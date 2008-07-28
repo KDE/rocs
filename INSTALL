@@ -1,0 +1,9 @@
+Basic Installation
+==================
+
+   These are generic installation instructions.
+
+   download the entire playground/edu folder from kde-svn, 
+   go to techbase.kde.org to configure your system for a kde-build
+   then do a cmakekde on playground/edu.
+

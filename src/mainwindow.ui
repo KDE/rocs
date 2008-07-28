@@ -1,0 +1,822 @@
+<ui version="4.0" >
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>902</width>
+    <height>501</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Tumaics</string>
+  </property>
+  <property name="dockNestingEnabled" >
+   <bool>true</bool>
+  </property>
+  <property name="dockOptions" >
+   <set>QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks|QMainWindow::ForceTabbedDocks|QMainWindow::VerticalTabs</set>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>24</y>
+     <width>902</width>
+     <height>456</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout" >
+    <item>
+     <widget class="QWidget" native="1" name="pToolBar" >
+      <property name="sizePolicy" >
+       <sizepolicy vsizetype="Minimum" hsizetype="Expanding" >
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>0</width>
+        <height>36</height>
+       </size>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3" >
+       <property name="margin" >
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QWidget" native="1" name="pNodeCtrl" >
+         <layout class="QHBoxLayout" name="horizontalLayout" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="btnStartNode" >
+            <property name="toolTip" >
+             <string>Set the currently selected node as `Begin` of the graph</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="resources.qrc" >
+              <normaloff>:/img/node_start.svg</normaloff>:/img/node_start.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnEndNode" >
+            <property name="toolTip" >
+             <string>Set the current selected node as `end` of the graph.</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="resources.qrc" >
+              <normaloff>:/img/node_end.svg</normaloff>:/img/node_end.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnNodeColor" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="toolTip" >
+             <string>Set the current color for newly created nodes.</string>
+            </property>
+            <property name="text" >
+             <string>C</string>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txtNodeName" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip" >
+             <string>change the current name of the Node</string>
+            </property>
+            <property name="text" >
+             <string>Name</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" native="1" name="pGroupCtrl" >
+         <layout class="QHBoxLayout" name="horizontalLayout_7" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="btnRemoveFromGroup" >
+            <property name="toolTip" >
+             <string>Remove Node(s) from group</string>
+            </property>
+            <property name="text" >
+             <string>R</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnUngroup" >
+            <property name="toolTip" >
+             <string>Destroy the group</string>
+            </property>
+            <property name="text" >
+             <string>U</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnNodeIndex" >
+         <property name="toolTip" >
+          <string>show node index</string>
+         </property>
+         <property name="text" >
+          <string>i</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" native="1" name="pNodeAllign" >
+         <layout class="QHBoxLayout" name="horizontalLayout_2" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="btnGroup" >
+            <property name="toolTip" >
+             <string>Group the nodes</string>
+            </property>
+            <property name="text" >
+             <string>G</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnAllignHBottom" >
+            <property name="toolTip" >
+             <string>Allign nodes at the bottom-most position</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="resources.qrc" >
+              <normaloff>:/img/allign_bottom.svg</normaloff>:/img/allign_bottom.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnAllignHCenter" >
+            <property name="toolTip" >
+             <string>allign nodes horizontally at center</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="resources.qrc" >
+              <normaloff>:/img/allign_h_center.svg</normaloff>:/img/allign_h_center.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnAllignHTop" >
+            <property name="toolTip" >
+             <string>allign nodes at the topmost position</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="resources.qrc" >
+              <normaloff>:/img/allign_top.svg</normaloff>:/img/allign_top.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnAllignVRight" >
+            <property name="toolTip" >
+             <string>allign nodes at the right-most position</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="resources.qrc" >
+              <normaloff>:/img/allign_right.svg</normaloff>:/img/allign_right.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnAllignVCenter" >
+            <property name="toolTip" >
+             <string>allign nodes vertically at the center</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="resources.qrc" >
+              <normaloff>:/img/allign_v_center.svg</normaloff>:/img/allign_v_center.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="btnAllignVLeft" >
+            <property name="toolTip" >
+             <string>allign nodes at the leftmost position</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="resources.qrc" >
+              <normaloff>:/img/allign_left.svg</normaloff>:/img/allign_left.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+         <zorder>btnAllignHBottom</zorder>
+         <zorder>btnAllignHCenter</zorder>
+         <zorder>btnAllignHTop</zorder>
+         <zorder>btnAllignVRight</zorder>
+         <zorder>btnAllignVCenter</zorder>
+         <zorder>btnAllignVLeft</zorder>
+         <zorder>btnGroup</zorder>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" native="1" name="pEdgeCtrl" >
+         <layout class="QHBoxLayout" name="horizontalLayout_4" >
+          <property name="leftMargin" >
+           <number>0</number>
+          </property>
+          <property name="topMargin" >
+           <number>0</number>
+          </property>
+          <property name="rightMargin" >
+           <number>4</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="chkEdgeShowLength" >
+            <property name="toolTip" >
+             <string>Display or hide the control to manipulate the Edge Length</string>
+            </property>
+            <property name="text" >
+             <string>Show Length</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="spinEdgeLength" >
+            <property name="toolTip" >
+             <string>Changes the current Edge Length</string>
+            </property>
+            <property name="maximum" >
+             <double>999.990000000000009</double>
+            </property>
+            <property name="singleStep" >
+             <double>0.500000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5" >
+      <item>
+       <widget class="QWidget" native="1" name="pMenu" >
+        <property name="maximumSize" >
+         <size>
+          <width>70</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <layout class="QFormLayout" name="formLayout_2" >
+         <property name="fieldGrowthPolicy" >
+          <enum>QFormLayout::FieldsStayAtSizeHint</enum>
+         </property>
+         <property name="formAlignment" >
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="margin" >
+          <number>2</number>
+         </property>
+         <item row="0" column="0" >
+          <widget class="QToolButton" name="btnSelection" >
+           <property name="toolTip" >
+            <string>Select single nodes or edges</string>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="resources.qrc" >
+             <normaloff>:/img/select.svg</normaloff>:/img/select.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="QToolButton" name="btnMove" >
+           <property name="toolTip" >
+            <string>Moves around nodes</string>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="resources.qrc" >
+             <normaloff>:/img/move.svg</normaloff>:/img/move.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QToolButton" name="btnSquareSelect" >
+           <property name="toolTip" >
+            <string>(Not Implemented) Select everything inside an area</string>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="resources.qrc" >
+             <normaloff>:/img/select_square.svg</normaloff>:/img/select_square.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" >
+          <widget class="QToolButton" name="btnAddNode" >
+           <property name="toolTip" >
+            <string>Add new nodes</string>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="resources.qrc" >
+             <normaloff>:/img/node.svg</normaloff>:/img/node.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" >
+          <widget class="QToolButton" name="btnAddEdge" >
+           <property name="toolTip" >
+            <string>Connect two nodes with an Edge</string>
+           </property>
+           <property name="whatsThis" >
+            <string>First, insert two nodes with the 'insert node' tool, &lt;br>
+and then, select this tool, click on the first node, &lt;br>
+drag and release on top of the second one.</string>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="resources.qrc" >
+             <normaloff>:/img/edge.svg</normaloff>:/img/edge.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" >
+          <widget class="QToolButton" name="btnAddEdgeArrow1" >
+           <property name="toolTip" >
+            <string>Connect two nodes with an single arrowed Edge</string>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="resources.qrc" >
+             <normaloff>:/img/edge_arrow_1.svg</normaloff>:/img/edge_arrow_1.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1" >
+          <widget class="QToolButton" name="btnAddEdgeArrow2" >
+           <property name="toolTip" >
+            <string>Connect two nodes with an double-arrowed Edge</string>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="resources.qrc" >
+             <normaloff>:/img/edge_arrow_2.svg</normaloff>:/img/edge_arrow_2.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" >
+          <widget class="QToolButton" name="btnRemove" >
+           <property name="toolTip" >
+            <string>Removes the selection</string>
+           </property>
+           <property name="text" >
+            <string>x</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSplitter" name="splitter" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="orientation" >
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QGraphicsView" name="view" />
+        <widget class="QTabWidget" name="tabWidget" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="tabPosition" >
+          <enum>QTabWidget::South</enum>
+         </property>
+         <property name="tabShape" >
+          <enum>QTabWidget::Rounded</enum>
+         </property>
+         <property name="currentIndex" >
+          <number>1</number>
+         </property>
+         <property name="elideMode" >
+          <enum>Qt::ElideMiddle</enum>
+         </property>
+         <widget class="QWidget" name="tabScript" >
+          <property name="geometry" >
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>806</width>
+            <height>163</height>
+           </rect>
+          </property>
+          <attribute name="title" >
+           <string>Script</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_2" >
+           <property name="margin" >
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPlainTextEdit" name="txtProgrammingArea" />
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabDebug" >
+          <property name="geometry" >
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>806</width>
+            <height>163</height>
+           </rect>
+          </property>
+          <attribute name="title" >
+           <string>Debug</string>
+          </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_6" >
+           <property name="margin" >
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QTextEdit" name="txtDebug" >
+             <property name="frameShape" >
+              <enum>QFrame::WinPanel</enum>
+             </property>
+             <property name="frameShadow" >
+              <enum>QFrame::Sunken</enum>
+             </property>
+             <property name="lineWidth" >
+              <number>0</number>
+             </property>
+             <property name="midLineWidth" >
+              <number>0</number>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnRunScript" >
+      <property name="text" >
+       <string>Run Script</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>480</y>
+     <width>902</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QMenuBar" name="menubar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>902</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <action name="actionOpen_File" >
+   <property name="text" >
+    <string>Open File</string>
+   </property>
+  </action>
+  <action name="actionSave_Graph" >
+   <property name="text" >
+    <string>Save Graph</string>
+   </property>
+  </action>
+  <action name="actionSave_Graph_As" >
+   <property name="text" >
+    <string>Save Graph as</string>
+   </property>
+  </action>
+  <action name="actionNew_Script" >
+   <property name="text" >
+    <string>New Script</string>
+   </property>
+  </action>
+  <action name="actionSave_Script" >
+   <property name="text" >
+    <string>Save Script</string>
+   </property>
+  </action>
+  <action name="actionClose" >
+   <property name="text" >
+    <string>close</string>
+   </property>
+  </action>
+  <action name="actionUndo" >
+   <property name="text" >
+    <string>Undo</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo" >
+   <property name="text" >
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionCopy" >
+   <property name="text" >
+    <string>Copy</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionCut" >
+   <property name="text" >
+    <string>Cut</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionPaste" >
+   <property name="text" >
+    <string>Paste</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionRemove" >
+   <property name="text" >
+    <string>Remove</string>
+   </property>
+   <property name="shortcut" >
+    <string>Backspace</string>
+   </property>
+  </action>
+  <action name="actionNew_Graph" >
+   <property name="text" >
+    <string>New Graph</string>
+   </property>
+  </action>
+  <action name="actionSave_Script_As" >
+   <property name="text" >
+    <string>Save Script As</string>
+   </property>
+  </action>
+  <action name="actionSet_Start" >
+   <property name="text" >
+    <string>Set Start</string>
+   </property>
+  </action>
+  <action name="actionSet_End" >
+   <property name="text" >
+    <string>Set End</string>
+   </property>
+  </action>
+  <action name="actionLeft" >
+   <property name="text" >
+    <string>Left</string>
+   </property>
+  </action>
+  <action name="actionRight" >
+   <property name="text" >
+    <string>Right</string>
+   </property>
+  </action>
+  <action name="actionBottom" >
+   <property name="text" >
+    <string>Bottom</string>
+   </property>
+  </action>
+  <action name="actionTop" >
+   <property name="text" >
+    <string>Top</string>
+   </property>
+  </action>
+  <action name="actionCenter_Horizontal" >
+   <property name="text" >
+    <string>Center Horizontal</string>
+   </property>
+  </action>
+  <action name="actionCenter_Vertical" >
+   <property name="text" >
+    <string>Center Vertical</string>
+   </property>
+  </action>
+  <action name="actionCreate_Group" >
+   <property name="text" >
+    <string>Create Group</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="actionRemove_From_Group" >
+   <property name="text" >
+    <string>Remove From Group</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Shift+U</string>
+   </property>
+  </action>
+  <action name="actionUngroup" >
+   <property name="text" >
+    <string>Destroy Group</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+U</string>
+   </property>
+  </action>
+  <action name="actionColor" >
+   <property name="text" >
+    <string>Color</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="resources.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>chkEdgeShowLength</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>spinEdgeLength</receiver>
+   <slot>setShown(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>538</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>613</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

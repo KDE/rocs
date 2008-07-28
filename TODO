@@ -1,0 +1,9 @@
+30 June 2005
+------------------
+
+Create Menu Bars.
+Create KActions
+Convert QActions to KActions
+Create Session Management
+Do Nice Animations of fade in, fade out and moveTo(x, y)
+port from QScript to KRoss
