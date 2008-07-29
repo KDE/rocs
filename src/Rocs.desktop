@@ -1,14 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Rocs
-Name[xx]=xxRocsxx
 GenericName=Rocs Graph Theory
-GenericName[pt_BR]=Tutor de Cálculo Mental
 Exec=kalcul %i %m -caption "%c"
 Icon=Rocs
 Type=Application
 DocPath=Rocs/rocs.html
 Comment=Graph Theory Tool for Professors and Students.
-Comment[pt_BR]=Programa de Teoria dos Grafos para Professores e Estudantes.
 Terminal=false
 Categories=Qt;KDE;Education;Science;
