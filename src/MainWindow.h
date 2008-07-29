@@ -1,6 +1,7 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Anne-Marie Mahfouf   *
- *   tomaz.canabrava@gmail.com   *
+ *   Copyright (C) 2005-2006 by Tomaz Canabrava and Ugo Sangiori           *
+ *   tomaz.canabrava@gmail.com                                             *
+ *   ugorox@gmail.com                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -24,21 +25,22 @@
 #include <QList>
 #include <QtScript>
 #include <QScriptEngine>
+#include <KXmlGuiWindow>
 #include "ui_mainwindow.h"
 #include "DiagramScene.h"
 #include "DiagramEdge.h"
 #include "DiagramNode.h"
 
-class QMainWindow;
+
 class QScriptEngine;
 
-class MainWindow : public QMainWindow, private Ui::MainWindow
+class MainWindow : public KXmlGuiWindow, private Ui::MainWindow
 {
   Q_OBJECT
   private:
     DiagramScene *scene;
-    void runScript();
-    void createActions();
+    
+    void setupActions();
   
   /**************************************************************
     * JavaScript Engine. CHANGE IT TO KROSS AS SOON AS POSSIBLE!  *
@@ -46,7 +48,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
   private slots:
   
-  //! Botões da barra de ferramentas
+  //! Left Sidebar buttons.
   void on_btnAddNode_clicked()      { scene -> action = scene -> InsertNode;       }
   void on_btnAddEdge_clicked()      { scene -> action = scene -> InsertEdge;       }
   void on_btnSelection_clicked()    { scene -> action = scene -> SelectItem;       }
@@ -55,11 +57,10 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
   void on_btnAddEdgeArrow1_clicked(){ scene -> action = scene -> InsertEdgeArrow1; }
   void on_btnAddEdgeArrow2_clicked(){ scene -> action = scene -> InsertEdgeArrow2; }
   
-  void on_btnGroup_clicked()           { scene -> group();           }
-  void on_btnUngroup_clicked()         { scene -> ungroup();         }
-  void on_btnRemoveFromGroup_clicked() { scene -> removeFromGroup(); }
-  void on_btnRemove_clicked()          { scene -> removeSelection(); }
-
+  void on_btnGroup_clicked()           { createGroup();           }
+  void on_btnUngroup_clicked()         { ungroup();         }
+  void on_btnRemoveFromGroup_clicked() { removeFromGroup(); }
+  void on_btnRemove_clicked()          { remove();          }
 
   void on_btnRunScript_clicked() { runScript();  }
 
@@ -68,19 +69,54 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
      #################*/
   
   // Changes the beginning and end of the graph
-  void on_btnStartNode_clicked()    { scene -> setStartNode();   }
-  void on_btnEndNode_clicked()      { scene -> setEndNode();     }
+  void on_btnStartNode_clicked()    { setStart();   }
+  void on_btnEndNode_clicked()      { setEnd();     }
   
   // Allignment Options
-  void on_btnAllignVLeft_clicked()  { scene -> allignVLeft();           }
-  void on_btnAllignVRight_clicked() { scene -> allignVRight();          }
-  void on_btnAllignVCenter_clicked(){ scene -> allignVCenter();         }
-  void on_btnAllignHTop_clicked()   { scene -> allignHTop();            }  
-  void on_btnAllignHBottom_clicked(){ scene -> allignHBottom();         }
-  void on_btnAllignHCenter_clicked(){ scene -> allignHCenter();         }
-  void on_btnNodeIndex_clicked()    { scene -> toogleIndexVisibility();  }
-  void on_btnNodeColor_clicked();
-    
+  void on_btnAllignVLeft_clicked()  { allignLeft();           }
+  void on_btnAllignVRight_clicked() { allignRight();          }
+  void on_btnAllignVCenter_clicked(){ allignVCenter();         }
+  void on_btnAllignHTop_clicked()   { allignTop();            }  
+  void on_btnAllignHBottom_clicked(){ allignBottom();         }
+  void on_btnAllignHCenter_clicked(){ allignHCenter();         }
+  void on_btnNodeIndex_clicked()    { scene -> toogleIndexVisibility(); }
+  void on_btnNodeColor_clicked()    { setColor();              } 
+  
+//! Slots for the KActions.
+public slots:
+  void openFile();              //! TODO
+  void newGraph();              //! TODO
+  void saveGraph();             //! TODO
+  void saveGraphAs();           //! TODO
+  void newScript();             //! TODO
+  void saveScript();            //! TODO
+  void saveScriptAs();          //! TODO
+  void closeThisGraph();        //! TODO
+  void closeAllGraphs();        //! TODO
+  void closeAllButThisGraph();  //! TODO
+  void closeThisScript();       //! TODO
+  void closeAllScripts();       //! TODO
+  void closeAllButThisScript(); //! TODO
+  void undo();                  //! TODO
+  void redo();                  //! TODO
+  void copy();                  //! TODO
+  void cut();                   //! TODO
+  void paste();                 //! TODO
+  void remove();
+  void setStart();
+  void setEnd();
+  void allignLeft();
+  void allignRight();
+  void allignTop();
+  void allignBottom();
+  void allignHCenter();
+  void allignVCenter();
+  void createGroup();
+  void removeFromGroup();
+  void ungroup();
+  void setColor();
+  void runScript();
+
   public:
    
   MainWindow(QWidget *parent = 0);

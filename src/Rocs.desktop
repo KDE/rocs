@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Rocs
 GenericName=Rocs Graph Theory
-Exec=kalcul %i %m -caption "%c"
+Exec=Rocs %i %m -caption "%c"
 Icon=Rocs
 Type=Application
 DocPath=Rocs/rocs.html

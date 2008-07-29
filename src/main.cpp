@@ -1,6 +1,7 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Anne-Marie Mahfouf   *
- *   tomaz.canabrava@gmail.com   *
+ *   Copyright (C) 2005-2006 by Tomaz Canabrava and Ugo Sangiori           *
+ *   tomaz.canabrava@gmail.com                                             *
+ *   ugorox@gmail.com                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -39,8 +40,8 @@ int main(int argc, char *argv[])
   KCmdLineArgs::init( argc, argv, &aboutData );
   KApplication app;
 
-  MainWindow window;
-  window.show();
+  MainWindow *window = new MainWindow();
+  window->show();
 
   return app.exec();
 }
