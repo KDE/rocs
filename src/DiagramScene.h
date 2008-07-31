@@ -41,13 +41,15 @@ class DiagramScene : public QGraphicsScene {
   
   public:
     enum Mode {  
-      MoveItem,      // Moves The current Item Under Mouse
-      SelectItem,     // Select the item at the current mouse position
+      MoveItem,         // Moves The current Item Under Mouse
+      SelectItem,       // Select the item at the current mouse position
       SquareSelect,     // Starts an Square-type Select
-      InsertNode,     // Insert a new node at the current mouse position
-      InsertEdge,     // Insert a new Edge between two nodes
-      InsertEdgeArrow1,  // Insert a New Edge between two nodes, with an fluffy arrow.
-      InsertEdgeArrow2  // Insert a new Edge between two nodes, witn a fluffy double-arrow.      
+      InsertNode,       // Insert a new node at the current mouse position
+      InsertEdge,       // Insert a new Edge between two nodes
+      InsertEdgeArrow1, // Insert a New Edge between two nodes, with an fluffy arrow.
+      InsertEdgeArrow2, // Insert a new Edge between two nodes, witn a fluffy double-arrow.      
+      InsertKGraph,        // Insert a KGraph. 
+      InsertCGraph      // Inserts a Circular Graph
     };
     
     DiagramScene(QObject *parent = 0);
@@ -55,24 +57,7 @@ class DiagramScene : public QGraphicsScene {
     
     int action;
     GraphEngine *engine;
-    void allignVLeft();
-    void allignVRight();
-    void allignVCenter();
-    void allignHTop();
-    void allignHBottom();
-    void allignHCenter();
-    void group();
-    void ungroup();
-    void removeFromGroup();
-    void setStartNode();
-    void setEndNode();
-    void changeSelectedNodeColor(QColor c);
-    void removeSelection();
-    void removeEdge(Edge *e);
-    void removeNode(Node *n);
-    void removeGroup(Group *g);
-    void toogleIndexVisibility();
-    
+     
     QList<Node*> getSelectedNodes() const;
     QList<Edge*> getSelectedEdges() const;
     QList<Node*> getNodes() const;
@@ -106,6 +91,9 @@ class DiagramScene : public QGraphicsScene {
     MainWindow *mainWindow;
     Node *startNode;
     Node *endNode;
+
+    int bottom;
+    int right;
     
     public slots:
     /* ######################
@@ -117,7 +105,28 @@ class DiagramScene : public QGraphicsScene {
     void insertNode(QPointF pos);
     QScriptValue insertNode(double x1, double y1);
     void debug(const QString& s);
-    
+
+    /* UI Control */
+   void allignVLeft();
+   void allignVRight();
+   void allignVCenter();
+   void allignHTop();
+   void allignHBottom();
+   void allignHCenter();
+   void group();
+   void ungroup();
+   void removeFromGroup();
+   void setStartNode();
+   void setEndNode();
+   void changeSelectedNodeColor(QColor c);
+   void removeSelection();
+   void removeEdge(Edge *e);
+   void removeNode(Node *n);
+   void removeGroup(Group *g);
+   void toogleIndexVisibility();
+   void createKGraph(QPointF pos);
+   void createCGraph(QPointF pos);
+   int createConcentricNodes(int k = 0, qreal radius = 0, QPointF pos = QPointF()); 
 };
 
 #endif

@@ -34,56 +34,65 @@
 
 class QScriptEngine;
 
-class MainWindow : public KXmlGuiWindow, private Ui::MainWindow
+class MainWindow : public KXmlGuiWindow, public Ui::MainWindow
 {
+
   Q_OBJECT
   private:
     DiagramScene *scene;
     
     void setupActions();
-  
-  /**************************************************************
+    void runScript();
+  /*!*************************************************************
     * JavaScript Engine. CHANGE IT TO KROSS AS SOON AS POSSIBLE!  *
     ***************************************************************/
 
   private slots:
   
   //! Left Sidebar buttons.
+  
+  //! everything that involves Mouse-Iteraction is here.
   void on_btnAddNode_clicked()      { scene -> action = scene -> InsertNode;       }
   void on_btnAddEdge_clicked()      { scene -> action = scene -> InsertEdge;       }
   void on_btnSelection_clicked()    { scene -> action = scene -> SelectItem;       }
   void on_btnSquareSelect_clicked() { scene -> action = scene -> SquareSelect;     }
-  void on_btnMove_clicked()         { scene -> action = scene -> MoveItem;       }
+  void on_btnMove_clicked()         { scene -> action = scene -> MoveItem;         }
   void on_btnAddEdgeArrow1_clicked(){ scene -> action = scene -> InsertEdgeArrow1; }
   void on_btnAddEdgeArrow2_clicked(){ scene -> action = scene -> InsertEdgeArrow2; }
+  void on_btnMakeKGraph_clicked()   { scene -> action = scene -> InsertKGraph;     }
+  void on_btnMakeCGraph_clicked()   { scene -> action = scene -> InsertCGraph;     }
   
-  void on_btnGroup_clicked()           { createGroup();           }
-  void on_btnUngroup_clicked()         { ungroup();         }
-  void on_btnRemoveFromGroup_clicked() { removeFromGroup(); }
-  void on_btnRemove_clicked()          { remove();          }
+  //! Here are those that Do not need mouse-iteraction.
+  void on_btnGroup_clicked()           { scene->group();     }
+  void on_btnUngroup_clicked()         { scene->ungroup();         }
+  void on_btnRemoveFromGroup_clicked() { scene->removeFromGroup(); }
+  void on_btnRemove_clicked()          { scene->removeSelection();          }
 
   void on_btnRunScript_clicked() { runScript();  }
 
-  /* #################
+  /*! #################
      #! Node Control #
      #################*/
   
-  // Changes the beginning and end of the graph
-  void on_btnStartNode_clicked()    { setStart();   }
-  void on_btnEndNode_clicked()      { setEnd();     }
+  //! Changes the beginning and end of the graph
+  void on_btnStartNode_clicked()    { scene->setStartNode();   }
+  void on_btnEndNode_clicked()      { scene->setEndNode();     }
   
-  // Allignment Options
-  void on_btnAllignVLeft_clicked()  { allignLeft();           }
-  void on_btnAllignVRight_clicked() { allignRight();          }
-  void on_btnAllignVCenter_clicked(){ allignVCenter();         }
-  void on_btnAllignHTop_clicked()   { allignTop();            }  
-  void on_btnAllignHBottom_clicked(){ allignBottom();         }
-  void on_btnAllignHCenter_clicked(){ allignHCenter();         }
+  //! Allignment Options
+  void on_btnAllignVLeft_clicked()  { scene->allignVLeft();     }
+  void on_btnAllignVRight_clicked() { scene->allignVRight();    }
+  void on_btnAllignVCenter_clicked(){ scene->allignVCenter();  }
+  void on_btnAllignHTop_clicked()   { scene->allignHTop();      }  
+  void on_btnAllignHBottom_clicked(){ scene->allignHBottom();   }
+  void on_btnAllignHCenter_clicked(){ scene->allignHCenter();  }
   void on_btnNodeIndex_clicked()    { scene -> toogleIndexVisibility(); }
-  void on_btnNodeColor_clicked()    { setColor();              } 
+  void on_btnNodeColor_clicked()    { setColor();              }
+
   
 //! Slots for the KActions.
 public slots:
+  void setColor();
+
   void openFile();              //! TODO
   void newGraph();              //! TODO
   void saveGraph();             //! TODO
@@ -97,26 +106,15 @@ public slots:
   void closeThisScript();       //! TODO
   void closeAllScripts();       //! TODO
   void closeAllButThisScript(); //! TODO
+
+  //! Those below should be only at Diagram Scene, so please, 
+  //! when you got the time, change everything to there.
   void undo();                  //! TODO
   void redo();                  //! TODO
   void copy();                  //! TODO
   void cut();                   //! TODO
   void paste();                 //! TODO
-  void remove();
-  void setStart();
-  void setEnd();
-  void allignLeft();
-  void allignRight();
-  void allignTop();
-  void allignBottom();
-  void allignHCenter();
-  void allignVCenter();
-  void createGroup();
-  void removeFromGroup();
-  void ungroup();
-  void setColor();
-  void runScript();
-
+  
   public:
    
   MainWindow(QWidget *parent = 0);

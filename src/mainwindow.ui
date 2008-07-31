@@ -171,17 +171,37 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QToolButton" name="btnNodeIndex" >
+            <property name="toolTip" >
+             <string>show node index</string>
+            </property>
+            <property name="text" >
+             <string>i</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label" >
+            <property name="text" >
+             <string>Nodes</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinNodes" />
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2" >
+            <property name="text" >
+             <string>Radius</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="spinRadius" />
+          </item>
          </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="btnNodeIndex" >
-         <property name="toolTip" >
-          <string>show node index</string>
-         </property>
-         <property name="text" >
-          <string>i</string>
-         </property>
         </widget>
        </item>
        <item>
@@ -321,13 +341,6 @@
            </widget>
           </item>
          </layout>
-         <zorder>btnAllignHBottom</zorder>
-         <zorder>btnAllignHCenter</zorder>
-         <zorder>btnAllignHTop</zorder>
-         <zorder>btnAllignVRight</zorder>
-         <zorder>btnAllignVCenter</zorder>
-         <zorder>btnAllignVLeft</zorder>
-         <zorder>btnGroup</zorder>
         </widget>
        </item>
        <item>
@@ -517,6 +530,20 @@ drag and release on top of the second one.</string>
            </property>
            <property name="text" >
             <string>x</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" >
+          <widget class="QToolButton" name="btnMakeKGraph" >
+           <property name="text" >
+            <string>KG</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0" >
+          <widget class="QToolButton" name="btnMakeCGraph" >
+           <property name="text" >
+            <string>CG</string>
            </property>
           </widget>
          </item>

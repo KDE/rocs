@@ -18,7 +18,6 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.             *
  ***************************************************************************/
-
 #include <QtScript>
 #include <QColorDialog>
 #include <KActionCollection>
@@ -421,53 +420,6 @@ void MainWindow::cut(){
 }
 void MainWindow::paste(){
 //TODO: Create this.
-}
-
-void MainWindow::remove(){
-  scene -> removeSelection();
-}
-
-void MainWindow::setStart(){
-  scene -> setStartNode(); 
-}
-
-void MainWindow::setEnd(){
-  scene -> setEndNode();
-}
-
-void MainWindow::allignLeft(){
-  scene -> allignVLeft();  
-}
-
-void MainWindow::allignRight(){
-  scene -> allignVRight();  
-}
-
-void MainWindow::allignTop(){
-  scene -> allignHTop();  
-}
-
-void MainWindow::allignBottom(){
-  scene -> allignHBottom();  
-}
-
-void MainWindow::allignHCenter(){
-  scene -> allignHCenter();  
-}
-
-void MainWindow::allignVCenter(){
-  scene -> allignVCenter();  
-}
-
-void MainWindow::createGroup(){
-  scene -> group();
-}
-void MainWindow::removeFromGroup(){
-  scene -> removeFromGroup();
-}
-
-void MainWindow::ungroup(){
-  scene -> ungroup();
 }
 
 #include "MainWindow.moc"

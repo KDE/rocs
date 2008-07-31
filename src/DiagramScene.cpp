@@ -1,4 +1,9 @@
-/***************************************************************************
+/*!
+
+
+
+
+**************************************************************************
  *   Copyright (C) 2005-2006 by Tomaz Canabrava and Ugo Sangiori           *
  *   tomaz.canabrava@gmail.com                                             *
  *   ugorox@gmail.com                                                      *
@@ -31,13 +36,15 @@
 
 DiagramScene::DiagramScene( QObject *parent ) : QGraphicsScene( parent )
 {
-  /* Default constructor, just initializes some basic stuff. 
+  /*!Default constructor, just initializes some basic stuff. 
      tmpItem is the temporary holder for drawings like the line when inserting an edge,
    and the Square while selecting.
    startNode is the currently node set as `start`
      same for endNode. */
   mainWindow = qobject_cast< MainWindow* >( parent );
-  setSceneRect( 0, 0, 1024, 768 );
+  bottom = 768;
+  right = 1024;
+  setSceneRect( 0, 0, right, bottom );
   tmpItem   = 0;
   startNode = 0;
   engine    = 0;
@@ -46,12 +53,12 @@ DiagramScene::DiagramScene( QObject *parent ) : QGraphicsScene( parent )
 
 DiagramScene::~DiagramScene( )
 {
-	/* Default Destructor. 
-	clears all the arrays, 
-	groups, nodes, edges, selectedNodes, selectedEdges.
-	then removes all nodes, getting all edges to go with them.
-	( edges are removed on nodes destructors. )
-	*/
+  /*!Default Destructor. 
+  clears all the arrays, 
+  groups, nodes, edges, selectedNodes, selectedEdges.
+  then removes all nodes, getting all edges to go with them.
+  ( edges are removed on nodes destructors. )
+  */
   selectedNodes.clear( );
   selectedEdges.clear( );
   
@@ -75,7 +82,7 @@ DiagramScene::~DiagramScene( )
 
 void DiagramScene::group( )
 {
-  /* gets the currently selected nodes and creates a group around them,
+  /*!gets the currently selected nodes and creates a group around them,
   then add the group to the item list to the scene, so it can be drawn. 
   and appends it on the groups list for the scripting interface.
   */
@@ -89,7 +96,7 @@ void DiagramScene::group( )
 
 void DiagramScene::ungroup( )
 {
-  /* if the currently first item on the selection has a group, 
+  /*!if the currently first item on the selection has a group, 
   this group will be disbanded. */
   if (groups.size() == 0) return;
   if (selectedNodes.size() == 0) return;
@@ -100,12 +107,12 @@ void DiagramScene::ungroup( )
 }
 
 void DiagramScene::removeFromGroup(){
-	/* removes the currently selected node from the group, preserving it.
-	if the group size is 0, it will me removed too. */
+  /*!removes the currently selected node from the group, preserving it.
+  if the group size is 0, it will me removed too. */
 }
 void DiagramScene::mousePressEvent( QGraphicsSceneMouseEvent *mouseEvent )
 {
-  /* when choosing an option on MainWindow toolbar, `action` will be changed, 
+  /*!when choosing an option on MainWindow toolbar, `action` will be changed, 
      this method is invocked when you click on the scene. 
      it will choose an option based on the currently action set by mainWindow,
      then pass to the same method on the super class. 
@@ -121,13 +128,15 @@ void DiagramScene::mousePressEvent( QGraphicsSceneMouseEvent *mouseEvent )
     case InsertEdgeArrow2 : beginInsertEdge( pos, 2 );   break;
     case SelectItem       : selectItem( pos );           break;
     case SquareSelect     : beginSquareSelect( pos );    break;
+    case InsertKGraph     : createKGraph(pos);           break;
+    case InsertCGraph     : createCGraph(pos);           break;
   }
   QGraphicsScene::mousePressEvent( mouseEvent );
 }
 
 void DiagramScene::insertNode( QPointF pos )
 {
-  /* inserts a new node on position pos. 
+  /*!inserts a new node on position pos. 
    then adds it to the scene so it can be draw.
   and append it on the nodes list for the scripting interface 
   */
@@ -140,7 +149,7 @@ void DiagramScene::insertNode( QPointF pos )
 
 QScriptValue DiagramScene::insertNode( double x1, double y1 )
 {
-  /* inserts a new node on position pos. 
+  /*!inserts a new node on position pos. 
    then adds it to the scene so it can be draw.
   and append it on the nodes list for the scripting interface 
   
@@ -159,7 +168,7 @@ QScriptValue DiagramScene::insertNode( double x1, double y1 )
 
 void DiagramScene::beginInsertEdge( QPointF pos, int arrowType )
 {
-  /* this is the first click after pressing any 'insert edge' buttom.
+  /*!this is the first click after pressing any 'insert edge' buttom.
    it will draw a line between the clicked point and the current mouse position.
   when the mouse has a release button event, it will try to insert the edge.
   
@@ -177,7 +186,7 @@ void DiagramScene::beginInsertEdge( QPointF pos, int arrowType )
 
 void DiagramScene::beginSquareSelect( QPointF pos )
 {
-  /* this is the first click after pressing the 'square select' buttom.
+  /*!this is the first click after pressing the 'square select' buttom.
    it will draw a square with 0 size, and them the mouseMoveEvent will
   handle the rest. 
   initializes the tmpItem so to draw the selection square. */
@@ -191,15 +200,15 @@ void DiagramScene::beginSquareSelect( QPointF pos )
 
 void DiagramScene::endSquareSelect( )
 {
-  /* the selection is done, the mouse is released, it will try to get
+  /*!the selection is done, the mouse is released, it will try to get
    any items inside the square area and insert it into the selection list. */
   
-  /* gets the list and removes the first item IF the item is the selection retangle */
+  /*!gets the list and removes the first item IF the item is the selection retangle */
   QGraphicsRectItem *i = qgraphicsitem_cast<QGraphicsRectItem*>( tmpItem );
   QList<QGraphicsItem*> itemList = items( i -> sceneBoundingRect( ) );
   if ( itemList.count( ) && itemList.first( ) == i ) itemList.removeFirst( );
 
-  /* iterates over the list of items inside the selection 
+  /*!iterates over the list of items inside the selection 
   area and puts them inside of the selection list */
   foreach( QGraphicsItem *i, itemList )
   {
@@ -212,13 +221,13 @@ void DiagramScene::endSquareSelect( )
     n -> update( );                             //! redraw the node, now with an little retanglearound it.
   }
   
-  /* hides or shows the mainWindows Buttons*/
+  /*!hides or shows the mainWindows Buttons*/
   toogleWindowButtons( );
 }
 
 void DiagramScene::setStartNode( )
 {
-  /* Sets the currently selected node as 'start', 
+  /*!Sets the currently selected node as 'start', 
    and if there`s another start, it`s lost.
    note that a node can be start and end at the same time.
  */
@@ -238,7 +247,7 @@ void DiagramScene::setStartNode( )
   
 void DiagramScene::setEndNode( )
 {
-	/* Sets the currently selected node as 'end', 
+  /*!Sets the currently selected node as 'end', 
    and if there`s another start, it`s lost.
    note that a node can be start and end at the same time.
  */
@@ -259,13 +268,13 @@ void DiagramScene::setEndNode( )
 
 
 void DiagramScene::mouseMoveEvent( QGraphicsSceneMouseEvent *mouseEvent ){
-	/* do something based on current action when mouse is moving */
+  /*!do something based on current action when mouse is moving */
   if ( tmpItem != 0 )
   {
     switch( action )
     {
-	   /* if action is insertEdge, continue drawing the line from 
-	   the start position to the actual mouse position. */
+     /*!if action is insertEdge, continue drawing the line from 
+     the start position to the actual mouse position. */
        case InsertEdge: 
        case InsertEdgeArrow1:  
        case InsertEdgeArrow2:
@@ -276,7 +285,7 @@ void DiagramScene::mouseMoveEvent( QGraphicsSceneMouseEvent *mouseEvent ){
             i  ->  setLine( newLine );
          }
        break;
-       /* if the action is a square selection, continue drawing the rectangle over the points. */
+       /*!if the action is a square selection, continue drawing the rectangle over the points. */
        case SquareSelect:
          if ( qgraphicsitem_cast<QGraphicsRectItem*>( tmpItem ) )
          {
@@ -286,7 +295,7 @@ void DiagramScene::mouseMoveEvent( QGraphicsSceneMouseEvent *mouseEvent ){
             i -> setRect( QRect( 0,0,x2,y2 ) );
          }
          break;
-         /* if is moving the item, invoke the superclass, it handles everything =D */
+         /*!if is moving the item, invoke the superclass, it handles everything =D */
     }
   }
   if(action == MoveItem) QGraphicsScene::mouseMoveEvent( mouseEvent );
@@ -294,13 +303,13 @@ void DiagramScene::mouseMoveEvent( QGraphicsSceneMouseEvent *mouseEvent ){
 
 void DiagramScene::selectItem( QPointF pos )
 {
-  /* single select item at the currently mouse position. 
+  /*!single select item at the currently mouse position. 
      it`s possible to select multiple items clicking on them, 
      but only multiple nodes or multiple edges, it`s not possible 
      to select nodes AND edges currently.
   */
 
-  /* if the item is a node, selects the node.
+  /*!if the item is a node, selects the node.
      puts the node on the selected nodes list
      updates it so the little square around it is drawn. 
     
@@ -326,7 +335,7 @@ void DiagramScene::selectItem( QPointF pos )
     selectedNodes.removeFirst( );
   }
 
- /* same goes for edges, 
+ /*!same goes for edges, 
     and also reset the little box with the length of it, with the actual edge distance.
  */
 
@@ -350,13 +359,13 @@ void DiagramScene::selectItem( QPointF pos )
     selectedEdges.removeFirst( );
   }
   
- /* shows or hide the buttons on the mainWindow */
+ /*!shows or hide the buttons on the mainWindow */
   toogleWindowButtons( );
 }
 
 void DiagramScene::toogleWindowButtons( )
 {
-	/* shows or hide the buttons on the mainwindow depending on the situation. */
+  /*!shows or hide the buttons on the mainwindow depending on the situation. */
   switch( selectedNodes.size( ) )
   {
     case 0:  mainWindow -> showNodeControls( false ); mainWindow -> showNodeAllign( false ); break;
@@ -369,20 +378,20 @@ void DiagramScene::toogleWindowButtons( )
 void DiagramScene::removeNode( Node *n )
 {
   // remove a node from the scene.
-  /* this function is called from the node 
+  /*!this function is called from the node 
   destructor, so no delete should be done here. */
   if ( !n ) return;
   if ( n -> hasGroup( ) )              n -> removeGroup( );
   if ( nodes.contains( n ) ){
-	 int pos = nodes.indexOf(n);
-	 nodes.removeAt( nodes.indexOf( n ) );
-	 int length = nodes.size();
-	
-	for(; pos < length; pos++)
-	{
-		nodes[pos]->index = pos;
-		nodes[pos]->update();
-	}
+   int pos = nodes.indexOf(n);
+   nodes.removeAt( nodes.indexOf( n ) );
+   int length = nodes.size();
+  
+  for(; pos < length; pos++)
+  {
+    nodes[pos]->index = pos;
+    nodes[pos]->update();
+  }
   }
 
   if ( selectedNodes.contains( n ) )  selectedNodes.removeAt( selectedNodes.indexOf( n ) );
@@ -391,8 +400,8 @@ void DiagramScene::removeNode( Node *n )
 
 void DiagramScene::removeEdge( Edge *e )
 {
-	//! removes the edge from the scene. 
-	/* this function is called from the edge 
+  //! removes the edge from the scene. 
+  /*!this function is called from the edge 
       destructor, so no delete should be done here. */
     if ( edges.contains( e ) )   edges.removeAt( edges.indexOf( e ) );
     if ( selectedEdges.contains( e ) ) selectedEdges.removeAt( selectedEdges.indexOf( e ) );
@@ -401,20 +410,20 @@ void DiagramScene::removeEdge( Edge *e )
 
 void DiagramScene::removeGroup(Group *g)
 {
-	if ( groups.contains( g ) ) groups.removeAt(groups.indexOf( g ));
-	toogleWindowButtons();
+  if ( groups.contains( g ) ) groups.removeAt(groups.indexOf( g ));
+  toogleWindowButtons();
 }
 
 void DiagramScene::removeSelection( )
 {
-	//! delete everything inside of the selection. yeah baby, yeah.
+  //! delete everything inside of the selection. yeah baby, yeah.
   if ( selectedNodes.size( ) != 0 ) foreach( Node *n, selectedNodes ) delete n;
   if ( selectedEdges.size( ) != 0 ) foreach( Edge *e, selectedEdges ) delete e;
 }
 
 void DiagramScene::mouseReleaseEvent( QGraphicsSceneMouseEvent *mouseEvent )
 {
- /* if there`s a tmpItem, it means that we are doing something. so, if it`s InsertEdge, finish the inserting. 
+ /*!if there`s a tmpItem, it means that we are doing something. so, if it`s InsertEdge, finish the inserting. 
     if it`s the Square Selection, finish the selection. */
  if ( tmpItem != 0 ) switch( action )
  {
@@ -424,7 +433,7 @@ void DiagramScene::mouseReleaseEvent( QGraphicsSceneMouseEvent *mouseEvent )
      case SquareSelect:      if  ( qgraphicsitem_cast<QGraphicsRectItem*>( tmpItem ) ) endSquareSelect( );     break;
  }
   
- /* release the tmpItem from it`s evil holder. */
+ /*!release the tmpItem from it`s evil holder. */
   if( tmpItem )
   {
     removeItem( tmpItem );
@@ -440,14 +449,14 @@ void DiagramScene::mouseReleaseEvent( QGraphicsSceneMouseEvent *mouseEvent )
     if ( n && n  ->  hasGroup( ) )  n  ->  getGroup( )  ->  rePaint( );
   }
 
-  /* throws the job for the superclass. */
+  /*!throws the job for the superclass. */
   QGraphicsScene::mouseReleaseEvent( mouseEvent );
 }
 
 void DiagramScene::insertEdge( Node *begin, Node *end, int arrowType )
 {
-	/* Insert an edge between two nodes. */
-	
+  /*!Insert an edge between two nodes. */
+  
   Edge *newEdge = new Edge( begin, end, arrowType, 0, false, this );
   newEdge -> setZValue( -1000 ); // puts the edge behind the node. 
   addItem( newEdge );
@@ -458,9 +467,9 @@ void DiagramScene::insertEdgeWithLine( )
 {
   //! insert the edge between the first `pos` that was the first mouse click.
   // and the second pos, that`s the position when the mouse release the buttom.
-  /* if there`s a node on both positions, a Edge will be inserted. */
+  /*!if there`s a node on both positions, a Edge will be inserted. */
 
-  /* first, tryes to get the items on the first point of the line and the second.
+  /*!first, tryes to get the items on the first point of the line and the second.
     then removes the `this` line from the selected items (no racism, it`s just, we don`t really need a line right now. )
   */
   QGraphicsLineItem *i = qgraphicsitem_cast<QGraphicsLineItem*>( tmpItem );
@@ -470,7 +479,7 @@ void DiagramScene::insertEdgeWithLine( )
     if ( startItems.count( ) && startItems.first( ) == i ) startItems.removeFirst( );
     if ( endItems.count( )   && endItems.first( )   == i ) endItems.removeFirst( );
     
-   /* checks if there`s a node at the same position on both points. */
+   /*!checks if there`s a node at the same position on both points. */
     if ( startItems.count( ) > 0 
     && endItems.count( )    > 0 
     && startItems.first( ) -> type( ) == Node::Type 
@@ -482,14 +491,14 @@ void DiagramScene::insertEdgeWithLine( )
     }
 }
 
-/* this goes for all allign functions.:
+/*!this goes for all allign functions.:
  gets the selected nodes, get the topWathever (top, bottom, left, right, hcenter, vcenter)
   and set the positions of each selected nodes for the new one. */
 void DiagramScene::allignVLeft( )
 {
   qreal topLeft = selectedNodes.first( ) -> scenePos( ).x( );
   foreach( Node *n, selectedNodes ){
-	  if ( topLeft < n -> scenePos( ).x( ) )   topLeft = n -> scenePos( ).x( );
+    if ( topLeft > n -> scenePos( ).x( ) )   topLeft = n -> scenePos( ).x( );
   }
 
   foreach( Node *n, selectedNodes )   n -> setPos( topLeft, n -> scenePos( ).y( ) );
@@ -499,7 +508,7 @@ void DiagramScene::allignVRight( )
 {
   qreal topRigth = selectedNodes.first( ) -> scenePos( ).x( );
   foreach( Node *n, selectedNodes ){
-	 if ( topRigth > n -> scenePos( ).x( ) ) topRigth = n -> scenePos( ).x( );
+   if ( topRigth < n -> scenePos( ).x( ) ) topRigth = n -> scenePos( ).x( );
   }
   foreach( Node *n, selectedNodes )  n -> setPos( topRigth, n -> scenePos( ).y( ) );
 }
@@ -521,7 +530,7 @@ void DiagramScene::allignHTop( )
   qreal topTop = selectedNodes.first( ) -> scenePos( ).y( );
   foreach( Node *n, selectedNodes )
   {
-	  if ( topTop > n -> scenePos( ).y( ) )  topTop = n -> scenePos( ).y( );
+    if ( topTop > n -> scenePos( ).y( ) )  topTop = n -> scenePos( ).y( );
   }
   foreach( Node *n, selectedNodes )  n -> setPos( n -> scenePos( ).x( ), topTop );
 }
@@ -531,7 +540,7 @@ void DiagramScene::allignHBottom( )
   qreal topBottom = selectedNodes.first( ) -> scenePos( ).y( );
   foreach( Node *n, selectedNodes ) 
   {
-	 if ( topBottom < n -> scenePos( ).y( ) )  topBottom = n -> scenePos( ).y( );
+   if ( topBottom < n -> scenePos( ).y( ) )  topBottom = n -> scenePos( ).y( );
   }
   foreach( Node *n, selectedNodes )  n -> setPos( n -> scenePos( ).x( ), topBottom );
 }
@@ -564,10 +573,79 @@ void DiagramScene::createScriptFunctions( const QString& program ){
   engine = NULL;
 }
 
+//! shows or hides the index inside of the nodes.
 void DiagramScene::toogleIndexVisibility(){
-	foreach(Node *n, nodes){
-		n->toogleIndexVisibility();
-	}
+  foreach(Node *n, nodes){
+    n->toogleIndexVisibility();
+  }
+}
+
+//! creates a KGraph.
+int DiagramScene::createConcentricNodes(int k, qreal radius,  QPointF pos ){
+   
+   //! sees if there's space on the canvas
+   if ((pos.x() - radius) < 0){
+      int ratio = pos.x() - radius;
+      pos.setX(pos.x() - radius + ratio);
+      debug(" Out of Bounds, x - radius < 0. ");
+   }
+   if ((pos.y() - radius) < 0){
+      int ratio = pos.y() - radius;
+      pos.setY(pos.y() - radius + ratio);
+      debug(" Out of Bounds, y - radius < 0. ");
+   }
+   if ( (pos.x() + radius) > right){
+     int ratio = pos.x() + radius;
+     pos.setX(pos.x() + radius - ratio);
+     debug(" Out of Bounds, x + radius > right. ");
+  }
+  if ( (pos.y() + radius) > bottom){
+    int ratio = pos.y() + radius;
+    pos.setY( pos.y() + radius - ratio);
+    debug(" Out of Bounds, x + radius > bottom. ");
+  }
+  
+  qreal x = pos.x();
+  qreal y = pos.y();
+
+  int beginOfGraph = nodes.size();
+  for (int i = 1; i <= k; i++) {  
+    const qreal angle =  i * (2*M_PI / k);    
+    insertNode(QPoint(radius * cos(angle) + x, radius * sin(angle) + y)) ; 
+  }
+  return beginOfGraph;
+}
+
+void DiagramScene::createKGraph(QPointF pos)
+{
+   int k = mainWindow->spinNodes->value();
+   qreal radius = mainWindow -> spinRadius->value();
+
+   int posBegin = createConcentricNodes(k, radius, pos);
+   int s = nodes.size();
+
+   for(int i = posBegin; i < (s - 1); i++)
+   {
+     for(int e = posBegin + 1; e < s; e++){
+        if (i == e) continue;
+        insertEdge(nodes[i], nodes[e], 0);
+     }
+  }
+}
+
+void DiagramScene::createCGraph(QPointF pos)
+{
+   int k = mainWindow->spinNodes->value();
+   qreal radius = mainWindow -> spinRadius->value();
+
+   int posBegin = createConcentricNodes(k, radius, pos);
+   int s = nodes.size();
+   int i = 0;
+   for(i = posBegin; i < (s - 1); i++)
+   {
+     insertEdge(nodes[i], nodes[i+1], 0);
+   }
+   insertEdge(nodes[i], nodes[posBegin]);
 }
 //! you can now be happy changing your node`s color.
 void DiagramScene::changeSelectedNodeColor( QColor c ){ foreach( Node *n, selectedNodes ) n -> setColour( c ); }
