@@ -135,17 +135,15 @@ graph.numberOfEdges = function(node1, node2){
     var num_loops = 0;
 
     for (var i = 0; i < edges_size; i++){
-
-        if (node1 == node2){
-             if (n1_edges[i].getFrom() == n1_edges[i].getTo()){
-                 amount++;
-                num_loops++;
-             }
-        }
-
-       else if ((n1_edges[i].getFrom() == node2) || (n1_edges[i].getTo() == node2)){
-          amount++;
+	  if (node1 == node2){
+         if (n1_edges[i].getFrom() == n1_edges[i].getTo()){
+            amount++;
+            num_loops++;
          }
+       }
+       else if ((n1_edges[i].getFrom() == node2) || (n1_edges[i].getTo() == node2)){
+         amount++;
+       }
     }
 
     if (num_loops > 0){

@@ -138,18 +138,17 @@ QPainterPath Edge::shape() const
   
   QPointF p1, p2, p3, p4;
   
-  //! descobrir em qual quadrante está cada coisa.
   if (myLine->p1().x() >= myLine->p2().x())
   {
     if (myLine->p1().y() >= myLine->p2().y())
-    { //! Quarto quadrante
+    { 
       p1.setX(myLine->p2().x() - 5); p1.setY(myLine->p2().y() + 5);
       p2.setX(myLine->p2().x() + 5); p2.setY(myLine->p2().y() - 5);
       p3.setX(myLine->p1().x() + 5); p3.setY(myLine->p1().y() - 5);
       p4.setX(myLine->p1().x() - 5); p4.setY(myLine->p1().y() + 5);  
     }
     else
-    {                  //! Segundo quadrante
+    { 
       p1.setX(myLine->p2().x() - 5); p1.setY(myLine->p2().y() - 5);
       p2.setX(myLine->p2().x() + 5); p2.setY(myLine->p2().y() + 5);
       p3.setX(myLine->p1().x() + 5); p3.setY(myLine->p1().y() + 5);
@@ -159,14 +158,14 @@ QPainterPath Edge::shape() const
   else
   {
     if (myLine->p1().y() >= myLine->p2().y())
-    { //! Terceiro Quadrante
+    { 
       p1.setX(myLine->p1().x() - 5); p1.setY(myLine->p1().y() - 5);
       p2.setX(myLine->p2().x() - 5); p2.setY(myLine->p2().y() - 5);
       p3.setX(myLine->p2().x() + 5); p3.setY(myLine->p2().y() + 5);
       p4.setX(myLine->p1().x() + 5); p4.setY(myLine->p1().y() + 5);    
     }
     else
-    {                  // ! Primeiro Quadrante
+    {  
       p1.setX(myLine->p1().x() + 5); p1.setY(myLine->p1().y() - 5);
       p2.setX(myLine->p2().x() + 5); p2.setY(myLine->p2().y() - 5);
       p3.setX(myLine->p2().x() - 5); p3.setY(myLine->p2().y() + 5);
@@ -174,7 +173,7 @@ QPainterPath Edge::shape() const
     }
   }
 
-  //! desenha o quadradinho
+  //! draws a little retangle around the edge.
   QPolygonF poly;
   poly << p1 << p2 << p3 << p4 << p1;
   QPainterPath p;

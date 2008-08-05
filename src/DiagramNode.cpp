@@ -50,47 +50,47 @@ Node::Node(DiagramScene *diagramScene)     : diagramScene(diagramScene)
 }
 
 Node::~Node(){
-	if (ellipse) delete ellipse;
-	
-	while(edgeList.size()){
-	    Edge *e = edgeList.first();
-		if (e != 0) {
-		  edgeList.removeAll(e);
-		  delete e;
-		  e = 0;
-		}
-	}
-	
-	if (hasGroup()){
-		removeGroup();
-	} 
-	diagramScene -> removeNode(this);
+    if (ellipse) delete ellipse;
+    
+    while(edgeList.size()){
+        Edge *e = edgeList.first();
+        if (e != 0) {
+          edgeList.removeAll(e);
+          delete e;
+          e = 0;
+        }
+    }
+    
+    if (hasGroup()){
+        removeGroup();
+    } 
+    diagramScene -> removeNode(this);
 }
 
 bool Node::operator==(Node* n)
 {
-	if (this == n) return true;
-	return false;
+    if (this == n) return true;
+    return false;
 }
 
 void Node::remove(){
-	delete this;
+    delete this;
 }
 bool Node::hasGroup(){
-	if (group != NULL) return true;
-	return false;
+    if (group != NULL) return true;
+    return false;
 }
 Group* Node::getGroup() const{
     return group; 
 }
 
 void Node::setGroup(Group *g){
-	group = g;
+    group = g;
 }
 
 void Node::removeGroup(){
-	group->removeNode(this);
-	group = NULL;
+    group->removeNode(this);
+    group = NULL;
 }
 
 void Node::addEdge(Edge *edge)
@@ -138,9 +138,9 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
   if(selected)
   {
-	painter->setPen(Qt::DashLine);
-	painter->setBrush(Qt::NoBrush);
-	painter->drawRect(-10, -10, 20, 20);
+    painter->setPen(Qt::DashLine);
+    painter->setBrush(Qt::NoBrush);
+    painter->drawRect(-10, -10, 20, 20);
   }
 
   painter->setBrush(gradient);
@@ -177,28 +177,28 @@ void Node::setName(QString s){
 
 QScriptValue Node::edges()
 {
-	if (diagramScene -> engine == NULL) return QScriptValue();
-	
-	QScriptValue edgelist = diagramScene -> engine->newArray();
-	int length = diagramScene -> engine -> evaluate("edges.length;").toInt32();
-	
-	foreach(Edge *e, edgeList)
-	{
-		for(int i = 0; i < length; i++)
-		{
-			QString n = "edges["+QString::number(i)+"];";
-			QScriptValue edge = diagramScene -> engine -> evaluate(n);
-			Edge *x = qobject_cast<Edge*>(edge.toQObject());
-			
-			if (x == e) edgelist.property("push").call(edgelist, QScriptValueList() << edge);
-		} 
-	}
-	return edgelist;
+    if (diagramScene -> engine == NULL) return QScriptValue();
+    
+    QScriptValue edgelist = diagramScene -> engine->newArray();
+    int length = diagramScene -> engine -> evaluate("edges.length;").toInt32();
+    
+    foreach(Edge *e, edgeList)
+    {
+        for(int i = 0; i < length; i++)
+        {
+            QString n = "edges["+QString::number(i)+"];";
+            QScriptValue edge = diagramScene -> engine -> evaluate(n);
+            Edge *x = qobject_cast<Edge*>(edge.toQObject());
+            
+            if (x == e) edgelist.property("push").call(edgelist, QScriptValueList() << edge);
+        } 
+    }
+    return edgelist;
 }
 
 void Node::removeEdge(Edge *e)
 {
-	edgeList.removeAt(edgeList.indexOf(e));
+    edgeList.removeAt(edgeList.indexOf(e));
 }
 
 QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)

@@ -584,26 +584,11 @@ void DiagramScene::toogleIndexVisibility(){
 int DiagramScene::createConcentricNodes(int k, qreal radius,  QPointF pos ){
    
    //! sees if there's space on the canvas
-   if ((pos.x() - radius) < 0){
-      int ratio = pos.x() - radius;
-      pos.setX(pos.x() - radius + ratio);
-      debug(" Out of Bounds, x - radius < 0. ");
-   }
-   if ((pos.y() - radius) < 0){
-      int ratio = pos.y() - radius;
-      pos.setY(pos.y() - radius + ratio);
-      debug(" Out of Bounds, y - radius < 0. ");
-   }
-   if ( (pos.x() + radius) > right){
-     int ratio = pos.x() + radius;
-     pos.setX(pos.x() + radius - ratio);
-     debug(" Out of Bounds, x + radius > right. ");
-  }
-  if ( (pos.y() + radius) > bottom){
-    int ratio = pos.y() + radius;
-    pos.setY( pos.y() + radius - ratio);
-    debug(" Out of Bounds, x + radius > bottom. ");
-  }
+  //! sees if there's space on the canvas
+  if ((pos.x() - radius) < 0){ pos.setX(radius+20); }
+  if ((pos.y() - radius) < 0){ pos.setY(radius+20); }
+  if ( (pos.x() + radius) > right){ pos.setX(right - radius - 20);   }
+  if ( (pos.y() + radius) > bottom){ pos.setY( bottom - radius - 20); }
   
   qreal x = pos.x();
   qreal y = pos.y();
