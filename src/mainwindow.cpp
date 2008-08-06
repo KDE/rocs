@@ -31,9 +31,7 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
   pEdgeCtrl = 0;
   scene = 0;
 
-  //! cria a janela usando o arquivo gerado pelo Qt Designer.
   setupUi(this);
-  //setupActions();
 
   spinEdgeLength->setVisible(false);
   pNodeAllign->setVisible(false);
@@ -43,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
   scene = new DiagramScene(this);
   view->setScene(scene);
   view->setRenderHint(QPainter::Antialiasing);
+  setupActions();
 }
 
 MainWindow::~MainWindow()
@@ -76,29 +75,33 @@ void MainWindow::setupActions()
   tmpAction->setIcon(KIcon("document-open"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("Open", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(openFile()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(openFile()) ); 
+//! TODO: CREATE THE openFile method.
 
  /*! newGraph(), saveGraph(), saveGraphAs() */
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("New Graph"));
   tmpAction->setIcon(KIcon("document-new"));
-//   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
+//!   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("newGraph", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(newGraph()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(newGraph()) );
+//! TODO: create the newGraph() method
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Save Graph"));
   tmpAction->setIcon(KIcon("document-save"));
-//   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
+//!   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("saveGraph", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(saveGraph()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(saveGraph()) );
+//! TODO: create the saveGraph method and the file formats class.
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Save Graph as"));
   tmpAction->setIcon(KIcon("document-save-as"));
-//   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
+//!   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("saveGraphAs", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(saveGraphAs()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(saveGraphAs()) );
+//! TODO: ditto.
 
 /*! newScript(), saveScript(), saveScriptAs(),  */
 tmpAction = new KAction(this);
@@ -107,20 +110,23 @@ tmpAction = new KAction(this);
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("newScript", tmpAction);
   connect( tmpAction, SIGNAL(triggered()), this, SLOT(newScript()) );
+//! TODO: newScript().
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Save Script"));
   tmpAction->setIcon(KIcon("document-save"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("saveScript", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(saveScript()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(saveScript()) );
+//! TODO: saveScript().
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Save Script as"));
   tmpAction->setIcon(KIcon("document-save-as"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("saveScriptAs", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(saveScriptAs()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(saveScriptAs()) );
+//! TODO: saveScriptAs().
 
 /*! closeThisGraph(), closeAllGraphs(), closeAllButThisGraph(), */
 tmpAction = new KAction(this);
@@ -128,21 +134,24 @@ tmpAction = new KAction(this);
   tmpAction->setIcon(KIcon("close"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("closeThisGraph", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeThisGraph()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeThisGraph()) );
+//! TODO: closeThisGraph().
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Close all Graphs"));
   tmpAction->setIcon(KIcon("document-close"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("closeAllGraphs", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAllGraphs()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAllGraphs()) );
+//! TODO: closeAllGraphs()
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Close all Graphs but this"));
   tmpAction->setIcon(KIcon("document-new"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("clear", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAllButThisGraph()) );
+//!  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAllButThisGraph()) );
+//! TODO: closeAllButThisSGraph().
 
 /*! closeThisScript(), closeAllScripts(), closeAllButThisScript() */
 
@@ -151,21 +160,21 @@ tmpAction = new KAction(this);
   tmpAction->setIcon(KIcon("document-close"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("closeThisScript", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeThisScript()) );
+  //connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeThisScript()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Close all Scripts"));
   tmpAction->setIcon(KIcon("document-close"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("closeAllScripts", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAllScripts()) );
+  //connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAllScripts()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Close all Scripts but this"));
   tmpAction->setIcon(KIcon("document-close"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("closeAllButThisScript", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAllButThisScript()) );
+  //connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAllButThisScript()) );
 
 /*! undo(), redo(), copy(), cut(), paste()  */
 
@@ -174,35 +183,35 @@ tmpAction = new KAction(this);
   tmpAction->setIcon(KIcon("edit-undo"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("undo", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(undo()) );
+  //connect( tmpAction, SIGNAL(triggered()), this, SLOT(undo()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Redo"));
   tmpAction->setIcon(KIcon("edit-redo"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("redo", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(redo()) );
+  //connect( tmpAction, SIGNAL(triggered()), this, SLOT(redo()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Copy"));
   tmpAction->setIcon(KIcon("edit-copy"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("copy", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(copy()) );
+  //connect( tmpAction, SIGNAL(triggered()), this, SLOT(copy()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Cut"));
   tmpAction->setIcon(KIcon("edit-cut"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("cut", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(cut()) );
+  //connect( tmpAction, SIGNAL(triggered()), this, SLOT(cut()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Paste"));
   tmpAction->setIcon(KIcon("edit-paste"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("paste", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(paste()) );
+  //connect( tmpAction, SIGNAL(triggered()), this, SLOT(paste()) );
 
 /*! delete(), setStart(), setEnd() */
 
@@ -211,21 +220,21 @@ tmpAction = new KAction(this);
   tmpAction->setIcon(KIcon("edit-delete"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("delete", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(delete()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(removeSelection()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Set start node"));
 //   tmpAction->setIcon(KIcon("document-new"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("setStart", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(setStart()) );
+  //connect( tmpAction, SIGNAL(triggered()), scene, SLOT(setStartNode()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Set end node"));
 //   tmpAction->setIcon(KIcon("document-new"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("setEnd", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(setEnd()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(setEndNode()) );
 
 /*! ALLIGN ICONS MISSING FROM SPEC.
 allignLeft(), allignRight(), allignTop(), allignBottom(), allignHCenter(), allignVCenter(),
@@ -236,42 +245,42 @@ tmpAction = new KAction(this);
   tmpAction->setIcon(KIcon("format-justify-left"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("allignLeft", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignLeft()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(allignVLeft()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Allign Right"));
   tmpAction->setIcon(KIcon("format-justify-right"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("allignRight", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignRight()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(allignVRight()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Allign Top"));
   tmpAction->setIcon(KIcon("document-new")); 
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("allignTop", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignTop()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(allignHTop()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Allign Bottom"));
   tmpAction->setIcon(KIcon("document-new"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("allignBottom", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignBottom()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(allignHBottom()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Allign Center Vertically"));
   tmpAction->setIcon(KIcon("document-new")); 
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("allignVCenter", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignVCenter()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(allignVCenter()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Allign Center Horizontally"));
   tmpAction->setIcon(KIcon("document-new"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("allignHCenter", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignHCenter()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(allignHCenter()) );
 
 /*! createGroup(), removeFromGroup(), ungroup(), */
 tmpAction = new KAction(this);
@@ -279,21 +288,21 @@ tmpAction = new KAction(this);
   tmpAction->setIcon(KIcon("document-new"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("createGroup", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(createGroup()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(group()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Remove Node from Group"));
   tmpAction->setIcon(KIcon("document-new")); 
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("removeFromGroup", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(removeFromGroup()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(removeFromGroup()) );
 
 tmpAction = new KAction(this);
   tmpAction->setText(i18n("Ungroup"));
   tmpAction->setIcon(KIcon("document-new"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
   actionCollection()->addAction("ungroup", tmpAction);
-  connect( tmpAction, SIGNAL(triggered()), this, SLOT(ungroup()) );
+  connect( tmpAction, SIGNAL(triggered()), scene, SLOT(ungroup()) );
 
 /*! setColor() */
 tmpAction = new KAction(this);

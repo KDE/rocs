@@ -37,12 +37,12 @@ Group::Group(DiagramScene *scene, QList<Node*> nodeList)
 }
 
 Group::~Group(){
-	foreach(Node *n, nodeList){
-		n -> setGroup(NULL);
-	}
-	nodeList.clear();
-	delete box;
-	diagramScene = 0;
+  foreach(Node *n, nodeList){
+    n -> setGroup(NULL);
+  }
+  nodeList.clear();
+  delete box;
+  diagramScene = 0;
 }
 
 QScriptValue Group::nodes(){
@@ -73,7 +73,7 @@ void Group::removeNode(Node *n)
   nodeList.removeAt(nodeList.indexOf(n));
   if (nodeList.size() != 0){
     rePaint();
-	return;	
+  return;  
   }
   
   diagramScene->removeGroup(this);

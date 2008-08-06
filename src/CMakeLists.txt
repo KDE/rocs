@@ -1,10 +1,9 @@
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
-
 include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
-
+# Source Files
 set(Rocs_SRCS 
    main.cpp 
    DiagramScene.cpp
@@ -15,12 +14,14 @@ set(Rocs_SRCS
    mainwindow.cpp 
 )
 
-
+# Resource Files
 set (Rocs_RCCS
     resources.qrc
 )
 
+# Since the JavaScript supports came from QtScript... 
 set (QT_USE_QTSCRIPT true)
+
 
 kde4_add_ui_files(Rocs_SRCS mainwindow.ui )
 
