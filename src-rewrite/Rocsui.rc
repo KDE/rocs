@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<gui name="tutorial3" version="1">
+  <ToolBar name="mainToolBar" >
+  </ToolBar>
+  <MenuBar>
+    <Menu name="file" >
+    </Menu>
+  </MenuBar>
+</gui>
