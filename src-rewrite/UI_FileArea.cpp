@@ -23,6 +23,8 @@
 #include <QTreeWidgetItem>
 #include <KLocale>
 #include <KIcon>
+#include <Graph.h>
+
 FileArea::FileArea(MainWindow *parent) : QTreeWidget(parent) 
 {
    setObjectName("FileArea");

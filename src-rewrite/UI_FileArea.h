@@ -25,6 +25,7 @@
 
 class MainWindow;
 class QTreeWidgetItem;
+class Graph;
 
 class FileArea : public QTreeWidget
 {
