@@ -35,6 +35,7 @@ class ConfigureDialog;
 class QSplitter;
 class Graph;
 class QToolBox;
+class QGraphicsView;
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -90,14 +91,14 @@ signals:
 private:
   //! Widgets being displayed
   PaletteBar*      _paletteBar;
-  GraphScene*      _graphScene;
+  QGraphicsView*   _graphView;
   ScriptingArea*   _scriptingArea;
   FileArea*        _fileArea;
   PropertiesArea*  _propertiesArea;
   GraphLayers*     _graphLayers;
   ConfigureDialog* _configureDialog;
-  QSplitter*        _centralWidget;
-  QToolBox*         _rightToolBox;
+  QSplitter*       _centralWidget;
+  QToolBox*        _rightToolBox;
 
   QList<Graph*>  _listGraphs;
   QStringList _listScripts;

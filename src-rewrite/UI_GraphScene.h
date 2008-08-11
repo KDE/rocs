@@ -20,14 +20,14 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <QGraphicsView>
+#include <QGraphicsScene>
 
 class MainWindow;
 
-class GraphScene : public QGraphicsView
+class GraphScene : public QGraphicsScene
 {
   public:
-  GraphScene(MainWindow* parent);
+  GraphScene(QObject* parent);
   enum{ SingleSelection, // Selects only one node or edge
         SquareSelection, // Create a Square that will select everything inside.
         Move,            // Move the selected item(s)

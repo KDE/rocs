@@ -24,6 +24,7 @@
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KLocale>
+#include <QGraphicsView>
 
 #include "UI_MainWindow.h"
 
@@ -41,7 +42,7 @@ MainWindow::MainWindow() : KXmlGuiWindow()
 {
   setObjectName("MainWindow");
 
-  _graphScene      = new GraphScene(this);
+  _graphView       = new QGraphicsView(this);
   _paletteBar      = new PaletteBar(this);
   _scriptingArea   = new ScriptingArea(this);
   _fileArea        = new FileArea(this);
@@ -76,7 +77,7 @@ void MainWindow::setupWidgets()
    addDockWidget(Qt::RightDockWidgetArea, dockWidget);
 
    _centralWidget->setOrientation(Qt::Vertical);
-   _centralWidget->addWidget(_graphScene);
+   _centralWidget->addWidget(_graphView);
    _centralWidget->addWidget(_scriptingArea);
    setCentralWidget(_centralWidget);
 }

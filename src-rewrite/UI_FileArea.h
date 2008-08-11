@@ -36,6 +36,8 @@ public:
   void addScript(const QString& name, const QString& data);
   void addGraph(const QString& name, Graph& g);
 
+  enum{ ScriptRole = Qt::UserRole + 1, GraphRole};
+
 private:
   QTreeWidgetItem* _graphFolder;
   QTreeWidgetItem* _scriptFolder;

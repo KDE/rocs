@@ -41,21 +41,29 @@ FileArea::FileArea(MainWindow *parent) : QTreeWidget(parent)
 
    addTopLevelItem(_graphFolder);   
    addTopLevelItem(_scriptFolder);
-   
+   addScript(i18n("untitled"));
+   addGraph(i18n("untitled"));
 }
 
 void FileArea::addScript(const QString& s)
 {
-
+   QTreeWidgetItem *scriptItem = new QTreeWidgetItem(_scriptFolder);
+   scriptItem->setIcon(0, KIcon("file-new"));
+   scriptItem->setText(0, s);
+   scriptItem->setData(0, ScriptRole, "");
 }
 
 void FileArea::addGraph(const QString& s)
 {
-
+   QTreeWidgetItem *graphItem = new QTreeWidgetItem(_graphFolder);
+   graphItem->setIcon(0, KIcon("file-new"));
+   graphItem->setText(0, s);
+   graphItem->setData(0, GraphRole, "");
 }
 
 void FileArea::addScript(const QString& name, const QString& data)
 {
+
 }
 
 void FileArea::addGraph(const QString& name, Graph& g)
