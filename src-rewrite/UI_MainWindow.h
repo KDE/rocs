@@ -22,7 +22,6 @@
 */
 
 #include <KXmlGuiWindow>
-#include <KUrl>
 #include <QList>
 #include <QStringList>
 
@@ -33,8 +32,9 @@ class FileArea;
 class PropertiesArea;
 class GraphLayers;
 class ConfigureDialog;
-
+class QSplitter;
 class Graph;
+class QToolBox;
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -88,6 +88,7 @@ signals:
   void sendDebugMsg(const QString& s);
 
 private:
+  //! Widgets being displayed
   PaletteBar*      _paletteBar;
   GraphScene*      _graphScene;
   ScriptingArea*   _scriptingArea;
@@ -95,6 +96,8 @@ private:
   PropertiesArea*  _propertiesArea;
   GraphLayers*     _graphLayers;
   ConfigureDialog* _configureDialog;
+  QSplitter*        _centralWidget;
+  QToolBox*         _rightToolBox;
 
   QList<Graph*>  _listGraphs;
   QStringList _listScripts;

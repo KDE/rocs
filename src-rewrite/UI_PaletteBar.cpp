@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,  
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -42,7 +42,7 @@
 PaletteBar::PaletteBar(QWidget* parent, Qt::WindowFlags flags) : QDockWidget(i18n("Palette"), parent, flags), _widget(0)
 {
     setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    setFeatures(QDockWidget::DockWidgetMovable);
+    setFeatures(QDockWidget::NoDockWidgetFeatures);
 
     QWidget* topWidget = new QWidget(this);
 
@@ -186,12 +186,12 @@ void PaletteBar::showButtonTextToggled(bool b)
 
 void PaletteBar::actionTriggered(QAction* action)
 {
-    emit beginAddItem(action->property("step_object").toString());
+    emit beginAddItem(action->property("rocs_action").toString());
 }
 
 void PaletteBar::endAddItem(const QString& name, bool /*success*/)
 {
-    if(name == _actionGroup->checkedAction()->property("step_object").toString())
+    if(name == _actionGroup->checkedAction()->property("rocs_action").toString())
         _pointerAction->setChecked(true);
 }
 

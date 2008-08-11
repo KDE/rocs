@@ -4,7 +4,7 @@ add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 include(KDE4Defaults)
 
-add_subdirectory(src)
+add_subdirectory(src-rewrite)
 
 include_directories( ${KDE4_INCLUDES} ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} )
 

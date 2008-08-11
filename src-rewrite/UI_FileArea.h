@@ -21,15 +21,24 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <QWidget>
+#include <QTreeWidget>
 
 class MainWindow;
+class QTreeWidgetItem;
 
-class FileArea : public QWidget
+class FileArea : public QTreeWidget
 {
 public:
   FileArea(MainWindow *parent);
+  void addScript(const QString& s);
+  void addGraph(const QString& s);
+  void addScript(const QString& name, const QString& data);
+  void addGraph(const QString& name, Graph& g);
 
+private:
+  QTreeWidgetItem* _graphFolder;
+  QTreeWidgetItem* _scriptFolder;
+  
 };
 
 #endif

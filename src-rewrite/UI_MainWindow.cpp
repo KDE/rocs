@@ -18,6 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include <QSplitter>
+#include <QToolBox>
 #include <KAction>
 #include <KActionCollection>
 #include <KStandardAction>
@@ -38,6 +40,7 @@
 MainWindow::MainWindow() : KXmlGuiWindow() 
 {
   setObjectName("MainWindow");
+
   _graphScene      = new GraphScene(this);
   _paletteBar      = new PaletteBar(this);
   _scriptingArea   = new ScriptingArea(this);
@@ -45,6 +48,8 @@ MainWindow::MainWindow() : KXmlGuiWindow()
   _propertiesArea  = new PropertiesArea(this);
   _graphLayers     = new GraphLayers(this);
   _configureDialog = new ConfigureDialog(this);
+  _centralWidget   = new QSplitter(this);
+  _rightToolBox    = new QToolBox(this);
 
   setCorner(Qt::TopLeftCorner,     Qt::LeftDockWidgetArea);
   setCorner(Qt::BottomLeftCorner,  Qt::LeftDockWidgetArea);
@@ -54,6 +59,26 @@ MainWindow::MainWindow() : KXmlGuiWindow()
   setupActions();
   setupWidgets();
   setupGUI();
+}
+
+void MainWindow::setupWidgets()
+{
+   _paletteBar->setObjectName("PaletteBar");
+   addDockWidget(Qt::LeftDockWidgetArea, _paletteBar);
+
+   _rightToolBox->addItem(_fileArea, i18n("Opened Files"));
+   _rightToolBox->addItem(_propertiesArea, i18n("Properties"));
+   _rightToolBox->addItem(_graphLayers, i18n("Graphs"));
+   QDockWidget *dockWidget = new QDockWidget(this);
+   dockWidget->setObjectName("rightToolBox");
+   dockWidget->setWidget(_rightToolBox);
+   dockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
+   addDockWidget(Qt::RightDockWidgetArea, dockWidget);
+
+   _centralWidget->setOrientation(Qt::Vertical);
+   _centralWidget->addWidget(_graphScene);
+   _centralWidget->addWidget(_scriptingArea);
+   setCentralWidget(_centralWidget);
 }
 
 void MainWindow::setupActions()
@@ -141,12 +166,6 @@ void MainWindow::setupActions()
   actionCollection()->addAction("Open", tmpAction);
   connect( tmpAction, SIGNAL(triggered()), this, SLOT(openFile()) ); 
 
-}
-
-void MainWindow::setupWidgets()
-{
-    _paletteBar->setObjectName("PaletteBar");
-    addDockWidget(Qt::LeftDockWidgetArea, _paletteBar);
 }
 
 void MainWindow::documentNew()

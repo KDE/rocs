@@ -20,5 +20,43 @@
 
 #include "UI_FileArea.h"
 #include "UI_MainWindow.h"
+#include <QTreeWidgetItem>
+#include <KLocale>
+#include <KIcon>
+FileArea::FileArea(MainWindow *parent) : QTreeWidget(parent) 
+{
+   setObjectName("FileArea");
+   setHeaderHidden(true);
+   setColumnCount(1);
+   
+   _scriptFolder = new QTreeWidgetItem();
+   _scriptFolder->setIcon(0, KIcon("folder"));
+   _scriptFolder->setText(0, i18n("Scripts"));
 
-FileArea::FileArea(MainWindow *parent) : QWidget(parent) {}
+   _graphFolder = new QTreeWidgetItem();
+   _graphFolder->setIcon(0, KIcon("folder"));
+   _graphFolder->setText(0, i18n("Graphs"));
+
+   addTopLevelItem(_graphFolder);   
+   addTopLevelItem(_scriptFolder);
+   
+}
+
+void FileArea::addScript(const QString& s)
+{
+
+}
+
+void FileArea::addGraph(const QString& s)
+{
+
+}
+
+void FileArea::addScript(const QString& name, const QString& data)
+{
+}
+
+void FileArea::addGraph(const QString& name, Graph& g)
+{
+
+}
