@@ -2,6 +2,7 @@
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
+   With Sponsorship from Faculdades Ruy Barbosa
 
    Rocs is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,28 +22,84 @@
 #include "UI_FileArea.h"
 #include "UI_MainWindow.h"
 #include <QTreeWidgetItem>
+#include <KPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <KLocale>
 #include <KIcon>
 #include <Graph.h>
 
-FileArea::FileArea(MainWindow *parent) : QTreeWidget(parent) 
+FileArea::FileArea(MainWindow *parent) : QWidget(parent) 
 {
    setObjectName("FileArea");
-   setHeaderHidden(true);
-   setColumnCount(1);
    
-   _scriptFolder = new QTreeWidgetItem();
+   createTreeWidget();
+   createButtons();
+   createDesignLayout();
+   
+   addScript(i18n("untitled"));
+   addGraph(i18n("untitled"));
+    
+}
+
+void FileArea::createButtons()
+{
+  _btnNewGraph  = new KPushButton(this);
+  _btnNewGraph->setIcon(KIcon("file-new"));
+
+  _btnNewScript = new KPushButton(this);
+  _btnNewScript->setIcon(KIcon("file-new"));
+
+  _btnSave      = new KPushButton(this); 
+  _btnSave->setIcon(KIcon("file-save"));
+
+  _btnSaveAll   = new KPushButton(this); 
+  _btnSaveAll->setIcon(KIcon("file-save"));
+
+  _btnClose     = new KPushButton(this);
+  _btnClose->setIcon(KIcon("file-close"));
+
+  _btnCloseAll  = new KPushButton(this);
+  _btnCloseAll->setIcon(KIcon("file-close"));
+
+  _btnShowHide  = new KPushButton(this);
+  _btnShowHide->setIcon(KIcon(""));
+}
+
+
+void FileArea::createTreeWidget()
+{
+   _treeWidget = new QTreeWidget(this);
+   _treeWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+   //_treeWidget->setRootIsDecorated(false);
+   _treeWidget->setAnimated(true);
+   _treeWidget->setHeaderHidden(true);
+
+   _scriptFolder = new QTreeWidgetItem(_treeWidget);
    _scriptFolder->setIcon(0, KIcon("folder"));
    _scriptFolder->setText(0, i18n("Scripts"));
 
-   _graphFolder = new QTreeWidgetItem();
+   _graphFolder = new QTreeWidgetItem(_treeWidget);
    _graphFolder->setIcon(0, KIcon("folder"));
    _graphFolder->setText(0, i18n("Graphs"));
+}
 
-   addTopLevelItem(_graphFolder);   
-   addTopLevelItem(_scriptFolder);
-   addScript(i18n("untitled"));
-   addGraph(i18n("untitled"));
+void FileArea::createDesignLayout()
+{
+  QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+  QHBoxLayout* horizontalLayout = new QHBoxLayout();  
+  
+  horizontalLayout->addWidget(_btnShowHide);
+  horizontalLayout->addWidget(_btnNewGraph);
+  horizontalLayout->addWidget(_btnNewScript);
+  horizontalLayout->addWidget(_btnSave);
+  horizontalLayout->addWidget(_btnSaveAll);
+  horizontalLayout->addWidget(_btnClose);
+  horizontalLayout->addWidget(_btnCloseAll);
+
+  verticalLayout->addWidget(_treeWidget);
+  verticalLayout->addLayout(horizontalLayout);
+  setLayout(verticalLayout);
 }
 
 void FileArea::addScript(const QString& s)

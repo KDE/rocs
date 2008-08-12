@@ -21,13 +21,16 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <QTreeWidget>
+#include <QWidget>
 
 class MainWindow;
+class QTreeWidget;
 class QTreeWidgetItem;
 class Graph;
+class KPushButton;
 
-class FileArea : public QTreeWidget
+
+class FileArea : public QWidget
 {
 public:
   FileArea(MainWindow *parent);
@@ -39,10 +42,22 @@ public:
   enum{ ScriptRole = Qt::UserRole + 1, GraphRole};
 
 private:
+  QTreeWidget*     _treeWidget;
   QTreeWidgetItem* _graphFolder;
   QTreeWidgetItem* _scriptFolder;
+
+  KPushButton *_btnNewGraph;
+  KPushButton *_btnNewScript;
+  KPushButton *_btnSave;
+  KPushButton *_btnSaveAll;
+  KPushButton *_btnClose;
+  KPushButton *_btnCloseAll;
+  KPushButton  *_btnShowHide;
+
+  void createButtons();
+  void createDesignLayout();
+  void createTreeWidget();
   
 };
 
 #endif
-

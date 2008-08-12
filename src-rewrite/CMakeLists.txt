@@ -1,7 +1,11 @@
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
-include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+include_directories( ${KDE4_INCLUDE_DIR} 
+                     ${QT_INCLUDES} 
+                     ${CMAKE_CURRENT_SOURCE_DIR} 
+                     ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 # Source Files
 set(Rocs_SRCS
@@ -46,6 +50,16 @@ kde4_add_executable(Rocs ${Rocs_SRCS} ${Rocs_RCC_SRCS})
 target_link_libraries(Rocs ${KDE4_KDEUI_LIBS}  ${QT_QTSCRIPT_LIBRARY})
 
 install(TARGETS Rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
 install( FILES Rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES GraphScript.js Examples.js Rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/Rocs  )
+
+install( FILES 
+            GraphScript.js 
+            Examples.js 
+            Rocsui.rc 
+         DESTINATION 
+            ${DATA_INSTALL_DIR}/Rocs  
+)
+
 install(FILES Rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR})
+
