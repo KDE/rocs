@@ -32,14 +32,18 @@ class KPushButton;
 
 class FileArea : public QWidget
 {
+Q_OBJECT
 public:
   FileArea(MainWindow *parent);
-  void addScript(const QString& s);
-  void addGraph(const QString& s);
+  enum { ScriptRole = Qt::UserRole + 1, GraphRole};
+
+public slots:
+  void addScript(const QString& s = "");
+  void addGraph(const QString& s = "");
   void addScript(const QString& name, const QString& data);
   void addGraph(const QString& name, Graph& g);
 
-  enum{ ScriptRole = Qt::UserRole + 1, GraphRole};
+
 
 private:
   QTreeWidget*     _treeWidget;
@@ -48,11 +52,7 @@ private:
 
   KPushButton *_btnNewGraph;
   KPushButton *_btnNewScript;
-  KPushButton *_btnSave;
   KPushButton *_btnSaveAll;
-  KPushButton *_btnClose;
-  KPushButton *_btnCloseAll;
-  KPushButton  *_btnShowHide;
 
   void createButtons();
   void createDesignLayout();

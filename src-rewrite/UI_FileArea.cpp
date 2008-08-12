@@ -29,6 +29,8 @@
 #include <KIcon>
 #include <Graph.h>
 
+#include "UI_FileArea.moc" //! why, oh, why? each .moc files takes me almost 20 min to remember and include them.
+
 FileArea::FileArea(MainWindow *parent) : QWidget(parent) 
 {
    setObjectName("FileArea");
@@ -37,8 +39,8 @@ FileArea::FileArea(MainWindow *parent) : QWidget(parent)
    createButtons();
    createDesignLayout();
    
-   addScript(i18n("untitled"));
-   addGraph(i18n("untitled"));
+   addScript();
+   addGraph();
     
 }
 
@@ -46,24 +48,19 @@ void FileArea::createButtons()
 {
   _btnNewGraph  = new KPushButton(this);
   _btnNewGraph->setIcon(KIcon("file-new"));
+  _btnNewGraph->setToolTip(i18n("Creates a new Graph"));
+  connect(_btnNewGraph, SIGNAL(clicked()), this, SLOT(addGraph()));
 
   _btnNewScript = new KPushButton(this);
   _btnNewScript->setIcon(KIcon("file-new"));
-
-  _btnSave      = new KPushButton(this); 
-  _btnSave->setIcon(KIcon("file-save"));
+  _btnNewScript->setToolTip(i18n("Creates a new Script"));
+  connect(_btnNewScript, SIGNAL(clicked()), this, SLOT(addScript()));
 
   _btnSaveAll   = new KPushButton(this); 
   _btnSaveAll->setIcon(KIcon("file-save"));
+  _btnSaveAll->setToolTip(i18n("Save all files"));
+  
 
-  _btnClose     = new KPushButton(this);
-  _btnClose->setIcon(KIcon("file-close"));
-
-  _btnCloseAll  = new KPushButton(this);
-  _btnCloseAll->setIcon(KIcon("file-close"));
-
-  _btnShowHide  = new KPushButton(this);
-  _btnShowHide->setIcon(KIcon(""));
 }
 
 
@@ -89,13 +86,9 @@ void FileArea::createDesignLayout()
   QVBoxLayout* verticalLayout = new QVBoxLayout(this);
   QHBoxLayout* horizontalLayout = new QHBoxLayout();  
   
-  horizontalLayout->addWidget(_btnShowHide);
   horizontalLayout->addWidget(_btnNewGraph);
   horizontalLayout->addWidget(_btnNewScript);
-  horizontalLayout->addWidget(_btnSave);
   horizontalLayout->addWidget(_btnSaveAll);
-  horizontalLayout->addWidget(_btnClose);
-  horizontalLayout->addWidget(_btnCloseAll);
 
   verticalLayout->addWidget(_treeWidget);
   verticalLayout->addLayout(horizontalLayout);
@@ -104,17 +97,27 @@ void FileArea::createDesignLayout()
 
 void FileArea::addScript(const QString& s)
 {
+   QString name = "";
+
+   if (s == "") name = i18n("untitled");
+   else         name = s;
+
    QTreeWidgetItem *scriptItem = new QTreeWidgetItem(_scriptFolder);
    scriptItem->setIcon(0, KIcon("file-new"));
-   scriptItem->setText(0, s);
+   scriptItem->setText(0, name);
    scriptItem->setData(0, ScriptRole, "");
 }
 
 void FileArea::addGraph(const QString& s)
 {
+   QString name = "";
+
+   if (s == "") name = i18n("untitled");
+   else         name = s;
+
    QTreeWidgetItem *graphItem = new QTreeWidgetItem(_graphFolder);
    graphItem->setIcon(0, KIcon("file-new"));
-   graphItem->setText(0, s);
+   graphItem->setText(0, name);
    graphItem->setData(0, GraphRole, "");
 }
 

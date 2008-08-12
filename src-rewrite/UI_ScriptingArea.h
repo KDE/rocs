@@ -23,9 +23,43 @@
 #include <QWidget>
 
 class MainWindow;
+class QLabel;
+class KTextEdit;
+class KPushButton;
+class KTabWidget;
+class QTextBrowser;
+
 class ScriptingArea : public QWidget
 {
 public:
   ScriptingArea(MainWindow* parent);
+
+private:
+    QLabel *_txtLine;
+    QLabel *_txtColumn;
+    QLabel *_txtFile;
+    QLabel *_lblLine;
+    QLabel *_lblColumn;
+    QLabel *_lblFile;
+    
+    KTextEdit *_txtEditScript;
+    QTextBrowser *_txtDebug;
+    KPushButton *_btnClearDebug;
+    KTabWidget *_tabWidget;
+    QWidget *_tabScript;
+    QWidget *_tabDebug;
+
+   void createTabs();
+   void createDesignLayout();
 };
 #endif
+
+ 
+
+    
+
+     
+
+
+
+
