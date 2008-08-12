@@ -36,6 +36,11 @@ class QSplitter;
 class Graph;
 class QToolBox;
 class QGraphicsView;
+class QTreeWidgetItem;
+
+namespace KTextEditor{
+class View;
+}
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -81,7 +86,7 @@ public slots:
   void execute();
   void debug(const QString& s);
 
-  
+  void changeActive(QTreeWidgetItem * item);
 
 protected slots:
 
@@ -100,12 +105,13 @@ private:
   QSplitter*       _centralWidget;
   QToolBox*        _rightToolBox;
 
-  QList<Graph*>  _listGraphs;
-  QStringList _listScripts;
-
+  QTreeWidgetItem *_activeGraphItem;
+  QTreeWidgetItem *_activeScriptItem;
+  
   void setupWidgets();
   void setupActions();
-
+  void changeActiveScript(QTreeWidgetItem *item);
+  void changeActiveGraph(QTreeWidgetItem *item);
 };
 
 #endif

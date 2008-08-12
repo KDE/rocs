@@ -25,6 +25,9 @@
 #include <KStandardAction>
 #include <KLocale>
 #include <QGraphicsView>
+#include <QTreeWidgetItem>
+#include <KXMLGUIFactory>
+#include <ktexteditor/view.h>
 
 #include "UI_MainWindow.h"
 
@@ -60,6 +63,8 @@ MainWindow::MainWindow() : KXmlGuiWindow()
   setupActions();
   setupWidgets();
   setupGUI();
+
+   guiFactory()->addClient(_scriptingArea->view());
 }
 
 void MainWindow::setupWidgets()
@@ -80,16 +85,20 @@ void MainWindow::setupWidgets()
    _centralWidget->addWidget(_graphView);
    _centralWidget->addWidget(_scriptingArea);
    setCentralWidget(_centralWidget);
+
+
 }
 
 void MainWindow::setupActions()
 {
   KStandardAction::quit(this,    SLOT(quit()),        actionCollection());
-  KStandardAction::undo(this,    SLOT(undo()),        actionCollection());
-  KStandardAction::redo(this,    SLOT(redo()),        actionCollection());
-  KStandardAction::cut(this,     SLOT(cut()),         actionCollection());
-  KStandardAction::copy(this,    SLOT(copy()),        actionCollection());
-  KStandardAction::paste(this,   SLOT(paste()),       actionCollection());
+
+//! Only Activate those commented below when the graph view is active.
+//   KStandardAction::undo(this,    SLOT(undo()),        actionCollection());
+//   KStandardAction::redo(this,    SLOT(redo()),        actionCollection());
+//   KStandardAction::cut(this,     SLOT(cut()),         actionCollection());
+//   KStandardAction::copy(this,    SLOT(copy()),        actionCollection());
+//   KStandardAction::paste(this,   SLOT(paste()),       actionCollection());
   KStandardAction::openNew(this, SLOT(documentNew()), actionCollection());
   KStandardAction::open(this,    SLOT(openFile()),    actionCollection());
   KStandardAction::save(this,    SLOT(save()),        actionCollection());
@@ -265,3 +274,26 @@ void MainWindow::redo()
 {
 }
 
+void MainWindow::changeActive(QTreeWidgetItem * item)
+{
+  switch(item->type())
+  {
+     case FileArea::ScriptRole : changeActiveScript(item); break;
+     case FileArea::GraphRole  : changeActiveGraph(item);  break;
+  }
+}
+
+void MainWindow::changeActiveScript(QTreeWidgetItem *item)
+{
+   //!Gets the actual data from the 'Edit Script' tab and saves it.
+  
+}
+
+void MainWindow::changeActiveGraph(QTreeWidgetItem *item)
+{
+}
+
+
+
+
+ 

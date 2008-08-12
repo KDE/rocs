@@ -29,24 +29,21 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <KLocale>
-
+#include <ktexteditor/document.h>
+#include <ktexteditor/view.h>
+#include <ktexteditor/editor.h>
+#include <ktexteditor/editorchooser.h>
+#include <KMessageBox>
+#include <KXMLGUIFactory>
 
 ScriptingArea::ScriptingArea( MainWindow *parent ) : QWidget( parent ) {
-    setObjectName( "scriptingArea" );
-
+   setObjectName( "scriptingArea" );
+   mainWindow = parent;
    createTabs(  );
    createDesignLayout(  );
 }
 
 void ScriptingArea::createTabs(  ){
-    _txtLine = new QLabel( this );    _txtLine   -> setText( "" );
-    _txtColumn = new QLabel( this );  _txtColumn -> setText( "" );
-    _txtFile = new QLabel( this );    _txtFile   -> setText( "" );
-
-    _lblLine   = new QLabel( this ); _lblLine   -> setText( i18n( "Line: " ));
-    _lblColumn = new QLabel( this ); _lblColumn -> setText( i18n( "Column: " ));
-    _lblFile   = new QLabel( this ); _lblFile   -> setText( i18n( "File: " ));
-
     _tabWidget = new KTabWidget( this );  _tabWidget -> setTabPosition( QTabWidget::South );
     
     _tabScript = new QWidget(  );  _tabWidget -> addTab( _tabScript, i18n( "Untitled" ) );    
@@ -55,38 +52,45 @@ void ScriptingArea::createTabs(  ){
 
     _btnClearDebug = new KPushButton( _tabDebug );  _btnClearDebug -> setText( i18n( "clear" ));
     
-    _txtEditScript = new KTextEdit( _tabScript );
-    _txtDebug = new QTextBrowser( _tabDebug );
+    KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
+
+    if (!editor) {
+      KMessageBox::error(this, i18n("A KDE text-editor component could not be found;\n please check your KDE installation."));
+    }
+
+    _txtEditScriptDocument = editor -> createDocument(0);
+    _txtEditScriptDocument->setMode("JavaScript");
+    _txtEditScriptView     = qobject_cast<KTextEditor::View*>(_txtEditScriptDocument->createView(this));
     
+    _txtDebug = new QTextBrowser( _tabDebug );
     _tabWidget -> setCurrentIndex( 0 );
+   
+}
+
+KTextEditor::View* ScriptingArea::view(){ 
+   return _txtEditScriptView;
 }
 
 void ScriptingArea::createDesignLayout(  )
 {
-    QSpacerItem *horizontalSpacer = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
     QSpacerItem* horizontalSpacer_2 = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
 
     QVBoxLayout *verticalLayout = new QVBoxLayout( this );
-    QHBoxLayout *horizontalLayout = new QHBoxLayout(  );
     QVBoxLayout *verticalLayout_3 = new QVBoxLayout( _tabScript );
     QVBoxLayout *verticalLayout_2 = new QVBoxLayout( _tabDebug );
     QHBoxLayout *horizontalLayout_2 = new QHBoxLayout(  );
 
-    horizontalLayout -> addWidget( _lblLine );    
-    horizontalLayout -> addWidget( _txtLine );
-    horizontalLayout -> addWidget( _lblColumn );
-    horizontalLayout -> addWidget( _txtColumn );
-    horizontalLayout -> addWidget( _lblFile );
-    horizontalLayout -> addWidget( _txtFile );
-    horizontalLayout -> addItem( horizontalSpacer );
-
-    verticalLayout -> addLayout( horizontalLayout );
-    verticalLayout_3 -> addWidget( _txtEditScript );
+    verticalLayout_3 -> addWidget( _txtEditScriptView );
     verticalLayout_2 -> addWidget( _txtDebug );
     
     horizontalLayout_2 -> addWidget( _btnClearDebug );
     horizontalLayout_2 -> addItem( horizontalSpacer_2 );
-    verticalLayout_2 -> addLayout( horizontalLayout_2 );
-    verticalLayout -> addWidget( _tabWidget );
+    verticalLayout_2   -> addLayout( horizontalLayout_2 );
+    verticalLayout     -> addWidget( _tabWidget );
 
+}
+
+const QString ScriptingArea::getScriptText()
+{
+   return _txtEditScriptDocument->text(); 
 }

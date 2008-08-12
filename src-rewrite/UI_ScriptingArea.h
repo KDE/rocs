@@ -29,12 +29,21 @@ class KPushButton;
 class KTabWidget;
 class QTextBrowser;
 
+namespace KTextEditor
+{
+    class Document;
+    class View;
+}
+
 class ScriptingArea : public QWidget
 {
 public:
   ScriptingArea(MainWindow* parent);
+   const QString getScriptText();
+   KTextEditor::View* view();
 
 private:
+    MainWindow *mainWindow;
     QLabel *_txtLine;
     QLabel *_txtColumn;
     QLabel *_txtFile;
@@ -42,7 +51,9 @@ private:
     QLabel *_lblColumn;
     QLabel *_lblFile;
     
-    KTextEdit *_txtEditScript;
+    KTextEditor::View *_txtEditScriptView;
+    KTextEditor::Document *_txtEditScriptDocument;
+
     QTextBrowser *_txtDebug;
     KPushButton *_btnClearDebug;
     KTabWidget *_tabWidget;
@@ -51,15 +62,6 @@ private:
 
    void createTabs();
    void createDesignLayout();
+
 };
 #endif
-
- 
-
-    
-
-     
-
-
-
-

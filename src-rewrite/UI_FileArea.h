@@ -43,8 +43,6 @@ public slots:
   void addScript(const QString& name, const QString& data);
   void addGraph(const QString& name, Graph& g);
 
-
-
 private:
   QTreeWidget*     _treeWidget;
   QTreeWidgetItem* _graphFolder;

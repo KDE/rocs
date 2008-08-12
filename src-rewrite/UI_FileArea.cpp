@@ -41,7 +41,9 @@ FileArea::FileArea(MainWindow *parent) : QWidget(parent)
    
    addScript();
    addGraph();
-    
+   connect(_treeWidget, SIGNAL(itemClicked ( QTreeWidgetItem*, int )), 
+           parent,      SLOT(changeActive( QTreeWidgetItem* )));
+
 }
 
 void FileArea::createButtons()
@@ -60,7 +62,6 @@ void FileArea::createButtons()
   _btnSaveAll->setIcon(KIcon("file-save"));
   _btnSaveAll->setToolTip(i18n("Save all files"));
   
-
 }
 
 
