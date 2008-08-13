@@ -72,7 +72,7 @@ MainWindow::MainWindow() : KXmlGuiWindow()
   setupWidgets();
   setupGUI();
 
-   guiFactory()->addClient(_scriptingArea->view());
+   //guiFactory()->addClient(_scriptingArea->view());
 }
 
 void MainWindow::setupWidgets()

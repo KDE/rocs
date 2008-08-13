@@ -48,7 +48,6 @@ void ScriptingArea::createTabs(  ){
     _tabScript = new QWidget(  );  _tabWidget -> addTab( _tabScript, i18n( "Untitled" ) );    
     _tabDebug  = new QWidget(  );  _tabWidget -> addTab( _tabDebug, i18n( "Debug" ) );
 
-
     _btnClearDebug = new KPushButton( _tabDebug );  _btnClearDebug -> setText( i18n( "clear" ));
     
     _txtDebug = new QTextBrowser( _tabDebug );
