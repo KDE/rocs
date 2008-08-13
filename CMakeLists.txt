@@ -1,25 +1,9 @@
+project(Rocs)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 find_package(KDE4 REQUIRED)
-
-add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-
+find_package(KDEEdu)
 include(KDE4Defaults)
+add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+include_directories(${KDE4_INCLUDES} ${KDE4_INCLUDE_DIR} ${QT_INCLUDES})
 
 add_subdirectory(src-rewrite)
-
-include_directories( ${KDE4_INCLUDES} ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} )
-
-
-
-########### install files ###############
-
-
-
-
-
-
-#original Makefile.am contents follow:
-#SUBDIRS = src
-
-#EXTRA_DIST = TODO README AUTHORS Doxyfile INSTALL ChangeLog COPYING
-
-#AUTOMAKE_OPTIONS = foreign
