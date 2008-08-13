@@ -32,7 +32,6 @@
 #include <ktexteditor/document.h>
 #include <ktexteditor/view.h>
 #include <ktexteditor/editor.h>
-#include <ktexteditor/editorchooser.h>
 #include <KMessageBox>
 #include <KXMLGUIFactory>
 
@@ -52,16 +51,6 @@ void ScriptingArea::createTabs(  ){
 
     _btnClearDebug = new KPushButton( _tabDebug );  _btnClearDebug -> setText( i18n( "clear" ));
     
-    KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
-
-    if (!editor) {
-      KMessageBox::error(this, i18n("A KDE text-editor component could not be found;\n please check your KDE installation."));
-    }
-
-    _txtEditScriptDocument = editor -> createDocument(0);
-    _txtEditScriptDocument->setMode("JavaScript");
-    _txtEditScriptView     = qobject_cast<KTextEditor::View*>(_txtEditScriptDocument->createView(this));
-    
     _txtDebug = new QTextBrowser( _tabDebug );
     _tabWidget -> setCurrentIndex( 0 );
    
@@ -71,16 +60,21 @@ KTextEditor::View* ScriptingArea::view(){
    return _txtEditScriptView;
 }
 
+void ScriptingArea::setDocument(KTextEditor::Document *d)
+{
+    _txtEditScriptDocument = d;
+    _txtEditScriptView     = qobject_cast<KTextEditor::View*>(_txtEditScriptDocument->createView(this));
+    _txtEditScriptView -> setParent(_tabScript);
+}
+
 void ScriptingArea::createDesignLayout(  )
 {
     QSpacerItem* horizontalSpacer_2 = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
 
     QVBoxLayout *verticalLayout = new QVBoxLayout( this );
-    QVBoxLayout *verticalLayout_3 = new QVBoxLayout( _tabScript );
     QVBoxLayout *verticalLayout_2 = new QVBoxLayout( _tabDebug );
     QHBoxLayout *horizontalLayout_2 = new QHBoxLayout(  );
 
-    verticalLayout_3 -> addWidget( _txtEditScriptView );
     verticalLayout_2 -> addWidget( _txtDebug );
     
     horizontalLayout_2 -> addWidget( _btnClearDebug );

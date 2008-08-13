@@ -21,6 +21,8 @@
 
 #include "UI_FileArea.h"
 #include "UI_MainWindow.h"
+#include "UI_GraphScene.h"
+
 #include <QTreeWidgetItem>
 #include <KPushButton>
 #include <QHBoxLayout>
@@ -28,21 +30,25 @@
 #include <KLocale>
 #include <KIcon>
 #include <Graph.h>
+#include <ktexteditor/document.h>
+#include <ktexteditor/editor.h>
+#include <ktexteditor/editorchooser.h>
 
 #include "UI_FileArea.moc" //! why, oh, why? each .moc files takes me almost 20 min to remember and include them.
 
 FileArea::FileArea(MainWindow *parent) : QWidget(parent) 
 {
+   _mainWindow = parent;
    setObjectName("FileArea");
    
    createTreeWidget();
    createButtons();
    createDesignLayout();
    
-   addScript();
-   addGraph();
-   connect(_treeWidget, SIGNAL(itemClicked ( QTreeWidgetItem*, int )), 
-           parent,      SLOT(changeActive( QTreeWidgetItem* )));
+   createNewScript();
+   createNewGraph();
+   
+   connect(_treeWidget, SIGNAL(itemClicked ( QTreeWidgetItem*, int )), parent, SLOT(changeActive( QTreeWidgetItem* )));
 
 }
 
@@ -51,12 +57,12 @@ void FileArea::createButtons()
   _btnNewGraph  = new KPushButton(this);
   _btnNewGraph->setIcon(KIcon("file-new"));
   _btnNewGraph->setToolTip(i18n("Creates a new Graph"));
-  connect(_btnNewGraph, SIGNAL(clicked()), this, SLOT(addGraph()));
+ // connect(_btnNewGraph, SIGNAL(clicked()), this, SLOT(addGraph()));
 
   _btnNewScript = new KPushButton(this);
   _btnNewScript->setIcon(KIcon("file-new"));
   _btnNewScript->setToolTip(i18n("Creates a new Script"));
-  connect(_btnNewScript, SIGNAL(clicked()), this, SLOT(addScript()));
+ // connect(_btnNewScript, SIGNAL(clicked()), this, SLOT(addScript()));
 
   _btnSaveAll   = new KPushButton(this); 
   _btnSaveAll->setIcon(KIcon("file-save"));
@@ -69,7 +75,6 @@ void FileArea::createTreeWidget()
 {
    _treeWidget = new QTreeWidget(this);
    _treeWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-   //_treeWidget->setRootIsDecorated(false);
    _treeWidget->setAnimated(true);
    _treeWidget->setHeaderHidden(true);
 
@@ -96,38 +101,34 @@ void FileArea::createDesignLayout()
   setLayout(verticalLayout);
 }
 
-void FileArea::addScript(const QString& s)
+void FileArea::addScript(const QString& name, KTextEditor::Document* data)
 {
-   QString name = "";
-
-   if (s == "") name = i18n("untitled");
-   else         name = s;
-
    QTreeWidgetItem *scriptItem = new QTreeWidgetItem(_scriptFolder);
    scriptItem->setIcon(0, KIcon("file-new"));
    scriptItem->setText(0, name);
-   scriptItem->setData(0, ScriptRole, "");
+   scriptItem->setData(0, ScriptRole, data);
+  _mainWindow->changeActive(scriptItem);
 }
 
-void FileArea::addGraph(const QString& s)
+void FileArea::addGraph(const QString& name, GraphScene* data)
 {
-   QString name = "";
-
-   if (s == "") name = i18n("untitled");
-   else         name = s;
-
    QTreeWidgetItem *graphItem = new QTreeWidgetItem(_graphFolder);
    graphItem->setIcon(0, KIcon("file-new"));
    graphItem->setText(0, name);
-   graphItem->setData(0, GraphRole, "");
+   graphItem->setData(0, GraphRole, data);
+  _mainWindow->changeActive(graphItem);
 }
 
-void FileArea::addScript(const QString& name, const QString& data)
+void FileArea::createNewScript()
 {
-
+   KTextEditor::Editor *e = _mainWindow->editor();
+   KTextEditor::Document* d = e -> createDocument(0);
+   d->setMode("JavaScript");
+   addScript(d->documentName(), d);
 }
 
-void FileArea::addGraph(const QString& name, Graph& g)
+void FileArea::createNewGraph()
 {
-
+    GraphScene *g = new GraphScene(parent());
+    addGraph("untitled", g);
 }

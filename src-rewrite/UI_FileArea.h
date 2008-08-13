@@ -18,8 +18,7 @@
 
    You should have received a copy of the GNU General Public License
    along with Step; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA */
 
 #include <QWidget>
 
@@ -28,7 +27,12 @@ class QTreeWidget;
 class QTreeWidgetItem;
 class Graph;
 class KPushButton;
+class GraphScene;
 
+namespace KTextEditor
+{
+    class Document;
+}
 
 class FileArea : public QWidget
 {
@@ -38,10 +42,8 @@ public:
   enum { ScriptRole = Qt::UserRole + 1, GraphRole};
 
 public slots:
-  void addScript(const QString& s = "");
-  void addGraph(const QString& s = "");
-  void addScript(const QString& name, const QString& data);
-  void addGraph(const QString& name, Graph& g);
+  void addScript(const QString& s, KTextEditor::Document* data);
+  void addGraph(const QString& s, GraphScene* data);
 
 private:
   QTreeWidget*     _treeWidget;
@@ -52,10 +54,13 @@ private:
   KPushButton *_btnNewScript;
   KPushButton *_btnSaveAll;
 
+  MainWindow* _mainWindow;
+
   void createButtons();
   void createDesignLayout();
   void createTreeWidget();
-  
+  void createNewScript();
+  void createNewGraph();
 };
 
 #endif

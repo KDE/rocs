@@ -40,6 +40,7 @@ class QTreeWidgetItem;
 
 namespace KTextEditor{
 class View;
+class Editor;
 }
 
 class MainWindow : public KXmlGuiWindow
@@ -48,42 +49,20 @@ Q_OBJECT
 
 public:
   MainWindow();
-
+  KTextEditor::Editor* editor();
 public slots:
   //! #####################
   //! ##      MENUS      ##
   //! #####################
 
   //! File Menu
-  void documentNew();
-  void newGraph();
-  void newScript();
-  void openFile();
-  void saveFileAs();
-  void save();
-  void close();
-  void closeAll();
-  
+
   //! Edit Menu
-  void cut();
-  void copy();
-  void paste();
-  void undo();
-  void redo();
-  void quit();
-  void allignRight();
-  void allignLeft();
-  void allignBottom();
-  void allignTop();
-  void allignVCenter();
-  void allignHCenter();
 
   //! Help Menu
-  void about();
-  void showManual();
-  
+   
   //! Script Menu
-  void execute();
+
   void debug(const QString& s);
 
   void changeActive(QTreeWidgetItem * item);
@@ -104,7 +83,7 @@ private:
   ConfigureDialog* _configureDialog;
   QSplitter*       _centralWidget;
   QToolBox*        _rightToolBox;
-
+  KTextEditor::Editor* _editor;
   QTreeWidgetItem *_activeGraphItem;
   QTreeWidgetItem *_activeScriptItem;
   

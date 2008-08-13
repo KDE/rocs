@@ -44,13 +44,7 @@ public:
 
 private:
     MainWindow *mainWindow;
-    QLabel *_txtLine;
-    QLabel *_txtColumn;
-    QLabel *_txtFile;
-    QLabel *_lblLine;
-    QLabel *_lblColumn;
-    QLabel *_lblFile;
-    
+
     KTextEditor::View *_txtEditScriptView;
     KTextEditor::Document *_txtEditScriptDocument;
 
@@ -62,6 +56,6 @@ private:
 
    void createTabs();
    void createDesignLayout();
-
+   void setDocument(KTextEditor::Document *d);
 };
 #endif
