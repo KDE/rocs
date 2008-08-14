@@ -82,7 +82,6 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
   setupWidgets();
   setupGUI();
 
-  _fileArea->createNewScript();
 }
 
 void MainWindow::setupWidgets()
@@ -202,23 +201,13 @@ void MainWindow::changeActive(QTreeWidgetItem * item)
 {
   switch(item->type())
   {
-//     case FileArea::ScriptRole : changeActiveScript(item); break;
-     case FileArea::GraphRole  : changeActiveGraph(item);  break;
-     default: KMessageBox::error(this, i18n("AAAAAAAAAAHHHHHHHH" )); break;
   }
 }
 
 void MainWindow::changeActiveScript(KTextEditor::Document *item)
 {
-//   KTextEditor::Document *d = 0;
-//   kDebug() << item->data(0,FileArea::ScriptRole).type();
-//   kDebug() << FileArea::ScriptRole;
-//   if (item->data(0,FileArea::ScriptRole).canConvert<KTextEditor::Document*>() ) {
-//     d = item->data(0, FileArea::ScriptRole).value<KTextEditor::Document*>();
     _scriptingArea -> setDocument( item );
     guiFactory()->addClient(_scriptingArea->view());
-//   }
-
 }
 
 void MainWindow::changeActiveGraph(QTreeWidgetItem *item)

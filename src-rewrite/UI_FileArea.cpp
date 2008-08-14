@@ -24,6 +24,8 @@
 #include "UI_GraphScene.h"
 
 #include <QTreeWidgetItem>
+#include <QTreeWidget>
+
 #include <KPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -38,99 +40,12 @@
 
 FileArea::FileArea(MainWindow *parent) : QWidget(parent) 
 {
-   _mainWindow = parent;
-   setObjectName("FileArea");
-
-   createTreeWidget();
-   createButtons();
-   createDesignLayout();
-
-   connect(_treeWidget, SIGNAL(itemClicked ( QTreeWidgetItem*, int )), parent, SLOT(changeActive( QTreeWidgetItem* )));
-
-}
-
-void FileArea::createButtons()
-{
-  _btnNewGraph  = new KPushButton(this);
-  _btnNewGraph->setIcon(KIcon("file-new"));
-  _btnNewGraph->setToolTip(i18n("Creates a new Graph"));
- // connect(_btnNewGraph, SIGNAL(clicked()), this, SLOT(addGraph()));
-
-  _btnNewScript = new KPushButton(this);
-  _btnNewScript->setIcon(KIcon("file-new"));
-  _btnNewScript->setToolTip(i18n("Creates a new Script"));
- // connect(_btnNewScript, SIGNAL(clicked()), this, SLOT(addScript()));
-
-  _btnSaveAll   = new KPushButton(this); 
-  _btnSaveAll->setIcon(KIcon("file-save"));
-  _btnSaveAll->setToolTip(i18n("Save all files"));
-  
-}
-
-
-void FileArea::createTreeWidget()
-{
    _treeWidget = new QTreeWidget(this);
-   _treeWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-   _treeWidget->setAnimated(true);
    _treeWidget->setHeaderHidden(true);
-
    _scriptFolder = new QTreeWidgetItem(_treeWidget);
    _scriptFolder->setIcon(0, KIcon("folder"));
    _scriptFolder->setText(0, i18n("Scripts"));
+    QVBoxLayout *verticalLayout = new QVBoxLayout(this);
+    verticalLayout->addWidget(_treeWidget);
 
-   _graphFolder = new QTreeWidgetItem(_treeWidget);
-   _graphFolder->setIcon(0, KIcon("folder"));
-   _graphFolder->setText(0, i18n("Graphs"));
-}
-
-void FileArea::createDesignLayout()
-{
-  QVBoxLayout* verticalLayout = new QVBoxLayout(this);
-  QHBoxLayout* horizontalLayout = new QHBoxLayout();  
-  
-  horizontalLayout->addWidget(_btnNewGraph);
-  horizontalLayout->addWidget(_btnNewScript);
-  horizontalLayout->addWidget(_btnSaveAll);
-
-  verticalLayout->addWidget(_treeWidget);
-  verticalLayout->addLayout(horizontalLayout);
-  setLayout(verticalLayout);
-}
-
-void FileArea::addScript(const QString& name, KTextEditor::Document* data)
-{
- //  kDebug() << data->type();
-   // QTreeWidgetItem *scriptItem = new QTreeWidgetItem(_scriptFolder, ScriptRole);
-   // scriptItem->setIcon(0, KIcon("file-new"));
-   // scriptItem->setText(0, name);
-   // scriptItem->setData(0, ScriptRole, data);
-    _mainWindow->changeActiveScript(data);
-}
-
-// 91549085
-// 88461028
-// 92335659
-
-void FileArea::addGraph(const QString& name, GraphScene* data)
-{
-   QTreeWidgetItem *graphItem = new QTreeWidgetItem(_graphFolder, GraphRole);
-   graphItem->setIcon(0, KIcon("file-new"));
-   graphItem->setText(0, name);
-   graphItem->setData(0, GraphRole, data);
-  _mainWindow->changeActive(graphItem);
-}
-
-void FileArea::createNewScript()
-{
-   KTextEditor::Editor *e = _mainWindow->editor();
-   KTextEditor::Document* d = e -> createDocument(0);
-   d->setMode("JavaScript");
-   addScript(d->documentName(), d);
-}
-
-void FileArea::createNewGraph()
-{
-    GraphScene *g = new GraphScene(parent());
-    addGraph("untitled", g);
 }

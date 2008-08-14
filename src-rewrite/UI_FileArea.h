@@ -26,45 +26,19 @@
 class MainWindow;
 class QTreeWidget;
 class QTreeWidgetItem;
-class Graph;
-class KPushButton;
-class GraphScene;
-
-namespace KTextEditor
-{
-    class Document;
-}
 
 class FileArea : public QWidget
 {
 Q_OBJECT
 public:
   FileArea(MainWindow *parent);
-  enum { ScriptRole = Qt::UserRole + 1, GraphRole};
-  void createNewScript();
-  void createNewGraph();
 
 public slots:
-  void addScript(const QString& s, KTextEditor::Document* data);
-  void addGraph(const QString& s, GraphScene* data);
+
 
 private:
-  QTreeWidget*     _treeWidget;
-  QTreeWidgetItem* _graphFolder;
+  QTreeWidget* _treeWidget;
   QTreeWidgetItem* _scriptFolder;
-
-  QList<KTextEditor::Document*> _documentList;
-  QList<GraphScene*> _graphSceneList;
-
-  KPushButton *_btnNewGraph;
-  KPushButton *_btnNewScript;
-  KPushButton *_btnSaveAll;
-
-  MainWindow* _mainWindow;
-
-  void createButtons();
-  void createDesignLayout();
-  void createTreeWidget();
 
 };
 
