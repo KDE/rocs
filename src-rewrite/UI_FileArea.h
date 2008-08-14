@@ -22,24 +22,34 @@
 
 #include <QWidget>
 #include <QList>
+#include <QVariant>
 
 class MainWindow;
 class QTreeWidget;
 class QTreeWidgetItem;
+
+namespace KTextEditor{
+class Document;
+}
 
 class FileArea : public QWidget
 {
 Q_OBJECT
 public:
   FileArea(MainWindow *parent);
-
+  void createNewScript();
+  enum {ScriptType = QVariant::UserType + 1};
+  KTextEditor::Document* scriptAt(int pos);
 public slots:
 
 
 private:
   QTreeWidget* _treeWidget;
   QTreeWidgetItem* _scriptFolder;
+  QList<KTextEditor::Document*> _scriptList;
+  MainWindow *_mainWindow;
 
+ void  atualizeTreeWidget();
 };
 
 #endif

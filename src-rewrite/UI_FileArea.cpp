@@ -25,7 +25,7 @@
 
 #include <QTreeWidgetItem>
 #include <QTreeWidget>
-
+#include <QVariant>
 #include <KPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -40,6 +40,10 @@
 
 FileArea::FileArea(MainWindow *parent) : QWidget(parent) 
 {
+   _scriptFolder = 0;
+   _treeWidget = 0;
+
+   _mainWindow = parent;
    _treeWidget = new QTreeWidget(this);
    _treeWidget->setHeaderHidden(true);
    _scriptFolder = new QTreeWidgetItem(_treeWidget);
@@ -48,4 +52,38 @@ FileArea::FileArea(MainWindow *parent) : QWidget(parent)
     QVBoxLayout *verticalLayout = new QVBoxLayout(this);
     verticalLayout->addWidget(_treeWidget);
 
+   _scriptList.clear();
+   createNewScript();
+   createNewScript();
+   createNewScript();
+
+   connect( _treeWidget, SIGNAL(itemClicked (QTreeWidgetItem*, int)),
+            _mainWindow, SLOT(changeActive(QTreeWidgetItem*))); 
+}
+
+void FileArea::createNewScript(){
+   KTextEditor::Editor *e = _mainWindow->editor();
+   KTextEditor::Document *d = e -> createDocument(0);
+   _scriptList.append(d);
+   atualizeTreeWidget();
+}
+
+void FileArea::atualizeTreeWidget(){
+  QList<QTreeWidgetItem *> children = _scriptFolder->takeChildren();
+  foreach(QTreeWidgetItem* t, children)
+  { 
+    delete t; 
+  }
+
+  for(int i = 0; i < _scriptList.size(); i++){
+     KTextEditor::Document *d = _scriptList.at(i);
+     QTreeWidgetItem *item = new QTreeWidgetItem(_scriptFolder, ScriptType);
+     item->setText (0, d->documentName());
+     item->setData (0, ScriptType, i);
+  }
+}
+
+KTextEditor::Document* FileArea::scriptAt(int pos)
+{
+   return _scriptList.at(pos);
 }

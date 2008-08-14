@@ -76,10 +76,10 @@ KTextEditor::View* ScriptingArea::view(){
 
 void ScriptingArea::setDocument(KTextEditor::Document *d)
 {
-  if (_txtEditScriptView != 0){
-    delete _txtEditScriptView;
-    _txtEditScriptView = 0;
-  }
+   if (_txtEditScriptView != 0){
+     delete _txtEditScriptView;
+     _txtEditScriptView = 0;
+   }
 
    _txtEditScriptDocument = d;
    _txtEditScriptView  = qobject_cast<KTextEditor::View*>(d->createView(this));

@@ -44,17 +44,18 @@
 
 #include "UI_MainWindow.moc"     //! I *really* dislike this... 
 
-MainWindow::MainWindow() : KXmlGuiWindow(),
-  _graphView      (0),
-  _paletteBar     (0),
-  _scriptingArea  (0),
-  _propertiesArea (0),
-  _graphLayers    (0),
-  _configureDialog(0),
-  _centralWidget  (0),
-  _rightToolBox   (0),
-  _fileArea       (0)
+MainWindow::MainWindow() : KXmlGuiWindow()
 {
+  _graphView      = 0;
+  _paletteBar     = 0;
+  _scriptingArea  = 0;
+  _propertiesArea = 0;
+  _graphLayers    = 0;
+  _configureDialog= 0;
+  _centralWidget  = 0;
+  _rightToolBox   = 0;
+  _fileArea       = 0;
+
   setObjectName("MainWindow");
 
 
@@ -199,8 +200,13 @@ void MainWindow::debug(const QString& s)
 
 void MainWindow::changeActive(QTreeWidgetItem * item)
 {
-  switch(item->type())
-  {
+  kDebug() << item->type() << "\n";
+  kDebug() << item->data(0, FileArea::ScriptType).toInt() << "\n";
+  switch(item->type()){
+    case FileArea::ScriptType :
+      int pos = item->data(0, FileArea::ScriptType).toInt();
+      changeActiveScript( _fileArea->scriptAt(pos));
+    break;
   }
 }
 
