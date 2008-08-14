@@ -41,6 +41,7 @@ class QTreeWidgetItem;
 namespace KTextEditor{
 class View;
 class Editor;
+class Document;
 }
 
 class MainWindow : public KXmlGuiWindow
@@ -50,6 +51,9 @@ Q_OBJECT
 public:
   MainWindow();
   KTextEditor::Editor* editor();
+  void changeActiveScript(KTextEditor::Document *item);
+  void changeActiveGraph(QTreeWidgetItem *item);
+
 public slots:
   //! #####################
   //! ##      MENUS      ##
@@ -89,8 +93,7 @@ private:
   
   void setupWidgets();
   void setupActions();
-  void changeActiveScript(QTreeWidgetItem *item);
-  void changeActiveGraph(QTreeWidgetItem *item);
+
 };
 
 #endif

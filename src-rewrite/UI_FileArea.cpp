@@ -40,14 +40,11 @@ FileArea::FileArea(MainWindow *parent) : QWidget(parent)
 {
    _mainWindow = parent;
    setObjectName("FileArea");
-   
+
    createTreeWidget();
    createButtons();
    createDesignLayout();
-   
-   createNewScript();
-   createNewGraph();
-   
+
    connect(_treeWidget, SIGNAL(itemClicked ( QTreeWidgetItem*, int )), parent, SLOT(changeActive( QTreeWidgetItem* )));
 
 }
@@ -103,16 +100,21 @@ void FileArea::createDesignLayout()
 
 void FileArea::addScript(const QString& name, KTextEditor::Document* data)
 {
-   QTreeWidgetItem *scriptItem = new QTreeWidgetItem(_scriptFolder);
-   scriptItem->setIcon(0, KIcon("file-new"));
-   scriptItem->setText(0, name);
-   scriptItem->setData(0, ScriptRole, data);
-  _mainWindow->changeActive(scriptItem);
+ //  kDebug() << data->type();
+   // QTreeWidgetItem *scriptItem = new QTreeWidgetItem(_scriptFolder, ScriptRole);
+   // scriptItem->setIcon(0, KIcon("file-new"));
+   // scriptItem->setText(0, name);
+   // scriptItem->setData(0, ScriptRole, data);
+    _mainWindow->changeActiveScript(data);
 }
+
+// 91549085
+// 88461028
+// 92335659
 
 void FileArea::addGraph(const QString& name, GraphScene* data)
 {
-   QTreeWidgetItem *graphItem = new QTreeWidgetItem(_graphFolder);
+   QTreeWidgetItem *graphItem = new QTreeWidgetItem(_graphFolder, GraphRole);
    graphItem->setIcon(0, KIcon("file-new"));
    graphItem->setText(0, name);
    graphItem->setData(0, GraphRole, data);

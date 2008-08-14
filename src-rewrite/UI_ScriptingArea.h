@@ -28,6 +28,7 @@ class KTextEdit;
 class KPushButton;
 class KTabWidget;
 class QTextBrowser;
+class QVBoxLayout;
 
 namespace KTextEditor
 {
@@ -41,9 +42,10 @@ public:
   ScriptingArea(MainWindow* parent);
    const QString getScriptText();
    KTextEditor::View* view();
+   void setDocument(KTextEditor::Document *d);
 
 private:
-    MainWindow *mainWindow;
+    MainWindow *_mainWindow;
 
     KTextEditor::View *_txtEditScriptView;
     KTextEditor::Document *_txtEditScriptDocument;
@@ -54,8 +56,10 @@ private:
     QWidget *_tabScript;
     QWidget *_tabDebug;
 
+   QVBoxLayout *_tabScriptLayout;
+
    void createTabs();
    void createDesignLayout();
-   void setDocument(KTextEditor::Document *d);
+
 };
 #endif

@@ -21,6 +21,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA */
 
 #include <QWidget>
+#include <QList>
 
 class MainWindow;
 class QTreeWidget;
@@ -40,6 +41,8 @@ Q_OBJECT
 public:
   FileArea(MainWindow *parent);
   enum { ScriptRole = Qt::UserRole + 1, GraphRole};
+  void createNewScript();
+  void createNewGraph();
 
 public slots:
   void addScript(const QString& s, KTextEditor::Document* data);
@@ -50,6 +53,9 @@ private:
   QTreeWidgetItem* _graphFolder;
   QTreeWidgetItem* _scriptFolder;
 
+  QList<KTextEditor::Document*> _documentList;
+  QList<GraphScene*> _graphSceneList;
+
   KPushButton *_btnNewGraph;
   KPushButton *_btnNewScript;
   KPushButton *_btnSaveAll;
@@ -59,8 +65,7 @@ private:
   void createButtons();
   void createDesignLayout();
   void createTreeWidget();
-  void createNewScript();
-  void createNewGraph();
+
 };
 
 #endif

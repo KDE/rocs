@@ -17,7 +17,7 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
+#include <iostream>
 #include <QSplitter>
 #include <QToolBox>
 #include <KAction>
@@ -44,13 +44,23 @@
 
 #include "UI_MainWindow.moc"     //! I *really* dislike this... 
 
-MainWindow::MainWindow() : KXmlGuiWindow() 
+MainWindow::MainWindow() : KXmlGuiWindow(),
+  _graphView      (0),
+  _paletteBar     (0),
+  _scriptingArea  (0),
+  _propertiesArea (0),
+  _graphLayers    (0),
+  _configureDialog(0),
+  _centralWidget  (0),
+  _rightToolBox   (0),
+  _fileArea       (0)
 {
   setObjectName("MainWindow");
 
+
   _editor = KTextEditor::EditorChooser::editor();
   if (!_editor) KMessageBox::error(this, i18n("A KDE text-editor component could not be found"));
-  
+
    _editor -> setSimpleMode(true);
 
   _graphView       = new QGraphicsView(this);
@@ -72,7 +82,7 @@ MainWindow::MainWindow() : KXmlGuiWindow()
   setupWidgets();
   setupGUI();
 
-   //guiFactory()->addClient(_scriptingArea->view());
+  _fileArea->createNewScript();
 }
 
 void MainWindow::setupWidgets()
@@ -192,15 +202,23 @@ void MainWindow::changeActive(QTreeWidgetItem * item)
 {
   switch(item->type())
   {
-     case FileArea::ScriptRole : changeActiveScript(item); break;
+//     case FileArea::ScriptRole : changeActiveScript(item); break;
      case FileArea::GraphRole  : changeActiveGraph(item);  break;
+     default: KMessageBox::error(this, i18n("AAAAAAAAAAHHHHHHHH" )); break;
   }
 }
 
-void MainWindow::changeActiveScript(QTreeWidgetItem *item)
+void MainWindow::changeActiveScript(KTextEditor::Document *item)
 {
-   //!Gets the actual data from the 'Edit Script' tab and saves it.
-  _scriptingArea->getScriptText();
+//   KTextEditor::Document *d = 0;
+//   kDebug() << item->data(0,FileArea::ScriptRole).type();
+//   kDebug() << FileArea::ScriptRole;
+//   if (item->data(0,FileArea::ScriptRole).canConvert<KTextEditor::Document*>() ) {
+//     d = item->data(0, FileArea::ScriptRole).value<KTextEditor::Document*>();
+    _scriptingArea -> setDocument( item );
+    guiFactory()->addClient(_scriptingArea->view());
+//   }
+
 }
 
 void MainWindow::changeActiveGraph(QTreeWidgetItem *item)
