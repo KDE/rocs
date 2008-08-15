@@ -64,7 +64,7 @@ public slots:
   //! Edit Menu
 
   //! Help Menu
-   
+
   //! Script Menu
 
   void debug(const QString& s);

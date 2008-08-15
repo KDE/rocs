@@ -72,7 +72,7 @@ void FileArea::atualizeTreeWidget(){
   QList<QTreeWidgetItem *> children = _scriptFolder->takeChildren();
   foreach(QTreeWidgetItem* t, children)
   { 
-    delete t; 
+    delete t;
   }
 
   for(int i = 0; i < _scriptList.size(); i++){

@@ -17,18 +17,16 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <iostream>
+
 #include <QSplitter>
 #include <QToolBox>
-#include <KAction>
-#include <KActionCollection>
-#include <KStandardAction>
 #include <KLocale>
 #include <QGraphicsView>
 #include <QTreeWidgetItem>
-#include <KXMLGUIFactory>
-#include <KMessageBox>
-#include <ktexteditor/view.h>
+#include <KAction>
+#include <KStandardAction>
+#include <KActionCollection>
+
 #include <ktexteditor/editor.h>
 #include <ktexteditor/editorchooser.h>
 
@@ -46,23 +44,9 @@
 
 MainWindow::MainWindow() : KXmlGuiWindow()
 {
-  _graphView      = 0;
-  _paletteBar     = 0;
-  _scriptingArea  = 0;
-  _propertiesArea = 0;
-  _graphLayers    = 0;
-  _configureDialog= 0;
-  _centralWidget  = 0;
-  _rightToolBox   = 0;
-  _fileArea       = 0;
-
-  setObjectName("MainWindow");
-
-
+  setObjectName("Rocs");
   _editor = KTextEditor::EditorChooser::editor();
-  if (!_editor) KMessageBox::error(this, i18n("A KDE text-editor component could not be found"));
-
-   _editor -> setSimpleMode(true);
+  _editor -> setSimpleMode(true);
 
   _graphView       = new QGraphicsView(this);
   _paletteBar      = new PaletteBar(this);
@@ -82,19 +66,16 @@ MainWindow::MainWindow() : KXmlGuiWindow()
   setupActions();
   setupWidgets();
   setupGUI();
-
 }
 
 void MainWindow::setupWidgets()
 {
-   _paletteBar->setObjectName("PaletteBar");
    addDockWidget(Qt::LeftDockWidgetArea, _paletteBar);
 
    _rightToolBox->addItem(_fileArea, i18n("Opened Files"));
    _rightToolBox->addItem(_propertiesArea, i18n("Properties"));
    _rightToolBox->addItem(_graphLayers, i18n("Graphs"));
-   QDockWidget *dockWidget = new QDockWidget(this);
-   dockWidget->setObjectName("rightToolBox");
+   QDockWidget *dockWidget = new QDockWidget(i18n("Tool Box"), this);
    dockWidget->setWidget(_rightToolBox);
    dockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
    addDockWidget(Qt::RightDockWidgetArea, dockWidget);
@@ -107,7 +88,7 @@ void MainWindow::setupWidgets()
 
 void MainWindow::setupActions()
 {
- // KStandardAction::quit(this,    SLOT(quit()),        actionCollection());
+  KStandardAction::quit(this,    SLOT(quit()),        actionCollection());
 
 //! Only Activate those commented below when the graph view is active.
 //   KStandardAction::undo(this,    SLOT(undo()),        actionCollection());
@@ -200,8 +181,6 @@ void MainWindow::debug(const QString& s)
 
 void MainWindow::changeActive(QTreeWidgetItem * item)
 {
-  kDebug() << item->type() << "\n";
-  kDebug() << item->data(0, FileArea::ScriptType).toInt() << "\n";
   switch(item->type()){
     case FileArea::ScriptType :
       int pos = item->data(0, FileArea::ScriptType).toInt();
@@ -213,7 +192,6 @@ void MainWindow::changeActive(QTreeWidgetItem * item)
 void MainWindow::changeActiveScript(KTextEditor::Document *item)
 {
     _scriptingArea -> setDocument( item );
-    guiFactory()->addClient(_scriptingArea->view());
 }
 
 void MainWindow::changeActiveGraph(QTreeWidgetItem *item)

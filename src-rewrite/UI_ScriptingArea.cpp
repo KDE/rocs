@@ -77,6 +77,7 @@ KTextEditor::View* ScriptingArea::view(){
 void ScriptingArea::setDocument(KTextEditor::Document *d)
 {
    if (_txtEditScriptView != 0){
+     _mainWindow->guiFactory()->removeClient(_txtEditScriptView);
      delete _txtEditScriptView;
      _txtEditScriptView = 0;
    }
@@ -84,6 +85,7 @@ void ScriptingArea::setDocument(KTextEditor::Document *d)
    _txtEditScriptDocument = d;
    _txtEditScriptView  = qobject_cast<KTextEditor::View*>(d->createView(this));
    _tabScriptLayout -> addWidget( _txtEditScriptView );
+   _mainWindow->guiFactory()->addClient(_txtEditScriptView);
 }
 
 void ScriptingArea::createDesignLayout(  )
