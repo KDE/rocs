@@ -41,14 +41,14 @@ void Graph::addNode(qreal x, qreal y)
 {
   Node *n = new Node(this);
   n -> setXY( x, y);
-  _nodeList.append(n);
+  _nodes.append(n);
   emit nodeInserted( n );
 }
 
 void Graph::addEdge(int nodeIndex1, int nodeIndex2)
 {
-  Node *n1 = _nodeList[nodeIndex1];
-  Node *n2 = _nodeList[nodeIndex1];
+  Node *n1 = _nodes[nodeIndex1];
+  Node *n2 = _nodes[nodeIndex1];
   addEdge(n1, n2);
 }
 
@@ -62,6 +62,7 @@ void Graph::addEdge(Node *from, Node *to)
    {
       to -> addTo(from);
    }
+   _edges.append( e );
    emit edgeInserted( e );
 }
 

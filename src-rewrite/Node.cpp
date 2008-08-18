@@ -30,19 +30,19 @@ Node::Node(Graph *graph) : QObject(graph)
 
 void Node::addTo( Node *to )
 {
-   _toList.append( to );
+   _connections.append( to );
 }
 
 void Node::addEdge( Edge *e )
 {
-   _edgeList.append( e );
+   _edges.append( e );
 }
 
 QList<Edge*> Node::getConnections( Node *to )
 {
   QList<Edge*> c;
 
-  foreach(Edge *e, _edgeList){
+  foreach(Edge *e, _edges){
      if ( e->isConnected(this, to) ) c.append(e);
   }
 

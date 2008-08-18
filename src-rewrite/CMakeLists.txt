@@ -32,6 +32,11 @@ set(Rocs_SRCS
   UI_Separator.cpp
   UI_PaletteScrollArea.cpp
 
+  # Glue Code from Graph Library to the UI.
+  UI_Edge.cpp
+  UI_Graph.cpp
+  UI_Node.cpp
+
   # Graph Library
   Graph.cpp
   Node.cpp

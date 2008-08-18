@@ -50,8 +50,8 @@ private:
   qreal _x;
   qreal _y;
   QColor _color;
-  QList<Node*> _toList;
-  QList<Edge*> _edgeList;
+  QList<Node*> _connections;
+  QList<Edge*> _edges;
 
 };
 #endif

@@ -42,8 +42,8 @@ private:
   QString _comment; //! Some Comment of the graph.
   QString _name;   //! Name of the Graph
 
-  QList<Edge*> _edgeList; //! List of edges
-  QList<Node*> _nodeList; //! list of Nodes.
+  QList<Edge*> _edges; //! List of edges
+  QList<Node*> _nodes; //! list of Nodes.
 
 public slots:
   void setName(const QString& n);
