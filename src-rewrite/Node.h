@@ -16,45 +16,42 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.             *
+ *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
  ***************************************************************************/
 
-#ifndef GRAPH_H
-#define GRAPH_H
+#ifndef NODE_H
+#define NODE_H
 
 #include <QList>
-#include <QVariant>
-#include <QColor>
 #include <QString>
+#include <QColor>
 
 class Edge;
-class Node;
-class QString;
+class Graph;
 
-class Graph : public QObject{
+class Node : public QObject{
 Q_OBJECT
+
 public:
-  Graph(int graphType, QObject *parent);
-  enum { GraphType = QVariant::UserType + 1, DigraphType };
-
-private:
-  QColor  _color;   //! Color of the outlines of the Graph on the screen.
-  QString _comment; //! Some Comment of the graph.
-  QString _name;   //! Name of the Graph
-
-  QList<Edge*> _edgeList; //! List of edges
-  QList<Node*> _nodeList; //! list of Nodes.
+  Node(Graph *graph);
+  void addTo( Node *to );
+  void addEdge( Edge *e );
+  QList<Edge*> getConnections( Node *to );
 
 public slots:
-  void setName(const QString& n);
-  void addNode(qreal x, qreal y);
-  void addEdge(int nodeIndex1, int nodeIndex2);
-  void addEdge(Node *n1, Node *n2);
-  void setColor(const QColor& c);
-signals:
-  void nodeInserted(Node *n);
-  void edgeInserted(Edge *e);
+  void setName(const QString& name);
+  void setColor(const QColor& color);
+  void setXY( qreal x, qreal y);
+
+private:
+  Graph *_graph;
+  QString _name;
+  int _index;
+  qreal _x;
+  qreal _y;
+  QColor _color;
+  QList<Node*> _toList;
+  QList<Edge*> _edgeList;
 
 };
-
 #endif

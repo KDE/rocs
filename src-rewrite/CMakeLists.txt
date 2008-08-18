@@ -34,6 +34,8 @@ set(Rocs_SRCS
 
   # Graph Library
   Graph.cpp
+  Node.cpp
+  Edge.cpp
 )
 
 # Resource Files

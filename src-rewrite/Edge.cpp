@@ -16,45 +16,42 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.             *
+ *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
  ***************************************************************************/
 
-#ifndef GRAPH_H
-#define GRAPH_H
+#include "Edge.h"
+#include "Node.h"
+#include "Graph.h"
 
-#include <QList>
-#include <QVariant>
-#include <QColor>
-#include <QString>
+Edge::Edge(Graph *graph){
+  _graph = graph;
+  _to    = 0;
+  _from  = 0;
+}
 
-class Edge;
-class Node;
-class QString;
+bool  Edge::isConnected(Node *n1, Node *n2){
+  if (_graph->property("graph_type") == Graph::GraphType){
+    if ( ((_from == n1) && (_to == n2) ) || ( (_from == n2) && (_to == n1) ) ) return true;
+  }
+  else{
+     if ( (_from == n1) && (_to == n2) ) return true;
+  }
+  return false;
+}
 
-class Graph : public QObject{
-Q_OBJECT
-public:
-  Graph(int graphType, QObject *parent);
-  enum { GraphType = QVariant::UserType + 1, DigraphType };
+void  Edge::setFrom(Node *from){
+  _from = from;
+}
 
-private:
-  QColor  _color;   //! Color of the outlines of the Graph on the screen.
-  QString _comment; //! Some Comment of the graph.
-  QString _name;   //! Name of the Graph
+void  Edge::setTo(Node *to){
+  _to = to;
+}
 
-  QList<Edge*> _edgeList; //! List of edges
-  QList<Node*> _nodeList; //! list of Nodes.
+Node* Edge::from(){
+  return _from;
+}
 
-public slots:
-  void setName(const QString& n);
-  void addNode(qreal x, qreal y);
-  void addEdge(int nodeIndex1, int nodeIndex2);
-  void addEdge(Node *n1, Node *n2);
-  void setColor(const QColor& c);
-signals:
-  void nodeInserted(Node *n);
-  void edgeInserted(Edge *e);
+Node* Edge::to(){
+  return _to;
+}
 
-};
-
-#endif

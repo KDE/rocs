@@ -20,5 +20,52 @@
  ***************************************************************************/
 
 #include "Graph.h"
+#include "Edge.h"
+#include "Node.h"
 
-Graph::Graph(){}
+#include <KLocale>
+
+Graph::Graph(int graphType, QObject *parent) : QObject(parent)
+{
+  setName(i18n("untitled"));
+  setColor(Qt::black);
+  setProperty("graph_type", graphType);
+}
+
+void Graph::setName(const QString& n)
+{
+  _name = n;
+}
+
+void Graph::addNode(qreal x, qreal y)
+{
+  Node *n = new Node(this);
+  n -> setXY( x, y);
+  _nodeList.append(n);
+  emit nodeInserted( n );
+}
+
+void Graph::addEdge(int nodeIndex1, int nodeIndex2)
+{
+  Node *n1 = _nodeList[nodeIndex1];
+  Node *n2 = _nodeList[nodeIndex1];
+  addEdge(n1, n2);
+}
+
+void Graph::addEdge(Node *from, Node *to)
+{
+   Edge *e = new Edge(this);
+   e->setFrom(from);
+   e->setTo(to);
+   from -> addTo(to);
+   if (property("graph_type") == GraphType)
+   {
+      to -> addTo(from);
+   }
+   emit edgeInserted( e );
+}
+
+void Graph::setColor(const QColor& c)
+{
+   _color = c;
+}
