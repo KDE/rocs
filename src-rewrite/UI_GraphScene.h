@@ -23,19 +23,24 @@
 #include <QGraphicsScene>
 
 class MainWindow;
+class GraphCollection;
 
 class GraphScene : public QGraphicsScene
 {
-  public:
+public:
   GraphScene(QObject* parent);
   enum{ SingleSelection, // Selects only one node or edge
         SquareSelection, // Create a Square that will select everything inside.
         Move,            // Move the selected item(s)
         AddNode,         // Adds a not at the Click pos.
-        AddEdge1,        // Add an edge between 2 nodes.
-        AddEdge2,        // Add an edge with a little arrow between 2 nodes.
+        AddEdge,        // Add an edge between 2 nodes.
         MakeKGraph,      // Make a complete graph with n nodes.
-        MakeCGraph       // Make a Circular graph with n nodes.
+        MakeCGraph,      // Make a Circular graph with n nodes.
+        MakeWGraph       // Make a Whell Graph with n nodes.
   };
+
+private:
+  GraphCollection *graphCollection;
+
 };
 #endif

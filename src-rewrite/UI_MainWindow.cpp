@@ -40,6 +40,8 @@
 #include "UI_GraphLayers.h"      // Control of the Graph Layers.
 #include "UI_ConfigureDialog.h"  // Configuration of the app
 
+#include "GraphCollection.h"
+
 #include "UI_MainWindow.moc"     //! I *really* dislike this... 
 
 MainWindow::MainWindow() : KXmlGuiWindow()
@@ -76,6 +78,7 @@ void MainWindow::setupWidgets()
    _rightToolBox->addItem(_propertiesArea, i18n("Properties"));
    _rightToolBox->addItem(_graphLayers, i18n("Graphs"));
    QDockWidget *dockWidget = new QDockWidget(i18n("Tool Box"), this);
+   dockWidget -> setObjectName("RightToolBox");
    dockWidget->setWidget(_rightToolBox);
    dockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
    addDockWidget(Qt::RightDockWidgetArea, dockWidget);
@@ -181,10 +184,15 @@ void MainWindow::debug(const QString& s)
 
 void MainWindow::changeActive(QTreeWidgetItem * item)
 {
+  int pos;
   switch(item->type()){
     case FileArea::ScriptType :
-      int pos = item->data(0, FileArea::ScriptType).toInt();
+      pos = item->data(0, FileArea::ScriptType).toInt();
       changeActiveScript( _fileArea->scriptAt(pos));
+    break;
+    case FileArea::GraphType : 
+      pos = item->data(0, FileArea::GraphType).toInt();
+      changeActiveGraph( _fileArea->graphCollectionAt(pos));
     break;
   }
 }
@@ -194,7 +202,7 @@ void MainWindow::changeActiveScript(KTextEditor::Document *item)
     _scriptingArea -> setDocument( item );
 }
 
-void MainWindow::changeActiveGraph(QTreeWidgetItem *item)
+void MainWindow::changeActiveGraph(GraphCollection *item)
 {
 }
 

@@ -41,6 +41,7 @@
 
 PaletteBar::PaletteBar(QWidget* parent, Qt::WindowFlags flags) : QDockWidget(i18n("Palette"), parent, flags), _widget(0)
 {
+   setObjectName("palleteBar");
     setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     setFeatures(QDockWidget::NoDockWidgetFeatures);
 
@@ -101,18 +102,11 @@ PaletteBar::PaletteBar(QWidget* parent, Qt::WindowFlags flags) : QDockWidget(i18
     tmpAction->setIcon(KIcon("pointer"));
     tmpAction->setCheckable(true);
     tmpAction->setChecked(false);
-    tmpAction->setProperty("rocs_action", GraphScene::AddEdge1);
+    tmpAction->setProperty("rocs_action", GraphScene::AddEdge);
     _actionGroup->addAction(tmpAction);
     createToolButton(tmpAction);
 
-    tmpAction = new KAction(i18n("Add Arrowed Edge"), this);
-    tmpAction->setToolTip(i18n("Connects two nodes with an arrowed edge"));
-    tmpAction->setIcon(KIcon("pointer"));
-    tmpAction->setCheckable(true);
-    tmpAction->setChecked(false);
-    tmpAction->setProperty("rocs_action", GraphScene::AddEdge2);
-    _actionGroup->addAction(tmpAction);
-    createToolButton(tmpAction);
+    createSeparator();
 
     tmpAction = new KAction(i18n("Create Complete Graph"), this);
     tmpAction->setToolTip(i18n("Creates a Graph with N vertices interconected"));
@@ -132,6 +126,14 @@ PaletteBar::PaletteBar(QWidget* parent, Qt::WindowFlags flags) : QDockWidget(i18
     _actionGroup->addAction(tmpAction);
     createToolButton(tmpAction);
 
+    tmpAction = new KAction(i18n("Create Whell Graph"), this);
+    tmpAction->setToolTip(i18n("Creates a Graph with N vertices interconected"));
+    tmpAction->setIcon(KIcon("pointer"));
+    tmpAction->setCheckable(true);
+    tmpAction->setChecked(false);
+    tmpAction->setProperty("rocs_action", GraphScene::MakeKGraph);
+    _actionGroup->addAction(tmpAction);
+    createToolButton(tmpAction);
 
     _scrollArea->setWidget(_widget);
     _scrollArea->setMinimumWidth(_widget->minimumSizeHint().width());

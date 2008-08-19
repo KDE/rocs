@@ -22,6 +22,7 @@
 #include "UI_FileArea.h"
 #include "UI_MainWindow.h"
 #include "UI_GraphScene.h"
+#include "GraphCollection.h"
 
 #include <QTreeWidgetItem>
 #include <QTreeWidget>
@@ -46,44 +47,85 @@ FileArea::FileArea(MainWindow *parent) : QWidget(parent)
    _mainWindow = parent;
    _treeWidget = new QTreeWidget(this);
    _treeWidget->setHeaderHidden(true);
+
    _scriptFolder = new QTreeWidgetItem(_treeWidget);
    _scriptFolder->setIcon(0, KIcon("folder"));
    _scriptFolder->setText(0, i18n("Scripts"));
+
+   _graphFolder = new QTreeWidgetItem(_treeWidget);
+   _graphFolder->setIcon(0, KIcon("folder"));
+   _graphFolder->setText(0, i18n("Graphs"));
+
     QVBoxLayout *verticalLayout = new QVBoxLayout(this);
     verticalLayout->addWidget(_treeWidget);
 
-   _scriptList.clear();
+   _scripts.clear();
+   _graphcollections.clear();
+
    createNewScript();
    createNewScript();
    createNewScript();
+
+   createNewGraph();
+   createNewGraph();
+   createNewGraph();
 
    connect( _treeWidget, SIGNAL(itemClicked (QTreeWidgetItem*, int)),
             _mainWindow, SLOT(changeActive(QTreeWidgetItem*))); 
 }
 
-void FileArea::createNewScript(){
+void FileArea::createNewScript()
+{
    KTextEditor::Editor *e = _mainWindow->editor();
    KTextEditor::Document *d = e -> createDocument(0);
-   _scriptList.append(d);
+   _scripts.append(d);
    atualizeTreeWidget();
 }
 
-void FileArea::atualizeTreeWidget(){
+void FileArea::createNewGraph()
+{
+   GraphCollection *gc = new GraphCollection();
+   _graphcollections.append(gc);
+   atualizeTreeWidget();
+}
+
+void FileArea::atualizeTreeWidget()
+{
   QList<QTreeWidgetItem *> children = _scriptFolder->takeChildren();
   foreach(QTreeWidgetItem* t, children)
   { 
     delete t;
   }
+  children = _graphFolder->takeChildren();
+  foreach(QTreeWidgetItem* t, children)
+  { 
+    delete t;
+  }
 
-  for(int i = 0; i < _scriptList.size(); i++){
-     KTextEditor::Document *d = _scriptList.at(i);
+  for(int i = 0; i < _scripts.size(); i++)
+  {
+     KTextEditor::Document *d = _scripts.at(i);
      QTreeWidgetItem *item = new QTreeWidgetItem(_scriptFolder, ScriptType);
      item->setText (0, d->documentName());
      item->setData (0, ScriptType, i);
   }
+
+  for(int i = 0; i < _graphcollections.size(); i++)
+  {
+      GraphCollection *gc = _graphcollections.at(i);
+      QTreeWidgetItem *item = new QTreeWidgetItem(_graphFolder, GraphType);
+      item->setText(0, gc -> name());
+      item->setData(0, GraphType, i);
+  }
+
 }
 
 KTextEditor::Document* FileArea::scriptAt(int pos)
 {
-   return _scriptList.at(pos);
+   return _scripts.at(pos);
+}
+
+GraphCollection* FileArea::graphCollectionAt(int pos)
+{
+   return _graphcollections.at(pos);
 }

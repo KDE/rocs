@@ -37,6 +37,7 @@ class Graph;
 class QToolBox;
 class QGraphicsView;
 class QTreeWidgetItem;
+class GraphCollection;
 
 namespace KTextEditor{
 class View;
@@ -52,7 +53,7 @@ public:
   MainWindow();
   KTextEditor::Editor* editor();
   void changeActiveScript(KTextEditor::Document *item);
-  void changeActiveGraph(QTreeWidgetItem *item);
+  void changeActiveGraph(GraphCollection *item);
 
 public slots:
   //! #####################

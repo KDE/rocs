@@ -41,6 +41,7 @@ set(Rocs_SRCS
   Graph.cpp
   Node.cpp
   Edge.cpp
+  GraphCollection.cpp
 )
 
 # Resource Files
@@ -49,7 +50,7 @@ set(Rocs_SRCS
 # )
 
 # Since the JavaScript supports came from QtScript... 
-set (QT_USE_QTSCRIPT true)
+# set (QT_USE_QTSCRIPT true)
 
 set(Rocs_KCFGS settings.kcfgc)
 

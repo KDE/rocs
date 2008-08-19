@@ -27,6 +27,7 @@
 class MainWindow;
 class QTreeWidget;
 class QTreeWidgetItem;
+class GraphCollection;
 
 namespace KTextEditor{
 class Document;
@@ -38,15 +39,21 @@ Q_OBJECT
 public:
   FileArea(MainWindow *parent);
   void createNewScript();
-  enum {ScriptType = QVariant::UserType + 1};
+  void createNewGraph();
+  enum {ScriptType = QVariant::UserType + 1, GraphType};
   KTextEditor::Document* scriptAt(int pos);
+  GraphCollection* graphCollectionAt(int pos);
+
 public slots:
 
 
 private:
   QTreeWidget* _treeWidget;
   QTreeWidgetItem* _scriptFolder;
-  QList<KTextEditor::Document*> _scriptList;
+  QTreeWidgetItem* _graphFolder;
+
+  QList<KTextEditor::Document*> _scripts;
+  QList<GraphCollection*> _graphcollections;
   MainWindow *_mainWindow;
 
  void  atualizeTreeWidget();
