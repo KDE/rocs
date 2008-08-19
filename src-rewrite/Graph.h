@@ -34,8 +34,8 @@ class QString;
 class Graph : public QObject{
 Q_OBJECT
 public:
-  Graph(int graphType, QObject *parent);
-  enum { SimpleType = QVariant::UserType + 1, MultigraphType ,DigraphType };
+  Graph(int GraphType, QObject *parent);
+  enum Type{ SimpleType = QVariant::UserType + 1, MultigraphType ,DigraphType };
   
   bool isSimple();
   bool isMultigraph();

@@ -25,11 +25,11 @@
 
 #include <KLocale>
 
-Graph::Graph(int graphType, QObject *parent) : QObject(parent)
+Graph::Graph(int type, QObject *parent) : QObject(parent)
 {
   setName(i18n("untitled"));
   setColor(Qt::black);
-  setProperty("graph_type", graphType);
+  setProperty("graph_type", type);
 }
 
 void Graph::setName(const QString& n)
