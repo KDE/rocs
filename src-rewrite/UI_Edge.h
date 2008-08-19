@@ -21,39 +21,42 @@
 
 #ifndef UI_EDGE_H
 #define UI_EDGE_H
+
+#include <QGraphicsItem>
+class Edge;
+class GraphScene;
+class NodeItem;
+
 class EdgeItem : public QGraphicsItem
 {
  public:
    EdgeItem(QGraphicsItem *parent = 0);
+   enum { Type = UserType + 2 };
+   enum { Default, Selected, Focused, Dragged };
+   EdgeItem(NodeItem *from, NodeItem *to, GraphScene *parent = 0 );
+   ~EdgeItem();
+   void adjust();
+   int type() const { return Type; }
 
-    enum { Type = UserType + 2 };
+public slots:
 
-    Edge(NodeItem *from, NodeItem *to, DiagramScene *parent = 0 );
-    ~Edge();
-    void adjust();
-    int type() const { return Type; }
-    bool operator==(Edge *e);
+protected:
+  Edge *_edge;
 
-  public slots:
-     getFrom();
-     getTo();
-
-    void setLength(double d);
-    void showLength(int i);
-
- protected:
-    QPainterPath shape() const;
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
+  QPainterPath shape() const;
+  QRectF boundingRect() const;
+  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+  void paintSelected();
+  void paintFocused();
+  void paintDefault();
+  void paintName();
+  void paintIndex();
+  void paintLength();
  private:
-    Node *_from;
-    Node *_to;
-
     QPointF sourcePoint;
     QPointF destPoint;
     QLineF *myLine;
-    qreal length;
+
 
 };
 

@@ -42,13 +42,20 @@ QList<Edge*> Node::getConnections( Node *to )
 {
   QList<Edge*> c;
 
-  foreach(Edge *e, _edges){
-     if ( e->isConnected(this, to) ) c.append(e);
+  foreach(Edge *e, _edges)
+  {
+    if ( e->isConnected(this, to) )
+    {
+      c.append(e);
+    }
   }
-
   return c;
 }
 
+QList<Edge*> Node::getEdges()
+{
+  return _edges;
+}
 void Node::setName(const QString& name)
 {
   _name = name;

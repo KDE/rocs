@@ -37,7 +37,9 @@ public:
   void addTo( Node *to );
   void addEdge( Edge *e );
   QList<Edge*> getConnections( Node *to );
-
+  QList<Edge*> getEdges();
+  bool isBegin(){ return _begin; }
+  bool isEnd() { return _end; }
 public slots:
   void setName(const QString& name);
   void setColor(const QColor& color);
@@ -52,6 +54,8 @@ private:
   QColor _color;
   QList<Node*> _connections;
   QList<Edge*> _edges;
+  bool _begin;
+  bool _end;
 
 };
 #endif

@@ -58,7 +58,7 @@ void Graph::addEdge(Node *from, Node *to)
    e->setFrom(from);
    e->setTo(to);
    from -> addTo(to);
-   if (property("graph_type") == GraphType)
+   if (property("graph_type") != DigraphType)
    {
       to -> addTo(from);
    }
@@ -69,4 +69,80 @@ void Graph::addEdge(Node *from, Node *to)
 void Graph::setColor(const QColor& c)
 {
    _color = c;
+}
+
+bool Graph::isSimple()
+{
+  return (property("graph_type") == SimpleType);
+}
+
+bool Graph::isMultigraph(){
+  return (property("graph_type") == MultigraphType);
+}
+
+bool Graph::isDigraph()
+{
+  return (property("graph_type") == DigraphType);
+}
+
+bool Graph::isNull()
+{
+  if (_edges.size() == 0) return true;
+}
+
+bool Graph::isComplete()
+{
+  int x = _nodes.size() - 1;
+  foreach(Node *n, _nodes)
+  {
+    if (n->getEdges().size() != x) return false;
+  }
+  return true;
+}
+
+bool Graph::isCircular()
+{
+  foreach(Node *n, _nodes)
+  {
+    if (n->getEdges().size() != 2) return false;
+  }
+  return true;
+}
+
+bool Graph::isWheel()
+{
+  int x = (_nodes.size() - 1) * 2;
+  if (_edges.size() != x) return false;
+  
+  x = _nodes.size() - 1;
+  int z = 0;
+  foreach(Node *n, _nodes)
+  {
+    if (n->getEdges().size() == 3) continue;
+    if (n->getEdges().size() == x) z += 1;
+  }
+  if (z == 1) return true;
+  return false;
+}
+
+bool Graph::isCubic()
+{
+  if (!isComplete()) return false;
+  if (_nodes.size() == 0) return false;
+  if (_nodes[0]->getEdges().size() != 3) return false;
+  return true;
+}
+  
+void Graph::makeComplement(){
+
+}
+
+QList< QList< int > > incidencyMatrix()
+{
+
+}
+
+QList< QList < int > > adjacencyMatrix()
+{
+
 }

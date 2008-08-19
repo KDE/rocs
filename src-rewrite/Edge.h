@@ -37,12 +37,13 @@ public:
   void setTo(Node *to);
   Node *from();
   Node *to();
-
+  void setLength(double d);
+  
 private:
   Graph *_graph;
   Node *_from;
   Node *_to;
-
+  double _length;
 };
 
 #endif

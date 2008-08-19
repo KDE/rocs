@@ -22,13 +22,31 @@
 #ifndef UI_GRAPH_H
 #define UI_GRAPH_H
 
+#include <QGraphicsItem>
+
+class Graph;
+class NodeItem;
+class EdgeItem;
+
 class GraphItem : public QGraphicsItem{
 public:
- GraphItem(QGraphicsItem *parent = 0);
+  GraphItem(Graph *graph, QGraphicsItem *parent = 0);
+  void showIndexes(bool show);
+  void showNames(bool show);
+  void showLengths(bool show);
+
+  bool showLengthGlobal();
+  bool showIndexGlobal();
+  bool showNamesGlobal();
 
 private:
+  Graph *_graph;
   QList<NodeItem*> _nodes;
   QList<EdgeItem*> _edges;
+
+  bool _showIndex;
+  bool _showLength;
+  bool _showNames;
 
 };
 
