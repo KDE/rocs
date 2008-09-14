@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -25,9 +25,9 @@
 
 class Separator : public QWidget
 {
-public:
-    Separator(QWidget* parent);
-    QSize sizeHint() const ;
-    void paintEvent(QPaintEvent *) ;
+	public:
+		Separator ( QWidget* parent );
+		QSize sizeHint() const ;
+		void paintEvent ( QPaintEvent * ) ;
 };
 #endif

@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -21,4 +21,4 @@
 #include "UI_ConfigureDialog.h"
 #include "UI_MainWindow.h"
 
-ConfigureDialog::ConfigureDialog(MainWindow *parent) : QWidget(parent) {}
+ConfigureDialog::ConfigureDialog ( MainWindow *parent ) : QWidget ( parent ) {}

@@ -23,51 +23,51 @@
 #include "Edge.h"
 #include "Graph.h"
 
-Node::Node(Graph *graph) : QObject(graph)
+Node::Node ( Graph *graph ) : QObject ( graph )
 {
-   _graph = graph;
+	_graph = graph;
 }
 
-void Node::addTo( Node *to )
+void Node::addTo ( Node *to )
 {
-   _connections.append( to );
+	_connections.append ( to );
 }
 
-void Node::addEdge( Edge *e )
+void Node::addEdge ( Edge *e )
 {
-   _edges.append( e );
+	_edges.append ( e );
 }
 
-QList<Edge*> Node::getConnections( Node *to )
+QList<Edge*> Node::getConnections ( Node *to )
 {
-  QList<Edge*> c;
+	QList<Edge*> c;
 
-  foreach(Edge *e, _edges)
-  {
-    if ( e->isConnected(this, to) )
-    {
-      c.append(e);
-    }
-  }
-  return c;
+	foreach ( Edge *e, _edges )
+	{
+		if ( e->isConnected ( this, to ) )
+		{
+			c.append ( e );
+		}
+	}
+	return c;
 }
 
 QList<Edge*> Node::getEdges()
 {
-  return _edges;
+	return _edges;
 }
-void Node::setName(const QString& name)
+void Node::setName ( const QString& name )
 {
-  _name = name;
-}
-
-void Node::setColor(const QColor& color)
-{
-  _color = color;
+	_name = name;
 }
 
-void Node::setXY( qreal x, qreal y)
+void Node::setColor ( const QColor& color )
 {
-  _x = x;
-  _y = y;
+	_color = color;
+}
+
+void Node::setXY ( qreal x, qreal y )
+{
+	_x = x;
+	_y = y;
 }

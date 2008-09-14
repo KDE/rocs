@@ -1,7 +1,7 @@
 #ifndef UI_MAINWINDOW_H
 #define UI_MAINWINDOW_H
 
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -39,61 +39,62 @@ class QGraphicsView;
 class QTreeWidgetItem;
 class GraphCollection;
 
-namespace KTextEditor{
-class View;
-class Editor;
-class Document;
+namespace KTextEditor
+{
+	class View;
+	class Editor;
+	class Document;
 }
 
 class MainWindow : public KXmlGuiWindow
 {
-Q_OBJECT
+		Q_OBJECT
 
-public:
-  MainWindow();
-  KTextEditor::Editor* editor();
-  void changeActiveScript(KTextEditor::Document *item);
-  void changeActiveGraph(GraphCollection *item);
+	public:
+		MainWindow();
+		KTextEditor::Editor* editor();
+		void changeActiveScript ( KTextEditor::Document *item );
+		void changeActiveGraph ( GraphCollection *item );
 
-public slots:
-  //! #####################
-  //! ##      MENUS      ##
-  //! #####################
+	public slots:
+		//! #####################
+		//! ##      MENUS      ##
+		//! #####################
 
-  //! File Menu
+		//! File Menu
 
-  //! Edit Menu
+		//! Edit Menu
 
-  //! Help Menu
+		//! Help Menu
 
-  //! Script Menu
+		//! Script Menu
 
-  void debug(const QString& s);
+		void debug ( const QString& s );
 
-  void changeActive(QTreeWidgetItem * item);
+		void changeActive ( QTreeWidgetItem * item );
 
-protected slots:
+	protected slots:
 
-signals:
-  void sendDebugMsg(const QString& s);
+	signals:
+		void sendDebugMsg ( const QString& s );
 
-private:
-  //! Widgets being displayed
-  PaletteBar*      _paletteBar;
-  QGraphicsView*   _graphView;
-  ScriptingArea*   _scriptingArea;
-  FileArea*        _fileArea;
-  PropertiesArea*  _propertiesArea;
-  GraphLayers*     _graphLayers;
-  ConfigureDialog* _configureDialog;
-  QSplitter*       _centralWidget;
-  QToolBox*        _rightToolBox;
-  KTextEditor::Editor* _editor;
-  QTreeWidgetItem *_activeGraphItem;
-  QTreeWidgetItem *_activeScriptItem;
-  
-  void setupWidgets();
-  void setupActions();
+	private:
+		//! Widgets being displayed
+		PaletteBar*      _paletteBar;
+		QGraphicsView*   _graphView;
+		ScriptingArea*   _scriptingArea;
+		FileArea*        _fileArea;
+		PropertiesArea*  _propertiesArea;
+		GraphLayers*     _graphLayers;
+		ConfigureDialog* _configureDialog;
+		QSplitter*       _centralWidget;
+		QToolBox*        _rightToolBox;
+		KTextEditor::Editor* _editor;
+		QTreeWidgetItem *_activeGraphItem;
+		QTreeWidgetItem *_activeScriptItem;
+
+		void setupWidgets();
+		void setupActions();
 
 };
 

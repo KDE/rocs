@@ -28,25 +28,26 @@ class Graph;
 class NodeItem;
 class EdgeItem;
 
-class GraphItem : public QGraphicsItem{
-public:
-  GraphItem(Graph *graph, QGraphicsItem *parent = 0);
-  void showIndexes(bool show);
-  void showNames(bool show);
-  void showLengths(bool show);
+class GraphItem : public QGraphicsItem
+{
+	public:
+		GraphItem ( Graph *graph, QGraphicsItem *parent = 0 );
+		void showIndexes ( bool show );
+		void showNames ( bool show );
+		void showLengths ( bool show );
 
-  bool showLengthGlobal();
-  bool showIndexGlobal();
-  bool showNamesGlobal();
+		bool showLengthGlobal();
+		bool showIndexGlobal();
+		bool showNamesGlobal();
 
-private:
-  Graph *_graph;
-  QList<NodeItem*> _nodes;
-  QList<EdgeItem*> _edges;
+	private:
+		Graph *_graph;
+		QList<NodeItem*> _nodes;
+		QList<EdgeItem*> _edges;
 
-  bool _showIndex;
-  bool _showLength;
-  bool _showNames;
+		bool _showIndex;
+		bool _showLength;
+		bool _showNames;
 
 };
 

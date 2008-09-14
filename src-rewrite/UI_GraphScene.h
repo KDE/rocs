@@ -1,7 +1,7 @@
 #ifndef UI_GRAPHSCENE_H
 #define UI_GRAPHSCENE_H
 
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -27,20 +27,20 @@ class GraphCollection;
 
 class GraphScene : public QGraphicsScene
 {
-public:
-  GraphScene(QObject* parent);
-  enum{ SingleSelection, // Selects only one node or edge
-        SquareSelection, // Create a Square that will select everything inside.
-        Move,            // Move the selected item(s)
-        AddNode,         // Adds a not at the Click pos.
-        AddEdge,        // Add an edge between 2 nodes.
-        MakeKGraph,      // Make a complete graph with n nodes.
-        MakeCGraph,      // Make a Circular graph with n nodes.
-        MakeWGraph       // Make a Whell Graph with n nodes.
-  };
+	public:
+		GraphScene ( QObject* parent );
+		enum{ SingleSelection, // Selects only one node or edge
+		      SquareSelection, // Create a Square that will select everything inside.
+		      Move,            // Move the selected item(s)
+		      AddNode,         // Adds a not at the Click pos.
+		      AddEdge,        // Add an edge between 2 nodes.
+		      MakeKGraph,      // Make a complete graph with n nodes.
+		      MakeCGraph,      // Make a Circular graph with n nodes.
+		      MakeWGraph       // Make a Whell Graph with n nodes.
+	    };
 
-private:
-  GraphCollection *graphCollection;
+	private:
+		GraphCollection *graphCollection;
 
 };
 #endif

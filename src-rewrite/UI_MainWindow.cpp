@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -42,56 +42,56 @@
 
 #include "GraphCollection.h"
 
-#include "UI_MainWindow.moc"     //! I *really* dislike this... 
+#include "UI_MainWindow.moc"     //! I *really* dislike this...
 
 MainWindow::MainWindow() : KXmlGuiWindow()
 {
-  setObjectName("Rocs");
-  _editor = KTextEditor::EditorChooser::editor();
-  _editor -> setSimpleMode(true);
+	setObjectName ( "Rocs" );
+	_editor = KTextEditor::EditorChooser::editor();
+	_editor -> setSimpleMode ( true );
 
-  _graphView       = new QGraphicsView(this);
-  _paletteBar      = new PaletteBar(this);
-  _scriptingArea   = new ScriptingArea(this);
-  _propertiesArea  = new PropertiesArea(this);
-  _graphLayers     = new GraphLayers(this);
-  _configureDialog = new ConfigureDialog(this);
-  _centralWidget   = new QSplitter(this);
-  _rightToolBox    = new QToolBox(this);
-  _fileArea        = new FileArea(this);
+	_graphView       = new QGraphicsView ( this );
+	_paletteBar      = new PaletteBar ( this );
+	_scriptingArea   = new ScriptingArea ( this );
+	_propertiesArea  = new PropertiesArea ( this );
+	_graphLayers     = new GraphLayers ( this );
+	_configureDialog = new ConfigureDialog ( this );
+	_centralWidget   = new QSplitter ( this );
+	_rightToolBox    = new QToolBox ( this );
+	_fileArea        = new FileArea ( this );
 
-  setCorner(Qt::TopLeftCorner,     Qt::LeftDockWidgetArea);
-  setCorner(Qt::BottomLeftCorner,  Qt::LeftDockWidgetArea);
-  setCorner(Qt::TopRightCorner,    Qt::RightDockWidgetArea);
-  setCorner(Qt::BottomRightCorner, Qt::RightDockWidgetArea);
+	setCorner ( Qt::TopLeftCorner,     Qt::LeftDockWidgetArea );
+	setCorner ( Qt::BottomLeftCorner,  Qt::LeftDockWidgetArea );
+	setCorner ( Qt::TopRightCorner,    Qt::RightDockWidgetArea );
+	setCorner ( Qt::BottomRightCorner, Qt::RightDockWidgetArea );
 
-  setupActions();
-  setupWidgets();
-  setupGUI();
+	setupActions();
+	setupWidgets();
+	setupGUI();
 }
 
 void MainWindow::setupWidgets()
 {
-   addDockWidget(Qt::LeftDockWidgetArea, _paletteBar);
+	addDockWidget ( Qt::LeftDockWidgetArea, _paletteBar );
 
-   _rightToolBox->addItem(_fileArea, i18n("Opened Files"));
-   _rightToolBox->addItem(_propertiesArea, i18n("Properties"));
-   _rightToolBox->addItem(_graphLayers, i18n("Graphs"));
-   QDockWidget *dockWidget = new QDockWidget(i18n("Tool Box"), this);
-   dockWidget -> setObjectName("RightToolBox");
-   dockWidget->setWidget(_rightToolBox);
-   dockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
-   addDockWidget(Qt::RightDockWidgetArea, dockWidget);
+	_rightToolBox->addItem ( _fileArea, i18n ( "Opened Files" ) );
+	_rightToolBox->addItem ( _propertiesArea, i18n ( "Properties" ) );
+	_rightToolBox->addItem ( _graphLayers, i18n ( "Graphs" ) );
+	QDockWidget *dockWidget = new QDockWidget ( i18n ( "Tool Box" ), this );
+	dockWidget -> setObjectName ( "RightToolBox" );
+	dockWidget->setWidget ( _rightToolBox );
+	dockWidget->setFeatures ( QDockWidget::NoDockWidgetFeatures );
+	addDockWidget ( Qt::RightDockWidgetArea, dockWidget );
 
-   _centralWidget->setOrientation(Qt::Vertical);
-   _centralWidget->addWidget(_graphView);
-   _centralWidget->addWidget(_scriptingArea);
-   setCentralWidget(_centralWidget);
+	_centralWidget->setOrientation ( Qt::Vertical );
+	_centralWidget->addWidget ( _graphView );
+	_centralWidget->addWidget ( _scriptingArea );
+	setCentralWidget ( _centralWidget );
 }
 
 void MainWindow::setupActions()
 {
-  KStandardAction::quit(this,    SLOT(quit()),        actionCollection());
+	KStandardAction::quit ( this,    SLOT ( quit() ),        actionCollection() );
 
 //! Only Activate those commented below when the graph view is active.
 //   KStandardAction::undo(this,    SLOT(undo()),        actionCollection());
@@ -105,108 +105,109 @@ void MainWindow::setupActions()
 //   KStandardAction::open(this,    SLOT(openFile()),    actionCollection());
 //   KStandardAction::close(this,   SLOT(close()),       actionCollection());
 
-  //! void closeAll();
+	//! void closeAll();
 //   KAction *tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Close All"));
 //   tmpAction->setIcon(KIcon("document-close-all"));
 //   actionCollection()->addAction("CloseAll", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAll()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAll()) );
 
-  //! void allignRight();
+	//! void allignRight();
 //   tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Right"));
 //   //tmpAction->setIcon(KIcon(""));
 //   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
 //   actionCollection()->addAction("AllignRight", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignRight()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignRight()) );
 
-  //! void allignLeft();
+	//! void allignLeft();
 //   tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Left"));
 //   //tmpAction->setIcon(KIcon("document-open"));
 //   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
 //   actionCollection()->addAction("AllignLeft", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignLeft()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignLeft()) );
 
-  //! void allignBottom();
+	//! void allignBottom();
 //   tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Bottom"));
 //   //tmpAction->setIcon(KIcon("document-open"));
 //   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
 //   actionCollection()->addAction("AllignBottom", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignBottom()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignBottom()) );
 
-  //! void allignTop();
+	//! void allignTop();
 //   tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Top"));
 //   //tmpAction->setIcon(KIcon("document-open"));
 //   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
 //   actionCollection()->addAction("AllignTop", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignTop()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignTop()) );
 
-  //! void allignVCenter();
+	//! void allignVCenter();
 //   tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Vertical Center"));
 //   //tmpAction->setIcon(KIcon("document-open"));
 //   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
 //   actionCollection()->addAction("AllignVCenter", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignVCenter()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignVCenter()) );
 
-  //! void allignHCenter();
+	//! void allignHCenter();
 //   tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Horizontal Center"));
 //   // tmpAction->setIcon(KIcon("document-open"));
 //   // tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
 //   actionCollection()->addAction("AllignHCenter", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignHCenter()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignHCenter()) );
 
-  //! void showManual();
+	//! void showManual();
 //   tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Show Manual"));
 //   // tmpAction->setIcon(KIcon("document-open"));
 //   tmpAction->setShortcut(QKeySequence::HelpContents);
 //   actionCollection()->addAction("ShowManual", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(showManual()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(showManual()) );
 
-  //! void execute();
+	//! void execute();
 //   tmpAction = new KAction(this);
 //   tmpAction->setText(i18n("Execute"));
 //   // tmpAction->setIcon(KIcon("document-open"));
 //   tmpAction->setShortcut(Qt::CTRL + Qt::Key_F9);
 //   actionCollection()->addAction("Open", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(openFile()) ); 
+//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(openFile()) );
 
 }
 
-void MainWindow::debug(const QString& s)
+void MainWindow::debug ( const QString& s )
 {
 }
 
-void MainWindow::changeActive(QTreeWidgetItem * item)
+void MainWindow::changeActive ( QTreeWidgetItem * item )
 {
-  int pos;
-  switch(item->type()){
-    case FileArea::ScriptType :
-      pos = item->data(0, FileArea::ScriptType).toInt();
-      changeActiveScript( _fileArea->scriptAt(pos));
-    break;
-    case FileArea::GraphType : 
-      pos = item->data(0, FileArea::GraphType).toInt();
-      changeActiveGraph( _fileArea->graphCollectionAt(pos));
-    break;
-  }
+	int pos;
+	switch ( item->type() )
+	{
+		case FileArea::ScriptType :
+			pos = item->data ( 0, FileArea::ScriptType ).toInt();
+			changeActiveScript ( _fileArea->scriptAt ( pos ) );
+			break;
+		case FileArea::GraphType :
+			pos = item->data ( 0, FileArea::GraphType ).toInt();
+			changeActiveGraph ( _fileArea->graphCollectionAt ( pos ) );
+			break;
+	}
 }
 
-void MainWindow::changeActiveScript(KTextEditor::Document *item)
+void MainWindow::changeActiveScript ( KTextEditor::Document *item )
 {
-    _scriptingArea -> setDocument( item );
+	_scriptingArea -> setDocument ( item );
 }
 
-void MainWindow::changeActiveGraph(GraphCollection *item)
+void MainWindow::changeActiveGraph ( GraphCollection *item )
 {
 }
 
 KTextEditor::Editor* MainWindow::editor()
 {
-   return _editor; 
+	return _editor;
 }

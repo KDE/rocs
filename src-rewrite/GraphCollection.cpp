@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -21,25 +21,25 @@
 #include "Graph.h"
 #include "GraphCollection.h"
 
-GraphCollection::GraphCollection(const QString& name)
+GraphCollection::GraphCollection ( const QString& name )
 {
-  _name = name; 
-  createNewGraph();
+	_name = name;
+	createNewGraph();
 }
 void GraphCollection::createNewGraph()
 {
-  Graph *g = new Graph( (int) Graph::SimpleType, 0 );
-  _graphs.append(g);
-  emit graphCreated(g);
+	Graph *g = new Graph ( ( int ) Graph::SimpleType, 0 );
+	_graphs.append ( g );
+	emit graphCreated ( g );
 }
 
-void GraphCollection::removeGraph(int pos)
+void GraphCollection::removeGraph ( int pos )
 {
-  _graphs.removeAt(pos);
-  emit graphRemoved(pos);
+	_graphs.removeAt ( pos );
+	emit graphRemoved ( pos );
 }
 
-Graph* GraphCollection::graphAt(int pos)
+Graph* GraphCollection::graphAt ( int pos )
 {
 
 }

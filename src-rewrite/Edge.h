@@ -26,24 +26,25 @@
 
 class Graph;
 class Node;
-class Edge : public QObject{
-Q_OBJECT
+class Edge : public QObject
+{
+		Q_OBJECT
 
-public:
+	public:
 
-  Edge(Graph *graph);
-  bool isConnected(Node *n1, Node *n2);
-  void setFrom(Node *from);
-  void setTo(Node *to);
-  Node *from();
-  Node *to();
-  void setLength(double d);
-  
-private:
-  Graph *_graph;
-  Node *_from;
-  Node *_to;
-  double _length;
+		Edge ( Graph *graph );
+		bool isConnected ( Node *n1, Node *n2 );
+		void setFrom ( Node *from );
+		void setTo ( Node *to );
+		Node *from();
+		Node *to();
+		void setLength ( double d );
+
+	private:
+		Graph *_graph;
+		Node *_from;
+		Node *_to;
+		double _length;
 };
 
 #endif

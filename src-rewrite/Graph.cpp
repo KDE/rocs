@@ -25,115 +25,117 @@
 
 #include <KLocale>
 
-Graph::Graph(int type, QObject *parent) : QObject(parent)
+Graph::Graph ( int type, QObject *parent ) : QObject ( parent )
 {
-  setName(i18n("untitled"));
-  setColor(Qt::black);
-  setProperty("graph_type", type);
+	setName ( i18n ( "untitled" ) );
+	setColor ( Qt::black );
+	setProperty ( "graph_type", type );
 }
 
-void Graph::setName(const QString& n)
+void Graph::setName ( const QString& n )
 {
-  _name = n;
+	_name = n;
 }
 
-void Graph::addNode(qreal x, qreal y)
+void Graph::addNode ( qreal x, qreal y )
 {
-  Node *n = new Node(this);
-  n -> setXY( x, y);
-  _nodes.append(n);
-  emit nodeInserted( n );
+	Node *n = new Node ( this );
+	n -> setXY ( x, y );
+	_nodes.append ( n );
+	emit nodeInserted ( n );
 }
 
-void Graph::addEdge(int nodeIndex1, int nodeIndex2)
+void Graph::addEdge ( int nodeIndex1, int nodeIndex2 )
 {
-  Node *n1 = _nodes[nodeIndex1];
-  Node *n2 = _nodes[nodeIndex1];
-  addEdge(n1, n2);
+	Node *n1 = _nodes[nodeIndex1];
+	Node *n2 = _nodes[nodeIndex1];
+	addEdge ( n1, n2 );
 }
 
-void Graph::addEdge(Node *from, Node *to)
+void Graph::addEdge ( Node *from, Node *to )
 {
-   Edge *e = new Edge(this);
-   e->setFrom(from);
-   e->setTo(to);
-   from -> addTo(to);
-   if (property("graph_type") != DigraphType)
-   {
-      to -> addTo(from);
-   }
-   _edges.append( e );
-   emit edgeInserted( e );
+	Edge *e = new Edge ( this );
+	e->setFrom ( from );
+	e->setTo ( to );
+	from -> addTo ( to );
+	if ( property ( "graph_type" ) != DigraphType )
+	{
+		to -> addTo ( from );
+	}
+	_edges.append ( e );
+	emit edgeInserted ( e );
 }
 
-void Graph::setColor(const QColor& c)
+void Graph::setColor ( const QColor& c )
 {
-   _color = c;
+	_color = c;
 }
 
 bool Graph::isSimple()
 {
-  return (property("graph_type") == SimpleType);
+	return ( property ( "graph_type" ) == SimpleType );
 }
 
-bool Graph::isMultigraph(){
-  return (property("graph_type") == MultigraphType);
+bool Graph::isMultigraph()
+{
+	return ( property ( "graph_type" ) == MultigraphType );
 }
 
 bool Graph::isDigraph()
 {
-  return (property("graph_type") == DigraphType);
+	return ( property ( "graph_type" ) == DigraphType );
 }
 
 bool Graph::isNull()
 {
-  if (_edges.size() == 0) return true;
+	if ( _edges.size() == 0 ) return true;
 }
 
 bool Graph::isComplete()
 {
-  int x = _nodes.size() - 1;
-  foreach(Node *n, _nodes)
-  {
-    if (n->getEdges().size() != x) return false;
-  }
-  return true;
+	int x = _nodes.size() - 1;
+	foreach ( Node *n, _nodes )
+	{
+		if ( n->getEdges().size() != x ) return false;
+	}
+	return true;
 }
 
 bool Graph::isCircular()
 {
-  foreach(Node *n, _nodes)
-  {
-    if (n->getEdges().size() != 2) return false;
-  }
-  return true;
+	foreach ( Node *n, _nodes )
+	{
+		if ( n->getEdges().size() != 2 ) return false;
+	}
+	return true;
 }
 
 bool Graph::isWheel()
 {
-  int x = (_nodes.size() - 1) * 2;
-  if (_edges.size() != x) return false;
-  
-  x = _nodes.size() - 1;
-  int z = 0;
-  foreach(Node *n, _nodes)
-  {
-    if (n->getEdges().size() == 3) continue;
-    if (n->getEdges().size() == x) z += 1;
-  }
-  if (z == 1) return true;
-  return false;
+	int x = ( _nodes.size() - 1 ) * 2;
+	if ( _edges.size() != x ) return false;
+
+	x = _nodes.size() - 1;
+	int z = 0;
+	foreach ( Node *n, _nodes )
+	{
+		if ( n->getEdges().size() == 3 ) continue;
+		if ( n->getEdges().size() == x ) z += 1;
+	}
+	if ( z == 1 ) return true;
+	return false;
 }
 
 bool Graph::isCubic()
 {
-  if (!isComplete()) return false;
-  if (_nodes.size() == 0) return false;
-  if (_nodes[0]->getEdges().size() != 3) return false;
-  return true;
+	if ( !isComplete() ) return false;
+	if ( _nodes.size() == 0 ) return false;
+	if ( _nodes[0]->getEdges().size() != 3 ) return false;
+	return true;
 }
-  
-void Graph::makeComplement(){
+
+void Graph::makeComplement()
+{
 
 }
 

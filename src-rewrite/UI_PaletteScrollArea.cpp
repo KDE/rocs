@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -23,20 +23,21 @@
 #include <QStyle>
 #include <QScrollBar>
 
-PaletteScrollArea::PaletteScrollArea(QWidget* parent): QScrollArea(parent) {}
+PaletteScrollArea::PaletteScrollArea ( QWidget* parent ) : QScrollArea ( parent ) {}
 
-void PaletteScrollArea::resizeEvent(QResizeEvent* event) {
-  if(widget() && widget()->layout()) 
-  {
-    QSize size(maximumViewportSize().width(),
-    widget()->layout()->heightForWidth(maximumViewportSize().width()));
-    if(size.height() > maximumViewportSize().height()) 
-    {
-      int ext = style()->pixelMetric(QStyle::PM_LayoutHorizontalSpacing);
-      size.setWidth(maximumViewportSize().width() - verticalScrollBar()->sizeHint().width() - ext);
-      size.setHeight(widget()->layout()->heightForWidth(size.width()));
-    }
-  widget()->resize(size);
-  }
-  QScrollArea::resizeEvent(event);
+void PaletteScrollArea::resizeEvent ( QResizeEvent* event )
+{
+	if ( widget() && widget()->layout() )
+	{
+		QSize size ( maximumViewportSize().width(),
+		             widget()->layout()->heightForWidth ( maximumViewportSize().width() ) );
+		if ( size.height() > maximumViewportSize().height() )
+		{
+			int ext = style()->pixelMetric ( QStyle::PM_LayoutHorizontalSpacing );
+			size.setWidth ( maximumViewportSize().width() - verticalScrollBar()->sizeHint().width() - ext );
+			size.setHeight ( widget()->layout()->heightForWidth ( size.width() ) );
+		}
+		widget()->resize ( size );
+	}
+	QScrollArea::resizeEvent ( event );
 }

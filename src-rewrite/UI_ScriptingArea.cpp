@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright ( C ) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -37,77 +37,81 @@
 
 #include "UI_ScriptingArea.moc"
 
-ScriptingArea::ScriptingArea( MainWindow *parent ) : QWidget( parent ) {
-
-  _txtDebug              = 0;
-  _btnClearDebug         = 0;
-  _tabDebug              = 0;
-  _tabScriptLayout       = 0;
-  _tabScript             = 0;
-  _txtEditScriptView     = 0;
-  _tabWidget             = 0;
-  _txtEditScriptDocument = 0;
-
-   _mainWindow = parent;
-
-   setObjectName( "scriptingArea" );
-
-   createTabs(  );
-   createDesignLayout(  );
-}
-
-void ScriptingArea::createTabs(  ){
-    _tabWidget = new KTabWidget( this );  _tabWidget -> setTabPosition( QTabWidget::South );
-
-    _tabScript = new QWidget(  );  _tabWidget -> addTab( _tabScript, i18n( "Untitled" ) );
-    _tabDebug  = new QWidget(  );  _tabWidget -> addTab( _tabDebug, i18n( "Debug" ) );
-
-    _btnClearDebug = new KPushButton( _tabDebug );  _btnClearDebug -> setText( i18n( "clear" ));
-
-    _txtDebug = new QTextBrowser( _tabDebug );
-    _tabWidget -> setCurrentIndex( 0 );
-
-
-}
-
-KTextEditor::View* ScriptingArea::view(){ 
-   return _txtEditScriptView;
-}
-
-void ScriptingArea::setDocument(KTextEditor::Document *d)
+ScriptingArea::ScriptingArea ( MainWindow *parent ) : QWidget ( parent )
 {
-   if (_txtEditScriptView != 0){
-     _mainWindow->guiFactory()->removeClient(_txtEditScriptView);
-     delete _txtEditScriptView;
-     _txtEditScriptView = 0;
-   }
 
-   _txtEditScriptDocument = d;
-   _txtEditScriptView  = qobject_cast<KTextEditor::View*>(d->createView(this));
-   _tabScriptLayout -> addWidget( _txtEditScriptView );
-   _mainWindow->guiFactory()->addClient(_txtEditScriptView);
+	_txtDebug              = 0;
+	_btnClearDebug         = 0;
+	_tabDebug              = 0;
+	_tabScriptLayout       = 0;
+	_tabScript             = 0;
+	_txtEditScriptView     = 0;
+	_tabWidget             = 0;
+	_txtEditScriptDocument = 0;
+
+	_mainWindow = parent;
+
+	setObjectName ( "scriptingArea" );
+
+	createTabs( );
+	createDesignLayout( );
 }
 
-void ScriptingArea::createDesignLayout(  )
+void ScriptingArea::createTabs( )
 {
-    QSpacerItem* horizontalSpacer_2 = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
+	_tabWidget = new KTabWidget ( this );  _tabWidget -> setTabPosition ( QTabWidget::South );
 
-    QVBoxLayout *verticalLayout = new QVBoxLayout( this );
-    QVBoxLayout *verticalLayout_2 = new QVBoxLayout( _tabDebug );
-    _tabScriptLayout = new QVBoxLayout( _tabScript ); 
+	_tabScript = new QWidget( );  _tabWidget -> addTab ( _tabScript, i18n ( "Untitled" ) );
+	_tabDebug  = new QWidget( );  _tabWidget -> addTab ( _tabDebug, i18n ( "Debug" ) );
 
-    QHBoxLayout *horizontalLayout_2 = new QHBoxLayout(  );
+	_btnClearDebug = new KPushButton ( _tabDebug );  _btnClearDebug -> setText ( i18n ( "clear" ) );
 
-    verticalLayout_2 -> addWidget( _txtDebug );
+	_txtDebug = new QTextBrowser ( _tabDebug );
+	_tabWidget -> setCurrentIndex ( 0 );
 
-    horizontalLayout_2 -> addWidget( _btnClearDebug );
-    horizontalLayout_2 -> addItem( horizontalSpacer_2 );
-    verticalLayout_2   -> addLayout( horizontalLayout_2 );
-    verticalLayout     -> addWidget( _tabWidget );
+
+}
+
+KTextEditor::View* ScriptingArea::view()
+{
+	return _txtEditScriptView;
+}
+
+void ScriptingArea::setDocument ( KTextEditor::Document *d )
+{
+	if ( _txtEditScriptView != 0 )
+	{
+		_mainWindow->guiFactory()->removeClient ( _txtEditScriptView );
+		delete _txtEditScriptView;
+		_txtEditScriptView = 0;
+	}
+
+	_txtEditScriptDocument = d;
+	_txtEditScriptView  = qobject_cast<KTextEditor::View*> ( d->createView ( this ) );
+	_tabScriptLayout -> addWidget ( _txtEditScriptView );
+	_mainWindow->guiFactory()->addClient ( _txtEditScriptView );
+}
+
+void ScriptingArea::createDesignLayout( )
+{
+	QSpacerItem* horizontalSpacer_2 = new QSpacerItem ( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
+
+	QVBoxLayout *verticalLayout = new QVBoxLayout ( this );
+	QVBoxLayout *verticalLayout_2 = new QVBoxLayout ( _tabDebug );
+	_tabScriptLayout = new QVBoxLayout ( _tabScript );
+
+	QHBoxLayout *horizontalLayout_2 = new QHBoxLayout( );
+
+	verticalLayout_2 -> addWidget ( _txtDebug );
+
+	horizontalLayout_2 -> addWidget ( _btnClearDebug );
+	horizontalLayout_2 -> addItem ( horizontalSpacer_2 );
+	verticalLayout_2   -> addLayout ( horizontalLayout_2 );
+	verticalLayout     -> addWidget ( _tabWidget );
 
 }
 
 const QString ScriptingArea::getScriptText()
 {
-   return _txtEditScriptDocument->text(); 
+	return _txtEditScriptDocument->text();
 }

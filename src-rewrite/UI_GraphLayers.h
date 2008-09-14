@@ -1,7 +1,7 @@
 #ifndef UI_GRAPHLAYERS_H
 #define UI_GRAPHLAYERS_H
 
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -26,7 +26,7 @@
 class MainWindow;
 class GraphLayers : public QWidget
 {
-public:
-  GraphLayers(MainWindow* parent);
+	public:
+		GraphLayers ( MainWindow* parent );
 };
 #endif

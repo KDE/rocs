@@ -29,33 +29,34 @@
 class Edge;
 class Graph;
 
-class Node : public QObject{
-Q_OBJECT
+class Node : public QObject
+{
+		Q_OBJECT
 
-public:
-  Node(Graph *graph);
-  void addTo( Node *to );
-  void addEdge( Edge *e );
-  QList<Edge*> getConnections( Node *to );
-  QList<Edge*> getEdges();
-  bool isBegin(){ return _begin; }
-  bool isEnd() { return _end; }
-public slots:
-  void setName(const QString& name);
-  void setColor(const QColor& color);
-  void setXY( qreal x, qreal y);
+	public:
+		Node ( Graph *graph );
+		void addTo ( Node *to );
+		void addEdge ( Edge *e );
+		QList<Edge*> getConnections ( Node *to );
+		QList<Edge*> getEdges();
+		bool isBegin() { return _begin; }
+		bool isEnd() { return _end; }
+	public slots:
+		void setName ( const QString& name );
+		void setColor ( const QColor& color );
+		void setXY ( qreal x, qreal y );
 
-private:
-  Graph *_graph;
-  QString _name;
-  int _index;
-  qreal _x;
-  qreal _y;
-  QColor _color;
-  QList<Node*> _connections;
-  QList<Edge*> _edges;
-  bool _begin;
-  bool _end;
+	private:
+		Graph *_graph;
+		QString _name;
+		int _index;
+		qreal _x;
+		qreal _y;
+		QColor _color;
+		QList<Node*> _connections;
+		QList<Edge*> _edges;
+		bool _begin;
+		bool _end;
 
 };
 #endif

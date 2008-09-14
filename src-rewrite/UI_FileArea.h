@@ -1,7 +1,7 @@
 #ifndef UI_FILEAREA_H
 #define UI_FILEAREA_H
 
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -29,34 +29,35 @@ class QTreeWidget;
 class QTreeWidgetItem;
 class GraphCollection;
 
-namespace KTextEditor{
-class Document;
+namespace KTextEditor
+{
+	class Document;
 }
 
 class FileArea : public QWidget
 {
-Q_OBJECT
-public:
-  FileArea(MainWindow *parent);
-  void createNewScript();
-  void createNewGraph();
-  enum {ScriptType = QVariant::UserType + 1, GraphType};
-  KTextEditor::Document* scriptAt(int pos);
-  GraphCollection* graphCollectionAt(int pos);
+		Q_OBJECT
+	public:
+		FileArea ( MainWindow *parent );
+		void createNewScript();
+		void createNewGraph();
+		enum {ScriptType = QVariant::UserType + 1, GraphType};
+		KTextEditor::Document* scriptAt ( int pos );
+		GraphCollection* graphCollectionAt ( int pos );
 
-public slots:
+	public slots:
 
 
-private:
-  QTreeWidget* _treeWidget;
-  QTreeWidgetItem* _scriptFolder;
-  QTreeWidgetItem* _graphFolder;
+	private:
+		QTreeWidget* _treeWidget;
+		QTreeWidgetItem* _scriptFolder;
+		QTreeWidgetItem* _graphFolder;
 
-  QList<KTextEditor::Document*> _scripts;
-  QList<GraphCollection*> _graphcollections;
-  MainWindow *_mainWindow;
+		QList<KTextEditor::Document*> _scripts;
+		QList<GraphCollection*> _graphcollections;
+		MainWindow *_mainWindow;
 
- void  atualizeTreeWidget();
+		void  atualizeTreeWidget();
 };
 
 #endif

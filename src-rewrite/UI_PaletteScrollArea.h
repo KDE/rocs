@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -25,11 +25,11 @@
 
 class PaletteScrollArea: public QScrollArea
 {
-public:
-    PaletteScrollArea(QWidget* parent);
+	public:
+		PaletteScrollArea ( QWidget* parent );
 
-protected:
-    void resizeEvent(QResizeEvent* event);
+	protected:
+		void resizeEvent ( QResizeEvent* event );
 };
 
 #endif

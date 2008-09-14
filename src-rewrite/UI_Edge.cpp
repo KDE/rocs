@@ -21,7 +21,7 @@
 
 #include "UI_Edge.h"
 
-void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void EdgeItem::paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget )
 {
 
 }

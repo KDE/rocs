@@ -22,30 +22,31 @@
 #include "Node.h"
 #include "UI_Graph.h"
 
-NodeItem::NodeItem(GraphItem *graphItem, Node *node, QGraphicsItem *parent) : QGraphicsItem(parent)
+NodeItem::NodeItem ( GraphItem *graphItem, Node *node, QGraphicsItem *parent ) : QGraphicsItem ( parent )
 {
 
 }
 
-void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void NodeItem::paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget )
 {
-   switch( _action ){
-      case Selected: paintSelected(); break;
-	  case Focused:  paintFocused();  break;
-	  case Dragged:  paintDragged();  break;
-	  Default:       paintDefault();  break;
-   }
-   
-   if ( _node -> isBegin() ) paintAsBegin();
-   else if (_node -> isEnd() ) paintAsEnd();
-   
-   if ( ( _showName  ) || ( _graphItem -> showNamesGlobal() ) )  paintName();
-   if ( ( _showIndex ) || ( _graphItem -> showIndexGlobal() ) ) paintIndex();
+	switch ( _action )
+	{
+		case Selected: paintSelected(); break;
+		case Focused:  paintFocused();  break;
+		case Dragged:  paintDragged();  break;
+		Default:       paintDefault();  break;
+	}
+
+	if ( _node -> isBegin() ) paintAsBegin();
+	else if ( _node -> isEnd() ) paintAsEnd();
+
+	if ( ( _showName ) || ( _graphItem -> showNamesGlobal() ) )  paintName();
+	if ( ( _showIndex ) || ( _graphItem -> showIndexGlobal() ) ) paintIndex();
 }
 
 void NodeItem::paintSelected()
 {
-  
+
 }
 
 void NodeItem::paintFocused()

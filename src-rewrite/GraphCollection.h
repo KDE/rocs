@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -29,24 +29,24 @@ class Graph;
 
 class GraphCollection : public QObject
 {
-Q_OBJECT
+		Q_OBJECT
 
-public:
-  GraphCollection(const QString& name = "untitled");
-  void createNewGraph();
-  void removeGraph(int pos);
-  Graph* graphAt(int pos);
+	public:
+		GraphCollection ( const QString& name = "untitled" );
+		void createNewGraph();
+		void removeGraph ( int pos );
+		Graph* graphAt ( int pos );
 
-  QString name() { return _name; }
-  void setName(const QString& name){ _name = name; }
+		QString name() { return _name; }
+		void setName ( const QString& name ) { _name = name; }
 
-signals:
-void graphCreated(Graph *g);
-void graphRemoved(int pos);
+	signals:
+		void graphCreated ( Graph *g );
+		void graphRemoved ( int pos );
 
-private:
-  QList<Graph*> _graphs;
-  QString _name;
+	private:
+		QList<Graph*> _graphs;
+		QString _name;
 };
 
 #endif

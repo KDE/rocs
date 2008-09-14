@@ -28,31 +28,32 @@ class GraphItem;
 class EdgeItem;
 class Node;
 
-class NodeItem : public QGraphicsItem{
-public:
-  NodeItem(GraphItem *graphItem, Node *node, QGraphicsItem *parent = 0);
-  QRectF bounds();
-  enum{Type = UserType + 1};
-  enum{ Default, Selected, Focused, Dragged};
-  
-protected:
-  Node *_node; //! the node that this particular drawing represents.
-  GraphItem *_graphItem;
-  int _action;
-  bool _showIndex;
-  bool _showName;
+class NodeItem : public QGraphicsItem
+{
+	public:
+		NodeItem ( GraphItem *graphItem, Node *node, QGraphicsItem *parent = 0 );
+		QRectF bounds();
+		enum{Type = UserType + 1};
+		enum{ Default, Selected, Focused, Dragged};
 
-  QPainterPath shape() const;
-  QRectF boundingRect() const;
-  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  void paintSelected();
-  void paintFocused();
-  void paintDragged();
-  void paintAsBegin();
-  void paintDefault();
-  void paintAsEnd();
-  void paintName();
-  void paintIndex();
-  
+	protected:
+		Node *_node; //! the node that this particular drawing represents.
+		GraphItem *_graphItem;
+		int _action;
+		bool _showIndex;
+		bool _showName;
+
+		QPainterPath shape() const;
+		QRectF boundingRect() const;
+		void paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
+		void paintSelected();
+		void paintFocused();
+		void paintDragged();
+		void paintAsBegin();
+		void paintDefault();
+		void paintAsEnd();
+		void paintName();
+		void paintIndex();
+
 };
 #endif

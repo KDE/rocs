@@ -1,4 +1,4 @@
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -24,24 +24,24 @@
 #include <QVariant>
 #include <QStyleOption>
 
-Separator::Separator(QWidget* parent): QWidget(parent) 
+Separator::Separator ( QWidget* parent ) : QWidget ( parent )
 {
-  setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-  setProperty("isSeparator", true);
+	setSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Minimum );
+	setProperty ( "isSeparator", true );
 }
 
-QSize Separator::sizeHint() const 
+QSize Separator::sizeHint() const
 {
-  QStyleOption opt; 
-  opt.initFrom(this);
-  const int extent = style()->pixelMetric(QStyle::PM_ToolBarSeparatorExtent, &opt, parentWidget());
-  return QSize(extent, extent);
+	QStyleOption opt;
+	opt.initFrom ( this );
+	const int extent = style()->pixelMetric ( QStyle::PM_ToolBarSeparatorExtent, &opt, parentWidget() );
+	return QSize ( extent, extent );
 }
 
-void Separator::paintEvent(QPaintEvent *) 
+void Separator::paintEvent ( QPaintEvent * )
 {
-  QPainter p(this); 
-  QStyleOption opt; 
-  opt.initFrom(this);
-  style()->drawPrimitive(QStyle::PE_IndicatorToolBarSeparator, &opt, &p, parentWidget());
+	QPainter p ( this );
+	QStyleOption opt;
+	opt.initFrom ( this );
+	style()->drawPrimitive ( QStyle::PE_IndicatorToolBarSeparator, &opt, &p, parentWidget() );
 }

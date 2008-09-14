@@ -1,7 +1,7 @@
 #ifndef UI_SCRIPTINGAREA_H
 #define UI_SCRIPTINGAREA_H
 
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -32,34 +32,34 @@ class QVBoxLayout;
 
 namespace KTextEditor
 {
-    class Document;
-    class View;
+	class Document;
+	class View;
 }
 
 class ScriptingArea : public QWidget
 {
-public:
-  ScriptingArea(MainWindow* parent);
-   const QString getScriptText();
-   KTextEditor::View* view();
-   void setDocument(KTextEditor::Document *d);
+	public:
+		ScriptingArea ( MainWindow* parent );
+		const QString getScriptText();
+		KTextEditor::View* view();
+		void setDocument ( KTextEditor::Document *d );
 
-private:
-    MainWindow *_mainWindow;
+	private:
+		MainWindow *_mainWindow;
 
-    KTextEditor::View *_txtEditScriptView;
-    KTextEditor::Document *_txtEditScriptDocument;
+		KTextEditor::View *_txtEditScriptView;
+		KTextEditor::Document *_txtEditScriptDocument;
 
-    QTextBrowser *_txtDebug;
-    KPushButton *_btnClearDebug;
-    KTabWidget *_tabWidget;
-    QWidget *_tabScript;
-    QWidget *_tabDebug;
+		QTextBrowser *_txtDebug;
+		KPushButton *_btnClearDebug;
+		KTabWidget *_tabWidget;
+		QWidget *_tabScript;
+		QWidget *_tabDebug;
 
-   QVBoxLayout *_tabScriptLayout;
+		QVBoxLayout *_tabScriptLayout;
 
-   void createTabs();
-   void createDesignLayout();
+		void createTabs();
+		void createDesignLayout();
 
 };
 #endif

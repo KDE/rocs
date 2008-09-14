@@ -31,35 +31,35 @@ class PaletteLayout;
 
 class PaletteBar : public QDockWidget
 {
-Q_OBJECT
+		Q_OBJECT
 
-public:
-    PaletteBar(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+	public:
+		PaletteBar ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
 
-protected slots:
-    void actionTriggered(QAction* action);
-    void showButtonTextToggled(bool b);
+	protected slots:
+		void actionTriggered ( QAction* action );
+		void showButtonTextToggled ( bool b );
 
-signals:
-    void beginAddItem(const QString& name);
+	signals:
+		void beginAddItem ( const QString& name );
 
-public slots:
-    void endAddItem(const QString& name, bool success);
+	public slots:
+		void endAddItem ( const QString& name, bool success );
 
-protected:
-    void createSeparator();
-    void createToolButton(QAction* action);
+	protected:
+		void createSeparator();
+		void createToolButton ( QAction* action );
 
-    bool event(QEvent* event);
+		bool event ( QEvent* event );
 
-    QScrollArea*    _scrollArea;
-    QWidget*        _widget;
-    PaletteLayout*  _layout;
+		QScrollArea*    _scrollArea;
+		QWidget*        _widget;
+		PaletteLayout*  _layout;
 
-    QAction*        _pointerAction;
-    QActionGroup*   _actionGroup;
+		QAction*        _pointerAction;
+		QActionGroup*   _actionGroup;
 
-    QList<QToolButton*> _toolButtons;
+		QList<QToolButton*> _toolButtons;
 };
 
 #endif

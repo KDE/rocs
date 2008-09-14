@@ -31,44 +31,45 @@ class Edge;
 class Node;
 class QString;
 
-class Graph : public QObject{
-Q_OBJECT
-public:
-  Graph(int GraphType, QObject *parent);
-  enum Type{ SimpleType = QVariant::UserType + 1, MultigraphType ,DigraphType };
-  
-  bool isSimple();
-  bool isMultigraph();
-  bool isDigraph();
-  bool isNull();
-  bool isComplete();
-  bool isCircular();
-  bool isWheel();
-  bool isCubic();
-  
-  void makeComplement();
-  QList< QList<int> > incidencyMatrix();
-  QList< QList<int> > adjacencyMatrix();
-  
-private:
-  QColor  _color;   //! Color of the outlines of the Graph on the screen.
-  QString _comment; //! Some Comment of the graph.
-  QString _name;   //! Name of the Graph
+class Graph : public QObject
+{
+		Q_OBJECT
+	public:
+		Graph ( int GraphType, QObject *parent );
+		enum Type{ SimpleType = QVariant::UserType + 1, MultigraphType ,DigraphType };
 
-  QList<Edge*> _edges; //! List of edges
-  QList<Node*> _nodes; //! list of Nodes.
+		bool isSimple();
+		bool isMultigraph();
+		bool isDigraph();
+		bool isNull();
+		bool isComplete();
+		bool isCircular();
+		bool isWheel();
+		bool isCubic();
+
+		void makeComplement();
+		QList< QList<int> > incidencyMatrix();
+		QList< QList<int> > adjacencyMatrix();
+
+	private:
+		QColor  _color;   //! Color of the outlines of the Graph on the screen.
+		QString _comment; //! Some Comment of the graph.
+		QString _name;   //! Name of the Graph
+
+		QList<Edge*> _edges; //! List of edges
+		QList<Node*> _nodes; //! list of Nodes.
 
 
-public slots:
-  void setName(const QString& n);
-  void addNode(qreal x, qreal y);
-  void addEdge(int nodeIndex1, int nodeIndex2);
-  void addEdge(Node *n1, Node *n2);
-  void setColor(const QColor& c);
-  
-signals:
-  void nodeInserted(Node *n);
-  void edgeInserted(Edge *e);
+	public slots:
+		void setName ( const QString& n );
+		void addNode ( qreal x, qreal y );
+		void addEdge ( int nodeIndex1, int nodeIndex2 );
+		void addEdge ( Node *n1, Node *n2 );
+		void setColor ( const QColor& c );
+
+	signals:
+		void nodeInserted ( Node *n );
+		void edgeInserted ( Edge *e );
 
 };
 

@@ -29,33 +29,33 @@ class NodeItem;
 
 class EdgeItem : public QGraphicsItem
 {
- public:
-   EdgeItem(QGraphicsItem *parent = 0);
-   enum { Type = UserType + 2 };
-   enum { Default, Selected, Focused, Dragged };
-   EdgeItem(NodeItem *from, NodeItem *to, GraphScene *parent = 0 );
-   ~EdgeItem();
-   void adjust();
-   int type() const { return Type; }
+	public:
+		EdgeItem ( QGraphicsItem *parent = 0 );
+		enum { Type = UserType + 2 };
+		enum { Default, Selected, Focused, Dragged };
+		EdgeItem ( NodeItem *from, NodeItem *to, GraphScene *parent = 0 );
+		~EdgeItem();
+		void adjust();
+		int type() const { return Type; }
 
-public slots:
+	public slots:
 
-protected:
-  Edge *_edge;
+	protected:
+		Edge *_edge;
 
-  QPainterPath shape() const;
-  QRectF boundingRect() const;
-  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  void paintSelected();
-  void paintFocused();
-  void paintDefault();
-  void paintName();
-  void paintIndex();
-  void paintLength();
- private:
-    QPointF sourcePoint;
-    QPointF destPoint;
-    QLineF *myLine;
+		QPainterPath shape() const;
+		QRectF boundingRect() const;
+		void paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
+		void paintSelected();
+		void paintFocused();
+		void paintDefault();
+		void paintName();
+		void paintIndex();
+		void paintLength();
+	private:
+		QPointF sourcePoint;
+		QPointF destPoint;
+		QLineF *myLine;
 
 
 };

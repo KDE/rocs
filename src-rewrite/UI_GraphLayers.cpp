@@ -1,5 +1,5 @@
 
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -21,4 +21,4 @@
 
 #include "UI_GraphLayers.h"
 #include "UI_MainWindow.h"
-GraphLayers::GraphLayers(MainWindow *parent) : QWidget(parent) {}
+GraphLayers::GraphLayers ( MainWindow *parent ) : QWidget ( parent ) {}

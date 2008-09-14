@@ -18,41 +18,41 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
  ***************************************************************************/
- 
+
 #include "UI_Graph.h"
 #include "Graph.h"
 
-GraphItem::GraphItem(Graph *graph, QGraphicsItem *parent) : QGraphicsItem(parent)
+GraphItem::GraphItem ( Graph *graph, QGraphicsItem *parent ) : QGraphicsItem ( parent )
 {
-  _graph = graph;
+	_graph = graph;
 }
 
-void GraphItem::showIndexes(bool show)
+void GraphItem::showIndexes ( bool show )
 {
-  _showIndex = show;
+	_showIndex = show;
 }
 
-void GraphItem::showNames(bool show)
+void GraphItem::showNames ( bool show )
 {
-  _showNames = show;
+	_showNames = show;
 }
 
-void GraphItem::showLengths(bool show)
+void GraphItem::showLengths ( bool show )
 {
-  _showLength = show;
+	_showLength = show;
 }
 
 bool GraphItem::showLengthGlobal()
 {
-  return _showLength;
+	return _showLength;
 }
 
 bool GraphItem::showIndexGlobal()
 {
-  return _showIndex;
+	return _showIndex;
 }
 
 bool GraphItem::showNamesGlobal()
 {
-  return _showNames;
+	return _showNames;
 }

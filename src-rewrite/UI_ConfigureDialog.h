@@ -1,7 +1,7 @@
 #ifndef UI_CONFIGUREDIALOG_H
 #define UI_CONFIGUREDIALOG_H
 
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -25,9 +25,10 @@
 
 class MainWindow;
 
-class ConfigureDialog : public QWidget{
-public:
-  ConfigureDialog(MainWindow *parent);
+class ConfigureDialog : public QWidget
+{
+	public:
+		ConfigureDialog ( MainWindow *parent );
 
 };
 #endif

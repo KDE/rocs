@@ -1,7 +1,7 @@
 #ifndef UI_PROPERTIESAREA_H
 #define UI_PROPERTIESAREA_H
 
-/* This file is part of Rocs, 
+/* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
@@ -25,7 +25,7 @@
 class MainWindow;
 class PropertiesArea : public QWidget
 {
-public:
-  PropertiesArea(MainWindow* parent);
+	public:
+		PropertiesArea ( MainWindow* parent );
 };
 #endif
