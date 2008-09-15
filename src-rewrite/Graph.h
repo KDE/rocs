@@ -62,7 +62,7 @@ class Graph : public QObject
 
 	public slots:
 		void setName ( const QString& n );
-		void addNode ( qreal x, qreal y );
+		void addNode ( QPointF pos);
 		void addEdge ( int nodeIndex1, int nodeIndex2 );
 		void addEdge ( Node *n1, Node *n2 );
 		void setColor ( const QColor& c );

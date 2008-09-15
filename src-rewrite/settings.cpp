@@ -8,40 +8,38 @@
 
 class SettingsHelper
 {
-	public:
-		SettingsHelper() : q ( 0 ) {}
-		~SettingsHelper() { delete q; }
-		Settings *q;
+  public:
+    SettingsHelper() : q(0) {}
+    ~SettingsHelper() { delete q; }
+    Settings *q;
 };
-K_GLOBAL_STATIC ( SettingsHelper, s_globalSettings )
+K_GLOBAL_STATIC(SettingsHelper, s_globalSettings)
 Settings *Settings::self()
 {
-	if ( !s_globalSettings->q )
-	{
-		new Settings;
-		s_globalSettings->q->readConfig();
-	}
+  if (!s_globalSettings->q) {
+    new Settings;
+    s_globalSettings->q->readConfig();
+  }
 
-	return s_globalSettings->q;
+  return s_globalSettings->q;
 }
 
-Settings::Settings( )
-		: KConfigSkeleton ( QLatin1String ( "rocsrc" ) )
+Settings::Settings(  )
+  : KConfigSkeleton( QLatin1String( "rocsrc" ) )
 {
-	Q_ASSERT ( !s_globalSettings->q );
-	s_globalSettings->q = this;
-	setCurrentGroup ( QLatin1String ( "ItemPalette" ) );
+  Q_ASSERT(!s_globalSettings->q);
+  s_globalSettings->q = this;
+  setCurrentGroup( QLatin1String( "ItemPalette" ) );
 
-	KConfigSkeleton::ItemBool  *itemShowButtonText;
-	itemShowButtonText = new KConfigSkeleton::ItemBool ( currentGroup(), QLatin1String ( "showButtonText" ), mShowButtonText, true );
-	addItem ( itemShowButtonText, QLatin1String ( "showButtonText" ) );
+  KConfigSkeleton::ItemBool  *itemShowButtonText;
+  itemShowButtonText = new KConfigSkeleton::ItemBool( currentGroup(), QLatin1String( "showButtonText" ), mShowButtonText, true );
+  addItem( itemShowButtonText, QLatin1String( "showButtonText" ) );
 }
 
 Settings::~Settings()
 {
-	if ( !s_globalSettings.isDestroyed() )
-	{
-		s_globalSettings->q = 0;
-	}
+  if (!s_globalSettings.isDestroyed()) {
+    s_globalSettings->q = 0;
+  }
 }
 

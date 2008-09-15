@@ -22,16 +22,18 @@
 #ifndef UI_GRAPH_H
 #define UI_GRAPH_H
 
+#include "Node.h"
 #include <QGraphicsItem>
 
 class Graph;
 class NodeItem;
 class EdgeItem;
 
-class GraphItem : public QGraphicsItem
+class GraphItem :public QObject, public QGraphicsItem
 {
+	Q_OBJECT
 	public:
-		GraphItem ( Graph *graph, QGraphicsItem *parent = 0 );
+		GraphItem (QGraphicsItem *parent = 0 );
 		void showIndexes ( bool show );
 		void showNames ( bool show );
 		void showLengths ( bool show );
@@ -39,16 +41,21 @@ class GraphItem : public QGraphicsItem
 		bool showLengthGlobal();
 		bool showIndexGlobal();
 		bool showNamesGlobal();
-
+		QRectF boundingRect() const;
+		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	private:
-		Graph *_graph;
 		QList<NodeItem*> _nodes;
 		QList<EdgeItem*> _edges;
 
 		bool _showIndex;
 		bool _showLength;
 		bool _showNames;
-
+	
+	public slots:
+		void createNodeItem(Node *n);
+		void createEdgeItem(Edge *e);
+	signals:
+		
 };
 
 #endif

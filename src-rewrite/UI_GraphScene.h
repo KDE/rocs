@@ -24,11 +24,21 @@
 
 class MainWindow;
 class GraphCollection;
+class QGraphicsSceneMouseEvent;
+class Graph;
+class GraphItem;
 
 class GraphScene : public QGraphicsScene
 {
+	Q_OBJECT
 	public:
-		GraphScene ( QObject* parent );
+		GraphScene ( QObject* parent, GraphCollection *item );
+		void changeActiveGraph(Graph *g);
+		void createGraphItem(Graph*);
+		void removeGraphItem(int pos);
+		QRectF boudingRect() const;
+		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+		
 		enum{ SingleSelection, // Selects only one node or edge
 		      SquareSelection, // Create a Square that will select everything inside.
 		      Move,            // Move the selected item(s)
@@ -40,7 +50,49 @@ class GraphScene : public QGraphicsScene
 	    };
 
 	private:
-		GraphCollection *graphCollection;
+		QRectF coords;
+		GraphCollection *_graphCollection;
+		QList<GraphItem*> _graphCollectionItems;
+		Graph  *_activeGraph;
 
+		int action;
+		void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+		void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
+		void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
+
+		QGraphicsItem *tmpItem; //! pointer for the line that's being draw right now.
+		MainWindow *mainWindow;
+
+    public slots:
+    /* ######################
+       #   Script Control
+       ###################### */
+
+	//	void createScriptFunctions(const QString& program);
+   // void insertEdge(Node *begin, Node *end, int arrowType = 0);
+		void insertNode(QPointF pos);
+
+    /* UI Control */
+//    void allignVLeft();
+//    void allignVRight();
+//    void allignVCenter();
+//    void allignHTop();
+//    void allignHBottom();
+//    void allignHCenter();
+
+/*   void group();
+   void ungroup();
+   void removeFromGroup();
+   void setStartNode();
+   void setEndNode();
+   void changeSelectedNodeColor(QColor c);
+   void removeSelection();
+   void removeEdge(Edge *e);
+   void removeNode(Node *n);
+   void removeGroup(Group *g);
+   void toogleIndexVisibility();
+   void createKGraph(QPointF pos);
+   void createCGraph(QPointF pos);*/
+//    int createConcentricNodes(int k = 0, qreal radius = 0, QPointF pos = QPointF()); 
 };
 #endif

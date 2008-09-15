@@ -22,7 +22,7 @@
 #include "Graph.h"
 #include "Edge.h"
 #include "Node.h"
-
+#include <QPointF>
 #include <KLocale>
 
 Graph::Graph ( int type, QObject *parent ) : QObject ( parent )
@@ -37,10 +37,10 @@ void Graph::setName ( const QString& n )
 	_name = n;
 }
 
-void Graph::addNode ( qreal x, qreal y )
+void Graph::addNode ( QPointF pos )
 {
 	Node *n = new Node ( this );
-	n -> setXY ( x, y );
+	n -> setXY ( pos.x(), pos.y() );
 	_nodes.append ( n );
 	emit nodeInserted ( n );
 }

@@ -24,7 +24,6 @@
 GraphCollection::GraphCollection ( const QString& name )
 {
 	_name = name;
-	createNewGraph();
 }
 void GraphCollection::createNewGraph()
 {
@@ -39,7 +38,7 @@ void GraphCollection::removeGraph ( int pos )
 	emit graphRemoved ( pos );
 }
 
-Graph* GraphCollection::graphAt ( int pos )
+Graph* GraphCollection::At ( int pos )
 {
-
+	return _graphs.at( pos );
 }

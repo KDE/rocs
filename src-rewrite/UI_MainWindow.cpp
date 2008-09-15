@@ -29,6 +29,7 @@
 
 #include <ktexteditor/editor.h>
 #include <ktexteditor/editorchooser.h>
+#include <iostream>
 
 #include "UI_MainWindow.h"
 
@@ -205,6 +206,15 @@ void MainWindow::changeActiveScript ( KTextEditor::Document *item )
 
 void MainWindow::changeActiveGraph ( GraphCollection *item )
 {
+	//! Creating a new GraphScene and connect it to the view.
+	if ( _graphView -> scene() != NULL )
+	{
+		delete _graphView -> scene();
+	}
+	GraphScene* scene = new GraphScene(this, item);
+	_graphView->setScene(scene);
+	std::cout << "Entrou Aqui" << std::endl;
+	
 }
 
 KTextEditor::Editor* MainWindow::editor()

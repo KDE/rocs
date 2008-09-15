@@ -22,9 +22,8 @@
 #include "UI_Graph.h"
 #include "Graph.h"
 
-GraphItem::GraphItem ( Graph *graph, QGraphicsItem *parent ) : QGraphicsItem ( parent )
+GraphItem::GraphItem (QGraphicsItem *parent ) : QGraphicsItem ( parent )
 {
-	_graph = graph;
 }
 
 void GraphItem::showIndexes ( bool show )
@@ -55,4 +54,21 @@ bool GraphItem::showIndexGlobal()
 bool GraphItem::showNamesGlobal()
 {
 	return _showNames;
+}
+
+QRectF GraphItem::boundingRect() const
+{
+
+}
+void GraphItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+}
+
+void GraphItem::createNodeItem(Node *n)
+{
+
+}
+void GraphItem::createEdgeItem(Edge *e)
+{
+
 }
