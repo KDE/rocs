@@ -28,10 +28,11 @@ class GraphItem;
 class EdgeItem;
 class Node;
 
-class NodeItem : public QGraphicsItem
+class NodeItem : public QObject, public QGraphicsItem
 {
+	Q_OBJECT
 	public:
-		NodeItem ( GraphItem *graphItem, Node *node, QGraphicsItem *parent = 0 );
+		NodeItem (Node *node, GraphItem *Graph, QGraphicsItem *parent = 0 );
 		QRectF bounds();
 		enum{Type = UserType + 1};
 		enum{ Default, Selected, Focused, Dragged};

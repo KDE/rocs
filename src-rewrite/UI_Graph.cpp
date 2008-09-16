@@ -22,7 +22,7 @@
 #include "UI_Graph.h"
 #include "Graph.h"
 
-GraphItem::GraphItem (QGraphicsItem *parent ) : QGraphicsItem ( parent )
+GraphItem::GraphItem()
 {
 }
 
@@ -54,14 +54,6 @@ bool GraphItem::showIndexGlobal()
 bool GraphItem::showNamesGlobal()
 {
 	return _showNames;
-}
-
-QRectF GraphItem::boundingRect() const
-{
-
-}
-void GraphItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
 }
 
 void GraphItem::createNodeItem(Node *n)

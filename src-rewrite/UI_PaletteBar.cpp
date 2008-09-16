@@ -33,6 +33,7 @@
 #include "UI_Separator.h"
 
 #include "UI_GraphScene.h"
+#include "AddNodeAction.h"
 
 #include "settings.h" //! AUTO GENERATED!  ( *Hate* this u_u )
 
@@ -88,12 +89,7 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 
 	createSeparator();
 
-	tmpAction = new KAction ( i18n ( "Add Node" ), this );
-	tmpAction->setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
-	tmpAction->setIcon ( KIcon ( "pointer" ) );
-	tmpAction->setCheckable ( true );
-	tmpAction->setChecked ( false );
-	tmpAction->setProperty ( "rocs_action", GraphScene::AddNode );
+	tmpAction = new addNodeAction(this);
 	_actionGroup->addAction ( tmpAction );
 	createToolButton ( tmpAction );
 

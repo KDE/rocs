@@ -25,17 +25,16 @@ GraphCollection::GraphCollection ( const QString& name )
 {
 	_name = name;
 }
-void GraphCollection::createNewGraph()
+Graph* GraphCollection::createNewGraph()
 {
 	Graph *g = new Graph ( ( int ) Graph::SimpleType, 0 );
 	_graphs.append ( g );
-	emit graphCreated ( g );
+	return g;
 }
 
 void GraphCollection::removeGraph ( int pos )
 {
 	_graphs.removeAt ( pos );
-	emit graphRemoved ( pos );
 }
 
 Graph* GraphCollection::At ( int pos )

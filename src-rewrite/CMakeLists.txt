@@ -27,6 +27,9 @@ set(Rocs_SRCS
   UI_PropertiesArea.cpp
   UI_ScriptingArea.cpp
 
+  #Options on the Pallete
+  AddNodeAction.cpp
+
   # stolen from Step (remember to kiss  Vladimir Kuznetsov
   UI_PaletteLayout.cpp
   UI_Separator.cpp

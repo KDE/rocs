@@ -42,7 +42,6 @@ void Graph::addNode ( QPointF pos )
 	Node *n = new Node ( this );
 	n -> setXY ( pos.x(), pos.y() );
 	_nodes.append ( n );
-	emit nodeInserted ( n );
 }
 
 void Graph::addEdge ( int nodeIndex1, int nodeIndex2 )
@@ -63,7 +62,6 @@ void Graph::addEdge ( Node *from, Node *to )
 		to -> addTo ( from );
 	}
 	_edges.append ( e );
-	emit edgeInserted ( e );
 }
 
 void Graph::setColor ( const QColor& c )

@@ -22,9 +22,10 @@
 #include "Node.h"
 #include "UI_Graph.h"
 
-NodeItem::NodeItem ( GraphItem *graphItem, Node *node, QGraphicsItem *parent ) : QGraphicsItem ( parent )
+NodeItem::NodeItem (Node *node, GraphItem *graph, QGraphicsItem *parent ) : QGraphicsItem ( parent )
 {
-
+	_graphItem = graph;
+	_node = node;
 }
 
 void NodeItem::paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget )

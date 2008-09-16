@@ -33,7 +33,7 @@ class GraphCollection : public QObject
 
 	public:
 		GraphCollection ( const QString& name = "untitled" );
-		void createNewGraph();
+		Graph* createNewGraph();
 		void removeGraph ( int pos );
 		Graph* At ( int pos );
 

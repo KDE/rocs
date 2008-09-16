@@ -27,6 +27,7 @@ class GraphCollection;
 class QGraphicsSceneMouseEvent;
 class Graph;
 class GraphItem;
+class Node;
 
 class GraphScene : public QGraphicsScene
 {
@@ -34,10 +35,7 @@ class GraphScene : public QGraphicsScene
 	public:
 		GraphScene ( QObject* parent, GraphCollection *item );
 		void changeActiveGraph(Graph *g);
-		void createGraphItem(Graph*);
-		void removeGraphItem(int pos);
-		QRectF boudingRect() const;
-		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
 		
 		enum{ SingleSelection, // Selects only one node or edge
 		      SquareSelection, // Create a Square that will select everything inside.
@@ -63,36 +61,41 @@ class GraphScene : public QGraphicsScene
 		QGraphicsItem *tmpItem; //! pointer for the line that's being draw right now.
 		MainWindow *mainWindow;
 
-    public slots:
+	public slots:
     /* ######################
        #   Script Control
        ###################### */
 
-	//	void createScriptFunctions(const QString& program);
-   // void insertEdge(Node *begin, Node *end, int arrowType = 0);
+		//void createScriptFunctions(const QString& program);
+		// void insertEdge(Node *begin, Node *end, int arrowType = 0);
+		void createGraphItem(Graph* g);
+		void removeGraphItem(int pos);
+		void createNodeItem(Node* n);
+
+		/* UI Control */
+		//    void allignVLeft();
+		//    void allignVRight();
+		//    void allignVCenter();
+		//    void allignHTop();
+		//    void allignHBottom();
+		//    void allignHCenter();
+
+		/*   void group();
+		void ungroup();
+		void removeFromGroup();
+		void setStartNode();
+		void setEndNode();
+		void changeSelectedNodeColor(QColor c);
+		void removeSelection();
+		void removeEdge(Edge *e);
+		void removeNode(Node *n);
+		void removeGroup(Group *g);
+		void toogleIndexVisibility();
+		void createKGraph(QPointF pos);
+		void createCGraph(QPointF pos);
+		int createConcentricNodes(int k = 0, qreal radius = 0, QPointF pos = QPointF()); 
+		*/
+	signals:
 		void insertNode(QPointF pos);
-
-    /* UI Control */
-//    void allignVLeft();
-//    void allignVRight();
-//    void allignVCenter();
-//    void allignHTop();
-//    void allignHBottom();
-//    void allignHCenter();
-
-/*   void group();
-   void ungroup();
-   void removeFromGroup();
-   void setStartNode();
-   void setEndNode();
-   void changeSelectedNodeColor(QColor c);
-   void removeSelection();
-   void removeEdge(Edge *e);
-   void removeNode(Node *n);
-   void removeGroup(Group *g);
-   void toogleIndexVisibility();
-   void createKGraph(QPointF pos);
-   void createCGraph(QPointF pos);*/
-//    int createConcentricNodes(int k = 0, qreal radius = 0, QPointF pos = QPointF()); 
 };
 #endif

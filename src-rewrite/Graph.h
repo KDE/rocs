@@ -66,11 +66,6 @@ class Graph : public QObject
 		void addEdge ( int nodeIndex1, int nodeIndex2 );
 		void addEdge ( Node *n1, Node *n2 );
 		void setColor ( const QColor& c );
-
-	signals:
-		void nodeInserted ( Node *n );
-		void edgeInserted ( Edge *e );
-
 };
 
 #endif

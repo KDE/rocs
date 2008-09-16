@@ -29,11 +29,11 @@ class Graph;
 class NodeItem;
 class EdgeItem;
 
-class GraphItem :public QObject, public QGraphicsItem
+class GraphItem :public QObject
 {
 	Q_OBJECT
 	public:
-		GraphItem (QGraphicsItem *parent = 0 );
+		GraphItem ();
 		void showIndexes ( bool show );
 		void showNames ( bool show );
 		void showLengths ( bool show );
@@ -41,8 +41,6 @@ class GraphItem :public QObject, public QGraphicsItem
 		bool showLengthGlobal();
 		bool showIndexGlobal();
 		bool showNamesGlobal();
-		QRectF boundingRect() const;
-		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 	private:
 		QList<NodeItem*> _nodes;
 		QList<EdgeItem*> _edges;
@@ -55,7 +53,8 @@ class GraphItem :public QObject, public QGraphicsItem
 		void createNodeItem(Node *n);
 		void createEdgeItem(Edge *e);
 	signals:
-		
+		void nodeInserted(QPointF pos);
+		void edgeInserted(QPointF pos1, QPointF pos2);
 };
 
 #endif
