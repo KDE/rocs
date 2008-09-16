@@ -1,12 +1,13 @@
 #ifndef ADDNODEACTION_H
 #define ADDNODEACTION_H
 
-#include <KAction>
+#include "AbstractAction.h"
 #include <QObject>
 
-class addNodeAction : public KAction{
+class AddNodeAction : public AbstractAction{
 public:
-	addNodeAction(QObject *parent);
+	AddNodeAction(QObject *parent = 0);
+	void changeGraphScene(GraphScene *graphScene);
 };
 
 #endif

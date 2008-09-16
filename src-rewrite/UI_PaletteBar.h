@@ -28,6 +28,8 @@ class QScrollArea;
 class QAction;
 class QActionGroup;
 class PaletteLayout;
+class GraphScene;
+class AbstractAction;
 
 class PaletteBar : public QDockWidget
 {
@@ -35,16 +37,13 @@ class PaletteBar : public QDockWidget
 
 	public:
 		PaletteBar ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+		void changeActiveGraph(GraphScene* graphScene);
 
 	protected slots:
-		void actionTriggered ( QAction* action );
 		void showButtonTextToggled ( bool b );
 
 	signals:
-		void beginAddItem ( const QString& name );
-
-	public slots:
-		void endAddItem ( const QString& name, bool success );
+		void buttonClicked ( const QString& name );
 
 	protected:
 		void createSeparator();
@@ -57,8 +56,7 @@ class PaletteBar : public QDockWidget
 		PaletteLayout*  _layout;
 
 		QAction*        _pointerAction;
-		QActionGroup*   _actionGroup;
-
+		QList<AbstractAction*> _actionGroup;
 		QList<QToolButton*> _toolButtons;
 };
 

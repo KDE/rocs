@@ -55,7 +55,7 @@ class MainWindow : public KXmlGuiWindow
 		KTextEditor::Editor* editor();
 		void changeActiveScript ( KTextEditor::Document *item );
 		void changeActiveGraph ( GraphCollection *item );
-
+		GraphScene *activeScene();
 	public slots:
 		//! #####################
 		//! ##      MENUS      ##
@@ -90,8 +90,6 @@ class MainWindow : public KXmlGuiWindow
 		QSplitter*       _centralWidget;
 		QToolBox*        _rightToolBox;
 		KTextEditor::Editor* _editor;
-		QTreeWidgetItem *_activeGraphItem;
-		QTreeWidgetItem *_activeScriptItem;
 
 		void setupWidgets();
 		void setupActions();

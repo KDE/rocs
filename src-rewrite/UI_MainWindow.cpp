@@ -93,90 +93,6 @@ void MainWindow::setupWidgets()
 void MainWindow::setupActions()
 {
 	KStandardAction::quit ( this,    SLOT ( quit() ),        actionCollection() );
-
-//! Only Activate those commented below when the graph view is active.
-//   KStandardAction::undo(this,    SLOT(undo()),        actionCollection());
-//   KStandardAction::redo(this,    SLOT(redo()),        actionCollection());
-//   KStandardAction::cut(this,     SLOT(cut()),         actionCollection());
-//   KStandardAction::copy(this,    SLOT(copy()),        actionCollection());
-//   KStandardAction::paste(this,   SLOT(paste()),       actionCollection());
-//   KStandardAction::save(this,    SLOT(save()),        actionCollection());
-//   KStandardAction::saveAs(this,  SLOT(saveFileAs()),  actionCollection());
-//   KStandardAction::openNew(this, SLOT(documentNew()), actionCollection());
-//   KStandardAction::open(this,    SLOT(openFile()),    actionCollection());
-//   KStandardAction::close(this,   SLOT(close()),       actionCollection());
-
-	//! void closeAll();
-//   KAction *tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Close All"));
-//   tmpAction->setIcon(KIcon("document-close-all"));
-//   actionCollection()->addAction("CloseAll", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(closeAll()) );
-
-	//! void allignRight();
-//   tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Right"));
-//   //tmpAction->setIcon(KIcon(""));
-//   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
-//   actionCollection()->addAction("AllignRight", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignRight()) );
-
-	//! void allignLeft();
-//   tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Left"));
-//   //tmpAction->setIcon(KIcon("document-open"));
-//   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
-//   actionCollection()->addAction("AllignLeft", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignLeft()) );
-
-	//! void allignBottom();
-//   tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Bottom"));
-//   //tmpAction->setIcon(KIcon("document-open"));
-//   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
-//   actionCollection()->addAction("AllignBottom", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignBottom()) );
-
-	//! void allignTop();
-//   tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Top"));
-//   //tmpAction->setIcon(KIcon("document-open"));
-//   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
-//   actionCollection()->addAction("AllignTop", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignTop()) );
-
-	//! void allignVCenter();
-//   tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Vertical Center"));
-//   //tmpAction->setIcon(KIcon("document-open"));
-//   //tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
-//   actionCollection()->addAction("AllignVCenter", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignVCenter()) );
-
-	//! void allignHCenter();
-//   tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Horizontal Center"));
-//   // tmpAction->setIcon(KIcon("document-open"));
-//   // tmpAction->setShortcut(Qt::CTRL + Qt::Key_W);
-//   actionCollection()->addAction("AllignHCenter", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(allignHCenter()) );
-
-	//! void showManual();
-//   tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Show Manual"));
-//   // tmpAction->setIcon(KIcon("document-open"));
-//   tmpAction->setShortcut(QKeySequence::HelpContents);
-//   actionCollection()->addAction("ShowManual", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(showManual()) );
-
-	//! void execute();
-//   tmpAction = new KAction(this);
-//   tmpAction->setText(i18n("Execute"));
-//   // tmpAction->setIcon(KIcon("document-open"));
-//   tmpAction->setShortcut(Qt::CTRL + Qt::Key_F9);
-//   actionCollection()->addAction("Open", tmpAction);
-//   connect( tmpAction, SIGNAL(triggered()), this, SLOT(openFile()) );
-
 }
 
 void MainWindow::debug ( const QString& s )
@@ -213,8 +129,12 @@ void MainWindow::changeActiveGraph ( GraphCollection *item )
 	}
 	GraphScene* scene = new GraphScene(this, item);
 	_graphView->setScene(scene);
-	std::cout << "Entrou Aqui" << std::endl;
-	
+	_paletteBar->changeActiveGraph(scene);
+}
+
+GraphScene* MainWindow::activeScene()
+{
+	return qobject_cast<GraphScene*>(_graphView -> scene());
 }
 
 KTextEditor::Editor* MainWindow::editor()

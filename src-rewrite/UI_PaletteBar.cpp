@@ -57,10 +57,7 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 	_layout->setSpacing ( 0 );
 	_layout->setOneLine ( Settings::showButtonText() );
 
-	_actionGroup = new QActionGroup ( this );
-	_actionGroup->setExclusive ( true );
-
-	KAction* tmpAction = new KAction ( i18n ( "Pointer" ), this );
+	AbstractAction* tmpAction; /*= new KAction ( i18n ( "Pointer" ), this );
 	tmpAction->setToolTip ( i18n ( "Selection pointer" ) );
 	tmpAction->setIcon ( KIcon ( "pointer" ) );
 	tmpAction->setCheckable ( true );
@@ -88,11 +85,11 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 	createToolButton ( tmpAction );
 
 	createSeparator();
-
-	tmpAction = new addNodeAction(this);
-	_actionGroup->addAction ( tmpAction );
+*/
+	tmpAction = new AddNodeAction(this);
+	_actionGroup.append( tmpAction );
 	createToolButton ( tmpAction );
-
+/*
 	tmpAction = new KAction ( i18n ( "Add Edge" ), this );
 	tmpAction->setToolTip ( i18n ( "Connects two nodes with an edge" ) );
 	tmpAction->setIcon ( KIcon ( "pointer" ) );
@@ -129,7 +126,7 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 	tmpAction->setChecked ( false );
 	tmpAction->setProperty ( "rocs_action", GraphScene::MakeKGraph );
 	_actionGroup->addAction ( tmpAction );
-	createToolButton ( tmpAction );
+	createToolButton ( tmpAction ); */
 
 	_scrollArea->setWidget ( _widget );
 	_scrollArea->setMinimumWidth ( _widget->minimumSizeHint().width() );
@@ -137,8 +134,6 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 	QVBoxLayout* topLayout = new QVBoxLayout ( topWidget );
 	topLayout->addWidget ( _scrollArea );
 	setWidget ( topWidget );
-
-	QObject::connect ( _actionGroup, SIGNAL ( triggered ( QAction* ) ), this, SLOT ( actionTriggered ( QAction* ) ) );
 
 	QAction* showText = new QAction ( i18n ( "Show text" ), this );
 	showText->setCheckable ( true );
@@ -164,9 +159,6 @@ void PaletteBar::createToolButton ( QAction* action )
 
 void PaletteBar::createSeparator()
 {
-	QAction* action = new QAction ( this );
-	action->setSeparator ( true );
-	_actionGroup->addAction ( action );
 	_layout->addWidget ( new Separator ( _widget ) );
 }
 
@@ -182,20 +174,18 @@ void PaletteBar::showButtonTextToggled ( bool b )
 	_scrollArea->setMinimumWidth ( _widget->minimumSizeHint().width() );
 }
 
-void PaletteBar::actionTriggered ( QAction* action )
-{
-	emit beginAddItem ( action->property ( "rocs_action" ).toString() );
-}
-
-void PaletteBar::endAddItem ( const QString& name, bool /*success*/ )
-{
-	if ( name == _actionGroup->checkedAction()->property ( "rocs_action" ).toString() )
-		_pointerAction->setChecked ( true );
-}
-
 bool PaletteBar::event ( QEvent* event )
 {
 	return QDockWidget::event ( event );
 }
 
+void PaletteBar::changeActiveGraph(GraphScene* graphScene)
+{
+	
+	if (_actionGroup.size() == 0) return;
+
+	foreach(AbstractAction *action, _actionGroup){
+		action->changeGraphScene(graphScene);
+	}
+}
 
