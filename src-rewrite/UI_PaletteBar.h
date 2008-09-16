@@ -47,7 +47,7 @@ class PaletteBar : public QDockWidget
 
 	protected:
 		void createSeparator();
-		void createToolButton ( QAction* action );
+		void createToolButton ( AbstractAction* action );
 
 		bool event ( QEvent* event );
 

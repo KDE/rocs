@@ -57,7 +57,9 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 	_layout->setSpacing ( 0 );
 	_layout->setOneLine ( Settings::showButtonText() );
 
-	AbstractAction* tmpAction; /*= new KAction ( i18n ( "Pointer" ), this );
+	createToolButton ( new AddNodeAction(this) );
+
+ 	/*= new KAction ( i18n ( "Pointer" ), this );
 	tmpAction->setToolTip ( i18n ( "Selection pointer" ) );
 	tmpAction->setIcon ( KIcon ( "pointer" ) );
 	tmpAction->setCheckable ( true );
@@ -86,9 +88,7 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 
 	createSeparator();
 */
-	tmpAction = new AddNodeAction(this);
-	_actionGroup.append( tmpAction );
-	createToolButton ( tmpAction );
+
 /*
 	tmpAction = new KAction ( i18n ( "Add Edge" ), this );
 	tmpAction->setToolTip ( i18n ( "Connects two nodes with an edge" ) );
@@ -144,8 +144,9 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 	_widget->setContextMenuPolicy ( Qt::ActionsContextMenu );
 }
 
-void PaletteBar::createToolButton ( QAction* action )
+void PaletteBar::createToolButton ( AbstractAction* action )
 {
+	_actionGroup.append( action );
 	QToolButton* button = new QToolButton ( _widget );
 	button->setToolButtonStyle ( Settings::showButtonText() ?
 	                             Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly );
@@ -183,8 +184,8 @@ void PaletteBar::changeActiveGraph(GraphScene* graphScene)
 {
 	
 	if (_actionGroup.size() == 0) return;
-
-	foreach(AbstractAction *action, _actionGroup){
+	foreach(AbstractAction *action, _actionGroup)
+	{
 		action->changeGraphScene(graphScene);
 	}
 }
