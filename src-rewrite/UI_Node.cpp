@@ -54,22 +54,22 @@ void NodeItem::paint ( QPainter *painter, const QStyleOptionGraphicsItem *option
 	QRadialGradient gradient(-3, -3, 10);
 	QColor color = _colorDefault;
 
+
+	switch ( _action )
+	{
+		case NodeItem::Selected : color = _colorSelected; break;
+		case NodeItem::Focused  : color = _colorFocused;  break;
+		case NodeItem::Dragged  : color = _colorDragged;  break;
+		case NodeItem::Default  : color = _colorDefault;  break;
+	}
+
 	gradient.setColorAt(0, color.light(120));
 	gradient.setColorAt(1, color.light(180));
 
 	painter->setBrush(gradient);
-  	painter->setPen(QPen(Qt::black, 0));
-  	painter->drawEllipse(-10, -10, 20, 20);
+	painter->setPen(QPen(Qt::black, 0));
+	painter->drawEllipse(-10, -10, 20, 20);
 
-/*
-	switch ( _action )
-	{
-		case Selected: color = _colorSelected; break;
-		case Focused:  color = _colorFocused;  break;
-		case Dragged:  color = _colorDragged;  break;
-		Default:       color = _colorDefault;  break;
-	}
-*/
 /*	gradient.setColorAt(0, color.light(120));
 	gradient.setColorAt(1, color.light(180));
 
