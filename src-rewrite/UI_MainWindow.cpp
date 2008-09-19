@@ -123,7 +123,7 @@ void MainWindow::changeActiveScript ( KTextEditor::Document *item )
 void MainWindow::changeActiveGraph ( GraphCollection *item )
 {
 	//! Creating a new GraphScene and connect it to the view.
-	if ( _graphView -> scene() != NULL )
+	if ( _graphView -> scene() != 0 )
 	{
 		delete _graphView -> scene();
 	}

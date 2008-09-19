@@ -45,7 +45,8 @@ class GraphScene : public QGraphicsScene
 		      MakeKGraph,      // Make a complete graph with n nodes.
 		      MakeCGraph,      // Make a Circular graph with n nodes.
 		      MakeWGraph       // Make a Whell Graph with n nodes.
-	    };
+		};
+		void setAction(int action);
 
 	private:
 		QRectF coords;
@@ -53,7 +54,7 @@ class GraphScene : public QGraphicsScene
 		QList<GraphItem*> _graphCollectionItems;
 		Graph  *_activeGraph;
 
-		int action;
+		int _action;
 		void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
 		void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
 		void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
@@ -96,6 +97,6 @@ class GraphScene : public QGraphicsScene
 		int createConcentricNodes(int k = 0, qreal radius = 0, QPointF pos = QPointF()); 
 		*/
 	signals:
-		void insertNode(QPointF pos);
+		void executeAction(int action, QPointF pos);
 };
 #endif

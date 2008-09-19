@@ -28,6 +28,7 @@ set(Rocs_SRCS
   UI_ScriptingArea.cpp
 
   #Options on the Pallete
+  AbstractAction.cpp
   AddNodeAction.cpp
 
   # stolen from Step (remember to kiss  Vladimir Kuznetsov

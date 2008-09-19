@@ -58,6 +58,7 @@ class PaletteBar : public QDockWidget
 		QAction*        _pointerAction;
 		QList<AbstractAction*> _actionGroup;
 		QList<QToolButton*> _toolButtons;
+		int _numOfButtons;
 };
 
 #endif

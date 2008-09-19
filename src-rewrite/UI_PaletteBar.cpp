@@ -42,6 +42,7 @@
 
 PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget ( i18n ( "Palette" ), parent, flags ), _widget ( 0 )
 {
+	_numOfButtons = 0;
 	setObjectName ( "palleteBar" );
 	setAllowedAreas ( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
 	setFeatures ( QDockWidget::NoDockWidgetFeatures );
@@ -57,7 +58,7 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 	_layout->setSpacing ( 0 );
 	_layout->setOneLine ( Settings::showButtonText() );
 
-	createToolButton ( new AddNodeAction(this) );
+	createToolButton ( new AddNodeAction( ++_numOfButtons, this) );
 
  	/*= new KAction ( i18n ( "Pointer" ), this );
 	tmpAction->setToolTip ( i18n ( "Selection pointer" ) );

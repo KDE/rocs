@@ -18,35 +18,26 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#ifndef ABSTRACTACTION_H
-#define ABSTRACTACTION_H
+#include "AbstractAction.h"
 
-#include <KAction>
-#include <QObject>
-
-#include "UI_GraphScene.h"
-
-class AbstractAction : public KAction
+AbstractAction::AbstractAction(int type, QObject *parent) : KAction(parent)
 {
-	Q_OBJECT
-public: 
+		_graphScene = 0;
+		_type = type; 
+}
 
-	AbstractAction(int type, QObject *parent);
+void AbstractAction::changeGraphScene(GraphScene *graphScene)
+{
+	if (_graphScene != 0)
+	{
+		disconnect(this, 0, _graphScene, 0);
+	}
+	_graphScene = graphScene;
+	connect(this, SIGNAL(triggered()), this, SLOT(sendExecuteBit()));
+	connect(_graphScene, SIGNAL(executeAction(int, QPointF)), this, SLOT(execute(int, QPointF)));
+}
 
-	int Type() { return _type; }
-		
-	virtual void changeGraphScene(GraphScene *graphScene);
-	
-		
-public slots:
-	virtual void execute(int action, QPointF pos) = 0;
-	void sendExecuteBit();
-
-protected:
-	int _type;
-	GraphScene *_graphScene;
-signals:
-
-};
-
-#endif
+void AbstractAction::sendExecuteBit()
+{
+	_graphScene -> setAction(_type);
+}
