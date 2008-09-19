@@ -44,9 +44,9 @@ void AddNodeAction::execute(int action, QPointF pos)
 	and append it on the nodes list for the scripting interface 
 	*/
 	
-	Node *node = new Node( _graphScene );
-	node  ->  setPos( pos );
-	_graphScene -> addItem( node );
-	_graphScene -> activeGraph() -> nodes.append( node );
-	node -> index = _graphScene -> activeGraph() -> nodes.size()-1;
+	//Node *node = new Node( _graphScene );
+	//node  ->  setPos( pos );
+	//_graphScene -> addItem( node );
+	//_graphScene -> activeGraph() -> nodes.append( node );
+	//node -> index = _graphScene -> activeGraph() -> nodes.size()-1;
 }

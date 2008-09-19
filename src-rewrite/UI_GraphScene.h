@@ -47,6 +47,7 @@ class GraphScene : public QGraphicsScene
 		      MakeWGraph       // Make a Whell Graph with n nodes.
 		};
 		void setAction(int action);
+		Graph *graph(){ return _activeGraph; };
 
 	private:
 		QRectF coords;
