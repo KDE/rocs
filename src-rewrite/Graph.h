@@ -27,8 +27,8 @@
 #include <QColor>
 #include <QString>
 
-class Edge;
-class Node;
+class EdgeItem;
+class NodeItem;
 class QString;
 
 class Graph : public QObject
@@ -50,21 +50,24 @@ class Graph : public QObject
 		void makeComplement();
 		QList< QList<int> > incidencyMatrix();
 		QList< QList<int> > adjacencyMatrix();
+		
+		QList<NodeItem*>& nodes();
 
 	private:
 		QColor  _color;   //! Color of the outlines of the Graph on the screen.
 		QString _comment; //! Some Comment of the graph.
 		QString _name;   //! Name of the Graph
-
-		QList<Edge*> _edges; //! List of edges
-		QList<Node*> _nodes; //! list of Nodes.
+		
+		QList<EdgeItem*> _edges; //! List of edges
+		QList<NodeItem*> _nodes; //! list of Nodes.
+		
 
 
 	public slots:
 		void setName ( const QString& n );
-		void addNode ( QPointF pos);
+		void addNode ( NodeItem *node );
 		void addEdge ( int nodeIndex1, int nodeIndex2 );
-		void addEdge ( Node *n1, Node *n2 );
+		void addEdge ( NodeItem *n1, NodeItem *n2 );
 		void setColor ( const QColor& c );
 };
 

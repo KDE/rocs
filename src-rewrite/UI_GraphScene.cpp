@@ -25,6 +25,7 @@
 #include "Graph.h"
 #include "UI_Node.h"
 #include "Node.h"
+
 #include <iostream>
 #include <QGraphicsSceneMouseEvent>
 
@@ -37,6 +38,8 @@ GraphScene::GraphScene ( QObject* parent, GraphCollection *item ) : QGraphicsSce
 	_graphCollection = item;
 	changeActiveGraph( _graphCollection->createNewGraph() );
 }
+
+Graph* GraphScene::graph(){ return _activeGraph; }
 
 void GraphScene::changeActiveGraph(Graph *g)
 {

@@ -22,52 +22,68 @@
 #include "Node.h"
 #include "UI_Graph.h"
 
-NodeItem::NodeItem (Node *node, GraphItem *graph, QGraphicsItem *parent ) : QGraphicsItem ( parent )
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include <QPainter>
+#include <QStyleOption>
+
+
+NodeItem::NodeItem (Graph *graph, QGraphicsItem *parent ) : QGraphicsItem ( parent )
 {
-	_graphItem = graph;
-	_node = node;
+	_action = 0;
+	_graph = graph;
+	
+	//! Change those colors to make it configurable.
+	_colorDefault  = Qt::yellow;
+	_colorSelected = Qt::yellow; 
+	_colorFocused  = Qt::yellow;
+	_colorDragged  = Qt::yellow;
+
+	setFlag(ItemIsMovable, true);
+	setCacheMode(DeviceCoordinateCache);
+	setZValue(1);
 }
 
 void NodeItem::paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget )
 {
+	//! draw the Shadow
+	painter->setPen(Qt::NoPen);
+	painter->setBrush(Qt::darkGray);
+	painter->drawEllipse(-7, -7, 20, 20);
+
+	QRadialGradient gradient(-3, -3, 10);
+	QColor color = _colorDefault;
+
+	gradient.setColorAt(0, color.light(120));
+	gradient.setColorAt(1, color.light(180));
+
+	painter->setBrush(gradient);
+  	painter->setPen(QPen(Qt::black, 0));
+  	painter->drawEllipse(-10, -10, 20, 20);
+
+/*
 	switch ( _action )
 	{
-		case Selected: paintSelected(); break;
-		case Focused:  paintFocused();  break;
-		case Dragged:  paintDragged();  break;
-		Default:       paintDefault();  break;
+		case Selected: color = _colorSelected; break;
+		case Focused:  color = _colorFocused;  break;
+		case Dragged:  color = _colorDragged;  break;
+		Default:       color = _colorDefault;  break;
 	}
+*/
+/*	gradient.setColorAt(0, color.light(120));
+	gradient.setColorAt(1, color.light(180));
 
+	painter->setBrush(gradient);
+  	painter->setPen(QPen(Qt::black, 0));
+  	painter->drawEllipse(-10, -10, 20, 20); */
+	
+/*
 	if ( _node -> isBegin() ) paintAsBegin();
 	else if ( _node -> isEnd() ) paintAsEnd();
 
 	if ( ( _showName ) || ( _graphItem -> showNamesGlobal() ) )  paintName();
 	if ( ( _showIndex ) || ( _graphItem -> showIndexGlobal() ) ) paintIndex();
-}
-
-void NodeItem::paintSelected()
-{
-
-}
-
-void NodeItem::paintFocused()
-{
-
-}
-
-void NodeItem::paintDragged()
-{
-
-}
-
-void NodeItem::paintAsBegin()
-{
-
-}
-
-void NodeItem::paintDefault()
-{
-
+*/
 }
 
 void NodeItem::paintAsEnd()
@@ -87,10 +103,38 @@ void NodeItem::paintIndex()
 
 QPainterPath NodeItem::shape() const
 {
-
+  QPainterPath path;
+  path.addEllipse(-10, -10, 20, 20);
+  return path;
 }
 
 QRectF NodeItem::boundingRect() const
 {
+  qreal adjust = 2;
+  qreal x1 = -10 - adjust;
+  qreal y2 = 23 + adjust;
+  qreal x2 = y2 + 150;
+  
+  return QRectF(x1, x1, x2, y2);
+}
 
+void NodeItem::setName ( const QString& name )
+{
+	_name = name;
+}
+
+void NodeItem::setColor ( const QColor& color )
+{
+	_colorDefault = color;
+}
+
+void NodeItem::setXY ( qreal x, qreal y )
+{
+	_x = x;
+	_y = y;
+}
+
+void NodeItem::addTo ( NodeItem *to )
+{
+	_connections.append ( to );
 }

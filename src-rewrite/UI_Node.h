@@ -24,7 +24,7 @@
 
 #include <QGraphicsItem>
 
-class GraphItem;
+class Graph;
 class EdgeItem;
 class Node;
 
@@ -32,29 +32,57 @@ class NodeItem : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
 	public:
-		NodeItem (Node *node, GraphItem *Graph, QGraphicsItem *parent = 0 );
+		NodeItem (Graph *Graph, QGraphicsItem *parent = 0 );
 		QRectF bounds();
 		enum{Type = UserType + 1};
-		enum{ Default, Selected, Focused, Dragged};
 
+		enum{ 	Default 	= 0,	// 0000000
+			Selected 	= 1,	// 0000001
+			Focused 	= 2,	// 0000010
+			Dragged 	= 4,	// 0000100
+			Begin 		= 8,	// 0801000
+			End 		= 16,	// 0010000
+			Name 		= 32,	// 0100000
+			Index 		= 64	// 1000000
+		};
+		int type() const { return Type; }
+		void setIndex(int i) { _index = i; }
+		int index() const {return _index; }
+
+		//! Change this here later to a MVC structure.
+		void addTo ( NodeItem *to );
+		void setName ( const QString& name );
+		void setColor ( const QColor& color );
+		void setXY ( qreal x, qreal y );
 	protected:
-		Node *_node; //! the node that this particular drawing represents.
-		GraphItem *_graphItem;
-		int _action;
-		bool _showIndex;
-		bool _showName;
+		unsigned char _action;
+		
+		Graph *_graph;
+		QString _name;
+		int _index;
+		qreal _x;
+		qreal _y;
 
+		QList<NodeItem*> _connections;
+		QList<EdgeItem*> _edges;
+
+		QColor _colorFocused;
+		QColor _colorDragged;
+		QColor _colorSelected;
+		QColor _colorDefault;
+
+		//! Methods
 		QPainterPath shape() const;
 		QRectF boundingRect() const;
 		void paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
-		void paintSelected();
-		void paintFocused();
-		void paintDragged();
-		void paintAsBegin();
-		void paintDefault();
-		void paintAsEnd();
-		void paintName();
-		void paintIndex();
+		void paintSelected(); // 0000000
+		void paintFocused();  // 0000001
+		void paintDragged();  // 0000010
+		void paintAsBegin();  // 0000100
+		void paintDefault();  // 0001000
+		void paintAsEnd();    // 0010000
+		void paintName();     // 0100000
+		void paintIndex();    // 1000000
 
 };
 #endif

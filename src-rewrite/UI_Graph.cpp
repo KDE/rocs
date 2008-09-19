@@ -56,11 +56,11 @@ bool GraphItem::showNamesGlobal()
 	return _showNames;
 }
 
-void GraphItem::createNodeItem(Node *n)
+void GraphItem::createNodeItem(NodeItem *n)
 {
 
 }
-void GraphItem::createEdgeItem(Edge *e)
+void GraphItem::createEdgeItem(EdgeItem *e)
 {
 
 }

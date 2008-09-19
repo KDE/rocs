@@ -35,19 +35,8 @@ class GraphScene : public QGraphicsScene
 	public:
 		GraphScene ( QObject* parent, GraphCollection *item );
 		void changeActiveGraph(Graph *g);
-
-		
-		enum{ SingleSelection, // Selects only one node or edge
-		      SquareSelection, // Create a Square that will select everything inside.
-		      Move,            // Move the selected item(s)
-		      AddNode,         // Adds a not at the Click pos.
-		      AddEdge,        // Add an edge between 2 nodes.
-		      MakeKGraph,      // Make a complete graph with n nodes.
-		      MakeCGraph,      // Make a Circular graph with n nodes.
-		      MakeWGraph       // Make a Whell Graph with n nodes.
-		};
 		void setAction(int action);
-		Graph *graph(){ return _activeGraph; };
+		Graph *graph();
 
 	private:
 		QRectF coords;

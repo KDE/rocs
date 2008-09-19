@@ -50,8 +50,8 @@ class GraphItem :public QObject
 		bool _showNames;
 	
 	public slots:
-		void createNodeItem(Node *n);
-		void createEdgeItem(Edge *e);
+		void createNodeItem(NodeItem *n);
+		void createEdgeItem(EdgeItem *e);
 	signals:
 		void nodeInserted(QPointF pos);
 		void edgeInserted(QPointF pos1, QPointF pos2);

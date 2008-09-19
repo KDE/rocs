@@ -25,7 +25,7 @@
 #include <QList>
 #include <QString>
 #include <QColor>
-
+/*
 class Edge;
 class Graph;
 
@@ -46,17 +46,6 @@ class Node : public QObject
 		void setColor ( const QColor& color );
 		void setXY ( qreal x, qreal y );
 
-	private:
-		Graph *_graph;
-		QString _name;
-		int _index;
-		qreal _x;
-		qreal _y;
-		QColor _color;
-		QList<Node*> _connections;
-		QList<Edge*> _edges;
-		bool _begin;
-		bool _end;
-
-};
+	private: 
+}; */
 #endif

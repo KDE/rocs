@@ -20,8 +20,8 @@
  ***************************************************************************/
 
 #include "Graph.h"
-#include "Edge.h"
-#include "Node.h"
+#include "UI_Edge.h"
+#include "UI_Node.h"
 #include <QPointF>
 #include <KLocale>
 
@@ -32,36 +32,39 @@ Graph::Graph ( int type, QObject *parent ) : QObject ( parent )
 	setProperty ( "graph_type", type );
 }
 
+QList<NodeItem*>& Graph::nodes()
+{
+	 return _nodes; 
+}
+
 void Graph::setName ( const QString& n )
 {
 	_name = n;
 }
 
-void Graph::addNode ( QPointF pos )
+void Graph::addNode ( NodeItem *node )
 {
-	Node *n = new Node ( this );
-	n -> setXY ( pos.x(), pos.y() );
-	_nodes.append ( n );
+	_nodes.append ( node );
+	node->setIndex( _nodes.size() - 1 );
 }
 
 void Graph::addEdge ( int nodeIndex1, int nodeIndex2 )
 {
-	Node *n1 = _nodes[nodeIndex1];
-	Node *n2 = _nodes[nodeIndex1];
+	NodeItem *n1 = _nodes[nodeIndex1];
+	NodeItem *n2 = _nodes[nodeIndex1];
 	addEdge ( n1, n2 );
 }
 
-void Graph::addEdge ( Node *from, Node *to )
-{
-	Edge *e = new Edge ( this );
-	e->setFrom ( from );
-	e->setTo ( to );
+void Graph::addEdge ( NodeItem *from, NodeItem *to )
+{/*
+	EdgeItem *e = new EdgeItem ( from, to, this );
+	
 	from -> addTo ( to );
 	if ( property ( "graph_type" ) != DigraphType )
 	{
 		to -> addTo ( from );
 	}
-	_edges.append ( e );
+	_edges.append ( e ); */
 }
 
 void Graph::setColor ( const QColor& c )
@@ -90,46 +93,46 @@ bool Graph::isNull()
 }
 
 bool Graph::isComplete()
-{
+{ /*
 	int x = _nodes.size() - 1;
-	foreach ( Node *n, _nodes )
+	foreach ( NodeItem *n, _nodes )
 	{
 		if ( n->getEdges().size() != x ) return false;
 	}
-	return true;
+	return true; */
 }
 
 bool Graph::isCircular()
-{
-	foreach ( Node *n, _nodes )
+{ /*
+	foreach ( NodeItem *n, _nodes )
 	{
 		if ( n->getEdges().size() != 2 ) return false;
 	}
-	return true;
+	return true; */
 }
 
 bool Graph::isWheel()
-{
+{ /*
 	int x = ( _nodes.size() - 1 ) * 2;
 	if ( _edges.size() != x ) return false;
 
 	x = _nodes.size() - 1;
 	int z = 0;
-	foreach ( Node *n, _nodes )
+	foreach ( NodeItem *n, _nodes )
 	{
 		if ( n->getEdges().size() == 3 ) continue;
 		if ( n->getEdges().size() == x ) z += 1;
 	}
 	if ( z == 1 ) return true;
-	return false;
+	return false; */
 }
 
 bool Graph::isCubic()
-{
+{ /*
 	if ( !isComplete() ) return false;
 	if ( _nodes.size() == 0 ) return false;
 	if ( _nodes[0]->getEdges().size() != 3 ) return false;
-	return true;
+	return true; */
 }
 
 void Graph::makeComplement()

@@ -19,8 +19,10 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "AddNodeAction.h"
-#include <KLocale>
 #include "UI_GraphScene.h"
+#include "UI_Node.h"
+#include "Graph.h"
+#include <KLocale>
 #include <iostream>
 
 AddNodeAction::AddNodeAction(int type, QObject *parent) : AbstractAction(type, parent)
@@ -30,7 +32,6 @@ AddNodeAction::AddNodeAction(int type, QObject *parent) : AbstractAction(type, p
 	setIcon ( KIcon ( "pointer" ) );
 	setCheckable ( true );
 	setChecked ( false );
-	setProperty ( "rocs_action", GraphScene::AddNode );
 }
 
 AddNodeAction::~AddNodeAction(){}
@@ -43,10 +44,11 @@ void AddNodeAction::execute(int action, QPointF pos)
 	then adds it to the scene so it can be draw.
 	and append it on the nodes list for the scripting interface 
 	*/
-	
-	//Node *node = new Node( _graphScene );
-	//node  ->  setPos( pos );
-	//_graphScene -> addItem( node );
-	//_graphScene -> activeGraph() -> nodes.append( node );
-	//node -> index = _graphScene -> activeGraph() -> nodes.size()-1;
+	QList<NodeItem*> n = _graphScene->graph()->nodes();
+
+	NodeItem *node = new NodeItem( _graphScene->graph() );
+	node  ->  setPos( pos );
+	_graphScene -> addItem( node );
+	_graphScene -> graph() -> addNode( node );
+	std::cout << "Chegou Aqui" << std::endl;
 }
