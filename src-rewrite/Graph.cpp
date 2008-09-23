@@ -25,7 +25,7 @@
 #include <QPointF>
 #include <KLocale>
 
-Graph::Graph ( int type, QObject *parent ) : QObject ( parent )
+Graph::Graph ( int type )
 {
 	setName ( i18n ( "untitled" ) );
 	setColor ( Qt::black );
@@ -70,6 +70,10 @@ void Graph::addEdge ( NodeItem *from, NodeItem *to )
 void Graph::setColor ( const QColor& c )
 {
 	_color = c;
+	foreach(NodeItem *node, _nodes)
+	{
+		node -> update();
+	}
 }
 
 bool Graph::isSimple()

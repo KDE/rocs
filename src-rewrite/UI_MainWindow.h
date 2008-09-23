@@ -46,53 +46,75 @@ namespace KTextEditor
 	class Document;
 }
 
+/*! 
+\brief the main window of the program
+This class is responsable for connecting all signals and stuff to all the other parts of the Gui
+*/
 class MainWindow : public KXmlGuiWindow
 {
-		Q_OBJECT
+Q_OBJECT
 
-	public:
-		MainWindow();
-		KTextEditor::Editor* editor();
-		void changeActiveScript ( KTextEditor::Document *item );
-		void changeActiveGraph ( GraphCollection *item );
-		GraphScene *activeScene();
-	public slots:
-		//! #####################
-		//! ##      MENUS      ##
-		//! #####################
+public:
+	/*! defalt constructor */
+	MainWindow();
+	
+	/*! 
+	gets the current active editor with the opened script
+	\return the active editor
+	*/
+	KTextEditor::Editor* editor();
+	
+	/*! 
+	change the current active script file 
+	\param item the new current active script file.
+	*/
+	void changeActiveScriptFile ( KTextEditor::Document *item );
 
-		//! File Menu
+	/*! 
+	change the current active graph file 
+	\param item the new current graph file.
+	*/
+	void changeActiveGraphFile ( GraphCollection *item );
 
-		//! Edit Menu
+	/*! 
+	gets the active scene 
+	\return the active GraphScene
+	*/
+	GraphScene *activeScene();
 
-		//! Help Menu
+public slots:
+	/*! 
+	send a message to the debug area.
+	\param s the message to appear on the debug area
+	*/
+	void debug ( const QString& s );
 
-		//! Script Menu
+	/*! change the active $SOMETHING, where something can be the script or the graph.
+	\param item the something to change, this item-type will tell if it's a graph or a script.
+	*/
+	void changeActive ( QTreeWidgetItem * item );
 
-		void debug ( const QString& s );
+signals:
+	/*! send a message to the debug() method 
+	\param s the message to be send
+	*/
+	void sendDebugMsg ( const QString& s );
 
-		void changeActive ( QTreeWidgetItem * item );
+private:
+	//! Widgets being displayed
+	PaletteBar*      _paletteBar; //! area where the icons of actions will be.
+	QGraphicsView*   _graphView;  //! area where you can draw graphs.
+	ScriptingArea*   _scriptingArea; //! area where you can create your scripts.
+	FileArea*        _fileArea; 	//! area where the opened files will be
+	PropertiesArea*  _propertiesArea;  //! *NOT IMPLEMENTED* edit the properties of the graphs, nodes and edges.
+	GraphLayers*     _graphLayers;	//! *NOT IMPLEMENTED* area where the layers of the active graph will appear.
+	ConfigureDialog* _configureDialog; //! *NOT IMPLEMENTED* the configure dialog.
+	QSplitter*       _centralWidget; //! The container for the Script Area and GraphcsView
+	QToolBox*        _rightToolBox;	//! The toolbox that will hold the the FileArea, Properties and stuff.
+	KTextEditor::Editor* _editor;	//! The active editor.
 
-	protected slots:
-
-	signals:
-		void sendDebugMsg ( const QString& s );
-
-	private:
-		//! Widgets being displayed
-		PaletteBar*      _paletteBar;
-		QGraphicsView*   _graphView;
-		ScriptingArea*   _scriptingArea;
-		FileArea*        _fileArea;
-		PropertiesArea*  _propertiesArea;
-		GraphLayers*     _graphLayers;
-		ConfigureDialog* _configureDialog;
-		QSplitter*       _centralWidget;
-		QToolBox*        _rightToolBox;
-		KTextEditor::Editor* _editor;
-
-		void setupWidgets();
-		void setupActions();
+	void setupWidgets(); //! Setup all the widgets
+	void setupActions(); //! Setup all the actions.
 
 };
 

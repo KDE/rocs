@@ -70,13 +70,6 @@ void NodeItem::paint ( QPainter *painter, const QStyleOptionGraphicsItem *option
 	painter->setPen(QPen(Qt::black, 0));
 	painter->drawEllipse(-10, -10, 20, 20);
 
-/*	gradient.setColorAt(0, color.light(120));
-	gradient.setColorAt(1, color.light(180));
-
-	painter->setBrush(gradient);
-  	painter->setPen(QPen(Qt::black, 0));
-  	painter->drawEllipse(-10, -10, 20, 20); */
-	
 /*
 	if ( _node -> isBegin() ) paintAsBegin();
 	else if ( _node -> isEnd() ) paintAsEnd();

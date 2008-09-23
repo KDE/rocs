@@ -29,28 +29,74 @@ class Graph;
 class GraphItem;
 class Node;
 
+/*! 
+\brief The graph drawing Area 
+
+This class holds all the nodes, edges and stuff that will appear on the screen.
+it also needs to respond to all actions created on the pallete bar 
+and invockable from the Script Side.
+
+*/
+
 class GraphScene : public QGraphicsScene
 {
 	Q_OBJECT
 	public:
+		/*! 
+		default constructor 
+		\param parent the MainObject that holds this container.
+		\param item all the Graphs of the file.
+		*/
+
 		GraphScene ( QObject* parent, GraphCollection *item );
+		
+		/*! 
+		sets or changes the current active graph 
+		\param g the new current active graph
+		*/
 		void changeActiveGraph(Graph *g);
+
+		/*! 
+		changes the action that will happen when the user clicks on the screen 
+		\param action the new action that will be performed.
+		*/
 		void setAction(int action);
+
+		/*! 
+		gets the active graph 
+		\return the active graph
+		*/
 		Graph *graph();
 
 	private:
-		QRectF coords;
-		GraphCollection *_graphCollection;
-		QList<GraphItem*> _graphCollectionItems;
-		Graph  *_activeGraph;
+		
+		GraphCollection *_graphCollection; /*! All The Graphs of the Graph File*/
+		
+		// QList<GraphItem*> _graphCollectionItems;
+		Graph  *_activeGraph; /*! The active graph being edited */
 
-		int _action;
+		int _action; /*! The current action being performed on the active graph */
+
+		/*! 
+		this will happen when the user clicks on the screen 
+		\param mouseEvent the MouseEvent send by Qt
+		*/
 		void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+		
+		/*! 
+		this will happen when the user clicks on the screen 
+		\param mouseEvent the MouseEvent send by Qt
+		*/
 		void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
+		
+		/*! 
+		this will happen when the user clicks on the screen 
+		\param mouseEvent the MouseEvent send by Qt
+		*/
 		void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
-		QGraphicsItem *tmpItem; //! pointer for the line that's being draw right now.
-		MainWindow *mainWindow;
+		QGraphicsItem *tmpItem; /*! pointer for the line that's being draw right now. */
+		MainWindow *mainWindow; /*! the MainWindow */
 
 	public slots:
     /* ######################
@@ -59,9 +105,11 @@ class GraphScene : public QGraphicsScene
 
 		//void createScriptFunctions(const QString& program);
 		// void insertEdge(Node *begin, Node *end, int arrowType = 0);
-		void createGraphItem(Graph* g);
-		void removeGraphItem(int pos);
-		void createNodeItem(Node* n);
+		
+		// void createGraphItem(Graph* g);
+		// void removeGraphItem(int pos);
+		
+		//void createNodeItem(Node* n);
 
 		/* UI Control */
 		//    void allignVLeft();

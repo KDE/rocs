@@ -19,6 +19,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
  ***************************************************************************/
 
+/* Not used YET */
 #ifndef EDGE_H
 #define EDGE_H
 

@@ -27,7 +27,7 @@ GraphCollection::GraphCollection ( const QString& name )
 }
 Graph* GraphCollection::createNewGraph()
 {
-	Graph *g = new Graph ( ( int ) Graph::SimpleType, 0 );
+	Graph *g = new Graph ( ( int ) Graph::SimpleType );
 	_graphs.append ( g );
 	return g;
 }

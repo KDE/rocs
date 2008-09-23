@@ -106,21 +106,21 @@ void MainWindow::changeActive ( QTreeWidgetItem * item )
 	{
 		case FileArea::ScriptType :
 			pos = item->data ( 0, FileArea::ScriptType ).toInt();
-			changeActiveScript ( _fileArea->scriptAt ( pos ) );
+			changeActiveScriptFile ( _fileArea->scriptAt ( pos ) );
 			break;
 		case FileArea::GraphType :
 			pos = item->data ( 0, FileArea::GraphType ).toInt();
-			changeActiveGraph ( _fileArea->graphCollectionAt ( pos ) );
+			changeActiveGraphFile ( _fileArea->graphCollectionAt ( pos ) );
 			break;
 	}
 }
 
-void MainWindow::changeActiveScript ( KTextEditor::Document *item )
+void MainWindow::changeActiveScriptFile ( KTextEditor::Document *item )
 {
 	_scriptingArea -> setDocument ( item );
 }
 
-void MainWindow::changeActiveGraph ( GraphCollection *item )
+void MainWindow::changeActiveGraphFile ( GraphCollection *item )
 {
 	//! Creating a new GraphScene and connect it to the view.
 	if ( _graphView -> scene() != 0 )

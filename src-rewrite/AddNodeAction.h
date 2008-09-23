@@ -24,12 +24,34 @@
 #include "AbstractAction.h"
 #include <QObject>
 
+/*! 
+	\brief The 'Add Node' Action 
+	This action holds the 'Add Node' icon and tooltips, and when it's executed, 
+	it will place a new node on the QGraphicsView that holds all the items.
+*/
+
 class AddNodeAction : public AbstractAction{
 	public:
+		/*! 
+			Default constructor 
+			\param type the Type for 'Add Node' action. must be unique.
+			\param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
+		*/
+	
 		AddNodeAction(int type, QObject *parent = 0);
+	
+		/*! 
+			Default Destructor 
+		*/
 		~AddNodeAction();
 	public slots:
-		void execute(int action, QPointF pos);
+		/*! 
+			this will be executed if type is the same as this action's type. 
+			\param type must be the same type as this action to execute this.
+			\param pos the position on the screen that the new node will be placed.
+
+		*/
+		void execute(int type, QPointF pos);
 };
 
 #endif

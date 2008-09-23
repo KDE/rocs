@@ -19,6 +19,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
  ***************************************************************************/
 
+/*! This will be removed */
+
 #ifndef UI_GRAPH_H
 #define UI_GRAPH_H
 
@@ -29,6 +31,7 @@ class Graph;
 class NodeItem;
 class EdgeItem;
 
+/*! NOT USED YET */
 class GraphItem :public QObject
 {
 	Q_OBJECT

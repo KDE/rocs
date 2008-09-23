@@ -22,11 +22,56 @@
 */
 
 #include <QWidget>
+#include <QList>
 
 class MainWindow;
+class KPushButton;
+class QImage;
+class QTreeWidget;
+class Graph;
+class GraphCollection;
+
+/*! 
+	\brief The Graph-Layer widget.
+	This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
+*/
 class GraphLayers : public QWidget
 {
 	public:
+		 /*! 
+		default constructor
+
+		\param parent the MainWindow of the program.
+		*/
 		GraphLayers ( MainWindow* parent );
+		
+		/*! 
+		Change the graph's collection what this widget will show.
+		When the graph file is changed, this method must be invocked
+ 
+		\param graphs the new graphCollection to be shown on this widget.
+		*/
+		void setGraphs(GraphCollection *graphs);
+	
+	public slots:
+		/*! creates a new graph */
+		void add();
+
+		/*! duplicates the currently selected graph */
+		void duplicate();
+
+		/*! removes the currently selected graph */
+		void remove();
+
+	private:
+		Graph *_activeGraph; /*! the currently selected Graph */
+		QList<Graph*> _graphCollection; /*! All the Graphs */
+
+		KPushButton *_btnAdd; /*! the 'add graph' button */
+		KPushButton *_btnDuplicate; /*! the  'duplicate graph' button */
+		KPushButton *_btnDelete;	/*! the 'delete graph' button */
+		QTreeWidget *_centralArea;	/*! the tree view that will 
+						store all the graphs indexes */
 };
+
 #endif

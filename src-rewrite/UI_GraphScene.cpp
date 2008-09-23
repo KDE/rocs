@@ -51,6 +51,7 @@ void GraphScene::setAction(int action){
 	
 }
 
+/*
 void GraphScene::createGraphItem(Graph *g)
 {
 	changeActiveGraph(g);
@@ -62,7 +63,7 @@ void GraphScene::removeGraphItem(int)
 {
 	
 }
-
+*/
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
 	if ( mouseEvent -> button( ) != Qt::LeftButton )
@@ -87,7 +88,9 @@ void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 }
 
+/*
 void GraphScene::createNodeItem(Node *n)
 {
 
 }
+*/

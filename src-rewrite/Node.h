@@ -19,6 +19,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.          *
  ***************************************************************************/
 
+/*! NOT USED YET! */
+
 #ifndef NODE_H
 #define NODE_H
 
