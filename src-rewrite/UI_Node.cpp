@@ -28,7 +28,7 @@
 #include <QStyleOption>
 
 
-NodeItem::NodeItem (Graph *graph, QGraphicsItem *parent ) : QGraphicsItem ( parent )
+NodeItem::NodeItem (Graph *graph )
 {
 	_action = 0;
 	_graph = graph;
