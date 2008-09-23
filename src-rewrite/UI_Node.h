@@ -28,14 +28,31 @@ class Graph;
 class EdgeItem;
 class Node;
 
+/*!
+\brief Node being displayed on the screen
+This class holds the Node abstraction and the Node item on the screen,
+It should be split in two separated classes in the future.
+*/
 class NodeItem : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
 	public:
-		NodeItem (Graph *Graph, QGraphicsItem *parent = 0 );
+		/*!
+		default constructor
+		\param Graph the Graph that this node belongs
+		*/
+		NodeItem (Graph *Graph );
+
+		/*! 
+		needed for some calculations of the positioning on the screen
+		\return the square-size of the item.
+		*/
 		QRectF bounds();
+	
+		/*! the Type of all nodes, so we can use qobject_cast<T*> */
 		enum{Type = UserType + 1};
 
+		/*! The flags that will tell what's happening on a particular node. */
 		enum{ 	Default 	= 0,	// 0000000
 			Selected 	= 1,	// 0000001
 			Focused 	= 2,	// 0000010
@@ -45,44 +62,87 @@ class NodeItem : public QObject, public QGraphicsItem
 			Name 		= 32,	// 0100000
 			Index 		= 64	// 1000000
 		};
+		
+		/*! 
+		gets the type of the Node, const for every node.
+		\return the type.  
+		*/
 		int type() const { return Type; }
+		
+		/*! 
+		changes the index of this node 
+		\param i the new index
+		*/
 		void setIndex(int i) { _index = i; }
+		
+		/*! 
+		gets the index of this node
+		\return index of the node.
+		*/	
 		int index() const {return _index; }
 
-		//! Change this here later to a MVC structure.
+		/*! 
+		adds a 'to' node to this node. This will make the 'to' node to be connected by an edge. to this one. 
+		\param to the node to connect with this one.
+		*/
 		void addTo ( NodeItem *to );
+
+		/*! change the name of this particular node. 
+		\param name the new name of the node. */
 		void setName ( const QString& name );
+
+		/*! changes the internal color (but not the outline) of this particular node.
+		\param color the new color of the node. */
 		void setColor ( const QColor& color );
+
+		/*! moves the node from the atual position to the new x,y.
+		\param x the x coordinate
+		\param y the y coordinate.
+		*/
 		void setXY ( qreal x, qreal y );
+
 	protected:
-		unsigned char _action;
+		unsigned char _action; //! what's happening right now with this node.
 		
-		Graph *_graph;
-		QString _name;
-		int _index;
-		qreal _x;
-		qreal _y;
+		Graph *_graph; //! the graph that this node belongs to.
+		QString _name; //! the name of this node.
+		int _index;	//! the position of this node on the Graph's list.
+		qreal _x;	//! the x position on the screen
+		qreal _y;	//! the y position on the screen
 
-		QList<NodeItem*> _connections;
-		QList<EdgeItem*> _edges;
+		QList<NodeItem*> _connections; //! all nodes that this node connects, note that if this node is connected.
+		QList<EdgeItem*> _edges;	//! all the edges that this node has.
 
-		QColor _colorFocused;
-		QColor _colorDragged;
-		QColor _colorSelected;
-		QColor _colorDefault;
+		QColor _colorFocused; //! the focused color of the node
+		QColor _colorDragged;	//! the dragged color of the node
+		QColor _colorSelected;	//! the selected color of the node
+		QColor _colorDefault;	//! the default color of the node
 
 		//! Methods
-		QPainterPath shape() const;
+		/*! calculates the shape of the node. 
+		\return a QPainterPath representation of the node. 
+		*/
+		QPainterPath shape() const; 
+
+		/*! calculate the bounding Rectangle of the node 
+		\return the QRectF bounding rectangle
+		*/
 		QRectF boundingRect() const;
+
+		/*! paints the node on the screen. 
+		\param painter the painter pointer
+		\param option the QStyleOptionGraphcsItem options
+		\param widget the widget that will have an effect on it.
+		*/
 		void paint ( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
-		void paintSelected(); // 0000000
-		void paintFocused();  // 0000001
-		void paintDragged();  // 0000010
-		void paintAsBegin();  // 0000100
-		void paintDefault();  // 0001000
-		void paintAsEnd();    // 0010000
-		void paintName();     // 0100000
-		void paintIndex();    // 1000000
+		void paintDefault();  //! paint the node as default if action & 0000000
+		void paintSelected(); //! paints the selected node  if action & 0000001
+		void paintFocused();  //! paints the focused node   if action & 0000010
+		void paintDragged();  //! paints the Dragged node   if action & 0000100
+		void paintAsBegin();  //! paint the node as Begin   if action & 0001000
+		void paintAsEnd();    //! paint the node as End     if action & 0010000
+		void paintName();     //! Paint the node's name     if action & 0100000
+		void paintIndex();    //! Paint the node Index      if action & 1000000
 
 };
 #endif

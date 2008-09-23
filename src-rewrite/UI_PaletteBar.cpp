@@ -60,6 +60,7 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 
 	createToolButton ( new AddNodeAction( ++_numOfButtons, this) );
 
+	// _layout->addWidget ( new Separator ( _widget ) );
  	/*= new KAction ( i18n ( "Pointer" ), this );
 	tmpAction->setToolTip ( i18n ( "Selection pointer" ) );
 	tmpAction->setIcon ( KIcon ( "pointer" ) );
@@ -149,19 +150,13 @@ void PaletteBar::createToolButton ( AbstractAction* action )
 {
 	_actionGroup.append( action );
 	QToolButton* button = new QToolButton ( _widget );
-	button->setToolButtonStyle ( Settings::showButtonText() ?
-	                             Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly );
+	button->setToolButtonStyle ( Settings::showButtonText() ? Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly );
 	button->setSizePolicy ( QSizePolicy::Expanding, QSizePolicy::Fixed );
 	button->setAutoRaise ( true );
 	button->setIconSize ( QSize ( 22,22 ) );
 	button->setDefaultAction ( action );
 	_toolButtons.append ( button );
 	_layout->addWidget ( button );
-}
-
-void PaletteBar::createSeparator()
-{
-	_layout->addWidget ( new Separator ( _widget ) );
 }
 
 void PaletteBar::showButtonTextToggled ( bool b )

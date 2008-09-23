@@ -31,23 +31,40 @@ class PaletteLayout;
 class GraphScene;
 class AbstractAction;
 
+/*! \brief this class holds all the buttons of the pallete.
+this is a container class for use with AbstractAction classes that will create
+a item for each AbstractAction instance on the menu.
+*/
 class PaletteBar : public QDockWidget
 {
-		Q_OBJECT
-
+	Q_OBJECT
 	public:
+		/*! 	default constructor 
+			\param parent the MainWindow
+			\param flags the window flags.
+		*/
 		PaletteBar ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+	
+		/*! 
+			whenever the active graph scene is changed, this method must be invocked 
+			to atualize the links between the buttons and the scene.
+			\param graphScene the new Scene.
+		*/
+		
 		void changeActiveGraph(GraphScene* graphScene);
 
 	protected slots:
+		/*! shows or hides the text on the buttons
+		\param b if true, shows the buttons, if false hides it. */
 		void showButtonTextToggled ( bool b );
 
-	signals:
-		void buttonClicked ( const QString& name );
-
 	protected:
-		void createSeparator();
+		
+		/*! creates a toolbutton and places it on the pallete.
+		\param action the action of with the button will take it's functionalies. */
+
 		void createToolButton ( AbstractAction* action );
+
 
 		bool event ( QEvent* event );
 
