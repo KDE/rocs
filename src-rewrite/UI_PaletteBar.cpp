@@ -40,9 +40,9 @@
 #include "UI_PaletteBar.moc" //! AUTO GENERATED! ( *Hate* this >_< )
 
 
-PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget ( i18n ( "Palette" ), parent, flags ), _widget ( 0 )
+PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) 
+	: QDockWidget ( i18n ( "Palette" ), parent, flags )
 {
-	_numOfButtons = 0;
 	setObjectName ( "palleteBar" );
 	setAllowedAreas ( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
 	setFeatures ( QDockWidget::NoDockWidgetFeatures );
@@ -58,7 +58,7 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) : QDockWidget 
 	_layout->setSpacing ( 0 );
 	_layout->setOneLine ( Settings::showButtonText() );
 
-	createToolButton ( new AddNodeAction( ++_numOfButtons, this) );
+	createToolButton ( new AddNodeAction( _actionGroup.size(), this) );
 
 	// _layout->addWidget ( new Separator ( _widget ) );
  	/*= new KAction ( i18n ( "Pointer" ), this );

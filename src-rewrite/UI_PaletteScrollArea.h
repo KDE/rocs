@@ -22,7 +22,7 @@
 #define UI_PALETTESCROLLAREA_H
 
 #include <QScrollArea>
-
+/*! \brief Palletebar Helper class */
 class PaletteScrollArea: public QScrollArea
 {
 	public:

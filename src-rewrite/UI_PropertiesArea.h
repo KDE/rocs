@@ -22,6 +22,7 @@
 */
 #include <QWidget>
 
+/*! \brief Properties Area, not used yet. */
 class MainWindow;
 class PropertiesArea : public QWidget
 {

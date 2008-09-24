@@ -23,6 +23,7 @@
 
 #include <QVBoxLayout>
 
+/*! \brief defines the layout on the pallete bar */
 class PaletteLayout: public QLayout
 {
 	public:
