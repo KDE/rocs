@@ -59,6 +59,7 @@ GraphLayers::GraphLayers ( MainWindow *parent )
 
 void GraphLayers::setGraphs(GraphCollection *graphs)
 {
+/*
 	// do nothing if the graph collection is the same as the active graphs.
 	if (_graphCollection == graphs)
 	{
@@ -73,4 +74,5 @@ void GraphLayers::setGraphs(GraphCollection *graphs)
 		QTreeWidgetItem *i = new QTreeWidgetItem(_centralWidget);
 		i->setFlags(Qt::ItemIsUserCheckable);
 	}
+*/
 }
