@@ -91,13 +91,15 @@ void FileArea::atualizeTreeWidget()
 	{
 		delete t;
 	}
+
 	children = _graphFolder->takeChildren();
 	foreach ( QTreeWidgetItem* t, children )
 	{
 		delete t;
 	}
 
-	for ( int i = 0; i < _scripts.size(); i++ )
+	int size = _scripts.size();
+	for ( int i = 0; i < size; i++ )
 	{
 		KTextEditor::Document *d = _scripts.at ( i );
 		QTreeWidgetItem *item = new QTreeWidgetItem ( _scriptFolder, ScriptType );
@@ -105,7 +107,8 @@ void FileArea::atualizeTreeWidget()
 		item->setData ( 0, ScriptType, i );
 	}
 
-	for ( int i = 0; i < _graphcollections.size(); i++ )
+	size = _graphcollections.size();
+	for ( int i = 0; i < size; i++ )
 	{
 		GraphCollection *gc = _graphcollections.at ( i );
 		QTreeWidgetItem *item = new QTreeWidgetItem ( _graphFolder, GraphType );

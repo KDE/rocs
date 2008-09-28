@@ -25,6 +25,12 @@ GraphCollection::GraphCollection ( const QString& name )
 {
 	_name = name;
 }
+
+QList<Graph*> GraphCollection::graphs() const 
+{ 
+	return _graphs; 
+}
+
 Graph* GraphCollection::createNewGraph()
 {
 	Graph *g = new Graph ( ( int ) Graph::SimpleType );

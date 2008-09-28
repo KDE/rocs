@@ -72,6 +72,10 @@ class GraphCollection : public QObject
 		*/
 		void setName ( const QString& name ) { _name = name; }
 		
+		/*! 
+			\return a list of graphs 
+		*/
+		QList<Graph*> graphs() const;
 	signals:
 		/*! 
 			Emited when a new graph is created

@@ -65,7 +65,7 @@ class GraphLayers : public QWidget
 
 	private:
 		Graph *_activeGraph; /*! the currently selected Graph */
-		QList<Graph*> _graphCollection; /*! All the Graphs */
+		GraphCollection *_graphCollection; /*! All the Graphs */
 
 		KPushButton *_btnAdd; /*! the 'add graph' button */
 		KPushButton *_btnDuplicate; /*! the  'duplicate graph' button */
