@@ -1,8 +1,9 @@
 #include "SimpleGraph.h"
 #include "SimpleNode.h"
 #include "Edge.h"
+#include "GraphCollection.h"
 
-SimpleGraph::SimpleGraph() : Graph()
+SimpleGraph::SimpleGraph(GraphCollection *parent) : Graph(parent)
 {
 
 }
@@ -14,7 +15,14 @@ SimpleGraph::~SimpleGraph()
 
 Edge* SimpleGraph::createEdge(Node* from, Node* to)
 {
-  if ( from->isConnected(to) ) return 0;
+  if (( _nodes.indexOf(from) == -1 ) || ( _nodes.indexOf(to) == -1) )
+  {
+    return 0;
+  }
+  if ( from->isConnected(to) )
+  {
+    return 0;
+  }
   
   Edge *e = new Edge(from, to, this);
 

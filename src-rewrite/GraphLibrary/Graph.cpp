@@ -2,10 +2,18 @@
 #include "Node.h"
 #include "Edge.h"
 #include <iostream>
+#include <math.h>
+#include "GraphCollection.h"
 
 // Default Constructor
-Graph::Graph() : QObject(0)
+Graph::Graph(GraphCollection *parent) : QObject(parent)
 {
+  GraphCollection *gc = qobject_cast<GraphCollection*>(parent);
+  if (gc->indexOf(this) == -1)
+  {
+    gc->append(this);
+  }
+
   _nodes.clear();
   _edges.clear();
 }
@@ -118,4 +126,67 @@ void Graph::transformIntoKGraph()
       createEdge(n1, n2);
     }
   }
+}
+
+// creates a KGraph.
+int Graph::makeConcentricNodes(int k, qreal radius,  QPointF pos ){
+   
+  GraphCollection *gc = qobject_cast<GraphCollection*>(parent());
+ 
+  // sees if there's space on the canvas
+  if ( (pos.x() - radius) < 0)
+  { 
+    pos.setX(radius+20); 
+  }
+
+  if ( (pos.y() - radius) < 0)
+  { 
+    pos.setY(radius+20); 
+  }
+  
+  if ( (pos.x() + radius) > gc -> width())
+  { 
+    pos.setX( gc->width() - radius - 20);   
+  }
+  
+  if ( (pos.y() + radius) > gc -> height())
+  { 
+    pos.setY( gc->height() - radius - 20); 
+  }
+  
+  qreal x = pos.x();
+  qreal y = pos.y();
+
+  int beginOfGraph = _nodes.size();
+  for (int i = 1; i <= k; i++) {  
+    const qreal angle =  i * (2*M_PI / k);    
+    createNode( QPointF(radius * cos(angle) + x, radius * sin(angle) + y) ) ; 
+  }
+  return beginOfGraph;
+}
+
+void Graph::makeKGraph(int k, qreal radius,  QPointF pos)
+{
+   int posBegin = makeConcentricNodes(k, radius, pos);
+   int s = _nodes.size();
+
+   for(int i = posBegin; i < (s - 1); i++)
+   {
+     for(int e = posBegin + 1; e < s; e++){
+        if (i == e) continue;
+        createEdge(_nodes[i], _nodes[e]);
+     }
+  }
+}
+
+void Graph::makeCGraph(int k, qreal radius,  QPointF pos)
+{
+   int posBegin = makeConcentricNodes(k, radius, pos);
+   int s = _nodes.size();
+   int i = 0;
+   for(i = posBegin; i < (s - 1); i++)
+   {
+     createEdge(_nodes[i], _nodes[i+1]);
+   }
+   createEdge(_nodes[i], _nodes[posBegin]);
 }

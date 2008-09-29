@@ -24,6 +24,10 @@ void Tests::testCreatingSimpleGraph()
 
   QVERIFY2(graph2->nodes().size() == 0, "Number of nodes on the newly created graph is not zero.");
   QVERIFY2(graph2->edges().size() == 0, "Number of edges on the newly created graph is not zero.");
+
+  _graphCollection.addGraph(GraphCollection::simple);
+  _graphCollection.addGraph(GraphCollection::simple);
+  _graphCollection.addGraph(GraphCollection::simple);
 }
 
 void Tests::testManipulatingSimpleGraph()
@@ -112,8 +116,7 @@ void Tests::testCreatingSimpleGraphNodes()
 * 3 -> 5
 * 4 -> 5
 */
-  Graph *graph = new SimpleGraph();
-  _graphCollection << graph;
+  Graph *graph = new SimpleGraph(&_graphCollection);
   graph->createNode( QPointF(0,50) );
   graph->createNode( QPointF(100, 50) );
   graph->createNode( QPointF(200, 0) );
@@ -136,6 +139,9 @@ void Tests::testCreatingSimpleGraphNodes()
   QVERIFY2(graph->edges().size() == 7, "Number of edges is wrong. ");
   QVERIFY2(nodes[1]->edges().size() == 3, "node 2 has more edges than it should.");
 
+
+  Graph *g = _graphCollection[2];
+  
 }
 
 void Tests::testManipulatingSimpleGraphNodes()

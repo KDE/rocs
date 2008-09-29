@@ -2,12 +2,18 @@
 #include "Graph.h"
 #include "Edge.h"
 
-DiNode::DiNode(QPointF position, Graph *parent) : Node(position, parent)
+DiNode::DiNode(QPointF position, Graph *parent) 
+: Node(position, parent)
 {
 }
 
 DiNode::~DiNode()
 {
+  foreach(Edge *e, _edges)
+  {
+    delete e;
+  }
+  _edges.clear();
 }
 
 bool DiNode::isConnected(Node *to)

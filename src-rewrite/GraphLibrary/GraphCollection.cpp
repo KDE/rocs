@@ -1,6 +1,8 @@
 #include "GraphCollection.h"
 #include "Graph.h"
 #include "SimpleGraph.h"
+#include "MultiGraph.h"
+#include "Digraph.h"
 
 #include <QString>
 
@@ -34,6 +36,26 @@ QString GraphCollection::name() const
   return _name;
 }
 
+
+void GraphCollection::setWidth(qreal width)
+{
+  _width = width;
+}
+
+void GraphCollection::setHeight(qreal height)
+{
+  _height = height;
+}
+
+qreal GraphCollection::height() const
+{
+  return _height;
+}
+
+qreal GraphCollection::width() const
+{
+  return _width;
+}
 // Gets the size of the graph Collection
 int GraphCollection::size()
 {
@@ -53,12 +75,11 @@ Graph* GraphCollection::addGraph(int type)
   Graph *g = 0;
   switch(type)
   {
-    case 0 : g = new SimpleGraph(); break;
-    case 1 : g = new SimpleGraph(); break;
-    case 2 : g = new SimpleGraph(); break;
+    case 0 : g = new SimpleGraph(this); break;
+    case 1 : g = new MultiGraph(this); break;
+    case 2 : g = new SimpleGraph(this); break;
   }
   
-  _graphs.append(g);
   emit graphCreated(g);
   return g;
 }
@@ -107,4 +128,9 @@ void GraphCollection::clear()
     delete g;
   }
   _graphs.clear();
+}
+
+int GraphCollection::indexOf(Graph *g)
+{
+  return _graphs.indexOf(g);
 }

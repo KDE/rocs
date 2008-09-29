@@ -8,7 +8,11 @@ SimpleNode::SimpleNode(QPointF position, Graph *parent) : Node(position, parent)
 
 SimpleNode::~SimpleNode()
 {
-
+  foreach(Edge *e, _edges)
+  {
+    delete e;
+  }
+  _edges.clear();
 }
 
 bool SimpleNode::isConnected(Node *to)

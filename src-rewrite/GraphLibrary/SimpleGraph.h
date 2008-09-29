@@ -5,12 +5,13 @@
 
 class Edge;
 class Node;
+class GraphCollection;
 
 class SimpleGraph : public Graph
 {
   public:
     /*! Default Constructor */
-    SimpleGraph();	// TESTED - OK
+    SimpleGraph(GraphCollection *parent);	// TESTED - OK
 
     /*! Default Destructor */
     ~SimpleGraph();	// TESTED - OK

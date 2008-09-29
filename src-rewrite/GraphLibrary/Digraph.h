@@ -10,7 +10,7 @@ class QPointF;
 class Digraph : public Graph
 {
 public:
-  Digraph();
+  Digraph(GraphCollection *parent);
   ~Digraph();
   Edge* addEdge(Node *from, Node *to);
   Node* createNode(QPointF position);

@@ -9,6 +9,7 @@
 class Node;
 class Edge;
 class QPointF;
+class GraphCollection;
 
 class Graph : public QObject
 {
@@ -18,7 +19,7 @@ class Graph : public QObject
 
 public:
   /*! Default Constructor */
-  Graph();						// TESTED - OK
+  Graph(GraphCollection *parent);						// TESTED - OK
 
   /*! Default Destructor */
   virtual ~Graph(); 					// TESTED - OK
@@ -65,6 +66,15 @@ public:
   /*! transform this graph into a KGraph */
   void transformIntoKGraph();				// TESTED - OK. ( But should move to respective files, maybe? )
 
+  /*! make this graph a KGraph with nodes Nodes and a radius = radius at the specified pos.. erase everything inside. */
+  void makeKGraph(int nodes, qreal radius, QPointF pos);
+
+  /*! make this graph a CGraph with nodes Nodes and a radius = radius at the specified pos. erase everything inside */
+  void makeCGraph(int nodes, qreal radius, QPointF pos);
+
+  /*! Create nodes Nodes in a circular form with radius radius at position pos. */
+  int makeConcentricNodes(int nodes, qreal radius, QPointF pos);
+  
 signals:
   /*! emited when the name changes */
   void nameChanged(const QString& name);
@@ -89,6 +99,7 @@ protected:
   QList<Edge*> _edges;
   QString _name;
   QColor _color;
+
 };
 
 #endif

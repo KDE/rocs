@@ -7,6 +7,11 @@ MultiNode::MultiNode(QPointF position, Graph *parent) : Node(position, parent)
 
 MultiNode::~MultiNode()
 {
+  foreach(Edge *e, _edges)
+  {
+    delete e;
+  }
+  _edges.clear();
 }
 
 bool MultiNode::isConnected(Node* to)

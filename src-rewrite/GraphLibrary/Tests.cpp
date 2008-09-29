@@ -55,6 +55,16 @@ void Tests::graphCollectionGraphDestroyed(int index)
   qDebug() << "Graph at position " << index << "destroyed.";
 }
 
+void Tests::graphCollectionWidthChanged(qreal width)
+{
+  qDebug() << "Width changed to " << width;
+}
+
+void Tests::graphCollectionHeightChanged(qreal height)
+{
+  qDebug() << "Height changed to " << height;
+}
+
 // Graph Specific
 void Tests::graphNameChanged(QString n)
 {
@@ -136,6 +146,8 @@ void Tests::connectSignalsGraphCollection(GraphCollection *gc)
   connect( gc, SIGNAL(graphCreated(Graph*)), this, SLOT(graphCreated(Graph*)));
   connect( gc, SIGNAL(graphRemoved(int)),    this, SLOT(graphRemoved(int)));
   connect( gc, SIGNAL(nameChanged(QString)), this, SLOT(graphCollectionNameChanged(QString)));
+  connect( gc, SIGNAL(heightChanged(qreal)), this, SLOT(graphCollectionHeightChanged(qreal)));
+  connect( gc, SIGNAL(widthChanged(qreal)), this, SLOT(graphCollectionWidthChanged(qreal)));
 }
 
 void Tests::connectSignalsGraph(Graph *graph)

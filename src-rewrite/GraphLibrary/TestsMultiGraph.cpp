@@ -113,8 +113,7 @@ void Tests::testCreatingMultiGraphNodes()
 * 3 -> 5
 * 4 -> 5
 */
-  Graph *graph = new MultiGraph();
-  _graphCollection << graph;
+  Graph *graph = new MultiGraph(&_graphCollection);
   graph->createNode( QPointF(0,50) );
   graph->createNode( QPointF(100, 50) );
   graph->createNode( QPointF(200, 0) );

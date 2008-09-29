@@ -61,6 +61,8 @@ class Tests : public QObject
     void graphCollectionNameChanged(QString n);
     void graphCollectionGraphCreated(Graph *g);
     void graphCollectionGraphDestroyed(int index);
+    void graphCollectionHeightChanged(qreal height);
+    void graphCollectionWidthChanged(qreal width);
 
     // Graph Specific
     void graphNameChanged(QString n);
