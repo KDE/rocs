@@ -1,0 +1,12 @@
+PARTS THAT ARE READY:
+  
+LIBGRAPH - 90%, NEEDS TESTING.
+
+PARTS THAT AREN'T EVEN A LITTLE BIT READY:
+
+GraphDocumentModel
+GraphModel
+NodeModel
+EdgeModel
+
+

@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Rocs
+GenericName=Rocs Graph Theory
+GenericName[es]=Teoría gráfica de Rocs
+GenericName[et]=Rocs graafiteooria
+GenericName[sv]=Rocs grafteori
+Exec=Rocs %i %m -caption "%c"
+Icon=Rocs
+Type=Application
+DocPath=Rocs/rocs.html
+Comment=Graph Theory Tool for Professors and Students.
+Comment[es]=Herramienta de la teoría gráfica para profesores y alumnos.
+Comment[et]=Graafiteooria tööriist nii professoritele kui ka tudengitele.
+Comment[sv]=Grafteoriverktyg för lärare och studenter.
+Terminal=false
+Categories=Qt;KDE;Education;Science;
