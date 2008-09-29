@@ -36,22 +36,25 @@ QString GraphCollection::name() const
   return _name;
 }
 
-
+// set the width of the drawable area
 void GraphCollection::setWidth(qreal width)
 {
   _width = width;
 }
 
+//set the height of the drawable area
 void GraphCollection::setHeight(qreal height)
 {
   _height = height;
 }
 
+// gets the wheight of the drawable area
 qreal GraphCollection::height() const
 {
   return _height;
 }
 
+// sets the width of the drawable area
 qreal GraphCollection::width() const
 {
   return _width;

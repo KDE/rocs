@@ -79,21 +79,20 @@ public:
   /*! Return all edges connected with this node */
   QList<Edge*> edges() const; // TESTED - OK
 
-  // NEED BETTER NAMES FOR THOSE 4 METHODS BELOW.
   /*! Return the first node that this node is connected to. */
-  Node *getAdjacentNode(); // TODO: Need to test
+  virtual Node *getAdjacentNode() = 0; 
 
   /*! return the node connected with this using edge e */
-  Node *getAdjacentNode(Edge *e); // TODO: Need to test
+  virtual Node *getAdjacentNode(Edge *e) = 0; 
 
   /*! Return the first node that has not been visited and this node is connected to */
-  Node *getFirstUnvisitedNode(); // TODO: need to test
+  virtual Node *getFirstUnvisitedNode() = 0; 
 
   /*! Return the first edge on the list, does not care if it's visited or not */
-  Edge *getFirstEdge(); // TODO: need to test
+  virtual Edge *getFirstEdge() = 0; 
 
   /*! Return the first unvisited edge on the list */
-  Edge *getFirstUnvisitedEdge(); // TODO: need to test
+  virtual Edge *getFirstUnvisitedEdge() = 0; 
 
 
 signals:
