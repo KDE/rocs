@@ -18,77 +18,66 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <QSplitter>
-#include <QToolBox>
+// KDE Related Includes
 #include <KLocale>
-#include <QGraphicsView>
-#include <QTreeWidgetItem>
 #include <KAction>
 #include <KStandardAction>
 #include <KActionCollection>
 
-#include <ktexteditor/editor.h>
-#include <ktexteditor/editorchooser.h>
+// UI RELATED INCLUDES
+#include "UI_MainWindow.h"  
+#include "UI_PaletteBarDockWidget.h" 
+#include "UI_GraphLayersDockWidget.h"
+#include "UI_OpenedFilesDockWidget.h"
+#include "UI_GraphEditWidget.h"
 
-#include "UI_MainWindow.h"   // The Main Window
-#include "UI_PaletteBar.h"       // Left Side Toolbox Pallete.
-#include "UI_GraphScene.h"       // Plot-Area
-#include "UI_ScriptingArea.h"    // Script-Area
-#include "UI_FileArea.h"         // handling of opened files
-#include "UI_PropertiesArea.h"   // handling the properties of the graphs and stuff.
-#include "UI_GraphLayers.h"      // Control of the Graph Layers.
-#include "UI_ConfigureDialog.h"  // Configuration of the app
+// MODEL Related Includes
+#include "model_GraphDocument.h"
+#include "model_GraphLayers.h"
 
+// Graph Related Includes
 #include "libgraph_GraphDocument.h"
 
-MainWindow::MainWindow() : KXmlGuiWindow()
-{
+
+MainWindow::MainWindow() : KXmlGuiWindow(){
+
+  _documentModel = 0;
+  _graphLayersModel = 0;
+
   setObjectName ( "Rocs" );
-  _editor = KTextEditor::EditorChooser::editor();
-  _editor -> setSimpleMode ( true );
 
-  _graphView       = new QGraphicsView 	 ( this );
-  _paletteBar      = new PaletteBar 	 ( this );
-  _scriptingArea   = new ScriptingArea 	 ( this );
-  _propertiesArea  = new PropertiesArea  ( this );
-  _graphLayers     = new GraphLayers 	 ( this );
-  _configureDialog = new ConfigureDialog ( this );
-  _centralWidget   = new QSplitter 	 ( this );
-  _rightToolBox    = new QToolBox 	 ( this );
-  _fileArea        = new FileArea 	 ( this );
-
-  setCorner ( Qt::TopLeftCorner,     Qt::LeftDockWidgetArea );
-  setCorner ( Qt::BottomLeftCorner,  Qt::LeftDockWidgetArea );
-  setCorner ( Qt::TopRightCorner,    Qt::RightDockWidgetArea );
-  setCorner ( Qt::BottomRightCorner, Qt::RightDockWidgetArea );
-
+  setupModels();
   setupActions();
   setupWidgets();
   setupGUI();
 }
 
-void MainWindow::setupWidgets()
-{
-  addDockWidget ( Qt::LeftDockWidgetArea, _paletteBar );
+void MainWindow::setupModels(){
+  _documentModel = new GraphDocumentModel( &_documents );
+  _graphLayersModel = new GraphLayersModel( 0 );
+}
+void MainWindow::setupWidgets(){
+  setCorner ( Qt::TopLeftCorner,     Qt::LeftDockWidgetArea );
+  setCorner ( Qt::BottomLeftCorner,  Qt::LeftDockWidgetArea );
+  setCorner ( Qt::TopRightCorner,    Qt::RightDockWidgetArea );
+  setCorner ( Qt::BottomRightCorner, Qt::RightDockWidgetArea );
 
-  _rightToolBox->addItem ( _fileArea, 		i18n ( "Opened Files" 	) );
-  _rightToolBox->addItem ( _propertiesArea, 	i18n ( "Properties" 	) );
-  _rightToolBox->addItem ( _graphLayers, 	i18n ( "Graphs" 	) );
+  _OpenedFiles     = new OpenedFilesDockWidget ( _documentModel, this );
+  _PaletteBar      = new PaletteBarDockWidget  ( this );
+  _GraphLayers     = new GraphLayersDockWidget ( this );
+  _GraphEdit       = new GraphEditWidget( this );
 
-  QDockWidget *dockWidget = new QDockWidget ( 	i18n ( "Tool Box" ), this );
-  dockWidget -> setObjectName ( "RightToolBox" );
-  dockWidget->setWidget ( _rightToolBox );
-  dockWidget->setFeatures ( QDockWidget::NoDockWidgetFeatures );
-  addDockWidget ( Qt::RightDockWidgetArea, dockWidget );
+  addDockWidget ( Qt::LeftDockWidgetArea, _PaletteBar );
+  addDockWidget ( Qt::LeftDockWidgetArea, _GraphLayers );
+  addDockWidget ( Qt::RightDockWidgetArea, _OpenedFiles );
 
-  _centralWidget->setOrientation ( Qt::Vertical );
-  _centralWidget->addWidget ( _graphView );
-  _centralWidget->addWidget ( _scriptingArea );
+  setCentralWidget ( _GraphEdit );
 
-  setCentralWidget ( _centralWidget );
+  connect(_OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
+	  _GraphLayers, SLOT(setGraphDocument(libgraph::GraphDocument*)));
+
 }
 
-void MainWindow::setupActions()
-{
+void MainWindow::setupActions(){
   KStandardAction::quit ( this,    SLOT ( quit() ),        actionCollection() );
 }

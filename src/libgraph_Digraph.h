@@ -21,7 +21,7 @@ public:
   ~Digraph();
 
   /*! Add a edge between two nodes */
-  Edge* addEdge(Node *from, Node *to);
+  Edge* createEdge(Node *from, Node *to);
 
   /*! Creates a new Node on Position position */
   Node* createNode(QPointF position);

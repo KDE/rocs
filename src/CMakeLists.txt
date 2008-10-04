@@ -18,21 +18,34 @@ set(Rocs_SRCS
   Main.cpp
 
   # UI Related Files
-  UI_MainWindow.cpp
-  UI_ConfigureDialog.cpp
-  UI_FileArea.cpp
-  UI_GraphLayers.cpp
-  UI_GraphScene.cpp
-  UI_PaletteBar.cpp
-  UI_PropertiesArea.cpp
-  UI_ScriptingArea.cpp
+   UI_MainWindow.cpp
+  # UI_ConfigureDialog.cpp
+   UI_OpenedFilesDockWidget.cpp
+  # UI_GraphEditWidget.cpp
+   UI_GraphLayersDockWidget.cpp
+  # UI_GraphScene.cpp
+   UI_PaletteBarDockWidget.cpp
+  # UI_PropertiesArea.cpp
+  # UI_ScriptingArea.cpp
   UI_PaletteLayout.cpp  # stolen from Step (remember to kiss  Vladimir Kuznetsov
   UI_Separator.cpp
   UI_PaletteScrollArea.cpp
+  UI_GraphEditWidget.cpp
 
   # Actions related files
-  action_AbstractAction.cpp
-  action_AddNode.cpp
+  # action_AbstractAction.cpp
+  # action_AddNode.cpp
+  # action_AddEdge.cpp
+  # action_MoveNode.cpp
+
+  # graphicsitems for the graph
+  # graphicsitem_Edge.cpp
+  # graphicsitem_Graph.cpp
+  # graphicsitem_Node.cpp
+  
+  #models for the List, TreeView and stuff
+  model_GraphDocument.cpp
+  model_GraphLayers.cpp
 
   # Graph Library
   libgraph_Digraph.cpp
@@ -46,6 +59,13 @@ set(Rocs_SRCS
   libgraph_SimpleGraph.cpp
   libgraph_SimpleNode.cpp
 
+)
+
+kde4_add_ui_files( 
+  Rocs_SRCS 
+  GraphLayersDockWidget.ui
+  OpenedFilesDockWidget.ui
+  GraphEditWidget.ui
 )
 
 # Resource Files

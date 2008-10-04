@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QColor>
 #include <QString>
+#include  <QVariant>
 
 class QPointF;
 
@@ -24,7 +25,10 @@ class Graph : public QObject
 
 public:
   /*! Default Constructor */
-  Graph(GraphDocument *parent);						// TESTED - OK
+  Graph(GraphDocument *parent = 0);// TESTED - OK
+
+  /*! o.o.. */
+  Graph(const Graph& graph);
 
   /*! Default Destructor */
   virtual ~Graph(); 					// TESTED - OK
@@ -42,10 +46,10 @@ public:
   QColor color() const; 				// TESTED - OK
 
   /*! Creates a new Node */
-  virtual Node* createNode(QPointF Position) = 0;	// PURE VIRTUAL, TEST EACH OF INHERETED ONES.
+  virtual Node* createNode(QPointF Position);	// PURE VIRTUAL, TEST EACH OF INHERETED ONES.
 
   /*! Creates a new Edge between 2 nodes */
-  virtual Edge* createEdge(Node* from, Node* to) = 0;	// PURE VIRTUAL, TEST EACH OF INHERETED ONES.
+  virtual Edge* createEdge(Node* from, Node* to);	// PURE VIRTUAL, TEST EACH OF INHERETED ONES.
 
   /*! Removes a node */
   void removeNode(int index);				// TESTED - OK
@@ -79,7 +83,10 @@ public:
 
   /*! Create nodes Nodes in a circular form with radius radius at position pos. */
   int makeConcentricNodes(int nodes, qreal radius, QPointF pos);
-  
+
+  /*! return a definition of this class as a string */
+  QString toString() const;
+
 signals:
   /*! emited when the name changes */
   void nameChanged(const QString& name);
@@ -108,4 +115,6 @@ protected:
 };
 
 };
+
+Q_DECLARE_METATYPE(libgraph::Graph*);
 #endif

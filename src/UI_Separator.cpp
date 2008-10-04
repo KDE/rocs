@@ -24,24 +24,21 @@
 #include <QVariant>
 #include <QStyleOption>
 
-Separator::Separator ( QWidget* parent ) : QWidget ( parent )
-{
-	setSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Minimum );
-	setProperty ( "isSeparator", true );
+Separator::Separator ( QWidget* parent ) : QWidget ( parent ){
+  setSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Minimum );
+  setProperty ( "isSeparator", true );
 }
 
-QSize Separator::sizeHint() const
-{
-	QStyleOption opt;
-	opt.initFrom ( this );
-	const int extent = style()->pixelMetric ( QStyle::PM_ToolBarSeparatorExtent, &opt, parentWidget() );
-	return QSize ( extent, extent );
+QSize Separator::sizeHint() const{
+  QStyleOption opt;
+  opt.initFrom ( this );
+  const int extent = style()->pixelMetric ( QStyle::PM_ToolBarSeparatorExtent, &opt, parentWidget() );
+  return QSize ( extent, extent );
 }
 
-void Separator::paintEvent ( QPaintEvent * )
-{
-	QPainter p ( this );
-	QStyleOption opt;
-	opt.initFrom ( this );
-	style()->drawPrimitive ( QStyle::PE_IndicatorToolBarSeparator, &opt, &p, parentWidget() );
+void Separator::paintEvent ( QPaintEvent * ){
+  QPainter p ( this );
+  QStyleOption opt;
+  opt.initFrom ( this );
+  style()->drawPrimitive ( QStyle::PE_IndicatorToolBarSeparator, &opt, &p, parentWidget() );
 }

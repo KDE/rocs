@@ -25,19 +25,16 @@
 
 PaletteScrollArea::PaletteScrollArea ( QWidget* parent ) : QScrollArea ( parent ) {}
 
-void PaletteScrollArea::resizeEvent ( QResizeEvent* event )
-{
-	if ( widget() && widget()->layout() )
-	{
-		QSize size ( maximumViewportSize().width(),
-		             widget()->layout()->heightForWidth ( maximumViewportSize().width() ) );
-		if ( size.height() > maximumViewportSize().height() )
-		{
-			int ext = style()->pixelMetric ( QStyle::PM_LayoutHorizontalSpacing );
-			size.setWidth ( maximumViewportSize().width() - verticalScrollBar()->sizeHint().width() - ext );
-			size.setHeight ( widget()->layout()->heightForWidth ( size.width() ) );
-		}
-		widget()->resize ( size );
-	}
-	QScrollArea::resizeEvent ( event );
+void PaletteScrollArea::resizeEvent ( QResizeEvent* event ){
+  
+  if ( widget() && widget()->layout() ){
+    QSize size ( maximumViewportSize().width(), widget()->layout()->heightForWidth ( maximumViewportSize().width() ) );
+    if ( size.height() > maximumViewportSize().height() ){
+      int ext = style()->pixelMetric ( QStyle::PM_LayoutHorizontalSpacing );
+      size.setWidth ( maximumViewportSize().width() - verticalScrollBar()->sizeHint().width() - ext );
+      size.setHeight ( widget()->layout()->heightForWidth ( size.width() ) );
+    }
+    widget()->resize ( size );
+  }
+  QScrollArea::resizeEvent ( event );
 }

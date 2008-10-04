@@ -2,14 +2,12 @@
 #define DINODE_H
 
 #include "libgraph_Node.h"
-namespace libgraph
-{
+namespace libgraph{
 
 class Edge;
 class Graph;
 
-class DiNode : public Node 
-{
+class DiNode : public Node {
 public:
   /*! Default constructor */
   DiNode(QPointF position, Graph *parent);

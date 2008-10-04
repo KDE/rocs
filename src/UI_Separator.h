@@ -23,8 +23,7 @@
 
 #include <QWidget>
 
-class Separator : public QWidget
-{
+class Separator : public QWidget{
   public:
     Separator ( QWidget* parent );
     QSize sizeHint() const ;

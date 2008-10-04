@@ -1,5 +1,3 @@
-#ifndef UI_GRAPHSCENE_H
-#define UI_GRAPHSCENE_H
 
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
@@ -20,13 +18,16 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+#ifndef UI_GRAPHSCENE_H
+#define UI_GRAPHSCENE_H
+
 #include <QGraphicsScene>
 
 class MainWindow;
 class QGraphicsSceneMouseEvent;
 
-namespace libgraph
-{
+namespace libgraph{
   class GraphDocument;
 }
 
@@ -41,8 +42,7 @@ and invockable from the Script Side.
 
 */
 
-class GraphScene : public QGraphicsScene
-{
+class GraphScene : public QGraphicsScene{
 Q_OBJECT
 public:
     /*! 

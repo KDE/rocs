@@ -25,69 +25,38 @@
 #include <QList>
 #include <QStringList>
 
-class PaletteBar;
-class GraphScene;
-class ScriptingArea;
-class FileArea;
-class PropertiesArea;
-class GraphLayers;
-class ConfigureDialog;
-class QSplitter;
-class Graph;
-class QToolBox;
-class QGraphicsView;
-class QTreeWidgetItem;
-class GraphCollection;
+/* WORKING */
+class PaletteBarDockWidget;
+class OpenedFilesDockWidget;
+class GraphLayersDockWidget;
+class GraphEditWidget;
+class GraphDocumentModel;
+class GraphLayersModel;
 
-namespace KTextEditor
-{
-  class View;
-  class Editor;
-  class Document;
-};
-
-namespace libgraph
-{
+namespace libgraph{
   class GraphDocument;
 };
 
-/*! 
-\brief the main window of the program
-This class is responsable for connecting all signals and stuff to all the other parts of the Gui
-*/
-class MainWindow : public KXmlGuiWindow
-{
+class MainWindow : public KXmlGuiWindow{
 Q_OBJECT
 
 public:
-	/*! defalt constructor */
-	MainWindow();
-	
-
-public slots:
-
-signals:
-	/*! send a message to the debug() method 
-	\param s the message to be send
-	*/
-	void sendDebugMsg ( const QString& s );
-
+  /*! defalt constructor */
+  MainWindow();
+  
 private:
-	//! Widgets being displayed
-	PaletteBar*      _paletteBar; //! area where the icons of actions will be.
-	QGraphicsView*   _graphView;  //! area where you can draw graphs.
-	ScriptingArea*   _scriptingArea; //! area where you can create your scripts.
-	FileArea*        _fileArea; 	//! area where the opened files will be
-	PropertiesArea*  _propertiesArea;  //! *NOT IMPLEMENTED* edit the properties of the graphs, nodes and edges.
-	GraphLayers*     _graphLayers;	//! *NOT IMPLEMENTED* area where the layers of the active graph will appear.
-	ConfigureDialog* _configureDialog; //! *NOT IMPLEMENTED* the configure dialog.
-	QSplitter*       _centralWidget; //! The container for the Script Area and GraphcsView
-	QToolBox*        _rightToolBox;	//! The toolbox that will hold the the FileArea, Properties and stuff.
-	KTextEditor::Editor* _editor;	//! The active editor.
+  PaletteBarDockWidget*  _PaletteBar;   // area where the icons of actions will be.
+  OpenedFilesDockWidget* _OpenedFiles;  // area where the opened files will be
+  GraphLayersDockWidget* _GraphLayers;  // area where the layers of the active graph will appear.
+  GraphEditWidget* _GraphEdit; // Area where the graph will be editted.
 
-	void setupWidgets(); //! Setup all the widgets
-	void setupActions(); //! Setup all the actions.
+  void setupModels();  // setup all the models to be used on the views.
+  void setupWidgets(); // Setup all the widgets
+  void setupActions(); // Setup all the actions.
 
+  QList<libgraph::GraphDocument*> _documents;
+  GraphDocumentModel *_documentModel;
+  GraphLayersModel   *_graphLayersModel;
 };
 
 #endif

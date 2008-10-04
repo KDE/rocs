@@ -24,24 +24,29 @@
 #include <KCmdLineArgs>
 #include "UI_MainWindow.h"
 
-int main ( int argc, char *argv[] )
-{
-	KAboutData aboutData ( "Rocs",
-	                       0,
-	                       ki18n ( "Rocs 1" ),
-	                       "1.0",
-	                       ki18n ( "Graph Theory Tool" ),
-	                       KAboutData::License_GPL,
-	                       ki18n ( "(c) 2008" ),
-	                       ki18n ( "Thanks to Ugo Sangiori" ),
-	                       "",
-	                       "submit@bugs.kde.org" );
+#include "libgraph_GraphDocument.h"
+#include "libgraph_Graph.h"
+#include "model_GraphDocument.h"
 
-	KCmdLineArgs::init ( argc, argv, &aboutData );
-	KApplication app;
+#include <QListView>
+#include <QDebug>
+int main ( int argc, char *argv[] ){
+  KAboutData aboutData ( "Rocs",
+                         0,
+                         ki18n ( "Rocs 1" ),
+                         "1.0",
+                         ki18n ( "Graph Theory Tool" ),
+                         KAboutData::License_GPL,
+                         ki18n ( "(c) 2008" ),
+                         ki18n ( "Thanks to Ugo Sangiori" ),
+                         "",
+                         "submit@bugs.kde.org" );
 
-	MainWindow *window = new MainWindow();
-	window->show();
+  KCmdLineArgs::init ( argc, argv, &aboutData );
+  KApplication app;
 
-	return app.exec();
+  MainWindow *window = new MainWindow();
+  window->show();
+
+  return app.exec();
 }

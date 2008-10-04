@@ -26,7 +26,7 @@
 #include <KLocale>
 #include <KIcon>
 
-#include "UI_PaletteBar.h"
+#include "UI_PaletteBarDockWidget.h"
 #include "UI_MainWindow.h"
 #include "UI_PaletteScrollArea.h"
 #include "UI_PaletteLayout.h"
@@ -37,10 +37,7 @@
 
 #include "settings.h" //! AUTO GENERATED!  ( *Hate* this u_u )
 
-#include "UI_PaletteBar.moc" //! AUTO GENERATED! ( *Hate* this >_< )
-
-
-PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags ) 
+PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags flags ) 
   : QDockWidget ( i18n ( "Palette" ), parent, flags ){
   setObjectName ( "palleteBar" );
   setAllowedAreas ( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
@@ -146,7 +143,7 @@ PaletteBar::PaletteBar ( QWidget* parent, Qt::WindowFlags flags )
   _widget->setContextMenuPolicy ( Qt::ActionsContextMenu );
 }
 
-void PaletteBar::createToolButton ( AbstractAction* action ){
+void PaletteBarDockWidget::createToolButton ( AbstractAction* action ){
   _actionGroup.append( action );
   QToolButton* button = new QToolButton ( _widget );
   button->setToolButtonStyle ( Settings::showButtonText() ? Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly );
@@ -158,7 +155,7 @@ void PaletteBar::createToolButton ( AbstractAction* action ){
   _layout->addWidget ( button );
 }
 
-void PaletteBar::showButtonTextToggled ( bool b ){
+void PaletteBarDockWidget::showButtonTextToggled ( bool b ){
   Settings::setShowButtonText ( b );
   Settings::self()->writeConfig();
   foreach ( QToolButton* button, _toolButtons ){
@@ -168,11 +165,11 @@ void PaletteBar::showButtonTextToggled ( bool b ){
   _scrollArea->setMinimumWidth ( _widget->minimumSizeHint().width() );
 }
 
-bool PaletteBar::event ( QEvent* event ){
+bool PaletteBarDockWidget::event ( QEvent* event ){
   return QDockWidget::event ( event );
 }
 
-void PaletteBar::changeActiveGraph(GraphScene* graphScene){
+void PaletteBarDockWidget::changeActiveGraph(GraphScene* graphScene){
   
   if (_actionGroup.size() == 0) return;
   foreach(AbstractAction *action, _actionGroup){

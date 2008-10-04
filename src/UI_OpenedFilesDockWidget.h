@@ -1,8 +1,8 @@
+
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
-   With Sponsorship from Faculdades Ruy Barbosa
 
    Rocs is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -19,15 +19,37 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_FileArea.h"
-#include "UI_MainWindow.h"
-#include "UI_GraphScene.h"
+#ifndef UI_OPENED_FILES_DOCK_WIDGET_H
+#define UI_OPENED_FILES_DOCK_WIDGET_H
 
-#include "libgraph_GraphDocument.h"
-#include "libgraph_Graph.h"
+#include "ui_OpenedFilesDockWidget.h"
+#include <QDockWidget>
 
-FileArea::FileArea ( MainWindow *parent ) : QWidget ( parent )
-{
-  
+class GraphDocumentModel;
+
+namespace libgraph{
+  class GraphDocument;
 }
 
+/*! 
+  \brief The Graph-Layer widget.
+  This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
+*/
+class OpenedFilesDockWidget : public QDockWidget, public Ui::OpenedFilesDockWidget{
+  Q_OBJECT
+
+  public:
+    OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent = 0, Qt::WindowFlags flags = 0);
+  
+  signals:
+    void activeDocumentChanged(libgraph::GraphDocument *document);
+
+  private slots:
+    void changeActiveDocument(const QModelIndex& model);
+    void on__btnNewFile_clicked();
+
+  private:
+    GraphDocumentModel *_documentModel;
+};
+
+#endif

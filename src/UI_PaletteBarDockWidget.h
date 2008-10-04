@@ -1,5 +1,5 @@
-#ifndef UI_PALLETEBAR_H
-#define UI_PALLETEBAR_H
+#ifndef UI_PALLETEBARDOCKWIDGET_H
+#define UI_PALLETEBARDOCKWIDGET_H
 
 /* This file is part of Step, modified to work on Rocs.
    Copyright (C) 2007 Vladimir Kuznetsov <ks.vladimir@gmail.com> (Original Author)
@@ -35,14 +35,14 @@ class AbstractAction;
 this is a container class for use with AbstractAction classes that will create
 a item for each AbstractAction instance on the menu.
 */
-class PaletteBar : public QDockWidget{
+class PaletteBarDockWidget : public QDockWidget{
   Q_OBJECT
   public:
     /*!   default constructor 
       \param parent the MainWindow
       \param flags the window flags.
     */
-    PaletteBar ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    PaletteBarDockWidget ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
   
     /*! 
       whenever the active graph scene is changed, this method must be invocked 

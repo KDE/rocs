@@ -3,24 +3,17 @@
 
 using namespace libgraph;
 
-SimpleNode::SimpleNode(QPointF position, Graph *parent) : Node(position, parent)
-{
+SimpleNode::SimpleNode(QPointF position, Graph *parent) : Node(position, parent){}
 
-}
-
-SimpleNode::~SimpleNode()
-{
-  foreach(Edge *e, _edges)
-  {
+SimpleNode::~SimpleNode(){
+  foreach(Edge *e, _edges)  {
     delete e;
   }
   _edges.clear();
 }
 
-bool SimpleNode::isConnected(Node *to)
-{
- foreach(Edge *e, _edges)
- {  // Doesn't care the direction.
+bool SimpleNode::isConnected(Node *to){
+ foreach(Edge *e, _edges) {  // Doesn't care the direction.
     if ((e->to() == to) && (e->from() == this)) return true;
     if ((e->from() == to) && (e->to() == this)) return true;
  }
@@ -28,14 +21,12 @@ bool SimpleNode::isConnected(Node *to)
 }
 
 
-void SimpleNode::addEdge(Edge *e)
-{
+void SimpleNode::addEdge(Edge *e){
   Node *from = e->from();
   Node *to = e->to();
 
   // Do not insert same edge 2 times.
-  foreach(Edge *edge, _edges)
-  {
+  foreach(Edge *edge, _edges)  {
     if ((edge->to() == to) && (edge->from() == from)) return;
     if ((edge->from() == to) && (edge->to() == from))   return;
   }
@@ -44,30 +35,24 @@ void SimpleNode::addEdge(Edge *e)
 }
 
 // Return the first node that this node is connected to. 
-Node* SimpleNode::getAdjacentNode()
-{
-  if (_edges.size() == 0)
-  {
+Node* SimpleNode::getAdjacentNode(){
+  if (_edges.size() == 0){
     return 0;
   }
   return getAdjacentNode( _edges[0] );
 }
 
 // Return the node connected with this node using edge e.
-Node* SimpleNode::getAdjacentNode(Edge *e)
-{
-  if (_edges.indexOf(e) == -1)
-  {
+Node* SimpleNode::getAdjacentNode(Edge *e){
+  if (_edges.indexOf(e) == -1){
     return 0;
   }
   return ( e->from() == this) ? e->to() : e-> from();
 }
 
 // Return the first node that has not been visited and this node is connected to 
-Node* SimpleNode::getFirstUnvisitedNode()
-{
-  foreach(Edge *e, _edges)
-  {
+Node* SimpleNode::getFirstUnvisitedNode(){
+  foreach(Edge *e, _edges){
     Node *n = getAdjacentNode(e);
     if ( !n -> visited() ){
       return n;
@@ -78,22 +63,15 @@ Node* SimpleNode::getFirstUnvisitedNode()
 }
 
 // Return the first edge on the list, does not care if it's visited or not 
-Edge* SimpleNode::getFirstEdge()
-{
-  if (_edges.size() == 0)
-  {
-    return 0;
-  }
+Edge* SimpleNode::getFirstEdge(){
+  if (_edges.size() == 0) return 0;
   return _edges[0];
 }
 
 // Return the first unvisited edge on the list
-Edge* SimpleNode::getFirstUnvisitedEdge()
-{
-  foreach(Edge *e, _edges)
-  {
-    if ( ! e->visited() )
-    {
+Edge* SimpleNode::getFirstUnvisitedEdge(){
+  foreach(Edge *e, _edges){
+    if ( ! e->visited() ){
       return e;
     }
   }

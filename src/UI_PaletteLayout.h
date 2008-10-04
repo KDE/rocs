@@ -24,36 +24,35 @@
 #include <QVBoxLayout>
 
 /*! \brief defines the layout on the pallete bar */
-class PaletteLayout: public QLayout
-{
-	public:
-		PaletteLayout ( QWidget *parent, int margin = 0, int spacing = -1 );
-		PaletteLayout ( int spacing = -1 ) ;
-		~PaletteLayout();
-		void addItem ( QLayoutItem *item ) ;
-		int count() const;
-		QLayoutItem* itemAt ( int index ) const ;
-		QLayoutItem* takeAt ( int index ) ;
-		Qt::Orientations expandingDirections() const ;
-		bool hasHeightForWidth() const ;
-		int heightForWidth ( int width ) const ;
-		void setGeometry ( const QRect &rect ) ;
-		QSize sizeHint() const ;
-		QSize minimumSize() const ;
-		void setOneLine ( bool b ) ;
-		bool isOneLine() const ;
-		void invalidate() ;
+class PaletteLayout: public QLayout{
+  public:
+    PaletteLayout ( QWidget *parent, int margin = 0, int spacing = -1 );
+    PaletteLayout ( int spacing = -1 ) ;
+    ~PaletteLayout();
+    void addItem ( QLayoutItem *item ) ;
+    int count() const;
+    QLayoutItem* itemAt ( int index ) const ;
+    QLayoutItem* takeAt ( int index ) ;
+    Qt::Orientations expandingDirections() const ;
+    bool hasHeightForWidth() const ;
+    int heightForWidth ( int width ) const ;
+    void setGeometry ( const QRect &rect ) ;
+    QSize sizeHint() const ;
+    QSize minimumSize() const ;
+    void setOneLine ( bool b ) ;
+    bool isOneLine() const ;
+    void invalidate() ;
 
-	protected:
-		void resetCache() ;
-		int doLayout ( const QRect &rect, bool testOnly ) const;
-		QList<QLayoutItem *> itemList;
-		bool oneLine;
+  protected:
+    void resetCache() ;
+    int doLayout ( const QRect &rect, bool testOnly ) const;
+    QList<QLayoutItem *> itemList;
+    bool oneLine;
 
-		mutable bool isCachedMinimumSize;
-		mutable bool isCachedHeightForWidth;
-		mutable QSize cachedMinimumSize;
-		mutable QSize cachedHeightForWidth;
+    mutable bool isCachedMinimumSize;
+    mutable bool isCachedHeightForWidth;
+    mutable QSize cachedMinimumSize;
+    mutable QSize cachedHeightForWidth;
 };
 
 #endif

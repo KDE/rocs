@@ -24,22 +24,18 @@
 #include <iostream>
 #include <QGraphicsSceneMouseEvent>
 
-GraphScene::GraphScene ( QObject* parent ) : QGraphicsScene ( parent )
-{
+GraphScene::GraphScene ( QObject* parent ) : QGraphicsScene ( parent ){
 
 }
 
-void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
-{
+void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent){
 
 }
 
-void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
-{
+void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent){
 
 }
 
-void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
-{
+void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent){
 
 }

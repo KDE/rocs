@@ -23,7 +23,7 @@ public:
   enum{ simple, multi, digraph };
 
   /*! Default Constructor */
-  GraphDocument();
+  GraphDocument(const QString name = QString());
   
   /*! Default Destructor */
   ~GraphDocument();
@@ -52,6 +52,9 @@ public:
   /*! Gets the Graph at position 'i' on the _graphs list */
   Graph* operator[](int i); 
 
+  /*! Gets the graph at position i on the _graphs list */
+  Graph* at(int i);
+
   /*! Append a grpah on the graph's list */
   void operator<<(Graph *g);
 
@@ -62,7 +65,7 @@ public:
   void prepend(Graph *g);
 
   /*! Creates a new Graph */
-  Graph *addGraph(int type);
+  Graph *addGraph(QString name = "", int type = 1);
   
   /*! Removes the graph at position 'i' */
   void removeAt(int i = 0); 

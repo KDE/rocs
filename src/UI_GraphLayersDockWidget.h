@@ -1,5 +1,3 @@
-#ifndef UI_FILEAREA_H
-#define UI_FILEAREA_H
 
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
@@ -18,38 +16,39 @@
 
    You should have received a copy of the GNU General Public License
    along with Step; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA */
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+#ifndef UI_GRAPH_LAYERS_DOCK_WIDGET_H
+#define UI_GRAPH_LAYERS_DOCK_WIDGET_H
 
 #include <QWidget>
-#include <QList>
-#include <QVariant>
+#include <QListView>
 
-class MainWindow;
+#include "ui_GraphLayersDockWidget.h"
 
-namespace libgraph
-{
+namespace libgraph{
   class GraphDocument;
-};
+}
+class GraphLayersModel;
 
-namespace KTextEditor
-{
-  class Document;
-};
 
-/*!
-  \brief The Opened Files Area.
-  This class is the Area where all the opened files are Stored
+/*! 
+  \brief The Graph-Layer widget.
+  This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
 */
-class FileArea : public QWidget
-{
+class GraphLayersDockWidget : public QDockWidget, public Ui::GraphLayersDockWidget{
   Q_OBJECT
   public:
-    /*! 
-      Default Constructor 
-      \param parent the MainWindow that will hold the FileArea
-    */
-    FileArea ( MainWindow *parent );
- 
+    GraphLayersDockWidget(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+
+  public slots:
+    void setGraphDocument(libgraph::GraphDocument *document);
+    void on__btnNewGraph_clicked();
+
+  private:
+    libgraph::GraphDocument *_document;
+    GraphLayersModel *_layerModel;
 };
 
 #endif
