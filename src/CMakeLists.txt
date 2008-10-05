@@ -33,7 +33,7 @@ set(Rocs_SRCS
   UI_GraphEditWidget.cpp
 
   # Actions related files
-  # action_AbstractAction.cpp
+  action_AbstractAction.cpp
   # action_AddNode.cpp
   # action_AddEdge.cpp
   # action_MoveNode.cpp

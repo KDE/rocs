@@ -76,6 +76,11 @@ void MainWindow::setupWidgets(){
   connect(_OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
 	  _GraphLayers, SLOT(setGraphDocument(libgraph::GraphDocument*)));
 
+  connect(_OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
+	  _PaletteBar, SLOT(setGraphDocument(libgraph::GraphDocument*)));
+
+  connect(_GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
+	  _PaletteBar, SLOT( setGraph(libgraph::Graph*)));
 }
 
 void MainWindow::setupActions(){

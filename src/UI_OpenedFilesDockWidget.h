@@ -45,7 +45,7 @@ class OpenedFilesDockWidget : public QDockWidget, public Ui::OpenedFilesDockWidg
     void activeDocumentChanged(libgraph::GraphDocument *document);
 
   private slots:
-    void changeActiveDocument(const QModelIndex& model);
+    void setActiveDocument(const QModelIndex& model);
     void on__btnNewFile_clicked();
 
   private:

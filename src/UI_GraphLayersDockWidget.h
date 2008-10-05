@@ -29,6 +29,7 @@
 
 namespace libgraph{
   class GraphDocument;
+  class Graph;
 }
 class GraphLayersModel;
 
@@ -44,7 +45,12 @@ class GraphLayersDockWidget : public QDockWidget, public Ui::GraphLayersDockWidg
 
   public slots:
     void setGraphDocument(libgraph::GraphDocument *document);
+    void setActiveGraph(const QModelIndex& modelindex);
     void on__btnNewGraph_clicked();
+
+  signals:
+    void activeGraphChanged(libgraph::Graph *graph);
+    
 
   private:
     libgraph::GraphDocument *_document;

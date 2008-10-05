@@ -31,7 +31,7 @@ OpenedFilesDockWidget::OpenedFilesDockWidget(GraphDocumentModel *model, QWidget*
   _documentModel = model;
   _openedFilesListView->setModel(model);
   connect(_openedFilesListView, SIGNAL(clicked(const QModelIndex&)),
-  this, SLOT(changeActiveDocument(const QModelIndex&)));
+  this, SLOT(setActiveDocument(const QModelIndex&)));
 }
 
 void OpenedFilesDockWidget::on__btnNewFile_clicked()
@@ -39,7 +39,7 @@ void OpenedFilesDockWidget::on__btnNewFile_clicked()
   _openedFilesListView->model()->insertRow(1);
 }
 
-void OpenedFilesDockWidget::changeActiveDocument(const QModelIndex& modelindex){
+void OpenedFilesDockWidget::setActiveDocument(const QModelIndex& modelindex){
   libgraph::GraphDocument *g = _documentModel -> at(modelindex);
   if (g == 0) qDebug() << "Returning a NULL pointer";
   else{

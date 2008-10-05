@@ -24,7 +24,12 @@
 #include <KAction>
 #include <QObject>
 
-#include "UI_GraphScene.h"
+class GraphScene;
+
+namespace libgraph{
+  class Graph;
+  class GraphDocument;
+}
 
 /*! 
 \brief the base class for custom actions.
@@ -35,46 +40,23 @@ class AbstractAction : public KAction
 {
 Q_OBJECT
 public: 
-	/*! 
-		Default constructor 
-		\param type the Type of the Action, each action must have a diferent one. doesn't matter the number.
-		\param parent the pointer of the Container that will hold the action. (hm... should remove this in the future? )
-	*/
-	AbstractAction(int type, QObject *parent);
 
-	/*! 
-		the Type of the action 
-		\return return the type of the action.
-	*/
-	int type() { return _type; }
+  AbstractAction(int type, QObject *parent);
+  int type() { return _type; }
 
-	/*! 
-		when the user selects a different GraphFile from the FileArea this method will be invocked
-		\param graphScene the new GraphScene where this action will work on.
+  void setGraphDocument(libgraph::GraphDocument *graphDocument);
+  void setGraph(libgraph::Graph *graph);
 
-	 */
-	virtual void changeGraphScene(GraphScene *graphScene);
-		
 public slots:
-	
-	/*! 
-		executed just after the user clicks on the Graph Screen 
-		\param type the type of the action to be executed. if the type is the same as this action, then this action will be executed.
-		\param pos the position on the QGraphcsView area that will be affected when this action is executed.
-	
-	*/
-	virtual void execute(int type, QPointF pos) = 0;
-	
-	/*! Changes the action that will be executed 
-	after the user clicks on the Graph Screen */ 
-	void sendExecuteBit();
+
+  virtual void execute(int type, QPointF pos) = 0;
+  void sendExecuteBit();
 
 protected:
 
-	int _type; //! the type, so the program can know what is being executed.
-	GraphScene *_graphScene; //! The main drawing area.
-
-
+  int _type;
+  libgraph::GraphDocument *_graphDocument; 
+  libgraph::Graph *_graph;
 };
 
 #endif

@@ -54,79 +54,6 @@ PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags fl
   _layout->setSpacing ( 0 );
   _layout->setOneLine ( Settings::showButtonText() );
 
-  
-  // createToolButton ( new AddNodeAction( _actionGroup.size(), this) );
-
-  // _layout->addWidget ( new Separator ( _widget ) );
-   /*= new KAction ( i18n ( "Pointer" ), this );
-  tmpAction->setToolTip ( i18n ( "Selection pointer" ) );
-  tmpAction->setIcon ( KIcon ( "pointer" ) );
-  tmpAction->setCheckable ( true );
-  tmpAction->setChecked ( true );
-  tmpAction->setProperty ( "rocs_action", GraphScene::SingleSelection );
-  _actionGroup->addAction ( tmpAction );
-  createToolButton ( tmpAction );
-
-  tmpAction = new KAction ( i18n ( "Square Selection" ), this );
-  tmpAction->setToolTip ( i18n ( "Square Selection tool" ) );
-  tmpAction->setIcon ( KIcon ( "pointer" ) );
-  tmpAction->setCheckable ( true );
-  tmpAction->setChecked ( false );
-  tmpAction->setProperty ( "rocs_action", GraphScene::SquareSelection );
-  _actionGroup->addAction ( tmpAction );
-  createToolButton ( tmpAction );
-
-  tmpAction = new KAction ( i18n ( "Move" ), this );
-  tmpAction->setToolTip ( i18n ( "Move Selected" ) );
-  tmpAction->setIcon ( KIcon ( "pointer" ) );
-  tmpAction->setCheckable ( true );
-  tmpAction->setChecked ( false );
-  tmpAction->setProperty ( "rocs_action", GraphScene::Move );
-  _actionGroup->addAction ( tmpAction );
-  createToolButton ( tmpAction );
-
-  createSeparator();
-*/
-
-/*
-  tmpAction = new KAction ( i18n ( "Add Edge" ), this );
-  tmpAction->setToolTip ( i18n ( "Connects two nodes with an edge" ) );
-  tmpAction->setIcon ( KIcon ( "pointer" ) );
-  tmpAction->setCheckable ( true );
-  tmpAction->setChecked ( false );
-  tmpAction->setProperty ( "rocs_action", GraphScene::AddEdge );
-  _actionGroup->addAction ( tmpAction );
-  createToolButton ( tmpAction );
-
-  createSeparator();
-
-  tmpAction = new KAction ( i18n ( "Create Complete Graph" ), this );
-  tmpAction->setToolTip ( i18n ( "Creates a Graph with N vertices interconected" ) );
-  tmpAction->setIcon ( KIcon ( "pointer" ) );
-  tmpAction->setCheckable ( true );
-  tmpAction->setChecked ( false );
-  tmpAction->setProperty ( "rocs_action", GraphScene::MakeKGraph );
-  _actionGroup->addAction ( tmpAction );
-  createToolButton ( tmpAction );
-
-  tmpAction = new KAction ( i18n ( "Create a Circular Graph" ), this );
-  tmpAction->setToolTip ( i18n ( "Create a Graph with N vertices, connected as a ring" ) );
-  tmpAction->setIcon ( KIcon ( "pointer" ) );
-  tmpAction->setCheckable ( true );
-  tmpAction->setChecked ( false );
-  tmpAction->setProperty ( "rocs_action", GraphScene::MakeCGraph );
-  _actionGroup->addAction ( tmpAction );
-  createToolButton ( tmpAction );
-
-  tmpAction = new KAction ( i18n ( "Create Whell Graph" ), this );
-  tmpAction->setToolTip ( i18n ( "Creates a Graph with N vertices interconected" ) );
-  tmpAction->setIcon ( KIcon ( "pointer" ) );
-  tmpAction->setCheckable ( true );
-  tmpAction->setChecked ( false );
-  tmpAction->setProperty ( "rocs_action", GraphScene::MakeKGraph );
-  _actionGroup->addAction ( tmpAction );
-  createToolButton ( tmpAction ); */
-
   _scrollArea->setWidget ( _widget );
   _scrollArea->setMinimumWidth ( _widget->minimumSizeHint().width() );
 
@@ -169,11 +96,11 @@ bool PaletteBarDockWidget::event ( QEvent* event ){
   return QDockWidget::event ( event );
 }
 
-void PaletteBarDockWidget::changeActiveGraph(GraphScene* graphScene){
+void PaletteBarDockWidget::setActiveGraph(libgraph::Graph *graph){
   
   if (_actionGroup.size() == 0) return;
   foreach(AbstractAction *action, _actionGroup){
-    action->changeGraphScene(graphScene);
+    action->setGraph(graph);
   }
 }
 

@@ -22,21 +22,19 @@
 
 AbstractAction::AbstractAction(int type, QObject *parent) : KAction(parent)
 {
-		_graphScene = 0;
-		_type = type; 
+  _graphDocument = 0;
+  _graph = 0;
+  _type = type; 
 }
 
-void AbstractAction::changeGraphScene(GraphScene *graphScene)
+void AbstractAction::setGraphDocument( libgraph::GraphDocument *graphDocument)
 {
-	if (_graphScene != 0)
-	{
-		disconnect(this, 0, _graphScene, 0);
-	}
-	_graphScene = graphScene;
-	connect(this, SIGNAL(triggered()), this, SLOT(sendExecuteBit()));
-	connect(_graphScene, SIGNAL(executeAction(int, QPointF)), this, SLOT(execute(int, QPointF)));
+
 }
 
+void AbstractAction::setGraph(libgraph::Graph *graph){
+  
+}
 void AbstractAction::sendExecuteBit()
 {
 

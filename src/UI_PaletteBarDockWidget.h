@@ -1,6 +1,3 @@
-#ifndef UI_PALLETEBARDOCKWIDGET_H
-#define UI_PALLETEBARDOCKWIDGET_H
-
 /* This file is part of Step, modified to work on Rocs.
    Copyright (C) 2007 Vladimir Kuznetsov <ks.vladimir@gmail.com> (Original Author)
    Tomaz Canabrava - Rocs Modifications
@@ -19,6 +16,10 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+#ifndef UI_PALLETEBARDOCKWIDGET_H
+#define UI_PALLETEBARDOCKWIDGET_H
+
 #include <QDockWidget>
 #include <QList>
 
@@ -30,6 +31,10 @@ class QActionGroup;
 class PaletteLayout;
 class GraphScene;
 class AbstractAction;
+
+namespace libgraph{
+  class Graph;
+}
 
 /*! \brief this class holds all the buttons of the pallete.
 this is a container class for use with AbstractAction classes that will create
@@ -50,7 +55,7 @@ class PaletteBarDockWidget : public QDockWidget{
       \param graphScene the new Scene.
     */
     
-    void changeActiveGraph(GraphScene* graphScene);
+    void setActiveGraph(libgraph::Graph* graphScene);
 
   protected slots:
     /*! shows or hides the text on the buttons

@@ -36,6 +36,8 @@ GraphLayersDockWidget::GraphLayersDockWidget(QWidget* parent, Qt::WindowFlags fl
 
   setupUi(this);
   _btnNewGraph ->setEnabled(false);
+  connect(_graphLayersListView, SIGNAL(clicked(const QModelIndex&)),
+   this, SLOT(setActiveGraph(const QModelIndex&)));
 }
 
 void GraphLayersDockWidget::on__btnNewGraph_clicked()
@@ -50,7 +52,7 @@ void GraphLayersDockWidget::on__btnNewGraph_clicked()
 
 void GraphLayersDockWidget::setGraphDocument(libgraph::GraphDocument *document)
 {
-  qDebug() << "Got The Doc";
+  qDebug() << "Got The Graph";
   if ( _layerModel != 0) delete _layerModel;
   _document = document;
   _layerModel = new GraphLayersModel( document );
@@ -58,3 +60,11 @@ void GraphLayersDockWidget::setGraphDocument(libgraph::GraphDocument *document)
   _btnNewGraph -> setEnabled(true);
 }
 
+void GraphLayersDockWidget::setActiveGraph(const QModelIndex& modelindex){
+  libgraph::Graph *g = _layerModel -> at(modelindex);
+  if (g == 0) qDebug() << "Returning a NULL pointer";
+  else{
+    emit activeGraphChanged( g );
+    qDebug() << "Send the Graph at position " << modelindex.row();
+  }
+}
