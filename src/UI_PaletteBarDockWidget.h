@@ -33,6 +33,7 @@ class GraphScene;
 class AbstractAction;
 
 namespace libgraph{
+  class GraphDocument;
   class Graph;
 }
 
@@ -48,19 +49,10 @@ class PaletteBarDockWidget : public QDockWidget{
       \param flags the window flags.
     */
     PaletteBarDockWidget ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
-  
-    /*! 
-      whenever the active graph scene is changed, this method must be invocked 
-      to atualize the links between the buttons and the scene.
-      \param graphScene the new Scene.
-    */
-    
-    void setActiveGraph(libgraph::Graph* graphScene);
-
-  protected slots:
-    /*! shows or hides the text on the buttons
-    \param b if true, shows the buttons, if false hides it. */
-    void showButtonTextToggled ( bool b );
+  public slots:
+    void setGraphDocument(libgraph::GraphDocument *document);
+    void setGraph(libgraph::Graph* graph);
+    void showButtonTextToggled ( bool b );   
 
   protected:
     

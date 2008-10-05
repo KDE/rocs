@@ -145,3 +145,13 @@ void GraphDocument::clear(){
 int GraphDocument::indexOf(Graph *g){
   return _graphs.indexOf(g);
 }
+
+// sets the current script on this file
+void GraphDocument::setScript(const QString& script){
+  _script = script;
+}
+
+// gets the current script on this file
+QString GraphDocument::script(){
+  return _script;
+}

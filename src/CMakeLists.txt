@@ -23,7 +23,7 @@ set(Rocs_SRCS
    UI_OpenedFilesDockWidget.cpp
   # UI_GraphEditWidget.cpp
    UI_GraphLayersDockWidget.cpp
-  # UI_GraphScene.cpp
+   UI_GraphScene.cpp
    UI_PaletteBarDockWidget.cpp
   # UI_PropertiesArea.cpp
   # UI_ScriptingArea.cpp
@@ -41,7 +41,7 @@ set(Rocs_SRCS
   # graphicsitems for the graph
   # graphicsitem_Edge.cpp
   # graphicsitem_Graph.cpp
-  # graphicsitem_Node.cpp
+  graphicsitem_Node.cpp
   
   #models for the List, TreeView and stuff
   model_GraphDocument.cpp

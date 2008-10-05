@@ -46,7 +46,7 @@ class GraphDocumentModel : public QAbstractListModel
       libgraph::GraphDocument *at(const QModelIndex& index);
   private:
     QList<libgraph::GraphDocument*>& _documents;
-  
+    
 };
 
 #endif

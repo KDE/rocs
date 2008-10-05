@@ -30,16 +30,35 @@ namespace KTextEditor{
   class Document;
 }
 
+namespace libgraph{
+  class GraphDocument;
+  class Graph;
+  class Node;
+  class Edge;
+}
+
+class GraphScene;
+class MainWindow;
+
 class GraphEditWidget : public QWidget, public Ui::GraphEditWidget{
+Q_OBJECT  
 public:
-  GraphEditWidget(QWidget *parent = 0);
+  GraphEditWidget(MainWindow *parent = 0);
   QString text() const;
   void setDocument ( KTextEditor::Document *d );
 
+public slots:
+  void setGraphDocument(libgraph::GraphDocument *gd);
+
 private:
+  void drawGraphOnScene(libgraph::Graph *g);
   KTextEditor::Editor *_editor;
   KTextEditor::View *_txtEditScriptView;
+  
   KTextEditor::Document *_txtEditScriptDocument;
+  GraphScene *_graphScene;
+
+  libgraph::GraphDocument *_graphDocument;
 };
 
 #endif

@@ -23,6 +23,7 @@
 #include <KAction>
 #include <KStandardAction>
 #include <KActionCollection>
+#include <kxmlguifactory.h>
 
 // UI RELATED INCLUDES
 #include "UI_MainWindow.h"  
@@ -77,10 +78,15 @@ void MainWindow::setupWidgets(){
 	  _GraphLayers, SLOT(setGraphDocument(libgraph::GraphDocument*)));
 
   connect(_OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
-	  _PaletteBar, SLOT(setGraphDocument(libgraph::GraphDocument*)));
+	  _GraphEdit,   SLOT(setGraphDocument(libgraph::GraphDocument*)));
 
+  connect(_OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
+	  _PaletteBar, SLOT(setGraphDocument(libgraph::GraphDocument*)));
+  
   connect(_GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
-	  _PaletteBar, SLOT( setGraph(libgraph::Graph*)));
+	  _PaletteBar, SLOT(setGraph(libgraph::Graph*)));
+  
+
 }
 
 void MainWindow::setupActions(){

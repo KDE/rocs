@@ -35,6 +35,10 @@
 
 #include "action_AbstractAction.h"
 
+
+#include "libgraph_GraphDocument.h"
+#include "libgraph_Graph.h"
+
 #include "settings.h" //! AUTO GENERATED!  ( *Hate* this u_u )
 
 PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags flags ) 
@@ -96,11 +100,15 @@ bool PaletteBarDockWidget::event ( QEvent* event ){
   return QDockWidget::event ( event );
 }
 
-void PaletteBarDockWidget::setActiveGraph(libgraph::Graph *graph){
-  
-  if (_actionGroup.size() == 0) return;
-  foreach(AbstractAction *action, _actionGroup){
-    action->setGraph(graph);
-  }
+
+
+void PaletteBarDockWidget::setGraph(libgraph::Graph* graph){
+  qDebug() << "Got the Graph";
+  return;
+}
+
+void PaletteBarDockWidget::setGraphDocument(libgraph::GraphDocument *g){
+  qDebug() << "Got the Graph Document";
+  return;
 }
 

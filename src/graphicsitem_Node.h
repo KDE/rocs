@@ -17,3 +17,44 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+#ifndef GRAPHICSITEM_NODE_H
+#define GRAPHICSITEM_NODE_H
+
+#include <QGraphicsItem>
+#include <QList>
+
+class QGraphicsSceneMouseEvent;
+
+namespace libgraph{
+  class Node;
+}
+
+class NodeItem : public QGraphicsItem{
+
+public:
+  NodeItem(libgraph::Node *node, QGraphicsItem *parent = 0);
+
+  enum { Type = UserType + 1 };
+  int type() const { return Type; }
+
+  QRectF boundingRect() const;
+  QPainterPath shape() const;
+  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+public slots:
+  void setPos(QPointF pos);
+
+protected:
+   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+  void mousePressEvent(QGraphicsSceneMouseEvent *event);
+  void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+signals:
+  void positionChanged(QPointF pos);
+
+private:
+    libgraph::Node *_node;
+};
+
+#endif

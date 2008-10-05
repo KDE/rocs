@@ -19,14 +19,86 @@
 */
 
 #include "UI_GraphEditWidget.h"
+#include "UI_GraphScene.h"
+#include "UI_MainWindow.h"
+
+#include "graphicsitem_Node.h"
+#include "graphicsitem_Edge.h"
+
+#include "libgraph_GraphDocument.h"
+#include "libgraph_Graph.h"
+#include "libgraph_Node.h"
+#include "libgraph_Edge.h"
 
 #include <ktexteditor/editor.h>
 #include <ktexteditor/editorchooser.h>
+#include <ktexteditor/view.h>
+#include <ktexteditor/document.h>
+#include <KXMLGUIFactory>
+#include <QVBoxLayout>
 
-GraphEditWidget::GraphEditWidget(QWidget *parent) : QWidget(parent)
-{
+#include <QGraphicsItem>
+GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
   setupUi(this);
-  
+  _graphDocument = 0;
+
+  _graphScene = new GraphScene(this);
+  _graphicsView->setScene(_graphScene);
+
   _editor = KTextEditor::EditorChooser::editor();
-  _editor -> setSimpleMode ( true );
+  _txtEditScriptDocument = _editor->createDocument(0);
+  _txtEditScriptView = qobject_cast<KTextEditor::View*>(_txtEditScriptDocument->createView(this));
+    
+   QVBoxLayout *layout = new QVBoxLayout;
+   layout->addWidget(_txtEditScriptView);
+  _tabEditor -> setLayout(layout);
+
+  // MainWindow *mainWindow = qobject_cast<MainWindow*>(parent);
+  // mainWindow->guiFactory()->addClient( _txtEditScriptView );
+  
+  /*
+  connect( _txtEditScriptView, SIGNAL(focusIn(KTextEditor::View*)), 
+      this, SLOT( scriptViewFocusIn(KTextEditor::View*)));
+  connect( _txtEditScriptView, SIGNAL(focusOut(KTextEditor::View*)), 
+      this, SLOT( scriptViewFocusOut(KTextEditor::View*)));
+  */
+  
+
+}
+
+void GraphEditWidget::setGraphDocument(libgraph::GraphDocument *gd){
+  
+  // if there is another document active, desactive it first.
+  if ( _graphDocument != 0 ){
+    QList<QGraphicsItem*> itemList = _graphScene->items();
+    foreach(QGraphicsItem *i, itemList){
+      _graphScene->removeItem(i);
+      delete i;
+    }
+    
+    _graphDocument -> setScript( _txtEditScriptDocument->text() );
+  }
+  
+  int size = gd->size();
+  for(int i = 0; i < size; i++){
+    drawGraphOnScene( gd->at(i) );
+  }
+  
+  _graphDocument = gd;
+  _txtEditScriptDocument->setText( gd->script() );
+
+}
+
+void GraphEditWidget::drawGraphOnScene(libgraph::Graph *g){
+  QList<libgraph::Node*> nodes = g->nodes();
+  QList<libgraph::Edge*> edges = g->edges();
+
+  foreach(libgraph::Node* node, nodes){
+    NodeItem *nodeitem = new NodeItem( node );
+    _graphScene->addItem(nodeitem);    
+  }
+
+  foreach(libgraph::Edge *edge, edges){
+
+  }  
 }

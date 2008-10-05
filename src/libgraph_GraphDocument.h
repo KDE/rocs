@@ -98,6 +98,12 @@ public:
   /*! destroy all the graphs */
   void clear();
 
+  /*! sets the current script on this file */
+  void setScript(const QString& script);
+
+  /*! gets the current script on this file */
+  QString script();
+
 signals:
   void graphCreated(Graph *g);
   void graphRemoved(int i);
@@ -108,6 +114,7 @@ signals:
 private:
   QList<Graph*> _graphs;
   QString _name;
+  QString _script;
   qreal _width;
   qreal _height;
 };
