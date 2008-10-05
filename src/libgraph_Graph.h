@@ -133,7 +133,7 @@ protected:
 
 };
 
-};
+}
 
-Q_DECLARE_METATYPE(libgraph::Graph*);
+Q_DECLARE_METATYPE(libgraph::Graph*)
 #endif

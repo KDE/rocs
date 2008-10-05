@@ -112,5 +112,5 @@ private:
   qreal _height;
 };
 
-};
+}
 #endif

@@ -143,5 +143,5 @@ protected:
   
 };
 
-};
+}
 #endif

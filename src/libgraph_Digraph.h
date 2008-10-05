@@ -47,5 +47,5 @@ public:
   Node* createNode(QPointF position);
 };
 
-};
+}
 #endif

@@ -45,6 +45,6 @@ class SimpleGraph : public Graph
     Node* createNode(QPointF position);	// TESTED - OK
 };
 
-};
+}
 
 #endif

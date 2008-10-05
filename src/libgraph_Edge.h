@@ -110,5 +110,5 @@ class Edge : public QObject
 
 };
 
-};
+}
 #endif

@@ -62,5 +62,5 @@ public:
   void addEdge(Edge *e);	// WARNING: DO NOT CALL IT DIRECTLY. 
 };
 
-};
+}
 #endif

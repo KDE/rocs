@@ -28,7 +28,7 @@ namespace KTextEditor{
   class View;
   class Editor;
   class Document;
-};
+}
 
 class GraphEditWidget : public QWidget, public Ui::GraphEditWidget{
 public:

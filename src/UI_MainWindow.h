@@ -35,7 +35,7 @@ class GraphLayersModel;
 
 namespace libgraph{
   class GraphDocument;
-};
+}
 
 class MainWindow : public KXmlGuiWindow{
 Q_OBJECT
