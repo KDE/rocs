@@ -19,12 +19,17 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "action_AbstractAction.h"
+#include "UI_GraphScene.h"
+#include "libgraph_Graph.h"
+#include <QPointF>
+#include <KDebug>
 
-AbstractAction::AbstractAction(int type, QObject *parent) : KAction(parent)
+AbstractAction::AbstractAction(int type, GraphScene *scene, QObject *parent) : KAction(parent)
 {
   _graphDocument = 0;
   _graph = 0;
   _type = type; 
+  _graphScene = scene;
 }
 
 void AbstractAction::setGraphDocument( libgraph::GraphDocument *graphDocument)
@@ -33,9 +38,11 @@ void AbstractAction::setGraphDocument( libgraph::GraphDocument *graphDocument)
 }
 
 void AbstractAction::setGraph(libgraph::Graph *graph){
-  
+  kDebug() << "Graph Setted";
+  _graph = graph;
 }
+
 void AbstractAction::sendExecuteBit()
 {
-
+  _graphScene -> setAction ( _type );
 }

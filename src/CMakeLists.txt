@@ -34,7 +34,7 @@ set(Rocs_SRCS
 
   # Actions related files
   action_AbstractAction.cpp
-  # action_AddNode.cpp
+   action_AddNode.cpp
   # action_AddEdge.cpp
   # action_MoveNode.cpp
 

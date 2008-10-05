@@ -84,7 +84,7 @@ public:
   void prepend(Graph *g);
 
   /*! Creates a new Graph */
-  Graph *addGraph(QString name = "", int type = 1);
+  Graph *addGraph(QString name = "", int type = 0);
   
   /*! Removes the graph at position 'i' */
   void removeAt(int i = 0); 

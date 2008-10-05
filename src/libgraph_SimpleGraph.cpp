@@ -22,6 +22,8 @@
 #include "libgraph_Edge.h"
 #include "libgraph_GraphDocument.h"
 
+#include <KDebug>
+
 using namespace libgraph;
 
 SimpleGraph::SimpleGraph(GraphDocument *parent) : Graph(parent){}
@@ -44,10 +46,12 @@ Edge* SimpleGraph::createEdge(Node* from, Node* to){
 }
 
 Node* SimpleGraph::createNode(QPointF position){
+  kDebug() << "Got here";
   Node *n = new SimpleNode(position, this);
   _nodes.append(n);
   n -> setIndex( _nodes.size() - 1 );
 
   emit nodeCreated(n);
+  kDebug() << "Node Created";
   return n;
 }

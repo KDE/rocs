@@ -46,12 +46,15 @@ public:
   GraphEditWidget(MainWindow *parent = 0);
   QString text() const;
   void setDocument ( KTextEditor::Document *d );
+  GraphScene *scene() const;
+  void setGraph(libgraph::Graph *graph);
 
 public slots:
   void setGraphDocument(libgraph::GraphDocument *gd);
-
+  void createNode(libgraph::Node *node);
 private:
   void drawGraphOnScene(libgraph::Graph *g);
+  
   KTextEditor::Editor *_editor;
   KTextEditor::View *_txtEditScriptView;
   
@@ -59,6 +62,7 @@ private:
   GraphScene *_graphScene;
 
   libgraph::GraphDocument *_graphDocument;
+  libgraph::Graph *_graph;
 };
 
 #endif

@@ -41,14 +41,14 @@ class AbstractAction : public KAction
 Q_OBJECT
 public: 
 
-  AbstractAction(int type, QObject *parent);
+  AbstractAction(int type, GraphScene *scene, QObject *parent);
   int type() { return _type; }
 
   void setGraphDocument(libgraph::GraphDocument *graphDocument);
-  void setGraph(libgraph::Graph *graph);
+  void setGraphScene(GraphScene *graphScene);
 
 public slots:
-
+  void setGraph(libgraph::Graph *graph);
   virtual void execute(int type, QPointF pos) = 0;
   void sendExecuteBit();
 
@@ -57,6 +57,7 @@ protected:
   int _type;
   libgraph::GraphDocument *_graphDocument; 
   libgraph::Graph *_graph;
+  GraphScene *_graphScene;
 };
 
 #endif

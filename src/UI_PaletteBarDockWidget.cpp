@@ -25,6 +25,7 @@
 #include <QScrollArea>
 #include <KLocale>
 #include <KIcon>
+#include <KDebug>
 
 #include "UI_PaletteBarDockWidget.h"
 #include "UI_MainWindow.h"
@@ -38,6 +39,8 @@
 
 #include "libgraph_GraphDocument.h"
 #include "libgraph_Graph.h"
+
+#include <KActionCollection>
 
 #include "settings.h" //! AUTO GENERATED!  ( *Hate* this u_u )
 
@@ -74,8 +77,17 @@ PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags fl
   _widget->setContextMenuPolicy ( Qt::ActionsContextMenu );
 }
 
-void PaletteBarDockWidget::createToolButton ( AbstractAction* action ){
-  _actionGroup.append( action );
+void PaletteBarDockWidget::setActionCollection(KActionCollection *collection){
+  _actionCollection = collection;
+  QList<QAction*> actions = collection->actions();
+  foreach(QAction *action, actions)
+  {
+    kDebug() << "Action inserted onto pallete";
+    createToolButton(action);
+  }
+}
+
+void PaletteBarDockWidget::createToolButton ( QAction* action ){
   QToolButton* button = new QToolButton ( _widget );
   button->setToolButtonStyle ( Settings::showButtonText() ? Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly );
   button->setSizePolicy ( QSizePolicy::Expanding, QSizePolicy::Fixed );
@@ -99,8 +111,6 @@ void PaletteBarDockWidget::showButtonTextToggled ( bool b ){
 bool PaletteBarDockWidget::event ( QEvent* event ){
   return QDockWidget::event ( event );
 }
-
-
 
 void PaletteBarDockWidget::setGraph(libgraph::Graph* graph){
   qDebug() << "Got the Graph";

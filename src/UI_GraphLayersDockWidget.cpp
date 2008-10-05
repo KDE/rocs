@@ -26,7 +26,7 @@
 #include "libgraph_GraphDocument.h"
 #include "model_GraphLayers.h"
 
-#include <QDebug>
+#include <KDebug>
 
 GraphLayersDockWidget::GraphLayersDockWidget(QWidget* parent, Qt::WindowFlags flags)
 : QDockWidget(i18n("Graph Layers"),parent, flags) 
@@ -43,16 +43,16 @@ GraphLayersDockWidget::GraphLayersDockWidget(QWidget* parent, Qt::WindowFlags fl
 void GraphLayersDockWidget::on__btnNewGraph_clicked()
 {
   if ( _document == 0){
-    qDebug() << " _document is NULL ";
+    kDebug() << " _document is NULL ";
     return;
   }
   _graphLayersListView->model()->insertRow(1);
-  qDebug() << " Graph Created ";
+  kDebug() << " Graph Created ";
 }
 
 void GraphLayersDockWidget::setGraphDocument(libgraph::GraphDocument *document)
 {
-  qDebug() << "Got The Graph";
+  kDebug() << "Got The Graph";
   if ( _layerModel != 0) delete _layerModel;
   _document = document;
   _layerModel = new GraphLayersModel( document );
@@ -62,9 +62,9 @@ void GraphLayersDockWidget::setGraphDocument(libgraph::GraphDocument *document)
 
 void GraphLayersDockWidget::setActiveGraph(const QModelIndex& modelindex){
   libgraph::Graph *g = _layerModel -> at(modelindex);
-  if (g == 0) qDebug() << "Returning a NULL pointer";
+  if (g == 0) kDebug() << "Returning a NULL pointer";
   else{
     emit activeGraphChanged( g );
-    qDebug() << "Send the Graph at position " << modelindex.row();
+    kDebug() << "Send the Graph at position " << modelindex.row();
   }
 }

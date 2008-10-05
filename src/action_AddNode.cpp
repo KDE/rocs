@@ -20,22 +20,37 @@
 */
 #include "action_AddNode.h"
 #include "UI_GraphScene.h"
+#include "libgraph_Graph.h"
 
 #include <KLocale>
 #include <iostream>
 
-AddNodeAction::AddNodeAction(int type, QObject *parent) : AbstractAction(type, parent)
-{
-	setText(i18n ( "Add Node" ));
-	setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
-	setIcon ( KIcon ( "pointer" ) );
-	setCheckable ( true );
-	setChecked ( false );
+#include <KDebug>
+
+AddNodeAction::AddNodeAction(int type, GraphScene *scene, QObject *parent) : AbstractAction(type, scene, parent){
+  setText(i18n ( "Add Node" ));
+  setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
+  setIcon ( KIcon ( "pointer" ) );
+  setCheckable ( true );
+  setChecked ( false );
+
+  connect(this, SIGNAL(triggered()), this, SLOT( sendExecuteBit() ));
 }
 
-AddNodeAction::~AddNodeAction(){}
+AddNodeAction::~AddNodeAction(){
+  kDebug() << "Destroyed";
+}
 
-void AddNodeAction::execute(int action, QPointF pos)
-{
-	if (action != _type) return;
+void AddNodeAction::execute(int action, QPointF pos){
+  if (action != _type){
+    kDebug() << "unknown action";
+    return;
+  }
+
+  if (_graph == 0){
+    kDebug() << "Error, Graph == 0";
+  }
+  _graph -> createNode(pos);
+  kDebug() << "Action Executed at pos " << pos.x() << pos.y();
+
 }

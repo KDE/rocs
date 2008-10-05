@@ -31,6 +31,7 @@ class QActionGroup;
 class PaletteLayout;
 class GraphScene;
 class AbstractAction;
+class KActionCollection;
 
 namespace libgraph{
   class GraphDocument;
@@ -49,26 +50,27 @@ class PaletteBarDockWidget : public QDockWidget{
       \param flags the window flags.
     */
     PaletteBarDockWidget ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    void setActionCollection(KActionCollection *colletion);
   public slots:
     void setGraphDocument(libgraph::GraphDocument *document);
     void setGraph(libgraph::Graph* graph);
     void showButtonTextToggled ( bool b );   
 
-  protected:
+  
     
     /*! creates a toolbutton and places it on the pallete.
     \param action the action of with the button will take it's functionalies. */
 
-    void createToolButton ( AbstractAction* action );
+    void createToolButton ( QAction* action );
 
-
+  protected:
     bool event ( QEvent* event );
 
-    QScrollArea*    _scrollArea;
-    QWidget*        _widget;
-    PaletteLayout*  _layout;
+    QScrollArea     *_scrollArea;
+    QWidget         *_widget;
+    PaletteLayout   *_layout;
 
-    QList<AbstractAction*> _actionGroup;
+    KActionCollection *_actionCollection;
     QList<QToolButton*> _toolButtons;
 };
 

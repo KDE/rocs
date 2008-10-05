@@ -75,7 +75,10 @@ void GraphEditWidget::setGraphDocument(libgraph::GraphDocument *gd){
       _graphScene->removeItem(i);
       delete i;
     }
-    
+    int size = gd->size();
+    for(int i = 0; i < size; i++){
+      gd->at(i)->disconnect();
+    } 
     _graphDocument -> setScript( _txtEditScriptDocument->text() );
   }
   
@@ -94,11 +97,27 @@ void GraphEditWidget::drawGraphOnScene(libgraph::Graph *g){
   QList<libgraph::Edge*> edges = g->edges();
 
   foreach(libgraph::Node* node, nodes){
-    NodeItem *nodeitem = new NodeItem( node );
-    _graphScene->addItem(nodeitem);    
+    createNode(node);
   }
 
   foreach(libgraph::Edge *edge, edges){
 
   }  
+}
+
+GraphScene *GraphEditWidget::scene() const{
+  return _graphScene;
+}
+
+void GraphEditWidget::setGraph(libgraph::Graph *graph){
+  if (_graph != 0)
+  _graph = graph;
+  connect(_graph, SIGNAL(nodeCreated(libgraph::Node*)), this, SLOT( createNode(libgraph::Node*)));
+  kDebug() << "graph -> nodeCreated connected with GraphEdit -> createNode";
+}
+
+void GraphEditWidget::createNode(libgraph::Node *node){
+  NodeItem *nodeitem = new NodeItem( node );
+  _graphScene->addItem(nodeitem); 
+  kDebug() << "Node Created on Screen";
 }

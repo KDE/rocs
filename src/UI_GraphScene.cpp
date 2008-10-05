@@ -21,15 +21,16 @@
 #include "UI_GraphScene.h"
 #include "UI_MainWindow.h"
 
-#include <iostream>
 #include <QGraphicsSceneMouseEvent>
+#include <KDebug>
 
 GraphScene::GraphScene ( QObject* parent ) : QGraphicsScene ( parent ){
 
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent){
-
+  kDebug() << "Clicked inside of the scene";
+  emit executeAction(_action, mouseEvent->scenePos());
 }
 
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent){
@@ -38,4 +39,8 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent){
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent){
 
+}
+
+void GraphScene::setAction(int action){
+  _action = action;
 }

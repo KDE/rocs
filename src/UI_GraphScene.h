@@ -52,8 +52,7 @@ public:
     */
 
     GraphScene ( QObject* parent );
-    
-  
+    void setAction(int action);
 private:
    /*! 
     this will happen when the user clicks on the screen 
@@ -73,9 +72,11 @@ private:
     */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
+  int _action;
 public slots:
 
-  signals:
+signals:
     void executeAction(int action, QPointF pos);
+
 };
 #endif

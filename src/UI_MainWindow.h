@@ -32,9 +32,11 @@ class GraphLayersDockWidget;
 class GraphEditWidget;
 class GraphDocumentModel;
 class GraphLayersModel;
+class KActionCollection;
 
 namespace libgraph{
   class GraphDocument;
+  class Graph;
 }
 
 class MainWindow : public KXmlGuiWindow{
@@ -45,18 +47,22 @@ public:
   MainWindow();
   
 private:
+  void setupModels();  // setup all the models to be used on the views.
+  void setupWidgets(); // Setup all the widgets.
+  void setupActions(); // Setup all the actions.
+  void setupSignals();
+
   PaletteBarDockWidget*  _PaletteBar;   // area where the icons of actions will be.
   OpenedFilesDockWidget* _OpenedFiles;  // area where the opened files will be
   GraphLayersDockWidget* _GraphLayers;  // area where the layers of the active graph will appear.
   GraphEditWidget* _GraphEdit; // Area where the graph will be editted.
-
-  void setupModels();  // setup all the models to be used on the views.
-  void setupWidgets(); // Setup all the widgets
-  void setupActions(); // Setup all the actions.
-
   QList<libgraph::GraphDocument*> _documents;
   GraphDocumentModel *_documentModel;
   GraphLayersModel   *_graphLayersModel;
+  KActionCollection  *_palleteActions;
+
+public slots:
+  void setGraph(libgraph::Graph *g);
 };
 
 #endif

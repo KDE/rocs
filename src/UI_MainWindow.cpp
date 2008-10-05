@@ -31,6 +31,7 @@
 #include "UI_GraphLayersDockWidget.h"
 #include "UI_OpenedFilesDockWidget.h"
 #include "UI_GraphEditWidget.h"
+#include "UI_GraphScene.h"
 
 // MODEL Related Includes
 #include "model_GraphDocument.h"
@@ -38,7 +39,11 @@
 
 // Graph Related Includes
 #include "libgraph_GraphDocument.h"
+#include "libgraph_Graph.h"
 
+// Action Related Includes
+#include "action_AbstractAction.h"
+#include "action_AddNode.h"
 
 MainWindow::MainWindow() : KXmlGuiWindow(){
 
@@ -48,9 +53,10 @@ MainWindow::MainWindow() : KXmlGuiWindow(){
   setObjectName ( "Rocs" );
 
   setupModels();
-  setupActions();
   setupWidgets();
   setupGUI();
+  setupActions();
+  setupSignals();
 }
 
 void MainWindow::setupModels(){
@@ -73,22 +79,47 @@ void MainWindow::setupWidgets(){
   addDockWidget ( Qt::RightDockWidgetArea, _OpenedFiles );
 
   setCentralWidget ( _GraphEdit );
-
-  connect(_OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
-	  _GraphLayers, SLOT(setGraphDocument(libgraph::GraphDocument*)));
-
-  connect(_OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
-	  _GraphEdit,   SLOT(setGraphDocument(libgraph::GraphDocument*)));
-
-  connect(_OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
-	  _PaletteBar, SLOT(setGraphDocument(libgraph::GraphDocument*)));
-  
-  connect(_GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
-	  _PaletteBar, SLOT(setGraph(libgraph::Graph*)));
-  
-
 }
 
 void MainWindow::setupActions(){
   KStandardAction::quit ( this,    SLOT ( quit() ),        actionCollection() );
+  GraphScene *gc = _GraphEdit->scene();
+
+  _palleteActions = new KActionCollection(qobject_cast<QObject*>(this));
+  _palleteActions->addAction("add_node_action", new AddNodeAction(1, gc, this));
+  _PaletteBar->setActionCollection(_palleteActions);
+  
+}
+
+void MainWindow::setupSignals(){
+  connect( _OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
+	   _GraphLayers, SLOT(setGraphDocument(libgraph::GraphDocument*)));
+
+  connect( _OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
+	   _GraphEdit,   SLOT(setGraphDocument(libgraph::GraphDocument*)));
+
+  connect( _OpenedFiles, SIGNAL(activeDocumentChanged(libgraph::GraphDocument*)),
+	   _PaletteBar, SLOT(setGraphDocument(libgraph::GraphDocument*)));
+  
+  connect( _GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
+	   _PaletteBar, SLOT(setGraph(libgraph::Graph*)));
+
+  connect( _GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
+	   this, SLOT(setGraph(libgraph::Graph*)));
+  
+  GraphScene *gc = _GraphEdit->scene();
+  foreach( QAction *action, _palleteActions->actions() ){
+    
+    connect( gc, SIGNAL(executeAction(int, QPointF)), 
+      action, SLOT( execute(int, QPointF)));
+    
+    connect( _GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
+      action, SLOT(setGraph(libgraph::Graph*)));
+
+  }
+}
+
+void MainWindow::setGraph(libgraph::Graph *g){
+  _PaletteBar -> setGraph(g);
+  _GraphEdit -> setGraph(g);
 }

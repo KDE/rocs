@@ -23,8 +23,9 @@
 #include "libgraph_Edge.h"
 #include "libgraph_GraphDocument.h"
 
-#include <iostream>
 #include <math.h>
+
+#include <KDebug>
 
 using namespace libgraph;
 
@@ -182,6 +183,7 @@ QString Graph::toString() const{
 }
 
 Node* Graph::createNode(QPointF pos){
+  kDebug() << "ERROR: shouldn't come here";
   return 0;
 }
 
