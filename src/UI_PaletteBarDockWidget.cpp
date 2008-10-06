@@ -75,25 +75,36 @@ PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags fl
 
   _widget->addAction ( showText );
   _widget->setContextMenuPolicy ( Qt::ActionsContextMenu );
+  _actionGroup = new QActionGroup(this);
+  _actionGroup -> setExclusive(true);
+  
 }
 
 void PaletteBarDockWidget::setActionCollection(KActionCollection *collection){
   _actionCollection = collection;
   QList<QAction*> actions = collection->actions();
+  bool b = true;
   foreach(QAction *action, actions)
   {
     kDebug() << "Action inserted onto pallete";
-    createToolButton(action);
+    if (b){
+      createToolButton(action, true);
+      b = false;
+    }
+    else{
+        createToolButton(action, false);
+    }
   }
 }
 
-void PaletteBarDockWidget::createToolButton ( QAction* action ){
-  QToolButton* button = new QToolButton ( _widget );
+void PaletteBarDockWidget::createToolButton ( QAction* action, bool checked ){
+  QToolButton* button = new QToolButton (  );
   button->setToolButtonStyle ( Settings::showButtonText() ? Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly );
   button->setSizePolicy ( QSizePolicy::Expanding, QSizePolicy::Fixed );
   button->setAutoRaise ( true );
   button->setIconSize ( QSize ( 22,22 ) );
   button->setDefaultAction ( action );
+  _actionGroup->addAction( action );
   _toolButtons.append ( button );
   _layout->addWidget ( button );
 }

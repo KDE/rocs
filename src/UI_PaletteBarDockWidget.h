@@ -61,7 +61,7 @@ class PaletteBarDockWidget : public QDockWidget{
     /*! creates a toolbutton and places it on the pallete.
     \param action the action of with the button will take it's functionalies. */
 
-    void createToolButton ( QAction* action );
+    void createToolButton ( QAction* action , bool checked);
 
   protected:
     bool event ( QEvent* event );
@@ -71,6 +71,7 @@ class PaletteBarDockWidget : public QDockWidget{
     PaletteLayout   *_layout;
 
     KActionCollection *_actionCollection;
+    QActionGroup *_actionGroup;
     QList<QToolButton*> _toolButtons;
 };
 

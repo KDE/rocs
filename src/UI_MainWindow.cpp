@@ -43,6 +43,7 @@
 
 // Action Related Includes
 #include "action_AbstractAction.h"
+#include "action_Pointer.h"
 #include "action_AddNode.h"
 
 MainWindow::MainWindow() : KXmlGuiWindow(){
@@ -85,9 +86,10 @@ void MainWindow::setupActions(){
   KStandardAction::quit ( this,    SLOT ( quit() ),        actionCollection() );
   GraphScene *gc = _GraphEdit->scene();
 
-  _palleteActions = new KActionCollection(qobject_cast<QObject*>(this));
-  _palleteActions->addAction("add_node_action", new AddNodeAction(1, gc, this));
-  _PaletteBar->setActionCollection(_palleteActions);
+  _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
+  _paletteActions->addAction("pointer_action", new PointerAction(0, gc, this));  
+  _paletteActions->addAction("add_node_action", new AddNodeAction(1, gc, this));
+  _PaletteBar->setActionCollection(_paletteActions);
   
 }
 
@@ -108,7 +110,7 @@ void MainWindow::setupSignals(){
 	   this, SLOT(setGraph(libgraph::Graph*)));
   
   GraphScene *gc = _GraphEdit->scene();
-  foreach( QAction *action, _palleteActions->actions() ){
+  foreach( QAction *action, _paletteActions->actions() ){
     
     connect( gc, SIGNAL(executeAction(int, QPointF)), 
       action, SLOT( execute(int, QPointF)));

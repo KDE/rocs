@@ -59,7 +59,7 @@ private:
   QList<libgraph::GraphDocument*> _documents;
   GraphDocumentModel *_documentModel;
   GraphLayersModel   *_graphLayersModel;
-  KActionCollection  *_palleteActions;
+  KActionCollection  *_paletteActions;
 
 public slots:
   void setGraph(libgraph::Graph *g);

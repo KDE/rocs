@@ -43,12 +43,12 @@ AddNodeAction::~AddNodeAction(){
 
 void AddNodeAction::execute(int action, QPointF pos){
   if (action != _type){
-    kDebug() << "unknown action";
     return;
   }
 
   if (_graph == 0){
     kDebug() << "Error, Graph == 0";
+    return;
   }
   _graph -> createNode(pos);
   kDebug() << "Action Executed at pos " << pos.x() << pos.y();
