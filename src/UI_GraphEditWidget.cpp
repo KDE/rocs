@@ -36,6 +36,7 @@
 #include <ktexteditor/document.h>
 #include <KXMLGUIFactory>
 #include <QVBoxLayout>
+#include <QPointF>
 
 #include <QGraphicsItem>
 GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){

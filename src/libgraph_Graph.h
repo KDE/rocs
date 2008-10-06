@@ -114,10 +114,10 @@ signals:
   void colorChanged(const QColor& color);
 
   /*! emited when a new node is created */
-  void nodeCreated(Node* node);
+  void nodeCreated(libgraph::Node* node);
 
   /*! emited when a new edge is created */
-  void edgeCreated(Edge* edge);
+  void edgeCreated(libgraph::Edge* edge);
 
   /*! emited when a node is destroyed */
   void nodeRemoved(int i);
