@@ -54,17 +54,6 @@ GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
    layout->addWidget(_txtEditScriptView);
   _tabEditor -> setLayout(layout);
 
-  // MainWindow *mainWindow = qobject_cast<MainWindow*>(parent);
-  // mainWindow->guiFactory()->addClient( _txtEditScriptView );
-  
-  /*
-  connect( _txtEditScriptView, SIGNAL(focusIn(KTextEditor::View*)), 
-      this, SLOT( scriptViewFocusIn(KTextEditor::View*)));
-  connect( _txtEditScriptView, SIGNAL(focusOut(KTextEditor::View*)), 
-      this, SLOT( scriptViewFocusOut(KTextEditor::View*)));
-  */
-  
-
 }
 
 void GraphEditWidget::setGraphDocument(libgraph::GraphDocument *gd){
@@ -90,7 +79,8 @@ void GraphEditWidget::setGraphDocument(libgraph::GraphDocument *gd){
   
   _graphDocument = gd;
   _txtEditScriptDocument->setText( gd->script() );
-
+  _graphScene->setSceneRect(gd->width(), gd->height() );
+  
 }
 
 void GraphEditWidget::drawGraphOnScene(libgraph::Graph *g){

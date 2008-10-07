@@ -28,6 +28,35 @@ GraphScene::GraphScene ( QObject* parent ) : QGraphicsScene ( parent ){
 
 }
 
+void GraphScene::setSceneRect(qreal width, qreal height)
+{
+  QGraphicsScene::setSceneRect(0,0,width,height);
+
+  //Bottom Horizontal Line
+  QGraphicsLineItem *lineItem = new QGraphicsLineItem(width, 0, width, height);
+  lineItem->setEnabled(false);
+  addItem(lineItem);
+
+  // Right Vertical Line
+  lineItem = new QGraphicsLineItem(0, height, width, height); 
+  lineItem->setEnabled(false);
+  addItem(lineItem);
+
+  //Top Horizontal Line
+  lineItem = new QGraphicsLineItem(0, 0, width, 0); 
+  lineItem->setEnabled(false);
+  addItem(lineItem);
+  
+  // Left Vertical Line
+  
+  lineItem = new QGraphicsLineItem(0, 0, 0, height); 
+  lineItem->setEnabled(false);
+  addItem(lineItem);
+
+  kDebug() << "Setted the Scene Rect ";
+  
+}
+
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent){
   kDebug() << "Clicked inside of the scene";
   emit executeAction(_action, mouseEvent->scenePos());

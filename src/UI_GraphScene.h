@@ -23,7 +23,7 @@
 #define UI_GRAPHSCENE_H
 
 #include <QGraphicsScene>
-
+#include <QGraphicsLineItem>
 class MainWindow;
 class QGraphicsSceneMouseEvent;
 
@@ -53,6 +53,7 @@ public:
 
     GraphScene ( QObject* parent );
     void setAction(int action);
+    void setSceneRect(qreal width, qreal height);
 private:
    /*! 
     this will happen when the user clicks on the screen 
@@ -71,6 +72,7 @@ private:
     \param mouseEvent the MouseEvent send by Qt
     */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
+
 
   int _action;
 public slots:

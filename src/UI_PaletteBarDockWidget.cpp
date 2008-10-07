@@ -48,8 +48,7 @@ PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags fl
   : QDockWidget ( i18n ( "Palette" ), parent, flags ){
   setObjectName ( "palleteBar" );
   setAllowedAreas ( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
-  setFeatures ( QDockWidget::NoDockWidgetFeatures );
-
+  
   QWidget* topWidget = new QWidget ( this );
 
   _scrollArea = new PaletteScrollArea ( topWidget );

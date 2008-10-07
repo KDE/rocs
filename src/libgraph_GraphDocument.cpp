@@ -31,6 +31,8 @@ using namespace libgraph;
 GraphDocument::GraphDocument(const QString name){
   _graphs.clear();
   _name = name;
+  _width = 800;
+  _height = 600;
 }
 
 // Default Destructor
