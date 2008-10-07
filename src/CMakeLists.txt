@@ -20,7 +20,7 @@ set(Rocs_SRCS
   action_AbstractAction.cpp
   action_Pointer.cpp
   action_AddNode.cpp
-  # action_AddEdge.cpp
+  action_AddEdge.cpp
   # action_MoveNode.cpp
 
   # graphicsitem_Edge.cpp

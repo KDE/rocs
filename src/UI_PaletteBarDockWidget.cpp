@@ -82,18 +82,12 @@ PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags fl
 void PaletteBarDockWidget::setActionCollection(KActionCollection *collection){
   _actionCollection = collection;
   QList<QAction*> actions = collection->actions();
-  bool b = true;
-  foreach(QAction *action, actions)
-  {
-    kDebug() << "Action inserted onto pallete";
-    if (b){
-      createToolButton(action, true);
-      b = false;
-    }
-    else{
-        createToolButton(action, false);
-    }
+  QAction *action_pointer = actions.takeFirst();
+  createToolButton(action_pointer, true);
+  foreach(QAction *action, actions){
+     createToolButton(action, false);
   }
+  kDebug() << "all toolbuttons created";
 }
 
 void PaletteBarDockWidget::createToolButton ( QAction* action, bool checked ){
@@ -101,6 +95,7 @@ void PaletteBarDockWidget::createToolButton ( QAction* action, bool checked ){
   button->setToolButtonStyle ( Settings::showButtonText() ? Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly );
   button->setSizePolicy ( QSizePolicy::Expanding, QSizePolicy::Fixed );
   button->setAutoRaise ( true );
+  button->setChecked(checked);
   button->setIconSize ( QSize ( 22,22 ) );
   button->setDefaultAction ( action );
   _actionGroup->addAction( action );
@@ -124,12 +119,12 @@ bool PaletteBarDockWidget::event ( QEvent* event ){
   return QDockWidget::event ( event );
 }
 
-void PaletteBarDockWidget::setGraph(libgraph::Graph* graph){
+void PaletteBarDockWidget::setGraph(libgraph::Graph* ){
   kDebug() << "Got the Graph but did nothing with it.";
   return;
 }
 
-void PaletteBarDockWidget::setGraphDocument(libgraph::GraphDocument *g){
+void PaletteBarDockWidget::setGraphDocument(libgraph::GraphDocument *){
   kDebug() << "Got the Graph Document but did nothing with it.";
   return;
 }

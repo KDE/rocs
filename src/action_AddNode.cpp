@@ -23,7 +23,6 @@
 #include "libgraph_Graph.h"
 
 #include <KLocale>
-#include <iostream>
 
 #include <KDebug>
 
