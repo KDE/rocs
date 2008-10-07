@@ -106,6 +106,7 @@ void PaletteBarDockWidget::createToolButton ( QAction* action, bool checked ){
   _actionGroup->addAction( action );
   _toolButtons.append ( button );
   _layout->addWidget ( button );
+  kDebug() << "ToolButton Created";
 }
 
 void PaletteBarDockWidget::showButtonTextToggled ( bool b ){
@@ -116,6 +117,7 @@ void PaletteBarDockWidget::showButtonTextToggled ( bool b ){
   }
   _layout->setOneLine ( b );
   _scrollArea->setMinimumWidth ( _widget->minimumSizeHint().width() );
+  kDebug() << "changed from icons to text (or text to icons)";
 }
 
 bool PaletteBarDockWidget::event ( QEvent* event ){
@@ -123,12 +125,12 @@ bool PaletteBarDockWidget::event ( QEvent* event ){
 }
 
 void PaletteBarDockWidget::setGraph(libgraph::Graph* graph){
-  qDebug() << "Got the Graph";
+  kDebug() << "Got the Graph but did nothing with it.";
   return;
 }
 
 void PaletteBarDockWidget::setGraphDocument(libgraph::GraphDocument *g){
-  qDebug() << "Got the Graph Document";
+  kDebug() << "Got the Graph Document but did nothing with it.";
   return;
 }
 
