@@ -30,20 +30,29 @@ namespace libgraph{
 class Node;
 class Edge;
 
-
+/*! \brief represents a Digraph 
+ long explanation needed.
+*/
 class Digraph : public Graph
 {
 public:
-  /*! Default Constructor */
+  /*! Default Constructor 
+    \param parent the document that this node belongs to.
+  */
   Digraph(GraphDocument *parent);
   
   /*! Default Destructor */
   ~Digraph();
 
-  /*! Add a edge between two nodes */
+  /*! Add a edge between two nodes 
+    \param from the edge will come from this node
+    \param to to this node.
+  */
   Edge* createEdge(Node *from, Node *to);
 
-  /*! Creates a new Node on Position position */
+  /*! Creates a new Node on Position position 
+    \param position the position that this node will be created.
+  */
   Node* createNode(QPointF position);
 };
 

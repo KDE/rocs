@@ -26,33 +26,44 @@ namespace libgraph{
 class Edge;
 class Graph;
 
+/*! \brief represents a Node inside of a Digraph 
+  long explanation needed.
+*/
 class DiNode : public Node {
 public:
-  /*! Default constructor */
+  /*! Default constructor 
+    \param position the position that this node will be created.
+    \param parent the graph that this node belongs to.
+  */
   DiNode(QPointF position, Graph *parent);
   
   /*! Default Destructor */
   ~DiNode();
 
-  /*! Return the first node that this node is connected to. */
+  /*! \return the first node that this node is connected to. */
   Node *getAdjacentNode(); // TODO: Need to test
 
-  /*! return the node connected with this using edge e */
+  /*! \return the node connected with this using edge e */
   Node *getAdjacentNode(Edge *e); // TODO: Need to test
 
-  /*! Return the first node that has not been visited and this node is connected to */
+  /*! \return the first node that has not been visited and this node is connected to */
   Node *getFirstUnvisitedNode(); // TODO: need to test
 
-  /*! Return the first edge on the list, does not care if it's visited or not */
+  /*! \return the first edge on the list, does not care if it's visited or not */
   Edge *getFirstEdge(); // TODO: need to test
 
-  /*! Return the first unvisited edge on the list */
+  /*! \return the first unvisited edge on the list */
   Edge *getFirstUnvisitedEdge(); // TODO: need to test
   
-  /*! Verify if this node is connected with the To node */
+  /*! Verify if this node is connected with the To node 
+    \param to the node to check if this node is connected with.
+    \return false if it's not connected, true otherwise.
+  */
   bool isConnected(Node *to);
 
-  /*! add a new edge to this node */
+  /*! add a new edge to this node 
+    \param e the node to be inserted.
+  */
   void addEdge(Edge *e);	//WARNING: CANNOT CALL IT DIRECLY.
 };
 

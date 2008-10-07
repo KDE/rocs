@@ -30,6 +30,9 @@ namespace libgraph
 
 class Graph;
 
+/*! \brief the graph document 
+  long explanation needed.
+*/
 class GraphDocument : public QObject
 {
   Q_OBJECT
@@ -38,77 +41,121 @@ class GraphDocument : public QObject
   Q_PROPERTY(qreal height READ height WRITE setHeight)
 
 public:
-  /*! Some Simple Enum */
+  /*! Some Simple Enum 
+    \enum simple defines a simple graph.
+    \enum multi defines a multi graph
+    \enum digraph defines a digraph.
+  */
   enum{ simple, multi, digraph };
 
-  /*! Default Constructor */
+  /*! Default Constructor 
+    \param name sets the name of the document.
+  */
   GraphDocument(const QString name = QString());
   
   /*! Default Destructor */
   ~GraphDocument();
 
-  /*! Sets the current file name of the Graph Collection */
+  /*! Sets the current file name of the Graph Collection 
+    \param name changes the name of the document.
+  */
   void setName(const QString& name);
   
-  /*! Gets the Name of the Collection of Graphs */
+  /*! \return the Name of the Collection of Graphs */
   QString name() const;
 
-  /*! set the height of the working area */
+  /*! set the height of the working area 
+      \param height the new height of the document.
+  */
   void setHeight(qreal height);
 
-  /*! gets the heigth of the working area */
+  /*! \return the heigth of the working area */
   qreal height() const;
 
-  /*! set the width of the working area */
+  /*! set the width of the working area 
+    \param width the new width of the working area.
+  */
   void setWidth(qreal width);
 
-  /*! get the width of the working area */
+  /*! \return the width of the working area */
   qreal width() const;
 
-  /*! Gets the size of the graph Collection */
+  /*! \return the size of the graph Collection */
   int size(); 
 
-  /*! Gets the Graph at position 'i' on the _graphs list */
+  /*! \return the Graph at position 'i' on the _graphs list */
   Graph* operator[](int i); 
 
-  /*! Gets the graph at position i on the _graphs list */
+  /*! \return the graph at position i on the _graphs list */
   Graph* at(int i);
 
-  /*! Append a grpah on the graph's list */
+  /*! Append a grpah on the graph's list 
+    \param g the graph to be appende.
+  */
   void operator<<(Graph *g);
 
-  /*! Append a graph on the Graph's list */
+  /*! Append a graph on the Graph's list 
+    \param g the graph to be appended
+  */
   void append(Graph *g);
 
-  /*! Prepend a graph on the Graph's list */
+  /*! Prepend a graph on the Graph's list 
+    \param g the graph to be prepended.
+  */
   void prepend(Graph *g);
 
-  /*! Creates a new Graph */
+  /*! Creates a new Graph 
+    \param name the name of the graph
+    \param type the the of the graph. 
+  */
   Graph *addGraph(QString name = "", int type = 0);
   
-  /*! Removes the graph at position 'i' */
+  /*! Removes the graph at position 'i' 
+    \param i the position to remove the graph.
+  */
   void removeAt(int i = 0); 
 
-  /*! Remove the first instance of the graph g */
+  /*! Remove the first instance of the graph g 
+    \param g the instance of the graph to be removed.
+  */
   void removeOne(Graph *g);
 
-  /*! returns the index of the graph or -1 if not found */
+  /*! search for the index of a graph.
+    \param g the graph that you're looking for the index
+    \return the index of the graph g or -1 if not foind
+  */
   int indexOf(Graph *g);
 
   /*! destroy all the graphs */
   void clear();
 
-  /*! sets the current script on this file */
+  /*! sets the current script on this file 
+    \param script the new script of the file.
+  */
   void setScript(const QString& script);
 
-  /*! gets the current script on this file */
+  /*! \return the current script on this file */
   QString script();
 
 signals:
+  /*! emited when a new graph is created 
+    \param g the created graph */
   void graphCreated(Graph *g);
+
+  /*! emitted when a graph is removed.
+    \param i the index of the removed graph */
   void graphRemoved(int i);
+
+  /*! emitted when the document changes it's name. 
+    \param name the new name of the document */
   void nameChanged(QString name);
+
+  /*! emitted when the document changes it's height 
+    \param height the new height of the document */
   void heightChanged(qreal height);
+
+  /*!  emitted when the document changes it's width
+    \param width the new width of the document */
   void widthChanged(qreal width);
 
 private:

@@ -29,6 +29,8 @@ namespace libgraph
 class Node;
 class Graph;
 
+/*! \brief base class for Edges.
+ long explanation needed */
 class Edge : public QObject
 {
   Q_OBJECT
@@ -40,43 +42,55 @@ class Edge : public QObject
 
 
   public:
-    /*! Default Constructor */
+    /*! Default Constructor 
+      \param from the first node that this edge is connected.
+      \param to the second node that this edge is connected.
+      \param parent the graph that this edge belongs to.
+    */
     Edge(Node *from, Node *to, Graph *parent);
 
     /*! Default Destructor */
     ~Edge();
 
-    /*! gets visited flag */
+    /*! \return the visited status.  */
     bool visited() const;
 
-    /*! visit this edge */
-    void setVisited(bool);
+    /*! visit this edge 
+	\param visited the visited status
+    */
+    void setVisited(bool visited);
 
     /*! unvisit this edge */
     void unsetVisited();
 
-    /*! return the name of this edge */
+    /*! \return the name of this edge */
     QString name() const;
 
-    /*! sets the name of this edge */
+    /*! sets the name of this edge 
+      \param name the new name of the edge.
+    */
     void setName(const QString& name);
     
-    /*! return the length of the edge */
+    /*! \return the length of the edge */
     qreal length() const;
 
-    /*! set the length of this edge */
+    /*! set the length of this edge 
+      \param length the new length of the edge.
+    */
     void setLength(const qreal& length);
 
-    /*! gets the color of this edge */
+    /*! \return the color of this edge */
     QColor color() const;
 
-    /*! sets the color of this edge */
+    /*! sets the color of this edge 
+	\param color the new color of the edge.
+    */
     void setColor(QColor color);
 
-    /*! gets the from node */
+    /*! \return the from node */
     Node* from() const;
 
-    /*! gets the to node */
+    /*! \return the to node */
     Node* to() const;
     
     /*! reconnect this edge to the nodes */

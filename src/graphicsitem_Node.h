@@ -29,28 +29,67 @@ class QGraphicsSceneMouseEvent;
 namespace libgraph{
   class Node;
 }
-
+/*! \brief the node drawing on screen. 
+  long explanation here...
+*/
 class NodeItem : public QGraphicsItem{
 
 public:
+  /*! default constructor 
+  \param node the libgraph::Node that this item will interact to.
+  \param parent the QGraphicsITem that this Item belongs to. */
   NodeItem(libgraph::Node *node, QGraphicsItem *parent = 0);
 
+  /*! The type of the item */
   enum { Type = UserType + 1 };
+
+  /*! gets the type of the item 
+    \return the type of the item
+  */
   int type() const { return Type; }
 
+  /*! calculates the boundingRect of this item 
+    \return the calculated boudingRect.
+  */
   QRectF boundingRect() const;
+
+  /*! calculates the shape of the node 
+    \return the calculated shape.
+  */
   QPainterPath shape() const;
+
+  /*! paint the node onscreen 
+    \param painter the active painter.
+    \param option the QStyleOptionGraphicsItem flags
+    \param widget the widget that will be affected.*/
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 public slots:
+  /*! Atualize the position of the node onscreen 
+    \param pos the new position.
+  */
   void setPos(QPointF pos);
 
 protected:
-   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+  /*! when the item is changed or anything happens to it, this method is called 
+    \param change the changed flags
+    \param value reference to the new value for the changing.*/
+  QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+
+  /*! when there's a mouse click on the node, this method is invocked 
+    \param event the mouse object
+  */
   void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+  /*! when the mouse is released, this method is invocked 
+    \param event the mouse object
+  */
   void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 signals:
+  /*! emitted when the node change it's position 
+    \param pos the new position
+  */
   void positionChanged(QPointF pos);
 
 private:
