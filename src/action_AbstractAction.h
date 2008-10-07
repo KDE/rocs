@@ -43,16 +43,10 @@ Q_OBJECT
 public: 
 
   /*! Default Constructor  
-    \param type This action's type, must be unique.
     \param scene the GraphicsScene that this action will interact.
     \param parent the MainWindow
   */
-  AbstractAction(int type, GraphScene *scene, QObject *parent);
-  
-  /*! Gets the type of this action 
-    \return the type of this action
-  */
-  int type() { return _type; }
+  AbstractAction(GraphScene *scene, QObject *parent);
 
   /*! Atualize the Graph Document that this action will work on 
     \param graphDocument the pointer to the active libgraph::GraphDocument
@@ -66,17 +60,14 @@ public slots:
   void setGraph(libgraph::Graph *graph);
 
   /*! pure virtual, reimplement it on others, this will be the action that will happen in the graph 
-    \param type the type of action to be executed (need to check if it's equal this action).
-    \param pos the position on screen that the execution will take part.
+     \param pos the position on screen that the execution will take part.
   */
-  virtual void execute(int type, QPointF pos) = 0;
+  virtual void execute(QPointF pos) = 0;
 
   /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
   void sendExecuteBit();
 
 protected:
-
-  int _type; /*! must be unique, doesn't matter what number is. */
   libgraph::GraphDocument *_graphDocument;  /*! pointer to the active graph document */
   libgraph::Graph *_graph;	/*! pointer to the active graph */
   GraphScene *_graphScene;	/*! pointer to the GraphicsScene with the drawing */

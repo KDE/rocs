@@ -24,8 +24,10 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
+
 class MainWindow;
 class QGraphicsSceneMouseEvent;
+class AbstractAction;
 
 namespace libgraph{
   class GraphDocument;
@@ -52,7 +54,7 @@ public:
     */
 
     GraphScene ( QObject* parent );
-    void setAction(int action);
+    void setAction(AbstractAction *action);
     void setSceneRect(qreal width, qreal height);
 private:
    /*! 
@@ -74,11 +76,7 @@ private:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
 
-  int _action;
-public slots:
-
-signals:
-    void executeAction(int action, QPointF pos);
+  AbstractAction *_action;
 
 };
 #endif

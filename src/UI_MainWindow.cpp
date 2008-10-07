@@ -88,9 +88,9 @@ void MainWindow::setupActions(){
   GraphScene *gc = _GraphEdit->scene();
 
   _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
-  _paletteActions->addAction("pointer_action", new PointerAction(0, gc, this));  
-  _paletteActions->addAction("add_node_action", new AddNodeAction(1, gc, this));
-  _paletteActions->addAction("add_edge_action", new AddEdgeAction(2, gc, this));
+  _paletteActions->addAction("pointer_action", new PointerAction(gc, this));  
+  _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
+  _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
   _PaletteBar->setActionCollection(_paletteActions);
   
 }

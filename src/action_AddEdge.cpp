@@ -26,7 +26,8 @@
 
 #include <KDebug>
 
-AddEdgeAction::AddEdgeAction(int type, GraphScene *scene, QObject *parent) : AbstractAction(type, scene, parent){
+AddEdgeAction::AddEdgeAction(GraphScene *scene, QObject *parent) 
+: AbstractAction(scene, parent){
   setText(i18n ( "Add Edge" ));
   setToolTip ( i18n ( "Creates a new edge between 2 nodes" ) );
   setIcon ( KIcon ( "pointer" ) );
@@ -40,11 +41,7 @@ AddEdgeAction::~AddEdgeAction(){
   kDebug() << "Destroyed";
 }
 
-void AddEdgeAction::execute(int action, QPointF pos){
-  if (action != _type){
-    return;
-  }
-
+void AddEdgeAction::execute(QPointF pos){
   if (_graph == 0){
     kDebug() << "Error, Graph == 0";
     return;

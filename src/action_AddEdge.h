@@ -34,11 +34,10 @@ class AddEdgeAction : public AbstractAction{
   public:
     /*! 
       Default constructor 
-      \param type the Type for 'Add Node' action. must be unique.
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
   
-    AddEdgeAction(int type, GraphScene *scene, QObject *parent = 0);
+    AddEdgeAction(GraphScene *scene, QObject *parent = 0);
   
     /*! 
       Default Destructor 
@@ -51,7 +50,7 @@ class AddEdgeAction : public AbstractAction{
       \param pos the position on the screen that the new node will be placed.
 
     */
-    void execute(int type, QPointF pos);
+    void execute(QPointF pos);
 };
 
 #endif

@@ -42,7 +42,7 @@
 GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
   setupUi(this);
   _graphDocument = 0;
-
+  _graph = 0;
   _graphScene = new GraphScene(this);
   _graphicsView->setScene(_graphScene);
 
@@ -101,7 +101,9 @@ GraphScene *GraphEditWidget::scene() const{
 }
 
 void GraphEditWidget::setGraph(libgraph::Graph *graph){
-  if (_graph != 0)
+  if (_graph != 0){
+    _graph->disconnect();
+  }
   _graph = graph;
   connect(_graph, SIGNAL(nodeCreated(libgraph::Node*)), this, SLOT( createNode(libgraph::Node*)));
   kDebug() << "graph -> nodeCreated connected with GraphEdit -> createNode";
@@ -111,4 +113,5 @@ void GraphEditWidget::createNode(libgraph::Node *node){
   NodeItem *nodeitem = new NodeItem( node );
   _graphScene->addItem(nodeitem); 
   kDebug() << "Node Created on Screen";
+  kDebug() << "Number of Nodes on Screen:"  << _graphScene->items().size() - 4;
 }

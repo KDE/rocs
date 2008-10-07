@@ -24,11 +24,10 @@
 #include <QPointF>
 #include <KDebug>
 
-AbstractAction::AbstractAction(int type, GraphScene *scene, QObject *parent) : KAction(parent)
+AbstractAction::AbstractAction(GraphScene *scene, QObject *parent) : KAction(parent)
 {
   _graphDocument = 0;
   _graph = 0;
-  _type = type; 
   _graphScene = scene;
 }
 
@@ -44,5 +43,5 @@ void AbstractAction::setGraph(libgraph::Graph *graph){
 
 void AbstractAction::sendExecuteBit()
 {
-  _graphScene -> setAction ( _type );
+  _graphScene -> setAction ( this );
 }

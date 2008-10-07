@@ -20,6 +20,7 @@
 */
 #include "UI_GraphScene.h"
 #include "UI_MainWindow.h"
+#include "action_AbstractAction.h"
 
 #include <QGraphicsSceneMouseEvent>
 #include <KDebug>
@@ -58,8 +59,8 @@ void GraphScene::setSceneRect(qreal width, qreal height)
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent){
-  kDebug() << "Clicked inside of the scene";
-  emit executeAction(_action, mouseEvent->scenePos());
+  kDebug() << "Clicked inside of the scene at" << mouseEvent->scenePos().x() << mouseEvent->scenePos().y() ;
+  _action->execute(mouseEvent->scenePos());
 }
 
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent){
@@ -70,6 +71,6 @@ void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent){
 
 }
 
-void GraphScene::setAction(int action){
+void GraphScene::setAction(AbstractAction *action){
   _action = action;
 }

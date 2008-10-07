@@ -26,7 +26,8 @@
 
 #include <KDebug>
 
-AddNodeAction::AddNodeAction(int type, GraphScene *scene, QObject *parent) : AbstractAction(type, scene, parent){
+AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent) 
+: AbstractAction(scene, parent){
   setText(i18n ( "Add Node" ));
   setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
   setIcon ( KIcon ( "pointer" ) );
@@ -40,11 +41,7 @@ AddNodeAction::~AddNodeAction(){
   kDebug() << "Destroyed";
 }
 
-void AddNodeAction::execute(int action, QPointF pos){
-  if (action != _type){
-    return;
-  }
-
+void AddNodeAction::execute(QPointF pos){
   if (_graph == 0){
     kDebug() << "Error, Graph == 0";
     return;
