@@ -99,6 +99,8 @@ class Edge : public QObject
     /*! disconnect this edge from the nodes */
     void disconnectNodes();
 
+    void remove();
+
   signals:
     /*! emited when the name changes */
     void nameChanged(QString name);
@@ -112,6 +114,7 @@ class Edge : public QObject
     /*! emited when the color changes */
     void colorChanged(QColor color);
 
+    void removed();
   private:
     Node* _from;
     Node* _to;
@@ -125,4 +128,5 @@ class Edge : public QObject
 };
 
 }
+
 #endif

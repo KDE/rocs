@@ -26,22 +26,35 @@
 
 #include "graphicsitem_Node.h"
 #include "libgraph_Node.h"
+#include <KDebug>
 
 NodeItem::NodeItem(libgraph::Node *node, QGraphicsItem *parent)
-     : QGraphicsItem(parent)
+     : QGraphicsItem(parent), QObject(0)
 {
     _node = node;
     setPos( _node -> position() );
     setFlag(ItemIsMovable);
     setCacheMode(DeviceCoordinateCache);
     setZValue(1);
+  
+  connect (_node, SIGNAL(nameChanged(QString)), 
+      this, SLOT(changeName(QString)));
+  connect (_node, SIGNAL(positionChanged(QPointF)), 
+      this, SLOT(changePosition(QPointF)));
+  connect (_node, SIGNAL(colorChanged(QColor)), 
+      this, SLOT(changeColor(QColor)));
+  connect (_node, SIGNAL(indexChanged(int)), 
+      this, SLOT(changeIndex(int)));
+  connect (_node, SIGNAL(visitedChanged(bool)), 
+      this, SLOT(changeVisited(bool)));
+  connect (_node, SIGNAL(removed()), 
+      this, SLOT(removed()));
 }
 
  QRectF NodeItem::boundingRect() const
  {
      qreal adjust = 2;
-     return QRectF(-10 - adjust, -10 - adjust,
-                   23 + adjust, 23 + adjust);
+     return QRectF(-10 - adjust, -10 - adjust, 23 + adjust, 23 + adjust);
  }
 
  QPainterPath NodeItem::shape() const
@@ -61,11 +74,11 @@ NodeItem::NodeItem(libgraph::Node *node, QGraphicsItem *parent)
      if (option->state & QStyle::State_Sunken) {
          gradient.setCenter(3, 3);
          gradient.setFocalPoint(3, 3);
-         gradient.setColorAt(1, QColor(Qt::yellow).light(120));
-         gradient.setColorAt(0, QColor(Qt::darkYellow).light(120));
+         gradient.setColorAt(1, QColor(_node->color()).light(120));
+         gradient.setColorAt(0, QColor(_node->color()));
      } else {
-         gradient.setColorAt(0, Qt::yellow);
-         gradient.setColorAt(1, Qt::darkYellow);
+         gradient.setColorAt(0,_node->color());
+         gradient.setColorAt(1,_node->color());
      }
      painter->setBrush(gradient);
      painter->setPen(QPen(Qt::black, 0));
@@ -102,3 +115,34 @@ void NodeItem::setPos(QPointF pos)
 {
   QGraphicsItem::setPos(pos);
 }
+
+
+void NodeItem::changeName(QString name){
+  kDebug() << " Not Implemented Yet " << "changeName";
+}
+  
+void NodeItem::changePosition(QPointF position){
+  QGraphicsItem::setPos(position);
+  kDebug() << "Position of node" << _node->index() << "changed";
+}
+  
+
+void NodeItem::changeColor(QColor color){
+  update();
+  kDebug() << "Color of node" << _node ->index() << "changed";
+}
+
+void NodeItem::changeIndex(int index){
+  kDebug() << " Not Implemented Yet " << "changeIndex";
+}
+
+
+void NodeItem::changeVisited(bool b){
+  kDebug() << " Not Implemented Yet " << "changeVisited";
+}
+
+void NodeItem::removed(){
+  kDebug() << " Not Implemented Yet " << "removed";
+}
+
+#include "graphicsitem_Node.moc"

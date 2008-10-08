@@ -92,20 +92,23 @@ Graph* GraphDocument::at(int i){
 }
 
 // Creates a new Graph
-Graph* GraphDocument::addGraph(QString name, int type){
+void GraphDocument::addGraph(QString name, int type){
   Graph *g = 0;
   switch(type){
     case 0 : g = new SimpleGraph(this); break;
     case 1 : g = new MultiGraph(this); break;
     case 2 : g = new Digraph(this); break;
   }
-
+  name += QString::number( _graphs.size() );
   g -> setName(name);
+ // _graphs.append(g);
+  //emit graphCreated(g);
 
-  emit graphCreated(g);
-  return g;
 }
 
+QList<Graph*> GraphDocument::graphs() const{
+  return _graphs;
+}
 // Append a grpah on the graph's list
 void GraphDocument::operator<<(Graph *g){
   _graphs << g;

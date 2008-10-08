@@ -33,6 +33,7 @@ Edge::Edge(Node *from, Node *to, Graph *parent) : QObject(parent){
 }
 
 Edge::~Edge(){
+  emit removed();
   // Remove from '_from', '_to', and the Parent Graph.
   Graph *g = qobject_cast<Graph *>(parent());
   
@@ -105,4 +106,10 @@ void Edge::disconnectNodes(){
   _to = 0;
   _from_disconnected = _from;
   _from = 0;
+}
+
+void Edge::remove(){
+  
+  Graph *g = qobject_cast<Graph*>(parent());
+  g->removeEdge(this);
 }

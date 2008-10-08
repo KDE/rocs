@@ -42,11 +42,7 @@ GraphLayersDockWidget::GraphLayersDockWidget(QWidget* parent, Qt::WindowFlags fl
 
 void GraphLayersDockWidget::on__btnNewGraph_clicked()
 {
-  if ( _document == 0){
-    kDebug() << " _document is NULL ";
-    return;
-  }
-  _graphLayersListView->model()->insertRow(1);
+  _graphLayersListView->model()->insertRow(0);
   kDebug() << " Graph Created ";
 }
 

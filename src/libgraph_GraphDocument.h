@@ -104,11 +104,8 @@ public:
   */
   void prepend(Graph *g);
 
-  /*! Creates a new Graph 
-    \param name the name of the graph
-    \param type the the of the graph. 
-  */
-  Graph *addGraph(QString name = "", int type = 0);
+  /*! get the graph's list */
+  QList<Graph*> graphs() const;
   
   /*! Removes the graph at position 'i' 
     \param i the position to remove the graph.
@@ -136,6 +133,13 @@ public:
 
   /*! \return the current script on this file */
   QString script();
+
+public slots:
+  /*! Creates a new Graph 
+    \param name the name of the graph
+    \param type the the of the graph. 
+  */
+  void addGraph(QString name = "", int type = 0);
 
 signals:
   /*! emited when a new graph is created 

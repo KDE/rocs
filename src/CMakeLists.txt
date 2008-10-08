@@ -40,6 +40,8 @@ set(Rocs_SRCS
   libgraph_Node.cpp
   libgraph_SimpleGraph.cpp
   libgraph_SimpleNode.cpp
+
+  kross_rocsengine.cpp
 )
 
 kde4_add_ui_files( 
@@ -63,7 +65,9 @@ set(Rocs_KCFGS settings.kcfgc)
 
 kde4_add_kcfg_files( Rocs_SRCS ${Rocs_KCFGS} )
 kde4_add_executable(Rocs ${Rocs_SRCS} ${Rocs_RCC_SRCS})
+
 target_link_libraries(Rocs ${KDE4_KDEUI_LIBS}
+			   ${KDE4_KROSSUI_LIBS}
                            ${KDE4_KIO_LIBS}
                            ${KDE4_KTEXTEDITOR_LIBS}
                            ${QT_QTSCRIPT_LIBRARY}

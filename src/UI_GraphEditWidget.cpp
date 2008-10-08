@@ -30,6 +30,8 @@
 #include "libgraph_Node.h"
 #include "libgraph_Edge.h"
 
+#include "kross_rocsengine.h"
+
 #include <ktexteditor/editor.h>
 #include <ktexteditor/editorchooser.h>
 #include <ktexteditor/view.h>
@@ -161,4 +163,15 @@ void GraphEditWidget::connectGraphSignals(libgraph::Graph *graph){
 	  this,   SLOT( removeEdge( int ) ) 
   );
   kDebug() << "Graph Signals Connected with GraphEdit";
+}
+
+
+void GraphEditWidget::on__btnRunScript_clicked(){
+  if ( _graphDocument == 0 ) return;
+
+  kross_rocsengine e;
+  e.setDocument( _graphDocument );
+  e.setEngine( _cmbEngine->currentText());
+  e.execute( _txtEditScriptDocument -> text() );
+  
 }

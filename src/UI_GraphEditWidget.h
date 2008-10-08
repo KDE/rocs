@@ -37,6 +37,7 @@ namespace libgraph{
   class Edge;
 }
 
+
 class GraphScene;
 class MainWindow;
 
@@ -57,6 +58,7 @@ public slots:
   void removeEdge(int e);
   void graphColorChanged(const QColor& c);
   void graphNameChanged(QString name);
+  void on__btnRunScript_clicked();
 
 private:
   void drawGraphOnScene(libgraph::Graph *g);

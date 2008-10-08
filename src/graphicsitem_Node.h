@@ -32,8 +32,8 @@ namespace libgraph{
 /*! \brief the node drawing on screen. 
   long explanation here...
 */
-class NodeItem : public QGraphicsItem{
-
+class NodeItem : public QObject, public QGraphicsItem{
+Q_OBJECT
 public:
   /*! default constructor 
   \param node the libgraph::Node that this item will interact to.
@@ -85,6 +85,25 @@ protected:
     \param event the mouse object
   */
   void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+protected slots:
+  /*! connect with nameChanged signal */
+  void changeName(QString name);
+  
+  /*! emited when the position changes */
+  void changePosition(QPointF position);
+  
+  /*! emited wwhen the color changes */
+  void changeColor(QColor color);
+
+  /*! emited when the index changes */
+  void changeIndex(int index);
+
+  /*! emited when visited status changes */
+  void changeVisited(bool b);
+
+  /*! Emited when a node is removed */
+  void removed();
 
 signals:
   /*! emitted when the node change it's position 

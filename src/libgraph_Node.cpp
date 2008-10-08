@@ -34,6 +34,7 @@ Node::Node( QPointF position, Graph *parent ) : QObject(parent){
   
 // Default Destructor 
 Node::~Node(){
+  emit removed();
   // Must remove each edge that this node is connected to.
   foreach(Edge *e, _edges)  delete e;
   _edges.clear();
@@ -123,4 +124,9 @@ void Node::unsetVisited(){
 
   _visited = false;
   emit visitedChanged(false);
+}
+
+void Node::remove(){
+  Graph *_p = qobject_cast<Graph*>(parent());
+  _p->removeNode(this);
 }

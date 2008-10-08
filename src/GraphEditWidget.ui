@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>636</width>
+    <width>688</width>
     <height>624</height>
    </rect>
   </property>
@@ -53,26 +53,48 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QSlider" name="_zoomLevelSlider" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="orientation" >
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="tickPosition" >
-            <enum>QSlider::NoTicks</enum>
+           <item>
+          <widget class="KSqueezedTextLabel" name="_txtStatus" >
+           <property name="text" >
+            <string>KSqueezedTextLabel</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="KSqueezedTextLabel" name="_txtStatus" >
+          <widget class="QComboBox" name="_cmbEngine" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <item>
+            <property name="text" >
+             <string>javascript</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>python</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>ruby</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="_btnRunScript" >
            <property name="text" >
-            <string>KSqueezedTextLabel</string>
+            <string>Run</string>
            </property>
           </widget>
          </item>
@@ -186,4 +208,5 @@
    </hints>
   </connection>
  </connections>
+
 </ui>

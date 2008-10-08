@@ -92,7 +92,10 @@ void MainWindow::setupActions(){
   _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
   _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
   _PaletteBar->setActionCollection(_paletteActions);
+
+  // Pointer Action is the first. 
   _GraphEdit->scene()->setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
+
 }
 
 void MainWindow::setupSignals(){
@@ -113,10 +116,8 @@ void MainWindow::setupSignals(){
   
   GraphScene *gc = _GraphEdit->scene();
   foreach( QAction *action, _paletteActions->actions() ){
-    
       connect( _GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
       action, SLOT(setGraph(libgraph::Graph*)));
-
   }
 }
 

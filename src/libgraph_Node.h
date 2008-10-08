@@ -116,6 +116,7 @@ public:
   /*! Return the first unvisited edge on the list */
   virtual Edge *getFirstUnvisitedEdge() = 0; 
 
+  void remove();
 
 signals:
   /*! emited when the name changes */
@@ -133,6 +134,9 @@ signals:
   /*! emited when visited status changes */
   void visitedChanged(bool b);
 
+  /*! Emited when a node is removed */
+  void removed();
+
 protected:
   QList<Edge*> _edges;
   QColor _color;
@@ -144,4 +148,5 @@ protected:
 };
 
 }
+
 #endif
