@@ -62,7 +62,9 @@ public slots:
   /*! pure virtual, reimplement it on others, this will be the action that will happen in the graph 
      \param pos the position on screen that the execution will take part.
   */
-  virtual void execute(QPointF pos) = 0;
+  virtual void executePress(QPointF pos);
+  virtual void executeMove(QPointF pos);
+  virtual void executeRelease(QPointF pos);
 
   /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
   void sendExecuteBit();

@@ -50,7 +50,9 @@ class AddEdgeAction : public AbstractAction{
       \param pos the position on the screen that the new node will be placed.
 
     */
-    void execute(QPointF pos);
+    void executePress(QPointF pos);
+    void executeMove(QPointF pos);
+    void executeRelease(QPointF pos);
 };
 
 #endif

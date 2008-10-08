@@ -45,3 +45,7 @@ void AbstractAction::sendExecuteBit()
 {
   _graphScene -> setAction ( this );
 }
+
+void AbstractAction::executePress(QPointF){ return; }
+void AbstractAction::executeMove(QPointF){ return; }
+void AbstractAction::executeRelease(QPointF) { return; }

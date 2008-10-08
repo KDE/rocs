@@ -41,7 +41,7 @@ AddEdgeAction::~AddEdgeAction(){
   kDebug() << "Destroyed";
 }
 
-void AddEdgeAction::execute(QPointF pos){
+void AddEdgeAction::executePress(QPointF pos){
   if (_graph == 0){
     kDebug() << "Error, Graph == 0";
     return;
@@ -50,3 +50,7 @@ void AddEdgeAction::execute(QPointF pos){
   kDebug() << " NOT IMPLEMENTED YET ";
 
 }
+
+void AddEdgeAction::executeMove(QPointF pos){}
+
+void AddEdgeAction::executeRelease(QPointF pos){}

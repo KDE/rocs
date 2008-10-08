@@ -60,15 +60,15 @@ void GraphScene::setSceneRect(qreal width, qreal height)
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent){
   kDebug() << "Clicked inside of the scene at" << mouseEvent->scenePos().x() << mouseEvent->scenePos().y() ;
-  _action->execute(mouseEvent->scenePos());
+  _action->executePress(mouseEvent->scenePos());
 }
 
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent){
-
+  _action->executeMove(mouseEvent->scenePos());
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent){
-
+  _action->executeRelease(mouseEvent->scenePos());
 }
 
 void GraphScene::setAction(AbstractAction *action){

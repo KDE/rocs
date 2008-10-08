@@ -74,6 +74,7 @@ void GraphEditWidget::setGraphDocument(libgraph::GraphDocument *gd){
   
   int size = gd->size();
   for(int i = 0; i < size; i++){
+    connectGraphSignals( gd->at(i) );
     drawGraphOnScene( gd->at(i) );
   }
   
@@ -105,8 +106,7 @@ void GraphEditWidget::setGraph(libgraph::Graph *graph){
     _graph->disconnect();
   }
   _graph = graph;
-  connect(_graph, SIGNAL(nodeCreated(libgraph::Node*)), this, SLOT( createNode(libgraph::Node*)));
-  kDebug() << "graph -> nodeCreated connected with GraphEdit -> createNode";
+  connectGraphSignals(graph);
 }
 
 void GraphEditWidget::createNode(libgraph::Node *node){
@@ -114,4 +114,51 @@ void GraphEditWidget::createNode(libgraph::Node *node){
   _graphScene->addItem(nodeitem); 
   kDebug() << "Node Created on Screen";
   kDebug() << "Number of Nodes on Screen:"  << _graphScene->items().size() - 4;
+}
+
+void GraphEditWidget::createEdge(libgraph::Edge *edge)
+{
+  kDebug() << "Should Insert an edge on screen, NOT IMPLEMENTED YET";
+}
+
+void GraphEditWidget::removeNode(int i)
+{
+  kDebug() << "Should remove a node and associated edges, NOT IMPLEMENTED YET";
+}
+
+void GraphEditWidget::removeEdge(int e)
+{
+  kDebug() << "Should remove an edge, NOT IMPLEMENTED  YET";
+}
+
+void GraphEditWidget::graphColorChanged(const QColor& c)
+{
+  kDebug() << "Should change the graph's outlines color. NOT IMPLEMENTED YET";
+}
+
+void GraphEditWidget::graphNameChanged(QString name)
+{
+  kDebug() << "Should change the graph's name onscreen. NOT IMPLEMENTED YET";
+}
+
+void GraphEditWidget::connectGraphSignals(libgraph::Graph *graph){
+  connect(_graph, SIGNAL( nodeCreated( libgraph::Node* ) ), 
+	  this,   SLOT( createNode( libgraph::Node* ) ) 
+  );
+  connect(_graph, SIGNAL( nameChanged( QString& ) ), 	
+	  this,   SLOT( graphNameChanged( QString& )) 
+  );
+  connect(_graph, SIGNAL( colorChanged( const QColor& ) ), 	
+	  this,   SLOT( graphColorChanged( ) )
+  );
+  connect(_graph, SIGNAL( edgeCreated( libgraph::Edge* ) ), 
+	  this,   SLOT( createEdge( libgraph::Edge* ) ) 
+  );
+  connect(_graph, SIGNAL( nodeRemoved( int ) ), 
+	  this,   SLOT( removeNode( int ) ) 
+  );
+  connect(_graph, SIGNAL( edgeRemoved( int ) ), 
+	  this,   SLOT( removeEdge( int ) ) 
+  );
+  kDebug() << "Graph Signals Connected with GraphEdit";
 }

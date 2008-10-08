@@ -52,9 +52,16 @@ public:
 public slots:
   void setGraphDocument(libgraph::GraphDocument *gd);
   void createNode(libgraph::Node *node);
+  void createEdge(libgraph::Edge *edge);
+  void removeNode(int i);
+  void removeEdge(int e);
+  void graphColorChanged(const QColor& c);
+  void graphNameChanged(QString name);
+
 private:
   void drawGraphOnScene(libgraph::Graph *g);
-  
+  void connectGraphSignals(libgraph::Graph *g);
+
   KTextEditor::Editor *_editor;
   KTextEditor::View *_txtEditScriptView;
   

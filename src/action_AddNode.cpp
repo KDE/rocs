@@ -30,7 +30,7 @@ AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent)
 : AbstractAction(scene, parent){
   setText(i18n ( "Add Node" ));
   setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
-  setIcon ( KIcon ( "pointer" ) );
+  setIcon ( KIcon ( "edit-select-all" ) );
   setCheckable ( true );
   setChecked ( false );
 
@@ -41,12 +41,11 @@ AddNodeAction::~AddNodeAction(){
   kDebug() << "Destroyed";
 }
 
-void AddNodeAction::execute(QPointF pos){
+void AddNodeAction::executePress(QPointF pos){
   if (_graph == 0){
     kDebug() << "Error, Graph == 0";
     return;
   }
   _graph -> createNode(pos);
   kDebug() << "Action Executed at pos " << pos.x() << pos.y();
-
 }
