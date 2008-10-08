@@ -23,6 +23,7 @@
 #include <QString>
 #include <QDebug>
 #include <QModelIndex>
+#include <KDebug>
 
 GraphLayersModel::GraphLayersModel(libgraph::GraphDocument *document, QObject *parent)
   : QAbstractListModel( parent ){
@@ -57,9 +58,8 @@ Qt::ItemFlags GraphLayersModel::flags(const QModelIndex& index) const{
 
 bool GraphLayersModel::setData(const QModelIndex& index, const QVariant& value, int role){
   if ( index.isValid() && (role == Qt::ItemIsEditable)) {
-    _document->at(index.row())-> setName(value.toString());
-    emit dataChanged(index, index);
-    return true;
+    libgraph::Graph *g = _document->at(index.row());
+    g-> setName(value.toString());
   }
   return false;
 }
@@ -67,8 +67,10 @@ bool GraphLayersModel::setData(const QModelIndex& index, const QVariant& value, 
 bool GraphLayersModel::insertRows(int position, int rows, const QModelIndex &index){
   if ( _document == 0) return false;
 
-  beginInsertRows(QModelIndex(), position, position+rows-1);  
-  _document->addGraph("untitled");  
+  beginInsertRows(QModelIndex(), position, position+rows-1);
+  libgraph::Graph *g = new libgraph::Graph(_document);
+  g->setName("untitled");
+  connect(g, SIGNAL(nameChanged(libgraph::Graph*)), this, SLOT(update(libgraph::Graph*)));
   endInsertRows();
   return true;
 }
@@ -85,4 +87,11 @@ bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex &ind
 libgraph::Graph *GraphLayersModel::at(const QModelIndex& index)
 {
   return _document->at(index.row());
+}
+
+void GraphLayersModel::update(libgraph::Graph *g){
+  kDebug() << "Tryed to change the name of the graph on the model";
+  int i = _document->indexOf(g);
+  QModelIndex index = QAbstractItemModel::createIndex(i, 0);
+  emit dataChanged(index, index);
 }

@@ -108,7 +108,7 @@ public:
 
 signals:
   /*! emited when the name changes */
-  void nameChanged(const QString& name);
+  void nameChanged(libgraph::Graph *g);
 
   /*! emited when the color chnges */
   void colorChanged(const QColor& color);

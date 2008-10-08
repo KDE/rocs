@@ -45,6 +45,8 @@ class GraphLayersModel : public QAbstractListModel
 
       libgraph::Graph *at(const QModelIndex& index);
 
+  private slots:
+    void update(libgraph::Graph *g);
   private:
     libgraph::GraphDocument *_document;
   

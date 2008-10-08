@@ -54,7 +54,8 @@ Graph::Graph(const Graph& graph) : QObject( graph.parent() )
 // Changes the Graph's Name 
 void Graph::setName(const QString& name){
   _name = name;
-  emit nameChanged(name);
+  emit nameChanged(this);
+  kDebug() << "nameChanged signal emitted";
 }
 
 //  Gets the name of the graph 

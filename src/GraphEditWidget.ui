@@ -53,7 +53,7 @@
            </property>
           </widget>
          </item>
-           <item>
+         <item>
           <widget class="KSqueezedTextLabel" name="_txtStatus" >
            <property name="text" >
             <string>KSqueezedTextLabel</string>
@@ -123,7 +123,7 @@
           <enum>QTabWidget::South</enum>
          </property>
          <property name="currentIndex" >
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="_tabEditor" >
           <attribute name="title" >
@@ -136,7 +136,7 @@
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_3" >
            <item>
-            <widget class="KTextBrowser" name="ktextbrowser" />
+            <widget class="KTextBrowser" name="_txtDebug" />
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3" >
@@ -194,7 +194,7 @@
   <connection>
    <sender>_btnClearDebugArea</sender>
    <signal>clicked()</signal>
-   <receiver>ktextbrowser</receiver>
+   <receiver>_txtDebug</receiver>
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -208,5 +208,4 @@
    </hints>
   </connection>
  </connections>
-
 </ui>

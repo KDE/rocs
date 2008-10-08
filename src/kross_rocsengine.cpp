@@ -3,9 +3,10 @@
 #include "libgraph_Graph.h"
 #include <QList>
 #include <KDebug>
+#include <KTextBrowser>
 
-kross_rocsengine::kross_rocsengine(){
-
+kross_rocsengine::kross_rocsengine(KTextBrowser *debugArea){
+  _debugArea = debugArea;
 }
 
 void kross_rocsengine::setDocument(libgraph::GraphDocument *gd){
@@ -29,6 +30,8 @@ void kross_rocsengine::execute(const QString& script){
     action.addObject( g, g->name());
   }
 
+  action.addObject( _debugArea, "debug");
+
   if(_engine == "python")          configureForPython(action);
   else if(_engine == "ruby")       configureForRuby(action);
   else if(_engine == "javascript") configureForJavaScript(action);
@@ -36,6 +39,7 @@ void kross_rocsengine::execute(const QString& script){
   action.setCode( script.toAscii() );
 
   action.trigger();
+  kDebug()  << "Should Have Worked";
 }
 
 void kross_rocsengine::configureForJavaScript(Kross::Action& action){

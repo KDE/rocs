@@ -99,11 +99,10 @@ void GraphDocument::addGraph(QString name, int type){
     case 1 : g = new MultiGraph(this); break;
     case 2 : g = new Digraph(this); break;
   }
-  name += QString::number( _graphs.size() );
-  g -> setName(name);
- // _graphs.append(g);
-  //emit graphCreated(g);
 
+  if (name == "untitled") name += QString::number( _graphs.size() );
+
+  g -> setName(name);
 }
 
 QList<Graph*> GraphDocument::graphs() const{

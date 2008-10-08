@@ -9,10 +9,11 @@ namespace Kross{
 namespace libgraph{
   class GraphDocument;
 }
+class KTextBrowser;
 
 class kross_rocsengine{
 public:
-  kross_rocsengine();
+  kross_rocsengine(KTextBrowser *debugArea);
   void setDocument(libgraph::GraphDocument *gd);
   void setEngine(const QString& engine);
   void execute(const QString& script);
@@ -22,9 +23,9 @@ private:
   void configureForPython(Kross::Action& action);
   void configureForRuby(Kross::Action& action);
 
-
   libgraph::GraphDocument *_graphDocument;
   QString _engine;
+  KTextBrowser *_debugArea;
 };
 
 #endif

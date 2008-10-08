@@ -167,11 +167,14 @@ void GraphEditWidget::connectGraphSignals(libgraph::Graph *graph){
 
 
 void GraphEditWidget::on__btnRunScript_clicked(){
+
+  kDebug() << "Button to run Script Clicked" ;
   if ( _graphDocument == 0 ) return;
 
-  kross_rocsengine e;
+  kross_rocsengine e( _txtDebug) ;
   e.setDocument( _graphDocument );
   e.setEngine( _cmbEngine->currentText());
   e.execute( _txtEditScriptDocument -> text() );
   
+
 }
