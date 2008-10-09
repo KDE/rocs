@@ -26,7 +26,9 @@
 
 using namespace libgraph;
 
-SimpleGraph::SimpleGraph(GraphDocument *parent) : Graph(parent){}
+SimpleGraph::SimpleGraph(GraphDocument *parent) : Graph(parent){
+  kDebug() << "Simple Graph Created";
+}
 
 SimpleGraph::~SimpleGraph(){}
 

@@ -57,7 +57,6 @@ public slots:
   void removeNode(int i);
   void removeEdge(int e);
   void graphColorChanged(const QColor& c);
-  void graphNameChanged(QString name);
   void on__btnRunScript_clicked();
 
 private:

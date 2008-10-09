@@ -32,24 +32,18 @@ void kross_rocsengine::execute(const QString& script){
 
   action.addObject( _debugArea, "debug");
 
-  if(_engine == "python")          configureForPython(action);
-  else if(_engine == "ruby")       configureForRuby(action);
-  else if(_engine == "javascript") configureForJavaScript(action);
+  if(_engine == "python"){
+    
+  }
+  else if(_engine == "ruby"){
+
+  }
+  else if(_engine == "javascript"){
+
+  }
   
   action.setCode( script.toAscii() );
 
   action.trigger();
   kDebug()  << "Should Have Worked";
-}
-
-void kross_rocsengine::configureForJavaScript(Kross::Action& action){
-  
-}
-
-void kross_rocsengine::configureForPython(Kross::Action& action){
-
-}
-
-void kross_rocsengine::configureForRuby(Kross::Action& action){
-
 }

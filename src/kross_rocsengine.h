@@ -19,10 +19,6 @@ public:
   void execute(const QString& script);
 
 private:
-  void configureForJavaScript(Kross::Action& action);
-  void configureForPython(Kross::Action& action);
-  void configureForRuby(Kross::Action& action);
-
   libgraph::GraphDocument *_graphDocument;
   QString _engine;
   KTextBrowser *_debugArea;

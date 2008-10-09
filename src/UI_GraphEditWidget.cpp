@@ -41,6 +41,8 @@
 #include <QPointF>
 
 #include <QGraphicsItem>
+#include <KDebug>
+
 GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
   setupUi(this);
   _graphDocument = 0;
@@ -55,7 +57,7 @@ GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
    QVBoxLayout *layout = new QVBoxLayout;
    layout->addWidget(_txtEditScriptView);
   _tabEditor -> setLayout(layout);
-
+  kDebug() << "GraphEditWidget Created";
 }
 
 void GraphEditWidget::setGraphDocument(libgraph::GraphDocument *gd){
@@ -67,13 +69,17 @@ void GraphEditWidget::setGraphDocument(libgraph::GraphDocument *gd){
       _graphScene->removeItem(i);
       delete i;
     }
+    kDebug() << "document " << _graphDocument -> name() << "being disconnected";
     int size = gd->size();
     for(int i = 0; i < size; i++){
       gd->at(i)->disconnect();
+      kDebug() << "graph at " << i << "Disconnected.";
     } 
     _graphDocument -> setScript( _txtEditScriptDocument->text() );
+    kDebug() << "script text saved on graph document " << _graphDocument -> name();
   }
   
+  kDebug() << "document" << gd->name() << "setted as active.";
   int size = gd->size();
   for(int i = 0; i < size; i++){
     connectGraphSignals( gd->at(i) );
@@ -97,6 +103,7 @@ void GraphEditWidget::drawGraphOnScene(libgraph::Graph *g){
   foreach(libgraph::Edge *edge, edges){
 
   }  
+  kDebug() << "Graph drawn on screen"; 
 }
 
 GraphScene *GraphEditWidget::scene() const{
@@ -104,11 +111,9 @@ GraphScene *GraphEditWidget::scene() const{
 }
 
 void GraphEditWidget::setGraph(libgraph::Graph *graph){
-  if (_graph != 0){
-    _graph->disconnect();
-  }
   _graph = graph;
   connectGraphSignals(graph);
+  kDebug() << "new active graph set.";
 }
 
 void GraphEditWidget::createNode(libgraph::Node *node){
@@ -138,20 +143,9 @@ void GraphEditWidget::graphColorChanged(const QColor& c)
   kDebug() << "Should change the graph's outlines color. NOT IMPLEMENTED YET";
 }
 
-void GraphEditWidget::graphNameChanged(QString name)
-{
-  kDebug() << "Should change the graph's name onscreen. NOT IMPLEMENTED YET";
-}
-
 void GraphEditWidget::connectGraphSignals(libgraph::Graph *graph){
   connect(_graph, SIGNAL( nodeCreated( libgraph::Node* ) ), 
 	  this,   SLOT( createNode( libgraph::Node* ) ) 
-  );
-  connect(_graph, SIGNAL( nameChanged( QString& ) ), 	
-	  this,   SLOT( graphNameChanged( QString& )) 
-  );
-  connect(_graph, SIGNAL( colorChanged( const QColor& ) ), 	
-	  this,   SLOT( graphColorChanged( ) )
   );
   connect(_graph, SIGNAL( edgeCreated( libgraph::Edge* ) ), 
 	  this,   SLOT( createEdge( libgraph::Edge* ) ) 

@@ -52,23 +52,35 @@ public:
   /*! Default Destructor */
   virtual ~Graph(); 					// TESTED - OK
     
-  /*! Changes the Graph's Name */
-  void setName(const QString& name); 			// TESTED - OK
+  /*! destroys an edge from the list */
+  void destroyEdge(Edge *e); // WARNING: DO NOT CALL IT DIRECTLY! - TESTED - OK
 
-  /*! gets the name of the Graph */
-  QString name() const; 				// TESTED - OK
+  /*! Creates a new Node */
+  virtual Node* createNode(QPointF Position);		// TEST EACH OF INHERETED ONES.
+
+  /*! Creates a new Edge between 2 nodes */
+  virtual Edge* createEdge(Node* from, Node* to);	// TEST EACH OF INHERETED ONES.
+
+public slots:
+ /*! Changes the Graph's Name */
+  void setName(const QString& name); 			// TESTED - OK
 
   /*! Changes the Graph's Color */
   void setColor(QColor color); 				// TESTED - OK
 
+  /*! Returns all nodes from the graph */		// TESTED - OK
+  QList<Node*> nodes() const;
+
+  /*! Returns all edges from the graph */
+  QList<Edge*> edges() const;		
+
+  /*! gets the name of the Graph */
+  QString name() const; 				// TESTED - OK
+
   /*! Gets the color of the Graph */
   QColor color() const; 				// TESTED - OK
 
-  /*! Creates a new Node */
-  virtual Node* createNode(QPointF Position);	// PURE VIRTUAL, TEST EACH OF INHERETED ONES.
 
-  /*! Creates a new Edge between 2 nodes */
-  virtual Edge* createEdge(Node* from, Node* to);	// PURE VIRTUAL, TEST EACH OF INHERETED ONES.
 
   /*! Removes a node */
   void removeNode(int index);				// TESTED - OK
@@ -81,15 +93,6 @@ public:
 
   /*! removes an edge that doesn't have any more links */
   void removeEdge(Edge *e);				// TESTED - OK
-
-  /*! destroys an edge from the list */
-  void destroyEdge(Edge *e); // WARNING: DO NOT CALL IT DIRECTLY! - TESTED - OK
-
-  /*! Returns all nodes from the graph */		// TESTED - OK
-  QList<Node*> nodes() const;
-
-  /*! Returns all edges from the graph */
-  QList<Edge*> edges() const;				// TESTED - OK
 
   /*! transform this graph into a KGraph */
   void transformIntoKGraph();				// TESTED - OK. ( But should move to respective files, maybe? )

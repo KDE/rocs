@@ -48,6 +48,14 @@ public:
   /*! Default Destructor */
   virtual ~Node();// TESTED - OK
 
+  /*! removes one edge from the list, if the edge exists inside of the node */
+  void destroyEdge(Edge *e); // TESTED - OK
+			      //WARNING: This function CANNOT be called directly. ONLY the edge can call it.
+
+  /*! Add a Edge to the list */
+  virtual void addEdge(Edge *e) = 0;	// PURE VIRTUAL, TEST ON THE INHERETED CLASSES
+
+public slots:
   /*! gets the name of the Node */
   QString name() const;// TESTED - OK
 
@@ -82,15 +90,9 @@ public:
   /*! unset the visited node */
   void unsetVisited();	// TODO: Test this.
 
-  /*! Add a Edge to the list */
-  virtual void addEdge(Edge *e) = 0;	// PURE VIRTUAL, TEST ON THE INHERETED CLASSES
 
   /*! check to see if there's any Node equals to this one on the Connected List */
   virtual bool isConnected(Node *n) = 0; // PURE VIRTUAL, TEST ON THE INHERETED CLASSES
-
-  /*! removes one edge from the list, if the edge exists inside of the node */
-  void destroyEdge(Edge *e); // TESTED - OK
-			      //WARNING: This function CANNOT be called directly. ONLY the edge can call it.
 
   /*! Removes the node at specified index from the list */
   void removeEdge(int index); // TESTED - OK

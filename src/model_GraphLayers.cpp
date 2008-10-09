@@ -28,6 +28,10 @@
 GraphLayersModel::GraphLayersModel(libgraph::GraphDocument *document, QObject *parent)
   : QAbstractListModel( parent ){
   _document = document;
+  connect( _document, SIGNAL( graphCreated(libgraph::Graph*)), 
+	  this, SLOT( connectGraphSignals(libgraph::Graph*)));
+
+  kDebug () << "GraphCreated signal connected with connect graphSignals";
 }
 
 int GraphLayersModel::rowCount(const QModelIndex &parent) const{
@@ -68,9 +72,9 @@ bool GraphLayersModel::insertRows(int position, int rows, const QModelIndex &ind
   if ( _document == 0) return false;
 
   beginInsertRows(QModelIndex(), position, position+rows-1);
-  libgraph::Graph *g = new libgraph::Graph(_document);
-  g->setName("untitled");
-  connect(g, SIGNAL(nameChanged(libgraph::Graph*)), this, SLOT(update(libgraph::Graph*)));
+  QString name = "untitled";
+  name += QString::number( _document->size() );
+  _document->addGraph(name);
   endInsertRows();
   return true;
 }
@@ -83,7 +87,6 @@ bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex &ind
      return true;
 }
 
-
 libgraph::Graph *GraphLayersModel::at(const QModelIndex& index)
 {
   return _document->at(index.row());
@@ -95,3 +98,9 @@ void GraphLayersModel::update(libgraph::Graph *g){
   QModelIndex index = QAbstractItemModel::createIndex(i, 0);
   emit dataChanged(index, index);
 }
+
+void GraphLayersModel::connectGraphSignals(libgraph::Graph *g){
+  kDebug () << "connecting Graph Signals with GraphLayer Model";
+  connect(g, SIGNAL(nameChanged(libgraph::Graph*)), this, SLOT(update(libgraph::Graph*)));
+}
+

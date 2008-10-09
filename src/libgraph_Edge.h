@@ -52,6 +52,7 @@ class Edge : public QObject
     /*! Default Destructor */
     ~Edge();
 
+  public slots:
     /*! \return the visited status.  */
     bool visited() const;
 

@@ -43,6 +43,8 @@ class SimpleGraph : public Graph
 
     /*! Create a new node and places it at expected position */
     Node* createNode(QPointF position);	// TESTED - OK
+  public slots:
+
 };
 
 }

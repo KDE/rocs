@@ -144,7 +144,7 @@ public slots:
 signals:
   /*! emited when a new graph is created 
     \param g the created graph */
-  void graphCreated(Graph *g);
+  void graphCreated(libgraph::Graph *g);
 
   /*! emitted when a graph is removed.
     \param i the index of the removed graph */

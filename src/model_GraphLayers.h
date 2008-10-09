@@ -47,6 +47,7 @@ class GraphLayersModel : public QAbstractListModel
 
   private slots:
     void update(libgraph::Graph *g);
+    void connectGraphSignals(libgraph::Graph *g);
   private:
     libgraph::GraphDocument *_document;
   

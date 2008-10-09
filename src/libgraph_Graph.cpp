@@ -41,6 +41,7 @@ Graph::Graph(GraphDocument *parent) : QObject(parent){
 
 // Default Destructor 
 Graph::~Graph(){
+  kDebug() << "Destructiong the graph";
   foreach(Node *n, _nodes)  delete n;
   _nodes.clear();
   _edges.clear();
@@ -56,6 +57,7 @@ void Graph::setName(const QString& name){
   _name = name;
   emit nameChanged(this);
   kDebug() << "nameChanged signal emitted";
+  kDebug() << "Number of Receivers" << receivers(SIGNAL(nameChanged(libgraph::Graph)));            
 }
 
 //  Gets the name of the graph 

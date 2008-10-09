@@ -39,7 +39,6 @@ bool SimpleNode::isConnected(Node *to){
   return false;
 }
 
-
 void SimpleNode::addEdge(Edge *e){
   Node *from = e->from();
   Node *to = e->to();

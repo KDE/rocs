@@ -39,6 +39,10 @@ public:
   /*! Default Destructor */
   ~SimpleNode();	// TESTED - OK
 
+ /*! Add a edge on the edges list */
+  void addEdge(Edge *e);	// WARNING: DO NOT CALL IT DIRECTLY. 
+
+  public slots:
   /*! Return the first node that this node is connected to. */
   Node *getAdjacentNode(); // TODO: Need to test
 
@@ -58,8 +62,6 @@ public:
   bool isConnected(Node* to);	// TESTED
 				// WARNING: Probably I will need to change the behavior of this method.
 
-  /*! Add a edge on the edges list */
-  void addEdge(Edge *e);	// WARNING: DO NOT CALL IT DIRECTLY. 
 };
 
 }
