@@ -2,6 +2,7 @@
 #define KROSS_ROCSENGINE_H
 
 #include <kross/core/action.h>
+#include <kross/core/manager.h>
 
 namespace Kross{
   class Action;

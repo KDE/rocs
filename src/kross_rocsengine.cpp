@@ -30,19 +30,28 @@ void kross_rocsengine::execute(const QString& script){
     action.addObject( g, g->name());
   }
 
-  action.addObject( _debugArea, "debug");
-
-  if(_engine == "python"){
-    
-  }
-  else if(_engine == "ruby"){
-
-  }
-  else if(_engine == "javascript"){
-
+  foreach(QString s, Kross::Manager::self().interpreters()){
+    kDebug() << "BACKEND FOUND" << s;
   }
   
-  action.setCode( script.toAscii() );
+  action.addObject( _debugArea, "debug");
+
+  QString codeToBeExecuted = "";
+  if(_engine == "python"){
+    foreach(libgraph::Graph* g, graphList){
+      codeToBeExecuted += "import " + g->name() + " \n";
+    }
+    kDebug() << "Python imports : " << codeToBeExecuted;
+  }
+  else if(_engine == "ruby"){
+    foreach(libgraph::Graph* g, graphList){
+      codeToBeExecuted += "require '" + g->name() + "' \n";
+    }
+    kDebug() << "ruby requires : " << codeToBeExecuted;
+  }
+    
+  codeToBeExecuted += script;
+  action.setCode( codeToBeExecuted.toAscii() );
 
   action.trigger();
   kDebug()  << "Should Have Worked";
