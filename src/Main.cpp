@@ -24,12 +24,6 @@
 #include <KCmdLineArgs>
 #include "UI_MainWindow.h"
 
-#include "libgraph_GraphDocument.h"
-#include "libgraph_Graph.h"
-#include "model_GraphDocument.h"
-
-#include <QListView>
-#include <QDebug>
 int main ( int argc, char *argv[] ){
   KAboutData aboutData ( "Rocs",
                          0,
