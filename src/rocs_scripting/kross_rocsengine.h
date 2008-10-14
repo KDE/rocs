@@ -3,7 +3,6 @@
 
 #include <kross/core/action.h>
 #include <kross/core/manager.h>
-#include "rocsengine_export.h"
 
 namespace Kross{
   class Action;
