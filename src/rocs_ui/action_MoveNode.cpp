@@ -49,15 +49,7 @@ void MoveNodeAction::executePress(QPointF pos){
     kDebug() << "Error, Graph == 0";
     return;
   }
-  QGraphicsItem *item = _graphScene->itemAt(pos);
-  _movableNode = qgraphicsitem_cast<NodeItem*>(item);
-  if ( _movableNode ){
-    kDebug() << "Got the node! ";
-  }
-  else{
-    kDebug() << "Got Nothing!";
-  }
-  kDebug() << "Action Executed at pos " << pos.x() << pos.y();
+  _movableNode = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
 }
 
 void MoveNodeAction::executeMove(QPointF pos){
@@ -67,10 +59,6 @@ void MoveNodeAction::executeMove(QPointF pos){
   _movableNode -> node() -> setPosition( pos );
 }
 
-void MoveNodeAction::executeRelease(QPointF pos){
-  if (! _movableNode ){
-    return;
-  }
-  _movableNode -> node() -> setPosition( pos );
+void MoveNodeAction::executeRelease(QPointF){
   _movableNode = 0;
 }
