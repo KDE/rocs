@@ -111,12 +111,6 @@ QVariant NodeItem::itemChange(GraphicsItemChange change, const QVariant &value){
      QGraphicsItem::mouseReleaseEvent(event);
  }
 
-void NodeItem::setPos(QPointF pos)
-{
-  QGraphicsItem::setPos(pos);
-}
-
-
 void NodeItem::changeName(QString){
   kDebug() << " Not Implemented Yet " << "changeName";
 }

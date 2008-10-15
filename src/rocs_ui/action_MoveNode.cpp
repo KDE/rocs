@@ -1,3 +1,4 @@
+
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -17,3 +18,59 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#include "action_MoveNode.h"
+#include "UI_GraphScene.h"
+#include "libgraph_Graph.h"
+#include "libgraph_Node.h"
+#include "graphicsitem_Node.h"
+#include <KLocale>
+
+#include <KDebug>
+
+MoveNodeAction::MoveNodeAction(GraphScene *scene, QObject *parent) 
+: AbstractAction(scene, parent){
+  setText(i18n ( "Move Node" ));
+  setToolTip ( i18n ( "Moves a node around the drawing area." ) );
+  setIcon ( KIcon ( "move-node" ) );
+  setCheckable ( true );
+  setChecked ( false );
+
+  _movableNode = 0;
+  connect(this, SIGNAL(triggered()), this, SLOT( sendExecuteBit() ));
+  
+}
+
+MoveNodeAction::~MoveNodeAction(){
+  kDebug() << "Destroyed";
+}
+
+void MoveNodeAction::executePress(QPointF pos){
+  if (_graph == 0){
+    kDebug() << "Error, Graph == 0";
+    return;
+  }
+  QGraphicsItem *item = _graphScene->itemAt(pos);
+  _movableNode = qgraphicsitem_cast<NodeItem*>(item);
+  if ( _movableNode ){
+    kDebug() << "Got the node! ";
+  }
+  else{
+    kDebug() << "Got Nothing!";
+  }
+  kDebug() << "Action Executed at pos " << pos.x() << pos.y();
+}
+
+void MoveNodeAction::executeMove(QPointF pos){
+  if ( ! _movableNode ){
+    return; 
+  }
+  _movableNode -> node() -> setPosition( pos );
+}
+
+void MoveNodeAction::executeRelease(QPointF pos){
+  if (! _movableNode ){
+    return;
+  }
+  _movableNode -> node() -> setPosition( pos );
+  _movableNode = 0;
+}

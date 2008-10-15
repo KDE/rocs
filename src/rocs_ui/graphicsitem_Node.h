@@ -64,12 +64,7 @@ public:
     \param widget the widget that will be affected.*/
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-public slots:
-  /*! Atualize the position of the node onscreen 
-    \param pos the new position.
-  */
-  void setPos(QPointF pos);
-
+  libgraph::Node* node() { return _node; }
 protected:
   /*! when the item is changed or anything happens to it, this method is called 
     \param change the changed flags
@@ -104,12 +99,6 @@ protected slots:
 
   /*! Emited when a node is removed */
   void removed();
-
-signals:
-  /*! emitted when the node change it's position 
-    \param pos the new position
-  */
-  void positionChanged(QPointF pos);
 
 private:
     libgraph::Node *_node;

@@ -19,6 +19,8 @@ set(librocsui_SRCS
   action_Pointer.cpp
   action_AddNode.cpp
   action_AddEdge.cpp
+  action_MoveNode.cpp
+
   graphicsitem_Node.cpp
   
   model_GraphDocument.cpp

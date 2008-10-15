@@ -30,7 +30,7 @@ AddEdgeAction::AddEdgeAction(GraphScene *scene, QObject *parent)
 : AbstractAction(scene, parent){
   setText(i18n ( "Add Edge" ));
   setToolTip ( i18n ( "Creates a new edge between 2 nodes" ) );
-  setIcon ( KIcon ( "pointer" ) );
+  setIcon ( KIcon ( "add-edge" ) );
   setCheckable ( true );
   setChecked ( false );
 

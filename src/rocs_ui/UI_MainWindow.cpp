@@ -46,6 +46,7 @@
 #include "action_Pointer.h"
 #include "action_AddNode.h"
 #include "action_AddEdge.h"
+#include "action_MoveNode.h"
 
 MainWindow::MainWindow() : KXmlGuiWindow(){
 
@@ -91,6 +92,7 @@ void MainWindow::setupActions(){
   _paletteActions->addAction("pointer_action", new PointerAction(gc, this));  
   _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
   _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
+  _paletteActions->addAction("move_node_action", new MoveNodeAction(gc, this));
   _PaletteBar->setActionCollection(_paletteActions);
 
   // Pointer Action is the first. 
