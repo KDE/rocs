@@ -66,11 +66,6 @@ public:
 
   libgraph::Node* node() { return _node; }
 protected:
-  /*! when the item is changed or anything happens to it, this method is called 
-    \param change the changed flags
-    \param value reference to the new value for the changing.*/
-  QVariant itemChange(GraphicsItemChange change, const QVariant &value);
-
   /*! when there's a mouse click on the node, this method is invocked 
     \param event the mouse object
   */

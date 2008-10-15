@@ -85,20 +85,6 @@ NodeItem::NodeItem(libgraph::Node *node, QGraphicsItem *parent)
      painter->drawEllipse(-10, -10, 20, 20);
  }
 
-QVariant NodeItem::itemChange(GraphicsItemChange change, const QVariant &value){
-  switch (change){
-  case ItemPositionHasChanged:
-    _node->setPosition( pos() );
-/*  foreach (Edge *edge, edgeList){
-           edge->adjust();
-    }
-    graph->itemMoved(); */
-  break;
-  default:  break;
-  }
-  return QGraphicsItem::itemChange(change, value);
-}
-
  void NodeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
  {
      update();

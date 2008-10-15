@@ -22,6 +22,7 @@ set(librocsui_SRCS
   action_MoveNode.cpp
 
   graphicsitem_Node.cpp
+  graphicsitem_Edge.cpp
   
   model_GraphDocument.cpp
   model_GraphLayers.cpp
