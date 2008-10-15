@@ -29,7 +29,7 @@
 #include <KDebug>
 
 NodeItem::NodeItem(libgraph::Node *node, QGraphicsItem *parent)
-     : QGraphicsItem(parent), QObject(0)
+     : QObject(0), QGraphicsItem(parent)
 {
     _node = node;
     setPos( _node -> position() );
@@ -117,7 +117,7 @@ void NodeItem::setPos(QPointF pos)
 }
 
 
-void NodeItem::changeName(QString name){
+void NodeItem::changeName(QString){
   kDebug() << " Not Implemented Yet " << "changeName";
 }
   
@@ -127,17 +127,17 @@ void NodeItem::changePosition(QPointF position){
 }
   
 
-void NodeItem::changeColor(QColor color){
+void NodeItem::changeColor(QColor){
   update();
   kDebug() << "Color of node" << _node ->index() << "changed";
 }
 
-void NodeItem::changeIndex(int index){
+void NodeItem::changeIndex(int){
   kDebug() << " Not Implemented Yet " << "changeIndex";
 }
 
 
-void NodeItem::changeVisited(bool b){
+void NodeItem::changeVisited(bool){
   kDebug() << " Not Implemented Yet " << "changeVisited";
 }
 

@@ -100,9 +100,6 @@ void GraphEditWidget::drawGraphOnScene(libgraph::Graph *g){
     createNode(node);
   }
 
-  foreach(libgraph::Edge *edge, edges){
-
-  }  
   kDebug() << "Graph drawn on screen"; 
 }
 
@@ -123,37 +120,37 @@ void GraphEditWidget::createNode(libgraph::Node *node){
   kDebug() << "Number of Nodes on Screen:"  << _graphScene->items().size() - 4;
 }
 
-void GraphEditWidget::createEdge(libgraph::Edge *edge)
+void GraphEditWidget::createEdge(libgraph::Edge*)
 {
   kDebug() << "Should Insert an edge on screen, NOT IMPLEMENTED YET";
 }
 
-void GraphEditWidget::removeNode(int i)
+void GraphEditWidget::removeNode(int )
 {
   kDebug() << "Should remove a node and associated edges, NOT IMPLEMENTED YET";
 }
 
-void GraphEditWidget::removeEdge(int e)
+void GraphEditWidget::removeEdge(int )
 {
   kDebug() << "Should remove an edge, NOT IMPLEMENTED  YET";
 }
 
-void GraphEditWidget::graphColorChanged(const QColor& c)
+void GraphEditWidget::graphColorChanged(const QColor&)
 {
   kDebug() << "Should change the graph's outlines color. NOT IMPLEMENTED YET";
 }
 
 void GraphEditWidget::connectGraphSignals(libgraph::Graph *graph){
-  connect(_graph, SIGNAL( nodeCreated( libgraph::Node* ) ), 
+  connect(graph, SIGNAL( nodeCreated( libgraph::Node* ) ), 
 	  this,   SLOT( createNode( libgraph::Node* ) ) 
   );
-  connect(_graph, SIGNAL( edgeCreated( libgraph::Edge* ) ), 
+  connect(graph, SIGNAL( edgeCreated( libgraph::Edge* ) ), 
 	  this,   SLOT( createEdge( libgraph::Edge* ) ) 
   );
-  connect(_graph, SIGNAL( nodeRemoved( int ) ), 
+  connect(graph, SIGNAL( nodeRemoved( int ) ), 
 	  this,   SLOT( removeNode( int ) ) 
   );
-  connect(_graph, SIGNAL( edgeRemoved( int ) ), 
+  connect(graph, SIGNAL( edgeRemoved( int ) ), 
 	  this,   SLOT( removeEdge( int ) ) 
   );
   kDebug() << "Graph Signals Connected with GraphEdit";

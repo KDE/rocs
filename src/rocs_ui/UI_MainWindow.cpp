@@ -114,7 +114,6 @@ void MainWindow::setupSignals(){
   connect( _GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
 	   this, SLOT(setGraph(libgraph::Graph*)));
   
-  GraphScene *gc = _GraphEdit->scene();
   foreach( QAction *action, _paletteActions->actions() ){
       connect( _GraphLayers, SIGNAL(activeGraphChanged(libgraph::Graph*)),
       action, SLOT(setGraph(libgraph::Graph*)));

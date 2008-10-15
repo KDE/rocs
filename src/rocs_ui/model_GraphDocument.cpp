@@ -28,7 +28,7 @@ GraphDocumentModel::GraphDocumentModel(QList<libgraph::GraphDocument*>* document
   : QAbstractListModel( parent ), _documents( (*documents) ){
 }
 
-int GraphDocumentModel::rowCount(const QModelIndex &parent) const{
+int GraphDocumentModel::rowCount(const QModelIndex&) const{
   return _documents.size();
 }
 
@@ -60,7 +60,7 @@ bool GraphDocumentModel::setData(const QModelIndex& index, const QVariant& value
   return false;
 }
 
-bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex &index){
+bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex&){
   beginInsertRows(QModelIndex(), position, position+rows-1);  
   
   libgraph::GraphDocument *doc = new libgraph::GraphDocument("untitled");
@@ -70,7 +70,7 @@ bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex &i
   return true;
 }
 
-bool GraphDocumentModel::removeRows(int position, int rows, const QModelIndex &index){
+bool GraphDocumentModel::removeRows(int position, int rows, const QModelIndex&){
      beginRemoveRows(QModelIndex(), position, position+rows-1);
     _documents.removeAt(position);
      endRemoveRows();

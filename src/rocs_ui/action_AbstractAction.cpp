@@ -33,7 +33,8 @@ AbstractAction::AbstractAction(GraphScene *scene, QObject *parent) : KAction(par
 
 void AbstractAction::setGraphDocument( libgraph::GraphDocument *graphDocument)
 {
-
+  kDebug() << "Document Setted";
+  _graphDocument = graphDocument;
 }
 
 void AbstractAction::setGraph(libgraph::Graph *graph){

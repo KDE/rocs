@@ -34,7 +34,7 @@ GraphLayersModel::GraphLayersModel(libgraph::GraphDocument *document, QObject *p
   kDebug () << "GraphCreated signal connected with connect graphSignals";
 }
 
-int GraphLayersModel::rowCount(const QModelIndex &parent) const{
+int GraphLayersModel::rowCount(const QModelIndex&) const{
   if ( _document == 0) return 0;
   return _document -> size();
 }
@@ -68,7 +68,7 @@ bool GraphLayersModel::setData(const QModelIndex& index, const QVariant& value, 
   return false;
 }
 
-bool GraphLayersModel::insertRows(int position, int rows, const QModelIndex &index){
+bool GraphLayersModel::insertRows(int position, int rows, const QModelIndex&){
   if ( _document == 0) return false;
 
   beginInsertRows(QModelIndex(), position, position+rows-1);
@@ -79,7 +79,7 @@ bool GraphLayersModel::insertRows(int position, int rows, const QModelIndex &ind
   return true;
 }
 
-bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex &index){
+bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex&){
     if (_document == 0) return false;
      beginRemoveRows(QModelIndex(), position, position+rows-1);
     _document->removeAt(position);
