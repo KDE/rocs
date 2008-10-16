@@ -61,7 +61,12 @@ void AddEdgeAction::executeRelease(QPointF pos){
   if (_graph == 0){ return; }
   if( _tmpLine ){ delete _tmpLine; _tmpLine = 0; }
   _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
-  if ( _nodeTo == 0){ return; }
+  if ( _nodeTo == 0){ 
+    _nodeFrom = 0;
+    return; 
+  }
 
   _graph->createEdge( _nodeFrom->node(), _nodeTo->node());
+  _nodeFrom = 0;
+  _nodeTo = 0;
 }

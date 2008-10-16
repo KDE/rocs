@@ -49,7 +49,7 @@ GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
   _graph = 0;
   _graphScene = new GraphScene(this);
   _graphicsView->setScene(_graphScene);
-
+  _graphicsView->setRenderHint(QPainter::Antialiasing);
   _editor = KTextEditor::EditorChooser::editor();
   _txtEditScriptDocument = _editor->createDocument(0);
   _txtEditScriptView = qobject_cast<KTextEditor::View*>(_txtEditScriptDocument->createView(this));
@@ -100,6 +100,9 @@ void GraphEditWidget::drawGraphOnScene(libgraph::Graph *g){
     createNode(node);
   }
 
+  foreach(libgraph::Edge* edge, edges){
+    createEdge(edge);
+  }
   kDebug() << "Graph drawn on screen"; 
 }
 
@@ -120,8 +123,10 @@ void GraphEditWidget::createNode(libgraph::Node *node){
   kDebug() << "Number of Nodes on Screen:"  << _graphScene->items().size() - 4;
 }
 
-void GraphEditWidget::createEdge(libgraph::Edge*)
+void GraphEditWidget::createEdge(libgraph::Edge* edge)
 {
+  EdgeItem *edgeItem = new EdgeItem( edge );
+  _graphScene->addItem(edgeItem);
   kDebug() << "Should Insert an edge on screen, NOT IMPLEMENTED YET";
 }
 

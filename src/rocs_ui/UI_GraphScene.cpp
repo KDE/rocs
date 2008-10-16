@@ -53,7 +53,7 @@ void GraphScene::setSceneRect(qreal width, qreal height)
   lineItem = new QGraphicsLineItem(0, 0, 0, height); 
   lineItem->setEnabled(false);
   addItem(lineItem);
-
+  
   kDebug() << "Setted the Scene Rect ";
   
 }

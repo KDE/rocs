@@ -26,6 +26,7 @@
 #include <KLocale>
 
 #include <KDebug>
+#include "settings.h"
 
 MoveNodeAction::MoveNodeAction(GraphScene *scene, QObject *parent) 
 : AbstractAction(scene, parent){
@@ -40,20 +41,18 @@ MoveNodeAction::~MoveNodeAction(){
 }
 
 void MoveNodeAction::executePress(QPointF pos){
-  if (_graph == 0){
-    kDebug() << "Error, Graph == 0";
-    return;
-  }
+  if (_graph == 0){ return; }
   _movableNode = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
 }
 
 void MoveNodeAction::executeMove(QPointF pos){
-  if ( ! _movableNode ){
-    return; 
-  }
-  _movableNode -> node() -> setPosition( pos );
+  if ( ! _movableNode ){ return; }
+  if (Settings::fastGraphics()){  _movableNode -> node() -> setPosition( pos ); }
+  else{ _movableNode -> setPos( pos ); }
+
 }
 
-void MoveNodeAction::executeRelease(QPointF){
+void MoveNodeAction::executeRelease(QPointF pos){
+  _movableNode -> node() -> setPosition( pos );
   _movableNode = 0;
 }

@@ -25,11 +25,13 @@
 #include <QList>
 
 class QGraphicsSceneMouseEvent;
-
+class QPen;
 namespace libgraph{
   class Edge;
   class Node;
 }
+
+
 /*! \brief the Edge drawing on screen. 
   long explanation here...
 */
@@ -83,6 +85,7 @@ protected slots:
 
 private:
     libgraph::Edge *_edge;
+    QPen *_pen;
 };
 
 #endif

@@ -33,7 +33,6 @@ NodeItem::NodeItem(libgraph::Node *node, QGraphicsItem *parent)
 {
     _node = node;
     setPos( _node -> position() );
-    setFlag(ItemIsMovable);
     setCacheMode(DeviceCoordinateCache);
     setZValue(1);
   

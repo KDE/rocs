@@ -11,4 +11,11 @@
 			<default>true</default>
 		</entry>
 	</group>
+	<group name="GraphicsView">
+		 <entry name="fastGraphics" type="Bool">
+			<label>Draw the graphics using the fastest (but ugliest) method. </label>
+			<whatsthis>long explanation needed. </whatsthis>
+			<default>false</default>
+		 </entry>
+	</group>
 </kcfg>

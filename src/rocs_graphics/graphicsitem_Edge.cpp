@@ -23,6 +23,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QStyleOption>
+#include <QPen>
 
 #include "graphicsitem_Edge.h"
 #include "libgraph_Node.h"
@@ -34,9 +35,16 @@ EdgeItem::EdgeItem(libgraph::Edge *edge, QGraphicsItem *parent)
      : QObject(0), QGraphicsLineItem(parent)
 {
     _edge = edge;
-    setFlag(ItemIsMovable);
     setCacheMode(DeviceCoordinateCache);
-    setZValue(1);
+    setZValue(0);
+    
+ _pen = new QPen();
+ _pen->setStyle(Qt::SolidLine);
+ _pen->setWidth(2);
+ _pen->setBrush(Qt::black);
+ _pen->setCapStyle(Qt::RoundCap);
+ _pen->setJoinStyle(Qt::RoundJoin);
+ setPen( (*_pen) );
 
   // ! Connect the Edge's Signals.
   connect (_edge, SIGNAL(nameChanged(QString)), 
@@ -80,6 +88,10 @@ void EdgeItem::changeColor(QColor){
 }
 
 void EdgeItem::changeVisited(bool){
+  kDebug() << " Not Implemented Yet " << "changeVisited";
+}
+
+void EdgeItem::changeLength(qreal){
   kDebug() << " Not Implemented Yet " << "changeVisited";
 }
 
