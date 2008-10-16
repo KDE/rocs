@@ -24,6 +24,9 @@
 #include "action_AbstractAction.h"
 #include <QObject>
 
+class QGraphicsLineItem;
+class NodeItem;
+
 /*! 
   \brief The 'Add Node' Action 
   This action holds the 'Add Node' icon and tooltips, and when it's executed, 
@@ -53,6 +56,12 @@ class AddEdgeAction : public AbstractAction{
     void executePress(QPointF pos);
     void executeMove(QPointF pos);
     void executeRelease(QPointF pos);
+
+  private:
+    NodeItem *_nodeFrom;
+    NodeItem *_nodeTo;
+    QGraphicsLineItem *_tmpLine;
+
 };
 
 #endif

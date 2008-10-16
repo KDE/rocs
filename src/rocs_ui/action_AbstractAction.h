@@ -57,7 +57,7 @@ public slots:
   /*! Atualize the Active Graph that this action will work on 
     \param graph the pointer to the active libgraph::Graph
   */
-  void setGraph(libgraph::Graph *graph);
+  virtual void setGraph(libgraph::Graph *graph);
 
   /*! pure virtual, reimplement it on others, this will be the action that will happen in the graph 
      \param pos the position on screen that the execution will take part.

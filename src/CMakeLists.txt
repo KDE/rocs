@@ -2,6 +2,8 @@ project(Rocs-rewrite)
 
 add_subdirectory(rocs_core)
 add_subdirectory(rocs_scripting)
+add_subdirectory(rocs_model)
+add_subdirectory(rocs_graphics)
 add_subdirectory(rocs_ui)
 
 find_package(KDE4 REQUIRED)
@@ -32,6 +34,8 @@ target_link_libraries(Rocs ${KDE4_KDEUI_LIBS}
                            ${QT_QTSCRIPT_LIBRARY}
 			   librocscore
 			   librocsengine
+			   librocsmodel
+			   librocsgraphics
 			   librocsui
 )
 

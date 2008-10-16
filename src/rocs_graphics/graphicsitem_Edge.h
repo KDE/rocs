@@ -21,18 +21,19 @@
 #ifndef GRAPHICSITEM_EDGE_H
 #define GRAPHICSITEM_EDGE_H
 
-#include <QGraphicsItem>
+#include <QGraphicsLineItem>
 #include <QList>
 
 class QGraphicsSceneMouseEvent;
 
 namespace libgraph{
   class Edge;
+  class Node;
 }
 /*! \brief the Edge drawing on screen. 
   long explanation here...
 */
-class EdgeItem : public QObject, public QGraphicsItem{
+class EdgeItem : public QObject, public QGraphicsLineItem{
 Q_OBJECT
 public:
   /*! default constructor 
@@ -48,22 +49,7 @@ public:
   */
   int type() const { return Type; }
 
-  /*! calculates the boundingRect of this item 
-    \return the calculated boudingRect.
-  */
-  QRectF boundingRect() const;
-
-  /*! calculates the shape of the node 
-    \return the calculated shape.
-  */
-  // QPainterPath shape() const;
-
-  /*! paint the node onscreen 
-    \param painter the active painter.
-    \param option the QStyleOptionGraphicsItem flags
-    \param widget the widget that will be affected.*/
-  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
+  /*! Gets the edge of the node */
   libgraph::Edge* edge() { return _edge; }
 protected:
   /*! when there's a mouse click on the node, this method is invocked 

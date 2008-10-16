@@ -2,7 +2,11 @@ project(librocsui)
 find_package(KDE4 REQUIRED)
 
 include(KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../rocs_core ../rocs_scripting)
+include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} 
+		    ../rocs_core 
+		    ../rocs_scripting
+		    ../rocs_model
+		    ../rocs_graphics)
 
 set(librocsui_SRCS
   UI_MainWindow.cpp
@@ -20,12 +24,6 @@ set(librocsui_SRCS
   action_AddNode.cpp
   action_AddEdge.cpp
   action_MoveNode.cpp
-
-  graphicsitem_Node.cpp
-  graphicsitem_Edge.cpp
-  
-  model_GraphDocument.cpp
-  model_GraphLayers.cpp
 )
 
 kde4_add_ui_files( 

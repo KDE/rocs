@@ -32,10 +32,6 @@ PointerAction::PointerAction(GraphScene *scene, QObject *parent)
   setText(i18n ( "Pointer" ));
   setToolTip ( i18n ( "Does Nothing." ) );
   setIcon ( KIcon ( "pointer" ) );
-  setCheckable ( true );
-  setChecked ( false );
-
-  connect(this, SIGNAL(triggered()), this, SLOT( sendExecuteBit() ));
 }
 
 PointerAction::~PointerAction(){}

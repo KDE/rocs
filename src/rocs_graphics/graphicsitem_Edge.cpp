@@ -27,10 +27,11 @@
 #include "graphicsitem_Edge.h"
 #include "libgraph_Node.h"
 #include "libgraph_Edge.h"
+#include "graphicsitem_Node.h"
 #include <KDebug>
 
 EdgeItem::EdgeItem(libgraph::Edge *edge, QGraphicsItem *parent)
-     : QObject(0), QGraphicsItem(parent)
+     : QObject(0), QGraphicsLineItem(parent)
 {
     _edge = edge;
     setFlag(ItemIsMovable);
@@ -53,31 +54,9 @@ EdgeItem::EdgeItem(libgraph::Edge *edge, QGraphicsItem *parent)
   connect (_edge->to(), SIGNAL(positionChanged(QPointF)), 
       this, SLOT(update2()));
 
+  setLine(_edge->from()->position().x(), _edge->from()->position().y(),
+	  _edge->to()->position().x(), _edge->to()->position().y());
 }
-
- QRectF EdgeItem::boundingRect() const
- {
-      return QRectF(_edge->from()->position().x(), 
-		   _edge->from()->position().y(),
-		   _edge->to()->position().x(),
-		   _edge->to()->position().y());
- }
-
-/*
- QPainterPath EdgeItem::shape() const
- {
-     QPainterPath path;
-     path.addLine(_edge->from()->position(), edge->to()->position());
-     return path;
- }
-*/
-
- void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
- {
-     painter->setPen(Qt::NoPen);
-     painter->setBrush(Qt::darkGray);
-     painter->drawLine(_edge->from()->position(), _edge->to()->position());
- }
 
  void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
  {
@@ -109,7 +88,8 @@ void EdgeItem::removed(){
 }
 
 void EdgeItem::update2(){
-  update();
+    setLine(_edge->from()->position().x(), _edge->from()->position().y(),
+	    _edge->to()->position().x(), _edge->to()->position().y());
 }
 
 #include "graphicsitem_Edge.moc"

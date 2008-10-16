@@ -32,12 +32,7 @@ MoveNodeAction::MoveNodeAction(GraphScene *scene, QObject *parent)
   setText(i18n ( "Move Node" ));
   setToolTip ( i18n ( "Moves a node around the drawing area." ) );
   setIcon ( KIcon ( "move-node" ) );
-  setCheckable ( true );
-  setChecked ( false );
-
   _movableNode = 0;
-  connect(this, SIGNAL(triggered()), this, SLOT( sendExecuteBit() ));
-  
 }
 
 MoveNodeAction::~MoveNodeAction(){
