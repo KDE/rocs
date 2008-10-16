@@ -43,13 +43,17 @@
 #include <QGraphicsItem>
 #include <KDebug>
 
+#include "settings.h"
+
 GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
   setupUi(this);
   _graphDocument = 0;
   _graph = 0;
   _graphScene = new GraphScene(this);
   _graphicsView->setScene(_graphScene);
-  _graphicsView->setRenderHint(QPainter::Antialiasing);
+
+  if ( ! Settings::fastGraphics() ) _graphicsView->setRenderHint(QPainter::Antialiasing);
+
   _editor = KTextEditor::EditorChooser::editor();
   _txtEditScriptDocument = _editor->createDocument(0);
   _txtEditScriptView = qobject_cast<KTextEditor::View*>(_txtEditScriptDocument->createView(this));

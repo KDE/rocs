@@ -23,7 +23,7 @@
 
 #include "action_AbstractAction.h"
 #include <QObject>
-
+#include <QPointF>
 class QGraphicsLineItem;
 class NodeItem;
 
@@ -61,7 +61,7 @@ class AddEdgeAction : public AbstractAction{
     NodeItem *_nodeFrom;
     NodeItem *_nodeTo;
     QGraphicsLineItem *_tmpLine;
-
+    QPointF _startPos;
 };
 
 #endif

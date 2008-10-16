@@ -47,12 +47,13 @@ void MoveNodeAction::executePress(QPointF pos){
 
 void MoveNodeAction::executeMove(QPointF pos){
   if ( ! _movableNode ){ return; }
-  if (Settings::fastGraphics()){  _movableNode -> node() -> setPosition( pos ); }
-  else{ _movableNode -> setPos( pos ); }
+  if (Settings::fastGraphics()){  _movableNode -> setPos( pos ); }
+  else{ _movableNode -> node() -> setPosition( pos ); }
 
 }
 
 void MoveNodeAction::executeRelease(QPointF pos){
+  if ( !_movableNode ){ return; }
   _movableNode -> node() -> setPosition( pos );
   _movableNode = 0;
 }

@@ -43,25 +43,31 @@ AddEdgeAction::~AddEdgeAction(){
 }
 
 void AddEdgeAction::executePress(QPointF pos){
-  if (_graph == 0){ return; }
+  if ( ! _graph ) return; 
    _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+
+  if ( ! _nodeFrom ) return;
+  _startPos = _nodeFrom->node()->position();
 }
 
 void AddEdgeAction::executeMove(QPointF pos){
-  if (_graph == 0){ return; }
-  if (_nodeFrom == 0){ return; }
-  if ( _tmpLine ) { delete _tmpLine; }
+  if ( ! _graph ) return; 
+  if ( !_nodeFrom ) return; 
+  if ( _tmpLine )  delete _tmpLine; 
 
-  QPointF startPos = _nodeFrom->node()->position();
-  _tmpLine = new QGraphicsLineItem(startPos.x(), startPos.y(), pos.x(), pos.y());
+  _tmpLine = new QGraphicsLineItem( _startPos.x(), _startPos.y(), pos.x(), pos.y());
   _graphScene->addItem(_tmpLine);
 }
 
 void AddEdgeAction::executeRelease(QPointF pos){
-  if (_graph == 0){ return; }
-  if( _tmpLine ){ delete _tmpLine; _tmpLine = 0; }
+  if ( ! _graph ) return; 
+
+  if( _tmpLine ){ 
+    delete _tmpLine; 
+    _tmpLine = 0;
+  }
   _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
-  if ( _nodeTo == 0){ 
+  if ( ! _nodeTo ){ 
     _nodeFrom = 0;
     return; 
   }
