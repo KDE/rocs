@@ -175,6 +175,4 @@ void GraphEditWidget::on__btnRunScript_clicked(){
   e.setDocument( _graphDocument );
   e.setEngine( _cmbEngine->currentText());
   e.execute( _txtEditScriptDocument -> text() );
-  
-
 }

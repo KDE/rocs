@@ -128,4 +128,3 @@ void PaletteBarDockWidget::setGraphDocument(libgraph::GraphDocument *){
   kDebug() << "Got the Graph Document but did nothing with it.";
   return;
 }
-

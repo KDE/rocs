@@ -193,4 +193,3 @@ Edge* Graph::createEdge(Node* , Node* ){
   kDebug() << "ERROR: shouldn't come here";
   return 0;
 }
-

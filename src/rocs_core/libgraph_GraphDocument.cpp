@@ -156,6 +156,4 @@ void GraphDocument::setScript(const QString& script){
 }
 
 // gets the current script on this file
-QString GraphDocument::script(){
-  return _script;
-}
+QString GraphDocument::script(){ return _script; }

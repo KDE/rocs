@@ -55,8 +55,6 @@ class PaletteBarDockWidget : public QDockWidget{
     void setGraphDocument(libgraph::GraphDocument *document);
     void setGraph(libgraph::Graph* graph);
     void showButtonTextToggled ( bool b );   
-
-  
     
     /*! creates a toolbutton and places it on the pallete.
     \param action the action of with the button will take it's functionalies. */
