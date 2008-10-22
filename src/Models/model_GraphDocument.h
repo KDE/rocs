@@ -25,15 +25,13 @@
 
 class QModelIndex;
 
-namespace libgraph{
-  class GraphDocument;
-}
+class GraphDocument;
 
 class GraphDocumentModel : public QAbstractListModel
 {
   Q_OBJECT
   public:
-      GraphDocumentModel(QList<libgraph::GraphDocument*>* documents, QObject *parent = 0);
+      GraphDocumentModel(QList< GraphDocument*>* documents, QObject *parent = 0);
       int rowCount(const QModelIndex &parent = QModelIndex()) const;
       QVariant data(const QModelIndex &index, int role) const;
       QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -43,9 +41,9 @@ class GraphDocumentModel : public QAbstractListModel
       bool insertRows(int position, int rows, const QModelIndex &index = QModelIndex());
       bool removeRows(int position, int rows, const QModelIndex &index = QModelIndex());
 
-      libgraph::GraphDocument *at(const QModelIndex& index);
+       GraphDocument *at(const QModelIndex& index);
   private:
-    QList<libgraph::GraphDocument*>& _documents;
+    QList< GraphDocument*>& _documents;
     
 };
 

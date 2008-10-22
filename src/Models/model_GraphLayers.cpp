@@ -18,18 +18,18 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "model_GraphLayers.h"
-#include "libgraph_GraphDocument.h"
-#include "libgraph_Graph.h"
+#include "GraphDocument.h"
+#include "Graph.h"
 #include <QString>
 #include <QDebug>
 #include <QModelIndex>
 #include <KDebug>
 
-GraphLayersModel::GraphLayersModel(libgraph::GraphDocument *document, QObject *parent)
+GraphLayersModel::GraphLayersModel( GraphDocument *document, QObject *parent)
   : QAbstractListModel( parent ){
   _document = document;
-  connect( _document, SIGNAL( graphCreated(libgraph::Graph*)), 
-	  this, SLOT( connectGraphSignals(libgraph::Graph*)));
+  connect( _document, SIGNAL( graphCreated( Graph*)), 
+	  this, SLOT( connectGraphSignals( Graph*)));
 
   kDebug () << "GraphCreated signal connected with connect graphSignals";
 }
@@ -45,7 +45,7 @@ QVariant GraphLayersModel::data(const QModelIndex &index, int role) const{
   if ( index.row() > _document -> size()) return QVariant();
   if ( role != Qt::DisplayRole) return QVariant();
 
-  return _document->at(index.row())->toString();
+  return _document->at(index.row())->name();
 }
 
 QVariant GraphLayersModel::headerData(int section, Qt::Orientation orientation, int role) const{
@@ -62,7 +62,7 @@ Qt::ItemFlags GraphLayersModel::flags(const QModelIndex& index) const{
 
 bool GraphLayersModel::setData(const QModelIndex& index, const QVariant& value, int role){
   if ( index.isValid() && (role == Qt::ItemIsEditable)) {
-    libgraph::Graph *g = _document->at(index.row());
+     Graph *g = _document->at(index.row());
     g-> setName(value.toString());
   }
   return false;
@@ -87,20 +87,20 @@ bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex&){
      return true;
 }
 
-libgraph::Graph *GraphLayersModel::at(const QModelIndex& index)
+ Graph *GraphLayersModel::at(const QModelIndex& index)
 {
   return _document->at(index.row());
 }
 
-void GraphLayersModel::update(libgraph::Graph *g){
+void GraphLayersModel::update( Graph *g){
   kDebug() << "Tryed to change the name of the graph on the model";
   int i = _document->indexOf(g);
   QModelIndex index = QAbstractItemModel::createIndex(i, 0);
   emit dataChanged(index, index);
 }
 
-void GraphLayersModel::connectGraphSignals(libgraph::Graph *g){
+void GraphLayersModel::connectGraphSignals( Graph *g){
   kDebug () << "connecting Graph Signals with GraphLayer Model";
-  connect(g, SIGNAL(nameChanged(libgraph::Graph*)), this, SLOT(update(libgraph::Graph*)));
+  connect(g, SIGNAL(nameChanged( Graph*)), this, SLOT(update( Graph*)));
 }
 

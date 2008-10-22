@@ -1,15 +1,15 @@
 project(Rocs-rewrite)
 
-add_subdirectory(rocs_core)
-add_subdirectory(rocs_scripting)
-add_subdirectory(rocs_model)
-add_subdirectory(rocs_graphics)
-add_subdirectory(rocs_ui)
+add_subdirectory(Core)
+add_subdirectory(Engine)
+add_subdirectory(Models)
+add_subdirectory(GraphicsItem)
+add_subdirectory(Interface)
 
 find_package(KDE4 REQUIRED)
 
 include(KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} rocs_core rocs_ui)
+include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} Interface)
 
 set(Rocs_SRCS  Main.cpp )
 

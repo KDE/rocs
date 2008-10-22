@@ -18,13 +18,13 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "model_GraphDocument.h"
-#include "libgraph_GraphDocument.h"
-#include "libgraph_Graph.h"
+#include "GraphDocument.h"
+#include "Graph.h"
 #include <QString>
 #include <QDebug>
 #include <QModelIndex>
 
-GraphDocumentModel::GraphDocumentModel(QList<libgraph::GraphDocument*>* documents, QObject *parent)
+GraphDocumentModel::GraphDocumentModel(QList< GraphDocument*>* documents, QObject *parent)
   : QAbstractListModel( parent ), _documents( (*documents) ){
 }
 
@@ -63,7 +63,7 @@ bool GraphDocumentModel::setData(const QModelIndex& index, const QVariant& value
 bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex&){
   beginInsertRows(QModelIndex(), position, position+rows-1);  
   
-  libgraph::GraphDocument *doc = new libgraph::GraphDocument("untitled");
+   GraphDocument *doc = new  GraphDocument("untitled");
   _documents.append(doc);
   
   endInsertRows();
@@ -77,7 +77,7 @@ bool GraphDocumentModel::removeRows(int position, int rows, const QModelIndex&){
      return true;
 }
 
-libgraph::GraphDocument *GraphDocumentModel::at(const QModelIndex& index)
+ GraphDocument *GraphDocumentModel::at(const QModelIndex& index)
 {
   return _documents.at(index.row());
 }
