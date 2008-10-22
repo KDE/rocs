@@ -68,13 +68,13 @@ bool GraphLayersModel::setData(const QModelIndex& index, const QVariant& value, 
   return false;
 }
 
-bool GraphLayersModel::insertRows(int position, int rows, const QModelIndex&){
+bool GraphLayersModel::insertRows(int position, int type, const QModelIndex&){
   if ( _document == 0) return false;
 
-  beginInsertRows(QModelIndex(), position, position+rows-1);
-  QString name = "untitled";
-  name += QString::number( _document->size() );
-  _document->addGraph(name);
+  beginInsertRows(QModelIndex(), position, position);
+
+  _document->addGraph("Untitled", type);
+
   endInsertRows();
   return true;
 }
