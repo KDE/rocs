@@ -27,9 +27,9 @@
 #include <KDebug>
 
 Node::Node( qreal x, qreal y, Graph *parent ) : QObject(parent){
-  _color = Qt::black;
+  _color = parent->color();
   _pos = QPointF(x, y);
-  _name = "untitled";
+  _name = "";
   _total = 1;
   _value = 1;
   _visited = false;

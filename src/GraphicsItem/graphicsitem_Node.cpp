@@ -56,10 +56,8 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 
  void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
  {
-     Graph *g = qobject_cast<Graph*>(_node->parent());
-
      painter->setPen(Qt::NoPen);
-     painter->setBrush(g->color());
+     painter->setBrush(_node->color().dark(220));
      painter->drawEllipse(-7, -7, 20, 20);
 
      QRadialGradient gradient(-3, -3, 10);
@@ -69,11 +67,11 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
          gradient.setColorAt(1, QColor(_node->color()).light(120));
          gradient.setColorAt(0, QColor(_node->color()));
      } else {
-         gradient.setColorAt(0,_node->color());
+         gradient.setColorAt(0,_node->color().light(240));
          gradient.setColorAt(1,_node->color());
      }
      painter->setBrush(gradient);
-     painter->setPen(QPen(g->color(), 2));
+     painter->setPen(QPen(_node->color(), 2));
      painter->drawEllipse(-10, -10, 20, 20);
  }
 

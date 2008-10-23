@@ -232,7 +232,7 @@ QList< QList <int> > Graph::incMatrix(){
 
   for( i = 0; i < nodesSize; i++){
 	QList<int> vector;
-    matrix.append( vector );
+        matrix.append( vector );
 
     for( j = 0; j < edgesSize; j++){
       if ((_edges[j]->to() == _nodes[i]) && (_edges[j]->from() == _nodes[i])){
@@ -259,7 +259,7 @@ bool Graph::checkExistence(Node *n){
 }
 
 bool Graph::checkExistence(Edge *e){
-  return ( _edges.indexOf(e) == -1) ? false : true;
+  return ( _edges.indexOf(        e) == -1) ? false : true;
 }
 
 void Graph::nodeCreatedEdge(Edge *e){ 

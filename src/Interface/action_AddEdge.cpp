@@ -53,10 +53,14 @@ void AddEdgeAction::executePress(QPointF pos){
 void AddEdgeAction::executeMove(QPointF pos){
   if ( ! _graph ) return; 
   if ( !_nodeFrom ) return; 
-  if ( _tmpLine )  delete _tmpLine; 
-
-  _tmpLine = new QGraphicsLineItem( _startPos.x(), _startPos.y(), pos.x(), pos.y());
-  _graphScene->addItem(_tmpLine);
+  
+  if ( !_tmpLine ){
+    _tmpLine = new QGraphicsLineItem( _startPos.x(), _startPos.y(), pos.x(), pos.y());
+    _graphScene->addItem(_tmpLine);  
+  }
+  else{
+    _tmpLine->setLine(_startPos.x(), _startPos.y(), pos.x(), pos.y());
+  }
 }
 
 void AddEdgeAction::executeRelease(QPointF pos){

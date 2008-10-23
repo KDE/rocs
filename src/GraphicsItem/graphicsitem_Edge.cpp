@@ -41,11 +41,11 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
   
   setCacheMode(DeviceCoordinateCache);
   setZValue(0);
-  Graph *g = qobject_cast<Graph*>(_edge->parent());     
+    
   _pen = new QPen();
   _pen->setStyle(Qt::SolidLine);
   _pen->setWidth(2);
-  _pen->setBrush(g->color());
+  _pen->setBrush(_edge->color());
   _pen->setCapStyle(Qt::RoundCap);
   _pen->setJoinStyle(Qt::RoundJoin);
   setPen( (*_pen) );

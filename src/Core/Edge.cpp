@@ -23,21 +23,32 @@
 #include "Node.h"
 
 Edge::Edge(Node *from, Node *to, Graph *parent) : QObject(parent){
-	_from = from;
-	_to = to;
-	parent->append(this);
+  _from = from;
+  _to = to;
+  _color = parent->color();
+  _visited = false;
+  _name = "";
+  _length = 0;
+  _value = 0;
+  _total = 0;
+  parent->append(this);
 }
 
 Edge::~Edge(){
-	_from->removeEdge(this);
-	_to->removeEdge(this);
-	Graph *g = qobject_cast<Graph*>(parent());
-	g->removeEdge(this);
+  _from->removeEdge(this);
+  _to->removeEdge(this);
+  Graph *g = qobject_cast<Graph*>(parent());
+  g->removeEdge(this);
 }
 
 void Edge::remove(){
-	delete this;
+  delete this;
 }
 
 Node* Edge::to(){ return _to;    }
 Node* Edge::from(){ return _from; }
+
+int Edge::getRelativeIndex(){
+  QList<Edge*> e = _from -> edges(_to);
+  return e.indexOf(this);
+}
