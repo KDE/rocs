@@ -32,7 +32,7 @@ class Edge : public QObject{
   public:
     Edge(Node* from, Node* to, Graph* parent); // Default constructor
     ~Edge(); // Default destructor 
-    int getRelativeIndex();
+    int relativeIndex();
   public slots:
     
   Node* to();   // gets the To node

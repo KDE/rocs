@@ -24,6 +24,7 @@
 
 #include "graphicsitem_Node.h"
 #include "graphicsitem_Edge.h"
+#include "graphicsitem_MultiEdge.h"
 
 #include "GraphDocument.h"
 #include "Graph.h"
@@ -124,7 +125,7 @@ void GraphEditWidget::createNode( Node *node){
 
 void GraphEditWidget::createEdge( Edge* edge)
 {
-  EdgeItem *edgeItem = new EdgeItem( edge );
+  MultiEdgeItem *edgeItem = new MultiEdgeItem( edge );
   _graphScene->addItem(edgeItem);
 }
 

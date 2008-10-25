@@ -33,7 +33,7 @@ Node::Node( qreal x, qreal y, Graph *parent ) : QObject(parent){
   _total = 1;
   _value = 1;
   _visited = false;
-  parent->append(this);
+   parent->append(this);
 }
   
 Node::~Node(){
@@ -78,9 +78,11 @@ QList<Edge*> Node::edges(Node *n){
   if ( n == 0 ){ return _edges; }
   
   QList<Edge*> tmpEdges;
+  kDebug() << "Tamanho total do numero de arestas: " << _edges.size();
   foreach(Edge *e, _edges){
     if ((e -> from() == n) || (e -> to() == n)) tmpEdges.append(e);
   }
+  kDebug() << "Tamanho da Lista de Nos que conectam esse no pela aresta e = " << tmpEdges.size();
   return tmpEdges;
 }
 
@@ -119,15 +121,14 @@ Edge* Node::connect(Node* n){
   if ( isConnected(n) ) return 0;
   
   Graph *g = qobject_cast<Graph*>(parent()); 
-  if (! g->checkExistence(n) ){
-    kDebug() << "Não deveria ter criado o grafo";
-    return 0;
-  }
+  if (! g->checkExistence(n) ){ return 0; }
 
   Edge *e = new Edge(this, n, g);
   g->nodeCreatedEdge(e);  
-  _edges.append(e);
-
-  kDebug() << "Edge Created";
+  
   return e;
+}
+
+void Node::append(Edge *e){
+  if (_edges.indexOf(e) == -1) _edges.append(e);
 }

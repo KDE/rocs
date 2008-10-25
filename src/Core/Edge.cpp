@@ -21,6 +21,7 @@
 #include "Edge.h"
 #include "Graph.h"
 #include "Node.h"
+#include <KDebug>
 
 Edge::Edge(Node *from, Node *to, Graph *parent) : QObject(parent){
   _from = from;
@@ -32,6 +33,8 @@ Edge::Edge(Node *from, Node *to, Graph *parent) : QObject(parent){
   _value = 0;
   _total = 0;
   parent->append(this);
+  _from->append(this);
+  _to->append(this);
 }
 
 Edge::~Edge(){
@@ -48,7 +51,9 @@ void Edge::remove(){
 Node* Edge::to(){ return _to;    }
 Node* Edge::from(){ return _from; }
 
-int Edge::getRelativeIndex(){
+int Edge::relativeIndex(){
   QList<Edge*> e = _from -> edges(_to);
+  kDebug() << "Index dessa aresta em relacao ao no2: " << e.indexOf(this);
+
   return e.indexOf(this);
 }

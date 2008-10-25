@@ -36,6 +36,7 @@ public:
   Node(qreal x, qreal y, Graph *parent);
   ~Node();
   void removeEdge(Edge *e);
+  void append(Edge *e);
 public slots:
 
   bool isConnected(Node* n);
