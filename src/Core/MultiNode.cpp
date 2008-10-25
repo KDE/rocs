@@ -7,8 +7,7 @@ Edge* MultiNode::connect(Node* n){
   Edge *e = 0;
   e = new Edge(this, n, g);
   g->nodeCreatedEdge(e);
-  _edges.append(e);
-
-  kDebug() << "Edge Created";
+  
+  kDebug() << "Simple Edge Created";
   return e;
 }

@@ -83,6 +83,7 @@ QList<Edge*> Node::edges(Node *n){
     if ((e -> from() == n) || (e -> to() == n)) tmpEdges.append(e);
   }
   kDebug() << "Tamanho da Lista de Nos que conectam esse no pela aresta e = " << tmpEdges.size();
+  qSort(tmpEdges.begin(), tmpEdges.end());
   return tmpEdges;
 }
 
@@ -124,8 +125,7 @@ Edge* Node::connect(Node* n){
   if (! g->checkExistence(n) ){ return 0; }
 
   Edge *e = new Edge(this, n, g);
-  g->nodeCreatedEdge(e);  
-  
+  kDebug() << "Simple Edge Created";  
   return e;
 }
 

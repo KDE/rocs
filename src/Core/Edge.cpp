@@ -57,3 +57,8 @@ int Edge::relativeIndex(){
 
   return e.indexOf(this);
 }
+
+bool Edge::operator<(Edge *e){
+  if ( this < e ) return true;
+  return false;
+}

@@ -45,6 +45,7 @@ QList<Edge*> OrientedNode::adjEdges(Node *n){
   else foreach(Edge *e, _edges){
     if ( e->to() == n) tmpEdges.append(e);
   }
+  qSort(tmpEdges.begin(), tmpEdges.end());
   return tmpEdges;
 }
 
@@ -68,9 +69,7 @@ Edge* OrientedNode::connect(Node* n){
   if (! g->checkExistence(n) ) return 0;
   Edge *e = 0;
   e = new Edge(this, n, g);
-  g->nodeCreatedEdge(e);
-  _edges.append(e);
-
-  kDebug() << "Edge Created";
+    
+  kDebug() << "Oriented Edge Created";
   return e;
 }

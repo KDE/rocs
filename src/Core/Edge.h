@@ -33,6 +33,7 @@ class Edge : public QObject{
     Edge(Node* from, Node* to, Graph* parent); // Default constructor
     ~Edge(); // Default destructor 
     int relativeIndex();
+    bool operator<(Edge *e);
   public slots:
     
   Node* to();   // gets the To node
@@ -53,6 +54,7 @@ class Edge : public QObject{
   void  setValue(qreal v) { _value = v;   emit valueChanged(v);   }
   void  setTotal(qreal t) { _total = t;   emit totalChanged(t);   }
   void  setColor(QColor c){ _color = c;   emit colorChanged(c);   }
+
 
   signals:
     void visitedChanged(bool v);
