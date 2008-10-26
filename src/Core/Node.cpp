@@ -78,12 +78,11 @@ QList<Edge*> Node::edges(Node *n){
   if ( n == 0 ){ return _edges; }
   
   QList<Edge*> tmpEdges;
-  kDebug() << "Tamanho total do numero de arestas: " << _edges.size();
   foreach(Edge *e, _edges){
     if ((e -> from() == n) || (e -> to() == n)) tmpEdges.append(e);
   }
   kDebug() << "Tamanho da Lista de Nos que conectam esse no pela aresta e = " << tmpEdges.size();
-  qSort(tmpEdges.begin(), tmpEdges.end());
+  
   return tmpEdges;
 }
 

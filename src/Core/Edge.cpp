@@ -52,10 +52,13 @@ Node* Edge::to(){ return _to;    }
 Node* Edge::from(){ return _from; }
 
 int Edge::relativeIndex(){
-  QList<Edge*> e = _from -> edges(_to);
-  kDebug() << "Index dessa aresta em relacao ao no2: " << e.indexOf(this);
+  int relativeIndex1 = _from -> edges(_to).indexOf(this); kDebug() << "Relative Index1: " << relativeIndex1;
+  int relativeIndex2 = _to -> edges(_from).indexOf(this); kDebug() << "Relative Index2: " << relativeIndex2;
+  int index = (relativeIndex1 >= relativeIndex2) ? relativeIndex1 : relativeIndex2;
 
-  return e.indexOf(this);
+  kDebug() << "Index " << index;
+
+  return index;
 }
 
 bool Edge::operator<(Edge *e){
