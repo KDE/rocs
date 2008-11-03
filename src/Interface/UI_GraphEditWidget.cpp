@@ -62,6 +62,7 @@ GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
    QVBoxLayout *layout = new QVBoxLayout;
    layout->addWidget(_txtEditScriptView);
   _tabEditor -> setLayout(layout);
+
   kDebug() << "GraphEditWidget Created";
 }
 

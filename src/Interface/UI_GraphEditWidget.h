@@ -68,6 +68,11 @@ private:
 
    GraphDocument *_graphDocument;
    Graph *_graph;
+
+  qreal topNode;
+  qreal bottomNode;
+  qreal leftNode;
+  qreal rightNode;
 };
 
 #endif

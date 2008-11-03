@@ -81,8 +81,7 @@ QList<Edge*> Node::edges(Node *n){
   foreach(Edge *e, _edges){
     if ((e -> from() == n) || (e -> to() == n)) tmpEdges.append(e);
   }
-  kDebug() << "Tamanho da Lista de Nos que conectam esse no pela aresta e = " << tmpEdges.size();
-  
+    
   return tmpEdges;
 }
 

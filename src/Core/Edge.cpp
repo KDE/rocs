@@ -52,13 +52,7 @@ Node* Edge::to(){ return _to;    }
 Node* Edge::from(){ return _from; }
 
 int Edge::relativeIndex(){
-  int relativeIndex1 = _from -> edges(_to).indexOf(this); kDebug() << "Relative Index1: " << relativeIndex1;
-  int relativeIndex2 = _to -> edges(_from).indexOf(this); kDebug() << "Relative Index2: " << relativeIndex2;
-  int index = (relativeIndex1 >= relativeIndex2) ? relativeIndex1 : relativeIndex2;
-
-  kDebug() << "Index " << index;
-
-  return index;
+  return _from -> edges(_to).indexOf(this);
 }
 
 bool Edge::operator<(Edge *e){
