@@ -134,4 +134,4 @@ void OrientedEdgeItem::updateValue(qreal ){}
 void OrientedEdgeItem::updateTotal(qreal ){}
 void OrientedEdgeItem::updateColor(QColor ){}
 
-#include "graphicsitem_MultiEdge.moc"
+#include "graphicsitem_OrientedEdge.moc"

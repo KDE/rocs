@@ -137,7 +137,7 @@ void GraphEditWidget::createEdge( Edge* edge)
     return;
   }
   if (qobject_cast<OrientedGraph*>(edge->parent())){
-    MultiEdgeItem *edgeItem = new MultiEdgeItem( edge );
+    OrientedEdgeItem *edgeItem = new OrientedEdgeItem( edge );
     _graphScene->addItem(edgeItem);
     kDebug() << "converted to Oriented Graph";
     return;
