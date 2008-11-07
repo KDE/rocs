@@ -25,7 +25,6 @@
 #include <QObject>
 #include <QColor>
 #include <QString>
-#include <QVariant>
 #include <QPointF>
 
 class Edge;
@@ -100,7 +99,5 @@ protected:
   QList<Edge*> _edges; // The graph`s edges
 
 };
-
-Q_DECLARE_METATYPE(Graph*)
 
 #endif

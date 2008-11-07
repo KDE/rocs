@@ -55,7 +55,6 @@ class Edge : public QObject{
   void  setTotal(qreal t) { _total = t;   emit totalChanged(t);   }
   void  setColor(QColor c){ _color = c;   emit colorChanged(c);   }
 
-
   signals:
     void visitedChanged(bool v);
     void nameChanged(const QString& s);

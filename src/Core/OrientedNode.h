@@ -7,6 +7,7 @@ class Edge;
 class Graph;
 
 class OrientedNode : public Node{
+Q_OBJECT
 public:
   OrientedNode(qreal x, qreal y, Graph *parent) : Node(x,y,parent){}
 

@@ -69,7 +69,7 @@ Edge* OrientedNode::connect(Node* n){
   if (! g->checkExistence(n) ) return 0;
   Edge *e = 0;
   e = new Edge(this, n, g);
-    
+  g->nodeCreatedEdge(e);
   kDebug() << "Oriented Edge Created";
   return e;
 }

@@ -5,6 +5,7 @@
 #include "MultiNode.h"
 
 class MultiGraph : public Graph{
+  Q_OBJECT
   public:
     MultiGraph(GraphDocument *parent = 0);
 
@@ -12,4 +13,5 @@ class MultiGraph : public Graph{
     Node* addNode(qreal x, qreal y);
 
 };
+
 #endif

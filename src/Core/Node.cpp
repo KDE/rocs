@@ -123,6 +123,7 @@ Edge* Node::connect(Node* n){
   if (! g->checkExistence(n) ){ return 0; }
 
   Edge *e = new Edge(this, n, g);
+  g->nodeCreatedEdge(e);
   kDebug() << "Simple Edge Created";  
   return e;
 }

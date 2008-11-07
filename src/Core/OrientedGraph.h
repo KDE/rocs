@@ -5,6 +5,7 @@
 #include "OrientedNode.h"
 
 class OrientedGraph : public Graph{
+  Q_OBJECT
   public:
     OrientedGraph(GraphDocument *parent = 0);
 

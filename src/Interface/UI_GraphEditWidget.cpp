@@ -30,6 +30,8 @@
 #include "Graph.h"
 #include "Node.h"
 #include "Edge.h"
+#include "MultiGraph.h"
+#include "OrientedGraph.h"
 
 #include "kross_rocsengine.h"
 
@@ -126,8 +128,23 @@ void GraphEditWidget::createNode( Node *node){
 
 void GraphEditWidget::createEdge( Edge* edge)
 {
-  MultiEdgeItem *edgeItem = new MultiEdgeItem( edge );
+  
+  if ( qobject_cast<MultiGraph*>(edge->parent())){
+    MultiEdgeItem *edgeItem = new MultiEdgeItem( edge );
+    _graphScene->addItem(edgeItem);
+    kDebug() << "converted to Multi Graph";
+    return;
+  }
+  if (qobject_cast<OrientedGraph*>(edge->parent())){
+    MultiEdgeItem *edgeItem = new MultiEdgeItem( edge );
+    _graphScene->addItem(edgeItem);
+    kDebug() << "converted to Oriented Graph";
+    return;
+  }
+  EdgeItem *edgeItem = new EdgeItem(edge);
   _graphScene->addItem(edgeItem);
+  kDebug() << "converted to simple Graph";
+  return;
 }
 
 void GraphEditWidget::removeNode(int )
