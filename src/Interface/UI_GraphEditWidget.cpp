@@ -25,6 +25,7 @@
 #include "graphicsitem_Node.h"
 #include "graphicsitem_Edge.h"
 #include "graphicsitem_MultiEdge.h"
+#include "graphicsitem_OrientedEdge.h"
 
 #include "GraphDocument.h"
 #include "Graph.h"

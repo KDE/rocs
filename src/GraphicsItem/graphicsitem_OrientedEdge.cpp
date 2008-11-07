@@ -30,16 +30,17 @@
 #include "Node.h"
 #include "Edge.h"
 #include "Graph.h"
+
 #include "math_constants.h"
 #include <math.h>
 
 #include "graphicsitem_Node.h"
-#include "graphicsitem_MultiEdge.h"
+#include "graphicsitem_OrientedEdge.h"
 
 #include <KDebug>
 #include <QPen>
 
-MultiEdgeItem::MultiEdgeItem( Edge *edge, QGraphicsItem *parent)
+OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
      : QObject(0), QGraphicsPathItem(parent)
 {
   
@@ -70,8 +71,8 @@ MultiEdgeItem::MultiEdgeItem( Edge *edge, QGraphicsItem *parent)
   kDebug() << "Multi Edge Created, Index = " << _index;
 }
 
-QPainterPath MultiEdgeItem::createCurves(QPointF Pos1, QPointF Pos2, int index){
-    
+QPainterPath OrientedEdgeItem::createCurves(QPointF Pos1, QPointF Pos2, int index){
+  
   if (Pos1.x() > Pos2.x()){
     QPointF p3 = Pos2;  
     Pos2 = Pos1;
@@ -105,32 +106,32 @@ QPainterPath MultiEdgeItem::createCurves(QPointF Pos1, QPointF Pos2, int index){
   return p;
 }
 
- void MultiEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+ void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
  {
      update();
      QGraphicsItem::mousePressEvent(event);
  }
 
- void MultiEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+ void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
  {
      update();
      QGraphicsItem::mouseReleaseEvent(event);
  }
 
-void MultiEdgeItem::removed(){
+void OrientedEdgeItem::removed(){
   kDebug() << " Not Implemented Yet " << "removed";
 }
 
-void MultiEdgeItem::updatePos(QPointF){
+void OrientedEdgeItem::updatePos(QPointF){
   QPainterPath p = createCurves(_edge->from()->pos(), _edge->to()->pos(), _index);
   setPath(p);
 }
 
-void MultiEdgeItem::updateName(const QString& ){}
-void MultiEdgeItem::updateVisited(bool ){}
-void MultiEdgeItem::updateLength(qreal ){}
-void MultiEdgeItem::updateValue(qreal ){}
-void MultiEdgeItem::updateTotal(qreal ){}
-void MultiEdgeItem::updateColor(QColor ){}
+void OrientedEdgeItem::updateName(const QString& ){}
+void OrientedEdgeItem::updateVisited(bool ){}
+void OrientedEdgeItem::updateLength(qreal ){}
+void OrientedEdgeItem::updateValue(qreal ){}
+void OrientedEdgeItem::updateTotal(qreal ){}
+void OrientedEdgeItem::updateColor(QColor ){}
 
 #include "graphicsitem_MultiEdge.moc"
