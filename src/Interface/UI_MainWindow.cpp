@@ -49,7 +49,7 @@
 #include "action_MoveNode.h"
 
 MainWindow::MainWindow() : KXmlGuiWindow(){
-
+ 
   _documentModel = 0;
   _graphLayersModel = 0;
 
@@ -59,6 +59,7 @@ MainWindow::MainWindow() : KXmlGuiWindow(){
   setupWidgets();
   setupGUI();
   setupActions();
+  
   setupSignals();
 }
 

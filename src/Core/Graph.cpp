@@ -267,8 +267,22 @@ void Graph::nodeCreatedEdge(Edge *e){
   emit edgeCreated(e) ;
 }
 
-void Graph::removeEdge(Edge* e){ _edges.removeOne(e);}
-QList<Node*> Graph::nodes() { return _nodes; } 
-QList<Edge*> Graph::edges() { return _edges; }
-Node* Graph::nodeAt(int index){ return _nodes.at(index); }
-Edge* Graph::edgeAt(int index){ return _edges.at(index); }
+void Graph::removeEdge(Edge* e){ 
+  _edges.removeOne(e);
+}
+
+QList<Node*> Graph::nodes() { 
+  return _nodes; 
+} 
+
+QList<Edge*> Graph::edges() { 
+  return _edges; 
+}
+
+Node* Graph::nodeAt(int index){ 
+  return _nodes.at(index); 
+}
+
+Edge* Graph::edgeAt(int index){ 
+  return _edges.at(index); 
+}
