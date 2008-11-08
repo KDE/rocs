@@ -46,7 +46,7 @@ class PaletteBarDockWidget : public QDockWidget{
       \param parent the MainWindow
       \param flags the window flags.
     */
-    PaletteBarDockWidget ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    explicit PaletteBarDockWidget ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
     void setActionCollection(KActionCollection *colletion);
   public slots:
     void setGraphDocument( GraphDocument *document);

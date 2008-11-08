@@ -40,7 +40,7 @@ class GraphLayersModel;
 class GraphLayersDockWidget : public QDockWidget, public Ui::GraphLayersDockWidget{
   Q_OBJECT
   public:
-    GraphLayersDockWidget(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    explicit GraphLayersDockWidget(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
   public slots:
     void setGraphDocument(GraphDocument *document);

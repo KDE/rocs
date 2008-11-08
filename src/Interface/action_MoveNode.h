@@ -39,7 +39,7 @@ class MoveNodeAction : public AbstractAction{
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
   
-    MoveNodeAction(GraphScene *scene, QObject *parent = 0);
+    explicit MoveNodeAction(GraphScene *scene, QObject *parent = 0);
   
     /*! 
       Default Destructor 

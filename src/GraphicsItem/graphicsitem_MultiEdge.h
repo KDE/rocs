@@ -38,7 +38,7 @@ public:
   /*! default constructor 
   \param node the libgraph::Node that this item will interact to.
   \param parent the QGraphicsITem that this Item belongs to. */
-  MultiEdgeItem(Edge *edge, QGraphicsItem *parent = 0);
+  explicit MultiEdgeItem(Edge *edge, QGraphicsItem *parent = 0);
 
   /*! The type of the item */
   enum { Type = UserType + 3 };

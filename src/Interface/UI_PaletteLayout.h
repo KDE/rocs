@@ -26,7 +26,7 @@
 /*! \brief defines the layout on the pallete bar */
 class PaletteLayout: public QLayout{
   public:
-    PaletteLayout ( QWidget *parent, int margin = 0, int spacing = -1 );
+    explicit PaletteLayout ( QWidget *parent, int margin = 0, int spacing = -1 );
     PaletteLayout ( int spacing = -1 ) ;
     ~PaletteLayout();
     void addItem ( QLayoutItem *item ) ;

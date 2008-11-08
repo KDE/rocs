@@ -36,7 +36,7 @@ public:
   /*! default constructor 
   \param node the  Node that this item will interact to.
   \param parent the QGraphicsITem that this Item belongs to. */
-  NodeItem( Node *node, QGraphicsItem *parent = 0);
+ explicit NodeItem( Node *node, QGraphicsItem *parent = 0);
 
   /*! The type of the item */
   enum { Type = UserType + 1 };

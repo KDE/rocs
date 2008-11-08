@@ -38,7 +38,7 @@ class OpenedFilesDockWidget : public QDockWidget, public Ui::OpenedFilesDockWidg
   Q_OBJECT
 
   public:
-    OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    explicit OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent = 0, Qt::WindowFlags flags = 0);
   
   signals:
     void activeDocumentChanged( GraphDocument *document);
