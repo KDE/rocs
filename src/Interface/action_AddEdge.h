@@ -18,8 +18,8 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#ifndef ADDEDGEACTION_H
-#define ADDEDGEACTION_H
+#ifndef ACTION_ADDEDGE_H
+#define ACTION_ADDEDGE_H
 
 #include "action_AbstractAction.h"
 #include <QObject>

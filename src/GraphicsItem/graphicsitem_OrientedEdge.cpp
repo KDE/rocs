@@ -18,6 +18,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "graphicsitem_OrientedEdge.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -35,7 +36,7 @@
 #include <math.h>
 
 #include "graphicsitem_Node.h"
-#include "graphicsitem_OrientedEdge.h"
+
 
 #include <KDebug>
 #include <QPen>

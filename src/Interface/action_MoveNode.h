@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef MOVENODEACTION_H
-#define MOVENODEACTION_H
+#ifndef ACTION_MOVENODE_H
+#define ACTION_MOVENODE_H
 
 #include "action_AbstractAction.h"
 

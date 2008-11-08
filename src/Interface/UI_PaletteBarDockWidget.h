@@ -17,8 +17,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef UI_PALLETEBARDOCKWIDGET_H
-#define UI_PALLETEBARDOCKWIDGET_H
+#ifndef UI_PALETTEBARDOCKWIDGET_H
+#define UI_PALETTEBARDOCKWIDGET_H
 
 #include <QDockWidget>
 #include <QList>

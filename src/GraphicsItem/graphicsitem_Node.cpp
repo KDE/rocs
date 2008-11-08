@@ -19,12 +19,13 @@
 */
 
 
+#include "graphicsitem_Node.h"
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QStyleOption>
 
-#include "graphicsitem_Node.h"
+
 #include "Node.h"
 #include "Graph.h"
 #include <KDebug>

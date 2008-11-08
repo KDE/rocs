@@ -19,8 +19,8 @@
 */
 
 #include "Graph.h"
-#include "OrientedGraph.h"
 #include "GraphDocument.h"
+#include "OrientedGraph.h"
 #include "MultiGraph.h"
 #include <QString>
 

@@ -18,6 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "UI_PaletteBarDockWidget.h"
+
 #include <KAction>
 #include <QEvent>
 #include <QToolButton>
@@ -27,7 +29,7 @@
 #include <KIcon>
 #include <KDebug>
 
-#include "UI_PaletteBarDockWidget.h"
+
 #include "UI_MainWindow.h"
 #include "UI_PaletteScrollArea.h"
 #include "UI_PaletteLayout.h"

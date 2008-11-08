@@ -18,6 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "UI_MainWindow.h"  
+
 // KDE Related Includes
 #include <KLocale>
 #include <KAction>
@@ -26,7 +28,7 @@
 #include <kxmlguifactory.h>
 
 // UI RELATED INCLUDES
-#include "UI_MainWindow.h"  
+
 #include "UI_PaletteBarDockWidget.h" 
 #include "UI_GraphLayersDockWidget.h"
 #include "UI_OpenedFilesDockWidget.h"

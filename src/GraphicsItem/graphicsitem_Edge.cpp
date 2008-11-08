@@ -19,13 +19,15 @@
 */
 
 
+#include "graphicsitem_Edge.h"
+
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QStyleOption>
 #include <QPen>
 
-#include "graphicsitem_Edge.h"
+
 #include "Node.h"
 #include "Edge.h"
 #include "Graph.h"
