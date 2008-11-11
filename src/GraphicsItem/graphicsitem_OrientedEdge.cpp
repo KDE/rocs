@@ -156,14 +156,9 @@ QPainterPath OrientedEdgeItem::createCurves(){
     p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
     
     /// Calculate the Arrow.
-    x = Pos2.x();
-    y = Pos2.y();
-    x -= finalX/2;
-    y -= finalY/2;
+    QPointF middle = p.pointAtPercent(0.5);
     
-    arrow.translate(-x, -y );
-
-    arrow.translate( -x, -y);
+    arrow.translate(-middle.x()/2,-middle.y()/2 );
     p.addPolygon(arrow);
   }
 
