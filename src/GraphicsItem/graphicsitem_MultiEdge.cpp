@@ -72,37 +72,44 @@ MultiEdgeItem::MultiEdgeItem( Edge *edge, QGraphicsItem *parent)
 }
 
 QPainterPath MultiEdgeItem::createCurves(QPointF Pos1, QPointF Pos2, int index){
-    
-  if (Pos1.x() > Pos2.x()){
-    QPointF p3 = Pos2;  
-    Pos2 = Pos1;
-    Pos1 = p3;
-  }
-
-  qreal x = Pos2.x() - Pos1.x();
-  qreal y = Pos2.y() - Pos1.y();
-
-  qreal theta = atan2(y,x) + PI_2 ;  
-  qreal finalX = cos(theta);
-  qreal finalY = sin(theta);
-
-  if (index & 1){ // If number is Odd.
-    index++;
-    finalX *= (-1);
-    finalY *= (-1);
-  }
-
-  qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
-    
-  finalX *= size;
-  finalY *= size;
-  
-  finalX += Pos1.x() + (x)/2;
-  finalY += Pos1.y() + (y)/2;
-
   QPainterPath p;
-  p.moveTo(Pos1);
-  p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
+  
+  if (_index == 0){
+      p.moveTo(Pos1);
+      p.lineTo(Pos2);
+  }
+  else{
+
+    if (Pos1.x() > Pos2.x()){
+      QPointF p3 = Pos2;  
+      Pos2 = Pos1;
+      Pos1 = p3;
+    }
+
+    qreal x = Pos2.x() - Pos1.x();
+    qreal y = Pos2.y() - Pos1.y();
+
+    qreal theta = atan2(y,x) + PI_2 ;  
+    qreal finalX = cos(theta);
+    qreal finalY = sin(theta);
+
+    if (index & 1){ // If number is Odd.
+      index++;
+      finalX *= (-1);
+      finalY *= (-1);
+    }
+
+    qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
+    
+    finalX *= size;
+    finalY *= size;
+  
+    finalX += Pos1.x() + (x)/2;
+    finalY += Pos1.y() + (y)/2;
+
+    p.moveTo(Pos1);
+    p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
+  }
   return p;
 }
 

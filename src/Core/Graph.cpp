@@ -181,12 +181,13 @@ void Graph::toWGraph(){
   int s = _nodes.size();
   int i;
 
-  for(i = 0; i < (s - 2); i++) {
+  s -= 2;
+  for(i = 0; i < s ; ++i) {
     _nodes[i]->connect(_nodes[i+1]);
   }
   _nodes[i]->connect(_nodes[0]);
 
-  for(i = 0; i < (s - 2); i++){
+  for(i = 0; i < s ; ++i){
     _nodes[i]->connect(_nodes[s-1]);
   }
 }
@@ -211,10 +212,10 @@ QList< QList <int> > Graph::ajdMatrix(){
   int i, j;
   int size = _nodes.size();
 
-  for( i = 0; i < size; i++){
+  for( i = 0; i < size; ++i){
 	QList<int> vector;
     matrix.append( vector );
-    for( j = 0; j < size; j++){
+    for( j = 0; j < size; ++j){
       if  (_nodes[i]->isConnected(_nodes[j])){
         matrix[i].append( _nodes[i]->connections(_nodes[j]).size());
       }
@@ -230,7 +231,7 @@ QList< QList <int> > Graph::incMatrix(){
   int edgesSize = _edges.size();
   int nodesSize = _nodes.size();
 
-  for( i = 0; i < nodesSize; i++){
+  for( i = 0; i < nodesSize; ++i){
 	QList<int> vector;
         matrix.append( vector );
 

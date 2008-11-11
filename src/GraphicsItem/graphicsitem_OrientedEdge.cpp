@@ -27,6 +27,8 @@
 #include <QPen>
 #include <QGraphicsLineItem>
 #include <QPainterPath>
+#include <QLine>
+#include <QPolygonF>
 
 #include "Node.h"
 #include "Edge.h"
@@ -67,43 +69,104 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
   pen.setJoinStyle(Qt::RoundJoin);
   setPen( pen );    // ! Connect the Edge's Signals.
 
-  QPainterPath p = createCurves(_edge->from()->pos(), _edge->to()->pos(), _index);
+  QPainterPath p = createCurves();
   setPath(p);
-  kDebug() << "Multi Edge Created, Index = " << _index;
+
+  kDebug() << "Oriented Edge Created, Index = " << _index;
 }
 
-QPainterPath OrientedEdgeItem::createCurves(QPointF Pos1, QPointF Pos2, int index){
+QPainterPath OrientedEdgeItem::createCurves(){
+  /// Calculate the angle.
+  QPointF Pos1 = _edge->from()->pos();
+  QPointF Pos2 = _edge->to()->pos();
+
+  qreal angle;
+
+  /// Draw the Arrow
+  QLineF line(Pos1, Pos2);
   
-  if (Pos1.x() > Pos2.x()){
-    QPointF p3 = Pos2;  
-    Pos2 = Pos1;
-    Pos1 = p3;
+  // Draw the arrows if there's enough room
+  angle = ::acos(line.dx() / line.length());
+
+  if (line.dy() >= 0){
+    angle = TwoPi - angle;
   }
-
-  qreal x = Pos2.x() - Pos1.x();
-  qreal y = Pos2.y() - Pos1.y();
-
-  qreal theta = atan2(y,x) + PI_2 ;  
-  qreal finalX = cos(theta);
-  qreal finalY = sin(theta);
-
-  if (index & 1){ // If number is Odd.
-    index++;
-    finalX *= (-1);
-    finalY *= (-1);
-  }
-
-  qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
+ 
+  qreal arrowSize = 10;
+  
+  QPointF destArrowP1 = Pos2 + QPointF(sin(angle - PI_3) * arrowSize,         cos(angle - PI_3) * arrowSize);
+  QPointF destArrowP2 = Pos2 + QPointF(sin(angle - Pi + PI_3) * arrowSize,    cos(angle - Pi + PI_3) * arrowSize);
     
-  finalX *= size;
-  finalY *= size;
-  
-  finalX += Pos1.x() + (x)/2;
-  finalY += Pos1.y() + (y)/2;
-
   QPainterPath p;
-  p.moveTo(Pos1);
-  p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
+  QPolygonF arrow;
+  arrow << destArrowP1 << Pos2 << destArrowP2;
+  
+  if (_index == 0){
+      qreal x = Pos2.x() - Pos1.x();
+      qreal y = Pos2.y() - Pos1.y();
+      x -= x/2;
+      y -= y/2;
+      
+      p.moveTo(Pos1);
+      p.lineTo(Pos2);
+      arrow.translate(-x, -y );
+      p.addPolygon(arrow);
+  }
+  
+  else{
+    /// change the angle for correctness of the points.
+    qreal x;
+    qreal y;
+
+    if (Pos1.x() > Pos2.x()){
+      QPointF p3 = Pos2;  
+      Pos2 = Pos1;
+      Pos1 = p3;
+    }
+
+    x = Pos2.x() - Pos1.x();
+    y = Pos2.y() - Pos1.y();
+
+    angle = atan2(y,x);
+
+    /// Calculate the size of the inclination on the curve.
+    qreal theta = angle + PI_2 ;
+
+    qreal finalX = cos(theta);
+    qreal finalY = sin(theta);
+    int index = _index;
+
+    if (index & 1){ // If number is Odd.
+      index++;
+      finalX *= (-1);
+      finalY *= (-1);
+    }
+
+    qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
+    
+    finalX *= size;
+    finalY *= size;
+  
+    finalX += Pos1.x() + (x)/2;
+    finalY += Pos1.y() + (y)/2;
+  
+    /// Draw the Arc.
+
+    p.moveTo(Pos1);
+    p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
+    
+    /// Calculate the Arrow.
+    x = Pos2.x();
+    y = Pos2.y();
+    x -= finalX/2;
+    y -= finalY/2;
+    
+    arrow.translate(-x, -y );
+
+    arrow.translate( -x, -y);
+    p.addPolygon(arrow);
+  }
+
   return p;
 }
 
@@ -124,9 +187,10 @@ void OrientedEdgeItem::removed(){
 }
 
 void OrientedEdgeItem::updatePos(QPointF){
-  QPainterPath p = createCurves(_edge->from()->pos(), _edge->to()->pos(), _index);
+  QPainterPath p = createCurves();
   setPath(p);
 }
+
 
 void OrientedEdgeItem::updateName(const QString& ){}
 void OrientedEdgeItem::updateVisited(bool ){}

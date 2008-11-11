@@ -1,3 +1,4 @@
+
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -18,36 +19,20 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#ifndef MATH_CONSTANTS_H
+#define MATH_CONSTANTS_H
 
-#include "OrientedGraph.h"
-#include "OrientedNode.h"
-#include "Edge.h"
 
-OrientedGraph::OrientedGraph(GraphDocument *parent)  : Graph(parent){
-  _color = Qt::darkBlue;
-}
 
-QList< QList <int> > OrientedGraph::ajdMatrix(){
-  QList< QList< int > > matrix;
-  int i, j;
-  int size = _nodes.size();
+static const double Pi = 3.14159265358979323846264338327950288419717;
 
-  for( i = 0; i < size; ++i){
-	QList<int> vector;
-    matrix.append( vector );
-    for( j = 0; j < size; ++j){
-      if ( _nodes[i]->isAdjacent( _nodes[j] )){
-        matrix[i].append( _nodes[i]->adjEdges(_nodes[j]).size());
-      }
-    }
-  }
+/// The value of Pi * 2
+static double TwoPi = 2.0 * Pi;
 
-  return matrix;
-}
+/// The Value of PI / 3
+static const qreal PI_3 = Pi / 3;
 
-Node* OrientedGraph::addNode(qreal x, qreal y){
-  Node *tmpNode = new OrientedNode(x, y, this);
-  emit nodeCreated(tmpNode);
-  return tmpNode;
-}
+/// The Value of PI / 2
+static const qreal PI_2 = Pi / 2;
 
+#endif

@@ -50,6 +50,7 @@ public:
 
   /*! Gets the edge of the node */
   Edge* edge() { return _edge; }
+
 protected:
   /*! when there's a mouse click on the node, this method is invocked 
     \param event the mouse object
@@ -75,7 +76,7 @@ private:
     Edge *_edge;
     int _index;
     bool _loop; // if the edge is connected with the same node twice.
-    QPainterPath createCurves(QPointF Pos1, QPointF Pos2, int index);
+    QPainterPath createCurves();
 };
 
 #endif
