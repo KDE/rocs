@@ -80,13 +80,9 @@ QPainterPath OrientedEdgeItem::createCurves(){
   QPointF Pos1 = _edge->from()->pos();
   QPointF Pos2 = _edge->to()->pos();
 
-  qreal angle;
-
   /// Draw the Arrow
   QLineF line(Pos1, Pos2);
-  
-  // Draw the arrows if there's enough room
-  angle = ::acos(line.dx() / line.length());
+  qreal angle = ::acos(line.dx() / line.length());
 
   if (line.dy() >= 0){
     angle = TwoPi - angle;
@@ -96,29 +92,27 @@ QPainterPath OrientedEdgeItem::createCurves(){
   
   QPointF destArrowP1 = Pos2 + QPointF(sin(angle - PI_3) * arrowSize,         cos(angle - PI_3) * arrowSize);
   QPointF destArrowP2 = Pos2 + QPointF(sin(angle - Pi + PI_3) * arrowSize,    cos(angle - Pi + PI_3) * arrowSize);
-    
-  QPainterPath p;
-  QPolygonF arrow;
-  arrow << destArrowP1 << Pos2 << destArrowP2;
+  QPolygonF arrow(QPolygonF() <<  destArrowP1 << Pos2 << destArrowP2);
   
+  /// Put the arrow on the center of the nodes.
+  qreal x = Pos2.x() - Pos1.x();
+  qreal y = Pos2.y() - Pos1.y();
+
+  x -= x/2;
+  y -= y/2;
+  arrow.translate(-x, -y );
+
+  QPainterPath p;
+  /// Draw the line if it is to draw the line.
   if (_index == 0){
-      qreal x = Pos2.x() - Pos1.x();
-      qreal y = Pos2.y() - Pos1.y();
-      x -= x/2;
-      y -= y/2;
-      
       p.moveTo(Pos1);
       p.lineTo(Pos2);
-      arrow.translate(-x, -y );
       p.addPolygon(arrow);
   }
-  
+  /// Draw a curve if it's to draw a curve.
   else{
     /// change the angle for correctness of the points.
-    qreal x;
-    qreal y;
-
-    if (Pos1.x() > Pos2.x()){
+      if (Pos1.x() > Pos2.x()){
       QPointF p3 = Pos2;  
       Pos2 = Pos1;
       Pos1 = p3;
@@ -146,19 +140,21 @@ QPainterPath OrientedEdgeItem::createCurves(){
     
     finalX *= size;
     finalY *= size;
-  
     finalX += Pos1.x() + (x)/2;
     finalY += Pos1.y() + (y)/2;
   
     /// Draw the Arc.
-
     p.moveTo(Pos1);
     p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
     
     /// Calculate the Arrow.
     QPointF middle = p.pointAtPercent(0.5);
-    
-    arrow.translate(-middle.x()/2,-middle.y()/2 );
+
+    x = Pos1.x() + (Pos2.x() - Pos1.x())/2;
+    y = Pos1.y() + (Pos2.y() - Pos1.y())/2;
+    QLineF line2(QPointF(x,y) , middle);
+ 
+    arrow.translate(+line2.dx() , +line2.dy());
     p.addPolygon(arrow);
   }
 
