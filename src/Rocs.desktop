@@ -21,6 +21,7 @@ Icon=Rocs
 Type=Application
 DocPath=Rocs/rocs.html
 Comment=Graph Theory Tool for Professors and Students.
+Comment[cs]=Nástroj teorie grafů pro profesory a studenty.
 Comment[el]=Εργαλείο θεωρίας γραφημάτων για καθηγητές και φοιτητές.
 Comment[es]=Herramientas de teoría gráfica para profesores y alumnos.
 Comment[et]=Graafiteooria tööriist nii professoritele kui ka tudengitele.
