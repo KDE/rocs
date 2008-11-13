@@ -76,6 +76,8 @@ private:
     int _index;
     bool _loop; // if the edge is connected with the same node twice.
     QPainterPath createCurves(QPointF Pos1, QPointF Pos2, int index);
+    void setupPen();
+    void connectSignals();
 };
 
 #endif

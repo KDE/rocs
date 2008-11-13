@@ -107,13 +107,24 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
 }
 
 QPainterPath OrientedEdgeItem::createCurves(){
+
+
   /// Calculate the angle.
   QPointF Pos1 = _edge->from()->pos();
   QPointF Pos2 = _edge->to()->pos();
+  QPainterPath p;
+  
+  if ( _loop ){
+      qreal size = 20 + (10 * _index);
+      qreal hypotenuse = sqrt( pow(size, 2) + pow(size, 2)) / 2;
+      qreal correctPos = ( hypotenuse - (size/2));
+      p.addEllipse( Pos1.x() - correctPos , Pos1.y() - correctPos, size, size);
+      return p;
+  }
 
   QPolygonF arrow = createArrow(Pos1,  Pos2);
 
-  QPainterPath p;
+  
   /// Draw the line if it is to draw the line.
   if (_index == 0){
       p.moveTo(Pos1);

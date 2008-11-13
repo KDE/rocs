@@ -51,13 +51,24 @@ MultiEdgeItem::MultiEdgeItem( Edge *edge, QGraphicsItem *parent)
   setCacheMode(DeviceCoordinateCache);
   setZValue(0);
   
+  connectSignals();
+  setupPen();
+
+  QPainterPath p = createCurves(_edge->from()->pos(), _edge->to()->pos(), _index);
+  setPath(p);
+  kDebug() << "Multi Edge Created, Index = " << _index;
+}
+
+void MultiEdgeItem::connectSignals(){
   connect (_edge, SIGNAL(changed()), this, SLOT(updateSlot()));
   connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
 
   // ! Connect the Node connected to the edge's signals.
   connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos(QPointF)));
   connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos(QPointF)));
+}
 
+void MultiEdgeItem::setupPen(){
   QPen pen;
   pen.setStyle(Qt::SolidLine);
   pen.setWidth(2);
@@ -65,21 +76,21 @@ MultiEdgeItem::MultiEdgeItem( Edge *edge, QGraphicsItem *parent)
   pen.setCapStyle(Qt::RoundCap);
   pen.setJoinStyle(Qt::RoundJoin);
   setPen( pen );    // ! Connect the Edge's Signals.
-
-  QPainterPath p = createCurves(_edge->from()->pos(), _edge->to()->pos(), _index);
-  setPath(p);
-  kDebug() << "Multi Edge Created, Index = " << _index;
 }
 
 QPainterPath MultiEdgeItem::createCurves(QPointF Pos1, QPointF Pos2, int index){
   QPainterPath p;
-  
-  if (_index == 0){
+  if ( _loop ){
+      qreal size = 20 + (10 * _index);
+      qreal hypotenuse = sqrt( pow(size, 2) + pow(size, 2)) / 2;
+      qreal correctPos = ( hypotenuse - (size/2));
+      p.addEllipse( Pos1.x() - correctPos , Pos1.y() - correctPos, size, size);
+  }
+  else if (_index == 0){
       p.moveTo(Pos1);
       p.lineTo(Pos2);
   }
   else{
-
     if (Pos1.x() > Pos2.x()){
       QPointF p3 = Pos2;  
       Pos2 = Pos1;
