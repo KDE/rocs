@@ -77,6 +77,9 @@ private:
     int _index;
     bool _loop; // if the edge is connected with the same node twice.
     QPainterPath createCurves();
+    void connectSignals(); // All signals are connected here.
+    QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2);
+    void setupPen();
 };
 
 #endif

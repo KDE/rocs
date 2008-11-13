@@ -54,20 +54,8 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
   setCacheMode(DeviceCoordinateCache);
   setZValue(0);
   
-  connect (_edge, SIGNAL(changed()), this, SLOT(updateSlot()));
-  connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
-
-  // ! Connect the Node connected to the edge's signals.
-  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos(QPointF)));
-  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos(QPointF)));
-
-  QPen pen;
-  pen.setStyle(Qt::SolidLine);
-  pen.setWidth(2);
-  pen.setBrush(_edge->color());
-  pen.setCapStyle(Qt::RoundCap);
-  pen.setJoinStyle(Qt::RoundJoin);
-  setPen( pen );    // ! Connect the Edge's Signals.
+  connectSignals();
+  setupPen();
 
   QPainterPath p = createCurves();
   setPath(p);
@@ -75,12 +63,26 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
   kDebug() << "Oriented Edge Created, Index = " << _index;
 }
 
-QPainterPath OrientedEdgeItem::createCurves(){
-  /// Calculate the angle.
-  QPointF Pos1 = _edge->from()->pos();
-  QPointF Pos2 = _edge->to()->pos();
+void OrientedEdgeItem::setupPen(){
+  QPen pen;
+  pen.setStyle(Qt::SolidLine);
+  pen.setWidth(2);
+  pen.setBrush(_edge->color());
+  pen.setCapStyle(Qt::RoundCap);
+  pen.setJoinStyle(Qt::RoundJoin);
+  setPen( pen );    // ! Connect the Edge's Signals.
+}
 
-  /// Draw the Arrow
+void OrientedEdgeItem::connectSignals(){
+  connect (_edge, SIGNAL(changed()), this, SLOT(updateSlot()));
+  connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
+
+  // ! Connect the Node connected to the edge's signals.
+  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos(QPointF)));
+  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos(QPointF)));
+}
+
+QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2){
   QLineF line(Pos1, Pos2);
   qreal angle = ::acos(line.dx() / line.length());
 
@@ -101,6 +103,15 @@ QPainterPath OrientedEdgeItem::createCurves(){
   x -= x/2;
   y -= y/2;
   arrow.translate(-x, -y );
+  return arrow;
+}
+
+QPainterPath OrientedEdgeItem::createCurves(){
+  /// Calculate the angle.
+  QPointF Pos1 = _edge->from()->pos();
+  QPointF Pos2 = _edge->to()->pos();
+
+  QPolygonF arrow = createArrow(Pos1,  Pos2);
 
   QPainterPath p;
   /// Draw the line if it is to draw the line.
@@ -118,10 +129,10 @@ QPainterPath OrientedEdgeItem::createCurves(){
       Pos1 = p3;
     }
 
-    x = Pos2.x() - Pos1.x();
-    y = Pos2.y() - Pos1.y();
+    qreal x = Pos2.x() - Pos1.x();
+    qreal y = Pos2.y() - Pos1.y();
 
-    angle = atan2(y,x);
+    qreal angle = atan2(y,x);
 
     /// Calculate the size of the inclination on the curve.
     qreal theta = angle + PI_2 ;
@@ -147,7 +158,7 @@ QPainterPath OrientedEdgeItem::createCurves(){
     p.moveTo(Pos1);
     p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
     
-    /// Calculate the Arrow.
+    /// puts the arrow on it's correct position
     QPointF middle = p.pointAtPercent(0.5);
 
     x = Pos1.x() + (Pos2.x() - Pos1.x())/2;
