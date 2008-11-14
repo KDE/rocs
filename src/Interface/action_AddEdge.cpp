@@ -36,6 +36,7 @@ AddEdgeAction::AddEdgeAction(GraphScene *scene, QObject *parent)
   _nodeFrom = 0;
   _nodeTo   = 0;
   _tmpLine  = 0;
+  _working = false;
 }
 
 AddEdgeAction::~AddEdgeAction(){
@@ -43,6 +44,10 @@ AddEdgeAction::~AddEdgeAction(){
 }
 
 void AddEdgeAction::executePress(QPointF pos){
+  if (_working) return;
+
+  _working = true;
+
   if ( ! _graph ) return; 
    _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
 
@@ -64,6 +69,8 @@ void AddEdgeAction::executeMove(QPointF pos){
 }
 
 void AddEdgeAction::executeRelease(QPointF pos){
+  if ( !_working ) return;
+  
   if ( ! _graph ) return; 
 
   if( _tmpLine ){ 
@@ -79,4 +86,5 @@ void AddEdgeAction::executeRelease(QPointF pos){
   _nodeFrom-> node() -> connect(_nodeTo->node());
   _nodeFrom = 0;
   _nodeTo = 0;
+  _working = false;
 }

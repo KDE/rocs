@@ -76,18 +76,6 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
      painter->drawEllipse(-10, -10, 20, 20);
  }
 
- void NodeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
- {
-     update();
-     QGraphicsItem::mousePressEvent(event);
- }
-
- void NodeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
- {
-     update();
-     QGraphicsItem::mouseReleaseEvent(event);
- }
-
 void NodeItem::updatePos(QPointF pos){
   setPos( pos );
   update();

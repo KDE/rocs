@@ -63,16 +63,6 @@ public:
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
    Node* node() { return _node; }
-protected:
-  /*! when there's a mouse click on the node, this method is invocked 
-    \param event the mouse object
-  */
-  void mousePressEvent(QGraphicsSceneMouseEvent *event);
-
-  /*! when the mouse is released, this method is invocked 
-    \param event the mouse object
-  */
-  void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 protected slots:
   void updatePos(QPointF);

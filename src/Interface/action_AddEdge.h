@@ -62,6 +62,7 @@ class AddEdgeAction : public AbstractAction{
     NodeItem *_nodeTo;
     QGraphicsLineItem *_tmpLine;
     QPointF _startPos;
+    bool _working;
 };
 
 #endif
