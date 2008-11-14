@@ -57,8 +57,8 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
   connectSignals();
   setupPen();
 
-  QPainterPath p = createCurves();
-  setPath(p);
+  
+  setPath(createCurves());
 
   kDebug() << "Oriented Edge Created, Index = " << _index;
 }
@@ -115,15 +115,13 @@ QPainterPath OrientedEdgeItem::createCurves(){
   QPainterPath p;
   
   if ( _loop ){
-      qreal size = 20 + (10 * _index);
-      qreal hypotenuse = sqrt( pow(size, 2) + pow(size, 2)) / 2;
-      qreal correctPos = ( hypotenuse - (size/2));
-      p.addEllipse( Pos1.x() - correctPos , Pos1.y() - correctPos, size, size);
+      qreal size = 30 + (10 * _index);
+      qreal correctPos = (sqrt( pow(size, 2)*2 ) / 2.0) - (size/2.0);
+      p.addEllipse( Pos1.x() - correctPos + _index , Pos1.y() - correctPos + _index, size, size);
       return p;
   }
 
   QPolygonF arrow = createArrow(Pos1,  Pos2);
-
   
   /// Draw the line if it is to draw the line.
   if (_index == 0){
