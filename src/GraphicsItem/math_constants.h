@@ -27,12 +27,14 @@
 static const double Pi = 3.14159265358979323846264338327950288419717;
 
 /// The value of Pi * 2
-static double TwoPi = 2.0 * Pi;
+static const double TwoPi = 2.0 * Pi;
 
 /// The Value of PI / 3
-static const qreal PI_3 = Pi / 3;
+static const qreal PI_3 = Pi / 3.0;
 
 /// The Value of PI / 2
-static const qreal PI_2 = Pi / 2;
+static const qreal PI_2 = Pi / 2.0;
 
+/// The Value of PI_4
+static const qreal PI_4 = Pi / 4.0;
 #endif

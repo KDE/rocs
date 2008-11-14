@@ -117,7 +117,8 @@ QPainterPath OrientedEdgeItem::createCurves(){
   if ( _loop ){
       qreal size = 30 + (10 * _index);
       qreal correctPos = (sqrt( pow(size, 2)*2 ) / 2.0) - (size/2.0);
-      p.addEllipse( Pos1.x() - correctPos + _index , Pos1.y() - correctPos + _index, size, size);
+      correctPos = correctPos * sin(PI_4);
+      p.addEllipse( Pos1.x() - correctPos , Pos1.y() - correctPos , size, size);
       return p;
   }
 
