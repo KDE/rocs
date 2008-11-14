@@ -81,16 +81,9 @@ void MultiEdgeItem::setupPen(){
 QPainterPath MultiEdgeItem::createCurves(QPointF Pos1, QPointF Pos2, int index){
   QPainterPath p;
   if ( _loop ){
-      kDebug() << "###########################";
+      
       qreal size = 30 + (10 * _index);
-      kDebug() << "Size : " << size;
-
-      qreal hypotenuse = sqrt( pow(size, 2)*2 ) / 2.0;
-      kDebug() << "Hypotenuse / 2" << hypotenuse;
-
-      qreal correctPos = ( hypotenuse - (size/2.0));
-      kDebug() << " correctPos " << correctPos;
-
+      qreal correctPos = (sqrt( pow(size, 2)*2 ) / 2.0) - (size/2.0);
       p.addEllipse( Pos1.x() - correctPos + _index , Pos1.y() - correctPos + _index, size, size);
 
   }

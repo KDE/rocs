@@ -77,9 +77,11 @@ QList<Node*> Node::nodes(){
 
 QList<Edge*> Node::edges(Node *n){
   if ( n == 0 ){ return _edges; }
-  
-  QList<Edge*> tmpEdges;
-  foreach(Edge *e, _edges){
+  QList<Edge*> tmpEdges;  
+  if ( n == this ) foreach (Edge *e, _edges){
+    if ((e -> from() == n) && (e -> to() == n)) tmpEdges.append(e);
+  }
+  else foreach(Edge *e, _edges){
     if ((e -> from() == n) || (e -> to() == n)) tmpEdges.append(e);
   }
     
