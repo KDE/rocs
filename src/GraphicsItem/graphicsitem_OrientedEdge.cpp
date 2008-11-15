@@ -115,7 +115,7 @@ QPainterPath OrientedEdgeItem::createCurves(){
   QPainterPath p;
   
   if ( _loop ){
-      qreal size = 30 + (10 * _index);
+      qreal size = 30 + (20 * _index);
       qreal correctPos = (sqrt( pow(size, 2)*2 ) / 2.0) - (size/2.0);
       correctPos = correctPos * sin(PI_4);
       p.addEllipse( Pos1.x() - correctPos , Pos1.y() - correctPos , size, size);
@@ -152,7 +152,7 @@ QPainterPath OrientedEdgeItem::createCurves(){
     int index = _index;
 
     if (index & 1){ // If number is Odd.
-      index++;
+      ++index;
       finalX *= (-1);
       finalY *= (-1);
     }

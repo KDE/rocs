@@ -65,37 +65,33 @@ GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
    QVBoxLayout *layout = new QVBoxLayout;
    layout->addWidget(_txtEditScriptView);
   _tabEditor -> setLayout(layout);
-
-  kDebug() << "GraphEditWidget Created";
 }
 
 void GraphEditWidget::setGraphDocument( GraphDocument *gd){
-  
-  // if there is another document active, desactive it first.
   if ( _graphDocument != 0 ){
-    QList<QGraphicsItem*> itemList = _graphScene->items();
-    foreach(QGraphicsItem *i, itemList){
-      _graphScene->removeItem(i);
-      delete i;
-    }
-    kDebug() << "document " << _graphDocument -> name() << "being disconnected";
-    int size = gd->size();
-    for(int i = 0; i < size; i++){
-      gd->at(i)->disconnect();
-      kDebug() << "graph at " << i << "Disconnected.";
-    } 
+    releaseGraphDocument();
    }
   
-  kDebug() << "document" << gd->name() << "setted as active.";
   int size = gd->size();
   for(int i = 0; i < size; i++){
     connectGraphSignals( gd->at(i) );
-    drawGraphOnScene( gd->at(i) );
+    drawGraphOnScene( gd->at(i) );	
   }
   
   _graphDocument = gd;
   _graphScene->setSceneRect(gd->width(), gd->height() );
-  
+}
+
+void GraphEditWidget::releaseGraphDocument(){
+  QList<QGraphicsItem*> itemList = _graphScene->items();
+  foreach(QGraphicsItem *i, itemList){
+    _graphScene->removeItem(i);
+    delete i;
+  }
+  int size = _graphDocument->size();
+  for(int i = 0; i < size; i++){
+    _graphDocument->at(i)->disconnect(this);
+  }
 }
 
 void GraphEditWidget::drawGraphOnScene( Graph *g){
@@ -109,7 +105,6 @@ void GraphEditWidget::drawGraphOnScene( Graph *g){
   foreach( Edge* edge, edges){
     createEdge(edge);
   }
-  kDebug() << "Graph drawn on screen"; 
 }
 
 GraphScene *GraphEditWidget::scene() const{
@@ -119,7 +114,6 @@ GraphScene *GraphEditWidget::scene() const{
 void GraphEditWidget::setGraph( Graph *graph){
   _graph = graph;
   connectGraphSignals(graph);
-  kDebug() << "new active graph set.";
 }
 
 void GraphEditWidget::createNode( Node *node){
@@ -133,18 +127,15 @@ void GraphEditWidget::createEdge( Edge* edge)
   if ( qobject_cast<MultiGraph*>(edge->parent())){
     MultiEdgeItem *edgeItem = new MultiEdgeItem( edge );
     _graphScene->addItem(edgeItem);
-    kDebug() << "converted to Multi Graph";
     return;
   }
   if (qobject_cast<OrientedGraph*>(edge->parent())){
     OrientedEdgeItem *edgeItem = new OrientedEdgeItem( edge );
     _graphScene->addItem(edgeItem);
-    kDebug() << "converted to Oriented Graph";
     return;
   }
   EdgeItem *edgeItem = new EdgeItem(edge);
   _graphScene->addItem(edgeItem);
-  kDebug() << "converted to simple Graph";
   return;
 }
 
@@ -168,7 +159,6 @@ void GraphEditWidget::connectGraphSignals( Graph *graph){
   connect(graph,SIGNAL(edgeCreated(Edge*)),this,SLOT(createEdge(Edge*)));
   connect(graph,SIGNAL(nodeRemoved(int)),this,SLOT(removeNode(int)));
   connect(graph,SIGNAL(edgeRemoved(int)),this,SLOT(removeEdge(int)));
-  kDebug() << "Graph Signals Connected with GraphEdit";
 }
 
 

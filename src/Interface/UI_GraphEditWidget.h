@@ -59,6 +59,7 @@ public slots:
 private:
   void drawGraphOnScene( Graph *g);
   void connectGraphSignals( Graph *g);
+  void releaseGraphDocument();
 
   KTextEditor::Editor *_editor;
   KTextEditor::View *_txtEditScriptView;
