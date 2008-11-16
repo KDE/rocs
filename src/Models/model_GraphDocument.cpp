@@ -33,10 +33,9 @@ int GraphDocumentModel::rowCount(const QModelIndex&) const{
 }
 
 QVariant GraphDocumentModel::data(const QModelIndex &index, int role) const{
-  if ( !index.isValid() ) return QVariant();
-  if ( index.row() > _documents.size()) return QVariant();
-  if ( role != Qt::DisplayRole) return QVariant();
-
+  if (( !index.isValid() ) || ( index.row() > _documents.size() ) || ( role != Qt::DisplayRole)){
+    return QVariant();
+  }
   return _documents.at(index.row())->name();
 }
 

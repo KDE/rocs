@@ -29,6 +29,12 @@ class Node;
 class Edge : public QObject{
   Q_OBJECT
 
+  Q_PROPERTY(bool visited READ visited WRITE setVisited)
+  Q_PROPERTY(QString name READ name WRITE setName)
+  Q_PROPERTY(qreal length READ length WRITE setLength)
+  Q_PROPERTY(qreal value READ value WRITE setValue)
+  Q_PROPERTY(QColor color READ color WRITE setColor)
+
   public:
     Edge(Node* from, Node* to, Graph* parent); // Default constructor
     ~Edge(); // Default destructor 
@@ -45,14 +51,12 @@ class Edge : public QObject{
   QString  name()  { return _name;    }
   qreal    length(){ return _length;  }
   qreal    value() { return _value;   }
-  qreal    total() { return _total;   }
   QColor   color() { return _color;   }
 
   void  setVisited(bool v){ _visited = v; emit visitedChanged(v); }
   void  setName(QString n){ _name = n;    emit nameChanged(n);    }
   void  setLength(qreal l){ _length = l;  emit lengthChanged(l);  }
   void  setValue(qreal v) { _value = v;   emit valueChanged(v);   }
-  void  setTotal(qreal t) { _total = t;   emit totalChanged(t);   }
   void  setColor(QColor c){ _color = c;   emit colorChanged(c);   }
 
   signals:
@@ -71,7 +75,6 @@ class Edge : public QObject{
     QString _name;
     qreal   _length;
     qreal   _value;
-    qreal   _total;
     QColor  _color;
 
 };

@@ -30,7 +30,12 @@
 
 class Node : public QObject
 {
-Q_OBJECT
+  Q_OBJECT
+  Q_PROPERTY(QColor color READ color WRITE setColor)
+  Q_PROPERTY(QPointF pos READ pos WRITE setPos)
+  Q_PROPERTY(QString name READ name WRITE setName)
+  Q_PROPERTY(qreal value READ value WRITE setValue)
+  Q_PROPERTY(bool visited READ visited WRITE setVisited)
 
 public:
   Node(qreal x, qreal y, Graph *parent);
@@ -62,14 +67,12 @@ public slots:
   QColor color(){ return _color;    }
   QString name(){ return _name;     }
   qreal value() { return _value;    }
-  qreal total() { return _total;    }
   bool visited(){ return _visited;  }
 
   void setPos(QPointF p) { _pos = p;     emit posChanged(p);     }
   void setColor(QColor c){ _color = c;   emit colorChanged(c);   }
   void setName(QString n){ _name = n;    emit nameChanged(n);    }
   void setValue(qreal v) { _value = v;   emit valueChanged(v);   }
-  void setTotal(qreal t) { _total = t;   emit totalChanged(t);   }
   void setVisited(bool v){ _visited = v; emit visitedChanged(v); }
 
   virtual QList<Edge*> adjEdges(Node *n = 0) { return edges(n); }
@@ -88,7 +91,6 @@ signals:
   void colorChanged(QColor c);
   void nameChanged(const QString& s);
   void valueChanged(qreal v);
-  void totalChanged(qreal t);
   void visitedChanged(bool v);
 
   void removed();
@@ -99,7 +101,6 @@ protected:
   QColor _color;
   QPointF _pos;
   QString _name;
-  qreal _total;
   qreal _value;
   bool _visited;
   

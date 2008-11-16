@@ -39,30 +39,17 @@ Graph::Graph( Graph& g) : QObject(g.parent()){
   _name = g.name();
   _color = g.color();
 
+
   foreach(Node *n, g.nodes()){
     Node *tmpNode = addNode(0,0);
     tmpNode->setPos(n->pos());
     tmpNode->setColor(n->color());
     tmpNode->setVisited(n->visited());
     tmpNode->setValue(n->value());
-    tmpNode->setTotal(n->total());
     tmpNode->setName(n->name());
   }
+ 
 
-  QList< QList < int > > matrix = g.ajdMatrix();
-  int matrixSize = matrix.size();
-  for(int row = 0; row < matrixSize; row++){
-    for(int col = 0; col < matrixSize; col++){
-      if ( matrix[row][col] == 0) continue;
-      
-      int size = _nodes[row]->adjConnections(_nodes[col]).size();
-      if ( matrix[row][col] != size){
-        for(int i = 0; i < size; i++){
-        
-        }
-      }
-    }
-  }
 }
 
 Graph::~Graph(){

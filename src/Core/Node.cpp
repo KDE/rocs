@@ -31,7 +31,6 @@ Node::Node( qreal x, qreal y, Graph *parent ) : QObject(parent){
   _color = parent->color();
   _pos = QPointF(x, y);
   _name = "";
-  _total = 1;
   _value = 1;
   _visited = false;
    parent->append(this);

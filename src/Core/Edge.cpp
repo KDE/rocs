@@ -31,7 +31,6 @@ Edge::Edge(Node *from, Node *to, Graph *parent) : QObject(parent){
   _name = "";
   _length = 0;
   _value = 0;
-  _total = 0;
   parent->append(this);
   _from->append(this);
   _to->append(this);

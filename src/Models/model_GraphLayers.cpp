@@ -40,10 +40,13 @@ int GraphLayersModel::rowCount(const QModelIndex&) const{
 }
 
 QVariant GraphLayersModel::data(const QModelIndex &index, int role) const{
-  if ( _document == 0) return 0;
-  if ( !index.isValid() ) return QVariant();
-  if ( index.row() > _document -> size()) return QVariant();
-  if ( role != Qt::DisplayRole) return QVariant();
+  if ( _document == 0){
+    return 0;
+  }
+  if ( ( !index.isValid() ) || ( index.row() > _document -> size() ) || ( role != Qt::DisplayRole) ){
+    return QVariant();
+  }
+
 
   return _document->at(index.row())->name();
 }

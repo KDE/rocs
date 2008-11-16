@@ -35,6 +35,9 @@ class Graph : public QObject
 {
   Q_OBJECT
 
+  Q_PROPERTY(QString name READ name WRITE setName)
+  Q_PROPERTY(QColor color READ color WRITE setColor)
+
 public:
   
   Graph(GraphDocument *parent = 0); // Default Constructor

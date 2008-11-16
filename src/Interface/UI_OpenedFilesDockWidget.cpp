@@ -23,7 +23,8 @@
 #include "UI_MainWindow.h"
 
 #include "model_GraphDocument.h"
-#include <QDebug>
+#include <KDebug>
+
 OpenedFilesDockWidget::OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent, Qt::WindowFlags flags)
 : QDockWidget(i18n("Opened Files"),parent, flags) 
 {
@@ -39,11 +40,9 @@ void OpenedFilesDockWidget::on__btnNewFile_clicked()
   _openedFilesListView->model()->insertRow(1);
 }
 
-void OpenedFilesDockWidget::setActiveDocument(const QModelIndex& modelindex){
+void OpenedFilesDockWidget::setActiveDocument(const QModelIndex& modelindex)
+{
    GraphDocument *g = _documentModel -> at(modelindex);
-  if (g == 0) qDebug() << "Returning a NULL pointer";
-  else{
-    emit activeDocumentChanged( g );
-    qDebug() << "Send the Doc";
-  }
+   if (g == 0) return;
+   emit activeDocumentChanged( g );
 }
