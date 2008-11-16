@@ -18,12 +18,14 @@ set(librocsui_SRCS
   UI_Separator.cpp
   UI_PaletteScrollArea.cpp
   UI_GraphEditWidget.cpp
+  UI_PropertiesArea.cpp
 
   action_AbstractAction.cpp
   action_Pointer.cpp
   action_AddNode.cpp
   action_AddEdge.cpp
   action_MoveNode.cpp
+  action_SingleSelect.cpp
 )
 
 kde4_add_ui_files( 
@@ -31,6 +33,7 @@ kde4_add_ui_files(
   GraphLayersDockWidget.ui
   OpenedFilesDockWidget.ui
   GraphEditWidget.ui
+  GraphPropertiesWidget.ui
 )
 
 set(librocsui_KCFGS ../settings.kcfgc)

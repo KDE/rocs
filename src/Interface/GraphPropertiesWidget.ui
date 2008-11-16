@@ -1,0 +1,50 @@
+<ui version="4.0" >
+ <class>GraphPropertiesWidget</class>
+ <widget class="QDockWidget" name="GraphPropertiesWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>DockWidget</string>
+  </property>
+  <widget class="QWidget" name="dockWidgetContents" >
+   <layout class="QGridLayout" name="gridLayout" >
+    <item row="0" column="0" colspan="2" >
+     <widget class="QTableView" name="_tableView" />
+    </item>
+    <item row="1" column="0" >
+     <widget class="KLineEdit" name="_txtPropertyName" />
+    </item>
+    <item row="1" column="1" >
+     <widget class="KLineEdit" name="_txtPropertyValue" />
+    </item>
+    <item row="2" column="0" colspan="2" >
+     <widget class="KPushButton" name="_btnAddProperty" >
+      <property name="text" >
+       <string>Add Property</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

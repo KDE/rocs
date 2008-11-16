@@ -1,7 +1,8 @@
 #include "model_GraphProperties.h"
 
 GraphPropertiesModel::GraphPropertiesModel( QObject *parent ) : QAbstractTableModel(parent){
-
+  _dataSource = 0;
+  _metaObject = 0;
 }
 
 int GraphPropertiesModel::rowCount(const QModelIndex &parent) const{
@@ -54,6 +55,14 @@ QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientati
 }
 
 void GraphPropertiesModel::setDataSource(QObject *dataSource){
+  if( _dataSource){
+    beginRemoveRows(QModelIndex(), 0, _metaObject->propertyCount()-1);
+    endRemoveRows();
+  }
   _dataSource = dataSource;
   _metaObject = _dataSource -> metaObject();
+ 
+ beginInsertRows(QModelIndex(), 0, _metaObject->propertyCount()-1);
+ endInsertRows();
+ 
 }

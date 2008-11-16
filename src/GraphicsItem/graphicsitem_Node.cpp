@@ -37,15 +37,15 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
     setPos( _node -> pos() );
     setCacheMode(DeviceCoordinateCache);
     setZValue(1);
-  
+    setFlag(ItemIsSelectable);
+
   connect (_node, SIGNAL(posChanged(QPointF)),  this, SLOT(updatePos(QPointF)));
   connect (_node, SIGNAL(removed()), this, SLOT(removed()));
 }
 
  QRectF NodeItem::boundingRect() const
  {
-     qreal adjust = 2;
-     return QRectF(-10 - adjust, -10 - adjust, 23 + adjust, 23 + adjust);
+     return QRectF(-12, -12 , 25, 25);
  }
 
  QPainterPath NodeItem::shape() const
@@ -74,6 +74,12 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
      painter->setBrush(gradient);
      painter->setPen(QPen(_node->color(), 2));
      painter->drawEllipse(-10, -10, 20, 20);
+
+    if (isSelected()){
+      painter->setBrush(QBrush());
+      painter->setPen(QPen(Qt::black));
+      painter->drawRect(QRectF(-12 , -12 , 25 , 25 ));
+    }
  }
 
 void NodeItem::updatePos(QPointF pos){

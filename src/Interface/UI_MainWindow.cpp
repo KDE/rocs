@@ -32,6 +32,7 @@
 #include "UI_PaletteBarDockWidget.h" 
 #include "UI_GraphLayersDockWidget.h"
 #include "UI_OpenedFilesDockWidget.h"
+#include "UI_PropertiesArea.h"
 #include "UI_GraphEditWidget.h"
 #include "UI_GraphScene.h"
 
@@ -49,19 +50,17 @@
 #include "action_AddNode.h"
 #include "action_AddEdge.h"
 #include "action_MoveNode.h"
+#include "action_SingleSelect.h"
 
 MainWindow::MainWindow() : KXmlGuiWindow(){
- 
   _documentModel = 0;
   _graphLayersModel = 0;
-
   setObjectName ( "Rocs" );
 
   setupModels();
   setupWidgets();
   setupGUI();
   setupActions();
-  
   setupSignals();
 }
 
@@ -78,8 +77,10 @@ void MainWindow::setupWidgets(){
   _OpenedFiles     = new OpenedFilesDockWidget ( _documentModel, this );
   _PaletteBar      = new PaletteBarDockWidget  ( this );
   _GraphLayers     = new GraphLayersDockWidget ( this );
+  _GraphProperties = new GraphPropertiesDockWidget( this ); 
   _GraphEdit       = new GraphEditWidget( this );
 
+  addDockWidget ( Qt::RightDockWidgetArea, _GraphProperties);
   addDockWidget ( Qt::LeftDockWidgetArea, _PaletteBar );
   addDockWidget ( Qt::LeftDockWidgetArea, _GraphLayers );
   addDockWidget ( Qt::RightDockWidgetArea, _OpenedFiles );
@@ -96,6 +97,8 @@ void MainWindow::setupActions(){
   _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
   _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
   _paletteActions->addAction("move_node_action", new MoveNodeAction(gc, this));
+  _paletteActions->addAction("single_selection_action", new SingleSelectAction(gc, this));
+
   _PaletteBar->setActionCollection(_paletteActions);
 
   // Pointer Action is the first. 
@@ -119,6 +122,10 @@ void MainWindow::setupSignals(){
   connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
 	   this, SLOT(setGraph(Graph*)));
   
+  connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
+	  _GraphProperties, SLOT(setDataSource(QObject*)));
+
+
   foreach( QAction *action, _paletteActions->actions() ){
       connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
       action, SLOT(setGraph(Graph*)));

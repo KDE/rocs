@@ -33,7 +33,7 @@ class GraphEditWidget;
 class GraphDocumentModel;
 class GraphLayersModel;
 class KActionCollection;
-
+class GraphPropertiesDockWidget;
 class GraphDocument;
 class Graph;
 
@@ -53,12 +53,13 @@ private:
   PaletteBarDockWidget*  _PaletteBar;   // area where the icons of actions will be.
   OpenedFilesDockWidget* _OpenedFiles;  // area where the opened files will be
   GraphLayersDockWidget* _GraphLayers;  // area where the layers of the active graph will appear.
+  GraphPropertiesDockWidget* _GraphProperties; // Area where the nodes and edges will be modified.
   GraphEditWidget* _GraphEdit; // Area where the graph will be editted.
   QList<GraphDocument*> _documents;
   GraphDocumentModel *_documentModel;
   GraphLayersModel   *_graphLayersModel;
   KActionCollection  *_paletteActions;
-
+  
 public slots:
   void setGraph(Graph *g);
 };

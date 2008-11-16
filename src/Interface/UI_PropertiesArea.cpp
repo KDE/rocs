@@ -20,5 +20,20 @@
 
 #include "UI_PropertiesArea.h"
 #include "UI_MainWindow.h"
+#include "model_GraphProperties.h"
+#include <KDebug>
 
-PropertiesArea::PropertiesArea ( MainWindow *parent ) : QWidget ( parent ) {}
+GraphPropertiesDockWidget::GraphPropertiesDockWidget (  QWidget* parent , Qt::WindowFlags flags ) 
+  : QDockWidget (  i18n ( "Palette" ), parent, flags ) {
+  
+  setupUi(this);
+  _model = new GraphPropertiesModel();
+  _tableView->setModel(_model);
+}
+
+void GraphPropertiesDockWidget::setDataSource(QObject *o){
+  _model->setDataSource(o);
+  kDebug() << "Executou essa poha";
+}
+
+

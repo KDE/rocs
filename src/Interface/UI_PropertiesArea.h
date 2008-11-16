@@ -20,13 +20,21 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <QWidget>
+#include <QDockWidget>
+#include "ui_GraphPropertiesWidget.h"
+
+class GraphPropertiesModel;
 
 /*! \brief Properties Area, not used yet. */
 class MainWindow;
-class PropertiesArea : public QWidget
+class GraphPropertiesDockWidget : public QDockWidget, public Ui::GraphPropertiesWidget
 {
-	public:
-		PropertiesArea ( MainWindow* parent );
+  Q_OBJECT
+  public:
+    GraphPropertiesDockWidget ( QWidget* parent = 0 , Qt::WindowFlags flags = 0 );
+  private slots:
+    void setDataSource(QObject *o);
+  private:
+    GraphPropertiesModel *_model;
 };
 #endif
