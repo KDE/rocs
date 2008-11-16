@@ -32,7 +32,6 @@ class Node : public QObject
 {
   Q_OBJECT
   Q_PROPERTY(QColor color READ color WRITE setColor)
-  Q_PROPERTY(QPointF pos READ pos WRITE setPos)
   Q_PROPERTY(QString name READ name WRITE setName)
   Q_PROPERTY(qreal value READ value WRITE setValue)
   Q_PROPERTY(bool visited READ visited WRITE setVisited)

@@ -63,7 +63,7 @@ protected:
 
 protected slots:
   void removed();
-  void updatePos(QPointF);
+  void updatePos();
   void updateName(const QString& name);
   void updateVisited(bool v);
   void updateLength(qreal l);
@@ -72,6 +72,8 @@ protected slots:
   void updateColor(QColor c);
 
 private:
+    void connectSignals();
+    void setupPen();
     Edge *_edge;
     QPen *_pen;
 };

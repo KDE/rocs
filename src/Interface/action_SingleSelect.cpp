@@ -23,6 +23,10 @@
 #include "Graph.h"
 #include "Node.h"
 #include "graphicsitem_Node.h"
+#include "graphicsitem_Edge.h"
+#include "graphicsitem_MultiEdge.h"
+#include "graphicsitem_OrientedEdge.h"
+
 #include <KLocale>
 
 #include <KDebug>
@@ -41,26 +45,43 @@ SingleSelectAction::~SingleSelectAction(){
 void SingleSelectAction::executeRelease(QPointF pos){
   if ( !_graph ) return; 
 
-  NodeItem* _node = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
-
-
-  //! release all current selected items from it's imprisioner.
   QList<QGraphicsItem*> currentSelection = _scene->selectedItems();
   foreach(QGraphicsItem *i, currentSelection){
     i->setSelected(false);
     i->update();
   }
 
-  if ( ! _node ){ 
+
+  QGraphicsItem * item = _graphScene->itemAt(pos);
+  //! release all current selected items from it's imprisioner.
+  if ( ! item ){ 
+    emit ItemSelectedChanged(0);
     return; 
   }
 
-  _node->setSelected(true);
-  _node->update();
+  item->setSelected(true);
+  item->update();
   
-  emit ItemSelectedChanged(_node->node());
-
-  kDebug() << "Node selected";
+  if (qgraphicsitem_cast<NodeItem*>(item)){
+    NodeItem * nodeItem = qgraphicsitem_cast<NodeItem*>(item);
+    emit ItemSelectedChanged( nodeItem -> node() );
+    kDebug() << "Node Selected";
+ }
+  else if (qgraphicsitem_cast<EdgeItem*>(item)){
+    EdgeItem *i = qgraphicsitem_cast<EdgeItem*>(item);
+    emit ItemSelectedChanged(i->edge());
+    kDebug() << "Single Edge Selected";
+  }
+  else if (qgraphicsitem_cast<OrientedEdgeItem*>(item)){
+    OrientedEdgeItem *i = qgraphicsitem_cast<OrientedEdgeItem*>(item);
+    emit ItemSelectedChanged(i->edge());
+    kDebug() << "Oriented Edge Selected";
+  }
+  else if (qgraphicsitem_cast<MultiEdgeItem*>(item)){
+    MultiEdgeItem *i = qgraphicsitem_cast<MultiEdgeItem*>(item);
+    emit ItemSelectedChanged(i->edge());
+    kDebug() << "MultiGraph selected";
+  }
 }
 
 #include "action_SingleSelect.moc"

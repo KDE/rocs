@@ -36,14 +36,30 @@
 #include <KDebug>
 
 EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
-     : QObject(0), QGraphicsLineItem(parent)
-{
+     : QObject(0), QGraphicsLineItem(parent){
   
   _edge = edge;
   
   setCacheMode(DeviceCoordinateCache);
   setZValue(0);
-    
+  setFlag(ItemIsSelectable);
+
+  connectSignals();
+  setupPen();
+  updatePos();
+}
+
+void EdgeItem::connectSignals(){
+  // ! Connect the Edge's Signals.
+  connect (_edge, SIGNAL(changed()), this, SLOT(updateSlot()));
+  connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
+
+  // ! Connect the Node connected to the edge's signals.
+  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
+  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos()));
+}
+
+void EdgeItem::setupPen(){
   _pen = new QPen();
   _pen->setStyle(Qt::SolidLine);
   _pen->setWidth(2);
@@ -51,17 +67,6 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
   _pen->setCapStyle(Qt::RoundCap);
   _pen->setJoinStyle(Qt::RoundJoin);
   setPen( (*_pen) );
-
-  // ! Connect the Edge's Signals.
-  connect (_edge, SIGNAL(changed()), this, SLOT(updateSlot()));
-  connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
-
-  // ! Connect the Node connected to the edge's signals.
-  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos(QPointF)));
-  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos(QPointF)));
-
-  setLine(_edge->from()->pos().x(), _edge->from()->pos().y(),
-	  _edge->to()->pos().x(), _edge->to()->pos().y());
 }
 
  void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -80,7 +85,7 @@ void EdgeItem::removed(){
   kDebug() << " Not Implemented Yet " << "removed";
 }
 
-void EdgeItem::updatePos(QPointF){
+void EdgeItem::updatePos(){
     setLine(_edge->from()->pos().x(), _edge->from()->pos().y(),
 	    _edge->to()->pos().x(), _edge->to()->pos().y());
 }

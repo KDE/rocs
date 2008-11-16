@@ -55,6 +55,14 @@ QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientati
 }
 
 void GraphPropertiesModel::setDataSource(QObject *dataSource){
+  if (dataSource == 0){
+    int count = rowCount();
+    if (count == 0) return;
+    beginRemoveRows(QModelIndex(), 0, count-1);
+    endRemoveRows();
+    return;
+  }
+
   if( _dataSource){
     beginRemoveRows(QModelIndex(), 0, _metaObject->propertyCount()-1);
     endRemoveRows();

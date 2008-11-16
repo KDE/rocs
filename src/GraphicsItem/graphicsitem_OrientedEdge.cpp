@@ -52,11 +52,11 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
   _index = _edge->relativeIndex();
 
   setCacheMode(DeviceCoordinateCache);
-  setZValue(0);
-  
+  setZValue(-_index);
+  setFlag(ItemIsSelectable);
   connectSignals();
   setupPen();
-
+  
   
   setPath(createCurves());
 
@@ -78,8 +78,8 @@ void OrientedEdgeItem::connectSignals(){
   connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
 
   // ! Connect the Node connected to the edge's signals.
-  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos(QPointF)));
-  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos(QPointF)));
+  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
+  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos()));
 }
 
 QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2){
@@ -198,7 +198,7 @@ void OrientedEdgeItem::removed(){
   kDebug() << " Not Implemented Yet " << "removed";
 }
 
-void OrientedEdgeItem::updatePos(QPointF){
+void OrientedEdgeItem::updatePos(){
   QPainterPath p = createCurves();
   setPath(p);
 }

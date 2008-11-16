@@ -33,7 +33,6 @@ GraphPropertiesDockWidget::GraphPropertiesDockWidget (  QWidget* parent , Qt::Wi
 
 void GraphPropertiesDockWidget::setDataSource(QObject *o){
   _model->setDataSource(o);
-  kDebug() << "Executou essa poha";
 }
 
 

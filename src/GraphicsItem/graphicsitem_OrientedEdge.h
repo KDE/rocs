@@ -64,7 +64,7 @@ protected:
 
 protected slots:
   void removed();
-  void updatePos(QPointF);
+  void updatePos();
   void updateName(const QString& name);
   void updateVisited(bool v);
   void updateLength(qreal l);

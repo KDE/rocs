@@ -49,8 +49,8 @@ MultiEdgeItem::MultiEdgeItem( Edge *edge, QGraphicsItem *parent)
   _index = _edge->relativeIndex();
 
   setCacheMode(DeviceCoordinateCache);
-  setZValue(0);
-  
+  setZValue(-_index);
+  setFlag(ItemIsSelectable);
   connectSignals();
   setupPen();
 
@@ -64,8 +64,8 @@ void MultiEdgeItem::connectSignals(){
   connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
 
   // ! Connect the Node connected to the edge's signals.
-  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos(QPointF)));
-  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos(QPointF)));
+  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
+  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos()));
 }
 
 void MultiEdgeItem::setupPen(){
@@ -140,7 +140,7 @@ void MultiEdgeItem::removed(){
   kDebug() << " Not Implemented Yet " << "removed";
 }
 
-void MultiEdgeItem::updatePos(QPointF){
+void MultiEdgeItem::updatePos(){
   QPainterPath p = createCurves(_edge->from()->pos(), _edge->to()->pos(), _index);
   setPath(p);
 }
