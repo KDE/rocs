@@ -1,3 +1,4 @@
+
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -18,21 +19,30 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_PropertiesArea.h"
-#include "UI_MainWindow.h"
-#include "model_GraphProperties.h"
+#include "SUI_OpenedFilesDockWidget.h"
+#include "SUI_MainWindow.h"
+
+#include "model_GraphDocument.h"
 #include <KDebug>
 
-GraphPropertiesDockWidget::GraphPropertiesDockWidget (  QWidget* parent , Qt::WindowFlags flags ) 
-  : QDockWidget (  i18n ( "Palette" ), parent, flags ) {
-  
-  setupUi(this);
-  _model = new GraphPropertiesModel();
-  _tableView->setModel(_model);
+OpenedFilesDockWidget::OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent, Qt::WindowFlags flags)
+: QDockWidget(i18n("Opened Files"),parent, flags) 
+{
+  setupUi(this);  
+  _documentModel = model;
+  _openedFilesListView->setModel(model);
+  connect(_openedFilesListView, SIGNAL(clicked(const QModelIndex&)),
+  this, SLOT(setActiveDocument(const QModelIndex&)));
 }
 
-void GraphPropertiesDockWidget::setDataSource(QObject *o){
-  _model->setDataSource(o);
+void OpenedFilesDockWidget::on__btnNewFile_clicked()
+{
+  _openedFilesListView->model()->insertRow(1);
 }
 
-
+void OpenedFilesDockWidget::setActiveDocument(const QModelIndex& modelindex)
+{
+   GraphDocument *g = _documentModel -> at(modelindex);
+   if (g == 0) return;
+   emit activeDocumentChanged( g );
+}

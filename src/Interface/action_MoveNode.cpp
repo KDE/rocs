@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "action_MoveNode.h"
-#include "UI_GraphScene.h"
+#include "SUI_GraphScene.h"
 #include "Graph.h"
 #include "Node.h"
 #include "graphicsitem_Node.h"

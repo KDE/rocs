@@ -18,7 +18,18 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_ConfigureDialog.h"
-#include "UI_MainWindow.h"
+#ifndef SUI_PALETTESCROLLAREA_H
+#define SUI_PALETTESCROLLAREA_H
 
-ConfigureDialog::ConfigureDialog ( MainWindow *parent ) : QWidget ( parent ) {}
+#include <QScrollArea>
+/*! \brief Palletebar Helper class */
+class PaletteScrollArea: public QScrollArea
+{
+  public:
+    PaletteScrollArea ( QWidget* parent );
+
+  protected:
+    void resizeEvent ( QResizeEvent* event );
+};
+
+#endif

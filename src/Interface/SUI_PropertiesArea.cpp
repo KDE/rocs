@@ -18,15 +18,21 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef UI_SEPARATOR_H
-#define UI_SEPARATOR_H
+#include "SUI_PropertiesArea.h"
+#include "SUI_MainWindow.h"
+#include "model_GraphProperties.h"
+#include <KDebug>
 
-#include <QWidget>
+GraphPropertiesDockWidget::GraphPropertiesDockWidget (  QWidget* parent , Qt::WindowFlags flags ) 
+  : QDockWidget (  i18n ( "Palette" ), parent, flags ) {
+  
+  setupUi(this);
+  _model = new GraphPropertiesModel();
+  _tableView->setModel(_model);
+}
 
-class Separator : public QWidget{
-  public:
-    Separator ( QWidget* parent );
-    QSize sizeHint() const ;
-    void paintEvent ( QPaintEvent * ) ;
-};
-#endif
+void GraphPropertiesDockWidget::setDataSource(QObject *o){
+  _model->setDataSource(o);
+}
+
+

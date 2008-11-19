@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef UI_CONFIGUREDIALOG_H
-#define UI_CONFIGUREDIALOG_H
+#ifndef SUI_CONFIGUREDIALOG_H
+#define SUI_CONFIGUREDIALOG_H
 
 /*! NOT USED YET */
 #include <QWidget>

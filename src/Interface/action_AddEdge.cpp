@@ -19,7 +19,7 @@
 */
 
 #include "action_AddEdge.h"
-#include "UI_GraphScene.h"
+#include "SUI_GraphScene.h"
 #include "Graph.h"
 #include "Node.h"
 #include "graphicsitem_Node.h"

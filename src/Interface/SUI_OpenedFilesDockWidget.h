@@ -1,5 +1,3 @@
-#ifndef UI_PROPERTIESAREA_H
-#define UI_PROPERTIESAREA_H
 
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
@@ -20,21 +18,37 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+#ifndef SUI_OPENED_FILES_DOCK_WIDGET_H
+#define SUI_OPENED_FILES_DOCK_WIDGET_H
+
+#include "ui_OpenedFilesDockWidget.h"
 #include <QDockWidget>
-#include "ui_GraphPropertiesWidget.h"
 
-class GraphPropertiesModel;
+class GraphDocumentModel;
 
-/*! \brief Properties Area, not used yet. */
-class MainWindow;
-class GraphPropertiesDockWidget : public QDockWidget, public Ui::GraphPropertiesWidget
-{
+class GraphDocument;
+
+
+/*! 
+  \brief The Graph-Layer widget.
+  This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
+*/
+class OpenedFilesDockWidget : public QDockWidget, public Ui::OpenedFilesDockWidget{
   Q_OBJECT
+
   public:
-    GraphPropertiesDockWidget ( QWidget* parent = 0 , Qt::WindowFlags flags = 0 );
+    explicit OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent = 0, Qt::WindowFlags flags = 0);
+  
+  signals:
+    void activeDocumentChanged( GraphDocument *document);
+
   private slots:
-    void setDataSource(QObject *o);
+    void setActiveDocument(const QModelIndex& model);
+    void on__btnNewFile_clicked();
+
   private:
-    GraphPropertiesModel *_model;
+    GraphDocumentModel *_documentModel;
 };
+
 #endif

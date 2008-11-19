@@ -18,7 +18,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_MainWindow.h"  
+#include "SUI_MainWindow.h"  
 
 // KDE Related Includes
 #include <KLocale>
@@ -29,12 +29,12 @@
 
 // UI RELATED INCLUDES
 
-#include "UI_PaletteBarDockWidget.h" 
-#include "UI_GraphLayersDockWidget.h"
-#include "UI_OpenedFilesDockWidget.h"
-#include "UI_PropertiesArea.h"
-#include "UI_GraphEditWidget.h"
-#include "UI_GraphScene.h"
+#include "SUI_PaletteBarDockWidget.h" 
+#include "SUI_GraphLayersDockWidget.h"
+#include "SUI_OpenedFilesDockWidget.h"
+#include "SUI_PropertiesArea.h"
+#include "SUI_GraphEditWidget.h"
+#include "SUI_GraphScene.h"
 
 // MODEL Related Includes
 #include "model_GraphDocument.h"

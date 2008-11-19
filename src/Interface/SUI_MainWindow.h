@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef UI_MAINWINDOW_H
-#define UI_MAINWINDOW_H
+#ifndef SUI_MAINWINDOW_H
+#define SUI_MAINWINDOW_H
 
 #include <KXmlGuiWindow>
 #include <QList>

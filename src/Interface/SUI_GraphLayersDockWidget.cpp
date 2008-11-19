@@ -19,8 +19,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_GraphLayersDockWidget.h"
-#include "UI_MainWindow.h"
+#include "SUI_GraphLayersDockWidget.h"
+#include "SUI_MainWindow.h"
 
 #include "Graph.h"
 #include "GraphDocument.h"

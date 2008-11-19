@@ -9,16 +9,16 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES}
 		    ../GraphicsItem)
 
 set(librocsui_SRCS
-  UI_MainWindow.cpp
-  UI_OpenedFilesDockWidget.cpp
-  UI_GraphLayersDockWidget.cpp
-  UI_GraphScene.cpp
-  UI_PaletteBarDockWidget.cpp
-  UI_PaletteLayout.cpp  # stolen from Step (remember to kiss  Vladimir Kuznetsov
-  UI_Separator.cpp
-  UI_PaletteScrollArea.cpp
-  UI_GraphEditWidget.cpp
-  UI_PropertiesArea.cpp
+  SUI_MainWindow.cpp
+  SUI_OpenedFilesDockWidget.cpp
+  SUI_GraphLayersDockWidget.cpp
+  SUI_GraphScene.cpp
+  SUI_PaletteBarDockWidget.cpp
+  SUI_PaletteLayout.cpp  # stolen from Step (remember to kiss  Vladimir Kuznetsov
+  SUI_Separator.cpp
+  SUI_PaletteScrollArea.cpp
+  SUI_GraphEditWidget.cpp
+  SUI_PropertiesArea.cpp
 
   action_AbstractAction.cpp
   action_Pointer.cpp

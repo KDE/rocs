@@ -18,7 +18,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_PaletteBarDockWidget.h"
+#include "SUI_PaletteBarDockWidget.h"
 
 #include <KAction>
 #include <QEvent>
@@ -30,11 +30,11 @@
 #include <KDebug>
 
 
-#include "UI_MainWindow.h"
-#include "UI_PaletteScrollArea.h"
-#include "UI_PaletteLayout.h"
-#include "UI_Separator.h"
-#include "UI_GraphScene.h"
+#include "SUI_MainWindow.h"
+#include "SUI_PaletteScrollArea.h"
+#include "SUI_PaletteLayout.h"
+#include "SUI_Separator.h"
+#include "SUI_GraphScene.h"
 
 #include "action_AbstractAction.h"
 

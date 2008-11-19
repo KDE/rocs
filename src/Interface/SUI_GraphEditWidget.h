@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef UI_GRAPH_EDIT_WIDGET_H
-#define UI_GRAPH_EDIT_WIDGET_H
+#ifndef SUI_GRAPH_EDIT_WIDGET_H
+#define SUI_GRAPH_EDIT_WIDGET_H
 
 #include <QWidget>
 #include "ui_GraphEditWidget.h"

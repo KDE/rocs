@@ -18,7 +18,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_PaletteLayout.h"
+#include "SUI_PaletteLayout.h"
 #include <QWidget>
 #include <QStyleOption>
 

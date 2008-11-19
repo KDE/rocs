@@ -19,36 +19,44 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef UI_OPENED_FILES_DOCK_WIDGET_H
-#define UI_OPENED_FILES_DOCK_WIDGET_H
+#ifndef SUI_GRAPH_LAYERS_DOCK_WIDGET_H
+#define SUI_GRAPH_LAYERS_DOCK_WIDGET_H
 
-#include "ui_OpenedFilesDockWidget.h"
+#include <QWidget>
 #include <QDockWidget>
+#include <QListView>
 
-class GraphDocumentModel;
+#include "ui_GraphLayersDockWidget.h"
 
 class GraphDocument;
+class Graph;
+
+class GraphLayersModel;
 
 
 /*! 
   \brief The Graph-Layer widget.
   This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
 */
-class OpenedFilesDockWidget : public QDockWidget, public Ui::OpenedFilesDockWidget{
+class GraphLayersDockWidget : public QDockWidget, public Ui::GraphLayersDockWidget{
   Q_OBJECT
-
   public:
-    explicit OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent = 0, Qt::WindowFlags flags = 0);
-  
-  signals:
-    void activeDocumentChanged( GraphDocument *document);
+    explicit GraphLayersDockWidget(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-  private slots:
-    void setActiveDocument(const QModelIndex& model);
-    void on__btnNewFile_clicked();
+  public slots:
+    void setGraphDocument(GraphDocument *document);
+    void setActiveGraph(const QModelIndex& modelindex);
+    void on__btnNewGraph_clicked();
+    void on__btnNewMultiGraph_clicked();
+    void on__btnNewOrientedGraph_clicked();
+
+  signals:
+    void activeGraphChanged(Graph *graph);
+    
 
   private:
-    GraphDocumentModel *_documentModel;
+    GraphDocument *_document;
+    GraphLayersModel *_layerModel;
 };
 
 #endif

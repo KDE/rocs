@@ -18,8 +18,8 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include "UI_GraphScene.h"
-#include "UI_MainWindow.h"
+#include "SUI_GraphScene.h"
+#include "SUI_MainWindow.h"
 #include "action_AbstractAction.h"
 
 #include <QGraphicsSceneMouseEvent>

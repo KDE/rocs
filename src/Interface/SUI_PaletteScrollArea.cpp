@@ -1,4 +1,3 @@
-
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -19,30 +18,23 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_OpenedFilesDockWidget.h"
-#include "UI_MainWindow.h"
+#include "SUI_PaletteScrollArea.h"
+#include <QLayout>
+#include <QStyle>
+#include <QScrollBar>
 
-#include "model_GraphDocument.h"
-#include <KDebug>
+PaletteScrollArea::PaletteScrollArea ( QWidget* parent ) : QScrollArea ( parent ) {}
 
-OpenedFilesDockWidget::OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent, Qt::WindowFlags flags)
-: QDockWidget(i18n("Opened Files"),parent, flags) 
-{
-  setupUi(this);  
-  _documentModel = model;
-  _openedFilesListView->setModel(model);
-  connect(_openedFilesListView, SIGNAL(clicked(const QModelIndex&)),
-  this, SLOT(setActiveDocument(const QModelIndex&)));
-}
-
-void OpenedFilesDockWidget::on__btnNewFile_clicked()
-{
-  _openedFilesListView->model()->insertRow(1);
-}
-
-void OpenedFilesDockWidget::setActiveDocument(const QModelIndex& modelindex)
-{
-   GraphDocument *g = _documentModel -> at(modelindex);
-   if (g == 0) return;
-   emit activeDocumentChanged( g );
+void PaletteScrollArea::resizeEvent ( QResizeEvent* event ){
+  
+  if ( widget() && widget()->layout() ){
+    QSize size ( maximumViewportSize().width(), widget()->layout()->heightForWidth ( maximumViewportSize().width() ) );
+    if ( size.height() > maximumViewportSize().height() ){
+      int ext = style()->pixelMetric ( QStyle::PM_LayoutHorizontalSpacing );
+      size.setWidth ( maximumViewportSize().width() - verticalScrollBar()->sizeHint().width() - ext );
+      size.setHeight ( widget()->layout()->heightForWidth ( size.width() ) );
+    }
+    widget()->resize ( size );
+  }
+  QScrollArea::resizeEvent ( event );
 }

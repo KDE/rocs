@@ -1,3 +1,6 @@
+#ifndef SUI_PROPERTIESAREA_H
+#define SUI_PROPERTIESAREA_H
+
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -17,19 +20,21 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#include <QDockWidget>
+#include "ui_GraphPropertiesWidget.h"
 
-#ifndef UI_PALETTESCROLLAREA_H
-#define UI_PALETTESCROLLAREA_H
+class GraphPropertiesModel;
 
-#include <QScrollArea>
-/*! \brief Palletebar Helper class */
-class PaletteScrollArea: public QScrollArea
+/*! \brief Properties Area, not used yet. */
+class MainWindow;
+class GraphPropertiesDockWidget : public QDockWidget, public Ui::GraphPropertiesWidget
 {
+  Q_OBJECT
   public:
-    PaletteScrollArea ( QWidget* parent );
-
-  protected:
-    void resizeEvent ( QResizeEvent* event );
+    GraphPropertiesDockWidget ( QWidget* parent = 0 , Qt::WindowFlags flags = 0 );
+  private slots:
+    void setDataSource(QObject *o);
+  private:
+    GraphPropertiesModel *_model;
 };
-
 #endif

@@ -18,27 +18,15 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "UI_Separator.h"
-#include <QScrollBar>
-#include <QPainter>
-#include <QVariant>
-#include <QStyleOption>
+#ifndef SUI_SEPARATOR_H
+#define SUI_SEPARATOR_H
 
-Separator::Separator ( QWidget* parent ) : QWidget ( parent ){
-  setSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Minimum );
-  setProperty ( "isSeparator", true );
-}
+#include <QWidget>
 
-QSize Separator::sizeHint() const{
-  QStyleOption opt;
-  opt.initFrom ( this );
-  const int extent = style()->pixelMetric ( QStyle::PM_ToolBarSeparatorExtent, &opt, parentWidget() );
-  return QSize ( extent, extent );
-}
-
-void Separator::paintEvent ( QPaintEvent * ){
-  QPainter p ( this );
-  QStyleOption opt;
-  opt.initFrom ( this );
-  style()->drawPrimitive ( QStyle::PE_IndicatorToolBarSeparator, &opt, &p, parentWidget() );
-}
+class Separator : public QWidget{
+  public:
+    Separator ( QWidget* parent );
+    QSize sizeHint() const ;
+    void paintEvent ( QPaintEvent * ) ;
+};
+#endif
