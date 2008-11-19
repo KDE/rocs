@@ -1,0 +1,43 @@
+Ok, for those Willing to hack Rocs:
+Just quick'n dirty explanation on Qt for those not used to it.
+  
+  foreach is a for-like-loop.
+  slots and signals are the way Qt has to manage events (like button click)
+  emit will trow an signal, and all connected slots will caugth it. 
+  (so, please, read about signals and slots on Qt doc before trying to hack Rocs)
+  Q_OBJECT declares an object that can has signals and slots.
+  Q_PROPERTY makes a variable avaliable from scripting engine.
+  ui files are the XML description of the interface;
+
+there are 5 folders with code, 
+
+Core/
+Engine/
+GraphicsItem/
+Models/
+Interface/
+
+Core is the Graph Library + Document Handling. 
+  the classes are GraphDocument, Graph, Node, Edge, OrientedGraph, OrientedNode, MultiGraph and MultiNode.
+  The class GraphDocument is created on the app itself after clicking 'New Document' button, that's defined on FileArea.{h, ui, cpp}
+  the Graph* classes ( including node and edge ) are build to be acessible from scripting engine ( all of the methods on the public slots: 
+  area on the .h file are acessible from Kross )
+
+Engine is the Scripting Engine. it should only be executed while clicking the 'Run' button on the GraphEditDialog {h, ui, cpp} area. 
+  There isn't anything really done here, so nothing to explain. it already uses Kross, already uses Python, Ruby and Javascript, but there's
+  no integration with Rocs code yet.
+
+GraphicsItem is the drawings of the Graph on screen. the Graph from CoreLib is not connected with this item, but the GraphicsItem has a pointer to it.
+  ( NodeItem -> node(), but Node doesn't have a NodeItem). All comunication is done with signals and slots. ( if the Code::Node moves, 
+  it will send a 'Moved' signal that the NodeItem will caugth and actualize its position.
+
+Models are DataModels for the Model-View-Controler classes like TreeViews, ListViews and TableViews, there are 3 models already, 
+  modelGraphDocument: creates and organizes a list with all opened files.
+  modelGraphLayers: creates and organizes a list with all graphs from one file ( like the Gimp layer or Photoshop Layer, but for graphs).
+  modelGraphProperties: a Tableview with all variables-avaliable-from-script of the selected object.
+  ( the model part is very important to understand how it's done, it's not the most simple thing on Qt, 
+  so please, pay attention and read about how it works on qt doc. )
+
+Interface: this is divided in 2 parts actually, the Action {h, cpp} and the SUI files. Sui is the visible parts, the clickable areas and so on. 
+Actions are the KActions associated with buttons. If you plan to do another buttom on the pallete, Create a new class for it's action, 
+and on SUI_MAinWindow.cpp add the action on the setupActions() method like the rest of the others. it will be placed magically on it's correct location.
