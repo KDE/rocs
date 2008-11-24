@@ -41,16 +41,33 @@ class GraphLayersModel;
 class GraphLayersDockWidget : public QDockWidget, public Ui::GraphLayersDockWidget{
   Q_OBJECT
   public:
+    /*! public constructor */
     explicit GraphLayersDockWidget(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
   public slots:
+    /*! send the GraphDocument to the list of graphs. 
+      \param document the GraphDocument that will populate the model of the view.    */
     void setGraphDocument(GraphDocument *document);
+
+    /*! sets the modelindex data ( that holds a graph ) to be the active Graph being editted on the canvas. 
+    \param modelindex the index of the graph onto the model. 
+    */
     void setActiveGraph(const QModelIndex& modelindex);
+
+    /* executed when clicking the btnNewGraph, 
+    this method creates a new graph. */
     void on__btnNewGraph_clicked();
+
+    /* executed when clicking the btnNewMultiGraph
+    this method creates a new MultiEdged Graph. */
     void on__btnNewMultiGraph_clicked();
+
+    /* executed when clicking the btnNewOrientedGraph 
+    this method creaates a new OrientedEdge Graph */
     void on__btnNewOrientedGraph_clicked();
 
   signals:
+    /* Signal emmited when the active graph changes */
     void activeGraphChanged(Graph *graph);
     
 

@@ -41,24 +41,61 @@ class MainWindow;
 class GraphEditWidget : public QWidget, public Ui::GraphEditWidget{
 Q_OBJECT  
 public:
+  /*! Default Constructor 
+    \param parent the owner of this widget.  */
   GraphEditWidget(MainWindow *parent = 0);
-  QString text() const;
+
+  /*! Change the Script Editor Document. 
+    \param d the new document.  */
   void setDocument ( KTextEditor::Document *d );
+
+  /*! Gets the scene of the drawned graph.
+   \return the GraphScene of the graph. */
   GraphScene *scene() const;
+
+  /*! set the current selected Graph. 
+      \param graph the new active graph.
+  */
   void setGraph( Graph *graph);
 
 public slots:
+  /*! reset the graph view and insert the graph of the new document on it.
+    \param gd the new graph document that will be shown on screen. */
   void setGraphDocument( GraphDocument *gd);
+
+  /*! creates a new node on screen based on a node-data.
+    \param node the data of the node that will be onscreen.*/
   void createNode( Node *node);
+
+  /*! creates a new edge based on a edge-data. 
+    \param edge the data of the edge that will be onscreen.
+  */
   void createEdge( Edge *edge);
+
+  /*! not implemented. */
   void removeNode(int i);
+
+  /*! not implemented. */
   void removeEdge(int e);
+
+  /*! not implemented. */
   void graphColorChanged(const QColor& c);
+
+  /*! not implemented. */
   void on__btnRunScript_clicked();
 
 private:
+  /*! as the name says, draw a graph on scene.
+  \param g the graph to be drawn. */
   void drawGraphOnScene( Graph *g);
+
+  /*! as the name says, connect the graph signals to the scene. 
+   \param g the graph that will be connected. 
+  */
   void connectGraphSignals( Graph *g);
+
+  /*! as the name says, it removes the current GraphDocument 
+  from the screen and releases it from the evil hands of GraphEditWidget.*/
   void releaseGraphDocument();
 
   KTextEditor::Editor *_editor;

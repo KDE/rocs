@@ -38,6 +38,8 @@ class OpenedFilesDockWidget : public QDockWidget, public Ui::OpenedFilesDockWidg
   Q_OBJECT
 
   public:
+    /*! default constructor. 
+    \param model the model that will populate the view.*/
     explicit OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent = 0, Qt::WindowFlags flags = 0);
   
   signals:
