@@ -43,10 +43,19 @@ class OpenedFilesDockWidget : public QDockWidget, public Ui::OpenedFilesDockWidg
     explicit OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent = 0, Qt::WindowFlags flags = 0);
   
   signals:
+    /*! when the active document changes, this signal is emmited. 
+      \param document the new active document.
+    */
     void activeDocumentChanged( GraphDocument *document);
 
   private slots:
+    /*! when you click on the name of a document inside of the model, this method is invocked. 
+    \param model the index of the model ( rename it to index? )
+  */
+
     void setActiveDocument(const QModelIndex& model);
+
+    /*! executed when btnNewFileis clicked. */
     void on__btnNewFile_clicked();
 
   private:
