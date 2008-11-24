@@ -62,26 +62,21 @@ void SingleSelectAction::executeRelease(QPointF pos){
   item->setSelected(true);
   item->update();
   
+// TODO: Rewrite this to a more ellegant way.
+  QObject *obj = 0;
   if (qgraphicsitem_cast<NodeItem*>(item)){
-    NodeItem * nodeItem = qgraphicsitem_cast<NodeItem*>(item);
-    emit ItemSelectedChanged( nodeItem -> node() );
-    kDebug() << "Node Selected";
- }
+    obj = (qgraphicsitem_cast<NodeItem*>(item)) -> node();
+  }
   else if (qgraphicsitem_cast<EdgeItem*>(item)){
-    EdgeItem *i = qgraphicsitem_cast<EdgeItem*>(item);
-    emit ItemSelectedChanged(i->edge());
-    kDebug() << "Single Edge Selected";
+    obj = (qgraphicsitem_cast<EdgeItem*>(item)) -> edge();
   }
   else if (qgraphicsitem_cast<OrientedEdgeItem*>(item)){
-    OrientedEdgeItem *i = qgraphicsitem_cast<OrientedEdgeItem*>(item);
-    emit ItemSelectedChanged(i->edge());
-    kDebug() << "Oriented Edge Selected";
+    obj = (qgraphicsitem_cast<OrientedEdgeItem*>(item)) -> edge();
   }
   else if (qgraphicsitem_cast<MultiEdgeItem*>(item)){
-    MultiEdgeItem *i = qgraphicsitem_cast<MultiEdgeItem*>(item);
-    emit ItemSelectedChanged(i->edge());
-    kDebug() << "MultiGraph selected";
+    obj = (qgraphicsitem_cast<MultiEdgeItem*>(item)) -> edge();
   }
+  emit ItemSelectedChanged(obj);
 }
 
 #include "action_SingleSelect.moc"

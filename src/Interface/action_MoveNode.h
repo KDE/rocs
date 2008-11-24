@@ -47,13 +47,18 @@ class MoveNodeAction : public AbstractAction{
     ~MoveNodeAction();
   public slots:
     /*! 
-      this will be executed if type is the same as this action's type. 
-      \param type must be the same type as this action to execute this.
-      \param pos the position on the screen that the new node will be placed.
-
+      will be executed when the mouse press a button.
+      \param pos the position onscreen of the click.
     */
     void executePress(QPointF pos);
+    /*! will be executed when the mouse moves.
+      \param pos the current position of the cursor.
+    */
     void executeMove(QPointF pos);
+
+    /*! will be executed when the mouse releases a click 
+    \param pos the position of the cursor.
+    */
     void executeRelease(QPointF pos);
 
   protected:

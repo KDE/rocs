@@ -40,13 +40,21 @@ QVariant GraphDocumentModel::data(const QModelIndex &index, int role) const{
 }
 
 QVariant GraphDocumentModel::headerData(int section, Qt::Orientation orientation, int role) const{
-  if ( role != Qt::DisplayRole) return QVariant();
-  if (orientation == Qt::Horizontal) return QString("Column %1").arg(section);
-  else return QString("Row %1").arg(section);
+  if ( role != Qt::DisplayRole){
+    return QVariant();
+  }
+  if (orientation == Qt::Horizontal){
+    return QString("Column %1").arg(section);
+  }
+  
+  return QString("Row %1").arg(section);
+  
 }
 
 Qt::ItemFlags GraphDocumentModel::flags(const QModelIndex& index) const{
-  if ( !index.isValid() ) return Qt::ItemIsEnabled;
+  if ( !index.isValid() ){
+    return Qt::ItemIsEnabled;
+  }
   return QAbstractItemModel::flags(index); // | Qt::ItemIsEditable;
 }
 
@@ -76,8 +84,7 @@ bool GraphDocumentModel::removeRows(int position, int rows, const QModelIndex&){
      return true;
 }
 
- GraphDocument *GraphDocumentModel::at(const QModelIndex& index)
-{
+ GraphDocument *GraphDocumentModel::at(const QModelIndex& index){
   return _documents.at(index.row());
 }
 
