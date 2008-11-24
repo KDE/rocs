@@ -1,4 +1,5 @@
 #include "model_GraphProperties.h"
+#include <KLocale>
 
 GraphPropertiesModel::GraphPropertiesModel( QObject *parent ) : QAbstractTableModel(parent){
   // start all pointers to zero, so we don't crash things.
