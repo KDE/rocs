@@ -58,10 +58,6 @@ class GraphLayersDockWidget : public QDockWidget, public Ui::GraphLayersDockWidg
     this method creates a new graph. */
     void on__btnNewGraph_clicked();
 
-    /* executed when clicking the btnNewMultiGraph
-    this method creates a new MultiEdged Graph. */
-    void on__btnNewMultiGraph_clicked();
-
     /* executed when clicking the btnNewOrientedGraph 
     this method creaates a new OrientedEdge Graph */
     void on__btnNewOrientedGraph_clicked();

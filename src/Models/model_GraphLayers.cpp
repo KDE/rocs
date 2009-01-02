@@ -47,7 +47,6 @@ QVariant GraphLayersModel::data(const QModelIndex &index, int role) const{
     return QVariant();
   }
 
-
   return _document->at(index.row())->property("name");
 }
 
@@ -76,8 +75,8 @@ bool GraphLayersModel::insertRows(int position, int type, const QModelIndex&){
 
   beginInsertRows(QModelIndex(), position, position);
 
-  _document->addGraph("Untitled");
-
+  Graph* g =  _document->addGraph("Untitled");
+  g->setDirected( (type == 0)? false : true );
   endInsertRows();
   return true;
 }

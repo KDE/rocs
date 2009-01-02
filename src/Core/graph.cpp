@@ -54,7 +54,7 @@ Node* Graph::addNode(QString name){
 }
 
 Edge* Graph::addEdge(Node* from,Node* to){
-  if( ( from == to) && ( _directed ) ){ 
+  if( ( from == to) && ( !_directed ) ){
     return 0;  
   }
 
@@ -75,8 +75,7 @@ Edge* Graph::addEdge(const QString& name_from, const QString& name_to){
   Node *from = 0;
   Node *to   = 0;
   
-  QString tmpName;
-	
+   QString tmpName;
 
   foreach( Node* n,  _nodes){
     tmpName = n->property("name").toString();

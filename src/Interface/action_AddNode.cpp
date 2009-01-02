@@ -50,6 +50,4 @@ void AddNodeAction::executePress(QPointF pos){
   
   NodeItem *nodeitem = new NodeItem( n );
   _graphScene->addItem(nodeitem); 
-  
-  kDebug() << "Action Executed at pos " << pos.x() << pos.y();
 }

@@ -34,7 +34,7 @@ class GraphDocument : public QObject, public QList<Graph*>
   Q_OBJECT
 
 public:
-  enum Type{Simple, Multi, Oriented};
+  enum Type{Simple = 0, Oriented};
   /*! Default Constructor 
     \param name sets the name of the document.
   */

@@ -28,6 +28,8 @@
 class MainWindow;
 class QGraphicsSceneMouseEvent;
 class AbstractAction;
+class Node;
+class Edge;
 
 /*! 
 \brief The graph drawing Area 
@@ -50,6 +52,8 @@ public:
     GraphScene ( QObject* parent );
     void setAction(AbstractAction *action);
     void setSceneRect(qreal width, qreal height);
+    void createNode(Node *n);
+    void createEdge(Edge *e);
 
 private:
    /*! 

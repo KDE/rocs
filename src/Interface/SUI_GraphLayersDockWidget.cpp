@@ -45,10 +45,6 @@ void GraphLayersDockWidget::on__btnNewGraph_clicked()
   _graphLayersListView->model()->insertRows(0, GraphDocument::Simple);
 }
 
-void GraphLayersDockWidget::on__btnNewMultiGraph_clicked(){
-  _graphLayersListView->model()->insertRows(0, GraphDocument::Multi);
-}
-
 void GraphLayersDockWidget::on__btnNewOrientedGraph_clicked(){
   _graphLayersListView->model()->insertRows(0, GraphDocument::Oriented);
 }

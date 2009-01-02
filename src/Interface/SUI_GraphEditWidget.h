@@ -63,15 +63,6 @@ public slots:
     \param gd the new graph document that will be shown on screen. */
   void setGraphDocument( GraphDocument *gd);
 
-  /*! creates a new node on screen based on a node-data.
-    \param node the data of the node that will be onscreen.*/
-  void createNode( Node *node);
-
-  /*! creates a new edge based on a edge-data. 
-    \param edge the data of the edge that will be onscreen.
-  */
-  void createEdge( Edge *edge);
-
   /*! not implemented. */
   void removeNode(int i);
 

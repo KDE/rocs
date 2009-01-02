@@ -24,6 +24,8 @@
 
 #include <QGraphicsSceneMouseEvent>
 #include <KDebug>
+#include "node.h"
+#include "edge.h"
 
 GraphScene::GraphScene ( QObject* parent ) : QGraphicsScene ( parent ){
 
@@ -72,4 +74,12 @@ void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent){
 
 void GraphScene::setAction(AbstractAction *action){
   _action = action;
+}
+
+void GraphScene::createNode(Node *n){
+
+}
+
+void GraphScene::createEdge(Edge *e){
+
 }

@@ -110,11 +110,11 @@ void GraphEditWidget::drawGraphOnScene( Graph *g){
   QList< Edge*> edges = g->edges();
 
   foreach( Node* node, nodes){
-    createNode(node);
+    _graphScene->createNode(node);
   }
 
   foreach( Edge* edge, edges){
-    createEdge(edge);
+    _graphScene->createEdge(edge);
   }
 }
 
@@ -125,15 +125,6 @@ GraphScene *GraphEditWidget::scene() const{
 void GraphEditWidget::setGraph( Graph *graph){
   _graph = graph;
   connectGraphSignals(graph);
-}
-
-/*! TODO: REMOVE THIS */
-void GraphEditWidget::createNode( Node* ){
-
-}
-
-void GraphEditWidget::createEdge( Edge* ){
- 
 }
 
 void GraphEditWidget::removeNode(int )
