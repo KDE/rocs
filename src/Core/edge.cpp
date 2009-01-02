@@ -27,7 +27,7 @@ QObject(parent),
 _from(from),
 _to(to)
 {
-
+  setProperty("color", "#FF00FF");
 }
 
 Edge::~Edge()

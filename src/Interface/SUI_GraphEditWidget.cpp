@@ -127,21 +127,13 @@ void GraphEditWidget::setGraph( Graph *graph){
   connectGraphSignals(graph);
 }
 
-void GraphEditWidget::createNode( Node *node){
-  NodeItem *nodeitem = new NodeItem( node );
-  _graphScene->addItem(nodeitem); 
+/*! TODO: REMOVE THIS */
+void GraphEditWidget::createNode( Node* ){
+
 }
 
-void GraphEditWidget::createEdge( Edge* edge){
-  Graph *g = qobject_cast<Graph*>(edge->parent());
- if ( ! g -> directed() ){
-    EdgeItem *edgeItem = new EdgeItem( edge );
-    _graphScene->addItem(edgeItem);
-    return;
-  }
-  OrientedEdgeItem *edgeItem = new OrientedEdgeItem( edge );
-  _graphScene->addItem(edgeItem);
-  return;
+void GraphEditWidget::createEdge( Edge* ){
+ 
 }
 
 void GraphEditWidget::removeNode(int )
@@ -160,8 +152,6 @@ void GraphEditWidget::graphColorChanged(const QColor&)
 }
 
 void GraphEditWidget::connectGraphSignals( Graph *graph){
-  connect(graph,SIGNAL(nodeCreated(Node*)),this,SLOT(createNode(Node*)));
-  connect(graph,SIGNAL(edgeCreated(Edge*)),this,SLOT(createEdge(Edge*)));
   connect(graph,SIGNAL(nodeRemoved(int)),this,SLOT(removeNode(int)));
   connect(graph,SIGNAL(edgeRemoved(int)),this,SLOT(removeEdge(int)));
 }

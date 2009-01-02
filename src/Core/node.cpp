@@ -24,6 +24,9 @@
 
 Node::Node(QObject *parent) : QObject(parent)
 {
+  setProperty("color", "#FF0000");
+  setProperty("x", 0);
+  setProperty("y", 0);
 }
 
 Node::~Node(){

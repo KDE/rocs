@@ -72,6 +72,10 @@ public  slots:
   void remove(Node *n);
   void remove(Edge *e);
 
+signals:
+  void nodeCreated(Node *n);
+  void edgeCreated(Edge *e);
+
 private:
   bool _directed;
   QList<Node*> _nodes;

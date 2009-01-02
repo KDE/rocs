@@ -49,6 +49,7 @@ Node* Graph::addNode(QString name){
   Node  *n = new Node(this);
   n->setProperty("name", name);
   _nodes.append( n );
+  emit nodeCreated(n);
   return n;
 }
 

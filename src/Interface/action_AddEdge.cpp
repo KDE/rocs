@@ -24,6 +24,8 @@
 #include "node.h"
 #include "edge.h"
 #include "graphicsitem_Node.h"
+#include "graphicsitem_Edge.h"
+#include "graphicsitem_OrientedEdge.h"
 #include <KLocale>
 
 #include <KDebug>
@@ -86,9 +88,21 @@ void AddEdgeAction::executeRelease(QPointF pos){
   }
 
   Graph *g = qobject_cast<Graph*>(_nodeFrom-> node() -> parent()); 
-  g -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
+  Edge *e = g -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
   
   _nodeFrom = 0;
   _nodeTo = 0;
   _working = false;
+
+  QGraphicsItem *edgeItem = 0;
+
+  if ( !g->directed() ){
+    edgeItem = new EdgeItem(e);
+  }
+  else{
+    edgeItem = new OrientedEdgeItem(e);
+  }
+  
+  _graphScene->addItem(edgeItem);
+  
 }

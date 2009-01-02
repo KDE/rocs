@@ -21,6 +21,7 @@
 #include "action_AddNode.h"
 #include "SUI_GraphScene.h"
 #include "graph.h"
+#include "graphicsitem_Node.h"
 #include "node.h"
 #include <KLocale>
 
@@ -42,9 +43,13 @@ void AddNodeAction::executePress(QPointF pos){
     kDebug() << "Error, Graph == 0";
     return;
   }
+
   Node *n = _graph -> addNode(i18n("untitled"));
   n -> setProperty("x", pos.x() );
   n -> setProperty("y", pos.y() );
-
+  
+  NodeItem *nodeitem = new NodeItem( n );
+  _graphScene->addItem(nodeitem); 
+  
   kDebug() << "Action Executed at pos " << pos.x() << pos.y();
 }
