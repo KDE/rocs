@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "model_GraphDocument.h"
-#include "GraphDocument.h"
-#include "Graph.h"
+#include "graphDocument.h"
+#include "graph.h"
 #include <QString>
 #include <QDebug>
 #include <QModelIndex>

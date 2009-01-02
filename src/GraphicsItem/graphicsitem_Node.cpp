@@ -26,20 +26,21 @@
 #include <QStyleOption>
 
 
-#include "Node.h"
-#include "Graph.h"
+#include "node.h"
+#include "graph.h"
 #include <KDebug>
 
 NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
      : QObject(0), QGraphicsItem(parent)
 {
     _node = node;
-    setPos( _node -> pos() );
+    QPointF pos( _node -> property("x").toDouble() ,_node->property("y").toDouble() );
+
+    setPos( pos );
     setCacheMode(DeviceCoordinateCache);
     setZValue(1);
     setFlag(ItemIsSelectable);
 
-  connect (_node, SIGNAL(posChanged(QPointF)),  this, SLOT(updatePos(QPointF)));
   connect (_node, SIGNAL(removed()), this, SLOT(removed()));
 }
 
@@ -57,22 +58,25 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 
  void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
  {
+    
      painter->setPen(Qt::NoPen);
-     painter->setBrush(_node->color().dark(220));
+
+     QColor color = _node->property("color").value<QColor>();
+     painter->setBrush( color );
      painter->drawEllipse(-7, -7, 20, 20);
 
      QRadialGradient gradient(-3, -3, 10);
      if (option->state & QStyle::State_Sunken) {
          gradient.setCenter(3, 3);
          gradient.setFocalPoint(3, 3);
-         gradient.setColorAt(1, QColor(_node->color()).light(120));
-         gradient.setColorAt(0, QColor(_node->color()));
+         gradient.setColorAt(1, color.light(120));
+         gradient.setColorAt(0, color);
      } else {
-         gradient.setColorAt(0,_node->color().light(240));
-         gradient.setColorAt(1,_node->color());
+         gradient.setColorAt(0, color.light(240));
+         gradient.setColorAt(1, color);
      }
      painter->setBrush(gradient);
-     painter->setPen(QPen(_node->color(), 2));
+     painter->setPen(QPen(color, 2));
      painter->drawEllipse(-10, -10, 20, 20);
 
     if (isSelected()){

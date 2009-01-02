@@ -28,9 +28,9 @@
 #include <QPen>
 
 
-#include "Node.h"
-#include "Edge.h"
-#include "Graph.h"
+#include "node.h"
+#include "edge.h"
+#include "graph.h"
 
 #include "graphicsitem_Node.h"
 #include <KDebug>
@@ -50,20 +50,14 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
 }
 
 void EdgeItem::connectSignals(){
-  // ! Connect the Edge's Signals.
-  connect (_edge, SIGNAL(changed()), this, SLOT(updateSlot()));
   connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
-
-  // ! Connect the Node connected to the edge's signals.
-  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
-  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos()));
 }
 
 void EdgeItem::setupPen(){
   _pen = new QPen();
   _pen->setStyle(Qt::SolidLine);
   _pen->setWidth(2);
-  _pen->setBrush(_edge->color());
+  _pen->setBrush(_edge->property("color").value<QColor>());
   _pen->setCapStyle(Qt::RoundCap);
   _pen->setJoinStyle(Qt::RoundJoin);
   setPen( (*_pen) );
@@ -86,8 +80,11 @@ void EdgeItem::removed(){
 }
 
 void EdgeItem::updatePos(){
-    setLine(_edge->from()->pos().x(), _edge->from()->pos().y(),
-	    _edge->to()->pos().x(), _edge->to()->pos().y());
+    
+    setLine( _edge->from()->property("x").toInt(),
+	     _edge->from()->property("y").toInt(),
+	     _edge->to()->property("x").toInt(),
+	     _edge->to()->property("y").toInt());
 }
 
 void EdgeItem::updateName(const QString& ){}

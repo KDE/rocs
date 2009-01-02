@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "model_GraphLayers.h"
-#include "GraphDocument.h"
-#include "Graph.h"
+#include "graphDocument.h"
+#include "graph.h"
 #include <QString>
 #include <QDebug>
 #include <QModelIndex>
@@ -48,7 +48,7 @@ QVariant GraphLayersModel::data(const QModelIndex &index, int role) const{
   }
 
 
-  return _document->at(index.row())->name();
+  return _document->at(index.row())->property("name");
 }
 
 QVariant GraphLayersModel::headerData(int section, Qt::Orientation orientation, int role) const{
@@ -66,7 +66,7 @@ Qt::ItemFlags GraphLayersModel::flags(const QModelIndex& index) const{
 bool GraphLayersModel::setData(const QModelIndex& index, const QVariant& value, int role){
   if ( index.isValid() && (role == Qt::ItemIsEditable)) {
      Graph *g = _document->at(index.row());
-    g-> setName(value.toString());
+    g-> setProperty("name",value.toString());
   }
   return false;
 }
@@ -76,7 +76,7 @@ bool GraphLayersModel::insertRows(int position, int type, const QModelIndex&){
 
   beginInsertRows(QModelIndex(), position, position);
 
-  _document->addGraph("Untitled", type);
+  _document->addGraph("Untitled");
 
   endInsertRows();
   return true;

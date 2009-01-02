@@ -24,17 +24,19 @@
 
 #include "graphicsitem_Node.h"
 #include "graphicsitem_Edge.h"
-#include "graphicsitem_MultiEdge.h"
 #include "graphicsitem_OrientedEdge.h"
 
-#include "GraphDocument.h"
-#include "Graph.h"
-#include "Node.h"
-#include "Edge.h"
-#include "MultiGraph.h"
-#include "OrientedGraph.h"
+#include "graphDocument.h"
+#include "graph.h"
+#include "node.h"
+#include "edge.h"
 
-#include "kross_rocsengine.h"
+#ifdef USING_QTSCRIPT
+#include "qtScriptBackend.h"
+#else
+#include "krossScriptBackend.h"
+#include <kross/core/manager.h>
+#endif
 
 #include <ktexteditor/editor.h>
 #include <ktexteditor/editorchooser.h>
@@ -65,6 +67,15 @@ GraphEditWidget::GraphEditWidget(MainWindow *parent) : QWidget(parent){
    QVBoxLayout *layout = new QVBoxLayout;
    layout->addWidget(_txtEditScriptView);
   _tabEditor -> setLayout(layout);
+
+#ifdef USING_QTSCRIPT
+  _cmbEngine->addItem(QString("JavaScript"));
+#else
+  foreach(QString s, Kross::Manager::self().interpreters()){
+    _cmbEngine->addItem(s);
+  }
+#endif
+
 }
 
 void GraphEditWidget::setGraphDocument( GraphDocument *gd){
@@ -121,20 +132,14 @@ void GraphEditWidget::createNode( Node *node){
   _graphScene->addItem(nodeitem); 
 }
 
-void GraphEditWidget::createEdge( Edge* edge)
-{
-  
-  if ( qobject_cast<MultiGraph*>(edge->parent())){
-    MultiEdgeItem *edgeItem = new MultiEdgeItem( edge );
+void GraphEditWidget::createEdge( Edge* edge){
+  Graph *g = qobject_cast<Graph*>(edge->parent());
+ if ( ! g -> directed() ){
+    EdgeItem *edgeItem = new EdgeItem( edge );
     _graphScene->addItem(edgeItem);
     return;
   }
-  if (qobject_cast<OrientedGraph*>(edge->parent())){
-    OrientedEdgeItem *edgeItem = new OrientedEdgeItem( edge );
-    _graphScene->addItem(edgeItem);
-    return;
-  }
-  EdgeItem *edgeItem = new EdgeItem(edge);
+  OrientedEdgeItem *edgeItem = new OrientedEdgeItem( edge );
   _graphScene->addItem(edgeItem);
   return;
 }
@@ -164,11 +169,14 @@ void GraphEditWidget::connectGraphSignals( Graph *graph){
 
 void GraphEditWidget::on__btnRunScript_clicked(){
 
-  kDebug() << "Button to run Script Clicked" ;
-  if ( _graphDocument == 0 ) return;
-
-  kross_rocsengine e( _txtDebug) ;
+ if ( _graphDocument == 0 ) return;
+#ifdef USING_QTSCRIPT
+  QtScriptBackend e( _graphDocument, _txtDebug );
+  e.evaluate( _txtEditScriptDocument -> text() );
+#else
+  KrossBackend e( _txtDebug) ;
   e.setDocument( _graphDocument );
   e.setEngine( _cmbEngine->currentText());
   e.execute( _txtEditScriptDocument -> text() );
+#endif
 }

@@ -39,8 +39,8 @@
 #include "action_AbstractAction.h"
 
 
-#include "GraphDocument.h"
-#include "Graph.h"
+#include "graphDocument.h"
+#include "graph.h"
 
 #include <KActionCollection>
 

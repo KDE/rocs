@@ -30,9 +30,9 @@
 #include <QLine>
 #include <QPolygonF>
 
-#include "Node.h"
-#include "Edge.h"
-#include "Graph.h"
+#include "node.h"
+#include "edge.h"
+#include "graph.h"
 
 #include "math_constants.h"
 #include <math.h>
@@ -67,19 +67,14 @@ void OrientedEdgeItem::setupPen(){
   QPen pen;
   pen.setStyle(Qt::SolidLine);
   pen.setWidth(2);
-  pen.setBrush(_edge->color());
+  pen.setBrush(_edge->property("color").value<QColor>());
   pen.setCapStyle(Qt::RoundCap);
   pen.setJoinStyle(Qt::RoundJoin);
   setPen( pen );    // ! Connect the Edge's Signals.
 }
 
 void OrientedEdgeItem::connectSignals(){
-  connect (_edge, SIGNAL(changed()), this, SLOT(updateSlot()));
   connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
-
-  // ! Connect the Node connected to the edge's signals.
-  connect (_edge->from(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
-  connect (_edge->to(), SIGNAL(posChanged(QPointF)),   this, SLOT(updatePos()));
 }
 
 QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2){
@@ -110,8 +105,8 @@ QPainterPath OrientedEdgeItem::createCurves(){
 
 
   /// Calculate the angle.
-  QPointF Pos1 = _edge->from()->pos();
-  QPointF Pos2 = _edge->to()->pos();
+  QPointF Pos1(_edge->from()->property("x").toDouble(), _edge->from()->property("y").toDouble());
+  QPointF Pos2(_edge->to()->property("x").toDouble(), _edge->to()->property("y").toDouble());
   QPainterPath p;
   
   if ( _loop ){

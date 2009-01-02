@@ -1,3 +1,4 @@
+
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -20,8 +21,9 @@
 
 #include "action_SingleSelect.h"
 #include "SUI_GraphScene.h"
-#include "Graph.h"
-#include "Node.h"
+#include "graph.h"
+#include "node.h"
+#include "edge.h"
 #include "graphicsitem_Node.h"
 #include "graphicsitem_Edge.h"
 #include "graphicsitem_MultiEdge.h"
@@ -72,9 +74,6 @@ void SingleSelectAction::executeRelease(QPointF pos){
   }
   else if (qgraphicsitem_cast<OrientedEdgeItem*>(item)){
     obj = (qgraphicsitem_cast<OrientedEdgeItem*>(item)) -> edge();
-  }
-  else if (qgraphicsitem_cast<MultiEdgeItem*>(item)){
-    obj = (qgraphicsitem_cast<MultiEdgeItem*>(item)) -> edge();
   }
   emit ItemSelectedChanged(obj);
 }

@@ -41,8 +41,8 @@
 #include "model_GraphLayers.h"
 
 // Graph Related Includes
-#include "GraphDocument.h"
-#include "Graph.h"
+#include "graphDocument.h"
+#include "graph.h"
 
 // Action Related Includes
 #include "action_AbstractAction.h"

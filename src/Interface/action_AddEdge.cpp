@@ -20,8 +20,9 @@
 
 #include "action_AddEdge.h"
 #include "SUI_GraphScene.h"
-#include "Graph.h"
-#include "Node.h"
+#include "graph.h"
+#include "node.h"
+#include "edge.h"
 #include "graphicsitem_Node.h"
 #include <KLocale>
 
@@ -51,7 +52,8 @@ void AddEdgeAction::executePress(QPointF pos){
   _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
 
   if ( ! _nodeFrom ) return;
-  _startPos = _nodeFrom->node()->pos();
+  _startPos = QPointF(_nodeFrom->node()->property("x").toInt(), 
+		      _nodeFrom->node()->property("y").toInt()); 
 }
 
 void AddEdgeAction::executeMove(QPointF pos){
@@ -83,7 +85,9 @@ void AddEdgeAction::executeRelease(QPointF pos){
     return; 
   }
 
-  _nodeFrom-> node() -> connect(_nodeTo->node());
+  Graph *g = qobject_cast<Graph*>(_nodeFrom-> node() -> parent()); 
+  g -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
+  
   _nodeFrom = 0;
   _nodeTo = 0;
   _working = false;

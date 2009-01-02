@@ -29,7 +29,7 @@ class Graph;
 /*! \brief the graph document 
   long explanation needed.
 */
-class GraphDocument : public QObject
+class GraphDocument : public QObject, public QList<Graph*>
 {
   Q_OBJECT
 
@@ -38,8 +38,11 @@ public:
   /*! Default Constructor 
     \param name sets the name of the document.
   */
-  GraphDocument(const QString name = QString());
+  GraphDocument(const QString name, int width = 800, int heigth = 600);
   
+  /*! default copy constructor */
+  GraphDocument(const GraphDocument& gd);
+
   /*! Default Destructor */
   ~GraphDocument();
 
@@ -67,58 +70,12 @@ public:
   /*! \return the width of the working area */
   qreal width() const;
 
-  /*! \return the size of the graph Collection */
-  int size(); 
-
-  /*! \return the Graph at position 'i' on the _graphs list */
-  Graph* operator[](int i); 
-
-  /*! \return the graph at position i on the _graphs list */
-  Graph* at(int i);
-
-  /*! Append a grpah on the graph's list 
-    \param g the graph to be appende.
-  */
-  void operator<<(Graph *g);
-
-  /*! Append a graph on the Graph's list 
-    \param g the graph to be appended
-  */
-  void append(Graph *g);
-
-  /*! Prepend a graph on the Graph's list 
-    \param g the graph to be prepended.
-  */
-  void prepend(Graph *g);
-
-  /*! get the graph's list */
-  QList<Graph*> graphs() const;
-  
-  /*! Removes the graph at position 'i' 
-    \param i the position to remove the graph.
-  */
-  void removeAt(int i = 0); 
-
-  /*! Remove the first instance of the graph g 
-    \param g the instance of the graph to be removed.
-  */
-  void removeOne(Graph *g);
-
-  /*! search for the index of a graph.
-    \param g the graph that you're looking for the index
-    \return the index of the graph g or -1 if not foind
-  */
-  int indexOf(Graph *g);
-
-  /*! destroy all the graphs */
-  void clear();
-
 public slots:
   /*! Creates a new Graph 
     \param name the name of the graph
     \param type the the of the graph. 
   */
-  void addGraph(QString name = "untitled", int type = 0);
+  Graph *addGraph(QString name = "untitled");
 
 signals:
   /*! emited when a new graph is created 
@@ -142,7 +99,6 @@ signals:
   void widthChanged(qreal width);
 
 private:
-  QList<Graph*> _graphs;
   QString _name;
   qreal _width;
   qreal _height;

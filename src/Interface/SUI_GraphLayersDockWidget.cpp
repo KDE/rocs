@@ -22,8 +22,8 @@
 #include "SUI_GraphLayersDockWidget.h"
 #include "SUI_MainWindow.h"
 
-#include "Graph.h"
-#include "GraphDocument.h"
+#include "graph.h"
+#include "graphDocument.h"
 #include "model_GraphLayers.h"
 
 #include <KDebug>

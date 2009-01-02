@@ -20,8 +20,8 @@
 */
 #include "action_AddNode.h"
 #include "SUI_GraphScene.h"
-#include "Graph.h"
-
+#include "graph.h"
+#include "node.h"
 #include <KLocale>
 
 #include <KDebug>
@@ -42,6 +42,9 @@ void AddNodeAction::executePress(QPointF pos){
     kDebug() << "Error, Graph == 0";
     return;
   }
-  _graph -> addNode(pos.x(), pos.y());
+  Node *n = _graph -> addNode(i18n("untitled"));
+  n -> setProperty("x", pos.x() );
+  n -> setProperty("y", pos.y() );
+
   kDebug() << "Action Executed at pos " << pos.x() << pos.y();
 }

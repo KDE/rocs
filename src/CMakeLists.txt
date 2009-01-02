@@ -1,15 +1,16 @@
 project(Rocs-rewrite)
 
-add_subdirectory(Core)
-add_subdirectory(Engine)
-add_subdirectory(Models)
-add_subdirectory(GraphicsItem)
-add_subdirectory(Interface)
-
 find_package(KDE4 REQUIRED)
 
 include(KDE4Defaults)
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} Interface)
+
+
+add_subdirectory(Core)
+add_subdirectory(Models)
+add_subdirectory(GraphicsItem)
+add_subdirectory(Interface)
+add_subdirectory(Tests)
 
 set(Rocs_SRCS  Main.cpp )
 
@@ -20,7 +21,8 @@ set(Rocs_SRCS  Main.cpp )
 # qt4_add_resources(Rocs_RCC_SRCS ${Rocs_RCCS})
 
 # Since the JavaScript supports came from QtScript... 
-# set (QT_USE_QTSCRIPT true)
+
+set (QT_USE_QTSCRIPT true)
 
 set(Rocs_KCFGS settings.kcfgc)
 
@@ -34,7 +36,6 @@ target_link_libraries(Rocs ${KDE4_KDEUI_LIBS}
                            ${QT_QTSCRIPT_LIBRARY}
 			   librocsui
 			   librocscore
-			   librocsengine
 			   librocsmodel
 			   librocsgraphics
 )

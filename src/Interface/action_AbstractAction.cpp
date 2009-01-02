@@ -20,8 +20,8 @@
 */
 #include "action_AbstractAction.h"
 #include "SUI_GraphScene.h"
-#include "Graph.h"
-#include "GraphDocument.h"
+#include "graph.h"
+#include "graphDocument.h"
 #include <QPointF>
 #include <KDebug>
 

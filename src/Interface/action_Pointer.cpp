@@ -20,7 +20,7 @@
 */
 #include "action_Pointer.h"
 #include "SUI_GraphScene.h"
-#include "Graph.h"
+#include "graph.h"
 
 #include <KLocale>
 #include <iostream>

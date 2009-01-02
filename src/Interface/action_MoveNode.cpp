@@ -20,8 +20,8 @@
 */
 #include "action_MoveNode.h"
 #include "SUI_GraphScene.h"
-#include "Graph.h"
-#include "Node.h"
+#include "graph.h"
+#include "node.h"
 #include "graphicsitem_Node.h"
 #include <KLocale>
 
@@ -47,13 +47,12 @@ void MoveNodeAction::executePress(QPointF pos){
 
 void MoveNodeAction::executeMove(QPointF pos){
   if ( ! _movableNode ){ return; }
-  if (Settings::fastGraphics()){  _movableNode -> setPos( pos ); }
-  else{ _movableNode -> node() -> setPos( pos ); }
-
+  _movableNode -> setPos( pos );
 }
 
 void MoveNodeAction::executeRelease(QPointF pos){
   if ( !_movableNode ){ return; }
-  _movableNode -> node() -> setPos( pos );
+  _movableNode -> node() -> setProperty("x",pos.x() );
+  _movableNode -> node() -> setProperty("y",pos.y() );
   _movableNode = 0;
 }

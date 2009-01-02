@@ -74,25 +74,10 @@
              <height>0</height>
             </size>
            </property>
-           <item>
-            <property name="text" >
-             <string>javascript</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>python</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>ruby</string>
-            </property>
-           </item>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="_btnRunScript" >
+          <widget class="KPushButton" name="_btnRunScript" >
            <property name="text" >
             <string>Run</string>
            </property>
@@ -141,7 +126,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3" >
              <item>
-              <widget class="QPushButton" name="_btnClearDebugArea" >
+              <widget class="KPushButton" name="_btnClearDebugArea" >
                <property name="text" >
                 <string>Clear</string>
                </property>
