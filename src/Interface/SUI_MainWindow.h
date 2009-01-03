@@ -50,7 +50,7 @@ private:
   void setupWidgets(); // Setup all the widgets.
   void setupActions(); // Setup all the actions.
   void setupSignals();
-	
+	QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
 
   PaletteBarWidget*  _PaletteBar;   // area where the icons of actions will be.
   OpenedFilesWidget* _OpenedFiles;  // area where the opened files will be

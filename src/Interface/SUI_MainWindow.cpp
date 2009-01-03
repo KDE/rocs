@@ -76,6 +76,12 @@ void MainWindow::setupModels(){
   _graphLayersModel = new GraphLayersModel( 0 );
 }
 void MainWindow::setupWidgets(){
+	QWidget *leftPanel = setupLeftPanel();
+	setCentralWidget(leftPanel);
+}
+
+QWidget* MainWindow::setupLeftPanel(){
+
 	//! constructing the Default Looking LeftSide menu.
 	QWidget *toolBox = new QWidget( this );
 	toolsTab = new KMultiTabBar(KMultiTabBar::Left, toolBox);
@@ -107,9 +113,8 @@ void MainWindow::setupWidgets(){
 		connect(toolsTab->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseLeftTabbarButton(int)));
 	}
 	toolsTab->setTab(0, true);
-	setCentralWidget(toolBox);
+	return toolBox;
 }
-
 void MainWindow::releaseLeftTabbarButton(int index){
 	if ( _tabId == index ){
 		toolsTab->setTab( _tabId, true );
