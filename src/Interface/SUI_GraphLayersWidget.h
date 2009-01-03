@@ -19,14 +19,13 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef SUI_GRAPH_LAYERS_DOCK_WIDGET_H
-#define SUI_GRAPH_LAYERS_DOCK_WIDGET_H
+#ifndef SUI_GRAPH_LAYERS_WIDGET_H
+#define SUI_GRAPH_LAYERS_WIDGET_H
 
 #include <QWidget>
-#include <QDockWidget>
 #include <QListView>
 
-#include "ui_GraphLayersDockWidget.h"
+#include "ui_GraphLayersWidget.h"
 
 class GraphDocument;
 class Graph;
@@ -38,11 +37,11 @@ class GraphLayersModel;
   \brief The Graph-Layer widget.
   This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
 */
-class GraphLayersDockWidget : public QDockWidget, public Ui::GraphLayersDockWidget{
+class GraphLayersWidget : public QWidget, public Ui::GraphLayersWidget{
   Q_OBJECT
   public:
     /*! public constructor */
-    explicit GraphLayersDockWidget(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    explicit GraphLayersWidget(QWidget* parent = 0);
 
   public slots:
     /*! send the GraphDocument to the list of graphs. 

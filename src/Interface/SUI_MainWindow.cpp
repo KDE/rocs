@@ -26,13 +26,16 @@
 #include <KStandardAction>
 #include <KActionCollection>
 #include <kxmlguifactory.h>
+#include <kmultitabbar.h>
+#include <kpagewidget.h>
+#include <QPixmap>
 
 // UI RELATED INCLUDES
 
-#include "SUI_PaletteBarDockWidget.h" 
-#include "SUI_GraphLayersDockWidget.h"
-#include "SUI_OpenedFilesDockWidget.h"
-#include "SUI_PropertiesArea.h"
+#include "SUI_PaletteBarWidget.h" 
+#include "SUI_GraphLayersWidget.h"
+#include "SUI_OpenedFilesWidget.h"
+#include "SUI_GraphPropertiesWidget.h"
 #include "SUI_GraphEditWidget.h"
 #include "SUI_GraphScene.h"
 
@@ -65,12 +68,25 @@ MainWindow::MainWindow() : KXmlGuiWindow(){
 }
 
 void MainWindow::setupModels(){
-/*
   _documentModel = new GraphDocumentModel( &_documents );
   _graphLayersModel = new GraphLayersModel( 0 );
-*/
 }
 void MainWindow::setupWidgets(){
+	//! constructing the Default Looking LeftSide menu.
+	KMultiTabBar *toolsTab = new KMultiTabBar(KMultiTabBar::Left, this);
+	toolsTab->setStyle(KMultiTabBar::KDEV3ICON);
+
+	toolsTab->appendTab(QPixmap(), 0, "Files");
+	toolsTab->appendTab(QPixmap(), 1, "Tools");
+	toolsTab->appendTab(QPixmap(), 2, "Properties");
+	toolsTab->appendTab(QPixmap(), 3, "Layers");
+
+  _OpenedFiles     = new OpenedFilesWidget ( _documentModel, this );
+  _PaletteBar      = new PaletteBarWidget  ( this );
+  _GraphLayers     = new GraphLayersWidget ( this );
+  _GraphProperties = new GraphPropertiesWidget( this ); 
+
+/*
   setCorner ( Qt::TopLeftCorner,     Qt::LeftDockWidgetArea );
   setCorner ( Qt::BottomLeftCorner,  Qt::LeftDockWidgetArea );
   setCorner ( Qt::TopRightCorner,    Qt::RightDockWidgetArea );
@@ -88,6 +104,8 @@ void MainWindow::setupWidgets(){
   addDockWidget ( Qt::RightDockWidgetArea, _OpenedFiles );
 
   setCentralWidget ( _GraphEdit );
+*/
+
 }
 
 void MainWindow::setupActions(){

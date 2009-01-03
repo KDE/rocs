@@ -20,7 +20,7 @@
 #ifndef SUI_PALETTEBARDOCKWIDGET_H
 #define SUI_PALETTEBARDOCKWIDGET_H
 
-#include <QDockWidget>
+#include <QWidget>
 #include <QList>
 
 class QVBoxLayout;
@@ -39,14 +39,14 @@ class Graph;
 this is a container class for use with AbstractAction classes that will create
 a item for each AbstractAction instance on the menu.
 */
-class PaletteBarDockWidget : public QDockWidget{
+class PaletteBarWidget : public QWidget{
   Q_OBJECT
   public:
     /*!   default constructor 
       \param parent the MainWindow
       \param flags the window flags.
     */
-    explicit PaletteBarDockWidget ( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    explicit PaletteBarWidget ( QWidget* parent = 0 );
 
     /*! this method will configure the action pallette inserting 
     a button for each action inside of the collection.

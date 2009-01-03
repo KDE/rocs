@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "SUI_GraphLayersDockWidget.h"
+#include "SUI_GraphLayersWidget.h"
 #include "SUI_MainWindow.h"
 
 #include "graph.h"
@@ -28,8 +28,8 @@
 
 #include <KDebug>
 
-GraphLayersDockWidget::GraphLayersDockWidget(QWidget* parent, Qt::WindowFlags flags)
-: QDockWidget(i18n("Graph Layers"),parent, flags) 
+GraphLayersWidget::GraphLayersWidget(QWidget* parent)
+: QWidget(parent) 
 {
   _document = 0;
   _layerModel = 0;
@@ -40,16 +40,16 @@ GraphLayersDockWidget::GraphLayersDockWidget(QWidget* parent, Qt::WindowFlags fl
    this, SLOT(setActiveGraph(const QModelIndex&)));
 }
 
-void GraphLayersDockWidget::on__btnNewGraph_clicked()
+void GraphLayersWidget::on__btnNewGraph_clicked()
 {
   _graphLayersListView->model()->insertRows(0, GraphDocument::Simple);
 }
 
-void GraphLayersDockWidget::on__btnNewOrientedGraph_clicked(){
+void GraphLayersWidget::on__btnNewOrientedGraph_clicked(){
   _graphLayersListView->model()->insertRows(0, GraphDocument::Oriented);
 }
 
-void GraphLayersDockWidget::setGraphDocument( GraphDocument *document)
+void GraphLayersWidget::setGraphDocument( GraphDocument *document)
 {
   kDebug() << "Got The Graph";
   if ( _layerModel != 0) delete _layerModel;
@@ -59,7 +59,7 @@ void GraphLayersDockWidget::setGraphDocument( GraphDocument *document)
   _btnNewGraph -> setEnabled(true);
 }
 
-void GraphLayersDockWidget::setActiveGraph(const QModelIndex& modelindex){
+void GraphLayersWidget::setActiveGraph(const QModelIndex& modelindex){
    Graph *g = _layerModel -> at(modelindex);
   if (g == 0) kDebug() << "Returning a NULL pointer";
   else{

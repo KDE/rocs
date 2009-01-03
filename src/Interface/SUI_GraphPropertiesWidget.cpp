@@ -18,20 +18,20 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "SUI_PropertiesArea.h"
+#include "SUI_GraphPropertiesWidget.h"
 #include "SUI_MainWindow.h"
 #include "model_GraphProperties.h"
 #include <KDebug>
 
-GraphPropertiesDockWidget::GraphPropertiesDockWidget (  QWidget* parent , Qt::WindowFlags flags ) 
-  : QDockWidget (  i18n ( "Palette" ), parent, flags ) {
+GraphPropertiesWidget::GraphPropertiesWidget (  QWidget* parent ) 
+  : QWidget (  parent ) {
   
   setupUi(this);
   _model = new GraphPropertiesModel();
   _tableView->setModel(_model);
 }
 
-void GraphPropertiesDockWidget::setDataSource(QObject *o){
+void GraphPropertiesWidget::setDataSource(QObject *o){
   _model->setDataSource(o);
 }
 

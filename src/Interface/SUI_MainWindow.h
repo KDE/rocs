@@ -26,14 +26,14 @@
 #include <QStringList>
 
 /* WORKING */
-class PaletteBarDockWidget;
-class OpenedFilesDockWidget;
-class GraphLayersDockWidget;
+class PaletteBarWidget;
+class OpenedFilesWidget;
+class GraphLayersWidget;
+class GraphPropertiesWidget;
 class GraphEditWidget;
 class GraphDocumentModel;
 class GraphLayersModel;
 class KActionCollection;
-class GraphPropertiesDockWidget;
 class GraphDocument;
 class Graph;
 
@@ -50,10 +50,10 @@ private:
   void setupActions(); // Setup all the actions.
   void setupSignals();
 
-  PaletteBarDockWidget*  _PaletteBar;   // area where the icons of actions will be.
-  OpenedFilesDockWidget* _OpenedFiles;  // area where the opened files will be
-  GraphLayersDockWidget* _GraphLayers;  // area where the layers of the active graph will appear.
-  GraphPropertiesDockWidget* _GraphProperties; // Area where the nodes and edges will be modified.
+  PaletteBarWidget*  _PaletteBar;   // area where the icons of actions will be.
+  OpenedFilesWidget* _OpenedFiles;  // area where the opened files will be
+  GraphLayersWidget* _GraphLayers;  // area where the layers of the active graph will appear.
+  GraphPropertiesWidget* _GraphProperties; // Area where the nodes and edges will be modified.
   GraphEditWidget* _GraphEdit; // Area where the graph will be editted.
   QList<GraphDocument*> _documents;
   GraphDocumentModel *_documentModel;

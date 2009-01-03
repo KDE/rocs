@@ -19,10 +19,10 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef SUI_OPENED_FILES_DOCK_WIDGET_H
-#define SUI_OPENED_FILES_DOCK_WIDGET_H
+#ifndef SUI_OPENED_FILES_WIDGET_H
+#define SUI_OPENED_FILES_WIDGET_H
 
-#include "ui_OpenedFilesDockWidget.h"
+#include "ui_OpenedFilesWidget.h"
 #include <QDockWidget>
 
 class GraphDocumentModel;
@@ -34,13 +34,13 @@ class GraphDocument;
   \brief The Graph-Layer widget.
   This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
 */
-class OpenedFilesDockWidget : public QDockWidget, public Ui::OpenedFilesDockWidget{
+class OpenedFilesWidget : public QWidget, public Ui::OpenedFilesWidget{
   Q_OBJECT
 
   public:
     /*! default constructor. 
     \param model the model that will populate the view.*/
-    explicit OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    explicit OpenedFilesWidget(GraphDocumentModel *model, QWidget* parent = 0);
   
   signals:
     /*! when the active document changes, this signal is emmited. 

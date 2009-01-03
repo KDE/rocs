@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>OpenedFilesDockWidget</class>
- <widget class="QDockWidget" name="OpenedFilesDockWidget" >
+ <class>OpenedFilesWidget</class>
+ <widget class="QWidget" name="OpenedFilesWidget" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -9,14 +9,8 @@
     <height>462</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>Opened Files</string>
-  </property>
   <widget class="QWidget" name="dockWidgetContents" >
    <layout class="QVBoxLayout" name="verticalLayout" >
-    <item>
-     <widget class="KListWidgetSearchLine" name="_txtSearch" />
-    </item>
     <item>
      <widget class="QListView" name="_openedFilesListView" />
     </item>
@@ -50,11 +44,6 @@
   </widget>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KListWidgetSearchLine</class>
-   <extends>KLineEdit</extends>
-   <header>klistwidgetsearchline.h</header>
-  </customwidget>
   <customwidget>
    <class>KPushButton</class>
    <extends>QPushButton</extends>

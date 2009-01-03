@@ -1,5 +1,5 @@
-#ifndef SUI_PROPERTIESAREA_H
-#define SUI_PROPERTIESAREA_H
+#ifndef SUI_GRAPHPROPERTIESWIDGET_H
+#define SUI_GRAPHPROPERTIESWIDGET_H
 
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
@@ -20,18 +20,18 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <QDockWidget>
+#include <QWidget>
 #include "ui_GraphPropertiesWidget.h"
 
 class GraphPropertiesModel;
 
 /*! \brief Properties Area, not used yet. */
 class MainWindow;
-class GraphPropertiesDockWidget : public QDockWidget, public Ui::GraphPropertiesWidget
+class GraphPropertiesWidget : public QWidget, public Ui::GraphPropertiesWidget
 {
   Q_OBJECT
   public:
-    GraphPropertiesDockWidget ( QWidget* parent = 0 , Qt::WindowFlags flags = 0 );
+    GraphPropertiesWidget ( QWidget* parent = 0 );
   private slots:
     void setDataSource(QObject *o);
   private:

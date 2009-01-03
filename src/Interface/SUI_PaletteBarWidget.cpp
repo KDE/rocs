@@ -18,7 +18,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "SUI_PaletteBarDockWidget.h"
+#include "SUI_PaletteBarWidget.h"
 
 #include <KAction>
 #include <QEvent>
@@ -46,14 +46,13 @@
 
 #include "settings.h" //! AUTO GENERATED!  ( *Hate* this u_u )
 
-PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags flags ) 
-  : QDockWidget ( i18n ( "Palette" ), parent, flags ){
+PaletteBarWidget::PaletteBarWidget ( QWidget* parent ) 
+  : QWidget (parent){
   setObjectName ( "palleteBar" );
-  setAllowedAreas ( Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea );
+   
   
-  QWidget* topWidget = new QWidget ( this );
 
-  _scrollArea = new PaletteScrollArea ( topWidget );
+  _scrollArea = new PaletteScrollArea ( this );
   _scrollArea->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
   _scrollArea->setFrameShape ( QFrame::NoFrame );
 
@@ -65,10 +64,9 @@ PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags fl
   _scrollArea->setWidget ( _widget );
   _scrollArea->setMinimumWidth ( _widget->minimumSizeHint().width() );
 
-  QVBoxLayout* topLayout = new QVBoxLayout ( topWidget );
+  QVBoxLayout* topLayout = new QVBoxLayout ( this );
   topLayout->addWidget ( _scrollArea );
-  setWidget ( topWidget );
-
+  
   QAction* showText = new QAction ( i18n ( "Show text" ), this );
   showText->setCheckable ( true );
   showText->setChecked ( Settings::showButtonText() );
@@ -81,7 +79,7 @@ PaletteBarDockWidget::PaletteBarDockWidget ( QWidget* parent, Qt::WindowFlags fl
   
 }
 
-void PaletteBarDockWidget::setActionCollection(KActionCollection *collection){
+void PaletteBarWidget::setActionCollection(KActionCollection *collection){
   _actionCollection = collection;
   QList<QAction*> actions = collection->actions();
   QAction *action_pointer = actions.takeFirst();
@@ -91,7 +89,7 @@ void PaletteBarDockWidget::setActionCollection(KActionCollection *collection){
   }
 }
 
-void PaletteBarDockWidget::createToolButton ( QAction* action, bool checked ){
+void PaletteBarWidget::createToolButton ( QAction* action, bool checked ){
   QToolButton* button = new QToolButton (  );
   button->setToolButtonStyle ( Settings::showButtonText() ? Qt::ToolButtonTextBesideIcon : Qt::ToolButtonIconOnly );
   button->setSizePolicy ( QSizePolicy::Expanding, QSizePolicy::Fixed );
@@ -104,7 +102,7 @@ void PaletteBarDockWidget::createToolButton ( QAction* action, bool checked ){
   _layout->addWidget ( button );
 }
 
-void PaletteBarDockWidget::showButtonTextToggled ( bool b ){
+void PaletteBarWidget::showButtonTextToggled ( bool b ){
   Settings::setShowButtonText ( b );
   Settings::self()->writeConfig();
   foreach ( QToolButton* button, _toolButtons ){
@@ -115,12 +113,12 @@ void PaletteBarDockWidget::showButtonTextToggled ( bool b ){
 }
 
 
-void PaletteBarDockWidget::setGraph( Graph* ){
+void PaletteBarWidget::setGraph( Graph* ){
   kDebug() << "Got the Graph but did nothing with it.";
   return;
 }
 
-void PaletteBarDockWidget::setGraphDocument( GraphDocument *){
+void PaletteBarWidget::setGraphDocument( GraphDocument *){
   kDebug() << "Got the Graph Document but did nothing with it.";
   return;
 }

@@ -76,10 +76,10 @@ void GraphScene::setAction(AbstractAction *action){
   _action = action;
 }
 
-void GraphScene::createNode(Node *n){
+void GraphScene::createNode(Node *){
 
 }
 
-void GraphScene::createEdge(Edge *e){
+void GraphScene::createEdge(Edge *){
 
 }

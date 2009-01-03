@@ -19,14 +19,14 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "SUI_OpenedFilesDockWidget.h"
+#include "SUI_OpenedFilesWidget.h"
 #include "SUI_MainWindow.h"
 
 #include "model_GraphDocument.h"
 #include <KDebug>
 
-OpenedFilesDockWidget::OpenedFilesDockWidget(GraphDocumentModel *model, QWidget* parent, Qt::WindowFlags flags)
-: QDockWidget(i18n("Opened Files"),parent, flags) 
+OpenedFilesWidget::OpenedFilesWidget(GraphDocumentModel *model, QWidget* parent)
+: QWidget(parent) 
 {
   setupUi(this);  
   _documentModel = model;
@@ -35,12 +35,12 @@ OpenedFilesDockWidget::OpenedFilesDockWidget(GraphDocumentModel *model, QWidget*
   this, SLOT(setActiveDocument(const QModelIndex&)));
 }
 
-void OpenedFilesDockWidget::on__btnNewFile_clicked()
+void OpenedFilesWidget::on__btnNewFile_clicked()
 {
   _openedFilesListView->model()->insertRow(1);
 }
 
-void OpenedFilesDockWidget::setActiveDocument(const QModelIndex& modelindex)
+void OpenedFilesWidget::setActiveDocument(const QModelIndex& modelindex)
 {
    GraphDocument *g = _documentModel -> at(modelindex);
    if (g == 0) return;
