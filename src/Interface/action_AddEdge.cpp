@@ -87,29 +87,24 @@ void AddEdgeAction::executeRelease(QPointF pos){
     return; 
   }
 
-  Graph *g = qobject_cast<Graph*>(_nodeFrom-> node() -> parent()); 
-  if (g == 0){
-    kDebug() << "Graph is zero";
-  }
-  Edge *e = g -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
+  Edge *e = _graph -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
   if (e == 0){
-    kDebug() << "there's no node";
-    return;
+    _nodeFrom = 0;
+    _working = false;
+     return;
   }
-  _nodeFrom = 0;
-  _nodeTo = 0;
-  _working = false;
-
+  
   QGraphicsItem *edgeItem = 0;
-  // edgeItem = (!g->directed() == true) ? new EdgeItem(e) : new OrientedEdgeItem(e);
-
-  if ( !g->directed() ){
-    edgeItem = new EdgeItem(e);
+  if ( !_graph->directed() ){ 
+    edgeItem = new EdgeItem(e); 
   }
-  else{
+  else{ 
     edgeItem = new OrientedEdgeItem(e);
   }
 
   _graphScene->addItem(edgeItem);
-  
+
+  _nodeFrom = 0;
+  _nodeTo = 0;
+  _working = false;
 }

@@ -65,8 +65,10 @@ MainWindow::MainWindow() : KXmlGuiWindow(){
 }
 
 void MainWindow::setupModels(){
+/*
   _documentModel = new GraphDocumentModel( &_documents );
   _graphLayersModel = new GraphLayersModel( 0 );
+*/
 }
 void MainWindow::setupWidgets(){
   setCorner ( Qt::TopLeftCorner,     Qt::LeftDockWidgetArea );
@@ -89,6 +91,7 @@ void MainWindow::setupWidgets(){
 }
 
 void MainWindow::setupActions(){
+/*
   KStandardAction::quit ( this,    SLOT ( quit() ),        actionCollection() );
   GraphScene *gc = _GraphEdit->scene();
 
@@ -103,10 +106,12 @@ void MainWindow::setupActions(){
 
   // Pointer Action is the first. 
   _GraphEdit->scene()->setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
+*/
 
 }
 
 void MainWindow::setupSignals(){
+/*
   connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
 	   _GraphLayers, SLOT(setGraphDocument(GraphDocument*)));
 
@@ -130,9 +135,12 @@ void MainWindow::setupSignals(){
       connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
       action, SLOT(setGraph(Graph*)));
   }
+*/
 }
 
 void MainWindow::setGraph( Graph *g){
+/*
   _PaletteBar -> setGraph(g);
   _GraphEdit -> setGraph(g);
+*/
 }

@@ -30,7 +30,6 @@ Node::Node(QObject *parent) : QObject(parent)
 }
 
 Node::~Node(){
-  emit removed();
   empty(&_in_edges);
   empty(&_out_edges);
   empty(&_self_edges);
@@ -195,7 +194,6 @@ QScriptValue Node::loop_edges(){
 	QList<Edge*> list = out_edges();
 	return createScriptArray(list);
 }
-
 
 QScriptValue Node::connected_edges(Node *n){
 	QList<Edge*> list = edges(n);
