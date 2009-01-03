@@ -27,8 +27,9 @@
 #include <KActionCollection>
 #include <kxmlguifactory.h>
 #include <kmultitabbar.h>
-#include <kpagewidget.h>
+#include <QStackedWidget>
 #include <QPixmap>
+#include <KDebug>
 
 // UI RELATED INCLUDES
 
@@ -55,7 +56,10 @@
 #include "action_MoveNode.h"
 #include "action_SingleSelect.h"
 
-MainWindow::MainWindow() : KXmlGuiWindow(){
+MainWindow::MainWindow() : 
+	KXmlGuiWindow(),
+	_tabId(0)
+	{
   _documentModel = 0;
   _graphLayersModel = 0;
   setObjectName ( "Rocs" );
@@ -73,7 +77,8 @@ void MainWindow::setupModels(){
 }
 void MainWindow::setupWidgets(){
 	//! constructing the Default Looking LeftSide menu.
-	KMultiTabBar *toolsTab = new KMultiTabBar(KMultiTabBar::Left, this);
+	QWidget *toolBox = new QWidget( this );
+	toolsTab = new KMultiTabBar(KMultiTabBar::Left, toolBox);
 	toolsTab->setStyle(KMultiTabBar::KDEV3ICON);
 
 	toolsTab->appendTab(QPixmap(), 0, "Files");
@@ -81,60 +86,66 @@ void MainWindow::setupWidgets(){
 	toolsTab->appendTab(QPixmap(), 2, "Properties");
 	toolsTab->appendTab(QPixmap(), 3, "Layers");
 
-  _OpenedFiles     = new OpenedFilesWidget ( _documentModel, this );
-  _PaletteBar      = new PaletteBarWidget  ( this );
-  _GraphLayers     = new GraphLayersWidget ( this );
-  _GraphProperties = new GraphPropertiesWidget( this ); 
+  _OpenedFiles     = new OpenedFilesWidget ( _documentModel, toolBox );
+  _PaletteBar      = new PaletteBarWidget  ( toolBox );
+  _GraphLayers     = new GraphLayersWidget ( toolBox );
+  _GraphProperties = new GraphPropertiesWidget( toolBox ); 
+	
+	QStackedWidget *toolsStack = new QStackedWidget();
+	toolsStack->addWidget( _OpenedFiles );
+	toolsStack->addWidget( _PaletteBar );
+	toolsStack->addWidget( _GraphProperties );
+	toolsStack->addWidget( _GraphLayers );
 
-/*
-  setCorner ( Qt::TopLeftCorner,     Qt::LeftDockWidgetArea );
-  setCorner ( Qt::BottomLeftCorner,  Qt::LeftDockWidgetArea );
-  setCorner ( Qt::TopRightCorner,    Qt::RightDockWidgetArea );
-  setCorner ( Qt::BottomRightCorner, Qt::RightDockWidgetArea );
+	QHBoxLayout  *toolBoxLayout = new QHBoxLayout( toolBox );
+	toolBoxLayout->addWidget(toolsTab);
+	toolBoxLayout->addWidget(toolsStack);
+	toolBox->setLayout(toolBoxLayout);
 
-  _OpenedFiles     = new OpenedFilesDockWidget ( _documentModel, this );
-  _PaletteBar      = new PaletteBarDockWidget  ( this );
-  _GraphLayers     = new GraphLayersDockWidget ( this );
-  _GraphProperties = new GraphPropertiesDockWidget( this ); 
-  _GraphEdit       = new GraphEditWidget( this );
+	for(int i = 0; i < 4; ++i){
+		connect(toolsTab->tab(i), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
+		connect(toolsTab->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseLeftTabbarButton(int)));
+	}
+	toolsTab->setTab(0, true);
+	setCentralWidget(toolBox);
+}
 
-  addDockWidget ( Qt::RightDockWidgetArea, _GraphProperties);
-  addDockWidget ( Qt::LeftDockWidgetArea, _PaletteBar );
-  addDockWidget ( Qt::LeftDockWidgetArea, _GraphLayers );
-  addDockWidget ( Qt::RightDockWidgetArea, _OpenedFiles );
-
-  setCentralWidget ( _GraphEdit );
-*/
-
+void MainWindow::releaseLeftTabbarButton(int index){
+	if ( _tabId == index ){
+		toolsTab->setTab( _tabId, true );
+		return;
+	}
+	toolsTab->setTab( _tabId, false );
+	_tabId = index;
 }
 
 void MainWindow::setupActions(){
-/*
+
   KStandardAction::quit ( this,    SLOT ( quit() ),        actionCollection() );
-  GraphScene *gc = _GraphEdit->scene();
+ // GraphScene *gc = _GraphEdit->scene();
 
-  _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
-  _paletteActions->addAction("pointer_action", new PointerAction(gc, this));  
-  _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
-  _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
-  _paletteActions->addAction("move_node_action", new MoveNodeAction(gc, this));
-  _paletteActions->addAction("single_selection_action", new SingleSelectAction(gc, this));
+ // _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
+ // _paletteActions->addAction("pointer_action", new PointerAction(gc, this));  
+ // _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
+ // _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
+ // _paletteActions->addAction("move_node_action", new MoveNodeAction(gc, this));
+ // _paletteActions->addAction("single_selection_action", new SingleSelectAction(gc, this));
 
-  _PaletteBar->setActionCollection(_paletteActions);
+//   _PaletteBar->setActionCollection(_paletteActions);
 
   // Pointer Action is the first. 
-  _GraphEdit->scene()->setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
-*/
+//  _GraphEdit->scene()->setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
+
 
 }
 
 void MainWindow::setupSignals(){
-/*
+
   connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
 	   _GraphLayers, SLOT(setGraphDocument(GraphDocument*)));
 
-  connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
-	   _GraphEdit,   SLOT(setGraphDocument(GraphDocument*)));
+//  connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
+//	   _GraphEdit,   SLOT(setGraphDocument(GraphDocument*)));
 
   connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
 	   _PaletteBar, SLOT(setGraphDocument(GraphDocument*)));
@@ -145,20 +156,20 @@ void MainWindow::setupSignals(){
   connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
 	   this, SLOT(setGraph(Graph*)));
   
-  connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
-	  _GraphProperties, SLOT(setDataSource(QObject*)));
+ // connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
+//	  _GraphProperties, SLOT(setDataSource(QObject*)));
 
 
-  foreach( QAction *action, _paletteActions->actions() ){
-      connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
-      action, SLOT(setGraph(Graph*)));
-  }
-*/
+ // foreach( QAction *action, _paletteActions->actions() ){
+ //     connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
+ //     action, SLOT(setGraph(Graph*)));
+ // }
+
 }
 
 void MainWindow::setGraph( Graph *g){
-/*
+
   _PaletteBar -> setGraph(g);
   _GraphEdit -> setGraph(g);
-*/
+
 }

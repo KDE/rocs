@@ -36,6 +36,7 @@ class GraphLayersModel;
 class KActionCollection;
 class GraphDocument;
 class Graph;
+class KMultiTabBar;
 
 class MainWindow : public KXmlGuiWindow{
 Q_OBJECT
@@ -49,6 +50,7 @@ private:
   void setupWidgets(); // Setup all the widgets.
   void setupActions(); // Setup all the actions.
   void setupSignals();
+	
 
   PaletteBarWidget*  _PaletteBar;   // area where the icons of actions will be.
   OpenedFilesWidget* _OpenedFiles;  // area where the opened files will be
@@ -59,7 +61,12 @@ private:
   GraphDocumentModel *_documentModel;
   GraphLayersModel   *_graphLayersModel;
   KActionCollection  *_paletteActions;
-  
+
+  KMultiTabBar *toolsTab; // Tab that will hold the pallete, opened files, graphLayers and Properties.
+	int _tabId;
+
+private slots:
+	void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
 public slots:
   void setGraph(Graph *g);
 };
