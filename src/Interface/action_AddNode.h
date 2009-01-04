@@ -38,7 +38,7 @@ class AddNodeAction : public AbstractAction{
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
   
-    explicit AddNodeAction( GraphView *view, QObject *parent = 0);
+    explicit AddNodeAction( GraphScene *scene, QObject *parent = 0);
   
     /*! 
       Default Destructor 

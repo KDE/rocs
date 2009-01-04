@@ -8,9 +8,9 @@ class Node;
 class Edge;
 class QGraphicsItem;
 
-class GraphView : public QGraphicsScene{
+class GraphScene : public QGraphicsScene{
 public:
-	GraphView();
+	GraphScene();
 	void setAction(AbstractAction *action);
 	void createNode(Node *n);
 	void createEdge(Edge *e);

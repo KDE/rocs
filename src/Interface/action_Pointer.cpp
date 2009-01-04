@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "action_Pointer.h"
-#include "SUI_GraphView.h"
+#include "SUI_GraphScene.h"
 #include "graph.h"
 
 #include <KLocale>
@@ -27,8 +27,8 @@
 
 #include <KDebug>
 
-PointerAction::PointerAction(GraphView *view, QObject *parent) 
-: AbstractAction(view, parent){
+PointerAction::PointerAction(GraphScene *scene, QObject *parent) 
+: AbstractAction(scene, parent){
   setText(i18n ( "Pointer" ));
   setToolTip ( i18n ( "Does Nothing." ) );
   setIcon ( KIcon ( "pointer" ) );

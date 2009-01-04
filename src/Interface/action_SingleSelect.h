@@ -43,7 +43,7 @@ class SingleSelectAction : public AbstractAction
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
   
-    explicit SingleSelectAction(GraphView *view, QObject *parent = 0);
+    explicit SingleSelectAction(GraphScene *scene, QObject *parent = 0);
   
     /*! 
       Default Destructor 

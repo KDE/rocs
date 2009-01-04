@@ -19,7 +19,7 @@
 */
 
 #include "action_AddEdge.h"
-#include "SUI_GraphView.h"
+#include "SUI_GraphScene.h"
 #include "graph.h"
 #include "node.h"
 #include "edge.h"
@@ -30,8 +30,8 @@
 
 #include <KDebug>
 
-AddEdgeAction::AddEdgeAction(GraphView *view, QObject *parent) 
-: AbstractAction(view, parent){
+AddEdgeAction::AddEdgeAction(GraphScene *scene, QObject *parent) 
+: AbstractAction(scene, parent){
   setText(i18n ( "Add Edge" ));
   setToolTip ( i18n ( "Creates a new edge between 2 nodes" ) );
   setIcon ( KIcon ( "add-edge" ) );
@@ -51,7 +51,7 @@ void AddEdgeAction::executePress(QPointF pos){
   if ( ! _graph ) return; 
 
   _working = true;
-  _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphView->itemAt(pos));
+  _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
 
   if ( ! _nodeFrom ) return;
   _startPos = QPointF(_nodeFrom->node()->property("x").toInt(), 
@@ -64,7 +64,7 @@ void AddEdgeAction::executeMove(QPointF pos){
   
   if ( !_tmpLine ){
     _tmpLine = new QGraphicsLineItem( _startPos.x(), _startPos.y(), pos.x(), pos.y());
-    _graphView->addItem(_tmpLine);  
+    _graphScene->addItem(_tmpLine);  
   }
   else{
     _tmpLine->setLine(_startPos.x(), _startPos.y(), pos.x(), pos.y());
@@ -80,7 +80,7 @@ void AddEdgeAction::executeRelease(QPointF pos){
     _tmpLine = 0;
   }
 
-  _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphView->itemAt(pos));
+  _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
   if ( ! _nodeTo ){ 
     _nodeFrom = 0;
     _working = false;
@@ -102,7 +102,7 @@ void AddEdgeAction::executeRelease(QPointF pos){
     edgeItem = new OrientedEdgeItem(e);
   }
 
-  _graphView->addItem(edgeItem);
+  _graphScene->addItem(edgeItem);
 
   _nodeFrom = 0;
   _nodeTo = 0;

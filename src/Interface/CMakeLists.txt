@@ -12,7 +12,7 @@ set(librocsui_SRCS
   SUI_MainWindow.cpp
   SUI_OpenedFilesWidget.cpp
   SUI_GraphLayersWidget.cpp
-  SUI_GraphView.cpp
+  SUI_GraphScene.cpp
   SUI_PaletteBarWidget.cpp
   SUI_PaletteLayout.cpp  # stolen from Step (remember to kiss  Vladimir Kuznetsov
   SUI_Separator.cpp

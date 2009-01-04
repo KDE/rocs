@@ -20,7 +20,7 @@
 */
 
 #include "action_SingleSelect.h"
-#include "SUI_GraphView.h"
+#include "SUI_GraphScene.h"
 #include "graph.h"
 #include "node.h"
 #include "edge.h"
@@ -33,8 +33,8 @@
 
 #include <KDebug>
 
-SingleSelectAction::SingleSelectAction(GraphView *view, QObject *parent) 
-: AbstractAction(view, parent){
+SingleSelectAction::SingleSelectAction(GraphScene *scene, QObject *parent) 
+: AbstractAction(scene, parent){
   setText(i18n ( "Single Select" ));
   setToolTip ( i18n ( "Select Items by clicking on them." ) );
   setIcon ( KIcon ( "single-select" ) );
@@ -46,14 +46,14 @@ SingleSelectAction::~SingleSelectAction(){
 void SingleSelectAction::executeRelease(QPointF pos){
   if ( !_graph ) return; 
 
-  QList<QGraphicsItem*> currentSelection = _graphView->selectedItems();
+  QList<QGraphicsItem*> currentSelection = _graphScene->selectedItems();
   foreach(QGraphicsItem *i, currentSelection){
     i->setSelected(false);
     i->update();
   }
 
 
-  QGraphicsItem * item = _graphView->itemAt(pos);
+  QGraphicsItem * item = _graphScene->itemAt(pos);
   //! release all current selected items from it's imprisioner.
   if ( ! item ){ 
     emit ItemSelectedChanged(0);
