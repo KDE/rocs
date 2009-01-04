@@ -38,13 +38,15 @@ public:
 	\param parent the owner of this widget. */
 	GraphVisualEditor(QWidget *parent = 0);
 
-	/*! set the current selected Graph. 
+	GraphScene *scene() const;
+
+public slots:
+/*! set the current selected Graph. 
 	\param graph the new active graph.
 	*/
 	void setGraph( Graph *graph);
 
 	void setGraphDocument(GraphDocument *graphDocument);
-public slots:
 
 private:
 	void setupWidgets();

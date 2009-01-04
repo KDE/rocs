@@ -217,3 +217,7 @@ void GraphVisualEditor::drawGraphOnScene( Graph *g){
 void GraphVisualEditor::setGraph( Graph *graph){
   _graph = graph;
 }
+
+GraphScene* GraphVisualEditor::scene() const{
+	return _scene;
+}

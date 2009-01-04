@@ -51,21 +51,32 @@ QVariant GraphLayersModel::data(const QModelIndex &index, int role) const{
 }
 
 QVariant GraphLayersModel::headerData(int section, Qt::Orientation orientation, int role) const{
-  if ( _document == 0) return QVariant();
-  if ( role != Qt::DisplayRole) return QVariant();
-  if (orientation == Qt::Horizontal) return QString("Column %1").arg(section);
-  else return QString("Row %1").arg(section);
+  if ( _document == 0){
+    return QVariant();
+  }
+  if ( role != Qt::DisplayRole){
+    return QVariant();
+  }
+  if (orientation == Qt::Horizontal){
+    return QString("Column %1").arg(section);
+  }
+  
+  return QString("Row %1").arg(section);
+  
 }
 
 Qt::ItemFlags GraphLayersModel::flags(const QModelIndex& index) const{
-  if ( !index.isValid() ) return Qt::ItemIsEnabled;
+  if ( !index.isValid() ){
+    return Qt::ItemIsEnabled;
+  }
   return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
 bool GraphLayersModel::setData(const QModelIndex& index, const QVariant& value, int role){
   if ( index.isValid() && (role == Qt::ItemIsEditable)) {
      Graph *g = _document->at(index.row());
-    g-> setProperty("name",value.toString());
+     g-> setProperty("name",value.toString());
+		 return true;
   }
   return false;
 }
@@ -93,16 +104,3 @@ bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex&){
 {
   return _document->at(index.row());
 }
-
-void GraphLayersModel::update( Graph *g){
-  kDebug() << "Tryed to change the name of the graph on the model";
-  int i = _document->indexOf(g);
-  QModelIndex index = QAbstractItemModel::createIndex(i, 0);
-  emit dataChanged(index, index);
-}
-
-void GraphLayersModel::connectGraphSignals( Graph *g){
-  kDebug () << "connecting Graph Signals with GraphLayer Model";
-  connect(g, SIGNAL(nameChanged( Graph*)), this, SLOT(update( Graph*)));
-}
-

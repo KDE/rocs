@@ -86,9 +86,6 @@ class GraphLayersModel : public QAbstractListModel
     \return the graph at position Index.*/
      Graph *at(const QModelIndex& index);
 
-  private slots:
-    void update( Graph *g);
-    void connectGraphSignals( Graph *g);
   private:
     GraphDocument *_document;
   

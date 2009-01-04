@@ -54,18 +54,6 @@ class PaletteBarWidget : public QWidget{
     void setActionCollection(KActionCollection *colletion);
 
   public slots:
-    /*! changes the GraphDocument and relink all actions to this new document. 
-    \param document the new document that all actions will point to.
-    FIXME: remove this? it's doing nothing.
-    */
-    void setGraphDocument( GraphDocument *document);
-
-    /*! changes the active graph and relink all actions to this new graph. 
-    \param graph the new graph that all actions will point to. 
-    FIXME: remove this? it's doing nothing.
-    */
-    void setGraph( Graph* graph);
-
     /*! shows or hides text on buttons.
     \param b true to show, false to hide.
     */

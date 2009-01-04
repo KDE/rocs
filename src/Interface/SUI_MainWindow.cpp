@@ -44,7 +44,7 @@
 #include "SUI_OpenedFilesWidget.h"
 #include "SUI_GraphPropertiesWidget.h"
 #include "SUI_GraphVisualEditor.h"
-// #include "SUI_GraphScene.h"
+#include "SUI_GraphScene.h"
 
 // MODEL Related Includes
 #include "model_GraphDocument.h"
@@ -207,19 +207,19 @@ void MainWindow::releaseLeftTabbarButton(int index){
 void MainWindow::setupActions(){
 
   KStandardAction::quit ( this,    SLOT ( quit() ),        actionCollection() );
- // GraphScene *gc = _GraphEdit->scene();
+  GraphScene *gc = _graphVisualEditor->scene();
 
- // _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
- // _paletteActions->addAction("pointer_action", new PointerAction(gc, this));  
- // _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
- // _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
- // _paletteActions->addAction("move_node_action", new MoveNodeAction(gc, this));
- // _paletteActions->addAction("single_selection_action", new SingleSelectAction(gc, this));
+  _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
+  _paletteActions->addAction("pointer_action", new PointerAction(gc, this));  
+  _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
+  _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
+  _paletteActions->addAction("move_node_action", new MoveNodeAction(gc, this));
+  _paletteActions->addAction("single_selection_action", new SingleSelectAction(gc, this));
 
-//   _PaletteBar->setActionCollection(_paletteActions);
+   _PaletteBar->setActionCollection(_paletteActions);
 
   // Pointer Action is the first. 
-//  _GraphEdit->scene()->setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
+  gc -> setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
 
 
 }
@@ -229,34 +229,27 @@ void MainWindow::setupSignals(){
   connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
 	   _GraphLayers, SLOT(setGraphDocument(GraphDocument*)));
 
-//  connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
-//	   _GraphEdit,   SLOT(setGraphDocument(GraphDocument*)));
-
   connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
-	   _PaletteBar, SLOT(setGraphDocument(GraphDocument*)));
-  
-  connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
-	   _PaletteBar, SLOT(setGraph(Graph*)));
+	   _graphVisualEditor,   SLOT(setGraphDocument(GraphDocument*)));
 
   connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
 	   this, SLOT(setGraph(Graph*)));
   
- // connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
-//	  _GraphProperties, SLOT(setDataSource(QObject*)));
+	// action here is "single selection action. please, change that to a more intuitive approach.
+  connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
+ 	  _GraphProperties, SLOT(setDataSource(QObject*)));
 
-
- // foreach( QAction *action, _paletteActions->actions() ){
- //     connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
- //     action, SLOT(setGraph(Graph*)));
- // }
+  foreach( QAction *action, _paletteActions->actions() ){
+      connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
+      action, SLOT(setGraph(Graph*)));
+	}
 
 }
 
 void MainWindow::setGraph( Graph *g){
-
-  _PaletteBar -> setGraph(g);
-  // _GraphEdit -> setGraph(g);
-
+  _graphVisualEditor -> setGraph(g);
 }
 
-void MainWindow::executeScript(){}
+void MainWindow::executeScript(){
+
+}

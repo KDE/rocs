@@ -34,9 +34,9 @@ target_link_libraries(Rocs ${KDE4_KDEUI_LIBS}
       ${KDE4_KIO_LIBS}
       ${KDE4_KTEXTEDITOR_LIBS}
       ${QT_QTSCRIPT_LIBRARY}
-			
-			librocsgraphics
+
 			librocsui
+			librocsgraphics
 			librocsmodel
 			librocscore
 )

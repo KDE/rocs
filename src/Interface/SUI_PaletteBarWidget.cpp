@@ -32,7 +32,6 @@
 #include "SUI_PaletteScrollArea.h"
 #include "SUI_PaletteLayout.h"
 #include "SUI_Separator.h"
-// #include "SUI_GraphScene.h"
 
 #include "action_AbstractAction.h"
 
@@ -106,15 +105,4 @@ void PaletteBarWidget::showButtonTextToggled ( bool b ){
   }
   _layout->setOneLine ( b );
   _scrollArea->setMinimumWidth ( _widget->minimumSizeHint().width() );
-}
-
-
-void PaletteBarWidget::setGraph( Graph* ){
-  kDebug() << "Got the Graph but did nothing with it.";
-  return;
-}
-
-void PaletteBarWidget::setGraphDocument( GraphDocument *){
-  kDebug() << "Got the Graph Document but did nothing with it.";
-  return;
 }
