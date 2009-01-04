@@ -28,7 +28,8 @@
 #include <kxmlguifactory.h>
 #include <kmultitabbar.h>
 #include <QStackedWidget>
-#include <QPixmap>
+#include <KIcon>
+#include <QSplitter>
 #include <KDebug>
 
 // UI RELATED INCLUDES
@@ -58,7 +59,7 @@
 
 MainWindow::MainWindow() : 
 	KXmlGuiWindow(),
-	_tabId(0)
+	_leftTabId(0)
 	{
   _documentModel = 0;
   _graphLayersModel = 0;
@@ -76,20 +77,33 @@ void MainWindow::setupModels(){
   _graphLayersModel = new GraphLayersModel( 0 );
 }
 void MainWindow::setupWidgets(){
-	QWidget *leftPanel = setupLeftPanel();
-	setCentralWidget(leftPanel);
+	QSplitter *cSplitter = new QSplitter(this);
+	QWidget *rightPanel = setupRightPanel();
+	QWidget *leftPanel  = setupLeftPanel();
+	cSplitter->addWidget(leftPanel);
+	cSplitter->addWidget(rightPanel);
+	setCentralWidget(cSplitter);
+}
+
+QWidget* MainWindow::setupRightPanel(){
+	QWidget *toolBox = new QWidget( this );
+	_bottomTabBar = new KMultiTabBar(KMultiTabBar::Bottom, toolBox);
+	_bottomTabBar->setStyle(KMultiTabBar::KDEV3ICON);
+	_bottomTabBar->appendTab(KIcon("editor").pixmap(16), 0, "Editor");
+	_bottomTabBar->appendTab(KIcon("debugger").pixmap(16), 1, "Debugger");
+	return toolBox;
 }
 
 QWidget* MainWindow::setupLeftPanel(){
 	//! constructing the Default Looking LeftSide menu.
 	QWidget *toolBox = new QWidget( this );
-	toolsTab = new KMultiTabBar(KMultiTabBar::Left, toolBox);
-	toolsTab->setStyle(KMultiTabBar::KDEV3ICON);
+	_leftTabBar = new KMultiTabBar(KMultiTabBar::Left, toolBox);
+	_leftTabBar->setStyle(KMultiTabBar::KDEV3ICON);
 
-	toolsTab->appendTab(QPixmap(), 0, "Files");
-	toolsTab->appendTab(QPixmap(), 1, "Tools");
-	toolsTab->appendTab(QPixmap(), 2, "Properties");
-	toolsTab->appendTab(QPixmap(), 3, "Layers");
+	_leftTabBar->appendTab(KIcon("files").pixmap(16), 0, "Files");
+	_leftTabBar->appendTab(KIcon("tools").pixmap(16), 1, "Tools");
+	_leftTabBar->appendTab(KIcon("properties").pixmap(16), 2, "Properties");
+	_leftTabBar->appendTab(KIcon("layers").pixmap(16), 3, "Layers");
 
   _OpenedFiles     = new OpenedFilesWidget ( _documentModel, toolBox );
   _PaletteBar      = new PaletteBarWidget  ( toolBox );
@@ -103,24 +117,24 @@ QWidget* MainWindow::setupLeftPanel(){
 	toolsStack->addWidget( _GraphLayers );
 
 	QHBoxLayout  *toolBoxLayout = new QHBoxLayout( toolBox );
-	toolBoxLayout->addWidget(toolsTab);
+	toolBoxLayout->addWidget(_leftTabBar);
 	toolBoxLayout->addWidget(toolsStack);
 	toolBox->setLayout(toolBoxLayout);
 
 	for(int i = 0; i < 4; ++i){
-		connect(toolsTab->tab(i), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
-		connect(toolsTab->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseLeftTabbarButton(int)));
+		connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
+		connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseLeftTabbarButton(int)));
 	}
-	toolsTab->setTab(0, true);
+	_leftTabBar->setTab(0, true);
 	return toolBox;
 }
 void MainWindow::releaseLeftTabbarButton(int index){
-	if ( _tabId == index ){
-		toolsTab->setTab( _tabId, true );
+	if ( _leftTabId == index ){
+		_leftTabBar->setTab( _leftTabId, true );
 		return;
 	}
-	toolsTab->setTab( _tabId, false );
-	_tabId = index;
+	_leftTabBar->setTab( _leftTabId, false );
+	_leftTabId = index;
 }
 
 void MainWindow::setupActions(){

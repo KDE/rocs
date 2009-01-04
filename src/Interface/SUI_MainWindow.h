@@ -50,23 +50,32 @@ private:
   void setupWidgets(); // Setup all the widgets.
   void setupActions(); // Setup all the actions.
   void setupSignals();
-	QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
 
+	QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
+	QWidget* setupRightPanel(); // setup the Right area of the  panel, the GraphicsView, the editors and stuff.
+	
+	// Left Area:
   PaletteBarWidget*  _PaletteBar;   // area where the icons of actions will be.
   OpenedFilesWidget* _OpenedFiles;  // area where the opened files will be
   GraphLayersWidget* _GraphLayers;  // area where the layers of the active graph will appear.
   GraphPropertiesWidget* _GraphProperties; // Area where the nodes and edges will be modified.
+  KMultiTabBar *_leftTabBar; // Tab that will hold the pallete, opened files, graphLayers and Properties.
+	int _leftTabId;
+
+	// Right Area:
   GraphEditWidget* _GraphEdit; // Area where the graph will be editted.
-  QList<GraphDocument*> _documents;
+	KMultiTabBar *_bottomTabBar; // This will hold the Editor and the Debugger.
+  int _rightTabId;
+
+	// Other Bunch of stuff.
+	QList<GraphDocument*> _documents;
   GraphDocumentModel *_documentModel;
   GraphLayersModel   *_graphLayersModel;
   KActionCollection  *_paletteActions;
 
-  KMultiTabBar *toolsTab; // Tab that will hold the pallete, opened files, graphLayers and Properties.
-	int _tabId;
-
 private slots:
 	void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
+
 public slots:
   void setGraph(Graph *g);
 };
