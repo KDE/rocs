@@ -119,6 +119,7 @@ void GraphVisualEditor::setupWidgets(){
 	_graphPropContainer = new QWidget(this);
 	_graphComboBox = new KComboBox(_graphPropContainer);
 	_colorButton = new KColorButton(_graphPropContainer);
+	_colorButton -> setMaximumSize(32,32);
 	layout -> addWidget( _graphComboBox );
 	layout -> addWidget( _colorButton );	
 	_graphPropContainer -> setLayout(layout);

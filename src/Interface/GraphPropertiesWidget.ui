@@ -39,6 +39,12 @@
    </item>
    <item row="2" column="2" >
     <widget class="KPushButton" name="_btnAddProperty" >
+     <property name="minimumSize" >
+      <size>
+       <width>32</width>
+       <height>16</height>
+      </size>
+     </property>
      <property name="text" >
       <string>ok</string>
      </property>
