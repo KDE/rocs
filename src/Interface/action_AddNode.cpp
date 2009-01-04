@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "action_AddNode.h"
-#include "SUI_GraphScene.h"
+#include "SUI_GraphView.h"
 #include "graph.h"
 #include "graphicsitem_Node.h"
 #include "node.h"
@@ -27,8 +27,8 @@
 
 #include <KDebug>
 
-AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent) 
-: AbstractAction(scene, parent){
+AddNodeAction::AddNodeAction(GraphView *view, QObject *parent) 
+: AbstractAction(view, parent){
   setText(i18n ( "Add Node" ));
   setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
   setIcon ( KIcon ( "add-node" ) );
@@ -49,5 +49,5 @@ void AddNodeAction::executePress(QPointF pos){
   n -> setProperty("y", pos.y() );
   
   NodeItem *nodeitem = new NodeItem( n );
-  _graphScene->addItem(nodeitem); 
+  _graphView->addItem(nodeitem); 
 }

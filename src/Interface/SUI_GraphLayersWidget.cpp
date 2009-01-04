@@ -20,7 +20,6 @@
 */
 
 #include "SUI_GraphLayersWidget.h"
-#include "SUI_MainWindow.h"
 
 #include "graph.h"
 #include "graphDocument.h"

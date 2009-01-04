@@ -19,17 +19,17 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "action_AbstractAction.h"
-#include "SUI_GraphScene.h"
+#include "SUI_GraphView.h"
 #include "graph.h"
 #include "graphDocument.h"
 #include <QPointF>
 #include <KDebug>
 
-AbstractAction::AbstractAction(GraphScene *scene, QObject *parent) : KAction(parent)
+AbstractAction::AbstractAction(GraphView *view, QObject *parent) : KAction(parent)
 {
   _graphDocument = 0;
   _graph = 0;
-  _graphScene = scene;
+  _graphView = view;
   setCheckable ( true );
   setChecked ( false );
   connect(this, SIGNAL(triggered()), this, SLOT( sendExecuteBit() ));
@@ -48,7 +48,7 @@ void AbstractAction::setGraph( Graph *graph){
 
 void AbstractAction::sendExecuteBit()
 {
-  _graphScene -> setAction ( this );
+  _graphView -> setAction ( this );
 }
 
 void AbstractAction::executePress(QPointF){ return; }

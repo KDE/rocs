@@ -20,7 +20,6 @@
 */
 
 #include "SUI_OpenedFilesWidget.h"
-#include "SUI_MainWindow.h"
 
 #include "model_GraphDocument.h"
 #include <KDebug>

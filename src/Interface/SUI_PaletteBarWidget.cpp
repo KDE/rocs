@@ -29,12 +29,10 @@
 #include <KIcon>
 #include <KDebug>
 
-
-#include "SUI_MainWindow.h"
 #include "SUI_PaletteScrollArea.h"
 #include "SUI_PaletteLayout.h"
 #include "SUI_Separator.h"
-#include "SUI_GraphScene.h"
+// #include "SUI_GraphScene.h"
 
 #include "action_AbstractAction.h"
 

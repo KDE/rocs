@@ -37,8 +37,8 @@
 #include "SUI_GraphLayersWidget.h"
 #include "SUI_OpenedFilesWidget.h"
 #include "SUI_GraphPropertiesWidget.h"
-#include "SUI_GraphEditWidget.h"
-#include "SUI_GraphScene.h"
+#include "SUI_GraphVisualEditor.h"
+// #include "SUI_GraphScene.h"
 
 // MODEL Related Includes
 #include "model_GraphDocument.h"
@@ -81,7 +81,6 @@ void MainWindow::setupWidgets(){
 }
 
 QWidget* MainWindow::setupLeftPanel(){
-
 	//! constructing the Default Looking LeftSide menu.
 	QWidget *toolBox = new QWidget( this );
 	toolsTab = new KMultiTabBar(KMultiTabBar::Left, toolBox);
@@ -175,6 +174,6 @@ void MainWindow::setupSignals(){
 void MainWindow::setGraph( Graph *g){
 
   _PaletteBar -> setGraph(g);
-  _GraphEdit -> setGraph(g);
+  // _GraphEdit -> setGraph(g);
 
 }

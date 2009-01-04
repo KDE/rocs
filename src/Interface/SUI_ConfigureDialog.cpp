@@ -19,6 +19,5 @@
 */
 
 #include "SUI_ConfigureDialog.h"
-#include "SUI_MainWindow.h"
 
 ConfigureDialog::ConfigureDialog ( MainWindow *parent ) : QWidget ( parent ) {}

@@ -24,7 +24,7 @@
 #include <KAction>
 #include <QObject>
 
-class GraphScene;
+class GraphView;
 class Graph;
 class GraphDocument;
 
@@ -44,7 +44,7 @@ public:
     \param scene the GraphicsScene that this action will interact.
     \param parent the MainWindow
   */
-  AbstractAction(GraphScene *scene, QObject *parent);
+  AbstractAction(GraphView *view, QObject *parent);
 
   /*! Atualize the Graph Document that this action will work on 
     \param graphDocument the pointer to the active  GraphDocument
@@ -70,7 +70,7 @@ public slots:
 protected:
   GraphDocument *_graphDocument;  /*! pointer to the active graph document */
   Graph *_graph;	/*! pointer to the active graph */
-  GraphScene *_graphScene;	/*! pointer to the GraphicsScene with the drawing */
+  GraphView *_graphView;	/*! pointer to the GraphicsScene with the drawing */
 
 };
 

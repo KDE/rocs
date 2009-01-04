@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "action_MoveNode.h"
-#include "SUI_GraphScene.h"
+#include "SUI_GraphView.h"
 #include "graph.h"
 #include "node.h"
 #include "graphicsitem_Node.h"
@@ -28,8 +28,8 @@
 #include <KDebug>
 #include "settings.h"
 
-MoveNodeAction::MoveNodeAction(GraphScene *scene, QObject *parent) 
-: AbstractAction(scene, parent){
+MoveNodeAction::MoveNodeAction(GraphView *view, QObject *parent) 
+: AbstractAction(view, parent){
   setText(i18n ( "Move Node" ));
   setToolTip ( i18n ( "Moves a node around the drawing area." ) );
   setIcon ( KIcon ( "move-node" ) );
@@ -42,7 +42,7 @@ MoveNodeAction::~MoveNodeAction(){
 
 void MoveNodeAction::executePress(QPointF pos){
   if (_graph == 0){ return; }
-  _movableNode = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+  _movableNode = qgraphicsitem_cast<NodeItem*>(_graphView->itemAt(pos));
 }
 
 void MoveNodeAction::executeMove(QPointF pos){

@@ -19,7 +19,6 @@
 */
 
 #include "SUI_GraphPropertiesWidget.h"
-#include "SUI_MainWindow.h"
 #include "model_GraphProperties.h"
 #include <KDebug>
 
