@@ -48,8 +48,6 @@ PaletteBarWidget::PaletteBarWidget ( QWidget* parent )
   : QWidget (parent){
   setObjectName ( "palleteBar" );
    
-  
-
   _scrollArea = new PaletteScrollArea ( this );
   _scrollArea->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
   _scrollArea->setFrameShape ( QFrame::NoFrame );

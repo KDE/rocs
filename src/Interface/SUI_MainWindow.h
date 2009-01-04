@@ -30,13 +30,20 @@ class PaletteBarWidget;
 class OpenedFilesWidget;
 class GraphLayersWidget;
 class GraphPropertiesWidget;
-class GraphEditWidget;
+class GraphVisualEditor;
 class GraphDocumentModel;
 class GraphLayersModel;
 class KActionCollection;
 class GraphDocument;
 class Graph;
 class KMultiTabBar;
+class KTextBrowser;
+class QSplitter;
+
+namespace KTextEditor{
+	class Document;
+	class View;
+}
 
 class MainWindow : public KXmlGuiWindow{
 Q_OBJECT
@@ -44,7 +51,7 @@ Q_OBJECT
 public:
   /*! defalt constructor */
   MainWindow();
-  
+  ~MainWindow();
 private:
   void setupModels();  // setup all the models to be used on the views.
   void setupWidgets(); // Setup all the widgets.
@@ -63,8 +70,10 @@ private:
 	int _leftTabId;
 
 	// Right Area:
-  GraphEditWidget* _GraphEdit; // Area where the graph will be editted.
+  GraphVisualEditor* _graphVisualEditor; // Area where the graph will be editted.
 	KMultiTabBar *_bottomTabBar; // This will hold the Editor and the Debugger.
+	KTextEditor::View *_docView;
+	KTextBrowser *_txtDebug;
   int _rightTabId;
 
 	// Other Bunch of stuff.
@@ -73,9 +82,13 @@ private:
   GraphLayersModel   *_graphLayersModel;
   KActionCollection  *_paletteActions;
 
+	KTextEditor::Document *_scriptDoc;
+
+	QSplitter *_vSplitter;
+	QSplitter *_hSplitter;
 private slots:
 	void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
-
+	void executeScript();
 public slots:
   void setGraph(Graph *g);
 };

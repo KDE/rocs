@@ -28,7 +28,7 @@ class Node;
 class Edge;
 class KComboBox;
 class QGraphicsScene;
-class GraphView;
+class GraphScene;
 class KColorButton;
 
 class GraphVisualEditor : public QWidget{
@@ -56,7 +56,7 @@ private:
 	from the screen and releases it from the evil hands of GraphEditWidget.*/
 	void releaseGraphDocument();
 
-	GraphView *_view;
+	GraphScene *_scene;
 	GraphDocument *_graphDocument;
 	Graph *_graph;
 

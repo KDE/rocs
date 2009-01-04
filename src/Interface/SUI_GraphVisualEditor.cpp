@@ -29,7 +29,7 @@
 #include "node.h"
 #include "edge.h"
 
-#include "SUI_GraphView.h"
+#include "SUI_GraphScene.h"
 
 #include <QVBoxLayout>
 #include <QPointF>
@@ -63,7 +63,7 @@ void GraphVisualEditor::setupWidgets(){
 	QHBoxLayout *layout = 0;
 
 	layout  = new QHBoxLayout();
-	
+	layout->setContentsMargins(0,0,0,0);
 	//!################## CODE TO GENERATE THE ALLIGN TOOLBOX ##########################
 
 	_spacingPropContainer = new QWidget(this);
@@ -114,6 +114,8 @@ void GraphVisualEditor::setupWidgets(){
 
 	//!############################### CODE TO GENERATE THE GRAPH PROPERTIES TOOLBOX ####################################
 	layout = new QHBoxLayout();
+	layout->setSpacing(0);
+	layout->setContentsMargins(0,0,0,0);
 	_graphPropContainer = new QWidget(this);
 	_graphComboBox = new KComboBox(_graphPropContainer);
 	_colorButton = new KColorButton(_graphPropContainer);
@@ -123,11 +125,13 @@ void GraphVisualEditor::setupWidgets(){
 
 	//!############################### CODE TO GENERATE THE EDGE PROPERTIES TOOLBOX #####################################
 	layout = new QHBoxLayout();
+	layout->setContentsMargins(0,0,0,0);
 	_edgePropContainer = new QWidget(this);
 	_edgePropContainer -> setLayout(layout);
 
 	//!################################ CODE TO GENERATE THE NODE PROPERTIES TOOLBOX ####################################
 	layout = new QHBoxLayout();
+	layout->setContentsMargins(0,0,0,0);
 	_nodePropContainer = new QWidget(this);
 
 	tmpAction = new KAction(KIcon("set-start"), "Set this node as 'start_node' on the engine.", this);
@@ -148,17 +152,22 @@ void GraphVisualEditor::setupWidgets(){
 	//!############################### finishes the Toolbar.
 	layout = new QHBoxLayout();
 	_toolbar = new QWidget(this);
+	layout->setSpacing(0);
+layout->setContentsMargins(0,0,0,0);
 	layout->addWidget( _graphPropContainer );
 	layout->addWidget( _nodePropContainer );
 	layout->addWidget( _edgePropContainer );
 	layout->addWidget( _spacingPropContainer );
+	layout->addStretch();
+	
 	_toolbar->setLayout(layout);
 
 	//!############################## Adds the GraphView on the screen.
 	QVBoxLayout *vLayout = new QVBoxLayout();
-	_view = new GraphView();
+	vLayout->setContentsMargins(0,0,0,0);
+	_scene = new GraphScene();
 	QGraphicsView *graphicsView = new QGraphicsView();
-	graphicsView->setScene(_view);
+	graphicsView->setScene(_scene);
 	vLayout -> addWidget( _toolbar );
 	vLayout -> addWidget ( graphicsView );
 	setLayout( vLayout );
@@ -176,13 +185,13 @@ void GraphVisualEditor::setGraphDocument( GraphDocument *gd){
   }
   
   _graphDocument = gd;
-  _view->setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
+  _scene->setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
 }
 
 void GraphVisualEditor::releaseGraphDocument(){
-  QList<QGraphicsItem*> itemList = _view->items();
+  QList<QGraphicsItem*> itemList = _scene->items();
   foreach(QGraphicsItem *i, itemList){
-    _view->removeItem(i);
+    _scene->removeItem(i);
     delete i;
   }
   int size = _graphDocument->size();
@@ -196,11 +205,11 @@ void GraphVisualEditor::drawGraphOnScene( Graph *g){
   QList< Edge*> edges = g->edges();
 
   foreach( Node* node, nodes){
-    _view->createNode(node);
+    _scene->createNode(node);
   }
 
   foreach( Edge* edge, edges){
-    _view->createEdge(edge);
+    _scene->createEdge(edge);
   }
 }
 
