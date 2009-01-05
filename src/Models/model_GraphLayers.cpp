@@ -85,9 +85,9 @@ bool GraphLayersModel::insertRows(int position, int type, const QModelIndex&){
   if ( _document == 0) return false;
 
   beginInsertRows(QModelIndex(), position, position);
-
+	QString name = "Untitled";
+	name += QString::number(rowCount());
   Graph* g =  _document->addGraph("Untitled");
-  g->setDirected( (type == 0)? false : true );
   endInsertRows();
   return true;
 }

@@ -19,7 +19,7 @@
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 
-#include "SUI_GraphLayersWidget.h"
+#include "SUI_GraphToolBoxWidget.h"
 
 #include "graph.h"
 #include "graphDocument.h"
@@ -27,7 +27,7 @@
 
 #include <KDebug>
 
-GraphLayersWidget::GraphLayersWidget(QWidget* parent)
+GraphToolBoxWidget::GraphToolBoxWidget(QWidget* parent)
 : QWidget(parent) 
 {
 	_document = 0;
@@ -35,30 +35,26 @@ GraphLayersWidget::GraphLayersWidget(QWidget* parent)
 
 	setupUi(this);
 	_btnNewGraph ->setEnabled(false);
-	connect(_graphLayersListView, SIGNAL(clicked(const QModelIndex&)),
+	connect(_comboGraphLayers, SIGNAL(clicked(const QModelIndex&)),
 	 this, SLOT(setActiveGraph(const QModelIndex&)));
 }
 
-void GraphLayersWidget::on__btnNewGraph_clicked()
+void GraphToolBoxWidget::on__btnNewGraph_clicked()
 {
-	_layerModel->insertRows(_layerModel->rowCount(), GraphDocument::Simple);
+	_layerModel->insertRow(_layerModel->rowCount());
 }
 
-void GraphLayersWidget::on__btnNewOrientedGraph_clicked(){
-	_layerModel->insertRows(_layerModel->rowCount(), GraphDocument::Oriented);
-}
-
-void GraphLayersWidget::setGraphDocument( GraphDocument *document)
+void GraphToolBoxWidget::setGraphDocument( GraphDocument *document)
 {
 	kDebug() << "Got The Graph";
 	if ( _layerModel != 0) delete _layerModel;
 	_document = document;
 	_layerModel = new GraphLayersModel( document );
-	_graphLayersListView->setModel( _layerModel );
+	_comboGraphLayers->setModel( _layerModel );
 	_btnNewGraph -> setEnabled(true);
 }
 
-void GraphLayersWidget::setActiveGraph(const QModelIndex& modelindex){
+void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex){
 	Graph *g = _layerModel -> at(modelindex);
 	if (g == 0){ 
 			return;
@@ -66,5 +62,4 @@ void GraphLayersWidget::setActiveGraph(const QModelIndex& modelindex){
 	
 	emit activeGraphChanged( g );
 	kDebug() << "Send the Graph at position " << modelindex.row();
-	
 }

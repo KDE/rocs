@@ -19,13 +19,13 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef SUI_GRAPH_LAYERS_WIDGET_H
-#define SUI_GRAPH_LAYERS_WIDGET_H
+#ifndef SUI_GRAPHTOOLBOXWIDGET_H
+#define SUI_GRAPHTOOLBOXWIDGET_H
 
 #include <QWidget>
 #include <QListView>
 
-#include "ui_GraphLayersWidget.h"
+#include "ui_GraphToolBox.h"
 
 class GraphDocument;
 class Graph;
@@ -37,11 +37,11 @@ class GraphLayersModel;
   \brief The Graph-Layer widget.
   This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
 */
-class GraphLayersWidget : public QWidget, public Ui::GraphLayersWidget{
+class GraphToolBoxWidget : public QWidget, public Ui::GraphToolBoxWidget{
   Q_OBJECT
   public:
     /*! public constructor */
-    explicit GraphLayersWidget(QWidget* parent = 0);
+    explicit GraphToolBoxWidget(QWidget* parent = 0);
 
   public slots:
     /*! send the GraphDocument to the list of graphs. 
@@ -56,10 +56,6 @@ class GraphLayersWidget : public QWidget, public Ui::GraphLayersWidget{
     /* executed when clicking the btnNewGraph, 
     this method creates a new graph. */
     void on__btnNewGraph_clicked();
-
-    /* executed when clicking the btnNewOrientedGraph 
-    this method creaates a new OrientedEdge Graph */
-    void on__btnNewOrientedGraph_clicked();
 
   signals:
     /* Signal emmited when the active graph changes */

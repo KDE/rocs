@@ -40,7 +40,7 @@
 // UI RELATED INCLUDES
 
 #include "SUI_PaletteBarWidget.h" 
-#include "SUI_GraphLayersWidget.h"
+// 
 #include "SUI_OpenedFilesWidget.h"
 #include "SUI_GraphPropertiesWidget.h"
 #include "SUI_GraphVisualEditor.h"
@@ -101,7 +101,6 @@ void MainWindow::setupWidgets(){
 	_leftTabBar->appendTab(KIcon("document-open").pixmap(16), 0, "Files");
 	_leftTabBar->appendTab(KIcon("applications-system").pixmap(16), 1, "Tools");
 	_leftTabBar->appendTab(KIcon("document-properties").pixmap(16), 2, "Properties");
-	_leftTabBar->appendTab(KIcon("drive-harddisk").pixmap(16), 3, "Layers");
 
 	QWidget *centralWidget = new QWidget(this);
 	QHBoxLayout *l1 = new QHBoxLayout();
@@ -113,7 +112,6 @@ void MainWindow::setupWidgets(){
 	_hSplitter->addWidget(leftPanel);
 	_hSplitter->addWidget(rightPanel);
 	_hSplitter->setSizes( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight());
-	kDebug() << "Horizontal Values" << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight();
 	l1->addWidget( _leftTabBar);
 	l1->addWidget( _hSplitter );
 
@@ -159,7 +157,6 @@ QWidget* MainWindow::setupRightPanel(){
 	_vSplitter->addWidget(toolsStack);
 	
 	_vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
-	kDebug() << "Vertical Values"  << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom();
 	QWidget *widget = new QWidget( this );
 	QVBoxLayout *l = new QVBoxLayout();
 	l->addWidget(_vSplitter);
@@ -175,20 +172,19 @@ QWidget* MainWindow::setupLeftPanel(){
   _OpenedFiles     = new OpenedFilesWidget ( _documentModel, toolBox );
   _PaletteBar      = new PaletteBarWidget  ( toolBox );
   _GraphProperties = new GraphPropertiesWidget( toolBox ); 
-	_GraphLayers     = new GraphLayersWidget ( toolBox );
-	
+
 	QStackedWidget *toolsStack = new QStackedWidget();
-	
+
 	toolsStack->addWidget( _OpenedFiles );
 	toolsStack->addWidget( _PaletteBar );
 	toolsStack->addWidget( _GraphProperties );
-	toolsStack->addWidget( _GraphLayers );
+
 
 	QHBoxLayout  *toolBoxLayout = new QHBoxLayout( toolBox );
 	toolBoxLayout->addWidget(toolsStack);
 	toolBox->setLayout(toolBoxLayout);
 
-	for(int i = 0; i < 4; ++i){
+	for(int i = 0; i < 3; ++i){
 		connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
 		connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseLeftTabbarButton(int)));
 	}
@@ -221,28 +217,21 @@ void MainWindow::setupActions(){
   // Pointer Action is the first. 
   gc -> setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
 
-
 }
 
 void MainWindow::setupSignals(){
 
   connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
-	   _GraphLayers, SLOT(setGraphDocument(GraphDocument*)));
-
-  connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
 	   _graphVisualEditor,   SLOT(setGraphDocument(GraphDocument*)));
 
-  connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
-	   this, SLOT(setGraph(Graph*)));
-  
 	// action here is "single selection action. please, change that to a more intuitive approach.
   connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
  	  _GraphProperties, SLOT(setDataSource(QObject*)));
 
-  foreach( QAction *action, _paletteActions->actions() ){
-      connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
-      action, SLOT(setGraph(Graph*)));
-	}
+ // foreach( QAction *action, _paletteActions->actions() ){
+ //     connect( _GraphLayers, SIGNAL(activeGraphChanged(Graph*)),
+ //     action, SLOT(setGraph(Graph*)));
+//	}
 
 }
 

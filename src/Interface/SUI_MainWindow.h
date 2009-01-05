@@ -28,11 +28,11 @@
 /* WORKING */
 class PaletteBarWidget;
 class OpenedFilesWidget;
-class GraphLayersWidget;
+
 class GraphPropertiesWidget;
 class GraphVisualEditor;
-class GraphDocumentModel;
 class GraphLayersModel;
+class GraphDocumentModel;
 class KActionCollection;
 class GraphDocument;
 class Graph;
@@ -64,7 +64,6 @@ private:
 	// Left Area:
   PaletteBarWidget*  _PaletteBar;   // area where the icons of actions will be.
   OpenedFilesWidget* _OpenedFiles;  // area where the opened files will be
-  GraphLayersWidget* _GraphLayers;  // area where the layers of the active graph will appear.
   GraphPropertiesWidget* _GraphProperties; // Area where the nodes and edges will be modified.
   KMultiTabBar *_leftTabBar; // Tab that will hold the pallete, opened files, graphLayers and Properties.
 	int _leftTabId;
@@ -84,11 +83,14 @@ private:
 
 	KTextEditor::Document *_scriptDoc;
 
+	// Needed to reestore the size of the splitter after closing / opening the UI.
 	QSplitter *_vSplitter;
 	QSplitter *_hSplitter;
+
 private slots:
 	void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
 	void executeScript();
+
 public slots:
   void setGraph(Graph *g);
 };

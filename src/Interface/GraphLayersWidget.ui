@@ -5,15 +5,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>290</width>
+    <width>316</width>
     <height>534</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="0" column="0" colspan="3" >
-    <widget class="QListView" name="_graphLayersListView" />
-   </item>
-   <item row="1" column="0" >
+  <layout class="QHBoxLayout" name="horizontalLayout" >
+   <item>
     <widget class="QToolButton" name="_btnNewGraph" >
      <property name="toolTip" >
       <string>Creates a simple Graph, without multiple edges and without an edge to a note from the same node.</string>
@@ -26,20 +23,23 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1" >
-    <widget class="QToolButton" name="_btnNewOrientedGraph" >
-     <property name="toolTip" >
-      <string>Creates a Multi Edge Oriented Graph</string>
-     </property>
+   <item>
+    <widget class="KComboBox" name="_comboGraphLayers" />
+   </item>
+   <item>
+    <widget class="KPushButton" name="_btnSetOriented" >
      <property name="text" >
-      <string>...</string>
+      <string>Oriented</string>
      </property>
-     <property name="autoRaise" >
+     <property name="checkable" >
       <bool>true</bool>
+     </property>
+     <property name="checked" >
+      <bool>false</bool>
      </property>
     </widget>
    </item>
-   <item row="1" column="2" >
+   <item>
     <spacer name="horizontalSpacer" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
@@ -54,6 +54,18 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
