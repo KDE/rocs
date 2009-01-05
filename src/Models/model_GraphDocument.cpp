@@ -26,6 +26,7 @@
 
 GraphDocumentModel::GraphDocumentModel(QList< GraphDocument*>* documents, QObject *parent)
   : QAbstractListModel( parent ), _documents( (*documents) ){
+	insertRow(0);
 }
 
 int GraphDocumentModel::rowCount(const QModelIndex&) const{

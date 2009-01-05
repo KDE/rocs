@@ -31,6 +31,8 @@ OpenedFilesWidget::OpenedFilesWidget(GraphDocumentModel *model, QWidget* parent)
 	_openedFilesListView->setModel(model);
 	connect(_openedFilesListView, SIGNAL(clicked(const QModelIndex&)),
 	this, SLOT(setActiveDocument(const QModelIndex&)));
+	 GraphDocument *g = _documentModel -> at( _documentModel->index(0,0) );
+	 emit activeDocumentChanged( g );
 }
 
 void OpenedFilesWidget::on__btnNewFile_clicked(){
