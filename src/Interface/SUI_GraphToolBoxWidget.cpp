@@ -54,6 +54,10 @@ void GraphToolBoxWidget::setGraphDocument( GraphDocument *document)
 	_btnNewGraph -> setEnabled(true);
 }
 
+void GraphToolBoxWidget::on__comboGraphLayers_activated(int i){
+	setActiveGraph( _layerModel->index(i,0) );
+}
+
 void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex){
 	Graph *g = _layerModel -> at(modelindex);
 	if (g == 0){ 

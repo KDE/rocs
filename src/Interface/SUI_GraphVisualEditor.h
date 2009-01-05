@@ -21,6 +21,7 @@
 #define SUI_GRAPHVISUALEDITOR_H
 
 #include <QWidget>
+#include <QString>
 
 class GraphDocument;
 class Graph;
@@ -30,6 +31,8 @@ class KComboBox;
 class QGraphicsScene;
 class GraphScene;
 class KColorButton;
+class GraphToolBoxWidget;
+class QToolButton;
 
 class GraphVisualEditor : public QWidget{
 Q_OBJECT
@@ -58,17 +61,18 @@ private:
 	from the screen and releases it from the evil hands of GraphEditWidget.*/
 	void releaseGraphDocument();
 
+	QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent);
+
 	GraphScene *_scene;
 	GraphDocument *_graphDocument;
 	Graph *_graph;
 
 	QWidget *_spacingPropContainer;
-	QWidget *_graphPropContainer;
 	QWidget *_edgePropContainer;
 	QWidget *_nodePropContainer;
 	QWidget *_toolbar;
-	KComboBox *_graphComboBox;
-	KColorButton *_colorButton;
+	
+	GraphToolBoxWidget *_graphToolBox;
 
 	qreal _topNode;
 	qreal _bottomNode;

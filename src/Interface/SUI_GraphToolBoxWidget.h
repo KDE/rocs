@@ -57,6 +57,8 @@ class GraphToolBoxWidget : public QWidget, public Ui::GraphToolBoxWidget{
     this method creates a new graph. */
     void on__btnNewGraph_clicked();
 
+		void on__comboGraphLayers_activated(int i);
+
   signals:
     /* Signal emmited when the active graph changes */
     void activeGraphChanged(Graph *graph);

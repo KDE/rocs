@@ -19,6 +19,7 @@
 */
 
 #include "SUI_GraphVisualEditor.h"
+#include "SUI_GraphToolBoxWidget.h"
 
 #include "graphicsitem_Node.h"
 #include "graphicsitem_Edge.h"
@@ -58,8 +59,7 @@ GraphVisualEditor::GraphVisualEditor(QWidget *parent)
 }
 
 void GraphVisualEditor::setupWidgets(){
-	QToolButton *tmpButton = 0;
-	KAction *tmpAction = 0;
+
 	QHBoxLayout *layout = 0;
 
 	layout  = new QHBoxLayout();
@@ -68,62 +68,19 @@ void GraphVisualEditor::setupWidgets(){
 
 	_spacingPropContainer = new QWidget(this);
 
-	tmpAction = new KAction(KIcon("allign-horizontal-bottom"), "Allign nodes horizontally on the base", this);
-	connect( tmpAction, SIGNAL(triggered()), this, SLOT(alignHBottom()));
-	tmpButton = new QToolButton(_spacingPropContainer);
-	tmpButton -> setDefaultAction ( tmpAction );
-	tmpButton -> setAutoRaise( true );
-	layout -> addWidget(tmpButton);
-
-	tmpAction = new KAction(KIcon("allign-horizontal-middle"), "Allign nodes horizontally on the middle", this);
-	connect( tmpAction, SIGNAL(triggered()), this, SLOT(alignHMiddle()));
-	tmpButton = new QToolButton(_spacingPropContainer);
-	tmpButton -> setDefaultAction ( tmpAction );
-	tmpButton -> setAutoRaise( true );
-	layout -> addWidget(tmpButton);
-
-	tmpAction = new KAction(KIcon("allign-horizontal-top"), "Allign nodes horizontally on the top", this);
-	connect( tmpAction, SIGNAL(triggered()), this, SLOT(alignHTop()));
-	tmpButton = new QToolButton(_spacingPropContainer);
-	tmpButton -> setDefaultAction ( tmpAction );
-	tmpButton -> setAutoRaise( true );
-	layout -> addWidget(tmpButton);
-
-	tmpAction = new KAction(KIcon("allign-vertical-left"), "Allign nodes vertically on the left", this);
-	connect( tmpAction, SIGNAL(triggered()), this, SLOT(alignVLeft()));
-	tmpButton = new QToolButton(_spacingPropContainer);
-	tmpButton -> setDefaultAction ( tmpAction );
-	tmpButton -> setAutoRaise( true );
-	layout -> addWidget(tmpButton);
-
-	tmpAction = new KAction(KIcon("allign-vertical-middle"), "Allign nodes vertically on the middle", this);
-	connect( tmpAction, SIGNAL(triggered()), this, SLOT(alignVMiddle()));
-	tmpButton = new QToolButton(_spacingPropContainer);
-	tmpButton -> setDefaultAction ( tmpAction );
-	tmpButton -> setAutoRaise( true );
-	layout -> addWidget(tmpButton);
-
-	tmpAction = new KAction(KIcon("allign-vertical-right"), "Allign nodes vertically on the right", this);
-	connect( tmpAction, SIGNAL(triggered()), this, SLOT(alignVRight()));
-	tmpButton = new QToolButton(_spacingPropContainer);
-	tmpButton -> setDefaultAction ( tmpAction );
-	tmpButton -> setAutoRaise( true );
-	layout -> addWidget(tmpButton);
+	layout->addWidget(setupToolButton("allign-horizontal-bottom", "Allign nodes horizontally on the base", "alignHBottom()",_spacingPropContainer ));
+	layout->addWidget(setupToolButton("allign-horizontal-middle", "Allign nodes horizontally on the middle", "alignHMiddle()",_spacingPropContainer));
+	layout->addWidget(setupToolButton("allign-horizontal-top", "Allign nodes horizontally on the top", "alignHTop()",_spacingPropContainer));
+	layout->addWidget(setupToolButton("allign-vertical-left", "Allign nodes vertically on the left", "alignVLeft()",_spacingPropContainer ));
+	layout->addWidget(setupToolButton("allign-horizontal-middle", "Allign nodes vertically on the middle", "alignVMiddle()",_spacingPropContainer));
+	layout->addWidget(setupToolButton("allign-horizontal-right", "Allign nodes vertically on the right", "alignVRight()",_spacingPropContainer));
 
 	_spacingPropContainer->setLayout(layout);
 
 	//!############################### CODE TO GENERATE THE GRAPH PROPERTIES TOOLBOX ####################################
-	layout = new QHBoxLayout();
-	layout->setSpacing(0);
-	layout->setContentsMargins(0,0,0,0);
-	_graphPropContainer = new QWidget(this);
-	_graphComboBox = new KComboBox(_graphPropContainer);
-	_colorButton = new KColorButton(_graphPropContainer);
-	_colorButton -> setMaximumSize(32,32);
-	layout -> addWidget( _graphComboBox );
-	layout -> addWidget( _colorButton );	
-	_graphPropContainer -> setLayout(layout);
 
+	_graphToolBox = new GraphToolBoxWidget(this);
+	
 	//!############################### CODE TO GENERATE THE EDGE PROPERTIES TOOLBOX #####################################
 	layout = new QHBoxLayout();
 	layout->setContentsMargins(0,0,0,0);
@@ -135,19 +92,9 @@ void GraphVisualEditor::setupWidgets(){
 	layout->setContentsMargins(0,0,0,0);
 	_nodePropContainer = new QWidget(this);
 
-	tmpAction = new KAction(KIcon("set-start"), "Set this node as 'start_node' on the engine.", this);
-	connect( tmpAction, SIGNAL(triggered()), this, SLOT(setStartNode()));
-	tmpButton = new QToolButton(_nodePropContainer);
-	tmpButton -> setDefaultAction ( tmpAction );
-	tmpButton -> setAutoRaise( true );
-	layout -> addWidget(tmpButton);
+	layout->addWidget(setupToolButton("set-start", "Set this node as 'start_node' on the engine.", "setStartNode()",_nodePropContainer));
+	layout->addWidget(setupToolButton("set-end","Set this node as 'end_node' on the engine. if there's more than one end node, the 'end_node' is an array","setEndNode()",_nodePropContainer));
 
-	tmpAction = new KAction(KIcon("set-end"), "Set this node as 'end_node' on the engine. if there's more than one end node, the 'end_node' is an array", this);
-	connect( tmpAction, SIGNAL(triggered()), this, SLOT(setEndNode()));
-	tmpButton = new QToolButton(_nodePropContainer);
-	tmpButton -> setDefaultAction ( tmpAction );
-	tmpButton -> setAutoRaise( true );
-	layout -> addWidget(tmpButton);
 	_nodePropContainer -> setLayout(layout);
 
 	//!############################### finishes the Toolbar.
@@ -155,7 +102,7 @@ void GraphVisualEditor::setupWidgets(){
 	_toolbar = new QWidget(this);
 	layout->setSpacing(0);
 layout->setContentsMargins(0,0,0,0);
-	layout->addWidget( _graphPropContainer );
+	layout->addWidget( _graphToolBox );
 	layout->addWidget( _nodePropContainer );
 	layout->addWidget( _edgePropContainer );
 	layout->addWidget( _spacingPropContainer );
@@ -175,6 +122,20 @@ layout->setContentsMargins(0,0,0,0);
 
 }
 
+QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent){
+	QToolButton *tmpButton = 0;
+	KAction *tmpAction = 0;
+
+	tmpAction = new KAction(KIcon(actionName), tooltip, parent);
+	connect( tmpAction, SIGNAL(triggered()), this, slot);
+	tmpButton = new QToolButton(_spacingPropContainer);
+	tmpButton -> setDefaultAction ( tmpAction );
+	tmpButton -> setAutoRaise( true );
+	return tmpButton;
+
+
+}
+
 void GraphVisualEditor::setGraphDocument( GraphDocument *gd){
   if ( _graphDocument != 0 ){
     releaseGraphDocument();
@@ -187,6 +148,7 @@ void GraphVisualEditor::setGraphDocument( GraphDocument *gd){
   
   _graphDocument = gd;
   _scene->setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
+	_graphToolBox->setGraphDocument( gd );
 }
 
 void GraphVisualEditor::releaseGraphDocument(){
