@@ -20,7 +20,8 @@
 
 #include "SUI_GraphVisualEditor.h"
 #include "SUI_GraphToolBoxWidget.h"
-
+#include "SUI_GraphScene.h"
+#include "SUI_MainWindow.h"
 #include "graphicsitem_Node.h"
 #include "graphicsitem_Edge.h"
 #include "graphicsitem_OrientedEdge.h"
@@ -30,7 +31,7 @@
 #include "node.h"
 #include "edge.h"
 
-#include "SUI_GraphScene.h"
+
 
 #include <QVBoxLayout>
 #include <QPointF>
@@ -46,7 +47,7 @@
 #include "settings.h"
 
 
-GraphVisualEditor::GraphVisualEditor(QWidget *parent) 
+GraphVisualEditor::GraphVisualEditor(MainWindow *parent) 
 	: QWidget(parent),
 	_topNode(0),
 	_bottomNode(0),
@@ -54,7 +55,7 @@ GraphVisualEditor::GraphVisualEditor(QWidget *parent)
 	_rightNode(0){
 	_graphDocument = 0;
 	_graph = 0;
-
+	_mainWindow = parent;
 	setupWidgets();
 }
 
@@ -66,42 +67,42 @@ void GraphVisualEditor::setupWidgets(){
 	layout->setContentsMargins(0,0,0,0);
 	//!################## CODE TO GENERATE THE ALLIGN TOOLBOX ##########################
 
-	_spacingPropContainer = new QWidget(this);
+	_spacingPropContainer = new QWidget(parentWidget());
 
-	layout->addWidget(setupToolButton("allign-horizontal-bottom", "Allign nodes horizontally on the base", "alignHBottom()",_spacingPropContainer ));
-	layout->addWidget(setupToolButton("allign-horizontal-middle", "Allign nodes horizontally on the middle", "alignHMiddle()",_spacingPropContainer));
-	layout->addWidget(setupToolButton("allign-horizontal-top", "Allign nodes horizontally on the top", "alignHTop()",_spacingPropContainer));
-	layout->addWidget(setupToolButton("allign-vertical-left", "Allign nodes vertically on the left", "alignVLeft()",_spacingPropContainer ));
-	layout->addWidget(setupToolButton("allign-horizontal-middle", "Allign nodes vertically on the middle", "alignVMiddle()",_spacingPropContainer));
-	layout->addWidget(setupToolButton("allign-horizontal-right", "Allign nodes vertically on the right", "alignVRight()",_spacingPropContainer));
+	layout->addWidget(setupToolButton("allign-h-bottom", "Allign nodes on the base", SLOT(alignHBottom()),_spacingPropContainer ));
+	layout->addWidget(setupToolButton("allign-h-middle", "Allign nodes horizontally on the middle", SLOT(alignHMiddle()),_spacingPropContainer));
+	layout->addWidget(setupToolButton("allign-h-top", "Allign nodes on the top", SLOT(alignHTop()),_spacingPropContainer));
+	layout->addWidget(setupToolButton("allign-v-left", "Allign nodes on the left", SLOT(alignVLeft()),_spacingPropContainer ));
+	layout->addWidget(setupToolButton("allign-v-middle", "Allign nodes vertically on the middle", SLOT(alignVMiddle()),_spacingPropContainer));
+	layout->addWidget(setupToolButton("allign-v-right", "Allign nodes on the right", SLOT(alignVRight()),_spacingPropContainer));
 
 	_spacingPropContainer->setLayout(layout);
 
 	//!############################### CODE TO GENERATE THE GRAPH PROPERTIES TOOLBOX ####################################
 
-	_graphToolBox = new GraphToolBoxWidget(this);
+	_graphToolBox = new GraphToolBoxWidget(_mainWindow);
 	
 	//!############################### CODE TO GENERATE THE EDGE PROPERTIES TOOLBOX #####################################
 	layout = new QHBoxLayout();
 	layout->setContentsMargins(0,0,0,0);
-	_edgePropContainer = new QWidget(this);
+	_edgePropContainer = new QWidget(parentWidget());
 	_edgePropContainer -> setLayout(layout);
 
 	//!################################ CODE TO GENERATE THE NODE PROPERTIES TOOLBOX ####################################
 	layout = new QHBoxLayout();
 	layout->setContentsMargins(0,0,0,0);
-	_nodePropContainer = new QWidget(this);
+	_nodePropContainer = new QWidget(parentWidget());
 
-	layout->addWidget(setupToolButton("set-start", "Set this node as 'start_node' on the engine.", "setStartNode()",_nodePropContainer));
-	layout->addWidget(setupToolButton("set-end","Set this node as 'end_node' on the engine. if there's more than one end node, the 'end_node' is an array","setEndNode()",_nodePropContainer));
+	layout->addWidget(setupToolButton("set-start", "Set this node as 'start_node' on the engine.", SLOT(setStartNode()),_nodePropContainer));
+	layout->addWidget(setupToolButton("set-end","Set this node as 'end_node' on the engine. if there's more than one end node, the 'end_node' is an array",SLOT(setEndNode()),_nodePropContainer));
 
 	_nodePropContainer -> setLayout(layout);
 
 	//!############################### finishes the Toolbar.
 	layout = new QHBoxLayout();
-	_toolbar = new QWidget(this);
+	_toolbar = new QWidget(parentWidget());
 	layout->setSpacing(0);
-layout->setContentsMargins(0,0,0,0);
+	layout->setContentsMargins(0,0,0,0);
 	layout->addWidget( _graphToolBox );
 	layout->addWidget( _nodePropContainer );
 	layout->addWidget( _edgePropContainer );
@@ -132,7 +133,6 @@ QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const
 	tmpButton -> setDefaultAction ( tmpAction );
 	tmpButton -> setAutoRaise( true );
 	return tmpButton;
-
 
 }
 

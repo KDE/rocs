@@ -20,19 +20,19 @@
 */
 
 #include "SUI_GraphToolBoxWidget.h"
-
+#include "SUI_MainWindow.h"
 #include "graph.h"
 #include "graphDocument.h"
 #include "model_GraphLayers.h"
 
 #include <KDebug>
 
-GraphToolBoxWidget::GraphToolBoxWidget(QWidget* parent)
+GraphToolBoxWidget::GraphToolBoxWidget(MainWindow* parent)
 : QWidget(parent) 
 {
 	_document = 0;
 	_layerModel = 0;
-
+	_mainWindow = parent;
 	setupUi(this);
 	_btnNewGraph ->setEnabled(false);
 	connect(_comboGraphLayers, SIGNAL(clicked(const QModelIndex&)),
@@ -63,7 +63,6 @@ void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex){
 	if (g == 0){ 
 			return;
 		}
-	
-	emit activeGraphChanged( g );
+	_mainWindow->setGraph(g);
 	kDebug() << "Send the Graph at position " << modelindex.row();
 }

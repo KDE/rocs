@@ -33,16 +33,17 @@ class GraphScene;
 class KColorButton;
 class GraphToolBoxWidget;
 class QToolButton;
+class MainWindow;
 
 class GraphVisualEditor : public QWidget{
 Q_OBJECT
 public:
 	/*! Default Constructor 
 	\param parent the owner of this widget. */
-	GraphVisualEditor(QWidget *parent = 0);
+	GraphVisualEditor(MainWindow *parent = 0);
 
 	GraphScene *scene() const;
-
+	MainWindow *mainWindow();
 public slots:
 /*! set the current selected Graph. 
 	\param graph the new active graph.
@@ -50,7 +51,7 @@ public slots:
 	void setGraph( Graph *graph);
 
 	void setGraphDocument(GraphDocument *graphDocument);
-
+	
 private:
 	void setupWidgets();
 	/*! as the name says, draw a graph on scene.
@@ -73,6 +74,7 @@ private:
 	QWidget *_toolbar;
 	
 	GraphToolBoxWidget *_graphToolBox;
+	MainWindow *_mainWindow;
 
 	qreal _topNode;
 	qreal _bottomNode;
