@@ -63,6 +63,7 @@ public:
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
    Node* node() { return _node; }
+	void addEdge(QGraphicsItem *e);
 
 protected slots:
   void updatePos(QPointF);
@@ -76,7 +77,8 @@ protected slots:
   void removed();
 
 private:
-     Node *_node;
+	Node *_node;
+	QList<QGraphicsItem*> _edges;
 };
 
 #endif

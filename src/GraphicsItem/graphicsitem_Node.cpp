@@ -89,6 +89,9 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 void NodeItem::updatePos(QPointF pos){
   setPos( pos );
   update();
+	foreach(QGraphicsItem* i, _edges){
+		i->update();
+	}
 }
 
 void NodeItem::updateName(const QString& ){}
@@ -101,4 +104,7 @@ void NodeItem::removed(){
   kDebug() << " Not Implemented Yet " << "removed";
 }
 
+void NodeItem::addEdge(QGraphicsItem *e){
+	_edges.append(e);
+}
 #include "graphicsitem_Node.moc"
