@@ -35,6 +35,8 @@ OpenedFilesWidget::OpenedFilesWidget(GraphDocumentModel *model, QWidget* parent)
 
 void OpenedFilesWidget::on__btnNewFile_clicked(){
 	_documentModel->insertRow(_documentModel->rowCount());
+	 GraphDocument *g = _documentModel -> at( _documentModel->index(_documentModel->rowCount()-1,0) );
+	 emit activeDocumentChanged( g );
 }
 
 void OpenedFilesWidget::setActiveDocument(const QModelIndex& modelindex){

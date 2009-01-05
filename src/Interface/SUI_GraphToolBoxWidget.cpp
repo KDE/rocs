@@ -52,6 +52,7 @@ void GraphToolBoxWidget::setGraphDocument( GraphDocument *document)
 	_layerModel = new GraphLayersModel( document );
 	_comboGraphLayers->setModel( _layerModel );
 	_btnNewGraph -> setEnabled(true);
+	setActiveGraph ( _layerModel->index(0,0) );
 }
 
 void GraphToolBoxWidget::on__comboGraphLayers_activated(int i){

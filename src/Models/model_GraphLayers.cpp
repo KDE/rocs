@@ -30,6 +30,7 @@ GraphLayersModel::GraphLayersModel( GraphDocument *document, QObject *parent)
   _document = document;
   connect( _document, SIGNAL( graphCreated( Graph*)), 
 	  this, SLOT( connectGraphSignals( Graph*)));
+	insertRow(0);
 
   kDebug () << "GraphCreated signal connected with connect graphSignals";
 }
@@ -85,9 +86,8 @@ bool GraphLayersModel::insertRows(int position, int , const QModelIndex&){
   if ( _document == 0) return false;
 
   beginInsertRows(QModelIndex(), position, position);
-	QString name = "Untitled";
-	name += QString::number(rowCount());
-  _document->addGraph("Untitled");
+	
+  _document->addGraph(QString("Untitled %1").arg(rowCount()));
   endInsertRows();
   return true;
 }
