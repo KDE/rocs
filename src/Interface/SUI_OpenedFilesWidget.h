@@ -55,7 +55,8 @@ class OpenedFilesWidget : public QWidget, public Ui::OpenedFilesWidget{
 
     void setActiveDocument(const QModelIndex& model);
 
-    /*! executed when btnNewFileis clicked. */
+  public  slots:
+  /*! executed when btnNewFileis clicked. */
     void on__btnNewFile_clicked();
 
   private:

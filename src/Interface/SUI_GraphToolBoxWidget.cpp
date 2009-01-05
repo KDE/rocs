@@ -35,8 +35,6 @@ GraphToolBoxWidget::GraphToolBoxWidget(MainWindow* parent)
 	_mainWindow = parent;
 	setupUi(this);
 	_btnNewGraph ->setEnabled(false);
-	connect(_comboGraphLayers, SIGNAL(clicked(const QModelIndex&)),
-	 this, SLOT(setActiveGraph(const QModelIndex&)));
 }
 
 void GraphToolBoxWidget::on__btnNewGraph_clicked()
@@ -50,7 +48,9 @@ void GraphToolBoxWidget::setGraphDocument( GraphDocument *document)
 	if ( _layerModel != 0) delete _layerModel;
 	_document = document;
 	_layerModel = new GraphLayersModel( document );
+	_comboGraphLayers->clear();
 	_comboGraphLayers->setModel( _layerModel );
+
 	_btnNewGraph -> setEnabled(true);
 	setActiveGraph ( _layerModel->index(0,0) );
 }

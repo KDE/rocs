@@ -31,7 +31,6 @@ class OpenedFilesWidget;
 
 class GraphPropertiesWidget;
 class GraphVisualEditor;
-class GraphLayersModel;
 class GraphDocumentModel;
 class KActionCollection;
 class GraphDocument;
@@ -78,7 +77,6 @@ private:
 	// Other Bunch of stuff.
 	QList<GraphDocument*> _documents;
   GraphDocumentModel *_documentModel;
-  GraphLayersModel   *_graphLayersModel;
   KActionCollection  *_paletteActions;
 
 	KTextEditor::Document *_scriptDoc;

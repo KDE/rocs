@@ -21,12 +21,12 @@
 #include "graphDocument.h"
 #include "graph.h"
 #include <QString>
-#include <QDebug>
+#include <KDebug>
 #include <QModelIndex>
 
 GraphDocumentModel::GraphDocumentModel(QList< GraphDocument*>* documents, QObject *parent)
   : QAbstractListModel( parent ), _documents( (*documents) ){
-	insertRow(0);
+	
 }
 
 int GraphDocumentModel::rowCount(const QModelIndex&) const{
@@ -56,7 +56,7 @@ Qt::ItemFlags GraphDocumentModel::flags(const QModelIndex& index) const{
   if ( !index.isValid() ){
     return Qt::ItemIsEnabled;
   }
-  return QAbstractItemModel::flags(index); // | Qt::ItemIsEditable;
+  return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
 bool GraphDocumentModel::setData(const QModelIndex& index, const QVariant& value, int role){
@@ -73,7 +73,7 @@ bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex&){
   
    GraphDocument *doc = new  GraphDocument("untitled");
   _documents.append(doc);
-  
+  kDebug() << "THIS WAS CALLED";
   endInsertRows();
   return true;
 }

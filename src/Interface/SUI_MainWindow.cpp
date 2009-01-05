@@ -47,7 +47,6 @@
 
 // MODEL Related Includes
 #include "model_GraphDocument.h"
-#include "model_GraphLayers.h"
 
 // Graph Related Includes
 #include "graphDocument.h"
@@ -68,7 +67,7 @@ MainWindow::MainWindow() :
 	_leftTabId(0)
 	{
 	_documentModel = 0;
-	_graphLayersModel = 0;
+	
 	setObjectName ( "Rocs" );
 
 	setupModels();
@@ -76,6 +75,8 @@ MainWindow::MainWindow() :
 	setupGUI();
 	setupActions();
 	setupSignals();
+
+	_OpenedFiles->on__btnNewFile_clicked();
 }
 
 MainWindow::~MainWindow(){
@@ -90,7 +91,6 @@ MainWindow::~MainWindow(){
 }
 void MainWindow::setupModels(){
 	_documentModel = new GraphDocumentModel( &_documents );
-	_graphLayersModel = new GraphLayersModel( 0 );
 }
 void MainWindow::setupWidgets(){
 

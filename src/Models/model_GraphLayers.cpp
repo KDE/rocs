@@ -28,11 +28,10 @@
 GraphLayersModel::GraphLayersModel( GraphDocument *document, QObject *parent)
   : QAbstractListModel( parent ){
   _document = document;
-  connect( _document, SIGNAL( graphCreated( Graph*)), 
-	  this, SLOT( connectGraphSignals( Graph*)));
-	insertRow(0);
-
-  kDebug () << "GraphCreated signal connected with connect graphSignals";
+	if (document->size() == 0){
+		kDebug() << "DOCUMENT SIZE IS ZERO!";
+		insertRow(0);
+	}
 }
 
 int GraphLayersModel::rowCount(const QModelIndex&) const{
