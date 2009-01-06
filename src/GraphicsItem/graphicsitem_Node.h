@@ -65,8 +65,9 @@ public:
    Node* node() { return _node; }
 	void addEdge(QGraphicsItem *e);
 
+
 protected slots:
-  void updatePos(QPointF);
+  
   void updateName(const QString& name);
   void updateVisited(bool v);
   void updateValue(qreal v);
@@ -75,6 +76,9 @@ protected slots:
 
   /*! Emited when a node is removed */
   void removed();
+
+public slots:
+	void updatePos(QPointF);
 
 private:
 	Node *_node;

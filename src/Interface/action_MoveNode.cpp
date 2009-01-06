@@ -47,12 +47,10 @@ void MoveNodeAction::executePress(QPointF pos){
 
 void MoveNodeAction::executeMove(QPointF pos){
   if ( ! _movableNode ){ return; }
-  _movableNode -> setPos( pos );
+  _movableNode -> updatePos( pos );
 }
 
 void MoveNodeAction::executeRelease(QPointF pos){
   if ( !_movableNode ){ return; }
-  _movableNode -> node() -> setProperty("x",pos.x() );
-  _movableNode -> node() -> setProperty("y",pos.y() );
-  _movableNode = 0;
+ _movableNode = 0;
 }

@@ -34,6 +34,8 @@ class KColorButton;
 class GraphToolBoxWidget;
 class QToolButton;
 class MainWindow;
+class NodeItem;
+
 
 class GraphVisualEditor : public QWidget{
 Q_OBJECT
@@ -52,6 +54,13 @@ public slots:
 
 	void setGraphDocument(GraphDocument *graphDocument);
 	
+	void alignHBottom();
+	void alignHMiddle();
+	void alignHTop();
+	void alignVLeft();
+	void alignVMiddle();
+	void alignVRight();
+
 private:
 	void setupWidgets();
 	/*! as the name says, draw a graph on scene.
@@ -63,6 +72,8 @@ private:
 	void releaseGraphDocument();
 
 	QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent);
+
+	QList<NodeItem*> selectedNodes() const;
 
 	GraphScene *_scene;
 	GraphDocument *_graphDocument;

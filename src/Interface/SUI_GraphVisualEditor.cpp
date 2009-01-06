@@ -30,7 +30,7 @@
 #include "graph.h"
 #include "node.h"
 #include "edge.h"
-
+#include "graphicsitem_Node.h"
 
 
 #include <QVBoxLayout>
@@ -182,4 +182,138 @@ void GraphVisualEditor::setGraph( Graph *graph){
 
 GraphScene* GraphVisualEditor::scene() const{
 	return _scene;
+}
+
+void GraphVisualEditor::alignHBottom(){
+	QList<NodeItem*> l = selectedNodes();
+
+	if ( l.size()  == 0){
+		return;	
+	}
+
+	qreal bottom = l[0]->scenePos().y();
+	foreach(NodeItem *i, l){
+		if ( i->scenePos().y() < bottom ){
+			bottom = i -> scenePos().y();
+		}
+	}
+	foreach(NodeItem *i, l){
+		i -> updatePos(QPointF(i->scenePos().x(), bottom));
+	}
+
+}
+
+void GraphVisualEditor::alignHMiddle(){
+	QList<NodeItem*> l = selectedNodes();
+
+	if ( l.size()  == 0){
+		return;	
+	}
+
+	qreal bottom = l[0]->pos().y();
+	qreal top = bottom;
+
+	foreach(NodeItem *i, l){
+		if ( i->pos().y() < bottom ){
+			bottom = i -> scenePos().y();
+		}
+		else if ( i->scenePos().y() > top ){
+			top = i -> scenePos().y();
+		}
+	}
+	qreal middle = (top + bottom) / 2;
+	foreach(NodeItem *i, l){
+		i -> updatePos(QPointF(i->scenePos().x(), middle));
+	}
+}
+void GraphVisualEditor::alignHTop(){
+	QList<NodeItem*> l = selectedNodes();
+
+	if ( l.size()  == 0){
+		return;	
+	}
+
+	qreal top = l[0]->scenePos().y();
+	foreach(NodeItem *i, l){
+		if ( i->scenePos().y() > top ){
+			top = i -> scenePos().y();
+		}
+	}
+	foreach(NodeItem *i, l){
+		i -> updatePos(QPointF(i->scenePos().x(), top));
+	}
+
+}
+
+void GraphVisualEditor::alignVLeft(){
+
+	QList<NodeItem*> l = selectedNodes();
+
+	if ( l.size()  == 0){
+		return;	
+	}
+
+	qreal left = l[0]->scenePos().x();
+	foreach(NodeItem *i, l){
+		if ( i->scenePos().x() < left ){
+			left = i -> scenePos().x();
+		}
+	}
+	foreach(NodeItem *i, l){
+		i -> updatePos(QPointF(left, i->scenePos().y()));
+	}
+}
+
+void GraphVisualEditor::alignVMiddle(){
+	QList<NodeItem*> l = selectedNodes();
+
+	if ( l.size()  == 0){
+		return;	
+	}
+
+	qreal left = l[0]->scenePos().x();
+	qreal right = left;
+
+	foreach(NodeItem *i, l){
+		if ( i->scenePos().x() < left ){
+			left = i -> scenePos().x();
+		}
+		else if ( i->scenePos().x() > right){
+			right= i->scenePos().x();
+		}
+	}
+	qreal middle = ( left +  right) / 2;
+	foreach(NodeItem *i, l){
+		i -> updatePos(QPointF(middle, i->scenePos().y()));
+	}
+}
+
+void GraphVisualEditor::alignVRight(){
+	QList<NodeItem*> l = selectedNodes();
+
+	if ( l.size()  == 0){
+		return;	
+	}
+
+	qreal right = l[0]->scenePos().x();
+	foreach(NodeItem *i, l){
+		if ( i->scenePos().x() > right ){
+			right = i -> scenePos().x();
+		}
+	}
+	foreach(NodeItem *i, l){
+		i -> updatePos(QPointF(right, i->scenePos().y()));
+	}
+
+}
+
+QList<NodeItem*> GraphVisualEditor::selectedNodes() const{
+	QList<NodeItem*> tmpList;
+	QList<QGraphicsItem*> l = _scene->selectedItems();
+	foreach(QGraphicsItem *i, l){
+		if ( qgraphicsitem_cast<NodeItem*>(i) ){
+			tmpList.append( qgraphicsitem_cast<NodeItem*>(i) );
+		}
+	}
+	return tmpList;
 }

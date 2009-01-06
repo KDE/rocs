@@ -41,7 +41,7 @@ public:
   explicit OrientedEdgeItem(Edge *edge, QGraphicsItem *parent = 0);
 
   /*! The type of the item */
-  enum { Type = UserType + 4 };
+  enum { Type = UserType + 3 };
 
   /*! gets the type of the item 
     \return the type of the item
