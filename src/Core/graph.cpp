@@ -21,6 +21,7 @@
 #include "edge.h"
 #include "node.h"
 #include "qtScriptBackend.h"
+#include "graphGroups.h"
 #include <QDebug>
 
 Graph::Graph() : QObject(0){
@@ -138,7 +139,13 @@ void Graph::setEngine(	QtScriptBackend *engine ){
 	foreach(Edge *e, _edges){
 		e->setEngine(engine);
 	}
-
+	foreach(GraphGroup *g, _graphGroups){
+		QScriptValue array = _engine->newArray();
+		foreach(Node* n, (*g) ){
+			array.property("push").call(array, QScriptValueList() << n->scriptValue());
+		}
+		_engine->globalObject().setProperty(g->name(), array);
+	}
 }
 
 QScriptValue Graph::list_nodes(){

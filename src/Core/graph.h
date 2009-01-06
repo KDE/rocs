@@ -36,6 +36,7 @@
 class Node;
 class Edge;
 class QtScriptBackend;
+class GraphGroup;
 
 class Graph : public QObject{
 Q_OBJECT
@@ -82,11 +83,13 @@ private:
   bool _directed;
   QList<Node*> _nodes;
   QList<Edge*> _edges;
-	
+	QList<GraphGroup*> _graphGroups;
+
 	#ifdef USING_QTSCRIPT
 	QScriptValue _value;
 	QtScriptBackend *_engine;
 	#endif
+
 };
 
 #endif
