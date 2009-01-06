@@ -23,7 +23,6 @@
 #include <QList>
 #include <QObject>
 
-class QString;
 class Graph;
 
 /*! \brief the graph document 

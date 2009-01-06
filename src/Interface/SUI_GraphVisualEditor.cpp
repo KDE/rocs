@@ -114,7 +114,7 @@ void GraphVisualEditor::setupWidgets(){
 	//!############################## Adds the GraphView on the screen.
 	QVBoxLayout *vLayout = new QVBoxLayout();
 	vLayout->setContentsMargins(0,0,0,0);
-	_scene = new GraphScene();
+	_scene = new GraphScene(this);
 	QGraphicsView *graphicsView = new QGraphicsView();
 	graphicsView->setScene(_scene);
 	vLayout -> addWidget( _toolbar );

@@ -76,6 +76,7 @@ MainWindow::MainWindow() :
 	setupActions();
 	setupSignals();
 
+	// this will create a new opened file by default.
 	_OpenedFiles->on__btnNewFile_clicked();
 }
 

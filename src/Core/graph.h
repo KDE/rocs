@@ -31,6 +31,8 @@
 #include <QtScript>
 #endif
 
+// #include "graphGroups.h"
+
 class Node;
 class Edge;
 class QtScriptBackend;
@@ -80,7 +82,7 @@ private:
   bool _directed;
   QList<Node*> _nodes;
   QList<Edge*> _edges;
-
+	
 	#ifdef USING_QTSCRIPT
 	QScriptValue _value;
 	QtScriptBackend *_engine;

@@ -6,7 +6,9 @@
 #include <QGraphicsItem>
 
 
-GraphScene::GraphScene() : QGraphicsScene(0){}
+GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent){
+	
+}
 
 void GraphScene::setAction(AbstractAction *){}
 

@@ -10,6 +10,7 @@ set( rocscore_LIB_SRCS
   graphDocument.cpp
   graphDocumentHandler.cpp
   node.cpp
+	graphGroups.cpp
   krossBackend.cpp
   qtScriptBackend.cpp
 )

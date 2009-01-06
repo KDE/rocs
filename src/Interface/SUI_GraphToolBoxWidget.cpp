@@ -53,6 +53,7 @@ void GraphToolBoxWidget::setGraphDocument( GraphDocument *document)
 
 	_btnNewGraph -> setEnabled(true);
 	setActiveGraph ( _layerModel->index(0,0) );
+	
 }
 
 void GraphToolBoxWidget::on__comboGraphLayers_activated(int i){
