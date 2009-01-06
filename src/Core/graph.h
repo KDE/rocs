@@ -45,7 +45,7 @@ Q_OBJECT
 public:
   Graph();
   ~Graph();
-
+	
 	#ifdef USING_QTSCRIPT
 	QScriptValue scriptValue() const;
 	void setEngine(	QtScriptBackend *engine );
@@ -58,6 +58,7 @@ public  slots:
   bool directed();
   QList<Node*> nodes() const;
   QList<Edge*> edges() const;
+	QList<GraphGroup*> groups() const;
 
 	#ifdef USING_QTSCRIPT
 	QScriptValue list_nodes();
@@ -74,6 +75,7 @@ public  slots:
 
   void remove(Node *n);
   void remove(Edge *e);
+	GraphGroup *addGroup(const QString& name);
 
 signals:
   void nodeCreated(Node *n);

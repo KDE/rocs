@@ -2,6 +2,7 @@
 #include "graph.h"
 #include "node.h"
 #include "edge.h"
+#include "graphGroups.h"
 #include <KSaveFile>
 #include <QDebug>
 #include <QFile>
@@ -22,11 +23,14 @@ bool GraphDocumentHandler::saveAsInternalFormat(QList<Graph*> graph, const QStri
 	QTextStream stream(&saveFile);
 	
 	foreach(Graph *g, graph){
+		buf += " \n \n ############ Graph  ########### \n \n";
 		buf += "[Graph ";
 		buf += g->property("name").toString();
 		buf += "] \n";
 
 		savePropertiesInternalFormat(g);
+
+		buf += " \n \n ############ NODES ########### \n \n";
 		foreach( Node *n, g->nodes()){
 			buf += "[Node ";
 			buf += n->property("name").toString();
@@ -35,6 +39,7 @@ bool GraphDocumentHandler::saveAsInternalFormat(QList<Graph*> graph, const QStri
 			savePropertiesInternalFormat(n);
 		}
 
+		buf += " \n \n ############ EDGES ########### \n \n";
 		foreach( Edge *e, g->edges()){
 			buf += QString("[Edge ");
 			buf += e->from()->property("name").toString();
@@ -42,6 +47,18 @@ bool GraphDocumentHandler::saveAsInternalFormat(QList<Graph*> graph, const QStri
 			buf += e->to()->property("name").toString();
 			buf += QString("] \n");
 			savePropertiesInternalFormat(e);
+		}
+
+		buf += " \n \n ############ GROUPS ########### \n \n";
+		foreach( GraphGroup *gg, g->groups()){
+			buf += "[Group ";
+			buf += gg->name();
+			buf += "] \n";
+
+			foreach( Node *n, g->nodes() ){
+				buf += n->property("name").toString();
+				buf += "\n";
+			}
 		}
 	}
 	qDebug() << buf.toAscii();
@@ -85,6 +102,7 @@ QList<Graph*> GraphDocumentHandler::loadFromInternalFormat(const QString& filena
 	Graph *tmpGraph = 0;
 	Node *tmpNode  = 0;
 	Edge *tmpEdge = 0;
+	GraphGroup *tmpGroup = 0;
 	QObject *tmpObject = 0;
 
 
@@ -126,13 +144,18 @@ QList<Graph*> GraphDocumentHandler::loadFromInternalFormat(const QString& filena
 			tmpObject = tmpEdge;
 
 		}
-		else{
-			if (! str.contains(":")){
-				continue;
-			}
+		else if (str.startsWith("[Group")){
+			QString gName = str.section(" ",1,1);
+			gName.remove(']');
+			tmpGroup = tmpGraph->addGroup(gName);
+		}
+		else if (str.contains(":")){
 			QString propertyName = str.section(":",0,0);
 			QString propertyValue = str.section(":",1,1);
 			tmpObject->setProperty( propertyName.toAscii() , propertyValue.toAscii() );
+		}
+		else{
+			tmpGroup->append( tmpGraph->node(str));
 		}
 	}
 

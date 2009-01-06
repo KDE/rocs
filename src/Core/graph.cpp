@@ -118,6 +118,16 @@ void Graph::setDirected(bool directed){
 	_directed = directed;
 }
 
+GraphGroup* Graph::addGroup(const QString& name){
+	GraphGroup *gg = new GraphGroup();
+	gg->setName(name);
+	_graphGroups.append(gg);
+	return gg;
+}
+
+QList<GraphGroup*> Graph::groups() const{
+	return _graphGroups;
+}
 #ifdef USING_QTSCRIPT
 
 QScriptValue Graph::scriptValue() const{
