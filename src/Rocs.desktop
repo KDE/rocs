@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Rocs
+Name[pa]=ਰੌਕਸ
 Name[uk]=Рух
 Name[x-test]=xxRocsxx
 GenericName=Rocs Graph Theory
@@ -27,6 +28,7 @@ Comment[ga]=Uirlis Graftheoirice le haghaidh Ollúna agus Mic Léinn.
 Comment[gl]=Ferramenta de teoría de grafos para profesores e estudantes.
 Comment[km]=ឧបករណ៍​ទ្រឹស្ដី​ក្រាហ្វ​​សម្រាប់​សាស្ត្រាចារ្យ និង​សិស្ស ។
 Comment[nds]=Graphentheorie för Professors un Studenten
+Comment[pa]=ਪਰੋਫੈਸਰ ਅਤੇ ਵਿਦਿਆਰਥੀ ਲਈ ਗਰਾਫ਼ ਥਿਊਰੀ ਟੂਲ
 Comment[pt]=Ferramenta da Teoria dos Grafos para Professores e Estudantes.
 Comment[pt_BR]=Ferramenta de teoria de grafos para professores e alunos.
 Comment[sv]=Grafteoriverktyg för lärare och elever.
