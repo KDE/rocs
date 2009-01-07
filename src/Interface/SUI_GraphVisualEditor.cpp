@@ -1,21 +1,21 @@
 /* This file is part of Rocs,
-   Copyright (C) 2008 by:
-   Tomaz Canabrava <tomaz.canabrava@gmail.com>
-   Ugo Sangiori <ugorox@gmail.com>
+	 Copyright (C) 2008 by:
+	 Tomaz Canabrava <tomaz.canabrava@gmail.com>
+	 Ugo Sangiori <ugorox@gmail.com>
 
-   Rocs is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+	 Rocs is free software; you can redistribute it and/or modify
+	 it under the terms of the GNU General Public License as published by
+	 the Free Software Foundation; either version 2 of the License, or
+	 (at your option) any later version.
 
-   Rocs is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+	 Rocs is distributed in the hope that it will be useful,
+	 but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
+	 GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with Step; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	 You should have received a copy of the GNU General Public License
+	 along with Step; if not, write to the Free Software
+	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 
 #include "SUI_GraphVisualEditor.h"
@@ -63,7 +63,7 @@ void GraphVisualEditor::setupWidgets(){
 
 	QHBoxLayout *layout = 0;
 
-	layout  = new QHBoxLayout();
+	layout	= new QHBoxLayout();
 	layout->setContentsMargins(0,0,0,0);
 	//!################## CODE TO GENERATE THE ALLIGN TOOLBOX ##########################
 
@@ -137,47 +137,47 @@ QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const
 }
 
 void GraphVisualEditor::setGraphDocument( GraphDocument *gd){
-  if ( _graphDocument != 0 ){
-    releaseGraphDocument();
-   }
-  
-  int size = gd->size();
-  for(int i = 0; i < size; i++){
-    drawGraphOnScene( gd->at(i) );	
-  }
-  
-  _graphDocument = gd;
-  _scene->setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
+	if ( _graphDocument != 0 ){
+		releaseGraphDocument();
+	 }
+	
+	int size = gd->size();
+	for(int i = 0; i < size; i++){
+		drawGraphOnScene( gd->at(i) );	
+	}
+	
+	_graphDocument = gd;
+	_scene->setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
 	_graphToolBox->setGraphDocument( gd );
 }
 
 void GraphVisualEditor::releaseGraphDocument(){
-  QList<QGraphicsItem*> itemList = _scene->items();
-  foreach(QGraphicsItem *i, itemList){
-    _scene->removeItem(i);
-    delete i;
-  }
-  int size = _graphDocument->size();
-  for(int i = 0; i < size; i++){
-    _graphDocument->at(i)->disconnect(this);
-  }
+	QList<QGraphicsItem*> itemList = _scene->items();
+	foreach(QGraphicsItem *i, itemList){
+		_scene->removeItem(i);
+		delete i;
+	}
+	int size = _graphDocument->size();
+	for(int i = 0; i < size; i++){
+		_graphDocument->at(i)->disconnect(this);
+	}
 }
 
 void GraphVisualEditor::drawGraphOnScene( Graph *g){
-  QList< Node*> nodes = g->nodes();
-  QList< Edge*> edges = g->edges();
+	QList< Node*> nodes = g->nodes();
+	QList< Edge*> edges = g->edges();
 
-  foreach( Node* node, nodes){
-    _scene->createNode(node);
-  }
+	foreach( Node* node, nodes){
+		_scene->createNode(node);
+	}
 
-  foreach( Edge* edge, edges){
-    _scene->createEdge(edge);
-  }
+	foreach( Edge* edge, edges){
+		_scene->createEdge(edge);
+	}
 }
 
 void GraphVisualEditor::setGraph( Graph *graph){
-  _graph = graph;
+	_graph = graph;
 }
 
 GraphScene* GraphVisualEditor::scene() const{
@@ -187,7 +187,7 @@ GraphScene* GraphVisualEditor::scene() const{
 void GraphVisualEditor::alignHBottom(){
 	QList<NodeItem*> l = selectedNodes();
 
-	if ( l.size()  == 0){
+	if ( l.size()	== 0){
 		return;	
 	}
 
@@ -206,7 +206,7 @@ void GraphVisualEditor::alignHBottom(){
 void GraphVisualEditor::alignHMiddle(){
 	QList<NodeItem*> l = selectedNodes();
 
-	if ( l.size()  == 0){
+	if ( l.size()	== 0){
 		return;	
 	}
 
@@ -229,7 +229,7 @@ void GraphVisualEditor::alignHMiddle(){
 void GraphVisualEditor::alignHTop(){
 	QList<NodeItem*> l = selectedNodes();
 
-	if ( l.size()  == 0){
+	if ( l.size()	== 0){
 		return;	
 	}
 
@@ -249,7 +249,7 @@ void GraphVisualEditor::alignVLeft(){
 
 	QList<NodeItem*> l = selectedNodes();
 
-	if ( l.size()  == 0){
+	if ( l.size()	== 0){
 		return;	
 	}
 
@@ -267,7 +267,7 @@ void GraphVisualEditor::alignVLeft(){
 void GraphVisualEditor::alignVMiddle(){
 	QList<NodeItem*> l = selectedNodes();
 
-	if ( l.size()  == 0){
+	if ( l.size()	== 0){
 		return;	
 	}
 
@@ -282,7 +282,7 @@ void GraphVisualEditor::alignVMiddle(){
 			right= i->scenePos().x();
 		}
 	}
-	qreal middle = ( left +  right) / 2;
+	qreal middle = ( left +	right) / 2;
 	foreach(NodeItem *i, l){
 		i -> updatePos(QPointF(middle, i->scenePos().y()));
 	}
@@ -291,7 +291,7 @@ void GraphVisualEditor::alignVMiddle(){
 void GraphVisualEditor::alignVRight(){
 	QList<NodeItem*> l = selectedNodes();
 
-	if ( l.size()  == 0){
+	if ( l.size()	== 0){
 		return;	
 	}
 

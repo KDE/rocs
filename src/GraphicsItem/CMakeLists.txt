@@ -5,9 +5,9 @@ include(KDE4Defaults)
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../Core)
  
 set( rocsgraphics_LIB_SRCS
-  graphicsitem_Node.cpp
-  graphicsitem_Edge.cpp
-  graphicsitem_OrientedEdge.cpp
+	graphicsitem_Node.cpp
+	graphicsitem_Edge.cpp
+	graphicsitem_OrientedEdge.cpp
 )
 
-kde4_add_library( librocsgraphics  STATIC ${rocsgraphics_LIB_SRCS} )
+kde4_add_library( librocsgraphics	STATIC ${rocsgraphics_LIB_SRCS} )
