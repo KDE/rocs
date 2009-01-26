@@ -24,7 +24,7 @@
 #include "graph.h"
 #include "graphDocument.h"
 #include "model_GraphLayers.h"
-
+#include "SUI_GraphScene.h"
 #include <KDebug>
 
 GraphToolBoxWidget::GraphToolBoxWidget(MainWindow* parent)
@@ -67,4 +67,11 @@ void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex){
 		}
 	_mainWindow->setGraph(g);
 	kDebug() << "Send the Graph at position " << modelindex.row();
+}
+
+void GraphToolBoxWidget::on__btnSetOriented_clicked(){
+	Graph *g = _mainWindow->graph();
+	g->setDirected(_btnSetOriented->isChecked());
+	_mainWindow->scene()->updateGraph(g);
+	kDebug() <<  "Rodou Isso";
 }

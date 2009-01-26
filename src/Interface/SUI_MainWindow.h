@@ -38,6 +38,7 @@ class Graph;
 class KMultiTabBar;
 class KTextBrowser;
 class QSplitter;
+class GraphScene;
 
 namespace KTextEditor{
 	class Document;
@@ -51,6 +52,9 @@ public:
 	/*! defalt constructor */
 	MainWindow();
 	~MainWindow();
+	Graph *graph() const;
+	GraphScene *scene() const;
+
 private:
 	void setupModels();	// setup all the models to be used on the views.
 	void setupWidgets(); // Setup all the widgets.
@@ -85,6 +89,8 @@ private:
 	QSplitter *_vSplitter;
 	QSplitter *_hSplitter;
 
+	// The Active Graph.
+	Graph *_graph;
 private slots:
 	void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
 	void executeScript();

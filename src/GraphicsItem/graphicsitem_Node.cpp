@@ -28,72 +28,84 @@
 
 #include "node.h"
 #include "graph.h"
+#include "graphicsitem_Edge.h"
+#include "graphicsitem_OrientedEdge.h"
 #include <KDebug>
 
 NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 		 : QObject(0), QGraphicsItem(parent)
 {
-		_node = node;
-		QPointF pos( _node -> property("x").toDouble() ,_node->property("y").toDouble() );
-
-		setPos( pos );
-		setCacheMode(DeviceCoordinateCache);
-		setZValue(1);
-		setFlag(ItemIsSelectable);
+	_node = node;
+	QPointF pos( _node -> property("x").toDouble() ,_node->property("y").toDouble() );
+	setPos( pos );
+	setCacheMode(DeviceCoordinateCache);
+	setZValue(1);
+	setFlag(ItemIsSelectable);
 
 	connect (_node, SIGNAL(removed()), this, SLOT(removed()));
 }
 
- QRectF NodeItem::boundingRect() const
- {
-		 return QRectF(-12, -12 , 25, 25);
+ QRectF NodeItem::boundingRect() const{
+	 return QRectF(-12, -12 , 25, 25);
  }
 
- QPainterPath NodeItem::shape() const
- {
-		 QPainterPath path;
-		 path.addEllipse(-10, -10, 20, 20);
-		 return path;
+ QPainterPath NodeItem::shape() const{
+	 QPainterPath path;
+	 path.addEllipse(-10, -10, 20, 20);
+	 return path;
  }
 
- void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
- {
+ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *){
 		
-		 painter->setPen(Qt::NoPen);
+	 painter->setPen(Qt::NoPen);
 
-		 QColor color = _node->property("color").value<QColor>();
-		 painter->setBrush( color );
-		 painter->drawEllipse(-7, -7, 20, 20);
+	 QColor color = _node->property("color").value<QColor>();
+	 painter->setBrush( color.dark(240) );
 
-		 QRadialGradient gradient(-3, -3, 10);
-		 if (option->state & QStyle::State_Sunken) {
-				 gradient.setCenter(3, 3);
-				 gradient.setFocalPoint(3, 3);
-				 gradient.setColorAt(1, color.light(120));
-				 gradient.setColorAt(0, color);
-		 } else {
-				 gradient.setColorAt(0, color.light(240));
-				 gradient.setColorAt(1, color);
-		 }
-		 painter->setBrush(gradient);
-		 painter->setPen(QPen(color, 2));
-		 painter->drawEllipse(-10, -10, 20, 20);
+	 painter->drawEllipse(-7, -7, 20, 20);
+	 QRadialGradient gradient(-3, -3, 10);
+	 if (option->state & QStyle::State_Sunken) {
+		 gradient.setCenter(3, 3);
+		 gradient.setFocalPoint(3, 3);
+		 gradient.setColorAt(1, color.light(120));
+		 gradient.setColorAt(0, color);
+	 } else {
+		 gradient.setColorAt(0, color.light(240));
+		 gradient.setColorAt(1, color);
+	 }
 
-		if (isSelected()){
-			painter->setBrush(QBrush());
-			painter->setPen(QPen(Qt::black));
-			painter->drawRect(QRectF(-12 , -12 , 25 , 25 ));
-		}
+	 painter->setBrush(gradient);
+	 painter->setPen(QPen(color, 2));
+	 painter->drawEllipse(-10, -10, 20, 20);
+
+	if (isSelected()){
+		painter->setBrush(QBrush());
+		painter->setPen(QPen(Qt::black));
+		painter->drawRect(QRectF(-12 , -12 , 25 , 25 ));
+	}
+
  }
 
 void NodeItem::updatePos(QPointF pos){
-	setPos( pos );
-	update();
-	foreach(QGraphicsItem* i, _edges){
-		i->update();
-	}
 	_node->setProperty("x", pos.x());
 	_node->setProperty("y", pos.y());
+	setPos( pos );
+	update();
+	Graph *g = qobject_cast<Graph*>(_node->parent());
+	if (!g->directed()){
+		foreach(QGraphicsItem* i, _edges){
+			EdgeItem *edgeItem = qgraphicsitem_cast<EdgeItem*>(i);
+			edgeItem->updatePos();
+			kDebug()  << "Edge Atualizado";
+		}
+	}
+	else{
+		foreach(QGraphicsItem* i, _edges){
+			OrientedEdgeItem *edgeItem = qgraphicsitem_cast<OrientedEdgeItem*>(i);
+			edgeItem->updatePos();
+			kDebug()  << "Edge Atualizado";
+		}
+	}
 }
 
 void NodeItem::updateName(const QString& ){}

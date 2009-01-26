@@ -102,10 +102,10 @@ void AddEdgeAction::executeRelease(QPointF pos){
     edgeItem = new OrientedEdgeItem(e);
   }
 
-	_nodeFrom->addEdge(edgeItem);
-	_nodeTo->addEdge(edgeItem);
+   _nodeFrom->addEdge(edgeItem);
+  _nodeTo->addEdge(edgeItem);
 
-  _graphScene->addItem(edgeItem);
+  _graphScene->insertGraphItem(edgeItem);
 
   _nodeFrom = 0;
   _nodeTo = 0;

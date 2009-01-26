@@ -43,7 +43,7 @@
 #include <KComboBox>
 #include <KColorButton>
 #include <QGraphicsView>
-
+#include <QPainter>
 #include "settings.h"
 
 
@@ -116,6 +116,7 @@ void GraphVisualEditor::setupWidgets(){
 	vLayout->setContentsMargins(0,0,0,0);
 	_scene = new GraphScene(this);
 	QGraphicsView *graphicsView = new QGraphicsView();
+	graphicsView->setRenderHints(QPainter::Antialiasing);
 	graphicsView->setScene(_scene);
 	vLayout -> addWidget( _toolbar );
 	vLayout -> addWidget ( graphicsView );

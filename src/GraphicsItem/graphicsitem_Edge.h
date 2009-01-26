@@ -61,7 +61,7 @@ protected:
   */
   void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-protected slots:
+public slots:
   void removed();
   void updatePos();
   void updateName(const QString& name);

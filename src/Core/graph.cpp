@@ -22,9 +22,10 @@
 #include "node.h"
 #include "qtScriptBackend.h"
 #include "graphGroups.h"
-#include <QDebug>
+#include <KDebug>
 
 Graph::Graph() : QObject(0){
+  _directed = false;
 }
 
 Graph::~Graph(){
@@ -57,6 +58,10 @@ Node* Graph::addNode(QString name){
 Edge* Graph::addEdge(Node* from,Node* to){
   if( ( from == to) && ( !_directed ) ){
     return 0;  
+  }else if ((from->edges(to).size() >= 1)&&(!_directed)){
+    return 0;
+  }else if((_nodes.indexOf(from) == -1) || (_nodes.indexOf(to) == -1)){
+    return 0;
   }
 
   Edge *e  = new Edge(this, from, to);
@@ -89,7 +94,7 @@ Edge* Graph::addEdge(const QString& name_from, const QString& name_to){
   return addEdge(from, to);
 }
 
-bool Graph::directed(){
+bool Graph::directed() const{
   return _directed;
 }
 
@@ -111,11 +116,38 @@ void Graph::remove(Node *n){
 
 void Graph::remove(Edge *e){
   _edges.removeOne( e );
+  foreach(Node *n, _nodes){
+      n->removeEdge(e, 0);
+      n->removeEdge(e, 1);
+      n->removeEdge(e, 2);
+  }
   delete e;
 }
 
 void Graph::setDirected(bool directed){
 	_directed = directed;
+	if(!_directed){
+		return;
+	}
+	
+	foreach(Node *n1, _nodes){
+		foreach(Node *n2, n1->adjacent_nodes()){
+			if (n1->edges(n2).size() == 1){
+				continue;
+			}
+
+			QList<Edge*> listEdges = n1->edges(n2);
+			if (n1 != n2){
+				listEdges.removeFirst();
+				kDebug()  << "Chamou Update Pos";
+			}
+			foreach(Edge *e, listEdges){
+				remove(e);
+			}
+		}
+	}
+
+	return;
 }
 
 GraphGroup* Graph::addGroup(const QString& name){
@@ -128,6 +160,8 @@ GraphGroup* Graph::addGroup(const QString& name){
 QList<GraphGroup*> Graph::groups() const{
 	return _graphGroups;
 }
+
+
 #ifdef USING_QTSCRIPT
 
 QScriptValue Graph::scriptValue() const{

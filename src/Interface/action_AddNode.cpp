@@ -47,7 +47,7 @@ void AddNodeAction::executePress(QPointF pos){
   Node *n = _graph -> addNode(i18n("untitled"));
   n -> setProperty("x", pos.x() );
   n -> setProperty("y", pos.y() );
-  
+  kDebug() << "Coordenadas Recebidas" << pos.x() << pos.y();
   NodeItem *nodeitem = new NodeItem( n );
-  _graphScene->addItem(nodeitem); 
+  _graphScene->insertGraphItem(nodeitem); 
 }

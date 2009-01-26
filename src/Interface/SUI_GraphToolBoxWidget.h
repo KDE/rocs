@@ -58,6 +58,7 @@ class GraphToolBoxWidget : public QWidget, public Ui::GraphToolBoxWidget{
 		void on__btnNewGraph_clicked();
 
 		void on__comboGraphLayers_activated(int i);
+		void on__btnSetOriented_clicked();
 
 	signals:
 		/* Signal emmited when the active graph changes */

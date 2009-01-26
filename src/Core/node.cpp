@@ -1,4 +1,4 @@
-/***************************************************************************
+ /***************************************************************************
  * main.cpp
  * This file is part of the KDE project
  * copyright (C)2004-2007 by Tomaz Canabrava (tomaz.canabrava@gmail.com)

@@ -33,6 +33,8 @@
 #include "graph.h"
 
 #include "graphicsitem_Node.h"
+
+
 #include <KDebug>
 
 EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
@@ -80,11 +82,12 @@ void EdgeItem::removed(){
 }
 
 void EdgeItem::updatePos(){
-    
     setLine( _edge->from()->property("x").toInt(),
 	     _edge->from()->property("y").toInt(),
 	     _edge->to()->property("x").toInt(),
 	     _edge->to()->property("y").toInt());
+    update();
+    kDebug() << "Chamou Isso";
 }
 
 void EdgeItem::updateName(const QString& ){}

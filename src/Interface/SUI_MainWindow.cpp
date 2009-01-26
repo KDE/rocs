@@ -239,8 +239,17 @@ void MainWindow::setGraph( Graph *g){
 		AbstractAction *absAction = qobject_cast<AbstractAction*>(action);
 		absAction->setGraph(g);
 	}
+	_graphVisualEditor->scene()->setGraph(g);
+	_graph = g;
 }
 
+Graph* MainWindow::graph() const{
+	return _graph;
+}
+
+GraphScene* MainWindow::scene() const {
+	return _graphVisualEditor->scene();
+}
 void MainWindow::executeScript(){
 
 }
