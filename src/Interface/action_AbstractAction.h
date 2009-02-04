@@ -63,6 +63,8 @@ public slots:
   virtual void executePress(QPointF pos);
   virtual void executeMove(QPointF pos);
   virtual void executeRelease(QPointF pos);
+  virtual void executeKeyPress(QKeyEvent *keyEvent);
+  virtual void executeKeyRelease(QKeyEvent *keyEvent);
 
   /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
   void sendExecuteBit();

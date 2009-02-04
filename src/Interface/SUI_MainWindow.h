@@ -81,7 +81,7 @@ private:
 	// Other Bunch of stuff.
 	QList<GraphDocument*> _documents;
 	GraphDocumentModel *_documentModel;
-	KActionCollection	*_paletteActions;
+	KActionCollection *_paletteActions;
 
 	KTextEditor::Document *_scriptDoc;
 

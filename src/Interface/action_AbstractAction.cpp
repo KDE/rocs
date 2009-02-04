@@ -54,3 +54,5 @@ void AbstractAction::sendExecuteBit()
 void AbstractAction::executePress(QPointF){ return; }
 void AbstractAction::executeMove(QPointF){ return; }
 void AbstractAction::executeRelease(QPointF) { return; }
+void AbstractAction::executeKeyPress(QKeyEvent*){ return;  }
+void AbstractAction::executeKeyRelease(QKeyEvent*){ return; }

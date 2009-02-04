@@ -59,7 +59,7 @@
 #include "action_AddEdge.h"
 #include "action_MoveNode.h"
 #include "action_SingleSelect.h"
-
+#include "action_SmartAction.h"
 #include "settings.h" 
 
 MainWindow::MainWindow() : 
@@ -169,8 +169,8 @@ QWidget* MainWindow::setupLeftPanel(){
 	//! constructing the Default Looking LeftSide menu.
 	QWidget *toolBox = new QWidget( this );
 
-	_OpenedFiles		 = new OpenedFilesWidget ( _documentModel, toolBox );
-	_PaletteBar			= new PaletteBarWidget	( toolBox );
+	_OpenedFiles = new OpenedFilesWidget ( _documentModel, toolBox );
+	_PaletteBar	= new PaletteBarWidget	( toolBox );
 	_GraphProperties = new GraphPropertiesWidget( toolBox ); 
 
 	QStackedWidget *toolsStack = new QStackedWidget();

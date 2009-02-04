@@ -31,6 +31,7 @@
 */
 
 class AddNodeAction : public AbstractAction{
+  Q_OBJECT;
   public:
     /*! 
       Default constructor 
@@ -47,7 +48,6 @@ class AddNodeAction : public AbstractAction{
   public slots:
     /*! 
       this will be executed if type is the same as this action's type. 
-      \param type must be the same type as this action to execute this.
       \param pos the position on the screen that the new node will be placed.
 
     */

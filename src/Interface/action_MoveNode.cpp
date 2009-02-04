@@ -48,7 +48,6 @@ void MoveNodeAction::executePress(QPointF pos){
 void MoveNodeAction::executeMove(QPointF pos){
   if ( ! _movableNode ){ return; }
   _movableNode -> updatePos( pos );
-  kDebug() << "Chamou updatePos";
 }
 
 void MoveNodeAction::executeRelease(QPointF pos){

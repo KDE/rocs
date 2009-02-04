@@ -87,7 +87,6 @@ void EdgeItem::updatePos(){
 	     _edge->to()->property("x").toInt(),
 	     _edge->to()->property("y").toInt());
     update();
-    kDebug() << "Chamou Isso";
 }
 
 void EdgeItem::updateName(const QString& ){}

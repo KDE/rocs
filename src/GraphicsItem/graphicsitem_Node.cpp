@@ -96,14 +96,12 @@ void NodeItem::updatePos(QPointF pos){
 		foreach(QGraphicsItem* i, _edges){
 			EdgeItem *edgeItem = qgraphicsitem_cast<EdgeItem*>(i);
 			edgeItem->updatePos();
-			kDebug()  << "Edge Atualizado";
 		}
 	}
 	else{
 		foreach(QGraphicsItem* i, _edges){
 			OrientedEdgeItem *edgeItem = qgraphicsitem_cast<OrientedEdgeItem*>(i);
 			edgeItem->updatePos();
-			kDebug()  << "Edge Atualizado";
 		}
 	}
 }

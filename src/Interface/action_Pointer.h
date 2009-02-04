@@ -31,6 +31,7 @@
 */
 
 class PointerAction : public AbstractAction{
+  Q_OBJECT;
   public:
     /*! 
       Default constructor 

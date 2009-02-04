@@ -33,6 +33,7 @@ class NodeItem;
 */
 
 class MoveNodeAction : public AbstractAction{
+  Q_OBJECT;
   public:
     /*! 
       Default constructor 

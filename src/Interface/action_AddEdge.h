@@ -34,6 +34,7 @@ class NodeItem;
 */
 
 class AddEdgeAction : public AbstractAction{
+  Q_OBJECT;
   public:
     /*! 
       Default constructor 

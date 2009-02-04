@@ -44,7 +44,6 @@ void GraphToolBoxWidget::on__btnNewGraph_clicked()
 
 void GraphToolBoxWidget::setGraphDocument( GraphDocument *document)
 {
-	kDebug() << "Got The Graph";
 	if ( _layerModel != 0) delete _layerModel;
 	_document = document;
 	_layerModel = new GraphLayersModel( document );
@@ -73,5 +72,4 @@ void GraphToolBoxWidget::on__btnSetOriented_clicked(){
 	Graph *g = _mainWindow->graph();
 	g->setDirected(_btnSetOriented->isChecked());
 	_mainWindow->scene()->updateGraph(g);
-	kDebug() <<  "Rodou Isso";
 }
