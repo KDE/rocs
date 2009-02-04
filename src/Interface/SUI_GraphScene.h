@@ -21,8 +21,8 @@ class GraphScene : public QGraphicsScene{
 public:
 	GraphScene(QObject *parent);
 	void setAction(AbstractAction *action);
-	NodeItem* createNode(Node *n);
-	EdgeItem* createEdge(Edge *e);
+	QGraphicsItem* createNode(Node *n);
+	QGraphicsItem* createEdge(Edge *e);
 	void updateGraph(Graph *g);
 	void setGraph(Graph *g);
 	void insertGraphItem(QGraphicsItem *item);

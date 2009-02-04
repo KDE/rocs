@@ -66,7 +66,7 @@ void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex){
 			return;
 		}
 	_mainWindow->setGraph(g);
-	kDebug() << "Send the Graph at position " << modelindex.row();
+	_btnSetOriented->setChecked(g->directed());
 }
 
 void GraphToolBoxWidget::on__btnSetOriented_clicked(){

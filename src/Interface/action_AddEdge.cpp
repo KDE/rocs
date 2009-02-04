@@ -93,19 +93,7 @@ void AddEdgeAction::executeRelease(QPointF pos){
     _working = false;
      return;
   }
-  
-  QGraphicsItem *edgeItem = 0;
-  if ( !_graph->directed() ){ 
-    edgeItem = new EdgeItem(e); 
-  }
-  else{ 
-    edgeItem = new OrientedEdgeItem(e);
-  }
-
-   _nodeFrom->addEdge(edgeItem);
-  _nodeTo->addEdge(edgeItem);
-
-  _graphScene->insertGraphItem(edgeItem);
+  _graphScene->createEdge(e);
 
   _nodeFrom = 0;
   _nodeTo = 0;

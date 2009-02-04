@@ -25,16 +25,33 @@ void GraphScene::setAction(AbstractAction *action){
   _action = action;
 }
 
-NodeItem *GraphScene::createNode(Node *n){
+QGraphicsItem *GraphScene::createNode(Node *n){
   NodeItem *nItem = new NodeItem(n);
   insertGraphItem(nItem);
   return nItem;
 }
 
-EdgeItem *GraphScene::createEdge(Edge *e){
-  EdgeItem *eItem = new EdgeItem(e);
-  insertGraphItem(eItem);
-  return eItem;
+QGraphicsItem *GraphScene::createEdge(Edge *e){
+    QGraphicsItem *edgeItem = 0;
+    
+    if ( !_graph->directed() ){ 
+      edgeItem = new EdgeItem(e); 
+    }
+    else{
+      edgeItem = new OrientedEdgeItem(e);
+    }
+    
+    qreal x1 = e->from()->property("x").toDouble();
+    qreal y1 = e->from()->property("y").toDouble();
+    qreal x2 = e->to()->property("x").toDouble();
+    qreal y2 = e->to()->property("y").toDouble();
+    
+    NodeItem *nFrom = qgraphicsitem_cast<NodeItem*>(itemAt(x1,y1));
+    NodeItem *nTo  = qgraphicsitem_cast<NodeItem*>(itemAt(x2,y2));
+    nFrom->addEdge(edgeItem);
+    nTo->addEdge(edgeItem);
+    insertGraphItem(edgeItem);
+    return edgeItem;
 }
 
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent){
@@ -72,33 +89,12 @@ void GraphScene::updateGraph(Graph *g){
 
   QList<Node*> nodes = g->nodes();
   foreach(Node *n, nodes){
-    _hashGraphs.insert(g, createNode(n));
+    createNode(n);
   }
   
   QList<Edge*> edges = g->edges();
-  
   foreach(Edge *e, edges){
-    QGraphicsItem *edgeItem = 0;
-    
-    if ( !_graph->directed() ){ 
-      edgeItem = new EdgeItem(e); 
-      kDebug()  << "Criou Edge nao orientado";
-    }
-    else{ 
-      edgeItem = new OrientedEdgeItem(e);
-      kDebug() << "Criou Edge Orientado";
-    }
-    
-    qreal x1 = e->from()->property("x").toDouble();
-    qreal y1 = e->from()->property("y").toDouble();
-    qreal x2 = e->to()->property("x").toDouble();
-    qreal y2 = e->to()->property("y").toDouble();
-    
-    NodeItem *nFrom = qgraphicsitem_cast<NodeItem*>(itemAt(x1,y1));
-    NodeItem *nTo  = qgraphicsitem_cast<NodeItem*>(itemAt(x2,y2));
-    nFrom->addEdge(edgeItem);
-    nTo->addEdge(edgeItem);
-    insertGraphItem(edgeItem);
+    createEdge(e);
   }
 
  /* QList<Group*> groups = g->groups();
