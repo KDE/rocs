@@ -53,7 +53,10 @@ void AddEdgeAction::executePress(QPointF pos){
   _working = true;
   _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
 
-  if ( ! _nodeFrom ) return;
+  if ( ! _nodeFrom ){
+    _working = false;
+    return;
+  }
   _startPos = QPointF(_nodeFrom->node()->property("x").toInt(), 
 		      _nodeFrom->node()->property("y").toInt()); 
 }
@@ -86,7 +89,13 @@ void AddEdgeAction::executeRelease(QPointF pos){
     _working = false;
     return; 
   }
-
+  
+  if (_nodeFrom == 0){
+    
+  }
+  if (_nodeTo == 0){
+    kDebug() << "nao tem node de saida";
+  }
   Edge *e = _graph -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
   if (e == 0){
     _nodeFrom = 0;
