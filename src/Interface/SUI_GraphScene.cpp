@@ -3,6 +3,7 @@
 
 #include "node.h"
 #include "edge.h"
+#include "graphDocument.h"
 #include "graphicsitem_Node.h"
 #include "graphicsitem_Edge.h"
 #include "graphicsitem_OrientedEdge.h"
@@ -102,5 +103,19 @@ void GraphScene::updateGraph(Graph *g){
     
   }
 */
+}
 
+void GraphScene::updateDocument(){
+//	if (_graphDocument == 0){
+//	    kDebug() << "FUDEU!";
+//	    return;
+//	}
+
+	
+	kDebug() << "Graph Document Size: " << _graphDocument;
+
+	//for(int i = 0; i < size; i++){
+		
+		//updateGraph( _graphDocument->at(i) );	
+	//}
 }

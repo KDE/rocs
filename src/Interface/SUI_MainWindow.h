@@ -90,9 +90,11 @@ private:
 	QSplitter *_hSplitter;
 
 	// The Active Graph.
+	GraphDocument *_activeGraphDocument;
 	Graph *_graph;
 private slots:
 	void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
+	void setActiveGraphDocument(GraphDocument *d);
 	void executeScript();
 
 public slots:

@@ -63,7 +63,7 @@ void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex){
 	Graph *g = _layerModel -> at(modelindex);
 	if (g == 0){ 
 			return;
-		}
+	}
 	_mainWindow->setGraph(g);
 	_btnSetOriented->setChecked(g->directed());
 }

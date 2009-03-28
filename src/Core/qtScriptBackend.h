@@ -28,13 +28,13 @@ class KTextBrowser;
 
 class QtScriptBackend : public QScriptEngine{
 public:
-  QtScriptBackend(GraphDocument *graphs,  KTextBrowser *debugArea);
+  QtScriptBackend(GraphDocument& graphs,  KTextBrowser *debugArea);
   void setScript(const QString& s);
   void loadFile(const QString& file);
 	
 private:
   QString _script;
-  GraphDocument *_graphs;
+  GraphDocument& _graphs;
   KTextBrowser  *_debugArea;
   void createGraphList();
 };

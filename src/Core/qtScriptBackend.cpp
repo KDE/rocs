@@ -20,23 +20,30 @@
 #include "krossBackend.h"
 #include "graph.h"
 #include "node.h"
-#include <QDebug>
+#include "graphDocument.h"
+#include <KDebug>
 #include <QTextCodec>
 #include <KTextBrowser>
 #include "graphDocument.h"
 
-QtScriptBackend::QtScriptBackend(GraphDocument *graphs, KTextBrowser *debugArea)
+QtScriptBackend::QtScriptBackend(GraphDocument& graphs, KTextBrowser *debugArea): _graphs(graphs)
 {
+	kDebug() << "Starting Script Backend";
 	_debugArea = debugArea;
-	_graphs = graphs;
-	foreach(Graph *g, (*_graphs) ){
-		g -> setEngine(this);
+	
+	kDebug() << "Graph Document" << _graphs;
+
+	int size = _graphs.size();
+	for(int i = 0; i < size; i++){
+		_graphs.at(i)->setEngine(this);	
 	}
 	createGraphList();
+	kDebug() << "ScriptBackend Created";
 }
 
 void QtScriptBackend::setScript(const QString& s){
 	_script = s;
+	kDebug() << "script Set";
 }
 
 void QtScriptBackend::createGraphList(){
@@ -45,8 +52,10 @@ void QtScriptBackend::createGraphList(){
 
 	// Add all the graphs on the array as an array, and if it has a name, 
 	// also add it for direct acess with it's name.
-	foreach(Graph *g, (*_graphs) ){
-		graphList.property("push").call(graphList, QScriptValueList() << g->scriptValue());
+	int size = _graphs.size();
+	for(int i = 0; i < size; i++){
+		kDebug() << "Graph added as scriptvalue" << i << _graphs.at(i)->scriptValue().toString();
+		graphList.property("push").call(graphList, QScriptValueList() << _graphs.at(i)->scriptValue());
 	}
 }
 

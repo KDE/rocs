@@ -24,6 +24,7 @@ public:
 	QGraphicsItem* createNode(Node *n);
 	QGraphicsItem* createEdge(Edge *e);
 	void updateGraph(Graph *g);
+	void updateDocument();
 	void setGraph(Graph *g);
 	void insertGraphItem(QGraphicsItem *item);
 

@@ -62,12 +62,16 @@
 #include "action_SmartAction.h"
 #include "settings.h" 
 
+// backends
+#include "qtScriptBackend.h"
+
 MainWindow::MainWindow() : 
 	KXmlGuiWindow(),
 	_leftTabId(0)
-	{
+{
 	_documentModel = 0;
-	
+	_activeGraphDocument = 0;
+	_graph = 0;
 	setObjectName ( "Rocs" );
 
 	setupModels();
@@ -78,6 +82,7 @@ MainWindow::MainWindow() :
 
 	// this will create a new opened file by default.
 	_OpenedFiles->on__btnNewFile_clicked();
+	
 }
 
 MainWindow::~MainWindow(){
@@ -224,10 +229,18 @@ void MainWindow::setupSignals(){
 	connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
 		 _graphVisualEditor,	 SLOT(setGraphDocument(GraphDocument*)));
 
+	connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
+		 this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
+
 	// action here is "single selection action. please, change that to a more intuitive approach.
 	connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
 		_GraphProperties, SLOT(setDataSource(QObject*)));
 
+}
+
+void MainWindow::setActiveGraphDocument(GraphDocument* d){
+  kDebug() << "Graph Document set as Active: " << d->name();
+  _activeGraphDocument = d;
 }
 
 void MainWindow::setGraph( Graph *g){
@@ -250,6 +263,22 @@ Graph* MainWindow::graph() const{
 GraphScene* MainWindow::scene() const {
 	return _graphVisualEditor->scene();
 }
-void MainWindow::executeScript(){
 
+void MainWindow::executeScript(){
+#ifdef USING_QTSCRIPT
+	kDebug() << "Iniciando a execucao do Script";
+	if (_activeGraphDocument == 0){ kDebug() << "Graph Document is NULL"; return;}
+	if (_txtDebug == 0){ kDebug() << "Debug Text Area is NULL"; return; }
+
+	QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
+	QScriptValue results = engine->evaluate("graphs.length");
+	_txtDebug->setPlainText(results.toString());
+	
+	if (scene() == 0){
+	    kDebug() << "Debug is NULL";
+	    return;
+	}
+
+	scene()->updateDocument();
+#endif
 }

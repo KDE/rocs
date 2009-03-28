@@ -30,7 +30,6 @@
 #include "graphicsitem_OrientedEdge.h"
 
 #include <KLocale>
-
 #include <KDebug>
 
 SingleSelectAction::SingleSelectAction(GraphScene *scene, QObject *parent) 
@@ -54,7 +53,6 @@ void SingleSelectAction::executeRelease(QPointF pos){
 
 
   QGraphicsItem * item = _graphScene->itemAt(pos);
-  //! release all current selected items from it's imprisioner.
   if ( ! item ){ 
     emit ItemSelectedChanged(0);
     return; 
@@ -65,6 +63,7 @@ void SingleSelectAction::executeRelease(QPointF pos){
   
 // TODO: Rewrite this to a more ellegant way.
   QObject *obj = 0;
+  kDebug() << "Item Selecionado.";
   if (qgraphicsitem_cast<NodeItem*>(item)){
     obj = (qgraphicsitem_cast<NodeItem*>(item)) -> node();
   }
@@ -75,6 +74,7 @@ void SingleSelectAction::executeRelease(QPointF pos){
     obj = (qgraphicsitem_cast<OrientedEdgeItem*>(item)) -> edge();
   }
   emit ItemSelectedChanged(obj);
+  
 }
 
 #include "action_SingleSelect.moc"
