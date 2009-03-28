@@ -159,7 +159,7 @@ QWidget* MainWindow::setupRightPanel(){
 	toolsStack->addWidget(_docView);
 	toolsStack->addWidget(_txtDebug);
 
-// Tab bar outside the main area, gee... I need a better way to document this.
+	// Tab bar outside the main area, gee... I need a better way to document this.
 	_bottomTabBar = new KMultiTabBar(KMultiTabBar::Bottom, this);
 	_bottomTabBar->setStyle(KMultiTabBar::KDEV3ICON);
 	_bottomTabBar->appendTab(KIcon("accessories-text-editor").pixmap(16), 0, "Editor");
@@ -264,13 +264,63 @@ void MainWindow::setupActions(){
 	// Pointer Action is the first. 
 	gc -> setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
 
-	KAction* clearAction = new KAction(this);
-	clearAction->setText(i18n("Clear"));
-	clearAction->setIcon(KIcon("document-new"));
-	clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
-	actionCollection()->addAction("clear", clearAction);
-	connect(clearAction, SIGNAL(triggered(bool)), kapp, SLOT(quit()));
+	KAction* action = new KAction(this);
+	action->setText(i18n("New Graph"));
+	action->setIcon(KIcon("document-new"));
+	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("new-graph", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(newGraph()));
  
+	action = new KAction(this);
+	action->setText(i18n("Open Graph"));
+	action->setIcon(KIcon("document-open"));
+	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("open-graph", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(openGraph()));
+
+	action = new KAction(this);
+	action->setText(i18n("Save Graph"));
+	action->setIcon(KIcon("document-new"));
+	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("save-graph", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraph()));
+
+	action = new KAction(this);
+	action->setText(i18n("Save Graph As"));
+	action->setIcon(KIcon("document-new"));
+	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("save-graph-as", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraphAs()));
+
+	action = new KAction(this);
+	action->setText(i18n("New Script"));
+	action->setIcon(KIcon("document-new"));
+	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("new-script", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(newScript()));
+ 
+	action = new KAction(this);
+	action->setText(i18n("Open Script"));
+	action->setIcon(KIcon("document-open"));
+	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("open-script", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(openScript()));
+
+	action = new KAction(this);
+	action->setText(i18n("Save Script"));
+	action->setIcon(KIcon("document-new"));
+	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("save-script", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScript()));
+
+	action = new KAction(this);
+	action->setText(i18n("Save Script As"));
+	action->setIcon(KIcon("document-new"));
+	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("save-script-as", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScriptAs()));
+
+
 	KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 
 }
@@ -333,3 +383,12 @@ void MainWindow::executeScript(){
 	_graphVisualEditor->scene()->updateDocument();
 #endif
 }
+
+void MainWindow::newGraph(){}
+void MainWindow::openGraph(){}
+void MainWindow::saveGraph(){}
+void MainWindow::saveGraphAs(){}
+void MainWindow::newScript(){}
+void MainWindow::openScript(){}
+void MainWindow::saveScript(){}
+void MainWindow::saveScriptAs(){}

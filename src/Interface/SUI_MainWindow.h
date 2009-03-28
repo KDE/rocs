@@ -100,6 +100,16 @@ private slots:
 	void setActiveGraphDocument(GraphDocument *d);
 	void executeScript();
 	void releaseRunButton();
+
+	void newGraph();
+	void openGraph();
+	void saveGraph();
+	void saveGraphAs();
+
+	void newScript();
+	void openScript();
+	void saveScript();
+	void saveScriptAs();
 public slots:
 	void setGraph(Graph *g);
 };

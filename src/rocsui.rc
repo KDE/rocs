@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml version="1.0" encoding="UTF-8"?>
 <gui name="rocs"
      version="1"
      xmlns="http://www.kde.org/standards/kxmlgui/1.0"
@@ -9,7 +8,14 @@
  
   <MenuBar>
     <Menu name="file" >
-      <Action name="clear" />
+      <Action name="new-graph" />
+      <Action name="open-graph" />
+      <Action name="save-graph" />
+      <Action name="save-graph-as" />
+      <Action name="new-script" />
+      <Action name="open-script" />
+      <Action name="save-script" />
+      <Action name="save-script-as" />
     </Menu>
   </MenuBar>
  
@@ -17,6 +23,5 @@
     <text>Main Toolbar</text>
     <Action name="clear" />
   </ToolBar>
- 
 </gui>
-<!-- -->
+
