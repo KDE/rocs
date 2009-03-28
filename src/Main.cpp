@@ -26,7 +26,7 @@
 
 int main ( int argc, char *argv[] ){
   KAboutData aboutData ("rocs",    
-			0,
+			"rocs",
 			ki18n ( "Rocs 1" ),  
 			"1.0",
 			ki18n ( "Graph Theory Tool" ),

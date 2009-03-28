@@ -31,6 +31,8 @@
 #include <KIcon>
 #include <QSplitter>
 #include <KDebug>
+#include <KApplication>
+
 #include <ktexteditor/document.h>
 #include <ktexteditor/view.h>
 #include <ktexteditor/editor.h>
@@ -65,6 +67,10 @@
 // backends
 #include "qtScriptBackend.h"
 
+
+#include <kstandarddirs.h>
+
+
 MainWindow::MainWindow() : 
 	KXmlGuiWindow(),
 	_leftTabId(0)
@@ -76,13 +82,16 @@ MainWindow::MainWindow() :
 
 	setupModels();
 	setupWidgets();
-	setupGUI();
+	
 	setupActions();
 	setupSignals();
 
 	// this will create a new opened file by default.
 	_OpenedFiles->on__btnNewFile_clicked();
-	
+	kDebug() << "##############################################";
+	kDebug() << KStandardDirs::locate("data", "rocs/rocsui.rc") ;
+	kDebug() << "################################################";
+	setupGUI();
 }
 
 MainWindow::~MainWindow(){
@@ -126,10 +135,10 @@ void MainWindow::setupWidgets(){
 }
 
 QWidget* MainWindow::setupRightPanel(){
-// Top Area, The Graph Visual Editor.
+	// Top Area, The Graph Visual Editor.
 	_graphVisualEditor = new GraphVisualEditor(this);
 
-// Bottom Area, the rest. ( Script Editor, Debugger )
+	// Bottom Area, the rest. ( Script Editor, Debugger )
 	KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
 	if (!editor){
 		KMessageBox::error(this, i18n("A KDE Text Editor could not be found, \n please, check your installation"));
@@ -142,7 +151,6 @@ QWidget* MainWindow::setupRightPanel(){
 
 	#ifdef USING_QTSCRIPT
 	_scriptDoc->setMode("JavaScript");
-	
 	#endif
 
 	_txtDebug = new KTextBrowser(this);
@@ -255,6 +263,15 @@ void MainWindow::setupActions(){
 
 	// Pointer Action is the first. 
 	gc -> setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
+
+	KAction* clearAction = new KAction(this);
+	clearAction->setText(i18n("Clear"));
+	clearAction->setIcon(KIcon("document-new"));
+	clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+	actionCollection()->addAction("clear", clearAction);
+	connect(clearAction, SIGNAL(triggered(bool)), kapp, SLOT(quit()));
+ 
+	KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 
 }
 

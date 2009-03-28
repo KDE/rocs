@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<!-- -->
-<gui name="Rocs" version="1">
-  <ToolBar name="mainToolBar">
-	  <text> Main toolbar </text>
-  </ToolBar>
+<?xml version="1.0" encoding="UTF-8"?>
+<gui name="rocs"
+     version="1"
+     xmlns="http://www.kde.org/standards/kxmlgui/1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
+                         http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd" >
+ 
   <MenuBar>
-    <text> Main menubar </text>
-    <Menu name="file">
-	    <text> &amp;File </text>
-    </Menu>
-    <Menu name="edit">
-	    <text> &amp;Edit </text>
-    </Menu>
-    <Menu name="view">
-	    <text> &amp;View </text>
-    </Menu>
-    <Menu name="tools">
-	    <text> &amp;Tools </text>
-    </Menu>
-    <Menu name="settings">
-	    <text> &amp;Settings </text>
-    </Menu>
-    <Menu name="help">
-	    <text> &amp;Help </text>
+    <Menu name="file" >
+      <Action name="clear" />
     </Menu>
   </MenuBar>
+ 
+  <ToolBar name="mainToolBar" >
+    <text>Main Toolbar</text>
+    <Action name="clear" />
+  </ToolBar>
+ 
 </gui>
 <!-- -->
