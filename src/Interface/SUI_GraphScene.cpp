@@ -15,7 +15,8 @@
 #include "graph.h"
 
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent){
-	
+	_graphDocument = 0;
+
 }
 
 void GraphScene::setGraph(Graph *g){
@@ -26,6 +27,9 @@ void GraphScene::setAction(AbstractAction *action){
   _action = action;
 }
 
+void GraphScene::setGraphDocument(GraphDocument *gd){
+  _graphDocument = gd;
+}
 QGraphicsItem *GraphScene::createNode(Node *n){
   NodeItem *nItem = new NodeItem(n);
   insertGraphItem(nItem);
@@ -106,16 +110,16 @@ void GraphScene::updateGraph(Graph *g){
 }
 
 void GraphScene::updateDocument(){
-//	if (_graphDocument == 0){
-//	    kDebug() << "FUDEU!";
-//	    return;
-//	}
+	if (_graphDocument == 0){
+	    kDebug() << "Graph Document is null. please hit the developer.";
+	    return;
+	}
 
 	
-	kDebug() << "Graph Document Size: " << _graphDocument;
-
-	//for(int i = 0; i < size; i++){
+	kDebug() << "Graph Document Size: " << _graphDocument->size();
+	int size = _graphDocument->size();
+	for(int i = 0; i < size; i++){
 		
-		//updateGraph( _graphDocument->at(i) );	
-	//}
+		updateGraph( _graphDocument->at(i) );	
+	}
 }

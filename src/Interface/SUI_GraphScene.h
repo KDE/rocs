@@ -26,6 +26,7 @@ public:
 	void updateGraph(Graph *g);
 	void updateDocument();
 	void setGraph(Graph *g);
+	void setGraphDocument(GraphDocument *gd);
 	void insertGraphItem(QGraphicsItem *item);
 
 protected:

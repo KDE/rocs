@@ -279,6 +279,6 @@ void MainWindow::executeScript(){
 	    return;
 	}
 
-	scene()->updateDocument();
+	_graphVisualEditor->scene()->updateDocument();
 #endif
 }

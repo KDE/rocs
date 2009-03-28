@@ -150,6 +150,7 @@ void GraphVisualEditor::setGraphDocument( GraphDocument *gd){
 	_graphDocument = gd;
 	_scene->setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
 	_graphToolBox->setGraphDocument( gd );
+	_scene->setGraphDocument(gd);
 }
 
 void GraphVisualEditor::releaseGraphDocument(){
