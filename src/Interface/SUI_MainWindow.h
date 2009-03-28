@@ -70,6 +70,8 @@ private:
 	GraphPropertiesWidget* _GraphProperties; // Area where the nodes and edges will be modified.
 	KMultiTabBar *_leftTabBar; // Tab that will hold the pallete, opened files, graphLayers and Properties.
 	int _leftTabId;
+	int _bottomTabId;
+
 
 	// Right Area:
 	GraphVisualEditor* _graphVisualEditor; // Area where the graph will be editted.
@@ -94,9 +96,10 @@ private:
 	Graph *_graph;
 private slots:
 	void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
+	void releaseBottomTabbarButton(int index); // control the flux of the left tabbar.
 	void setActiveGraphDocument(GraphDocument *d);
 	void executeScript();
-
+	void releaseRunButton();
 public slots:
 	void setGraph(Graph *g);
 };

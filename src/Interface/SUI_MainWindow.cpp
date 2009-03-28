@@ -133,6 +133,7 @@ QWidget* MainWindow::setupRightPanel(){
 	KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
 	if (!editor){
 		KMessageBox::error(this, i18n("A KDE Text Editor could not be found, \n please, check your installation"));
+		exit(1);
 	}
 	_scriptDoc = editor->createDocument(0);
 	_docView = qobject_cast<KTextEditor::View*>(_scriptDoc->createView(this));
@@ -155,6 +156,15 @@ QWidget* MainWindow::setupRightPanel(){
 	connect(_bottomTabBar->tab(1), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
 	connect(_bottomTabBar->tab(2), SIGNAL(clicked(int)), this, SLOT( executeScript()));
 
+	for(int i = 0; i < 2; ++i){
+		connect(_bottomTabBar->tab(i), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
+		connect(_bottomTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseBottomTabbarButton(int)));
+	}
+	connect(_bottomTabBar->tab(2), SIGNAL(clicked(int)), this, SLOT(releaseRunButton()));
+
+	_bottomTabBar->setTab(0, true);
+	_bottomTabId = 0;
+
 	// Configure the visual area.
 	_vSplitter = new QSplitter(this);
 	_vSplitter->setOrientation(Qt::Vertical);
@@ -168,6 +178,12 @@ QWidget* MainWindow::setupRightPanel(){
 	l->addWidget(_bottomTabBar);
 	widget->setLayout(l);
 	return widget;
+}
+
+void MainWindow::releaseRunButton(){
+      _bottomTabBar->setTab(_bottomTabId, true);
+      _bottomTabBar->setTab(2, false);
+      kDebug() << "Tab 2 deveria ter desligado";
 }
 
 QWidget* MainWindow::setupLeftPanel(){
@@ -194,6 +210,7 @@ QWidget* MainWindow::setupLeftPanel(){
 		connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseLeftTabbarButton(int)));
 	}
 	_leftTabBar->setTab(0, true);
+	_leftTabId = 0;
 	return toolBox;
 }
 void MainWindow::releaseLeftTabbarButton(int index){
@@ -203,6 +220,15 @@ void MainWindow::releaseLeftTabbarButton(int index){
 	}
 	_leftTabBar->setTab( _leftTabId, false );
 	_leftTabId = index;
+}
+
+void MainWindow::releaseBottomTabbarButton(int index){
+	if ( _bottomTabId == index ){
+		_bottomTabBar->setTab( _bottomTabId, true );
+		return;
+	}
+	_bottomTabBar->setTab( _bottomTabId, false );
+	_bottomTabId = index;
 }
 
 void MainWindow::setupActions(){
@@ -271,7 +297,7 @@ void MainWindow::executeScript(){
 	if (_txtDebug == 0){ kDebug() << "Debug Text Area is NULL"; return; }
 
 	QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
-	QScriptValue results = engine->evaluate("graphs.length");
+	QScriptValue results = engine->evaluate(_scriptDoc->text().toAscii());
 	_txtDebug->setPlainText(results.toString());
 	
 	if (scene() == 0){

@@ -114,7 +114,6 @@ void GraphScene::updateDocument(){
 	    kDebug() << "Graph Document is null. please hit the developer.";
 	    return;
 	}
-
 	
 	kDebug() << "Graph Document Size: " << _graphDocument->size();
 	int size = _graphDocument->size();
