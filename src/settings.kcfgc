@@ -1,4 +1,4 @@
-File=Rocs.kcfg
+File=rocs.kcfg
 ClassName=Settings
 Singleton=true
 Mutators=true

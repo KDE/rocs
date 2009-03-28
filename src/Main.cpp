@@ -25,7 +25,7 @@
 #include "SUI_MainWindow.h"
 
 int main ( int argc, char *argv[] ){
-  KAboutData aboutData ("Rocs",    
+  KAboutData aboutData ("rocs",    
 			0,
 			ki18n ( "Rocs 1" ),  
 			"1.0",

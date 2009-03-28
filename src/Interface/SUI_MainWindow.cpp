@@ -135,9 +135,16 @@ QWidget* MainWindow::setupRightPanel(){
 		KMessageBox::error(this, i18n("A KDE Text Editor could not be found, \n please, check your installation"));
 		exit(1);
 	}
+	editor->setSimpleMode(true);
 	_scriptDoc = editor->createDocument(0);
+
 	_docView = qobject_cast<KTextEditor::View*>(_scriptDoc->createView(this));
+
+	#ifdef USING_QTSCRIPT
+	_scriptDoc->setMode("JavaScript");
 	
+	#endif
+
 	_txtDebug = new KTextBrowser(this);
 
 	QStackedWidget *toolsStack = new QStackedWidget();
@@ -213,6 +220,7 @@ QWidget* MainWindow::setupLeftPanel(){
 	_leftTabId = 0;
 	return toolBox;
 }
+
 void MainWindow::releaseLeftTabbarButton(int index){
 	if ( _leftTabId == index ){
 		_leftTabBar->setTab( _leftTabId, true );

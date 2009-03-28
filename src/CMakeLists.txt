@@ -1,4 +1,4 @@
-project(Rocs-rewrite)
+project(rocs)
 
 find_package(KDE4 REQUIRED)
 
@@ -12,24 +12,18 @@ add_subdirectory(GraphicsItem)
 add_subdirectory(Interface)
 add_subdirectory(Tests)
 
-set(Rocs_SRCS  Main.cpp )
-
-# Resource Files
-# set (Rocs_RCCS
-#    resources.qrc
-# )
-# qt4_add_resources(Rocs_RCC_SRCS ${Rocs_RCCS})
+set(rocs_SRCS  Main.cpp )
 
 # Since the JavaScript supports came from QtScript... 
 
 set (QT_USE_QTSCRIPT true)
 
-set(Rocs_KCFGS settings.kcfgc)
+set(rocs_KCFGS settings.kcfgc)
 
-kde4_add_kcfg_files( Rocs_SRCS ${Rocs_KCFGS} )
-kde4_add_executable(Rocs ${Rocs_SRCS} ${Rocs_RCC_SRCS})
+kde4_add_kcfg_files(rocs_SRCS ${rocs_KCFGS} )
+kde4_add_executable(rocs ${rocs_SRCS} ${rocs_RCC_SRCS})
 
-target_link_libraries(Rocs ${KDE4_KDEUI_LIBS}
+target_link_libraries(rocs ${KDE4_KDEUI_LIBS}
 			${KDE4_KROSSUI_LIBS}
       ${KDE4_KIO_LIBS}
       ${KDE4_KTEXTEDITOR_LIBS}
@@ -41,8 +35,8 @@ target_link_libraries(Rocs ${KDE4_KDEUI_LIBS}
 			librocscore
 )
 
-install( TARGETS Rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
-install( FILES Rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES Rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/Rocs  )
-install( FILES Rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
+install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( FILES rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs  )
+install( FILES rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
 
