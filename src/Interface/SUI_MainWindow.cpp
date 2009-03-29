@@ -280,14 +280,14 @@ void MainWindow::setupActions(){
 
 	action = new KAction(this);
 	action->setText(i18n("Save Graph"));
-	action->setIcon(KIcon("document-new"));
+	action->setIcon(KIcon("document-save"));
 	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
 	actionCollection()->addAction("save-graph", action);
 	connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraph()));
 
 	action = new KAction(this);
 	action->setText(i18n("Save Graph As"));
-	action->setIcon(KIcon("document-new"));
+	action->setIcon(KIcon("document-save-as"));
 	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
 	actionCollection()->addAction("save-graph-as", action);
 	connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraphAs()));
@@ -308,14 +308,14 @@ void MainWindow::setupActions(){
 
 	action = new KAction(this);
 	action->setText(i18n("Save Script"));
-	action->setIcon(KIcon("document-new"));
+	action->setIcon(KIcon("document-save"));
 	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
 	actionCollection()->addAction("save-script", action);
 	connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScript()));
 
 	action = new KAction(this);
 	action->setText(i18n("Save Script As"));
-	action->setIcon(KIcon("document-new"));
+	action->setIcon(KIcon("document-save-as"));
 	//clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
 	actionCollection()->addAction("save-script-as", action);
 	connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScriptAs()));
@@ -384,9 +384,20 @@ void MainWindow::executeScript(){
 #endif
 }
 
-void MainWindow::newGraph(){}
+void MainWindow::newGraph(){
+  _OpenedFiles->on__btnNewFile_clicked();
+}
+
 void MainWindow::openGraph(){}
-void MainWindow::saveGraph(){}
+void MainWindow::saveGraph(){
+  if (_activeGraphDocument == 0){ kDebug() << "Graph Document is NULL"; return;}
+  if (_activeGraphDocument->documentPath() == QString() ){
+      saveGraphAs();
+  }
+  else{
+
+  }
+}
 void MainWindow::saveGraphAs(){}
 void MainWindow::newScript(){}
 void MainWindow::openScript(){}

@@ -315,34 +315,12 @@ void GraphTests::testQtScript(){
 
 void GraphTests::saveTestFile(){
 	createPentagon();
-	GraphDocumentHandler docHandler;
-
-	QList<Graph*> graphList;
-	graphList.append(_graphDocument[0]);
-	
-	docHandler.saveAsInternalFormat(graphList, "/home/tumaix/pentagono.rif");
-	graphList.removeFirst();	
-	
-	create3x3();
-	graphList.append(_graphDocument[0]);
-	docHandler.saveAsInternalFormat(graphList, "/home/tumaix/square.rif");
-
-	graphList.removeFirst();
-	createPentagon();
-	graphList.append(_graphDocument[0]);
-	create3x3();
-	graphList.append(_graphDocument[0]);
-	docHandler.saveAsInternalFormat(graphList, "/home/tumaix/twographs.rif");
-	
+	_graphDocument.saveAsInternalFormat("/home/tomaz/pentagono.rif");
 }
 
 void  GraphTests::loadTestFile(){
-	QList<Graph*> listGraphs;
-	GraphDocumentHandler docHandler;
+ _graphDocument.loadFromInternalFormat("/home/tumaix/twographs.rif");
 
-	listGraphs = docHandler.loadFromInternalFormat("/home/tumaix/twographs.rif");
-	_graphDocument[0] = listGraphs[0];
-	
   QVERIFY2( _graphDocument[0]->nodes().size() == 5, "ERROR: Number of nodes is not 5 ");
   QVERIFY2( _graphDocument[0]->edges().size() == 5, "ERROR: Number of edges is not 5 ");
   
@@ -353,9 +331,8 @@ void  GraphTests::loadTestFile(){
     QVERIFY2( n->adjacent_edges().size() == 2, "ERRORR: Number of adjacent edges is not 2");
   }
 
-	_graphDocument[0] = listGraphs[1];
 
-   QVERIFY2( _graphDocument[0]->node("a")->out_edges().size()  == 1, "ERROR: Number of nodes is not 1 ");
+  QVERIFY2( _graphDocument[0]->node("a")->out_edges().size()  == 1, "ERROR: Number of nodes is not 1 ");
    QVERIFY2( _graphDocument[0]->node("a")->in_edges().size()   == 1, "ERROR: Number of edges is not 1 ");
    QVERIFY2( _graphDocument[0]->node("a")->self_edges().size() == 0, "ERROR: Number of nodes is not 0 ");
    QVERIFY2( _graphDocument[0]->node("a")->adjacent_nodes().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");

@@ -4,8 +4,10 @@
 #include <QList>
 #include <QString>
 #include "graph.h"
+#include "graphDocument.h"
 
 class Graph;
+
 class QObject;
 
 class GraphDocumentHandler{
@@ -15,8 +17,8 @@ class GraphDocumentHandler{
 
 public:
 	GraphDocumentHandler();
-	bool saveAsInternalFormat(QList<Graph*> graph, const QString& filename);
-  QList<Graph*> loadFromInternalFormat(const QString& filename);
+	bool saveAsInternalFormat(const GraphDocument& graph, const QString& filename);
+	GraphDocument loadFromInternalFormat(const QString& filename);
 	
 };
 

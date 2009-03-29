@@ -27,7 +27,6 @@ set( rocscore_LIB_SRCS
 	graph.cpp
 	edge.cpp
 	graphDocument.cpp
-	graphDocumentHandler.cpp
 	node.cpp
 	graphGroups.cpp
 	krossBackend.cpp

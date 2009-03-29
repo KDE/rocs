@@ -69,6 +69,13 @@ public:
   /*! \return the width of the working area */
   qreal width() const;
 
+  /* */
+  void savedDocumentAt(const QString& fileName);
+
+  const QString& documentPath() const ;
+
+  bool saveAsInternalFormat(const QString& filename);
+  void loadFromInternalFormat(const QString& filename);
 public slots:
   /*! Creates a new Graph 
     \param name the name of the graph
@@ -98,6 +105,9 @@ signals:
   void widthChanged(qreal width);
 
 private:
+  QString buf;
+  void  savePropertiesInternalFormat(QObject *o);
+  QString _lastSavedDocumentPath;
   QString _name;
   qreal _width;
   qreal _height;
