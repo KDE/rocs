@@ -24,7 +24,6 @@
 #include "krossBackend.h"
 #include "qtScriptBackend.h"
 #include "graphDocument.h"
-#include "graphDocumentHandler.h"
 #include <qtest_kde.h>
 
 #include <kross/core/action.h>
