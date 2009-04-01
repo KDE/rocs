@@ -403,3 +403,4 @@ void MainWindow::newScript(){}
 void MainWindow::openScript(){}
 void MainWindow::saveScript(){}
 void MainWindow::saveScriptAs(){}
+
