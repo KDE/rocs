@@ -65,6 +65,7 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent){
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent){
   _action->executePress(mouseEvent->scenePos());
+  //QGraphicsScene::mousePressEvent(mouseEvent);
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent){

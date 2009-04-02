@@ -118,6 +118,7 @@ void GraphVisualEditor::setupWidgets(){
 	QGraphicsView *graphicsView = new QGraphicsView();
 	graphicsView->setRenderHints(QPainter::Antialiasing);
 	graphicsView->setScene(_scene);
+	graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 	vLayout -> addWidget( _toolbar );
 	vLayout -> addWidget ( graphicsView );
 	setLayout( vLayout );

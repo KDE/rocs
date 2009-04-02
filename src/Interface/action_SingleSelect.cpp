@@ -46,11 +46,11 @@ void SingleSelectAction::executeRelease(QPointF pos){
   if ( !_graph ) return; 
 
   QList<QGraphicsItem*> currentSelection = _graphScene->selectedItems();
+  kDebug() << "Number of selected Items: " << currentSelection.size();
   foreach(QGraphicsItem *i, currentSelection){
     i->setSelected(false);
     i->update();
   }
-
 
   QGraphicsItem * item = _graphScene->itemAt(pos);
   if ( ! item ){ 
@@ -59,13 +59,13 @@ void SingleSelectAction::executeRelease(QPointF pos){
   }
 
   item->setSelected(true);
-  item->update();
-  
-// TODO: Rewrite this to a more ellegant way.
+
+  kDebug() << "item is selected? " << item->isSelected();
+
   QObject *obj = 0;
-  kDebug() << "Item Selecionado.";
+
   if (qgraphicsitem_cast<NodeItem*>(item)){
-    obj = (qgraphicsitem_cast<NodeItem*>(item)) -> node();
+    obj = (qgraphicsitem_cast<NodeItem*>(item)) -> node();    
   }
   else if (qgraphicsitem_cast<EdgeItem*>(item)){
     obj = (qgraphicsitem_cast<EdgeItem*>(item)) -> edge();
@@ -75,6 +75,7 @@ void SingleSelectAction::executeRelease(QPointF pos){
   }
   emit ItemSelectedChanged(obj);
   
+  item->update();
 }
 
 #include "action_SingleSelect.moc"

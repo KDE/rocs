@@ -24,7 +24,8 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QStyleOption>
-
+#include <QPen>
+#include <QBrush>
 
 #include "node.h"
 #include "graph.h"
@@ -40,14 +41,14 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 	setPos( pos );
 	setCacheMode(DeviceCoordinateCache);
 	setZValue(1);
-	setFlag(ItemIsSelectable);
-
+	setFlag(ItemIsSelectable, true);
+	
 	connect (_node, SIGNAL(removed()), this, SLOT(removed()));
 }
 
- QRectF NodeItem::boundingRect() const{
-	 return QRectF(-12, -12 , 25, 25);
- }
+ QRectF NodeItem::boundingRect() const{ 
+  return QRectF(-12, -12 , 25, 25); 
+}
 
  QPainterPath NodeItem::shape() const{
 	 QPainterPath path;
@@ -56,33 +57,37 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
  }
 
  void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *){
-		
-	 painter->setPen(Qt::NoPen);
 
+	if (isSelected()){
+		kDebug() << "IT'S BEING DRAWNED!";
+		QPen pen;
+		pen.setStyle(Qt::DotLine);
+		pen.setWidth(1);
+		pen.setBrush(Qt::black);
+
+		painter->setBrush(QBrush());
+		painter->setPen(pen);
+		painter->drawRect(QRectF(-11 , -11 , 24 , 24 ));
+	}
+
+	 painter->setPen(Qt::NoPen);
 	 QColor color = _node->property("color").value<QColor>();
 	 painter->setBrush( color.dark(240) );
 
 	 painter->drawEllipse(-7, -7, 20, 20);
 	 QRadialGradient gradient(-3, -3, 10);
 	 if (option->state & QStyle::State_Sunken) {
-		 gradient.setCenter(3, 3);
-		 gradient.setFocalPoint(3, 3);
-		 gradient.setColorAt(1, color.light(120));
-		 gradient.setColorAt(0, color);
+		 gradient.setColorAt(0, color.light(240));
+		 gradient.setColorAt(1, color);
 	 } else {
 		 gradient.setColorAt(0, color.light(240));
 		 gradient.setColorAt(1, color);
 	 }
 
-	 painter->setBrush(gradient);
-	 painter->setPen(QPen(color, 2));
-	 painter->drawEllipse(-10, -10, 20, 20);
+	painter->setBrush(gradient);
+	painter->setPen(QPen(color, 2));
+	painter->drawEllipse(-10, -10, 20, 20);
 
-	if (isSelected()){
-		painter->setBrush(QBrush());
-		painter->setPen(QPen(Qt::black));
-		painter->drawRect(QRectF(-12 , -12 , 25 , 25 ));
-	}
 
  }
 
@@ -90,7 +95,7 @@ void NodeItem::updatePos(QPointF pos){
 	_node->setProperty("x", pos.x());
 	_node->setProperty("y", pos.y());
 	setPos( pos );
-	update();
+
 	Graph *g = qobject_cast<Graph*>(_node->parent());
 	if (!g->directed()){
 		foreach(QGraphicsItem* i, _edges){
