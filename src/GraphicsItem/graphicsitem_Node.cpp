@@ -39,7 +39,7 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 	_node = node;
 	QPointF pos( _node -> property("x").toDouble() ,_node->property("y").toDouble() );
 	setPos( pos );
-	setCacheMode(NoCache);
+	setCacheMode(DeviceCoordinateCache);
 	setZValue(1);
 	setFlag(ItemIsSelectable, true);
 
