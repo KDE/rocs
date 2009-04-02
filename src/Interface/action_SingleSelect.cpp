@@ -61,7 +61,7 @@ void SingleSelectAction::executeRelease(QPointF pos){
   item->setSelected(true);
 
   kDebug() << "item is selected? " << item->isSelected();
-
+  kDebug() << "item is visible?" << item->isVisible();
   QObject *obj = 0;
 
   if (qgraphicsitem_cast<NodeItem*>(item)){

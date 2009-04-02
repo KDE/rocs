@@ -39,10 +39,10 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 	_node = node;
 	QPointF pos( _node -> property("x").toDouble() ,_node->property("y").toDouble() );
 	setPos( pos );
-	setCacheMode(DeviceCoordinateCache);
+	setCacheMode(NoCache);
 	setZValue(1);
 	setFlag(ItemIsSelectable, true);
-	
+
 	connect (_node, SIGNAL(removed()), this, SLOT(removed()));
 }
 
@@ -83,7 +83,7 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 		 gradient.setColorAt(0, color.light(240));
 		 gradient.setColorAt(1, color);
 	 }
-
+	kDebug() << "Called";
 	painter->setBrush(gradient);
 	painter->setPen(QPen(color, 2));
 	painter->drawEllipse(-10, -10, 20, 20);
