@@ -63,7 +63,7 @@ public:
   void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
    Node* node() { return _node; }
-	void addEdge(QGraphicsItem *e);
+   void addEdge(QGraphicsItem *e);
 
 
 protected slots:

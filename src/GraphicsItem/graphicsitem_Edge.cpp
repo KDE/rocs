@@ -96,7 +96,7 @@ void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     QGraphicsLineItem::paint(painter, option);
  }
  else{
-    _pen -> setWidth(3);
+    _pen -> setWidth(4);
     _pen->setBrush(_edge->property("color").value<QColor>().light(120));
     painter->setPen((*_pen));
     painter->drawLine(line());
