@@ -49,7 +49,9 @@ void SingleSelectAction::executeRelease(QPointF pos){
   kDebug() << "Number of selected Items: " << currentSelection.size();
   foreach(QGraphicsItem *i, currentSelection){
     i->setSelected(false);
+    i->setCacheMode( QGraphicsItem::NoCache );
     i->update();
+    i->setCacheMode( QGraphicsItem::DeviceCoordinateCache );
   }
 
   QGraphicsItem * item = _graphScene->itemAt(pos);
@@ -75,7 +77,9 @@ void SingleSelectAction::executeRelease(QPointF pos){
   }
   emit ItemSelectedChanged(obj);
   
+  item->setCacheMode( QGraphicsItem::NoCache );
   item->update();
+  item->setCacheMode( QGraphicsItem::DeviceCoordinateCache );
 }
 
 #include "action_SingleSelect.moc"
