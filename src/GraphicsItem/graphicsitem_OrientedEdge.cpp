@@ -177,17 +177,21 @@ QPainterPath OrientedEdgeItem::createCurves(){
   return p;
 }
 
- void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
- {
+void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *){
+  QGraphicsPathItem::paint(painter, option);
+}
+
+void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
      update();
      QGraphicsItem::mousePressEvent(event);
- }
+}
 
- void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
- {
-     update();
-     QGraphicsItem::mouseReleaseEvent(event);
- }
+void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    update();
+    QGraphicsItem::mouseReleaseEvent(event);
+}
 
 void OrientedEdgeItem::removed(){
   kDebug() << " Not Implemented Yet " << "removed";

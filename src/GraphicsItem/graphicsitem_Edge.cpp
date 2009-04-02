@@ -89,6 +89,20 @@ void EdgeItem::updatePos(){
     update();
 }
 
+void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *){
+ if (!isSelected()){
+     _pen->setWidth(2);
+    _pen->setBrush(_edge->property("color").value<QColor>());
+    QGraphicsLineItem::paint(painter, option);
+ }
+ else{
+    _pen -> setWidth(3);
+    _pen->setBrush(_edge->property("color").value<QColor>().light(120));
+    painter->setPen((*_pen));
+    painter->drawLine(line());
+  }
+}
+
 void EdgeItem::updateName(const QString& ){}
 void EdgeItem::updateVisited(bool ){}
 void EdgeItem::updateLength(qreal ){}
