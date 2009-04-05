@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Rocs
+Name[hne]=राक्स
 Name[pa]=ਰੌਕਸ
 Name[uk]=Рух
 Name[x-test]=xxRocsxx
@@ -10,6 +11,7 @@ GenericName[es]=Teoría gráfica de Rocs
 GenericName[et]=Rocs graafiteooria
 GenericName[ga]=Graftheoiric Rocs
 GenericName[gl]=Teoría de grafos con Rocs
+GenericName[hne]=राक्स ग्राफ सिद्धांत
 GenericName[km]=ទ្រឹស្ដី​ក្រាហ្វ​របស់ Rocs
 GenericName[nds]=Graphentheorie Rocs
 GenericName[pt]=Teoria dos Grafos de Rocs
