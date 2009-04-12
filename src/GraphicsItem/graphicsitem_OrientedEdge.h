@@ -29,49 +29,53 @@ class QPen;
 class Edge;
 class Node;
 
-/*! \brief the Edge drawing on screen. 
+/*! \brief the Edge drawing on screen.
   long explanation here...
 */
-class OrientedEdgeItem : public QObject, public QGraphicsPathItem{
-Q_OBJECT
+class OrientedEdgeItem : public QObject, public QGraphicsPathItem {
+    Q_OBJECT
 public:
-  /*! default constructor 
-  \param node the libgraph::Node that this item will interact to.
-  \param parent the QGraphicsITem that this Item belongs to. */
-  explicit OrientedEdgeItem(Edge *edge, QGraphicsItem *parent = 0);
+    /*! default constructor
+    \param node the libgraph::Node that this item will interact to.
+    \param parent the QGraphicsITem that this Item belongs to. */
+    explicit OrientedEdgeItem(Edge *edge, QGraphicsItem *parent = 0);
 
-  /*! The type of the item */
-  enum { Type = UserType + 3 };
+    /*! The type of the item */
+    enum { Type = UserType + 3 };
 
-  /*! gets the type of the item 
-    \return the type of the item
-  */
-  int type() const { return Type; }
+    /*! gets the type of the item
+      \return the type of the item
+    */
+    int type() const {
+        return Type;
+    }
 
-  /*! Gets the edge of the node */
-  Edge* edge() { return _edge; }
+    /*! Gets the edge of the node */
+    Edge* edge() {
+        return _edge;
+    }
 
-  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 protected:
-  /*! when there's a mouse click on the node, this method is invocked 
-    \param event the mouse object
-  */
-  void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    /*! when there's a mouse click on the node, this method is invocked
+      \param event the mouse object
+    */
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
-  /*! when the mouse is released, this method is invocked 
-    \param event the mouse object
-  */
-  void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    /*! when the mouse is released, this method is invocked
+      \param event the mouse object
+    */
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 public slots:
-  void removed();
-  void updatePos();
-  void updateName(const QString& name);
-  void updateVisited(bool v);
-  void updateLength(qreal l);
-  void updateValue(qreal v);
-  void updateTotal(qreal t);
-  void updateColor(QColor c);
+    void removed();
+    void updatePos();
+    void updateName(const QString& name);
+    void updateVisited(bool v);
+    void updateLength(qreal l);
+    void updateValue(qreal v);
+    void updateTotal(qreal t);
+    void updateColor(QColor c);
 
 private:
     Edge *_edge;

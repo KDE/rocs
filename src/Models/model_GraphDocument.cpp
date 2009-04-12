@@ -25,67 +25,67 @@
 #include <QModelIndex>
 
 GraphDocumentModel::GraphDocumentModel(QList< GraphDocument*>* documents, QObject *parent)
-  : QAbstractListModel( parent ), _documents( (*documents) ){
-	
+        : QAbstractListModel( parent ), _documents( (*documents) ) {
+
 }
 
-int GraphDocumentModel::rowCount(const QModelIndex&) const{
-  return _documents.size();
+int GraphDocumentModel::rowCount(const QModelIndex&) const {
+    return _documents.size();
 }
 
-QVariant GraphDocumentModel::data(const QModelIndex &index, int role) const{
-  if (( !index.isValid() ) || ( index.row() > _documents.size() ) || ( role != Qt::DisplayRole)){
-    return QVariant();
-  }
-  return _documents.at(index.row())->name();
+QVariant GraphDocumentModel::data(const QModelIndex &index, int role) const {
+    if (( !index.isValid() ) || ( index.row() > _documents.size() ) || ( role != Qt::DisplayRole)) {
+        return QVariant();
+    }
+    return _documents.at(index.row())->name();
 }
 
-QVariant GraphDocumentModel::headerData(int section, Qt::Orientation orientation, int role) const{
-  if ( role != Qt::DisplayRole){
-    return QVariant();
-  }
-  if (orientation == Qt::Horizontal){
-    return QString("Column %1").arg(section);
-  }
-  
-  return QString("Row %1").arg(section);
-  
+QVariant GraphDocumentModel::headerData(int section, Qt::Orientation orientation, int role) const {
+    if ( role != Qt::DisplayRole) {
+        return QVariant();
+    }
+    if (orientation == Qt::Horizontal) {
+        return QString("Column %1").arg(section);
+    }
+
+    return QString("Row %1").arg(section);
+
 }
 
-Qt::ItemFlags GraphDocumentModel::flags(const QModelIndex& index) const{
-  if ( !index.isValid() ){
-    return Qt::ItemIsEnabled;
-  }
-  return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+Qt::ItemFlags GraphDocumentModel::flags(const QModelIndex& index) const {
+    if ( !index.isValid() ) {
+        return Qt::ItemIsEnabled;
+    }
+    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
-bool GraphDocumentModel::setData(const QModelIndex& index, const QVariant& value, int role){
-  if ( index.isValid() && (role == Qt::ItemIsEditable)) {
-    _documents.at(index.row())-> setName(value.toString());
-    emit dataChanged(index, index);
+bool GraphDocumentModel::setData(const QModelIndex& index, const QVariant& value, int role) {
+    if ( index.isValid() && (role == Qt::ItemIsEditable)) {
+        _documents.at(index.row())-> setName(value.toString());
+        emit dataChanged(index, index);
+        return true;
+    }
+    return false;
+}
+
+bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex&) {
+    beginInsertRows(QModelIndex(), position, position+rows-1);
+
+    GraphDocument *doc = new  GraphDocument("untitled");
+    _documents.append(doc);
+    kDebug() << "THIS WAS CALLED";
+    endInsertRows();
     return true;
-  }
-  return false;
 }
 
-bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex&){
-  beginInsertRows(QModelIndex(), position, position+rows-1);  
-  
-   GraphDocument *doc = new  GraphDocument("untitled");
-  _documents.append(doc);
-  kDebug() << "THIS WAS CALLED";
-  endInsertRows();
-  return true;
-}
-
-bool GraphDocumentModel::removeRows(int position, int rows, const QModelIndex&){
-     beginRemoveRows(QModelIndex(), position, position+rows-1);
+bool GraphDocumentModel::removeRows(int position, int rows, const QModelIndex&) {
+    beginRemoveRows(QModelIndex(), position, position+rows-1);
     _documents.removeAt(position);
-     endRemoveRows();
-     return true;
+    endRemoveRows();
+    return true;
 }
 
- GraphDocument *GraphDocumentModel::at(const QModelIndex& index){
-  return _documents.at(index.row());
+GraphDocument *GraphDocumentModel::at(const QModelIndex& index) {
+    return _documents.at(index.row());
 }
 

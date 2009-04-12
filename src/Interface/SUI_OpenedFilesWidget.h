@@ -30,37 +30,37 @@ class GraphDocumentModel;
 class GraphDocument;
 
 
-/*! 
-	\brief The Graph-Layer widget.
-	This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
+/*!
+	\brief The Opened Files widget.
+	This Holds the list of opened Graph Files
 */
-class OpenedFilesWidget : public QWidget, public Ui::OpenedFilesWidget{
-	Q_OBJECT
+class OpenedFilesWidget : public QWidget, public Ui::OpenedFilesWidget {
+    Q_OBJECT
 
-	public:
-		/*! default constructor. 
-		\param model the model that will populate the view.*/
-		explicit OpenedFilesWidget(GraphDocumentModel *model, QWidget* parent = 0);
-	
-	signals:
-		/*! when the active document changes, this signal is emmited. 
-			\param document the new active document.
-		*/
-		void activeDocumentChanged( GraphDocument *document);
+public:
+    /*! default constructor.
+    \param model the model that will populate the view.*/
+    explicit OpenedFilesWidget(GraphDocumentModel *model, QWidget* parent = 0);
 
-	private slots:
-		/*! when you click on the name of a document inside of the model, this method is invocked. 
-		\param model the index of the model ( rename it to index? )
-	*/
+signals:
+    /*! when the active document changes, this signal is emmited.
+    	\param document the new active document.
+    */
+    void activeDocumentChanged( GraphDocument *document);
 
-		void setActiveDocument(const QModelIndex& model);
+private slots:
+    /*! when you click on the name of a document inside of the model, this method is invocked.
+    \param model the index of the model ( rename it to index? )
+    */
 
-	public	slots:
-	/*! executed when btnNewFileis clicked. */
-		void on__btnNewFile_clicked();
+    void setActiveDocument(const QModelIndex& model);
 
-	private:
-		GraphDocumentModel *_documentModel;
+public	slots:
+    /*! executed when btnNewFileis clicked. */
+    void on__btnNewFile_clicked();
+
+private:
+    GraphDocumentModel *_documentModel;
 };
 
 #endif

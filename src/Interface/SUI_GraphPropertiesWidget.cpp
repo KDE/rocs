@@ -22,16 +22,16 @@
 #include "model_GraphProperties.h"
 #include <KDebug>
 
-GraphPropertiesWidget::GraphPropertiesWidget ( QWidget* parent ) 
-	: QWidget ( parent ) {
-	
-	setupUi(this);
-	_model = new GraphPropertiesModel();
-	_tableView->setModel(_model);
+GraphPropertiesWidget::GraphPropertiesWidget ( QWidget* parent )
+        : QWidget ( parent ) {
+
+    setupUi(this);
+    _model = new GraphPropertiesModel();
+    _tableView->setModel(_model);
 }
 
-void GraphPropertiesWidget::setDataSource(QObject *o){
-	_model->setDataSource(o);
+void GraphPropertiesWidget::setDataSource(QObject *o) {
+    _model->setDataSource(o);
 }
 
 

@@ -33,42 +33,47 @@ class Graph;
 class GraphLayersModel;
 class MainWindow;
 
-/*! 
+/*!
 	\brief The Graph-Layer widget.
-	This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File 
+	This Holds in a layer-way (like Photoshop Layers) the Graphs of the current opened Graph File
 */
-class GraphToolBoxWidget : public QWidget, public Ui::GraphToolBoxWidget{
-	Q_OBJECT
-	public:
-		/*! public constructor */
-		explicit GraphToolBoxWidget(MainWindow* parent = 0);
+class GraphToolBoxWidget : public QWidget, public Ui::GraphToolBoxWidget {
+    Q_OBJECT
+public:
+    /*! public constructor */
+    explicit GraphToolBoxWidget(MainWindow* parent = 0);
 
-	public slots:
-		/*! send the GraphDocument to the list of graphs. 
-			\param document the GraphDocument that will populate the model of the view.		*/
-		void setGraphDocument(GraphDocument *document);
+public slots:
+    /*! send the GraphDocument to the list of graphs.
+    	\param document the GraphDocument that will populate the model of the view.		*/
+    void setGraphDocument(GraphDocument *document);
 
-		/*! sets the modelindex data ( that holds a graph ) to be the active Graph being editted on the canvas. 
-		\param modelindex the index of the graph onto the model. 
-		*/
-		void setActiveGraph(const QModelIndex& modelindex);
+    /*! sets the modelindex data ( that holds a graph ) to be the active Graph being editted on the canvas.
+    \param modelindex the index of the graph onto the model.
+    */
+    void setActiveGraph(const QModelIndex& modelindex);
 
-		/* executed when clicking the btnNewGraph, 
-		this method creates a new graph. */
-		void on__btnNewGraph_clicked();
+    /*! executed when clicking the btnNewGraph,
+    this method creates a new graph. */
+    void on__btnNewGraph_clicked();
 
-		void on__comboGraphLayers_activated(int i);
-		void on__btnSetOriented_clicked();
+    /*! executed on changing the graph layers. 
+	this should be the only method to changing an active graph? nope. there's also graphDocumentChanged that will change it.
+    */
+    void on__comboGraphLayers_activated(int i);
 
-	signals:
-		/* Signal emmited when the active graph changes */
-		void activeGraphChanged(Graph *graph);
-		
+    /*! executed when the user clicks on the 'set Oriented' button. */
+    void on__btnSetOriented_clicked();
 
-	private:
-		GraphDocument *_document;
-		GraphLayersModel *_layerModel;
-		MainWindow *_mainWindow;
+signals:
+    /*! Signal emmited when the active graph changes */
+    void activeGraphChanged(Graph *graph);
+
+
+private:
+    GraphDocument *_document;
+    GraphLayersModel *_layerModel;
+    MainWindow *_mainWindow;
 };
 
 #endif

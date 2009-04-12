@@ -30,16 +30,16 @@ class Graph;
 
 class GraphLayersModel : public QAbstractListModel
 {
-  Q_OBJECT
-  public:
-    /*! Default Constructor. 
+    Q_OBJECT
+public:
+    /*! Default Constructor.
     \param document the GraphDocument that will populate the model.
     \param parent the QObject that owns this Model.   */
     explicit GraphLayersModel( GraphDocument *document, QObject *parent = 0);
 
-   /*! Gives the number of rows on the model. 
-      \param parent a default constructed, unused, QModelIndex.
-      \return the number of rows on the model. */
+    /*! Gives the number of rows on the model.
+       \param parent a default constructed, unused, QModelIndex.
+       \return the number of rows on the model. */
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
     /*! Return the data of a item on the model.
@@ -49,7 +49,7 @@ class GraphLayersModel : public QAbstractListModel
     QVariant data(const QModelIndex &index, int role) const;
 
     /*! some information that goes on the header.
-    \param section the place where the data will be. 
+    \param section the place where the data will be.
     \param orientation Horizontal or Vertical.
     \param role defaulted to DisplayRole for displaying things.
     \return a QVariant containing the string of the header. */
@@ -60,7 +60,7 @@ class GraphLayersModel : public QAbstractListModel
     \return a Qt::ItemFlags of the item. */
     Qt::ItemFlags flags(const QModelIndex& index) const;
 
-    /*! changes the data on a item. 
+    /*! changes the data on a item.
     \param index the index of the item that will have it's data modified.
     \param value the new value of the data.
     \param role defaulted to Edit Role, if it's another, it does nothing.
@@ -77,18 +77,18 @@ class GraphLayersModel : public QAbstractListModel
     /*! remmove n rows, from position to potion+rows from the model.
     \param position the first position to remove anything.
     \param rows the number of rows to remove.
-     \param QModelIndex not used. 
+     \param QModelIndex not used.
     \return true if success, false otherwise. */
     bool removeRows(int position, int rows, const QModelIndex &index = QModelIndex());
 
     /*! select the graph at position index.
     \param index the position of the graph that you want to select.
     \return the graph at position Index.*/
-     Graph *at(const QModelIndex& index);
+    Graph *at(const QModelIndex& index);
 
-  private:
+private:
     GraphDocument *_document;
-  
+
 };
 
 #endif

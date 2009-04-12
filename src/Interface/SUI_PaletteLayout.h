@@ -24,8 +24,8 @@
 #include <QVBoxLayout>
 
 /*! \brief defines the layout on the pallete bar */
-class PaletteLayout: public QLayout{
-  public:
+class PaletteLayout: public QLayout {
+public:
     explicit PaletteLayout ( QWidget *parent, int margin = 0, int spacing = -1 );
     PaletteLayout ( int spacing = -1 ) ;
     ~PaletteLayout();
@@ -43,7 +43,7 @@ class PaletteLayout: public QLayout{
     bool isOneLine() const ;
     void invalidate() ;
 
-  protected:
+protected:
     void resetCache() ;
     int doLayout ( const QRect &rect, bool testOnly ) const;
     QList<QLayoutItem *> itemList;

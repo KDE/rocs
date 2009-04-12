@@ -9,26 +9,26 @@ class MoveNodeAction;
 class SingleSelectAction;
 class KAction;
 
-class SmartAction : public AbstractAction{
+class SmartAction : public AbstractAction {
 public:
-   explicit SmartAction( GraphScene *scene, QObject *parent = 0);
-   void setAddEdgeAction(KAction *e);
-   void setAddNodeAction(KAction *e);
-   void setMoveAction(KAction *e);
-   void setSingleSelectAction(KAction *e);
+    explicit SmartAction( GraphScene *scene, QObject *parent = 0);
+    void setAddEdgeAction(KAction *e);
+    void setAddNodeAction(KAction *e);
+    void setMoveAction(KAction *e);
+    void setSingleSelectAction(KAction *e);
 
 public slots:
-  virtual void executePress(QPointF pos);
-  virtual void executeMove(QPointF pos);
-  virtual void executeRelease(QPointF pos);
-  virtual void executeKeyPress(QKeyEvent *keyEvent);
-  virtual void executeKeyRelease(QKeyEvent *keyEvent);
- 
+    virtual void executePress(QPointF pos);
+    virtual void executeMove(QPointF pos);
+    virtual void executeRelease(QPointF pos);
+    virtual void executeKeyPress(QKeyEvent *keyEvent);
+    virtual void executeKeyRelease(QKeyEvent *keyEvent);
+
 private:
-  AddNodeAction *_addNodeAction;
-  AddEdgeAction *_addEdgeAction;
-  SingleSelectAction *_singleSelectAction;
-  MoveNodeAction *_moveAction;
+    AddNodeAction *_addNodeAction;
+    AddEdgeAction *_addEdgeAction;
+    SingleSelectAction *_singleSelectAction;
+    MoveNodeAction *_moveAction;
 };
 
 #endif

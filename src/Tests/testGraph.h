@@ -25,30 +25,30 @@
 
 class Graph;
 
-class GraphTests : public QObject{
-Q_OBJECT
+class GraphTests : public QObject {
+    Q_OBJECT
 public:
-  GraphTests();
-  void createPentagon(bool directed = false);
-  void create3x3(bool directed = false);
+    GraphTests();
+    void createPentagon(bool directed = false);
+    void create3x3(bool directed = false);
 private slots:
-  void init();
+    void init();
 
-  void createSimpleGraph();
-  void manipulateSimpleGraph();
-  void createDirectedGraph();
-  void manipulateDirectedGraph();
-	void saveTestFile();
-	void loadTestFile();
+    void createSimpleGraph();
+    void manipulateSimpleGraph();
+    void createDirectedGraph();
+    void manipulateDirectedGraph();
+    void saveTestFile();
+    void loadTestFile();
 //   void testKrossJs();
 //   void testKrossPy();
 //   void testKrossRb();
 // 	void testKrossQtjs();
-	void testQtScript();
+    void testQtScript();
 
 private:
-  GraphDocument _graphDocument;
-  QVariantList Graphs;
+    GraphDocument _graphDocument;
+    QVariantList Graphs;
 };
 
 #endif

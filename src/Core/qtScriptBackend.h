@@ -28,18 +28,18 @@ class Graph;
 class GraphDocument;
 class KTextBrowser;
 
-class QtScriptBackend : public QScriptEngine{
+class QtScriptBackend : public QScriptEngine {
 public:
-  QtScriptBackend(GraphDocument& graphs,  KTextBrowser *debugArea);
-  void setScript(const QString& s);
-  void loadFile(const QString& file);
-  void setProperty ( QScriptValue & object, const QScriptString & name, uint id, const QScriptValue & value );
-  QScriptValue property ( const QScriptValue & object, const QScriptString & name, uint id );
+    QtScriptBackend(GraphDocument& graphs,  KTextBrowser *debugArea);
+    void setScript(const QString& s);
+    void loadFile(const QString& file);
+    void setProperty ( QScriptValue & object, const QScriptString & name, uint id, const QScriptValue & value );
+    QScriptValue property ( const QScriptValue & object, const QScriptString & name, uint id );
 private:
-  QString _script;
-  GraphDocument& _graphs;
-  KTextBrowser  *_debugArea;
-  void createGraphList();
+    QString _script;
+    GraphDocument& _graphs;
+    KTextBrowser  *_debugArea;
+    void createGraphList();
 };
 
 #endif

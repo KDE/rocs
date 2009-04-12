@@ -6,18 +6,18 @@
 
 class Node;
 
-class GraphGroup : public QObject, public QList< ::Node*>{
-Q_OBJECT
+class GraphGroup : public QObject, public QList< ::Node*> {
+    Q_OBJECT
 
 public:
-	GraphGroup();
-	GraphGroup(const GraphGroup& g);
+    GraphGroup();
+    GraphGroup(const GraphGroup& g);
 
 public slots:
-	QString name() const;
-	void setName(const QString&  name);
+    QString name() const;
+    void setName(const QString&  name);
 
 private:
-	QString _name;
+    QString _name;
 };
 #endif

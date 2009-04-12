@@ -26,9 +26,9 @@
 
 class MainWindow;
 
-class ConfigureDialog : public QWidget{
-	public:
-		ConfigureDialog ( QWidget *parent );
+class ConfigureDialog : public QWidget {
+public:
+    ConfigureDialog ( QWidget *parent );
 
 };
 #endif

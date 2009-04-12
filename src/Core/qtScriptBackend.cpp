@@ -28,72 +28,72 @@
 
 QtScriptBackend::QtScriptBackend(GraphDocument& graphs, KTextBrowser *debugArea): _graphs(graphs)
 {
-	kDebug() << "Starting Script Backend";
-	_debugArea = debugArea;
-	
-	kDebug() << "Graph Document" << _graphs;
+    kDebug() << "Starting Script Backend";
+    _debugArea = debugArea;
 
-	int size = _graphs.size();
-	for(int i = 0; i < size; i++){
-		_graphs.at(i)->setEngine(this);	
-	}
-	createGraphList();
-	kDebug() << "ScriptBackend Created";
+    kDebug() << "Graph Document" << _graphs;
+
+    int size = _graphs.size();
+    for (int i = 0; i < size; i++) {
+        _graphs.at(i)->setEngine(this);
+    }
+    createGraphList();
+    kDebug() << "ScriptBackend Created";
 }
 
-void QtScriptBackend::setScript(const QString& s){
-	_script = s;
-	kDebug() << "script Set";
+void QtScriptBackend::setScript(const QString& s) {
+    _script = s;
+    kDebug() << "script Set";
 }
 
-void QtScriptBackend::createGraphList(){
-	QScriptValue graphList = newArray();
-	globalObject().setProperty("graphs", graphList);
+void QtScriptBackend::createGraphList() {
+    QScriptValue graphList = newArray();
+    globalObject().setProperty("graphs", graphList);
 
-	// Add all the graphs on the array as an array, and if it has a name, 
-	// also add it for direct acess with it's name.
-	int size = _graphs.size();
-	for(int i = 0; i < size; i++){
-		graphList.property("push").call(graphList, QScriptValueList() << _graphs.at(i)->scriptValue());
-	}
+    // Add all the graphs on the array as an array, and if it has a name,
+    // also add it for direct acess with it's name.
+    int size = _graphs.size();
+    for (int i = 0; i < size; i++) {
+        graphList.property("push").call(graphList, QScriptValueList() << _graphs.at(i)->scriptValue());
+    }
 }
 
-void QtScriptBackend::setProperty( QScriptValue& object, const QScriptString& name, uint , const QScriptValue& value ){
-  kDebug() << "CHEGOU AQUI";
-  QObject *obj = object.toQObject();
-  QString s(name.toString());
-  QVariant v(value.toVariant());
-  if (obj == 0){
-     kDebug () << "Object is zero";
-     return;
-  }
+void QtScriptBackend::setProperty( QScriptValue& object, const QScriptString& name, uint , const QScriptValue& value ) {
+    kDebug() << "CHEGOU AQUI";
+    QObject *obj = object.toQObject();
+    QString s(name.toString());
+    QVariant v(value.toVariant());
+    if (obj == 0) {
+        kDebug () << "Object is zero";
+        return;
+    }
 
-  obj->setProperty(s.toAscii(), v);
+    obj->setProperty(s.toAscii(), v);
 }
 
-QScriptValue QtScriptBackend::property ( const QScriptValue & object, const QScriptString & name, uint ){
-  kDebug() << " E AQUI TAMBEM ";
-   QObject *obj = object.toQObject();
-   QString s(name.toString());
-   if (obj == 0){
-     kDebug () << "Object is zero";
-     return QScriptValue();
-  }
-  
-  QScriptValue  value = object.property(s);
-  return value;
+QScriptValue QtScriptBackend::property ( const QScriptValue & object, const QScriptString & name, uint ) {
+    kDebug() << " E AQUI TAMBEM ";
+    QObject *obj = object.toQObject();
+    QString s(name.toString());
+    if (obj == 0) {
+        kDebug () << "Object is zero";
+        return QScriptValue();
+    }
+
+    QScriptValue  value = object.property(s);
+    return value;
 }
-void QtScriptBackend::loadFile(const QString& file){
-	_script.clear();
-	QFile f(file);
-	if  (  !f.open(QIODevice::ReadOnly | QIODevice::Text ) ){
-		qDebug() << "File not found";
-		return;
-	}
-  
-	while( ! f.atEnd() ){
-		QByteArray line = f.readLine();
-		_script += line;
-	}
-	_script += "\n";
+void QtScriptBackend::loadFile(const QString& file) {
+    _script.clear();
+    QFile f(file);
+    if  (  !f.open(QIODevice::ReadOnly | QIODevice::Text ) ) {
+        qDebug() << "File not found";
+        return;
+    }
+
+    while ( ! f.atEnd() ) {
+        QByteArray line = f.readLine();
+        _script += line;
+    }
+    _script += "\n";
 }

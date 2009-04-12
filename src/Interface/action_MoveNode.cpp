@@ -28,29 +28,35 @@
 #include <KDebug>
 #include "settings.h"
 
-MoveNodeAction::MoveNodeAction(GraphScene *scene, QObject *parent) 
-: AbstractAction(scene, parent){
-  setText(i18n ( "Move Node" ));
-  setToolTip ( i18n ( "Moves a node around the drawing area." ) );
-  setIcon ( KIcon ( "move-node" ) );
-  _movableNode = 0;
+MoveNodeAction::MoveNodeAction(GraphScene *scene, QObject *parent)
+        : AbstractAction(scene, parent) {
+    setText(i18n ( "Move Node" ));
+    setToolTip ( i18n ( "Moves a node around the drawing area." ) );
+    setIcon ( KIcon ( "move-node" ) );
+    _movableNode = 0;
 }
 
-MoveNodeAction::~MoveNodeAction(){
-  kDebug() << "Destroyed";
+MoveNodeAction::~MoveNodeAction() {
+    kDebug() << "Destroyed";
 }
 
-void MoveNodeAction::executePress(QPointF pos){
-  if (_graph == 0){ return; }
-  _movableNode = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+void MoveNodeAction::executePress(QPointF pos) {
+    if (_graph == 0) {
+        return;
+    }
+    _movableNode = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
 }
 
-void MoveNodeAction::executeMove(QPointF pos){
-  if ( ! _movableNode ){ return; }
-  _movableNode -> updatePos( pos );
+void MoveNodeAction::executeMove(QPointF pos) {
+    if ( ! _movableNode ) {
+        return;
+    }
+    _movableNode -> updatePos( pos );
 }
 
-void MoveNodeAction::executeRelease(QPointF pos){
-  if ( !_movableNode ){ return; }
- _movableNode = 0;
+void MoveNodeAction::executeRelease(QPointF pos) {
+    if ( !_movableNode ) {
+        return;
+    }
+    _movableNode = 0;
 }

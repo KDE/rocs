@@ -28,34 +28,34 @@
 class NodeItem;
 class Node;
 
-/*! 
-  \brief The 'Add Node' Action 
-  This action holds the 'Add Node' icon and tooltips, and when it's executed, 
+/*!
+  \brief The 'Add Node' Action
+  This action holds the 'Add Node' icon and tooltips, and when it's executed,
   it will place a new node on the QGraphicsView that holds all the items.
 */
 
 class SingleSelectAction : public AbstractAction
 {
-  Q_OBJECT
-  public:
-    /*! 
-      Default constructor 
+    Q_OBJECT
+public:
+    /*!
+      Default constructor
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
-  
+
     explicit SingleSelectAction(GraphScene *scene, QObject *parent = 0);
-  
-    /*! 
-      Default Destructor 
+
+    /*!
+      Default Destructor
     */
     ~SingleSelectAction();
-  public slots:
-    /*! 
-      this will be executed if type is the same as this action's type. 
+public slots:
+    /*!
+      this will be executed if type is the same as this action's type.
       \param pos the position on the screen that selection will occour.
     */
-      void executeRelease(QPointF pos);
-  signals:
+    void executeRelease(QPointF pos);
+signals:
     void ItemSelectedChanged(QObject *o);
 
 };

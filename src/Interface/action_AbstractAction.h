@@ -29,50 +29,50 @@ class Graph;
 class GraphDocument;
 
 
-/*! 
+/*!
 \brief the base class for custom actions.
-This class provides the basic functionality for all custom actions Used on the pallete bar. 
+This class provides the basic functionality for all custom actions Used on the pallete bar.
 */
 
 // TODO: Changer the behavior of this class, so it sends itself instead of the type  of action to the graphscene.
 class AbstractAction : public KAction
 {
-Q_OBJECT
-public: 
+    Q_OBJECT
+public:
 
-  /*! Default Constructor  
-    \param scene the GraphicsScene that this action will interact.
-    \param parent the MainWindow
-  */
-  AbstractAction(GraphScene *scene, QObject *parent);
+    /*! Default Constructor
+      \param scene the GraphicsScene that this action will interact.
+      \param parent the MainWindow
+    */
+    AbstractAction(GraphScene *scene, QObject *parent);
 
-  /*! Atualize the Graph Document that this action will work on 
-    \param graphDocument the pointer to the active  GraphDocument
-  */
-  void setGraphDocument( GraphDocument *graphDocument);
+    /*! Atualize the Graph Document that this action will work on
+      \param graphDocument the pointer to the active  GraphDocument
+    */
+    void setGraphDocument( GraphDocument *graphDocument);
 
 public slots:
-  /*! Atualize the Active Graph that this action will work on 
-    \param graph the pointer to the active  Graph
-  */
-  virtual void setGraph( Graph *graph);
+    /*! Atualize the Active Graph that this action will work on
+      \param graph the pointer to the active  Graph
+    */
+    virtual void setGraph( Graph *graph);
 
-  /*! pure virtual, reimplement it on others, this will be the action that will happen in the graph 
-     \param pos the position on screen that the execution will take part.
-  */
-  virtual void executePress(QPointF pos);
-  virtual void executeMove(QPointF pos);
-  virtual void executeRelease(QPointF pos);
-  virtual void executeKeyPress(QKeyEvent *keyEvent);
-  virtual void executeKeyRelease(QKeyEvent *keyEvent);
+    /*! pure virtual, reimplement it on others, this will be the action that will happen in the graph
+       \param pos the position on screen that the execution will take part.
+    */
+    virtual void executePress(QPointF pos);
+    virtual void executeMove(QPointF pos);
+    virtual void executeRelease(QPointF pos);
+    virtual void executeKeyPress(QKeyEvent *keyEvent);
+    virtual void executeKeyRelease(QKeyEvent *keyEvent);
 
-  /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
-  void sendExecuteBit();
+    /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
+    void sendExecuteBit();
 
 protected:
-  GraphDocument *_graphDocument;  /*! pointer to the active graph document */
-  Graph *_graph;	/*! pointer to the active graph */
-  GraphScene *_graphScene;	/*! pointer to the GraphicsScene with the drawing */
+    GraphDocument *_graphDocument;  /*! pointer to the active graph document */
+    Graph *_graph;	/*! pointer to the active graph */
+    GraphScene *_graphScene;	/*! pointer to the GraphicsScene with the drawing */
 
 };
 

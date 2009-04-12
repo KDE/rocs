@@ -25,10 +25,10 @@
 /*! \brief Palletebar Helper class */
 class PaletteScrollArea: public QScrollArea
 {
-  public:
+public:
     PaletteScrollArea ( QWidget* parent );
 
-  protected:
+protected:
     void resizeEvent ( QResizeEvent* event );
 };
 

@@ -28,226 +28,226 @@
 
 // Default Constructor
 GraphDocument::GraphDocument(const QString name, int width,  int height)
-: QObject(0), QList<Graph*>()
+        : QObject(0), QList<Graph*>()
 {
-  _name = name;
-  _width = width;
-  _height = height;
+    _name = name;
+    _width = width;
+    _height = height;
 }
 
 GraphDocument::GraphDocument(const GraphDocument& gd)
-: QObject(0), QList<Graph*>()
+        : QObject(0), QList<Graph*>()
 {
-  _name = gd.name();
-  _width = gd.width();
-  _height = gd.height();
-  
-  foreach (Graph *g, gd){
-    append(g);
-  }
+    _name = gd.name();
+    _width = gd.width();
+    _height = gd.height();
+
+    foreach (Graph *g, gd) {
+        append(g);
+    }
 }
 
 // Default Destructor
-GraphDocument::~GraphDocument(){
-  foreach(Graph *g, (*this)){
-    delete g;
-  }
-  clear();
+GraphDocument::~GraphDocument() {
+    foreach(Graph *g, (*this)) {
+        delete g;
+    }
+    clear();
 }
 
 
-// Sets the current file name of the Graph Collection 
-void GraphDocument::setName(const QString& name){
-  _name = name;
-  emit nameChanged(name);
+// Sets the current file name of the Graph Collection
+void GraphDocument::setName(const QString& name) {
+    _name = name;
+    emit nameChanged(name);
 }
 
 // Gets the name of the Graph
-QString GraphDocument::name() const{
-  return _name;
+QString GraphDocument::name() const {
+    return _name;
 }
 
 // set the width of the drawable area
-void GraphDocument::setWidth(qreal width){
-  _width = width;
+void GraphDocument::setWidth(qreal width) {
+    _width = width;
 }
 
 //set the height of the drawable area
-void GraphDocument::setHeight(qreal height){
-  _height = height;
+void GraphDocument::setHeight(qreal height) {
+    _height = height;
 }
 
 // gets the wheight of the drawable area
-qreal GraphDocument::height() const{
-  return _height;
+qreal GraphDocument::height() const {
+    return _height;
 }
 
 // sets the width of the drawable area
-qreal GraphDocument::width() const{
-  return _width;
+qreal GraphDocument::width() const {
+    return _width;
 }
 
-Graph* GraphDocument::addGraph(QString name){
-  Graph *g = new Graph();
-  g->setProperty("name",name);
-  append(g);
-  return g;
+Graph* GraphDocument::addGraph(QString name) {
+    Graph *g = new Graph();
+    g->setProperty("name",name);
+    append(g);
+    return g;
 }
 
 
-void GraphDocument::savedDocumentAt(const QString& fileName){
-  _lastSavedDocumentPath = fileName;
+void GraphDocument::savedDocumentAt(const QString& fileName) {
+    _lastSavedDocumentPath = fileName;
 }
 
 const QString& GraphDocument::documentPath() const {
-  return _lastSavedDocumentPath;
+    return _lastSavedDocumentPath;
 }
 
 
-bool GraphDocument::saveAsInternalFormat(const QString& filename){
-	buf.clear();
-	KSaveFile saveFile;
-	saveFile.setFileName( filename );
-	qDebug() << filename;
+bool GraphDocument::saveAsInternalFormat(const QString& filename) {
+    buf.clear();
+    KSaveFile saveFile;
+    saveFile.setFileName( filename );
+    qDebug() << filename;
 
- 	if (!saveFile.open()){
- 		qDebug() << "Error: File Not Open";
- 		return false;
- 	}
-	
-	QTextStream stream(&saveFile);
-	
-	foreach(Graph *g, (*this)){
-		buf += " \n \n ############ Graph  ########### \n \n";
-		buf += "[Graph " + g->property("name").toString() + "] \n";
+    if (!saveFile.open()) {
+        qDebug() << "Error: File Not Open";
+        return false;
+    }
 
-		savePropertiesInternalFormat(g);
+    QTextStream stream(&saveFile);
 
-		buf += " \n \n ############ NODES ########### \n \n";
-		foreach( ::Node *n, g->nodes()){
-			buf += "[Node ";
-			buf += n->property("name").toString();
-			buf += "] \n";
-			
-			savePropertiesInternalFormat(n);
-		}
+    foreach(Graph *g, (*this)) {
+        buf += " \n \n ############ Graph  ########### \n \n";
+        buf += "[Graph " + g->property("name").toString() + "] \n";
 
-		buf += " \n \n ############ EDGES ########### \n \n";
-		foreach( Edge *e, g->edges()){
-			buf += QString("[Edge ");
-			buf += e->from()->property("name").toString();
-			buf += "->";
-			buf += e->to()->property("name").toString();
-			buf += QString("] \n");
-			savePropertiesInternalFormat(e);
-		}
+        savePropertiesInternalFormat(g);
 
-		buf += " \n \n ############ GROUPS ########### \n \n";
-		foreach( GraphGroup *gg, g->groups()){
-			buf += "[Group ";
-			buf += gg->name();
-			buf += "] \n";
+        buf += " \n \n ############ NODES ########### \n \n";
+        foreach( ::Node *n, g->nodes()) {
+            buf += "[Node ";
+            buf += n->property("name").toString();
+            buf += "] \n";
 
-			foreach( ::Node *n, g->nodes() ){
-				buf += n->property("name").toString();
-				buf += "\n";
-			}
-		}
-	}
-	qDebug() << buf.toAscii();
+            savePropertiesInternalFormat(n);
+        }
 
-	stream << buf.toAscii();
-	if (!saveFile.finalize()){
-		qDebug() << "Error, file not saved.";
-	}
-	return true;
+        buf += " \n \n ############ EDGES ########### \n \n";
+        foreach( Edge *e, g->edges()) {
+            buf += QString("[Edge ");
+            buf += e->from()->property("name").toString();
+            buf += "->";
+            buf += e->to()->property("name").toString();
+            buf += QString("] \n");
+            savePropertiesInternalFormat(e);
+        }
+
+        buf += " \n \n ############ GROUPS ########### \n \n";
+        foreach( GraphGroup *gg, g->groups()) {
+            buf += "[Group ";
+            buf += gg->name();
+            buf += "] \n";
+
+            foreach( ::Node *n, g->nodes() ) {
+                buf += n->property("name").toString();
+                buf += "\n";
+            }
+        }
+    }
+    qDebug() << buf.toAscii();
+
+    stream << buf.toAscii();
+    if (!saveFile.finalize()) {
+        qDebug() << "Error, file not saved.";
+    }
+    return true;
 }
 
-void GraphDocument::savePropertiesInternalFormat(QObject *o){
-	const QMetaObject *metaObject = o->metaObject();
-	int propertyCount = metaObject->propertyCount();
+void GraphDocument::savePropertiesInternalFormat(QObject *o) {
+    const QMetaObject *metaObject = o->metaObject();
+    int propertyCount = metaObject->propertyCount();
 
-	for( int i = 0; i < propertyCount; ++i){
-		QMetaProperty metaProperty = metaObject->property(i);
-		const char *name = metaProperty.name();
+    for ( int i = 0; i < propertyCount; ++i) {
+        QMetaProperty metaProperty = metaObject->property(i);
+        const char *name = metaProperty.name();
 
-		if ( QString("objectName") == QString(name) ){
-			continue;
-		}
+        if ( QString("objectName") == QString(name) ) {
+            continue;
+        }
 
-		QVariant value = o->property(name);
-		buf +=  name;
-		buf += " : ";
-		buf += value.toString();
-		buf += "\n";
-	}
+        QVariant value = o->property(name);
+        buf +=  name;
+        buf += " : ";
+        buf += value.toString();
+        buf += "\n";
+    }
 }
 
-void GraphDocument::loadFromInternalFormat(const QString& filename){
-	QFile f(filename);
-	if ( !f.open(QIODevice::ReadOnly | QIODevice::Text) ){
-		qDebug  () << "File not open " << filename.toAscii();
-		return;
-	}
-	
-	Graph *tmpGraph = 0;
-	::Node *tmpNode  = 0;
-	Edge *tmpEdge = 0;
-	GraphGroup *tmpGroup = 0;
-	QObject *tmpObject = 0;
+void GraphDocument::loadFromInternalFormat(const QString& filename) {
+    QFile f(filename);
+    if ( !f.open(QIODevice::ReadOnly | QIODevice::Text) ) {
+        qDebug  () << "File not open " << filename.toAscii();
+        return;
+    }
+
+    Graph *tmpGraph = 0;
+    ::Node *tmpNode  = 0;
+    Edge *tmpEdge = 0;
+    GraphGroup *tmpGroup = 0;
+    QObject *tmpObject = 0;
 
 
-	while(!f.atEnd()){
-		QString str = f.readLine();
-		str = str.simplified();
-	
-		if (str.startsWith("#")){ //! Ignore it, commented line.
-				continue;
-		}
+    while (!f.atEnd()) {
+        QString str = f.readLine();
+        str = str.simplified();
 
-		else if (str.startsWith("[Graph")){
-			QString gName = str.section(" ",1,1);
-			gName.remove(']');
-	
-			tmpGraph = new Graph();
-			tmpGraph->setProperty("name", gName.toAscii());
-			tmpObject = tmpGraph;
-			append(tmpGraph);
-		}
+        if (str.startsWith("#")) { //! Ignore it, commented line.
+            continue;
+        }
 
-		else if (str.startsWith("[Node")){
-			QString nName = str.section(" ",1,1);
-			nName.remove(']');
+        else if (str.startsWith("[Graph")) {
+            QString gName = str.section(" ",1,1);
+            gName.remove(']');
 
-			tmpNode = tmpGraph->addNode(nName);
-			tmpNode->setProperty("name", nName);
-			tmpObject = tmpNode;
-		}
+            tmpGraph = new Graph();
+            tmpGraph->setProperty("name", gName.toAscii());
+            tmpObject = tmpGraph;
+            append(tmpGraph);
+        }
 
-		else if (str.startsWith("[Edge")){
-			QString eName = str.section(" ",1,1);
-			eName.remove(']');
-			
-			QString nameFrom = eName.section("->", 0,0);
-			QString nameTo = eName.section("->", 1,1);
+        else if (str.startsWith("[Node")) {
+            QString nName = str.section(" ",1,1);
+            nName.remove(']');
 
-			tmpEdge = tmpGraph->addEdge(tmpGraph->node(nameFrom), tmpGraph->node(nameTo));
-			tmpObject = tmpEdge;
+            tmpNode = tmpGraph->addNode(nName);
+            tmpNode->setProperty("name", nName);
+            tmpObject = tmpNode;
+        }
 
-		}
-		else if (str.startsWith("[Group")){
-			QString gName = str.section(" ",1,1);
-			gName.remove(']');
-			tmpGroup = tmpGraph->addGroup(gName);
-		}
-		else if (str.contains(":")){
-			QString propertyName = str.section(":",0,0);
-			QString propertyValue = str.section(":",1,1);
-			tmpObject->setProperty( propertyName.toAscii() , propertyValue.toAscii() );
-		}
-		else{
-			tmpGroup->append( tmpGraph->node(str));
-		}
-	}
+        else if (str.startsWith("[Edge")) {
+            QString eName = str.section(" ",1,1);
+            eName.remove(']');
+
+            QString nameFrom = eName.section("->", 0,0);
+            QString nameTo = eName.section("->", 1,1);
+
+            tmpEdge = tmpGraph->addEdge(tmpGraph->node(nameFrom), tmpGraph->node(nameTo));
+            tmpObject = tmpEdge;
+
+        }
+        else if (str.startsWith("[Group")) {
+            QString gName = str.section(" ",1,1);
+            gName.remove(']');
+            tmpGroup = tmpGraph->addGroup(gName);
+        }
+        else if (str.contains(":")) {
+            QString propertyName = str.section(":",0,0);
+            QString propertyValue = str.section(":",1,1);
+            tmpObject->setProperty( propertyName.toAscii() , propertyValue.toAscii() );
+        }
+        else {
+            tmpGroup->append( tmpGraph->node(str));
+        }
+    }
 
 }

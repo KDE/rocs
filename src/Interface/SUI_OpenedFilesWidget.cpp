@@ -25,22 +25,22 @@
 #include <KDebug>
 
 OpenedFilesWidget::OpenedFilesWidget(GraphDocumentModel *model, QWidget* parent)
-: QWidget(parent){
-	setupUi(this);
-	_documentModel = model;
-	_openedFilesListView->setModel(model);
-	connect(_openedFilesListView, SIGNAL(clicked(const QModelIndex&)),
-	this, SLOT(setActiveDocument(const QModelIndex&)));
+        : QWidget(parent) {
+    setupUi(this);
+    _documentModel = model;
+    _openedFilesListView->setModel(model);
+    connect(_openedFilesListView, SIGNAL(clicked(const QModelIndex&)),
+            this, SLOT(setActiveDocument(const QModelIndex&)));
 }
 
-void OpenedFilesWidget::on__btnNewFile_clicked(){
-	_documentModel->insertRow(_documentModel->rowCount());
-	 GraphDocument *g = _documentModel -> at( _documentModel->index(_documentModel->rowCount()-1,0) );
-	 emit activeDocumentChanged( g );
+void OpenedFilesWidget::on__btnNewFile_clicked() {
+    _documentModel->insertRow(_documentModel->rowCount());
+    GraphDocument *g = _documentModel -> at( _documentModel->index(_documentModel->rowCount()-1,0) );
+    emit activeDocumentChanged( g );
 }
 
-void OpenedFilesWidget::setActiveDocument(const QModelIndex& modelindex){
-	 GraphDocument *g = _documentModel -> at(modelindex);
-	 if (g == 0) return;
-	 emit activeDocumentChanged( g );
+void OpenedFilesWidget::setActiveDocument(const QModelIndex& modelindex) {
+    GraphDocument *g = _documentModel -> at(modelindex);
+    if (g == 0) return;
+    emit activeDocumentChanged( g );
 }

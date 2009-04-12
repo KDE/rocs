@@ -26,28 +26,28 @@
 class QObject;
 class NodeItem;
 
-/*! 
-  \brief The 'Move Node' Action 
-  This action holds the 'Move Node' icon and tooltips, and when it's executed, 
+/*!
+  \brief The 'Move Node' Action
+  This action holds the 'Move Node' icon and tooltips, and when it's executed,
   it will move the selected node around the screen.
 */
 
-class MoveNodeAction : public AbstractAction{
-  Q_OBJECT;
-  public:
-    /*! 
-      Default constructor 
+class MoveNodeAction : public AbstractAction {
+    Q_OBJECT;
+public:
+    /*!
+      Default constructor
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
-  
+
     explicit MoveNodeAction(GraphScene *scene, QObject *parent = 0);
-  
-    /*! 
-      Default Destructor 
+
+    /*!
+      Default Destructor
     */
     ~MoveNodeAction();
-  public slots:
-    /*! 
+public slots:
+    /*!
       will be executed when the mouse press a button.
       \param pos the position onscreen of the click.
     */
@@ -57,12 +57,12 @@ class MoveNodeAction : public AbstractAction{
     */
     void executeMove(QPointF pos);
 
-    /*! will be executed when the mouse releases a click 
+    /*! will be executed when the mouse releases a click
     \param pos the position of the cursor.
     */
     void executeRelease(QPointF pos);
 
-  protected:
+protected:
     NodeItem *_movableNode;
 };
 

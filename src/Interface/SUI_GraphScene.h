@@ -17,30 +17,30 @@ class NodeItem;
 class EdgeItem;
 
 
-class GraphScene : public QGraphicsScene{
+class GraphScene : public QGraphicsScene {
 public:
-	GraphScene(QObject *parent);
-	void setAction(AbstractAction *action);
-	QGraphicsItem* createNode(Node *n);
-	QGraphicsItem* createEdge(Edge *e);
-	void updateGraph(Graph *g);
-	void updateDocument();
-	void setGraph(Graph *g);
-	void setGraphDocument(GraphDocument *gd);
-	void insertGraphItem(QGraphicsItem *item);
+    GraphScene(QObject *parent);
+    void setAction(AbstractAction *action);
+    QGraphicsItem* createNode(Node *n);
+    QGraphicsItem* createEdge(Edge *e);
+    void updateGraph(Graph *g);
+    void updateDocument();
+    void setGraph(Graph *g);
+    void setGraphDocument(GraphDocument *gd);
+    void insertGraphItem(QGraphicsItem *item);
 
 protected:
-	void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
-	void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
-	void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent);
-	void keyPressEvent(QKeyEvent *keyEvent);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent);
+    void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
-	GraphDocument *_graphDocument;
-	Graph *_graph;
-	AbstractAction *_action;
-	QMultiHash<Graph*, QGraphicsItem* > _hashGraphs;
+    GraphDocument *_graphDocument;
+    Graph *_graph;
+    AbstractAction *_action;
+    QMultiHash<Graph*, QGraphicsItem* > _hashGraphs;
 };
 
 #endif

@@ -27,62 +27,66 @@
 class QGraphicsSceneMouseEvent;
 class Node;
 
-/*! \brief the node drawing on screen. 
+/*! \brief the node drawing on screen.
   long explanation here...
 */
-class NodeItem : public QObject, public QGraphicsItem{
-Q_OBJECT
+class NodeItem : public QObject, public QGraphicsItem {
+    Q_OBJECT
 public:
-  /*! default constructor 
-  \param node the  Node that this item will interact to.
-  \param parent the QGraphicsITem that this Item belongs to. */
- explicit NodeItem( Node *node, QGraphicsItem *parent = 0);
+    /*! default constructor
+    \param node the  Node that this item will interact to.
+    \param parent the QGraphicsITem that this Item belongs to. */
+    explicit NodeItem( Node *node, QGraphicsItem *parent = 0);
 
-  /*! The type of the item */
-  enum { Type = UserType + 1 };
+    /*! The type of the item */
+    enum { Type = UserType + 1 };
 
-  /*! gets the type of the item 
-    \return the type of the item
-  */
-  int type() const { return Type; }
+    /*! gets the type of the item
+      \return the type of the item
+    */
+    int type() const {
+        return Type;
+    }
 
-  /*! calculates the boundingRect of this item 
-    \return the calculated boudingRect.
-  */
-  QRectF boundingRect() const;
+    /*! calculates the boundingRect of this item
+      \return the calculated boudingRect.
+    */
+    QRectF boundingRect() const;
 
-  /*! calculates the shape of the node 
-    \return the calculated shape.
-  */
-  QPainterPath shape() const;
+    /*! calculates the shape of the node
+      \return the calculated shape.
+    */
+    QPainterPath shape() const;
 
-  /*! paint the node onscreen 
-    \param painter the active painter.
-    \param option the QStyleOptionGraphicsItem flags
-    \param widget the widget that will be affected.*/
-  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    /*! paint the node onscreen
+      \param painter the active painter.
+      \param option the QStyleOptionGraphicsItem flags
+      \param widget the widget that will be affected.*/
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-   Node* node() { return _node; }
-   void addEdge(QGraphicsItem *e);
+    Node* node() {
+        return _node;
+    }
+    void addEdge(QGraphicsItem *e);
 
 
 protected slots:
-  
-  void updateName(const QString& name);
-  void updateVisited(bool v);
-  void updateValue(qreal v);
-  void updateTotal(qreal t);
-  void updateColor(QColor c);
 
-  /*! Emited when a node is removed */
-  void removed();
+    void updateName(const QString& name);
+    void updateVisited(bool v);
+    void updateValue(qreal v);
+    void updateTotal(qreal t);
+    void updateColor(QColor c);
+
+    /*! Emited when a node is removed */
+    void removed();
 
 public slots:
-	void updatePos(QPointF);
+    void updatePos(QPointF);
 
 private:
-	Node *_node;
-	QList<QGraphicsItem*> _edges;
+    Node *_node;
+    QList<QGraphicsItem*> _edges;
 };
 
 #endif

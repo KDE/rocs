@@ -25,92 +25,92 @@
 
 class Graph;
 
-/*! \brief the graph document 
+/*! \brief the graph document
   long explanation needed.
 */
 class GraphDocument : public QObject, public QList<Graph*>
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  enum Type{Simple = 0, Oriented};
-  /*! Default Constructor 
-    \param name sets the name of the document.
-  */
-  GraphDocument(const QString name, int width = 800, int heigth = 600);
-  
-  /*! default copy constructor */
-  GraphDocument(const GraphDocument& gd);
+    enum Type {Simple = 0, Oriented};
+    /*! Default Constructor
+      \param name sets the name of the document.
+    */
+    GraphDocument(const QString name, int width = 800, int heigth = 600);
 
-  /*! Default Destructor */
-  ~GraphDocument();
+    /*! default copy constructor */
+    GraphDocument(const GraphDocument& gd);
 
-  /*! Sets the current file name of the Graph Collection 
-    \param name changes the name of the document.
-  */
-  void setName(const QString& name);
-  
-  /*! \return the Name of the Collection of Graphs */
-  QString name() const;
+    /*! Default Destructor */
+    ~GraphDocument();
 
-  /*! set the height of the working area 
-      \param height the new height of the document.
-  */
-  void setHeight(qreal height);
+    /*! Sets the current file name of the Graph Collection
+      \param name changes the name of the document.
+    */
+    void setName(const QString& name);
 
-  /*! \return the heigth of the working area */
-  qreal height() const;
+    /*! \return the Name of the Collection of Graphs */
+    QString name() const;
 
-  /*! set the width of the working area 
-    \param width the new width of the working area.
-  */
-  void setWidth(qreal width);
+    /*! set the height of the working area
+        \param height the new height of the document.
+    */
+    void setHeight(qreal height);
 
-  /*! \return the width of the working area */
-  qreal width() const;
+    /*! \return the heigth of the working area */
+    qreal height() const;
 
-  /* */
-  void savedDocumentAt(const QString& fileName);
+    /*! set the width of the working area
+      \param width the new width of the working area.
+    */
+    void setWidth(qreal width);
 
-  const QString& documentPath() const ;
+    /*! \return the width of the working area */
+    qreal width() const;
 
-  bool saveAsInternalFormat(const QString& filename);
-  void loadFromInternalFormat(const QString& filename);
+    /* */
+    void savedDocumentAt(const QString& fileName);
+
+    const QString& documentPath() const ;
+
+    bool saveAsInternalFormat(const QString& filename);
+    void loadFromInternalFormat(const QString& filename);
 public slots:
-  /*! Creates a new Graph 
-    \param name the name of the graph
-    \param type the the of the graph. 
-  */
-  Graph *addGraph(QString name = "untitled");
+    /*! Creates a new Graph
+      \param name the name of the graph
+      \param type the the of the graph.
+    */
+    Graph *addGraph(QString name = "untitled");
 
 signals:
-  /*! emited when a new graph is created 
-    \param g the created graph */
-  void graphCreated( Graph *g);
+    /*! emited when a new graph is created
+      \param g the created graph */
+    void graphCreated( Graph *g);
 
-  /*! emitted when a graph is removed.
-    \param i the index of the removed graph */
-  void graphRemoved(int i);
+    /*! emitted when a graph is removed.
+      \param i the index of the removed graph */
+    void graphRemoved(int i);
 
-  /*! emitted when the document changes it's name. 
-    \param name the new name of the document */
-  void nameChanged(QString name);
+    /*! emitted when the document changes it's name.
+      \param name the new name of the document */
+    void nameChanged(QString name);
 
-  /*! emitted when the document changes it's height 
-    \param height the new height of the document */
-  void heightChanged(qreal height);
+    /*! emitted when the document changes it's height
+      \param height the new height of the document */
+    void heightChanged(qreal height);
 
-  /*!  emitted when the document changes it's width
-    \param width the new width of the document */
-  void widthChanged(qreal width);
+    /*!  emitted when the document changes it's width
+      \param width the new width of the document */
+    void widthChanged(qreal width);
 
 private:
-  QString buf;
-  void  savePropertiesInternalFormat(QObject *o);
-  QString _lastSavedDocumentPath;
-  QString _name;
-  qreal _width;
-  qreal _height;
+    QString buf;
+    void  savePropertiesInternalFormat(QObject *o);
+    QString _lastSavedDocumentPath;
+    QString _name;
+    qreal _width;
+    qreal _height;
 };
 
 #endif

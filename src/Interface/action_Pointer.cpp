@@ -27,11 +27,11 @@
 
 #include <KDebug>
 
-PointerAction::PointerAction(GraphScene *scene, QObject *parent) 
-: AbstractAction(scene, parent){
-  setText(i18n ( "Pointer" ));
-  setToolTip ( i18n ( "Does Nothing." ) );
-  setIcon ( KIcon ( "pointer" ) );
+PointerAction::PointerAction(GraphScene *scene, QObject *parent)
+        : AbstractAction(scene, parent) {
+    setText(i18n ( "Pointer" ));
+    setToolTip ( i18n ( "Does Nothing." ) );
+    setIcon ( KIcon ( "pointer" ) );
 }
 
-PointerAction::~PointerAction(){}
+PointerAction::~PointerAction() {}

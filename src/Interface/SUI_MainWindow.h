@@ -40,78 +40,80 @@ class KTextBrowser;
 class QSplitter;
 class GraphScene;
 
-namespace KTextEditor{
-	class Document;
-	class View;
+namespace KTextEditor {
+class Document;
+class View;
 }
 
-class MainWindow : public KXmlGuiWindow{
-Q_OBJECT
+class MainWindow : public KXmlGuiWindow {
+    Q_OBJECT
 
 public:
-	/*! defalt constructor */
-	MainWindow();
-	~MainWindow();
-	Graph *graph() const;
-	GraphScene *scene() const;
+    /*! defalt constructor */
+    MainWindow();
+    ~MainWindow();
+    Graph *graph() const;
+    GraphScene *scene() const;
 
-private:
-	void setupModels();	// setup all the models to be used on the views.
-	void setupWidgets(); // Setup all the widgets.
-	void setupActions(); // Setup all the actions.
-	void setupSignals();
+private: // Methods
+    void setupModels();	// setup all the models to be used on the views.
+    void setupWidgets(); // Setup all the widgets.
+    void setupActions(); // Setup all the actions.
+    void setupSignals();
 
-	QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
-	QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff.
-	
-	// Left Area:
-	PaletteBarWidget*	_PaletteBar;	 // area where the icons of actions will be.
-	OpenedFilesWidget* _OpenedFiles;	// area where the opened files will be
-	GraphPropertiesWidget* _GraphProperties; // Area where the nodes and edges will be modified.
-	KMultiTabBar *_leftTabBar; // Tab that will hold the pallete, opened files, graphLayers and Properties.
-	int _leftTabId;
-	int _bottomTabId;
+    QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
+    QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff.
 
-
-	// Right Area:
-	GraphVisualEditor* _graphVisualEditor; // Area where the graph will be editted.
-	KMultiTabBar *_bottomTabBar; // This will hold the Editor and the Debugger.
-	KTextEditor::View *_docView;
-	KTextBrowser *_txtDebug;
-	int _rightTabId;
-
-	// Other Bunch of stuff.
-	QList<GraphDocument*> _documents;
-	GraphDocumentModel *_documentModel;
-	KActionCollection *_paletteActions;
-
-	KTextEditor::Document *_scriptDoc;
-
-	// Needed to reestore the size of the splitter after closing / opening the UI.
-	QSplitter *_vSplitter;
-	QSplitter *_hSplitter;
-
-	// The Active Graph.
-	GraphDocument *_activeGraphDocument;
-	Graph *_graph;
 private slots:
-	void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
-	void releaseBottomTabbarButton(int index); // control the flux of the left tabbar.
-	void setActiveGraphDocument(GraphDocument *d);
-	void executeScript();
-	void releaseRunButton();
+    void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
+    void releaseBottomTabbarButton(int index); // control the flux of the left tabbar.
+    void setActiveGraphDocument(GraphDocument *d);
+    void executeScript();
+    void releaseRunButton();
 
-	void newGraph();
-	void openGraph();
-	void saveGraph();
-	void saveGraphAs();
+    void newGraph();
+    void openGraph();
+    void saveGraph();
+    void saveGraphAs();
 
-	void newScript();
-	void openScript();
-	void saveScript();
-	void saveScriptAs();
+    void newScript();
+    void openScript();
+    void saveScript();
+    void saveScriptAs();
 public slots:
-	void setGraph(Graph *g);
+    void setGraph(Graph *g);
+
+private: // Variables.
+
+   // Left Area:
+    PaletteBarWidget*	_PaletteBar;	 //! area where the icons of actions will be.
+    OpenedFilesWidget* _OpenedFiles;	//! area where the opened files will be
+    GraphPropertiesWidget* _GraphProperties; //! Area where the nodes and edges will be modified.
+    KMultiTabBar *_leftTabBar; //! Tab that will hold the pallete, opened files, graphLayers and Properties.
+    int _leftTabId; //! active left tab
+    int _bottomTabId; //! active bottom tab
+
+
+    // Right Area:
+    GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
+    KMultiTabBar *_bottomTabBar; //! This will hold the Editor and the Debugger.
+    KTextEditor::View *_docView; //! this is the view where you edit your scripts
+    KTextBrowser *_txtDebug; //! this is the debug view.
+    
+    // Other Bunch of stuff.
+    QList<GraphDocument*> _documents; //! The list of opend documents
+    GraphDocumentModel *_documentModel; //! the model that hold the documents. there's a need for a Model and a QList?
+    KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
+
+    KTextEditor::Document *_scriptDoc; //! the document that you are editing. 
+
+    //! Needed to reestore the size of the splitter after closing / opening the UI.
+    QSplitter *_vSplitter;
+    QSplitter *_hSplitter;
+
+    //! The Active Graph.
+    GraphDocument *_activeGraphDocument;
+    Graph *_graph;
 };
 
 #endif

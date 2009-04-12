@@ -27,28 +27,28 @@
 class QGraphicsLineItem;
 class NodeItem;
 
-/*! 
-  \brief The 'Add Node' Action 
-  This action holds the 'Add Node' icon and tooltips, and when it's executed, 
+/*!
+  \brief The 'Add Node' Action
+  This action holds the 'Add Node' icon and tooltips, and when it's executed,
   it will place a new node on the QGraphicsView that holds all the items.
 */
 
-class AddEdgeAction : public AbstractAction{
-  Q_OBJECT;
-  public:
-    /*! 
-      Default constructor 
+class AddEdgeAction : public AbstractAction {
+    Q_OBJECT;
+public:
+    /*!
+      Default constructor
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
-  
+
     explicit AddEdgeAction(GraphScene *scene, QObject *parent = 0);
-  
-    /*! 
-      Default Destructor 
+
+    /*!
+      Default Destructor
     */
     ~AddEdgeAction();
-  public slots:
-    /*! 
+public slots:
+    /*!
       will be executed when the mouse press a button.
       \param pos the position onscreen of the click.
     */
@@ -58,12 +58,12 @@ class AddEdgeAction : public AbstractAction{
     */
     void executeMove(QPointF pos);
 
-    /*! will be executed when the mouse releases a click 
+    /*! will be executed when the mouse releases a click
     \param pos the position of the cursor.
     */
     void executeRelease(QPointF pos);
 
-  private:
+private:
     NodeItem *_nodeFrom;
     NodeItem *_nodeTo;
     QGraphicsLineItem *_tmpLine;

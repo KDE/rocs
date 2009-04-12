@@ -28,48 +28,48 @@
 #include <KDebug>
 
 GraphToolBoxWidget::GraphToolBoxWidget(MainWindow* parent)
-: QWidget(parent) 
+        : QWidget(parent)
 {
-	_document = 0;
-	_layerModel = 0;
-	_mainWindow = parent;
-	setupUi(this);
-	_btnNewGraph ->setEnabled(false);
+    _document = 0;
+    _layerModel = 0;
+    _mainWindow = parent;
+    setupUi(this);
+    _btnNewGraph ->setEnabled(false);
 }
 
 void GraphToolBoxWidget::on__btnNewGraph_clicked()
 {
-	_layerModel->insertRow(_layerModel->rowCount());
+    _layerModel->insertRow(_layerModel->rowCount());
 }
 
 void GraphToolBoxWidget::setGraphDocument( GraphDocument *document)
 {
-	if ( _layerModel != 0) delete _layerModel;
-	_document = document;
-	_layerModel = new GraphLayersModel( document );
-	_comboGraphLayers->clear();
-	_comboGraphLayers->setModel( _layerModel );
+    if ( _layerModel != 0) delete _layerModel;
+    _document = document;
+    _layerModel = new GraphLayersModel( document );
+    _comboGraphLayers->clear();
+    _comboGraphLayers->setModel( _layerModel );
 
-	_btnNewGraph -> setEnabled(true);
-	setActiveGraph ( _layerModel->index(0,0) );
-	
+    _btnNewGraph -> setEnabled(true);
+    setActiveGraph ( _layerModel->index(0,0) );
+
 }
 
-void GraphToolBoxWidget::on__comboGraphLayers_activated(int i){
-	setActiveGraph( _layerModel->index(i,0) );
+void GraphToolBoxWidget::on__comboGraphLayers_activated(int i) {
+    setActiveGraph( _layerModel->index(i,0) );
 }
 
-void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex){
-	Graph *g = _layerModel -> at(modelindex);
-	if (g == 0){ 
-			return;
-	}
-	_mainWindow->setGraph(g);
-	_btnSetOriented->setChecked(g->directed());
+void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex) {
+    Graph *g = _layerModel -> at(modelindex);
+    if (g == 0) {
+        return;
+    }
+    _mainWindow->setGraph(g);
+    _btnSetOriented->setChecked(g->directed());
 }
 
-void GraphToolBoxWidget::on__btnSetOriented_clicked(){
-	Graph *g = _mainWindow->graph();
-	g->setDirected(_btnSetOriented->isChecked());
-	_mainWindow->scene()->updateGraph(g);
+void GraphToolBoxWidget::on__btnSetOriented_clicked() {
+    Graph *g = _mainWindow->graph();
+    g->setDirected(_btnSetOriented->isChecked());
+    _mainWindow->scene()->updateGraph(g);
 }

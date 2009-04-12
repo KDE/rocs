@@ -44,147 +44,147 @@
 #include <QPen>
 
 OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
-     : QObject(0), QGraphicsPathItem(parent)
+        : QObject(0), QGraphicsPathItem(parent)
 {
-  
-  _edge = edge;
-  _loop = (_edge->from() == edge->to()) ? true : false;
-  _index = _edge->relativeIndex();
 
-  setCacheMode(DeviceCoordinateCache);
-  setZValue(-_index);
-  setFlag(ItemIsSelectable);
-  connectSignals();
-  setupPen();
-  
-  
-  setPath(createCurves());
+    _edge = edge;
+    _loop = (_edge->from() == edge->to()) ? true : false;
+    _index = _edge->relativeIndex();
 
-  kDebug() << "Oriented Edge Created, Index = " << _index;
+    setCacheMode(DeviceCoordinateCache);
+    setZValue(-_index);
+    setFlag(ItemIsSelectable);
+    connectSignals();
+    setupPen();
+
+
+    setPath(createCurves());
+
+    kDebug() << "Oriented Edge Created, Index = " << _index;
 }
 
-void OrientedEdgeItem::setupPen(){
-  QPen pen;
-  pen.setStyle(Qt::SolidLine);
-  pen.setWidth(2);
-  pen.setBrush(_edge->property("color").value<QColor>());
-  pen.setCapStyle(Qt::RoundCap);
-  pen.setJoinStyle(Qt::RoundJoin);
-  setPen( pen );    // ! Connect the Edge's Signals.
+void OrientedEdgeItem::setupPen() {
+    QPen pen;
+    pen.setStyle(Qt::SolidLine);
+    pen.setWidth(2);
+    pen.setBrush(_edge->property("color").value<QColor>());
+    pen.setCapStyle(Qt::RoundCap);
+    pen.setJoinStyle(Qt::RoundJoin);
+    setPen( pen );    // ! Connect the Edge's Signals.
 }
 
-void OrientedEdgeItem::connectSignals(){
-  connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
+void OrientedEdgeItem::connectSignals() {
+    connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
 }
 
-QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2){
-  QLineF line(Pos1, Pos2);
-  qreal angle = ::acos(line.dx() / line.length());
+QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) {
+    QLineF line(Pos1, Pos2);
+    qreal angle = ::acos(line.dx() / line.length());
 
-  if (line.dy() >= 0){
-    angle = TwoPi - angle;
-  }
- 
-  qreal arrowSize = 10;
-  
-  QPointF destArrowP1 = Pos2 + QPointF(sin(angle - PI_3) * arrowSize,         cos(angle - PI_3) * arrowSize);
-  QPointF destArrowP2 = Pos2 + QPointF(sin(angle - Pi + PI_3) * arrowSize,    cos(angle - Pi + PI_3) * arrowSize);
-  QPolygonF arrow(QPolygonF() <<  destArrowP1 << Pos2 << destArrowP2);
-  
-  /// Put the arrow on the center of the nodes.
-  qreal x = Pos2.x() - Pos1.x();
-  qreal y = Pos2.y() - Pos1.y();
-
-  x -= x/2;
-  y -= y/2;
-  arrow.translate(-x, -y );
-  return arrow;
-}
-
-QPainterPath OrientedEdgeItem::createCurves(){
-
-
-  /// Calculate the angle.
-  QPointF Pos1(_edge->from()->property("x").toDouble(), _edge->from()->property("y").toDouble());
-  QPointF Pos2(_edge->to()->property("x").toDouble(), _edge->to()->property("y").toDouble());
-  QPainterPath p;
-  
-  if ( _loop ){
-      qreal size = 30 + (20 * _index);
-      qreal correctPos = (sqrt( pow(size, 2)*2 ) / 2.0) - (size/2.0);
-      correctPos = correctPos * sin(PI_4);
-      p.addEllipse( Pos1.x() - correctPos , Pos1.y() - correctPos , size, size);
-      return p;
-  }
-
-  QPolygonF arrow = createArrow(Pos1,  Pos2);
-  
-  /// Draw the line if it is to draw the line.
-  if (_index == 0){
-      p.moveTo(Pos1);
-      p.lineTo(Pos2);
-      p.addPolygon(arrow);
-  }
-  /// Draw a curve if it's to draw a curve.
-  else{
-    /// change the angle for correctness of the points.
-      if (Pos1.x() > Pos2.x()){
-      QPointF p3 = Pos2;  
-      Pos2 = Pos1;
-      Pos1 = p3;
+    if (line.dy() >= 0) {
+        angle = TwoPi - angle;
     }
 
+    qreal arrowSize = 10;
+
+    QPointF destArrowP1 = Pos2 + QPointF(sin(angle - PI_3) * arrowSize,         cos(angle - PI_3) * arrowSize);
+    QPointF destArrowP2 = Pos2 + QPointF(sin(angle - Pi + PI_3) * arrowSize,    cos(angle - Pi + PI_3) * arrowSize);
+    QPolygonF arrow(QPolygonF() <<  destArrowP1 << Pos2 << destArrowP2);
+
+    /// Put the arrow on the center of the nodes.
     qreal x = Pos2.x() - Pos1.x();
     qreal y = Pos2.y() - Pos1.y();
 
-    qreal angle = atan2(y,x);
-
-    /// Calculate the size of the inclination on the curve.
-    qreal theta = angle + PI_2 ;
-
-    qreal finalX = cos(theta);
-    qreal finalY = sin(theta);
-    int index = _index;
-
-    if (index & 1){ // If number is Odd.
-      ++index;
-      finalX *= (-1);
-      finalY *= (-1);
-    }
-
-    qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
-    
-    finalX *= size;
-    finalY *= size;
-    finalX += Pos1.x() + (x)/2;
-    finalY += Pos1.y() + (y)/2;
-  
-    /// Draw the Arc.
-    p.moveTo(Pos1);
-    p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
-    
-    /// puts the arrow on it's correct position
-    QPointF middle = p.pointAtPercent(0.5);
-
-    x = Pos1.x() + (Pos2.x() - Pos1.x())/2;
-    y = Pos1.y() + (Pos2.y() - Pos1.y())/2;
-    QLineF line2(QPointF(x,y) , middle);
- 
-    arrow.translate(+line2.dx() , +line2.dy());
-    p.addPolygon(arrow);
-  }
-
-  return p;
+    x -= x/2;
+    y -= y/2;
+    arrow.translate(-x, -y );
+    return arrow;
 }
 
-void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *){
-  QGraphicsPathItem::paint(painter, option);
+QPainterPath OrientedEdgeItem::createCurves() {
+
+
+    /// Calculate the angle.
+    QPointF Pos1(_edge->from()->property("x").toDouble(), _edge->from()->property("y").toDouble());
+    QPointF Pos2(_edge->to()->property("x").toDouble(), _edge->to()->property("y").toDouble());
+    QPainterPath p;
+
+    if ( _loop ) {
+        qreal size = 30 + (20 * _index);
+        qreal correctPos = (sqrt( pow(size, 2)*2 ) / 2.0) - (size/2.0);
+        correctPos = correctPos * sin(PI_4);
+        p.addEllipse( Pos1.x() - correctPos , Pos1.y() - correctPos , size, size);
+        return p;
+    }
+
+    QPolygonF arrow = createArrow(Pos1,  Pos2);
+
+    /// Draw the line if it is to draw the line.
+    if (_index == 0) {
+        p.moveTo(Pos1);
+        p.lineTo(Pos2);
+        p.addPolygon(arrow);
+    }
+    /// Draw a curve if it's to draw a curve.
+    else {
+        /// change the angle for correctness of the points.
+        if (Pos1.x() > Pos2.x()) {
+            QPointF p3 = Pos2;
+            Pos2 = Pos1;
+            Pos1 = p3;
+        }
+
+        qreal x = Pos2.x() - Pos1.x();
+        qreal y = Pos2.y() - Pos1.y();
+
+        qreal angle = atan2(y,x);
+
+        /// Calculate the size of the inclination on the curve.
+        qreal theta = angle + PI_2 ;
+
+        qreal finalX = cos(theta);
+        qreal finalY = sin(theta);
+        int index = _index;
+
+        if (index & 1) { // If number is Odd.
+            ++index;
+            finalX *= (-1);
+            finalY *= (-1);
+        }
+
+        qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
+
+        finalX *= size;
+        finalY *= size;
+        finalX += Pos1.x() + (x)/2;
+        finalY += Pos1.y() + (y)/2;
+
+        /// Draw the Arc.
+        p.moveTo(Pos1);
+        p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
+
+        /// puts the arrow on it's correct position
+        QPointF middle = p.pointAtPercent(0.5);
+
+        x = Pos1.x() + (Pos2.x() - Pos1.x())/2;
+        y = Pos1.y() + (Pos2.y() - Pos1.y())/2;
+        QLineF line2(QPointF(x,y) , middle);
+
+        arrow.translate(+line2.dx() , +line2.dy());
+        p.addPolygon(arrow);
+    }
+
+    return p;
+}
+
+void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+    QGraphicsPathItem::paint(painter, option);
 }
 
 void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-     update();
-     QGraphicsItem::mousePressEvent(event);
+    update();
+    QGraphicsItem::mousePressEvent(event);
 }
 
 void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
@@ -193,21 +193,21 @@ void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void OrientedEdgeItem::removed(){
-  kDebug() << " Not Implemented Yet " << "removed";
+void OrientedEdgeItem::removed() {
+    kDebug() << " Not Implemented Yet " << "removed";
 }
 
-void OrientedEdgeItem::updatePos(){
-  QPainterPath p = createCurves();
-  setPath(p);
+void OrientedEdgeItem::updatePos() {
+    QPainterPath p = createCurves();
+    setPath(p);
 }
 
 
-void OrientedEdgeItem::updateName(const QString& ){}
-void OrientedEdgeItem::updateVisited(bool ){}
-void OrientedEdgeItem::updateLength(qreal ){}
-void OrientedEdgeItem::updateValue(qreal ){}
-void OrientedEdgeItem::updateTotal(qreal ){}
-void OrientedEdgeItem::updateColor(QColor ){}
+void OrientedEdgeItem::updateName(const QString& ) {}
+void OrientedEdgeItem::updateVisited(bool ) {}
+void OrientedEdgeItem::updateLength(qreal ) {}
+void OrientedEdgeItem::updateValue(qreal ) {}
+void OrientedEdgeItem::updateTotal(qreal ) {}
+void OrientedEdgeItem::updateColor(QColor ) {}
 
 #include "graphicsitem_OrientedEdge.moc"

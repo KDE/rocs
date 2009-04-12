@@ -38,58 +38,58 @@ class Edge;
 class QtScriptBackend;
 class GraphGroup;
 
-class Graph : public QObject{
-Q_OBJECT
- Q_PROPERTY(bool directed READ directed WRITE setDirected);
+class Graph : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(bool directed READ directed WRITE setDirected);
 
 public:
-  Graph();
-  ~Graph();
+    Graph();
+    ~Graph();
 
-  #ifdef USING_QTSCRIPT
-  QScriptValue scriptValue() const;
-  void setEngine( QtScriptBackend *engine );
-  #endif
-  
-public  slots:  
-  void setDirected(bool directed = true);
-  bool directed() const;
-  QList<Node*> nodes() const;
-  QList<Edge*> edges() const;
-  QList<GraphGroup*> groups() const;
+#ifdef USING_QTSCRIPT
+    QScriptValue scriptValue() const;
+    void setEngine( QtScriptBackend *engine );
+#endif
 
-  #ifdef USING_QTSCRIPT
-  QScriptValue list_nodes();
-  QScriptValue list_edges();
-  QScriptValue add_node(const QString& name);
-  QScriptValue add_edge(const QString& from, const QString& to);
-  QScriptValue node_byname(const QString& name);
-  #endif
+public  slots:
+    void setDirected(bool directed = true);
+    bool directed() const;
+    QList<Node*> nodes() const;
+    QList<Edge*> edges() const;
+    QList<GraphGroup*> groups() const;
 
-  Node* addNode(QString name);
-  Edge* addEdge(Node* from,Node* to);
-  Edge* addEdge(const QString& name_from, const QString& name_to);
-  Node* node(const QString& name);
+#ifdef USING_QTSCRIPT
+    QScriptValue list_nodes();
+    QScriptValue list_edges();
+    QScriptValue add_node(const QString& name);
+    QScriptValue add_edge(const QString& from, const QString& to);
+    QScriptValue node_byname(const QString& name);
+#endif
 
-  void remove(Node *n);
-  void remove(Edge *e);
-  GraphGroup *addGroup(const QString& name);
+    Node* addNode(QString name);
+    Edge* addEdge(Node* from,Node* to);
+    Edge* addEdge(const QString& name_from, const QString& name_to);
+    Node* node(const QString& name);
+
+    void remove(Node *n);
+    void remove(Edge *e);
+    GraphGroup *addGroup(const QString& name);
 
 signals:
-  void nodeCreated(Node *n);
-  void edgeCreated(Edge *e);
-  void directionChanged(bool directed);
+    void nodeCreated(Node *n);
+    void edgeCreated(Edge *e);
+    void directionChanged(bool directed);
 
 private:
-  bool _directed;
-  QList<Node*> _nodes;
-  QList<Edge*> _edges;
-  QList<GraphGroup*> _graphGroups;
+    bool _directed;
+    QList<Node*> _nodes;
+    QList<Edge*> _edges;
+    QList<GraphGroup*> _graphGroups;
 
-  #ifdef USING_QTSCRIPT
-  QScriptValue _value;
-  QtScriptBackend *_engine;
-  #endif
+#ifdef USING_QTSCRIPT
+    QScriptValue _value;
+    QtScriptBackend *_engine;
+#endif
 
 };
 

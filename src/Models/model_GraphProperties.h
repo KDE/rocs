@@ -30,17 +30,17 @@
 
 class GraphPropertiesModel : public QAbstractTableModel
 {
-  public:
-    /*! Default Constructor. 
+public:
+    /*! Default Constructor.
       \param parent the QObject that owns this Model.   */
     explicit GraphPropertiesModel(QObject *parent = 0);
 
-    /*! Gives the number of rows on the model. 
+    /*! Gives the number of rows on the model.
       \param parent a default constructed, unused, QModelIndex.
       \return the number of rows on the model. */
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
-    /*! Gives the number or columns on the model. 
+    /*! Gives the number or columns on the model.
      \param parent a default constructed, unused, QModelIndex.
      \return the const value 2. */
     int columnCount ( const QModelIndex & parent = QModelIndex() ) const;
@@ -52,7 +52,7 @@ class GraphPropertiesModel : public QAbstractTableModel
     QVariant data(const QModelIndex &index, int role) const;
 
     /*! some information that goes on the header.
-    \param section the place where the data will be. 
+    \param section the place where the data will be.
     \param orientation Horizontal or Vertical.
     \param role defaulted to DisplayRole for displaying things.
     \return a QVariant containing the string of the header. */
@@ -61,8 +61,8 @@ class GraphPropertiesModel : public QAbstractTableModel
     /*! recreates the information on the model based on another datasource.
     \param dataSource the new dataSource of the model.*/
     void setDataSource(QObject *dataSource);
-  
-  private:
+
+private:
     QObject *_dataSource;
     const QMetaObject *_metaObject;
 };

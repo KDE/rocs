@@ -29,12 +29,12 @@ class GraphPropertiesModel;
 class MainWindow;
 class GraphPropertiesWidget : public QWidget, public Ui::GraphPropertiesWidget
 {
-	Q_OBJECT
-	public:
-		GraphPropertiesWidget ( QWidget* parent = 0 );
-	private slots:
-		void setDataSource(QObject *o);
-	private:
-		GraphPropertiesModel *_model;
+    Q_OBJECT
+public:
+    GraphPropertiesWidget ( QWidget* parent = 0 );
+private slots:
+    void setDataSource(QObject *o);
+private:
+    GraphPropertiesModel *_model;
 };
 #endif

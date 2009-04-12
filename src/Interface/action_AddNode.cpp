@@ -27,27 +27,27 @@
 
 #include <KDebug>
 
-AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent) 
-: AbstractAction(scene, parent){
-  setText(i18n ( "Add Node" ));
-  setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
-  setIcon ( KIcon ( "add-node" ) );
+AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent)
+        : AbstractAction(scene, parent) {
+    setText(i18n ( "Add Node" ));
+    setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
+    setIcon ( KIcon ( "add-node" ) );
 }
 
-AddNodeAction::~AddNodeAction(){
-  kDebug() << "Destroyed";
+AddNodeAction::~AddNodeAction() {
+    kDebug() << "Destroyed";
 }
 
-void AddNodeAction::executePress(QPointF pos){
-  if (_graph == 0){
-    kDebug() << "Error, Graph == 0";
-    return;
-  }
+void AddNodeAction::executePress(QPointF pos) {
+    if (_graph == 0) {
+        kDebug() << "Error, Graph == 0";
+        return;
+    }
 
-  Node *n = _graph -> addNode(i18n("untitled"));
-  n -> setProperty("x", pos.x() );
-  n -> setProperty("y", pos.y() );
- 
-  NodeItem *nodeitem = new NodeItem( n );
-  _graphScene->insertGraphItem(nodeitem); 
+    Node *n = _graph -> addNode(i18n("untitled"));
+    n -> setProperty("x", pos.x() );
+    n -> setProperty("y", pos.y() );
+
+    NodeItem *nodeitem = new NodeItem( n );
+    _graphScene->insertGraphItem(nodeitem);
 }

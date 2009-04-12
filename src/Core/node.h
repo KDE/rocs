@@ -20,7 +20,7 @@
 #ifndef NODE_H
 #define NODE_H
 
-#ifndef USING_QTSCRIPT 
+#ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
 #endif
 
@@ -35,57 +35,57 @@
 
 class Edge;
 
-class Node : public QObject{
-Q_OBJECT
+class Node : public QObject {
+    Q_OBJECT
 
 public:
-  Node(QObject *parent);
-  ~Node();
-  void addInEdge(Edge *e);
-  void addOutEdge(Edge *e);
-  void addSelfEdge(Edge *e);
-  void removeEdge(Edge *e, int edgeList);
-  void removeEdge(Edge *e, QList<Edge*> *list);
-  enum EdgeLists{In, Out, Self};
+    Node(QObject *parent);
+    ~Node();
+    void addInEdge(Edge *e);
+    void addOutEdge(Edge *e);
+    void addSelfEdge(Edge *e);
+    void removeEdge(Edge *e, int edgeList);
+    void removeEdge(Edge *e, QList<Edge*> *list);
+    enum EdgeLists {In, Out, Self};
 
 #ifdef USING_QTSCRIPT
-	QScriptValue scriptValue() const;
-	void setEngine(	QtScriptBackend *_engine );
-	QScriptValue createScriptArray(QList<Edge*> list);
+    QScriptValue scriptValue() const;
+    void setEngine(	QtScriptBackend *_engine );
+    QScriptValue createScriptArray(QList<Edge*> list);
 #endif
 
 public  slots:
-  QList<Node*> adjacent_nodes() const;
-  QList<Edge*> adjacent_edges() const;
-  QList<Edge*> edges(Node *n);
-  QList<Edge*> in_edges() const;
-  QList<Edge*> out_edges() const;
-  QList<Edge*> self_edges() const;
+    QList<Node*> adjacent_nodes() const;
+    QList<Edge*> adjacent_edges() const;
+    QList<Edge*> edges(Node *n);
+    QList<Edge*> in_edges() const;
+    QList<Edge*> out_edges() const;
+    QList<Edge*> self_edges() const;
 
 #ifdef USING_QTSCRIPT
-	QScriptValue adj_nodes();
-	QScriptValue adj_edges();
-	QScriptValue input_edges();
-	QScriptValue output_edges();
-	QScriptValue loop_edges();
-	QScriptValue connected_edges(Node *n);
+    QScriptValue adj_nodes();
+    QScriptValue adj_edges();
+    QScriptValue input_edges();
+    QScriptValue output_edges();
+    QScriptValue loop_edges();
+    QScriptValue connected_edges(Node *n);
 #endif
 
-  Edge* addEdge(Node* to);
+    Edge* addEdge(Node* to);
 
 private:
-  QList<Edge*> _in_edges;
-  QList<Edge*> _out_edges;
-  QList<Edge*> _self_edges;
-  void empty(QList<Edge*> *list);
+    QList<Edge*> _in_edges;
+    QList<Edge*> _out_edges;
+    QList<Edge*> _self_edges;
+    void empty(QList<Edge*> *list);
 
 #ifdef USING_QTSCRIPT
-	QScriptValue _value;
-	QtScriptBackend *_engine;
+    QScriptValue _value;
+    QtScriptBackend *_engine;
 #endif
 
 signals:
-  void removed();
+    void removed();
 };
 
 #endif

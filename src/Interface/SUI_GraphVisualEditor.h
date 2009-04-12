@@ -37,63 +37,63 @@ class MainWindow;
 class NodeItem;
 
 
-class GraphVisualEditor : public QWidget{
-Q_OBJECT
+class GraphVisualEditor : public QWidget {
+    Q_OBJECT
 public:
-	/*! Default Constructor 
-	\param parent the owner of this widget. */
-	GraphVisualEditor(MainWindow *parent = 0);
+    /*! Default Constructor
+    \param parent the owner of this widget. */
+    GraphVisualEditor(MainWindow *parent = 0);
 
-	GraphScene *scene() const;
-	MainWindow *mainWindow();
+    GraphScene *scene() const;
+    MainWindow *mainWindow();
 public slots:
-/*! set the current selected Graph. 
-	\param graph the new active graph.
-	*/
-	void setGraph( Graph *graph);
+    /*! set the current selected Graph.
+    	\param graph the new active graph.
+    	*/
+    void setGraph( Graph *graph);
 
-	void setGraphDocument(GraphDocument *graphDocument);
-	
-	void alignHBottom();
-	void alignHMiddle();
-	void alignHTop();
-	void alignVLeft();
-	void alignVMiddle();
-	void alignVRight();
+    void setGraphDocument(GraphDocument *graphDocument);
+
+    void alignHBottom();
+    void alignHMiddle();
+    void alignHTop();
+    void alignVLeft();
+    void alignVMiddle();
+    void alignVRight();
 
 private:
-	void setupWidgets();
-	/*! as the name says, draw a graph on scene.
-	\param g the graph to be drawn. */
-	void drawGraphOnScene( Graph *g );
+    void setupWidgets();
+    /*! as the name says, draw a graph on scene.
+    \param g the graph to be drawn. */
+    void drawGraphOnScene( Graph *g );
 
-	/*! as the name says, it removes the current GraphDocument 
-	from the screen and releases it from the evil hands of GraphEditWidget.*/
-	void releaseGraphDocument();
+    /*! as the name says, it removes the current GraphDocument
+    from the screen and releases it from the evil hands of GraphEditWidget.*/
+    void releaseGraphDocument();
 
-	QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent);
+    QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent);
 
-	QList<NodeItem*> selectedNodes() const;
+    QList<NodeItem*> selectedNodes() const;
 
-	GraphScene *_scene;
-	GraphDocument *_graphDocument;
-	Graph *_graph;
+    GraphScene *_scene;
+    GraphDocument *_graphDocument;
+    Graph *_graph;
 
-	QWidget *_spacingPropContainer;
-	QWidget *_edgePropContainer;
-	QWidget *_nodePropContainer;
-	QWidget *_toolbar;
-	
-	GraphToolBoxWidget *_graphToolBox;
-	MainWindow *_mainWindow;
+    QWidget *_spacingPropContainer;
+    QWidget *_edgePropContainer;
+    QWidget *_nodePropContainer;
+    QWidget *_toolbar;
 
-	qreal _topNode;
-	qreal _bottomNode;
-	qreal _leftNode;
-	qreal _rightNode;
+    GraphToolBoxWidget *_graphToolBox;
+    MainWindow *_mainWindow;
 
-	/*! Actions */
-	
+    qreal _topNode;
+    qreal _bottomNode;
+    qreal _leftNode;
+    qreal _rightNode;
+
+    /*! Actions */
+
 };
 
 #endif

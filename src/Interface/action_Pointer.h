@@ -24,25 +24,25 @@
 #include "action_AbstractAction.h"
 #include <QObject>
 
-/*! 
-  \brief The 'Pointer' Action 
-  This action holds the 'Cursor' icon and tooltips, and when it's executed, 
+/*!
+  \brief The 'Pointer' Action
+  This action holds the 'Cursor' icon and tooltips, and when it's executed,
   it will do nothing.
 */
 
-class PointerAction : public AbstractAction{
-  Q_OBJECT;
-  public:
-    /*! 
-      Default constructor 
+class PointerAction : public AbstractAction {
+    Q_OBJECT;
+public:
+    /*!
+      Default constructor
       \param type the Type for 'Cursor' action. must be unique.
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
-  
+
     explicit PointerAction(GraphScene *scene, QObject *parent = 0);
-  
-    /*! 
-      Default Destructor 
+
+    /*!
+      Default Destructor
     */
     ~PointerAction();
 };

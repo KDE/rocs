@@ -39,33 +39,33 @@ class Graph;
 this is a container class for use with AbstractAction classes that will create
 a item for each AbstractAction instance on the menu.
 */
-class PaletteBarWidget : public QWidget{
-  Q_OBJECT
-  public:
-    /*!   default constructor 
+class PaletteBarWidget : public QWidget {
+    Q_OBJECT
+public:
+    /*!   default constructor
       \param parent the MainWindow
       \param flags the window flags.
     */
     explicit PaletteBarWidget ( QWidget* parent = 0 );
 
-    /*! this method will configure the action pallette inserting 
+    /*! this method will configure the action pallette inserting
     a button for each action inside of the collection.
     \param collection the collection of the KActions. */
     void setActionCollection(KActionCollection *colletion);
 
-  public slots:
+public slots:
     /*! shows or hides text on buttons.
     \param b true to show, false to hide.
     */
-    void showButtonTextToggled ( bool b );   
-    
+    void showButtonTextToggled ( bool b );
+
     /*! creates a toolbutton and places it on the pallete.
     \param action the action of with the button will take it's functionalies. */
 
     void createToolButton ( QAction* action , bool checked);
 
-  protected:
-    
+protected:
+
     QScrollArea     *_scrollArea;
     QWidget         *_widget;
     PaletteLayout   *_layout;

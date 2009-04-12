@@ -22,56 +22,56 @@
 #include "node.h"
 #include "graph.h"
 
-Edge::Edge(QObject *parent, Node *from, Node *to) : 
-QObject(parent), 
-_from(from),
-_to(to)
+Edge::Edge(QObject *parent, Node *from, Node *to) :
+        QObject(parent),
+        _from(from),
+        _to(to)
 {
-  setProperty("color", "#FF00FF");
+    setProperty("color", "#FF00FF");
 }
 
 Edge::~Edge()
 {
-  emit removed();
-  if (_from == _to){
-    _from->removeEdge(this, Node::Self);
-  }
-  else{
-    _from->removeEdge(this, Node::Out);
-    _to->removeEdge(this, Node::In);
-  }
-  _from = 0;
-  _to = 0;
+    emit removed();
+    if (_from == _to) {
+        _from->removeEdge(this, Node::Self);
+    }
+    else {
+        _from->removeEdge(this, Node::Out);
+        _to->removeEdge(this, Node::In);
+    }
+    _from = 0;
+    _to = 0;
 }
 
-Node* Edge::from() const { 
-  return _from; 
+Node* Edge::from() const {
+    return _from;
 }
 
-Node* Edge::to() const { 
-  return _to; 
+Node* Edge::to() const {
+    return _to;
 }
 
-int Edge::relativeIndex(){
-  QList<Edge*> list = _to -> edges(_from);
-  return list.indexOf(this);
+int Edge::relativeIndex() {
+    QList<Edge*> list = _to -> edges(_from);
+    return list.indexOf(this);
 }
 #ifdef USING_QTSCRIPT
 
-QScriptValue Edge::start(){
-	return _from->scriptValue();
+QScriptValue Edge::start() {
+    return _from->scriptValue();
 }
 
-QScriptValue  Edge::end(){
-	return _to->scriptValue();
+QScriptValue  Edge::end() {
+    return _to->scriptValue();
 }
 
-void Edge::setEngine(	QtScriptBackend *engine ){
-	_engine = engine;
-	_value = _engine->newQObject(this);
+void Edge::setEngine(	QtScriptBackend *engine ) {
+    _engine = engine;
+    _value = _engine->newQObject(this);
 }
 
 QScriptValue Edge::scriptValue() const {
-	return  _value;
+    return  _value;
 }
 #endif

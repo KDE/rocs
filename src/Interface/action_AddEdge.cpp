@@ -30,81 +30,81 @@
 
 #include <KDebug>
 
-AddEdgeAction::AddEdgeAction(GraphScene *scene, QObject *parent) 
-: AbstractAction(scene, parent){
-  setText(i18n ( "Add Edge" ));
-  setToolTip ( i18n ( "Creates a new edge between 2 nodes" ) );
-  setIcon ( KIcon ( "add-edge" ) );
+AddEdgeAction::AddEdgeAction(GraphScene *scene, QObject *parent)
+        : AbstractAction(scene, parent) {
+    setText(i18n ( "Add Edge" ));
+    setToolTip ( i18n ( "Creates a new edge between 2 nodes" ) );
+    setIcon ( KIcon ( "add-edge" ) );
 
-  _nodeFrom = 0;
-  _nodeTo   = 0;
-  _tmpLine  = 0;
-  _working = false;
-}
-
-AddEdgeAction::~AddEdgeAction(){
-  kDebug() << "Destroyed";
-}
-
-void AddEdgeAction::executePress(QPointF pos){
-  if (_working) return;
-  if ( ! _graph ) return; 
-
-  _working = true;
-  _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
-
-  if ( ! _nodeFrom ){
-    _working = false;
-    return;
-  }
-  _startPos = QPointF(_nodeFrom->node()->property("x").toInt(), 
-		      _nodeFrom->node()->property("y").toInt()); 
-}
-
-void AddEdgeAction::executeMove(QPointF pos){
-  if ( !_graph ) return; 
-  if ( !_nodeFrom ) return; 
-  
-  if ( !_tmpLine ){
-    _tmpLine = new QGraphicsLineItem( _startPos.x(), _startPos.y(), pos.x(), pos.y());
-    _graphScene->addItem(_tmpLine);  
-  }
-  else{
-    _tmpLine->setLine(_startPos.x(), _startPos.y(), pos.x(), pos.y());
-  }
-}
-
-void AddEdgeAction::executeRelease(QPointF pos){
-  if ( !_working ) return;
-  if ( !_graph ) return; 
-
-  if( _tmpLine ){ 
-    delete _tmpLine; 
-    _tmpLine = 0;
-  }
-
-  _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
-  if ( ! _nodeTo ){ 
     _nodeFrom = 0;
+    _nodeTo   = 0;
+    _tmpLine  = 0;
     _working = false;
-    return; 
-  }
-  
-  if (_nodeFrom == 0){
-    
-  }
-  if (_nodeTo == 0){
-    kDebug() << "nao tem node de saida";
-  }
-  Edge *e = _graph -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
-  if (e == 0){
-    _nodeFrom = 0;
-    _working = false;
-     return;
-  }
-  _graphScene->createEdge(e);
+}
 
-  _nodeFrom = 0;
-  _nodeTo = 0;
-  _working = false;
+AddEdgeAction::~AddEdgeAction() {
+    kDebug() << "Destroyed";
+}
+
+void AddEdgeAction::executePress(QPointF pos) {
+    if (_working) return;
+    if ( ! _graph ) return;
+
+    _working = true;
+    _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+
+    if ( ! _nodeFrom ) {
+        _working = false;
+        return;
+    }
+    _startPos = QPointF(_nodeFrom->node()->property("x").toInt(),
+                        _nodeFrom->node()->property("y").toInt());
+}
+
+void AddEdgeAction::executeMove(QPointF pos) {
+    if ( !_graph ) return;
+    if ( !_nodeFrom ) return;
+
+    if ( !_tmpLine ) {
+        _tmpLine = new QGraphicsLineItem( _startPos.x(), _startPos.y(), pos.x(), pos.y());
+        _graphScene->addItem(_tmpLine);
+    }
+    else {
+        _tmpLine->setLine(_startPos.x(), _startPos.y(), pos.x(), pos.y());
+    }
+}
+
+void AddEdgeAction::executeRelease(QPointF pos) {
+    if ( !_working ) return;
+    if ( !_graph ) return;
+
+    if ( _tmpLine ) {
+        delete _tmpLine;
+        _tmpLine = 0;
+    }
+
+    _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+    if ( ! _nodeTo ) {
+        _nodeFrom = 0;
+        _working = false;
+        return;
+    }
+
+    if (_nodeFrom == 0) {
+
+    }
+    if (_nodeTo == 0) {
+        kDebug() << "nao tem node de saida";
+    }
+    Edge *e = _graph -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
+    if (e == 0) {
+        _nodeFrom = 0;
+        _working = false;
+        return;
+    }
+    _graphScene->createEdge(e);
+
+    _nodeFrom = 0;
+    _nodeTo = 0;
+    _working = false;
 }

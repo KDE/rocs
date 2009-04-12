@@ -35,40 +35,40 @@
 
 class Node;
 
-class Edge : public QObject{
-Q_OBJECT
+class Edge : public QObject {
+    Q_OBJECT
 
 public:
-  Edge(QObject *parent, Node *from, Node *to);
-  ~Edge();
-  int relativeIndex();
+    Edge(QObject *parent, Node *from, Node *to);
+    ~Edge();
+    int relativeIndex();
 
 #ifdef USING_QTSCRIPT
-	QScriptValue scriptValue() const;
-	void setEngine(	QtScriptBackend *engine );
+    QScriptValue scriptValue() const;
+    void setEngine(	QtScriptBackend *engine );
 #endif
 
 public  slots:
-  Node* from() const;
-  Node* to() const;
+    Node* from() const;
+    Node* to() const;
 
 #ifdef USING_QTSCRIPT
-  QScriptValue start();
-  QScriptValue end();
+    QScriptValue start();
+    QScriptValue end();
 #endif
 
 private:
-  Node *_from;
-  Node *_to;
+    Node *_from;
+    Node *_to;
 
-	
+
 #ifdef USING_QTSCRIPT
-	QScriptValue _value;
-	QtScriptBackend *_engine;
+    QScriptValue _value;
+    QtScriptBackend *_engine;
 #endif
 
 signals:
-  void removed();
+    void removed();
 };
 
 #endif

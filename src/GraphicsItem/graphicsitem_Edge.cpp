@@ -38,76 +38,76 @@
 #include <KDebug>
 
 EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
-     : QObject(0), QGraphicsLineItem(parent){
-  
-  _edge = edge;
-  
-  setCacheMode(DeviceCoordinateCache);
-  setZValue(0);
-  setFlag(ItemIsSelectable);
+        : QObject(0), QGraphicsLineItem(parent) {
 
-  connectSignals();
-  setupPen();
-  updatePos();
+    _edge = edge;
+
+    setCacheMode(DeviceCoordinateCache);
+    setZValue(0);
+    setFlag(ItemIsSelectable);
+
+    connectSignals();
+    setupPen();
+    updatePos();
 }
 
-void EdgeItem::connectSignals(){
-  connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
+void EdgeItem::connectSignals() {
+    connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
 }
 
-void EdgeItem::setupPen(){
-  _pen = new QPen();
-  _pen->setStyle(Qt::SolidLine);
-  _pen->setWidth(2);
-  _pen->setBrush(_edge->property("color").value<QColor>());
-  _pen->setCapStyle(Qt::RoundCap);
-  _pen->setJoinStyle(Qt::RoundJoin);
-  setPen( (*_pen) );
+void EdgeItem::setupPen() {
+    _pen = new QPen();
+    _pen->setStyle(Qt::SolidLine);
+    _pen->setWidth(2);
+    _pen->setBrush(_edge->property("color").value<QColor>());
+    _pen->setCapStyle(Qt::RoundCap);
+    _pen->setJoinStyle(Qt::RoundJoin);
+    setPen( (*_pen) );
 }
 
- void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
- {
-     update();
-     QGraphicsItem::mousePressEvent(event);
- }
-
- void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
- {
-     update();
-     QGraphicsItem::mouseReleaseEvent(event);
- }
-
-void EdgeItem::removed(){
-  kDebug() << " Not Implemented Yet " << "removed";
+void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    update();
+    QGraphicsItem::mousePressEvent(event);
 }
 
-void EdgeItem::updatePos(){
+void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    update();
+    QGraphicsItem::mouseReleaseEvent(event);
+}
+
+void EdgeItem::removed() {
+    kDebug() << " Not Implemented Yet " << "removed";
+}
+
+void EdgeItem::updatePos() {
     setLine( _edge->from()->property("x").toInt(),
-	     _edge->from()->property("y").toInt(),
-	     _edge->to()->property("x").toInt(),
-	     _edge->to()->property("y").toInt());
+             _edge->from()->property("y").toInt(),
+             _edge->to()->property("x").toInt(),
+             _edge->to()->property("y").toInt());
     update();
 }
 
-void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *){
- if (!isSelected()){
-     _pen->setWidth(2);
-    _pen->setBrush(_edge->property("color").value<QColor>());
-    QGraphicsLineItem::paint(painter, option);
- }
- else{
-    _pen -> setWidth(4);
-    _pen->setBrush(_edge->property("color").value<QColor>().light(120));
-    painter->setPen((*_pen));
-    painter->drawLine(line());
-  }
+void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+    if (!isSelected()) {
+        _pen->setWidth(2);
+        _pen->setBrush(_edge->property("color").value<QColor>());
+        QGraphicsLineItem::paint(painter, option);
+    }
+    else {
+        _pen -> setWidth(4);
+        _pen->setBrush(_edge->property("color").value<QColor>().light(120));
+        painter->setPen((*_pen));
+        painter->drawLine(line());
+    }
 }
 
-void EdgeItem::updateName(const QString& ){}
-void EdgeItem::updateVisited(bool ){}
-void EdgeItem::updateLength(qreal ){}
-void EdgeItem::updateValue(qreal ){}
-void EdgeItem::updateTotal(qreal ){}
-void EdgeItem::updateColor(QColor ){}
+void EdgeItem::updateName(const QString& ) {}
+void EdgeItem::updateVisited(bool ) {}
+void EdgeItem::updateLength(qreal ) {}
+void EdgeItem::updateValue(qreal ) {}
+void EdgeItem::updateTotal(qreal ) {}
+void EdgeItem::updateColor(QColor ) {}
 
 #include "graphicsitem_Edge.moc"
