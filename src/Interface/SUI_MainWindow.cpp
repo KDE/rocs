@@ -251,7 +251,10 @@ void MainWindow::setupActions() {
 
     KStandardAction::quit ( this,		SLOT ( quit() ),				actionCollection() );
     GraphScene *gc = _graphVisualEditor->scene();
-
+    if (!gc){
+	kDebug() << "There is no graph scene at this point.";
+	return;
+    }
     _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
     _paletteActions->addAction("pointer_action", new PointerAction(gc, this));
     _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
@@ -328,32 +331,57 @@ void MainWindow::setupActions() {
 void MainWindow::setupSignals() {
 
     connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
-             _graphVisualEditor,	 SLOT(setGraphDocument(GraphDocument*)));
-
-    connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
              this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
 
-    // action here is "single selection action. please, change that to a more intuitive approach.
+    //! action here is "single selection action. please, change that to a more intuitive approach.
     connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
              _GraphProperties, SLOT(setDataSource(QObject*)));
 
 }
 
 void MainWindow::setActiveGraphDocument(GraphDocument* d) {
-    kDebug() << "Graph Document set as Active: " << d->name();
+    if (_paletteActions == 0){
+      kDebug() << " ERROR: There isn't pallete Actions.";
+      return;
+    }
     _activeGraphDocument = d;
+    _graphVisualEditor->setActiveGraphDocument(d);
+    foreach( QAction *action, _paletteActions->actions() ) {
+        AbstractAction *absAction = qobject_cast<AbstractAction*>(action);
+	if (!absAction){
+	    kDebug() << "ERROR: Invalid conversion, it should be AbstractAction but it isn't. ";
+	    continue;
+	}
+        absAction->setActiveGraphDocument(d);
+    }
+
+    
+    setActiveGraph(_activeGraphDocument->at(0));    
 }
 
-void MainWindow::setGraph( Graph *g) {
-    if (_paletteActions == 0) {
-        kDebug() << "PALETTE = 0";
-        return;
+void MainWindow::setActiveGraph( Graph *g) {
+    if (_paletteActions == 0){
+      kDebug() << "ERROR : There isn't pallete actions";
+      return;
+    }
+    if ( _activeGraphDocument  == 0){
+     kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should beong to one."; 
+      return;
+    }
+    if ( _activeGraphDocument->indexOf(g) == -1){
+      kDebug() << "ERROR: this graph doesn't belong to the active document";
+      return;
     }
     foreach( QAction *action, _paletteActions->actions() ) {
         AbstractAction *absAction = qobject_cast<AbstractAction*>(action);
-        absAction->setGraph(g);
+	if (!absAction){
+	    kDebug() << "ERROR: Invalid conversion, it should be AbstractAction but it isn't. ";
+	    continue;
+	}
+        absAction->setActiveGraph(g);
     }
-    _graphVisualEditor->scene()->setGraph(g);
+
+    _graphVisualEditor->setActiveGraph(g);
     _graph = g;
 }
 
@@ -402,9 +430,6 @@ void MainWindow::saveGraph() {
     }
     if (_activeGraphDocument->documentPath() == QString() ) {
         saveGraphAs();
-    }
-    else {
-
     }
 }
 void MainWindow::saveGraphAs() {}

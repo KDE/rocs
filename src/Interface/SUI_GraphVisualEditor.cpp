@@ -52,7 +52,8 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
         _topNode(0),
         _bottomNode(0),
         _leftNode(0),
-        _rightNode(0) {
+        _rightNode(0),
+	_scene(0){
     _graphDocument = 0;
     _graph = 0;
     _mainWindow = parent;
@@ -138,36 +139,36 @@ QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const
 
 }
 
-void GraphVisualEditor::setGraphDocument( GraphDocument *gd) {
+void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
     if ( _graphDocument != 0 ) {
+	kDebug() << "Releasing Graph Document";
         releaseGraphDocument();
+	kDebug() << "Graph Document Released.";
     }
 
     _graphDocument = gd;
     _scene->setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
-    _graphToolBox->setGraphDocument( gd );
-    _scene->setGraphDocument(gd);
+    _graphToolBox->setActiveGraphDocument( gd );
+    _scene->setActiveGraphDocument( gd );
 }
 
 void GraphVisualEditor::releaseGraphDocument() {
-    QList<QGraphicsItem*> itemList = _scene->items();
-    foreach(QGraphicsItem *i, itemList) {
-        _scene->removeItem(i);
-        delete i;
-    }
+    _scene->clearGraph();
     int size = _graphDocument->size();
     for (int i = 0; i < size; i++) {
         _graphDocument->at(i)->disconnect(this);
     }
+    _scene->setActiveGraphDocument(0);
+    _graphDocument = 0;
 }
 
 void GraphVisualEditor::drawGraphOnScene( Graph *g) {
-    _scene->setGraph(g);
-    
+
 }
 
-void GraphVisualEditor::setGraph( Graph *graph) {
-    _graph = graph;
+void GraphVisualEditor::setActiveGraph( Graph *g) {
+    _graph = g;
+    _scene->setActiveGraph(g);
 }
 
 GraphScene* GraphVisualEditor::scene() const {

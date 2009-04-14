@@ -46,7 +46,7 @@ public:
 public slots:
     /*! send the GraphDocument to the list of graphs.
     	\param document the GraphDocument that will populate the model of the view.		*/
-    void setGraphDocument(GraphDocument *document);
+    void setActiveGraphDocument(GraphDocument *document);
 
     /*! sets the modelindex data ( that holds a graph ) to be the active Graph being editted on the canvas.
     \param modelindex the index of the graph onto the model.

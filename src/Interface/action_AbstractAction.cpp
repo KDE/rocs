@@ -35,14 +35,12 @@ AbstractAction::AbstractAction(GraphScene *scene, QObject *parent) : KAction(par
     connect(this, SIGNAL(triggered()), this, SLOT( sendExecuteBit() ));
 }
 
-void AbstractAction::setGraphDocument(  GraphDocument *graphDocument)
+void AbstractAction::setActiveGraphDocument(  GraphDocument *graphDocument)
 {
-    kDebug() << "Document Setted";
-    _graphDocument = graphDocument;
+     _graphDocument = graphDocument;
 }
 
-void AbstractAction::setGraph( Graph *graph) {
-    kDebug() << "Graph Setted";
+void AbstractAction::setActiveGraph( Graph *graph) {
     _graph = graph;
 }
 

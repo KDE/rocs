@@ -50,9 +50,9 @@ public slots:
     /*! set the current selected Graph.
     	\param graph the new active graph.
     	*/
-    void setGraph( Graph *graph);
+    void setActiveGraph( Graph *g);
 
-    void setGraphDocument(GraphDocument *graphDocument);
+    void setActiveGraphDocument(GraphDocument *graphDocument);
 
     void alignHBottom();
     void alignHMiddle();

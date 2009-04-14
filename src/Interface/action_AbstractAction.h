@@ -49,13 +49,13 @@ public:
     /*! Atualize the Graph Document that this action will work on
       \param graphDocument the pointer to the active  GraphDocument
     */
-    void setGraphDocument( GraphDocument *graphDocument);
+    void setActiveGraphDocument( GraphDocument *graphDocument);
 
 public slots:
     /*! Atualize the Active Graph that this action will work on
       \param graph the pointer to the active  Graph
     */
-    virtual void setGraph( Graph *graph);
+    virtual void setActiveGraph( Graph *graph);
 
     /*! pure virtual, reimplement it on others, this will be the action that will happen in the graph
        \param pos the position on screen that the execution will take part.

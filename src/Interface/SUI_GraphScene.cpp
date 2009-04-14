@@ -19,7 +19,8 @@ GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
 
 }
 
-void GraphScene::setGraph(Graph *g) {
+void GraphScene::setActiveGraph(Graph *g) {
+    kDebug() << "Active Graph Setted";
     _graph = g;
 }
 
@@ -27,15 +28,18 @@ void GraphScene::setAction(AbstractAction *action) {
     _action = action;
 }
 
-void GraphScene::setGraphDocument(GraphDocument *gd) {
+void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     _graphDocument = gd;
     if(gd == 0){
-      kDebug() << "GRAFO EH NULL";
+      kDebug() << "Graph Document Doesn't Exist, crashing.";
       return;
     }
     int size = _graphDocument->size();
+
     for(int i = 0; i < size; i++){
+	kDebug() << "Updating Graph at position: " << i;
 	updateGraph(_graphDocument->at(i));
+	kDebug() << "Graph Updated.";
     }
   
 }
@@ -94,13 +98,26 @@ void GraphScene::insertGraphItem(QGraphicsItem *item) {
     _hashGraphs.insert(_graph, item);
 }
 
+void GraphScene::clearGraph(){
+    int i = _graphDocument->size();
+    for(int e = 0; e < i; e++){
+      Graph *g = _graphDocument->at(e);
+      QList<QGraphicsItem*> items = _hashGraphs.values(g);
+      foreach(QGraphicsItem *i, items) {
+	  removeItem(i);
+	  delete i;
+	}
+	_hashGraphs.remove(g);
+    }
+}
+
 void GraphScene::updateGraph(Graph *g) {
-    _graph = g;
     QList<QGraphicsItem*> items = _hashGraphs.values(g);
     foreach(QGraphicsItem *i, items) {
         removeItem(i);
+	delete i;
     }
-    _hashGraphs.values(g);
+    
     _hashGraphs.remove(g);
 
     QList<Node*> nodes = g->nodes();
@@ -112,12 +129,6 @@ void GraphScene::updateGraph(Graph *g) {
     foreach(Edge *e, edges) {
         createEdge(e);
     }
-
-    /* QList<Group*> groups = g->groups();
-     foreach(Group* g, groups){
-
-     }
-    */
 }
 
 void GraphScene::updateDocument() {

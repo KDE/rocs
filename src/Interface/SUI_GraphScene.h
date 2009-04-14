@@ -25,10 +25,10 @@ public:
     QGraphicsItem* createEdge(Edge *e);
     void updateGraph(Graph *g);
     void updateDocument();
-    void setGraph(Graph *g);
-    void setGraphDocument(GraphDocument *gd);
+    void setActiveGraph(Graph *g);
+    void setActiveGraphDocument(GraphDocument *gd);
     void insertGraphItem(QGraphicsItem *item);
-
+    void clearGraph();
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);

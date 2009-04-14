@@ -67,7 +67,6 @@ private: // Methods
 private slots:
     void releaseLeftTabbarButton(int index); // control the flux of the left tabbar.
     void releaseBottomTabbarButton(int index); // control the flux of the left tabbar.
-    void setActiveGraphDocument(GraphDocument *d);
     void executeScript();
     void releaseRunButton();
 
@@ -80,8 +79,10 @@ private slots:
     void openScript();
     void saveScript();
     void saveScriptAs();
+
 public slots:
-    void setGraph(Graph *g);
+    void setActiveGraphDocument(GraphDocument *d);
+    void setActiveGraph(Graph *g);
 
 private: // Variables.
 

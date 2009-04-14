@@ -42,7 +42,7 @@ void GraphToolBoxWidget::on__btnNewGraph_clicked()
     _layerModel->insertRow(_layerModel->rowCount());
 }
 
-void GraphToolBoxWidget::setGraphDocument( GraphDocument *document)
+void GraphToolBoxWidget::setActiveGraphDocument( GraphDocument *document)
 {
     if ( _layerModel != 0) delete _layerModel;
     _document = document;
@@ -64,7 +64,7 @@ void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex) {
     if (g == 0) {
         return;
     }
-    _mainWindow->setGraph(g);
+    _mainWindow->setActiveGraph(g);
     _btnSetOriented->setChecked(g->directed());
 }
 
