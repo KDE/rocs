@@ -102,7 +102,8 @@ void AddEdgeAction::executeRelease(QPointF pos) {
         _working = false;
         return;
     }
-    _graphScene->createEdge(e);
+
+    _graphScene->createEdge(_graph, e);
 
     _nodeFrom = 0;
     _nodeTo = 0;

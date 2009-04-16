@@ -34,6 +34,8 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
       kDebug() << "Graph Document Doesn't Exist, crashing.";
       return;
     }
+    
+    setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
     int size = _graphDocument->size();
 
     for(int i = 0; i < size; i++){
@@ -43,16 +45,16 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     }
   
 }
-QGraphicsItem *GraphScene::createNode(Node *n) {
+QGraphicsItem *GraphScene::createNode(Graph *g, Node *n) {
     NodeItem *nItem = new NodeItem(n);
-    insertGraphItem(nItem);
+    insertGraphItem(g, nItem);
     return nItem;
 }
 
-QGraphicsItem *GraphScene::createEdge(Edge *e) {
+QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
     QGraphicsItem *edgeItem = 0;
 
-    if ( !_graph->directed() ) {
+    if ( !g->directed() ) {
         edgeItem = new EdgeItem(e);
     }
     else {
@@ -68,7 +70,7 @@ QGraphicsItem *GraphScene::createEdge(Edge *e) {
     NodeItem *nTo  = qgraphicsitem_cast<NodeItem*>(itemAt(x2,y2));
     nFrom->addEdge(edgeItem);
     nTo->addEdge(edgeItem);
-    insertGraphItem(edgeItem);
+    insertGraphItem(g, edgeItem);
     return edgeItem;
 }
 
@@ -93,9 +95,9 @@ void GraphScene::keyPressEvent(QKeyEvent *) {
 
 }
 
-void GraphScene::insertGraphItem(QGraphicsItem *item) {
+void GraphScene::insertGraphItem(Graph *g, QGraphicsItem *item) {
     addItem(item);
-    _hashGraphs.insert(_graph, item);
+    _hashGraphs.insert(g, item);
 }
 
 void GraphScene::clearGraph(){
@@ -122,12 +124,12 @@ void GraphScene::updateGraph(Graph *g) {
 
     QList<Node*> nodes = g->nodes();
     foreach(Node *n, nodes) {
-        createNode(n);
+        createNode(g, n);
     }
 
     QList<Edge*> edges = g->edges();
     foreach(Edge *e, edges) {
-        createEdge(e);
+        createEdge(g, e);
     }
 }
 

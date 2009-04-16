@@ -21,13 +21,13 @@ class GraphScene : public QGraphicsScene {
 public:
     GraphScene(QObject *parent);
     void setAction(AbstractAction *action);
-    QGraphicsItem* createNode(Node *n);
-    QGraphicsItem* createEdge(Edge *e);
+    QGraphicsItem* createNode(Graph *g, Node *n);
+    QGraphicsItem* createEdge(Graph *g, Edge *e);
     void updateGraph(Graph *g);
     void updateDocument();
     void setActiveGraph(Graph *g);
     void setActiveGraphDocument(GraphDocument *gd);
-    void insertGraphItem(QGraphicsItem *item);
+    void insertGraphItem(Graph *g, QGraphicsItem *item);
     void clearGraph();
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);

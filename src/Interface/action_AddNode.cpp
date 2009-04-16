@@ -48,6 +48,5 @@ void AddNodeAction::executePress(QPointF pos) {
     n -> setProperty("x", pos.x() );
     n -> setProperty("y", pos.y() );
 
-    NodeItem *nodeitem = new NodeItem( n );
-    _graphScene->insertGraphItem(nodeitem);
+    _graphScene->createNode(_graph, n);
 }

@@ -147,7 +147,6 @@ void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
     }
 
     _graphDocument = gd;
-    _scene->setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
     _graphToolBox->setActiveGraphDocument( gd );
     _scene->setActiveGraphDocument( gd );
 }
@@ -237,9 +236,7 @@ void GraphVisualEditor::alignHTop() {
 }
 
 void GraphVisualEditor::alignVLeft() {
-
     QList<NodeItem*> l = selectedNodes();
-
     if ( l.size()	== 0) {
         return;
     }
@@ -257,11 +254,9 @@ void GraphVisualEditor::alignVLeft() {
 
 void GraphVisualEditor::alignVMiddle() {
     QList<NodeItem*> l = selectedNodes();
-
     if ( l.size()	== 0) {
         return;
     }
-
     qreal left = l[0]->scenePos().x();
     qreal right = left;
 
@@ -281,11 +276,9 @@ void GraphVisualEditor::alignVMiddle() {
 
 void GraphVisualEditor::alignVRight() {
     QList<NodeItem*> l = selectedNodes();
-
     if ( l.size()	== 0) {
         return;
     }
-
     qreal right = l[0]->scenePos().x();
     foreach(NodeItem *i, l) {
         if ( i->scenePos().x() > right ) {
