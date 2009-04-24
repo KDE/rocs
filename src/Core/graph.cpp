@@ -65,14 +65,6 @@ Edge* Graph::addEdge(Node* from,Node* to) {
     }
 
     Edge *e  = new Edge(this, from, to);
-
-    if ( from == to ) {
-        from -> addSelfEdge(e);
-    }
-    else {
-        from -> addOutEdge(e);
-        to -> addInEdge(e);
-    }
     _edges.append( e );
     return e;
 }

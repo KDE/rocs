@@ -28,6 +28,17 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
         _to(to)
 {
     setProperty("color", "#FF00FF");
+
+    if ( from == to ) {
+        from -> addSelfEdge(this);
+    }
+    else {
+        from -> addOutEdge(this);
+        to -> addInEdge(this);
+    }
+
+    _relativeIndex = _to -> edges(_from).size();
+    
 }
 
 Edge::~Edge()
@@ -52,9 +63,8 @@ Node* Edge::to() const {
     return _to;
 }
 
-int Edge::relativeIndex() {
-    QList<Edge*> list = _to -> edges(_from);
-    return list.indexOf(this);
+int Edge::relativeIndex() const {
+   return _relativeIndex;
 }
 #ifdef USING_QTSCRIPT
 

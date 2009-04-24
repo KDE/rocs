@@ -87,8 +87,6 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setBrush(gradient);
     painter->setPen(QPen(color, 2));
     painter->drawEllipse(-10, -10, 20, 20);
-
-
 }
 
 void NodeItem::updatePos(QPointF pos) {

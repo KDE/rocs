@@ -41,7 +41,7 @@ class Edge : public QObject {
 public:
     Edge(QObject *parent, Node *from, Node *to);
     ~Edge();
-    int relativeIndex();
+    int relativeIndex() const;
 
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
@@ -60,7 +60,7 @@ public  slots:
 private:
     Node *_from;
     Node *_to;
-
+    int _relativeIndex;
 
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
