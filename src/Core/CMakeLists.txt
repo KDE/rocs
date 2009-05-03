@@ -17,11 +17,7 @@
 #	 along with Step; if not, write to the Free Software
 #	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 
-project(librocscore)
-find_package(KDE4 REQUIRED)
 
-include(KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
  
 set( rocscore_LIB_SRCS
 	graph.cpp

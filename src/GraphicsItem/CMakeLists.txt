@@ -1,7 +1,4 @@
-project(librocsgraphics)
-find_package(KDE4 REQUIRED)
 
-include(KDE4Defaults)
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../Core)
  
 set( rocsgraphics_LIB_SRCS
