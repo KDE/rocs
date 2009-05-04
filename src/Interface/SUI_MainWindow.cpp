@@ -39,6 +39,8 @@
 #include <ktexteditor/editorchooser.h>
 #include <KTextBrowser>
 #include <KMessageBox>
+#include <kfiledialog.h>
+
 // UI RELATED INCLUDES
 
 #include "SUI_PaletteBarWidget.h"
@@ -431,8 +433,19 @@ void MainWindow::saveGraph() {
     if (_activeGraphDocument->documentPath() == QString() ) {
         saveGraphAs();
     }
+    else{
+      _activeGraphDocument->savedDocumentAt(_activeGraphDocument->documentPath());
+    }
 }
-void MainWindow::saveGraphAs() {}
+void MainWindow::saveGraphAs(){
+  if (_activeGraphDocument == 0) {
+        kDebug() << "Graph Document is NULL";
+        return;
+    }
+    
+    _activeGraphDocument->saveAsInternalFormat(KFileDialog::getSaveFileName());
+}
+
 void MainWindow::newScript() {}
 void MainWindow::openScript() {}
 void MainWindow::saveScript() {}

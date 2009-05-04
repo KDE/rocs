@@ -22,6 +22,8 @@
 #include "graphDocument.h"
 #include <QString>
 #include <KSaveFile>
+#include <QByteArray>
+#include <KDebug>
 #include "node.h"
 #include "edge.h"
 #include "graphGroups.h"
@@ -116,71 +118,69 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     }
 
     QTextStream stream(&saveFile);
-
-    foreach(Graph *g, (*this)) {
+    int graphSize = count();
+    
+    for(int i = 0; i < graphSize; i++){
+	Graph *g = this->at(i);
         buf += " \n \n ############ Graph  ########### \n \n";
-        buf += "[Graph " + g->property("name").toString() + "] \n";
+        buf += QString("[Graph %1 ] \n").arg(i);
 
         savePropertiesInternalFormat(g);
 
         buf += " \n \n ############ NODES ########### \n \n";
         foreach( ::Node *n, g->nodes()) {
-            buf += "[Node ";
-            buf += n->property("name").toString();
-            buf += "] \n";
-
+            buf += QString("[Node %1]\n").arg(g->nodes().indexOf(n));
             savePropertiesInternalFormat(n);
         }
 
         buf += " \n \n ############ EDGES ########### \n \n";
         foreach( Edge *e, g->edges()) {
-            buf += QString("[Edge ");
-            buf += e->from()->property("name").toString();
-            buf += "->";
-            buf += e->to()->property("name").toString();
-            buf += QString("] \n");
+            buf += QString("[Edge %1->%2]\n").arg(g->nodes().indexOf(e->from())).arg(g->nodes().indexOf(e->to()));
             savePropertiesInternalFormat(e);
         }
 
-        buf += " \n \n ############ GROUPS ########### \n \n";
+   /*     buf += " \n \n ############ GROUPS ########### \n \n";
         foreach( GraphGroup *gg, g->groups()) {
-            buf += "[Group ";
-            buf += gg->name();
-            buf += "] \n";
+            buf += QString("[Group %1] \n").arg((long) gg);
 
-            foreach( ::Node *n, g->nodes() ) {
-                buf += n->property("name").toString();
-                buf += "\n";
+            foreach( ::Node *n, gg->nodes() ) {
+                buf += QString("%1\n").arg((long)n);
             }
-        }
+        } */
     }
     qDebug() << buf.toAscii();
 
     stream << buf.toAscii();
     if (!saveFile.finalize()) {
         qDebug() << "Error, file not saved.";
+	return false;
     }
+    _lastSavedDocumentPath = filename;
     return true;
 }
 
 void GraphDocument::savePropertiesInternalFormat(QObject *o) {
     const QMetaObject *metaObject = o->metaObject();
     int propertyCount = metaObject->propertyCount();
-
+    kDebug() << "Property Count: " << propertyCount;
+    
     for ( int i = 0; i < propertyCount; ++i) {
         QMetaProperty metaProperty = metaObject->property(i);
         const char *name = metaProperty.name();
-
-        if ( QString("objectName") == QString(name) ) {
+        if ( QString("objectName") == QString(name) ){
             continue;
         }
-
         QVariant value = o->property(name);
-        buf +=  name;
-        buf += " : ";
-        buf += value.toString();
-        buf += "\n";
+        buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
     }
+    
+    QList<QByteArray> propertyNames = o->dynamicPropertyNames();
+    foreach(QByteArray name, propertyNames){
+       QVariant value = o->property(name);
+        buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
+    }
+    
+    buf += "\n";
 }
 
 void GraphDocument::loadFromInternalFormat(const QString& filename) {
