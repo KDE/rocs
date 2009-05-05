@@ -90,9 +90,7 @@ MainWindow::MainWindow() :
 
     // this will create a new opened file by default.
     _OpenedFiles->on__btnNewFile_clicked();
-    kDebug() << "##############################################";
-    kDebug() << KStandardDirs::locate("data", "rocs/rocsui.rc") ;
-    kDebug() << "################################################";
+        
     setupGUI();
 }
 
@@ -357,7 +355,7 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d) {
         absAction->setActiveGraphDocument(d);
     }
 
-    
+    if (_activeGraphDocument->size() == 0) return;
     setActiveGraph(_activeGraphDocument->at(0));    
 }
 

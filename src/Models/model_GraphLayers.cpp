@@ -28,10 +28,6 @@
 GraphLayersModel::GraphLayersModel( GraphDocument *document, QObject *parent)
         : QAbstractListModel( parent ) {
     _document = document;
-    if (document->size() == 0) {
-        kDebug() << "DOCUMENT SIZE IS ZERO!";
-        insertRow(0);
-    }
 }
 
 int GraphLayersModel::rowCount(const QModelIndex&) const {
@@ -101,5 +97,6 @@ bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex&) {
 
 Graph *GraphLayersModel::at(const QModelIndex& index)
 {
+  if(_document->size() == 0) return 0;
     return _document->at(index.row());
 }
