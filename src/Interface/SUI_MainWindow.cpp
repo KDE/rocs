@@ -422,7 +422,13 @@ void MainWindow::newGraph() {
     _OpenedFiles->on__btnNewFile_clicked();
 }
 
-void MainWindow::openGraph() {}
+void MainWindow::openGraph() {
+  
+  _OpenedFiles->on__btnNewFile_clicked();
+  _activeGraphDocument->loadFromInternalFormat(KFileDialog::getOpenFileName());
+  
+}
+
 void MainWindow::saveGraph() {
     if (_activeGraphDocument == 0) {
         kDebug() << "Graph Document is NULL";

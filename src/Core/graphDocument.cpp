@@ -123,7 +123,7 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     for(int i = 0; i < graphSize; i++){
 	Graph *g = this->at(i);
         buf += " \n \n ############ Graph  ########### \n \n";
-        buf += QString("[Graph %1 ] \n").arg(i);
+        buf += QString("[Graph %1] \n").arg(i);
 
         savePropertiesInternalFormat(g);
 
@@ -213,40 +213,42 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             tmpGraph->setProperty("name", gName.toAscii());
             tmpObject = tmpGraph;
             append(tmpGraph);
+	    kDebug() << "Graph Created";
         }
 
         else if (str.startsWith("[Node")) {
             QString nName = str.section(" ",1,1);
             nName.remove(']');
-
             tmpNode = tmpGraph->addNode(nName);
             tmpNode->setProperty("name", nName);
             tmpObject = tmpNode;
+	    kDebug() << "Node Created";
         }
 
         else if (str.startsWith("[Edge")) {
-            QString eName = str.section(" ",1,1);
+           QString eName = str.section(" ",1,1);
             eName.remove(']');
 
             QString nameFrom = eName.section("->", 0,0);
             QString nameTo = eName.section("->", 1,1);
 
-            tmpEdge = tmpGraph->addEdge(tmpGraph->node(nameFrom), tmpGraph->node(nameTo));
+            tmpEdge = tmpGraph->addEdge(tmpGraph->nodes()[nameFrom.toInt()], tmpGraph->nodes()[nameTo.toInt()]);
             tmpObject = tmpEdge;
-
+	    kDebug() << "Edge Created";
         }
         else if (str.startsWith("[Group")) {
-            QString gName = str.section(" ",1,1);
+            /*QString gName = str.section(" ",1,1);
             gName.remove(']');
-            tmpGroup = tmpGraph->addGroup(gName);
+            tmpGroup = tmpGraph->addGroup(gName); */
         }
         else if (str.contains(":")) {
-            QString propertyName = str.section(":",0,0);
-            QString propertyValue = str.section(":",1,1);
+            QString propertyName = str.section(":",0,0).trimmed();
+	     QString propertyValue = str.section(":",1,1).trimmed();
             tmpObject->setProperty( propertyName.toAscii() , propertyValue.toAscii() );
+	    kDebug() << "Property" << propertyName.toAscii() << "value" << propertyValue.toAscii();
         }
         else {
-            tmpGroup->append( tmpGraph->node(str));
+//            // tmpGroup->append( tmpGraph->node(str));
         }
     }
 
