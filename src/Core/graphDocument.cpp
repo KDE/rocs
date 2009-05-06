@@ -189,10 +189,8 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         qDebug  () << "File not open " << filename.toAscii();
         return;
     }
-
-    Graph *tmpGraph = 0;
-    ::Node *tmpNode  = 0;
-    Edge *tmpEdge = 0;
+    
+    Graph* tmpGraph = 0;
     GraphGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
 
@@ -219,9 +217,8 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         else if (str.startsWith("[Node")) {
             QString nName = str.section(" ",1,1);
             nName.remove(']');
-            tmpNode = tmpGraph->addNode(nName);
-            tmpNode->setProperty("name", nName);
-            tmpObject = tmpNode;
+            tmpObject = tmpGraph->addNode(nName);
+            
 	    kDebug() << "Node Created";
         }
 
@@ -232,8 +229,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             QString nameFrom = eName.section("->", 0,0);
             QString nameTo = eName.section("->", 1,1);
 
-            tmpEdge = tmpGraph->addEdge(tmpGraph->nodes()[nameFrom.toInt()], tmpGraph->nodes()[nameTo.toInt()]);
-            tmpObject = tmpEdge;
+            tmpObject = tmpGraph->addEdge(tmpGraph->nodes()[nameFrom.toInt()], tmpGraph->nodes()[nameTo.toInt()]);
 	    kDebug() << "Edge Created";
         }
         else if (str.startsWith("[Group")) {
