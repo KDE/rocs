@@ -73,7 +73,6 @@ bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex&) 
 
     GraphDocument *doc = new  GraphDocument("untitled");
     _documents.append(doc);
-    kDebug() << "THIS WAS CALLED";
     endInsertRows();
     return true;
 }

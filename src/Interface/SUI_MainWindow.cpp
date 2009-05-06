@@ -90,7 +90,7 @@ MainWindow::MainWindow() :
 
     // this will create a new opened file by default.
     _OpenedFiles->on__btnNewFile_clicked();
-        
+    _activeGraphDocument->addGraph("Untitled0");
     setupGUI();
 }
 
