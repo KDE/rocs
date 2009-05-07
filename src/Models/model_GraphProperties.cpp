@@ -40,13 +40,6 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const {
     // if it's the first column, return it's name.
     // if it's the second column, return it's data.
      
-     /*  QList<QByteArray> propertyNames = o->dynamicPropertyNames();
-    foreach(QByteArray name, propertyNames){
-       QVariant value = o->property(name);
-        buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
-    }
-    */
-     
     if (index.column() == 0) {
 	return _dataSource->dynamicPropertyNames()[index.row()];
     }
@@ -85,7 +78,7 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource) {
 
     // clear the model for the new data.
     if ( _dataSource) {
-        beginRemoveRows(QModelIndex(), 0, _metaObject->propertyCount()-1);
+        beginRemoveRows(QModelIndex(), 0, _dataSource->dynamicPropertyNames().size()-1);
         endRemoveRows();
     }
 
