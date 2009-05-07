@@ -218,7 +218,6 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             QString nName = str.section(" ",1,1);
             nName.remove(']');
             tmpObject = tmpGraph->addNode(nName);
-            
 	    kDebug() << "Node Created";
         }
 
