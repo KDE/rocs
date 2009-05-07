@@ -1,5 +1,6 @@
 #include "model_GraphProperties.h"
 #include <KLocale>
+#include <KDebug>
 
 GraphPropertiesModel::GraphPropertiesModel( QObject *parent ) : QAbstractTableModel(parent) {
     // start all pointers to zero, so we don't crash things.
@@ -14,7 +15,8 @@ int GraphPropertiesModel::rowCount(const QModelIndex &parent) const {
     if (_dataSource == 0) {
         return 0;
     }
-    return _metaObject->propertyCount();
+    kDebug() << _dataSource->dynamicPropertyNames().size();
+    return _dataSource->dynamicPropertyNames().size();
 }
 
 int GraphPropertiesModel::columnCount ( const QModelIndex & parent ) const {
@@ -28,7 +30,7 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const {
     if ( !index.isValid() ) {
         return QVariant();
     }
-    if ( index.row() >= _metaObject->propertyCount() ) {
+    if ( index.row() >= _dataSource->dynamicPropertyNames().size() ) {
         return QVariant();
     }
     if ( role != Qt::DisplayRole ) {
@@ -37,11 +39,19 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const {
 
     // if it's the first column, return it's name.
     // if it's the second column, return it's data.
+     
+     /*  QList<QByteArray> propertyNames = o->dynamicPropertyNames();
+    foreach(QByteArray name, propertyNames){
+       QVariant value = o->property(name);
+        buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
+    }
+    */
+     
     if (index.column() == 0) {
-        return _metaObject->property(index.row()).name();
+	return _dataSource->dynamicPropertyNames()[index.row()];
     }
     else if (index.column() == 1) {
-        return _dataSource->property(_metaObject->property(index.row()).name());
+	return _dataSource->property( _dataSource->dynamicPropertyNames()[index.row()]);
     }
     // if it's anything else, it's an error, return a default value constructed QVariant.
     return QVariant();
@@ -55,12 +65,9 @@ QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientati
 
     if (orientation == Qt::Horizontal) {
         switch (section) {
-        case 0:
-            return i18n("Property");
-        case 1:
-            return i18n("Value");
-        default:
-            return QVariant();
+        case 0:            return i18n("Property");
+        case 1:            return i18n("Value");
+        default:           return QVariant();
         }
     }
     return QVariant();
@@ -87,7 +94,9 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource) {
     _metaObject = _dataSource -> metaObject();
 
     // insert the information.
-    beginInsertRows(QModelIndex(), 0, _metaObject->propertyCount()-1);
+   
+    
+    beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size()-1);
     endInsertRows();
 
 }
