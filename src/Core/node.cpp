@@ -202,7 +202,7 @@ QScriptValue Node::output_edges() {
 }
 
 QScriptValue Node::loop_edges() {
-    QList<Edge*> list = out_edges();
+    QList<Edge*> list = self_edges();
     return createScriptArray(list);
 }
 
