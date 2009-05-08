@@ -45,7 +45,7 @@ class Graph : public QObject {
 public:
     Graph();
     ~Graph();
-
+    
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
     void setEngine( QtScriptBackend *engine );

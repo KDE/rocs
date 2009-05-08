@@ -42,7 +42,7 @@ public:
     Edge(QObject *parent, Node *from, Node *to);
     ~Edge();
     int relativeIndex() const;
-
+    void remove();
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
     void setEngine(	QtScriptBackend *engine );
@@ -55,6 +55,7 @@ public  slots:
 #ifdef USING_QTSCRIPT
     QScriptValue start();
     QScriptValue end();
+    void self_remove();
 #endif
 
 private:
@@ -67,8 +68,6 @@ private:
     QtScriptBackend *_engine;
 #endif
 
-signals:
-    void removed();
 };
 
 #endif

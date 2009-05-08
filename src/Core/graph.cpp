@@ -114,11 +114,6 @@ void Graph::remove(Node *n) {
 
 void Graph::remove(Edge *e) {
     _edges.removeOne( e );
-    foreach(Node *n, _nodes) {
-        n->removeEdge(e, 0);
-        n->removeEdge(e, 1);
-        n->removeEdge(e, 2);
-    }
     delete e;
 }
 
