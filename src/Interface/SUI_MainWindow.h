@@ -24,6 +24,7 @@
 #include <KXmlGuiWindow>
 #include <QList>
 #include <QStringList>
+#include <QScriptValue>
 
 /* WORKING */
 class PaletteBarWidget;
@@ -39,11 +40,17 @@ class KMultiTabBar;
 class KTextBrowser;
 class QSplitter;
 class GraphScene;
+class QScriptContext;
+class QScriptEngine;
 
 namespace KTextEditor {
 class Document;
 class View;
 }
+
+#ifndef USING_QTSCRIPT
+#define USING_QTSCRIPT 1
+#endif
 
 class MainWindow : public KXmlGuiWindow {
     Q_OBJECT
@@ -54,7 +61,8 @@ public:
     ~MainWindow();
     Graph *graph() const;
     GraphScene *scene() const;
-
+    void debug(const QString& s);
+    
 private: // Methods
     void setupModels();	// setup all the models to be used on the views.
     void setupWidgets(); // Setup all the widgets.
@@ -83,7 +91,7 @@ private slots:
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
-
+    
 private: // Variables.
 
    // Left Area:
@@ -117,4 +125,7 @@ private: // Variables.
     Graph *_graph;
 };
 
+#ifdef USING_QTSCRIPT
+   static QScriptValue debug_script(QScriptContext *context, QScriptEngine *engine);
+#endif
 #endif

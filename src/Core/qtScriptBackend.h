@@ -23,6 +23,7 @@
 #include <QtScript>
 #include <QScriptValue>
 #include <QScriptString>
+#include <QScriptContext>
 
 class Graph;
 class GraphDocument;

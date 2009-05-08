@@ -72,6 +72,7 @@
 
 #include <kstandarddirs.h>
 
+MainWindow* mainWindow = 0;
 
 MainWindow::MainWindow() :
         KXmlGuiWindow(),
@@ -92,6 +93,7 @@ MainWindow::MainWindow() :
     _OpenedFiles->on__btnNewFile_clicked();
     _activeGraphDocument->addGraph("Untitled0");
     setupGUI();
+    mainWindow = this;
 }
 
 MainWindow::~MainWindow() {
@@ -393,31 +395,6 @@ GraphScene* MainWindow::scene() const {
     return _graphVisualEditor->scene();
 }
 
-void MainWindow::executeScript() {
-#ifdef USING_QTSCRIPT
-    kDebug() << "Iniciando a execucao do Script";
-    if (_activeGraphDocument == 0) {
-        kDebug() << "Graph Document is NULL";
-        return;
-    }
-    if (_txtDebug == 0) {
-        kDebug() << "Debug Text Area is NULL";
-        return;
-    }
-
-    QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
-    QScriptValue results = engine->evaluate(_scriptDoc->text().toAscii());
-    _txtDebug->setPlainText(results.toString());
-
-    if (scene() == 0) {
-        kDebug() << "Debug is NULL";
-        return;
-    }
-
-    _graphVisualEditor->scene()->updateDocument();
-#endif
-}
-
 void MainWindow::newGraph() {
     _OpenedFiles->on__btnNewFile_clicked();
 }
@@ -455,3 +432,36 @@ void MainWindow::openScript() {}
 void MainWindow::saveScript() {}
 void MainWindow::saveScriptAs() {}
 
+void MainWindow::debug(const QString& s){
+  _txtDebug->insertPlainText(s);
+}
+
+#ifdef USING_QTSCRIPT
+void MainWindow::executeScript() {
+    if (_activeGraphDocument == 0) {        
+        return;
+    }
+    if (_txtDebug == 0) {
+        return;
+    }
+
+    QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
+    engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
+    QScriptValue results = engine->evaluate(_scriptDoc->text().toAscii());
+    _txtDebug->insertPlainText(results.toString());
+
+    if (scene() == 0) {
+        return;
+    }
+
+    _graphVisualEditor->scene()->updateDocument();
+}
+
+
+static QScriptValue debug_script(QScriptContext* context, QScriptEngine* engine){ 
+  mainWindow->debug(context->argument(0).toString());
+  return QScriptValue();
+}
+
+
+#endif
