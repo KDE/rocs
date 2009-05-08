@@ -158,8 +158,16 @@ QList<Edge*> Node::edges(Node *n) {
     return list;
 }
 
-#ifdef USING_QTSCRIPT
+void Node::remove(){
+    Graph *p = qobject_cast<Graph*>(QObject::parent());
+    p->remove(this);
+}
 
+
+#ifdef USING_QTSCRIPT
+void Node::self_remove(){
+  remove();
+}
 QScriptValue Node::scriptValue() const {
     return _value;
 }

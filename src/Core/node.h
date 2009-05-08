@@ -46,6 +46,7 @@ public:
     void addSelfEdge(Edge *e);
     void removeEdge(Edge *e, int edgeList);
     void removeEdge(Edge *e, QList<Edge*> *list);
+    void remove();
     enum EdgeLists {In, Out, Self};
 
 #ifdef USING_QTSCRIPT
@@ -69,6 +70,7 @@ public  slots:
     QScriptValue output_edges();
     QScriptValue loop_edges();
     QScriptValue connected_edges(Node *n);
+    void self_remove();
 #endif
 
     Edge* addEdge(Node* to);
