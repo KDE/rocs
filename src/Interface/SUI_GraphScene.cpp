@@ -61,10 +61,10 @@ QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
         edgeItem = new OrientedEdgeItem(e);
     }
 
-    qreal x1 = e->from()->property("x").toDouble();
-    qreal y1 = e->from()->property("y").toDouble();
-    qreal x2 = e->to()->property("x").toDouble();
-    qreal y2 = e->to()->property("y").toDouble();
+    qreal x1 = e->from()->x();
+    qreal y1 = e->from()->y();
+    qreal x2 = e->to()->x();
+    qreal y2 = e->to()->y();
 
     NodeItem *nFrom = qgraphicsitem_cast<NodeItem*>(itemAt(x1,y1));
     NodeItem *nTo  = qgraphicsitem_cast<NodeItem*>(itemAt(x2,y2));

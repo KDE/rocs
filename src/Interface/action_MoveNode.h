@@ -25,6 +25,8 @@
 
 class QObject;
 class NodeItem;
+class Node;
+class Graph;
 
 /*!
   \brief The 'Move Node' Action
@@ -64,6 +66,8 @@ public slots:
 
 protected:
     NodeItem *_movableNode;
+    Node *_node;
+    Graph *_g;
 };
 
 #endif

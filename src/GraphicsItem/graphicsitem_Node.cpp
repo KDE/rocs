@@ -37,7 +37,7 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
         : QObject(0), QGraphicsItem(parent)
 {
     _node = node;
-    QPointF pos( _node -> property("x").toDouble() ,_node->property("y").toDouble() );
+    QPointF pos( _node -> x() ,_node->y() );
     setPos( pos );
     setCacheMode(DeviceCoordinateCache);
     setZValue(1);
@@ -59,7 +59,6 @@ QPainterPath NodeItem::shape() const {
 void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
 
     if (isSelected()) {
-        kDebug() << "IT'S BEING DRAWNED!";
         QPen pen;
         pen.setStyle(Qt::DotLine);
         pen.setWidth(1);
@@ -90,8 +89,8 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 }
 
 void NodeItem::updatePos(QPointF pos) {
-    _node->setProperty("x", pos.x());
-    _node->setProperty("y", pos.y());
+    _node->setX( pos.x());
+    _node->setY( pos.y());
     setPos( pos );
 
     Graph *g = qobject_cast<Graph*>(_node->parent());
@@ -106,6 +105,7 @@ void NodeItem::updatePos(QPointF pos) {
             OrientedEdgeItem *edgeItem = qgraphicsitem_cast<OrientedEdgeItem*>(i);
             edgeItem->updatePos();
         }
+	/*FIXME: add a way to every loop node be updated.
     }
 }
 

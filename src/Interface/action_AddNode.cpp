@@ -45,8 +45,10 @@ void AddNodeAction::executePress(QPointF pos) {
     }
 
     Node *n = _graph -> addNode(i18n("untitled"));
-    n -> setProperty("x", pos.x() );
-    n -> setProperty("y", pos.y() );
+    n ->setX(pos.x());
+    n -> setY(pos.y());
+    Graph *g = qobject_cast<Graph*>(n->parent());
+    g->calcRelativeCenter();
 
     _graphScene->createNode(_graph, n);
 }

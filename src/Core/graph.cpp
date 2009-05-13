@@ -52,6 +52,7 @@ Node* Graph::addNode(QString name) {
     n->setProperty("name", name);
     _nodes.append( n );
     emit nodeCreated(n);
+    
     return n;
 }
 
@@ -154,7 +155,25 @@ QList<GraphGroup*> Graph::groups() const {
     return _graphGroups;
 }
 
+void Graph::calcRelativeCenter() {
+    _top = _nodes[0]->y();   _bottom = _nodes[0]->y();
+    _left = _nodes[0]->x(); _right = _nodes[0]->x();
+    kDebug() << "INICIO:";
+    kDebug() << "TOP : " << _top << " BOTTOM " << _bottom << "LEFT" << _left << "RIGHT" << _right;
+    for (int counter = 0; counter < _nodes.size(); counter++) {
+	 if(_nodes[counter]->x() > _right)  _right = _nodes[counter]->x();
+	 if(_nodes[counter]->y() > _top)  _top = _nodes[counter]->y();
+	 if(_nodes[counter]->x() < _left)  _left = _nodes[counter]->x();
+	 if(_nodes[counter]->y() < _bottom)  _bottom = _nodes[counter]->y();	     
+	     kDebug() << "TOP : " << _top << " BOTTOM " << _bottom << "LEFT" << _left << "RIGHT" << _right;
+    }
+    _relativeCenter.setY((_top + _bottom)/2);
+    _relativeCenter.setX((_left + _right)/2);
+}
 
+QPointF Graph::relativeCenter() const {
+    return _relativeCenter;
+}
 #ifdef USING_QTSCRIPT
 
 QScriptValue Graph::scriptValue() const {

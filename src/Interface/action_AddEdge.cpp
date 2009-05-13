@@ -57,8 +57,7 @@ void AddEdgeAction::executePress(QPointF pos) {
         _working = false;
         return;
     }
-    _startPos = QPointF(_nodeFrom->node()->property("x").toInt(),
-                        _nodeFrom->node()->property("y").toInt());
+    _startPos = QPointF(_nodeFrom->node()->x(), _nodeFrom->node()->y());
 }
 
 void AddEdgeAction::executeMove(QPointF pos) {

@@ -45,12 +45,17 @@ void MoveNodeAction::executePress(QPointF pos) {
         return;
     }
     _movableNode = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+    if (!_movableNode ) return;
+    
+    _node = _movableNode->node();
+    _graph = qobject_cast<Graph*>(_node->parent());
 }
 
 void MoveNodeAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return;
     }
+    if (_graph->directed()) _graph->calcRelativeCenter();
     _movableNode -> updatePos( pos );
 }
 

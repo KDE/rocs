@@ -37,7 +37,8 @@ class Edge;
 
 class Node : public QObject {
     Q_OBJECT
-
+    Q_PROPERTY(qreal _x READ x WRITE setX);
+    Q_PROPERTY(qreal _y READ y WRITE setY);
 public:
     Node(QObject *parent);
     ~Node();
@@ -62,9 +63,13 @@ public  slots:
     QList<Edge*> in_edges() const;
     QList<Edge*> out_edges() const;
     QList<Edge*> self_edges() const;
-
+    void setX(qreal x);
+    void setY(qreal y);
+    qreal x() const;
+    qreal y() const;
+    
 #ifdef USING_QTSCRIPT
-    QScriptValue adj_nodes();
+    QScriptValue adj_nodes(); 
     QScriptValue adj_edges();
     QScriptValue input_edges();
     QScriptValue output_edges();
@@ -80,7 +85,8 @@ private:
     QList<Edge*> _out_edges;
     QList<Edge*> _self_edges;
     void empty(QList<Edge*> *list);
-
+    qreal _x;
+    qreal _y;
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

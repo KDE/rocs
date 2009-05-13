@@ -45,7 +45,8 @@ class Graph : public QObject {
 public:
     Graph();
     ~Graph();
-    
+    void calcRelativeCenter();
+    QPointF relativeCenter() const;
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
     void setEngine( QtScriptBackend *engine );
@@ -57,6 +58,7 @@ public  slots:
     QList<Node*> nodes() const;
     QList<Edge*> edges() const;
     QList<GraphGroup*> groups() const;
+
 
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();
@@ -85,7 +87,8 @@ private:
     QList<Node*> _nodes;
     QList<Edge*> _edges;
     QList<GraphGroup*> _graphGroups;
-
+    qreal _top, _bottom, _left, _right;
+    QPointF _relativeCenter;
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

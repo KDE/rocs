@@ -163,6 +163,10 @@ void Node::remove(){
     p->remove(this);
 }
 
+void Node::setX(qreal x){ _x = x; }
+qreal Node::x() const{ return _x; }
+void Node::setY(qreal y){ _y  = y;}
+qreal Node::y() const { return _y; }
 
 #ifdef USING_QTSCRIPT
 void Node::self_remove(){

@@ -31,7 +31,7 @@ int main ( int argc, char *argv[] ) {
                           "1.0",
                           ki18n ( "Graph Theory Tool" ),
                           KAboutData::License_GPL,
-                          ki18n ( "(c) 2008" ),
+                          ki18n ( "(c) 2009" ),
                           ki18n ( "Thanks to Ugo Sangiori" ),
                           "",
                           "submit@bugs.kde.org" );
