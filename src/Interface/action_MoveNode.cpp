@@ -55,7 +55,7 @@ void MoveNodeAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return;
     }
-    if (_graph->directed()) _graph->calcRelativeCenter();
+   // if (_graph->directed()) _graph->calcRelativeCenter();
     _movableNode -> updatePos( pos );
 }
 

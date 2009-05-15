@@ -90,7 +90,7 @@ qreal GraphDocument::width() const {
 }
 
 Graph* GraphDocument::addGraph(QString name) {
-    Graph *g = new Graph();
+    Graph *g = new Graph(this);
     g->setProperty("name",name);
     append(g);
     return g;
@@ -207,7 +207,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             QString gName = str.section(" ",1,1);
             gName.remove(']');
 
-            tmpGraph = new Graph();
+            tmpGraph = new Graph(this);
             tmpGraph->setProperty("name", gName.toAscii());
             tmpObject = tmpGraph;
             append(tmpGraph);

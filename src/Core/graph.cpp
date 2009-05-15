@@ -22,10 +22,12 @@
 #include "node.h"
 #include "qtScriptBackend.h"
 #include "graphGroups.h"
+#include "graphDocument.h"
 #include <KDebug>
 
-Graph::Graph() : QObject(0) {
+Graph::Graph(QObject *parent) : QObject(parent) {
     _directed = false;
+    calcRelativeCenter();
 }
 
 Graph::~Graph() {
@@ -156,6 +158,7 @@ QList<GraphGroup*> Graph::groups() const {
 }
 
 void Graph::calcRelativeCenter() {
+  /*
     _top = _nodes[0]->y();   _bottom = _nodes[0]->y();
     _left = _nodes[0]->x(); _right = _nodes[0]->x();
     kDebug() << "INICIO:";
@@ -167,8 +170,11 @@ void Graph::calcRelativeCenter() {
 	 if(_nodes[counter]->y() < _bottom)  _bottom = _nodes[counter]->y();	     
 	     kDebug() << "TOP : " << _top << " BOTTOM " << _bottom << "LEFT" << _left << "RIGHT" << _right;
     }
-    _relativeCenter.setY((_top + _bottom)/2);
-    _relativeCenter.setX((_left + _right)/2);
+    */
+    /// this will be here till I find a better way to calculate a *relative* center of the graph, and not the center of the document.
+    GraphDocument *gd = qobject_cast<GraphDocument*>(parent());
+    _relativeCenter.setY(gd->height()/2);
+    _relativeCenter.setX(gd->width()/2);
 }
 
 QPointF Graph::relativeCenter() const {

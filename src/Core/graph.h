@@ -43,7 +43,7 @@ class Graph : public QObject {
     Q_PROPERTY(bool directed READ directed WRITE setDirected);
 
 public:
-    Graph();
+    Graph(QObject *parent);
     ~Graph();
     void calcRelativeCenter();
     QPointF relativeCenter() const;
