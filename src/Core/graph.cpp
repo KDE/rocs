@@ -228,7 +228,7 @@ QScriptValue Graph::add_node(const QString& name) {
     return n->scriptValue();
 }
 
-QScriptValue Graph::add_edge(const QString& from, const QString& to) {
+QScriptValue Graph::add_edge(Node* from, Node* to) {
     Edge *e = addEdge(from, to);
     e->setEngine(_engine);
     return e->scriptValue();

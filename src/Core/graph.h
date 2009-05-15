@@ -64,7 +64,7 @@ public  slots:
     QScriptValue list_nodes();
     QScriptValue list_edges();
     QScriptValue add_node(const QString& name);
-    QScriptValue add_edge(const QString& from, const QString& to);
+    QScriptValue add_edge(Node* from, Node* to);
     QScriptValue node_byname(const QString& name);
 #endif
 
