@@ -103,8 +103,6 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
 }
 
 QPainterPath OrientedEdgeItem::createCurves() {
-
-
     /// Calculate the angle.
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
     QPointF Pos2(_edge->to()->x(), _edge->to()->y());
@@ -139,23 +137,22 @@ QPainterPath OrientedEdgeItem::createCurves() {
 
         qreal x = Pos2.x() - Pos1.x();
         qreal y = Pos2.y() - Pos1.y();
-
         qreal angle = atan2(y,x);
 
         /// Calculate the size of the inclination on the curve.
-	 qreal theta;
-	if((((angle) / (PI_4) - floor(angle / (PI_4))) >= 0.01)) {
-	    qreal curve = (2 *((angle) / (PI_4) - floor(angle / (PI_4))) * PI_2) + PI_4;
-	    if ((angle / (PI_8)) - floor (angle / (PI_8))) {
-		theta = angle + curve;
-	    }
-	    else {
-		theta = angle - curve;
-	    }
-	 }
-	 else {
-	    theta = angle + PI_2;
-	 }
+
+//	if((((angle) / (PI_4) - floor(angle / (PI_4))) >= 0.01)) {
+// 	    qreal curve = (2 *((angle) / (PI_4) - floor(angle / (PI_4))) * PI_2) + PI_4;
+// 	    if ((angle / (PI_8)) - floor (angle / (PI_8))) {
+// 		theta = angle + curve;
+// 	    }
+// 	    else {
+// 		theta = angle - curve;
+// 	    }
+//	 }
+//	 else {
+	 qreal theta = angle + PI_2;
+//	 }
 
         qreal finalX = cos(theta);
         qreal finalY = sin(theta);
@@ -171,8 +168,8 @@ QPainterPath OrientedEdgeItem::createCurves() {
 
         finalX *= size;
         finalY *= size;
-        finalX += Pos1.x() + (x)/2;
-        finalY += Pos1.y() + (y)/2;
+        finalX += Pos1.x() + x/2;
+        finalY += Pos1.y() + y/2;
 
         /// Draw the Arc.
         p.moveTo(Pos1);
@@ -213,9 +210,7 @@ void OrientedEdgeItem::removed() {
 }
 
 void OrientedEdgeItem::updatePos() {
-    QPainterPath p = createCurves();	
-    setPath(p);
-
+    setPath(createCurves());
 }
 
 

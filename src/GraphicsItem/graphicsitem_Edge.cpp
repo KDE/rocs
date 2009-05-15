@@ -82,10 +82,7 @@ void EdgeItem::removed() {
 }
 
 void EdgeItem::updatePos() {
-    setLine( _edge->from()->property("x").toInt(),
-             _edge->from()->property("y").toInt(),
-             _edge->to()->property("x").toInt(),
-             _edge->to()->property("y").toInt());
+    setLine( _edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
     update();
 }
 
