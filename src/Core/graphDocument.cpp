@@ -91,7 +91,7 @@ qreal GraphDocument::width() const {
 
 Graph* GraphDocument::addGraph(QString name) {
     Graph *g = new Graph(this);
-    g->setProperty("name",name);
+    g->setName(name);
     append(g);
     return g;
 }
@@ -207,7 +207,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             QString gName = str.section(" ",1,1);
             gName.remove(']');
             tmpGraph = new Graph(this);
-            tmpGraph->setProperty("name", gName.toAscii());
+            tmpGraph->setName(gName.toAscii());
             tmpObject = tmpGraph;
             append(tmpGraph);
 	    kDebug() << "Graph Created";
@@ -237,7 +237,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         }
         else if (str.contains(":")) {
             QString propertyName = str.section(":",0,0).trimmed();
-	     QString propertyValue = str.section(":",1,1).trimmed();
+            QString propertyValue = str.section(":",1,1).trimmed();
             tmpObject->setProperty( propertyName.toAscii() , propertyValue.toAscii() );
 	    kDebug() << "Property" << propertyName.toAscii() << "value" << propertyValue.toAscii();
         }

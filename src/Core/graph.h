@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QList>
 #include <QVariant>
+#include <QString>
 
 #ifdef USING_QTSCRIPT
 #include <QtScript>
@@ -41,7 +42,8 @@ class GraphGroup;
 class Graph : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool directed READ directed WRITE setDirected);
-
+    Q_PROPERTY(QString name READ name WRITE setName);
+    
 public:
     Graph(QObject *parent);
     ~Graph();
@@ -53,6 +55,8 @@ public:
 #endif
 
 public  slots:
+    void setName(const QString& s);
+    const QString& name() const;
     void setDirected(bool directed = true);
     bool directed() const;
     QList<Node*> nodes() const;
@@ -89,6 +93,7 @@ private:
     QList<GraphGroup*> _graphGroups;
     qreal _top, _bottom, _left, _right;
     QPointF _relativeCenter;
+    QString _name;
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

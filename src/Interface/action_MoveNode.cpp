@@ -57,7 +57,6 @@ void MoveNodeAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return;
     }
-   // if (_graph->directed()) _graph->calcRelativeCenter();
     _movableNode -> updatePos( pos );
 }
 
@@ -65,8 +64,10 @@ void MoveNodeAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
         return;
     }
-    _movableNode = 0;
+    
     _view->setRenderHint(QPainter::Antialiasing, true);
+     _movableNode -> updatePos( pos );
+     _movableNode = 0;
 }
 
 void MoveNodeAction::setView(QGraphicsView *v){

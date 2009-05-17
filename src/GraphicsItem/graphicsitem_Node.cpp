@@ -70,7 +70,7 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
 
     painter->setPen(Qt::NoPen);
-    QColor color = _node->property("color").value<QColor>();
+    QColor color = QColor(_node->color());
     painter->setBrush( color.dark(240) );
 
     painter->drawEllipse(-7, -7, 20, 20);

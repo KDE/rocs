@@ -51,7 +51,7 @@ QList<Edge*> Graph::edges() const {
 
 Node* Graph::addNode(QString name) {
     Node  *n = new Node(this);
-    n->setProperty("name", name);
+    n->setName(name);
     _nodes.append( n );
     emit nodeCreated(n);
     
@@ -79,7 +79,7 @@ Edge* Graph::addEdge(const QString& name_from, const QString& name_to) {
     QString tmpName;
 
     foreach( Node* n,  _nodes) {
-        tmpName = n->property("name").toString();
+        tmpName = n->name();
 
         if (tmpName == name_from) {
             from = n;
@@ -102,7 +102,7 @@ bool Graph::directed() const {
 Node* Graph::node(const QString& name) {
     QString tmpName;
     foreach( Node* n,  _nodes) {
-        tmpName = n->property("name").toString();
+        tmpName = n->name();
         if (tmpName == name) {
             return n;
         }
@@ -135,7 +135,6 @@ void Graph::setDirected(bool directed) {
             QList<Edge*> listEdges = n1->edges(n2);
             if (n1 != n2) {
                 listEdges.removeFirst();
-                kDebug()  << "Chamou Update Pos";
             }
             foreach(Edge *e, listEdges) {
                 remove(e);
@@ -180,6 +179,10 @@ void Graph::calcRelativeCenter() {
 QPointF Graph::relativeCenter() const {
     return _relativeCenter;
 }
+
+const QString& Graph::name() const{ return _name; }
+void Graph::setName(const QString& s){ _name = s; }
+
 #ifdef USING_QTSCRIPT
 
 QScriptValue Graph::scriptValue() const {
@@ -191,8 +194,8 @@ void Graph::setEngine(	QtScriptBackend *engine ) {
 
     _value = _engine->newQObject(this);
 
-    if ( property("name") != QVariant() ) {
-        _engine->globalObject().setProperty(property("name").toString(), _value);
+    if ( _name.isEmpty() ) {
+        _engine->globalObject().setProperty(_name, _value);
     }
 
     foreach(Node *n, _nodes) {

@@ -27,6 +27,7 @@
 #include <QObject>
 #include <QList>
 #include <QVariant>
+#include <QString>
 
 #ifdef USING_QTSCRIPT
 #include <QtScript>
@@ -37,8 +38,11 @@ class Edge;
 
 class Node : public QObject {
     Q_OBJECT
-    Q_PROPERTY(qreal _x READ x WRITE setX);
-    Q_PROPERTY(qreal _y READ y WRITE setY);
+    Q_PROPERTY(qreal x READ x WRITE setX);
+    Q_PROPERTY(qreal y READ y WRITE setY);
+    Q_PROPERTY(QString name READ name WRITE setName);
+    Q_PROPERTY(QString color READ color WRITE setColor);
+    
 public:
     Node(QObject *parent);
     ~Node();
@@ -67,6 +71,10 @@ public  slots:
     void setY(qreal y);
     qreal x() const;
     qreal y() const;
+    void setColor(const QString& s);
+    const QString& color() const;
+    void setName(const QString& s);
+    const QString& name() const;
     
 #ifdef USING_QTSCRIPT
     QScriptValue adj_nodes(); 
@@ -85,8 +93,13 @@ private:
     QList<Edge*> _out_edges;
     QList<Edge*> _self_edges;
     void empty(QList<Edge*> *list);
+    
+    //! fixed properties
     qreal _x;
     qreal _y;
+    QString _name;
+    QString _color;
+    
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

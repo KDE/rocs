@@ -22,11 +22,11 @@
 #include "graph.h"
 #include <QDebug>
 
-Node::Node(QObject *parent) : QObject(parent)
-{
-    setProperty("color", "#FF0000");
-    setProperty("x", 0);
-    setProperty("y", 0);
+
+Node::Node(QObject *parent) : QObject(parent){
+    setColor("#FF0000");
+    setX(0);
+    setY(0);
 }
 
 Node::~Node() {
@@ -163,10 +163,15 @@ void Node::remove(){
     p->remove(this);
 }
 
+//! Properties:
 void Node::setX(qreal x){ _x = x; }
 qreal Node::x() const{ return _x; }
 void Node::setY(qreal y){ _y  = y;}
 qreal Node::y() const { return _y; }
+void Node::setColor(const QString& s){ _color = s; }
+const QString& Node::color() const { return _color; }
+void Node::setName(const QString& s){ _name = s; }
+const QString& Node::name() const { return _name; }
 
 #ifdef USING_QTSCRIPT
 void Node::self_remove(){

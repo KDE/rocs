@@ -52,7 +52,7 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     _loop = (_edge->from() == edge->to()) ? true : false;
     _index = _edge->relativeIndex();
 
-    setCacheMode(DeviceCoordinateCache);
+  //  setCacheMode(DeviceCoordinateCache);
     setZValue(-_index);
     setFlag(ItemIsSelectable);
     connectSignals();
