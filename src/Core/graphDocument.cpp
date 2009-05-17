@@ -206,7 +206,6 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         else if (str.startsWith("[Graph")) {
             QString gName = str.section(" ",1,1);
             gName.remove(']');
-
             tmpGraph = new Graph(this);
             tmpGraph->setProperty("name", gName.toAscii());
             tmpObject = tmpGraph;

@@ -42,6 +42,7 @@ class QSplitter;
 class GraphScene;
 class QScriptContext;
 class QScriptEngine;
+class MoveNodeAction;
 
 namespace KTextEditor {
 class Document;
@@ -123,6 +124,9 @@ private: // Variables.
     //! The Active Graph.
     GraphDocument *_activeGraphDocument;
     Graph *_graph;
+    
+    //! all the actions that I need to reference later.
+    MoveNodeAction *_moveNodeAction;
 };
 
 #ifdef USING_QTSCRIPT

@@ -24,6 +24,7 @@
 #include "node.h"
 #include "graphicsitem_Node.h"
 #include <KLocale>
+#include <QGraphicsView>
 
 #include <KDebug>
 #include "settings.h"
@@ -49,6 +50,7 @@ void MoveNodeAction::executePress(QPointF pos) {
     
     _node = _movableNode->node();
     _graph = qobject_cast<Graph*>(_node->parent());
+    _view->setRenderHint(QPainter::Antialiasing, false);
 }
 
 void MoveNodeAction::executeMove(QPointF pos) {
@@ -64,4 +66,9 @@ void MoveNodeAction::executeRelease(QPointF pos) {
         return;
     }
     _movableNode = 0;
+    _view->setRenderHint(QPainter::Antialiasing, true);
+}
+
+void MoveNodeAction::setView(QGraphicsView *v){
+  _view = v;
 }

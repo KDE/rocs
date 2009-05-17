@@ -35,7 +35,7 @@ class GraphToolBoxWidget;
 class QToolButton;
 class MainWindow;
 class NodeItem;
-
+class QGraphicsView;
 
 class GraphVisualEditor : public QWidget {
     Q_OBJECT
@@ -45,6 +45,7 @@ public:
     GraphVisualEditor(MainWindow *parent = 0);
 
     GraphScene *scene() const;
+    QGraphicsView *view() const;
     MainWindow *mainWindow();
 public slots:
     /*! set the current selected Graph.
@@ -92,6 +93,7 @@ private:
     qreal _leftNode;
     qreal _rightNode;
 
+    QGraphicsView *_graphicsView;
     /*! Actions */
 
 };

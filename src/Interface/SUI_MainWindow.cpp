@@ -93,6 +93,7 @@ MainWindow::MainWindow() :
     _OpenedFiles->on__btnNewFile_clicked();
     _activeGraphDocument->addGraph("Untitled0");
     setupGUI();
+    _moveNodeAction->setView( _graphVisualEditor->view() );
     mainWindow = this;
 }
 
@@ -261,7 +262,7 @@ void MainWindow::setupActions() {
     _paletteActions->addAction("pointer_action", new PointerAction(gc, this));
     _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
     _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
-    _paletteActions->addAction("move_node_action", new MoveNodeAction(gc, this));
+    _moveNodeAction = new MoveNodeAction(gc, this); _paletteActions->addAction("move_node_action", _moveNodeAction);
     _paletteActions->addAction("single_selection_action", new SingleSelectAction(gc, this));
 
     _PaletteBar->setActionCollection(_paletteActions);

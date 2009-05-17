@@ -27,6 +27,7 @@ class QObject;
 class NodeItem;
 class Node;
 class Graph;
+class QGraphicsView;
 
 /*!
   \brief The 'Move Node' Action
@@ -48,6 +49,7 @@ public:
       Default Destructor
     */
     ~MoveNodeAction();
+    void setView(QGraphicsView *v);
 public slots:
     /*!
       will be executed when the mouse press a button.
@@ -68,6 +70,7 @@ protected:
     NodeItem *_movableNode;
     Node *_node;
     Graph *_g;
+    QGraphicsView *_view;
 };
 
 #endif

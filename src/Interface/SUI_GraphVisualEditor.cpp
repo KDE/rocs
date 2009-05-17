@@ -116,16 +116,18 @@ void GraphVisualEditor::setupWidgets() {
     QVBoxLayout *vLayout = new QVBoxLayout();
     vLayout->setContentsMargins(0,0,0,0);
     _scene = new GraphScene(this);
-    QGraphicsView *graphicsView = new QGraphicsView();
-    graphicsView->setRenderHints(QPainter::Antialiasing);
-    graphicsView->setScene(_scene);
-    graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    _graphicsView = new QGraphicsView();
+    _graphicsView->setRenderHints(QPainter::Antialiasing);
+    _graphicsView->setScene(_scene);
     vLayout -> addWidget( _toolbar );
-    vLayout -> addWidget ( graphicsView );
+    vLayout -> addWidget ( _graphicsView );
     setLayout( vLayout );
 
 }
 
+QGraphicsView* GraphVisualEditor::view() const{
+  return _graphicsView;
+}
 QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent) {
     QToolButton *tmpButton = 0;
     KAction *tmpAction = 0;
