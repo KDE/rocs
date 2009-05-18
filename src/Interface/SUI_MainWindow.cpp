@@ -62,7 +62,7 @@
 #include "action_AddNode.h"
 #include "action_AddEdge.h"
 #include "action_MoveNode.h"
-#include "action_SingleSelect.h"
+#include "action_Select.h"
 #include "action_SmartAction.h"
 #include "settings.h"
 
@@ -264,7 +264,7 @@ void MainWindow::setupActions() {
     _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
     _moveNodeAction = new MoveNodeAction(gc, this);
     _paletteActions->addAction("move_node_action", _moveNodeAction);
-    _paletteActions->addAction("single_selection_action", new SingleSelectAction(gc, this));
+    _paletteActions->addAction("single_selection_action", new SelectAction(gc, this));
 
     _PaletteBar->setActionCollection(_paletteActions);
 

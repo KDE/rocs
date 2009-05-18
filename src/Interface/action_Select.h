@@ -18,8 +18,8 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#ifndef ACTION_SINGLESELECT_H
-#define ACTION_SINGLESELECT_H
+#ifndef ACTION_SELECT_H
+#define ACTION_SELECT_H
 
 #include "action_AbstractAction.h"
 #include <QObject>
@@ -35,7 +35,7 @@ class QGraphicsRectItem;
   it will place a new node on the QGraphicsView that holds all the items.
 */
 
-class SingleSelectAction : public AbstractAction
+class SelectAction : public AbstractAction
 {
     Q_OBJECT
 public:
@@ -44,12 +44,12 @@ public:
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
 
-    explicit SingleSelectAction(GraphScene *scene, QObject *parent = 0);
+    explicit SelectAction(GraphScene *scene, QObject *parent = 0);
 
     /*!
       Default Destructor
     */
-    ~SingleSelectAction();
+    ~SelectAction();
 public slots:
     /*!
       will be executed when the mouse press a button.

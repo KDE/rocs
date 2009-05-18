@@ -23,7 +23,7 @@ set(librocsui_SRCS
 	action_AddNode.cpp
 	action_AddEdge.cpp
 	action_MoveNode.cpp
-	action_SingleSelect.cpp
+	action_Select.cpp
 	action_SmartAction.cpp
 )
 

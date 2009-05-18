@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "action_SingleSelect.h"
+#include "action_Select.h"
 #include "SUI_GraphScene.h"
 #include "graph.h"
 #include "node.h"
@@ -32,7 +32,7 @@
 #include <KLocale>
 #include <KDebug>
 
-SingleSelectAction::SingleSelectAction(GraphScene *scene, QObject *parent)
+SelectAction::SelectAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Single Select" ));
     setToolTip ( i18n ( "Select Items by clicking on them." ) );
@@ -40,21 +40,21 @@ SingleSelectAction::SingleSelectAction(GraphScene *scene, QObject *parent)
     _selectionRect = 0;
 }
 
-SingleSelectAction::~SingleSelectAction() {
+SelectAction::~SelectAction() {
 }
 
-void SingleSelectAction::executePress(QPointF pos){
+void SelectAction::executePress(QPointF pos){
   _p1 = pos;
   _selectionRect = new QGraphicsRectItem();
   _graphScene->addItem(_selectionRect);
 }
 
-void SingleSelectAction::executeMove(QPointF pos){
+void SelectAction::executeMove(QPointF pos){
   if (_selectionRect == 0) return;
   _selectionRect->setRect(QRectF(_p1, pos));
 }
 
-void SingleSelectAction::executeRelease(QPointF pos) {
+void SelectAction::executeRelease(QPointF pos) {
     if ( !_graph ) return;
     if ( _selectionRect == 0) return;
     
@@ -79,7 +79,7 @@ void SingleSelectAction::executeRelease(QPointF pos) {
     
 }
 
-void SingleSelectAction::multiSelect(QPointF pos){
+void SelectAction::multiSelect(QPointF pos){
   QList<QGraphicsItem*> items = _graphScene->items(QRectF(_p1, pos));
   foreach(QGraphicsItem *i, items){
     i->setSelected(true);
@@ -87,7 +87,7 @@ void SingleSelectAction::multiSelect(QPointF pos){
   }
 }
 
-void SingleSelectAction::singleSelect(QPointF pos){
+void SelectAction::singleSelect(QPointF pos){
     QGraphicsItem * item = _graphScene->itemAt(pos);
     if ( ! item ) {
         emit ItemSelectedChanged(0);
@@ -108,4 +108,4 @@ void SingleSelectAction::singleSelect(QPointF pos){
     emit ItemSelectedChanged(obj);
     item->update();
 }
-#include "action_SingleSelect.moc"
+#include "action_Select.moc"
