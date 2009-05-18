@@ -30,20 +30,20 @@ void GraphScene::setAction(AbstractAction *action) {
 
 void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     _graphDocument = gd;
-    if(gd == 0){
-      kDebug() << "Graph Document Doesn't Exist, crashing.";
-      return;
+    if (gd == 0) {
+        kDebug() << "Graph Document Doesn't Exist, crashing.";
+        return;
     }
-    
+
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
     int size = _graphDocument->size();
 
-    for(int i = 0; i < size; i++){
-	kDebug() << "Updating Graph at position: " << i;
-	updateGraph(_graphDocument->at(i));
-	kDebug() << "Graph Updated.";
+    for (int i = 0; i < size; i++) {
+        kDebug() << "Updating Graph at position: " << i;
+        updateGraph(_graphDocument->at(i));
+        kDebug() << "Graph Updated.";
     }
-  
+
 }
 QGraphicsItem *GraphScene::createNode(Graph *g, Node *n) {
     NodeItem *nItem = new NodeItem(n);
@@ -100,16 +100,16 @@ void GraphScene::insertGraphItem(Graph *g, QGraphicsItem *item) {
     _hashGraphs.insert(g, item);
 }
 
-void GraphScene::clearGraph(){
+void GraphScene::clearGraph() {
     int i = _graphDocument->size();
-    for(int e = 0; e < i; e++){
-      Graph *g = _graphDocument->at(e);
-      QList<QGraphicsItem*> items = _hashGraphs.values(g);
-      foreach(QGraphicsItem *i, items) {
-	  removeItem(i);
-	  delete i;
-	}
-	_hashGraphs.remove(g);
+    for (int e = 0; e < i; e++) {
+        Graph *g = _graphDocument->at(e);
+        QList<QGraphicsItem*> items = _hashGraphs.values(g);
+        foreach(QGraphicsItem *i, items) {
+            removeItem(i);
+            delete i;
+        }
+        _hashGraphs.remove(g);
     }
 }
 
@@ -117,9 +117,9 @@ void GraphScene::updateGraph(Graph *g) {
     QList<QGraphicsItem*> items = _hashGraphs.values(g);
     foreach(QGraphicsItem *i, items) {
         removeItem(i);
-	delete i;
+        delete i;
     }
-    
+
     _hashGraphs.remove(g);
 
     QList<Node*> nodes = g->nodes();

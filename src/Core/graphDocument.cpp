@@ -119,9 +119,9 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
 
     QTextStream stream(&saveFile);
     int graphSize = count();
-    
-    for(int i = 0; i < graphSize; i++){
-	Graph *g = this->at(i);
+
+    for (int i = 0; i < graphSize; i++) {
+        Graph *g = this->at(i);
         buf += " \n \n ############ Graph  ########### \n \n";
         buf += QString("[Graph %1] \n").arg(i);
 
@@ -139,21 +139,21 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
             savePropertiesInternalFormat(e);
         }
 
-   /*     buf += " \n \n ############ GROUPS ########### \n \n";
-        foreach( GraphGroup *gg, g->groups()) {
-            buf += QString("[Group %1] \n").arg((long) gg);
+        /*     buf += " \n \n ############ GROUPS ########### \n \n";
+             foreach( GraphGroup *gg, g->groups()) {
+                 buf += QString("[Group %1] \n").arg((long) gg);
 
-            foreach( ::Node *n, gg->nodes() ) {
-                buf += QString("%1\n").arg((long)n);
-            }
-        } */
+                 foreach( ::Node *n, gg->nodes() ) {
+                     buf += QString("%1\n").arg((long)n);
+                 }
+             } */
     }
     qDebug() << buf.toAscii();
 
     stream << buf.toAscii();
     if (!saveFile.finalize()) {
         qDebug() << "Error, file not saved.";
-	return false;
+        return false;
     }
     _lastSavedDocumentPath = filename;
     return true;
@@ -163,23 +163,23 @@ void GraphDocument::savePropertiesInternalFormat(QObject *o) {
     const QMetaObject *metaObject = o->metaObject();
     int propertyCount = metaObject->propertyCount();
     kDebug() << "Property Count: " << propertyCount;
-    
+
     for ( int i = 0; i < propertyCount; ++i) {
         QMetaProperty metaProperty = metaObject->property(i);
         const char *name = metaProperty.name();
-        if ( QString("objectName") == QString(name) ){
+        if ( QString("objectName") == QString(name) ) {
             continue;
         }
         QVariant value = o->property(name);
         buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
     }
-    
+
     QList<QByteArray> propertyNames = o->dynamicPropertyNames();
-    foreach(QByteArray name, propertyNames){
-       QVariant value = o->property(name);
+    foreach(QByteArray name, propertyNames) {
+        QVariant value = o->property(name);
         buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
     }
-    
+
     buf += "\n";
 }
 
@@ -189,7 +189,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         qDebug  () << "File not open " << filename.toAscii();
         return;
     }
-    
+
     Graph* tmpGraph = 0;
     GraphGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
@@ -210,25 +210,25 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             tmpGraph->setName(gName.toAscii());
             tmpObject = tmpGraph;
             append(tmpGraph);
-	    kDebug() << "Graph Created";
+            kDebug() << "Graph Created";
         }
 
         else if (str.startsWith("[Node")) {
             QString nName = str.section(" ",1,1);
             nName.remove(']');
             tmpObject = tmpGraph->addNode(nName);
-	    kDebug() << "Node Created";
+            kDebug() << "Node Created";
         }
 
         else if (str.startsWith("[Edge")) {
-           QString eName = str.section(" ",1,1);
+            QString eName = str.section(" ",1,1);
             eName.remove(']');
 
             QString nameFrom = eName.section("->", 0,0);
             QString nameTo = eName.section("->", 1,1);
 
             tmpObject = tmpGraph->addEdge(tmpGraph->nodes()[nameFrom.toInt()], tmpGraph->nodes()[nameTo.toInt()]);
-	    kDebug() << "Edge Created";
+            kDebug() << "Edge Created";
         }
         else if (str.startsWith("[Group")) {
             /*QString gName = str.section(" ",1,1);
@@ -239,7 +239,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             QString propertyName = str.section(":",0,0).trimmed();
             QString propertyValue = str.section(":",1,1).trimmed();
             tmpObject->setProperty( propertyName.toAscii() , propertyValue.toAscii() );
-	    kDebug() << "Property" << propertyName.toAscii() << "value" << propertyValue.toAscii();
+            kDebug() << "Property" << propertyName.toAscii() << "value" << propertyValue.toAscii();
         }
         else {
 //            // tmpGroup->append( tmpGraph->node(str));

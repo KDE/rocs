@@ -97,6 +97,6 @@ bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex&) {
 
 Graph *GraphLayersModel::at(const QModelIndex& index)
 {
-  if(_document->size() == 0) return 0;
+    if (_document->size() == 0) return 0;
     return _document->at(index.row());
 }

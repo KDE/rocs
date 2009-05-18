@@ -53,7 +53,7 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
         _bottomNode(0),
         _leftNode(0),
         _rightNode(0),
-	_scene(0){
+        _scene(0) {
     _graphDocument = 0;
     _graph = 0;
     _mainWindow = parent;
@@ -125,8 +125,8 @@ void GraphVisualEditor::setupWidgets() {
 
 }
 
-QGraphicsView* GraphVisualEditor::view() const{
-  return _graphicsView;
+QGraphicsView* GraphVisualEditor::view() const {
+    return _graphicsView;
 }
 QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent) {
     QToolButton *tmpButton = 0;
@@ -143,9 +143,9 @@ QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const
 
 void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
     if ( _graphDocument != 0 ) {
-	kDebug() << "Releasing Graph Document";
+        kDebug() << "Releasing Graph Document";
         releaseGraphDocument();
-	kDebug() << "Graph Document Released.";
+        kDebug() << "Graph Document Released.";
     }
 
     _graphDocument = gd;

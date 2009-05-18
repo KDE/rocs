@@ -52,7 +52,7 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     _loop = (_edge->from() == edge->to()) ? true : false;
     _index = _edge->relativeIndex();
 
-  //  setCacheMode(DeviceCoordinateCache);
+    //  setCacheMode(DeviceCoordinateCache);
     setZValue(-_index);
     setFlag(ItemIsSelectable);
     connectSignals();
@@ -109,12 +109,12 @@ QPainterPath OrientedEdgeItem::createCurves() {
     QPainterPath p;
 
     if ( _loop ) {
-	 Graph *g = qobject_cast<Graph*>(_edge->parent());
-         qreal size = 30 + (20 * _index);
-         qreal angle = atan2((Pos1.x() - g->relativeCenter().x()), (Pos1.y() - g->relativeCenter().y()));
-	 qreal posx = (Pos1.x()-(((size/2) * sin(angle)) * -1)-(size/2));
-	 qreal posy = (Pos1.y()+(((size/2) * cos(angle)))-(size/2));
-	 p.addEllipse( posx, posy, size, size);
+        Graph *g = qobject_cast<Graph*>(_edge->parent());
+        qreal size = 30 + (20 * _index);
+        qreal angle = atan2((Pos1.x() - g->relativeCenter().x()), (Pos1.y() - g->relativeCenter().y()));
+        qreal posx = (Pos1.x()-(((size/2) * sin(angle)) * -1)-(size/2));
+        qreal posy = (Pos1.y()+(((size/2) * cos(angle)))-(size/2));
+        p.addEllipse( posx, posy, size, size);
         return p;
     }
 
@@ -151,7 +151,7 @@ QPainterPath OrientedEdgeItem::createCurves() {
 // 	    }
 //	 }
 //	 else {
-	 qreal theta = angle + PI_2;
+        qreal theta = angle + PI_2;
 //	 }
 
         qreal finalX = cos(theta);

@@ -42,7 +42,7 @@ class Node : public QObject {
     Q_PROPERTY(qreal y READ y WRITE setY);
     Q_PROPERTY(QString name READ name WRITE setName);
     Q_PROPERTY(QString color READ color WRITE setColor);
-    
+
 public:
     Node(QObject *parent);
     ~Node();
@@ -75,9 +75,9 @@ public  slots:
     const QString& color() const;
     void setName(const QString& s);
     const QString& name() const;
-    
+
 #ifdef USING_QTSCRIPT
-    QScriptValue adj_nodes(); 
+    QScriptValue adj_nodes();
     QScriptValue adj_edges();
     QScriptValue input_edges();
     QScriptValue output_edges();
@@ -93,13 +93,13 @@ private:
     QList<Edge*> _out_edges;
     QList<Edge*> _self_edges;
     void empty(QList<Edge*> *list);
-    
+
     //! fixed properties
     qreal _x;
     qreal _y;
     QString _name;
     QString _color;
-    
+
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

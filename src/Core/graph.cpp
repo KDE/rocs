@@ -54,7 +54,7 @@ Node* Graph::addNode(QString name) {
     n->setName(name);
     _nodes.append( n );
     emit nodeCreated(n);
-    
+
     return n;
 }
 
@@ -157,19 +157,19 @@ QList<GraphGroup*> Graph::groups() const {
 }
 
 void Graph::calcRelativeCenter() {
-  /*
-    _top = _nodes[0]->y();   _bottom = _nodes[0]->y();
-    _left = _nodes[0]->x(); _right = _nodes[0]->x();
-    kDebug() << "INICIO:";
-    kDebug() << "TOP : " << _top << " BOTTOM " << _bottom << "LEFT" << _left << "RIGHT" << _right;
-    for (int counter = 0; counter < _nodes.size(); counter++) {
-	 if(_nodes[counter]->x() > _right)  _right = _nodes[counter]->x();
-	 if(_nodes[counter]->y() > _top)  _top = _nodes[counter]->y();
-	 if(_nodes[counter]->x() < _left)  _left = _nodes[counter]->x();
-	 if(_nodes[counter]->y() < _bottom)  _bottom = _nodes[counter]->y();	     
-	     kDebug() << "TOP : " << _top << " BOTTOM " << _bottom << "LEFT" << _left << "RIGHT" << _right;
-    }
-    */
+    /*
+      _top = _nodes[0]->y();   _bottom = _nodes[0]->y();
+      _left = _nodes[0]->x(); _right = _nodes[0]->x();
+      kDebug() << "INICIO:";
+      kDebug() << "TOP : " << _top << " BOTTOM " << _bottom << "LEFT" << _left << "RIGHT" << _right;
+      for (int counter = 0; counter < _nodes.size(); counter++) {
+       if(_nodes[counter]->x() > _right)  _right = _nodes[counter]->x();
+       if(_nodes[counter]->y() > _top)  _top = _nodes[counter]->y();
+       if(_nodes[counter]->x() < _left)  _left = _nodes[counter]->x();
+       if(_nodes[counter]->y() < _bottom)  _bottom = _nodes[counter]->y();
+           kDebug() << "TOP : " << _top << " BOTTOM " << _bottom << "LEFT" << _left << "RIGHT" << _right;
+      }
+      */
     /// this will be here till I find a better way to calculate a *relative* center of the graph, and not the center of the document.
     GraphDocument *gd = qobject_cast<GraphDocument*>(parent());
     _relativeCenter.setY(gd->height()/2);
@@ -180,8 +180,12 @@ QPointF Graph::relativeCenter() const {
     return _relativeCenter;
 }
 
-const QString& Graph::name() const{ return _name; }
-void Graph::setName(const QString& s){ _name = s; }
+const QString& Graph::name() const {
+    return _name;
+}
+void Graph::setName(const QString& s) {
+    _name = s;
+}
 
 #ifdef USING_QTSCRIPT
 

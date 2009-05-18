@@ -37,7 +37,7 @@ AbstractAction::AbstractAction(GraphScene *scene, QObject *parent) : KAction(par
 
 void AbstractAction::setActiveGraphDocument(  GraphDocument *graphDocument)
 {
-     _graphDocument = graphDocument;
+    _graphDocument = graphDocument;
 }
 
 void AbstractAction::setActiveGraph( Graph *graph) {

@@ -63,7 +63,7 @@ public:
     Graph *graph() const;
     GraphScene *scene() const;
     void debug(const QString& s);
-    
+
 private: // Methods
     void setupModels();	// setup all the models to be used on the views.
     void setupWidgets(); // Setup all the widgets.
@@ -92,10 +92,10 @@ private slots:
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
-    
+
 private: // Variables.
 
-   // Left Area:
+    // Left Area:
     PaletteBarWidget*	_PaletteBar;	 //! area where the icons of actions will be.
     OpenedFilesWidget* _OpenedFiles;	//! area where the opened files will be
     GraphPropertiesWidget* _GraphProperties; //! Area where the nodes and edges will be modified.
@@ -109,13 +109,13 @@ private: // Variables.
     KMultiTabBar *_bottomTabBar; //! This will hold the Editor and the Debugger.
     KTextEditor::View *_docView; //! this is the view where you edit your scripts
     KTextBrowser *_txtDebug; //! this is the debug view.
-    
+
     // Other Bunch of stuff.
     QList<GraphDocument*> _documents; //! The list of opend documents
     GraphDocumentModel *_documentModel; //! the model that hold the documents. there's a need for a Model and a QList?
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
 
-    KTextEditor::Document *_scriptDoc; //! the document that you are editing. 
+    KTextEditor::Document *_scriptDoc; //! the document that you are editing.
 
     //! Needed to reestore the size of the splitter after closing / opening the UI.
     QSplitter *_vSplitter;
@@ -124,12 +124,12 @@ private: // Variables.
     //! The Active Graph.
     GraphDocument *_activeGraphDocument;
     Graph *_graph;
-    
+
     //! all the actions that I need to reference later.
     MoveNodeAction *_moveNodeAction;
 };
 
 #ifdef USING_QTSCRIPT
-   static QScriptValue debug_script(QScriptContext *context, QScriptEngine *engine);
+static QScriptValue debug_script(QScriptContext *context, QScriptEngine *engine);
 #endif
 #endif

@@ -27,6 +27,7 @@
 
 class NodeItem;
 class Node;
+class QGraphicsRectItem;
 
 /*!
   \brief The 'Add Node' Action
@@ -51,12 +52,29 @@ public:
     ~SingleSelectAction();
 public slots:
     /*!
-      this will be executed if type is the same as this action's type.
-      \param pos the position on the screen that selection will occour.
+      will be executed when the mouse press a button.
+      \param pos the position onscreen of the click.
+    */
+    void executePress(QPointF pos);
+    /*! will be executed when the mouse moves.
+      \param pos the current position of the cursor.
+    */
+    void executeMove(QPointF pos);
+
+    /*! will be executed when the mouse releases a click
+    \param pos the position of the cursor.
     */
     void executeRelease(QPointF pos);
+
 signals:
     void ItemSelectedChanged(QObject *o);
+    
+private:
+    void singleSelect(QPointF pos);
+    void multiSelect(QPointF pos);
+     QPointF _p1;
+     QPointF _p2;
+     QGraphicsRectItem *_selectionRect;
 
 };
 

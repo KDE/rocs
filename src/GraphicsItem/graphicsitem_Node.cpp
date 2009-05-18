@@ -105,7 +105,7 @@ void NodeItem::updatePos(QPointF pos) {
             OrientedEdgeItem *edgeItem = qgraphicsitem_cast<OrientedEdgeItem*>(i);
             edgeItem->updatePos();
         }
-	/*FIXME: add a way to every loop node be updated. */
+        /*FIXME: add a way to every loop node be updated. */
     }
 }
 

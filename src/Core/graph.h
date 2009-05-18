@@ -43,7 +43,7 @@ class Graph : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool directed READ directed WRITE setDirected);
     Q_PROPERTY(QString name READ name WRITE setName);
-    
+
 public:
     Graph(QObject *parent);
     ~Graph();

@@ -37,23 +37,57 @@ SingleSelectAction::SingleSelectAction(GraphScene *scene, QObject *parent)
     setText(i18n ( "Single Select" ));
     setToolTip ( i18n ( "Select Items by clicking on them." ) );
     setIcon ( KIcon ( "single-select" ) );
+    _selectionRect = 0;
 }
 
 SingleSelectAction::~SingleSelectAction() {
 }
 
+void SingleSelectAction::executePress(QPointF pos){
+  _p1 = pos;
+  _selectionRect = new QGraphicsRectItem();
+  _graphScene->addItem(_selectionRect);
+}
+
+void SingleSelectAction::executeMove(QPointF pos){
+  if (_selectionRect == 0) return;
+  _selectionRect->setRect(QRectF(_p1, pos));
+}
+
 void SingleSelectAction::executeRelease(QPointF pos) {
     if ( !_graph ) return;
-
+    if ( _selectionRect == 0) return;
+    
+    _graphScene->removeItem(_selectionRect);
+    
+    delete _selectionRect;
+    _selectionRect = 0;
+    
     QList<QGraphicsItem*> currentSelection = _graphScene->selectedItems();
     kDebug() << "Number of selected Items: " << currentSelection.size();
     foreach(QGraphicsItem *i, currentSelection) {
         i->setSelected(false);
-        i->setCacheMode( QGraphicsItem::NoCache );
         i->update();
-        i->setCacheMode( QGraphicsItem::DeviceCoordinateCache );
     }
+    
+    if (pos == _p1){
+      singleSelect(pos);
+    }
+    else{
+      multiSelect(pos);
+    }
+    
+}
 
+void SingleSelectAction::multiSelect(QPointF pos){
+  QList<QGraphicsItem*> items = _graphScene->items(QRectF(_p1, pos));
+  foreach(QGraphicsItem *i, items){
+    i->setSelected(true);
+    i->update();
+  }
+}
+
+void SingleSelectAction::singleSelect(QPointF pos){
     QGraphicsItem * item = _graphScene->itemAt(pos);
     if ( ! item ) {
         emit ItemSelectedChanged(0);
@@ -61,9 +95,7 @@ void SingleSelectAction::executeRelease(QPointF pos) {
     }
 
     item->setSelected(true);
-
     QObject *obj = 0;
-
     if (qgraphicsitem_cast<NodeItem*>(item)) {
         obj = (qgraphicsitem_cast<NodeItem*>(item)) -> node();
     }
@@ -74,10 +106,6 @@ void SingleSelectAction::executeRelease(QPointF pos) {
         obj = (qgraphicsitem_cast<OrientedEdgeItem*>(item)) -> edge();
     }
     emit ItemSelectedChanged(obj);
-
-    item->setCacheMode( QGraphicsItem::NoCache );
     item->update();
-    item->setCacheMode( QGraphicsItem::DeviceCoordinateCache );
 }
-
 #include "action_SingleSelect.moc"

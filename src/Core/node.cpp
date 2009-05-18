@@ -23,7 +23,7 @@
 #include <QDebug>
 
 
-Node::Node(QObject *parent) : QObject(parent){
+Node::Node(QObject *parent) : QObject(parent) {
     setColor("#FF0000");
     setX(0);
     setY(0);
@@ -158,24 +158,40 @@ QList<Edge*> Node::edges(Node *n) {
     return list;
 }
 
-void Node::remove(){
+void Node::remove() {
     Graph *p = qobject_cast<Graph*>(QObject::parent());
     p->remove(this);
 }
 
 //! Properties:
-void Node::setX(qreal x){ _x = x; }
-qreal Node::x() const{ return _x; }
-void Node::setY(qreal y){ _y  = y;}
-qreal Node::y() const { return _y; }
-void Node::setColor(const QString& s){ _color = s; }
-const QString& Node::color() const { return _color; }
-void Node::setName(const QString& s){ _name = s; }
-const QString& Node::name() const { return _name; }
+void Node::setX(qreal x) {
+    _x = x;
+}
+qreal Node::x() const {
+    return _x;
+}
+void Node::setY(qreal y) {
+    _y  = y;
+}
+qreal Node::y() const {
+    return _y;
+}
+void Node::setColor(const QString& s) {
+    _color = s;
+}
+const QString& Node::color() const {
+    return _color;
+}
+void Node::setName(const QString& s) {
+    _name = s;
+}
+const QString& Node::name() const {
+    return _name;
+}
 
 #ifdef USING_QTSCRIPT
-void Node::self_remove(){
-  remove();
+void Node::self_remove() {
+    remove();
 }
 QScriptValue Node::scriptValue() const {
     return _value;

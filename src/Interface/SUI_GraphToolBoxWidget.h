@@ -57,8 +57,8 @@ public slots:
     this method creates a new graph. */
     void on__btnNewGraph_clicked();
 
-    /*! executed on changing the graph layers. 
-	this should be the only method to changing an active graph? nope. there's also graphDocumentChanged that will change it.
+    /*! executed on changing the graph layers.
+    this should be the only method to changing an active graph? nope. there's also graphDocumentChanged that will change it.
     */
     void on__comboGraphLayers_activated(int i);
 

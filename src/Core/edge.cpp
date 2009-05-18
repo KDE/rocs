@@ -38,12 +38,12 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
     }
 
     _relativeIndex = _to -> edges(_from).size();
-    
+
 }
 
 Edge::~Edge()
 {
-   if (_from == _to) {
+    if (_from == _to) {
         _from->removeEdge(this, Node::Self);
     }
     else {
@@ -63,10 +63,10 @@ Node* Edge::to() const {
 }
 
 int Edge::relativeIndex() const {
-   return _relativeIndex;
+    return _relativeIndex;
 }
 
-void Edge::remove(){
+void Edge::remove() {
     Graph *p = qobject_cast<Graph*>(QObject::parent());
     p->remove(this);
 }
@@ -90,7 +90,7 @@ QScriptValue Edge::scriptValue() const {
     return  _value;
 }
 
-void Edge::self_remove(){
+void Edge::self_remove() {
     remove();
 }
 #endif
