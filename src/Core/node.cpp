@@ -27,6 +27,7 @@ Node::Node(QObject *parent) : QObject(parent) {
     setColor("#FF0000");
     setX(0);
     setY(0);
+   setEnd();
 }
 
 Node::~Node() {
@@ -189,6 +190,16 @@ const QString& Node::name() const {
     return _name;
 }
 
+void Node::setBegin(bool begin){
+  _begin = begin;
+}
+
+void Node::setEnd(bool end){
+  _end = end;
+}
+
+bool Node::begin() const { return _begin; }
+bool Node::end() const { return _end; }
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {
     remove();
