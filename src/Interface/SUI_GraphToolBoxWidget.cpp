@@ -69,7 +69,8 @@ void GraphToolBoxWidget::setActiveGraph(const QModelIndex& modelindex) {
 }
 
 void GraphToolBoxWidget::on__btnSetOriented_clicked() {
-    Graph *g = _mainWindow->graph();
-    g->setDirected(_btnSetOriented->isChecked());
-    _mainWindow->scene()->updateGraph(g);
+    if (Graph *g = _mainWindow->graph() ){
+      g->setDirected(_btnSetOriented->isChecked());
+      _mainWindow->scene()->updateGraph(g);
+    }
 }
