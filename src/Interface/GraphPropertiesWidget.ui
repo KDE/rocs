@@ -1,52 +1,127 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>GraphPropertiesWidget</class>
- <widget class="QWidget" name="GraphPropertiesWidget" >
-  <property name="geometry" >
+ <widget class="QWidget" name="GraphPropertiesWidget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>237</width>
-    <height>301</height>
+    <width>331</width>
+    <height>535</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <property name="margin" >
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
     <number>0</number>
    </property>
-   <item row="0" column="0" colspan="3" >
-    <widget class="QTableView" name="_tableView" />
+   <item row="2" column="0" colspan="3">
+    <widget class="QTableView" name="_tableView"/>
    </item>
-   <item row="1" column="0" colspan="3" >
-    <widget class="KSqueezedTextLabel" name="ksqueezedtextlabel" >
-     <property name="text" >
-      <string>Add Property</string>
+   <item row="3" column="0" colspan="3">
+    <widget class="KSqueezedTextLabel" name="ksqueezedtextlabel">
+     <property name="text">
+      <string>KSqueezedTextLabel</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" >
-    <widget class="KLineEdit" name="_txtPropertyName" >
-     <property name="text" >
+   <item row="4" column="0">
+    <widget class="KLineEdit" name="_txtPropertyName">
+     <property name="text">
       <string>Name</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1" >
-    <widget class="KLineEdit" name="_txtPropertyValue" >
-     <property name="text" >
+   <item row="4" column="1">
+    <widget class="KLineEdit" name="_txtPropertyValue">
+     <property name="text">
       <string>Value</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="2" >
-    <widget class="KPushButton" name="_btnAddProperty" >
-     <property name="minimumSize" >
+   <item row="4" column="2">
+    <widget class="KPushButton" name="_btnAddProperty">
+     <property name="minimumSize">
       <size>
        <width>32</width>
        <height>16</height>
       </size>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>ok</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QWidget" name="nodeWidget" native="true">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="KColorCombo" name="kcolorcombo"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="spinBox"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="spinBox_2"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Y</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="text">
+         <string>End</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Automate:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QCheckBox" name="checkBox">
+        <property name="text">
+         <string>Begin</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Dinamyc Properties:</string>
      </property>
     </widget>
    </item>
@@ -54,9 +129,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
+   <class>KSqueezedTextLabel</class>
+   <extends>QLabel</extends>
+   <header>ksqueezedtextlabel.h</header>
   </customwidget>
   <customwidget>
    <class>KPushButton</class>
@@ -64,9 +139,14 @@
    <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>KSqueezedTextLabel</class>
-   <extends>QLabel</extends>
-   <header>ksqueezedtextlabel.h</header>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KColorCombo</class>
+   <extends>QComboBox</extends>
+   <header>kcolorcombo.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -2,7 +2,7 @@
 #include "action_AddEdge.h"
 #include "action_AddNode.h"
 #include "action_MoveNode.h"
-#include "action_SingleSelect.h"
+#include "action_Select.h"
 
 #include <KAction>
 #include <KLocale>
@@ -46,5 +46,5 @@ void SmartAction::setMoveAction(KAction *e) {
 }
 
 void SmartAction::setSingleSelectAction(KAction *e) {
-    _singleSelectAction = qobject_cast<SingleSelectAction*>(e);
+    _SelectAction = qobject_cast<SelectAction*>(e);
 }

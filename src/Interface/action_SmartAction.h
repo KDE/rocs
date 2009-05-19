@@ -6,7 +6,7 @@
 class AddEdgeAction;
 class AddNodeAction;
 class MoveNodeAction;
-class SingleSelectAction;
+class SelectAction;
 class KAction;
 
 class SmartAction : public AbstractAction {
@@ -27,7 +27,7 @@ public slots:
 private:
     AddNodeAction *_addNodeAction;
     AddEdgeAction *_addEdgeAction;
-    SingleSelectAction *_singleSelectAction;
+    SelectAction *_SelectAction;
     MoveNodeAction *_moveAction;
 };
 
