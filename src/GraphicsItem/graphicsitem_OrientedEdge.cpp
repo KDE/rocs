@@ -68,7 +68,7 @@ void OrientedEdgeItem::setupPen() {
     QPen pen;
     pen.setStyle(Qt::SolidLine);
     pen.setWidth(2);
-    pen.setBrush(_edge->property("color").value<QColor>());
+    pen.setBrush(_edge->color());
     pen.setCapStyle(Qt::RoundCap);
     pen.setJoinStyle(Qt::RoundJoin);
     setPen( pen );    // ! Connect the Edge's Signals.

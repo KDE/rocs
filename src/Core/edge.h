@@ -27,6 +27,8 @@
 #include <QObject>
 #include <QVariant>
 #include <QtScript>
+#include <QString>
+#include <QColor>
 
 #ifdef USING_QTSCRIPT
 #include <QScriptValue>
@@ -37,7 +39,10 @@ class Node;
 
 class Edge : public QObject {
     Q_OBJECT
-
+    Q_PROPERTY(QColor color READ color WRITE setColor);
+    Q_PROPERTY(QString value READ value WRITE setValue);
+    Q_PROPERTY(QString name READ name WRITE setName);
+    
 public:
     Edge(QObject *parent, Node *from, Node *to);
     ~Edge();
@@ -51,7 +56,13 @@ public:
 public  slots:
     Node* from() const;
     Node* to() const;
-
+    const QString& value() const;
+    void setValue (const QString& s);
+    const QString& name() const;
+    void setName (const QString& s);
+    QColor color() const;
+    void setColor(QColor s);
+    
 #ifdef USING_QTSCRIPT
     QScriptValue start();
     QScriptValue end();
@@ -62,9 +73,12 @@ private:
     Node *_from;
     Node *_to;
     int _relativeIndex;
-
+    QString _value;
+    QString _name;
+    QColor _color;
+    
 #ifdef USING_QTSCRIPT
-    QScriptValue _value;
+    QScriptValue _scriptvalue;
     QtScriptBackend *_engine;
 #endif
 

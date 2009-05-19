@@ -71,6 +71,25 @@ void Edge::remove() {
     p->remove(this);
 }
 
+const QString& Edge::value() const{
+  return _value;
+}
+void Edge::setValue (const QString& s){
+  _value = s;
+}
+const QString& Edge::name() const{
+  return _name;
+}
+void Edge::setName (const QString& s){
+  _name = s;
+}
+QColor Edge::color() const{
+  return _color;
+}
+void Edge::setColor(QColor s){
+  _color = s;
+}
+    
 #ifdef USING_QTSCRIPT
 
 QScriptValue Edge::start() {
@@ -83,11 +102,11 @@ QScriptValue  Edge::end() {
 
 void Edge::setEngine(	QtScriptBackend *engine ) {
     _engine = engine;
-    _value = _engine->newQObject(this);
+    _scriptvalue = _engine->newQObject(this);
 }
 
 QScriptValue Edge::scriptValue() const {
-    return  _value;
+    return  _scriptvalue;
 }
 
 void Edge::self_remove() {

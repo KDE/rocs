@@ -59,7 +59,7 @@ void EdgeItem::setupPen() {
     _pen = new QPen();
     _pen->setStyle(Qt::SolidLine);
     _pen->setWidth(2);
-    _pen->setBrush(_edge->property("color").value<QColor>());
+    _pen->setBrush(_edge->color());
     _pen->setCapStyle(Qt::RoundCap);
     _pen->setJoinStyle(Qt::RoundJoin);
     setPen( (*_pen) );
@@ -89,12 +89,12 @@ void EdgeItem::updatePos() {
 void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
     if (!isSelected()) {
         _pen->setWidth(2);
-        _pen->setBrush(_edge->property("color").value<QColor>());
+        _pen->setBrush(_edge->color());
         QGraphicsLineItem::paint(painter, option);
     }
     else {
         _pen -> setWidth(4);
-        _pen->setBrush(_edge->property("color").value<QColor>().light(120));
+        _pen->setBrush(_edge->color().light(120));
         painter->setPen((*_pen));
         painter->drawLine(line());
     }

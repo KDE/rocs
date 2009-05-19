@@ -16,7 +16,7 @@
 
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
     _graphDocument = 0;
-
+ 
 }
 
 void GraphScene::setActiveGraph(Graph *g) {
@@ -36,6 +36,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     }
 
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
+    addRect(0,0, gd->width(), gd->height());
     int size = _graphDocument->size();
 
     for (int i = 0; i < size; i++) {
