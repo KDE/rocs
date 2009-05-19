@@ -27,7 +27,8 @@ Node::Node(QObject *parent) : QObject(parent) {
     setColor("#FF0000");
     setX(0);
     setY(0);
-   setEnd();
+    setBegin(false);
+    setEnd(false);
 }
 
 Node::~Node() {

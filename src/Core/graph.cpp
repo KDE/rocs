@@ -187,6 +187,9 @@ void Graph::setName(const QString& s) {
     _name = s;
 }
 
+void Graph::setBegin(Node* n){ _begin = n; }
+Node* Graph::begin() const{ return _begin; }
+
 #ifdef USING_QTSCRIPT
 
 QScriptValue Graph::scriptValue() const {

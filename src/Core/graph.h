@@ -32,9 +32,10 @@
 #include <QtScript>
 #endif
 
+#include "node.h"
 // #include "graphGroups.h"
 
-class Node;
+
 class Edge;
 class QtScriptBackend;
 class GraphGroup;
@@ -43,7 +44,8 @@ class Graph : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool directed READ directed WRITE setDirected);
     Q_PROPERTY(QString name READ name WRITE setName);
-
+    //Q_PROPERTY(Node* begin READ begin END setBegin);
+    
 public:
     Graph(QObject *parent);
     ~Graph();
@@ -62,7 +64,8 @@ public  slots:
     QList<Node*> nodes() const;
     QList<Edge*> edges() const;
     QList<GraphGroup*> groups() const;
-
+    Node* begin() const;
+    void setBegin(Node* b);
 
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();
@@ -94,6 +97,7 @@ private:
     qreal _top, _bottom, _left, _right;
     QPointF _relativeCenter;
     QString _name;
+    Node* _begin;
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;
