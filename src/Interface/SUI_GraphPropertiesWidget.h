@@ -24,6 +24,10 @@
 #include "ui_GraphPropertiesWidget.h"
 
 class GraphPropertiesModel;
+class QGraphicsItem;
+class Graph;
+class Node;
+class Edge;
 
 /*! \brief Properties Area, not used yet. */
 class MainWindow;
@@ -32,9 +36,30 @@ class GraphPropertiesWidget : public QWidget, public Ui::GraphPropertiesWidget
     Q_OBJECT
 public:
     GraphPropertiesWidget ( QWidget* parent = 0 );
+public slots:
+    void setDataSource(QGraphicsItem *o);
+    
 private slots:
-    void setDataSource(QObject *o);
+  void nodeNameChanged(QString s);
+  void nodeColorChanged();
+  void nodeEndChanged(bool b);
+  void nodeBeginChanged(bool b);
+  void nodeXChanged(int x);
+  void nodeYChanged(int y);
+
 private:
     GraphPropertiesModel *_model;
+    Graph *_graph;
+    Node *_node;
+    Edge *_edge;
+    QGraphicsItem *_graphicsItem;
+    
+    void setGraph(Graph *g);
+    void setNode(Node *n);
+    void setEdge(Edge *e);
+    void unsetNode();
+    void unsetEdge();
+    void unsetGraph();
+    void unsetAll();
 };
 #endif

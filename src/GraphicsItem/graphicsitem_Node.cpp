@@ -40,7 +40,7 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
     QPointF pos( _node -> x() ,_node->y() );
     setPos( pos );
     setZValue(1);
-    
+    setFlag(ItemIsSelectable);
     connect (_node, SIGNAL(removed()), this, SLOT(removed()));
 }
 
@@ -88,7 +88,7 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         gradient.setColorAt(0, color.light(240));
         gradient.setColorAt(1, color);
     }
-    kDebug() << "Called";
+
     painter->setBrush(gradient);
     painter->setPen(QPen(color, 2));
     painter->drawEllipse(-10, -10, 20, 20);

@@ -166,52 +166,32 @@ void Node::remove() {
 }
 
 //! Properties:
-void Node::setX(qreal x) {
-    _x = x;
-}
-qreal Node::x() const {
-    return _x;
-}
-void Node::setY(qreal y) {
-    _y  = y;
-}
-qreal Node::y() const {
-    return _y;
-}
-void Node::setColor(const QString& s) {
-    _color = s;
-}
-const QString& Node::color() const {
-    return _color;
-}
-void Node::setName(const QString& s) {
-    _name = s;
-}
-const QString& Node::name() const {
-    return _name;
-}
-
-void Node::setBegin(bool begin){
-  _begin = begin;
-}
-
-void Node::setEnd(bool end){
-  _end = end;
-}
-
+void Node::setX(qreal x) {    _x = x; }
+qreal Node::x() const {    return _x; }
+void Node::setY(qreal y) {    _y  = y; }
+qreal Node::y() const {    return _y; }
+void Node::setColor(const QString& s) {    _color = s; }
+const QString& Node::color() const {    return _color; }
+void Node::setName(const QString& s) {    _name = s;}
+const QString& Node::name() const {    return _name;}
+void Node::setBegin(bool begin){  _begin = begin;}
+void Node::setEnd(bool end){  _end = end; }
 bool Node::begin() const { return _begin; }
 bool Node::end() const { return _end; }
+const QString& Node::value() const { return _value; }
+void  Node::setValue(const QString& s) { _value = s; }
+
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {
     remove();
 }
 QScriptValue Node::scriptValue() const {
-    return _value;
+    return _scriptvalue;
 }
 
 void Node::setEngine(	QtScriptBackend *engine ) {
     _engine = engine;
-    _value = engine->newQObject(this);
+    _scriptvalue = engine->newQObject(this);
 }
 
 QScriptValue Node::adj_nodes() {

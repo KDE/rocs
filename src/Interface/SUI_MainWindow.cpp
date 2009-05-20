@@ -337,9 +337,9 @@ void MainWindow::setupSignals() {
     connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
              this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
 
-    //! action here is "single selection action. please, change that to a more intuitive approach.
-    connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QObject*)),
-             _GraphProperties, SLOT(setDataSource(QObject*)));
+    //! action here is "selection action". please, change that to a more intuitive approach.
+    connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
+             _GraphProperties, SLOT(setDataSource(QGraphicsItem*)));
 
 }
 

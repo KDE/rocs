@@ -44,6 +44,7 @@ class Node : public QObject {
     Q_PROPERTY(QString color READ color WRITE setColor);
     Q_PROPERTY(bool begin READ begin WRITE setBegin);
     Q_PROPERTY(bool end READ end WRITE setEnd);
+    Q_PROPERTY(QString value READ value WRITE setValue);
     
 public:
     Node(QObject *parent);
@@ -82,6 +83,8 @@ public  slots:
     bool end() const;
     void setBegin(bool begin = true);
     void setEnd(bool end = true);
+    void setValue(const QString& s);
+    const QString& value() const;
     
 #ifdef USING_QTSCRIPT
     QScriptValue adj_nodes();
@@ -108,9 +111,10 @@ private:
     QString _color;
     bool _begin;
     bool _end;
+    QString _value;
     
 #ifdef USING_QTSCRIPT
-    QScriptValue _value;
+    QScriptValue _scriptvalue;
     QtScriptBackend *_engine;
 #endif
 

@@ -28,6 +28,7 @@
 class NodeItem;
 class Node;
 class QGraphicsRectItem;
+class QGraphicsItem;
 
 /*!
   \brief The 'Add Node' Action
@@ -67,7 +68,7 @@ public slots:
     void executeRelease(QPointF pos);
 
 signals:
-    void ItemSelectedChanged(QObject *o);
+    void ItemSelectedChanged(QGraphicsItem *o);
     
 private:
     void singleSelect(QPointF pos);

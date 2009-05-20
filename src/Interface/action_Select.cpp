@@ -95,17 +95,8 @@ void SelectAction::singleSelect(QPointF pos){
     }
 
     item->setSelected(true);
-    QObject *obj = 0;
-    if (qgraphicsitem_cast<NodeItem*>(item)) {
-        obj = (qgraphicsitem_cast<NodeItem*>(item)) -> node();
-    }
-    else if (qgraphicsitem_cast<EdgeItem*>(item)) {
-        obj = (qgraphicsitem_cast<EdgeItem*>(item)) -> edge();
-    }
-    else if (qgraphicsitem_cast<OrientedEdgeItem*>(item)) {
-        obj = (qgraphicsitem_cast<OrientedEdgeItem*>(item)) -> edge();
-    }
-    emit ItemSelectedChanged(obj);
+    emit ItemSelectedChanged(item);
     item->update();
+    kDebug() << "Item Selected!";
 }
 #include "action_Select.moc"
