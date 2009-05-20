@@ -138,7 +138,7 @@
    <item row="5" column="0">
     <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>Dinamyc Properties:</string>
+      <string>Dynamic Properties:</string>
      </property>
     </widget>
    </item>
