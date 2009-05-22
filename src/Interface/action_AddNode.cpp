@@ -24,7 +24,7 @@
 #include "graphicsitem_Node.h"
 #include "node.h"
 #include <KLocale>
-
+#include "graphDocument.h"
 #include <KDebug>
 
 AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent)
@@ -43,7 +43,12 @@ void AddNodeAction::executePress(QPointF pos) {
         kDebug() << "Error, Graph == 0";
         return;
     }
-
+    
+    if (pos.x() < 0) return;
+    else if (pos.y() < 0) return;
+    else if (pos.x() > _graphDocument->width()) return;
+    else if (pos.y() > _graphDocument->height()) return;
+    
     Node *n = _graph -> addNode(i18n("untitled"));
     n ->setX(pos.x());
     n -> setY(pos.y());

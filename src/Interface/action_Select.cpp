@@ -55,25 +55,25 @@ void SelectAction::executeMove(QPointF pos){
 }
 
 void SelectAction::executeRelease(QPointF pos) {
-    if ( !_graph ) return;
     if ( _selectionRect == 0) return;
-    
+    if ( !_graph ) return;    
     _graphScene->removeItem(_selectionRect);
     
     delete _selectionRect;
     _selectionRect = 0;
     
     QList<QGraphicsItem*> currentSelection = _graphScene->selectedItems();
-    kDebug() << "Number of selected Items: " << currentSelection.size();
     foreach(QGraphicsItem *i, currentSelection) {
         i->setSelected(false);
         i->update();
     }
     
     if (pos == _p1){
+      kDebug() << "Selecionando um item apenas.";
       singleSelect(pos);
     }
     else{
+      kDebug() << "Selecionando um monte de items";
       multiSelect(pos);
     }
     
@@ -89,7 +89,7 @@ void SelectAction::multiSelect(QPointF pos){
 
 void SelectAction::singleSelect(QPointF pos){
     QGraphicsItem * item = _graphScene->itemAt(pos);
-    if ( ! item ) {
+    if ( !qgraphicsitem_cast<NodeItem*>(item) && !qgraphicsitem_cast<EdgeItem*>(item) && !qgraphicsitem_cast<OrientedEdgeItem*>(item)){
         emit ItemSelectedChanged(0);
         return;
     }

@@ -63,7 +63,7 @@ public:
     Graph *graph() const;
     GraphScene *scene() const;
     void debug(const QString& s);
-
+    GraphDocument *activeDocument() const;
 private: // Methods
     void setupModels();	// setup all the models to be used on the views.
     void setupWidgets(); // Setup all the widgets.

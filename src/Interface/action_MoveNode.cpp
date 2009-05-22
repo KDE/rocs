@@ -22,6 +22,7 @@
 #include "SUI_GraphScene.h"
 #include "graph.h"
 #include "node.h"
+#include "graphDocument.h"
 #include "graphicsitem_Node.h"
 #include <KLocale>
 #include <QGraphicsView>
@@ -57,16 +58,32 @@ void MoveNodeAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return;
     }
-    _movableNode -> updatePos( pos );
+    if ((pos.x() < 0) || (pos.x() > _graphDocument->width())){
+      if (( pos.y() > 0) && (pos.y() < _graphDocument->height())){
+	_movableNode -> updatePos( QPointF(_node->x(), pos.y()) );
+      }
+    }
+    else if ((pos.y() < 0) || (pos.y() > _graphDocument->height())){
+      if (( pos.x() > 0) && (pos.x() < _graphDocument->width())){
+	_movableNode -> updatePos( QPointF(pos.x(),_node->y() ));
+      }
+    }
+   else{
+      _movableNode -> updatePos( pos );
+    }
 }
 
 void MoveNodeAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
         return;
     }
-
     _view->setRenderHint(QPainter::Antialiasing, true);
-    _movableNode -> updatePos( pos );
+    if ((pos.x() < 0) || (pos.y() < 0) || (pos.x() > _graphDocument->width())|| (pos.y() > _graphDocument->height())){
+      _movableNode -> updatePos( QPointF(_node->x(), _node->y()) );
+    }
+    else{
+      _movableNode -> updatePos( pos );
+    }
     _movableNode = 0;
 }
 

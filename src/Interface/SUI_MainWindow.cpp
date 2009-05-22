@@ -110,6 +110,9 @@ MainWindow::~MainWindow() {
 void MainWindow::setupModels() {
     _documentModel = new GraphDocumentModel( &_documents );
 }
+
+GraphDocument *MainWindow::activeDocument() const{ return _activeGraphDocument; }
+
 void MainWindow::setupWidgets() {
 
     _leftTabBar = new KMultiTabBar(KMultiTabBar::Left, this);
@@ -210,7 +213,7 @@ QWidget* MainWindow::setupLeftPanel() {
 
     _OpenedFiles = new OpenedFilesWidget ( _documentModel, toolBox );
     _PaletteBar	= new PaletteBarWidget	( toolBox );
-    _GraphProperties = new GraphPropertiesWidget( toolBox );
+    _GraphProperties = new GraphPropertiesWidget( this );
 
     QStackedWidget *toolsStack = new QStackedWidget();
 

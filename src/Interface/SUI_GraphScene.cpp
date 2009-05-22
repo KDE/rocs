@@ -36,7 +36,11 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     }
 
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
-    addRect(0,0, gd->width(), gd->height());
+    QGraphicsRectItem *n = new QGraphicsRectItem(0,0, gd->width(), gd->height());
+    n->setFlag(QGraphicsItem::ItemIsSelectable, false);
+    n->setZValue(-1);
+    addItem(n);
+    
     int size = _graphDocument->size();
 
     for (int i = 0; i < size; i++) {
