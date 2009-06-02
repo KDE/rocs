@@ -450,6 +450,7 @@ void MainWindow::executeScript() {
         return;
     }
 
+    _txtDebug->clear();
     QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
     engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
     QScriptValue results = engine->evaluate(_scriptDoc->text().toAscii());
@@ -464,7 +465,7 @@ void MainWindow::executeScript() {
 
 
 static QScriptValue debug_script(QScriptContext* context, QScriptEngine* engine) {
-    mainWindow->debug(context->argument(0).toString());
+    mainWindow->debug(QString("%1 \n").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
