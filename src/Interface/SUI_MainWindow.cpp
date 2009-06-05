@@ -65,6 +65,7 @@
 #include "action_Select.h"
 #include "action_SmartAction.h"
 #include "settings.h"
+#include "deleteaction.h"
 
 // backends
 #include "qtScriptBackend.h"
@@ -267,7 +268,8 @@ void MainWindow::setupActions() {
     _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
     _moveNodeAction = new MoveNodeAction(gc, this);
     _paletteActions->addAction("move_node_action", _moveNodeAction);
-    _paletteActions->addAction("single_selection_action", new SelectAction(gc, this));
+    _paletteActions->addAction("select_action", new SelectAction(gc, this));
+    _paletteActions->addAction("delete_action", new DeleteAction(gc, this));
 
     _PaletteBar->setActionCollection(_paletteActions);
 

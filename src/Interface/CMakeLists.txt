@@ -25,6 +25,7 @@ set(librocsui_SRCS
 	action_MoveNode.cpp
 	action_Select.cpp
 	action_SmartAction.cpp
+	deleteaction.cpp
 )
 
 kde4_add_ui_files( 
