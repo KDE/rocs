@@ -31,6 +31,7 @@
 
 #include <KLocale>
 #include <KDebug>
+#include <QDebug>
 
 SelectAction::SelectAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
@@ -46,6 +47,7 @@ SelectAction::~SelectAction() {
 void SelectAction::executePress(QPointF pos){
   _p1 = pos;
   _selectionRect = new QGraphicsRectItem();
+  _selectionRect->setFlag(QGraphicsItem::ItemIsSelectable, false);
   _graphScene->addItem(_selectionRect);
 }
 
@@ -69,11 +71,11 @@ void SelectAction::executeRelease(QPointF pos) {
     }
     
     if (pos == _p1){
-      kDebug() << "Selecionando um item apenas.";
+      qDebug() << "Selecionando um item apenas.";
       singleSelect(pos);
     }
     else{
-      kDebug() << "Selecionando um monte de items";
+      qDebug() << "Selecionando um monte de items";
       multiSelect(pos);
     }
     
@@ -82,9 +84,22 @@ void SelectAction::executeRelease(QPointF pos) {
 void SelectAction::multiSelect(QPointF pos){
   QList<QGraphicsItem*> items = _graphScene->items(QRectF(_p1, pos));
   foreach(QGraphicsItem *i, items){
+    if (!( qgraphicsitem_cast<NodeItem*>(i) 
+	|| qgraphicsitem_cast<EdgeItem*>(i)
+	|| qgraphicsitem_cast<OrientedEdgeItem*>(i))){
+      items.removeAll(i);
+    }
+  }
+  if (items.size() == 1){
+    singleSelect(items[0]->pos());
+    return;
+  }
+  
+  foreach(QGraphicsItem *i, items){
     i->setSelected(true);
     i->update();
   }
+  
 }
 
 void SelectAction::singleSelect(QPointF pos){
@@ -97,6 +112,6 @@ void SelectAction::singleSelect(QPointF pos){
     item->setSelected(true);
     emit ItemSelectedChanged(item);
     item->update();
-    kDebug() << "Item Selected!";
+    qDebug() << "Item Selected!";
 }
 #include "action_Select.moc"
