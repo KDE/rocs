@@ -72,6 +72,8 @@ public  slots:
     QScriptValue add_node(const QString& name);
     QScriptValue add_edge(Node* from, Node* to);
     QScriptValue node_byname(const QString& name);
+    QScriptValue begin_node();
+    QScriptValue end_nodes();
 #endif
 
     Node* addNode(QString name);
@@ -82,6 +84,9 @@ public  slots:
     void remove(Node *n);
     void remove(Edge *e);
     GraphGroup *addGroup(const QString& name);
+    
+    Node* addEnd(Node* n);
+    void  removeEnd(Node* n);
 
 signals:
     void nodeCreated(Node *n);
@@ -97,6 +102,8 @@ private:
     QPointF _relativeCenter;
     QString _name;
     Node* _begin;
+    QList<Node*> _ends;
+    
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

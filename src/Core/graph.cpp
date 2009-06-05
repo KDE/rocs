@@ -190,7 +190,30 @@ void Graph::setName(const QString& s) {
 void Graph::setBegin(Node* n){ _begin = n; }
 Node* Graph::begin() const{ return _begin; }
 
+Node* Graph::addEnd(Node *n){
+  _ends.append(n);
+  return n;
+}
+
+void Graph::removeEnd(Node *n){
+  _ends.removeAll(n);
+}
+
 #ifdef USING_QTSCRIPT
+
+QScriptValue Graph::begin_node(){
+  return _begin->scriptValue();
+}
+
+QScriptValue Graph::end_nodes()
+{
+    QScriptValue array = _engine->newArray();
+    foreach(Node* n, _ends) {
+        array.property("push").call(array, QScriptValueList() << n->scriptValue());
+    }
+    return array;
+}
+
 
 QScriptValue Graph::scriptValue() const {
     return _value;
@@ -221,18 +244,16 @@ void Graph::setEngine(	QtScriptBackend *engine ) {
 }
 
 QScriptValue Graph::list_nodes() {
-    QList<Node*> list = nodes();
     QScriptValue array = _engine->newArray();
-    foreach(Node* n, list) {
+    foreach(Node* n, _nodes) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
 }
 
 QScriptValue Graph::list_edges() {
-    QList<Edge*> list = edges();
     QScriptValue array = _engine->newArray();
-    foreach(Edge* n, list) {
+    foreach(Edge* n, _edges) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
