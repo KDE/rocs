@@ -38,7 +38,7 @@ void DeleteAction::executePress(QPointF pos)
    if ( NodeItem *n  = qgraphicsitem_cast<NodeItem*>(item) ){ 
 	Node *node = n->node();
 	node->self_remove();
-	_graphScene->updateDocument();
+	_graphScene->updateDocument(); //! TODO: we don't want to redraw the whole document, we just want to remove the edges connected to this node, and this node on the screen;
         return;
     }
 
