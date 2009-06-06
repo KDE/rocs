@@ -29,6 +29,8 @@ public:
     void setActiveGraphDocument(GraphDocument *gd);
     void insertGraphItem(Graph *g, QGraphicsItem *item);
     void clearGraph();
+    void removeGItem(QGraphicsItem *i);
+    
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);

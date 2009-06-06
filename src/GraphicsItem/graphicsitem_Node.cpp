@@ -33,6 +33,7 @@
 #include "graphicsitem_OrientedEdge.h"
 #include <KDebug>
 #include <QDebug>
+#include <SUI_GraphScene.h>
 
 NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
         : QObject(0), QGraphicsItem(parent)
@@ -108,11 +109,10 @@ void NodeItem::updateTotal(qreal ) {}
 void NodeItem::updateColor(QColor ) {}
 
 void NodeItem::remove() {
-    scene()->removeItem(this);
+  if (scene() == 0) return;
+  if (this == 0){ qDebug() << "O.O"; }
+    dynamic_cast<GraphScene*>(scene())->removeGItem(this);
     deleteLater();
 }
 
-void NodeItem::addEdge(QGraphicsItem *e) {
-    _edges.append(e);
-}
 #include "graphicsitem_Node.moc"

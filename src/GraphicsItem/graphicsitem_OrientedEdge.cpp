@@ -38,7 +38,7 @@
 #include <math.h>
 
 #include "graphicsitem_Node.h"
-
+#include <SUI_GraphScene.h>
 
 #include <KDebug>
 #include <QPen>
@@ -49,7 +49,6 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
 {
 
     _edge = edge;
-    connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));
     _loop = (_edge->from() == edge->to()) ? true : false;
     _index = _edge->relativeIndex();
 
@@ -72,7 +71,8 @@ void OrientedEdgeItem::setupPen() {
 }
 
 void OrientedEdgeItem::connectSignals() {
-    connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
+  connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));  
+  connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
 QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) {
@@ -203,7 +203,7 @@ void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 void OrientedEdgeItem::remove() {
-    scene()->removeItem(this);
+    dynamic_cast<GraphScene*>(scene())->removeGItem(this);
     deleteLater();
 }
 

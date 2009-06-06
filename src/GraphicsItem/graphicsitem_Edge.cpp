@@ -31,6 +31,8 @@
 #include "node.h"
 #include "edge.h"
 #include "graph.h"
+#include <SUI_GraphScene.h>
+
 
 #include "graphicsitem_Node.h"
 
@@ -41,7 +43,7 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsLineItem(parent) {
 
     _edge = edge;
-    connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));
+  
     setCacheMode(DeviceCoordinateCache);
     setZValue(0);
     setFlag(ItemIsSelectable);
@@ -52,6 +54,7 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
 }
 
 void EdgeItem::connectSignals() {
+    connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
@@ -78,7 +81,7 @@ void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 void EdgeItem::remove() {
-    scene()->removeItem(this);
+    dynamic_cast<GraphScene*>(scene())->removeGItem(this);
     deleteLater();
 }
 

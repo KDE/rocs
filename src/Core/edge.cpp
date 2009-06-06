@@ -55,6 +55,7 @@ Edge::~Edge()
     }
     _from = 0;
     _to = 0;
+    emit removed();
 }
 
 Node* Edge::from() const {
@@ -70,9 +71,7 @@ int Edge::relativeIndex() const {
 }
 
 void Edge::remove() {
-    Graph *p = qobject_cast<Graph*>(QObject::parent());
-    emit removed();
-    p->remove(this);
+  qobject_cast<Graph*>(QObject::parent())->remove(this);
 }
 
 const QString& Edge::value() const{

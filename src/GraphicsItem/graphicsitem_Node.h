@@ -67,8 +67,6 @@ public:
     Node* node() {
         return _node;
     }
-    void addEdge(QGraphicsItem *e);
-
 
 protected slots:
 
@@ -86,7 +84,6 @@ public slots:
 
 private:
     Node *_node;
-    QList<QGraphicsItem*> _edges;
 };
 
 #endif

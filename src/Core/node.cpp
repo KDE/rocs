@@ -35,6 +35,7 @@ Node::~Node() {
     empty(&_in_edges);
     empty(&_out_edges);
     empty(&_self_edges);
+    emit removed();
 }
 
 void Node::empty(QList<Edge*> *list) {
@@ -161,9 +162,7 @@ QList<Edge*> Node::edges(Node *n) {
 }
 
 void Node::remove() {
-    emit removed();
-    Graph *p = qobject_cast<Graph*>(QObject::parent());
-    p->remove(this);
+     qobject_cast<Graph*>(QObject::parent())->remove(this);
 }
 
 //! Properties:

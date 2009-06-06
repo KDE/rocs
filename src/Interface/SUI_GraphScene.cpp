@@ -70,10 +70,6 @@ QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
     qreal x1 = e->from()->x(), y1 = e->from()->y();
     qreal x2 = e->to()->x(),  y2 = e->to()->y();
 
-    NodeItem *nFrom = qgraphicsitem_cast<NodeItem*>(itemAt(x1,y1));
-    NodeItem *nTo  = qgraphicsitem_cast<NodeItem*>(itemAt(x2,y2));
-    nFrom->addEdge(edgeItem);
-    nTo->addEdge(edgeItem);
     insertGraphItem(g, edgeItem);
     return edgeItem;
 }
@@ -115,6 +111,11 @@ void GraphScene::clearGraph() {
         }
         _hashGraphs.remove(g);
     }
+}
+
+void GraphScene::removeGItem(QGraphicsItem *i){
+  _hashGraphs.remove(_graph, i);
+  removeItem(i);
 }
 
 void GraphScene::updateGraph(Graph *g) {

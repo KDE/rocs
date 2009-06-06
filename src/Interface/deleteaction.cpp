@@ -39,22 +39,14 @@ void DeleteAction::executePress(QPointF pos)
 {
    QGraphicsItem * item = _graphScene->itemAt(pos);
    if ( NodeItem *n  = qgraphicsitem_cast<NodeItem*>(item) ){ 
-	Node *node = n->node();
-	node->self_remove();
-	_graphScene->updateDocument(); //! TODO: we don't want to redraw the whole document, we just want to remove the edges connected to this node, and this node on the screen;
-        return;
+      qDebug() << "Tentando remover o node. NodeItem: " << n->objectName() ;
+	n->node()->remove();
     }
     else if( EdgeItem *e = qgraphicsitem_cast<EdgeItem*>(item) ){
-	Edge *edge = e->edge();
-	edge->self_remove();
-	//_graphScene->updateDocument(); //! TODO: we don't want to redraw the whole document, we just want to remove the edges connected to this node, and this node on the screen;
-        return;
+	e->edge()->remove();
     }
    else if( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ){
-	Edge *edge = e->edge();
-	edge->self_remove();
-	//_graphScene->updateDocument(); //! TODO: we don't want to redraw the whole document, we just want to remove the edges connected to this node, and this node on the screen;
-        return;
+	e->edge()->remove();
     }
   qDebug() << "Item Removed!";
 }
