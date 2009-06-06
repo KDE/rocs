@@ -61,7 +61,7 @@ void EdgeItem::connectSignals() {
 void EdgeItem::setupPen() {
     _pen = new QPen();
     _pen->setStyle(Qt::SolidLine);
-    _pen->setWidth(2);
+    _pen->setWidth(1);
     _pen->setBrush(_edge->color());
     _pen->setCapStyle(Qt::RoundCap);
     _pen->setJoinStyle(Qt::RoundJoin);
@@ -71,14 +71,12 @@ void EdgeItem::setupPen() {
 void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     update();
-   // QGraphicsItem::mousePressEvent(event);
-}
+ }
 
 void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     update();
-  //  QGraphicsItem::mouseReleaseEvent(event);
-}
+ }
 
 void EdgeItem::remove() {
     dynamic_cast<GraphScene*>(scene())->removeGItem(this);
@@ -92,18 +90,14 @@ void EdgeItem::updatePos() {
 }
 
 void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-    if (!isSelected()) {
-        _pen->setWidth(2);
-        _pen->setBrush(_edge->color().light(120));
+  if (isSelected()) {
 	_pen->setStyle(Qt::DotLine);
-        QGraphicsLineItem::paint(painter, option);
     }
-    else {
-        _pen -> setWidth(4);
-        _pen->setBrush(_edge->color().light(120));
-        painter->setPen((*_pen));
-        painter->drawLine(line());
+    else{
+	_pen->setStyle(Qt::SolidLine);
     }
+    painter->setPen((*_pen));
+    painter->drawLine(line());
 }
 
 void EdgeItem::updateName(const QString& ) {}

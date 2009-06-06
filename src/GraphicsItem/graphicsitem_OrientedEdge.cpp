@@ -61,13 +61,13 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
 }
 
 void OrientedEdgeItem::setupPen() {
-    QPen pen;
-    pen.setStyle(Qt::SolidLine);
-    pen.setWidth(2);
-    pen.setBrush(_edge->color());
-    pen.setCapStyle(Qt::RoundCap);
-    pen.setJoinStyle(Qt::RoundJoin);
-    setPen( pen );    // ! Connect the Edge's Signals.
+    _pen = new QPen();
+    _pen->setStyle(Qt::SolidLine);
+    _pen->setWidth(2);
+    _pen->setBrush(_edge->color());
+    _pen->setCapStyle(Qt::RoundCap);
+    _pen->setJoinStyle(Qt::RoundJoin);
+    setPen( *_pen );
 }
 
 void OrientedEdgeItem::connectSignals() {
@@ -99,22 +99,25 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
     return arrow;
 }
 
+QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const{
+	QPainterPath p;
+        Graph *g = qobject_cast<Graph*>(_edge->parent());
+        qreal size = 30 + (20 * _index);
+        qreal angle = atan2((pos.x() - g->relativeCenter().x()), (pos.y() - g->relativeCenter().y()));
+        qreal posx = (pos.x()-(((size/2) * sin(angle)) * -1)-(size/2));
+        qreal posy = (pos.y()+(((size/2) * cos(angle)))-(size/2));
+        p.addEllipse( posx, posy, size, size);
+	return p;
+}
+
 QPainterPath OrientedEdgeItem::createCurves() const {
     /// Calculate the angle.
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
     QPointF Pos2(_edge->to()->x(), _edge->to()->y());
     QPainterPath p;
 
-    if ( _loop ) {
-        Graph *g = qobject_cast<Graph*>(_edge->parent());
-        qreal size = 30 + (20 * _index);
-        qreal angle = atan2((Pos1.x() - g->relativeCenter().x()), (Pos1.y() - g->relativeCenter().y()));
-        qreal posx = (Pos1.x()-(((size/2) * sin(angle)) * -1)-(size/2));
-        qreal posy = (Pos1.y()+(((size/2) * cos(angle)))-(size/2));
-        p.addEllipse( posx, posy, size, size);
-        return p;
-    }
-
+    if ( _loop ) return createLoop(Pos1);
+    
     QPolygonF arrow = createArrow(Pos1,  Pos2);
 
     /// Draw the line if it is to draw the line.
@@ -148,9 +151,10 @@ QPainterPath OrientedEdgeItem::createCurves() const {
 // 	    }
 //	 }
 //	 else {
-        qreal theta = angle + PI_2;
+//        qreal theta = angle + PI_2;
 //	 }
-
+	
+	qreal theta = angle + PI_2;
         qreal finalX = cos(theta);
         qreal finalY = sin(theta);
         int index = _index;
@@ -187,29 +191,31 @@ QPainterPath OrientedEdgeItem::createCurves() const {
 }
 
 QPainterPath OrientedEdgeItem::shape() const{
-  QPainterPath p = this->createCurves();
-  return p;
+  return createCurves();
 }
 
 void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-    painter->drawRect(boundingRect());
-    QGraphicsPathItem::paint(painter, option);
+    
+    if (isSelected()) {
+	_pen->setStyle(Qt::DotLine);
+    }
+    else {
+        _pen->setStyle(Qt::SolidLine);
+    }
+    painter->setPen((*_pen));
+    painter->drawPath(path());
+
 }
 
-void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
+void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event){
     update();
-  //  QGraphicsItem::mousePressEvent(event);
-}
+ }
 
-void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
+void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     update();
- //   QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void OrientedEdgeItem::remove() {
-    qDebug() << "Removing Oriented Edge";
     dynamic_cast<GraphScene*>(scene())->removeGItem(this);
     deleteLater();
 }
@@ -217,7 +223,6 @@ void OrientedEdgeItem::remove() {
 void OrientedEdgeItem::updatePos() {
     setPath(createCurves());
 }
-
 
 void OrientedEdgeItem::updateName(const QString& ) {}
 void OrientedEdgeItem::updateVisited(bool ) {}
