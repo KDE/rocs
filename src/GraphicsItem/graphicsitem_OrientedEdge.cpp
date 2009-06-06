@@ -52,8 +52,8 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     _loop = (_edge->from() == edge->to()) ? true : false;
     _index = _edge->relativeIndex();
 
-    setZValue(-_index);
-    setFlag(ItemIsSelectable);
+    setZValue( - _index);
+    setFlag(ItemIsSelectable, true);
     connectSignals();
     setupPen();
 
@@ -75,7 +75,7 @@ void OrientedEdgeItem::connectSignals() {
   connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
-QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) {
+QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const {
     QLineF line(Pos1, Pos2);
     qreal angle = ::acos(line.dx() / line.length());
 
@@ -99,7 +99,7 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
     return arrow;
 }
 
-QPainterPath OrientedEdgeItem::createCurves() {
+QPainterPath OrientedEdgeItem::createCurves() const {
     /// Calculate the angle.
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
     QPointF Pos2(_edge->to()->x(), _edge->to()->y());
@@ -186,20 +186,26 @@ QPainterPath OrientedEdgeItem::createCurves() {
     return p;
 }
 
+QPainterPath OrientedEdgeItem::shape() const{
+  QPainterPath p = this->createCurves();
+  return p;
+}
+
 void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+    painter->drawRect(boundingRect());
     QGraphicsPathItem::paint(painter, option);
 }
 
 void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     update();
-    QGraphicsItem::mousePressEvent(event);
+  //  QGraphicsItem::mousePressEvent(event);
 }
 
 void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     update();
-    QGraphicsItem::mouseReleaseEvent(event);
+ //   QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void OrientedEdgeItem::remove() {

@@ -46,7 +46,11 @@ void DeleteAction::executePress(QPointF pos)
 	e->edge()->remove();
     }
    else if( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ){
+      qDebug() << "Should have deleted the oriented node.";
 	e->edge()->remove();
+    }
+    else{
+      qDebug() << "Nog getting any item.";
     }
   qDebug() << "Item Removed!";
 }

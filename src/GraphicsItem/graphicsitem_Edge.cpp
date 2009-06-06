@@ -71,13 +71,13 @@ void EdgeItem::setupPen() {
 void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     update();
-    QGraphicsItem::mousePressEvent(event);
+   // QGraphicsItem::mousePressEvent(event);
 }
 
 void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     update();
-    QGraphicsItem::mouseReleaseEvent(event);
+  //  QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void EdgeItem::remove() {
@@ -94,7 +94,8 @@ void EdgeItem::updatePos() {
 void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
     if (!isSelected()) {
         _pen->setWidth(2);
-        _pen->setBrush(_edge->color());
+        _pen->setBrush(_edge->color().light(120));
+	_pen->setStyle(Qt::DotLine);
         QGraphicsLineItem::paint(painter, option);
     }
     else {

@@ -54,7 +54,8 @@ public:
     Edge* edge() {
         return _edge;
     }
-
+    QPainterPath shape() const;
+    
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 protected:
     /*! when there's a mouse click on the node, this method is invocked
@@ -80,10 +81,10 @@ public slots:
 private:
     Edge *_edge;
     int _index;
-    bool _loop; // if the edge is connected with the same node twice.
-    QPainterPath createCurves();
-    void connectSignals(); // All signals are connected here.
-    QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2);
+    bool _loop;
+    QPainterPath createCurves() const;
+    QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const;
+    void connectSignals(); 
     void setupPen();
 };
 
