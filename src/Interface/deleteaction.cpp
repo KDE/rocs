@@ -25,6 +25,9 @@
 #include <QKeyEvent>
 #include "SUI_GraphScene.h"
 #include "node.h"
+#include "edge.h"
+#include <graphicsitem_Edge.h>
+#include <graphicsitem_OrientedEdge.h>
 
 DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent){
     setText(i18n ( "Delete" ));
@@ -41,7 +44,18 @@ void DeleteAction::executePress(QPointF pos)
 	_graphScene->updateDocument(); //! TODO: we don't want to redraw the whole document, we just want to remove the edges connected to this node, and this node on the screen;
         return;
     }
-
+    else if( EdgeItem *e = qgraphicsitem_cast<EdgeItem*>(item) ){
+	Edge *edge = e->edge();
+	edge->self_remove();
+	//_graphScene->updateDocument(); //! TODO: we don't want to redraw the whole document, we just want to remove the edges connected to this node, and this node on the screen;
+        return;
+    }
+   else if( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ){
+	Edge *edge = e->edge();
+	edge->self_remove();
+	//_graphScene->updateDocument(); //! TODO: we don't want to redraw the whole document, we just want to remove the edges connected to this node, and this node on the screen;
+        return;
+    }
   qDebug() << "Item Removed!";
 }
 

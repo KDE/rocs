@@ -23,6 +23,7 @@
 
 #include <QGraphicsLineItem>
 #include <QList>
+#include <graphicsitem_Node.h>
 
 class QGraphicsSceneMouseEvent;
 class QPen;
@@ -68,7 +69,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 public slots:
-    void removed();
+    void remove();
     void updatePos();
     void updateName(const QString& name);
     void updateVisited(bool v);
@@ -82,6 +83,8 @@ private:
     void setupPen();
     Edge *_edge;
     QPen *_pen;
+    NodeItem *_fromItem;
+    NodeItem *_toItem;
 };
 
 #endif

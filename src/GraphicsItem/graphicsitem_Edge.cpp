@@ -41,7 +41,7 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsLineItem(parent) {
 
     _edge = edge;
-
+    connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));
     setCacheMode(DeviceCoordinateCache);
     setZValue(0);
     setFlag(ItemIsSelectable);
@@ -52,7 +52,7 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
 }
 
 void EdgeItem::connectSignals() {
-    connect (_edge, SIGNAL(removed()), this, SLOT(removed()));
+    connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
 void EdgeItem::setupPen() {
@@ -77,11 +77,13 @@ void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-void EdgeItem::removed() {
-    kDebug() << " Not Implemented Yet " << "removed";
+void EdgeItem::remove() {
+    scene()->removeItem(this);
+    deleteLater();
 }
 
 void EdgeItem::updatePos() {
+    qDebug() << "Calling Everything!";
     setLine( _edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
     update();
 }

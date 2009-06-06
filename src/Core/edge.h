@@ -103,6 +103,9 @@ private:
     QtScriptBackend *_engine;
 #endif
 
+  signals:
+    void removed();
+    void posChanged();
 };
 
 #endif

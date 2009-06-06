@@ -157,19 +157,14 @@ void GraphPropertiesWidget::nodeBeginChanged(bool b){
 void GraphPropertiesWidget::nodeXChanged(int x){
   if (!_node) return;
   if (NodeItem *n = qgraphicsitem_cast<NodeItem*>(_graphicsItem)){
-    n->updatePos(QPointF(x, _node->y()));
-    _graphicsItem->update();
+    n->node()->setX(x);
   }
-  
-  kDebug() << "x updated";
 }
 void GraphPropertiesWidget::nodeYChanged(int y){
   if (!_node) return;
   if (NodeItem *n = qgraphicsitem_cast<NodeItem*>(_graphicsItem)){
-    n->updatePos(QPointF(_node->x(), y));
-    _graphicsItem->update();
+    n->node()->setY(y);
   }
-  kDebug() << "y updated";
 }
 
 void GraphPropertiesWidget::nodeValueChanged(QString s){

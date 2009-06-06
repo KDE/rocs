@@ -60,16 +60,17 @@ void MoveNodeAction::executeMove(QPointF pos) {
     }
     if ((pos.x() < 0) || (pos.x() > _graphDocument->width())){
       if (( pos.y() > 0) && (pos.y() < _graphDocument->height())){
-	_movableNode -> updatePos( QPointF(_node->x(), pos.y()) );
+	_node -> setY(pos.y());
       }
     }
     else if ((pos.y() < 0) || (pos.y() > _graphDocument->height())){
       if (( pos.x() > 0) && (pos.x() < _graphDocument->width())){
-	_movableNode -> updatePos( QPointF(pos.x(),_node->y() ));
+	_node -> setX(pos.x());
       }
     }
    else{
-      _movableNode -> updatePos( pos );
+      _node -> setX(pos.x());
+      _node -> setY(pos.y());
     }
 }
 
@@ -77,12 +78,10 @@ void MoveNodeAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
         return;
     }
-    _view->setRenderHint(QPainter::Antialiasing, true);
-    if ((pos.x() < 0) || (pos.y() < 0) || (pos.x() > _graphDocument->width())|| (pos.y() > _graphDocument->height())){
-      _movableNode -> updatePos( QPointF(_node->x(), _node->y()) );
-    }
-    else{
-      _movableNode -> updatePos( pos );
+     _view->setRenderHint(QPainter::Antialiasing, true);
+    if (!((pos.x() < 0) || (pos.y() < 0) || (pos.x() > _graphDocument->width())|| (pos.y() > _graphDocument->height()))){
+      _node -> setY(pos.y());
+      _node -> setX(pos.x());
     }
     _movableNode = 0;
 }

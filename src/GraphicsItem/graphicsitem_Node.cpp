@@ -32,16 +32,18 @@
 #include "graphicsitem_Edge.h"
 #include "graphicsitem_OrientedEdge.h"
 #include <KDebug>
+#include <QDebug>
 
 NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
         : QObject(0), QGraphicsItem(parent)
 {
     _node = node;
+    connect(_node, SIGNAL(posChanged()), this, SLOT(updatePos()));
     QPointF pos( _node -> x() ,_node->y() );
     setPos( pos );
     setZValue(1);
     setFlag(ItemIsSelectable);
-    connect (_node, SIGNAL(removed()), this, SLOT(removed()));
+    connect (_node, SIGNAL(removed()), this, SLOT(remove()));
 }
 
 QRectF NodeItem::boundingRect() const {
@@ -98,35 +100,16 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
 }
 
-void NodeItem::updatePos(QPointF pos) {
-    _node->setX( pos.x());
-    _node->setY( pos.y());
-    setPos( pos );
-
-    Graph *g = qobject_cast<Graph*>(_node->parent());
-    if (!g->directed()) {
-        foreach(QGraphicsItem* i, _edges) {
-            EdgeItem *edgeItem = qgraphicsitem_cast<EdgeItem*>(i);
-            edgeItem->updatePos();
-        }
-    }
-    else {
-        foreach(QGraphicsItem* i, _edges) {
-            OrientedEdgeItem *edgeItem = qgraphicsitem_cast<OrientedEdgeItem*>(i);
-            edgeItem->updatePos();
-        }
-        /*FIXME: add a way to every loop node be updated. */
-    }
-}
-
+void NodeItem::updatePos() {   setPos( QPointF(_node->x(), _node->y() ) ); qDebug() << "Movendo Corretamente"; }
 void NodeItem::updateName(const QString& ) {}
 void NodeItem::updateVisited(bool ) {}
 void NodeItem::updateValue(qreal ) {}
 void NodeItem::updateTotal(qreal ) {}
 void NodeItem::updateColor(QColor ) {}
 
-void NodeItem::removed() {
-    kDebug() << " Not Implemented Yet " << "removed";
+void NodeItem::remove() {
+    scene()->removeItem(this);
+    deleteLater();
 }
 
 void NodeItem::addEdge(QGraphicsItem *e) {

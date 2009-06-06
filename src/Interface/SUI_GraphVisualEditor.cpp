@@ -190,7 +190,8 @@ void GraphVisualEditor::alignHBottom() {
         }
     }
     foreach(NodeItem *i, l) {
-        i -> updatePos(QPointF(i->scenePos().x(), bottom));
+      Node *n = i->node();
+        n -> setY(bottom);
     }
 
 }
@@ -215,7 +216,7 @@ void GraphVisualEditor::alignHMiddle() {
     }
     qreal middle = (top + bottom) / 2;
     foreach(NodeItem *i, l) {
-        i -> updatePos(QPointF(i->scenePos().x(), middle));
+	i->node()->setY(middle);
     }
 }
 void GraphVisualEditor::alignHTop() {
@@ -232,7 +233,7 @@ void GraphVisualEditor::alignHTop() {
         }
     }
     foreach(NodeItem *i, l) {
-        i -> updatePos(QPointF(i->scenePos().x(), top));
+        i -> node() -> setY(top);
     }
 
 }
@@ -250,7 +251,7 @@ void GraphVisualEditor::alignVLeft() {
         }
     }
     foreach(NodeItem *i, l) {
-        i -> updatePos(QPointF(left, i->scenePos().y()));
+        i -> node() -> setX(left);
     }
 }
 
@@ -272,7 +273,7 @@ void GraphVisualEditor::alignVMiddle() {
     }
     qreal middle = ( left +	right) / 2;
     foreach(NodeItem *i, l) {
-        i -> updatePos(QPointF(middle, i->scenePos().y()));
+        i -> node() -> setX(middle);
     }
 }
 
@@ -288,7 +289,7 @@ void GraphVisualEditor::alignVRight() {
         }
     }
     foreach(NodeItem *i, l) {
-        i -> updatePos(QPointF(right, i->scenePos().y()));
+        i -> node() -> setX(right);
     }
 
 }

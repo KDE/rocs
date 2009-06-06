@@ -161,19 +161,21 @@ QList<Edge*> Node::edges(Node *n) {
 }
 
 void Node::remove() {
+    emit removed();
     Graph *p = qobject_cast<Graph*>(QObject::parent());
     p->remove(this);
 }
 
 //! Properties:
-void Node::setX(qreal x) {    _x = x; }
+void Node::setX(qreal x) {  _x = x; emit posChanged(); }
 qreal Node::x() const {    return _x; }
-void Node::setY(qreal y) {    _y  = y; }
+void Node::setY(qreal y) {  _y  = y; emit posChanged(); }
 qreal Node::y() const {    return _y; }
 void Node::setColor(const QString& s) {    _color = s; }
 const QString& Node::color() const {    return _color; }
 void Node::setName(const QString& s) {    _name = s;}
 const QString& Node::name() const {    return _name;}
+
 void Node::setBegin(bool begin){
   _begin = begin;
    if(begin){
@@ -191,6 +193,7 @@ void Node::setEnd(bool end){
     p->removeEnd(this);
   }
 }
+
 bool Node::begin() const { return _begin; }
 bool Node::end() const { return _end; }
 const QString& Node::value() const { return _value; }

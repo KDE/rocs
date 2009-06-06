@@ -68,7 +68,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 public slots:
-    void removed();
+    void remove();
     void updatePos();
     void updateName(const QString& name);
     void updateVisited(bool v);

@@ -120,6 +120,7 @@ private:
 
 signals:
     void removed();
+    void posChanged();
 };
 
 #endif

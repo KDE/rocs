@@ -30,10 +30,13 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
     setProperty("color", "#FF00FF");
 
     if ( from == to ) {
+	connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
         from -> addSelfEdge(this);
     }
     else {
+      connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
         from -> addOutEdge(this);
+      connect(to, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
         to -> addInEdge(this);
     }
 
@@ -68,6 +71,7 @@ int Edge::relativeIndex() const {
 
 void Edge::remove() {
     Graph *p = qobject_cast<Graph*>(QObject::parent());
+    emit removed();
     p->remove(this);
 }
 

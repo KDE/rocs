@@ -52,6 +52,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
 }
 QGraphicsItem *GraphScene::createNode(Graph *g, Node *n) {
     NodeItem *nItem = new NodeItem(n);
+    connect(n, SIGNAL(removed()), nItem, SLOT(remove()));
     insertGraphItem(g, nItem);
     return nItem;
 }
@@ -66,10 +67,8 @@ QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
         edgeItem = new OrientedEdgeItem(e);
     }
 
-    qreal x1 = e->from()->x();
-    qreal y1 = e->from()->y();
-    qreal x2 = e->to()->x();
-    qreal y2 = e->to()->y();
+    qreal x1 = e->from()->x(), y1 = e->from()->y();
+    qreal x2 = e->to()->x(),  y2 = e->to()->y();
 
     NodeItem *nFrom = qgraphicsitem_cast<NodeItem*>(itemAt(x1,y1));
     NodeItem *nTo  = qgraphicsitem_cast<NodeItem*>(itemAt(x2,y2));

@@ -79,10 +79,10 @@ protected slots:
     void updateColor(QColor c);
 
     /*! Emited when a node is removed */
-    void removed();
+    void remove();
 
 public slots:
-    void updatePos(QPointF);
+    void updatePos();
 
 private:
     Node *_node;
