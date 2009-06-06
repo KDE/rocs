@@ -203,6 +203,7 @@ void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 void OrientedEdgeItem::remove() {
+    qDebug() << "Removing Oriented Edge";
     dynamic_cast<GraphScene*>(scene())->removeGItem(this);
     deleteLater();
 }
