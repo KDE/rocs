@@ -51,20 +51,17 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     _edge = edge;
     _loop = (_edge->from() == edge->to()) ? true : false;
     _index = _edge->relativeIndex();
-
+    _pen = new QPen();
     setZValue( - _index);
     setFlag(ItemIsSelectable, true);
     connectSignals();
     setupPen();
-
     setPath(createCurves());
 }
 
 void OrientedEdgeItem::setupPen() {
-    _pen = new QPen();
     _pen->setStyle(Qt::SolidLine);
     _pen->setWidth(2);
-    _pen->setBrush(_edge->color());
     _pen->setCapStyle(Qt::RoundCap);
     _pen->setJoinStyle(Qt::RoundJoin);
     setPen( *_pen );
@@ -112,10 +109,11 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const{
 
 QPainterPath OrientedEdgeItem::createCurves() const {
     /// Calculate the angle.
+   
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
     QPointF Pos2(_edge->to()->x(), _edge->to()->y());
     QPainterPath p;
-
+   
     if ( _loop ) return createLoop(Pos1);
     
     QPolygonF arrow = createArrow(Pos1,  Pos2);
@@ -195,7 +193,7 @@ QPainterPath OrientedEdgeItem::shape() const{
 }
 
 void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-    
+     _pen->setBrush(QColor(_edge->color()));
     if (isSelected()) {
 	_pen->setStyle(Qt::DotLine);
     }

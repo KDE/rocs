@@ -74,24 +74,12 @@ void Edge::remove() {
   qobject_cast<Graph*>(QObject::parent())->remove(this);
 }
 
-const QString& Edge::value() const{
-  return _value;
-}
-void Edge::setValue (const QString& s){
-  _value = s;
-}
-const QString& Edge::name() const{
-  return _name;
-}
-void Edge::setName (const QString& s){
-  _name = s;
-}
-QColor Edge::color() const{
-  return _color;
-}
-void Edge::setColor(QColor s){
-  _color = s;
-}
+const QString& Edge::value() const{   return _value; }
+void Edge::setValue (const QString& s){  _value = s; }
+const QString& Edge::name() const{  return _name; }
+void Edge::setName (const QString& s){  _name = s; }
+const QString Edge::color() const{   return _color; }
+void Edge::setColor(const QString& s){  _color = s; }
     
 #ifdef USING_QTSCRIPT
 

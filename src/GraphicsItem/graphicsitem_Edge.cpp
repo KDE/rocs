@@ -43,7 +43,7 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsLineItem(parent) {
 
     _edge = edge;
-  
+    _pen = new QPen();  
     setCacheMode(DeviceCoordinateCache);
     setZValue(0);
     setFlag(ItemIsSelectable);
@@ -59,22 +59,18 @@ void EdgeItem::connectSignals() {
 }
 
 void EdgeItem::setupPen() {
-    _pen = new QPen();
     _pen->setStyle(Qt::SolidLine);
     _pen->setWidth(1);
-    _pen->setBrush(_edge->color());
     _pen->setCapStyle(Qt::RoundCap);
     _pen->setJoinStyle(Qt::RoundJoin);
     setPen( (*_pen) );
 }
 
-void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
+void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event){
     update();
  }
 
-void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
+void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     update();
  }
 
@@ -90,6 +86,7 @@ void EdgeItem::updatePos() {
 }
 
 void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+    _pen->setBrush(QColor(_edge->color()));
   if (isSelected()) {
 	_pen->setStyle(Qt::DotLine);
     }

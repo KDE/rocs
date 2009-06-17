@@ -51,7 +51,7 @@ class Edge : public QObject {
     Q_OBJECT
     
     /*! all properties are accessible from the scripting engine via .propertyName */
-    Q_PROPERTY(QColor color READ color WRITE setColor);
+    Q_PROPERTY(QString color READ color WRITE setColor);
     Q_PROPERTY(QString value READ value WRITE setValue);
     Q_PROPERTY(QString name READ name WRITE setName);
     
@@ -81,8 +81,8 @@ public  slots:
     void setValue (const QString& s);
     const QString& name() const;
     void setName (const QString& s);
-    QColor color() const;
-    void setColor(QColor s);
+    const QString color() const;
+    void setColor(const QString& s);
     
 #ifdef USING_QTSCRIPT
     QScriptValue start();
@@ -96,7 +96,7 @@ private:
     int _relativeIndex;
     QString _value;
     QString _name;
-    QColor _color;
+    QString _color;
     
 #ifdef USING_QTSCRIPT
     QScriptValue _scriptvalue;
