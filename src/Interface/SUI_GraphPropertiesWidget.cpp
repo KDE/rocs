@@ -50,6 +50,7 @@ GraphPropertiesWidget::GraphPropertiesWidget ( MainWindow* parent )
   connect(_edgeColor, SIGNAL(activated(QColor)),    this, SLOT(edgeColorChanged(QColor)) );
   connect(_edgeName, SIGNAL(textChanged(const QString&)),  this, SLOT(edgeNameChanged(const QString&)));
   connect(_edgeValue, SIGNAL(textChanged(const QString&)), this, SLOT(edgeValueChanged(const QString&)));
+  
 }
 
 void GraphPropertiesWidget::setDataSource(QGraphicsItem *o) {
@@ -60,6 +61,8 @@ void GraphPropertiesWidget::setDataSource(QGraphicsItem *o) {
 
     QObject *obj = 0;
     unsetAll();
+    _graphicsItem = o;
+
     if ( o == 0){
       if (Graph *g = _mainWindow->graph()){
 	 obj = g;
@@ -68,18 +71,14 @@ void GraphPropertiesWidget::setDataSource(QGraphicsItem *o) {
       }
     }
     else if( NodeItem *nodeItem = qgraphicsitem_cast<NodeItem*>(o) ){
-      _graphicsItem = nodeItem;      
       obj = nodeItem->node();
       setNode(nodeItem->node());
-      kDebug() << "Node Setted";
     }
     else if( EdgeItem *edgeItem = qgraphicsitem_cast<EdgeItem*>(o)){
-      _graphicsItem = edgeItem;
       obj = edgeItem->edge();
       setEdge(edgeItem->edge());
     }
     else if ( OrientedEdgeItem *edgeItem = qgraphicsitem_cast<OrientedEdgeItem*>(o)){
-      _graphicsItem = edgeItem;
       obj = edgeItem->edge();
       setEdge(edgeItem->edge());
     } 
@@ -102,7 +101,6 @@ void GraphPropertiesWidget::setNode(Node *n){
   _nodeValue->setText(_node->value());
   _nodeX->setValue(_node->x());
   _nodeY->setValue(_node->y());
-  
 }
 
 void GraphPropertiesWidget::setEdge(Edge *e){
