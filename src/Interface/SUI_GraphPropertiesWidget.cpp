@@ -58,31 +58,23 @@ void GraphPropertiesWidget::setDataSource(QGraphicsItem *o) {
        _nodeX->setRange(0,g->width());
       _nodeY->setRange(0, g->height());
     }
-
-    QObject *obj = 0;
+  
     unsetAll();
     _graphicsItem = o;
 
     if ( o == 0){
-      if (Graph *g = _mainWindow->graph()){
-	 obj = g;
-	 setGraph(g);
-	 _graphicsItem = 0;
-      }
+      setGraph( _mainWindow->graph());
     }
     else if( NodeItem *nodeItem = qgraphicsitem_cast<NodeItem*>(o) ){
-      obj = nodeItem->node();
       setNode(nodeItem->node());
     }
     else if( EdgeItem *edgeItem = qgraphicsitem_cast<EdgeItem*>(o)){
-      obj = edgeItem->edge();
       setEdge(edgeItem->edge());
     }
     else if ( OrientedEdgeItem *edgeItem = qgraphicsitem_cast<OrientedEdgeItem*>(o)){
-      obj = edgeItem->edge();
       setEdge(edgeItem->edge());
     } 
-    _model->setDataSource(obj);
+    _model->setDataSource(_obj);
 }
 
 void GraphPropertiesWidget::unsetAll(){
@@ -93,6 +85,7 @@ void GraphPropertiesWidget::unsetAll(){
 
 void GraphPropertiesWidget::setNode(Node *n){
   _node = n;
+  _obj = n;
   _nodePAnel->show();
   _nodeName->setText(_node->name());
   _nodeColor->setColor(_node->color());
@@ -105,6 +98,7 @@ void GraphPropertiesWidget::setNode(Node *n){
 
 void GraphPropertiesWidget::setEdge(Edge *e){
   _edge = e;
+  _obj = e;
   _edgePanel->show();
   _edgeName->setText(_edge->name());
   _edgeColor->setColor(_edge->color());
@@ -112,24 +106,33 @@ void GraphPropertiesWidget::setEdge(Edge *e){
 }
 
 void GraphPropertiesWidget::setGraph(Graph *g){
-
+  _obj = g;
 }
 
 void GraphPropertiesWidget::unsetNode(){
   _node = 0;
+  _obj = 0;
   _graphicsItem = 0;
   _nodePAnel->hide();
 }
 
 void GraphPropertiesWidget::unsetGraph(){
   _graph = 0;
+  _obj = 0;
   _graphPanel->hide();
 }
 
 void GraphPropertiesWidget::unsetEdge(){
   _edge = 0;
+  _obj = 0;
   _graphicsItem = 0;
   _edgePanel->hide();
+}
+
+void GraphPropertiesWidget::on__btnAddProperty_clicked(){
+  if (_obj == 0) return;
+  _obj->setProperty(_txtPropertyName->text().toAscii(), _txtPropertyValue->text());
+   _model->setDataSource(_obj);
 }
 
 void GraphPropertiesWidget::nodeNameChanged(const QString& s){
@@ -143,6 +146,7 @@ void GraphPropertiesWidget::nodeColorChanged(QColor c){
   _node->setColor(c.name());
   _graphicsItem->update();
 }
+
 void GraphPropertiesWidget::nodeEndChanged(bool b){
   if (!_node) return;
   _node->setEnd(b);

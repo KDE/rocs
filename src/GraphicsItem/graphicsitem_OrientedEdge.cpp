@@ -47,9 +47,8 @@
 OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsPathItem(parent)
 {
-
     _edge = edge;
-    _loop = (_edge->from() == edge->to()) ? true : false;
+    _loop = (_edge->from() == edge->to());
     _index = _edge->relativeIndex();
     _pen = new QPen();
     setZValue( - _index);
@@ -111,10 +110,10 @@ QPainterPath OrientedEdgeItem::createCurves() const {
     /// Calculate the angle.
    
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
+    if ( _loop ) return createLoop(Pos1);
+
     QPointF Pos2(_edge->to()->x(), _edge->to()->y());
     QPainterPath p;
-   
-    if ( _loop ) return createLoop(Pos1);
     
     QPolygonF arrow = createArrow(Pos1,  Pos2);
 

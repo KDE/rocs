@@ -51,11 +51,14 @@ private slots:
   void edgeColorChanged(QColor c);
   void edgeNameChanged(const QString& s);
   void edgeValueChanged(const QString& s);
+  void on__btnAddProperty_clicked();
+
 private:
     GraphPropertiesModel *_model;
     Graph *_graph;
     Node *_node;
     Edge *_edge;
+    QObject *_obj;
     QGraphicsItem *_graphicsItem;
     MainWindow *_mainWindow;
     
