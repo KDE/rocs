@@ -21,6 +21,7 @@
 #include "SUI_GraphPropertiesWidget.h"
 #include "model_GraphProperties.h"
 #include <KDebug>
+#include <QVariant>
 #include <QGraphicsItem>
 #include "graph.h"
 #include "graphDocument.h"
@@ -131,7 +132,15 @@ void GraphPropertiesWidget::unsetEdge(){
 
 void GraphPropertiesWidget::on__btnAddProperty_clicked(){
   if (_obj == 0) return;
-  _obj->setProperty(_txtPropertyName->text().toAscii(), _txtPropertyValue->text());
+  if (_txtPropertyName->text().isEmpty()) return;
+  _model->setDataSource(0);
+  if (_txtPropertyValue->text().isEmpty()){
+    _obj->setProperty(_txtPropertyName->text().toAscii(), QVariant());
+  }
+  else{
+    _obj->setProperty(_txtPropertyName->text().toAscii(), _txtPropertyValue->text());
+  }
+
    _model->setDataSource(_obj);
 }
 
