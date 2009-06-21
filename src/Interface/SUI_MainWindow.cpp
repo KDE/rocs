@@ -121,8 +121,7 @@ void MainWindow::setupWidgets() {
 
     _leftTabBar->appendTab(KIcon("document-open").pixmap(16), 0, "Files");
     _leftTabBar->appendTab(KIcon("applications-system").pixmap(16), 1, "Tools");
-    _leftTabBar->appendTab(KIcon("document-properties").pixmap(16), 2, "Properties");
-
+    
     QWidget *centralWidget = new QWidget(this);
     QHBoxLayout *l1 = new QHBoxLayout();
 
@@ -205,29 +204,30 @@ QWidget* MainWindow::setupRightPanel() {
 void MainWindow::releaseRunButton() {
     _bottomTabBar->setTab(_bottomTabId, true);
     _bottomTabBar->setTab(2, false);
-    kDebug() << "Tab 2 deveria ter desligado";
 }
 
 QWidget* MainWindow::setupLeftPanel() {
     //! constructing the Default Looking LeftSide menu.
     QWidget *toolBox = new QWidget( this );
+    QWidget *palletePropertiesHolder = new QWidget(this);
 
     _OpenedFiles = new OpenedFilesWidget ( _documentModel, toolBox );
     _PaletteBar	= new PaletteBarWidget	( toolBox );
     _GraphProperties = new GraphPropertiesWidget( this );
 
+    palletePropertiesHolder -> setLayout(new QVBoxLayout());
+    palletePropertiesHolder -> layout() -> addWidget( _PaletteBar );
+    palletePropertiesHolder -> layout() -> addWidget( _GraphProperties );
     QStackedWidget *toolsStack = new QStackedWidget();
 
     toolsStack->addWidget( _OpenedFiles );
-    toolsStack->addWidget( _PaletteBar );
-    toolsStack->addWidget( _GraphProperties );
-
-
+    toolsStack->addWidget( palletePropertiesHolder );
+ 
     QHBoxLayout	*toolBoxLayout = new QHBoxLayout( toolBox );
     toolBoxLayout->addWidget(toolsStack);
     toolBox->setLayout(toolBoxLayout);
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 2; ++i) {
         connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
         connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseLeftTabbarButton(int)));
     }
