@@ -41,13 +41,16 @@ public slots:
     void setDataSource(QGraphicsItem *o);
     
 private slots:
-  void nodeNameChanged(QString s);
+  void nodeNameChanged(const QString& s);
   void nodeColorChanged(QColor c);
   void nodeEndChanged(bool b);
   void nodeBeginChanged(bool b);
   void nodeXChanged(int x);
   void nodeYChanged(int y);
-  void nodeValueChanged(QString s);
+  void nodeValueChanged(const QString& s);
+  void edgeColorChanged(QColor c);
+  void edgeNameChanged(const QString& s);
+  void edgeValueChanged(const QString& s);
 private:
     GraphPropertiesModel *_model;
     Graph *_graph;
