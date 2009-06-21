@@ -103,15 +103,23 @@ void SelectAction::multiSelect(QPointF pos){
 }
 
 void SelectAction::singleSelect(QPointF pos){
-    QGraphicsItem * item = _graphScene->itemAt(pos);
-    if ( !qgraphicsitem_cast<NodeItem*>(item) && !qgraphicsitem_cast<EdgeItem*>(item) && !qgraphicsitem_cast<OrientedEdgeItem*>(item)){
-        emit ItemSelectedChanged(0);
-        return;
+    QGraphicsItem * item = 0;
+    QGraphicsEllipseItem *tmpItem = new QGraphicsEllipseItem(pos.x()-5,pos.y()-5,10,10);
+    _graphScene->addItem(tmpItem);
+    
+    if (tmpItem->collidingItems().empty()){
+      kDebug() << "Não está colidindo com nada";
+      _graphScene->removeItem(tmpItem);
+      delete tmpItem;
+      return;
+    }else{
+      item = tmpItem->collidingItems()[0];
     }
-
+    
     item->setSelected(true);
     emit ItemSelectedChanged(item);
     item->update();
     qDebug() << "Item Selected!";
+    delete tmpItem;
 }
 #include "action_Select.moc"
