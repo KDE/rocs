@@ -61,7 +61,7 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
 
 void OrientedEdgeItem::setupPen() {
     _pen->setStyle(Qt::SolidLine);
-    _pen->setWidth(2);
+    _pen->setWidth(1);
     _pen->setCapStyle(Qt::RoundCap);
     _pen->setJoinStyle(Qt::RoundJoin);
     setPen( *_pen );
@@ -139,19 +139,6 @@ QPainterPath OrientedEdgeItem::createCurves() const {
 
         /// Calculate the size of the inclination on the curve.
 
-//	if((((angle) / (PI_4) - floor(angle / (PI_4))) >= 0.01)) {
-// 	    qreal curve = (2 *((angle) / (PI_4) - floor(angle / (PI_4))) * PI_2) + PI_4;
-// 	    if ((angle / (PI_8)) - floor (angle / (PI_8))) {
-// 		theta = angle + curve;
-// 	    }
-// 	    else {
-// 		theta = angle - curve;
-// 	    }
-//	 }
-//	 else {
-//        qreal theta = angle + PI_2;
-//	 }
-	
 	qreal theta = angle + PI_2;
         qreal finalX = cos(theta);
         qreal finalY = sin(theta);
@@ -188,10 +175,6 @@ QPainterPath OrientedEdgeItem::createCurves() const {
     return p;
 }
 
-QPainterPath OrientedEdgeItem::shape() const{
-  return createCurves();
-}
-
 void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
      _pen->setBrush(QColor(_edge->color()));
     if (isSelected()) {
@@ -202,7 +185,6 @@ void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     }
     painter->setPen((*_pen));
     painter->drawPath(path());
-
 }
 
 void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event){

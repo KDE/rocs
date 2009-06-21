@@ -54,7 +54,6 @@ public:
     Edge* edge() {
         return _edge;
     }
-    QPainterPath shape() const;
     
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 protected:
