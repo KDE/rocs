@@ -102,18 +102,27 @@ void SelectAction::multiSelect(QPointF pos){
   
 }
 
+#include <QtAlgorithms>
+bool zValue(QGraphicsItem *i1, QGraphicsItem *i2){
+  return i1->zValue() < i2->zValue();
+}
+
+
 void SelectAction::singleSelect(QPointF pos){
     QGraphicsItem * item = 0;
     QGraphicsEllipseItem *tmpItem = new QGraphicsEllipseItem(pos.x()-5,pos.y()-5,10,10);
     _graphScene->addItem(tmpItem);
     
     if (tmpItem->collidingItems().empty()){
-      kDebug() << "Não está colidindo com nada";
+      kDebug() << "No Colisions";
       _graphScene->removeItem(tmpItem);
       delete tmpItem;
       return;
     }else{
-      item = tmpItem->collidingItems()[0];
+      QList<QGraphicsItem*> items = tmpItem->collidingItems();
+      
+      qSort(items.begin(), items.end(), zValue);
+      item = items.at(items.size()-1);
     }
     
     item->setSelected(true);

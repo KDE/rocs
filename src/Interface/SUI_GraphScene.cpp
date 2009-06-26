@@ -38,7 +38,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
     QGraphicsRectItem *n = new QGraphicsRectItem(0,0, gd->width(), gd->height());
     n->setFlag(QGraphicsItem::ItemIsSelectable, false);
-    n->setZValue(-1);
+    n->setZValue(-1000);
     addItem(n);
     
     int size = _graphDocument->size();
@@ -80,7 +80,7 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     _action->executePress(mouseEvent->scenePos());
-    //QGraphicsScene::mousePressEvent(mouseEvent);
+
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
