@@ -21,8 +21,9 @@
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 #include <QWidget>
+#include <QScrollArea>
 #include "ui_GraphPropertiesWidget.h"
-
+ 
 class GraphPropertiesModel;
 class QGraphicsItem;
 class Graph;
@@ -32,7 +33,7 @@ class Edge;
 
 /*! \brief Properties Area, not used yet. */
 class MainWindow;
-class GraphPropertiesWidget : public QWidget, public Ui::GraphPropertiesWidget
+class GraphPropertiesWidget : public QScrollArea, public Ui::GraphPropertiesWidget
 {
     Q_OBJECT
 public:

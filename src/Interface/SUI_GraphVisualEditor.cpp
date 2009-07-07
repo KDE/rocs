@@ -163,7 +163,7 @@ void GraphVisualEditor::releaseGraphDocument() {
     _graphDocument = 0;
 }
 
-void GraphVisualEditor::drawGraphOnScene( Graph *g) {
+void GraphVisualEditor::drawGraphOnScene( Graph */*g*/) {
 
 }
 

@@ -45,6 +45,8 @@ SelectAction::~SelectAction() {
 }
 
 void SelectAction::executePress(QPointF pos){
+  if (! _graph ) return;
+
   _p1 = pos;
   _selectionRect = new QGraphicsRectItem();
   _selectionRect->setFlag(QGraphicsItem::ItemIsSelectable, false);
@@ -52,14 +54,16 @@ void SelectAction::executePress(QPointF pos){
 }
 
 void SelectAction::executeMove(QPointF pos){
+  if (! _graph ) return;
   if (_selectionRect == 0) return;
   _selectionRect->setRect(QRectF(_p1, pos));
 }
 
 void SelectAction::executeRelease(QPointF pos) {
-    if ( _selectionRect == 0) return;
-    if ( !_graph ) return;    
-    _graphScene->removeItem(_selectionRect);
+  if (! _graph ) return;
+  if ( _selectionRect == 0) return;
+  if ( !_graph ) return;    
+  _graphScene->removeItem(_selectionRect);
     
     delete _selectionRect;
     _selectionRect = 0;
@@ -123,6 +127,11 @@ void SelectAction::singleSelect(QPointF pos){
       
       qSort(items.begin(), items.end(), zValue);
       item = items.at(items.size()-1);
+      if (item->zValue() == -1000){
+	emit ItemSelectedChanged(0);
+	delete tmpItem;
+	return;
+      }
     }
     
     item->setSelected(true);

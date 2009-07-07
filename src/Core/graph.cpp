@@ -128,7 +128,7 @@ void Graph::setDirected(bool directed) {
 
     foreach(Node *n1, _nodes) {
         foreach(Node *n2, n1->adjacent_nodes()) {
-            if (n1->edges(n2).size() == 1) {
+            if ((n1->edges(n2).size() == 1) && (n1 != n2)) {
                 continue;
             }
 

@@ -33,7 +33,7 @@
 #include "graphicsitem_OrientedEdge.h"
 
 GraphPropertiesWidget::GraphPropertiesWidget ( MainWindow* parent )
-        : QWidget ( parent ) {
+        : QScrollArea ( parent ) {
 
     setupUi(this);
     unsetAll();
@@ -63,10 +63,7 @@ void GraphPropertiesWidget::setDataSource(QGraphicsItem *o) {
     unsetAll();
     _graphicsItem = o;
 
-    if ( o == 0){
-      setGraph( _mainWindow->graph());
-    }
-    else if( NodeItem *nodeItem = qgraphicsitem_cast<NodeItem*>(o) ){
+    if( NodeItem *nodeItem = qgraphicsitem_cast<NodeItem*>(o) ){
       setNode(nodeItem->node());
     }
     else if( EdgeItem *edgeItem = qgraphicsitem_cast<EdgeItem*>(o)){
@@ -79,6 +76,7 @@ void GraphPropertiesWidget::setDataSource(QGraphicsItem *o) {
 }
 
 void GraphPropertiesWidget::unsetAll(){
+  hide();
   unsetGraph();
   unsetNode();
   unsetEdge();
@@ -95,6 +93,7 @@ void GraphPropertiesWidget::setNode(Node *n){
   _nodeValue->setText(_node->value());
   _nodeX->setValue(_node->x());
   _nodeY->setValue(_node->y());
+  show();
 }
 
 void GraphPropertiesWidget::setEdge(Edge *e){
@@ -104,6 +103,7 @@ void GraphPropertiesWidget::setEdge(Edge *e){
   _edgeName->setText(_edge->name());
   _edgeColor->setColor(_edge->color());
   _edgeValue->setText(_edge->value());
+  show();
 }
 
 void GraphPropertiesWidget::setGraph(Graph *g){

@@ -174,7 +174,7 @@ QPainterPath OrientedEdgeItem::createCurves() const {
     return p;
 }
 
-void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget *) {
      _pen->setBrush(QColor(_edge->color()));
     if (isSelected()) {
 	_pen->setStyle(Qt::DotLine);
@@ -186,11 +186,11 @@ void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
     painter->drawPath(path());
 }
 
-void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent *event){
+void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/){
     update();
  }
 
-void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
+void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/){
     update();
 }
 

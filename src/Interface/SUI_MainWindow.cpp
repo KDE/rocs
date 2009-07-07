@@ -161,9 +161,9 @@ QWidget* MainWindow::setupRightPanel() {
 
     _txtDebug = new KTextBrowser(this);
 
-    QStackedWidget *toolsStack = new QStackedWidget();
-    toolsStack->addWidget(_docView);
-    toolsStack->addWidget(_txtDebug);
+    _programmingStackWidget = new QStackedWidget();
+    _programmingStackWidget->addWidget(_docView);
+    _programmingStackWidget->addWidget(_txtDebug);
 
     // Tab bar outside the main area, gee... I need a better way to document this.
     _bottomTabBar = new KMultiTabBar(KMultiTabBar::Bottom, this);
@@ -173,15 +173,10 @@ QWidget* MainWindow::setupRightPanel() {
     _bottomTabBar->appendTab(KIcon("system-run").pixmap(16),2,"Run");
 
     // Connect the signals.
-    connect(_bottomTabBar->tab(0), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
-    connect(_bottomTabBar->tab(1), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
-    connect(_bottomTabBar->tab(2), SIGNAL(clicked(int)), this, SLOT( executeScript()));
-
-    for (int i = 0; i < 2; ++i) {
-        connect(_bottomTabBar->tab(i), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
-        connect(_bottomTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseBottomTabbarButton(int)));
-    }
-    connect(_bottomTabBar->tab(2), SIGNAL(clicked(int)), this, SLOT(releaseRunButton()));
+    connect(_bottomTabBar->tab(0), SIGNAL(clicked(int)), this, SLOT(cntrlProgrammingPanel(int)));
+    connect(_bottomTabBar->tab(1), SIGNAL(clicked(int)), this, SLOT(cntrlProgrammingPanel(int)));
+    connect(_bottomTabBar->tab(2), SIGNAL(clicked(int)), this, SLOT(executeScript()));
+    connect(_bottomTabBar->tab(2), SIGNAL(clicked(int)), this, SLOT(releaseBottomTabbarButton(int)));
 
     _bottomTabBar->setTab(0, true);
     _bottomTabId = 0;
@@ -190,7 +185,7 @@ QWidget* MainWindow::setupRightPanel() {
     _vSplitter = new QSplitter(this);
     _vSplitter->setOrientation(Qt::Vertical);
     _vSplitter->addWidget(_graphVisualEditor);
-    _vSplitter->addWidget(toolsStack);
+    _vSplitter->addWidget(_programmingStackWidget);
 
     _vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
     QWidget *widget = new QWidget( this );
@@ -201,6 +196,26 @@ QWidget* MainWindow::setupRightPanel() {
     return widget;
 }
 
+void MainWindow::cntrlProgrammingPanel(int index){
+  if ( _programmingStackWidget->currentIndex() == index){
+    _programmingStackWidget->setVisible(!_programmingStackWidget->isVisible());
+  }
+  else{
+    _programmingStackWidget->setCurrentIndex(index);
+    releaseBottomTabbarButton(index);
+  }
+}
+
+void MainWindow::cntrlToolsPanel(int index){
+  if ( _toolsStackWidget->currentIndex() == index){
+    _toolsStackWidget->setVisible(!_toolsStackWidget->isVisible());
+  }
+  else{
+    _toolsStackWidget->setCurrentIndex(index);
+    releaseLeftTabbarButton(index);
+  }
+}
+
 void MainWindow::releaseRunButton() {
     _bottomTabBar->setTab(_bottomTabId, true);
     _bottomTabBar->setTab(2, false);
@@ -208,32 +223,28 @@ void MainWindow::releaseRunButton() {
 
 QWidget* MainWindow::setupLeftPanel() {
     //! constructing the Default Looking LeftSide menu.
-    QWidget *toolBox = new QWidget( this );
-    QWidget *palletePropertiesHolder = new QWidget(this);
 
-    _OpenedFiles = new OpenedFilesWidget ( _documentModel, toolBox );
-    _PaletteBar	= new PaletteBarWidget	( toolBox );
+    QSplitter *palletePropertiesHolder = new QSplitter(this);
+    palletePropertiesHolder->setOrientation(Qt::Vertical);
+    
+    _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
+    _PaletteBar	= new PaletteBarWidget	( this );
     _GraphProperties = new GraphPropertiesWidget( this );
 
     palletePropertiesHolder -> setLayout(new QVBoxLayout());
     palletePropertiesHolder -> layout() -> addWidget( _PaletteBar );
     palletePropertiesHolder -> layout() -> addWidget( _GraphProperties );
-    QStackedWidget *toolsStack = new QStackedWidget();
+   _toolsStackWidget = new QStackedWidget();
 
-    toolsStack->addWidget( _OpenedFiles );
-    toolsStack->addWidget( palletePropertiesHolder );
+   _toolsStackWidget->addWidget( _OpenedFiles );
+   _toolsStackWidget->addWidget( palletePropertiesHolder );
  
-    QHBoxLayout	*toolBoxLayout = new QHBoxLayout( toolBox );
-    toolBoxLayout->addWidget(toolsStack);
-    toolBox->setLayout(toolBoxLayout);
-
     for (int i = 0; i < 2; ++i) {
-        connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), toolsStack, SLOT(setCurrentIndex(int)));
-        connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(releaseLeftTabbarButton(int)));
+        connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(cntrlToolsPanel(int)));
     }
     _leftTabBar->setTab(0, true);
     _leftTabId = 0;
-    return toolBox;
+    return _toolsStackWidget;
 }
 
 void MainWindow::releaseLeftTabbarButton(int index) {
@@ -444,6 +455,12 @@ void MainWindow::debug(const QString& s) {
 }
 
 #ifdef USING_QTSCRIPT
+
+static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {
+    mainWindow->debug(QString("%1 \n").arg(context->argument(0).toString()));
+    return QScriptValue();
+}
+
 void MainWindow::executeScript() {
     if (_activeGraphDocument == 0) {
         return;
@@ -464,12 +481,5 @@ void MainWindow::executeScript() {
 
     _graphVisualEditor->scene()->updateDocument();
 }
-
-
-static QScriptValue debug_script(QScriptContext* context, QScriptEngine* engine) {
-    mainWindow->debug(QString("%1 \n").arg(context->argument(0).toString()));
-    return QScriptValue();
-}
-
 
 #endif

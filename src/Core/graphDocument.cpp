@@ -191,7 +191,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
     }
 
     Graph* tmpGraph = 0;
-    GraphGroup *tmpGroup = 0;
+// //    GraphGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
 
 

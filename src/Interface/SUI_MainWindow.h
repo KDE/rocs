@@ -43,6 +43,7 @@ class GraphScene;
 class QScriptContext;
 class QScriptEngine;
 class MoveNodeAction;
+class QStackedWidget;
 
 namespace KTextEditor {
 class Document;
@@ -89,6 +90,8 @@ private slots:
     void saveScript();
     void saveScriptAs();
 
+    void cntrlProgrammingPanel(int index);
+    void cntrlToolsPanel(int index);
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
@@ -101,14 +104,15 @@ private: // Variables.
     GraphPropertiesWidget* _GraphProperties; //! Area where the nodes and edges will be modified.
     KMultiTabBar *_leftTabBar; //! Tab that will hold the pallete, opened files, graphLayers and Properties.
     int _leftTabId; //! active left tab
-    int _bottomTabId; //! active bottom tab
-
+    QStackedWidget *_toolsStackWidget;
 
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
     KMultiTabBar *_bottomTabBar; //! This will hold the Editor and the Debugger.
     KTextEditor::View *_docView; //! this is the view where you edit your scripts
     KTextBrowser *_txtDebug; //! this is the debug view.
+    QStackedWidget *_programmingStackWidget;
+   int _bottomTabId; //! active bottom tab
 
     // Other Bunch of stuff.
     QList<GraphDocument*> _documents; //! The list of opend documents
@@ -129,7 +133,7 @@ private: // Variables.
     MoveNodeAction *_moveNodeAction;
 };
 
-#ifdef USING_QTSCRIPT
+/*#ifdef USING_QTSCRIPT
 static QScriptValue debug_script(QScriptContext *context, QScriptEngine *engine);
-#endif
+#endif*/
 #endif

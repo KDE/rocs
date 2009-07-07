@@ -25,11 +25,11 @@ void SmartAction::executeRelease(QPointF) {
 
 }
 
-void SmartAction::executeKeyPress(QKeyEvent *keyEvent) {
+void SmartAction::executeKeyPress(QKeyEvent */*keyEvent*/) {
 
 }
 
-void SmartAction::executeKeyRelease(QKeyEvent *keyEvent) {
+void SmartAction::executeKeyRelease(QKeyEvent */*keyEvent*/) {
 
 }
 

@@ -67,9 +67,6 @@ QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
         edgeItem = new OrientedEdgeItem(e);
     }
 
-    qreal x1 = e->from()->x(), y1 = e->from()->y();
-    qreal x2 = e->to()->x(),  y2 = e->to()->y();
-
     insertGraphItem(g, edgeItem);
     return edgeItem;
 }
