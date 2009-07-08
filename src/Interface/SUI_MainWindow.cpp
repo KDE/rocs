@@ -21,26 +21,18 @@
 #include "SUI_MainWindow.h"
 
 // KDE Related Includes
-#include <KLocale>
-#include <KAction>
-#include <KStandardAction>
 #include <KActionCollection>
-#include <kxmlguifactory.h>
-#include <kmultitabbar.h>
-#include <QStackedWidget>
 #include <KIcon>
 #include <QSplitter>
 #include <KDebug>
 #include <KApplication>
 
-#include <ktexteditor/document.h>
 #include <ktexteditor/view.h>
-#include <ktexteditor/editor.h>
 #include <ktexteditor/editorchooser.h>
 #include <KTextBrowser>
 #include <KMessageBox>
 #include <kfiledialog.h>
-
+#include "TabWidget.h"
 // UI RELATED INCLUDES
 
 #include "SUI_PaletteBarWidget.h"
@@ -69,16 +61,12 @@
 
 // backends
 #include "qtScriptBackend.h"
-
-
 #include <kstandarddirs.h>
 
 MainWindow* mainWindow = 0;
 
 MainWindow::MainWindow() :
-        KXmlGuiWindow(),
-        _leftTabId(0)
-{
+        KXmlGuiWindow(){
     _documentModel = 0;
     _activeGraphDocument = 0;
     _graph = 0;
@@ -86,7 +74,6 @@ MainWindow::MainWindow() :
 
     setupModels();
     setupWidgets();
-
     setupActions();
     setupSignals();
 
@@ -115,16 +102,6 @@ void MainWindow::setupModels() {
 GraphDocument *MainWindow::activeDocument() const{ return _activeGraphDocument; }
 
 void MainWindow::setupWidgets() {
-
-    _leftTabBar = new KMultiTabBar(KMultiTabBar::Left, this);
-    _leftTabBar->setStyle(KMultiTabBar::KDEV3ICON);
-
-    _leftTabBar->appendTab(KIcon("document-open").pixmap(16), 0, "Files");
-    _leftTabBar->appendTab(KIcon("applications-system").pixmap(16), 1, "Tools");
-    
-    QWidget *centralWidget = new QWidget(this);
-    QHBoxLayout *l1 = new QHBoxLayout();
-
     _hSplitter = new QSplitter(this);
 
     QWidget *rightPanel = setupRightPanel();
@@ -132,17 +109,12 @@ void MainWindow::setupWidgets() {
     _hSplitter->addWidget(leftPanel);
     _hSplitter->addWidget(rightPanel);
     _hSplitter->setSizes( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight());
-    l1->addWidget( _leftTabBar);
-    l1->addWidget( _hSplitter );
 
-    centralWidget->setLayout(l1);
-
-    setCentralWidget(centralWidget);
+    setCentralWidget(_hSplitter);
 }
 
 QWidget* MainWindow::setupRightPanel() {
-    // Top Area, The Graph Visual Editor.
-    _graphVisualEditor = new GraphVisualEditor(this);
+   _graphVisualEditor = new GraphVisualEditor(this);
 
     // Bottom Area, the rest. ( Script Editor, Debugger )
     KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
@@ -152,78 +124,31 @@ QWidget* MainWindow::setupRightPanel() {
     }
     editor->setSimpleMode(true);
     _scriptDoc = editor->createDocument(0);
-
     _docView = qobject_cast<KTextEditor::View*>(_scriptDoc->createView(this));
+    _txtDebug = new KTextBrowser(this);
 
 #ifdef USING_QTSCRIPT
     _scriptDoc->setMode("JavaScript");
 #endif
 
-    _txtDebug = new KTextBrowser(this);
+  _bottomTabs = new TabWidget(TabWidget::TabOnBottom, this);
+  _bottomTabs->addWidget(_docView,  "Editor", KIcon("accessories-text-editor"));
+  _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("debugger"));
+   _runScript = new KAction(KIcon("system-run"), "Run", this);
+    connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
+  _bottomTabs->addAction(_runScript);
 
-    _programmingStackWidget = new QStackedWidget();
-    _programmingStackWidget->addWidget(_docView);
-    _programmingStackWidget->addWidget(_txtDebug);
-
-    // Tab bar outside the main area, gee... I need a better way to document this.
-    _bottomTabBar = new KMultiTabBar(KMultiTabBar::Bottom, this);
-    _bottomTabBar->setStyle(KMultiTabBar::KDEV3ICON);
-    _bottomTabBar->appendTab(KIcon("accessories-text-editor").pixmap(16), 0, "Editor");
-    _bottomTabBar->appendTab(KIcon("debugger").pixmap(16), 1, "Debugger");
-    _bottomTabBar->appendTab(KIcon("system-run").pixmap(16),2,"Run");
-
-    // Connect the signals.
-    connect(_bottomTabBar->tab(0), SIGNAL(clicked(int)), this, SLOT(cntrlProgrammingPanel(int)));
-    connect(_bottomTabBar->tab(1), SIGNAL(clicked(int)), this, SLOT(cntrlProgrammingPanel(int)));
-    connect(_bottomTabBar->tab(2), SIGNAL(clicked(int)), this, SLOT(executeScript()));
-    connect(_bottomTabBar->tab(2), SIGNAL(clicked(int)), this, SLOT(releaseBottomTabbarButton(int)));
-
-    _bottomTabBar->setTab(0, true);
-    _bottomTabId = 0;
-
-    // Configure the visual area.
     _vSplitter = new QSplitter(this);
     _vSplitter->setOrientation(Qt::Vertical);
     _vSplitter->addWidget(_graphVisualEditor);
-    _vSplitter->addWidget(_programmingStackWidget);
-
+    _vSplitter->addWidget(_bottomTabs);
     _vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
-    QWidget *widget = new QWidget( this );
-    QVBoxLayout *l = new QVBoxLayout();
-    l->addWidget(_vSplitter);
-    l->addWidget(_bottomTabBar);
-    widget->setLayout(l);
-    return widget;
-}
-
-void MainWindow::cntrlProgrammingPanel(int index){
-  if ( _programmingStackWidget->currentIndex() == index){
-    _programmingStackWidget->setVisible(!_programmingStackWidget->isVisible());
-  }
-  else{
-    _programmingStackWidget->setCurrentIndex(index);
-    releaseBottomTabbarButton(index);
-  }
-}
-
-void MainWindow::cntrlToolsPanel(int index){
-  if ( _toolsStackWidget->currentIndex() == index){
-    _toolsStackWidget->setVisible(!_toolsStackWidget->isVisible());
-  }
-  else{
-    _toolsStackWidget->setCurrentIndex(index);
-    releaseLeftTabbarButton(index);
-  }
-}
-
-void MainWindow::releaseRunButton() {
-    _bottomTabBar->setTab(_bottomTabId, true);
-    _bottomTabBar->setTab(2, false);
+    return _vSplitter;
 }
 
 QWidget* MainWindow::setupLeftPanel() {
-    //! constructing the Default Looking LeftSide menu.
-
+    _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
+ 
     QSplitter *palletePropertiesHolder = new QSplitter(this);
     palletePropertiesHolder->setOrientation(Qt::Vertical);
     
@@ -234,39 +159,14 @@ QWidget* MainWindow::setupLeftPanel() {
     palletePropertiesHolder -> setLayout(new QVBoxLayout());
     palletePropertiesHolder -> layout() -> addWidget( _PaletteBar );
     palletePropertiesHolder -> layout() -> addWidget( _GraphProperties );
-   _toolsStackWidget = new QStackedWidget();
+  
+   _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
+   _leftTabs->addWidget( palletePropertiesHolder, "Tools" , KIcon("applications-system"));
 
-   _toolsStackWidget->addWidget( _OpenedFiles );
-   _toolsStackWidget->addWidget( palletePropertiesHolder );
- 
-    for (int i = 0; i < 2; ++i) {
-        connect(_leftTabBar->tab(i), SIGNAL(clicked(int)), this, SLOT(cntrlToolsPanel(int)));
-    }
-    _leftTabBar->setTab(0, true);
-    _leftTabId = 0;
-    return _toolsStackWidget;
-}
-
-void MainWindow::releaseLeftTabbarButton(int index) {
-    if ( _leftTabId == index ) {
-        _leftTabBar->setTab( _leftTabId, true );
-        return;
-    }
-    _leftTabBar->setTab( _leftTabId, false );
-    _leftTabId = index;
-}
-
-void MainWindow::releaseBottomTabbarButton(int index) {
-    if ( _bottomTabId == index ) {
-        _bottomTabBar->setTab( _bottomTabId, true );
-        return;
-    }
-    _bottomTabBar->setTab( _bottomTabId, false );
-    _bottomTabId = index;
+    return _leftTabs;
 }
 
 void MainWindow::setupActions() {
-
     KStandardAction::quit ( this,		SLOT ( quit() ),				actionCollection() );
     GraphScene *gc = _graphVisualEditor->scene();
     if (!gc) {
@@ -281,75 +181,55 @@ void MainWindow::setupActions() {
     _paletteActions->addAction("move_node_action", _moveNodeAction);
     _paletteActions->addAction("select_action", new SelectAction(gc, this));
     _paletteActions->addAction("delete_action", new DeleteAction(gc, this));
-
     _PaletteBar->setActionCollection(_paletteActions);
 
     // Pointer Action is the first.
     gc -> setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
 
-    KAction* action = new KAction(this);
-    action->setText(i18n("New Graph"));
-    action->setIcon(KIcon("document-new"));
+    KAction* action = new KAction(KIcon("document-new"),i18n("New Graph"),  this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("new-graph", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(newGraph()));
 
-    action = new KAction(this);
-    action->setText(i18n("Open Graph"));
-    action->setIcon(KIcon("document-open"));
+    action = new KAction(KIcon("document-open"),i18n("Open Graph"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("open-graph", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(openGraph()));
 
-    action = new KAction(this);
-    action->setText(i18n("Save Graph"));
-    action->setIcon(KIcon("document-save"));
+    action = new KAction(KIcon("document-save"), i18n("Save Graph"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("save-graph", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraph()));
 
-    action = new KAction(this);
-    action->setText(i18n("Save Graph As"));
-    action->setIcon(KIcon("document-save-as"));
+    action = new KAction(KIcon("document-save-as"),i18n("Save Graph As"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("save-graph-as", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraphAs()));
 
-    action = new KAction(this);
-    action->setText(i18n("New Script"));
-    action->setIcon(KIcon("document-new"));
+    action = new KAction(KIcon("document-new"),i18n("New Script"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("new-script", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(newScript()));
 
-    action = new KAction(this);
-    action->setText(i18n("Open Script"));
-    action->setIcon(KIcon("document-open"));
+    action = new KAction(KIcon("document-open"),i18n("Open Script"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("open-script", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(openScript()));
 
-    action = new KAction(this);
-    action->setText(i18n("Save Script"));
-    action->setIcon(KIcon("document-save"));
+    action = new KAction(KIcon("document-save"),i18n("Save Script"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("save-script", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScript()));
 
-    action = new KAction(this);
-    action->setText(i18n("Save Script As"));
-    action->setIcon(KIcon("document-save-as"));
+    action = new KAction(KIcon("document-save-as"), i18n("Save Script As"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("save-script-as", action);
-    connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScriptAs()));
-
+   // connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScriptAs()));
 
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
-
 }
 
 void MainWindow::setupSignals() {
-
     connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
              this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
 
@@ -418,10 +298,8 @@ void MainWindow::newGraph() {
 }
 
 void MainWindow::openGraph() {
-
     _OpenedFiles->on__btnNewFile_clicked();
     _activeGraphDocument->loadFromInternalFormat(KFileDialog::getOpenFileName());
-
 }
 
 void MainWindow::saveGraph() {
@@ -436,6 +314,7 @@ void MainWindow::saveGraph() {
         _activeGraphDocument->savedDocumentAt(_activeGraphDocument->documentPath());
     }
 }
+
 void MainWindow::saveGraphAs() {
     if (_activeGraphDocument == 0) {
         kDebug() << "Graph Document is NULL";
@@ -447,8 +326,6 @@ void MainWindow::saveGraphAs() {
 
 void MainWindow::newScript() {}
 void MainWindow::openScript() {}
-void MainWindow::saveScript() {}
-void MainWindow::saveScriptAs() {}
 
 void MainWindow::debug(const QString& s) {
     _txtDebug->insertPlainText(s);
@@ -462,12 +339,8 @@ static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engin
 }
 
 void MainWindow::executeScript() {
-    if (_activeGraphDocument == 0) {
-        return;
-    }
-    if (_txtDebug == 0) {
-        return;
-    }
+    if (_activeGraphDocument == 0) {     return;     }
+    if (_txtDebug == 0) {    return;    }
 
     _txtDebug->clear();
     QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
@@ -475,9 +348,7 @@ void MainWindow::executeScript() {
     QScriptValue results = engine->evaluate(_scriptDoc->text().toAscii());
     _txtDebug->insertPlainText(results.toString());
 
-    if (scene() == 0) {
-        return;
-    }
+    if (scene() == 0) {   return;    }
 
     _graphVisualEditor->scene()->updateDocument();
 }

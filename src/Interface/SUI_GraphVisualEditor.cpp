@@ -52,8 +52,8 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
         _topNode(0),
         _bottomNode(0),
         _leftNode(0),
-        _rightNode(0),
-        _scene(0) {
+        _rightNode(0){
+   _scene = 0;
     _graphDocument = 0;
     _graph = 0;
     _mainWindow = parent;
@@ -279,9 +279,7 @@ void GraphVisualEditor::alignVMiddle() {
 
 void GraphVisualEditor::alignVRight() {
     QList<NodeItem*> l = selectedNodes();
-    if ( l.size()	== 0) {
-        return;
-    }
+    if ( l.size()	== 0) {     return;    }
     qreal right = l[0]->scenePos().x();
     foreach(NodeItem *i, l) {
         if ( i->scenePos().x() > right ) {

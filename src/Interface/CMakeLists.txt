@@ -18,6 +18,7 @@ set(librocsui_SRCS
 	SUI_GraphVisualEditor.cpp
 	SUI_GraphPropertiesWidget.cpp
 
+	TabWidget.cpp
 	action_AbstractAction.cpp
 	action_Pointer.cpp
 	action_AddNode.cpp
