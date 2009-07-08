@@ -4,6 +4,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES}
 	../Engine
 	../Models
 	../GraphicsItem
+	../Actions
 )
 
 set(librocsui_SRCS
@@ -19,14 +20,6 @@ set(librocsui_SRCS
 	SUI_GraphPropertiesWidget.cpp
 
 	TabWidget.cpp
-	action_AbstractAction.cpp
-	action_Pointer.cpp
-	action_AddNode.cpp
-	action_AddEdge.cpp
-	action_MoveNode.cpp
-	action_Select.cpp
-	action_SmartAction.cpp
-	deleteaction.cpp
 )
 
 kde4_add_ui_files( 

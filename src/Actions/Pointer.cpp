@@ -18,33 +18,20 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#ifndef POINTERACTION_H
-#define POINTERACTION_H
+#include "Pointer.h"
+#include "SUI_GraphScene.h"
+#include "graph.h"
 
-#include "action_AbstractAction.h"
-#include <QObject>
+#include <KLocale>
+#include <iostream>
 
-/*!
-  \brief The 'Pointer' Action
-  This action holds the 'Cursor' icon and tooltips, and when it's executed,
-  it will do nothing.
-*/
+#include <KDebug>
 
-class PointerAction : public AbstractAction {
-    Q_OBJECT;
-public:
-    /*!
-      Default constructor
-      \param type the Type for 'Cursor' action. must be unique.
-      \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
-    */
+PointerAction::PointerAction(GraphScene *scene, QObject *parent)
+        : AbstractAction(scene, parent) {
+    setText(i18n ( "Pointer" ));
+    setToolTip ( i18n ( "Does Nothing." ) );
+    setIcon ( KIcon ( "pointer" ) );
+}
 
-    explicit PointerAction(GraphScene *scene, QObject *parent = 0);
-
-    /*!
-      Default Destructor
-    */
-    ~PointerAction();
-};
-
-#endif
+PointerAction::~PointerAction() {}

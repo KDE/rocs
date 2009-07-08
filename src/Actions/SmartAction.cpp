@@ -1,8 +1,8 @@
-#include "action_SmartAction.h"
-#include "action_AddEdge.h"
-#include "action_AddNode.h"
-#include "action_MoveNode.h"
-#include "action_Select.h"
+#include "SmartAction.h"
+#include "AddEdge.h"
+#include "AddNode.h"
+#include "MoveNode.h"
+#include "Select.h"
 
 #include <KAction>
 #include <KLocale>

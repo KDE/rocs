@@ -48,16 +48,17 @@
 #include "graphDocument.h"
 #include "graph.h"
 
-// Action Related Includes
-#include "action_AbstractAction.h"
-#include "action_Pointer.h"
-#include "action_AddNode.h"
-#include "action_AddEdge.h"
-#include "action_MoveNode.h"
-#include "action_Select.h"
-#include "action_SmartAction.h"
 #include "settings.h"
-#include "deleteaction.h"
+
+// Action Related Includes
+#include "AbstractAction.h"
+#include "Pointer.h"
+#include "AddNode.h"
+#include "AddEdge.h"
+#include "MoveNode.h"
+#include "Select.h"
+#include "SmartAction.h"
+#include "DeleteAction.h"
 
 // backends
 #include "qtScriptBackend.h"

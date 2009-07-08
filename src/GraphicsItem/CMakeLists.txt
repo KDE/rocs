@@ -1,5 +1,5 @@
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../Core)
+include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../Core ../Actions)
  
 set( rocsgraphics_LIB_SRCS
 	graphicsitem_Node.cpp

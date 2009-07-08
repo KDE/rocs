@@ -1,6 +1,7 @@
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} Interface)
 
 add_subdirectory(Core)
+add_subdirectory(Actions)
 add_subdirectory(Models)
 add_subdirectory(GraphicsItem)
 add_subdirectory(Interface)
@@ -26,6 +27,7 @@ target_link_libraries(rocs ${KDE4_KDEUI_LIBS}
 	librocsui
 	librocsgraphics
 	librocsmodel
+	librocsactions
 	librocscore
 )
 

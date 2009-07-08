@@ -20,7 +20,7 @@
 #ifndef DELETEACTION_H
 #define DELETEACTION_H
 
-#include "action_AbstractAction.h"
+#include "AbstractAction.h"
 
 
 class DeleteAction : public AbstractAction

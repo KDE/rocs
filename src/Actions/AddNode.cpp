@@ -18,7 +18,7 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include "action_AddNode.h"
+#include "AddNode.h"
 #include "SUI_GraphScene.h"
 #include "graph.h"
 #include "graphicsitem_Node.h"

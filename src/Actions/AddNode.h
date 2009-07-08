@@ -1,3 +1,4 @@
+
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -17,60 +18,40 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#ifndef ACTION_ADDNODE_H
+#define ACTION_ADDNODE_H
 
-#ifndef ACTION_MOVENODE_H
-#define ACTION_MOVENODE_H
-
-#include "action_AbstractAction.h"
-
-class QObject;
-class NodeItem;
-class Node;
-class Graph;
-class QGraphicsView;
+#include "AbstractAction.h"
+#include <QObject>
 
 /*!
-  \brief The 'Move Node' Action
-  This action holds the 'Move Node' icon and tooltips, and when it's executed,
-  it will move the selected node around the screen.
+  \brief The 'Add Node' Action
+  This action holds the 'Add Node' icon and tooltips, and when it's executed,
+  it will place a new node on the QGraphicsView that holds all the items.
 */
 
-class MoveNodeAction : public AbstractAction {
+class AddNodeAction : public AbstractAction {
     Q_OBJECT;
 public:
     /*!
       Default constructor
+      \param type the Type for 'Add Node' action. must be unique.
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
 
-    explicit MoveNodeAction(GraphScene *scene, QObject *parent = 0);
+    explicit AddNodeAction( GraphScene *scene, QObject *parent = 0);
 
     /*!
       Default Destructor
     */
-    ~MoveNodeAction();
-    void setView(QGraphicsView *v);
+    ~AddNodeAction();
 public slots:
     /*!
-      will be executed when the mouse press a button.
-      \param pos the position onscreen of the click.
+      this will be executed if type is the same as this action's type.
+      \param pos the position on the screen that the new node will be placed.
+
     */
     void executePress(QPointF pos);
-    /*! will be executed when the mouse moves.
-      \param pos the current position of the cursor.
-    */
-    void executeMove(QPointF pos);
-
-    /*! will be executed when the mouse releases a click
-    \param pos the position of the cursor.
-    */
-    void executeRelease(QPointF pos);
-
-protected:
-    NodeItem *_movableNode;
-    Node *_node;
-    Graph *_g;
-    QGraphicsView *_view;
 };
 
 #endif

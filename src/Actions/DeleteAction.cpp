@@ -17,7 +17,7 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "deleteaction.h"
+#include "DeleteAction.h"
 #include <KLocale>
 #include <QGraphicsItem>
 #include <graphicsitem_Node.h>

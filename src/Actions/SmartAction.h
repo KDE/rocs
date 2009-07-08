@@ -1,7 +1,7 @@
 #ifndef ACTION_SMARTACTION_H
 #define ACTION_SMARTACTION_H
 
-#include "action_AbstractAction.h"
+#include "AbstractAction.h"
 #include <QObject>
 class AddEdgeAction;
 class AddNodeAction;

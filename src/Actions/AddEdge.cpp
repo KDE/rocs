@@ -18,7 +18,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "action_AddEdge.h"
+#include "AddEdge.h"
 #include "SUI_GraphScene.h"
 #include "graph.h"
 #include "node.h"

@@ -18,14 +18,17 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#ifndef ACTION_ADDEDGE_H
-#define ACTION_ADDEDGE_H
+#ifndef ACTION_SELECT_H
+#define ACTION_SELECT_H
 
-#include "action_AbstractAction.h"
+#include "AbstractAction.h"
 #include <QObject>
 #include <QPointF>
-class QGraphicsLineItem;
+
 class NodeItem;
+class Node;
+class QGraphicsRectItem;
+class QGraphicsItem;
 
 /*!
   \brief The 'Add Node' Action
@@ -33,20 +36,21 @@ class NodeItem;
   it will place a new node on the QGraphicsView that holds all the items.
 */
 
-class AddEdgeAction : public AbstractAction {
-    Q_OBJECT;
+class SelectAction : public AbstractAction
+{
+    Q_OBJECT
 public:
     /*!
       Default constructor
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
 
-    explicit AddEdgeAction(GraphScene *scene, QObject *parent = 0);
+    explicit SelectAction(GraphScene *scene, QObject *parent = 0);
 
     /*!
       Default Destructor
     */
-    ~AddEdgeAction();
+    ~SelectAction();
 public slots:
     /*!
       will be executed when the mouse press a button.
@@ -63,12 +67,16 @@ public slots:
     */
     void executeRelease(QPointF pos);
 
+signals:
+    void ItemSelectedChanged(QGraphicsItem *o);
+    
 private:
-    NodeItem *_nodeFrom;
-    NodeItem *_nodeTo;
-    QGraphicsLineItem *_tmpLine;
-    QPointF _startPos;
-    bool _working;
+    void singleSelect(QPointF pos);
+    void multiSelect(QPointF pos);
+     QPointF _p1;
+     QPointF _p2;
+     QGraphicsRectItem *_selectionRect;
+
 };
 
 #endif

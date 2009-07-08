@@ -1,5 +1,5 @@
 #include "SUI_GraphScene.h"
-#include "action_AbstractAction.h"
+#include "AbstractAction.h"
 
 #include "node.h"
 #include "edge.h"

@@ -18,7 +18,7 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include "action_MoveNode.h"
+#include "MoveNode.h"
 #include "SUI_GraphScene.h"
 #include "graph.h"
 #include "node.h"
@@ -28,7 +28,7 @@
 #include <QGraphicsView>
 
 #include <KDebug>
-#include "settings.h"
+//#include "settings.h"
 
 MoveNodeAction::MoveNodeAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {

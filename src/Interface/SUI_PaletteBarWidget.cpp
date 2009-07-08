@@ -33,7 +33,7 @@
 #include "SUI_PaletteLayout.h"
 #include "SUI_Separator.h"
 
-#include "action_AbstractAction.h"
+#include "AbstractAction.h"
 
 
 #include "graphDocument.h"
