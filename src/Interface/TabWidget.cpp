@@ -98,8 +98,7 @@ void TabWidget::addAction(KAction *a){
   m_tabs -> appendTab( a->icon().pixmap(16), m_numOfTabs+m_numOfActions, a->text());
   connect(m_tabs->tab(m_numOfTabs+m_numOfActions), SIGNAL(clicked(int)), a, SLOT(trigger()));
   connect(m_tabs->tab(m_numOfTabs+m_numOfActions), SIGNAL(clicked(int)), this, SLOT(releaseActionButton(int)));
-  kDebug() << "calling a->trigger() ";
-  a->trigger();
+   a->trigger();
 }
 
 void TabWidget::releaseActionButton(int index) {
