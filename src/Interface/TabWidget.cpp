@@ -27,6 +27,8 @@
 #include <QSplitter>
 #include <KDebug>
 #include <KAction>
+#include <QSize>
+
 
 TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(parent){
   m_orientation = o;
@@ -44,14 +46,14 @@ void TabWidget::createLayout(){
     delete m_layout;
     m_layout = 0;
   }
-
+ 
   if ((m_orientation == TabOnLeft) || (m_orientation == TabOnRight) ){
     m_layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
   }
   else{
     m_layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
   }
-
+  m_layout->setSizeConstraint(QLayout::SetMaximumSize);	
   switch(m_orientation){
     case TabOnLeft  : case TabOnTop:
       m_layout->addWidget(m_tabs);
@@ -62,19 +64,11 @@ void TabWidget::createLayout(){
       m_layout->addWidget(m_tabs);
     break;
   }
-
 }
 
 void TabWidget::controlPanel(int index){
   if ( m_widgets -> currentIndex() == index){
     m_widgets ->setVisible(! m_widgets -> isVisible() );
-    if (! m_widgets->isVisible()){
-      
-      setMaximumSize(size() - m_widgets->size());
-    }
-    else{
-      setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
-    }
   }
   else{
     m_widgets->setCurrentIndex(index);
