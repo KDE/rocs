@@ -15,5 +15,6 @@ set(librocsactions_SRCS
 	Select.cpp
 	SmartAction.cpp
 	DeleteAction.cpp
+	AlignAction.cpp
 )
 kde4_add_library( librocsactions	STATIC ${librocsactions_SRCS} )

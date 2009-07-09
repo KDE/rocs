@@ -59,7 +59,6 @@ void QtScriptBackend::createGraphList() {
 }
 
 void QtScriptBackend::setProperty( QScriptValue& object, const QScriptString& name, uint , const QScriptValue& value ) {
-    kDebug() << "CHEGOU AQUI";
     QObject *obj = object.toQObject();
     QString s(name.toString());
     QVariant v(value.toVariant());
@@ -72,8 +71,7 @@ void QtScriptBackend::setProperty( QScriptValue& object, const QScriptString& na
 }
 
 QScriptValue QtScriptBackend::property ( const QScriptValue & object, const QScriptString & name, uint ) {
-    kDebug() << " E AQUI TAMBEM ";
-    QObject *obj = object.toQObject();
+   QObject *obj = object.toQObject();
     QString s(name.toString());
     if (obj == 0) {
         kDebug () << "Object is zero";

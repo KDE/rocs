@@ -22,6 +22,7 @@
 
 #include <QWidget>
 #include <QString>
+#include "AlignAction.h"
 
 class GraphDocument;
 class Graph;
@@ -54,13 +55,7 @@ public slots:
     void setActiveGraph( Graph *g);
 
     void setActiveGraphDocument(GraphDocument *graphDocument);
-
-    void alignHBottom();
-    void alignHMiddle();
-    void alignHTop();
-    void alignVLeft();
-    void alignVMiddle();
-    void alignVRight();
+    QList<NodeItem*> selectedNodes() const;
 
 private:
     void setupWidgets();
@@ -72,17 +67,15 @@ private:
     from the screen and releases it from the evil hands of GraphEditWidget.*/
     void releaseGraphDocument();
 
-    QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent);
+    QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
 
-    QList<NodeItem*> selectedNodes() const;
+
 
     GraphScene *_scene;
     GraphDocument *_graphDocument;
     Graph *_graph;
 
     QWidget *_spacingPropContainer;
-    QWidget *_edgePropContainer;
-    QWidget *_nodePropContainer;
     QWidget *_toolbar;
 
     GraphToolBoxWidget *_graphToolBox;

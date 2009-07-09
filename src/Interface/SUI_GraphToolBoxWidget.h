@@ -1,4 +1,3 @@
-
 /* This file is part of Rocs,
 	 Copyright (C) 2008 by:
 	 Tomaz Canabrava <tomaz.canabrava@gmail.com>

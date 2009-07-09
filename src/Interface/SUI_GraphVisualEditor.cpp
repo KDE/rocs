@@ -32,7 +32,6 @@
 #include "edge.h"
 #include "graphicsitem_Node.h"
 
-
 #include <QVBoxLayout>
 #include <QPointF>
 #include <QGraphicsItem>
@@ -44,8 +43,8 @@
 #include <KColorButton>
 #include <QGraphicsView>
 #include <QPainter>
+#include "AlignAction.h"
 #include "settings.h"
-
 
 GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
         : QWidget(parent),
@@ -61,43 +60,21 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
 }
 
 void GraphVisualEditor::setupWidgets() {
-
-    QHBoxLayout *layout = 0;
-
-    layout	= new QHBoxLayout();
+    QHBoxLayout *layout	= new QHBoxLayout();
     layout->setContentsMargins(0,0,0,0);
     //!################## CODE TO GENERATE THE ALLIGN TOOLBOX ##########################
 
     _spacingPropContainer = new QWidget(parentWidget());
-
-    layout->addWidget(setupToolButton("allign-h-bottom", "Allign nodes on the base", SLOT(alignHBottom()),_spacingPropContainer ));
-    layout->addWidget(setupToolButton("allign-h-middle", "Allign nodes horizontally on the middle", SLOT(alignHMiddle()),_spacingPropContainer));
-    layout->addWidget(setupToolButton("allign-h-top", "Allign nodes on the top", SLOT(alignHTop()),_spacingPropContainer));
-    layout->addWidget(setupToolButton("allign-v-left", "Allign nodes on the left", SLOT(alignVLeft()),_spacingPropContainer ));
-    layout->addWidget(setupToolButton("allign-v-middle", "Allign nodes vertically on the middle", SLOT(alignVMiddle()),_spacingPropContainer));
-    layout->addWidget(setupToolButton("allign-v-right", "Allign nodes on the right", SLOT(alignVRight()),_spacingPropContainer));
-
+    layout->addWidget(setupToolButton("allign-h-bottom", "Allign nodes on the base", AlignAction::Bottom,this ));
+    layout->addWidget(setupToolButton("allign-h-middle", "Allign nodes horizontally on the middle", AlignAction::MiddleHorizontal,this));
+    layout->addWidget(setupToolButton("allign-h-top", "Allign nodes on the top",AlignAction::Top, this));
+    layout->addWidget(setupToolButton("allign-v-left", "Allign nodes on the left", AlignAction::Left, this ));
+    layout->addWidget(setupToolButton("allign-v-middle", "Allign nodes vertically on the middle", AlignAction::MiddleVertical,this));
+    layout->addWidget(setupToolButton("allign-v-right", "Allign nodes on the right", AlignAction::Right,this));
     _spacingPropContainer->setLayout(layout);
 
     //!############################### CODE TO GENERATE THE GRAPH PROPERTIES TOOLBOX ####################################
-
     _graphToolBox = new GraphToolBoxWidget(_mainWindow);
-
-    //!############################### CODE TO GENERATE THE EDGE PROPERTIES TOOLBOX #####################################
-    layout = new QHBoxLayout();
-    layout->setContentsMargins(0,0,0,0);
-    _edgePropContainer = new QWidget(parentWidget());
-    _edgePropContainer -> setLayout(layout);
-
-    //!################################ CODE TO GENERATE THE NODE PROPERTIES TOOLBOX ####################################
-    layout = new QHBoxLayout();
-    layout->setContentsMargins(0,0,0,0);
-    _nodePropContainer = new QWidget(parentWidget());
-
-    layout->addWidget(setupToolButton("set-start", "Set this node as 'start_node' on the engine.", SLOT(setStartNode()),_nodePropContainer));
-    layout->addWidget(setupToolButton("set-end","Set this node as 'end_node' on the engine. if there's more than one end node, the 'end_node' is an array",SLOT(setEndNode()),_nodePropContainer));
-
-    _nodePropContainer -> setLayout(layout);
 
     //!############################### finishes the Toolbar.
     layout = new QHBoxLayout();
@@ -105,8 +82,6 @@ void GraphVisualEditor::setupWidgets() {
     layout->setSpacing(0);
     layout->setContentsMargins(0,0,0,0);
     layout->addWidget( _graphToolBox );
-    layout->addWidget( _nodePropContainer );
-    layout->addWidget( _edgePropContainer );
     layout->addWidget( _spacingPropContainer );
     layout->addStretch();
 
@@ -122,31 +97,22 @@ void GraphVisualEditor::setupWidgets() {
     vLayout -> addWidget( _toolbar );
     vLayout -> addWidget ( _graphicsView );
     setLayout( vLayout );
-
 }
 
 QGraphicsView* GraphVisualEditor::view() const {
     return _graphicsView;
 }
-QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const QString& tooltip, const char* slot, QWidget *parent) {
-    QToolButton *tmpButton = 0;
-    KAction *tmpAction = 0;
 
-    tmpAction = new KAction(KIcon(actionName), tooltip, parent);
-    connect( tmpAction, SIGNAL(triggered()), this, slot);
-    tmpButton = new QToolButton(_spacingPropContainer);
+QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent) {
+    AlignAction*  tmpAction = new AlignAction(actionName, tooltip, o, parent);
+    QToolButton*  tmpButton = new QToolButton(_spacingPropContainer);
     tmpButton -> setDefaultAction ( tmpAction );
     tmpButton -> setAutoRaise( true );
     return tmpButton;
-
 }
 
 void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
-    if ( _graphDocument != 0 ) {
-        kDebug() << "Releasing Graph Document";
-        releaseGraphDocument();
-        kDebug() << "Graph Document Released.";
-    }
+    if ( _graphDocument != 0 ) { releaseGraphDocument(); }
 
     _graphDocument = gd;
     _graphToolBox->setActiveGraphDocument( gd );
@@ -163,9 +129,7 @@ void GraphVisualEditor::releaseGraphDocument() {
     _graphDocument = 0;
 }
 
-void GraphVisualEditor::drawGraphOnScene( Graph */*g*/) {
-
-}
+void GraphVisualEditor::drawGraphOnScene( Graph */*g*/) {}
 
 void GraphVisualEditor::setActiveGraph( Graph *g) {
     _graph = g;
@@ -174,122 +138,6 @@ void GraphVisualEditor::setActiveGraph( Graph *g) {
 
 GraphScene* GraphVisualEditor::scene() const {
     return _scene;
-}
-
-void GraphVisualEditor::alignHBottom() {
-    QList<NodeItem*> l = selectedNodes();
-
-    if ( l.size()	== 0) {
-        return;
-    }
-
-    qreal bottom = l[0]->scenePos().y();
-    foreach(NodeItem *i, l) {
-        if ( i->scenePos().y() < bottom ) {
-            bottom = i -> scenePos().y();
-        }
-    }
-    foreach(NodeItem *i, l) {
-      Node *n = i->node();
-        n -> setY(bottom);
-    }
-
-}
-
-void GraphVisualEditor::alignHMiddle() {
-    QList<NodeItem*> l = selectedNodes();
-
-    if ( l.size()	== 0) {
-        return;
-    }
-
-    qreal bottom = l[0]->pos().y();
-    qreal top = bottom;
-
-    foreach(NodeItem *i, l) {
-        if ( i->pos().y() < bottom ) {
-            bottom = i -> scenePos().y();
-        }
-        else if ( i->scenePos().y() > top ) {
-            top = i -> scenePos().y();
-        }
-    }
-    qreal middle = (top + bottom) / 2;
-    foreach(NodeItem *i, l) {
-	i->node()->setY(middle);
-    }
-}
-void GraphVisualEditor::alignHTop() {
-    QList<NodeItem*> l = selectedNodes();
-
-    if ( l.size()	== 0) {
-        return;
-    }
-
-    qreal top = l[0]->scenePos().y();
-    foreach(NodeItem *i, l) {
-        if ( i->scenePos().y() > top ) {
-            top = i -> scenePos().y();
-        }
-    }
-    foreach(NodeItem *i, l) {
-        i -> node() -> setY(top);
-    }
-
-}
-
-void GraphVisualEditor::alignVLeft() {
-    QList<NodeItem*> l = selectedNodes();
-    if ( l.size()	== 0) {
-        return;
-    }
-
-    qreal left = l[0]->scenePos().x();
-    foreach(NodeItem *i, l) {
-        if ( i->scenePos().x() < left ) {
-            left = i -> scenePos().x();
-        }
-    }
-    foreach(NodeItem *i, l) {
-        i -> node() -> setX(left);
-    }
-}
-
-void GraphVisualEditor::alignVMiddle() {
-    QList<NodeItem*> l = selectedNodes();
-    if ( l.size()	== 0) {
-        return;
-    }
-    qreal left = l[0]->scenePos().x();
-    qreal right = left;
-
-    foreach(NodeItem *i, l) {
-        if ( i->scenePos().x() < left ) {
-            left = i -> scenePos().x();
-        }
-        else if ( i->scenePos().x() > right) {
-            right= i->scenePos().x();
-        }
-    }
-    qreal middle = ( left +	right) / 2;
-    foreach(NodeItem *i, l) {
-        i -> node() -> setX(middle);
-    }
-}
-
-void GraphVisualEditor::alignVRight() {
-    QList<NodeItem*> l = selectedNodes();
-    if ( l.size()	== 0) {     return;    }
-    qreal right = l[0]->scenePos().x();
-    foreach(NodeItem *i, l) {
-        if ( i->scenePos().x() > right ) {
-            right = i -> scenePos().x();
-        }
-    }
-    foreach(NodeItem *i, l) {
-        i -> node() -> setX(right);
-    }
-
 }
 
 QList<NodeItem*> GraphVisualEditor::selectedNodes() const {
