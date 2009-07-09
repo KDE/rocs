@@ -53,22 +53,14 @@ void TabWidget::createLayout(){
   }
 
   switch(m_orientation){
-    case TabOnLeft  :
+    case TabOnLeft  : case TabOnTop:
       m_layout->addWidget(m_tabs);
       m_layout->addWidget(m_widgets);
     break;
-    case TabOnRight :
+    case TabOnRight : case TabOnBottom:
       m_layout->addWidget(m_widgets);
       m_layout->addWidget(m_tabs);
     break;
-    case TabOnTop :
-      m_layout->addWidget(m_tabs);
-      m_layout->addWidget(m_widgets);
-    break;
-    case TabOnBottom :
-      m_layout->addWidget(m_widgets);
-      m_layout->addWidget(m_tabs);
-  break;
   }
 
 }
@@ -77,7 +69,8 @@ void TabWidget::controlPanel(int index){
   if ( m_widgets -> currentIndex() == index){
     m_widgets ->setVisible(! m_widgets -> isVisible() );
     if (! m_widgets->isVisible()){
-      setMaximumSize(m_tabs->size());
+      
+      setMaximumSize(size() - m_widgets->size());
     }
     else{
       setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);

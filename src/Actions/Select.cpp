@@ -62,7 +62,7 @@ void SelectAction::executeMove(QPointF pos){
 void SelectAction::executeRelease(QPointF pos) {
   if (! _graph ) return;
   if ( _selectionRect == 0) return;
-  if ( !_graph ) return;    
+ 
   _graphScene->removeItem(_selectionRect);
     
     delete _selectionRect;
@@ -103,14 +103,12 @@ void SelectAction::multiSelect(QPointF pos){
     i->setSelected(true);
     i->update();
   }
-  
 }
 
 #include <QtAlgorithms>
 bool zValue(QGraphicsItem *i1, QGraphicsItem *i2){
   return i1->zValue() < i2->zValue();
 }
-
 
 void SelectAction::singleSelect(QPointF pos){
     QGraphicsItem * item = 0;
