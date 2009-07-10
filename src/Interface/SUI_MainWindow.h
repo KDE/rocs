@@ -37,19 +37,15 @@ class Graph;
 class KTextBrowser;
 class QSplitter;
 class GraphScene;
-class QScriptContext;
-class QScriptEngine;
 class KAction;
 class MoveNodeAction;
 class TabWidget;
-
-namespace KTextEditor {
-class Document;
-class View;
-}
+class CodeEditor;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
+  class QScriptContext;
+  class QScriptEngine;
 #endif
 
 class MainWindow : public KXmlGuiWindow {
@@ -98,15 +94,14 @@ private: // Variables.
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
     TabWidget *_bottomTabs; 
-    KTextEditor::View *_docView; //! this is the view where you edit your scripts
-    KTextBrowser *_txtDebug; //! this is the debug view.
+     CodeEditor *_codeEditor;
+     KTextBrowser *_txtDebug; //! this is the debug view.
 
     // Other Bunch of stuff.
     QList<GraphDocument*> _documents; //! The list of opend documents
     GraphDocumentModel *_documentModel; //! the model that hold the documents. there's a need for a Model and a QList?
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
     KAction *_runScript;
-    KTextEditor::Document *_scriptDoc; //! the document that you are editing.
 
     //! Needed to reestore the size of the splitter after closing / opening the UI.
     QSplitter *_vSplitter;
@@ -120,7 +115,4 @@ private: // Variables.
     MoveNodeAction *_moveNodeAction;
 };
 
-/*#ifdef USING_QTSCRIPT
-static QScriptValue debug_script(QScriptContext *context, QScriptEngine *engine);
-#endif*/
 #endif

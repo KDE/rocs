@@ -26,13 +26,11 @@
 #include <QSplitter>
 #include <KDebug>
 #include <KApplication>
-
-#include <ktexteditor/view.h>
-#include <ktexteditor/editorchooser.h>
 #include <KTextBrowser>
 #include <KMessageBox>
 #include <kfiledialog.h>
 #include "TabWidget.h"
+
 // UI RELATED INCLUDES
 
 #include "SUI_PaletteBarWidget.h"
@@ -40,6 +38,7 @@
 #include "SUI_GraphPropertiesWidget.h"
 #include "SUI_GraphVisualEditor.h"
 #include "SUI_GraphScene.h"
+#include "CodeEditor.h"
 
 // MODEL Related Includes
 #include "model_GraphDocument.h"
@@ -117,24 +116,11 @@ void MainWindow::setupWidgets() {
 
 QWidget* MainWindow::setupRightPanel() {
    _graphVisualEditor = new GraphVisualEditor(this);
-
-    // Bottom Area, the rest. ( Script Editor, Debugger )
-    KTextEditor::Editor *editor = KTextEditor::EditorChooser::editor();
-    if (!editor) {
-        KMessageBox::error(this, i18n("A KDE Text Editor could not be found, \n please, check your installation"));
-        exit(1);
-    }
-    editor->setSimpleMode(true);
-    _scriptDoc = editor->createDocument(0);
-    _docView = qobject_cast<KTextEditor::View*>(_scriptDoc->createView(this));
-    _txtDebug = new KTextBrowser(this);
-
-#ifdef USING_QTSCRIPT
-    _scriptDoc->setMode("JavaScript");
-#endif
+  _codeEditor = new CodeEditor(this);
+   _txtDebug = new KTextBrowser(this);
 
   _bottomTabs = new TabWidget(TabWidget::TabOnBottom, this);
-  _bottomTabs->addWidget(_docView,  "Editor", KIcon("accessories-text-editor"));
+  _bottomTabs->addWidget(_codeEditor,  "Editor", KIcon("accessories-text-editor"));
   _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("debugger"));
    _runScript = new KAction(KIcon("system-run"), "Run", this);
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
@@ -347,7 +333,7 @@ void MainWindow::executeScript() {
     _txtDebug->clear();
     QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
     engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
-    QScriptValue results = engine->evaluate(_scriptDoc->text().toAscii());
+    QScriptValue results = engine->evaluate(_codeEditor->text());
     _txtDebug->insertPlainText(results.toString());
 
     if (scene() == 0) {   return;    }

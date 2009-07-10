@@ -20,6 +20,7 @@ set(librocsui_SRCS
 	SUI_GraphPropertiesWidget.cpp
 
 	TabWidget.cpp
+	CodeEditor.cpp
 )
 
 kde4_add_ui_files( 
