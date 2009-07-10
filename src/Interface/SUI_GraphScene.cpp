@@ -16,7 +16,15 @@
 
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
     _graphDocument = 0;
- 
+ _hideEdges = false;
+}
+
+bool GraphScene::hideEdges(){
+  return _hideEdges;
+}
+
+void GraphScene::setHideEdges(bool h){
+  _hideEdges = h;
 }
 
 void GraphScene::setActiveGraph(Graph *g) {
@@ -144,7 +152,6 @@ void GraphScene::updateDocument() {
     kDebug() << "Graph Document Size: " << _graphDocument->size();
     int size = _graphDocument->size();
     for (int i = 0; i < size; i++) {
-
         updateGraph( _graphDocument->at(i) );
     }
 }

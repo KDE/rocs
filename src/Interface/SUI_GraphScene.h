@@ -30,7 +30,8 @@ public:
     void insertGraphItem(Graph *g, QGraphicsItem *item);
     void clearGraph();
     void removeGItem(QGraphicsItem *i);
-    
+    void setHideEdges(bool h);
+    bool hideEdges();
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
@@ -43,6 +44,7 @@ private:
     Graph *_graph;
     AbstractAction *_action;
     QMultiHash<Graph*, QGraphicsItem* > _hashGraphs;
+    bool _hideEdges;
 };
 
 #endif

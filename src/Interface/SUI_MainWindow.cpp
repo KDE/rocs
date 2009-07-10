@@ -84,6 +84,7 @@ MainWindow::MainWindow() :
     setupGUI();
     _moveNodeAction->setView( _graphVisualEditor->view() );
     mainWindow = this;
+  _OpenedFiles->selectDefaultFile();
 }
 
 MainWindow::~MainWindow() {

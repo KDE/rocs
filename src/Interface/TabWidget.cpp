@@ -37,7 +37,6 @@ TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(paren
   m_tabs =  new KMultiTabBar((KMultiTabBar::KMultiTabBarPosition)o, this);
   m_tabs->setStyle(KMultiTabBar::KDEV3ICON);
   m_widgets = new QStackedWidget(this);
-
   createLayout();
 }
 

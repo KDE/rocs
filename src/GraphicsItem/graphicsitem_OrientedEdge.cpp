@@ -23,12 +23,11 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
-#include <QStyleOption>
 #include <QPen>
-#include <QGraphicsLineItem>
 #include <QPainterPath>
 #include <QLine>
 #include <QPolygonF>
+#include <QtAlgorithms>
 
 #include "node.h"
 #include "edge.h"
@@ -74,11 +73,7 @@ void OrientedEdgeItem::connectSignals() {
 QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const {
     QLineF line(Pos1, Pos2);
     qreal angle = ::acos(line.dx() / line.length());
-
-    if (line.dy() >= 0) {
-        angle = TwoPi - angle;
-    }
-
+    if (line.dy() >= 0) {    angle = TwoPi - angle; }
     qreal arrowSize = 10;
 
     QPointF destArrowP1 = Pos2 + QPointF(sin(angle - PI_3) * arrowSize,         cos(angle - PI_3) * arrowSize);
@@ -107,91 +102,75 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const{
 }
 
 QPainterPath OrientedEdgeItem::createCurves() const {
-    /// Calculate the angle.
-   
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
     if ( _loop ) return createLoop(Pos1);
-
+   
+    // else return QPainterPath();
     QPointF Pos2(_edge->to()->x(), _edge->to()->y());
-    QPainterPath p;
-    
     QPolygonF arrow = createArrow(Pos1,  Pos2);
 
-    /// Draw the line if it is to draw the line.
-    if (_index == 0)  {
-        p.moveTo(Pos1);
-        p.lineTo(Pos2);
-        p.addPolygon(arrow);
+    if (Pos1.x() > Pos2.x()) {
+       qSwap(Pos1, Pos2); 
     }
-    /// Draw a curve if it's to draw a curve.
-    else {
-        /// change the angle for correctness of the points.
-        if (Pos1.x() > Pos2.x()) {
-            QPointF p3 = Pos2;
-            Pos2 = Pos1;
-            Pos1 = p3;
-        }
 
-        qreal x = Pos2.x() - Pos1.x();
-        qreal y = Pos2.y() - Pos1.y();
-        qreal angle = atan2(y,x);
+     qreal x = Pos2.x() - Pos1.x();
+     qreal y = Pos2.y() - Pos1.y();
+     qreal angle = atan2(y,x);
 
-        /// Calculate the size of the inclination on the curve.
+     /// Calculate the size of the inclination on the curve.
+    qreal theta = angle + PI_2;
+    qreal finalX = cos(theta);
+    qreal finalY = sin(theta);
+    int index = _index;
 
-	qreal theta = angle + PI_2;
-        qreal finalX = cos(theta);
-        qreal finalY = sin(theta);
-        int index = _index;
+     if (index & 1) { // If the number is Odd.
+         ++index;
+          finalX *= (-1);
+          finalY *= (-1);
+      }
 
-        if (index & 1) { // If the number is Odd.
-            ++index;
-            finalX *= (-1);
-            finalY *= (-1);
-        }
+      qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
 
-        qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
-
-        finalX *= size;
-        finalY *= size;
-        finalX += Pos1.x() + x/2;
-        finalY += Pos1.y() + y/2;
+      finalX *= size;
+      finalY *= size;
+      finalX += Pos1.x() + x/2;
+      finalY += Pos1.y() + y/2;
 
         /// Draw the Arc.
-        p.moveTo(Pos1);
-        p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
+      QPainterPath p;
+      p.moveTo(Pos1);
+      p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
 
         /// puts the arrow on its correct position
-        QPointF middle = p.pointAtPercent(0.5);
+      QPointF middle = p.pointAtPercent(0.5);
 
-        x = Pos1.x() + (Pos2.x() - Pos1.x())/2;
-        y = Pos1.y() + (Pos2.y() - Pos1.y())/2;
-        QLineF line2(QPointF(x,y) , middle);
-
-        arrow.translate(+line2.dx() , +line2.dy());
-        p.addPolygon(arrow);
-    }
-
+      x = Pos1.x() + (Pos2.x() - Pos1.x())/2;
+      y = Pos1.y() + (Pos2.y() - Pos1.y())/2;
+      QLineF line2(QPointF(x,y) , middle);
+      arrow.translate(+line2.dx() , +line2.dy());
+     p.addPolygon(arrow);
+    
     return p;
 }
 
-void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget *) {
-     _pen->setBrush(QColor(_edge->color()));
-    if (isSelected()) {
-	_pen->setStyle(Qt::DotLine);
-    }
-    else {
-        _pen->setStyle(Qt::SolidLine);
-    }
+void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+    if (! isVisible() ) return;
+    if (dynamic_cast<GraphScene*>(scene())->hideEdges())return;
+
+    _pen->setBrush(QColor(_edge->color()));
+    if (isSelected()) { _pen->setStyle(Qt::DotLine); }
+    else { _pen->setStyle(Qt::SolidLine); }
     painter->setPen((*_pen));
-    painter->drawPath(path());
+    
+    setPath(createCurves());
+    QGraphicsPathItem::paint(painter, option, 0);
+   // painter->drawPath(path());
 }
 
 void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/){
-    update();
  }
 
 void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/){
-    update();
 }
 
 void OrientedEdgeItem::remove() {
@@ -200,7 +179,7 @@ void OrientedEdgeItem::remove() {
 }
 
 void OrientedEdgeItem::updatePos() {
-    setPath(createCurves());
+  update();
 }
 
 void OrientedEdgeItem::updateName(const QString& ) {}

@@ -80,13 +80,17 @@ void EdgeItem::remove() {
 }
 
 void EdgeItem::updatePos() {
-    qDebug() << "Calling Everything!";
-    setLine( _edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
-    update();
+   update();
 }
 
 void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget *) {
-    _pen->setBrush(QColor(_edge->color()));
+  if (! isVisible() ) return;
+  QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
+  qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
+  if (size   < 20) return ;
+  setLine( q );
+ 
+   _pen->setBrush(QColor(_edge->color()));
   if (isSelected()) {
 	_pen->setStyle(Qt::DotLine);
     }

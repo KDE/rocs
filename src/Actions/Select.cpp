@@ -26,7 +26,6 @@
 #include "edge.h"
 #include "graphicsitem_Node.h"
 #include "graphicsitem_Edge.h"
-#include "graphicsitem_MultiEdge.h"
 #include "graphicsitem_OrientedEdge.h"
 
 #include <KLocale>

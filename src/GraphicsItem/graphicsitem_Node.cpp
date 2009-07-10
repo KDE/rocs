@@ -61,12 +61,9 @@ QPainterPath NodeItem::shape() const {
 }
 
 void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-
+  setPos( QPointF(_node->x(), _node->y() ) );
     if (isSelected()) {
-        QPen pen;
-        pen.setStyle(Qt::DotLine);
-        pen.setWidth(1);
-        pen.setBrush(Qt::black);
+        QPen pen(Qt::black, 1, Qt::DotLine);
 
         painter->setBrush(QBrush());
         painter->setPen(pen);
@@ -95,13 +92,13 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setBrush(gradient);
     painter->setPen(QPen(color, 2));
     painter->drawEllipse(-10, -10, 20, 20);
-    painter->setPen(Qt::black);
     if( _node->end() ){
+      painter->setPen(Qt::black);
       painter->drawEllipse(-7, -7, 15, 15); 
     }
 }
 
-void NodeItem::updatePos() {   setPos( QPointF(_node->x(), _node->y() ) ); qDebug() << "Movendo Corretamente"; }
+void NodeItem::updatePos() {  update(); }
 void NodeItem::updateName(const QString& ) {}
 void NodeItem::updateVisited(bool ) {}
 void NodeItem::updateValue(qreal ) {}
@@ -110,9 +107,8 @@ void NodeItem::updateColor(QColor ) {}
 
 void NodeItem::remove() {
   if (scene() == 0) return;
-  if (this == 0){ qDebug() << "O.O"; }
-    dynamic_cast<GraphScene*>(scene())->removeGItem(this);
-    deleteLater();
+  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
+  deleteLater();
 }
 
 #include "graphicsitem_Node.moc"

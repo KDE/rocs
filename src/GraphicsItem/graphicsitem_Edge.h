@@ -22,13 +22,10 @@
 #define GRAPHICSITEM_EDGE_H
 
 #include <QGraphicsLineItem>
-#include <QList>
-#include <graphicsitem_Node.h>
 
 class QGraphicsSceneMouseEvent;
 class QPen;
 class Edge;
-class Node;
 
 /*! \brief the Edge drawing on screen.
   long explanation here...
@@ -83,8 +80,6 @@ private:
     void setupPen();
     Edge *_edge;
     QPen *_pen;
-    NodeItem *_fromItem;
-    NodeItem *_toItem;
 };
 
 #endif

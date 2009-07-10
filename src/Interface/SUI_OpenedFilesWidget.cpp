@@ -44,3 +44,7 @@ void OpenedFilesWidget::setActiveDocument(const QModelIndex& modelindex) {
     if (g == 0) return;
     emit activeDocumentChanged( g );
 }
+
+void OpenedFilesWidget::selectDefaultFile(){
+  setActiveDocument(_documentModel->index(0,0));
+}

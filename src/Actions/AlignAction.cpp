@@ -33,23 +33,33 @@ AlignAction::AlignAction(const QString& actionName, const QString& tooltip,Align
 void AlignAction::align(){
   QList<NodeItem*> l = qobject_cast<GraphVisualEditor*>(parent())->selectedNodes();
   if (l.size() < 1) return;
+  kDebug() << "Size of the list: " << l.size();
+
   switch(m_orientation){
     case Left : 
     case MiddleVertical : 
-	  qSort(l.begin(), l.end(),  leftLessThan); 
+	  kDebug() << "Ordering by Left";
+	  qSort(l.begin(), l.end(),  leftLessThan);
+	  kDebug() << "Alligning";
 	  allignX(l); 
     break;
     case Bottom : 
     case MiddleHorizontal : 
-      qSort(l.begin(), l.end(), bottomLessThan); 
+      kDebug() << "Ordering by Bottom";
+      qSort(l.begin(), l.end(), bottomLessThan);
+      kDebug() << "Alligning";
       allignY(l); 
     break;
     case Right : 
+      kDebug() << "Ordening by Right";
       qSort(l.begin(), l.end(), rightLessThan);
+      kDebug() << "Alligning";
       allignX(l);
     break;
     case Top : 
+      kDebug() << "Ordening by Top";
 	qSort( l.begin(), l.end(), topLessThan);
+	kDebug() << "Alligning";
 	allignY(l);
       break;
   }
@@ -59,7 +69,7 @@ void AlignAction::allignY(QList<NodeItem*>& l){
   qreal final = l[0]->pos().y();
   if (m_orientation == MiddleHorizontal || m_orientation == MiddleVertical){
     qreal otherSide = l[l.size()-1]->pos().y();
-    qreal final = (final + otherSide) / 2;
+     final = (final + otherSide) / 2;
   }
   foreach(NodeItem *i, l) {
     i->node()->setY(final);
@@ -70,7 +80,7 @@ void AlignAction::allignX(QList<NodeItem*>& l){
   qreal final = l[0]->pos().x();
   if (m_orientation == MiddleHorizontal || m_orientation == MiddleVertical){
     qreal otherSide = l[l.size()-1]->pos().x();
-    qreal final = (final + otherSide) / 2;
+     final = (final + otherSide) / 2;
   }
   foreach(NodeItem *i, l) {
     i->node()->setX(final);
