@@ -43,27 +43,18 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsLineItem(parent) {
 
     _edge = edge;
-    _pen = new QPen();  
     setCacheMode(DeviceCoordinateCache);
     setZValue(0);
     setFlag(ItemIsSelectable);
 
     connectSignals();
-    setupPen();
+    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
     updatePos();
 }
 
 void EdgeItem::connectSignals() {
     connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
-}
-
-void EdgeItem::setupPen() {
-    _pen->setStyle(Qt::SolidLine);
-    _pen->setWidth(1);
-    _pen->setCapStyle(Qt::RoundCap);
-    _pen->setJoinStyle(Qt::RoundJoin);
-    setPen( (*_pen) );
 }
 
 void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent * /*event*/){
@@ -80,15 +71,15 @@ void EdgeItem::remove() {
 }
 
 void EdgeItem::updatePos() {
-   update();
-}
-
-void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget *) {
-  if (! isVisible() ) return;
   QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
   qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
   if (size   < 20) return ;
   setLine( q );
+}
+
+/*
+void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+  if (! isVisible() ) return;
  
    _pen->setBrush(QColor(_edge->color()));
   if (isSelected()) {
@@ -100,6 +91,7 @@ void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option
     painter->setPen((*_pen));
     painter->drawLine(line());
 }
+*/
 
 void EdgeItem::updateName(const QString& ) {}
 void EdgeItem::updateVisited(bool ) {}

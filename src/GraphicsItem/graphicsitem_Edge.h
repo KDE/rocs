@@ -53,7 +53,7 @@ public:
         return _edge;
     }
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
+  //  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 protected:
     /*! when there's a mouse click on the node, this method is invocked
       \param event the mouse object
