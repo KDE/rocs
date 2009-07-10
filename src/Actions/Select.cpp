@@ -24,9 +24,9 @@
 #include "graph.h"
 #include "node.h"
 #include "edge.h"
-#include "graphicsitem_Node.h"
-#include "graphicsitem_Edge.h"
-#include "graphicsitem_OrientedEdge.h"
+#include "NodeItem.h"
+#include "EdgeItem.h"
+#include "OrientedEdgeItem.h"
 
 #include <KLocale>
 #include <KDebug>

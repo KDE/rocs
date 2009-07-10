@@ -22,15 +22,14 @@
 #include "SUI_GraphToolBoxWidget.h"
 #include "SUI_GraphScene.h"
 #include "SUI_MainWindow.h"
-#include "graphicsitem_Node.h"
-#include "graphicsitem_Edge.h"
-#include "graphicsitem_OrientedEdge.h"
+#include "NodeItem.h"
+#include "EdgeItem.h"
+#include "OrientedEdgeItem.h"
 
 #include "graphDocument.h"
 #include "graph.h"
 #include "node.h"
 #include "edge.h"
-#include "graphicsitem_Node.h"
 
 #include <QVBoxLayout>
 #include <QPointF>

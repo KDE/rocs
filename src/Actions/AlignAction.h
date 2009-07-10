@@ -21,7 +21,7 @@
 #define ALIGNACTION_H
 
 #include <KAction>
-#include "graphicsitem_Node.h"
+#include "NodeItem.h"
 #include "node.h"
 
 class AlignAction : public KAction{

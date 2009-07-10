@@ -28,9 +28,9 @@
 #include "node.h"
 #include "edge.h"
 #include "SUI_MainWindow.h"
-#include "graphicsitem_Edge.h"
-#include "graphicsitem_Node.h"
-#include "graphicsitem_OrientedEdge.h"
+#include "EdgeItem.h"
+#include "NodeItem.h"
+#include "OrientedEdgeItem.h"
 
 GraphPropertiesWidget::GraphPropertiesWidget ( MainWindow* parent )
         : QScrollArea ( parent ) {

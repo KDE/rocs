@@ -21,7 +21,7 @@
 #ifndef GENERICS_H
 #define GENERICS_H
 
-#include "../GraphicsItem/graphicsitem_Node.h"
+#include "../GraphicsItem/NodeItem.h"
 
 bool leftLessThan(NodeItem *n1, NodeItem *n2){        return n1->x() < n2->x(); }
 bool rightLessThan(NodeItem *n1, NodeItem *n2){      return n1->x() > n2->x(); }

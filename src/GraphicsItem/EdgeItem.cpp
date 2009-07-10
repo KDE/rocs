@@ -19,7 +19,7 @@
 */
 
 
-#include "graphicsitem_Edge.h"
+#include "EdgeItem.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -34,7 +34,7 @@
 #include <SUI_GraphScene.h>
 
 
-#include "graphicsitem_Node.h"
+#include "NodeItem.h"
 
 
 #include <KDebug>
@@ -100,4 +100,4 @@ void EdgeItem::updateValue(qreal ) {}
 void EdgeItem::updateTotal(qreal ) {}
 void EdgeItem::updateColor(QColor ) {}
 
-#include "graphicsitem_Edge.moc"
+#include "EdgeItem.moc"

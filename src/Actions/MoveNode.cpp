@@ -23,7 +23,7 @@
 #include "graph.h"
 #include "node.h"
 #include "graphDocument.h"
-#include "graphicsitem_Node.h"
+#include "NodeItem.h"
 #include <KLocale>
 #include <QGraphicsView>
 

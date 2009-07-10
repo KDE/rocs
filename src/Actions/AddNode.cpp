@@ -21,7 +21,7 @@
 #include "AddNode.h"
 #include "SUI_GraphScene.h"
 #include "graph.h"
-#include "graphicsitem_Node.h"
+#include "NodeItem.h"
 #include "node.h"
 #include <KLocale>
 #include "graphDocument.h"

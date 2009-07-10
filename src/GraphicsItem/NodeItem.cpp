@@ -19,7 +19,7 @@
 */
 
 
-#include "graphicsitem_Node.h"
+#include "NodeItem.h"
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
@@ -29,8 +29,8 @@
 
 #include "node.h"
 #include "graph.h"
-#include "graphicsitem_Edge.h"
-#include "graphicsitem_OrientedEdge.h"
+#include "EdgeItem.h"
+#include "OrientedEdgeItem.h"
 #include <KDebug>
 #include <QDebug>
 #include <SUI_GraphScene.h>
@@ -111,4 +111,4 @@ void NodeItem::remove() {
   deleteLater();
 }
 
-#include "graphicsitem_Node.moc"
+#include "NodeItem.moc"

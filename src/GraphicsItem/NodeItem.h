@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef GRAPHICSITEM_NODE_H
-#define GRAPHICSITEM_NODE_H
+#ifndef NODEITEM_H
+#define NODEITEM_H
 
 #include <QGraphicsItem>
 #include <QList>

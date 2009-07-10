@@ -16,18 +16,18 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
 #include "DeleteAction.h"
+
 #include <KLocale>
 #include <QGraphicsItem>
-#include <graphicsitem_Node.h>
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include "SUI_GraphScene.h"
 #include "node.h"
 #include "edge.h"
-#include <graphicsitem_Edge.h>
-#include <graphicsitem_OrientedEdge.h>
+#include "NodeItem.h"
+#include "EdgeItem.h"
+#include "OrientedEdgeItem.h"
 
 DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent){
     setText(i18n ( "Delete" ));

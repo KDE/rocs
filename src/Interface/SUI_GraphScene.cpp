@@ -4,9 +4,9 @@
 #include "node.h"
 #include "edge.h"
 #include "graphDocument.h"
-#include "graphicsitem_Node.h"
-#include "graphicsitem_Edge.h"
-#include "graphicsitem_OrientedEdge.h"
+#include "NodeItem.h"
+#include "EdgeItem.h"
+#include "OrientedEdgeItem.h"
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsSceneWheelEvent>

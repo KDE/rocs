@@ -18,7 +18,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "graphicsitem_OrientedEdge.h"
+#include "OrientedEdgeItem.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -36,7 +36,7 @@
 #include "math_constants.h"
 #include <math.h>
 
-#include "graphicsitem_Node.h"
+#include "NodeItem.h"
 #include <SUI_GraphScene.h>
 
 #include <KDebug>
@@ -172,4 +172,4 @@ void OrientedEdgeItem::updateValue(qreal ) {}
 void OrientedEdgeItem::updateTotal(qreal ) {}
 void OrientedEdgeItem::updateColor(QColor ) {}
 
-#include "graphicsitem_OrientedEdge.moc"
+#include "OrientedEdgeItem.moc"
