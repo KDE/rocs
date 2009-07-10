@@ -76,7 +76,7 @@ protected slots:
     void updateTotal(qreal t);
     void updateColor(QColor c);
 
-    /*! Emited when a node is removed */
+    /*! Emmited when a node is removed */
     void remove();
 
 public slots:

@@ -20,6 +20,13 @@
 
 #include "OrientedEdgeItem.h"
 
+#include "NodeItem.h"
+#include "SUI_GraphScene.h"
+#include "node.h"
+#include "edge.h"
+#include "graph.h"
+#include "math_constants.h"
+
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
@@ -28,19 +35,8 @@
 #include <QLine>
 #include <QPolygonF>
 #include <QtAlgorithms>
-
-#include "node.h"
-#include "edge.h"
-#include "graph.h"
-
-#include "math_constants.h"
-#include <math.h>
-
-#include "NodeItem.h"
-#include <SUI_GraphScene.h>
-
 #include <KDebug>
-#include <QPen>
+#include <math.h>
 #include <QTransform>
 
 OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)

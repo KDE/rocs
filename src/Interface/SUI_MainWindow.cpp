@@ -295,7 +295,7 @@ void MainWindow::saveGraph() {
         kDebug() << "Graph Document is NULL";
         return;
     }
-    if (_activeGraphDocument->documentPath() == QString() ) {
+    if (_activeGraphDocument->documentPath().isEmpty() ) {
         saveGraphAs();
     }
     else {

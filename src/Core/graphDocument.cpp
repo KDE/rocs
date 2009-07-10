@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "graph.h"
 #include "graphDocument.h"
+#include "graph.h"
 #include <QString>
 #include <KSaveFile>
 #include <QByteArray>
@@ -175,12 +175,12 @@ void GraphDocument::savePropertiesInternalFormat(QObject *o) {
     }
 
     QList<QByteArray> propertyNames = o->dynamicPropertyNames();
-    foreach(QByteArray name, propertyNames) {
+    foreach(const QByteArray& name, propertyNames) {
         QVariant value = o->property(name);
         buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
     }
 
-    buf += "\n";
+    buf += '\n';
 }
 
 void GraphDocument::loadFromInternalFormat(const QString& filename) {
@@ -199,12 +199,12 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         QString str = f.readLine();
         str = str.simplified();
 
-        if (str.startsWith("#")) { //! Ignore it, commented line.
+        if (str.startsWith('#')) { //! Ignore it, commented line.
             continue;
         }
 
         else if (str.startsWith("[Graph")) {
-            QString gName = str.section(" ",1,1);
+            QString gName = str.section(' ',1,1);
             gName.remove(']');
             tmpGraph = new Graph(this);
             tmpGraph->setName(gName.toAscii());
@@ -214,14 +214,14 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         }
 
         else if (str.startsWith("[Node")) {
-            QString nName = str.section(" ",1,1);
+            QString nName = str.section(' ',1,1);
             nName.remove(']');
             tmpObject = tmpGraph->addNode(nName);
             kDebug() << "Node Created";
         }
 
         else if (str.startsWith("[Edge")) {
-            QString eName = str.section(" ",1,1);
+            QString eName = str.section(' ',1,1);
             eName.remove(']');
 
             QString nameFrom = eName.section("->", 0,0);
@@ -235,9 +235,9 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             gName.remove(']');
             tmpGroup = tmpGraph->addGroup(gName); */
         }
-        else if (str.contains(":")) {
-            QString propertyName = str.section(":",0,0).trimmed();
-            QString propertyValue = str.section(":",1,1).trimmed();
+        else if (str.contains(':')) {
+            QString propertyName = str.section(':',0,0).trimmed();
+            QString propertyValue = str.section(':',1,1).trimmed();
             tmpObject->setProperty( propertyName.toAscii() , propertyValue.toAscii() );
             kDebug() << "Property" << propertyName.toAscii() << "value" << propertyValue.toAscii();
         }

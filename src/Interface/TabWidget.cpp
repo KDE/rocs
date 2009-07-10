@@ -22,7 +22,6 @@
 #include <QStackedWidget>
 
 #include <kmultitabbar.h>
-#include <QStackedWidget>
 #include <KIcon>
 #include <QSplitter>
 #include <KDebug>

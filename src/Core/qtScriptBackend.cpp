@@ -1,5 +1,5 @@
 /***************************************************************************
- * main.cpp
+ *
  * This file is part of the KDE project
  * copyright (C)2004-2007 by Tomaz Canabrava (tomaz.canabrava@gmail.com)
  *
@@ -20,7 +20,6 @@
 #include "krossBackend.h"
 #include "graph.h"
 #include "node.h"
-#include "graphDocument.h"
 #include <KDebug>
 #include <QTextCodec>
 #include <KTextBrowser>
@@ -93,5 +92,5 @@ void QtScriptBackend::loadFile(const QString& file) {
         QByteArray line = f.readLine();
         _script += line;
     }
-    _script += "\n";
+    _script += '\n';
 }

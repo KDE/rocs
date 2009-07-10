@@ -31,6 +31,9 @@
 #include "node.h"
 #include "edge.h"
 
+#include "AlignAction.h"
+#include "settings.h"
+
 #include <QVBoxLayout>
 #include <QPointF>
 #include <QGraphicsItem>
@@ -42,8 +45,6 @@
 #include <KColorButton>
 #include <QGraphicsView>
 #include <QPainter>
-#include "AlignAction.h"
-#include "settings.h"
 
 GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
         : QWidget(parent),
@@ -61,15 +62,15 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
 void GraphVisualEditor::setupWidgets() {
     QHBoxLayout *layout	= new QHBoxLayout();
     layout->setContentsMargins(0,0,0,0);
-    //!################## CODE TO GENERATE THE ALLIGN TOOLBOX ##########################
+    //!################## CODE TO GENERATE THE ALIGN TOOLBOX ##########################
 
     _spacingPropContainer = new QWidget(parentWidget());
-    layout->addWidget(setupToolButton("allign-h-bottom", "Allign nodes on the base", AlignAction::Bottom,this ));
-    layout->addWidget(setupToolButton("allign-h-middle", "Allign nodes horizontally on the middle", AlignAction::MiddleHorizontal,this));
-    layout->addWidget(setupToolButton("allign-h-top", "Allign nodes on the top",AlignAction::Top, this));
-    layout->addWidget(setupToolButton("allign-v-left", "Allign nodes on the left", AlignAction::Left, this ));
-    layout->addWidget(setupToolButton("allign-v-middle", "Allign nodes vertically on the middle", AlignAction::MiddleVertical,this));
-    layout->addWidget(setupToolButton("allign-v-right", "Allign nodes on the right", AlignAction::Right,this));
+    layout->addWidget(setupToolButton("align-h-bottom", "Align nodes on the base", AlignAction::Bottom,this ));
+    layout->addWidget(setupToolButton("align-h-middle", "Align nodes horizontally on the middle", AlignAction::MiddleHorizontal,this));
+    layout->addWidget(setupToolButton("align-h-top", "Align nodes on the top",AlignAction::Top, this));
+    layout->addWidget(setupToolButton("align-v-left", "Align nodes on the left", AlignAction::Left, this ));
+    layout->addWidget(setupToolButton("align-v-middle", "Align nodes vertically on the middle", AlignAction::MiddleVertical,this));
+    layout->addWidget(setupToolButton("align-v-right", "Align nodes on the right", AlignAction::Right,this));
     _spacingPropContainer->setLayout(layout);
 
     //!############################### CODE TO GENERATE THE GRAPH PROPERTIES TOOLBOX ####################################
