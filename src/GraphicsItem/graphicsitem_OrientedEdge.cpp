@@ -49,20 +49,11 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     _edge = edge;
     _loop = (_edge->from() == edge->to());
     _index = _edge->relativeIndex();
-    _pen = new QPen();
     setZValue( - _index);
     setFlag(ItemIsSelectable, true);
     connectSignals();
-    setupPen();
+    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
     setPath(createCurves());
-}
-
-void OrientedEdgeItem::setupPen() {
-    _pen->setStyle(Qt::SolidLine);
-    _pen->setWidth(1);
-    _pen->setCapStyle(Qt::RoundCap);
-    _pen->setJoinStyle(Qt::RoundJoin);
-    setPen( *_pen );
 }
 
 void OrientedEdgeItem::connectSignals() {
@@ -153,20 +144,6 @@ QPainterPath OrientedEdgeItem::createCurves() const {
     return p;
 }
 
-void OrientedEdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-    if (! isVisible() ) return;
-    if (dynamic_cast<GraphScene*>(scene())->hideEdges())return;
-
-    _pen->setBrush(QColor(_edge->color()));
-    if (isSelected()) { _pen->setStyle(Qt::DotLine); }
-    else { _pen->setStyle(Qt::SolidLine); }
-    painter->setPen((*_pen));
-    
-    setPath(createCurves());
-    QGraphicsPathItem::paint(painter, option, 0);
-   // painter->drawPath(path());
-}
-
 void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/){
  }
 
@@ -179,7 +156,8 @@ void OrientedEdgeItem::remove() {
 }
 
 void OrientedEdgeItem::updatePos() {
-  update();
+setPath(createCurves());
+//  update();
 }
 
 void OrientedEdgeItem::updateName(const QString& ) {}

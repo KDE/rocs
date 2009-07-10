@@ -44,6 +44,8 @@ private:
     Graph *_graph;
     AbstractAction *_action;
     QMultiHash<Graph*, QGraphicsItem* > _hashGraphs;
+    QList<QGraphicsItem*> _hidedEdges;
+
     bool _hideEdges;
 };
 

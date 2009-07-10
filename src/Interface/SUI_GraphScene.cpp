@@ -25,6 +25,11 @@ bool GraphScene::hideEdges(){
 
 void GraphScene::setHideEdges(bool h){
   _hideEdges = h;
+  if ( ! _hideEdges ){
+    foreach(QGraphicsItem *i, _hidedEdges){
+      i->update();
+    }
+  }
 }
 
 void GraphScene::setActiveGraph(Graph *g) {
