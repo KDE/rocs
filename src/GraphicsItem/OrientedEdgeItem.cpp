@@ -152,6 +152,10 @@ void OrientedEdgeItem::remove() {
 }
 
 void OrientedEdgeItem::updatePos() {
+  GraphScene* gScene = dynamic_cast<GraphScene*>(scene());
+  if (gScene->hideEdges()){
+      gScene->updateAfter(this);
+  }
  QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
   qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
   if (size   < 20) {

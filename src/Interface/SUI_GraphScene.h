@@ -51,6 +51,8 @@ public:
     void removeGItem(QGraphicsItem *i);
     void setHideEdges(bool h);
     bool hideEdges();
+    void updateAfter(QGraphicsItem *item);
+
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);

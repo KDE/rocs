@@ -69,8 +69,7 @@ void MoveNodeAction::executeMove(QPointF pos) {
       }
     }
    else{
-      _node -> setX(pos.x());
-      _node -> setY(pos.y());
+      _node -> setPos(pos.x(), pos.y());
     }
 }
 

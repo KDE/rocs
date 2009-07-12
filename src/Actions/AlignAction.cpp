@@ -20,6 +20,7 @@
 #include "AlignAction.h"
 #include <KIcon>
 #include "SUI_GraphVisualEditor.h"
+#include "SUI_GraphScene.h"
 #include "generics.h"
 #include <KDebug>
 
@@ -31,38 +32,31 @@ AlignAction::AlignAction(const QString& actionName, const QString& tooltip,Align
 }
 
 void AlignAction::align(){
-  QList<NodeItem*> l = qobject_cast<GraphVisualEditor*>(parent())->selectedNodes();
+  GraphVisualEditor *gEditor = qobject_cast<GraphVisualEditor*>(parent());
+  QList<NodeItem*> l = gEditor->selectedNodes();
+  
   if (l.size() < 1) return;
-  kDebug() << "Size of the list: " << l.size();
-
+  gEditor->scene()->setHideEdges(true);
   switch(m_orientation){
-    case Left : 
-    case MiddleVertical : 
-	  kDebug() << "Ordering by Left";
+    case Left :    case MiddleVertical : 
 	  qSort(l.begin(), l.end(),  leftLessThan);
-	  kDebug() << "Alligning";
 	  allignX(l); 
     break;
-    case Bottom : 
-    case MiddleHorizontal : 
-      kDebug() << "Ordering by Bottom";
-      qSort(l.begin(), l.end(), bottomLessThan);
-      kDebug() << "Alligning";
-      allignY(l); 
+    case Bottom :    case MiddleHorizontal : 
+     qSort(l.begin(), l.end(), bottomLessThan);
+     allignY(l); 
     break;
     case Right : 
-      kDebug() << "Ordening by Right";
       qSort(l.begin(), l.end(), rightLessThan);
-      kDebug() << "Alligning";
       allignX(l);
     break;
-    case Top : 
-      kDebug() << "Ordening by Top";
+    case Top :  
 	qSort( l.begin(), l.end(), topLessThan);
-	kDebug() << "Alligning";
 	allignY(l);
       break;
   }
+
+    gEditor->scene()->setHideEdges(false);
 }
 
 void AlignAction::allignY(QList<NodeItem*>& l){

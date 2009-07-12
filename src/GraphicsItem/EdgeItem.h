@@ -79,7 +79,6 @@ private:
     void connectSignals();
     void setupPen();
     Edge *_edge;
-    QPen *_pen;
 };
 
 #endif

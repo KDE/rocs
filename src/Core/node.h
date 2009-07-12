@@ -73,6 +73,7 @@ public  slots:
     
     void setX(qreal x);
     void setY(qreal y);
+    void setPos(qreal x, qreal y);
     qreal x() const;
     qreal y() const;
     void setColor(const QString& s);

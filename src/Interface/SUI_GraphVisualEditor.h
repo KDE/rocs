@@ -87,7 +87,6 @@ private:
     qreal _rightNode;
 
     QGraphicsView *_graphicsView;
-    /*! Actions */
 
 };
 

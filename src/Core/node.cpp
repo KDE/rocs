@@ -20,7 +20,7 @@
 #include "node.h"
 #include "edge.h"
 #include "graph.h"
-#include <QDebug>
+#include <KDebug>
 
 
 Node::Node(QObject *parent) : QObject(parent) {
@@ -169,6 +169,7 @@ void Node::remove() {
 void Node::setX(qreal x) {  _x = x; emit posChanged(); }
 qreal Node::x() const {    return _x; }
 void Node::setY(qreal y) {  _y  = y; emit posChanged(); }
+void Node::setPos(qreal x, qreal y){ _x = x; _y = y; emit posChanged(); kDebug() << "Updating"; }
 qreal Node::y() const {    return _y; }
 void Node::setColor(const QString& s) {    _color = s; }
 const QString& Node::color() const {    return _color; }

@@ -57,12 +57,12 @@ void EdgeItem::connectSignals() {
     connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
-void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent * /*event*/){
-    update();
+void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent * ){
+  
  }
 
-void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/){
-    update();
+void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *){
+
  }
 
 void EdgeItem::remove() {
@@ -71,27 +71,19 @@ void EdgeItem::remove() {
 }
 
 void EdgeItem::updatePos() {
+  GraphScene* gScene = dynamic_cast<GraphScene*>(scene());
+  if ( gScene && gScene->hideEdges()){
+      gScene->updateAfter(this);
+  }
   QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
   qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
-  if (size   < 20) return ;
-  setLine( q );
+  if (size   < 20){
+    setLine( QLine()) ;
+  }
+  else{
+    setLine( q );
+  }
 }
-
-/*
-void EdgeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-  if (! isVisible() ) return;
- 
-   _pen->setBrush(QColor(_edge->color()));
-  if (isSelected()) {
-	_pen->setStyle(Qt::DotLine);
-    }
-    else{
-	_pen->setStyle(Qt::SolidLine);
-    }
-    painter->setPen((*_pen));
-    painter->drawLine(line());
-}
-*/
 
 void EdgeItem::updateName(const QString& ) {}
 void EdgeItem::updateVisited(bool ) {}

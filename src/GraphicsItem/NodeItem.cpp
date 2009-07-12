@@ -61,7 +61,6 @@ QPainterPath NodeItem::shape() const {
 }
 
 void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-  setPos( QPointF(_node->x(), _node->y() ) );
     if (isSelected()) {
         QPen pen(Qt::black, 1, Qt::DotLine);
 
@@ -98,7 +97,7 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
 }
 
-void NodeItem::updatePos() {  update(); }
+void NodeItem::updatePos() {  setPos( QPointF(_node->x(), _node->y() ) ); }
 void NodeItem::updateName(const QString& ) {}
 void NodeItem::updateVisited(bool ) {}
 void NodeItem::updateValue(qreal ) {}

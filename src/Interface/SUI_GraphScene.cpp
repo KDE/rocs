@@ -56,6 +56,12 @@ void GraphScene::setActiveGraph(Graph *g) {
     _graph = g;
 }
 
+void GraphScene::updateAfter(QGraphicsItem *item){
+  if (_hidedEdges.contains(item)) return;
+  _hidedEdges << item;
+}
+
+
 void GraphScene::setAction(AbstractAction *action) {
     _action = action;
 }
