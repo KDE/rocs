@@ -13,10 +13,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 find_package(KDE4 REQUIRED)
 find_package(GraphViz REQUIRED)
 
-
 include(KDE4Defaults)
-#include(MacroLibrary)
-#include(CheckIncludeFile)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 

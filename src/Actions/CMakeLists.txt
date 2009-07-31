@@ -4,6 +4,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES}
 	../Engine
 	../Models
 	../GraphicsItem
+	../Interface
 )
 
 set(librocsactions_SRCS

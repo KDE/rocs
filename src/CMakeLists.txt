@@ -1,7 +1,5 @@
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
-find_package(GraphViz REQUIRED)
-
 add_subdirectory(Core)
 add_subdirectory(Actions)
 add_subdirectory(Models)
@@ -21,16 +19,18 @@ kde4_add_kcfg_files(rocs_SRCS ${rocs_KCFGS} )
 kde4_add_executable(rocs ${rocs_SRCS} ${rocs_RCC_SRCS})
 
 target_link_libraries(rocs ${KDE4_KDEUI_LIBS}
-	${KDE4_KROSSUI_LIBS}
-      ${KDE4_KIO_LIBS}
-      ${KDE4_KTEXTEDITOR_LIBS}
-      ${QT_QTSCRIPT_LIBRARY}
-
-	librocsui
-	librocsgraphics
-	librocsmodel
-	librocsactions
-	librocscore
+  ${KDE4_KROSSUI_LIBS}
+  ${KDE4_KIO_LIBS}
+  ${KDE4_KTEXTEDITOR_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
+  gvc 
+  graph 
+  cdt
+  librocsui
+  librocsgraphics
+  librocsmodel
+  librocsactions
+  librocscore
 )
 
 install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
