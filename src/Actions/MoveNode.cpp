@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "MoveNode.h"
-#include "SUI_GraphScene.h"
+#include "GraphScene.h"
 #include "graph.h"
 #include "node.h"
 #include "graphDocument.h"
@@ -58,18 +58,18 @@ void MoveNodeAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return;
     }
-    if ((pos.x() < 0) || (pos.x() > _graphDocument->width())){
-      if (( pos.y() > 0) && (pos.y() < _graphDocument->height())){
-	_node -> setY(pos.y());
-      }
+    if ((pos.x() < 0) || (pos.x() > _graphDocument->width())) {
+        if (( pos.y() > 0) && (pos.y() < _graphDocument->height())) {
+            _node -> setY(pos.y());
+        }
     }
-    else if ((pos.y() < 0) || (pos.y() > _graphDocument->height())){
-      if (( pos.x() > 0) && (pos.x() < _graphDocument->width())){
-	_node -> setX(pos.x());
-      }
+    else if ((pos.y() < 0) || (pos.y() > _graphDocument->height())) {
+        if (( pos.x() > 0) && (pos.x() < _graphDocument->width())) {
+            _node -> setX(pos.x());
+        }
     }
-   else{
-      _node -> setPos(pos.x(), pos.y());
+    else {
+        _node -> setPos(pos.x(), pos.y());
     }
 }
 
@@ -77,10 +77,10 @@ void MoveNodeAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
         return;
     }
-     _view->setRenderHint(QPainter::Antialiasing, true);
-    if (!((pos.x() < 0) || (pos.y() < 0) || (pos.x() > _graphDocument->width())|| (pos.y() > _graphDocument->height()))){
-      _node -> setY(pos.y());
-      _node -> setX(pos.x());
+    _view->setRenderHint(QPainter::Antialiasing, true);
+    if (!((pos.x() < 0) || (pos.y() < 0) || (pos.x() > _graphDocument->width())|| (pos.y() > _graphDocument->height()))) {
+        _node -> setY(pos.y());
+        _node -> setX(pos.x());
     }
     _movableNode = 0;
 }

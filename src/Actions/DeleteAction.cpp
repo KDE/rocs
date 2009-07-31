@@ -23,14 +23,14 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QKeyEvent>
-#include "SUI_GraphScene.h"
+#include "GraphScene.h"
 #include "node.h"
 #include "edge.h"
 #include "NodeItem.h"
 #include "EdgeItem.h"
 #include "OrientedEdgeItem.h"
 
-DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent){
+DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent) {
     setText(i18n ( "Delete" ));
     setToolTip ( i18n ( "Delete items by clicking on them.." ) );
     setIcon ( KIcon ( "remove-item" ) );
@@ -38,28 +38,28 @@ DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(s
 
 void DeleteAction::executePress(QPointF pos)
 {
-   QGraphicsItem * item = _graphScene->itemAt(pos);
-   if ( NodeItem *n  = qgraphicsitem_cast<NodeItem*>(item) ){ 
-      qDebug() << "Tentando remover o node. NodeItem: " << n->objectName() ;
-	n->node()->remove();
+    QGraphicsItem * item = _graphScene->itemAt(pos);
+    if ( NodeItem *n  = qgraphicsitem_cast<NodeItem*>(item) ) {
+        qDebug() << "Tentando remover o node. NodeItem: " << n->objectName() ;
+        n->node()->remove();
     }
-    else if( EdgeItem *e = qgraphicsitem_cast<EdgeItem*>(item) ){
-	e->edge()->remove();
+    else if ( EdgeItem *e = qgraphicsitem_cast<EdgeItem*>(item) ) {
+        e->edge()->remove();
     }
-   else if( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ){
-      qDebug() << "Should have deleted the oriented node.";
-	e->edge()->remove();
+    else if ( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ) {
+        qDebug() << "Should have deleted the oriented node.";
+        e->edge()->remove();
     }
-    else{
-      qDebug() << "Nog getting any item.";
+    else {
+        qDebug() << "Nog getting any item.";
     }
-  qDebug() << "Item Removed!";
+    qDebug() << "Item Removed!";
 }
 
 void DeleteAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
-  if (keyEvent->key() == Qt::Key_Delete){
-    qDebug() << "you pressed the Delete key... big deal.";
-  }
+    if (keyEvent->key() == Qt::Key_Delete) {
+        qDebug() << "you pressed the Delete key... big deal.";
+    }
 }
 

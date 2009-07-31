@@ -18,23 +18,27 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "SUI_PaletteScrollArea.h"
-#include <QLayout>
-#include <QStyle>
+#include "Separator.h"
 #include <QScrollBar>
+#include <QPainter>
+#include <QVariant>
+#include <QStyleOption>
 
-PaletteScrollArea::PaletteScrollArea ( QWidget* parent ) : QScrollArea ( parent ) {}
+Separator::Separator ( QWidget* parent ) : QWidget ( parent ) {
+    setSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Minimum );
+    setProperty ( "isSeparator", true );
+}
 
-void PaletteScrollArea::resizeEvent ( QResizeEvent* event ) {
+QSize Separator::sizeHint() const {
+    QStyleOption opt;
+    opt.initFrom ( this );
+    const int extent = style()->pixelMetric ( QStyle::PM_ToolBarSeparatorExtent, &opt, parentWidget() );
+    return QSize ( extent, extent );
+}
 
-    if ( widget() && widget()->layout() ) {
-        QSize size ( maximumViewportSize().width(), widget()->layout()->heightForWidth ( maximumViewportSize().width() ) );
-        if ( size.height() > maximumViewportSize().height() ) {
-            int ext = style()->pixelMetric ( QStyle::PM_LayoutHorizontalSpacing );
-            size.setWidth ( maximumViewportSize().width() - verticalScrollBar()->sizeHint().width() - ext );
-            size.setHeight ( widget()->layout()->heightForWidth ( size.width() ) );
-        }
-        widget()->resize ( size );
-    }
-    QScrollArea::resizeEvent ( event );
+void Separator::paintEvent ( QPaintEvent * ) {
+    QPainter p ( this );
+    QStyleOption opt;
+    opt.initFrom ( this );
+    style()->drawPrimitive ( QStyle::PE_IndicatorToolBarSeparator, &opt, &p, parentWidget() );
 }

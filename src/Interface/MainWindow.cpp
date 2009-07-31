@@ -18,7 +18,7 @@
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 
-#include "SUI_MainWindow.h"
+#include "MainWindow.h"
 
 // KDE Related Includes
 #include <KActionCollection>
@@ -33,11 +33,11 @@
 
 // UI RELATED INCLUDES
 
-#include "SUI_PaletteBarWidget.h"
-#include "SUI_OpenedFilesWidget.h"
-#include "SUI_GraphPropertiesWidget.h"
-#include "SUI_GraphVisualEditor.h"
-#include "SUI_GraphScene.h"
+#include "PaletteBarWidget.h"
+#include "OpenedFilesWidget.h"
+#include "GraphPropertiesWidget.h"
+#include "GraphVisualEditor.h"
+#include "GraphScene.h"
 #include "CodeEditor.h"
 
 // MODEL Related Includes

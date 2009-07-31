@@ -44,7 +44,7 @@ class Graph : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool directed READ directed WRITE setDirected);
     Q_PROPERTY(QString name READ name WRITE setName);
-    
+
 public:
     Graph(QObject *parent);
     ~Graph();
@@ -84,7 +84,7 @@ public  slots:
     void remove(Node *n);
     void remove(Edge *e);
     GraphGroup *addGroup(const QString& name);
-    
+
     Node* addEnd(Node* n);
     void  removeEnd(Node* n);
 
@@ -103,7 +103,7 @@ private:
     QString _name;
     Node* _begin;
     QList<Node*> _ends;
-    
+
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

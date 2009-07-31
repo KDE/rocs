@@ -30,13 +30,13 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
     setProperty("color", "#FF00FF");
 
     if ( from == to ) {
-	connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
+        connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
         from -> addSelfEdge(this);
     }
     else {
-      connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
+        connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
         from -> addOutEdge(this);
-      connect(to, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
+        connect(to, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
         to -> addInEdge(this);
     }
 
@@ -44,7 +44,7 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
 
 }
 
-Edge::~Edge(){
+Edge::~Edge() {
     if (_from == _to) {
         _from->removeEdge(this, Node::Self);
     }
@@ -56,18 +56,28 @@ Edge::~Edge(){
     _to = 0;
     emit removed();
 }
-  void Edge::remove() {  qobject_cast<Graph*>(QObject::parent())->remove(this);}
-  
+void Edge::remove() {
+    qobject_cast<Graph*>(QObject::parent())->remove(this);
+}
+
 #ifdef USING_QTSCRIPT
 
-QScriptValue Edge::start() {    return _from->scriptValue(); }
-QScriptValue  Edge::end() {    return _to->scriptValue(); }
+QScriptValue Edge::start() {
+    return _from->scriptValue();
+}
+QScriptValue  Edge::end() {
+    return _to->scriptValue();
+}
 
 void Edge::setEngine(	QtScriptBackend *engine ) {
     _engine = engine;
     _scriptvalue = _engine->newQObject(this);
 }
 
-QScriptValue Edge::scriptValue() const {    return  _scriptvalue;}
-void Edge::self_remove() {    remove(); }
+QScriptValue Edge::scriptValue() const {
+    return  _scriptvalue;
+}
+void Edge::self_remove() {
+    remove();
+}
 #endif

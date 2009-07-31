@@ -31,7 +31,7 @@
 #include "node.h"
 #include "edge.h"
 #include "graph.h"
-#include <SUI_GraphScene.h>
+#include <GraphScene.h>
 
 
 #include "NodeItem.h"

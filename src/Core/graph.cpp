@@ -187,22 +187,26 @@ void Graph::setName(const QString& s) {
     _name = s;
 }
 
-void Graph::setBegin(Node* n){ _begin = n; }
-Node* Graph::begin() const{ return _begin; }
-
-Node* Graph::addEnd(Node *n){
-  _ends.append(n);
-  return n;
+void Graph::setBegin(Node* n) {
+    _begin = n;
+}
+Node* Graph::begin() const {
+    return _begin;
 }
 
-void Graph::removeEnd(Node *n){
-  _ends.removeAll(n);
+Node* Graph::addEnd(Node *n) {
+    _ends.append(n);
+    return n;
+}
+
+void Graph::removeEnd(Node *n) {
+    _ends.removeAll(n);
 }
 
 #ifdef USING_QTSCRIPT
 
-QScriptValue Graph::begin_node(){
-  return _begin->scriptValue();
+QScriptValue Graph::begin_node() {
+    return _begin->scriptValue();
 }
 
 QScriptValue Graph::end_nodes()

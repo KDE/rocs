@@ -39,7 +39,7 @@ class Node;
 
 /**
 * \class Edge
-* 
+*
 * This class is an edge on the graph. it holds the orientation, the from and the to nodes,auto
 * and has a name, value and color properties.
 * you can change all properties by 'edge.propertyName = new property' and access it's value
@@ -49,24 +49,26 @@ class Node;
 
 class Edge : public QObject {
     Q_OBJECT
-    
+
     /*! all properties are accessible from the scripting engine via .propertyName */
     Q_PROPERTY(QString color READ color WRITE setColor);
     Q_PROPERTY(QString value READ value WRITE setValue);
     Q_PROPERTY(QString name READ name WRITE setName);
-    
+
 public:
     /*! default constructor, takes a Graph* as a parent, and the nodes from and to that it will be bound to. */
     Edge(QObject *parent, Node *from, Node *to);
-    
+
     /*! default destructor */
     ~Edge();
-    
+
     /*! relative index is the index that this edge has relative to the nodes that it's bound to.
     eg. if the nodes have 2 or more edges connecteds between them, it will have a unique
     identifier relative to that nodes */
-  int relativeIndex() const {    return _relativeIndex; }
-    
+    int relativeIndex() const {
+        return _relativeIndex;
+    }
+
     /*! remove this node from the graph */
     void remove();
 #ifdef USING_QTSCRIPT
@@ -75,18 +77,34 @@ public:
 #endif
 
 public  slots:
-  Node* from() const {    return _from; }
-  Node* to() const {    return _to; }
-  
- 
-  const QString& value() const{   return _value; }
-  void setValue (const QString& s){  _value = s; }
-  const QString& name() const{  return _name; }
-  void setName (const QString& s){  _name = s; }
-  const QString color() const{   return _color; }
-  void setColor(const QString& s){  _color = s; }
+    Node* from() const {
+        return _from;
+    }
+    Node* to() const {
+        return _to;
+    }
 
-    
+
+    const QString& value() const {
+        return _value;
+    }
+    void setValue (const QString& s) {
+        _value = s;
+    }
+    const QString& name() const {
+        return _name;
+    }
+    void setName (const QString& s) {
+        _name = s;
+    }
+    const QString color() const {
+        return _color;
+    }
+    void setColor(const QString& s) {
+        _color = s;
+    }
+
+
 #ifdef USING_QTSCRIPT
     QScriptValue start();
     QScriptValue end();
@@ -100,13 +118,13 @@ private:
     QString _value;
     QString _name;
     QString _color;
-    
+
 #ifdef USING_QTSCRIPT
     QScriptValue _scriptvalue;
     QtScriptBackend *_engine;
 #endif
 
-  signals:
+signals:
     void removed();
     void posChanged();
 };

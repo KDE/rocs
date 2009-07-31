@@ -22,7 +22,7 @@
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include "Interface/SUI_MainWindow.h"
+#include "Interface/MainWindow.h"
 
 int main ( int argc, char *argv[] ) {
     KAboutData aboutData ("rocs",

@@ -19,12 +19,12 @@
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 
-#include "SUI_GraphToolBoxWidget.h"
-#include "SUI_MainWindow.h"
+#include "GraphToolBoxWidget.h"
+#include "MainWindow.h"
 #include "graph.h"
 #include "graphDocument.h"
 #include "model_GraphLayers.h"
-#include "SUI_GraphScene.h"
+#include "GraphScene.h"
 #include <KDebug>
 
 GraphToolBoxWidget::GraphToolBoxWidget(MainWindow* parent)

@@ -33,7 +33,7 @@
 #include "OrientedEdgeItem.h"
 #include <KDebug>
 #include <QDebug>
-#include <SUI_GraphScene.h>
+#include <GraphScene.h>
 
 NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
         : QObject(0), QGraphicsItem(parent)

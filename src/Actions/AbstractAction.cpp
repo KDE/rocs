@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "AbstractAction.h"
-#include "SUI_GraphScene.h"
+#include "GraphScene.h"
 #include "graph.h"
 #include "graphDocument.h"
 #include <QPointF>

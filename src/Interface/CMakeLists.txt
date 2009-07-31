@@ -8,16 +8,16 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES}
 )
 
 set(librocsui_SRCS
-	SUI_MainWindow.cpp
-	SUI_OpenedFilesWidget.cpp
-	SUI_GraphToolBoxWidget.cpp
-	SUI_GraphScene.cpp
-	SUI_PaletteBarWidget.cpp
-	SUI_PaletteLayout.cpp	# stolen from Step (remember to kiss	Vladimir Kuznetsov
-	SUI_Separator.cpp
-	SUI_PaletteScrollArea.cpp
-	SUI_GraphVisualEditor.cpp
-	SUI_GraphPropertiesWidget.cpp
+	MainWindow.cpp
+	OpenedFilesWidget.cpp
+	GraphToolBoxWidget.cpp
+	GraphScene.cpp
+	PaletteBarWidget.cpp
+	PaletteLayout.cpp	# stolen from Step (remember to kiss	Vladimir Kuznetsov
+	Separator.cpp
+	PaletteScrollArea.cpp
+	GraphVisualEditor.cpp
+	GraphPropertiesWidget.cpp
 
 	TabWidget.cpp
 	CodeEditor.cpp
@@ -29,6 +29,7 @@ kde4_add_ui_files(
 	OpenedFilesWidget.ui
 	GraphEditWidget.ui
 	GraphPropertiesWidget.ui
+	AddMultiNodes.ui
 )
 
 set(librocsui_KCFGS ../settings.kcfgc)

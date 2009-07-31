@@ -70,7 +70,7 @@ void QtScriptBackend::setProperty( QScriptValue& object, const QScriptString& na
 }
 
 QScriptValue QtScriptBackend::property ( const QScriptValue & object, const QScriptString & name, uint ) {
-   QObject *obj = object.toQObject();
+    QObject *obj = object.toQObject();
     QString s(name.toString());
     if (obj == 0) {
         kDebug () << "Object is zero";

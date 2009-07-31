@@ -19,7 +19,7 @@
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 
-#include "SUI_OpenedFilesWidget.h"
+#include "OpenedFilesWidget.h"
 
 #include "model_GraphDocument.h"
 #include <KDebug>

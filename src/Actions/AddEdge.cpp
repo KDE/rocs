@@ -19,7 +19,7 @@
 */
 
 #include "AddEdge.h"
-#include "SUI_GraphScene.h"
+#include "GraphScene.h"
 #include "graph.h"
 #include "node.h"
 #include "edge.h"
@@ -84,10 +84,10 @@ void AddEdgeAction::executeRelease(QPointF pos) {
 
     _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
     if (  _nodeTo ) {
-      Edge *e = _graph -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
-      if (e) {
-	_graphScene->createEdge(_graph, e);
-      }
+        Edge *e = _graph -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
+        if (e) {
+            _graphScene->createEdge(_graph, e);
+        }
     }
 
     _nodeFrom = 0;

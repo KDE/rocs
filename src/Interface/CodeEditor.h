@@ -2,7 +2,7 @@
 #define CODEEDITOR_H
 
 #include <QWidget>
-#include "SUI_MainWindow.h"
+#include "MainWindow.h"
 
 namespace KTextEditor {
   class Document;

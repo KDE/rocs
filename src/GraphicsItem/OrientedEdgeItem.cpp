@@ -21,7 +21,7 @@
 #include "OrientedEdgeItem.h"
 
 #include "NodeItem.h"
-#include "SUI_GraphScene.h"
+#include "GraphScene.h"
 #include "node.h"
 #include "edge.h"
 #include "graph.h"

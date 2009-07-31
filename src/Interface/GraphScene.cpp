@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  ***************************************************************************/
 
-#include "SUI_GraphScene.h"
+#include "GraphScene.h"
 #include "AbstractAction.h"
 
 #include "node.h"

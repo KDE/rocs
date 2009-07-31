@@ -19,7 +19,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "AddNode.h"
-#include "SUI_GraphScene.h"
+#include "GraphScene.h"
 #include "graph.h"
 #include "NodeItem.h"
 #include "node.h"
@@ -43,12 +43,12 @@ void AddNodeAction::executePress(QPointF pos) {
         kDebug() << "Error, Graph == 0";
         return;
     }
-    
+
     if (pos.x() < 0) return;
     else if (pos.y() < 0) return;
     else if (pos.x() > _graphDocument->width()) return;
     else if (pos.y() > _graphDocument->height()) return;
-    
+
     Node *n = _graph -> addNode(i18n("untitled"));
     n ->setX(pos.x());
     n -> setY(pos.y());

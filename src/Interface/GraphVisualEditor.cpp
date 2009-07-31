@@ -18,10 +18,10 @@
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 
-#include "SUI_GraphVisualEditor.h"
-#include "SUI_GraphToolBoxWidget.h"
-#include "SUI_GraphScene.h"
-#include "SUI_MainWindow.h"
+#include "GraphVisualEditor.h"
+#include "GraphToolBoxWidget.h"
+#include "GraphScene.h"
+#include "MainWindow.h"
 #include "NodeItem.h"
 #include "EdgeItem.h"
 #include "OrientedEdgeItem.h"

@@ -6,7 +6,7 @@
 #include <KLocale>
 #include <KXMLGUIFactory>
 #include <QHBoxLayout>
-#include "SUI_MainWindow.h"
+#include "MainWindow.h"
 #include <KParts/ReadOnlyPart>
 #include <KFileDialog>
 

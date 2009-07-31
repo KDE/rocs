@@ -18,7 +18,7 @@
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 
-#include "SUI_GraphPropertiesWidget.h"
+#include "GraphPropertiesWidget.h"
 #include "model_GraphProperties.h"
 #include <KDebug>
 #include <QVariant>
@@ -27,7 +27,7 @@
 #include "graphDocument.h"
 #include "node.h"
 #include "edge.h"
-#include "SUI_MainWindow.h"
+#include "MainWindow.h"
 #include "EdgeItem.h"
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"

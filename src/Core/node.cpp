@@ -162,42 +162,73 @@ QList<Edge*> Node::edges(Node *n) {
 }
 
 void Node::remove() {
-     qobject_cast<Graph*>(QObject::parent())->remove(this);
+    qobject_cast<Graph*>(QObject::parent())->remove(this);
 }
 
 //! Properties:
-void Node::setX(qreal x) {  _x = x; emit posChanged(); }
-qreal Node::x() const {    return _x; }
-void Node::setY(qreal y) {  _y  = y; emit posChanged(); }
-void Node::setPos(qreal x, qreal y){ _x = x; _y = y; emit posChanged(); kDebug() << "Updating"; }
-qreal Node::y() const {    return _y; }
-void Node::setColor(const QString& s) {    _color = s; }
-const QString& Node::color() const {    return _color; }
-void Node::setName(const QString& s) {    _name = s;}
-const QString& Node::name() const {    return _name;}
-
-void Node::setBegin(bool begin){
-  _begin = begin;
-   if(begin){
-     Graph *p = qobject_cast<Graph*>(QObject::parent());
-     p->setBegin(this);
-   }
+void Node::setX(qreal x) {
+    _x = x;
+    emit posChanged();
+}
+qreal Node::x() const {
+    return _x;
+}
+void Node::setY(qreal y) {
+    _y  = y;
+    emit posChanged();
+}
+void Node::setPos(qreal x, qreal y) {
+    _x = x;
+    _y = y;
+    emit posChanged();
+    kDebug() << "Updating";
+}
+qreal Node::y() const {
+    return _y;
+}
+void Node::setColor(const QString& s) {
+    _color = s;
+}
+const QString& Node::color() const {
+    return _color;
+}
+void Node::setName(const QString& s) {
+    _name = s;
+}
+const QString& Node::name() const {
+    return _name;
 }
 
-void Node::setEnd(bool end){ 
-  _end = end; 
-  Graph *p = qobject_cast<Graph*>(QObject::parent());
-  if (end){
-     p->addEnd(this);
-  }else{
-    p->removeEnd(this);
-  }
+void Node::setBegin(bool begin) {
+    _begin = begin;
+    if (begin) {
+        Graph *p = qobject_cast<Graph*>(QObject::parent());
+        p->setBegin(this);
+    }
 }
 
-bool Node::begin() const { return _begin; }
-bool Node::end() const { return _end; }
-const QString& Node::value() const { return _value; }
-void  Node::setValue(const QString& s) { _value = s; }
+void Node::setEnd(bool end) {
+    _end = end;
+    Graph *p = qobject_cast<Graph*>(QObject::parent());
+    if (end) {
+        p->addEnd(this);
+    } else {
+        p->removeEnd(this);
+    }
+}
+
+bool Node::begin() const {
+    return _begin;
+}
+bool Node::end() const {
+    return _end;
+}
+const QString& Node::value() const {
+    return _value;
+}
+void  Node::setValue(const QString& s) {
+    _value = s;
+}
 
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {

@@ -19,8 +19,8 @@
 */
 #include "AlignAction.h"
 #include <KIcon>
-#include "SUI_GraphVisualEditor.h"
-#include "SUI_GraphScene.h"
+#include "GraphVisualEditor.h"
+#include "GraphScene.h"
 #include "generics.h"
 #include <KDebug>
 
