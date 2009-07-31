@@ -66,6 +66,8 @@
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
 
+#include <qscriptenginedebugger.h>
+
 MainWindow* mainWindow = 0;
 
 MainWindow::MainWindow() :
@@ -329,9 +331,15 @@ static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engin
 void MainWindow::executeScript() {
     if (_activeGraphDocument == 0) {     return;     }
     if (_txtDebug == 0) {    return;    }
-
+    
+    
     _txtDebug->clear();
     QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
+    QScriptEngineDebugger *e = new QScriptEngineDebugger(this);
+    
+    e->attachTo(engine);
+    //e->action(QScriptEngineDebugger::InterruptAction)
+    
     engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
     QScriptValue results = engine->evaluate(_codeEditor->text());
     _txtDebug->insertPlainText(results.toString());

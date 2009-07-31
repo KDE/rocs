@@ -22,8 +22,6 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent){
     _editor->setSimpleMode(true);
     newScript();
     setLayout(_layout);
- //parent->guiFactory()->addClient( _docView );
-
 }
 
 void CodeEditor::newScript(){
