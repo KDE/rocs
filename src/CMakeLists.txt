@@ -1,4 +1,6 @@
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} Interface)
+include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+
+find_package(GraphViz REQUIRED)
 
 add_subdirectory(Core)
 add_subdirectory(Actions)
