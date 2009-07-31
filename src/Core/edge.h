@@ -65,7 +65,7 @@ public:
     /*! relative index is the index that this edge has relative to the nodes that it's bound to.
     eg. if the nodes have 2 or more edges connecteds between them, it will have a unique
     identifier relative to that nodes */
-    int relativeIndex() const;
+  int relativeIndex() const {    return _relativeIndex; }
     
     /*! remove this node from the graph */
     void remove();
@@ -75,14 +75,17 @@ public:
 #endif
 
 public  slots:
-    Node* from() const;
-    Node* to() const;
-    const QString& value() const;
-    void setValue (const QString& s);
-    const QString& name() const;
-    void setName (const QString& s);
-    const QString color() const;
-    void setColor(const QString& s);
+  Node* from() const {    return _from; }
+  Node* to() const {    return _to; }
+  
+ 
+  const QString& value() const{   return _value; }
+  void setValue (const QString& s){  _value = s; }
+  const QString& name() const{  return _name; }
+  void setName (const QString& s){  _name = s; }
+  const QString color() const{   return _color; }
+  void setColor(const QString& s){  _color = s; }
+
     
 #ifdef USING_QTSCRIPT
     QScriptValue start();

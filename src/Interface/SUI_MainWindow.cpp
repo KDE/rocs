@@ -59,9 +59,12 @@
 #include "SmartAction.h"
 #include "DeleteAction.h"
 
+
 // backends
 #include "qtScriptBackend.h"
 #include <kstandarddirs.h>
+#include <ktexteditor/editor.h>
+#include <ktexteditor/document.h>
 
 MainWindow* mainWindow = 0;
 
@@ -197,22 +200,22 @@ void MainWindow::setupActions() {
     action = new KAction(KIcon("document-new"),i18n("New Script"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("new-script", action);
-    connect(action, SIGNAL(triggered(bool)), this, SLOT(newScript()));
+    connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(newScript()));
 
     action = new KAction(KIcon("document-open"),i18n("Open Script"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("open-script", action);
-    connect(action, SIGNAL(triggered(bool)), this, SLOT(openScript()));
+    connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(openScript()));
 
     action = new KAction(KIcon("document-save"),i18n("Save Script"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("save-script", action);
-    connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScript()));
+    connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScript()));
 
     action = new KAction(KIcon("document-save-as"), i18n("Save Script As"), this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
     actionCollection()->addAction("save-script-as", action);
-   // connect(action, SIGNAL(triggered(bool)), this, SLOT(saveScriptAs()));
+    connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScriptAs()));
 
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
@@ -311,9 +314,6 @@ void MainWindow::saveGraphAs() {
 
     _activeGraphDocument->saveAsInternalFormat(KFileDialog::getSaveFileName());
 }
-
-void MainWindow::newScript() {}
-void MainWindow::openScript() {}
 
 void MainWindow::debug(const QString& s) {
     _txtDebug->insertPlainText(s);

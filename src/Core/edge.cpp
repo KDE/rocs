@@ -44,8 +44,7 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
 
 }
 
-Edge::~Edge()
-{
+Edge::~Edge(){
     if (_from == _to) {
         _from->removeEdge(this, Node::Self);
     }
@@ -57,50 +56,18 @@ Edge::~Edge()
     _to = 0;
     emit removed();
 }
-
-Node* Edge::from() const {
-    return _from;
-}
-
-Node* Edge::to() const {
-    return _to;
-}
-
-int Edge::relativeIndex() const {
-    return _relativeIndex;
-}
-
-void Edge::remove() {
-  qobject_cast<Graph*>(QObject::parent())->remove(this);
-}
-
-const QString& Edge::value() const{   return _value; }
-void Edge::setValue (const QString& s){  _value = s; }
-const QString& Edge::name() const{  return _name; }
-void Edge::setName (const QString& s){  _name = s; }
-const QString Edge::color() const{   return _color; }
-void Edge::setColor(const QString& s){  _color = s; }
-    
+  void Edge::remove() {  qobject_cast<Graph*>(QObject::parent())->remove(this);}
+  
 #ifdef USING_QTSCRIPT
 
-QScriptValue Edge::start() {
-    return _from->scriptValue();
-}
-
-QScriptValue  Edge::end() {
-    return _to->scriptValue();
-}
+QScriptValue Edge::start() {    return _from->scriptValue(); }
+QScriptValue  Edge::end() {    return _to->scriptValue(); }
 
 void Edge::setEngine(	QtScriptBackend *engine ) {
     _engine = engine;
     _scriptvalue = _engine->newQObject(this);
 }
 
-QScriptValue Edge::scriptValue() const {
-    return  _scriptvalue;
-}
-
-void Edge::self_remove() {
-    remove();
-}
+QScriptValue Edge::scriptValue() const {    return  _scriptvalue;}
+void Edge::self_remove() {    remove(); }
 #endif

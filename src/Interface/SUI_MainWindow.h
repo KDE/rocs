@@ -76,9 +76,6 @@ private slots:
     void saveGraph();
     void saveGraphAs();
 
-    void newScript();
-    void openScript();
-
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);

@@ -8,14 +8,18 @@
  
   <MenuBar>
     <Menu name="file" >
-      <Action name="new-graph" />
-      <Action name="open-graph" />
-      <Action name="save-graph" />
-      <Action name="save-graph-as" />
-      <Action name="new-script" />
-      <Action name="open-script" />
-      <Action name="save-script" />
-      <Action name="save-script-as" />
+      <Menu name="graph"><Text> Graph </Text>
+	<Action name="new-graph" />
+	<Action name="open-graph" />
+	<Action name="save-graph" />
+	<Action name="save-graph-as" />
+      </Menu>
+      <Menu name="Script"> <Text> Script </Text>
+	<Action name="new-script" />
+	<Action name="open-script" />
+	<Action name="save-script" />
+	<Action name="save-script-as" />
+      </Menu>
     </Menu>
   </MenuBar>
  
