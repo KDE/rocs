@@ -24,9 +24,9 @@ target_link_libraries(rocs ${KDE4_KDEUI_LIBS}
   ${KDE4_KTEXTEDITOR_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
   QtScriptTools
-  gvc 
-  graph 
-  cdt
+  #  gvc 
+  #  graph 
+  # cdt
   librocsui
   librocsgraphics
   librocsmodel

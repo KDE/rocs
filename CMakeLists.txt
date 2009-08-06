@@ -11,7 +11,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 
 #atm this gets is FindQt4 and FindX11 (provided that the default cmake FindQt4 doesn't get used)
 find_package(KDE4 REQUIRED)
-find_package(GraphViz REQUIRED)
+#find_package(GraphViz REQUIRED)
 
 include(KDE4Defaults)
 
