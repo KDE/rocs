@@ -22,6 +22,9 @@
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
+#include <KIconLoader>
+#include <KDebug>
+
 #include "Interface/MainWindow.h"
 
 int main ( int argc, char *argv[] ) {
@@ -38,7 +41,7 @@ int main ( int argc, char *argv[] ) {
 
     KCmdLineArgs::init ( argc, argv, &aboutData );
     KApplication app;
-
+    
     MainWindow *window = new MainWindow();
     window->show();
 

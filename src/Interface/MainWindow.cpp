@@ -51,7 +51,6 @@
 
 // Action Related Includes
 #include "AbstractAction.h"
-#include "Pointer.h"
 #include "AddNode.h"
 #include "AddEdge.h"
 #include "MoveNode.h"
@@ -65,7 +64,7 @@
 #include <kstandarddirs.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
-
+#include <KStatusBar>
 #include <qscriptenginedebugger.h>
 
 MainWindow* mainWindow = 0;
@@ -89,6 +88,7 @@ MainWindow::MainWindow() :
     _moveNodeAction->setView( _graphVisualEditor->view() );
     mainWindow = this;
   _OpenedFiles->selectDefaultFile();
+  statusBar()->hide();
 }
 
 MainWindow::~MainWindow() {
@@ -166,12 +166,13 @@ void MainWindow::setupActions() {
         kDebug() << "There is no graph scene at this point.";
         return;
     }
+        _moveNodeAction = new MoveNodeAction(gc, this);
     _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
-    _paletteActions->addAction("pointer_action", new PointerAction(gc, this));
+    _paletteActions->addAction("move_node_action", _moveNodeAction);
     _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
     _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
-    _moveNodeAction = new MoveNodeAction(gc, this);
-    _paletteActions->addAction("move_node_action", _moveNodeAction);
+
+
     _paletteActions->addAction("select_action", new SelectAction(gc, this));
     _paletteActions->addAction("delete_action", new DeleteAction(gc, this));
     _PaletteBar->setActionCollection(_paletteActions);

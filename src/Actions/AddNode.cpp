@@ -31,7 +31,7 @@ AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Add Node" ));
     setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
-    setIcon ( KIcon ( "add-node" ) );
+    setIcon ( KIcon ( "node16.png" ) );
 }
 
 AddNodeAction::~AddNodeAction() {
