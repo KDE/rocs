@@ -26,6 +26,7 @@
 #include <QStyleOption>
 #include <QPen>
 #include <QBrush>
+#include <QThread>
 
 #include "node.h"
 #include "graph.h"
@@ -34,21 +35,50 @@
 #include <KDebug>
 #include <QDebug>
 #include <GraphScene.h>
+#include <QTimeLine>
 
 NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
         : QObject(0), QGraphicsItem(parent)
 {
     _node = node;
+    _opacity = 0;
     connect(_node, SIGNAL(posChanged()), this, SLOT(updatePos()));
     QPointF pos( _node -> x() ,_node->y() );
     setPos( pos );
     setZValue(1);
     setFlag(ItemIsSelectable);
     connect (_node, SIGNAL(removed()), this, SLOT(remove()));
+     QTimeLine *timeLine = new QTimeLine(500, this);
+     timeLine->setFrameRange(0, 50);
+     connect(timeLine, SIGNAL(frameChanged(int)), this, SLOT(removeOpacity()));
+     timeLine->start();
+     
+   }
+
+NodeItem::~NodeItem(){
+//      QTimeLine *timeLine = new QTimeLine(500, this);
+//      timeLine->setFrameRange(0, 50);
+//      connect(timeLine, SIGNAL(frameChanged(int)), this, SLOT(addOpacity()));
+//      timeLine->start();
+//      sleep(500);
+}
+void NodeItem::removeOpacity(){
+  if ( _opacity  < 1.0 ) _opacity += 0.1;
+  if ( _opacity  > 1.0 ) _opacity = 1.0;
+  update();
+}
+
+void NodeItem::addOpacity(){
+  if ( _opacity > 0.0 ) _opacity -= 0.1;
+  if ( _opacity < 0.0 ) _opacity = 0.0;
+  update();
 }
 
 QRectF NodeItem::boundingRect() const {
      if ( _node->begin() ){
+         return QRectF(-52, -12 , 65, 25);
+     }
+     if ( _removingBeginFlag ){
          return QRectF(-52, -12 , 65, 25);
      }
     return QRectF(-12, -12 , 25, 25);
@@ -69,17 +99,21 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawRect(QRectF(-11 , -11 , 24 , 24 ));
     }
     if( _node->begin() ){
+      if (_removingBeginFlag == false) _removingBeginFlag = true;
       painter->drawLine(-20, -10, 0, 0);
       painter->drawLine(-52, 0, 0, 0);
       painter->drawLine(-20, 10, 0, 0);
     }
+    else if (_removingBeginFlag) _removingBeginFlag = false;
 
     painter->setPen(Qt::NoPen);
     QColor color = QColor(_node->color());
+    color.setAlphaF(_opacity);
     painter->setBrush( color.dark(240) );
 
     painter->drawEllipse(-7, -7, 20, 20);
     QRadialGradient gradient(-3, -3, 10);
+    
     if (option->state & QStyle::State_Sunken) {
         gradient.setColorAt(0, color.light(240));
         gradient.setColorAt(1, color);
@@ -92,7 +126,9 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setPen(QPen(color, 2));
     painter->drawEllipse(-10, -10, 20, 20);
     if( _node->end() ){
-      painter->setPen(Qt::black);
+      QColor c(Qt::black);
+      c.setAlphaF(_opacity);
+      painter->setPen(c);
       painter->drawEllipse(-7, -7, 15, 15); 
     }
 }

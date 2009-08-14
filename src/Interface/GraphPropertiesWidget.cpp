@@ -51,7 +51,7 @@ GraphPropertiesWidget::GraphPropertiesWidget ( MainWindow* parent )
   connect(_edgeColor, SIGNAL(activated(QColor)),    this, SLOT(edgeColorChanged(QColor)) );
   connect(_edgeName, SIGNAL(textChanged(const QString&)),  this, SLOT(edgeNameChanged(const QString&)));
   connect(_edgeValue, SIGNAL(textChanged(const QString&)), this, SLOT(edgeValueChanged(const QString&)));
-  
+    kDebug() << "Graph Properties Widget Created!";
 }
 
 void GraphPropertiesWidget::setDataSource(QGraphicsItem *o) {

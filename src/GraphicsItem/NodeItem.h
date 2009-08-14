@@ -37,7 +37,8 @@ public:
     \param node the  Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
     explicit NodeItem( Node *node, QGraphicsItem *parent = 0);
-
+   virtual ~NodeItem();
+  
     /*! The type of the item */
     enum { Type = UserType + 1 };
 
@@ -51,7 +52,7 @@ public:
     /*! calculates the boundingRect of this item
       \return the calculated boudingRect.
     */
-    QRectF boundingRect() const;
+    QRectF boundingRect() const ;
 
     /*! calculates the shape of the node
       \return the calculated shape.
@@ -81,9 +82,13 @@ protected slots:
 
 public slots:
     void updatePos();
-
+     void addOpacity();
+     void removeOpacity();
+     
 private:
     Node *_node;
+    qreal _opacity;
+    bool _removingBeginFlag;
 };
 
 #endif

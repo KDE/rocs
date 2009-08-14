@@ -166,13 +166,11 @@ void MainWindow::setupActions() {
         kDebug() << "There is no graph scene at this point.";
         return;
     }
-        _moveNodeAction = new MoveNodeAction(gc, this);
+     _moveNodeAction = new MoveNodeAction(gc, this);
     _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
     _paletteActions->addAction("move_node_action", _moveNodeAction);
     _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
     _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
-
-
     _paletteActions->addAction("select_action", new SelectAction(gc, this));
     _paletteActions->addAction("delete_action", new DeleteAction(gc, this));
     _PaletteBar->setActionCollection(_paletteActions);
@@ -227,8 +225,7 @@ void MainWindow::setupSignals() {
     connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
              this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
 
-    //! action here is "selection action". please, change that to a more intuitive approach.
-    connect( _paletteActions->action(4), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
+ connect( _paletteActions->action("select_action"), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
              _GraphProperties, SLOT(setDataSource(QGraphicsItem*)));
 
 }
