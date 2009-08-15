@@ -112,12 +112,12 @@ Node* Graph::node(const QString& name) {
 
 void Graph::remove(Node *n) {
     _nodes.removeOne( n  );
-    delete n;
+    n->deleteLater();
 }
 
 void Graph::remove(Edge *e) {
     _edges.removeOne( e );
-    delete e;
+    e->deleteLater();
 }
 
 void Graph::setDirected(bool directed) {

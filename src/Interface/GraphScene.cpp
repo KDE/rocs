@@ -90,7 +90,6 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
 }
 QGraphicsItem *GraphScene::createNode(Graph *g, Node *n) {
     NodeItem *nItem = new NodeItem(n);
-    connect(n, SIGNAL(removed()), nItem, SLOT(remove()));
     insertGraphItem(g, nItem);
     return nItem;
 }
@@ -98,12 +97,8 @@ QGraphicsItem *GraphScene::createNode(Graph *g, Node *n) {
 QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
     QGraphicsItem *edgeItem = 0;
 
-    if ( !g->directed() ) {
-        edgeItem = new EdgeItem(e);
-    }
-    else {
-        edgeItem = new OrientedEdgeItem(e);
-    }
+    if ( !g->directed() )  edgeItem = new EdgeItem(e);
+    else         edgeItem = new OrientedEdgeItem(e);
 
     insertGraphItem(g, edgeItem);
     return edgeItem;

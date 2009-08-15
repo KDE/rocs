@@ -50,9 +50,6 @@ void DeleteAction::executePress(QPointF pos)
         qDebug() << "Should have deleted the oriented node.";
         e->edge()->remove();
     }
-    else {
-        qDebug() << "Nog getting any item.";
-    }
     qDebug() << "Item Removed!";
 }
 

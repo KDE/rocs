@@ -38,30 +38,26 @@
 #include <QTimeLine>
 
 NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
-        : QObject(0), QGraphicsItem(parent)
-{
+        : QObject(0), QGraphicsItem(parent){
     _node = node;
     _opacity = 0;
+    _timeLine = 0;
     connect(_node, SIGNAL(posChanged()), this, SLOT(updatePos()));
     QPointF pos( _node -> x() ,_node->y() );
     setPos( pos );
     setZValue(1);
     setFlag(ItemIsSelectable);
-    connect (_node, SIGNAL(removed()), this, SLOT(remove()));
-     QTimeLine *timeLine = new QTimeLine(500, this);
-     timeLine->setFrameRange(0, 50);
-     connect(timeLine, SIGNAL(frameChanged(int)), this, SLOT(removeOpacity()));
-     timeLine->start();
-     
-   }
+    connect (_node, SIGNAL(removed()), this, SLOT(deleteItem()));
+    _timeLine = new QTimeLine(500, this);
+    _timeLine->setFrameRange(0, 50);
+    connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(removeOpacity()));
+    _timeLine->start();
+}
 
 NodeItem::~NodeItem(){
-//      QTimeLine *timeLine = new QTimeLine(500, this);
-//      timeLine->setFrameRange(0, 50);
-//      connect(timeLine, SIGNAL(frameChanged(int)), this, SLOT(addOpacity()));
-//      timeLine->start();
-//      sleep(500);
+  kDebug() << "Node Item removed";
 }
+
 void NodeItem::removeOpacity(){
   if ( _opacity  < 1.0 ) _opacity += 0.1;
   if ( _opacity  > 1.0 ) _opacity = 1.0;
@@ -69,13 +65,24 @@ void NodeItem::removeOpacity(){
 }
 
 void NodeItem::addOpacity(){
+  kDebug() << "Add Opacity Running";
   if ( _opacity > 0.0 ) _opacity -= 0.1;
   if ( _opacity < 0.0 ) _opacity = 0.0;
   update();
 }
 
+void NodeItem::deleteItem() {
+  _node = 0;
+  if (!_timeLine ) delete _timeLine;
+  _timeLine = new QTimeLine(500, this);
+  _timeLine->setFrameRange(0, 50);
+  connect(_timeLine, SIGNAL(finished()), this, SLOT(deleteLater()));
+  connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(addOpacity()));
+  _timeLine->start();
+}
+
 QRectF NodeItem::boundingRect() const {
-     if ( _node->begin() ){
+     if ( _node && _node->begin() ){
          return QRectF(-52, -12 , 65, 25);
      }
      if ( _removingBeginFlag ){
@@ -91,14 +98,17 @@ QPainterPath NodeItem::shape() const {
 }
 
 void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+    if (_node){   _color = _node->color();  }
+    
     if (isSelected()) {
         QPen pen(Qt::black, 1, Qt::DotLine);
-
         painter->setBrush(QBrush());
         painter->setPen(pen);
         painter->drawRect(QRectF(-11 , -11 , 24 , 24 ));
     }
-    if( _node->begin() ){
+
+
+    if( _node && _node->begin() ){
       if (_removingBeginFlag == false) _removingBeginFlag = true;
       painter->drawLine(-20, -10, 0, 0);
       painter->drawLine(-52, 0, 0, 0);
@@ -107,25 +117,25 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     else if (_removingBeginFlag) _removingBeginFlag = false;
 
     painter->setPen(Qt::NoPen);
-    QColor color = QColor(_node->color());
-    color.setAlphaF(_opacity);
-    painter->setBrush( color.dark(240) );
+    
+    _color.setAlphaF(_opacity);
+    painter->setBrush( _color.dark(240) );
 
     painter->drawEllipse(-7, -7, 20, 20);
     QRadialGradient gradient(-3, -3, 10);
     
     if (option->state & QStyle::State_Sunken) {
-        gradient.setColorAt(0, color.light(240));
-        gradient.setColorAt(1, color);
+        gradient.setColorAt(0, _color.light(240));
+        gradient.setColorAt(1, _color);
     } else {
-        gradient.setColorAt(0, color.light(240));
-        gradient.setColorAt(1, color);
+        gradient.setColorAt(0, _color.light(240));
+        gradient.setColorAt(1, _color);
     }
 
     painter->setBrush(gradient);
-    painter->setPen(QPen(color, 2));
+    painter->setPen(QPen(_color, 2));
     painter->drawEllipse(-10, -10, 20, 20);
-    if( _node->end() ){
+    if(_node && _node->end() ){
       QColor c(Qt::black);
       c.setAlphaF(_opacity);
       painter->setPen(c);

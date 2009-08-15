@@ -23,9 +23,12 @@
 
 #include <QGraphicsItem>
 #include <QList>
+#include <QColor>
 
 class QGraphicsSceneMouseEvent;
 class Node;
+class QTimeLine;
+
 
 /*! \brief the node drawing on screen.
   long explanation here...
@@ -84,11 +87,14 @@ public slots:
     void updatePos();
      void addOpacity();
      void removeOpacity();
+     void deleteItem();
      
 private:
     Node *_node;
     qreal _opacity;
     bool _removingBeginFlag;
+    QTimeLine *_timeLine;
+    QColor _color;
 };
 
 #endif
