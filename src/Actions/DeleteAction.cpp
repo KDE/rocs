@@ -33,7 +33,7 @@
 DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent) {
     setText(i18n ( "Delete" ));
     setToolTip ( i18n ( "Delete items by clicking on them.." ) );
-    setIcon ( KIcon ( "remove-item" ) );
+    setIcon ( KIcon ( "rocsdelete" ) );
 }
 
 void DeleteAction::executePress(QPointF pos)

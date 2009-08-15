@@ -25,10 +25,18 @@
 #include <KDebug>
 
 AlignAction::AlignAction(const QString& actionName, const QString& tooltip,AlignAction::Orientation o, QWidget *parent)
-  : KAction(KIcon(actionName), tooltip, parent){
+  : KAction(KIcon(), tooltip, parent){
   m_orientation = o;
   connect(this, SIGNAL(triggered()), this, SLOT(align()));
     kDebug() << " Allign Action Created!";
+    switch(o){
+      case Left : setIcon(KIcon("rocsallignleft")); break;
+      case  Right : setIcon(KIcon("rocsallignright")); break;
+      case Top : setIcon(KIcon("rocsalligntop")); break;
+      case Bottom : setIcon(KIcon("rocsallignbottom")); break;
+      case MiddleHorizontal : setIcon(KIcon("rocsallignhmiddle")); break;
+      case MiddleVertical : setIcon(KIcon("rocsallignvmiddle")); break;
+    }
 }
 
 void AlignAction::align(){

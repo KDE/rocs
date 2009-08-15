@@ -36,7 +36,7 @@ SelectAction::SelectAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Select" ));
     setToolTip ( i18n ( "Select Items by clicking on them." ) );
-    setIcon ( KIcon ( "single-select" ) );
+    setIcon ( KIcon ( "rocsselect" ) );
     _selectionRect = 0;
 }
 
