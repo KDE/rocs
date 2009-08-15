@@ -28,6 +28,7 @@
 #include <KApplication>
 #include <KTextBrowser>
 #include <KMessageBox>
+#include <KApplication>
 #include <kfiledialog.h>
 #include "TabWidget.h"
 
@@ -160,7 +161,7 @@ QWidget* MainWindow::setupLeftPanel() {
 }
 
 void MainWindow::setupActions() {
-    KStandardAction::quit ( this,		SLOT ( quit() ),				actionCollection() );
+    KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
     GraphScene *gc = _graphVisualEditor->scene();
     if (!gc) {
         kDebug() << "There is no graph scene at this point.";
