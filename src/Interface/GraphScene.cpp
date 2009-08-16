@@ -152,7 +152,7 @@ void GraphScene::updateGraph(Graph *g) {
     QList<QGraphicsItem*> items = _hashGraphs.values(g);
     foreach(QGraphicsItem *i, items) {
         removeItem(i);
-        delete i;
+      delete i;
     }
 
     _hashGraphs.remove(g);

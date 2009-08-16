@@ -117,7 +117,7 @@ void Graph::remove(Node *n) {
 
 void Graph::remove(Edge *e) {
     _edges.removeOne( e );
-    e->deleteLater();
+    delete e;
 }
 
 void Graph::setDirected(bool directed) {

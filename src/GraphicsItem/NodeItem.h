@@ -79,7 +79,7 @@ protected slots:
     void updateValue(qreal v);
     void updateTotal(qreal t);
     void updateColor(QColor c);
-
+    void removeFromScene();
     /*! Emmited when a node is removed */
     void remove();
 

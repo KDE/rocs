@@ -57,6 +57,10 @@ void EdgeItem::connectSignals() {
     connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
+EdgeItem::~EdgeItem(){
+//  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
+//  kDebug() << "Removing Edge";
+}
 void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent * ){
   
  }

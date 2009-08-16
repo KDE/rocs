@@ -39,7 +39,7 @@ public:
     \param node the libgraph::Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
     explicit OrientedEdgeItem(Edge *edge, QGraphicsItem *parent = 0);
-
+    virtual ~OrientedEdgeItem();
     /*! The type of the item */
     enum { Type = UserType + 3 };
 

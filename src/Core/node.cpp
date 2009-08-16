@@ -39,9 +39,8 @@ Node::~Node() {
 }
 
 void Node::empty(QList<Edge*> *list) {
-    Graph *g = qobject_cast<Graph*>( QObject::parent() );
     foreach(Edge *e, (*list) ) {
-        g->remove(e);
+        e->remove();
     }
 }
 
@@ -123,12 +122,9 @@ Edge* Node::addEdge(Node* to) {
 
 void Node::removeEdge(Edge *e, int edgeList) {
     switch (edgeList) {
-    case In  :
-        removeEdge(e, &_in_edges);
-    case Out :
-        removeEdge(e, &_out_edges);
-    case Self:
-        removeEdge(e, &_self_edges);
+    case In  : removeEdge(e, &_in_edges); break;
+    case Out : removeEdge(e, &_out_edges); break;
+    case Self: removeEdge(e, &_self_edges); break;
     }
 }
 

@@ -52,6 +52,11 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     setPath(createCurves());
 }
 
+OrientedEdgeItem::~OrientedEdgeItem(){
+//  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
+//  kDebug() << "Oriented Edge Removed";
+}
+
 void OrientedEdgeItem::connectSignals() {
   connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));  
   connect (_edge, SIGNAL(removed()), this, SLOT(remove()));

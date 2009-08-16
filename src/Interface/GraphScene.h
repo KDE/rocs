@@ -37,6 +37,7 @@ class EdgeItem;
 
 
 class GraphScene : public QGraphicsScene {
+  Q_OBJECT
 public:
     GraphScene(QObject *parent);
     void setAction(AbstractAction *action);
@@ -48,11 +49,14 @@ public:
     void setActiveGraphDocument(GraphDocument *gd);
     void insertGraphItem(Graph *g, QGraphicsItem *item);
     void clearGraph();
-    void removeGItem(QGraphicsItem *i);
+    
     void setHideEdges(bool h);
     bool hideEdges();
     void updateAfter(QGraphicsItem *item);
 
+  public slots:
+    void removeGItem(QGraphicsItem *i);
+    
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);

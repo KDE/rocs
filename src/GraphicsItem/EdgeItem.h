@@ -38,6 +38,7 @@ public:
     \param parent the QGraphicsITem that this Item belongs to. */
     explicit EdgeItem(Edge *edge, QGraphicsItem *parent = 0);
 
+    virtual ~EdgeItem();
     /*! The type of the item */
     enum { Type = UserType + 2 };
 

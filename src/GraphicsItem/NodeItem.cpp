@@ -55,7 +55,7 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
 }
 
 NodeItem::~NodeItem(){
-  kDebug() << "Node Item removed";
+ 
 }
 
 void NodeItem::removeOpacity(){
@@ -76,9 +76,14 @@ void NodeItem::deleteItem() {
   if (!_timeLine ) delete _timeLine;
   _timeLine = new QTimeLine(500, this);
   _timeLine->setFrameRange(0, 50);
-  connect(_timeLine, SIGNAL(finished()), this, SLOT(deleteLater()));
+  connect(_timeLine, SIGNAL(finished()), this, SLOT(removeFromScene()));
   connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(addOpacity()));
   _timeLine->start();
+}
+
+void NodeItem::removeFromScene(){
+  qobject_cast<GraphScene*>(scene())->removeGItem(this);
+  deleteLater();
 }
 
 QRectF NodeItem::boundingRect() const {
