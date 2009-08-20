@@ -331,7 +331,6 @@ void MainWindow::executeScript() {
     if (_activeGraphDocument == 0) {     return;     }
     if (_txtDebug == 0) {    return;    }
     
-    
     _txtDebug->clear();
     QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
     QScriptEngineDebugger *e = new QScriptEngineDebugger(this);

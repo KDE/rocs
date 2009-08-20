@@ -163,7 +163,7 @@ void OrientedEdgeItem::updatePos() {
   }
  QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
   qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
-  if (size   < 20) {
+  if (_edge->from() != _edge->to() && size < 20  ){
     setPath(QPainterPath()); 
   }else{
      setPath(createCurves());

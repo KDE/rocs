@@ -69,7 +69,6 @@ void GraphScene::setAction(AbstractAction *action) {
 void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     _graphDocument = gd;
     if (gd == 0) {
-        kDebug() << "Graph Document Doesn't Exist, crashing.";
         return;
     }
 
