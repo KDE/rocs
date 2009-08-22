@@ -67,9 +67,17 @@ public slots:
     void executeRelease(QPointF pos);
 
 protected:
+    /*! the node that will be moved on screen */
     NodeItem *_movableNode;
+    
+    /*! the model of the NodeItem, 
+    needs it to modify it's internal value when the move is finished */
     Node *_node;
+    
+    /*! the parent graph of the node. */
     Graph *_g;
+    
+    /*! the QGraphicsView. */
     QGraphicsView *_view;
 };
 

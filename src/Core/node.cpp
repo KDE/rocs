@@ -199,8 +199,12 @@ void Node::setBegin(bool begin) {
     _begin = begin;
     if (begin) {
         Graph *p = qobject_cast<Graph*>(QObject::parent());
+	if (p->begin() == this){
+	  return;
+	}
         p->setBegin(this);
     }
+    
 }
 
 void Node::setEnd(bool end) {

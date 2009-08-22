@@ -1,5 +1,7 @@
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} 
+include_directories( 
+	${KDE4_INCLUDES} 
+	${QT_INCLUDES} 
 	../Core
 	../Engine
 	../Models
@@ -9,12 +11,10 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES}
 
 set(librocsactions_SRCS
 	AbstractAction.cpp
-	Pointer.cpp
 	AddNode.cpp
 	AddEdge.cpp
 	MoveNode.cpp
 	Select.cpp
-	SmartAction.cpp
 	DeleteAction.cpp
 	AlignAction.cpp
 )

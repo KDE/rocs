@@ -1,8 +1,6 @@
-
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
-   Ugo Sangiori <ugorox@gmail.com>
 
    Rocs is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -28,10 +26,10 @@ class GraphScene;
 class Graph;
 class GraphDocument;
 
-
 /*!
 \brief the base class for custom actions.
-This class provides the basic functionality for all custom actions Used on the pallete bar.
+This class provides the basic functionality for all custom actions Used on the pallete bar
+that will interact directly with the scene.
 */
 
 // TODO: Changer the behavior of this class, so it sends itself instead of the type  of action to the graphscene.
@@ -41,38 +39,59 @@ class AbstractAction : public KAction
 public:
 
     /*! Default Constructor
-      \param scene the GraphicsScene that this action will interact.
-      \param parent the MainWindow
+      \p scene the GraphicsScene that this action will interact.
+      \p parent the MainWindow
     */
     AbstractAction(GraphScene *scene, QObject *parent);
 
     /*! Atualize the Graph Document that this action will work on
-      \param graphDocument the pointer to the active  GraphDocument
+      \p graphDocument the pointer to the active  GraphDocument
     */
     void setActiveGraphDocument( GraphDocument *graphDocument);
 
 public slots:
     /*! Atualize the Active Graph that this action will work on
-      \param graph the pointer to the active  Graph
+      \p graph the pointer to the active  Graph
     */
     virtual void setActiveGraph( Graph *graph);
 
-    /*! pure virtual, reimplement it on others, this will be the action that will happen in the graph
-       \param pos the position on screen that the execution will take part.
+    /*! Virtual,  executed when a mouse press occours on the scene. 
+    \p pos the position on screen that the execution will take part.
     */
     virtual void executePress(QPointF pos);
+    
+    /*! Virtual, executed when a mouse move on the scene. 
+     \p pos the position on screen that the mouse is now. 
+    */
     virtual void executeMove(QPointF pos);
+    
+    /*! virtual, executed when a mous click is released on the scene. 
+    \p pos the position where the release occourred.
+    */
     virtual void executeRelease(QPointF pos);
+    
+    /*! virtual, executed when a keyboard key is pressed on the scene.
+    \p keyEvent the key event from the scene.
+    */
     virtual void executeKeyPress(QKeyEvent *keyEvent);
+    
+    /*! virtual, executed when a keyboard key is released on the scene 
+      \p keyEvent the key event from the scene.
+      */
     virtual void executeKeyRelease(QKeyEvent *keyEvent);
 
     /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
     void sendExecuteBit();
 
 protected:
-    GraphDocument *_graphDocument;  /*! pointer to the active graph document */
-    Graph *_graph;	/*! pointer to the active graph */
-    GraphScene *_graphScene;	/*! pointer to the GraphicsScene with the drawing */
+    /*! pointer to the active graph document */
+    GraphDocument *_graphDocument; 
+    
+    /*! pointer to the active graph */
+    Graph *_graph;	
+    
+    /*! pointer to the GraphicsScene with the drawing */
+    GraphScene *_graphScene; 
 
 };
 

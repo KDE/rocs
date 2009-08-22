@@ -25,18 +25,18 @@
 #include <QPointF>
 #include <KDebug>
 
-AbstractAction::AbstractAction(GraphScene *scene, QObject *parent) : KAction(parent)
-{
+AbstractAction::AbstractAction(GraphScene *scene, QObject *parent) 
+: KAction(parent){
     _graphDocument = 0;
     _graph = 0;
     _graphScene = scene;
     setCheckable ( true );
     setChecked ( false );
-    connect(this, SIGNAL(triggered()), this, SLOT( sendExecuteBit() ));
+    connect(this, SIGNAL(triggered()), 
+	    this, SLOT( sendExecuteBit() ));
 }
 
-void AbstractAction::setActiveGraphDocument(  GraphDocument *graphDocument)
-{
+void AbstractAction::setActiveGraphDocument(  GraphDocument *graphDocument){
     _graphDocument = graphDocument;
 }
 
@@ -44,23 +44,12 @@ void AbstractAction::setActiveGraph( Graph *graph) {
     _graph = graph;
 }
 
-void AbstractAction::sendExecuteBit()
-{
+void AbstractAction::sendExecuteBit(){
     _graphScene -> setAction ( this );
 }
 
-void AbstractAction::executePress(QPointF) {
-    return;
-}
-void AbstractAction::executeMove(QPointF) {
-    return;
-}
-void AbstractAction::executeRelease(QPointF) {
-    return;
-}
-void AbstractAction::executeKeyPress(QKeyEvent*) {
-    return;
-}
-void AbstractAction::executeKeyRelease(QKeyEvent*) {
-    return;
-}
+void AbstractAction::executePress(QPointF) {}
+void AbstractAction::executeMove(QPointF) {}
+void AbstractAction::executeRelease(QPointF) {}
+void AbstractAction::executeKeyPress(QKeyEvent*) {}
+void AbstractAction::executeKeyRelease(QKeyEvent*) {}

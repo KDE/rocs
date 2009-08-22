@@ -23,14 +23,35 @@
 
 #include "AbstractAction.h"
 
-
+/*! this class defines the delete button on the pallete. */
 class DeleteAction : public AbstractAction
 {
 public:
-  
+  /*! default constructor
+  \p scene the graph scene
+  \p parent the mainwindow
+  */
   DeleteAction(GraphScene* scene, QObject* parent);
-  virtual void executePress(QPointF pos);
-  virtual void executeKeyRelease(QKeyEvent* keyEvent);
+  
+  /*! start the node deletion algorithm on the specified point.
+  \p pos the position of the click.
+  */
+   void executePress(QPointF pos);
+  
+  /*! tryes to move the square - ranged selection for deletion 
+  \p pos the moovable edge of the square select. 
+  */
+  void executeMove(QPointF pos);
+  
+  /*! when the mouse is released, we try to delete all the nodes in the square. 
+  \p pos the position where the release occoured.
+  */
+  void executeRelease(QPointF pos);
+  
+  /*! when somebody press the delete key, the system will try to delete all selected nodes.
+  \p keyEvent the key to be processed. 
+  */
+  void executeKeyRelease(QKeyEvent* keyEvent);
 };
 
 #endif // DELETEACTION_H

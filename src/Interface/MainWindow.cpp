@@ -56,9 +56,7 @@
 #include "AddEdge.h"
 #include "MoveNode.h"
 #include "Select.h"
-#include "SmartAction.h"
 #include "DeleteAction.h"
-
 
 // backends
 #include "qtScriptBackend.h"
