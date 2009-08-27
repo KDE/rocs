@@ -34,7 +34,6 @@
 
 // UI RELATED INCLUDES
 
-#include "PaletteBarWidget.h"
 #include "OpenedFilesWidget.h"
 #include "GraphPropertiesWidget.h"
 #include "GraphVisualEditor.h"
@@ -57,6 +56,7 @@
 #include "MoveNode.h"
 #include "Select.h"
 #include "DeleteAction.h"
+#include "AlignAction.h"
 
 // backends
 #include "qtScriptBackend.h"
@@ -86,8 +86,8 @@ MainWindow::MainWindow() :
     setupGUI();
     _moveNodeAction->setView( _graphVisualEditor->view() );
     mainWindow = this;
-  _OpenedFiles->selectDefaultFile();
-  statusBar()->hide();
+    _OpenedFiles->selectDefaultFile();
+    statusBar()->hide();
 }
 
 MainWindow::~MainWindow() {
@@ -141,41 +141,43 @@ QWidget* MainWindow::setupRightPanel() {
 QWidget* MainWindow::setupLeftPanel() {
     _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
  
-    QSplitter *palletePropertiesHolder = new QSplitter(this);
-    palletePropertiesHolder->setOrientation(Qt::Vertical);
-    
     _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
-    _PaletteBar	= new PaletteBarWidget	( this );
     _GraphProperties = new GraphPropertiesWidget( this );
-
-    palletePropertiesHolder -> setLayout(new QVBoxLayout());
-    palletePropertiesHolder -> layout() -> addWidget( _PaletteBar );
-    palletePropertiesHolder -> layout() -> addWidget( _GraphProperties );
-  
+ 
    _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
-   _leftTabs->addWidget( palletePropertiesHolder, "Tools" , KIcon("applications-system"));
+   _leftTabs->addWidget( _GraphProperties, "Properties" , KIcon("applications-system"));
 
     return _leftTabs;
 }
 
 void MainWindow::setupActions() {
+    kDebug() << "Entrou no Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
+    
+    
     GraphScene *gc = _graphVisualEditor->scene();
     if (!gc) {
         kDebug() << "There is no graph scene at this point.";
         return;
     }
      _moveNodeAction = new MoveNodeAction(gc, this);
-    _paletteActions = new KActionCollection(qobject_cast<QObject*>(this));
-    _paletteActions->addAction("move_node_action", _moveNodeAction);
-    _paletteActions->addAction("add_node_action", new AddNodeAction(gc, this));
-    _paletteActions->addAction("add_edge_action", new AddEdgeAction(gc, this));
-    _paletteActions->addAction("select_action", new SelectAction(gc, this));
-    _paletteActions->addAction("delete_action", new DeleteAction(gc, this));
-    _PaletteBar->setActionCollection(_paletteActions);
-
+     
+    KActionCollection *ac = actionCollection();
+    ac->addAction("move_node", _moveNodeAction);
+    ac->addAction("add_node", new AddNodeAction(gc, this));
+    ac->addAction("add_edge", new AddEdgeAction(gc, this));
+    ac->addAction("select", new SelectAction(gc, this));
+    ac->addAction("delete", new DeleteAction(gc, this));
+   
+    ac->addAction("align-hbottom",new AlignAction( "Align on the base",  AlignAction::Bottom, _graphVisualEditor ));
+    ac->addAction("align-hcenter",new AlignAction( "Align on the center",AlignAction::HCenter,_graphVisualEditor ));
+    ac->addAction("align-htop",   new AlignAction( "Align on the top",   AlignAction::Top,    _graphVisualEditor ));
+    ac->addAction("align-vleft",  new AlignAction( "Align on the left",  AlignAction::Left,   _graphVisualEditor ));
+    ac->addAction("align-vcenter",new AlignAction( "Align on the center",AlignAction::VCenter,_graphVisualEditor ));
+    ac->addAction("align-vright", new AlignAction( "Align on the right", AlignAction::Right,  _graphVisualEditor ));
+ 
     // Pointer Action is the first.
-    gc -> setAction(qobject_cast<AbstractAction*>(_paletteActions->actions()[0]));
+    gc -> setAction(actionCollection()->action("move_node"));
 
     KAction* action = new KAction(KIcon("document-new"),i18n("New Graph"),  this);
     //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
@@ -224,25 +226,17 @@ void MainWindow::setupSignals() {
     connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
              this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
 
- connect( _paletteActions->action("select_action"), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
+ connect( actionCollection()->action("select"), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
              _GraphProperties, SLOT(setDataSource(QGraphicsItem*)));
 
 }
 
 void MainWindow::setActiveGraphDocument(GraphDocument* d) {
-    if (_paletteActions == 0) {
-        kDebug() << " ERROR: There isn't pallete Actions.";
-        return;
-    }
     _activeGraphDocument = d;
     _graphVisualEditor->setActiveGraphDocument(d);
-    foreach( QAction *action, _paletteActions->actions() ) {
-        AbstractAction *absAction = qobject_cast<AbstractAction*>(action);
-        if (!absAction) {
-            kDebug() << "ERROR: Invalid conversion, it should be AbstractAction but it isn't. ";
-            continue;
-        }
-        absAction->setActiveGraphDocument(d);
+    foreach( QAction *action, actionCollection()->actions() ) {
+        if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action)) 
+	  absAction->setActiveGraphDocument(d);
     }
 
     if (_activeGraphDocument->size() == 0) return;
@@ -250,10 +244,6 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d) {
 }
 
 void MainWindow::setActiveGraph( Graph *g) {
-    if (_paletteActions == 0) {
-        kDebug() << "ERROR : There isn't pallete actions";
-        return;
-    }
     if ( _activeGraphDocument  == 0) {
         kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should beong to one.";
         return;
@@ -262,15 +252,10 @@ void MainWindow::setActiveGraph( Graph *g) {
         kDebug() << "ERROR: this graph doesn't belong to the active document";
         return;
     }
-    foreach( QAction *action, _paletteActions->actions() ) {
-        AbstractAction *absAction = qobject_cast<AbstractAction*>(action);
-        if (!absAction) {
-            kDebug() << "ERROR: Invalid conversion, it should be AbstractAction but it isn't. ";
-            continue;
-        }
-        absAction->setActiveGraph(g);
+    foreach( QAction *action, actionCollection()->actions() ) {
+        if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action)) 
+	  absAction->setActiveGraph(g);
     }
-
     _graphVisualEditor->setActiveGraph(g);
     _graph = g;
 }

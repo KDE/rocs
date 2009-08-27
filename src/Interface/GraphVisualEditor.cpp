@@ -19,7 +19,6 @@
 */
 
 #include "GraphVisualEditor.h"
-#include "GraphToolBoxWidget.h"
 #include "GraphScene.h"
 #include "MainWindow.h"
 #include "NodeItem.h"
@@ -38,7 +37,6 @@
 #include <QPointF>
 #include <QGraphicsItem>
 #include <KDebug>
-#include <QToolButton>
 #include <KAction>
 #include <KIcon>
 #include <KComboBox>
@@ -60,41 +58,12 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
 }
 
 void GraphVisualEditor::setupWidgets() {
-    QHBoxLayout *layout	= new QHBoxLayout();
-    layout->setContentsMargins(0,0,0,0);
-    //!################## CODE TO GENERATE THE ALIGN TOOLBOX ##########################
-
-    _spacingPropContainer = new QWidget(parentWidget());
-    layout->addWidget(setupToolButton("align-h-bottom", "Align nodes on the base", AlignAction::Bottom,this ));
-    layout->addWidget(setupToolButton("align-h-middle", "Align nodes horizontally on the middle", AlignAction::MiddleHorizontal,this));
-    layout->addWidget(setupToolButton("align-h-top", "Align nodes on the top",AlignAction::Top, this));
-    layout->addWidget(setupToolButton("align-v-left", "Align nodes on the left", AlignAction::Left, this ));
-    layout->addWidget(setupToolButton("align-v-middle", "Align nodes vertically on the middle", AlignAction::MiddleVertical,this));
-    layout->addWidget(setupToolButton("align-v-right", "Align nodes on the right", AlignAction::Right,this));
-    _spacingPropContainer->setLayout(layout);
-
-    //!############################### CODE TO GENERATE THE GRAPH PROPERTIES TOOLBOX ####################################
-    _graphToolBox = new GraphToolBoxWidget(_mainWindow);
-
-    //!############################### finishes the Toolbar.
-    layout = new QHBoxLayout();
-    _toolbar = new QWidget(parentWidget());
-    layout->setSpacing(0);
-    layout->setContentsMargins(0,0,0,0);
-    layout->addWidget( _graphToolBox );
-    layout->addWidget( _spacingPropContainer );
-    layout->addStretch();
-
-    _toolbar->setLayout(layout);
-
-    //!############################## Adds the GraphView on the screen.
     QVBoxLayout *vLayout = new QVBoxLayout();
     vLayout->setContentsMargins(0,0,0,0);
     _scene = new GraphScene(this);
     _graphicsView = new QGraphicsView();
     _graphicsView->setRenderHints(QPainter::Antialiasing);
     _graphicsView->setScene(_scene);
-    vLayout -> addWidget( _toolbar );
     vLayout -> addWidget ( _graphicsView );
     setLayout( vLayout );
 }
@@ -103,19 +72,10 @@ QGraphicsView* GraphVisualEditor::view() const {
     return _graphicsView;
 }
 
-QToolButton* GraphVisualEditor::setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent) {
-    AlignAction*  tmpAction = new AlignAction(actionName, tooltip, o, parent);
-    QToolButton*  tmpButton = new QToolButton(_spacingPropContainer);
-    tmpButton -> setDefaultAction ( tmpAction );
-    tmpButton -> setAutoRaise( true );
-    return tmpButton;
-}
-
 void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
     if ( _graphDocument != 0 ) { releaseGraphDocument(); }
 
     _graphDocument = gd;
-    _graphToolBox->setActiveGraphDocument( gd );
     _scene->setActiveGraphDocument( gd );
 }
 

@@ -10,12 +10,8 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES}
 set(librocsui_SRCS
 	MainWindow.cpp
 	OpenedFilesWidget.cpp
-	GraphToolBoxWidget.cpp
 	GraphScene.cpp
-	PaletteBarWidget.cpp
-	PaletteLayout.cpp	# stolen from Step (remember to kiss	Vladimir Kuznetsov
 	Separator.cpp
-	PaletteScrollArea.cpp
 	GraphVisualEditor.cpp
 	GraphPropertiesWidget.cpp
 
@@ -25,7 +21,6 @@ set(librocsui_SRCS
 
 kde4_add_ui_files( 
 	librocsui_SRCS 
-	GraphToolBox.ui
 	OpenedFilesWidget.ui
 	GraphEditWidget.ui
 	GraphPropertiesWidget.ui

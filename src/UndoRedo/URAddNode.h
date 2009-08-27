@@ -17,4 +17,27 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+#ifndef URADDNODE_H
+#define URADDNODE_H
+
+#include <QUndoCommand>
+#include <QList>
+#include <QPointF>
+
+class Graph;
+class Node;
+
+class URAddNode : public QUndoCommand{
+  public:
+    URAddNode(Node *g);
+    void undo();
+    void redo();
+
+  private:
+   QPointF _pos;
+   Node *_node;
+   Graph *_graph;
+};
  
+#endif

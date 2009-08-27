@@ -62,8 +62,8 @@ void GraphScene::updateAfter(QGraphicsItem *item){
 }
 
 
-void GraphScene::setAction(AbstractAction *action) {
-    _action = action;
+void GraphScene::setAction(QAction *action) {
+    _action = qobject_cast<AbstractAction*>(action);
 }
 
 void GraphScene::setActiveGraphDocument(GraphDocument *gd) {

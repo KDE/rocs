@@ -75,10 +75,6 @@ private:
     GraphDocument *_graphDocument;
     Graph *_graph;
 
-    QWidget *_spacingPropContainer;
-    QWidget *_toolbar;
-
-    GraphToolBoxWidget *_graphToolBox;
     MainWindow *_mainWindow;
 
     qreal _topNode;

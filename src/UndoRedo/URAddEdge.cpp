@@ -17,4 +17,22 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
- 
+#include "URAddEdge.h"
+#include "node.h"
+#include "graph.h"
+#include "edge.h"
+
+URAddEdge::URAddEdge(Edge *e){
+  _edge = e;
+  _from = e->from();
+  _to = e->to();
+  _graph = qobject_cast<Graph*>(e->parent());
+}
+
+void URAddEdge::redo(){
+  _edge->remove();
+}
+
+void URAddEdge::undo(){
+  _graph->addEdge(_from, _to);
+}

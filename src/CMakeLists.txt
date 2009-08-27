@@ -5,6 +5,7 @@ add_subdirectory(Actions)
 add_subdirectory(Models)
 add_subdirectory(GraphicsItem)
 add_subdirectory(Interface)
+add_subdirectory(UndoRedo)
 add_subdirectory(Tests)
 
 set(rocs_SRCS  Main.cpp )

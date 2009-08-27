@@ -26,7 +26,6 @@
 #include <QStringList>
 #include <QScriptValue>
 
-class PaletteBarWidget;
 class OpenedFilesWidget;
 class GraphPropertiesWidget;
 class GraphVisualEditor;
@@ -66,8 +65,8 @@ private: // Methods
     void setupSignals();
 
     QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
-    QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff.
-
+    QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
+    
 private slots:
     void executeScript();
 
@@ -83,7 +82,6 @@ public slots:
 private: // Variables.
 
     // Left Area:
-    PaletteBarWidget*	_PaletteBar;	 //! area where the icons of actions will be.
     OpenedFilesWidget* _OpenedFiles;	//! area where the opened files will be
     GraphPropertiesWidget* _GraphProperties; //! Area where the nodes and edges will be modified.
     TabWidget *_leftTabs; //! Tab that will hold the pallete, opened files, graphLayers and Properties.

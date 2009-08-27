@@ -24,7 +24,7 @@
 #include "generics.h"
 #include <KDebug>
 
-AlignAction::AlignAction(const QString& actionName, const QString& tooltip,AlignAction::Orientation o, QWidget *parent)
+AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, QWidget *parent)
   : KAction(KIcon(), tooltip, parent){
   m_orientation = o;
   connect(this, SIGNAL(triggered()), this, SLOT(align()));
@@ -34,8 +34,8 @@ AlignAction::AlignAction(const QString& actionName, const QString& tooltip,Align
       case  Right : setIcon(KIcon("rocsallignright")); break;
       case Top : setIcon(KIcon("rocsalligntop")); break;
       case Bottom : setIcon(KIcon("rocsallignbottom")); break;
-      case MiddleHorizontal : setIcon(KIcon("rocsallignhmiddle")); break;
-      case MiddleVertical : setIcon(KIcon("rocsallignvmiddle")); break;
+      case HCenter : setIcon(KIcon("rocsallignhmiddle")); break;
+      case VCenter : setIcon(KIcon("rocsallignvmiddle")); break;
     }
 }
 
@@ -46,11 +46,11 @@ void AlignAction::align(){
   if (l.size() < 1) return;
   gEditor->scene()->setHideEdges(true);
   switch(m_orientation){
-    case Left :    case MiddleVertical : 
+    case Left :    case VCenter : 
 	  qSort(l.begin(), l.end(),  leftLessThan);
 	  allignX(l); 
     break;
-    case Bottom :    case MiddleHorizontal : 
+    case Bottom :    case HCenter : 
      qSort(l.begin(), l.end(), bottomLessThan);
      allignY(l); 
     break;
@@ -69,7 +69,7 @@ void AlignAction::align(){
 
 void AlignAction::allignY(QList<NodeItem*>& l){
   qreal final = l[0]->pos().y();
-  if (m_orientation == MiddleHorizontal || m_orientation == MiddleVertical){
+  if (m_orientation == VCenter || m_orientation == HCenter){
     qreal otherSide = l[l.size()-1]->pos().y();
      final = (final + otherSide) / 2;
   }
@@ -80,7 +80,7 @@ void AlignAction::allignY(QList<NodeItem*>& l){
 
 void AlignAction::allignX(QList<NodeItem*>& l){
   qreal final = l[0]->pos().x();
-  if (m_orientation == MiddleHorizontal || m_orientation == MiddleVertical){
+  if (m_orientation == VCenter || m_orientation == HCenter){
     qreal otherSide = l[l.size()-1]->pos().x();
      final = (final + otherSide) / 2;
   }

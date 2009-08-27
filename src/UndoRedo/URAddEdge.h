@@ -17,19 +17,26 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+ 
+#ifndef ADDEDGE_H
+#define ADDEDGE_H
 
-#ifndef SUI_PALETTESCROLLAREA_H
-#define SUI_PALETTESCROLLAREA_H
+#include <QUndoCommand>
+class Edge;
+class Node;
+class Graph;
 
-#include <QScrollArea>
-/*! \brief Palletebar Helper class */
-class PaletteScrollArea: public QScrollArea
-{
-public:
-    PaletteScrollArea ( QWidget* parent );
 
-protected:
-    void resizeEvent ( QResizeEvent* event );
+class URAddEdge : public QUndoCommand{
+  public:
+    URAddEdge(Edge *e);
+    void redo();
+    void undo();
+  private:
+   Edge *_edge;
+   Node *_from;
+   Node *_to;
+   Graph *_graph;
 };
 
 #endif

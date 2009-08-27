@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gui name="rocs"
-     version="1"
+     version="6"
      xmlns="http://www.kde.org/standards/kxmlgui/1.0"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
@@ -23,9 +23,22 @@
     </Menu>
   </MenuBar>
  
-  <ToolBar name="mainToolBar" >
+  <ToolBar name="main" >
     <text>Main Toolbar</text>
-    <Action name="clear" />
+      <Action name="move_node" />
+      <Action name="add_node" />
+      <Action name="add_edge" />
+      <Action name="select" />
+      <Action name="delete" />
+  </ToolBar>
+  <ToolBar name="layout">
+      <text>Layout Toolbar</text>
+      <Action name="align-htop"/>
+      <Action name="align-hcenter"/>
+      <Action name="align-hbottom"/>
+      <Action name="align-vleft"/>
+      <Action name="align-vcenter"/>
+      <Action name="align-vright" />
   </ToolBar>
 </gui>
 

@@ -24,6 +24,7 @@
 #include <QMultiHash>
 
 class AbstractAction;
+class QAction;
 class Node;
 class Edge;
 class QGraphicsItem;
@@ -40,7 +41,7 @@ class GraphScene : public QGraphicsScene {
   Q_OBJECT
 public:
     GraphScene(QObject *parent);
-    void setAction(AbstractAction *action);
+    void setAction(QAction *action);
     QGraphicsItem* createNode(Graph *g, Node *n);
     QGraphicsItem* createEdge(Graph *g, Edge *e);
     void updateGraph(Graph *g);

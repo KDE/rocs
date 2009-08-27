@@ -18,19 +18,23 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
  
-#ifndef UNDOADDEDGE_H
-#define UNDOADDEDGE_H
+#include "URAddNode.h"
+#include "graph.h"
+#include "node.h"
 
-#include <QUndoCommand>
-#include "Edge.h"
+  
+URAddNode::URAddNode(Node *g){
+  _graph = qobject_cast<Graph*>(g->parent());
+  _node = g;
+  _pos.setX(_node->x());
+  _pos.setY(_node->y());
+}
 
-class UndoAddEdge : public QUndoCommand{
-  public:
-    UndoAddEdge(Edge *e);
-    void redo();
-    void undo();
-  private:
-   QGraphicsItem *m_edge;
-};
+void URAddNode::undo(){
+  _node->remove();
+}
 
-#endif
+void URAddNode::redo(){
+  Node *n = _graph->addNode("Untitled");
+  n->setPos(_pos.x(), _pos.y());
+}
