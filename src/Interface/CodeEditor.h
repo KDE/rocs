@@ -18,6 +18,7 @@ public:
   const char * text() const;
   KTextEditor::Editor *editor() const { return _editor; }
   KTextEditor::Document *document() const { return _scriptDoc; }
+  KTextEditor::View *view() const {return _docView; }
   
 public slots:
       void newScript();

@@ -30,8 +30,7 @@ AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
     _graphDocument = 0;
     _graph = 0;
     _graphScene = scene;
-    setCheckable ( true );
-    setChecked ( false );
+
     connect(this, SIGNAL(triggered()), 
 	    this, SLOT( sendExecuteBit() ));
 }

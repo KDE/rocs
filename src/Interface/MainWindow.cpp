@@ -29,6 +29,9 @@
 #include <KTextBrowser>
 #include <KMessageBox>
 #include <KApplication>
+#include <KToolBar>
+#include <QToolButton>
+#include <QGraphicsView>
 #include <kfiledialog.h>
 #include "TabWidget.h"
 
@@ -61,6 +64,7 @@
 // backends
 #include "qtScriptBackend.h"
 #include <kstandarddirs.h>
+#include <ktexteditor/view.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
 #include <KStatusBar>
@@ -97,9 +101,8 @@ MainWindow::~MainWindow() {
     Settings::setHSplitterSizeRight( _hSplitter->sizes()[1] );
 
     Settings::self()->writeConfig();
-    kDebug() << "Config	File Written";
-
 }
+
 void MainWindow::setupModels() {
     _documentModel = new GraphDocumentModel( &_documents );
 }
@@ -126,16 +129,16 @@ QWidget* MainWindow::setupRightPanel() {
   _bottomTabs = new TabWidget(TabWidget::TabOnBottom, this);
   _bottomTabs->addWidget(_codeEditor,  "Editor", KIcon("accessories-text-editor"));
   _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("debugger"));
-   _runScript = new KAction(KIcon("system-run"), "Run", this);
-    connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
+  _runScript = new KAction(KIcon("system-run"), "Run", this);
+   connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
   _bottomTabs->addAction(_runScript);
 
-    _vSplitter = new QSplitter(this);
-    _vSplitter->setOrientation(Qt::Vertical);
-    _vSplitter->addWidget(_graphVisualEditor);
-    _vSplitter->addWidget(_bottomTabs);
-    _vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
-    return _vSplitter;
+  _vSplitter = new QSplitter(this);
+  _vSplitter->setOrientation(Qt::Vertical);
+  _vSplitter->addWidget(_graphVisualEditor);
+  _vSplitter->addWidget(_bottomTabs);
+  _vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
+  return _vSplitter;
 }
 
 QWidget* MainWindow::setupLeftPanel() {
@@ -157,7 +160,6 @@ void MainWindow::setupActions() {
     
     GraphScene *gc = _graphVisualEditor->scene();
     if (!gc) {
-        kDebug() << "There is no graph scene at this point.";
         return;
     }
      _moveNodeAction = new MoveNodeAction(gc, this);
@@ -168,7 +170,8 @@ void MainWindow::setupActions() {
     ac->addAction("add_edge", new AddEdgeAction(gc, this));
     ac->addAction("select", new SelectAction(gc, this));
     ac->addAction("delete", new DeleteAction(gc, this));
-   
+    gc -> setAction(actionCollection()->action("move_node"));
+    
     ac->addAction("align-hbottom",new AlignAction( "Align on the base",  AlignAction::Bottom, _graphVisualEditor ));
     ac->addAction("align-hcenter",new AlignAction( "Align on the center",AlignAction::HCenter,_graphVisualEditor ));
     ac->addAction("align-htop",   new AlignAction( "Align on the top",   AlignAction::Top,    _graphVisualEditor ));
@@ -176,46 +179,51 @@ void MainWindow::setupActions() {
     ac->addAction("align-vcenter",new AlignAction( "Align on the center",AlignAction::VCenter,_graphVisualEditor ));
     ac->addAction("align-vright", new AlignAction( "Align on the right", AlignAction::Right,  _graphVisualEditor ));
  
-    // Pointer Action is the first.
-    gc -> setAction(actionCollection()->action("move_node"));
-
-    KAction* action = new KAction(KIcon("document-new"),i18n("New Graph"),  this);
-    //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    KAction* action = new KAction(KIcon("document-new"),i18n("New Graph"),  _graphVisualEditor->view());
+    action->setShortcut(Qt::CTRL + Qt::Key_N);
+    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("new-graph", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(newGraph()));
 
-    action = new KAction(KIcon("document-open"),i18n("Open Graph"), this);
-    //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    action = new KAction(KIcon("document-open"),i18n("Open Graph"), _graphVisualEditor->view());
+    action->setShortcut(Qt::CTRL + Qt::Key_O);
+    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("open-graph", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(openGraph()));
 
-    action = new KAction(KIcon("document-save"), i18n("Save Graph"), this);
-    //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    action = new KAction(KIcon("document-save"), i18n("Save Graph"), _graphVisualEditor->view());
+    action->setShortcut(Qt::CTRL + Qt::Key_S);
+    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-graph", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraph()));
 
-    action = new KAction(KIcon("document-save-as"),i18n("Save Graph As"), this);
-    //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    action = new KAction(KIcon("document-save-as"),i18n("Save Graph As"), _graphVisualEditor->view());
+    action->setShortcut(Qt::CTRL + Qt::Key_W);
+    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-graph-as", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraphAs()));
 
-    action = new KAction(KIcon("document-new"),i18n("New Script"), this);
-    //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    action = new KAction(KIcon("document-new"),i18n("New Script"), _codeEditor->view());
+    action->setShortcut(Qt::CTRL + Qt::Key_N);
+    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("new-script", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(newScript()));
 
-    action = new KAction(KIcon("document-open"),i18n("Open Script"), this);
-    //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    action = new KAction(KIcon("document-open"),i18n("Open Script"), _codeEditor->view());
+    action->setShortcut(Qt::CTRL + Qt::Key_O);
+    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("open-script", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(openScript()));
 
-    action = new KAction(KIcon("document-save"),i18n("Save Script"), this);
-    //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    action = new KAction(KIcon("document-save"),i18n("Save Script"), _codeEditor->view());
+    action->setShortcut(Qt::CTRL + Qt::Key_S);
+    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-script", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScript()));
 
-    action = new KAction(KIcon("document-save-as"), i18n("Save Script As"), this);
-    //clearAction->setShortcut(Qt::CTRL + Qt::Key_W);
+    action = new KAction(KIcon("document-save-as"), i18n("Save Script As"), _codeEditor->view());
+    action->setShortcut(Qt::CTRL + Qt::Key_W);
+    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-script-as", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScriptAs()));
 
