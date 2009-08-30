@@ -148,7 +148,7 @@ QWidget* MainWindow::setupLeftPanel() {
  //   _GraphProperties = new GraphPropertiesWidget( this );
  
    _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
-   _leftTabs->addWidget( _GraphProperties, "Properties" , KIcon("applications-system"));
+ //  _leftTabs->addWidget( _GraphProperties, "Properties" , KIcon("applications-system"));
 
     return _leftTabs;
 }
@@ -234,8 +234,8 @@ void MainWindow::setupSignals() {
     connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
              this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
 
- connect( actionCollection()->action("select"), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
-             _GraphProperties, SLOT(setDataSource(QGraphicsItem*)));
+ //connect( actionCollection()->action("select"), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
+ //            _GraphProperties, SLOT(setDataSource(QGraphicsItem*)));
 
 }
 
