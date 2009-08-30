@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>244</width>
-    <height>151</height>
+    <width>226</width>
+    <height>171</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,65 +15,65 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="label_14">
+    <widget class="QLabel" name="label">
      <property name="text">
       <string>Name</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QLineEdit" name="_graphName"/>
+   <item row="0" column="1" colspan="2">
+    <widget class="KLineEdit" name="_graphName"/>
    </item>
    <item row="1" column="0">
-    <widget class="QLabel" name="label_15">
+    <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Node color</string>
+      <string>Node Color</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="1" column="1" colspan="2">
     <widget class="KColorCombo" name="_graphNodeColor"/>
    </item>
-   <item row="1" column="2">
-    <widget class="KPushButton" name="_graphNodeApplyNow">
-     <property name="text">
-      <string>All</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="label_16">
+    <widget class="QLabel" name="label_3">
      <property name="text">
       <string>Edge Color</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="2" column="1" colspan="2">
     <widget class="KColorCombo" name="_graphEdgeColor"/>
    </item>
-   <item row="2" column="2">
-    <widget class="KPushButton" name="_graphEdgeApplyNow">
-     <property name="text">
-      <string>All</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QCheckBox" name="_graphAutomate">
-     <property name="text">
-      <string>Automate</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
+   <item row="4" column="1" colspan="2">
     <widget class="QCheckBox" name="_graphOriented">
      <property name="text">
       <string>Oriented</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="2">
-    <widget class="KPushButton" name="_graphDelete">
+   <item row="5" column="1" colspan="2">
+    <widget class="QCheckBox" name="_graphAutomate">
+     <property name="text">
+      <string>Automate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="KPushButton" name="_graphNodeColorApplyNow">
+     <property name="text">
+      <string>all</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="KPushButton" name="_graphEdgeColorApplyNow">
+     <property name="text">
+      <string>all</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <widget class="KPushButton" name="kpushbutton">
      <property name="text">
       <string>delete</string>
      </property>
@@ -86,6 +86,11 @@
    <class>KPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KColorCombo</class>

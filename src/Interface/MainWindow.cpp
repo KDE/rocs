@@ -19,6 +19,8 @@
 */
 
 #include "MainWindow.h"
+//Qt related includes
+#include <QToolBox>
 
 // KDE Related Includes
 #include <KActionCollection>
@@ -145,10 +147,10 @@ QWidget* MainWindow::setupLeftPanel() {
     _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
  
     _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
- //   _GraphProperties = new GraphPropertiesWidget( this );
+    _GraphProperties = new QToolBox(this);
  
    _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
- //  _leftTabs->addWidget( _GraphProperties, "Properties" , KIcon("applications-system"));
+   _leftTabs->addWidget( _GraphProperties, "Properties" , KIcon("applications-system"));
 
     return _leftTabs;
 }

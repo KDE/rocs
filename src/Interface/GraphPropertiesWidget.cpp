@@ -63,7 +63,7 @@ void GraphPropertiesWidget::on__graphName_textChanged(QString n){
 
 }
 
-void GraphPropertiesWidget::on__graphNodeColorApply_Now_clicked(){
+void GraphPropertiesWidget::on__graphNodeColorApplyNow_clicked(){
 
 }
 

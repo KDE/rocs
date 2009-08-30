@@ -43,7 +43,7 @@ private slots:
   void on__graphEdgeApplyNow_cliicked();
   void on__graphEdgeColor_activated(QColor c);
   void on__graphName_textChanged(QString n);
-  void on__graphNodeColorApply_Now_clicked();
+  void on__graphNodeColorApplyNow_clicked();
   void on__graphNodeColor_activated(QColor c);
   void on__graphOriented_clicked(bool b);
   void on__graphDelete_clicked();

@@ -40,11 +40,12 @@ class KAction;
 class MoveNodeAction;
 class TabWidget;
 class CodeEditor;
+class QToolBox;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
-  class QScriptContext;
-  class QScriptEngine;
+class QScriptContext;
+class QScriptEngine;
 #endif
 
 class MainWindow : public KXmlGuiWindow {
@@ -66,7 +67,7 @@ private: // Methods
 
     QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
     QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
-    
+
 private slots:
     void executeScript();
 
@@ -83,14 +84,14 @@ private: // Variables.
 
     // Left Area:
     OpenedFilesWidget* _OpenedFiles;	//! area where the opened files will be
-    GraphPropertiesWidget* _GraphProperties; //! Area where the nodes and edges will be modified.
+    QToolBox* _GraphProperties; //! Area where the nodes and edges will be modified.
     TabWidget *_leftTabs; //! Tab that will hold the pallete, opened files, graphLayers and Properties.
 
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
-    TabWidget *_bottomTabs; 
-     CodeEditor *_codeEditor;
-     KTextBrowser *_txtDebug; //! this is the debug view.
+    TabWidget *_bottomTabs;
+    CodeEditor *_codeEditor;
+    KTextBrowser *_txtDebug; //! this is the debug view.
 
     // Other Bunch of stuff.
     QList<GraphDocument*> _documents; //! The list of opend documents
