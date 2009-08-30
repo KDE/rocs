@@ -52,6 +52,14 @@ class Graph : public QObject {
     /*! this property holds the name of the graph */
     Q_PROPERTY(QString name READ name WRITE setName);
 
+    /*! this property holds the default color for new nodes */
+    Q_PROPERTY(QString nodeDefaultColor READ nodeDefaultColor WRITE setNodeDefaultColor)
+    
+    /*! this property holds the default color for new nodes */
+    Q_PROPERTY(QString edgeDefaultColor READ edgeDefaultColor WRITE setEdgeDefaultColor)
+    
+    /*! this property tells the system if this graph is to be treated as an automate */
+    Q_PROPERTY(bool automate READ automate WRITE setAutomate)
 public:
     /*! constructo
       \p parent the parent QObject
@@ -180,6 +188,15 @@ public  slots:
     */
     void  removeEnd(Node* n);
     
+    void setNodeDefaultColor(const QString& color);
+    const QString& nodeDefaultColor() const;
+    
+    void setEdgeDefaultColor(const QString& color);
+    const QString& edgeDefaultColor() const;
+    
+    void setAutomate(bool b);
+    bool automate();
+    
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();
     QScriptValue list_edges();
@@ -206,7 +223,10 @@ private:
     QString _name;
     Node* _begin;
     QList<Node*> _ends;
-
+    QString _nodeDefaultColor;
+    QString _edgeDefaultColor;
+    bool _automate;
+    
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

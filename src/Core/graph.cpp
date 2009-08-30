@@ -204,6 +204,28 @@ void Graph::removeEnd(Node *n) {
     _ends.removeAll(n);
 }
 
+void Graph::setNodeDefaultColor(const QString& color){
+    _nodeDefaultColor = color;
+}
+
+const QString& Graph::nodeDefaultColor() const{
+  return _nodeDefaultColor;
+}
+    
+void Graph::setEdgeDefaultColor(const QString& color){
+  _edgeDefaultColor = color;
+}
+const QString& Graph::edgeDefaultColor() const{
+  return _edgeDefaultColor;
+}
+    
+void Graph::setAutomate(bool b){
+  _automate = b;
+}
+bool Graph::automate(){
+  return _automate;
+}
+
 #ifdef USING_QTSCRIPT
 
 QScriptValue Graph::begin_node() {

@@ -21,7 +21,6 @@
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 #include <QWidget>
-#include <QScrollArea>
 #include "ui_GraphPropertiesWidget.h"
  
 class GraphPropertiesModel;
@@ -33,42 +32,26 @@ class Edge;
 
 /*! \brief Properties Area, not used yet. */
 class MainWindow;
-class GraphPropertiesWidget : public QScrollArea, public Ui::GraphPropertiesWidget
+class GraphPropertiesWidget : public QWidget, public Ui::GraphPropertiesWidget
 {
     Q_OBJECT
 public:
-    GraphPropertiesWidget ( MainWindow* parent = 0 );
-public slots:
-    void setDataSource(QGraphicsItem *o);
+    GraphPropertiesWidget (Graph *g, MainWindow* parent = 0 );
     
 private slots:
-  void nodeNameChanged(const QString& s);
-  void nodeColorChanged(QColor c);
-  void nodeEndChanged(bool b);
-  void nodeBeginChanged(bool b);
-  void nodeXChanged(int x);
-  void nodeYChanged(int y);
-  void nodeValueChanged(const QString& s);
-  void edgeColorChanged(QColor c);
-  void edgeNameChanged(const QString& s);
-  void edgeValueChanged(const QString& s);
-  void on__btnAddProperty_clicked();
+  void on__graphAutomate_clicked(bool b);
+  void on__graphEdgeApplyNow_cliicked();
+  void on__graphEdgeColor_activated(QColor c);
+  void on__graphName_textChanged(QString n);
+  void on__graphNodeColorApply_Now_clicked();
+  void on__graphNodeColor_activated(QColor c);
+  void on__graphOriented_clicked(bool b);
+  void on__graphDelete_clicked();
 
 private:
-    GraphPropertiesModel *_model;
+
     Graph *_graph;
-    Node *_node;
-    Edge *_edge;
-    QObject *_obj;
-    QGraphicsItem *_graphicsItem;
     MainWindow *_mainWindow;
     
-    void setGraph(Graph *g);
-    void setNode(Node *n);
-    void setEdge(Edge *e);
-    void unsetNode();
-    void unsetEdge();
-    void unsetGraph();
-    void unsetAll();
 };
 #endif
