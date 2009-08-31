@@ -36,6 +36,9 @@ class QTimeLine;
 class NodeItem : public QObject, public QGraphicsItem {
     Q_OBJECT
 public:
+  
+    bool isDownSizing;
+    bool isUpSizing;
     /*! default constructor
     \param node the  Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
@@ -91,6 +94,7 @@ public slots:
      
 private:
     Node *_node;
+    qreal _oldZ;
     qreal _opacity;
     bool _removingBeginFlag;
     QTimeLine *_timeLine;

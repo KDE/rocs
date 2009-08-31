@@ -43,7 +43,10 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
   _graphEdgeColor->setColor(_graph->edgeDefaultColor());
   _graphNodeColor->setColor(_graph->nodeDefaultColor());
   _graphAutomate->setChecked(_graph->automate());
-  _graphAutomate->setChecked( _graph->directed());
+  _graphAutomate->setChecked(_graph->directed());
+  _activateGraph->setChecked(true);
+  
+  _editWidget->setVisible(_activateGraph->isChecked());
   
 }
 
@@ -60,7 +63,7 @@ void GraphPropertiesWidget::on__graphEdgeColor_activated(QColor c){
 }
 
 void GraphPropertiesWidget::on__graphName_textChanged(QString n){
-
+  _activateGraph->setText(_graphName->text());
 }
 
 void GraphPropertiesWidget::on__graphNodeColorApplyNow_clicked(){

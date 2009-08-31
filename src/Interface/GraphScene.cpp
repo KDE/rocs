@@ -31,6 +31,7 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 #include <KDebug>
+#include "node.h"
 #include "graph.h"
 
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
@@ -103,21 +104,49 @@ QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
     return edgeItem;
 }
 
+void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
+  NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(wheelEvent->scenePos()));
+  if (!nitem) return;
+  Node *movableNode = nitem->node();
+  int numDegrees = wheelEvent->delta();
+  if(wheelEvent->orientation() == Qt::Vertical) {
+    if(numDegrees > 0)
+    {
+      nitem->isUpSizing = 1;
+      movableNode->setZ(movableNode->z()+0.25);
+      nitem->update();
+      nitem->isUpSizing = 0;
+    }
+    else if(movableNode->z() > 0.5)
+      {
+	nitem->isDownSizing = 1;
+	movableNode->setZ(movableNode->z()-0.25);
+	nitem->update();
+	nitem->isDownSizing = 0;
+      }
+    }
+  }
+  
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     _action->executeMove(mouseEvent->scenePos());
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
+    if(mouseEvent->button() == 4)
+    {
+      NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
+      if (!nitem) return;
+      Node *movableNode = nitem->node();
+      nitem->isDownSizing = 1;
+	movableNode->setZ(1);
+	nitem->update();
+	nitem->isDownSizing = 0;
+    }
     _action->executePress(mouseEvent->scenePos());
-
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-    _action->executeRelease(mouseEvent->scenePos());
-}
-
-void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *) {
-
+     _action->executeRelease(mouseEvent->scenePos());
 }
 
 void GraphScene::keyPressEvent(QKeyEvent *) {

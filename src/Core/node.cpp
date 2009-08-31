@@ -27,6 +27,7 @@ Node::Node(QObject *parent) : QObject(parent) {
     setColor("#FF0000");
     setX(0);
     setY(0);
+    setZ(0);
     setBegin(false);
     setEnd(false);
 }
@@ -173,14 +174,25 @@ void Node::setY(qreal y) {
     _y  = y;
     emit posChanged();
 }
-void Node::setPos(qreal x, qreal y) {
+
+void Node::setZ(qreal z) {
+  _z = z;
+  emit posChanged();
+}
+
+void Node::setPos(qreal x, qreal y, qreal z) {
     _x = x;
     _y = y;
+    _z = z;
     emit posChanged();
     kDebug() << "Updating";
 }
 qreal Node::y() const {
     return _y;
+}
+
+qreal Node::z() const {
+  return _z;
 }
 void Node::setColor(const QString& s) {
     _color = s;

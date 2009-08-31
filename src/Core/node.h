@@ -40,6 +40,7 @@ class Node : public QObject {
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX);
     Q_PROPERTY(qreal y READ y WRITE setY);
+    Q_PROPERTY(qreal z READ z WRITE setZ);
     Q_PROPERTY(QString name READ name WRITE setName);
     Q_PROPERTY(QString color READ color WRITE setColor);
     Q_PROPERTY(bool begin READ begin WRITE setBegin);
@@ -73,9 +74,11 @@ public  slots:
 
     void setX(qreal x);
     void setY(qreal y);
-    void setPos(qreal x, qreal y);
+    void setZ(qreal z);
+    void setPos(qreal x, qreal y, qreal z = 1);
     qreal x() const;
     qreal y() const;
+    qreal z() const;
     void setColor(const QString& s);
     const QString& color() const;
     void setName(const QString& s);
@@ -108,6 +111,7 @@ private:
     //! fixed properties
     qreal _x;
     qreal _y;
+    qreal _z;
     QString _name;
     QString _color;
     bool _begin;
