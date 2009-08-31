@@ -147,8 +147,10 @@ QWidget* MainWindow::setupLeftPanel() {
     _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
  
     _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
+    QWidget *w = new QWidget();
+    
     _GraphProperties = new QToolBox(this);
- 
+
    _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
    _leftTabs->addWidget( _GraphProperties, "Properties" , KIcon("applications-system"));
 

@@ -26,6 +26,7 @@
 #include <QStringList>
 #include <QScriptValue>
 
+class KPushButton;
 class OpenedFilesWidget;
 class GraphPropertiesWidget;
 class GraphVisualEditor;
@@ -86,7 +87,8 @@ private: // Variables.
     OpenedFilesWidget* _OpenedFiles;	//! area where the opened files will be
     QToolBox* _GraphProperties; //! Area where the nodes and edges will be modified.
     TabWidget *_leftTabs; //! Tab that will hold the pallete, opened files, graphLayers and Properties.
-
+    KPushButton *_btnAddGraph;
+    
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
     TabWidget *_bottomTabs;
