@@ -1,0 +1,46 @@
+/*!
+	\page index.html
+	\title Pie Menu
+
+    	\section1 Description
+	
+            The Pie Menu component provides circular pie menus.
+	
+
+	
+            It is usually triggered as a context menu, and allows
+            directional, gesture and traditional mouse
+            click-move-click navigation. It also has support for
+            keyboard navigation.
+	
+
+    	
+        \section1 Classes
+	    \list
+	 \i  QtPieMenu\endlist
+	
+        \section1 Examples
+	    \list
+	 \i  \link editor-example.html An editor with a pie menu \endlink  \i  \link hexagon-example.html Subclassing QtPieMenu \endlink \endlist
+	
+    
+
+    	
+
+    	
+    		\section1 Tested platforms
+		\list
+		\i Qt 4.4, 4.5 / Windows XP / MSVC.NET 2005
+		    \i Qt 4.4, 4.5 / Linux / gcc
+		    \i Qt 4.4, 4.5 / MacOS X 10.5 / gcc
+		    \endlist
+
+    	
+
+	
+		\section1 Screenshots
+
+    		\img qtpiemenu.png
+		    \img hexagon.png
+		    
+	*/

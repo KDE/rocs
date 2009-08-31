@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- qtpiemenu-2.4-opensource/src/qtpiemenu.cpp -->
+<head>
+  <title>QtPieMenu Class Reference</title>
+  <link href="classic.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left" valign="top" width="32"><img src="images/qt-logo.png" align="left" width="57" height="67" border="0" /></td>
+<td width="1">&nbsp;&nbsp;</td><td class="postheader" valign="center"><a href="index.html"><font color="#004faf">Home</font></a></td>
+</tr></table><h1 class="title">QtPieMenu Class Reference</h1>
+<p>The QtPieMenu class provides a pie menu popup widget. <a href="#details">More...</a></p>
+<pre> #include &lt;QtPieMenu&gt;</pre><p>Inherits <a href="qtpieitem.html">QtPieItem</a>.</p>
+<ul>
+<li><a href="qtpiemenu-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-types"></a>
+<h3>Public Types</h3>
+<ul>
+<li><div class="fn"/>enum <b><a href="qtpiemenu.html#ItemType-enum">ItemType</a></b> { Invalid, SubMenu, Action }</li>
+</ul>
+<a name="properties"></a>
+<h3>Properties</h3>
+<ul>
+<li><div class="fn"/><b><a href="qtpiemenu.html#innerRadius-prop">innerRadius</a></b> : int</li>
+<li><div class="fn"/><b><a href="qtpiemenu.html#outerRadius-prop">outerRadius</a></b> : int</li>
+</ul>
+<ul>
+<li><div class="fn"/>57 properties inherited from <a href="http://doc.trolltech.com/4.4/qwidget.html#properties">QWidget</a></li>
+<li><div class="fn"/>1 property inherited from <a href="http://doc.trolltech.com/4.4/qobject.html#properties">QObject</a></li>
+</ul>
+<a name="public-functions"></a>
+<h3>Public Functions</h3>
+<ul>
+<li><div class="fn"/><b><a href="qtpiemenu.html#QtPieMenu">QtPieMenu</a></b> ( const QString &amp; <i>text</i>, QWidget * <i>parent</i> = 0, const char * <i>name</i> = 0, uint <i>innerRadius</i> = 15, uint <i>outerRadius</i> = 75 )</li>
+<li><div class="fn"/><b><a href="qtpiemenu.html#QtPieMenu-2">QtPieMenu</a></b> ( const QIcon &amp; <i>icon</i>, QWidget * <i>parent</i> = 0, const char * <i>name</i> = 0, uint <i>innerRadius</i> = 15, uint <i>outerRadius</i> = 75 )</li>
+<li><div class="fn"/><b><a href="qtpiemenu.html#QtPieMenu-3">QtPieMenu</a></b> ( const QIcon &amp; <i>icon</i>, const QString &amp; <i>text</i>, QWidget * <i>parent</i> = 0, const char * <i>name</i> = 0, uint <i>innerRadius</i> = 15, uint <i>outerRadius</i> = 75 )</li>
+<li><div class="fn"/>virtual <b><a href="qtpiemenu.html#dtor.QtPieMenu">~QtPieMenu</a></b> ()</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#clear">clear</a></b> ()</li>
+<li><div class="fn"/>int <b><a href="qtpiemenu.html#count">count</a></b> () const</li>
+<li><div class="fn"/>int <b><a href="qtpiemenu.html#highlightedItem">highlightedItem</a></b> ()</li>
+<li><div class="fn"/>virtual int <b><a href="qtpiemenu.html#indexAt">indexAt</a></b> ( const QPoint &amp; <i>pos</i> )</li>
+<li><div class="fn"/>int <b><a href="qtpiemenu.html#innerRadius-prop">innerRadius</a></b> () const</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#insertItem">insertItem</a></b> ( const QIcon &amp; <i>icon</i>, QObject * <i>receiver</i>, const char * <i>member</i>, int <i>index</i> = -1 )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#insertItem-2">insertItem</a></b> ( QtPieMenu * <i>item</i>, int <i>index</i> = -1 )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#insertItem-3">insertItem</a></b> ( const QString &amp; <i>text</i>, QObject * <i>receiver</i>, const char * <i>member</i>, int <i>index</i> = -1 )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#insertItem-4">insertItem</a></b> ( const QIcon &amp; <i>icons</i>, const QString &amp; <i>text</i>, QObject * <i>receiver</i>, const char * <i>member</i>, int <i>index</i> = -1 )</li>
+<li><div class="fn"/>bool <b><a href="qtpiemenu.html#isItemEnabled">isItemEnabled</a></b> ( int <i>index</i> ) const</li>
+<li><div class="fn"/>bool <b><a href="qtpiemenu.html#isShaded">isShaded</a></b> () const</li>
+<li><div class="fn"/>QIcon <b><a href="qtpiemenu.html#itemIcon">itemIcon</a></b> ( int <i>index</i> ) const</li>
+<li><div class="fn"/>QString <b><a href="qtpiemenu.html#itemText">itemText</a></b> ( int <i>index</i> ) const</li>
+<li><div class="fn"/>int <b><a href="qtpiemenu.html#itemType">itemType</a></b> ( int <i>index</i> ) const</li>
+<li><div class="fn"/>int <b><a href="qtpiemenu.html#itemWeight">itemWeight</a></b> ( int <i>index</i> ) const</li>
+<li><div class="fn"/>int <b><a href="qtpiemenu.html#outerRadius-prop">outerRadius</a></b> () const</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#popup">popup</a></b> ( const QPoint &amp; <i>pos</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#removeItemAt">removeItemAt</a></b> ( int <i>index</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#setHighlightedItem">setHighlightedItem</a></b> ( int <i>index</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#innerRadius-prop">setInnerRadius</a></b> ( int <i>r</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#setItemEnabled">setItemEnabled</a></b> ( bool <i>enabled</i>, int <i>index</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#setItemIcon">setItemIcon</a></b> ( const QIcon &amp; <i>icon</i>, int <i>index</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#setItemText">setItemText</a></b> ( const QString &amp; <i>text</i>, int <i>index</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#setItemWeight">setItemWeight</a></b> ( int <i>weight</i>, int <i>index</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#outerRadius-prop">setOuterRadius</a></b> ( int <i>r</i> )</li>
+<li><div class="fn"/>QtPieMenu * <b><a href="qtpiemenu.html#subMenuAt">subMenuAt</a></b> ( int <i>index</i> ) const</li>
+</ul>
+<ul>
+<li><div class="fn"/>9 public functions inherited from <a href="qtpieitem.html#public-functions">QtPieItem</a></li>
+<li><div class="fn"/>206 public functions inherited from <a href="http://doc.trolltech.com/4.4/qwidget.html#public-functions">QWidget</a></li>
+<li><div class="fn"/>29 public functions inherited from <a href="http://doc.trolltech.com/4.4/qobject.html#public-functions">QObject</a></li>
+<li><div class="fn"/>12 public functions inherited from <a href="http://doc.trolltech.com/4.4/qpaintdevice.html#public-functions">QPaintDevice</a></li>
+</ul>
+<a name="signals"></a>
+<h3>Signals</h3>
+<ul>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#aboutToHide">aboutToHide</a></b> ()</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#aboutToShow">aboutToShow</a></b> ()</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#activated">activated</a></b> ()</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#activated-2">activated</a></b> ( int <i>i</i> )</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#canceled">canceled</a></b> ()</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#canceledAll">canceledAll</a></b> ()</li>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#highlighted">highlighted</a></b> ( int <i>i</i> )</li>
+</ul>
+<ul>
+<li><div class="fn"/>1 signal inherited from <a href="http://doc.trolltech.com/4.4/qwidget.html#signals">QWidget</a></li>
+<li><div class="fn"/>1 signal inherited from <a href="http://doc.trolltech.com/4.4/qobject.html#signals">QObject</a></li>
+</ul>
+<a name="protected-types"></a>
+<h3>Protected Types</h3>
+<ul>
+<li><div class="fn"/>enum <b><a href="qtpiemenu.html#ActivateReason-enum">ActivateReason</a></b> { MousePress, MouseRelease, KeyPress, Hovering, Dragging }</li>
+</ul>
+<a name="protected-functions"></a>
+<h3>Protected Functions</h3>
+<ul>
+<li><div class="fn"/>void <b><a href="qtpiemenu.html#activateItem">activateItem</a></b> ( int <i>reason</i> )</li>
+<li><div class="fn"/>double <b><a href="qtpiemenu.html#angleAt">angleAt</a></b> ( const QPoint &amp; <i>pos</i> ) const</li>
+<li><div class="fn"/>virtual void <b><a href="qtpiemenu.html#generateMask">generateMask</a></b> ( QBitmap * <i>mask</i> )</li>
+<li><div class="fn"/>double <b><a href="qtpiemenu.html#radiusAt">radiusAt</a></b> ( const QPoint &amp; <i>pos</i> ) const</li>
+<li><div class="fn"/>virtual void <b><a href="qtpiemenu.html#reposition">reposition</a></b> ()</li>
+</ul>
+<ul>
+<li><div class="fn"/>38 protected functions inherited from <a href="http://doc.trolltech.com/4.4/qwidget.html#protected-functions">QWidget</a></li>
+<li><div class="fn"/>7 protected functions inherited from <a href="http://doc.trolltech.com/4.4/qobject.html#protected-functions">QObject</a></li>
+<li><div class="fn"/>1 protected function inherited from <a href="http://doc.trolltech.com/4.4/qpaintdevice.html#protected-functions">QPaintDevice</a></li>
+</ul>
+<h3>Additional Inherited Members</h3>
+<ul>
+<li><div class="fn"/>19 public slots inherited from <a href="http://doc.trolltech.com/4.4/qwidget.html#public-slots">QWidget</a></li>
+<li><div class="fn"/>1 public slot inherited from <a href="http://doc.trolltech.com/4.4/qobject.html#public-slots">QObject</a></li>
+<li><div class="fn"/>1 public type inherited from <a href="http://doc.trolltech.com/4.4/qobject.html#public-variables">QObject</a></li>
+<li><div class="fn"/>4 static public members inherited from <a href="http://doc.trolltech.com/4.4/qwidget.html#static-public-members">QWidget</a></li>
+<li><div class="fn"/>4 static public members inherited from <a href="http://doc.trolltech.com/4.4/qobject.html#static-public-members">QObject</a></li>
+<li><div class="fn"/>1 protected slot inherited from <a href="http://doc.trolltech.com/4.4/qwidget.html#protected-slots">QWidget</a></li>
+<li><div class="fn"/>2 protected variables inherited from <a href="http://doc.trolltech.com/4.4/qobject.html#protected-variables">QObject</a></li>
+<li><div class="fn"/>1 protected type inherited from <a href="http://doc.trolltech.com/4.4/qpaintdevice.html#protected-variables">QPaintDevice</a></li>
+</ul>
+<a name="details"></a>
+<hr />
+<h2>Detailed Description</h2>
+<p>The QtPieMenu class provides a pie menu popup widget.</p>
+<p>A pie menu is a popup menu that is usually invoked as a context menu, and that supports several forms of navigation.</p>
+<p>Using conventional navigation, menu items can be highlighted simply by moving the mouse over them, or by single-clicking them, or by using the keyboard's arrow keys. Menu items can be chosen (invoking a submenu or the menu item's action), by clicking a highlighted menu item, or by pressing <b>Enter</b>.</p>
+<p>Pie menus can also be navigated using <i>gestures</i>. Gesture navigation is where a menu item is chosen as the result of moving the mouse in a particular sequence of movements, for example, up-left-down, without the user having to actually read the menu item text.</p>
+<p>The user can cancel a pie menu in the conventional way by clicking outside of the pie menu, or by clicking the center of the pie (the &quot;cancel zone&quot;), or by pressing <b>Esc</b>.</p>
+<p>Pie menus are faster to navigate with the mouse than conventional menus because all the menu items are available at an equal distance from the origin of the mouse pointer.</p>
+<p>The circular layout and the length of the longest menu text imposes a natural limit on how many items can be displayed at a time. For this reason, submenus are very commonly used.</p>
+<p>Use <a href="qtpiemenu.html#popup">popup</a>() to pop up the pie menu. Note that QtPieMenu is different from <a href="http://doc.trolltech.com/4.4/porting4.html">QPopupMenu</a> in that it pops up with the mouse cursor in the center of the menu (i.e&#x2e; over the cancel zone), instead of having the cursor at the top left corner.</p>
+<p>Pie menus can only be used as popup menus; they cannot be used as normal widgets.</p>
+<p>A pie menu contains of a list of items, where each item is displayed as a slice of a pie. Items are added with <a href="qtpiemenu.html#insertItem">insertItem</a>(), and are displayed with a richtext text label, an icon or with both. The items are laid out automatically, starting from the top at index 0 and going counter clockwise. Each item can either pop up a submenu, or perform an action when activated. To get an item at a particular position, use itemAt().</p>
+<p>When inserting action items, you specify a receiver and a slot. The slot is invoked in the receiver when the action is activated. In the following example, a pie menu is created with three items: &quot;Open&quot; and &quot;Close&quot; are actions, and &quot;New&quot; pops up a submenu. The submenu has two items, &quot;New project&quot; and &quot;New dialog&quot;, which are both actions.</p>
+<pre> Editor::Editor(QWidget *parent, const char *name)
+   : QTextEdit(parent)
+ {
+     setObjectName(name);
+
+     <span class="comment">// Create a root menu and insert two action items.</span>
+     QtPieMenu *rootMenu = new QtPieMenu(tr(&quot;Root menu&quot;), this);
+     rootMenu-&gt;insertItem(tr(&quot;Open&quot;), storage, SLOT(open()));
+     rootMenu-&gt;insertItem(tr(&quot;Close&quot;), storage, SLOT(close());
+
+     <span class="comment">// Now create a submenu and insert two action items.</span>
+     QtPieMenu *subMenu = new QtPieMenu(tr(&quot;New&quot;), rootMenu);
+     subMenu-&gt;insertItem(tr(&quot;New project&quot;), formEditor, SLOT(newProject()));
+     subMenu-&gt;insertItem(tr(&quot;New dialog&quot;), formEditor, SLOT(newDialog()));
+
+     <span class="comment">// Finally add the submenu to the root menu.</span>
+     rootMenu-&gt;insertItem(subMenu);
+ }</pre>
+<p>By default, each slice of the pie takes up an equal amount of space. Sometimes it can be useful to have certain slices take up more space than others. QtPieItem::setItemWeight() changes an item's space weighting, which by default is 1. QtPieMenu uses the weightings when laying out the pie slices. Each slice gets a share of the size proportional to its weight.</p>
+<p align="center"><img src="images/weighted.png" /></p><p>At the center of a pie menu is a cancel zone, which cancels the menu if the user clicks in it. The radius of the whole pie menu and of the cancel zone are set in the constructor, or with <a href="qtpiemenu.html#outerRadius-prop">setOuterRadius</a>() and <a href="qtpiemenu.html#innerRadius-prop">setInnerRadius</a>().</p>
+<p>Any shape or layout of items is possible by subclassing QtPieMenu and reimplementing <a href="http://doc.trolltech.com/4.4/qwidget.html#paintEvent">paintEvent</a>(), <a href="qtpiemenu.html#indexAt">indexAt</a>(), <a href="qtpiemenu.html#generateMask">generateMask</a>() and <a href="qtpiemenu.html#reposition">reposition</a>().</p>
+<p align="center"><img src="images/qtpiemenu.png" /></p><hr />
+<h2>Member Type Documentation</h2>
+<h3 class="fn"><a name="ActivateReason-enum"></a>enum QtPieMenu::ActivateReason</h3>
+<p>This enum describes the reason for the activation of an item in a pie menu.</p>
+<p><table border="1" cellpadding="2" cellspacing="1" width="100%">
+<tr><th width="25%">Constant</th><th width="15%">Value</th><th width="60%">Description</th></tr>
+<tr><td valign="top"><tt>QtPieMenu::MousePress</tt></td><td align="center" valign="top"><tt>0x01</tt></td><td valign="top">The activation was caused by a mouse button press.</td></tr>
+<tr><td valign="top"><tt>QtPieMenu::MouseRelease</tt></td><td align="center" valign="top"><tt>0x02</tt></td><td valign="top">The activation was caused by a mouse button release.</td></tr>
+<tr><td valign="top"><tt>QtPieMenu::KeyPress</tt></td><td align="center" valign="top"><tt>0x04</tt></td><td valign="top">The activation was caused by a key press.</td></tr>
+<tr><td valign="top"><tt>QtPieMenu::Hovering</tt></td><td align="center" valign="top"><tt>0x08</tt></td><td valign="top">The activation was caused by hovering the mouse pointer over an item.</td></tr>
+<tr><td valign="top"><tt>QtPieMenu::Dragging</tt></td><td align="center" valign="top"><tt>0x10</tt></td><td valign="top">The activation was caused by dragging.</td></tr>
+</table></p>
+<p>See also <a href="qtpiemenu.html#activateItem">activateItem</a>().</p>
+<h3 class="fn"><a name="ItemType-enum"></a>enum QtPieMenu::ItemType</h3>
+<p><table border="1" cellpadding="2" cellspacing="1" width="100%">
+<tr><th width="25%">Constant</th><th width="15%">Value</th><th width="60%">Description</th></tr>
+<tr><td valign="top"><tt>QtPieMenu::Invalid</tt></td><td align="center" valign="top"><tt>0</tt></td><td valign="top">The item has an invalid type or doesn't exist; for example if QtPiePenu::itemType() is called with an invalid index.</td></tr>
+<tr><td valign="top"><tt>QtPieMenu::SubMenu</tt></td><td align="center" valign="top"><tt>1</tt></td><td valign="top">Activating the item will pop up a submenu.</td></tr>
+<tr><td valign="top"><tt>QtPieMenu::Action</tt></td><td align="center" valign="top"><tt>2</tt></td><td valign="top">Activating this item will trigger an action.</td></tr>
+</table></p>
+<hr />
+<h2>Property Documentation</h2>
+<h3 class="fn"><a name="innerRadius-prop"></a>innerRadius : int</h3>
+<p>This property holds the inner radius of the pie menu.</p>
+<p>The radius in pixels of the cancel zone (in the center) of the pie menu. Setting the radius to 0 disables the cancel zone.</p>
+<p>Access functions:</p>
+<ul>
+<li><div class="fn"/><b>int innerRadius () const</b></li>
+<li><div class="fn"/><b>void setInnerRadius ( int <i>r</i> )</b></li>
+</ul>
+<p>See also <a href="qtpiemenu.html#outerRadius-prop">outerRadius</a>.</p>
+<h3 class="fn"><a name="outerRadius-prop"></a>outerRadius : int</h3>
+<p>This property holds the outer radius of the pie menu.</p>
+<p>The outer radius of the pie menu in pixels.</p>
+<p>Access functions:</p>
+<ul>
+<li><div class="fn"/><b>int outerRadius () const</b></li>
+<li><div class="fn"/><b>void setOuterRadius ( int <i>r</i> )</b></li>
+</ul>
+<p>See also <a href="qtpiemenu.html#innerRadius-prop">innerRadius</a>.</p>
+<hr />
+<h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="QtPieMenu"></a>QtPieMenu::QtPieMenu ( const <a href="http://doc.trolltech.com/4.4/qstring.html">QString</a> &amp; <i>text</i>, <a href="http://doc.trolltech.com/4.4/qwidget.html">QWidget</a> * <i>parent</i> = 0, const char * <i>name</i> = 0, <a href="http://doc.trolltech.com/4.4/qtglobal.html#uint-typedef">uint</a> <i>innerRadius</i> = 15, <a href="http://doc.trolltech.com/4.4/qtglobal.html#uint-typedef">uint</a> <i>outerRadius</i> = 75 )</h3>
+<p>Constructs a pie menu. The <i>innerRadius</i> argument is the radius of the cancel zone at the center of the pie. The <i>outerRadius</i> is the radius of the outer edge of the pie.</p>
+<p>If this pie menu is a submenu, the richtext <i>text</i> argument is displayed by its parent menu.</p>
+<p>The <i>parent</i> argument is passed on to <a href="http://doc.trolltech.com/4.4/qwidget.html">QWidget</a>'s constructor. The object name is set to the <i>name</i> argument.</p>
+<h3 class="fn"><a name="QtPieMenu-2"></a>QtPieMenu::QtPieMenu ( const <a href="http://doc.trolltech.com/4.4/qicon.html">QIcon</a> &amp; <i>icon</i>, <a href="http://doc.trolltech.com/4.4/qwidget.html">QWidget</a> * <i>parent</i> = 0, const char * <i>name</i> = 0, <a href="http://doc.trolltech.com/4.4/qtglobal.html#uint-typedef">uint</a> <i>innerRadius</i> = 15, <a href="http://doc.trolltech.com/4.4/qtglobal.html#uint-typedef">uint</a> <i>outerRadius</i> = 75 )</h3>
+<p>Constructs a pie menu. The <i>innerRadius</i> argument is the radius of the cancel zone at the center of the pie. The <i>outerRadius</i> is the radius of the outer edge of the pie.</p>
+<p>If this pie menu is a submenu, the <i>icon</i> argument is displayed by its parent menu.</p>
+<p>The <i>parent</i> argument is passed on to <a href="http://doc.trolltech.com/4.4/qwidget.html">QWidget</a>'s constructor. The object name is set to the <i>name</i> argument.</p>
+<h3 class="fn"><a name="QtPieMenu-3"></a>QtPieMenu::QtPieMenu ( const <a href="http://doc.trolltech.com/4.4/qicon.html">QIcon</a> &amp; <i>icon</i>, const <a href="http://doc.trolltech.com/4.4/qstring.html">QString</a> &amp; <i>text</i>, <a href="http://doc.trolltech.com/4.4/qwidget.html">QWidget</a> * <i>parent</i> = 0, const char * <i>name</i> = 0, <a href="http://doc.trolltech.com/4.4/qtglobal.html#uint-typedef">uint</a> <i>innerRadius</i> = 15, <a href="http://doc.trolltech.com/4.4/qtglobal.html#uint-typedef">uint</a> <i>outerRadius</i> = 75 )</h3>
+<p>Constructs a pie menu. The <i>innerRadius</i> argument is the radius of the cancel zone at the center of the pie. The <i>outerRadius</i> is the radius of the outer edge of the pie.</p>
+<p>If this pie menu is a submenu, the <i>icon</i> and richtext <i>text</i> arguments are displayed by its parent menu.</p>
+<p>The <i>parent</i> argument is passed on to <a href="http://doc.trolltech.com/4.4/qwidget.html">QWidget</a>'s constructor. The object name is set to the <i>name</i> argument.</p>
+<h3 class="fn"><a name="dtor.QtPieMenu"></a>QtPieMenu::~QtPieMenu ()&nbsp;&nbsp;<tt> [virtual]</tt></h3>
+<p>Destructs the pie menu.</p>
+<h3 class="fn"><a name="aboutToHide"></a>void QtPieMenu::aboutToHide ()&nbsp;&nbsp;<tt> [signal]</tt></h3>
+<p>This signal is emitted just before the pie menu is hidden after it has been displayed.</p>
+<p><b>Warning:</b> Do not open a widget in a slot connected to this signal.</p>
+<p>See also <a href="qtpiemenu.html#aboutToShow">aboutToShow</a>(), <a href="qtpiemenu.html#insertItem">insertItem</a>(), and <a href="qtpiemenu.html#removeItemAt">removeItemAt</a>().</p>
+<h3 class="fn"><a name="aboutToShow"></a>void QtPieMenu::aboutToShow ()&nbsp;&nbsp;<tt> [signal]</tt></h3>
+<p>This signal is emitted just before the pie menu is displayed. You can connect it to any slot that sets up the menu contents (e.g&#x2e; to ensure that the correct items are enabled).</p>
+<p>See also <a href="qtpiemenu.html#aboutToHide">aboutToHide</a>(), <a href="qtpiemenu.html#insertItem">insertItem</a>(), and <a href="qtpiemenu.html#removeItemAt">removeItemAt</a>().</p>
+<h3 class="fn"><a name="activateItem"></a>void QtPieMenu::activateItem ( int <i>reason</i> )&nbsp;&nbsp;<tt> [protected]</tt></h3>
+<p>Activates an item. The reason for the activation is given in <i>reason</i>. Activating an item either causes an action to be activated, a submenu to popup, or the menu to be canceled.</p>
+<p>See also <a href="qtpiemenu.html#ActivateReason-enum">QtPieMenu::ActivateReason</a>.</p>
+<h3 class="fn"><a name="activated"></a>void QtPieMenu::activated ()&nbsp;&nbsp;<tt> [signal]</tt></h3>
+<p>This signal is emitted when a pie menu action item is activated, causing the popup menu to hide. It is used internally by <a href="qtpiemenu.html">QtPieMenu</a>. Most users will find activated(int) more useful.</p>
+<h3 class="fn"><a name="activated-2"></a>void QtPieMenu::activated ( int <i>i</i> )&nbsp;&nbsp;<tt> [signal]</tt></h3>
+<p>This is an overloaded member function, provided for convenience.</p>
+<p>This signal is emitted when the action item at index position <i>i</i> in the pie menu's list of menu items is activated.</p>
+<p>See also <a href="qtpiemenu.html#highlighted">highlighted</a>().</p>
+<h3 class="fn"><a name="angleAt"></a>double QtPieMenu::angleAt ( const <a href="http://doc.trolltech.com/4.4/qpoint.html">QPoint</a> &amp; <i>pos</i> ) const&nbsp;&nbsp;<tt> [protected]</tt></h3>
+<p>With origin set to the center of the pie, this function returns the angle in radians between the line that starts at (0,0) and ends at (1,0) and the line that starts at (0,0) and ends at <i>pos</i>.</p>
+<h3 class="fn"><a name="canceled"></a>void QtPieMenu::canceled ()&nbsp;&nbsp;<tt> [signal]</tt></h3>
+<p>This signal is emitted when the pie menu is canceled. Only the menu that emits this signal is canceled; any parent menus are still shown.</p>
+<p>See also <a href="qtpiemenu.html#canceledAll">canceledAll</a>().</p>
+<h3 class="fn"><a name="canceledAll"></a>void QtPieMenu::canceledAll ()&nbsp;&nbsp;<tt> [signal]</tt></h3>
+<p>This signal is emitted when the pie menu is canceled in such a way that the entire menu (including submenus) hides. For example, this would happen if the user clicked somewhere outside all the pie menus.</p>
+<p>See also <a href="qtpiemenu.html#canceled">canceled</a>().</p>
+<h3 class="fn"><a name="clear"></a>void QtPieMenu::clear ()</h3>
+<p>Removes all the items from the pie menu.</p>
+<h3 class="fn"><a name="count"></a>int QtPieMenu::count () const</h3>
+<p>Returns the number of items in this pie menu.</p>
+<h3 class="fn"><a name="generateMask"></a>void QtPieMenu::generateMask ( <a href="http://doc.trolltech.com/4.4/qbitmap.html">QBitmap</a> * <i>mask</i> )&nbsp;&nbsp;<tt> [virtual protected]</tt></h3>
+<p>Draws the outline of the pie menu using the bitmap <i>mask</i>. This is used as a <a href="http://doc.trolltech.com/4.4/qwidget.html">QWidget</a> mask.</p>
+<p>When subclassing <a href="qtpiemenu.html">QtPieMenu</a>, this function should be reimplemented if the shape of the new menu is different from <a href="qtpiemenu.html">QtPieMenu</a>'s shape.</p>
+<h3 class="fn"><a name="highlighted"></a>void QtPieMenu::highlighted ( int <i>i</i> )&nbsp;&nbsp;<tt> [signal]</tt></h3>
+<p>This signal is emitted when the item at index position <i>i</i> in the pie menu's list of menu items is highlighted.</p>
+<p>See also <a href="qtpiemenu.html#activated">activated</a>().</p>
+<h3 class="fn"><a name="highlightedItem"></a>int QtPieMenu::highlightedItem ()</h3>
+<p>Returns the index of the item that is currently selected, or -1 if no item is selected.</p>
+<p>See also <a href="qtpiemenu.html#setHighlightedItem">setHighlightedItem</a>().</p>
+<h3 class="fn"><a name="indexAt"></a>int QtPieMenu::indexAt ( const <a href="http://doc.trolltech.com/4.4/qpoint.html">QPoint</a> &amp; <i>pos</i> )&nbsp;&nbsp;<tt> [virtual]</tt></h3>
+<p>Returns the index of the item that is highlighted when the cursor is at position <i>pos</i>.</p>
+<p>This function is reimplemented if a subclass of <a href="qtpiemenu.html">QtPieMenu</a> provides a new item layout.</p>
+<h3 class="fn"><a name="insertItem"></a>void QtPieMenu::insertItem ( const <a href="http://doc.trolltech.com/4.4/qicon.html">QIcon</a> &amp; <i>icon</i>, <a href="http://doc.trolltech.com/4.4/qobject.html">QObject</a> * <i>receiver</i>, const char * <i>member</i>, int <i>index</i> = -1 )</h3>
+<p>Adds an action item to this pie menu at position <i>index</i>. The <i>icon</i> is displayed on this item's slice in the pie. The <i>receiver</i> gets notified through the signal or slot in <i>member</i> when the item is activated.</p>
+<pre> QIcon icon(QPixmap(&quot;save.png&quot;));
+ rootMenu-&gt;insertItem(icon, this, SLOT(save()));</pre>
+<p>The items are ordered by their ordinal position, starting from the top of the pie and going counter clockwise.</p>
+<h3 class="fn"><a name="insertItem-2"></a>void QtPieMenu::insertItem ( QtPieMenu * <i>item</i>, int <i>index</i> = -1 )</h3>
+<p>This is an overloaded member function, provided for convenience.</p>
+<p>Adds the submenu <i>item</i> to this pie menu at position <i>index</i>. The items are ordered by their ordinal position, starting from the top of the pie and counting counter clockwise.</p>
+<pre> QtPieMenu *subMenu = new QtPieMenu(&quot;Undo&quot;, this, SLOT(undo()));
+ rootMenu-&gt;insertItem(subMenu);</pre>
+<h3 class="fn"><a name="insertItem-3"></a>void QtPieMenu::insertItem ( const <a href="http://doc.trolltech.com/4.4/qstring.html">QString</a> &amp; <i>text</i>, <a href="http://doc.trolltech.com/4.4/qobject.html">QObject</a> * <i>receiver</i>, const char * <i>member</i>, int <i>index</i> = -1 )</h3>
+<p>This is an overloaded member function, provided for convenience.</p>
+<p>Adds an action item to this pie menu at position <i>index</i>. The <i>text</i> is used as the item's text, or the text that is displayed on this item's slice in the pie. The <i>receiver</i> gets notified through the signal or slot in <i>member</i> when the item is activated.</p>
+<pre> rootMenu-&gt;insertItem(&quot;Save&quot;, this, SLOT(save()));</pre>
+<p>The items are ordered by their ordinal position, starting from the top of the pie and going counter clockwise.</p>
+<h3 class="fn"><a name="insertItem-4"></a>void QtPieMenu::insertItem ( const <a href="http://doc.trolltech.com/4.4/qicon.html">QIcon</a> &amp; <i>icons</i>, const <a href="http://doc.trolltech.com/4.4/qstring.html">QString</a> &amp; <i>text</i>, <a href="http://doc.trolltech.com/4.4/qobject.html">QObject</a> * <i>receiver</i>, const char * <i>member</i>, int <i>index</i> = -1 )</h3>
+<p>This is an overloaded member function, provided for convenience.</p>
+<p>Adds an action item to this pie menu at position <i>index</i>. The <i>icons</i> and <i>text</i> are used as the item's text and icon, or the text and icon that is displayed on this item's slice in the pie. The <i>receiver</i> gets notified through the signal or slot in <i>member</i> when the item is activated.</p>
+<pre> QIcon icon(QPixmap(&quot;save.png&quot;));
+ rootMenu-&gt;insertItem(icon, &quot;Save&quot;, this, SLOT(save()));</pre>
+<p>The items are ordered by their ordinal position, starting from the top of the pie and going counter clockwise.</p>
+<h3 class="fn"><a name="isItemEnabled"></a>bool QtPieMenu::isItemEnabled ( int <i>index</i> ) const</h3>
+<p>Returns true if the pie menu item at position <i>index</i> is enabled; otherwise returns false.</p>
+<p>See also <a href="qtpiemenu.html#setItemEnabled">setItemEnabled</a>().</p>
+<h3 class="fn"><a name="isShaded"></a>bool QtPieMenu::isShaded () const</h3>
+<p>Returns true if the menu is shaded (inactive); otherwise returns false.</p>
+<h3 class="fn"><a name="itemIcon"></a><a href="http://doc.trolltech.com/4.4/qicon.html">QIcon</a> QtPieMenu::itemIcon ( int <i>index</i> ) const</h3>
+<p>Returns the icon set of the pie menu item at position <i>index</i>. If no icon has been set an invalid icon is returned.</p>
+<p>See also <a href="qtpiemenu.html#setItemIcon">setItemIcon</a>() and <a href="qtpiemenu.html#itemText">itemText</a>().</p>
+<h3 class="fn"><a name="itemText"></a><a href="http://doc.trolltech.com/4.4/qstring.html">QString</a> QtPieMenu::itemText ( int <i>index</i> ) const</h3>
+<p>Returns the text of the pie menu item at position <i>index</i>. The string may be a rich text string.</p>
+<p>See also <a href="qtpiemenu.html#setItemText">setItemText</a>() and <a href="qtpiemenu.html#itemIcon">itemIcon</a>().</p>
+<h3 class="fn"><a name="itemType"></a>int QtPieMenu::itemType ( int <i>index</i> ) const</h3>
+<p>Returns the type of the item at position <i>index</i>, or QtPieItem::Invalid if there is no item at position <i>index</i>.</p>
+<h3 class="fn"><a name="itemWeight"></a>int QtPieMenu::itemWeight ( int <i>index</i> ) const</h3>
+<p>Returns the weight of the pie menu item at position <i>index</i>.</p>
+<p>See also <a href="qtpiemenu.html#setItemWeight">setItemWeight</a>().</p>
+<h3 class="fn"><a name="popup"></a>void QtPieMenu::popup ( const <a href="http://doc.trolltech.com/4.4/qpoint.html">QPoint</a> &amp; <i>pos</i> )</h3>
+<p>Displays the pie menu with the center of the pie at the global position <i>pos</i>.</p>
+<p>To translate a widget's contents coordinates into global coordinates, use <a href="http://doc.trolltech.com/4.4/qwidget.html#mapToGlobal">QWidget::mapToGlobal</a>().</p>
+<h3 class="fn"><a name="radiusAt"></a>double QtPieMenu::radiusAt ( const <a href="http://doc.trolltech.com/4.4/qpoint.html">QPoint</a> &amp; <i>pos</i> ) const&nbsp;&nbsp;<tt> [protected]</tt></h3>
+<p>Returns the distance from <i>pos</i> to the center of the pie menu.</p>
+<h3 class="fn"><a name="removeItemAt"></a>void QtPieMenu::removeItemAt ( int <i>index</i> )</h3>
+<p>Removes the item at position <i>index</i>.</p>
+<h3 class="fn"><a name="reposition"></a>void QtPieMenu::reposition ()&nbsp;&nbsp;<tt> [virtual protected]</tt></h3>
+<p>Repositions a pie menu. This function is called in <a href="qtpiemenu.html#popup">popup</a>() after the pie menu's initial position has been set. Reimplement this function when subclassing <a href="qtpiemenu.html">QtPieMenu</a> to gain finer control of where submenus are positioned when popped up.</p>
+<p>The default implementation does nothing.</p>
+<h3 class="fn"><a name="setHighlightedItem"></a>void QtPieMenu::setHighlightedItem ( int <i>index</i> )</h3>
+<p>Highlights the item at position <i>index</i>, then schedules a display update.</p>
+<p>See also <a href="qtpiemenu.html#highlightedItem">highlightedItem</a>().</p>
+<h3 class="fn"><a name="setItemEnabled"></a>void QtPieMenu::setItemEnabled ( bool <i>enabled</i>, int <i>index</i> )</h3>
+<p>If <i>enabled</i> is true, this function enables the pie menu item at position <i>index</i>; otherwise the item is disabled. When an item is disabled, it will not respond to mouse clicks or releases. All all items are enabled by default.</p>
+<p>See also <a href="qtpiemenu.html#isItemEnabled">isItemEnabled</a>().</p>
+<h3 class="fn"><a name="setItemIcon"></a>void QtPieMenu::setItemIcon ( const <a href="http://doc.trolltech.com/4.4/qicon.html">QIcon</a> &amp; <i>icon</i>, int <i>index</i> )</h3>
+<p>Sets the icon of the pie menu item at position <i>index</i> to <i>icon</i>.</p>
+<p>See also <a href="qtpiemenu.html#itemIcon">itemIcon</a>() and <a href="qtpiemenu.html#setItemText">setItemText</a>().</p>
+<h3 class="fn"><a name="setItemText"></a>void QtPieMenu::setItemText ( const <a href="http://doc.trolltech.com/4.4/qstring.html">QString</a> &amp; <i>text</i>, int <i>index</i> )</h3>
+<p>Sets the text of the pie menu item at position <i>index</i> to <i>text</i>. Currently <a href="qtpiemenu.html">QtPieMenu</a> only supports plain text, and HTML tags will be stripped from <i>text</i>.</p>
+<pre> pieMenu-&gt;setItemText(&quot;Undo&quot;, 0);</pre>
+<p>See also <a href="qtpiemenu.html#itemText">itemText</a>() and <a href="qtpiemenu.html#setItemIcon">setItemIcon</a>().</p>
+<h3 class="fn"><a name="setItemWeight"></a>void QtPieMenu::setItemWeight ( int <i>weight</i>, int <i>index</i> )</h3>
+<p>Sets the relative weight of the pie menu item at position <i>index</i> to <i>weight</i>. The weight of an item decides how big its slice of the pie menu will be. By default, all pie menu items have a weight of 1. If one item has a weight of 2, it will be twice as big as the other items.</p>
+<p align="center"><img src="images/weighted.png" /></p><p>The pie menu in this image has three pie menu items with icons and no text. The item at position 0 has a weight of 2, and the rest have the default weight of 1.</p>
+<p>See also <a href="qtpiemenu.html#itemWeight">itemWeight</a>().</p>
+<h3 class="fn"><a name="subMenuAt"></a>QtPieMenu * QtPieMenu::subMenuAt ( int <i>index</i> ) const</h3>
+<p>If the item at position <i>index</i> is a submenu, a pointer to the corresponding <a href="qtpiemenu.html">QtPieMenu</a> is returned; otherwise returns 0.</p>
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="30%" align="left">Copyright &copy; 2009 Nokia</td>
+<td width="40%" align="center"><a href="http://doc.trolltech.com/trademarks.html">Trademarks</a></td>
+<td width="30%" align="right"><div align="right">Qt Solutions</div></td>
+</tr></table></div></address></body>
+</html>

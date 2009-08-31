@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- qtpiemenu-2.4-opensource/examples/hexagon/hexagon.qdoc -->
+<head>
+  <title>How to implement a different shape.</title>
+  <link href="classic.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td align="left" valign="top" width="32"><img src="images/qt-logo.png" align="left" width="57" height="67" border="0" /></td>
+<td width="1">&nbsp;&nbsp;</td><td class="postheader" valign="center"><a href="index.html"><font color="#004faf">Home</font></a></td>
+</tr></table><h1 class="title">How to implement a different shape.<br /><span class="subtitle"></span>
+</h1>
+<p>By subclassing <a href="qtpiemenu.html">QtPieMenu</a> and reimplementing a few functions, a menu with a different shape can be provided, which better fits the needs of your application. The following example shows how to generate a hexagon shaped pie menu with a transparent center, by reimplementing only three functions: generateMask(), reposition() and paintEvent().</p>
+<p align="center"><img src="images/hexagon.png" /></p>        <hr>
+    <p>hexagonpie.h:</p>
+<pre><span class="comment"> /****************************************************************************
+ **
+ ** This file is part of a Qt Solutions component.
+ **
+ ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+ **
+ ** Contact:  Qt Software Information (qt-info@nokia.com)
+ **
+ ** Commercial Usage
+ ** Licensees holding valid Qt Commercial licenses may use this file in
+ ** accordance with the Qt Solutions Commercial License Agreement provided
+ ** with the Software or, alternatively, in accordance with the terms
+ ** contained in a written agreement between you and Nokia.
+ **
+ ** GNU Lesser General Public License Usage
+ ** Alternatively, this file may be used under the terms of the GNU Lesser
+ ** General Public License version 2.1 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.LGPL included in the
+ ** packaging of this file.  Please review the following information to
+ ** ensure the GNU Lesser General Public License version 2.1 requirements
+ ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ **
+ ** In addition, as a special exception, Nokia gives you certain
+ ** additional rights. These rights are described in the Nokia Qt LGPL
+ ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
+ ** package.
+ **
+ ** GNU General Public License Usage
+ ** Alternatively, this file may be used under the terms of the GNU
+ ** General Public License version 3.0 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.GPL included in the
+ ** packaging of this file.  Please review the following information to
+ ** ensure the GNU General Public License version 3.0 requirements will be
+ ** met: http://www.gnu.org/copyleft/gpl.html.
+ **
+ ** Please note Third Party Software included with Qt Solutions may impose
+ ** additional restrictions and it is the user's responsibility to ensure
+ ** that they have met the licensing requirements of the GPL, LGPL, or Qt
+ ** Solutions Commercial license and the relevant license of the Third
+ ** Party Software they are using.
+ **
+ ** If you are unsure which license is appropriate for your use, please
+ ** contact the sales department at qt-sales@nokia.com.
+ **
+ ****************************************************************************/</span>
+
+ #ifndef HEXAGONPIE_H
+ #define HEXAGONPIE_H
+ #include &lt;qtpiemenu.h&gt;
+ #include &lt;QtGui/QColor&gt;
+
+ class HexagonPie : public QtPieMenu
+ {
+     Q_OBJECT
+ public:
+     HexagonPie(const QString &amp;title = QString::null,
+                const QColor &amp;color = QColor(),
+                QWidget *parent = 0, const char *name = 0);
+
+ protected:
+     void generateMask(QBitmap *mask);
+     void reposition();
+
+     void paintEvent(QPaintEvent *e);
+
+ private:
+     QColor col;
+ };
+
+ #endif</pre>
+        <hr>
+    <p>hexagonpie.cpp:</p>
+<pre><span class="comment"> /****************************************************************************
+ **
+ ** This file is part of a Qt Solutions component.
+ **
+ ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+ **
+ ** Contact:  Qt Software Information (qt-info@nokia.com)
+ **
+ ** Commercial Usage
+ ** Licensees holding valid Qt Commercial licenses may use this file in
+ ** accordance with the Qt Solutions Commercial License Agreement provided
+ ** with the Software or, alternatively, in accordance with the terms
+ ** contained in a written agreement between you and Nokia.
+ **
+ ** GNU Lesser General Public License Usage
+ ** Alternatively, this file may be used under the terms of the GNU Lesser
+ ** General Public License version 2.1 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.LGPL included in the
+ ** packaging of this file.  Please review the following information to
+ ** ensure the GNU Lesser General Public License version 2.1 requirements
+ ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ **
+ ** In addition, as a special exception, Nokia gives you certain
+ ** additional rights. These rights are described in the Nokia Qt LGPL
+ ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
+ ** package.
+ **
+ ** GNU General Public License Usage
+ ** Alternatively, this file may be used under the terms of the GNU
+ ** General Public License version 3.0 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.GPL included in the
+ ** packaging of this file.  Please review the following information to
+ ** ensure the GNU General Public License version 3.0 requirements will be
+ ** met: http://www.gnu.org/copyleft/gpl.html.
+ **
+ ** Please note Third Party Software included with Qt Solutions may impose
+ ** additional restrictions and it is the user's responsibility to ensure
+ ** that they have met the licensing requirements of the GPL, LGPL, or Qt
+ ** Solutions Commercial license and the relevant license of the Third
+ ** Party Software they are using.
+ **
+ ** If you are unsure which license is appropriate for your use, please
+ ** contact the sales department at qt-sales@nokia.com.
+ **
+ ****************************************************************************/</span>
+
+<span class="comment"> /*
+     This example demonstrates subclassing of QtPieMenu in order to
+     provide a different shape. It reimplements the functions
+     generateMask(), reposition() and paintEvent().
+
+     The basic shape is a hexagon.
+ */</span>
+ #include &quot;hexagonpie.h&quot;
+ #include &lt;QtCore/QObject&gt;
+ #include &lt;QtGui/QPainter&gt;
+ #include &lt;QtGui/QBitmap&gt;
+ #include &lt;QtGui/QFontMetrics&gt;
+ #include &lt;QtGui/QPolygon&gt;
+ #include &lt;math.h&gt;
+
+<span class="comment"> /*!
+     Constructs a hexagon pie menu. The \a title, \a parent and \a name
+     arguments are passed to QtPieMenu's constructor. \a color sets the
+     color of the pie menu. This color will also be used to draw the
+     pie item of any parent menu.
+ */</span>
+ HexagonPie::HexagonPie(const QString &amp;title, const QColor &amp;color,
+                        QWidget *parent, const char *name)
+     : QtPieMenu(title, parent, name), col(color)
+ {
+ }
+
+<span class="comment"> /*!
+     Draws a hexagon shape on \a mask.
+ */</span>
+ void HexagonPie::generateMask(QBitmap *mask)
+ {
+     QPainter p(mask);
+
+     p.setPen(Qt::color1);
+     p.setBrush(Qt::color1);
+
+     int x = pix.rect().center().x();
+     int y = pix.rect().center().y();
+
+     for (int i = 0; i &lt; 6; ++i) {
+         double a = indexToAngle(i, 6, true);
+         double b = indexToAngle(i + 1, 6, true);
+             double ax = outerRadius() * cos(a);
+             double ay = - outerRadius() * sin(a);
+             double bx = outerRadius() * cos(b);
+             double by = - outerRadius() * sin(b);
+             double cx = innerRadius() * cos(a);
+             double cy = - innerRadius() * sin(a);
+             double dx = innerRadius() * cos(b);
+             double dy = - innerRadius() * sin(b);
+
+         QPolygon poly(4);
+         poly.setPoint(0, x + (int) ax, y + (int) ay);
+         poly.setPoint(1, x + (int) bx, y + (int) by);
+         poly.setPoint(2, x + (int) dx, y + (int) dy);
+         poly.setPoint(3, x + (int) cx, y + (int) cy);
+         p.drawPolygon(poly);
+     }
+ }
+
+<span class="comment"> /*!
+     The hexagon shaped pie menu has a special rule for placement; we
+     want the sub menus to be positioned precisely next to the parent.
+     Since this hexagon piemenu has a fixed default size, we can do a
+     precise repositioning before the menu is shown.
+ */</span>
+ void HexagonPie::reposition()
+ {
+     if (!parent()-&gt;inherits(&quot;HexagonPie&quot;))
+         return;
+
+     HexagonPie *parentPie = reinterpret_cast&lt;HexagonPie *&gt;(parent());
+
+     QPoint parentCenter = mapToGlobal(parentPie-&gt;pos());
+
+     if (parentPie-&gt;subMenuAt(0) == this) {
+         move(mapFromGlobal(QPoint(parentCenter.x(), parentCenter.y() - 128)));
+     } else if (parentPie-&gt;subMenuAt(1) == this) {
+         move(mapFromGlobal(QPoint(parentCenter.x() - 112, parentCenter.y() - 64)));
+     } else if (parentPie-&gt;subMenuAt(2) == this) {
+         move(mapFromGlobal(QPoint(parentCenter.x() - 112, parentCenter.y() + 64)));
+     } else if (parentPie-&gt;subMenuAt(3) == this) {
+         move(mapFromGlobal(QPoint(parentCenter.x(), parentCenter.y() + 128)));
+     } else if (parentPie-&gt;subMenuAt(4) == this) {
+         move(mapFromGlobal(QPoint(parentCenter.x() + 112, parentCenter.y() + 64)));
+     } else if (parentPie-&gt;subMenuAt(5) == this) {
+         move(mapFromGlobal(QPoint(parentCenter.x() + 112, parentCenter.y() - 64)));
+     }
+ }
+
+<span class="comment"> /*!
+     Draws the hexagon shape, taking shading and highlighting into
+     consideration.
+ */</span>
+ void HexagonPie::paintEvent(QPaintEvent *)
+ {
+     QPainter p(&amp;pix);
+     pix.fill();
+
+     int x = pix.rect().center().x();
+     int y = pix.rect().center().y();
+
+     <span class="comment">// Draw the segments</span>
+     QFontMetrics fm(font());
+     for (int i = 0; i &lt; 6; ++i) {
+         p.setPen(Qt::black);
+         <span class="comment">// Find the brush we should use for drawing the segments of</span>
+         <span class="comment">// the menu. Each segment has its own color.</span>
+         QColor baseColor = col;
+         if (itemType(i) == SubMenu)
+             baseColor = ((HexagonPie *)subMenuAt(i))-&gt;col;
+
+         if (i == highlightedItem()) {
+             QColor tmp = Qt::white;
+             if (baseColor.isValid()) {
+                 QColor merge((tmp.red()*3 + baseColor.red()*2)/5,
+                              (tmp.green()*3 + baseColor.green()*2)/5,
+                              (tmp.blue()*3 + baseColor.blue()*2)/5);
+                 p.setBrush(QBrush(merge));
+             } else {
+                 p.setBrush(QBrush(tmp));
+             }
+         } else {
+             QColor tmp = palette().background().color();
+             if (baseColor.isValid()) {
+                 QColor merge((tmp.red()*3 + baseColor.red()*2)/5,
+                              (tmp.green()*3 + baseColor.green()*2)/5,
+                              (tmp.blue()*3 + baseColor.blue()*2)/5);
+                 p.setBrush(QBrush(merge));
+             } else {
+                 p.setBrush(QBrush(tmp));
+             }
+         }
+
+         <span class="comment">// Draw the polygon</span>
+         double a = indexToAngle(i, 6, true);
+         double b = indexToAngle(i + 1, 6, true);
+             double ax = outerRadius() * cos(a);
+             double ay = - outerRadius() * sin(a);
+             double bx = outerRadius() * cos(b);
+             double by = - outerRadius() * sin(b);
+             double cx = innerRadius() * cos(a);
+             double cy = - innerRadius() * sin(a);
+             double dx = innerRadius() * cos(b);
+             double dy = - innerRadius() * sin(b);
+
+         QPolygon pointArray(4);
+         pointArray.putPoints(0, 4,
+                              x + (int) ax, y + (int) ay,
+                              x + (int) bx, y + (int) by,
+                              x + (int) dx, y + (int) dy,
+                              x + (int) cx, y + (int) cy);
+
+         p.drawPolygon(pointArray);
+
+         if (!itemText(i).isEmpty()) {
+             QFont font = p.font();
+             if (i == highlightedItem()) {
+                 p.setPen(Qt::white);
+                 font.setBold(true);
+             } else {
+                 p.setPen(palette().text().color());
+                 font.setBold(false);
+             }
+
+             p.setFont(font);
+
+             <span class="comment">// Draw the title text</span>
+             QString t = itemText(i);
+             p.drawText((int) (x + (ax + bx + cx + dx) / 4 - fm.width(t) / 2),
+                        (int) (y + (ay + by + cy + dy) / 4), t);
+
+             font.setBold(false);
+             p.setFont(font);
+         }
+     }
+
+     QPainter p2(this);
+     p2.drawPixmap(QPoint(0, 0), pix);
+ }</pre>
+        <hr>
+    <p>main.cpp:</p>
+<pre><span class="comment"> /****************************************************************************
+ **
+ ** This file is part of a Qt Solutions component.
+ **
+ ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+ **
+ ** Contact:  Qt Software Information (qt-info@nokia.com)
+ **
+ ** Commercial Usage
+ ** Licensees holding valid Qt Commercial licenses may use this file in
+ ** accordance with the Qt Solutions Commercial License Agreement provided
+ ** with the Software or, alternatively, in accordance with the terms
+ ** contained in a written agreement between you and Nokia.
+ **
+ ** GNU Lesser General Public License Usage
+ ** Alternatively, this file may be used under the terms of the GNU Lesser
+ ** General Public License version 2.1 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.LGPL included in the
+ ** packaging of this file.  Please review the following information to
+ ** ensure the GNU Lesser General Public License version 2.1 requirements
+ ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ **
+ ** In addition, as a special exception, Nokia gives you certain
+ ** additional rights. These rights are described in the Nokia Qt LGPL
+ ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
+ ** package.
+ **
+ ** GNU General Public License Usage
+ ** Alternatively, this file may be used under the terms of the GNU
+ ** General Public License version 3.0 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.GPL included in the
+ ** packaging of this file.  Please review the following information to
+ ** ensure the GNU General Public License version 3.0 requirements will be
+ ** met: http://www.gnu.org/copyleft/gpl.html.
+ **
+ ** Please note Third Party Software included with Qt Solutions may impose
+ ** additional restrictions and it is the user's responsibility to ensure
+ ** that they have met the licensing requirements of the GPL, LGPL, or Qt
+ ** Solutions Commercial license and the relevant license of the Third
+ ** Party Software they are using.
+ **
+ ** If you are unsure which license is appropriate for your use, please
+ ** contact the sales department at qt-sales@nokia.com.
+ **
+ ****************************************************************************/</span>
+
+ #include &quot;hexagonpie.h&quot;
+
+ #include &lt;QtGui/QApplication&gt;
+ #include &lt;QtGui/QTextEdit&gt;
+ #include &lt;QtGui/QMouseEvent&gt;
+
+ class MyEditor : public QTextEdit
+ {
+     Q_OBJECT
+ public:
+     MyEditor()
+     {
+         <span class="comment">// Create a pie menu with six submenus, and no action items.</span>
+         pie = new HexagonPie(&quot;Root&quot;, Qt::black, this, &quot;Root&quot;);
+         pie-&gt;insertItem(new HexagonPie(&quot;N&quot;, Qt::red, pie, &quot;N&quot;));
+         pie-&gt;insertItem(new HexagonPie(&quot;NW&quot;, Qt::green, pie, &quot;NW&quot;));
+         pie-&gt;insertItem(new HexagonPie(&quot;SW&quot;, Qt::blue, pie, &quot;SW&quot;));
+         pie-&gt;insertItem(new HexagonPie(&quot;S&quot;, Qt::yellow, pie, &quot;S&quot;));
+         pie-&gt;insertItem(new HexagonPie(&quot;SE&quot;, Qt::gray, pie, &quot;SE&quot;));
+         pie-&gt;insertItem(new HexagonPie(&quot;NE&quot;, Qt::cyan, pie, &quot;NE&quot;));
+
+         for (int i = 0; i &lt; 6; ++i) {
+             HexagonPie *subPie = (HexagonPie *)pie-&gt;subMenuAt(i);
+             subPie-&gt;insertItem(&quot;A&quot;, this, SLOT(noop()));
+             subPie-&gt;insertItem(&quot;B&quot;, this, SLOT(noop()));
+             subPie-&gt;insertItem(&quot;C&quot;, this, SLOT(noop()));
+             subPie-&gt;insertItem(&quot;D&quot;, this, SLOT(noop()));
+             subPie-&gt;insertItem(&quot;E&quot;, this, SLOT(noop()));
+             subPie-&gt;insertItem(&quot;F&quot;, this, SLOT(noop()));
+         }
+     }
+
+ public slots:
+     void noop()
+     {
+     }
+
+ protected:
+     void mousePressEvent(QMouseEvent *e)
+     {
+         if ( e-&gt;button() &amp; Qt::RightButton ) {
+             pie-&gt;popup(e-&gt;globalPos());
+             return;
+         }
+
+         QTextEdit::mousePressEvent( e );
+     }
+
+ private:
+     HexagonPie *pie;
+ };
+
+ int main(int argc, char *argv[])
+ {
+     QApplication app(argc, argv);
+
+     MyEditor editor;
+     editor.show();
+
+     return app.exec();
+ }
+
+ #include &quot;main.moc&quot;</pre>
+        <hr>
+    <p>hexagon.pro:</p>
+<pre> TEMPLATE = app
+ INCLUDEPATH += .
+
+ include(../../src/qtpiemenu.pri)
+
+ # Input
+ HEADERS += hexagonpie.h
+ SOURCES += hexagonpie.cpp main.cpp</pre>
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="30%" align="left">Copyright &copy; 2009 Nokia</td>
+<td width="40%" align="center"><a href="http://doc.trolltech.com/trademarks.html">Trademarks</a></td>
+<td width="30%" align="right"><div align="right">Qt Solutions</div></td>
+</tr></table></div></address></body>
+</html>

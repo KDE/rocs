@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>com.trolltech.qtsolutions.qtpropertybrowser_2.5</namespace>
+    <virtualFolder>qdoc</virtualFolder>
+    <customFilter name="Qt Solutions: Property Browser">
+        <filterAttribute>qt</filterAttribute>
+        <filterAttribute>qtpropertybrowser</filterAttribute>
+        <filterAttribute>solutions</filterAttribute>
+    </customFilter>
+    <filterSection>
+        <filterAttribute>qt</filterAttribute>
+        <filterAttribute>qtpropertybrowser</filterAttribute>
+        <filterAttribute>solutions</filterAttribute>
+        <toc>
+            <section ref="index.html" title="Qt Solutions: Property Browser Documentation">
+                <section ref="qtpropertybrowser-example-decoration.html" title="Decoration Example"></section>
+                <section ref="qtpropertybrowser-example-demo.html" title="Demo Example"></section>
+                <section ref="qtpropertybrowser-example-extension.html" title="Extension Example"></section>
+                <section ref="index.html" title="Property Browser"></section>
+                <section ref="qtpropertybrowser-example-simple.html" title="Simple Tree Property Browser Example"></section>
+                <section ref="qtpropertybrowser-example-object-controller.html" title="The Object Controller Example."></section>
+                <section ref="qtpropertybrowser-example-canvas-typed.html" title="Type Based Canvas Example"></section>
+                <section ref="qtpropertybrowser-example-canvas-variant.html" title="Variant Based Canvas Example"></section>
+            </section>
+        </toc>
+        <keywords>
+            <keyword name="Decoration Example" id="Decoration Example" ref="qtpropertybrowser-example-decoration.html"></keyword>
+            <keyword name="Demo Example" id="Demo Example" ref="qtpropertybrowser-example-demo.html"></keyword>
+            <keyword name="Extension Example" id="Extension Example" ref="qtpropertybrowser-example-extension.html"></keyword>
+            <keyword name="Property Browser" id="Property Browser" ref="index.html"></keyword>
+            <keyword name="QtAbstractEditorFactory" id="QtAbstractEditorFactory" ref="qtabstracteditorfactory.html"></keyword>
+            <keyword name="addPropertyManager" id="QtAbstractEditorFactory::addPropertyManager" ref="qtabstracteditorfactory.html#addPropertyManager"></keyword>
+            <keyword name="connectPropertyManager" id="QtAbstractEditorFactory::connectPropertyManager" ref="qtabstracteditorfactory.html#connectPropertyManager"></keyword>
+            <keyword name="createEditor" id="QtAbstractEditorFactory::createEditor" ref="qtabstracteditorfactory.html#createEditor"></keyword>
+            <keyword name="disconnectPropertyManager" id="QtAbstractEditorFactory::disconnectPropertyManager" ref="qtabstracteditorfactory.html#disconnectPropertyManager"></keyword>
+            <keyword name="propertyManager" id="QtAbstractEditorFactory::propertyManager" ref="qtabstracteditorfactory.html#propertyManager"></keyword>
+            <keyword name="propertyManagers" id="QtAbstractEditorFactory::propertyManagers" ref="qtabstracteditorfactory.html#propertyManagers"></keyword>
+            <keyword name="removePropertyManager" id="QtAbstractEditorFactory::removePropertyManager" ref="qtabstracteditorfactory.html#removePropertyManager"></keyword>
+            <keyword name="QtAbstractEditorFactoryBase" id="QtAbstractEditorFactoryBase" ref="qtabstracteditorfactorybase.html"></keyword>
+            <keyword name="createEditor" id="QtAbstractEditorFactoryBase::createEditor" ref="qtabstracteditorfactorybase.html#createEditor"></keyword>
+            <keyword name="QtAbstractPropertyBrowser" id="QtAbstractPropertyBrowser" ref="qtabstractpropertybrowser.html"></keyword>
+            <keyword name="addProperty" id="QtAbstractPropertyBrowser::addProperty" ref="qtabstractpropertybrowser.html#addProperty"></keyword>
+            <keyword name="clear" id="QtAbstractPropertyBrowser::clear" ref="qtabstractpropertybrowser.html#clear"></keyword>
+            <keyword name="createEditor" id="QtAbstractPropertyBrowser::createEditor" ref="qtabstractpropertybrowser.html#createEditor"></keyword>
+            <keyword name="currentItem" id="QtAbstractPropertyBrowser::currentItem" ref="qtabstractpropertybrowser.html#currentItem"></keyword>
+            <keyword name="currentItemChanged" id="QtAbstractPropertyBrowser::currentItemChanged" ref="qtabstractpropertybrowser.html#currentItemChanged"></keyword>
+            <keyword name="insertProperty" id="QtAbstractPropertyBrowser::insertProperty" ref="qtabstractpropertybrowser.html#insertProperty"></keyword>
+            <keyword name="itemChanged" id="QtAbstractPropertyBrowser::itemChanged" ref="qtabstractpropertybrowser.html#itemChanged"></keyword>
+            <keyword name="itemInserted" id="QtAbstractPropertyBrowser::itemInserted" ref="qtabstractpropertybrowser.html#itemInserted"></keyword>
+            <keyword name="itemRemoved" id="QtAbstractPropertyBrowser::itemRemoved" ref="qtabstractpropertybrowser.html#itemRemoved"></keyword>
+            <keyword name="items" id="QtAbstractPropertyBrowser::items" ref="qtabstractpropertybrowser.html#items"></keyword>
+            <keyword name="properties" id="QtAbstractPropertyBrowser::properties" ref="qtabstractpropertybrowser.html#properties"></keyword>
+            <keyword name="removeProperty" id="QtAbstractPropertyBrowser::removeProperty" ref="qtabstractpropertybrowser.html#removeProperty"></keyword>
+            <keyword name="setCurrentItem" id="QtAbstractPropertyBrowser::setCurrentItem" ref="qtabstractpropertybrowser.html#setCurrentItem"></keyword>
+            <keyword name="setFactoryForManager" id="QtAbstractPropertyBrowser::setFactoryForManager" ref="qtabstractpropertybrowser.html#setFactoryForManager"></keyword>
+            <keyword name="topLevelItem" id="QtAbstractPropertyBrowser::topLevelItem" ref="qtabstractpropertybrowser.html#topLevelItem"></keyword>
+            <keyword name="topLevelItems" id="QtAbstractPropertyBrowser::topLevelItems" ref="qtabstractpropertybrowser.html#topLevelItems"></keyword>
+            <keyword name="unsetFactoryForManager" id="QtAbstractPropertyBrowser::unsetFactoryForManager" ref="qtabstractpropertybrowser.html#unsetFactoryForManager"></keyword>
+            <keyword name="~QtAbstractPropertyBrowser" id="QtAbstractPropertyBrowser::~QtAbstractPropertyBrowser" ref="qtabstractpropertybrowser.html#dtor.QtAbstractPropertyBrowser"></keyword>
+            <keyword name="QtAbstractPropertyManager" id="QtAbstractPropertyManager" ref="qtabstractpropertymanager.html"></keyword>
+            <keyword name="addProperty" id="QtAbstractPropertyManager::addProperty" ref="qtabstractpropertymanager.html#addProperty"></keyword>
+            <keyword name="clear" id="QtAbstractPropertyManager::clear" ref="qtabstractpropertymanager.html#clear"></keyword>
+            <keyword name="createProperty" id="QtAbstractPropertyManager::createProperty" ref="qtabstractpropertymanager.html#createProperty"></keyword>
+            <keyword name="hasValue" id="QtAbstractPropertyManager::hasValue" ref="qtabstractpropertymanager.html#hasValue"></keyword>
+            <keyword name="initializeProperty" id="QtAbstractPropertyManager::initializeProperty" ref="qtabstractpropertymanager.html#initializeProperty"></keyword>
+            <keyword name="properties" id="QtAbstractPropertyManager::properties" ref="qtabstractpropertymanager.html#properties"></keyword>
+            <keyword name="propertyChanged" id="QtAbstractPropertyManager::propertyChanged" ref="qtabstractpropertymanager.html#propertyChanged"></keyword>
+            <keyword name="propertyDestroyed" id="QtAbstractPropertyManager::propertyDestroyed" ref="qtabstractpropertymanager.html#propertyDestroyed"></keyword>
+            <keyword name="propertyInserted" id="QtAbstractPropertyManager::propertyInserted" ref="qtabstractpropertymanager.html#propertyInserted"></keyword>
+            <keyword name="propertyRemoved" id="QtAbstractPropertyManager::propertyRemoved" ref="qtabstractpropertymanager.html#propertyRemoved"></keyword>
+            <keyword name="uninitializeProperty" id="QtAbstractPropertyManager::uninitializeProperty" ref="qtabstractpropertymanager.html#uninitializeProperty"></keyword>
+            <keyword name="valueIcon" id="QtAbstractPropertyManager::valueIcon" ref="qtabstractpropertymanager.html#valueIcon"></keyword>
+            <keyword name="valueText" id="QtAbstractPropertyManager::valueText" ref="qtabstractpropertymanager.html#valueText"></keyword>
+            <keyword name="~QtAbstractPropertyManager" id="QtAbstractPropertyManager::~QtAbstractPropertyManager" ref="qtabstractpropertymanager.html#dtor.QtAbstractPropertyManager"></keyword>
+            <keyword name="QtBoolPropertyManager" id="QtBoolPropertyManager" ref="qtboolpropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtBoolPropertyManager::setValue" ref="qtboolpropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtBoolPropertyManager::value" ref="qtboolpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtBoolPropertyManager::valueChanged" ref="qtboolpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtBoolPropertyManager" id="QtBoolPropertyManager::~QtBoolPropertyManager" ref="qtboolpropertymanager.html#dtor.QtBoolPropertyManager"></keyword>
+            <keyword name="QtBrowserItem" id="QtBrowserItem" ref="qtbrowseritem.html"></keyword>
+            <keyword name="browser" id="QtBrowserItem::browser" ref="qtbrowseritem.html#browser"></keyword>
+            <keyword name="children" id="QtBrowserItem::children" ref="qtbrowseritem.html#children"></keyword>
+            <keyword name="parent" id="QtBrowserItem::parent" ref="qtbrowseritem.html#parent"></keyword>
+            <keyword name="property" id="QtBrowserItem::property" ref="qtbrowseritem.html#property"></keyword>
+            <keyword name="QtButtonPropertyBrowser" id="QtButtonPropertyBrowser" ref="qtbuttonpropertybrowser.html"></keyword>
+            <keyword name="collapsed" id="QtButtonPropertyBrowser::collapsed" ref="qtbuttonpropertybrowser.html#collapsed"></keyword>
+            <keyword name="expanded" id="QtButtonPropertyBrowser::expanded" ref="qtbuttonpropertybrowser.html#expanded"></keyword>
+            <keyword name="isExpanded" id="QtButtonPropertyBrowser::isExpanded" ref="qtbuttonpropertybrowser.html#isExpanded"></keyword>
+            <keyword name="setExpanded" id="QtButtonPropertyBrowser::setExpanded" ref="qtbuttonpropertybrowser.html#setExpanded"></keyword>
+            <keyword name="~QtButtonPropertyBrowser" id="QtButtonPropertyBrowser::~QtButtonPropertyBrowser" ref="qtbuttonpropertybrowser.html#dtor.QtButtonPropertyBrowser"></keyword>
+            <keyword name="QtCharEditorFactory" id="QtCharEditorFactory" ref="qtchareditorfactory.html"></keyword>
+            <keyword name="~QtCharEditorFactory" id="QtCharEditorFactory::~QtCharEditorFactory" ref="qtchareditorfactory.html#dtor.QtCharEditorFactory"></keyword>
+            <keyword name="QtCharPropertyManager" id="QtCharPropertyManager" ref="qtcharpropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtCharPropertyManager::setValue" ref="qtcharpropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtCharPropertyManager::value" ref="qtcharpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtCharPropertyManager::valueChanged" ref="qtcharpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtCharPropertyManager" id="QtCharPropertyManager::~QtCharPropertyManager" ref="qtcharpropertymanager.html#dtor.QtCharPropertyManager"></keyword>
+            <keyword name="QtCheckBoxFactory" id="QtCheckBoxFactory" ref="qtcheckboxfactory.html"></keyword>
+            <keyword name="~QtCheckBoxFactory" id="QtCheckBoxFactory::~QtCheckBoxFactory" ref="qtcheckboxfactory.html#dtor.QtCheckBoxFactory"></keyword>
+            <keyword name="QtColorEditorFactory" id="QtColorEditorFactory" ref="qtcoloreditorfactory.html"></keyword>
+            <keyword name="~QtColorEditorFactory" id="QtColorEditorFactory::~QtColorEditorFactory" ref="qtcoloreditorfactory.html#dtor.QtColorEditorFactory"></keyword>
+            <keyword name="QtColorPropertyManager" id="QtColorPropertyManager" ref="qtcolorpropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtColorPropertyManager::setValue" ref="qtcolorpropertymanager.html#setValue"></keyword>
+            <keyword name="subIntPropertyManager" id="QtColorPropertyManager::subIntPropertyManager" ref="qtcolorpropertymanager.html#subIntPropertyManager"></keyword>
+            <keyword name="value" id="QtColorPropertyManager::value" ref="qtcolorpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtColorPropertyManager::valueChanged" ref="qtcolorpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtColorPropertyManager" id="QtColorPropertyManager::~QtColorPropertyManager" ref="qtcolorpropertymanager.html#dtor.QtColorPropertyManager"></keyword>
+            <keyword name="QtCursorEditorFactory" id="QtCursorEditorFactory" ref="qtcursoreditorfactory.html"></keyword>
+            <keyword name="~QtCursorEditorFactory" id="QtCursorEditorFactory::~QtCursorEditorFactory" ref="qtcursoreditorfactory.html#dtor.QtCursorEditorFactory"></keyword>
+            <keyword name="QtCursorPropertyManager" id="QtCursorPropertyManager" ref="qtcursorpropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtCursorPropertyManager::setValue" ref="qtcursorpropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtCursorPropertyManager::value" ref="qtcursorpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtCursorPropertyManager::valueChanged" ref="qtcursorpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtCursorPropertyManager" id="QtCursorPropertyManager::~QtCursorPropertyManager" ref="qtcursorpropertymanager.html#dtor.QtCursorPropertyManager"></keyword>
+            <keyword name="QtDateEditFactory" id="QtDateEditFactory" ref="qtdateeditfactory.html"></keyword>
+            <keyword name="~QtDateEditFactory" id="QtDateEditFactory::~QtDateEditFactory" ref="qtdateeditfactory.html#dtor.QtDateEditFactory"></keyword>
+            <keyword name="QtDatePropertyManager" id="QtDatePropertyManager" ref="qtdatepropertymanager.html"></keyword>
+            <keyword name="maximum" id="QtDatePropertyManager::maximum" ref="qtdatepropertymanager.html#maximum"></keyword>
+            <keyword name="minimum" id="QtDatePropertyManager::minimum" ref="qtdatepropertymanager.html#minimum"></keyword>
+            <keyword name="rangeChanged" id="QtDatePropertyManager::rangeChanged" ref="qtdatepropertymanager.html#rangeChanged"></keyword>
+            <keyword name="setMaximum" id="QtDatePropertyManager::setMaximum" ref="qtdatepropertymanager.html#setMaximum"></keyword>
+            <keyword name="setMinimum" id="QtDatePropertyManager::setMinimum" ref="qtdatepropertymanager.html#setMinimum"></keyword>
+            <keyword name="setRange" id="QtDatePropertyManager::setRange" ref="qtdatepropertymanager.html#setRange"></keyword>
+            <keyword name="setValue" id="QtDatePropertyManager::setValue" ref="qtdatepropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtDatePropertyManager::value" ref="qtdatepropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtDatePropertyManager::valueChanged" ref="qtdatepropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtDatePropertyManager" id="QtDatePropertyManager::~QtDatePropertyManager" ref="qtdatepropertymanager.html#dtor.QtDatePropertyManager"></keyword>
+            <keyword name="QtDateTimeEditFactory" id="QtDateTimeEditFactory" ref="qtdatetimeeditfactory.html"></keyword>
+            <keyword name="~QtDateTimeEditFactory" id="QtDateTimeEditFactory::~QtDateTimeEditFactory" ref="qtdatetimeeditfactory.html#dtor.QtDateTimeEditFactory"></keyword>
+            <keyword name="QtDateTimePropertyManager" id="QtDateTimePropertyManager" ref="qtdatetimepropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtDateTimePropertyManager::setValue" ref="qtdatetimepropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtDateTimePropertyManager::value" ref="qtdatetimepropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtDateTimePropertyManager::valueChanged" ref="qtdatetimepropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtDateTimePropertyManager" id="QtDateTimePropertyManager::~QtDateTimePropertyManager" ref="qtdatetimepropertymanager.html#dtor.QtDateTimePropertyManager"></keyword>
+            <keyword name="QtDoublePropertyManager" id="QtDoublePropertyManager" ref="qtdoublepropertymanager.html"></keyword>
+            <keyword name="decimals" id="QtDoublePropertyManager::decimals" ref="qtdoublepropertymanager.html#decimals"></keyword>
+            <keyword name="decimalsChanged" id="QtDoublePropertyManager::decimalsChanged" ref="qtdoublepropertymanager.html#decimalsChanged"></keyword>
+            <keyword name="maximum" id="QtDoublePropertyManager::maximum" ref="qtdoublepropertymanager.html#maximum"></keyword>
+            <keyword name="minimum" id="QtDoublePropertyManager::minimum" ref="qtdoublepropertymanager.html#minimum"></keyword>
+            <keyword name="rangeChanged" id="QtDoublePropertyManager::rangeChanged" ref="qtdoublepropertymanager.html#rangeChanged"></keyword>
+            <keyword name="setDecimals" id="QtDoublePropertyManager::setDecimals" ref="qtdoublepropertymanager.html#setDecimals"></keyword>
+            <keyword name="setMaximum" id="QtDoublePropertyManager::setMaximum" ref="qtdoublepropertymanager.html#setMaximum"></keyword>
+            <keyword name="setMinimum" id="QtDoublePropertyManager::setMinimum" ref="qtdoublepropertymanager.html#setMinimum"></keyword>
+            <keyword name="setRange" id="QtDoublePropertyManager::setRange" ref="qtdoublepropertymanager.html#setRange"></keyword>
+            <keyword name="setSingleStep" id="QtDoublePropertyManager::setSingleStep" ref="qtdoublepropertymanager.html#setSingleStep"></keyword>
+            <keyword name="setValue" id="QtDoublePropertyManager::setValue" ref="qtdoublepropertymanager.html#setValue"></keyword>
+            <keyword name="singleStep" id="QtDoublePropertyManager::singleStep" ref="qtdoublepropertymanager.html#singleStep"></keyword>
+            <keyword name="singleStepChanged" id="QtDoublePropertyManager::singleStepChanged" ref="qtdoublepropertymanager.html#singleStepChanged"></keyword>
+            <keyword name="value" id="QtDoublePropertyManager::value" ref="qtdoublepropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtDoublePropertyManager::valueChanged" ref="qtdoublepropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtDoublePropertyManager" id="QtDoublePropertyManager::~QtDoublePropertyManager" ref="qtdoublepropertymanager.html#dtor.QtDoublePropertyManager"></keyword>
+            <keyword name="QtDoubleSpinBoxFactory" id="QtDoubleSpinBoxFactory" ref="qtdoublespinboxfactory.html"></keyword>
+            <keyword name="~QtDoubleSpinBoxFactory" id="QtDoubleSpinBoxFactory::~QtDoubleSpinBoxFactory" ref="qtdoublespinboxfactory.html#dtor.QtDoubleSpinBoxFactory"></keyword>
+            <keyword name="QtEnumEditorFactory" id="QtEnumEditorFactory" ref="qtenumeditorfactory.html"></keyword>
+            <keyword name="~QtEnumEditorFactory" id="QtEnumEditorFactory::~QtEnumEditorFactory" ref="qtenumeditorfactory.html#dtor.QtEnumEditorFactory"></keyword>
+            <keyword name="QtEnumPropertyManager" id="QtEnumPropertyManager" ref="qtenumpropertymanager.html"></keyword>
+            <keyword name="enumIcons" id="QtEnumPropertyManager::enumIcons" ref="qtenumpropertymanager.html#enumIcons"></keyword>
+            <keyword name="enumIconsChanged" id="QtEnumPropertyManager::enumIconsChanged" ref="qtenumpropertymanager.html#enumIconsChanged"></keyword>
+            <keyword name="enumNames" id="QtEnumPropertyManager::enumNames" ref="qtenumpropertymanager.html#enumNames"></keyword>
+            <keyword name="enumNamesChanged" id="QtEnumPropertyManager::enumNamesChanged" ref="qtenumpropertymanager.html#enumNamesChanged"></keyword>
+            <keyword name="setEnumIcons" id="QtEnumPropertyManager::setEnumIcons" ref="qtenumpropertymanager.html#setEnumIcons"></keyword>
+            <keyword name="setEnumNames" id="QtEnumPropertyManager::setEnumNames" ref="qtenumpropertymanager.html#setEnumNames"></keyword>
+            <keyword name="setValue" id="QtEnumPropertyManager::setValue" ref="qtenumpropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtEnumPropertyManager::value" ref="qtenumpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtEnumPropertyManager::valueChanged" ref="qtenumpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtEnumPropertyManager" id="QtEnumPropertyManager::~QtEnumPropertyManager" ref="qtenumpropertymanager.html#dtor.QtEnumPropertyManager"></keyword>
+            <keyword name="QtFlagPropertyManager" id="QtFlagPropertyManager" ref="qtflagpropertymanager.html"></keyword>
+            <keyword name="flagNames" id="QtFlagPropertyManager::flagNames" ref="qtflagpropertymanager.html#flagNames"></keyword>
+            <keyword name="flagNamesChanged" id="QtFlagPropertyManager::flagNamesChanged" ref="qtflagpropertymanager.html#flagNamesChanged"></keyword>
+            <keyword name="setFlagNames" id="QtFlagPropertyManager::setFlagNames" ref="qtflagpropertymanager.html#setFlagNames"></keyword>
+            <keyword name="setValue" id="QtFlagPropertyManager::setValue" ref="qtflagpropertymanager.html#setValue"></keyword>
+            <keyword name="subBoolPropertyManager" id="QtFlagPropertyManager::subBoolPropertyManager" ref="qtflagpropertymanager.html#subBoolPropertyManager"></keyword>
+            <keyword name="value" id="QtFlagPropertyManager::value" ref="qtflagpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtFlagPropertyManager::valueChanged" ref="qtflagpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtFlagPropertyManager" id="QtFlagPropertyManager::~QtFlagPropertyManager" ref="qtflagpropertymanager.html#dtor.QtFlagPropertyManager"></keyword>
+            <keyword name="QtFontEditorFactory" id="QtFontEditorFactory" ref="qtfonteditorfactory.html"></keyword>
+            <keyword name="~QtFontEditorFactory" id="QtFontEditorFactory::~QtFontEditorFactory" ref="qtfonteditorfactory.html#dtor.QtFontEditorFactory"></keyword>
+            <keyword name="QtFontPropertyManager" id="QtFontPropertyManager" ref="qtfontpropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtFontPropertyManager::setValue" ref="qtfontpropertymanager.html#setValue"></keyword>
+            <keyword name="subBoolPropertyManager" id="QtFontPropertyManager::subBoolPropertyManager" ref="qtfontpropertymanager.html#subBoolPropertyManager"></keyword>
+            <keyword name="subEnumPropertyManager" id="QtFontPropertyManager::subEnumPropertyManager" ref="qtfontpropertymanager.html#subEnumPropertyManager"></keyword>
+            <keyword name="subIntPropertyManager" id="QtFontPropertyManager::subIntPropertyManager" ref="qtfontpropertymanager.html#subIntPropertyManager"></keyword>
+            <keyword name="value" id="QtFontPropertyManager::value" ref="qtfontpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtFontPropertyManager::valueChanged" ref="qtfontpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtFontPropertyManager" id="QtFontPropertyManager::~QtFontPropertyManager" ref="qtfontpropertymanager.html#dtor.QtFontPropertyManager"></keyword>
+            <keyword name="QtGroupBoxPropertyBrowser" id="QtGroupBoxPropertyBrowser" ref="qtgroupboxpropertybrowser.html"></keyword>
+            <keyword name="~QtGroupBoxPropertyBrowser" id="QtGroupBoxPropertyBrowser::~QtGroupBoxPropertyBrowser" ref="qtgroupboxpropertybrowser.html#dtor.QtGroupBoxPropertyBrowser"></keyword>
+            <keyword name="QtGroupPropertyManager" id="QtGroupPropertyManager" ref="qtgrouppropertymanager.html"></keyword>
+            <keyword name="~QtGroupPropertyManager" id="QtGroupPropertyManager::~QtGroupPropertyManager" ref="qtgrouppropertymanager.html#dtor.QtGroupPropertyManager"></keyword>
+            <keyword name="QtIntPropertyManager" id="QtIntPropertyManager" ref="qtintpropertymanager.html"></keyword>
+            <keyword name="maximum" id="QtIntPropertyManager::maximum" ref="qtintpropertymanager.html#maximum"></keyword>
+            <keyword name="minimum" id="QtIntPropertyManager::minimum" ref="qtintpropertymanager.html#minimum"></keyword>
+            <keyword name="rangeChanged" id="QtIntPropertyManager::rangeChanged" ref="qtintpropertymanager.html#rangeChanged"></keyword>
+            <keyword name="setMaximum" id="QtIntPropertyManager::setMaximum" ref="qtintpropertymanager.html#setMaximum"></keyword>
+            <keyword name="setMinimum" id="QtIntPropertyManager::setMinimum" ref="qtintpropertymanager.html#setMinimum"></keyword>
+            <keyword name="setRange" id="QtIntPropertyManager::setRange" ref="qtintpropertymanager.html#setRange"></keyword>
+            <keyword name="setSingleStep" id="QtIntPropertyManager::setSingleStep" ref="qtintpropertymanager.html#setSingleStep"></keyword>
+            <keyword name="setValue" id="QtIntPropertyManager::setValue" ref="qtintpropertymanager.html#setValue"></keyword>
+            <keyword name="singleStep" id="QtIntPropertyManager::singleStep" ref="qtintpropertymanager.html#singleStep"></keyword>
+            <keyword name="singleStepChanged" id="QtIntPropertyManager::singleStepChanged" ref="qtintpropertymanager.html#singleStepChanged"></keyword>
+            <keyword name="value" id="QtIntPropertyManager::value" ref="qtintpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtIntPropertyManager::valueChanged" ref="qtintpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtIntPropertyManager" id="QtIntPropertyManager::~QtIntPropertyManager" ref="qtintpropertymanager.html#dtor.QtIntPropertyManager"></keyword>
+            <keyword name="QtKeySequenceEditorFactory" id="QtKeySequenceEditorFactory" ref="qtkeysequenceeditorfactory.html"></keyword>
+            <keyword name="~QtKeySequenceEditorFactory" id="QtKeySequenceEditorFactory::~QtKeySequenceEditorFactory" ref="qtkeysequenceeditorfactory.html#dtor.QtKeySequenceEditorFactory"></keyword>
+            <keyword name="QtKeySequencePropertyManager" id="QtKeySequencePropertyManager" ref="qtkeysequencepropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtKeySequencePropertyManager::setValue" ref="qtkeysequencepropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtKeySequencePropertyManager::value" ref="qtkeysequencepropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtKeySequencePropertyManager::valueChanged" ref="qtkeysequencepropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtKeySequencePropertyManager" id="QtKeySequencePropertyManager::~QtKeySequencePropertyManager" ref="qtkeysequencepropertymanager.html#dtor.QtKeySequencePropertyManager"></keyword>
+            <keyword name="QtLineEditFactory" id="QtLineEditFactory" ref="qtlineeditfactory.html"></keyword>
+            <keyword name="~QtLineEditFactory" id="QtLineEditFactory::~QtLineEditFactory" ref="qtlineeditfactory.html#dtor.QtLineEditFactory"></keyword>
+            <keyword name="QtLocalePropertyManager" id="QtLocalePropertyManager" ref="qtlocalepropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtLocalePropertyManager::setValue" ref="qtlocalepropertymanager.html#setValue"></keyword>
+            <keyword name="subEnumPropertyManager" id="QtLocalePropertyManager::subEnumPropertyManager" ref="qtlocalepropertymanager.html#subEnumPropertyManager"></keyword>
+            <keyword name="value" id="QtLocalePropertyManager::value" ref="qtlocalepropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtLocalePropertyManager::valueChanged" ref="qtlocalepropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtLocalePropertyManager" id="QtLocalePropertyManager::~QtLocalePropertyManager" ref="qtlocalepropertymanager.html#dtor.QtLocalePropertyManager"></keyword>
+            <keyword name="QtPointFPropertyManager" id="QtPointFPropertyManager" ref="qtpointfpropertymanager.html"></keyword>
+            <keyword name="decimals" id="QtPointFPropertyManager::decimals" ref="qtpointfpropertymanager.html#decimals"></keyword>
+            <keyword name="decimalsChanged" id="QtPointFPropertyManager::decimalsChanged" ref="qtpointfpropertymanager.html#decimalsChanged"></keyword>
+            <keyword name="setDecimals" id="QtPointFPropertyManager::setDecimals" ref="qtpointfpropertymanager.html#setDecimals"></keyword>
+            <keyword name="setValue" id="QtPointFPropertyManager::setValue" ref="qtpointfpropertymanager.html#setValue"></keyword>
+            <keyword name="subDoublePropertyManager" id="QtPointFPropertyManager::subDoublePropertyManager" ref="qtpointfpropertymanager.html#subDoublePropertyManager"></keyword>
+            <keyword name="value" id="QtPointFPropertyManager::value" ref="qtpointfpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtPointFPropertyManager::valueChanged" ref="qtpointfpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtPointFPropertyManager" id="QtPointFPropertyManager::~QtPointFPropertyManager" ref="qtpointfpropertymanager.html#dtor.QtPointFPropertyManager"></keyword>
+            <keyword name="QtPointPropertyManager" id="QtPointPropertyManager" ref="qtpointpropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtPointPropertyManager::setValue" ref="qtpointpropertymanager.html#setValue"></keyword>
+            <keyword name="subIntPropertyManager" id="QtPointPropertyManager::subIntPropertyManager" ref="qtpointpropertymanager.html#subIntPropertyManager"></keyword>
+            <keyword name="value" id="QtPointPropertyManager::value" ref="qtpointpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtPointPropertyManager::valueChanged" ref="qtpointpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtPointPropertyManager" id="QtPointPropertyManager::~QtPointPropertyManager" ref="qtpointpropertymanager.html#dtor.QtPointPropertyManager"></keyword>
+            <keyword name="QtProperty" id="QtProperty" ref="qtproperty.html"></keyword>
+            <keyword name="addSubProperty" id="QtProperty::addSubProperty" ref="qtproperty.html#addSubProperty"></keyword>
+            <keyword name="hasValue" id="QtProperty::hasValue" ref="qtproperty.html#hasValue"></keyword>
+            <keyword name="insertSubProperty" id="QtProperty::insertSubProperty" ref="qtproperty.html#insertSubProperty"></keyword>
+            <keyword name="isEnabled" id="QtProperty::isEnabled" ref="qtproperty.html#isEnabled"></keyword>
+            <keyword name="isModified" id="QtProperty::isModified" ref="qtproperty.html#isModified"></keyword>
+            <keyword name="propertyManager" id="QtProperty::propertyManager" ref="qtproperty.html#propertyManager"></keyword>
+            <keyword name="propertyName" id="QtProperty::propertyName" ref="qtproperty.html#propertyName"></keyword>
+            <keyword name="removeSubProperty" id="QtProperty::removeSubProperty" ref="qtproperty.html#removeSubProperty"></keyword>
+            <keyword name="setEnabled" id="QtProperty::setEnabled" ref="qtproperty.html#setEnabled"></keyword>
+            <keyword name="setModified" id="QtProperty::setModified" ref="qtproperty.html#setModified"></keyword>
+            <keyword name="setPropertyName" id="QtProperty::setPropertyName" ref="qtproperty.html#setPropertyName"></keyword>
+            <keyword name="setStatusTip" id="QtProperty::setStatusTip" ref="qtproperty.html#setStatusTip"></keyword>
+            <keyword name="setToolTip" id="QtProperty::setToolTip" ref="qtproperty.html#setToolTip"></keyword>
+            <keyword name="setWhatsThis" id="QtProperty::setWhatsThis" ref="qtproperty.html#setWhatsThis"></keyword>
+            <keyword name="statusTip" id="QtProperty::statusTip" ref="qtproperty.html#statusTip"></keyword>
+            <keyword name="subProperties" id="QtProperty::subProperties" ref="qtproperty.html#subProperties"></keyword>
+            <keyword name="toolTip" id="QtProperty::toolTip" ref="qtproperty.html#toolTip"></keyword>
+            <keyword name="valueIcon" id="QtProperty::valueIcon" ref="qtproperty.html#valueIcon"></keyword>
+            <keyword name="valueText" id="QtProperty::valueText" ref="qtproperty.html#valueText"></keyword>
+            <keyword name="whatsThis" id="QtProperty::whatsThis" ref="qtproperty.html#whatsThis"></keyword>
+            <keyword name="~QtProperty" id="QtProperty::~QtProperty" ref="qtproperty.html#dtor.QtProperty"></keyword>
+            <keyword name="QtRectFPropertyManager" id="QtRectFPropertyManager" ref="qtrectfpropertymanager.html"></keyword>
+            <keyword name="constraint" id="QtRectFPropertyManager::constraint" ref="qtrectfpropertymanager.html#constraint"></keyword>
+            <keyword name="constraintChanged" id="QtRectFPropertyManager::constraintChanged" ref="qtrectfpropertymanager.html#constraintChanged"></keyword>
+            <keyword name="decimals" id="QtRectFPropertyManager::decimals" ref="qtrectfpropertymanager.html#decimals"></keyword>
+            <keyword name="decimalsChanged" id="QtRectFPropertyManager::decimalsChanged" ref="qtrectfpropertymanager.html#decimalsChanged"></keyword>
+            <keyword name="setConstraint" id="QtRectFPropertyManager::setConstraint" ref="qtrectfpropertymanager.html#setConstraint"></keyword>
+            <keyword name="setDecimals" id="QtRectFPropertyManager::setDecimals" ref="qtrectfpropertymanager.html#setDecimals"></keyword>
+            <keyword name="setValue" id="QtRectFPropertyManager::setValue" ref="qtrectfpropertymanager.html#setValue"></keyword>
+            <keyword name="subDoublePropertyManager" id="QtRectFPropertyManager::subDoublePropertyManager" ref="qtrectfpropertymanager.html#subDoublePropertyManager"></keyword>
+            <keyword name="value" id="QtRectFPropertyManager::value" ref="qtrectfpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtRectFPropertyManager::valueChanged" ref="qtrectfpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtRectFPropertyManager" id="QtRectFPropertyManager::~QtRectFPropertyManager" ref="qtrectfpropertymanager.html#dtor.QtRectFPropertyManager"></keyword>
+            <keyword name="QtRectPropertyManager" id="QtRectPropertyManager" ref="qtrectpropertymanager.html"></keyword>
+            <keyword name="constraint" id="QtRectPropertyManager::constraint" ref="qtrectpropertymanager.html#constraint"></keyword>
+            <keyword name="constraintChanged" id="QtRectPropertyManager::constraintChanged" ref="qtrectpropertymanager.html#constraintChanged"></keyword>
+            <keyword name="setConstraint" id="QtRectPropertyManager::setConstraint" ref="qtrectpropertymanager.html#setConstraint"></keyword>
+            <keyword name="setValue" id="QtRectPropertyManager::setValue" ref="qtrectpropertymanager.html#setValue"></keyword>
+            <keyword name="subIntPropertyManager" id="QtRectPropertyManager::subIntPropertyManager" ref="qtrectpropertymanager.html#subIntPropertyManager"></keyword>
+            <keyword name="value" id="QtRectPropertyManager::value" ref="qtrectpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtRectPropertyManager::valueChanged" ref="qtrectpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtRectPropertyManager" id="QtRectPropertyManager::~QtRectPropertyManager" ref="qtrectpropertymanager.html#dtor.QtRectPropertyManager"></keyword>
+            <keyword name="QtScrollBarFactory" id="QtScrollBarFactory" ref="qtscrollbarfactory.html"></keyword>
+            <keyword name="~QtScrollBarFactory" id="QtScrollBarFactory::~QtScrollBarFactory" ref="qtscrollbarfactory.html#dtor.QtScrollBarFactory"></keyword>
+            <keyword name="QtSizeFPropertyManager" id="QtSizeFPropertyManager" ref="qtsizefpropertymanager.html"></keyword>
+            <keyword name="decimals" id="QtSizeFPropertyManager::decimals" ref="qtsizefpropertymanager.html#decimals"></keyword>
+            <keyword name="decimalsChanged" id="QtSizeFPropertyManager::decimalsChanged" ref="qtsizefpropertymanager.html#decimalsChanged"></keyword>
+            <keyword name="maximum" id="QtSizeFPropertyManager::maximum" ref="qtsizefpropertymanager.html#maximum"></keyword>
+            <keyword name="minimum" id="QtSizeFPropertyManager::minimum" ref="qtsizefpropertymanager.html#minimum"></keyword>
+            <keyword name="rangeChanged" id="QtSizeFPropertyManager::rangeChanged" ref="qtsizefpropertymanager.html#rangeChanged"></keyword>
+            <keyword name="setDecimals" id="QtSizeFPropertyManager::setDecimals" ref="qtsizefpropertymanager.html#setDecimals"></keyword>
+            <keyword name="setMaximum" id="QtSizeFPropertyManager::setMaximum" ref="qtsizefpropertymanager.html#setMaximum"></keyword>
+            <keyword name="setMinimum" id="QtSizeFPropertyManager::setMinimum" ref="qtsizefpropertymanager.html#setMinimum"></keyword>
+            <keyword name="setRange" id="QtSizeFPropertyManager::setRange" ref="qtsizefpropertymanager.html#setRange"></keyword>
+            <keyword name="setValue" id="QtSizeFPropertyManager::setValue" ref="qtsizefpropertymanager.html#setValue"></keyword>
+            <keyword name="subDoublePropertyManager" id="QtSizeFPropertyManager::subDoublePropertyManager" ref="qtsizefpropertymanager.html#subDoublePropertyManager"></keyword>
+            <keyword name="value" id="QtSizeFPropertyManager::value" ref="qtsizefpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtSizeFPropertyManager::valueChanged" ref="qtsizefpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtSizeFPropertyManager" id="QtSizeFPropertyManager::~QtSizeFPropertyManager" ref="qtsizefpropertymanager.html#dtor.QtSizeFPropertyManager"></keyword>
+            <keyword name="QtSizePolicyPropertyManager" id="QtSizePolicyPropertyManager" ref="qtsizepolicypropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtSizePolicyPropertyManager::setValue" ref="qtsizepolicypropertymanager.html#setValue"></keyword>
+            <keyword name="subEnumPropertyManager" id="QtSizePolicyPropertyManager::subEnumPropertyManager" ref="qtsizepolicypropertymanager.html#subEnumPropertyManager"></keyword>
+            <keyword name="subIntPropertyManager" id="QtSizePolicyPropertyManager::subIntPropertyManager" ref="qtsizepolicypropertymanager.html#subIntPropertyManager"></keyword>
+            <keyword name="value" id="QtSizePolicyPropertyManager::value" ref="qtsizepolicypropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtSizePolicyPropertyManager::valueChanged" ref="qtsizepolicypropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtSizePolicyPropertyManager" id="QtSizePolicyPropertyManager::~QtSizePolicyPropertyManager" ref="qtsizepolicypropertymanager.html#dtor.QtSizePolicyPropertyManager"></keyword>
+            <keyword name="QtSizePropertyManager" id="QtSizePropertyManager" ref="qtsizepropertymanager.html"></keyword>
+            <keyword name="maximum" id="QtSizePropertyManager::maximum" ref="qtsizepropertymanager.html#maximum"></keyword>
+            <keyword name="minimum" id="QtSizePropertyManager::minimum" ref="qtsizepropertymanager.html#minimum"></keyword>
+            <keyword name="rangeChanged" id="QtSizePropertyManager::rangeChanged" ref="qtsizepropertymanager.html#rangeChanged"></keyword>
+            <keyword name="setMaximum" id="QtSizePropertyManager::setMaximum" ref="qtsizepropertymanager.html#setMaximum"></keyword>
+            <keyword name="setMinimum" id="QtSizePropertyManager::setMinimum" ref="qtsizepropertymanager.html#setMinimum"></keyword>
+            <keyword name="setRange" id="QtSizePropertyManager::setRange" ref="qtsizepropertymanager.html#setRange"></keyword>
+            <keyword name="setValue" id="QtSizePropertyManager::setValue" ref="qtsizepropertymanager.html#setValue"></keyword>
+            <keyword name="subIntPropertyManager" id="QtSizePropertyManager::subIntPropertyManager" ref="qtsizepropertymanager.html#subIntPropertyManager"></keyword>
+            <keyword name="value" id="QtSizePropertyManager::value" ref="qtsizepropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtSizePropertyManager::valueChanged" ref="qtsizepropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtSizePropertyManager" id="QtSizePropertyManager::~QtSizePropertyManager" ref="qtsizepropertymanager.html#dtor.QtSizePropertyManager"></keyword>
+            <keyword name="QtSliderFactory" id="QtSliderFactory" ref="qtsliderfactory.html"></keyword>
+            <keyword name="~QtSliderFactory" id="QtSliderFactory::~QtSliderFactory" ref="qtsliderfactory.html#dtor.QtSliderFactory"></keyword>
+            <keyword name="QtSpinBoxFactory" id="QtSpinBoxFactory" ref="qtspinboxfactory.html"></keyword>
+            <keyword name="~QtSpinBoxFactory" id="QtSpinBoxFactory::~QtSpinBoxFactory" ref="qtspinboxfactory.html#dtor.QtSpinBoxFactory"></keyword>
+            <keyword name="QtStringPropertyManager" id="QtStringPropertyManager" ref="qtstringpropertymanager.html"></keyword>
+            <keyword name="regExp" id="QtStringPropertyManager::regExp" ref="qtstringpropertymanager.html#regExp"></keyword>
+            <keyword name="regExpChanged" id="QtStringPropertyManager::regExpChanged" ref="qtstringpropertymanager.html#regExpChanged"></keyword>
+            <keyword name="setRegExp" id="QtStringPropertyManager::setRegExp" ref="qtstringpropertymanager.html#setRegExp"></keyword>
+            <keyword name="setValue" id="QtStringPropertyManager::setValue" ref="qtstringpropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtStringPropertyManager::value" ref="qtstringpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtStringPropertyManager::valueChanged" ref="qtstringpropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtStringPropertyManager" id="QtStringPropertyManager::~QtStringPropertyManager" ref="qtstringpropertymanager.html#dtor.QtStringPropertyManager"></keyword>
+            <keyword name="QtTimeEditFactory" id="QtTimeEditFactory" ref="qttimeeditfactory.html"></keyword>
+            <keyword name="~QtTimeEditFactory" id="QtTimeEditFactory::~QtTimeEditFactory" ref="qttimeeditfactory.html#dtor.QtTimeEditFactory"></keyword>
+            <keyword name="QtTimePropertyManager" id="QtTimePropertyManager" ref="qttimepropertymanager.html"></keyword>
+            <keyword name="setValue" id="QtTimePropertyManager::setValue" ref="qttimepropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtTimePropertyManager::value" ref="qttimepropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtTimePropertyManager::valueChanged" ref="qttimepropertymanager.html#valueChanged"></keyword>
+            <keyword name="~QtTimePropertyManager" id="QtTimePropertyManager::~QtTimePropertyManager" ref="qttimepropertymanager.html#dtor.QtTimePropertyManager"></keyword>
+            <keyword name="QtTreePropertyBrowser" id="QtTreePropertyBrowser" ref="qttreepropertybrowser.html"></keyword>
+            <keyword name="QtTreePropertyBrowser::ResizeMode" id="QtTreePropertyBrowser::ResizeMode" ref="qttreepropertybrowser.html#ResizeMode-enum"></keyword>
+            <keyword name="QtTreePropertyBrowser::Interactive" id="QtTreePropertyBrowser::Interactive" ref="qttreepropertybrowser.html#ResizeMode-enum"></keyword>
+            <keyword name="QtTreePropertyBrowser::Stretch" id="QtTreePropertyBrowser::Stretch" ref="qttreepropertybrowser.html#ResizeMode-enum"></keyword>
+            <keyword name="QtTreePropertyBrowser::Fixed" id="QtTreePropertyBrowser::Fixed" ref="qttreepropertybrowser.html#ResizeMode-enum"></keyword>
+            <keyword name="QtTreePropertyBrowser::ResizeToContents" id="QtTreePropertyBrowser::ResizeToContents" ref="qttreepropertybrowser.html#ResizeMode-enum"></keyword>
+            <keyword name="alternatingRowColors" id="QtTreePropertyBrowser::alternatingRowColors" ref="qttreepropertybrowser.html#alternatingRowColors-prop"></keyword>
+            <keyword name="backgroundColor" id="QtTreePropertyBrowser::backgroundColor" ref="qttreepropertybrowser.html#backgroundColor"></keyword>
+            <keyword name="calculatedBackgroundColor" id="QtTreePropertyBrowser::calculatedBackgroundColor" ref="qttreepropertybrowser.html#calculatedBackgroundColor"></keyword>
+            <keyword name="collapsed" id="QtTreePropertyBrowser::collapsed" ref="qttreepropertybrowser.html#collapsed"></keyword>
+            <keyword name="editItem" id="QtTreePropertyBrowser::editItem" ref="qttreepropertybrowser.html#editItem"></keyword>
+            <keyword name="expanded" id="QtTreePropertyBrowser::expanded" ref="qttreepropertybrowser.html#expanded"></keyword>
+            <keyword name="headerVisible" id="QtTreePropertyBrowser::headerVisible" ref="qttreepropertybrowser.html#headerVisible-prop"></keyword>
+            <keyword name="indentation" id="QtTreePropertyBrowser::indentation" ref="qttreepropertybrowser.html#indentation-prop"></keyword>
+            <keyword name="isExpanded" id="QtTreePropertyBrowser::isExpanded" ref="qttreepropertybrowser.html#isExpanded"></keyword>
+            <keyword name="isHeaderVisible" id="QtTreePropertyBrowser::isHeaderVisible" ref="qttreepropertybrowser.html#headerVisible-prop"></keyword>
+            <keyword name="isItemVisible" id="QtTreePropertyBrowser::isItemVisible" ref="qttreepropertybrowser.html#isItemVisible"></keyword>
+            <keyword name="propertiesWithoutValueMarked" id="QtTreePropertyBrowser::propertiesWithoutValueMarked" ref="qttreepropertybrowser.html#propertiesWithoutValueMarked-prop"></keyword>
+            <keyword name="resizeMode" id="QtTreePropertyBrowser::resizeMode" ref="qttreepropertybrowser.html#resizeMode-prop"></keyword>
+            <keyword name="rootIsDecorated" id="QtTreePropertyBrowser::rootIsDecorated" ref="qttreepropertybrowser.html#rootIsDecorated-prop"></keyword>
+            <keyword name="setAlternatingRowColors" id="QtTreePropertyBrowser::setAlternatingRowColors" ref="qttreepropertybrowser.html#alternatingRowColors-prop"></keyword>
+            <keyword name="setBackgroundColor" id="QtTreePropertyBrowser::setBackgroundColor" ref="qttreepropertybrowser.html#setBackgroundColor"></keyword>
+            <keyword name="setExpanded" id="QtTreePropertyBrowser::setExpanded" ref="qttreepropertybrowser.html#setExpanded"></keyword>
+            <keyword name="setHeaderVisible" id="QtTreePropertyBrowser::setHeaderVisible" ref="qttreepropertybrowser.html#headerVisible-prop"></keyword>
+            <keyword name="setIndentation" id="QtTreePropertyBrowser::setIndentation" ref="qttreepropertybrowser.html#indentation-prop"></keyword>
+            <keyword name="setItemVisible" id="QtTreePropertyBrowser::setItemVisible" ref="qttreepropertybrowser.html#setItemVisible"></keyword>
+            <keyword name="setPropertiesWithoutValueMarked" id="QtTreePropertyBrowser::setPropertiesWithoutValueMarked" ref="qttreepropertybrowser.html#propertiesWithoutValueMarked-prop"></keyword>
+            <keyword name="setResizeMode" id="QtTreePropertyBrowser::setResizeMode" ref="qttreepropertybrowser.html#resizeMode-prop"></keyword>
+            <keyword name="setRootIsDecorated" id="QtTreePropertyBrowser::setRootIsDecorated" ref="qttreepropertybrowser.html#rootIsDecorated-prop"></keyword>
+            <keyword name="setSplitterPosition" id="QtTreePropertyBrowser::setSplitterPosition" ref="qttreepropertybrowser.html#splitterPosition-prop"></keyword>
+            <keyword name="splitterPosition" id="QtTreePropertyBrowser::splitterPosition" ref="qttreepropertybrowser.html#splitterPosition-prop"></keyword>
+            <keyword name="~QtTreePropertyBrowser" id="QtTreePropertyBrowser::~QtTreePropertyBrowser" ref="qttreepropertybrowser.html#dtor.QtTreePropertyBrowser"></keyword>
+            <keyword name="QtVariantEditorFactory" id="QtVariantEditorFactory" ref="qtvarianteditorfactory.html"></keyword>
+            <keyword name="~QtVariantEditorFactory" id="QtVariantEditorFactory::~QtVariantEditorFactory" ref="qtvarianteditorfactory.html#dtor.QtVariantEditorFactory"></keyword>
+            <keyword name="QtVariantProperty" id="QtVariantProperty" ref="qtvariantproperty.html"></keyword>
+            <keyword name="attributeValue" id="QtVariantProperty::attributeValue" ref="qtvariantproperty.html#attributeValue"></keyword>
+            <keyword name="propertyType" id="QtVariantProperty::propertyType" ref="qtvariantproperty.html#propertyType"></keyword>
+            <keyword name="setAttribute" id="QtVariantProperty::setAttribute" ref="qtvariantproperty.html#setAttribute"></keyword>
+            <keyword name="setValue" id="QtVariantProperty::setValue" ref="qtvariantproperty.html#setValue"></keyword>
+            <keyword name="value" id="QtVariantProperty::value" ref="qtvariantproperty.html#value"></keyword>
+            <keyword name="valueType" id="QtVariantProperty::valueType" ref="qtvariantproperty.html#valueType"></keyword>
+            <keyword name="~QtVariantProperty" id="QtVariantProperty::~QtVariantProperty" ref="qtvariantproperty.html#dtor.QtVariantProperty"></keyword>
+            <keyword name="QtVariantPropertyManager" id="QtVariantPropertyManager" ref="qtvariantpropertymanager.html"></keyword>
+            <keyword name="addProperty" id="QtVariantPropertyManager::addProperty" ref="qtvariantpropertymanager.html#addProperty"></keyword>
+            <keyword name="attributeChanged" id="QtVariantPropertyManager::attributeChanged" ref="qtvariantpropertymanager.html#attributeChanged"></keyword>
+            <keyword name="attributeType" id="QtVariantPropertyManager::attributeType" ref="qtvariantpropertymanager.html#attributeType"></keyword>
+            <keyword name="attributeValue" id="QtVariantPropertyManager::attributeValue" ref="qtvariantpropertymanager.html#attributeValue"></keyword>
+            <keyword name="attributes" id="QtVariantPropertyManager::attributes" ref="qtvariantpropertymanager.html#attributes"></keyword>
+            <keyword name="enumTypeId" id="QtVariantPropertyManager::enumTypeId" ref="qtvariantpropertymanager.html#enumTypeId"></keyword>
+            <keyword name="flagTypeId" id="QtVariantPropertyManager::flagTypeId" ref="qtvariantpropertymanager.html#flagTypeId"></keyword>
+            <keyword name="groupTypeId" id="QtVariantPropertyManager::groupTypeId" ref="qtvariantpropertymanager.html#groupTypeId"></keyword>
+            <keyword name="iconMapTypeId" id="QtVariantPropertyManager::iconMapTypeId" ref="qtvariantpropertymanager.html#iconMapTypeId"></keyword>
+            <keyword name="isPropertyTypeSupported" id="QtVariantPropertyManager::isPropertyTypeSupported" ref="qtvariantpropertymanager.html#isPropertyTypeSupported"></keyword>
+            <keyword name="propertyType" id="QtVariantPropertyManager::propertyType" ref="qtvariantpropertymanager.html#propertyType"></keyword>
+            <keyword name="setAttribute" id="QtVariantPropertyManager::setAttribute" ref="qtvariantpropertymanager.html#setAttribute"></keyword>
+            <keyword name="setValue" id="QtVariantPropertyManager::setValue" ref="qtvariantpropertymanager.html#setValue"></keyword>
+            <keyword name="value" id="QtVariantPropertyManager::value" ref="qtvariantpropertymanager.html#value"></keyword>
+            <keyword name="valueChanged" id="QtVariantPropertyManager::valueChanged" ref="qtvariantpropertymanager.html#valueChanged"></keyword>
+            <keyword name="valueType" id="QtVariantPropertyManager::valueType" ref="qtvariantpropertymanager.html#valueType"></keyword>
+            <keyword name="variantProperty" id="QtVariantPropertyManager::variantProperty" ref="qtvariantpropertymanager.html#variantProperty"></keyword>
+            <keyword name="~QtVariantPropertyManager" id="QtVariantPropertyManager::~QtVariantPropertyManager" ref="qtvariantpropertymanager.html#dtor.QtVariantPropertyManager"></keyword>
+            <keyword name="Simple Tree Property Browser Example" id="Simple Tree Property Browser Example" ref="qtpropertybrowser-example-simple.html"></keyword>
+            <keyword name="The Object Controller Example." id="The Object Controller Example." ref="qtpropertybrowser-example-object-controller.html"></keyword>
+            <keyword name="Type Based Canvas Example" id="Type Based Canvas Example" ref="qtpropertybrowser-example-canvas-typed.html"></keyword>
+            <keyword name="Variant Based Canvas Example" id="Variant Based Canvas Example" ref="qtpropertybrowser-example-canvas-variant.html"></keyword>
+        </keywords>
+        <files>
+            <file>images/decoration.png</file>
+            <file>qtpointfpropertymanager.html</file>
+            <file>qtpropertybrowser-example-object-controller.html</file>
+            <file>qtpropertybrowser-example-demo.html</file>
+            <file>qttimepropertymanager.html</file>
+            <file>qtspinboxfactory.html</file>
+            <file>qtvariantpropertymanager.html</file>
+            <file>qtkeysequenceeditorfactory.html</file>
+            <file>images/canvas_variant.png</file>
+            <file>qtabstractpropertybrowser.html</file>
+            <file>qtrectfpropertymanager.html</file>
+            <file>qtkeysequencepropertymanager.html</file>
+            <file>images/qtpropertybrowser-duplicate.png</file>
+            <file>qtpropertybrowser-example-extension.html</file>
+            <file>qtvariantproperty.html</file>
+            <file>qtfonteditorfactory.html</file>
+            <file>index.html</file>
+            <file>qtabstractpropertymanager.html</file>
+            <file>qtstringpropertymanager.html</file>
+            <file>qtpropertybrowser-example-canvas-variant.html</file>
+            <file>images/qtbuttonpropertybrowser.png</file>
+            <file>qtflagpropertymanager.html</file>
+            <file>images/demo.png</file>
+            <file>qtscrollbarfactory.html</file>
+            <file>qtdoublepropertymanager.html</file>
+            <file>images/qtgroupboxpropertybrowser.png</file>
+            <file>qttreepropertybrowser.html</file>
+            <file>qtgrouppropertymanager.html</file>
+            <file>qtsizepolicypropertymanager.html</file>
+            <file>qtdatetimeeditfactory.html</file>
+            <file>qtcharpropertymanager.html</file>
+            <file>qtdatepropertymanager.html</file>
+            <file>qtpropertybrowser-example-decoration.html</file>
+            <file>qtboolpropertymanager.html</file>
+            <file>qtsliderfactory.html</file>
+            <file>qtpropertybrowser-example-canvas-typed.html</file>
+            <file>qtrectpropertymanager.html</file>
+            <file>qtvarianteditorfactory.html</file>
+            <file>qtgroupboxpropertybrowser.html</file>
+            <file>qtsizepropertymanager.html</file>
+            <file>qtabstracteditorfactory.html</file>
+            <file>qtcolorpropertymanager.html</file>
+            <file>qtdoublespinboxfactory.html</file>
+            <file>qtabstracteditorfactorybase.html</file>
+            <file>qtpointpropertymanager.html</file>
+            <file>images/object_controller.png</file>
+            <file>images/extension.png</file>
+            <file>qtlineeditfactory.html</file>
+            <file>qtenumeditorfactory.html</file>
+            <file>qtcursorpropertymanager.html</file>
+            <file>qtsizefpropertymanager.html</file>
+            <file>qtfontpropertymanager.html</file>
+            <file>qtbrowseritem.html</file>
+            <file>images/simple.png</file>
+            <file>qtpropertybrowser-example-simple.html</file>
+            <file>images/qtpropertybrowser.png</file>
+            <file>qtproperty.html</file>
+            <file>qtlocalepropertymanager.html</file>
+            <file>qtdatetimepropertymanager.html</file>
+            <file>qtintpropertymanager.html</file>
+            <file>qtcoloreditorfactory.html</file>
+            <file>qtdateeditfactory.html</file>
+            <file>images/qttreepropertybrowser.png</file>
+            <file>qtbuttonpropertybrowser.html</file>
+            <file>qtcursoreditorfactory.html</file>
+            <file>qttimeeditfactory.html</file>
+            <file>qtcheckboxfactory.html</file>
+            <file>images/canvas_typed.png</file>
+            <file>qtchareditorfactory.html</file>
+            <file>qtenumpropertymanager.html</file>
+            <file>images/canvas_typed.png</file>
+            <file>images/demo.png</file>
+            <file>images/simple.png</file>
+            <file>images/canvas_variant.png</file>
+            <file>images/qtpropertybrowser.png</file>
+            <file>classic.css</file>
+            <file>images/decoration.png</file>
+            <file>images/qtpropertybrowser-duplicate.png</file>
+            <file>images/qt-logo.png</file>
+            <file>images/qttreepropertybrowser.png</file>
+            <file>images/qtgroupboxpropertybrowser.png</file>
+            <file>images/qtbuttonpropertybrowser.png</file>
+            <file>images/object_controller.png</file>
+            <file>images/extension.png</file>
+        </files>
+    </filterSection>
+</QtHelpProject>

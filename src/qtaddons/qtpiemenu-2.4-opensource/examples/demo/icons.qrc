@@ -1,0 +1,12 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/icons">
+    <file>kformula.png</file>
+    <file>kontour.png</file>
+    <file>NORW001.png</file>
+    <file>SWDN001.png</file>
+    <file>ITAL001.png</file>
+    <file>kugar.png</file>
+    <file>GERM001.png</file>
+    <file>INDA001.png</file>
+</qresource>
+</RCC>
