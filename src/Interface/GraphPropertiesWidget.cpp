@@ -46,7 +46,7 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
   _graphAutomate->setChecked(_graph->directed());
   _activateGraph->setChecked(true);
   
-  _editWidget->setVisible(_activateGraph->isChecked());
+   _editWidget->setVisible(_activateGraph->isChecked());
   
 }
 

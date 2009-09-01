@@ -28,7 +28,7 @@
 
 class KPushButton;
 class OpenedFilesWidget;
-class GraphPropertiesWidget;
+class GraphLayers;
 class GraphVisualEditor;
 class GraphDocumentModel;
 class KActionCollection;
@@ -85,7 +85,7 @@ private: // Variables.
 
     // Left Area:
     OpenedFilesWidget* _OpenedFiles;	//! area where the opened files will be
-    QToolBox* _GraphProperties; //! Area where the nodes and edges will be modified.
+    GraphLayers* _GraphLayers; //! Area where the nodes and edges will be modified.
     TabWidget *_leftTabs; //! Tab that will hold the pallete, opened files, graphLayers and Properties.
     KPushButton *_btnAddGraph;
     

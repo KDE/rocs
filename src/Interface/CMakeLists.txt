@@ -14,7 +14,7 @@ set(librocsui_SRCS
 	Separator.cpp
 	GraphVisualEditor.cpp
 	GraphPropertiesWidget.cpp
-
+	GraphLayers.cpp
 	TabWidget.cpp
 	CodeEditor.cpp
 )

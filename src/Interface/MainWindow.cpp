@@ -40,7 +40,7 @@
 // UI RELATED INCLUDES
 
 #include "OpenedFilesWidget.h"
-#include "GraphPropertiesWidget.h"
+#include "GraphLayers.h"
 #include "GraphVisualEditor.h"
 #include "GraphScene.h"
 #include "CodeEditor.h"
@@ -109,7 +109,12 @@ void MainWindow::setupModels() {
     _documentModel = new GraphDocumentModel( &_documents );
 }
 
-GraphDocument *MainWindow::activeDocument() const{ return _activeGraphDocument; }
+GraphDocument *MainWindow::activeDocument() const{ 
+  if (! _activeGraphDocument){
+    kDebug() << "Document is NULL";
+  }
+  return _activeGraphDocument; 
+}
 
 void MainWindow::setupWidgets() {
     _hSplitter = new QSplitter(this);
@@ -149,10 +154,10 @@ QWidget* MainWindow::setupLeftPanel() {
     _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
     QWidget *w = new QWidget();
     
-    _GraphProperties = new QToolBox(this);
+    _GraphLayers = new GraphLayers(this);
 
    _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
-   _leftTabs->addWidget( _GraphProperties, "Properties" , KIcon("applications-system"));
+   _leftTabs->addWidget( _GraphLayers, "Properties" , KIcon("applications-system"));
 
     return _leftTabs;
 }

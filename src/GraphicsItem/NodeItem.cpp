@@ -130,17 +130,17 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     _color = _node->color(); 
   }
   
-    QColor c = _color;
-    c.setAlphaF(0);
-    painter->setPen(QPen(c));
-    painter->setBrush(QBrush(c));
-    painter->drawRect(QRectF(-11 * _oldZ, -11 * _oldZ, 24 * _oldZ, 24 * _oldZ));
+  QColor c = _color;
+  c.setAlphaF(0);
+  painter->setPen(QPen(c));
+  painter->setBrush(QBrush(c));
+  painter->drawRect(QRectF(-11 * _oldZ, -11 * _oldZ, 24 * _oldZ, 24 * _oldZ));
     
   if (isSelected()) {
-        QPen pen(Qt::black, 1, Qt::DotLine);
-        painter->setBrush(QBrush());
-        painter->setPen(pen);
-        painter->drawRect(QRectF(-11 * _oldZ , -11 * _oldZ , 24 * _oldZ , 24 * _oldZ ));
+    QPen pen(Qt::black, 1, Qt::DotLine);
+    painter->setBrush(QBrush());
+    painter->setPen(pen);
+    painter->drawRect(QRectF(-11 * _oldZ , -11 * _oldZ , 24 * _oldZ , 24 * _oldZ ));
   }
   if( _node && _node->begin() ){
     if (_removingBeginFlag == false) _removingBeginFlag = true;
