@@ -194,6 +194,7 @@ qreal Node::y() const {
 qreal Node::z() const {
   return _z;
 }
+
 void Node::setColor(const QString& s) {
     _color = s;
 }

@@ -88,17 +88,18 @@ void NodeItem::removeFromScene(){
 }
 
 QRectF NodeItem::boundingRect() const {
-      qreal z = _node->z();
-      if(isDownSizing) {
-	return QRectF(-12 * _oldZ, -12 * _oldZ, 25 * _oldZ, 25 * _oldZ);
-      }
-     if ( _node && _node->begin() ){
-         return QRectF(-52 * z, -12 * z , 65 * z, 25 * z);
-     }
-     if ( _removingBeginFlag ){
-         return QRectF(-52 * z, -12 * z , 65 * z, 25 * z);
-     }
-    return QRectF(-12 * z, -12 * z , 25 * z, 25 * z);
+  qreal z = 1;
+  qreal x1 = -12, y1 = -12, x2 = 25, y2 = 25;
+  if (_node) z = _node->z();
+
+  if (( _node && _node->begin() ) || ( _removingBeginFlag )){
+    x1 -= 40;
+    x2 += 40;
+  }
+  if(isDownSizing) {
+    return QRectF(x1 * _oldZ, y1* _oldZ, x2 * _oldZ, y2 * _oldZ);
+  }
+  return QRectF(x1 * z, y1 * z , x2 * z, y2 * z);
 }
 
 QPainterPath NodeItem::shape() const {
@@ -109,31 +110,33 @@ QPainterPath NodeItem::shape() const {
 }
 
 void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-  qreal z = _node->z();  
+  qreal z = _oldZ;
+  if (_node){
+    z = _node->z();
+    _color = _node->color(); 
+  }
+  
   if(z > _oldZ) _oldZ = z;
+  
   if(isDownSizing) {
       QBrush brush(Qt::white);
       painter->setBrush(brush);
       painter->drawRect(QRectF(-11 * z, -11 * z, 24 * z, 24 * z));
-    }
-    if (_node){   _color = _node->color();  }
-    if (isSelected()) {
+  }
+    
+  if (isSelected()) {
         QPen pen(Qt::black, 1, Qt::DotLine);
         painter->setBrush(QBrush());
         painter->setPen(pen);
         painter->drawRect(QRectF(-11 * z , -11 * z , 24 * z , 24 * z ));
-    }
-
-
-    if( _node && _node->begin() ){
-      if (_removingBeginFlag == false) _removingBeginFlag = true;
-      painter->drawLine(-20, -10, 0, 0);
-      painter->drawLine(-52, 0, 0, 0);
-      painter->drawLine(-20, 10, 0, 0);
-    }
-    else if (_removingBeginFlag) _removingBeginFlag = false;
-      
-
+  }
+  if( _node && _node->begin() ){
+    if (_removingBeginFlag == false) _removingBeginFlag = true;
+    painter->drawLine(-20, -10, 0, 0);
+    painter->drawLine(-52, 0, 0, 0);
+    painter->drawLine(-20, 10, 0, 0);
+  }
+  else if (_removingBeginFlag) _removingBeginFlag = false;
     painter->setPen(Qt::NoPen);
     
     _color.setAlphaF(_opacity);
