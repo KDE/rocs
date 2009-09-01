@@ -36,9 +36,7 @@ class QTimeLine;
 class NodeItem : public QObject, public QGraphicsItem {
     Q_OBJECT
 public:
-  
-    bool isDownSizing;
-    bool isUpSizing;
+
     /*! default constructor
     \param node the  Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
@@ -75,6 +73,10 @@ public:
         return _node;
     }
 
+    void startUpSizing();
+    void endUpSizing();
+    void startDownSizing();
+    void endDownSizing();
 protected slots:
 
     void updateName(const QString& name);
@@ -99,6 +101,9 @@ private:
     bool _removingBeginFlag;
     QTimeLine *_timeLine;
     QColor _color;
+      
+    bool _isDownSizing;
+    bool _isUpSizing;
 };
 
 #endif

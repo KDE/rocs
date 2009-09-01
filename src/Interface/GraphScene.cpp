@@ -106,25 +106,29 @@ QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
 
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
   NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(wheelEvent->scenePos()));
-  if (!nitem) return;
+  if (!nitem){
+    wheelEvent->ignore();
+    return;
+  }
   Node *movableNode = nitem->node();
   int numDegrees = wheelEvent->delta();
   if(wheelEvent->orientation() == Qt::Vertical) {
     if(numDegrees > 0)
     {
-      nitem->isUpSizing = 1;
+      nitem->startUpSizing();
       movableNode->setZ(movableNode->z()+0.25);
       nitem->update();
-      nitem->isUpSizing = 0;
+      nitem->endUpSizing();
     }
     else if(movableNode->z() > 0.5)
       {
-	nitem->isDownSizing = 1;
+	nitem->startDownSizing();
 	movableNode->setZ(movableNode->z()-0.25);
 	nitem->update();
-	nitem->isDownSizing = 0;
+	nitem->endDownSizing();
       }
     }
+    wheelEvent->accept();
   }
   
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
@@ -137,10 +141,10 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
       NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
       if (!nitem) return;
       Node *movableNode = nitem->node();
-      nitem->isDownSizing = 1;
+      nitem->startDownSizing();
 	movableNode->setZ(1);
 	nitem->update();
-	nitem->isDownSizing = 0;
+	nitem->endDownSizing();
     }
     _action->executePress(mouseEvent->scenePos());
 }

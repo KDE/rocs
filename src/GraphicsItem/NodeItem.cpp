@@ -66,7 +66,7 @@ void NodeItem::removeOpacity(){
 }
 
 void NodeItem::addOpacity(){
-  kDebug() << "Add Opacity Running";
+  kDebug() << "Removing Node." << _oldZ;
   if ( _opacity > 0.0 ) _opacity -= 0.1;
   if ( _opacity < 0.0 ) _opacity = 0.0;
   update();
@@ -88,18 +88,14 @@ void NodeItem::removeFromScene(){
 }
 
 QRectF NodeItem::boundingRect() const {
-  qreal z = 1;
   qreal x1 = -12, y1 = -12, x2 = 25, y2 = 25;
-  if (_node) z = _node->z();
 
   if (( _node && _node->begin() ) || ( _removingBeginFlag )){
     x1 -= 40;
     x2 += 40;
   }
-  if(isDownSizing) {
+  
     return QRectF(x1 * _oldZ, y1* _oldZ, x2 * _oldZ, y2 * _oldZ);
-  }
-  return QRectF(x1 * z, y1 * z , x2 * z, y2 * z);
 }
 
 QPainterPath NodeItem::shape() const {
@@ -109,26 +105,43 @@ QPainterPath NodeItem::shape() const {
     return path;
 }
 
+void NodeItem::startUpSizing(){
+  _isUpSizing = 1;
+  _oldZ = _node->z() + 0.25;
+}
+
+void NodeItem::endUpSizing(){
+  _isUpSizing = 0;
+  _oldZ = _node->z();
+}
+
+void NodeItem::startDownSizing(){
+  _isDownSizing = 1;
+  _oldZ = _node->z();
+
+}
+void NodeItem::endDownSizing(){
+  _isDownSizing = 0;
+  _oldZ = _node->z();
+}
+    
 void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
-  qreal z = _oldZ;
   if (_node){
-    z = _node->z();
     _color = _node->color(); 
   }
   
-  if(z > _oldZ) _oldZ = z;
-  
-  if(isDownSizing) {
+  if(_isDownSizing) {
       QBrush brush(Qt::white);
+  //    brush.color().setAlphaF(1);
       painter->setBrush(brush);
-      painter->drawRect(QRectF(-11 * z, -11 * z, 24 * z, 24 * z));
+      painter->drawRect(QRectF(-11 * _oldZ, -11 * _oldZ, 24 * _oldZ, 24 * _oldZ));
   }
     
   if (isSelected()) {
         QPen pen(Qt::black, 1, Qt::DotLine);
         painter->setBrush(QBrush());
         painter->setPen(pen);
-        painter->drawRect(QRectF(-11 * z , -11 * z , 24 * z , 24 * z ));
+        painter->drawRect(QRectF(-11 * _oldZ , -11 * _oldZ , 24 * _oldZ , 24 * _oldZ ));
   }
   if( _node && _node->begin() ){
     if (_removingBeginFlag == false) _removingBeginFlag = true;
@@ -142,8 +155,8 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     _color.setAlphaF(_opacity);
     painter->setBrush( _color.dark(240) );
 
-    painter->drawEllipse(-7 * z, -7 * z, 20 * z, 20 * z);
-    QRadialGradient gradient(-3 * z, -3 * z, 10 * z);
+    painter->drawEllipse(-7 * _oldZ, -7 * _oldZ, 20 * _oldZ, 20 * _oldZ);
+    QRadialGradient gradient(-3 * _oldZ, -3 * _oldZ, 10 * _oldZ);
     
     if (option->state & QStyle::State_Sunken) {
         gradient.setColorAt(0, _color.light(240));
@@ -155,12 +168,12 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     painter->setBrush(gradient);
     painter->setPen(QPen(_color, 2));
-    painter->drawEllipse(-10 * z, -10 * z, 20 * z, 20 * z);
+    painter->drawEllipse(-10 * _oldZ, -10 * _oldZ, 20 * _oldZ, 20 * _oldZ);
     if(_node && _node->end() ){
       QColor c(Qt::black);
       c.setAlphaF(_opacity);
       painter->setPen(c);
-      painter->drawEllipse(-7 * z, -7 * z, 15 * z, 15 * z); 
+      painter->drawEllipse(-7 * _oldZ, -7 * _oldZ, 15 * _oldZ, 15 * _oldZ); 
     }
 }
 
