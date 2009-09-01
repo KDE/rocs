@@ -130,12 +130,11 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     _color = _node->color(); 
   }
   
-  if(_isDownSizing) {
-      QBrush brush(Qt::white);
-  //    brush.color().setAlphaF(1);
-      painter->setBrush(brush);
-      painter->drawRect(QRectF(-11 * _oldZ, -11 * _oldZ, 24 * _oldZ, 24 * _oldZ));
-  }
+    QColor c = _color;
+    c.setAlphaF(0);
+    painter->setPen(QPen(c));
+    painter->setBrush(QBrush(c));
+    painter->drawRect(QRectF(-11 * _oldZ, -11 * _oldZ, 24 * _oldZ, 24 * _oldZ));
     
   if (isSelected()) {
         QPen pen(Qt::black, 1, Qt::DotLine);
