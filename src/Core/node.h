@@ -57,7 +57,9 @@ public:
     void removeEdge(Edge *e, QList<Edge*> *list);
     void remove();
     enum EdgeLists {In, Out, Self};
-
+    void startChange();
+    void endChange();
+    
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
     void setEngine(	QtScriptBackend *_engine );
@@ -117,7 +119,7 @@ private:
     bool _begin;
     bool _end;
     QString _value;
-
+    bool _changing;
 #ifdef USING_QTSCRIPT
     QScriptValue _scriptvalue;
     QtScriptBackend *_engine;
@@ -125,6 +127,7 @@ private:
 
 signals:
     void removed();
+    void updateNeeded();
     void posChanged();
 };
 

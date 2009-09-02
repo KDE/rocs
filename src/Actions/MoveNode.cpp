@@ -51,7 +51,6 @@ void MoveNodeAction::executePress(QPointF pos) {
 
     _node = _movableNode->node();
     _graph = qobject_cast<Graph*>(_node->parent());
-    _view->setRenderHint(QPainter::Antialiasing, false);
 }
 
 void MoveNodeAction::executeMove(QPointF pos) {
@@ -77,7 +76,6 @@ void MoveNodeAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
         return;
     }
-    _view->setRenderHint(QPainter::Antialiasing, true);
     if (!((pos.x() < 0) || (pos.y() < 0) || (pos.x() > _graphDocument->width())|| (pos.y() > _graphDocument->height()))) {
         _node -> setY(pos.y());
         _node -> setX(pos.x());

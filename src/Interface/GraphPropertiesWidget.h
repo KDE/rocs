@@ -37,17 +37,18 @@ class GraphPropertiesWidget : public QWidget, public Ui::GraphPropertiesWidget
     Q_OBJECT
 public:
     GraphPropertiesWidget (Graph *g, MainWindow* parent = 0 );
-    
+    QRadioButton *radio() const;
 private slots:
   void on__graphAutomate_clicked(bool b);
-  void on__graphEdgeApplyNow_cliicked();
+  void on__graphEdgeColorApplyNow_clicked();
   void on__graphEdgeColor_activated(QColor c);
   void on__graphName_textChanged(QString n);
   void on__graphNodeColorApplyNow_clicked();
   void on__graphNodeColor_activated(QColor c);
   void on__graphOriented_clicked(bool b);
   void on__graphDelete_clicked();
-
+  void on__activateGraph_toggled(bool b);
+  
 private:
 
     Graph *_graph;

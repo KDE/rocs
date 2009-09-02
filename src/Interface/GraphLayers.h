@@ -14,12 +14,11 @@ class MainWindow;
 class GraphLayers : public QWidget{
   Q_OBJECT
   QButtonGroup *_buttonGroup;
-  QList<GraphPropertiesWidget*> _list;
   KLineEdit *_lineEdit;
   MainWindow *_mainWindow;
   public:
     GraphLayers(MainWindow *parent = 0);
-    
+    void populate();
   public slots:
     void btnADDClicked();
     

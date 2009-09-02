@@ -94,6 +94,7 @@ MainWindow::MainWindow() :
     mainWindow = this;
     _OpenedFiles->selectDefaultFile();
     statusBar()->hide();
+    _GraphLayers->populate();
 }
 
 MainWindow::~MainWindow() {
@@ -149,17 +150,12 @@ QWidget* MainWindow::setupRightPanel() {
 }
 
 QWidget* MainWindow::setupLeftPanel() {
-    _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
- 
-    _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
-    QWidget *w = new QWidget();
-    
-    _GraphLayers = new GraphLayers(this);
-
+   _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
+   _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
+   _GraphLayers = new GraphLayers(this);
    _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
    _leftTabs->addWidget( _GraphLayers, "Properties" , KIcon("applications-system"));
-
-    return _leftTabs;
+   return _leftTabs;
 }
 
 void MainWindow::setupActions() {
@@ -258,6 +254,7 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d) {
 
     if (_activeGraphDocument->size() == 0) return;
     setActiveGraph(_activeGraphDocument->at(0));
+    _GraphLayers->populate();
 }
 
 void MainWindow::setActiveGraph( Graph *g) {
@@ -275,6 +272,7 @@ void MainWindow::setActiveGraph( Graph *g) {
     }
     _graphVisualEditor->setActiveGraph(g);
     _graph = g;
+    kDebug() << "New Active Graph Setted: " << g->name();
 }
 
 Graph* MainWindow::graph() const {
@@ -336,8 +334,7 @@ void MainWindow::executeScript() {
     QScriptEngineDebugger *e = new QScriptEngineDebugger(this);
     
     e->attachTo(engine);
-    //e->action(QScriptEngineDebugger::InterruptAction)
-    
+   
     engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
     QScriptValue results = engine->evaluate(_codeEditor->text());
     _txtDebug->insertPlainText(results.toString());

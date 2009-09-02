@@ -39,6 +39,8 @@
 class Edge;
 class QtScriptBackend;
 class GraphGroup;
+class GraphDocument;
+
 
 /*! \brief this class acts as a container for nodes and edges.
   this class has all the edges and nodes, plus a few extra funcionalities
@@ -64,7 +66,7 @@ public:
     /*! constructo
       \p parent the parent QObject
     */
-    Graph(QObject *parent = 0);
+    Graph(GraphDocument *parent = 0);
 
     /*! destructor */
     ~Graph();
@@ -77,7 +79,15 @@ public:
       \return the center of the graph.
       */
     QPointF relativeCenter() const;
-
+    
+    /*! gets the document that holds this graph. 
+      \return the GraphDocument
+    */
+    GraphDocument *document() const;
+    
+    /*! remove this graph from the document. */
+    void remove();
+    
 #ifdef USING_QTSCRIPT
     /*! if QtScript is enabled for this rocs,
     \return  the self-referenced Script Value for this graph. */
@@ -207,7 +217,6 @@ public  slots:
     QScriptValue end_nodes();
 #endif
 
-
 signals:
     void nodeCreated(Node *n);
     void edgeCreated(Edge *e);
@@ -226,6 +235,7 @@ private:
     QString _nodeDefaultColor;
     QString _edgeDefaultColor;
     bool _automate;
+    GraphDocument *_document;
     
 #ifdef USING_QTSCRIPT
     QScriptValue _value;

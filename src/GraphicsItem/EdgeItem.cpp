@@ -53,21 +53,12 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
 }
 
 void EdgeItem::connectSignals() {
+    connect(_edge, SIGNAL(updateNeeded()), this, SLOT(updateAttributes()));
     connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
-EdgeItem::~EdgeItem(){
-//  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
-//  kDebug() << "Removing Edge";
-}
-void EdgeItem::mousePressEvent(QGraphicsSceneMouseEvent * ){
-  
- }
-
-void EdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *){
-
- }
+EdgeItem::~EdgeItem(){}
 
 void EdgeItem::remove() {
     dynamic_cast<GraphScene*>(scene())->removeGItem(this);
@@ -89,11 +80,9 @@ void EdgeItem::updatePos() {
   }
 }
 
-void EdgeItem::updateName(const QString& ) {}
-void EdgeItem::updateVisited(bool ) {}
-void EdgeItem::updateLength(qreal ) {}
-void EdgeItem::updateValue(qreal ) {}
-void EdgeItem::updateTotal(qreal ) {}
-void EdgeItem::updateColor(QColor ) {}
+void EdgeItem::updateAttributes(){ 
+   setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
+   update(); 
+}
 
 #include "EdgeItem.moc"

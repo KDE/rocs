@@ -37,22 +37,30 @@
 #include <GraphScene.h>
 #include <QTimeLine>
 
-NodeItem::NodeItem(Node *node, QGraphicsItem *parent)
+NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
         : QObject(0), QGraphicsItem(parent){
     _node = node;
-    _opacity = 0;
+    _opacity = 1;
     _timeLine = 0;
     connect(_node, SIGNAL(posChanged()), this, SLOT(updatePos()));
+    connect(_node, SIGNAL(updateNeeded()), this, SLOT(updateAttributes()));
+    
     QPointF pos( _node -> x() ,_node->y() );
     setPos( pos );
     _oldZ = node->z();
     setZValue(1);
     setFlag(ItemIsSelectable);
     connect (_node, SIGNAL(removed()), this, SLOT(deleteItem()));
-    _timeLine = new QTimeLine(500, this);
-    _timeLine->setFrameRange(0, 50);
-    connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(removeOpacity()));
-    _timeLine->start();
+    if (fade){
+      _opacity = 0;
+      _timeLine = new QTimeLine(500, this);
+      _timeLine->setFrameRange(0, 50);
+      connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(removeOpacity()));
+      _timeLine->start();
+    }
+}
+void NodeItem::updateAttributes(){
+  update();
 }
 
 NodeItem::~NodeItem(){
@@ -75,8 +83,8 @@ void NodeItem::addOpacity(){
 void NodeItem::deleteItem() {
   _node = 0;
   if (!_timeLine ) delete _timeLine;
-  _timeLine = new QTimeLine(500, this);
-  _timeLine->setFrameRange(0, 50);
+  _timeLine = new QTimeLine(250, this);
+  _timeLine->setFrameRange(0, 25);
   connect(_timeLine, SIGNAL(finished()), this, SLOT(removeFromScene()));
   connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(addOpacity()));
   _timeLine->start();
@@ -176,12 +184,9 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
 }
 
-void NodeItem::updatePos() {  setPos( QPointF(_node->x(), _node->y() ) ); }
-void NodeItem::updateName(const QString& ) {}
-void NodeItem::updateVisited(bool ) {}
-void NodeItem::updateValue(qreal ) {}
-void NodeItem::updateTotal(qreal ) {}
-void NodeItem::updateColor(QColor ) {}
+void NodeItem::updatePos() { 
+    setPos( QPointF(_node->x(), _node->y() ) ); 
+}
 
 void NodeItem::remove() {
   if (scene() == 0) return;

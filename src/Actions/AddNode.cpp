@@ -50,9 +50,7 @@ void AddNodeAction::executePress(QPointF pos) {
     else if (pos.y() > _graphDocument->height()) return;
 
     Node *n = _graph -> addNode(i18n("untitled"));
-    n ->setX(pos.x());
-    n -> setY(pos.y());
-    n -> setZ(1);
+    n ->setPos(pos.x(),pos.y(),1);
     Graph *g = qobject_cast<Graph*>(n->parent());
     g->calcRelativeCenter();
 

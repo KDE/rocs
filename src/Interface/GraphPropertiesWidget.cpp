@@ -43,41 +43,58 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
   _graphEdgeColor->setColor(_graph->edgeDefaultColor());
   _graphNodeColor->setColor(_graph->nodeDefaultColor());
   _graphAutomate->setChecked(_graph->automate());
-  _graphAutomate->setChecked(_graph->directed());
+  _graphOriented->setChecked(_graph->directed());
   _activateGraph->setChecked(true);
   
-   _editWidget->setVisible(_activateGraph->isChecked());
-  
+  _editWidget->setVisible(_activateGraph->isChecked());
+  _mainWindow->setActiveGraph(_graph);
+  kDebug() << "Active Graph" << _mainWindow->graph()->name();
+  kDebug() << "This Graph" << _graph->name();
+}
+QRadioButton *GraphPropertiesWidget::radio()const { 
+    return _activateGraph; 
+ }
+ 
+ void GraphPropertiesWidget::on__activateGraph_toggled(bool b){
+    _editWidget->setVisible(b);
+    if (b){
+    _mainWindow->setActiveGraph(_graph);
+    }
 }
 
-void GraphPropertiesWidget::on__graphAutomate_clicked(bool b){
-
-}
-
-void GraphPropertiesWidget::on__graphEdgeApplyNow_cliicked(){
-  
+void GraphPropertiesWidget::on__graphEdgeColorApplyNow_clicked(){
+  foreach(Edge *e, _graph->edges()){
+    e->setColor(_graphEdgeColor->color().name());
+  }
 }
 
 void GraphPropertiesWidget::on__graphEdgeColor_activated(QColor c){
-
+  _graph->setEdgeDefaultColor(c.name());
 }
 
 void GraphPropertiesWidget::on__graphName_textChanged(QString n){
-  _activateGraph->setText(_graphName->text());
+  _activateGraph->setText(n);
+  _graph->setName(n);
 }
 
 void GraphPropertiesWidget::on__graphNodeColorApplyNow_clicked(){
-
+  foreach(Node *n, _graph->nodes()){
+    n->setColor(_graphNodeColor->color().name());
+  }
 }
 
 void GraphPropertiesWidget::on__graphNodeColor_activated(QColor c){
-
+  _graph->setNodeDefaultColor(c.name());
 }
 
 void GraphPropertiesWidget::on__graphOriented_clicked(bool b){
+  _graph->setDirected(b);
+}
 
+void GraphPropertiesWidget::on__graphAutomate_clicked(bool b){
+  _graph->setAutomate(b);
 }
 
 void GraphPropertiesWidget::on__graphDelete_clicked(){
-
+  _graph->remove();
 }

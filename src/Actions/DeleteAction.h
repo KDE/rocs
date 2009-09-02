@@ -38,16 +38,6 @@ public:
   */
    void executePress(QPointF pos);
   
-  /*! tryes to move the square - ranged selection for deletion 
-  \p pos the moovable edge of the square select. 
-  */
-  void executeMove(QPointF pos);
-  
-  /*! when the mouse is released, we try to delete all the nodes in the square. 
-  \p pos the position where the release occoured.
-  */
-  void executeRelease(QPointF pos);
-  
   /*! when somebody press the delete key, the system will try to delete all selected nodes.
   \p keyEvent the key to be processed. 
   */

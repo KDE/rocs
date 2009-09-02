@@ -27,7 +27,7 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
         _from(from),
         _to(to)
 {
-    setProperty("color", "#FF00FF");
+    _color = qobject_cast<Graph*>(parent)->edgeDefaultColor();
 
     if ( from == to ) {
         connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));

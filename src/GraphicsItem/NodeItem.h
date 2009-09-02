@@ -40,7 +40,7 @@ public:
     /*! default constructor
     \param node the  Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
-    explicit NodeItem( Node *node, QGraphicsItem *parent = 0);
+    explicit NodeItem( Node *node, QGraphicsItem *parent = 0, bool fade = true);
    virtual ~NodeItem();
   
     /*! The type of the item */
@@ -78,18 +78,13 @@ public:
     void startDownSizing();
     void endDownSizing();
 protected slots:
-
-    void updateName(const QString& name);
-    void updateVisited(bool v);
-    void updateValue(qreal v);
-    void updateTotal(qreal t);
-    void updateColor(QColor c);
     void removeFromScene();
     /*! Emmited when a node is removed */
     void remove();
 
 public slots:
     void updatePos();
+    void updateAttributes();
      void addOpacity();
      void removeOpacity();
      void deleteItem();

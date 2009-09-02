@@ -36,14 +36,6 @@ DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(s
     setIcon ( KIcon ( "rocsdelete" ) );
 }
 
-void DeleteAction::executeMove(QPointF pos){
-
-}
-
-void DeleteAction::executeRelease(QPointF pos){
-
-}
-
 void DeleteAction::executePress(QPointF pos)
 {
     QGraphicsItem * item = _graphScene->itemAt(pos);

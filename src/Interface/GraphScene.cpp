@@ -88,8 +88,9 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     }
 
 }
-QGraphicsItem *GraphScene::createNode(Graph *g, Node *n) {
-    NodeItem *nItem = new NodeItem(n);
+
+QGraphicsItem *GraphScene::createNode(Graph *g, Node *n, bool f) {
+    NodeItem *nItem = new NodeItem(n, 0, f);
     insertGraphItem(g, nItem);
     return nItem;
 }
@@ -183,7 +184,7 @@ void GraphScene::removeGItem(QGraphicsItem *i){
 void GraphScene::updateGraph(Graph *g) {
     QList<QGraphicsItem*> items = _hashGraphs.values(g);
     foreach(QGraphicsItem *i, items) {
-        removeItem(i);
+      removeItem(i);
       delete i;
     }
 
@@ -191,7 +192,7 @@ void GraphScene::updateGraph(Graph *g) {
 
     QList<Node*> nodes = g->nodes();
     foreach(Node *n, nodes) {
-        createNode(g, n);
+        createNode(g, n, false);
     }
 
     QList<Edge*> edges = g->edges();

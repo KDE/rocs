@@ -25,9 +25,12 @@
 #include "graphDocument.h"
 #include <KDebug>
 
-Graph::Graph(QObject *parent) : QObject(parent) {
+Graph::Graph(GraphDocument *parent) : QObject(parent) {
     _directed = false;
+    _document = parent;
     calcRelativeCenter();
+    _nodeDefaultColor = "blue";
+    _edgeDefaultColor = "gray";
 }
 
 Graph::~Graph() {
@@ -39,6 +42,14 @@ Graph::~Graph() {
     foreach(Node* n, _nodes) {
         remove(n);
     }
+}
+
+GraphDocument *Graph::document() const{
+  return _document;
+}
+
+void Graph::remove(){
+
 }
 
 QList<Node*> Graph::nodes() const {
@@ -251,8 +262,9 @@ void Graph::setEngine(	QtScriptBackend *engine ) {
 
     _value = _engine->newQObject(this);
 
-    if ( _name.isEmpty() ) {
+    if (! _name.isEmpty() ) {
         _engine->globalObject().setProperty(_name, _value);
+	kDebug() << _name << "Added as global object.";
     }
 
     foreach(Node *n, _nodes) {

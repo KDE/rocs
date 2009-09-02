@@ -116,7 +116,7 @@ public  slots:
     /*! sets the value attribute of this edge 
     \p s the new value of this edge.
     */
-    void setValue (const QString& s) { _value = s; }
+    void setValue (const QString& s) { _value = s; emit updateNeeded(); }
     
     /*! returns the name attribute of the edge. 
       \return the name of the edge.
@@ -126,7 +126,7 @@ public  slots:
     /*! sets the name attribute of the edge 
       \p s the new name of this edge
     */
-    void setName (const QString& s) { _name = s;   }
+    void setName (const QString& s) { _name = s;   emit updateNeeded();}
     
     /*! gets the color attribute of the edge 
       \return the string value of the edge.
@@ -136,7 +136,7 @@ public  slots:
     /*! sets the color attribute of the edge 
       \p s the new color of the edge in the format "#000000" or by it's english name ("red" for example)
     */ 
-    void setColor(const QString& s) { _color = s;  }
+    void setColor(const QString& s) { _color = s;  emit updateNeeded(); }
 
 
 #ifdef USING_QTSCRIPT
@@ -189,6 +189,8 @@ signals:
     
     /*! emmited when any of the 2 nodes connected using this edge moves it's position. */
     void posChanged();
+    
+    void updateNeeded();
 };
 
 #endif

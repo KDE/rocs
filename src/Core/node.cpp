@@ -24,12 +24,13 @@
 
 
 Node::Node(QObject *parent) : QObject(parent) {
-    setColor("#FF0000");
     setX(0);
     setY(0);
     setZ(0);
     setBegin(false);
     setEnd(false);
+    _color = qobject_cast<Graph*>(parent)->nodeDefaultColor();
+    _changing = false;
 }
 
 Node::~Node() {
@@ -165,27 +166,34 @@ void Node::remove() {
 //! Properties:
 void Node::setX(qreal x) {
     _x = x;
-    emit posChanged();
+    if (! _changing){
+      emit posChanged();
+    }
 }
 qreal Node::x() const {
     return _x;
 }
 void Node::setY(qreal y) {
     _y  = y;
-    emit posChanged();
+    if (! _changing){
+      emit posChanged();
+    }
 }
 
 void Node::setZ(qreal z) {
   _z = z;
-  emit posChanged();
+    if (! _changing){
+      emit posChanged();
+    }
 }
 
 void Node::setPos(qreal x, qreal y, qreal z) {
     _x = x;
     _y = y;
     _z = z;
-    emit posChanged();
-    kDebug() << "Updating";
+    if (! _changing){
+      emit posChanged();
+    }
 }
 qreal Node::y() const {
     return _y;
@@ -197,12 +205,18 @@ qreal Node::z() const {
 
 void Node::setColor(const QString& s) {
     _color = s;
+    if (! _changing){
+      emit updateNeeded();
+    }
 }
 const QString& Node::color() const {
     return _color;
 }
 void Node::setName(const QString& s) {
     _name = s;
+    if (! _changing){
+      emit updateNeeded();
+    }
 }
 const QString& Node::name() const {
     return _name;
@@ -217,7 +231,9 @@ void Node::setBegin(bool begin) {
 	}
         p->setBegin(this);
     }
-    
+    if (! _changing){
+      emit updateNeeded();
+    }
 }
 
 void Node::setEnd(bool end) {
@@ -227,6 +243,9 @@ void Node::setEnd(bool end) {
         p->addEnd(this);
     } else {
         p->removeEnd(this);
+    }
+    if (! _changing){
+      emit updateNeeded();
     }
 }
 
@@ -241,8 +260,19 @@ const QString& Node::value() const {
 }
 void  Node::setValue(const QString& s) {
     _value = s;
+    if (! _changing){
+      emit updateNeeded();
+    }
 }
 
+void Node::startChange(){
+  _changing = true;
+}
+
+void Node::endChange(){
+  _changing = false;
+  emit updateNeeded();
+}
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {
     remove();

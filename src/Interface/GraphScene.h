@@ -42,7 +42,7 @@ class GraphScene : public QGraphicsScene {
 public:
     GraphScene(QObject *parent);
     void setAction(QAction *action);
-    QGraphicsItem* createNode(Graph *g, Node *n);
+    QGraphicsItem* createNode(Graph *g, Node *n, bool f = true);
     QGraphicsItem* createEdge(Graph *g, Edge *e);
     void updateGraph(Graph *g);
     void updateDocument();

@@ -56,25 +56,12 @@ public:
 
   //  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 protected:
-    /*! when there's a mouse click on the node, this method is invocked
-      \param event the mouse object
-    */
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
-    /*! when the mouse is released, this method is invocked
-      \param event the mouse object
-    */
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 public slots:
     void remove();
     void updatePos();
-    void updateName(const QString& name);
-    void updateVisited(bool v);
-    void updateLength(qreal l);
-    void updateValue(qreal v);
-    void updateTotal(qreal t);
-    void updateColor(QColor c);
+    void updateAttributes();
 
 private:
     void connectSignals();
