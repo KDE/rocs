@@ -26,6 +26,7 @@
 class QGraphicsSceneMouseEvent;
 class QPen;
 class Edge;
+class QGraphisSimpleTextItem;
 
 /*! \brief the Edge drawing on screen.
   long explanation here...
@@ -67,6 +68,8 @@ private:
     void connectSignals();
     void setupPen();
     Edge *_edge;
+    QGraphicsSimpleTextItem *_name;
+    QGraphicsSimpleTextItem *_value;
 };
 
 #endif

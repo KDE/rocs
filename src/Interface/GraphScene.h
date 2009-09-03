@@ -71,8 +71,9 @@ private:
     AbstractAction *_action;
     QMultiHash<Graph*, QGraphicsItem* > _hashGraphs;
     QList<QGraphicsItem*> _hidedEdges;
-
     bool _hideEdges;
+//     NodePropertiesWidget *_nodePropWidget;
+//     EdgePropertiesWidget *_edgePropWidget;
 };
 
 #endif

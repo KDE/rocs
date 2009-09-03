@@ -28,6 +28,7 @@
 class QGraphicsSceneMouseEvent;
 class Node;
 class QTimeLine;
+class QGraphicsSimpleTextItem;
 
 
 /*! \brief the node drawing on screen.
@@ -99,6 +100,9 @@ private:
       
     bool _isDownSizing;
     bool _isUpSizing;
+    
+    QGraphicsSimpleTextItem *_name;
+    QGraphicsSimpleTextItem *_value;
 };
 
 #endif

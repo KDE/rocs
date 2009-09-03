@@ -31,6 +31,7 @@
 #include "EdgeItem.h"
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"
+#include "GraphScene.h"
 
 GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
         : QWidget ( parent ) {
@@ -89,6 +90,7 @@ void GraphPropertiesWidget::on__graphNodeColor_activated(QColor c){
 
 void GraphPropertiesWidget::on__graphOriented_clicked(bool b){
   _graph->setDirected(b);
+  _mainWindow->scene()->updateDocument();
 }
 
 void GraphPropertiesWidget::on__graphAutomate_clicked(bool b){

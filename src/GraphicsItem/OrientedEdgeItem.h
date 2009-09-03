@@ -28,6 +28,7 @@ class QGraphicsSceneMouseEvent;
 class QPen;
 class Edge;
 class Node;
+class QGraphicsSimpleTextItem;
 
 /*! \brief the Edge drawing on screen.
   long explanation here...
@@ -84,6 +85,9 @@ private:
     QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const;
     QPainterPath createLoop(QPointF pos) const;
     void connectSignals(); 
+    
+    QGraphicsSimpleTextItem *_name;
+    QGraphicsSimpleTextItem *_value;
 };
 
 #endif

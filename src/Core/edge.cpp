@@ -39,7 +39,8 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
         connect(to, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
         to -> addInEdge(this);
     }
-
+    connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(updateNeeded()));
+    
     _relativeIndex = _to -> edges(_from).size();
 
 }

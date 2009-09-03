@@ -36,6 +36,7 @@
 #include <QDebug>
 #include <GraphScene.h>
 #include <QTimeLine>
+#include <QGraphicsSimpleTextItem>
 
 NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
         : QObject(0), QGraphicsItem(parent){
@@ -50,6 +51,13 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
     _oldZ = node->z();
     setZValue(1);
     setFlag(ItemIsSelectable);
+    _name = new QGraphicsSimpleTextItem(this);
+    _name->setText(node->name());
+    _name->setPos(boundingRect().width(),(boundingRect().height()/2));
+    _value = new QGraphicsSimpleTextItem(this);
+    _value->setText(node->value());
+    _value->setPos(0,10);
+    
     connect (_node, SIGNAL(removed()), this, SLOT(deleteItem()));
     if (fade){
       _opacity = 0;
@@ -60,7 +68,14 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
     }
 }
 void NodeItem::updateAttributes(){
+  _name->setText(_node->name());
+  _name->setPos(boundingRect().width(),(boundingRect().height()));
+
+  _value->setText(_node->value());
   update();
+  kDebug() << _name->text() << _name->scenePos() << _name->pos();
+  kDebug() << _value->text() << _value->scenePos() << _value->pos();
+  
 }
 
 NodeItem::~NodeItem(){
@@ -97,13 +112,11 @@ void NodeItem::removeFromScene(){
 
 QRectF NodeItem::boundingRect() const {
   qreal x1 = -12, y1 = -12, x2 = 25, y2 = 25;
-
   if (( _node && _node->begin() ) || ( _removingBeginFlag )){
     x1 -= 40;
     x2 += 40;
   }
-  
-    return QRectF(x1 * _oldZ, y1* _oldZ, x2 * _oldZ, y2 * _oldZ);
+  return QRectF(x1 * _oldZ, y1* _oldZ, x2 * _oldZ, y2 * _oldZ);
 }
 
 QPainterPath NodeItem::shape() const {

@@ -152,7 +152,7 @@ void Graph::setDirected(bool directed) {
             }
         }
     }
-
+    emit complexityChanged(directed);
     return;
 }
 

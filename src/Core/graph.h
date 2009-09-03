@@ -220,8 +220,8 @@ public  slots:
 signals:
     void nodeCreated(Node *n);
     void edgeCreated(Edge *e);
-    void directionChanged(bool directed);
-
+    void complexityChanged(bool directed);
+    
 private:
     bool _directed;
     QList<Node*> _nodes;
