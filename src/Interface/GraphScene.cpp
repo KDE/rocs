@@ -117,14 +117,14 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
     if(numDegrees > 0)
     {
       nitem->startUpSizing();
-      movableNode->setZ(movableNode->z()+0.25);
+      movableNode->setWidth(movableNode->width()+0.25);
       nitem->update();
       nitem->endUpSizing();
     }
-    else if(movableNode->z() > 0.5)
+    else if(movableNode->width() > 0.5)
       {
 	nitem->startDownSizing();
-	movableNode->setZ(movableNode->z()-0.25);
+	movableNode->setWidth(movableNode->width()-0.25);
 	nitem->update();
 	nitem->endDownSizing();
       }
@@ -143,7 +143,7 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
       if (!nitem) return;
       Node *movableNode = nitem->node();
       nitem->startDownSizing();
-	movableNode->setZ(1);
+	movableNode->setWidth(1);
 	nitem->update();
 	nitem->endDownSizing();
     }

@@ -88,12 +88,13 @@ void GraphPropertiesWidget::on__graphNodeColor_activated(QColor c){
   _graph->setNodeDefaultColor(c.name());
 }
 
-void GraphPropertiesWidget::on__graphOriented_clicked(bool b){
+void GraphPropertiesWidget::on__graphOriented_toggled(bool b){
   _graph->setDirected(b);
   _mainWindow->scene()->updateDocument();
+  kDebug() << "Tooglado";
 }
 
-void GraphPropertiesWidget::on__graphAutomate_clicked(bool b){
+void GraphPropertiesWidget::on__graphAutomate_toggled(bool b){
   _graph->setAutomate(b);
 }
 

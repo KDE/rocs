@@ -24,9 +24,11 @@
 
 
 Node::Node(QObject *parent) : QObject(parent) {
-    setX(0);
-    setY(0);
-    setZ(0);
+    _x = 0;
+    _y = 0;
+    _width = 1;
+    _showName = true;
+    _showValue = true;
     setBegin(false);
     setEnd(false);
     _color = qobject_cast<Graph*>(parent)->nodeDefaultColor();
@@ -46,6 +48,22 @@ void Node::empty(QList<Edge*> *list) {
     }
 }
 
+bool Node::showName(){
+  return _showName;
+}
+
+bool Node::showValue(){
+  return _showValue;
+}
+
+void Node::hideName(bool b){
+  _showName = b;
+}
+
+void Node::hideValue(bool b){
+  _showValue = b;
+}
+    
 QList<Node*> Node::adjacent_nodes() const
 {
     QList<Node*> adjacent;
@@ -180,17 +198,16 @@ void Node::setY(qreal y) {
     }
 }
 
-void Node::setZ(qreal z) {
-  _z = z;
+void Node::setWidth(qreal w) {
+  _width = w;
     if (! _changing){
       emit posChanged();
     }
 }
 
-void Node::setPos(qreal x, qreal y, qreal z) {
+void Node::setPos(qreal x, qreal y) {
     _x = x;
     _y = y;
-    _z = z;
     if (! _changing){
       emit posChanged();
     }
@@ -199,8 +216,8 @@ qreal Node::y() const {
     return _y;
 }
 
-qreal Node::z() const {
-  return _z;
+qreal Node::width() const {
+  return _width;
 }
 
 void Node::setColor(const QString& s) {

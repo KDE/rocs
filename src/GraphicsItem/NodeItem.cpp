@@ -48,15 +48,11 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
     
     QPointF pos( _node -> x() ,_node->y() );
     setPos( pos );
-    _oldZ = node->z();
+    _oldWidth = node->width();
     setZValue(1);
     setFlag(ItemIsSelectable);
     _name = new QGraphicsSimpleTextItem(this);
-    _name->setText(node->name());
-    _name->setPos(boundingRect().width(),(boundingRect().height()/2));
     _value = new QGraphicsSimpleTextItem(this);
-    _value->setText(node->value());
-    _value->setPos(0,10);
     
     connect (_node, SIGNAL(removed()), this, SLOT(deleteItem()));
     if (fade){
@@ -66,15 +62,32 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
       connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(removeOpacity()));
       _timeLine->start();
     }
+    
+    setupTextAttributes();
+    
+    
 }
-void NodeItem::updateAttributes(){
-  _name->setText(_node->name());
-  _name->setPos(boundingRect().width(),(boundingRect().height()));
 
-  _value->setText(_node->value());
+void NodeItem::setupTextAttributes(){
+  qreal x1 = boundingRect().x() + boundingRect().width() + 5;
+  qreal y1 = boundingRect().y() + (boundingRect().height()/2) - 10;
+  
+  if (_node -> showName() ){
+    _name->setText("Name: "+_node->name());
+    _name->setPos(x1,y1);
+  }
+  if (_node->showValue() ){
+    _value->setText("Value: "+_node->value());
+    _value->setPos(x1,y1 + 12);
+  }
+}
+
+void NodeItem::updateAttributes(){
+  setupTextAttributes();
   update();
   kDebug() << _name->text() << _name->scenePos() << _name->pos();
   kDebug() << _value->text() << _value->scenePos() << _value->pos();
+  
   
 }
 
@@ -89,7 +102,7 @@ void NodeItem::removeOpacity(){
 }
 
 void NodeItem::addOpacity(){
-  kDebug() << "Removing Node." << _oldZ;
+  kDebug() << "Removing Node." << _oldWidth;
   if ( _opacity > 0.0 ) _opacity -= 0.1;
   if ( _opacity < 0.0 ) _opacity = 0.0;
   update();
@@ -116,34 +129,34 @@ QRectF NodeItem::boundingRect() const {
     x1 -= 40;
     x2 += 40;
   }
-  return QRectF(x1 * _oldZ, y1* _oldZ, x2 * _oldZ, y2 * _oldZ);
+  return QRectF(x1 * _oldWidth, y1* _oldWidth, x2 * _oldWidth, y2 * _oldWidth);
 }
 
 QPainterPath NodeItem::shape() const {
     QPainterPath path;
-    qreal z = _node->z();
+    qreal z = _node->width();
     path.addEllipse(-10 * z, -10 * z, 20 * z, 20 * z);
     return path;
 }
 
 void NodeItem::startUpSizing(){
   _isUpSizing = 1;
-  _oldZ = _node->z() + 0.25;
+  _oldWidth = _node->width() + 0.25;
 }
 
 void NodeItem::endUpSizing(){
   _isUpSizing = 0;
-  _oldZ = _node->z();
+  _oldWidth = _node->width();
 }
 
 void NodeItem::startDownSizing(){
   _isDownSizing = 1;
-  _oldZ = _node->z();
+  _oldWidth = _node->width();
 
 }
 void NodeItem::endDownSizing(){
   _isDownSizing = 0;
-  _oldZ = _node->z();
+  _oldWidth = _node->width();
 }
     
 void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
@@ -155,13 +168,13 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
   c.setAlphaF(0);
   painter->setPen(QPen(c));
   painter->setBrush(QBrush(c));
-  painter->drawRect(QRectF(-11 * _oldZ, -11 * _oldZ, 24 * _oldZ, 24 * _oldZ));
+  painter->drawRect(QRectF(-11 * _oldWidth, -11 * _oldWidth, 24 * _oldWidth, 24 * _oldWidth));
     
   if (isSelected()) {
     QPen pen(Qt::black, 1, Qt::DotLine);
     painter->setBrush(QBrush());
     painter->setPen(pen);
-    painter->drawRect(QRectF(-11 * _oldZ , -11 * _oldZ , 24 * _oldZ , 24 * _oldZ ));
+    painter->drawRect(QRectF(-11 * _oldWidth , -11 * _oldWidth , 24 * _oldWidth , 24 * _oldWidth ));
   }
   if( _node && _node->begin() ){
     if (_removingBeginFlag == false) _removingBeginFlag = true;
@@ -175,8 +188,8 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     _color.setAlphaF(_opacity);
     painter->setBrush( _color.dark(240) );
 
-    painter->drawEllipse(-7 * _oldZ, -7 * _oldZ, 20 * _oldZ, 20 * _oldZ);
-    QRadialGradient gradient(-3 * _oldZ, -3 * _oldZ, 10 * _oldZ);
+    painter->drawEllipse(-7 * _oldWidth, -7 * _oldWidth, 20 * _oldWidth, 20 * _oldWidth);
+    QRadialGradient gradient(-3 * _oldWidth, -3 * _oldWidth, 10 * _oldWidth);
     
     if (option->state & QStyle::State_Sunken) {
         gradient.setColorAt(0, _color.light(240));
@@ -188,13 +201,15 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     painter->setBrush(gradient);
     painter->setPen(QPen(_color, 2));
-    painter->drawEllipse(-10 * _oldZ, -10 * _oldZ, 20 * _oldZ, 20 * _oldZ);
+    painter->drawEllipse(-10 * _oldWidth, -10 * _oldWidth, 20 * _oldWidth, 20 * _oldWidth);
     if(_node && _node->end() ){
       QColor c(Qt::black);
       c.setAlphaF(_opacity);
       painter->setPen(c);
-      painter->drawEllipse(-7 * _oldZ, -7 * _oldZ, 15 * _oldZ, 15 * _oldZ); 
+      painter->drawEllipse(-7 * _oldWidth, -7 * _oldWidth, 15 * _oldWidth, 15 * _oldWidth); 
     }
+    painter->setBrush(QBrush());
+    painter->drawRect(boundingRect());
 }
 
 void NodeItem::updatePos() { 

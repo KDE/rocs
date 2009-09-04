@@ -92,7 +92,6 @@ public slots:
      
 private:
     Node *_node;
-    qreal _oldZ;
     qreal _opacity;
     bool _removingBeginFlag;
     QTimeLine *_timeLine;
@@ -103,6 +102,9 @@ private:
     
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;
+    QGraphicsRectItem	*_boundingRect;
+    qreal _oldWidth;
+    void setupTextAttributes();
 };
 
 #endif
