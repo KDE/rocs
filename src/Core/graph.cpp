@@ -27,6 +27,7 @@
 
 Graph::Graph(GraphDocument *parent) : QObject(parent) {
     _directed = false;
+    _automate = false;
     _document = parent;
     calcRelativeCenter();
     _nodeDefaultColor = "blue";

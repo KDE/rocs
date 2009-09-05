@@ -58,10 +58,12 @@ bool Node::showValue(){
 
 void Node::hideName(bool b){
   _showName = b;
+  emit updateNeeded();
 }
 
 void Node::hideValue(bool b){
   _showValue = b;
+ emit updateNeeded();
 }
     
 QList<Node*> Node::adjacent_nodes() const
@@ -201,7 +203,7 @@ void Node::setY(qreal y) {
 void Node::setWidth(qreal w) {
   _width = w;
     if (! _changing){
-      emit posChanged();
+      emit updateNeeded();
     }
 }
 

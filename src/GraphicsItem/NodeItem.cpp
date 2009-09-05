@@ -69,26 +69,45 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
 }
 
 void NodeItem::setupTextAttributes(){
-  qreal x1 = boundingRect().x() + boundingRect().width() + 5;
+  qreal x1;
   qreal y1 = boundingRect().y() + (boundingRect().height()/2) - 10;
+  QString name = _node->name();
+  QString value = _node->value();
   
-  if (_node -> showName() ){
-    _name->setText("Name: "+_node->name());
-    _name->setPos(x1,y1);
+  _name->hide(); _value->hide();
+  
+  if (_node -> showName() && ! name.isEmpty()){
+    _name->show();
+    if (name.length() == 1){
+       x1 = boundingRect().x() + boundingRect().width()/2;
+      _name->setText(name);
+      _name->font().setBold(true);
+      _name->setPos(x1-6, y1);
+    }
+    else{
+      x1 = boundingRect().x() + boundingRect().width() + 5;
+      _name->font().setBold(false);
+      _name->setText("Name "+name);
+      _name->setPos(x1,y1);
+    }
   }
-  if (_node->showValue() ){
-    _value->setText("Value: "+_node->value());
-    _value->setPos(x1,y1 + 12);
+   x1 = boundingRect().x() + boundingRect().width() + 5;
+  if (_node->showValue() && ! value.isEmpty()){
+    if( name.length() == 1){
+      _value->show();
+      _value->setText(value);
+      _value->setPos(x1,y1);
+    }else{
+      _value->show();
+      _value->setText("Value: "+value);
+      _value->setPos(x1,y1 + 12);
+    }
   }
 }
 
 void NodeItem::updateAttributes(){
   setupTextAttributes();
   update();
-  kDebug() << _name->text() << _name->scenePos() << _name->pos();
-  kDebug() << _value->text() << _value->scenePos() << _value->pos();
-  
-  
 }
 
 NodeItem::~NodeItem(){
@@ -208,8 +227,6 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
       painter->setPen(c);
       painter->drawEllipse(-7 * _oldWidth, -7 * _oldWidth, 15 * _oldWidth, 15 * _oldWidth); 
     }
-    painter->setBrush(QBrush());
-    painter->drawRect(boundingRect());
 }
 
 void NodeItem::updatePos() { 

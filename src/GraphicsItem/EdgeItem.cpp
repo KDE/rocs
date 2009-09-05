@@ -32,8 +32,7 @@
 #include "edge.h"
 #include "graph.h"
 #include <GraphScene.h>
-
-
+#include <QGraphicsSimpleTextItem>
 #include "NodeItem.h"
 
 
@@ -43,13 +42,18 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsLineItem(parent) {
 
     _edge = edge;
+    _name = new QGraphicsSimpleTextItem(this);
+    _value = new QGraphicsSimpleTextItem(this);
+    
     setCacheMode(DeviceCoordinateCache);
     setZValue(0);
     setFlag(ItemIsSelectable);
 
     connectSignals();
     setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
+
     updatePos();
+    updateAttributes();
 }
 
 void EdgeItem::connectSignals() {
@@ -82,6 +86,42 @@ void EdgeItem::updatePos() {
 
 void EdgeItem::updateAttributes(){ 
    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
+   QLineF l = line();
+    
+   _value->hide();
+   _name->hide();
+   if(_edge->name().length() == 1){
+    _name->setText(_edge->name());
+   }
+   else{
+    _name->setText("Name: "+_edge->name());
+   }
+   
+   _value->setText(_edge->value());
+   
+   if(_edge->showValue()){
+    _value->show();
+   }
+   if (_edge->showName()){
+    _name->show();
+   }
+   // 1st quadrant
+   if (l.x1() < l.x2() && l.y1() < l.y2()) {
+      
+   }
+   // 2nd quadrant
+   else if( l.x1() < l.x2() && l.y1() > l.y2()){
+      
+   }
+   // 3rd quadrant
+   else if (l.x1() > l.x2() && l.y1() < l.y2()){
+     
+   }
+   // 4th quadrant
+   else if(l.x1() > l.x2() && l.y1() > l.y2()){
+      
+   }
+   
    update(); 
 }
 

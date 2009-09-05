@@ -84,6 +84,11 @@ public:
     /*! remove this node from the graph */
     void remove();
     
+    bool showName();
+    bool showValue();
+    void hideName(bool b);
+    bool hideValue(bool b);
+    
 #ifdef USING_QTSCRIPT
     /*! if the qtscript is enabled for this rocs, 
       this method returns the self-referenced script value for this edge.
@@ -174,6 +179,10 @@ private:
     
     /*! the value of the color */
     QString _color;
+    
+    bool _showName;
+    bool _showValue;
+    
 
 #ifdef USING_QTSCRIPT
     /*! if the script interface is Qt-Script, this will hold the scriptValue self-reference. */

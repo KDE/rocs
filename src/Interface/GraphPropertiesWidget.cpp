@@ -101,3 +101,27 @@ void GraphPropertiesWidget::on__graphAutomate_toggled(bool b){
 void GraphPropertiesWidget::on__graphDelete_clicked(){
   _graph->remove();
 }
+
+void GraphPropertiesWidget::on__showNodeNames_toggled(bool b){
+  foreach(Node *n, _graph->nodes()){
+    n->hideName(!b);
+  }
+}
+
+void GraphPropertiesWidget::on__showEdgeNames_toggled(bool b){
+  foreach(Edge *e, _graph->edges()){
+    // e->hideName(!b);
+  }
+}
+
+void GraphPropertiesWidget::on__showNodeValues_toggled(bool b){
+  foreach(Node *n, _graph->nodes()){
+    n->hideValue(!b);
+  }
+}
+
+void GraphPropertiesWidget::on__showEdgeValues_toggled(bool b){
+  foreach(Edge *e, _graph->edges()){
+    // e->hideValue(!b);
+  }
+}
