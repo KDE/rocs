@@ -110,7 +110,7 @@ void GraphPropertiesWidget::on__showNodeNames_toggled(bool b){
 
 void GraphPropertiesWidget::on__showEdgeNames_toggled(bool b){
   foreach(Edge *e, _graph->edges()){
-    // e->hideName(!b);
+     e->hideName(!b);
   }
 }
 
@@ -122,6 +122,6 @@ void GraphPropertiesWidget::on__showNodeValues_toggled(bool b){
 
 void GraphPropertiesWidget::on__showEdgeValues_toggled(bool b){
   foreach(Edge *e, _graph->edges()){
-    // e->hideValue(!b);
+     e->hideValue(!b);
   }
 }

@@ -82,6 +82,7 @@ void EdgeItem::updatePos() {
   else{
     setLine( q );
   }
+  updateAttributes();
 }
 
 void EdgeItem::updateAttributes(){ 
@@ -90,39 +91,24 @@ void EdgeItem::updateAttributes(){
     
    _value->hide();
    _name->hide();
+   
+   _value->setText(_edge->value());
    if(_edge->name().length() == 1){
     _name->setText(_edge->name());
-   }
-   else{
+   }else{
     _name->setText("Name: "+_edge->name());
    }
    
-   _value->setText(_edge->value());
+   if(_edge->showValue()){    _value->show();   }
+   if (_edge->showName()){    _name->show();    }
+
+  qreal x = l.x1() + l.dx()/2;
+  qreal y = l.y1()  + l.dy()/2;
    
-   if(_edge->showValue()){
-    _value->show();
-   }
-   if (_edge->showName()){
-    _name->show();
-   }
-   // 1st quadrant
-   if (l.x1() < l.x2() && l.y1() < l.y2()) {
-      
-   }
-   // 2nd quadrant
-   else if( l.x1() < l.x2() && l.y1() > l.y2()){
-      
-   }
-   // 3rd quadrant
-   else if (l.x1() > l.x2() && l.y1() < l.y2()){
-     
-   }
-   // 4th quadrant
-   else if(l.x1() > l.x2() && l.y1() > l.y2()){
-      
-   }
-   
+  _name->setPos(x,y);
+  _value->setPos(x, y+14);
    update(); 
+   
 }
 
 #include "EdgeItem.moc"
