@@ -33,6 +33,7 @@ Node::Node(QObject *parent) : QObject(parent) {
     setEnd(false);
     _color = qobject_cast<Graph*>(parent)->nodeDefaultColor();
     _changing = false;
+    _value = '0';
 }
 
 Node::~Node() {
@@ -69,7 +70,6 @@ void Node::hideValue(bool b){
 QList<Node*> Node::adjacent_nodes() const
 {
     QList<Node*> adjacent;
-
 
     foreach(Edge *e, _out_edges) {
         adjacent.append( e->to()  );

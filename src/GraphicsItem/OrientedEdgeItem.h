@@ -70,13 +70,7 @@ public:
 public slots:
     void remove();
     void updatePos();
-    void updateName(const QString& name);
-    void updateVisited(bool v);
-    void updateLength(qreal l);
-    void updateValue(qreal v);
-    void updateTotal(qreal t);
-    void updateColor(QColor c);
-
+    void updateAttributes();
 private:
     Edge *_edge;
     int _index;

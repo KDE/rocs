@@ -87,7 +87,7 @@ public:
     bool showName();
     bool showValue();
     void hideName(bool b);
-    bool hideValue(bool b);
+    void hideValue(bool b);
     
 #ifdef USING_QTSCRIPT
     /*! if the qtscript is enabled for this rocs, 

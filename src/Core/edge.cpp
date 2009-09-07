@@ -21,6 +21,7 @@
 #include "edge.h"
 #include "node.h"
 #include "graph.h"
+#include <KDebug>
 
 Edge::Edge(QObject *parent, Node *from, Node *to) :
         QObject(parent),
@@ -76,11 +77,13 @@ bool Edge::showValue(){
 void Edge::hideName(bool b){
   _showName = b;
   emit updateNeeded();
+  kDebug() << "Hide Name: " << b;
 }
 
-bool Edge::hideValue(bool b){
+void Edge::hideValue(bool b){
   _showValue = b;
   emit updateNeeded();
+  kDebug() << "Hide Value: " << b;
 }
     
 #ifdef USING_QTSCRIPT

@@ -88,27 +88,21 @@ void EdgeItem::updatePos() {
 void EdgeItem::updateAttributes(){ 
    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
    QLineF l = line();
-    
-   _value->hide();
-   _name->hide();
+     
+  _value->setText(_edge->value());
+  _name->setText(_edge->name());
+  
    
-   _value->setText(_edge->value());
-   if(_edge->name().length() == 1){
-    _name->setText(_edge->name());
-   }else{
-    _name->setText("Name: "+_edge->name());
-   }
-   
-   if(_edge->showValue()){    _value->show();   }
-   if (_edge->showName()){    _name->show();    }
+  if(_edge->showValue()){ _value->show(); }
+  if(_edge->showName()){ _name->show();  }
 
   qreal x = l.x1() + l.dx()/2;
   qreal y = l.y1()  + l.dy()/2;
    
   _name->setPos(x,y);
   _value->setPos(x, y+14);
-   update(); 
-   
+  update(); 
+   kDebug() << "Chamou" << _value->text() << " " << _name->text();
 }
 
 #include "EdgeItem.moc"

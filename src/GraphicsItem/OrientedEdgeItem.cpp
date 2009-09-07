@@ -38,6 +38,7 @@
 #include <KDebug>
 #include <math.h>
 #include <QTransform>
+#include <QGraphicsSimpleTextItem>
 
 OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsPathItem(parent)
@@ -45,6 +46,8 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     _edge = edge;
     _loop = (_edge->from() == edge->to());
     _index = _edge->relativeIndex();
+    _name = new QGraphicsSimpleTextItem(this);
+    _value = new QGraphicsSimpleTextItem(this);
     setZValue( - _index);
     setFlag(ItemIsSelectable, true);
     connectSignals();
@@ -95,9 +98,9 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const{
 
 QPainterPath OrientedEdgeItem::createCurves() const {
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
+ 
     if ( _loop ) return createLoop(Pos1);
    
-    // else return QPainterPath();
     QPointF Pos2(_edge->to()->x(), _edge->to()->y());
     QPolygonF arrow = createArrow(Pos1,  Pos2);
 
@@ -105,21 +108,21 @@ QPainterPath OrientedEdgeItem::createCurves() const {
        qSwap(Pos1, Pos2); 
     }
 
-     qreal x = Pos2.x() - Pos1.x();
-     qreal y = Pos2.y() - Pos1.y();
-     qreal angle = atan2(y,x);
+    qreal x = Pos2.x() - Pos1.x();
+    qreal y = Pos2.y() - Pos1.y();
+    qreal angle = atan2(y,x);
 
-     /// Calculate the size of the inclination on the curve.
+    /// Calculate the size of the inclination on the curve.
     qreal theta = angle + PI_2;
     qreal finalX = cos(theta);
     qreal finalY = sin(theta);
     int index = _index;
 
-     if (index & 1) { // If the number is Odd.
+    if (index & 1) { // If the number is Odd.
          ++index;
           finalX *= (-1);
           finalY *= (-1);
-      }
+    }
 
       qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
 
@@ -168,13 +171,34 @@ void OrientedEdgeItem::updatePos() {
   }else{
      setPath(createCurves());
   }
+  updateAttributes();
 }
 
-void OrientedEdgeItem::updateName(const QString& ) {}
-void OrientedEdgeItem::updateVisited(bool ) {}
-void OrientedEdgeItem::updateLength(qreal ) {}
-void OrientedEdgeItem::updateValue(qreal ) {}
-void OrientedEdgeItem::updateTotal(qreal ) {}
-void OrientedEdgeItem::updateColor(QColor ) {}
+void OrientedEdgeItem::updateAttributes(){
+  _value->hide();
+  _name->hide();
+  QPointF middle = path().pointAtPercent(0.5);
+  _name->setText(_edge->name());
+  _value->setText(_edge->value());
+  
+  if(_edge->from() == _edge->to()){
+    qreal x1 = boundingRect().x() + boundingRect().width() + 5;
+    qreal y1 = boundingRect().y() + (boundingRect().height()/2) - 10;
+    _name->setPos(x1, y1);
+    _value->setPos(x1, y1+14);
+  }
+  else{
+    _name->setPos(middle);
+    _value->setPos(middle.x(), middle.y()-14);
+  }
+  
+  if (_edge->showValue()){
+    _value->show();
+  }
+  if (_edge->showName()){
+    _name->show();
+  }
+  
+}
 
 #include "OrientedEdgeItem.moc"
