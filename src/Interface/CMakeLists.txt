@@ -17,12 +17,14 @@ set(librocsui_SRCS
 	GraphLayers.cpp
 	TabWidget.cpp
 	CodeEditor.cpp
+	NodePropertiesWidget.cpp
 )
 
 kde4_add_ui_files( 
 	librocsui_SRCS 
 	OpenedFilesWidget.ui
 	GraphPropertiesWidget.ui
+	NodePropertiesWidget.ui
 	AddMultiNodes.ui
 )
 

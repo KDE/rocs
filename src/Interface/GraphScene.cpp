@@ -33,10 +33,14 @@
 #include <KDebug>
 #include "node.h"
 #include "graph.h"
+#include "NodePropertiesWidget.h"
+#include "MainWindow.h"
 
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
-    _graphDocument = 0;
+ _graphDocument = 0;
  _hideEdges = false;
+ _nodePropertiesWidget = new NodePropertiesWidget(qobject_cast<MainWindow*>(parent));
+ 
 }
 
 bool GraphScene::hideEdges(){
@@ -137,8 +141,7 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-    if(mouseEvent->button() == 4)
-    {
+    if(mouseEvent->button() == 4){
       NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
       if (!nitem) return;
       Node *movableNode = nitem->node();
@@ -151,7 +154,21 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-     _action->executeRelease(mouseEvent->scenePos());
+  _action->executeRelease(mouseEvent->scenePos());
+  if (selectedItems().size() == 1){
+    NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(selectedItems().at(0));
+    if (nItem){
+	return;
+    }
+    EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(selectedItems().at(0));
+    if (eItem){
+	return;
+    }
+    OrientedEdgeItem *oItem = qgraphicsitem_cast<OrientedEdgeItem*>(selectedItems().at(0));
+    if (oItem){
+	return;
+    }
+  }
 }
 
 void GraphScene::keyPressEvent(QKeyEvent *) {

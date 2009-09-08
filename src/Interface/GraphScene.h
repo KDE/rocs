@@ -35,7 +35,7 @@ class QGraphicsSceneWheelEvent;
 class QKeyEvent;
 class NodeItem;
 class EdgeItem;
-
+class NodePropertiesWidget;
 
 class GraphScene : public QGraphicsScene {
   Q_OBJECT
@@ -72,7 +72,7 @@ private:
     QMultiHash<Graph*, QGraphicsItem* > _hashGraphs;
     QList<QGraphicsItem*> _hidedEdges;
     bool _hideEdges;
-//     NodePropertiesWidget *_nodePropWidget;
+     NodePropertiesWidget *_nodePropertiesWidget;
 //     EdgePropertiesWidget *_edgePropWidget;
 };
 
