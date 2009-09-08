@@ -53,7 +53,6 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
     setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
 
     updatePos();
-    updateAttributes();
 }
 
 void EdgeItem::connectSignals() {
@@ -88,13 +87,19 @@ void EdgeItem::updatePos() {
 void EdgeItem::updateAttributes(){ 
    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
    QLineF l = line();
-     
+  _value->hide();
+  _name->hide();
   _value->setText(_edge->value());
   _name->setText(_edge->name());
   
-   
-  if(_edge->showValue()){ _value->show(); }
-  if(_edge->showName()){ _name->show();  }
+   kDebug() << " Show Value: " << _edge->showValue();
+  if(_edge->showValue()){ 
+    _value->show();  
+  }
+  kDebug() << "Show Name : " << _edge->showName();
+  if(_edge->showName()){ 
+    _name->show();  
+  }
 
   qreal x = l.x1() + l.dx()/2;
   qreal y = l.y1()  + l.dy()/2;

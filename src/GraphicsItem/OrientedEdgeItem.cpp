@@ -53,6 +53,7 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     connectSignals();
     setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
     setPath(createCurves());
+    updateAttributes();
 }
 
 OrientedEdgeItem::~OrientedEdgeItem(){
@@ -62,6 +63,7 @@ OrientedEdgeItem::~OrientedEdgeItem(){
 
 void OrientedEdgeItem::connectSignals() {
   connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));  
+  connect(_edge, SIGNAL(updateNeeded()), this, SLOT(updateAttributes()));
   connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
