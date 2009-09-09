@@ -7,7 +7,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES}
 	../Actions
 )
 
-set(librocsui_SRCS
+set(librocsui_SRCS edgepropertieswidget.cpp
 	MainWindow.cpp
 	OpenedFilesWidget.cpp
 	GraphScene.cpp
@@ -18,6 +18,7 @@ set(librocsui_SRCS
 	TabWidget.cpp
 	CodeEditor.cpp
 	NodePropertiesWidget.cpp
+	edgepropertieswidget.cpp
 )
 
 kde4_add_ui_files( 
@@ -25,6 +26,7 @@ kde4_add_ui_files(
 	OpenedFilesWidget.ui
 	GraphPropertiesWidget.ui
 	NodePropertiesWidget.ui
+	EdgePropertiesWidget.ui
 	AddMultiNodes.ui
 )
 
