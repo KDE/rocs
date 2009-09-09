@@ -108,6 +108,7 @@ void NodeItem::setupTextAttributes(){
 void NodeItem::updateAttributes(){
   setupTextAttributes();
   update();
+  kDebug() << "Deveria ter atualizado essa bagaça";
 }
 
 NodeItem::~NodeItem(){

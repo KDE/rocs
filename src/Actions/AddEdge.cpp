@@ -40,6 +40,7 @@ AddEdgeAction::AddEdgeAction(GraphScene *scene, QObject *parent)
     _nodeTo   = 0;
     _tmpLine  = 0;
     _working = false;
+    _name = "add-edge";
 }
 
 AddEdgeAction::~AddEdgeAction() {

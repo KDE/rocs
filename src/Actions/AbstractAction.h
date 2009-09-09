@@ -21,7 +21,7 @@
 
 #include <KAction>
 #include <QObject>
-
+#include <QString>
 class GraphScene;
 class Graph;
 class GraphDocument;
@@ -49,6 +49,8 @@ public:
     */
     void setActiveGraphDocument( GraphDocument *graphDocument);
 
+    
+    const QString& name() const;
 public slots:
     /*! Atualize the Active Graph that this action will work on
       \p graph the pointer to the active  Graph
@@ -80,6 +82,7 @@ public slots:
       */
     virtual void executeKeyRelease(QKeyEvent *keyEvent);
 
+    
     /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
     void sendExecuteBit();
 
@@ -93,6 +96,7 @@ protected:
     /*! pointer to the GraphicsScene with the drawing */
     GraphScene *_graphScene; 
 
+    QString _name;
 };
 
 #endif

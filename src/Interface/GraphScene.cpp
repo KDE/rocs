@@ -155,9 +155,10 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
   _action->executeRelease(mouseEvent->scenePos());
-  if (selectedItems().size() == 1){
+  if (selectedItems().size() == 1 && _action->name() == "select"){
     NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(selectedItems().at(0));
     if (nItem){
+      _nodePropertiesWidget->setNode(nItem->node());
 	return;
     }
     EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(selectedItems().at(0));

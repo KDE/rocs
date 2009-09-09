@@ -47,8 +47,12 @@ void AbstractAction::sendExecuteBit(){
     _graphScene -> setAction ( this );
 }
 
+const QString& AbstractAction::name() const{
+  return _name;
+}
 void AbstractAction::executePress(QPointF) {}
 void AbstractAction::executeMove(QPointF) {}
 void AbstractAction::executeRelease(QPointF) {}
 void AbstractAction::executeKeyPress(QKeyEvent*) {}
 void AbstractAction::executeKeyRelease(QKeyEvent*) {}
+

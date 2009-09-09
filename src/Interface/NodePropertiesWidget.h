@@ -43,8 +43,8 @@ private slots:
   void on__value_textChanged(const QString& s);
   void on__x_valueChanged(int i);
   void on__y_valueChanged(int i);
-  void on__size_valueChanged(int i);
-  
+  void on__width_valueChanged(int i);
+  void on__color_activated(const QColor& c);
 private:
 
     Node *_node;

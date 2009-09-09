@@ -38,6 +38,7 @@ SelectAction::SelectAction(GraphScene *scene, QObject *parent)
     setToolTip ( i18n ( "Select Items by clicking on them." ) );
     setIcon ( KIcon ( "rocsselect" ) );
     _selectionRect = 0;
+    _name = "select";
 }
 
 SelectAction::~SelectAction() {

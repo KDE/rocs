@@ -190,8 +190,8 @@ void OrientedEdgeItem::updateAttributes(){
     _value->setPos(x1, y1+14);
   }
   else{
-    _name->setPos(middle);
-    _value->setPos(middle.x(), middle.y()-14);
+    _name->setPos(middle.x() - _name->boundingRect().width()/2, middle.y());
+    _value->setPos(middle.x() - _name->boundingRect().width()/2, middle.y()-14);
   }
   
   if (_edge->showValue()){
