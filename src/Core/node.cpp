@@ -202,6 +202,7 @@ void Node::setY(qreal y) {
 
 void Node::setWidth(qreal w) {
   _width = w;
+  kDebug() << "Modificando Width";
     if (! _changing){
       emit updateNeeded();
     }
