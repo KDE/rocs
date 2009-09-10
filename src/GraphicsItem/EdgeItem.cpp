@@ -58,7 +58,7 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
 void EdgeItem::connectSignals() {
     connect(_edge, SIGNAL(updateNeeded()), this, SLOT(updateAttributes()));
     connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));
-    connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
+    connect(_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
 EdgeItem::~EdgeItem() {}

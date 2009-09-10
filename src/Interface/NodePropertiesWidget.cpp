@@ -12,6 +12,15 @@ NodePropertiesWidget::NodePropertiesWidget (MainWindow* /*parent*/  ): QWidget(0
 void NodePropertiesWidget::setNode(NodeItem *n) {
     _item = n;
     _node = n->node();
+    show();
+    activateWindow();
+    raise();
+    connect(_node, SIGNAL(updateNeeded()), this, SLOT(reflectAttributes()));
+    connect(_node, SIGNAL(posChanged()), this, SLOT(reflectAttributes()));
+    reflectAttributes();
+}
+
+void NodePropertiesWidget::reflectAttributes(){
     _color->setColor(_node->color());
     _x->setValue(_node->x());
     _y->setValue(_node->y());
@@ -35,9 +44,6 @@ void NodePropertiesWidget::setNode(NodeItem *n) {
         _begin->hide();
         _end->hide();
     }
-    show();
-    activateWindow();
-    raise();
 }
 
 void NodePropertiesWidget::on__showName_toggled(bool b) {

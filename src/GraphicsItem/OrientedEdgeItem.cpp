@@ -51,9 +51,8 @@ OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
     setZValue( - _index);
     setFlag(ItemIsSelectable, true);
     connectSignals();
-    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
-    setPath(createCurves());
     updateAttributes();
+    setPath(createCurves());
 }
 
 OrientedEdgeItem::~OrientedEdgeItem() {
@@ -179,6 +178,7 @@ void OrientedEdgeItem::updatePos() {
 }
 
 void OrientedEdgeItem::updateAttributes() {
+    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
     _value->hide();
     _name->hide();
     QPointF middle = path().pointAtPercent(0.5);
@@ -202,7 +202,7 @@ void OrientedEdgeItem::updateAttributes() {
     if (_edge->showName()) {
         _name->show();
     }
-
+    update();
 }
 
 #include "OrientedEdgeItem.moc"

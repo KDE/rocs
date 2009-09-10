@@ -39,6 +39,7 @@ public:
     NodePropertiesWidget (MainWindow* parent = 0 );
     void setNode(NodeItem *n);
 
+
 private slots:
     void on__name_textChanged(const QString& s);
     void on__value_textChanged(const QString& s);
@@ -50,7 +51,8 @@ private slots:
     void on__showValue_toggled(bool b);
     void on__begin_toggled(bool b);
     void on__end_toggled(bool b);
-
+    void reflectAttributes();
+    
 private:
 
     Node *_node;

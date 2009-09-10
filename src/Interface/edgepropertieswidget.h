@@ -40,6 +40,7 @@ public slots:
     void on__color_activated(const QColor& c);
     void on__width_valueChanged(double v);
     void on__style_activated(const QString& s);
+    void reflectAttributes();
 
 private:
     Edge *_edge;
