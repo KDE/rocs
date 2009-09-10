@@ -12,12 +12,14 @@ NodePropertiesWidget::NodePropertiesWidget (MainWindow* /*parent*/  ): QWidget(0
 void NodePropertiesWidget::setNode(NodeItem *n) {
     _item = n;
     _node = n->node();
+    move(_node->x() + 10, _node->y() + 10);
     show();
     activateWindow();
     raise();
     connect(_node, SIGNAL(updateNeeded()), this, SLOT(reflectAttributes()));
     connect(_node, SIGNAL(posChanged()), this, SLOT(reflectAttributes()));
     reflectAttributes();
+
 }
 
 void NodePropertiesWidget::reflectAttributes(){
@@ -29,7 +31,6 @@ void NodePropertiesWidget::reflectAttributes(){
     _width->setValue(_node->width());
     _showName->setChecked(!_node->showName());
     _showValue->setChecked(!_node->showValue());
-    move(_node->x() + 10, _node->y() + 10);
 
     Graph *g =qobject_cast<Graph*>( _node->parent() );
     if (g->automate()) {

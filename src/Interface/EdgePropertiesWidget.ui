@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Edge Properties</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="2" column="0">
@@ -70,13 +70,34 @@
    <item row="2" column="2" colspan="2">
     <widget class="KLineEdit" name="_value"/>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="2" colspan="2">
     <widget class="KLineEdit" name="_name"/>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="KPushButton" name="_showName">
+     <property name="text">
+      <string>name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <widget class="KPushButton" name="_showValue">
+     <property name="text">
+      <string>value</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>show</string>
      </property>
     </widget>
    </item>
@@ -87,6 +108,11 @@
    <class>KDoubleNumInput</class>
    <extends>QWidget</extends>
    <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
