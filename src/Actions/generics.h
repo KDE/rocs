@@ -26,24 +26,32 @@
 \p n1 first node
 \p n2 second node
 */
-bool leftLessThan(NodeItem *n1, NodeItem *n2){   return n1->x() < n2->x(); }
+bool leftLessThan(NodeItem *n1, NodeItem *n2) {
+    return n1->x() < n2->x();
+}
 
 /*! for the AlignNodes class, checks if a node is more in the right than the other.
 \p n1 first node
 \p n2 second node
 */
-bool rightLessThan(NodeItem *n1, NodeItem *n2){  return n1->x() > n2->x(); }
+bool rightLessThan(NodeItem *n1, NodeItem *n2) {
+    return n1->x() > n2->x();
+}
 
 /*! for the AlignNodes class, checks if a node is more in the top than the other.
 \p n1 first node
 \p n2 second node
 */
-bool topLessThan(NodeItem *n1, NodeItem *n2){    return n1->y() < n2->y(); }
+bool topLessThan(NodeItem *n1, NodeItem *n2) {
+    return n1->y() < n2->y();
+}
 
 /*! for the AlignNodes class, checks if a node is more in the bottom than the other.
 \p n1 first node
 \p n2 second node
 */
-bool bottomLessThan(NodeItem *n1, NodeItem *n2){ return n1->y() > n2->y(); }
+bool bottomLessThan(NodeItem *n1, NodeItem *n2) {
+    return n1->y() > n2->y();
+}
 
 #endif

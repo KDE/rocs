@@ -70,27 +70,27 @@ public slots:
 signals:
     /*! signal sended when the selection changes. */
     void ItemSelectedChanged(QGraphicsItem *o);
-    
+
 private:
-    /*! selects just one node or edge, on the mouseclick-position 
+    /*! selects just one node or edge, on the mouseclick-position
       \p pos the position of the mouse click
     */
     void singleSelect(QPointF pos);
 
-    /*! selects more than one node or edge, on the retangle done by 
+    /*! selects more than one node or edge, on the retangle done by
     the first click and the release positions.
-      \p pos the position of the release 
+      \p pos the position of the release
     */
     void multiSelect(QPointF pos);
-    
+
     /*! position of the first click */
-     QPointF _p1;
-     
-     /*! position of the mouse release */
-     QPointF _p2;
-     
-     /*! onscreen temporary rectangle for the selected items */
-     QGraphicsRectItem *_selectionRect;
+    QPointF _p1;
+
+    /*! position of the mouse release */
+    QPointF _p2;
+
+    /*! onscreen temporary rectangle for the selected items */
+    QGraphicsRectItem *_selectionRect;
 
 };
 

@@ -88,7 +88,7 @@ private: // Variables.
     GraphLayers* _GraphLayers; //! Area where the nodes and edges will be modified.
     TabWidget *_leftTabs; //! Tab that will hold the pallete, opened files, graphLayers and Properties.
     KPushButton *_btnAddGraph;
-    
+
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
     TabWidget *_bottomTabs;

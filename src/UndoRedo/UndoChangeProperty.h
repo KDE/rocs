@@ -24,12 +24,12 @@
 #include <QUndoCommand>
 #include <QObjectt>
 
-class UndoAddEdge : public QUndoCommand{
-  public:
+class UndoAddEdge : public QUndoCommand {
+public:
     UndoAddEdge(QObject *g);
 
-  private:
-   QGraphicsItem *m_edge;
+private:
+    QGraphicsItem *m_edge;
 };
 
-#endif 
+#endif

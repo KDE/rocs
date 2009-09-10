@@ -38,23 +38,23 @@
 #include "edgepropertieswidget.h"
 
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
- _graphDocument = 0;
- _hideEdges = false;
- _nodePropertiesWidget = new NodePropertiesWidget(qobject_cast<MainWindow*>(parent));
- _edgePropertiesWidget = new EdgePropertiesWidget();
+    _graphDocument = 0;
+    _hideEdges = false;
+    _nodePropertiesWidget = new NodePropertiesWidget(qobject_cast<MainWindow*>(parent));
+    _edgePropertiesWidget = new EdgePropertiesWidget();
 }
 
-bool GraphScene::hideEdges(){
-  return _hideEdges;
+bool GraphScene::hideEdges() {
+    return _hideEdges;
 }
 
-void GraphScene::setHideEdges(bool h){
-  _hideEdges = h;
-  if ( ! _hideEdges ){
-    foreach(QGraphicsItem *i, _hidedEdges){
-      i->update();
+void GraphScene::setHideEdges(bool h) {
+    _hideEdges = h;
+    if ( ! _hideEdges ) {
+        foreach(QGraphicsItem *i, _hidedEdges) {
+            i->update();
+        }
     }
-  }
 }
 
 void GraphScene::setActiveGraph(Graph *g) {
@@ -62,9 +62,9 @@ void GraphScene::setActiveGraph(Graph *g) {
     _graph = g;
 }
 
-void GraphScene::updateAfter(QGraphicsItem *item){
-  if (_hidedEdges.contains(item)) return;
-  _hidedEdges << item;
+void GraphScene::updateAfter(QGraphicsItem *item) {
+    if (_hidedEdges.contains(item)) return;
+    _hidedEdges << item;
 }
 
 
@@ -83,7 +83,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     n->setFlag(QGraphicsItem::ItemIsSelectable, false);
     n->setZValue(-1000);
     addItem(n);
-    
+
     int size = _graphDocument->size();
 
     for (int i = 0; i < size; i++) {
@@ -111,68 +111,68 @@ QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
 }
 
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
-  NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(wheelEvent->scenePos()));
-  if (!nitem){
-    wheelEvent->ignore();
-    return;
-  }
-  Node *movableNode = nitem->node();
-  int numDegrees = wheelEvent->delta();
-  if(wheelEvent->orientation() == Qt::Vertical) {
-    if(numDegrees > 0)
-    {
-      nitem->startUpSizing();
-      movableNode->setWidth(movableNode->width()+0.25);
-      nitem->update();
-      nitem->endUpSizing();
+    NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(wheelEvent->scenePos()));
+    if (!nitem) {
+        wheelEvent->ignore();
+        return;
     }
-    else if(movableNode->width() > 0.5)
-      {
-	nitem->startDownSizing();
-	movableNode->setWidth(movableNode->width()-0.25);
-	nitem->update();
-	nitem->endDownSizing();
-      }
+    Node *movableNode = nitem->node();
+    int numDegrees = wheelEvent->delta();
+    if (wheelEvent->orientation() == Qt::Vertical) {
+        if (numDegrees > 0)
+        {
+            nitem->startUpSizing();
+            movableNode->setWidth(movableNode->width()+0.25);
+            nitem->update();
+            nitem->endUpSizing();
+        }
+        else if (movableNode->width() > 0.5)
+        {
+            nitem->startDownSizing();
+            movableNode->setWidth(movableNode->width()-0.25);
+            nitem->update();
+            nitem->endDownSizing();
+        }
     }
     wheelEvent->accept();
-  }
-  
+}
+
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     _action->executeMove(mouseEvent->scenePos());
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-    if(mouseEvent->button() == 4){
-      NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
-      if (!nitem) return;
-	Node *movableNode = nitem->node();
-	nitem->startDownSizing();
-	movableNode->setWidth(1);
-	nitem->update();
-	nitem->endDownSizing();
+    if (mouseEvent->button() == 4) {
+        NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
+        if (!nitem) return;
+        Node *movableNode = nitem->node();
+        nitem->startDownSizing();
+        movableNode->setWidth(1);
+        nitem->update();
+        nitem->endDownSizing();
     }
     _action->executePress(mouseEvent->scenePos());
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-  _action->executeRelease(mouseEvent->scenePos());
-  if (selectedItems().size() == 1 && _action->name() == "select"){
-    NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(selectedItems().at(0));
-    if (nItem){
-      _nodePropertiesWidget->setNode(nItem);
-	return;
+    _action->executeRelease(mouseEvent->scenePos());
+    if (selectedItems().size() == 1 && _action->name() == "select") {
+        NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(selectedItems().at(0));
+        if (nItem) {
+            _nodePropertiesWidget->setNode(nItem);
+            return;
+        }
+        EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(selectedItems().at(0));
+        if (eItem) {
+            _edgePropertiesWidget->setEdge(eItem->edge());
+            return;
+        }
+        OrientedEdgeItem *oItem = qgraphicsitem_cast<OrientedEdgeItem*>(selectedItems().at(0));
+        if (oItem) {
+            _edgePropertiesWidget->setEdge(oItem->edge());
+            return;
+        }
     }
-    EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(selectedItems().at(0));
-    if (eItem){
-      _edgePropertiesWidget->setEdge(eItem->edge());
-	return;
-    }
-    OrientedEdgeItem *oItem = qgraphicsitem_cast<OrientedEdgeItem*>(selectedItems().at(0));
-    if (oItem){
-      _edgePropertiesWidget->setEdge(oItem->edge());
-	return;
-    }
-  }
 }
 
 void GraphScene::keyPressEvent(QKeyEvent *) {
@@ -197,16 +197,16 @@ void GraphScene::clearGraph() {
     }
 }
 
-void GraphScene::removeGItem(QGraphicsItem *i){
-  _hashGraphs.remove(_graph, i);
-  removeItem(i);
+void GraphScene::removeGItem(QGraphicsItem *i) {
+    _hashGraphs.remove(_graph, i);
+    removeItem(i);
 }
 
 void GraphScene::updateGraph(Graph *g) {
     QList<QGraphicsItem*> items = _hashGraphs.values(g);
     foreach(QGraphicsItem *i, items) {
-      removeItem(i);
-      delete i;
+        removeItem(i);
+        delete i;
     }
 
     _hashGraphs.remove(g);

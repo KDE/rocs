@@ -44,7 +44,7 @@ EdgeItem::EdgeItem( Edge *edge, QGraphicsItem *parent)
     _edge = edge;
     _name = new QGraphicsSimpleTextItem(this);
     _value = new QGraphicsSimpleTextItem(this);
-    
+
     setCacheMode(DeviceCoordinateCache);
     setZValue(0);
     setFlag(ItemIsSelectable);
@@ -61,7 +61,7 @@ void EdgeItem::connectSignals() {
     connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
-EdgeItem::~EdgeItem(){}
+EdgeItem::~EdgeItem() {}
 
 void EdgeItem::remove() {
     dynamic_cast<GraphScene*>(scene())->removeGItem(this);
@@ -69,45 +69,45 @@ void EdgeItem::remove() {
 }
 
 void EdgeItem::updatePos() {
-  GraphScene* gScene = dynamic_cast<GraphScene*>(scene());
-  if ( gScene && gScene->hideEdges()){
-      gScene->updateAfter(this);
-  }
-  QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
-  qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
-  if (size   < 20){
-    setLine( QLine()) ;
-  }
-  else{
-    setLine( q );
-  }
-  updateAttributes();
+    GraphScene* gScene = dynamic_cast<GraphScene*>(scene());
+    if ( gScene && gScene->hideEdges()) {
+        gScene->updateAfter(this);
+    }
+    QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
+    qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
+    if (size   < 20) {
+        setLine( QLine()) ;
+    }
+    else {
+        setLine( q );
+    }
+    updateAttributes();
 }
 
-void EdgeItem::updateAttributes(){ 
-   setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
-   QLineF l = line();
-  _value->hide();
-  _name->hide();
-  _value->setText(_edge->value());
-  _name->setText(_edge->name());
-  
-   kDebug() << " Show Value: " << _edge->showValue();
-  if(_edge->showValue()){ 
-    _value->show();  
-  }
-  kDebug() << "Show Name : " << _edge->showName();
-  if(_edge->showName()){ 
-    _name->show();  
-  }
+void EdgeItem::updateAttributes() {
+    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
+    QLineF l = line();
+    _value->hide();
+    _name->hide();
+    _value->setText(_edge->value());
+    _name->setText(_edge->name());
 
-  qreal x = l.x1() + l.dx()/2;
-  qreal y = l.y1()  + l.dy()/2;
-   
-  _name->setPos(x,y);
-  _value->setPos(x, y+14);
-  update(); 
-   kDebug() << "Chamou" << _value->text() << " " << _name->text();
+    kDebug() << " Show Value: " << _edge->showValue();
+    if (_edge->showValue()) {
+        _value->show();
+    }
+    kDebug() << "Show Name : " << _edge->showName();
+    if (_edge->showName()) {
+        _name->show();
+    }
+
+    qreal x = l.x1() + l.dx()/2;
+    qreal y = l.y1()  + l.dy()/2;
+
+    _name->setPos(x,y);
+    _value->setPos(x, y+14);
+    update();
+    kDebug() << "Chamou" << _value->text() << " " << _name->text();
 }
 
 #include "EdgeItem.moc"

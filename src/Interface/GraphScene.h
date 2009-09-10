@@ -39,7 +39,7 @@ class NodePropertiesWidget;
 class EdgePropertiesWidget;
 
 class GraphScene : public QGraphicsScene {
-  Q_OBJECT
+    Q_OBJECT
 public:
     GraphScene(QObject *parent);
     void setAction(QAction *action);
@@ -51,14 +51,14 @@ public:
     void setActiveGraphDocument(GraphDocument *gd);
     void insertGraphItem(Graph *g, QGraphicsItem *item);
     void clearGraph();
-    
+
     void setHideEdges(bool h);
     bool hideEdges();
     void updateAfter(QGraphicsItem *item);
 
-  public slots:
+public slots:
     void removeGItem(QGraphicsItem *i);
-    
+
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
@@ -73,8 +73,8 @@ private:
     QMultiHash<Graph*, QGraphicsItem* > _hashGraphs;
     QList<QGraphicsItem*> _hidedEdges;
     bool _hideEdges;
-     NodePropertiesWidget *_nodePropertiesWidget;
-     EdgePropertiesWidget *_edgePropertiesWidget;
+    NodePropertiesWidget *_nodePropertiesWidget;
+    EdgePropertiesWidget *_edgePropertiesWidget;
 };
 
 #endif

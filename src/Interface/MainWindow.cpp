@@ -75,7 +75,7 @@
 MainWindow* mainWindow = 0;
 
 MainWindow::MainWindow() :
-        KXmlGuiWindow(){
+        KXmlGuiWindow() {
     _documentModel = 0;
     _activeGraphDocument = 0;
     _graph = 0;
@@ -110,11 +110,11 @@ void MainWindow::setupModels() {
     _documentModel = new GraphDocumentModel( &_documents );
 }
 
-GraphDocument *MainWindow::activeDocument() const{ 
-  if (! _activeGraphDocument){
-    kDebug() << "Document is NULL";
-  }
-  return _activeGraphDocument; 
+GraphDocument *MainWindow::activeDocument() const {
+    if (! _activeGraphDocument) {
+        kDebug() << "Document is NULL";
+    }
+    return _activeGraphDocument;
 }
 
 void MainWindow::setupWidgets() {
@@ -130,45 +130,45 @@ void MainWindow::setupWidgets() {
 }
 
 QWidget* MainWindow::setupRightPanel() {
-   _graphVisualEditor = new GraphVisualEditor(this);
-  _codeEditor = new CodeEditor(this);
-   _txtDebug = new KTextBrowser(this);
+    _graphVisualEditor = new GraphVisualEditor(this);
+    _codeEditor = new CodeEditor(this);
+    _txtDebug = new KTextBrowser(this);
 
-  _bottomTabs = new TabWidget(TabWidget::TabOnBottom, this);
-  _bottomTabs->addWidget(_codeEditor,  "Editor", KIcon("accessories-text-editor"));
-  _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("debugger"));
-  _runScript = new KAction(KIcon("system-run"), "Run", this);
-   connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
-  _bottomTabs->addAction(_runScript);
+    _bottomTabs = new TabWidget(TabWidget::TabOnBottom, this);
+    _bottomTabs->addWidget(_codeEditor,  "Editor", KIcon("accessories-text-editor"));
+    _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("debugger"));
+    _runScript = new KAction(KIcon("system-run"), "Run", this);
+    connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
+    _bottomTabs->addAction(_runScript);
 
-  _vSplitter = new QSplitter(this);
-  _vSplitter->setOrientation(Qt::Vertical);
-  _vSplitter->addWidget(_graphVisualEditor);
-  _vSplitter->addWidget(_bottomTabs);
-  _vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
-  return _vSplitter;
+    _vSplitter = new QSplitter(this);
+    _vSplitter->setOrientation(Qt::Vertical);
+    _vSplitter->addWidget(_graphVisualEditor);
+    _vSplitter->addWidget(_bottomTabs);
+    _vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
+    return _vSplitter;
 }
 
 QWidget* MainWindow::setupLeftPanel() {
-   _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
-   _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
-   _GraphLayers = new GraphLayers(this);
-   _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
-   _leftTabs->addWidget( _GraphLayers, "Properties" , KIcon("applications-system"));
-   return _leftTabs;
+    _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
+    _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
+    _GraphLayers = new GraphLayers(this);
+    _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
+    _leftTabs->addWidget( _GraphLayers, "Properties" , KIcon("applications-system"));
+    return _leftTabs;
 }
 
 void MainWindow::setupActions() {
     kDebug() << "Entrou no Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
-    
-    
+
+
     GraphScene *gc = _graphVisualEditor->scene();
     if (!gc) {
         return;
     }
-     _moveNodeAction = new MoveNodeAction(gc, this);
-     
+    _moveNodeAction = new MoveNodeAction(gc, this);
+
     KActionCollection *ac = actionCollection();
     ac->addAction("move_node", _moveNodeAction);
     ac->addAction("add_node", new AddNodeAction(gc, this));
@@ -176,14 +176,14 @@ void MainWindow::setupActions() {
     ac->addAction("select", new SelectAction(gc, this));
     ac->addAction("delete", new DeleteAction(gc, this));
     gc -> setAction(actionCollection()->action("move_node"));
-    
+
     ac->addAction("align-hbottom",new AlignAction( "Align on the base",  AlignAction::Bottom, _graphVisualEditor ));
     ac->addAction("align-hcenter",new AlignAction( "Align on the center",AlignAction::HCenter,_graphVisualEditor ));
     ac->addAction("align-htop",   new AlignAction( "Align on the top",   AlignAction::Top,    _graphVisualEditor ));
     ac->addAction("align-vleft",  new AlignAction( "Align on the left",  AlignAction::Left,   _graphVisualEditor ));
     ac->addAction("align-vcenter",new AlignAction( "Align on the center",AlignAction::VCenter,_graphVisualEditor ));
     ac->addAction("align-vright", new AlignAction( "Align on the right", AlignAction::Right,  _graphVisualEditor ));
- 
+
     KAction* action = new KAction(KIcon("document-new"),i18n("New Graph"),  _graphVisualEditor->view());
     action->setShortcut(Qt::CTRL + Qt::Key_N);
     action->setShortcutContext(Qt::WidgetShortcut);
@@ -239,8 +239,8 @@ void MainWindow::setupSignals() {
     connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
              this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
 
- //connect( actionCollection()->action("select"), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
- //            _GraphProperties, SLOT(setDataSource(QGraphicsItem*)));
+//connect( actionCollection()->action("select"), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
+//            _GraphProperties, SLOT(setDataSource(QGraphicsItem*)));
 
 }
 
@@ -248,8 +248,8 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d) {
     _activeGraphDocument = d;
     _graphVisualEditor->setActiveGraphDocument(d);
     foreach( QAction *action, actionCollection()->actions() ) {
-        if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action)) 
-	  absAction->setActiveGraphDocument(d);
+        if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action))
+            absAction->setActiveGraphDocument(d);
     }
 
     if (_activeGraphDocument->size() == 0) return;
@@ -267,8 +267,8 @@ void MainWindow::setActiveGraph( Graph *g) {
         return;
     }
     foreach( QAction *action, actionCollection()->actions() ) {
-        if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action)) 
-	  absAction->setActiveGraph(g);
+        if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action))
+            absAction->setActiveGraph(g);
     }
     _graphVisualEditor->setActiveGraph(g);
     _graph = g;
@@ -326,20 +326,26 @@ static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engin
 }
 
 void MainWindow::executeScript() {
-    if (_activeGraphDocument == 0) {     return;     }
-    if (_txtDebug == 0) {    return;    }
-    
+    if (_activeGraphDocument == 0) {
+        return;
+    }
+    if (_txtDebug == 0) {
+        return;
+    }
+
     _txtDebug->clear();
     QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
     QScriptEngineDebugger *e = new QScriptEngineDebugger(this);
-    
+
     e->attachTo(engine);
-   
+
     engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
     QScriptValue results = engine->evaluate(_codeEditor->text());
     _txtDebug->insertPlainText(results.toString());
 
-    if (scene() == 0) {   return;    }
+    if (scene() == 0) {
+        return;
+    }
 
     _graphVisualEditor->scene()->updateDocument();
 }

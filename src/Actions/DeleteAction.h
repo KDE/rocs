@@ -27,21 +27,21 @@
 class DeleteAction : public AbstractAction
 {
 public:
-  /*! default constructor
-  \p scene the graph scene
-  \p parent the mainwindow
-  */
-  DeleteAction(GraphScene* scene, QObject* parent);
-  
-  /*! start the node deletion algorithm on the specified point.
-  \p pos the position of the click.
-  */
-   void executePress(QPointF pos);
-  
-  /*! when somebody press the delete key, the system will try to delete all selected nodes.
-  \p keyEvent the key to be processed. 
-  */
-  void executeKeyRelease(QKeyEvent* keyEvent);
+    /*! default constructor
+    \p scene the graph scene
+    \p parent the mainwindow
+    */
+    DeleteAction(GraphScene* scene, QObject* parent);
+
+    /*! start the node deletion algorithm on the specified point.
+    \p pos the position of the click.
+    */
+    void executePress(QPointF pos);
+
+    /*! when somebody press the delete key, the system will try to delete all selected nodes.
+    \p keyEvent the key to be processed.
+    */
+    void executeKeyRelease(QKeyEvent* keyEvent);
 };
 
 #endif // DELETEACTION_H

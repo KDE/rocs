@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 /****************************************************************************
@@ -125,9 +125,9 @@ public:
     void propertyDestroyed(QtProperty *property);
     void propertyChanged(QtProperty *property) const;
     void propertyRemoved(QtProperty *property,
-                QtProperty *parentProperty) const;
+                         QtProperty *parentProperty) const;
     void propertyInserted(QtProperty *property, QtProperty *parentProperty,
-                QtProperty *afterProperty) const;
+                          QtProperty *afterProperty) const;
 
     QSet<QtProperty *> m_properties;
 };
@@ -458,7 +458,7 @@ void QtProperty::addSubProperty(QtProperty *property)
     \sa addSubProperty(), removeSubProperty()
 */
 void QtProperty::insertSubProperty(QtProperty *property,
-            QtProperty *afterProperty)
+                                   QtProperty *afterProperty)
 {
     if (!property)
         return;
@@ -552,13 +552,13 @@ void QtAbstractPropertyManagerPrivate::propertyChanged(QtProperty *property) con
 }
 
 void QtAbstractPropertyManagerPrivate::propertyRemoved(QtProperty *property,
-            QtProperty *parentProperty) const
+        QtProperty *parentProperty) const
 {
     emit q_ptr->propertyRemoved(property, parentProperty);
 }
 
 void QtAbstractPropertyManagerPrivate::propertyInserted(QtProperty *property,
-            QtProperty *parentProperty, QtProperty *afterProperty) const
+        QtProperty *parentProperty, QtProperty *afterProperty) const
 {
     emit q_ptr->propertyInserted(property, parentProperty, afterProperty);
 }
@@ -680,7 +680,7 @@ void QtAbstractPropertyManagerPrivate::propertyInserted(QtProperty *property,
     Creates an abstract property manager with the given \a parent.
 */
 QtAbstractPropertyManager::QtAbstractPropertyManager(QObject *parent)
-    : QObject(parent)
+        : QObject(parent)
 {
     d_ptr = new QtAbstractPropertyManagerPrivate;
     d_ptr->q_ptr = this;
@@ -1104,7 +1104,7 @@ class QtBrowserItemPrivate
 {
 public:
     QtBrowserItemPrivate(QtAbstractPropertyBrowser *browser, QtProperty *property, QtBrowserItem *parent)
-        : m_browser(browser), m_property(property), m_parent(parent), q_ptr(0) {}
+            : m_browser(browser), m_property(property), m_parent(parent), q_ptr(0) {}
 
     void addChild(QtBrowserItem *index, QtBrowserItem *after);
     void removeChild(QtBrowserItem *index);
@@ -1222,9 +1222,9 @@ QtBrowserItem::~QtBrowserItem()
 ////////////////////////////////////
 
 typedef QMap<QtAbstractPropertyBrowser *, QMap<QtAbstractPropertyManager *,
-                            QtAbstractEditorFactoryBase *> > Map1;
+QtAbstractEditorFactoryBase *> > Map1;
 typedef QMap<QtAbstractPropertyManager *, QMap<QtAbstractEditorFactoryBase *,
-                            QList<QtAbstractPropertyBrowser *> > > Map2;
+QList<QtAbstractPropertyBrowser *> > > Map2;
 Q_GLOBAL_STATIC(Map1, m_viewToManagerToFactory)
 Q_GLOBAL_STATIC(Map2, m_managerToFactoryToViews)
 
@@ -1236,9 +1236,9 @@ public:
     QtAbstractPropertyBrowserPrivate();
 
     void insertSubTree(QtProperty *property,
-            QtProperty *parentProperty);
+                       QtProperty *parentProperty);
     void removeSubTree(QtProperty *property,
-            QtProperty *parentProperty);
+                       QtProperty *parentProperty);
     void createBrowserIndexes(QtProperty *property, QtProperty *parentProperty, QtProperty *afterProperty);
     void removeBrowserIndexes(QtProperty *property, QtProperty *parentProperty);
     QtBrowserItem *createBrowserIndex(QtProperty *property, QtBrowserItem *parentIndex, QtBrowserItem *afterIndex);
@@ -1246,7 +1246,7 @@ public:
     void clearIndex(QtBrowserItem *index);
 
     void slotPropertyInserted(QtProperty *property,
-            QtProperty *parentProperty, QtProperty *afterProperty);
+                              QtProperty *parentProperty, QtProperty *afterProperty);
     void slotPropertyRemoved(QtProperty *property, QtProperty *parentProperty);
     void slotPropertyDestroyed(QtProperty *property);
     void slotPropertyDataChanged(QtProperty *property);
@@ -1263,12 +1263,12 @@ public:
 };
 
 QtAbstractPropertyBrowserPrivate::QtAbstractPropertyBrowserPrivate() :
-   m_currentItem(0)
+        m_currentItem(0)
 {
 }
 
 void QtAbstractPropertyBrowserPrivate::insertSubTree(QtProperty *property,
-            QtProperty *parentProperty)
+        QtProperty *parentProperty)
 {
     if (m_propertyToParents.contains(property)) {
         // property was already inserted, so its manager is connected
@@ -1283,16 +1283,16 @@ void QtAbstractPropertyBrowserPrivate::insertSubTree(QtProperty *property,
     if (m_managerToProperties[manager].isEmpty()) {
         // connect manager's signals
         q_ptr->connect(manager, SIGNAL(propertyInserted(QtProperty *,
-                            QtProperty *, QtProperty *)),
-                q_ptr, SLOT(slotPropertyInserted(QtProperty *,
-                            QtProperty *, QtProperty *)));
+                                       QtProperty *, QtProperty *)),
+                       q_ptr, SLOT(slotPropertyInserted(QtProperty *,
+                                                        QtProperty *, QtProperty *)));
         q_ptr->connect(manager, SIGNAL(propertyRemoved(QtProperty *,
-                            QtProperty *)),
-                q_ptr, SLOT(slotPropertyRemoved(QtProperty *, QtProperty *)));
+                                       QtProperty *)),
+                       q_ptr, SLOT(slotPropertyRemoved(QtProperty *, QtProperty *)));
         q_ptr->connect(manager, SIGNAL(propertyDestroyed(QtProperty *)),
-                q_ptr, SLOT(slotPropertyDestroyed(QtProperty *)));
+                       q_ptr, SLOT(slotPropertyDestroyed(QtProperty *)));
         q_ptr->connect(manager, SIGNAL(propertyChanged(QtProperty *)),
-                q_ptr, SLOT(slotPropertyDataChanged(QtProperty *)));
+                       q_ptr, SLOT(slotPropertyDataChanged(QtProperty *)));
     }
     m_managerToProperties[manager].append(property);
     m_propertyToParents[property].append(parentProperty);
@@ -1306,7 +1306,7 @@ void QtAbstractPropertyBrowserPrivate::insertSubTree(QtProperty *property,
 }
 
 void QtAbstractPropertyBrowserPrivate::removeSubTree(QtProperty *property,
-            QtProperty *parentProperty)
+        QtProperty *parentProperty)
 {
     if (!m_propertyToParents.contains(property)) {
         // ASSERT
@@ -1323,16 +1323,16 @@ void QtAbstractPropertyBrowserPrivate::removeSubTree(QtProperty *property,
     if (m_managerToProperties[manager].isEmpty()) {
         // disconnect manager's signals
         q_ptr->disconnect(manager, SIGNAL(propertyInserted(QtProperty *,
-                            QtProperty *, QtProperty *)),
-                q_ptr, SLOT(slotPropertyInserted(QtProperty *,
-                            QtProperty *, QtProperty *)));
+                                          QtProperty *, QtProperty *)),
+                          q_ptr, SLOT(slotPropertyInserted(QtProperty *,
+                                                           QtProperty *, QtProperty *)));
         q_ptr->disconnect(manager, SIGNAL(propertyRemoved(QtProperty *,
-                            QtProperty *)),
-                q_ptr, SLOT(slotPropertyRemoved(QtProperty *, QtProperty *)));
+                                          QtProperty *)),
+                          q_ptr, SLOT(slotPropertyRemoved(QtProperty *, QtProperty *)));
         q_ptr->disconnect(manager, SIGNAL(propertyDestroyed(QtProperty *)),
-                q_ptr, SLOT(slotPropertyDestroyed(QtProperty *)));
+                          q_ptr, SLOT(slotPropertyDestroyed(QtProperty *)));
         q_ptr->disconnect(manager, SIGNAL(propertyChanged(QtProperty *)),
-                q_ptr, SLOT(slotPropertyDataChanged(QtProperty *)));
+                          q_ptr, SLOT(slotPropertyDataChanged(QtProperty *)));
 
         m_managerToProperties.remove(manager);
     }
@@ -1364,7 +1364,7 @@ void QtAbstractPropertyBrowserPrivate::createBrowserIndexes(QtProperty *property
         }
     } else if (parentProperty) {
         QMap<QtProperty *, QList<QtBrowserItem *> >::ConstIterator it =
-                m_propertyToIndexes.find(parentProperty);
+            m_propertyToIndexes.find(parentProperty);
         if (it == m_propertyToIndexes.constEnd())
             return;
 
@@ -1499,7 +1499,7 @@ void QtAbstractPropertyBrowserPrivate::slotPropertyDataChanged(QtProperty *prope
         return;
 
     QMap<QtProperty *, QList<QtBrowserItem *> >::ConstIterator it =
-            m_propertyToIndexes.find(property);
+        m_propertyToIndexes.find(property);
     if (it == m_propertyToIndexes.constEnd())
         return;
 
@@ -1711,7 +1711,7 @@ void QtAbstractPropertyBrowserPrivate::slotPropertyDataChanged(QtProperty *prope
     Creates an abstract property browser with the given \a parent.
 */
 QtAbstractPropertyBrowser::QtAbstractPropertyBrowser(QWidget *parent)
-    : QWidget(parent)
+        : QWidget(parent)
 {
     d_ptr = new QtAbstractPropertyBrowserPrivate;
     d_ptr->q_ptr = this;
@@ -1845,7 +1845,7 @@ QtBrowserItem *QtAbstractPropertyBrowser::addProperty(QtProperty *property)
     \sa addProperty(), QtProperty::insertSubProperty(), properties()
 */
 QtBrowserItem *QtAbstractPropertyBrowser::insertProperty(QtProperty *property,
-            QtProperty *afterProperty)
+        QtProperty *afterProperty)
 {
     if (!property)
         return 0;
@@ -1929,13 +1929,13 @@ void QtAbstractPropertyBrowser::removeProperty(QtProperty *property)
     \sa setFactoryForManager()
 */
 QWidget *QtAbstractPropertyBrowser::createEditor(QtProperty *property,
-                QWidget *parent)
+        QWidget *parent)
 {
     QtAbstractEditorFactoryBase *factory = 0;
     QtAbstractPropertyManager *manager = property->propertyManager();
 
     if (m_viewToManagerToFactory()->contains(this) &&
-        (*m_viewToManagerToFactory())[this].contains(manager)) {
+            (*m_viewToManagerToFactory())[this].contains(manager)) {
         factory = (*m_viewToManagerToFactory())[this][manager];
     }
 
@@ -1945,19 +1945,19 @@ QWidget *QtAbstractPropertyBrowser::createEditor(QtProperty *property,
 }
 
 bool QtAbstractPropertyBrowser::addFactory(QtAbstractPropertyManager *abstractManager,
-            QtAbstractEditorFactoryBase *abstractFactory)
+        QtAbstractEditorFactoryBase *abstractFactory)
 {
     bool connectNeeded = false;
     if (!m_managerToFactoryToViews()->contains(abstractManager) ||
-        !(*m_managerToFactoryToViews())[abstractManager].contains(abstractFactory)) {
+            !(*m_managerToFactoryToViews())[abstractManager].contains(abstractFactory)) {
         connectNeeded = true;
     } else if ((*m_managerToFactoryToViews())[abstractManager][abstractFactory]
-                    .contains(this)) {
+               .contains(this)) {
         return connectNeeded;
     }
 
     if (m_viewToManagerToFactory()->contains(this) &&
-        (*m_viewToManagerToFactory())[this].contains(abstractManager)) {
+            (*m_viewToManagerToFactory())[this].contains(abstractManager)) {
         unsetFactoryForManager(abstractManager);
     }
 
@@ -1977,12 +1977,12 @@ bool QtAbstractPropertyBrowser::addFactory(QtAbstractPropertyManager *abstractMa
 void QtAbstractPropertyBrowser::unsetFactoryForManager(QtAbstractPropertyManager *manager)
 {
     if (!m_viewToManagerToFactory()->contains(this) ||
-        !(*m_viewToManagerToFactory())[this].contains(manager)) {
+            !(*m_viewToManagerToFactory())[this].contains(manager)) {
         return;
     }
 
     QtAbstractEditorFactoryBase *abstractFactory =
-                (*m_viewToManagerToFactory())[this][manager];
+        (*m_viewToManagerToFactory())[this][manager];
     (*m_viewToManagerToFactory())[this].remove(manager);
     if ((*m_viewToManagerToFactory())[this].isEmpty()) {
         (*m_viewToManagerToFactory()).remove(this);

@@ -41,7 +41,7 @@ public:
     /*! default constructor.
     \param model the model that will populate the view.*/
     explicit OpenedFilesWidget(GraphDocumentModel *model, QWidget* parent = 0);
-void selectDefaultFile();
+    void selectDefaultFile();
 signals:
     /*! when the active document changes, this signal is emmited.
     	\param document the new active document.

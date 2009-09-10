@@ -17,7 +17,7 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
- 
+
 #ifndef ADDEDGE_H
 #define ADDEDGE_H
 
@@ -27,16 +27,16 @@ class Node;
 class Graph;
 
 
-class URAddEdge : public QUndoCommand{
-  public:
+class URAddEdge : public QUndoCommand {
+public:
     URAddEdge(Edge *e);
     void redo();
     void undo();
-  private:
-   Edge *_edge;
-   Node *_from;
-   Node *_to;
-   Graph *_graph;
+private:
+    Edge *_edge;
+    Node *_from;
+    Node *_to;
+    Graph *_graph;
 };
 
 #endif

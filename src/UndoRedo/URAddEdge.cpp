@@ -22,17 +22,17 @@
 #include "graph.h"
 #include "edge.h"
 
-URAddEdge::URAddEdge(Edge *e){
-  _edge = e;
-  _from = e->from();
-  _to = e->to();
-  _graph = qobject_cast<Graph*>(e->parent());
+URAddEdge::URAddEdge(Edge *e) {
+    _edge = e;
+    _from = e->from();
+    _to = e->to();
+    _graph = qobject_cast<Graph*>(e->parent());
 }
 
-void URAddEdge::redo(){
-  _edge->remove();
+void URAddEdge::redo() {
+    _edge->remove();
 }
 
-void URAddEdge::undo(){
-  _graph->addEdge(_from, _to);
+void URAddEdge::undo() {
+    _graph->addEdge(_from, _to);
 }

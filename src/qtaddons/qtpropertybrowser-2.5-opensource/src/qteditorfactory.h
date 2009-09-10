@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 /****************************************************************************
@@ -105,7 +105,7 @@ public:
 protected:
     void connectPropertyManager(QtIntPropertyManager *manager);
     QWidget *createEditor(QtIntPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtIntPropertyManager *manager);
 private:
     QtSpinBoxFactoryPrivate *d_ptr;
@@ -129,7 +129,7 @@ public:
 protected:
     void connectPropertyManager(QtIntPropertyManager *manager);
     QWidget *createEditor(QtIntPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtIntPropertyManager *manager);
 private:
     QtSliderFactoryPrivate *d_ptr;
@@ -153,7 +153,7 @@ public:
 protected:
     void connectPropertyManager(QtIntPropertyManager *manager);
     QWidget *createEditor(QtIntPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtIntPropertyManager *manager);
 private:
     QtScrollBarFactoryPrivate *d_ptr;
@@ -177,7 +177,7 @@ public:
 protected:
     void connectPropertyManager(QtBoolPropertyManager *manager);
     QWidget *createEditor(QtBoolPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtBoolPropertyManager *manager);
 private:
     QtCheckBoxFactoryPrivate *d_ptr;
@@ -199,7 +199,7 @@ public:
 protected:
     void connectPropertyManager(QtDoublePropertyManager *manager);
     QWidget *createEditor(QtDoublePropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtDoublePropertyManager *manager);
 private:
     QtDoubleSpinBoxFactoryPrivate *d_ptr;
@@ -224,7 +224,7 @@ public:
 protected:
     void connectPropertyManager(QtStringPropertyManager *manager);
     QWidget *createEditor(QtStringPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtStringPropertyManager *manager);
 private:
     QtLineEditFactoryPrivate *d_ptr;
@@ -247,7 +247,7 @@ public:
 protected:
     void connectPropertyManager(QtDatePropertyManager *manager);
     QWidget *createEditor(QtDatePropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtDatePropertyManager *manager);
 private:
     QtDateEditFactoryPrivate *d_ptr;
@@ -255,7 +255,7 @@ private:
     Q_DISABLE_COPY(QtDateEditFactory)
     Q_PRIVATE_SLOT(d_func(), void slotPropertyChanged(QtProperty *, const QDate &))
     Q_PRIVATE_SLOT(d_func(), void slotRangeChanged(QtProperty *,
-                        const QDate &, const QDate &))
+                   const QDate &, const QDate &))
     Q_PRIVATE_SLOT(d_func(), void slotSetValue(const QDate &))
     Q_PRIVATE_SLOT(d_func(), void slotEditorDestroyed(QObject *))
 };
@@ -271,7 +271,7 @@ public:
 protected:
     void connectPropertyManager(QtTimePropertyManager *manager);
     QWidget *createEditor(QtTimePropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtTimePropertyManager *manager);
 private:
     QtTimeEditFactoryPrivate *d_ptr;
@@ -293,7 +293,7 @@ public:
 protected:
     void connectPropertyManager(QtDateTimePropertyManager *manager);
     QWidget *createEditor(QtDateTimePropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtDateTimePropertyManager *manager);
 private:
     QtDateTimeEditFactoryPrivate *d_ptr;
@@ -315,7 +315,7 @@ public:
 protected:
     void connectPropertyManager(QtKeySequencePropertyManager *manager);
     QWidget *createEditor(QtKeySequencePropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtKeySequencePropertyManager *manager);
 private:
     QtKeySequenceEditorFactoryPrivate *d_ptr;
@@ -337,7 +337,7 @@ public:
 protected:
     void connectPropertyManager(QtCharPropertyManager *manager);
     QWidget *createEditor(QtCharPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtCharPropertyManager *manager);
 private:
     QtCharEditorFactoryPrivate *d_ptr;
@@ -359,7 +359,7 @@ public:
 protected:
     void connectPropertyManager(QtEnumPropertyManager *manager);
     QWidget *createEditor(QtEnumPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtEnumPropertyManager *manager);
 private:
     QtEnumEditorFactoryPrivate *d_ptr;
@@ -367,9 +367,9 @@ private:
     Q_DISABLE_COPY(QtEnumEditorFactory)
     Q_PRIVATE_SLOT(d_func(), void slotPropertyChanged(QtProperty *, int))
     Q_PRIVATE_SLOT(d_func(), void slotEnumNamesChanged(QtProperty *,
-                        const QStringList &))
+                   const QStringList &))
     Q_PRIVATE_SLOT(d_func(), void slotEnumIconsChanged(QtProperty *,
-                        const QMap<int, QIcon> &))
+                   const QMap<int, QIcon> &))
     Q_PRIVATE_SLOT(d_func(), void slotSetValue(int))
     Q_PRIVATE_SLOT(d_func(), void slotEditorDestroyed(QObject *))
 };
@@ -385,7 +385,7 @@ public:
 protected:
     void connectPropertyManager(QtCursorPropertyManager *manager);
     QWidget *createEditor(QtCursorPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtCursorPropertyManager *manager);
 private:
     QtCursorEditorFactoryPrivate *d_ptr;
@@ -407,7 +407,7 @@ public:
 protected:
     void connectPropertyManager(QtColorPropertyManager *manager);
     QWidget *createEditor(QtColorPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtColorPropertyManager *manager);
 private:
     QtColorEditorFactoryPrivate *d_ptr;
@@ -429,7 +429,7 @@ public:
 protected:
     void connectPropertyManager(QtFontPropertyManager *manager);
     QWidget *createEditor(QtFontPropertyManager *manager, QtProperty *property,
-                QWidget *parent);
+                          QWidget *parent);
     void disconnectPropertyManager(QtFontPropertyManager *manager);
 private:
     QtFontEditorFactoryPrivate *d_ptr;

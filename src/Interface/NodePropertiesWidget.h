@@ -22,7 +22,7 @@
 */
 #include <QWidget>
 #include "ui_NodePropertiesWidget.h"
- 
+
 class GraphPropertiesModel;
 class QGraphicsItem;
 class Graph;
@@ -38,19 +38,19 @@ class NodePropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
 public:
     NodePropertiesWidget (MainWindow* parent = 0 );
     void setNode(NodeItem *n);
-    
+
 private slots:
-  void on__name_textChanged(const QString& s);
-  void on__value_textChanged(const QString& s);
-  void on__x_valueChanged(int i);
-  void on__y_valueChanged(int i);
-  void on__width_valueChanged(double i);
-  void on__color_activated(const QColor& c);
-  void on__showName_toggled(bool b);
-  void on__showValue_toggled(bool b);
-  void on__begin_toggled(bool b);
-  void on__end_toggled(bool b);
-  
+    void on__name_textChanged(const QString& s);
+    void on__value_textChanged(const QString& s);
+    void on__x_valueChanged(int i);
+    void on__y_valueChanged(int i);
+    void on__width_valueChanged(double i);
+    void on__color_activated(const QColor& c);
+    void on__showName_toggled(bool b);
+    void on__showValue_toggled(bool b);
+    void on__begin_toggled(bool b);
+    void on__end_toggled(bool b);
+
 private:
 
     Node *_node;

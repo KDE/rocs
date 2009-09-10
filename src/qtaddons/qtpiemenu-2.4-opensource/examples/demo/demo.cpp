@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 #include "demo.h"
@@ -52,7 +52,7 @@
 #include <QtGui/QMouseEvent>
 
 TextEditWithPieMenu::TextEditWithPieMenu(QWidget *parent, const char *name)
-    : QTextEdit(parent)
+        : QTextEdit(parent)
 {
     setObjectName(name);
 
@@ -78,7 +78,7 @@ TextEditWithPieMenu::TextEditWithPieMenu(QWidget *parent, const char *name)
     grammarMenu->insertItem(QIcon(QPixmap(":/icons/SWDN001.png")), this, SLOT(ignoreAction()));
 
     QtPieMenu *indiaMenu = new QtPieMenu(QIcon(QPixmap(":/icons/INDA001.png")),
-					 grammarMenu, "India menu");
+                                         grammarMenu, "India menu");
 
     indiaMenu->insertItem("Assamese", this, SLOT(ignoreAction()));
     indiaMenu->insertItem("Bengali", this, SLOT(ignoreAction()));
@@ -91,10 +91,10 @@ TextEditWithPieMenu::TextEditWithPieMenu(QWidget *parent, const char *name)
     indiaMenu->setFont(fon);
 
     QtPieMenu *norskMenu = new QtPieMenu(QIcon(QPixmap(":/icons/NORW001.png")),
-					 grammarMenu, "Grammar menu");
+                                         grammarMenu, "Grammar menu");
 
     norskMenu->insertItem("Nynorsk", this, SLOT(ignoreAction()));
-    norskMenu->insertItem("Bokmål", this, SLOT(ignoreAction()));
+    norskMenu->insertItem("Bokmï¿½l", this, SLOT(ignoreAction()));
     grammarMenu->insertItem(norskMenu);
 
     grammarMenu->insertItem(QIcon(QPixmap(":/icons/GERM001.png")), this, SLOT(ignoreAction()));
@@ -201,13 +201,13 @@ void Editor::doOpenDocument()
     QString s = QFileDialog::getOpenFileName(this, "Choose a file", ".", "All files (*)");
 
     if (s == "")
-    	return;
+        return;
 
     QFile f(s);
     if (f.open(QFile::ReadOnly)) {
-	    QByteArray arr = f.readAll();
+        QByteArray arr = f.readAll();
 
-	    edit->document()->setPlainText(QString(arr));
-	    f.close();
+        edit->document()->setPlainText(QString(arr));
+        f.close();
     }
 }

@@ -17,24 +17,24 @@
    along with Step; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
- 
+
 #include "URAddNode.h"
 #include "graph.h"
 #include "node.h"
 
-  
-URAddNode::URAddNode(Node *g){
-  _graph = qobject_cast<Graph*>(g->parent());
-  _node = g;
-  _pos.setX(_node->x());
-  _pos.setY(_node->y());
+
+URAddNode::URAddNode(Node *g) {
+    _graph = qobject_cast<Graph*>(g->parent());
+    _node = g;
+    _pos.setX(_node->x());
+    _pos.setY(_node->y());
 }
 
-void URAddNode::undo(){
-  _node->remove();
+void URAddNode::undo() {
+    _node->remove();
 }
 
-void URAddNode::redo(){
-  Node *n = _graph->addNode("Untitled");
-  n->setPos(_pos.x(), _pos.y());
+void URAddNode::redo() {
+    Node *n = _graph->addNode("Untitled");
+    n->setPos(_pos.x(), _pos.y());
 }

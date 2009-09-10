@@ -63,14 +63,14 @@ class Edge : public QObject {
 
     /*! this property holds the width of the edge */
     Q_PROPERTY(qreal width READ width WRITE setWidth);
-    
+
     /*! this property holds the style of the edge */
     Q_PROPERTY(QString style READ style WRITE setStyle);
-    
+
 public:
     /*! default constructor, an edge connects two nodes.
-    \p parent a Graph 
-    \p from the first node 
+    \p parent a Graph
+    \p from the first node
     \p to the second node */
     Edge(QObject *parent, Node *from, Node *to);
 
@@ -79,8 +79,8 @@ public:
 
     /*! relative index is the index that this edge has relative to the nodes that it's bound to.
     eg. if the nodes have 2 or more edges connecteds between them, it will have a unique
-    identifier relative to that nodes 
-    
+    identifier relative to that nodes
+
     \return the relativeIndex identifier.
     */
     int relativeIndex() const {
@@ -89,19 +89,19 @@ public:
 
     /*! remove this node from the graph */
     void remove();
-    
+
     bool showName();
     bool showValue();
     void hideName(bool b);
     void hideValue(bool b);
-    
+
 #ifdef USING_QTSCRIPT
-    /*! if the qtscript is enabled for this rocs, 
+    /*! if the qtscript is enabled for this rocs,
       this method returns the self-referenced script value for this edge.
       \return QScriptValue self reference for this node.
       */
     QScriptValue scriptValue() const;
-    
+
     /*! if qtscript is enabled for this rocs,
     this method will set the engine for this single object
     \p engine the QScriptEngine that will work on the object */
@@ -109,64 +109,93 @@ public:
 #endif
 
 public  slots:
-    /*! return the first node of this edge 
+    /*! return the first node of this edge
       \return Node* pointer for the first node of this edge.
     */
-    Node* from() const {  return _from; }
-    
-    /*! return the second node of this edge 
+    Node* from() const {
+        return _from;
+    }
+
+    /*! return the second node of this edge
       \return Node* pointer for the second node of this edge.
     */
-    Node* to() const {    return _to;   }
-    
-    /*! return the value of this edge 
+    Node* to() const {
+        return _to;
+    }
+
+    /*! return the value of this edge
     \return the value of the edge.
     */
-    const QString& value() const { return _value;  }
-    
-    /*! sets the value attribute of this edge 
+    const QString& value() const {
+        return _value;
+    }
+
+    /*! sets the value attribute of this edge
     \p s the new value of this edge.
     */
-    void setValue (const QString& s) { _value = s; emit updateNeeded(); }
-    
-    /*! returns the name attribute of the edge. 
+    void setValue (const QString& s) {
+        _value = s;
+        emit updateNeeded();
+    }
+
+    /*! returns the name attribute of the edge.
       \return the name of the edge.
     */
-    const QString& name() const { return _name;    }
-    
-    /*! sets the name attribute of the edge 
+    const QString& name() const {
+        return _name;
+    }
+
+    /*! sets the name attribute of the edge
       \p s the new name of this edge
     */
-    void setName (const QString& s) { _name = s;   emit updateNeeded();}
-    
-    /*! gets the color attribute of the edge 
+    void setName (const QString& s) {
+        _name = s;
+        emit updateNeeded();
+    }
+
+    /*! gets the color attribute of the edge
       \return the string value of the edge.
     */
-    const QString color() const { return _color;   }
-    
-    /*! sets the color attribute of the edge 
-      \p s the new color of the edge in the format "#000000" or by it's english name ("red" for example)
-    */ 
-    void setColor(const QString& s) { _color = s;  emit updateNeeded(); }
+    const QString color() const {
+        return _color;
+    }
 
-    qreal width () const { return _width;}
-    void setWidth(qreal w) { _width = w; emit updateNeeded(); }
-    
-    const QString& style() const{ return _style; }
-    void setStyle(const QString& s){ _style = s; emit updateNeeded(); } 
+    /*! sets the color attribute of the edge
+      \p s the new color of the edge in the format "#000000" or by it's english name ("red" for example)
+    */
+    void setColor(const QString& s) {
+        _color = s;
+        emit updateNeeded();
+    }
+
+    qreal width () const {
+        return _width;
+    }
+    void setWidth(qreal w) {
+        _width = w;
+        emit updateNeeded();
+    }
+
+    const QString& style() const {
+        return _style;
+    }
+    void setStyle(const QString& s) {
+        _style = s;
+        emit updateNeeded();
+    }
 #ifdef USING_QTSCRIPT
-    /*! this method can be used inside of the script interface. 
-    \return the first node of this edge. 
+    /*! this method can be used inside of the script interface.
+    \return the first node of this edge.
     */
     QScriptValue start();
-    
+
     /*! this method can be used inside of the script interface,
-    \return the last node of this edge 
+    \return the last node of this edge
     */
     QScriptValue end();
-    
+
     /*! this method can be used inside of the script interface,
-     it will remove this edge from the graph. 
+     it will remove this edge from the graph.
      */
     void self_remove();
 #endif
@@ -174,32 +203,32 @@ public  slots:
 private:
     /*! the first node connected with this edge */
     Node *_from;
-    
+
     /*! the second node connected with this edge */
     Node *_to;
-    
+
     /*! the intex relative to the connected nodes if the graph is multi-edge-oriented. */
     int _relativeIndex;
-    
+
     /*! the value of the node */
     QString _value;
-    
+
     /*! the value of the name */
     QString _name;
-    
+
     /*! the value of the color */
     QString _color;
-    
+
     bool _showName;
     bool _showValue;
-    
+
     QString _style;
     qreal _width;
 
 #ifdef USING_QTSCRIPT
     /*! if the script interface is Qt-Script, this will hold the scriptValue self-reference. */
     QScriptValue _scriptvalue;
-    
+
     /*! if the script interface is Qt-Script, this will hold  a pointer to the engine */
     QtScriptBackend *_engine;
 #endif
@@ -207,10 +236,10 @@ private:
 signals:
     /*! emmited when this edge is removed. */
     void removed();
-    
+
     /*! emmited when any of the 2 nodes connected using this edge moves it's position. */
     void posChanged();
-    
+
     void updateNeeded();
 };
 

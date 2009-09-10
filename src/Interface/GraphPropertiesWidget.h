@@ -22,7 +22,7 @@
 */
 #include <QWidget>
 #include "ui_GraphPropertiesWidget.h"
- 
+
 class GraphPropertiesModel;
 class QGraphicsItem;
 class Graph;
@@ -40,25 +40,25 @@ public:
     QRadioButton *radio() const;
 
 private slots:
-  void on__graphEdgeColorApplyNow_clicked();
-  void on__graphEdgeColor_activated(QColor c);
-  void on__graphName_textChanged(QString n);
-  void on__graphNodeColorApplyNow_clicked();
-  void on__graphNodeColor_activated(QColor c);
-  void on__graphDelete_clicked();
-  
-  void on__graphOriented_toggled(bool b);
-  void on__graphAutomate_toggled(bool b);
-  void on__activateGraph_toggled(bool b);
-  void on__showNodeNames_toggled(bool b);
-  void on__showEdgeNames_toggled(bool b);
-  void on__showNodeValues_toggled(bool b);
-  void on__showEdgeValues_toggled(bool b);
-  
+    void on__graphEdgeColorApplyNow_clicked();
+    void on__graphEdgeColor_activated(QColor c);
+    void on__graphName_textChanged(QString n);
+    void on__graphNodeColorApplyNow_clicked();
+    void on__graphNodeColor_activated(QColor c);
+    void on__graphDelete_clicked();
+
+    void on__graphOriented_toggled(bool b);
+    void on__graphAutomate_toggled(bool b);
+    void on__activateGraph_toggled(bool b);
+    void on__showNodeNames_toggled(bool b);
+    void on__showEdgeNames_toggled(bool b);
+    void on__showNodeValues_toggled(bool b);
+    void on__showEdgeValues_toggled(bool b);
+
 private:
 
     Graph *_graph;
     MainWindow *_mainWindow;
-    
+
 };
 #endif

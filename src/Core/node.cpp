@@ -49,24 +49,24 @@ void Node::empty(QList<Edge*> *list) {
     }
 }
 
-bool Node::showName(){
-  return _showName;
+bool Node::showName() {
+    return _showName;
 }
 
-bool Node::showValue(){
-  return _showValue;
+bool Node::showValue() {
+    return _showValue;
 }
 
-void Node::hideName(bool b){
-  _showName = b;
-  emit updateNeeded();
+void Node::hideName(bool b) {
+    _showName = b;
+    emit updateNeeded();
 }
 
-void Node::hideValue(bool b){
-  _showValue = b;
- emit updateNeeded();
+void Node::hideValue(bool b) {
+    _showValue = b;
+    emit updateNeeded();
 }
-    
+
 QList<Node*> Node::adjacent_nodes() const
 {
     QList<Node*> adjacent;
@@ -144,9 +144,15 @@ Edge* Node::addEdge(Node* to) {
 
 void Node::removeEdge(Edge *e, int edgeList) {
     switch (edgeList) {
-    case In  : removeEdge(e, &_in_edges); break;
-    case Out : removeEdge(e, &_out_edges); break;
-    case Self: removeEdge(e, &_self_edges); break;
+    case In  :
+        removeEdge(e, &_in_edges);
+        break;
+    case Out :
+        removeEdge(e, &_out_edges);
+        break;
+    case Self:
+        removeEdge(e, &_self_edges);
+        break;
     }
 }
 
@@ -186,8 +192,8 @@ void Node::remove() {
 //! Properties:
 void Node::setX(qreal x) {
     _x = x;
-    if (! _changing){
-      emit posChanged();
+    if (! _changing) {
+        emit posChanged();
     }
 }
 qreal Node::x() const {
@@ -195,24 +201,24 @@ qreal Node::x() const {
 }
 void Node::setY(qreal y) {
     _y  = y;
-    if (! _changing){
-      emit posChanged();
+    if (! _changing) {
+        emit posChanged();
     }
 }
 
 void Node::setWidth(qreal w) {
-  _width = w;
-    if (! _changing){
-      emit updateNeeded();
-      kDebug() << "Updating node drawing";
+    _width = w;
+    if (! _changing) {
+        emit updateNeeded();
+        kDebug() << "Updating node drawing";
     }
 }
 
 void Node::setPos(qreal x, qreal y) {
     _x = x;
     _y = y;
-    if (! _changing){
-      emit posChanged();
+    if (! _changing) {
+        emit posChanged();
     }
 }
 qreal Node::y() const {
@@ -220,13 +226,13 @@ qreal Node::y() const {
 }
 
 qreal Node::width() const {
-  return _width;
+    return _width;
 }
 
 void Node::setColor(const QString& s) {
     _color = s;
-    if (! _changing){
-      emit updateNeeded();
+    if (! _changing) {
+        emit updateNeeded();
     }
 }
 const QString& Node::color() const {
@@ -234,8 +240,8 @@ const QString& Node::color() const {
 }
 void Node::setName(const QString& s) {
     _name = s;
-    if (! _changing){
-      emit updateNeeded();
+    if (! _changing) {
+        emit updateNeeded();
     }
 }
 const QString& Node::name() const {
@@ -243,36 +249,36 @@ const QString& Node::name() const {
 }
 
 void Node::setBegin(bool begin) {
-  Graph *p = qobject_cast<Graph*>(parent());
-  
-  if (!begin) {
-    _begin = false;
-    p->setBegin(0);
-  }
-  else if (p->begin() == this){
-      return;
-  }
-  else{
-    p->setBegin(this);
-    _begin = true;
-  }
-  
-  if (! _changing){
-    emit updateNeeded();
-  }
+    Graph *p = qobject_cast<Graph*>(parent());
+
+    if (!begin) {
+        _begin = false;
+        p->setBegin(0);
+    }
+    else if (p->begin() == this) {
+        return;
+    }
+    else {
+        p->setBegin(this);
+        _begin = true;
+    }
+
+    if (! _changing) {
+        emit updateNeeded();
+    }
 }
 
 void Node::setEnd(bool end) {
     _end = end;
-    
+
     Graph *p = qobject_cast<Graph*>(QObject::parent());
     if (end) {
         p->addEnd(this);
     } else {
         p->removeEnd(this);
     }
-    if (! _changing){
-      emit updateNeeded();
+    if (! _changing) {
+        emit updateNeeded();
     }
 }
 
@@ -289,18 +295,18 @@ const QString& Node::value() const {
 }
 void  Node::setValue(const QString& s) {
     _value = s;
-    if (! _changing){
-      emit updateNeeded();
+    if (! _changing) {
+        emit updateNeeded();
     }
 }
 
-void Node::startChange(){
-  _changing = true;
+void Node::startChange() {
+    _changing = true;
 }
 
-void Node::endChange(){
-  _changing = false;
-  emit updateNeeded();
+void Node::endChange() {
+    _changing = false;
+    emit updateNeeded();
 }
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {

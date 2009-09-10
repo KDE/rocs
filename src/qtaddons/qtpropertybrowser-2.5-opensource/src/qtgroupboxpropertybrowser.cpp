@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 /****************************************************************************
@@ -109,7 +109,9 @@ public:
     void propertyRemoved(QtBrowserItem *index);
     void propertyChanged(QtBrowserItem *index);
     QWidget *createEditor(QtProperty *property, QWidget *parent) const
-        { return q_ptr->createEditor(property, parent); }
+    {
+        return q_ptr->createEditor(property, parent);
+    }
 
     void slotEditorDestroyed();
     void slotUpdate();
@@ -148,7 +150,7 @@ void QtGroupBoxPropertyBrowserPrivate::init(QWidget *parent)
     m_mainLayout = new QGridLayout();
     parent->setLayout(m_mainLayout);
     QLayoutItem *item = new QSpacerItem(0, 0,
-                QSizePolicy::Fixed, QSizePolicy::Expanding);
+                                        QSizePolicy::Fixed, QSizePolicy::Expanding);
     m_mainLayout->addItem(item, 0, 0);
 }
 
@@ -521,7 +523,7 @@ void QtGroupBoxPropertyBrowserPrivate::updateItem(WidgetItem *item)
     Creates a property browser with the given \a parent.
 */
 QtGroupBoxPropertyBrowser::QtGroupBoxPropertyBrowser(QWidget *parent)
-    : QtAbstractPropertyBrowser(parent)
+        : QtAbstractPropertyBrowser(parent)
 {
     d_ptr = new QtGroupBoxPropertyBrowserPrivate;
     d_ptr->q_ptr = this;

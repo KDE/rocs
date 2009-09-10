@@ -49,8 +49,8 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
         _topNode(0),
         _bottomNode(0),
         _leftNode(0),
-        _rightNode(0){
-   _scene = 0;
+        _rightNode(0) {
+    _scene = 0;
     _graphDocument = 0;
     _graph = 0;
     _mainWindow = parent;
@@ -73,7 +73,9 @@ QGraphicsView* GraphVisualEditor::view() const {
 }
 
 void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
-    if ( _graphDocument != 0 ) { releaseGraphDocument(); }
+    if ( _graphDocument != 0 ) {
+        releaseGraphDocument();
+    }
 
     _graphDocument = gd;
     _scene->setActiveGraphDocument( gd );

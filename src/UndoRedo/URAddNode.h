@@ -28,16 +28,16 @@
 class Graph;
 class Node;
 
-class URAddNode : public QUndoCommand{
-  public:
+class URAddNode : public QUndoCommand {
+public:
     URAddNode(Node *g);
     void undo();
     void redo();
 
-  private:
-   QPointF _pos;
-   Node *_node;
-   Graph *_graph;
+private:
+    QPointF _pos;
+    Node *_node;
+    Graph *_graph;
 };
- 
+
 #endif

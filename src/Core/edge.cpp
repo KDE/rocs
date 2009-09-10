@@ -41,7 +41,7 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
         to -> addInEdge(this);
     }
     connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(updateNeeded()));
-    
+
     _relativeIndex = _to -> edges(_from).size();
     _showName = true;
     _showValue = true;
@@ -65,27 +65,27 @@ void Edge::remove() {
     qobject_cast<Graph*>(QObject::parent())->remove(this);
 }
 
-    
-bool Edge::showName(){
+
+bool Edge::showName() {
     return _showName;
 }
 
-bool Edge::showValue(){
-  return _showValue;
+bool Edge::showValue() {
+    return _showValue;
 }
 
-void Edge::hideName(bool b){
-  _showName = b;
-  emit updateNeeded();
-  kDebug() << "Hide Name: " << b;
+void Edge::hideName(bool b) {
+    _showName = b;
+    emit updateNeeded();
+    kDebug() << "Hide Name: " << b;
 }
 
-void Edge::hideValue(bool b){
-  _showValue = b;
-  emit updateNeeded();
-  kDebug() << "Hide Value: " << b;
+void Edge::hideValue(bool b) {
+    _showValue = b;
+    emit updateNeeded();
+    kDebug() << "Hide Value: " << b;
 }
-    
+
 #ifdef USING_QTSCRIPT
 
 QScriptValue Edge::start() {

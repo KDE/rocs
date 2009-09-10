@@ -29,19 +29,19 @@ class Edge;
 
 class EdgePropertiesWidget : public QWidget, public Ui::EdgePropertiesWidget
 {
-  Q_OBJECT
-  public:
+    Q_OBJECT
+public:
     EdgePropertiesWidget();
     void setEdge(Edge *e);
-    
-  public slots:
+
+public slots:
     void on__name_textChanged(const QString& s);
     void on__value_textChanged(const QString& s);
     void on__color_activated(const QColor& c);
     void on__width_valueChanged(double v);
     void on__style_activated(const QString& s);
-    
-  private:
+
+private:
     Edge *_edge;
 };
 

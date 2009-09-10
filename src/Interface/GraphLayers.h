@@ -11,17 +11,17 @@ class QButtonGroup;
 class KLineEdit;
 class MainWindow;
 
-class GraphLayers : public QWidget{
-  Q_OBJECT
-  QButtonGroup *_buttonGroup;
-  KLineEdit *_lineEdit;
-  MainWindow *_mainWindow;
-  public:
+class GraphLayers : public QWidget {
+    Q_OBJECT
+    QButtonGroup *_buttonGroup;
+    KLineEdit *_lineEdit;
+    MainWindow *_mainWindow;
+public:
     GraphLayers(MainWindow *parent = 0);
     void populate();
-  public slots:
+public slots:
     void btnADDClicked();
-    
+
 };
 
 #endif

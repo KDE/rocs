@@ -29,51 +29,53 @@
 #include <QSize>
 
 
-TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(parent){
-  m_orientation = o;
-  m_layout = 0;
-  m_numOfTabs = 0;
-  m_tabs =  new KMultiTabBar((KMultiTabBar::KMultiTabBarPosition)o, this);
-  m_tabs->setStyle(KMultiTabBar::KDEV3ICON);
-  m_widgets = new QStackedWidget(this);
-  createLayout();
-}
-
-void TabWidget::createLayout(){
-  if (m_layout != 0){
-    delete m_layout;
+TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(parent) {
+    m_orientation = o;
     m_layout = 0;
-  }
- 
-  if ((m_orientation == TabOnLeft) || (m_orientation == TabOnRight) ){
-    m_layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
-  }
-  else{
-    m_layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
-  }
-  m_layout->setSizeConstraint(QLayout::SetMaximumSize);	
-  switch(m_orientation){
-    case TabOnLeft  : case TabOnTop:
-      m_layout->addWidget(m_tabs);
-      m_layout->addWidget(m_widgets);
-    break;
-    case TabOnRight : case TabOnBottom:
-      m_layout->addWidget(m_widgets);
-      m_layout->addWidget(m_tabs);
-    break;
-  }
+    m_numOfTabs = 0;
+    m_tabs =  new KMultiTabBar((KMultiTabBar::KMultiTabBarPosition)o, this);
+    m_tabs->setStyle(KMultiTabBar::KDEV3ICON);
+    m_widgets = new QStackedWidget(this);
+    createLayout();
 }
 
-void TabWidget::controlPanel(int index){
-  if ( m_widgets -> currentIndex() == index){
-    m_widgets ->setVisible(! m_widgets -> isVisible() );
-  }
-  else{
-    m_widgets->setCurrentIndex(index);
-    releaseButton(index);
-    emit widgetActivated(index);
-  }
-  kDebug() << "Widget Size:" << size();
+void TabWidget::createLayout() {
+    if (m_layout != 0) {
+        delete m_layout;
+        m_layout = 0;
+    }
+
+    if ((m_orientation == TabOnLeft) || (m_orientation == TabOnRight) ) {
+        m_layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
+    }
+    else {
+        m_layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
+    }
+    m_layout->setSizeConstraint(QLayout::SetMaximumSize);
+    switch (m_orientation) {
+    case TabOnLeft  :
+    case TabOnTop:
+        m_layout->addWidget(m_tabs);
+        m_layout->addWidget(m_widgets);
+        break;
+    case TabOnRight :
+    case TabOnBottom:
+        m_layout->addWidget(m_widgets);
+        m_layout->addWidget(m_tabs);
+        break;
+    }
+}
+
+void TabWidget::controlPanel(int index) {
+    if ( m_widgets -> currentIndex() == index) {
+        m_widgets ->setVisible(! m_widgets -> isVisible() );
+    }
+    else {
+        m_widgets->setCurrentIndex(index);
+        releaseButton(index);
+        emit widgetActivated(index);
+    }
+    kDebug() << "Widget Size:" << size();
 }
 
 void TabWidget::releaseButton(int index) {
@@ -85,18 +87,18 @@ void TabWidget::releaseButton(int index) {
     m_activeTab = index;
 }
 
-void TabWidget::addWidget(QWidget *w, const QString& text,const KIcon& icon){
-  m_widgets -> addWidget(w);
-  m_tabs -> appendTab(icon.pixmap(16), m_numOfTabs, text);
-  connect(m_tabs->tab(m_numOfTabs), SIGNAL(clicked(int)), this, SLOT(controlPanel(int)));
-  m_numOfTabs++;
+void TabWidget::addWidget(QWidget *w, const QString& text,const KIcon& icon) {
+    m_widgets -> addWidget(w);
+    m_tabs -> appendTab(icon.pixmap(16), m_numOfTabs, text);
+    connect(m_tabs->tab(m_numOfTabs), SIGNAL(clicked(int)), this, SLOT(controlPanel(int)));
+    m_numOfTabs++;
 }
 
-void TabWidget::addAction(KAction *a){
-  m_tabs -> appendTab( a->icon().pixmap(16), m_numOfTabs+m_numOfActions, a->text());
-  connect(m_tabs->tab(m_numOfTabs+m_numOfActions), SIGNAL(clicked(int)), a, SLOT(trigger()));
-  connect(m_tabs->tab(m_numOfTabs+m_numOfActions), SIGNAL(clicked(int)), this, SLOT(releaseActionButton(int)));
-   a->trigger();
+void TabWidget::addAction(KAction *a) {
+    m_tabs -> appendTab( a->icon().pixmap(16), m_numOfTabs+m_numOfActions, a->text());
+    connect(m_tabs->tab(m_numOfTabs+m_numOfActions), SIGNAL(clicked(int)), a, SLOT(trigger()));
+    connect(m_tabs->tab(m_numOfTabs+m_numOfActions), SIGNAL(clicked(int)), this, SLOT(releaseActionButton(int)));
+    a->trigger();
 }
 
 void TabWidget::releaseActionButton(int index) {

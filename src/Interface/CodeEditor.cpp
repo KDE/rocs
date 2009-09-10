@@ -10,7 +10,7 @@
 #include <KParts/ReadOnlyPart>
 #include <KFileDialog>
 
-CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent){
+CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent) {
     _layout = new QHBoxLayout();
     _editor = KTextEditor::EditorChooser::editor();
     _docView = 0;
@@ -24,48 +24,49 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent){
     setLayout(_layout);
 }
 
-void CodeEditor::newScript(){
-  if (_docView){ 
-    _layout->removeWidget(_docView);
-    delete _docView; _docView = 0; 
-  }
-  if (_scriptDoc){
-    delete _scriptDoc; 
-    _scriptDoc =0; 
-  }
-  
-  _scriptDoc = _editor->createDocument(0);
-   #ifdef USING_QTSCRIPT
-   _scriptDoc->setMode("JavaScript");	
-  #endif
-  _docView = qobject_cast<KTextEditor::View*>(_scriptDoc->createView(this));
-  _layout->addWidget(_docView);
-  kDebug() << "New script created.";
+void CodeEditor::newScript() {
+    if (_docView) {
+        _layout->removeWidget(_docView);
+        delete _docView;
+        _docView = 0;
+    }
+    if (_scriptDoc) {
+        delete _scriptDoc;
+        _scriptDoc =0;
+    }
+
+    _scriptDoc = _editor->createDocument(0);
+#ifdef USING_QTSCRIPT
+    _scriptDoc->setMode("JavaScript");
+#endif
+    _docView = qobject_cast<KTextEditor::View*>(_scriptDoc->createView(this));
+    _layout->addWidget(_docView);
+    kDebug() << "New script created.";
 }
 
-void CodeEditor::saveScript(){
-  if ((!_docView) ||  (!_scriptDoc)){
-    return;
-  }
-  
-  _scriptDoc->documentSave();
+void CodeEditor::saveScript() {
+    if ((!_docView) ||  (!_scriptDoc)) {
+        return;
+    }
+
+    _scriptDoc->documentSave();
 }
 
-void CodeEditor::openScript(){
- _scriptDoc->openUrl(KFileDialog::getOpenUrl() );
-  #ifdef USING_QTSCRIPT
-   _scriptDoc->setMode("JavaScript");	
-  #endif
+void CodeEditor::openScript() {
+    _scriptDoc->openUrl(KFileDialog::getOpenUrl() );
+#ifdef USING_QTSCRIPT
+    _scriptDoc->setMode("JavaScript");
+#endif
 }
 
-void CodeEditor::saveScriptAs(){
-  if ((!_docView) ||  (!_scriptDoc)){
-    return;
-  }
-  
-  _scriptDoc->documentSaveAs();
+void CodeEditor::saveScriptAs() {
+    if ((!_docView) ||  (!_scriptDoc)) {
+        return;
+    }
+
+    _scriptDoc->documentSaveAs();
 }
-      
-const char* CodeEditor::text() const{
-  return _docView->document()->text().toAscii();
+
+const char* CodeEditor::text() const {
+    return _docView->document()->text().toAscii();
 }

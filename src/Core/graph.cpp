@@ -45,11 +45,11 @@ Graph::~Graph() {
     }
 }
 
-GraphDocument *Graph::document() const{
-  return _document;
+GraphDocument *Graph::document() const {
+    return _document;
 }
 
-void Graph::remove(){
+void Graph::remove() {
 
 }
 
@@ -217,26 +217,26 @@ void Graph::removeEnd(Node *n) {
     _ends.removeAll(n);
 }
 
-void Graph::setNodeDefaultColor(const QString& color){
+void Graph::setNodeDefaultColor(const QString& color) {
     _nodeDefaultColor = color;
 }
 
-const QString& Graph::nodeDefaultColor() const{
-  return _nodeDefaultColor;
+const QString& Graph::nodeDefaultColor() const {
+    return _nodeDefaultColor;
 }
-    
-void Graph::setEdgeDefaultColor(const QString& color){
-  _edgeDefaultColor = color;
+
+void Graph::setEdgeDefaultColor(const QString& color) {
+    _edgeDefaultColor = color;
 }
-const QString& Graph::edgeDefaultColor() const{
-  return _edgeDefaultColor;
+const QString& Graph::edgeDefaultColor() const {
+    return _edgeDefaultColor;
 }
-    
-void Graph::setAutomate(bool b){
-  _automate = b;
+
+void Graph::setAutomate(bool b) {
+    _automate = b;
 }
-bool Graph::automate(){
-  return _automate;
+bool Graph::automate() {
+    return _automate;
 }
 
 #ifdef USING_QTSCRIPT
@@ -266,7 +266,7 @@ void Graph::setEngine(	QtScriptBackend *engine ) {
 
     if (! _name.isEmpty() ) {
         _engine->globalObject().setProperty(_name, _value);
-	kDebug() << _name << "Added as global object.";
+        kDebug() << _name << "Added as global object.";
     }
 
     foreach(Node *n, _nodes) {

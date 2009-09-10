@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 #include "mainwindow.h"
@@ -79,17 +79,17 @@ void CanvasView::handleMouseClickEvent(QMouseEvent* event)
 void CanvasView::contentsMouseMoveEvent(QMouseEvent* event)
 {
     if (moving) {
-	QPoint p = inverseWorldMatrix().map(event->pos());
-	moving->moveBy(p.x() - moving_start.x(), p.y() - moving_start.y());
-	moving_start = p;
-	canvas()->update();
+        QPoint p = inverseWorldMatrix().map(event->pos());
+        moving->moveBy(p.x() - moving_start.x(), p.y() - moving_start.y());
+        moving_start = p;
+        canvas()->update();
         emit itemMoved(moving);
     }
 }
 
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+        : QMainWindow(parent)
 {
     QMenu *editMenu = menuBar()->addMenu(tr("Edit"));
     QMenu *newObjectMenu = editMenu->addMenu(tr("New Object"));
@@ -130,17 +130,17 @@ MainWindow::MainWindow(QWidget *parent)
     sizeManager = new QtSizePropertyManager(this);
 
     connect(doubleManager, SIGNAL(valueChanged(QtProperty *, double)),
-                this, SLOT(valueChanged(QtProperty *, double)));
+            this, SLOT(valueChanged(QtProperty *, double)));
     connect(stringManager, SIGNAL(valueChanged(QtProperty *, const QString &)),
-                this, SLOT(valueChanged(QtProperty *, const QString &)));
+            this, SLOT(valueChanged(QtProperty *, const QString &)));
     connect(colorManager, SIGNAL(valueChanged(QtProperty *, const QColor &)),
-                this, SLOT(valueChanged(QtProperty *, const QColor &)));
+            this, SLOT(valueChanged(QtProperty *, const QColor &)));
     connect(fontManager, SIGNAL(valueChanged(QtProperty *, const QFont &)),
-                this, SLOT(valueChanged(QtProperty *, const QFont &)));
+            this, SLOT(valueChanged(QtProperty *, const QFont &)));
     connect(pointManager, SIGNAL(valueChanged(QtProperty *, const QPoint &)),
-                this, SLOT(valueChanged(QtProperty *, const QPoint &)));
+            this, SLOT(valueChanged(QtProperty *, const QPoint &)));
     connect(sizeManager, SIGNAL(valueChanged(QtProperty *, const QSize &)),
-                this, SLOT(valueChanged(QtProperty *, const QSize &)));
+            this, SLOT(valueChanged(QtProperty *, const QSize &)));
 
     QtDoubleSpinBoxFactory *doubleSpinBoxFactory = new QtDoubleSpinBoxFactory(this);
     QtCheckBoxFactory *checkBoxFactory = new QtCheckBoxFactory(this);
@@ -237,7 +237,7 @@ void MainWindow::fillView()
 QtCanvasItem *MainWindow::addRectangle()
 {
     QtCanvasPolygonalItem *item = new QtCanvasRectangle(rand() % canvas->width(),
-                rand() % canvas->height(), 50, 50, canvas);
+            rand() % canvas->height(), 50, 50, canvas);
     int z = rand() % 256;
     item->setBrush(QColor(rand() % 32 * 8, rand() % 32 * 8, rand() % 32 * 8));
     item->setPen(QPen(QColor(rand() % 32*8, rand() % 32*8, rand() % 32*8), 4));
@@ -260,7 +260,7 @@ QtCanvasItem *MainWindow::addLine()
 {
     QtCanvasLine *item = new QtCanvasLine(canvas);
     item->setPoints(0, 0, rand() % canvas->width() - canvas->width() / 2,
-                rand() % canvas->height() - canvas->height() / 2);
+                    rand() % canvas->height() - canvas->height() / 2);
     item->move(rand() % canvas->width(), rand() % canvas->height());
     item->setPen(QPen(QColor(rand() % 32*8, rand() % 32*8, rand() % 32*8), 6));
     item->setZ(rand() % 256);

@@ -55,8 +55,8 @@ public:
     Edge* edge() {
         return _edge;
     }
-    
- protected:
+
+protected:
     /*! when there's a mouse click on the node, this method is invocked
       \param event the mouse object
     */
@@ -78,8 +78,8 @@ private:
     QPainterPath createCurves() const;
     QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const;
     QPainterPath createLoop(QPointF pos) const;
-    void connectSignals(); 
-    
+    void connectSignals();
+
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;
 };

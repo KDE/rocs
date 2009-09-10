@@ -66,17 +66,17 @@ public slots:
 private:
     /*! pointer to the node that suffered the mouse-click */
     NodeItem *_nodeFrom;
-    
+
     /*! pointer to the node that suffered the mouse-release-click */
     NodeItem *_nodeTo;
-    
+
     /*! a temporary line that will connect the two Nodes. */
     QGraphicsLineItem *_tmpLine;
-    
+
     /*! the point of the first click while adding a new edge */
     QPointF _startPos;
-    
-    /*! this boolean is true when we are actually adding a new edge, 
+
+    /*! this boolean is true when we are actually adding a new edge,
     false when we are not. */
     bool _working;
 };

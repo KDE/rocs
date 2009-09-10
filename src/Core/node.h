@@ -63,7 +63,7 @@ public:
     bool showValue();
     void hideName(bool b);
     void hideValue(bool b);
-    
+
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
     void setEngine(	QtScriptBackend *_engine );
@@ -124,10 +124,10 @@ private:
     bool _end;
     QString _value;
     bool _changing;
-    
+
     bool _showName;
     bool _showValue;
-    
+
 #ifdef USING_QTSCRIPT
     QScriptValue _scriptvalue;
     QtScriptBackend *_engine;

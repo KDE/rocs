@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 /****************************************************************************
@@ -170,7 +170,7 @@ public:
 Q_SIGNALS:
 
     void propertyInserted(QtProperty *property,
-                QtProperty *parent, QtProperty *after);
+                          QtProperty *parent, QtProperty *after);
     void propertyChanged(QtProperty *property);
     void propertyRemoved(QtProperty *property, QtProperty *parent);
     void propertyDestroyed(QtProperty *property);
@@ -195,7 +195,7 @@ public:
     virtual QWidget *createEditor(QtProperty *property, QWidget *parent) = 0;
 protected:
     explicit QtAbstractEditorFactoryBase(QObject *parent = 0)
-        : QObject(parent) {}
+            : QObject(parent) {}
 
     virtual void breakConnection(QtAbstractPropertyManager *manager) = 0;
 protected Q_SLOTS:
@@ -227,14 +227,14 @@ public:
         m_managers.insert(manager);
         connectPropertyManager(manager);
         connect(manager, SIGNAL(destroyed(QObject *)),
-                    this, SLOT(managerDestroyed(QObject *)));
+                this, SLOT(managerDestroyed(QObject *)));
     }
     void removePropertyManager(PropertyManager *manager)
     {
         if (!m_managers.contains(manager))
             return;
         disconnect(manager, SIGNAL(destroyed(QObject *)),
-                    this, SLOT(managerDestroyed(QObject *)));
+                   this, SLOT(managerDestroyed(QObject *)));
         disconnectPropertyManager(manager);
         m_managers.remove(manager);
     }
@@ -257,7 +257,7 @@ public:
 protected:
     virtual void connectPropertyManager(PropertyManager *manager) = 0;
     virtual QWidget *createEditor(PropertyManager *manager, QtProperty *property,
-                QWidget *parent) = 0;
+                                  QWidget *parent) = 0;
     virtual void disconnectPropertyManager(PropertyManager *manager) = 0;
     void managerDestroyed(QObject *manager)
     {
@@ -322,7 +322,7 @@ public:
 
     template <class PropertyManager>
     void setFactoryForManager(PropertyManager *manager,
-                    QtAbstractEditorFactory<PropertyManager> *factory) {
+                              QtAbstractEditorFactory<PropertyManager> *factory) {
         QtAbstractPropertyManager *abstractManager = manager;
         QtAbstractEditorFactoryBase *abstractFactory = factory;
 
@@ -355,15 +355,15 @@ protected:
 private:
 
     bool addFactory(QtAbstractPropertyManager *abstractManager,
-                QtAbstractEditorFactoryBase *abstractFactory);
+                    QtAbstractEditorFactoryBase *abstractFactory);
 
     QtAbstractPropertyBrowserPrivate *d_ptr;
     Q_DECLARE_PRIVATE(QtAbstractPropertyBrowser)
     Q_DISABLE_COPY(QtAbstractPropertyBrowser)
     Q_PRIVATE_SLOT(d_func(), void slotPropertyInserted(QtProperty *,
-                            QtProperty *, QtProperty *))
+                   QtProperty *, QtProperty *))
     Q_PRIVATE_SLOT(d_func(), void slotPropertyRemoved(QtProperty *,
-                            QtProperty *))
+                   QtProperty *))
     Q_PRIVATE_SLOT(d_func(), void slotPropertyDestroyed(QtProperty *))
     Q_PRIVATE_SLOT(d_func(), void slotPropertyDataChanged(QtProperty *))
 

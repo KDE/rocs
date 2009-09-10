@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 #include "qtpieitem.h"
@@ -274,8 +274,8 @@ static MouseButtonStatus mouseButtonStatus = Released;
     constructor. The object name is set to the \a name argument.
 */
 QtPieMenu::QtPieMenu(const QString &text, QWidget *parent, const char *name,
-                             uint innerRadius, uint outerRadius)
-      :  QtPieItem(text, 1, parent),
+                     uint innerRadius, uint outerRadius)
+        :  QtPieItem(text, 1, parent),
         pix(outerRadius * 2 + 1, outerRadius * 2 + 1), hoverTimer(this),
         innerRad(innerRadius), outerRad(outerRadius)
 {
@@ -295,9 +295,9 @@ QtPieMenu::QtPieMenu(const QString &text, QWidget *parent, const char *name,
 */
 QtPieMenu::QtPieMenu(const QIcon &icon, QWidget *parent, const char *name,
                      uint innerRadius, uint outerRadius)
-             : QtPieItem(icon, QString(), 1, parent),
-               pix(outerRadius * 2 + 1, outerRadius * 2 + 1), hoverTimer(this),
-               innerRad(innerRadius), outerRad(outerRadius)
+        : QtPieItem(icon, QString(), 1, parent),
+        pix(outerRadius * 2 + 1, outerRadius * 2 + 1), hoverTimer(this),
+        innerRad(innerRadius), outerRad(outerRadius)
 
 {
     init(name);
@@ -316,9 +316,9 @@ QtPieMenu::QtPieMenu(const QIcon &icon, QWidget *parent, const char *name,
 */
 QtPieMenu::QtPieMenu(const QIcon &icon, const QString &text, QWidget *parent,
                      const char *name, uint innerRadius, uint outerRadius)
-             : QtPieItem(icon, text, 1, parent),
-                pix(outerRadius * 2 + 1, outerRadius * 2 + 1), hoverTimer(this),
-                innerRad(innerRadius), outerRad(outerRadius)
+        : QtPieItem(icon, text, 1, parent),
+        pix(outerRadius * 2 + 1, outerRadius * 2 + 1), hoverTimer(this),
+        innerRad(innerRadius), outerRad(outerRadius)
 {
     init(name);
 }
@@ -583,9 +583,9 @@ void QtPieMenu::popup(const QPoint &pos)
         y = screenGeometry.top();
 
     if (x + sizeHint().width() > screenGeometry.right())
-            x = screenGeometry.right() - sizeHint().width();
+        x = screenGeometry.right() - sizeHint().width();
     if (y + sizeHint().height() > screenGeometry.bottom())
-            y = screenGeometry.bottom() - sizeHint().height();
+        y = screenGeometry.bottom() - sizeHint().height();
 
     move(x, y);
     reposition();
@@ -645,7 +645,7 @@ void QtPieMenu::insertItem(QtPieMenu *item, int index)
 {
     // Out of bounds indexes are treated as appends.
     if (index < 0 || index > items.size())
-            index = items.size();
+        index = items.size();
 
     items.insert(index, item);
 
@@ -677,7 +677,7 @@ void QtPieMenu::insertItem(const QString &text, QObject *receiver,
 
     // Out of bounds indexes are treated as appends.
     if (index < 0 || index > int(items.size()))
-            index = items.size();
+        index = items.size();
 
     items.insert(index, action);
 }
@@ -702,7 +702,7 @@ void QtPieMenu::insertItem(const QIcon &icon, QObject *receiver, const char *mem
 
     // Out of bounds indexes are treated as appends.
     if (index < 0 || index > int(items.size()))
-            index = items.size();
+        index = items.size();
 
     items.insert(index, action);
 }
@@ -731,7 +731,7 @@ void QtPieMenu::insertItem(const QIcon &icons, const QString &text,
 
     // Out of bounds indexes are treated as appends.
     if (index < 0 || index > int(items.size()))
-            index = items.size();
+        index = items.size();
 
     items.insert(index, action);
 }
@@ -793,9 +793,9 @@ QtPieMenu *QtPieMenu::subMenuAt(int index) const
 void QtPieMenu::removeItemAt(int index)
 {
     if (index >= int(items.size()) || index < 0) {
-            qWarning("Attempt to remove item %i from QtPieMenu with %i items.",
-                    index, items.size());
-            return;
+        qWarning("Attempt to remove item %i from QtPieMenu with %i items.",
+                 index, items.size());
+        return;
     }
 
     deleteItems(index);
@@ -859,36 +859,36 @@ void QtPieMenu::keyPressEvent(QKeyEvent *e)
     case Qt::Key_Right:
     case Qt::Key_Down:
     case Qt::Key_Tab:
-            --hItem;
-            if (hItem < 0)
-                hItem += items.size();
-            update();
-            break;
+        --hItem;
+        if (hItem < 0)
+            hItem += items.size();
+        update();
+        break;
     case Qt::Key_Left:
     case Qt::Key_Up:
     case Qt::Key_Backtab:
-            ++hItem;
-            if (hItem >= char(items.size()))
-                hItem -= items.size();
-            update();
-            break;
+        ++hItem;
+        if (hItem >= char(items.size()))
+            hItem -= items.size();
+        update();
+        break;
     case Qt::Key_Return:
     case Qt::Key_Enter:
     case Qt::Key_Space:
-            motion = 0;
-            activateItem(KeyPress);
-            if (shownSubMenu != -1) {
-                ((QtPieMenu *)shownItemPtr())->setHighlightedItem(0);
-            }
+        motion = 0;
+        activateItem(KeyPress);
+        if (shownSubMenu != -1) {
+            ((QtPieMenu *)shownItemPtr())->setHighlightedItem(0);
+        }
 
-            break;
+        break;
     case Qt::Key_Escape:
     case Qt::Key_Backspace:
-        {
-            emit aboutToHide();
-            hide();
-        }
-            break;
+    {
+        emit aboutToHide();
+        hide();
+    }
+    break;
     default:
         break;
     }
@@ -911,7 +911,7 @@ void QtPieMenu::mousePressEvent(QMouseEvent *e)
     double mouserad = sqrt(mousexdist * mousexdist + mouseydist * mouseydist);
     double mouseAngle = acos(mousexdist / mouserad);
     if (mouseydist >= 0)
-            mouseAngle = TWOPI - mouseAngle;
+        mouseAngle = TWOPI - mouseAngle;
     hItem = indexAt(lastMousePos);
 
     if (shaded &&  shownSubMenu != hItem)
@@ -933,12 +933,12 @@ void QtPieMenu::mouseReleaseEvent(QMouseEvent *e)
     // Solve the case where a submenu is canceled by clicking inside
     // the cancel zone, and the next mouse release comes to us.
     if (ignoreNextMouseReleaseIfNotDragging) {
-            ignoreNextMouseReleaseIfNotDragging = false;
+        ignoreNextMouseReleaseIfNotDragging = false;
 
-            if (!dragging()) {
-                mouseButtonStatus = Released;
-                return;
-            }
+        if (!dragging()) {
+            mouseButtonStatus = Released;
+            return;
+        }
     }
 
     lastMousePos = mapFromGlobal(e->globalPos());
@@ -982,23 +982,23 @@ void QtPieMenu::mouseMoveEvent(QMouseEvent *e)
     if (mouseRad >= innerRad && (shownSubMenu != -1 || (mouseRad <= outerRad || dragging()))) {
         hItem = indexAt(lastMousePos);
     } else {
-            if (mouseRad < innerRad)
-                hItem = -1;
-            else
-                hItem = -2;
+        if (mouseRad < innerRad)
+            hItem = -1;
+        else
+            hItem = -2;
     }
 
     // If highlight changes, order an update.
     if (prevHighlightedItem != hItem) {
-            emit highlighted(hItem);
-            update();
+        emit highlighted(hItem);
+        update();
 
-            // And in this case, if we are in dragging mode, start the
-            // timer so that in case the highlighted item is a submenu, it
-            // will pop up in 0.25 seconds. If the mouse hovers over an
-            // action item, any shown submenu is closed.
+        // And in this case, if we are in dragging mode, start the
+        // timer so that in case the highlighted item is a submenu, it
+        // will pop up in 0.25 seconds. If the mouse hovers over an
+        // action item, any shown submenu is closed.
         hoverTimer.setSingleShot(true);
-            hoverTimer.start(250);
+        hoverTimer.start(250);
 
     }
 
@@ -1006,8 +1006,8 @@ void QtPieMenu::mouseMoveEvent(QMouseEvent *e)
     // the mouse has moved far enough away from the pie. This allows
     // more snappy response as we do not have to wait 250ms.
     if (highlightedItemPtr() && highlightedItemPtr()->type() == SubMenu && mouseRad > outerRad && dragging()) {
-            hoverTimer.stop();
-            activateItem(Hovering | Dragging);
+        hoverTimer.stop();
+        activateItem(Hovering | Dragging);
     }
 }
 
@@ -1021,13 +1021,13 @@ void QtPieMenu::showEvent(QShowEvent *e)
     emit aboutToShow();
 
     if (!hasMask) {
-            // Create mask.
-            QBitmap mask(pix.size());
-            mask.fill(Qt::color0);
-            generateMask(&mask);
-            pix.setMask(mask);
-            setMask(mask);
-            hasMask = true;
+        // Create mask.
+        QBitmap mask(pix.size());
+        mask.fill(Qt::color0);
+        generateMask(&mask);
+        pix.setMask(mask);
+        setMask(mask);
+        hasMask = true;
     }
 
     // motion is used to detect dragging.
@@ -1042,10 +1042,10 @@ void QtPieMenu::showEvent(QShowEvent *e)
     if (rad >= innerRad && rad <= outerRad) {
         hItem = angleToIndex(angleAt(lastMousePos), items.size());
     } else {
-            if (rad < innerRad)
-                hItem = -1;
-            else
-                hItem = -2;
+        if (rad < innerRad)
+            hItem = -1;
+        else
+            hItem = -2;
     }
 
     QWidget::showEvent(e);
@@ -1482,8 +1482,8 @@ void QtPieMenu::paintEvent(QPaintEvent *)
         int textWidth = boundingRect.width();
 
         QPixmap icon = items.at(i)->icon().pixmap(QSize(32, 32),
-                                                  QIcon::Normal,
-                                                  QIcon::On);
+                       QIcon::Normal,
+                       QIcon::On);
         int x = pix.rect().center().x();
         int y = pix.rect().center().y();
 
@@ -1670,7 +1670,7 @@ double QtPieMenu::indexToAngle(int item, int total, bool shifted)
             rad += double(items.at(index)->weight()) * baseAngle;
     }
 
-        // Adjust accordingly.
+    // Adjust accordingly.
     while (rad > TWOPI)
         rad -= TWOPI;
 
@@ -1754,7 +1754,7 @@ double QtPieMenu::angleAt(const QPoint &pos) const
     double mouserad = sqrt(mousexdist * mousexdist + mouseydist * mouseydist);
     double angle = acos(mousexdist / mouserad);
     if (mouseydist >= 0)
-            angle = TWOPI - angle;
+        angle = TWOPI - angle;
 
     return angle;
 }
@@ -1776,18 +1776,18 @@ bool QtPieMenu::dragging() const
 void QtPieMenu::hideShownSubMenu()
 {
     if (shownSubMenu != -1) {
-            QtPieMenu *menu = static_cast<QtPieMenu *>(items[shownSubMenu]);
-            if (!menu) {
-                // ### Dead code
-                return;
-            }
+        QtPieMenu *menu = static_cast<QtPieMenu *>(items[shownSubMenu]);
+        if (!menu) {
+            // ### Dead code
+            return;
+        }
 
         emit menu->aboutToHide();
         menu->hide();
 
-            shownSubMenu = -1;
-            shaded = false;
-            update();
+        shownSubMenu = -1;
+        shaded = false;
+        update();
     }
 }
 
@@ -1836,9 +1836,9 @@ QtPieItem *QtPieMenu::highlightedItemPtr()
 QtPieItem *QtPieMenu::shownItemPtr()
 {
     if (shownSubMenu == -1)
-            return 0;
+        return 0;
     else
-            return items[shownSubMenu];
+        return items[shownSubMenu];
 }
 
 /*!

@@ -55,7 +55,7 @@ public:
         return _edge;
     }
 
-  //  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
+    //  void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *);
 protected:
 
 

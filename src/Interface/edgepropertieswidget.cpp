@@ -20,13 +20,13 @@
 #include "edgepropertieswidget.h"
 #include "edge.h"
 
-EdgePropertiesWidget::EdgePropertiesWidget(): QWidget(0){
-  setupUi(this);
+EdgePropertiesWidget::EdgePropertiesWidget(): QWidget(0) {
+    setupUi(this);
 }
 
-void EdgePropertiesWidget::setEdge(Edge *e){
-  _edge = e;
-  _name->setText("Weeee");
+void EdgePropertiesWidget::setEdge(Edge *e) {
+    _edge = e;
+    _name->setText("Weeee");
 //   _name->setText(_edge->name());
 //   _value->setText(_edge->value());
 //   _color->setColor(_edge->color());
@@ -34,22 +34,22 @@ void EdgePropertiesWidget::setEdge(Edge *e){
 //   _style->setCurrentItem("Solid");
 }
 
-void EdgePropertiesWidget::on__name_textChanged(const QString& s){
-  _edge->setName(s);
+void EdgePropertiesWidget::on__name_textChanged(const QString& s) {
+    _edge->setName(s);
 }
 
-void EdgePropertiesWidget::on__value_textChanged(const QString& s){
-  _edge->setValue(s);
+void EdgePropertiesWidget::on__value_textChanged(const QString& s) {
+    _edge->setValue(s);
 }
 
-void EdgePropertiesWidget::on__color_activated(const QColor& c){
-  _edge->setColor(c.name());
+void EdgePropertiesWidget::on__color_activated(const QColor& c) {
+    _edge->setColor(c.name());
 }
 
-void EdgePropertiesWidget::on__width_valueChanged(double v){
-  //_edge->setWidth(v);
+void EdgePropertiesWidget::on__width_valueChanged(double v) {
+    //_edge->setWidth(v);
 }
 
-void EdgePropertiesWidget::on__style_activated(const QString& s){
-  //_edge->setStyle(s);
+void EdgePropertiesWidget::on__style_activated(const QString& s) {
+    //_edge->setStyle(s);
 }

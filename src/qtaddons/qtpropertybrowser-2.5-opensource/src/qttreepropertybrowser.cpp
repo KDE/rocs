@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 /****************************************************************************
@@ -117,7 +117,9 @@ public:
     void propertyRemoved(QtBrowserItem *index);
     void propertyChanged(QtBrowserItem *index);
     QWidget *createEditor(QtProperty *property, QWidget *parent) const
-        { return q_ptr->createEditor(property, parent); }
+    {
+        return q_ptr->createEditor(property, parent);
+    }
     QtProperty *indexToProperty(const QModelIndex &index) const;
     QTreeWidgetItem *indexToItem(const QModelIndex &index) const;
     QtBrowserItem *indexToBrowserItem(const QModelIndex &index) const;
@@ -131,8 +133,12 @@ public:
 
     QColor calculatedBackgroundColor(QtBrowserItem *item) const;
 
-    QtPropertyEditorView *treeWidget() const { return m_treeWidget; }
-    bool markPropertiesWithoutValue() const { return m_markPropertiesWithoutValue; }
+    QtPropertyEditorView *treeWidget() const {
+        return m_treeWidget;
+    }
+    bool markPropertiesWithoutValue() const {
+        return m_markPropertiesWithoutValue;
+    }
 
     QtBrowserItem *currentItem() const;
     void setCurrentItem(QtBrowserItem *browserItem, bool block);
@@ -169,10 +175,14 @@ public:
     QtPropertyEditorView(QWidget *parent = 0);
 
     void setEditorPrivate(QtTreePropertyBrowserPrivate *editorPrivate)
-        { m_editorPrivate = editorPrivate; }
+    {
+        m_editorPrivate = editorPrivate;
+    }
 
     QTreeWidgetItem *indexToItem(const QModelIndex &index) const
-        { return itemFromIndex(index); }
+    {
+        return itemFromIndex(index);
+    }
 
 protected:
     void keyPressEvent(QKeyEvent *event);
@@ -184,8 +194,8 @@ private:
 };
 
 QtPropertyEditorView::QtPropertyEditorView(QWidget *parent) :
-    QTreeWidget(parent),
-    m_editorPrivate(0)
+        QTreeWidget(parent),
+        m_editorPrivate(0)
 {
     connect(header(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(resizeColumnToContents(int)));
 }
@@ -267,32 +277,36 @@ class QtPropertyEditorDelegate : public QItemDelegate
     Q_OBJECT
 public:
     QtPropertyEditorDelegate(QObject *parent = 0)
-        : QItemDelegate(parent), m_editorPrivate(0), m_editedItem(0), m_editedWidget(0)
-        {}
+            : QItemDelegate(parent), m_editorPrivate(0), m_editedItem(0), m_editedWidget(0)
+    {}
 
     void setEditorPrivate(QtTreePropertyBrowserPrivate *editorPrivate)
-        { m_editorPrivate = editorPrivate; }
+    {
+        m_editorPrivate = editorPrivate;
+    }
 
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-            const QModelIndex &index) const;
+                          const QModelIndex &index) const;
 
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
-            const QModelIndex &index) const;
+                              const QModelIndex &index) const;
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
-            const QModelIndex &index) const;
+               const QModelIndex &index) const;
 
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
     void setModelData(QWidget *, QAbstractItemModel *,
-            const QModelIndex &) const {}
+                      const QModelIndex &) const {}
 
     void setEditorData(QWidget *, const QModelIndex &) const {}
 
     bool eventFilter(QObject *object, QEvent *event);
     void closeEditor(QtProperty *property);
 
-    QTreeWidgetItem *editedItem() const { return m_editedItem; }
+    QTreeWidgetItem *editedItem() const {
+        return m_editedItem;
+    }
 
 private slots:
     void slotEditorDestroyed(QObject *object);
@@ -378,7 +392,7 @@ void QtPropertyEditorDelegate::updateEditorGeometry(QWidget *editor,
 }
 
 void QtPropertyEditorDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
-            const QModelIndex &index) const
+                                     const QModelIndex &index) const
 {
     bool hasValue = true;
     if (m_editorPrivate) {
@@ -420,7 +434,7 @@ void QtPropertyEditorDelegate::paint(QPainter *painter, const QStyleOptionViewIt
 }
 
 QSize QtPropertyEditorDelegate::sizeHint(const QStyleOptionViewItem &option,
-            const QModelIndex &index) const
+        const QModelIndex &index) const
 {
     return QItemDelegate::sizeHint(option, index) + QSize(3, 4);
 }
@@ -437,12 +451,12 @@ bool QtPropertyEditorDelegate::eventFilter(QObject *object, QEvent *event)
 
 //  -------- QtTreePropertyBrowserPrivate implementation
 QtTreePropertyBrowserPrivate::QtTreePropertyBrowserPrivate() :
-    m_treeWidget(0),
-    m_headerVisible(true),
-    m_resizeMode(QtTreePropertyBrowser::Stretch),
-    m_delegate(0),
-    m_markPropertiesWithoutValue(false),
-    m_browserChangedBlocked(false)
+        m_treeWidget(0),
+        m_headerVisible(true),
+        m_resizeMode(QtTreePropertyBrowser::Stretch),
+        m_delegate(0),
+        m_markPropertiesWithoutValue(false),
+        m_browserChangedBlocked(false)
 {
 }
 
@@ -771,7 +785,7 @@ void QtTreePropertyBrowserPrivate::editItem(QtBrowserItem *browserItem)
     Creates a property browser with the given \a parent.
 */
 QtTreePropertyBrowser::QtTreePropertyBrowser(QWidget *parent)
-    : QtAbstractPropertyBrowser(parent)
+        : QtAbstractPropertyBrowser(parent)
 {
     d_ptr = new QtTreePropertyBrowserPrivate;
     d_ptr->q_ptr = this;
@@ -902,11 +916,19 @@ void QtTreePropertyBrowser::setResizeMode(QtTreePropertyBrowser::ResizeMode mode
     d_ptr->m_resizeMode = mode;
     QHeaderView::ResizeMode m = QHeaderView::Stretch;
     switch (mode) {
-        case QtTreePropertyBrowser::Interactive:      m = QHeaderView::Interactive;      break;
-        case QtTreePropertyBrowser::Fixed:            m = QHeaderView::Fixed;            break;
-        case QtTreePropertyBrowser::ResizeToContents: m = QHeaderView::ResizeToContents; break;
-        case QtTreePropertyBrowser::Stretch:
-        default:                                      m = QHeaderView::Stretch;          break;
+    case QtTreePropertyBrowser::Interactive:
+        m = QHeaderView::Interactive;
+        break;
+    case QtTreePropertyBrowser::Fixed:
+        m = QHeaderView::Fixed;
+        break;
+    case QtTreePropertyBrowser::ResizeToContents:
+        m = QHeaderView::ResizeToContents;
+        break;
+    case QtTreePropertyBrowser::Stretch:
+    default:
+        m = QHeaderView::Stretch;
+        break;
     }
     d_ptr->m_treeWidget->header()->setResizeMode(m);
 }

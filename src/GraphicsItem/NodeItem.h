@@ -42,8 +42,8 @@ public:
     \param node the  Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
     explicit NodeItem( Node *node, QGraphicsItem *parent = 0, bool fade = true);
-   virtual ~NodeItem();
-  
+    virtual ~NodeItem();
+
     /*! The type of the item */
     enum { Type = UserType + 1 };
 
@@ -86,29 +86,29 @@ protected slots:
 public slots:
     void updatePos();
     void updateAttributes();
-     void addOpacity();
-     void removeOpacity();
-     void deleteItem();
-     
+    void addOpacity();
+    void removeOpacity();
+    void deleteItem();
+
 private:
     Node *_node;
     qreal _opacity;
     bool _removingBeginFlag;
     QTimeLine *_timeLine;
     QColor _color;
-      
+
     bool _isDownSizing;
     bool _isUpSizing;
-    
+
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;
     QGraphicsRectItem	*_boundingRect;
     qreal _oldWidth;
     void setupTextAttributes();
-    
+
     void eraseNode(QPainter *p);
     void drawNode(QPainter *p);
-    void drawEnd(QPainter *p);    
+    void drawEnd(QPainter *p);
     void drawSelectRectangle(QPainter *p);
     void drawBeginArrow(QPainter *p);
 

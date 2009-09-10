@@ -49,7 +49,7 @@ public:
     */
     void setActiveGraphDocument( GraphDocument *graphDocument);
 
-    
+
     const QString& name() const;
 public slots:
     /*! Atualize the Active Graph that this action will work on
@@ -57,44 +57,44 @@ public slots:
     */
     virtual void setActiveGraph( Graph *graph);
 
-    /*! Virtual,  executed when a mouse press occours on the scene. 
+    /*! Virtual,  executed when a mouse press occours on the scene.
     \p pos the position on screen that the execution will take part.
     */
     virtual void executePress(QPointF pos);
-    
-    /*! Virtual, executed when a mouse move on the scene. 
-     \p pos the position on screen that the mouse is now. 
+
+    /*! Virtual, executed when a mouse move on the scene.
+     \p pos the position on screen that the mouse is now.
     */
     virtual void executeMove(QPointF pos);
-    
-    /*! virtual, executed when a mous click is released on the scene. 
+
+    /*! virtual, executed when a mous click is released on the scene.
     \p pos the position where the release occourred.
     */
     virtual void executeRelease(QPointF pos);
-    
+
     /*! virtual, executed when a keyboard key is pressed on the scene.
     \p keyEvent the key event from the scene.
     */
     virtual void executeKeyPress(QKeyEvent *keyEvent);
-    
-    /*! virtual, executed when a keyboard key is released on the scene 
+
+    /*! virtual, executed when a keyboard key is released on the scene
       \p keyEvent the key event from the scene.
       */
     virtual void executeKeyRelease(QKeyEvent *keyEvent);
 
-    
+
     /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
     void sendExecuteBit();
 
 protected:
     /*! pointer to the active graph document */
-    GraphDocument *_graphDocument; 
-    
+    GraphDocument *_graphDocument;
+
     /*! pointer to the active graph */
-    Graph *_graph;	
-    
+    Graph *_graph;
+
     /*! pointer to the GraphicsScene with the drawing */
-    GraphScene *_graphScene; 
+    GraphScene *_graphScene;
 
     QString _name;
 };

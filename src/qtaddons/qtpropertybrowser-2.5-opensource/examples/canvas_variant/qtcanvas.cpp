@@ -1,17 +1,17 @@
 /****************************************************************************
 **
 ** This file is part of a Qt Solutions component.
-** 
+**
 ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
-** 
+**
 ** Contact:  Qt Software Information (qt-info@nokia.com)
-** 
-** Commercial Usage  
+**
+** Commercial Usage
 ** Licensees holding valid Qt Commercial licenses may use this file in
 ** accordance with the Qt Solutions Commercial License Agreement provided
 ** with the Software or, alternatively, in accordance with the terms
 ** contained in a written agreement between you and Nokia.
-** 
+**
 ** GNU Lesser General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU Lesser
 ** General Public License version 2.1 as published by the Free Software
@@ -19,29 +19,29 @@
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU Lesser General Public License version 2.1 requirements
 ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-** 
+**
 ** In addition, as a special exception, Nokia gives you certain
 ** additional rights. These rights are described in the Nokia Qt LGPL
 ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
 ** package.
-** 
-** GNU General Public License Usage 
+**
+** GNU General Public License Usage
 ** Alternatively, this file may be used under the terms of the GNU
 ** General Public License version 3.0 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.  Please review the following information to
 ** ensure the GNU General Public License version 3.0 requirements will be
 ** met: http://www.gnu.org/copyleft/gpl.html.
-** 
+**
 ** Please note Third Party Software included with Qt Solutions may impose
 ** additional restrictions and it is the user's responsibility to ensure
 ** that they have met the licensing requirements of the GPL, LGPL, or Qt
 ** Solutions Commercial license and the relevant license of the Third
 ** Party Software they are using.
-** 
+**
 ** If you are unsure which license is appropriate for your use, please
 ** contact the sales department at qt-sales@nokia.com.
-** 
+**
 ****************************************************************************/
 
 #include "qtcanvas.h"
@@ -91,7 +91,9 @@ public:
     void add(const QRect& rect);
 
     void clear();
-    int clusters() const { return count; }
+    int clusters() const {
+        return count;
+    }
     const QRect& operator[](int i) const;
 
 private:
@@ -104,16 +106,16 @@ static
 void include(QRect& r, const QRect& rect)
 {
     if (rect.left() < r.left()) {
-            r.setLeft(rect.left());
+        r.setLeft(rect.left());
     }
     if (rect.right()>r.right()) {
-            r.setRight(rect.right());
+        r.setRight(rect.right());
     }
     if (rect.top() < r.top()) {
-            r.setTop(rect.top());
+        r.setTop(rect.top());
     }
     if (rect.bottom()>r.bottom()) {
-            r.setBottom(rect.bottom());
+        r.setBottom(rect.bottom());
     }
 }
 
@@ -122,9 +124,9 @@ A QtCanvasClusterizer groups rectangles (QRects) into non-overlapping rectangles
 by a merging heuristic.
 */
 QtCanvasClusterizer::QtCanvasClusterizer(int maxclusters) :
-    cluster(new QRect[maxclusters]),
-    count(0),
-    maxcl(maxclusters)
+        cluster(new QRect[maxclusters]),
+        count(0),
+        maxcl(maxclusters)
 { }
 
 QtCanvasClusterizer::~QtCanvasClusterizer()
@@ -165,7 +167,7 @@ void QtCanvasClusterizer::add(const QRect& rect)
     int lowestcost = 9999999;
     int cheapest = -1;
     cursor = 0;
-    while(cursor < count) {
+    while (cursor < count) {
         if (cluster[cursor].intersects(biggerrect)) {
             QRect larger = cluster[cursor];
             include(larger, rect);
@@ -203,11 +205,11 @@ void QtCanvasClusterizer::add(const QRect& rect)
     lowestcost = 9999999;
     cheapest = -1;
     cursor = 0;
-    while(cursor < count) {
+    while (cursor < count) {
         QRect larger = cluster[cursor];
         include(larger, rect);
         int cost = larger.width()*larger.height()
-                - cluster[cursor].width()*cluster[cursor].height();
+                   - cluster[cursor].width()*cluster[cursor].height();
         if (cost < lowestcost) {
             bool bad = false;
             for (int c = 0; c < count && !bad; c++) {
@@ -229,15 +231,15 @@ void QtCanvasClusterizer::add(const QRect& rect)
     int cheapestmerge2 = -1;
 
     int merge1 = 0;
-    while(merge1 < count) {
+    while (merge1 < count) {
         int merge2 = 0;
-        while(merge2 < count) {
-            if(merge1!= merge2) {
+        while (merge2 < count) {
+            if (merge1!= merge2) {
                 QRect larger = cluster[merge1];
                 include(larger, cluster[merge2]);
                 int cost = larger.width()*larger.height()
-                    - cluster[merge1].width()*cluster[merge1].height()
-                    - cluster[merge2].width()*cluster[merge2].height();
+                           - cluster[merge1].width()*cluster[merge1].height()
+                           - cluster[merge2].width()*cluster[merge2].height();
                 if (cost < lowestcost) {
                     bool bad = false;
                     for (int c = 0; c < count && !bad; c++) {
@@ -543,7 +545,7 @@ void QtCanvas::init(int w, int h, int chunksze, int mxclusters)
     be able to use the canvas.
 */
 QtCanvas::QtCanvas(QObject* parent)
-    : QObject(parent)
+        : QObject(parent)
 {
     init(0, 0);
 }
@@ -580,7 +582,7 @@ QtCanvas::QtCanvas(int w, int h)
     \sa setTiles()
 */
 QtCanvas::QtCanvas(QPixmap p,
-        int h, int v, int tilewidth, int tileheight)
+                   int h, int v, int tilewidth, int tileheight)
 {
     init(h*tilewidth, v*tileheight, scm(tilewidth, tileheight));
     setTiles(p, h, v, tilewidth, tileheight);
@@ -1026,9 +1028,9 @@ void QtCanvas::setChanged(const QRect& area)
         my = chheight;
 
     int x = thearea.x()/chunksize;
-    while(x < mx) {
+    while (x < mx) {
         int y = thearea.y()/chunksize;
-        while(y < my) {
+        while (y < my) {
             chunk(x, y).change();
             y++;
         }
@@ -1053,9 +1055,9 @@ void QtCanvas::setUnchanged(const QRect& area)
         my = chheight;
 
     int x = thearea.x()/chunksize;
-    while(x < mx) {
+    while (x < mx) {
         int y = thearea.y()/chunksize;
-        while(y < my) {
+        while (y < my) {
             chunk(x, y).takeChange();
             y++;
         }
@@ -1081,9 +1083,9 @@ QRect QtCanvas::changeBounds()
     QRect result;
 
     int x = area.x()/chunksize;
-    while(x < mx) {
+    while (x < mx) {
         int y = area.y()/chunksize;
-        while(y < my) {
+        while (y < my) {
             QtCanvasChunk& ch = chunk(x, y);
             if (ch.hasChanged())
                 result |= QRect(x*chunksize, y*chunksize, chunksize + 1, chunksize + 1);
@@ -1349,10 +1351,10 @@ void QtCanvas::drawBackground(QPainter& painter, const QRect& clip)
         painter.fillRect(clip, bgcolor);
     } else if (!grid) {
         for (int x = clip.x()/pm.width();
-            x < (clip.x()+clip.width()+pm.width()-1)/pm.width(); x++)
+                x < (clip.x()+clip.width()+pm.width()-1)/pm.width(); x++)
         {
             for (int y = clip.y()/pm.height();
-                y < (clip.y()+clip.height()+pm.height()-1)/pm.height(); y++)
+                    y < (clip.y()+clip.height()+pm.height()-1)/pm.height(); y++)
             {
                 painter.drawPixmap(x*pm.width(), y*pm.height(), pm);
             }
@@ -1371,8 +1373,8 @@ void QtCanvas::drawBackground(QPainter& painter, const QRect& clip)
                 int t = tile(i%tilesHorizontally(), jj);
                 int tx = t % roww;
                 int ty = t / roww;
-                painter.drawPixmap(i*tilew, j*tileh, pm, 
-                                tx*tilew, ty*tileh, tilew, tileh);
+                painter.drawPixmap(i*tilew, j*tileh, pm,
+                                   tx*tilew, ty*tileh, tilew, tileh);
             }
         }
     }
@@ -1424,11 +1426,11 @@ void QtCanvas::drawForeground(QPainter& painter, const QRect& clip)
     pixmap and 0 for \a h, \a v, \a tilewidth, and
     \a tileheight.
 */
-void QtCanvas::setTiles(QPixmap p, 
+void QtCanvas::setTiles(QPixmap p,
                         int h, int v, int tilewidth, int tileheight)
 {
     if (!p.isNull() && (!tilewidth || !tileheight ||
-         p.width() % tilewidth != 0 || p.height() % tileheight != 0))
+                        p.width() % tilewidth != 0 || p.height() % tileheight != 0))
         return;
 
     htiles = h;
@@ -1616,8 +1618,8 @@ class QtCanvasItemExtra {
     \sa setCanvas()
 */
 QtCanvasItem::QtCanvasItem(QtCanvas* canvas) :
-    cnv(canvas),
-    myx(0), myy(0), myz(0)
+        cnv(canvas),
+        myx(0), myy(0), myz(0)
 {
     ani = 0;
     vis = 0;
@@ -1996,7 +1998,7 @@ bool qt_testCollision(const QtCanvasSprite* s1, const QtCanvasSprite* s2)
     QRect s2area = s2->boundingRectAdvanced();
 
     QRect cyourarea(s2area.x(), s2area.y(),
-            s2area.width(), s2area.height());
+                    s2area.width(), s2area.height());
 
     QImage* s1image = s1->imageAdvanced()->collision_mask;
 
@@ -2019,8 +2021,12 @@ bool qt_testCollision(const QtCanvasSprite* s1, const QtCanvasSprite* s2)
             return w>0 && h>0;
         // swap everything around
         int t;
-        t = x1; x1 = x2; x2 = t;
-        t = y1; x1 = y2; y2 = t;
+        t = x1;
+        x1 = x2;
+        x2 = t;
+        t = y1;
+        x1 = y2;
+        y2 = t;
         s2image = s1image;
         s1image = 0;
     }
@@ -2043,7 +2049,7 @@ bool qt_testCollision(const QtCanvasSprite* s1, const QtCanvasSprite* s2)
                 const uchar* yl = s2image->scanLine(y2+j);
                 for (int i = 0; i < w; i++) {
                     if (*(yl + ((x2+i) >> 3)) & (1 << ((x2+i) & 7))
-                    && *(ml + ((x1+i) >> 3)) & (1 << ((x1+i) & 7)))
+                            && *(ml + ((x1+i) >> 3)) & (1 << ((x1+i) & 7)))
                     {
                         return true;
                     }
@@ -2055,7 +2061,7 @@ bool qt_testCollision(const QtCanvasSprite* s1, const QtCanvasSprite* s2)
                 const uchar* yl = s2image->scanLine(y2+j);
                 for (int i = 0; i < w; i++) {
                     if (*(yl + ((x2+i) >> 3)) & (1 << (7-((x2+i) & 7)))
-                    && *(ml + ((x1+i) >> 3)) & (1 << (7-((x1+i) & 7))))
+                            && *(ml + ((x1+i) >> 3)) & (1 << (7-((x1+i) & 7))))
                     {
                         return true;
                     }
@@ -2090,26 +2096,26 @@ bool qt_testCollision(const QtCanvasSprite* s1, const QtCanvasSprite* s2)
 }
 
 static bool collision_double_dispatch(const QtCanvasSprite* s1,
-                                       const QtCanvasPolygonalItem* p1,
-                                       const QtCanvasRectangle* r1,
-                                       const QtCanvasEllipse* e1,
-                                       const QtCanvasText* t1,
-                                       const QtCanvasSprite* s2,
-                                       const QtCanvasPolygonalItem* p2,
-                                       const QtCanvasRectangle* r2,
-                                       const QtCanvasEllipse* e2,
-                                       const QtCanvasText* t2)
+                                      const QtCanvasPolygonalItem* p1,
+                                      const QtCanvasRectangle* r1,
+                                      const QtCanvasEllipse* e1,
+                                      const QtCanvasText* t1,
+                                      const QtCanvasSprite* s2,
+                                      const QtCanvasPolygonalItem* p2,
+                                      const QtCanvasRectangle* r2,
+                                      const QtCanvasEllipse* e2,
+                                      const QtCanvasText* t2)
 {
     const QtCanvasItem* i1 = s1 ?
-                            (const QtCanvasItem*)s1 : p1 ?
-                            (const QtCanvasItem*)p1 : r1 ?
-                            (const QtCanvasItem*)r1 : e1 ?
-                            (const QtCanvasItem*)e1 : (const QtCanvasItem*)t1;
+                             (const QtCanvasItem*)s1 : p1 ?
+                             (const QtCanvasItem*)p1 : r1 ?
+                             (const QtCanvasItem*)r1 : e1 ?
+                             (const QtCanvasItem*)e1 : (const QtCanvasItem*)t1;
     const QtCanvasItem* i2 = s2 ?
-                            (const QtCanvasItem*)s2 : p2 ?
-                            (const QtCanvasItem*)p2 : r2 ?
-                            (const QtCanvasItem*)r2 : e2 ?
-                            (const QtCanvasItem*)e2 : (const QtCanvasItem*)t2;
+                             (const QtCanvasItem*)s2 : p2 ?
+                             (const QtCanvasItem*)p2 : r2 ?
+                             (const QtCanvasItem*)r2 : e2 ?
+                             (const QtCanvasItem*)e2 : (const QtCanvasItem*)t2;
 
     if (s1 && s2) {
         // a
@@ -2120,9 +2126,9 @@ static bool collision_double_dispatch(const QtCanvasSprite* s1,
         QRect rc2 = i2->boundingRectAdvanced();
         return rc1.intersects(rc2);
     } else if (e1 && e2
-                && e1->angleLength()>= 360*16 && e2->angleLength()>= 360*16
-                && e1->width() == e1->height()
-                && e2->width() == e2->height()) {
+               && e1->angleLength()>= 360*16 && e2->angleLength()>= 360*16
+               && e1->width() == e1->height()
+               && e2->width() == e2->height()) {
         // c
         double xd = (e1->x()+e1->xVelocity())-(e2->x()+e1->xVelocity());
         double yd = (e1->y()+e1->yVelocity())-(e2->y()+e1->yVelocity());
@@ -2132,12 +2138,12 @@ static bool collision_double_dispatch(const QtCanvasSprite* s1,
         // d
         QPolygon pa1 = p1->areaPointsAdvanced();
         QPolygon pa2 = p2 ? p2->areaPointsAdvanced()
-                          : QPolygon(i2->boundingRectAdvanced());
+                       : QPolygon(i2->boundingRectAdvanced());
         bool col = !(QRegion(pa1) & QRegion(pa2, Qt::WindingFill)).isEmpty();
 
         return col;
     } else {
-        return collision_double_dispatch(s2, p2, r2, e2, t2, 
+        return collision_double_dispatch(s2, p2, r2, e2, t2,
                                          s1, p1, r1, e1, t1);
     }
 }
@@ -2230,10 +2236,10 @@ bool QtCanvasPolygonalItem::collidesWith(const QtCanvasItem* i) const
 }
 
 bool QtCanvasPolygonalItem::collidesWith(const QtCanvasSprite* s,
-                                 const QtCanvasPolygonalItem* p,
-                                 const QtCanvasRectangle* r,
-                                 const QtCanvasEllipse* e,
-                                 const QtCanvasText* t) const
+        const QtCanvasPolygonalItem* p,
+        const QtCanvasRectangle* r,
+        const QtCanvasEllipse* e,
+        const QtCanvasText* t) const
 {
     return collision_double_dispatch(s, p, r, e, t, 0, this, 0, 0, 0);
 }
@@ -2247,10 +2253,10 @@ bool QtCanvasRectangle::collidesWith(const QtCanvasItem* i) const
 }
 
 bool QtCanvasRectangle::collidesWith(const QtCanvasSprite* s,
-                                 const QtCanvasPolygonalItem* p,
-                                 const QtCanvasRectangle* r,
-                                 const QtCanvasEllipse* e,
-                                 const QtCanvasText* t) const
+                                     const QtCanvasPolygonalItem* p,
+                                     const QtCanvasRectangle* r,
+                                     const QtCanvasEllipse* e,
+                                     const QtCanvasText* t) const
 {
     return collision_double_dispatch(s, p, r, e, t, 0, this, this, 0, 0);
 }
@@ -2265,10 +2271,10 @@ bool QtCanvasEllipse::collidesWith(const QtCanvasItem* i) const
 }
 
 bool QtCanvasEllipse::collidesWith(const QtCanvasSprite* s,
-                                 const QtCanvasPolygonalItem* p,
-                                 const QtCanvasRectangle* r,
-                                 const QtCanvasEllipse* e,
-                                 const QtCanvasText* t) const
+                                   const QtCanvasPolygonalItem* p,
+                                   const QtCanvasRectangle* r,
+                                   const QtCanvasEllipse* e,
+                                   const QtCanvasText* t) const
 {
     return collision_double_dispatch(s, p, r, e, t, 0, this, 0, this, 0);
 }
@@ -2282,10 +2288,10 @@ bool QtCanvasText::collidesWith(const QtCanvasItem* i) const
 }
 
 bool QtCanvasText::collidesWith(const QtCanvasSprite* s,
-                                 const QtCanvasPolygonalItem* p,
-                                 const QtCanvasRectangle* r,
-                                 const QtCanvasEllipse* e,
-                                 const QtCanvasText* t) const
+                                const QtCanvasPolygonalItem* p,
+                                const QtCanvasRectangle* r,
+                                const QtCanvasEllipse* e,
+                                const QtCanvasText* t) const
 {
     return collision_double_dispatch(s, p, r, e, t, 0, 0, 0, 0, this);
 }
@@ -2364,7 +2370,7 @@ QtCanvasItemList QtCanvas::collisions(const QRect& r) const
     \overload
 
     Returns a list of canvas items which intersect with the chunks
-    listed in \a chunklist, excluding \a item. If \a exact is true, 
+    listed in \a chunklist, excluding \a item. If \a exact is true,
     only those which actually \link QtCanvasItem::collidesWith()
     collide with\endlink \a item are returned; otherwise canvas items
     are included just for being in the chunks.
@@ -2372,8 +2378,8 @@ QtCanvasItemList QtCanvas::collisions(const QRect& r) const
     This is a utility function mainly used to implement the simpler
     QtCanvasItem::collisions() function.
 */
-QtCanvasItemList QtCanvas::collisions(const QPolygon& chunklist, 
-            const QtCanvasItem* item, bool exact) const
+QtCanvasItemList QtCanvas::collisions(const QPolygon& chunklist,
+                                      const QtCanvasItem* item, bool exact) const
 {
     QSet<QtCanvasItem *> seen;
     QtCanvasItemList result;
@@ -2531,7 +2537,7 @@ void QtCanvasPixmap::init(const QImage& image)
     hotx = image.offset().x();
     hoty = image.offset().y();
 #ifndef QT_NO_IMAGE_DITHER_TO_1
-    if(image.hasAlphaChannel()) {
+    if (image.hasAlphaChannel()) {
         QImage i = image.createAlphaMask();
         collision_mask = new QImage(i);
     } else
@@ -2544,7 +2550,7 @@ void QtCanvasPixmap::init(const QPixmap& pixmap, int hx, int hy)
     (QPixmap&)*this = pixmap;
     hotx = hx;
     hoty = hy;
-    if(pixmap.hasAlphaChannel())  {
+    if (pixmap.hasAlphaChannel())  {
         QImage i = mask().toImage();
         collision_mask = new QImage(i);
     } else
@@ -2613,7 +2619,7 @@ QtCanvasPixmap::~QtCanvasPixmap()
     QtCanvasPixmapArray.
 */
 QtCanvasPixmapArray::QtCanvasPixmapArray()
-: framecount(0), img(0)
+        : framecount(0), img(0)
 {
 }
 
@@ -2623,7 +2629,7 @@ QtCanvasPixmapArray::QtCanvasPixmapArray()
     The \a fc parameter sets the number of frames to be loaded for
     this image.
 
-    If \a fc is not 0, \a datafilenamepattern should contain "%1", 
+    If \a fc is not 0, \a datafilenamepattern should contain "%1",
     e.g. "foo%1.png". The actual filenames are formed by replacing the
     %1 with four-digit integers from 0 to (fc - 1), e.g. foo0000.png,
     foo0001.png, foo0002.png, etc.
@@ -2638,8 +2644,8 @@ QtCanvasPixmapArray::QtCanvasPixmapArray()
 */
 
 QtCanvasPixmapArray::QtCanvasPixmapArray(const QString& datafilenamepattern,
-                                        int fc)
-: framecount(0), img(0)
+        int fc)
+        : framecount(0), img(0)
 {
     readPixmaps(datafilenamepattern, fc);
 }
@@ -2653,8 +2659,8 @@ QtCanvasPixmapArray::QtCanvasPixmapArray(const QString& datafilenamepattern,
   list. The \a hotspots list has to be of the same size as \a list.
 */
 QtCanvasPixmapArray::QtCanvasPixmapArray(const QList<QPixmap> &list, const QPolygon &hotspots)
-    : framecount(list.count()),
-      img(new QtCanvasPixmap*[list.count()])
+        : framecount(list.count()),
+        img(new QtCanvasPixmap*[list.count()])
 {
     if (list.count() != hotspots.count()) {
         qWarning("QtCanvasPixmapArray: lists have different lengths");
@@ -2763,8 +2769,8 @@ bool QtCanvasPixmapArray::readPixmaps(const QString& datafilenamepattern,
             img[i]->collision_mask->load(
                 arg ? datafilenamepattern.arg(r) : datafilenamepattern);
             ok = ok
-               && !img[i]->collision_mask->isNull()
-               && img[i]->collision_mask->depth() == 1;
+                 && !img[i]->collision_mask->isNull()
+                 && img[i]->collision_mask->depth() == 1;
         } else {
             img[i] = new QtCanvasPixmap(
                 arg ? datafilenamepattern.arg(r) : datafilenamepattern);
@@ -2827,7 +2833,8 @@ void QtCanvasPixmapArray::setImage(int i, QtCanvasPixmap* p)
         delete [] img;
         img = newimg;
     }
-    delete img[i]; img[i] = p;
+    delete img[i];
+    img[i] = p;
 }
 
 /*
@@ -3129,7 +3136,9 @@ void QtCanvasSprite::draw(QPainter& painter)
 class QtCanvasWidget : public QWidget
 {
 public:
-    QtCanvasWidget(QtCanvasView *view) : QWidget(view) { m_view = view; }
+    QtCanvasWidget(QtCanvasView *view) : QWidget(view) {
+        m_view = view;
+    }
 protected:
     void paintEvent(QPaintEvent *e);
     void mousePressEvent(QMouseEvent *e) {
@@ -3182,7 +3191,7 @@ void QtCanvasWidget::paintEvent(QPaintEvent *e)
     to view a canvas.
 */
 QtCanvasView::QtCanvasView(QWidget* parent)
-    : QScrollArea(parent)
+        : QScrollArea(parent)
 {
     d = new QtCanvasViewData;
     setWidget(new QtCanvasWidget(this));
@@ -3198,7 +3207,7 @@ QtCanvasView::QtCanvasView(QWidget* parent)
     \a parent.
 */
 QtCanvasView::QtCanvasView(QtCanvas* canvas, QWidget* parent)
-    : QScrollArea(parent)
+        : QScrollArea(parent)
 {
     d = new QtCanvasViewData;
     d->highQuality = false;
@@ -3408,7 +3417,7 @@ QSize QtCanvasView::sizeHint() const
     on a QtCanvas.
 
     The mostly rectangular classes, such as QtCanvasSprite and
-    QtCanvasText, use the object's bounding rectangle for movement, 
+    QtCanvasText, use the object's bounding rectangle for movement,
     repainting and collision calculations. For most other items, the
     bounding rectangle can be far too large -- a diagonal line being
     the worst case, and there are many other cases which are also bad.
@@ -3479,9 +3488,9 @@ static const QBrush& defaultPolygonBrush()
     Constructs a QtCanvasPolygonalItem on the canvas \a canvas.
 */
 QtCanvasPolygonalItem::QtCanvasPolygonalItem(QtCanvas* canvas) :
-    QtCanvasItem(canvas),
-    br(defaultPolygonBrush()),
-    pn(defaultPolygonPen())
+        QtCanvasItem(canvas),
+        br(defaultPolygonBrush()),
+        pn(defaultPolygonPen())
 {
     wind = 0;
 }
@@ -3569,7 +3578,7 @@ static QPainter* dbg_ptr = 0;
 class QPolygonalProcessor {
 public:
     QPolygonalProcessor(QtCanvas* c, const QPolygon& pa) :
-        canvas(c)
+            canvas(c)
     {
         QRect pixelbounds = pa.boundingRect();
         int cs = canvas->chunkSize();
@@ -3821,7 +3830,7 @@ void QtCanvasPolygonalItem::setBrush(QBrush b)
     should call setPoints() before using it further.
 */
 QtCanvasPolygon::QtCanvasPolygon(QtCanvas* canvas) :
-    QtCanvasPolygonalItem(canvas)
+        QtCanvasPolygonalItem(canvas)
 {
 }
 
@@ -3914,8 +3923,8 @@ void QtCanvasPolygon::moveBy(double dx, double dy)
     \sa setControlPoints()
 */
 QtCanvasSpline::QtCanvasSpline(QtCanvas* canvas) :
-    QtCanvasPolygon(canvas), 
-    cl(true)
+        QtCanvasPolygon(canvas),
+        cl(true)
 {
 }
 
@@ -3935,7 +3944,7 @@ QtCanvasSpline::~QtCanvasSpline()
     point is required, and the number of control points must be one of
     (4, 7, 10, 13, ...).
 
-    If the number of control points doesn't meet the above conditions, 
+    If the number of control points doesn't meet the above conditions,
     the number of points will be truncated to the largest number of
     points that do meet the requirement.
 */
@@ -4038,7 +4047,7 @@ QPolygon QtCanvasPolygon::areaPoints() const
     \sa setPoints()
 */
 QtCanvasLine::QtCanvasLine(QtCanvas* canvas) :
-    QtCanvasPolygonalItem(canvas)
+        QtCanvasPolygonalItem(canvas)
 {
     x1 = y1 = x2 = y2 = 0;
 }
@@ -4181,8 +4190,8 @@ void QtCanvasLine::moveBy(double dx, double dy)
     height set to 32 pixels on \a canvas.
 */
 QtCanvasRectangle::QtCanvasRectangle(QtCanvas* canvas) :
-    QtCanvasPolygonalItem(canvas),
-    w(32), h(32)
+        QtCanvasPolygonalItem(canvas),
+        w(32), h(32)
 {
 }
 
@@ -4190,8 +4199,8 @@ QtCanvasRectangle::QtCanvasRectangle(QtCanvas* canvas) :
     Constructs a rectangle positioned and sized by \a r on \a canvas.
 */
 QtCanvasRectangle::QtCanvasRectangle(const QRect& r, QtCanvas* canvas) :
-    QtCanvasPolygonalItem(canvas),
-    w(r.width()), h(r.height())
+        QtCanvasPolygonalItem(canvas),
+        w(r.width()), h(r.height())
 {
     move(r.x(), r.y());
 }
@@ -4201,9 +4210,9 @@ QtCanvasRectangle::QtCanvasRectangle(const QRect& r, QtCanvas* canvas) :
     by \a height, on \a canvas.
 */
 QtCanvasRectangle::QtCanvasRectangle(int x, int y, int width, int height,
-        QtCanvas* canvas) :
-    QtCanvasPolygonalItem(canvas),
-    w(width), h(height)
+                                     QtCanvas* canvas) :
+        QtCanvasPolygonalItem(canvas),
+        w(width), h(height)
 {
     move(x, y);
 }
@@ -4322,9 +4331,9 @@ void QtCanvasRectangle::drawShape(QPainter & p)
     Constructs a 32x32 ellipse, centered at (0, 0) on \a canvas.
 */
 QtCanvasEllipse::QtCanvasEllipse(QtCanvas* canvas) :
-    QtCanvasPolygonalItem(canvas),
-    w(32), h(32),
-    a1(0), a2(360*16)
+        QtCanvasPolygonalItem(canvas),
+        w(32), h(32),
+        a1(0), a2(360*16)
 {
 }
 
@@ -4333,9 +4342,9 @@ QtCanvasEllipse::QtCanvasEllipse(QtCanvas* canvas) :
     (0, 0) on \a canvas.
 */
 QtCanvasEllipse::QtCanvasEllipse(int width, int height, QtCanvas* canvas) :
-    QtCanvasPolygonalItem(canvas), 
-    w(width), h(height),
-    a1(0), a2(360*16)
+        QtCanvasPolygonalItem(canvas),
+        w(width), h(height),
+        a1(0), a2(360*16)
 {
 }
 
@@ -4350,11 +4359,11 @@ QtCanvasEllipse::QtCanvasEllipse(int width, int height, QtCanvas* canvas) :
 
     Note that angles are specified in sixteenths of a degree.
 */
-QtCanvasEllipse::QtCanvasEllipse(int width, int height, 
-    int startangle, int angle, QtCanvas* canvas) :
-    QtCanvasPolygonalItem(canvas), 
-    w(width), h(height), 
-    a1(startangle), a2(angle)
+QtCanvasEllipse::QtCanvasEllipse(int width, int height,
+                                 int startangle, int angle, QtCanvas* canvas) :
+        QtCanvasPolygonalItem(canvas),
+        w(width), h(height),
+        a1(startangle), a2(angle)
 {
 }
 
@@ -4482,8 +4491,8 @@ void QtCanvasEllipse::drawShape(QPainter & p)
     Constructs a QtCanvasText with the text "\<text\>", on \a canvas.
 */
 QtCanvasText::QtCanvasText(QtCanvas* canvas) :
-    QtCanvasItem(canvas), 
-    txt("<text>"), flags(0)
+        QtCanvasItem(canvas),
+        txt("<text>"), flags(0)
 {
     setRect();
 }
@@ -4493,8 +4502,8 @@ QtCanvasText::QtCanvasText(QtCanvas* canvas) :
     Constructs a QtCanvasText with the text \a t, on canvas \a canvas.
 */
 QtCanvasText::QtCanvasText(const QString& t, QtCanvas* canvas) :
-    QtCanvasItem(canvas), 
-    txt(t), flags(0)
+        QtCanvasItem(canvas),
+        txt(t), flags(0)
 {
     setRect();
 }
@@ -4505,9 +4514,9 @@ QtCanvasText::QtCanvasText(const QString& t, QtCanvas* canvas) :
     canvas \a canvas.
 */
 QtCanvasText::QtCanvasText(const QString& t, QFont f, QtCanvas* canvas) :
-    QtCanvasItem(canvas), 
-    txt(t), flags(0), 
-    fnt(f)
+        QtCanvasItem(canvas),
+        txt(t), flags(0),
+        fnt(f)
 {
     setRect();
 }
@@ -4523,7 +4532,9 @@ QtCanvasText::~QtCanvasText()
 /*
     Returns the bounding rectangle of the text.
 */
-QRect QtCanvasText::boundingRect() const { return brect; }
+QRect QtCanvasText::boundingRect() const {
+    return brect;
+}
 
 void QtCanvasText::setRect()
 {
@@ -4731,7 +4742,9 @@ void QtCanvasText::removeFromChunks()
         }
     \endcode
 */
-int QtCanvasItem::rtti() const { return RTTI; }
+int QtCanvasItem::rtti() const {
+    return RTTI;
+}
 int QtCanvasItem::RTTI = Rtti_Item;
 
 /*
@@ -4739,7 +4752,9 @@ int QtCanvasItem::RTTI = Rtti_Item;
 
     \sa QtCanvasItem::rtti()
 */
-int QtCanvasSprite::rtti() const { return RTTI; }
+int QtCanvasSprite::rtti() const {
+    return RTTI;
+}
 int QtCanvasSprite::RTTI = Rtti_Sprite;
 
 /*
@@ -4747,7 +4762,9 @@ int QtCanvasSprite::RTTI = Rtti_Sprite;
 
     \sa QtCanvasItem::rtti()
 */
-int QtCanvasPolygonalItem::rtti() const { return RTTI; }
+int QtCanvasPolygonalItem::rtti() const {
+    return RTTI;
+}
 int QtCanvasPolygonalItem::RTTI = Rtti_PolygonalItem;
 
 /*
@@ -4755,7 +4772,9 @@ int QtCanvasPolygonalItem::RTTI = Rtti_PolygonalItem;
 
     \sa QtCanvasItem::rtti()
 */
-int QtCanvasText::rtti() const { return RTTI; }
+int QtCanvasText::rtti() const {
+    return RTTI;
+}
 int QtCanvasText::RTTI = Rtti_Text;
 
 /*
@@ -4763,7 +4782,9 @@ int QtCanvasText::RTTI = Rtti_Text;
 
     \sa QtCanvasItem::rtti()
 */
-int QtCanvasPolygon::rtti() const { return RTTI; }
+int QtCanvasPolygon::rtti() const {
+    return RTTI;
+}
 int QtCanvasPolygon::RTTI = Rtti_Polygon;
 
 /*
@@ -4771,7 +4792,9 @@ int QtCanvasPolygon::RTTI = Rtti_Polygon;
 
     \sa QtCanvasItem::rtti()
 */
-int QtCanvasRectangle::rtti() const { return RTTI; }
+int QtCanvasRectangle::rtti() const {
+    return RTTI;
+}
 int QtCanvasRectangle::RTTI = Rtti_Rectangle;
 
 /*
@@ -4779,7 +4802,9 @@ int QtCanvasRectangle::RTTI = Rtti_Rectangle;
 
     \sa QtCanvasItem::rtti()
 */
-int QtCanvasEllipse::rtti() const { return RTTI; }
+int QtCanvasEllipse::rtti() const {
+    return RTTI;
+}
 int QtCanvasEllipse::RTTI = Rtti_Ellipse;
 
 /*
@@ -4787,7 +4812,9 @@ int QtCanvasEllipse::RTTI = Rtti_Ellipse;
 
     \sa QtCanvasItem::rtti()
 */
-int QtCanvasLine::rtti() const { return RTTI; }
+int QtCanvasLine::rtti() const {
+    return RTTI;
+}
 int QtCanvasLine::RTTI = Rtti_Line;
 
 /*
@@ -4795,7 +4822,9 @@ int QtCanvasLine::RTTI = Rtti_Line;
 
     \sa QtCanvasItem::rtti()
 */
-int QtCanvasSpline::rtti() const { return RTTI; }
+int QtCanvasSpline::rtti() const {
+    return RTTI;
+}
 int QtCanvasSpline::RTTI = Rtti_Spline;
 
 /*
@@ -4806,12 +4835,12 @@ int QtCanvasSpline::RTTI = Rtti_Spline;
     frame 0.
 */
 QtCanvasSprite::QtCanvasSprite(QtCanvasPixmapArray* a, QtCanvas* canvas) :
-    QtCanvasItem(canvas), 
-    frm(0), 
-    anim_val(0), 
-    anim_state(0), 
-    anim_type(0), 
-    images(a)
+        QtCanvasItem(canvas),
+        frm(0),
+        anim_val(0),
+        anim_state(0),
+        anim_type(0),
+        images(a)
 {
 }
 
@@ -4862,7 +4891,7 @@ QtCanvasSprite::~QtCanvasSprite()
 }
 
 /*
-    Sets the animation frame used for displaying the sprite to \a f, 
+    Sets the animation frame used for displaying the sprite to \a f,
     an index into the QtCanvasSprite's QtCanvasPixmapArray. The call
     will be ignored if \a f is larger than frameCount() or smaller
     than 0.
@@ -4959,7 +4988,9 @@ void QtCanvasSprite::advance(int phase)
 /*
     Moves the sprite to (\a x, \a y).
 */
-void QtCanvasSprite::move(double x, double y) { QtCanvasItem::move(x, y); }
+void QtCanvasSprite::move(double x, double y) {
+    QtCanvasItem::move(x, y);
+}
 
 /*
     \fn void QtCanvasSprite::move(double nx, double ny, int nf)
@@ -5029,13 +5060,13 @@ public:
  *     The basic algorithm is to start at the top (smallest y)
  *     of the polygon, stepping down to the bottom of
  *     the polygon by incrementing the y coordinate.  We
- *     keep a list of edges which the current scanline crosses, 
+ *     keep a list of edges which the current scanline crosses,
  *     sorted by x.  This list is called the Active Edge Table (AET)
  *     As we change the y-coordinate, we update each entry in
  *     in the active edge table to reflect the edges new xcoord.
  *     This list must be sorted at each scanline in case
  *     two edges intersect.
- *     We also keep a data structure known as the Edge Table (ET), 
+ *     We also keep a data structure known as the Edge Table (ET),
  *     which keeps track of all the edges which the current
  *     scanline has not yet reached.  The ET is basically a
  *     list of ScanLineList structures containing a list of
@@ -5062,7 +5093,7 @@ Copyright (c) 1987  X Consortium
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 "Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish, 
+without limitation the rights to use, copy, modify, merge, publish,
 distribute, sublicense, and/or sell copies of the Software, and to
 permit persons to whom the Software is furnished to do so, subject to
 the following conditions:
@@ -5074,7 +5105,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE X CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
@@ -5097,7 +5128,7 @@ from the X Consortium.
  *     algorithm used is an extension of Bresenham's line
  *     drawing algorithm which assumes that y is always the
  *     major axis.
- *     Since these pieces of code are the same for any filled shape, 
+ *     Since these pieces of code are the same for any filled shape,
  *     it is more convenient to gather the library in one
  *     place, but since these pieces of code are also in
  *     the inner loops of output primitives, procedure call
@@ -5197,26 +5228,26 @@ typedef struct {
 
 
 typedef struct _EdgeTableEntry {
-     int ymax;             /* ycoord at which we exit this edge. */
-     BRESINFO bres;        /* Bresenham info to run the edge     */
-     struct _EdgeTableEntry *next;       /* next in the list     */
-     struct _EdgeTableEntry *back;       /* for insertion sort   */
-     struct _EdgeTableEntry *nextWETE;   /* for winding num rule */
-     int ClockWise;        /* flag for winding number rule       */
+    int ymax;             /* ycoord at which we exit this edge. */
+    BRESINFO bres;        /* Bresenham info to run the edge     */
+    struct _EdgeTableEntry *next;       /* next in the list     */
+    struct _EdgeTableEntry *back;       /* for insertion sort   */
+    struct _EdgeTableEntry *nextWETE;   /* for winding num rule */
+    int ClockWise;        /* flag for winding number rule       */
 } EdgeTableEntry;
 
 
-typedef struct _ScanLineList{
-     int scanline;              /* the scanline represented */
-     EdgeTableEntry *edgelist;  /* header node              */
-     struct _ScanLineList *next;  /* next in the list       */
+typedef struct _ScanLineList {
+    int scanline;              /* the scanline represented */
+    EdgeTableEntry *edgelist;  /* header node              */
+    struct _ScanLineList *next;  /* next in the list       */
 } ScanLineList;
 
 
 typedef struct {
-     int ymax;                 /* ymax for the polygon     */
-     int ymin;                 /* ymin for the polygon     */
-     ScanLineList scanlines;   /* header node              */
+    int ymax;                 /* ymax for the polygon     */
+    int ymin;                 /* ymin for the polygon     */
+    ScanLineList scanlines;   /* header node              */
 } EdgeTable;
 
 
@@ -5228,8 +5259,8 @@ typedef struct {
 #define SLLSPERBLOCK 25
 
 typedef struct _ScanLineListBlock {
-     ScanLineList SLLs[SLLSPERBLOCK];
-     struct _ScanLineListBlock *next;
+    ScanLineList SLLs[SLLSPERBLOCK];
+    struct _ScanLineListBlock *next;
 } ScanLineListBlock;
 
 /*
@@ -5303,7 +5334,7 @@ The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
 X CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
 AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
@@ -5319,7 +5350,7 @@ Copyright 1987 by Digital Equipment Corporation, Maynard, Massachusetts.
                         All Rights Reserved
 
 Permission to use, copy, modify, and distribute this software and its
-documentation for any purpose and without fee is hereby granted, 
+documentation for any purpose and without fee is hereby granted,
 provided that the above copyright notice appear in all copies and that
 both that copyright notice and this permission notice appear in
 supporting documentation, and that the name of Digital not be
@@ -5329,8 +5360,8 @@ software without specific, written prior permission.
 DIGITAL DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING
 ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN NO EVENT SHALL
 DIGITAL BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR
-ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, 
-WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, 
+ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
 ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 
@@ -5358,8 +5389,8 @@ SOFTWARE.
  *
  */
 static bool
-miInsertEdgeInET(EdgeTable *ET, EdgeTableEntry *ETE, 
-        int scanline, ScanLineListBlock **SLLBlock, int *iSLLBlock)
+miInsertEdgeInET(EdgeTable *ET, EdgeTableEntry *ETE,
+                 int scanline, ScanLineListBlock **SLLBlock, int *iSLLBlock)
 {
     register EdgeTableEntry *start, *prev;
     register ScanLineList *pSLL, *pPrevSLL;
@@ -5383,8 +5414,8 @@ miInsertEdgeInET(EdgeTable *ET, EdgeTableEntry *ETE,
     {
         if (*iSLLBlock > SLLSPERBLOCK-1)
         {
-            tmpSLLBlock = 
-                  (ScanLineListBlock *)malloc(sizeof(ScanLineListBlock));
+            tmpSLLBlock =
+                (ScanLineListBlock *)malloc(sizeof(ScanLineListBlock));
             if (!tmpSLLBlock)
                 return false;
             (*SLLBlock)->next = tmpSLLBlock;
@@ -5438,7 +5469,7 @@ miInsertEdgeInET(EdgeTable *ET, EdgeTableEntry *ETE,
  *                    V             V
  *              list of ETEs   list of ETEs
  *
- *     where ETE is an EdgeTableEntry data structure, 
+ *     where ETE is an EdgeTableEntry data structure,
  *     and there is one ScanLineList per scanline at
  *     which an edge is initially entered.
  *
@@ -5470,8 +5501,8 @@ miFreeStorage(ScanLineListBlock   *pSLLBlock)
 }
 
 static bool
-miCreateETandAET(int count, DDXPointPtr pts, EdgeTable *ET, 
-        EdgeTableEntry *AET, EdgeTableEntry *pETEs, ScanLineListBlock *pSLLBlock)
+miCreateETandAET(int count, DDXPointPtr pts, EdgeTable *ET,
+                 EdgeTableEntry *AET, EdgeTableEntry *pETEs, ScanLineListBlock *pSLLBlock)
 {
     register DDXPointPtr top, bottom;
     register DDXPointPtr PrevPt, CurrPt;
@@ -5555,7 +5586,7 @@ miCreateETandAET(int count, DDXPointPtr pts, EdgeTable *ET,
  *     loadAET
  *
  *     This routine moves EdgeTableEntries from the
- *     EdgeTable into the Active Edge Table, 
+ *     EdgeTable into the Active Edge Table,
  *     leaving them sorted by smaller x coordinate.
  *
  */
@@ -5625,7 +5656,7 @@ micomputeWAET(EdgeTableEntry *AET)
             isInside--;
 
         if ((!inside && !isInside) ||
-            (inside &&  isInside))
+                (inside &&  isInside))
         {
             pWETE->nextWETE = AET;
             pWETE = AET;
@@ -5694,8 +5725,8 @@ void QtPolygonScanner::scan(const QPolygon& pa, bool winding, int index, int npo
 */
 void QtPolygonScanner::scan(const QPolygon& pa, bool winding, int index, int npoints, bool stitchable)
 {
-    scan(pa, winding, index, npoints, 
-        stitchable ? Edge(Left+Top) : Edge(Left+Right+Top+Bottom));
+    scan(pa, winding, index, npoints,
+         stitchable ? Edge(Left+Top) : Edge(Left+Right+Top+Bottom));
 }
 
 /*
@@ -5749,8 +5780,8 @@ void QtPolygonScanner::scan(const QPolygon& pa, bool winding, int index, int npo
     if (npoints < 3)
         return;
 
-    if(!(pETEs = (EdgeTableEntry *)
-        malloc(sizeof(EdgeTableEntry) * npoints)))
+    if (!(pETEs = (EdgeTableEntry *)
+                  malloc(sizeof(EdgeTableEntry) * npoints)))
         return;
     ptsOut = FirstPoint;
     width = FirstWidth;
@@ -5788,7 +5819,7 @@ void QtPolygonScanner::scan(const QPolygon& pa, bool winding, int index, int npo
                 ptsOut->x = pAET->bres.minor + 1 - edge_l;
                 ptsOut++->y = y;
                 *width++ = pAET->next->bres.minor - pAET->bres.minor
-                    - 1 + edge_l + edge_r;
+                           - 1 + edge_l + edge_r;
                 nPts++;
 
                 /*
@@ -5896,7 +5927,7 @@ class QtCanvasPolygonScanner : public QtPolygonScanner {
     QPolygonalProcessor& processor;
 public:
     QtCanvasPolygonScanner(QPolygonalProcessor& p) :
-        processor(p)
+            processor(p)
     {
     }
     void processSpans(int n, QPoint* point, int* width)
