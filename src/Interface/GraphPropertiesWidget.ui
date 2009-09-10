@@ -135,7 +135,7 @@
         <item>
          <widget class="QToolButton" name="_graphAutomate">
           <property name="toolTip">
-           <string>Enabling this button will make hte graph an automate</string>
+           <string>Enabling this button will make the graph an automate</string>
           </property>
           <property name="text">
            <string>...</string>
