@@ -35,12 +35,13 @@
 #include "graph.h"
 #include "NodePropertiesWidget.h"
 #include "MainWindow.h"
+#include "edgepropertieswidget.h"
 
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
  _graphDocument = 0;
  _hideEdges = false;
  _nodePropertiesWidget = new NodePropertiesWidget(qobject_cast<MainWindow*>(parent));
- 
+ _edgePropertiesWidget = new EdgePropertiesWidget();
 }
 
 bool GraphScene::hideEdges(){
@@ -144,8 +145,8 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     if(mouseEvent->button() == 4){
       NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
       if (!nitem) return;
-      Node *movableNode = nitem->node();
-      nitem->startDownSizing();
+	Node *movableNode = nitem->node();
+	nitem->startDownSizing();
 	movableNode->setWidth(1);
 	nitem->update();
 	nitem->endDownSizing();
@@ -158,15 +159,17 @@ void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
   if (selectedItems().size() == 1 && _action->name() == "select"){
     NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(selectedItems().at(0));
     if (nItem){
-      _nodePropertiesWidget->setNode(nItem->node());
+      _nodePropertiesWidget->setNode(nItem);
 	return;
     }
     EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(selectedItems().at(0));
     if (eItem){
+      _edgePropertiesWidget->setEdge(eItem->edge());
 	return;
     }
     OrientedEdgeItem *oItem = qgraphicsitem_cast<OrientedEdgeItem*>(selectedItems().at(0));
     if (oItem){
+      _edgePropertiesWidget->setEdge(oItem->edge());
 	return;
     }
   }

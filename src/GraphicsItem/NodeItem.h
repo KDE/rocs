@@ -105,6 +105,13 @@ private:
     QGraphicsRectItem	*_boundingRect;
     qreal _oldWidth;
     void setupTextAttributes();
+    
+    void eraseNode(QPainter *p);
+    void drawNode(QPainter *p);
+    void drawEnd(QPainter *p);    
+    void drawSelectRectangle(QPainter *p);
+    void drawBeginArrow(QPainter *p);
+
 };
 
 #endif

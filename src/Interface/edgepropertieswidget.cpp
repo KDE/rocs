@@ -26,11 +26,12 @@ EdgePropertiesWidget::EdgePropertiesWidget(): QWidget(0){
 
 void EdgePropertiesWidget::setEdge(Edge *e){
   _edge = e;
-  _name->setText(_edge->name());
-  _value->setText(_edge->value());
-  _color->setColor(_edge->color());
-  //_width->setValue(_edge->width());
-  //_style->set
+  _name->setText("Weeee");
+//   _name->setText(_edge->name());
+//   _value->setText(_edge->value());
+//   _color->setColor(_edge->color());
+//   _width->setValue(_edge->width());
+//   _style->setCurrentItem("Solid");
 }
 
 void EdgePropertiesWidget::on__name_textChanged(const QString& s){

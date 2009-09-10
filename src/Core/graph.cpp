@@ -201,6 +201,7 @@ void Graph::setName(const QString& s) {
 
 void Graph::setBegin(Node* n) {
     _begin = n;
+    if (!n) return;
     n->setBegin(true);
 }
 Node* Graph::begin() const {

@@ -64,8 +64,6 @@ NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
     }
     
     setupTextAttributes();
-    
-    
 }
 
 void NodeItem::setupTextAttributes(){
@@ -78,37 +76,27 @@ void NodeItem::setupTextAttributes(){
   
   if (_node -> showName() && ! name.isEmpty()){
     _name->show();
+    _name->setText(name);
     if (name.length() == 1){
        x1 = boundingRect().x() + boundingRect().width()/2;
-      _name->setText(name);
-      _name->font().setBold(true);
       _name->setPos(x1-6, y1);
     }
     else{
       x1 = boundingRect().x() + boundingRect().width() + 5;
-      _name->font().setBold(false);
-      _name->setText("Name "+name);
       _name->setPos(x1,y1);
     }
   }
-   x1 = boundingRect().x() + boundingRect().width() + 5;
+  x1 = boundingRect().x() + boundingRect().width() + 5;
   if (_node->showValue() && ! value.isEmpty()){
-    if( name.length() == 1){
-      _value->show();
-      _value->setText(value);
-      _value->setPos(x1,y1);
-    }else{
-      _value->show();
-      _value->setText("Value: "+value);
-      _value->setPos(x1,y1 + 12);
-    }
+    _value->show();
+    _value->setText(value);
+    _value->setPos(x1, (name.length() == 1)? y1 : y1 + 12);
   }
 }
 
 void NodeItem::updateAttributes(){
   setupTextAttributes();
   update();
-  kDebug() << "Deveria ter atualizado essa bagaça";
 }
 
 NodeItem::~NodeItem(){
@@ -178,56 +166,72 @@ void NodeItem::endDownSizing(){
   _isDownSizing = 0;
   _oldWidth = _node->width();
 }
-    
-void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *) {
+  
+void NodeItem::eraseNode(QPainter *p){
+  QColor c = _color;
+  c.setAlphaF(0);
+  p->setPen(QPen(c));
+  p->setBrush(QBrush(c));
+  p->drawRect(QRectF(-11 * _oldWidth, -11 * _oldWidth, 24 * _oldWidth, 24 * _oldWidth));
+}
+
+void NodeItem::drawSelectRectangle(QPainter *p){
+  if (isSelected()) {
+    QPen pen(Qt::black, 1, Qt::DotLine);
+    p->setBrush(QBrush());
+    p->setPen(pen);
+    p->drawRect(QRectF(-11 * _oldWidth , -11 * _oldWidth , 24 * _oldWidth , 24 * _oldWidth ));
+  }
+}
+
+void NodeItem::drawBeginArrow(QPainter *p){
+  if( _node && _node->begin() ){
+    if (_removingBeginFlag == false){
+      _removingBeginFlag = true;
+    }
+    QPen pen(Qt::black, 1, Qt::SolidLine);
+    p->setPen(pen);
+    p->setBrush(QBrush());
+    p->drawLine(-20, -10, 0, 0);
+    p->drawLine(-52, 0, 0, 0);
+    p->drawLine(-20, 10, 0, 0);
+  }
+  else if (_removingBeginFlag){
+   _removingBeginFlag = false;
+  }
+}
+
+void NodeItem::drawNode(QPainter *p){
+   QRadialGradient gradient(-3 * _oldWidth, -3 * _oldWidth, 10 * _oldWidth);
+   gradient.setColorAt(0, _color.light(240));
+   gradient.setColorAt(1, _color); 
+   p->setBrush(gradient);
+   p->setPen(QPen(_color, 2));
+   p->drawEllipse(-10 * _oldWidth, -10 * _oldWidth, 20 * _oldWidth, 20 * _oldWidth);
+}
+
+void NodeItem::drawEnd(QPainter *p){
+   if(_node && _node->end() ){
+      QColor c(Qt::black);
+      c.setAlphaF(_opacity);
+      p->setPen(c);
+      p->drawEllipse(-7 * _oldWidth, -7 * _oldWidth, 15 * _oldWidth, 15 * _oldWidth); 
+    }
+}
+void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget *) {
+  // setups base color.
   if (_node){
     _color = _node->color(); 
   }
   
-  QColor c = _color;
-  c.setAlphaF(0);
-  painter->setPen(QPen(c));
-  painter->setBrush(QBrush(c));
-  painter->drawRect(QRectF(-11 * _oldWidth, -11 * _oldWidth, 24 * _oldWidth, 24 * _oldWidth));
-    
-  if (isSelected()) {
-    QPen pen(Qt::black, 1, Qt::DotLine);
-    painter->setBrush(QBrush());
-    painter->setPen(pen);
-    painter->drawRect(QRectF(-11 * _oldWidth , -11 * _oldWidth , 24 * _oldWidth , 24 * _oldWidth ));
-  }
-  if( _node && _node->begin() ){
-    if (_removingBeginFlag == false) _removingBeginFlag = true;
-    painter->drawLine(-20, -10, 0, 0);
-    painter->drawLine(-52, 0, 0, 0);
-    painter->drawLine(-20, 10, 0, 0);
-  }
-  else if (_removingBeginFlag) _removingBeginFlag = false;
-    painter->setPen(Qt::NoPen);
-    
-    _color.setAlphaF(_opacity);
-    painter->setBrush( _color.dark(240) );
+  eraseNode(painter);
+  drawSelectRectangle(painter);
+  drawBeginArrow(painter);
 
-    painter->drawEllipse(-7 * _oldWidth, -7 * _oldWidth, 20 * _oldWidth, 20 * _oldWidth);
-    QRadialGradient gradient(-3 * _oldWidth, -3 * _oldWidth, 10 * _oldWidth);
-    
-    if (option->state & QStyle::State_Sunken) {
-        gradient.setColorAt(0, _color.light(240));
-        gradient.setColorAt(1, _color);
-    } else {
-        gradient.setColorAt(0, _color.light(240));
-        gradient.setColorAt(1, _color);
-    }
-
-    painter->setBrush(gradient);
-    painter->setPen(QPen(_color, 2));
-    painter->drawEllipse(-10 * _oldWidth, -10 * _oldWidth, 20 * _oldWidth, 20 * _oldWidth);
-    if(_node && _node->end() ){
-      QColor c(Qt::black);
-      c.setAlphaF(_opacity);
-      painter->setPen(c);
-      painter->drawEllipse(-7 * _oldWidth, -7 * _oldWidth, 15 * _oldWidth, 15 * _oldWidth); 
-    }
+  painter->setPen(Qt::NoPen); 
+  _color.setAlphaF(_opacity);
+  drawNode(painter);
+  drawEnd(painter);    
 }
 
 void NodeItem::updatePos() { 

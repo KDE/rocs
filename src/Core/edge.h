@@ -61,6 +61,12 @@ class Edge : public QObject {
     /*! this property holds the name of the edge. */
     Q_PROPERTY(QString name READ name WRITE setName);
 
+    /*! this property holds the width of the edge */
+    Q_PROPERTY(qreal width READ width WRITE setWidth);
+    
+    /*! this property holds the style of the edge */
+    Q_PROPERTY(QString style READ style WRITE setStyle);
+    
 public:
     /*! default constructor, an edge connects two nodes.
     \p parent a Graph 
@@ -143,7 +149,11 @@ public  slots:
     */ 
     void setColor(const QString& s) { _color = s;  emit updateNeeded(); }
 
-
+    qreal width () const { return _width;}
+    void setWidth(qreal w) { _width = w; emit updateNeeded(); }
+    
+    const QString& style() const{ return _style; }
+    void setStyle(const QString& s){ _style = s; emit updateNeeded(); } 
 #ifdef USING_QTSCRIPT
     /*! this method can be used inside of the script interface. 
     \return the first node of this edge. 
@@ -183,6 +193,8 @@ private:
     bool _showName;
     bool _showValue;
     
+    QString _style;
+    qreal _width;
 
 #ifdef USING_QTSCRIPT
     /*! if the script interface is Qt-Script, this will hold the scriptValue self-reference. */

@@ -29,8 +29,8 @@ Node::Node(QObject *parent) : QObject(parent) {
     _width = 1;
     _showName = true;
     _showValue = true;
-    setBegin(false);
-    setEnd(false);
+    _begin = false;
+    _end = false;
     _color = qobject_cast<Graph*>(parent)->nodeDefaultColor();
     _changing = false;
     _value = '0';
@@ -202,9 +202,9 @@ void Node::setY(qreal y) {
 
 void Node::setWidth(qreal w) {
   _width = w;
-  kDebug() << "Modificando Width";
     if (! _changing){
       emit updateNeeded();
+      kDebug() << "Updating node drawing";
     }
 }
 
@@ -243,21 +243,28 @@ const QString& Node::name() const {
 }
 
 void Node::setBegin(bool begin) {
-    _begin = begin;
-    if (begin) {
-        Graph *p = qobject_cast<Graph*>(QObject::parent());
-	if (p->begin() == this){
-	  return;
-	}
-        p->setBegin(this);
-    }
-    if (! _changing){
-      emit updateNeeded();
-    }
+  Graph *p = qobject_cast<Graph*>(parent());
+  
+  if (!begin) {
+    _begin = false;
+    p->setBegin(0);
+  }
+  else if (p->begin() == this){
+      return;
+  }
+  else{
+    p->setBegin(this);
+    _begin = true;
+  }
+  
+  if (! _changing){
+    emit updateNeeded();
+  }
 }
 
 void Node::setEnd(bool end) {
     _end = end;
+    
     Graph *p = qobject_cast<Graph*>(QObject::parent());
     if (end) {
         p->addEnd(this);
@@ -272,9 +279,11 @@ void Node::setEnd(bool end) {
 bool Node::begin() const {
     return _begin;
 }
+
 bool Node::end() const {
     return _end;
 }
+
 const QString& Node::value() const {
     return _value;
 }

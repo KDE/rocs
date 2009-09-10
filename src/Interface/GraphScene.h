@@ -36,6 +36,7 @@ class QKeyEvent;
 class NodeItem;
 class EdgeItem;
 class NodePropertiesWidget;
+class EdgePropertiesWidget;
 
 class GraphScene : public QGraphicsScene {
   Q_OBJECT
@@ -73,7 +74,7 @@ private:
     QList<QGraphicsItem*> _hidedEdges;
     bool _hideEdges;
      NodePropertiesWidget *_nodePropertiesWidget;
-//     EdgePropertiesWidget *_edgePropWidget;
+     EdgePropertiesWidget *_edgePropertiesWidget;
 };
 
 #endif
