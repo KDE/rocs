@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+	http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+	<kcfgfile name="rocsrc"/>
+	<group name="ItemPalette">
+		<entry name="showButtonText" type="Bool">
+			<label>Show text beside icon</label>
+			<whatsthis>Show text beside icon</whatsthis>
+			<default>true</default>
+		</entry>
+	</group>
+	<group name="GraphicsView">
+		 <entry name="fastGraphics" type="Bool">
+			<label>Draw the graphics using the fastest (but ugliest) method. </label>
+			<whatsthis>long explanation needed. </whatsthis>
+			<default>false</default>
+		 </entry>
+	</group>
+	<group name="MainWindow">
+		<entry name="vSplitterSizeTop" type="Int">
+			<label> The Right Size of the Cell </label>
+			<whatsthis> long  explanation needed </whatsthis>
+			<default>200</default>
+		</entry>
+		<entry name="vSplitterSizeBottom" type="Int">
+			<label> The Right Size of the Cell </label>
+			<whatsthis> long  explanation needed </whatsthis>
+			<default>200</default>
+		</entry>
+		<entry name="hSplitterSizeLeft" type="Int">
+			<label> the Top Size of the cell </label>
+			<whatsthis> long explanation needed </whatsthis>
+			<default> 500 </default>
+		</entry>
+		<entry name="hSplitterSizeRight" type="Int">
+			<label> the Top Size of the cell </label>
+			<whatsthis> long explanation needed </whatsthis>
+			<default> 500 </default>
+		</entry>
+	</group>
+</kcfg>

@@ -1,0 +1,478 @@
+ 
+ 
+ ############ Graph  ########### 
+ 
+[Graph 0] 
+directed : false 
+name : azuis 
+nodeDefaultColor : #a0a0a4 
+edgeDefaultColor : #c0c0c0 
+automate : false 
+
+ 
+ 
+ ############ NODES ########### 
+ 
+[Node 0]
+x : 230 
+y : 161 
+width : 2.25 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 1]
+x : 242 
+y : 106 
+width : 0.5 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 2]
+x : 200 
+y : 73 
+width : 1 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 3]
+x : 225 
+y : 86 
+width : 0.5 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 4]
+x : 254 
+y : 120 
+width : 0.5 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 5]
+x : 259 
+y : 137 
+width : 0.5 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 6]
+x : 211 
+y : 156 
+width : 1 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 7]
+x : 233 
+y : 156 
+width : 1 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 8]
+x : 226 
+y : 241 
+width : 3 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 9]
+x : 172 
+y : 226 
+width : 0.75 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 10]
+x : 289 
+y : 221 
+width : 0.75 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 11]
+x : 202 
+y : 301 
+width : 0.5 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 12]
+x : 256 
+y : 301 
+width : 0.5 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 13]
+x : 198 
+y : 360 
+width : 1.5 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 14]
+x : 259 
+y : 364 
+width : 1.5 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 15]
+x : 165 
+y : 283 
+width : 1 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+[Node 16]
+x : 293 
+y : 291 
+width : 1 
+name : untitled 
+color : #a0a0a4 
+begin : false 
+end : false 
+value :  
+
+ 
+ 
+ ############ EDGES ########### 
+ 
+[Edge 0->1]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 0->2]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 0->3]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 0->4]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 0->5]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 8->0]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 9->8]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 8->10]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 8->11]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 11->13]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 12->14]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 12->8]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 10->16]
+color : #c0c0c0 
+value :  
+name :  
+
+[Edge 9->15]
+color : #c0c0c0 
+value :  
+name :  
+
+ 
+ 
+ ############ Graph  ########### 
+ 
+[Graph 1] 
+directed : false 
+name : patterson 
+nodeDefaultColor : #008000 
+edgeDefaultColor : gray 
+automate : false 
+
+ 
+ 
+ ############ NODES ########### 
+ 
+[Node 0]
+x : 467 
+y : 46 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 1]
+x : 410 
+y : 79 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 2]
+x : 446 
+y : 138 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 3]
+x : 514 
+y : 131 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 4]
+x : 524 
+y : 69 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 5]
+x : 461 
+y : 10 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 6]
+x : 371 
+y : 66 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 7]
+x : 559 
+y : 48 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 8]
+x : 544 
+y : 159 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+[Node 9]
+x : 426 
+y : 172 
+width : 1 
+name : untitled 
+color : #008000 
+begin : false 
+end : false 
+value :  
+
+ 
+ 
+ ############ EDGES ########### 
+ 
+[Edge 6->5]
+color : gray 
+value :  
+name :  
+
+[Edge 5->7]
+color : gray 
+value :  
+name :  
+
+[Edge 7->8]
+color : gray 
+value :  
+name :  
+
+[Edge 8->9]
+color : gray 
+value :  
+name :  
+
+[Edge 9->6]
+color : gray 
+value :  
+name :  
+
+[Edge 6->1]
+color : gray 
+value :  
+name :  
+
+[Edge 1->0]
+color : gray 
+value :  
+name :  
+
+[Edge 0->5]
+color : gray 
+value :  
+name :  
+
+[Edge 0->4]
+color : gray 
+value :  
+name :  
+
+[Edge 4->3]
+color : gray 
+value :  
+name :  
+
+[Edge 3->2]
+color : gray 
+value :  
+name :  
+
+[Edge 2->9]
+color : gray 
+value :  
+name :  
+
+[Edge 2->1]
+color : gray 
+value :  
+name :  
+
+[Edge 4->7]
+color : gray 
+value :  
+name :  
+
+[Edge 8->3]
+color : gray 
+value :  
+name :  
+
+[Edge 0->2]
+color : gray 
+value :  
+name :  
+
+[Edge 1->4]
+color : gray 
+value :  
+name :  
+
+[Edge 3->0]
+color : gray 
+value :  
+name :  
+
+[Edge 2->4]
+color : gray 
+value :  
+name :  
+
+[Edge 1->3]
+color : gray 
+value :  
+name :  
+

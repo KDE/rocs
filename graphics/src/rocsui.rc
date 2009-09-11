@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gui name="rocs"
+     version="6"
+     xmlns="http://www.kde.org/standards/kxmlgui/1.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
+                         http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd" >
+ 
+  <MenuBar>
+    <Menu name="file" >
+      <Menu name="graph"><Text> Graph </Text>
+	<Action name="new-graph" />
+	<Action name="open-graph" />
+	<Action name="save-graph" />
+	<Action name="save-graph-as" />
+      </Menu>
+      <Menu name="Script"> <Text> Script </Text>
+	<Action name="new-script" />
+	<Action name="open-script" />
+	<Action name="save-script" />
+	<Action name="save-script-as" />
+      </Menu>
+    </Menu>
+  </MenuBar>
+ 
+  <ToolBar name="main" >
+    <text>Main Toolbar</text>
+      <Action name="move_node" />
+      <Action name="add_node" />
+      <Action name="add_edge" />
+      <Action name="select" />
+      <Action name="delete" />
+  </ToolBar>
+  <ToolBar name="layout">
+      <text>Layout Toolbar</text>
+      <Action name="align-htop"/>
+      <Action name="align-hcenter"/>
+      <Action name="align-hbottom"/>
+      <Action name="align-vleft"/>
+      <Action name="align-vcenter"/>
+      <Action name="align-vright" />
+  </ToolBar>
+</gui>
+

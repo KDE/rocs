@@ -1,0 +1,50 @@
+<ui version="4.0" >
+ <class>OpenedFilesWidget</class>
+ <widget class="QWidget" name="OpenedFilesWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>379</width>
+    <height>519</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
+   <item row="0" column="0" colspan="2" >
+    <widget class="QListView" name="_openedFilesListView" />
+   </item>
+   <item row="1" column="0" >
+    <widget class="KPushButton" name="_btnNewFile" >
+     <property name="text" >
+      <string>New File</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <spacer name="horizontalSpacer" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>298</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
