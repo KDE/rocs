@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>163</width>
-    <height>146</height>
+    <width>190</width>
+    <height>191</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,6 +49,11 @@
     <widget class="KComboBox" name="_style">
      <item>
       <property name="text">
+       <string>solid</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>dash</string>
       </property>
      </item>
@@ -85,12 +90,18 @@
      <property name="text">
       <string>name</string>
      </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="6" column="3">
     <widget class="KPushButton" name="_showValue">
      <property name="text">
       <string>value</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

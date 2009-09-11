@@ -85,7 +85,14 @@ void EdgeItem::updatePos() {
 }
 
 void EdgeItem::updateAttributes() {
-    setPen(QPen(QBrush(QColor(_edge->color())), 1, Qt::SolidLine,Qt::RoundCap, Qt::RoundJoin));
+    Qt::PenStyle s;
+    if     (_edge->style() == "dash")    { s = Qt::DashLine;   }
+    else if(_edge->style() == "dot")     { s = Qt::DotLine;    }
+    else if(_edge->style() == "dash dot"){ s = Qt::DashDotLine;}
+    else if(_edge->style() == "solid")   { s = Qt::SolidLine;  }
+    else                                 { s = Qt::SolidLine;  }
+    
+    setPen(QPen(QBrush(QColor(_edge->color())), _edge->width(), s,Qt::RoundCap, Qt::RoundJoin));
     QLineF l = line();
     _value->hide();
     _name->hide();

@@ -40,7 +40,7 @@ void EdgePropertiesWidget::reflectAttributes(){
    _value->setText(_edge->value());
    _color->setColor(_edge->color());
    _width->setValue(_edge->width());
-   _style->setCurrentItem("dash");
+   _style->setCurrentItem(_edge->style());
 
 }
 void EdgePropertiesWidget::on__name_textChanged(const QString& s) {
@@ -56,9 +56,17 @@ void EdgePropertiesWidget::on__color_activated(const QColor& c) {
 }
 
 void EdgePropertiesWidget::on__width_valueChanged(double v) {
-    //_edge->setWidth(v);
+    _edge->setWidth(v);
 }
 
 void EdgePropertiesWidget::on__style_activated(const QString& s) {
-    //_edge->setStyle(s);
+    _edge->setStyle(s);
+}
+
+void EdgePropertiesWidget::on__showName_toggled(bool b){
+  _edge->hideName(!b);
+}
+
+void EdgePropertiesWidget::on__showValue_toggled(bool b){
+  _edge->hideValue(!b);
 }

@@ -45,7 +45,8 @@ Edge::Edge(QObject *parent, Node *from, Node *to) :
     _relativeIndex = _to -> edges(_from).size();
     _showName = true;
     _showValue = true;
-
+    _style = "solid";
+    _width = 1;
 }
 
 Edge::~Edge() {

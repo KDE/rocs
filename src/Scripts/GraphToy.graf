@@ -16,7 +16,7 @@ automate : false
 [Node 0]
 x : 230 
 y : 161 
-z : 2.25 
+width : 2.25 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -26,7 +26,7 @@ value :
 [Node 1]
 x : 242 
 y : 106 
-z : 0.5 
+width : 0.5 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -36,7 +36,7 @@ value :
 [Node 2]
 x : 200 
 y : 73 
-z : 1 
+width : 1 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -46,7 +46,7 @@ value :
 [Node 3]
 x : 225 
 y : 86 
-z : 0.5 
+width : 0.5 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -56,7 +56,7 @@ value :
 [Node 4]
 x : 254 
 y : 120 
-z : 0.5 
+width : 0.5 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -66,7 +66,7 @@ value :
 [Node 5]
 x : 259 
 y : 137 
-z : 0.5 
+width : 0.5 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -76,7 +76,7 @@ value :
 [Node 6]
 x : 211 
 y : 156 
-z : 1 
+width : 1 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -86,7 +86,7 @@ value :
 [Node 7]
 x : 233 
 y : 156 
-z : 1 
+width : 1 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -96,7 +96,7 @@ value :
 [Node 8]
 x : 226 
 y : 241 
-z : 3 
+width : 3 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -106,7 +106,7 @@ value :
 [Node 9]
 x : 172 
 y : 226 
-z : 0.75 
+width : 0.75 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -116,7 +116,7 @@ value :
 [Node 10]
 x : 289 
 y : 221 
-z : 0.75 
+width : 0.75 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -126,7 +126,7 @@ value :
 [Node 11]
 x : 202 
 y : 301 
-z : 0.5 
+width : 0.5 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -136,7 +136,7 @@ value :
 [Node 12]
 x : 256 
 y : 301 
-z : 0.5 
+width : 0.5 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -146,7 +146,7 @@ value :
 [Node 13]
 x : 198 
 y : 360 
-z : 1.5 
+width : 1.5 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -156,7 +156,7 @@ value :
 [Node 14]
 x : 259 
 y : 364 
-z : 1.5 
+width : 1.5 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -166,7 +166,7 @@ value :
 [Node 15]
 x : 165 
 y : 283 
-z : 1 
+width : 1 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -176,7 +176,7 @@ value :
 [Node 16]
 x : 293 
 y : 291 
-z : 1 
+width : 1 
 name : untitled 
 color : #a0a0a4 
 begin : false 
@@ -275,7 +275,7 @@ automate : false
 [Node 0]
 x : 467 
 y : 46 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -285,7 +285,7 @@ value :
 [Node 1]
 x : 410 
 y : 79 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -295,7 +295,7 @@ value :
 [Node 2]
 x : 446 
 y : 138 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -305,7 +305,7 @@ value :
 [Node 3]
 x : 514 
 y : 131 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -315,7 +315,7 @@ value :
 [Node 4]
 x : 524 
 y : 69 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -325,7 +325,7 @@ value :
 [Node 5]
 x : 461 
 y : 10 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -335,7 +335,7 @@ value :
 [Node 6]
 x : 371 
 y : 66 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -345,7 +345,7 @@ value :
 [Node 7]
 x : 559 
 y : 48 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -355,7 +355,7 @@ value :
 [Node 8]
 x : 544 
 y : 159 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 
@@ -365,7 +365,7 @@ value :
 [Node 9]
 x : 426 
 y : 172 
-z : 1 
+width : 1 
 name : untitled 
 color : #008000 
 begin : false 

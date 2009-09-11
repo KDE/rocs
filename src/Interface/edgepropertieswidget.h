@@ -41,7 +41,9 @@ public slots:
     void on__width_valueChanged(double v);
     void on__style_activated(const QString& s);
     void reflectAttributes();
-
+    void on__showName_toggled(bool b);
+    void on__showValue_toggled(bool b);
+    
 private:
     Edge *_edge;
 };

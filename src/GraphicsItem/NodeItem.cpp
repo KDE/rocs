@@ -195,9 +195,9 @@ void NodeItem::drawBeginArrow(QPainter *p) {
         QPen pen(Qt::black, 1, Qt::SolidLine);
         p->setPen(pen);
         p->setBrush(QBrush());
-        p->drawLine(-20, -10, 0, 0);
-        p->drawLine(-52, 0, 0, 0);
-        p->drawLine(-20, 10, 0, 0);
+        p->drawLine(-20*_oldWidth, -10*_oldWidth, 0, 0);
+        p->drawLine(-52*_oldWidth, 0, 0, 0);
+        p->drawLine(-20*_oldWidth, 10*_oldWidth, 0, 0);
     }
     else if (_removingBeginFlag) {
         _removingBeginFlag = false;
