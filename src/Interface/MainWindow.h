@@ -61,11 +61,9 @@ public:
     void debug(const QString& s);
     GraphDocument *activeDocument() const;
 private: // Methods
-    void setupModels();	// setup all the models to be used on the views.
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.
-    void setupSignals();
-
+    
     QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
     QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
 
@@ -84,9 +82,7 @@ public slots:
 private: // Variables.
 
     // Left Area:
-    OpenedFilesWidget* _OpenedFiles;	//! area where the opened files will be
     GraphLayers* _GraphLayers; //! Area where the nodes and edges will be modified.
-    TabWidget *_leftTabs; //! Tab that will hold the pallete, opened files, graphLayers and Properties.
     KPushButton *_btnAddGraph;
 
     // Right Area:
@@ -96,8 +92,6 @@ private: // Variables.
     KTextBrowser *_txtDebug; //! this is the debug view.
 
     // Other Bunch of stuff.
-    QList<GraphDocument*> _documents; //! The list of opend documents
-    GraphDocumentModel *_documentModel; //! the model that hold the documents. there's a need for a Model and a QList?
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
     KAction *_runScript;
 

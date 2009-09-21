@@ -35,6 +35,7 @@ GraphDocument::GraphDocument(const QString name, int width,  int height)
     _name = name;
     _width = width;
     _height = height;
+    _modified = false;
 }
 
 GraphDocument::GraphDocument(const GraphDocument& gd)
@@ -89,6 +90,9 @@ qreal GraphDocument::width() const {
     return _width;
 }
 
+bool GraphDocument::isModified(){
+  return _modified;
+}
 Graph* GraphDocument::addGraph(QString name) {
     Graph *g = new Graph(this);
     g->setName(name);
@@ -194,7 +198,6 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
 // //    GraphGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
 
-
     while (!f.atEnd()) {
         QString str = f.readLine();
         str = str.simplified();
@@ -243,7 +246,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         }
         else {
 //            // tmpGroup->append( tmpGraph->node(str));
-        }
+	}
     }
-
+    kDebug() << "Graph Document Loaded.";
 }

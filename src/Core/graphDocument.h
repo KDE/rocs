@@ -45,6 +45,9 @@ public:
     /*! Default Destructor */
     ~GraphDocument();
 
+    /*! verifies if this document is changed */
+    bool isModified();
+    
     /*! Sets the current file name of the Graph Collection
       \param name changes the name of the document.
     */
@@ -111,6 +114,7 @@ private:
     QString _name;
     qreal _width;
     qreal _height;
+    bool _modified;
 };
 
 #endif

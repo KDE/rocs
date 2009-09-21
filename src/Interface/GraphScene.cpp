@@ -91,7 +91,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
         updateGraph(_graphDocument->at(i));
         kDebug() << "Graph Updated.";
     }
-
+    kDebug() << "Graph Document Setted" << _graphDocument -> name();
 }
 
 QGraphicsItem *GraphScene::createNode(Graph *g, Node *n, bool f) {

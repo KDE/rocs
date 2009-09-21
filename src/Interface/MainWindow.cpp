@@ -34,12 +34,13 @@
 #include <KToolBar>
 #include <QToolButton>
 #include <QGraphicsView>
+#include <klocalizedstring.h>
+
 #include <kfiledialog.h>
 #include "TabWidget.h"
 
 // UI RELATED INCLUDES
 
-#include "OpenedFilesWidget.h"
 #include "GraphLayers.h"
 #include "GraphVisualEditor.h"
 #include "GraphScene.h"
@@ -76,23 +77,20 @@ MainWindow* mainWindow = 0;
 
 MainWindow::MainWindow() :
         KXmlGuiWindow() {
-    _documentModel = 0;
     _activeGraphDocument = 0;
     _graph = 0;
     setObjectName ( "Rocs" );
 
-    setupModels();
     setupWidgets();
     setupActions();
-    setupSignals();
 
-    // this will create a new opened file by default.
-    _OpenedFiles->on__btnNewFile_clicked();
+    // this will create a new opened file by default
+    setActiveGraphDocument( new GraphDocument("Untitled", 800, 600));
     _activeGraphDocument->addGraph("Untitled0");
     setupGUI();
     _moveNodeAction->setView( _graphVisualEditor->view() );
+
     mainWindow = this;
-    _OpenedFiles->selectDefaultFile();
     statusBar()->hide();
     _GraphLayers->populate();
 }
@@ -104,10 +102,6 @@ MainWindow::~MainWindow() {
     Settings::setHSplitterSizeRight( _hSplitter->sizes()[1] );
 
     Settings::self()->writeConfig();
-}
-
-void MainWindow::setupModels() {
-    _documentModel = new GraphDocumentModel( &_documents );
 }
 
 GraphDocument *MainWindow::activeDocument() const {
@@ -150,18 +144,13 @@ QWidget* MainWindow::setupRightPanel() {
 }
 
 QWidget* MainWindow::setupLeftPanel() {
-    _leftTabs = new TabWidget(TabWidget::TabOnLeft, this);
-    _OpenedFiles = new OpenedFilesWidget ( _documentModel, this );
     _GraphLayers = new GraphLayers(this);
-    _leftTabs->addWidget( _OpenedFiles,  "Files", KIcon("document-open"));
-    _leftTabs->addWidget( _GraphLayers, "Properties" , KIcon("applications-system"));
-    return _leftTabs;
+    return _GraphLayers;
 }
 
 void MainWindow::setupActions() {
     kDebug() << "Entrou no Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
-
 
     GraphScene *gc = _graphVisualEditor->scene();
     if (!gc) {
@@ -184,7 +173,7 @@ void MainWindow::setupActions() {
     ac->addAction("align-vcenter",new AlignAction( "Align on the center",AlignAction::VCenter,_graphVisualEditor ));
     ac->addAction("align-vright", new AlignAction( "Align on the right", AlignAction::Right,  _graphVisualEditor ));
 
-    KAction* action = new KAction(KIcon("document-new"),i18n("New Graph"),  _graphVisualEditor->view());
+    KAction* action = new KAction(KIcon("document-new"), "New Graph",  _graphVisualEditor->view());
     action->setShortcut(Qt::CTRL + Qt::Key_N);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("new-graph", action);
@@ -235,16 +224,8 @@ void MainWindow::setupActions() {
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
 
-void MainWindow::setupSignals() {
-    connect( _OpenedFiles, SIGNAL(activeDocumentChanged(GraphDocument*)),
-             this,	 SLOT(setActiveGraphDocument(GraphDocument*)));
-
-//connect( actionCollection()->action("select"), SIGNAL(ItemSelectedChanged(QGraphicsItem*)),
-//            _GraphProperties, SLOT(setDataSource(QGraphicsItem*)));
-
-}
-
-void MainWindow::setActiveGraphDocument(GraphDocument* d) {
+void MainWindow::setActiveGraphDocument(GraphDocument* d)
+{
     _activeGraphDocument = d;
     _graphVisualEditor->setActiveGraphDocument(d);
     foreach( QAction *action, actionCollection()->actions() ) {
@@ -257,7 +238,8 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d) {
     _GraphLayers->populate();
 }
 
-void MainWindow::setActiveGraph( Graph *g) {
+void MainWindow::setActiveGraph( Graph *g)
+{
     if ( _activeGraphDocument  == 0) {
         kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should beong to one.";
         return;
@@ -284,12 +266,20 @@ GraphScene* MainWindow::scene() const {
 }
 
 void MainWindow::newGraph() {
-    _OpenedFiles->on__btnNewFile_clicked();
+    
 }
 
 void MainWindow::openGraph() {
-    _OpenedFiles->on__btnNewFile_clicked();
+    if (_activeGraphDocument->isModified()){
+      if (KMessageBox::warningYesNo(this, i18n("Wanna save your unsaved document?")) == KMessageBox::Yes){
+	 _activeGraphDocument->savedDocumentAt(_activeGraphDocument->documentPath());
+      }
+    }
+    GraphDocument *oldGraphDocument = _activeGraphDocument;
+    setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
     _activeGraphDocument->loadFromInternalFormat(KFileDialog::getOpenFileName());
+    _GraphLayers->populate();
+   _graphVisualEditor->scene()->updateDocument();
 }
 
 void MainWindow::saveGraph() {
