@@ -97,6 +97,7 @@ Graph* GraphDocument::addGraph(QString name) {
     Graph *g = new Graph(this);
     g->setName(name);
     append(g);
+    emit graphCreated(g);
     return g;
 }
 

@@ -85,28 +85,38 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     addItem(n);
 
     int size = _graphDocument->size();
-
+    kDebug() << "AAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH";
     for (int i = 0; i < size; i++) {
         kDebug() << "Updating Graph at position: " << i;
         updateGraph(_graphDocument->at(i));
+	connect( _graphDocument->at(i), SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)));
+	connect( _graphDocument->at(i), SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)));
         kDebug() << "Graph Updated.";
     }
+    connect( _graphDocument, SIGNAL(graphCreated(Graph*)), this, SLOT(connectGraphSignals(Graph*)));
+    kDebug() << "AAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH";
     kDebug() << "Graph Document Setted" << _graphDocument -> name();
 }
 
-QGraphicsItem *GraphScene::createNode(Graph *g, Node *n, bool f) {
+void GraphScene::connectGraphSignals(Graph *g){
+	connect( g, SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)));
+	connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)));
+}
+
+QGraphicsItem *GraphScene::createNode(Node *n, bool f) {
     NodeItem *nItem = new NodeItem(n, 0, f);
-    insertGraphItem(g, nItem);
+    insertGraphItem(n->graph(), nItem);
+    kDebug() << "Node Item Created";
     return nItem;
 }
 
-QGraphicsItem *GraphScene::createEdge(Graph *g, Edge *e) {
+QGraphicsItem *GraphScene::createEdge(Edge *e) {
     QGraphicsItem *edgeItem = 0;
 
-    if ( !g->directed() )  edgeItem = new EdgeItem(e);
+    if ( !e->graph()->directed() )  edgeItem = new EdgeItem(e);
     else         edgeItem = new OrientedEdgeItem(e);
 
-    insertGraphItem(g, edgeItem);
+    insertGraphItem(e->graph(), edgeItem);
     return edgeItem;
 }
 
@@ -220,13 +230,13 @@ void GraphScene::updateGraph(Graph *g) {
     kDebug() << "Creating" << g->nodes().size() << "nodes";
     QList<Node*> nodes = g->nodes();
     foreach(Node *n, nodes) {
-        createNode(g, n, false);
+        createNode(n, false);
     }
     
     kDebug() << "Creating" << g->nodes().size() << "edges";
     QList<Edge*> edges = g->edges();
     foreach(Edge *e, edges) {
-        createEdge(g, e);
+        createEdge( e);
     }
 }
 

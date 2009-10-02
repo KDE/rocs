@@ -43,8 +43,6 @@ class GraphScene : public QGraphicsScene {
 public:
     GraphScene(QObject *parent);
     void setAction(QAction *action);
-    QGraphicsItem* createNode(Graph *g, Node *n, bool f = true);
-    QGraphicsItem* createEdge(Graph *g, Edge *e);
     void updateGraph(Graph *g);
     void updateDocument();
     void setActiveGraph(Graph *g);
@@ -58,7 +56,10 @@ public:
 
 public slots:
     void removeGItem(QGraphicsItem *i);
-
+    QGraphicsItem* createNode( Node *n, bool f = true);
+    QGraphicsItem* createEdge( Edge *e);
+    void connectGraphSignals(Graph *g);
+    
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
@@ -75,6 +76,7 @@ private:
     bool _hideEdges;
     NodePropertiesWidget *_nodePropertiesWidget;
     EdgePropertiesWidget *_edgePropertiesWidget;
+
 };
 
 #endif

@@ -87,7 +87,7 @@ void AddEdgeAction::executeRelease(QPointF pos) {
     if (  _nodeTo ) {
         Edge *e = _graph -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
         if (e) {
-            _graphScene->createEdge(_graph, e);
+            _graphScene->createEdge(e);
         }
     }
 

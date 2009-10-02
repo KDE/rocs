@@ -338,7 +338,7 @@ void MainWindow::executeScript() {
    
     delete engine;
     delete e;
-    scene()->updateDocument();
+   // scene()->updateDocument();
 }
 
 #endif
