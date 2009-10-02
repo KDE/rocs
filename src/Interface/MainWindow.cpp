@@ -93,6 +93,8 @@ MainWindow::MainWindow() :
     mainWindow = this;
     statusBar()->hide();
     _GraphLayers->populate();
+    
+
 }
 
 MainWindow::~MainWindow() {
@@ -322,22 +324,21 @@ void MainWindow::executeScript() {
     if (_txtDebug == 0) {
         return;
     }
-
-    _txtDebug->clear();
-    QtScriptBackend *engine = new QtScriptBackend((*_activeGraphDocument),  _txtDebug);
-    QScriptEngineDebugger *e = new QScriptEngineDebugger(this);
-
-    e->attachTo(engine);
-
-    engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
-    QScriptValue results = engine->evaluate(_codeEditor->text());
-    _txtDebug->insertPlainText(results.toString());
-
     if (scene() == 0) {
         return;
     }
-
-    _graphVisualEditor->scene()->updateDocument();
+    
+    _txtDebug->clear();
+     QtScriptBackend* engine = new QtScriptBackend( (*_activeGraphDocument) ,  _txtDebug);
+    QScriptEngineDebugger *e = new QScriptEngineDebugger(this);
+    e->attachTo(engine);
+    engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
+    QScriptValue results = engine->evaluate(_codeEditor->text());
+    _txtDebug->insertPlainText(results.toString());
+   
+    delete engine;
+    delete e;
+    scene()->updateDocument();
 }
 
 #endif

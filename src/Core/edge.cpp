@@ -23,12 +23,13 @@
 #include "graph.h"
 #include <KDebug>
 
-Edge::Edge(QObject *parent, Node *from, Node *to) :
+Edge::Edge(Graph *parent, Node *from, Node *to) :
         QObject(parent),
         _from(from),
         _to(to)
 {
-    _color = qobject_cast<Graph*>(parent)->edgeDefaultColor();
+  _graph = parent;
+    _color =_graph->edgeDefaultColor();
 
     if ( from == to ) {
         connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
@@ -63,7 +64,7 @@ Edge::~Edge() {
 }
 
 void Edge::remove() {
-    qobject_cast<Graph*>(QObject::parent())->remove(this);
+    _graph->remove(this);
 }
 
 

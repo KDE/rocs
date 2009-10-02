@@ -52,6 +52,7 @@ class QScriptEngine;
 class MainWindow : public KXmlGuiWindow {
     Q_OBJECT
 
+
 public:
     /*! defalt constructor */
     MainWindow();

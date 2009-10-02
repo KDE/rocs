@@ -23,7 +23,8 @@
 #include <KDebug>
 
 
-Node::Node(QObject *parent) : QObject(parent) {
+Node::Node(Graph *parent) : QObject(parent) {
+    _graph = parent;
     _x = 0;
     _y = 0;
     _width = 1;
@@ -31,7 +32,7 @@ Node::Node(QObject *parent) : QObject(parent) {
     _showValue = true;
     _begin = false;
     _end = false;
-    _color = qobject_cast<Graph*>(parent)->nodeDefaultColor();
+    _color = _graph->nodeDefaultColor();
     _changing = false;
     _value = '0';
 }
@@ -74,8 +75,8 @@ QList<Node*> Node::adjacent_nodes() const
     foreach(Edge *e, _out_edges) {
         adjacent.append( e->to()  );
     }
-    Graph *g = qobject_cast<Graph*>( QObject::parent()  );
-    if ( g -> directed() ) {
+  
+    if ( _graph -> directed() ) {
         foreach(Edge *e, _self_edges) {
             adjacent.append( e->to() );
         }
@@ -97,9 +98,9 @@ QList<Edge*> Node::adjacent_edges() const
     foreach(Edge* e, _out_edges) {
         adjacent.append( e );
     }
-    Graph *g = qobject_cast<Graph*>( QObject::parent()  );
+   
 
-    if ( g -> directed() ) {
+    if ( _graph -> directed() ) {
         foreach(Edge *e, _self_edges) {
             adjacent.append( e );
         }
@@ -138,8 +139,8 @@ QList<Edge*> Node::self_edges() const {
 }
 
 Edge* Node::addEdge(Node* to) {
-    Graph *g = qobject_cast<Graph*>( QObject::parent()  );
-    return g->addEdge(this, to);
+  
+    return _graph->addEdge(this, to);
 }
 
 void Node::removeEdge(Edge *e, int edgeList) {
@@ -186,7 +187,7 @@ QList<Edge*> Node::edges(Node *n) {
 }
 
 void Node::remove() {
-    qobject_cast<Graph*>(QObject::parent())->remove(this);
+  _graph->remove(this);
 }
 
 //! Properties:
@@ -249,17 +250,17 @@ const QString& Node::name() const {
 }
 
 void Node::setBegin(bool begin) {
-    Graph *p = qobject_cast<Graph*>(parent());
+    
 
     if (!begin) {
         _begin = false;
-        p->setBegin(0);
+        _graph->setBegin(0);
     }
-    else if (p->begin() == this) {
+    else if (_graph->begin() == this) {
         return;
     }
     else {
-        p->setBegin(this);
+        _graph->setBegin(this);
         _begin = true;
     }
 
@@ -271,11 +272,10 @@ void Node::setBegin(bool begin) {
 void Node::setEnd(bool end) {
     _end = end;
 
-    Graph *p = qobject_cast<Graph*>(QObject::parent());
     if (end) {
-        p->addEnd(this);
+        _graph->addEnd(this);
     } else {
-        p->removeEnd(this);
+        _graph->removeEnd(this);
     }
     if (! _changing) {
         emit updateNeeded();

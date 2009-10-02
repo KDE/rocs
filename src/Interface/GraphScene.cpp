@@ -197,25 +197,33 @@ void GraphScene::clearGraph() {
     }
 }
 
-void GraphScene::removeGItem(QGraphicsItem *i) {
-    _hashGraphs.remove(_graph, i);
-    removeItem(i);
+void GraphScene::removeGItem(QGraphicsItem *gItem) {
+  int size = _graphDocument->size();
+  for( int i = 0; i < size; i++){
+    _hashGraphs.remove(_graphDocument->at(i), gItem);
+    removeItem(gItem);
+  }
 }
 
 void GraphScene::updateGraph(Graph *g) {
     QList<QGraphicsItem*> items = _hashGraphs.values(g);
+    kDebug() << "Quantity of items to be removed." << items.size();
     foreach(QGraphicsItem *i, items) {
         removeItem(i);
         delete i;
     }
-
+    kDebug() << "Items removed";
+    
     _hashGraphs.remove(g);
-
+    kDebug() << "Removed Graph from the hash";
+    
+    kDebug() << "Creating" << g->nodes().size() << "nodes";
     QList<Node*> nodes = g->nodes();
     foreach(Node *n, nodes) {
         createNode(g, n, false);
     }
-
+    
+    kDebug() << "Creating" << g->nodes().size() << "edges";
     QList<Edge*> edges = g->edges();
     foreach(Edge *e, edges) {
         createEdge(g, e);
@@ -230,7 +238,9 @@ void GraphScene::updateDocument() {
 
     kDebug() << "Graph Document Size: " << _graphDocument->size();
     int size = _graphDocument->size();
+
     for (int i = 0; i < size; i++) {
         updateGraph( _graphDocument->at(i) );
+	kDebug() << "updated Graph at " << i;
     }
 }

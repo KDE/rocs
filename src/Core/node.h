@@ -48,7 +48,7 @@ class Node : public QObject {
     Q_PROPERTY(QString value READ value WRITE setValue);
 
 public:
-    Node(QObject *parent);
+    Node(Graph *parent);
     ~Node();
     void addInEdge(Edge *e);
     void addOutEdge(Edge *e);
@@ -63,6 +63,7 @@ public:
     bool showValue();
     void hideName(bool b);
     void hideValue(bool b);
+    Graph *graph(){ return _graph; }
 
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
@@ -127,6 +128,7 @@ private:
 
     bool _showName;
     bool _showValue;
+    Graph *_graph;
 
 #ifdef USING_QTSCRIPT
     QScriptValue _scriptvalue;
