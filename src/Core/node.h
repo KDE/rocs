@@ -38,14 +38,14 @@ class Edge;
 
 class Node : public QObject {
     Q_OBJECT
-    Q_PROPERTY(qreal x READ x WRITE setX);
-    Q_PROPERTY(qreal y READ y WRITE setY);
-    Q_PROPERTY(qreal width READ width WRITE setWidth);
-    Q_PROPERTY(QString name READ name WRITE setName);
-    Q_PROPERTY(QString color READ color WRITE setColor);
-    Q_PROPERTY(bool begin READ begin WRITE setBegin);
-    Q_PROPERTY(bool end READ end WRITE setEnd);
-    Q_PROPERTY(QString value READ value WRITE setValue);
+    Q_PROPERTY(qreal x READ x WRITE setX)
+    Q_PROPERTY(qreal y READ y WRITE setY)
+    Q_PROPERTY(qreal width READ width WRITE setWidth)
+    Q_PROPERTY(QString name READ name WRITE setName)
+    Q_PROPERTY(QString color READ color WRITE setColor)
+    Q_PROPERTY(bool begin READ begin WRITE setBegin)
+    Q_PROPERTY(bool end READ end WRITE setEnd)
+    Q_PROPERTY(QString value READ value WRITE setValue)
 
 public:
     Node(Graph *parent);

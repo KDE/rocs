@@ -36,7 +36,7 @@ class QGraphicsView;
 */
 
 class MoveNodeAction : public AbstractAction {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     /*!
       Default constructor

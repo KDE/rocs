@@ -49,10 +49,10 @@ class Graph : public QObject {
     Q_OBJECT
 
     /*! this property defines if the graph is directed or simple */
-    Q_PROPERTY(bool directed READ directed WRITE setDirected);
+    Q_PROPERTY(bool directed READ directed WRITE setDirected)
 
     /*! this property holds the name of the graph */
-    Q_PROPERTY(QString name READ name WRITE setName);
+    Q_PROPERTY(QString name READ name WRITE setName)
 
     /*! this property holds the default color for new nodes */
     Q_PROPERTY(QString nodeDefaultColor READ nodeDefaultColor WRITE setNodeDefaultColor)

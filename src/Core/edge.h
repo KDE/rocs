@@ -53,19 +53,19 @@ class Edge : public QObject {
     /*! all properties are accessible from the scripting engine via .propertyName */
 
     /*! this property holds the color attribute. */
-    Q_PROPERTY(QString color READ color WRITE setColor);
+    Q_PROPERTY(QString color READ color WRITE setColor)
 
     /*! this property hold the valie attribute */
-    Q_PROPERTY(QString value READ value WRITE setValue);
+    Q_PROPERTY(QString value READ value WRITE setValue)
 
     /*! this property holds the name of the edge. */
-    Q_PROPERTY(QString name READ name WRITE setName);
+    Q_PROPERTY(QString name READ name WRITE setName)
 
     /*! this property holds the width of the edge */
-    Q_PROPERTY(qreal width READ width WRITE setWidth);
+    Q_PROPERTY(qreal width READ width WRITE setWidth)
 
     /*! this property holds the style of the edge */
-    Q_PROPERTY(QString style READ style WRITE setStyle);
+    Q_PROPERTY(QString style READ style WRITE setStyle)
 
 public:
     /*! default constructor, an edge connects two nodes.

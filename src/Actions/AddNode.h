@@ -31,7 +31,7 @@
 */
 
 class AddNodeAction : public AbstractAction {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     /*!
       Default constructor
