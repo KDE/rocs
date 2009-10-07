@@ -52,8 +52,6 @@ void AddNodeAction::executePress(QPointF pos) {
 
     Node *n = _graph -> addNode(i18n("untitled"));
     n ->setPos(pos.x(),pos.y());
-    
-    n->graph()->calcRelativeCenter();
 
-    _graphScene->createNode( n);
+    n->graph()->calcRelativeCenter();
 }

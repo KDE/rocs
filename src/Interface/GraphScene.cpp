@@ -85,17 +85,14 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     addItem(n);
 
     int size = _graphDocument->size();
-    kDebug() << "AAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH";
-    for (int i = 0; i < size; i++) {
+   for (int i = 0; i < size; i++) {
         kDebug() << "Updating Graph at position: " << i;
         updateGraph(_graphDocument->at(i));
-	connect( _graphDocument->at(i), SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)));
-	connect( _graphDocument->at(i), SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)));
-        kDebug() << "Graph Updated.";
+	connectGraphSignals(_graphDocument->at(i));
+	kDebug() << "Graph Updated.";
     }
     connect( _graphDocument, SIGNAL(graphCreated(Graph*)), this, SLOT(connectGraphSignals(Graph*)));
-    kDebug() << "AAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH";
-    kDebug() << "Graph Document Setted" << _graphDocument -> name();
+   kDebug() << "Graph Document Setted" << _graphDocument -> name();
 }
 
 void GraphScene::connectGraphSignals(Graph *g){
@@ -113,10 +110,14 @@ QGraphicsItem *GraphScene::createNode(Node *n, bool f) {
 QGraphicsItem *GraphScene::createEdge(Edge *e) {
     QGraphicsItem *edgeItem = 0;
 
-    if ( !e->graph()->directed() )  edgeItem = new EdgeItem(e);
-    else         edgeItem = new OrientedEdgeItem(e);
+    if ( !e->graph()->directed() ){
+      edgeItem = new EdgeItem(e);
+    }else{
+      edgeItem = new OrientedEdgeItem(e);
+    }
 
     insertGraphItem(e->graph(), edgeItem);
+    kDebug() << "Edge Created";
     return edgeItem;
 }
 
@@ -223,16 +224,16 @@ void GraphScene::updateGraph(Graph *g) {
         delete i;
     }
     kDebug() << "Items removed";
-    
+
     _hashGraphs.remove(g);
     kDebug() << "Removed Graph from the hash";
-    
+
     kDebug() << "Creating" << g->nodes().size() << "nodes";
     QList<Node*> nodes = g->nodes();
     foreach(Node *n, nodes) {
         createNode(n, false);
     }
-    
+
     kDebug() << "Creating" << g->nodes().size() << "edges";
     QList<Edge*> edges = g->edges();
     foreach(Edge *e, edges) {

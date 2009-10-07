@@ -72,9 +72,6 @@ void NodeItem::setupTextAttributes() {
     QString name = _node->name();
     QString value = _node->value();
 
-    _name->hide();
-    _value->hide();
-
     if (_node -> showName() && ! name.isEmpty()) {
         _name->show();
         _name->setText(name);
@@ -86,12 +83,17 @@ void NodeItem::setupTextAttributes() {
             x1 = boundingRect().x() + boundingRect().width() + 5;
             _name->setPos(x1,y1);
         }
+    }else{
+	_name->hide();
     }
+
     x1 = boundingRect().x() + boundingRect().width() + 5;
     if (_node->showValue() && ! value.isEmpty()) {
-        _value->show();
         _value->setText(value);
         _value->setPos(x1, (name.length() == 1)? y1 : y1 + 12);
+	_value->show();
+    }else{
+	_value->hide();
     }
 }
 
@@ -226,7 +228,6 @@ void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option
         _color = _node->color();
     }
 
-    eraseNode(painter);
     drawSelectRectangle(painter);
     drawBeginArrow(painter);
 

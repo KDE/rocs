@@ -93,7 +93,7 @@ MainWindow::MainWindow() :
     mainWindow = this;
     statusBar()->hide();
     _GraphLayers->populate();
-    
+
 
 }
 
@@ -268,7 +268,7 @@ GraphScene* MainWindow::scene() const {
 }
 
 void MainWindow::newGraph() {
-    
+
 }
 
 void MainWindow::openGraph() {
@@ -282,6 +282,7 @@ void MainWindow::openGraph() {
     _activeGraphDocument->loadFromInternalFormat(KFileDialog::getOpenFileName());
     _GraphLayers->populate();
    _graphVisualEditor->scene()->updateDocument();
+  delete oldGraphDocument;
 }
 
 void MainWindow::saveGraph() {
@@ -327,7 +328,7 @@ void MainWindow::executeScript() {
     if (scene() == 0) {
         return;
     }
-    
+
     _txtDebug->clear();
      QtScriptBackend* engine = new QtScriptBackend( (*_activeGraphDocument) ,  _txtDebug);
     QScriptEngineDebugger *e = new QScriptEngineDebugger(this);
@@ -335,7 +336,7 @@ void MainWindow::executeScript() {
     engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
     QScriptValue results = engine->evaluate(_codeEditor->text());
     _txtDebug->insertPlainText(results.toString());
-   
+
     delete engine;
     delete e;
    // scene()->updateDocument();

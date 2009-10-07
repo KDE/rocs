@@ -35,7 +35,6 @@ Graph::Graph(GraphDocument *parent) : QObject(parent) {
 }
 
 Graph::~Graph() {
-
     foreach(Edge* e,  _edges) {
         remove(e);
     }
@@ -50,7 +49,8 @@ GraphDocument *Graph::document() const {
 }
 
 void Graph::remove() {
-
+  _document->removeOne(this);
+  delete this;
 }
 
 QList<Node*> Graph::nodes() const {
@@ -81,6 +81,7 @@ Edge* Graph::addEdge(Node* from,Node* to) {
 
     Edge *e  = new Edge(this, from, to);
     _edges.append( e );
+    emit edgeCreated(e);
     return e;
 }
 

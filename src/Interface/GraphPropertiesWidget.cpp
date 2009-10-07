@@ -34,7 +34,7 @@
 #include "GraphScene.h"
 
 GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
-        : QWidget ( parent ) {
+        : KButtonGroup ( parent ) {
 
     setupUi(this);
     _mainWindow = parent;
@@ -100,6 +100,7 @@ void GraphPropertiesWidget::on__graphAutomate_toggled(bool b) {
 
 void GraphPropertiesWidget::on__graphDelete_clicked() {
     _graph->remove();
+    delete this;
 }
 
 void GraphPropertiesWidget::on__showNodeNames_toggled(bool b) {
