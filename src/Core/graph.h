@@ -142,7 +142,7 @@ public  slots:
     /*! sets a node as begin.
       \param b the new begin of the graph.
     */
-    void setBegin(Node* b);
+    bool setBegin(Node* b);
 
     /*! creates a new node.
     \p name the name of the node.

@@ -75,7 +75,7 @@ QList<Node*> Node::adjacent_nodes() const
     foreach(Edge *e, _out_edges) {
         adjacent.append( e->to()  );
     }
-  
+
     if ( _graph -> directed() ) {
         foreach(Edge *e, _self_edges) {
             adjacent.append( e->to() );
@@ -98,7 +98,7 @@ QList<Edge*> Node::adjacent_edges() const
     foreach(Edge* e, _out_edges) {
         adjacent.append( e );
     }
-   
+
 
     if ( _graph -> directed() ) {
         foreach(Edge *e, _self_edges) {
@@ -139,7 +139,7 @@ QList<Edge*> Node::self_edges() const {
 }
 
 Edge* Node::addEdge(Node* to) {
-  
+
     return _graph->addEdge(this, to);
 }
 
@@ -250,18 +250,19 @@ const QString& Node::name() const {
 }
 
 void Node::setBegin(bool begin) {
-    
-
     if (!begin) {
         _begin = false;
-        _graph->setBegin(0);
+	if (_graph->begin() == this){
+	    _graph->setBegin(0);
+	}
     }
     else if (_graph->begin() == this) {
         return;
     }
-    else {
-        _graph->setBegin(this);
+    else if( _graph->setBegin(this) ) {
         _begin = true;
+    }else{
+	return;
     }
 
     if (! _changing) {

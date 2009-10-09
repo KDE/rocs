@@ -29,6 +29,7 @@ Graph::Graph(GraphDocument *parent) : QObject(parent) {
     _directed = false;
     _automate = false;
     _document = parent;
+    _begin = 0;
     calcRelativeCenter();
     _nodeDefaultColor = "blue";
     _edgeDefaultColor = "gray";
@@ -204,11 +205,24 @@ void Graph::setName(const QString& s) {
     _name = s;
 }
 
-void Graph::setBegin(Node* n) {
-    _begin = n;
-    if (!n) return;
-    n->setBegin(true);
+bool Graph::setBegin(Node* n) {
+  if (!n){
+    _begin = 0;
+    return false;
+  }
+
+  if (!_begin){
+      _begin = n;
+      return true;
+  }else if( _begin == n){
+    return false;
+  }
+
+   _begin->setBegin(false);
+   _begin = n;
+    return true;
 }
+
 Node* Graph::begin() const {
     return _begin;
 }
