@@ -55,8 +55,10 @@ private slots:
     void on__showNodeValues_toggled(bool b);
     void on__showEdgeValues_toggled(bool b);
 
-private:
+  signals:
+    void updateNeeded();
 
+  private:
     Graph *_graph;
     MainWindow *_mainWindow;
 

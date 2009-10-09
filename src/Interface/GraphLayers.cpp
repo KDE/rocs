@@ -25,6 +25,7 @@ GraphLayers::GraphLayers(MainWindow *parent) : QWidget(parent) {
     l->addStretch();
     setLayout(l);
     _buttonGroup = new QButtonGroup();
+
 }
 
 void GraphLayers::populate() {
@@ -38,12 +39,12 @@ void GraphLayers::populate() {
 
     kDebug() << "Starting to populate";
     GraphDocument *gd = _mainWindow->activeDocument();
+    connect(gd, SIGNAL(graphCreated(Graph*)), this, SLOT(addGraph(Graph*)));
+
     int total = gd->count();
     for (int i = 0; i < total; ++i) {
-        Graph *g = gd->at(i);
-        GraphPropertiesWidget *gp = new GraphPropertiesWidget(g, _mainWindow);
-        _buttonGroup->addButton(gp->radio());
-        qobject_cast<QVBoxLayout*>(layout())->insertWidget(1,gp);
+	  addGraph(gd->at(i));
+
     }
 }
 
@@ -51,10 +52,20 @@ void GraphLayers::btnADDClicked() {
     QString name = _lineEdit->text();
     if (name == QString()) {
         name = "Untitled" + QString("%1").arg(_mainWindow->activeDocument()->count());
-
     }
-    Graph *g = _mainWindow->activeDocument()->addGraph(name);
+    _mainWindow->activeDocument()->addGraph(name);
+}
+
+void GraphLayers::addGraph(Graph *g){
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
     _buttonGroup->addButton(gp->radio());
+    connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectGraph()));
     qobject_cast<QVBoxLayout*>(layout())->insertWidget(1,gp);
+}
+
+void GraphLayers::selectGraph(){
+  kDebug() << "Chamando Corretamente";
+  QList<QAbstractButton *> btns = _buttonGroup->buttons();
+  int s = btns.size();
+  btns[0]->click();
 }

@@ -99,8 +99,14 @@ void GraphPropertiesWidget::on__graphAutomate_toggled(bool b) {
 }
 
 void GraphPropertiesWidget::on__graphDelete_clicked() {
+  bool isActive = false;
+  if (_graph == _mainWindow->graph()){
+	isActive = true;
+    }
     _graph->remove();
-    delete this;
+    if (isActive) emit updateNeeded();
+    radio()->group()->removeButton(radio());
+    deleteLater();
 }
 
 void GraphPropertiesWidget::on__showNodeNames_toggled(bool b) {

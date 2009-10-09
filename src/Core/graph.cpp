@@ -42,6 +42,10 @@ Graph::~Graph() {
     foreach(Node* n, _nodes) {
         remove(n);
     }
+    if (_document->size() == 0){
+	_document->addGraph("Untitled");
+    }
+    kDebug() << "_document.size" << _document->size();
 }
 
 GraphDocument *Graph::document() const {

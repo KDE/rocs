@@ -5,7 +5,7 @@
 #include <QList>
 class GraphPropertiesWidget;
 class graphDocument;
-class graph;
+class Graph;
 class KPushButton;
 class QButtonGroup;
 class KLineEdit;
@@ -21,7 +21,8 @@ public:
     void populate();
 public slots:
     void btnADDClicked();
-
+    void addGraph(Graph *g);
+    void selectGraph();
 };
 
 #endif
