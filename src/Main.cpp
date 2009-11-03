@@ -30,7 +30,7 @@
 int main ( int argc, char *argv[] ) {
     KAboutData aboutData ("rocs",
                           "rocs",
-                          ki18n ( "Rocs 1" ),
+                          ki18n ( "Rocs" ),
                           "1.0",
                           ki18n ( "Graph Theory Tool" ),
                           KAboutData::License_GPL,
