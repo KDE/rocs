@@ -148,7 +148,7 @@ QWidget* MainWindow::setupLeftPanel() {
 }
 
 void MainWindow::setupActions() {
-    kDebug() << "Entering in Setup Actions";
+    kDebug() << "Entrou no Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
 
     GraphScene *gc = _graphVisualEditor->scene();
@@ -240,11 +240,11 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d)
 void MainWindow::setActiveGraph( Graph *g)
 {
     if ( _activeGraphDocument  == 0) {
-        kDebug() << "ERROR : There is no activeGraphDocument, but this graph should belong to one.";
+        kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should beong to one.";
         return;
     }
     if ( _activeGraphDocument->indexOf(g) == -1) {
-        kDebug() << "ERROR: this graph does not belong to the active document";
+        kDebug() << "ERROR: this graph doesn't belong to the active document";
         return;
     }
     foreach( QAction *action, actionCollection()->actions() ) {
@@ -253,7 +253,7 @@ void MainWindow::setActiveGraph( Graph *g)
     }
     _graphVisualEditor->setActiveGraph(g);
     _graph = g;
-    kDebug() << "New Active Graph Set: " << g->name();
+    kDebug() << "New Active Graph Setted: " << g->name();
 }
 
 Graph* MainWindow::graph() const {
@@ -265,18 +265,26 @@ GraphScene* MainWindow::scene() const {
 }
 
 void MainWindow::newGraph() {
-
+    GraphDocument *oldGraphDocument = _activeGraphDocument;
+    setActiveGraphDocument(new GraphDocument(i18n("Untitled", 800,600)));
+    _activeGraphDocument->addGraph(i18n("Untitled0"));
+    _GraphLayers->populate();
+   _graphVisualEditor->scene()->updateDocument();
+   delete oldGraphDocument;
 }
 
 void MainWindow::openGraph() {
     if (_activeGraphDocument->isModified()){
-      if (KMessageBox::warningYesNo(this, i18n("Do you want to save your unsaved document?")) == KMessageBox::Yes){
+      if (KMessageBox::warningYesNo(this, i18n("Wanna save your unsaved document?")) == KMessageBox::Yes){
 	 _activeGraphDocument->savedDocumentAt(_activeGraphDocument->documentPath());
       }
     }
     GraphDocument *oldGraphDocument = _activeGraphDocument;
     setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
-    _activeGraphDocument->loadFromInternalFormat(KFileDialog::getOpenFileName());
+    QString fileName = KFileDialog::getOpenFileName();
+    if (fileName == "") return;
+    
+    _activeGraphDocument->loadFromInternalFormat(fileName);
     _GraphLayers->populate();
    _graphVisualEditor->scene()->updateDocument();
   delete oldGraphDocument;

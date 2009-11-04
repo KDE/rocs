@@ -52,10 +52,15 @@ GraphDocument::GraphDocument(const GraphDocument& gd)
 
 // Default Destructor
 GraphDocument::~GraphDocument() {
-    foreach(Graph *g, (*this)) {
+    kDebug() << "Deleting Graph Document";
+    kDebug() << this;
+    kDebug() << size();
+    
+    for(int i = 0; i < size(); i ++){
+	Graph *g = at(i);
+	qDebug() << "Deleting graph" << g->name();
         delete g;
     }
-    clear();
 }
 
 
