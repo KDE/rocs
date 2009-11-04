@@ -153,7 +153,7 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-    if (mouseEvent->button() == 4) {
+    if (mouseEvent->button() == Qt::MidButton) {
         NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
         if (!nitem) return;
         Node *movableNode = nitem->node();
@@ -162,27 +162,25 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
         nitem->update();
         nitem->endDownSizing();
     }
-    _action->executePress(mouseEvent->scenePos());
+    else if( mouseEvent->button() == Qt::RightButton){
+	QGraphicsItem *i = itemAt(mouseEvent->scenePos());
+        if (NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(i)){
+            _nodePropertiesWidget->setNode(nItem);
+        }
+        else if (EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(i)){
+            _edgePropertiesWidget->setEdge(eItem->edge());
+        }
+	else if (OrientedEdgeItem *eItem = qgraphicsitem_cast<OrientedEdgeItem*>(i)){
+	    _edgePropertiesWidget->setEdge(eItem->edge());
+        }
+    }else if( mouseEvent -> button() == Qt::LeftButton){
+      _action->executePress(mouseEvent->scenePos());
+    }
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-    _action->executeRelease(mouseEvent->scenePos());
-    if (selectedItems().size() == 1 && _action->name() == "select") {
-        NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(selectedItems().at(0));
-        if (nItem) {
-            _nodePropertiesWidget->setNode(nItem);
-            return;
-        }
-        EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(selectedItems().at(0));
-        if (eItem) {
-            _edgePropertiesWidget->setEdge(eItem->edge());
-            return;
-        }
-        OrientedEdgeItem *oItem = qgraphicsitem_cast<OrientedEdgeItem*>(selectedItems().at(0));
-        if (oItem) {
-            _edgePropertiesWidget->setEdge(oItem->edge());
-            return;
-        }
+    if (mouseEvent->button() == Qt::LeftButton){
+      _action->executeRelease(mouseEvent->scenePos());
     }
 }
 
