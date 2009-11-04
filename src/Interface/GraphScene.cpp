@@ -196,23 +196,23 @@ void GraphScene::insertGraphItem(Graph *g, QGraphicsItem *item) {
 }
 
 void GraphScene::clearGraph() {
-    int i = _graphDocument->size();
-    for (int e = 0; e < i; e++) {
-        Graph *g = _graphDocument->at(e);
-        QList<QGraphicsItem*> items = _hashGraphs.values(g);
-        foreach(QGraphicsItem *i, items) {
-            removeItem(i);
-            delete i;
-        }
-        _hashGraphs.remove(g);
-    }
+    clear();
+    _hashGraphs.clear();
+    qDebug() << "Chamando isso o.o";
 }
 
 void GraphScene::removeGItem(QGraphicsItem *gItem) {
+  if (! _graphDocument ) return;
+  
   int size = _graphDocument->size();
+  
   for( int i = 0; i < size; i++){
-    _hashGraphs.remove(_graphDocument->at(i), gItem);
-    removeItem(gItem);
+    if (! _hashGraphs.empty() ){
+      _hashGraphs.remove(_graphDocument->at(i), gItem);
+    }
+    if( !items().empty()){
+      removeItem(gItem);
+    }
   }
 }
 

@@ -68,6 +68,7 @@ private slots:
     void openGraph();
     void saveGraph();
     void saveGraphAs();
+    void loadDocument(const QString& name = QString());
     
 public slots:
     void setActiveGraphDocument(GraphDocument *d);

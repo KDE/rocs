@@ -266,28 +266,30 @@ GraphScene* MainWindow::scene() const {
 
 void MainWindow::newGraph() {
     if (saveIfChanged() == KMessageBox::Cancel) return;
-    delete _activeGraphDocument;
-    setActiveGraphDocument(new GraphDocument(i18n("Untitled", 800,600)));
-    _activeGraphDocument->addGraph(i18n("Untitled0"));
-    _GraphLayers->populate();
-   _graphVisualEditor->scene()->updateDocument();
+    loadDocument();
  
 }
 
 void MainWindow::openGraph() {
     if (saveIfChanged() == KMessageBox::Cancel) return;
-    
     QString fileName = KFileDialog::getOpenFileName();
     if (fileName == "") return;
-    
-    GraphDocument *oldGraphDocument = _activeGraphDocument;
-    delete oldGraphDocument;
-    setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
-    _activeGraphDocument->loadFromInternalFormat(fileName);
-    _GraphLayers->populate();
-   _graphVisualEditor->scene()->updateDocument();
+    loadDocument(fileName);
+}
 
-
+void MainWindow::loadDocument(const QString& name){
+  _graphVisualEditor->scene()->clearGraph();
+  _graphVisualEditor->scene()->setActiveGraphDocument(0);
+  delete _activeGraphDocument;
+  setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
+  if (name == QString()){
+    _activeGraphDocument->addGraph(i18n("Untitled0"));
+  }
+  else{
+    _activeGraphDocument->loadFromInternalFormat(name);
+  }
+  _GraphLayers->populate();
+  _graphVisualEditor->scene()->updateDocument();
 }
 
 void MainWindow::saveGraph() {
