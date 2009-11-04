@@ -274,11 +274,6 @@ void MainWindow::newGraph() {
 }
 
 void MainWindow::openGraph() {
-    if (_activeGraphDocument->isModified()){
-      if (KMessageBox::warningYesNo(this, i18n("Do you want to save your unsaved document?")) == KMessageBox::Yes){
-	 _activeGraphDocument->savedDocumentAt(_activeGraphDocument->documentPath());
-      }
-    }
     GraphDocument *oldGraphDocument = _activeGraphDocument;
     setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
     QString fileName = KFileDialog::getOpenFileName();
@@ -287,7 +282,7 @@ void MainWindow::openGraph() {
     _activeGraphDocument->loadFromInternalFormat(fileName);
     _GraphLayers->populate();
    _graphVisualEditor->scene()->updateDocument();
-  delete oldGraphDocument;
+    delete oldGraphDocument;
 }
 
 void MainWindow::saveGraph() {
@@ -295,6 +290,7 @@ void MainWindow::saveGraph() {
         kDebug() << "Graph Document is NULL";
         return;
     }
+
     if (_activeGraphDocument->documentPath().isEmpty() ) {
         saveGraphAs();
     }
@@ -347,4 +343,13 @@ void MainWindow::executeScript() {
    // scene()->updateDocument();
 }
 
+void MainWindow::saveIfChanged(){
+  if (_activeGraphDocument->isModified()){
+    if ( ! KMessageBox::warningYesNo(this, i18n("Do you want to save your unsaved document?")) == KMessageBox::Yes){
+      return;
+    }else{
+      saveGraph();
+    }
+  }
+}
 #endif

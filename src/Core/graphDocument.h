@@ -47,7 +47,7 @@ public:
 
     /*! verifies if this document is changed */
     bool isModified();
-    
+
     /*! Sets the current file name of the Graph Collection
       \param name changes the name of the document.
     */
@@ -115,6 +115,7 @@ private:
     qreal _width;
     qreal _height;
     bool _modified;
+    bool _saved;
 };
 
 #endif

@@ -36,6 +36,7 @@ GraphDocument::GraphDocument(const QString name, int width,  int height)
     _width = width;
     _height = height;
     _modified = false;
+    _saved = false;
 }
 
 GraphDocument::GraphDocument(const GraphDocument& gd)

@@ -197,13 +197,34 @@ public  slots:
     */
     void  removeEnd(Node* n);
 
+    /*! sets the default color for new added nodes.
+    \p color the new color.
+    */
     void setNodeDefaultColor(const QString& color);
+    
+    /*! gets the default node color for this graph.
+    \return a QColor.
+    */
     const QString& nodeDefaultColor() const;
 
+    /*! sets the default color for new added edges.
+    \p color the new color.
+    */
     void setEdgeDefaultColor(const QString& color);
+    
+    /*! gets the default edge color for this graph 
+    \return a QColor
+    */
     const QString& edgeDefaultColor() const;
 
+    /*! sets this graph an automate 
+      \param b true = automate, false = graph.
+    */
     void setAutomate(bool b);
+    
+    /*! boolean that represents if the graph is an automate or not 
+      \return true = automate, false = graph.
+    */
     bool automate();
 
 #ifdef USING_QTSCRIPT
