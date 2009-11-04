@@ -64,7 +64,7 @@ void GraphLayers::addGraph(Graph *g){
 }
 
 void GraphLayers::selectGraph(){
-  kDebug() << "Chamando Corretamente";
+  kDebug() << "Update Graph";
   QList<QAbstractButton *> btns = _buttonGroup->buttons();
   int s = btns.size();
   btns[0]->click();

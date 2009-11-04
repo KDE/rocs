@@ -41,7 +41,7 @@ void DeleteAction::executePress(QPointF pos)
 {
     QGraphicsItem * item = _graphScene->itemAt(pos);
     if ( NodeItem *n  = qgraphicsitem_cast<NodeItem*>(item) ) {
-        qDebug() << "Tentando remover o node. NodeItem: " << n->objectName() ;
+        qDebug() << "Trying to remove node. NodeItem: " << n->objectName() ;
         n->node()->remove();
     }
     else if ( EdgeItem *e = qgraphicsitem_cast<EdgeItem*>(item) ) {

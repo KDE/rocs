@@ -58,7 +58,7 @@ void GraphScene::setHideEdges(bool h) {
 }
 
 void GraphScene::setActiveGraph(Graph *g) {
-    kDebug() << "Active Graph Setted";
+    kDebug() << "Active Graph Set";
     _graph = g;
 }
 
@@ -92,7 +92,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
 	kDebug() << "Graph Updated.";
     }
     connect( _graphDocument, SIGNAL(graphCreated(Graph*)), this, SLOT(connectGraphSignals(Graph*)));
-   kDebug() << "Graph Document Setted" << _graphDocument -> name();
+   kDebug() << "Graph Document Set" << _graphDocument -> name();
 }
 
 void GraphScene::connectGraphSignals(Graph *g){
@@ -243,7 +243,7 @@ void GraphScene::updateGraph(Graph *g) {
 
 void GraphScene::updateDocument() {
     if (_graphDocument == 0) {
-        kDebug() << "Graph Document is null. please hit the developer.";
+        kDebug() << "Graph Document is null. Please hit the developer.";
         return;
     }
 

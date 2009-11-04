@@ -78,7 +78,7 @@ void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
     }
 
     _graphDocument = gd;
-    kDebug() << "Graph Document Setted: " << gd->name();
+    kDebug() << "Graph Document Set: " << gd->name();
     _scene->setActiveGraphDocument( gd );
 
 }

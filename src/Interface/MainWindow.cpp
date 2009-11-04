@@ -151,7 +151,7 @@ QWidget* MainWindow::setupLeftPanel() {
 }
 
 void MainWindow::setupActions() {
-    kDebug() << "Entrou no Setup Actions";
+    kDebug() << "Entering in Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
 
     GraphScene *gc = _graphVisualEditor->scene();
@@ -243,11 +243,11 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d)
 void MainWindow::setActiveGraph( Graph *g)
 {
     if ( _activeGraphDocument  == 0) {
-        kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should beong to one.";
+        kDebug() << "ERROR : There is no activeGraphDocument, but this graph should belong to one.";
         return;
     }
     if ( _activeGraphDocument->indexOf(g) == -1) {
-        kDebug() << "ERROR: this graph doesn't belong to the active document";
+        kDebug() << "ERROR: this graph does not belong to the active document";
         return;
     }
     foreach( QAction *action, actionCollection()->actions() ) {
@@ -256,7 +256,7 @@ void MainWindow::setActiveGraph( Graph *g)
     }
     _graphVisualEditor->setActiveGraph(g);
     _graph = g;
-    kDebug() << "New Active Graph Setted: " << g->name();
+    kDebug() << "New Active Graph Set: " << g->name();
 }
 
 Graph* MainWindow::graph() const {
@@ -273,7 +273,7 @@ void MainWindow::newGraph() {
 
 void MainWindow::openGraph() {
     if (_activeGraphDocument->isModified()){
-      if (KMessageBox::warningYesNo(this, i18n("Wanna save your unsaved document?")) == KMessageBox::Yes){
+      if (KMessageBox::warningYesNo(this, i18n("Do you want to save your unsaved document?")) == KMessageBox::Yes){
 	 _activeGraphDocument->savedDocumentAt(_activeGraphDocument->documentPath());
       }
     }

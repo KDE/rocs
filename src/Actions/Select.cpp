@@ -75,11 +75,11 @@ void SelectAction::executeRelease(QPointF pos) {
     }
 
     if (pos == _p1) {
-        qDebug() << "Selecionando um item apenas.";
+        qDebug() << "Selecting only one item.";
         singleSelect(pos);
     }
     else {
-        qDebug() << "Selecionando um monte de items";
+        qDebug() << "Selecting several items.";
         multiSelect(pos);
     }
 
@@ -116,7 +116,7 @@ void SelectAction::singleSelect(QPointF pos) {
     _graphScene->addItem(tmpItem);
 
     if (tmpItem->collidingItems().empty()) {
-        kDebug() << "No Colisions";
+        kDebug() << "No Collisions";
         _graphScene->removeItem(tmpItem);
         delete tmpItem;
         return;

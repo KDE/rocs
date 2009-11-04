@@ -103,7 +103,7 @@ void EdgeItem::updateAttributes() {
     if (_edge->showValue()) {
         _value->show();
     }
-    kDebug() << "Show Name : " << _edge->showName();
+    kDebug() << "Show Name: " << _edge->showName();
     if (_edge->showName()) {
         _name->show();
     }
@@ -114,7 +114,7 @@ void EdgeItem::updateAttributes() {
     _name->setPos(x,y);
     _value->setPos(x, y+14);
     update();
-    kDebug() << "Chamou" << _value->text() << " " << _name->text();
+    kDebug() << "Text " << _value->text() << " " << _name->text();
 }
 
 #include "EdgeItem.moc"

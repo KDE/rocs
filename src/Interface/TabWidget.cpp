@@ -75,7 +75,7 @@ void TabWidget::controlPanel(int index) {
         releaseButton(index);
         emit widgetActivated(index);
     }
-    kDebug() << "Widget Size:" << size();
+    kDebug() << "Widget Size: " << size();
 }
 
 void TabWidget::releaseButton(int index) {

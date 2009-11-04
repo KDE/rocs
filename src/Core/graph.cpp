@@ -178,7 +178,7 @@ void Graph::calcRelativeCenter() {
     /*
       _top = _nodes[0]->y();   _bottom = _nodes[0]->y();
       _left = _nodes[0]->x(); _right = _nodes[0]->x();
-      kDebug() << "INICIO:";
+      kDebug() << "INIT:";
       kDebug() << "TOP : " << _top << " BOTTOM " << _bottom << "LEFT" << _left << "RIGHT" << _right;
       for (int counter = 0; counter < _nodes.size(); counter++) {
        if(_nodes[counter]->x() > _right)  _right = _nodes[counter]->x();
