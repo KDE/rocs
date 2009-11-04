@@ -169,7 +169,7 @@
         <item>
          <widget class="QToolButton" name="_graphAutomate">
           <property name="toolTip">
-           <string>Enabling this button will make the graph an automate</string>
+           <string>Enabling this button will make the graph an automated graph.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -182,7 +182,7 @@
         <item>
          <widget class="QToolButton" name="_showNodeNames">
           <property name="toolTip">
-           <string>Enabling this button will show all names of nodes</string>
+           <string>Enabling this button will show the names of nodes.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -195,7 +195,7 @@
         <item>
          <widget class="QToolButton" name="_showEdgeNames">
           <property name="toolTip">
-           <string>Enabling this button will show all names in edges</string>
+           <string>Enabling this button will show the names of edges.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -208,7 +208,7 @@
         <item>
          <widget class="QToolButton" name="_showNodeValues">
           <property name="toolTip">
-           <string>enabling this button will show all values in nodes</string>
+           <string>Enabling this button will show the values of nodes.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -221,7 +221,7 @@
         <item>
          <widget class="QToolButton" name="_showEdgeValues">
           <property name="toolTip">
-           <string>enabling this button will show all values in edges</string>
+           <string>Enabling this button will show the values of edges.</string>
           </property>
           <property name="text">
            <string>...</string>
