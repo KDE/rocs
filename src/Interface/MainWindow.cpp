@@ -148,7 +148,7 @@ QWidget* MainWindow::setupLeftPanel() {
 }
 
 void MainWindow::setupActions() {
-    kDebug() << "Entrou no Setup Actions";
+    kDebug() << "Entering in Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
 
     GraphScene *gc = _graphVisualEditor->scene();
@@ -178,7 +178,7 @@ void MainWindow::setupActions() {
     actionCollection()->addAction("new-graph", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(newGraph()));
 
-    action = new KAction(KIcon("document-open"),i18n("Open Graph"), _graphVisualEditor->view());
+    action = new KAction(KIcon("document-open"),i18n("Open Graph..."), _graphVisualEditor->view());
     action->setShortcut(Qt::CTRL + Qt::Key_O);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("open-graph", action);
@@ -190,7 +190,7 @@ void MainWindow::setupActions() {
     actionCollection()->addAction("save-graph", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraph()));
 
-    action = new KAction(KIcon("document-save-as"),i18n("Save Graph As"), _graphVisualEditor->view());
+    action = new KAction(KIcon("document-save-as"),i18n("Save Graph As..."), _graphVisualEditor->view());
     action->setShortcut(Qt::CTRL + Qt::Key_W);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-graph-as", action);
@@ -202,7 +202,7 @@ void MainWindow::setupActions() {
     actionCollection()->addAction("new-script", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(newScript()));
 
-    action = new KAction(KIcon("document-open"),i18n("Open Script"), _codeEditor->view());
+    action = new KAction(KIcon("document-open"),i18n("Open Script..."), _codeEditor->view());
     action->setShortcut(Qt::CTRL + Qt::Key_O);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("open-script", action);
@@ -214,7 +214,7 @@ void MainWindow::setupActions() {
     actionCollection()->addAction("save-script", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScript()));
 
-    action = new KAction(KIcon("document-save-as"), i18n("Save Script As"), _codeEditor->view());
+    action = new KAction(KIcon("document-save-as"), i18n("Save Script As..."), _codeEditor->view());
     action->setShortcut(Qt::CTRL + Qt::Key_W);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-script-as", action);
@@ -240,11 +240,11 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d)
 void MainWindow::setActiveGraph( Graph *g)
 {
     if ( _activeGraphDocument  == 0) {
-        kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should beong to one.";
+        kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should belong to one.";
         return;
     }
     if ( _activeGraphDocument->indexOf(g) == -1) {
-        kDebug() << "ERROR: this graph doesn't belong to the active document";
+        kDebug() << "ERROR: this graph does not belong to the active document";
         return;
     }
     foreach( QAction *action, actionCollection()->actions() ) {
@@ -253,7 +253,7 @@ void MainWindow::setActiveGraph( Graph *g)
     }
     _graphVisualEditor->setActiveGraph(g);
     _graph = g;
-    kDebug() << "New Active Graph Setted: " << g->name();
+    kDebug() << "New Active Graph Set: " << g->name();
 }
 
 Graph* MainWindow::graph() const {
@@ -275,7 +275,7 @@ void MainWindow::newGraph() {
 
 void MainWindow::openGraph() {
     if (_activeGraphDocument->isModified()){
-      if (KMessageBox::warningYesNo(this, i18n("Wanna save your unsaved document?")) == KMessageBox::Yes){
+      if (KMessageBox::warningYesNo(this, i18n("Do you want to save your unsaved document?")) == KMessageBox::Yes){
 	 _activeGraphDocument->savedDocumentAt(_activeGraphDocument->documentPath());
       }
     }
