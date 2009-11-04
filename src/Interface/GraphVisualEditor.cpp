@@ -34,13 +34,8 @@
 #include "settings.h"
 
 #include <QVBoxLayout>
-#include <QPointF>
 #include <QGraphicsItem>
 #include <KDebug>
-#include <KAction>
-#include <KIcon>
-#include <KComboBox>
-#include <KColorButton>
 #include <QGraphicsView>
 #include <QPainter>
 

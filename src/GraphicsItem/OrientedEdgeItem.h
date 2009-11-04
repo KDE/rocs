@@ -22,7 +22,6 @@
 #define ORIENTEDEDGEITEM_H
 
 #include <QGraphicsLineItem>
-#include <QList>
 
 class QGraphicsSceneMouseEvent;
 class Edge;

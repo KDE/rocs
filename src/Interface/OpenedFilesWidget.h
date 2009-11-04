@@ -23,7 +23,6 @@
 #define SUI_OPENED_FILES_WIDGET_H
 
 #include "ui_OpenedFilesWidget.h"
-#include <QDockWidget>
 
 class GraphDocumentModel;
 

@@ -23,7 +23,6 @@
 #include <kross/core/action.h>
 #include <kross/core/manager.h>
 #include <QDebug>
-#include <QTextCodec>
 
 KrossBackend::KrossBackend(QVariantList *graphs)
 {

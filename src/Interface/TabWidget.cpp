@@ -23,10 +23,8 @@
 
 #include <kmultitabbar.h>
 #include <KIcon>
-#include <QSplitter>
 #include <KDebug>
 #include <KAction>
-#include <QSize>
 
 
 TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(parent) {

@@ -2,7 +2,6 @@
 #define GRAPHLAYERS_H
 
 #include <QWidget>
-#include <QList>
 class Graph;
 class QButtonGroup;
 class KLineEdit;

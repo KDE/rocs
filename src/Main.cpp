@@ -22,7 +22,6 @@
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include <KIconLoader>
 #include <KDebug>
 
 #include "Interface/MainWindow.h"

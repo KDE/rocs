@@ -21,7 +21,6 @@
 #include "graph.h"
 #include "node.h"
 #include <KDebug>
-#include <QTextCodec>
 #include <KTextBrowser>
 #include "graphDocument.h"
 

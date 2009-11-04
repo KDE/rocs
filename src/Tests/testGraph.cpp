@@ -29,8 +29,6 @@
 #include <kross/core/action.h>
 #include <kross/core/manager.h>
 #include <QVariant>
-#include <QtTest>
-#include <QList>
 
 
 GraphTests::GraphTests()

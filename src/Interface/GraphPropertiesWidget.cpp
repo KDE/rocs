@@ -21,7 +21,6 @@
 #include "GraphPropertiesWidget.h"
 #include "model_GraphProperties.h"
 #include <KDebug>
-#include <QVariant>
 #include <QGraphicsItem>
 #include "graph.h"
 #include "graphDocument.h"

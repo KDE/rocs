@@ -21,7 +21,6 @@
 #include "graphDocument.h"
 #include "graph.h"
 #include <QString>
-#include <QDebug>
 #include <QModelIndex>
 #include <KDebug>
 

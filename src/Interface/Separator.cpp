@@ -19,9 +19,7 @@
 */
 
 #include "Separator.h"
-#include <QScrollBar>
 #include <QPainter>
-#include <QVariant>
 #include <QStyleOption>
 
 Separator::Separator ( QWidget* parent ) : QWidget ( parent ) {

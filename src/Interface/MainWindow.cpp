@@ -20,7 +20,6 @@
 
 #include "MainWindow.h"
 //Qt related includes
-#include <QToolBox>
 
 // KDE Related Includes
 #include <KActionCollection>
@@ -31,10 +30,9 @@
 #include <KTextBrowser>
 #include <KMessageBox>
 #include <KApplication>
-#include <KToolBar>
-#include <QToolButton>
 #include <QGraphicsView>
 #include <klocalizedstring.h>
+#include <KStatusBar>
 
 #include <kfiledialog.h>
 #include "TabWidget.h"
@@ -70,7 +68,6 @@
 #include <ktexteditor/view.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
-#include <KStatusBar>
 #include <qscriptenginedebugger.h>
 
 MainWindow* mainWindow = 0;

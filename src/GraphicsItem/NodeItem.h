@@ -22,7 +22,6 @@
 #define NODEITEM_H
 
 #include <QGraphicsItem>
-#include <QList>
 #include <QColor>
 
 class Node;

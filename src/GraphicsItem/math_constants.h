@@ -21,7 +21,6 @@
 
 #ifndef MATH_CONSTANTS_H
 #define MATH_CONSTANTS_H
-#include <QObject>
 
 
 static const double Pi = 3.14159265358979323846264338327950288419717;

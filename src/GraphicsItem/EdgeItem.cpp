@@ -23,8 +23,6 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
-#include <QPainter>
-#include <QStyleOption>
 #include <QPen>
 
 

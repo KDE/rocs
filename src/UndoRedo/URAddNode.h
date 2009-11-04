@@ -22,7 +22,6 @@
 #define URADDNODE_H
 
 #include <QUndoCommand>
-#include <QList>
 #include <QPointF>
 
 class Graph;

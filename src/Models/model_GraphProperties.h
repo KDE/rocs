@@ -26,7 +26,6 @@
 #include <QMetaObject>
 #include <QModelIndex>
 #include <QVariant>
-#include <QMetaProperty>
 
 class GraphPropertiesModel : public QAbstractTableModel
 {

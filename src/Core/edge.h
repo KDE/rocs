@@ -25,10 +25,8 @@
 #endif
 
 #include <QObject>
-#include <QVariant>
 #include <QtScript>
 #include <QString>
-#include <QColor>
 
 #ifdef USING_QTSCRIPT
 #include <QScriptValue>

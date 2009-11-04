@@ -33,7 +33,6 @@
 #include "EdgeItem.h"
 #include "OrientedEdgeItem.h"
 #include <KDebug>
-#include <QDebug>
 #include <GraphScene.h>
 #include <QTimeLine>
 #include <QGraphicsSimpleTextItem>

@@ -4,10 +4,8 @@
 #include <ktexteditor/editorchooser.h>
 #include <KMessageBox>
 #include <KLocale>
-#include <KXMLGUIFactory>
 #include <QHBoxLayout>
 #include "MainWindow.h"
-#include <KParts/ReadOnlyPart>
 #include <KFileDialog>
 
 CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent) {

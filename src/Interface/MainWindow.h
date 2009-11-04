@@ -22,9 +22,6 @@
 #define SUI_MAINWINDOW_H
 
 #include <KXmlGuiWindow>
-#include <QList>
-#include <QStringList>
-#include <QScriptValue>
 
 class KPushButton;
 class GraphLayers;

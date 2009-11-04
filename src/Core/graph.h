@@ -25,7 +25,6 @@
 
 #include <QObject>
 #include <QList>
-#include <QVariant>
 #include <QString>
 
 #ifdef USING_QTSCRIPT

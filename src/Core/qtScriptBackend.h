@@ -19,11 +19,9 @@
 #ifndef QTSCRIPTBACKEND_H
 #define QTSCRIPTBACKEND_H
 
-#include <QList>
 #include <QtScript>
 #include <QScriptValue>
 #include <QScriptString>
-#include <QScriptContext>
 
 class Graph;
 class GraphDocument;

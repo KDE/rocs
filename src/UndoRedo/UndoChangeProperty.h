@@ -22,7 +22,6 @@
 #define UNDOCHANGEPROPERTY_H
 
 #include <QUndoCommand>
-#include <QObjectt>
 
 class UndoAddEdge : public QUndoCommand {
 public:

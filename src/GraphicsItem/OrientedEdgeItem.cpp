@@ -37,7 +37,6 @@
 #include <QtAlgorithms>
 #include <KDebug>
 #include <math.h>
-#include <QTransform>
 #include <QGraphicsSimpleTextItem>
 
 OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
