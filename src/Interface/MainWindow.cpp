@@ -265,24 +265,29 @@ GraphScene* MainWindow::scene() const {
 }
 
 void MainWindow::newGraph() {
-    GraphDocument *oldGraphDocument = _activeGraphDocument;
+    if (saveIfChanged() == KMessageBox::Cancel) return;
+    delete _activeGraphDocument;
     setActiveGraphDocument(new GraphDocument(i18n("Untitled", 800,600)));
     _activeGraphDocument->addGraph(i18n("Untitled0"));
     _GraphLayers->populate();
    _graphVisualEditor->scene()->updateDocument();
-   delete oldGraphDocument;
+ 
 }
 
 void MainWindow::openGraph() {
-    GraphDocument *oldGraphDocument = _activeGraphDocument;
-    setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
+    if (saveIfChanged() == KMessageBox::Cancel) return;
+    
     QString fileName = KFileDialog::getOpenFileName();
     if (fileName == "") return;
     
+    GraphDocument *oldGraphDocument = _activeGraphDocument;
+    delete oldGraphDocument;
+    setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
     _activeGraphDocument->loadFromInternalFormat(fileName);
     _GraphLayers->populate();
    _graphVisualEditor->scene()->updateDocument();
-    delete oldGraphDocument;
+
+
 }
 
 void MainWindow::saveGraph() {
@@ -343,13 +348,15 @@ void MainWindow::executeScript() {
    // scene()->updateDocument();
 }
 
-void MainWindow::saveIfChanged(){
+int MainWindow::saveIfChanged(){
   if (_activeGraphDocument->isModified()){
-    if ( ! KMessageBox::warningYesNo(this, i18n("Do you want to save your unsaved document?")) == KMessageBox::Yes){
-      return;
-    }else{
+     int btnCode;
+     btnCode = KMessageBox::warningYesNoCancel(this, i18n("Do you want to save your unsaved document?")); 
+    if ( btnCode == KMessageBox::Yes){
       saveGraph();
     }
+    return btnCode;
   }
+  return KMessageBox::No;
 }
 #endif

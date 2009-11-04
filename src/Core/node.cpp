@@ -195,6 +195,7 @@ void Node::setX(qreal x) {
     _x = x;
     if (! _changing) {
         emit posChanged();
+	emit changed();
     }
 }
 qreal Node::x() const {
@@ -204,15 +205,19 @@ void Node::setY(qreal y) {
     _y  = y;
     if (! _changing) {
         emit posChanged();
+	emit changed();
     }
+    
 }
 
 void Node::setWidth(qreal w) {
     _width = w;
     if (! _changing) {
         emit updateNeeded();
+	emit changed();
         kDebug() << "Updating node drawing";
     }
+    
 }
 
 void Node::setPos(qreal x, qreal y) {
@@ -220,8 +225,11 @@ void Node::setPos(qreal x, qreal y) {
     _y = y;
     if (! _changing) {
         emit posChanged();
+	emit changed();
     }
+    
 }
+
 qreal Node::y() const {
     return _y;
 }
@@ -234,6 +242,7 @@ void Node::setColor(const QString& s) {
     _color = s;
     if (! _changing) {
         emit updateNeeded();
+	emit changed();
     }
 }
 const QString& Node::color() const {
@@ -243,6 +252,7 @@ void Node::setName(const QString& s) {
     _name = s;
     if (! _changing) {
         emit updateNeeded();
+	emit changed();
     }
 }
 const QString& Node::name() const {
@@ -267,6 +277,7 @@ void Node::setBegin(bool begin) {
 
     if (! _changing) {
         emit updateNeeded();
+	emit changed();
     }
 }
 
@@ -280,6 +291,7 @@ void Node::setEnd(bool end) {
     }
     if (! _changing) {
         emit updateNeeded();
+	emit changed();
     }
 }
 
@@ -298,6 +310,7 @@ void  Node::setValue(const QString& s) {
     _value = s;
     if (! _changing) {
         emit updateNeeded();
+	emit changed();
     }
 }
 
@@ -308,6 +321,7 @@ void Node::startChange() {
 void Node::endChange() {
     _changing = false;
     emit updateNeeded();
+    emit changed();
 }
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {

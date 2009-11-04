@@ -86,7 +86,7 @@ public:
 
     /*! remove this graph from the document. */
     void remove();
-
+    
 #ifdef USING_QTSCRIPT
     /*! if QtScript is enabled for this rocs,
     \return  the self-referenced Script Value for this graph. */
@@ -208,7 +208,7 @@ public  slots:
     const QString& nodeDefaultColor() const;
 
     /*! sets the default color for new added edges.
-    \p color the new color.
+    \p color the new color.http://imagebin.ca/view/VoxkFg.html
     */
     void setEdgeDefaultColor(const QString& color);
     
@@ -241,7 +241,8 @@ signals:
     void nodeCreated(Node *n);
     void edgeCreated(Edge *e);
     void complexityChanged(bool directed);
-
+    void changed();
+    
 private:
     bool _directed;
     QList<Node*> _nodes;

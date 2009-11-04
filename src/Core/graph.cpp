@@ -71,7 +71,7 @@ Node* Graph::addNode(QString name) {
     n->setName(name);
     _nodes.append( n );
     emit nodeCreated(n);
-
+    connect (n, SIGNAL(changed()), this, SIGNAL(changed()));
     return n;
 }
 
@@ -87,6 +87,7 @@ Edge* Graph::addEdge(Node* from,Node* to) {
     Edge *e  = new Edge(this, from, to);
     _edges.append( e );
     emit edgeCreated(e);
+    connect (e, SIGNAL(changed()), this, SIGNAL(changed()));
     return e;
 }
 

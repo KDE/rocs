@@ -108,6 +108,7 @@ public  slots:
 
     Edge* addEdge(Node* to);
 
+
 private:
     QList<Edge*> _in_edges;
     QList<Edge*> _out_edges;
@@ -138,6 +139,7 @@ signals:
     void removed();
     void updateNeeded();
     void posChanged();
+    void changed();
 };
 
 #endif

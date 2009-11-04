@@ -134,6 +134,7 @@ public  slots:
     void setValue (const QString& s) {
         _value = s;
         emit updateNeeded();
+	void changed();
     }
 
     /*! returns the name attribute of the edge.
@@ -149,6 +150,7 @@ public  slots:
     void setName (const QString& s) {
         _name = s;
         emit updateNeeded();
+	void changed();
     }
 
     /*! gets the color attribute of the edge
@@ -164,6 +166,7 @@ public  slots:
     void setColor(const QString& s) {
         _color = s;
         emit updateNeeded();
+	void changed();
     }
 
     qreal width () const {
@@ -172,6 +175,7 @@ public  slots:
     void setWidth(qreal w) {
         _width = w;
         emit updateNeeded();
+	void changed();
     }
 
     const QString& style() const {
@@ -180,6 +184,7 @@ public  slots:
     void setStyle(const QString& s) {
         _style = s;
         emit updateNeeded();
+	void changed();
     }
 #ifdef USING_QTSCRIPT
     /*! this method can be used inside of the script interface.
@@ -240,6 +245,8 @@ signals:
     void posChanged();
 
     void updateNeeded();
+    
+    void changed();
 };
 
 #endif

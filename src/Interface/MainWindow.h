@@ -22,6 +22,7 @@
 #define SUI_MAINWINDOW_H
 
 #include <KXmlGuiWindow>
+#include <kmessagebox.h>
 
 class KPushButton;
 class GraphLayers;
@@ -59,7 +60,7 @@ private: // Methods
     
     QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
     QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
-    void saveIfChanged();
+    int saveIfChanged();
 private slots:
     void executeScript();
 
