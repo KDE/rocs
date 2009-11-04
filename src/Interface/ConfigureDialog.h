@@ -24,7 +24,6 @@
 /*! NOT USED YET */
 #include <QWidget>
 
-class MainWindow;
 
 class ConfigureDialog : public QWidget {
 public:

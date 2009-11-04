@@ -23,8 +23,6 @@
 #include <KButtonGroup>
 #include "ui_GraphPropertiesWidget.h"
 
-class GraphPropertiesModel;
-class QGraphicsItem;
 class Graph;
 class Node;
 class Edge;

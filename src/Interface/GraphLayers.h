@@ -3,10 +3,7 @@
 
 #include <QWidget>
 #include <QList>
-class GraphPropertiesWidget;
-class graphDocument;
 class Graph;
-class KPushButton;
 class QButtonGroup;
 class KLineEdit;
 class MainWindow;

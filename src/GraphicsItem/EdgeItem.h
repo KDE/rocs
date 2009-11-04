@@ -23,10 +23,7 @@
 
 #include <QGraphicsLineItem>
 
-class QGraphicsSceneMouseEvent;
-class QPen;
 class Edge;
-class QGraphisSimpleTextItem;
 
 /*! \brief the Edge drawing on screen.
   long explanation here...

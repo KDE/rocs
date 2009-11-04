@@ -27,10 +27,8 @@
 #include <QScriptValue>
 
 class KPushButton;
-class OpenedFilesWidget;
 class GraphLayers;
 class GraphVisualEditor;
-class GraphDocumentModel;
 class KActionCollection;
 class GraphDocument;
 class Graph;
@@ -41,12 +39,9 @@ class KAction;
 class MoveNodeAction;
 class TabWidget;
 class CodeEditor;
-class QToolBox;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
-class QScriptContext;
-class QScriptEngine;
 #endif
 
 class MainWindow : public KXmlGuiWindow {

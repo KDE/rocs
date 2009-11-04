@@ -23,11 +23,7 @@
 #include <QWidget>
 #include "ui_NodePropertiesWidget.h"
 
-class GraphPropertiesModel;
-class QGraphicsItem;
-class Graph;
 class Node;
-class Edge;
 class MainWindow;
 class NodeItem;
 

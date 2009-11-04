@@ -27,12 +27,7 @@
 class GraphDocument;
 class Graph;
 class Node;
-class Edge;
-class KComboBox;
-class QGraphicsScene;
 class GraphScene;
-class KColorButton;
-class GraphToolBoxWidget;
 class QToolButton;
 class MainWindow;
 class NodeItem;

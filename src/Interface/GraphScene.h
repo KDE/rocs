@@ -33,8 +33,6 @@ class Graph;
 class QGraphicsSceneMouseEvent;
 class QGraphicsSceneWheelEvent;
 class QKeyEvent;
-class NodeItem;
-class EdgeItem;
 class NodePropertiesWidget;
 class EdgePropertiesWidget;
 

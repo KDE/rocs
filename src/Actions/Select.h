@@ -25,7 +25,6 @@
 #include <QObject>
 #include <QPointF>
 
-class NodeItem;
 class Node;
 class QGraphicsRectItem;
 class QGraphicsItem;

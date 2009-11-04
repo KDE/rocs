@@ -25,7 +25,6 @@
 #include <QList>
 #include <QColor>
 
-class QGraphicsSceneMouseEvent;
 class Node;
 class QTimeLine;
 class QGraphicsSimpleTextItem;

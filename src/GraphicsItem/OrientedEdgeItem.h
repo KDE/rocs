@@ -25,7 +25,6 @@
 #include <QList>
 
 class QGraphicsSceneMouseEvent;
-class QPen;
 class Edge;
 class Node;
 class QGraphicsSimpleTextItem;
