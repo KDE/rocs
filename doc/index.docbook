@@ -1,0 +1,336 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+
+  <!ENTITY kappname "&rocs;">
+  <!ENTITY package "kdereview">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE"> 
+]>
+<book lang="&language;">
+
+<bookinfo>
+<title>The &rocs; Handbook</title>
+<authorgroup>
+<author>
+<personname>
+<firstname>Tomaz</firstname>
+<surname>Canabrava</surname>
+</personname>
+<email>alexanderrieder@gmail.com</email>
+</author>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
+
+<copyright>
+<year>2009</year>
+<holder>Tomaz Canabrava</holder>
+</copyright>
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2009-11-05</date>
+<releaseinfo>1.0</releaseinfo>
+
+<abstract>
+<para>
+&rocs; is a graph theory viewer tool for KDE.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>kdeedu</keyword>
+<keyword>mathematics</keyword>
+<keyword>math</keyword>
+<keyword>graphs</keyword>
+<keyword>node</keyword>
+<keyword>edge</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+<para>&rocs; aims to be a Graph Theory IDE for helping professors to show the
+results of a Graph Algorithm and also helping students to do the
+algorithms.</para>
+
+<para>&rocs; has a scripting module, done in Qt Script, that interacts with the
+drawned graph and every change in the graph with the script is reflected on the drawned one.</para>
+</chapter>
+
+<chapter id="using-rocs">
+<title>Using &rocs;</title>
+<para>
+The user interface is divided in two parts:
+</para> 
+<itemizedlist>
+<listitem><para>
+the top part is where you draw your graphs, and the bottom one is where you 
+create your algorithms,
+</para></listitem>
+<listitem><para>
+the left sidebar is where all your open graphs stay, you can open multiple 
+graphs per file.
+</para></listitem>
+</itemizedlist>
+
+
+<sect1 id="rocs-features">
+<title>&rocs; features</title>
+<para>
+
+The options are:
+Graph Name
+Default Node Color
+Default Edge Color
+
+the other buttons are ON/OFF :
+
+oriented graph 
+automate
+show names on nodes
+show names on edges
+show values on nodes
+show values on edges
+</para>
+<para>There are two toolbars, on the top. The main one has the following tools:</para>
+<itemizedlist>
+<listitem><para>
+<guilabel>Move Node</guilabel>: moves a node around the drawing area.</para></listitem>
+<listitem><para>
+<guilabel>Add Node</guilabel>: creates a new node at the clicked position on the drawing area.</para></listitem>
+<listitem><para>
+<guilabel>Add Edge</guilabel>: creates a new edge between two nodes.</para></listitem>
+<listitem><para>
+<guilabel>Select</guilabel>: select items by clicking on them.</para></listitem>
+<listitem><para>
+<guilabel>Delete</guilabel>: delete items by clicking on them.</para></listitem>
+</itemizedlist>
+<para>A right mouse click on a node or edge brings you the property dialog for that node 
+or edge.</para>
+<para>The layout toolbar consists in various aligns icons.</para>
+
+<para>To align nodes, choose the <guiicon>Select</guiicon> tool, click and drag a rectangle, then choose 
+the alignement  that you want.
+</para>
+</sect1>
+</chapter>
+
+<chapter id="scripting-rocs">
+<title>Scripting &rocs;</title>
+<para>After the graph is on screen, you can start creating the script for it. The language uses a
+Javascript syntax and following are the Graph, Node and Edge objects.</para>
+
+<sect1 id="script-graph">
+<title>Graph</title>
+<programlisting>
+     array list_nodes();
+     array list_edges();
+     node add_node(name);
+     edge add_edge(from, to);
+     node node_byname(QString&amp; name);
+     node begin_node();
+     array end_nodes();
+</programlisting> 
+<para>Graph variables that can be changed:</para>
+<programlisting>
+     bool directed
+     bool automate
+     string name
+     string nodeDefaultColor // in HEXA
+     string edgeDefaultColor  // in HEXA 
+</programlisting>
+</sect1>
+
+<sect1 id="script-nodes">
+<title>Nodes</title>
+<programlisting>
+     array adj_nodes();
+     array adj_edges();
+     array  input_edges();
+     array output_edges();
+     array loop_edges();
+     array connected_edges(Node *n);
+     void self_remove();
+</programlisting> 
+<para>Node Variables:</para>
+<programlisting>
+    double x
+    double y
+    double width
+    string value
+    string name
+    string color  // in HEXA
+    bool begin
+    bool end
+</programlisting>
+</sect1>
+
+<sect1 id="script-edges">
+<title>Edges</title>
+<programlisting>
+    string color ( em hexa )
+    string value
+    string name
+    double width
+    string style ( dot, dash, dash dot, solid )
+
+    node start();
+    node  end();
+
+    void self_remove();
+</programlisting> 
+</sect1>
+
+<sect1 id="script-example">
+<title>Example</title>
+<para>Here is a simple script example that sets the color of the 4 first nodes in the first 
+graph:</para>
+<programlisting>
+/* A simple example that sets the color of the 4 first nodes in the first 
+graph: */
+ 
+var colours = new Array("red", "green", "blue", "yellow");
+
+/* graphs is an array of graphs, you can access a graph by its index in the 
+array or by its name, so if the first graph's name is Untitled0, the following 
+sentence are right  */
+var list1= graphs[0].list_nodes(); //  1st form.
+var list2=Untitled0.list_nodes();              // 2nd form
+ 
+ for ( var i = 0; i &le; colours.length; i++){
+        if (i > list2.length) break;
+        list2[i].color = colours[i]
+ }
+</programlisting>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title>Command Reference</title>
+
+<sect1 id="rocs-mainwindow">
+<title>Menus and Shortcut Keys</title>
+
+<sect2>
+<title>The <guimenu>File</guimenu> Menu</title>
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Quit</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Quits</action> &rocs;</para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+
+<sect2>
+<title>The <guimenu>Settings</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guisubmenu>Toolbars</guisubmenu>
+</menuchoice></term>
+<listitem><para><action>Toggle</action> the <guimenuitem>Main</guimenuitem>, <guimenuitem>Special Characters</guimenuitem>,
+<guimenuitem>Look</guimenuitem> and <guimenuitem>Language</guimenuitem> toolbars.</para></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Show Statusbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle</action> the statusbar.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure Shortcuts...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Open</action> standard &kde; setting dialog that allows you to
+choose different shortcut keys for different actions.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure Toolbars...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Configure</action> the items you want to put in the toolbar.
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2>
+<title>The <guimenu>Help</guimenu> Menu</title>
+&help.menu.documentation;
+</sect2>
+</sect1>
+</chapter>
+
+
+<chapter id="credits">
+
+<title>Credits and License</title>
+
+<para>
+&rocs;
+</para>
+<para>
+Program copyright 2009 Tomaz Canabrava tcanabrava at kde dot org
+</para>
+
+<para>
+Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail; and Tomaz Canabrava tcanabrava at kde dot org
+</para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+&underFDL;               <!-- FDL: do not remove -->
+&underGPL;               <!-- GPL License -->
+
+</chapter>
+
+<appendix id="installation">
+<title>Installation</title>
+
+<sect1 id="getting-rocs">
+<title>How to obtain &rocs;</title>
+
+&install.intro.documentation;
+
+</sect1>
+
+<sect1 id="compilation">
+<title>Compilation and installation</title>
+
+&install.compile.documentation;
+
+</sect1>
+</appendix>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
