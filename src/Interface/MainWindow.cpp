@@ -152,10 +152,6 @@ void MainWindow::setupActions() {
     kDebug() << "Entering in Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
 
-    GraphScene *gc = _graphVisualEditor->scene();
-    if (!gc) {
-        return;
-    }
     _moveNodeAction = new MoveNodeAction(gc, this);
 
     KActionCollection *ac = actionCollection();
@@ -167,7 +163,6 @@ void MainWindow::setupActions() {
     g->addAction(ac->addAction("select", new SelectAction(gc, this)));
     g->addAction(ac->addAction("delete", new DeleteAction(gc, this)));
     actionCollection()->action("move_node")->toggle();
-    //gc -> setAction(actionCollection()->action("move_node"));
 
     ac->addAction("align-hbottom",new AlignAction( "Align on the base",  AlignAction::Bottom, _graphVisualEditor ));
     ac->addAction("align-hcenter",new AlignAction( "Align on the center",AlignAction::HCenter,_graphVisualEditor ));
@@ -351,7 +346,6 @@ void MainWindow::executeScript() {
 
     delete engine;
     delete e;
-   // scene()->updateDocument();
 }
 
 int MainWindow::saveIfChanged(){
