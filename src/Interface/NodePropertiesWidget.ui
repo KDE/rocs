@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>254</width>
-    <height>175</height>
+    <width>370</width>
+    <height>246</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,10 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Name</string>
+      <string>Name:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
@@ -39,28 +42,40 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Value</string>
+      <string>Value:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
     <widget class="KLineEdit" name="_value"/>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>x</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>X-coordinate </string>
+       </property>
+       <property name="text">
+        <string extracomment="X-coordinate ">x:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QSpinBox" name="_x">
        <property name="sizePolicy">
@@ -82,8 +97,14 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Y-coordinate </string>
+       </property>
        <property name="text">
-        <string>y</string>
+        <string extracomment="Y-coordinate ">y:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -104,23 +125,42 @@
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_6">
+     <property name="toolTip">
+      <string>Node color</string>
+     </property>
      <property name="text">
-      <string>Color</string>
+      <string>Color:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="KColorCombo" name="_color"/>
+    <widget class="KColorCombo" name="_color">
+     <property name="toolTip">
+      <string>Node color</string>
+     </property>
+    </widget>
    </item>
    <item row="4" column="0">
     <widget class="QLabel" name="label_5">
+     <property name="toolTip">
+      <string>Node size</string>
+     </property>
      <property name="text">
-      <string>Size</string>
+      <string>Size:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="4" column="1">
     <widget class="KDoubleNumInput" name="_width">
+     <property name="toolTip">
+      <string>Node size</string>
+     </property>
      <property name="minimum">
       <double>0.500000000000000</double>
      </property>
@@ -134,12 +174,18 @@
      <property name="text">
       <string>Show</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
     </widget>
    </item>
    <item row="5" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="_showName">
+       <property name="toolTip">
+        <string>Node name</string>
+       </property>
        <property name="text">
         <string>name</string>
        </property>
