@@ -278,6 +278,10 @@ void MainWindow::openGraph() {
 }
 
 void MainWindow::loadDocument(const QString& name){
+  if ( name != QString() && !name.endsWith(".graph")){
+	  KMessageBox::sorry(this, i18n("This doesn't seem to be a graph file."), i18n("Invalid file"));
+	  return;
+  }
   _graphVisualEditor->scene()->clearGraph();
   _graphVisualEditor->scene()->setActiveGraphDocument(0);
   delete _activeGraphDocument;
