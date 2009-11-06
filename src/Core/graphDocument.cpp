@@ -120,8 +120,10 @@ const QString& GraphDocument::documentPath() const {
 bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     buf.clear();
     KSaveFile saveFile;
-    saveFile.setFileName( filename );
-    qDebug() << filename;
+	const QString s( (!filename.endsWith(".graph"))? QString("%1.graph").arg(filename):filename);
+	
+    saveFile.setFileName( s );
+    qDebug() << s;
 
     if (!saveFile.open()) {
         qDebug() << "Error: File Not Open";
