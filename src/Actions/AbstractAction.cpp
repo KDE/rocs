@@ -26,7 +26,7 @@
 #include <KDebug>
 
 AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
-        : KAction(parent) {
+        : KToggleAction(parent) {
     _graphDocument = 0;
     _graph = 0;
     _graphScene = scene;

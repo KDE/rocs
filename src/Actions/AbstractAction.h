@@ -19,7 +19,7 @@
 #ifndef ACTION_ABSTRACTACTION_H
 #define ACTION_ABSTRACTACTION_H
 
-#include <KAction>
+#include <KToggleAction>
 #include <QObject>
 #include <QString>
 class GraphScene;
@@ -33,7 +33,7 @@ that will interact directly with the scene.
 */
 
 // TODO: Changer the behavior of this class, so it sends itself instead of the type  of action to the graphscene.
-class AbstractAction : public KAction
+class AbstractAction : public KToggleAction
 {
     Q_OBJECT
 public:

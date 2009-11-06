@@ -69,6 +69,7 @@
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
 #include <qscriptenginedebugger.h>
+#include <QActionGroup>
 
 MainWindow* mainWindow = 0;
 
@@ -158,12 +159,15 @@ void MainWindow::setupActions() {
     _moveNodeAction = new MoveNodeAction(gc, this);
 
     KActionCollection *ac = actionCollection();
-    ac->addAction("move_node", _moveNodeAction);
-    ac->addAction("add_node", new AddNodeAction(gc, this));
-    ac->addAction("add_edge", new AddEdgeAction(gc, this));
-    ac->addAction("select", new SelectAction(gc, this));
-    ac->addAction("delete", new DeleteAction(gc, this));
-    gc -> setAction(actionCollection()->action("move_node"));
+    QActionGroup *g = new QActionGroup(this);
+    
+    g->addAction(ac->addAction("move_node", _moveNodeAction));
+    g->addAction(ac->addAction("add_node", new AddNodeAction(gc, this)));
+    g->addAction(ac->addAction("add_edge", new AddEdgeAction(gc, this)));
+    g->addAction(ac->addAction("select", new SelectAction(gc, this)));
+    g->addAction(ac->addAction("delete", new DeleteAction(gc, this)));
+    actionCollection()->action("move_node")->toggle();
+    //gc -> setAction(actionCollection()->action("move_node"));
 
     ac->addAction("align-hbottom",new AlignAction( "Align on the base",  AlignAction::Bottom, _graphVisualEditor ));
     ac->addAction("align-hcenter",new AlignAction( "Align on the center",AlignAction::HCenter,_graphVisualEditor ));
