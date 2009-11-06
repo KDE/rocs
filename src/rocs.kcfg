@@ -12,21 +12,21 @@
 		</entry>
 	</group>
 	<group name="GraphicsView">
-		 <entry name="fastGraphics" type="Bool">
+		 <entry name="fastGraphics" type="Bool" hidden="true">
 			<default>false</default>
 		 </entry>
 	</group>
 	<group name="MainWindow">
-		<entry name="vSplitterSizeTop" type="Int">
+		<entry name="vSplitterSizeTop" type="Int" hidden="true">
 			<default>200</default>
 		</entry>
-		<entry name="vSplitterSizeBottom" type="Int">
+		<entry name="vSplitterSizeBottom" type="Int" hidden="true">
 			<default>200</default>
 		</entry>
-		<entry name="hSplitterSizeLeft" type="Int">
+		<entry name="hSplitterSizeLeft" type="Int" hidden="true">
 			<default> 500 </default>
 		</entry>
-		<entry name="hSplitterSizeRight" type="Int">
+		<entry name="hSplitterSizeRight" type="Int" hidden="true">
 			<default> 500 </default>
 		</entry>
 	</group>
