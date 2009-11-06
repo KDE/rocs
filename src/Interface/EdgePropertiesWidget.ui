@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>190</width>
-    <height>191</height>
+    <width>223</width>
+    <height>207</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,21 +17,33 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Value</string>
+      <string>Value:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Color</string>
+      <string>Color:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="4" column="0">
     <widget class="QLabel" name="label_4">
+     <property name="toolTip">
+      <string>Edge width</string>
+     </property>
      <property name="text">
-      <string>Width</string>
+      <string>Width:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
@@ -41,12 +53,18 @@
    <item row="5" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>Style</string>
+      <string>Style:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="5" column="2" colspan="2">
     <widget class="KComboBox" name="_style">
+     <property name="toolTip">
+      <string>Edge style</string>
+     </property>
      <item>
       <property name="text">
        <string>solid</string>
@@ -70,25 +88,43 @@
     </widget>
    </item>
    <item row="3" column="2" colspan="2">
-    <widget class="KColorCombo" name="_color"/>
+    <widget class="KColorCombo" name="_color">
+     <property name="toolTip">
+      <string>Edge color</string>
+     </property>
+    </widget>
    </item>
    <item row="2" column="2" colspan="2">
-    <widget class="KLineEdit" name="_value"/>
+    <widget class="KLineEdit" name="_value">
+     <property name="toolTip">
+      <string>Edge value</string>
+     </property>
+    </widget>
    </item>
    <item row="1" column="2" colspan="2">
-    <widget class="KLineEdit" name="_name"/>
+    <widget class="KLineEdit" name="_name">
+     <property name="toolTip">
+      <string>Edge name</string>
+     </property>
+    </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Name</string>
+      <string>Name:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="6" column="2">
     <widget class="KPushButton" name="_showName">
+     <property name="toolTip">
+      <string>Show/hide edge name</string>
+     </property>
      <property name="text">
-      <string>name</string>
+      <string>Name</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -97,8 +133,11 @@
    </item>
    <item row="6" column="3">
     <widget class="KPushButton" name="_showValue">
+     <property name="toolTip">
+      <string>Show/add edge value</string>
+     </property>
      <property name="text">
-      <string>value</string>
+      <string>Value</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -108,7 +147,10 @@
    <item row="6" column="0">
     <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>show</string>
+      <string>Show</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
