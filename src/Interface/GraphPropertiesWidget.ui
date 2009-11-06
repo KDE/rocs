@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>232</width>
-    <height>150</height>
+    <width>267</width>
+    <height>162</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -80,7 +80,10 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Name</string>
+         <string>Name:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -90,7 +93,10 @@
       <item row="1" column="0" colspan="2">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Node Color</string>
+         <string>Node Color:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -102,19 +108,31 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="toolTip">
+         <string>Color for new nodes</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="3">
        <widget class="KPushButton" name="_graphNodeColorApplyNow">
+        <property name="toolTip">
+         <string>Set the current color to all nodes</string>
+        </property>
+        <property name="whatsThis">
+         <string>Set the current color to all nodes on the drawing area</string>
+        </property>
         <property name="text">
-         <string>all</string>
+         <string>All</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Edge Color</string>
+         <string>Edge Color:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -126,12 +144,21 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="toolTip">
+         <string>Color for new edges</string>
+        </property>
        </widget>
       </item>
       <item row="2" column="3">
        <widget class="KPushButton" name="_graphEdgeColorApplyNow">
+        <property name="toolTip">
+         <string>Set the current color to all edges</string>
+        </property>
+        <property name="whatsThis">
+         <string>Set the current color to all edges on the drawing area</string>
+        </property>
         <property name="text">
-         <string>all</string>
+         <string>All</string>
         </property>
        </widget>
       </item>
