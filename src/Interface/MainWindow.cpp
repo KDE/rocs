@@ -151,7 +151,8 @@ QWidget* MainWindow::setupLeftPanel() {
 void MainWindow::setupActions() {
     kDebug() << "Entering in Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
-
+    GraphScene *gc = _graphVisualEditor->scene();
+    
     _moveNodeAction = new MoveNodeAction(gc, this);
 
     KActionCollection *ac = actionCollection();
