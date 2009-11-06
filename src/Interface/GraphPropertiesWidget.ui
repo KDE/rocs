@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>267</width>
+    <width>272</width>
     <height>162</height>
    </rect>
   </property>
@@ -55,8 +55,14 @@
      </item>
      <item>
       <widget class="KPushButton" name="_graphDelete">
+       <property name="toolTip">
+        <string>Delete the active graph</string>
+       </property>
+       <property name="whatsThis">
+        <string>Delete the current active graph: delete all nodes and edges</string>
+       </property>
        <property name="text">
-        <string>x</string>
+        <string extracomment="Do not translate, X is for delete">x</string>
        </property>
       </widget>
      </item>
@@ -183,6 +189,9 @@
         <item>
          <widget class="QToolButton" name="_graphOriented">
           <property name="toolTip">
+           <string>Oriented graph</string>
+          </property>
+          <property name="whatsThis">
            <string>Enabling this button will make the graph oriented.</string>
           </property>
           <property name="text">
@@ -196,6 +205,9 @@
         <item>
          <widget class="QToolButton" name="_graphAutomate">
           <property name="toolTip">
+           <string>Automated graph</string>
+          </property>
+          <property name="whatsThis">
            <string>Enabling this button will make the graph an automated graph.</string>
           </property>
           <property name="text">
@@ -209,7 +221,10 @@
         <item>
          <widget class="QToolButton" name="_showNodeNames">
           <property name="toolTip">
-           <string>Enabling this button will show the names of nodes.</string>
+           <string>Show all nodes names</string>
+          </property>
+          <property name="whatsThis">
+           <string>Enabling this button will show the names of all nodes.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -222,7 +237,10 @@
         <item>
          <widget class="QToolButton" name="_showEdgeNames">
           <property name="toolTip">
-           <string>Enabling this button will show the names of edges.</string>
+           <string>Show all edges names</string>
+          </property>
+          <property name="whatsThis">
+           <string>Enabling this button will show the names of all edges.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -235,7 +253,10 @@
         <item>
          <widget class="QToolButton" name="_showNodeValues">
           <property name="toolTip">
-           <string>Enabling this button will show the values of nodes.</string>
+           <string>Show all nodes values</string>
+          </property>
+          <property name="whatsThis">
+           <string>Enabling this button will show the values of all nodes.</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -248,6 +269,9 @@
         <item>
          <widget class="QToolButton" name="_showEdgeValues">
           <property name="toolTip">
+           <string>Show all edges values</string>
+          </property>
+          <property name="whatsThis">
            <string>Enabling this button will show the values of edges.</string>
           </property>
           <property name="text">
