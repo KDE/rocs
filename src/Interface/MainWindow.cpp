@@ -272,7 +272,7 @@ void MainWindow::newGraph() {
 
 void MainWindow::openGraph() {
     if (saveIfChanged() == KMessageBox::Cancel) return;
-    QString fileName = KFileDialog::getOpenFileName();
+    QString fileName = KFileDialog::getOpenFileName(QString(), i18n("*.graph|Graph files\n*.*|All files"), this, i18n("Graph Files") );
     if (fileName == "") return;
     loadDocument(fileName);
 }
