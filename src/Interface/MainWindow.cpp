@@ -287,7 +287,7 @@ void MainWindow::loadDocument(const QString& name){
   _graphVisualEditor->scene()->setActiveGraphDocument(0);
   delete _activeGraphDocument;
   setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
-  if (name == QString()){
+  if (name.isEmpty()){
     _activeGraphDocument->addGraph(i18n("Untitled0"));
   }
   else{

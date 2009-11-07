@@ -215,6 +215,10 @@ void GraphScene::removeGItem(QGraphicsItem *gItem) {
 }
 
 void GraphScene::updateGraph(Graph *g) {
+/* This updates a particular graph by removing all nodes and edges associated to it
+   and redrawn it on screen. now updateDocument is calling clearGraph() that will do the same thing, but for *all* graphs at the same time, but actually working. */
+
+/*
     QList<QGraphicsItem*> items = _hashGraphs.values(g);
     kDebug() << "Quantity of items to be removed." << items.size();
     foreach(QGraphicsItem *i, items) {
@@ -223,7 +227,8 @@ void GraphScene::updateGraph(Graph *g) {
     }
     kDebug() << "Items removed";
 
-    _hashGraphs.remove(g);
+    _hashGraphs.remove(g); */
+
     kDebug() << "Removed Graph from the hash";
 
     kDebug() << "Creating" << g->nodes().size() << "nodes";
@@ -244,7 +249,8 @@ void GraphScene::updateDocument() {
         kDebug() << "Graph Document is null. Please hit the developer.";
         return;
     }
-
+    
+    clearGraph();
     kDebug() << "Graph Document Size: " << _graphDocument->size();
     int size = _graphDocument->size();
 
