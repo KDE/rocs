@@ -51,11 +51,11 @@
 <chapter id="introduction">
 <title>Introduction</title>
 <para>&rocs; aims to be a Graph Theory IDE for helping professors to show the
-results of a Graph Algorithm and also helping students to do the
+results of a graph algorithm and also helping students to do the
 algorithms.</para>
 
 <para>&rocs; has a scripting module, done in Qt Script, that interacts with the
-drawned graph and every change in the graph with the script is reflected on the drawned one.</para>
+drawn graph and every change in the graph with the script is reflected on the drawn one.</para>
 </chapter>
 
 <chapter id="using-rocs">
@@ -65,7 +65,7 @@ The user interface is divided in two parts:
 </para> 
 <itemizedlist>
 <listitem><para>
-the top part is where you draw your graphs, and the bottom one is where you 
+the top right part is where you draw your graphs, and the bottom right one is where you 
 create your algorithms,
 </para></listitem>
 <listitem><para>
@@ -76,23 +76,47 @@ graphs per file.
 
 
 <sect1 id="rocs-features">
-<title>&rocs; features</title>
+<title>&rocs; global settings</title>
 <para>
+On the left sidebar you can find the options for each opened graph, all these options are global 
+per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.</para>
+<itemizedlist>
+<listitem><para>
+<guilabel>Graph Name</guilabel>
+</para></listitem>
+<listitem><para>
+<guilabel>Default Node Color</guilabel> for new created nodes, you can change the node color for all current nodes 
+by clicking the All button
+</para></listitem>
+<listitem><para>
+<guilabel>Default Edge Color</guilabel>
+</para></listitem>
+</itemizedlist>
+<para>The last row of options consists in toggled buttons:</para>
+<itemizedlist>
+<listitem><para>
+<guilabel>Oriented Graph</guilabel>
+</para></listitem>
+<listitem><para>
+<guilabel>Automated Graph</guilabel>
+</para></listitem>
+<listitem><para>
+<guilabel>Show nodes names</guilabel>
+</para></listitem>
+<listitem><para>
+<guilabel>Show edges names</guilabel>
+</para></listitem>
+<listitem><para>
+<guilabel>Show nodes values</guilabel>
+</para></listitem>
+<listitem><para>
+<guilabel>Show edges values</guilabel>
+</para></listitem>
+</itemizedlist>
+</sect1>
 
-The options are:
-Graph Name
-Default Node Color
-Default Edge Color
-
-the other buttons are ON/OFF :
-
-oriented graph 
-automate
-show names on nodes
-show names on edges
-show values on nodes
-show values on edges
-</para>
+<sect1 id="rocs-toolbars">
+<title>&rocs; toolbars</title>
 <para>There are two toolbars, on the top. The main one has the following tools:</para>
 <itemizedlist>
 <listitem><para>
@@ -106,6 +130,7 @@ show values on edges
 <listitem><para>
 <guilabel>Delete</guilabel>: delete items by clicking on them.</para></listitem>
 </itemizedlist>
+
 <para>A right mouse click on a node or edge brings you the property dialog for that node 
 or edge.</para>
 <para>The layout toolbar consists in various aligns icons.</para>
