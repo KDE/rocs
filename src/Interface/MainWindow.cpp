@@ -165,12 +165,12 @@ void MainWindow::setupActions() {
     g->addAction(ac->addAction("delete", new DeleteAction(gc, this)));
     actionCollection()->action("move_node")->toggle();
 
-    ac->addAction("align-hbottom",new AlignAction( "Align on the base",  AlignAction::Bottom, _graphVisualEditor ));
-    ac->addAction("align-hcenter",new AlignAction( "Align on the center",AlignAction::HCenter,_graphVisualEditor ));
-    ac->addAction("align-htop",   new AlignAction( "Align on the top",   AlignAction::Top,    _graphVisualEditor ));
-    ac->addAction("align-vleft",  new AlignAction( "Align on the left",  AlignAction::Left,   _graphVisualEditor ));
-    ac->addAction("align-vcenter",new AlignAction( "Align on the center",AlignAction::VCenter,_graphVisualEditor ));
-    ac->addAction("align-vright", new AlignAction( "Align on the right", AlignAction::Right,  _graphVisualEditor ));
+    ac->addAction("align-hbottom",new AlignAction( i18n("Align on the base"),  AlignAction::Bottom, _graphVisualEditor ));
+    ac->addAction("align-hcenter",new AlignAction( i18n("Align on the center"),AlignAction::HCenter,_graphVisualEditor ));
+    ac->addAction("align-htop",   new AlignAction( i18n("Align on the top"),   AlignAction::Top,    _graphVisualEditor ));
+    ac->addAction("align-vleft",  new AlignAction( i18n("Align on the left"),  AlignAction::Left,   _graphVisualEditor ));
+    ac->addAction("align-vcenter",new AlignAction( i18n("Align on the center"),AlignAction::VCenter,_graphVisualEditor ));
+    ac->addAction("align-vright", new AlignAction( i18n("Align on the right"), AlignAction::Right,  _graphVisualEditor ));
 
     KAction* action = new KAction(KIcon("document-new"), i18n("New Graph"),  _graphVisualEditor->view());
     action->setShortcut(Qt::CTRL + Qt::Key_N);
