@@ -131,7 +131,7 @@ QWidget* MainWindow::setupRightPanel() {
     _bottomTabs = new TabWidget(TabWidget::TabOnBottom, this);
     _bottomTabs->addWidget(_codeEditor,  "Editor", KIcon("accessories-text-editor"));
     _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("debugger"));
-    _runScript = new KAction(KIcon("system-run"), "Run", this);
+    _runScript = new KAction(KIcon("system-run"), i18n("Run"), this);
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
     _bottomTabs->addAction(_runScript);
 
@@ -172,7 +172,7 @@ void MainWindow::setupActions() {
     ac->addAction("align-vcenter",new AlignAction( "Align on the center",AlignAction::VCenter,_graphVisualEditor ));
     ac->addAction("align-vright", new AlignAction( "Align on the right", AlignAction::Right,  _graphVisualEditor ));
 
-    KAction* action = new KAction(KIcon("document-new"), "New Graph",  _graphVisualEditor->view());
+    KAction* action = new KAction(KIcon("document-new"), i18n("New Graph"),  _graphVisualEditor->view());
     action->setShortcut(Qt::CTRL + Qt::Key_N);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("new-graph", action);

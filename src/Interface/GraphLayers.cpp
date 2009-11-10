@@ -15,7 +15,7 @@ GraphLayers::GraphLayers(MainWindow *parent) : QWidget(parent) {
     _mainWindow = parent;
     QHBoxLayout *hBoxLayout = new QHBoxLayout();
 
-    KPushButton *btnADD = new KPushButton(KIcon("AddGraph"), "Add");
+    KPushButton *btnADD = new KPushButton(KIcon("AddGraph"), i18n("Add"));
     _lineEdit = new KLineEdit(this);
     connect(btnADD, SIGNAL(clicked()), this, SLOT(btnADDClicked()));
     hBoxLayout->addWidget(btnADD);
