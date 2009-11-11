@@ -26,13 +26,15 @@
 #include <QColor>
 
 class Edge;
+class MainWindow;
+#include <QPointF>
 
 class EdgePropertiesWidget : public QWidget, public Ui::EdgePropertiesWidget
 {
     Q_OBJECT
 public:
-    EdgePropertiesWidget();
-    void setEdge(Edge *e);
+    EdgePropertiesWidget(MainWindow *parent);
+    void setEdge(Edge *e, QPointF pos);
 
 public slots:
     void on__name_textChanged(const QString& s);

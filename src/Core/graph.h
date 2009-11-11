@@ -242,6 +242,8 @@ signals:
     void edgeCreated(Edge *e);
     void complexityChanged(bool directed);
     void changed();
+    void orientedChanged(bool b);
+    void automateChanged(bool b);
     
 private:
     bool _directed;

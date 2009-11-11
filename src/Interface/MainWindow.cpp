@@ -140,6 +140,7 @@ QWidget* MainWindow::setupRightPanel() {
     _vSplitter->addWidget(_graphVisualEditor);
     _vSplitter->addWidget(_bottomTabs);
     _vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
+   // _bottomTabs->actions().first()->setChecked(true);
     return _vSplitter;
 }
 

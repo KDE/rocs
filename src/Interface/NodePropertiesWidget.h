@@ -26,6 +26,7 @@
 class Node;
 class MainWindow;
 class NodeItem;
+#include <QPointF>
 
 /*! \brief Properties Area, not used yet. */
 class NodePropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
@@ -33,7 +34,7 @@ class NodePropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
     Q_OBJECT
 public:
     NodePropertiesWidget (MainWindow* parent = 0 );
-    void setNode(NodeItem *n);
+    void setNode(NodeItem *n, QPointF pos);
 
 
 private slots:
@@ -48,11 +49,13 @@ private slots:
     void on__begin_toggled(bool b);
     void on__end_toggled(bool b);
     void reflectAttributes();
+    void updateAutomateAttributes(bool b);
     
 private:
 
     Node *_node;
     MainWindow *_mainWindow;
     NodeItem *_item;
+    
 };
 #endif

@@ -254,6 +254,7 @@ const QString& Graph::edgeDefaultColor() const {
 
 void Graph::setAutomate(bool b) {
     _automate = b;
+    emit automateChanged(b);
 }
 bool Graph::automate() {
     return _automate;

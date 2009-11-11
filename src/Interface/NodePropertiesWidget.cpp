@@ -9,15 +9,17 @@ NodePropertiesWidget::NodePropertiesWidget (MainWindow* /*parent*/  ): QWidget(0
     setupUi(this);
 }
 
-void NodePropertiesWidget::setNode(NodeItem *n) {
+void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
     _item = n;
     _node = n->node();
-    move(_node->x() + 10, _node->y() + 10);
+    move(pos.x()+ 10,  pos.y() + 10);
     show();
     activateWindow();
     raise();
+    disconnect();
     connect(_node, SIGNAL(updateNeeded()), this, SLOT(reflectAttributes()));
     connect(_node, SIGNAL(posChanged()), this, SLOT(reflectAttributes()));
+    connect(_node->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
     reflectAttributes();
 
 }
@@ -31,9 +33,11 @@ void NodePropertiesWidget::reflectAttributes(){
     _width->setValue(_node->width());
     _showName->setChecked(!_node->showName());
     _showValue->setChecked(!_node->showValue());
+    updateAutomateAttributes(qobject_cast< Graph* >(_node->parent())->automate());
+}
 
-    Graph *g =qobject_cast<Graph*>( _node->parent() );
-    if (g->automate()) {
+void NodePropertiesWidget::updateAutomateAttributes(bool b){
+    if (b) {
         _begin->setChecked(_node->begin());
         _end->setChecked(_node->end());
         _begin->show();

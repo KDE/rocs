@@ -88,6 +88,11 @@ void TabWidget::releaseButton(int index) {
 void TabWidget::addWidget(QWidget *w, const QString& text,const KIcon& icon) {
     m_widgets -> addWidget(w);
     m_tabs -> appendTab(icon.pixmap(16), m_numOfTabs, text);
+    
+    if (m_numOfTabs == 0){
+      m_tabs->setTab(m_numOfTabs, true);
+    }
+      
     connect(m_tabs->tab(m_numOfTabs), SIGNAL(clicked(int)), this, SLOT(controlPanel(int)));
     m_numOfTabs++;
 }

@@ -41,7 +41,7 @@ GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
     _graphDocument = 0;
     _hideEdges = false;
     _nodePropertiesWidget = new NodePropertiesWidget(qobject_cast<MainWindow*>(parent));
-    _edgePropertiesWidget = new EdgePropertiesWidget();
+    _edgePropertiesWidget = new EdgePropertiesWidget(qobject_cast<MainWindow*>(parent));
 }
 
 bool GraphScene::hideEdges() {
@@ -165,13 +165,13 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     else if( mouseEvent->button() == Qt::RightButton){
 	QGraphicsItem *i = itemAt(mouseEvent->scenePos());
         if (NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(i)){
-            _nodePropertiesWidget->setNode(nItem);
+            _nodePropertiesWidget->setNode(nItem, mouseEvent->screenPos());
         }
         else if (EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(i)){
-            _edgePropertiesWidget->setEdge(eItem->edge());
+            _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());
         }
 	else if (OrientedEdgeItem *eItem = qgraphicsitem_cast<OrientedEdgeItem*>(i)){
-	    _edgePropertiesWidget->setEdge(eItem->edge());
+	    _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());
         }
     }else if( mouseEvent -> button() == Qt::LeftButton){
       _action->executePress(mouseEvent->scenePos());

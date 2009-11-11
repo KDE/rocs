@@ -19,17 +19,19 @@
 
 #include "edgepropertieswidget.h"
 #include "edge.h"
-
-EdgePropertiesWidget::EdgePropertiesWidget(): QWidget(0) {
+#include "MainWindow.h"
+EdgePropertiesWidget::EdgePropertiesWidget(MainWindow *parent): QWidget(parent) {
     setupUi(this);
         
 }
 
-void EdgePropertiesWidget::setEdge(Edge *e) {
+void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
     _edge = e;
+    move(pos.x()+ 10,  pos.y() + 10);
     show();
     activateWindow();
     raise();
+    disconnect();
     connect(_edge, SIGNAL(updateNeeded()), this, SLOT(reflectAttributes()));
     connect(_edge, SIGNAL(posChanged()), this, SLOT(reflectAttributes()));
     reflectAttributes();
