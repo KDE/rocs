@@ -1,9 +1,24 @@
 [Desktop Entry]
 Name=Rocs
+Name[en_GB]=Rocs
+Name[pt]=Rocs
+Name[sv]=Rocs
+Name[uk]=Рух
+Name[x-test]=xxRocsxx
 GenericName=Rocs Graph Theory
+GenericName[en_GB]=Rocs Graph Theory
+GenericName[pt]=Teoria dos Grafos - Rocs
+GenericName[sv]=Rocs grafteori
+GenericName[uk]=Теорія графів «Рух»
+GenericName[x-test]=xxRocs Graph Theoryxx
 Exec=rocs %i -caption "%c"
 Icon=Rocs
 Type=Application
 Comment=Graph Theory Tool for Professors and Students.
+Comment[en_GB]=Graph Theory Tool for Professors and Students.
+Comment[pt]=Ferramenta de Teoria dos Grafos para Professores e Alunos.
+Comment[sv]=Grafteoriverktyg för lärare och elever.
+Comment[uk]=Інструмент теорії графів для викладачів та студентів.
+Comment[x-test]=xxGraph Theory Tool for Professors and Students.xx
 Terminal=false
 Categories=Qt;KDE;Education;Science;
