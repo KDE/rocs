@@ -42,6 +42,7 @@ GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
     _hideEdges = false;
     _nodePropertiesWidget = new NodePropertiesWidget(qobject_cast<MainWindow*>(parent));
     _edgePropertiesWidget = new EdgePropertiesWidget(qobject_cast<MainWindow*>(parent));
+    _action = 0;
 }
 
 bool GraphScene::hideEdges() {
@@ -149,7 +150,9 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
 }
 
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
+  if(_action)
     _action->executeMove(mouseEvent->scenePos());
+  
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
@@ -174,14 +177,16 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 	    _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());
         }
     }else if( mouseEvent -> button() == Qt::LeftButton){
-      _action->executePress(mouseEvent->scenePos());
+      if (_action){
+	_action->executePress(mouseEvent->scenePos());
+      }
     }
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-    if (mouseEvent->button() == Qt::LeftButton){
-      _action->executeRelease(mouseEvent->scenePos());
-    }
+//     if (mouseEvent->button() == Qt::LeftButton){
+//       _action->executeRelease(mouseEvent->scenePos());
+//     }
 }
 
 void GraphScene::keyPressEvent(QKeyEvent *) {
