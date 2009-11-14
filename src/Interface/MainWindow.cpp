@@ -165,6 +165,7 @@ void MainWindow::setupActions() {
     g->addAction(ac->addAction("select", new SelectAction(gc, this)));
     g->addAction(ac->addAction("delete", new DeleteAction(gc, this)));
     actionCollection()->action("move_node")->toggle();
+    gc->setAction(_moveNodeAction);
 
     ac->addAction("align-hbottom",new AlignAction( i18n("Align on the base"),  AlignAction::Bottom, _graphVisualEditor ));
     ac->addAction("align-hcenter",new AlignAction( i18n("Align on the center"),AlignAction::HCenter,_graphVisualEditor ));
