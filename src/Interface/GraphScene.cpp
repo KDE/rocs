@@ -150,9 +150,7 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
 }
 
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-  if(_action)
     _action->executeMove(mouseEvent->scenePos());
-  
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
@@ -177,16 +175,14 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 	    _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());
         }
     }else if( mouseEvent -> button() == Qt::LeftButton){
-      if (_action){
 	_action->executePress(mouseEvent->scenePos());
-      }
     }
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
      if (mouseEvent->button() == Qt::LeftButton){
-       if(_action)
 	_action->executeRelease(mouseEvent->scenePos());
+	
      }
 }
 
@@ -202,7 +198,6 @@ void GraphScene::insertGraphItem(Graph *g, QGraphicsItem *item) {
 void GraphScene::clearGraph() {
     clear();
     _hashGraphs.clear();
-    qDebug() << "Chamando isso o.o";
 }
 
 void GraphScene::removeGItem(QGraphicsItem *gItem) {
