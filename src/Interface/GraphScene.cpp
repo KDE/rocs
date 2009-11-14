@@ -184,9 +184,10 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-//     if (mouseEvent->button() == Qt::LeftButton){
-//       _action->executeRelease(mouseEvent->scenePos());
-//     }
+     if (mouseEvent->button() == Qt::LeftButton){
+       if(_action)
+	_action->executeRelease(mouseEvent->scenePos());
+     }
 }
 
 void GraphScene::keyPressEvent(QKeyEvent *) {
