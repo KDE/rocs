@@ -19,12 +19,7 @@ set(rocs_KCFGS settings.kcfgc)
 kde4_add_kcfg_files(rocs_SRCS ${rocs_KCFGS} )
 kde4_add_executable(rocs ${rocs_SRCS} ${rocs_RCC_SRCS})
 
-target_link_libraries(rocs ${KDE4_KDEUI_LIBS}
-  ${KDE4_KROSSUI_LIBS}
-  ${KDE4_KIO_LIBS}
-  ${KDE4_KTEXTEDITOR_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
-  QtScriptTools
+target_link_libraries(rocs
   #  gvc 
   #  graph 
   # cdt
@@ -33,6 +28,12 @@ target_link_libraries(rocs ${KDE4_KDEUI_LIBS}
   librocsmodel
   librocsactions
   librocscore
+  ${KDE4_KDEUI_LIBS}
+  ${KDE4_KROSSUI_LIBS}
+  ${KDE4_KIO_LIBS}
+  ${KDE4_KTEXTEDITOR_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
+  QtScriptTools
 )
 
 install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
