@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Rocs
 Name[en_GB]=Rocs
+Name[es]=Rocs
 Name[pt]=Rocs
 Name[pt_BR]=Rocs
 Name[sv]=Rocs
@@ -8,6 +9,7 @@ Name[uk]=Рух
 Name[x-test]=xxRocsxx
 GenericName=Rocs Graph Theory
 GenericName[en_GB]=Rocs Graph Theory
+GenericName[es]=Teoría de grafos Rocs
 GenericName[pt]=Teoria dos Grafos - Rocs
 GenericName[pt_BR]=Teoria dos grafos de Rocs
 GenericName[sv]=Rocs grafteori
@@ -18,6 +20,7 @@ Icon=Rocs
 Type=Application
 Comment=Graph Theory Tool for Professors and Students.
 Comment[en_GB]=Graph Theory Tool for Professors and Students.
+Comment[es]=Herramienta de teoría de grafos para profesores y estudiantes
 Comment[pt]=Ferramenta de Teoria dos Grafos para Professores e Alunos.
 Comment[pt_BR]=Ferramenta de teoria de grafos para professores e alunos.
 Comment[sv]=Grafteoriverktyg för lärare och elever.
