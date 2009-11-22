@@ -15,7 +15,7 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    version="1.0"
-   sodipodi:docname="rocs-allignbottom16.svg"
+   sodipodi:docname="hi16-action-rocsallignbottom.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs4">
@@ -59,15 +59,15 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="16"
-     inkscape:cy="16"
+     inkscape:zoom="29"
+     inkscape:cx="8"
+     inkscape:cy="8"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="984"
-     inkscape:window-height="574"
-     inkscape:window-x="32"
+     inkscape:window-height="672"
+     inkscape:window-x="0"
      inkscape:window-y="0" />
   <metadata
      id="metadata7">
@@ -114,5 +114,10 @@
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
        transform="matrix(0.1681177,0,0,-0.1681177,44.372835,11.24347)" />
+    <path
+       style="fill:#414237;fill-opacity:0.93725491;stroke:none;stroke-width:0.08468141000000000;stroke-miterlimit:1;stroke-opacity:1"
+       d="M 10.659251,0.98052954 L 8.0000001,8.6696912 L 5.3407488,0.98052954 L 10.659251,0.98052954 z"
+       id="rect2451"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>

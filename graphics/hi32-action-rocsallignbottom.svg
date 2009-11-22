@@ -15,7 +15,7 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    version="1.0"
-   sodipodi:docname="rocs-alligbottom32.svg"
+   sodipodi:docname="hi32-action-rocsallignbottom.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs4">
@@ -59,15 +59,15 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
+     inkscape:zoom="14.5"
      inkscape:cx="16"
-     inkscape:cy="16"
+     inkscape:cy="16.71149"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="984"
-     inkscape:window-height="574"
-     inkscape:window-x="32"
+     inkscape:window-height="672"
+     inkscape:window-x="0"
      inkscape:window-y="0" />
   <metadata
      id="metadata7">
@@ -93,7 +93,7 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0.3314882,0,0,-0.3314882,66.458903,24.408827)" />
+       transform="matrix(0.362709,0,0,-0.362709,71.359536,25.122524)" />
     <path
        sodipodi:type="arc"
        style="fill:#414237;fill-opacity:0.93364928;stroke:none;stroke-width:0.90700001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.721, 2.721;stroke-dashoffset:0;stroke-opacity:1"
@@ -103,7 +103,7 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0.3314882,0,0,-0.3314882,76.879095,24.408827)" />
+       transform="matrix(0.362709,0,0,-0.362709,82.761146,25.122524)" />
     <path
        sodipodi:type="arc"
        style="fill:#414237;fill-opacity:0.93364928;stroke:none;stroke-width:0.90700001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.721, 2.721;stroke-dashoffset:0;stroke-opacity:1"
@@ -113,6 +113,11 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0.3314882,0,0,-0.3314882,87.299289,24.408827)" />
+       transform="matrix(0.362709,0,0,-0.362709,94.16276,25.122524)" />
+    <path
+       style="fill:#414237;fill-opacity:0.9372549;stroke:none;stroke-width:0.08468141;stroke-miterlimit:1;stroke-opacity:1"
+       d="M 21.426688,0.98052954 L 15.689432,17.569671 L 9.9521747,0.98052954 L 21.426688,0.98052954 z"
+       id="rect2451"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>
