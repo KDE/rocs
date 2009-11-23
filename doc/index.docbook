@@ -223,7 +223,7 @@ sentence are right  */
 var list1= graphs[0].list_nodes(); //  1st form.
 var list2=Untitled0.list_nodes();              // 2nd form
  
- for ( var i = 0; i &le; colours.length; i++){
+ for ( var i = 0; i &lt; colours.length; i++){
         if (i > list2.length) break;
         list2[i].color = colours[i]
  }
