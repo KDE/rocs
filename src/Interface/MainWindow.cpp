@@ -130,7 +130,7 @@ QWidget* MainWindow::setupRightPanel() {
 
     _bottomTabs = new TabWidget(TabWidget::TabOnBottom, this);
     _bottomTabs->addWidget(_codeEditor,  "Editor", KIcon("accessories-text-editor"));
-    _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("debugger"));
+    _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("tools-report-bug"));
     _runScript = new KAction(KIcon("system-run"), i18n("Run"), this);
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
     _bottomTabs->addAction(_runScript);
