@@ -129,8 +129,8 @@ QWidget* MainWindow::setupRightPanel() {
     _txtDebug = new KTextBrowser(this);
 
     _bottomTabs = new TabWidget(TabWidget::TabOnBottom, this);
-    _bottomTabs->addWidget(_codeEditor,  "Editor", KIcon("accessories-text-editor"));
-    _bottomTabs->addWidget(_txtDebug, "Debugger", KIcon("tools-report-bug"));
+    _bottomTabs->addWidget(_codeEditor,  i18n("Editor"), KIcon("accessories-text-editor"));
+    _bottomTabs->addWidget(_txtDebug, i18n("Debugger"), KIcon("tools-report-bug"));
     _runScript = new KAction(KIcon("system-run"), i18n("Run"), this);
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
     _bottomTabs->addAction(_runScript);
