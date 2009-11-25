@@ -42,8 +42,6 @@ void EdgePropertiesWidget::reflectAttributes(){
    _value->setText(_edge->value());
    _color->setColor(_edge->color());
    _width->setValue(_edge->width());
-   _style->setCurrentItem(_edge->style());
-
 }
 void EdgePropertiesWidget::on__name_textChanged(const QString& s) {
     _edge->setName(s);
@@ -61,8 +59,13 @@ void EdgePropertiesWidget::on__width_valueChanged(double v) {
     _edge->setWidth(v);
 }
 
-void EdgePropertiesWidget::on__style_activated(const QString& s) {
-    _edge->setStyle(s);
+void EdgePropertiesWidget::on__style_activated(int index) {
+    switch(index){
+      case 0 : _edge->setStyle("solid"); break;
+      case 1 : _edge->setStyle("dash"); break;
+      case 2 : _edge->setStyle("dot"); break;
+      case 3 : _edge->setStyle("dash dot"); break;
+    }
 }
 
 void EdgePropertiesWidget::on__showName_toggled(bool b){

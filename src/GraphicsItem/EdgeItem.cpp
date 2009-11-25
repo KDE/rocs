@@ -32,6 +32,7 @@
 #include <GraphScene.h>
 #include <QGraphicsSimpleTextItem>
 #include "NodeItem.h"
+#include <KLocale>
 
 
 #include <KDebug>
