@@ -41,8 +41,7 @@ SelectAction::SelectAction(GraphScene *scene, QObject *parent)
     _name = "select";
 }
 
-SelectAction::~SelectAction() {
-}
+SelectAction::~SelectAction() {}
 
 void SelectAction::executePress(QPointF pos) {
     if (! _graph ) return;
@@ -51,12 +50,29 @@ void SelectAction::executePress(QPointF pos) {
     _selectionRect = new QGraphicsRectItem();
     _selectionRect->setFlag(QGraphicsItem::ItemIsSelectable, false);
     _graphScene->addItem(_selectionRect);
+    kDebug() << "Press Executed.";
 }
 
 void SelectAction::executeMove(QPointF pos) {
     if (! _graph ) return;
     if (_selectionRect == 0) return;
-    _selectionRect->setRect(QRectF(_p1, pos));
+    QPointF p1 = _p1;
+    /* Code to make setRect stop behaving wrongly */
+    if (p1.x() > pos.x()){
+      int x = pos.x();
+      pos.setX(p1.x());
+      p1.setX(x);
+    }
+    if (p1.y() > pos.y()){
+      int y = pos.y();
+      pos.setY(p1.y());
+      p1.setY(y);
+    }
+    /* end of code to make setRect stop behaving silly */
+    
+    _selectionRect->setRect(QRectF(p1, pos));
+    kDebug() << "Moving the rectangle.";
+    kDebug() << pos;
 }
 
 void SelectAction::executeRelease(QPointF pos) {
@@ -75,14 +91,11 @@ void SelectAction::executeRelease(QPointF pos) {
     }
 
     if (pos == _p1) {
-        qDebug() << "Selecting only one item.";
         singleSelect(pos);
     }
     else {
-        qDebug() << "Selecting several items.";
         multiSelect(pos);
     }
-
 }
 
 void SelectAction::multiSelect(QPointF pos) {

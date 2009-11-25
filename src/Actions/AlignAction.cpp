@@ -30,24 +30,12 @@ AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, QWid
     connect(this, SIGNAL(triggered()), this, SLOT(align()));
     kDebug() << " Allign Action Created!";
     switch (o) {
-    case Left :
-        setIcon(KIcon("rocsallignleft"));
-        break;
-    case  Right :
-        setIcon(KIcon("rocsallignright"));
-        break;
-    case Top :
-        setIcon(KIcon("rocsalligntop"));
-        break;
-    case Bottom :
-        setIcon(KIcon("rocsallignbottom"));
-        break;
-    case HCenter :
-        setIcon(KIcon("rocsallignhmiddle"));
-        break;
-    case VCenter :
-        setIcon(KIcon("rocsallignvmiddle"));
-        break;
+      case Left :    setIcon(KIcon("rocsallignleft"));   break;
+      case  Right :  setIcon(KIcon("rocsallignright"));  break; 
+      case Top :     setIcon(KIcon("rocsalligntop"));    break;
+      case Bottom :  setIcon(KIcon("rocsallignbottom")); break;
+      case HCenter : setIcon(KIcon("rocsallignhmiddle"));break;
+      case VCenter : setIcon(KIcon("rocsallignvmiddle"));break;
     }
 }
 
