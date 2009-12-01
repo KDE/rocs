@@ -33,7 +33,7 @@ target_link_libraries(rocs
   ${KDE4_KIO_LIBS}
   ${KDE4_KTEXTEDITOR_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTSCRIPTTOOLS_LIBRARY}
+  QtScriptTools
 )
 
 install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
