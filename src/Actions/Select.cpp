@@ -71,8 +71,6 @@ void SelectAction::executeMove(QPointF pos) {
     /* end of code to make setRect stop behaving silly */
     
     _selectionRect->setRect(QRectF(p1, pos));
-    kDebug() << "Moving the rectangle.";
-    kDebug() << pos;
 }
 
 void SelectAction::executeRelease(QPointF pos) {
