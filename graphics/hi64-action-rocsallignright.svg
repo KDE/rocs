@@ -59,9 +59,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="-126.97068"
-     inkscape:cy="8"
+     inkscape:zoom="12.40625"
+     inkscape:cx="32"
+     inkscape:cy="30.703749"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -93,7 +93,7 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0,0.5414634,0.5414634,0,58.436585,154.21463)" />
+       transform="matrix(0,0.5921535,-0.5921535,0,55.795494,164.90019)" />
     <path
        sodipodi:type="arc"
        style="fill:#414237;fill-opacity:0.93364928;stroke:none;stroke-width:0.90700001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.721, 2.721;stroke-dashoffset:0;stroke-opacity:1"
@@ -103,7 +103,7 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0,0.5414634,0.5414634,0,58.436585,109.00244)" />
+       transform="matrix(0,0.5921535,-0.5921535,0,55.795494,115.45538)" />
     <path
        sodipodi:type="arc"
        style="fill:#414237;fill-opacity:0.93364928;stroke:none;stroke-width:0.90700001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.721, 2.721;stroke-dashoffset:0;stroke-opacity:1"
@@ -113,6 +113,11 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0,0.5414634,0.5414634,0,58.436585,131.60853)" />
+       transform="matrix(0,0.5921535,-0.5921535,0,55.795494,140.17777)" />
+    <path
+       style="fill:#414237;fill-opacity:0.9372549;stroke:none;stroke-width:0.1;stroke-miterlimit:1;stroke-opacity:1"
+       d="M 1.526122,21.457489 L 1.526122,42.095565 L 46.274882,31.776528 L 1.526122,21.457489 z"
+       id="rect2626"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>

@@ -60,7 +60,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="12.40625"
-     inkscape:cx="16"
+     inkscape:cx="5.1183879"
      inkscape:cy="16"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -114,5 +114,10 @@
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
        transform="matrix(0,0.2869228,0.2869228,0,5.5430414,68.524878)" />
+    <path
+       style="fill:#414237;fill-opacity:0.9372549;stroke:none;stroke-width:0.1;stroke-miterlimit:1;stroke-opacity:1"
+       d="M 31.838791,11 L 31.838791,21 L 10.156171,16 L 31.838791,11 z"
+       id="rect2626"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>

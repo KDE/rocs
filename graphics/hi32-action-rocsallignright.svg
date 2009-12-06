@@ -59,9 +59,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="12.40625"
-     inkscape:cx="16"
-     inkscape:cy="16"
+     inkscape:zoom="8.2708333"
+     inkscape:cx="24"
+     inkscape:cy="4.6549118"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -93,7 +93,7 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0,0.2869228,0.2869228,0,29.482588,80.503905)" />
+       transform="matrix(0,0.2843002,-0.2843002,0,27.581512,79.778739)" />
     <path
        sodipodi:type="arc"
        style="fill:#414237;fill-opacity:0.93364928;stroke:none;stroke-width:0.90700001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.721, 2.721;stroke-dashoffset:0;stroke-opacity:1"
@@ -103,7 +103,7 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0,0.2869228,0.2869228,0,29.482588,56.545856)" />
+       transform="matrix(0,0.2843002,-0.2843002,0,27.581512,56.03968)" />
     <path
        sodipodi:type="arc"
        style="fill:#414237;fill-opacity:0.93364928;stroke:none;stroke-width:0.90700001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.721, 2.721;stroke-dashoffset:0;stroke-opacity:1"
@@ -113,6 +113,11 @@
        sodipodi:rx="9.5"
        sodipodi:ry="9.5"
        d="M -174,-4.5 A 9.5,9.5 0 1 1 -193,-4.5 A 9.5,9.5 0 1 1 -174,-4.5 z"
-       transform="matrix(0,0.2869228,0.2869228,0,29.482588,68.524878)" />
+       transform="matrix(0,0.2843002,-0.2843002,0,27.581512,67.909201)" />
+    <path
+       style="fill:#414237;fill-opacity:0.9372549;stroke:none;stroke-width:0.1;stroke-miterlimit:1;stroke-opacity:1"
+       d="M 1.526122,10.910142 L 1.526122,20.818735 L 23.01055,15.864439 L 1.526122,10.910142 z"
+       id="rect2626"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>
