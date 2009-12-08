@@ -45,7 +45,10 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
     _graphAutomate->setChecked(_graph->automate());
     _graphOriented->setChecked(_graph->directed());
     _activateGraph->setChecked(true);
-
+    _showEdgeNames->setChecked(true);
+    _showEdgeValues->setChecked(true);
+    _showNodeNames->setChecked(true);
+    _showNodeValues->setChecked(true);
     _editWidget->setVisible(_activateGraph->isChecked());
     _mainWindow->setActiveGraph(_graph);
     kDebug() << "Active Graph" << _mainWindow->graph()->name();
@@ -110,24 +113,24 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
 
 void GraphPropertiesWidget::on__showNodeNames_toggled(bool b) {
     foreach(Node *n, _graph->nodes()) {
-        n->hideName(!b);
+        n->hideName(b);
     }
 }
 
 void GraphPropertiesWidget::on__showEdgeNames_toggled(bool b) {
     foreach(Edge *e, _graph->edges()) {
-        e->hideName(!b);
+        e->hideName(b);
     }
 }
 
 void GraphPropertiesWidget::on__showNodeValues_toggled(bool b) {
     foreach(Node *n, _graph->nodes()) {
-        n->hideValue(!b);
+        n->hideValue(b);
     }
 }
 
 void GraphPropertiesWidget::on__showEdgeValues_toggled(bool b) {
     foreach(Edge *e, _graph->edges()) {
-        e->hideValue(!b);
+        e->hideValue(b);
     }
 }
