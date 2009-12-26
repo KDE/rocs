@@ -7,9 +7,9 @@ set (testGraphs_SRCS
 kde4_add_executable(testGraphs ${testGraphs_SRCS} )
 
 target_link_libraries( testGraphs
-  ${KDE4_KDECORE_LIBS}
+  librocscore
   ${KDE4_KROSSUI_LIBS}
   ${QT_QTTEST_LIBRARY}
-  librocscore
+  ${KDE4_KDECORE_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
 ) 
