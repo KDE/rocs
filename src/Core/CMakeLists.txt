@@ -18,7 +18,7 @@
 #	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 
 
- 
+
 set( rocscore_LIB_SRCS
 	graph.cpp
 	edge.cpp
@@ -27,6 +27,7 @@ set( rocscore_LIB_SRCS
 	graphGroups.cpp
 	krossBackend.cpp
 	qtScriptBackend.cpp
+      threadScriptExecution.cpp
 )
 
 kde4_add_library( librocscore	STATIC ${rocscore_LIB_SRCS} )

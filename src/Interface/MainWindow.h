@@ -37,6 +37,7 @@ class KAction;
 class MoveNodeAction;
 class TabWidget;
 class CodeEditor;
+class ThreadScriptExecution;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -57,7 +58,7 @@ public:
 private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.
-    
+
     QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
     QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
     int saveIfChanged();
@@ -69,7 +70,7 @@ private slots:
     void saveGraph();
     void saveGraphAs();
     void loadDocument(const QString& name = QString());
-    
+
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
@@ -100,6 +101,8 @@ private: // Variables.
 
     //! all the actions that I need to reference later.
     MoveNodeAction *_moveNodeAction;
+
+    ThreadScriptExecution *_tScriptExecution;
 };
 
 #endif

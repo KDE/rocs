@@ -70,6 +70,7 @@
 #include <ktexteditor/document.h>
 #include <qscriptenginedebugger.h>
 #include <QActionGroup>
+#include "threadScriptExecution.h"
 
 MainWindow* mainWindow = 0;
 
@@ -77,6 +78,7 @@ MainWindow::MainWindow() :
         KXmlGuiWindow() {
     _activeGraphDocument = 0;
     _graph = 0;
+    _tScriptExecution=0;
     setObjectName ( "Rocs" );
 
     setupWidgets();
@@ -153,12 +155,12 @@ void MainWindow::setupActions() {
     kDebug() << "Entering in Setup Actions";
     KStandardAction::quit( kapp,SLOT(quit()),actionCollection());
     GraphScene *gc = _graphVisualEditor->scene();
-    
+
     _moveNodeAction = new MoveNodeAction(gc, this);
 
     KActionCollection *ac = actionCollection();
     QActionGroup *g = new QActionGroup(this);
-    
+
     g->addAction(ac->addAction("move_node", _moveNodeAction));
     g->addAction(ac->addAction("add_node", new AddNodeAction(gc, this)));
     g->addAction(ac->addAction("add_edge", new AddEdgeAction(gc, this)));
@@ -269,7 +271,7 @@ GraphScene* MainWindow::scene() const {
 void MainWindow::newGraph() {
     if (saveIfChanged() == KMessageBox::Cancel) return;
     loadDocument();
- 
+
 }
 
 void MainWindow::openGraph() {
@@ -284,7 +286,7 @@ void MainWindow::loadDocument(const QString& name){
 	KMessageBox::sorry(this, i18n("This does not seem to be a graph file."), i18n("Invalid file"));
 	return;
   }
-  
+
   _graphVisualEditor->scene()->clearGraph();
   _graphVisualEditor->scene()->setActiveGraphDocument(0);
   delete _activeGraphDocument;
@@ -326,45 +328,35 @@ void MainWindow::debug(const QString& s) {
     _txtDebug->insertPlainText(s);
 }
 
-#ifdef USING_QTSCRIPT
-
-static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {
-    mainWindow->debug(QString("%1 \n").arg(context->argument(0).toString()));
-    return QScriptValue();
-}
-
-void MainWindow::executeScript() {
-    if (_activeGraphDocument == 0) {
-        return;
-    }
-    if (_txtDebug == 0) {
-        return;
-    }
-    if (scene() == 0) {
-        return;
-    }
-
-    _txtDebug->clear();
-     QtScriptBackend* engine = new QtScriptBackend( (*_activeGraphDocument) ,  _txtDebug);
-    QScriptEngineDebugger *e = new QScriptEngineDebugger(this);
-    e->attachTo(engine);
-    engine->globalObject().setProperty("debug", engine->newFunction(debug_script));
-    QScriptValue results = engine->evaluate(_codeEditor->text());
-    _txtDebug->insertPlainText(results.toString());
-
-    delete engine;
-    delete e;
-}
-
 int MainWindow::saveIfChanged(){
   if (_activeGraphDocument->isModified()){
      int btnCode;
-     btnCode = KMessageBox::warningYesNoCancel(this, i18n("Do you want to save your unsaved document?")); 
+     btnCode = KMessageBox::warningYesNoCancel(this, i18n("Do you want to save your unsaved document?"));
     if ( btnCode == KMessageBox::Yes){
       saveGraph();
     }
     return btnCode;
   }
   return KMessageBox::No;
+}
+
+#ifdef USING_QTSCRIPT
+// move that to the thread thing.
+// static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {
+//     mainWindow->debug(QString("%1 \n").arg(context->argument(0).toString()));
+//     return QScriptValue();
+// }
+
+void MainWindow::executeScript() {
+    if (_activeGraphDocument == 0)  return;
+    if (_txtDebug == 0)   return;
+    if (scene() == 0)    return;
+    _txtDebug->clear();
+
+    bool op = true;
+    if ( !_tScriptExecution ){
+	_tScriptExecution = new ThreadScriptExecution(_codeEditor->text());
+	_tScriptExecution->run();
+    }
 }
 #endif
