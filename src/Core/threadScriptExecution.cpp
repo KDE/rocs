@@ -59,7 +59,7 @@ void ThreadScriptExecution::run(){
 void ThreadScriptExecution::abort(){
     if (!_mutex.tryLock()){
         _engine->abortEvaluation();
-        this->terminate();
+    //    this->terminate();
     }
     _mutex.unlock();
 }
