@@ -104,6 +104,7 @@ MainWindow::~MainWindow() {
     Settings::setHSplitterSizeRight( _hSplitter->sizes()[1] );
 
     Settings::self()->writeConfig();
+    delete _tScriptExecution;
 }
 
 GraphDocument *MainWindow::activeDocument() const {
@@ -353,10 +354,15 @@ void MainWindow::executeScript() {
     if (scene() == 0)    return;
     _txtDebug->clear();
 
-    bool op = true;
     if ( !_tScriptExecution ){
-	_tScriptExecution = new ThreadScriptExecution(_codeEditor->text());
-	_tScriptExecution->run();
+        _tScriptExecution = new ThreadScriptExecution(_txtDebug);
     }
+    if (!_tScriptExecution->isRunning()){
+        _tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
+        _tScriptExecution->start();
+    }else{
+        _tScriptExecution->abort();
+    }
+ 
 }
 #endif

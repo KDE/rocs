@@ -20,21 +20,31 @@
 #define THREADSCRIPTEXECUTION_H
 
 #include <QThread>
+#include <QMutex>
+class KTextBrowser;
+class GraphDocument;
+class QtScriptBackend;
 
 class ThreadScriptExecution : public QThread{
   Q_OBJECT
   public:
-    ThreadScriptExecution(const QString& script);
+    ThreadScriptExecution(KTextBrowser * debugView = 0);
     virtual ~ThreadScriptExecution();
 
   public slots:
     void run();
-    void stop();
-    void pause();
-    void play();
+//    bool isEvaluating();
+    void abort();
+    void setData(QString script, GraphDocument * graphDocument);
+    void debug(const QString& str);
 
   private:
-    const QString& _script;
+    QtScriptBackend* _engine;
+
+    QString _script;
+    GraphDocument * _graphDocument;
+    KTextBrowser * _txtDebug;
+    QMutex _mutex;
 };
 
 #endif
