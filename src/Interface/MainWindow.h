@@ -65,6 +65,9 @@ private: // Methods
 private slots:
     void executeScript();
 
+    /** Return the text and icon of button run after script is finished.   */
+    void stopedScript();
+
     void newGraph();
     void openGraph();
     void saveGraph();
