@@ -1,6 +1,7 @@
 #include "threadScriptExecution.h"
 #include "graphDocument.h"
 #include "qtScriptBackend.h"
+#include "qscriptenginedebugger.h"
 #include <QMutex>
 #include <KTextBrowser>
 
@@ -33,17 +34,16 @@ void ThreadScriptExecution::debug(const QString& str){
 
 void ThreadScriptExecution::setData(QString script, GraphDocument * graphDocument){
     _script = script;
-    if (this->_graphDocument != graphDocument){
-        _graphDocument = graphDocument;
-        if (_engine) {
-            delete _engine;
-        }
-
-        _engine = new QtScriptBackend( (*_graphDocument) ,  _txtDebug);
-    //    QScriptEngineDebugger *e = new QScriptEngineDebugger(this);
-    //    e->attachTo(engine);
-        _engine->globalObject().setProperty("debug", _engine->newFunction(debug_script));
+    _graphDocument = graphDocument;
+    if (_engine) {
+          delete _engine;
     }
+
+    _engine = new QtScriptBackend( (*_graphDocument) ,  _txtDebug);
+    //QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
+    //dbg->attachTo(_engine);
+    _engine->globalObject().setProperty("debug", _engine->newFunction(debug_script));
+
 }
 
 void ThreadScriptExecution::run(){
