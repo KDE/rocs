@@ -51,7 +51,7 @@ void GraphLayers::populate() {
 void GraphLayers::btnADDClicked() {
     QString name = _lineEdit->text();
     if (name == QString()) {
-        name = "Untitled" + QString("%1").arg(_mainWindow->activeDocument()->count());
+        name = i18n("Untitled%1", _mainWindow->activeDocument()->count());
     }
     _mainWindow->activeDocument()->addGraph(name);
 }

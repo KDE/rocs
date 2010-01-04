@@ -44,7 +44,7 @@ Graph::~Graph() {
         remove(n);
     }
     if (_document->size() == 0){
-	_document->addGraph("Untitled");
+	_document->addGraph(i18n("Untitled"));
     }
     kDebug() << "_document.size" << _document->size();
 }

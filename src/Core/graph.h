@@ -167,7 +167,7 @@ public  slots:
     \p name the name of the node to be returned.
     \return a node, or null if an invalid name is provided.
     */
-    Node* node(const QString& name = "Untitled");
+    Node* node(const QString& name = i18n("Untitled"));
 
     /*! removes a node.
     \p n the node to be removed.

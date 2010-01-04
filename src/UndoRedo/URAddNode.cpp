@@ -35,6 +35,6 @@ void URAddNode::undo() {
 }
 
 void URAddNode::redo() {
-    Node *n = _graph->addNode("Untitled");
+    Node *n = _graph->addNode(i18n("Untitled"));
     n->setPos(_pos.x(), _pos.y());
 }

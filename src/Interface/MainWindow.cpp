@@ -85,8 +85,8 @@ MainWindow::MainWindow() :
     setupActions();
 
     // this will create a new opened file by default
-    setActiveGraphDocument( new GraphDocument("Untitled", 800, 600));
-    _activeGraphDocument->addGraph("Untitled0");
+    setActiveGraphDocument( new GraphDocument(i18n("Untitled"), 800, 600));
+    _activeGraphDocument->addGraph(i18n("Untitled0"));
     setupGUI();
     _moveNodeAction->setView( _graphVisualEditor->view() );
 
@@ -291,7 +291,7 @@ void MainWindow::loadDocument(const QString& name){
   _graphVisualEditor->scene()->clearGraph();
   _graphVisualEditor->scene()->setActiveGraphDocument(0);
   delete _activeGraphDocument;
-  setActiveGraphDocument(new GraphDocument("Untitled", 800,600));
+  setActiveGraphDocument(new GraphDocument(i18n("Untitled"), 800,600));
   if (name.isEmpty()){
     _activeGraphDocument->addGraph(i18n("Untitled0"));
   }

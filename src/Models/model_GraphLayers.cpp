@@ -80,7 +80,7 @@ bool GraphLayersModel::insertRows(int position, int , const QModelIndex&) {
     if ( _document == 0) return false;
 
     beginInsertRows(QModelIndex(), position, position);
-    _document->addGraph(QString("Untitled%1").arg(rowCount()));
+    _document->addGraph(i18n("Untitled%1", rowCount()));
     kDebug() << "Called!";
     endInsertRows();
     return true;
