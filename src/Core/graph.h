@@ -31,6 +31,8 @@
 #include <QtScript>
 #endif
 
+#include <klocalizedstring.h>
+
 #include "node.h"
 // #include "graphGroups.h"
 
