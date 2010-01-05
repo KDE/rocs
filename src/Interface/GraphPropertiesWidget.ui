@@ -208,7 +208,7 @@
            <string>Automaton Graph</string>
           </property>
           <property name="whatsThis">
-           <string>Enabling this button will make the graph an automated graph.</string>
+           <string>Enabling this button will make the graph an automaton graph.</string>
           </property>
           <property name="text">
            <string>...</string>
