@@ -360,7 +360,7 @@ void MainWindow::executeScript() {
     }
     if (!_tScriptExecution->isRunning()){
         _tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
-        kDebug("Need change label to Stop.");
+        kDebug() << "Need change label to Stop.";
         _tScriptExecution->start();
     }else{
         _tScriptExecution->abort();
@@ -369,7 +369,7 @@ void MainWindow::executeScript() {
 
 void MainWindow::stopedScript(){
     //ToDo
-    kDebug("Need change label to Run.");
+    kDebug() << "Need change label to Run.";
 }
 
 #endif
