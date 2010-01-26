@@ -25,7 +25,7 @@
 #include <KIcon>
 #include <KDebug>
 #include <KAction>
-
+#include <KLocale>
 
 TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(parent) {
     m_orientation = o;
@@ -98,10 +98,22 @@ void TabWidget::addWidget(QWidget *w, const QString& text,const KIcon& icon) {
 }
 
 void TabWidget::addAction(KAction *a) {
-    m_tabs -> appendTab( a->icon().pixmap(16), m_numOfTabs+m_numOfActions, a->text());
-    connect(m_tabs->tab(m_numOfTabs+m_numOfActions), SIGNAL(clicked(int)), a, SLOT(trigger()));
-    connect(m_tabs->tab(m_numOfTabs+m_numOfActions), SIGNAL(clicked(int)), this, SLOT(releaseActionButton(int)));
-    a->trigger();
+    int pos = m_numOfTabs+m_numOfActions;
+    m_tabs -> appendTab( a->icon().pixmap(16), pos, a->text());
+    m_tabs -> addAction(a);
+    connect(m_tabs->tab(pos), SIGNAL(clicked(int)), a, SLOT(trigger()));
+    connect(m_tabs->tab(pos), SIGNAL(clicked(int)), this, SLOT(releaseActionButton(int)));
+    _runAction = a;
+    
+}
+
+void TabWidget::setPlayString(){
+    kDebug() << "EAAAAAAAAAHHHHHHH";
+    m_tabs->tab(m_numOfActions+m_numOfTabs)->setText(i18n("Run"));
+}
+
+void TabWidget::setStopString(){
+    m_tabs->tab(m_numOfActions+m_numOfTabs)->setText(i18n("Stop"));
 }
 
 void TabWidget::releaseActionButton(int index) {

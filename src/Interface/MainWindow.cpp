@@ -119,6 +119,12 @@ void MainWindow::setupWidgets() {
 
     QWidget *rightPanel = setupRightPanel();
     QWidget *leftPanel	= setupLeftPanel();
+     
+    _tScriptExecution = new ThreadScriptExecution(_txtDebug);
+    connect(_tScriptExecution, SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
+    connect(_tScriptExecution, SIGNAL(terminated()), _bottomTabs, SLOT(setPlayString()));
+    connect(_tScriptExecution, SIGNAL(destroyed(QObject*)), _bottomTabs, SLOT(setPlayString()));
+    
     _hSplitter->addWidget(leftPanel);
     _hSplitter->addWidget(rightPanel);
     _hSplitter->setSizes( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight());
@@ -201,25 +207,25 @@ void MainWindow::setupActions() {
     actionCollection()->addAction("save-graph-as", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(saveGraphAs()));
 
-    action = new KAction(KIcon("document-new"),i18n("New Script"), _codeEditor->view());
+    action = new KAction(KIcon("document-new"),i18n("New Script"), this);
     action->setShortcut(Qt::CTRL + Qt::Key_N);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("new-script", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(newScript()));
 
-    action = new KAction(KIcon("document-open"),i18n("Open Script..."), _codeEditor->view());
+    action = new KAction(KIcon("document-open"),i18n("Open Script..."), this);
     action->setShortcut(Qt::CTRL + Qt::Key_O);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("open-script", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(openScript()));
 
-    action = new KAction(KIcon("document-save"),i18n("Save Script"), _codeEditor->view());
+    action = new KAction(KIcon("document-save"),i18n("Save Script"), this);
     action->setShortcut(Qt::CTRL + Qt::Key_S);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-script", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScript()));
 
-    action = new KAction(KIcon("document-save-as"), i18n("Save Script As..."), _codeEditor->view());
+    action = new KAction(KIcon("document-save-as"), i18n("Save Script As..."), this);
     action->setShortcut(Qt::CTRL + Qt::Key_W);
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-script-as", action);
@@ -352,24 +358,20 @@ void MainWindow::executeScript() {
     if (_activeGraphDocument == 0)  return;
     if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
-    _txtDebug->clear();
 
-    if ( !_tScriptExecution ){
-        _tScriptExecution = new ThreadScriptExecution(_txtDebug);
-        connect(_tScriptExecution, SIGNAL(finished()),this, SLOT(stopedScript()));
-    }
-    if (!_tScriptExecution->isRunning()){
-        _tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
-        kDebug() << "Need change label to Stop.";
-        _tScriptExecution->start();
+    _txtDebug->clear();
+    _bottomTabs->setStopString();
+
+    if ( !_tScriptExecution->isRunning() ){
+	kDebug() << "Starting Script";
+	_tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
+        _tScriptExecution ->run();
+        
     }else{
+	kDebug() << "Aborting Script";
+	_bottomTabs->setPlayString();
         _tScriptExecution->abort();
     }
-}
-
-void MainWindow::stopedScript(){
-    //ToDo
-    kDebug() << "Need change label to Run.";
 }
 
 #endif

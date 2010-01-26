@@ -64,16 +64,12 @@ private: // Methods
     int saveIfChanged();
 private slots:
     void executeScript();
-
-    /** Return the text and icon of button run after script is finished.   */
-    void stopedScript();
-
     void newGraph();
     void openGraph();
     void saveGraph();
     void saveGraphAs();
     void loadDocument(const QString& name = QString());
-
+    
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);

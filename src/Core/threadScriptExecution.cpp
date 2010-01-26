@@ -4,6 +4,8 @@
 #include "qscriptenginedebugger.h"
 #include <QMutex>
 #include <KTextBrowser>
+#include <QScriptEngineDebugger>
+#include <KDebug>
 
 ThreadScriptExecution * self;
 
@@ -40,27 +42,31 @@ void ThreadScriptExecution::setData(QString script, GraphDocument * graphDocumen
     }
 
     _engine = new QtScriptBackend( (*_graphDocument) ,  _txtDebug);
-    //QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
-    //dbg->attachTo(_engine);
+//    QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
+//    dbg->attachTo(_engine);
     _engine->globalObject().setProperty("debug", _engine->newFunction(debug_script));
 
 }
 
 void ThreadScriptExecution::run(){
      if (_mutex.tryLock()){
+       kDebug() << _script;
+	if(!_engine){
+	  return;
+	}
         QScriptValue results = _engine->evaluate(_script);
         _txtDebug->insertPlainText(results.toString());
-
         _mutex.unlock();
      }
+     emit finished(); // strange, it seems that Qt doesn't emmit this signal.
 
 }
 
 void ThreadScriptExecution::abort(){
     if (!_mutex.tryLock()){
-        _engine->abortEvaluation();
-    //    this->terminate();
+      _engine->abortEvaluation();
     }
     _mutex.unlock();
+    emit finished(); // ditto.
 }
 

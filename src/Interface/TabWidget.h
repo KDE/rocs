@@ -31,6 +31,7 @@ class KAction;
 
 class TabWidget : public QWidget {
     Q_OBJECT
+    KAction* _runAction;
 public:
     enum Orientation {TabOnLeft, TabOnRight, TabOnTop, TabOnBottom};
     TabWidget(TabWidget::Orientation o, QWidget *parent = 0);
@@ -51,7 +52,8 @@ signals:
     void actionTriggered(int id);
 
 public slots:
-
+  void setPlayString();
+  void setStopString();
 
 private slots:
     void releaseButton(int id);

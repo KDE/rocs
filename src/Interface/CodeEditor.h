@@ -2,6 +2,8 @@
 #define CODEEDITOR_H
 
 #include <QWidget>
+#include <KTabBar>
+#include <QList>
 #include "MainWindow.h"
 
 namespace KTextEditor {
@@ -9,7 +11,8 @@ class Document;
 class View;
 class Editor;
 }
-class QHBoxLayout;
+class QVBoxLayout;
+class QStackedWidget;
 
 class CodeEditor : public QWidget {
     Q_OBJECT
@@ -20,10 +23,10 @@ public:
         return _editor;
     }
     KTextEditor::Document *document() const {
-        return _scriptDoc;
+        return _activeDocument;
     }
     KTextEditor::View *view() const {
-        return _docView;
+        return _activeView;
     }
 
 public slots:
@@ -32,11 +35,20 @@ public slots:
     void openScript();
     void saveScriptAs();
 
+  private slots:
+    void closeDocument(int index);
+    void changeCurrentDocument(int index);
 private:
-    KTextEditor::View *_docView; //! this is the view where you edit your scripts
-    KTextEditor::Document *_scriptDoc; //! the document that you are editing
+    
+    QStackedWidget *_docArea;
+    KTabBar *_tabDocs; //! the tabs of the opened documents.
+    QList<KTextEditor::View*> _docViews; //! this is the view where you edit your scripts
+    QList<KTextEditor::Document*> _scriptDocs; //! the document that you are editing
     KTextEditor::Editor *_editor;
-    QHBoxLayout* _layout;
+    QVBoxLayout* _layout;
+    
+    KTextEditor::Document *_activeDocument;
+    KTextEditor::View     *_activeView;
 };
 
 #endif
