@@ -29,6 +29,9 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent) {
     _layout->addWidget(_tabDocs);
     _layout->addWidget(_docArea);
     
+    _layout->setSpacing(0);
+    _layout->setMargin(0);
+    
     newScript();
     setLayout(_layout);
 }
@@ -85,7 +88,7 @@ void CodeEditor::newScript() {
     _docArea->addWidget(_docViews.last());
     _activeDocument = _scriptDocs.last();
     _activeView = _docViews.last();
-    
+    connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(atualizeTabText(KTextEditor::Document*)));
     kDebug()<< "New script created.";
 }
 
@@ -95,6 +98,11 @@ void CodeEditor::saveScript() {
     }
     
     _activeDocument->documentSave();
+}
+
+void CodeEditor::atualizeTabText(KTextEditor::Document* t){
+    int index = _scriptDocs.indexOf(t);
+    _tabDocs->setTabText(index, t->documentName());
 }
 
 void CodeEditor::openScript() {

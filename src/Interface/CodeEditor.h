@@ -38,6 +38,8 @@ public slots:
   private slots:
     void closeDocument(int index);
     void changeCurrentDocument(int index);
+    void atualizeTabText(KTextEditor::Document* t);
+    
 private:
     
     QStackedWidget *_docArea;
