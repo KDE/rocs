@@ -4,7 +4,7 @@
 #include "qscriptenginedebugger.h"
 #include <QMutex>
 #include <KTextBrowser>
-#include <QScriptEngineDebugger>
+// #include <QScriptEngineDebugger> //give-me a error ¬¬, realy need it?
 #include <KDebug>
 
 ThreadScriptExecution * self;

@@ -88,6 +88,15 @@ void Edge::hideValue(bool b) {
     kDebug() << "Hide Value: " << b;
 }
 
+void Edge::addDinamicProperty(QByteArray newProperty, QVariant value){
+    this->setProperty(newProperty, value); 
+}
+
+void Edge::removeDinamicProperty(QByteArray arg1){
+  addDinamicProperty(arg1, QVariant::Invalid);
+}
+
+
 #ifdef USING_QTSCRIPT
 
 QScriptValue Edge::start() {

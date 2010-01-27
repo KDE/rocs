@@ -92,6 +92,18 @@ public:
     bool showValue();
     void hideName(bool b);
     void hideValue(bool b);
+    
+    /** Add a property to this edge
+    * @param arg1 Name of property
+    * @param arg2 Value of the property. arg2 shoud be different of QVariant::Invalid.
+    */
+    void addDinamicProperty(QByteArray arg1, QVariant arg2);
+    
+    /** Remove property arg1 from this edge. If property arg1 don't exist in this edge, nothing is made.
+    * @param arg1 name os property to remove
+    */
+    void removeDinamicProperty(QByteArray arg1);
+    
     Graph *graph(){return _graph; }
 #ifdef USING_QTSCRIPT
     /*! if the qtscript is enabled for this rocs,
@@ -201,6 +213,7 @@ public  slots:
      it will remove this edge from the graph.
      */
     void self_remove();
+
 #endif
 
 private:

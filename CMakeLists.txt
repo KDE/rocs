@@ -25,6 +25,13 @@ include_directories(
   ${KDE4_INCLUDE_DIR} 
   ${QT_INCLUDES}
 )
+if(${CMAKE_BUILD_TYPE} MATCHES coverage)
+  set (CMAKE_CXX_COMPILER cov++)
+  set (CMAKE_CXX_FLAGS "-fexceptions" )
+endif()
+
+
+enable_testing()
 
 add_subdirectory(src)
 add_subdirectory(graphics)
@@ -32,3 +39,5 @@ add_subdirectory(graphics)
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     macro_display_feature_log()
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
+
+

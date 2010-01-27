@@ -43,10 +43,12 @@ Graph::~Graph() {
     foreach(Node* n, _nodes) {
         remove(n);
     }
-    if (_document->size() == 0){
-	_document->addGraph(i18n("Untitled"));
+    if (_document != 0){
+	if (_document->size() == 0){
+	    _document->addGraph(i18n("Untitled"));
+	}
+	kDebug() << "_document.size" << _document->size();
     }
-    kDebug() << "_document.size" << _document->size();
 }
 
 GraphDocument *Graph::document() const {
@@ -190,9 +192,14 @@ void Graph::calcRelativeCenter() {
       }
       */
     /// this will be here till I find a better way to calculate a *relative* center of the graph, and not the center of the document.
-    GraphDocument *gd = qobject_cast<GraphDocument*>(parent());
-    _relativeCenter.setY(gd->height()/2);
-    _relativeCenter.setX(gd->width()/2);
+    if (parent() != 0){
+	GraphDocument *gd = qobject_cast<GraphDocument*>(parent());
+	_relativeCenter.setY(gd->height()/2);
+	_relativeCenter.setX(gd->width()/2);
+    }else{
+        _relativeCenter.setY(0);
+	_relativeCenter.setX(0);
+    }
 }
 
 QPointF Graph::relativeCenter() const {
@@ -258,6 +265,33 @@ void Graph::setAutomate(bool b) {
 }
 bool Graph::automate() {
     return _automate;
+}
+
+void Graph::addDinamicProperty(QByteArray property, QVariant value){
+    this->setProperty(property, value);
+}
+
+void Graph::removeDinamicProperty(QByteArray property){
+    this->addDinamicProperty(property, QVariant::Invalid);
+}
+
+void Graph::addNodesDinamicProperty(QByteArray property, QVariant value){
+    foreach(Node *n, nodes()){
+      n->addDinamicProperty(property, value);
+    }
+}
+
+void Graph::addEdgesDinamicProperty(QByteArray property, QVariant value){
+    foreach(Edge *n, edges()){
+      n->addDinamicProperty(property, value);
+    }
+}
+
+void Graph::removeNodesDinamicProperty(QByteArray property){
+    this->addNodesDinamicProperty(property, QVariant::Invalid);
+}
+void Graph::removeEdgesDinamicProperty(QByteArray property){
+  this->addEdgesDinamicProperty(property, QVariant::Invalid);
 }
 
 #ifdef USING_QTSCRIPT

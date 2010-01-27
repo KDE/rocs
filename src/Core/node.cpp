@@ -323,6 +323,15 @@ void Node::endChange() {
     emit updateNeeded();
     emit changed();
 }
+
+void Node::addDinamicProperty(QByteArray property, QVariant value){
+    this->setProperty(property, value);
+}
+
+void Node::removeDinamicProperty(QByteArray arg1){
+    this->addDinamicProperty(arg1, QVariant::Invalid);
+}
+
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {
     remove();
