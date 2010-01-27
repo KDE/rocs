@@ -58,8 +58,6 @@ void ThreadScriptExecution::run(){
         _txtDebug->insertPlainText(results.toString());
         _mutex.unlock();
      }
-     emit finished(); // strange, it seems that Qt doesn't emmit this signal.
-
 }
 
 void ThreadScriptExecution::abort(){
@@ -67,6 +65,5 @@ void ThreadScriptExecution::abort(){
       _engine->abortEvaluation();
     }
     _mutex.unlock();
-    emit finished(); // ditto.
 }
 

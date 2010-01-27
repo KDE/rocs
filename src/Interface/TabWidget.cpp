@@ -108,7 +108,6 @@ void TabWidget::addAction(KAction *a) {
 }
 
 void TabWidget::setPlayString(){
-    kDebug() << "EAAAAAAAAAHHHHHHH";
     m_tabs->tab(m_numOfActions+m_numOfTabs)->setText(i18n("Run"));
 }
 

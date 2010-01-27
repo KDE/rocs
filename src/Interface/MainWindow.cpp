@@ -365,7 +365,7 @@ void MainWindow::executeScript() {
     if ( !_tScriptExecution->isRunning() ){
 	kDebug() << "Starting Script";
 	_tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
-        _tScriptExecution ->run();
+        _tScriptExecution ->start();
         
     }else{
 	kDebug() << "Aborting Script";
