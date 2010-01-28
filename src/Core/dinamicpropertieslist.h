@@ -49,8 +49,11 @@ public:
   
   void addProperty(QObject *obj, QString name);
   void removeProperty(QObject *obj, QString name);
-    
+  
+  /**Return type of property from obj*/  
   DinamicPropertyType type(QObject *obj, QString name);
+  /**Return textual type of property from obj*/
+  QString typeInText(QObject* obj, QString name);
   
   const QList <QString> properties (QObject * obj);
   

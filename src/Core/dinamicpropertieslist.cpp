@@ -127,6 +127,15 @@ DinamicPropertyType DinamicPropertiesList::type(QObject* obj, QString name)
       return None;
 }
 
+QString DinamicPropertiesList::typeInText(QObject* obj, QString name){
+    switch (type(obj, name)){
+      case None: return i18n("None");
+      case Unique: return i18n("Unique");
+      case Multiple: return i18n("Multiple");
+      case Global: return i18n("Global");
+    }
+}
+
 const QList< QString > DinamicPropertiesList::properties(QObject* obj)
 {
       Node * node = qobject_cast< Node* >(obj);
@@ -155,3 +164,4 @@ void DinamicPropertiesList::clear(Graph* graph)
 	_NodesProperties.clear();
     }
 }
+

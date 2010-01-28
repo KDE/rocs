@@ -1,6 +1,7 @@
 #include "model_GraphProperties.h"
 #include <KLocale>
 #include <KDebug>
+#include <dinamicpropertieslist.h>
 
 GraphPropertiesModel::GraphPropertiesModel( QObject *parent ) : QAbstractTableModel(parent) {
     // start all pointers to zero, so we don't crash things.
@@ -22,7 +23,7 @@ int GraphPropertiesModel::rowCount(const QModelIndex &parent) const {
 int GraphPropertiesModel::columnCount ( const QModelIndex & parent ) const {
     // should always be 2.
     Q_UNUSED(parent);
-    return 2;
+    return 3; //Name - Value - Type
 }
 
 QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const {
@@ -45,7 +46,11 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const {
     }
     else if (index.column() == 1) {
         return _dataSource->property( _dataSource->dynamicPropertyNames()[index.row()]);
+    }else if (index.column() == 2) {
+        return DinamicPropertiesList::New()->typeInText(_dataSource, 
+							_dataSource->dynamicPropertyNames()[index.row()]);
     }
+    
     // if it's anything else, it's an error, return a default value constructed QVariant.
     return QVariant();
 }
@@ -62,6 +67,8 @@ QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientati
             return i18n("Property");
         case 1:
             return i18n("Value");
+	case 2:
+            return i18n("Type");
         default:
             return QVariant();
         }
