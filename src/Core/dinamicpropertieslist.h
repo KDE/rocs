@@ -17,32 +17,44 @@
 
 */
 
-#ifndef TESTDINAMICPROPERTIES_H
-#define TESTDINAMICPROPERTIES_H
+#ifndef DINAMICPROPERTIESLIST_H
+#define DINAMICPROPERTIESLIST_H
 #include <QObject>
+#include <QList>
+#include "graph.h"
+#include "edge.h"
 
-class TestDinamicProperties:  public QObject
-{
-     Q_OBJECT
-private slots:
-  void cleanup();
-  
-  void addNodeDinamicProperty();
-  void addEdgeDinamicProperty();
-  void addGraphDinamicProperty();
-  
-  void addToAllNodes();
-  void addToAllEdges();
-  
-  void removeNodeDinamicProperty();
-  void removeEdgeDinamicProperty();
-  void removeGraphDinamicProperty();
-  
-  void removeToAllNodes();
-  void removeToAllEdges();
-  
-  void MultipleProperties();
-  
+enum DinamicPropertyType{
+      None,
+      Unique,
+      Multiple,
+      Global
 };
 
-#endif // TESTDINAMICPROPERTIES_H
+
+class DinamicPropertiesList : public QObject
+{
+  Q_OBJECT
+  QMultiMap <QString, Node*> _NodesProperties;
+  QMultiMap <QString, Edge*> _EdgesProperties;
+  QMultiMap <QString, Graph*> _GraphProperties;
+  
+  static DinamicPropertiesList * self;
+  
+  DinamicPropertiesList(QObject* parent = 0);
+  
+public:
+  
+  static DinamicPropertiesList * New();
+  
+  void addProperty(QObject *obj, QString name);
+  void removeProperty(QObject *obj, QString name);
+    
+  DinamicPropertyType type(QObject *obj, QString name);
+  
+  const QList <QString> properties (QObject * obj);
+  
+  void clear(Graph * graph = 0);
+};
+
+#endif // DINAMICPROPERTIESLIST_H

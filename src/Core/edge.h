@@ -93,17 +93,7 @@ public:
     void hideName(bool b);
     void hideValue(bool b);
     
-    /** Add a property to this edge
-    * @param arg1 Name of property
-    * @param arg2 Value of the property. arg2 shoud be different of QVariant::Invalid.
-    */
-    void addDinamicProperty(QByteArray arg1, QVariant arg2);
-    
-    /** Remove property arg1 from this edge. If property arg1 don't exist in this edge, nothing is made.
-    * @param arg1 name os property to remove
-    */
-    void removeDinamicProperty(QByteArray arg1);
-    
+
     Graph *graph(){return _graph; }
 #ifdef USING_QTSCRIPT
     /*! if the qtscript is enabled for this rocs,
@@ -198,6 +188,18 @@ public  slots:
         emit updateNeeded();
 	void changed();
     }
+    
+    /** Add a property to this edge
+    * @param property Name of property
+    * @param value Value of the property. value shoud be different of QVariant::Invalid.
+    */
+    void addDinamicProperty(QString Property, QVariant value);
+    
+    /** Remove property arg1 from this edge. If property arg1 don't exist in this edge, nothing is made.
+    * @param arg1 name os property to remove
+    */
+    void removeDinamicProperty(QString property);
+    
 #ifdef USING_QTSCRIPT
     /*! this method can be used inside of the script interface.
     \return the first node of this edge.

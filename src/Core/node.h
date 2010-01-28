@@ -70,16 +70,7 @@ public:
     QScriptValue createScriptArray(QList<Edge*> list);
 #endif
     
-    /** Add a property to this node
-    * @param property Name of property
-    * @param value Value of the property. arg2 shoud be different of QVariant::Invalid.
-    */
-    void addDinamicProperty(QByteArray property, QVariant value);
-    
-    /** Remove property arg1 from this node. If property arg1 don't exist in this node, nothing is made.
-    * @param property name os property to remove
-    */
-    void removeDinamicProperty(QByteArray property);
+
 
 public  slots:
     QList<Node*> adjacent_nodes() const;
@@ -106,8 +97,20 @@ public  slots:
     void setEnd(bool end = true);
     void setValue(const QString& s);
     const QString& value() const;
-
+    
+    /** Add a property to this node
+    * @param property Name of property
+    * @param value Value of the property. arg2 shoud be different of QVariant::Invalid.
+    */
+    void addDinamicProperty(QString property, QVariant value);
+    
+    /** Remove property arg1 from this node. If property arg1 don't exist in this node, nothing is made.
+    * @param property name os property to remove
+    */
+    void removeDinamicProperty(QString property);
+    
 #ifdef USING_QTSCRIPT
+
     QScriptValue adj_nodes();
     QScriptValue adj_edges();
     QScriptValue input_edges();

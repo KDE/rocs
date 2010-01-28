@@ -27,7 +27,8 @@ set( rocscore_LIB_SRCS
 	graphGroups.cpp
 	krossBackend.cpp
 	qtScriptBackend.cpp
-      threadScriptExecution.cpp
+	threadScriptExecution.cpp
+	dinamicpropertieslist.cpp
 )
 
 kde4_add_library( librocscore	STATIC ${rocscore_LIB_SRCS} )

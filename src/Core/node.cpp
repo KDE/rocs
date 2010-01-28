@@ -21,6 +21,7 @@
 #include "edge.h"
 #include "graph.h"
 #include <KDebug>
+#include "dinamicpropertieslist.h"
 
 
 Node::Node(Graph *parent) : QObject(parent) {
@@ -324,18 +325,25 @@ void Node::endChange() {
     emit changed();
 }
 
-void Node::addDinamicProperty(QByteArray property, QVariant value){
-    this->setProperty(property, value);
+
+void Node::addDinamicProperty(QString property, QVariant value){
+    this->setProperty(property.toUtf8(), value);
+    if (value.isValid()){
+      DinamicPropertiesList::New()->addProperty(this, property);
+    }
 }
 
-void Node::removeDinamicProperty(QByteArray arg1){
-    this->addDinamicProperty(arg1, QVariant::Invalid);
+void Node::removeDinamicProperty(QString property){
+    this->addDinamicProperty(property.toUtf8(), QVariant::Invalid);
+    DinamicPropertiesList::New()->removeProperty(this, property);
 }
+
 
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {
     remove();
 }
+
 QScriptValue Node::scriptValue() const {
     return _scriptvalue;
 }

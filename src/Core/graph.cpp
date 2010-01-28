@@ -23,6 +23,7 @@
 #include "qtScriptBackend.h"
 #include "graphGroups.h"
 #include "graphDocument.h"
+#include "dinamicpropertieslist.h"
 #include <KDebug>
 
 Graph::Graph(GraphDocument *parent) : QObject(parent) {
@@ -267,31 +268,39 @@ bool Graph::automate() {
     return _automate;
 }
 
-void Graph::addDinamicProperty(QByteArray property, QVariant value){
-    this->setProperty(property, value);
+void Graph::addDinamicProperty(QString property, QVariant value){
+    this->setProperty(property.toUtf8(), value);
+    if (value.isValid()){
+      DinamicPropertiesList::New()->addProperty(this, property);
+    }
 }
 
-void Graph::removeDinamicProperty(QByteArray property){
+void Graph::removeDinamicProperty(QString property){
     this->addDinamicProperty(property, QVariant::Invalid);
+    DinamicPropertiesList::New()->removeProperty(this, property);
 }
 
-void Graph::addNodesDinamicProperty(QByteArray property, QVariant value){
+void Graph::addNodesDinamicProperty(QString property, QVariant value){
     foreach(Node *n, nodes()){
       n->addDinamicProperty(property, value);
     }
 }
 
-void Graph::addEdgesDinamicProperty(QByteArray property, QVariant value){
-    foreach(Edge *n, edges()){
-      n->addDinamicProperty(property, value);
+void Graph::addEdgesDinamicProperty(QString property, QVariant value){
+    foreach(Edge *e, edges()){
+      e->addDinamicProperty(property, value);
     }
 }
 
-void Graph::removeNodesDinamicProperty(QByteArray property){
-    this->addNodesDinamicProperty(property, QVariant::Invalid);
+void Graph::removeNodesDinamicProperty(QString property){
+  foreach(Node *n, nodes()){
+    n->removeDinamicProperty(property);
+  }
 }
-void Graph::removeEdgesDinamicProperty(QByteArray property){
-  this->addEdgesDinamicProperty(property, QVariant::Invalid);
+void Graph::removeEdgesDinamicProperty(QString property){
+  foreach(Edge *e, edges()){
+    e->removeDinamicProperty(property);
+  }
 }
 
 #ifdef USING_QTSCRIPT

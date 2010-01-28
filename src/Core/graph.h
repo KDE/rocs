@@ -89,37 +89,7 @@ public:
     /*! remove this graph from the document. */
     void remove();
     
-    /** Add a property to this graph.
-    * @param property Name of property
-    * @param value Value of the property. value shoud be different of QVariant::Invalid.
-    */
-    void addDinamicProperty(QByteArray property, QVariant value = QVariant(0));
-    /** remove a property from this graph.
-    * @param property Name of property
-    */
-    void removeDinamicProperty(QByteArray property);
-    
-    /** Add a property to all nodes in this graph. If a new node is add later, the node will not containg this property.
-    * @param property Name of property
-    * @param value Value of the property. value shoud be different of QVariant::Invalid.
-    */
-    void addNodesDinamicProperty(QByteArray property, QVariant value);
-    
-    /** remove a property to all nodes in this graph.
-    * @param property Name of property
-    */
-    void addEdgesDinamicProperty(QByteArray property, QVariant value);
-    
-     /** Add a property to all Edges in this graph. If a new edge is add later, the edge will not containg this property.
-    * @param property Name of property
-    * @param value Value of the property. value shoud be different of QVariant::Invalid.
-    */
-    void removeNodesDinamicProperty(QByteArray property);
-    /** remove a property to all edges in this graph.
-    * @param property Name of property
-    */
-    void removeEdgesDinamicProperty(QByteArray property);
-    
+ 
     
 #ifdef USING_QTSCRIPT
     /*! if QtScript is enabled for this rocs,
@@ -261,6 +231,38 @@ public  slots:
     */
     bool automate();
 
+       /** Add a property to this graph.
+    * @param property Name of property
+    * @param value Value of the property. value shoud be different of QVariant::Invalid.
+    */
+    void addDinamicProperty(QString property, QVariant value = QVariant(0));
+    /** remove a property from this graph.
+    * @param property Name of property
+    */
+    void removeDinamicProperty(QString property);
+    
+    /** Add a property to all nodes in this graph. If a new node is add later, the node will not containg this property.
+    * @param property Name of property
+    * @param value Value of the property. value shoud be different of QVariant::Invalid.
+    */
+    void addNodesDinamicProperty(QString property, QVariant value = QVariant(0));
+    
+    /** remove a property to all nodes in this graph.
+    * @param property Name of property
+    */
+    void addEdgesDinamicProperty(QString property, QVariant value = QVariant(0));
+    
+     /** Add a property to all Edges in this graph. If a new edge is add later, the edge will not containg this property.
+    * @param property Name of property
+    * @param value Value of the property. value shoud be different of QVariant::Invalid.
+    */
+    void removeNodesDinamicProperty(QString property);
+    /** remove a property to all edges in this graph.
+    * @param property Name of property
+    */
+    void removeEdgesDinamicProperty(QString property);
+    
+    
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();
     QScriptValue list_edges();

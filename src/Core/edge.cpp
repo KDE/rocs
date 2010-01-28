@@ -21,6 +21,7 @@
 #include "edge.h"
 #include "node.h"
 #include "graph.h"
+#include "dinamicpropertieslist.h"
 #include <KDebug>
 
 Edge::Edge(Graph *parent, Node *from, Node *to) :
@@ -88,12 +89,16 @@ void Edge::hideValue(bool b) {
     kDebug() << "Hide Value: " << b;
 }
 
-void Edge::addDinamicProperty(QByteArray newProperty, QVariant value){
-    this->setProperty(newProperty, value); 
+void Edge::addDinamicProperty(QString property, QVariant value){
+    this->setProperty(property.toUtf8(), value); 
+    if (value.isValid()){
+      DinamicPropertiesList::New()->addProperty(this, property);
+    }
 }
 
-void Edge::removeDinamicProperty(QByteArray arg1){
-  addDinamicProperty(arg1, QVariant::Invalid);
+void Edge::removeDinamicProperty(QString property){
+  addDinamicProperty(property.toUtf8(), QVariant::Invalid);
+  DinamicPropertiesList::New()->removeProperty(this, property);
 }
 
 
