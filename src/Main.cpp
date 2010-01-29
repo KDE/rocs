@@ -23,6 +23,9 @@
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KDebug>
+#include <KLocale>
+#include <KLocalizedString>
+#include <QByteArray>
 
 #include "Interface/MainWindow.h"
 
@@ -37,6 +40,9 @@ int main ( int argc, char *argv[] ) {
                           ki18n ( "Thanks to Ugo Sangiori" ),
                           "",
                           "submit@bugs.kde.org" );
+			  
+    aboutData.addAuthor(ki18n("Tomaz Canabrava"), ki18n("Developer"), "tcanabrava@kde.org", "http://liveblue.wordpress.com");
+    aboutData.addAuthor(ki18n("Wagner Reck"), ki18n("Developer"), "wagner.reck@gmail.com", "http://wiglot.wordpress.com");
 
     KCmdLineArgs::init ( argc, argv, &aboutData );
     KApplication app;

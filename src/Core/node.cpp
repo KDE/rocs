@@ -21,6 +21,7 @@
 #include "edge.h"
 #include "graph.h"
 #include <KDebug>
+
 #include "dinamicpropertieslist.h"
 
 

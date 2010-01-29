@@ -58,7 +58,7 @@ void GraphLayers::btnADDClicked() {
 void GraphLayers::addGraph(Graph *g){
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
     _buttonGroup->addButton(gp->radio());
-    connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectGraph()));
+    connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()));
     qobject_cast<QVBoxLayout*>(layout())->insertWidget(1,gp);
 }
 

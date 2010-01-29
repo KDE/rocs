@@ -120,12 +120,17 @@ void NodeItem::addOpacity() {
 
 void NodeItem::deleteItem() {
     _node = 0;
-    if (!_timeLine ) delete _timeLine;
-    _timeLine = new QTimeLine(250, this);
-    _timeLine->setFrameRange(0, 25);
-    connect(_timeLine, SIGNAL(finished()), this, SLOT(removeFromScene()));
-    connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(addOpacity()));
-    _timeLine->start();
+    if ( qobject_cast<GraphScene*>(scene())->fade() ){
+      if (!_timeLine ) delete _timeLine;
+      _timeLine = new QTimeLine(250, this);
+      _timeLine->setFrameRange(0, 25);
+      connect(_timeLine, SIGNAL(finished()), this, SLOT(removeFromScene()));
+      connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(addOpacity()));
+      _timeLine->start();
+    }
+    else{
+      deleteLater();
+    }
 }
 
 void NodeItem::removeFromScene() {

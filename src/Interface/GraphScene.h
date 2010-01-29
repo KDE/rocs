@@ -51,7 +51,10 @@ public:
     void setHideEdges(bool h);
     bool hideEdges();
     void updateAfter(QGraphicsItem *item);
-
+    bool fade() const{ return _fade; }
+    void fade(bool b){ _fade = b; }
+    void hideGraph( Graph *g, bool visibility);
+    
 public slots:
     void removeGItem(QGraphicsItem *i);
     QGraphicsItem* createNode( Node *n, bool f = true);
@@ -74,7 +77,7 @@ private:
     bool _hideEdges;
     NodePropertiesWidget *_nodePropertiesWidget;
     EdgePropertiesWidget *_edgePropertiesWidget;
-
+    bool _fade;
 };
 
 #endif

@@ -101,16 +101,25 @@ void GraphPropertiesWidget::on__graphAutomate_toggled(bool b) {
     _graph->setAutomate(b);
 }
 
+void GraphPropertiesWidget::on__graphHide_toggled(bool b){
+  _mainWindow->scene()->hideGraph( _graph, b );
+}
+
 void GraphPropertiesWidget::on__graphDelete_clicked() {
-  bool isActive = false;
-  if (_graph == _mainWindow->graph()){
-	isActive = true;
+    bool isActive = false;
+    if (_graph == _mainWindow->graph()){
+      isActive = true;
     }
+    
     GraphDocument *gd = qobject_cast<GraphDocument*>(_graph->parent());
     if (gd->size() == 1){
-      gd->addGraph(i18n("Untitled0"));
+	gd->addGraph(i18n("Untitled0"));
     }
+    
+    _mainWindow->scene()->fade(false);
     _graph->remove();
+    _mainWindow->scene()->fade(true);
+    
     if (isActive) emit updateNeeded();
     radio()->group()->removeButton(radio());
     deleteLater();

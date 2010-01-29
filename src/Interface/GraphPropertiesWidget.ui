@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>272</width>
-    <height>162</height>
+    <width>202</width>
+    <height>130</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -50,6 +50,19 @@
        </property>
        <property name="text">
         <string>graph name here</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="_graphHide">
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

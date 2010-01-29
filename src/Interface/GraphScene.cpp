@@ -68,6 +68,14 @@ void GraphScene::updateAfter(QGraphicsItem *item) {
     _hidedEdges << item;
 }
 
+void GraphScene::hideGraph(Graph* g, bool visibility)
+{
+  QList<QGraphicsItem*> list = _hashGraphs.values(g);
+  foreach(QGraphicsItem *i, list){
+    i->setVisible(visibility);
+  }
+}
+
 
 void GraphScene::setAction(QAction *action) {
     _action = qobject_cast<AbstractAction*>(action);
@@ -208,10 +216,8 @@ void GraphScene::removeGItem(QGraphicsItem *gItem) {
     if (! _hashGraphs.empty() ){
       _hashGraphs.remove(_graphDocument->at(i), gItem);
     }
-    if( !items().empty()){
-      removeItem(gItem);
-    }
   }
+  removeItem(gItem);
 }
 
 void GraphScene::updateGraph(Graph *g) {
