@@ -50,6 +50,7 @@ private slots:
     void on__end_toggled(bool b);
     void reflectAttributes();
     void updateAutomateAttributes(bool b);
+    void on__addProperty_clicked();
     
 private:
 

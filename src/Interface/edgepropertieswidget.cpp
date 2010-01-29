@@ -20,6 +20,9 @@
 #include "edgepropertieswidget.h"
 #include "edge.h"
 #include "MainWindow.h"
+#include "model_GraphProperties.h"
+#include <graph.h>
+
 EdgePropertiesWidget::EdgePropertiesWidget(MainWindow *parent): QWidget(parent) {
     setupUi(this);
         
@@ -28,10 +31,18 @@ EdgePropertiesWidget::EdgePropertiesWidget(MainWindow *parent): QWidget(parent) 
 void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
     _edge = e;
     move(pos.x()+ 10,  pos.y() + 10);
+    
+    GraphPropertiesModel *model = new GraphPropertiesModel();
+    model->setDataSource(_edge);
+    
+    _propertiesTable->setModel(model);
+    
+    
     show();
     activateWindow();
     raise();
     disconnect();
+    
     connect(_edge, SIGNAL(updateNeeded()), this, SLOT(reflectAttributes()));
     connect(_edge, SIGNAL(posChanged()), this, SLOT(reflectAttributes()));
     reflectAttributes();
@@ -42,6 +53,9 @@ void EdgePropertiesWidget::reflectAttributes(){
    _value->setText(_edge->value());
    _color->setColor(_edge->color());
    _width->setValue(_edge->width());
+   _propertyName->setText("");
+   _propertyValue->setText("");
+   _isPropertyGlobal->setCheckState(Qt::Unchecked);
 }
 void EdgePropertiesWidget::on__name_textChanged(const QString& s) {
     _edge->setName(s);
@@ -74,4 +88,14 @@ void EdgePropertiesWidget::on__showName_toggled(bool b){
 
 void EdgePropertiesWidget::on__showValue_toggled(bool b){
   _edge->hideValue(!b);
+}
+
+void EdgePropertiesWidget::on__addProperty_clicked(){
+    if (_isPropertyGlobal){
+      _edge->graph()->addEdgesDinamicProperty(_propertyName->text(),
+					      QVariant(_propertyValue->text()));
+    }else{
+      _edge->addDinamicProperty(_propertyName->text(),
+				QVariant(_propertyValue->text()));
+    }
 }

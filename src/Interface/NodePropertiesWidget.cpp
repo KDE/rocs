@@ -4,6 +4,7 @@
 #include <KDebug>
 #include "NodeItem.h"
 #include "graph.h"
+#include "model_GraphProperties.h"
 
 NodePropertiesWidget::NodePropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
     setupUi(this);
@@ -21,6 +22,11 @@ void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
     connect(_node, SIGNAL(posChanged()), this, SLOT(reflectAttributes()));
     connect(_node->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
     reflectAttributes();
+    
+    GraphPropertiesModel *model = new GraphPropertiesModel();
+    model->setDataSource(_node);
+    
+    _propertiesTable->setModel(model);
 
 }
 
@@ -34,6 +40,9 @@ void NodePropertiesWidget::reflectAttributes(){
     _showName->setChecked(!_node->showName());
     _showValue->setChecked(!_node->showValue());
     updateAutomateAttributes(qobject_cast< Graph* >(_node->parent())->automate());
+   _propertyName->setText("");
+   _propertyValue->setText("");
+   _isPropertyGlobal->setCheckState(Qt::Unchecked);
 }
 
 void NodePropertiesWidget::updateAutomateAttributes(bool b){
@@ -114,3 +123,12 @@ void NodePropertiesWidget::on__width_valueChanged(double i) {
     }
 }
 
+void NodePropertiesWidget::on__addProperty_clicked(){
+    if (_isPropertyGlobal){
+      _node->graph()->addNodesDinamicProperty(_propertyName->text(),
+					      QVariant(_propertyValue->text()));
+    }else{
+      _node->addDinamicProperty(_propertyName->text(),
+				QVariant(_propertyValue->text()));
+    }
+}

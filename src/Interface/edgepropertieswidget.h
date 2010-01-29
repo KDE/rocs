@@ -45,6 +45,7 @@ public slots:
     void reflectAttributes();
     void on__showName_toggled(bool b);
     void on__showValue_toggled(bool b);
+    void on__addProperty_clicked();
     
 private:
     Edge *_edge;
