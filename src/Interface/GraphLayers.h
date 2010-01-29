@@ -18,7 +18,7 @@ public:
 public slots:
     void btnADDClicked();
     void addGraph(Graph *g);
-    void selectGraph();
+    void selectFirstGraph();
 };
 
 #endif

@@ -31,6 +31,7 @@
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"
 #include "GraphScene.h"
+#include <KLocale>
 
 GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
         : KButtonGroup ( parent ) {
@@ -104,6 +105,10 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
   bool isActive = false;
   if (_graph == _mainWindow->graph()){
 	isActive = true;
+    }
+    GraphDocument *gd = qobject_cast<GraphDocument*>(_graph->parent());
+    if (gd->size() == 1){
+      gd->addGraph(i18n("Untitled0"));
     }
     _graph->remove();
     if (isActive) emit updateNeeded();

@@ -44,7 +44,6 @@ void GraphLayers::populate() {
     int total = gd->count();
     for (int i = 0; i < total; ++i) {
 	  addGraph(gd->at(i));
-
     }
 }
 
@@ -63,9 +62,6 @@ void GraphLayers::addGraph(Graph *g){
     qobject_cast<QVBoxLayout*>(layout())->insertWidget(1,gp);
 }
 
-void GraphLayers::selectGraph(){
-  kDebug() << "Update Graph";
-  QList<QAbstractButton *> btns = _buttonGroup->buttons();
-  int s = btns.size();
-  btns[0]->click();
+void GraphLayers::selectFirstGraph(){
+  _buttonGroup->buttons()[0]->click();
 }
