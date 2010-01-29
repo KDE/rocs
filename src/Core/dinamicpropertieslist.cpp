@@ -41,19 +41,19 @@ void DinamicPropertiesList::addProperty(QObject* obj, QString name)
 {
       Node * node = qobject_cast< Node* >(obj);
       if (node){
-	  this->_NodesProperties.insert(name, node);
+	  _NodesProperties.insert(name, node);
 	  return;
       }
       
       Edge * edge = qobject_cast< Edge* >(obj);
       if (edge){
-	  this->_EdgesProperties.insert(name, edge);
+	  _EdgesProperties.insert(name, edge);
 	  return;
       }
       
       Graph * graph = qobject_cast< Graph* >(obj);
       if (graph){
-	  this->_GraphProperties.insert(name, graph);
+	  _GraphProperties.insert(name, graph);
 	  return;
       }
 }
@@ -63,19 +63,19 @@ void DinamicPropertiesList::removeProperty(QObject* obj, QString name)
 {
       Node * node = qobject_cast< Node* >(obj);
       if (node){
-	  this->_NodesProperties.remove(name, node);
+	  _NodesProperties.remove(name, node);
 	  return;
       }
       
       Edge * edge = qobject_cast< Edge* >(obj);
       if (edge){
-	  this->_EdgesProperties.remove(name, edge);
+	  _EdgesProperties.remove(name, edge);
 	  return;
       }
       
       Graph * graph = qobject_cast< Graph* >(obj);
       if (graph){
-	  this->_GraphProperties.remove(name, graph);
+	  _GraphProperties.remove(name, graph);
 	  return;
       }
 }
@@ -129,30 +129,30 @@ DinamicPropertyType DinamicPropertiesList::type(QObject* obj, QString name)
 
 QString DinamicPropertiesList::typeInText(QObject* obj, QString name){
     switch (type(obj, name)){
-      case None: return i18n("None");
-      case Unique: return i18n("Unique");
-      case Multiple: return i18n("Multiple");
-      case Global: return i18n("Global");
+      case None: 	return i18n("None");
+      case Unique: 	return i18n("Unique");
+      case Multiple: 	return i18n("Multiple");
+      case Global: 	return i18n("Global");
     }
 }
 
-const QList< QString > DinamicPropertiesList::properties(QObject* obj)
+const QStringList DinamicPropertiesList::properties(QObject* obj)
 {
       Node * node = qobject_cast< Node* >(obj);
       if (node){
-	  return this->_NodesProperties.keys(node);
+	  return _NodesProperties.keys(node);
       }
       
       Edge * edge = qobject_cast< Edge* >(obj);
       if (edge){
-	  return this->_EdgesProperties.keys(edge);
+	  return _EdgesProperties.keys(edge);
       }
       
       Graph * graph = qobject_cast< Graph* >(obj);
       if (graph){
-	  return this->_GraphProperties.keys(graph);
+	  return _GraphProperties.keys(graph);
       }
-      return QList <QString>();
+      return QStringList();
 }
 
 

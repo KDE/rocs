@@ -55,7 +55,7 @@ public:
   /**Return textual type of property from obj*/
   QString typeInText(QObject* obj, QString name);
   
-  const QList <QString> properties (QObject * obj);
+  const QStringList properties (QObject * obj);
   
   void clear(Graph * graph = 0);
 };
