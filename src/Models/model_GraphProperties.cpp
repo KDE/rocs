@@ -156,7 +156,7 @@ void GraphPropertiesModel::addDinamicProperty(QString name, QVariant value, QObj
         }
         Node * node = qobject_cast<Node*> (obj);
         if (node) {
-            node->graph()->addEdgesDinamicProperty(name,value);
+            node->graph()->addNodesDinamicProperty(name,value);
         }
         
 

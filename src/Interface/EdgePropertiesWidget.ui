@@ -45,49 +45,6 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="3" rowspan="2">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Color:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" rowspan="2">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Value:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" rowspan="2">
-    <widget class="KLineEdit" name="_value">
-     <property name="toolTip">
-      <string>Edge value</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="3">
-    <widget class="QLabel" name="label_4">
-     <property name="toolTip">
-      <string>Edge width</string>
-     </property>
-     <property name="text">
-      <string>Width:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="4" rowspan="2">
-    <widget class="KDoubleNumInput" name="_width"/>
-   </item>
    <item row="5" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
@@ -213,6 +170,49 @@
      </item>
     </layout>
    </item>
+   <item row="0" column="3">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Color:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="KLineEdit" name="_value">
+     <property name="toolTip">
+      <string>Edge value</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="4">
+    <widget class="KDoubleNumInput" name="_width"/>
+   </item>
+   <item row="2" column="3">
+    <widget class="QLabel" name="label_4">
+     <property name="toolTip">
+      <string>Edge width</string>
+     </property>
+     <property name="text">
+      <string>Width:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Value:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -242,6 +242,51 @@
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>_name</tabstop>
+  <tabstop>_style</tabstop>
+  <tabstop>_color</tabstop>
+  <tabstop>_showName</tabstop>
+  <tabstop>_showValue</tabstop>
+  <tabstop>_propertiesTable</tabstop>
+  <tabstop>_propertyName</tabstop>
+  <tabstop>_propertyValue</tabstop>
+  <tabstop>_isPropertyGlobal</tabstop>
+  <tabstop>_addProperty</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>_propertyName</sender>
+   <signal>returnPressed()</signal>
+   <receiver>_addProperty</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>103</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>300</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_propertyValue</sender>
+   <signal>returnPressed()</signal>
+   <receiver>_addProperty</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>214</x>
+     <y>286</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>289</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

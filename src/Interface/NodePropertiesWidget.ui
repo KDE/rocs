@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>359</width>
-    <height>316</height>
+    <height>366</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -287,6 +287,55 @@
    <header>kcolorcombo.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>_name</tabstop>
+  <tabstop>_showName</tabstop>
+  <tabstop>_value</tabstop>
+  <tabstop>_showValue</tabstop>
+  <tabstop>_color</tabstop>
+  <tabstop>_x</tabstop>
+  <tabstop>_y</tabstop>
+  <tabstop>_begin</tabstop>
+  <tabstop>_end</tabstop>
+  <tabstop>_propertiesTable</tabstop>
+  <tabstop>_propertyName</tabstop>
+  <tabstop>_propertyValue</tabstop>
+  <tabstop>_isPropertyGlobal</tabstop>
+  <tabstop>_addProperty</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>_propertyValue</sender>
+   <signal>returnPressed()</signal>
+   <receiver>_addProperty</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>223</x>
+     <y>352</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>350</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_propertyName</sender>
+   <signal>returnPressed()</signal>
+   <receiver>_addProperty</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>318</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
