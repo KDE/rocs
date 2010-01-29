@@ -35,8 +35,8 @@ enum DinamicPropertyType{
 class DinamicPropertiesList : public QObject
 {
   Q_OBJECT
-  QMultiMap <QString, Node*> _NodesProperties;
-  QMultiMap <QString, Edge*> _EdgesProperties;
+  QMap< Graph*,  QMultiMap <QString, Node* > > _NodesProperties;
+  QMap< Graph*,  QMultiMap <QString, Edge* > > _EdgesProperties;
   QMultiMap <QString, Graph*> _GraphProperties;
   
   static DinamicPropertiesList * self;
@@ -55,9 +55,14 @@ public:
   /**Return textual type of property from obj*/
   QString typeInText(QObject* obj, QString name);
   
-  const QStringList properties (QObject * obj);
+//   const QStringList properties (QObject * obj);
   
   void clear(Graph * graph = 0);
+  
+  /** Change property name in all objects from same graph of object.*/
+  void changePropertyName(QString name, QString newName, QObject* object);
+  
+  
 };
 
 #endif // DINAMICPROPERTIESLIST_H

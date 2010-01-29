@@ -39,7 +39,7 @@ void TestDinamicProperties:: cleanup(){
     n->addDinamicProperty(property, QVariant(0));
     QVERIFY2(n->property(property) != QVariant::Invalid, "Property not added.");
     QVERIFY2(DinamicPropertiesList::New()->type(n, property) == Global, "Property isn't global.");
-      QVERIFY2(DinamicPropertiesList::New()->properties(n).at(0) == property, "Property not added to list..");
+
   }
   
   void TestDinamicProperties::addEdgeDinamicProperty(){
@@ -52,7 +52,7 @@ void TestDinamicProperties:: cleanup(){
     e->addDinamicProperty(property, QVariant(0));
     QVERIFY2(e->property(property) != QVariant::Invalid, "Property not added.");
     QVERIFY2(DinamicPropertiesList::New()->type(e, property) == Global, "Property isn't global.");
-    QVERIFY2(DinamicPropertiesList::New()->properties(e).at(0) == property, "Property not added to list..");
+
     
     
   }
@@ -62,9 +62,8 @@ void TestDinamicProperties:: cleanup(){
     Graph g;
     QByteArray property = "newProperty";
     g.addDinamicProperty(property);
-    QVERIFY2(g.property(property) != QVariant::Invalid, "Property not added.");    
-    QVERIFY2(DinamicPropertiesList::New()->type(&g, property) == None, "Property isn't None.");
-    QVERIFY2(DinamicPropertiesList::New()->properties(&g).at(0) == property, "Property not added to list..");
+    QVERIFY2(g.property(property) != QVariant::Invalid, "Property not added.");   
+    QVERIFY2(DinamicPropertiesList::New()->type(&g, property) == Unique, "Property isn't Unique.");
     
   }
   
@@ -79,8 +78,7 @@ void TestDinamicProperties:: cleanup(){
     QVERIFY2(n2->property(property) != QVariant::Invalid, "Property not added to Node2.");
     QVERIFY2(DinamicPropertiesList::New()->type(n, property) == Global, "Property isn't Global. (by node 1)");
     QVERIFY2(DinamicPropertiesList::New()->type(n2, property) == Global, "Property isn't Global. (by node 2)");
-    QVERIFY2(DinamicPropertiesList::New()->properties(n).at(0) == property, "Property of node 1 not added to list..");
-    QVERIFY2(DinamicPropertiesList::New()->properties(n2).at(0) == property, "Property of node 2 not added to list..");
+
         
   }
   void TestDinamicProperties::addToAllEdges(){
@@ -94,8 +92,7 @@ void TestDinamicProperties:: cleanup(){
     QVERIFY2(e->property(property) != QVariant::Invalid, "Property not added.");
     QVERIFY2(DinamicPropertiesList::New()->type(e, property) == Global, "Property isn't Global. (by Edge 1)");
     QVERIFY2(DinamicPropertiesList::New()->type(e2, property) == Global, "Property isn't Global. (by Edge 2)");
-    QVERIFY2(DinamicPropertiesList::New()->properties(e).at(0) == property, "Property of Edge 1 not added to list..");
-    QVERIFY2(DinamicPropertiesList::New()->properties(e2).at(0) == property, "Property of Edge 2 not added to list..");
+
   }
 
   void TestDinamicProperties::removeNodeDinamicProperty(){
@@ -108,7 +105,7 @@ void TestDinamicProperties:: cleanup(){
     n->removeDinamicProperty(property);
     QVERIFY2(n->property(property) == QVariant::Invalid, "Property not removed.");
     QVERIFY2(DinamicPropertiesList::New()->type(n, property) == None, "Property isn't None.");
-    QVERIFY2(DinamicPropertiesList::New()->properties(n).size() == 0, "Still having property.");
+    QVERIFY2(n->dynamicPropertyNames().size() == 0, "Still having property.");
     
   }
    
@@ -123,7 +120,7 @@ void TestDinamicProperties:: cleanup(){
     e->removeDinamicProperty(property);
     QVERIFY2(e->property(property) == QVariant::Invalid, "Property not removed.");
     QVERIFY2(DinamicPropertiesList::New()->type(e, property) == None, "Property isn't None.");
-    QVERIFY2(DinamicPropertiesList::New()->properties(e).size() == 0, "Still having property.");
+    QVERIFY2(e->dynamicPropertyNames().size() == 0, "Still having property.");
     
   }
   void TestDinamicProperties::removeGraphDinamicProperty(){
@@ -135,7 +132,7 @@ void TestDinamicProperties:: cleanup(){
     g.removeDinamicProperty(property);
     QVERIFY2(g.property(property) == QVariant::Invalid, "Property not removed.");
     QVERIFY2(DinamicPropertiesList::New()->type(&g, property) == None, "Property isn't None.");
-    QVERIFY2(DinamicPropertiesList::New()->properties(&g).size() == 0, "Still having property.");
+    QVERIFY2(g.dynamicPropertyNames().size() == 0, "Still having property.");
     
   }
   
@@ -190,6 +187,28 @@ void TestDinamicProperties:: cleanup(){
     
     n3->removeDinamicProperty(property);
     QVERIFY2(DinamicPropertiesList::New()->type(n1, property) == None, "Property isn't None");
+    
+  }
+  
+  void TestDinamicProperties::changeNames(){
+      Graph g;
+    Node *n1 = g.addNode("Node 1");
+    Node *n2 = g.addNode("Node 2");
+    Edge *e  = g.addEdge(n1, n2);
+    
+    QString property = "newProperty";
+    g.addNodesDinamicProperty(property, QVariant(0));
+    g.addEdgesDinamicProperty(property, QVariant(0));
+    g.addDinamicProperty(property, QVariant(0));
+    
+    DinamicPropertiesList::New()->changePropertyName(property, QString("newName_Node"), n1);
+    DinamicPropertiesList::New()->changePropertyName(property, QString("newName_Edge"), e);
+    DinamicPropertiesList::New()->changePropertyName(property, QString("newName_Graph"), &g);
+    
+    QCOMPARE(n1->dynamicPropertyNames()[0], QByteArray("newName_Node"));
+    QCOMPARE(n2->dynamicPropertyNames()[0], QByteArray("newName_Node"));
+    QCOMPARE( e->dynamicPropertyNames()[0], QByteArray("newName_Edge"));
+    QCOMPARE(  g.dynamicPropertyNames()[0], QByteArray("newName_Graph"));
     
   }
 

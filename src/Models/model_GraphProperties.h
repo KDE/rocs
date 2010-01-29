@@ -61,6 +61,10 @@ public:
     \param dataSource the new dataSource of the model.*/
     void setDataSource(QObject *dataSource);
 
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+    
+    Qt::ItemFlags flags(const QModelIndex &index) const;
+    
 private:
     QObject *_dataSource;
     const QMetaObject *_metaObject;

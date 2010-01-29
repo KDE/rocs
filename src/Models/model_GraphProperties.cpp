@@ -103,3 +103,43 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource) {
     endInsertRows();
 
 }
+
+Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const{
+   if (index.isValid()){
+	if (index.column() != 2){//Can't change type for now
+	    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+	}else{
+	    return QAbstractItemModel::flags(index);
+	}
+   }
+     return Qt::ItemIsEnabled;
+   
+     
+}
+
+bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,
+				   int role){
+    if (index.isValid() && role == Qt::EditRole) {
+      switch (index.column()){
+	case 0: kDebug() << "Change name. DinamicPropertiesList take part";
+		DinamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), //name
+								 value.toString(), //NewName
+								 _dataSource); //Object
+		break;
+	case 1: kDebug() << "Just change Value";
+		_dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()],
+					 value);
+		break;
+	default: kDebug() << "shoudn't enter here ¬¬";
+		return false;
+		break;
+      }
+      
+      emit dataChanged(index, index);
+      return true;
+	
+    }
+    return false;
+  
+  
+}

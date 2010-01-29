@@ -43,6 +43,7 @@ private slots:
   
   void MultipleProperties();
   
+  void changeNames();
 };
 
 #endif // TESTDINAMICPROPERTIES_H

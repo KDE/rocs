@@ -39,15 +39,28 @@ DinamicPropertiesList* DinamicPropertiesList::New()
 
 void DinamicPropertiesList::addProperty(QObject* obj, QString name)
 {
+      
       Node * node = qobject_cast< Node* >(obj);
       if (node){
-	  _NodesProperties.insert(name, node);
+	  QMap< Graph*,  QMultiMap <QString, Node* > >::iterator multimap = _NodesProperties.find(node->graph());
+	  if( multimap == _NodesProperties.end()){ //Not exist a graph yet
+	      QMultiMap <QString, Node* > newMap;
+	      multimap = _NodesProperties.insert(node->graph(),newMap); 
+	  }
+	  
+	  multimap.value().insert(name, node);
+	  
 	  return;
       }
       
       Edge * edge = qobject_cast< Edge* >(obj);
       if (edge){
-	  _EdgesProperties.insert(name, edge);
+	  QMap< Graph*,  QMultiMap <QString, Edge* > >::iterator multimap = _EdgesProperties.find(edge->graph());
+	  if( multimap == _EdgesProperties.end()){ //Not exist a graph yet
+	      QMultiMap <QString, Edge* > newMap;
+	      multimap = _EdgesProperties.insert(edge->graph(),newMap); 
+	  }
+	  multimap.value().insert(name, edge);
 	  return;
       }
       
@@ -63,13 +76,22 @@ void DinamicPropertiesList::removeProperty(QObject* obj, QString name)
 {
       Node * node = qobject_cast< Node* >(obj);
       if (node){
-	  _NodesProperties.remove(name, node);
+	  QMap< Graph*,  QMultiMap <QString, Node* > >::iterator multimap = _NodesProperties.find(node->graph());
+	  if( multimap == _NodesProperties.end()){ //Not exist a graph yet
+	    return;
+	  }
+	  multimap.value().remove(name, node);
+// 	  _NodesProperties.remove(name, node);
 	  return;
       }
       
       Edge * edge = qobject_cast< Edge* >(obj);
       if (edge){
-	  _EdgesProperties.remove(name, edge);
+	  QMap< Graph*,  QMultiMap <QString, Edge* > >::iterator multimap = _EdgesProperties.find(edge->graph());
+	  if( multimap == _EdgesProperties.end()){ //Not exist a graph yet
+		return;
+	  }
+	  multimap.value().remove(name, edge);
 	  return;
       }
       
@@ -84,17 +106,16 @@ DinamicPropertyType DinamicPropertiesList::type(QObject* obj, QString name)
 {
       Node * node = qobject_cast< Node* >(obj);
       if (node){
-	  QList <Node*> list = this->_NodesProperties.values(name);
-	  int count= 0;
-	  foreach (Node * n, list ){
-	      if (n->graph() == node->graph()){
-		++count;
-	      }
+	  QMap< Graph*,  QMultiMap <QString, Node* > >::iterator multimap = _NodesProperties.find(node->graph());
+	  if( multimap == _NodesProperties.end()){ //Not exist a graph yet
+	    return None;
 	  }
-	  if (node->graph()->nodes().size() == count){
+	  QList <Node*> list = multimap.value().values(name);
+	  
+	  if (node->graph()->nodes().size() == list.size()){
 	      return Global;
 	  }
-	  switch(count){
+	  switch(list.size()){
 	    case 0 :return None;
 	    case 1 :return Unique;
 	    default : return Multiple;
@@ -103,17 +124,15 @@ DinamicPropertyType DinamicPropertiesList::type(QObject* obj, QString name)
       
       Edge * edge = qobject_cast< Edge* >(obj);
       if (edge){
-	  QList <Edge*> list = this->_EdgesProperties.values(name);
-	  int count= 0;
-	  foreach (Edge * e, list ){
-	      if (e->graph() == edge->graph()){
-		++count;
-	      }
+	  QMap< Graph*,  QMultiMap <QString, Edge* > >::iterator multimap = _EdgesProperties.find(edge->graph());
+	  if( multimap == _EdgesProperties.end()){ //Not exist a graph yet
+		return None;
 	  }
-	  if (edge->graph()->edges().size() == count){
+	  QList <Edge*> list = multimap.value().values(name);
+	  if (edge->graph()->edges().size() == list.size()){
 	      return Global;
 	  }
-	  switch(count){
+	  switch(list.size()){
 	    case 0 :return None;
 	    case 1 :return Unique;
 	    default : return Multiple;
@@ -122,7 +141,11 @@ DinamicPropertyType DinamicPropertiesList::type(QObject* obj, QString name)
       
       Graph * graph = qobject_cast< Graph* >(obj);
       if (graph){
-	    return None;
+	    if (_GraphProperties.values(name).size() == 0){
+	      return None;
+	    }else {
+		return Unique;
+	    }
       }
       return None;
 }
@@ -136,7 +159,7 @@ QString DinamicPropertiesList::typeInText(QObject* obj, QString name){
     }
 }
 
-const QStringList DinamicPropertiesList::properties(QObject* obj)
+/*const QStringList DinamicPropertiesList::properties(QObject* obj)
 {
       Node * node = qobject_cast< Node* >(obj);
       if (node){
@@ -152,16 +175,56 @@ const QStringList DinamicPropertiesList::properties(QObject* obj)
       if (graph){
 	  return _GraphProperties.keys(graph);
       }
-      return QStringList();
-}
+      return QStringList();*/
+// }
 
 
 void DinamicPropertiesList::clear(Graph* graph)
 {
-    if (graph == 0){
-	_EdgesProperties.clear();
-	_GraphProperties.clear();
-	_NodesProperties.clear();
+    if (graph != 0){
+	_EdgesProperties.values(graph).clear();
+	foreach (QString name,  _GraphProperties.keys(graph) ){
+	    _GraphProperties.remove(name, graph);
+	}
+	
+	_NodesProperties.values(graph).clear();
+    }else{
+      _EdgesProperties.clear();
+      _GraphProperties.clear();
+      _NodesProperties.clear(); 
+      
     }
 }
 
+
+void DinamicPropertiesList::changePropertyName(QString name, QString newName, QObject* object){
+    Node * node = qobject_cast< Node* >(object);
+    if (node){
+	QMap< Graph*,  QMultiMap <QString, Node* > >::iterator multimap = _NodesProperties.find(node->graph());
+	if( multimap == _NodesProperties.end()){ //Not exist a graph yet
+	      return;
+	}
+	foreach(node, multimap.value().values(name)){
+	    node->addDinamicProperty(newName, node->property(name.toUtf8()));
+	    node->removeDinamicProperty(name);
+	}
+    }
+      Edge * edge = qobject_cast< Edge* >(object);
+      if (edge){
+	  QMap< Graph*,  QMultiMap <QString, Edge* > >::iterator multimap = _EdgesProperties.find(edge->graph());
+	  if( multimap == _EdgesProperties.end()){ //Not exist a graph yet
+		return;
+	  }
+	 
+	 foreach (edge, multimap.value().values(name)){
+	      edge->addDinamicProperty(newName, edge->property(name.toUtf8()));
+	      edge->removeDinamicProperty(name);
+	 }
+      }
+    Graph * graph = qobject_cast<Graph*>(object);
+    if (graph){
+	graph->addDinamicProperty(newName, graph->property(name.toUtf8()));
+	graph->removeDinamicProperty(name);
+    }
+  
+}
