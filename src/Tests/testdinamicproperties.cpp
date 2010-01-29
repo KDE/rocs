@@ -174,19 +174,29 @@ void TestDinamicProperties:: cleanup(){
     Node *n1 = g.addNode("Node 1");
     Node *n2 = g.addNode("Node 2");
     Node *n3 = g.addNode("Node 3");
+    Edge *e1 = g.addEdge(n3, n1);
+    Edge *e2 = g.addEdge(n2, n1);
+    Edge *e3 = g.addEdge(n3, n2);
+    
     QByteArray property = "newProperty";
     g.addNodesDinamicProperty(property, QVariant(0));
+    g.addEdgesDinamicProperty(property, QVariant(0));
     
     QVERIFY2(DinamicPropertiesList::New()->type(n1, property) == Global, "Property isn't global");
+    QVERIFY2(DinamicPropertiesList::New()->type(e1, property) == Global, "Property isn't global");
     
     n1->removeDinamicProperty(property);
     QVERIFY2(DinamicPropertiesList::New()->type(n1, property) == Multiple, "Property isn't Multiple");
+    QVERIFY2(DinamicPropertiesList::New()->type(e1, property) == Multiple, "Property isn't Multiple");
     
     n2->removeDinamicProperty(property);
     QVERIFY2(DinamicPropertiesList::New()->type(n1, property) == Unique, "Property isn't Unique");
+    QVERIFY2(DinamicPropertiesList::New()->type(e1, property) == Unique, "Property isn't Unique");
+    
     
     n3->removeDinamicProperty(property);
     QVERIFY2(DinamicPropertiesList::New()->type(n1, property) == None, "Property isn't None");
+    QVERIFY2(DinamicPropertiesList::New()->type(e1, property) == None, "Property isn't Unique");
     
   }
   

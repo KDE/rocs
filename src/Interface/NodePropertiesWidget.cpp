@@ -124,7 +124,7 @@ void NodePropertiesWidget::on__width_valueChanged(double i) {
 }
 
 void NodePropertiesWidget::on__addProperty_clicked(){
-    if (_isPropertyGlobal){
+    if (_isPropertyGlobal->checkState() == Qt::Checked) {
       _node->graph()->addNodesDinamicProperty(_propertyName->text(),
 					      QVariant(_propertyValue->text()));
     }else{

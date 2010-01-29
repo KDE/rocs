@@ -91,7 +91,7 @@ void EdgePropertiesWidget::on__showValue_toggled(bool b){
 }
 
 void EdgePropertiesWidget::on__addProperty_clicked(){
-    if (_isPropertyGlobal){
+    if (_isPropertyGlobal->checkState() == Qt::Checked ){
       _edge->graph()->addEdgesDinamicProperty(_propertyName->text(),
 					      QVariant(_propertyValue->text()));
     }else{
