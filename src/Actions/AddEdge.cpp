@@ -50,7 +50,7 @@ AddEdgeAction::~AddEdgeAction() {
 void AddEdgeAction::executePress(QPointF pos) {
     if (_working) return;
     if ( ! _graph ) return;
-
+    if (_graph->readOnly()) return;
     _working = true;
     _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
 

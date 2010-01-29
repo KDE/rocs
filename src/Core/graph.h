@@ -89,7 +89,8 @@ public:
     /*! remove this graph from the document. */
     void remove();
     
- 
+    void readOnly( bool r) { _readOnly = r; }
+    bool readOnly() const { return _readOnly; }
     
 #ifdef USING_QTSCRIPT
     /*! if QtScript is enabled for this rocs,
@@ -295,7 +296,8 @@ private:
     QString _edgeDefaultColor;
     bool _automate;
     GraphDocument *_document;
-
+    bool _readOnly;
+    
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QtScriptBackend *_engine;

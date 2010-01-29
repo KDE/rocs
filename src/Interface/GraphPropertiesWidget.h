@@ -52,7 +52,7 @@ private slots:
     void on__showEdgeNames_toggled(bool b);
     void on__showNodeValues_toggled(bool b);
     void on__showEdgeValues_toggled(bool b);
-    void on__graphHide_toggled(bool b);
+    void on__graphVisible_toggled(bool b);
     
   signals:
     void updateNeeded();

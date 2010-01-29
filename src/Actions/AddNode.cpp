@@ -44,6 +44,7 @@ void AddNodeAction::executePress(QPointF pos) {
         kDebug() << "Error, Graph == 0";
         return;
     }
+    if (_graph->readOnly()) return;
 
     if (pos.x() < 0) return;
     else if (pos.y() < 0) return;
@@ -51,6 +52,7 @@ void AddNodeAction::executePress(QPointF pos) {
     else if (pos.y() > _graphDocument->height()) return;
 
     Node *n = _graph -> addNode(i18n("untitled"));
+
     n ->setPos(pos.x(),pos.y());
 
     n->graph()->calcRelativeCenter();

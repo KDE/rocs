@@ -45,11 +45,13 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
     _graphNodeColor->setColor(_graph->nodeDefaultColor());
     _graphAutomate->setChecked(_graph->automate());
     _graphOriented->setChecked(_graph->directed());
+    _graphVisible->setChecked( ! _graph->readOnly());
     _activateGraph->setChecked(true);
     _showEdgeNames->setChecked(true);
     _showEdgeValues->setChecked(true);
     _showNodeNames->setChecked(true);
     _showNodeValues->setChecked(true);
+    
     _editWidget->setVisible(_activateGraph->isChecked());
     _mainWindow->setActiveGraph(_graph);
     kDebug() << "Active Graph" << _mainWindow->graph()->name();
@@ -60,7 +62,7 @@ QRadioButton *GraphPropertiesWidget::radio()const {
 }
 
 void GraphPropertiesWidget::on__activateGraph_toggled(bool b) {
-    _editWidget->setVisible(b);
+    _editWidget->setVisible( b );
     if (b) {
         _mainWindow->setActiveGraph(_graph);
     }
@@ -101,7 +103,9 @@ void GraphPropertiesWidget::on__graphAutomate_toggled(bool b) {
     _graph->setAutomate(b);
 }
 
-void GraphPropertiesWidget::on__graphHide_toggled(bool b){
+void GraphPropertiesWidget::on__graphVisible_toggled(bool b){
+  kDebug() << b;
+  _graph->readOnly( !b );
   _mainWindow->scene()->hideGraph( _graph, b );
 }
 

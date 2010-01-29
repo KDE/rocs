@@ -29,6 +29,7 @@
 Graph::Graph(GraphDocument *parent) : QObject(parent) {
     _directed = false;
     _automate = false;
+    _readOnly = false;
     _document = parent;
     _begin = 0;
     calcRelativeCenter();
@@ -64,6 +65,8 @@ QList<Edge*> Graph::edges() const {
 }
 
 Node* Graph::addNode(QString name) {
+    if (_readOnly) return 0;
+    
     Node  *n = new Node(this);
     n->setName(name);
     _nodes.append( n );
@@ -73,6 +76,7 @@ Node* Graph::addNode(QString name) {
 }
 
 Edge* Graph::addEdge(Node* from,Node* to) {
+    if (_readOnly) return 0;
     if ( ( from == to) && ( !_directed ) ) {
         return 0;
     } else if ((from->edges(to).size() >= 1)&&(!_directed)) {
@@ -89,6 +93,7 @@ Edge* Graph::addEdge(Node* from,Node* to) {
 }
 
 Edge* Graph::addEdge(const QString& name_from, const QString& name_to) {
+    if (_readOnly) return 0;
     Node *from = 0;
     Node *to   = 0;
 
