@@ -124,11 +124,16 @@ void NodePropertiesWidget::on__width_valueChanged(double i) {
 }
 
 void NodePropertiesWidget::on__addProperty_clicked(){
-    if (_isPropertyGlobal->checkState() == Qt::Checked) {
-      _node->graph()->addNodesDinamicProperty(_propertyName->text(),
-					      QVariant(_propertyValue->text()));
-    }else{
-      _node->addDinamicProperty(_propertyName->text(),
-				QVariant(_propertyValue->text()));
-    }
+//     if (_isPropertyGlobal->checkState() == Qt::Checked) {
+//       _node->graph()->addNodesDinamicProperty(_propertyName->text(),
+// 					      QVariant(_propertyValue->text()));
+//     }else{
+//       _node->addDinamicProperty(_propertyName->text(),
+// 				QVariant(_propertyValue->text()));
+//     }
+    GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
+    model->addDinamicProperty(_propertyName->text(),
+					    QVariant(_propertyValue->text()),
+					    _node,
+					    (_isPropertyGlobal->checkState() == Qt::Checked));
 }

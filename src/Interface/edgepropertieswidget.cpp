@@ -91,11 +91,18 @@ void EdgePropertiesWidget::on__showValue_toggled(bool b){
 }
 
 void EdgePropertiesWidget::on__addProperty_clicked(){
-    if (_isPropertyGlobal->checkState() == Qt::Checked ){
-      _edge->graph()->addEdgesDinamicProperty(_propertyName->text(),
-					      QVariant(_propertyValue->text()));
-    }else{
-      _edge->addDinamicProperty(_propertyName->text(),
-				QVariant(_propertyValue->text()));
-    }
+//     if (_isPropertyGlobal->checkState() == Qt::Checked ){
+//       _edge->graph()->addEdgesDinamicProperty(_propertyName->text(),
+// 					      QVariant(_propertyValue->text()));
+//     }else{
+//       _edge->addDinamicProperty(_propertyName->text(),
+// 				QVariant(_propertyValue->text()));
+//     }
+    
+    GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
+    model->addDinamicProperty(_propertyName->text(),
+			      QVariant(_propertyValue->text()),
+			      _edge,
+			      (_isPropertyGlobal->checkState() == Qt::Checked));
 }
+

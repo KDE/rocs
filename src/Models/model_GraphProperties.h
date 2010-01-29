@@ -29,6 +29,7 @@
 
 class GraphPropertiesModel : public QAbstractTableModel
 {
+  Q_OBJECT
 public:
     /*! Default Constructor.
       \param parent the QObject that owns this Model.   */
@@ -65,6 +66,9 @@ public:
     
     Qt::ItemFlags flags(const QModelIndex &index) const;
     
+    /**Add properti to data source and insert a new row,*/
+    void addDinamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal);
+
 private:
     QObject *_dataSource;
     const QMetaObject *_metaObject;
