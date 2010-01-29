@@ -53,7 +53,7 @@ class Edge : public QObject {
     /*! this property holds the color attribute. */
     Q_PROPERTY(QString color READ color WRITE setColor)
 
-    /*! this property hold the valie attribute */
+    /*! this property hold the value attribute */
     Q_PROPERTY(QString value READ value WRITE setValue)
 
     /*! this property holds the name of the edge. */

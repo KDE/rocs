@@ -73,6 +73,7 @@ void CodeEditor::changeCurrentDocument(int index){
   _activeDocument = _scriptDocs.at(index);
   _activeView = _docViews.at(index);
   _docArea->setCurrentIndex(index);
+  _tabDocs->setCurrentIndex(index);
 }
 
 void CodeEditor::newScript() {
@@ -86,8 +87,7 @@ void CodeEditor::newScript() {
     
     _tabDocs->addTab(_scriptDocs.last()->documentName());
     _docArea->addWidget(_docViews.last());
-    _activeDocument = _scriptDocs.last();
-    _activeView = _docViews.last();
+    changeCurrentDocument( _docViews.count() - 1 );
     connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(atualizeTabText(KTextEditor::Document*)));
     kDebug()<< "New script created.";
 }
@@ -115,7 +115,15 @@ void CodeEditor::openScript() {
 #ifdef USING_QTSCRIPT
     d->setMode("JavaScript");
 #endif
+    _scriptDocs << d;
+    _docViews << qobject_cast<KTextEditor::View*>(_scriptDocs.last()->createView(this));
+    _tabDocs->addTab(_scriptDocs.last()->documentName());
+    _docArea->addWidget(_docViews.last());
+
+    connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(atualizeTabText(KTextEditor::Document*)));
+    changeCurrentDocument( _docViews.count() - 1 );
     
+    kDebug() << "Being Called";
     
 }
 
