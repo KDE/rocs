@@ -18,7 +18,7 @@ class NodeItem : public QGraphicsSvgItem{
 
   public:
     NodeItem(Node *n);
-    ~NodeItem();
+
     Node* node() const { return _node; }
   private slots:
     void setupNode();
