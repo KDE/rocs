@@ -1,0 +1,1 @@
+install( FILES default.svg DESTINATION ${DATA_INSTALL_DIR}/rocs/iconpacks  )
