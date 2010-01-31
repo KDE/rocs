@@ -24,7 +24,6 @@
 #include "node.h"
 #include "edge.h"
 #include "NodeItem.h"
-#include "EdgeItem.h"
 #include "OrientedEdgeItem.h"
 #include <KLocale>
 

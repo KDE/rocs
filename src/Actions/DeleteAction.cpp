@@ -27,7 +27,6 @@
 #include "node.h"
 #include "edge.h"
 #include "NodeItem.h"
-#include "EdgeItem.h"
 #include "OrientedEdgeItem.h"
 
 DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent) {
@@ -43,9 +42,6 @@ void DeleteAction::executePress(QPointF pos)
     if ( NodeItem *n  = qgraphicsitem_cast<NodeItem*>(item) ) {
         qDebug() << "Trying to remove node. NodeItem: " << n->objectName() ;
         n->node()->remove();
-    }
-    else if ( EdgeItem *e = qgraphicsitem_cast<EdgeItem*>(item) ) {
-        e->edge()->remove();
     }
     else if ( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ) {
         qDebug() << "Should have deleted the oriented node.";

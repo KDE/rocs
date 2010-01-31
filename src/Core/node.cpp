@@ -194,15 +194,16 @@ void Node::setX(qreal x) {
 	emit changed();
     }
 }
+
 qreal Node::x() const {
     return _x;
 }
+
 void Node::setY(qreal y) {
     _y  = y;
     if (! _changing) {
 	emit changed();
-    }
-    
+    }    
 }
 
 void Node::setWidth(qreal w) {
@@ -211,7 +212,6 @@ void Node::setWidth(qreal w) {
 	emit changed();
         kDebug() << "Updating node drawing";
     }
-    
 }
 
 void Node::setPos(qreal x, qreal y) {
@@ -237,15 +237,18 @@ void Node::setColor(const QString& s) {
 	emit changed();
     }
 }
+
 const QString& Node::color() const {
     return _color;
 }
+
 void Node::setName(const QString& s) {
     _name = s;
     if (! _changing) {
 	emit changed();
     }
 }
+
 const QString& Node::name() const {
     return _name;
 }

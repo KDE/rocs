@@ -3,7 +3,6 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../Core ../Actions ../Inter
  
 set( rocsgraphics_LIB_SRCS
 	NodeItem.cpp
-	EdgeItem.cpp
 	OrientedEdgeItem.cpp
 )
 

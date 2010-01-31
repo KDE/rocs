@@ -22,7 +22,6 @@
 #include "GraphScene.h"
 #include "MainWindow.h"
 #include "NodeItem.h"
-#include "EdgeItem.h"
 #include "OrientedEdgeItem.h"
 
 #include "graphDocument.h"

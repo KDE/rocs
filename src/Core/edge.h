@@ -92,7 +92,7 @@ public:
     bool showValue();
     void hideName(bool b);
     void hideValue(bool b);
-    
+    void emitChangedSignal(){ emit changed(); }
 
     Graph *graph(){return _graph; }
 #ifdef USING_QTSCRIPT

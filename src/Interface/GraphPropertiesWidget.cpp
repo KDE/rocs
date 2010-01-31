@@ -27,7 +27,6 @@
 #include "node.h"
 #include "edge.h"
 #include "MainWindow.h"
-#include "EdgeItem.h"
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"
 #include "GraphScene.h"

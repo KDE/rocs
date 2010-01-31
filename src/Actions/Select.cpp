@@ -25,7 +25,6 @@
 #include "node.h"
 #include "edge.h"
 #include "NodeItem.h"
-#include "EdgeItem.h"
 #include "OrientedEdgeItem.h"
 
 #include <KLocale>
@@ -100,7 +99,6 @@ void SelectAction::multiSelect(QPointF pos) {
     QList<QGraphicsItem*> items = _graphScene->items(QRectF(_p1, pos));
     foreach(QGraphicsItem *i, items) {
         if (!( qgraphicsitem_cast<NodeItem*>(i)
-                || qgraphicsitem_cast<EdgeItem*>(i)
                 || qgraphicsitem_cast<OrientedEdgeItem*>(i))) {
             items.removeAll(i);
         }

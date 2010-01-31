@@ -24,7 +24,6 @@
 #include "edge.h"
 #include "graphDocument.h"
 #include "NodeItem.h"
-#include "EdgeItem.h"
 #include "OrientedEdgeItem.h"
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
@@ -118,12 +117,7 @@ QGraphicsItem *GraphScene::createNode(Node *n) {
 
 QGraphicsItem *GraphScene::createEdge(Edge *e) {
     QGraphicsItem *edgeItem = 0;
-
-    if ( !e->graph()->directed() ){
-      edgeItem = new EdgeItem(e);
-    }else{
-      edgeItem = new OrientedEdgeItem(e);
-    }
+    edgeItem = new OrientedEdgeItem(e);
 
     addItem(edgeItem);
     kDebug() << "Edge Created";
@@ -172,9 +166,6 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 	QGraphicsItem *i = itemAt(mouseEvent->scenePos());
         if (NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(i)){
             _nodePropertiesWidget->setNode(nItem, mouseEvent->screenPos());
-        }
-        else if (EdgeItem *eItem = qgraphicsitem_cast<EdgeItem*>(i)){
-            _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());
         }
 	else if (OrientedEdgeItem *eItem = qgraphicsitem_cast<OrientedEdgeItem*>(i)){
 	    _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());

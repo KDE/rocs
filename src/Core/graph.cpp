@@ -143,28 +143,27 @@ void Graph::remove(Edge *e) {
 
 void Graph::setDirected(bool directed) {
     _directed = directed;
-  //  if (!_directed) {
-  //      return;
-  //  }
 
     kDebug() << "directed is " << directed;
     foreach(Node *n1, _nodes) {
-        foreach(Node *n2, n1->adjacent_nodes()) {
-	  
+        foreach(Node *n2, n1->adjacent_nodes()) {  
 	    // do not permit loop nodes while changing graph's state.
             if ( (n1->edges(n2).size() == 1) && (n1 != n2) ) {
                 continue;
             }
 
-	    // this looks wrong.
             QList<Edge*> listEdges = n1->edges(n2);
             if (n1 != n2) {
                 listEdges.removeFirst();
             }
+            
             foreach(Edge *e, listEdges) {
-                remove(e);
+	      remove(e);
             }
         }
+    }
+    foreach(Edge *e, _edges){
+      e->emitChangedSignal(); // dummy updater.
     }
     emit complexityChanged(directed);
     return;

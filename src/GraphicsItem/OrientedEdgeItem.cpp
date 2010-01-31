@@ -60,8 +60,7 @@ OrientedEdgeItem::~OrientedEdgeItem() {
 }
 
 void OrientedEdgeItem::connectSignals() {
-    connect(_edge, SIGNAL(posChanged()), this, SLOT(updatePos()));
-    connect(_edge, SIGNAL(updateNeeded()), this, SLOT(updateAttributes()));
+    connect(_edge, SIGNAL(changed()), this, SLOT(updatePos()));
     connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
 }
 
@@ -110,6 +109,13 @@ QPainterPath OrientedEdgeItem::createCurves() const {
         qSwap(Pos1, Pos2);
     }
 
+    if (! _edge->graph()->directed()){
+	QPainterPath p;
+	p.moveTo(Pos1);
+	p.lineTo(Pos2);
+	return p;
+    }
+    
     qreal x = Pos2.x() - Pos1.x();
     qreal y = Pos2.y() - Pos1.y();
     qreal angle = atan2(y,x);
