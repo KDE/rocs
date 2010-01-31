@@ -38,7 +38,7 @@ Node::Node(Graph *parent) : QObject(parent) {
     _end = false;
     _color = _graph->nodeDefaultColor();
     _changing = false;
-    _value = '0';
+    _value = 0;
     _icon = "default";
     _iconpackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
     kDebug() << "Node successfully created" << _iconpackage;

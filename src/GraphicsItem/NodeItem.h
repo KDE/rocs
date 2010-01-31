@@ -35,8 +35,8 @@ class NodeItem : public QGraphicsSvgItem{
     
     QString _iconPackage;
     QString _element;
-    QGraphicsTextItem *_name;
-    QGraphicsTextItem *_value;
+    QGraphicsSimpleTextItem *_name;
+    QGraphicsSimpleTextItem *_value;
     QGraphicsColorizeEffect *_colorizer;
 };
 

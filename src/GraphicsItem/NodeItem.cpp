@@ -4,6 +4,8 @@
 #include <KGlobal>
 #include <KDebug>
 #include <QGraphicsColorizeEffect>
+#include <QFont>
+#include <QGraphicsScene>
 
 NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
     _node = n;
@@ -32,6 +34,7 @@ void NodeItem::setupNode(){
     updateColor();
     updateSize();
     updatePos();
+    update();
 }
 
 void NodeItem::updatePos(){
@@ -42,10 +45,10 @@ void NodeItem::updatePos(){
 }
 
 void NodeItem::updateSize(){
-  if (_node->width() == _width) return;
+  if (_node->width()-0.5 == _width) return;
   resetMatrix();
-  _width = _node->width();
-  scale(_node->width(),_node->width());
+  _width = _node->width() - 0.5;
+  scale(_node->width()-0.5,_node->width()-0.5);
   kDebug() << "Scaling in a factor of" << _node->width();
 }
 
@@ -84,12 +87,14 @@ void NodeItem::updateColor(){
 void NodeItem::updateName(){
    // setting the name
    if ( !_name ){
-    _name = new QGraphicsTextItem(_node->name(), this);
+    _name = new QGraphicsSimpleTextItem(_node->name(), this);
+    _name->setFont(QFont("Helvetica [Cronyx]", 18));
     kDebug() << "Setting the name to" << _node->name();
-   }else if (_name->toPlainText() != _node->name()){
-    _name->setPlainText(_node->name());
+   }else if (_name->text() != _node->name()){
+    _name->setText(_node->name());
     kDebug() << "Updating the name to" << _node->name();
    }
+   kDebug() << "_node->showName()" << _node->showName();
    if ( ! _node->showName() ){
     _name->hide();
    }else{
@@ -100,17 +105,19 @@ void NodeItem::updateName(){
 
 void NodeItem::updateValue(){
    // setting the value
-   if ( !_value ){
-    _value = new QGraphicsTextItem(_node->value().toString(), this);
-    kDebug() << "Setting the value to" << _node->value().toString();
-   }else if (_value->toPlainText() != _node->value().toString()){
-    _value ->setPlainText(_node->value().toString());
-    kDebug() << "updating the value to" << _node -> value().toString();
+   if ( !_value ){ 
+      _value = new QGraphicsSimpleTextItem(_node->value().toString(), this);
+      _value->setFont(QFont("Helvetica [Cronyx]", 18));
+      kDebug() << "Setting the value to" << _node->value().toString();
+   }else if (_value->text() != _node->value().toString()){
+      _value ->setText(_node->value().toString());
+      kDebug() << "updating the value to" << _node -> value().toString();
    }
+   kDebug() << "_node->showValue()" << _node->showValue();
    if (! _node->showValue()){
-    _value->hide();
+      _value->hide();
    }else{
-    _value->show();
+      _value->show();
    }
-   _value->setPos(100, 100);
+      _value->setPos(20, 20);
 }

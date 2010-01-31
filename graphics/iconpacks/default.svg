@@ -3886,7 +3886,7 @@
      id="layer1">
     <g
        id="g3071"
-       transform="matrix(1.3704233,0,0,1.3857418,485.52012,445.4181)"
+       transform="matrix(0.64320023,0,0,0.65038988,486.73667,537.38826)"
        style="filter:url(#filter8651)">
       <g
          style="display:inline"
@@ -3942,7 +3942,7 @@
     <g
        id="computer"
        inkscape:label="Layer 1"
-       transform="matrix(1.1362711,0,0,1.1362711,43.731374,129.28793)"
+       transform="matrix(0.53333333,0,0,0.60000001,44.435211,155.48938)"
        style="filter:url(#filter8655)">
       <g
          transform="matrix(3.125,0,0,3.1216258,236.15799,-357.91815)"
@@ -4011,7 +4011,7 @@
     <g
        id="layer1-4"
        inkscape:label="Layer 1"
-       transform="matrix(1.6377524,0,0,1.4950939,471.36007,227.58486)"
+       transform="matrix(0.76970276,0,0,0.70265682,480.20163,321.33679)"
        style="filter:url(#filter8659)">
       <g
          transform="translate(-86.71068,-84.05382)"
@@ -4109,7 +4109,7 @@
     <g
        inkscape:label="Layer 1"
        id="grayball1"
-       transform="matrix(9.8977133,0,0,8.5966631,233.48845,13.09478)"
+       transform="matrix(5.054203,0,0,4.5346943,248.48648,93.606578)"
        style="filter:url(#filter8663)">
       <path
          transform="matrix(1.3595661,0,0,1.359566,1.8032547,0.8032547)"
@@ -4154,7 +4154,7 @@
     </g>
     <g
        id="layer1-9"
-       transform="matrix(4.0767054,0,0,3.9492608,28.479653,649.20444)"
+       transform="matrix(1.9138538,0,0,1.8540235,37.292216,745.60073)"
        style="filter:url(#filter8667)">
       <path
          id="path5168"
@@ -4172,7 +4172,7 @@
     </g>
     <g
        id="layer1-8"
-       transform="matrix(3.5508472,0,0,3.497186,45.071261,446.42344)"
+       transform="matrix(1.6667983,0,0,1.6416093,45.07126,536.07348)"
        style="filter:url(#filter8671)">
       <path
          id="path3456"
@@ -4191,7 +4191,7 @@
     <g
        inkscape:label="Layer 1"
        id="layer1-3"
-       transform="matrix(3.344349,0,0,3.5131075,276.387,444.88298)"
+       transform="matrix(1.567443,0,0,1.6465374,272.83113,536.43448)"
        style="filter:url(#filter8675)">
       <path
          id="path5472"
@@ -4385,7 +4385,7 @@
     <g
        inkscape:label="Layer 1"
        id="layer1-43"
-       transform="matrix(3.7588569,0,0,5.4485716,483.79787,611.32285)"
+       transform="matrix(1.7563999,0,0,2.5459524,485.53354,729.51523)"
        style="filter:url(#filter8679)">
       <path
          transform="matrix(1,0,0,1.651685,0.883883,-21.33488)"
@@ -4563,7 +4563,7 @@
     <g
        inkscape:label="Layer 1"
        id="grayinformation"
-       transform="matrix(5.4349703,0,0,5.4349703,264.74291,874.52809)"
+       transform="matrix(2.5510204,0,0,2.5510204,265.66579,965.89162)"
        style="filter:url(#filter8683)">
       <path
          id="path4138"
@@ -4634,7 +4634,7 @@
     </g>
     <g
        id="g5620"
-       transform="matrix(4.6368011,0,0,3.7056639,461.43494,873.33708)"
+       transform="matrix(2.1795259,0,0,1.7418454,475.54937,965.21506)"
        style="filter:url(#filter8687)">
       <path
          id="path6671"
@@ -4676,7 +4676,7 @@
     <g
        inkscape:label="Layer 1"
        id="default"
-       transform="matrix(10.652542,0,0,9.98957,487.8226,24.971427)"
+       transform="matrix(5,0,0,5,487.8226,104.80455)"
        style="filter:url(#filter8691)">
       <path
          style="opacity:0.2;fill:#848484;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -4709,7 +4709,7 @@
     </g>
     <g
        id="server"
-       transform="matrix(1.3315677,0,0,1.3315677,45.057795,230.02079)"
+       transform="matrix(0.625,0,0,0.625,45.057795,320.46146)"
        inkscape:label="#Layer_1"
        style="filter:url(#filter8695)">
       <g
@@ -4964,7 +4964,7 @@
     <g
        style="fill-rule:nonzero;stroke:#ffffff;stroke-width:0;stroke-miterlimit:4;filter:url(#filter8699)"
        id="konqueror"
-       transform="matrix(1.1836158,0,0,1.1836158,269.94444,235.89508)"
+       transform="matrix(0.55555556,0,0,0.55555556,269.94444,326.33576)"
        inkscape:label="#Layer_x0020_2">
       <path
          id="path6687"
@@ -6050,7 +6050,7 @@
     <g
        id="eletricsuperman"
        inkscape:label="Layer 1"
-       transform="matrix(3.5509227,0,0,4.0430387,268.02776,645.45676)"
+       transform="matrix(1.6667021,0,0,1.8976873,269.04481,745.1055)"
        style="filter:url(#filter8703)">
       <rect
          style="color:#000000;fill:url(#linearGradient175);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:block;overflow:visible"
@@ -6594,7 +6594,7 @@
     <g
        id="layer1-7"
        inkscape:label="Camada 1"
-       transform="matrix(3.5843836,0,0,3.6742367,44.979661,870.34459)"
+       transform="matrix(1.6816368,0,0,1.7237919,44.979661,963.96594)"
        style="filter:url(#filter8707)">
       <path
          transform="matrix(0.9794558,0,0,0.3529652,13.30308,20.613054)"
