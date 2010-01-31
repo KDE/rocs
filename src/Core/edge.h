@@ -135,8 +135,7 @@ public  slots:
     */
     void setValue (const QString& s) {
         _value = s;
-        emit updateNeeded();
-	void changed();
+	emit changed();
     }
 
     /*! returns the name attribute of the edge.
@@ -151,8 +150,7 @@ public  slots:
     */
     void setName (const QString& s) {
         _name = s;
-        emit updateNeeded();
-	void changed();
+	emit changed();
     }
 
     /*! gets the color attribute of the edge
@@ -167,8 +165,7 @@ public  slots:
     */
     void setColor(const QString& s) {
         _color = s;
-        emit updateNeeded();
-	void changed();
+	emit changed();
     }
 
     qreal width () const {
@@ -176,8 +173,7 @@ public  slots:
     }
     void setWidth(qreal w) {
         _width = w;
-        emit updateNeeded();
-	void changed();
+	emit changed();
     }
 
     const QString& style() const {
@@ -185,8 +181,7 @@ public  slots:
     }
     void setStyle(const QString& s) {
         _style = s;
-        emit updateNeeded();
-	void changed();
+	emit changed();
     }
     
     /** Add a property to this edge
@@ -255,13 +250,9 @@ private:
 signals:
     /*! emmited when this edge is removed. */
     void removed();
-
-    /*! emmited when any of the 2 nodes connected using this edge moves it's position. */
-    void posChanged();
-
-    void updateNeeded();
-    
+    /*! emmited when a node connected to this edge changes, or when this edge changes. */
     void changed();
 };
 
+typedef QList<Edge*> EdgeList;
 #endif

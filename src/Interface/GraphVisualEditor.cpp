@@ -79,7 +79,7 @@ void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
 }
 
 void GraphVisualEditor::releaseGraphDocument() {
-    _scene->clearGraph();
+    _scene->clear();
     int size = _graphDocument->size();
     for (int i = 0; i < size; i++) {
         _graphDocument->at(i)->disconnect(this);

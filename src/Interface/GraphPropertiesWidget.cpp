@@ -95,7 +95,7 @@ void GraphPropertiesWidget::on__graphNodeColor_activated(QColor c) {
 
 void GraphPropertiesWidget::on__graphOriented_toggled(bool b) {
     _graph->setDirected(b);
-    _mainWindow->scene()->updateDocument();
+    //_mainWindow->scene()->updateDocument();
     kDebug() << "Toggle";
 }
 

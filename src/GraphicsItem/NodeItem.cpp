@@ -1,254 +1,116 @@
-/* This file is part of Rocs,
-	 Copyright (C) 2008 by:
-	 Tomaz Canabrava <tomaz.canabrava@gmail.com>
-	 Ugo Sangiori <ugorox@gmail.com>
-
-	 Rocs is free software; you can redistribute it and/or modify
-	 it under the terms of the GNU General Public License as published by
-	 the Free Software Foundation; either version 2 of the License, or
-	 (at your option) any later version.
-
-	 Rocs is distributed in the hope that it will be useful,
-	 but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
-	 GNU General Public License for more details.
-
-	 You should have received a copy of the GNU General Public License
-	 along with Step; if not, write to the Free Software
-	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
-*/
-
-
 #include "NodeItem.h"
-#include <QGraphicsScene>
-#include <QGraphicsSceneMouseEvent>
-#include <QPainter>
-#include <QStyleOption>
-#include <QPen>
-#include <QBrush>
-#include <QThread>
-
-#include "node.h"
-#include "graph.h"
-#include "EdgeItem.h"
-#include "OrientedEdgeItem.h"
+#include <kstandarddirs.h>
+#include <QDir>
+#include <KGlobal>
 #include <KDebug>
-#include <GraphScene.h>
-#include <QTimeLine>
-#include <QGraphicsSimpleTextItem>
+#include <QGraphicsColorizeEffect>
 
-NodeItem::NodeItem(Node *node, QGraphicsItem *parent, bool fade)
-        : QObject(0), QGraphicsItem(parent) {
-    _node = node;
-    _opacity = 1;
-    _timeLine = 0;
-    connect(_node, SIGNAL(posChanged()), this, SLOT(updatePos()));
-    connect(_node, SIGNAL(updateNeeded()), this, SLOT(updateAttributes()));
-
-    QPointF pos( _node -> x() ,_node->y() );
-    setPos( pos );
-    _oldWidth = node->width();
+NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
+    _node = n;
+    _renderer = 0;
+    _iconPackage = _node->iconPackage();
+    _name = 0;
+    _value = 0;
+    _originalWidth = _node->width();
+    _colorizer = new QGraphicsColorizeEffect(this);
+    connect(n, SIGNAL(changed()), this, SLOT(setupNode()));
+    connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
+    setupNode();
     setZValue(1);
-    setFlag(ItemIsSelectable);
-    _name = new QGraphicsSimpleTextItem(this);
-    _value = new QGraphicsSimpleTextItem(this);
-
-    connect (_node, SIGNAL(removed()), this, SLOT(deleteItem()));
-    if (fade) {
-        _opacity = 0;
-        _timeLine = new QTimeLine(500, this);
-        _timeLine->setFrameRange(0, 50);
-        connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(removeOpacity()));
-        _timeLine->start();
-    }
-
-    setupTextAttributes();
-}
-
-void NodeItem::setupTextAttributes() {
-    qreal x1;
-    qreal y1 = boundingRect().y() + (boundingRect().height()/2) - 10;
-    QString name = _node->name();
-    QString value = _node->value();
-
-    if (_node -> showName() && ! name.isEmpty()) {
-        _name->show();
-        _name->setText(name);
-        if (name.length() == 1) {
-            x1 = boundingRect().x() + boundingRect().width()/2;
-            _name->setPos(x1-6, y1);
-        }
-        else {
-            x1 = boundingRect().x() + boundingRect().width() + 5;
-            _name->setPos(x1,y1);
-        }
-    }else{
-	_name->hide();
-    }
-
-    x1 = boundingRect().x() + boundingRect().width() + 5;
-    if (_node->showValue() && ! value.isEmpty()) {
-        _value->setText(value);
-        _value->setPos(x1, (name.length() == 1)? y1 : y1 + 12);
-	_value->show();
-    }else{
-	_value->hide();
-    }
-}
-
-void NodeItem::updateAttributes() {
-    setupTextAttributes();
-    update();
-}
-
-NodeItem::~NodeItem() {
+    kDebug() << "Node Item Created";
 
 }
 
-void NodeItem::removeOpacity() {
-    if ( _opacity  < 1.0 ) _opacity += 0.1;
-    if ( _opacity  > 1.0 ) _opacity = 1.0;
-    update();
+NodeItem::~NodeItem(){
 }
 
-void NodeItem::addOpacity() {
-    kDebug() << "Removing Node." << _oldWidth;
-    if ( _opacity > 0.0 ) _opacity -= 0.1;
-    if ( _opacity < 0.0 ) _opacity = 0.0;
-    update();
+void NodeItem::setupNode(){
+    updateRenderer();
+    updateIcon();
+    updateName();
+    updateValue();
+    updateColor();
+    updateSize();
+    updatePos();
 }
 
-void NodeItem::deleteItem() {
-    _node = 0;
-    if ( qobject_cast<GraphScene*>(scene())->fade() ){
-      if (!_timeLine ) delete _timeLine;
-      _timeLine = new QTimeLine(250, this);
-      _timeLine->setFrameRange(0, 25);
-      connect(_timeLine, SIGNAL(finished()), this, SLOT(removeFromScene()));
-      connect(_timeLine, SIGNAL(frameChanged(int)), this, SLOT(addOpacity()));
-      _timeLine->start();
-    }
-    else{
-      deleteLater();
-    }
+void NodeItem::updatePos(){
+   // setting the positions
+   int fixPos = - boundingRect().width()/2;
+   setPos(_node->x() + fixPos, _node->y() + fixPos);
+   kDebug() << "setting position to" << _node->x() << _node->y();
 }
 
-void NodeItem::removeFromScene() {
-    qobject_cast<GraphScene*>(scene())->removeGItem(this);
-    deleteLater();
+void NodeItem::updateSize(){
+  if (_node->width() == _width) return;
+  resetMatrix();
+  _width = _node->width();
+  scale(_node->width(),_node->width());
+  kDebug() << "Scaling in a factor of" << _node->width();
 }
 
-QRectF NodeItem::boundingRect() const {
-    qreal x1 = -12, y1 = -12, x2 = 25, y2 = 25;
-    if (( _node && _node->begin() ) || ( _removingBeginFlag )) {
-        x1 -= 40;
-        x2 += 40;
-    }
-    return QRectF(x1 * _oldWidth, y1* _oldWidth, x2 * _oldWidth, y2 * _oldWidth);
+void NodeItem::updateRenderer(){
+   if ( ! _renderer ){
+      _renderer = new QSvgRenderer(_node->iconPackage());
+      setSharedRenderer(_renderer);
+      kDebug() << "New render created";
+   }else if (_iconPackage != _node->iconPackage()){
+     _renderer -> load(_node->iconPackage());
+     setSharedRenderer(_renderer);
+     kDebug() << "Using existing renderer";
+   }
 }
 
-QPainterPath NodeItem::shape() const {
-    QPainterPath path;
-    qreal z = _node->width();
-    path.addEllipse(-10 * z, -10 * z, 20 * z, 20 * z);
-    return path;
+void NodeItem::updateIcon(){
+   //creating or refreshing the icon
+   if ( elementId().isEmpty() ){
+      _element = _node->icon();
+      setElementId(_element);
+      kDebug() << "Creating initial icon";
+   }else if( elementId() != _node->icon()){
+      _element = _node->icon();
+      setElementId(_element);
+      kDebug() << "Updating existing icon";
+   }
 }
 
-void NodeItem::startUpSizing() {
-    _isUpSizing = 1;
-    _oldWidth = _node->width() + 0.25;
+void NodeItem::updateColor(){
+   // coloring
+   _colorizer->setColor( _node->color());
+   setGraphicsEffect(_colorizer);
+   kDebug() << "setting the color to " << _node->color();
 }
 
-void NodeItem::endUpSizing() {
-    _isUpSizing = 0;
-    _oldWidth = _node->width();
+void NodeItem::updateName(){
+   // setting the name
+   if ( !_name ){
+    _name = new QGraphicsTextItem(_node->name(), this);
+    kDebug() << "Setting the name to" << _node->name();
+   }else if (_name->toPlainText() != _node->name()){
+    _name->setPlainText(_node->name());
+    kDebug() << "Updating the name to" << _node->name();
+   }
+   if ( ! _node->showName() ){
+    _name->hide();
+   }else{
+    _name->show();
+   }
+   _name->setPos(boundingRect().width() - _name->boundingRect().width(), 75);
 }
 
-void NodeItem::startDownSizing() {
-    _isDownSizing = 1;
-    _oldWidth = _node->width();
-
+void NodeItem::updateValue(){
+   // setting the value
+   if ( !_value ){
+    _value = new QGraphicsTextItem(_node->value().toString(), this);
+    kDebug() << "Setting the value to" << _node->value().toString();
+   }else if (_value->toPlainText() != _node->value().toString()){
+    _value ->setPlainText(_node->value().toString());
+    kDebug() << "updating the value to" << _node -> value().toString();
+   }
+   if (! _node->showValue()){
+    _value->hide();
+   }else{
+    _value->show();
+   }
+   _value->setPos(100, 100);
 }
-void NodeItem::endDownSizing() {
-    _isDownSizing = 0;
-    _oldWidth = _node->width();
-}
-
-void NodeItem::eraseNode(QPainter *p) {
-    if (_isDownSizing) {
-        QColor c = _color;
-        c.setAlphaF(0);
-        p->setPen(QPen(c));
-        p->setBrush(QBrush(c));
-        p->drawRect(QRectF(-11 * _oldWidth, -11 * _oldWidth, 24 * _oldWidth, 24 * _oldWidth));
-    }
-}
-
-void NodeItem::drawSelectRectangle(QPainter *p) {
-    if (isSelected()) {
-        QPen pen(Qt::black, 1, Qt::DotLine);
-        p->setBrush(QBrush());
-        p->setPen(pen);
-        p->drawRect(QRectF(-11 * _oldWidth , -11 * _oldWidth , 24 * _oldWidth , 24 * _oldWidth ));
-    }
-}
-
-void NodeItem::drawBeginArrow(QPainter *p) {
-    if ( _node && _node->begin() ) {
-        if (_removingBeginFlag == false) {
-            _removingBeginFlag = true;
-        }
-        QPen pen(Qt::black, 1, Qt::SolidLine);
-        p->setPen(pen);
-        p->setBrush(QBrush());
-        p->drawLine(-20*_oldWidth, -10*_oldWidth, 0, 0);
-        p->drawLine(-52*_oldWidth, 0, 0, 0);
-        p->drawLine(-20*_oldWidth, 10*_oldWidth, 0, 0);
-    }
-    else if (_removingBeginFlag) {
-        _removingBeginFlag = false;
-    }
-}
-
-void NodeItem::drawNode(QPainter *p) {
-    QRadialGradient gradient(-3 * _oldWidth, -3 * _oldWidth, 10 * _oldWidth);
-    gradient.setColorAt(0, _color.light(240));
-    gradient.setColorAt(1, _color);
-    p->setBrush(gradient);
-    p->setPen(QPen());
-    p->drawEllipse(-10 * _oldWidth, -10 * _oldWidth, 20 * _oldWidth, 20 * _oldWidth);
-}
-
-void NodeItem::drawEnd(QPainter *p) {
-    if (_node && _node->end() ) {
-        QColor c(Qt::black);
-        c.setAlphaF(_opacity);
-        p->setPen(c);
-        p->drawEllipse(-7 * _oldWidth, -7 * _oldWidth, 15 * _oldWidth, 15 * _oldWidth);
-    }
-}
-void NodeItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget *) {
-    if (_node) {
-        _color = _node->color();
-    }
-
-    drawSelectRectangle(painter);
-    drawBeginArrow(painter);
-
-    painter->setPen(Qt::NoPen);
-    _color.setAlphaF(_opacity);
-    drawNode(painter);
-    drawEnd(painter);
-}
-
-void NodeItem::updatePos() {
-    setPos( QPointF(_node->x(), _node->y() ) );
-}
-
-void NodeItem::remove() {
-    if (scene() == 0) return;
-    dynamic_cast<GraphScene*>(scene())->removeGItem(this);
-    deleteLater();
-}
-
-#include "NodeItem.moc"

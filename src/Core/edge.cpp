@@ -33,16 +33,16 @@ Edge::Edge(Graph *parent, Node *from, Node *to) :
     _color =_graph->edgeDefaultColor();
 
     if ( from == to ) {
-        connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
+        connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
         from -> addSelfEdge(this);
     }
     else {
-        connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
+        connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
         from -> addOutEdge(this);
-        connect(to, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
+        connect(to, SIGNAL(changed()), this, SIGNAL(changed()));
         to -> addInEdge(this);
     }
-    connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(updateNeeded()));
+    connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
 
     _relativeIndex = _to -> edges(_from).size();
     _showName = true;
@@ -79,13 +79,13 @@ bool Edge::showValue() {
 
 void Edge::hideName(bool b) {
     _showName = b;
-    emit updateNeeded();
+    emit changed();
     kDebug() << "Hide Name: " << b;
 }
 
 void Edge::hideValue(bool b) {
     _showValue = b;
-    emit updateNeeded();
+    emit changed();
     kDebug() << "Hide Value: " << b;
 }
 

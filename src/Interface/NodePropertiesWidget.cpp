@@ -35,7 +35,7 @@ void NodePropertiesWidget::reflectAttributes(){
     _x->setValue(_node->x());
     _y->setValue(_node->y());
     _name->setText(_node->name());
-    _value->setText(_node->value());
+    _value->setText(_node->value().toString());
     _width->setValue(_node->width());
     _showName->setChecked(!_node->showName());
     _showValue->setChecked(!_node->showValue());
@@ -106,21 +106,7 @@ void NodePropertiesWidget::on__width_valueChanged(double i) {
     if (! _node ) {
         return;
     }
-
-    qreal oldW = _node->width();
-    if (oldW < i) {
-        _item->startUpSizing();
-    }
-    else {
-        _item->startDownSizing();
-    }
     _node->setWidth(i);
-    if (oldW < i) {
-        _item->endUpSizing();
-    }
-    else {
-        _item->endDownSizing();
-    }
 }
 
 void NodePropertiesWidget::on__addProperty_clicked(){

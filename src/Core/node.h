@@ -33,7 +33,9 @@
 #include "qtScriptBackend.h"
 #endif
 
-class Edge;
+#include "edge.h"
+class Node;
+typedef QList<Node*> NodeList;
 
 class Node : public QObject {
     Q_OBJECT
@@ -44,8 +46,10 @@ class Node : public QObject {
     Q_PROPERTY(QString color READ color WRITE setColor)
     Q_PROPERTY(bool begin READ begin WRITE setBegin)
     Q_PROPERTY(bool end READ end WRITE setEnd)
-    Q_PROPERTY(QString value READ value WRITE setValue)
-
+    Q_PROPERTY(QVariant value READ value WRITE setValue)
+    Q_PROPERTY(QString iconPackage READ iconPackage WRITE setIconPackage)
+    Q_PROPERTY(QString icon READ icon WRITE setIcon)
+    
 public:
     Node(Graph *parent);
     ~Node();
@@ -53,7 +57,7 @@ public:
     void addOutEdge(Edge *e);
     void addSelfEdge(Edge *e);
     void removeEdge(Edge *e, int edgeList);
-    void removeEdge(Edge *e, QList<Edge*> *list);
+    void removeEdge(Edge *e, EdgeList &list);
     void remove();
     enum EdgeLists {In, Out, Self};
     void startChange();
@@ -67,18 +71,18 @@ public:
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
     void setEngine(	QtScriptBackend *_engine );
-    QScriptValue createScriptArray(QList<Edge*> list);
+    QScriptValue createScriptArray(EdgeList list);
 #endif
     
 
 
 public  slots:
-    QList<Node*> adjacent_nodes() const;
-    QList<Edge*> adjacent_edges() const;
-    QList<Edge*> edges(Node *n);
-    QList<Edge*> in_edges() const;
-    QList<Edge*> out_edges() const;
-    QList<Edge*> self_edges() const;
+    NodeList adjacent_nodes() const;
+    EdgeList adjacent_edges() const;
+    EdgeList edges(Node *n);
+    EdgeList in_edges() const;
+    EdgeList out_edges() const;
+    EdgeList self_edges() const;
 
     void setX(qreal x);
     void setY(qreal y);
@@ -95,8 +99,12 @@ public  slots:
     bool end() const;
     void setBegin(bool begin = true);
     void setEnd(bool end = true);
-    void setValue(const QString& s);
-    const QString& value() const;
+    void setValue(const QVariant v);
+    const QVariant value() const;
+    void setIcon(const QString& s);
+    const QString& icon() const;
+    const QString& iconPackage() const;
+    void setIconPackage(const QString& s);
     
     /** Add a property to this node
     * @param property Name of property
@@ -122,29 +130,32 @@ public  slots:
 
     Edge* addEdge(Node* to);
     
-
-
 private:
-    QList<Edge*> _in_edges;
-    QList<Edge*> _out_edges;
-    QList<Edge*> _self_edges;
-    void empty(QList<Edge*> *list);
+    EdgeList _in_edges;
+    EdgeList _out_edges;
+    EdgeList _self_edges;
+    void empty(EdgeList &list);
 
     //! fixed properties
     qreal _x;
     qreal _y;
     qreal _width;
-    QString _name;
-    QString _color;
+    
     bool _begin;
     bool _end;
-    QString _value;
     bool _changing;
-
     bool _showName;
     bool _showValue;
+    
     Graph *_graph;
-
+    
+    QString _name;
+    QString _color;
+    QString _iconpackage;
+    QString _icon;
+    
+    QVariant _value;
+    
 #ifdef USING_QTSCRIPT
     QScriptValue _scriptvalue;
     QtScriptBackend *_engine;
@@ -152,9 +163,8 @@ private:
 
 signals:
     void removed();
-    void updateNeeded();
-    void posChanged();
     void changed();
 };
+
 
 #endif

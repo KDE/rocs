@@ -43,6 +43,12 @@ public:
     GraphScene *scene() const;
     QGraphicsView *view() const;
     MainWindow *mainWindow();
+    
+    /*! as the name says, it removes the current GraphDocument
+    from the screen and releases it from the evil hands of GraphEditWidget.*/
+    
+    void releaseGraphDocument();
+    
 public slots:
     /*! set the current selected Graph.
     	\param graph the new active graph.
@@ -57,10 +63,6 @@ private:
     /*! as the name says, draw a graph on scene.
     \param g the graph to be drawn. */
     void drawGraphOnScene( Graph *g );
-
-    /*! as the name says, it removes the current GraphDocument
-    from the screen and releases it from the evil hands of GraphEditWidget.*/
-    void releaseGraphDocument();
 
     QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
 

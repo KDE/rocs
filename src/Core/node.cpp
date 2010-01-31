@@ -21,6 +21,8 @@
 #include "edge.h"
 #include "graph.h"
 #include <KDebug>
+#include <KGlobal>
+#include <kstandarddirs.h>
 
 #include "dinamicpropertieslist.h"
 
@@ -37,17 +39,20 @@ Node::Node(Graph *parent) : QObject(parent) {
     _color = _graph->nodeDefaultColor();
     _changing = false;
     _value = '0';
+    _icon = "default";
+    _iconpackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
+    kDebug() << "Node successfully created" << _iconpackage;
 }
 
 Node::~Node() {
-    empty(&_in_edges);
-    empty(&_out_edges);
-    empty(&_self_edges);
+    empty(_in_edges);
+    empty(_out_edges);
+    empty(_self_edges);
     emit removed();
 }
 
-void Node::empty(QList<Edge*> *list) {
-    foreach(Edge *e, (*list) ) {
+void Node::empty(EdgeList &list) {
+    foreach(Edge *e, list ) {
         e->remove();
     }
 }
@@ -62,13 +67,26 @@ bool Node::showValue() {
 
 void Node::hideName(bool b) {
     _showName = b;
-    emit updateNeeded();
+    emit changed();
 }
 
 void Node::hideValue(bool b) {
     _showValue = b;
-    emit updateNeeded();
+    emit changed();
 }
+
+void Node::setIcon(const QString& s){
+    _icon = s;
+    emit changed();
+}
+
+void Node::setIconPackage(const QString& s){
+    _iconpackage = s;
+}
+
+const QString& Node::icon() const { return _icon; }
+
+const QString& Node::iconPackage() const { return _iconpackage; }
 
 QList<Node*> Node::adjacent_nodes() const
 {
@@ -92,27 +110,18 @@ QList<Node*> Node::adjacent_nodes() const
 }
 
 
-QList<Edge*> Node::adjacent_edges() const
+EdgeList Node::adjacent_edges() const
 {
-    QList<Edge*> adjacent;
+    EdgeList adjacent;
 
-
-    foreach(Edge* e, _out_edges) {
-        adjacent.append( e );
-    }
-
-
+    adjacent << _out_edges;
+    
     if ( _graph -> directed() ) {
-        foreach(Edge *e, _self_edges) {
-            adjacent.append( e );
-        }
-        return adjacent;
+        adjacent << _self_edges;
+    }else{
+      adjacent << _in_edges;
     }
-
-    foreach(Edge *e, _in_edges) {
-        adjacent.append( e );
-    }
-
+    
     return adjacent;
 }
 
@@ -128,52 +137,38 @@ void Node::addSelfEdge(Edge *e) {
     _self_edges.append( e );
 }
 
-QList<Edge*> Node::in_edges() const {
+EdgeList Node::in_edges() const {
     return _in_edges;
 }
 
-QList<Edge*> Node::out_edges() const {
+EdgeList Node::out_edges() const {
     return _out_edges;
 }
 
-QList<Edge*> Node::self_edges() const {
+EdgeList Node::self_edges() const {
     return _self_edges;
 }
 
 Edge* Node::addEdge(Node* to) {
-
     return _graph->addEdge(this, to);
 }
 
 void Node::removeEdge(Edge *e, int edgeList) {
     switch (edgeList) {
-    case In  :
-        removeEdge(e, &_in_edges);
-        break;
-    case Out :
-        removeEdge(e, &_out_edges);
-        break;
-    case Self:
-        removeEdge(e, &_self_edges);
-        break;
+    case In  : removeEdge(e, _in_edges);    break;
+    case Out : removeEdge(e, _out_edges);   break;
+    case Self: removeEdge(e, _self_edges);  break;
     }
 }
 
-void Node::removeEdge(Edge *e, QList<Edge*> *list) {
-    foreach(Edge* tmp, (*list) ) {
-        if (tmp == e) {
-            (*list).removeOne( e );
-        }
-    }
+void Node::removeEdge(Edge* e, EdgeList &list) {
+      if (list.contains(e)) list.removeOne(e);
 }
 
-QList<Edge*> Node::edges(Node *n) {
-    QList<Edge*> list;
+EdgeList Node::edges(Node *n) {
+    EdgeList list;
     if (n == this) {
-        foreach(Edge *tmp, _self_edges) {
-            list.append(tmp);
-        }
-        return list;
+        return _self_edges;
     }
     foreach (Edge *tmp, _out_edges) {
         if (tmp->to() == n) {
@@ -196,7 +191,6 @@ void Node::remove() {
 void Node::setX(qreal x) {
     _x = x;
     if (! _changing) {
-        emit posChanged();
 	emit changed();
     }
 }
@@ -206,7 +200,6 @@ qreal Node::x() const {
 void Node::setY(qreal y) {
     _y  = y;
     if (! _changing) {
-        emit posChanged();
 	emit changed();
     }
     
@@ -215,7 +208,6 @@ void Node::setY(qreal y) {
 void Node::setWidth(qreal w) {
     _width = w;
     if (! _changing) {
-        emit updateNeeded();
 	emit changed();
         kDebug() << "Updating node drawing";
     }
@@ -226,7 +218,6 @@ void Node::setPos(qreal x, qreal y) {
     _x = x;
     _y = y;
     if (! _changing) {
-        emit posChanged();
 	emit changed();
     }
     
@@ -243,7 +234,6 @@ qreal Node::width() const {
 void Node::setColor(const QString& s) {
     _color = s;
     if (! _changing) {
-        emit updateNeeded();
 	emit changed();
     }
 }
@@ -253,7 +243,6 @@ const QString& Node::color() const {
 void Node::setName(const QString& s) {
     _name = s;
     if (! _changing) {
-        emit updateNeeded();
 	emit changed();
     }
 }
@@ -278,7 +267,6 @@ void Node::setBegin(bool begin) {
     }
 
     if (! _changing) {
-        emit updateNeeded();
 	emit changed();
     }
 }
@@ -292,7 +280,6 @@ void Node::setEnd(bool end) {
         _graph->removeEnd(this);
     }
     if (! _changing) {
-        emit updateNeeded();
 	emit changed();
     }
 }
@@ -305,13 +292,12 @@ bool Node::end() const {
     return _end;
 }
 
-const QString& Node::value() const {
+const QVariant Node::value() const {
     return _value;
 }
-void  Node::setValue(const QString& s) {
+void  Node::setValue(QVariant s) {
     _value = s;
     if (! _changing) {
-        emit updateNeeded();
 	emit changed();
     }
 }
@@ -322,10 +308,8 @@ void Node::startChange() {
 
 void Node::endChange() {
     _changing = false;
-    emit updateNeeded();
     emit changed();
 }
-
 
 void Node::addDinamicProperty(QString property, QVariant value){
     this->setProperty(property.toUtf8(), value);
@@ -338,7 +322,6 @@ void Node::removeDinamicProperty(QString property){
     this->addDinamicProperty(property.toUtf8(), QVariant::Invalid);
     DinamicPropertiesList::New()->removeProperty(this, property);
 }
-
 
 #ifdef USING_QTSCRIPT
 void Node::self_remove() {
@@ -364,31 +347,31 @@ QScriptValue Node::adj_nodes() {
 }
 
 QScriptValue Node::adj_edges() {
-    QList<Edge*> list = adjacent_edges();
+    EdgeList list = adjacent_edges();
     return createScriptArray(list);
 }
 
 QScriptValue Node::input_edges() {
-    QList<Edge*> list = in_edges();
+    EdgeList list = in_edges();
     return createScriptArray(list);
 }
 
 QScriptValue Node::output_edges() {
-    QList<Edge*> list = out_edges();
+    EdgeList list = out_edges();
     return createScriptArray(list);
 }
 
 QScriptValue Node::loop_edges() {
-    QList<Edge*> list = self_edges();
+    EdgeList list = self_edges();
     return createScriptArray(list);
 }
 
 QScriptValue Node::connected_edges(Node *n) {
-    QList<Edge*> list = edges(n);
+    EdgeList list = edges(n);
     return createScriptArray(list);
 }
 
-QScriptValue Node::createScriptArray(QList<Edge*> list) {
+QScriptValue Node::createScriptArray(EdgeList list) {
     QScriptValue array = _engine->newArray();
     foreach(Edge* e, list) {
         array.property("push").call(array, QScriptValueList() << e->scriptValue());

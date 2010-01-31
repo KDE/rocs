@@ -109,9 +109,9 @@ void GraphScene::connectGraphSignals(Graph *g){
 	connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)));
 }
 
-QGraphicsItem *GraphScene::createNode(Node *n, bool f) {
-    NodeItem *nItem = new NodeItem(n, 0, f);
-    insertGraphItem(n->graph(), nItem);
+QGraphicsItem *GraphScene::createNode(Node *n) {
+    NodeItem *nItem = new NodeItem(n);
+    addItem(nItem);
     kDebug() << "Node Item Created";
     return nItem;
 }
@@ -125,7 +125,7 @@ QGraphicsItem *GraphScene::createEdge(Edge *e) {
       edgeItem = new OrientedEdgeItem(e);
     }
 
-    insertGraphItem(e->graph(), edgeItem);
+    addItem(edgeItem);
     kDebug() << "Edge Created";
     return edgeItem;
 }
@@ -141,17 +141,17 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
     if (wheelEvent->orientation() == Qt::Vertical) {
         if (numDegrees > 0)
         {
-            nitem->startUpSizing();
-            movableNode->setWidth(movableNode->width()+0.25);
-            nitem->update();
-            nitem->endUpSizing();
+            //nitem->startUpSizing();
+            //movableNode->setWidth(movableNode->width()+0.25);
+            //nitem->update();
+            //nitem->endUpSizing();
         }
         else if (movableNode->width() > 0.5)
         {
-            nitem->startDownSizing();
-            movableNode->setWidth(movableNode->width()-0.25);
-            nitem->update();
-            nitem->endDownSizing();
+            //nitem->startDownSizing();
+            //movableNode->setWidth(movableNode->width()-0.25);
+            //nitem->update();
+            //nitem->endDownSizing();
         }
     }
     wheelEvent->accept();
@@ -166,10 +166,7 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
         NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
         if (!nitem) return;
         Node *movableNode = nitem->node();
-        nitem->startDownSizing();
         movableNode->setWidth(1);
-        nitem->update();
-        nitem->endDownSizing();
     }
     else if( mouseEvent->button() == Qt::RightButton){
 	QGraphicsItem *i = itemAt(mouseEvent->scenePos());
@@ -197,56 +194,19 @@ void GraphScene::keyPressEvent(QKeyEvent *) {
 
 }
 
-void GraphScene::insertGraphItem(Graph *g, QGraphicsItem *item) {
-    addItem(item);
-    _hashGraphs.insert(g, item);
-}
-
-void GraphScene::clearGraph() {
-    clear();
-    _hashGraphs.clear();
-}
-
-void GraphScene::removeGItem(QGraphicsItem *gItem) {
-  if (! _graphDocument ) return;
-  
-  int size = _graphDocument->size();
-  
-  for( int i = 0; i < size; i++){
-    if (! _hashGraphs.empty() ){
-      _hashGraphs.remove(_graphDocument->at(i), gItem);
-    }
-  }
-  removeItem(gItem);
-}
-
 void GraphScene::updateGraph(Graph *g) {
-/* This updates a particular graph by removing all nodes and edges associated to it
-   and redrawn it on screen. now updateDocument is calling clearGraph() that will do the same thing, but for *all* graphs at the same time, but actually working. */
-
-/*
-    QList<QGraphicsItem*> items = _hashGraphs.values(g);
-    kDebug() << "Quantity of items to be removed." << items.size();
-    foreach(QGraphicsItem *i, items) {
-        removeItem(i);
-        delete i;
-    }
-    kDebug() << "Items removed";
-
-    _hashGraphs.remove(g); */
-
     kDebug() << "Removed Graph from the hash";
 
     kDebug() << "Creating" << g->nodes().size() << "nodes";
     QList<Node*> nodes = g->nodes();
     foreach(Node *n, nodes) {
-        createNode(n, false);
+        n->setName(n->name()); // just a dummy update trigger;
     }
 
     kDebug() << "Creating" << g->nodes().size() << "edges";
     QList<Edge*> edges = g->edges();
     foreach(Edge *e, edges) {
-        createEdge( e);
+       e->setName(e->name()); // just a dummy update trigger.
     }
 }
 
@@ -256,7 +216,7 @@ void GraphScene::updateDocument() {
         return;
     }
     
-    clearGraph();
+    clear();
     kDebug() << "Graph Document Size: " << _graphDocument->size();
     int size = _graphDocument->size();
 

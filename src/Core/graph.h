@@ -34,10 +34,8 @@
 #include <klocalizedstring.h>
 
 #include "node.h"
-// #include "graphGroups.h"
+#include "edge.h"
 
-
-class Edge;
 class QtScriptBackend;
 class GraphGroup;
 class GraphDocument;
@@ -124,19 +122,19 @@ public  slots:
     /*! all nodes are accessible from that method.
       \return the QList containing all the  nodes.
     */
-    QList<Node*> nodes() const;
+    NodeList nodes() const;
 
 
     /*! all edges are accessible from that method.
       \return the QList containing all the edges.
     */
-    QList<Edge*> edges() const;
+    EdgeList edges() const;
 
 
     /*! all groups are accessible from that method.
       \return the QList containing all the  groups.
     */
-    QList<GraphGroup*> groups() const;
+    //QList<GraphGroup*> groups() const;
 
     /*! get the node marked as 'begin'
     \return the 'begin' node. (node.begin == true), NULL if there isn't a begin node.
@@ -159,7 +157,7 @@ public  slots:
     \p to the 'to' node.
     \return the newly created edge.
     */
-    Edge* addEdge(Node* from,Node* to);
+    Edge* addEdge(Node* from, Node* to);
 
     /*! creates a new edge
     \p name_from the name of the node that will be used as 'from'
@@ -284,14 +282,18 @@ signals:
     
 private:
     bool _directed;
-    QList<Node*> _nodes;
-    QList<Edge*> _edges;
-    QList<GraphGroup*> _graphGroups;
-    qreal _top, _bottom, _left, _right;
+    NodeList _nodes;
+    EdgeList _edges;
+    //QList<GraphGroup*> _graphGroups;
+    qreal _top;
+    qreal _bottom;
+    qreal _left;
+    qreal _right;
+    
     QPointF _relativeCenter;
     QString _name;
     Node* _begin;
-    QList<Node*> _ends;
+    NodeList _ends;
     QString _nodeDefaultColor;
     QString _edgeDefaultColor;
     bool _automate;

@@ -45,7 +45,6 @@ public:
     void updateDocument();
     void setActiveGraph(Graph *g);
     void setActiveGraphDocument(GraphDocument *gd);
-    void insertGraphItem(Graph *g, QGraphicsItem *item);
     void clearGraph();
 
     void setHideEdges(bool h);
@@ -56,8 +55,7 @@ public:
     void hideGraph( Graph *g, bool visibility);
     
 public slots:
-    void removeGItem(QGraphicsItem *i);
-    QGraphicsItem* createNode( Node *n, bool f = true);
+    QGraphicsItem* createNode( Node* n);
     QGraphicsItem* createEdge( Edge *e);
     void connectGraphSignals(Graph *g);
     

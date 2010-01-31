@@ -157,7 +157,7 @@ void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/) {
 }
 
 void OrientedEdgeItem::remove() {
-    dynamic_cast<GraphScene*>(scene())->removeGItem(this);
+    scene()->removeItem(this);
     deleteLater();
 }
 

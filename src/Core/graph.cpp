@@ -143,16 +143,20 @@ void Graph::remove(Edge *e) {
 
 void Graph::setDirected(bool directed) {
     _directed = directed;
-    if (!_directed) {
-        return;
-    }
+  //  if (!_directed) {
+  //      return;
+  //  }
 
+    kDebug() << "directed is " << directed;
     foreach(Node *n1, _nodes) {
         foreach(Node *n2, n1->adjacent_nodes()) {
-            if ((n1->edges(n2).size() == 1) && (n1 != n2)) {
+	  
+	    // do not permit loop nodes while changing graph's state.
+            if ( (n1->edges(n2).size() == 1) && (n1 != n2) ) {
                 continue;
             }
 
+	    // this looks wrong.
             QList<Edge*> listEdges = n1->edges(n2);
             if (n1 != n2) {
                 listEdges.removeFirst();
@@ -169,13 +173,13 @@ void Graph::setDirected(bool directed) {
 GraphGroup* Graph::addGroup(const QString& name) {
     GraphGroup *gg = new GraphGroup();
     gg->setName(name);
-    _graphGroups.append(gg);
+//    _graphGroups.append(gg);
     return gg;
 }
 
-QList<GraphGroup*> Graph::groups() const {
-    return _graphGroups;
-}
+//QList<GraphGroup*> Graph::groups() const {
+//    return _graphGroups;
+//}
 
 void Graph::calcRelativeCenter() {
     /*
@@ -338,13 +342,13 @@ void Graph::setEngine(	QtScriptBackend *engine ) {
     foreach(Edge *e, _edges) {
         e->setEngine(engine);
     }
-    foreach(GraphGroup *g, _graphGroups) {
-        QScriptValue array = _engine->newArray();
-        foreach(Node* n, (*g) ) {
-            array.property("push").call(array, QScriptValueList() << n->scriptValue());
-        }
-        _engine->globalObject().setProperty(g->name(), array);
-    }
+//    foreach(GraphGroup *g, _graphGroups) {
+//        QScriptValue array = _engine->newArray();
+//        foreach(Node* n, (*g) ) {
+//            array.property("push").call(array, QScriptValueList() << n->scriptValue());
+//        }
+//        _engine->globalObject().setProperty(g->name(), array);
+//    }
 }
 
 QScriptValue Graph::list_nodes() {
