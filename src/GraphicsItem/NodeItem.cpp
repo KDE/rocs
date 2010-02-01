@@ -19,10 +19,12 @@ NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
     setupNode();
     setZValue(1);
+    
     kDebug() << "Node Item Created";
 }
 
 void NodeItem::setupNode(){
+    
     updateRenderer();
     updateIcon();
     updateName();
@@ -35,15 +37,17 @@ void NodeItem::setupNode(){
 
 void NodeItem::updatePos(){
    // setting the positions
-   int fixPos = - boundingRect().width()/2;
-   setPos(_node->x() + fixPos, _node->y() + fixPos);
+   
+   int fixPos = boundingRect().width()/2;
+   setPos(_node->x() - fixPos, _node->y() - fixPos);
 }
 
 void NodeItem::updateSize(){
-  if (_node->width()-0.5 == _width) return;
+  if (_node->width() == _width) return;
   resetMatrix();
-  _width = _node->width() - 0.5;
-  scale(_node->width()-0.5,_node->width()-0.5);
+  _width = _node->width();
+  setScale(_node->width());
+   kDebug() << "Scale" << scale() << "Node Width" << _node->width() << "Shét" <<  _node->width() - 0.5;
 }
 
 void NodeItem::updateRenderer(){
@@ -61,9 +65,11 @@ void NodeItem::updateIcon(){
    if ( elementId().isEmpty() ){
       _element = _node->icon();
       setElementId(_element);
+      setTransformOriginPoint(boundingRect().width()/2, boundingRect().width()/2);
    }else if( elementId() != _node->icon()){
       _element = _node->icon();
       setElementId(_element);
+      setTransformOriginPoint(boundingRect().width()/2, boundingRect().width()/2);
    }
 }
 
