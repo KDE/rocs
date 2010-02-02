@@ -8,6 +8,10 @@ add_subdirectory(Interface)
 add_subdirectory(UndoRedo)
 add_subdirectory(Tests)
 
+
+add_subdirectory(Plugins)
+
+
 set(rocs_SRCS  Main.cpp )
 
 # Since the JavaScript supports came from QtScript... 
@@ -23,6 +27,7 @@ target_link_libraries(rocs
   #  gvc 
   #  graph 
   # cdt
+  ToolsPluginManager
   librocsui
   librocsgraphics
   librocsmodel
@@ -40,4 +45,3 @@ install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs  )
 install( FILES rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
-

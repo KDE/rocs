@@ -21,6 +21,9 @@
 	<Action name="save-script-as" />
       </Menu>
     </Menu>
+    <Menu name="tools">
+      <Action name="make_complete" />
+    </Menu>
   </MenuBar>
  
   <ToolBar name="main" >

@@ -71,6 +71,7 @@
 #include <qscriptenginedebugger.h>
 #include <QActionGroup>
 #include "threadScriptExecution.h"
+#include "../Plugins/toolspluginmanager.h"
 
 MainWindow* mainWindow = 0;
 
@@ -81,6 +82,12 @@ MainWindow::MainWindow() :
     _tScriptExecution=0;
     setObjectName ( "Rocs" );
 
+        
+    kDebug() << "############ Load Plugins ###############";
+    ToolsPluginManager::New()->loadPlugins();
+    
+    kDebug() << ToolsPluginManager::New()->pluginNames();
+    
     setupWidgets();
     setupActions();
 
@@ -93,6 +100,7 @@ MainWindow::MainWindow() :
     mainWindow = this;
     statusBar()->hide();
     _GraphLayers->populate();
+
 
 
 }
@@ -230,6 +238,14 @@ void MainWindow::setupActions() {
     action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction("save-script-as", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScriptAs()));
+    
+    QObject * plugin = ToolsPluginManager::New()->plugins()[0];
+    action = new KAction(ToolsPluginManager::New()->pluginNames()[0], 
+			 plugin);
+//     action->setShortcut(Qt::CTRL + Qt::Key_W);
+//     action->setShortcutContext(Qt::WidgetShortcut);
+    actionCollection()->addAction("make_complete", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
 
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
@@ -354,7 +370,7 @@ int MainWindow::saveIfChanged(){
 //     return QScriptValue();
 // }
 
-void MainWindow::executeScript() {
+void MainWindow::executeScript(QString text) {
     if (_activeGraphDocument == 0)  return;
     if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
@@ -364,7 +380,11 @@ void MainWindow::executeScript() {
 
     if ( !_tScriptExecution->isRunning() ){
 	kDebug() << "Starting Script";
-	_tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
+	if (text == ""){
+	    _tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
+	}else{
+	    _tScriptExecution->setData(text, _activeGraphDocument);
+	}
         _tScriptExecution ->start();
         
     }else{
@@ -375,3 +395,11 @@ void MainWindow::executeScript() {
 }
 
 #endif
+
+void MainWindow::runToolPlugin(){
+    QAction *action = qobject_cast<KAction *>(sender());
+    ToolsPluginInterface *plugin = qobject_cast<ToolsPluginInterface *>(action->parent());
+    QString run = plugin->run(0);
+    executeScript(run);
+     
+}

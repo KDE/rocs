@@ -63,7 +63,7 @@ private: // Methods
     QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
     int saveIfChanged();
 private slots:
-    void executeScript();
+    void executeScript(QString text = "");
     void newGraph();
     void openGraph();
     void saveGraph();
@@ -73,6 +73,7 @@ private slots:
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
+    void runToolPlugin();
 
 private: // Variables.
 
