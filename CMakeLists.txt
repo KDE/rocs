@@ -14,7 +14,7 @@ include_directories(
 
 if(${CMAKE_BUILD_TYPE} MATCHES coverage)
   set (CMAKE_CXX_COMPILER cov++)
-  set (CMAKE_CXX_FLAGS "-fexceptions" )
+  set (CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS}" )
 endif()
 
 
