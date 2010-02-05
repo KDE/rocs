@@ -69,4 +69,4 @@ QString MakeCompleteToolsPlugin::name() const
   return i18n("Make Complete");
 }
 
-Q_EXPORT_PLUGIN2(makeCompleteToolsPlugin, MakeCompleteToolsPlugin);
+Q_EXPORT_PLUGIN2(makeCompleteToolsPlugin, MakeCompleteToolsPlugin)
