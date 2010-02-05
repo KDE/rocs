@@ -239,13 +239,13 @@ void MainWindow::setupActions() {
     actionCollection()->addAction("save-script-as", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScriptAs()));
     
-    QObject * plugin = ToolsPluginManager::New()->plugins()[0];
-    action = new KAction(ToolsPluginManager::New()->pluginNames()[0], 
-			 plugin);
+//    QObject * plugin = ToolsPluginManager::New()->plugins()[0];
+//    action = new KAction(ToolsPluginManager::New()->pluginNames()[0], 
+//			 plugin);
 //     action->setShortcut(Qt::CTRL + Qt::Key_W);
 //     action->setShortcutContext(Qt::WidgetShortcut);
-    actionCollection()->addAction("make_complete", action);
-    connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
+//    actionCollection()->addAction("make_complete", action);
+//    connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
 
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
