@@ -56,7 +56,7 @@ QString MakeCompleteToolsPlugin::category()
 
 QString MakeCompleteToolsPlugin::about() const
 {
-  return i18n("remove all edges of the graphs and add news one to make graphs completes");
+  return i18n("Remove all the edges from a graph, and add new ones to make it complete.");
 }
 
 QString MakeCompleteToolsPlugin::tooltip() const
