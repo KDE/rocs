@@ -57,7 +57,7 @@ void PluginManager::loadToolsPlugins() {
     KService::List offers = KServiceTypeTrader::self()->query("Rocs/ToolPlugin");
 
     KService::List::const_iterator iter;
-    for (iter = offers.begin(); iter < offers.end(); ++iter)
+    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter)
     {
         QString error;
         KService::Ptr service = *iter;
@@ -111,7 +111,7 @@ void PluginManager::loadFilePlugins() {
     KService::List offers = KServiceTypeTrader::self()->query("Rocs/FilePlugin");
 
     KService::List::const_iterator iter;
-    for (iter = offers.begin(); iter < offers.end(); ++iter)
+    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter)
     {
         QString error;
         KService::Ptr service = *iter;
