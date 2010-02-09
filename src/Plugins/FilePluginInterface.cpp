@@ -17,23 +17,32 @@
 
 */
 
-#ifndef MAKECOMPLETETOOLSPLUGIN_H
-#define MAKECOMPLETETOOLSPLUGIN_H
+#include "FilePluginInterface.h"
 
-#include <QtCore/QObject>
-#include "../ToolsPluginInterface.h"
 #include <QStringList>
+#include <QObject>
 
-class MakeCompleteToolPlugin : public Rocs::ToolsPluginInterface
+namespace Rocs{
+FilePluginInterface::FilePluginInterface(const KComponentData& instance, QObject* parent):
+      QObject(parent)
 {
-  Q_OBJECT
-//   Q_INTERFACES(ToolsPluginInterface)
-  public:
-    
-    MakeCompleteToolPlugin(QObject* parent, const QList< QVariant >&);
-     ~MakeCompleteToolPlugin();
-     QString run(QObject* parent = 0) const;
 
-};
+}
 
-#endif // MAKECOMPLETETOOLSPLUGIN_H
+
+FilePluginInterface::~FilePluginInterface()
+{
+
+}
+
+
+QStringList FilePluginInterface::extensions()
+{
+    return QStringList() << "*";
+}
+ 
+const QString FilePluginInterface::lastError()
+{
+    return QString("Error.");
+}
+}

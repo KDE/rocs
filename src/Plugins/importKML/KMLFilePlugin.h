@@ -17,23 +17,23 @@
 
 */
 
-#ifndef MAKECOMPLETETOOLSPLUGIN_H
-#define MAKECOMPLETETOOLSPLUGIN_H
+#ifndef KMLFILEPLUGIN_H
+#define KMLFILEPLUGIN_H
+#include "../FilePluginInterface.h"
 
-#include <QtCore/QObject>
-#include "../ToolsPluginInterface.h"
-#include <QStringList>
-
-class MakeCompleteToolPlugin : public Rocs::ToolsPluginInterface
+class KMLFilePlugin: public Rocs::FilePluginInterface
 {
   Q_OBJECT
-//   Q_INTERFACES(ToolsPluginInterface)
   public:
+    KMLFilePlugin(QObject* parent, const QList< QVariant >&);
+    ~KMLFilePlugin();
     
-    MakeCompleteToolPlugin(QObject* parent, const QList< QVariant >&);
-     ~MakeCompleteToolPlugin();
-     QString run(QObject* parent = 0) const;
-
+    const QStringList extensions(); //Extensões suportadas
+    
+    GraphDocument * readFile(const QString &file) const; //return 0 se arq. inválido
+    
+    bool writeFile(const QObject& graph, const QString &filename) const; //false se não gravou.
+  
 };
 
-#endif // MAKECOMPLETETOOLSPLUGIN_H
+#endif // KMLFILEPLUGIN_H

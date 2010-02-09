@@ -18,12 +18,35 @@
 */
 
 #include "makecompletetoolsplugin.h"
+#include "../ToolsPluginInterface.h"
 #include <KLocalizedString>
 #include <QString>
 #include <QStringList>
+#include <kgenericfactory.h>
+#include <KAboutData>
 
 
-QString MakeCompleteToolsPlugin::run(QWidget* /*parent*/) const
+static const KAboutData aboutdata("rocs_makecompletetoolplugin", 0, ki18n("Make Comple") , "0.1" );
+
+K_PLUGIN_FACTORY( MyPluginFactory, registerPlugin< MakeCompleteToolPlugin>(); ) 
+K_EXPORT_PLUGIN( MyPluginFactory(aboutdata) )
+
+
+
+MakeCompleteToolPlugin::MakeCompleteToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
+    ToolsPluginInterface(MyPluginFactory::componentData(), parent)
+{
+
+}
+
+
+MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
+{
+
+}
+
+
+QString MakeCompleteToolPlugin::run(QObject* /*parent*/ ) const
 {
   return QString (
       "function makeComplete(graph){"
@@ -44,29 +67,30 @@ QString MakeCompleteToolsPlugin::run(QWidget* /*parent*/) const
      );
 }
 
-QStringList MakeCompleteToolsPlugin::authors() const
-{
-  return QStringList() << i18n("Wagner Reck - wagner.reck@gmail.com");
-}
+// QStringList MakeCompleteToolsPlugin::authors() const
+// {
+//   return QStringList() << i18n("Wagner Reck - wagner.reck@gmail.com");
+// }
+// 
+// QString MakeCompleteToolsPlugin::category()
+// {
+//   return i18n("Add Components");
+// }
+// 
+// QString MakeCompleteToolsPlugin::about() const
+// {
+//   return i18n("remove all edges of the graphs and add news one to make graphs completes");
+// }
+// 
+// QString MakeCompleteToolsPlugin::tooltip() const
+// {
+//   return i18n("Add edges and make graph complete.");
+// }
+// 
+// QString MakeCompleteToolsPlugin::name() const
+// {
+//   return i18n("Make Complete");
+// }
 
-QString MakeCompleteToolsPlugin::category()
-{
-  return i18n("Add Components");
-}
-
-QString MakeCompleteToolsPlugin::about() const
-{
-  return i18n("Remove all the edges from a graph, and add new ones to make it complete.");
-}
-
-QString MakeCompleteToolsPlugin::tooltip() const
-{
-  return i18n("Add edges and make graph complete.");
-}
-
-QString MakeCompleteToolsPlugin::name() const
-{
-  return i18n("Make Complete");
-}
-
-Q_EXPORT_PLUGIN2(makeCompleteToolsPlugin, MakeCompleteToolsPlugin)
+// Q_EXPORT_PLUGIN2(makeCompleteToolsPlugin, MakeCompleteToolsPlugin)
+#include "makecompletetoolsplugin.moc"

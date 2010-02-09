@@ -71,7 +71,7 @@
 #include <qscriptenginedebugger.h>
 #include <QActionGroup>
 #include "threadScriptExecution.h"
-#include "../Plugins/toolspluginmanager.h"
+#include "../Plugins/PluginManager.h"
 
 MainWindow* mainWindow = 0;
 
@@ -84,9 +84,13 @@ MainWindow::MainWindow() :
 
         
     kDebug() << "############ Load Plugins ###############";
-    ToolsPluginManager::New()->loadPlugins();
-    
-    kDebug() << ToolsPluginManager::New()->pluginNames();
+    Rocs::PluginManager::New()->loadPlugins();
+//     if (Rocs::ToolsPluginManager::New()->plugins().size() > 0){
+// 	foreach (Rocs::ToolsPluginInterface * plugin, Rocs::ToolsPluginManager::New()->plugins()){
+// 	      this->addClient(plugin);
+// 	}
+//     }
+//     kDebug() << Rocs::ToolsPluginManager::New()->plugins();
     
     setupWidgets();
     setupActions();
@@ -239,14 +243,15 @@ void MainWindow::setupActions() {
     actionCollection()->addAction("save-script-as", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScriptAs()));
     
-//    QObject * plugin = ToolsPluginManager::New()->plugins()[0];
-//    action = new KAction(ToolsPluginManager::New()->pluginNames()[0], 
-//			 plugin);
-//     action->setShortcut(Qt::CTRL + Qt::Key_W);
-//     action->setShortcutContext(Qt::WidgetShortcut);
-//    actionCollection()->addAction("make_complete", action);
-//    connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
-
+    if (Rocs::PluginManager::New()->plugins().size() > 0){
+	  QObject * plugin = Rocs::PluginManager::New()->plugins()[0];
+	  action = new KAction(Rocs::PluginManager::New()->plugins()[0]->pluginId(), 
+			      plugin);
+      //     action->setShortcut(Qt::CTRL + Qt::Key_W);
+      //     action->setShortcutContext(Qt::WidgetShortcut);
+	  actionCollection()->addAction("make_complete", action);
+	  connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
+    }
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
 
@@ -398,7 +403,7 @@ void MainWindow::executeScript(QString text) {
 
 void MainWindow::runToolPlugin(){
     QAction *action = qobject_cast<KAction *>(sender());
-    ToolsPluginInterface *plugin = qobject_cast<ToolsPluginInterface *>(action->parent());
+    Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *>(action->parent());
     QString run = plugin->run(0);
     executeScript(run);
      

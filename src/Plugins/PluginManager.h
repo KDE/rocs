@@ -17,23 +17,34 @@
 
 */
 
-#ifndef MAKECOMPLETETOOLSPLUGIN_H
-#define MAKECOMPLETETOOLSPLUGIN_H
-
-#include <QtCore/QObject>
-#include "../ToolsPluginInterface.h"
+#ifndef TOOLSPLUGINMANAGER_H
+#define TOOLSPLUGINMANAGER_H
 #include <QStringList>
+#include "ToolsPluginInterface.h"
+class KPluginInfo;
 
-class MakeCompleteToolPlugin : public Rocs::ToolsPluginInterface
+namespace Rocs{
+  
+class PluginManager: public QObject
 {
   Q_OBJECT
-//   Q_INTERFACES(ToolsPluginInterface)
+  private:
+      QList<ToolsPluginInterface*> _plugins;
+      PluginManager();
+
+      static PluginManager * self;
   public:
     
-    MakeCompleteToolPlugin(QObject* parent, const QList< QVariant >&);
-     ~MakeCompleteToolPlugin();
-     QString run(QObject* parent = 0) const;
-
+    static PluginManager * New();
+    ~PluginManager() { }
+    void loadPlugins();
+    void loadToolsPlugins();
+    void loadFilePlugins();
+    
+    QList <ToolsPluginInterface*> plugins(){return _plugins;}
+    KPluginInfo pluginInfo(const ToolsPluginInterface * plugin);
+  
 };
 
-#endif // MAKECOMPLETETOOLSPLUGIN_H
+}
+#endif // TOOLSPLUGINMANAGER_H

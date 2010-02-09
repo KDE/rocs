@@ -1,4 +1,5 @@
-/*
+
+class Private;/*
     <one line to give the program's name and a brief idea of what it does.>
     Copyright (C) <year>  <name of author>
 
@@ -17,31 +18,31 @@
 
 */
 
-#ifndef TOOLSPLUGINMANAGER_H
-#define TOOLSPLUGINMANAGER_H
-#include <QStringList>
-#include "ToolsPlugins.h"
+#ifndef FILEPLUGININTERFACE_H
+#define FILEPLUGININTERFACE_H
+#include <QObject>
+class GraphDocument;
 
-class ToolsPluginManager
+#include <KComponentData>
+
+namespace Rocs{
+class FilePluginInterface: public QObject
 {
-  QStringList _names;
-  QStringList _category;
-  QStringList _toolTip;
-  QList<QObject*> _plugins;
-  ToolsPluginManager() { } 
+  Q_OBJECT
+public:
+  FilePluginInterface(const KComponentData &instance, QObject* parent); 
+  virtual ~FilePluginInterface();
+  QStringList extensions(); //Extensões suportadas
   
-  static ToolsPluginManager * self;
-  public:
-    
-    static ToolsPluginManager * New();
-    ~ToolsPluginManager() { }
-    void loadPlugins();
-    
-    QStringList pluginNames() { return _names;}
-    QStringList pluginToolTips() { return _toolTip;}
-    QStringList pluginCategories() { return _category;}
-    QList <QObject*> plugins(){return _plugins;}
+  virtual GraphDocument * readFile(const QString &file) const = 0; //return 0 se arq. inválido
   
+  virtual bool writeFile(const QObject &graph, const QString & fileName)  const = 0; //false se não gravou.
+  
+  const QString lastError(); //return error
+  
+private:
+  class Private;
+  Private * d;
 };
-
-#endif // TOOLSPLUGINMANAGER_H
+}
+#endif // FILEPLUGININTERFACE_H
