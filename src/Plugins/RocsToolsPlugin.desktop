@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=Rocs/ToolPlugin 
+X-KDE-ServiceType=Rocs/ToolPlugin
 X-KDE-Derived=KPluginInfo
 Comment=Rocs Tool Plugin
