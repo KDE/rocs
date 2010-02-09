@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
 
   <!ENTITY kappname "&rocs;">
-  <!ENTITY package "kdereview">
+  <!ENTITY package "kdeedu">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"> 
 ]>
@@ -85,11 +85,11 @@ per graph and can be changed per node and edge with the Node Properties and the 
 <guilabel>Graph Name</guilabel>
 </para></listitem>
 <listitem><para>
-<guilabel>Default Node Color</guilabel> for new created nodes, you can change the node color for all current nodes 
+<guilabel>Node Color</guilabel> for new created nodes, you can change the node color for all current nodes 
 by clicking the All button
 </para></listitem>
 <listitem><para>
-<guilabel>Default Edge Color</guilabel>
+<guilabel>Edge Color</guilabel>
 </para></listitem>
 </itemizedlist>
 <para>The last row of options consists in toggled buttons:</para>
@@ -263,10 +263,10 @@ var list2=Untitled0.list_nodes();              // 2nd form
 <varlistentry>
 <term><menuchoice>
 <guimenu>Settings</guimenu>
-<guisubmenu>Toolbars</guisubmenu>
+<guisubmenu>Toolbars Shown</guisubmenu>
 </menuchoice></term>
-<listitem><para><action>Toggle</action> the <guimenuitem>Main</guimenuitem>, <guimenuitem>Special Characters</guimenuitem>,
-<guimenuitem>Look</guimenuitem> and <guimenuitem>Language</guimenuitem> toolbars.</para></listitem>
+<listitem><para><action>Toggle</action> the <guimenuitem>Main</guimenuitem>, 
+and <guimenuitem>Layout</guimenuitem> toolbars.</para></listitem>
 </varlistentry>
 
 
