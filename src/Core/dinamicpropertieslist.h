@@ -24,6 +24,8 @@
 #include "graph.h"
 #include "edge.h"
 
+#include "rocslib_export.h"
+
 enum DinamicPropertyType{
       None,
       Unique,
@@ -32,7 +34,7 @@ enum DinamicPropertyType{
 };
 
 
-class DinamicPropertiesList : public QObject
+class ROCSLIB_EXPORT DinamicPropertiesList : public QObject
 {
   Q_OBJECT
   QMap< Graph*,  QMultiMap <QString, Node* > > _NodesProperties;

@@ -22,13 +22,14 @@
 
 #include <QList>
 #include <QObject>
+#include "rocslib_export.h"
 
 class Graph;
 
 /*! \brief the graph document
   long explanation needed.
 */
-class GraphDocument : public QObject, public QList<Graph*>
+class ROCSLIB_EXPORT GraphDocument : public QObject, public QList<Graph*>
 {
     Q_OBJECT
 

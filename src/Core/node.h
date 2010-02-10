@@ -32,12 +32,12 @@
 #include <QtScript>
 #include "qtScriptBackend.h"
 #endif
-
+#include "rocslib_export.h"
 #include "edge.h"
 class Node;
 typedef QList<Node*> NodeList;
 
-class Node : public QObject {
+class  ROCSLIB_EXPORT Node : public QObject {
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX)
     Q_PROPERTY(qreal y READ y WRITE setY)

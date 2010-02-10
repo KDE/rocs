@@ -22,12 +22,12 @@
 #include <QtScript>
 #include <QScriptValue>
 #include <QScriptString>
-
+#include "rocslib_export.h"
 class Graph;
 class GraphDocument;
 class KTextBrowser;
 
-class QtScriptBackend : public QScriptEngine {
+class  ROCSLIB_EXPORT QtScriptBackend : public QScriptEngine {
 public:
     QtScriptBackend(GraphDocument& graphs,  KTextBrowser *debugArea);
     void setScript(const QString& s);

@@ -21,12 +21,14 @@ class Private;/*
 #ifndef FILEPLUGININTERFACE_H
 #define FILEPLUGININTERFACE_H
 #include <QObject>
+#include "rocslib_export.h"
+
 class GraphDocument;
 
 #include <KComponentData>
 
 namespace Rocs{
-class FilePluginInterface: public QObject
+class ROCSLIB_EXPORT FilePluginInterface: public QObject
 {
   Q_OBJECT
 public:

@@ -33,6 +33,8 @@
 #include "qtScriptBackend.h"
 #endif
 
+#include "rocslib_export.h"
+
 class Node;
 
 /**
@@ -45,7 +47,7 @@ class Node;
 * new properties can be added on the fly via edge.addProp(propertyname) , and accessed by edge.propertyName.
 */
 
-class Edge : public QObject {
+class ROCSLIB_EXPORT Edge : public QObject {
     Q_OBJECT
 
     /*! all properties are accessible from the scripting engine via .propertyName */

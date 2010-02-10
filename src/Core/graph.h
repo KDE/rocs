@@ -35,6 +35,7 @@
 
 #include "node.h"
 #include "edge.h"
+#include "rocslib_export.h"
 
 class QtScriptBackend;
 class GraphGroup;
@@ -44,7 +45,7 @@ class GraphDocument;
 /*! \brief this class acts as a container for nodes and edges.
   this class has all the edges and nodes, plus a few extra funcionalities
   to help programming with it on the programming backend. */
-class Graph : public QObject {
+class ROCSLIB_EXPORT Graph : public QObject {
     Q_OBJECT
 
     /*! this property defines if the graph is directed or simple */

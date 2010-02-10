@@ -23,10 +23,10 @@
 
 #include <QObject>
 #include <QList>
-
+#include "rocslib_export.h"
 class Node;
 
-class GraphGroup : public QObject, public QList< ::Node*> {
+class  ROCSLIB_EXPORT GraphGroup : public QObject, public QList< ::Node*> {
     Q_OBJECT
 
 public:

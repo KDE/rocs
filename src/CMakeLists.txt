@@ -1,20 +1,125 @@
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+include_directories( 
+    ${KDE4_INCLUDES} 
+    ${QT_INCLUDES} 
+    ${KROSS_INCLUDES}
+    Core/
+    Actions/
+    GraphicsItem/
+    Interface/
+    Models/
+    Plugins/
+    Scripts/
+    Tests/
+)
 
-add_subdirectory(Core)
-add_subdirectory(Actions)
-add_subdirectory(Models)
-add_subdirectory(GraphicsItem)
-add_subdirectory(Interface)
-add_subdirectory(UndoRedo)
-add_subdirectory(Tests)
+# Preparando a biblioteca padrão.
 
+set( rocs_core_SRCS
+  Core/graph.cpp
+  Core/edge.cpp
+  Core/graphDocument.cpp
+  Core/node.cpp
+  Core/graphGroups.cpp
+  Core/krossBackend.cpp
+  Core/qtScriptBackend.cpp
+  Core/threadScriptExecution.cpp
+  Core/dinamicpropertieslist.cpp
 
-add_subdirectory(Plugins)
+  Plugins/FilePluginInterface.cpp 
+  Plugins/PluginManager.cpp 
+  Plugins/ToolsPluginInterface.cpp
+)
 
+kde4_add_library( rocslib  SHARED ${rocs_core_SRCS} )
+ 
+target_link_libraries( rocslib
+  ${KDE4_KROSSCORE_LIBS}
+  ${KDE4_KIO_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
+  ${QT_QTSCRIPTTOOLS_LIBRARY}
+)
 
-set(rocs_SRCS  Main.cpp )
+set( rocslib_LIB_HDRS
+  Core/dinamicpropertieslist.h
+  Core/edge.h
+  Core/graph.j
+  Core/graphDocument.h
+  Core/graphGroups.h
+  Core/krossBackend.h
+  Core/node.h
+  Core/qtScriptBackend.h
+  Core/threadScriptExecution.h
+)
 
-# Since the JavaScript supports came from QtScript... 
+set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+
+install( TARGETS rocslib  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( FILES ${rocslib_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel )
+###################### Outros SRCS ############################
+set ( rocs_actions_SRCS 
+  Actions/AbstractAction.cpp
+  Actions/AddNode.cpp
+  Actions/AddEdge.cpp
+  Actions/MoveNode.cpp
+  Actions/Select.cpp
+  Actions/DeleteAction.cpp
+  Actions/AlignAction.cpp
+)
+
+set ( rocs_graphcisitem_SRCS
+  GraphicsItem/NodeItem.cpp
+  GraphicsItem/OrientedEdgeItem.cpp
+)
+
+set( rocs_interface_SRCS
+  Interface/MainWindow.cpp
+  Interface/OpenedFilesWidget.cpp
+  Interface/GraphScene.cpp
+  Interface/Separator.cpp
+  Interface/GraphVisualEditor.cpp
+  Interface/GraphPropertiesWidget.cpp
+  Interface/GraphLayers.cpp
+  Interface/TabWidget.cpp
+  Interface/CodeEditor.cpp
+  Interface/NodePropertiesWidget.cpp
+  Interface/edgepropertieswidget.cpp
+)
+
+set( rocs_models_SRCS
+  Models/model_GraphDocument.cpp 
+  Models/model_GraphLayers.cpp
+  Models/model_GraphProperties.cpp
+)
+
+#set (rocs_plugins_SRCS 
+#  Plugins/FilePluginInterface.cpp 
+#  Plugins/PluginManager.cpp 
+#  Plugins/ToolsPluginInterface.cpp
+#)
+
+set( rocs_undoredo_SRCS
+  UndoRedo/URAddNode.cpp
+  UndoRedo/URAddEdge.cpp
+)
+
+set(rocs_SRCS  
+  Main.cpp 
+  ${rocs_actions_SRCS}
+  ${rocs_graphcisitem_SRCS}
+  ${rocs_interface_SRCS}
+  ${rocs_models_SRCS}
+#  ${rocs_plugins_SRCS}
+  ${rocs_undoredo_SRCS}
+)
+
+kde4_add_ui_files(
+	rocs_SRCS 
+	Interface/OpenedFilesWidget.ui
+	Interface/GraphPropertiesWidget.ui
+	Interface/NodePropertiesWidget.ui
+	Interface/EdgePropertiesWidget.ui
+	Interface/AddMultiNodes.ui
+)
 
 set (QT_USE_QTSCRIPT true)
 
@@ -24,15 +129,7 @@ kde4_add_kcfg_files(rocs_SRCS ${rocs_KCFGS} )
 kde4_add_executable(rocs ${rocs_SRCS} ${rocs_RCC_SRCS})
 
 target_link_libraries(rocs
-  #  gvc 
-  #  graph 
-  # cdt
-  ToolsPluginManager
-  librocsui
-  librocsgraphics
-  librocsmodel
-  librocsactions
-  librocscore
+  rocslib
   ${KDE4_KDEUI_LIBS}
   ${KDE4_KROSSUI_LIBS}
   ${KDE4_KIO_LIBS}
@@ -41,7 +138,71 @@ target_link_libraries(rocs
   ${QT_QTSCRIPTTOOLS_LIBRARY}
 )
 
+########################## Plugins ########################
+ Set (KMLFilePlugin_SRC 
+   Plugins/importKML/KMLFilePlugin.cpp
+ )
+ 
+ kde4_add_plugin(rocs_kmlfileplugin ${KMLFilePlugin_SRC} )
+ 
+ target_link_libraries(rocs_kmlfileplugin
+   rocslib
+   ${KDE4_KDEUI_LIBS}
+ )
+
+#install(TARGETS rocs_kmlfileplugin  DESTINATION ${PLUGIN_INSTALL_DIR})
+#install( FILES  Plugins/importKML/rocs_kmlfileplugin.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+####################### TESTS #############################
+
+set (testGraphs_SRCS
+    ${rocs_core_SRCS}
+    Tests/testGraph.cpp
+ )
+kde4_add_executable(testGraphs ${testGraphs_SRCS} )
+
+target_link_libraries( testGraphs
+  rocslib
+  ${KDE4_KROSSUI_LIBS}
+  ${QT_QTGUI_LIBRARY}
+  ${QT_QTTEST_LIBRARY}
+  ${KDE4_KDECORE_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
+) 
+
+set( testDinamicProperties_SRCS
+  ${rocs_core_SRCS}
+  Tests/testdinamicproperties.cpp)
+
+kde4_add_executable(testDinamicProperties ${testDinamicProperties_SRCS})
+
+target_link_libraries( testDinamicProperties
+  rocslib
+  ${KDE4_KROSSUI_LIBS}
+  ${QT_QTGUI_LIBRARY}
+  ${QT_QTTEST_LIBRARY}
+  ${KDE4_KDECORE_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
+)
+
+add_test(TestDinamicProperties testDinamicProperties)
+add_test(TestGraphs testGraphs)
+
+################## INSTALLS ##########################
+
 install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
 install( FILES rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs  )
 install( FILES rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
+
+
+
+install( FILES 
+	  Plugins/RocsToolsPlugin.desktop 
+	  Plugins/RocsFilePlugin.desktop  
+	DESTINATION 
+	    ${SERVICETYPES_INSTALL_DIR}
+)
+
+#add_subdirectory(Plugins/MakeComplete)
+#add_subdirectory(Plugins/importKML)

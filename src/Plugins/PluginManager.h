@@ -21,11 +21,13 @@
 #define TOOLSPLUGINMANAGER_H
 #include <QStringList>
 #include "ToolsPluginInterface.h"
+#include "rocslib_export.h"
+
 class KPluginInfo;
 
 namespace Rocs{
   
-class PluginManager: public QObject
+class ROCSLIB_EXPORT PluginManager: public QObject
 {
   Q_OBJECT
   private:

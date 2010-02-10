@@ -21,11 +21,13 @@
 
 #include <QThread>
 #include <QMutex>
+#include "rocslib_export.h"
+
 class KTextBrowser;
 class GraphDocument;
 class QtScriptBackend;
 
-class ThreadScriptExecution : public QThread{
+class ROCSLIB_EXPORT ThreadScriptExecution : public QThread{
   Q_OBJECT
   public:
     ThreadScriptExecution(KTextBrowser * debugView = 0);

@@ -22,8 +22,8 @@
 #include <QVariant>
 
 #include <kross/core/action.h>
-
-class KrossBackend {
+#include "rocslib_export.h"
+class ROCSLIB_EXPORT KrossBackend {
 public:
     KrossBackend(QVariantList  *graphs);
     void setScript(const QString& s);

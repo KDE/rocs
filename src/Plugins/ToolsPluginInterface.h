@@ -51,7 +51,7 @@ Q_DECLARE_INTERFACE(ToolsPluginInterface,
 #include <kxmlguiclient.h>
 #include <QtCore/QObject>
 #include <kdemacros.h>
-
+#include "rocslib_export.h"
 // #include "kopete_export.h"
 
 class KPluginInfo;
@@ -106,7 +106,7 @@ Comment=Plugin that do some nice stuff
  * @author Olivier Goffart <ogoffart\@kde.org>
  */
 
-class ToolsPluginInterface : public QObject, public KXMLGUIClient
+class ROCSLIB_EXPORT ToolsPluginInterface : public QObject, public KXMLGUIClient
 {
 	Q_OBJECT
 
