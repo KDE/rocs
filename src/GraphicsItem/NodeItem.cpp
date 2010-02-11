@@ -7,13 +7,16 @@
 #include <QFont>
 #include <QGraphicsScene>
 
+
+QMap<QString, QSvgRenderer*> NodeItem::_renders;    
+
 NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
     _node = n;
-    _renderer = 0;
-    _iconPackage = _node->iconPackage();
     _name = 0;
     _value = 0;
+    static QMap<QString, QSvgRenderer*> _renders;
     _originalWidth = _node->width();
+    _iconPackage = _node->iconPackage();
     _colorizer = new QGraphicsColorizeEffect(this);
     connect(n, SIGNAL(changed()), this, SLOT(setupNode()));
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
@@ -24,7 +27,6 @@ NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
 }
 
 void NodeItem::setupNode(){
-    
     updateRenderer();
     updateIcon();
     updateName();
@@ -51,13 +53,14 @@ void NodeItem::updateSize(){
 }
 
 void NodeItem::updateRenderer(){
-   if ( ! _renderer ){
-      _renderer = new QSvgRenderer(_node->iconPackage());
-      setSharedRenderer(_renderer);
-   }else if (_iconPackage != _node->iconPackage()){
-     _renderer -> load(_node->iconPackage());
-     setSharedRenderer(_renderer);
-   }
+  _iconPackage = _node->iconPackage();
+  if( _renders.count(_iconPackage) == 0){
+        QSvgRenderer *z = new QSvgRenderer(_node->iconPackage());
+        _renders.insert(_iconPackage, z);
+        setSharedRenderer(z);
+  }else{
+      setSharedRenderer( _renders.value(_iconPackage) );
+  }
 }
 
 void NodeItem::updateIcon(){

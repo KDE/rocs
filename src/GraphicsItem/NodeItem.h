@@ -8,6 +8,8 @@
 #include <QSvgRenderer>
 #include <QGraphicsTextItem>
 #include <QGraphicsColorizeEffect>
+#include <QMap>
+#include <QString>
 
 #include "node.h"
 
@@ -20,6 +22,8 @@ class NodeItem : public QGraphicsSvgItem{
     NodeItem(Node *n);
 
     Node* node() const { return _node; }
+    static QMap<QString, QSvgRenderer*> _renders;
+    
   private slots:
     void setupNode();
     void updateRenderer();
@@ -31,7 +35,8 @@ class NodeItem : public QGraphicsSvgItem{
     void updateSize();
   private:
     Node *_node;
-    QSvgRenderer *_renderer;
+
+
     
     QString _iconPackage;
     QString _element;
