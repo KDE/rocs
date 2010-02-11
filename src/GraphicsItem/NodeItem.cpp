@@ -19,7 +19,7 @@ NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
     setupNode();
     setZValue(1);
-    
+    setFlag(ItemIsSelectable, true);
     kDebug() << "Node Item Created";
 }
 
