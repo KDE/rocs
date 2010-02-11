@@ -18,3 +18,6 @@ Name[sv]=Gör fullständig
 Name[uk]=Зробити повним
 Name[x-test]=xxMake Completexx
 Comment=Make all graphs complete. All actual edges will be removed.
+Comment[sv]=Gör alla grafer fullständiga. Alla verkliga bågar kommer att tas bort
+Comment[uk]=Зробити всі графи повними. Всі справжні ребра буде вилучено.
+Comment[x-test]=xxMake all graphs complete. All actual edges will be removed.xx
