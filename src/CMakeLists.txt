@@ -42,7 +42,7 @@ target_link_libraries( rocslib
 set( rocslib_LIB_HDRS
   Core/dinamicpropertieslist.h
   Core/edge.h
-  Core/graph.j
+  Core/graph.h
   Core/graphDocument.h
   Core/graphGroups.h
   Core/krossBackend.h
