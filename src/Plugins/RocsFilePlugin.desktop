@@ -4,6 +4,7 @@ X-KDE-ServiceType=Rocs/FilePlugin
 X-KDE-Derived=KPluginInfo
 Comment=Rocs File Plugin
 Comment[en_GB]=Rocs File Plugin
+Comment[es]=Complemento de archivo para Rocs
 Comment[nds]=Dateimoduul för Rocs
 Comment[sv]=Rocs filinsticksprogram
 Comment[uk]=Додаток роботи з файлами Rocs
