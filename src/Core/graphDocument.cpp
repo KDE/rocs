@@ -59,7 +59,7 @@ GraphDocument::~GraphDocument() {
     
     for(int i = 0; i < size(); i ++){
 	Graph *g = at(i);
-	qDebug() << "Deleting graph" << g->name();
+	kDebug() << "Deleting graph" << g->name();
         delete g;
     }
 }
@@ -104,6 +104,7 @@ Graph* GraphDocument::addGraph(QString name) {
     g->setName(name);
     append(g);
     emit graphCreated(g);
+    kDebug() << "Graph Added" << g->name();
     return g;
 }
 
@@ -123,10 +124,10 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
 	const QString s( (!filename.endsWith(".graph"))? QString("%1.graph").arg(filename):filename);
 	
     saveFile.setFileName( s );
-    qDebug() << s;
+    kDebug() << s;
 
     if (!saveFile.open()) {
-        qDebug() << "Error: File Not Open";
+        kDebug() << "Error: File Not Open";
         return false;
     }
 
@@ -135,20 +136,27 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
 
     for (int i = 0; i < graphSize; i++) {
         Graph *g = this->at(i);
+	kDebug() << "Saving graph at "<< i;
+	
         buf += " \n \n ############ Graph  ########### \n \n";
         buf += QString("[Graph %1] \n").arg(i);
-
+	
+	kDebug() << "Saving Graph properties.";
         savePropertiesInternalFormat(g);
 
         buf += " \n \n ############ NODES ########### \n \n";
         foreach( ::Node *n, g->nodes()) {
+	    kDebug() << "Saving node at" << g->nodes().indexOf(n);
             buf += QString("[Node %1]\n").arg(g->nodes().indexOf(n));
+	    kDebug() << "Saving node properties.";
             savePropertiesInternalFormat(n);
         }
 
         buf += " \n \n ############ EDGES ########### \n \n";
         foreach( Edge *e, g->edges()) {
+	    kDebug() << "Saving node between " << g->nodes().indexOf(e->from()) << "and" << g->nodes().indexOf(e->to()); 
             buf += QString("[Edge %1->%2]\n").arg(g->nodes().indexOf(e->from())).arg(g->nodes().indexOf(e->to()));
+	    kDebug() << "Saving edge properties";
             savePropertiesInternalFormat(e);
         }
 
@@ -161,11 +169,11 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
                  }
              } */
     }
-    qDebug() << buf.toAscii();
+    kDebug() << buf.toAscii();
 
     stream << buf.toAscii();
     if (!saveFile.finalize()) {
-        qDebug() << "Error, file not saved.";
+        kDebug() << "Error, file not saved.";
         return false;
     }
     _lastSavedDocumentPath = filename;
@@ -199,17 +207,16 @@ void GraphDocument::savePropertiesInternalFormat(QObject *o) {
 void GraphDocument::loadFromInternalFormat(const QString& filename) {
     QFile f(filename);
     if ( !f.open(QIODevice::ReadOnly | QIODevice::Text) ) {
-        qDebug  () << "File not open " << filename.toAscii();
+        kDebug() << "File not open " << filename.toAscii();
         return;
     }
 
     Graph* tmpGraph = 0;
-// //    GraphGroup *tmpGroup = 0;
+   //GraphGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
 
     while (!f.atEnd()) {
-        QString str = f.readLine();
-        str = str.simplified();
+        QString str = f.readLine().simplified();
 
         if (str.startsWith('#')) { //! Ignore it, commented line.
             continue;

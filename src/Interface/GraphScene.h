@@ -58,6 +58,7 @@ public slots:
     QGraphicsItem* createNode( Node* n);
     QGraphicsItem* createEdge( Edge *e);
     void connectGraphSignals(Graph *g);
+    void createItems();
     
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);

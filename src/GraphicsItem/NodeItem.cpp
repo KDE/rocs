@@ -23,7 +23,7 @@ NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
     setupNode();
     setZValue(1);
     setFlag(ItemIsSelectable, true);
-    kDebug() << "Node Item Created";
+    kDebug() << "Visual Node Item Created";
 }
 
 void NodeItem::setupNode(){

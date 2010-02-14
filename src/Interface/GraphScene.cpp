@@ -85,7 +85,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     if (gd == 0) {
         return;
     }
-
+    
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
     QGraphicsRectItem *n = new QGraphicsRectItem(0,0, gd->width(), gd->height());
     n->setFlag(QGraphicsItem::ItemIsSelectable, false);
@@ -93,19 +93,35 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     addItem(n);
 
     int size = _graphDocument->size();
-   for (int i = 0; i < size; i++) {
+    if (size == 0) kDebug() << "############## SIZE = 0 ################";
+    for (int i = 0; i < size; i++) {
         kDebug() << "Updating Graph at position: " << i;
         updateGraph(_graphDocument->at(i));
-	connectGraphSignals(_graphDocument->at(i));
-	kDebug() << "Graph Updated.";
+        connectGraphSignals(_graphDocument->at(i));
+        kDebug() << "Graph Updated.";
     }
     connect( _graphDocument, SIGNAL(graphCreated(Graph*)), this, SLOT(connectGraphSignals(Graph*)));
-   kDebug() << "Graph Document Set" << _graphDocument -> name();
+    kDebug() << "Graph Document Set" << _graphDocument -> name();
+}
+void GraphScene::createItems(){
+    kDebug() << "Creating the graph items.";
+    int size = _graphDocument->size();
+    for (int i = 0; i < size; i++) {
+        Graph *g = _graphDocument->at(i);
+        kDebug() << "Creating " << g->nodes().size() << "nodes";
+        for(int n = 0; n < g->nodes().size(); n++){
+            createNode( g->nodes()[n] );
+        }
+        kDebug() << "Creating" << g->edges().size() << "edges";
+        for( int v = 0; v < g->edges().size(); v++){
+            createEdge( g->edges()[v]);
+        }
+    }
 }
 
 void GraphScene::connectGraphSignals(Graph *g){
-	connect( g, SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)));
-	connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)));
+    connect( g, SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)));
+    connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)));
 }
 
 QGraphicsItem *GraphScene::createNode(Node *n) {

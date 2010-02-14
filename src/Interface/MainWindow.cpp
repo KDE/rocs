@@ -257,13 +257,19 @@ void MainWindow::setupActions() {
 
 void MainWindow::setActiveGraphDocument(GraphDocument* d)
 {
-    _activeGraphDocument = d;
-    _graphVisualEditor->setActiveGraphDocument(d);
     foreach( QAction *action, actionCollection()->actions() ) {
         if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action))
             absAction->setActiveGraphDocument(d);
     }
-
+    
+    //connect(d, SIGNAL(graphCreated(Graph*)), this, SLOT());
+    //connect(d, SIGNAL(graphRemoved(int)), this, SLOT());
+    //connect(d, SIGNAL(nameChanged(QString)), this, SLOT());
+    //connect(d, SIGNAL(heightChanged(qreal)), this, SLOT());
+    //connect(d, SIGNAL(widthChanged(qreal)), this, SLOT());
+    
+    _activeGraphDocument = d;
+    _graphVisualEditor->setActiveGraphDocument(d);
     if (_activeGraphDocument->size() == 0) return;
     setActiveGraph(_activeGraphDocument->at(0));
     _GraphLayers->populate();
@@ -318,15 +324,17 @@ void MainWindow::loadDocument(const QString& name){
   _graphVisualEditor->releaseGraphDocument();
   delete _activeGraphDocument;
   
-  setActiveGraphDocument(new GraphDocument(i18n("Untitled"), 800,600));
+  //setActiveGraphDocument();
+  GraphDocument *gd = new GraphDocument(i18n("Untitled"), 800,600);
   if (name.isEmpty()){
-    _activeGraphDocument->addGraph(i18n("Untitled0"));
+    gd->addGraph(i18n("Untitled0"));
+  }else{
+    gd->loadFromInternalFormat(name);
   }
-  else{
-    _activeGraphDocument->loadFromInternalFormat(name);
+  setActiveGraphDocument(gd);
+  if (!name.isEmpty()){
+    _graphVisualEditor->scene()->createItems();
   }
-  _GraphLayers->populate();
-  _graphVisualEditor->scene()->updateDocument();
 }
 
 void MainWindow::saveGraph() {

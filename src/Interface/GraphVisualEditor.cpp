@@ -67,6 +67,7 @@ QGraphicsView* GraphVisualEditor::view() const {
 }
 
 void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
+    
     if ( _graphDocument != 0 ) {
         releaseGraphDocument();
     }
