@@ -155,7 +155,6 @@ target_link_libraries(rocs
 ####################### TESTS #############################
 
 set (testGraphs_SRCS
-    ${rocs_core_SRCS}
     Tests/testGraph.cpp
  )
 kde4_add_executable(testGraphs ${testGraphs_SRCS} )
@@ -170,7 +169,6 @@ target_link_libraries( testGraphs
 ) 
 
 set( testDinamicProperties_SRCS
-  ${rocs_core_SRCS}
   Tests/testdinamicproperties.cpp)
 
 kde4_add_executable(testDinamicProperties ${testDinamicProperties_SRCS})

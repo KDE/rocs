@@ -5,7 +5,7 @@
 #include <kdemacros.h>
  
 #ifndef ROCSLIB_EXPORT
-# if defined(ROCSLIB_MYSHARED_LIB)
+# if defined(MAKE_ROCSLIB_LIB)
    // We are building this library
 #  define ROCSLIB_EXPORT KDE_EXPORT
 # else
