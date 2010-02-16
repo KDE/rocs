@@ -95,16 +95,7 @@ Comment=Plugin that do some nice stuff
 		//...
 	}
  \endcode
- *
- * Kopete::Plugin inherits from KXMLGUIClient.  That client is added
- * to the Kopete's mainwindow KXMLGUIFactory. So you may add actions
- * on the main window (for hinstance in the meta contact popup menu).
- * Please note that the client is added right after the plugin is created,
- * so you have to create every actions in the constructor.
- *
- * @author Duncan Mac-Vicar P. <duncan@kde.org>
- * @author Olivier Goffart <ogoffart\@kde.org>
- */
+  */
 
 class ROCSLIB_EXPORT ToolsPluginInterface : public QObject, public KXMLGUIClient
 {

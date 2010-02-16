@@ -19,8 +19,10 @@
 
 #ifndef TOOLSPLUGINMANAGER_H
 #define TOOLSPLUGINMANAGER_H
-#include <QStringList>
+#include <QList>
+
 #include "ToolsPluginInterface.h"
+#include "FilePluginInterface.h"
 #include "rocslib_export.h"
 
 class KPluginInfo;
@@ -31,7 +33,9 @@ class ROCSLIB_EXPORT PluginManager: public QObject
 {
   Q_OBJECT
   private:
-      QList<ToolsPluginInterface*> _plugins;
+      QList<ToolsPluginInterface*> _toolPlugins;
+      QList<FilePluginInterface*> _filePlugins;
+      
       PluginManager();
 
       static PluginManager * self;
@@ -43,8 +47,18 @@ class ROCSLIB_EXPORT PluginManager: public QObject
     void loadToolsPlugins();
     void loadFilePlugins();
     
-    QList <ToolsPluginInterface*> plugins(){return _plugins;}
+    QList <ToolsPluginInterface*> toolPlugins(){return _toolPlugins;}
+    QList <FilePluginInterface*> filePlugins(){return _filePlugins;}
+    
     KPluginInfo pluginInfo(const ToolsPluginInterface * plugin);
+    
+    KPluginInfo pluginInfo(const FilePluginInterface * plugin);
+    
+    /** Returns plugin that can handle extension \p ext 
+    \param ext File extension (like 'TXT', 'cpp', '.Cpp', '*.js')
+    \return File plugin to handle files with that extension or 0 if there is no plugin to handle it.
+    */
+    FilePluginInterface *  filePluginsByExtension(QString ext);
   
 };
 

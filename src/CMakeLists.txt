@@ -202,5 +202,5 @@ install( FILES
 	    ${SERVICETYPES_INSTALL_DIR}
 )
 
-#add_subdirectory(Plugins/MakeComplete)
-#add_subdirectory(Plugins/importKML)
+add_subdirectory(Plugins/MakeComplete)
+add_subdirectory(Plugins/importKML)

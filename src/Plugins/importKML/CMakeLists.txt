@@ -11,7 +11,7 @@ Set (KMLFilePlugin_SRC KMLFilePlugin.cpp KMLFilePlugin.h)
 kde4_add_plugin(rocs_kmlfileplugin ${KMLFilePlugin_SRC} )
 target_link_libraries(rocs_kmlfileplugin
 			    ${KDE4_KDEUI_LIBS}
-                            ToolsPluginManager)
+                            rocslib)
 
 install(TARGETS rocs_kmlfileplugin  DESTINATION ${PLUGIN_INSTALL_DIR})
 

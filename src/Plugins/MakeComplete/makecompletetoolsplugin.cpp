@@ -28,13 +28,13 @@
 
 static const KAboutData aboutdata("rocs_makecompletetoolplugin", 0, ki18n("Make Complete") , "0.1" );
 
-K_PLUGIN_FACTORY( MyPluginFactory, registerPlugin< MakeCompleteToolPlugin>(); ) 
-K_EXPORT_PLUGIN( MyPluginFactory(aboutdata) )
+K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin< MakeCompleteToolPlugin>(); ) 
+K_EXPORT_PLUGIN( ToolsPluginFactory(aboutdata) )
 
 
 
 MakeCompleteToolPlugin::MakeCompleteToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
-    ToolsPluginInterface(MyPluginFactory::componentData(), parent)
+    ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
 {
 
 }

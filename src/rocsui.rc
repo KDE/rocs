@@ -20,6 +20,8 @@
 	<Action name="save-script" />
 	<Action name="save-script-as" />
       </Menu>
+      <Action name="import" />
+      <Action name="export" />
     </Menu>
     <Menu name="tools">
       <Action name="make_complete" />

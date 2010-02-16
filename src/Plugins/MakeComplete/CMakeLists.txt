@@ -11,7 +11,7 @@ Set (MakeCompleToolsPlugin_SRC makecompletetoolsplugin.cpp)
 kde4_add_plugin(rocs_makecompleteplugin ${MakeCompleToolsPlugin_SRC} )
 target_link_libraries(rocs_makecompleteplugin 
 			    ${KDE4_KDEUI_LIBS}
-                            ToolsPluginManager)
+                            rocslib)
 
 install(TARGETS rocs_makecompleteplugin  DESTINATION ${PLUGIN_INSTALL_DIR})
 

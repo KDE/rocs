@@ -34,15 +34,10 @@ FilePluginInterface::~FilePluginInterface()
 {
 
 }
-
-
-QStringList FilePluginInterface::extensions()
-{
-    return QStringList() << "*";
-}
  
 const QString FilePluginInterface::lastError()
 {
-    return QString("Error.");
+    return QString("Default Error.");
 }
+
 }

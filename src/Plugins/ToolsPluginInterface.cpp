@@ -17,13 +17,14 @@
 */
 
 #include "ToolsPluginInterface.h"
-// #include "toolspluginmanager.h"
+
 
 #include <kplugininfo.h>
 
+
 namespace Rocs{
 
-class ToolsPluginInterface::Private{
+class  ToolsPluginInterface::Private{
 public:
 	KPluginInfo *_pluginInfo;
 	QStringList addressBookFields;

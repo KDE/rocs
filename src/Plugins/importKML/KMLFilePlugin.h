@@ -25,14 +25,14 @@ class KMLFilePlugin: public Rocs::FilePluginInterface
 {
   Q_OBJECT
   public:
-    KMLFilePlugin(QObject* parent, const QList< QVariant >&);
+    explicit KMLFilePlugin(QObject* parent, const QList< QVariant >&);
     ~KMLFilePlugin();
     
-    const QStringList extensions(); //Extensões suportadas
+    const QStringList extensions() const; //Extensões suportadas
     
     GraphDocument * readFile(const QString &file) const; //return 0 se arq. inválido
     
-    bool writeFile(const QObject& graph, const QString &filename) const; //false se não gravou.
+    bool writeFile(const GraphDocument&, const QString&) const; //false se não gravou.
   
 };
 

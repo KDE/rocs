@@ -18,10 +18,10 @@
 */
 
 #include "PluginManager.h"
-#include <QDir>
-#include <QPluginLoader>
-#include <QCoreApplication>
+
 #include "ToolsPluginInterface.h"
+#include "FilePluginInterface.h"
+
 #include <KServiceTypeTrader>
 #include <KPluginInfo>
 #include <KDebug>
@@ -53,7 +53,14 @@ void PluginManager::loadPlugins() {
 
 void PluginManager::loadToolsPlugins() {
 
-    kDebug() << "Load all plugins";
+    kDebug() << "Load Tools plugins";
+    
+    foreach(ToolsPluginInterface * t, _toolPlugins){
+	delete t;
+    }
+    
+    _toolPlugins.clear();
+    
     KService::List offers = KServiceTypeTrader::self()->query("Rocs/ToolPlugin");
 
     KService::List::const_iterator iter;
@@ -66,48 +73,34 @@ void PluginManager::loadToolsPlugins() {
 
         if (!factory)
         {
-            KMessageBox::error(0, i18n("<html><p>KPluginFactory could not load the plugin:<br/><i>%1</i></p></html>",
-                                       service->library()));
-            kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
+           kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
             continue;
         }
 
         ToolsPluginInterface *plugin = factory->create<ToolsPluginInterface>(this);
 
         if (plugin) {
-            kDebug() << "Load plugin:" << service->name();
-            kError(5001) << "<html><p>KPluginFactory load the plugin:<br/><i>%1</i></p></html>";
+            kDebug() << "Loaded plugin:" << service->name();
+           _toolPlugins.append(plugin);
             //emit pluginLoaded(plugin);
         } else {
             //KMessageBox::error(0, i18n("<html><p>Plugin Error:<br/><i>%1</i></p></html>",
             //                           service->name()));
-            kDebug() << error;
+            kDebug() << "can´t load Plugin: " << service->name();
         }
     }
-//      ToolsPluginInterface * toolsPlugins;
-//
-//      //SelectDirs...
-//      QDir pluginsDir (QCoreApplication::applicationDirPath());
-//      if (pluginsDir.exists("plugins")){
-// 	pluginsDir.cd("plugins");
-// 	foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
-// 	    QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
-// 	    QObject *plugin = pluginLoader.instance();
-// 	    if (plugin) {
-// 		toolsPlugins = qobject_cast<ToolsPluginInterface *>(plugin);
-// 		if (toolsPlugins){
-//
-// 		    _plugins.append (plugin);
-// 		}
-// 	    }
-// 	}
-//      }
 }
 
 
 void PluginManager::loadFilePlugins() {
 
-    kDebug() << "Load all plugins";
+    kDebug() << "Load File plugins";
+    
+    foreach (FilePluginInterface * f, _filePlugins){
+	delete f;
+    }
+    _filePlugins.clear();
+    
     KService::List offers = KServiceTypeTrader::self()->query("Rocs/FilePlugin");
 
     KService::List::const_iterator iter;
@@ -120,26 +113,33 @@ void PluginManager::loadFilePlugins() {
 
         if (!factory)
         {
-            KMessageBox::error(0, i18n("<html><p>KPluginFactory could not load the plugin:<br/><i>%1</i></p></html>",
-                                       service->library()));
             kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
             continue;
         }
 
-        ToolsPluginInterface *plugin = factory->create<ToolsPluginInterface>(this);
+        FilePluginInterface *plugin = factory->create<FilePluginInterface>(this);
 
         if (plugin) {
-            kDebug() << "Load plugin:" << service->name();
-            kError(5001) << "<html><p>KPluginFactory load the plugin:<br/><i>%1</i></p></html>";
+            kDebug() << "Loaded plugin: " << service->name();
+	    _filePlugins.append(plugin);
+            
             //emit pluginLoaded(plugin);
         } else {
-            //KMessageBox::error(0, i18n("<html><p>Plugin Error:<br/><i>%1</i></p></html>",
-            //                           service->name()));
-            kDebug() << error;
+            kDebug() << "Can't load plugin: " << service->name();
         }
     }
 }
 KPluginInfo pluginInfo(const ToolsPluginInterface * /*plugin*/) {
     return KPluginInfo();
 }
+
+FilePluginInterface *  PluginManager::filePluginsByExtension(QString ext){
+    foreach (FilePluginInterface * p,  _filePlugins){
+	if (p->extensions().join(";").contains(ext, Qt::CaseInsensitive)){
+	    return p;
+	}
+    }
+    return 0;
+}
+
 }

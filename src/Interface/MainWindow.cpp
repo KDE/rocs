@@ -72,6 +72,7 @@
 #include <QActionGroup>
 #include "threadScriptExecution.h"
 #include "../Plugins/PluginManager.h"
+#include <KPushButton>
 
 MainWindow* mainWindow = 0;
 
@@ -85,12 +86,6 @@ MainWindow::MainWindow() :
         
     kDebug() << "############ Load Plugins ###############";
     Rocs::PluginManager::New()->loadPlugins();
-//     if (Rocs::ToolsPluginManager::New()->plugins().size() > 0){
-// 	foreach (Rocs::ToolsPluginInterface * plugin, Rocs::ToolsPluginManager::New()->plugins()){
-// 	      this->addClient(plugin);
-// 	}
-//     }
-//     kDebug() << Rocs::ToolsPluginManager::New()->plugins();
     
     setupWidgets();
     setupActions();
@@ -243,15 +238,27 @@ void MainWindow::setupActions() {
     actionCollection()->addAction("save-script-as", action);
     connect(action, SIGNAL(triggered(bool)), _codeEditor, SLOT(saveScriptAs()));
     
-    if (Rocs::PluginManager::New()->plugins().size() > 0){
-	  QObject * plugin = Rocs::PluginManager::New()->plugins()[0];
-	  action = new KAction(Rocs::PluginManager::New()->plugins()[0]->pluginId(), 
-			      plugin);
-      //     action->setShortcut(Qt::CTRL + Qt::Key_W);
-      //     action->setShortcutContext(Qt::WidgetShortcut);
-	  actionCollection()->addAction("make_complete", action);
-	  connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
+    
+    if (Rocs::PluginManager::New()->filePlugins().count() > 0){
+	kDebug() << "Creating Actions (import export)..";
+	action = new KAction(KIcon("document-save-as"), i18n("Import"), this);
+	action->setShortcut(Qt::CTRL + Qt::Key_I);
+	action->setShortcutContext(Qt::WidgetShortcut);
+	actionCollection()->addAction("import", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(importFile()));
+	
+	action = new KAction(KIcon("document-save-as"), i18n("Export"), this);
+	action->setShortcut(Qt::CTRL + Qt::Key_E);
+	action->setShortcutContext(Qt::WidgetShortcut);
+	actionCollection()->addAction("export", action);
+	connect(action, SIGNAL(triggered(bool)), this, SLOT(exportFile()));
+    }else {
+	kDebug() << "Not Creating Actions (import export).." << Rocs::PluginManager::New()->filePlugins().count();
+      
     }
+    
+    
+    
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
 
@@ -376,6 +383,67 @@ int MainWindow::saveIfChanged(){
   return KMessageBox::No;
 }
 
+void MainWindow::importFile(){
+    if (saveIfChanged() == KMessageBox::Cancel) return;
+    QString ext;
+    foreach (Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins()){
+	ext.append(f->extensions().join(""));
+    }
+    kDebug() << "Extensions:"<< ext;
+    
+    
+    QString fileName = KFileDialog::getOpenFileName(QString(), ext, this, i18n("Graph Files") );
+    if (fileName == "") return;
+    
+    Rocs::FilePluginInterface *f = Rocs::PluginManager::New()->filePluginsByExtension(fileName.right(3));
+    if (f){
+      GraphDocument * gd = f->readFile(fileName);
+      if (gd){
+	  _graphVisualEditor->releaseGraphDocument();
+	  delete _activeGraphDocument;
+	  setActiveGraphDocument(gd);
+	  _graphVisualEditor->scene()->createItems();
+	  kDebug() << "Importing File.." << fileName;
+      }else{
+	  kDebug() << "Error loading file" << fileName << f->lastError();
+      }
+      return;
+    }else{
+	kDebug() <<  "Cannot handle extension "<<  fileName.right(3);
+    }
+}
+
+void MainWindow::exportFile(){
+    QString ext;
+    foreach (Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins()){
+	ext.append(f->extensions().join("\n"));
+    }
+    
+    KFileDialog exportDialog(QString(),ext,this);
+    exportDialog.okButton()->setText(i18n("Export"));
+    exportDialog.okButton()->setToolTip(i18n("Export graphs to file"));
+    if (exportDialog.exec() == KDialog::Accepted){
+	kDebug() << "Exporting File..";
+	if (exportDialog.selectedFile() == ""){
+	    return;
+	}
+	ext = exportDialog.currentFilter().remove('*');	
+	QString file = exportDialog.selectedFile();
+	if (!file.endsWith("ext")){
+	      file.append(ext);
+	}
+	Rocs::FilePluginInterface * p = Rocs::PluginManager::New()->filePluginsByExtension(ext);
+	if (p){
+ 		if (!p->writeFile(*_activeGraphDocument, file)){
+ 		    kDebug() << "Error writing file: " << p->lastError();
+ 		}else{
+		    kDebug() << "File Exported!" << file;
+		}
+ 		return;
+	}
+	kDebug() << "Cannot export file: " << file;
+    }
+}
 #ifdef USING_QTSCRIPT
 // move that to the thread thing.
 // static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {

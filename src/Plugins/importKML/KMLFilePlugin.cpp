@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Rocs file plugin to handle KML Files.
+    Copyright (C) 2010  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,18 +39,20 @@ KMLFilePlugin::KMLFilePlugin(QObject* parent, const QList< QVariant >& ):
 
 }
 
-const QStringList KMLFilePlugin::extensions()
+const QStringList KMLFilePlugin::extensions() const
 {
-    return QStringList() << "kml";
+    return QStringList()
+	<< i18n("*.kml|KML Files\n");
 }
 
 
 GraphDocument * KMLFilePlugin::readFile(const QString &/*fileName*/) const{
-    
-    return 0;
+    GraphDocument * graph = new GraphDocument("Untitled");
+    graph->addGraph();
+    return graph;
 }
 
-bool KMLFilePlugin::writeFile(const QObject &/*graph*/ , const QString &/*filename*/) const{
+bool KMLFilePlugin::writeFile(const GraphDocument &/*graph*/ , const QString &/*filename*/) const{
   
     return false;
 }
