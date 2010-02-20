@@ -72,6 +72,7 @@ private slots:
     
     void importFile();
     void exportFile();
+    void setupToolsPluginsAction();
     
 public slots:
     void setActiveGraphDocument(GraphDocument *d);

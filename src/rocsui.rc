@@ -24,7 +24,7 @@
       <Action name="export" />
     </Menu>
     <Menu name="tools">
-      <Action name="make_complete" />
+      <ActionList name="tools_plugins" />
     </Menu>
   </MenuBar>
  

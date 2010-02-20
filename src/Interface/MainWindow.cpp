@@ -94,13 +94,14 @@ MainWindow::MainWindow() :
     setActiveGraphDocument( new GraphDocument(i18n("Untitled"), 800, 600));
     _activeGraphDocument->addGraph(i18n("Untitled0"));
     setupGUI();
+    
     _moveNodeAction->setView( _graphVisualEditor->view() );
 
     mainWindow = this;
     statusBar()->hide();
     _GraphLayers->populate();
 
-
+    setupToolsPluginsAction();
 
 }
 
@@ -254,12 +255,22 @@ void MainWindow::setupActions() {
 	connect(action, SIGNAL(triggered(bool)), this, SLOT(exportFile()));
     }else {
 	kDebug() << "Not Creating Actions (import export).." << Rocs::PluginManager::New()->filePlugins().count();
-      
     }
     
-    
-    
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
+}
+
+void MainWindow::setupToolsPluginsAction(){
+    QList <QAction*> pluginList;
+    KAction* action = 0;
+    unplugActionList("tools_plugins");
+    QList <Rocs::ToolsPluginInterface*> avaliablePlugins = Rocs::PluginManager::New()->toolPlugins();
+    foreach (Rocs::ToolsPluginInterface* p, avaliablePlugins ){
+	action = new KAction("Your name here", p);
+	connect (action, SIGNAL(toggled(bool)),this, SLOT(runToolPlugin()));
+	pluginList.append(action);
+    }
+    plugActionList("tools_plugins", pluginList);
 }
 
 void MainWindow::setActiveGraphDocument(GraphDocument* d)
