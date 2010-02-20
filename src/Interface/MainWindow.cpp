@@ -262,16 +262,17 @@ void MainWindow::setupActions() {
 
 void MainWindow::setupToolsPluginsAction(){
     QList <QAction*> pluginList;
-    KAction* action = 0;
+    QAction* action = 0;
     unplugActionList("tools_plugins");
-    QList <Rocs::ToolsPluginInterface*> avaliablePlugins = Rocs::PluginManager::New()->toolPlugins();
+    QList < Rocs::ToolsPluginInterface*> avaliablePlugins = Rocs::PluginManager::New()->toolPlugins();
     foreach (Rocs::ToolsPluginInterface* p, avaliablePlugins ){
-	action = new KAction("Your name here", p);
-	connect (action, SIGNAL(toggled(bool)),this, SLOT(runToolPlugin()));
+	action = new KAction(p->displayName(), p);	
+	connect (action, SIGNAL(triggered(bool)),this, SLOT(runToolPlugin()));
 	pluginList.append(action);
     }
     plugActionList("tools_plugins", pluginList);
 }
+
 
 void MainWindow::setActiveGraphDocument(GraphDocument* d)
 {
@@ -489,9 +490,14 @@ void MainWindow::executeScript(QString text) {
 #endif
 
 void MainWindow::runToolPlugin(){
-    QAction *action = qobject_cast<KAction *>(sender());
-    Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *>(action->parent());
-    QString run = plugin->run(0);
-    executeScript(run);
+    
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action){
+	Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *>(action->parent());
+	if (plugin){
+	    QString run = plugin->run(this);
+	    executeScript(run);
+	}
+    }
      
 }

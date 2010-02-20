@@ -33,26 +33,35 @@ class ROCSLIB_EXPORT PluginManager: public QObject
 {
   Q_OBJECT
   private:
-      QList<ToolsPluginInterface*> _toolPlugins;
+      //QList<ToolsPluginInterface*> _toolPlugins;
       QList<FilePluginInterface*> _filePlugins;
       
       PluginManager();
 
       static PluginManager * self;
+      
+      /**The D Pointer*/
+      class PluginManagerPrivate * _d;
   public:
     
     static PluginManager * New();
-    ~PluginManager() { }
+    ~PluginManager();
+    
     void loadPlugins();
+    
+    
+    bool loadToolPlugin(QString arg1);
+    
     void loadToolsPlugins();
+    
     void loadFilePlugins();
     
-    QList <ToolsPluginInterface*> toolPlugins(){return _toolPlugins;}
-    QList <FilePluginInterface*> filePlugins(){return _filePlugins;}
+    QList < ToolsPluginInterface*> toolPlugins();
+    QList < FilePluginInterface*> filePlugins(){return _filePlugins;}
     
-    KPluginInfo pluginInfo(const ToolsPluginInterface * plugin);
+    KPluginInfo pluginInfo( ToolsPluginInterface * plugin);
     
-    KPluginInfo pluginInfo(const FilePluginInterface * plugin);
+    KPluginInfo pluginInfo( FilePluginInterface * plugin);
     
     /** Returns plugin that can handle extension \p ext 
     \param ext File extension (like 'TXT', 'cpp', '.Cpp', '*.js')

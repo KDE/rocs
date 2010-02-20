@@ -29,7 +29,39 @@
 
 
 namespace Rocs {
+
+class PluginManagerPrivate {
+  public:
+      PluginManagerPrivate(){
+	  toolsPluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/ToolPlugin"));
+	  filePluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/FilePlugin"));
+      }
+      ~PluginManagerPrivate(){
+	
+      }
+    KPluginInfo PluginInfoFromName(const QString &arg1){
+	foreach (KPluginInfo info, toolsPluginsInfo){
+	    if (info.name() == arg1){
+		return info;
+	    }
+	}
+	return KPluginInfo();
+    }
+      typedef KPluginInfo::List KPluginList;
+      KPluginList toolsPluginsInfo;
+      KPluginList filePluginsInfo;
+      
+      QMap<KPluginInfo,  ToolsPluginInterface*> toolsPluginsMap;
+      QMap<KPluginInfo,  FilePluginInterface*> filePluginsMap;
+  
+};
+  
+  
+  
+  
 PluginManager * PluginManager::self = 0;
+
+
 
 
 PluginManager * PluginManager::New()
@@ -43,53 +75,70 @@ PluginManager * PluginManager::New()
 
 PluginManager::PluginManager()
 {
-
+  _d = new PluginManagerPrivate();
 }
+
+
+PluginManager::~PluginManager()
+{
+  kDebug() << " ++++++++++++++++ NEED DELETE PLUGINS!!!! A MEMORY LEAK! Running away!";
+  
+  delete _d;
+}
+
 
 void PluginManager::loadPlugins() {
   loadFilePlugins();
   loadToolsPlugins();  
 }
 
+bool PluginManager::loadToolPlugin(QString name){
+    KPluginInfo kpi =  _d->PluginInfoFromName(name);
+    if (kpi.isValid()){
+	QString error;
+	ToolsPluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<ToolsPluginInterface>( QString::fromLatin1( "Rocs/ToolPlugin" ), QString::fromLatin1( "[Name]=='%1'" ).arg( name ), this, QVariantList(), &error );
+	if (plugin ){
+	    _d->toolsPluginsMap.insert(kpi, plugin);
+	    kpi.setPluginEnabled(true);
+	    return true;
+	}
+	else {
+	  kDebug() << "error loading plugin: " << name << error;
+	}
+	
+    }else {
+	kDebug() << "Error loading tool plugin " << name;
+    }
+    return false;
+}
+
 void PluginManager::loadToolsPlugins() {
 
     kDebug() << "Load Tools plugins";
     
-    foreach(ToolsPluginInterface * t, _toolPlugins){
-	delete t;
-    }
-    
-    _toolPlugins.clear();
-    
-    KService::List offers = KServiceTypeTrader::self()->query("Rocs/ToolPlugin");
-
-    KService::List::const_iterator iter;
-    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter)
-    {
-        QString error;
-        KService::Ptr service = *iter;
-
-        KPluginFactory *factory = KPluginLoader(service->library()).factory();
-
-        if (!factory)
-        {
-           kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
-            continue;
-        }
-
-        ToolsPluginInterface *plugin = factory->create<ToolsPluginInterface>(this);
-
-        if (plugin) {
-            kDebug() << "Loaded plugin:" << service->name();
-           _toolPlugins.append(plugin);
-            //emit pluginLoaded(plugin);
-        } else {
-            //KMessageBox::error(0, i18n("<html><p>Plugin Error:<br/><i>%1</i></p></html>",
-            //                           service->name()));
-            kDebug() << "can´t load Plugin: " << service->name();
-        }
+    foreach (KPluginInfo info, _d->toolsPluginsInfo){
+	loadToolPlugin(info.name());
     }
 }
+
+
+KPluginInfo PluginManager::pluginInfo( Rocs::ToolsPluginInterface* plugin)
+{
+      return _d->toolsPluginsMap.key(plugin);
+}
+
+QList< ToolsPluginInterface* > PluginManager::toolPlugins()
+{
+      QList < ToolsPluginInterface * > value;
+      foreach (KPluginInfo info, _d->toolsPluginsMap.keys()){
+	  if (info.isPluginEnabled()){
+	      value.append(_d->toolsPluginsMap[info]);
+	  }
+      }
+      
+      return value;
+}
+
 
 
 void PluginManager::loadFilePlugins() {

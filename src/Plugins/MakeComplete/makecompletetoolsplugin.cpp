@@ -26,7 +26,7 @@
 #include <KAboutData>
 
 
-static const KAboutData aboutdata("rocs_makecompletetoolplugin", 0, ki18n("Make Complete") , "0.1" );
+static const KAboutData aboutdata("rocs_makecompleteplugin", 0, ki18n("Make Complete") , "0.1" );
 
 K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin< MakeCompleteToolPlugin>(); ) 
 K_EXPORT_PLUGIN( ToolsPluginFactory(aboutdata) )

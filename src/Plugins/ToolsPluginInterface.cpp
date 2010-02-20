@@ -20,6 +20,7 @@
 
 
 #include <kplugininfo.h>
+#include "PluginManager.h"
 
 
 namespace Rocs{
@@ -43,26 +44,27 @@ ToolsPluginInterface::~ToolsPluginInterface()
 	delete d;
 }
 
-QString ToolsPluginInterface::pluginId() const
+QString ToolsPluginInterface::pluginId() 
 {
 	return QString::fromLatin1( metaObject()->className() );
 }
 
 
-QString ToolsPluginInterface::displayName() const
+QString ToolsPluginInterface::displayName() 
 {
 	return pluginInfo().isValid() ? pluginInfo().name() : QString();
 }
 
-QString ToolsPluginInterface::pluginIcon() const
+QString ToolsPluginInterface::pluginIcon() 
 {
 	return pluginInfo().isValid() ? pluginInfo().icon() : QString();
 }
 
 
-KPluginInfo ToolsPluginInterface::pluginInfo() const 
+KPluginInfo ToolsPluginInterface::pluginInfo()  
 {
-	return *(d->_pluginInfo);
+    return PluginManager::New()->pluginInfo(this);
+// 	return *(d->_pluginInfo);
 }
 
 

@@ -108,7 +108,7 @@ public:
 	/**
 	 * Returns the KPluginInfo object associated with this plugin
 	 */
-	KPluginInfo pluginInfo() const;
+	KPluginInfo pluginInfo();
 
 	/**
 	 * Get the name of the icon for this plugin. The icon name is taken from the
@@ -119,20 +119,20 @@ public:
 	 *
 	 * This is a convenience method that simply calls @ref pluginInfo()->icon().
 	 */
-	QString pluginIcon() const;
+	QString pluginIcon() ;
 
 	/**
 	 * Returns the display name of this plugin.
 	 *
 	 * This is a convenience method that simply calls @ref pluginInfo()->name().
 	 */
-	QString displayName() const;
+	QString displayName() ;
 
 	/**
 	 * @brief Get the plugin id
 	 * @return the plugin's id which is gotten by calling QObject::metaObject()->className().
 	 */
-	QString pluginId() const;
+	QString pluginId() ;
 
 	/** @brief Implements this function and return the script to run
 	* @param document is actual Document (graph).
