@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Rocs/ToolPlugin
 X-KDE-Derived=KPluginInfo
 Comment=Rocs Tool Plugin
+Comment[el]=Εργαλείο πρόσθετου για το Rocs
 Comment[en_GB]=Rocs Tool Plugin
 Comment[es]=Complemento de herramienta para Rocs
 Comment[nb]=Rocs Tool programtillegg
