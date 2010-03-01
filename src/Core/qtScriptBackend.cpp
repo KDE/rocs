@@ -24,10 +24,9 @@
 #include <KTextBrowser>
 #include "graphDocument.h"
 
-QtScriptBackend::QtScriptBackend(GraphDocument& graphs, KTextBrowser *debugArea): _graphs(graphs)
+QtScriptBackend::QtScriptBackend(GraphDocument& graphs): _graphs(graphs)
 {
     kDebug() << "Starting Script Backend";
-    _debugArea = debugArea;
 
     kDebug() << "Graph Document" << _graphs;
 
@@ -83,7 +82,7 @@ void QtScriptBackend::loadFile(const QString& file) {
     _script.clear();
     QFile f(file);
     if  (  !f.open(QIODevice::ReadOnly | QIODevice::Text ) ) {
-        qDebug() << "File not found";
+        kDebug() << "File not found";
         return;
     }
 

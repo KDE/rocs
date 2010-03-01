@@ -30,7 +30,7 @@ class QtScriptBackend;
 class ROCSLIB_EXPORT ThreadScriptExecution : public QThread{
   Q_OBJECT
   public:
-    ThreadScriptExecution(KTextBrowser * debugView = 0);
+    ThreadScriptExecution();
     virtual ~ThreadScriptExecution();
 
   public slots:
@@ -39,14 +39,18 @@ class ROCSLIB_EXPORT ThreadScriptExecution : public QThread{
     void abort();
     void setData(QString script, GraphDocument * graphDocument);
     void debug(const QString& str);
+    void output(const QString& str);
 
   private:
     QtScriptBackend* _engine;
-
     QString _script;
     GraphDocument * _graphDocument;
-    KTextBrowser * _txtDebug;
     QMutex _mutex;
+    
+  signals:
+    void debugString(const QString& s);
+    void outputString(const QString& s);
+    
 };
 
 #endif

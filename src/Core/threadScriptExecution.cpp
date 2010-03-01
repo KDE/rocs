@@ -9,15 +9,14 @@
 
 ThreadScriptExecution * self;
 
-ThreadScriptExecution::ThreadScriptExecution(KTextBrowser * debugView):
+ThreadScriptExecution::ThreadScriptExecution():
 	 QThread(),
          _script(0),
-         _graphDocument(0),
-         _txtDebug(debugView)
-	{
+         _graphDocument(0)
+{
         _engine = 0;
 	self = this;
-	}
+}
 
 
 
@@ -30,8 +29,17 @@ static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engin
     return QScriptValue();
 }
 
+static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engine*/){
+    self->output(QString("%1 \n").arg(context->argument(0).toString()));
+    return QScriptValue();
+}
+
 void ThreadScriptExecution::debug(const QString& str){
-	_txtDebug->insertPlainText(str);
+	emit debugString(str);
+}
+
+void ThreadScriptExecution::output(const QString& str){
+	emit outputString(str);
 }
 
 void ThreadScriptExecution::setData(QString script, GraphDocument * graphDocument){
@@ -41,10 +49,11 @@ void ThreadScriptExecution::setData(QString script, GraphDocument * graphDocumen
           delete _engine;
     }
 
-    _engine = new QtScriptBackend( (*_graphDocument) ,  _txtDebug);
+    _engine = new QtScriptBackend( (*_graphDocument) );
 //    QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
 //    dbg->attachTo(_engine);
     _engine->globalObject().setProperty("debug", _engine->newFunction(debug_script));
+    _engine->globalObject().setProperty("output", _engine->newFunction(output_script));
 
 }
 
@@ -55,7 +64,7 @@ void ThreadScriptExecution::run(){
 	  return;
 	}
         QScriptValue results = _engine->evaluate(_script);
-        _txtDebug->insertPlainText(results.toString());
+        emit debugString(results.toString());
         _mutex.unlock();
      }
 }

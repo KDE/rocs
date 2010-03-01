@@ -282,7 +282,7 @@ void GraphTests::testKrossRb(){
 
 void GraphTests::testQtScript() {
     createPentagon();
-    QtScriptBackend *engine = new QtScriptBackend(_graphDocument,  0);
+    QtScriptBackend *engine = new QtScriptBackend(_graphDocument);
 
     QScriptValue results = engine->evaluate("graphs.length");
     QVERIFY2(results.toNumber() == 1, "Error: number of graphs is not 1.");

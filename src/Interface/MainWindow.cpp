@@ -128,7 +128,7 @@ void MainWindow::setupWidgets() {
     QWidget *rightPanel = setupRightPanel();
     QWidget *leftPanel	= setupLeftPanel();
      
-    _tScriptExecution = new ThreadScriptExecution(_txtDebug);
+    _tScriptExecution = new ThreadScriptExecution();
     connect(_tScriptExecution, SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
     connect(_tScriptExecution, SIGNAL(terminated()), _bottomTabs, SLOT(setPlayString()));
     connect(_tScriptExecution, SIGNAL(destroyed(QObject*)), _bottomTabs, SLOT(setPlayString()));
