@@ -27,6 +27,7 @@ Comment=Make all graphs complete. All actual edges will be removed.
 Comment[el]=Ολοκλήρωση όλων των γραφημάτων. Όλες οι ενεργές ακμές θα αφαιρεθούν.
 Comment[en_GB]=Make all graphs complete. All actual edges will be removed.
 Comment[es]=Completar todos los grafos. Se eliminarán todas las aristas reales.
+Comment[hr]=Učini sve grafove potpunima. Svi stvarni vrhovi biti će uklonjeni.
 Comment[nb]=Fullfør alle grafer, alle virkelige kanter vil bli fjernet.
 Comment[nds]=All Diagrammen afsluten. All Kanten warrt wegdaan.
 Comment[pt]=Torna todos os gráficos completos. Todas as arestas actuais serão removidas.
