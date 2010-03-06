@@ -6,7 +6,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 #ADD_DEFINITIONS(-DQT_SHARED)
 
 
-Set (KMLFilePlugin_SRC KMLFilePlugin.cpp KMLFilePlugin.h)
+Set (KMLFilePlugin_SRC KMLFilePlugin.cpp)
 
 kde4_add_plugin(rocs_kmlfileplugin ${KMLFilePlugin_SRC} )
 target_link_libraries(rocs_kmlfileplugin
