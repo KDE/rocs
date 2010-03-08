@@ -138,20 +138,6 @@ target_link_libraries(rocs
   ${QT_QTSCRIPTTOOLS_LIBRARY}
 )
 
-########################## Plugins ########################
- Set (KMLFilePlugin_SRC 
-   Plugins/importKML/KMLFilePlugin.cpp
- )
- 
- kde4_add_plugin(rocs_kmlfileplugin ${KMLFilePlugin_SRC} )
- 
- target_link_libraries(rocs_kmlfileplugin
-   rocslib
-   ${KDE4_KDEUI_LIBS}
- )
-
-#install(TARGETS rocs_kmlfileplugin  DESTINATION ${PLUGIN_INSTALL_DIR})
-#install( FILES  Plugins/importKML/rocs_kmlfileplugin.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 ####################### TESTS #############################
 
 set (testGraphs_SRCS
