@@ -11,7 +11,7 @@ ThreadScriptExecution * self;
 
 ThreadScriptExecution::ThreadScriptExecution():
 	 QThread(),
-         _script(0),
+         _script(),
          _graphDocument(0)
 {
         _engine = 0;
