@@ -145,5 +145,5 @@ private:
 
 
 
-};
+}
 #endif
