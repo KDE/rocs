@@ -62,8 +62,10 @@ private: // Methods
     QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
     QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
     int saveIfChanged();
+    void finishLoadingUi();
+    
 private slots:
-    void executeScript(QString text = "");
+    void executeScript(const QString &text = QString());
     void newGraph();
     void openGraph();
     void saveGraph();
@@ -78,9 +80,14 @@ public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
     void runToolPlugin();
+    void outputString(const QString& s);
+    void debugString(const QString& s);
 
+  signals:
+      void startDocument();
 private: // Variables.
-
+    bool _uiCreated;
+    
     // Left Area:
     GraphLayers* _GraphLayers; //! Area where the nodes and edges will be modified.
     KPushButton *_btnAddGraph;

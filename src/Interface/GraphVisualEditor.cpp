@@ -79,6 +79,7 @@ void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
 }
 
 void GraphVisualEditor::releaseGraphDocument() {
+    if (_scene == 0) { kDebug() << "Fudeu"; }
     _scene->clear();
     int size = _graphDocument->size();
     for (int i = 0; i < size; i++) {

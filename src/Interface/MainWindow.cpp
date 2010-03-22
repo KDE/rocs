@@ -76,32 +76,37 @@
 
 MainWindow* mainWindow = 0;
 
-MainWindow::MainWindow() :
-        KXmlGuiWindow() {
-    _activeGraphDocument = 0;
-    _graph = 0;
-    _tScriptExecution=0;
+MainWindow::MainWindow() :  KXmlGuiWindow() {    
     setObjectName ( "Rocs" );
-
-        
+    
     kDebug() << "############ Load Plugins ###############";
     Rocs::PluginManager::New()->loadPlugins();
     
-    setupWidgets();
-    setupActions();
-
-    // this will create a new opened file by default
-    setActiveGraphDocument( new GraphDocument(i18n("Untitled"), 800, 600));
-    _activeGraphDocument->addGraph(i18n("Untitled0"));
-    setupGUI();
+    kDebug() << "Creating Thread"; _tScriptExecution = new ThreadScriptExecution();
+    kDebug() << "Starting Thread"; _tScriptExecution->start();
     
-    _moveNodeAction->setView( _graphVisualEditor->view() );
+    // conexões Thread -> MainThread
+    connect(_tScriptExecution, SIGNAL(graphDocumentChanged(GraphDocument*)), 
+            this, SLOT(setActiveGraphDocument(GraphDocument*)));
+    connect(_tScriptExecution, SIGNAL(outputString(QString)), 
+            this, SLOT(outputString(QString)));
+    connect(_tScriptExecution, SIGNAL(debugString(QString)),
+            this, SLOT(debugString(QString)));
+    connect(_tScriptExecution, SIGNAL(graphDocumentCreated(GraphDocument*)), 
+            this, SLOT(setActiveGraphDocument(GraphDocument*)));
+    
+            
+    // conexões MainThread -> Thread.
+    connect(this, SIGNAL(startDocument()), 
+            _tScriptExecution, SLOT(setActiveGraphDocument()));
 
-    mainWindow = this;
-    statusBar()->hide();
-    _GraphLayers->populate();
-
-    setupToolsPluginsAction();
+    
+    kDebug() << "Starting Document"; emit startDocument();
+    
+    kDebug() << "Waiting for document to be created";
+    //while(!_tScriptExecution->documentCreated());
+    kDebug() << "Document Created, let's go.";
+    
 
 }
 
@@ -113,6 +118,14 @@ MainWindow::~MainWindow() {
 
     Settings::self()->writeConfig();
     delete _tScriptExecution;
+}
+
+void MainWindow::outputString(const QString& s){
+   _txtDebug->append(s);
+}
+
+void MainWindow::debugString(const QString& s){
+   _txtDebug->append(s);
 }
 
 GraphDocument *MainWindow::activeDocument() const {
@@ -273,13 +286,38 @@ void MainWindow::setupToolsPluginsAction(){
     plugActionList("tools_plugins", pluginList);
 }
 
+void MainWindow::finishLoadingUi()
+{
+  if (!_uiCreated){
+  // this will create a new opened file by default
+    kDebug() << "Settuping Widgets"; setupWidgets(); 
+    kDebug() << "Settuping Actions"; setupActions();
+    
+    kDebug() <<"Seting up Gui"; setupGUI();
+    
+    kDebug() << "Setting View for Move Action"; _moveNodeAction->setView( _graphVisualEditor->view() );
+
+    mainWindow = this;
+    kDebug() << "Hidding the Statusbar"; statusBar()->hide();
+    kDebug() << "GraphLayers being populated"; _GraphLayers->populate();
+
+    kDebug() << "Setting up plugins"; setupToolsPluginsAction();
+  }
+  _uiCreated = true;
+}
+
 
 void MainWindow::setActiveGraphDocument(GraphDocument* d)
 {
-    foreach( QAction *action, actionCollection()->actions() ) {
-        if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action))
+  if( !_uiCreated ){
+    _activeGraphDocument = d;
+    finishLoadingUi();
+  }
+
+  foreach( QAction *action, actionCollection()->actions() ) {
+      if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action))
             absAction->setActiveGraphDocument(d);
-    }
+  }
     
     //connect(d, SIGNAL(graphCreated(Graph*)), this, SLOT());
     //connect(d, SIGNAL(graphRemoved(int)), this, SLOT());
@@ -457,33 +495,25 @@ void MainWindow::exportFile(){
     }
 }
 #ifdef USING_QTSCRIPT
-// move that to the thread thing.
-// static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {
-//     mainWindow->debug(QString("%1 \n").arg(context->argument(0).toString()));
-//     return QScriptValue();
-// }
 
-void MainWindow::executeScript(QString text) {
-    if (_activeGraphDocument == 0)  return;
+void MainWindow::executeScript(const QString& text) {
     if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
 
     _txtDebug->clear();
     _bottomTabs->setStopString();
-
+    QString script = text.isEmpty()?_codeEditor->text():text;
+    
     if ( !_tScriptExecution->isRunning() ){
-	kDebug() << "Starting Script";
-	if (text == ""){
-	    _tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
-	}else{
-	    _tScriptExecution->setData(text, _activeGraphDocument);
-	}
-        _tScriptExecution ->start();
+        kDebug() << "Starting Script";
+        //! change that to signals.
+	    //_tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
+        //_tScriptExecution ->start();
         
     }else{
-	kDebug() << "Aborting Script";
-	_bottomTabs->setPlayString();
-        _tScriptExecution->abort();
+        kDebug() << "Aborting Script";
+        _bottomTabs->setPlayString();
+        //_tScriptExecution->abort();
     }
 }
 

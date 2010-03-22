@@ -23,6 +23,10 @@
 #include <QMutex>
 #include "rocslib_export.h"
 
+class Graph;
+class Node;
+class Edge;
+
 class KTextBrowser;
 class GraphDocument;
 class QtScriptBackend;
@@ -32,25 +36,48 @@ class ROCSLIB_EXPORT ThreadScriptExecution : public QThread{
   public:
     ThreadScriptExecution();
     virtual ~ThreadScriptExecution();
-
+    bool documentCreated();
+    
   public slots:
     void run();
-//    bool isEvaluating();
-    void abort();
-    void setData(QString script, GraphDocument * graphDocument);
-    void debug(const QString& str);
-    void output(const QString& str);
+    
+    // script - related.
+    void abortScript();
+    void startScript();
+    void setScript(const QString& s);
+    
+    void setActiveGraphDocument(GraphDocument *g = 0);
+    
+    // ui related.
+    void debug(const QString& s);
+    void output(const QString& s);
+    /*
+    // graph - related.
+    void addGraph(const QString& s);
+    void removeGraph(Graph *g);
+    
+    void addNode(const QString& s, Graph *g = 0);
+    void removeNode(Node *n);
 
+    void addEdge(Node *n1, Node *n2);
+    void removeEdge(Edge *e);
+    */
   private:
-    QtScriptBackend* _engine;
     QString _script;
+    QtScriptBackend* _engine;
+
     GraphDocument * _graphDocument;
     QMutex _mutex;
     
   signals:
     void debugString(const QString& s);
     void outputString(const QString& s);
-    
+    void graphDocumentChanged(GraphDocument *d);
+    void graphCreated(Graph *g);
+    void graphRemoved(int i);
+    void documentHeightChanged(qreal q);
+    void documentHeigthChanged(qreal q);
+    void graphDocumentCreated(GraphDocument *g);
 };
 
 #endif
