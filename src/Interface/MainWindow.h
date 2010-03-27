@@ -23,6 +23,7 @@
 
 #include <KXmlGuiWindow>
 #include <kmessagebox.h>
+#include <QMutex>
 
 class KPushButton;
 class GraphLayers;
@@ -114,6 +115,8 @@ private: // Variables.
     MoveNodeAction *_moveNodeAction;
 
     ThreadScriptExecution *_tScriptExecution;
+    
+    QMutex _mutex;
 };
 
 #endif

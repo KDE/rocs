@@ -34,7 +34,7 @@ class QtScriptBackend;
 class ROCSLIB_EXPORT ThreadScriptExecution : public QThread{
   Q_OBJECT
   public:
-    ThreadScriptExecution();
+    ThreadScriptExecution(QMutex &mutex);
     virtual ~ThreadScriptExecution();
     bool documentCreated();
     
@@ -67,7 +67,7 @@ class ROCSLIB_EXPORT ThreadScriptExecution : public QThread{
     QtScriptBackend* _engine;
 
     GraphDocument * _graphDocument;
-    QMutex _mutex;
+    QMutex &_mutex;
     
   signals:
     void debugString(const QString& s);

@@ -76,14 +76,14 @@
 
 MainWindow* mainWindow = 0;
 
-MainWindow::MainWindow() :  KXmlGuiWindow() {    
+MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex() {    
     setObjectName ( "Rocs" );
     _uiCreated = false;
     
     kDebug() << "############ Load Plugins ###############";
     Rocs::PluginManager::New()->loadPlugins();
     
-    kDebug() << "Creating Thread"; _tScriptExecution = new ThreadScriptExecution();
+    kDebug() << "Creating Thread"; _tScriptExecution = new ThreadScriptExecution(_mutex);
     kDebug() << "Starting Thread"; _tScriptExecution->start();
     
     // conexões Thread -> MainThread
@@ -130,7 +130,6 @@ void MainWindow::setupWidgets() {
     QWidget *rightPanel = setupRightPanel();
     QWidget *leftPanel	= setupLeftPanel();
      
-    _tScriptExecution = new ThreadScriptExecution();
     connect(_tScriptExecution, SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
     connect(_tScriptExecution, SIGNAL(terminated()), _bottomTabs, SLOT(setPlayString()));
     connect(_tScriptExecution, SIGNAL(destroyed(QObject*)), _bottomTabs, SLOT(setPlayString()));
@@ -279,18 +278,18 @@ void MainWindow::finishLoadingUi()
 {
   if (!_uiCreated){
   // this will create a new opened file by default
-    kDebug() << "Settuping Widgets"; setupWidgets(); 
-    kDebug() << "Settuping Actions"; setupActions();
+    setupWidgets(); 
+    setupActions();
     
-    kDebug() <<"Seting up Gui"; setupGUI();
+    setupGUI();
     
-    kDebug() << "Setting View for Move Action"; _moveNodeAction->setView( _graphVisualEditor->view() );
+    _moveNodeAction->setView( _graphVisualEditor->view() );
 
     mainWindow = this;
-    kDebug() << "Hidding the Statusbar"; statusBar()->hide();
-    kDebug() << "GraphLayers being populated"; _GraphLayers->populate();
+    statusBar()->hide();
+    _GraphLayers->populate();
 
-    kDebug() << "Setting up plugins"; setupToolsPluginsAction();
+    setupToolsPluginsAction();
   }
   _uiCreated = true;
 }

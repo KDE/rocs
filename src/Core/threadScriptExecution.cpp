@@ -9,10 +9,11 @@
 #include <KLocale>
 static ThreadScriptExecution *self;
 
-ThreadScriptExecution::ThreadScriptExecution():
+ThreadScriptExecution::ThreadScriptExecution(QMutex &mutex):
 	 QThread(),
-         _script(),
-         _graphDocument(0)
+	 _mutex(mutex),
+     _script(),
+     _graphDocument(0)
 {
 	self = this;
 }
