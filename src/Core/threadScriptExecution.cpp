@@ -31,11 +31,6 @@ void ThreadScriptExecution::setActiveGraphDocument(GraphDocument *d){
         connect(_graphDocument, SIGNAL(widthChanged(qreal)),    this, SIGNAL(documentHeightChanged(qreal)));
         
         _graphDocument->addGraph(i18n("Untitled0"));
-        if (_graphDocument){
-            kDebug() << "Sim, Ele Existe!";
-        }
-        kDebug() << "Chegou até aqui";
-        usleep(500);
      } else {
         _graphDocument = d;
      }
