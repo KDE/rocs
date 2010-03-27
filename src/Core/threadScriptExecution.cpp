@@ -13,7 +13,8 @@ ThreadScriptExecution::ThreadScriptExecution(QMutex &mutex):
 	 QThread(),
 	 _mutex(mutex),
      _script(),
-     _graphDocument(0)
+     _graphDocument(0),
+     _engine(0)
 {
 	self = this;
 }
@@ -41,7 +42,7 @@ void ThreadScriptExecution::setActiveGraphDocument(GraphDocument *d){
 }
 
 ThreadScriptExecution::~ThreadScriptExecution(){
-        delete _engine;
+    if(_engine) delete _engine;
 }
 
 static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {

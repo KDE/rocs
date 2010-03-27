@@ -73,6 +73,7 @@
 #include "threadScriptExecution.h"
 #include "../Plugins/PluginManager.h"
 #include <KPushButton>
+#include <QMutexLocker>
 
 MainWindow* mainWindow = 0;
 
@@ -277,7 +278,6 @@ void MainWindow::setupToolsPluginsAction(){
 void MainWindow::finishLoadingUi()
 {
   if (!_uiCreated){
-  // this will create a new opened file by default
     setupWidgets(); 
     setupActions();
     
@@ -315,6 +315,8 @@ void MainWindow::setActiveGraphDocument(GraphDocument* d)
     
     _activeGraphDocument = d;
     _graphVisualEditor->setActiveGraphDocument(d);
+    
+    QMutexLocker locker(&_mutex);
     if (_activeGraphDocument->size() == 0) return;
     setActiveGraph(_activeGraphDocument->at(0));
     _GraphLayers->populate();
