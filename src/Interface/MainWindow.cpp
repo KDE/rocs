@@ -87,28 +87,16 @@ MainWindow::MainWindow() :  KXmlGuiWindow() {
     kDebug() << "Starting Thread"; _tScriptExecution->start();
     
     // conexões Thread -> MainThread
-    connect(_tScriptExecution, SIGNAL(graphDocumentChanged(GraphDocument*)), 
-            this, SLOT(setActiveGraphDocument(GraphDocument*)));
-    connect(_tScriptExecution, SIGNAL(outputString(QString)), 
-            this, SLOT(outputString(QString)));
-    connect(_tScriptExecution, SIGNAL(debugString(QString)),
-            this, SLOT(debugString(QString)));
-    connect(_tScriptExecution, SIGNAL(graphDocumentCreated(GraphDocument*)), 
-            this, SLOT(setActiveGraphDocument(GraphDocument*)));
+    connect(_tScriptExecution, SIGNAL(graphDocumentChanged(GraphDocument*)), this, SLOT(setActiveGraphDocument(GraphDocument*)));
+    connect(_tScriptExecution, SIGNAL(graphDocumentCreated(GraphDocument*)), this, SLOT(setActiveGraphDocument(GraphDocument*)));
     
+    connect(_tScriptExecution, SIGNAL(outputString(QString)), this, SLOT(outputString(QString)));
+    connect(_tScriptExecution, SIGNAL(debugString(QString)),  this, SLOT(debugString(QString)));
             
     // conexões MainThread -> Thread.
-    connect(this, SIGNAL(startDocument()), 
-            _tScriptExecution, SLOT(setActiveGraphDocument()));
+    connect(this, SIGNAL(startDocument()),   _tScriptExecution, SLOT(setActiveGraphDocument()));
 
-    
     kDebug() << "Starting Document"; emit startDocument();
-    
-    kDebug() << "Waiting for document to be created";
-    //while(!_tScriptExecution->documentCreated());
-    kDebug() << "Document Created, let's go.";
-    
-
 }
 
 MainWindow::~MainWindow() {
@@ -255,20 +243,20 @@ void MainWindow::setupActions() {
     
     
     if (Rocs::PluginManager::New()->filePlugins().count() > 0){
-	kDebug() << "Creating Actions (import export)..";
-	action = new KAction(KIcon("document-save-as"), i18n("Import"), this);
-	action->setShortcut(Qt::CTRL + Qt::Key_I);
-	action->setShortcutContext(Qt::WidgetShortcut);
-	actionCollection()->addAction("import", action);
-	connect(action, SIGNAL(triggered(bool)), this, SLOT(importFile()));
-	
-	action = new KAction(KIcon("document-save-as"), i18n("Export"), this);
-	action->setShortcut(Qt::CTRL + Qt::Key_E);
-	action->setShortcutContext(Qt::WidgetShortcut);
-	actionCollection()->addAction("export", action);
-	connect(action, SIGNAL(triggered(bool)), this, SLOT(exportFile()));
+        kDebug() << "Creating Actions (import export)..";
+        action = new KAction(KIcon("document-save-as"), i18n("Import"), this);
+        action->setShortcut(Qt::CTRL + Qt::Key_I);
+        action->setShortcutContext(Qt::WidgetShortcut);
+        actionCollection()->addAction("import", action);
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(importFile()));
+        
+        action = new KAction(KIcon("document-save-as"), i18n("Export"), this);
+        action->setShortcut(Qt::CTRL + Qt::Key_E);
+        action->setShortcutContext(Qt::WidgetShortcut);
+        actionCollection()->addAction("export", action);
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(exportFile()));
     }else {
-	kDebug() << "Not Creating Actions (import export).." << Rocs::PluginManager::New()->filePlugins().count();
+        kDebug() << "Not Creating Actions (import export).." << Rocs::PluginManager::New()->filePlugins().count();
     }
     
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
