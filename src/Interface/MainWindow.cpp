@@ -78,6 +78,7 @@ MainWindow* mainWindow = 0;
 
 MainWindow::MainWindow() :  KXmlGuiWindow() {    
     setObjectName ( "Rocs" );
+    _uiCreated = false;
     
     kDebug() << "############ Load Plugins ###############";
     Rocs::PluginManager::New()->loadPlugins();
