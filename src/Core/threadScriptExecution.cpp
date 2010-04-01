@@ -9,7 +9,7 @@ ThreadScriptExecution * self;
 
 ThreadScriptExecution::ThreadScriptExecution(KTextBrowser * debugView):
 	 QThread(),
-         _script(0),
+         _script(),
          _graphDocument(0),
          _txtDebug(debugView)
 	{
