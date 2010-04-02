@@ -31,7 +31,7 @@ Node::Node(Graph *parent) : QObject(parent) {
     _graph = parent;
     _x = 0;
     _y = 0;
-    _width = 1;
+    _width = 0.5;
     _showName = true;
     _showValue = true;
     _begin = false;

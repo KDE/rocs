@@ -84,10 +84,16 @@ void AddEdgeAction::executeRelease(QPointF pos) {
 
     _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
     if (  _nodeTo ) {
-        _graph -> addEdge( _nodeFrom->node(),  _nodeTo->node() );
+        emit addEdge( _nodeFrom->node(),  _nodeTo->node() );
     }
 
     _nodeFrom = 0;
     _nodeTo = 0;
     _working = false;
+}
+
+void AddEdgeAction::setActiveGraph(Graph* graph){
+    if (_graph) disconnect(this, 0, _graph, 0);
+    _graph = graph;
+    connect(this, SIGNAL(addEdge(Node*,Node*)), _graph, SLOT(addEdge(Node*,Node*)));
 }
