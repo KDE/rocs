@@ -262,6 +262,7 @@ public  slots:
     */
     void removeEdgesDinamicProperty(QString property);
     
+    void addNode(QString name, QPointF point);
     
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();

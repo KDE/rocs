@@ -70,34 +70,53 @@
 #include <ktexteditor/document.h>
 #include <qscriptenginedebugger.h>
 #include <QActionGroup>
-#include "threadScriptExecution.h"
+#include "threadDocument.h"
 #include "../Plugins/PluginManager.h"
 #include <KPushButton>
 #include <QMutexLocker>
 
-MainWindow* mainWindow = 0;
-
 MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex() {    
     setObjectName ( "Rocs" );
-    _uiCreated = false;
     
     kDebug() << "############ Load Plugins ###############";
     Rocs::PluginManager::New()->loadPlugins();
     
-    kDebug() << "Creating Thread"; _tScriptExecution = new ThreadScriptExecution(_mutex);
-    kDebug() << "Starting Thread"; _tScriptExecution->start();
     
-    // conexões Thread -> MainThread
-    connect(_tScriptExecution, SIGNAL(graphDocumentChanged(GraphDocument*)), this, SLOT(setActiveGraphDocument(GraphDocument*)));
-    connect(_tScriptExecution, SIGNAL(graphDocumentCreated(GraphDocument*)), this, SLOT(setActiveGraphDocument(GraphDocument*)));
+    kDebug() << "Creating Thread"; _tDocument = new ThreadDocument(_waitForDocument ,_mutex, this);
     
-    connect(_tScriptExecution, SIGNAL(outputString(QString)), this, SLOT(outputString(QString)));
-    connect(_tScriptExecution, SIGNAL(debugString(QString)),  this, SLOT(debugString(QString)));
-            
-    // conexões MainThread -> Thread.
-    connect(this, SIGNAL(startDocument()),   _tScriptExecution, SLOT(setActiveGraphDocument()));
+    // let's start the thread and wait for the graph document. to be created.
+    _mutex.lock();
+    kDebug() << "Starting Thread"; _tDocument->start();
+    _waitForDocument.wait(&_mutex);
+    _mutex.unlock();
+    
+    // setting up the rest of stuff
+    setupWidgets(); 
+    setupActions();
+    setupGUI();
+    
+    connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)));
+    
+    //_moveNodeAction->setView( _graphVisualEditor->view() );
 
-    kDebug() << "Starting Document"; emit startDocument();
+    statusBar()->hide();
+    
+    _mutex.lock();
+      kDebug() << "################################";
+      kDebug() << "Setting Graph Document";
+      kDebug() << "#################################";
+      
+      setActiveGraphDocument(_tDocument->document());
+      
+      kDebug() << "#################################";
+      kDebug() << "Graph Document Setted";
+      kDebug() << "#################################";
+      
+    _mutex.unlock();
+    
+    //_GraphLayers->populate();
+
+    //setupToolsPluginsAction();
 }
 
 MainWindow::~MainWindow() {
@@ -107,7 +126,7 @@ MainWindow::~MainWindow() {
     Settings::setHSplitterSizeRight( _hSplitter->sizes()[1] );
 
     Settings::self()->writeConfig();
-    delete _tScriptExecution;
+    delete _tDocument;
 }
 
 void MainWindow::outputString(const QString& s){
@@ -119,10 +138,11 @@ void MainWindow::debugString(const QString& s){
 }
 
 GraphDocument *MainWindow::activeDocument() const {
-    if (! _activeGraphDocument) {
+    if (! _tDocument->document()) {
         kDebug() << "Document is NULL";
     }
-    return _activeGraphDocument;
+    kDebug() << "RETORNANDO CORRETAMENTE";
+    return _tDocument->document();
 }
 
 void MainWindow::setupWidgets() {
@@ -131,9 +151,9 @@ void MainWindow::setupWidgets() {
     QWidget *rightPanel = setupRightPanel();
     QWidget *leftPanel	= setupLeftPanel();
      
-    connect(_tScriptExecution, SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
+/*    connect(_tScriptExecution, SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
     connect(_tScriptExecution, SIGNAL(terminated()), _bottomTabs, SLOT(setPlayString()));
-    connect(_tScriptExecution, SIGNAL(destroyed(QObject*)), _bottomTabs, SLOT(setPlayString()));
+    connect(_tScriptExecution, SIGNAL(destroyed(QObject*)), _bottomTabs, SLOT(setPlayString()));*/
     
     _hSplitter->addWidget(leftPanel);
     _hSplitter->addWidget(rightPanel);
@@ -275,60 +295,28 @@ void MainWindow::setupToolsPluginsAction(){
     plugActionList("tools_plugins", pluginList);
 }
 
-void MainWindow::finishLoadingUi()
-{
-  if (!_uiCreated){
-    setupWidgets(); 
-    setupActions();
-    
-    setupGUI();
-    
-    _moveNodeAction->setView( _graphVisualEditor->view() );
-
-    mainWindow = this;
-    statusBar()->hide();
-    _GraphLayers->populate();
-
-    setupToolsPluginsAction();
-  }
-  _uiCreated = true;
-}
-
-
 void MainWindow::setActiveGraphDocument(GraphDocument* d)
 {
-  if( !_uiCreated ){
-    _activeGraphDocument = d;
-    finishLoadingUi();
-  }
-
   foreach( QAction *action, actionCollection()->actions() ) {
       if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action))
             absAction->setActiveGraphDocument(d);
   }
     
-    //connect(d, SIGNAL(graphCreated(Graph*)), this, SLOT());
-    //connect(d, SIGNAL(graphRemoved(int)), this, SLOT());
-    //connect(d, SIGNAL(nameChanged(QString)), this, SLOT());
-    //connect(d, SIGNAL(heightChanged(qreal)), this, SLOT());
-    //connect(d, SIGNAL(widthChanged(qreal)), this, SLOT());
+  _graphVisualEditor->setActiveGraphDocument(d);
     
-    _activeGraphDocument = d;
-    _graphVisualEditor->setActiveGraphDocument(d);
+  if (_tDocument->document()->size() == 0) return;
+  setActiveGraph(_tDocument->document()->at(0));
     
-    QMutexLocker locker(&_mutex);
-    if (_activeGraphDocument->size() == 0) return;
-    setActiveGraph(_activeGraphDocument->at(0));
-    _GraphLayers->populate();
+  _GraphLayers->populate();
 }
 
 void MainWindow::setActiveGraph( Graph *g)
 {
-    if ( _activeGraphDocument  == 0) {
+    if ( _tDocument->document() == 0) {
         kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should belong to one.";
         return;
     }
-    if ( _activeGraphDocument->indexOf(g) == -1) {
+    if ( _tDocument->document()->indexOf(g) == -1) {
         kDebug() << "ERROR: this graph does not belong to the active document";
         return;
     }
@@ -336,13 +324,15 @@ void MainWindow::setActiveGraph( Graph *g)
         if (AbstractAction *absAction = qobject_cast<AbstractAction*>(action))
             absAction->setActiveGraph(g);
     }
+    
     _graphVisualEditor->setActiveGraph(g);
-    _graph = g;
+
     kDebug() << "New Active Graph Set: " << g->name();
+    
 }
 
 Graph* MainWindow::graph() const {
-    return _graph;
+    return _tDocument->document()->activeGraph();
 }
 
 GraphScene* MainWindow::scene() const {
@@ -352,7 +342,6 @@ GraphScene* MainWindow::scene() const {
 void MainWindow::newGraph() {
     if (saveIfChanged() == KMessageBox::Cancel) return;
     loadDocument();
-
 }
 
 void MainWindow::openGraph() {
@@ -363,13 +352,13 @@ void MainWindow::openGraph() {
 }
 
 void MainWindow::loadDocument(const QString& name){
-  if (!name.isEmpty() && !name.endsWith(".graph")){
+/*  if (!name.isEmpty() && !name.endsWith(".graph")){
 	KMessageBox::sorry(this, i18n("This does not seem to be a graph file."), i18n("Invalid file"));
 	return;
   }
 
   _graphVisualEditor->releaseGraphDocument();
-  delete _activeGraphDocument;
+  //delete _activeGraphDocument;
   
   //setActiveGraphDocument();
   GraphDocument *gd = new GraphDocument(i18n("Untitled"), 800,600);
@@ -381,30 +370,31 @@ void MainWindow::loadDocument(const QString& name){
   setActiveGraphDocument(gd);
   if (!name.isEmpty()){
     _graphVisualEditor->scene()->createItems();
-  }
+  }*/
 }
 
 void MainWindow::saveGraph() {
-    if (_activeGraphDocument == 0) {
-        kDebug() << "Graph Document is NULL";
-        return;
-    }
-
-    if (_activeGraphDocument->documentPath().isEmpty() ) {
-        saveGraphAs();
-    }
-    else {
-        _activeGraphDocument->savedDocumentAt(_activeGraphDocument->documentPath());
-    }
+    
+//     if (_tDocument->document() == 0) {
+//         kDebug() << "Graph Document is NULL";
+//         return;
+//     }
+// 
+//     if (_tDocument->document()->documentPath().isEmpty() ) {
+//         saveGraphAs();
+//     }
+//     else {
+//         _tDocument->document()->savedDocumentAt(_tDocument->document()->documentPath());
+//     }
 }
 
 void MainWindow::saveGraphAs() {
-    if (_activeGraphDocument == 0) {
+/*    if (_activeGraphDocument == 0) {
         kDebug() << "Graph Document is NULL";
         return;
     }
 
-    _activeGraphDocument->saveAsInternalFormat(KFileDialog::getSaveFileName());
+    _activeGraphDocument->saveAsInternalFormat(KFileDialog::getSaveFileName());*/
 }
 
 void MainWindow::debug(const QString& s) {
@@ -412,7 +402,7 @@ void MainWindow::debug(const QString& s) {
 }
 
 int MainWindow::saveIfChanged(){
-  if (_activeGraphDocument->isModified()){
+/*  if (_activeGraphDocument->isModified()){
      int btnCode;
      btnCode = KMessageBox::warningYesNoCancel(this, i18n("Do you want to save your unsaved document?"));
     if ( btnCode == KMessageBox::Yes){
@@ -420,11 +410,11 @@ int MainWindow::saveIfChanged(){
     }
     return btnCode;
   }
-  return KMessageBox::No;
+  return KMessageBox::No;*/
 }
 
 void MainWindow::importFile(){
-    if (saveIfChanged() == KMessageBox::Cancel) return;
+/*    if (saveIfChanged() == KMessageBox::Cancel) return;
     QString ext;
     foreach (Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins()){
 	ext.append(f->extensions().join(""));
@@ -450,11 +440,11 @@ void MainWindow::importFile(){
       return;
     }else{
 	kDebug() <<  "Cannot handle extension "<<  fileName.right(3);
-    }
+    }*/
 }
 
 void MainWindow::exportFile(){
-    QString ext;
+/*    QString ext;
     foreach (Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins()){
 	ext.append(f->extensions().join("\n"));
     }
@@ -482,12 +472,12 @@ void MainWindow::exportFile(){
  		return;
 	}
 	kDebug() << "Cannot export file: " << file;
-    }
+    }*/
 }
 #ifdef USING_QTSCRIPT
 
 void MainWindow::executeScript(const QString& text) {
-    if (_txtDebug == 0)   return;
+/*    if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
 
     _txtDebug->clear();
@@ -504,20 +494,18 @@ void MainWindow::executeScript(const QString& text) {
         kDebug() << "Aborting Script";
         _bottomTabs->setPlayString();
         //_tScriptExecution->abort();
-    }
+    }*/
 }
 
 #endif
 
-void MainWindow::runToolPlugin(){
-    
+void MainWindow::runToolPlugin(){    
     QAction *action = qobject_cast<QAction *>(sender());
     if (action){
-	Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *>(action->parent());
-	if (plugin){
-	    QString run = plugin->run(this);
-	    executeScript(run);
-	}
+        Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *>(action->parent());
+        if (plugin){
+            QString run = plugin->run(this);
+            executeScript(run);
+        }
     }
-     
 }

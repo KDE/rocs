@@ -99,10 +99,19 @@ qreal GraphDocument::width() const {
 bool GraphDocument::isModified(){
   return _modified;
 }
+
+void GraphDocument::setActiveGraph(Graph *g){
+    if ( indexOf(g) != -1){
+        _activeGraph = g;
+        emit activeGraphChanged(g);
+    }
+}
+
 Graph* GraphDocument::addGraph(QString name) {
     Graph *g = new Graph(this);
     g->setName(name);
     append(g);
+    _activeGraph = g;
     emit graphCreated(g);
     kDebug() << "Graph Added" << g->name();
     return g;
@@ -262,7 +271,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         }
         else {
 //            // tmpGroup->append( tmpGraph->node(str));
-	}
+        }
     }
     kDebug() << "Graph Document Loaded.";
 }

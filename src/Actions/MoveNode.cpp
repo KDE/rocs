@@ -83,7 +83,3 @@ void MoveNodeAction::executeRelease(QPointF pos) {
     }
     _movableNode = 0;
 }
-
-void MoveNodeAction::setView(QGraphicsView *v) {
-    _view = v;
-}

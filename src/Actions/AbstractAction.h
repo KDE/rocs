@@ -47,7 +47,7 @@ public:
     /*! Atualize the Graph Document that this action will work on
       \p graphDocument the pointer to the active  GraphDocument
     */
-    void setActiveGraphDocument( GraphDocument *graphDocument);
+    virtual void setActiveGraphDocument( GraphDocument *graphDocument);
 
 
     const QString& name() const;

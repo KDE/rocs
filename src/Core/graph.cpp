@@ -75,6 +75,11 @@ Node* Graph::addNode(QString name) {
     return n;
 }
 
+void Graph::addNode(QString name, QPointF pos){
+    Node *node = addNode(name);
+    node->setPos(pos.x(), pos.y());
+}
+
 Edge* Graph::addEdge(Node* from,Node* to) {
     if (_readOnly) return 0;
     if ( ( from == to) && ( !_directed ) ) {

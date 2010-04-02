@@ -86,7 +86,9 @@ public slots:
       \param type the the of the graph.
     */
     Graph *addGraph(QString name = "untitled");
-
+    Graph *activeGraph(){ return _activeGraph; }
+    void setActiveGraph(Graph *g);
+    
 signals:
     /*! emited when a new graph is created
       \param g the created graph */
@@ -108,6 +110,7 @@ signals:
       \param width the new width of the document */
     void widthChanged(qreal width);
 
+    void activeGraphChanged(Graph* g);
 private:
     QString buf;
     void  savePropertiesInternalFormat(QObject *o);
@@ -117,6 +120,7 @@ private:
     qreal _height;
     bool _modified;
     bool _saved;
+    Graph *_activeGraph;
 };
 
 #endif

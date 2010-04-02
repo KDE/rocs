@@ -23,11 +23,25 @@
 #include <KDebug>
 #include <KTextBrowser>
 #include "graphDocument.h"
+#include <QScriptEngineDebugger>
+
+static QtScriptBackend *self;
+
+static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {
+    self->debug(QString("%1 \n").arg(context->argument(0).toString()));
+    return QScriptValue();
+}
+
+static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engine*/){
+    self->output(QString("%1 \n").arg(context->argument(0).toString()));
+    return QScriptValue();
+}
 
 QtScriptBackend::QtScriptBackend(GraphDocument& graphs): _graphs(graphs)
 {
+    self = this;
+    
     kDebug() << "Starting Script Backend";
-
     kDebug() << "Graph Document" << _graphs;
 
     int size = _graphs.size();
@@ -35,7 +49,13 @@ QtScriptBackend::QtScriptBackend(GraphDocument& graphs): _graphs(graphs)
         _graphs.at(i)->setEngine(this);
     }
     createGraphList();
+    
     kDebug() << "ScriptBackend Created";
+    
+    QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
+    dbg->attachTo(this);
+    globalObject().setProperty("debug",  newFunction(debug_script));
+    globalObject().setProperty("output", newFunction(output_script));
 }
 
 void QtScriptBackend::setScript(const QString& s) {
@@ -92,3 +112,12 @@ void QtScriptBackend::loadFile(const QString& file) {
     }
     _script += '\n';
 }
+
+void QtScriptBackend::debug(const QString& str){
+     emit sendDebug(str);
+}
+
+void QtScriptBackend::output(const QString& str){
+    emit sendOutput(str);
+}
+

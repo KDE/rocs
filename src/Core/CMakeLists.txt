@@ -27,7 +27,7 @@ set( rocscore_LIB_SRCS
 	graphGroups.cpp
 	krossBackend.cpp
 	qtScriptBackend.cpp
-	threadScriptExecution.cpp
+	threadDocument.cpp
 	dinamicpropertieslist.cpp
 )
 

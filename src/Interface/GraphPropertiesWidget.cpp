@@ -34,7 +34,6 @@
 
 GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
         : KButtonGroup ( parent ) {
-
     setupUi(this);
     _mainWindow = parent;
 
@@ -52,10 +51,9 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
     _showNodeValues->setChecked(true);
     
     _editWidget->setVisible(_activateGraph->isChecked());
-    _mainWindow->setActiveGraph(_graph);
-    kDebug() << "Active Graph" << _mainWindow->graph()->name();
-    kDebug() << "This Graph" << _graph->name();
+    connect( this, SIGNAL( activeGraphChanged(Graph*)), _mainWindow->activeDocument(), SLOT(setActiveGraph(Graph*)));
 }
+
 QRadioButton *GraphPropertiesWidget::radio()const {
     return _activateGraph;
 }
@@ -63,7 +61,7 @@ QRadioButton *GraphPropertiesWidget::radio()const {
 void GraphPropertiesWidget::on__activateGraph_toggled(bool b) {
     _editWidget->setVisible( b );
     if (b) {
-        _mainWindow->setActiveGraph(_graph);
+       _mainWindow->setActiveGraph(_graph);
     }
 }
 

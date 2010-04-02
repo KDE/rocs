@@ -16,68 +16,38 @@
  * Boston, MA 02110-1301, USA.
  ***************************************************************************/
 
-#ifndef THREADSCRIPTEXECUTION_H
-#define THREADSCRIPTEXECUTION_H
+#ifndef THREADDOCUMENT_H
+#define THREADDOCUMENT_H
 
 #include <QThread>
 #include <QMutex>
 #include "rocslib_export.h"
+#include <QWaitCondition>
 
 class Graph;
 class Node;
 class Edge;
 
-class KTextBrowser;
 class GraphDocument;
 class QtScriptBackend;
 
-class ROCSLIB_EXPORT ThreadScriptExecution : public QThread{
+class ROCSLIB_EXPORT ThreadDocument : public QThread{
   Q_OBJECT
+
   public:
-    ThreadScriptExecution(QMutex &mutex);
-    virtual ~ThreadScriptExecution();
-    bool documentCreated();
+    ThreadDocument(QWaitCondition &docCondition,QMutex &mutex, QObject *parent = 0);
+    virtual ~ThreadDocument();
+    GraphDocument *document() const {return _graphDocument;}
     
   public slots:
     void run();
     
-    // script - related.
-    void abortScript();
-    void startScript();
-    void setScript(const QString& s);
-    
-    void setActiveGraphDocument(GraphDocument *g = 0);
-    
-    // ui related.
-    void debug(const QString& s);
-    void output(const QString& s);
-    /*
-    // graph - related.
-    void addGraph(const QString& s);
-    void removeGraph(Graph *g);
-    
-    void addNode(const QString& s, Graph *g = 0);
-    void removeNode(Node *n);
-
-    void addEdge(Node *n1, Node *n2);
-    void removeEdge(Edge *e);
-    */
   private:
-    QString _script;
     QtScriptBackend* _engine;
-
     GraphDocument * _graphDocument;
+    QWaitCondition &_docCondition;    
     QMutex &_mutex;
     
-  signals:
-    void debugString(const QString& s);
-    void outputString(const QString& s);
-    void graphDocumentChanged(GraphDocument *d);
-    void graphCreated(Graph *g);
-    void graphRemoved(int i);
-    void documentHeightChanged(qreal q);
-    void documentHeigthChanged(qreal q);
-    void graphDocumentCreated(GraphDocument *g);
 };
 
 #endif

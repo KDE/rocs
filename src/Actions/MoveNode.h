@@ -49,7 +49,6 @@ public:
       Default Destructor
     */
     ~MoveNodeAction();
-    void setView(QGraphicsView *v);
 public slots:
     /*!
       will be executed when the mouse press a button.

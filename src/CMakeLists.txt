@@ -22,7 +22,7 @@ set( rocs_core_SRCS
   Core/graphGroups.cpp
   Core/krossBackend.cpp
   Core/qtScriptBackend.cpp
-  Core/threadScriptExecution.cpp
+  Core/threadDocument.cpp
   Core/dinamicpropertieslist.cpp
 
   Plugins/FilePluginInterface.cpp 
@@ -48,7 +48,7 @@ set( rocslib_LIB_HDRS
   Core/krossBackend.h
   Core/node.h
   Core/qtScriptBackend.h
-  Core/threadScriptExecution.h
+  Core/threadDocument.h
 )
 
 set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )

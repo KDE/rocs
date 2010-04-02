@@ -51,7 +51,12 @@ void AddNodeAction::executePress(QPointF pos) {
     else if (pos.x() > _graphDocument->width()) return;
     else if (pos.y() > _graphDocument->height()) return;
 
-    Node *n = _graph -> addNode(i18n("untitled"));
-    n ->setPos(pos.x(),pos.y());
-    n->graph()->calcRelativeCenter();
+    emit addNode(i18n("untitled"), QPointF(pos.x(), pos.y()));
 }
+
+void AddNodeAction::setActiveGraph(Graph* graph){
+    if (_graph) disconnect(this, 0, _graph, 0);
+    _graph = graph;
+    connect(this, SIGNAL(addNode(QString,QPointF)), _graph, SLOT(addNode(QString,QPointF)));
+}
+

@@ -38,7 +38,10 @@ class KAction;
 class MoveNodeAction;
 class TabWidget;
 class CodeEditor;
-class ThreadScriptExecution;
+class ThreadDocument;
+
+#include <QWaitCondition>
+
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -87,7 +90,6 @@ public slots:
   signals:
       void startDocument();
 private: // Variables.
-    bool _uiCreated;
     
     // Left Area:
     GraphLayers* _GraphLayers; //! Area where the nodes and edges will be modified.
@@ -108,14 +110,13 @@ private: // Variables.
     QSplitter *_hSplitter;
 
     //! The Active Graph.
-    GraphDocument *_activeGraphDocument;
-    Graph *_graph;
-
+    
     //! all the actions that I need to reference later.
     MoveNodeAction *_moveNodeAction;
 
-    ThreadScriptExecution *_tScriptExecution;
-    
+    //!threading and Document part
+    ThreadDocument *_tDocument;
+    QWaitCondition _waitForDocument;
     QMutex _mutex;
 };
 

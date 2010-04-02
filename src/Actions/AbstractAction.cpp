@@ -35,6 +35,7 @@ AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
             this, SLOT( sendExecuteBit() ));
 }
 
+
 void AbstractAction::setActiveGraphDocument(  GraphDocument *graphDocument) {
     _graphDocument = graphDocument;
 }
