@@ -410,7 +410,8 @@ int MainWindow::saveIfChanged(){
     }
     return btnCode;
   }
-  return KMessageBox::No;*/
+  */
+  return KMessageBox::No;
 }
 
 void MainWindow::importFile(){
