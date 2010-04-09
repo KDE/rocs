@@ -114,7 +114,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex() {
       
     _mutex.unlock();
     
-    //_GraphLayers->populate();
+    _GraphLayers->populate();
 
     setupToolsPluginsAction();
 }
@@ -141,7 +141,6 @@ GraphDocument *MainWindow::activeDocument() const {
     if (! _tDocument->document()) {
         kDebug() << "Document is NULL";
     }
-    kDebug() << "RETORNANDO CORRETAMENTE";
     return _tDocument->document();
 }
 
@@ -179,7 +178,6 @@ QWidget* MainWindow::setupRightPanel() {
     _vSplitter->addWidget(_graphVisualEditor);
     _vSplitter->addWidget(_bottomTabs);
     _vSplitter->setSizes( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
-   // _bottomTabs->actions().first()->setChecked(true);
     return _vSplitter;
 }
 
@@ -288,9 +286,9 @@ void MainWindow::setupToolsPluginsAction(){
     unplugActionList("tools_plugins");
     QList < Rocs::ToolsPluginInterface*> avaliablePlugins = Rocs::PluginManager::New()->toolPlugins();
     foreach (Rocs::ToolsPluginInterface* p, avaliablePlugins ){
-	action = new KAction(p->displayName(), p);	
-	connect (action, SIGNAL(triggered(bool)),this, SLOT(runToolPlugin()));
-	pluginList.append(action);
+        action = new KAction(p->displayName(), p);	
+        connect (action, SIGNAL(triggered(bool)),this, SLOT(runToolPlugin()));
+        pluginList.append(action);
     }
     plugActionList("tools_plugins", pluginList);
 }
@@ -374,27 +372,22 @@ void MainWindow::loadDocument(const QString& name){
 }
 
 void MainWindow::saveGraph() {
+    if (_tDocument->document()->documentPath().isEmpty() ) {
+        saveGraphAs();
+    }
+    else {
+        _tDocument->document()->savedDocumentAt(_tDocument->document()->documentPath());
+    }
     
-//     if (_tDocument->document() == 0) {
-//         kDebug() << "Graph Document is NULL";
-//         return;
-//     }
-// 
-//     if (_tDocument->document()->documentPath().isEmpty() ) {
-//         saveGraphAs();
-//     }
-//     else {
-//         _tDocument->document()->savedDocumentAt(_tDocument->document()->documentPath());
-//     }
 }
 
 void MainWindow::saveGraphAs() {
-/*    if (_activeGraphDocument == 0) {
+    if (_tDocument->document() == 0) {
         kDebug() << "Graph Document is NULL";
         return;
     }
 
-    _activeGraphDocument->saveAsInternalFormat(KFileDialog::getSaveFileName());*/
+    _tDocument->document()->saveAsInternalFormat(KFileDialog::getSaveFileName());
 }
 
 void MainWindow::debug(const QString& s) {
@@ -402,7 +395,7 @@ void MainWindow::debug(const QString& s) {
 }
 
 int MainWindow::saveIfChanged(){
-/*  if (_activeGraphDocument->isModified()){
+  if (_tDocument->document()->isModified()){
      int btnCode;
      btnCode = KMessageBox::warningYesNoCancel(this, i18n("Do you want to save your unsaved document?"));
     if ( btnCode == KMessageBox::Yes){
@@ -410,70 +403,82 @@ int MainWindow::saveIfChanged(){
     }
     return btnCode;
   }
-  */
   return KMessageBox::No;
 }
 
 void MainWindow::importFile(){
-/*    if (saveIfChanged() == KMessageBox::Cancel) return;
+    if (saveIfChanged() == KMessageBox::Cancel) return;
     QString ext;
     foreach (Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins()){
-	ext.append(f->extensions().join(""));
+        ext.append(f->extensions().join(""));
     }
     kDebug() << "Extensions:"<< ext;
-    
-    
+       
     QString fileName = KFileDialog::getOpenFileName(QString(), ext, this, i18n("Graph Files") );
     if (fileName == "") return;
     
     Rocs::FilePluginInterface *f = Rocs::PluginManager::New()->filePluginsByExtension(fileName.right(3));
-    if (f){
-      GraphDocument * gd = f->readFile(fileName);
-      if (gd){
-	  _graphVisualEditor->releaseGraphDocument();
-	  delete _activeGraphDocument;
-	  setActiveGraphDocument(gd);
-	  _graphVisualEditor->scene()->createItems();
-	  kDebug() << "Importing File.." << fileName;
-      }else{
-	  kDebug() << "Error loading file" << fileName << f->lastError();
-      }
-      return;
-    }else{
-	kDebug() <<  "Cannot handle extension "<<  fileName.right(3);
-    }*/
+    if (!f){
+        kDebug() <<  "Cannot handle extension "<<  fileName.right(3);
+        return;
+    }
+    
+    GraphDocument * gd = f->readFile(fileName);
+    if (!gd){
+        kDebug() << "Error loading file" << fileName << f->lastError();
+        return;
+    }
+    
+    _graphVisualEditor->releaseGraphDocument();
+    delete _tDocument;
+    
+    _mutex.lock();
+    kDebug() << "Starting Thread"; _tDocument->start();
+    _waitForDocument.wait(&_mutex);
+    _mutex.unlock();
+    
+    setActiveGraphDocument(_tDocument->document());
+    _graphVisualEditor->scene()->createItems();
+    kDebug() << "Importing File.." << fileName; 
 }
 
 void MainWindow::exportFile(){
-/*    QString ext;
+    QString ext;
     foreach (Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins()){
-	ext.append(f->extensions().join("\n"));
+        ext.append(f->extensions().join("\n"));
     }
     
     KFileDialog exportDialog(QString(),ext,this);
     exportDialog.okButton()->setText(i18n("Export"));
     exportDialog.okButton()->setToolTip(i18n("Export graphs to file"));
-    if (exportDialog.exec() == KDialog::Accepted){
+    if (exportDialog.exec() != KDialog::Accepted){
+      return;
+    }
+    
 	kDebug() << "Exporting File..";
 	if (exportDialog.selectedFile() == ""){
 	    return;
 	}
+	
 	ext = exportDialog.currentFilter().remove('*');	
 	QString file = exportDialog.selectedFile();
 	if (!file.endsWith("ext")){
 	      file.append(ext);
 	}
+	
 	Rocs::FilePluginInterface * p = Rocs::PluginManager::New()->filePluginsByExtension(ext);
-	if (p){
- 		if (!p->writeFile(*_activeGraphDocument, file)){
- 		    kDebug() << "Error writing file: " << p->lastError();
- 		}else{
-		    kDebug() << "File Exported!" << file;
-		}
- 		return;
-	}
-	kDebug() << "Cannot export file: " << file;
-    }*/
+	if (!p){
+        kDebug() << "Cannot export file: " << file;
+        return;
+    }
+
+    _mutex.lock();
+    if (!p->writeFile(*_tDocument->document(), file)){
+        kDebug() << "Error writing file: " << p->lastError();
+    }else{
+        kDebug() << "File Exported!" << file;
+    }
+    _mutex.unlock();
 }
 #ifdef USING_QTSCRIPT
 
