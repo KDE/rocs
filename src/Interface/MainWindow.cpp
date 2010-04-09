@@ -116,7 +116,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex() {
     
     //_GraphLayers->populate();
 
-    //setupToolsPluginsAction();
+    setupToolsPluginsAction();
 }
 
 MainWindow::~MainWindow() {
