@@ -37,41 +37,58 @@ static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engi
     return QScriptValue();
 }
 
-QtScriptBackend::QtScriptBackend(GraphDocument& graphs): _graphs(graphs)
-{
-    self = this;
-    
-    kDebug() << "Starting Script Backend";
-    kDebug() << "Graph Document" << _graphs;
-
-    int size = _graphs.size();
-    for (int i = 0; i < size; i++) {
-        _graphs.at(i)->setEngine(this);
-    }
-    createGraphList();
-    
-    kDebug() << "ScriptBackend Created";
-    
-    QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
-    dbg->attachTo(this);
-    globalObject().setProperty("debug",  newFunction(debug_script));
-    globalObject().setProperty("output", newFunction(output_script));
+void QtScriptBackend::stop(){
+      if (!_engine) return;
+      if (_engine->isEvaluating()){
+        _engine->abortEvaluation();
+      }
+      _engine->deleteLater();
 }
 
-void QtScriptBackend::setScript(const QString& s) {
+void QtScriptBackend::start()
+{
+    if (_engine){
+        _engine->disconnect();
+        delete _engine;
+    }
+    
+    _engine = new QScriptEngine();
+    QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
+    dbg->attachTo( _engine );
+    _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
+    _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
+    kDebug() << "ScriptBackend Created";
+    
+    int size = _graphs->size();
+    for (int i = 0; i < size; i++) {
+        _graphs->at(i)->setEngine(_engine);
+    }
+    createGraphList();
+    _engine->evaluate(_script);
+    
+    delete dbg;
+}
+
+QtScriptBackend::QtScriptBackend(){
+    self = this;
+    _engine = 0;
+}
+
+void QtScriptBackend::setScript(const QString& s,GraphDocument *graphs ) {
     _script = s;
+    _graphs = graphs;
     kDebug() << "script Set";
 }
 
 void QtScriptBackend::createGraphList() {
-    QScriptValue graphList = newArray();
-    globalObject().setProperty("graphs", graphList);
+    QScriptValue graphList = _engine->newArray();
+    _engine->globalObject().setProperty("graphs", graphList);
 
     // Add all the graphs on the array as an array, and if it has a name,
     // also add it for direct acess with it's name.
-    int size = _graphs.size();
+    int size = _graphs->size();
     for (int i = 0; i < size; i++) {
-        graphList.property("push").call(graphList, QScriptValueList() << _graphs.at(i)->scriptValue());
+        graphList.property("push").call(graphList, QScriptValueList() << _graphs->at(i)->scriptValue());
     }
 }
 

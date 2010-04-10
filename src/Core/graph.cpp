@@ -330,7 +330,7 @@ QScriptValue Graph::scriptValue() const {
     return _value;
 }
 
-void Graph::setEngine(	QtScriptBackend *engine ) {
+void Graph::setEngine(	QScriptEngine *engine ) {
     _engine = engine;
 
     _value = _engine->newQObject(this);

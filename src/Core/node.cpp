@@ -335,7 +335,7 @@ QScriptValue Node::scriptValue() const {
     return _scriptvalue;
 }
 
-void Node::setEngine(	QtScriptBackend *engine ) {
+void Node::setEngine(	QScriptEngine *engine ) {
     _engine = engine;
     _scriptvalue = engine->newQObject(this);
 }

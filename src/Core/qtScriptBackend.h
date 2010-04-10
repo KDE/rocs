@@ -23,30 +23,36 @@
 #include <QScriptValue>
 #include <QScriptString>
 #include "rocslib_export.h"
+
 class Graph;
 class GraphDocument;
 class KTextBrowser;
 
-class  ROCSLIB_EXPORT QtScriptBackend : public QScriptEngine {
+class  ROCSLIB_EXPORT QtScriptBackend : public QObject{
   Q_OBJECT
 public:
-    QtScriptBackend(GraphDocument& graphs);
-    void setScript(const QString& s);
+    QtScriptBackend();
+    void setScript(const QString& s, GraphDocument *graph);
+    void setDocument(GraphDocument *document);
     void loadFile(const QString& file);
     void setProperty ( QScriptValue & object, const QScriptString & name, uint id, const QScriptValue & value );
     QScriptValue property ( const QScriptValue & object, const QScriptString & name, uint id );
     void debug(const QString& s);
     void output(const QString& s);
-    
+    QScriptEngine *engine(){ return _engine; }
 private:
     QString _script;
-    GraphDocument& _graphs;
+    GraphDocument *_graphs;
     void createGraphList();
+    QScriptEngine *_engine;
     
 signals:
     void sendOutput(const QString& s);
     void sendDebug(const QString& s);
-    
+
+  public slots:
+    void start();
+    void stop();
 };
 
 #endif

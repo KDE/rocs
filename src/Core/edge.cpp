@@ -111,7 +111,7 @@ QScriptValue  Edge::end() {
     return _to->scriptValue();
 }
 
-void Edge::setEngine(	QtScriptBackend *engine ) {
+void Edge::setEngine(	QScriptEngine *engine ) {
     _engine = engine;
     _scriptvalue = _engine->newQObject(this);
 }

@@ -87,7 +87,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex() {
     // let's start the thread and wait for the graph document. to be created.
     _mutex.lock();
     kDebug() << "Starting Thread"; _tDocument->start();
-    _waitForDocument.wait(&_mutex);
+    _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();
     
     // setting up the rest of stuff
@@ -96,6 +96,8 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex() {
     setupGUI();
     
     connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)));
+    connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
+    connect(this, SIGNAL(stopEvaluation()),     _tDocument->engine(), SLOT(stop()));
     
     //_moveNodeAction->setView( _graphVisualEditor->view() );
 
@@ -105,7 +107,6 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex() {
       kDebug() << "################################";
       kDebug() << "Setting Graph Document";
       kDebug() << "#################################";
-      
       setActiveGraphDocument(_tDocument->document());
       
       kDebug() << "#################################";
@@ -483,24 +484,24 @@ void MainWindow::exportFile(){
 #ifdef USING_QTSCRIPT
 
 void MainWindow::executeScript(const QString& text) {
-/*    if (_txtDebug == 0)   return;
+    if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
-
+    
     _txtDebug->clear();
     _bottomTabs->setStopString();
     QString script = text.isEmpty()?_codeEditor->text():text;
-    
-    if ( !_tScriptExecution->isRunning() ){
+
+    kDebug() << script;
+    if ( !_tDocument->isRunning() ){
         kDebug() << "Starting Script";
-        //! change that to signals.
-	    //_tScriptExecution->setData(_codeEditor->text(), _activeGraphDocument);
-        //_tScriptExecution ->start();
-        
+        _tDocument->engine()->setScript(script, _tDocument->document());
+        emit startEvaluation();
     }else{
         kDebug() << "Aborting Script";
         _bottomTabs->setPlayString();
-        //_tScriptExecution->abort();
-    }*/
+        _tDocument->engine()->stop();
+        //emit stopEvaluation();
+    }
 }
 
 #endif

@@ -89,6 +89,8 @@ public slots:
 
   signals:
       void startDocument();
+      void startEvaluation();
+      void stopEvaluation();
 private: // Variables.
     
     // Left Area:

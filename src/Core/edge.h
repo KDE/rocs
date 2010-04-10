@@ -107,7 +107,7 @@ public:
     /*! if qtscript is enabled for this rocs,
     this method will set the engine for this single object
     \p engine the QScriptEngine that will work on the object */
-    void setEngine(	QtScriptBackend *engine );
+    void setEngine(	QScriptEngine *engine );
 #endif
 
 public  slots:
@@ -246,7 +246,7 @@ private:
     QScriptValue _scriptvalue;
 
     /*! if the script interface is Qt-Script, this will hold  a pointer to the engine */
-    QtScriptBackend *_engine;
+    QScriptEngine *_engine;
 #endif
 
 signals:

@@ -21,10 +21,20 @@ ThreadDocument::~ThreadDocument(){
     if(_engine) delete _engine;
 }
 
+bool ThreadDocument::isRunning(){
+    if (!_engine) return false;
+    if (!_engine->engine()) return false;
+    return _engine->engine()->isEvaluating();
+}
+
+QtScriptBackend *ThreadDocument::engine(){
+    return _engine;
+}
+
 void ThreadDocument::run(){
   _graphDocument = new GraphDocument(i18n("Untitled"), 800, 600);  
   _graphDocument->addGraph(i18n("Untitled0"));
-  _engine = new QtScriptBackend((*_graphDocument));
+  _engine = new QtScriptBackend();
   _docCondition.wakeAll();
   exec();
 }

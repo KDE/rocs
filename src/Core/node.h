@@ -70,7 +70,7 @@ public:
 
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
-    void setEngine(	QtScriptBackend *_engine );
+    void setEngine(	QScriptEngine *_engine );
     QScriptValue createScriptArray(EdgeList list);
 #endif
     
@@ -158,7 +158,7 @@ private:
     
 #ifdef USING_QTSCRIPT
     QScriptValue _scriptvalue;
-    QtScriptBackend *_engine;
+    QScriptEngine *_engine;
 #endif
 
 signals:

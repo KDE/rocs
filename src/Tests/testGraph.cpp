@@ -282,15 +282,15 @@ void GraphTests::testKrossRb(){
 
 void GraphTests::testQtScript() {
     createPentagon();
-    QtScriptBackend *engine = new QtScriptBackend(_graphDocument);
+    QtScriptBackend *engine = new QtScriptBackend();
 
-    QScriptValue results = engine->evaluate("graphs.length");
+    QScriptValue results = engine->engine()->evaluate("graphs.length");
     QVERIFY2(results.toNumber() == 1, "Error: number of graphs is not 1.");
 
-    results = engine->evaluate("graphs[0].list_nodes().length");
+    results = engine->engine()->evaluate("graphs[0].list_nodes().length");
     QVERIFY2(results.toNumber()  == 5, "Error: number of nodes is not 5");
 
-    results = engine->evaluate("graphs[0].list_edges().length");
+    results = engine->engine()->evaluate("graphs[0].list_edges().length");
     QVERIFY2(results.toNumber()  == 5, "Error: number of nodes is not 5");
 
     QString script = "";
@@ -298,7 +298,7 @@ void GraphTests::testQtScript() {
     script += "var node1 = graph.list_nodes()[0]; \n ";
     script += "var node2 = graph.list_nodes()[1]; \n ";
     script += "node1 != node2";
-    results = engine->evaluate(script);
+    results = engine->engine()->evaluate(script);
     QVERIFY2(results.toBoolean() == true, "ERROR: nodes are equal but they shouldn't be.");
 
     script.clear();
@@ -306,7 +306,7 @@ void GraphTests::testQtScript() {
     script += "var node1 = graph.list_nodes()[0]; \n ";
     script += "var node2 = graph.list_nodes()[1]; \n ";
     script += "node1.adj_edges().length";
-    results = engine->evaluate(script);
+    results = engine->engine()->evaluate(script);
     QVERIFY2( results.toNumber() == 2, results.toString().toAscii());
 }
 

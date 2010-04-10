@@ -98,7 +98,7 @@ public:
 
     /*! if QtScript is enabled for this rocs,
     \p engine is the QtScript engine that will be set for this graph. */
-    void setEngine( QtScriptBackend *engine );
+    void setEngine( QScriptEngine *engine );
 #endif
 
 public  slots:
@@ -304,7 +304,7 @@ private:
     
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
-    QtScriptBackend *_engine;
+    QScriptEngine *_engine;
 #endif
 
 };

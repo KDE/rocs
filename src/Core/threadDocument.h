@@ -38,6 +38,8 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
     ThreadDocument(QWaitCondition &docCondition,QMutex &mutex, QObject *parent = 0);
     virtual ~ThreadDocument();
     GraphDocument *document() const {return _graphDocument;}
+    bool isRunning();
+    QtScriptBackend* engine();
     
   public slots:
     void run();
@@ -47,7 +49,7 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
     GraphDocument * _graphDocument;
     QWaitCondition &_docCondition;    
     QMutex &_mutex;
-    
+
 };
 
 #endif
