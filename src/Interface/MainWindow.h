@@ -42,6 +42,9 @@ class ThreadDocument;
 
 #include <QWaitCondition>
 
+namespace Rocs{
+    class ToolsPluginInterface;
+}
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -91,6 +94,8 @@ public slots:
       void startDocument();
       void startEvaluation();
       void stopEvaluation();
+      
+      void runTool(Rocs::ToolsPluginInterface * plugin);
 private: // Variables.
     
     // Left Area:
@@ -120,6 +125,7 @@ private: // Variables.
     ThreadDocument *_tDocument;
     QWaitCondition _waitForDocument;
     QMutex _mutex;
+    bool _idle;
 };
 
 #endif

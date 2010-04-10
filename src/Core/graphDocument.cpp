@@ -275,3 +275,10 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
     }
     kDebug() << "Graph Document Loaded.";
 }
+
+
+void GraphDocument::runnTool(Rocs::ToolsPluginInterface * plugin){
+	QString run = plugin->run(this);
+	
+	//executeScript(run);
+}

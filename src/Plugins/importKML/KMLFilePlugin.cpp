@@ -21,6 +21,7 @@
 #include "../../Core/graphDocument.h"
 #include <KAboutData>
 #include <KGenericFactory>
+#include <QFile>
 
 static const KAboutData aboutdata("rocs_kmlfileplugin", 0, ki18n("Open and Save KML files") , "0.1" );
 
@@ -42,7 +43,7 @@ KMLFilePlugin::KMLFilePlugin(QObject* parent, const QList< QVariant >& ):
 const QStringList KMLFilePlugin::extensions() const
 {
     return QStringList()
-	<< i18n("*.kml|KML Files\n");
+	<< i18n("*.kml|KML Files") + '\n';
 }
 
 
@@ -52,7 +53,10 @@ GraphDocument * KMLFilePlugin::readFile(const QString &/*fileName*/) const{
     return graph;
 }
 
-bool KMLFilePlugin::writeFile(const GraphDocument &/*graph*/ , const QString &/*filename*/) const{
-  
-    return false;
+bool KMLFilePlugin::writeFile(const GraphDocument &/*graph*/ , const QString &filename) const{
+    QFile file (filename);
+    if (file.open(QFile::WriteOnly))
+    {
+        return true;
+    }
 }

@@ -3,8 +3,6 @@
 #include "qtScriptBackend.h"
 #include "qscriptenginedebugger.h"
 #include <QMutex>
-#include <KTextBrowser>
-// #include <QScriptEngineDebugger> //give-me a error ¬¬, realy need it?
 #include <KDebug>
 #include <KLocale>
 #include <QWaitCondition>
@@ -29,6 +27,28 @@ bool ThreadDocument::isRunning(){
 
 QtScriptBackend *ThreadDocument::engine(){
     return _engine;
+}
+
+void ThreadDocument::releaseDocument(){
+    delete _graphDocument;
+    _graphDocument = 0;
+}
+
+void ThreadDocument::setGraphDocument(GraphDocument * doc){
+  // must need block signals and events
+  
+  if (_engine){ 
+	delete _engine;
+  }
+    
+  releaseDocument(); //must 'freeze' thread
+    
+  _graphDocument = doc;
+  doc->moveToThread(this);
+  
+  _engine = new QtScriptBackend();
+  _engine->moveToThread(this);
+  _docCondition.wakeAll();
 }
 
 void ThreadDocument::run(){

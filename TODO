@@ -1,3 +1,6 @@
+10/04/2010
+1 - Sincronize remove in thread and mainwindow, only process next event of remove if already removed from the document.
+
 24 NOVEMBER 2008
 
 Shortcut Keys everywyere, please.

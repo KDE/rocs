@@ -41,10 +41,17 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
     bool isRunning();
     QtScriptBackend* engine();
     
+    /** release actual document and set the doc */
+    void setGraphDocument(GraphDocument * doc);
+    
+    
   public slots:
     void run();
     
   private:
+    /** Release actual document */
+    void releaseDocument();
+    
     QtScriptBackend* _engine;
     GraphDocument * _graphDocument;
     QWaitCondition &_docCondition;    

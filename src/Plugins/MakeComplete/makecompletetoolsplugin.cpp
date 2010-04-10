@@ -24,6 +24,8 @@
 #include <QStringList>
 #include <kgenericfactory.h>
 #include <KAboutData>
+#include <graphDocument.h>
+#include <graph.h>
 
 
 static const KAboutData aboutdata("rocs_makecompleteplugin", 0, ki18n("Make Complete") , "0.1" );
@@ -46,8 +48,24 @@ MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
 }
 
 
-QString MakeCompleteToolPlugin::run(QObject* /*parent*/ ) const
+QString MakeCompleteToolPlugin::run(QObject* doc ) const
 {
+  GraphDocument * graphDoc = qobject_cast<GraphDocument*>(doc);
+  if (graphDoc){
+  Graph * graph = graphDoc->activeGraph();
+	foreach(Edge *e, graph->edges()){
+	    graph->remove(e);
+	}
+	foreach(Node * n1, graph->nodes()){
+	  foreach(Node * n2, graph->nodes()){
+	      if (n1 != n2)
+		graph->addEdge(n1,n2);
+	  }
+      }
+  }
+    
+  
+  
   return QString (
       "function makeComplete(graph){"
       "  nodes = graph.list_nodes();"

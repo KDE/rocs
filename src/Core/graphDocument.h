@@ -23,6 +23,7 @@
 #include <QList>
 #include <QObject>
 #include "rocslib_export.h"
+#include <ToolsPluginInterface.h>
 
 class Graph;
 
@@ -88,6 +89,11 @@ public slots:
     Graph *addGraph(QString name = "untitled");
     Graph *activeGraph(){ return _activeGraph; }
     void setActiveGraph(Graph *g);
+    
+    /** Run the tool in this GraphDocument.
+    @param tool Tool plugin to be runned. */
+    void runnTool(Rocs::ToolsPluginInterface * plugin);
+    
     
 signals:
     /*! emited when a new graph is created
