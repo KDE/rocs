@@ -90,9 +90,9 @@ public slots:
     Graph *activeGraph(){ return _activeGraph; }
     void setActiveGraph(Graph *g);
     
-    /** Run the tool in this GraphDocument.
+    /* * Run the tool in this GraphDocument.
     @param tool Tool plugin to be runned. */
-    void runnTool(Rocs::ToolsPluginInterface * plugin);
+//     void runnTool(Rocs::ToolsPluginInterface * plugin);
     
     
 signals:

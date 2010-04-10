@@ -97,9 +97,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     setupActions();
     setupGUI();
 
-    connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)));
-    connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
-    connect(this, SIGNAL(stopEvaluation()),     _tDocument->engine(), SLOT(stop()));
+
     
     //_moveNodeAction->setView( _graphVisualEditor->view() );
 
@@ -320,11 +318,14 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 
     _graphVisualEditor->setActiveGraphDocument ( d );
 
-    connect ( activeDocument(), SIGNAL ( activeGraphChanged ( Graph* ) ), this, SLOT ( setActiveGraph ( Graph* ) ) );
 
-    connect ( this, SIGNAL ( runTool ( Rocs::ToolsPluginInterface* ) ), _tDocument->document(), SLOT ( runnTool ( Rocs::ToolsPluginInterface* ) ) );
+    connect ( this, SIGNAL ( runTool ( Rocs::ToolsPluginInterface*, GraphDocument* ) ), _tDocument->engine(), SLOT ( runTool ( Rocs::ToolsPluginInterface*, GraphDocument* ) ) );
 
+    connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)));
+    connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
+    connect(this, SIGNAL(stopEvaluation()),     _tDocument->engine(), SLOT(stop()));
 
+    
     if ( _tDocument->document()->size() == 0 ) return;
     setActiveGraph ( _tDocument->document()->at ( 0 ) );
 
@@ -611,13 +612,14 @@ void MainWindow::executeScript(const QString& text) {
 
 void MainWindow::runToolPlugin()
 {
+  kDebug() << "seeking for a plugin";
     QAction *action = qobject_cast<QAction *> ( sender() );
     if ( action )
     {
         Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *> ( action->parent() );
-        if ( plugin )
-        {
-            emit runTool ( plugin );
+        if ( plugin ){
+          kDebug() << "Runing a plugin";
+            emit runTool ( plugin, activeDocument() );
         }
     }
 }

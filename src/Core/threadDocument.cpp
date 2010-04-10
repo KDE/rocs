@@ -21,8 +21,8 @@ ThreadDocument::~ThreadDocument(){
 
 bool ThreadDocument::isRunning(){
     if (!_engine) return false;
-    if (!_engine->engine()) return false;
-    return _engine->engine()->isEvaluating();
+    return _engine->isRunning();
+//     return _engine->engine()->isEvaluating();
 }
 
 QtScriptBackend *ThreadDocument::engine(){

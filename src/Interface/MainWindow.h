@@ -95,7 +95,7 @@ public slots:
       void startEvaluation();
       void stopEvaluation();
       
-      void runTool(Rocs::ToolsPluginInterface * plugin);
+      void runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument * graphs);
 private: // Variables.
     
     // Left Area:
@@ -112,7 +112,7 @@ private: // Variables.
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
     KAction *_runScript;
 
-    //! Needed to reestore the size of the splitter after closing / opening the UI.
+    //! Needed to restore the size of the splitter after closing / opening the UI.
     QSplitter *_vSplitter;
     QSplitter *_hSplitter;
 

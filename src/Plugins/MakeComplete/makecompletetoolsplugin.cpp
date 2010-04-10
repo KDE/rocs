@@ -50,21 +50,25 @@ MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
 
 QString MakeCompleteToolPlugin::run(QObject* doc ) const
 {
-  GraphDocument * graphDoc = qobject_cast<GraphDocument*>(doc);
-  if (graphDoc){
-  Graph * graph = graphDoc->activeGraph();
-	foreach(Edge *e, graph->edges()){
-	    graph->remove(e);
-	}
-	foreach(Node * n1, graph->nodes()){
-	  foreach(Node * n2, graph->nodes()){
-	      if (n1 != n2)
-		graph->addEdge(n1,n2);
-	  }
-      }
-  }
-    
-  
+    GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
+    if ( graphDoc )
+    {
+        Graph * graph = graphDoc->activeGraph();
+        foreach ( Edge *e, graph->edges() )
+        {
+            graph->remove ( e );
+        }
+        foreach ( Node * n1, graph->nodes() )
+        {
+            foreach ( Node * n2, graph->nodes() )
+            {
+                if ( n1 != n2 )
+                    graph->addEdge ( n1,n2 );
+            }
+        }
+    }
+
+  return QString();
   
   return QString (
       "function makeComplete(graph){"

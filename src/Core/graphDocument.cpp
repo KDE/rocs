@@ -277,8 +277,8 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
 }
 
 
-void GraphDocument::runnTool(Rocs::ToolsPluginInterface * plugin){
-	QString run = plugin->run(this);
-	
-	//executeScript(run);
-}
+// void GraphDocument::runnTool(Rocs::ToolsPluginInterface * plugin){
+// 	QString run = plugin->run(this);
+// 	
+// 	//executeScript(run);
+// }

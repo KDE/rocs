@@ -43,6 +43,7 @@ void QtScriptBackend::stop(){
         _engine->abortEvaluation();
       }
       _engine->deleteLater();
+      _engine = 0;
 }
 
 void QtScriptBackend::start()
@@ -69,15 +70,39 @@ void QtScriptBackend::start()
     delete dbg;
 }
 
+bool QtScriptBackend::isRunning(){
+  if (_engine){
+     if (_engine->isEvaluating()){
+        return true;
+     }
+  }
+  return _runningTool;
+}
+    
+
 QtScriptBackend::QtScriptBackend(){
     self = this;
     _engine = 0;
+    _runningTool = false;
+}
+
+void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument *graphs){
+
+
+    _runningTool = true;
+    _graphs = graphs;
+    _script = plugin->run(graphs);
+    if ( !_script.isEmpty()){
+      start();
+    }
+    _runningTool = false;
 }
 
 void QtScriptBackend::setScript(const QString& s,GraphDocument *graphs ) {
+  
     _script = s;
     _graphs = graphs;
-    kDebug() << "script Set";
+    kDebug() << "script Set" << _script;
 }
 
 void QtScriptBackend::createGraphList() {

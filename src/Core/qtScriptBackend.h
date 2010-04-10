@@ -28,6 +28,10 @@ class Graph;
 class GraphDocument;
 class KTextBrowser;
 
+namespace Rocs{
+  class ToolsPluginInterface;
+}
+
 class  ROCSLIB_EXPORT QtScriptBackend : public QObject{
   Q_OBJECT
 public:
@@ -40,11 +44,17 @@ public:
     void debug(const QString& s);
     void output(const QString& s);
     QScriptEngine *engine(){ return _engine; }
+
+    /** return true if is evaluating a script or running a tool script. */
+    bool isRunning();
+    
 private:
     QString _script;
     GraphDocument *_graphs;
     void createGraphList();
     QScriptEngine *_engine;
+
+    bool _runningTool;
     
 signals:
     void sendOutput(const QString& s);
@@ -52,6 +62,14 @@ signals:
 
   public slots:
     void start();
+
+    /** run a tool plugin in graph and later run it resulting script.*/
+    void runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument *graphs);
+        
+    
+    /** abort script evaluation. In case of a too is running, stop will not stop tool. But the script resulting from tool will not be runned.
+
+    */
     void stop();
 };
 
