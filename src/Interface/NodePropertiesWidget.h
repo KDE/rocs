@@ -48,6 +48,7 @@ private slots:
     void on__showValue_toggled(bool b);
     void on__begin_toggled(bool b);
     void on__end_toggled(bool b);
+    void on__images_activated(const QString& s);
     void reflectAttributes();
     void updateAutomateAttributes(bool b);
     void on__addProperty_clicked();
@@ -57,6 +58,7 @@ private:
     Node *_node;
     MainWindow *_mainWindow;
     NodeItem *_item;
+    QString _svgFile;
     
 };
 #endif

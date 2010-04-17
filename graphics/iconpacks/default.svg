@@ -15,7 +15,7 @@
    height="297mm"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47pre4 r22446"
+   inkscape:version="0.47 r22583"
    sodipodi:docname="default.svg">
   <defs
      id="defs4">
@@ -3864,9 +3864,9 @@
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1280"
-     inkscape:window-height="777"
+     inkscape:window-height="746"
      inkscape:window-x="-4"
-     inkscape:window-y="0"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -3885,9 +3885,10 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       id="g3071"
+       id="rocs_information"
        transform="matrix(0.64320023,0,0,0.65038988,486.73667,537.38826)"
-       style="filter:url(#filter8651)">
+       style="filter:url(#filter8651)"
+       inkscape:label="#g3071">
       <g
          style="display:inline"
          inkscape:label="Explosion"
@@ -3940,7 +3941,7 @@
       </g>
     </g>
     <g
-       id="computer"
+       id="rocs_computer"
        inkscape:label="Layer 1"
        transform="matrix(0.53333333,0,0,0.60000001,44.435211,155.48938)"
        style="filter:url(#filter8655)">
@@ -4009,7 +4010,7 @@
       </g>
     </g>
     <g
-       id="layer1-4"
+       id="rocs_telepathy"
        inkscape:label="Layer 1"
        transform="matrix(0.76970276,0,0,0.70265682,480.20163,321.33679)"
        style="filter:url(#filter8659)">
@@ -4108,7 +4109,7 @@
     </g>
     <g
        inkscape:label="Layer 1"
-       id="grayball1"
+       id="rocs_grayball1"
        transform="matrix(5.054203,0,0,4.5346943,248.48648,93.606578)"
        style="filter:url(#filter8663)">
       <path
@@ -4153,9 +4154,10 @@
          transform="matrix(1.5295119,0,0,1.5295117,0.5286615,-0.4713384)" />
     </g>
     <g
-       id="layer1-9"
+       id="rocs_mines2"
        transform="matrix(1.9138538,0,0,1.8540235,37.292216,745.60073)"
-       style="filter:url(#filter8667)">
+       style="filter:url(#filter8667)"
+       inkscape:label="#layer1-9">
       <path
          id="path5168"
          style="opacity:0.23595503;color:#000000;fill:url(#radialGradient5176);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible"
@@ -4171,9 +4173,10 @@
          d="M 25.09375,4.6875 C 24.802565,4.69625 24.4375,4.830562 24.4375,5.53125 l 0,5.125 c 6.13e-4,0.436942 -0.318105,0.808779 -0.75,0.875 -2.405343,0.334506 -4.598633,1.32644 -6.40625,2.78125 -0.352791,0.288307 -0.866923,0.261248 -1.1875,-0.0625 L 12.375,10.53125 c -0.723506,-0.7235054 -1.04024,-0.525436 -1.1875,-0.375 -0.14726,0.150436 -0.351919,0.523081 0.34375,1.21875 L 15.25,15.09375 c 0.323748,0.320577 0.350807,0.834709 0.0625,1.1875 -1.459044,1.796601 -2.439691,3.973193 -2.78125,6.375 -0.06622,0.431895 -0.438058,0.750613 -0.875,0.75 l -5.125,0 c -0.5271548,0 -0.8092283,0.13919 -0.9375,0.25 -0.1282717,0.11081 -0.1301139,0.199742 -0.125,0.3125 0.010228,0.225517 0.1774716,0.65625 1.0625,0.65625 l 5.03125,0 c 0.458154,0.0032 0.837967,0.355835 0.875,0.8125 0.181308,2.539231 1.080176,4.844717 2.5,6.78125 0.261379,0.354891 0.221388,0.848104 -0.09375,1.15625 l -3.3125,3.3125 c -0.332795,0.332795 -0.398528,0.591129 -0.40625,0.75 -0.0077,0.158871 0.03411,0.258371 0.125,0.34375 0.181769,0.170758 0.543527,0.331473 1.125,-0.25 l 3.1875,-3.1875 c 0.332936,-0.333706 0.86915,-0.347455 1.21875,-0.03125 1.886004,1.679816 4.270573,2.792774 6.90625,3.15625 0.431895,0.06622 0.750613,0.438058 0.75,0.875 l 0,4.1875 c 0,0.996883 0.409858,1.09359 0.625,1.09375 0.215142,1.6e-4 0.59375,-0.09411 0.59375,-1.09375 l 0,-4.0625 c 0.0032,-0.458154 0.355835,-0.837967 0.8125,-0.875 2.74054,-0.199529 5.227664,-1.270122 7.25,-2.90625 0.352791,-0.288307 0.866923,-0.261248 1.1875,0.0625 l 2.78125,2.78125 c 0.01067,0.01015 0.0211,0.02058 0.03125,0.03125 0.476332,0.532371 0.772583,0.370124 1,0.15625 0.113708,-0.106937 0.188922,-0.229386 0.1875,-0.375 -0.0014,-0.145614 -0.03946,-0.335928 -0.34375,-0.625 C 38.55183,36.7086 38.5414,36.69817 38.53125,36.6875 L 35.75,33.90625 c -0.323748,-0.320577 -0.350807,-0.834709 -0.0625,-1.1875 1.640602,-2.029646 2.679046,-4.519901 2.875,-7.28125 0.03703,-0.456665 0.416846,-0.809349 0.875,-0.8125 l 4.09375,0 c 0.587579,0 0.735773,-0.343419 0.75,-0.65625 0.0071,-0.156416 -0.03909,-0.285448 -0.125,-0.375 -0.08591,-0.08955 -0.238522,-0.1875 -0.625,-0.1875 l -4.1875,0 c -0.436942,6.13e-4 -0.808779,-0.318105 -0.875,-0.75 -0.367586,-2.623598 -1.4819,-4.995134 -3.15625,-6.875 -0.316205,-0.3496 -0.302456,-0.885814 0.03125,-1.21875 L 38.5,11.40625 c 0.0153,-0.017 0.01703,-0.01482 0.03125,-0.03125 0.510895,-0.590681 0.332822,-0.834609 0.15625,-1 -0.181485,-0.169993 -0.506589,-0.308013 -1.03125,0.1875 L 34.375,13.84375 c -0.308146,0.315138 -0.801359,0.355129 -1.15625,0.09375 -1.929591,-1.414735 -4.22243,-2.313895 -6.75,-2.5 -0.456665,-0.03703 -0.809349,-0.416846 -0.8125,-0.875 l 0,-5.03125 c 0,-0.4177553 -0.123623,-0.5893215 -0.21875,-0.6875 C 25.34237,4.745571 25.239343,4.6831252 25.09375,4.6875 z" />
     </g>
     <g
-       id="layer1-8"
+       id="rocs_mines"
        transform="matrix(1.6667983,0,0,1.6416093,45.07126,536.07348)"
-       style="filter:url(#filter8671)">
+       style="filter:url(#filter8671)"
+       inkscape:label="#layer1-8">
       <path
          id="path3456"
          style="fill:url(#radialGradient4349);fill-opacity:1;stroke:none"
@@ -4190,7 +4193,7 @@
     </g>
     <g
        inkscape:label="Layer 1"
-       id="layer1-3"
+       id="rocs_server2"
        transform="matrix(1.567443,0,0,1.6465374,272.83113,536.43448)"
        style="filter:url(#filter8675)">
       <path
@@ -4384,7 +4387,7 @@
     </g>
     <g
        inkscape:label="Layer 1"
-       id="layer1-43"
+       id="rocs_wanda"
        transform="matrix(1.7563999,0,0,2.5459524,485.53354,729.51523)"
        style="filter:url(#filter8679)">
       <path
@@ -4562,7 +4565,7 @@
     </g>
     <g
        inkscape:label="Layer 1"
-       id="grayinformation"
+       id="rocs_information2"
        transform="matrix(2.5510204,0,0,2.5510204,265.66579,965.89162)"
        style="filter:url(#filter8683)">
       <path
@@ -4633,9 +4636,10 @@
          style="opacity:0.56734691;fill:#606060;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
-       id="g5620"
+       id="rocs_ribbon"
        transform="matrix(2.1795259,0,0,1.7418454,475.54937,965.21506)"
-       style="filter:url(#filter8687)">
+       style="filter:url(#filter8687)"
+       inkscape:label="#g5620">
       <path
          id="path6671"
          d="m 25.38911,19.305038 c 0,0 -5.904865,8.175967 -5.904865,11.923286 0,3.747318 6.813306,1.703326 9.538628,4.428649 2.725322,2.725322 -6.359086,9.765738 -6.359086,9.765738 l 9.084408,-2.498212 3.633764,3.860873 c 0,-4.655759 5.337089,-8.403077 2.611767,-11.241954 -2.838878,-2.838878 -10.90129,-2.498213 -11.35551,-6.245531 -0.454221,-3.747318 -1.135551,-9.879294 -1.135551,-9.879294 L 25.38911,19.305038 z"
@@ -4675,7 +4679,7 @@
     </g>
     <g
        inkscape:label="Layer 1"
-       id="default"
+       id="rocs_default"
        transform="matrix(5,0,0,5,487.8226,104.80455)"
        style="filter:url(#filter8691)">
       <path
@@ -4708,7 +4712,7 @@
          transform="translate(0,20)" />
     </g>
     <g
-       id="server"
+       id="rocs_server"
        transform="matrix(0.625,0,0,0.625,45.057795,320.46146)"
        inkscape:label="#Layer_1"
        style="filter:url(#filter8695)">
@@ -4963,7 +4967,7 @@
     </g>
     <g
        style="fill-rule:nonzero;stroke:#ffffff;stroke-width:0;stroke-miterlimit:4;filter:url(#filter8699)"
-       id="konqueror"
+       id="rocs_konqueror"
        transform="matrix(0.55555556,0,0,0.55555556,269.94444,326.33576)"
        inkscape:label="#Layer_x0020_2">
       <path
@@ -6048,7 +6052,7 @@
       </g>
     </g>
     <g
-       id="eletricsuperman"
+       id="rocs_eletricsuperman"
        inkscape:label="Layer 1"
        transform="matrix(1.6667021,0,0,1.8976873,269.04481,745.1055)"
        style="filter:url(#filter8703)">
@@ -6592,7 +6596,7 @@
          style="fill:url(#linearGradient6375);fill-opacity:1;fill-rule:nonzero;stroke:none" />
     </g>
     <g
-       id="layer1-7"
+       id="rocs_client"
        inkscape:label="Camada 1"
        transform="matrix(1.6816368,0,0,1.7237919,44.979661,963.96594)"
        style="filter:url(#filter8707)">

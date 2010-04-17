@@ -8,11 +8,17 @@
 
 NodePropertiesWidget::NodePropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
     setupUi(this);
+    _item = 0;
 }
 
 void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
-    _item = n;
+  
     _node = n->node();
+    if (! _item ){
+      _svgFile = _node->iconPackage();
+    }
+    
+    _item = n;
     move(pos.x()+ 10,  pos.y() + 10);
     show();
     activateWindow();
@@ -27,23 +33,52 @@ void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
     model->setDataSource(_node);
     
     _propertiesTable->setModel(model);
-
+    
 }
 
 void NodePropertiesWidget::reflectAttributes(){
-    _color->setColor(_node->color());
-    _x->setValue(_node->x());
-    _y->setValue(_node->y());
-    _name->setText(_node->name());
-    _value->setText(_node->value().toString());
-    _width->setValue(_node->width());
-    _showName->setChecked(!_node->showName());
-    _showValue->setChecked(!_node->showValue());
-    updateAutomateAttributes(qobject_cast< Graph* >(_node->parent())->automate());
+   _color->setColor(_node->color());
+   _x->setValue(_node->x());
+   _y->setValue(_node->y());
+   _name->setText(_node->name());
+   _value->setText(_node->value().toString());
+   _width->setValue(_node->width());
+   _showName->setChecked(!_node->showName());
+   _showValue->setChecked(!_node->showValue());
+   updateAutomateAttributes(qobject_cast< Graph* >(_node->parent())->automate());
    _propertyName->setText("");
    _propertyValue->setText("");
    _isPropertyGlobal->setCheckState(Qt::Unchecked);
+   if (( _svgFile == _node->iconPackage()) && (_images->count() != 0)){
+      kDebug() << _svgFile << "already set, and images combo box is not empty";
+      return;
+   }
+    _images->clear();
+    QFile svgFile(_item->node()->iconPackage());
+    if (!svgFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+      kDebug() << "could not open file for reading";
+      return;
+    }
+    
+    QXmlStreamReader reader(&svgFile);
+    while(!reader.atEnd()){
+      reader.readNext();
+      if ( reader.attributes().hasAttribute("id")){
+          QString attribute = reader.attributes().value("id").toString();
+          if (attribute.startsWith("rocs_")){
+              attribute.remove("rocs_");
+              _images->addItem(attribute);
+          }
+      }
+    }
 }
+
+void NodePropertiesWidget::on__images_activated(const QString& s)
+{
+  _node->setIcon("rocs_"+s);
+}
+
+
 
 void NodePropertiesWidget::updateAutomateAttributes(bool b){
     if (b) {

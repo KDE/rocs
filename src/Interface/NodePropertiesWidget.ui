@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>359</width>
+    <width>382</width>
     <height>366</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Node Properties</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="sizePolicy">
@@ -36,10 +36,10 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="0" column="1" colspan="2">
     <widget class="KLineEdit" name="_name"/>
    </item>
-   <item row="0" column="2">
+   <item row="0" column="3">
     <widget class="QCheckBox" name="_showName">
      <property name="text">
       <string/>
@@ -49,14 +49,14 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="3" rowspan="4">
+   <item row="0" column="4" rowspan="4">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </item>
-   <item row="0" column="4">
+   <item row="0" column="5">
     <widget class="QLabel" name="label_3">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -75,7 +75,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="5">
+   <item row="0" column="6" colspan="3">
     <widget class="QSpinBox" name="_x">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -104,10 +104,10 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="1" column="1" colspan="2">
     <widget class="KLineEdit" name="_value"/>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="3">
     <widget class="QCheckBox" name="_showValue">
      <property name="text">
       <string/>
@@ -117,7 +117,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="4">
+   <item row="1" column="5">
     <widget class="QLabel" name="label_4">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -136,7 +136,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="5">
+   <item row="1" column="6" colspan="3">
     <widget class="QSpinBox" name="_y">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -162,17 +162,10 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="2" column="1" colspan="2">
     <widget class="KColorCombo" name="_color">
      <property name="toolTip">
       <string>Node color</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="5">
-    <widget class="QCheckBox" name="_begin">
-     <property name="text">
-      <string> Is begin</string>
      </property>
     </widget>
    </item>
@@ -189,7 +182,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
+   <item row="3" column="1" colspan="2">
     <widget class="KDoubleNumInput" name="_width">
      <property name="toolTip">
       <string>Node size</string>
@@ -202,6 +195,67 @@
      </property>
     </widget>
    </item>
+   <item row="6" column="0" colspan="9">
+    <widget class="QTableView" name="_propertiesTable"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="2">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Value</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="7">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Global</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="2">
+    <widget class="KLineEdit" name="_propertyName"/>
+   </item>
+   <item row="8" column="2" colspan="5">
+    <widget class="KLineEdit" name="_propertyValue"/>
+   </item>
+   <item row="8" column="7">
+    <widget class="QCheckBox" name="_isPropertyGlobal">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="8">
+    <widget class="KPushButton" name="_addProperty">
+     <property name="text">
+      <string>add</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="5">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>Image</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="6" colspan="3">
+    <widget class="KComboBox" name="_images"/>
+   </item>
+   <item row="3" column="7" colspan="2">
+    <widget class="QCheckBox" name="_begin">
+     <property name="text">
+      <string>Begin</string>
+     </property>
+    </widget>
+   </item>
    <item row="3" column="5">
     <widget class="QCheckBox" name="_end">
      <property name="sizePolicy">
@@ -211,57 +265,9 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string> Is End</string>
+      <string>End</string>
      </property>
     </widget>
-   </item>
-   <item row="4" column="0" colspan="6">
-    <widget class="QTableView" name="_propertiesTable"/>
-   </item>
-   <item row="5" column="0" colspan="6">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0">
-      <widget class="KLineEdit" name="_propertyName"/>
-     </item>
-     <item row="1" column="1">
-      <widget class="KLineEdit" name="_propertyValue"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_8">
-       <property name="text">
-        <string>Value</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QCheckBox" name="_isPropertyGlobal">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>Global</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="KPushButton" name="_addProperty">
-       <property name="text">
-        <string>add</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>
@@ -286,6 +292,11 @@
    <extends>QComboBox</extends>
    <header>kcolorcombo.h</header>
   </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>_name</tabstop>
@@ -295,8 +306,6 @@
   <tabstop>_color</tabstop>
   <tabstop>_x</tabstop>
   <tabstop>_y</tabstop>
-  <tabstop>_begin</tabstop>
-  <tabstop>_end</tabstop>
   <tabstop>_propertiesTable</tabstop>
   <tabstop>_propertyName</tabstop>
   <tabstop>_propertyValue</tabstop>
