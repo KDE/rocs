@@ -78,8 +78,6 @@ void NodePropertiesWidget::on__images_activated(const QString& s)
   _node->setIcon("rocs_"+s);
 }
 
-
-
 void NodePropertiesWidget::updateAutomateAttributes(bool b){
     if (b) {
         _begin->setChecked(_node->begin());
