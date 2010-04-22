@@ -59,4 +59,6 @@ bool KMLFilePlugin::writeFile(const GraphDocument &/*graph*/ , const QString &fi
     {
         return true;
     }
+
+    return false;
 }
