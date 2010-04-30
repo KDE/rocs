@@ -62,6 +62,7 @@ class ROCSLIB_EXPORT Graph : public QObject {
 
     /*! this property tells the system if this graph is to be treated as an automate */
     Q_PROPERTY(bool automate READ automate WRITE setAutomate)
+    
 public:
     /*! constructo
       \p parent the parent QObject
@@ -257,12 +258,42 @@ public  slots:
     * @param value Value of the property. value shoud be different of QVariant::Invalid.
     */
     void removeNodesDinamicProperty(QString property);
+    
     /** remove a property to all edges in this graph.
     * @param property Name of property
     */
     void removeEdgesDinamicProperty(QString property);
     
+    /** adds a node in this graph.
+    * @param name the name of the node, 
+    * @param point the point in the euclidian space where this node is.
+    */
     void addNode(QString name, QPointF point);
+    
+    /** sets all nodes for this color.
+    * @param color the color that each node will have. 
+    */
+    void setNodesColor(QString c);
+    
+    /** sets all edges for this color 
+    * @param color the color that each edge will have.
+    */
+    void setEdgesColor(QString c);
+    
+    /** puts sets the visitbility of the names in the nodes. 
+    * @param b true if visible false invisible */
+    void setNodeNameVisibility(bool b);
+    bool nodeNameVisibility();
+    
+    void setEdgeNameVisibility(bool b);
+    bool edgeNameVisibility();
+    
+    void setNodeValueVisibility(bool b);
+    bool nodeValueVisibility();
+    
+    void setEdgeValueVisibility(bool b);
+    bool edgeValueVisibility();
+    
     
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();
@@ -301,6 +332,11 @@ private:
     bool _automate;
     GraphDocument *_document;
     bool _readOnly;
+    
+    bool _nodeNamesVisible;
+    bool _edgeNamesVisible;
+    bool _nodeValuesVisible;
+    bool _edgeValuesVisible;
     
 #ifdef USING_QTSCRIPT
     QScriptValue _value;

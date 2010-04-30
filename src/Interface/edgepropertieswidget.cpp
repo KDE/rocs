@@ -43,8 +43,14 @@ void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
     raise();
     disconnect();
     
-    connect(_edge, SIGNAL(updateNeeded()), this, SLOT(reflectAttributes()));
-    connect(_edge, SIGNAL(posChanged()), this, SLOT(reflectAttributes()));
+    connect(_edge,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
+        
+    connect(_value,     SIGNAL(textChanged(QString)),   _edge, SLOT(setValue(QString)));
+    connect(_name,      SIGNAL(textChanged(QString)),   _edge, SLOT(setName(QString)));
+    connect(_width,     SIGNAL(valueChanged(double)),    _edge, SLOT(setWidth(double)));
+    connect(_showName,  SIGNAL(toggled(bool)),          _edge, SLOT(hideName(bool)));
+    connect(_showValue, SIGNAL(toggled(bool)),          _edge, SLOT(hideValue(bool)));
+    
     reflectAttributes();
 }
 
@@ -57,37 +63,18 @@ void EdgePropertiesWidget::reflectAttributes(){
    _propertyValue->setText("");
    _isPropertyGlobal->setCheckState(Qt::Unchecked);
 }
-void EdgePropertiesWidget::on__name_textChanged(const QString& s) {
-    _edge->setName(s);
-}
-
-void EdgePropertiesWidget::on__value_textChanged(const QString& s) {
-    _edge->setValue(s);
-}
 
 void EdgePropertiesWidget::on__color_activated(const QColor& c) {
     _edge->setColor(c.name());
 }
 
-void EdgePropertiesWidget::on__width_valueChanged(double v) {
-    _edge->setWidth(v);
-}
-
 void EdgePropertiesWidget::on__style_activated(int index) {
     switch(index){
-      case 0 : _edge->setStyle("solid"); break;
-      case 1 : _edge->setStyle("dash"); break;
-      case 2 : _edge->setStyle("dot"); break;
+      case 0 : _edge->setStyle("solid");    break;
+      case 1 : _edge->setStyle("dash");     break;
+      case 2 : _edge->setStyle("dot");      break;
       case 3 : _edge->setStyle("dash dot"); break;
     }
-}
-
-void EdgePropertiesWidget::on__showName_toggled(bool b){
-  _edge->hideName(!b);
-}
-
-void EdgePropertiesWidget::on__showValue_toggled(bool b){
-  _edge->hideValue(!b);
 }
 
 void EdgePropertiesWidget::on__addProperty_clicked(){
@@ -100,9 +87,7 @@ void EdgePropertiesWidget::on__addProperty_clicked(){
 //     }
     
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
-    model->addDinamicProperty(_propertyName->text(),
-			      QVariant(_propertyValue->text()),
-			      _edge,
-			      (_isPropertyGlobal->checkState() == Qt::Checked));
+    model->addDinamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
+                              _edge,(_isPropertyGlobal->checkState() == Qt::Checked));
 }
 

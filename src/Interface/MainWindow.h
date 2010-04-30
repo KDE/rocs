@@ -62,6 +62,8 @@ public:
     GraphScene *scene() const;
     void debug(const QString& s);
     GraphDocument *activeDocument() const;
+    QMutex& mutex();
+    
 private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.

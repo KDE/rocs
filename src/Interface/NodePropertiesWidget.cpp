@@ -24,10 +24,21 @@ void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
     activateWindow();
     raise();
     disconnect();
-    connect(_node, SIGNAL(updateNeeded()), this, SLOT(reflectAttributes()));
-    connect(_node, SIGNAL(posChanged()), this, SLOT(reflectAttributes()));
-    connect(_node->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
+    
     reflectAttributes();
+    
+    connect(_node, SIGNAL(changed()), this, SLOT(reflectAttributes()));
+    connect(_node->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
+    
+    connect( _showName,     SIGNAL(toggled(bool)),          _node, SLOT(hideName(bool)));
+    connect( _showValue,    SIGNAL(toggled(bool)),          _node, SLOT( hideValue(bool)));
+    connect( _begin,        SIGNAL(toggled(bool)),          _node, SLOT(setBegin(bool)));
+    connect( _end,          SIGNAL(toggled(bool)),          _node, SLOT(setEnd(bool)));
+    connect( _name,         SIGNAL(textChanged(QString)),   _node, SLOT(setName(QString)));
+    connect( _value,        SIGNAL(textChanged(QString)),   _node, SLOT(setValue(QString)));
+    connect( _x,            SIGNAL(valueChanged(int)),      _node, SLOT(setX(int)));
+    connect( _y,            SIGNAL(valueChanged(int)),      _node, SLOT(setY(int)));
+    connect( _width,        SIGNAL(valueChanged(double)),   _node, SLOT(setWidth(double)));
     
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_node);
@@ -78,6 +89,10 @@ void NodePropertiesWidget::on__images_activated(const QString& s)
   _node->setIcon("rocs_"+s);
 }
 
+void NodePropertiesWidget::on__color_activated(const QColor& c) { 
+  _node->setColor(c.name()); 
+}
+
 void NodePropertiesWidget::updateAutomateAttributes(bool b){
     if (b) {
         _begin->setChecked(_node->begin());
@@ -91,55 +106,6 @@ void NodePropertiesWidget::updateAutomateAttributes(bool b){
         _begin->hide();
         _end->hide();
     }
-}
-
-void NodePropertiesWidget::on__showName_toggled(bool b) {
-    _node->hideName(!b);
-}
-
-void NodePropertiesWidget::on__showValue_toggled(bool b) {
-    _node->hideValue(!b);
-}
-
-void NodePropertiesWidget::on__begin_toggled(bool b) {
-    _node->setBegin(b);
-    kDebug() << "begin: " << b;
-}
-
-void NodePropertiesWidget::on__end_toggled(bool b) {
-    _node->setEnd(b);
-    kDebug() << "end: " << b;
-}
-
-void NodePropertiesWidget::on__color_activated(const QColor& c) {
-    if (! _node ) return;
-    _node->setColor(c.name());
-}
-void NodePropertiesWidget::on__name_textChanged(const QString& s) {
-    if (! _node ) return;
-    _node->setName(s);
-}
-
-void NodePropertiesWidget::on__value_textChanged(const QString& s) {
-    if (! _node ) return;
-    _node->setValue(s);
-}
-
-void NodePropertiesWidget::on__x_valueChanged(int i) {
-    if (! _node ) return;
-    _node->setX(i);
-}
-
-void NodePropertiesWidget::on__y_valueChanged(int i) {
-    if (! _node ) return ;
-    _node->setY(i);
-}
-
-void NodePropertiesWidget::on__width_valueChanged(double i) {
-    if (! _node ) {
-        return;
-    }
-    _node->setWidth(i);
 }
 
 void NodePropertiesWidget::on__addProperty_clicked(){

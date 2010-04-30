@@ -37,14 +37,9 @@ public:
     void setEdge(Edge *e, QPointF pos);
 
 public slots:
-    void on__name_textChanged(const QString& s);
-    void on__value_textChanged(const QString& s);
     void on__color_activated(const QColor& c);
-    void on__width_valueChanged(double v);
     void on__style_activated(int index);
     void reflectAttributes();
-    void on__showName_toggled(bool b);
-    void on__showValue_toggled(bool b);
     void on__addProperty_clicked();
     
 private:

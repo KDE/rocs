@@ -25,6 +25,7 @@
 #include "graphDocument.h"
 #include "dinamicpropertieslist.h"
 #include <KDebug>
+#include <QColor>
 
 Graph::Graph(GraphDocument *parent) : QObject(parent) {
     _directed = false;
@@ -35,6 +36,10 @@ Graph::Graph(GraphDocument *parent) : QObject(parent) {
     calcRelativeCenter();
     _nodeDefaultColor = "blue";
     _edgeDefaultColor = "gray";
+    _nodeNamesVisible = true;
+    _nodeValuesVisible = true;
+    _edgeNamesVisible = false;
+    _edgeValuesVisible = true;
 }
 
 Graph::~Graph() {
@@ -62,6 +67,20 @@ QList<Node*> Graph::nodes() const {
 
 QList<Edge*> Graph::edges() const {
     return _edges;
+}
+
+void Graph::setNodesColor(QString c){
+  kDebug() << "Entrou no setNodesColor, com a cor " << c;
+  foreach(Node *n, _nodes) {
+        n->setColor(c);
+    }
+}
+
+void Graph::setEdgesColor(QString c){
+    kDebug() << "Entrou no setEdgesColor, com a cor " << c;
+    foreach(Edge *e, _edges) {
+        e->setColor(c);
+    }
 }
 
 Node* Graph::addNode(QString name) {
@@ -253,6 +272,7 @@ void Graph::removeEnd(Node *n) {
 }
 
 void Graph::setNodeDefaultColor(const QString& color) {
+    kDebug() << "Entrou com cor aqui painho." << color;
     _nodeDefaultColor = color;
 }
 
@@ -288,26 +308,69 @@ void Graph::removeDinamicProperty(QString property){
 }
 
 void Graph::addNodesDinamicProperty(QString property, QVariant value){
-    foreach(Node *n, nodes()){
+    foreach(Node *n, _nodes){
       n->addDinamicProperty(property, value);
     }
 }
 
 void Graph::addEdgesDinamicProperty(QString property, QVariant value){
-    foreach(Edge *e, edges()){
+    foreach(Edge *e, _edges){
       e->addDinamicProperty(property, value);
     }
 }
 
 void Graph::removeNodesDinamicProperty(QString property){
-  foreach(Node *n, nodes()){
+  foreach(Node *n, _nodes){
     n->removeDinamicProperty(property);
   }
 }
 void Graph::removeEdgesDinamicProperty(QString property){
-  foreach(Edge *e, edges()){
+  foreach(Edge *e, _edges){
     e->removeDinamicProperty(property);
   }
+}
+
+void Graph::setNodeNameVisibility(bool b){
+  _nodeNamesVisible = b;
+  foreach(Node *n, _nodes){
+    n->hideName(b);
+  }
+}
+
+bool Graph::nodeNameVisibility(){
+  return _nodeNamesVisible;
+}
+
+void Graph::setEdgeNameVisibility(bool b){
+  _edgeNamesVisible = b;
+  foreach(Edge *n, _edges){
+    n->hideName(b);
+  }
+}
+
+bool Graph::edgeNameVisibility(){
+  return _edgeNamesVisible;
+}
+    
+void Graph::setNodeValueVisibility(bool b){
+  _nodeValuesVisible = b;
+  foreach(Node *n, _nodes){
+    n->hideValue(b);
+  }
+}
+bool Graph::nodeValueVisibility(){
+  return _nodeValuesVisible;
+}
+    
+void Graph::setEdgeValueVisibility(bool b){
+  _edgeValuesVisible = b;
+  foreach(Edge *n, _edges){
+    n->hideValue(b);
+  }
+}
+
+bool Graph::edgeValueVisibility(){
+  return _edgeValuesVisible;
 }
 
 #ifdef USING_QTSCRIPT

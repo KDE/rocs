@@ -188,7 +188,7 @@ void Node::remove() {
 }
 
 //! Properties:
-void Node::setX(qreal x) {
+void Node::setX(int x) {
     _x = x;
     if (! _changing) {
 	emit changed();
@@ -199,7 +199,7 @@ qreal Node::x() const {
     return _x;
 }
 
-void Node::setY(qreal y) {
+void Node::setY(int y) {
     _y  = y;
     if (! _changing) {
 	emit changed();
@@ -301,10 +301,16 @@ const QVariant Node::value() const {
 void  Node::setValue(QVariant s) {
     _value = s;
     if (! _changing) {
-	emit changed();
+      emit changed();
     }
 }
 
+void Node::setValue(const QString& c){
+    _value = c;
+    if (_changing){
+      emit changed();
+    }
+}
 void Node::startChange() {
     _changing = true;
 }

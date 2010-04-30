@@ -31,11 +31,14 @@
 #include "OrientedEdgeItem.h"
 #include "GraphScene.h"
 #include <KLocale>
+#include <QRadioButton>
+
 
 GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
         : KButtonGroup ( parent ) {
     setupUi(this);
     _mainWindow = parent;
+    //! do not lock here, it will create a racing condition.
 
     _graph = g;
     _graphName->setText(_graph->name());
@@ -45,13 +48,44 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
     _graphOriented->setChecked(_graph->directed());
     _graphVisible->setChecked( ! _graph->readOnly());
     _activateGraph->setChecked(true);
-    _showEdgeNames->setChecked(true);
-    _showEdgeValues->setChecked(true);
-    _showNodeNames->setChecked(true);
-    _showNodeValues->setChecked(true);
+    _showEdgeNames->setChecked( _graph->edgeNameVisibility() );
+    _showEdgeValues->setChecked(_graph->edgeValueVisibility());
+    _showNodeNames->setChecked( _graph->nodeNameVisibility() );
+    _showNodeValues->setChecked(_graph->nodeValueVisibility());
     
     _editWidget->setVisible(_activateGraph->isChecked());
-    connect( this, SIGNAL( activeGraphChanged(Graph*)), _mainWindow->activeDocument(), SLOT(setActiveGraph(Graph*)));
+   
+    connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setEdgeDefaultColor(QColor)));
+    connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setNodeDefaultColor(QColor)));
+    
+    connect( this, SIGNAL( edgeColorsChanged(QString)),      g, SLOT(setEdgesColor(QString)));
+    connect( this, SIGNAL( nodeColorsChanged(QString)),      g, SLOT(setNodesColor(QString)));
+    connect( this, SIGNAL( edgeDefaultColorSetted(QString)), g, SLOT(setEdgeDefaultColor(QString)));
+    connect( this, SIGNAL( nodeDefaultColorSetted(QString)), g, SLOT(setNodeDefaultColor(QString)));
+
+    
+    connect( _showEdgeNames,  SIGNAL(toggled(bool)), g, SLOT(setEdgeNameVisibility(bool)  ));
+    connect( _showEdgeValues, SIGNAL(toggled(bool)), g, SLOT(setEdgeValueVisibility(bool) ));
+    connect( _showNodeNames,  SIGNAL(toggled(bool)), g, SLOT(setNodeNameVisibility(bool)  ));
+    connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setNodeValueVisibility(bool) ));
+    
+    connect( _graphName,      SIGNAL(textChanged(QString)), g, SLOT(setName(QString)));
+
+    connect( _graphOriented, SIGNAL(toggled(bool)), g, SLOT(setDirected(bool)));
+    connect( _graphAutomate, SIGNAL(toggled(bool)), g, SLOT(setAutomate(bool)));
+    
+}
+
+void GraphPropertiesWidget::setEdgeDefaultColor(QColor c){    emit edgeDefaultColorSetted(c.name()); }
+void GraphPropertiesWidget::setNodeDefaultColor(QColor c){    emit nodeDefaultColorSetted(c.name()); }
+void GraphPropertiesWidget::on__graphEdgeColorApplyNow_clicked() {  emit edgeColorsChanged(_graphEdgeColor->color().name()); }
+void GraphPropertiesWidget::on__graphNodeColorApplyNow_clicked() {  emit nodeColorsChanged(_graphNodeColor->color().name()); }
+
+void GraphPropertiesWidget::on__graphVisible_toggled(bool b){
+  _mainWindow->mutex().lock();
+  _graph->readOnly( !b );
+  _mainWindow->scene()->hideGraph( _graph, b );
+  _mainWindow->mutex().unlock();
 }
 
 QRadioButton *GraphPropertiesWidget::radio()const {
@@ -65,48 +99,10 @@ void GraphPropertiesWidget::on__activateGraph_toggled(bool b) {
     }
 }
 
-void GraphPropertiesWidget::on__graphEdgeColorApplyNow_clicked() {
-    foreach(Edge *e, _graph->edges()) {
-        e->setColor(_graphEdgeColor->color().name());
-    }
-}
-
-void GraphPropertiesWidget::on__graphEdgeColor_activated(QColor c) {
-    _graph->setEdgeDefaultColor(c.name());
-}
-
-void GraphPropertiesWidget::on__graphName_textChanged(QString n) {
-    _activateGraph->setText(n);
-    _graph->setName(n);
-}
-
-void GraphPropertiesWidget::on__graphNodeColorApplyNow_clicked() {
-    foreach(Node *n, _graph->nodes()) {
-        n->setColor(_graphNodeColor->color().name());
-    }
-}
-
-void GraphPropertiesWidget::on__graphNodeColor_activated(QColor c) {
-    _graph->setNodeDefaultColor(c.name());
-}
-
-void GraphPropertiesWidget::on__graphOriented_toggled(bool b) {
-    _graph->setDirected(b);
-    //_mainWindow->scene()->updateDocument();
-    kDebug() << "Toggle";
-}
-
-void GraphPropertiesWidget::on__graphAutomate_toggled(bool b) {
-    _graph->setAutomate(b);
-}
-
-void GraphPropertiesWidget::on__graphVisible_toggled(bool b){
-  kDebug() << b;
-  _graph->readOnly( !b );
-  _mainWindow->scene()->hideGraph( _graph, b );
-}
-
 void GraphPropertiesWidget::on__graphDelete_clicked() {
+    if (! _mainWindow->mutex().tryLock()) 
+        return;
+    
     bool isActive = false;
     if (_graph == _mainWindow->graph()){
       isActive = true;
@@ -114,7 +110,7 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
     
     GraphDocument *gd = qobject_cast<GraphDocument*>(_graph->parent());
     if (gd->size() == 1){
-	gd->addGraph(i18n("Untitled0"));
+        gd->addGraph(i18n("Untitled0"));
     }
     
     _mainWindow->scene()->fade(false);
@@ -124,28 +120,8 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
     if (isActive) emit updateNeeded();
     radio()->group()->removeButton(radio());
     deleteLater();
+    
+    _mainWindow->mutex().unlock();
 }
 
-void GraphPropertiesWidget::on__showNodeNames_toggled(bool b) {
-    foreach(Node *n, _graph->nodes()) {
-        n->hideName(b);
-    }
-}
 
-void GraphPropertiesWidget::on__showEdgeNames_toggled(bool b) {
-    foreach(Edge *e, _graph->edges()) {
-        e->hideName(b);
-    }
-}
-
-void GraphPropertiesWidget::on__showNodeValues_toggled(bool b) {
-    foreach(Node *n, _graph->nodes()) {
-        n->hideValue(b);
-    }
-}
-
-void GraphPropertiesWidget::on__showEdgeValues_toggled(bool b) {
-    foreach(Edge *e, _graph->edges()) {
-        e->hideValue(b);
-    }
-}

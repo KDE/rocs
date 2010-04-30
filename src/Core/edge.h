@@ -62,7 +62,7 @@ class ROCSLIB_EXPORT Edge : public QObject {
     Q_PROPERTY(QString name READ name WRITE setName)
 
     /*! this property holds the width of the edge */
-    Q_PROPERTY(qreal width READ width WRITE setWidth)
+    Q_PROPERTY(double width READ width WRITE setWidth)
 
     /*! this property holds the style of the edge */
     Q_PROPERTY(QString style READ style WRITE setStyle)
@@ -90,10 +90,6 @@ public:
     /*! remove this node from the graph */
     void remove();
 
-    bool showName();
-    bool showValue();
-    void hideName(bool b);
-    void hideValue(bool b);
     void emitChangedSignal(){ emit changed(); }
 
     Graph *graph(){return _graph; }
@@ -173,9 +169,9 @@ public  slots:
     qreal width () const {
         return _width;
     }
-    void setWidth(qreal w) {
+    void setWidth(double w) {
         _width = w;
-	emit changed();
+        emit changed();
     }
 
     const QString& style() const {
@@ -196,6 +192,11 @@ public  slots:
     * @param arg1 name os property to remove
     */
     void removeDinamicProperty(QString property);
+    
+    bool showName();
+    bool showValue();
+    void hideName(bool b);
+    void hideValue(bool b);
     
 #ifdef USING_QTSCRIPT
     /*! this method can be used inside of the script interface.
@@ -238,7 +239,7 @@ private:
     bool _showValue;
 
     QString _style;
-    qreal _width;
+    double _width;
 
      Graph *_graph;
 #ifdef USING_QTSCRIPT

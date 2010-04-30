@@ -120,6 +120,8 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     setupToolsPluginsAction();
 }
 
+QMutex& MainWindow::mutex() { return _mutex;}
+
 MainWindow::~MainWindow()
 {
     Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );

@@ -64,8 +64,7 @@ public:
     void endChange();
     bool showName();
     bool showValue();
-    void hideName(bool b);
-    void hideValue(bool b);
+
     Graph *graph(){ return _graph; }
 
 #ifdef USING_QTSCRIPT
@@ -84,9 +83,9 @@ public  slots:
     EdgeList out_edges() const;
     EdgeList self_edges() const;
 
-    void setX(qreal x);
-    void setY(qreal y);
-    void setWidth(qreal w);
+    void setX(int x);
+    void setY(int y);
+    void setWidth(double w);
     void setPos(qreal x, qreal y);
     qreal x() const;
     qreal y() const;
@@ -100,12 +99,14 @@ public  slots:
     void setBegin(bool begin = true);
     void setEnd(bool end = true);
     void setValue(const QVariant v);
+    void setValue(const QString& s);
     const QVariant value() const;
     void setIcon(const QString& s);
     const QString& icon() const;
     const QString& iconPackage() const;
     void setIconPackage(const QString& s);
-    
+    void hideName(bool b);
+    void hideValue(bool b);
     /** Add a property to this node
     * @param property Name of property
     * @param value Value of the property. arg2 shoud be different of QVariant::Invalid.

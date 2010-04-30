@@ -21,7 +21,7 @@ int GraphPropertiesModel::rowCount(const QModelIndex &parent) const {
 }
 
 int GraphPropertiesModel::columnCount ( const QModelIndex & parent ) const {
-    // should always be 2.
+    // should always be 2. //! WARNING: wtf? should always be 2 but return 3?
     Q_UNUSED(parent);
     return 3; //Name - Value - Type
 }
@@ -63,14 +63,9 @@ QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientati
 
     if (orientation == Qt::Horizontal) {
         switch (section) {
-        case 0:
-            return i18n("Property");
-        case 1:
-            return i18n("Value");
-        case 2:
-            return i18n("Type");
-        default:
-            return QVariant();
+        case 0: return i18n("Property");
+        case 1: return i18n("Value");
+        case 2: return i18n("Type");
         }
     }
     return QVariant();
@@ -98,7 +93,6 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource) {
 
     // insert the information.
 
-
     beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size()-1);
     endInsertRows();
 
@@ -113,29 +107,15 @@ Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const {
         }
     }
     return Qt::ItemIsEnabled;
-
-
 }
 
-bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,
-                                   int role) {
+bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,  int role) {
     if (index.isValid() && role == Qt::EditRole) {
-        switch (index.column()) {
-        case 0:
-            kDebug() << "Change name. DinamicPropertiesList take part";
-            DinamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), //name
-                    value.toString(), //NewName
-                    _dataSource); //Object
-            break;
-        case 1:
-            kDebug() << "Just change Value";
-            _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()],
-                                     value);
-            break;
-        default:
-            kDebug() << "shoudn't enter here ¬¬";
-            return false;
-            break;
+        switch (index.column()) {   
+                /* Change name. DinamicPropertiesList take part"                    name                                        new name        object  */
+        case 0: DinamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;
+        case 1:  _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()], value);     break; /* just change the values */
+        default: kDebug() << "shoudn't enter here ¬¬";   return false;
         }
 
         emit dataChanged(index, index);
@@ -148,33 +128,23 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
 
 void GraphPropertiesModel::addDinamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal) {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-
     if (isGlobal) {
-        Edge * edge = qobject_cast<Edge*> (obj);
-        if (edge) {
+        if (Edge * edge = qobject_cast<Edge*> (obj)) {
             edge->graph()->addEdgesDinamicProperty(name,value);
         }
-        Node * node = qobject_cast<Node*> (obj);
-        if (node) {
+        if (Node * node = qobject_cast<Node*> (obj)) {
             node->graph()->addNodesDinamicProperty(name,value);
         }
-        
-
     } else {
-        Edge * edge = qobject_cast<Edge*> (obj);
-        if (edge) {
+        if (Edge * edge = qobject_cast<Edge*> (obj)) {
             edge->addDinamicProperty(name,value);
         }
-        Node * node = qobject_cast<Node*> (obj);
-        if (node) {
+        if (Node * node = qobject_cast<Node*> (obj)) {
             node->addDinamicProperty(name,value);
         }
-        Graph * graph = qobject_cast<Graph*> (obj);
-        if (graph) {
+        if (Graph * graph = qobject_cast<Graph*> (obj)) {
             graph->addDinamicProperty(name, value);
         }
-
     }
-
-        endInsertRows();
+    endInsertRows();
   }
