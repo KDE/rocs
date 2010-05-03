@@ -25,13 +25,9 @@ GraphLayers::GraphLayers(MainWindow *parent) : QWidget(parent) {
     l->addStretch();
     setLayout(l);
     _buttonGroup = new QButtonGroup();
-
 }
 
 void GraphLayers::populate() {
-    kDebug() << "############################";
-    kDebug() << "Removing old items";
-    kDebug() << "############################";
     for ( int i = 1; i < layout()->count(); ++i) {
         layout()->itemAt(i)->widget()->deleteLater();
     }
@@ -39,16 +35,9 @@ void GraphLayers::populate() {
         _buttonGroup->removeButton(b);
     }
 
-    kDebug() << "############################";
-    kDebug() << "Starting to populate";
-    kDebug() << "############################";
-    
     GraphDocument *gd = _mainWindow->activeDocument();
     connect(gd, SIGNAL(graphCreated(Graph*)), this, SLOT(addGraph(Graph*)));
 
-    kDebug() << "############################";
-    kDebug() << "Adding Graph to the List of Graphs";
-    kDebug() << "############################";
     int total = gd->count();
     for (int i = 0; i < total; ++i) {
 	  addGraph(gd->at(i));
@@ -64,16 +53,9 @@ void GraphLayers::btnADDClicked() {
 }
 
 void GraphLayers::addGraph(Graph *g){
-    
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
-    
-    kDebug() <<"################ linha2";
     _buttonGroup->addButton(gp->radio());
-    
-    kDebug() << "################# Linha 3";
     connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()));
-    
-    kDebug() << "################### Linha 4";
     qobject_cast<QVBoxLayout*>(layout())->insertWidget(1,gp);
 }
 

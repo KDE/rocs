@@ -43,6 +43,7 @@ private slots:
     void on__graphEdgeColorApplyNow_clicked();
     void on__graphNodeColorApplyNow_clicked();
     void on__graphDelete_clicked();
+    void on__graphName_textChanged(const QString& s);
 
     void on__activateGraph_toggled(bool b);
     void on__graphVisible_toggled(bool b);

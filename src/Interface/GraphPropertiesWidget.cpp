@@ -70,7 +70,7 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
     connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setNodeValueVisibility(bool) ));
     
     connect( _graphName,      SIGNAL(textChanged(QString)), g, SLOT(setName(QString)));
-
+    
     connect( _graphOriented, SIGNAL(toggled(bool)), g, SLOT(setDirected(bool)));
     connect( _graphAutomate, SIGNAL(toggled(bool)), g, SLOT(setAutomate(bool)));
     
@@ -124,4 +124,7 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
     _mainWindow->mutex().unlock();
 }
 
+void GraphPropertiesWidget::on__graphName_textChanged(const QString& s){
+    _activateGraph->setText(s);
+}
 

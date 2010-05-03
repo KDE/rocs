@@ -97,26 +97,10 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     setupActions();
     setupGUI();
 
-
-    
-    //_moveNodeAction->setView( _graphVisualEditor->view() );
-
     statusBar()->hide();
 
-
-    kDebug() << "################################";
-    kDebug() << "Setting Graph Document";
-    kDebug() << "#################################";
-
     setActiveGraphDocument ( _tDocument->document() );
-
-    kDebug() << "#################################";
-    kDebug() << "Graph Document Setted";
-    kDebug() << "#################################";
-
-
-    _GraphLayers->populate();
-
+     _GraphLayers->populate();
     setupToolsPluginsAction();
 }
 
@@ -331,7 +315,7 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     if ( _tDocument->document()->size() == 0 ) return;
     setActiveGraph ( _tDocument->document()->at ( 0 ) );
 
-    _GraphLayers->populate();
+    //_GraphLayers->populate();
 
 
 }
