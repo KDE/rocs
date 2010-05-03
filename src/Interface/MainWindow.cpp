@@ -129,12 +129,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::outputString ( const QString& s )
 {
-    _txtDebug->append ( s );
+    _txtOutput->append ( s );
 }
 
 void MainWindow::debugString ( const QString& s )
 {
-    _txtOutput->append ( s );
+    _txtDebug->append ( s );
 }
 
 GraphDocument *MainWindow::activeDocument() const
