@@ -39,8 +39,6 @@ public:
     void setScript(const QString& s, GraphDocument *graph);
     void setDocument(GraphDocument *document);
     void loadFile(const QString& file);
-    void setProperty ( QScriptValue & object, const QScriptString & name, uint id, const QScriptValue & value );
-    QScriptValue property ( const QScriptValue & object, const QScriptString & name, uint id );
     void debug(const QString& s);
     void output(const QString& s);
     QScriptEngine *engine(){ return _engine; }

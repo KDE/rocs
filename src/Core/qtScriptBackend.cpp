@@ -54,8 +54,8 @@ void QtScriptBackend::start()
     }
     
     _engine = new QScriptEngine();
-    QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
-    dbg->attachTo( _engine );
+    // QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
+    // dbg->attachTo( _engine );
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
     kDebug() << "ScriptBackend Created";
@@ -67,7 +67,7 @@ void QtScriptBackend::start()
     createGraphList();
     _engine->evaluate(_script);
     
-    delete dbg;
+  //  delete dbg;
 }
 
 bool QtScriptBackend::isRunning(){
@@ -99,7 +99,6 @@ void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument
 }
 
 void QtScriptBackend::setScript(const QString& s,GraphDocument *graphs ) {
-  
     _script = s;
     _graphs = graphs;
     kDebug() << "script Set" << _script;
@@ -117,29 +116,6 @@ void QtScriptBackend::createGraphList() {
     }
 }
 
-void QtScriptBackend::setProperty( QScriptValue& object, const QScriptString& name, uint , const QScriptValue& value ) {
-    QObject *obj = object.toQObject();
-    QString s(name.toString());
-    QVariant v(value.toVariant());
-    if (obj == 0) {
-        kDebug () << "Object is zero";
-        return;
-    }
-
-    obj->setProperty(s.toAscii(), v);
-}
-
-QScriptValue QtScriptBackend::property ( const QScriptValue & object, const QScriptString & name, uint ) {
-    QObject *obj = object.toQObject();
-    QString s(name.toString());
-    if (obj == 0) {
-        kDebug () << "Object is zero";
-        return QScriptValue();
-    }
-
-    QScriptValue  value = object.property(s);
-    return value;
-}
 void QtScriptBackend::loadFile(const QString& file) {
     _script.clear();
     QFile f(file);

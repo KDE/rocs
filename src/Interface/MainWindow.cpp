@@ -101,6 +101,9 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     setActiveGraphDocument ( _tDocument->document() );
     setupToolsPluginsAction();
+
+    QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
+    dbg->attachTo( _tDocument->engine()->engine() );
 }
 
 QMutex& MainWindow::mutex() { return _mutex;}
@@ -295,16 +298,15 @@ void MainWindow::setupToolsPluginsAction()
 
 void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 {
-    foreach ( QAction *action, actionCollection()->actions() )
-    {
-        if ( AbstractAction *absAction = qobject_cast<AbstractAction*> ( action ) )
+    foreach ( QAction *action, actionCollection()->actions() ){
+        if ( AbstractAction *absAction = qobject_cast<AbstractAction*> ( action ) ){
             absAction->setActiveGraphDocument ( d );
+        }
     }
 
     _graphVisualEditor->setActiveGraphDocument ( d );
 
-
-    connect ( this, SIGNAL ( runTool ( Rocs::ToolsPluginInterface*, GraphDocument* ) ), _tDocument->engine(), SLOT ( runTool ( Rocs::ToolsPluginInterface*, GraphDocument* ) ) );
+    connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)), _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,GraphDocument*)));
 
     connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)));
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
