@@ -93,7 +93,6 @@ public slots:
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
-    void updateEngine(QScriptEngine* e);
 
   signals:
       void startDocument();

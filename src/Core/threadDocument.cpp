@@ -47,7 +47,6 @@ void ThreadDocument::setGraphDocument(GraphDocument * doc){
   doc->moveToThread(this);
   
   _engine = new QtScriptBackend();
-  _engine->moveToThread(this);
   _docCondition.wakeAll();
 }
 
@@ -56,9 +55,7 @@ void ThreadDocument::run(){
   _graphDocument->addGraph(i18n("Untitled0"));
   _engine = new QtScriptBackend();
   _docCondition.wakeAll();
-  kDebug() << "Chegou no final e iniciou o bixinho";
   exec();
-  kDebug() << "Não devia ter chegado aqui =/";
 }
 
 

@@ -39,6 +39,7 @@ static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engi
 
 void QtScriptBackend::stop(){
       if (!_engine) return;
+      
       if (_engine->isEvaluating()){
         _engine->abortEvaluation();
       }
@@ -48,13 +49,11 @@ void QtScriptBackend::stop(){
 
 void QtScriptBackend::start()
 {
-    if (_engine){
-        _engine->disconnect();
-        delete _engine;
-    }
+    stop();
     
     _engine = new QScriptEngine();
     emit engineCreated(_engine);
+    
     
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
@@ -66,8 +65,6 @@ void QtScriptBackend::start()
     }
     createGraphList();
     _engine->evaluate(_script);
-    
-  //  delete dbg;
 }
 
 bool QtScriptBackend::isRunning(){
@@ -85,8 +82,6 @@ QtScriptBackend::QtScriptBackend(){
 }
 
 void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument *graphs){
-
-
     _runningTool = true;
     _graphs = graphs;
     _script = plugin->run(graphs);

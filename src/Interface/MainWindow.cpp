@@ -109,11 +109,6 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
 }
 
-void MainWindow::updateEngine(QScriptEngine* e){
-  kDebug() << "Updating Engine";
-  _scriptDbg->attachTo( e );
-}
-
 QMutex& MainWindow::mutex() { return _mutex;}
 
 MainWindow::~MainWindow()
@@ -171,9 +166,7 @@ QWidget* MainWindow::setupRightPanel()
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
     _txtOutput = new KTextBrowser( this );
-    _scriptDbg = new QScriptEngineDebugger(this);  
-    _scriptDbg->setAutoShowStandardWindow(true);
-        
+    
     _bottomTabs = new TabWidget ( TabWidget::TabOnBottom, this );
     _bottomTabs->addWidget ( _codeEditor,  i18n ( "Editor" ), KIcon ( "accessories-text-editor" ) );
     _bottomTabs->addWidget ( _txtDebug, i18n ( "Debugger" ), KIcon ( "tools-report-bug" ) );
