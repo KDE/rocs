@@ -100,7 +100,6 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     statusBar()->hide();
 
     setActiveGraphDocument ( _tDocument->document() );
-     _GraphLayers->populate();
     setupToolsPluginsAction();
 }
 
@@ -311,13 +310,10 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
     connect(this, SIGNAL(stopEvaluation()),     _tDocument->engine(), SLOT(stop()));
 
+    _GraphLayers->populate();
     
     if ( _tDocument->document()->size() == 0 ) return;
     setActiveGraph ( _tDocument->document()->at ( 0 ) );
-
-    //_GraphLayers->populate();
-
-
 }
 
 void MainWindow::setActiveGraph ( Graph *g )
