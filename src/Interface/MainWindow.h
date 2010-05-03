@@ -39,6 +39,8 @@ class MoveNodeAction;
 class TabWidget;
 class CodeEditor;
 class ThreadDocument;
+class QScriptEngine;
+class QScriptEngineDebugger;
 
 #include <QWaitCondition>
 
@@ -91,6 +93,7 @@ public slots:
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
+    void updateEngine(QScriptEngine* e);
 
   signals:
       void startDocument();
@@ -109,6 +112,7 @@ private: // Variables.
     TabWidget *_bottomTabs;
     CodeEditor *_codeEditor;
     KTextBrowser *_txtDebug; //! this is the debug view.
+    KTextBrowser *_txtOutput;
 
     // Other Bunch of stuff.
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
@@ -123,6 +127,8 @@ private: // Variables.
     //! all the actions that I need to reference later.
     MoveNodeAction *_moveNodeAction;
 
+    QScriptEngineDebugger *_scriptDbg;
+    
     //!threading and Document part
     ThreadDocument *_tDocument;
     QWaitCondition _waitForDocument;

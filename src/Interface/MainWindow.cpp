@@ -74,6 +74,7 @@
 #include "../Plugins/PluginManager.h"
 #include <KPushButton>
 #include <QMutexLocker>
+#include <QScriptEngineDebugger>
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 {
@@ -102,8 +103,15 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     setActiveGraphDocument ( _tDocument->document() );
     setupToolsPluginsAction();
 
-    QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
-    dbg->attachTo( _tDocument->engine()->engine() );
+    connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)));
+    connect( _tDocument->engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
+    connect( _tDocument->engine(), SIGNAL(engineCreated(QScriptEngine*)), this, SLOT(updateEngine(QScriptEngine*)));
+
+}
+
+void MainWindow::updateEngine(QScriptEngine* e){
+  kDebug() << "Updating Engine";
+  _scriptDbg->attachTo( e );
 }
 
 QMutex& MainWindow::mutex() { return _mutex;}
@@ -126,7 +134,7 @@ void MainWindow::outputString ( const QString& s )
 
 void MainWindow::debugString ( const QString& s )
 {
-    _txtDebug->append ( s );
+    _txtOutput->append ( s );
 }
 
 GraphDocument *MainWindow::activeDocument() const
@@ -158,13 +166,19 @@ void MainWindow::setupWidgets()
 
 QWidget* MainWindow::setupRightPanel()
 {
+     
     _graphVisualEditor = new GraphVisualEditor ( this );
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
-
+    _txtOutput = new KTextBrowser( this );
+    _scriptDbg = new QScriptEngineDebugger(this);  
+    _scriptDbg->setAutoShowStandardWindow(true);
+        
     _bottomTabs = new TabWidget ( TabWidget::TabOnBottom, this );
     _bottomTabs->addWidget ( _codeEditor,  i18n ( "Editor" ), KIcon ( "accessories-text-editor" ) );
     _bottomTabs->addWidget ( _txtDebug, i18n ( "Debugger" ), KIcon ( "tools-report-bug" ) );
+    _bottomTabs->addWidget ( _txtOutput, i18n("Output"), KIcon ("tools-document"));
+    
     _runScript = new KAction ( KIcon ( "system-run" ), i18n ( "Run" ), this );
     connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
     _bottomTabs->addAction ( _runScript );
@@ -311,7 +325,8 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)));
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
     connect(this, SIGNAL(stopEvaluation()),     _tDocument->engine(), SLOT(stop()));
-
+    connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)));
+            
     _GraphLayers->populate();
     
     if ( _tDocument->document()->size() == 0 ) return;

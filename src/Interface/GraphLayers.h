@@ -19,6 +19,9 @@ public slots:
     void btnADDClicked();
     void addGraph(Graph *g);
     void selectFirstGraph();
+signals:
+  void  createGraph(const QString& s);
+  
 };
 
 #endif

@@ -49,7 +49,7 @@ void GraphLayers::btnADDClicked() {
     if (name == QString()) {
         name = i18n("Untitled%1", _mainWindow->activeDocument()->count());
     }
-    _mainWindow->activeDocument()->addGraph(name);
+    emit  createGraph(name);
 }
 
 void GraphLayers::addGraph(Graph *g){

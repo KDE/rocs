@@ -54,8 +54,8 @@ void QtScriptBackend::start()
     }
     
     _engine = new QScriptEngine();
-    // QScriptEngineDebugger *dbg = new QScriptEngineDebugger(this);
-    // dbg->attachTo( _engine );
+    emit engineCreated(_engine);
+    
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
     kDebug() << "ScriptBackend Created";
@@ -71,10 +71,8 @@ void QtScriptBackend::start()
 }
 
 bool QtScriptBackend::isRunning(){
-  if (_engine){
-     if (_engine->isEvaluating()){
+  if ((_engine) && (_engine->isEvaluating())){
         return true;
-     }
   }
   return _runningTool;
 }
