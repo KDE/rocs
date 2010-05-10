@@ -128,12 +128,9 @@ const QString& GraphDocument::documentPath() const {
 
 
 bool GraphDocument::saveAsInternalFormat(const QString& filename) {
-    buf.clear();
-    KSaveFile saveFile;
-	const QString s( (!filename.endsWith(".graph"))? QString("%1.graph").arg(filename):filename);
-	
-    saveFile.setFileName( s );
-    kDebug() << s;
+    k_buf.clear();
+    
+    KSaveFile saveFile( !filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
 
     if (!saveFile.open()) {
         kDebug() << "Error: File Not Open";
@@ -141,32 +138,29 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     }
 
     QTextStream stream(&saveFile);
+    stream.setCodec("UTF-8");
+    
     int graphSize = count();
 
     for (int i = 0; i < graphSize; i++) {
         Graph *g = this->at(i);
-	kDebug() << "Saving graph at "<< i;
+		
+        k_buf += QString("[Graph %1] \n").arg(i).toUtf8();
 	
-        buf += " \n \n ############ Graph  ########### \n \n";
-        buf += QString("[Graph %1] \n").arg(i);
-	
-	kDebug() << "Saving Graph properties.";
-        savePropertiesInternalFormat(g);
+	    savePropertiesInternalFormat(g);
 
-        buf += " \n \n ############ NODES ########### \n \n";
         foreach( ::Node *n, g->nodes()) {
-	    kDebug() << "Saving node at" << g->nodes().indexOf(n);
-            buf += QString("[Node %1]\n").arg(g->nodes().indexOf(n));
-	    kDebug() << "Saving node properties.";
-            savePropertiesInternalFormat(n);
+	        k_buf += QString("[Node %1]\n").arg(g->nodes().indexOf(n)).toUtf8();
+	        savePropertiesInternalFormat(n);
         }
 
-        buf += " \n \n ############ EDGES ########### \n \n";
+        int from, to;
         foreach( Edge *e, g->edges()) {
-	    kDebug() << "Saving node between " << g->nodes().indexOf(e->from()) << "and" << g->nodes().indexOf(e->to()); 
-            buf += QString("[Edge %1->%2]\n").arg(g->nodes().indexOf(e->from())).arg(g->nodes().indexOf(e->to()));
-	    kDebug() << "Saving edge properties";
-            savePropertiesInternalFormat(e);
+            from = g->nodes().indexOf(e->from());
+            to = g->nodes().indexOf(e->to());
+            
+	        k_buf += QString("[Edge %1->%2]\n").arg(from).arg(to).toUtf8();
+	        savePropertiesInternalFormat(e);
         }
 
         /*     buf += " \n \n ############ GROUPS ########### \n \n";
@@ -178,9 +172,10 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
                  }
              } */
     }
-    kDebug() << buf.toAscii();
+    kDebug() << k_buf;
 
-    stream << buf.toAscii();
+    stream << k_buf;
+    
     if (!saveFile.finalize()) {
         kDebug() << "Error, file not saved.";
         return false;
@@ -192,31 +187,40 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
 void GraphDocument::savePropertiesInternalFormat(QObject *o) {
     const QMetaObject *metaObject = o->metaObject();
     int propertyCount = metaObject->propertyCount();
-    kDebug() << "Property Count: " << propertyCount;
-
+    
     for ( int i = 0; i < propertyCount; ++i) {
         QMetaProperty metaProperty = metaObject->property(i);
         const char *name = metaProperty.name();
-        if ( QString("objectName") == QString(name) ) {
+        QVariant value = o->property(name);
+        
+        if ( QString("objectName").compare(metaProperty.name()) == 0) {
             continue;
         }
-        QVariant value = o->property(name);
-        buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
+        else if( QString("name").compare(metaProperty.name()) == 0 ) {
+          QString namevalue = QString("%1 : %2 \n" ).arg(name).arg(value.toString());
+          kDebug() << "Normal"    << namevalue;
+          kDebug() << "Ascii "    << namevalue.toAscii();
+          kDebug() << "Latin1"    << namevalue.toLatin1();
+          kDebug() << "UTF-8"     << namevalue.toUtf8();
+          kDebug() << "Local8bit" << namevalue.toLocal8Bit();
+        }
+       
+        k_buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
     }
 
     QList<QByteArray> propertyNames = o->dynamicPropertyNames();
     foreach(const QByteArray& name, propertyNames) {
         QVariant value = o->property(name);
-        buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
+        k_buf +=  QString("%1 : %2 \n" ).arg(name, value.toString()).toUtf8();
     }
 
-    buf += '\n';
+    k_buf += '\n';
 }
 
 void GraphDocument::loadFromInternalFormat(const QString& filename) {
     QFile f(filename);
     if ( !f.open(QIODevice::ReadOnly | QIODevice::Text) ) {
-        kDebug() << "File not open " << filename.toAscii();
+        kDebug() << "File not open " << filename.toUtf8();
         return;
     }
 
@@ -224,8 +228,12 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
    //GraphGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
 
-    while (!f.atEnd()) {
-        QString str = f.readLine().simplified();
+    
+    QTextStream in(&f);
+    in.setCodec("UTF-8");
+    
+    while (!in.atEnd()) {
+        QString str = in.readLine().simplified();
 
         if (str.startsWith('#')) { //! Ignore it, commented line.
             continue;
@@ -266,8 +274,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         else if (str.contains(':')) {
             QString propertyName = str.section(':',0,0).trimmed();
             QString propertyValue = str.section(':',1,1).trimmed();
-            tmpObject->setProperty( propertyName.toAscii() , propertyValue.toAscii() );
-            kDebug() << "Property" << propertyName.toAscii() << "value" << propertyValue.toAscii();
+            tmpObject->setProperty( propertyName.toUtf8() , propertyValue );
         }
         else {
 //            // tmpGroup->append( tmpGraph->node(str));

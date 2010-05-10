@@ -118,7 +118,7 @@ signals:
 
     void activeGraphChanged(Graph* g);
 private:
-    QString buf;
+    QString k_buf;
     void  savePropertiesInternalFormat(QObject *o);
     QString _lastSavedDocumentPath;
     QString _name;
