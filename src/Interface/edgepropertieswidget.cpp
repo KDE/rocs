@@ -25,10 +25,16 @@
 
 EdgePropertiesWidget::EdgePropertiesWidget(MainWindow *parent): QWidget(parent) {
     setupUi(this);
-        
+    _edge = 0;
 }
 
 void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
+    if (_edge == e) 
+      return;
+    
+    if (_edge){
+      disconnectEdge();
+    }
     _edge = e;
     move(pos.x()+ 10,  pos.y() + 10);
     
@@ -41,7 +47,6 @@ void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
     show();
     activateWindow();
     raise();
-    disconnect();
     
     connect(_edge,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
         
@@ -91,3 +96,12 @@ void EdgePropertiesWidget::on__addProperty_clicked(){
                               _edge,(_isPropertyGlobal->checkState() == Qt::Checked));
 }
 
+void EdgePropertiesWidget::disconnectEdge(){
+   disconnect(_edge,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
+        
+    disconnect(_value,     SIGNAL(textChanged(QString)),   _edge, SLOT(setValue(QString)));
+    disconnect(_name,      SIGNAL(textChanged(QString)),   _edge, SLOT(setName(QString)));
+    disconnect(_width,     SIGNAL(valueChanged(double)),    _edge, SLOT(setWidth(double)));
+    disconnect(_showName,  SIGNAL(toggled(bool)),          _edge, SLOT(hideName(bool)));
+    disconnect(_showValue, SIGNAL(toggled(bool)),          _edge, SLOT(hideValue(bool)));
+}

@@ -27,10 +27,8 @@ void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
     
     _item = n;
     move(pos.x()+ 10,  pos.y() + 10);
-    show();
-    activateWindow();
-    raise();
-    disconnect();
+
+    show(); activateWindow(); raise();
     
     reflectAttributes();
     

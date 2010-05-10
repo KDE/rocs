@@ -41,6 +41,7 @@ public slots:
     void on__style_activated(int index);
     void reflectAttributes();
     void on__addProperty_clicked();
+    void disconnectEdge();
     
 private:
     Edge *_edge;
