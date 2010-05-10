@@ -64,7 +64,8 @@ void QtScriptBackend::start()
         _graphs->at(i)->setEngine(_engine);
     }
     createGraphList();
-    _engine->evaluate(_script);
+    QString error = _engine->evaluate(_script).toString();
+    emit sendDebug(error);
 }
 
 bool QtScriptBackend::isRunning(){

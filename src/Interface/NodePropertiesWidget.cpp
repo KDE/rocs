@@ -9,10 +9,17 @@
 NodePropertiesWidget::NodePropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
     setupUi(this);
     _item = 0;
+    _node = 0;
 }
 
 void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
-  
+    if (_node == n->node()) 
+      return;
+    
+    if (_node){
+      disconnectNode(_node);
+    }
+    
     _node = n->node();
     if (! _item ){
       _svgFile = _node->iconPackage();
@@ -121,4 +128,20 @@ void NodePropertiesWidget::on__addProperty_clicked(){
 					    QVariant(_propertyValue->text()),
 					    _node,
 					    (_isPropertyGlobal->checkState() == Qt::Checked));
+}
+
+void NodePropertiesWidget::disconnectNode(Node *n){
+    disconnect(_node, SIGNAL(changed()), this, SLOT(reflectAttributes()));
+    disconnect(_node->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
+    
+    disconnect( _showName,     SIGNAL(toggled(bool)),          _node, SLOT(hideName(bool)));
+    disconnect( _showValue,    SIGNAL(toggled(bool)),          _node, SLOT( hideValue(bool)));
+    disconnect( _begin,        SIGNAL(toggled(bool)),          _node, SLOT(setBegin(bool)));
+    disconnect( _end,          SIGNAL(toggled(bool)),          _node, SLOT(setEnd(bool)));
+    disconnect( _name,         SIGNAL(textChanged(QString)),   _node, SLOT(setName(QString)));
+    disconnect( _value,        SIGNAL(textChanged(QString)),   _node, SLOT(setValue(QString)));
+    disconnect( _x,            SIGNAL(valueChanged(int)),      _node, SLOT(setX(int)));
+    disconnect( _y,            SIGNAL(valueChanged(int)),      _node, SLOT(setY(int)));
+    disconnect( _width,        SIGNAL(valueChanged(double)),   _node, SLOT(setWidth(double)));
+
 }

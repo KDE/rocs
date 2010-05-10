@@ -35,6 +35,7 @@ class NodePropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
 public:
     NodePropertiesWidget (MainWindow* parent = 0 );
     void setNode(NodeItem *n, QPointF pos);
+    void disconnectNode(Node* arg1);
 
 
 private slots:

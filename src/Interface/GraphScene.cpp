@@ -179,15 +179,15 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
         movableNode->setWidth(1);
     }
     else if( mouseEvent->button() == Qt::RightButton){
-	QGraphicsItem *i = itemAt(mouseEvent->scenePos());
+        QGraphicsItem *i = itemAt(mouseEvent->scenePos());
         if (NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(i)){
             _nodePropertiesWidget->setNode(nItem, mouseEvent->screenPos());
         }
-	else if (OrientedEdgeItem *eItem = qgraphicsitem_cast<OrientedEdgeItem*>(i)){
-	    _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());
+        else if (OrientedEdgeItem *eItem = qgraphicsitem_cast<OrientedEdgeItem*>(i)){
+            _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());
         }
     }else if( mouseEvent -> button() == Qt::LeftButton){
-	_action->executePress(mouseEvent->scenePos());
+        _action->executePress(mouseEvent->scenePos());
     }
 }
 
