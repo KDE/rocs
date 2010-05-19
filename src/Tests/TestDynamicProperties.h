@@ -21,28 +21,28 @@
 #define TESTDINAMICPROPERTIES_H
 #include <QObject>
 
-class TestDinamicProperties:  public QObject
+class TestDynamicProperties:  public QObject
 {
      Q_OBJECT
 private slots:
   void cleanup();
-  
-  void addNodeDinamicProperty();
-  void addEdgeDinamicProperty();
-  void addGraphDinamicProperty();
-  
+
+  void addNodeDynamicProperty();
+  void addEdgeDynamicProperty();
+  void addGraphDynamicProperty();
+
   void addToAllNodes();
   void addToAllEdges();
-  
-  void removeNodeDinamicProperty();
-  void removeEdgeDinamicProperty();
-  void removeGraphDinamicProperty();
-  
+
+  void removeNodeDynamicProperty();
+  void removeEdgeDynamicProperty();
+  void removeGraphDynamicProperty();
+
   void removeToAllNodes();
   void removeToAllEdges();
-  
+
   void MultipleProperties();
-  
+
   void changeNames();
 };
 

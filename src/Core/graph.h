@@ -62,7 +62,7 @@ class ROCSLIB_EXPORT Graph : public QObject {
 
     /*! this property tells the system if this graph is to be treated as an automate */
     Q_PROPERTY(bool automate READ automate WRITE setAutomate)
-    
+
 public:
     /*! constructo
       \p parent the parent QObject
@@ -88,10 +88,10 @@ public:
 
     /*! remove this graph from the document. */
     void remove();
-    
+
     void readOnly( bool r) { _readOnly = r; }
     bool readOnly() const { return _readOnly; }
-    
+
 #ifdef USING_QTSCRIPT
     /*! if QtScript is enabled for this rocs,
     \return  the self-referenced Script Value for this graph. */
@@ -206,7 +206,7 @@ public  slots:
     \p color the new color.
     */
     void setNodeDefaultColor(const QString& color);
-    
+
     /*! gets the default node color for this graph.
     \return a QColor.
     */
@@ -216,18 +216,18 @@ public  slots:
     \p color the new color.http://imagebin.ca/view/VoxkFg.html
     */
     void setEdgeDefaultColor(const QString& color);
-    
-    /*! gets the default edge color for this graph 
+
+    /*! gets the default edge color for this graph
     \return a QColor
     */
     const QString& edgeDefaultColor() const;
 
-    /*! sets this graph an automate 
+    /*! sets this graph an automate
       \param b true = automate, false = graph.
     */
     void setAutomate(bool b);
-    
-    /*! boolean that represents if the graph is an automate or not 
+
+    /*! boolean that represents if the graph is an automate or not
       \return true = automate, false = graph.
     */
     bool automate();
@@ -236,65 +236,65 @@ public  slots:
     * @param property Name of property
     * @param value Value of the property. value shoud be different of QVariant::Invalid.
     */
-    void addDinamicProperty(QString property, QVariant value = QVariant(0));
+    void addDynamicProperty(QString property, QVariant value = QVariant(0));
     /** remove a property from this graph.
     * @param property Name of property
     */
-    void removeDinamicProperty(QString property);
-    
+    void removeDynamicProperty(QString property);
+
     /** Add a property to all nodes in this graph. If a new node is add later, the node will not containg this property.
     * @param property Name of property
     * @param value Value of the property. value shoud be different of QVariant::Invalid.
     */
-    void addNodesDinamicProperty(QString property, QVariant value = QVariant(0));
-    
+    void addNodesDynamicProperty(QString property, QVariant value = QVariant(0));
+
     /** remove a property to all nodes in this graph.
     * @param property Name of property
     */
-    void addEdgesDinamicProperty(QString property, QVariant value = QVariant(0));
-    
+    void addEdgesDynamicProperty(QString property, QVariant value = QVariant(0));
+
      /** Add a property to all Edges in this graph. If a new edge is add later, the edge will not containg this property.
     * @param property Name of property
     * @param value Value of the property. value shoud be different of QVariant::Invalid.
     */
-    void removeNodesDinamicProperty(QString property);
-    
+    void removeNodesDynamicProperty(QString property);
+
     /** remove a property to all edges in this graph.
     * @param property Name of property
     */
-    void removeEdgesDinamicProperty(QString property);
-    
+    void removeEdgesDynamicProperty(QString property);
+
     /** adds a node in this graph.
-    * @param name the name of the node, 
+    * @param name the name of the node,
     * @param point the point in the euclidian space where this node is.
     */
     void addNode(QString name, QPointF point);
-    
+
     /** sets all nodes for this color.
-    * @param color the color that each node will have. 
+    * @param color the color that each node will have.
     */
     void setNodesColor(QString c);
-    
-    /** sets all edges for this color 
+
+    /** sets all edges for this color
     * @param color the color that each edge will have.
     */
     void setEdgesColor(QString c);
-    
-    /** puts sets the visitbility of the names in the nodes. 
+
+    /** puts sets the visitbility of the names in the nodes.
     * @param b true if visible false invisible */
     void setNodeNameVisibility(bool b);
     bool nodeNameVisibility();
-    
+
     void setEdgeNameVisibility(bool b);
     bool edgeNameVisibility();
-    
+
     void setNodeValueVisibility(bool b);
     bool nodeValueVisibility();
-    
+
     void setEdgeValueVisibility(bool b);
     bool edgeValueVisibility();
-    
-    
+
+
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();
     QScriptValue list_edges();
@@ -312,7 +312,7 @@ signals:
     void changed();
     void orientedChanged(bool b);
     void automateChanged(bool b);
-    
+
 private:
     bool _directed;
     NodeList _nodes;
@@ -322,7 +322,7 @@ private:
     qreal _bottom;
     qreal _left;
     qreal _right;
-    
+
     QPointF _relativeCenter;
     QString _name;
     Node* _begin;
@@ -332,12 +332,12 @@ private:
     bool _automate;
     GraphDocument *_document;
     bool _readOnly;
-    
+
     bool _nodeNamesVisible;
     bool _edgeNamesVisible;
     bool _nodeValuesVisible;
     bool _edgeValuesVisible;
-    
+
 #ifdef USING_QTSCRIPT
     QScriptValue _value;
     QScriptEngine *_engine;

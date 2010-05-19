@@ -30,7 +30,7 @@
 
 static const KAboutData aboutdata("rocs_makecompleteplugin", 0, ki18n("Make Complete") , "0.1" );
 
-K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin< MakeCompleteToolPlugin>(); ) 
+K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin< MakeCompleteToolPlugin>(); )
 K_EXPORT_PLUGIN( ToolsPluginFactory(aboutdata) )
 
 
@@ -50,26 +50,26 @@ MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
 
 QString MakeCompleteToolPlugin::run(QObject* doc ) const
 {
-    GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
-    if ( graphDoc )
-    {
-        Graph * graph = graphDoc->activeGraph();
-        foreach ( Edge *e, graph->edges() )
-        {
-            graph->remove ( e );
-        }
-        foreach ( Node * n1, graph->nodes() )
-        {
-            foreach ( Node * n2, graph->nodes() )
-            {
-                if ( n1 != n2 )
-                    graph->addEdge ( n1,n2 );
-            }
-        }
-    }
+//     GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
+//     if ( graphDoc )
+//     {
+//         Graph * graph = graphDoc->activeGraph();
+//         foreach ( Edge *e, graph->edges() )
+//         {
+//             graph->remove ( e );
+//         }
+//         foreach ( Node * n1, graph->nodes() )
+//         {
+//             foreach ( Node * n2, graph->nodes() )
+//             {
+//                 if ( n1 != n2 )
+//                     graph->addEdge ( n1,n2 );
+//             }
+//         }
+//     }
+//
+//   return QString();
 
-  return QString();
-  
   return QString (
       "function makeComplete(graph){"
       "  nodes = graph.list_nodes();"
@@ -85,7 +85,7 @@ QString MakeCompleteToolPlugin::run(QObject* doc ) const
       "}"
       "for (var k = 0; k < graphs.length; k++){"
       "   makeComplete(graphs[k]);"
-      "}" 
+      "}"
      );
 }
 
@@ -93,22 +93,22 @@ QString MakeCompleteToolPlugin::run(QObject* doc ) const
 // {
 //   return QStringList() << i18n("Wagner Reck - wagner.reck@gmail.com");
 // }
-// 
+//
 // QString MakeCompleteToolsPlugin::category()
 // {
 //   return i18n("Add Components");
 // }
-// 
+//
 // QString MakeCompleteToolsPlugin::about() const
 // {
 //   return i18n("remove all edges of the graphs and add news one to make graphs completes");
 // }
-// 
+//
 // QString MakeCompleteToolsPlugin::tooltip() const
 // {
 //   return i18n("Add edges and make graph complete.");
 // }
-// 
+//
 // QString MakeCompleteToolsPlugin::name() const
 // {
 //   return i18n("Make Complete");

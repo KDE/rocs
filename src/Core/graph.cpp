@@ -23,7 +23,7 @@
 #include "qtScriptBackend.h"
 #include "graphGroups.h"
 #include "graphDocument.h"
-#include "dinamicpropertieslist.h"
+#include "DynamicPropertiesList.h"
 #include <KDebug>
 #include <QColor>
 
@@ -85,7 +85,7 @@ void Graph::setEdgesColor(QString c){
 
 Node* Graph::addNode(QString name) {
     if (_readOnly) return 0;
-    
+
     Node  *n = new Node(this);
     n->setName(name);
     _nodes.append( n );
@@ -170,7 +170,7 @@ void Graph::setDirected(bool directed) {
 
     kDebug() << "directed is " << directed;
     foreach(Node *n1, _nodes) {
-        foreach(Node *n2, n1->adjacent_nodes()) {  
+        foreach(Node *n2, n1->adjacent_nodes()) {
 	    // do not permit loop nodes while changing graph's state.
             if ( (n1->edges(n2).size() == 1) && (n1 != n2) ) {
                 continue;
@@ -180,7 +180,7 @@ void Graph::setDirected(bool directed) {
             if (n1 != n2) {
                 listEdges.removeFirst();
             }
-            
+
             foreach(Edge *e, listEdges) {
 	      remove(e);
             }
@@ -295,38 +295,38 @@ bool Graph::automate() {
     return _automate;
 }
 
-void Graph::addDinamicProperty(QString property, QVariant value){
+void Graph::addDynamicProperty(QString property, QVariant value){
     this->setProperty(property.toUtf8(), value);
     if (value.isValid()){
-      DinamicPropertiesList::New()->addProperty(this, property);
+      DynamicPropertiesList::New()->addProperty(this, property);
     }
 }
 
-void Graph::removeDinamicProperty(QString property){
-    this->addDinamicProperty(property, QVariant::Invalid);
-    DinamicPropertiesList::New()->removeProperty(this, property);
+void Graph::removeDynamicProperty(QString property){
+    this->addDynamicProperty(property, QVariant::Invalid);
+    DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
-void Graph::addNodesDinamicProperty(QString property, QVariant value){
+void Graph::addNodesDynamicProperty(QString property, QVariant value){
     foreach(Node *n, _nodes){
-      n->addDinamicProperty(property, value);
+      n->addDynamicProperty(property, value);
     }
 }
 
-void Graph::addEdgesDinamicProperty(QString property, QVariant value){
+void Graph::addEdgesDynamicProperty(QString property, QVariant value){
     foreach(Edge *e, _edges){
-      e->addDinamicProperty(property, value);
+      e->addDynamicProperty(property, value);
     }
 }
 
-void Graph::removeNodesDinamicProperty(QString property){
+void Graph::removeNodesDynamicProperty(QString property){
   foreach(Node *n, _nodes){
-    n->removeDinamicProperty(property);
+    n->removeDynamicProperty(property);
   }
 }
-void Graph::removeEdgesDinamicProperty(QString property){
+void Graph::removeEdgesDynamicProperty(QString property){
   foreach(Edge *e, _edges){
-    e->removeDinamicProperty(property);
+    e->removeDynamicProperty(property);
   }
 }
 
@@ -351,7 +351,7 @@ void Graph::setEdgeNameVisibility(bool b){
 bool Graph::edgeNameVisibility(){
   return _edgeNamesVisible;
 }
-    
+
 void Graph::setNodeValueVisibility(bool b){
   _nodeValuesVisible = b;
   foreach(Node *n, _nodes){
@@ -361,7 +361,7 @@ void Graph::setNodeValueVisibility(bool b){
 bool Graph::nodeValueVisibility(){
   return _nodeValuesVisible;
 }
-    
+
 void Graph::setEdgeValueVisibility(bool b){
   _edgeValuesVisible = b;
   foreach(Edge *n, _edges){

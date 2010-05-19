@@ -29,33 +29,33 @@ EdgePropertiesWidget::EdgePropertiesWidget(MainWindow *parent): QWidget(parent) 
 }
 
 void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
-    if (_edge == e) 
+    if (_edge == e)
       return;
-    
+
     if (_edge){
       disconnectEdge();
     }
     _edge = e;
     move(pos.x()+ 10,  pos.y() + 10);
-    
+
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_edge);
-    
+
     _propertiesTable->setModel(model);
-    
-    
+
+
     show();
     activateWindow();
     raise();
-    
+
     connect(_edge,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
-        
+
     connect(_value,     SIGNAL(textChanged(QString)),   _edge, SLOT(setValue(QString)));
     connect(_name,      SIGNAL(textChanged(QString)),   _edge, SLOT(setName(QString)));
     connect(_width,     SIGNAL(valueChanged(double)),    _edge, SLOT(setWidth(double)));
     connect(_showName,  SIGNAL(toggled(bool)),          _edge, SLOT(hideName(bool)));
     connect(_showValue, SIGNAL(toggled(bool)),          _edge, SLOT(hideValue(bool)));
-    
+
     reflectAttributes();
 }
 
@@ -90,15 +90,15 @@ void EdgePropertiesWidget::on__addProperty_clicked(){
 //       _edge->addDinamicProperty(_propertyName->text(),
 // 				QVariant(_propertyValue->text()));
 //     }
-    
+
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
-    model->addDinamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
+    model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
                               _edge,(_isPropertyGlobal->checkState() == Qt::Checked));
 }
 
 void EdgePropertiesWidget::disconnectEdge(){
    disconnect(_edge,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
-        
+
     disconnect(_value,     SIGNAL(textChanged(QString)),   _edge, SLOT(setValue(QString)));
     disconnect(_name,      SIGNAL(textChanged(QString)),   _edge, SLOT(setName(QString)));
     disconnect(_width,     SIGNAL(valueChanged(double)),    _edge, SLOT(setWidth(double)));

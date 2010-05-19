@@ -23,7 +23,7 @@
 #include <QObject>
 
 namespace Rocs{
-FilePluginInterface::FilePluginInterface(const KComponentData& instance, QObject* parent):
+FilePluginInterface::FilePluginInterface(const KComponentData& /*instance*/, QObject* parent):
       QObject(parent)
 {
 
@@ -34,7 +34,7 @@ FilePluginInterface::~FilePluginInterface()
 {
 
 }
- 
+
 const QString FilePluginInterface::lastError()
 {
     return QString("Default Error.");

@@ -1,7 +1,7 @@
 #include "model_GraphProperties.h"
 #include <KLocale>
 #include <KDebug>
-#include <dinamicpropertieslist.h>
+#include <DynamicPropertiesList.h>
 
 GraphPropertiesModel::GraphPropertiesModel( QObject *parent ) : QAbstractTableModel(parent) {
     // start all pointers to zero, so we don't crash things.
@@ -47,7 +47,7 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const {
     else if (index.column() == 1) {
         return _dataSource->property( _dataSource->dynamicPropertyNames()[index.row()]);
     } else if (index.column() == 2) {
-        return DinamicPropertiesList::New()->typeInText(_dataSource,
+        return DynamicPropertiesList::New()->typeInText(_dataSource,
                 _dataSource->dynamicPropertyNames()[index.row()]);
     }
 
@@ -111,9 +111,9 @@ Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const {
 
 bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,  int role) {
     if (index.isValid() && role == Qt::EditRole) {
-        switch (index.column()) {   
+        switch (index.column()) {
                 /* Change name. DinamicPropertiesList take part"                    name                                        new name        object  */
-        case 0: DinamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;
+        case 0: DynamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;
         case 1:  _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()], value);     break; /* just change the values */
         default: kDebug() << "shoudn't enter here ¬¬";   return false;
         }
@@ -126,25 +126,39 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
 
 }
 
-void GraphPropertiesModel::addDinamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal) {
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+void GraphPropertiesModel::addDynamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal) {
+    /*Need check if the propertie allready exists*/
+    bool insertingRow = false;
+    if (name.isEmpty()){
+       kWarning() << "Cannot add am empty property";
+       return;
+    }
+
+    if ( ! obj->dynamicPropertyNames().contains(name.toUtf8())){
+        beginInsertRows(QModelIndex(), rowCount(), rowCount());
+        insertingRow = true;
+    }
+
     if (isGlobal) {
         if (Edge * edge = qobject_cast<Edge*> (obj)) {
-            edge->graph()->addEdgesDinamicProperty(name,value);
+            edge->graph()->addEdgesDynamicProperty(name,value);
         }
         if (Node * node = qobject_cast<Node*> (obj)) {
-            node->graph()->addNodesDinamicProperty(name,value);
+            node->graph()->addNodesDynamicProperty(name,value);
         }
     } else {
         if (Edge * edge = qobject_cast<Edge*> (obj)) {
-            edge->addDinamicProperty(name,value);
+            edge->addDynamicProperty(name,value);
         }
         if (Node * node = qobject_cast<Node*> (obj)) {
-            node->addDinamicProperty(name,value);
+            node->addDynamicProperty(name,value);
         }
         if (Graph * graph = qobject_cast<Graph*> (obj)) {
-            graph->addDinamicProperty(name, value);
+            graph->addDynamicProperty(name, value);
         }
     }
-    endInsertRows();
+
+    if (insertingRow){ /* if inserting, need finish*/
+        endInsertRows();
+    }
   }

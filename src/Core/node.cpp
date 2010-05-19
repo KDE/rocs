@@ -24,7 +24,7 @@
 #include <KGlobal>
 #include <kstandarddirs.h>
 
-#include "dinamicpropertieslist.h"
+#include "DynamicPropertiesList.h"
 
 
 Node::Node(Graph *parent) : QObject(parent) {
@@ -115,13 +115,13 @@ EdgeList Node::adjacent_edges() const
     EdgeList adjacent;
 
     adjacent << _out_edges;
-    
+
     if ( _graph -> directed() ) {
         adjacent << _self_edges;
     }else{
       adjacent << _in_edges;
     }
-    
+
     return adjacent;
 }
 
@@ -203,7 +203,7 @@ void Node::setY(int y) {
     _y  = y;
     if (! _changing) {
 	emit changed();
-    }    
+    }
 }
 
 void Node::setWidth(qreal w) {
@@ -220,7 +220,7 @@ void Node::setPos(qreal x, qreal y) {
     if (! _changing) {
 	emit changed();
     }
-    
+
 }
 
 qreal Node::y() const {
@@ -320,16 +320,16 @@ void Node::endChange() {
     emit changed();
 }
 
-void Node::addDinamicProperty(QString property, QVariant value){
+void Node::addDynamicProperty(QString property, QVariant value){
     this->setProperty(property.toUtf8(), value);
     if (value.isValid()){
-      DinamicPropertiesList::New()->addProperty(this, property);
+      DynamicPropertiesList::New()->addProperty(this, property);
     }
 }
 
-void Node::removeDinamicProperty(QString property){
-    this->addDinamicProperty(property.toUtf8(), QVariant::Invalid);
-    DinamicPropertiesList::New()->removeProperty(this, property);
+void Node::removeDynamicProperty(QString property){
+    this->addDynamicProperty(property.toUtf8(), QVariant::Invalid);
+    DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
 #ifdef USING_QTSCRIPT

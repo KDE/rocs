@@ -111,12 +111,12 @@ public  slots:
     * @param property Name of property
     * @param value Value of the property. arg2 shoud be different of QVariant::Invalid.
     */
-    void addDinamicProperty(QString property, QVariant value);
+    void addDynamicProperty(QString property, QVariant value);
     
     /** Remove property arg1 from this node. If property arg1 don't exist in this node, nothing is made.
     * @param property name os property to remove
     */
-    void removeDinamicProperty(QString property);
+    void removeDynamicProperty(QString property);
     
 #ifdef USING_QTSCRIPT
 

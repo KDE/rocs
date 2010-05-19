@@ -1,6 +1,6 @@
-include_directories( 
-    ${KDE4_INCLUDES} 
-    ${QT_INCLUDES} 
+include_directories(
+    ${KDE4_INCLUDES}
+    ${QT_INCLUDES}
     ${KROSS_INCLUDES}
     Core/
     Actions/
@@ -9,8 +9,13 @@ include_directories(
     Models/
     Plugins/
     Scripts/
-    Tests/
 )
+
+#Build Tests if KDE_TEST is on
+if(KDE4_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(Tests)
+endif(KDE4_BUILD_TESTS)
 
 # Preparando a biblioteca padrão.
 
@@ -23,15 +28,15 @@ set( rocs_core_SRCS
   Core/krossBackend.cpp
   Core/qtScriptBackend.cpp
   Core/threadDocument.cpp
-  Core/dinamicpropertieslist.cpp
+  Core/DynamicPropertiesList.cpp
 
-  Plugins/FilePluginInterface.cpp 
-  Plugins/PluginManager.cpp 
+  Plugins/FilePluginInterface.cpp
+  Plugins/PluginManager.cpp
   Plugins/ToolsPluginInterface.cpp
 )
 
 kde4_add_library( rocslib  SHARED ${rocs_core_SRCS} )
- 
+
 target_link_libraries( rocslib
   ${KDE4_KROSSCORE_LIBS}
   ${KDE4_KIO_LIBS}
@@ -40,7 +45,7 @@ target_link_libraries( rocslib
 )
 
 set( rocslib_LIB_HDRS
-  Core/dinamicpropertieslist.h
+  Core/DynamicPropertiesList.h
   Core/edge.h
   Core/graph.h
   Core/graphDocument.h
@@ -56,7 +61,7 @@ set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERS
 install( TARGETS rocslib  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES ${rocslib_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel )
 ###################### Outros SRCS ############################
-set ( rocs_actions_SRCS 
+set ( rocs_actions_SRCS
   Actions/AbstractAction.cpp
   Actions/AddNode.cpp
   Actions/AddEdge.cpp
@@ -86,24 +91,19 @@ set( rocs_interface_SRCS
 )
 
 set( rocs_models_SRCS
-  Models/model_GraphDocument.cpp 
+  Models/model_GraphDocument.cpp
   Models/model_GraphLayers.cpp
   Models/model_GraphProperties.cpp
 )
 
-#set (rocs_plugins_SRCS 
-#  Plugins/FilePluginInterface.cpp 
-#  Plugins/PluginManager.cpp 
-#  Plugins/ToolsPluginInterface.cpp
-#)
 
 set( rocs_undoredo_SRCS
   UndoRedo/URAddNode.cpp
   UndoRedo/URAddEdge.cpp
 )
 
-set(rocs_SRCS  
-  Main.cpp 
+set(rocs_SRCS
+  Main.cpp
   ${rocs_actions_SRCS}
   ${rocs_graphcisitem_SRCS}
   ${rocs_interface_SRCS}
@@ -113,7 +113,7 @@ set(rocs_SRCS
 )
 
 kde4_add_ui_files(
-	rocs_SRCS 
+	rocs_SRCS
 	Interface/OpenedFilesWidget.ui
 	Interface/GraphPropertiesWidget.ui
 	Interface/NodePropertiesWidget.ui
@@ -139,37 +139,22 @@ target_link_libraries(rocs
 )
 
 ####################### TESTS #############################
+#
+# set (testGraphs_SRCS
+#     Tests/testGraph.cpp
+#  )
+# kde4_add_executable(testGraphs ${testGraphs_SRCS} )
+#
+# target_link_libraries( testGraphs
+#   rocslib
+#   ${KDE4_KROSSUI_LIBS}
+#   ${QT_QTGUI_LIBRARY}
+#   ${QT_QTTEST_LIBRARY}
+#   ${KDE4_KDECORE_LIBS}
+#   ${QT_QTSCRIPT_LIBRARY}
+# )
 
-set (testGraphs_SRCS
-    Tests/testGraph.cpp
- )
-kde4_add_executable(testGraphs ${testGraphs_SRCS} )
 
-target_link_libraries( testGraphs
-  rocslib
-  ${KDE4_KROSSUI_LIBS}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTTEST_LIBRARY}
-  ${KDE4_KDECORE_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
-) 
-
-set( testDinamicProperties_SRCS
-  Tests/testdinamicproperties.cpp)
-
-kde4_add_executable(testDinamicProperties ${testDinamicProperties_SRCS})
-
-target_link_libraries( testDinamicProperties
-  rocslib
-  ${KDE4_KROSSUI_LIBS}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTTEST_LIBRARY}
-  ${KDE4_KDECORE_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
-)
-
-add_test(TestDinamicProperties testDinamicProperties)
-add_test(TestGraphs testGraphs)
 
 ################## INSTALLS ##########################
 
@@ -181,10 +166,10 @@ install( FILES rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
 
 
 
-install( FILES 
-	  Plugins/RocsToolsPlugin.desktop 
-	  Plugins/RocsFilePlugin.desktop  
-	DESTINATION 
+install( FILES
+	  Plugins/RocsToolsPlugin.desktop
+	  Plugins/RocsFilePlugin.desktop
+	DESTINATION
 	    ${SERVICETYPES_INSTALL_DIR}
 )
 
