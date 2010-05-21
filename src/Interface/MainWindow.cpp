@@ -105,6 +105,10 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)));
     connect( _tDocument->engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
+    connect(_tDocument->engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
+}
+
+void MainWindow::setupScriptEngine(QScriptEngine *e){
 }
 
 QMutex& MainWindow::mutex() { return _mutex;}
@@ -146,10 +150,7 @@ void MainWindow::setupWidgets()
     QWidget *rightPanel = setupRightPanel();
     QWidget *leftPanel  = setupLeftPanel();
 
-    /*    connect(_tScriptExecution, SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
-        connect(_tScriptExecution, SIGNAL(terminated()), _bottomTabs, SLOT(setPlayString()));
-        connect(_tScriptExecution, SIGNAL(destroyed(QObject*)), _bottomTabs, SLOT(setPlayString()));*/
-
+    
     _hSplitter->addWidget ( leftPanel );
     _hSplitter->addWidget ( rightPanel );
     _hSplitter->setSizes ( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight() );
@@ -157,6 +158,13 @@ void MainWindow::setupWidgets()
     setCentralWidget ( _hSplitter );
 }
 
+void MainWindow::engineFinished(){
+  kDebug() << "ENGINE FINISHED!";
+}
+
+void MainWindow::engineTerminated(){
+  kDebug() << "ENGINE TERMINATED";
+}
 QWidget* MainWindow::setupRightPanel()
 {
      
@@ -314,10 +322,9 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)), _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,GraphDocument*)));
 
     connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)));
-    connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
-    connect(this, SIGNAL(stopEvaluation()),     _tDocument->engine(), SLOT(stop()));
     connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)));
-            
+
+    connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
     _GraphLayers->populate();
 }
 
@@ -377,17 +384,14 @@ void MainWindow::loadDocument ( const QString& name )
         return;
     }
 
-//   _graphVisualEditor->releaseGraphDocument();
-    //delete _activeGraphDocument;
+    // _graphVisualEditor->releaseGraphDocument();
+    // delete _activeGraphDocument;
 
     //setActiveGraphDocument();
     GraphDocument *gd = new GraphDocument ( i18n ( "Untitled" ), 800,600 );
-    if ( name.isEmpty() )
-    {
+    if ( name.isEmpty() ){
         gd->addGraph ( i18n ( "Untitled0" ) );
-    }
-    else
-    {
+    }else{
         gd->loadFromInternalFormat ( name );
     }
 
@@ -400,29 +404,21 @@ void MainWindow::loadDocument ( const QString& name )
     _mutex.unlock();
     setActiveGraphDocument ( _tDocument->document() );
 
-    if ( !name.isEmpty() )
-    {
+    if ( !name.isEmpty() ){
         _graphVisualEditor->scene()->createItems();
     }
 }
 
-void MainWindow::saveGraph()
-{
-    if ( _tDocument->document()->documentPath().isEmpty() )
-    {
+void MainWindow::saveGraph(){
+    if ( _tDocument->document()->documentPath().isEmpty() ){
         saveGraphAs();
-    }
-    else
-    {
+    }else{
         _tDocument->document()->savedDocumentAt ( _tDocument->document()->documentPath() );
     }
-
 }
 
-void MainWindow::saveGraphAs()
-{
-    if ( _tDocument->document() == 0 )
-    {
+void MainWindow::saveGraphAs(){
+    if ( _tDocument->document() == 0 ){
         kDebug() << "Graph Document is NULL";
         return;
     }
@@ -430,19 +426,15 @@ void MainWindow::saveGraphAs()
     _tDocument->document()->saveAsInternalFormat ( KFileDialog::getSaveFileName() );
 }
 
-void MainWindow::debug ( const QString& s )
-{
+void MainWindow::debug ( const QString& s ){
     _txtDebug->insertPlainText ( s );
 }
 
-int MainWindow::saveIfChanged()
-{
-    if ( _tDocument->document()->isModified() )
-    {
+int MainWindow::saveIfChanged(){
+    if ( _tDocument->document()->isModified() ){
         int btnCode;
         btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( "Do you want to save your unsaved document?" ) );
-        if ( btnCode == KMessageBox::Yes )
-        {
+        if ( btnCode == KMessageBox::Yes ){
             saveGraph();
         }
         return btnCode;
@@ -584,13 +576,13 @@ void MainWindow::executeScript(const QString& text) {
     kDebug() << script;
     if ( !_tDocument->isRunning() ){
         kDebug() << "Starting Script";
+	_bottomTabs->setStopString();
         _tDocument->engine()->setScript(script, _tDocument->document());
         emit startEvaluation();
     }else{
         kDebug() << "Aborting Script";
         _bottomTabs->setPlayString();
         _tDocument->engine()->stop();
-        //emit stopEvaluation();
     }
 
 }

@@ -38,6 +38,7 @@ static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engi
 }
 
 void QtScriptBackend::stop(){
+      kDebug() << "Stop requested.";
       if (!_engine) return;
       
       if (_engine->isEvaluating()){
@@ -45,6 +46,7 @@ void QtScriptBackend::stop(){
       }
       _engine->deleteLater();
       _engine = 0;
+      emit finished();
 }
 
 void QtScriptBackend::start()
@@ -53,7 +55,6 @@ void QtScriptBackend::start()
     
     _engine = new QScriptEngine();
     emit engineCreated(_engine);
-    
     
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
@@ -64,7 +65,13 @@ void QtScriptBackend::start()
         _graphs->at(i)->setEngine(_engine);
     }
     createGraphList();
+   
     QString error = _engine->evaluate(_script).toString();
+    while( _engine && _engine->isEvaluating() ){
+	usleep(200000); /// rest a bit.
+    }
+   
+    emit finished();
     emit sendDebug(error);
 }
 

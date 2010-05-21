@@ -58,6 +58,7 @@ signals:
     void sendOutput(const QString& s);
     void sendDebug(const QString& s);
     void engineCreated(QScriptEngine* e);
+    void finished();
     
   public slots:
     void start();
