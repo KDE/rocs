@@ -150,12 +150,15 @@ DynamicPropertyType DynamicPropertiesList::type(QObject* obj, QString name)
       return None;
 }
 
-QString DynamicPropertiesList::typeInText(QObject* obj, QString name){
+QString DynamicPropertiesList::typeInText(QObject* obj, QString name)
+{
     switch (type(obj, name)){
-      case None: 	return i18n("None");
       case Unique: 	return i18n("Unique");
       case Multiple: 	return i18n("Multiple");
       case Global: 	return i18n("Global");
+      case None:
+      default:
+        return i18n("None");
     }
 }
 
