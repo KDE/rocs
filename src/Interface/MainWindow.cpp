@@ -105,8 +105,6 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)));
     connect( _tDocument->engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-    connect( _tDocument->engine(), SIGNAL(engineCreated(QScriptEngine*)), this, SLOT(updateEngine(QScriptEngine*)));
-
 }
 
 QMutex& MainWindow::mutex() { return _mutex;}
@@ -321,9 +319,6 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)));
             
     _GraphLayers->populate();
-    
-    if ( _tDocument->document()->size() == 0 ) return;
-    setActiveGraph ( _tDocument->document()->at ( 0 ) );
 }
 
 void MainWindow::setActiveGraph ( Graph *g )
