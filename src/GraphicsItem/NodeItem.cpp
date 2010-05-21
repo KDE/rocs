@@ -41,7 +41,6 @@ void NodeItem::setupNode(){
 }
 
 void NodeItem::updatePos(){
-   // setting the positions
    int fixPos = boundingRect().width()/2;
    setPos(_node->x() - fixPos, _node->y() - fixPos);
 }
@@ -66,7 +65,6 @@ void NodeItem::updateRenderer(){
 }
 
 void NodeItem::updateIcon(){
-   //creating or refreshing the icon
    if ( elementId().isEmpty() ){
       _element = _node->icon();
       setElementId(_element);
@@ -90,13 +88,11 @@ void NodeItem::updateName(){
    }else if (_name->text() != _node->name()){
     _name->setText(i18n("Name: %1").arg(_node->name()));
    }
-   
    _name->setVisible(_node->showName());
    _name->setPos(0, 75);
 }
 
 void NodeItem::updateValue(){
-   // setting the value
    if ( !_value ){ 
       _value = new QGraphicsSimpleTextItem(i18n("Value: %1").arg(_node->value().toString()), this);
       _value->setFont(_font);

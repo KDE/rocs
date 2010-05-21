@@ -145,6 +145,7 @@ void GraphScene::mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent){
 }
 
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
+    kDebug() << "Entering on Whell Event";
     NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(wheelEvent->scenePos()));
     if (!nitem) {
 	kDebug() << "No Node Item to Spand";

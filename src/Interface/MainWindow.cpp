@@ -119,7 +119,7 @@ MainWindow::~MainWindow()
     Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
 
     Settings::self()->writeConfig();
-    delete _tDocument;
+    _tDocument->exit();
 }
 
 void MainWindow::outputString ( const QString& s )
