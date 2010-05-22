@@ -24,6 +24,7 @@
 #include <KTextBrowser>
 #include "graphDocument.h"
 #include <QScriptEngineDebugger>
+#include <unistd.h> // usleep
 
 static QtScriptBackend *self;
 
