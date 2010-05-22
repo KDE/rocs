@@ -174,4 +174,4 @@ install( FILES
 )
 
 add_subdirectory(Plugins/MakeComplete)
-add_subdirectory(Plugins/importKML)
+add_subdirectory(Plugins/importPlainTXT)

@@ -108,7 +108,8 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     connect(_tDocument->engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
 }
 
-void MainWindow::setupScriptEngine(QScriptEngine *e){
+void MainWindow::setupScriptEngine(QScriptEngine */*e*/){
+
 }
 
 QMutex& MainWindow::mutex() { return _mutex;}
@@ -151,7 +152,7 @@ void MainWindow::setupWidgets()
     QWidget *rightPanel = setupRightPanel();
     QWidget *leftPanel  = setupLeftPanel();
 
-    
+
     _hSplitter->addWidget ( leftPanel );
     _hSplitter->addWidget ( rightPanel );
     _hSplitter->setSizes ( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight() );
@@ -168,17 +169,17 @@ void MainWindow::engineTerminated(){
 }
 QWidget* MainWindow::setupRightPanel()
 {
-     
+
     _graphVisualEditor = new GraphVisualEditor ( this );
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
     _txtOutput = new KTextBrowser( this );
-    
+
     _bottomTabs = new TabWidget ( TabWidget::TabOnBottom, this );
     _bottomTabs->addWidget ( _codeEditor,  i18n ( "Editor" ), KIcon ( "accessories-text-editor" ) );
     _bottomTabs->addWidget ( _txtDebug, i18n ( "Debugger" ), KIcon ( "tools-report-bug" ) );
     _bottomTabs->addWidget ( _txtOutput, i18n("Output"), KIcon ("tools-document"));
-    
+
     _runScript = new KAction ( KIcon ( "system-run" ), i18n ( "Run" ), this );
     connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
     _bottomTabs->addAction ( _runScript );
@@ -504,6 +505,7 @@ void MainWindow::importFile()
     _mutex.lock();
     _graphVisualEditor->releaseGraphDocument();
     kDebug() << "Starting Thread";
+    gd->moveToThread(_tDocument);
     _tDocument->setGraphDocument ( gd );
     //_tDocument->start();
     //_waitForDocument.wait(&_mutex);
@@ -569,7 +571,7 @@ void MainWindow::exportFile()
 void MainWindow::executeScript(const QString& text) {
     if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
-    
+
     _txtDebug->clear();
     _bottomTabs->setStopString();
     QString script = text.isEmpty()?_codeEditor->text():text;

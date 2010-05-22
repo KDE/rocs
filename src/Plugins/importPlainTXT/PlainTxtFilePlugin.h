@@ -21,19 +21,25 @@
 #define KMLFILEPLUGIN_H
 #include "../FilePluginInterface.h"
 
-class KMLFilePlugin: public Rocs::FilePluginInterface
+class PlainTXTFilePlugin: public Rocs::FilePluginInterface
 {
   Q_OBJECT
   public:
-    explicit KMLFilePlugin(QObject* parent, const QList< QVariant >&);
-    ~KMLFilePlugin();
-    
+    explicit PlainTXTFilePlugin(QObject* parent, const QList< QVariant >&);
+    ~PlainTXTFilePlugin();
+
     const QStringList extensions() const; //Extensões suportadas
-    
-    GraphDocument * readFile(const QString &file) const; //return 0 se arq. inválido
-    
-    bool writeFile(const GraphDocument&, const QString&) const; //false se não gravou.
-  
+
+    GraphDocument * readFile(const QString& fileName) ; //return 0 se arq. inválido
+
+    bool writeFile(GraphDocument& graph, const QString& filename) ; //false se não gravou.
+
+
+    virtual const QString lastError();
+
+    private:
+        QString _lastError;
+        void setError ( QString arg1 );
 };
 
 #endif // KMLFILEPLUGIN_H

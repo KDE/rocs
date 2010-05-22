@@ -101,6 +101,10 @@ void Graph::addNode(QString name, QPointF pos){
 
 Edge* Graph::addEdge(Node* from,Node* to) {
     if (_readOnly) return 0;
+
+    if ( from == 0 || to == 0 ) {      return 0;   }
+
+
     if ( ( from == to) && ( !_directed ) ) {
         return 0;
     } else if ((from->edges(to).size() >= 1)&&(!_directed)) {

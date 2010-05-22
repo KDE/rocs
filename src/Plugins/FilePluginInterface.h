@@ -32,16 +32,16 @@ class ROCSLIB_EXPORT FilePluginInterface: public QObject
 {
   Q_OBJECT
 public:
-  FilePluginInterface(const KComponentData &instance, QObject* parent); 
+  FilePluginInterface(const KComponentData &instance, QObject* parent);
   virtual ~FilePluginInterface();
   virtual const QStringList extensions() const = 0; //Extensões suportadas
-  
-  virtual GraphDocument * readFile(const QString &file) const = 0; //return 0 se arq. inválido
-  
-  virtual bool writeFile(const GraphDocument &graph, const QString & fileName)  const = 0; //false se não gravou.
-  
-  const QString lastError(); //return error
-  
+
+  virtual GraphDocument * readFile(const QString &file) = 0; //return 0 se arq. inválido
+
+  virtual bool writeFile(GraphDocument &graph, const QString & fileName)  = 0; //false se não gravou.
+
+  virtual const QString lastError(); //return error
+
 private:
   class Private;
   Private * d;

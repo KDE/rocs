@@ -48,7 +48,7 @@ MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
 }
 
 
-QString MakeCompleteToolPlugin::run(QObject* doc ) const
+QString MakeCompleteToolPlugin::run(QObject* /*doc*/ ) const
 {
 //     GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
 //     if ( graphDoc )
