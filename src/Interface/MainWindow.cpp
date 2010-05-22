@@ -121,7 +121,8 @@ MainWindow::~MainWindow()
     Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
 
     Settings::self()->writeConfig();
-    _tDocument->exit();
+  //  _mutex.unlock();
+  //  _tDocument->exit(0);
 }
 
 void MainWindow::outputString ( const QString& s )

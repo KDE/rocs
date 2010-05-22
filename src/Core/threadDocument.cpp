@@ -17,12 +17,12 @@ ThreadDocument::ThreadDocument(QWaitCondition &docCondition, QMutex &mutex, QObj
 
 ThreadDocument::~ThreadDocument(){
     if(_engine) delete _engine;
+    delete _graphDocument;
 }
 
 bool ThreadDocument::isRunning(){
     if (!_engine) return false;
     return _engine->isRunning();
-//     return _engine->engine()->isEvaluating();
 }
 
 QtScriptBackend *ThreadDocument::engine(){
