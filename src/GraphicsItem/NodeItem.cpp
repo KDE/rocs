@@ -6,7 +6,7 @@
 #include <QGraphicsColorizeEffect>
 #include <QFont>
 #include <QGraphicsScene>
-
+#include <KLocale>
 
 QMap<QString, QSvgRenderer*> NodeItem::_renders;    
 
@@ -14,15 +14,18 @@ NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
     _node = n;
     _name = 0;
     _value = 0;
-    static QMap<QString, QSvgRenderer*> _renders;
     _originalWidth = _node->width();
     _iconPackage = _node->iconPackage();
     _colorizer = new QGraphicsColorizeEffect(this);
+    _font = QFont("Helvetica [Cronyx]", 18);
+    
     connect(n, SIGNAL(changed()), this, SLOT(setupNode()));
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
+    
     setupNode();
     setZValue(1);
     setFlag(ItemIsSelectable, true);
+    
     kDebug() << "Visual Node Item Created";
 }
 
@@ -38,8 +41,6 @@ void NodeItem::setupNode(){
 }
 
 void NodeItem::updatePos(){
-   // setting the positions
-   
    int fixPos = boundingRect().width()/2;
    setPos(_node->x() - fixPos, _node->y() - fixPos);
 }
@@ -64,7 +65,6 @@ void NodeItem::updateRenderer(){
 }
 
 void NodeItem::updateIcon(){
-   //creating or refreshing the icon
    if ( elementId().isEmpty() ){
       _element = _node->icon();
       setElementId(_element);
@@ -83,31 +83,22 @@ void NodeItem::updateColor(){
 
 void NodeItem::updateName(){
    if ( !_name ){
-    _name = new QGraphicsSimpleTextItem(_node->name(), this);
-    _name->setFont(QFont("Helvetica [Cronyx]", 18));
+    _name = new QGraphicsSimpleTextItem(i18n("Name: %1").arg(_node->name()), this);
+    _name->setFont(_font);
    }else if (_name->text() != _node->name()){
-    _name->setText(_node->name());
+    _name->setText(i18n("Name: %1").arg(_node->name()));
    }
-   if ( ! _node->showName() ){
-    _name->hide();
-   }else{
-    _name->show();
-   }
-   _name->setPos(boundingRect().width() - _name->boundingRect().width(), 75);
+   _name->setVisible(_node->showName());
+   _name->setPos(0, 75);
 }
 
 void NodeItem::updateValue(){
-   // setting the value
    if ( !_value ){ 
-      _value = new QGraphicsSimpleTextItem(_node->value().toString(), this);
-      _value->setFont(QFont("Helvetica [Cronyx]", 18));
+      _value = new QGraphicsSimpleTextItem(i18n("Value: %1").arg(_node->value().toString()), this);
+      _value->setFont(_font);
    }else if (_value->text() != _node->value().toString()){
-      _value ->setText(_node->value().toString());
+      _value ->setText(i18n("Value: %1").arg(_node->value().toString()));
    }
-   if (! _node->showValue()){
-      _value->hide();
-   }else{
-      _value->show();
-   }
-   _value->setPos(20, 20);
+   _value->setVisible(_node->showValue());
+   _value->setPos(0, 100);
 }

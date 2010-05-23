@@ -93,7 +93,10 @@ public slots:
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
-
+    void engineFinished();
+    void engineTerminated();
+    void setupScriptEngine(QScriptEngine *e);
+    
   signals:
       void startDocument();
       void startEvaluation();

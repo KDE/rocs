@@ -70,23 +70,28 @@ void AlignAction::align() {
 }
 
 void AlignAction::allignY(QList<NodeItem*>& l) {
-    qreal final = l[0]->pos().y();
+    qreal final = l[0]->node()->y();
+    
+    kDebug() << "final sould be:" << final;
     if (m_orientation == VCenter || m_orientation == HCenter) {
-        qreal otherSide = l[l.size()-1]->pos().y();
+        qreal otherSide = l[l.size()-1]->node()->y();
         final = (final + otherSide) / 2;
     }
     foreach(NodeItem *i, l) {
         i->node()->setY(final);
     }
+    kDebug() << "but it is:" << l[0]->node()->y();
 }
 
 void AlignAction::allignX(QList<NodeItem*>& l) {
-    qreal final = l[0]->pos().x();
+    qreal final = l[0]->node()->x();
+    kDebug() << "final should be:" << final;
     if (m_orientation == VCenter || m_orientation == HCenter) {
-        qreal otherSide = l[l.size()-1]->pos().x();
+        qreal otherSide = l[l.size()-1]->node()->x();
         final = (final + otherSide) / 2;
     }
     foreach(NodeItem *i, l) {
         i->node()->setX(final);
     }
+    kDebug() << "but it is:" << l[0]->node()->x();
 }

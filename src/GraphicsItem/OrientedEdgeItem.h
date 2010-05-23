@@ -65,6 +65,8 @@ protected:
     */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
+    void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 );
+    
 public slots:
     void remove();
     void updatePos();

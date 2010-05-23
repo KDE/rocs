@@ -140,28 +140,32 @@ QGraphicsItem *GraphScene::createEdge(Edge *e) {
     return edgeItem;
 }
 
+void GraphScene::mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent){
+  mouseEvent->accept();
+}
+
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
+    kDebug() << "Entering on Whell Event";
     NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(wheelEvent->scenePos()));
     if (!nitem) {
+	kDebug() << "No Node Item to Spand";
         wheelEvent->ignore();
         return;
     }
+    
     Node *movableNode = nitem->node();
     int numDegrees = wheelEvent->delta();
     if (wheelEvent->orientation() == Qt::Vertical) {
+	kDebug() << "Upgrading node size";
         if (numDegrees > 0)
         {
-            //nitem->startUpSizing();
-            //movableNode->setWidth(movableNode->width()+0.25);
-            //nitem->update();
-            //nitem->endUpSizing();
+            movableNode->setWidth(movableNode->width()+0.25);
+            nitem->update();
         }
         else if (movableNode->width() > 0.5)
         {
-            //nitem->startDownSizing();
-            //movableNode->setWidth(movableNode->width()-0.25);
-            //nitem->update();
-            //nitem->endDownSizing();
+            movableNode->setWidth(movableNode->width()-0.25);
+            nitem->update();
         }
     }
     wheelEvent->accept();

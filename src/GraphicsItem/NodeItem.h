@@ -10,7 +10,7 @@
 #include <QGraphicsColorizeEffect>
 #include <QMap>
 #include <QString>
-
+#include <QFont>
 #include "node.h"
 
 class NodeItem : public QGraphicsSvgItem{
@@ -35,14 +35,12 @@ class NodeItem : public QGraphicsSvgItem{
     void updateSize();
   private:
     Node *_node;
-
-
-    
     QString _iconPackage;
     QString _element;
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;
     QGraphicsColorizeEffect *_colorizer;
+    QFont _font;
 };
 
 #include "node.h"
