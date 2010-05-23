@@ -85,13 +85,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
 
     kDebug() << "Creating Thread";
-    _tDocument = new ThreadDocument ( _waitForDocument ,_mutex, this );
-
-    // let's start the thread and wait for the graph document. to be created.
-    _mutex.lock();
-    kDebug() << "Starting Thread"; _tDocument->start();
-    _waitForDocument.wait(&_mutex, 500);
-    _mutex.unlock();
+    startThreadDocument();
 
     // setting up the rest of stuff
     setupWidgets();
@@ -103,13 +97,18 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     setActiveGraphDocument ( _tDocument->document() );
     setupToolsPluginsAction();
 
-    connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)));
-    connect( _tDocument->engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-    connect(_tDocument->engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
+    
+    connect(this, SIGNAL(startDocument(QString)), _tDocument, SLOT(loadDocument(QString)));
+    connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(selfRemove()));
 }
 
-void MainWindow::setupScriptEngine(QScriptEngine */*e*/){
-
+void MainWindow::startThreadDocument(){
+    _tDocument = new ThreadDocument ( _waitForDocument ,_mutex, this );
+    _mutex.lock();
+    kDebug() << "Starting Thread"; _tDocument->start();
+    _waitForDocument.wait(&_mutex, 500);
+    
+    _mutex.unlock();
 }
 
 QMutex& MainWindow::mutex() { return _mutex;}
@@ -160,16 +159,8 @@ void MainWindow::setupWidgets()
     setCentralWidget ( _hSplitter );
 }
 
-void MainWindow::engineFinished(){
-  kDebug() << "ENGINE FINISHED!";
-}
-
-void MainWindow::engineTerminated(){
-  kDebug() << "ENGINE TERMINATED";
-}
 QWidget* MainWindow::setupRightPanel()
 {
-
     _graphVisualEditor = new GraphVisualEditor ( this );
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
@@ -327,6 +318,12 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)));
 
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
+    
+    connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)));
+    connect( _tDocument->engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
+    connect( _tDocument->engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
+    
+    
     _GraphLayers->populate();
 }
 
@@ -385,25 +382,15 @@ void MainWindow::loadDocument ( const QString& name )
         KMessageBox::sorry ( this, i18n ( "This does not seem to be a graph file." ), i18n ( "Invalid file" ) );
         return;
     }
-
-    // _graphVisualEditor->releaseGraphDocument();
-    // delete _activeGraphDocument;
-
-    //setActiveGraphDocument();
-    GraphDocument *gd = new GraphDocument ( i18n ( "Untitled" ), 800,600 );
-    if ( name.isEmpty() ){
-        gd->addGraph ( i18n ( "Untitled0" ) );
-    }else{
-        gd->loadFromInternalFormat ( name );
-    }
-
-    _mutex.lock();
-    _graphVisualEditor->releaseGraphDocument();
-    kDebug() << "Starting Thread";
-    _tDocument->setGraphDocument ( gd );
-    //_tDocument->start();
-    //_waitForDocument.wait(&_mutex);
+    
+    
+     _graphVisualEditor->releaseGraphDocument();
+    
+     _mutex.lock();
+    emit startDocument( name );
+    _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();
+    
     setActiveGraphDocument ( _tDocument->document() );
 
     if ( !name.isEmpty() ){
@@ -444,71 +431,52 @@ int MainWindow::saveIfChanged(){
     return KMessageBox::No;
 }
 
-void MainWindow::importFile()
-{
+void MainWindow::importFile(){
     if ( saveIfChanged() == KMessageBox::Cancel ) return;
     QString ext;
 
-    foreach ( Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins() )
-    {
+    foreach ( Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins() ){
         ext.append ( f->extensions().join ( "" ) );
     }
-
     ext.append ( i18n ( "*|All files" ) );
-
-
 
     KFileDialog dialog ( QString(),ext, this );
     dialog.setCaption ( i18n ( "Graph Files" ) );
-    if ( !dialog.exec() )
-    {
+    if ( !dialog.exec() ){
         return;
     }
 
     kDebug() << "Extensions:"<< ext;
-
     QString fileName = dialog.selectedFile();
-
     if ( fileName == "" ) return;
 
     int index = fileName.lastIndexOf ( '.' );
     Rocs::FilePluginInterface * f = 0;
     if ( index == -1 )
     {
-        //Cant open file without extension.
-        //kDebug () << "###########Filter: " << dialog.currentFilter();
-        //f = Rocs::PluginManager::New()->filePluginsByExtension(dialog.currentFilter());
+        kDebug() << "Cant open file without extension.";
         return;
     }
-    else
-    {
-        kDebug() << fileName.right ( fileName.count() - index );
-        f = Rocs::PluginManager::New()->filePluginsByExtension ( fileName.right ( fileName.count() - index ) );
-    }
-    if ( !f )
-    {
-//       KMessageBox error();
-//       error.exec();
+
+    kDebug() << fileName.right ( fileName.count() - index );
+    f = Rocs::PluginManager::New()->filePluginsByExtension ( fileName.right ( fileName.count() - index ) );
+
+    if ( !f ){
         kDebug() <<  "Cannot handle extension "<<  fileName.right ( 3 );
         return;
     }
 
     GraphDocument * gd = f->readFile ( fileName );
-    if ( !gd )
-    {
+    if ( !gd ){
         kDebug() << "Error loading file" << fileName << f->lastError();
         return;
     }
-
-
-
+    
     _mutex.lock();
     _graphVisualEditor->releaseGraphDocument();
     kDebug() << "Starting Thread";
-    gd->moveToThread(_tDocument);
     _tDocument->setGraphDocument ( gd );
-    //_tDocument->start();
-    //_waitForDocument.wait(&_mutex);
+    _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();
 
     setActiveGraphDocument ( _tDocument->document() );
@@ -569,22 +537,29 @@ void MainWindow::exportFile()
 #ifdef USING_QTSCRIPT
 
 void MainWindow::executeScript(const QString& text) {
+    kDebug() << "Going to execut the script";
     if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
-
+    kDebug() << "Has text and scene";
+    
     _txtDebug->clear();
-    _bottomTabs->setStopString();
+    kDebug() << "Cleared the debug";
+        
     QString script = text.isEmpty()?_codeEditor->text():text;
-
-    kDebug() << script;
+    kDebug() << "Got the correct string";
+    
+    //kDebug() << script;
     if ( !_tDocument->isRunning() ){
         kDebug() << "Starting Script";
 	_bottomTabs->setStopString();
+	kDebug() << "setting the script to the engine";
         _tDocument->engine()->setScript(script, _tDocument->document());
+	kDebug() << "Emiting the start signal";
         emit startEvaluation();
     }else{
-        kDebug() << "Aborting Script";
+        kDebug() << "Setting the play string";
         _bottomTabs->setPlayString();
+	kDebug() << "Aborting Script";
         _tDocument->engine()->stop();
     }
 

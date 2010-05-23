@@ -56,6 +56,7 @@ void QtScriptBackend::start()
     
     _engine = new QScriptEngine();
     emit engineCreated(_engine);
+    usleep(500);
     
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
@@ -63,17 +64,21 @@ void QtScriptBackend::start()
     
     int size = _graphs->size();
     for (int i = 0; i < size; i++) {
+	kDebug() << "Setting graph" << i << "as global object";
         _graphs->at(i)->setEngine(_engine);
     }
+    kDebug() << "Setting the graph list";
     createGraphList();
    
+    kDebug() << "Evaluating the script";
     QString error = _engine->evaluate(_script).toString();
     while( _engine && _engine->isEvaluating() ){
 	usleep(200000); /// rest a bit.
     }
+   kDebug() << "Script evaluated to " << error;
    
-    emit finished();
-    emit sendDebug(error);
+    emit finished(); kDebug() << "Finished emmited";
+    emit sendDebug(error); kDebug() << "send debug emmited";
 }
 
 bool QtScriptBackend::isRunning(){

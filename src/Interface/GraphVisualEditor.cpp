@@ -79,14 +79,14 @@ void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
 }
 
 void GraphVisualEditor::releaseGraphDocument() {
-    if (_scene == 0) { kDebug() << "Fudeu"; }
     _scene->clear();
     int size = _graphDocument->size();
     for (int i = 0; i < size; i++) {
         _graphDocument->at(i)->disconnect(this);
     }
-    _scene->setActiveGraphDocument(0);
-    _graphDocument = 0;
+    if (_graphDocument->size() != 0)
+      _scene->setActiveGraphDocument(0);
+
 }
 
 void GraphVisualEditor::drawGraphOnScene( Graph */*g*/) {}

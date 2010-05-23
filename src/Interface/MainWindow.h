@@ -74,6 +74,7 @@ private: // Methods
     QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
     int saveIfChanged();
     void finishLoadingUi();
+    void startThreadDocument();
     
 private slots:
     void executeScript(const QString &text = QString());
@@ -93,14 +94,12 @@ public slots:
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
-    void engineFinished();
-    void engineTerminated();
-    void setupScriptEngine(QScriptEngine *e);
     
   signals:
-      void startDocument();
+      void startDocument(const QString& s);
       void startEvaluation();
       void stopEvaluation();
+      void endThreadDocument();
       
       void runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument * graphs);
 private: // Variables.

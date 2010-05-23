@@ -13,6 +13,8 @@ ThreadDocument::ThreadDocument(QWaitCondition &docCondition, QMutex &mutex, QObj
 {
      _graphDocument = 0;
      _engine = 0;
+    // _loading = false;
+    // _name = i18n("Untitled0");
 }
 
 ThreadDocument::~ThreadDocument(){
@@ -20,6 +22,9 @@ ThreadDocument::~ThreadDocument(){
     delete _graphDocument;
 }
 
+// ThreadDocument::setDocumentName(const QString& name){
+//     _name = name;
+// }
 bool ThreadDocument::isRunning(){
     if (!_engine) return false;
     return _engine->isRunning();
@@ -30,32 +35,42 @@ QtScriptBackend *ThreadDocument::engine(){
 }
 
 void ThreadDocument::releaseDocument(){
-    delete _graphDocument;
+   if (_graphDocument) 
+       _graphDocument->deleteLater();
     _graphDocument = 0;
+    
+   if ( _engine )
+      _engine->deleteLater();
+    _engine = 0;
+}
+
+void ThreadDocument::createEmptyDocument(){
+  releaseDocument();
+  _graphDocument = new GraphDocument(i18n("Untitled"), 800, 600);
+  _engine = new QtScriptBackend();
+  _docCondition.wakeAll();
+  kDebug() << "Waking All";
+}
+
+void ThreadDocument::loadDocument(const QString& name){
+    createEmptyDocument();
+    if ( name.isEmpty() ){
+        _graphDocument->addGraph ( i18n ( "Untitled0" ) );
+    }else{
+        _graphDocument->loadFromInternalFormat ( name );
+    }
+    _docCondition.wakeAll();
 }
 
 void ThreadDocument::setGraphDocument(GraphDocument * doc){
-  // must need block signals and events
-  
-  if (_engine){ 
-	delete _engine;
-  }
-    
-  releaseDocument(); //must 'freeze' thread
-    
+  releaseDocument();
   _graphDocument = doc;
   doc->moveToThread(this);
-  
   _engine = new QtScriptBackend();
   _docCondition.wakeAll();
 }
 
 void ThreadDocument::run(){
-  _graphDocument = new GraphDocument(i18n("Untitled"), 800, 600);  
-  _graphDocument->addGraph(i18n("Untitled0"));
-  _engine = new QtScriptBackend();
-  _docCondition.wakeAll();
+  loadDocument();
   exec();
 }
-
-

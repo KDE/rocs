@@ -46,7 +46,7 @@ int main ( int argc, char *argv[] ) {
 
     KCmdLineArgs::init ( argc, argv, &aboutData );
     KApplication app;
-
+    
     MainWindow *window = new MainWindow();
     window->show();
 
