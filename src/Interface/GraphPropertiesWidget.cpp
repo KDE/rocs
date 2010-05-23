@@ -57,6 +57,8 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
    
     GraphDocument *gDocument = qobject_cast<GraphDocument*>(g->parent());
     connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addGraph(QString)));
+    connect(this, SIGNAL(removeGraph()), g, SLOT(remove()));
+    
     
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setEdgeDefaultColor(QColor)));
     connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setNodeDefaultColor(QColor)));
@@ -118,14 +120,13 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
 	createNewGraph = true;
     }
     
-    _mainWindow->scene()->fade(false);
-    _graph->remove();
-    _mainWindow->scene()->fade(true);
     
     if (isActive) emit updateNeeded();
     radio()->group()->removeButton(radio());
-    
     _mainWindow->mutex().unlock();
+    
+        /*! remove this graph from the document. */
+    emit removeGraph();
     
     if (createNewGraph){
 	emit addGraph(i18n("Untitled0"));

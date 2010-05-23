@@ -58,6 +58,7 @@ private slots:
     void edgeDefaultColorSetted(QString color);
     void nodeDefaultColorSetted(QString color);
     void addGraph(QString name);
+    void removeGraph();
     
   private:
     Graph *_graph;

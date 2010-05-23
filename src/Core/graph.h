@@ -84,10 +84,7 @@ public:
     /*! gets the document that holds this graph.
       \return the GraphDocument
     */
-    GraphDocument *document() const;
-
-    /*! remove this graph from the document. */
-    void remove();
+    GraphDocument *document() const;    
 
     void readOnly( bool r) { _readOnly = r; }
     bool readOnly() const { return _readOnly; }
@@ -294,7 +291,9 @@ public  slots:
     void setEdgeValueVisibility(bool b);
     bool edgeValueVisibility();
 
-
+    /*! remove this graph from the document. */
+    void remove();
+    
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();
     QScriptValue list_edges();
