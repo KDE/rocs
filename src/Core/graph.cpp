@@ -170,9 +170,7 @@ void Graph::remove(Edge *e) {
 }
 
 void Graph::setDirected(bool directed) {
-    _directed = directed;
-
-    kDebug() << "directed is " << directed;
+    
     foreach(Node *n1, _nodes) {
         foreach(Node *n2, n1->adjacent_nodes()) {
 	    // do not permit loop nodes while changing graph's state.
@@ -193,6 +191,7 @@ void Graph::setDirected(bool directed) {
     foreach(Edge *e, _edges){
       e->emitChangedSignal(); // dummy updater.
     }
+    _directed = directed;
     emit complexityChanged(directed);
     return;
 }
@@ -200,7 +199,6 @@ void Graph::setDirected(bool directed) {
 GraphGroup* Graph::addGroup(const QString& name) {
     GraphGroup *gg = new GraphGroup();
     gg->setName(name);
-//    _graphGroups.append(gg);
     return gg;
 }
 

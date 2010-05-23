@@ -59,7 +59,6 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
     connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addGraph(QString)));
     connect(this, SIGNAL(removeGraph()), g, SLOT(remove()));
     
-    
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setEdgeDefaultColor(QColor)));
     connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setNodeDefaultColor(QColor)));
     
