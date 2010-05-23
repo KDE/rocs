@@ -55,6 +55,9 @@ GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
     
     _editWidget->setVisible(_activateGraph->isChecked());
    
+    GraphDocument *gDocument = qobject_cast<GraphDocument*>(g->parent());
+    connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addGraph(QString)));
+    
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setEdgeDefaultColor(QColor)));
     connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setNodeDefaultColor(QColor)));
     
@@ -102,15 +105,17 @@ void GraphPropertiesWidget::on__activateGraph_toggled(bool b) {
 void GraphPropertiesWidget::on__graphDelete_clicked() {
     if (! _mainWindow->mutex().tryLock()) 
         return;
-    
+    bool createNewGraph = false;
     bool isActive = false;
+    
     if (_graph == _mainWindow->graph()){
       isActive = true;
     }
     
     GraphDocument *gd = qobject_cast<GraphDocument*>(_graph->parent());
+    
     if (gd->size() == 1){
-        gd->addGraph(i18n("Untitled0"));
+	createNewGraph = true;
     }
     
     _mainWindow->scene()->fade(false);
@@ -119,9 +124,14 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
     
     if (isActive) emit updateNeeded();
     radio()->group()->removeButton(radio());
-    deleteLater();
     
     _mainWindow->mutex().unlock();
+    
+    if (createNewGraph){
+	emit addGraph(i18n("Untitled0"));
+    }
+    
+    deleteLater();
 }
 
 void GraphPropertiesWidget::on__graphName_textChanged(const QString& s){

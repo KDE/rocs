@@ -45,10 +45,11 @@ Node::Node(Graph *parent) : QObject(parent) {
 }
 
 Node::~Node() {
+    emit removed();
     empty(_in_edges);
     empty(_out_edges);
     empty(_self_edges);
-    emit removed();
+    
 }
 
 void Node::empty(EdgeList &list) {
