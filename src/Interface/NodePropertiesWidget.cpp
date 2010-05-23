@@ -59,8 +59,8 @@ void NodePropertiesWidget::reflectAttributes(){
    _name->setText(_node->name());
    _value->setText(_node->value().toString());
    _width->setValue(_node->width());
-   _showName->setChecked(!_node->showName());
-   _showValue->setChecked(!_node->showValue());
+   _showName->setChecked(_node->showName());
+   _showValue->setChecked(_node->showValue());
    updateAutomateAttributes(qobject_cast< Graph* >(_node->parent())->automate());
    _propertyName->setText("");
    _propertyValue->setText("");
