@@ -80,10 +80,10 @@ void GraphVisualEditor::setActiveGraphDocument( GraphDocument *gd) {
 
 void GraphVisualEditor::releaseGraphDocument() {
     _scene->clear();
-    int size = _graphDocument->size();
-    for (int i = 0; i < size; i++) {
-        _graphDocument->at(i)->disconnect(this);
-    }
+    //int size = _graphDocument->size();
+    //for (int i = 0; i < size; i++) {
+    //    _graphDocument->at(i)->disconnect(this);
+    //}
     if (_graphDocument->size() != 0)
       _scene->setActiveGraphDocument(0);
 
