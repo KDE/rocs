@@ -79,6 +79,12 @@ void NodeItem::updateIcon(){
 void NodeItem::updateColor(){
    _colorizer->setColor( _node->color());
    setGraphicsEffect(_colorizer);
+    if (_name && _name->isVisible()){
+     _name->update();
+   }
+   if( _value && _value->isVisible()){
+     _value->update();
+   }
 }
 
 void NodeItem::updateName(){
@@ -90,6 +96,7 @@ void NodeItem::updateName(){
    }
    _name->setVisible(_node->showName());
    _name->setPos(0, 75);
+   
 }
 
 void NodeItem::updateValue(){
