@@ -30,4 +30,9 @@
 			<default> 500 </default>
 		</entry>
 	</group>
+	<group name="IncludeManager">
+        <entry name="includePath" type="StringList">
+            <label>Path where include manager seek for includes.</label>
+        </entry>
+    </group>
 </kcfg>

@@ -71,10 +71,9 @@ private: // Methods
     void setupActions(); // Setup all the actions.
 
     QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
-    QWidget* setupRightPanel(); // setup the Right area of the	panel, the GraphicsView, the editors and stuff
+    QWidget* setupRightPanel(); // setup the Right area of the panel, the GraphicsView, the editors and stuff
     int saveIfChanged();
     void finishLoadingUi();
-    void startThreadDocument();
     
 private slots:
     void executeScript(const QString &text = QString());
@@ -94,6 +93,7 @@ public slots:
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
+    void showSettings();
     
   signals:
       void startDocument(const QString& s);

@@ -33,6 +33,7 @@
 #include <QGraphicsView>
 #include <klocalizedstring.h>
 #include <KStatusBar>
+#include <KConfigDialog>
 
 #include <kfiledialog.h>
 #include "TabWidget.h"
@@ -62,6 +63,7 @@
 #include "DeleteAction.h"
 #include "AlignAction.h"
 
+
 // backends
 #include "qtScriptBackend.h"
 #include <kstandarddirs.h>
@@ -75,6 +77,7 @@
 #include <KPushButton>
 #include <QMutexLocker>
 #include <QScriptEngineDebugger>
+#include "IncludeManagerSettings.h"
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 {
@@ -193,6 +196,8 @@ void MainWindow::setupActions()
 {
     kDebug() << "Entering in Setup Actions";
     KStandardAction::quit ( kapp,SLOT ( quit() ),actionCollection() );
+    KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
+
     GraphScene *gc = _graphVisualEditor->scene();
 
     _moveNodeAction = new MoveNodeAction ( gc, this );
@@ -285,6 +290,28 @@ void MainWindow::setupActions()
     }
 
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
+}
+
+void MainWindow::showSettings()
+{
+     KConfigDialog *dialog = new KConfigDialog(this,  "settings", Settings::self());
+     IncludeManagerSettings * set = new IncludeManagerSettings(dialog);
+
+     dialog->addPage(set,"Include Manager",QString(),"Include Manager",true);
+
+//     QWidget *generalSettings = new QWidget;
+//     //Ui::SettingsBase base;
+//     base.setupUi(generalSettings);
+//     base.kcfg_DefaultBackend->addItems(Cantor::Backend::listAvailableBackends());
+//
+//     dialog->addPage(generalSettings, i18n("General"), "preferences-other");
+//     foreach(Cantor::Backend* backend, Cantor::Backend::availableBackends())
+//     {
+//         if (backend->config()) //It has something to configure, so add it to the dialog
+//             dialog->addPage(backend->settingsWidget(dialog), backend->config(), backend->name(),  backend->icon());
+//     }
+//
+     dialog->show();
 }
 
 void MainWindow::setupToolsPluginsAction()

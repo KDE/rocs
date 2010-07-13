@@ -77,6 +77,7 @@ set ( rocs_graphcisitem_SRCS
 )
 
 set( rocs_interface_SRCS
+  Interface/IncludeManagerSettings.cpp
   Interface/MainWindow.cpp
   Interface/OpenedFilesWidget.cpp
   Interface/GraphScene.cpp
@@ -102,13 +103,17 @@ set( rocs_undoredo_SRCS
   UndoRedo/URAddEdge.cpp
 )
 
+set ( rocs_script_SRC
+        Scripts/IncludeManager.cpp
+)
+
 set(rocs_SRCS
   Main.cpp
   ${rocs_actions_SRCS}
   ${rocs_graphcisitem_SRCS}
   ${rocs_interface_SRCS}
   ${rocs_models_SRCS}
-#  ${rocs_plugins_SRCS}
+  ${rocs_script_SRC}
   ${rocs_undoredo_SRCS}
 )
 

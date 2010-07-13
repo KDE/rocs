@@ -24,6 +24,7 @@
 #include <QFile>
 #include <graph.h>
 
+
 static const KAboutData aboutdata ( "rocs_plaintxtplugin", 0, ki18n ( "Open and Save Plain TXT files" ) , "0.1" );
 
 K_PLUGIN_FACTORY ( FilePLuginFactory, registerPlugin< PlainTXTFilePlugin>(); )
