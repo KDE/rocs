@@ -78,6 +78,7 @@
 #include <QMutexLocker>
 #include <QScriptEngineDebugger>
 #include "IncludeManagerSettings.h"
+#include <IncludeManager.h>
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 {
@@ -100,7 +101,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     setActiveGraphDocument ( _tDocument->document() );
     setupToolsPluginsAction();
 
-    
+
     connect(this, SIGNAL(startDocument(QString)), _tDocument, SLOT(loadDocument(QString)));
     connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(selfRemove()));
 }
@@ -110,7 +111,7 @@ void MainWindow::startThreadDocument(){
     _mutex.lock();
     kDebug() << "Starting Thread"; _tDocument->start();
     _waitForDocument.wait(&_mutex, 500);
-    
+
     _mutex.unlock();
 }
 
@@ -345,12 +346,12 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)));
 
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
-    
+
     connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)));
     connect( _tDocument->engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
     connect( _tDocument->engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
-    
-    
+
+
     _GraphLayers->populate();
 }
 
@@ -409,15 +410,15 @@ void MainWindow::loadDocument ( const QString& name )
         KMessageBox::sorry ( this, i18n ( "This does not seem to be a graph file." ), i18n ( "Invalid file" ) );
         return;
     }
-    
-    
+
+
      _graphVisualEditor->releaseGraphDocument();
-    
+
      _mutex.lock();
     emit startDocument( name );
     _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();
-    
+
     setActiveGraphDocument ( _tDocument->document() );
 
     if ( !name.isEmpty() ){
@@ -498,7 +499,7 @@ void MainWindow::importFile(){
         kDebug() << "Error loading file" << fileName << f->lastError();
         return;
     }
-    
+
     _mutex.lock();
     _graphVisualEditor->releaseGraphDocument();
     kDebug() << "Starting Thread";
@@ -568,13 +569,20 @@ void MainWindow::executeScript(const QString& text) {
     if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
     kDebug() << "Has text and scene";
-    
+
     _txtDebug->clear();
     kDebug() << "Cleared the debug";
-        
+
     QString script = text.isEmpty()?_codeEditor->text():text;
+    IncludeManager inc;
+//     QStringList paths(Settings::includePath());
+//     if (_codeEditor->document()->url().isValid()){
+//       paths.append(_codeEditor->document()->url().path());
+//     }
+//     inc.addPath(paths);
+    script = inc.include(script, _codeEditor->document()->url().path());
     kDebug() << "Got the correct string";
-    
+
     //kDebug() << script;
     if ( !_tDocument->isRunning() ){
         kDebug() << "Starting Script";

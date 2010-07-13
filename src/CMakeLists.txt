@@ -11,11 +11,6 @@ include_directories(
     Scripts/
 )
 
-#Build Tests if KDE_TEST is on
-if(KDE4_BUILD_TESTS)
-    enable_testing()
-    add_subdirectory(Tests)
-endif(KDE4_BUILD_TESTS)
 
 # Preparando a biblioteca padrão.
 
@@ -54,6 +49,12 @@ set( rocslib_LIB_HDRS
   Core/node.h
   Core/qtScriptBackend.h
   Core/threadDocument.h
+  Core/rocslib_export.h
+
+  Plugins/FilePluginInterface.h
+  Plugins/PluginManager.h
+  Plugins/ToolsPluginInterface.h
+
 )
 
 set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
@@ -130,8 +131,8 @@ set (QT_USE_QTSCRIPT true)
 
 set(rocs_KCFGS settings.kcfgc)
 
-kde4_add_kcfg_files(rocs_SRCS ${rocs_KCFGS} )
-kde4_add_executable(rocs ${rocs_SRCS} ${rocs_RCC_SRCS})
+kde4_add_kcfg_files(rocs_Settings_SRCS ${rocs_KCFGS} )
+kde4_add_executable(rocs ${rocs_SRCS} ${rocs_Settings_SRCS} ${rocs_RCC_SRCS})
 
 target_link_libraries(rocs
   rocslib
@@ -180,3 +181,11 @@ install( FILES
 
 add_subdirectory(Plugins/MakeComplete)
 add_subdirectory(Plugins/importPlainTXT)
+
+
+
+#Build Tests if KDE_TEST is on
+if(KDE4_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(Tests)
+endif(KDE4_BUILD_TESTS)

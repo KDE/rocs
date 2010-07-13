@@ -1,4 +1,9 @@
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../Core )
+include_directories(
+#     ${KDE4_INCLUDES} ${QT_INCLUDES}
+#     ${CMAKE_BINARY_DIR}/src
+    ${CMAKE_CURRENT_BINARY_DIR}}
+#     ${CMAKE_CURRENT_BINARY_DIR}}/..
+    )
 
 set (testGraphs_SRCS
    testGraph.cpp
@@ -29,12 +34,19 @@ add_test(TestDynamicProperties TestDynamicProperties)
 
 #Include Manager
 set( test_IncludeManager_SRC TestIncludeManager.cpp ../Scripts/IncludeManager.cpp)
-kde4_add_executable(TestIncludeManager ${test_IncludeManager_SRC})
+
+
+set(rocs_KCFGS ../settings.kcfgc)
+
+kde4_add_kcfg_files(rocs_Settings_SRCS_TEST ${rocs_KCFGS} )
+
+kde4_add_executable( TestIncludeManager ${test_IncludeManager_SRC} ${rocs_Settings_SRCS_TEST})
 target_link_libraries( TestIncludeManager
-# ${KDE4_KROSSUI_LIBS}
-${QT_QTTEST_LIBRARY}
-${KDE4_KDECORE_LIBS}
-${QT_QTSCRIPT_LIBRARY}
+        # ${KDE4_KROSSUI_LIBS}
+        ${QT_QTTEST_LIBRARY}
+        ${KDE4_KDECORE_LIBS}
+        ${QT_QTSCRIPT_LIBRARY}
+        ${KDE4_KIO_LIBS}
 )
 add_test(TestIncludeManager TestIncludeManager)
 

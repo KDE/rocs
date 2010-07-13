@@ -74,7 +74,9 @@ private: // Methods
     QWidget* setupRightPanel(); // setup the Right area of the panel, the GraphicsView, the editors and stuff
     int saveIfChanged();
     void finishLoadingUi();
-    
+
+    void startThreadDocument();    
+
 private slots:
     void executeScript(const QString &text = QString());
     void newGraph();

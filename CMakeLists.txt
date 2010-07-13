@@ -8,7 +8,7 @@ find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
 include_directories(
-  ${KDE4_INCLUDES} 
+  ${KDE4_INCLUDES}
   ${QT_INCLUDES}
 )
 
@@ -17,8 +17,6 @@ if(${CMAKE_BUILD_TYPE} MATCHES coverage)
   set (CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS}" )
 endif()
 
-
-enable_testing()
 
 add_subdirectory(src)
 add_subdirectory(graphics)
