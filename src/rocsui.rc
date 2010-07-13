@@ -5,7 +5,7 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
                          http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd" >
- 
+
   <MenuBar>
     <Menu name="file" >
       <Menu name="graph"><Text>Graph</Text>
@@ -20,14 +20,18 @@
 	<Action name="save-script" />
 	<Action name="save-script-as" />
       </Menu>
+      <Action name="download" />
       <Action name="import" />
       <Action name="export" />
+    </Menu>
+    <Menu name="Includes"><Text>Includes</Text>
+    <Action name="possible_includes" />
     </Menu>
     <Menu name="tools">
       <ActionList name="tools_plugins" />
     </Menu>
   </MenuBar>
- 
+
   <ToolBar name="main" >
     <text>Main Toolbar</text>
       <Action name="move_node" />

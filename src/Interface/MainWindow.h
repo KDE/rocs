@@ -62,7 +62,7 @@ public:
     ~MainWindow();
     Graph *graph() const;
     GraphScene *scene() const;
-    void debug(const QString& s);
+//    void debug(const QString& s);
     GraphDocument *activeDocument() const;
     QMutex& mutex();
     
@@ -77,7 +77,24 @@ private: // Methods
 
     void startThreadDocument();    
 
+
+
+
+
+
+
+
+
+
+
 private slots:
+
+     void showSettings();
+    //Testing to connect to KGHNS3
+    void downloadNewExamples();
+
+    void showPossibleIncludes();
+
     void executeScript(const QString &text = QString());
     void newGraph();
     void openGraph();
@@ -88,14 +105,14 @@ private slots:
     void importFile();
     void exportFile();
     void setupToolsPluginsAction();
-    
+   
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
-    void showSettings();
+    
     
   signals:
       void startDocument(const QString& s);

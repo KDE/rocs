@@ -18,7 +18,7 @@ class CodeEditor : public QWidget {
     Q_OBJECT
 public:
     CodeEditor(MainWindow *parent = 0);
-    const char * text() const;
+    QString text() const;
     KTextEditor::Editor *editor() const {
         return _editor;
     }
@@ -39,16 +39,16 @@ public slots:
     void closeDocument(int index);
     void changeCurrentDocument(int index);
     void atualizeTabText(KTextEditor::Document* t);
-    
+
 private:
-    
+
     QStackedWidget *_docArea;
     KTabBar *_tabDocs; //! the tabs of the opened documents.
     QList<KTextEditor::View*> _docViews; //! this is the view where you edit your scripts
     QList<KTextEditor::Document*> _scriptDocs; //! the document that you are editing
     KTextEditor::Editor *_editor;
     QVBoxLayout* _layout;
-    
+
     KTextEditor::Document *_activeDocument;
     KTextEditor::View     *_activeView;
 };

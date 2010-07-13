@@ -25,38 +25,77 @@
 #include <QDir>
 #include <KDebug>
 #include <settings.h>
+#include <KGlobal>
+#include <kstandarddirs.h>
 
 IncludeManager::IncludeManager() {
-  QStringList list = Settings::includePath();
-    addPath(list);
+    addPath(KGlobal::dirs()->findDirs("appdata", "examples"));
+
+    QStringList list = Settings::includePath();
+
+    while(!list.isEmpty()){
+      addPath(list.last());
+      list.removeLast();
+    }
+//     kDebug() << _tempPath;
+
 }
 
 
-QString IncludeManager::include ( const QString& script, const QString& actualPath ) {
+QString IncludeManager::include ( const QString& script, const QString& actualPath, const QString &filename) {
+    int pos;
+    bool inComment = false;
 
-  if (!actualPath.isEmpty()){
-    _actualDir = QDir(actualPath); // try the path of saved file
-  }else{
-    if(_tempPath.count() > 0){
-        _actualDir = _tempPath.first(); // not disponible the path to saved file, use the first path from list
-    }else{
-      _actualDir = QDir(); //No path in list? use application path!
+    if (!actualPath.isEmpty()) {
+        _actualDir = QDir(actualPath); // try the path of saved file
+        if (!seekFile(filename).isNull()){
+          _wasIncluded << seekFile(filename);
+        }
+    } else {
+        if (!_tempPath.isEmpty()) {
+            _actualDir = _tempPath.last(); // not disponible the path to saved file, use the first path from list
+        } else {
+            _actualDir = QDir(); //No path in list? use application path!
+        }
+
     }
-
-  }
     QStringList lines = script.split('\n');
-//     qDebug() << lines;
-    for (int i = 0; i < lines.count(); ++i){
-        if (!lines[i].startsWith("//")){
-
-          QRegExp reg("^\\s*include\\s*\\(\\s*.*.js\\s*\\)");
-          if (lines[i].indexOf(reg)!= -1){
-//           if (lines[i].contains("include", Qt::CaseInsensitive)){
-
-              QString ret = processInclude(reg.cap());
-              lines[i].replace(reg.cap(),ret);
+    for (int i = 0; i < lines.count(); ++i) {
+        if (lines[i].indexOf("//") != -1) {
+            /*lines[i] = */
+            lines[i].truncate(lines[i].indexOf("//"));//Ignores after '//'
+        }
+        if (inComment){
+          if ((pos = lines[i].indexOf("*/")) != -1 ){
+              lines[i].remove(0, pos+2);
+              inComment = false;
+          }else{
+              lines.removeAt(i);
+              --i;
+              continue;
           }
         }
+        while ((pos = lines[i].indexOf("/*")) != -1) {
+            int pos2;
+            if ((pos2 = lines[i].indexOf("*/", pos+2)) != -1 ){
+              lines[i].remove(pos, pos2-pos + 2);
+            }else{
+              lines[i].remove(pos, lines[i].count());
+
+              inComment = true;
+            }
+        }
+        if (lines[i].isEmpty()){
+          lines.removeAt(i);
+          --i;
+          continue;
+        }
+        QRegExp reg("^\\s*include\\s*\\(\\s*.*.js\\s*\\)");
+        if (lines[i].indexOf(reg)!= -1) {
+            QString ret = processInclude(reg.cap());
+            lines[i].replace(reg.cap(),ret);
+        }
+
     }
     QString str = lines.join("\n");
 //     qDebug() << str;
@@ -68,15 +107,18 @@ QString IncludeManager::processInclude ( QString arg1 ) {
     QString fileContent;
     QString file;
     int pos;
-    if (arg1.indexOf('(') != -1){
-        file=arg1.replace(')', '(').section('(',1,1);
+    if (arg1.indexOf('(') != -1) {
+        file=arg1.replace(')', '(').section('(',1,1).trimmed();
         // To avoid more ifs-elses
         fileContent = i18n("debug(\"Cannot open file %1.\")").arg(file);
-        if (!_actualDir.exists(file)){
+        if (!_actualDir.exists(file)) {
             QString filename = file;
-            if ((pos = file.lastIndexOf('/')) != -1){
+            if ((pos = file.lastIndexOf('/')) != -1) {  //add the path of file to list
                 QString path = file.left(pos+1);
-                QString filename = file.right(file.length() - pos +1);
+//                 QString filename = file.right(file.length() - pos +1);
+                if (!path.startsWith(QDir::rootPath())) {
+                    path.prepend(_actualDir.absolutePath() + '/');
+                }
                 _tempPath << QDir(path);
             }
             file = seekFile(filename);
@@ -89,11 +131,11 @@ QString IncludeManager::processInclude ( QString arg1 ) {
                     fileContent = fp.readAll();
                     fileContent = include ( fileContent );
                 }
-            }else{
-              return QString();
+            } else {
+                return QString();
             }
         }
-    }else{
+    } else {
         fileContent = i18n("debug(\"Invalid include directive: %1. Can't find file in directive.\")").arg(arg1);
     }
 
@@ -101,26 +143,45 @@ QString IncludeManager::processInclude ( QString arg1 ) {
 }
 
 
-QString IncludeManager::seekFile ( QString arg1 ) {
-//     QList<QDir>::const_iterator  end = _tempPath.end();
-//     QList<QDir>::const_iterator  begin = _tempPath.end();
-//     QList<QDir>::iterator  iter = _tempPath.end();
-    kDebug() << _tempPath.count();
-    for (int count = _tempPath.count() - 1; count >= 0; -- count){
-        if (_tempPath.at(count).exists(arg1)){
-            return _tempPath.at(count).absoluteFilePath(arg1);
+QString IncludeManager::seekFile ( const QString & arg1 ) {
+
+    if (arg1.isEmpty()){
+      return QString();
+    }
+    for (int count = _tempPath.count() - 1; count >= 0; -- count) {
+        if (_tempPath.at(count).exists(arg1.trimmed())) {
+            return _tempPath.at(count).absoluteFilePath(arg1.trimmed());
         }
     }
     return QString();
 }
 
-void IncludeManager::addPath ( QStringList& str )
+void IncludeManager::addPath(const QString& str)
+{
+  QString tmp = !str.endsWith('/')? str + "/": str;
+
+  if (!tempPath().contains(tmp)){
+    _tempPath << QDir(tmp);
+  }
+}
+
+
+void IncludeManager::addPath ( const QStringList& str )
 {
     foreach ( QString s, str ) {
-      QDir dir(s);
+
+        QDir dir(s);
         if ( !_tempPath.contains ( dir ) ) {
             _tempPath.append ( dir );
         }
     }
 }
 
+QStringList const IncludeManager::tempPath() const
+{
+    QStringList list;
+    foreach (QDir dir, _tempPath) {
+        list << dir.path() + '/';
+    }
+    return list;
+}

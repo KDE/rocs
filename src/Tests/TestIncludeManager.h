@@ -36,6 +36,8 @@ class TestIncludeManager : public QObject {
         void doublePathInsert();
 
         void findInclude();
+
+        void ignoreComments();
 };
 
 #endif // TESTINCLUDEMANAGER_H

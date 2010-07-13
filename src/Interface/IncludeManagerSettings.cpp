@@ -21,20 +21,34 @@
 #include "IncludeManagerSettings.h"
 #include <QGridLayout>
 #include <settings.h>
-
+#include <QListView>
+#include <KIconButton>
+#include <kurlrequester.h>
 
 
 IncludeManagerSettings::IncludeManagerSettings ( QWidget* parent, Qt::WindowFlags f ) : QWidget ( parent, f ) {
 
-//     _listModel = new QStringListModel(this);
-    //_listModel->setStringList();
+    _list_View = new QListWidget(this);
     QGridLayout * lay = new QGridLayout(this);
-//     _listView = new QListView(this);
-    kcfg_includePath = new QLineEdit(this);
-    lay->addWidget(kcfg_includePath,0,1);
+    _url = new KUrlRequester(this);
+    _url->setMode(KFile::Directory|KFile::LocalOnly|KFile::ExistingOnly);;
+    KPushButton * add = new KPushButton(this);
+    KPushButton * del = new KPushButton(this);
+
+    lay->addWidget(_url,0,0);
+    lay->addWidget(_list_View,1,0);
+    lay->addWidget(add,1,1);
+    lay->addWidget(del,2,1);
+    add->setDefault(true);
     this->setLayout(lay);
     readConfig();
-    connect(kcfg_includePath, SIGNAL(textChanged(QString)), this, SLOT(saveSettings()));
+
+//     editing = 0;
+    connect(add, SIGNAL(clicked(bool)), this, SLOT(insertUrl()));
+    connect(del, SIGNAL(clicked(bool)), this, SLOT(removeURL()));
+//     connect(_list_View, SIGNAL(currentTextChanged(QString)), this, SLOT(includeChanged()));
+//     connect(_list_View, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(editItem(QListWidgetItem*)));
+
 }
 
 
@@ -42,14 +56,75 @@ IncludeManagerSettings::~IncludeManagerSettings() {
 
 }
 
+// void IncludeManagerSettings::editItem(QListWidgetItem* item )
+// {
+//   _list_View->editItem(item);
+//
+// //     editing = item;
+// //     _url->setText(item->text());
+// }
+
+
 void IncludeManagerSettings::readConfig() {
-    kcfg_includePath->setText(Settings::includePath().join(":"));
+
+    QStringList list(Settings::includePath());
+    for (int i = 0 ; i < list.count(); ++i) {
+        QListWidgetItem * item = new QListWidgetItem(list.at(i),_list_View);
+        _list_View->addItem(item);
+    }
 }
 void IncludeManagerSettings::saveSettings() {
-    Settings::setIncludePath(kcfg_includePath->text().split(':', QString::SkipEmptyParts));
+    QStringList list;
+    for (int i = 0 ; i < _list_View->count(); ++i) {
+        list.append(_list_View->item(i)->text());
+    }
+
+    Settings::setIncludePath(list);
+}
+
+void IncludeManagerSettings::insertUrl()
+{
+    if (_url->text().isEmpty()){
+//         if (editing != 0){
+//           _list_View->takeItem(_list_View->row(editing));
+//           delete editing;
+//           editing = 0;
+//         }
+        return;
+    }
+
+    QString text = _url->text().startsWith(QDir::rootPath())
+                   ?_url->text()
+                   :QDir::homePath() + '/' + _url->text();
+
+    if (!text.endsWith('/')){
+      text.append('/');
+    }
+
+    if (_list_View->findItems(text, Qt::MatchExactly).count() != 0) {
+        return; //Allready have this item.
+    }
+
+    QListWidgetItem * item = new QListWidgetItem(text,_list_View);
+//     item->setFlags(Qt::ItemIsEditable);
+    _list_View->addItem(item);
+    _url->clear();
+    includeChanged();
+
+}
+
+void IncludeManagerSettings::removeURL()
+{
+    QListWidgetItem * itm = _list_View->takeItem(_list_View->currentRow());
+    if (itm) {
+        delete itm;
+    }
+    includeChanged();
 
 }
 
 
+void IncludeManagerSettings::includeChanged() {
 
-
+    emit changed(true);
+}

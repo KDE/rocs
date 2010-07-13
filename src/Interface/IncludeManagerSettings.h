@@ -22,24 +22,32 @@
 #define INCLUDEMANAGERSETTINGS_H
 
 #include <QWidget>
-#include <QStringListModel>
+#include <QListWidget>
 #include <QLineEdit>
+#include <kurlrequester.h>
 
- class IncludeManagerSettings : public QWidget {
+class IncludeManagerSettings : public QWidget {
     Q_OBJECT
-     public:
+public:
 
-        IncludeManagerSettings ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    IncludeManagerSettings ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
 
-        virtual ~IncludeManagerSettings();
+    virtual ~IncludeManagerSettings();
 
-     public slots:
-        void readConfig();
-        void saveSettings();
-    private:
-        QLineEdit * kcfg_includePath;
-//         QListView * _listView;
-//         QStringListModel * _listModel;
+public slots:
+    void readConfig();
+    void saveSettings();
+private slots:
+    void includeChanged();
+    void insertUrl();
+//     void editItem(QListWidgetItem*);
+    /** Remove the selected path (url) from list of places where Rocs will search for plugins. */
+    void removeURL();
+private:
+    KUrlRequester* _url;
+    QListWidget* _list_View;
+signals:
+    void changed(bool);
 };
 
 #endif // INCLUDEMANAGERSETTINGS_H

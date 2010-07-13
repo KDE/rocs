@@ -21,17 +21,17 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent) {
     connect( _tabDocs, SIGNAL(tabCloseRequested(int)), this, SLOT(closeDocument(int)));
     connect( _tabDocs, SIGNAL(currentChanged(int)), this, SLOT( changeCurrentDocument(int)));
     connect( _tabDocs, SIGNAL(newTabRequest()), this, SLOT(newScript()));
-    
+
     _tabDocs->setTabsClosable(true);
-    
+
     _editor->setSimpleMode(false);
-    
+
     _layout->addWidget(_tabDocs);
     _layout->addWidget(_docArea);
-    
+
     _layout->setSpacing(0);
     _layout->setMargin(0);
-    
+
     newScript();
     setLayout(_layout);
 }
@@ -61,7 +61,7 @@ void CodeEditor::closeDocument(int index){
       _activeView = _docViews.at(index - 1);
       _docArea->setCurrentIndex(index - 1);
       _tabDocs->setCurrentIndex(index - 1);
-      
+
       _scriptDocs.removeAt( index );
       _docArea->removeWidget(_docArea->widget( index));
       _docViews.removeAt( index );
@@ -78,13 +78,13 @@ void CodeEditor::changeCurrentDocument(int index){
 
 void CodeEditor::newScript() {
     _scriptDocs  << _editor->createDocument(0);
-    
+
  #ifdef USING_QTSCRIPT
     _scriptDocs.last()->setMode("JavaScript");
  #endif
 
     _docViews << qobject_cast<KTextEditor::View*>(_scriptDocs.last()->createView(this));
-    
+
     _tabDocs->addTab(_scriptDocs.last()->documentName());
     _docArea->addWidget(_docViews.last());
     changeCurrentDocument( _docViews.count() - 1 );
@@ -96,7 +96,7 @@ void CodeEditor::saveScript() {
     if ((_docViews.empty()) ||  (_scriptDocs.empty())) {
         return;
     }
-    
+
     _activeDocument->documentSave();
 }
 
@@ -108,10 +108,10 @@ void CodeEditor::atualizeTabText(KTextEditor::Document* t){
 void CodeEditor::openScript() {
     KUrl fileUrl = KFileDialog::getOpenUrl();
     if (!fileUrl.isValid()) return;
-    
+
     KTextEditor::Document *d = _editor->createDocument(0);
     d->openUrl( fileUrl );
-    
+
 #ifdef USING_QTSCRIPT
     d->setMode("JavaScript");
 #endif
@@ -122,9 +122,9 @@ void CodeEditor::openScript() {
 
     connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(atualizeTabText(KTextEditor::Document*)));
     changeCurrentDocument( _docViews.count() - 1 );
-    
+
     kDebug() << "Being Called";
-    
+
 }
 
 void CodeEditor::saveScriptAs() {
@@ -135,6 +135,6 @@ void CodeEditor::saveScriptAs() {
     _activeDocument->documentSaveAs();
 }
 
-const char* CodeEditor::text() const {
+QString CodeEditor::text() const {
     return _activeDocument->text().toAscii();
 }

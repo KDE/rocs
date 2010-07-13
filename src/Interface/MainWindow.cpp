@@ -62,7 +62,7 @@
 #include "Select.h"
 #include "DeleteAction.h"
 #include "AlignAction.h"
-
+#include <KNS3/DownloadDialog>
 
 // backends
 #include "qtScriptBackend.h"
@@ -79,6 +79,7 @@
 #include <QScriptEngineDebugger>
 #include "IncludeManagerSettings.h"
 #include <IncludeManager.h>
+#include "ImporterExporterManager.h"
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 {
@@ -101,9 +102,8 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     setActiveGraphDocument ( _tDocument->document() );
     setupToolsPluginsAction();
 
-
     connect(this, SIGNAL(startDocument(QString)), _tDocument, SLOT(loadDocument(QString)));
-    connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(selfRemove()));
+    connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(terminate()));
 }
 
 void MainWindow::startThreadDocument(){
@@ -126,6 +126,8 @@ MainWindow::~MainWindow()
 
     Settings::self()->writeConfig();
   //  _mutex.unlock();
+    emit endThreadDocument();
+    _tDocument->wait();
   //  _tDocument->exit(0);
 }
 
@@ -161,6 +163,11 @@ void MainWindow::setupWidgets()
     _hSplitter->setSizes ( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight() );
 
     setCentralWidget ( _hSplitter );
+}
+
+void MainWindow::downloadNewExamples(){
+    KNS3::DownloadDialog dialog("rocs.knsrc", this);
+    dialog.exec();
 }
 
 QWidget* MainWindow::setupRightPanel()
@@ -227,6 +234,10 @@ void MainWindow::setupActions()
     actionCollection()->addAction ( "new-graph", action );
     connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( newGraph() ) );
 
+    action = new KAction ("Donwload Examples", this);
+    actionCollection()->addAction ( "download", action );
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(downloadNewExamples()));
+
     action = new KAction ( KIcon ( "document-open" ),i18n ( "Open Graph..." ), _graphVisualEditor->view() );
     action->setShortcut ( Qt::CTRL + Qt::Key_O );
     action->setShortcutContext ( Qt::WidgetShortcut );
@@ -289,6 +300,11 @@ void MainWindow::setupActions()
     {
         kDebug() << "Not Creating Actions (import export).." << Rocs::PluginManager::New()->filePlugins().count();
     }
+    action = new KAction ( KIcon ( "document-save-as" ), i18n ( "Possible Includes" ), this );
+        action->setShortcut ( Qt::CTRL + Qt::Key_P );
+        action->setShortcutContext ( Qt::WidgetShortcut );
+        actionCollection()->addAction ( "possible_includes", action );
+        connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( showPossibleIncludes()) );
 
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
 }
@@ -296,23 +312,20 @@ void MainWindow::setupActions()
 void MainWindow::showSettings()
 {
      KConfigDialog *dialog = new KConfigDialog(this,  "settings", Settings::self());
+
      IncludeManagerSettings * set = new IncludeManagerSettings(dialog);
 
      dialog->addPage(set,"Include Manager",QString(),"Include Manager",true);
+     connect(set, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
+//      connect(set, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
 
-//     QWidget *generalSettings = new QWidget;
-//     //Ui::SettingsBase base;
-//     base.setupUi(generalSettings);
-//     base.kcfg_DefaultBackend->addItems(Cantor::Backend::listAvailableBackends());
-//
-//     dialog->addPage(generalSettings, i18n("General"), "preferences-other");
-//     foreach(Cantor::Backend* backend, Cantor::Backend::availableBackends())
-//     {
-//         if (backend->config()) //It has something to configure, so add it to the dialog
-//             dialog->addPage(backend->settingsWidget(dialog), backend->config(), backend->name(),  backend->icon());
-//     }
-//
-     dialog->show();
+     connect(dialog, SIGNAL(applyClicked()), set, SLOT(saveSettings()));
+     connect(dialog, SIGNAL(okClicked()), set, SLOT(saveSettings()));
+
+     connect(dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
+
+
+     dialog->exec();
 }
 
 void MainWindow::setupToolsPluginsAction()
@@ -443,9 +456,9 @@ void MainWindow::saveGraphAs(){
     _tDocument->document()->saveAsInternalFormat ( KFileDialog::getSaveFileName() );
 }
 
-void MainWindow::debug ( const QString& s ){
-    _txtDebug->insertPlainText ( s );
-}
+// void MainWindow::debug ( const QString& s ){
+//     _txtDebug->insertPlainText ( s );
+// }
 
 int MainWindow::saveIfChanged(){
     if ( _tDocument->document()->isModified() ){
@@ -460,46 +473,11 @@ int MainWindow::saveIfChanged(){
 }
 
 void MainWindow::importFile(){
-    if ( saveIfChanged() == KMessageBox::Cancel ) return;
-    QString ext;
-
-    foreach ( Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins() ){
-        ext.append ( f->extensions().join ( "" ) );
-    }
-    ext.append ( i18n ( "*|All files" ) );
-
-    KFileDialog dialog ( QString(),ext, this );
-    dialog.setCaption ( i18n ( "Graph Files" ) );
-    if ( !dialog.exec() ){
+    Rocs::ImporterExporterManager importer(this);
+    GraphDocument * gd = importer.importFile();
+    if (gd == 0){
         return;
     }
-
-    kDebug() << "Extensions:"<< ext;
-    QString fileName = dialog.selectedFile();
-    if ( fileName == "" ) return;
-
-    int index = fileName.lastIndexOf ( '.' );
-    Rocs::FilePluginInterface * f = 0;
-    if ( index == -1 )
-    {
-        kDebug() << "Cant open file without extension.";
-        return;
-    }
-
-    kDebug() << fileName.right ( fileName.count() - index );
-    f = Rocs::PluginManager::New()->filePluginsByExtension ( fileName.right ( fileName.count() - index ) );
-
-    if ( !f ){
-        kDebug() <<  "Cannot handle extension "<<  fileName.right ( 3 );
-        return;
-    }
-
-    GraphDocument * gd = f->readFile ( fileName );
-    if ( !gd ){
-        kDebug() << "Error loading file" << fileName << f->lastError();
-        return;
-    }
-
     _mutex.lock();
     _graphVisualEditor->releaseGraphDocument();
     kDebug() << "Starting Thread";
@@ -509,58 +487,19 @@ void MainWindow::importFile(){
 
     setActiveGraphDocument ( _tDocument->document() );
     _graphVisualEditor->scene()->createItems();
-    kDebug() << "Importing File.." << fileName;
+
+    if (!importer.scriptToRun().isEmpty()){
+      executeScript(importer.scriptToRun());
+    }
 }
 
 void MainWindow::exportFile()
 {
-    QString ext;
-    foreach ( Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins() )
-    {
-        ext.append ( f->extensions().join ( "" ) );
-    }
-    ext.append ( i18n ( "*|All files" ) );
-
-
-    KFileDialog exportDialog ( QString(),ext,this );
-    exportDialog.okButton()->setText ( i18n ( "Export" ) );
-    exportDialog.okButton()->setToolTip ( i18n ( "Export graphs to file" ) );
-    if ( exportDialog.exec() != KDialog::Accepted )
-    {
-        return;
-    }
-
-    kDebug() << "Exporting File..";
-    if ( exportDialog.selectedFile() == "" )
-    {
-        return;
-    }
-
-    ext = exportDialog.currentFilter().remove ( '*' );
-    kDebug () <<" Selected to export: " << ext;
-    QString file = exportDialog.selectedFile();
-    if ( !file.endsWith ( ext) )
-    {
-        file.append ( ext );
-    }
-
-    Rocs::FilePluginInterface * p = Rocs::PluginManager::New()->filePluginsByExtension ( ext );
-    if ( !p )
-    {
-        kDebug() << "Cannot export file: " << file;
-        return;
-    }
-
+    Rocs::ImporterExporterManager exp(this);
     _mutex.lock();
-    if ( !p->writeFile ( *_tDocument->document(), file ) )
-    {
-        kDebug() << "Error writing file: " << p->lastError();
-    }
-    else
-    {
-        kDebug() << "File Exported!" << file;
-    }
+    exp.exportFile(_tDocument->document());
     _mutex.unlock();
+
 }
 #ifdef USING_QTSCRIPT
 
@@ -568,20 +507,17 @@ void MainWindow::executeScript(const QString& text) {
     kDebug() << "Going to execut the script";
     if (_txtDebug == 0)   return;
     if (scene() == 0)    return;
-    kDebug() << "Has text and scene";
 
     _txtDebug->clear();
-    kDebug() << "Cleared the debug";
 
     QString script = text.isEmpty()?_codeEditor->text():text;
+
+    //Processing includes.
     IncludeManager inc;
-//     QStringList paths(Settings::includePath());
-//     if (_codeEditor->document()->url().isValid()){
-//       paths.append(_codeEditor->document()->url().path());
-//     }
-//     inc.addPath(paths);
-    script = inc.include(script, _codeEditor->document()->url().path());
-    kDebug() << "Got the correct string";
+    //If the documment is saved, use it path.
+//     if (_codeEditor->document()->)
+    script = inc.include(script, _codeEditor->document()->url().path(), _codeEditor->document()->documentName());
+
 
     //kDebug() << script;
     if ( !_tDocument->isRunning() ){
@@ -601,6 +537,15 @@ void MainWindow::executeScript(const QString& text) {
 }
 
 #endif
+
+void MainWindow::showPossibleIncludes()
+{
+   QDialog dialog(this);
+
+//    dialog.setLayout();
+   dialog.exec();
+}
+
 
 void MainWindow::runToolPlugin()
 {

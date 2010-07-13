@@ -56,7 +56,7 @@ GraphDocument::~GraphDocument() {
     kDebug() << "Deleting Graph Document";
     kDebug() << this;
     kDebug() << size();
-    
+
     for(int i = 0; i < size(); i ++){
 	Graph *g = at(i);
 	kDebug() << "Deleting graph" << g->name();
@@ -129,7 +129,7 @@ const QString& GraphDocument::documentPath() const {
 
 bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     k_buf.clear();
-    
+
     KSaveFile saveFile( !filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
 
     if (!saveFile.open()) {
@@ -139,14 +139,14 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
 
     QTextStream stream(&saveFile);
     stream.setCodec("UTF-8");
-    
+
     int graphSize = count();
 
     for (int i = 0; i < graphSize; i++) {
         Graph *g = this->at(i);
-		
+
         k_buf += QString("[Graph %1] \n").arg(i).toUtf8();
-	
+
 	    savePropertiesInternalFormat(g);
 
         foreach( ::Node *n, g->nodes()) {
@@ -158,7 +158,7 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
         foreach( Edge *e, g->edges()) {
             from = g->nodes().indexOf(e->from());
             to = g->nodes().indexOf(e->to());
-            
+
 	        k_buf += QString("[Edge %1->%2]\n").arg(from).arg(to).toUtf8();
 	        savePropertiesInternalFormat(e);
         }
@@ -175,7 +175,7 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     kDebug() << k_buf;
 
     stream << k_buf;
-    
+
     if (!saveFile.finalize()) {
         kDebug() << "Error, file not saved.";
         return false;
@@ -187,12 +187,12 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
 void GraphDocument::savePropertiesInternalFormat(QObject *o) {
     const QMetaObject *metaObject = o->metaObject();
     int propertyCount = metaObject->propertyCount();
-    
+
     for ( int i = 0; i < propertyCount; ++i) {
         QMetaProperty metaProperty = metaObject->property(i);
         const char *name = metaProperty.name();
         QVariant value = o->property(name);
-        
+
         if ( QString("objectName").compare(metaProperty.name()) == 0) {
             continue;
         }
@@ -204,7 +204,7 @@ void GraphDocument::savePropertiesInternalFormat(QObject *o) {
           kDebug() << "UTF-8"     << namevalue.toUtf8();
           kDebug() << "Local8bit" << namevalue.toLocal8Bit();
         }
-       
+
         k_buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
     }
 
@@ -228,10 +228,10 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
    //GraphGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
 
-    
+
     QTextStream in(&f);
     in.setCodec("UTF-8");
-    
+
     while (!in.atEnd()) {
         QString str = in.readLine().simplified();
 
@@ -286,6 +286,6 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
 
 // void GraphDocument::runnTool(Rocs::ToolsPluginInterface * plugin){
 // 	QString run = plugin->run(this);
-// 	
+//
 // 	//executeScript(run);
 // }

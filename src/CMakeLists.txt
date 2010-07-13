@@ -78,6 +78,7 @@ set ( rocs_graphcisitem_SRCS
 )
 
 set( rocs_interface_SRCS
+  Interface/ImporterExporterManager.cpp
   Interface/IncludeManagerSettings.cpp
   Interface/MainWindow.cpp
   Interface/OpenedFilesWidget.cpp
@@ -142,6 +143,7 @@ target_link_libraries(rocs
   ${KDE4_KTEXTEDITOR_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSCRIPTTOOLS_LIBRARY}
+  ${KDE4_KNEWSTUFF3_LIBS}
 )
 
 ####################### TESTS #############################
@@ -170,7 +172,7 @@ install( FILES rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs  )
 install( FILES rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
 
-
+install(FILES rocs.knsrc DESTINATION  ${CONFIG_INSTALL_DIR})
 
 install( FILES
 	  Plugins/RocsToolsPlugin.desktop
@@ -181,6 +183,8 @@ install( FILES
 
 add_subdirectory(Plugins/MakeComplete)
 add_subdirectory(Plugins/importPlainTXT)
+add_subdirectory(Scripts)
+
 
 
 

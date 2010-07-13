@@ -23,7 +23,6 @@
 #include <QList>
 #include <QObject>
 #include "rocslib_export.h"
-#include <ToolsPluginInterface.h>
 
 class Graph;
 
@@ -33,6 +32,8 @@ class Graph;
 class ROCSLIB_EXPORT GraphDocument : public QObject, public QList<Graph*>
 {
     Q_OBJECT
+    Q_PROPERTY(    qreal width READ width WRITE setWidth)
+    Q_PROPERTY(    qreal height READ height WRITE setHeight)
 
 public:
     enum Type {Simple = 0, Oriented};
@@ -58,6 +59,26 @@ public:
     /*! \return the Name of the Collection of Graphs */
     QString name() const;
 
+    /* */
+    void savedDocumentAt(const QString& fileName);
+
+    const QString& documentPath() const ;
+
+    bool saveAsInternalFormat(const QString& filename);
+    void loadFromInternalFormat(const QString& filename);
+public slots:
+    /*! Creates a new Graph
+      \param name the name of the graph
+      \param type the the of the graph.
+    */
+    Graph *addGraph(QString name = "untitled");
+    Graph *activeGraph(){ return _activeGraph; }
+    void setActiveGraph(Graph *g);
+
+    /* * Run the tool in this GraphDocument.
+    @param tool Tool plugin to be runned. */
+//     void runnTool(Rocs::ToolsPluginInterface * plugin);
+
     /*! set the height of the working area
         \param height the new height of the document.
     */
@@ -74,27 +95,6 @@ public:
     /*! \return the width of the working area */
     qreal width() const;
 
-    /* */
-    void savedDocumentAt(const QString& fileName);
-
-    const QString& documentPath() const ;
-
-    bool saveAsInternalFormat(const QString& filename);
-    void loadFromInternalFormat(const QString& filename);
-public slots:
-    /*! Creates a new Graph
-      \param name the name of the graph
-      \param type the the of the graph.
-    */
-    Graph *addGraph(QString name = "untitled");
-    Graph *activeGraph(){ return _activeGraph; }
-    void setActiveGraph(Graph *g);
-    
-    /* * Run the tool in this GraphDocument.
-    @param tool Tool plugin to be runned. */
-//     void runnTool(Rocs::ToolsPluginInterface * plugin);
-    
-    
 signals:
     /*! emited when a new graph is created
       \param g the created graph */

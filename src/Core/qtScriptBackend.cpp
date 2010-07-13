@@ -25,6 +25,7 @@
 #include "graphDocument.h"
 #include <QScriptEngineDebugger>
 #include <unistd.h> // usleep
+#include <ToolsPluginInterface.h>
 
 static QtScriptBackend *self;
 
@@ -41,7 +42,7 @@ static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engi
 void QtScriptBackend::stop(){
       kDebug() << "Stop requested.";
       if (!_engine) return;
-      
+
       if (_engine->isEvaluating()){
         _engine->abortEvaluation();
       }
@@ -53,15 +54,15 @@ void QtScriptBackend::stop(){
 void QtScriptBackend::start()
 {
     stop();
-    
+
     _engine = new QScriptEngine();
     emit engineCreated(_engine);
     usleep(500);
-    
+
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
     kDebug() << "ScriptBackend Created";
-    
+
     int size = _graphs->size();
     for (int i = 0; i < size; i++) {
 	kDebug() << "Setting graph" << i << "as global object";
@@ -69,14 +70,14 @@ void QtScriptBackend::start()
     }
     kDebug() << "Setting the graph list";
     createGraphList();
-   
+
     kDebug() << "Evaluating the script";
     QString error = _engine->evaluate(_script).toString();
     while( _engine && _engine->isEvaluating() ){
 	usleep(200000); /// rest a bit.
     }
    kDebug() << "Script evaluated to " << error;
-   
+
     emit finished(); kDebug() << "Finished emmited";
     emit sendDebug(error); kDebug() << "send debug emmited";
 }
@@ -87,7 +88,7 @@ bool QtScriptBackend::isRunning(){
   }
   return _runningTool;
 }
-    
+
 
 QtScriptBackend::QtScriptBackend(){
     self = this;

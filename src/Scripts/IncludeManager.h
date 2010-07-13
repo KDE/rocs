@@ -28,7 +28,7 @@ class IncludeManager {
     private:
         QList <QDir> _tempPath;
         QString processInclude ( QString arg1 );
-        QString seekFile ( QString arg1 );
+        QString seekFile ( const QString& arg1 );
         QStringList _wasIncluded;
         QDir _actualDir;
 
@@ -36,9 +36,9 @@ class IncludeManager {
         IncludeManager();
         ~IncludeManager(){ }
 
-        QString include(const QString& script, const QString &actualPath = QString());
+        QString include(const QString& script, const QString& actualPath = QString(), const QString& filename = QString());
 
-        QStringList const tempPath() const {return QStringList();}
+        QStringList const tempPath() const;
 
         /** check if the file was included before. It's avoid cyclic includes.
         filename should be path to file not only the name of file.
@@ -48,12 +48,8 @@ class IncludeManager {
         }
 
         /** insert aditional path to seek files.*/
-        void addPath(const QString str){
-            if (!_tempPath.contains(str)){
-              _tempPath << QDir(str);
-            }
-        }
-        void addPath(QStringList & str);
+        void addPath(const QString& str);
+        void addPath(const QStringList & str);
 
 };
 

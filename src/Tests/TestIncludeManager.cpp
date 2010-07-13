@@ -23,15 +23,17 @@
 #include <IncludeManager.h>
 #include <KLocalizedString>
 #include <QFile>
+#include <KDebug>
 
 void TestIncludeManager::inittestcase() {
     IncludeManager man;
-    QFile f("file.js");
+    QFile f(QDir::currentPath()+"/file.js");
     if ( f.open(QFile::WriteOnly) ){
         QTextStream tx(&f);
         tx << "include (otherFile.js)\n";
         tx << "include (file.js)";
     }
+    f.close();
 }
 
 
@@ -45,14 +47,15 @@ void TestIncludeManager::includeSimple() {
 
 void TestIncludeManager::appendToTempPath() {
     IncludeManager man;
-    QStringList inserted;
-    QString path1("/home/something");
-    QString path2("c:\\somePlace\\in\\Path");
+    QString path1("/home/something/");
+    QString path2("c:/somePlace/in/Path");
     man.addPath(path1);
     man.addPath(path2 );
-    QString str;
-    man.include(str);
-    QCOMPARE(man.tempPath(), inserted);
+
+    man.include(QString ());
+    QVERIFY(man.tempPath().contains(path1));
+//     kDebug () << man.tempPath();
+    QVERIFY(man.tempPath().contains(path2+"/"));
 }
 
 
@@ -60,14 +63,17 @@ void TestIncludeManager::appendToTempPath() {
 void TestIncludeManager::doublePathInsert() {
     IncludeManager man;
     QStringList inserted1;
-    inserted1 << "/home/something";
+    inserted1 << "/home/something/";
     inserted1 << "c:\\somePlace\\in\\Path";
     man.addPath(inserted1);
     QStringList inserted2;
     inserted2 << "/home/something";
     man.addPath(inserted2);
 
-    QCOMPARE(man.tempPath(), inserted1);
+    QCOMPARE(man.tempPath().count(inserted1.at(0)), 1);
+    man.addPath(inserted2.at(0));
+    QCOMPARE(man.tempPath().count(inserted1.at(0)), 1);
+
 }
 
 
@@ -75,12 +81,22 @@ void TestIncludeManager::findInclude() {
     IncludeManager man;
     QString str = "include ( file.js)";
 
-    QRegExp r("^\\s*include\\s*\\(\\s*\\w*.js\\s*\\)");
-    QWARN(QString::number(str.indexOf(r)).toAscii());
-    QWARN(r.cap().toAscii());
-    QCOMPARE (man.include(str), i18n("debug(\"Cannot open file %1.\")\n").arg("otherFile.js"));
+    man.addPath(QDir::currentPath());
+
+    QCOMPARE (man.include(str,QDir::currentPath(), "file.js"), i18n("debug(\"Cannot open file %1.\")\n").arg("otherFile.js"));
 }
 
+void TestIncludeManager::ignoreComments()
+{
+    IncludeManager man;
+    man.addPath(QDir::currentPath());
+    QString str = "//include ( file.js)";
+    QCOMPARE (man.include(str), QString(""));
+    str = "/*include (file.js)*/";
+    QCOMPARE (man.include(str), QString(""));
+    str = "/*include (file.js)\n\n*/";
+    QCOMPARE (man.include(str), QString(""));
+}
 
 
 

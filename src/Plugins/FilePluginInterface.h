@@ -42,6 +42,9 @@ public:
 
   virtual const QString lastError(); //return error
 
+  /** script to run after load the file*/
+  virtual const QString scriptToRun(){return QString();}
+
 private:
   class Private;
   Private * d;
