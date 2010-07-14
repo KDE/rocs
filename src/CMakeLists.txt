@@ -147,24 +147,6 @@ target_link_libraries(rocs
   ${KDE4_KNEWSTUFF3_LIBS}
 )
 
-####################### TESTS #############################
-#
-# set (testGraphs_SRCS
-#     Tests/testGraph.cpp
-#  )
-# kde4_add_executable(testGraphs ${testGraphs_SRCS} )
-#
-# target_link_libraries( testGraphs
-#   rocslib
-#   ${KDE4_KROSSUI_LIBS}
-#   ${QT_QTGUI_LIBRARY}
-#   ${QT_QTTEST_LIBRARY}
-#   ${KDE4_KDECORE_LIBS}
-#   ${QT_QTSCRIPT_LIBRARY}
-# )
-
-
-
 ################## INSTALLS ##########################
 
 install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
@@ -182,12 +164,12 @@ install( FILES
 	    ${SERVICETYPES_INSTALL_DIR}
 )
 
+
+if(BUILD_ROCS_PLUGINS)
 add_subdirectory(Plugins)
-# add_subdirectory(Plugins/importPlainTXT)
+endif(BUILD_ROCS_PLUGINS)
+
 add_subdirectory(Scripts)
-
-
-
 
 #Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
