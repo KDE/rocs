@@ -21,7 +21,7 @@
 #define IMPORTEREXPORTERMANAGER_H
 
 #include <QObject>
-#include <rocs/graphDocument.h>
+#include "Core/graphDocument.h"
 
 namespace Rocs{
 

@@ -20,7 +20,7 @@
 #include "ImporterExporterManager.h"
 #include <KFileDialog>
 #include <KLocalizedString>
-#include <rocs/FilePluginInterface.h>
+#include "Plugins/FilePluginInterface.h"
 #include <KDebug>
 #include <PluginManager.h>
 #include <KPushButton>
