@@ -1,3 +1,4 @@
+
 include_directories(
     ${KDE4_INCLUDES}
     ${QT_INCLUDES}
@@ -181,8 +182,8 @@ install( FILES
 	    ${SERVICETYPES_INSTALL_DIR}
 )
 
-add_subdirectory(Plugins/MakeComplete)
-add_subdirectory(Plugins/importPlainTXT)
+add_subdirectory(Plugins)
+# add_subdirectory(Plugins/importPlainTXT)
 add_subdirectory(Scripts)
 
 
