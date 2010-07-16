@@ -13,7 +13,14 @@ X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=KML file
+Name[hr]=KML datoteka
+Name[pt]=Ficheiro KML
+Name[sv]=KML-fil
+Name[uk]=Файл KML
 Name[x-test]=xxKML filexx
 Comment=Read and write Keyhole Markup Language files.
+Comment[pt]=Ler e gravar ficheiros no formato KML.
+Comment[sv]=Läs och skriv KML-filer (Keyhole Markup Language).
+Comment[uk]=Читання і запис файлів у форматі Keyhole Markup Language.
 Comment[x-test]=xxRead and write Keyhole Markup Language files.xx
 
