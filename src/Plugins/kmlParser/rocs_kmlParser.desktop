@@ -18,9 +18,11 @@ Name[pt]=Ficheiro KML
 Name[sv]=KML-fil
 Name[uk]=Файл KML
 Name[x-test]=xxKML filexx
+Name[zh_CN]=KML 文件
 Comment=Read and write Keyhole Markup Language files.
 Comment[pt]=Ler e gravar ficheiros no formato KML.
 Comment[sv]=Läs och skriv KML-filer (Keyhole Markup Language).
 Comment[uk]=Читання і запис файлів у форматі Keyhole Markup Language.
 Comment[x-test]=xxRead and write Keyhole Markup Language files.xx
+Comment[zh_CN]=读写 Keyhole 标记语言文件。
 
