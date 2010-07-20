@@ -20,6 +20,7 @@ Name[sv]=Dot-fil
 Name[uk]=Файл Dot
 Name[x-test]=xxDot filexx
 Name[zh_CN]=Dot 文件
+Name[zh_TW]=Dot 檔
 Comment=Read and write Graphviz files.
 Comment[pt]=Ler e gravar ficheiros do Graphviz.
 Comment[pt_BR]=Ler e gravar arquivos do Graphviz.
@@ -28,4 +29,5 @@ Comment[sv]=Läs och skriv Graphviz-filer.
 Comment[uk]=Читання і запис файлів Graphviz.
 Comment[x-test]=xxRead and write Graphviz files.xx
 Comment[zh_CN]=读写 Graphviz 文件。
+Comment[zh_TW]=讀寫 Graphviz 檔。
 
