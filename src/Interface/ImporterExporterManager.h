@@ -34,6 +34,9 @@ class ImporterExporterManager : public QObject
     GraphDocument* importFile();
     bool exportFile(GraphDocument* doc) const;
     QString& scriptToRun() {return _scriptToRun;}
+
+    void dialogExec();
+    bool hasDialog();
 };
 }
 #endif // IMPORTEREXPORTERMANAGER_H

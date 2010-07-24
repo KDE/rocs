@@ -98,9 +98,11 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
 }
 
 QPainterPath OrientedEdgeItem::createCurves() const {
-    if (_edge->from() == 0){
+    if (_edge->from() == 0 || _edge->to() == 0){
+	_edge->self_remove();
         return QPainterPath();
     }
+    
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
 
     if ( _loop ) return createLoop(Pos1);

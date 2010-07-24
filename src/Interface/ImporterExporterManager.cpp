@@ -123,3 +123,13 @@ bool ImporterExporterManager::exportFile(GraphDocument * doc) const
    // _scriptToRun = f->scriptToRun();
     return gd;
 }
+
+void Rocs::ImporterExporterManager::dialogExec()
+{
+
+}
+
+bool Rocs::ImporterExporterManager::hasDialog()
+{
+  return false;
+}

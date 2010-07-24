@@ -50,44 +50,44 @@ MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
 
 QString MakeCompleteToolPlugin::run(QObject* /*doc*/ ) const
 {
-//     GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
-//     if ( graphDoc )
-//     {
-//         Graph * graph = graphDoc->activeGraph();
-//         foreach ( Edge *e, graph->edges() )
-//         {
-//             graph->remove ( e );
-//         }
-//         foreach ( Node * n1, graph->nodes() )
-//         {
-//             foreach ( Node * n2, graph->nodes() )
-//             {
-//                 if ( n1 != n2 )
-//                     graph->addEdge ( n1,n2 );
-//             }
-//         }
-//     }
-//
-//   return QString();
+    GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
+    if ( graphDoc )
+    {
+        Graph * graph = graphDoc->activeGraph();
+        foreach ( Edge *e, graph->edges() )
+        {
+            graph->remove ( e );
+        }
+        foreach ( Node * n1, graph->nodes() )
+        {
+            foreach ( Node * n2, graph->nodes() )
+            {
+                if ( n1 != n2 )
+                    graph->addEdge ( n1,n2 );
+            }
+        }
+    }
 
-  return QString (
-      "function makeComplete(graph){"
-      "  nodes = graph.list_nodes();"
-      "  edges = graph.list_edges();"
-      "  for (var e = 0; e < edges.length; e++){"
-      "      graph.remove(edges[e]);"
-      "  }"
-      "  for (var i = 0; i < nodes.length; i++){"
-      "      for (var j = i+1; j < nodes.length; j++){"
-      "          graph.add_edge(nodes[i], nodes[j]);"
-      "      }"
-      "  }"
-      "}"
-      "for (var k = 0; k < graphs.length; k++){"
-      "   makeComplete(graphs[k]);"
-      "}"
-     );
-}
+  return QString();
+
+//   return QString (
+//       "function makeComplete(graph){"
+//       "  nodes = graph.list_nodes();"
+//       "  edges = graph.list_edges();"
+//       "  for (var e = 0; e < edges.length; e++){"
+//       "      graph.remove(edges[e]);"
+//       "  }"
+//       "  for (var i = 0; i < nodes.length; i++){"
+//       "      for (var j = i+1; j < nodes.length; j++){"
+//       "          graph.add_edge(nodes[i], nodes[j]);"
+//       "      }"
+//       "  }"
+//       "}"
+//       "for (var k = 0; k < graphs.length; k++){"
+//       "   makeComplete(graphs[k]);"
+//       "}"
+//      );
+// }
 
 // QStringList MakeCompleteToolsPlugin::authors() const
 // {

@@ -478,6 +478,7 @@ void MainWindow::importFile(){
     if (gd == 0){
         return;
     }
+    
     _mutex.lock();
     _graphVisualEditor->releaseGraphDocument();
     kDebug() << "Starting Thread";
@@ -488,6 +489,10 @@ void MainWindow::importFile(){
     setActiveGraphDocument ( _tDocument->document() );
     _graphVisualEditor->scene()->createItems();
 
+    if (importer.hasDialog()){
+	importer.dialogExec();
+    }
+    
     if (!importer.scriptToRun().isEmpty()){
       executeScript(importer.scriptToRun());
     }
@@ -501,6 +506,32 @@ void MainWindow::exportFile()
     _mutex.unlock();
 
 }
+
+
+void MainWindow::showPossibleIncludes()
+{
+   QDialog dialog(this);
+
+//    dialog.setLayout();
+   dialog.exec();
+}
+
+
+void MainWindow::runToolPlugin()
+{
+    kDebug() << "seeking for a plugin";
+    QAction *action = qobject_cast<QAction *> ( sender() );
+    
+    if (! action ){
+      return;
+    }
+    
+    if ( Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *> ( action->parent() ) ){
+	emit runTool ( plugin, activeDocument() );
+    }
+}
+
+
 #ifdef USING_QTSCRIPT
 
 void MainWindow::executeScript(const QString& text) {
@@ -537,26 +568,3 @@ void MainWindow::executeScript(const QString& text) {
 }
 
 #endif
-
-void MainWindow::showPossibleIncludes()
-{
-   QDialog dialog(this);
-
-//    dialog.setLayout();
-   dialog.exec();
-}
-
-
-void MainWindow::runToolPlugin()
-{
-  kDebug() << "seeking for a plugin";
-    QAction *action = qobject_cast<QAction *> ( sender() );
-    if ( action )
-    {
-        Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *> ( action->parent() );
-        if ( plugin ){
-          kDebug() << "Runing a plugin";
-            emit runTool ( plugin, activeDocument() );
-        }
-    }
-}
