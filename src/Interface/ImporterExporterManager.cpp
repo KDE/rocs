@@ -33,7 +33,7 @@ ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(paren
 
 bool ImporterExporterManager::exportFile(GraphDocument * doc) const
 {
-QString ext;
+    QString ext;
     foreach ( FilePluginInterface *f, PluginManager::New()->filePlugins() )
     {
         ext.append ( f->extensions().join ( "" ) );
