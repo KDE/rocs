@@ -14,6 +14,7 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=KML file
 Name[hr]=KML datoteka
+Name[nb]=KML-fil
 Name[pt]=Ficheiro KML
 Name[pt_BR]=Arquivo KML
 Name[ru]=Файл KML
