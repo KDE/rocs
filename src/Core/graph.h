@@ -84,7 +84,7 @@ public:
     /*! gets the document that holds this graph.
       \return the GraphDocument
     */
-    GraphDocument *document() const;    
+    GraphDocument *document() const;
 
     void readOnly( bool r) { _readOnly = r; }
     bool readOnly() const { return _readOnly; }
@@ -149,14 +149,14 @@ public  slots:
     \p name the name of the node.
     \return the newly created node.
     */
-    Node* addNode(QString name);
+    virtual Node* addNode(QString name);
 
     /*! creates a new edge
     \p from the 'from' node.
     \p to the 'to' node.
     \return the newly created edge.
     */
-    Edge* addEdge(Node* from, Node* to);
+    virtual Edge* addEdge(Node* from, Node* to);
 
     /*! creates a new edge
     \p name_from the name of the node that will be used as 'from'
@@ -293,7 +293,7 @@ public  slots:
 
     /*! remove this graph from the document. */
     void remove();
-    
+
 #ifdef USING_QTSCRIPT
     QScriptValue list_nodes();
     QScriptValue list_edges();

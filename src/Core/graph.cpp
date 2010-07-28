@@ -170,7 +170,7 @@ void Graph::remove(Edge *e) {
 }
 
 void Graph::setDirected(bool directed) {
-    
+
     foreach(Node *n1, _nodes) {
         foreach(Node *n2, n1->adjacent_nodes()) {
 	    // do not permit loop nodes while changing graph's state.

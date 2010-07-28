@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=Rocs/DSPlugin
+X-KDE-Derived=KPluginInfo
+Comment=Rocs Data Structure Plugin

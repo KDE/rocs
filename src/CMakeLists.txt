@@ -16,6 +16,8 @@ include_directories(
 # Preparando a biblioteca padrão.
 
 set( rocs_core_SRCS
+  Core/DSPluginManager.cpp
+  Core/DSPluginInterface.cpp
   Core/graph.cpp
   Core/edge.cpp
   Core/graphDocument.cpp
@@ -158,6 +160,7 @@ install( FILES rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
 install(FILES rocs.knsrc DESTINATION  ${CONFIG_INSTALL_DIR})
 
 install( FILES
+      Core/RocsDSPlugin.desktop
 	  Plugins/RocsToolsPlugin.desktop
 	  Plugins/RocsFilePlugin.desktop
 	DESTINATION

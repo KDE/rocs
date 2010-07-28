@@ -6,6 +6,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <QWaitCondition>
+#include "DSPluginManager.h"
 
 ThreadDocument::ThreadDocument(QWaitCondition &docCondition, QMutex &mutex, QObject *parent):
 	 QThread(parent),
@@ -35,10 +36,10 @@ QtScriptBackend *ThreadDocument::engine(){
 }
 
 void ThreadDocument::releaseDocument(){
-   if (_graphDocument) 
+   if (_graphDocument)
        _graphDocument->deleteLater();
     _graphDocument = 0;
-    
+
    if ( _engine )
       _engine->deleteLater();
     _engine = 0;
@@ -71,6 +72,7 @@ void ThreadDocument::setGraphDocument(GraphDocument * doc){
 }
 
 void ThreadDocument::run(){
+  kDebug() << Rocs::DSPluginManager::New()->listOfDS();
   loadDocument();
   exec();
 }
