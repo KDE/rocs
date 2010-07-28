@@ -48,7 +48,7 @@ MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
 }
 
 
-QString MakeCompleteToolPlugin::run(QObject* /*doc*/ ) const
+QString MakeCompleteToolPlugin::run(QObject* doc ) const
 {
     GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
     if ( graphDoc )
@@ -92,7 +92,7 @@ QString MakeCompleteToolPlugin::run(QObject* /*doc*/ ) const
 // QStringList MakeCompleteToolsPlugin::authors() const
 // {
 //   return QStringList() << i18n("Wagner Reck - wagner.reck@gmail.com");
-// }
+}
 //
 // QString MakeCompleteToolsPlugin::category()
 // {
