@@ -40,6 +40,9 @@ public:
     }
     void loadPlugins() {
         loadDSPlugins();
+        if (plugins.isEmpty())
+          return;
+        m_actualPlugin = pluginList().at(0);
     }
 
     KPluginInfo pluginInfo ( DSPluginInterface* plugin ) {
@@ -59,6 +62,9 @@ public:
     }
     QStringList listOfDS(){
       return plugins.keys();
+    }
+    QList < DSPluginInterface*> pluginList(){
+      return plugins.values();
     }
 
 private:
@@ -137,7 +143,7 @@ Graph* Rocs::DSPluginManager::createNewDS ( GraphDocument* parent ) {
 
 }
 
-KPluginInfo Rocs::DSPluginManager::pluginInfo(DSPluginInterface * plugin) const {
+KPluginInfo Rocs::DSPluginManager::pluginInfo( Rocs::DSPluginInterface* plugin) const {
     return _d->pluginInfo(plugin);
 }
 
@@ -145,4 +151,8 @@ const QStringList Rocs::DSPluginManager::listOfDS() {
     return New()->_d->listOfDS();
 }
 
+QList< Rocs::DSPluginInterface* > Rocs::DSPluginManager::pluginsList()
+{
+  return New()->_d->pluginList();
+}
 

@@ -7,7 +7,7 @@ class GraphDocument;
 class Graph;
 #include <KComponentData>
 #include "DSPluginManager.h"
-// #include <kplugininfo.h>
+#include <kplugininfo.h>
 
 namespace Rocs{
 class ROCSLIB_EXPORT DSPluginInterface: public QObject
@@ -21,12 +21,15 @@ public:
   virtual Graph* createDS(GraphDocument * parent) = 0;
 
   virtual Graph* changeToDS(Graph*) = 0;
+// QString name();
 
-//   QString name() const {
-//     if(DSPluginManager::New()->pluginInfo(this).isValid()){
-//       return DSPluginManager::New()->pluginInfo(this).name();
-//     }
-//   }
+
+  QString name() {
+    if(DSPluginManager::New()->pluginInfo(this).isValid()){
+      return DSPluginManager::New()->pluginInfo(this).name();
+    }
+    return QString();
+  }
 
 // private:
 //   class Private;

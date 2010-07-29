@@ -28,6 +28,8 @@
 #include "edge.h"
 #include "graphGroups.h"
 
+#include "DSPluginManager.h"
+
 // Default Constructor
 GraphDocument::GraphDocument(const QString name, int width,  int height)
         : QObject(0), QList<Graph*>()
@@ -108,7 +110,9 @@ void GraphDocument::setActiveGraph(Graph *g){
 }
 
 Graph* GraphDocument::addGraph(QString name) {
-    Graph *g = new Graph(this);
+
+  Graph *g = Rocs::DSPluginManager::New()->createNewDS(this);
+//     Graph *g = new Graph(this);
     g->setName(name);
     append(g);
     _activeGraph = g;

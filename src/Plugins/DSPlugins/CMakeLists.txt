@@ -11,6 +11,8 @@ Set (ListStructure_SRC ListStructure.cpp ListPlugin.cpp)
 kde4_add_plugin(rocs_ListStructure ${ListStructure_SRC} )
 target_link_libraries(rocs_ListStructure
                 ${KDE4_KDEUI_LIBS}
+                ${QT_QTSCRIPT_LIBRARY}
+                ${QT_QTSCRIPTTOOLS_LIBRARY}
                 rocslib)
 
 install(TARGETS rocs_ListStructure  DESTINATION ${PLUGIN_INSTALL_DIR})

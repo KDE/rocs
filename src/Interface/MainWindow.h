@@ -65,7 +65,7 @@ public:
 //    void debug(const QString& s);
     GraphDocument *activeDocument() const;
     QMutex& mutex();
-    
+
 private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.
@@ -75,7 +75,10 @@ private: // Methods
     int saveIfChanged();
     void finishLoadingUi();
 
-    void startThreadDocument();    
+    void startThreadDocument();
+
+    /** setup menu with data structures plugins. */
+    void setupDSPluginsAction();
 
 
 
@@ -101,28 +104,28 @@ private slots:
     void saveGraph();
     void saveGraphAs();
     void loadDocument(const QString& name = QString());
-    
+
     void importFile();
     void exportFile();
     void setupToolsPluginsAction();
-   
+
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
-    
-    
+
+
   signals:
       void startDocument(const QString& s);
       void startEvaluation();
       void stopEvaluation();
       void endThreadDocument();
-      
+
       void runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument * graphs);
 private: // Variables.
-    
+
     // Left Area:
     GraphLayers* _GraphLayers; //! Area where the nodes and edges will be modified.
     KPushButton *_btnAddGraph;
@@ -143,12 +146,12 @@ private: // Variables.
     QSplitter *_hSplitter;
 
     //! The Active Graph.
-    
+
     //! all the actions that I need to reference later.
     MoveNodeAction *_moveNodeAction;
 
     QScriptEngineDebugger *_scriptDbg;
-    
+
     //!threading and Document part
     ThreadDocument *_tDocument;
     QWaitCondition _waitForDocument;

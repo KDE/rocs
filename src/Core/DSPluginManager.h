@@ -22,6 +22,8 @@
 
 #include <QObject>
 #include "graph.h"
+#include "rocslib_export.h"
+
 class KPluginInfo;
 
 namespace Rocs{
@@ -29,7 +31,7 @@ namespace Rocs{
 class DSPluginInterface;
 
 
-class DSPluginManager : public QObject {
+class ROCSLIB_EXPORT DSPluginManager : public QObject {
   Q_OBJECT
     static DSPluginManager * self;
     DSPluginManager();
@@ -48,6 +50,9 @@ class DSPluginManager : public QObject {
 
     /** return informations about plugin.*/
     KPluginInfo pluginInfo ( DSPluginInterface* plugin ) const;
+
+
+    QList < DSPluginInterface*> pluginsList();
 
   signals:
     /** signal emited when is changing the data structure to \newDS */

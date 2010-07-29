@@ -25,17 +25,22 @@
 
 namespace Rocs{
 class ROCSLIB_EXPORT ListStructure : public Graph {
+  Q_OBJECT
   public:
 
     ListStructure ( GraphDocument* parent = 0 );
     virtual ~ListStructure();
   public slots:
+
+    virtual void setEngine ( QScriptEngine* engine );
+
     virtual Node* addNode ( QString name );
 
     virtual Edge* addEdge ( Node* from, Node* to );
 
     QScriptValue front();
     void pointTo(Node*);
+
 };
 }
 #endif // LISTSTRUCTURE_H

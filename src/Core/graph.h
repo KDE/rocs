@@ -96,7 +96,7 @@ public:
 
     /*! if QtScript is enabled for this rocs,
     \p engine is the QtScript engine that will be set for this graph. */
-    void setEngine( QScriptEngine *engine );
+    virtual void setEngine( QScriptEngine *engine );
 #endif
 
 public  slots:
@@ -338,6 +338,7 @@ private:
     bool _edgeValuesVisible;
 
 #ifdef USING_QTSCRIPT
+  protected:
     QScriptValue _value;
     QScriptEngine *_engine;
 #endif

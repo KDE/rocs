@@ -80,6 +80,7 @@
 #include "IncludeManagerSettings.h"
 #include <IncludeManager.h>
 #include "ImporterExporterManager.h"
+#include <DSPluginInterface.h>
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 {
@@ -101,6 +102,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     setActiveGraphDocument ( _tDocument->document() );
     setupToolsPluginsAction();
+    setupDSPluginsAction();
 
     connect(this, SIGNAL(startDocument(QString)), _tDocument, SLOT(loadDocument(QString)));
     connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(terminate()));
@@ -343,6 +345,24 @@ void MainWindow::setupToolsPluginsAction()
     plugActionList ( "tools_plugins", pluginList );
 }
 
+void MainWindow::setupDSPluginsAction()
+{
+    QList <QAction*> pluginList;
+    QAction* action = 0;
+    unplugActionList ( "DS_plugins" );
+    QList < Rocs::DSPluginInterface*> avaliablePlugins = Rocs::DSPluginManager::New()->pluginsList();
+    QActionGroup * group = new QActionGroup(this);
+    foreach ( Rocs::DSPluginInterface* p, avaliablePlugins )
+    {
+        action = new KAction ( p->name(), this );
+        action->setCheckable(true);
+        action->setActionGroup(group);
+//         connect ( action, SIGNAL ( triggered ( bool ) ),this, SLOT ( runToolPlugin() ) );
+        pluginList.append ( action );
+    }
+    plugActionList ( "DS_plugins", pluginList );
+}
+
 void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 {
     foreach ( QAction *action, actionCollection()->actions() ){
@@ -478,7 +498,7 @@ void MainWindow::importFile(){
     if (gd == 0){
         return;
     }
-    
+
     _mutex.lock();
     _graphVisualEditor->releaseGraphDocument();
     kDebug() << "Starting Thread";
@@ -492,7 +512,7 @@ void MainWindow::importFile(){
     if (importer.hasDialog()){
 	importer.dialogExec();
     }
-    
+
     if (!importer.scriptToRun().isEmpty()){
       executeScript(importer.scriptToRun());
     }
@@ -521,11 +541,11 @@ void MainWindow::runToolPlugin()
 {
     kDebug() << "seeking for a plugin";
     QAction *action = qobject_cast<QAction *> ( sender() );
-    
+
     if (! action ){
       return;
     }
-    
+
     if ( Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *> ( action->parent() ) ){
 	emit runTool ( plugin, activeDocument() );
     }

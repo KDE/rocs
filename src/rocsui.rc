@@ -30,6 +30,9 @@
     <Menu name="tools">
       <ActionList name="tools_plugins" />
     </Menu>
+    <Menu name="Data Strucure">
+      <ActionList name="DS_plugins" />
+    </Menu>
   </MenuBar>
 
   <ToolBar name="main" >

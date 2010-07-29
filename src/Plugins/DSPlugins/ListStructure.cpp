@@ -18,6 +18,7 @@
 */
 
 #include "ListStructure.h"
+#include "KDebug"
 
 Rocs::ListStructure::ListStructure ( GraphDocument* parent ) : Graph ( parent ) {
   setDirected(true);
@@ -34,6 +35,26 @@ Edge* Rocs::ListStructure::addEdge ( Node* from, Node* to ) {
     }
     return Graph::addEdge ( from, to );
 }
+
+void Rocs::ListStructure::setEngine ( QScriptEngine* engine )
+{
+    _engine = engine;
+
+    _value = _engine->newQObject(this);
+
+    if (! name().isEmpty() ) {
+        _engine->globalObject().setProperty(name(), _value);
+        kDebug() << name() << "It's a Linked List!.";
+    }
+
+    foreach(Node *n, nodes()) {
+        n->setEngine(engine);
+    }
+    foreach(Edge *e, edges()) {
+        e->setEngine(engine);
+    }
+}
+
 
 Node* Rocs::ListStructure::addNode ( QString name ) {
     return Graph::addNode ( name );
