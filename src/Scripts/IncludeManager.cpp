@@ -136,7 +136,7 @@ QString IncludeManager::processInclude ( QString arg1 ) {
             }
         }
     } else {
-        fileContent = i18n("debug(\"Invalid include directive: %1. Can't find file in directive.\")").arg(arg1);
+        fileContent = i18n("debug(\"Invalid include directive: %1. Cannot find file in directive.\")").arg(arg1);
     }
 
     return fileContent;
