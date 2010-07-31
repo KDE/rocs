@@ -42,7 +42,7 @@ public:
         loadDSPlugins();
         if (plugins.isEmpty())
           return;
-        m_actualPlugin = pluginList().at(0);
+        m_actualPlugin = pluginList().last();
     }
 
     KPluginInfo pluginInfo ( DSPluginInterface* plugin ) {
@@ -65,6 +65,9 @@ public:
     }
     QList < DSPluginInterface*> pluginList(){
       return plugins.values();
+    }
+    QString actualPluginName(){
+       return m_actualPlugin->name();
     }
 
 private:
@@ -156,3 +159,7 @@ QList< Rocs::DSPluginInterface* > Rocs::DSPluginManager::pluginsList()
   return New()->_d->pluginList();
 }
 
+QString Rocs::DSPluginManager::actualPlugin() const
+{
+  return _d->actualPluginName();
+}

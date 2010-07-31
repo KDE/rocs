@@ -96,7 +96,7 @@ public:
 
     /*! if QtScript is enabled for this rocs,
     \p engine is the QtScript engine that will be set for this graph. */
-    virtual void setEngine( QScriptEngine *engine );
+    virtual void setEngine( QScriptEngine *engine ) = 0;
 #endif
 
 public  slots:
@@ -295,13 +295,13 @@ public  slots:
     void remove();
 
 #ifdef USING_QTSCRIPT
-    QScriptValue list_nodes();
-    QScriptValue list_edges();
-    QScriptValue add_node(const QString& name);
-    QScriptValue add_edge(Node* from, Node* to);
-    QScriptValue node_byname(const QString& name);
-    QScriptValue begin_node();
-    QScriptValue end_nodes();
+//     QScriptValue list_nodes();
+//     QScriptValue list_edges();
+//     QScriptValue add_node(const QString& name);
+//     QScriptValue add_edge(Node* from, Node* to);
+//     QScriptValue node_byname(const QString& name);
+//     QScriptValue begin_node();
+//     QScriptValue end_nodes();
 #endif
 
 signals:
@@ -312,7 +312,7 @@ signals:
     void orientedChanged(bool b);
     void automateChanged(bool b);
 
-private:
+protected:
     bool _directed;
     NodeList _nodes;
     EdgeList _edges;

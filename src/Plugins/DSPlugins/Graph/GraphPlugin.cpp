@@ -17,35 +17,36 @@
 
 */
 
-#ifndef TESTDINAMICPROPERTIES_H
-#define TESTDINAMICPROPERTIES_H
-#include <QObject>
+#include "GraphPlugin.h"
+#include "GraphStructure.h"
+#include <KPluginFactory>
+#include <KAboutData>
 
-class TestDynamicProperties:  public QObject
+static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18n("Graph Structure") , "0.1" );
+using namespace Rocs;
+
+K_PLUGIN_FACTORY( DSPluginFactory, registerPlugin< GraphPlugin>(); )
+K_EXPORT_PLUGIN( DSPluginFactory(aboutdata) )
+
+
+GraphPlugin::GraphPlugin ( QObject* parent, const QList< QVariant >& /*args*/ )
+       : DSPluginInterface( DSPluginFactory::componentData(), parent)
 {
-     Q_OBJECT
-private slots:
-//   void initTestCase();
 
-  void cleanup();
+}
 
-  void addNodeDynamicProperty();
-  void addEdgeDynamicProperty();
-  void addGraphDynamicProperty();
+GraphPlugin::~GraphPlugin()
+{
 
-  void addToAllNodes();
-  void addToAllEdges();
+}
 
-  void removeNodeDynamicProperty();
-  void removeEdgeDynamicProperty();
-  void removeGraphDynamicProperty();
+Graph* GraphPlugin::changeToDS ( Graph* graph) {
+    return graph;
+}
 
-  void removeToAllNodes();
-  void removeToAllEdges();
+Graph* GraphPlugin::createDS ( GraphDocument* parent )
+{
+  return new GraphStructure(parent);
+//     return new Graph(parent);
+}
 
-  void MultipleProperties();
-
-  void changeNames();
-};
-
-#endif // TESTDINAMICPROPERTIES_H

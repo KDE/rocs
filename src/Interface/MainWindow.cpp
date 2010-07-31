@@ -352,12 +352,17 @@ void MainWindow::setupDSPluginsAction()
     unplugActionList ( "DS_plugins" );
     QList < Rocs::DSPluginInterface*> avaliablePlugins = Rocs::DSPluginManager::New()->pluginsList();
     QActionGroup * group = new QActionGroup(this);
+    int count = 0;
     foreach ( Rocs::DSPluginInterface* p, avaliablePlugins )
     {
         action = new KAction ( p->name(), this );
+        action->setData(count++);
         action->setCheckable(true);
+        if (p->name() == Rocs::DSPluginManager::New()->actualPlugin()){
+          action->setChecked(true);
+        }
         action->setActionGroup(group);
-//         connect ( action, SIGNAL ( triggered ( bool ) ),this, SLOT ( runToolPlugin() ) );
+        connect ( action, SIGNAL ( triggered ( bool ) ),this, SLOT ( changeDS() ) );
         pluginList.append ( action );
     }
     plugActionList ( "DS_plugins", pluginList );
@@ -551,6 +556,16 @@ void MainWindow::runToolPlugin()
     }
 }
 
+void MainWindow::changeDS(){
+    kDebug() << "seeking for a plugin";
+    QAction *action = qobject_cast<QAction *> ( sender() );
+
+    if (! action ){
+      return;
+    }
+    Rocs::DSPluginInterface *plugin = Rocs::DSPluginManager::New()->pluginsList().at(action->data().toInt() );
+    kDebug() << "Changed " << plugin->name();
+}
 
 #ifdef USING_QTSCRIPT
 

@@ -17,35 +17,31 @@
 
 */
 
-#ifndef TESTDINAMICPROPERTIES_H
-#define TESTDINAMICPROPERTIES_H
-#include <QObject>
+#ifndef GRAPHSTRUCTURE_H
+#define GRAPHSTRUCTURE_H
 
-class TestDynamicProperties:  public QObject
-{
-     Q_OBJECT
-private slots:
-//   void initTestCase();
+#include "graph.h"
+#include "rocslib_export.h"
 
-  void cleanup();
+namespace Rocs{
+class ROCSLIB_EXPORT GraphStructure : public Graph {
+  Q_OBJECT
+  public:
 
-  void addNodeDynamicProperty();
-  void addEdgeDynamicProperty();
-  void addGraphDynamicProperty();
+    GraphStructure ( GraphDocument* parent = 0 );
+    virtual ~GraphStructure();
+  public slots:
 
-  void addToAllNodes();
-  void addToAllEdges();
+    virtual void setEngine ( QScriptEngine* engine );
 
-  void removeNodeDynamicProperty();
-  void removeEdgeDynamicProperty();
-  void removeGraphDynamicProperty();
+    QScriptValue list_nodes();
+    QScriptValue list_edges();
+    QScriptValue add_node(const QString& name);
+    QScriptValue add_edge(Node* from, Node* to);
+    QScriptValue node_byname(const QString& name);
+//     QScriptValue begin_node();
+//     QScriptValue end_nodes();
 
-  void removeToAllNodes();
-  void removeToAllEdges();
-
-  void MultipleProperties();
-
-  void changeNames();
 };
-
-#endif // TESTDINAMICPROPERTIES_H
+}
+#endif // GRAPHSTRUCTURE_H

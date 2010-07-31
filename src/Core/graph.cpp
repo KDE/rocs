@@ -377,83 +377,37 @@ bool Graph::edgeValueVisibility(){
 
 #ifdef USING_QTSCRIPT
 
-QScriptValue Graph::begin_node() {
-    return _begin->scriptValue();
-}
 
-QScriptValue Graph::end_nodes()
-{
-    QScriptValue array = _engine->newArray();
-    foreach(Node* n, _ends) {
-        array.property("push").call(array, QScriptValueList() << n->scriptValue());
-    }
-    return array;
-}
 
 
 QScriptValue Graph::scriptValue() const {
     return _value;
 }
 
-void Graph::setEngine(	QScriptEngine *engine ) {
-    _engine = engine;
+// void Graph::setEngine(	QScriptEngine *engine ) {
+//     _engine = engine;
+//
+//     _value = _engine->newQObject(this);
+//
+//     if (! _name.isEmpty() ) {
+//         _engine->globalObject().setProperty(_name, _value);
+//         kDebug() << _name << "Added as global object.";
+//     }
+//
+//     foreach(Node *n, _nodes) {
+//         n->setEngine(engine);
+//     }
+//     foreach(Edge *e, _edges) {
+//         e->setEngine(engine);
+//     }
+// //    foreach(GraphGroup *g, _graphGroups) {
+// //        QScriptValue array = _engine->newArray();
+// //        foreach(Node* n, (*g) ) {
+// //            array.property("push").call(array, QScriptValueList() << n->scriptValue());
+// //        }
+// //        _engine->globalObject().setProperty(g->name(), array);
+// //    }
+// }
 
-    _value = _engine->newQObject(this);
 
-    if (! _name.isEmpty() ) {
-        _engine->globalObject().setProperty(_name, _value);
-        kDebug() << _name << "Added as global object.";
-    }
-
-    foreach(Node *n, _nodes) {
-        n->setEngine(engine);
-    }
-    foreach(Edge *e, _edges) {
-        e->setEngine(engine);
-    }
-//    foreach(GraphGroup *g, _graphGroups) {
-//        QScriptValue array = _engine->newArray();
-//        foreach(Node* n, (*g) ) {
-//            array.property("push").call(array, QScriptValueList() << n->scriptValue());
-//        }
-//        _engine->globalObject().setProperty(g->name(), array);
-//    }
-}
-
-QScriptValue Graph::list_nodes() {
-    QScriptValue array = _engine->newArray();
-    foreach(Node* n, _nodes) {
-        array.property("push").call(array, QScriptValueList() << n->scriptValue());
-    }
-    return array;
-}
-
-QScriptValue Graph::list_edges() {
-    QScriptValue array = _engine->newArray();
-    foreach(Edge* n, _edges) {
-        array.property("push").call(array, QScriptValueList() << n->scriptValue());
-    }
-    return array;
-}
-
-QScriptValue Graph::add_node(const QString& name) {
-    Node* n = addNode(name);
-    n->setEngine(_engine);
-    return n->scriptValue();
-}
-
-QScriptValue Graph::add_edge(Node* from, Node* to) {
-    Edge *e = addEdge(from, to);
-    if (e){
-      e->setEngine(_engine);
-      return e->scriptValue();
-    }
-
-    return QScriptValue();
-}
-
-QScriptValue Graph::node_byname(const QString& name) {
-    Node *n = node(name);
-    return n->scriptValue();
-}
 #endif

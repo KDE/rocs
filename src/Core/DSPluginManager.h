@@ -66,6 +66,7 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
   public slots:
       /** used to set change the data structure. */
     void changeDS( QString& newDS);
+    QString actualPlugin() const;
 
   private:
 

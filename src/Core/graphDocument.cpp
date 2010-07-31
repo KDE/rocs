@@ -246,7 +246,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         else if (str.startsWith("[Graph")) {
             QString gName = str.section(' ',1,1);
             gName.remove(']');
-            tmpGraph = new Graph(this);
+            tmpGraph = Rocs::DSPluginManager::New()->createNewDS(this);
             tmpGraph->setName(gName.toAscii());
             tmpObject = tmpGraph;
             append(tmpGraph);

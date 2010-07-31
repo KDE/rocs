@@ -81,15 +81,6 @@ private: // Methods
     void setupDSPluginsAction();
 
 
-
-
-
-
-
-
-
-
-
 private slots:
 
      void showSettings();
@@ -108,6 +99,8 @@ private slots:
     void importFile();
     void exportFile();
     void setupToolsPluginsAction();
+
+    void changeDS();
 
 public slots:
     void setActiveGraphDocument(GraphDocument *d);

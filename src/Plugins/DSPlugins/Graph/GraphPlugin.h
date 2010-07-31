@@ -17,35 +17,21 @@
 
 */
 
-#ifndef TESTDINAMICPROPERTIES_H
-#define TESTDINAMICPROPERTIES_H
-#include <QObject>
+#ifndef GRAPHPLUGIN_H
+#define GRAPHPLUGIN_H
+#include "rocslib_export.h"
+#include "DSPluginInterface.h"
 
-class TestDynamicProperties:  public QObject
-{
-     Q_OBJECT
-private slots:
-//   void initTestCase();
+namespace Rocs{
 
-  void cleanup();
+class /*ROCSLIB_EXPORT*/ GraphPlugin : public DSPluginInterface {
+  public:
+    GraphPlugin ( QObject* parent,  const QList<QVariant> & /* args*/ );
 
-  void addNodeDynamicProperty();
-  void addEdgeDynamicProperty();
-  void addGraphDynamicProperty();
+    virtual ~GraphPlugin();
 
-  void addToAllNodes();
-  void addToAllEdges();
-
-  void removeNodeDynamicProperty();
-  void removeEdgeDynamicProperty();
-  void removeGraphDynamicProperty();
-
-  void removeToAllNodes();
-  void removeToAllEdges();
-
-  void MultipleProperties();
-
-  void changeNames();
+    virtual Graph* changeToDS ( Graph* );
+    virtual Graph* createDS ( GraphDocument* parent );
 };
-
-#endif // TESTDINAMICPROPERTIES_H
+}
+#endif // GRAPHPLUGIN_H
