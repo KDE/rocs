@@ -21,6 +21,7 @@
 #include "ListStructure.h"
 #include <KPluginFactory>
 #include <KAboutData>
+#include <NodeListItem.h>
 
 static const KAboutData aboutdata("rocs_ListStructure", 0, ki18n("Linked List Structure") , "0.1" );
 using namespace Rocs;
@@ -50,3 +51,7 @@ Graph* ListPlugin::createDS ( GraphDocument* parent )
 //     return new Graph(parent);
 }
 
+QGraphicsItem* Rocs::ListPlugin::nodeItem(Node* node )
+{
+    return (new NodeListItem(node));
+}

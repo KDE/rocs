@@ -98,13 +98,15 @@ public:
         }
     }
 
+
+    DSPluginInterface * m_actualPlugin;
+
 private:
 
     typedef KPluginInfo::List KPluginList;
     KPluginList m_DSPluginsInfo;
 
     QHash<QString, DSPluginInterface*> m_plugins;
-    DSPluginInterface * m_actualPlugin;
     QObject* m_parent;
 
 
@@ -204,4 +206,9 @@ QList< Rocs::DSPluginInterface* > Rocs::DSPluginManager::pluginsList()
 QString Rocs::DSPluginManager::actualPlugin() const
 {
     return _d->actualPluginName();
+}
+
+QGraphicsItem* Rocs::DSPluginManager::nodeItem(Node* node)
+{
+  return _d->m_actualPlugin->nodeItem(node);
 }

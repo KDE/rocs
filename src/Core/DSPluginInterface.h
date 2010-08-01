@@ -3,6 +3,7 @@
 
 #include "rocslib_export.h"
 
+class QGraphicsItem;
 class GraphDocument;
 class Graph;
 #include <KComponentData>
@@ -31,9 +32,8 @@ public:
     return QString();
   }
 
-// private:
-//   class Private;
-//   Private * d;
+  virtual QGraphicsItem* nodeItem(Node*)=0;
+
 };
 }
 #endif // DSPLUGININTERFACE_H

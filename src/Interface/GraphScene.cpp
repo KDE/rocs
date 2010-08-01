@@ -35,6 +35,7 @@
 #include "NodePropertiesWidget.h"
 #include "MainWindow.h"
 #include "edgepropertieswidget.h"
+#include <DSPluginManager.h>
 
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
     _graphDocument = 0;
@@ -85,7 +86,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     if (gd == 0) {
         return;
     }
-    
+
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
     QGraphicsRectItem *n = new QGraphicsRectItem(0,0, gd->width(), gd->height());
     n->setFlag(QGraphicsItem::ItemIsSelectable, false);
@@ -125,7 +126,7 @@ void GraphScene::connectGraphSignals(Graph *g){
 }
 
 QGraphicsItem *GraphScene::createNode(Node *n) {
-    NodeItem *nItem = new NodeItem(n);
+    NodeItem *nItem = (NodeItem*)(Rocs::DSPluginManager::New()->nodeItem(n));// new NodeItem(n);
     addItem(nItem);
     kDebug() << "Node Item Created";
     return nItem;
@@ -152,7 +153,7 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
         wheelEvent->ignore();
         return;
     }
-    
+
     Node *movableNode = nitem->node();
     int numDegrees = wheelEvent->delta();
     if (wheelEvent->orientation() == Qt::Vertical) {
@@ -226,7 +227,7 @@ void GraphScene::updateDocument() {
         kDebug() << "Graph Document is null. Please hit the developer.";
         return;
     }
-    
+
     clear();
     kDebug() << "Graph Document Size: " << _graphDocument->size();
     int size = _graphDocument->size();

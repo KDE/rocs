@@ -6,7 +6,7 @@ ADD_DEFINITIONS(-DQT_NO_DEBUG)
 ADD_DEFINITIONS(-DQT_SHARED)
 
 
-Set (GraphStructure_SRC GraphStructure.cpp GraphPlugin.cpp)
+Set (GraphStructure_SRC GraphStructure.cpp GraphPlugin.cpp ../../../GraphicsItem/NodeItem.cpp)
 
 kde4_add_plugin(rocs_GraphStructure ${GraphStructure_SRC} )
 target_link_libraries(rocs_GraphStructure

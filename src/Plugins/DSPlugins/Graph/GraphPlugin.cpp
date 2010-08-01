@@ -21,6 +21,7 @@
 #include "GraphStructure.h"
 #include <KPluginFactory>
 #include <KAboutData>
+#include <NodeItem.h>
 
 static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18n("Graph Structure") , "0.1" );
 using namespace Rocs;
@@ -50,3 +51,8 @@ Graph* GraphPlugin::createDS ( GraphDocument* parent )
 //     return new Graph(parent);
 }
 
+QGraphicsItem* Rocs::GraphPlugin::nodeItem(Node* node)
+{
+    QGraphicsItem * item = new NodeItem(node);
+    return item;
+}

@@ -24,6 +24,7 @@
 #include "graph.h"
 #include "rocslib_export.h"
 
+class QGraphicsItem;
 class KPluginInfo;
 
 namespace Rocs{
@@ -53,6 +54,8 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
 
 
     QList < DSPluginInterface*> pluginsList();
+
+    QGraphicsItem * nodeItem(Node* node);
 
   signals:
     /** signal emited when is changing the data structure to \newDS */

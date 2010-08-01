@@ -32,6 +32,8 @@ class /*ROCSLIB_EXPORT*/ ListPlugin : public DSPluginInterface {
 
     virtual Graph* changeToDS ( Graph* );
     virtual Graph* createDS ( GraphDocument* parent );
+
+    virtual QGraphicsItem* nodeItem(Node* );
 };
 }
 #endif // LISTPLUGIN_H
