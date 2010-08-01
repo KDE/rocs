@@ -40,7 +40,7 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
     static DSPluginManager * New();
 
     /** build a new graph using actual data structure. */
-    static Graph * createNewDS(GraphDocument * parent = 0);
+    static Graph * createNewDS(GraphDocument* parent, const QString& pluginName = QString());
 
     /** When the DS pluin  is changed, all the existent graphs must be 'rebuild' with the new DS. If is not possible to change to a new data structure without losing data, then user should be asked to continue or nor. If user say to not continue, all ready done job should be undo.*/
     static Graph * changeToDS(Graph*);
@@ -65,7 +65,8 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
 
   public slots:
       /** used to set change the data structure. */
-    void changeDS( QString& newDS);
+    void changeActiveDS();
+    void changeActiveDS( const QString& newDS);
     QString actualPlugin() const;
 
   private:

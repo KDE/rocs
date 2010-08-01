@@ -127,6 +127,7 @@ private:
     bool _modified;
     bool _saved;
     Graph *_activeGraph;
+    QString _DSType;
 };
 
 #endif

@@ -39,6 +39,7 @@ GraphDocument::GraphDocument(const QString name, int width,  int height)
     _height = height;
     _modified = false;
     _saved = false;
+    _DSType = Rocs::DSPluginManager::New()->actualPlugin();
 }
 
 GraphDocument::GraphDocument(const GraphDocument& gd)
@@ -47,7 +48,7 @@ GraphDocument::GraphDocument(const GraphDocument& gd)
     _name = gd.name();
     _width = gd.width();
     _height = gd.height();
-
+    _DSType = gd._DSType;
     foreach (Graph *g, gd) {
         append(g);
     }
@@ -111,7 +112,8 @@ void GraphDocument::setActiveGraph(Graph *g){
 
 Graph* GraphDocument::addGraph(QString name) {
 
-  Graph *g = Rocs::DSPluginManager::New()->createNewDS(this);
+
+  Graph *g = Rocs::DSPluginManager::New()->createNewDS(this, _DSType);
 //     Graph *g = new Graph(this);
     g->setName(name);
     append(g);

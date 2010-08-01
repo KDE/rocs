@@ -25,11 +25,13 @@
 #include <KDebug>
 
 #include <QHash>
+#include <QAction>
+
 namespace Rocs {
 class DSPluginManagerPrivate {
 public:
-    DSPluginManagerPrivate(QObject * parent):m_parent(parent){
-      m_actualPlugin = 0;
+    DSPluginManagerPrivate(QObject * parent):m_parent(parent) {
+        m_actualPlugin = 0;
     }
 
     Graph* changeToDS ( Graph* graph ) {
@@ -40,34 +42,60 @@ public:
     }
     void loadPlugins() {
         loadDSPlugins();
-        if (plugins.isEmpty())
-          return;
+        if (m_plugins.isEmpty())
+            return;
         m_actualPlugin = pluginList().last();
     }
 
     KPluginInfo pluginInfo ( DSPluginInterface* plugin ) {
-        QString name = plugins.key(plugin);
-        foreach (KPluginInfo inf, m_DSPluginsInfo){
-          if (inf.name() == name){
-              return inf;
-          }
+        QString name = m_plugins.key(plugin);
+        foreach (KPluginInfo inf, m_DSPluginsInfo) {
+            if (inf.name() == name) {
+                return inf;
+            }
         }
         return KPluginInfo();
     }
-    Graph* createNewDS ( GraphDocument* arg1 ){
-      if ( m_actualPlugin ) {
-          return m_actualPlugin->createDS ( arg1 );
-      }
-      return 0;
+    Graph* createNewDS ( GraphDocument* arg1 , const QString & pluginName ) {
+        if (!pluginName.isEmpty()) {
+            Rocs::DSPluginInterface * plugin = m_plugins.value(pluginName);
+            if (plugin) {
+                return plugin->createDS ( arg1 );
+            }
+        } else {
+            if ( m_actualPlugin ) {
+                return m_actualPlugin->createDS ( arg1 );
+            }
+        }
+        return 0;
     }
-    QStringList listOfDS(){
-      return plugins.keys();
+    QStringList listOfDS() {
+        return m_plugins.keys();
     }
-    QList < DSPluginInterface*> pluginList(){
-      return plugins.values();
+    QList < DSPluginInterface*> pluginList() {
+        return m_plugins.values();
     }
-    QString actualPluginName(){
-       return m_actualPlugin->name();
+    QString actualPluginName() {
+        return m_actualPlugin->name();
+    }
+    Rocs::DSPluginInterface* plugin(const QString &pluginName) {
+
+        Rocs::DSPluginInterface * plugin = m_plugins.value(pluginName);
+        if (plugin)
+            return plugin;
+        return 0;
+//         foreach (Rocs::DSPluginInterface * plugin, plugins.values()) {
+//             kDebug() << plugin->name();
+//             if (plugin->name() == pluginName) {
+//                 return plugin;
+//             }
+//             return 0;
+//         }
+    }
+    void setActivePlugin(const QString &pluginName) {
+        if (Rocs::DSPluginInterface * plg = plugin(pluginName)) {
+            m_actualPlugin = plg;
+        }
     }
 
 private:
@@ -75,7 +103,7 @@ private:
     typedef KPluginInfo::List KPluginList;
     KPluginList m_DSPluginsInfo;
 
-    QHash<QString, DSPluginInterface*> plugins;
+    QHash<QString, DSPluginInterface*> m_plugins;
     DSPluginInterface * m_actualPlugin;
     QObject* m_parent;
 
@@ -86,7 +114,7 @@ private:
             QString error;
             DSPluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<DSPluginInterface> ( QString::fromLatin1 ( "Rocs/DSPlugin" ), QString::fromLatin1 ( "[Name]=='%1'" ).arg ( pluginInfo.name() ), m_parent, QVariantList(), &error );
             if ( plugin ) {
-                plugins.insert ( pluginInfo.name(), plugin );
+                m_plugins.insert ( pluginInfo.name(), plugin );
                 pluginInfo.setPluginEnabled ( true );
                 return true;
             } else {
@@ -116,7 +144,7 @@ Rocs::DSPluginManager* Rocs::DSPluginManager::self = 0;
 
 Rocs::DSPluginManager::DSPluginManager() :_d ( new DSPluginManagerPrivate(this) ) {
 
-  _d->loadPlugins();
+    _d->loadPlugins();
 }
 
 Rocs::DSPluginManager* Rocs::DSPluginManager::New() {
@@ -127,9 +155,24 @@ Rocs::DSPluginManager* Rocs::DSPluginManager::New() {
 }
 
 
-void Rocs::DSPluginManager::changeDS ( QString &newDS ) {
+void Rocs::DSPluginManager::changeActiveDS()
+{
+    QAction *action = qobject_cast<QAction *> ( sender() );
+
+    if (! action ) {
+        return;
+    }
+    changeActiveDS ( Rocs::DSPluginManager::New()->pluginsList().at(action->data().toInt() )->name() );
+
+}
+
+
+void Rocs::DSPluginManager::changeActiveDS (const QString &newDS ) {
     if ( listOfDS().contains ( newDS ) ) {
         emit changingDS ( newDS );
+        kDebug() << newDS << _d->actualPluginName();
+        _d->setActivePlugin(newDS);
+        kDebug() << newDS << _d->actualPluginName();
         emit DSChangedTo ( newDS );
         return;
     }
@@ -141,8 +184,8 @@ Graph* Rocs::DSPluginManager::changeToDS ( Graph* graph ) {
 
 }
 
-Graph* Rocs::DSPluginManager::createNewDS ( GraphDocument* parent ) {
-    return New()->_d->createNewDS(parent);
+Graph* Rocs::DSPluginManager::createNewDS ( GraphDocument* parent , const QString & pluginName) {
+    return New()->_d->createNewDS(parent, pluginName);
 
 }
 
@@ -156,10 +199,10 @@ const QStringList Rocs::DSPluginManager::listOfDS() {
 
 QList< Rocs::DSPluginInterface* > Rocs::DSPluginManager::pluginsList()
 {
-  return New()->_d->pluginList();
+    return New()->_d->pluginList();
 }
 
 QString Rocs::DSPluginManager::actualPlugin() const
 {
-  return _d->actualPluginName();
+    return _d->actualPluginName();
 }

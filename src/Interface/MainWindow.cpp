@@ -362,7 +362,7 @@ void MainWindow::setupDSPluginsAction()
           action->setChecked(true);
         }
         action->setActionGroup(group);
-        connect ( action, SIGNAL ( triggered ( bool ) ),this, SLOT ( changeDS() ) );
+        connect ( action, SIGNAL ( triggered ( bool ) ),Rocs::DSPluginManager::New(), SLOT ( changeActiveDS()) );
         pluginList.append ( action );
     }
     plugActionList ( "DS_plugins", pluginList );
@@ -564,6 +564,7 @@ void MainWindow::changeDS(){
       return;
     }
     Rocs::DSPluginInterface *plugin = Rocs::DSPluginManager::New()->pluginsList().at(action->data().toInt() );
+
     kDebug() << "Changed " << plugin->name();
 }
 
