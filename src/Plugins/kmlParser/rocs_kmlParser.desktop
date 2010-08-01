@@ -28,6 +28,7 @@ Name[zh_CN]=KML 文件
 Name[zh_TW]=KML 檔
 Comment=Read and write Keyhole Markup Language files.
 Comment[en_GB]=Read and write Keyhole Markup Language files.
+Comment[es]=Leer y escribir archivos del lenguaje de marcas Keyhole.
 Comment[pt]=Ler e gravar ficheiros no formato KML.
 Comment[pt_BR]=Ler e gravar arquivos KML (Keyhole Markup Language).
 Comment[ru]=Чтение и запись в файл KML (язык разметки Keyhole)

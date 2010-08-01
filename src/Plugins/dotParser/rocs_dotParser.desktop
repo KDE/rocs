@@ -14,6 +14,7 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=Dot file
 Name[en_GB]=Dot file
+Name[es]=Archivo Dot
 Name[pt]=Ficheiro do Dot
 Name[pt_BR]=Arquivo Dot
 Name[ru]=Файл Dot
