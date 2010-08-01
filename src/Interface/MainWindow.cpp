@@ -371,6 +371,9 @@ void MainWindow::setupDSPluginsAction()
 
 void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 {
+    //Ensure that is only on signal
+//     disconnect(d);
+
     foreach ( QAction *action, actionCollection()->actions() ){
         if ( AbstractAction *absAction = qobject_cast<AbstractAction*> ( action ) ){
             absAction->setActiveGraphDocument ( d );
@@ -379,16 +382,17 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 
     _graphVisualEditor->setActiveGraphDocument ( d );
 
-    connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)), _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,GraphDocument*)));
+    connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)),
+             _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,GraphDocument*)),Qt::UniqueConnection);
 
-    connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)));
-    connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)));
+    connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)),Qt::UniqueConnection);
+    connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)),Qt::UniqueConnection);
 
-    connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()));
+    connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()),Qt::UniqueConnection);
 
-    connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)));
-    connect( _tDocument->engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-    connect( _tDocument->engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
+    connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)),Qt::UniqueConnection);
+    connect( _tDocument->engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)),Qt::UniqueConnection);
+    connect( _tDocument->engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()),Qt::UniqueConnection);
 
 
     _GraphLayers->populate();
