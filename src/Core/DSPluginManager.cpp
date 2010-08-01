@@ -169,12 +169,11 @@ void Rocs::DSPluginManager::changeActiveDS()
 
 void Rocs::DSPluginManager::changeActiveDS (const QString &newDS ) {
     if ( listOfDS().contains ( newDS ) ) {
-        emit changingDS ( newDS );
+
         kDebug() << newDS << _d->actualPluginName();
         _d->setActivePlugin(newDS);
-        kDebug() << newDS << _d->actualPluginName();
-        emit DSChangedTo ( newDS );
-        return;
+        emit changingDS ( newDS );
+//         emit DSChangedTo ( newDS );
     }
 }
 

@@ -29,6 +29,9 @@ class ROCSLIB_EXPORT ListStructure : public Graph {
   public:
 
     ListStructure ( GraphDocument* parent = 0 );
+
+    ListStructure(Graph& other);
+
     virtual ~ListStructure();
   public slots:
 

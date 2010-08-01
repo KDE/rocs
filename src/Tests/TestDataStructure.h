@@ -17,36 +17,22 @@
 
 */
 
-#include "GraphPlugin.h"
-#include "GraphStructure.h"
-#include <KPluginFactory>
-#include <KAboutData>
+#ifndef TESTDATASTRUCTURE_H
+#define TESTDATASTRUCTURE_H
+#include <QObject>
 
-static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18n("Graph Structure") , "0.1" );
-using namespace Rocs;
-
-K_PLUGIN_FACTORY( DSPluginFactory, registerPlugin< GraphPlugin>(); )
-K_EXPORT_PLUGIN( DSPluginFactory(aboutdata) )
-
-
-GraphPlugin::GraphPlugin ( QObject* parent, const QList< QVariant >& /*args*/ )
-       : DSPluginInterface( DSPluginFactory::componentData(), parent)
+class TestDataStructure: public QObject
 {
+    Q_OBJECT
+    private slots:
+        void inittestcase();
 
-}
+        void create();
 
-GraphPlugin::~GraphPlugin()
-{
+        void changeAndCreate();
 
-}
+        void convert();
 
-Graph* GraphPlugin::changeToDS ( Graph* graph) {
-    return new GraphStructure(*graph);
-}
+};
 
-Graph* GraphPlugin::createDS ( GraphDocument* parent )
-{
-  return new GraphStructure(parent);
-//     return new Graph(parent);
-}
-
+#endif // TESTDATASTRUCTURE_H

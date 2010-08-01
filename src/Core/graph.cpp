@@ -42,6 +42,40 @@ Graph::Graph(GraphDocument *parent) : QObject(parent) {
     _edgeValuesVisible = true;
 }
 
+Graph::Graph(Graph& other): QObject(other.parent()){
+    _directed = other._directed;
+    _automate = other._automate;
+    _readOnly = other._readOnly;
+    _document = other._document;
+    _begin = other._begin;
+    calcRelativeCenter();
+    _nodeDefaultColor = other._nodeDefaultColor;
+    _edgeDefaultColor = other._edgeDefaultColor;
+    _nodeNamesVisible = other._nodeNamesVisible;
+    _nodeValuesVisible = other._nodeValuesVisible;
+    _edgeNamesVisible = other._edgeNamesVisible;
+    _edgeValuesVisible = other._edgeValuesVisible;
+    QHash <Node*, Node* > nodeToNode;
+    foreach(Node *n, other._nodes){
+      Node* newNode = addNode(n->name());
+      newNode->setColor(n->color());
+      newNode->setValue(n->value());
+      newNode->setX(n->x());
+      newNode->setY(n->y());
+      nodeToNode.insert(n, newNode);
+
+    }
+    foreach(Edge *e, other._edges){
+      Node* from =  nodeToNode.value(e->from());
+      Node* to =  nodeToNode.value(e->to());
+
+      Edge* newEdge = addEdge(from, to);
+      newEdge->setColor(e->color());
+      newEdge->setValue(e->value());
+    }
+}
+
+
 Graph::~Graph() {
     foreach(Edge* e,  _edges) {
         remove(e);

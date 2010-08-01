@@ -75,9 +75,9 @@ public slots:
     Graph *activeGraph(){ return _activeGraph; }
     void setActiveGraph(Graph *g);
 
-    /* * Run the tool in this GraphDocument.
-    @param tool Tool plugin to be runned. */
-//     void runnTool(Rocs::ToolsPluginInterface * plugin);
+    /** Convert actual DS to newDS if is needed.
+    @param newDS name of new data structure to be converted. */
+    void convertToDS(QString newDS);
 
     /*! set the height of the working area
         \param height the new height of the document.

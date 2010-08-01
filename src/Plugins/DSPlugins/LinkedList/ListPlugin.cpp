@@ -41,7 +41,7 @@ ListPlugin::~ListPlugin()
 }
 
 Graph* ListPlugin::changeToDS ( Graph* graph) {
-    return graph;
+    return new ListStructure(*graph);
 }
 
 Graph* ListPlugin::createDS ( GraphDocument* parent )

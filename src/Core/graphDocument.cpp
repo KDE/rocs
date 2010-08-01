@@ -50,7 +50,7 @@ GraphDocument::GraphDocument(const GraphDocument& gd)
     _height = gd.height();
     _DSType = gd._DSType;
     foreach (Graph *g, gd) {
-        append(g);
+        append(Rocs::DSPluginManager::New()->changeToDS(g));
     }
 }
 
@@ -289,9 +289,20 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
     kDebug() << "Graph Document Loaded.";
 }
 
-
-// void GraphDocument::runnTool(Rocs::ToolsPluginInterface * plugin){
-// 	QString run = plugin->run(this);
-//
-// 	//executeScript(run);
-// }
+void GraphDocument::convertToDS(QString newDS){
+    if (newDS != _DSType){
+        kDebug() << "Need convert doc from " << _DSType << " to "<< newDS ;
+        _DSType = newDS;
+        int numGraphs = count();
+        for (int i = 0 ; i < numGraphs; ++i){
+            Graph * g = Rocs::DSPluginManager::New()->changeToDS(at(i));
+            if (at(i) == _activeGraph)
+              _activeGraph = g;
+            append(g);
+        }
+        for (int i = 0 ; i < numGraphs; ++i){
+            at(0)->deleteLater();
+            removeAt(0);
+        }
+    }
+}

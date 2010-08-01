@@ -104,6 +104,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
     setupToolsPluginsAction();
     setupDSPluginsAction();
 
+    connect(Rocs::DSPluginManager::New(), SIGNAL(DSChangedTo(QString)), this, SLOT(dsChanged()));
     connect(this, SIGNAL(startDocument(QString)), _tDocument, SLOT(loadDocument(QString)));
     connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(terminate()));
 }
@@ -556,16 +557,18 @@ void MainWindow::runToolPlugin()
     }
 }
 
-void MainWindow::changeDS(){
-    kDebug() << "seeking for a plugin";
-    QAction *action = qobject_cast<QAction *> ( sender() );
+void MainWindow::dsChanged(){
+    kDebug() << "Data structure was changed, need to reload graphic part.";
 
-    if (! action ){
-      return;
-    }
-    Rocs::DSPluginInterface *plugin = Rocs::DSPluginManager::New()->pluginsList().at(action->data().toInt() );
-
-    kDebug() << "Changed " << plugin->name();
+    setActiveGraphDocument(_tDocument->document());
+//     QAction *action = qobject_cast<QAction *> ( sender() );
+//
+//     if (! action ){
+//       return;
+//     }
+//     Rocs::DSPluginInterface *plugin = Rocs::DSPluginManager::New()->pluginsList().at(action->data().toInt() );
+//
+//     kDebug() << "Changed " << plugin->name();
 }
 
 #ifdef USING_QTSCRIPT

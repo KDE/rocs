@@ -69,6 +69,8 @@ public:
     */
     Graph(GraphDocument *parent = 0);
 
+    Graph(Graph& other);
+
     /*! destructor */
     ~Graph();
 

@@ -48,6 +48,7 @@ void ThreadDocument::releaseDocument(){
 void ThreadDocument::createEmptyDocument(){
   releaseDocument();
   _graphDocument = new GraphDocument(i18n("Untitled"), 800, 600);
+  connect (Rocs::DSPluginManager::New(), SIGNAL(changingDS(QString)), _graphDocument, SLOT(convertToDS(QString)));
   _engine = new QtScriptBackend();
   _docCondition.wakeAll();
   kDebug() << "Waking All";
@@ -71,8 +72,13 @@ void ThreadDocument::setGraphDocument(GraphDocument * doc){
   _docCondition.wakeAll();
 }
 
+
+
+
 void ThreadDocument::run(){
-  kDebug() << Rocs::DSPluginManager::New()->listOfDS();
+
+  Rocs::DSPluginManager::New();
+
   loadDocument();
   exec();
 }

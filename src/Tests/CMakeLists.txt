@@ -52,3 +52,17 @@ add_test(TestIncludeManager TestIncludeManager)
 
 
 
+#Data structure
+set( test_DataStructure_SRC TestDataStructure.cpp)
+
+
+
+kde4_add_executable( TestDataStructure ${test_DataStructure_SRC})
+target_link_libraries( TestDataStructure
+        rocslib
+        ${QT_QTTEST_LIBRARY}
+        ${KDE4_KDECORE_LIBS}
+        ${QT_QTSCRIPT_LIBRARY}
+        ${KDE4_KIO_LIBS}
+)
+add_test(TestDataStructure TestDataStructure)

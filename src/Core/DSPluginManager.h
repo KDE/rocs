@@ -56,10 +56,10 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
 
   signals:
     /** signal emited when is changing the data structure to \newDS */
-    void changingDS(QString newDS);
+    void changingDS(const QString &newDS);
 
     /** this signal is emited at end of change of DS. This is used to say that the change was a success.*/
-    void DSChangedTo(QString);
+    void DSChangedTo(const QString &newDS);
 
 
 

@@ -24,6 +24,12 @@ Rocs::ListStructure::ListStructure ( GraphDocument* parent ) : Graph ( parent ) 
   setDirected(true);
 }
 
+Rocs::ListStructure::ListStructure(Graph& other): Graph(other)
+{
+  setDirected(true);
+}
+
+
 Rocs::ListStructure::~ListStructure() {
 
 }

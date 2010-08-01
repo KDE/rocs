@@ -40,24 +40,24 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
     GraphDocument *document() const {return _graphDocument;}
     bool isRunning();
     QtScriptBackend* engine();
-    
+
     /** release actual document and set the doc */
     void setGraphDocument(GraphDocument * doc);
     //void setDocumentName(const QString& name);
-    
-    
+
+
   public slots:
     void run();
     void createEmptyDocument();
     void loadDocument(const QString& name = QString());
-    
+
   private:
     /** Release actual document */
     void releaseDocument();
-    
+
     QtScriptBackend* _engine;
     GraphDocument * _graphDocument;
-    QWaitCondition &_docCondition;    
+    QWaitCondition &_docCondition;
     QMutex &_mutex;
     QString _documentName;
 

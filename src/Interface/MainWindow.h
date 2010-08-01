@@ -100,7 +100,7 @@ private slots:
     void exportFile();
     void setupToolsPluginsAction();
 
-    void changeDS();
+    void dsChanged();
 
 public slots:
     void setActiveGraphDocument(GraphDocument *d);

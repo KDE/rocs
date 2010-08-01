@@ -21,8 +21,12 @@
 #include "KDebug"
 
 Rocs::GraphStructure::GraphStructure ( GraphDocument* parent ) : Graph ( parent ) {
-  setDirected(true);
 }
+
+Rocs::GraphStructure::GraphStructure(Graph& other): Graph(other){
+
+}
+
 
 Rocs::GraphStructure::~GraphStructure() {
 
