@@ -58,7 +58,7 @@ void TestDataStructure::convert()
     DSPluginManager::New()->changeActiveDS(DSPluginManager::New()->pluginsList().at(1)->name());
     GraphDocument doc("teste");
     QSignalSpy spy(DSPluginManager::New(), SIGNAL(changingDS(QString)));
-    connect(DSPluginManager::New(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
+//     connect(DSPluginManager::New(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
     Graph * graph = doc.addGraph("Graph1");
     graph->addNode("node1");
@@ -72,21 +72,22 @@ void TestDataStructure::convert()
 
     //Change plugin.
     DSPluginManager::New()->changeActiveDS(DSPluginManager::New()->pluginsList().at(0)->name());
-    QCOMPARE(doc.count(), 2);
-    QVERIFY(doc.at(0)->directed());
-    QVERIFY(doc.at(1)->directed());
-    QCOMPARE(doc.at(0)->metaObject()->className(), "Rocs::ListStructure");
-    QCOMPARE(doc.at(1)->metaObject()->className(), "Rocs::ListStructure");
+    doc.convertToDS(DSPluginManager::New()->actualPlugin());
+    GraphDocument * newDoc = &doc;
 
-    graph =  doc.at(0);
+    QCOMPARE(newDoc->count(), 2);
+    QVERIFY(newDoc->at(0)->directed());
+    QVERIFY(newDoc->at(1)->directed());
+    QCOMPARE(newDoc->at(0)->metaObject()->className(), "Rocs::ListStructure");
+    QCOMPARE(newDoc->at(1)->metaObject()->className(), "Rocs::ListStructure");
+
+    graph =  newDoc->at(0);
     QCOMPARE (graph->nodes().count(), 2);
     QCOMPARE (graph->edges().count(), 1);
 
-    graph =  doc.at(1);
+    graph =  newDoc->at(1);
     QCOMPARE (graph->nodes().count(), 2);
     QCOMPARE (graph->edges().count(), 1);
-
-
 
 }
 

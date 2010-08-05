@@ -7,11 +7,14 @@
 #include <KLocale>
 #include <QWaitCondition>
 #include "DSPluginManager.h"
+#include "DocumentManager.h"
+#include <PluginManager.h>
 
 ThreadDocument::ThreadDocument(QWaitCondition &docCondition, QMutex &mutex, QObject *parent):
 	 QThread(parent),
 	 _docCondition(docCondition),_mutex(mutex)
 {
+     m_docManager = 0;
      _graphDocument = 0;
      _engine = 0;
     // _loading = false;
@@ -19,56 +22,79 @@ ThreadDocument::ThreadDocument(QWaitCondition &docCondition, QMutex &mutex, QObj
 }
 
 ThreadDocument::~ThreadDocument(){
-    if(_engine) delete _engine;
-    delete _graphDocument;
+//     m_docManager->deleteLater();
+//     Rocs::DSPluginManager::New()->deleteLater();
+//     Rocs::PluginManager::New()->deleteLater();
+//     if(_engine) delete _engine;
+//     delete _graphDocument;
+
 }
 
 // ThreadDocument::setDocumentName(const QString& name){
 //     _name = name;
 // }
-bool ThreadDocument::isRunning(){
-    if (!_engine) return false;
-    return _engine->isRunning();
+
+void ThreadDocument::terminate(){
+  m_docManager->deleteLater();
+  Rocs::DSPluginManager::New()->deleteLater();
+  Rocs::PluginManager::New()->deleteLater();
+  QThread::terminate();
 }
 
-QtScriptBackend *ThreadDocument::engine(){
-    return _engine;
+bool ThreadDocument::isRunning() const{
+    if (!engine()) return false;
+    return engine()->isRunning();
 }
 
-void ThreadDocument::releaseDocument(){
-   if (_graphDocument)
-       _graphDocument->deleteLater();
-    _graphDocument = 0;
-
-   if ( _engine )
-      _engine->deleteLater();
-    _engine = 0;
+GraphDocument* ThreadDocument::document() const
+{
+  return m_docManager->activeDocument();
 }
 
-void ThreadDocument::createEmptyDocument(){
-  releaseDocument();
-  _graphDocument = new GraphDocument(i18n("Untitled"), 800, 600);
-  connect (Rocs::DSPluginManager::New(), SIGNAL(changingDS(QString)), _graphDocument, SLOT(convertToDS(QString)));
-  _engine = new QtScriptBackend();
-  _docCondition.wakeAll();
-  kDebug() << "Waking All";
+
+QtScriptBackend *ThreadDocument::engine() const{
+
+    return  m_docManager->activeDocument()->engineBackend();
 }
+
+// void ThreadDocument::releaseDocument(){
+//    if (_graphDocument)
+//        _graphDocument->deleteLater();
+//     _graphDocument = 0;
+//
+//    if ( _engine )
+//       _engine->deleteLater();
+//     _engine = 0;
+// }
+
+// void ThreadDocument::createEmptyDocument(){
+//   releaseDocument();
+//   _graphDocument = new GraphDocument(i18n("Untitled"), 800, 600);
+//   connect (Rocs::DSPluginManager::New(), SIGNAL(changingDS(QString)), _graphDocument, SLOT(convertToDS(QString)));
+//   _engine = new QtScriptBackend();
+//   _docCondition.wakeAll();
+//   kDebug() << "Waking All";
+// }
 
 void ThreadDocument::loadDocument(const QString& name){
-    createEmptyDocument();
+//     createEmptyDocument();
     if ( name.isEmpty() ){
-        _graphDocument->addGraph ( i18n ( "Untitled0" ) );
+      GraphDocument * doc = new GraphDocument( i18n ( "Untitled0" ));
+      doc->addGraph ( i18n ( "Untitled0" ) );
+      m_docManager->addDocument(doc);
+
     }else{
-        _graphDocument->loadFromInternalFormat ( name );
+        m_docManager->activeDocument()->loadFromInternalFormat ( name );
     }
     _docCondition.wakeAll();
 }
 
 void ThreadDocument::setGraphDocument(GraphDocument * doc){
-  releaseDocument();
-  _graphDocument = doc;
-  doc->moveToThread(this);
-  _engine = new QtScriptBackend();
+//   releaseDocument();
+  m_docManager->addDocument(doc);
+//   _graphDocument = doc;
+
+//   _engine = new QtScriptBackend();
   _docCondition.wakeAll();
 }
 
@@ -76,9 +102,13 @@ void ThreadDocument::setGraphDocument(GraphDocument * doc){
 
 
 void ThreadDocument::run(){
-
+  kDebug() << "############ Load Plugins ###############";
+  Rocs::PluginManager::New()->loadPlugins();
+  kDebug() << "############ Load DS Plugins ############";
   Rocs::DSPluginManager::New();
-
-  loadDocument();
+  kDebug() <<"End of loading plugins.";
+  m_docManager = new DocumentManager();
+  connect (Rocs::DSPluginManager::New(), SIGNAL(changingDS(QString)), m_docManager, SLOT(convertToDataStructure(QString)));
+//   loadDocument();
   exec();
 }

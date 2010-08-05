@@ -16,6 +16,7 @@ include_directories(
 # Preparando a biblioteca padrão.
 
 set( rocs_core_SRCS
+  Core/DocumentManager.cpp
   Core/DSPluginManager.cpp
   Core/DSPluginInterface.cpp
   Core/graph.cpp

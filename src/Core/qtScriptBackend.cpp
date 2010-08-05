@@ -89,12 +89,12 @@ bool QtScriptBackend::isRunning(){
   return _runningTool;
 }
 
-
-QtScriptBackend::QtScriptBackend(){
+QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent){
     self = this;
     _engine = 0;
     _runningTool = false;
 }
+
 
 void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument *graphs){
     _runningTool = true;

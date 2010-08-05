@@ -25,7 +25,7 @@
 #include "rocslib_export.h"
 
 class Graph;
-
+class QtScriptBackend;
 /*! \brief the graph document
   long explanation needed.
 */
@@ -66,6 +66,8 @@ public:
 
     bool saveAsInternalFormat(const QString& filename);
     void loadFromInternalFormat(const QString& filename);
+
+    QtScriptBackend * engineBackend() const;
 public slots:
     /*! Creates a new Graph
       \param name the name of the graph
@@ -128,6 +130,7 @@ private:
     bool _saved;
     Graph *_activeGraph;
     QString _DSType;
+    QtScriptBackend* _engineBackend;
 };
 
 #endif

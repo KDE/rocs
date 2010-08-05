@@ -101,7 +101,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
         connectGraphSignals(_graphDocument->at(i));
         kDebug() << "Graph Updated.";
     }
-    connect( _graphDocument, SIGNAL(graphCreated(Graph*)), this, SLOT(connectGraphSignals(Graph*)));
+    connect( _graphDocument, SIGNAL(graphCreated(Graph*)), this, SLOT(connectGraphSignals(Graph*)),Qt::UniqueConnection);
     kDebug() << "Graph Document Set" << _graphDocument -> name();
 }
 void GraphScene::createItems(){
@@ -121,8 +121,8 @@ void GraphScene::createItems(){
 }
 
 void GraphScene::connectGraphSignals(Graph *g){
-    connect( g, SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)));
-    connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)));
+    connect( g, SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)), Qt::UniqueConnection);
+    connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)), Qt::UniqueConnection);
 }
 
 QGraphicsItem *GraphScene::createNode(Node *n) {

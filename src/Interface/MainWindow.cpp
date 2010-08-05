@@ -86,9 +86,6 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 {
     setObjectName ( "Rocs" );
 
-    kDebug() << "############ Load Plugins ###############";
-    Rocs::PluginManager::New()->loadPlugins();
-
 
     kDebug() << "Creating Thread";
     startThreadDocument();
@@ -131,7 +128,9 @@ MainWindow::~MainWindow()
   //  _mutex.unlock();
     emit endThreadDocument();
     _tDocument->wait();
-  //  _tDocument->exit(0);
+//     _tDocument->exit(0);
+//     delete _tDocument;
+
 }
 
 void MainWindow::outputString ( const QString& s )
@@ -304,10 +303,10 @@ void MainWindow::setupActions()
         kDebug() << "Not Creating Actions (import export).." << Rocs::PluginManager::New()->filePlugins().count();
     }
     action = new KAction ( KIcon ( "document-save-as" ), i18n ( "Possible Includes" ), this );
-        action->setShortcut ( Qt::CTRL + Qt::Key_P );
-        action->setShortcutContext ( Qt::WidgetShortcut );
-        actionCollection()->addAction ( "possible_includes", action );
-        connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( showPossibleIncludes()) );
+    action->setShortcut ( Qt::CTRL + Qt::Key_P );
+    action->setShortcutContext ( Qt::WidgetShortcut );
+    actionCollection()->addAction ( "possible_includes", action );
+    connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( showPossibleIncludes()) );
 
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
 }
@@ -337,9 +336,12 @@ void MainWindow::setupToolsPluginsAction()
     QAction* action = 0;
     unplugActionList ( "tools_plugins" );
     QList < Rocs::ToolsPluginInterface*> avaliablePlugins = Rocs::PluginManager::New()->toolPlugins();
+    int count = 0;
     foreach ( Rocs::ToolsPluginInterface* p, avaliablePlugins )
     {
-        action = new KAction ( p->displayName(), p );
+
+        action = new KAction ( p->displayName(), this );
+        action->setData(count++);
         connect ( action, SIGNAL ( triggered ( bool ) ),this, SLOT ( runToolPlugin() ) );
         pluginList.append ( action );
     }
@@ -369,6 +371,7 @@ void MainWindow::setupDSPluginsAction()
     plugActionList ( "DS_plugins", pluginList );
 }
 
+
 void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 {
     //Ensure that is only on signal
@@ -382,12 +385,15 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 
     _graphVisualEditor->setActiveGraphDocument ( d );
 
+    disconnect(SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)));
+
     connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)),
              _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,GraphDocument*)),Qt::UniqueConnection);
 
     connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)),Qt::UniqueConnection);
+    _GraphLayers->disconnect(SIGNAL(createGraph(QString)));
     connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)),Qt::UniqueConnection);
-
+    disconnect(SIGNAL(startEvaluation()));
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()),Qt::UniqueConnection);
 
     connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)),Qt::UniqueConnection);
@@ -555,9 +561,9 @@ void MainWindow::runToolPlugin()
     if (! action ){
       return;
     }
-
-    if ( Rocs::ToolsPluginInterface *plugin = qobject_cast<Rocs::ToolsPluginInterface *> ( action->parent() ) ){
-	emit runTool ( plugin, activeDocument() );
+    ;
+    if (Rocs::ToolsPluginInterface *plugin = Rocs::PluginManager::New()->toolPlugins().value(action->data().toInt()) ){
+      emit runTool ( plugin, activeDocument() );
     }
 }
 

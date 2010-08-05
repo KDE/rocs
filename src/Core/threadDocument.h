@@ -23,6 +23,7 @@
 #include <QMutex>
 #include "rocslib_export.h"
 #include <QWaitCondition>
+class DocumentManager;
 
 class Graph;
 class Node;
@@ -37,9 +38,9 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
   public:
     ThreadDocument(QWaitCondition &docCondition,QMutex &mutex, QObject *parent = 0);
     virtual ~ThreadDocument();
-    GraphDocument *document() const {return _graphDocument;}
-    bool isRunning();
-    QtScriptBackend* engine();
+    GraphDocument *document() const;// {return _graphDocument;}
+    bool isRunning() const;
+    QtScriptBackend* engine() const;
 
     /** release actual document and set the doc */
     void setGraphDocument(GraphDocument * doc);
@@ -48,8 +49,10 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
 
   public slots:
     void run();
-    void createEmptyDocument();
+//     void createEmptyDocument();
     void loadDocument(const QString& name = QString());
+
+    void terminate();
 
   private:
     /** Release actual document */
@@ -60,6 +63,8 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
     QWaitCondition &_docCondition;
     QMutex &_mutex;
     QString _documentName;
+
+    DocumentManager * m_docManager;
 
 };
 

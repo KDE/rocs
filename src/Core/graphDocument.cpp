@@ -39,6 +39,7 @@ GraphDocument::GraphDocument(const QString name, int width,  int height)
     _height = height;
     _modified = false;
     _saved = false;
+    _engineBackend = new QtScriptBackend(this);
     _DSType = Rocs::DSPluginManager::New()->actualPlugin();
 }
 
@@ -48,9 +49,11 @@ GraphDocument::GraphDocument(const GraphDocument& gd)
     _name = gd.name();
     _width = gd.width();
     _height = gd.height();
-    _DSType = gd._DSType;
-    foreach (Graph *g, gd) {
-        append(Rocs::DSPluginManager::New()->changeToDS(g));
+    _DSType = Rocs::DSPluginManager::New()->actualPlugin();
+    _engineBackend = new QtScriptBackend(this);
+    for (int i = 0; i < gd.count(); ++i){
+//     foreach (Graph *g, gd) {
+        append(Rocs::DSPluginManager::New()->changeToDS(gd.at(i)));
     }
 }
 
@@ -67,6 +70,9 @@ GraphDocument::~GraphDocument() {
     }
 }
 
+QtScriptBackend * GraphDocument::engineBackend() const{
+    return _engineBackend;
+}
 
 // Sets the current file name of the Graph Collection
 void GraphDocument::setName(const QString& name) {
@@ -292,6 +298,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
 void GraphDocument::convertToDS(QString newDS){
     if (newDS != _DSType){
         kDebug() << "Need convert doc from " << _DSType << " to "<< newDS ;
+//         GraphDocument * gDoc = new GraphDocument(*this);
         _DSType = newDS;
         int numGraphs = count();
         for (int i = 0 ; i < numGraphs; ++i){
@@ -304,5 +311,7 @@ void GraphDocument::convertToDS(QString newDS){
             at(0)->deleteLater();
             removeAt(0);
         }
+//         return gDoc;
     }
+//     return 0;
 }

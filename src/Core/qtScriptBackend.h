@@ -35,7 +35,8 @@ namespace Rocs{
 class  ROCSLIB_EXPORT QtScriptBackend : public QObject{
   Q_OBJECT
 public:
-    QtScriptBackend();
+//     QtScriptBackend();
+    QtScriptBackend(QObject* parent = 0);
     void setScript(const QString& s, GraphDocument *graph);
     void setDocument(GraphDocument *document);
     void loadFile(const QString& file);
@@ -45,7 +46,7 @@ public:
 
     /** return true if is evaluating a script or running a tool script. */
     bool isRunning();
-    
+
 private:
     QString _script;
     GraphDocument *_graphs;
@@ -53,20 +54,20 @@ private:
     QScriptEngine *_engine;
 
     bool _runningTool;
-    
+
 signals:
     void sendOutput(const QString& s);
     void sendDebug(const QString& s);
     void engineCreated(QScriptEngine* e);
     void finished();
-    
+
   public slots:
     void start();
 
     /** run a tool plugin in graph and later run it resulting script.*/
     void runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument *graphs);
-        
-    
+
+
     /** abort script evaluation. In case of a too is running, stop will not stop tool. But the script resulting from tool will not be runned.
 
     */
