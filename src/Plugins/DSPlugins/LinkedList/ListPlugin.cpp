@@ -22,6 +22,11 @@
 #include <KPluginFactory>
 #include <KAboutData>
 #include <NodeListItem.h>
+#include <QGridLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <kcombobox.h>
 
 static const KAboutData aboutdata("rocs_ListStructure", 0, ki18n("Linked List Structure") , "0.1" );
 using namespace Rocs;
@@ -51,7 +56,29 @@ Graph* ListPlugin::createDS ( GraphDocument* parent )
 //     return new Graph(parent);
 }
 
-QGraphicsItem* Rocs::ListPlugin::nodeItem(Node* node )
+QGraphicsItem* Rocs::ListPlugin::nodeItem(Node* node ) const
 {
     return (new NodeListItem(node));
 }
+
+QGraphicsItem* Rocs::ListPlugin::edgeItem ( Edge* ) const
+{
+    return 0;
+}
+
+QLayout* Rocs::ListPlugin::nodeExtraProperties ( Node* node, QWidget* parentWidget) const
+{
+  QGridLayout * lay = new QGridLayout(parentWidget);
+  QLabel *_value = new QLabel(i18n("Front value"), parentWidget);
+  QLineEdit *_valueLine = new QLineEdit(parentWidget);
+  _valueLine->setReadOnly(true);
+  if (node->out_edges().count() == 1){
+    _valueLine->setText(node->out_edges().at(0)->to()->value().toString());
+  }
+  lay->addWidget(_value,0,0);
+  lay->addWidget(_valueLine,0,1);
+
+
+  return lay;
+}
+

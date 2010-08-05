@@ -3,6 +3,7 @@
 
 #include "rocslib_export.h"
 
+class QLayout;
 class QGraphicsItem;
 class GraphDocument;
 class Graph;
@@ -32,7 +33,14 @@ public:
     return QString();
   }
 
-  virtual QGraphicsItem* nodeItem(Node*)=0;
+  virtual QGraphicsItem * nodeItem ( Node*)const = 0;
+  virtual QGraphicsItem * edgeItem ( Edge*)const = 0;
+
+  virtual QLayout* nodeExtraProperties ( Node* arg1, QWidget* arg2 ) const;
+  virtual QLayout* edgeExtraProperties ( Edge* arg1, QWidget* arg2 )const;
+  virtual QLayout* graphExtraProperties ( Graph* arg1, QWidget* arg2 )const;
+
+
 
 };
 }

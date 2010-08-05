@@ -89,7 +89,14 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     kDebug() << "Creating Thread";
     startThreadDocument();
-
+    if (Rocs::DSPluginManager::New()->listOfDS().count() == 0){
+      KMessageBox::detailedError(this,
+                                 i18n("No Data Structure plugins found in the system. Exiting."),
+                                 i18n("Rocs need at least one data structure plugin to continue.\n"
+                                      "Try running kbuildsycoca4 from a console and after execute Rocs again."));
+      kDebug() << "No Data Structure plugins found in the system. Rocs need at least one plugin to continue. Exiting.";
+      return;
+    }
     // setting up the rest of stuff
     setupWidgets();
     setupActions();

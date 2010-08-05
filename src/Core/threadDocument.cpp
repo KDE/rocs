@@ -107,6 +107,9 @@ void ThreadDocument::run(){
   kDebug() << "############ Load DS Plugins ############";
   Rocs::DSPluginManager::New();
   kDebug() <<"End of loading plugins.";
+  if (Rocs::DSPluginManager::New()->listOfDS().count() == 0){
+    return;
+  }
   m_docManager = new DocumentManager();
   connect (Rocs::DSPluginManager::New(), SIGNAL(changingDS(QString)), m_docManager, SLOT(convertToDataStructure(QString)));
 //   loadDocument();

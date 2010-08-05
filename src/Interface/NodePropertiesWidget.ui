@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
-    <height>366</height>
+    <width>431</width>
+    <height>372</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -49,42 +49,10 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="4" rowspan="4">
+   <item row="0" column="4" rowspan="3">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
-    <widget class="QLabel" name="label_3">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="toolTip">
-      <string>X-coordinate </string>
-     </property>
-     <property name="text">
-      <string extracomment="X-coordinate ">x</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="6" colspan="3">
-    <widget class="QSpinBox" name="_x">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximum">
-      <number>9999</number>
      </property>
     </widget>
    </item>
@@ -114,84 +82,6 @@
      </property>
      <property name="checked">
       <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="5">
-    <widget class="QLabel" name="label_4">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="toolTip">
-      <string>Y-coordinate </string>
-     </property>
-     <property name="text">
-      <string extracomment="Y-coordinate ">y</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="6" colspan="3">
-    <widget class="QSpinBox" name="_y">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximum">
-      <number>9999</number>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="toolTip">
-      <string>Node color</string>
-     </property>
-     <property name="text">
-      <string>Color:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" colspan="2">
-    <widget class="KColorCombo" name="_color">
-     <property name="toolTip">
-      <string>Node color</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="toolTip">
-      <string>Node size</string>
-     </property>
-     <property name="text">
-      <string>Size:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" colspan="2">
-    <widget class="KDoubleNumInput" name="_width">
-     <property name="toolTip">
-      <string>Node size</string>
-     </property>
-     <property name="minimum">
-      <double>0.500000000000000</double>
-     </property>
-     <property name="singleStep">
-      <double>0.250000000000000</double>
      </property>
     </widget>
    </item>
@@ -239,44 +129,59 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="5">
+   <item row="4" column="0" rowspan="2" colspan="9">
+    <widget class="QFrame" name="extraItens">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="6" colspan="3">
+    <widget class="KColorCombo" name="_color">
+     <property name="toolTip">
+      <string>Node color</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="6" colspan="3">
+    <widget class="KComboBox" name="_images"/>
+   </item>
+   <item row="1" column="5">
     <widget class="QLabel" name="label_10">
      <property name="text">
       <string>Image</string>
      </property>
-    </widget>
-   </item>
-   <item row="2" column="6" colspan="3">
-    <widget class="KComboBox" name="_images"/>
-   </item>
-   <item row="3" column="7" colspan="2">
-    <widget class="QCheckBox" name="_begin">
-     <property name="text">
-      <string>Begin</string>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
-   <item row="3" column="5">
-    <widget class="QCheckBox" name="_end">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+   <item row="0" column="5">
+    <widget class="QLabel" name="label_6">
+     <property name="toolTip">
+      <string>Node color</string>
      </property>
      <property name="text">
-      <string>End</string>
+      <string>Color:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="9">
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KDoubleNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
   <customwidget>
    <class>KPushButton</class>
    <extends>QPushButton</extends>
@@ -303,9 +208,6 @@
   <tabstop>_showName</tabstop>
   <tabstop>_value</tabstop>
   <tabstop>_showValue</tabstop>
-  <tabstop>_color</tabstop>
-  <tabstop>_x</tabstop>
-  <tabstop>_y</tabstop>
   <tabstop>_propertiesTable</tabstop>
   <tabstop>_propertyName</tabstop>
   <tabstop>_propertyValue</tabstop>

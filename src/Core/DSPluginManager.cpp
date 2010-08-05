@@ -84,13 +84,6 @@ public:
         if (plugin)
             return plugin;
         return 0;
-//         foreach (Rocs::DSPluginInterface * plugin, plugins.values()) {
-//             kDebug() << plugin->name();
-//             if (plugin->name() == pluginName) {
-//                 return plugin;
-//             }
-//             return 0;
-//         }
     }
     void setActivePlugin(const QString &pluginName) {
         if (Rocs::DSPluginInterface * plg = plugin(pluginName)) {
@@ -212,3 +205,21 @@ QGraphicsItem* Rocs::DSPluginManager::nodeItem(Node* node)
 {
   return _d->m_actualPlugin->nodeItem(node);
 }
+
+QGraphicsItem* Rocs::DSPluginManager::edgeItem ( Edge* edge ){
+    return _d->m_actualPlugin->edgeItem(edge);;
+}
+
+QLayout* Rocs::DSPluginManager::edgeExtraProperties ( Edge* edge, QWidget* parent ){
+  return _d->m_actualPlugin->edgeExtraProperties(edge, parent);
+}
+
+QLayout* Rocs::DSPluginManager::graphExtraProperties ( Graph* graph, QWidget* parent ){
+      return _d->m_actualPlugin->graphExtraProperties(graph, parent);
+}
+
+QLayout* Rocs::DSPluginManager::nodeExtraProperties ( Node* node, QWidget* parent ){
+    return _d->m_actualPlugin->nodeExtraProperties(node, parent);
+}
+
+

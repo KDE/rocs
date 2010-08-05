@@ -22,6 +22,7 @@
 #include "MainWindow.h"
 #include "model_GraphProperties.h"
 #include <graph.h>
+#include <DSPluginManager.h>
 
 EdgePropertiesWidget::EdgePropertiesWidget(MainWindow *parent): QWidget(parent) {
     setupUi(this);
@@ -60,6 +61,12 @@ void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
 }
 
 void EdgePropertiesWidget::reflectAttributes(){
+  if (_extraProperties->layout()){
+    delete _extraProperties->layout();
+  }
+  if (QLayout * lay = Rocs::DSPluginManager::New()->edgeExtraProperties(_edge, this)){
+      _extraProperties->setLayout(lay);
+  }
    _name->setText(_edge->name());
    _value->setText(_edge->value());
    _color->setColor(_edge->color());
@@ -83,13 +90,6 @@ void EdgePropertiesWidget::on__style_activated(int index) {
 }
 
 void EdgePropertiesWidget::on__addProperty_clicked(){
-//     if (_isPropertyGlobal->checkState() == Qt::Checked ){
-//       _edge->graph()->addEdgesDinamicProperty(_propertyName->text(),
-// 					      QVariant(_propertyValue->text()));
-//     }else{
-//       _edge->addDinamicProperty(_propertyName->text(),
-// 				QVariant(_propertyValue->text()));
-//     }
 
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
     model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),

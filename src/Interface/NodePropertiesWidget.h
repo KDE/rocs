@@ -28,7 +28,7 @@ class MainWindow;
 class NodeItem;
 #include <QPointF>
 
-/*! \brief Properties Area, not used yet. */
+/*! \brief Properties Area. */
 class NodePropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
 {
     Q_OBJECT
@@ -42,15 +42,15 @@ private slots:
     void on__color_activated(const QColor& c);
     void on__images_activated(const QString& s);
     void reflectAttributes();
-    void updateAutomateAttributes(bool b);
+//     void updateAutomateAttributes(bool b);
     void on__addProperty_clicked();
-    
+
 private:
 
     Node *_node;
     MainWindow *_mainWindow;
     NodeItem *_item;
     QString _svgFile;
-    
+
 };
 #endif

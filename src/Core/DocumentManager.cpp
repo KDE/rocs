@@ -105,6 +105,5 @@ void DocumentManager::convertToDataStructure(QString ds){
 //   if (doc != 0){
 //         addDocument(doc);
 //   }
-
-
 }
+

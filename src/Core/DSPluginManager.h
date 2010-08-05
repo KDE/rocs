@@ -24,6 +24,7 @@
 #include "graph.h"
 #include "rocslib_export.h"
 
+class QLayout;
 class QGraphicsItem;
 class KPluginInfo;
 
@@ -55,7 +56,18 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
 
     QList < DSPluginInterface*> pluginsList();
 
+    /** return the node graphic item that will be drawed by canvas . */
     QGraphicsItem * nodeItem(Node* node);
+    /** return the edge graphic item that will be drawed by canvas . */
+    QGraphicsItem * edgeItem(Edge* edge);
+
+
+    /** Create extra widgets to node properties window. If no extra properties is needed the is returned 0*/
+    QLayout * nodeExtraProperties(Node* node, QWidget * parent);
+    /** Create extra widgets to edge properties window. If no extra properties is needed the is returned 0*/
+    QLayout * edgeExtraProperties(Edge* edge, QWidget * parent);
+    /** Create extra widgets to graph properties window. If no extra properties is needed the is returned 0*/
+    QLayout * graphExtraProperties(Graph* graph, QWidget * parent);
 
   signals:
     /** signal emited when is changing the data structure to \newDS */

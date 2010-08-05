@@ -22,6 +22,10 @@
 
 #include <QObject>
 
+class Edge;
+class Graph;
+class Node;
+class QGridLayout;
 class GraphDocument;
 #include "rocslib_export.h"
 
