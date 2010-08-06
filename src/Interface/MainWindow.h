@@ -104,11 +104,14 @@ private slots:
 
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
+    void releaseDocument(GraphDocument *d);
     void setActiveGraph(Graph *g);
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
 
+    /** setup documents list.*/
+    void setupDocumentsList();
 
   signals:
       void startDocument(const QString& s);

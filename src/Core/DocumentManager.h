@@ -22,6 +22,8 @@
 
 #include <QObject>
 
+class QMutex;
+class QWaitCondition;
 class Edge;
 class Graph;
 class Node;
@@ -32,10 +34,14 @@ class GraphDocument;
 class ROCSLIB_EXPORT DocumentManager : public QObject
 {
   Q_OBJECT
+    QWaitCondition &_docCondition;
+    QMutex &_mutex;
     QList<GraphDocument*> m_documents;
     GraphDocument * m_actualDocument;
+
+
   public:
-    DocumentManager(QObject* parent = 0);
+    DocumentManager(QWaitCondition &docCondition, QMutex &mutex,QObject* parent = 0);
     virtual ~DocumentManager();
 
     QList <GraphDocument * > documentList();
@@ -46,16 +52,26 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
 
   public slots:
     void changeDocument(GraphDocument*);
+
+    void changeDocument();
     /** Add a document to list and set as active document */
     void addDocument(GraphDocument*);
     /** Remove the document from list. if the document is the active one, then active document pass to be the last from list. If it is the last one, an empty is created and set as active.*/
     void removeDocument(GraphDocument*);
     /** Convert document to new data structure. */
     void convertToDataStructure(QString ds);
+
+    void loadDocument(QString fileName = QString());
+
+
+
   signals:
-    /** signal emited when changeDocument() or addDocument() are called*/
-    void documentChanged (GraphDocument*);
-    void documentRemoved(GraphDocument* arg1);
+    /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/
+    void activateDocument (GraphDocument*);
+    /** this signal is emited when actual active document is deactivate (by a removal or a change)*/
+    void deactivateDocument(GraphDocument* doc);
+    /** signal emited when a document was removed from list. if doc is the active document, both, deactivateDocument() and activeDocument() is called first */
+    void documentRemoved(GraphDocument* doc);
 };
 
 #endif // DOCUMENTMANAGER_H

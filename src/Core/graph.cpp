@@ -62,6 +62,7 @@ Graph::Graph(Graph& other): QObject(other.parent()){
       newNode->setValue(n->value());
       newNode->setX(n->x());
       newNode->setY(n->y());
+      newNode->setWidth(n->width());
       nodeToNode.insert(n, newNode);
 
     }

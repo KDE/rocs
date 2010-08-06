@@ -42,21 +42,23 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
     bool isRunning() const;
     QtScriptBackend* engine() const;
 
-    /** release actual document and set the doc */
-    void setGraphDocument(GraphDocument * doc);
+//    /** release actual document and set the doc */
+//     void setGraphDocument(GraphDocument * doc);
     //void setDocumentName(const QString& name);
 
+    /** Return a pointer to document manager. Delete it can lead to a crash.*/
+    DocumentManager* documentManager();
 
   public slots:
     void run();
 //     void createEmptyDocument();
-    void loadDocument(const QString& name = QString());
+//     void loadDocument(const QString& name = QString());
 
     void terminate();
 
   private:
     /** Release actual document */
-    void releaseDocument();
+//     void releaseDocument();
 
     QtScriptBackend* _engine;
     GraphDocument * _graphDocument;

@@ -82,11 +82,12 @@ void GraphScene::setAction(QAction *action) {
 }
 
 void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
-    _graphDocument = gd;
+
     if (gd == 0) {
+        releaseDocument();
         return;
     }
-
+    _graphDocument = gd;
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
     QGraphicsRectItem *n = new QGraphicsRectItem(0,0, gd->width(), gd->height());
     n->setFlag(QGraphicsItem::ItemIsSelectable, false);
@@ -103,6 +104,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
     }
     connect( _graphDocument, SIGNAL(graphCreated(Graph*)), this, SLOT(connectGraphSignals(Graph*)),Qt::UniqueConnection);
     kDebug() << "Graph Document Set" << _graphDocument -> name();
+    createItems();
 }
 void GraphScene::createItems(){
     kDebug() << "Creating the graph items.";
@@ -124,6 +126,17 @@ void GraphScene::connectGraphSignals(Graph *g){
     connect( g, SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)), Qt::UniqueConnection);
     connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)), Qt::UniqueConnection);
 }
+
+void GraphScene::releaseDocument()
+{
+  _graphDocument->disconnect(this);
+  disconnect(_graphDocument);
+  for(int i = 0; i < _graphDocument->count(); ++i){
+    _graphDocument->at(i)->disconnect(this);
+    disconnect(_graphDocument->at(i));
+  }
+}
+
 
 QGraphicsItem *GraphScene::createNode(Node *n) {
     NodeItem *nItem = (NodeItem*)(Rocs::DSPluginManager::New()->nodeItem(n));// new NodeItem(n);

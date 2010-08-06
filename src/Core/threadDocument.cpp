@@ -19,6 +19,7 @@ ThreadDocument::ThreadDocument(QWaitCondition &docCondition, QMutex &mutex, QObj
      _engine = 0;
     // _loading = false;
     // _name = i18n("Untitled0");
+
 }
 
 ThreadDocument::~ThreadDocument(){
@@ -38,7 +39,8 @@ void ThreadDocument::terminate(){
   m_docManager->deleteLater();
   Rocs::DSPluginManager::New()->deleteLater();
   Rocs::PluginManager::New()->deleteLater();
-  QThread::terminate();
+//   QThread::terminate();
+  exit();
 }
 
 bool ThreadDocument::isRunning() const{
@@ -76,28 +78,25 @@ QtScriptBackend *ThreadDocument::engine() const{
 //   kDebug() << "Waking All";
 // }
 
-void ThreadDocument::loadDocument(const QString& name){
-//     createEmptyDocument();
-    if ( name.isEmpty() ){
-      GraphDocument * doc = new GraphDocument( i18n ( "Untitled0" ));
-      doc->addGraph ( i18n ( "Untitled0" ) );
-      m_docManager->addDocument(doc);
+// void ThreadDocument::loadDocument(const QString& name){
+// //     createEmptyDocument();
+//
+// }
 
-    }else{
-        m_docManager->activeDocument()->loadFromInternalFormat ( name );
-    }
-    _docCondition.wakeAll();
+// void ThreadDocument::setGraphDocument(GraphDocument * doc){
+// //   releaseDocument();
+//   m_docManager->addDocument(doc);
+// //   _graphDocument = doc;
+//
+// //   _engine = new QtScriptBackend();
+//   _docCondition.wakeAll();
+// }
+
+
+DocumentManager* ThreadDocument::documentManager()
+{
+  return m_docManager;
 }
-
-void ThreadDocument::setGraphDocument(GraphDocument * doc){
-//   releaseDocument();
-  m_docManager->addDocument(doc);
-//   _graphDocument = doc;
-
-//   _engine = new QtScriptBackend();
-  _docCondition.wakeAll();
-}
-
 
 
 
@@ -110,7 +109,7 @@ void ThreadDocument::run(){
   if (Rocs::DSPluginManager::New()->listOfDS().count() == 0){
     return;
   }
-  m_docManager = new DocumentManager();
+  m_docManager = new DocumentManager(_docCondition ,_mutex);
   connect (Rocs::DSPluginManager::New(), SIGNAL(changingDS(QString)), m_docManager, SLOT(convertToDataStructure(QString)));
 //   loadDocument();
   exec();

@@ -81,6 +81,7 @@
 #include <IncludeManager.h>
 #include "ImporterExporterManager.h"
 #include <DSPluginInterface.h>
+#include "DocumentManager.h"
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 {
@@ -98,19 +99,28 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
       return;
     }
     // setting up the rest of stuff
+    connect (_tDocument->documentManager(), SIGNAL(activateDocument(GraphDocument*)),this, SLOT(setActiveGraphDocument(GraphDocument*)));
+    connect (_tDocument->documentManager(), SIGNAL(deactivateDocument(GraphDocument*)),this, SLOT(releaseDocument(GraphDocument*)));
+
+    connect (_tDocument->documentManager(), SIGNAL(activateDocument(GraphDocument*)),this, SLOT(setupDocumentsList()));
+    connect (_tDocument->documentManager(), SIGNAL(documentRemoved(GraphDocument*)),this, SLOT(setupDocumentsList()));
+
+
     setupWidgets();
     setupActions();
     setupGUI();
 
     statusBar()->hide();
 
-    setActiveGraphDocument ( _tDocument->document() );
+//     setActiveGraphDocument ( _tDocument->document() );
     setupToolsPluginsAction();
     setupDSPluginsAction();
-
-    connect(Rocs::DSPluginManager::New(), SIGNAL(DSChangedTo(QString)), this, SLOT(dsChanged()));
-    connect(this, SIGNAL(startDocument(QString)), _tDocument, SLOT(loadDocument(QString)));
+//     connect(Rocs::DSPluginManager::New(), SIGNAL(DSChangedTo(QString)), this, SLOT(dsChanged()));
+    connect(this, SIGNAL(startDocument(QString)), _tDocument->documentManager(), SLOT(loadDocument(QString)));
     connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(terminate()));
+
+    loadDocument(); // load an empty document
+
 }
 
 void MainWindow::startThreadDocument(){
@@ -118,23 +128,25 @@ void MainWindow::startThreadDocument(){
     _mutex.lock();
     kDebug() << "Starting Thread"; _tDocument->start();
     _waitForDocument.wait(&_mutex, 500);
-
     _mutex.unlock();
+
+
 }
 
 QMutex& MainWindow::mutex() { return _mutex;}
 
 MainWindow::~MainWindow()
 {
-    Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );
-    Settings::setVSplitterSizeBottom ( _vSplitter->sizes() [1] );
-    Settings::setHSplitterSizeLeft ( _hSplitter->sizes() [0] );
-    Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
+//     Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );
+//     Settings::setVSplitterSizeBottom ( _vSplitter->sizes() [1] );
+//     Settings::setHSplitterSizeLeft ( _hSplitter->sizes() [0] );
+//     Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
 
-    Settings::self()->writeConfig();
+//     Settings::self()->writeConfig();
   //  _mutex.unlock();
     emit endThreadDocument();
     _tDocument->wait();
+    kDebug() << "End of thread.";
 //     _tDocument->exit(0);
 //     delete _tDocument;
 
@@ -378,10 +390,34 @@ void MainWindow::setupDSPluginsAction()
     plugActionList ( "DS_plugins", pluginList );
 }
 
+void MainWindow::setupDocumentsList(){
+
+_mutex.lock();
+    QList <QAction*> pluginList;
+    QAction* action = 0;
+    unplugActionList ( "Doc_List" );
+    QList < Rocs::DSPluginInterface*> avaliablePlugins = Rocs::DSPluginManager::New()->pluginsList();
+    QActionGroup * group = new QActionGroup(this);
+    int count = 0;
+    foreach(GraphDocument * doc, _tDocument->documentManager()->documentList()){
+        action = new KAction ( doc->name(), this );
+        action->setData(count++);
+        action->setCheckable(true);
+        if (doc == _tDocument->document()){
+          action->setChecked(true);
+        }
+        action->setActionGroup(group);
+        connect ( action, SIGNAL ( triggered ( bool ) ), _tDocument->documentManager(), SLOT ( changeDocument()) );
+        pluginList.append ( action );
+    }
+    plugActionList ( "Doc_List", pluginList );
+
+    _mutex.unlock();
+}
 
 void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 {
-    //Ensure that is only on signal
+//Ensure that is only on signal
 //     disconnect(d);
 
     foreach ( QAction *action, actionCollection()->actions() ){
@@ -392,15 +428,13 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 
     _graphVisualEditor->setActiveGraphDocument ( d );
 
-    disconnect(SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)));
 
     connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)),
              _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,GraphDocument*)),Qt::UniqueConnection);
 
     connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)),Qt::UniqueConnection);
-    _GraphLayers->disconnect(SIGNAL(createGraph(QString)));
     connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)),Qt::UniqueConnection);
-    disconnect(SIGNAL(startEvaluation()));
+
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()),Qt::UniqueConnection);
 
     connect( _tDocument->engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)),Qt::UniqueConnection);
@@ -409,6 +443,22 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
 
 
     _GraphLayers->populate();
+    _waitForDocument.wakeAll();
+}
+
+void MainWindow::releaseDocument ( GraphDocument* d ){
+    if (d == 0){
+      return;
+    }
+    _graphVisualEditor->releaseGraphDocument();
+    d->disconnect(this);
+    disconnect(d);
+    disconnect(d);
+    _GraphLayers->disconnect(d);
+    d->engineBackend()->disconnect(this);
+    d->engineBackend()->disconnect(_bottomTabs);
+
+    _waitForDocument.wakeAll();
 }
 
 void MainWindow::setActiveGraph ( Graph *g )
@@ -447,7 +497,9 @@ GraphScene* MainWindow::scene() const
 
 void MainWindow::newGraph()
 {
+  if (_tDocument->document() != 0){
     if ( saveIfChanged() == KMessageBox::Cancel ) return;
+  }
     loadDocument();
 }
 
@@ -468,18 +520,16 @@ void MainWindow::loadDocument ( const QString& name )
     }
 
 
-     _graphVisualEditor->releaseGraphDocument();
+//      _graphVisualEditor->releaseGraphDocument();
 
      _mutex.lock();
     emit startDocument( name );
     _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();
 
-    setActiveGraphDocument ( _tDocument->document() );
+//     setActiveGraphDocument ( _tDocument->document() );
 
-    if ( !name.isEmpty() ){
-        _graphVisualEditor->scene()->createItems();
-    }
+
 }
 
 void MainWindow::saveGraph(){
@@ -523,17 +573,17 @@ void MainWindow::importFile(){
     }
 
     _mutex.lock();
-    _graphVisualEditor->releaseGraphDocument();
-    kDebug() << "Starting Thread";
-    _tDocument->setGraphDocument ( gd );
+//     _graphVisualEditor->releaseGraphDocument();
+    _tDocument->documentManager()->addDocument(gd);
+//     _tDocument->setGraphDocument ( gd );
     _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();
 
-    setActiveGraphDocument ( _tDocument->document() );
-    _graphVisualEditor->scene()->createItems();
+//     setActiveGraphDocument ( _tDocument->document() );
+//     _graphVisualEditor->scene()->createItems();
 
     if (importer.hasDialog()){
-	importer.dialogExec();
+      importer.dialogExec();
     }
 
     if (!importer.scriptToRun().isEmpty()){

@@ -78,6 +78,7 @@ private:
     NodePropertiesWidget *_nodePropertiesWidget;
     EdgePropertiesWidget *_edgePropertiesWidget;
     bool _fade;
+    void releaseDocument();
 };
 
 #endif
