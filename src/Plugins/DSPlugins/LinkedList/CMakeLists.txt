@@ -6,7 +6,7 @@ ADD_DEFINITIONS(-DQT_NO_DEBUG)
 ADD_DEFINITIONS(-DQT_SHARED)
 
 
-Set (ListStructure_SRC ListStructure.cpp ListPlugin.cpp NodeListItem.cpp)
+Set (ListStructure_SRC ListNode.cpp ListStructure.cpp ListPlugin.cpp NodeListItem.cpp PointerItem.cpp)
 
 kde4_add_plugin(rocs_ListStructure ${ListStructure_SRC} )
 target_link_libraries(rocs_ListStructure

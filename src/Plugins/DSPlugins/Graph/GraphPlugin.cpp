@@ -27,6 +27,7 @@
 #include <QLabel>
 #include <knuminput.h>
 #include <QCheckBox>
+#include "OrientedEdgeItem.h"
 
 static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18n("Graph Structure") , "0.1" );
 using namespace Rocs;
@@ -62,9 +63,9 @@ QGraphicsItem* Rocs::GraphPlugin::nodeItem(Node* node) const
     return item;
 }
 
-QGraphicsItem* Rocs::GraphPlugin::edgeItem ( Edge* ) const
+QGraphicsItem* Rocs::GraphPlugin::edgeItem ( Edge* edge) const
 {
-  return 0;
+  return new OrientedEdgeItem(edge);
 }
 QLayout* GraphPlugin::nodeExtraProperties ( Node* node, QWidget* parentWidget ) const
 {

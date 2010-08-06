@@ -27,6 +27,7 @@
 #include <QLineEdit>
 #include <QCheckBox>
 #include <kcombobox.h>
+#include "PointerItem.h"
 
 static const KAboutData aboutdata("rocs_ListStructure", 0, ki18n("Linked List Structure") , "0.1" );
 using namespace Rocs;
@@ -61,9 +62,9 @@ QGraphicsItem* Rocs::ListPlugin::nodeItem(Node* node ) const
     return (new NodeListItem(node));
 }
 
-QGraphicsItem* Rocs::ListPlugin::edgeItem ( Edge* ) const
+QGraphicsItem* Rocs::ListPlugin::edgeItem ( Edge* edge) const
 {
-    return 0;
+    return new Rocs::LinkedList::PointerItem (edge);
 }
 
 QLayout* Rocs::ListPlugin::nodeExtraProperties ( Node* node, QWidget* parentWidget) const

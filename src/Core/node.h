@@ -49,7 +49,7 @@ class  ROCSLIB_EXPORT Node : public QObject {
     Q_PROPERTY(QVariant value READ value WRITE setValue)
     Q_PROPERTY(QString iconPackage READ iconPackage WRITE setIconPackage)
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
-    
+
 public:
     Node(Graph *parent);
     ~Node();
@@ -69,10 +69,10 @@ public:
 
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
-    void setEngine(	QScriptEngine *_engine );
+    virtual void setEngine(	QScriptEngine *_engine );
     QScriptValue createScriptArray(EdgeList list);
 #endif
-    
+
 
 
 public  slots:
@@ -112,12 +112,12 @@ public  slots:
     * @param value Value of the property. arg2 shoud be different of QVariant::Invalid.
     */
     void addDynamicProperty(QString property, QVariant value);
-    
+
     /** Remove property arg1 from this node. If property arg1 don't exist in this node, nothing is made.
     * @param property name os property to remove
     */
     void removeDynamicProperty(QString property);
-    
+
 #ifdef USING_QTSCRIPT
 
     QScriptValue adj_nodes();
@@ -130,7 +130,7 @@ public  slots:
 #endif
 
     Edge* addEdge(Node* to);
-    
+
 private:
     EdgeList _in_edges;
     EdgeList _out_edges;
@@ -141,23 +141,24 @@ private:
     qreal _x;
     qreal _y;
     qreal _width;
-    
+
     bool _begin;
     bool _end;
     bool _changing;
     bool _showName;
     bool _showValue;
-    
+
     Graph *_graph;
-    
+
     QString _name;
     QString _color;
     QString _iconpackage;
     QString _icon;
-    
+
     QVariant _value;
-    
+
 #ifdef USING_QTSCRIPT
+  protected:
     QScriptValue _scriptvalue;
     QScriptEngine *_engine;
 #endif

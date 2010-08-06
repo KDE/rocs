@@ -147,7 +147,8 @@ QGraphicsItem *GraphScene::createNode(Node *n) {
 
 QGraphicsItem *GraphScene::createEdge(Edge *e) {
     QGraphicsItem *edgeItem = 0;
-    edgeItem = new OrientedEdgeItem(e);
+    edgeItem = Rocs::DSPluginManager::New()->edgeItem(e);
+//     edgeItem = new OrientedEdgeItem(e);
 
     addItem(edgeItem);
     kDebug() << "Edge Created";

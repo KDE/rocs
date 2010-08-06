@@ -17,40 +17,46 @@
 
 */
 
-#ifndef LISTSTRUCTURE_H
-#define LISTSTRUCTURE_H
+#include "ListNode.h"
+#include "KDebug"
 
-#include "graph.h"
-#include "rocslib_export.h"
+ListNode::ListNode(Graph* parent): Node(parent)
+{
 
-class ListNode;
-namespace Rocs{
-class ROCSLIB_EXPORT ListStructure : public Graph {
-  Q_OBJECT
-  public:
-
-    ListStructure ( GraphDocument* parent = 0 );
-
-    ListStructure(Graph& other);
-
-    virtual ~ListStructure();
-  public slots:
-
-    virtual void setEngine ( QScriptEngine* engine );
-
-    virtual Node* addNode ( QString name );
-
-    virtual Edge* addEdge ( Node* from, Node* to );
-
-    void arrangeNodes();
-
-    QScriptValue front();
-    QScriptValue createNode(const QString &name);
-
-
-private:
-
-    ListNode * _front;
-};
 }
-#endif // LISTSTRUCTURE_H
+
+
+ListNode::~ListNode()
+{
+
+}
+
+QScriptValue ListNode::front(){
+  if (ListNode * n = next()){
+      return n->scriptValue();
+  }
+  return 0;
+}
+
+void ListNode::pointTo(ListNode* to )
+{
+    addEdge(to);
+}
+
+
+void ListNode::setEngine(QScriptEngine* engine)
+{
+     _engine = engine;
+    _scriptvalue = engine->newQObject(this);
+}
+
+
+
+ListNode * ListNode::next() const{
+    if (out_edges().count() == 1 ){
+        if(ListNode * n = qobject_cast<ListNode*>( out_edges().at(0)->to())){
+          return n;
+        }
+    }
+    return 0;
+}

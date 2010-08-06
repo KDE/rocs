@@ -17,40 +17,29 @@
 
 */
 
-#ifndef LISTSTRUCTURE_H
-#define LISTSTRUCTURE_H
+#ifndef LISTNODE_H
+#define LISTNODE_H
 
-#include "graph.h"
-#include "rocslib_export.h"
+#include <node.h>
 
-class ListNode;
-namespace Rocs{
-class ROCSLIB_EXPORT ListStructure : public Graph {
+
+class ListNode : public Node
+{
   Q_OBJECT
   public:
+    ListNode(Graph* parent);
 
-    ListStructure ( GraphDocument* parent = 0 );
+    virtual ~ListNode();
 
-    ListStructure(Graph& other);
+    virtual void setEngine(QScriptEngine* _engine);
 
-    virtual ~ListStructure();
+    ListNode * next() const;
+
   public slots:
-
-    virtual void setEngine ( QScriptEngine* engine );
-
-    virtual Node* addNode ( QString name );
-
-    virtual Edge* addEdge ( Node* from, Node* to );
-
-    void arrangeNodes();
-
     QScriptValue front();
-    QScriptValue createNode(const QString &name);
+    void pointTo(ListNode *);
 
 
-private:
-
-    ListNode * _front;
 };
-}
-#endif // LISTSTRUCTURE_H
+
+#endif // LISTNODE_H
