@@ -137,12 +137,12 @@ QMutex& MainWindow::mutex() { return _mutex;}
 
 MainWindow::~MainWindow()
 {
-//     Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );
-//     Settings::setVSplitterSizeBottom ( _vSplitter->sizes() [1] );
-//     Settings::setHSplitterSizeLeft ( _hSplitter->sizes() [0] );
-//     Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
+    Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );
+    Settings::setVSplitterSizeBottom ( _vSplitter->sizes() [1] );
+    Settings::setHSplitterSizeLeft ( _hSplitter->sizes() [0] );
+    Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
 
-//     Settings::self()->writeConfig();
+    Settings::self()->writeConfig();
   //  _mutex.unlock();
     emit endThreadDocument();
     _tDocument->wait();

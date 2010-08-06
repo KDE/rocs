@@ -169,9 +169,8 @@ install( FILES
 )
 
 
-if(BUILD_ROCS_PLUGINS)
+
 add_subdirectory(Plugins)
-endif(BUILD_ROCS_PLUGINS)
 
 add_subdirectory(Scripts)
 
