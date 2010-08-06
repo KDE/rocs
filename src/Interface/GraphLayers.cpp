@@ -36,7 +36,7 @@ void GraphLayers::populate() {
     }
 
     GraphDocument *gd = _mainWindow->activeDocument();
-    connect(gd, SIGNAL(graphCreated(Graph*)), this, SLOT(addGraph(Graph*)));
+    connect(gd, SIGNAL(graphCreated(Graph*)), this, SLOT(addGraph(Graph*)),Qt::UniqueConnection);
 
     int total = gd->count();
     for (int i = 0; i < total; ++i) {
@@ -55,7 +55,7 @@ void GraphLayers::btnADDClicked() {
 void GraphLayers::addGraph(Graph *g){
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
     _buttonGroup->addButton(gp->radio());
-    connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()));
+    connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()),Qt::UniqueConnection);
     qobject_cast<QVBoxLayout*>(layout())->insertWidget(1,gp);
 }
 
