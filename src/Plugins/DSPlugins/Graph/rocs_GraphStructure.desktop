@@ -14,6 +14,7 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=Graph
 Name[en_GB]=Graph
+Name[es]=Graph
 Name[pt]=Grafo
 Name[pt_BR]=Grafo
 Name[sv]=Graf
