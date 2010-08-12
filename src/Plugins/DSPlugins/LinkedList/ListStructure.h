@@ -51,6 +51,7 @@ class ROCSLIB_EXPORT ListStructure : public Graph {
 private:
 
     ListNode * _front;
+    QParallelAnimationGroup* _animationGroup;
 };
 }
 #endif // LISTSTRUCTURE_H

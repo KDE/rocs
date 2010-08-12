@@ -508,6 +508,8 @@ void MainWindow::openGraph()
     if ( saveIfChanged() == KMessageBox::Cancel ) return;
     QString fileName = KFileDialog::getOpenFileName ( QString(), i18n ( "*.graph|Graph files\n*|All files" ), this, i18n ( "Graph Files" ) );
     if ( fileName == "" ) return;
+//     Rocs::ImporterExporterManager imp(this);
+//     imp.openDocument();
     loadDocument ( fileName );
 }
 

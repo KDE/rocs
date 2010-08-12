@@ -24,11 +24,23 @@
 #include <KDebug>
 #include <PluginManager.h>
 #include <KPushButton>
+#include <kdebug.h>
+
+#include <QFile>
+
+#include <boost/config/warning_disable.hpp>
+#include <boost/spirit/include/qi.hpp>
+#include <boost/spirit/include/phoenix_operator.hpp>
+
+#include <iostream>
+#include <string>
+
 
 using namespace Rocs;
 
 ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(parent), _scriptToRun(QString())
 {
+
 }
 
 bool ImporterExporterManager::exportFile(GraphDocument * doc) const
@@ -120,7 +132,7 @@ bool ImporterExporterManager::exportFile(GraphDocument * doc) const
     if ( !gd ){
         kDebug() << "Error loading file" << fileName << f->lastError();
     }
-   // _scriptToRun = f->scriptToRun();
+   _scriptToRun = f->scriptToRun();
     return gd;
 }
 

@@ -22,6 +22,10 @@
 
 #include <QObject>
 #include "Core/graphDocument.h"
+// #include <boost/spirit/home/classic/core/non_terminal/grammar.hpp>
+// #include <boost/spirit/home/classic/core/non_terminal/rule.hpp>
+
+
 
 namespace Rocs{
 
@@ -37,6 +41,8 @@ class ImporterExporterManager : public QObject
 
     void dialogExec();
     bool hasDialog();
+
+//     GraphDocument * openDocument();
 };
 }
 #endif // IMPORTEREXPORTERMANAGER_H

@@ -27,6 +27,7 @@ Rocs::ListStructure::ListStructure ( GraphDocument* parent ) : Graph ( parent ) 
   p->hideName(false);
   p->hideValue(true);
   setBegin(p);
+  _animationGroup = new QParallelAnimationGroup(this);
   arrangeNodes();
 
 }
@@ -34,11 +35,13 @@ Rocs::ListStructure::ListStructure ( GraphDocument* parent ) : Graph ( parent ) 
 Rocs::ListStructure::ListStructure(Graph& other): Graph(other)
 {
   setDirected(true);
+  _animationGroup = new QParallelAnimationGroup(this);
   if (_begin == 0){
     Node * p = addNode("P");
     p->hideName(true);
     p->hideValue(false);
     setBegin(p);
+
     arrangeNodes();
   }
 
@@ -108,6 +111,9 @@ QScriptValue Rocs::ListStructure::createNode(const QString & name){
 void Rocs::ListStructure::arrangeNodes(){
   qreal x;
   qreal y;
+  if (_animationGroup->state() != QAnimationGroup::Stopped){
+    _animationGroup->stop();
+  }
   QScopedArrayPointer<bool>visited (new bool[_nodes.count()]);
   for (int i = 0; i < _nodes.count(); ++i){
     visited[i] = false;
@@ -115,8 +121,17 @@ void Rocs::ListStructure::arrangeNodes(){
   if (_begin == 0){
     return;
   }
-  _begin->setX(40);
-  _begin->setY(100);
+  QPropertyAnimation * anim = new QPropertyAnimation(_begin, "x");;
+  anim->setDuration(500);
+  anim->setStartValue(_begin->x());
+  anim->setEndValue(40);
+  _animationGroup->addAnimation(anim);
+  anim = new QPropertyAnimation(_begin, "y");;
+  anim->setDuration(500);
+  anim->setStartValue(_begin->y());
+  anim->setEndValue(120);
+  _animationGroup->addAnimation(anim);
+
   visited[_nodes.indexOf(_begin)] = true;
   ListNode * n = qobject_cast<ListNode*>(_begin);
   x = n->width() * 40;
@@ -126,17 +141,36 @@ void Rocs::ListStructure::arrangeNodes(){
       break;
     }
     visited[_nodes.indexOf(n)] = true;
-     x = x + 70 + n->width()*40;
-     n->setX(x);
-     n->setY(y);
+    x = x + 70 + n->width()*40;
+    anim = new QPropertyAnimation(n, "x");;
+    anim->setDuration(500);
+    anim->setStartValue(n->x());
+    anim->setEndValue(x);
+    _animationGroup->addAnimation(anim);
+    anim = new QPropertyAnimation(n, "y");;
+    anim->setDuration(500);
+    anim->setStartValue(n->y());
+    anim->setEndValue(y);
+    _animationGroup->addAnimation(anim);
   }
   x = y = 30;
   foreach (Node * n, _nodes){
     if (!visited[_nodes.indexOf(n)]){
-      n->setX(x);
-      n->setY(y);
-      x += 40;
+      anim = new QPropertyAnimation(n, "x");;
+      anim->setDuration(500);
+      anim->setStartValue(n->x());
+      anim->setEndValue(x);
+      _animationGroup->addAnimation(anim);
+      anim = new QPropertyAnimation(n, "y");;
+      anim->setDuration(500);
+      anim->setStartValue(n->y());
+      anim->setEndValue(y);
+      _animationGroup->addAnimation(anim);
+//       n->setX(x);
+//       n->setY(y);
+      x += 60;
     }
   }
+  _animationGroup->start();
 }
 
