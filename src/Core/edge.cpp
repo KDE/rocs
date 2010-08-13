@@ -90,10 +90,10 @@ void Edge::hideValue(bool b) {
 }
 
 void Edge::addDynamicProperty(QString property, QVariant value){
-    this->setProperty(property.toUtf8(), value);
-    if (value.isValid()){
+  if (!setProperty(property.toUtf8(), value)  &&   value.isValid()){ //if is addeding and NOT is a Q_PROPERTY
       DynamicPropertiesList::New()->addProperty(this, property);
-    }
+
+  }
 }
 
 void Edge::removeDynamicProperty(QString property){

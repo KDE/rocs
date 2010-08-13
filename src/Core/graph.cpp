@@ -334,8 +334,7 @@ bool Graph::automate() {
 }
 
 void Graph::addDynamicProperty(QString property, QVariant value){
-    this->setProperty(property.toUtf8(), value);
-    if (value.isValid()){
+    if ( !setProperty(property.toUtf8(), value) && value.isValid()){
       DynamicPropertiesList::New()->addProperty(this, property);
     }
 }

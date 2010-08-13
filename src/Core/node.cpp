@@ -49,7 +49,7 @@ Node::~Node() {
     empty(_in_edges);
     empty(_out_edges);
     empty(_self_edges);
-    
+
 }
 
 void Node::empty(EdgeList &list) {
@@ -322,14 +322,13 @@ void Node::endChange() {
 }
 
 void Node::addDynamicProperty(QString property, QVariant value){
-    this->setProperty(property.toUtf8(), value);
-    if (value.isValid()){
+    if (! setProperty(property.toUtf8(), value)  && value.isValid()){
       DynamicPropertiesList::New()->addProperty(this, property);
     }
 }
 
 void Node::removeDynamicProperty(QString property){
-    this->addDynamicProperty(property.toUtf8(), QVariant::Invalid);
+    addDynamicProperty(property.toUtf8(), QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property);
 }
 

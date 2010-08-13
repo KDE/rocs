@@ -72,44 +72,33 @@ GraphDocument * GMLParser::readFile ( const QString &fileName ) {
 
 
 
-bool GMLParser::writeFile ( GraphDocument &graph , const QString &filename ) {
+bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) {
     QFile file ( filename );
     QVariantList subgraphs;
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
-        Graph *g = graph.activeGraph();
-        if (g) {
-            out << QString("%1 %2 {\n").arg(g->directed()?"digraph":"graph").arg(g->name());
+        out << "Version 1\n";
+        out << "Vendor \"Rocs\"";
+        for (int i = 0 ; i < graphDoc.count(); ++i){
+          Graph *g = graphDoc.at(i);
+//         Graph *g = graph.activeGraph();
+            out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
+            out << QString("id \"%1\" \n").arg(g->name());
+
             foreach ( Node *n, g->nodes() ) {
-                if (n->dynamicPropertyNames().contains("SubGraph")){
-                  if (!subgraphs.contains(n->property("SubGraph"))){
-                    subgraphs << n->property("SubGraph");
-                    out << QString("subgraph %1 {\n").arg(n->property("SubGraph").toString());
-                    foreach ( Node *nTmp, g->nodes() ) {
-                        if (nTmp->property("SubGraph").isValid() && nTmp->property("SubGraph") == subgraphs.last()){
-                          out << processNode(nTmp);
-                        }
-                    }
-                    foreach ( Edge *e, g->edges() ) {
-                        if (e->property("SubGraph").isValid() && e->property("SubGraph") == subgraphs.last()){ //Only edges from outer graph
-                           out << processEdge(e);
-                        }
-                    }
-                    out << "}\n";
-                  }
-                }else{
-                  out << processNode(n);
-                }
+                out << QString("node [\n id \"%1\" \n").arg(n->name());
+
+                out << "]\n";
+
             }
             foreach ( Edge *e, g->edges() ) {
-                if (!e->dynamicPropertyNames().contains("SubGraph")){ //Only edges from outer graph
-                    out << processEdge(e);
-                }
+                out << "edge [\n";
+                out << QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->name(), e->to()->name());
+                out << "]\n";
             }
-            out << "}\n";
-            return true;
+            out << "]\n";
         }
-        setError(i18n("No active graph in this document."));
+        return true;
     }
     setError(i18n("Cannot open file %1 to write document. Error: %2").arg(filename).arg(file.errorString()));
     return false;

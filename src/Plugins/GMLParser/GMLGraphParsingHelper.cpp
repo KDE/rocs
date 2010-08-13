@@ -112,6 +112,7 @@ const QString GMLGraphParsingHelper::processKey(const QString& key){
 
 void GMLGraphParsingHelper::setAtribute(const QString& key, const QString& value)
 {
+  kDebug() << "Setting attibute " << key;
   switch(_actualState){
     case begin: break;
     case graph:
@@ -120,8 +121,10 @@ void GMLGraphParsingHelper::setAtribute(const QString& key, const QString& value
            joined.append('.').append(key);
            actualGraph->setProperty(joined.toAscii(),value);
         }else{
-           kDebug() << "seting property to graph" << key << value;
-          actualGraph->setProperty(processKey(key).toAscii(),value);
+          kDebug() << "seting property to graph" << key << value;
+//           if (!actualGraph->setProperty(processKey(key).toAscii(),value)){
+            actualGraph->addDynamicProperty(processKey(key),value);  //is a dinamic property
+//           }
         }
         break;
     case edge:
@@ -133,16 +136,20 @@ void GMLGraphParsingHelper::setAtribute(const QString& key, const QString& value
            }else{
             _edgeProperties.insert(joined, value);
            }
-        }else if (key.compare("source", Qt::CaseInsensitive)){   // search for source....
+        }else if (key.compare("source", Qt::CaseInsensitive) == 0){   // search for source....
               edgeSource = value;
               createEdge();
-        }else if (key.compare("target", Qt::CaseInsensitive)){   // .... and target
+        }else if (key.compare("target", Qt::CaseInsensitive) == 0){   // .... and target
               edgeTarget = value;
               createEdge();
         }else if (actualEdge){       //if edge was created.
-              actualEdge->setProperty(key.toAscii(),value);
+//               if(!actualEdge->setProperty(processKey(key).toAscii(),value)){
+                kDebug() << "inserting edge key: " << key;
+                actualEdge->addDynamicProperty(processKey(key),value);
+// //               }
         }else{
-            _edgeProperties.insert(processKey(key).toAscii(), value); //store to be inserted later
+            kDebug() << "Saving edge key: " << key;
+            _edgeProperties.insert(processKey(key), value); //store to be inserted later
         }
         break;
     case node:
@@ -152,7 +159,9 @@ void GMLGraphParsingHelper::setAtribute(const QString& key, const QString& value
            actualNode->setProperty(joined.toAscii(),value);
         }else{
           kDebug() << "seting property to node" << key << value;
-          actualNode->setProperty(processKey(key).toAscii(),value);
+//           if(!actualNode->setProperty(processKey(key).toAscii(),value)){
+            actualNode->addDynamicProperty(processKey(key), value);
+//           }
         }
         break;
   }
@@ -178,12 +187,17 @@ void GMLGraphParsingHelper::createNode(){
 
 void GMLGraphParsingHelper::createEdge(){
     if (!edgeSource.isEmpty() && !edgeTarget.isEmpty()){
-      kDebug () << "Creating a edge";
+      kDebug() << "Creating a edge";
       _actualState = edge;
       actualEdge = actualGraph->addEdge(edgeSource, edgeTarget);
       edgeSource = edgeTarget = QString();
+      while( ! _edgeProperties.isEmpty()){
+        QString property = _edgeProperties.keys().at(0);
+        actualEdge->addDynamicProperty(property, _edgeProperties.value(property));
+        _edgeProperties.remove(property);
+      }
     }else if (_actualState == graph){
-      kDebug () << "Creating a Edge";
+      kDebug () << "changing state Edge";
       _actualState = edge;
       actualEdge = 0;
     }
