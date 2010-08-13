@@ -49,7 +49,10 @@ namespace GMLPlugin
 
     void endList();
 
-    bool parse(const QString &content, GraphDocument *doc);
+    void t();
+    void t1();
+
+    bool parse(QString& content, GraphDocument* doc);
 
     template <typename Iterator>
     struct roman : boost::spirit::qi::grammar<Iterator, unsigned()>
@@ -65,11 +68,11 @@ namespace GMLPlugin
 
             start = List;
             List = -KeyValue >> *(+WhiteSpace >> KeyValue) >> *WhiteSpace;
-            KeyValue = Key[&gotKey] >> +WhiteSpace >> Value[&gotValue];
+            KeyValue = *(WhiteSpace) >> Key[&gotKey] >> +WhiteSpace >> Value[&gotValue] ;
             Key = (char_("a-zA-Z")[_val += _1] >> *char_("a-zA-Z0-9_")[_val += _1]);
             Value = -Sign[_val += _1] >> +char_("0-9")[_val += _1] >> -(( char_('.')[_val += _1] >> +char_("0-9")[_val += _1]))
                     | String[_val = _1]
-                    | char_('[')[beginList] >> *WhiteSpace >> List >> *WhiteSpace >> char_(']')[endList] ;
+                    | char_('[')[beginList] >> *WhiteSpace >> List >> *WhiteSpace>> char_(']')[endList] ;
             String = lexeme[char_('"') >> *(char_ - '"')[_val += _1] >> char_('"')];
             Sign = (char_('+')|char_('-'))[_val += _1];
             WhiteSpace = ascii::space;
@@ -78,7 +81,7 @@ namespace GMLPlugin
         boost::spirit::qi::rule<Iterator, unsigned()> start;
         boost::spirit::qi::rule<Iterator> List, KeyValue ;
         boost::spirit::qi::rule<Iterator, std::string()> Key, Value, String, Sign;
-        boost::spirit::qi::rule<Iterator> WhiteSpace;
+        boost::spirit::qi::rule<Iterator> WhiteSpace/*, Comments*/;
     };
 }
 }

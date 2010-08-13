@@ -420,30 +420,30 @@ QScriptValue Graph::scriptValue() const {
     return _value;
 }
 
-// void Graph::setEngine(	QScriptEngine *engine ) {
-//     _engine = engine;
-//
-//     _value = _engine->newQObject(this);
-//
-//     if (! _name.isEmpty() ) {
-//         _engine->globalObject().setProperty(_name, _value);
-//         kDebug() << _name << "Added as global object.";
-//     }
-//
-//     foreach(Node *n, _nodes) {
-//         n->setEngine(engine);
-//     }
-//     foreach(Edge *e, _edges) {
-//         e->setEngine(engine);
-//     }
-// //    foreach(GraphGroup *g, _graphGroups) {
-// //        QScriptValue array = _engine->newArray();
-// //        foreach(Node* n, (*g) ) {
-// //            array.property("push").call(array, QScriptValueList() << n->scriptValue());
-// //        }
-// //        _engine->globalObject().setProperty(g->name(), array);
-// //    }
-// }
+void Graph::setEngine(	QScriptEngine *engine ) {
+    _engine = engine;
+
+    _value = _engine->newQObject(this);
+
+    if (! _name.isEmpty() ) {
+        _engine->globalObject().setProperty(_name, _value);
+        kDebug() << _name << "Added as global object.";
+    }
+
+    foreach(Node *n, _nodes) {
+        n->setEngine(engine);
+    }
+    foreach(Edge *e, _edges) {
+        e->setEngine(engine);
+    }
+//    foreach(GraphGroup *g, _graphGroups) {
+//        QScriptValue array = _engine->newArray();
+//        foreach(Node* n, (*g) ) {
+//            array.property("push").call(array, QScriptValueList() << n->scriptValue());
+//        }
+//        _engine->globalObject().setProperty(g->name(), array);
+//    }
+}
 
 
 #endif

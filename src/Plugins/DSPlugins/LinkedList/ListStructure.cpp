@@ -64,23 +64,23 @@ Edge* Rocs::ListStructure::addEdge ( Node* from, Node* to ) {
     return e;
 }
 
-void Rocs::ListStructure::setEngine ( QScriptEngine* engine )
-{
-    _engine = engine;
-
-    _value = _engine->newQObject(this);
-
-    if (! name().isEmpty() ) {
-        _engine->globalObject().setProperty(name(), _value);
-    }
-
-    foreach(Node *n, nodes()) {
-        n->setEngine(engine);
-    }
-    foreach(Edge *e, edges()) {
-        e->setEngine(engine);
-    }
-}
+// void Rocs::ListStructure::setEngine ( QScriptEngine* engine )
+// {
+//     _engine = engine;
+//
+//     _value = _engine->newQObject(this);
+//
+//     if (! name().isEmpty() ) {
+//         _engine->globalObject().setProperty(name(), _value);
+//     }
+//
+//     foreach(Node *n, nodes()) {
+//         n->setEngine(engine);
+//     }
+//     foreach(Edge *e, edges()) {
+//         e->setEngine(engine);
+//     }
+// }
 
 
 Node* Rocs::ListStructure::addNode ( QString name ) {

@@ -34,9 +34,6 @@ class ROCSLIB_EXPORT GraphStructure : public Graph {
 
     virtual ~GraphStructure();
   public slots:
-
-    virtual void setEngine ( QScriptEngine* engine );
-
     QScriptValue list_nodes();
     QScriptValue list_edges();
     QScriptValue add_node(const QString& name);

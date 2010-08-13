@@ -83,7 +83,15 @@ void gotValue(const std::string& Value){
   }
 }
 
-bool parse(const QString &content, GraphDocument * doc){
+
+    void t(){
+      std::cout << "Found whitespace.\n";
+    }
+    void t1(const std::string &key){
+      std::cout << "Found " << key << ".\n";
+    }
+
+bool parse( QString &content, GraphDocument * doc){
     unsigned result;
     phelper = new GMLGraphParsingHelper;
     phelper->gd = doc;
@@ -94,6 +102,10 @@ bool parse(const QString &content, GraphDocument * doc){
 
 //     std::string content = file.readAll().data();
 //     kDebug() << QString::fromStdString(content);
+    int index;
+    while ( ( index = content.indexOf('#') ) != -1){
+      content.remove(index, content.indexOf('\n', index) - index);
+    }
     std::string str = content.toStdString();
     iterator_type iter = str.begin();
     iterator_type end = str.end();

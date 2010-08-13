@@ -56,7 +56,7 @@ GraphDocument * GMLParser::readFile ( const QString &fileName ) {
 //     Graph * graph = graphDoc->addGraph();
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
-    if ( !f.open ( QFile::ReadOnly ) ) {
+    if ( !f.open ( QIODevice::ReadOnly | QIODevice::Text ) ) {
         setError ( i18n ( "Cannot open the file: %1. Error %2" ).arg ( fileName ).arg ( f.errorString() ) );
         delete graphDoc;
         return 0;

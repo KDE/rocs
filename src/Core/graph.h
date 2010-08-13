@@ -98,7 +98,7 @@ public:
 
     /*! if QtScript is enabled for this rocs,
     \p engine is the QtScript engine that will be set for this graph. */
-    virtual void setEngine( QScriptEngine *engine ) = 0;
+    virtual void setEngine( QScriptEngine *engine );
 #endif
 
 public  slots:

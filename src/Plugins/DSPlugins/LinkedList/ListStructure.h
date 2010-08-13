@@ -36,7 +36,7 @@ class ROCSLIB_EXPORT ListStructure : public Graph {
     virtual ~ListStructure();
   public slots:
 
-    virtual void setEngine ( QScriptEngine* engine );
+//     virtual void setEngine ( QScriptEngine* engine );
 
     virtual Node* addNode ( QString name );
 

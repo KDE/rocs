@@ -21,7 +21,7 @@
 #include <QTest>
 #include <string>
 #include <Core/graphDocument.h>
-#include "../dotgrammar.h"
+#include "../GMLGrammar.h"
 #include <Core/graph.h>
 #include <Core/DynamicPropertiesList.h>
 #include <KDebug>
