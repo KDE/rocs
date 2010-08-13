@@ -13,7 +13,13 @@ X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=GML file
+Name[pt]=Ficheiro GML
+Name[sv]=GML-fil
+Name[uk]=Файл GML
 Name[x-test]=xxGML filexx
 Comment=Read and write GML files.
+Comment[pt]=Ler e gravar ficheiros GML.
+Comment[sv]=Läs och skriv GML-filer.
+Comment[uk]=Читання і запис файлів GML.
 Comment[x-test]=xxRead and write GML files.xx
 
