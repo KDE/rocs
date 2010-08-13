@@ -34,25 +34,6 @@ Rocs::GraphStructure::~GraphStructure() {
 }
 
 
-void Rocs::GraphStructure::setEngine ( QScriptEngine* engine )
-{
-    _engine = engine;
-
-    _value = _engine->newQObject(this);
-
-    if (! name().isEmpty() ) {
-        _engine->globalObject().setProperty(name(), _value);
-        kDebug() << name() << "It is a Graph!.";
-    }
-
-    foreach(Node *n, nodes()) {
-        n->setEngine(engine);
-    }
-    foreach(Edge *e, edges()) {
-        e->setEngine(engine);
-    }
-}
-
 QScriptValue Rocs::GraphStructure::list_nodes() {
     QScriptValue array = _engine->newArray();
     foreach(Node* n, _nodes) {
