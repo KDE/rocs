@@ -78,7 +78,7 @@ bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) 
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
         out << "Version 1\n";
-        out << "Vendor \"Rocs\"";
+        out << "Vendor \"Rocs\"\n";
         for (int i = 0 ; i < graphDoc.count(); ++i){
           Graph *g = graphDoc.at(i);
 //         Graph *g = graph.activeGraph();
@@ -87,13 +87,20 @@ bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) 
 
             foreach ( Node *n, g->nodes() ) {
                 out << QString("node [\n id \"%1\" \n").arg(n->name());
-
+//                 foreach (QByteArray p, n->dynamicPropertyNames()){
+//                    out << p << " " << n->property(p).toString() << "\n";
+//                  }
+                out << processNode(n);
                 out << "]\n";
 
             }
             foreach ( Edge *e, g->edges() ) {
                 out << "edge [\n";
-                out << QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->name(), e->to()->name());
+//                  foreach (QByteArray p, e->dynamicPropertyNames()){
+//                    out << p << " " << e->property(p).toString() << "\n";
+//                  }
+                out << processEdge(e);
+
                 out << "]\n";
             }
             out << "]\n";
@@ -107,62 +114,38 @@ bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) 
 QString const GMLParser::processEdge(Edge*e ) const
 {
     QString edge;
-    edge.append(QString(" %1 -> %2 ").arg(e->from()->property("NodeName").isValid()?
-                                                  e->from()->property("NodeName").toString():
-                                                  e->from()->name())
-                                      .arg( e->to()->property("NodeName").isValid()?
-                                                  e->to()->property("NodeName").toString():
-                                                  e->to()->name()));
-    bool firstProperty = true;
-    if(!e->name().isEmpty()){
-      firstProperty = false;
-      edge.append("[");
-      edge.append(QString(" label = \"%2\" ").arg(e->name()));
+    edge.append(QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->name(), e->to()->name()));
+    if (!e->name().isEmpty()){
+      edge.append (QString(" id \"%1\"\n").arg(e->name()));
     }
-    foreach(QByteArray property, e->dynamicPropertyNames()){
-      if (property != "SubGraph"){
-        if(firstProperty == true){
-          firstProperty = false;
-          edge.append("[");
-        }else{
-          edge.append(", ");
-        }
-        edge.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(e->property(property).toString()));
-      }
+    edge.append (QString(" width \"%1\"\n").arg(e->width()));
+//     edge.append (QString(" color \"%1\"\n").arg(e->color())); //Problem with comments (both starts by '#')
+    edge.append (QString(" value \"%1\"\n").arg(e->value()));
+
+
+    foreach (QByteArray p, e->dynamicPropertyNames()){
+      edge.append( QString("%1 %2\n").arg(QString(p)).arg(e->property(p).toString()));
     }
-    if (!firstProperty) //At least one property was inserted
-      edge.append("]");
-    edge.append(";\n");
+
     return edge;
 }
 
 QString const GMLParser::processNode(Node* n) const
 {
-        QString node;
-        if (n->property("NodeName").isValid())
-          node = QString("%1").arg(n->property("NodeName").toString());
-        else
-          node = QString("%1").arg(n->name());
+      QString node;
+      node.append(QString("  x %1 \n  y %2 \n").arg(n->x()).arg(n->y()));
+      node.append (QString(" width %1\n").arg(n->width()));
+//       node.append (QString(" color \"%1\"\n").arg(n->color())); //Problem with comments (both starts by '#')
+      node.append (QString(" value \"%1\"\n").arg(n->value().toString()));
+      node.append (QString(" iconPackage \"%1\"\n").arg(n->iconPackage()));
+      node.append (QString(" icon \"%1\"\n").arg(n->icon()));
 
-        bool firstProperty = true;
-        foreach(QByteArray property, n->dynamicPropertyNames()){
-          if (property != "NodeName" && property != "SubGraph"){
-            if(firstProperty == true){
-              firstProperty = false;
-              node.append("[");
-            }else{
-              node.append(", ");
-            }
-            node.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(n->property(property).toString()));
-          }
-        }
-        //Need save X and Y??
-        if (!firstProperty){ //At least one property was inserted
-          node.append("]");
-        }else{ //No needs os nodes definition, it doesn't have any property.
-          return QString();
-        }
-        node.append(";\n");
+      foreach (QByteArray p, n->dynamicPropertyNames()){
+        QString s = p ;
+
+        node.append(QString("%1 \"%2\"\n").arg(s.replace('.', '_')).arg(n->property(p).toString()));
+      }
+
         return node;
 }
 

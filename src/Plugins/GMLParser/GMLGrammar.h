@@ -73,7 +73,7 @@ namespace GMLPlugin
             Value = -Sign[_val += _1] >> +char_("0-9")[_val += _1] >> -(( char_('.')[_val += _1] >> +char_("0-9")[_val += _1]))
                     | String[_val = _1]
                     | char_('[')[beginList] >> *WhiteSpace >> List >> *WhiteSpace>> char_(']')[endList] ;
-            String = lexeme[char_('"') >> *(char_ - '"')[_val += _1] >> char_('"')];
+            String = lexeme[char_('"') >> *((char_ - '"') | char_('/'))[_val += _1] >> char_('"')];
             Sign = (char_('+')|char_('-'))[_val += _1];
             WhiteSpace = ascii::space;
         }
