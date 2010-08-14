@@ -27,7 +27,7 @@ class ListNode : public Node
 {
   Q_OBJECT
   public:
-    ListNode(Graph* parent);
+    ListNode(DataStructureBase* parent);
 
     virtual ~ListNode();
 

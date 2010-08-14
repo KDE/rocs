@@ -18,7 +18,7 @@
  ***************************************************************************/
 
 #include "testGraph.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "node.h"
 #include "edge.h"
 #include "krossBackend.h"
@@ -37,7 +37,7 @@ GraphTests::GraphTests()
 }
 
 void GraphTests::init() {
-    foreach(Graph *g, _graphDocument) {
+    foreach(DataStructureBase *g, _graphDocument) {
         delete g;
     }
     _graphDocument.clear();

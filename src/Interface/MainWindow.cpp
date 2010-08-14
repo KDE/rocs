@@ -50,7 +50,7 @@
 
 // Graph Related Includes
 #include "graphDocument.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 
 #include "settings.h"
 
@@ -432,7 +432,7 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)),
              _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,GraphDocument*)),Qt::UniqueConnection);
 
-    connect(activeDocument(), SIGNAL(activeGraphChanged(Graph*)), this, SLOT(setActiveGraph(Graph*)),Qt::UniqueConnection);
+    connect(activeDocument(), SIGNAL(activeGraphChanged(DataStructureBase*)), this, SLOT(setActiveGraph(DataStructureBase*)),Qt::UniqueConnection);
     connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)),Qt::UniqueConnection);
 
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()),Qt::UniqueConnection);
@@ -461,7 +461,7 @@ void MainWindow::releaseDocument ( GraphDocument* d ){
     _waitForDocument.wakeAll();
 }
 
-void MainWindow::setActiveGraph ( Graph *g )
+void MainWindow::setActiveGraph ( DataStructureBase *g )
 {
     if ( _tDocument->document() == 0 )
     {
@@ -485,7 +485,7 @@ void MainWindow::setActiveGraph ( Graph *g )
 
 }
 
-Graph* MainWindow::graph() const
+DataStructureBase* MainWindow::graph() const
 {
     return _tDocument->document()->activeGraph();
 }

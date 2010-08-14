@@ -21,7 +21,7 @@
 #define DSPLUGINMANAGER_H
 
 #include <QObject>
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "rocslib_export.h"
 
 class QLayout;
@@ -42,10 +42,10 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
     static DSPluginManager * New();
 
     /** build a new graph using actual data structure. */
-    static Graph * createNewDS(GraphDocument* parent, const QString& pluginName = QString());
+    static DataStructureBase * createNewDS(GraphDocument* parent, const QString& pluginName = QString());
 
     /** When the DS pluin  is changed, all the existent graphs must be 'rebuild' with the new DS. If is not possible to change to a new data structure without losing data, then user should be asked to continue or nor. If user say to not continue, all ready done job should be undo.*/
-    static Graph * changeToDS(Graph*);
+    static DataStructureBase * changeToDS(DataStructureBase*);
 
     /** return the list of avaliable data structure plugins.*/
     static const QStringList listOfDS();
@@ -67,7 +67,7 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
     /** Create extra widgets to edge properties window. If no extra properties is needed the is returned 0*/
     QLayout * edgeExtraProperties(Edge* edge, QWidget * parent);
     /** Create extra widgets to graph properties window. If no extra properties is needed the is returned 0*/
-    QLayout * graphExtraProperties(Graph* graph, QWidget * parent);
+    QLayout * graphExtraProperties(DataStructureBase* graph, QWidget * parent);
 
   signals:
     /** signal emited when is changing the data structure to \newDS */

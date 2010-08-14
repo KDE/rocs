@@ -23,9 +23,8 @@
 #include <KGenericFactory>
 #include <QFile>
 #include <KDebug>
-#include <Core/graph.h>
+#include <Core/DataStructureBase.h>
 #include <Core/node.h>
-#include <QXmlQuery>
 #include <QXmlResultItems>
 #include <QXmlNodeModelIndex>
 #include "KMLHandler.h"
@@ -47,7 +46,7 @@ KMLParser::KMLParser ( QObject* parent, const QList< QVariant >& ) :
 bool KMLParser::writeFile(GraphDocument& graph, const QString& fileName)
 {
     QFile file(fileName);
-    Graph * g = graph.activeGraph();
+    DataStructureBase * g = graph.activeGraph();
     if (!file.open(QIODevice::WriteOnly|QIODevice::Text)) {
         _lastError = i18n("Cannot open file %1: %2").arg(fileName).arg(file.errorString());
         return false;
@@ -119,7 +118,7 @@ bool KMLParser::writeFile(GraphDocument& graph, const QString& fileName)
 GraphDocument* KMLParser::readFile(const QString& file)
 {
     GraphDocument * graphDoc = new GraphDocument("KML File");
-    Graph * g = graphDoc->addGraph();
+    DataStructureBase * g = graphDoc->addGraph();
 
     KMLHandler handler(g);
     QFile f(file);

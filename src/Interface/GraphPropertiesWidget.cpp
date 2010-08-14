@@ -22,7 +22,7 @@
 #include "model_GraphProperties.h"
 #include <KDebug>
 #include <QGraphicsItem>
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "graphDocument.h"
 #include "node.h"
 #include "edge.h"
@@ -35,7 +35,7 @@
 #include <DSPluginManager.h>
 
 
-GraphPropertiesWidget::GraphPropertiesWidget (Graph *g, MainWindow* parent )
+GraphPropertiesWidget::GraphPropertiesWidget (DataStructureBase *g, MainWindow* parent )
         : KButtonGroup ( parent ) {
     setupUi(this);
     _mainWindow = parent;

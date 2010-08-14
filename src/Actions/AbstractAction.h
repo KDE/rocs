@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QString>
 class GraphScene;
-class Graph;
+class DataStructureBase;
 class GraphDocument;
 
 /*!
@@ -55,7 +55,7 @@ public slots:
     /*! Atualize the Active Graph that this action will work on
       \p graph the pointer to the active  Graph
     */
-    virtual void setActiveGraph( Graph *graph);
+    virtual void setActiveGraph( DataStructureBase *graph);
 
     /*! Virtual,  executed when a mouse press occours on the scene.
     \p pos the position on screen that the execution will take part.
@@ -91,7 +91,7 @@ protected:
     GraphDocument *_graphDocument;
 
     /*! pointer to the active graph */
-    Graph *_graph;
+    DataStructureBase *_graph;
 
     /*! pointer to the GraphicsScene with the drawing */
     GraphScene *_graphScene;

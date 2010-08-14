@@ -23,7 +23,7 @@
 #include <list>
 #include <string>
 #include <QStringList>
-#include "Core/graph.h"
+#include "Core/DataStructureBase.h"
 #include "Core/node.h"
 // class Node;
 // class Graph;
@@ -75,7 +75,7 @@ struct DotGraphParsingHelper
   unsigned int z;
   unsigned int maxZ;
 
-  Graph* graph;
+  DataStructureBase* graph;
 
 //   GraphSubgraph* gs;
   Node* gn;

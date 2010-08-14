@@ -19,7 +19,7 @@
 
 #include "node.h"
 #include "edge.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include <KDebug>
 #include <KGlobal>
 #include <kstandarddirs.h>
@@ -27,7 +27,7 @@
 #include "DynamicPropertiesList.h"
 
 
-Node::Node(Graph *parent) : QObject(parent) {
+Node::Node(DataStructureBase *parent) : QObject(parent) {
     _graph = parent;
     _x = 0;
     _y = 0;

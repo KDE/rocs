@@ -22,7 +22,7 @@
 #include <string>
 #include <Core/graphDocument.h>
 #include "../dotgrammar.h"
-#include <Core/graph.h>
+#include <Core/DataStructureBase.h>
 #include <Core/DynamicPropertiesList.h>
 #include <KDebug>
 

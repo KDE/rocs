@@ -20,18 +20,18 @@
 #ifndef LISTSTRUCTURE_H
 #define LISTSTRUCTURE_H
 
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "rocslib_export.h"
 
 class ListNode;
 namespace Rocs{
-class ROCSLIB_EXPORT ListStructure : public Graph {
+class ROCSLIB_EXPORT ListStructure : public DataStructureBase {
   Q_OBJECT
   public:
 
     ListStructure ( GraphDocument* parent = 0 );
 
-    ListStructure(Graph& other);
+    ListStructure(DataStructureBase& other);
 
     virtual ~ListStructure();
   public slots:

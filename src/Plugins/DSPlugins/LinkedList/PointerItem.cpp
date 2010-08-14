@@ -24,7 +24,7 @@
 #include "GraphScene.h"
 #include "node.h"
 #include "edge.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "math_constants.h"
 
 #include <QGraphicsScene>

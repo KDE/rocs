@@ -19,7 +19,7 @@ QLayout* Rocs::DSPluginInterface::edgeExtraProperties ( Edge* arg1, QWidget* arg
     return 0;
 }
 
-QLayout* Rocs::DSPluginInterface::graphExtraProperties ( Graph* arg1, QWidget* arg2 ) const {
+QLayout* Rocs::DSPluginInterface::graphExtraProperties ( DataStructureBase* arg1, QWidget* arg2 ) const {
   return 0;
 }
 

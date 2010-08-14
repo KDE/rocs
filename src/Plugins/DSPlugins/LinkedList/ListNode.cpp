@@ -20,7 +20,7 @@
 #include "ListNode.h"
 #include "KDebug"
 
-ListNode::ListNode(Graph* parent): Node(parent)
+ListNode::ListNode(DataStructureBase* parent): Node(parent)
 {
 
 }

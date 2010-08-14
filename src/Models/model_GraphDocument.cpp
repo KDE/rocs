@@ -19,7 +19,7 @@
 */
 #include "model_GraphDocument.h"
 #include "graphDocument.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include <QString>
 #include <KDebug>
 #include <QModelIndex>

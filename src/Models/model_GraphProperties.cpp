@@ -153,7 +153,7 @@ void GraphPropertiesModel::addDynamicProperty(QString name, QVariant value, QObj
         if (Node * node = qobject_cast<Node*> (obj)) {
             node->addDynamicProperty(name,value);
         }
-        if (Graph * graph = qobject_cast<Graph*> (obj)) {
+        if (DataStructureBase * graph = qobject_cast<DataStructureBase*> (obj)) {
             graph->addDynamicProperty(name, value);
         }
     }

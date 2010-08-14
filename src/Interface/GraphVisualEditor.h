@@ -53,7 +53,7 @@ public slots:
     /*! set the current selected Graph.
     	\param graph the new active graph.
     	*/
-    void setActiveGraph( Graph *g);
+    void setActiveGraph( DataStructureBase *g);
 
     void setActiveGraphDocument(GraphDocument *graphDocument);
     QList<NodeItem*> selectedNodes() const;
@@ -62,7 +62,7 @@ private:
     void setupWidgets();
     /*! as the name says, draw a graph on scene.
     \param g the graph to be drawn. */
-    void drawGraphOnScene( Graph *g );
+    void drawGraphOnScene( DataStructureBase *g );
 
     QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
 
@@ -70,7 +70,7 @@ private:
 
     GraphScene *_scene;
     GraphDocument *_graphDocument;
-    Graph *_graph;
+    DataStructureBase *_graph;
 
     MainWindow *_mainWindow;
 

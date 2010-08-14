@@ -24,7 +24,7 @@
 #include <QScriptString>
 #include "rocslib_export.h"
 
-class Graph;
+class DataStructureBase;
 class GraphDocument;
 class KTextBrowser;
 

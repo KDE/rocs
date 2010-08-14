@@ -19,12 +19,12 @@
 */
 
 #include "URAddNode.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "node.h"
 
 
 URAddNode::URAddNode(Node *g) {
-    _graph = qobject_cast<Graph*>(g->parent());
+    _graph = qobject_cast<DataStructureBase*>(g->parent());
     _node = g;
     _pos.setX(_node->x());
     _pos.setY(_node->y());

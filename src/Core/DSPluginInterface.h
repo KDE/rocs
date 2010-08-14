@@ -20,9 +20,9 @@ public:
 
   virtual ~DSPluginInterface();
 
-  virtual Graph* createDS(GraphDocument * parent) = 0;
+  virtual DataStructureBase* createDS(GraphDocument * parent) = 0;
 
-  virtual Graph* changeToDS(Graph*) = 0;
+  virtual DataStructureBase* changeToDS(DataStructureBase*) = 0;
 // QString name();
 
 
@@ -38,7 +38,7 @@ public:
 
   virtual QLayout* nodeExtraProperties ( Node* arg1, QWidget* arg2 ) const;
   virtual QLayout* edgeExtraProperties ( Edge* arg1, QWidget* arg2 )const;
-  virtual QLayout* graphExtraProperties ( Graph* arg1, QWidget* arg2 )const;
+  virtual QLayout* graphExtraProperties ( DataStructureBase* arg1, QWidget* arg2 )const;
 
 
 

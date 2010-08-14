@@ -21,7 +21,7 @@
 
 #include "Select.h"
 #include "GraphScene.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "node.h"
 #include "edge.h"
 #include "NodeItem.h"
@@ -68,7 +68,7 @@ void SelectAction::executeMove(QPointF pos) {
       p1.setY(y);
     }
     /* end of code to make setRect stop behaving silly */
-    
+
     _selectionRect->setRect(QRectF(p1, pos));
 }
 

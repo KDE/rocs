@@ -47,11 +47,11 @@ ListPlugin::~ListPlugin()
 
 }
 
-Graph* ListPlugin::changeToDS ( Graph* graph) {
+DataStructureBase* ListPlugin::changeToDS ( DataStructureBase* graph) {
     return new ListStructure(*graph);
 }
 
-Graph* ListPlugin::createDS ( GraphDocument* parent )
+DataStructureBase* ListPlugin::createDS ( GraphDocument* parent )
 {
   return new ListStructure(parent);
 //     return new Graph(parent);

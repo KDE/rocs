@@ -19,7 +19,7 @@
 */
 #include "model_GraphLayers.h"
 #include "graphDocument.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include <QString>
 #include <QModelIndex>
 #include <KDebug>
@@ -69,7 +69,7 @@ Qt::ItemFlags GraphLayersModel::flags(const QModelIndex& index) const {
 
 bool GraphLayersModel::setData(const QModelIndex& index, const QVariant& value, int role) {
     if ( index.isValid() && (role == Qt::ItemIsEditable)) {
-        Graph *g = _document->at(index.row());
+        DataStructureBase *g = _document->at(index.row());
         g-> setProperty("name",value.toString());
         return true;
     }
@@ -94,7 +94,7 @@ bool GraphLayersModel::removeRows(int position, int rows, const QModelIndex&) {
     return true;
 }
 
-Graph *GraphLayersModel::at(const QModelIndex& index)
+DataStructureBase *GraphLayersModel::at(const QModelIndex& index)
 {
     if (_document->size() == 0) return 0;
     return _document->at(index.row());

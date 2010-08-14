@@ -72,7 +72,7 @@ public:
     \p parent a Graph
     \p from the first node
     \p to the second node */
-    Edge(Graph *parent, Node *from, Node *to);
+    Edge(DataStructureBase *parent, Node *from, Node *to);
 
     /*! default destructor */
     ~Edge();
@@ -92,7 +92,7 @@ public:
 
     void emitChangedSignal(){ emit changed(); }
 
-    Graph *graph(){return _graph; }
+    DataStructureBase *graph(){return _graph; }
 #ifdef USING_QTSCRIPT
     /*! if the qtscript is enabled for this rocs,
       this method returns the self-referenced script value for this edge.
@@ -241,7 +241,7 @@ private:
     QString _style;
     double _width;
 
-     Graph *_graph;
+     DataStructureBase *_graph;
 #ifdef USING_QTSCRIPT
     /*! if the script interface is Qt-Script, this will hold the scriptValue self-reference. */
     QScriptValue _scriptvalue;

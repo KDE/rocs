@@ -20,7 +20,7 @@
 */
 #include "MoveNode.h"
 #include "GraphScene.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "node.h"
 #include "graphDocument.h"
 #include "NodeItem.h"
@@ -51,7 +51,7 @@ void MoveNodeAction::executePress(QPointF pos) {
     if (!_movableNode ) return;
 
     _node = _movableNode->node();
-    _graph = qobject_cast<Graph*>(_node->parent());
+    _graph = qobject_cast<DataStructureBase*>(_node->parent());
 }
 
 void MoveNodeAction::executeMove(QPointF pos) {

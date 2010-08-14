@@ -33,7 +33,7 @@ namespace GMLPlugin{
 GMLGraphParsingHelper* phelper = 0;
 std::string lastKey = "";
 QObject * lastInserted = 0;
-Graph * actualGraph = 0;
+DataStructureBase * actualGraph = 0;
 Node * actualNode = 0;
 Edge * actualEdge = 0;
 

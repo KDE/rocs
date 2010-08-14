@@ -24,7 +24,7 @@
 #include <QUndoCommand>
 #include <QPointF>
 
-class Graph;
+class DataStructureBase;
 class Node;
 
 class URAddNode : public QUndoCommand {
@@ -36,7 +36,7 @@ public:
 private:
     QPointF _pos;
     Node *_node;
-    Graph *_graph;
+    DataStructureBase *_graph;
 };
 
 #endif

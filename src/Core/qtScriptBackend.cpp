@@ -18,7 +18,7 @@
  ***************************************************************************/
 
 #include "krossBackend.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "node.h"
 #include <KDebug>
 #include <KTextBrowser>

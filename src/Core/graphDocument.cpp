@@ -19,7 +19,7 @@
 */
 
 #include "graphDocument.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include <QString>
 #include <KSaveFile>
 #include <QByteArray>
@@ -32,7 +32,7 @@
 
 // Default Constructor
 GraphDocument::GraphDocument(const QString name, int width,  int height)
-        : QObject(0), QList<Graph*>()
+        : QObject(0), QList<DataStructureBase*>()
 {
     _name = name;
     _width = width;
@@ -44,7 +44,7 @@ GraphDocument::GraphDocument(const QString name, int width,  int height)
 }
 
 GraphDocument::GraphDocument(const GraphDocument& gd)
-        : QObject(0), QList<Graph*>()
+        : QObject(0), QList<DataStructureBase*>()
 {
     _name = gd.name();
     _width = gd.width();
@@ -64,7 +64,7 @@ GraphDocument::~GraphDocument() {
     kDebug() << size();
 
     for(int i = 0; i < size(); i ++){
-	Graph *g = at(i);
+	DataStructureBase *g = at(i);
 	kDebug() << "Deleting graph" << g->name();
         delete g;
     }
@@ -109,17 +109,17 @@ bool GraphDocument::isModified(){
   return _modified;
 }
 
-void GraphDocument::setActiveGraph(Graph *g){
+void GraphDocument::setActiveGraph(DataStructureBase *g){
     if ( indexOf(g) != -1){
         _activeGraph = g;
         emit activeGraphChanged(g);
     }
 }
 
-Graph* GraphDocument::addGraph(QString name) {
+DataStructureBase* GraphDocument::addGraph(QString name) {
 
 
-  Graph *g = Rocs::DSPluginManager::New()->createNewDS(this, _DSType);
+  DataStructureBase *g = Rocs::DSPluginManager::New()->createNewDS(this, _DSType);
 //     Graph *g = new Graph(this);
     g->setName(name);
     append(g);
@@ -155,7 +155,7 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     int graphSize = count();
 
     for (int i = 0; i < graphSize; i++) {
-        Graph *g = this->at(i);
+        DataStructureBase *g = this->at(i);
 
         k_buf += QString("[Graph %1] \n").arg(i).toUtf8();
 
@@ -236,7 +236,7 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
         return;
     }
 
-    Graph* tmpGraph = 0;
+    DataStructureBase* tmpGraph = 0;
    //GraphGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
 
@@ -302,7 +302,7 @@ void GraphDocument::convertToDS(QString newDS){
         _DSType = newDS;
         int numGraphs = count();
         for (int i = 0 ; i < numGraphs; ++i){
-            Graph * g = Rocs::DSPluginManager::New()->changeToDS(at(i));
+            DataStructureBase * g = Rocs::DSPluginManager::New()->changeToDS(at(i));
             if (at(i) == _activeGraph)
               _activeGraph = g;
             append(g);

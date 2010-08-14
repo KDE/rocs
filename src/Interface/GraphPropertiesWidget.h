@@ -23,7 +23,7 @@
 #include <KButtonGroup>
 #include "ui_GraphPropertiesWidget.h"
 
-class Graph;
+class DataStructureBase;
 class Node;
 class Edge;
 
@@ -34,11 +34,11 @@ class GraphPropertiesWidget : public KButtonGroup, public Ui::GraphPropertiesWid
 {
     Q_OBJECT
 public:
-    GraphPropertiesWidget (Graph *g, MainWindow* parent = 0 );
+    GraphPropertiesWidget (DataStructureBase *g, MainWindow* parent = 0 );
     QRadioButton *radio() const;
 
-    
-    
+
+
 private slots:
     void on__graphEdgeColorApplyNow_clicked();
     void on__graphNodeColorApplyNow_clicked();
@@ -49,19 +49,19 @@ private slots:
     void on__graphVisible_toggled(bool b);
     void setEdgeDefaultColor(QColor c);
     void setNodeDefaultColor(QColor c);
-    
+
   signals:
     void updateNeeded();
     void edgeColorsChanged(QString color);
     void nodeColorsChanged(QString color);
-    
+
     void edgeDefaultColorSetted(QString color);
     void nodeDefaultColorSetted(QString color);
     void addGraph(QString name);
     void removeGraph();
-    
+
   private:
-    Graph *_graph;
+    DataStructureBase *_graph;
     MainWindow *_mainWindow;
 
 };

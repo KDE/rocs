@@ -25,7 +25,7 @@
 #include <kgenericfactory.h>
 #include <KAboutData>
 #include <graphDocument.h>
-#include <graph.h>
+#include <DataStructureBase.h>
 
 
 static const KAboutData aboutdata("rocs_makecompleteplugin", 0, ki18n("Make Complete") , "0.1" );
@@ -53,7 +53,7 @@ QString MakeCompleteToolPlugin::run(QObject* doc ) const
     GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
     if ( graphDoc )
     {
-        Graph * graph = graphDoc->activeGraph();
+        DataStructureBase * graph = graphDoc->activeGraph();
         foreach ( Edge *e, graph->edges() )
         {
             graph->remove ( e );

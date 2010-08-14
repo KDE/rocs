@@ -1,3 +1,4 @@
+
 /* This file is part of Rocs,
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -22,9 +23,9 @@
 #define ADDEDGE_H
 
 #include <QUndoCommand>
+class DataStructureBase;
 class Edge;
 class Node;
-class Graph;
 
 
 class URAddEdge : public QUndoCommand {
@@ -36,7 +37,7 @@ private:
     Edge *_edge;
     Node *_from;
     Node *_to;
-    Graph *_graph;
+    DataStructureBase *_graph;
 };
 
 #endif

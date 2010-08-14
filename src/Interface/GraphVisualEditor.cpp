@@ -25,7 +25,7 @@
 #include "OrientedEdgeItem.h"
 
 #include "graphDocument.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "node.h"
 #include "edge.h"
 
@@ -89,9 +89,9 @@ void GraphVisualEditor::releaseGraphDocument() {
 
 }
 
-void GraphVisualEditor::drawGraphOnScene( Graph */*g*/) {}
+void GraphVisualEditor::drawGraphOnScene( DataStructureBase */*g*/) {}
 
-void GraphVisualEditor::setActiveGraph( Graph *g) {
+void GraphVisualEditor::setActiveGraph( DataStructureBase *g) {
     _graph = g;
     _scene->setActiveGraph(g);
 }

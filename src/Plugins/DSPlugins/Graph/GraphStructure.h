@@ -20,17 +20,17 @@
 #ifndef GRAPHSTRUCTURE_H
 #define GRAPHSTRUCTURE_H
 
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "rocslib_export.h"
 
 namespace Rocs{
-class ROCSLIB_EXPORT GraphStructure : public Graph {
+class ROCSLIB_EXPORT GraphStructure : public DataStructureBase {
   Q_OBJECT
   public:
 
     GraphStructure ( GraphDocument* parent = 0 );
 
-    GraphStructure(Graph& other);
+    GraphStructure(DataStructureBase& other);
 
     virtual ~GraphStructure();
   public slots:

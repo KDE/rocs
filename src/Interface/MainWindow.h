@@ -30,7 +30,7 @@ class GraphLayers;
 class GraphVisualEditor;
 class KActionCollection;
 class GraphDocument;
-class Graph;
+class DataStructureBase;
 class KTextBrowser;
 class QSplitter;
 class GraphScene;
@@ -60,7 +60,7 @@ public:
     /*! defalt constructor */
     MainWindow();
     ~MainWindow();
-    Graph *graph() const;
+    DataStructureBase *graph() const;
     GraphScene *scene() const;
 //    void debug(const QString& s);
     GraphDocument *activeDocument() const;
@@ -105,7 +105,7 @@ private slots:
 public slots:
     void setActiveGraphDocument(GraphDocument *d);
     void releaseDocument(GraphDocument *d);
-    void setActiveGraph(Graph *g);
+    void setActiveGraph(DataStructureBase*g);
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);

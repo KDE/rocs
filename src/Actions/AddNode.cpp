@@ -20,7 +20,7 @@
 */
 #include "AddNode.h"
 #include "GraphScene.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "NodeItem.h"
 #include "node.h"
 #include <KLocale>
@@ -54,7 +54,7 @@ void AddNodeAction::executePress(QPointF pos) {
     emit addNode(i18n("untitled"), QPointF(pos.x(), pos.y()));
 }
 
-void AddNodeAction::setActiveGraph(Graph* graph){
+void AddNodeAction::setActiveGraph(DataStructureBase* graph){
     if (_graph) disconnect(this, 0, _graph, 0);
     _graph = graph;
     connect(this, SIGNAL(addNode(QString,QPointF)), _graph, SLOT(addNode(QString,QPointF)));

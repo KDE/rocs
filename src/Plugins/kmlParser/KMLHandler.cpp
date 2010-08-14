@@ -21,7 +21,7 @@
 #include <KDebug>
 
 
-KMLHandler::KMLHandler(Graph* doc): QXmlDefaultHandler(), m_graph(doc)
+KMLHandler::KMLHandler(DataStructureBase* doc): QXmlDefaultHandler(), m_graph(doc)
 {
 
 }

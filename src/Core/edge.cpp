@@ -20,11 +20,11 @@
 
 #include "edge.h"
 #include "node.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "DynamicPropertiesList.h"
 #include <KDebug>
 
-Edge::Edge(Graph *parent, Node *from, Node *to) :
+Edge::Edge(DataStructureBase *parent, Node *from, Node *to) :
         QObject(parent),
         _from(from),
         _to(to)

@@ -21,7 +21,7 @@
 #define DINAMICPROPERTIESLIST_H
 #include <QObject>
 #include <QList>
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "edge.h"
 
 #include "rocslib_export.h"
@@ -37,9 +37,9 @@ enum DynamicPropertyType{
 class ROCSLIB_EXPORT DynamicPropertiesList : public QObject
 {
   Q_OBJECT
-  QMap< Graph*,  QMultiMap <QString, Node* > > _NodesProperties;
-  QMap< Graph*,  QMultiMap <QString, Edge* > > _EdgesProperties;
-  QMultiMap <QString, Graph*> _GraphProperties;
+  QMap< DataStructureBase*,  QMultiMap <QString, Node* > > _NodesProperties;
+  QMap< DataStructureBase*,  QMultiMap <QString, Edge* > > _EdgesProperties;
+  QMultiMap <QString, DataStructureBase*> _GraphProperties;
 
   static DynamicPropertiesList * self;
 
@@ -59,7 +59,7 @@ public:
 
 //   const QStringList properties (QObject * obj);
 
-  void clear(Graph * graph = 0);
+  void clear(DataStructureBase * graph = 0);
 
   /** Change property name in all objects from same graph of object.*/
   void changePropertyName(QString name, QString newName, QObject* object);

@@ -22,7 +22,7 @@
 #include <KAboutData>
 #include <KGenericFactory>
 #include <QFile>
-#include <graph.h>
+#include <DataStructureBase.h>
 
 
 static const KAboutData aboutdata ( "rocs_plaintxtplugin", 0, ki18n ( "Open and Save Plain TXT files" ) , "0.1" );
@@ -48,7 +48,7 @@ const QStringList PlainTXTFilePlugin::extensions() const {
 
 GraphDocument * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
     GraphDocument * graphDoc = new GraphDocument ( "Untitled" );
-    Graph * graph = graphDoc->addGraph();
+    DataStructureBase * graph = graphDoc->addGraph();
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
     if ( !f.open ( QFile::ReadOnly ) ) {
@@ -87,7 +87,7 @@ bool PlainTXTFilePlugin::writeFile ( GraphDocument &graph , const QString &filen
     QFile file ( filename );
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
-        Graph *g = graph.activeGraph();
+        DataStructureBase *g = graph.activeGraph();
         if (g){
             foreach ( Node *n, g->nodes() ) {
                 out << n->name();

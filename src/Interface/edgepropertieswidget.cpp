@@ -21,7 +21,7 @@
 #include "edge.h"
 #include "MainWindow.h"
 #include "model_GraphProperties.h"
-#include <graph.h>
+#include <DataStructureBase.h>
 #include <DSPluginManager.h>
 
 EdgePropertiesWidget::EdgePropertiesWidget(MainWindow *parent): QWidget(parent) {

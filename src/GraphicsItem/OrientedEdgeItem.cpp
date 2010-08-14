@@ -24,7 +24,7 @@
 #include "GraphScene.h"
 #include "node.h"
 #include "edge.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "math_constants.h"
 
 #include <QGraphicsScene>
@@ -88,7 +88,7 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
 
 QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
     QPainterPath p;
-    Graph *g = qobject_cast<Graph*>(_edge->parent());
+    DataStructureBase *g = qobject_cast<DataStructureBase*>(_edge->parent());
     qreal size = 30 + (20 * _index);
     qreal angle = atan2((pos.x() - g->relativeCenter().x()), (pos.y() - g->relativeCenter().y()));
     qreal posx = (pos.x()-(((size/2) * sin(angle)) * -1)-(size/2));
@@ -102,7 +102,7 @@ QPainterPath OrientedEdgeItem::createCurves() const {
 	_edge->self_remove();
         return QPainterPath();
     }
-    
+
     QPointF Pos1(_edge->from()->x(), _edge->from()->y());
 
     if ( _loop ) return createLoop(Pos1);

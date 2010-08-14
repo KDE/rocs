@@ -20,7 +20,7 @@
 */
 #include "AbstractAction.h"
 #include "GraphScene.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "graphDocument.h"
 #include <QPointF>
 #include <KDebug>
@@ -40,7 +40,7 @@ void AbstractAction::setActiveGraphDocument(  GraphDocument *graphDocument) {
     _graphDocument = graphDocument;
 }
 
-void AbstractAction::setActiveGraph( Graph *graph) {
+void AbstractAction::setActiveGraph( DataStructureBase *graph) {
     _graph = graph;
 }
 

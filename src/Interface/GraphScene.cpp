@@ -31,7 +31,7 @@
 #include <QKeyEvent>
 #include <KDebug>
 #include "node.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "NodePropertiesWidget.h"
 #include "MainWindow.h"
 #include "edgepropertieswidget.h"
@@ -58,7 +58,7 @@ void GraphScene::setHideEdges(bool h) {
     }
 }
 
-void GraphScene::setActiveGraph(Graph *g) {
+void GraphScene::setActiveGraph(DataStructureBase *g) {
     kDebug() << "Active Graph Set";
     _graph = g;
 }
@@ -68,7 +68,7 @@ void GraphScene::updateAfter(QGraphicsItem *item) {
     _hidedEdges << item;
 }
 
-void GraphScene::hideGraph(Graph* g, bool visibility)
+void GraphScene::hideGraph(DataStructureBase* g, bool visibility)
 {
   QList<QGraphicsItem*> list = _hashGraphs.values(g);
   foreach(QGraphicsItem *i, list){
@@ -102,7 +102,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
         connectGraphSignals(_graphDocument->at(i));
         kDebug() << "Graph Updated.";
     }
-    connect( _graphDocument, SIGNAL(graphCreated(Graph*)), this, SLOT(connectGraphSignals(Graph*)),Qt::UniqueConnection);
+    connect( _graphDocument, SIGNAL(graphCreated(DataStructureBase*)), this, SLOT(connectGraphSignals(DataStructureBase*)),Qt::UniqueConnection);
     kDebug() << "Graph Document Set" << _graphDocument -> name();
     createItems();
 }
@@ -110,7 +110,7 @@ void GraphScene::createItems(){
     kDebug() << "Creating the graph items.";
     int size = _graphDocument->size();
     for (int i = 0; i < size; i++) {
-        Graph *g = _graphDocument->at(i);
+        DataStructureBase *g = _graphDocument->at(i);
         kDebug() << "Creating " << g->nodes().size() << "nodes";
         for(int n = 0; n < g->nodes().size(); n++){
             createNode( g->nodes()[n] );
@@ -122,7 +122,7 @@ void GraphScene::createItems(){
     }
 }
 
-void GraphScene::connectGraphSignals(Graph *g){
+void GraphScene::connectGraphSignals(DataStructureBase *g){
     connect( g, SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)), Qt::UniqueConnection);
     connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)), Qt::UniqueConnection);
 }
@@ -220,7 +220,7 @@ void GraphScene::keyPressEvent(QKeyEvent *) {
 
 }
 
-void GraphScene::updateGraph(Graph *g) {
+void GraphScene::updateGraph(DataStructureBase *g) {
     kDebug() << "Removed Graph from the hash";
 
     kDebug() << "Creating" << g->nodes().size() << "nodes";

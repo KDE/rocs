@@ -19,14 +19,14 @@
 */
 #include "URAddEdge.h"
 #include "node.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "edge.h"
 
 URAddEdge::URAddEdge(Edge *e) {
     _edge = e;
     _from = e->from();
     _to = e->to();
-    _graph = qobject_cast<Graph*>(e->parent());
+    _graph = qobject_cast<DataStructureBase*>(e->parent());
 }
 
 void URAddEdge::redo() {

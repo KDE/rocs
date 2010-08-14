@@ -43,7 +43,7 @@ public:
     */
 
     explicit AddEdgeAction(GraphScene *scene, QObject *parent = 0);
-    void setActiveGraph(Graph* graph);
+    void setActiveGraph(DataStructureBase* graph);
     /*!
       Default Destructor
     */
@@ -80,10 +80,10 @@ private:
     /*! this boolean is true when we are actually adding a new edge,
     false when we are not. */
     bool _working;
-    
+
   signals:
     void addEdge(Node *from, Node *to);
-    
+
 };
 
 #endif

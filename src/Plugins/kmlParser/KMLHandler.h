@@ -19,14 +19,14 @@
 
 #ifndef KMLHANDLER_H
 #define KMLHANDLER_H
-#include <Core/graph.h>
+#include <Core/DataStructureBase.h>
 #include <QXmlDefaultHandler>
 
 
 class KMLHandler: public QXmlDefaultHandler
 {
   public:
-  KMLHandler(Graph* doc);
+  KMLHandler(DataStructureBase* doc);
   ~KMLHandler();
 
 
@@ -53,7 +53,7 @@ private:
     QString errorStr;
 
     QString m_name;
-    Graph * m_graph;
+    DataStructureBase * m_graph;
     QStringList args;
     QString m_coordinates;
     QString m_description;

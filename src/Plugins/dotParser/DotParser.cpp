@@ -23,7 +23,7 @@
 #include <KAboutData>
 #include <KGenericFactory>
 #include <QFile>
-#include <Core/graph.h>
+#include <Core/DataStructureBase.h>
 #include "DotGraphParsingHelper.h"
 #include "dotgrammar.h"
 
@@ -77,7 +77,7 @@ bool DotParser::writeFile ( GraphDocument &graph , const QString &filename ) {
     QVariantList subgraphs;
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
-        Graph *g = graph.activeGraph();
+        DataStructureBase *g = graph.activeGraph();
         if (g) {
             out << QString("%1 %2 {\n").arg(g->directed()?"digraph":"graph").arg(g->name());
             foreach ( Node *n, g->nodes() ) {

@@ -23,7 +23,7 @@
 #include <list>
 #include <string>
 #include <QStringList>
-#include "Core/graph.h"
+#include "Core/DataStructureBase.h"
 #include "Core/node.h"
 // class Node;
 // class Graph;
@@ -58,7 +58,7 @@ namespace GMLPlugin{
 
     State _actualState;
 
-    Graph* actualGraph;
+    DataStructureBase* actualGraph;
     Node* actualNode;
     Edge* actualEdge;
     GraphDocument* gd;

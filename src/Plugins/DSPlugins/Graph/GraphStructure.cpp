@@ -20,11 +20,11 @@
 #include "GraphStructure.h"
 #include "KDebug"
 
-Rocs::GraphStructure::GraphStructure ( GraphDocument* parent ) : Graph ( parent ) {
+Rocs::GraphStructure::GraphStructure ( GraphDocument* parent ) : DataStructureBase ( parent ) {
   setDirected(false);
 }
 
-Rocs::GraphStructure::GraphStructure(Graph& other): Graph(other){
+Rocs::GraphStructure::GraphStructure(DataStructureBase& other): DataStructureBase(other){
 
 }
 

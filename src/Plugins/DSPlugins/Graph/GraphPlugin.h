@@ -30,8 +30,8 @@ class /*ROCSLIB_EXPORT*/ GraphPlugin : public DSPluginInterface {
 
     virtual ~GraphPlugin();
 
-    virtual Graph* changeToDS ( Graph* );
-    virtual Graph* createDS ( GraphDocument* parent );
+    virtual DataStructureBase* changeToDS ( DataStructureBase* );
+    virtual DataStructureBase* createDS ( GraphDocument* parent );
 
     virtual QGraphicsItem* edgeItem ( Edge* ) const;
     virtual QGraphicsItem* nodeItem ( Node* ) const;
@@ -40,7 +40,7 @@ class /*ROCSLIB_EXPORT*/ GraphPlugin : public DSPluginInterface {
 
     virtual QLayout* edgeExtraProperties ( Edge* arg1, QWidget* arg2 ) const;
 
-    virtual QLayout* graphExtraProperties ( Graph* graph, QWidget* parentWidget ) const;
+    virtual QLayout* graphExtraProperties ( DataStructureBase* graph, QWidget* parentWidget ) const;
 
 };
 }

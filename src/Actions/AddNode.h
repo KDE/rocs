@@ -45,9 +45,9 @@ public:
       Default Destructor
     */
     ~AddNodeAction();
-    
-    void setActiveGraph( Graph *graph);
-    
+
+    void setActiveGraph( DataStructureBase *graph);
+
 public slots:
     /*!
       this will be executed if type is the same as this action's type.
@@ -55,7 +55,7 @@ public slots:
 
     */
     void executePress(QPointF pos);
-    
+
   signals:
     void addNode(QString name, QPointF pos);
 };

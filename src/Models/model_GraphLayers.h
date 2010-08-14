@@ -22,10 +22,10 @@
 
 #include <QAbstractListModel>
 
+class DataStructureBase;
 class QModelIndex;
 
 class GraphDocument;
-class Graph;
 
 
 class GraphLayersModel : public QAbstractListModel
@@ -84,7 +84,7 @@ public:
     /*! select the graph at position index.
     \param index the position of the graph that you want to select.
     \return the graph at position Index.*/
-    Graph *at(const QModelIndex& index);
+    DataStructureBase *at(const QModelIndex& index);
 
 private:
     GraphDocument *_document;

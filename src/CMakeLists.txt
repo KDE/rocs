@@ -19,7 +19,7 @@ set( rocs_core_SRCS
   Core/DocumentManager.cpp
   Core/DSPluginManager.cpp
   Core/DSPluginInterface.cpp
-  Core/graph.cpp
+  Core/DataStructureBase.cpp
   Core/edge.cpp
   Core/graphDocument.cpp
   Core/node.cpp
@@ -46,7 +46,7 @@ target_link_libraries( rocslib
 set( rocslib_LIB_HDRS
   Core/DynamicPropertiesList.h
   Core/edge.h
-  Core/graph.h
+  Core/DataStructureBase.h
   Core/graphDocument.h
   Core/graphGroups.h
   Core/krossBackend.h

@@ -20,7 +20,7 @@
 
 #include "AddEdge.h"
 #include "GraphScene.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "node.h"
 #include "edge.h"
 #include "NodeItem.h"
@@ -92,7 +92,7 @@ void AddEdgeAction::executeRelease(QPointF pos) {
     _working = false;
 }
 
-void AddEdgeAction::setActiveGraph(Graph* graph){
+void AddEdgeAction::setActiveGraph(DataStructureBase* graph){
     if (_graph) disconnect(this, 0, _graph, 0);
     _graph = graph;
     connect(this, SIGNAL(addEdge(Node*,Node*)), _graph, SLOT(addEdge(Node*,Node*)));

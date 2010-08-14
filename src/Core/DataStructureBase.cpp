@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  ***************************************************************************/
 
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "edge.h"
 #include "node.h"
 #include "qtScriptBackend.h"
@@ -27,7 +27,7 @@
 #include <KDebug>
 #include <QColor>
 
-Graph::Graph(GraphDocument *parent) : QObject(parent) {
+DataStructureBase::DataStructureBase(GraphDocument *parent) : QObject(parent) {
     _directed = false;
     _automate = false;
     _readOnly = false;
@@ -42,7 +42,7 @@ Graph::Graph(GraphDocument *parent) : QObject(parent) {
     _edgeValuesVisible = true;
 }
 
-Graph::Graph(Graph& other): QObject(other.parent()){
+DataStructureBase::DataStructureBase(DataStructureBase& other): QObject(other.parent()){
     _directed = other._directed;
     _automate = other._automate;
     _readOnly = other._readOnly;
@@ -77,7 +77,7 @@ Graph::Graph(Graph& other): QObject(other.parent()){
 }
 
 
-Graph::~Graph() {
+DataStructureBase::~DataStructureBase() {
     foreach(Edge* e,  _edges) {
         remove(e);
     }
@@ -87,38 +87,38 @@ Graph::~Graph() {
     }
 }
 
-GraphDocument *Graph::document() const {
+GraphDocument *DataStructureBase::document() const {
     return _document;
 }
 
-void Graph::remove() {
+void DataStructureBase::remove() {
   _document->removeOne(this);
   delete this;
 }
 
-QList<Node*> Graph::nodes() const {
+QList<Node*> DataStructureBase::nodes() const {
     return _nodes;
 }
 
-QList<Edge*> Graph::edges() const {
+QList<Edge*> DataStructureBase::edges() const {
     return _edges;
 }
 
-void Graph::setNodesColor(QString c){
+void DataStructureBase::setNodesColor(QString c){
   kDebug() << "Entrou no setNodesColor, com a cor " << c;
   foreach(Node *n, _nodes) {
         n->setColor(c);
     }
 }
 
-void Graph::setEdgesColor(QString c){
+void DataStructureBase::setEdgesColor(QString c){
     kDebug() << "Entrou no setEdgesColor, com a cor " << c;
     foreach(Edge *e, _edges) {
         e->setColor(c);
     }
 }
 
-Node* Graph::addNode(QString name) {
+Node* DataStructureBase::addNode(QString name) {
     if (_readOnly) return 0;
 
     Node  *n = new Node(this);
@@ -129,12 +129,12 @@ Node* Graph::addNode(QString name) {
     return n;
 }
 
-void Graph::addNode(QString name, QPointF pos){
+void DataStructureBase::addNode(QString name, QPointF pos){
     Node *node = addNode(name);
     node->setPos(pos.x(), pos.y());
 }
 
-Edge* Graph::addEdge(Node* from,Node* to) {
+Edge* DataStructureBase::addEdge(Node* from,Node* to) {
     if (_readOnly) return 0;
 
     if ( from == 0 || to == 0 ) {      return 0;   }
@@ -155,7 +155,7 @@ Edge* Graph::addEdge(Node* from,Node* to) {
     return e;
 }
 
-Edge* Graph::addEdge(const QString& name_from, const QString& name_to) {
+Edge* DataStructureBase::addEdge(const QString& name_from, const QString& name_to) {
     if (_readOnly) return 0;
     Node *from = 0;
     Node *to   = 0;
@@ -179,11 +179,11 @@ Edge* Graph::addEdge(const QString& name_from, const QString& name_to) {
     return addEdge(from, to);
 }
 
-bool Graph::directed() const {
+bool DataStructureBase::directed() const {
     return _directed;
 }
 
-Node* Graph::node(const QString& name) {
+Node* DataStructureBase::node(const QString& name) {
     QString tmpName;
     foreach( Node* n,  _nodes) {
         tmpName = n->name();
@@ -194,18 +194,18 @@ Node* Graph::node(const QString& name) {
     return 0;
 }
 
-void Graph::remove(Node *n) {
+void DataStructureBase::remove(Node *n) {
     _nodes.removeOne( n  );
     n->deleteLater();
 }
 
-void Graph::remove(Edge *e) {
+void DataStructureBase::remove(Edge *e) {
     _edges.removeOne( e );
     e->deleteLater();
 //     delete e;
 }
 
-void Graph::setDirected(bool directed) {
+void DataStructureBase::setDirected(bool directed) {
 
     foreach(Node *n1, _nodes) {
         foreach(Node *n2, n1->adjacent_nodes()) {
@@ -232,7 +232,7 @@ void Graph::setDirected(bool directed) {
     return;
 }
 
-GraphGroup* Graph::addGroup(const QString& name) {
+GraphGroup* DataStructureBase::addGroup(const QString& name) {
     GraphGroup *gg = new GraphGroup();
     gg->setName(name);
     return gg;
@@ -242,7 +242,7 @@ GraphGroup* Graph::addGroup(const QString& name) {
 //    return _graphGroups;
 //}
 
-void Graph::calcRelativeCenter() {
+void DataStructureBase::calcRelativeCenter() {
     /*
       _top = _nodes[0]->y();   _bottom = _nodes[0]->y();
       _left = _nodes[0]->x(); _right = _nodes[0]->x();
@@ -267,18 +267,18 @@ void Graph::calcRelativeCenter() {
     }
 }
 
-QPointF Graph::relativeCenter() const {
+QPointF DataStructureBase::relativeCenter() const {
     return _relativeCenter;
 }
 
-const QString& Graph::name() const {
+const QString& DataStructureBase::name() const {
     return _name;
 }
-void Graph::setName(const QString& s) {
+void DataStructureBase::setName(const QString& s) {
     _name = s;
 }
 
-bool Graph::setBegin(Node* n) {
+bool DataStructureBase::setBegin(Node* n) {
   if (!n){
     _begin = 0;
     return false;
@@ -296,117 +296,117 @@ bool Graph::setBegin(Node* n) {
     return true;
 }
 
-Node* Graph::begin() const {
+Node* DataStructureBase::begin() const {
     return _begin;
 }
 
-Node* Graph::addEnd(Node *n) {
+Node* DataStructureBase::addEnd(Node *n) {
     _ends.append(n);
     return n;
 }
 
-void Graph::removeEnd(Node *n) {
+void DataStructureBase::removeEnd(Node *n) {
     _ends.removeAll(n);
 }
 
-void Graph::setNodeDefaultColor(const QString& color) {
+void DataStructureBase::setNodeDefaultColor(const QString& color) {
     kDebug() << "Entrou com cor aqui painho." << color;
     _nodeDefaultColor = color;
 }
 
-const QString& Graph::nodeDefaultColor() const {
+const QString& DataStructureBase::nodeDefaultColor() const {
     return _nodeDefaultColor;
 }
 
-void Graph::setEdgeDefaultColor(const QString& color) {
+void DataStructureBase::setEdgeDefaultColor(const QString& color) {
     _edgeDefaultColor = color;
 }
-const QString& Graph::edgeDefaultColor() const {
+const QString& DataStructureBase::edgeDefaultColor() const {
     return _edgeDefaultColor;
 }
 
-void Graph::setAutomate(bool b) {
+void DataStructureBase::setAutomate(bool b) {
     _automate = b;
     emit automateChanged(b);
 }
-bool Graph::automate() {
+bool DataStructureBase::automate() {
     return _automate;
 }
 
-void Graph::addDynamicProperty(QString property, QVariant value){
+void DataStructureBase::addDynamicProperty(QString property, QVariant value){
     if ( !setProperty(property.toUtf8(), value) && value.isValid()){
       DynamicPropertiesList::New()->addProperty(this, property);
     }
 }
 
-void Graph::removeDynamicProperty(QString property){
+void DataStructureBase::removeDynamicProperty(QString property){
     this->addDynamicProperty(property, QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
-void Graph::addNodesDynamicProperty(QString property, QVariant value){
+void DataStructureBase::addNodesDynamicProperty(QString property, QVariant value){
     foreach(Node *n, _nodes){
       n->addDynamicProperty(property, value);
     }
 }
 
-void Graph::addEdgesDynamicProperty(QString property, QVariant value){
+void DataStructureBase::addEdgesDynamicProperty(QString property, QVariant value){
     foreach(Edge *e, _edges){
       e->addDynamicProperty(property, value);
     }
 }
 
-void Graph::removeNodesDynamicProperty(QString property){
+void DataStructureBase::removeNodesDynamicProperty(QString property){
   foreach(Node *n, _nodes){
     n->removeDynamicProperty(property);
   }
 }
-void Graph::removeEdgesDynamicProperty(QString property){
+void DataStructureBase::removeEdgesDynamicProperty(QString property){
   foreach(Edge *e, _edges){
     e->removeDynamicProperty(property);
   }
 }
 
-void Graph::setNodeNameVisibility(bool b){
+void DataStructureBase::setNodeNameVisibility(bool b){
   _nodeNamesVisible = b;
   foreach(Node *n, _nodes){
     n->hideName(b);
   }
 }
 
-bool Graph::nodeNameVisibility(){
+bool DataStructureBase::nodeNameVisibility(){
   return _nodeNamesVisible;
 }
 
-void Graph::setEdgeNameVisibility(bool b){
+void DataStructureBase::setEdgeNameVisibility(bool b){
   _edgeNamesVisible = b;
   foreach(Edge *n, _edges){
     n->hideName(b);
   }
 }
 
-bool Graph::edgeNameVisibility(){
+bool DataStructureBase::edgeNameVisibility(){
   return _edgeNamesVisible;
 }
 
-void Graph::setNodeValueVisibility(bool b){
+void DataStructureBase::setNodeValueVisibility(bool b){
   _nodeValuesVisible = b;
   foreach(Node *n, _nodes){
     n->hideValue(b);
   }
 }
-bool Graph::nodeValueVisibility(){
+bool DataStructureBase::nodeValueVisibility(){
   return _nodeValuesVisible;
 }
 
-void Graph::setEdgeValueVisibility(bool b){
+void DataStructureBase::setEdgeValueVisibility(bool b){
   _edgeValuesVisible = b;
   foreach(Edge *n, _edges){
     n->hideValue(b);
   }
 }
 
-bool Graph::edgeValueVisibility(){
+bool DataStructureBase::edgeValueVisibility(){
   return _edgeValuesVisible;
 }
 
@@ -415,11 +415,11 @@ bool Graph::edgeValueVisibility(){
 
 
 
-QScriptValue Graph::scriptValue() const {
+QScriptValue DataStructureBase::scriptValue() const {
     return _value;
 }
 
-void Graph::setEngine(	QScriptEngine *engine ) {
+void DataStructureBase::setEngine(	QScriptEngine *engine ) {
     _engine = engine;
 
     _value = _engine->newQObject(this);

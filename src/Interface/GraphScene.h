@@ -29,7 +29,7 @@ class Node;
 class Edge;
 class QGraphicsItem;
 class GraphDocument;
-class Graph;
+class DataStructureBase;
 class QGraphicsSceneMouseEvent;
 class QGraphicsSceneWheelEvent;
 class QKeyEvent;
@@ -41,9 +41,9 @@ class GraphScene : public QGraphicsScene {
 public:
     GraphScene(QObject *parent);
     void setAction(QAction *action);
-    void updateGraph(Graph *g);
+    void updateGraph(DataStructureBase *g);
     void updateDocument();
-    void setActiveGraph(Graph *g);
+    void setActiveGraph(DataStructureBase *g);
     void setActiveGraphDocument(GraphDocument *gd);
     void clearGraph();
 
@@ -52,14 +52,14 @@ public:
     void updateAfter(QGraphicsItem *item);
     bool fade() const{ return _fade; }
     void fade(bool b){ _fade = b; }
-    void hideGraph( Graph *g, bool visibility);
-    
+    void hideGraph( DataStructureBase *g, bool visibility);
+
 public slots:
     QGraphicsItem* createNode( Node* n);
     QGraphicsItem* createEdge( Edge *e);
-    void connectGraphSignals(Graph *g);
+    void connectGraphSignals(DataStructureBase *g);
     void createItems();
-    
+
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
@@ -70,9 +70,9 @@ protected:
 
 private:
     GraphDocument *_graphDocument;
-    Graph *_graph;
+    DataStructureBase *_graph;
     AbstractAction *_action;
-    QMultiHash<Graph*, QGraphicsItem* > _hashGraphs;
+    QMultiHash<DataStructureBase*, QGraphicsItem* > _hashGraphs;
     QList<QGraphicsItem*> _hidedEdges;
     bool _hideEdges;
     NodePropertiesWidget *_nodePropertiesWidget;

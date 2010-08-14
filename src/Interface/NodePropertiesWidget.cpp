@@ -3,7 +3,7 @@
 #include "MainWindow.h"
 #include <KDebug>
 #include "NodeItem.h"
-#include "graph.h"
+#include "DataStructureBase.h"
 #include "model_GraphProperties.h"
 #include <DSPluginManager.h>
 

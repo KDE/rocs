@@ -34,7 +34,7 @@ public:
         m_actualPlugin = 0;
     }
 
-    Graph* changeToDS ( Graph* graph ) {
+    DataStructureBase* changeToDS ( DataStructureBase* graph ) {
         if ( m_actualPlugin ) {
             return m_actualPlugin->changeToDS ( graph );
         }
@@ -56,7 +56,7 @@ public:
         }
         return KPluginInfo();
     }
-    Graph* createNewDS ( GraphDocument* arg1 , const QString & pluginName ) {
+    DataStructureBase* createNewDS ( GraphDocument* arg1 , const QString & pluginName ) {
         if (!pluginName.isEmpty()) {
             Rocs::DSPluginInterface * plugin = m_plugins.value(pluginName);
             if (plugin) {
@@ -172,13 +172,13 @@ void Rocs::DSPluginManager::changeActiveDS (const QString &newDS ) {
     }
 }
 
-Graph* Rocs::DSPluginManager::changeToDS ( Graph* graph ) {
+DataStructureBase* Rocs::DSPluginManager::changeToDS ( DataStructureBase* graph ) {
 
     return New()->_d->changeToDS ( graph );
 
 }
 
-Graph* Rocs::DSPluginManager::createNewDS ( GraphDocument* parent , const QString & pluginName) {
+DataStructureBase* Rocs::DSPluginManager::createNewDS ( GraphDocument* parent , const QString & pluginName) {
     return New()->_d->createNewDS(parent, pluginName);
 
 }
@@ -214,7 +214,7 @@ QLayout* Rocs::DSPluginManager::edgeExtraProperties ( Edge* edge, QWidget* paren
   return _d->m_actualPlugin->edgeExtraProperties(edge, parent);
 }
 
-QLayout* Rocs::DSPluginManager::graphExtraProperties ( Graph* graph, QWidget* parent ){
+QLayout* Rocs::DSPluginManager::graphExtraProperties ( DataStructureBase* graph, QWidget* parent ){
       return _d->m_actualPlugin->graphExtraProperties(graph, parent);
 }
 

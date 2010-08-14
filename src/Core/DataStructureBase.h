@@ -45,7 +45,7 @@ class GraphDocument;
 /*! \brief this class acts as a container for nodes and edges.
   this class has all the edges and nodes, plus a few extra funcionalities
   to help programming with it on the programming backend. */
-class ROCSLIB_EXPORT Graph : public QObject {
+class ROCSLIB_EXPORT DataStructureBase : public QObject {
     Q_OBJECT
 
     /*! this property defines if the graph is directed or simple */
@@ -67,12 +67,12 @@ public:
     /*! constructo
       \p parent the parent QObject
     */
-    Graph(GraphDocument *parent = 0);
+    DataStructureBase(GraphDocument *parent = 0);
 
-    Graph(Graph& other);
+    DataStructureBase(DataStructureBase& other);
 
     /*! destructor */
-    ~Graph();
+    ~DataStructureBase();
 
     /*! calculates the relative center of the graph,
       taking into account the top, bottom, left and right edges. */

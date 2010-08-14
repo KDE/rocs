@@ -51,7 +51,7 @@ class  ROCSLIB_EXPORT Node : public QObject {
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
 
 public:
-    Node(Graph *parent);
+    Node(DataStructureBase *parent);
     ~Node();
     void addInEdge(Edge *e);
     void addOutEdge(Edge *e);
@@ -65,7 +65,7 @@ public:
     bool showName();
     bool showValue();
 
-    Graph *graph(){ return _graph; }
+    DataStructureBase *graph(){ return _graph; }
 
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
@@ -148,7 +148,7 @@ private:
     bool _showName;
     bool _showValue;
 
-    Graph *_graph;
+    DataStructureBase *_graph;
 
     QString _name;
     QString _color;

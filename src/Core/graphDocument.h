@@ -24,12 +24,12 @@
 #include <QObject>
 #include "rocslib_export.h"
 
-class Graph;
+class DataStructureBase;
 class QtScriptBackend;
 /*! \brief the graph document
   long explanation needed.
 */
-class ROCSLIB_EXPORT GraphDocument : public QObject, public QList<Graph*>
+class ROCSLIB_EXPORT GraphDocument : public QObject, public QList<DataStructureBase*>
 {
     Q_OBJECT
     Q_PROPERTY(    qreal width READ width WRITE setWidth)
@@ -73,9 +73,9 @@ public slots:
       \param name the name of the graph
       \param type the the of the graph.
     */
-    Graph *addGraph(QString name = "untitled");
-    Graph *activeGraph(){ return _activeGraph; }
-    void setActiveGraph(Graph *g);
+    DataStructureBase *addGraph(QString name = "untitled");
+    DataStructureBase *activeGraph(){ return _activeGraph; }
+    void setActiveGraph(DataStructureBase *g);
 
     /** Convert actual DS to newDS if is needed.
     @param newDS name of new data structure to be converted. */
@@ -100,7 +100,7 @@ public slots:
 signals:
     /*! emited when a new graph is created
       \param g the created graph */
-    void graphCreated( Graph *g);
+    void graphCreated( DataStructureBase *g);
 
     /*! emitted when a graph is removed.
       \param i the index of the removed graph */
@@ -118,7 +118,7 @@ signals:
       \param width the new width of the document */
     void widthChanged(qreal width);
 
-    void activeGraphChanged(Graph* g);
+    void activeGraphChanged(DataStructureBase* g);
 private:
     QString k_buf;
     void  savePropertiesInternalFormat(QObject *o);
@@ -128,7 +128,7 @@ private:
     qreal _height;
     bool _modified;
     bool _saved;
-    Graph *_activeGraph;
+    DataStructureBase *_activeGraph;
     QString _DSType;
     QtScriptBackend* _engineBackend;
 };

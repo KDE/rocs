@@ -21,7 +21,7 @@
 #include "KDebug"
 #include "ListNode.h"
 
-Rocs::ListStructure::ListStructure ( GraphDocument* parent ) : Graph ( parent ) {
+Rocs::ListStructure::ListStructure ( GraphDocument* parent ) : DataStructureBase ( parent ) {
   setDirected(true);
   Node * p = addNode("P");
   p->hideName(false);
@@ -32,7 +32,7 @@ Rocs::ListStructure::ListStructure ( GraphDocument* parent ) : Graph ( parent ) 
 
 }
 
-Rocs::ListStructure::ListStructure(Graph& other): Graph(other)
+Rocs::ListStructure::ListStructure(DataStructureBase& other): DataStructureBase(other)
 {
   setDirected(true);
   _animationGroup = new QParallelAnimationGroup(this);
@@ -59,7 +59,7 @@ Edge* Rocs::ListStructure::addEdge ( Node* from, Node* to ) {
 //       remove(e);
     }
 
-    Edge * e =  Graph::addEdge ( from, to );
+    Edge * e =  DataStructureBase::addEdge ( from, to );
     arrangeNodes();
     return e;
 }

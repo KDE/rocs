@@ -47,11 +47,11 @@ GraphPlugin::~GraphPlugin()
 
 }
 
-Graph* GraphPlugin::changeToDS ( Graph* graph) {
+DataStructureBase* GraphPlugin::changeToDS ( DataStructureBase* graph) {
     return new GraphStructure(*graph);
 }
 
-Graph* GraphPlugin::createDS ( GraphDocument* parent )
+DataStructureBase* GraphPlugin::createDS ( GraphDocument* parent )
 {
   return new GraphStructure(parent);
 //     return new Graph(parent);
@@ -106,7 +106,7 @@ QLayout* Rocs::GraphPlugin::edgeExtraProperties ( Edge* arg1, QWidget* arg2 ) co
     return Rocs::DSPluginInterface::edgeExtraProperties ( arg1, arg2 );
 }
 
-QLayout* Rocs::GraphPlugin::graphExtraProperties ( Graph* graph, QWidget* parentWidget ) const
+QLayout* Rocs::GraphPlugin::graphExtraProperties ( DataStructureBase* graph, QWidget* parentWidget ) const
 {
   QGridLayout *lay = new QGridLayout(parentWidget);
     QCheckBox * _graphOriented = new QCheckBox (i18n("Graph is oriented"), parentWidget);

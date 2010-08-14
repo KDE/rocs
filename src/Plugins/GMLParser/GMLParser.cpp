@@ -23,7 +23,7 @@
 #include <KAboutData>
 #include <KGenericFactory>
 #include <QFile>
-#include <Core/graph.h>
+#include <Core/DataStructureBase.h>
 #include "GMLGraphParsingHelper.h"
 #include "GMLGrammar.h"
 
@@ -80,7 +80,7 @@ bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) 
         out << "Version 1\n";
         out << "Vendor \"Rocs\"\n";
         for (int i = 0 ; i < graphDoc.count(); ++i){
-          Graph *g = graphDoc.at(i);
+          DataStructureBase *g = graphDoc.at(i);
 //         Graph *g = graph.activeGraph();
             out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
             out << QString("id \"%1\" \n").arg(g->name());
