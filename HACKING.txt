@@ -16,7 +16,7 @@ Engine/
 GraphicsItem/
 Models/
 Interface/
-
+teste
 Core is the Graph Library + Document Handling. 
   the classes are GraphDocument, Graph, Node, Edge, OrientedGraph, OrientedNode, MultiGraph and MultiNode.
   The class GraphDocument is created on the app itself after clicking 'New Document' button, that's defined on FileArea.{h, ui, cpp}
