@@ -80,12 +80,12 @@ bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) 
         out << "Version 1\n";
         out << "Vendor \"Rocs\"\n";
         for (int i = 0 ; i < graphDoc.count(); ++i){
-          DataStructureBase *g = graphDoc.at(i);
+          DataType *g = graphDoc.at(i);
 //         Graph *g = graph.activeGraph();
             out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
             out << QString("id \"%1\" \n").arg(g->name());
 
-            foreach ( Node *n, g->nodes() ) {
+            foreach ( Datum *n, g->nodes() ) {
                 out << QString("node [\n id \"%1\" \n").arg(n->name());
 //                 foreach (QByteArray p, n->dynamicPropertyNames()){
 //                    out << p << " " << n->property(p).toString() << "\n";
@@ -94,7 +94,7 @@ bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) 
                 out << "]\n";
 
             }
-            foreach ( Edge *e, g->edges() ) {
+            foreach ( Pointer *e, g->edges() ) {
                 out << "edge [\n";
 //                  foreach (QByteArray p, e->dynamicPropertyNames()){
 //                    out << p << " " << e->property(p).toString() << "\n";
@@ -111,7 +111,7 @@ bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) 
     return false;
 }
 
-QString const GMLParser::processEdge(Edge*e ) const
+QString const GMLParser::processEdge(Pointer*e ) const
 {
     QString edge;
     edge.append(QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->name(), e->to()->name()));
@@ -130,7 +130,7 @@ QString const GMLParser::processEdge(Edge*e ) const
     return edge;
 }
 
-QString const GMLParser::processNode(Node* n) const
+QString const GMLParser::processNode(Datum* n) const
 {
       QString node;
       node.append(QString("  x %1 \n  y %2 \n").arg(n->x()).arg(n->y()));

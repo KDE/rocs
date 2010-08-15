@@ -25,8 +25,8 @@
 #include <QObject>
 #include <QPointF>
 class QGraphicsLineItem;
-class NodeItem;
-class Node;
+class DatumItem;
+class Datum;
 
 /*!
   \brief The 'Add Node' Action
@@ -43,7 +43,7 @@ public:
     */
 
     explicit AddEdgeAction(GraphScene *scene, QObject *parent = 0);
-    void setActiveGraph(DataStructureBase* graph);
+    void setActiveGraph(DataType* graph);
     /*!
       Default Destructor
     */
@@ -66,10 +66,10 @@ public slots:
 
 private:
     /*! pointer to the node that suffered the mouse-click */
-    NodeItem *_nodeFrom;
+    DatumItem *_nodeFrom;
 
     /*! pointer to the node that suffered the mouse-release-click */
-    NodeItem *_nodeTo;
+    DatumItem *_nodeTo;
 
     /*! a temporary line that will connect the two Nodes. */
     QGraphicsLineItem *_tmpLine;
@@ -82,7 +82,7 @@ private:
     bool _working;
 
   signals:
-    void addEdge(Node *from, Node *to);
+    void addEdge(Datum *from, Datum *to);
 
 };
 

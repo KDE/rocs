@@ -24,9 +24,9 @@
 #include <QString>
 #include "AlignAction.h"
 
-class GraphDocument;
+class DataTypeDocument;
 class Graph;
-class Node;
+class Datum;
 class GraphScene;
 class QToolButton;
 class MainWindow;
@@ -44,33 +44,33 @@ public:
     QGraphicsView *view() const;
     MainWindow *mainWindow();
     
-    /*! as the name says, it removes the current GraphDocument
+    /*! as the name says, it removes the current DataTypeDocument
     from the screen and releases it from the evil hands of GraphEditWidget.*/
     
-    void releaseGraphDocument();
+    void releaseDataTypeDocument();
     
 public slots:
     /*! set the current selected Graph.
     	\param graph the new active graph.
     	*/
-    void setActiveGraph( DataStructureBase *g);
+    void setActiveGraph( DataType *g);
 
-    void setActiveGraphDocument(GraphDocument *graphDocument);
-    QList<NodeItem*> selectedNodes() const;
+    void setActiveDataTypeDocument(DataTypeDocument *graphDocument);
+    QList<DatumItem*> selectedNodes() const;
 
 private:
     void setupWidgets();
     /*! as the name says, draw a graph on scene.
     \param g the graph to be drawn. */
-    void drawGraphOnScene( DataStructureBase *g );
+    void drawGraphOnScene( DataType *g );
 
     QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
 
 
 
     GraphScene *_scene;
-    GraphDocument *_graphDocument;
-    DataStructureBase *_graph;
+    DataTypeDocument *_dataTypeDocument;
+    DataType *_dataType;
 
     MainWindow *_mainWindow;
 

@@ -1,29 +1,29 @@
 #include "NodePropertiesWidget.h"
-#include "node.h"
+#include "Data.h"
 #include "MainWindow.h"
 #include <KDebug>
 #include "NodeItem.h"
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include "model_GraphProperties.h"
 #include <DSPluginManager.h>
 
-NodePropertiesWidget::NodePropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
+DatumPropertiesWidget::DatumPropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
     setupUi(this);
     _item = 0;
-    _node = 0;
+    _datum = 0;
 }
 
-void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
-    if (_node == n->node())
+void DatumPropertiesWidget::setDatum(DatumItem *n, QPointF pos) {
+    if (_datum == n->datum())
       return;
 
-    if (_node){
-      disconnectNode(_node);
+    if (_datum){
+      disconnectDatum(_datum);
     }
 
-    _node = n->node();
+    _datum = n->datum();
     if (! _item ){
-      _svgFile = _node->iconPackage();
+      _svgFile = _datum->iconPackage();
     }
 
     _item = n;
@@ -34,51 +34,51 @@ void NodePropertiesWidget::setNode(NodeItem *n, QPointF pos) {
     reflectAttributes();
 
 
-    connect(_node, SIGNAL(changed()), this, SLOT(reflectAttributes()));
-//     connect(_node->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
+    connect(_datum, SIGNAL(changed()), this, SLOT(reflectAttributes()));
+//     connect(_datum->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
 
-    connect( _showName,     SIGNAL(toggled(bool)),          _node, SLOT(hideName(bool)));
-    connect( _showValue,    SIGNAL(toggled(bool)),          _node, SLOT( hideValue(bool)));
-//     connect( _begin,        SIGNAL(toggled(bool)),          _node, SLOT(setBegin(bool)));
-//     connect( _end,          SIGNAL(toggled(bool)),          _node, SLOT(setEnd(bool)));
-    connect( _name,         SIGNAL(textChanged(QString)),   _node, SLOT(setName(QString)));
-    connect( _value,        SIGNAL(textChanged(QString)),   _node, SLOT(setValue(QString)));
-//     connect( _x,            SIGNAL(valueChanged(int)),      _node, SLOT(setX(int)));
-//     connect( _y,            SIGNAL(valueChanged(int)),      _node, SLOT(setY(int)));
-//     connect( _width,        SIGNAL(valueChanged(double)),   _node, SLOT(setWidth(double)));
+    connect( _showName,     SIGNAL(toggled(bool)),          _datum, SLOT(hideName(bool)));
+    connect( _showValue,    SIGNAL(toggled(bool)),          _datum, SLOT( hideValue(bool)));
+//     connect( _begin,        SIGNAL(toggled(bool)),          _datum, SLOT(setBegin(bool)));
+//     connect( _end,          SIGNAL(toggled(bool)),          _datum, SLOT(setEnd(bool)));
+    connect( _name,         SIGNAL(textChanged(QString)),   _datum, SLOT(setName(QString)));
+    connect( _value,        SIGNAL(textChanged(QString)),   _datum, SLOT(setValue(QString)));
+//     connect( _x,            SIGNAL(valueChanged(int)),      _datum, SLOT(setX(int)));
+//     connect( _y,            SIGNAL(valueChanged(int)),      _datum, SLOT(setY(int)));
+//     connect( _width,        SIGNAL(valueChanged(double)),   _datum, SLOT(setWidth(double)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_node);
+    model->setDataSource(_datum);
 
     _propertiesTable->setModel(model);
 
 }
 
-void NodePropertiesWidget::reflectAttributes(){
+void DatumPropertiesWidget::reflectAttributes(){
     if (extraItens->layout()){
       delete extraItens->layout();
     }
-    if(QLayout *lay = Rocs::DSPluginManager::New()->nodeExtraProperties(_node, this)){
+    if(QLayout *lay = Rocs::DSPluginManager::instance()->datumExtraProperties(_datum, this)){
       extraItens->setLayout(lay);
     }
-   _color->setColor(_node->color());
-//    _x->setValue(_node->x());
-//    _y->setValue(_node->y());
-   _name->setText(_node->name());
-   _value->setText(_node->value().toString());
-//    _width->setValue(_node->width());
-   _showName->setChecked(_node->showName());
-   _showValue->setChecked(_node->showValue());
-//    updateAutomateAttributes(qobject_cast< Graph* >(_node->parent())->automate());
+   _color->setColor(_datum->color());
+//    _x->setValue(_datum->x());
+//    _y->setValue(_datum->y());
+   _name->setText(_datum->name());
+   _value->setText(_datum->value().toString());
+//    _width->setValue(_datum->width());
+   _showName->setChecked(_datum->showName());
+   _showValue->setChecked(_datum->showValue());
+//    updateAutomateAttributes(qobject_cast< Graph* >(_datum->parent())->automate());
    _propertyName->setText("");
    _propertyValue->setText("");
    _isPropertyGlobal->setCheckState(Qt::Unchecked);
-   if (( _svgFile == _node->iconPackage()) && (_images->count() != 0)){
+   if (( _svgFile == _datum->iconPackage()) && (_images->count() != 0)){
       kDebug() << _svgFile << "already set, and images combo box is not empty";
       return;
    }
     _images->clear();
-    QFile svgFile(_item->node()->iconPackage());
+    QFile svgFile(_item->datum()->iconPackage());
     if (!svgFile.open(QIODevice::ReadOnly | QIODevice::Text)){
       kDebug() << "could not open file for reading";
       return;
@@ -97,19 +97,19 @@ void NodePropertiesWidget::reflectAttributes(){
     }
 }
 
-void NodePropertiesWidget::on__images_activated(const QString& s)
+void DatumPropertiesWidget::on__images_activated(const QString& s)
 {
-  _node->setIcon("rocs_"+s);
+  _datum->setIcon("rocs_"+s);
 }
 
-void NodePropertiesWidget::on__color_activated(const QColor& c) {
-  _node->setColor(c.name());
+void DatumPropertiesWidget::on__color_activated(const QColor& c) {
+  _datum->setColor(c.name());
 }
 
-// void NodePropertiesWidget::updateAutomateAttributes(bool b){
+// void DatumPropertiesWidget::updateAutomateAttributes(bool b){
 // //     if (b) {
-// //         _begin->setChecked(_node->begin());
-// //         _end->setChecked(_node->end());
+// //         _begin->setChecked(_datum->begin());
+// //         _end->setChecked(_datum->end());
 // //         _begin->show();
 // //         _end->show();
 // //     }
@@ -121,17 +121,17 @@ void NodePropertiesWidget::on__color_activated(const QColor& c) {
 // //     }
 // }
 
-void NodePropertiesWidget::on__addProperty_clicked(){
+void DatumPropertiesWidget::on__addProperty_clicked(){
 
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
     model->addDynamicProperty(_propertyName->text(),
                             QVariant(_propertyValue->text()),
-                            _node,
+                            _datum,
                             (_isPropertyGlobal->checkState() == Qt::Checked));
 
 }
 
-void NodePropertiesWidget::disconnectNode(Node *n){
+void DatumPropertiesWidget::disconnectDatum(Datum *n){
 
     disconnect(n, SIGNAL(changed()), this, SLOT(reflectAttributes()));
     disconnect(n->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));

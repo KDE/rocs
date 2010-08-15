@@ -19,11 +19,11 @@ set( rocs_core_SRCS
   Core/DocumentManager.cpp
   Core/DSPluginManager.cpp
   Core/DSPluginInterface.cpp
-  Core/DataStructureBase.cpp
-  Core/edge.cpp
+  Core/DataType.cpp
+  Core/Data.cpp
   Core/graphDocument.cpp
-  Core/node.cpp
-  Core/graphGroups.cpp
+  Core/Pointer.cpp
+  #Core/graphGroups.cpp
   Core/krossBackend.cpp
   Core/qtScriptBackend.cpp
   Core/threadDocument.cpp
@@ -45,12 +45,12 @@ target_link_libraries( rocslib
 
 set( rocslib_LIB_HDRS
   Core/DynamicPropertiesList.h
-  Core/edge.h
-  Core/DataStructureBase.h
+  Core/Data.h
+  Core/DataType.h
   Core/graphDocument.h
-  Core/graphGroups.h
+  #Core/graphGroups.h
   Core/krossBackend.h
-  Core/node.h
+  Core/Pointer.h
   Core/qtScriptBackend.h
   Core/threadDocument.h
   Core/rocslib_export.h
@@ -59,6 +59,8 @@ set( rocslib_LIB_HDRS
   Plugins/PluginManager.h
   Plugins/ToolsPluginInterface.h
 
+  GraphicsItem/NodeItem.h
+  GraphicsItem/OrientedEdgeItem.h
 )
 
 set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
@@ -104,10 +106,10 @@ set( rocs_models_SRCS
 )
 
 
-set( rocs_undoredo_SRCS
-  UndoRedo/URAddNode.cpp
-  UndoRedo/URAddEdge.cpp
-)
+# set( rocs_undoredo_SRCS
+#   UndoRedo/URAddNode.cpp
+#   UndoRedo/URAddEdge.cpp
+# )
 
 set ( rocs_script_SRC
         Scripts/IncludeManager.cpp

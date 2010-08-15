@@ -24,11 +24,11 @@
 
 class QMutex;
 class QWaitCondition;
-class Edge;
+class Pointer;
 class Graph;
-class Node;
+class Datum;
 class QGridLayout;
-class GraphDocument;
+class DataTypeDocument;
 #include "rocslib_export.h"
 
 class ROCSLIB_EXPORT DocumentManager : public QObject
@@ -36,28 +36,28 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
   Q_OBJECT
     QWaitCondition &_docCondition;
     QMutex &_mutex;
-    QList<GraphDocument*> m_documents;
-    GraphDocument * m_actualDocument;
+    QList<DataTypeDocument*> m_documents;
+    DataTypeDocument * m_actualDocument;
 
 
   public:
     DocumentManager(QWaitCondition &docCondition, QMutex &mutex,QObject* parent = 0);
     virtual ~DocumentManager();
 
-    QList <GraphDocument * > documentList();
+    QList <DataTypeDocument * > documentList();
     /**Return document at index i */
-    GraphDocument * document(const int& i);
+    DataTypeDocument * document(const int& i);
     /**Return actual document.*/
-    GraphDocument * activeDocument();
+    DataTypeDocument * activeDocument();
 
   public slots:
-    void changeDocument(GraphDocument*);
+    void changeDocument(DataTypeDocument*);
 
     void changeDocument();
     /** Add a document to list and set as active document */
-    void addDocument(GraphDocument*);
+    void addDocument(DataTypeDocument*);
     /** Remove the document from list. if the document is the active one, then active document pass to be the last from list. If it is the last one, an empty is created and set as active.*/
-    void removeDocument(GraphDocument*);
+    void removeDocument(DataTypeDocument*);
     /** Convert document to new data structure. */
     void convertToDataStructure(QString ds);
 
@@ -67,11 +67,11 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
 
   signals:
     /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/
-    void activateDocument (GraphDocument*);
+    void activateDocument (DataTypeDocument*);
     /** this signal is emited when actual active document is deactivate (by a removal or a change)*/
-    void deactivateDocument(GraphDocument* doc);
+    void deactivateDocument(DataTypeDocument* doc);
     /** signal emited when a document was removed from list. if doc is the active document, both, deactivateDocument() and activeDocument() is called first */
-    void documentRemoved(GraphDocument* doc);
+    void documentRemoved(DataTypeDocument* doc);
 };
 
 #endif // DOCUMENTMANAGER_H

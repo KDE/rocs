@@ -18,29 +18,29 @@
 */
 
 #include "edgepropertieswidget.h"
-#include "edge.h"
+#include "Pointer.h"
 #include "MainWindow.h"
 #include "model_GraphProperties.h"
-#include <DataStructureBase.h>
+#include <DataType.h>
 #include <DSPluginManager.h>
 
-EdgePropertiesWidget::EdgePropertiesWidget(MainWindow *parent): QWidget(parent) {
+PointerPropertiesWidget::PointerPropertiesWidget(MainWindow *parent): QWidget(parent) {
     setupUi(this);
-    _edge = 0;
+    _pointer = 0;
 }
 
-void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
-    if (_edge == e)
+void PointerPropertiesWidget::setPointer(Pointer *e, QPointF pos) {
+    if (_pointer == e)
       return;
 
-    if (_edge){
-      disconnectEdge();
+    if (_pointer){
+      disconnectPointer();
     }
-    _edge = e;
+    _pointer = e;
     move(pos.x()+ 10,  pos.y() + 10);
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_edge);
+    model->setDataSource(_pointer);
 
     _propertiesTable->setModel(model);
 
@@ -49,59 +49,59 @@ void EdgePropertiesWidget::setEdge(Edge *e, QPointF pos) {
     activateWindow();
     raise();
 
-    connect(_edge,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
+    connect(_pointer,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
 
-    connect(_value,     SIGNAL(textChanged(QString)),   _edge, SLOT(setValue(QString)));
-    connect(_name,      SIGNAL(textChanged(QString)),   _edge, SLOT(setName(QString)));
-    connect(_width,     SIGNAL(valueChanged(double)),    _edge, SLOT(setWidth(double)));
-    connect(_showName,  SIGNAL(toggled(bool)),          _edge, SLOT(hideName(bool)));
-    connect(_showValue, SIGNAL(toggled(bool)),          _edge, SLOT(hideValue(bool)));
+    connect(_value,     SIGNAL(textChanged(QString)),   _pointer, SLOT(setValue(QString)));
+    connect(_name,      SIGNAL(textChanged(QString)),   _pointer, SLOT(setName(QString)));
+    connect(_width,     SIGNAL(valueChanged(double)),    _pointer, SLOT(setWidth(double)));
+    connect(_showName,  SIGNAL(toggled(bool)),          _pointer, SLOT(hideName(bool)));
+    connect(_showValue, SIGNAL(toggled(bool)),          _pointer, SLOT(hideValue(bool)));
 
     reflectAttributes();
 }
 
-void EdgePropertiesWidget::reflectAttributes(){
+void PointerPropertiesWidget::reflectAttributes(){
   if (_extraProperties->layout()){
     delete _extraProperties->layout();
   }
-  if (QLayout * lay = Rocs::DSPluginManager::New()->edgeExtraProperties(_edge, this)){
+  if (QLayout * lay = Rocs::DSPluginManager::instance()->pointerExtraProperties(_pointer, this)){
       _extraProperties->setLayout(lay);
   }
-   _name->setText(_edge->name());
-   _value->setText(_edge->value());
-   _color->setColor(_edge->color());
-   _width->setValue(_edge->width());
+   _name->setText(_pointer->name());
+   _value->setText(_pointer->value());
+   _color->setColor(_pointer->color());
+   _width->setValue(_pointer->width());
    _propertyName->setText("");
    _propertyValue->setText("");
    _isPropertyGlobal->setCheckState(Qt::Unchecked);
 }
 
-void EdgePropertiesWidget::on__color_activated(const QColor& c) {
-    _edge->setColor(c.name());
+void PointerPropertiesWidget::on__color_activated(const QColor& c) {
+    _pointer->setColor(c.name());
 }
 
-void EdgePropertiesWidget::on__style_activated(int index) {
+void PointerPropertiesWidget::on__style_activated(int index) {
     switch(index){
-      case 0 : _edge->setStyle("solid");    break;
-      case 1 : _edge->setStyle("dash");     break;
-      case 2 : _edge->setStyle("dot");      break;
-      case 3 : _edge->setStyle("dash dot"); break;
+      case 0 : _pointer->setStyle("solid");    break;
+      case 1 : _pointer->setStyle("dash");     break;
+      case 2 : _pointer->setStyle("dot");      break;
+      case 3 : _pointer->setStyle("dash dot"); break;
     }
 }
 
-void EdgePropertiesWidget::on__addProperty_clicked(){
+void PointerPropertiesWidget::on__addProperty_clicked(){
 
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
     model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
-                              _edge,(_isPropertyGlobal->checkState() == Qt::Checked));
+                              _pointer,(_isPropertyGlobal->checkState() == Qt::Checked));
 }
 
-void EdgePropertiesWidget::disconnectEdge(){
-   disconnect(_edge,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
+void PointerPropertiesWidget::disconnectPointer(){
+   disconnect(_pointer,      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
 
-    disconnect(_value,     SIGNAL(textChanged(QString)),   _edge, SLOT(setValue(QString)));
-    disconnect(_name,      SIGNAL(textChanged(QString)),   _edge, SLOT(setName(QString)));
-    disconnect(_width,     SIGNAL(valueChanged(double)),    _edge, SLOT(setWidth(double)));
-    disconnect(_showName,  SIGNAL(toggled(bool)),          _edge, SLOT(hideName(bool)));
-    disconnect(_showValue, SIGNAL(toggled(bool)),          _edge, SLOT(hideValue(bool)));
+    disconnect(_value,     SIGNAL(textChanged(QString)),   _pointer, SLOT(setValue(QString)));
+    disconnect(_name,      SIGNAL(textChanged(QString)),   _pointer, SLOT(setName(QString)));
+    disconnect(_width,     SIGNAL(valueChanged(double)),    _pointer, SLOT(setWidth(double)));
+    disconnect(_showName,  SIGNAL(toggled(bool)),          _pointer, SLOT(hideName(bool)));
+    disconnect(_showValue, SIGNAL(toggled(bool)),          _pointer, SLOT(hideValue(bool)));
 }

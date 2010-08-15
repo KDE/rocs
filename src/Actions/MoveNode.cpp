@@ -20,8 +20,8 @@
 */
 #include "MoveNode.h"
 #include "GraphScene.h"
-#include "DataStructureBase.h"
-#include "node.h"
+#include "DataType.h"
+#include "Data.h"
 #include "graphDocument.h"
 #include "NodeItem.h"
 #include <KLocale>
@@ -47,24 +47,24 @@ void MoveNodeAction::executePress(QPointF pos) {
     if (_graph == 0) {
         return;
     }
-    _movableNode = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+    _movableNode = qgraphicsitem_cast<DatumItem*>(_graphScene->itemAt(pos));
     if (!_movableNode ) return;
 
-    _node = _movableNode->node();
-    _graph = qobject_cast<DataStructureBase*>(_node->parent());
+    _node = _movableNode->datum();
+    _graph = qobject_cast<DataType*>(_node->parent());
 }
 
 void MoveNodeAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return;
     }
-    if ((pos.x() < 0) || (pos.x() > _graphDocument->width())) {
-        if (( pos.y() > 0) && (pos.y() < _graphDocument->height())) {
+    if ((pos.x() < 0) || (pos.x() > _dataTypeDocument->width())) {
+        if (( pos.y() > 0) && (pos.y() < _dataTypeDocument->height())) {
             _node -> setY(pos.y());
         }
     }
-    else if ((pos.y() < 0) || (pos.y() > _graphDocument->height())) {
-        if (( pos.x() > 0) && (pos.x() < _graphDocument->width())) {
+    else if ((pos.y() < 0) || (pos.y() > _dataTypeDocument->height())) {
+        if (( pos.x() > 0) && (pos.x() < _dataTypeDocument->width())) {
             _node -> setX(pos.x());
         }
     }
@@ -77,7 +77,7 @@ void MoveNodeAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
         return;
     }
-    if (!((pos.x() < 0) || (pos.y() < 0) || (pos.x() > _graphDocument->width())|| (pos.y() > _graphDocument->height()))) {
+    if (!((pos.x() < 0) || (pos.y() < 0) || (pos.x() > _dataTypeDocument->width())|| (pos.y() > _dataTypeDocument->height()))) {
         _node -> setY(pos.y());
         _node -> setX(pos.x());
     }

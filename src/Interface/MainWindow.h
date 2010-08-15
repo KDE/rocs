@@ -29,8 +29,8 @@ class KPushButton;
 class GraphLayers;
 class GraphVisualEditor;
 class KActionCollection;
-class GraphDocument;
-class DataStructureBase;
+class DataTypeDocument;
+class DataType;
 class KTextBrowser;
 class QSplitter;
 class GraphScene;
@@ -60,10 +60,10 @@ public:
     /*! defalt constructor */
     MainWindow();
     ~MainWindow();
-    DataStructureBase *graph() const;
+    DataType *graph() const;
     GraphScene *scene() const;
 //    void debug(const QString& s);
-    GraphDocument *activeDocument() const;
+    DataTypeDocument *activeDocument() const;
     QMutex& mutex();
 
 private: // Methods
@@ -103,9 +103,9 @@ private slots:
     void dsChanged();
 
 public slots:
-    void setActiveGraphDocument(GraphDocument *d);
-    void releaseDocument(GraphDocument *d);
-    void setActiveGraph(DataStructureBase*g);
+    void setActiveDataTypeDocument(DataTypeDocument *d);
+    void releaseDocument(DataTypeDocument *d);
+    void setActiveGraph(DataType*g);
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
@@ -119,11 +119,11 @@ public slots:
       void stopEvaluation();
       void endThreadDocument();
 
-      void runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument * graphs);
+      void runTool(Rocs::ToolsPluginInterface * plugin, DataTypeDocument * graphs);
 private: // Variables.
 
     // Left Area:
-    GraphLayers* _GraphLayers; //! Area where the nodes and edges will be modified.
+    GraphLayers* _GraphLayers; //! Area where the data and edges will be modified.
     KPushButton *_btnAddGraph;
 
     // Right Area:

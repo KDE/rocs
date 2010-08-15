@@ -64,7 +64,7 @@ PluginManager * PluginManager::self = 0;
 
 
 
-PluginManager * PluginManager::New()
+PluginManager * PluginManager::instance()
 {
     if (PluginManager::self == 0) {
         PluginManager::self = new PluginManager;

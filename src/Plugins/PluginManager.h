@@ -44,7 +44,7 @@ class ROCSLIB_EXPORT PluginManager: public QObject
       class PluginManagerPrivate * _d;
   public:
     
-    static PluginManager * New();
+    static PluginManager * instance();
     ~PluginManager();
     
     void loadPlugins();

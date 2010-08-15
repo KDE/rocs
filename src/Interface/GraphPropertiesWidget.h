@@ -23,9 +23,9 @@
 #include <KButtonGroup>
 #include "ui_GraphPropertiesWidget.h"
 
-class DataStructureBase;
-class Node;
-class Edge;
+class DataType;
+class Datum;
+class Pointer;
 
 
 /*! \brief Properties Area, not used yet. */
@@ -34,34 +34,34 @@ class GraphPropertiesWidget : public KButtonGroup, public Ui::GraphPropertiesWid
 {
     Q_OBJECT
 public:
-    GraphPropertiesWidget (DataStructureBase *g, MainWindow* parent = 0 );
+    GraphPropertiesWidget (DataType *g, MainWindow* parent = 0 );
     QRadioButton *radio() const;
 
 
 
 private slots:
-    void on__graphEdgeColorApplyNow_clicked();
-    void on__graphNodeColorApplyNow_clicked();
+    void on__graphPointerColorApplyNow_clicked();
+    void on__graphDatumColorApplyNow_clicked();
     void on__graphDelete_clicked();
     void on__graphName_textChanged(const QString& s);
 
     void on__activateGraph_toggled(bool b);
     void on__graphVisible_toggled(bool b);
-    void setEdgeDefaultColor(QColor c);
-    void setNodeDefaultColor(QColor c);
+    void setPointerDefaultColor(QColor c);
+    void setDatumDefaultColor(QColor c);
 
   signals:
     void updateNeeded();
-    void edgeColorsChanged(QString color);
-    void nodeColorsChanged(QString color);
+    void pointerColorsChanged(QString color);
+    void datumColorsChanged(QString color);
 
-    void edgeDefaultColorSetted(QString color);
-    void nodeDefaultColorSetted(QString color);
+    void pointerDefaultColorSetted(QString color);
+    void datumDefaultColorSetted(QString color);
     void addGraph(QString name);
     void removeGraph();
 
   private:
-    DataStructureBase *_graph;
+    DataType *_graph;
     MainWindow *_mainWindow;
 
 };

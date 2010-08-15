@@ -2,7 +2,7 @@
 #define GRAPHLAYERS_H
 
 #include <QWidget>
-class DataStructureBase;
+class DataType;
 class QButtonGroup;
 class KLineEdit;
 class MainWindow;
@@ -17,7 +17,7 @@ public:
     void populate();
 public slots:
     void btnADDClicked();
-    void addGraph(DataStructureBase *g);
+    void addGraph(DataType *g);
     void selectFirstGraph();
 signals:
   void  createGraph(const QString& s);

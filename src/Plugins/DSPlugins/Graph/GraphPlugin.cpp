@@ -47,27 +47,27 @@ GraphPlugin::~GraphPlugin()
 
 }
 
-DataStructureBase* GraphPlugin::changeToDS ( DataStructureBase* graph) {
+DataType* GraphPlugin::changeToDS ( DataType* graph) {
     return new GraphStructure(*graph);
 }
 
-DataStructureBase* GraphPlugin::createDS ( GraphDocument* parent )
+DataType* GraphPlugin::createDS ( DataTypeDocument* parent )
 {
   return new GraphStructure(parent);
 //     return new Graph(parent);
 }
 
-QGraphicsItem* Rocs::GraphPlugin::nodeItem(Node* node) const
+QGraphicsItem* Rocs::GraphPlugin::datumItem(Datum* node) const
 {
     QGraphicsItem * item = new NodeItem(node);
     return item;
 }
 
-QGraphicsItem* Rocs::GraphPlugin::edgeItem ( Edge* edge) const
+QGraphicsItem* Rocs::GraphPlugin::pointerItem ( Pointer* edge) const
 {
   return new OrientedEdgeItem(edge);
 }
-QLayout* GraphPlugin::nodeExtraProperties ( Node* node, QWidget* parentWidget ) const
+QLayout* GraphPlugin::datumExtraProperties ( Datum* node, QWidget* parentWidget ) const
 {
   QGridLayout * lay = new QGridLayout(parentWidget);
   QSpinBox * y = new QSpinBox(parentWidget);
@@ -101,12 +101,12 @@ QLayout* GraphPlugin::nodeExtraProperties ( Node* node, QWidget* parentWidget ) 
   return lay;
 }
 
-QLayout* Rocs::GraphPlugin::edgeExtraProperties ( Edge* arg1, QWidget* arg2 ) const
+QLayout* Rocs::GraphPlugin::pointerExtraProperties ( Pointer* arg1, QWidget* arg2 ) const
 {
-    return Rocs::DSPluginInterface::edgeExtraProperties ( arg1, arg2 );
+    return Rocs::DSPluginInterface::pointerExtraProperties ( arg1, arg2 );
 }
 
-QLayout* Rocs::GraphPlugin::graphExtraProperties ( DataStructureBase* graph, QWidget* parentWidget ) const
+QLayout* Rocs::GraphPlugin::dataTypeExtraProperties ( DataType* graph, QWidget* parentWidget ) const
 {
   QGridLayout *lay = new QGridLayout(parentWidget);
     QCheckBox * _graphOriented = new QCheckBox (i18n("Graph is oriented"), parentWidget);

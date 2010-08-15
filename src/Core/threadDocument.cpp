@@ -24,8 +24,8 @@ ThreadDocument::ThreadDocument(QWaitCondition &docCondition, QMutex &mutex, QObj
 
 ThreadDocument::~ThreadDocument(){
 //     m_docManager->deleteLater();
-//     Rocs::DSPluginManager::New()->deleteLater();
-//     Rocs::PluginManager::New()->deleteLater();
+//     Rocs::DSPluginManager::instance()->deleteLater();
+//     Rocs::PluginManager::instance()->deleteLater();
 //     if(_engine) delete _engine;
 //     delete _graphDocument;
 
@@ -37,8 +37,8 @@ ThreadDocument::~ThreadDocument(){
 
 void ThreadDocument::terminate(){
   m_docManager->deleteLater();
-  Rocs::DSPluginManager::New()->deleteLater();
-  Rocs::PluginManager::New()->deleteLater();
+  Rocs::DSPluginManager::instance()->deleteLater();
+  Rocs::PluginManager::instance()->deleteLater();
 //   QThread::terminate();
   exit();
 }
@@ -48,7 +48,7 @@ bool ThreadDocument::isRunning() const{
     return engine()->isRunning();
 }
 
-GraphDocument* ThreadDocument::document() const
+DataTypeDocument* ThreadDocument::document() const
 {
   return m_docManager->activeDocument();
 }
@@ -72,7 +72,7 @@ QtScriptBackend *ThreadDocument::engine() const{
 // void ThreadDocument::createEmptyDocument(){
 //   releaseDocument();
 //   _graphDocument = new GraphDocument(i18n("Untitled"), 800, 600);
-//   connect (Rocs::DSPluginManager::New(), SIGNAL(changingDS(QString)), _graphDocument, SLOT(convertToDS(QString)));
+//   connect (Rocs::DSPluginManager::instance(), SIGNAL(changingDS(QString)), _graphDocument, SLOT(convertToDS(QString)));
 //   _engine = new QtScriptBackend();
 //   _docCondition.wakeAll();
 //   kDebug() << "Waking All";
@@ -102,15 +102,15 @@ DocumentManager* ThreadDocument::documentManager()
 
 void ThreadDocument::run(){
   kDebug() << "############ Load Plugins ###############";
-  Rocs::PluginManager::New()->loadPlugins();
+  Rocs::PluginManager::instance()->loadPlugins();
   kDebug() << "############ Load DS Plugins ############";
-  Rocs::DSPluginManager::New();
+  Rocs::DSPluginManager::instance();
   kDebug() <<"End of loading plugins.";
-  if (Rocs::DSPluginManager::New()->listOfDS().count() == 0){
+  if (Rocs::DSPluginManager::instance()->listOfDS().count() == 0){
     return;
   }
   m_docManager = new DocumentManager(_docCondition ,_mutex);
-  connect (Rocs::DSPluginManager::New(), SIGNAL(changingDS(QString)), m_docManager, SLOT(convertToDataStructure(QString)));
+  connect (Rocs::DSPluginManager::instance(), SIGNAL(changingDS(QString)), m_docManager, SLOT(convertToDataStructure(QString)));
 //   loadDocument();
   exec();
 }

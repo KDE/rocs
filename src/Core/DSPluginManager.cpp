@@ -34,11 +34,11 @@ public:
         m_actualPlugin = 0;
     }
 
-    DataStructureBase* changeToDS ( DataStructureBase* graph ) {
+    DataType* changeToDS ( DataType* dataType ) {
         if ( m_actualPlugin ) {
-            return m_actualPlugin->changeToDS ( graph );
+            return m_actualPlugin->changeToDS ( dataType );
         }
-        return graph;
+        return dataType;
     }
     void loadPlugins() {
         loadDSPlugins();
@@ -56,7 +56,7 @@ public:
         }
         return KPluginInfo();
     }
-    DataStructureBase* createNewDS ( GraphDocument* arg1 , const QString & pluginName ) {
+    DataType* createNewDS ( DataTypeDocument* arg1 , const QString & pluginName ) {
         if (!pluginName.isEmpty()) {
             Rocs::DSPluginInterface * plugin = m_plugins.value(pluginName);
             if (plugin) {
@@ -142,7 +142,7 @@ Rocs::DSPluginManager::DSPluginManager() :_d ( new DSPluginManagerPrivate(this) 
     _d->loadPlugins();
 }
 
-Rocs::DSPluginManager* Rocs::DSPluginManager::New() {
+Rocs::DSPluginManager* Rocs::DSPluginManager::instance() {
     if ( DSPluginManager::self == 0 ) {
         DSPluginManager::self = new DSPluginManager();
     }
@@ -157,7 +157,7 @@ void Rocs::DSPluginManager::changeActiveDS()
     if (! action ) {
         return;
     }
-    changeActiveDS ( Rocs::DSPluginManager::New()->pluginsList().at(action->data().toInt() )->name() );
+    changeActiveDS ( Rocs::DSPluginManager::instance()->pluginsList().at(action->data().toInt() )->name() );
 
 }
 
@@ -172,14 +172,14 @@ void Rocs::DSPluginManager::changeActiveDS (const QString &newDS ) {
     }
 }
 
-DataStructureBase* Rocs::DSPluginManager::changeToDS ( DataStructureBase* graph ) {
+DataType* Rocs::DSPluginManager::changeToDS ( DataType* dataType ) {
 
-    return New()->_d->changeToDS ( graph );
+    return instance()->_d->changeToDS ( dataType );
 
 }
 
-DataStructureBase* Rocs::DSPluginManager::createNewDS ( GraphDocument* parent , const QString & pluginName) {
-    return New()->_d->createNewDS(parent, pluginName);
+DataType* Rocs::DSPluginManager::createNewDS ( DataTypeDocument* parent , const QString & pluginName) {
+    return instance()->_d->createNewDS(parent, pluginName);
 
 }
 
@@ -188,12 +188,12 @@ KPluginInfo Rocs::DSPluginManager::pluginInfo( Rocs::DSPluginInterface* plugin) 
 }
 
 const QStringList Rocs::DSPluginManager::listOfDS() {
-    return New()->_d->listOfDS();
+    return instance()->_d->listOfDS();
 }
 
 QList< Rocs::DSPluginInterface* > Rocs::DSPluginManager::pluginsList()
 {
-    return New()->_d->pluginList();
+    return instance()->_d->pluginList();
 }
 
 QString Rocs::DSPluginManager::actualPlugin() const
@@ -201,25 +201,25 @@ QString Rocs::DSPluginManager::actualPlugin() const
     return _d->actualPluginName();
 }
 
-QGraphicsItem* Rocs::DSPluginManager::nodeItem(Node* node)
+QGraphicsItem* Rocs::DSPluginManager::datumItem(Datum* datum)
 {
-  return _d->m_actualPlugin->nodeItem(node);
+  return _d->m_actualPlugin->datumItem(datum);
 }
 
-QGraphicsItem* Rocs::DSPluginManager::edgeItem ( Edge* edge ){
-    return _d->m_actualPlugin->edgeItem(edge);;
+QGraphicsItem* Rocs::DSPluginManager::pointerItem ( Pointer* pointer ){
+    return _d->m_actualPlugin->pointerItem(pointer);;
 }
 
-QLayout* Rocs::DSPluginManager::edgeExtraProperties ( Edge* edge, QWidget* parent ){
-  return _d->m_actualPlugin->edgeExtraProperties(edge, parent);
+QLayout* Rocs::DSPluginManager::pointerExtraProperties ( Pointer* pointer, QWidget* parent ){
+  return _d->m_actualPlugin->pointerExtraProperties(pointer, parent);
 }
 
-QLayout* Rocs::DSPluginManager::graphExtraProperties ( DataStructureBase* graph, QWidget* parent ){
-      return _d->m_actualPlugin->graphExtraProperties(graph, parent);
+QLayout* Rocs::DSPluginManager::dataTypeExtraProperties ( DataType* dataType, QWidget* parent ){
+      return _d->m_actualPlugin->dataTypeExtraProperties(dataType, parent);
 }
 
-QLayout* Rocs::DSPluginManager::nodeExtraProperties ( Node* node, QWidget* parent ){
-    return _d->m_actualPlugin->nodeExtraProperties(node, parent);
+QLayout* Rocs::DSPluginManager::datumExtraProperties ( Datum* datum, QWidget* parent ){
+    return _d->m_actualPlugin->datumExtraProperties(datum, parent);
 }
 
 

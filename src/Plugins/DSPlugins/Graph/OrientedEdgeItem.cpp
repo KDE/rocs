@@ -22,9 +22,9 @@
 
 #include "NodeItem.h"
 #include "GraphScene.h"
-#include "node.h"
-#include "edge.h"
-#include "DataStructureBase.h"
+#include "Data.h"
+#include "Pointer.h"
+#include "DataType.h"
 #include "math_constants.h"
 
 #include <QGraphicsScene>
@@ -39,7 +39,7 @@
 #include <math.h>
 #include <QGraphicsSimpleTextItem>
 
-OrientedEdgeItem::OrientedEdgeItem( Edge *edge, QGraphicsItem *parent)
+OrientedEdgeItem::OrientedEdgeItem( Pointer *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsPathItem(parent)
 {
     _edge = edge;
@@ -88,7 +88,7 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
 
 QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
     QPainterPath p;
-    DataStructureBase *g = qobject_cast<DataStructureBase*>(_edge->parent());
+    DataType *g = qobject_cast<DataType*>(_edge->parent());
     qreal size = 30 + (20 * _index);
     qreal angle = atan2((pos.x() - g->relativeCenter().x()), (pos.y() - g->relativeCenter().y()));
     qreal posx = (pos.x()-(((size/2) * sin(angle)) * -1)-(size/2));
@@ -114,7 +114,7 @@ QPainterPath OrientedEdgeItem::createCurves() const {
         qSwap(Pos1, Pos2);
     }
 
-    if (! _edge->graph()->directed()){
+    if (! _edge->dataType()->directed()){
 	QPainterPath p;
 	p.moveTo(Pos1);
 	p.lineTo(Pos2);
@@ -223,6 +223,8 @@ void OrientedEdgeItem::updateAttributes() {
 }
 
 void OrientedEdgeItem::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget){
+  Q_UNUSED(option);
+  Q_UNUSED(widget);
   if ( isSelected() ){
     painter->setPen(QPen(Qt::black, _edge->width(),  Qt::DotLine));
   }

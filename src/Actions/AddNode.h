@@ -46,7 +46,7 @@ public:
     */
     ~AddNodeAction();
 
-    void setActiveGraph( DataStructureBase *graph);
+    void setActiveGraph( DataType *graph);
 
 public slots:
     /*!

@@ -77,20 +77,20 @@ bool DotParser::writeFile ( GraphDocument &graph , const QString &filename ) {
     QVariantList subgraphs;
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
-        DataStructureBase *g = graph.activeGraph();
+        DataType *g = graph.activeGraph();
         if (g) {
             out << QString("%1 %2 {\n").arg(g->directed()?"digraph":"graph").arg(g->name());
-            foreach ( Node *n, g->nodes() ) {
+            foreach ( Datum *n, g->nodes() ) {
                 if (n->dynamicPropertyNames().contains("SubGraph")){
                   if (!subgraphs.contains(n->property("SubGraph"))){
                     subgraphs << n->property("SubGraph");
                     out << QString("subgraph %1 {\n").arg(n->property("SubGraph").toString());
-                    foreach ( Node *nTmp, g->nodes() ) {
+                    foreach ( Datum *nTmp, g->nodes() ) {
                         if (nTmp->property("SubGraph").isValid() && nTmp->property("SubGraph") == subgraphs.last()){
                           out << processNode(nTmp);
                         }
                     }
-                    foreach ( Edge *e, g->edges() ) {
+                    foreach ( Pointer *e, g->edges() ) {
                         if (e->property("SubGraph").isValid() && e->property("SubGraph") == subgraphs.last()){ //Only edges from outer graph
                            out << processEdge(e);
                         }
@@ -101,7 +101,7 @@ bool DotParser::writeFile ( GraphDocument &graph , const QString &filename ) {
                   out << processNode(n);
                 }
             }
-            foreach ( Edge *e, g->edges() ) {
+            foreach ( Pointer *e, g->edges() ) {
                 if (!e->dynamicPropertyNames().contains("SubGraph")){ //Only edges from outer graph
                     out << processEdge(e);
                 }
@@ -115,7 +115,7 @@ bool DotParser::writeFile ( GraphDocument &graph , const QString &filename ) {
     return false;
 }
 
-QString const DotParser::processEdge(Edge*e ) const
+QString const DotParser::processEdge(Pointer*e ) const
 {
     QString edge;
     edge.append(QString(" %1 -> %2 ").arg(e->from()->property("NodeName").isValid()?
@@ -147,7 +147,7 @@ QString const DotParser::processEdge(Edge*e ) const
     return edge;
 }
 
-QString const DotParser::processNode(Node* n) const
+QString const DotParser::processNode(Datum* n) const
 {
         QString node;
         if (n->property("NodeName").isValid())

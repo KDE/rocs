@@ -20,14 +20,14 @@
 #ifndef LISTNODE_H
 #define LISTNODE_H
 
-#include <node.h>
+#include <Data.h>
 
 
-class ListNode : public Node
+class ListNode : public Datum
 {
   Q_OBJECT
   public:
-    ListNode(DataStructureBase* parent);
+    ListNode(DataType* parent);
 
     virtual ~ListNode();
 

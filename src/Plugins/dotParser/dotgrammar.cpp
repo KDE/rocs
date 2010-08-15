@@ -1,7 +1,7 @@
-/* This file is part of KGraphViewer.
+/* This file is part of KDataTypeViewer.
    Copyright (C) 2006-2007 Gael de Chalendar <kleag@free.fr>
 
-   KGraphViewer is free software; you can redistribute it and/or
+   KDataTypeViewer is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
    License as published by the Free Software Foundation, version 2.
 
@@ -17,10 +17,10 @@
 */
 
 #include "dotgrammar.h"
-// #include "dotgraph.h"
+// #include "dotdataType.h"
 // #include "dotdefaults.h"
-// #include "graphnode.h"
-// #include "graphedge.h"
+// #include "dataTypenode.h"
+// #include "dataTypeedge.h"
 #include "DotGraphParsingHelper.h"
 #include "graphDocument.h"
 
@@ -61,8 +61,8 @@ const boost::spirit::classic::distinct_parser<> keyword_p("0-9a-zA-Z_");
 template <typename ScannerT>
 DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
 {
-  graph  = (!(keyword_p("strict")[&strict]) >> (keyword_p("graph")[&undigraph] | keyword_p("digraph")[&digraph])
-  >> !ID[&graphid] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
+  dataType  = (!(keyword_p("strict")[&strict]) >> (keyword_p("dataType")[&undidataType] | keyword_p("didataType")[&didataType])
+  >> !ID[&dataTypeid] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
   ID = (
   ( ( (anychar_p - punct_p) | '_' ) >> *( (anychar_p - punct_p) | '_' ) )
   | real_p
@@ -73,28 +73,28 @@ DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
   stmt_list  =  stmt >> !(ch_p(';')) >> !( stmt_list ) ;
   stmt  =  (
   attr_stmt
-  |  subgraph
+  |  subdataType
   |  edge_stmt
   |  node_stmt
   |  ( ID >> '=' >> ID )
   );
 
   attr_stmt  = (
-  (keyword_p("graph")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])[&setgraphattributes]
+  (keyword_p("dataType")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])[&setdataTypeattributes]
   | (keyword_p("node")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])
   | (keyword_p("edge")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])
   ) ;
 
   attr_list  = ch_p('[') >> !( a_list ) >> ch_p(']');
   a_list  =  ((ID[&attrid] >> !( '=' >> ID[&valid] ))[&addattr] >> !(',' >> a_list ));
-  edge_stmt  =  ( (node_id[&edgebound] | subgraph) >>  edgeRHS >> !( attr_list[assign_a(phelper->attributed,"edge")] ) )[&pushAttrList][&setattributedlist][&createedges][&popAttrList];
-  edgeRHS  =  edgeop[&checkedgeop] >> (node_id[&edgebound] | subgraph) >> !( edgeRHS );
+  edge_stmt  =  ( (node_id[&edgebound] | subdataType) >>  edgeRHS >> !( attr_list[assign_a(phelper->attributed,"edge")] ) )[&pushAttrList][&setattributedlist][&createedges][&popAttrList];
+  edgeRHS  =  edgeop[&checkedgeop] >> (node_id[&edgebound] | subdataType) >> !( edgeRHS );
   edgeop = str_p("->") | str_p("--");
   node_stmt  = ( node_id[&createnode] >> !( attr_list ) )[assign_a(phelper->attributed,"node")][&pushAttrList][&setattributedlist][&setnodeattributes][&popAttrList];
   node_id  =  (ID >> !( port ));
   port  =  ( ch_p(':') >> ID >> !( ':' >> compass_pt ) )
   |  ( ':' >> compass_pt );
-  subgraph  =  ( !( keyword_p("subgraph") >> !( ID[&subgraphid] ) ) >> ch_p('{')[&createsubgraph][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
+  subdataType  =  ( !( keyword_p("subgraph") >> !( ID[&subgraphid] ) ) >> ch_p('{')[&createsubdataType][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
   |  ( keyword_p("subgraph") >> ID[&subgraphid]);
   compass_pt  =  (keyword_p("n") | keyword_p("ne") | keyword_p("e")
   | keyword_p("se") | keyword_p("s") | keyword_p("sw")
@@ -139,7 +139,7 @@ void dump(char const* first, char const* last)
 
 void strict(char const* /*first*/, char const* /*last*/)
 {
-//   if (phelper) phelper;//->graph->strict(true);
+//   if (phelper) phelper;//->dataType->strict(true);
 }
 
 void gotid(char const* first, char const* last)
@@ -148,31 +148,31 @@ void gotid(char const* first, char const* last)
 //   kDebug() << "Got ID  = '"<<QString::fromStdString(phelper->attrid)<<"'";
 }
 
-void undigraph(char const* /*first*/, char const* /*last*/)
+void undidataType(char const* /*first*/, char const* /*last*/)
 {
-//   kDebug() << "Setting graph as undirected";
-  if (phelper->graph == 0){
-    phelper->graph = phelper->gd->addGraph("");
+//   kDebug() << "Setting dataType as undirected";
+  if (phelper->dataType == 0){
+    phelper->dataType = phelper->gd->addDataType("");
   }
-  phelper->graph->setDirected(false);
+  phelper->dataType->setDirected(false);
 }
 
-void digraph(char const* /*first*/, char const* /*last*/)
+void didataType(char const* /*first*/, char const* /*last*/)
 {
-//   kDebug() << "Setting graph as directed";
-  if (phelper->graph == 0){
-    phelper->graph = phelper->gd->addGraph("");
+//   kDebug() << "Setting dataType as directed";
+  if (phelper->dataType == 0){
+    phelper->dataType = phelper->gd->addDataType("");
   }
-  phelper->graph->setDirected(true);
+  phelper->dataType->setDirected(true);
 }
 
-void graphid(char const* first, char const* last)
+void dataTypeid(char const* first, char const* last)
 {
 //   kDebug() << QString::fromStdString(std::string(first,last));
-  if (phelper->graph == 0){
-    phelper->graph =phelper->gd->addGraph(QString::fromStdString(std::string(first,last)));
+  if (phelper->dataType == 0){
+    phelper->dataType =phelper->gd->addDataType(QString::fromStdString(std::string(first,last)));
   }
-  phelper->graph->setName(QString::fromStdString(std::string(first,last)));
+  phelper->dataType->setName(QString::fromStdString(std::string(first,last)));
 }
 
 void attrid(char const* first, char const* last)
@@ -198,7 +198,7 @@ void subgraphid(char const* first, char const* last)
     if (id.size()>0 && id[id.size()-1] == '"') id = id.substr(0,id.size()-1);
 //     phelper->subgraphid
     phelper->subgraphid.append(QString::fromStdString(id));
-//     kDebug() << "Got subgraph id = '"<<phelper->subgraphid<<"'";
+//     kDebug() << "Got subdataType id = '"<<phelper->subgraphid<<"'";
   }
 }
 
@@ -232,7 +232,7 @@ void pushAttrList(char const* /*first*/, char const* /*last*/)
 //   kDebug() << "Pushing attributes";
   if (phelper)
   {
-    phelper->graphAttributesStack.push_back(phelper->graphAttributes);
+    phelper->dataTypeAttributesStack.push_back(phelper->dataTypeAttributes);
     phelper->nodesAttributesStack.push_back(phelper->nodesAttributes);
     phelper->edgesAttributesStack.push_back(phelper->edgesAttributes);
   }
@@ -248,8 +248,8 @@ void popAttrList(char const* /*first*/, char const* /*last*/)
 //   kDebug() << "Poping attributes";
   if (phelper)
   {
-    phelper->graphAttributes = phelper->graphAttributesStack.back();
-    phelper->graphAttributesStack.pop_back();
+    phelper->dataTypeAttributes = phelper->dataTypeAttributesStack.back();
+    phelper->dataTypeAttributesStack.pop_back();
     phelper->nodesAttributes = phelper->nodesAttributesStack.back();
     phelper->nodesAttributesStack.pop_back();
     phelper->edgesAttributes = phelper->edgesAttributesStack.back();
@@ -270,26 +270,26 @@ void createnode(char const* first, char const* last)
   }
 }
 
-void createsubgraph(char const /*c*/)
+void createsubdataType(char const /*c*/)
 {
 //   if (phelper)
 //   {
-//     phelper->createsubgraph();
+//     phelper->createsubdataType();
 //   }
 }
 
-void setgraphattributes(char const* /*first*/, char const* /*last*/)
+void setdataTypeattributes(char const* /*first*/, char const* /*last*/)
 {
-//   kDebug() << "setgraphattributes with z = " << phelper->z;
+//   kDebug() << "setdataTypeattributes with z = " << phelper->z;
   if (phelper)
   {
-//     if (phelper->z == 1) // main graph
+//     if (phelper->z == 1) // main dataType
 //     {
-      phelper->setgraphattributes();
+      phelper->setdataTypeattributes();
 //     }
 //     else
 //     {
-//       phelper->setsubgraphattributes();
+//       phelper->setsubdataTypeattributes();
 //     }
   }
 }
@@ -316,11 +316,11 @@ void checkedgeop(char const* first, char const* last)
   std::string str(first,last);
   if (phelper)
   {
-     if ( ( (phelper->graph->directed()) && (str == "->") ) ||
-        ( (!phelper->graph->directed()) && (str == "--") ) )
+     if ( ( (phelper->dataType->directed()) && (str == "->") ) ||
+        ( (!phelper->dataType->directed()) && (str == "--") ) )
        return;
 
-    kError() << "Error !! uncoherent relation : directed = '" << phelper->graph->directed() << "' and op = '" << QString::fromStdString(str) << "'" << endl;
+    kError() << "Error !! uncoherent relation : directed = '" << phelper->dataType->directed() << "' and op = '" << QString::fromStdString(str) << "'" << endl;
   }
 }
 
@@ -542,13 +542,13 @@ bool parse_renderop(const std::string& /*str*//*, DotRenderOpVec& arenderopvec*/
 //   return res;
 // }
 
-bool parse(const std::string& str, GraphDocument * gd)
+bool parse(const std::string& str, DataTypeDocument * gd)
 {
   DotGrammar g;
   if (phelper != 0){
     delete phelper;
   }
-  phelper = new DotGraphParsingHelper;
+  phelper = new DotDataTypeParsingHelper;
   phelper->gd = gd;
 
   return boost::spirit::classic::parse(str.c_str(), g >> end_p, (+boost::spirit::classic::space_p|boost::spirit::classic::comment_p("/*", "*/"))).full;

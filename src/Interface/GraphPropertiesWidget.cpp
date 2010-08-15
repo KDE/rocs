@@ -22,10 +22,10 @@
 #include "model_GraphProperties.h"
 #include <KDebug>
 #include <QGraphicsItem>
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include "graphDocument.h"
-#include "node.h"
-#include "edge.h"
+#include "Data.h"
+#include "Pointer.h"
 #include "MainWindow.h"
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"
@@ -35,7 +35,7 @@
 #include <DSPluginManager.h>
 
 
-GraphPropertiesWidget::GraphPropertiesWidget (DataStructureBase *g, MainWindow* parent )
+GraphPropertiesWidget::GraphPropertiesWidget (DataType *g, MainWindow* parent )
         : KButtonGroup ( parent ) {
     setupUi(this);
     _mainWindow = parent;
@@ -43,43 +43,43 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructureBase *g, MainWindow* 
 
     _graph = g;
     _graphName->setText(_graph->name());
-    _graphEdgeColor->setColor(_graph->edgeDefaultColor());
-    _graphNodeColor->setColor(_graph->nodeDefaultColor());
+    _graphEdgeColor->setColor(_graph->pointerDefaultColor());
+    _graphNodeColor->setColor(_graph->datumDefaultColor());
 //     _graphAutomate->setChecked(_graph->automate());
 //     _graphOriented->setChecked(_graph->directed());
     _graphVisible->setChecked( ! _graph->readOnly());
     _activateGraph->setChecked(true);
-    _showEdgeNames->setChecked( _graph->edgeNameVisibility() );
-    _showEdgeValues->setChecked(_graph->edgeValueVisibility());
-    _showNodeNames->setChecked( _graph->nodeNameVisibility() );
-    _showNodeValues->setChecked(_graph->nodeValueVisibility());
+    _showEdgeNames->setChecked( _graph->pointerNameVisibility() );
+    _showEdgeValues->setChecked(_graph->pointerValueVisibility());
+    _showNodeNames->setChecked( _graph->datumNameVisibility() );
+    _showNodeValues->setChecked(_graph->datumValueVisibility());
 
     _editWidget->setVisible(_activateGraph->isChecked());
 
     if (_extraProperties->layout()){
       delete _extraProperties->layout();
     }
-    if (QLayout * lay = Rocs::DSPluginManager::New()->graphExtraProperties(g, _extraProperties)){
+    if (QLayout * lay = Rocs::DSPluginManager::instance()->dataTypeExtraProperties(g, _extraProperties)){
         _extraProperties->setLayout(lay);
     }
 
-    GraphDocument *gDocument = qobject_cast<GraphDocument*>(g->parent());
+    DataTypeDocument *gDocument = qobject_cast<DataTypeDocument*>(g->parent());
     connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addGraph(QString)));
     connect(this, SIGNAL(removeGraph()), g, SLOT(remove()));
 
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setEdgeDefaultColor(QColor)));
-    connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setNodeDefaultColor(QColor)));
+    connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDatumDefaultColor(QColor)));
 
     connect( this, SIGNAL( edgeColorsChanged(QString)),      g, SLOT(setEdgesColor(QString)));
-    connect( this, SIGNAL( nodeColorsChanged(QString)),      g, SLOT(setNodesColor(QString)));
+    connect( this, SIGNAL( datumColorsChanged(QString)),      g, SLOT(setDatumsColor(QString)));
     connect( this, SIGNAL( edgeDefaultColorSetted(QString)), g, SLOT(setEdgeDefaultColor(QString)));
-    connect( this, SIGNAL( nodeDefaultColorSetted(QString)), g, SLOT(setNodeDefaultColor(QString)));
+    connect( this, SIGNAL( datumDefaultColorSetted(QString)), g, SLOT(setDatumDefaultColor(QString)));
 
 
     connect( _showEdgeNames,  SIGNAL(toggled(bool)), g, SLOT(setEdgeNameVisibility(bool)  ));
     connect( _showEdgeValues, SIGNAL(toggled(bool)), g, SLOT(setEdgeValueVisibility(bool) ));
-    connect( _showNodeNames,  SIGNAL(toggled(bool)), g, SLOT(setNodeNameVisibility(bool)  ));
-    connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setNodeValueVisibility(bool) ));
+    connect( _showNodeNames,  SIGNAL(toggled(bool)), g, SLOT(setDatumNameVisibility(bool)  ));
+    connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setDatumValueVisibility(bool) ));
 
     connect( _graphName,      SIGNAL(textChanged(QString)), g, SLOT(setName(QString)));
 
@@ -87,10 +87,10 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructureBase *g, MainWindow* 
 
 }
 
-void GraphPropertiesWidget::setEdgeDefaultColor(QColor c){    emit edgeDefaultColorSetted(c.name()); }
-void GraphPropertiesWidget::setNodeDefaultColor(QColor c){    emit nodeDefaultColorSetted(c.name()); }
-void GraphPropertiesWidget::on__graphEdgeColorApplyNow_clicked() {  emit edgeColorsChanged(_graphEdgeColor->color().name()); }
-void GraphPropertiesWidget::on__graphNodeColorApplyNow_clicked() {  emit nodeColorsChanged(_graphNodeColor->color().name()); }
+void GraphPropertiesWidget::setPointerDefaultColor(QColor c){    emit pointerDefaultColorSetted(c.name()); }
+void GraphPropertiesWidget::setDatumDefaultColor(QColor c){    emit datumDefaultColorSetted(c.name()); }
+void GraphPropertiesWidget::on__graphPointerColorApplyNow_clicked() {  emit pointerColorsChanged(_graphEdgeColor->color().name()); }
+void GraphPropertiesWidget::on__graphDatumColorApplyNow_clicked() {  emit datumColorsChanged(_graphNodeColor->color().name()); }
 
 void GraphPropertiesWidget::on__graphVisible_toggled(bool b){
   _mainWindow->mutex().lock();
@@ -120,7 +120,7 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
       isActive = true;
     }
 
-    GraphDocument *gd = qobject_cast<GraphDocument*>(_graph->parent());
+    DataTypeDocument *gd = qobject_cast<DataTypeDocument*>(_graph->parent());
 
     if (gd->size() == 1){
 	createNewGraph = true;

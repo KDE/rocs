@@ -16,14 +16,14 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  ***************************************************************************/
-
+/*
 #include "graphGroups.h"
 #include "node.h"
 
-GraphGroup::GraphGroup() : QObject(0), QList< ::Node*>() {}
+GraphGroup::GraphGroup() : QObject(0), QList< ::DataBase*>() {}
 
-GraphGroup::GraphGroup(const GraphGroup& g) : QObject(0), QList< ::Node*>() {
-    foreach( ::Node *n, g) {
+GraphGroup::GraphGroup(const GraphGroup& g) : QObject(0), QList< ::DataBase*>() {
+    foreach( ::DataBase *n, g) {
         append(n);
     }
     _name = g.name();
@@ -35,3 +35,4 @@ QString GraphGroup::name() const {
 void GraphGroup::setName(const QString& name)  {
     _name = name;
 }
+*/

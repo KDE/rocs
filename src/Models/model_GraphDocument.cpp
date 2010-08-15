@@ -19,28 +19,28 @@
 */
 #include "model_GraphDocument.h"
 #include "graphDocument.h"
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include <QString>
 #include <KDebug>
 #include <QModelIndex>
 
-GraphDocumentModel::GraphDocumentModel(QList< GraphDocument*>* documents, QObject *parent)
+DataTypeDocumentModel::DataTypeDocumentModel(QList< DataTypeDocument*>* documents, QObject *parent)
         : QAbstractListModel( parent ), _documents( (*documents) ) {
 
 }
 
-int GraphDocumentModel::rowCount(const QModelIndex&) const {
+int DataTypeDocumentModel::rowCount(const QModelIndex&) const {
     return _documents.size();
 }
 
-QVariant GraphDocumentModel::data(const QModelIndex &index, int role) const {
+QVariant DataTypeDocumentModel::data(const QModelIndex &index, int role) const {
     if (( !index.isValid() ) || ( index.row() > _documents.size() ) || ( role != Qt::DisplayRole)) {
         return QVariant();
     }
     return _documents.at(index.row())->name();
 }
 
-QVariant GraphDocumentModel::headerData(int section, Qt::Orientation orientation, int role) const {
+QVariant DataTypeDocumentModel::headerData(int section, Qt::Orientation orientation, int role) const {
     if ( role != Qt::DisplayRole) {
         return QVariant();
     }
@@ -52,14 +52,14 @@ QVariant GraphDocumentModel::headerData(int section, Qt::Orientation orientation
 
 }
 
-Qt::ItemFlags GraphDocumentModel::flags(const QModelIndex& index) const {
+Qt::ItemFlags DataTypeDocumentModel::flags(const QModelIndex& index) const {
     if ( !index.isValid() ) {
         return Qt::ItemIsEnabled;
     }
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
-bool GraphDocumentModel::setData(const QModelIndex& index, const QVariant& value, int role) {
+bool DataTypeDocumentModel::setData(const QModelIndex& index, const QVariant& value, int role) {
     if ( index.isValid() && (role == Qt::ItemIsEditable)) {
         _documents.at(index.row())-> setName(value.toString());
         emit dataChanged(index, index);
@@ -68,23 +68,23 @@ bool GraphDocumentModel::setData(const QModelIndex& index, const QVariant& value
     return false;
 }
 
-bool GraphDocumentModel::insertRows(int position, int rows, const QModelIndex&) {
+bool DataTypeDocumentModel::insertRows(int position, int rows, const QModelIndex&) {
     beginInsertRows(QModelIndex(), position, position+rows-1);
 
-    GraphDocument *doc = new  GraphDocument("untitled");
+    DataTypeDocument *doc = new  DataTypeDocument("untitled");
     _documents.append(doc);
     endInsertRows();
     return true;
 }
 
-bool GraphDocumentModel::removeRows(int position, int rows, const QModelIndex&) {
+bool DataTypeDocumentModel::removeRows(int position, int rows, const QModelIndex&) {
     beginRemoveRows(QModelIndex(), position, position+rows-1);
     _documents.removeAt(position);
     endRemoveRows();
     return true;
 }
 
-GraphDocument *GraphDocumentModel::at(const QModelIndex& index) {
+DataTypeDocument *DataTypeDocumentModel::at(const QModelIndex& index) {
     return _documents.at(index.row());
 }
 

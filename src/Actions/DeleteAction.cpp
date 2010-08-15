@@ -24,8 +24,9 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include "GraphScene.h"
-#include "node.h"
-#include "edge.h"
+#include "DataType.h"
+#include "Data.h"
+#include "Pointer.h"
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"
 
@@ -39,13 +40,13 @@ DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(s
 void DeleteAction::executePress(QPointF pos)
 {
     QGraphicsItem * item = _graphScene->itemAt(pos);
-    if ( NodeItem *n  = qgraphicsitem_cast<NodeItem*>(item) ) {
-        qDebug() << "Trying to remove node. NodeItem: " << n->objectName() ;
-        n->node()->remove();
+    if ( DatumItem *n  = qgraphicsitem_cast<DatumItem*>(item) ) {
+        qDebug() << "Trying to remove node. DatumItem: " << n->objectName() ;
+        n->datum()->remove();
     }
     else if ( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ) {
         qDebug() << "Should have deleted the oriented node.";
-        e->edge()->remove();
+        e->pointer()->remove();
     }
     qDebug() << "Item Removed!";
 }

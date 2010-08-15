@@ -21,9 +21,9 @@
 
 #include "Select.h"
 #include "GraphScene.h"
-#include "DataStructureBase.h"
-#include "node.h"
-#include "edge.h"
+#include "DataType.h"
+#include "Data.h"
+#include "Pointer.h"
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"
 
@@ -98,7 +98,7 @@ void SelectAction::executeRelease(QPointF pos) {
 void SelectAction::multiSelect(QPointF pos) {
     QList<QGraphicsItem*> items = _graphScene->items(QRectF(_p1, pos));
     foreach(QGraphicsItem *i, items) {
-        if (!( qgraphicsitem_cast<NodeItem*>(i)
+        if (!( qgraphicsitem_cast<DatumItem*>(i)
                 || qgraphicsitem_cast<OrientedEdgeItem*>(i))) {
             items.removeAll(i);
         }

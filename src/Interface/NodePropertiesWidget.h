@@ -23,19 +23,19 @@
 #include <QWidget>
 #include "ui_NodePropertiesWidget.h"
 
-class Node;
+class Datum;
 class MainWindow;
-class NodeItem;
+class DatumItem;
 #include <QPointF>
 
 /*! \brief Properties Area. */
-class NodePropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
+class DatumPropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
 {
     Q_OBJECT
 public:
-    NodePropertiesWidget (MainWindow* parent = 0 );
-    void setNode(NodeItem *n, QPointF pos);
-    void disconnectNode(Node* arg1);
+    DatumPropertiesWidget (MainWindow* parent = 0 );
+    void setDatum(DatumItem *n, QPointF pos);
+    void disconnectDatum(Datum* arg1);
 
 
 private slots:
@@ -47,9 +47,9 @@ private slots:
 
 private:
 
-    Node *_node;
+    Datum *_datum;
     MainWindow *_mainWindow;
-    NodeItem *_item;
+    DatumItem *_item;
     QString _svgFile;
 
 };

@@ -43,10 +43,10 @@ ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(paren
 
 }
 
-bool ImporterExporterManager::exportFile(GraphDocument * doc) const
+bool ImporterExporterManager::exportFile(DataTypeDocument * doc) const
 {
     QString ext;
-    foreach ( FilePluginInterface *f, PluginManager::New()->filePlugins() )
+    foreach ( FilePluginInterface *f, PluginManager::instance()->filePlugins() )
     {
         ext.append ( f->extensions().join ( "" ) );
     }
@@ -75,7 +75,7 @@ bool ImporterExporterManager::exportFile(GraphDocument * doc) const
         file.append ( ext );
     }
 
-    FilePluginInterface * p = PluginManager::New()->filePluginsByExtension ( ext );
+    FilePluginInterface * p = PluginManager::instance()->filePluginsByExtension ( ext );
     if ( !p )
     {
         kDebug() << "Cannot export file: " << file;
@@ -92,12 +92,12 @@ bool ImporterExporterManager::exportFile(GraphDocument * doc) const
     return true;
 
 }
- GraphDocument* ImporterExporterManager::importFile()
+ DataTypeDocument* ImporterExporterManager::importFile()
 {
 
     QString ext;
 
-    foreach ( Rocs::FilePluginInterface *f, Rocs::PluginManager::New()->filePlugins() ){
+    foreach ( Rocs::FilePluginInterface *f, Rocs::PluginManager::instance()->filePlugins() ){
         ext.append ( f->extensions().join ( "" ) );
     }
     ext.append ( i18n ( "*|All files" ) );
@@ -121,14 +121,14 @@ bool ImporterExporterManager::exportFile(GraphDocument * doc) const
     }
 
     kDebug() << fileName.right ( fileName.count() - index );
-    f = Rocs::PluginManager::New()->filePluginsByExtension ( fileName.right ( fileName.count() - index ) );
+    f = Rocs::PluginManager::instance()->filePluginsByExtension ( fileName.right ( fileName.count() - index ) );
 
     if ( !f ){
         kDebug() <<  "Cannot handle extension "<<  fileName.right ( 3 );
         return 0;
     }
 
-    GraphDocument * gd = f->readFile ( fileName );
+    DataTypeDocument * gd = f->readFile ( fileName );
     if ( !gd ){
         kDebug() << "Error loading file" << fileName << f->lastError();
     }

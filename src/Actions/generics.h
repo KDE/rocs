@@ -26,7 +26,7 @@
 \p n1 first node
 \p n2 second node
 */
-bool leftLessThan(NodeItem *n1, NodeItem *n2) {
+bool leftLessThan(DatumItem *n1, DatumItem *n2) {
     return n1->x() < n2->x();
 }
 
@@ -34,7 +34,7 @@ bool leftLessThan(NodeItem *n1, NodeItem *n2) {
 \p n1 first node
 \p n2 second node
 */
-bool rightLessThan(NodeItem *n1, NodeItem *n2) {
+bool rightLessThan(DatumItem *n1, DatumItem *n2) {
     return n1->x() > n2->x();
 }
 
@@ -42,7 +42,7 @@ bool rightLessThan(NodeItem *n1, NodeItem *n2) {
 \p n1 first node
 \p n2 second node
 */
-bool topLessThan(NodeItem *n1, NodeItem *n2) {
+bool topLessThan(DatumItem *n1, DatumItem *n2) {
     return n1->y() < n2->y();
 }
 
@@ -50,7 +50,7 @@ bool topLessThan(NodeItem *n1, NodeItem *n2) {
 \p n1 first node
 \p n2 second node
 */
-bool bottomLessThan(NodeItem *n1, NodeItem *n2) {
+bool bottomLessThan(DatumItem *n1, DatumItem *n2) {
     return n1->y() > n2->y();
 }
 

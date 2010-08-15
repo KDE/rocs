@@ -46,7 +46,7 @@ KMLParser::KMLParser ( QObject* parent, const QList< QVariant >& ) :
 bool KMLParser::writeFile(GraphDocument& graph, const QString& fileName)
 {
     QFile file(fileName);
-    DataStructureBase * g = graph.activeGraph();
+    DataType * g = graph.activeGraph();
     if (!file.open(QIODevice::WriteOnly|QIODevice::Text)) {
         _lastError = i18n("Cannot open file %1: %2").arg(fileName).arg(file.errorString());
         return false;
@@ -59,7 +59,7 @@ bool KMLParser::writeFile(GraphDocument& graph, const QString& fileName)
     xmlWriter.writeNamespace("http://www.opengis.net/kml/2.2");
     xmlWriter.writeStartElement("Document");
     if (g->edges().isEmpty()) {
-        foreach(Node * n, g->nodes()) {
+        foreach(Datum * n, g->nodes()) {
             xmlWriter.writeStartElement("Placemark");
             xmlWriter.writeStartElement("name");
             xmlWriter.writeCharacters(n->name());
@@ -98,7 +98,7 @@ bool KMLParser::writeFile(GraphDocument& graph, const QString& fileName)
         xmlWriter.writeStartElement("LineString");
         xmlWriter.writeStartElement("coordinates");
 
-        foreach (Node* n, g->nodes()) {
+        foreach (Datum* n, g->nodes()) {
         if (n->property("Longitude").isValid()) {
                 xmlWriter.writeCharacters(QString("%1,%2,%3\n").arg(n->property("Longitude").toString(),
                                           n->property("Latitude").toString(),
@@ -118,7 +118,7 @@ bool KMLParser::writeFile(GraphDocument& graph, const QString& fileName)
 GraphDocument* KMLParser::readFile(const QString& file)
 {
     GraphDocument * graphDoc = new GraphDocument("KML File");
-    DataStructureBase * g = graphDoc->addGraph();
+    DataType * g = graphDoc->addGraph();
 
     KMLHandler handler(g);
     QFile f(file);

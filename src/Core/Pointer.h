@@ -35,19 +35,19 @@
 
 #include "rocslib_export.h"
 
-class Node;
+class Datum;
 
 /**
-* \class Edge
+* \class Pointer
 *
-* This class is an edge on the graph. it holds the orientation, the from and the to nodes,auto
+* This class is an pointer on the graph. it holds the orientation, the from and the to datums,auto
 * and has a name, value and color properties.
-* you can change all properties by 'edge.propertyName = new property' and access it's value
-* by 'edge.propertyName' .
-* new properties can be added on the fly via edge.addProp(propertyname) , and accessed by edge.propertyName.
+* you can change all properties by 'pointer.propertyName = new property' and access it's value
+* by 'pointer.propertyName' .
+* new properties can be added on the fly via pointer.addProp(propertyname) , and accessed by pointer.propertyName.
 */
 
-class ROCSLIB_EXPORT Edge : public QObject {
+class ROCSLIB_EXPORT Pointer : public QObject {
     Q_OBJECT
 
     /*! all properties are accessible from the scripting engine via .propertyName */
@@ -58,28 +58,28 @@ class ROCSLIB_EXPORT Edge : public QObject {
     /*! this property hold the value attribute */
     Q_PROPERTY(QString value READ value WRITE setValue)
 
-    /*! this property holds the name of the edge. */
+    /*! this property holds the name of the pointer. */
     Q_PROPERTY(QString name READ name WRITE setName)
 
-    /*! this property holds the width of the edge */
+    /*! this property holds the width of the pointer */
     Q_PROPERTY(double width READ width WRITE setWidth)
 
-    /*! this property holds the style of the edge */
+    /*! this property holds the style of the pointer */
     Q_PROPERTY(QString style READ style WRITE setStyle)
 
 public:
-    /*! default constructor, an edge connects two nodes.
+    /*! default constructor, an pointer connects two datums.
     \p parent a Graph
-    \p from the first node
-    \p to the second node */
-    Edge(DataStructureBase *parent, Node *from, Node *to);
+    \p from the first datum
+    \p to the second datum */
+    Pointer(DataType *parent, Datum *from, Datum *to);
 
     /*! default destructor */
-    ~Edge();
+    ~Pointer();
 
-    /*! relative index is the index that this edge has relative to the nodes that it's bound to.
-    eg. if the nodes have 2 or more edges connecteds between them, it will have a unique
-    identifier relative to that nodes
+    /*! relative index is the index that this pointer has relative to the datums that it's bound to.
+    eg. if the datums have 2 or more pointers connecteds between them, it will have a unique
+    identifier relative to that datums
 
     \return the relativeIndex identifier.
     */
@@ -87,16 +87,16 @@ public:
         return _relativeIndex;
     }
 
-    /*! remove this node from the graph */
+    /*! remove this datum from the graph */
     void remove();
 
     void emitChangedSignal(){ emit changed(); }
 
-    DataStructureBase *graph(){return _graph; }
+    DataType *dataType(){return _graph; }
 #ifdef USING_QTSCRIPT
     /*! if the qtscript is enabled for this rocs,
-      this method returns the self-referenced script value for this edge.
-      \return QScriptValue self reference for this node.
+      this method returns the self-referenced script value for this pointer.
+      \return QScriptValue self reference for this datum.
       */
     QScriptValue scriptValue() const;
 
@@ -107,59 +107,59 @@ public:
 #endif
 
 public  slots:
-    /*! return the first node of this edge
-      \return Node* pointer for the first node of this edge.
+    /*! return the first datum of this pointer
+      \return Datum* pointer for the first datum of this pointer.
     */
-    Node* from() const {
+    Datum* from() const {
         return _from;
     }
 
-    /*! return the second node of this edge
-      \return Node* pointer for the second node of this edge.
+    /*! return the second datum of this pointer
+      \return Datum* pointer for the second datum of this pointer.
     */
-    Node* to() const {
+    Datum* to() const {
         return _to;
     }
 
-    /*! return the value of this edge
-    \return the value of the edge.
+    /*! return the value of this pointer
+    \return the value of the pointer.
     */
     const QString& value() const {
         return _value;
     }
 
-    /*! sets the value attribute of this edge
-    \p s the new value of this edge.
+    /*! sets the value attribute of this pointer
+    \p s the new value of this pointer.
     */
     void setValue (const QString& s) {
         _value = s;
 	emit changed();
     }
 
-    /*! returns the name attribute of the edge.
-      \return the name of the edge.
+    /*! returns the name attribute of the pointer.
+      \return the name of the pointer.
     */
     const QString& name() const {
         return _name;
     }
 
-    /*! sets the name attribute of the edge
-      \p s the new name of this edge
+    /*! sets the name attribute of the pointer
+      \p s the new name of this pointer
     */
     void setName (const QString& s) {
         _name = s;
 	emit changed();
     }
 
-    /*! gets the color attribute of the edge
-      \return the string value of the edge.
+    /*! gets the color attribute of the pointer
+      \return the string value of the pointer.
     */
     const QString color() const {
         return _color;
     }
 
-    /*! sets the color attribute of the edge
-      \p s the new color of the edge in the format "#000000" or by it's english name ("red" for example)
+    /*! sets the color attribute of the pointer
+      \p s the new color of the pointer in the format "#000000" or by it's english name ("red" for example)
     */
     void setColor(const QString& s) {
         _color = s;
@@ -182,13 +182,13 @@ public  slots:
 	emit changed();
     }
     
-    /** Add a property to this edge
+    /** Add a property to this pointer
     * @param property Name of property
     * @param value Value of the property. value shoud be different of QVariant::Invalid.
     */
     void addDynamicProperty(QString Property, QVariant value);
     
-    /** Remove property arg1 from this edge. If property arg1 don't exist in this edge, nothing is made.
+    /** Remove property arg1 from this pointer. If property arg1 don't exist in this pointer, nothing is made.
     * @param arg1 name os property to remove
     */
     void removeDynamicProperty(QString property);
@@ -200,33 +200,33 @@ public  slots:
     
 #ifdef USING_QTSCRIPT
     /*! this method can be used inside of the script interface.
-    \return the first node of this edge.
+    \return the first datum of this pointer.
     */
     QScriptValue start();
 
     /*! this method can be used inside of the script interface,
-    \return the last node of this edge
+    \return the last datum of this pointer
     */
     QScriptValue end();
 
     /*! this method can be used inside of the script interface,
-     it will remove this edge from the graph.
+     it will remove this pointer from the graph.
      */
     void self_remove();
 
 #endif
 
 private:
-    /*! the first node connected with this edge */
-    Node *_from;
+    /*! the first datum connected with this pointer */
+    Datum *_from;
 
-    /*! the second node connected with this edge */
-    Node *_to;
+    /*! the second datum connected with this pointer */
+    Datum *_to;
 
-    /*! the intex relative to the connected nodes if the graph is multi-edge-oriented. */
+    /*! the intex relative to the connected datums if the graph is multi-pointer-oriented. */
     int _relativeIndex;
 
-    /*! the value of the node */
+    /*! the value of the datum */
     QString _value;
 
     /*! the value of the name */
@@ -241,7 +241,7 @@ private:
     QString _style;
     double _width;
 
-     DataStructureBase *_graph;
+     DataType *_graph;
 #ifdef USING_QTSCRIPT
     /*! if the script interface is Qt-Script, this will hold the scriptValue self-reference. */
     QScriptValue _scriptvalue;
@@ -251,11 +251,11 @@ private:
 #endif
 
 signals:
-    /*! emmited when this edge is removed. */
+    /*! emmited when this pointer is removed. */
     void removed();
-    /*! emmited when a node connected to this edge changes, or when this edge changes. */
+    /*! emmited when a datum connected to this pointer changes, or when this pointer changes. */
     void changed();
 };
 
-typedef QList<Edge*> EdgeList;
+typedef QList<Pointer*> PointerList;
 #endif

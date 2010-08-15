@@ -25,26 +25,26 @@
 #include <QString>
 #include <QColor>
 
-class Edge;
+class Pointer;
 class MainWindow;
 #include <QPointF>
 
-class EdgePropertiesWidget : public QWidget, public Ui::EdgePropertiesWidget
+class PointerPropertiesWidget : public QWidget, public Ui::EdgePropertiesWidget
 {
     Q_OBJECT
 public:
-    EdgePropertiesWidget(MainWindow *parent);
-    void setEdge(Edge *e, QPointF pos);
+    PointerPropertiesWidget(MainWindow *parent);
+    void setPointer(Pointer *e, QPointF pos);
 
 public slots:
     void on__color_activated(const QColor& c);
     void on__style_activated(int index);
     void reflectAttributes();
     void on__addProperty_clicked();
-    void disconnectEdge();
+    void disconnectPointer();
     
 private:
-    Edge *_edge;
+    Pointer *_pointer;
 };
 
 #endif // EDGEPROPERTIESWIDGET_H

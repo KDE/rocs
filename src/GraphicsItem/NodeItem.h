@@ -11,17 +11,17 @@
 #include <QMap>
 #include <QString>
 #include <QFont>
-#include "node.h"
+#include "Data.h"
 
-class NodeItem : public QGraphicsSvgItem{
+class DatumItem : public QGraphicsSvgItem{
   Q_OBJECT
     qreal _originalWidth;
     qreal _width;
 
   public:
-    NodeItem(Node *n);
+    DatumItem(Datum *n);
 
-    Node* node() const { return _node; }
+    Datum* datum() const { return _datum; }
     static QMap<QString, QSvgRenderer*> _renders;
     
   private slots:
@@ -34,7 +34,7 @@ class NodeItem : public QGraphicsSvgItem{
     void updatePos();
     void updateSize();
   private:
-    Node *_node;
+    Datum *_datum;
     QString _iconPackage;
     QString _element;
     QGraphicsSimpleTextItem *_name;
@@ -42,7 +42,5 @@ class NodeItem : public QGraphicsSvgItem{
     QGraphicsColorizeEffect *_colorizer;
     QFont _font;
 };
-
-#include "node.h"
 
 #endif

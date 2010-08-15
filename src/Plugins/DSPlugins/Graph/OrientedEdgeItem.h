@@ -24,8 +24,8 @@
 #include <QGraphicsLineItem>
 
 class QGraphicsSceneMouseEvent;
-class Edge;
-class Node;
+class Pointer;
+class Datum;
 class QGraphicsSimpleTextItem;
 
 /*! \brief the Edge drawing on screen.
@@ -37,7 +37,7 @@ public:
     /*! default constructor
     \param node the libgraph::Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
-    explicit OrientedEdgeItem(Edge *edge, QGraphicsItem *parent = 0);
+    explicit OrientedEdgeItem(Pointer *edge, QGraphicsItem *parent = 0);
     virtual ~OrientedEdgeItem();
     /*! The type of the item */
     enum { Type = UserType + 3 };
@@ -50,7 +50,7 @@ public:
     }
 
     /*! Gets the edge of the node */
-    Edge* edge() {
+    Pointer* edge() {
         return _edge;
     }
 
@@ -72,7 +72,7 @@ public slots:
     void updatePos();
     void updateAttributes();
 private:
-    Edge *_edge;
+    Pointer *_edge;
     int _index;
     bool _loop;
     QPainterPath createCurves() const;

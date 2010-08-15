@@ -1,7 +1,7 @@
 #include "GraphLayers.h"
 #include "GraphPropertiesWidget.h"
 #include "graphDocument.h"
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include "MainWindow.h"
 #include <KPushButton>
 #include <QButtonGroup>
@@ -35,8 +35,8 @@ void GraphLayers::populate() {
         _buttonGroup->removeButton(b);
     }
 
-    GraphDocument *gd = _mainWindow->activeDocument();
-    connect(gd, SIGNAL(graphCreated(DataStructureBase*)), this, SLOT(addGraph(DataStructureBase*)),Qt::UniqueConnection);
+    DataTypeDocument *gd = _mainWindow->activeDocument();
+    connect(gd, SIGNAL(graphCreated(DataType*)), this, SLOT(addGraph(DataType*)),Qt::UniqueConnection);
 
     int total = gd->count();
     for (int i = 0; i < total; ++i) {
@@ -52,7 +52,7 @@ void GraphLayers::btnADDClicked() {
     emit  createGraph(name);
 }
 
-void GraphLayers::addGraph(DataStructureBase *g){
+void GraphLayers::addGraph(DataType *g){
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
     _buttonGroup->addButton(gp->radio());
     connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()),Qt::UniqueConnection);

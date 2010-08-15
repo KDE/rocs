@@ -21,7 +21,7 @@
 #include <KDebug>
 
 
-KMLHandler::KMLHandler(DataStructureBase* doc): QXmlDefaultHandler(), m_graph(doc)
+KMLHandler::KMLHandler(DataType* doc): QXmlDefaultHandler(), m_graph(doc)
 {
 
 }
@@ -40,7 +40,7 @@ bool KMLHandler::characters(const QString& str)
 
 bool KMLHandler::endElement(const QString& namespaceURI, const QString& localName, const QString& qName)
 {
-  Node * n = 0;
+  Datum * n = 0;
     if (qName == "coordinates") {
         m_coordinates = currentText;
     } else if (qName == "name") {
@@ -73,7 +73,7 @@ bool KMLHandler::endElement(const QString& namespaceURI, const QString& localNam
     if (qName == "LineString" && !m_coordinates.isEmpty()) {
         QStringList points = m_coordinates.split('\n');
         int count = 0;
-        Node * n_old = 0;
+        Datum * n_old = 0;
         foreach (QString point, points) {
             count++;
 

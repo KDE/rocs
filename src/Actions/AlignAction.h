@@ -22,7 +22,7 @@
 
 #include <KAction>
 #include "NodeItem.h"
-#include "node.h"
+#include "Data.h"
 
 
 class AlignAction : public KAction {
@@ -40,19 +40,19 @@ public:
     AlignAction(const QString& tooltip,AlignAction::Orientation o, QWidget *parent);
 
 private slots:
-    /*! run the align algorithm in the selected nodes. */
+    /*! run the align algorithm in the selected data. */
     void align();
 
 private:
-    /*! align the nodes in the Y axis.
-      \p l the list of selected nodes.
+    /*! align the data in the Y axis.
+      \p l the list of selected data.
       */
-    void allignY(QList<NodeItem*>& l);
+    void allignY(QList<DatumItem*>& l);
 
-    /*! align the nodes in the X axis.
-    \p l the list of selected nodes.
+    /*! align the data in the X axis.
+    \p l the list of selected data.
     */
-    void allignX(QList<NodeItem*>& l);
+    void allignX(QList<DatumItem*>& l);
 
     /*! the orientation that this button will work on. */
     Orientation m_orientation;

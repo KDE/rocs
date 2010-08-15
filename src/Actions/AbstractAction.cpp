@@ -20,14 +20,14 @@
 */
 #include "AbstractAction.h"
 #include "GraphScene.h"
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include "graphDocument.h"
 #include <QPointF>
 #include <KDebug>
 
 AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
         : KToggleAction(parent) {
-    _graphDocument = 0;
+    _dataTypeDocument = 0;
     _graph = 0;
     _graphScene = scene;
 
@@ -36,11 +36,11 @@ AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
 }
 
 
-void AbstractAction::setActiveGraphDocument(  GraphDocument *graphDocument) {
-    _graphDocument = graphDocument;
+void AbstractAction::setActiveDataTypeDocument(  DataTypeDocument *dataTypeDocument) {
+    _dataTypeDocument = dataTypeDocument;
 }
 
-void AbstractAction::setActiveGraph( DataStructureBase *graph) {
+void AbstractAction::setActiveGraph( DataType *graph) {
     _graph = graph;
 }
 

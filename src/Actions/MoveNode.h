@@ -24,9 +24,9 @@
 #include "AbstractAction.h"
 
 class QObject;
-class NodeItem;
-class Node;
-class Graph;
+class DatumItem;
+class Datum;
+class DataType;
 class QGraphicsView;
 
 /*!
@@ -67,14 +67,14 @@ public slots:
 
 protected:
     /*! the node that will be moved on screen */
-    NodeItem *_movableNode;
+    DatumItem *_movableNode;
 
     /*! the model of the NodeItem,
     needs it to modify it's internal value when the move is finished */
-    Node *_node;
+    Datum *_node;
 
     /*! the parent graph of the node. */
-    Graph *_g;
+    DataType *_g;
 
     /*! the QGraphicsView. */
     QGraphicsView *_view;

@@ -17,16 +17,16 @@
  * Boston, MA 02110-1301, USA.
  ***************************************************************************/
 
-
+/*
 #ifndef GRAPHGROUPS_H
 #define GRAPHGROUPS_H
 
 #include <QObject>
 #include <QList>
 #include "rocslib_export.h"
-class Node;
+class Datum;
 
-class  ROCSLIB_EXPORT GraphGroup : public QObject, public QList< ::Node*> {
+class  ROCSLIB_EXPORT GraphGroup : public QObject, public QList< ::Datum*> {
     Q_OBJECT
 
 public:
@@ -41,3 +41,4 @@ private:
     QString _name;
 };
 #endif
+*/

@@ -22,7 +22,7 @@
 #include "dotgrammar.h"
 // #include "dotdefaults.h"
 //#include "graphsubgraph.h"
-// #include "graphnode.h"
+// #include "graphdatum.h"
 // #include "graphedge.h"
 
 #include <boost/throw_exception.hpp>
@@ -56,11 +56,11 @@ DotGraphParsingHelper::DotGraphParsingHelper():
         uniq(0),
         attributes(),
         graphAttributes(),
-        nodesAttributes(),
-        edgesAttributes(),
+        datumAttributes(),
+        pointersAttributes(),
         graphAttributesStack(),
-        nodesAttributesStack(),
-        edgesAttributesStack(),
+        datumAttributesStack(),
+        pointersAttributesStack(),
         edgebounds(),
         z(0),
         maxZ(0),
@@ -112,7 +112,7 @@ void DotGraphParsingHelper::setsubgraphattributes()
 //   setgraphelementattributes(gs, graphAttributes);
 }
 
-void DotGraphParsingHelper::setnodeattributes()
+void DotGraphParsingHelper::setdatumattributes()
 {
 
     if (gn == 0)
@@ -120,33 +120,33 @@ void DotGraphParsingHelper::setnodeattributes()
 //     kDebug() << "gn is null";
         return;
     }
-//   kDebug() << "Attributes for node " << gn->id() << " are : ";
+//   kDebug() << "Attributes for datum " << gn->id() << " are : ";
 //   gn->setZ(z+1);
 //   kDebug() << "z="<<gn->z();
-    setgraphelementattributes(gn, nodesAttributes);
+    setgraphelementattributes(gn, datumAttributes);
 }
 
 void DotGraphParsingHelper::setedgeattributes()
 {
 //   kDebug() << "setedgeattributeswith z = " << z;
 
-//   kDebug() << "Attributes for edge " << ge->fromNode()->id() << "->" << ge->toNode()->id() << " are : ";
+//   kDebug() << "Attributes for edge " << ge->fromDatum()->id() << "->" << ge->toDatum()->id() << " are : ";
 //   ge->setZ(z+1);
 //   kDebug() << "z="<<ge->z();
-    setgraphelementattributes(ge, edgesAttributes);
+    setgraphelementattributes(ge, pointersAttributes);
 
-//   if (edgesAttributes.find("_tdraw_") != edgesAttributes.end())
+//   if (pointersAttributes.find("_tdraw_") != pointersAttributes.end())
 //   {
-//     parse_renderop(edgesAttributes["_tdraw_"], ge->renderOperations());
+//     parse_renderop(pointersAttributes["_tdraw_"], ge->renderOperations());
 // //     kDebug() << "edge renderOperations size is now " << ge->renderOperations().size();
 //     DotRenderOpVec::const_iterator it, it_end;
 //     it = ge->renderOperations().constBegin(); it_end = ge->renderOperations().constEnd();
 //     for (; it != it_end; it++)
 //       ge->arrowheads().push_back(*it);
 //   }
-//   if (edgesAttributes.find("_hdraw_") != edgesAttributes.end())
+//   if (pointersAttributes.find("_hdraw_") != pointersAttributes.end())
 //   {
-//     parse_renderop(edgesAttributes["_hdraw_"], ge->renderOperations());
+//     parse_renderop(pointersAttributes["_hdraw_"], ge->renderOperations());
 // //     kDebug() << "edge renderOperations size is now " << ge->renderOperations().size();
 //     DotRenderOpVec::const_iterator it, it_end;
 //     it = ge->renderOperations().constBegin(); it_end = ge->renderOperations().constEnd();
@@ -180,7 +180,7 @@ void DotGraphParsingHelper::setattributedlist()
             graphAttributes[(*it).first] = (*it).second;
         }
     }
-    else if (attributed == "node")
+    else if (attributed == "datum")
     {
         AttributesMap::const_iterator it, it_end;
         it = attributes.begin();
@@ -188,7 +188,7 @@ void DotGraphParsingHelper::setattributedlist()
         for (; it != it_end; it++)
         {
 //       kDebug() << "    " << QString::fromStdString((*it).first) << " = " <<  QString::fromStdString((*it).second);
-            nodesAttributes[(*it).first] = (*it).second;
+            datumAttributes[(*it).first] = (*it).second;
         }
     }
     else if (attributed == "edge")
@@ -199,37 +199,37 @@ void DotGraphParsingHelper::setattributedlist()
         for (; it != it_end; it++)
         {
 //       kDebug() << "    " << QString::fromStdString((*it).first) << " = " <<  QString::fromStdString((*it).second);
-            edgesAttributes[(*it).first] = (*it).second;
+            pointersAttributes[(*it).first] = (*it).second;
         }
     }
     attributes.clear();
 }
 
-void DotGraphParsingHelper::createnode(const std::string& nodeid)
+void DotGraphParsingHelper::createdatum(const std::string& datumid)
 {
-    QString id = QString::fromStdString(nodeid);
+    QString id = QString::fromStdString(datumid);
     kDebug() << id;
-    gn = dynamic_cast<Node*>(graph->node(id));
-    if (gn==0 )//&& graph->nodes().size() < KGV_MAX_ITEMS_TO_LOAD)
+    gn = dynamic_cast<Datum*>(graph->datum(id));
+    if (gn==0 )//&& graph->data().size() < KGV_MAX_ITEMS_TO_LOAD)
     {
-        kDebug() << "Creating a new node" << subgraphid;
-        gn = graph->addNode(id);
+        kDebug() << "Creating a new datum" << subgraphid;
+        gn = graph->addDatum(id);
 
         if (!subgraphid.isEmpty()) {
             gn->addDynamicProperty("SubGraph", subgraphid.last());
 //       kDebug () << gn->dynamicPropertyNames();
         }
 //     gn->setId(id);
-//     gn->label(QString::fromStdString(nodeid));
+//     gn->label(QString::fromStdString(datumid));
 //     if (z>0 && gs != 0)
 //     {
-// //       kDebug() << "Adding node" << id << "in subgraph" << gs->id();
+// //       kDebug() << "Adding datum" << id << "in subgraph" << gs->id();
 //       gs->content().push_back(gn);
 //     }
 //     else
 //     {
-// //       kDebug() << "Adding node" << id;
-//       graph->nodes()[id] = gn;
+// //       kDebug() << "Adding datum" << id;
+//       graph->data()[id] = gn;
 //     }
     }
     edgebounds.clear();
@@ -271,40 +271,40 @@ void DotGraphParsingHelper::createsubgraph()
 void DotGraphParsingHelper::createedges()
 {
 //   kDebug();
-    std::string node1Name, node2Name;
-    node1Name = edgebounds.front();
+    std::string datum1Name, datum2Name;
+    datum1Name = edgebounds.front();
     edgebounds.pop_front();
     while (!edgebounds.empty())
     {
-        node2Name = edgebounds.front();
+        datum2Name = edgebounds.front();
         edgebounds.pop_front();
 
-        Node* gn1 = graph->node(QString::fromStdString(node1Name));
+        Datum* gn1 = graph->datum(QString::fromStdString(datum1Name));
         if (gn1 == 0)
         {
-//       kDebug() << "new node 1";
-            gn1 = graph->addNode(QString::fromStdString(node1Name));
+//       kDebug() << "new datum 1";
+            gn1 = graph->addDatum(QString::fromStdString(datum1Name));
 
             if (!subgraphid.isEmpty()) {
                 gn1->addDynamicProperty("SubGraph", subgraphid.last());
             }
-//             gn1 = graph->node(QString::fromStdString(node1Name));
+//             gn1 = graph->datum(QString::fromStdString(datum1Name));
         }
-        Node* gn2 = graph->node(QString::fromStdString(node2Name));
+        Datum* gn2 = graph->datum(QString::fromStdString(datum2Name));
         if (gn2 == 0)
         {
-//       kDebug() << "new node 1";
-            gn2 = graph->addNode(QString::fromStdString(node2Name));
+//       kDebug() << "new datum 1";
+            gn2 = graph->addDatum(QString::fromStdString(datum2Name));
 
             if (!subgraphid.isEmpty()) {
                 gn2->addDynamicProperty("SubGraph", subgraphid.last());
             }
         }
-//     if (graph->nodes().size() >= KGV_MAX_ITEMS_TO_LOAD || graph->edges().size() >= KGV_MAX_ITEMS_TO_LOAD)
+//     if (graph->data().size() >= KGV_MAX_ITEMS_TO_LOAD || graph->edges().size() >= KGV_MAX_ITEMS_TO_LOAD)
 //     {
 //       return;
 //     }
-//     kDebug() << QString::fromStdString(node1Name) << ", " << QString::fromStdString(node2Name);
+//     kDebug() << QString::fromStdString(datum1Name) << ", " << QString::fromStdString(datum2Name);
 //     rocsGraph;
 
 //     kDebug() << "Found gn1="<<gn1<<" and gn2=" << gn2;
@@ -313,18 +313,18 @@ void DotGraphParsingHelper::createedges()
             kError() << "Unable to find or create edge bound(s) gn1=" << gn1 << "; gn2=" << gn2;
         }
 
-        ge = graph->addEdge(gn1, gn2);
+        ge = graph->addPointer(gn1, gn2);
         if (!subgraphid.isEmpty()) {
             ge->addDynamicProperty("SubGraph", subgraphid.last());
         }
-//     ge->setFromNode(gn1);
-//     ge->setToNode(gn2);
-//     kDebug() << ge->fromNode()->id() << " -> " << ge->toNode()->id();
+//     ge->setFromDatum(gn1);
+//     ge->setToDatum(gn2);
+//     kDebug() << ge->fromDatum()->id() << " -> " << ge->toDatum()->id();
         setedgeattributes();
 //     kDebug() << ge->id();
 //     if (ge->name() == "")
 //     {
-//       ge->setName(QString::fromStdString(node1Name)+QString::fromStdString(node2Name)+QUuid::createUuid().toString().remove("{").remove("}").remove("-"));
+//       ge->setName(QString::fromStdString(datum1Name)+QString::fromStdString(datum2Name)+QUuid::createUuid().toString().remove("{").remove("}").remove("-"));
 //     }
 //     kDebug() << ge->id();
 //     kDebug() << "num before=" << graph->edges().size();
@@ -332,7 +332,7 @@ void DotGraphParsingHelper::createedges()
 //     kDebug() << "num after=" << graph->edges().size();
 
 
-        node1Name = node2Name;
+        datum1Name = datum2Name;
     }
     edgebounds.clear();
 }

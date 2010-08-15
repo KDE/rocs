@@ -58,9 +58,9 @@ namespace GMLPlugin{
 
     State _actualState;
 
-    DataStructureBase* actualGraph;
-    Node* actualNode;
-    Edge* actualEdge;
+    DataType* actualGraph;
+    Datum* actualNode;
+    Pointer* actualEdge;
     GraphDocument* gd;
     QStringList _properties;
     QHash<QString, QString> _edgeProperties;

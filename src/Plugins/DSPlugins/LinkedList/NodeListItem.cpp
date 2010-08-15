@@ -7,10 +7,11 @@
 #include <QFont>
 #include <QGraphicsScene>
 #include <KLocale>
+#include "Data.h"
 
 QMap<QString, QSvgRenderer*> NodeListItem::_renders;
 
-NodeListItem::NodeListItem(Node* n) : QGraphicsSvgItem(0){
+NodeListItem::NodeListItem(Datum* n) : QGraphicsSvgItem(0){
     _node = n;
     _name = 0;
     _value = 0;

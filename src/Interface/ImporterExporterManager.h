@@ -35,8 +35,8 @@ class ImporterExporterManager : public QObject
   QString _scriptToRun;
   public:
     ImporterExporterManager(QObject* parent = 0);
-    GraphDocument* importFile();
-    bool exportFile(GraphDocument* doc) const;
+    DataTypeDocument* importFile();
+    bool exportFile(DataTypeDocument* doc) const;
     QString& scriptToRun() {return _scriptToRun;}
 
     void dialogExec();

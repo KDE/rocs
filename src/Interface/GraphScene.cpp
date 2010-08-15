@@ -20,8 +20,7 @@
 #include "GraphScene.h"
 #include "AbstractAction.h"
 
-#include "node.h"
-#include "edge.h"
+#include "Pointer.h"
 #include "graphDocument.h"
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"
@@ -30,8 +29,8 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 #include <KDebug>
-#include "node.h"
-#include "DataStructureBase.h"
+#include "Data.h"
+#include "DataType.h"
 #include "NodePropertiesWidget.h"
 #include "MainWindow.h"
 #include "edgepropertieswidget.h"
@@ -40,8 +39,8 @@
 GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
     _graphDocument = 0;
     _hideEdges = false;
-    _nodePropertiesWidget = new NodePropertiesWidget(qobject_cast<MainWindow*>(parent));
-    _edgePropertiesWidget = new EdgePropertiesWidget(qobject_cast<MainWindow*>(parent));
+    _datumPropertiesWidget = new DatumPropertiesWidget(qobject_cast<MainWindow*>(parent));
+    _pointerPropertiesWidget = new PointerPropertiesWidget(qobject_cast<MainWindow*>(parent));
     _action = 0;
 }
 
@@ -58,7 +57,7 @@ void GraphScene::setHideEdges(bool h) {
     }
 }
 
-void GraphScene::setActiveGraph(DataStructureBase *g) {
+void GraphScene::setActiveGraph(DataType *g) {
     kDebug() << "Active Graph Set";
     _graph = g;
 }
@@ -68,7 +67,7 @@ void GraphScene::updateAfter(QGraphicsItem *item) {
     _hidedEdges << item;
 }
 
-void GraphScene::hideGraph(DataStructureBase* g, bool visibility)
+void GraphScene::hideGraph(DataType* g, bool visibility)
 {
   QList<QGraphicsItem*> list = _hashGraphs.values(g);
   foreach(QGraphicsItem *i, list){
@@ -81,7 +80,7 @@ void GraphScene::setAction(QAction *action) {
     _action = qobject_cast<AbstractAction*>(action);
 }
 
-void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
+void GraphScene::setActiveDataTypeDocument(DataTypeDocument *gd) {
 
     if (gd == 0) {
         releaseDocument();
@@ -102,7 +101,7 @@ void GraphScene::setActiveGraphDocument(GraphDocument *gd) {
         connectGraphSignals(_graphDocument->at(i));
         kDebug() << "Graph Updated.";
     }
-    connect( _graphDocument, SIGNAL(graphCreated(DataStructureBase*)), this, SLOT(connectGraphSignals(DataStructureBase*)),Qt::UniqueConnection);
+    connect( _graphDocument, SIGNAL(graphCreated(DataType*)), this, SLOT(connectGraphSignals(DataType*)),Qt::UniqueConnection);
     kDebug() << "Graph Document Set" << _graphDocument -> name();
     createItems();
 }
@@ -110,21 +109,21 @@ void GraphScene::createItems(){
     kDebug() << "Creating the graph items.";
     int size = _graphDocument->size();
     for (int i = 0; i < size; i++) {
-        DataStructureBase *g = _graphDocument->at(i);
-        kDebug() << "Creating " << g->nodes().size() << "nodes";
-        for(int n = 0; n < g->nodes().size(); n++){
-            createNode( g->nodes()[n] );
+        DataType *g = _graphDocument->at(i);
+        kDebug() << "Creating " << g->data().size() << "data";
+        for(int n = 0; n < g->data().size(); n++){
+            createDatum( g->data()[n] );
         }
-        kDebug() << "Creating" << g->edges().size() << "edges";
-        for( int v = 0; v < g->edges().size(); v++){
-            createEdge( g->edges()[v]);
+        kDebug() << "Creating" << g->pointers().size() << "pointers";
+        for( int v = 0; v < g->pointers().size(); v++){
+            createEdge( g->pointers()[v]);
         }
     }
 }
 
-void GraphScene::connectGraphSignals(DataStructureBase *g){
-    connect( g, SIGNAL(nodeCreated(Node*)), this, SLOT(createNode(Node*)), Qt::UniqueConnection);
-    connect( g, SIGNAL(edgeCreated(Edge*)), this, SLOT(createEdge(Edge*)), Qt::UniqueConnection);
+void GraphScene::connectGraphSignals(DataType *g){
+    connect( g, SIGNAL(datumCreated(Datum*)), this, SLOT(createDatum(Datum*)), Qt::UniqueConnection);
+    connect( g, SIGNAL(pointerCreated(Pointer*)), this, SLOT(createEdge(Pointer*)), Qt::UniqueConnection);
 }
 
 void GraphScene::releaseDocument()
@@ -138,21 +137,21 @@ void GraphScene::releaseDocument()
 }
 
 
-QGraphicsItem *GraphScene::createNode(Node *n) {
-    NodeItem *nItem = (NodeItem*)(Rocs::DSPluginManager::New()->nodeItem(n));// new NodeItem(n);
+QGraphicsItem *GraphScene::createDatum(Datum *n) {
+    DatumItem *nItem = (DatumItem*)(Rocs::DSPluginManager::instance()->datumItem(n));// new DatumItem(n);
     addItem(nItem);
-    kDebug() << "Node Item Created";
+    kDebug() << "Datum Item Created";
     return nItem;
 }
 
-QGraphicsItem *GraphScene::createEdge(Edge *e) {
-    QGraphicsItem *edgeItem = 0;
-    edgeItem = Rocs::DSPluginManager::New()->edgeItem(e);
-//     edgeItem = new OrientedEdgeItem(e);
+QGraphicsItem *GraphScene::createEdge(Pointer *e) {
+    QGraphicsItem *pointerItem = 0;
+    pointerItem = Rocs::DSPluginManager::instance()->pointerItem(e);
+//     pointerItem = new OrientedEdgeItem(e);
 
-    addItem(edgeItem);
+    addItem(pointerItem);
     kDebug() << "Edge Created";
-    return edgeItem;
+    return pointerItem;
 }
 
 void GraphScene::mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent){
@@ -161,25 +160,25 @@ void GraphScene::mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent){
 
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
     kDebug() << "Entering on Whell Event";
-    NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(wheelEvent->scenePos()));
+    DatumItem *nitem = qgraphicsitem_cast<DatumItem*>(itemAt(wheelEvent->scenePos()));
     if (!nitem) {
-	kDebug() << "No Node Item to Spand";
+	kDebug() << "No Datum Item to Spand";
         wheelEvent->ignore();
         return;
     }
 
-    Node *movableNode = nitem->node();
+    Datum *movableDatum = nitem->datum();
     int numDegrees = wheelEvent->delta();
     if (wheelEvent->orientation() == Qt::Vertical) {
-	kDebug() << "Upgrading node size";
+	kDebug() << "Upgrading datum size";
         if (numDegrees > 0)
         {
-            movableNode->setWidth(movableNode->width()+0.25);
+            movableDatum->setWidth(movableDatum->width()+0.25);
             nitem->update();
         }
-        else if (movableNode->width() > 0.5)
+        else if (movableDatum->width() > 0.5)
         {
-            movableNode->setWidth(movableNode->width()-0.25);
+            movableDatum->setWidth(movableDatum->width()-0.25);
             nitem->update();
         }
     }
@@ -192,18 +191,18 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     if (mouseEvent->button() == Qt::MidButton) {
-        NodeItem *nitem = qgraphicsitem_cast<NodeItem*>(itemAt(mouseEvent->scenePos()));
+        DatumItem *nitem = qgraphicsitem_cast<DatumItem*>(itemAt(mouseEvent->scenePos()));
         if (!nitem) return;
-        Node *movableNode = nitem->node();
-        movableNode->setWidth(1);
+        Datum *movableDatum = nitem->datum();
+        movableDatum->setWidth(1);
     }
     else if( mouseEvent->button() == Qt::RightButton){
         QGraphicsItem *i = itemAt(mouseEvent->scenePos());
-        if (NodeItem *nItem = qgraphicsitem_cast<NodeItem*>(i)){
-            _nodePropertiesWidget->setNode(nItem, mouseEvent->screenPos());
+        if (DatumItem *nItem = qgraphicsitem_cast<DatumItem*>(i)){
+            _datumPropertiesWidget->setDatum(nItem, mouseEvent->screenPos());
         }
         else if (OrientedEdgeItem *eItem = qgraphicsitem_cast<OrientedEdgeItem*>(i)){
-            _edgePropertiesWidget->setEdge(eItem->edge(), mouseEvent->screenPos());
+            _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
         }
     }else if( mouseEvent -> button() == Qt::LeftButton){
         _action->executePress(mouseEvent->scenePos());
@@ -220,18 +219,18 @@ void GraphScene::keyPressEvent(QKeyEvent *) {
 
 }
 
-void GraphScene::updateGraph(DataStructureBase *g) {
+void GraphScene::updateGraph(DataType *g) {
     kDebug() << "Removed Graph from the hash";
 
-    kDebug() << "Creating" << g->nodes().size() << "nodes";
-    QList<Node*> nodes = g->nodes();
-    foreach(Node *n, nodes) {
+    kDebug() << "Creating" << g->data().size() << "data";
+    QList<Datum*> data = g->data();
+    foreach(Datum *n, data) {
         n->setName(n->name()); // just a dummy update trigger;
     }
 
-    kDebug() << "Creating" << g->nodes().size() << "edges";
-    QList<Edge*> edges = g->edges();
-    foreach(Edge *e, edges) {
+    kDebug() << "Creating" << g->data().size() << "pointers";
+    QList<Pointer*> pointers = g->pointers();
+    foreach(Pointer *e, pointers) {
        e->setName(e->name()); // just a dummy update trigger.
     }
 }

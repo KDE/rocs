@@ -7,15 +7,16 @@
 #include <QFont>
 #include <QGraphicsScene>
 #include <KLocale>
+#include "Data.h"
 
-QMap<QString, QSvgRenderer*> NodeItem::_renders;    
+QMap<QString, QSvgRenderer*> DatumItem::_renders;    
 
-NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
-    _node = n;
+DatumItem::DatumItem(Datum* n) : QGraphicsSvgItem(0){
+    _datum = n;
     _name = 0;
     _value = 0;
-    _originalWidth = _node->width();
-    _iconPackage = _node->iconPackage();
+    _originalWidth = _datum->width();
+    _iconPackage = _datum->iconPackage();
     _colorizer = new QGraphicsColorizeEffect(this);
     _font = QFont("Helvetica [Cronyx]", 18);
     
@@ -29,7 +30,7 @@ NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
     kDebug() << "Visual Node Item Created";
 }
 
-void NodeItem::setupNode(){
+void DatumItem::setupNode(){
     updateRenderer();
     updateIcon();
     updateName();
@@ -40,23 +41,23 @@ void NodeItem::setupNode(){
     update();
 }
 
-void NodeItem::updatePos(){
+void DatumItem::updatePos(){
    int fixPos = boundingRect().width()/2;
-   setPos(_node->x() - fixPos, _node->y() - fixPos);
+   setPos(_datum->x() - fixPos, _datum->y() - fixPos);
 }
 
-void NodeItem::updateSize(){
-  if (_node->width() == _width) return;
+void DatumItem::updateSize(){
+  if (_datum->width() == _width) return;
   resetMatrix();
-  _width = _node->width();
-  setScale(_node->width());
-   kDebug() << "Scale" << scale() << "Node Width" << _node->width() << "Shét" <<  _node->width() - 0.5;
+  _width = _datum->width();
+  setScale(_datum->width());
+   kDebug() << "Scale" << scale() << "Node Width" << _datum->width() << "Shét" <<  _datum->width() - 0.5;
 }
 
-void NodeItem::updateRenderer(){
-  _iconPackage = _node->iconPackage();
+void DatumItem::updateRenderer(){
+  _iconPackage = _datum->iconPackage();
   if( _renders.count(_iconPackage) == 0){
-        QSvgRenderer *z = new QSvgRenderer(_node->iconPackage());
+        QSvgRenderer *z = new QSvgRenderer(_datum->iconPackage());
         _renders.insert(_iconPackage, z);
         setSharedRenderer(z);
   }else{
@@ -64,20 +65,20 @@ void NodeItem::updateRenderer(){
   }
 }
 
-void NodeItem::updateIcon(){
+void DatumItem::updateIcon(){
    if ( elementId().isEmpty() ){
-      _element = _node->icon();
+      _element = _datum->icon();
       setElementId(_element);
       setTransformOriginPoint(boundingRect().width()/2, boundingRect().width()/2);
-   }else if( elementId() != _node->icon()){
-      _element = _node->icon();
+   }else if( elementId() != _datum->icon()){
+      _element = _datum->icon();
       setElementId(_element);
       setTransformOriginPoint(boundingRect().width()/2, boundingRect().width()/2);
    }
 }
 
-void NodeItem::updateColor(){
-   _colorizer->setColor( _node->color());
+void DatumItem::updateColor(){
+   _colorizer->setColor( _datum->color());
    setGraphicsEffect(_colorizer);
     if (_name && _name->isVisible()){
      _name->update();
@@ -87,25 +88,25 @@ void NodeItem::updateColor(){
    }
 }
 
-void NodeItem::updateName(){
+void DatumItem::updateName(){
    if ( !_name ){
-    _name = new QGraphicsSimpleTextItem(i18n("Name: %1").arg(_node->name()), this);
+    _name = new QGraphicsSimpleTextItem(i18n("Name: %1").arg(_datum->name()), this);
     _name->setFont(_font);
-   }else if (_name->text() != _node->name()){
-    _name->setText(i18n("Name: %1").arg(_node->name()));
+   }else if (_name->text() != _datum->name()){
+    _name->setText(i18n("Name: %1").arg(_datum->name()));
    }
-   _name->setVisible(_node->showName());
+   _name->setVisible(_datum->showName());
    _name->setPos(0, 75);
    
 }
 
-void NodeItem::updateValue(){
+void DatumItem::updateValue(){
    if ( !_value ){ 
-      _value = new QGraphicsSimpleTextItem(i18n("Value: %1").arg(_node->value().toString()), this);
+      _value = new QGraphicsSimpleTextItem(i18n("Value: %1").arg(_datum->value().toString()), this);
       _value->setFont(_font);
-   }else if (_value->text() != _node->value().toString()){
-      _value ->setText(i18n("Value: %1").arg(_node->value().toString()));
+   }else if (_value->text() != _datum->value().toString()){
+      _value ->setText(i18n("Value: %1").arg(_datum->value().toString()));
    }
-   _value->setVisible(_node->showValue());
+   _value->setVisible(_datum->showValue());
    _value->setPos(0, 100);
 }

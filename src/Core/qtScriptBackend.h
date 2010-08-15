@@ -24,8 +24,8 @@
 #include <QScriptString>
 #include "rocslib_export.h"
 
-class DataStructureBase;
-class GraphDocument;
+class DataType;
+class DataTypeDocument;
 class KTextBrowser;
 
 namespace Rocs{
@@ -37,8 +37,8 @@ class  ROCSLIB_EXPORT QtScriptBackend : public QObject{
 public:
 //     QtScriptBackend();
     QtScriptBackend(QObject* parent = 0);
-    void setScript(const QString& s, GraphDocument *graph);
-    void setDocument(GraphDocument *document);
+    void setScript(const QString& s, DataTypeDocument *graph);
+    void setDocument(DataTypeDocument *document);
     void loadFile(const QString& file);
     void debug(const QString& s);
     void output(const QString& s);
@@ -49,7 +49,7 @@ public:
 
 private:
     QString _script;
-    GraphDocument *_graphs;
+    DataTypeDocument *_graphs;
     void createGraphList();
     QScriptEngine *_engine;
 
@@ -65,7 +65,7 @@ signals:
     void start();
 
     /** run a tool plugin in graph and later run it resulting script.*/
-    void runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument *graphs);
+    void runTool(Rocs::ToolsPluginInterface * plugin, DataTypeDocument *graphs);
 
 
     /** abort script evaluation. In case of a too is running, stop will not stop tool. But the script resulting from tool will not be runned.

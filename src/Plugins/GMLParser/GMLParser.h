@@ -23,8 +23,8 @@
 #include <QObject>
 
 #include <Plugins/FilePluginInterface.h>
-class Edge;
-class Node;
+class Pointer;
+class Datum;
 
 class GMLParser: public Rocs::FilePluginInterface
 {
@@ -47,8 +47,8 @@ class GMLParser: public Rocs::FilePluginInterface
     private:
         QString _lastError;
         void setError ( QString arg1 );
-        QString const processNode(Node*) const;
-        QString const processEdge(Edge* e) const;
+        QString const processNode(Datum*) const;
+        QString const processEdge(Pointer* e) const;
 
 };
 

@@ -23,7 +23,7 @@ class Private;/*
 #include <QObject>
 #include "rocslib_export.h"
 
-class GraphDocument;
+class DataTypeDocument;
 
 #include <KComponentData>
 
@@ -36,9 +36,9 @@ public:
   virtual ~FilePluginInterface();
   virtual const QStringList extensions() const = 0; //Extensões suportadas
 
-  virtual GraphDocument * readFile(const QString &file) = 0; //return 0 se arq. inválido
+  virtual DataTypeDocument * readFile(const QString &file) = 0; //return 0 se arq. inválido
 
-  virtual bool writeFile(GraphDocument &graph, const QString & fileName)  = 0; //false se não gravou.
+  virtual bool writeFile(DataTypeDocument &graph, const QString & fileName)  = 0; //false se não gravou.
 
   virtual const QString lastError(); //return error
 

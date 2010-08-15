@@ -19,12 +19,16 @@
 
 #include "GraphStructure.h"
 #include "KDebug"
+#include "Data.h"
+#include "Pointer.h"
+#include "graphDocument.h"
+#include "DataType.h"
 
-Rocs::GraphStructure::GraphStructure ( GraphDocument* parent ) : DataStructureBase ( parent ) {
+Rocs::GraphStructure::GraphStructure ( DataTypeDocument* parent ) : DataType ( parent ) {
   setDirected(false);
 }
 
-Rocs::GraphStructure::GraphStructure(DataStructureBase& other): DataStructureBase(other){
+Rocs::GraphStructure::GraphStructure(DataType& other): DataType(other){
 
 }
 
@@ -36,7 +40,7 @@ Rocs::GraphStructure::~GraphStructure() {
 
 QScriptValue Rocs::GraphStructure::list_nodes() {
     QScriptValue array = _engine->newArray();
-    foreach(Node* n, _nodes) {
+    foreach(Datum* n, _data) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
@@ -44,20 +48,20 @@ QScriptValue Rocs::GraphStructure::list_nodes() {
 
 QScriptValue Rocs::GraphStructure::list_edges() {
     QScriptValue array = _engine->newArray();
-    foreach(Edge* n, _edges) {
+    foreach(Pointer* n, _pointers) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
 }
 
 QScriptValue Rocs::GraphStructure::add_node(const QString& name) {
-    Node* n = addNode(name);
+    Datum* n = addDatum(name);
     n->setEngine(_engine);
     return n->scriptValue();
 }
 
-QScriptValue Rocs::GraphStructure::add_edge(Node* from, Node* to) {
-    Edge *e = addEdge(from, to);
+QScriptValue Rocs::GraphStructure::add_edge(Datum* from, Datum* to) {
+    Pointer *e = addPointer(from, to);
     if (e){
       e->setEngine(_engine);
       return e->scriptValue();
@@ -67,7 +71,7 @@ QScriptValue Rocs::GraphStructure::add_edge(Node* from, Node* to) {
 }
 
 QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
-    Node *n = node(name);
+    Datum *n = datum(name);
     return n->scriptValue();
 }
 

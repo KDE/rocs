@@ -21,6 +21,7 @@
 #define GRAPHPLUGIN_H
 #include "rocslib_export.h"
 #include "DSPluginInterface.h"
+#include "graphDocument.h"
 
 namespace Rocs{
 
@@ -30,17 +31,17 @@ class /*ROCSLIB_EXPORT*/ GraphPlugin : public DSPluginInterface {
 
     virtual ~GraphPlugin();
 
-    virtual DataStructureBase* changeToDS ( DataStructureBase* );
-    virtual DataStructureBase* createDS ( GraphDocument* parent );
+    virtual DataType* changeToDS ( DataType* );
+    virtual DataType* createDS ( DataTypeDocument* parent );
 
-    virtual QGraphicsItem* edgeItem ( Edge* ) const;
-    virtual QGraphicsItem* nodeItem ( Node* ) const;
+    virtual QGraphicsItem* pointerItem ( Pointer* ) const;
+    virtual QGraphicsItem* datumItem ( Datum* ) const;
 
-    virtual QLayout* nodeExtraProperties ( Node* arg1, QWidget* arg2 ) const;
+    virtual QLayout* datumExtraProperties ( Datum* arg1, QWidget* arg2 ) const;
 
-    virtual QLayout* edgeExtraProperties ( Edge* arg1, QWidget* arg2 ) const;
+    virtual QLayout* pointerExtraProperties ( Pointer* arg1, QWidget* arg2 ) const;
 
-    virtual QLayout* graphExtraProperties ( DataStructureBase* graph, QWidget* parentWidget ) const;
+    virtual QLayout* dataTypeExtraProperties ( DataType* graph, QWidget* parentWidget ) const;
 
 };
 }

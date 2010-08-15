@@ -38,7 +38,7 @@ void TestDataStructure::inittestcase()
 void TestDataStructure::create(){
     DSPluginManager::New()->changeActiveDS(DSPluginManager::New()->pluginsList().at(1)->name());
     GraphDocument doc("teste");
-    DataStructureBase * graph = doc.addGraph();
+    DataType * graph = doc.addGraph();
     QCOMPARE (graph->metaObject()->className(), "Rocs::GraphStructure");
 }
 
@@ -48,7 +48,7 @@ void TestDataStructure::create(){
 void TestDataStructure::changeAndCreate(){
   DSPluginManager::New()->changeActiveDS(DSPluginManager::New()->pluginsList().at(0)->name());
   GraphDocument doc("teste");
-  DataStructureBase * graph = doc.addGraph();
+  DataType * graph = doc.addGraph();
   QCOMPARE (graph->metaObject()->className(), "Rocs::ListStructure");
 
 }
@@ -60,7 +60,7 @@ void TestDataStructure::convert()
     QSignalSpy spy(DSPluginManager::New(), SIGNAL(changingDS(QString)));
 //     connect(DSPluginManager::New(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
-    DataStructureBase * graph = doc.addGraph("Graph1");
+    DataType * graph = doc.addGraph("Graph1");
     graph->addNode("node1");
     graph->addNode("node2");
     graph->addEdge("node1", "node2");

@@ -21,12 +21,16 @@
 #define DSPLUGINMANAGER_H
 
 #include <QObject>
-#include "DataStructureBase.h"
+
 #include "rocslib_export.h"
 
 class QLayout;
 class QGraphicsItem;
 class KPluginInfo;
+class DataType;
+class DataTypeDocument;
+class Datum;
+class Pointer;
 
 namespace Rocs{
 
@@ -39,13 +43,13 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
     DSPluginManager();
   public:
     /** Accessor to the manager's instance.*/
-    static DSPluginManager * New();
+    static DSPluginManager * instance();
 
-    /** build a new graph using actual data structure. */
-    static DataStructureBase * createNewDS(GraphDocument* parent, const QString& pluginName = QString());
+    /** build a new dataType using actual data structure. */
+    static DataType * createNewDS(DataTypeDocument* parent, const QString& pluginName = QString());
 
-    /** When the DS pluin  is changed, all the existent graphs must be 'rebuild' with the new DS. If is not possible to change to a new data structure without losing data, then user should be asked to continue or nor. If user say to not continue, all ready done job should be undo.*/
-    static DataStructureBase * changeToDS(DataStructureBase*);
+    /** When the DS pluin  is changed, all the existent dataTypes must be 'rebuild' with the new DS. If is not possible to change to a new data structure without losing data, then user should be asked to continue or nor. If user say to not continue, all ready done job should be undo.*/
+    static DataType * changeToDS(DataType*);
 
     /** return the list of avaliable data structure plugins.*/
     static const QStringList listOfDS();
@@ -56,18 +60,18 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
 
     QList < DSPluginInterface*> pluginsList();
 
-    /** return the node graphic item that will be drawed by canvas . */
-    QGraphicsItem * nodeItem(Node* node);
-    /** return the edge graphic item that will be drawed by canvas . */
-    QGraphicsItem * edgeItem(Edge* edge);
+    /** return the datum dataTypeic item that will be drawed by canvas . */
+    QGraphicsItem * datumItem(Datum* datum);
+    /** return the pointer dataTypeic item that will be drawed by canvas . */
+    QGraphicsItem * pointerItem(Pointer* pointer);
 
 
-    /** Create extra widgets to node properties window. If no extra properties is needed the is returned 0*/
-    QLayout * nodeExtraProperties(Node* node, QWidget * parent);
-    /** Create extra widgets to edge properties window. If no extra properties is needed the is returned 0*/
-    QLayout * edgeExtraProperties(Edge* edge, QWidget * parent);
-    /** Create extra widgets to graph properties window. If no extra properties is needed the is returned 0*/
-    QLayout * graphExtraProperties(DataStructureBase* graph, QWidget * parent);
+    /** Create extra widgets to datum properties window. If no extra properties is needed the is returned 0*/
+    QLayout * datumExtraProperties(Datum* datum, QWidget * parent);
+    /** Create extra widgets to pointer properties window. If no extra properties is needed the is returned 0*/
+    QLayout * pointerExtraProperties(Pointer* pointer, QWidget * parent);
+    /** Create extra widgets to dataType properties window. If no extra properties is needed the is returned 0*/
+    QLayout * dataTypeExtraProperties(DataType* dataType, QWidget * parent);
 
   signals:
     /** signal emited when is changing the data structure to \newDS */

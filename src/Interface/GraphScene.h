@@ -25,26 +25,26 @@
 
 class AbstractAction;
 class QAction;
-class Node;
-class Edge;
+class Datum;
+class Pointer;
 class QGraphicsItem;
-class GraphDocument;
-class DataStructureBase;
+class DataTypeDocument;
+class DataType;
 class QGraphicsSceneMouseEvent;
 class QGraphicsSceneWheelEvent;
 class QKeyEvent;
-class NodePropertiesWidget;
-class EdgePropertiesWidget;
+class DatumPropertiesWidget;
+class PointerPropertiesWidget;
 
 class GraphScene : public QGraphicsScene {
     Q_OBJECT
 public:
     GraphScene(QObject *parent);
     void setAction(QAction *action);
-    void updateGraph(DataStructureBase *g);
+    void updateGraph(DataType *g);
     void updateDocument();
-    void setActiveGraph(DataStructureBase *g);
-    void setActiveGraphDocument(GraphDocument *gd);
+    void setActiveGraph(DataType *g);
+    void setActiveDataTypeDocument(DataTypeDocument *gd);
     void clearGraph();
 
     void setHideEdges(bool h);
@@ -52,12 +52,12 @@ public:
     void updateAfter(QGraphicsItem *item);
     bool fade() const{ return _fade; }
     void fade(bool b){ _fade = b; }
-    void hideGraph( DataStructureBase *g, bool visibility);
+    void hideGraph( DataType *g, bool visibility);
 
 public slots:
-    QGraphicsItem* createNode( Node* n);
-    QGraphicsItem* createEdge( Edge *e);
-    void connectGraphSignals(DataStructureBase *g);
+    QGraphicsItem* createDatum( Datum* n);
+    QGraphicsItem* createEdge( Pointer *e);
+    void connectGraphSignals(DataType *g);
     void createItems();
 
 protected:
@@ -69,14 +69,14 @@ protected:
     void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
-    GraphDocument *_graphDocument;
-    DataStructureBase *_graph;
+    DataTypeDocument *_graphDocument;
+    DataType *_graph;
     AbstractAction *_action;
-    QMultiHash<DataStructureBase*, QGraphicsItem* > _hashGraphs;
+    QMultiHash<DataType*, QGraphicsItem* > _hashGraphs;
     QList<QGraphicsItem*> _hidedEdges;
     bool _hideEdges;
-    NodePropertiesWidget *_nodePropertiesWidget;
-    EdgePropertiesWidget *_edgePropertiesWidget;
+    DatumPropertiesWidget *_datumPropertiesWidget;
+    PointerPropertiesWidget *_pointerPropertiesWidget;
     bool _fade;
     void releaseDocument();
 };

@@ -49,7 +49,7 @@ int main ( int argc, char *argv[] ) {
     KApplication app;
 
     MainWindow *window = new MainWindow();
-    if (Rocs::DSPluginManager::New()->listOfDS().count() != 0){
+    if (Rocs::DSPluginManager::instance()->listOfDS().count() != 0){
       window->show();
       return app.exec();
     }else{

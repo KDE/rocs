@@ -20,27 +20,27 @@
 #ifndef LISTSTRUCTURE_H
 #define LISTSTRUCTURE_H
 
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include "rocslib_export.h"
 
 class ListNode;
 namespace Rocs{
-class ROCSLIB_EXPORT ListStructure : public DataStructureBase {
+class ROCSLIB_EXPORT ListStructure : public DataType {
   Q_OBJECT
   public:
 
-    ListStructure ( GraphDocument* parent = 0 );
+    ListStructure ( DataTypeDocument* parent = 0 );
 
-    ListStructure(DataStructureBase& other);
+    ListStructure(DataType& other);
 
     virtual ~ListStructure();
   public slots:
 
 //     virtual void setEngine ( QScriptEngine* engine );
 
-    virtual Node* addNode ( QString name );
+    virtual Datum* addNode ( QString name );
 
-    virtual Edge* addEdge ( Node* from, Node* to );
+    virtual Pointer* addEdge ( Datum* from, Datum* to );
 
     void arrangeNodes();
 

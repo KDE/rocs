@@ -25,13 +25,13 @@
 
 class QModelIndex;
 
-class GraphDocument;
+class DataTypeDocument;
 
-class GraphDocumentModel : public QAbstractListModel
+class DataTypeDocumentModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit GraphDocumentModel(QList< GraphDocument*>* documents, QObject *parent = 0);
+    explicit DataTypeDocumentModel(QList< DataTypeDocument*>* documents, QObject *parent = 0);
 
     /*! Gives the number of rows on the model.
        \param parent a default constructed, unused, QModelIndex.
@@ -80,9 +80,9 @@ public:
     /*! select the graph at position index.
     \param index the position of the graph that you want to select.
     \return the graph at position Index.*/
-    GraphDocument *at(const QModelIndex& index);
+    DataTypeDocument *at(const QModelIndex& index);
 private:
-    QList< GraphDocument*>& _documents;
+    QList< DataTypeDocument*>& _documents;
 
 };
 

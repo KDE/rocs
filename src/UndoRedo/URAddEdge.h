@@ -23,21 +23,21 @@
 #define ADDEDGE_H
 
 #include <QUndoCommand>
-class DataStructureBase;
-class Edge;
-class Node;
+class DataType;
+class Pointer;
+class Datum;
 
 
 class URAddEdge : public QUndoCommand {
 public:
-    URAddEdge(Edge *e);
+    URAddEdge(Pointer *e);
     void redo();
     void undo();
 private:
-    Edge *_edge;
-    Node *_from;
-    Node *_to;
-    DataStructureBase *_graph;
+    Pointer *_edge;
+    Datum *_from;
+    Datum *_to;
+    DataType *_graph;
 };
 
 #endif

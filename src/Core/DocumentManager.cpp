@@ -23,25 +23,27 @@
 #include <KDebug>
 #include <QWaitCondition>
 #include <QAction>
+#include "qtScriptBackend.h"
+#include <KLocale>
 
 DocumentManager::DocumentManager(QWaitCondition &docCondition, QMutex &mutex, QObject* parent):QObject(parent), _docCondition(docCondition), _mutex(mutex){
   m_actualDocument = 0;
-//   GraphDocument * doc = new GraphDocument(i18n("Untitled"), 800, 600);
+//   DataTypeDocument * doc = new DataTypeDocument(i18n("Untitled"), 800, 600);
 //   addDocument(doc);
 }
 
 DocumentManager::~DocumentManager(){
 //   qDeleteAll(m_documents.begin(), m_documents.end());
-  foreach (GraphDocument * g, m_documents){
+  foreach (DataTypeDocument * g, m_documents){
       removeDocument(g);
   }
 }
 
 
-void DocumentManager::addDocument(GraphDocument* newDoc){
+void DocumentManager::addDocument(DataTypeDocument* newDoc){
     if (!m_documents.contains(newDoc)){
        if (newDoc->count() == 0){
-          newDoc->addGraph();
+          newDoc->addDataType();
        }
        m_documents.append(newDoc);
        changeDocument(newDoc);
@@ -55,13 +57,13 @@ void DocumentManager::changeDocument(){
     if (! action ){
       return;
     }
-    if (GraphDocument *doc = m_documents.value(action->data().toInt()) ){
+    if (DataTypeDocument *doc = m_documents.value(action->data().toInt()) ){
       changeDocument(doc);
     }
 }
 
 
-void DocumentManager::changeDocument(GraphDocument* doc){
+void DocumentManager::changeDocument(DataTypeDocument* doc){
     if(!m_documents.contains(doc)){
       m_documents.append(doc);
     }
@@ -72,7 +74,7 @@ void DocumentManager::changeDocument(GraphDocument* doc){
          emit deactivateDocument(m_actualDocument);
 //          _docCondition.wait(&_mutex);
 //          _mutex.unlock();
-        Rocs::DSPluginManager::New()->disconnect(m_actualDocument);
+        Rocs::DSPluginManager::instance()->disconnect(m_actualDocument);
         doc->disconnect(SIGNAL(activeGraphChanged(Graph*)));
         doc->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
         doc->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
@@ -92,7 +94,7 @@ void DocumentManager::changeDocument(GraphDocument* doc){
     }
 }
 
-GraphDocument* DocumentManager::document(const int& i)
+DataTypeDocument* DocumentManager::document(const int& i)
 {
   if (i < m_documents.count() && i >= 0){
       return (m_documents.at(i));
@@ -100,19 +102,19 @@ GraphDocument* DocumentManager::document(const int& i)
   return 0;
 }
 
-GraphDocument* DocumentManager::activeDocument(){
+DataTypeDocument* DocumentManager::activeDocument(){
   return m_actualDocument;
 }
 
 
 
-QList< GraphDocument* > DocumentManager::documentList()
+QList< DataTypeDocument* > DocumentManager::documentList()
 {
   return m_documents;
 }
 
 
-void DocumentManager::removeDocument(GraphDocument* doc){
+void DocumentManager::removeDocument(DataTypeDocument* doc){
     if (m_documents.removeOne(doc) != 0){
       if (m_actualDocument == doc){
         if (m_documents.count() > 0){
@@ -127,7 +129,7 @@ void DocumentManager::removeDocument(GraphDocument* doc){
 //          if (m_documents.count() > 0){
 //             changeDocument(m_documents.last());
 //          }else{
-//             addDocument(new GraphDocument(i18n("Untitled"), 800, 600));
+//             addDocument(new DataTypeDocument(i18n("Untitled"), 800, 600));
          }
       }
 //       _mutex.lock();
@@ -161,15 +163,15 @@ void DocumentManager::convertToDataStructure(QString ds){
 
 
 void DocumentManager::loadDocument ( QString name ){
-  GraphDocument * doc;
+  DataTypeDocument * doc;
   if ( name.isEmpty() ){
-      doc = new GraphDocument( i18n ( "Untitled0" ));
-      doc->addGraph ( i18n ( "Untitled0" ) );
+      doc = new DataTypeDocument( i18n ( "Untitled0" ));
+      doc->addDataType ( i18n ( "Untitled0" ) );
       addDocument(doc);
 
   }else{
       if (m_actualDocument == 0){
-        doc = new GraphDocument( i18n ( "Untitled0" ));
+        doc = new DataTypeDocument( i18n ( "Untitled0" ));
         addDocument(doc);
       }else{
         doc = m_actualDocument;

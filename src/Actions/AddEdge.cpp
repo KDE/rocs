@@ -20,9 +20,9 @@
 
 #include "AddEdge.h"
 #include "GraphScene.h"
-#include "DataStructureBase.h"
-#include "node.h"
-#include "edge.h"
+#include "DataType.h"
+#include "Data.h"
+#include "Pointer.h"
 #include "NodeItem.h"
 #include "OrientedEdgeItem.h"
 #include <KLocale>
@@ -51,13 +51,13 @@ void AddEdgeAction::executePress(QPointF pos) {
     if ( ! _graph ) return;
     if (_graph->readOnly()) return;
     _working = true;
-    _nodeFrom = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+    _nodeFrom = qgraphicsitem_cast<DatumItem*>(_graphScene->itemAt(pos));
 
     if ( ! _nodeFrom ) {
         _working = false;
         return;
     }
-    _startPos = QPointF(_nodeFrom->node()->x(), _nodeFrom->node()->y());
+    _startPos = QPointF(_nodeFrom->datum()->x(), _nodeFrom->datum()->y());
 }
 
 void AddEdgeAction::executeMove(QPointF pos) {
@@ -82,9 +82,9 @@ void AddEdgeAction::executeRelease(QPointF pos) {
         _tmpLine = 0;
     }
 
-    _nodeTo = qgraphicsitem_cast<NodeItem*>(_graphScene->itemAt(pos));
+    _nodeTo = qgraphicsitem_cast<DatumItem*>(_graphScene->itemAt(pos));
     if (  _nodeTo ) {
-        emit addEdge( _nodeFrom->node(),  _nodeTo->node() );
+        emit addEdge( _nodeFrom->datum(),  _nodeTo->datum() );
     }
 
     _nodeFrom = 0;
@@ -92,8 +92,8 @@ void AddEdgeAction::executeRelease(QPointF pos) {
     _working = false;
 }
 
-void AddEdgeAction::setActiveGraph(DataStructureBase* graph){
+void AddEdgeAction::setActiveGraph(DataType* graph){
     if (_graph) disconnect(this, 0, _graph, 0);
     _graph = graph;
-    connect(this, SIGNAL(addEdge(Node*,Node*)), _graph, SLOT(addEdge(Node*,Node*)));
+    connect(this, SIGNAL(addEdge(Datum*,Datum*)), _graph, SLOT(addEdge(Datum*,Datum*)));
 }

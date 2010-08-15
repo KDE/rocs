@@ -37,7 +37,7 @@ GraphTests::GraphTests()
 }
 
 void GraphTests::init() {
-    foreach(DataStructureBase *g, _graphDocument) {
+    foreach(DataType *g, _graphDocument) {
         delete g;
     }
     _graphDocument.clear();
@@ -97,7 +97,7 @@ void GraphTests::createSimpleGraph() {
     QVERIFY2( _graphDocument[0]->edges().size() == 5, "ERROR: Number of edges is not 5 ");
 
 
-    foreach( Node *n, _graphDocument[0]->nodes() ) {
+    foreach( Datum *n, _graphDocument[0]->nodes() ) {
         QVERIFY2( n->out_edges().size() == 1, "ERROR: Number of out edges is not 1");
         QVERIFY2( n->in_edges().size() == 1, "ERROR: Number of in edges is not 1");
         QVERIFY2( n->adjacent_nodes().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
@@ -127,7 +127,7 @@ void GraphTests::manipulateSimpleGraph() {
     QVERIFY2( _graphDocument[0]->node("i")->adjacent_nodes().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
     QVERIFY2( _graphDocument[0]->node("i")->adjacent_edges().size() == 4, "ERRORR: Number of adjacent edges is not 2");
 
-    Node *n = _graphDocument[0]->node("i");
+    Datum *n = _graphDocument[0]->node("i");
     qDebug() << n->property("name");
     _graphDocument[0]->remove(n);
 
@@ -153,7 +153,7 @@ void GraphTests::createDirectedGraph() {
     QVERIFY2( _graphDocument[0]->nodes().size() == 5, "ERROR: Number of nodes is not 5 ");
     QVERIFY2( _graphDocument[0]->edges().size() == 5, "ERROR: Number of edges is not 5 ");
 
-    foreach( Node *n, _graphDocument[0]->nodes() ) {
+    foreach( Datum *n, _graphDocument[0]->nodes() ) {
         QVERIFY2( n->out_edges().size() == 1, "ERROR: Number of out edges is not 1");
         QVERIFY2( n->in_edges().size() == 1, "ERROR: Number of in edges is not 1");
         QVERIFY2( n->adjacent_nodes().size() == 1, "ERROR: Number of Adjacent Nodes is not 2");
@@ -184,7 +184,7 @@ void GraphTests::manipulateDirectedGraph() {
     QVERIFY2( _graphDocument[0]->node("i")->adjacent_nodes().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
     QVERIFY2( _graphDocument[0]->node("i")->adjacent_edges().size() == 4, "ERRORR: Number of adjacent edges is not 2");
 
-    Node *n = _graphDocument[0]->node("i");
+    Datum *n = _graphDocument[0]->node("i");
     _graphDocument[0]->remove(n);
 
     QVERIFY2( _graphDocument[0]->node("a")->out_edges().size()  == 1, "ERROR: Number of nodes is not 1 ");
@@ -321,7 +321,7 @@ void  GraphTests::loadTestFile() {
     QVERIFY2( _graphDocument[0]->nodes().size() == 5, "ERROR: Number of nodes is not 5 ");
     QVERIFY2( _graphDocument[0]->edges().size() == 5, "ERROR: Number of edges is not 5 ");
 
-    foreach( Node *n, _graphDocument[0]->nodes() ) {
+    foreach( Datum *n, _graphDocument[0]->nodes() ) {
         QVERIFY2( n->out_edges().size() == 1, "ERROR: Number of out edges is not 1");
         QVERIFY2( n->in_edges().size() == 1, "ERROR: Number of in edges is not 1");
         QVERIFY2( n->adjacent_nodes().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
@@ -347,7 +347,7 @@ void  GraphTests::loadTestFile() {
     QVERIFY2( _graphDocument[0]->node("i")->adjacent_nodes().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
     QVERIFY2( _graphDocument[0]->node("i")->adjacent_edges().size() == 4, "ERRORR: Number of adjacent edges is not 2");
 
-    Node *n = _graphDocument[0]->node("i");
+    Datum *n = _graphDocument[0]->node("i");
     qDebug() << n->property("name");
     _graphDocument[0]->remove(n);
 

@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 #include "krossBackend.h"
-#include "DataStructureBase.h"
-#include "node.h"
+#include "DataType.h"
+#include "Data.h"
 #include <KDebug>
 #include <KTextBrowser>
 #include "graphDocument.h"
@@ -96,7 +96,7 @@ QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent){
 }
 
 
-void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument *graphs){
+void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, DataTypeDocument *graphs){
     _runningTool = true;
     _graphs = graphs;
     _script = plugin->run(graphs);
@@ -106,7 +106,7 @@ void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, GraphDocument
     _runningTool = false;
 }
 
-void QtScriptBackend::setScript(const QString& s,GraphDocument *graphs ) {
+void QtScriptBackend::setScript(const QString& s,DataTypeDocument *graphs ) {
     _script = s;
     _graphs = graphs;
     kDebug() << "script Set" << _script;

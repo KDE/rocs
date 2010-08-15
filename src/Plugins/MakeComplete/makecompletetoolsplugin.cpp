@@ -25,7 +25,7 @@
 #include <kgenericfactory.h>
 #include <KAboutData>
 #include <graphDocument.h>
-#include <DataStructureBase.h>
+#include <DataType.h>
 
 
 static const KAboutData aboutdata("rocs_makecompleteplugin", 0, ki18n("Make Complete") , "0.1" );
@@ -50,20 +50,20 @@ MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
 
 QString MakeCompleteToolPlugin::run(QObject* doc ) const
 {
-    GraphDocument * graphDoc = qobject_cast<GraphDocument*> ( doc );
+    DataTypeDocument * graphDoc = qobject_cast<DataTypeDocument*> ( doc );
     if ( graphDoc )
     {
-        DataStructureBase * graph = graphDoc->activeGraph();
-        foreach ( Edge *e, graph->edges() )
+        DataType * graph = graphDoc->activeDataType();
+        foreach ( Pointer *e, graph->pointers() )
         {
             graph->remove ( e );
         }
-        foreach ( Node * n1, graph->nodes() )
+        foreach ( Datum * n1, graph->data() )
         {
-            foreach ( Node * n2, graph->nodes() )
+            foreach ( Datum * n2, graph->data() )
             {
                 if ( n1 != n2 )
-                    graph->addEdge ( n1,n2 );
+                    graph->addPointer ( n1,n2 );
             }
         }
     }
@@ -72,14 +72,14 @@ QString MakeCompleteToolPlugin::run(QObject* doc ) const
 
 //   return QString (
 //       "function makeComplete(graph){"
-//       "  nodes = graph.list_nodes();"
+//       "  data = graph.list_data();"
 //       "  edges = graph.list_edges();"
 //       "  for (var e = 0; e < edges.length; e++){"
 //       "      graph.remove(edges[e]);"
 //       "  }"
-//       "  for (var i = 0; i < nodes.length; i++){"
-//       "      for (var j = i+1; j < nodes.length; j++){"
-//       "          graph.add_edge(nodes[i], nodes[j]);"
+//       "  for (var i = 0; i < data.length; i++){"
+//       "      for (var j = i+1; j < data.length; j++){"
+//       "          graph.add_edge(data[i], data[j]);"
 //       "      }"
 //       "  }"
 //       "}"

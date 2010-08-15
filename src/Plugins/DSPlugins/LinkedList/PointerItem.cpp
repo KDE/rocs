@@ -22,9 +22,9 @@
 
 #include "NodeItem.h"
 #include "GraphScene.h"
-#include "node.h"
-#include "edge.h"
-#include "DataStructureBase.h"
+#include "Data.h"
+#include "Pointer.h"
+#include "DataType.h"
 #include "math_constants.h"
 
 #include <QGraphicsScene>
@@ -41,7 +41,7 @@
 using namespace Rocs::LinkedList;
 
 
-PointerItem::PointerItem( Edge *edge, QGraphicsItem *parent)
+PointerItem::PointerItem( Pointer *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsPathItem(parent)
 {
     _edge = edge;
@@ -67,7 +67,7 @@ void PointerItem::connectSignals() {
 }
 
 QPolygonF Rocs::LinkedList::PointerItem::createEndArrow() const{
-  Node * to = _edge->to();
+  Datum * to = _edge->to();
   QPointF pos1(to->x()-to->width()*40-20, to->y());
   QPointF pos2(to->x()-to->width()*40, to->y());
   QLineF line (pos1, pos2);

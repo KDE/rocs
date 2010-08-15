@@ -19,20 +19,21 @@
 */
 
 #include "graphDocument.h"
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include <QString>
 #include <KSaveFile>
 #include <QByteArray>
 #include <KDebug>
-#include "node.h"
-#include "edge.h"
-#include "graphGroups.h"
+#include "Data.h"
+#include "Pointer.h"
+
+//#include "dataTypeGroups.h"
 
 #include "DSPluginManager.h"
 
 // Default Constructor
-GraphDocument::GraphDocument(const QString name, int width,  int height)
-        : QObject(0), QList<DataStructureBase*>()
+DataTypeDocument::DataTypeDocument(const QString name, int width,  int height)
+        : QObject(0), QList<DataType*>()
 {
     _name = name;
     _width = width;
@@ -40,109 +41,109 @@ GraphDocument::GraphDocument(const QString name, int width,  int height)
     _modified = false;
     _saved = false;
     _engineBackend = new QtScriptBackend(this);
-    _DSType = Rocs::DSPluginManager::New()->actualPlugin();
+    _DSType = Rocs::DSPluginManager::instance()->actualPlugin();
 }
 
-GraphDocument::GraphDocument(const GraphDocument& gd)
-        : QObject(0), QList<DataStructureBase*>()
+DataTypeDocument::DataTypeDocument(const DataTypeDocument& gd)
+        : QObject(0), QList<DataType*>()
 {
     _name = gd.name();
     _width = gd.width();
     _height = gd.height();
-    _DSType = Rocs::DSPluginManager::New()->actualPlugin();
+    _DSType = Rocs::DSPluginManager::instance()->actualPlugin();
     _engineBackend = new QtScriptBackend(this);
     for (int i = 0; i < gd.count(); ++i){
-//     foreach (Graph *g, gd) {
-        append(Rocs::DSPluginManager::New()->changeToDS(gd.at(i)));
+//     foreach (DataType *g, gd) {
+        append(Rocs::DSPluginManager::instance()->changeToDS(gd.at(i)));
     }
 }
 
 // Default Destructor
-GraphDocument::~GraphDocument() {
-    kDebug() << "Deleting Graph Document";
+DataTypeDocument::~DataTypeDocument() {
+    kDebug() << "Deleting DataType Document";
     kDebug() << this;
     kDebug() << size();
 
     for(int i = 0; i < size(); i ++){
-	DataStructureBase *g = at(i);
-	kDebug() << "Deleting graph" << g->name();
+	DataType *g = at(i);
+	kDebug() << "Deleting dataType" << g->name();
         delete g;
     }
 }
 
-QtScriptBackend * GraphDocument::engineBackend() const{
+QtScriptBackend * DataTypeDocument::engineBackend() const{
     return _engineBackend;
 }
 
-// Sets the current file name of the Graph Collection
-void GraphDocument::setName(const QString& name) {
+// Sets the current file name of the DataType Collection
+void DataTypeDocument::setName(const QString& name) {
     _name = name;
     emit nameChanged(name);
 }
 
-// Gets the name of the Graph
-QString GraphDocument::name() const {
+// Gets the name of the DataType
+QString DataTypeDocument::name() const {
     return _name;
 }
 
 // set the width of the drawable area
-void GraphDocument::setWidth(qreal width) {
+void DataTypeDocument::setWidth(qreal width) {
     _width = width;
 }
 
 //set the height of the drawable area
-void GraphDocument::setHeight(qreal height) {
+void DataTypeDocument::setHeight(qreal height) {
     _height = height;
 }
 
 // gets the wheight of the drawable area
-qreal GraphDocument::height() const {
+qreal DataTypeDocument::height() const {
     return _height;
 }
 
 // sets the width of the drawable area
-qreal GraphDocument::width() const {
+qreal DataTypeDocument::width() const {
     return _width;
 }
 
-bool GraphDocument::isModified(){
+bool DataTypeDocument::isModified(){
   return _modified;
 }
 
-void GraphDocument::setActiveGraph(DataStructureBase *g){
+void DataTypeDocument::setActiveDataType(DataType *g){
     if ( indexOf(g) != -1){
-        _activeGraph = g;
-        emit activeGraphChanged(g);
+        _activeDataType = g;
+        emit activeDataTypeChanged(g);
     }
 }
 
-DataStructureBase* GraphDocument::addGraph(QString name) {
+DataType* DataTypeDocument::addDataType(QString name) {
 
 
-  DataStructureBase *g = Rocs::DSPluginManager::New()->createNewDS(this, _DSType);
-//     Graph *g = new Graph(this);
+  DataType *g = Rocs::DSPluginManager::instance()->createNewDS(this, _DSType);
+//     DataType *g = new DataType(this);
     g->setName(name);
     append(g);
-    _activeGraph = g;
-    emit graphCreated(g);
-    kDebug() << "Graph Added" << g->name();
+    _activeDataType = g;
+    emit dataTypeCreated(g);
+    kDebug() << "DataType Added" << g->name();
     return g;
 }
 
 
-void GraphDocument::savedDocumentAt(const QString& fileName) {
+void DataTypeDocument::savedDocumentAt(const QString& fileName) {
     _lastSavedDocumentPath = fileName;
 }
 
-const QString& GraphDocument::documentPath() const {
+const QString& DataTypeDocument::documentPath() const {
     return _lastSavedDocumentPath;
 }
 
 
-bool GraphDocument::saveAsInternalFormat(const QString& filename) {
+bool DataTypeDocument::saveAsInternalFormat(const QString& filename) {
     k_buf.clear();
 
-    KSaveFile saveFile( !filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
+    KSaveFile saveFile( !filename.endsWith(".dataType") ? QString("%1.dataType").arg(filename) : filename);
 
     if (!saveFile.open()) {
         kDebug() << "Error: File Not Open";
@@ -152,34 +153,34 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     QTextStream stream(&saveFile);
     stream.setCodec("UTF-8");
 
-    int graphSize = count();
+    int dataTypeSize = count();
 
-    for (int i = 0; i < graphSize; i++) {
-        DataStructureBase *g = this->at(i);
+    for (int i = 0; i < dataTypeSize; i++) {
+        DataType *g = this->at(i);
 
-        k_buf += QString("[Graph %1] \n").arg(i).toUtf8();
+        k_buf += QString("[DataType %1] \n").arg(i).toUtf8();
 
 	    savePropertiesInternalFormat(g);
 
-        foreach( ::Node *n, g->nodes()) {
-	        k_buf += QString("[Node %1]\n").arg(g->nodes().indexOf(n)).toUtf8();
+        foreach( Datum *n, g->data()) {
+	        k_buf += QString("[Datum %1]\n").arg(g->data().indexOf(n)).toUtf8();
 	        savePropertiesInternalFormat(n);
         }
 
         int from, to;
-        foreach( Edge *e, g->edges()) {
-            from = g->nodes().indexOf(e->from());
-            to = g->nodes().indexOf(e->to());
+        foreach( Pointer *e, g->pointers()) {
+            from = g->data().indexOf(e->from());
+            to = g->data().indexOf(e->to());
 
-	        k_buf += QString("[Edge %1->%2]\n").arg(from).arg(to).toUtf8();
+	        k_buf += QString("[Pointer %1->%2]\n").arg(from).arg(to).toUtf8();
 	        savePropertiesInternalFormat(e);
         }
 
         /*     buf += " \n \n ############ GROUPS ########### \n \n";
-             foreach( GraphGroup *gg, g->groups()) {
+             foreach( DataTypeGroup *gg, g->groups()) {
                  buf += QString("[Group %1] \n").arg((long) gg);
 
-                 foreach( ::Node *n, gg->nodes() ) {
+                 foreach( ::Datum *n, gg->data() ) {
                      buf += QString("%1\n").arg((long)n);
                  }
              } */
@@ -196,7 +197,7 @@ bool GraphDocument::saveAsInternalFormat(const QString& filename) {
     return true;
 }
 
-void GraphDocument::savePropertiesInternalFormat(QObject *o) {
+void DataTypeDocument::savePropertiesInternalFormat(QObject *o) {
     const QMetaObject *metaObject = o->metaObject();
     int propertyCount = metaObject->propertyCount();
 
@@ -229,15 +230,15 @@ void GraphDocument::savePropertiesInternalFormat(QObject *o) {
     k_buf += '\n';
 }
 
-void GraphDocument::loadFromInternalFormat(const QString& filename) {
+void DataTypeDocument::loadFromInternalFormat(const QString& filename) {
     QFile f(filename);
     if ( !f.open(QIODevice::ReadOnly | QIODevice::Text) ) {
         kDebug() << "File not open " << filename.toUtf8();
         return;
     }
 
-    DataStructureBase* tmpGraph = 0;
-   //GraphGroup *tmpGroup = 0;
+    DataType* tmpDataType = 0;
+   //DataTypeGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
 
 
@@ -251,37 +252,37 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             continue;
         }
 
-        else if (str.startsWith("[Graph")) {
+        else if (str.startsWith("[DataType")) {
             QString gName = str.section(' ',1,1);
             gName.remove(']');
-            tmpGraph = Rocs::DSPluginManager::New()->createNewDS(this);
-            tmpGraph->setName(gName.toAscii());
-            tmpObject = tmpGraph;
-            append(tmpGraph);
-            kDebug() << "Graph Created";
+            tmpDataType = Rocs::DSPluginManager::instance()->createNewDS(this);
+            tmpDataType->setName(gName.toAscii());
+            tmpObject = tmpDataType;
+            append(tmpDataType);
+            kDebug() << "DataType Created";
         }
 
-        else if (str.startsWith("[Node")) {
+        else if (str.startsWith("[Datum")) {
             QString nName = str.section(' ',1,1);
             nName.remove(']');
-            tmpObject = tmpGraph->addNode(nName);
-            kDebug() << "Node Created";
+            tmpObject = tmpDataType->addDatum(nName);
+            kDebug() << "Datum Created";
         }
 
-        else if (str.startsWith("[Edge")) {
+        else if (str.startsWith("[Pointer")) {
             QString eName = str.section(' ',1,1);
             eName.remove(']');
 
             QString nameFrom = eName.section("->", 0,0);
             QString nameTo = eName.section("->", 1,1);
 
-            tmpObject = tmpGraph->addEdge(tmpGraph->nodes()[nameFrom.toInt()], tmpGraph->nodes()[nameTo.toInt()]);
-            kDebug() << "Edge Created";
+            tmpObject = tmpDataType->addPointer(tmpDataType->data()[nameFrom.toInt()], tmpDataType->data()[nameTo.toInt()]);
+            kDebug() << "Pointer Created";
         }
         else if (str.startsWith("[Group")) {
             /*QString gName = str.section(" ",1,1);
             gName.remove(']');
-            tmpGroup = tmpGraph->addGroup(gName); */
+            tmpGroup = tmpDataType->addGroup(gName); */
         }
         else if (str.contains(':')) {
             QString propertyName = str.section(':',0,0).trimmed();
@@ -289,25 +290,25 @@ void GraphDocument::loadFromInternalFormat(const QString& filename) {
             tmpObject->setProperty( propertyName.toUtf8() , propertyValue );
         }
         else {
-//            // tmpGroup->append( tmpGraph->node(str));
+//            // tmpGroup->append( tmpDataType->datum(str));
         }
     }
-    kDebug() << "Graph Document Loaded.";
+    kDebug() << "DataType Document Loaded.";
 }
 
-void GraphDocument::convertToDS(QString newDS){
+void DataTypeDocument::convertToDS(QString newDS){
     if (newDS != _DSType){
         kDebug() << "Need convert doc from " << _DSType << " to "<< newDS ;
-//         GraphDocument * gDoc = new GraphDocument(*this);
+//         DataTypeDocument * gDoc = new DataTypeDocument(*this);
         _DSType = newDS;
-        int numGraphs = count();
-        for (int i = 0 ; i < numGraphs; ++i){
-            DataStructureBase * g = Rocs::DSPluginManager::New()->changeToDS(at(i));
-            if (at(i) == _activeGraph)
-              _activeGraph = g;
+        int numDataTypes = count();
+        for (int i = 0 ; i < numDataTypes; ++i){
+            DataType * g = Rocs::DSPluginManager::instance()->changeToDS(at(i));
+            if (at(i) == _activeDataType)
+              _activeDataType = g;
             append(g);
         }
-        for (int i = 0 ; i < numGraphs; ++i){
+        for (int i = 0 ; i < numDataTypes; ++i){
             at(0)->deleteLater();
             removeAt(0);
         }

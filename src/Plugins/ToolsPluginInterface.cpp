@@ -63,7 +63,7 @@ QString ToolsPluginInterface::pluginIcon()
 
 KPluginInfo ToolsPluginInterface::pluginInfo()  
 {
-    return PluginManager::New()->pluginInfo(this);
+    return PluginManager::instance()->pluginInfo(this);
 // 	return *(d->_pluginInfo);
 }
 

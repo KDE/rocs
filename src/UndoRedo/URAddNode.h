@@ -24,19 +24,19 @@
 #include <QUndoCommand>
 #include <QPointF>
 
-class DataStructureBase;
-class Node;
+class DataType;
+class Datum;
 
 class URAddNode : public QUndoCommand {
 public:
-    URAddNode(Node *g);
+    URAddNode(Datum *g);
     void undo();
     void redo();
 
 private:
     QPointF _pos;
-    Node *_node;
-    DataStructureBase *_graph;
+    Datum *_node;
+    DataType *_graph;
 };
 
 #endif

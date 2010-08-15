@@ -33,11 +33,12 @@
 #include "qtScriptBackend.h"
 #endif
 #include "rocslib_export.h"
-#include "edge.h"
-class Node;
-typedef QList<Node*> NodeList;
+#include "rocs_typedefs.h"
 
-class  ROCSLIB_EXPORT Node : public QObject {
+class Pointer;
+class Datum;
+
+class  ROCSLIB_EXPORT Datum : public QObject {
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX)
     Q_PROPERTY(qreal y READ y WRITE setY)
@@ -51,37 +52,40 @@ class  ROCSLIB_EXPORT Node : public QObject {
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
 
 public:
-    Node(DataStructureBase *parent);
-    ~Node();
-    void addInEdge(Edge *e);
-    void addOutEdge(Edge *e);
-    void addSelfEdge(Edge *e);
-    void removeEdge(Edge *e, int edgeList);
-    void removeEdge(Edge *e, EdgeList &list);
+    enum PointerLists {In, Out, Self};
+    
+    Datum(DataType *parent);
+    ~Datum();
+    
+    void addInPointer(Pointer *e);
+    void addOutPointer(Pointer *e);
+    void addSelfPointer(Pointer *e);
+    void removePointer(Pointer *e, int pointerList);
+    void removePointer(Pointer *e, PointerList &list);
     void remove();
-    enum EdgeLists {In, Out, Self};
+    
     void startChange();
     void endChange();
     bool showName();
     bool showValue();
 
-    DataStructureBase *graph(){ return _graph; }
+    DataType *dataType(){ return _graph; }
 
 #ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
     virtual void setEngine(	QScriptEngine *_engine );
-    QScriptValue createScriptArray(EdgeList list);
+    QScriptValue createScriptArray(PointerList list);
 #endif
 
 
 
 public  slots:
-    NodeList adjacent_nodes() const;
-    EdgeList adjacent_edges() const;
-    EdgeList edges(Node *n);
-    EdgeList in_edges() const;
-    EdgeList out_edges() const;
-    EdgeList self_edges() const;
+    DataList adjacent_data() const;
+    PointerList adjacent_pointers() const;
+    PointerList pointers(Datum *n);
+    PointerList in_pointers() const;
+    PointerList out_pointers() const;
+    PointerList self_pointers() const;
 
     void setX(int x);
     void setY(int y);
@@ -119,23 +123,23 @@ public  slots:
     void removeDynamicProperty(QString property);
 
 #ifdef USING_QTSCRIPT
-
-    QScriptValue adj_nodes();
-    QScriptValue adj_edges();
-    QScriptValue input_edges();
-    QScriptValue output_edges();
-    QScriptValue loop_edges();
-    QScriptValue connected_edges(Node *n);
+    QScriptValue adj_data();
+    QScriptValue adj_pointers();
+    QScriptValue input_pointers();
+    QScriptValue output_pointers();
+    QScriptValue loop_pointers();
+    QScriptValue connected_pointers(Datum *n);
     void self_remove();
 #endif
 
-    Edge* addEdge(Node* to);
+    Pointer* addPointer(Datum* to);
 
 private:
-    EdgeList _in_edges;
-    EdgeList _out_edges;
-    EdgeList _self_edges;
-    void empty(EdgeList &list);
+    PointerList _in_pointers;
+    PointerList _out_pointers;
+    PointerList _self_pointers;
+    
+    void empty(PointerList &list);
 
     //! fixed properties
     qreal _x;
@@ -148,7 +152,7 @@ private:
     bool _showName;
     bool _showValue;
 
-    DataStructureBase *_graph;
+    DataType *_graph;
 
     QString _name;
     QString _color;

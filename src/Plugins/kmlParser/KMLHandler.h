@@ -26,7 +26,7 @@
 class KMLHandler: public QXmlDefaultHandler
 {
   public:
-  KMLHandler(DataStructureBase* doc);
+  KMLHandler(DataType* doc);
   ~KMLHandler();
 
 
@@ -53,7 +53,7 @@ private:
     QString errorStr;
 
     QString m_name;
-    DataStructureBase * m_graph;
+    DataType * m_graph;
     QStringList args;
     QString m_coordinates;
     QString m_description;

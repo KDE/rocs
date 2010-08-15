@@ -22,6 +22,8 @@
 #include "rocslib_export.h"
 #include "DSPluginInterface.h"
 
+class DataTypeDocument;
+
 namespace Rocs{
 
 class /*ROCSLIB_EXPORT*/ ListPlugin : public DSPluginInterface {
@@ -30,13 +32,13 @@ class /*ROCSLIB_EXPORT*/ ListPlugin : public DSPluginInterface {
 
     virtual ~ListPlugin();
 
-    virtual DataStructureBase* changeToDS ( DataStructureBase* );
-    virtual DataStructureBase* createDS ( GraphDocument* parent );
+    virtual DataType* changeToDS ( DataType* );
+    virtual DataType* createDS ( DataTypeDocument* parent );
 
-    virtual QGraphicsItem* edgeItem ( Edge* ) const;
-    virtual QGraphicsItem* nodeItem ( Node* ) const;
+    virtual QGraphicsItem* pointerItem ( Pointer* ) const;
+    virtual QGraphicsItem* datumItem ( Datum* ) const;
 
-    virtual QLayout* nodeExtraProperties ( Node* arg1, QWidget* arg2 ) const;
+    virtual QLayout* nodeExtraProperties ( Datum* arg1, QWidget* arg2 ) const;
 
 
 

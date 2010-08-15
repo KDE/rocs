@@ -31,21 +31,21 @@
 #include <QtScript>
 #endif
 
+#include "rocs_typedefs.h"
 #include <klocalizedstring.h>
-
-#include "node.h"
-#include "edge.h"
 #include "rocslib_export.h"
 
 class QtScriptBackend;
-class GraphGroup;
-class GraphDocument;
+//class GraphGroup;
+class DataTypeDocument;
+class Datum;
+class Pointer;
 
 
-/*! \brief this class acts as a container for nodes and edges.
-  this class has all the edges and nodes, plus a few extra funcionalities
+/*! \brief this class acts as a container for datums and pointers.
+  this class has all the pointers and datums, plus a few extra funcionalities
   to help programming with it on the programming backend. */
-class ROCSLIB_EXPORT DataStructureBase : public QObject {
+class ROCSLIB_EXPORT DataType : public QObject {
     Q_OBJECT
 
     /*! this property defines if the graph is directed or simple */
@@ -54,11 +54,11 @@ class ROCSLIB_EXPORT DataStructureBase : public QObject {
     /*! this property holds the name of the graph */
     Q_PROPERTY(QString name READ name WRITE setName)
 
-    /*! this property holds the default color for new nodes */
-    Q_PROPERTY(QString nodeDefaultColor READ nodeDefaultColor WRITE setNodeDefaultColor)
+    /*! this property holds the default color for new datums */
+    Q_PROPERTY(QString datumDefaultColor READ datumDefaultColor WRITE setDatumDefaultColor)
 
-    /*! this property holds the default color for new nodes */
-    Q_PROPERTY(QString edgeDefaultColor READ edgeDefaultColor WRITE setEdgeDefaultColor)
+    /*! this property holds the default color for new datums */
+    Q_PROPERTY(QString pointerDefaultColor READ pointerDefaultColor WRITE setPointerDefaultColor)
 
     /*! this property tells the system if this graph is to be treated as an automate */
     Q_PROPERTY(bool automate READ automate WRITE setAutomate)
@@ -67,15 +67,15 @@ public:
     /*! constructo
       \p parent the parent QObject
     */
-    DataStructureBase(GraphDocument *parent = 0);
+    DataType(DataTypeDocument *parent = 0);
 
-    DataStructureBase(DataStructureBase& other);
+    DataType(DataType& other);
 
     /*! destructor */
-    ~DataStructureBase();
+    ~DataType();
 
     /*! calculates the relative center of the graph,
-      taking into account the top, bottom, left and right edges. */
+      taking into account the top, bottom, left and right pointers. */
     void calcRelativeCenter();
 
     /*! gets the precalculated relative center.
@@ -86,7 +86,7 @@ public:
     /*! gets the document that holds this graph.
       \return the GraphDocument
     */
-    GraphDocument *document() const;
+    DataTypeDocument *document() const;
 
     void readOnly( bool r) { _readOnly = r; }
     bool readOnly() const { return _readOnly; }
@@ -110,26 +110,26 @@ public  slots:
     \return the name of the graph */
     const QString& name() const;
 
-    /*! sets if the graph is directed or simple node
+    /*! sets if the graph is directed or simple datum
     \param directed true directed, false simple. FIXME: change that to enum.
     */
     void setDirected(bool directed = true);
 
-    /*! gets if the node is diirected of simple.
+    /*! gets if the datum is diirected of simple.
     \return true if directed, false if simple. FIXME: change that to enum.
     */
     bool directed() const;
 
-    /*! all nodes are accessible from that method.
-      \return the QList containing all the  nodes.
+    /*! all data are accessible from that method. 
+      \return the QList containing all the  datums.
     */
-    NodeList nodes() const;
+    DataList data() const;
 
 
-    /*! all edges are accessible from that method.
-      \return the QList containing all the edges.
+    /*! all pointers are accessible from that method.
+      \return the QList containing all the pointers.
     */
-    EdgeList edges() const;
+    PointerList pointers() const;
 
 
     /*! all groups are accessible from that method.
@@ -137,89 +137,89 @@ public  slots:
     */
     //QList<GraphGroup*> groups() const;
 
-    /*! get the node marked as 'begin'
-    \return the 'begin' node. (node.begin == true), NULL if there isn't a begin node.
+    /*! get the datum marked as 'begin'
+    \return the 'begin' datum. (datum.begin == true), NULL if there isn't a begin datum.
     */
-    Node* begin() const;
+    Datum* begin() const;
 
-    /*! sets a node as begin.
+    /*! sets a datum as begin.
       \param b the new begin of the graph.
     */
-    bool setBegin(Node* b);
+    bool setBegin(Datum* b);
 
-    /*! creates a new node.
-    \p name the name of the node.
-    \return the newly created node.
+    /*! creates a new datum.
+    \p name the name of the datum.
+    \return the newly created datum.
     */
-    virtual Node* addNode(QString name);
+    virtual Datum* addDatum(QString name);
 
-    /*! creates a new edge
-    \p from the 'from' node.
-    \p to the 'to' node.
-    \return the newly created edge.
+    /*! creates a new pointer
+    \p from the 'from' datum.
+    \p to the 'to' datum.
+    \return the newly created pointer.
     */
-    virtual Edge* addEdge(Node* from, Node* to);
+    virtual Pointer* addPointer(Datum* from, Datum* to);
 
-    /*! creates a new edge
-    \p name_from the name of the node that will be used as 'from'
-    \p name_to the name of the node that will be used as 'to'
-    \return the newly created edge.
+    /*! creates a new pointer
+    \p name_from the name of the datum that will be used as 'from'
+    \p name_to the name of the datum that will be used as 'to'
+    \return the newly created pointer.
     */
-    Edge* addEdge(const QString& name_from, const QString& name_to);
+    Pointer* addPointer(const QString& name_from, const QString& name_to);
 
-    /*! returns a node
-    \p name the name of the node to be returned.
-    \return a node, or null if an invalid name is provided.
+    /*! returns a datum
+    \p name the name of the datum to be returned.
+    \return a datum, or null if an invalid name is provided.
     */
-    Node* node(const QString& name = i18n("Untitled"));
+    Datum* datum(const QString& name = i18n("Untitled"));
 
-    /*! removes a node.
-    \p n the node to be removed.
+    /*! removes a datum.
+    \p n the datum to be removed.
     */
-    void remove(Node *n);
+    void remove(Datum *n);
 
-    /*! removes an edge
-    \p e the edge to be removed.
+    /*! removes an pointer
+    \p e the pointer to be removed.
     */
-    void remove(Edge *e);
+    void remove(Pointer *e);
 
     /*! adds a graph - group to the graph. FIXME: not implemented yet.
     \p name the name of the group.
     \return the newly created graph group.
     */
-    GraphGroup *addGroup(const QString& name);
+  //  GraphGroup *addGroup(const QString& name);
 
-    /*! \brief add a new node to the 'end' list.
-    end list is an QList that will hold every node as a final value.
-    \p n the node to be added.
-    \return the recently added node.
+    /*! \brief add a new datum to the 'end' list.
+    end list is an QList that will hold every datum as a final value.
+    \p n the datum to be added.
+    \return the recently added datum.
     */
-    Node* addEnd(Node* n);
+    Datum* addEnd(Datum* n);
 
-    /*! remove a node from the end's list.
-    \p n the node to be removed from the list.
+    /*! remove a datum from the end's list.
+    \p n the datum to be removed from the list.
     */
-    void  removeEnd(Node* n);
+    void  removeEnd(Datum* n);
 
-    /*! sets the default color for new added nodes.
+    /*! sets the default color for new added datums.
     \p color the new color.
     */
-    void setNodeDefaultColor(const QString& color);
+    void setDatumDefaultColor(const QString& color);
 
-    /*! gets the default node color for this graph.
+    /*! gets the default datum color for this graph.
     \return a QColor.
     */
-    const QString& nodeDefaultColor() const;
+    const QString& datumDefaultColor() const;
 
-    /*! sets the default color for new added edges.
+    /*! sets the default color for new added pointers.
     \p color the new color.http://imagebin.ca/view/VoxkFg.html
     */
-    void setEdgeDefaultColor(const QString& color);
+    void setPointerDefaultColor(const QString& color);
 
-    /*! gets the default edge color for this graph
+    /*! gets the default pointer color for this graph
     \return a QColor
     */
-    const QString& edgeDefaultColor() const;
+    const QString& pointerDefaultColor() const;
 
     /*! sets this graph an automate
       \param b true = automate, false = graph.
@@ -241,74 +241,74 @@ public  slots:
     */
     void removeDynamicProperty(QString property);
 
-    /** Add a property to all nodes in this graph. If a new node is add later, the node will not containg this property.
+    /** Add a property to all datums in this graph. If a new datum is add later, the datum will not containg this property.
     * @param property Name of property
     * @param value Value of the property. value shoud be different of QVariant::Invalid.
     */
-    void addNodesDynamicProperty(QString property, QVariant value = QVariant(0));
+    void addDatumsDynamicProperty(QString property, QVariant value = QVariant(0));
 
-    /** remove a property to all nodes in this graph.
+    /** remove a property to all datums in this graph.
     * @param property Name of property
     */
-    void addEdgesDynamicProperty(QString property, QVariant value = QVariant(0));
+    void addPointersDynamicProperty(QString property, QVariant value = QVariant(0));
 
-     /** Add a property to all Edges in this graph. If a new edge is add later, the edge will not containg this property.
+     /** Add a property to all Pointers in this graph. If a new pointer is add later, the pointer will not containg this property.
     * @param property Name of property
     * @param value Value of the property. value shoud be different of QVariant::Invalid.
     */
-    void removeNodesDynamicProperty(QString property);
+    void removeDatumsDynamicProperty(QString property);
 
-    /** remove a property to all edges in this graph.
+    /** remove a property to all pointers in this graph.
     * @param property Name of property
     */
-    void removeEdgesDynamicProperty(QString property);
+    void removePointersDynamicProperty(QString property);
 
-    /** adds a node in this graph.
-    * @param name the name of the node,
-    * @param point the point in the euclidian space where this node is.
+    /** adds a datum in this graph.
+    * @param name the name of the datum,
+    * @param point the point in the euclidian space where this datum is.
     */
-    void addNode(QString name, QPointF point);
+    void addDatum(QString name, QPointF point);
 
-    /** sets all nodes for this color.
-    * @param color the color that each node will have.
+    /** sets all datums for this color.
+    * @param color the color that each datum will have.
     */
-    void setNodesColor(QString c);
+    void setDatumsColor(QString c);
 
-    /** sets all edges for this color
-    * @param color the color that each edge will have.
+    /** sets all pointers for this color
+    * @param color the color that each pointer will have.
     */
-    void setEdgesColor(QString c);
+    void setPointersColor(QString c);
 
-    /** puts sets the visitbility of the names in the nodes.
+    /** puts sets the visitbility of the names in the datums.
     * @param b true if visible false invisible */
-    void setNodeNameVisibility(bool b);
-    bool nodeNameVisibility();
+    void setDatumNameVisibility(bool b);
+    bool datumNameVisibility();
 
-    void setEdgeNameVisibility(bool b);
-    bool edgeNameVisibility();
+    void setPointerNameVisibility(bool b);
+    bool pointerNameVisibility();
 
-    void setNodeValueVisibility(bool b);
-    bool nodeValueVisibility();
+    void setDatumValueVisibility(bool b);
+    bool datumValueVisibility();
 
-    void setEdgeValueVisibility(bool b);
-    bool edgeValueVisibility();
+    void setPointerValueVisibility(bool b);
+    bool pointerValueVisibility();
 
     /*! remove this graph from the document. */
     void remove();
 
 #ifdef USING_QTSCRIPT
-//     QScriptValue list_nodes();
-//     QScriptValue list_edges();
-//     QScriptValue add_node(const QString& name);
-//     QScriptValue add_edge(Node* from, Node* to);
-//     QScriptValue node_byname(const QString& name);
-//     QScriptValue begin_node();
-//     QScriptValue end_nodes();
+//     QScriptValue list_data();
+//     QScriptValue list_pointers();
+//     QScriptValue add_datum(const QString& name);
+//     QScriptValue add_pointer(Datum* from, Datum* to);
+//     QScriptValue datum_byname(const QString& name);
+//     QScriptValue begin_datum();
+//     QScriptValue end_data();
 #endif
 
 signals:
-    void nodeCreated(Node *n);
-    void edgeCreated(Edge *e);
+    void datumCreated(Datum *n);
+    void pointerCreated(Pointer *e);
     void complexityChanged(bool directed);
     void changed();
     void orientedChanged(bool b);
@@ -316,8 +316,10 @@ signals:
 
 protected:
     bool _directed;
-    NodeList _nodes;
-    EdgeList _edges;
+    
+    DataList _data;
+    PointerList _pointers;
+    
     //QList<GraphGroup*> _graphGroups;
     qreal _top;
     qreal _bottom;
@@ -326,18 +328,18 @@ protected:
 
     QPointF _relativeCenter;
     QString _name;
-    Node* _begin;
-    NodeList _ends;
-    QString _nodeDefaultColor;
-    QString _edgeDefaultColor;
+    Datum* _begin;
+    DataList _ends;
+    QString _datumDefaultColor;
+    QString _pointerDefaultColor;
     bool _automate;
-    GraphDocument *_document;
+    DataTypeDocument *_document;
     bool _readOnly;
 
-    bool _nodeNamesVisible;
-    bool _edgeNamesVisible;
-    bool _nodeValuesVisible;
-    bool _edgeValuesVisible;
+    bool _datumNamesVisible;
+    bool _pointerNamesVisible;
+    bool _datumValuesVisible;
+    bool _pointerValuesVisible;
 
 #ifdef USING_QTSCRIPT
   protected:

@@ -22,7 +22,9 @@
 #include <KAboutData>
 #include <KGenericFactory>
 #include <QFile>
-#include <DataStructureBase.h>
+#include <DataType.h>
+#include <Data.h>
+#include <Pointer.h>
 
 
 static const KAboutData aboutdata ( "rocs_plaintxtplugin", 0, ki18n ( "Open and Save Plain TXT files" ) , "0.1" );
@@ -46,9 +48,9 @@ const QStringList PlainTXTFilePlugin::extensions() const {
 }
 
 
-GraphDocument * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
-    GraphDocument * graphDoc = new GraphDocument ( "Untitled" );
-    DataStructureBase * graph = graphDoc->addGraph();
+DataTypeDocument * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
+    DataTypeDocument * graphDoc = new DataTypeDocument ( "Untitled" );
+    DataType * graph = graphDoc->addDataType();
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
     if ( !f.open ( QFile::ReadOnly ) ) {
@@ -60,15 +62,15 @@ GraphDocument * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
         QStringList list = QString ( f.readLine() ).trimmed().split ( ' ', QString::SkipEmptyParts );
         switch ( list.count() ) {
         case 1:
-            graph->addNode ( list.at ( 0 ) );
+            graph->addDatum ( list.at ( 0 ) );
             break;
         case 2:
             edges << QPair<QString, QString> ( list.at ( 0 ), list.at ( 1 ) ) ;
             break;
         case 3:
-            graph->addNode ( list.at ( 0 ) );
-            graph->node ( list.at ( 0 ) )->setX ( list.at ( 1 ).toDouble() );
-            graph->node ( list.at ( 0 ) )->setY ( list.at ( 2 ).toDouble() );
+            graph->addDatum ( list.at ( 0 ) );
+            graph->datum ( list.at ( 0 ) )->setX ( list.at ( 1 ).toDouble() );
+            graph->datum ( list.at ( 0 ) )->setY ( list.at ( 2 ).toDouble() );
             break;
         default:
             kDebug() << i18n ( "Ignoring line: %1" ).arg ( list.join ( " " ) );
@@ -77,19 +79,19 @@ GraphDocument * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
         }
     }
     for ( int i = 0; i < edges.count(); ++i ) {
-        graph->addEdge ( edges.at ( i ).first, edges.at ( i ).second );
+        graph->addPointer ( edges.at ( i ).first, edges.at ( i ).second );
         kDebug() << edges.at ( i );
     }
     return graphDoc;
 }
 
-bool PlainTXTFilePlugin::writeFile ( GraphDocument &graph , const QString &filename ) {
+bool PlainTXTFilePlugin::writeFile ( DataTypeDocument &graph , const QString &filename ) {
     QFile file ( filename );
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
-        DataStructureBase *g = graph.activeGraph();
+        DataType *g = graph.activeDataType();
         if (g){
-            foreach ( Node *n, g->nodes() ) {
+            foreach ( Datum *n, g->data() ) {
                 out << n->name();
                 out << " ";
                 out << n->x();
@@ -97,7 +99,7 @@ bool PlainTXTFilePlugin::writeFile ( GraphDocument &graph , const QString &filen
                 out << n->y();
                 out << '\n';
             }
-            foreach ( Edge *e, g->edges() ) {
+            foreach ( Pointer *e, g->pointers() ) {
                 out << e->from()->name() << " " << e->to()->name() << '\n';
             }
             return true;

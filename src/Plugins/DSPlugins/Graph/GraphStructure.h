@@ -20,24 +20,24 @@
 #ifndef GRAPHSTRUCTURE_H
 #define GRAPHSTRUCTURE_H
 
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include "rocslib_export.h"
 
 namespace Rocs{
-class ROCSLIB_EXPORT GraphStructure : public DataStructureBase {
+class ROCSLIB_EXPORT GraphStructure : public DataType {
   Q_OBJECT
   public:
 
-    GraphStructure ( GraphDocument* parent = 0 );
+    GraphStructure ( DataTypeDocument* parent = 0 );
 
-    GraphStructure(DataStructureBase& other);
+    GraphStructure(DataType& other);
 
     virtual ~GraphStructure();
   public slots:
     QScriptValue list_nodes();
     QScriptValue list_edges();
     QScriptValue add_node(const QString& name);
-    QScriptValue add_edge(Node* from, Node* to);
+    QScriptValue add_edge(Datum* from, Datum* to);
     QScriptValue node_byname(const QString& name);
 //     QScriptValue begin_node();
 //     QScriptValue end_nodes();

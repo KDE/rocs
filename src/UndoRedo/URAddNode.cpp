@@ -23,8 +23,8 @@
 #include "node.h"
 
 
-URAddNode::URAddNode(Node *g) {
-    _graph = qobject_cast<DataStructureBase*>(g->parent());
+URAddNode::URAddNode(Datum *g) {
+    _graph = qobject_cast<DataType*>(g->parent());
     _node = g;
     _pos.setX(_node->x());
     _pos.setY(_node->y());
@@ -35,6 +35,6 @@ void URAddNode::undo() {
 }
 
 void URAddNode::redo() {
-    Node *n = _graph->addNode(i18n("Untitled"));
+    Datum *n = _graph->addNode(i18n("Untitled"));
     n->setPos(_pos.x(), _pos.y());
 }

@@ -28,6 +28,8 @@
 #include <QCheckBox>
 #include <kcombobox.h>
 #include "PointerItem.h"
+#include "Pointer.h"
+#include <graphDocument.h>
 
 static const KAboutData aboutdata("rocs_ListStructure", 0, ki18n("Linked List Structure") , "0.1" );
 using namespace Rocs;
@@ -47,34 +49,34 @@ ListPlugin::~ListPlugin()
 
 }
 
-DataStructureBase* ListPlugin::changeToDS ( DataStructureBase* graph) {
+DataType* ListPlugin::changeToDS ( DataType* graph) {
     return new ListStructure(*graph);
 }
 
-DataStructureBase* ListPlugin::createDS ( GraphDocument* parent )
+DataType* ListPlugin::createDS ( DataTypeDocument* parent )
 {
   return new ListStructure(parent);
 //     return new Graph(parent);
 }
 
-QGraphicsItem* Rocs::ListPlugin::nodeItem(Node* node ) const
+QGraphicsItem* Rocs::ListPlugin::datumItem(Datum* node ) const
 {
     return (new NodeListItem(node));
 }
 
-QGraphicsItem* Rocs::ListPlugin::edgeItem ( Edge* edge) const
+QGraphicsItem* Rocs::ListPlugin::pointerItem ( Pointer* edge) const
 {
     return new Rocs::LinkedList::PointerItem (edge);
 }
 
-QLayout* Rocs::ListPlugin::nodeExtraProperties ( Node* node, QWidget* parentWidget) const
+QLayout* Rocs::ListPlugin::nodeExtraProperties ( Datum* node, QWidget* parentWidget) const
 {
   QGridLayout * lay = new QGridLayout(parentWidget);
   QLabel *_value = new QLabel(i18n("Front value"), parentWidget);
   QLineEdit *_valueLine = new QLineEdit(parentWidget);
   _valueLine->setReadOnly(true);
-  if (node->out_edges().count() == 1){
-    _valueLine->setText(node->out_edges().at(0)->to()->value().toString());
+  if (node->out_pointers().count() == 1){
+    _valueLine->setText(node->out_pointers().at(0)->to()->value().toString());
   }
   lay->addWidget(_value,0,0);
   lay->addWidget(_valueLine,0,1);

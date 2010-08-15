@@ -24,12 +24,12 @@
 #include <QObject>
 #include "rocslib_export.h"
 
-class DataStructureBase;
+class DataType;
 class QtScriptBackend;
-/*! \brief the graph document
+/*! \brief the dataType document
   long explanation needed.
 */
-class ROCSLIB_EXPORT GraphDocument : public QObject, public QList<DataStructureBase*>
+class ROCSLIB_EXPORT DataTypeDocument : public QObject, public QList<DataType*>
 {
     Q_OBJECT
     Q_PROPERTY(    qreal width READ width WRITE setWidth)
@@ -40,23 +40,23 @@ public:
     /*! Default Constructor
       \param name sets the name of the document.
     */
-    GraphDocument(const QString name, int width = 800, int heigth = 600);
+    DataTypeDocument(const QString name, int width = 800, int heigth = 600);
 
     /*! default copy constructor */
-    GraphDocument(const GraphDocument& gd);
+    DataTypeDocument(const DataTypeDocument& gd);
 
     /*! Default Destructor */
-    ~GraphDocument();
+    ~DataTypeDocument();
 
     /*! verifies if this document is changed */
     bool isModified();
 
-    /*! Sets the current file name of the Graph Collection
+    /*! Sets the current file name of the DataType Collection
       \param name changes the name of the document.
     */
     void setName(const QString& name);
 
-    /*! \return the Name of the Collection of Graphs */
+    /*! \return the Name of the Collection of DataTypes */
     QString name() const;
 
     /* */
@@ -69,13 +69,13 @@ public:
 
     QtScriptBackend * engineBackend() const;
 public slots:
-    /*! Creates a new Graph
-      \param name the name of the graph
-      \param type the the of the graph.
+    /*! Creates a new DataType
+      \param name the name of the dataType
+      \param type the the of the dataType.
     */
-    DataStructureBase *addGraph(QString name = "untitled");
-    DataStructureBase *activeGraph(){ return _activeGraph; }
-    void setActiveGraph(DataStructureBase *g);
+    DataType *addDataType(QString name = "untitled");
+    DataType *activeDataType(){ return _activeDataType; }
+    void setActiveDataType(DataType *g);
 
     /** Convert actual DS to newDS if is needed.
     @param newDS name of new data structure to be converted. */
@@ -98,13 +98,13 @@ public slots:
     qreal width() const;
 
 signals:
-    /*! emited when a new graph is created
-      \param g the created graph */
-    void graphCreated( DataStructureBase *g);
+    /*! emited when a new dataType is created
+      \param g the created dataType */
+    void dataTypeCreated( DataType *g);
 
-    /*! emitted when a graph is removed.
-      \param i the index of the removed graph */
-    void graphRemoved(int i);
+    /*! emitted when a dataType is removed.
+      \param i the index of the removed dataType */
+    void dataTypeRemoved(int i);
 
     /*! emitted when the document changes it's name.
       \param name the new name of the document */
@@ -118,7 +118,7 @@ signals:
       \param width the new width of the document */
     void widthChanged(qreal width);
 
-    void activeGraphChanged(DataStructureBase* g);
+    void activeDataTypeChanged(DataType* g);
 private:
     QString k_buf;
     void  savePropertiesInternalFormat(QObject *o);
@@ -128,7 +128,7 @@ private:
     qreal _height;
     bool _modified;
     bool _saved;
-    DataStructureBase *_activeGraph;
+    DataType *_activeDataType;
     QString _DSType;
     QtScriptBackend* _engineBackend;
 };

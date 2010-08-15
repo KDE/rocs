@@ -18,9 +18,10 @@
 */
 
 #include "ListNode.h"
+#include <Pointer.h>
 #include "KDebug"
 
-ListNode::ListNode(DataStructureBase* parent): Node(parent)
+ListNode::ListNode(DataType* parent): Datum(parent)
 {
 
 }
@@ -40,7 +41,7 @@ QScriptValue ListNode::front(){
 
 void ListNode::pointTo(ListNode* to )
 {
-    addEdge(to);
+    addPointer(to);
 }
 
 
@@ -53,8 +54,8 @@ void ListNode::setEngine(QScriptEngine* engine)
 
 
 ListNode * ListNode::next() const{
-    if (out_edges().count() == 1 ){
-        if(ListNode * n = qobject_cast<ListNode*>( out_edges().at(0)->to())){
+    if (out_pointers().count() == 1 ){
+        if(ListNode * n = qobject_cast<ListNode*>( out_pointers().at(0)->to())){
           return n;
         }
     }

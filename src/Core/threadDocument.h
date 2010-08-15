@@ -25,11 +25,11 @@
 #include <QWaitCondition>
 class DocumentManager;
 
-class Graph;
-class Node;
-class Edge;
+class DataType;
+class Datum;
+class Pointer;
 
-class GraphDocument;
+class DataTypeDocument;
 class QtScriptBackend;
 
 class ROCSLIB_EXPORT ThreadDocument : public QThread{
@@ -38,7 +38,7 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
   public:
     ThreadDocument(QWaitCondition &docCondition,QMutex &mutex, QObject *parent = 0);
     virtual ~ThreadDocument();
-    GraphDocument *document() const;// {return _graphDocument;}
+    DataTypeDocument *document() const;// {return _graphDocument;}
     bool isRunning() const;
     QtScriptBackend* engine() const;
 
@@ -61,7 +61,7 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
 //     void releaseDocument();
 
     QtScriptBackend* _engine;
-    GraphDocument * _graphDocument;
+    DataTypeDocument * _graphDocument;
     QWaitCondition &_docCondition;
     QMutex &_mutex;
     QString _documentName;

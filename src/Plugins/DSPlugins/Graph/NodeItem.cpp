@@ -10,7 +10,7 @@
 
 QMap<QString, QSvgRenderer*> NodeItem::_renders;    
 
-NodeItem::NodeItem(Node* n) : QGraphicsSvgItem(0){
+NodeItem::NodeItem(Datum* n) : QGraphicsSvgItem(0){
     _node = n;
     _name = 0;
     _value = 0;

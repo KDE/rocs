@@ -50,7 +50,7 @@
 
 // Graph Related Includes
 #include "graphDocument.h"
-#include "DataStructureBase.h"
+#include "DataType.h"
 
 #include "settings.h"
 
@@ -81,6 +81,7 @@
 #include <IncludeManager.h>
 #include "ImporterExporterManager.h"
 #include <DSPluginInterface.h>
+#include <DSPluginManager.h>
 #include "DocumentManager.h"
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
@@ -90,7 +91,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     kDebug() << "Creating Thread";
     startThreadDocument();
-    if (Rocs::DSPluginManager::New()->listOfDS().count() == 0){
+    if (Rocs::DSPluginManager::instance()->listOfDS().count() == 0){
       KMessageBox::detailedError(this,
                                  i18n("No Data Structure plugins found in the system. Exiting."),
                                  i18n("Rocs need at least one data structure plugin to continue.\n"
@@ -99,11 +100,11 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
       return;
     }
     // setting up the rest of stuff
-    connect (_tDocument->documentManager(), SIGNAL(activateDocument(GraphDocument*)),this, SLOT(setActiveGraphDocument(GraphDocument*)));
-    connect (_tDocument->documentManager(), SIGNAL(deactivateDocument(GraphDocument*)),this, SLOT(releaseDocument(GraphDocument*)));
+    connect (_tDocument->documentManager(), SIGNAL(activateDocument(DataTypeDocument*)),this, SLOT(setActiveDataTypeDocument(DataTypeDocument*)));
+    connect (_tDocument->documentManager(), SIGNAL(deactivateDocument(DataTypeDocument*)),this, SLOT(releaseDocument(DataTypeDocument*)));
 
-    connect (_tDocument->documentManager(), SIGNAL(activateDocument(GraphDocument*)),this, SLOT(setupDocumentsList()));
-    connect (_tDocument->documentManager(), SIGNAL(documentRemoved(GraphDocument*)),this, SLOT(setupDocumentsList()));
+    connect (_tDocument->documentManager(), SIGNAL(activateDocument(DataTypeDocument*)),this, SLOT(setupDocumentsList()));
+    connect (_tDocument->documentManager(), SIGNAL(documentRemoved(DataTypeDocument*)),this, SLOT(setupDocumentsList()));
 
 
     setupWidgets();
@@ -112,10 +113,10 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     statusBar()->hide();
 
-//     setActiveGraphDocument ( _tDocument->document() );
+//     setActiveDataTypeDocument ( _tDocument->document() );
     setupToolsPluginsAction();
     setupDSPluginsAction();
-//     connect(Rocs::DSPluginManager::New(), SIGNAL(DSChangedTo(QString)), this, SLOT(dsChanged()));
+//     connect(Rocs::DSPluginManager::instance(), SIGNAL(DSChangedTo(QString)), this, SLOT(dsChanged()));
     connect(this, SIGNAL(startDocument(QString)), _tDocument->documentManager(), SLOT(loadDocument(QString)));
     connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(terminate()));
 
@@ -162,7 +163,7 @@ void MainWindow::debugString ( const QString& s )
     _txtDebug->append ( s );
 }
 
-GraphDocument *MainWindow::activeDocument() const
+DataTypeDocument *MainWindow::activeDocument() const
 {
     if ( ! _tDocument->document() )
     {
@@ -302,7 +303,7 @@ void MainWindow::setupActions()
     connect ( action, SIGNAL ( triggered ( bool ) ), _codeEditor, SLOT ( saveScriptAs() ) );
 
 
-    if ( Rocs::PluginManager::New()->filePlugins().count() > 0 )
+    if ( Rocs::PluginManager::instance()->filePlugins().count() > 0 )
     {
         kDebug() << "Creating Actions (import export)..";
         action = new KAction ( KIcon ( "document-save-as" ), i18n ( "Import" ), this );
@@ -319,7 +320,7 @@ void MainWindow::setupActions()
     }
     else
     {
-        kDebug() << "Not Creating Actions (import export).." << Rocs::PluginManager::New()->filePlugins().count();
+        kDebug() << "Not Creating Actions (import export).." << Rocs::PluginManager::instance()->filePlugins().count();
     }
     action = new KAction ( KIcon ( "document-save-as" ), i18n ( "Possible Includes" ), this );
     action->setShortcut ( Qt::CTRL + Qt::Key_P );
@@ -354,7 +355,7 @@ void MainWindow::setupToolsPluginsAction()
     QList <QAction*> pluginList;
     QAction* action = 0;
     unplugActionList ( "tools_plugins" );
-    QList < Rocs::ToolsPluginInterface*> avaliablePlugins = Rocs::PluginManager::New()->toolPlugins();
+    QList < Rocs::ToolsPluginInterface*> avaliablePlugins = Rocs::PluginManager::instance()->toolPlugins();
     int count = 0;
     foreach ( Rocs::ToolsPluginInterface* p, avaliablePlugins )
     {
@@ -372,7 +373,7 @@ void MainWindow::setupDSPluginsAction()
     QList <QAction*> pluginList;
     QAction* action = 0;
     unplugActionList ( "DS_plugins" );
-    QList < Rocs::DSPluginInterface*> avaliablePlugins = Rocs::DSPluginManager::New()->pluginsList();
+    QList < Rocs::DSPluginInterface*> avaliablePlugins = Rocs::DSPluginManager::instance()->pluginsList();
     QActionGroup * group = new QActionGroup(this);
     int count = 0;
     foreach ( Rocs::DSPluginInterface* p, avaliablePlugins )
@@ -380,11 +381,11 @@ void MainWindow::setupDSPluginsAction()
         action = new KAction ( p->name(), this );
         action->setData(count++);
         action->setCheckable(true);
-        if (p->name() == Rocs::DSPluginManager::New()->actualPlugin()){
+        if (p->name() == Rocs::DSPluginManager::instance()->actualPlugin()){
           action->setChecked(true);
         }
         action->setActionGroup(group);
-        connect ( action, SIGNAL ( triggered ( bool ) ),Rocs::DSPluginManager::New(), SLOT ( changeActiveDS()) );
+        connect ( action, SIGNAL ( triggered ( bool ) ),Rocs::DSPluginManager::instance(), SLOT ( changeActiveDS()) );
         pluginList.append ( action );
     }
     plugActionList ( "DS_plugins", pluginList );
@@ -396,10 +397,10 @@ _mutex.lock();
     QList <QAction*> pluginList;
     QAction* action = 0;
     unplugActionList ( "Doc_List" );
-    QList < Rocs::DSPluginInterface*> avaliablePlugins = Rocs::DSPluginManager::New()->pluginsList();
+    QList < Rocs::DSPluginInterface*> avaliablePlugins = Rocs::DSPluginManager::instance()->pluginsList();
     QActionGroup * group = new QActionGroup(this);
     int count = 0;
-    foreach(GraphDocument * doc, _tDocument->documentManager()->documentList()){
+    foreach(DataTypeDocument * doc, _tDocument->documentManager()->documentList()){
         action = new KAction ( doc->name(), this );
         action->setData(count++);
         action->setCheckable(true);
@@ -415,24 +416,24 @@ _mutex.lock();
     _mutex.unlock();
 }
 
-void MainWindow::setActiveGraphDocument ( GraphDocument* d )
+void MainWindow::setActiveDataTypeDocument ( DataTypeDocument* d )
 {
 //Ensure that is only on signal
 //     disconnect(d);
 
     foreach ( QAction *action, actionCollection()->actions() ){
         if ( AbstractAction *absAction = qobject_cast<AbstractAction*> ( action ) ){
-            absAction->setActiveGraphDocument ( d );
+            absAction->setActiveDataTypeDocument ( d );
         }
     }
 
-    _graphVisualEditor->setActiveGraphDocument ( d );
+    _graphVisualEditor->setActiveDataTypeDocument ( d );
 
 
-    connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,GraphDocument*)),
-             _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,GraphDocument*)),Qt::UniqueConnection);
+    connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,DataTypeDocument*)),
+             _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,DataTypeDocument*)),Qt::UniqueConnection);
 
-    connect(activeDocument(), SIGNAL(activeGraphChanged(DataStructureBase*)), this, SLOT(setActiveGraph(DataStructureBase*)),Qt::UniqueConnection);
+    connect(activeDocument(), SIGNAL(activeGraphChanged(DataType*)), this, SLOT(setActiveGraph(DataType*)),Qt::UniqueConnection);
     connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)),Qt::UniqueConnection);
 
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()),Qt::UniqueConnection);
@@ -446,11 +447,11 @@ void MainWindow::setActiveGraphDocument ( GraphDocument* d )
     _waitForDocument.wakeAll();
 }
 
-void MainWindow::releaseDocument ( GraphDocument* d ){
+void MainWindow::releaseDocument ( DataTypeDocument* d ){
     if (d == 0){
       return;
     }
-    _graphVisualEditor->releaseGraphDocument();
+    _graphVisualEditor->releaseDataTypeDocument();
     d->disconnect(this);
     disconnect(d);
     disconnect(d);
@@ -461,11 +462,11 @@ void MainWindow::releaseDocument ( GraphDocument* d ){
     _waitForDocument.wakeAll();
 }
 
-void MainWindow::setActiveGraph ( DataStructureBase *g )
+void MainWindow::setActiveGraph ( DataType *g )
 {
     if ( _tDocument->document() == 0 )
     {
-        kDebug() << "ERROR : Theres no activeGraphDocument, but this graph should belong to one.";
+        kDebug() << "ERROR : Theres no activeDataTypeDocument, but this graph should belong to one.";
         return;
     }
     if ( _tDocument->document()->indexOf ( g ) == -1 )
@@ -485,9 +486,9 @@ void MainWindow::setActiveGraph ( DataStructureBase *g )
 
 }
 
-DataStructureBase* MainWindow::graph() const
+DataType* MainWindow::graph() const
 {
-    return _tDocument->document()->activeGraph();
+    return _tDocument->document()->activeDataType();
 }
 
 GraphScene* MainWindow::scene() const
@@ -522,14 +523,14 @@ void MainWindow::loadDocument ( const QString& name )
     }
 
 
-//      _graphVisualEditor->releaseGraphDocument();
+//      _graphVisualEditor->releaseDataTypeDocument();
 
      _mutex.lock();
     emit startDocument( name );
     _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();
 
-//     setActiveGraphDocument ( _tDocument->document() );
+//     setActiveDataTypeDocument ( _tDocument->document() );
 
 
 }
@@ -569,19 +570,19 @@ int MainWindow::saveIfChanged(){
 
 void MainWindow::importFile(){
     Rocs::ImporterExporterManager importer(this);
-    GraphDocument * gd = importer.importFile();
+    DataTypeDocument * gd = importer.importFile();
     if (gd == 0){
         return;
     }
 
     _mutex.lock();
-//     _graphVisualEditor->releaseGraphDocument();
+//     _graphVisualEditor->releaseDataTypeDocument();
     _tDocument->documentManager()->addDocument(gd);
-//     _tDocument->setGraphDocument ( gd );
+//     _tDocument->setDataTypeDocument ( gd );
     _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();
 
-//     setActiveGraphDocument ( _tDocument->document() );
+//     setActiveDataTypeDocument ( _tDocument->document() );
 //     _graphVisualEditor->scene()->createItems();
 
     if (importer.hasDialog()){
@@ -621,7 +622,7 @@ void MainWindow::runToolPlugin()
       return;
     }
     ;
-    if (Rocs::ToolsPluginInterface *plugin = Rocs::PluginManager::New()->toolPlugins().value(action->data().toInt()) ){
+    if (Rocs::ToolsPluginInterface *plugin = Rocs::PluginManager::instance()->toolPlugins().value(action->data().toInt()) ){
       emit runTool ( plugin, activeDocument() );
     }
 }
@@ -629,13 +630,13 @@ void MainWindow::runToolPlugin()
 void MainWindow::dsChanged(){
     kDebug() << "Data structure was changed, need to reload graphic part.";
 
-    setActiveGraphDocument(_tDocument->document());
+    setActiveDataTypeDocument(_tDocument->document());
 //     QAction *action = qobject_cast<QAction *> ( sender() );
 //
 //     if (! action ){
 //       return;
 //     }
-//     Rocs::DSPluginInterface *plugin = Rocs::DSPluginManager::New()->pluginsList().at(action->data().toInt() );
+//     Rocs::DSPluginInterface *plugin = Rocs::DSPluginManager::instance()->pluginsList().at(action->data().toInt() );
 //
 //     kDebug() << "Changed " << plugin->name();
 }

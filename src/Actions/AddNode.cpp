@@ -20,9 +20,9 @@
 */
 #include "AddNode.h"
 #include "GraphScene.h"
-#include "DataStructureBase.h"
+#include "DataType.h"
 #include "NodeItem.h"
-#include "node.h"
+#include "Data.h"
 #include <KLocale>
 #include "graphDocument.h"
 #include <KDebug>
@@ -48,13 +48,13 @@ void AddNodeAction::executePress(QPointF pos) {
 
     if (pos.x() < 0) return;
     else if (pos.y() < 0) return;
-    else if (pos.x() > _graphDocument->width()) return;
-    else if (pos.y() > _graphDocument->height()) return;
+    else if (pos.x() > _dataTypeDocument->width()) return;
+    else if (pos.y() > _dataTypeDocument->height()) return;
 
     emit addNode(i18n("untitled"), QPointF(pos.x(), pos.y()));
 }
 
-void AddNodeAction::setActiveGraph(DataStructureBase* graph){
+void AddNodeAction::setActiveGraph(DataType* graph){
     if (_graph) disconnect(this, 0, _graph, 0);
     _graph = graph;
     connect(this, SIGNAL(addNode(QString,QPointF)), _graph, SLOT(addNode(QString,QPointF)));

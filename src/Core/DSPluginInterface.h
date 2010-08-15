@@ -1,47 +1,48 @@
 #ifndef DSPLUGININTERFACE_H
 #define DSPLUGININTERFACE_H
 
-#include "rocslib_export.h"
+#include <kplugininfo.h>
 
+//Qt classes
 class QLayout;
 class QGraphicsItem;
-class GraphDocument;
-class Graph;
-#include <KComponentData>
-#include "DSPluginManager.h"
-#include <kplugininfo.h>
+
+//Rocs Classes
+class DataType;
+class Datum;
+class Pointer;
+class DSPluginManager;
+class DataTypeDocument;
+
+// KClasses
+class KComponentData;
+
+#include "rocslib_export.h"
 
 namespace Rocs{
 class ROCSLIB_EXPORT DSPluginInterface: public QObject
 {
   Q_OBJECT
+  
 public:
   DSPluginInterface(const KComponentData &instance, QObject* parent);
 
   virtual ~DSPluginInterface();
+  virtual DataType* createDS(DataTypeDocument * parent) = 0;
+  virtual DataType* changeToDS(DataType*) = 0;
 
-  virtual DataStructureBase* createDS(GraphDocument * parent) = 0;
+  QString name();
 
-  virtual DataStructureBase* changeToDS(DataStructureBase*) = 0;
-// QString name();
+  virtual QGraphicsItem * datumItem ( Datum*)const = 0;
+  virtual QGraphicsItem * pointerItem ( Pointer*)const = 0;
 
-
-  QString name() {
-    if(DSPluginManager::New()->pluginInfo(this).isValid()){
-      return DSPluginManager::New()->pluginInfo(this).name();
-    }
-    return QString();
-  }
-
-  virtual QGraphicsItem * nodeItem ( Node*)const = 0;
-  virtual QGraphicsItem * edgeItem ( Edge*)const = 0;
-
-  virtual QLayout* nodeExtraProperties ( Node* arg1, QWidget* arg2 ) const;
-  virtual QLayout* edgeExtraProperties ( Edge* arg1, QWidget* arg2 )const;
-  virtual QLayout* graphExtraProperties ( DataStructureBase* arg1, QWidget* arg2 )const;
-
-
+  virtual QLayout* datumExtraProperties ( Datum* arg1, QWidget* arg2 ) const;
+  virtual QLayout* pointerExtraProperties ( Pointer* arg1, QWidget* arg2 )const;
+  virtual QLayout* dataTypeExtraProperties ( DataType* arg1, QWidget* arg2 )const;
 
 };
-}
+
+  
+};
+
 #endif // DSPLUGININTERFACE_H

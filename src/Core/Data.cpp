@@ -17,9 +17,9 @@
 * Boston, MA 02110-1301, USA.
 ***************************************************************************/
 
-#include "node.h"
-#include "edge.h"
-#include "DataStructureBase.h"
+#include "Data.h"
+#include "Pointer.h"
+#include "DataType.h"
 #include <KDebug>
 #include <KGlobal>
 #include <kstandarddirs.h>
@@ -27,7 +27,7 @@
 #include "DynamicPropertiesList.h"
 
 
-Node::Node(DataStructureBase *parent) : QObject(parent) {
+Datum::Datum(DataType *parent) : QObject(parent) {
     _graph = parent;
     _x = 0;
     _y = 0;
@@ -36,7 +36,7 @@ Node::Node(DataStructureBase *parent) : QObject(parent) {
     _showValue = true;
     _begin = false;
     _end = false;
-    _color = _graph->nodeDefaultColor();
+    _color = _graph->datumDefaultColor();
     _changing = false;
     _value = 0;
     _icon = "rocs_default";
@@ -44,139 +44,139 @@ Node::Node(DataStructureBase *parent) : QObject(parent) {
     kDebug() << "Node successfully created" << _iconpackage;
 }
 
-Node::~Node() {
+Datum::~Datum() {
     emit removed();
-    empty(_in_edges);
-    empty(_out_edges);
-    empty(_self_edges);
+    empty(_in_pointers);
+    empty(_out_pointers);
+    empty(_self_pointers);
 
 }
 
-void Node::empty(EdgeList &list) {
-    foreach(Edge *e, list ) {
+void Datum::empty(PointerList &list) {
+    foreach(Pointer *e, list ) {
         e->remove();
     }
 }
 
-bool Node::showName() {
+bool Datum::showName() {
     return _showName;
 }
 
-bool Node::showValue() {
+bool Datum::showValue() {
     return _showValue;
 }
 
-void Node::hideName(bool b) {
+void Datum::hideName(bool b) {
     _showName = b;
     emit changed();
 }
 
-void Node::hideValue(bool b) {
+void Datum::hideValue(bool b) {
     _showValue = b;
     emit changed();
 }
 
-void Node::setIcon(const QString& s){
+void Datum::setIcon(const QString& s){
     _icon = s;
     emit changed();
 }
 
-void Node::setIconPackage(const QString& s){
+void Datum::setIconPackage(const QString& s){
     _iconpackage = s;
 }
 
-const QString& Node::icon() const { return _icon; }
+const QString& Datum::icon() const { return _icon; }
 
-const QString& Node::iconPackage() const { return _iconpackage; }
+const QString& Datum::iconPackage() const { return _iconpackage; }
 
-QList<Node*> Node::adjacent_nodes() const
+DataList Datum::adjacent_data() const
 {
-    QList<Node*> adjacent;
+    QList<Datum*> adjacent;
 
-    foreach(Edge *e, _out_edges) {
+    foreach(Pointer *e, _out_pointers) {
         adjacent.append( e->to()  );
     }
 
     if ( _graph -> directed() ) {
-        foreach(Edge *e, _self_edges) {
+        foreach(Pointer *e, _self_pointers) {
             adjacent.append( e->to() );
         }
         return adjacent;
     }
 
-    foreach(Edge *e, _in_edges) {
+    foreach(Pointer *e, _in_pointers) {
         adjacent.append( e->from() );
     }
     return adjacent;
 }
 
 
-EdgeList Node::adjacent_edges() const
+PointerList Datum::adjacent_pointers() const
 {
-    EdgeList adjacent;
+    PointerList adjacent;
 
-    adjacent << _out_edges;
+    adjacent << _out_pointers;
 
     if ( _graph -> directed() ) {
-        adjacent << _self_edges;
+        adjacent << _self_pointers;
     }else{
-      adjacent << _in_edges;
+      adjacent << _in_pointers;
     }
 
     return adjacent;
 }
 
-void Node::addInEdge(Edge *e) {
-    _in_edges.append( e );
+void Datum::addInPointer(Pointer *e) {
+    _in_pointers.append( e );
 }
 
-void Node::addOutEdge(Edge *e) {
-    _out_edges.append( e  );
+void Datum::addOutPointer(Pointer *e) {
+    _out_pointers.append( e  );
 }
 
-void Node::addSelfEdge(Edge *e) {
-    _self_edges.append( e );
+void Datum::addSelfPointer(Pointer *e) {
+    _self_pointers.append( e );
 }
 
-EdgeList Node::in_edges() const {
-    return _in_edges;
+PointerList Datum::in_pointers() const {
+    return _in_pointers;
 }
 
-EdgeList Node::out_edges() const {
-    return _out_edges;
+PointerList Datum::out_pointers() const {
+    return _out_pointers;
 }
 
-EdgeList Node::self_edges() const {
-    return _self_edges;
+PointerList Datum::self_pointers() const {
+    return _self_pointers;
 }
 
-Edge* Node::addEdge(Node* to) {
-    return _graph->addEdge(this, to);
+Pointer* Datum::addPointer(Datum* to) {
+    return _graph->addPointer(this, to);
 }
 
-void Node::removeEdge(Edge *e, int edgeList) {
-    switch (edgeList) {
-    case In  : removeEdge(e, _in_edges);    break;
-    case Out : removeEdge(e, _out_edges);   break;
-    case Self: removeEdge(e, _self_edges);  break;
+void Datum::removePointer(Pointer *e, int pointerList) {
+    switch (pointerList) {
+    case In  : removePointer(e, _in_pointers);    break;
+    case Out : removePointer(e, _out_pointers);   break;
+    case Self: removePointer(e, _self_pointers);  break;
     }
 }
 
-void Node::removeEdge(Edge* e, EdgeList &list) {
+void Datum::removePointer(Pointer* e, PointerList &list) {
       if (list.contains(e)) list.removeOne(e);
 }
 
-EdgeList Node::edges(Node *n) {
-    EdgeList list;
+PointerList Datum::pointers(Datum *n) {
+    PointerList list;
     if (n == this) {
-        return _self_edges;
+        return _self_pointers;
     }
-    foreach (Edge *tmp, _out_edges) {
+    foreach (Pointer *tmp, _out_pointers) {
         if (tmp->to() == n) {
             list.append(tmp);
         }
     }
-    foreach(Edge *tmp, _in_edges) {
+    foreach(Pointer *tmp, _in_pointers) {
         if (tmp->from() == n) {
             list.append(tmp);
         }
@@ -184,30 +184,30 @@ EdgeList Node::edges(Node *n) {
     return list;
 }
 
-void Node::remove() {
+void Datum::remove() {
   _graph->remove(this);
 }
 
 //! Properties:
-void Node::setX(int x) {
+void Datum::setX(int x) {
     _x = x;
     if (! _changing) {
 	emit changed();
     }
 }
 
-qreal Node::x() const {
+qreal Datum::x() const {
     return _x;
 }
 
-void Node::setY(int y) {
+void Datum::setY(int y) {
     _y  = y;
     if (! _changing) {
 	emit changed();
     }
 }
 
-void Node::setWidth(qreal w) {
+void Datum::setWidth(qreal w) {
     _width = w;
     if (! _changing) {
 	emit changed();
@@ -215,7 +215,7 @@ void Node::setWidth(qreal w) {
     }
 }
 
-void Node::setPos(qreal x, qreal y) {
+void Datum::setPos(qreal x, qreal y) {
     _x = x;
     _y = y;
     if (! _changing) {
@@ -224,37 +224,37 @@ void Node::setPos(qreal x, qreal y) {
 
 }
 
-qreal Node::y() const {
+qreal Datum::y() const {
     return _y;
 }
 
-qreal Node::width() const {
+qreal Datum::width() const {
     return _width;
 }
 
-void Node::setColor(const QString& s) {
+void Datum::setColor(const QString& s) {
     _color = s;
     if (! _changing) {
 	emit changed();
     }
 }
 
-const QString& Node::color() const {
+const QString& Datum::color() const {
     return _color;
 }
 
-void Node::setName(const QString& s) {
+void Datum::setName(const QString& s) {
     _name = s;
     if (! _changing) {
 	emit changed();
     }
 }
 
-const QString& Node::name() const {
+const QString& Datum::name() const {
     return _name;
 }
 
-void Node::setBegin(bool begin) {
+void Datum::setBegin(bool begin) {
     if (!begin) {
         _begin = false;
 	if (_graph->begin() == this){
@@ -275,7 +275,7 @@ void Node::setBegin(bool begin) {
     }
 }
 
-void Node::setEnd(bool end) {
+void Datum::setEnd(bool end) {
     _end = end;
 
     if (end) {
@@ -288,101 +288,101 @@ void Node::setEnd(bool end) {
     }
 }
 
-bool Node::begin() const {
+bool Datum::begin() const {
     return _begin;
 }
 
-bool Node::end() const {
+bool Datum::end() const {
     return _end;
 }
 
-const QVariant Node::value() const {
+const QVariant Datum::value() const {
     return _value;
 }
-void  Node::setValue(QVariant s) {
+void  Datum::setValue(QVariant s) {
     _value = s;
     if (! _changing) {
       emit changed();
     }
 }
 
-void Node::setValue(const QString& c){
+void Datum::setValue(const QString& c){
     _value = c;
     if (_changing){
       emit changed();
     }
 }
-void Node::startChange() {
+void Datum::startChange() {
     _changing = true;
 }
 
-void Node::endChange() {
+void Datum::endChange() {
     _changing = false;
     emit changed();
 }
 
-void Node::addDynamicProperty(QString property, QVariant value){
+void Datum::addDynamicProperty(QString property, QVariant value){
     if (! setProperty(property.toUtf8(), value)  && value.isValid()){
       DynamicPropertiesList::New()->addProperty(this, property);
     }
 }
 
-void Node::removeDynamicProperty(QString property){
+void Datum::removeDynamicProperty(QString property){
     addDynamicProperty(property.toUtf8(), QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
 #ifdef USING_QTSCRIPT
-void Node::self_remove() {
+void Datum::self_remove() {
     remove();
 }
 
-QScriptValue Node::scriptValue() const {
+QScriptValue Datum::scriptValue() const {
     return _scriptvalue;
 }
 
-void Node::setEngine(	QScriptEngine *engine ) {
+void Datum::setEngine(	QScriptEngine *engine ) {
     _engine = engine;
     _scriptvalue = engine->newQObject(this);
 }
 
-QScriptValue Node::adj_nodes() {
-    QList<Node*> list = adjacent_nodes();
+QScriptValue Datum::adj_data() {
+    QList<Datum*> list = adjacent_data();
     QScriptValue array = _engine->newArray();
-    foreach(Node* n, list) {
+    foreach(Datum* n, list) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
 }
 
-QScriptValue Node::adj_edges() {
-    EdgeList list = adjacent_edges();
+QScriptValue Datum::adj_pointers() {
+    PointerList list = adjacent_pointers();
     return createScriptArray(list);
 }
 
-QScriptValue Node::input_edges() {
-    EdgeList list = in_edges();
+QScriptValue Datum::input_pointers() {
+    PointerList list = in_pointers();
     return createScriptArray(list);
 }
 
-QScriptValue Node::output_edges() {
-    EdgeList list = out_edges();
+QScriptValue Datum::output_pointers() {
+    PointerList list = out_pointers();
     return createScriptArray(list);
 }
 
-QScriptValue Node::loop_edges() {
-    EdgeList list = self_edges();
+QScriptValue Datum::loop_pointers() {
+    PointerList list = self_pointers();
     return createScriptArray(list);
 }
 
-QScriptValue Node::connected_edges(Node *n) {
-    EdgeList list = edges(n);
+QScriptValue Datum::connected_pointers(Datum *n) {
+    PointerList list = pointers(n);
     return createScriptArray(list);
 }
 
-QScriptValue Node::createScriptArray(EdgeList list) {
+QScriptValue Datum::createScriptArray(PointerList list) {
     QScriptValue array = _engine->newArray();
-    foreach(Edge* e, list) {
+    foreach(Pointer* e, list) {
         array.property("push").call(array, QScriptValueList() << e->scriptValue());
     }
     return array;

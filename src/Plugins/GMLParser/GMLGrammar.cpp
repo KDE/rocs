@@ -33,9 +33,9 @@ namespace GMLPlugin{
 GMLGraphParsingHelper* phelper = 0;
 std::string lastKey = "";
 QObject * lastInserted = 0;
-DataStructureBase * actualGraph = 0;
-Node * actualNode = 0;
-Edge * actualEdge = 0;
+DataType * actualGraph = 0;
+Datum * actualNode = 0;
+Pointer * actualEdge = 0;
 
 GraphDocument *document = 0;
 
