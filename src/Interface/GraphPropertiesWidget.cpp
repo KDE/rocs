@@ -56,28 +56,27 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataType *g, MainWindow* parent )
 
     _editWidget->setVisible(_activateGraph->isChecked());
 
-    if (_extraProperties->layout()){
-      delete _extraProperties->layout();
-    }
+    delete _extraProperties->layout();
+    
     if (QLayout * lay = Rocs::DSPluginManager::instance()->dataTypeExtraProperties(g, _extraProperties)){
         _extraProperties->setLayout(lay);
     }
 
     DataTypeDocument *gDocument = qobject_cast<DataTypeDocument*>(g->parent());
-    connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addGraph(QString)));
+    connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataType(QString)));
     connect(this, SIGNAL(removeGraph()), g, SLOT(remove()));
 
-    connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setEdgeDefaultColor(QColor)));
+    connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
     connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDatumDefaultColor(QColor)));
 
-    connect( this, SIGNAL( edgeColorsChanged(QString)),      g, SLOT(setEdgesColor(QString)));
+    connect( this, SIGNAL( pointerColorsChanged(QString)),      g, SLOT(setPointersColor(QString)));
     connect( this, SIGNAL( datumColorsChanged(QString)),      g, SLOT(setDatumsColor(QString)));
-    connect( this, SIGNAL( edgeDefaultColorSetted(QString)), g, SLOT(setEdgeDefaultColor(QString)));
+    connect( this, SIGNAL( pointerDefaultColorSetted(QString)), g, SLOT(setPointerDefaultColor(QString)));
     connect( this, SIGNAL( datumDefaultColorSetted(QString)), g, SLOT(setDatumDefaultColor(QString)));
 
 
-    connect( _showEdgeNames,  SIGNAL(toggled(bool)), g, SLOT(setEdgeNameVisibility(bool)  ));
-    connect( _showEdgeValues, SIGNAL(toggled(bool)), g, SLOT(setEdgeValueVisibility(bool) ));
+    connect( _showEdgeNames,  SIGNAL(toggled(bool)), g, SLOT(setPointerNameVisibility(bool)));
+    connect( _showEdgeValues, SIGNAL(toggled(bool)), g, SLOT(setPointerValueVisibility(bool)));
     connect( _showNodeNames,  SIGNAL(toggled(bool)), g, SLOT(setDatumNameVisibility(bool)  ));
     connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setDatumValueVisibility(bool) ));
 

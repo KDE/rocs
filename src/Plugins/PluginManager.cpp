@@ -93,15 +93,21 @@ void PluginManager::loadPlugins() {
 }
 
 bool PluginManager::loadToolPlugin(QString name){
+    kDebug() << "Loading Tools Plugins ++++";
     KPluginInfo kpi =  _d->PluginInfoFromName(name);
+    
     if (kpi.isValid()){
+	kDebug() << "##### kpi is valid";
 	QString error;
+	
 	ToolsPluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<ToolsPluginInterface>( QString::fromLatin1( "Rocs/ToolPlugin" ), QString::fromLatin1( "[Name]=='%1'" ).arg( name ), this, QVariantList(), &error );
+	
 	if (plugin ){
 	    _d->toolsPluginsMap.insert(kpi, plugin);
 	    kpi.setPluginEnabled(true);
 	    return true;
 	}
+	
 	else {
 	  kDebug() << "error loading plugin: " << name << error;
 	}

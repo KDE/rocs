@@ -91,6 +91,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     kDebug() << "Creating Thread";
     startThreadDocument();
+    
     if (Rocs::DSPluginManager::instance()->listOfDS().count() == 0){
       KMessageBox::detailedError(this,
                                  i18n("No Data Structure plugins found in the system. Exiting."),
@@ -105,7 +106,6 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
     connect (_tDocument->documentManager(), SIGNAL(activateDocument(DataTypeDocument*)),this, SLOT(setupDocumentsList()));
     connect (_tDocument->documentManager(), SIGNAL(documentRemoved(DataTypeDocument*)),this, SLOT(setupDocumentsList()));
-
 
     setupWidgets();
     setupActions();
@@ -433,8 +433,8 @@ void MainWindow::setActiveDataTypeDocument ( DataTypeDocument* d )
     connect ( this, SIGNAL(runTool( Rocs::ToolsPluginInterface*,DataTypeDocument*)),
              _tDocument->engine(), SLOT (runTool(Rocs::ToolsPluginInterface*,DataTypeDocument*)),Qt::UniqueConnection);
 
-    connect(activeDocument(), SIGNAL(activeGraphChanged(DataType*)), this, SLOT(setActiveGraph(DataType*)),Qt::UniqueConnection);
-    connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addGraph(QString)),Qt::UniqueConnection);
+    connect(activeDocument(), SIGNAL(activeDataTypeChanged(DataType*)), this, SLOT(setActiveGraph(DataType*)),Qt::UniqueConnection);
+    connect(_GraphLayers, SIGNAL(createGraph(QString)), _tDocument->document(), SLOT(addDataType(QString)),Qt::UniqueConnection);
 
     connect(this, SIGNAL(startEvaluation()),    _tDocument->engine(), SLOT(start()),Qt::UniqueConnection);
 

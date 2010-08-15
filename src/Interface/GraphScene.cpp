@@ -101,7 +101,8 @@ void GraphScene::setActiveDataTypeDocument(DataTypeDocument *gd) {
         connectGraphSignals(_graphDocument->at(i));
         kDebug() << "Graph Updated.";
     }
-    connect( _graphDocument, SIGNAL(graphCreated(DataType*)), this, SLOT(connectGraphSignals(DataType*)),Qt::UniqueConnection);
+    
+    connect( _graphDocument, SIGNAL(dataTypeCreated(DataType*)), this, SLOT(connectGraphSignals(DataType*)),Qt::UniqueConnection);
     kDebug() << "Graph Document Set" << _graphDocument -> name();
     createItems();
 }

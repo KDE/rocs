@@ -36,7 +36,7 @@ void GraphLayers::populate() {
     }
 
     DataTypeDocument *gd = _mainWindow->activeDocument();
-    connect(gd, SIGNAL(graphCreated(DataType*)), this, SLOT(addGraph(DataType*)),Qt::UniqueConnection);
+    connect(gd, SIGNAL(dataTypeCreated(DataType*)), this, SLOT(addGraph(DataType*)),Qt::UniqueConnection);
 
     int total = gd->count();
     for (int i = 0; i < total; ++i) {

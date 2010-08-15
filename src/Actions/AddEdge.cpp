@@ -95,5 +95,5 @@ void AddEdgeAction::executeRelease(QPointF pos) {
 void AddEdgeAction::setActiveGraph(DataType* graph){
     if (_graph) disconnect(this, 0, _graph, 0);
     _graph = graph;
-    connect(this, SIGNAL(addEdge(Datum*,Datum*)), _graph, SLOT(addEdge(Datum*,Datum*)));
+    connect(this, SIGNAL(addEdge(Datum*,Datum*)), _graph, SLOT(addPointer(Datum*,Datum*)));
 }

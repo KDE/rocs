@@ -133,7 +133,7 @@
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="KPushButton" name="_graphNodeColorApplyNow">
+       <widget class="KPushButton" name="_graphDatumColorApplyNow">
         <property name="toolTip">
          <string>Apply the current color to all nodes</string>
         </property>
@@ -169,7 +169,7 @@
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="KPushButton" name="_graphEdgeColorApplyNow">
+       <widget class="KPushButton" name="_graphDatumColorApplyNow_2">
         <property name="toolTip">
          <string>Apply the current color to all edges</string>
         </property>
@@ -267,7 +267,6 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <zorder></zorder>
       </widget>
      </item>
      <item row="4" column="1">

@@ -57,6 +57,6 @@ void AddNodeAction::executePress(QPointF pos) {
 void AddNodeAction::setActiveGraph(DataType* graph){
     if (_graph) disconnect(this, 0, _graph, 0);
     _graph = graph;
-    connect(this, SIGNAL(addNode(QString,QPointF)), _graph, SLOT(addNode(QString,QPointF)));
+    connect(this, SIGNAL(addNode(QString,QPointF)), _graph, SLOT(addDatum(QString,QPointF)));
 }
 

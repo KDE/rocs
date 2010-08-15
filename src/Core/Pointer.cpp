@@ -53,18 +53,18 @@ Pointer::Pointer(DataType *parent, Datum *from, Datum *to) :
 
 Pointer::~Pointer() {
     if (_from == _to) {
+	kDebug() << "Removing from a loop node";
         _from->removePointer(this, Datum::Self);
     }
     else {
+	kDebug() << "Removing from not a loop node.";
         _from->removePointer(this, Datum::Out);
         _to->removePointer(this, Datum::In);
     }
-    _from = 0;
-    _to = 0;
-    emit removed();
 }
 
 void Pointer::remove() {
+      emit removed();
     _graph->remove(this);
 }
 
