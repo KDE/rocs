@@ -59,7 +59,9 @@ Pointer::~Pointer() {
     else {
 	kDebug() << "Removing from not a loop node.";
         _from->removePointer(this, Datum::Out);
+	kDebug() << "Removed from the from node";
         _to->removePointer(this, Datum::In);
+	kDebug() << "Removed from the to node";
     }
 }
 

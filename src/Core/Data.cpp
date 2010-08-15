@@ -163,7 +163,8 @@ void Datum::removePointer(Pointer *e, int pointerList) {
 }
 
 void Datum::removePointer(Pointer* e, PointerList &list) {
-      if (list.contains(e)) list.removeOne(e);
+      if (list.contains(e)) 
+	list.removeOne(e);
 }
 
 PointerList Datum::pointers(Datum *n) {
