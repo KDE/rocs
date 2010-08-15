@@ -11,7 +11,7 @@ class QGraphicsItem;
 class DataType;
 class Datum;
 class Pointer;
-class DSPluginManager;
+
 class DataTypeDocument;
 
 // KClasses
@@ -20,10 +20,12 @@ class KComponentData;
 #include "rocslib_export.h"
 
 namespace Rocs{
+class DSPluginManager;
+
 class ROCSLIB_EXPORT DSPluginInterface: public QObject
 {
   Q_OBJECT
-  
+
 public:
   DSPluginInterface(const KComponentData &instance, QObject* parent);
 
@@ -42,7 +44,7 @@ public:
 
 };
 
-  
+
 };
 
 #endif // DSPLUGININTERFACE_H

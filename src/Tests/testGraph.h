@@ -47,7 +47,7 @@ private slots:
     void testQtScript();
 
 private:
-    GraphDocument _graphDocument;
+    DataTypeDocument _graphDocument;
     QVariantList Graphs;
 };
 

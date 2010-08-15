@@ -24,21 +24,22 @@
 #include <QtTest>
 #include <DSPluginManager.h>
 #include <graphDocument.h>
+#include <DataType.h>
 #include <DSPluginInterface.h>
 
 using namespace Rocs;
 
 void TestDataStructure::inittestcase()
 {
-  if (DSPluginManager::New()->pluginsList().count() == 0){
+  if (DSPluginManager::instance()->pluginsList().count() == 0){
     QFAIL("No plugin of DS, no way to continue!");
   }
 }
 
 void TestDataStructure::create(){
-    DSPluginManager::New()->changeActiveDS(DSPluginManager::New()->pluginsList().at(1)->name());
-    GraphDocument doc("teste");
-    DataType * graph = doc.addGraph();
+    DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(1)->name());
+    DataTypeDocument doc("teste");
+    DataType * graph = doc.addDataType();
     QCOMPARE (graph->metaObject()->className(), "Rocs::GraphStructure");
 }
 
@@ -46,34 +47,34 @@ void TestDataStructure::create(){
 
 
 void TestDataStructure::changeAndCreate(){
-  DSPluginManager::New()->changeActiveDS(DSPluginManager::New()->pluginsList().at(0)->name());
-  GraphDocument doc("teste");
-  DataType * graph = doc.addGraph();
+  DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(0)->name());
+  DataTypeDocument doc("teste");
+  DataType * graph = doc.addDataType();
   QCOMPARE (graph->metaObject()->className(), "Rocs::ListStructure");
 
 }
 
 void TestDataStructure::convert()
 {
-    DSPluginManager::New()->changeActiveDS(DSPluginManager::New()->pluginsList().at(1)->name());
-    GraphDocument doc("teste");
-    QSignalSpy spy(DSPluginManager::New(), SIGNAL(changingDS(QString)));
-//     connect(DSPluginManager::New(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
+    DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(1)->name());
+    DataTypeDocument doc("teste");
+    QSignalSpy spy(DSPluginManager::instance(), SIGNAL(changingDS(QString)));
+//     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
-    DataType * graph = doc.addGraph("Graph1");
-    graph->addNode("node1");
-    graph->addNode("node2");
-    graph->addEdge("node1", "node2");
-    graph = doc.addGraph("Graph2");
+    DataType * graph = doc.addDataType("Graph1");
+    graph->addDatum("node1");
+    graph->addDatum("node2");
+    graph->addPointer("node1", "node2");
+    graph = doc.addDataType("Graph2");
     graph->setDirected(true);
-    graph->addNode("node1");
-    graph->addNode("node2");
-    graph->addEdge("node1", "node2");
+    graph->addDatum("node1");
+    graph->addDatum("node2");
+    graph->addPointer("node1", "node2");
 
     //Change plugin.
-    DSPluginManager::New()->changeActiveDS(DSPluginManager::New()->pluginsList().at(0)->name());
-    doc.convertToDS(DSPluginManager::New()->actualPlugin());
-    GraphDocument * newDoc = &doc;
+    DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(0)->name());
+    doc.convertToDS(DSPluginManager::instance()->actualPlugin());
+    DataTypeDocument * newDoc = &doc;
 
     QCOMPARE(newDoc->count(), 2);
     QVERIFY(newDoc->at(0)->directed());
@@ -82,12 +83,12 @@ void TestDataStructure::convert()
     QCOMPARE(newDoc->at(1)->metaObject()->className(), "Rocs::ListStructure");
 
     graph =  newDoc->at(0);
-    QCOMPARE (graph->nodes().count(), 2);
-    QCOMPARE (graph->edges().count(), 1);
+    QCOMPARE (graph->data().count(), 2);
+    QCOMPARE (graph->pointers().count(), 1);
 
     graph =  newDoc->at(1);
-    QCOMPARE (graph->nodes().count(), 2);
-    QCOMPARE (graph->edges().count(), 1);
+    QCOMPARE (graph->data().count(), 2);
+    QCOMPARE (graph->pointers().count(), 1);
 
 }
 
