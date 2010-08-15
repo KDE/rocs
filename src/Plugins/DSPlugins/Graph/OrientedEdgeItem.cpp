@@ -87,6 +87,7 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
 }
 
 QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
+    if ( !_edge ) return QPainterPath();
     QPainterPath p;
     DataType *g = qobject_cast<DataType*>(_edge->parent());
     qreal size = 30 + (20 * _index);
@@ -97,7 +98,9 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
     return p;
 }
 
-QPainterPath OrientedEdgeItem::createCurves() const {
+QPainterPath OrientedEdgeItem::createCurves() const {  
+    if ( !_edge ) return QPainterPath();
+    
     if (_edge->from() == 0 || _edge->to() == 0){
 	_edge->self_remove();
         return QPainterPath();
@@ -177,6 +180,8 @@ void OrientedEdgeItem::updatePos() {
 //     if (gScene->hideEdges()) {
 //         gScene->updateAfter(this);
 //     }
+    if( ! _edge ) remove();
+    
     QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
     qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
     if (_edge->from() != _edge->to() && size < 20  ) {

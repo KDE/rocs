@@ -34,7 +34,7 @@ class NodeItem : public QGraphicsSvgItem{
     void updatePos();
     void updateSize();
   private:
-    Datum *_node;
+    QPointer<Datum> _node;
     QString _iconPackage;
     QString _element;
     QGraphicsSimpleTextItem *_name;

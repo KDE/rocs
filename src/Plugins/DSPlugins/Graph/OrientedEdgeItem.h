@@ -22,6 +22,8 @@
 #define ORIENTEDEDGEITEM_H
 
 #include <QGraphicsLineItem>
+#include <QPointer>
+#include <Pointer.h>
 
 class QGraphicsSceneMouseEvent;
 class Pointer;
@@ -72,7 +74,7 @@ public slots:
     void updatePos();
     void updateAttributes();
 private:
-    Pointer *_edge;
+    QPointer<Pointer> _edge;
     int _index;
     bool _loop;
     QPainterPath createCurves() const;
