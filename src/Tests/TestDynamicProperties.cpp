@@ -57,6 +57,7 @@ void TestDynamicProperties::addEdgeDynamicProperty() {
     g->setDirected ( true );
     Datum *n = g->addDatum ( "Node" );
     Pointer *e = g->addPointer ( n, n );
+    QVERIFY2 (e != 0, "Pointer not created!");
     QByteArray property = "newProperty";
     e->addDynamicProperty ( property, QVariant ( 0 ) );
     QVERIFY2 ( e->property ( property ) != QVariant::Invalid, "Property not added." );
@@ -95,16 +96,20 @@ void TestDynamicProperties::addToAllNodes() {
 void TestDynamicProperties::addToAllEdges() {
     DataTypeDocument d("unnamed");
     DataType *g = d.addDataType("A graph");
-    g->setDirected ( true );
-    Datum *n = g->addDatum ( "Node" );
-    Pointer *e = g->addPointer ( n,n );
-    Pointer *e2 = g->addPointer ( n,n );
+//     g->setDirected ( true );
+    Datum *n1 = g->addDatum ( "Node" );
+    Datum *n2 = g->addDatum ( "Node" );
+    Datum *n3 = g->addDatum ( "Node" );
+    Pointer *e = g->addPointer ( n1,n2 );
+    Pointer *e2 = g->addPointer ( n2,n3 );
+    Pointer *e3 = g->addPointer ( n1,n3 );
+
     QByteArray property = "newProperty";
     g->addPointersDynamicProperty ( property, QVariant ( 0 ) );
     QVERIFY2 ( e->property ( property ) != QVariant::Invalid, "Property not added." );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( e, property ) == Global, "Property isn't Global. (by Edge 1)" );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( e2, property ) == Global, "Property isn't Global. (by Edge 2)" );
-
+    QVERIFY2 ( DynamicPropertiesList::New()->type ( e3, property ) == Global, "Property isn't Global. (by Edge 3)" );
 }
 
 void TestDynamicProperties::removeNodeDynamicProperty() {

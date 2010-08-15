@@ -88,7 +88,7 @@ public:
     }
 
     /*! remove this datum from the graph */
-    void remove();
+    void remove(Datum* node = 0);
 
     void emitChangedSignal(){ emit changed(); }
 
@@ -181,23 +181,23 @@ public  slots:
         _style = s;
 	emit changed();
     }
-    
+
     /** Add a property to this pointer
     * @param property Name of property
     * @param value Value of the property. value shoud be different of QVariant::Invalid.
     */
     void addDynamicProperty(QString Property, QVariant value);
-    
+
     /** Remove property arg1 from this pointer. If property arg1 don't exist in this pointer, nothing is made.
     * @param arg1 name os property to remove
     */
     void removeDynamicProperty(QString property);
-    
+
     bool showName();
     bool showValue();
     void hideName(bool b);
     void hideValue(bool b);
-    
+
 #ifdef USING_QTSCRIPT
     /*! this method can be used inside of the script interface.
     \return the first datum of this pointer.

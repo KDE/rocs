@@ -21,9 +21,8 @@
 
 #include <QObject>
 #include <QVariant>
-#include "graphDocument.h"
 
-class Graph;
+class DataTypeDocument;
 
 class GraphTests : public QObject {
     Q_OBJECT
@@ -32,8 +31,9 @@ public:
     void createPentagon(bool directed = false);
     void create3x3(bool directed = false);
 private slots:
-    void init();
-
+    void cleanup();
+    void initTestCase();
+    void cleanupTestCase();
     void createSimpleGraph();
     void manipulateSimpleGraph();
     void createDirectedGraph();
@@ -47,8 +47,8 @@ private slots:
     void testQtScript();
 
 private:
-    DataTypeDocument _graphDocument;
-    QVariantList Graphs;
+    DataTypeDocument *_graphDocument;
+//     QVariantList Graphs;
 };
 
 #endif
