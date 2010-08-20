@@ -54,7 +54,7 @@ set( rocslib_LIB_HDRS
   Core/qtScriptBackend.h
   Core/threadDocument.h
   Core/rocslib_export.h
-
+  Core/rocs_typedefs.h
   Plugins/FilePluginInterface.h
   Plugins/PluginManager.h
   Plugins/ToolsPluginInterface.h
