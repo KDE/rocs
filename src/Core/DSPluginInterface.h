@@ -45,6 +45,6 @@ public:
 };
 
 
-};
+}
 
 #endif // DSPLUGININTERFACE_H
