@@ -24,93 +24,175 @@
 #include "DynamicPropertiesList.h"
 #include <KDebug>
 
-Pointer::Pointer(DataType *parent, Datum *from, Datum *to) :
-        QObject(parent),
-        _from(from),
-        _to(to)
-{
-  _graph = parent;
-    _color =_graph->pointerDefaultColor();
+class PointerPrivate{
+public:
+    PointerPrivate(){}
+    Datum *from;
+    Datum *to;
+    int relativeIndex;
 
+    QString value;
+    QString name;
+    QString color;
+
+    bool showName;
+    bool showValue;
+
+    QString style;
+    double width;
+
+     DataType *dataType;
+
+    QScriptValue scriptvalue;
+    QScriptEngine *engine;
+};
+
+Pointer::Pointer(DataType *parent, Datum *from, Datum *to) :
+        QObject(parent), d(new PointerPrivate())
+{
+    d->from     = from;
+    d->to       = to;
+    d->dataType = parent;
+    d->color    = d->dataType->pointerDefaultColor();
+    
+    connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
+    connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
+    
     if ( from == to ) {
-        connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
         from -> addSelfPointer(this);
     }
     else {
-        connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
         from -> addOutPointer(this);
-        connect(to, SIGNAL(changed()), this, SIGNAL(changed()));
         to -> addInPointer(this);
+        connect(to, SIGNAL(changed()), this, SIGNAL(changed()));
     }
-    connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
 
-    _relativeIndex = _to -> pointers(_from).size();
-    _showName = true;
-    _showValue = true;
-    _style = "solid";
-    _width = 1;
+    d->relativeIndex  = d->to-> pointers(d->from).size();
+    d->showName       = true;
+    d->showValue      = true;
+    d->style          = "solid";
+    d->width          = 1;
 }
 
 Pointer::~Pointer() {
-
-    if (_from == _to) {
-        if (_from != 0){
+    if (d->from == d->to) {
+        if (d->from != 0){
           kDebug() << "Removing from a loop node";
-          _from->removePointer(this, Datum::Self);
+          d->from->removePointer(this, Datum::Self);
         }
     }
     else {
-      kDebug() << "Removing from not a loop node.";
-      if (_from != 0){
-        _from->removePointer(this, Datum::Out);
-        kDebug() << "Removed from the from node";
-      }
-      if (_to != 0){
-        _to->removePointer(this, Datum::In);
-        kDebug() << "Removed from the to node";
-      }
-
+        kDebug() << "Removing from not a loop node.";
+        if (d->from != 0){
+          d->from->removePointer(this, Datum::Out);
+          kDebug() << "Removed from the from node";
+        }
+        if (d->to != 0){
+          d->to->removePointer(this, Datum::In);
+          kDebug() << "Removed from the to node";
+        }
     }
+    delete d;
+}
+
+int Pointer::relativeIndex() const{
+    return d->relativeIndex;
+}
+
+void Pointer::emitChangedSignal(){
+    emit changed(); 
+}
+
+DataType *Pointer::dataType() const{
+    return d->dataType; 
+}
+
+Datum *Pointer::from() const{
+    return d->from;
+}
+
+Datum *Pointer::to() const{
+    return d->to;
+}
+
+const QString& Pointer::value() const{
+    return d->value;
+}
+
+const QString& Pointer::name() const{
+    return d->name;
 }
 
 void Pointer::remove(Datum * node) {
     if (node){
-        if (node == _from){
-          _from = 0;
+        if (node == d->from){
+          d->from = 0;
         }
-        if (node == _to){
-          _to = 0;
+        if (node == d->to){
+          d->to = 0;
         }
     }
       emit removed();
-    _graph->remove(this);
+    d->dataType->remove(this);
 }
 
 
 bool Pointer::showName() {
-    return _showName;
+    return d->showName;
 }
 
 bool Pointer::showValue() {
-    return _showValue;
+    return d->showValue;
 }
 
 void Pointer::hideName(bool b) {
-    _showName = b;
+    d->showName = b;
     emit changed();
-    kDebug() << "Hide Name: " << b;
 }
 
 void Pointer::hideValue(bool b) {
-    _showValue = b;
+    d->showValue = b;
     emit changed();
-    kDebug() << "Hide Value: " << b;
 }
 
+void Pointer::setValue(const QString& value){
+    d->value = value;
+    emit changed();  
+}
+
+void Pointer::setName(const QString& name){
+    d->name = name;
+    emit changed();
+}
+
+void Pointer::setColor(const QString& color){
+    d->color = color;
+    emit changed();
+}
+
+const QString& Pointer::color() const{
+     return d->color;
+}
+
+qreal Pointer::width () const {
+    return d->width;
+}
+void Pointer::setWidth(double w) {
+    d->width = w;
+    emit changed();
+}
+
+const QString& Pointer::style() const {
+    return d->style;
+}
+void Pointer::setStyle(const QString& s) {
+    d->style = s;
+    emit changed();
+}
+    
 void Pointer::addDynamicProperty(QString property, QVariant value){
   if (!setProperty(property.toUtf8(), value)  &&   value.isValid()){ //if is addeding and NOT is a Q_PROPERTY
       DynamicPropertiesList::New()->addProperty(this, property);
-
   }
 }
 
@@ -119,23 +201,22 @@ void Pointer::removeDynamicProperty(QString property){
   DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
-
 #ifdef USING_QTSCRIPT
 
 QScriptValue Pointer::start() {
-    return _from->scriptValue();
+    return d->from->scriptValue();
 }
 QScriptValue  Pointer::end() {
-    return _to->scriptValue();
+    return d->to->scriptValue();
 }
 
 void Pointer::setEngine(	QScriptEngine *engine ) {
-    _engine = engine;
-    _scriptvalue = _engine->newQObject(this);
+    d->engine = engine;
+    d->scriptvalue = d->engine->newQObject(this);
 }
 
 QScriptValue Pointer::scriptValue() const {
-    return  _scriptvalue;
+    return  d->scriptvalue;
 }
 void Pointer::self_remove() {
     remove();

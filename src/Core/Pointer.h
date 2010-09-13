@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  ***************************************************************************/
 
-#ifndef EDGE_H
-#define EDGE_H
+#ifndef POINTER_H
+#define POINTER_H
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -36,6 +36,7 @@
 #include "rocslib_export.h"
 
 class Datum;
+class PointerPrivate;
 
 /**
 * \class Pointer
@@ -83,16 +84,17 @@ public:
 
     \return the relativeIndex identifier.
     */
-    int relativeIndex() const {
-        return _relativeIndex;
-    }
+    int relativeIndex() const;
 
     /*! remove this datum from the graph */
     void remove(Datum* node = 0);
 
-    void emitChangedSignal(){ emit changed(); }
+    /*! forces emitting a signal that will update this pointer on screen */
+    void emitChangedSignal();
 
-    DataType *dataType(){return _graph; }
+    /*! returns the datastructure that owns this pointer. */
+    DataType *dataType() const;
+    
 #ifdef USING_QTSCRIPT
     /*! if the qtscript is enabled for this rocs,
       this method returns the self-referenced script value for this pointer.
@@ -110,77 +112,47 @@ public  slots:
     /*! return the first datum of this pointer
       \return Datum* pointer for the first datum of this pointer.
     */
-    Datum* from() const {
-        return _from;
-    }
+    Datum* from() const;
 
     /*! return the second datum of this pointer
       \return Datum* pointer for the second datum of this pointer.
     */
-    Datum* to() const {
-        return _to;
-    }
+    Datum* to() const ;
 
     /*! return the value of this pointer
     \return the value of the pointer.
     */
-    const QString& value() const {
-        return _value;
-    }
+    const QString& value() const;
 
     /*! sets the value attribute of this pointer
-    \p s the new value of this pointer.
-    */
-    void setValue (const QString& s) {
-        _value = s;
-	emit changed();
-    }
+    \p s the new value of this pointer. */
+    void setValue (const QString& s);
 
     /*! returns the name attribute of the pointer.
       \return the name of the pointer.
     */
-    const QString& name() const {
-        return _name;
-    }
-
+    const QString& name() const;
+    
     /*! sets the name attribute of the pointer
       \p s the new name of this pointer
     */
-    void setName (const QString& s) {
-        _name = s;
-	emit changed();
-    }
+    void setName (const QString& s) ;
 
     /*! gets the color attribute of the pointer
       \return the string value of the pointer.
     */
-    const QString color() const {
-        return _color;
-    }
+    const QString& color() const ;
 
     /*! sets the color attribute of the pointer
       \p s the new color of the pointer in the format "#000000" or by it's english name ("red" for example)
     */
-    void setColor(const QString& s) {
-        _color = s;
-	emit changed();
-    }
+    void setColor(const QString& s);
 
-    qreal width () const {
-        return _width;
-    }
-    void setWidth(double w) {
-        _width = w;
-        emit changed();
-    }
+    qreal width () const;
+    void setWidth(double w);
 
-    const QString& style() const {
-        return _style;
-    }
-    void setStyle(const QString& s) {
-        _style = s;
-	emit changed();
-    }
+    const QString& style() const;
+    void setStyle(const QString& s);
 
     /** Add a property to this pointer
     * @param property Name of property
@@ -217,38 +189,7 @@ public  slots:
 #endif
 
 private:
-    /*! the first datum connected with this pointer */
-    Datum *_from;
-
-    /*! the second datum connected with this pointer */
-    Datum *_to;
-
-    /*! the intex relative to the connected datums if the graph is multi-pointer-oriented. */
-    int _relativeIndex;
-
-    /*! the value of the datum */
-    QString _value;
-
-    /*! the value of the name */
-    QString _name;
-
-    /*! the value of the color */
-    QString _color;
-
-    bool _showName;
-    bool _showValue;
-
-    QString _style;
-    double _width;
-
-     DataType *_graph;
-#ifdef USING_QTSCRIPT
-    /*! if the script interface is Qt-Script, this will hold the scriptValue self-reference. */
-    QScriptValue _scriptvalue;
-
-    /*! if the script interface is Qt-Script, this will hold  a pointer to the engine */
-    QScriptEngine *_engine;
-#endif
+  PointerPrivate *d;
 
 signals:
     /*! emmited when this pointer is removed. */
