@@ -123,15 +123,22 @@ Datum* DataType::addDatum(QString name) {
 
     Datum  *n = new Datum(this);
     n->setName(name);
-    _data.append( n );
-    emit datumCreated(n);
-    connect (n, SIGNAL(changed()), this, SIGNAL(changed()));
-    return n;
+    return addDatum(n);
 }
 
-void DataType::addDatum(QString name, QPointF pos){
-    Datum *datum = addDatum(name);
-    datum->setPos(pos.x(), pos.y());
+Datum* DataType::addDatum(Datum *datum){
+    _data.append( datum );
+    emit datumCreated( datum );
+    connect ( datum, SIGNAL(changed()), this, SIGNAL(changed()));
+    return datum;
+}
+
+Datum* DataType::addDatum(QString name, QPointF pos){
+    if (Datum *datum = addDatum(name)){
+        datum->setPos(pos.x(), pos.y());
+        return datum;
+    }
+    return 0;
 }
 
 Pointer* DataType::addPointer(Datum* from,Datum* to) {

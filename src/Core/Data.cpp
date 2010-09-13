@@ -25,86 +25,122 @@
 #include <kstandarddirs.h>
 
 #include "DynamicPropertiesList.h"
+class DatumPrivate{
+public:
+  DatumPrivate(Datum *classPtr) : q(classPtr){}
+  
+    PointerList _in_pointers;
+    PointerList _out_pointers;
+    PointerList _self_pointers;
 
+    //! fixed properties
+    qreal _x;
+    qreal _y;
+    qreal _width;
 
-Datum::Datum(DataType *parent) : QObject(parent) {
-    _graph = parent;
-    _x = 0;
-    _y = 0;
-    _width = 0.5;
-    _showName = true;
-    _showValue = true;
-    _begin = false;
-    _end = false;
-    _color = _graph->datumDefaultColor();
-    _changing = false;
-    _value = 0;
-    _icon = "rocs_default";
-    _iconpackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
-    kDebug() << "Node successfully created" << _iconpackage;
+    bool _begin;
+    bool _end;
+    bool _changing;
+    bool _showName;
+    bool _showValue;
+
+    DataType *_dataType;
+
+    QString _name;
+    QString _color;
+    QString _iconpackage;
+    QString _icon;
+
+    QVariant _value;
+    QScriptValue _scriptvalue;
+    QScriptEngine *_engine;
+    
+    void empty(PointerList &list) {
+        for(int i = 0; i < list.size(); ++i){
+            list.at(i)->remove(q);
+        }
+    }
+private:
+  Datum *q;
+};
+
+DataType *Datum::dataType() const{ return d->_dataType; }
+
+Datum::Datum(DataType *parent) : QObject(parent), d(new DatumPrivate(this)) {
+    d->_dataType = parent;
+    d->_x = 0;
+    d->_y = 0;
+    d->_width = 0.5;
+    d->_showName = true;
+    d->_showValue = true;
+    d->_begin = false;
+    d->_end = false;
+    d->_color = d->_dataType->datumDefaultColor();
+    d->_changing = false;
+    d->_value = 0;
+    d->_icon = "rocs_default";
+    d->_iconpackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
+    kDebug() << "Node successfully created" << d->_iconpackage;
 }
 
 Datum::~Datum() {
     emit removed();
-    empty(_in_pointers);
-    empty(_out_pointers);
-    empty(_self_pointers);
-
-}
-
-void Datum::empty(PointerList &list) {
-    foreach(Pointer *e, list ) {
-        e->remove(this);
-    }
+    d->empty(d->_in_pointers);
+    d->empty(d->_out_pointers);
+    d->empty(d->_self_pointers);
 }
 
 bool Datum::showName() {
-    return _showName;
+    return d->_showName;
 }
 
 bool Datum::showValue() {
-    return _showValue;
+    return d->_showValue;
 }
 
 void Datum::hideName(bool b) {
-    _showName = b;
+    d->_showName = b;
     emit changed();
 }
 
 void Datum::hideValue(bool b) {
-    _showValue = b;
+    d->_showValue = b;
     emit changed();
 }
 
 void Datum::setIcon(const QString& s){
-    _icon = s;
+    d->_icon = s;
     emit changed();
 }
 
 void Datum::setIconPackage(const QString& s){
-    _iconpackage = s;
+   d-> _iconpackage = s;
 }
 
-const QString& Datum::icon() const { return _icon; }
+const QString& Datum::icon() const {
+    return d->_icon; 
+}
 
-const QString& Datum::iconPackage() const { return _iconpackage; }
+const QString& Datum::iconPackage() const { 
+    return d-> _iconpackage; 
+}
 
 DataList Datum::adjacent_data() const
 {
     QList<Datum*> adjacent;
 
-    foreach(Pointer *e, _out_pointers) {
+    foreach(Pointer *e, d->_out_pointers) {
         adjacent.append( e->to()  );
     }
 
-    if ( _graph -> directed() ) {
-        foreach(Pointer *e, _self_pointers) {
+    if ( d->_dataType -> directed() ) {
+        foreach(Pointer *e, d->_self_pointers) {
             adjacent.append( e->to() );
         }
         return adjacent;
     }
 
-    foreach(Pointer *e, _in_pointers) {
+    foreach(Pointer *e, d->_in_pointers) {
         adjacent.append( e->from() );
     }
     return adjacent;
@@ -115,50 +151,50 @@ PointerList Datum::adjacent_pointers() const
 {
     PointerList adjacent;
 
-    adjacent << _out_pointers;
+    adjacent << d->_out_pointers;
 
-    if ( _graph -> directed() ) {
-        adjacent << _self_pointers;
+    if ( d->_dataType -> directed() ) {
+        adjacent << d-> _self_pointers;
     }else{
-      adjacent << _in_pointers;
+      adjacent << d->_in_pointers;
     }
 
     return adjacent;
 }
 
 void Datum::addInPointer(Pointer *e) {
-    _in_pointers.append( e );
+    d-> _in_pointers.append( e );
 }
 
 void Datum::addOutPointer(Pointer *e) {
-    _out_pointers.append( e  );
+    d->_out_pointers.append( e  );
 }
 
 void Datum::addSelfPointer(Pointer *e) {
-    _self_pointers.append( e );
+    d->_self_pointers.append( e );
 }
 
 PointerList Datum::in_pointers() const {
-    return _in_pointers;
+    return d->_in_pointers;
 }
 
 PointerList Datum::out_pointers() const {
-    return _out_pointers;
+    return d->_out_pointers;
 }
 
 PointerList Datum::self_pointers() const {
-    return _self_pointers;
+    return d->_self_pointers;
 }
 
 Pointer* Datum::addPointer(Datum* to) {
-    return _graph->addPointer(this, to);
+    return d->_dataType->addPointer(this, to);
 }
 
 void Datum::removePointer(Pointer *e, int pointerList) {
     switch (pointerList) {
-    case In  : removePointer(e, _in_pointers);    break;
-    case Out : removePointer(e, _out_pointers);   break;
-    case Self: removePointer(e, _self_pointers);  break;
+    case In  : removePointer(e, d->_in_pointers);    break;
+    case Out : removePointer(e, d->_out_pointers);   break;
+    case Self: removePointer(e, d->_self_pointers);  break;
     }
 }
 
@@ -170,14 +206,14 @@ void Datum::removePointer(Pointer* e, PointerList &list) {
 PointerList Datum::pointers(Datum *n) {
     PointerList list;
     if (n == this) {
-        return _self_pointers;
+        return d->_self_pointers;
     }
-    foreach (Pointer *tmp, _out_pointers) {
+    foreach (Pointer *tmp, d->_out_pointers) {
         if (tmp->to() == n) {
             list.append(tmp);
         }
     }
-    foreach(Pointer *tmp, _in_pointers) {
+    foreach(Pointer *tmp, d->_in_pointers) {
         if (tmp->from() == n) {
             list.append(tmp);
         }
@@ -186,139 +222,139 @@ PointerList Datum::pointers(Datum *n) {
 }
 
 void Datum::remove() {
-  _graph->remove(this);
+  d->_dataType->remove(this);
 }
 
 //! Properties:
 void Datum::setX(int x) {
-    _x = x;
-    if (! _changing) {
+    d->_x = x;
+    if (! d->_changing) {
 	emit changed();
     }
 }
 
 qreal Datum::x() const {
-    return _x;
+    return d->_x;
 }
 
 void Datum::setY(int y) {
-    _y  = y;
-    if (! _changing) {
+    d->_y  = y;
+    if (! d->_changing) {
 	emit changed();
     }
 }
 
 void Datum::setWidth(qreal w) {
-    _width = w;
-    if (! _changing) {
+    d->_width = w;
+    if (! d->_changing) {
 	emit changed();
         kDebug() << "Updating node drawing";
     }
 }
 
 void Datum::setPos(qreal x, qreal y) {
-    _x = x;
-    _y = y;
-    if (! _changing) {
+    d->_x = x;
+    d->_y = y;
+    if (! d->_changing) {
 	emit changed();
     }
 
 }
 
 qreal Datum::y() const {
-    return _y;
+    return d->_y;
 }
 
 qreal Datum::width() const {
-    return _width;
+    return d->_width;
 }
 
 void Datum::setColor(const QString& s) {
-    _color = s;
-    if (! _changing) {
+    d->_color = s;
+    if (! d->_changing) {
 	emit changed();
     }
 }
 
 const QString& Datum::color() const {
-    return _color;
+    return d->_color;
 }
 
 void Datum::setName(const QString& s) {
-    _name = s;
-    if (! _changing) {
+    d->_name = s;
+    if (! d->_changing) {
 	emit changed();
     }
 }
 
 const QString& Datum::name() const {
-    return _name;
+    return d->_name;
 }
 
 void Datum::setBegin(bool begin) {
     if (!begin) {
-        _begin = false;
-	if (_graph->begin() == this){
-	    _graph->setBegin(0);
+        d->_begin = false;
+	if (d->_dataType->begin() == this){
+	    d->_dataType->setBegin(0);
 	}
     }
-    else if (_graph->begin() == this) {
+    else if (d->_dataType->begin() == this) {
         return;
     }
-    else if( _graph->setBegin(this) ) {
-        _begin = true;
+    else if( d->_dataType->setBegin(this) ) {
+        d->_begin = true;
     }else{
-	return;
+        return;
     }
 
-    if (! _changing) {
+    if (! d->_changing) {
 	emit changed();
     }
 }
 
 void Datum::setEnd(bool end) {
-    _end = end;
+    d->_end = end;
 
     if (end) {
-        _graph->addEnd(this);
+        d->_dataType->addEnd(this);
     } else {
-        _graph->removeEnd(this);
+        d->_dataType->removeEnd(this);
     }
-    if (! _changing) {
+    if (! d->_changing) {
 	emit changed();
     }
 }
 
 bool Datum::begin() const {
-    return _begin;
+    return d->_begin;
 }
 
 bool Datum::end() const {
-    return _end;
+    return d->_end;
 }
 
 const QVariant Datum::value() const {
-    return _value;
+    return d->_value;
 }
 void  Datum::setValue(QVariant s) {
-    _value = s;
-    if (! _changing) {
+    d->_value = s;
+    if (! d->_changing) {
       emit changed();
     }
 }
 
 void Datum::setValue(const QString& c){
-    _value = c;
-    if (_changing){
+    d->_value = c;
+    if (d->_changing){
       emit changed();
     }
 }
 void Datum::startChange() {
-    _changing = true;
+    d->_changing = true;
 }
 
 void Datum::endChange() {
-    _changing = false;
+    d->_changing = false;
     emit changed();
 }
 
@@ -339,17 +375,17 @@ void Datum::self_remove() {
 }
 
 QScriptValue Datum::scriptValue() const {
-    return _scriptvalue;
+    return d->_scriptvalue;
 }
 
 void Datum::setEngine(	QScriptEngine *engine ) {
-    _engine = engine;
-    _scriptvalue = engine->newQObject(this);
+    d->_engine = engine;
+    d->_scriptvalue = engine->newQObject(this);
 }
 
 QScriptValue Datum::adj_data() {
     QList<Datum*> list = adjacent_data();
-    QScriptValue array = _engine->newArray();
+    QScriptValue array = d->_engine->newArray();
     foreach(Datum* n, list) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
@@ -382,7 +418,7 @@ QScriptValue Datum::connected_pointers(Datum *n) {
 }
 
 QScriptValue Datum::createScriptArray(PointerList list) {
-    QScriptValue array = _engine->newArray();
+    QScriptValue array = d->_engine->newArray();
     foreach(Pointer* e, list) {
         array.property("push").call(array, QScriptValueList() << e->scriptValue());
     }

@@ -28,10 +28,7 @@ class ListNode : public Datum
   Q_OBJECT
   public:
     ListNode(DataType* parent);
-
-    virtual ~ListNode();
-
-    virtual void setEngine(QScriptEngine* _engine);
+    ~ListNode();
 
     ListNode * next() const;
 

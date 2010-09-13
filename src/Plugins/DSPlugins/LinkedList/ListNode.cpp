@@ -44,15 +44,6 @@ void ListNode::pointTo(ListNode* to )
     addPointer(to);
 }
 
-
-void ListNode::setEngine(QScriptEngine* engine)
-{
-     _engine = engine;
-    _scriptvalue = engine->newQObject(this);
-}
-
-
-
 ListNode * ListNode::next() const{
     if (out_pointers().count() == 1 ){
         if(ListNode * n = qobject_cast<ListNode*>( out_pointers().at(0)->to())){

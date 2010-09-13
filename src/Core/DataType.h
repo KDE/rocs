@@ -267,7 +267,7 @@ public  slots:
     * @param name the name of the datum,
     * @param point the point in the euclidian space where this datum is.
     */
-    void addDatum(QString name, QPointF point);
+    Datum* addDatum(QString name, QPointF point);
 
     /** sets all datums for this color.
     * @param color the color that each datum will have.
@@ -315,6 +315,8 @@ signals:
     void automateChanged(bool b);
 
 protected:
+    Datum* addDatum(Datum *datum);
+    
     bool _directed;
     
     DataList _data;

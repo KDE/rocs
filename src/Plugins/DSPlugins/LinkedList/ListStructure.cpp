@@ -21,8 +21,10 @@
 #include "KDebug"
 #include "ListNode.h"
 #include "Pointer.h"
+#include <QDebug>
 
 Rocs::ListStructure::ListStructure ( DataTypeDocument* parent ) : DataType ( parent ) {
+  qDebug() << "Creating  a list structure";
   setDirected(true);
   Datum * p = addNode("P");
   p->hideName(false);
@@ -30,34 +32,28 @@ Rocs::ListStructure::ListStructure ( DataTypeDocument* parent ) : DataType ( par
   setBegin(p);
   _animationGroup = new QParallelAnimationGroup(this);
   arrangeNodes();
-
 }
 
 Rocs::ListStructure::ListStructure(DataType& other): DataType(other)
 {
   setDirected(true);
+  qDebug() << "Criando pelo construtor de cópia";
   _animationGroup = new QParallelAnimationGroup(this);
-  if (_begin == 0){
-    Datum * p = addNode("P");
-    p->hideName(true);
-    p->hideValue(false);
-    setBegin(p);
-
-    arrangeNodes();
-  }
-
+  setBegin(addNode("P"));
+  _begin->hideName(true);
+  _begin->hideValue(false);
+  
+  arrangeNodes();
+  
 }
-
 
 Rocs::ListStructure::~ListStructure() {
 
 }
 
-
 Pointer* Rocs::ListStructure::addEdge ( Datum* from, Datum* to ) {
     foreach(Pointer *e, from->adjacent_pointers()){
       e->self_remove();
-//       remove(e);
     }
 
     Pointer * e =  DataType::addPointer ( from, to );
@@ -65,38 +61,13 @@ Pointer* Rocs::ListStructure::addEdge ( Datum* from, Datum* to ) {
     return e;
 }
 
-// void Rocs::ListStructure::setEngine ( QScriptEngine* engine )
-// {
-//     _engine = engine;
-//
-//     _value = _engine->newQObject(this);
-//
-//     if (! name().isEmpty() ) {
-//         _engine->globalObject().setProperty(name(), _value);
-//     }
-//
-//     foreach(Node *n, nodes()) {
-//         n->setEngine(engine);
-//     }
-//     foreach(Edge *e, pointers()) {
-//         e->setEngine(engine);
-//     }
-// }
-
-
 Datum* Rocs::ListStructure::addNode ( QString name ) {
-      if (_readOnly) return 0;
-
-    Datum  *n = new ListNode(this);
+    
+    Datum *n = DataType::addDatum(new ListNode(this));
     n->setName(name);
-    _data.append( n );
-    emit datumCreated(n);
-    connect (n, SIGNAL(changed()), this, SIGNAL(changed()));
     arrangeNodes();
     return n;
-//     return Graph::addNode ( name );
 }
-
 
 QScriptValue Rocs::ListStructure::front() {
   return begin()->scriptValue();
@@ -108,20 +79,23 @@ QScriptValue Rocs::ListStructure::createNode(const QString & name){
     return n->scriptValue();
 }
 
-
 void Rocs::ListStructure::arrangeNodes(){
   qreal x;
   qreal y;
   if (_animationGroup->state() != QAnimationGroup::Stopped){
-    _animationGroup->stop();
+      _animationGroup->stop();
   }
   QScopedArrayPointer<bool>visited (new bool[_data.count()]);
   for (int i = 0; i < _data.count(); ++i){
-    visited[i] = false;
+      visited[i] = false;
   }
   if (_begin == 0){
     return;
+  }else{
+    qDebug() << _begin;
   }
+  qDebug() << "Indo animar os bagaços.";
+  
   QPropertyAnimation * anim = new QPropertyAnimation(_begin, "x");;
   anim->setDuration(500);
   anim->setStartValue(_begin->x());
@@ -135,6 +109,10 @@ void Rocs::ListStructure::arrangeNodes(){
 
   visited[_data.indexOf(_begin)] = true;
   ListNode * n = qobject_cast<ListNode*>(_begin);
+  if (n == 0){
+    qDebug() << _begin->metaObject()->className();
+    return;
+  }
   x = n->width() * 40;
   y = 250;
   while ((n = n->next())){

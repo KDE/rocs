@@ -187,9 +187,9 @@ public  slots:
     void self_remove();
 
 #endif
-
+    
 private:
-  PointerPrivate *d;
+  PointerPrivate * const d;
 
 signals:
     /*! emmited when this pointer is removed. */

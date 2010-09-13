@@ -28,15 +28,15 @@
 #include <QList>
 #include <QString>
 
-#ifdef USING_QTSCRIPT
 #include <QtScript>
 #include "qtScriptBackend.h"
-#endif
+
 #include "rocslib_export.h"
 #include "rocs_typedefs.h"
 
 class Pointer;
 class Datum;
+class DatumPrivate;
 
 class  ROCSLIB_EXPORT Datum : public QObject {
     Q_OBJECT
@@ -69,15 +69,11 @@ public:
     bool showName();
     bool showValue();
 
-    DataType *dataType(){ return _graph; }
+    DataType *dataType() const;
 
-#ifdef USING_QTSCRIPT
     QScriptValue scriptValue() const;
     virtual void setEngine(	QScriptEngine *_engine );
     QScriptValue createScriptArray(PointerList list);
-#endif
-
-
 
 public  slots:
     DataList adjacent_data() const;
@@ -122,7 +118,6 @@ public  slots:
     */
     void removeDynamicProperty(QString property);
 
-#ifdef USING_QTSCRIPT
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue input_pointers();
@@ -130,42 +125,11 @@ public  slots:
     QScriptValue loop_pointers();
     QScriptValue connected_pointers(Datum *n);
     void self_remove();
-#endif
 
     Pointer* addPointer(Datum* to);
 
 private:
-    PointerList _in_pointers;
-    PointerList _out_pointers;
-    PointerList _self_pointers;
-    
-    void empty(PointerList &list);
-
-    //! fixed properties
-    qreal _x;
-    qreal _y;
-    qreal _width;
-
-    bool _begin;
-    bool _end;
-    bool _changing;
-    bool _showName;
-    bool _showValue;
-
-    DataType *_graph;
-
-    QString _name;
-    QString _color;
-    QString _iconpackage;
-    QString _icon;
-
-    QVariant _value;
-
-#ifdef USING_QTSCRIPT
-  protected:
-    QScriptValue _scriptvalue;
-    QScriptEngine *_engine;
-#endif
+    DatumPrivate *d;
 
 signals:
     void removed();
