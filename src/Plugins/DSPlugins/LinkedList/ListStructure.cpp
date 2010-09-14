@@ -40,8 +40,8 @@ Rocs::ListStructure::ListStructure(DataType& other): DataType(other)
   qDebug() << "Criando pelo construtor de cópia";
   _animationGroup = new QParallelAnimationGroup(this);
   setBegin(addNode("P"));
-  _begin->hideName(true);
-  _begin->hideValue(false);
+  begin()->hideName(true);
+  begin()->hideValue(false);
   
   arrangeNodes();
   
@@ -75,7 +75,7 @@ QScriptValue Rocs::ListStructure::front() {
 
 QScriptValue Rocs::ListStructure::createNode(const QString & name){
     Datum * n = addNode(name);
-    n->setEngine(_engine);
+    n->setEngine( engine() );
     return n->scriptValue();
 }
 
@@ -85,41 +85,32 @@ void Rocs::ListStructure::arrangeNodes(){
   if (_animationGroup->state() != QAnimationGroup::Stopped){
       _animationGroup->stop();
   }
-  QScopedArrayPointer<bool>visited (new bool[_data.count()]);
-  for (int i = 0; i < _data.count(); ++i){
+  QScopedArrayPointer<bool>visited (new bool[data().count()]);
+  for (int i = 0; i < data().count(); ++i){
       visited[i] = false;
   }
-  if (_begin == 0){
-    return;
-  }else{
-    qDebug() << _begin;
-  }
-  qDebug() << "Indo animar os bagaços.";
   
-  QPropertyAnimation * anim = new QPropertyAnimation(_begin, "x");;
+  QPropertyAnimation * anim = new QPropertyAnimation(begin(), "x");;
   anim->setDuration(500);
-  anim->setStartValue(_begin->x());
+  anim->setStartValue(begin()->x());
   anim->setEndValue(40);
   _animationGroup->addAnimation(anim);
-  anim = new QPropertyAnimation(_begin, "y");;
+  anim = new QPropertyAnimation(begin(), "y");;
   anim->setDuration(500);
-  anim->setStartValue(_begin->y());
+  anim->setStartValue(begin()->y());
   anim->setEndValue(120);
   _animationGroup->addAnimation(anim);
 
-  visited[_data.indexOf(_begin)] = true;
-  ListNode * n = qobject_cast<ListNode*>(_begin);
-  if (n == 0){
-    qDebug() << _begin->metaObject()->className();
-    return;
-  }
+  visited[data().indexOf(begin())] = true;
+  ListNode * n = qobject_cast<ListNode*>(begin());
+
   x = n->width() * 40;
   y = 250;
   while ((n = n->next())){
-    if (visited[_data.indexOf(n)] || n == _begin){
+    if (visited[data().indexOf(n)] || n == begin()){
       break;
     }
-    visited[_data.indexOf(n)] = true;
+    visited[data().indexOf(n)] = true;
     x = x + 70 + n->width()*40;
     anim = new QPropertyAnimation(n, "x");;
     anim->setDuration(500);
@@ -133,8 +124,8 @@ void Rocs::ListStructure::arrangeNodes(){
     _animationGroup->addAnimation(anim);
   }
   x = y = 30;
-  foreach (Datum * n, _data){
-    if (!visited[_data.indexOf(n)]){
+  foreach (Datum * n, data()){
+    if (!visited[data().indexOf(n)]){
       anim = new QPropertyAnimation(n, "x");;
       anim->setDuration(500);
       anim->setStartValue(n->x());
@@ -152,4 +143,3 @@ void Rocs::ListStructure::arrangeNodes(){
   }
   _animationGroup->start();
 }
-

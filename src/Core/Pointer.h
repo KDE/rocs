@@ -53,19 +53,10 @@ class ROCSLIB_EXPORT Pointer : public QObject {
 
     /*! all properties are accessible from the scripting engine via .propertyName */
 
-    /*! this property holds the color attribute. */
     Q_PROPERTY(QString color READ color WRITE setColor)
-
-    /*! this property hold the value attribute */
     Q_PROPERTY(QString value READ value WRITE setValue)
-
-    /*! this property holds the name of the pointer. */
     Q_PROPERTY(QString name READ name WRITE setName)
-
-    /*! this property holds the width of the pointer */
     Q_PROPERTY(double width READ width WRITE setWidth)
-
-    /*! this property holds the style of the pointer */
     Q_PROPERTY(QString style READ style WRITE setStyle)
 
 public:

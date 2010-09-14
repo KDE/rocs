@@ -40,7 +40,7 @@ class QtScriptBackend;
 class DataTypeDocument;
 class Datum;
 class Pointer;
-
+class DataTypePrivate;
 
 /*! \brief this class acts as a container for datums and pointers.
   this class has all the pointers and datums, plus a few extra funcionalities
@@ -88,19 +88,18 @@ public:
     */
     DataTypeDocument *document() const;
 
-    void readOnly( bool r) { _readOnly = r; }
-    bool readOnly() const { return _readOnly; }
+    void setReadOnly( bool r) ;
+    bool readOnly() const ;
 
-#ifdef USING_QTSCRIPT
     /*! if QtScript is enabled for this rocs,
     \return  the self-referenced Script Value for this graph. */
     QScriptValue scriptValue() const;
 
     /*! if QtScript is enabled for this rocs,
     \p engine is the QtScript engine that will be set for this graph. */
-    virtual void setEngine( QScriptEngine *engine );
-#endif
+    void setEngine( QScriptEngine *engine );
 
+    QScriptEngine *engine() const;
 public  slots:
     /*! sets the name of the graph.
     \p s the new name of the graph. */
@@ -317,38 +316,8 @@ signals:
 protected:
     Datum* addDatum(Datum *datum);
     
-    bool _directed;
-    
-    DataList _data;
-    PointerList _pointers;
-    
-    //QList<GraphGroup*> _graphGroups;
-    qreal _top;
-    qreal _bottom;
-    qreal _left;
-    qreal _right;
-
-    QPointF _relativeCenter;
-    QString _name;
-    Datum* _begin;
-    DataList _ends;
-    QString _datumDefaultColor;
-    QString _pointerDefaultColor;
-    bool _automate;
-    DataTypeDocument *_document;
-    bool _readOnly;
-
-    bool _datumNamesVisible;
-    bool _pointerNamesVisible;
-    bool _datumValuesVisible;
-    bool _pointerValuesVisible;
-
-#ifdef USING_QTSCRIPT
-  protected:
-    QScriptValue _value;
-    QScriptEngine *_engine;
-#endif
-
+private:
+    DataTypePrivate *d;
 };
 
 #endif

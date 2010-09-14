@@ -93,7 +93,7 @@ void GraphPropertiesWidget::on__graphDatumColorApplyNow_clicked() {  emit datumC
 
 void GraphPropertiesWidget::on__graphVisible_toggled(bool b){
   _mainWindow->mutex().lock();
-  _graph->readOnly( !b );
+  _graph->setReadOnly( !b );
   _mainWindow->scene()->hideGraph( _graph, b );
   _mainWindow->mutex().unlock();
 }

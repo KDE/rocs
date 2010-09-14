@@ -27,36 +27,71 @@
 #include <KDebug>
 #include <QColor>
 
-DataType::DataType(DataTypeDocument *parent) : QObject(parent) {
-    _directed = false;
-    _automate = false;
-    _readOnly = false;
-    _document = parent;
-    _begin = 0;
+class DataTypePrivate{
+public:
+    DataTypePrivate(){}
+    bool _directed;
+    
+    DataList _data;
+    PointerList _pointers;
+    
+    //QList<GraphGroup*> _graphGroups;
+    qreal _top;
+    qreal _bottom;
+    qreal _left;
+    qreal _right;
+
+    QPointF _relativeCenter;
+    QString _name;
+    Datum* _begin;
+    DataList _ends;
+    QString _datumDefaultColor;
+    QString _pointerDefaultColor;
+    bool _automate;
+    DataTypeDocument *_document;
+    bool _readOnly;
+
+    bool _datumNamesVisible;
+    bool _pointerNamesVisible;
+    bool _datumValuesVisible;
+    bool _pointerValuesVisible;
+
+    QScriptValue _value;
+    QScriptEngine *_engine;
+};
+
+DataType::DataType(DataTypeDocument *parent) : QObject(parent), d(new DataTypePrivate){
+    d->_directed = false;
+    d->_automate = false;
+    d->_readOnly = false;
+    d->_document = parent;
+    d->_begin = 0;
     calcRelativeCenter();
-    _datumDefaultColor = "blue";
-    _pointerDefaultColor = "gray";
-    _datumNamesVisible = true;
-    _datumValuesVisible = true;
-    _pointerNamesVisible = false;
-    _pointerValuesVisible = true;
+    d->_datumDefaultColor = "blue";
+    d->_pointerDefaultColor = "gray";
+    d->_datumNamesVisible = true;
+    d->_datumValuesVisible = true;
+    d->_pointerNamesVisible = false;
+    d->_pointerValuesVisible = true;
 }
 
 DataType::DataType(DataType& other): QObject(other.parent()){
-    _directed = other._directed;
-    _automate = other._automate;
-    _readOnly = other._readOnly;
-    _document = other._document;
-    _begin = other._begin;
+    d->_directed = other.directed();
+    d->_automate = other.automate();
+    d->_readOnly = other.readOnly();
+    d->_document = other.document();
+    d->_begin = other.begin();
     calcRelativeCenter();
-    _datumDefaultColor = other._datumDefaultColor;
-    _pointerDefaultColor = other._pointerDefaultColor;
-    _datumNamesVisible = other._datumNamesVisible;
-    _datumValuesVisible = other._datumValuesVisible;
-    _pointerNamesVisible = other._pointerNamesVisible;
-    _pointerValuesVisible = other._pointerValuesVisible;
+    d->_datumDefaultColor       = other.datumDefaultColor();
+    d->_pointerDefaultColor     = other.pointerDefaultColor();
+    
+    d->_datumNamesVisible       = other.d->_datumNamesVisible;
+    d->_datumValuesVisible      = other.d->_datumValuesVisible;
+    d->_pointerNamesVisible     = other.d->_pointerNamesVisible;
+    d->_pointerValuesVisible    = other.d->_pointerValuesVisible;
+    
     QHash <Datum*, Datum* > datumToDatum;
-    foreach(Datum *n, other._data){
+    foreach(Datum *n, other.data()){
       Datum* newDatum = addDatum(n->name());
       newDatum->setColor(n->color());
       newDatum->setValue(n->value());
@@ -66,7 +101,7 @@ DataType::DataType(DataType& other): QObject(other.parent()){
       datumToDatum.insert(n, newDatum);
 
     }
-    foreach(Pointer *e, other._pointers){
+    foreach(Pointer *e, other.d->_pointers){
       Datum* from =  datumToDatum.value(e->from());
       Datum* to =  datumToDatum.value(e->to());
 
@@ -78,48 +113,56 @@ DataType::DataType(DataType& other): QObject(other.parent()){
 
 
 DataType::~DataType() {
-    foreach(Pointer* e,  _pointers) {
+    foreach(Pointer* e,  d->_pointers) {
         remove(e);
     }
 
-    foreach(Datum* n, _data) {
+    foreach(Datum* n, d->_data) {
         remove(n);
     }
 }
 
+void DataType::setReadOnly(bool r){
+    d->_readOnly = r; 
+}
+
+bool DataType::readOnly() const{ 
+  return d->_readOnly; 
+}
+
 DataTypeDocument *DataType::document() const {
-    return _document;
+    return d->_document;
 }
 
 void DataType::remove() {
-  _document->removeOne(this);
+  d->_document->removeOne(this);
   delete this;
 }
 
 QList<Datum*> DataType::data() const {
-    return _data;
+    return d->_data;
 }
 
 QList<Pointer*> DataType::pointers() const {
-    return _pointers;
+    return d->_pointers;
 }
 
 void DataType::setDatumsColor(QString c){
   kDebug() << "Entrou no setDatumsColor, com a cor " << c;
-  foreach(Datum *n, _data) {
+  foreach(Datum *n, d->_data) {
         n->setColor(c);
     }
 }
 
 void DataType::setPointersColor(QString c){
     kDebug() << "Entrou no setPointersColor, com a cor " << c;
-    foreach(Pointer *e, _pointers) {
+    foreach(Pointer *e, d->_pointers) {
         e->setColor(c);
     }
 }
 
 Datum* DataType::addDatum(QString name) {
-    if (_readOnly) return 0;
+    if (d->_readOnly) return 0;
 
     Datum  *n = new Datum(this);
     n->setName(name);
@@ -127,7 +170,7 @@ Datum* DataType::addDatum(QString name) {
 }
 
 Datum* DataType::addDatum(Datum *datum){
-    _data.append( datum );
+    d->_data.append( datum );
     emit datumCreated( datum );
     connect ( datum, SIGNAL(changed()), this, SIGNAL(changed()));
     return datum;
@@ -142,34 +185,34 @@ Datum* DataType::addDatum(QString name, QPointF pos){
 }
 
 Pointer* DataType::addPointer(Datum* from,Datum* to) {
-    if (_readOnly) return 0;
+    if (d->_readOnly) return 0;
 
     if ( from == 0 || to == 0 ) {      return 0;   }
 
 
-    if ( ( from == to) && ( !_directed ) ) {
+    if ( ( from == to) && ( !d->_directed ) ) {
         return 0;
-    } else if ((from->pointers(to).size() >= 1)&&(!_directed)) {
+    } else if ((from->pointers(to).size() >= 1)&&(!d->_directed)) {
         return 0;
-    } else if ((_data.indexOf(from) == -1) || (_data.indexOf(to) == -1)) {
+    } else if ((d->_data.indexOf(from) == -1) || (d->_data.indexOf(to) == -1)) {
         return 0;
     }
 
     Pointer *e  = new Pointer(this, from, to);
-    _pointers.append( e );
+    d->_pointers.append( e );
     emit pointerCreated(e);
     connect (e, SIGNAL(changed()), this, SIGNAL(changed()));
     return e;
 }
 
 Pointer* DataType::addPointer(const QString& name_from, const QString& name_to) {
-    if (_readOnly) return 0;
+    if (d->_readOnly) return 0;
     Datum *from = 0;
     Datum *to   = 0;
 
     QString tmpName;
 
-    foreach( Datum* n,  _data) {
+    foreach( Datum* n,  d->_data) {
         tmpName = n->name();
 
         if (tmpName == name_from) {
@@ -187,12 +230,12 @@ Pointer* DataType::addPointer(const QString& name_from, const QString& name_to) 
 }
 
 bool DataType::directed() const {
-    return _directed;
+    return d->_directed;
 }
 
 Datum* DataType::datum(const QString& name) {
     QString tmpName;
-    foreach( Datum* n,  _data) {
+    foreach( Datum* n,  d->_data) {
         tmpName = n->name();
         if (tmpName == name) {
             return n;
@@ -202,19 +245,19 @@ Datum* DataType::datum(const QString& name) {
 }
 
 void DataType::remove(Datum *n) {
-    _data.removeOne( n  );
+    d->_data.removeOne( n  );
     n->deleteLater();
 }
 
 void DataType::remove(Pointer *e) {
-    _pointers.removeOne( e );
+    d->_pointers.removeOne( e );
     e->deleteLater();
 //     delete e;
 }
 
 void DataType::setDirected(bool directed) {
 
-    foreach(Datum *n1, _data) {
+    foreach(Datum *n1, d->_data) {
         foreach(Datum *n2, n1->adjacent_data()) {
 	    // do not permit loop datums while changing graph's state.
             if ( (n1->pointers(n2).size() == 1) && (n1 != n2) ) {
@@ -231,10 +274,10 @@ void DataType::setDirected(bool directed) {
             }
         }
     }
-    foreach(Pointer *e, _pointers){
+    foreach(Pointer *e, d->_pointers){
       e->emitChangedSignal(); // dummy updater.
     }
-    _directed = directed;
+    d->_directed = directed;
     emit complexityChanged(directed);
     return;
 }
@@ -265,79 +308,79 @@ void DataType::calcRelativeCenter() {
       */
     /// this will be here till I find a better way to calculate a *relative* center of the graph, and not the center of the document.
     if (parent() != 0){
-	DataTypeDocument *gd = qobject_cast<DataTypeDocument*>(parent());
-	_relativeCenter.setY(gd->height()/2);
-	_relativeCenter.setX(gd->width()/2);
+        DataTypeDocument *gd = qobject_cast<DataTypeDocument*>(parent());
+        d->_relativeCenter.setY(gd->height()/2);
+        d->_relativeCenter.setX(gd->width()/2);
     }else{
-        _relativeCenter.setY(0);
-	_relativeCenter.setX(0);
+        d->_relativeCenter.setY(0);
+        d->_relativeCenter.setX(0);
     }
 }
 
 QPointF DataType::relativeCenter() const {
-    return _relativeCenter;
+    return d->_relativeCenter;
 }
 
 const QString& DataType::name() const {
-    return _name;
+    return d->_name;
 }
 void DataType::setName(const QString& s) {
-    _name = s;
+    d->_name = s;
 }
 
 bool DataType::setBegin(Datum* n) {
   if (!n){
-    _begin = 0;
+    d->_begin = 0;
     return false;
   }
 
-  if (!_begin){
-      _begin = n;
+  if (!d->_begin){
+      d->_begin = n;
       return true;
-  }else if( _begin == n){
+  }else if( d->_begin == n){
     return false;
   }
 
-   _begin->setBegin(false);
-   _begin = n;
+   d->_begin->setBegin(false);
+   d->_begin = n;
     return true;
 }
 
 Datum* DataType::begin() const {
-    return _begin;
+    return d->_begin;
 }
 
 Datum* DataType::addEnd(Datum *n) {
-    _ends.append(n);
+   d-> _ends.append(n);
     return n;
 }
 
 void DataType::removeEnd(Datum *n) {
-    _ends.removeAll(n);
+    d->_ends.removeAll(n);
 }
 
 void DataType::setDatumDefaultColor(const QString& color) {
     kDebug() << "Entrou com cor aqui painho." << color;
-    _datumDefaultColor = color;
+    d->_datumDefaultColor = color;
 }
 
 const QString& DataType::datumDefaultColor() const {
-    return _datumDefaultColor;
+    return d->_datumDefaultColor;
 }
 
 void DataType::setPointerDefaultColor(const QString& color) {
-    _pointerDefaultColor = color;
+    d->_pointerDefaultColor = color;
 }
 const QString& DataType::pointerDefaultColor() const {
-    return _pointerDefaultColor;
+    return d->_pointerDefaultColor;
 }
 
 void DataType::setAutomate(bool b) {
-    _automate = b;
+    d->_automate = b;
     emit automateChanged(b);
 }
 bool DataType::automate() {
-    return _automate;
+    return d->_automate;
 }
 
 void DataType::addDynamicProperty(QString property, QVariant value){
@@ -352,96 +395,96 @@ void DataType::removeDynamicProperty(QString property){
 }
 
 void DataType::addDatumsDynamicProperty(QString property, QVariant value){
-    foreach(Datum *n, _data){
+    foreach(Datum *n, d->_data){
       n->addDynamicProperty(property, value);
     }
 }
 
 void DataType::addPointersDynamicProperty(QString property, QVariant value){
-    foreach(Pointer *e, _pointers){
+    foreach(Pointer *e, d->_pointers){
       e->addDynamicProperty(property, value);
     }
 }
 
 void DataType::removeDatumsDynamicProperty(QString property){
-  foreach(Datum *n, _data){
+  foreach(Datum *n, d->_data){
     n->removeDynamicProperty(property);
   }
 }
 void DataType::removePointersDynamicProperty(QString property){
-  foreach(Pointer *e, _pointers){
+  foreach(Pointer *e, d->_pointers){
     e->removeDynamicProperty(property);
   }
 }
 
 void DataType::setDatumNameVisibility(bool b){
-  _datumNamesVisible = b;
-  foreach(Datum *n, _data){
+  d->_datumNamesVisible = b;
+  foreach(Datum *n, d->_data){
     n->hideName(b);
   }
 }
 
 bool DataType::datumNameVisibility(){
-  return _datumNamesVisible;
+  return d-> _datumNamesVisible;
 }
 
 void DataType::setPointerNameVisibility(bool b){
-  _pointerNamesVisible = b;
-  foreach(Pointer *n, _pointers){
+  d->_pointerNamesVisible = b;
+  foreach(Pointer *n, d->_pointers){
     n->hideName(b);
   }
 }
 
 bool DataType::pointerNameVisibility(){
-  return _pointerNamesVisible;
+  return d->_pointerNamesVisible;
 }
 
 void DataType::setDatumValueVisibility(bool b){
-  _datumValuesVisible = b;
-  foreach(Datum *n, _data){
+ d-> _datumValuesVisible = b;
+  foreach(Datum *n, d->_data){
     n->hideValue(b);
   }
 }
 bool DataType::datumValueVisibility(){
-  return _datumValuesVisible;
+  return d->_datumValuesVisible;
 }
 
 void DataType::setPointerValueVisibility(bool b){
-  _pointerValuesVisible = b;
-  foreach(Pointer *n, _pointers){
+  d->_pointerValuesVisible = b;
+  foreach(Pointer *n, d->_pointers){
     n->hideValue(b);
   }
 }
 
 bool DataType::pointerValueVisibility(){
-  return _pointerValuesVisible;
+  return d->_pointerValuesVisible;
 }
 
-#ifdef USING_QTSCRIPT
-
-
-
-
 QScriptValue DataType::scriptValue() const {
-    return _value;
+    return d->_value;
+}
+
+QScriptEngine *DataType::engine() const{ 
+  return d->_engine;
 }
 
 void DataType::setEngine(	QScriptEngine *engine ) {
-    _engine = engine;
+   d-> _engine = engine;
 
-    _value = _engine->newQObject(this);
+    d->_value = d->_engine->newQObject(this);
 
-    if (! _name.isEmpty() ) {
-        _engine->globalObject().setProperty(_name, _value);
-        kDebug() << _name << "Added as global object.";
+    if (! d->_name.isEmpty() ) {
+        d->_engine->globalObject().setProperty(d->_name, d->_value);
+        kDebug() << d->_name << "Added as global object.";
     }
 
-    foreach(Datum *n, _data) {
-        n->setEngine(engine);
+    for( int i = 0; i < d->_data.size(); ++i){
+        d->_data.at(i)->setEngine(engine);
     }
-    foreach(Pointer *e, _pointers) {
-        e->setEngine(engine);
+    for( int i = 0; i < d->_pointers.size(); ++i){
+        d->_pointers.at(i)->setEngine(engine);
     }
+    
 //    foreach(GraphGroup *g, _graphGroups) {
 //        QScriptValue array = _engine->newArray();
 //        foreach(Datum* n, (*g) ) {
@@ -450,6 +493,3 @@ void DataType::setEngine(	QScriptEngine *engine ) {
 //        _engine->globalObject().setProperty(g->name(), array);
 //    }
 }
-
-
-#endif

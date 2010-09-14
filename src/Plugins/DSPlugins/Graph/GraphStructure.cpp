@@ -39,16 +39,16 @@ Rocs::GraphStructure::~GraphStructure() {
 
 
 QScriptValue Rocs::GraphStructure::list_nodes() {
-    QScriptValue array = _engine->newArray();
-    foreach(Datum* n, _data) {
+    QScriptValue array = engine()->newArray();
+    foreach(Datum* n, data()) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
 }
 
 QScriptValue Rocs::GraphStructure::list_edges() {
-    QScriptValue array = _engine->newArray();
-    foreach(Pointer* n, _pointers) {
+    QScriptValue array = engine()->newArray();
+    foreach(Pointer* n, pointers()) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
@@ -56,14 +56,14 @@ QScriptValue Rocs::GraphStructure::list_edges() {
 
 QScriptValue Rocs::GraphStructure::add_node(const QString& name) {
     Datum* n = addDatum(name);
-    n->setEngine(_engine);
+    n->setEngine(engine());
     return n->scriptValue();
 }
 
 QScriptValue Rocs::GraphStructure::add_edge(Datum* from, Datum* to) {
     Pointer *e = addPointer(from, to);
     if (e){
-      e->setEngine(_engine);
+      e->setEngine(engine());
       return e->scriptValue();
     }
 
