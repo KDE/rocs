@@ -336,7 +336,8 @@ bool Datum::end() const {
 const QVariant Datum::value() const {
     return d->_value;
 }
-void  Datum::setValue(QVariant s) {
+
+void  Datum::setValue(const QVariant s) {
     d->_value = s;
     if (! d->_changing) {
       emit changed();
