@@ -21,11 +21,10 @@
 #define LISTSTRUCTURE_H
 
 #include "DataType.h"
-#include "rocslib_export.h"
 
 class ListNode;
 namespace Rocs{
-class ROCSLIB_EXPORT ListStructure : public DataType {
+class ListStructure : public DataType {
   Q_OBJECT
   public:
 

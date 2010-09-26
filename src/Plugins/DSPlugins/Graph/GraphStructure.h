@@ -21,10 +21,9 @@
 #define GRAPHSTRUCTURE_H
 
 #include "DataType.h"
-#include "rocslib_export.h"
 
 namespace Rocs{
-class ROCSLIB_EXPORT GraphStructure : public DataType {
+class GraphStructure : public DataType {
   Q_OBJECT
   public:
 
