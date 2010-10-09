@@ -30,6 +30,7 @@
 #include "PointerItem.h"
 #include "Pointer.h"
 #include <graphDocument.h>
+#include <KDebug>
 
 static const KAboutData aboutdata("rocs_ListStructure", 0, ki18n("Linked List Structure") , "0.1" );
 using namespace Rocs;
@@ -50,6 +51,8 @@ ListPlugin::~ListPlugin()
 }
 
 DataType* ListPlugin::changeToDS ( DataType* graph) {
+    ListStructure *newList = 0;
+    kDebug() << "Graph default color:" << graph->datumDefaultColor();
     return new ListStructure(*graph);
 }
 

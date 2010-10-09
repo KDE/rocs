@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gui name="rocs"
-     version="6"
+     version="9"
      xmlns="http://www.kde.org/standards/kxmlgui/1.0"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.kde.org/standards/kxmlgui/1.0
@@ -8,34 +8,45 @@
 
   <MenuBar>
     <Menu name="file" >
-      <Menu name="graph"><Text>Graph</Text>
-	<Action name="new-graph" />
-	<Action name="open-graph" />
-	<Action name="save-graph" />
-	<Action name="save-graph-as" />
+      <Menu name="graph">
+        <Text>Graph</Text>
+        <Action name="new-graph" />
+        <Action name="open-graph" />
+        <Action name="save-graph" />
+        <Action name="save-graph-as" />
       </Menu>
-      <Menu name="Script"> <Text>Script</Text>
-	<Action name="new-script" />
-	<Action name="open-script" />
-	<Action name="save-script" />
-	<Action name="save-script-as" />
+      <Menu name="Script">
+        <Text>Script</Text>
+        <Action name="new-script" />
+        <Action name="open-script" />
+        <Action name="save-script" />
+        <Action name="save-script-as" />
       </Menu>
       <Action name="download" />
       <Action name="import" />
       <Action name="export" />
     </Menu>
-    <Menu name="Includes"><Text>Includes</Text>
-    <Action name="possible_includes" />
+    <Menu name="Includes">
+        <Text>Includes</Text>
+        <Action name="possible_includes" />
     </Menu>
     <Menu name="tools">
+      <Text> Tools </Text>
       <ActionList name="tools_plugins" />
     </Menu>
-    <Menu name="Data Strucure">
+    
+    <!--
+    <Menu name="Conversions">
+      <Text> Conversions </Text>
       <ActionList name="DS_plugins" />
     </Menu>
+    -->
+    
     <Menu name="Documents">
+      <Text> Documents </Text>
       <ActionList name="Doc_List" />
     </Menu>
+    
   </MenuBar>
 
   <ToolBar name="main" >

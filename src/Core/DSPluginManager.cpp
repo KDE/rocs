@@ -36,6 +36,7 @@ public:
 
     DataType* changeToDS ( DataType* dataType ) {
         if ( m_actualPlugin ) {
+            
             return m_actualPlugin->changeToDS ( dataType );
         }
         return dataType;
@@ -173,7 +174,6 @@ void Rocs::DSPluginManager::changeActiveDS (const QString &newDS ) {
 }
 
 DataType* Rocs::DSPluginManager::changeToDS ( DataType* dataType ) {
-
     return instance()->_d->changeToDS ( dataType );
 
 }

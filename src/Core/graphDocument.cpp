@@ -211,11 +211,6 @@ void DataTypeDocument::savePropertiesInternalFormat(QObject *o) {
         }
         else if( QString("name").compare(metaProperty.name()) == 0 ) {
           QString namevalue = QString("%1 : %2 \n" ).arg(name).arg(value.toString());
-          kDebug() << "Normal"    << namevalue;
-          kDebug() << "Ascii "    << namevalue.toAscii();
-          kDebug() << "Latin1"    << namevalue.toLatin1();
-          kDebug() << "UTF-8"     << namevalue.toUtf8();
-          kDebug() << "Local8bit" << namevalue.toLocal8Bit();
         }
 
         k_buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
@@ -297,22 +292,22 @@ void DataTypeDocument::loadFromInternalFormat(const QString& filename) {
 }
 
 void DataTypeDocument::convertToDS(QString newDS){
-    if (newDS != _DSType){
-        kDebug() << "Need convert doc from " << _DSType << " to "<< newDS ;
-//         DataTypeDocument * gDoc = new DataTypeDocument(*this);
+    if (newDS == _DSType) return;
+//        kDebug() << "Need convert doc from " << _DSType << " to "<< newDS ;
         _DSType = newDS;
-        int numDataTypes = count();
-        for (int i = 0 ; i < numDataTypes; ++i){
-            DataType * g = Rocs::DSPluginManager::instance()->changeToDS(at(i));
-            if (at(i) == _activeDataType)
-              _activeDataType = g;
-            append(g);
-        }
-        for (int i = 0 ; i < numDataTypes; ++i){
-            at(0)->deleteLater();
-            removeAt(0);
-        }
+//         DataTypeDocument * gDoc = new DataTypeDocument(*this);
+//        int numDataTypes = count();
+//         for (int i = 0 ; i < numDataTypes; ++i){
+//             DataType * g = Rocs::DSPluginManager::instance()->changeToDS(at(i));
+//             if (at(i) == _activeDataType)
+//               _activeDataType = g;
+//             append(g);
+//         }
+//         for (int i = 0 ; i < numDataTypes; ++i){
+//             at(0)->deleteLater();
+//             removeAt(0);
+//         }
 //         return gDoc;
-    }
+//    }
 //     return 0;
 }

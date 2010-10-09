@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>271</width>
+    <width>322</width>
     <height>291</height>
    </rect>
   </property>
@@ -49,7 +49,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>graph name here</string>
+        <string>Name of Data Structure Here</string>
        </property>
       </widget>
      </item>
@@ -112,7 +112,7 @@
       <item row="1" column="0" colspan="2">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Node Color:</string>
+         <string>Data Color:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -148,7 +148,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Edge Color:</string>
+         <string>Pointer Color:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -169,7 +169,7 @@
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="KPushButton" name="_graphDatumColorApplyNow_2">
+       <widget class="KPushButton" name="_graphPointerColorApplyNow">
         <property name="toolTip">
          <string>Apply the current color to all edges</string>
         </property>
@@ -196,14 +196,14 @@
      <item row="2" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Nodes</string>
+        <string>Data</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>Edges</string>
+        <string>Pointers</string>
        </property>
       </widget>
      </item>

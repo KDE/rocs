@@ -106,13 +106,10 @@ DataTypeDocument* DocumentManager::activeDocument(){
   return m_actualDocument;
 }
 
-
-
 QList< DataTypeDocument* > DocumentManager::documentList()
 {
   return m_documents;
 }
-
 
 void DocumentManager::removeDocument(DataTypeDocument* doc){
     if (m_documents.removeOne(doc) != 0){
@@ -143,53 +140,58 @@ void DocumentManager::removeDocument(DataTypeDocument* doc){
 }
 
 void DocumentManager::convertToDataStructure(QString ds){
+  kDebug() << "-=-=-=-=-= Converting Data Structures -=-=-=-=-=";
+  
   if (m_actualDocument)
-  m_actualDocument->convertToDS(ds);
-    kDebug() << "Converting Document";
-  //Release doc from interface...
+      m_actualDocument->convertToDS(ds);
+
+  kDebug() << "Converting Document";
   _mutex.lock();
   kDebug() << "Releasing Document";
-  emit deactivateDocument(m_actualDocument);
-  _docCondition.wait(&_mutex);
+      emit deactivateDocument(m_actualDocument);
+      _docCondition.wait(&_mutex);
   _mutex.unlock();
-  //And readd to it.
+  
   _mutex.lock();
-  kDebug() << "Activing it!";
-  emit activateDocument(m_actualDocument);
-  _docCondition.wait(&_mutex);
+      kDebug() << "Activing it!";
+      emit activateDocument(m_actualDocument);
+      _docCondition.wait(&_mutex);
   _mutex.unlock();
 }
-
-
 
 void DocumentManager::loadDocument ( QString name ){
   DataTypeDocument * doc;
   if ( name.isEmpty() ){
-      doc = new DataTypeDocument( i18n ( "Untitled0" ));
+      bool found = false;
+      int docNumber = 0;
+      forever{
+          name = QString("%1%2").arg(i18n("Untitled")).arg(docNumber);
+          foreach( DataTypeDocument *data, m_documents){
+              if( data->name() == name){
+                  found = true;
+                  docNumber += 1;
+              }
+          }
+          if ( ! found ){
+              break;
+          }
+          found = false;
+      }
+      doc = new DataTypeDocument( name );
       doc->addDataType ( i18n ( "Untitled0" ) );
       addDocument(doc);
-
   }else{
-      if (m_actualDocument == 0){
-        doc = new DataTypeDocument( i18n ( "Untitled0" ));
-        addDocument(doc);
-      }else{
-        doc = m_actualDocument;
+      doc = new DataTypeDocument( i18n ( "Untitled0" ) );
+      doc->loadFromInternalFormat ( name );
+      addDocument(doc);
+      
+      if (m_actualDocument){
+          emit deactivateDocument(m_actualDocument);
       }
-      m_actualDocument->loadFromInternalFormat ( name );
-//       _mutex.lock();
-      kDebug() << "Releasing Document";
-      emit deactivateDocument(m_actualDocument);
-//       _docCondition.wait(&_mutex);
-//       _mutex.unlock();
-      //And readd to it.
-//       _mutex.lock();
-      kDebug() << "Activing it!";
+      m_actualDocument = doc;
+      
       emit activateDocument(m_actualDocument);
-//       _docCondition.wait(&_mutex);
-//       _mutex.unlock();
+   }
 
+  }
 
-    }
-    _docCondition.wakeAll();
-}

@@ -138,19 +138,16 @@ QMutex& MainWindow::mutex() { return _mutex;}
 
 MainWindow::~MainWindow()
 {
+    kDebug() << "Killing Mainwinow";
     Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );
     Settings::setVSplitterSizeBottom ( _vSplitter->sizes() [1] );
     Settings::setHSplitterSizeLeft ( _hSplitter->sizes() [0] );
     Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
 
     Settings::self()->writeConfig();
-  //  _mutex.unlock();
     emit endThreadDocument();
     _tDocument->wait();
     kDebug() << "End of thread.";
-//     _tDocument->exit(0);
-//     delete _tDocument;
-
 }
 
 void MainWindow::outputString ( const QString& s )
@@ -359,7 +356,6 @@ void MainWindow::setupToolsPluginsAction()
     int count = 0;
     foreach ( Rocs::ToolsPluginInterface* p, avaliablePlugins )
     {
-
         action = new KAction ( p->displayName(), this );
         action->setData(count++);
         connect ( action, SIGNAL ( triggered ( bool ) ),this, SLOT ( runToolPlugin() ) );
@@ -397,7 +393,6 @@ _mutex.lock();
     QList <QAction*> pluginList;
     QAction* action = 0;
     unplugActionList ( "Doc_List" );
-    QList < Rocs::DSPluginInterface*> avaliablePlugins = Rocs::DSPluginManager::instance()->pluginsList();
     QActionGroup * group = new QActionGroup(this);
     int count = 0;
     foreach(DataTypeDocument * doc, _tDocument->documentManager()->documentList()){

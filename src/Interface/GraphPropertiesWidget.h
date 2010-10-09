@@ -27,7 +27,6 @@ class DataType;
 class Datum;
 class Pointer;
 
-
 /*! \brief Properties Area, not used yet. */
 class MainWindow;
 class GraphPropertiesWidget : public KButtonGroup, public Ui::GraphPropertiesWidget
@@ -36,8 +35,6 @@ class GraphPropertiesWidget : public KButtonGroup, public Ui::GraphPropertiesWid
 public:
     GraphPropertiesWidget (DataType *g, MainWindow* parent = 0 );
     QRadioButton *radio() const;
-
-
 
 private slots:
     void on__graphPointerColorApplyNow_clicked();

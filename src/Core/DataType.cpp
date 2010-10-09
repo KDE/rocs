@@ -82,9 +82,9 @@ DataType::DataType(DataType& other): QObject(other.parent()){
     d->_document = other.document();
     d->_begin = other.begin();
     calcRelativeCenter();
-    d->_datumDefaultColor       = other.datumDefaultColor();
-    d->_pointerDefaultColor     = other.pointerDefaultColor();
     
+//    d->_pointerDefaultColor     = "blue"; //other.pointerDefaultColor();
+//    d->_datumDefaultColor       =  "blue"; //other.datumDefaultColor();
     d->_datumNamesVisible       = other.d->_datumNamesVisible;
     d->_datumValuesVisible      = other.d->_datumValuesVisible;
     d->_pointerNamesVisible     = other.d->_pointerNamesVisible;
