@@ -63,6 +63,7 @@ drawn graph and every change in the graph with the script is reflected on the dr
 <para>
 The user interface is divided in two parts:
 </para> 
+
 <itemizedlist>
 <listitem><para>
 the top right part is where you draw your graphs, and the bottom right one is where you 
@@ -86,7 +87,7 @@ per graph and can be changed per node and edge with the Node Properties and the 
 </para></listitem>
 <listitem><para>
 <guilabel>Node Color</guilabel> for new created nodes, you can change the node color for all current nodes 
-by clicking the All button
+by clicking the <guilabel>All</guilabel> button
 </para></listitem>
 <listitem><para>
 <guilabel>Edge Color</guilabel>
@@ -95,23 +96,17 @@ by clicking the All button
 <para>The last row of options consists in toggled buttons:</para>
 <itemizedlist>
 <listitem><para>
-<guilabel>Oriented Graph</guilabel>
+<guilabel>Show names in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
 </para></listitem>
 <listitem><para>
-<guilabel>Automated Graph</guilabel>
+<guilabel>Show values in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
+</para></listitem>
+<!--listitem><para>
+<guilabel>Graph is oriented</guilabel>
 </para></listitem>
 <listitem><para>
-<guilabel>Show nodes names</guilabel>
-</para></listitem>
-<listitem><para>
-<guilabel>Show edges names</guilabel>
-</para></listitem>
-<listitem><para>
-<guilabel>Show nodes values</guilabel>
-</para></listitem>
-<listitem><para>
-<guilabel>Show edges values</guilabel>
-</para></listitem>
+<guilabel>Graph is Automate</guilabel>
+</para></listitem-->
 </itemizedlist>
 </sect1>
 
@@ -129,6 +124,8 @@ by clicking the All button
 <guilabel>Select</guilabel>: select items by clicking on them.</para></listitem>
 <listitem><para>
 <guilabel>Delete</guilabel>: delete items by clicking on them.</para></listitem>
+<listitem><para>
+Use the align tools to place selected nodes.</para></listitem>
 </itemizedlist>
 
 <para>A right mouse click on a node or edge brings you the property dialog for that node 
