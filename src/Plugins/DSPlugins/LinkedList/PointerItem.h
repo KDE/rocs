@@ -23,6 +23,7 @@
 
 #include <QGraphicsLineItem>
 
+class DataType;
 class QGraphicsSceneMouseEvent;
 class Pointer;
 class Datum;
@@ -76,6 +77,7 @@ namespace Rocs{
         void updateAttributes();
     private:
         Pointer *_edge;
+        DataType *_datatype;
         int _index;
         bool _loop;
         QPainterPath createCurves() const;

@@ -31,10 +31,10 @@ class DataTypePrivate{
 public:
     DataTypePrivate(){}
     bool _directed;
-    
+
     DataList _data;
     PointerList _pointers;
-    
+
     //QList<GraphGroup*> _graphGroups;
     qreal _top;
     qreal _bottom;
@@ -75,21 +75,21 @@ DataType::DataType(DataTypeDocument *parent) : QObject(parent), d(new DataTypePr
     d->_pointerValuesVisible = true;
 }
 
-DataType::DataType(DataType& other): QObject(other.parent()){
+DataType::DataType(DataType& other): QObject(other.parent()),d(new DataTypePrivate){
     d->_directed = other.directed();
     d->_automate = other.automate();
     d->_readOnly = other.readOnly();
     d->_document = other.document();
     d->_begin = other.begin();
     calcRelativeCenter();
-    
-//    d->_pointerDefaultColor     = "blue"; //other.pointerDefaultColor();
-//    d->_datumDefaultColor       =  "blue"; //other.datumDefaultColor();
+
+    d->_pointerDefaultColor     = other.pointerDefaultColor();
+    d->_datumDefaultColor       = other.datumDefaultColor();
     d->_datumNamesVisible       = other.d->_datumNamesVisible;
     d->_datumValuesVisible      = other.d->_datumValuesVisible;
     d->_pointerNamesVisible     = other.d->_pointerNamesVisible;
     d->_pointerValuesVisible    = other.d->_pointerValuesVisible;
-    
+
     QHash <Datum*, Datum* > datumToDatum;
     foreach(Datum *n, other.data()){
       Datum* newDatum = addDatum(n->name());
@@ -123,11 +123,11 @@ DataType::~DataType() {
 }
 
 void DataType::setReadOnly(bool r){
-    d->_readOnly = r; 
+    d->_readOnly = r;
 }
 
-bool DataType::readOnly() const{ 
-  return d->_readOnly; 
+bool DataType::readOnly() const{
+  return d->_readOnly;
 }
 
 DataTypeDocument *DataType::document() const {
@@ -464,7 +464,7 @@ QScriptValue DataType::scriptValue() const {
     return d->_value;
 }
 
-QScriptEngine *DataType::engine() const{ 
+QScriptEngine *DataType::engine() const{
   return d->_engine;
 }
 
@@ -484,7 +484,7 @@ void DataType::setEngine(	QScriptEngine *engine ) {
     for( int i = 0; i < d->_pointers.size(); ++i){
         d->_pointers.at(i)->setEngine(engine);
     }
-    
+
 //    foreach(GraphGroup *g, _graphGroups) {
 //        QScriptValue array = _engine->newArray();
 //        foreach(Datum* n, (*g) ) {

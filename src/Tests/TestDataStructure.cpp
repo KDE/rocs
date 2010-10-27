@@ -73,6 +73,7 @@ void TestDataStructure::convert()
 
     //Change plugin.
     DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(0)->name());
+    QVERIFY (DSPluginManager::instance()->pluginsList().at(0)->name() == DSPluginManager::instance()->actualPlugin());
     doc.convertToDS(DSPluginManager::instance()->actualPlugin());
     DataTypeDocument * newDoc = &doc;
 
@@ -83,11 +84,11 @@ void TestDataStructure::convert()
     QCOMPARE(newDoc->at(1)->metaObject()->className(), "Rocs::ListStructure");
 
     graph =  newDoc->at(0);
-    QCOMPARE (graph->data().count(), 2);
+    QCOMPARE (graph->data().count(), 3);
     QCOMPARE (graph->pointers().count(), 1);
 
     graph =  newDoc->at(1);
-    QCOMPARE (graph->data().count(), 2);
+    QCOMPARE (graph->data().count(), 3);
     QCOMPARE (graph->pointers().count(), 1);
 
 }

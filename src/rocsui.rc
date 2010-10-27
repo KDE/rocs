@@ -35,12 +35,12 @@
       <ActionList name="tools_plugins" />
     </Menu>
     
-    <!--
+    
     <Menu name="Conversions">
       <Text> Conversions </Text>
       <ActionList name="DS_plugins" />
     </Menu>
-    -->
+    
     
     <Menu name="Documents">
       <Text> Documents </Text>

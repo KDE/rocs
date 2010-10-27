@@ -97,7 +97,7 @@ public:
 
     /*! if QtScript is enabled for this rocs,
     \p engine is the QtScript engine that will be set for this graph. */
-    void setEngine( QScriptEngine *engine );
+    virtual void setEngine( QScriptEngine *engine );
 
     QScriptEngine *engine() const;
 public  slots:
@@ -119,7 +119,7 @@ public  slots:
     */
     bool directed() const;
 
-    /*! all data are accessible from that method. 
+    /*! all data are accessible from that method.
       \return the QList containing all the  datums.
     */
     DataList data() const;
@@ -315,7 +315,7 @@ signals:
 
 protected:
     Datum* addDatum(Datum *datum);
-    
+
 private:
     DataTypePrivate *d;
 };

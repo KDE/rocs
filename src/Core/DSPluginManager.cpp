@@ -36,7 +36,7 @@ public:
 
     DataType* changeToDS ( DataType* dataType ) {
         if ( m_actualPlugin ) {
-            
+
             return m_actualPlugin->changeToDS ( dataType );
         }
         return dataType;

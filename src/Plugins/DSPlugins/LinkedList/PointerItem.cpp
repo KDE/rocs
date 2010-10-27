@@ -45,6 +45,7 @@ PointerItem::PointerItem( Pointer *edge, QGraphicsItem *parent)
         : QObject(0), QGraphicsPathItem(parent)
 {
     _edge = edge;
+    _datatype = edge->dataType();
     _loop = (_edge->from() == edge->to());
     _index = _edge->relativeIndex();
     _name = new QGraphicsSimpleTextItem(this);
@@ -105,6 +106,9 @@ QPolygonF Rocs::LinkedList::PointerItem::createPath(const QPointF& pos1, const Q
 
 
 QPainterPath PointerItem::createCurves() const {
+    if (!_datatype->pointers().contains(_edge)){
+      return QPainterPath();
+    }
     if (_edge->from() == 0 || _edge->to() == 0){
 //         _edge->self_remove();
         return QPainterPath();
@@ -141,10 +145,14 @@ void PointerItem::updatePos() {
 //     if (gScene->hideEdges()) {
 //         gScene->updateAfter(this);
 //     }
+    if (!_datatype->pointers().contains(_edge)){
+      return;
+    }
     if (_edge->from() == 0 || _edge->to() == 0){
 //         _edge->self_remove();
         return;
     }
+
     QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
     qreal size = sqrt( pow(qreal(q.dx()), 2) + pow(qreal(q.dy()), 2));
     if (_edge->from() != _edge->to() && size < 20  ) {
@@ -157,6 +165,8 @@ void PointerItem::updatePos() {
 
 void PointerItem::updateAttributes() {
     Qt::PenStyle s;
+    if (!_edge)
+      return;
     if     (_edge->style() == "dash"	){ s = Qt::DashLine;    }
     else if(_edge->style() == "dot"	){ s = Qt::DotLine;     }
     else if(_edge->style() == "dash dot"){ s = Qt::DashDotLine; }

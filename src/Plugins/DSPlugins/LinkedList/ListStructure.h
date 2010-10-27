@@ -34,12 +34,17 @@ class ListStructure : public DataType {
 
     virtual ~ListStructure();
   public slots:
+    virtual void setEngine(QScriptEngine* engine);
 
 //     virtual void setEngine ( QScriptEngine* engine );
 
-    virtual Datum* addNode ( QString name );
+//     virtual Datum* addNode ( QString name );
 
-    virtual Pointer* addEdge ( Datum* from, Datum* to );
+
+    virtual Datum* addDatum(QString name);
+
+    virtual Pointer* addPointer(Datum* from, Datum* to);
+//     virtual Pointer* addEdge ( Datum* from, Datum* to );
 
     void arrangeNodes();
 
@@ -48,6 +53,9 @@ class ListStructure : public DataType {
 
 
 private:
+
+  /**@brief Initialize List structure */
+  void initialize();
 
     ListNode * _front;
     QParallelAnimationGroup* _animationGroup;
