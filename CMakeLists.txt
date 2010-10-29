@@ -18,8 +18,6 @@ if(${CMAKE_BUILD_TYPE} MATCHES coverage)
   set (CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS}" )
 endif()
 
-find_package(Boost REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
 
 add_subdirectory(src)
 add_subdirectory(graphics)
