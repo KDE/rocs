@@ -90,8 +90,28 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
 
 
     kDebug() << "Creating Thread";
-    startThreadDocument();
-    
+    _tDocument = new ThreadDocument ( _waitForDocument ,_mutex, this );
+    connect(_tDocument, SIGNAL(initializeComplete()), this, SLOT(startThreadDocument()));
+    kDebug() << "Starting Thread"; _tDocument->start();
+//     startThreadDocument();
+
+    setupWidgets();
+//     setupActions();
+//     setupGUI();
+//
+//     statusBar()->hide();
+
+//     setActiveDataTypeDocument ( _tDocument->document() );
+
+}
+
+void MainWindow::startThreadDocument(){
+//     _tDocument = new ThreadDocument ( _waitForDocument ,_mutex, this );
+//     _mutex.lock();
+//     kDebug() << "Starting Thread"; _tDocument->start();
+//     _waitForDocument.wait(&_mutex, 500);
+//     _mutex.unlock();
+
     if (Rocs::DSPluginManager::instance()->listOfDS().count() == 0){
       KMessageBox::detailedError(this,
                                  i18n("No Data Structure plugins found in the system. Exiting."),
@@ -101,35 +121,24 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _mutex()
       return;
     }
     // setting up the rest of stuff
-    connect (_tDocument->documentManager(), SIGNAL(activateDocument(DataTypeDocument*)),this, SLOT(setActiveDataTypeDocument(DataTypeDocument*)));
-    connect (_tDocument->documentManager(), SIGNAL(deactivateDocument(DataTypeDocument*)),this, SLOT(releaseDocument(DataTypeDocument*)));
+    connect (_tDocument, SIGNAL(activateDocument(DataTypeDocument*)),this, SLOT(setActiveDataTypeDocument(DataTypeDocument*)));
+    connect (_tDocument, SIGNAL(deactivateDocument(DataTypeDocument*)),this, SLOT(releaseDocument(DataTypeDocument*)));
 
-    connect (_tDocument->documentManager(), SIGNAL(activateDocument(DataTypeDocument*)),this, SLOT(setupDocumentsList()));
-    connect (_tDocument->documentManager(), SIGNAL(documentRemoved(DataTypeDocument*)),this, SLOT(setupDocumentsList()));
+//     connect (_tDocument->documentManager(), SIGNAL(activateDocument(DataTypeDocument*)),this, SLOT(setupDocumentsList()));
+//     connect (_tDocument->documentManager(), SIGNAL(documentRemoved(DataTypeDocument*)),this, SLOT(setupDocumentsList()));
 
-    setupWidgets();
+
     setupActions();
     setupGUI();
 
     statusBar()->hide();
-
-//     setActiveDataTypeDocument ( _tDocument->document() );
     setupToolsPluginsAction();
     setupDSPluginsAction();
 //     connect(Rocs::DSPluginManager::instance(), SIGNAL(DSChangedTo(QString)), this, SLOT(dsChanged()));
-    connect(this, SIGNAL(startDocument(QString)), _tDocument->documentManager(), SLOT(loadDocument(QString)));
+    connect(this, SIGNAL(startDocument(QString)), _tDocument, SLOT(loadDocument(QString)));
     connect(this, SIGNAL(endThreadDocument()),    _tDocument, SLOT(terminate()));
 
     loadDocument(); // load an empty document
-
-}
-
-void MainWindow::startThreadDocument(){
-    _tDocument = new ThreadDocument ( _waitForDocument ,_mutex, this );
-    _mutex.lock();
-    kDebug() << "Starting Thread"; _tDocument->start();
-    _waitForDocument.wait(&_mutex, 500);
-    _mutex.unlock();
 
 
 }
@@ -389,26 +398,26 @@ void MainWindow::setupDSPluginsAction()
 
 void MainWindow::setupDocumentsList(){
 
-_mutex.lock();
-    QList <QAction*> pluginList;
-    QAction* action = 0;
-    unplugActionList ( "Doc_List" );
-    QActionGroup * group = new QActionGroup(this);
-    int count = 0;
-    foreach(DataTypeDocument * doc, _tDocument->documentManager()->documentList()){
-        action = new KAction ( doc->name(), this );
-        action->setData(count++);
-        action->setCheckable(true);
-        if (doc == _tDocument->document()){
-          action->setChecked(true);
-        }
-        action->setActionGroup(group);
-        connect ( action, SIGNAL ( triggered ( bool ) ), _tDocument->documentManager(), SLOT ( changeDocument()) );
-        pluginList.append ( action );
-    }
-    plugActionList ( "Doc_List", pluginList );
-
-    _mutex.unlock();
+// _mutex.lock();
+//     QList <QAction*> pluginList;
+//     QAction* action = 0;
+//     unplugActionList ( "Doc_List" );
+//     QActionGroup * group = new QActionGroup(this);
+//     int count = 0;
+//     foreach(DataTypeDocument * doc, _tDocument->documentManager()->documentList()){
+//         action = new KAction ( doc->name(), this );
+//         action->setData(count++);
+//         action->setCheckable(true);
+//         if (doc == _tDocument->document()){
+//           action->setChecked(true);
+//         }
+//         action->setActionGroup(group);
+//         connect ( action, SIGNAL ( triggered ( bool ) ), _tDocument->documentManager(), SLOT ( changeDocument()) );
+//         pluginList.append ( action );
+//     }
+//     plugActionList ( "Doc_List", pluginList );
+//
+//     _mutex.unlock();
 }
 
 void MainWindow::setActiveDataTypeDocument ( DataTypeDocument* d )
@@ -416,11 +425,11 @@ void MainWindow::setActiveDataTypeDocument ( DataTypeDocument* d )
 //Ensure that is only on signal
 //     disconnect(d);
 
-    foreach ( QAction *action, actionCollection()->actions() ){
-        if ( AbstractAction *absAction = qobject_cast<AbstractAction*> ( action ) ){
-            absAction->setActiveDataTypeDocument ( d );
-        }
-    }
+//     foreach ( QAction *action, actionCollection()->actions() ){
+//         if ( AbstractAction *absAction = qobject_cast<AbstractAction*> ( action ) ){
+//             absAction->setActiveDataTypeDocument ( d );
+//         }
+//     }
 
     _graphVisualEditor->setActiveDataTypeDocument ( d );
 
@@ -455,6 +464,7 @@ void MainWindow::releaseDocument ( DataTypeDocument* d ){
     d->engineBackend()->disconnect(_bottomTabs);
 
     _waitForDocument.wakeAll();
+    d->deleteLater();
 }
 
 void MainWindow::setActiveGraph ( DataType *g )
@@ -516,14 +526,14 @@ void MainWindow::loadDocument ( const QString& name )
         KMessageBox::sorry ( this, i18n ( "This does not seem to be a graph file." ), i18n ( "Invalid file" ) );
         return;
     }
+    if (_tDocument->document())
+      releaseDocument(_tDocument->document());
+//       _graphVisualEditor->releaseDataTypeDocument();
 
-
-//      _graphVisualEditor->releaseDataTypeDocument();
-
-     _mutex.lock();
+//      _mutex.lock();
     emit startDocument( name );
-    _waitForDocument.wait(&_mutex, 500);
-    _mutex.unlock();
+//     _waitForDocument.wait(&_mutex, 500);
+//     _mutex.unlock();
 
 //     setActiveDataTypeDocument ( _tDocument->document() );
 
@@ -571,8 +581,8 @@ void MainWindow::importFile(){
     }
 
     _mutex.lock();
-//     _graphVisualEditor->releaseDataTypeDocument();
-    _tDocument->documentManager()->addDocument(gd);
+     _graphVisualEditor->releaseDataTypeDocument();
+    _tDocument->changeDocument(gd);
 //     _tDocument->setDataTypeDocument ( gd );
     _waitForDocument.wait(&_mutex, 500);
     _mutex.unlock();

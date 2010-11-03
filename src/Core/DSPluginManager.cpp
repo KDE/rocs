@@ -139,14 +139,14 @@ private:
 
 Rocs::DSPluginManager* Rocs::DSPluginManager::self = 0;
 
-Rocs::DSPluginManager::DSPluginManager() :_d ( new DSPluginManagerPrivate(this) ) {
+Rocs::DSPluginManager::DSPluginManager(QObject *parent) : QObject(parent),_d ( new DSPluginManagerPrivate(this) ) {
 
     _d->loadPlugins();
 }
 
-Rocs::DSPluginManager* Rocs::DSPluginManager::instance() {
+Rocs::DSPluginManager* Rocs::DSPluginManager::instance(QObject * parent) {
     if ( DSPluginManager::self == 0 ) {
-        DSPluginManager::self = new DSPluginManager();
+        DSPluginManager::self = new DSPluginManager(parent);
     }
     return DSPluginManager::self;
 }
@@ -165,9 +165,9 @@ void Rocs::DSPluginManager::changeActiveDS()
 
 
 void Rocs::DSPluginManager::changeActiveDS (const QString &newDS ) {
-    if ( listOfDS().contains ( newDS ) ) {
+    if ( listOfDS().contains ( newDS ) && newDS != _d->actualPluginName()) {
 
-        kDebug() << newDS << _d->actualPluginName();
+//         kDebug() << newDS << _d->actualPluginName();
         _d->setActivePlugin(newDS);
         emit changingDS ( newDS );
         emit DSChangedTo ( newDS );

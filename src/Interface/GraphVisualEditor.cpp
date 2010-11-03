@@ -80,13 +80,16 @@ void GraphVisualEditor::setActiveDataTypeDocument( DataTypeDocument *gd) {
 
 void GraphVisualEditor::releaseDataTypeDocument() {
     _scene->clear();
+    if (_dataTypeDocument == 0){
+      return;
+    }
     int size = _dataTypeDocument->size();
     for (int i = 0; i < size; i++) {
        _dataTypeDocument->at(i)->disconnect(this);
     }
     if (_dataTypeDocument->size() != 0)
       _scene->setActiveDataTypeDocument(0);
-
+    _dataTypeDocument = 0;
 }
 
 void GraphVisualEditor::drawGraphOnScene( DataType */*g*/) {}

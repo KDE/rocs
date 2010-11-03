@@ -42,6 +42,7 @@ void AbstractAction::setActiveDataTypeDocument(  DataTypeDocument *dataTypeDocum
 
 void AbstractAction::setActiveGraph( DataType *graph) {
     _graph = graph;
+    _dataTypeDocument = graph->document();
 }
 
 void AbstractAction::sendExecuteBit() {

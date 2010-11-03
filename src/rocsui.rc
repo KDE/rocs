@@ -41,12 +41,12 @@
       <ActionList name="DS_plugins" />
     </Menu>
     
-    
+<!--    
     <Menu name="Documents">
       <Text> Documents </Text>
       <ActionList name="Doc_List" />
     </Menu>
-    
+-->    
   </MenuBar>
 
   <ToolBar name="main" >

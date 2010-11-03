@@ -53,7 +53,6 @@ DataTypeDocument::DataTypeDocument(const DataTypeDocument& gd)
     _DSType = Rocs::DSPluginManager::instance()->actualPlugin();
     _engineBackend = new QtScriptBackend(this);
     for (int i = 0; i < gd.count(); ++i){
-//     foreach (DataType *g, gd) {
         append(Rocs::DSPluginManager::instance()->changeToDS(gd.at(i)));
     }
 }

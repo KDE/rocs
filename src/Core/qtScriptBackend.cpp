@@ -34,21 +34,21 @@ static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engin
     return QScriptValue();
 }
 
-static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engine*/){
+static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engine*/) {
     self->output(QString("%1 \n").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
-void QtScriptBackend::stop(){
-      kDebug() << "Stop requested.";
-      if (!_engine) return;
+void QtScriptBackend::stop() {
+    kDebug() << "Stop requested.";
+    if (!_engine) return;
 
-      if (_engine->isEvaluating()){
+    if (_engine->isEvaluating()) {
         _engine->abortEvaluation();
-      }
-      _engine->deleteLater();
-      _engine = 0;
-      emit finished();
+    }
+    _engine->deleteLater();
+    _engine = 0;
+    emit finished();
 }
 
 void QtScriptBackend::start()
@@ -65,7 +65,7 @@ void QtScriptBackend::start()
 
     int size = _graphs->size();
     for (int i = 0; i < size; i++) {
-	kDebug() << "Setting graph" << i << "as global object";
+        kDebug() << "Setting graph" << i << "as global object";
         _graphs->at(i)->setEngine(_engine);
     }
     kDebug() << "Setting the graph list";
@@ -73,35 +73,37 @@ void QtScriptBackend::start()
 
     kDebug() << "Evaluating the script";
     QString error = _engine->evaluate(_script).toString();
-    while( _engine && _engine->isEvaluating() ){
-	usleep(200000); /// rest a bit.
+    while ( _engine && _engine->isEvaluating() ) {
+        usleep(200000); /// rest a bit.
     }
-   kDebug() << "Script evaluated to " << error;
+    kDebug() << "Script evaluated to " << error;
 
-    emit finished(); kDebug() << "Finished emmited";
-    emit sendDebug(error); kDebug() << "send debug emmited";
+    emit finished();
+    kDebug() << "Finished emmited";
+    emit sendDebug(error);
+    kDebug() << "send debug emmited";
 }
 
-bool QtScriptBackend::isRunning(){
-  if ((_engine) && (_engine->isEvaluating())){
+bool QtScriptBackend::isRunning() {
+    if ((_engine) && (_engine->isEvaluating())) {
         return true;
-  }
-  return _runningTool;
+    }
+    return _runningTool;
 }
 
-QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent){
+QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent) {
     self = this;
     _engine = 0;
     _runningTool = false;
 }
 
 
-void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, DataTypeDocument *graphs){
+void QtScriptBackend::runTool(Rocs::ToolsPluginInterface * plugin, DataTypeDocument *graphs) {
     _runningTool = true;
     _graphs = graphs;
     _script = plugin->run(graphs);
-    if ( !_script.isEmpty()){
-      start();
+    if ( !_script.isEmpty()) {
+        start();
     }
     _runningTool = false;
 }
@@ -139,11 +141,11 @@ void QtScriptBackend::loadFile(const QString& file) {
     _script += '\n';
 }
 
-void QtScriptBackend::debug(const QString& str){
-     emit sendDebug(str);
+void QtScriptBackend::debug(const QString& str) {
+    emit sendDebug(str);
 }
 
-void QtScriptBackend::output(const QString& str){
+void QtScriptBackend::output(const QString& str) {
     emit sendOutput(str);
 }
 

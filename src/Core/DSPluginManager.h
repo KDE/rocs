@@ -40,10 +40,10 @@ class DSPluginInterface;
 class ROCSLIB_EXPORT DSPluginManager : public QObject {
   Q_OBJECT
     static DSPluginManager * self;
-    DSPluginManager();
+    DSPluginManager(QObject* parent);
   public:
     /** Accessor to the manager's instance.*/
-    static DSPluginManager * instance();
+    static DSPluginManager * instance(QObject * parent = 0);
 
     /** build a new dataType using actual data structure. */
     static DataType * createNewDS(DataTypeDocument* parent, const QString& pluginName = QString());

@@ -75,13 +75,14 @@ private: // Methods
     int saveIfChanged();
     void finishLoadingUi();
 
-    void startThreadDocument();
-
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
 
 
 private slots:
+
+
+    void startThreadDocument();
 
      void showSettings();
     //Testing to connect to KGHNS3

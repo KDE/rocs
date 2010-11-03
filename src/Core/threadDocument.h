@@ -23,7 +23,7 @@
 #include <QMutex>
 #include "rocslib_export.h"
 #include <QWaitCondition>
-class DocumentManager;
+// class DocumentManager;
 
 class DataType;
 class Datum;
@@ -47,26 +47,39 @@ class ROCSLIB_EXPORT ThreadDocument : public QThread{
     //void setDocumentName(const QString& name);
 
     /** Return a pointer to document manager. Delete it can lead to a crash.*/
-    DocumentManager* documentManager();
+//     DocumentManager* documentManager();
 
-  public slots:
+public slots:
     void run();
 //     void createEmptyDocument();
-//     void loadDocument(const QString& name = QString());
+     void loadDocument(const QString& name = QString());
 
     void terminate();
 
-  private:
+    void convertToDataStructure();
+    void changeDocument(DataTypeDocument* arg1);
+    void releaseDocument();
+
+private slots:
+  void init();
+
+signals:
+  void initialize();
+  void initializeComplete();
+  void activateDocument(DataTypeDocument* doc);
+
+  void deactivateDocument(DataTypeDocument * doc);
+private:
     /** Release actual document */
 //     void releaseDocument();
 
     QtScriptBackend* _engine;
-    DataTypeDocument * _graphDocument;
+    DataTypeDocument * _dataTypeDocument;
     QWaitCondition &_docCondition;
     QMutex &_mutex;
     QString _documentName;
 
-    DocumentManager * m_docManager;
+//     DocumentManager * m_docManager;
 
 };
 
