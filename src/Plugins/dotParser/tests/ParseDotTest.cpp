@@ -22,7 +22,7 @@
 #include <string>
 #include <Core/graphDocument.h>
 #include "../dotgrammar.h"
-#include <Core/DataStructureBase.h>
+#include <Core/DataType.h>
 #include <Core/DynamicPropertiesList.h>
 #include <KDebug>
 
@@ -62,12 +62,12 @@ static const std::string str = "digraph GG {"
 
 void ParseDotTest::parseCMakeGenerated()
 {
-    GraphDocument doc("A test");
+    DataTypeDocument doc("A test");
     QVERIFY (parse(str, &doc));
 }
 void ParseDotTest::WithSubgraph()
 {
-    GraphDocument doc("A test");
+    DataTypeDocument doc("A test");
     QVERIFY (parse(str_subgraph, &doc));
 }
 
