@@ -45,25 +45,31 @@ Rocs::ListStructure::ListStructure(DataType& other): DataType(other)
 }
 
 void Rocs::ListStructure::initialize(){
-  _front = new ListNode(this);
-  _front->setName("P");
-  _front->hideName(false);
-  _front->hideValue(true);
+  _animationGroup = new QParallelAnimationGroup(this);
+  m_oldBegin = begin();
+  setBegin(DataType::addDatum("P"));
+  begin()->hideName(false);
+  begin()->hideValue(true);
   setDirected(true);
 
   _animationGroup = new QParallelAnimationGroup(this);
-  arrangeNodes();
-//   setBegin(0);
-//   Datum * p = addDatum("P");
-//   p->hideName(false);
-//   p->hideValue(true);
-//   setBegin(p);
+//   arrangeNodes();
+
 }
 
 
 Rocs::ListStructure::~ListStructure() {
 
 }
+
+void Rocs::ListStructure::beforeConvert()
+{
+    remove(begin());
+    if (m_oldBegin != 0 && data().contains(m_oldBegin)){
+      setBegin(m_oldBegin);
+    }
+}
+
 
 Pointer* Rocs::ListStructure::addPointer(Datum* from, Datum* to){
 
@@ -80,20 +86,20 @@ Pointer* Rocs::ListStructure::addPointer(Datum* from, Datum* to){
 void Rocs::ListStructure::setEngine(QScriptEngine* engine)
 {
     DataType::setEngine(engine);
-    _front->setEngine(engine);
+    begin()->setEngine(engine);
 }
 
 
 Datum* Rocs::ListStructure::addDatum ( QString name ) {
 
-    Datum *n = DataType::addDatum(new ListNode(this));
-    n->setName(name);
+    Datum *n = DataType::addDatum(name);
+//     n->setName(name);
     arrangeNodes();
     return n;
 }
 
 QScriptValue Rocs::ListStructure::front() {
-  return _front->scriptValue();
+  return begin()->scriptValue();
 }
 
 QScriptValue Rocs::ListStructure::createNode(const QString & name){
@@ -109,21 +115,21 @@ void Rocs::ListStructure::arrangeNodes(){
       _animationGroup->stop();
   }
   if (data().isEmpty()){
-    _front->setX(40);
-    _front->setY(120);
+    begin()->setX(40);
+    begin()->setY(120);
     return;
   }
-  QScopedArrayPointer<bool>visited (new bool[data().count()]);
-  for (int i = 0; i < data().count(); ++i){
-      visited[i] = false;
-  }
+//   QScopedArrayPointer<bool>visited (new bool[data().count()]);
+//   for (int i = 0; i < data().count(); ++i){
+//       visited[i] = false;
+//   }
 
-  ListNode * n = _front;
+  ListNode * n = qobject_cast<ListNode*>(begin());
 
-  if (n == 0 && !data().isEmpty()){
-      n = qobject_cast<ListNode*>(data().at(0));
-      visited[data().indexOf(n)] = true;
-  }
+//   if (n == 0 && !data().isEmpty()){
+//       n = qobject_cast<ListNode*>(data().at(0));
+//       visited[data().indexOf(n)] = true;
+//   }
 
   if (n == 0){
     return;
@@ -141,31 +147,9 @@ void Rocs::ListStructure::arrangeNodes(){
   _animationGroup->addAnimation(anim);
 
 
-
-
-
-  x = n->width() * 40;
-  y = 250;
-  while ((n = n->next())){
-    if (visited[data().indexOf(n)] || n == _front){
-      break;
-    }
-    visited[data().indexOf(n)] = true;
-    x = x + 70 + n->width()*40;
-    anim = new QPropertyAnimation(n, "x");;
-    anim->setDuration(500);
-    anim->setStartValue(n->x());
-    anim->setEndValue(x);
-    _animationGroup->addAnimation(anim);
-    anim = new QPropertyAnimation(n, "y");;
-    anim->setDuration(500);
-    anim->setStartValue(n->y());
-    anim->setEndValue(y);
-    _animationGroup->addAnimation(anim);
-  }
   x = y = 30;
   foreach (Datum * n, data()){
-    if (!visited[data().indexOf(n)]){
+//     if (!visited[data().indexOf(n)]){
       anim = new QPropertyAnimation(n, "x");;
       anim->setDuration(500);
       anim->setStartValue(n->x());
@@ -179,7 +163,30 @@ void Rocs::ListStructure::arrangeNodes(){
 //       n->setX(x);
 //       n->setY(y);
       x += 60;
-    }
+//     }
   }
+
+
+
+  x = n->width() * 40;
+  y = 250;
+  while ((n = n->next())){
+    if (/*visited[data().indexOf(n)] ||*/  n == begin() ){
+      break;
+    }
+//     visited[data().indexOf(n)] = true;
+    x = x + 70 + n->width()*40;
+    anim = new QPropertyAnimation(n, "x");;
+    anim->setDuration(500);
+    anim->setStartValue(n->x());
+    anim->setEndValue(x);
+    _animationGroup->addAnimation(anim);
+    anim = new QPropertyAnimation(n, "y");;
+    anim->setDuration(500);
+    anim->setStartValue(n->y());
+    anim->setEndValue(y);
+    _animationGroup->addAnimation(anim);
+  }
+
   _animationGroup->start();
 }

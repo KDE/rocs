@@ -294,6 +294,7 @@ public  slots:
 
     /*! remove this graph from the document. */
     void remove();
+    virtual void beforeConvert(){ return; }
 
 #ifdef USING_QTSCRIPT
 //     QScriptValue list_data();

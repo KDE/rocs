@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Graph Plugin: implements graph support in Rocs
+    Copyright (C) 2010  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -47,14 +47,13 @@ GraphPlugin::~GraphPlugin()
 
 }
 
-DataType* GraphPlugin::changeToDS ( DataType* graph) {
-    return new GraphStructure(*graph);
+DataType* GraphPlugin::changeToDS ( DataType* data) {
+    return new GraphStructure(*data);
 }
 
 DataType* GraphPlugin::createDS ( DataTypeDocument* parent )
 {
   return new GraphStructure(parent);
-//     return new Graph(parent);
 }
 
 QGraphicsItem* Rocs::GraphPlugin::datumItem(Datum* node) const

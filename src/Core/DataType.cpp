@@ -245,6 +245,12 @@ Datum* DataType::datum(const QString& name) {
 }
 
 void DataType::remove(Datum *n) {
+    if (begin() == n){
+      setBegin(0);
+    }
+    foreach (Pointer *p, n->adjacent_pointers()){
+        remove(p);
+    }
     d->_data.removeOne( n  );
     n->deleteLater();
 }

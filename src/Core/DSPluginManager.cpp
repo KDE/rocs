@@ -26,6 +26,7 @@
 
 #include <QHash>
 #include <QAction>
+#include "DataType.h"
 
 namespace Rocs {
 class DSPluginManagerPrivate {
@@ -174,6 +175,7 @@ void Rocs::DSPluginManager::changeActiveDS (const QString &newDS ) {
 }
 
 DataType* Rocs::DSPluginManager::changeToDS ( DataType* dataType ) {
+    dataType->beforeConvert();
     return instance()->_d->changeToDS ( dataType );
 
 }
