@@ -20,10 +20,11 @@
 #include "GMLParser.h"
 
 #include "Core/graphDocument.h"
+#include <Pointer.h>
 #include <KAboutData>
 #include <KGenericFactory>
 #include <QFile>
-#include <Core/DataStructureBase.h>
+#include <Core/DataType.h>
 #include "GMLGraphParsingHelper.h"
 #include "GMLGrammar.h"
 
@@ -51,8 +52,8 @@ const QStringList GMLParser::extensions() const {
 }
 
 
-GraphDocument * GMLParser::readFile ( const QString &fileName ) {
-    GraphDocument * graphDoc = new GraphDocument ( "Untitled" );
+DataTypeDocument* GMLParser::readFile ( const QString& fileName ) {
+    DataTypeDocument * graphDoc = new DataTypeDocument ( "Untitled" );
 //     Graph * graph = graphDoc->addGraph();
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
@@ -72,20 +73,20 @@ GraphDocument * GMLParser::readFile ( const QString &fileName ) {
 
 
 
-bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) {
+bool GMLParser::writeFile ( DataTypeDocument& graph, const QString& filename ) {
     QFile file ( filename );
     QVariantList subgraphs;
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
         out << "Version 1\n";
         out << "Vendor \"Rocs\"\n";
-        for (int i = 0 ; i < graphDoc.count(); ++i){
-          DataType *g = graphDoc.at(i);
+        for (int i = 0 ; i < graph.count(); ++i){
+          DataType *g = graph.at(i);
 //         Graph *g = graph.activeGraph();
             out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
             out << QString("id \"%1\" \n").arg(g->name());
 
-            foreach ( Datum *n, g->nodes() ) {
+            foreach ( Datum *n, g->data() ) {
                 out << QString("node [\n id \"%1\" \n").arg(n->name());
 //                 foreach (QByteArray p, n->dynamicPropertyNames()){
 //                    out << p << " " << n->property(p).toString() << "\n";
@@ -94,7 +95,7 @@ bool GMLParser::writeFile ( GraphDocument &graphDoc , const QString &filename ) 
                 out << "]\n";
 
             }
-            foreach ( Pointer *e, g->edges() ) {
+            foreach ( Pointer *e, g->pointers() ) {
                 out << "edge [\n";
 //                  foreach (QByteArray p, e->dynamicPropertyNames()){
 //                    out << p << " " << e->property(p).toString() << "\n";

@@ -1,5 +1,6 @@
-find_package(Boost 1.36 REQUIRED)
+find_package(Boost)
 
+if(Boost_FOUND)
 include_directories(
  ${Boost_INCLUDE_DIR}
  ${CMAKE_CURRENT_BINARY_DIR}
@@ -30,3 +31,4 @@ target_link_libraries(rocs_dotParser
 install(TARGETS rocs_dotParser  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install( FILES rocs_dotParser.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+endif(Boost_FOUND)

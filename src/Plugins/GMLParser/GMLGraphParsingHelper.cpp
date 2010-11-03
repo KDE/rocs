@@ -40,6 +40,7 @@
 #include<QUuid>
 #include "Core/DynamicPropertiesList.h"
 #include <graphDocument.h>
+#include <Pointer.h>
 
 // using namespace std;
 using namespace Rocs;
@@ -170,7 +171,7 @@ void GMLGraphParsingHelper::setAtribute(const QString& key, const QString& value
 
 void GMLGraphParsingHelper::createGraph(){
     if (_actualState == begin){
-      actualGraph = gd->addGraph();
+      actualGraph = gd->addDataType();
       _actualState = graph;
     }
 }
@@ -179,7 +180,7 @@ void GMLGraphParsingHelper::createNode(){
   if (_actualState == graph){
     kDebug () << "Creating a node";
     _actualState = node;
-    actualNode = actualGraph->addNode("NewNode");
+    actualNode = actualGraph->addDatum("NewNode");
   }
 }
 
@@ -189,7 +190,7 @@ void GMLGraphParsingHelper::createEdge(){
     if (!edgeSource.isEmpty() && !edgeTarget.isEmpty()){
       kDebug() << "Creating a edge";
       _actualState = edge;
-      actualEdge = actualGraph->addEdge(edgeSource, edgeTarget);
+      actualEdge = actualGraph->addPointer(edgeSource, edgeTarget);
       edgeSource = edgeTarget = QString();
       while( ! _edgeProperties.isEmpty()){
         QString property = _edgeProperties.keys().at(0);

@@ -23,8 +23,8 @@
 #include <list>
 #include <string>
 #include <QStringList>
-#include "Core/DataStructureBase.h"
-#include "Core/node.h"
+#include "Core/DataType.h"
+#include "Core/Data.h"
 // class Node;
 // class Graph;
 
@@ -61,7 +61,7 @@ namespace GMLPlugin{
     DataType* actualGraph;
     Datum* actualNode;
     Pointer* actualEdge;
-    GraphDocument* gd;
+    DataTypeDocument* gd;
     QStringList _properties;
     QHash<QString, QString> _edgeProperties;
   };

@@ -1,8 +1,8 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    KMLParser.h is part of Rocs
+    Copyright (C) 2010  Wagner Reck <wagner.reck@gmail.com>
 
-    This program is free software: you can redistribute it and/or modify
+    Rocs is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -28,8 +28,8 @@ namespace Rocs{
 
   public:
       KMLParser(QObject* parent, const QList< QVariant >& opts);
-      virtual bool writeFile(GraphDocument& graph, const QString& fileName);
-      virtual GraphDocument* readFile(const QString& file);
+      virtual bool writeFile(DataTypeDocument& graph, const QString& fileName);
+      virtual DataTypeDocument* readFile(const QString& file);
       virtual const QStringList extensions() const;
       virtual const QString scriptToRun();
       virtual const QString lastError();

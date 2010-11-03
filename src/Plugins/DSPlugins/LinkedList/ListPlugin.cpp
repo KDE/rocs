@@ -40,7 +40,7 @@ K_EXPORT_PLUGIN( DSPluginFactory(aboutdata) )
 
 
 ListPlugin::ListPlugin ( QObject* parent, const QList< QVariant >& /*args*/ )
-       : DSPluginInterface( DSPluginFactory::componentData(), parent)
+        : DSPluginInterface( DSPluginFactory::componentData(), parent)
 {
 
 }
@@ -51,19 +51,14 @@ ListPlugin::~ListPlugin()
 }
 
 DataType* ListPlugin::changeToDS ( DataType* graph) {
-    ListStructure *newList = 0;
-    kDebug() << "Graph default color:" << graph->datumDefaultColor();
     return new ListStructure(*graph);
 }
 
-DataType* ListPlugin::createDS ( DataTypeDocument* parent )
-{
-  return new ListStructure(parent);
-//     return new Graph(parent);
+DataType* ListPlugin::createDS ( DataTypeDocument* parent ){
+    return new ListStructure(parent);
 }
 
-QGraphicsItem* Rocs::ListPlugin::datumItem(Datum* node ) const
-{
+QGraphicsItem* Rocs::ListPlugin::datumItem(Datum* node ) const{
     return (new NodeListItem(node));
 }
 
@@ -74,17 +69,17 @@ QGraphicsItem* Rocs::ListPlugin::pointerItem ( Pointer* edge) const
 
 QLayout* Rocs::ListPlugin::nodeExtraProperties ( Datum* node, QWidget* parentWidget) const
 {
-  QGridLayout * lay = new QGridLayout(parentWidget);
-  QLabel *_value = new QLabel(i18n("Front value"), parentWidget);
-  QLineEdit *_valueLine = new QLineEdit(parentWidget);
-  _valueLine->setReadOnly(true);
-  if (node->out_pointers().count() == 1){
-    _valueLine->setText(node->out_pointers().at(0)->to()->value().toString());
-  }
-  lay->addWidget(_value,0,0);
-  lay->addWidget(_valueLine,0,1);
+    QGridLayout * lay = new QGridLayout(parentWidget);
+    QLabel *_value = new QLabel(i18n("Front value"), parentWidget);
+    QLineEdit *_valueLine = new QLineEdit(parentWidget);
+    _valueLine->setReadOnly(true);
+    if (node->out_pointers().count() == 1) {
+        _valueLine->setText(node->out_pointers().at(0)->to()->value().toString());
+    }
+    lay->addWidget(_value,0,0);
+    lay->addWidget(_valueLine,0,1);
 
 
-  return lay;
+    return lay;
 }
 

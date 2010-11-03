@@ -23,7 +23,7 @@
 #include <KAboutData>
 #include <KGenericFactory>
 #include <QFile>
-#include <Core/DataStructureBase.h>
+#include <Core/DataType.h>
 #include "DotGraphParsingHelper.h"
 #include "dotgrammar.h"
 
@@ -51,8 +51,8 @@ const QStringList DotParser::extensions() const {
 }
 
 
-GraphDocument * DotParser::readFile ( const QString &fileName ) {
-    GraphDocument * graphDoc = new GraphDocument ( "Untitled" );
+DataTypeDocument* DotParser::readFile ( const QString& fileName ) {
+    DataTypeDocument * graphDoc = new DataTypeDocument ( "Untitled" );
 //     Graph * graph = graphDoc->addGraph();
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
@@ -72,25 +72,25 @@ GraphDocument * DotParser::readFile ( const QString &fileName ) {
 
 
 
-bool DotParser::writeFile ( GraphDocument &graph , const QString &filename ) {
+bool DotParser::writeFile ( DataTypeDocument& graph, const QString& filename ) {
     QFile file ( filename );
     QVariantList subgraphs;
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
-        DataType *g = graph.activeGraph();
+        DataType *g = graph.activeDataType();
         if (g) {
             out << QString("%1 %2 {\n").arg(g->directed()?"digraph":"graph").arg(g->name());
-            foreach ( Datum *n, g->nodes() ) {
+            foreach ( Datum *n, g->data() ) {
                 if (n->dynamicPropertyNames().contains("SubGraph")){
                   if (!subgraphs.contains(n->property("SubGraph"))){
                     subgraphs << n->property("SubGraph");
                     out << QString("subgraph %1 {\n").arg(n->property("SubGraph").toString());
-                    foreach ( Datum *nTmp, g->nodes() ) {
+                    foreach ( Datum *nTmp, g->data() ) {
                         if (nTmp->property("SubGraph").isValid() && nTmp->property("SubGraph") == subgraphs.last()){
                           out << processNode(nTmp);
                         }
                     }
-                    foreach ( Pointer *e, g->edges() ) {
+                    foreach ( Pointer *e, g->pointers() ) {
                         if (e->property("SubGraph").isValid() && e->property("SubGraph") == subgraphs.last()){ //Only edges from outer graph
                            out << processEdge(e);
                         }
@@ -101,7 +101,7 @@ bool DotParser::writeFile ( GraphDocument &graph , const QString &filename ) {
                   out << processNode(n);
                 }
             }
-            foreach ( Pointer *e, g->edges() ) {
+            foreach ( Pointer *e, g->pointers() ) {
                 if (!e->dynamicPropertyNames().contains("SubGraph")){ //Only edges from outer graph
                     out << processEdge(e);
                 }

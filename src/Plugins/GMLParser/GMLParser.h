@@ -35,9 +35,9 @@ class GMLParser: public Rocs::FilePluginInterface
 
     const QStringList extensions() const; //Extensões suportadas
 
-    GraphDocument * readFile(const QString& fileName) ; //return 0 se arq. inválido
+    DataTypeDocument * readFile(const QString& fileName) ; //return 0 se arq. inválido
 
-    bool writeFile(GraphDocument& graph, const QString& filename) ; //false se não gravou.
+    bool writeFile(DataTypeDocument& graph, const QString& filename) ; //false se não gravou.
 
 
     virtual const QString lastError();

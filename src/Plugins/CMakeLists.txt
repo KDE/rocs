@@ -4,13 +4,13 @@ add_subdirectory(MakeComplete)
 
 add_subdirectory(importPlainTXT)
 
-#add_subdirectory(dotParser)
+add_subdirectory(dotParser)
 
-#add_subdirectory(kmlParser)
+add_subdirectory(kmlParser)
 
 add_subdirectory(DSPlugins)
 
-#add_subdirectory(GMLParser)
+add_subdirectory(GMLParser)
 # set(toolspluginmanager_SRC FilePluginInterface.cpp PluginManager.cpp ToolsPluginInterface.cpp)
 #
 # kde4_add_library(ToolsPluginManager STATIC ${toolspluginmanager_SRC})

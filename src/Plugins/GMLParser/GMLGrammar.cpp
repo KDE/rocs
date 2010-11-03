@@ -33,11 +33,11 @@ namespace GMLPlugin{
 GMLGraphParsingHelper* phelper = 0;
 std::string lastKey = "";
 QObject * lastInserted = 0;
-DataType * actualGraph = 0;
+DataType * actualdataType = 0;
 Datum * actualNode = 0;
 Pointer * actualEdge = 0;
 
-GraphDocument *document = 0;
+DataTypeDocument *document = 0;
 
 void beginList(){
     phelper->startList(QString::fromStdString(lastKey));
@@ -50,7 +50,7 @@ void endList(){
 void gotKey(const std::string& key){
   lastKey = key.c_str();
 //   QString k = key.c_str();
-//   if (k.compare("graph", Qt::CaseInsensitive) == 0){
+//   if (k.compare("dataType", Qt::CaseInsensitive) == 0){
 //     kDebug() << "create a graph";
 //     actualGraph =  document->addGraph("new");
 //     lastInserted = actualGraph;
@@ -91,7 +91,7 @@ void gotValue(const std::string& Value){
       std::cout << "Found " << key << ".\n";
     }
 
-bool parse( QString &content, GraphDocument * doc){
+bool parse( QString &content, DataTypeDocument * doc){
     unsigned result;
     phelper = new GMLGraphParsingHelper;
     phelper->gd = doc;

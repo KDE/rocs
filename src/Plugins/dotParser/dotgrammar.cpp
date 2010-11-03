@@ -1,7 +1,7 @@
-/* This file is part of KDataTypeViewer.
+/* This file is part of KGraphViewer.
    Copyright (C) 2006-2007 Gael de Chalendar <kleag@free.fr>
 
-   KDataTypeViewer is free software; you can redistribute it and/or
+   KGraphViewer is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
    License as published by the Free Software Foundation, version 2.
 
@@ -94,8 +94,8 @@ DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
   node_id  =  (ID >> !( port ));
   port  =  ( ch_p(':') >> ID >> !( ':' >> compass_pt ) )
   |  ( ':' >> compass_pt );
-  subdataType  =  ( !( keyword_p("subgraph") >> !( ID[&subgraphid] ) ) >> ch_p('{')[&createsubdataType][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
-  |  ( keyword_p("subgraph") >> ID[&subgraphid]);
+  subdataType  =  ( !( keyword_p("subgraph") >> !( ID[&subdataTypeid] ) ) >> ch_p('{')[&createsubdataType][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
+  |  ( keyword_p("subgraph") >> ID[&subdataTypeid]);
   compass_pt  =  (keyword_p("n") | keyword_p("ne") | keyword_p("e")
   | keyword_p("se") | keyword_p("s") | keyword_p("sw")
   | keyword_p("w") | keyword_p("nw") );
@@ -126,8 +126,8 @@ void decrz(char const /*first*/)
   if (phelper)
   {
 //     phelper->z--;
-//     kDebug() << QString::fromStdString(phelper->subgraphid);
-    phelper->subgraphid.removeLast();
+//     kDebug() << QString::fromStdString(phelper->subdataTypeid);
+    phelper->subdataTypeid.removeLast();
   }
 }
 
@@ -188,7 +188,7 @@ void attrid(char const* first, char const* last)
   }
 }
 
-void subgraphid(char const* first, char const* last)
+void subdataTypeid(char const* first, char const* last)
 {
   std::string id(first,last);
 //   kDebug() << QString::fromStdString(id);
@@ -196,9 +196,9 @@ void subgraphid(char const* first, char const* last)
   {
     if (id.size()>0 && id[0] == '"') id = id.substr(1);
     if (id.size()>0 && id[id.size()-1] == '"') id = id.substr(0,id.size()-1);
-//     phelper->subgraphid
-    phelper->subgraphid.append(QString::fromStdString(id));
-//     kDebug() << "Got subdataType id = '"<<phelper->subgraphid<<"'";
+//     phelper->subdataTypeid
+    phelper->subdataTypeid.append(QString::fromStdString(id));
+//     kDebug() << "Got subdataType id = '"<<phelper->subdataTypeid<<"'";
   }
 }
 
@@ -233,8 +233,8 @@ void pushAttrList(char const* /*first*/, char const* /*last*/)
   if (phelper)
   {
     phelper->dataTypeAttributesStack.push_back(phelper->dataTypeAttributes);
-    phelper->nodesAttributesStack.push_back(phelper->nodesAttributes);
-    phelper->edgesAttributesStack.push_back(phelper->edgesAttributes);
+    phelper->datumAttributesStack.push_back(phelper->datumAttributes);
+    phelper->pointersAttributesStack.push_back(phelper->pointersAttributes);
   }
 }
 
@@ -250,10 +250,10 @@ void popAttrList(char const* /*first*/, char const* /*last*/)
   {
     phelper->dataTypeAttributes = phelper->dataTypeAttributesStack.back();
     phelper->dataTypeAttributesStack.pop_back();
-    phelper->nodesAttributes = phelper->nodesAttributesStack.back();
-    phelper->nodesAttributesStack.pop_back();
-    phelper->edgesAttributes = phelper->edgesAttributesStack.back();
-    phelper->edgesAttributesStack.pop_back();
+    phelper->datumAttributes = phelper->datumAttributesStack.back();
+    phelper->datumAttributesStack.pop_back();
+    phelper->pointersAttributes = phelper->pointersAttributesStack.back();
+    phelper->pointersAttributesStack.pop_back();
   }
 //   kDebug() << "Poped";
 }
@@ -266,7 +266,7 @@ void createnode(char const* first, char const* last)
     std::string id(first,last);
     if (id.size()>0 && id[0] == '"') id = id.substr(1);
     if (id.size()>0 && id[id.size()-1] == '"') id = id.substr(0,id.size()-1);
-    phelper->createnode(id);
+    phelper->createdatum(id);
   }
 }
 
@@ -299,7 +299,7 @@ void setnodeattributes(char const* /*first*/, char const* /*last*/)
 //   kDebug() << "setnodeattributes with z = " << phelper->z;
   if (phelper)
   {
-    phelper->setnodeattributes();
+    phelper->setdatumattributes();
   }
 }
 
@@ -548,7 +548,7 @@ bool parse(const std::string& str, DataTypeDocument * gd)
   if (phelper != 0){
     delete phelper;
   }
-  phelper = new DotDataTypeParsingHelper;
+  phelper = new DotGraphParsingHelper;
   phelper->gd = gd;
 
   return boost::spirit::classic::parse(str.c_str(), g >> end_p, (+boost::spirit::classic::space_p|boost::spirit::classic::comment_p("/*", "*/"))).full;

@@ -46,29 +46,29 @@ struct DotGraphParsingHelper
   DotGraphParsingHelper();
 
   void createdatum(const std::string& nodeid);
-  void createsubgraph();
-  void setgraphattributes();
-  void setsubgraphattributes();
+  void createsubdataType();
+  void setdataTypeattributes();
+  void setsubdataTypeattributes();
       void setdatumattributes();
   void setedgeattributes();
   void setattributedlist();
   void createedges();
   void edgebound(const std::string& bound) {edgebounds.push_back(bound);}
   void finalactions();
-  void setgraphelementattributes(QObject* ge, const KGraphViewer::DotGraphParsingHelper::AttributesMap& attributes);
+  void setdataTypeelementattributes(QObject* ge, const KGraphViewer::DotGraphParsingHelper::AttributesMap& attributes);
 
   std::string attrid;
   std::string valid;
   std::string attributed;
-  QStringList subgraphid;
+  QStringList subdataTypeid;
 //   std::string subgraphid;
   unsigned int uniq;
 
   AttributesMap attributes;
-  AttributesMap graphAttributes;
+  AttributesMap dataTypeAttributes;
   AttributesMap datumAttributes;
   AttributesMap pointersAttributes;
-  std::list< AttributesMap > graphAttributesStack;
+  std::list< AttributesMap > dataTypeAttributesStack;
   std::list< AttributesMap > datumAttributesStack;
   std::list< AttributesMap > pointersAttributesStack;
 
@@ -77,7 +77,7 @@ struct DotGraphParsingHelper
   unsigned int z;
   unsigned int maxZ;
 
-  DataType* graph;
+  DataType* dataType;
 
 //   GraphSubgraph* gs;
   Datum* gn;

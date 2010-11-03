@@ -19,6 +19,9 @@
 
 #include "KMLHandler.h"
 #include <KDebug>
+#include <Core/DataType.h>
+#include <Core/Data.h>
+
 
 
 KMLHandler::KMLHandler(DataType* doc): QXmlDefaultHandler(), m_graph(doc)
@@ -38,7 +41,7 @@ bool KMLHandler::characters(const QString& str)
     return true;
 }
 
-bool KMLHandler::endElement(const QString& namespaceURI, const QString& localName, const QString& qName)
+bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName)
 {
   Datum * n = 0;
     if (qName == "coordinates") {
@@ -51,7 +54,7 @@ bool KMLHandler::endElement(const QString& namespaceURI, const QString& localNam
         if (m_name.isEmpty()) {
             m_name = QString::number(qrand());
         }
-        n = m_graph->addNode(m_name);
+        n = m_graph->addDatum(m_name);
         QStringList values = m_coordinates.split(',');
         if (values.count() >=2) {
 
@@ -79,7 +82,7 @@ bool KMLHandler::endElement(const QString& namespaceURI, const QString& localNam
 
             QStringList values = point.split(',');
             if (values.count() >=2) {
-               n = m_graph->addNode(m_name + "_" + QString::number(count+1));
+               n = m_graph->addDatum(m_name + "_" + QString::number(count+1));
 
                 n->setX(values.at(0).toDouble());
                 n->addDynamicProperty("Longitude", values.at(0).toDouble());
@@ -93,7 +96,7 @@ bool KMLHandler::endElement(const QString& namespaceURI, const QString& localNam
                 n->addDynamicProperty("Description", m_description);
             }
             if (n_old != 0){
-              m_graph->addEdge(n_old, n);
+              m_graph->addPointer(n_old, n);
             }
             n_old = n;
         }
@@ -119,7 +122,7 @@ bool KMLHandler::fatalError(const QXmlParseException& exception)
 
 
 
-bool KMLHandler::startElement(const QString& namespaceURI, const QString& localName, const QString& qName, const QXmlAttributes& attributes)
+bool KMLHandler::startElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName, const QXmlAttributes& /*attributes*/)
 {
     currentText.clear();
     return true;

@@ -19,7 +19,7 @@
 
 #ifndef KMLHANDLER_H
 #define KMLHANDLER_H
-#include <Core/DataStructureBase.h>
+#include <Core/DataType.h>
 #include <QXmlDefaultHandler>
 
 
