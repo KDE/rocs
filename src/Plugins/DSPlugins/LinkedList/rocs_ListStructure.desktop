@@ -13,6 +13,7 @@ X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=Linked list
+Name[ca]=Llista enllaçada
 Name[en_GB]=Linked list
 Name[es]=Lista enlazada
 Name[et]=Lingitud loend

@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Rocs/DSPlugin
 X-KDE-Derived=KPluginInfo
 Comment=Rocs Data Structure Plugin
+Comment[ca]=Endollable d'estructures de dades de Rocs
 Comment[en_GB]=Rocs Data Structure Plugin
 Comment[es]=Complemento de estructura de datos para Rocs
 Comment[et]=Rocsi andmestruktuuri plugin
