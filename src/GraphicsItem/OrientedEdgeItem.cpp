@@ -37,6 +37,7 @@
 #include <QtAlgorithms>
 #include <KDebug>
 #include <math.h>
+#include <qmath.h>
 #include <QGraphicsSimpleTextItem>
 
 OrientedEdgeItem::OrientedEdgeItem( Pointer *pointer, QGraphicsItem *parent)
@@ -178,7 +179,7 @@ void OrientedEdgeItem::updatePos() {
         gScene->updateAfter(this);
     }
     QLine q(_pointer->from()->x(), _pointer->from()->y(),    _pointer->to()->x(),  _pointer->to()->y());
-    qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
+    qreal size = qSqrt( qPow(q.dx(), 2) + qPow(q.dy(), 2));
     if (_pointer->from() != _pointer->to() && size < 20  ) {
         setPath(QPainterPath());
     } else {
