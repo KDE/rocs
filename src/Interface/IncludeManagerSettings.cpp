@@ -32,13 +32,13 @@ IncludeManagerSettings::IncludeManagerSettings ( QWidget* parent, Qt::WindowFlag
     QGridLayout * lay = new QGridLayout(this);
     _url = new KUrlRequester(this);
     _url->setMode(KFile::Directory|KFile::LocalOnly|KFile::ExistingOnly);;
-    KPushButton * add = new KPushButton(this);
-    KPushButton * del = new KPushButton(this);
+    KPushButton * add = new KPushButton(KIcon("list-add"), QString(), this);
+    KPushButton * del = new KPushButton(KIcon("list-remove"), QString(),  this);
 
     lay->addWidget(_url,0,0);
     lay->addWidget(_list_View,1,0);
-    lay->addWidget(add,1,1);
-    lay->addWidget(del,2,1);
+    lay->addWidget(add,0,1);
+    lay->addWidget(del,1,1, Qt::AlignTop|Qt::AlignLeft);
     add->setDefault(true);
     this->setLayout(lay);
     readConfig();
