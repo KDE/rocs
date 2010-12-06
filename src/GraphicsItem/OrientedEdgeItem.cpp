@@ -179,7 +179,7 @@ void OrientedEdgeItem::updatePos() {
         gScene->updateAfter(this);
     }
     QLine q(_pointer->from()->x(), _pointer->from()->y(),    _pointer->to()->x(),  _pointer->to()->y());
-    qreal size = qSqrt( qPow(q.dx(), 2) + qPow(q.dy(), 2));
+    qreal size = qSqrt( qPow(qreal(q.dx()), 2) + qPow(qreal(q.dy()), 2));
     if (_pointer->from() != _pointer->to() && size < 20  ) {
         setPath(QPainterPath());
     } else {
@@ -226,7 +226,7 @@ void OrientedEdgeItem::updateAttributes() {
 void OrientedEdgeItem::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget){
   Q_UNUSED(option);
   Q_UNUSED(widget);
-  
+
   if ( isSelected() ){
     painter->setPen(QPen(Qt::black, _pointer->width(),  Qt::DotLine));
   }
