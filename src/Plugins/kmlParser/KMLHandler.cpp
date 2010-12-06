@@ -122,7 +122,7 @@ bool KMLHandler::fatalError(const QXmlParseException& exception)
 
 
 
-bool KMLHandler::startElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName, const QXmlAttributes& /*attributes*/)
+bool KMLHandler::startElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& /*qName*/, const QXmlAttributes& /*attributes*/)
 {
     currentText.clear();
     return true;
