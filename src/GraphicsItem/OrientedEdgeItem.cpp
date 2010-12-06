@@ -138,7 +138,7 @@ QPainterPath OrientedEdgeItem::createCurves() const {
         finalY *= (-1);
     }
 
-    qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
+    qreal size = qSqrt(qPow((x*0.1),2) + qPow((y*0.1),2)) * index;
 
     finalX *= size;
     finalY *= size;
@@ -179,7 +179,7 @@ void OrientedEdgeItem::updatePos() {
         gScene->updateAfter(this);
     }
     QLine q(_pointer->from()->x(), _pointer->from()->y(),    _pointer->to()->x(),  _pointer->to()->y());
-    qreal size = qSqrt( qPow(qreal(q.dx()), 2) + qPow(qreal(q.dy()), 2));
+    qreal size = qSqrt( qPow(q.dx(), 2) + qPow(q.dy(), 2));
     if (_pointer->from() != _pointer->to() && size < 20  ) {
         setPath(QPainterPath());
     } else {
