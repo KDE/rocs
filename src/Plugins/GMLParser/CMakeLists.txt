@@ -1,4 +1,4 @@
-find_package(Boost)
+find_package(Boost  1.43)
 
 if (Boost_FOUND)
   include_directories(
