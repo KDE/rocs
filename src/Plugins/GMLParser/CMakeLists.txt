@@ -1,6 +1,6 @@
 find_package(Boost  1.43)
 
-if (Boost_FOUND)
+if (Boost_FOUND AND Boost_MINOR_VERSION GREATER 42)
   include_directories(
   ${Boost_INCLUDE_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
@@ -23,7 +23,7 @@ if (Boost_FOUND)
 
   qt4_automoc(${GMLParser_SRCS})
   kde4_add_plugin(rocs_GMLParser ${GMLParser_SRCS})
-
+  add_definitions(-DQT_STL)
   target_link_libraries(rocs_GMLParser
     ${KDE4_KDEUI_LIBS}
     rocslib
@@ -32,4 +32,4 @@ if (Boost_FOUND)
   install(TARGETS rocs_GMLParser  DESTINATION ${PLUGIN_INSTALL_DIR})
 
   install( FILES rocs_GMLParser.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
-endif(Boost_FOUND)
+endif(Boost_FOUND AND Boost_MINOR_VERSION GREATER 42)
