@@ -85,7 +85,7 @@ public  slots:
 
     void setX(int x);
     void setY(int y);
-    void setWidth(double w);
+    void setWidth(qreal w);
     void setPos(qreal x, qreal y);
     qreal x() const;
     qreal y() const;
