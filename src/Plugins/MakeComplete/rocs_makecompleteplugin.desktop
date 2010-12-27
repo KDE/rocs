@@ -43,6 +43,7 @@ Comment[ca]=Completa tots els grafs. S'esborraran totes les arestes reals.
 Comment[ca@valencia]=Completa tots els grafs. S'esborraran totes les arestes reals.
 Comment[cs]=Označit všechny grafy jako dokončené. Všechny dosavadní hrany budou odstraněny.
 Comment[da]=Færdiggør alle grafer. Alle aktuelle kanter bliver fjernet.
+Comment[de]=Alle Graphen vervollständigen. Alle aktuellen Kanten werden entfernt.
 Comment[el]=Ολοκλήρωση όλων των γραφημάτων. Όλες οι ενεργές ακμές θα αφαιρεθούν.
 Comment[en_GB]=Make all graphs complete. All actual edges will be removed.
 Comment[es]=Completar todos los grafos. Se eliminarán todas las aristas reales.
