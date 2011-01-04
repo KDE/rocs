@@ -25,15 +25,15 @@
 
 class AbstractAction;
 class QAction;
-class Datum;
+class Data;
 class Pointer;
 class QGraphicsItem;
-class DataTypeDocument;
-class DataType;
+class Document;
+class DataStructure;
 class QGraphicsSceneMouseEvent;
 class QGraphicsSceneWheelEvent;
 class QKeyEvent;
-class DatumPropertiesWidget;
+class DataPropertiesWidget;
 class PointerPropertiesWidget;
 
 class GraphScene : public QGraphicsScene {
@@ -41,10 +41,10 @@ class GraphScene : public QGraphicsScene {
 public:
     GraphScene(QObject *parent);
     void setAction(QAction *action);
-    void updateGraph(DataType *g);
+    void updateGraph(DataStructure *g);
     void updateDocument();
-    void setActiveGraph(DataType *g);
-    void setActiveDataTypeDocument(DataTypeDocument *gd);
+    void setActiveGraph(DataStructure *g);
+    void setActiveDocument(Document *gd);
     void clearGraph();
 
     void setHideEdges(bool h);
@@ -52,12 +52,12 @@ public:
     void updateAfter(QGraphicsItem *item);
     bool fade() const{ return _fade; }
     void fade(bool b){ _fade = b; }
-    void hideGraph( DataType *g, bool visibility);
+    void hideGraph( DataStructure *g, bool visibility);
 
 public slots:
-    QGraphicsItem* createDatum( Datum* n);
+    QGraphicsItem* createData(Data * n);
     QGraphicsItem* createEdge( Pointer *e);
-    void connectGraphSignals(DataType *g);
+    void connectGraphSignals(DataStructure *g);
     void createItems();
 
 protected:
@@ -69,13 +69,13 @@ protected:
     void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
-    DataTypeDocument *_graphDocument;
-    DataType *_graph;
+    Document *_graphDocument;
+    DataStructure *_graph;
     AbstractAction *_action;
-    QMultiHash<DataType*, QGraphicsItem* > _hashGraphs;
+    QMultiHash<DataStructure*, QGraphicsItem* > _hashGraphs;
     QList<QGraphicsItem*> _hidedEdges;
     bool _hideEdges;
-    DatumPropertiesWidget *_datumPropertiesWidget;
+    DataPropertiesWidget *_datumPropertiesWidget;
     PointerPropertiesWidget *_pointerPropertiesWidget;
     bool _fade;
     void releaseDocument();

@@ -23,8 +23,6 @@
 #include "PluginManager.h"
 
 
-namespace Rocs{
-
 class  ToolsPluginInterface::Private{
 public:
 	KPluginInfo *_pluginInfo;
@@ -66,7 +64,3 @@ KPluginInfo ToolsPluginInterface::pluginInfo()
     return PluginManager::instance()->pluginInfo(this);
 // 	return *(d->_pluginInfo);
 }
-
-
-}
-

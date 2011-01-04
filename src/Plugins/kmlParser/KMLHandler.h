@@ -19,7 +19,7 @@
 
 #ifndef KMLHANDLER_H
 #define KMLHANDLER_H
-#include <Core/DataType.h>
+#include <Core/DataStructure.h>
 #include <QXmlDefaultHandler>
 
 
@@ -53,7 +53,7 @@ private:
     QString errorStr;
 
     QString m_name;
-    DataType * m_graph;
+    DataStructure * m_graph;
     QStringList args;
     QString m_coordinates;
     QString m_description;

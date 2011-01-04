@@ -10,12 +10,13 @@ include_directories(
 )
 
 set(librocsactions_SRCS
-	AbstractAction.cpp
-	AddNode.cpp
-	AddEdge.cpp
-	MoveNode.cpp
-	Select.cpp
-	DeleteAction.cpp
-	AlignAction.cpp
+  AbstractAction.cpp
+  AddConnection.cpp
+  AddData.cpp
+  AlignAction.cpp
+  DeleteAction.cpp
+  MoveData.cpp
+  Select.cpp
+
 )
 kde4_add_library( librocsactions	STATIC ${librocsactions_SRCS} )

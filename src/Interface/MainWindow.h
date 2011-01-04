@@ -29,24 +29,18 @@ class KPushButton;
 class GraphLayers;
 class GraphVisualEditor;
 class KActionCollection;
-class DataTypeDocument;
-class DataType;
+class Document;
+class DataStructure;
 class KTextBrowser;
 class QSplitter;
 class GraphScene;
 class KAction;
-class MoveNodeAction;
+class MoveDataAction;
 class TabWidget;
 class CodeEditor;
-class ThreadDocument;
 class QScriptEngine;
 class QScriptEngineDebugger;
-
-#include <QWaitCondition>
-
-namespace Rocs{
-    class ToolsPluginInterface;
-}
+class ToolsPluginInterface;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -60,12 +54,9 @@ public:
     /*! defalt constructor */
     MainWindow();
     ~MainWindow();
-    DataType *graph() const;
+    
     GraphScene *scene() const;
-//    void debug(const QString& s);
-    DataTypeDocument *activeDocument() const;
-    QMutex& mutex();
-
+    
 private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.
@@ -80,10 +71,6 @@ private: // Methods
 
 
 private slots:
-
-
-    void startThreadDocument();
-
      void showSettings();
     //Testing to connect to KGHNS3
     void downloadNewExamples();
@@ -104,9 +91,9 @@ private slots:
     void dsChanged();
 
 public slots:
-    void setActiveDataTypeDocument(DataTypeDocument *d);
-    void releaseDocument(DataTypeDocument *d);
-    void setActiveGraph(DataType*g);
+    void setActiveDocument(Document *d);
+    void releaseDocument(Document *d);
+    //void setActiveGraph(DataStructure *g);
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
@@ -120,7 +107,7 @@ public slots:
       void stopEvaluation();
       void endThreadDocument();
 
-      void runTool(Rocs::ToolsPluginInterface * plugin, DataTypeDocument * graphs);
+      void runTool(ToolsPluginInterface * plugin, Document * graphs);
 private: // Variables.
 
     // Left Area:
@@ -142,18 +129,10 @@ private: // Variables.
     QSplitter *_vSplitter;
     QSplitter *_hSplitter;
 
-    //! The Active Graph.
-
     //! all the actions that I need to reference later.
-    MoveNodeAction *_moveNodeAction;
+    MoveDataAction *_moveDataAction;
 
     QScriptEngineDebugger *_scriptDbg;
-
-    //!threading and Document part
-    ThreadDocument *_tDocument;
-    QWaitCondition _waitForDocument;
-    QMutex _mutex;
-    bool _idle;
 };
 
 #endif

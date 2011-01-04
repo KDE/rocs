@@ -41,7 +41,7 @@ AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, QWid
 
 void AlignAction::align() {
     GraphVisualEditor *gEditor = qobject_cast<GraphVisualEditor*>(parent());
-    QList<DatumItem*> l = gEditor->selectedNodes();
+    QList<DataItem*> l = gEditor->selectedNodes();
 
     if (l.size() < 1) return;
     gEditor->scene()->setHideEdges(true);
@@ -69,29 +69,25 @@ void AlignAction::align() {
     gEditor->scene()->setHideEdges(false);
 }
 
-void AlignAction::allignY(QList<DatumItem*>& l) {
+void AlignAction::allignY(QList<DataItem*>& l) {
     qreal final = l[0]->datum()->y();
     
-    kDebug() << "final sould be:" << final;
     if (m_orientation == VCenter || m_orientation == HCenter) {
         qreal otherSide = l[l.size()-1]->datum()->y();
         final = (final + otherSide) / 2;
     }
-    foreach(DatumItem *i, l) {
+    foreach(DataItem *i, l) {
         i->datum()->setY(final);
     }
-    kDebug() << "but it is:" << l[0]->datum()->y();
 }
 
-void AlignAction::allignX(QList<DatumItem*>& l) {
+void AlignAction::allignX(QList<DataItem*>& l) {
     qreal final = l[0]->datum()->x();
-    kDebug() << "final should be:" << final;
     if (m_orientation == VCenter || m_orientation == HCenter) {
         qreal otherSide = l[l.size()-1]->datum()->x();
         final = (final + otherSide) / 2;
     }
-    foreach(DatumItem *i, l) {
+    foreach(DataItem *i, l) {
         i->datum()->setX(final);
     }
-    kDebug() << "but it is:" << l[0]->datum()->x();
 }

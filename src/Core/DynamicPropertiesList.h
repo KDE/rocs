@@ -22,8 +22,8 @@
 #include <QObject>
 #include <QList>
 
-class Datum;
-class DataType;
+class Data;
+class DataStructure;
 class Pointer;
 
 #include "rocslib_export.h"
@@ -40,9 +40,9 @@ enum DynamicPropertyType{
 class ROCSLIB_EXPORT DynamicPropertiesList : public QObject
 {
   Q_OBJECT
-  QMap< DataType*,  QMultiMap <QString, Datum* > > _NodesProperties;
-  QMap< DataType*,  QMultiMap <QString, Pointer* > > _EdgesProperties;
-  QMultiMap <QString, DataType*> _GraphProperties;
+  QMap< DataStructure*,  QMultiMap <QString, Data* > > _NodesProperties;
+  QMap< DataStructure*,  QMultiMap <QString, Pointer* > > _EdgesProperties;
+  QMultiMap <QString, DataStructure*> _GraphProperties;
 
   static DynamicPropertiesList * self;
 
@@ -52,17 +52,15 @@ public:
 
   static DynamicPropertiesList * New();
 
-  void addProperty(QObject *obj, QString name);
-  void removeProperty(QObject *obj, QString name);
+  void addProperty(QObject *obj,const QString& name);
+  void removeProperty(QObject *obj,const QString& name);
 
-  /**Return type of property from obj*/
-  DynamicPropertyType type(QObject *obj, QString name);
-  /**Return textual type of property from obj*/
-  QString typeInText(QObject* obj, QString name);
+  DynamicPropertyType type(QObject *obj,const QString& name);
+  const QString typeInText(QObject* obj,const QString& name);
 
 //   const QStringList properties (QObject * obj);
 
-  void clear(DataType * dataStructure = 0);
+  void clear(DataStructure * dataStructure = 0);
 
   /** Change property name in all objects from same graph of object.*/
   void changePropertyName(QString name, QString newName, QObject* object);

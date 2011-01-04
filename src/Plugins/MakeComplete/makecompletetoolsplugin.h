@@ -24,7 +24,7 @@
 #include "../ToolsPluginInterface.h"
 #include <QStringList>
 
-class MakeCompleteToolPlugin : public Rocs::ToolsPluginInterface
+class MakeCompleteToolPlugin : public ToolsPluginInterface
 {
   Q_OBJECT
 //   Q_INTERFACES(ToolsPluginInterface)

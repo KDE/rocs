@@ -1,7 +1,7 @@
 #include "GraphLayers.h"
 #include "GraphPropertiesWidget.h"
-#include "graphDocument.h"
-#include "DataType.h"
+#include "Document.h"
+#include "DataStructure.h"
 #include "MainWindow.h"
 #include <KPushButton>
 #include <QButtonGroup>
@@ -10,6 +10,7 @@
 #include <QHBoxLayout>
 #include <KDebug>
 #include <KLineEdit>
+#include "DocumentManager.h"
 
 GraphLayers::GraphLayers(MainWindow *parent) : QWidget(parent) {
     _mainWindow = parent;
@@ -35,24 +36,23 @@ void GraphLayers::populate() {
         _buttonGroup->removeButton(b);
     }
 
-    DataTypeDocument *gd = _mainWindow->activeDocument();
-    connect(gd, SIGNAL(dataTypeCreated(DataType*)), this, SLOT(addGraph(DataType*)),Qt::UniqueConnection);
+    Document *gd = DocumentManager::self()->activeDocument();
+    connect(gd, SIGNAL(dataTypeCreated(DataStructure*)), this, SLOT(addGraph(DataStructure*)),Qt::UniqueConnection);
 
-    int total = gd->count();
-    for (int i = 0; i < total; ++i) {
-	  addGraph(gd->at(i));
+    foreach(DataStructure *s, gd->dataStructures()){
+	  addGraph(s);
     }
 }
 
 void GraphLayers::btnADDClicked() {
     QString name = _lineEdit->text();
     if (name == QString()) {
-        name = i18n("Untitled%1", _mainWindow->activeDocument()->count());
+        name = i18n("Untitled%1", DocumentManager::self()->activeDocument()->dataStructures().count());
     }
     emit  createGraph(name);
 }
 
-void GraphLayers::addGraph(DataType *g){
+void GraphLayers::addGraph(DataStructure *g){
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
     _buttonGroup->addButton(gp->radio());
     connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()),Qt::UniqueConnection);

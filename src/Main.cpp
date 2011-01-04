@@ -28,7 +28,7 @@
 #include <QByteArray>
 
 #include "Interface/MainWindow.h"
-#include <DSPluginManager.h>
+#include "Core/DataStructurePluginManager.h"
 
 int main ( int argc, char *argv[] ) {
     KAboutData aboutData ("rocs",
@@ -38,7 +38,7 @@ int main ( int argc, char *argv[] ) {
                           ki18n ( "Graph Theory Tool" ),
                           KAboutData::License_GPL,
                           ki18n ( "(c) 2009" ),
-                          ki18n ( "Thanks to Ugo Sangiori" ),
+                          ki18n ( "Rocs - Data Structure Training" ),
                           "",
                           "submit@bugs.kde.org" );
 
@@ -47,13 +47,17 @@ int main ( int argc, char *argv[] ) {
 
     KCmdLineArgs::init ( argc, argv, &aboutData );
     KApplication app;
-
-    MainWindow *window = new MainWindow();
-//     if (Rocs::DSPluginManager::instance()->listOfDS().count() != 0){
+    
+    if (DataStructurePluginManager::self()->listOfDataStructures().count() == 0){
+          KMessageBox::detailedError(0,
+                                 i18n("No Data Structure plugins found in the system. Exiting."),
+                                 i18n("Rocs need at least one data structure plugin to continue.\n"
+                                      "Try running kbuildsycoca4 from a console and after execute Rocs again."));
+      
+    }else{
+      MainWindow *window = new MainWindow();
       window->show();
       return app.exec();
-//     }else{
-//       return -1;
-//     }
-
+    }
+    return 0;
 }

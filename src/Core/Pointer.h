@@ -20,23 +20,19 @@
 #ifndef POINTER_H
 #define POINTER_H
 
-#ifndef USING_QTSCRIPT
-#define USING_QTSCRIPT 1
-#endif
-
 #include <QObject>
 #include <QtScript>
 #include <QString>
-
-#ifdef USING_QTSCRIPT
+#include <QColor>
 #include <QScriptValue>
-#include "qtScriptBackend.h"
-#endif
+#include "QtScriptBackend.h"
 
 #include "rocslib_export.h"
 
-class Datum;
+class Data;
 class PointerPrivate;
+class DataStructure;
+
 
 /**
 * \class Pointer
@@ -53,7 +49,7 @@ class ROCSLIB_EXPORT Pointer : public QObject {
 
     /*! all properties are accessible from the scripting engine via .propertyName */
 
-    Q_PROPERTY(QString color READ color WRITE setColor)
+    Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(QString value READ value WRITE setValue)
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(double width READ width WRITE setWidth)
@@ -64,7 +60,7 @@ public:
     \p parent a Graph
     \p from the first datum
     \p to the second datum */
-    Pointer(DataType *parent, Datum *from, Datum *to);
+    Pointer(DataStructure *parent, Data *from, Data *to);
 
     /*! default destructor */
     ~Pointer();
@@ -78,15 +74,15 @@ public:
     int relativeIndex() const;
 
     /*! remove this datum from the graph */
-    void remove(Datum* node = 0);
+    void remove(Data* node = 0);
 
     /*! forces emitting a signal that will update this pointer on screen */
     void emitChangedSignal();
 
     /*! returns the datastructure that owns this pointer. */
-    DataType *dataType() const;
+    DataStructure *dataStructure() const;
     
-#ifdef USING_QTSCRIPT
+
     /*! if the qtscript is enabled for this rocs,
       this method returns the self-referenced script value for this pointer.
       \return QScriptValue self reference for this datum.
@@ -97,18 +93,18 @@ public:
     this method will set the engine for this single object
     \p engine the QScriptEngine that will work on the object */
     void setEngine(	QScriptEngine *engine );
-#endif
+
 
 public  slots:
     /*! return the first datum of this pointer
-      \return Datum* pointer for the first datum of this pointer.
+      \return Data* pointer for the first datum of this pointer.
     */
-    Datum* from() const;
+    Data* from() const;
 
     /*! return the second datum of this pointer
-      \return Datum* pointer for the second datum of this pointer.
+      \return Data* pointer for the second datum of this pointer.
     */
-    Datum* to() const ;
+    Data* to() const ;
 
     /*! return the value of this pointer
     \return the value of the pointer.
@@ -132,12 +128,12 @@ public  slots:
     /*! gets the color attribute of the pointer
       \return the string value of the pointer.
     */
-    const QString& color() const ;
+    const QColor& color() const ;
 
     /*! sets the color attribute of the pointer
       \p s the new color of the pointer in the format "#000000" or by it's english name ("red" for example)
     */
-    void setColor(const QString& s);
+    void setColor(const QColor& s);
 
     qreal width () const;
     void setWidth(double w);
@@ -161,7 +157,6 @@ public  slots:
     void hideName(bool b);
     void hideValue(bool b);
 
-#ifdef USING_QTSCRIPT
     /*! this method can be used inside of the script interface.
     \return the first datum of this pointer.
     */
@@ -176,8 +171,6 @@ public  slots:
      it will remove this pointer from the graph.
      */
     void self_remove();
-
-#endif
     
 private:
   PointerPrivate * const d;
@@ -189,5 +182,4 @@ signals:
     void changed();
 };
 
-typedef QList<Pointer*> PointerList;
 #endif

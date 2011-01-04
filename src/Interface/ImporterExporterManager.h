@@ -21,13 +21,8 @@
 #define IMPORTEREXPORTERMANAGER_H
 
 #include <QObject>
-#include "Core/graphDocument.h"
-// #include <boost/spirit/home/classic/core/non_terminal/grammar.hpp>
-// #include <boost/spirit/home/classic/core/non_terminal/rule.hpp>
 
-
-
-namespace Rocs{
+class Document;
 
 class ImporterExporterManager : public QObject
 {
@@ -35,8 +30,8 @@ class ImporterExporterManager : public QObject
   QString _scriptToRun;
   public:
     ImporterExporterManager(QObject* parent = 0);
-    DataTypeDocument* importFile();
-    bool exportFile(DataTypeDocument* doc) const;
+    Document* importFile();
+    bool exportFile(Document* doc) const;
     QString& scriptToRun() {return _scriptToRun;}
 
     void dialogExec();
@@ -44,5 +39,5 @@ class ImporterExporterManager : public QObject
 
 //     GraphDocument * openDocument();
 };
-}
+
 #endif // IMPORTEREXPORTERMANAGER_H

@@ -17,45 +17,42 @@
  * Boston, MA 02110-1301, USA.
  ***************************************************************************/
 
-#ifndef NODE_H
-#define NODE_H
-
-#ifndef USING_QTSCRIPT
-#define USING_QTSCRIPT 1
-#endif
+#ifndef DATA_H
+#define DATA_H
 
 #include <QObject>
 #include <QList>
 #include <QString>
 
 #include <QtScript>
-#include "qtScriptBackend.h"
+#include "QtScriptBackend.h"
+#include <QColor>
 
+#include "DataItem.h"
 #include "rocslib_export.h"
-#include "rocs_typedefs.h"
+#include "Rocs_Typedefs.h"
 
+class DataItem;
 class Pointer;
-class Datum;
-class DatumPrivate;
+class DataPrivate;
+class DataStructure;
 
-class  ROCSLIB_EXPORT Datum : public QObject {
+class  ROCSLIB_EXPORT Data : public QObject {
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX)
     Q_PROPERTY(qreal y READ y WRITE setY)
     Q_PROPERTY(qreal width READ width WRITE setWidth)
     Q_PROPERTY(QString name READ name WRITE setName)
-    Q_PROPERTY(QString color READ color WRITE setColor)
-    Q_PROPERTY(bool begin READ begin WRITE setBegin)
-    Q_PROPERTY(bool end READ end WRITE setEnd)
+    Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(QVariant value READ value WRITE setValue)
     Q_PROPERTY(QString iconPackage READ iconPackage WRITE setIconPackage)
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
 
 public:
-    enum PointerLists {In, Out, Self};
+    enum ListType{In, Out, Self};
     
-    Datum(DataType *parent);
-    ~Datum();
+    Data(DataStructure *parent);
+    ~Data();
     
     void addInPointer(Pointer *e);
     void addOutPointer(Pointer *e);
@@ -69,72 +66,115 @@ public:
     bool showName();
     bool showValue();
 
-    DataType *dataType() const;
+    DataStructure *dataStructure() const;
 
     QScriptValue scriptValue() const;
     virtual void setEngine(	QScriptEngine *_engine );
     QScriptValue createScriptArray(PointerList list);
-
-public  slots:
-    DataList adjacent_data() const;
-    PointerList adjacent_pointers() const;
-    PointerList pointers(Datum *n);
-    PointerList in_pointers() const;
-    PointerList out_pointers() const;
-    PointerList self_pointers() const;
-
+    
+        //setters
     void setX(int x);
     void setY(int y);
     void setWidth(qreal w);
     void setPos(qreal x, qreal y);
+    void setColor(const QColor& s);
+    void setName(const QString& s);
+    void setValue(const QVariant& v);
+    void setIcon(const QString& s);
+    void setIconPackage(const QString& s);
+    
+    //getters
     qreal x() const;
     qreal y() const;
     qreal width() const;
-    void setColor(const QString& s);
-    const QString& color() const;
-    void setName(const QString& s);
+    const QColor& color() const;
     const QString& name() const;
-    bool begin() const;
-    bool end() const;
-    void setBegin(bool begin = true);
-    void setEnd(bool end = true);
-    void setValue(const QVariant v);
-    void setValue(const QString& s);
     const QVariant value() const;
-    void setIcon(const QString& s);
     const QString& icon() const;
     const QString& iconPackage() const;
-    void setIconPackage(const QString& s);
+    DataItem *item() const;
+    
+    DataList adjacent_data() const;
+    PointerList adjacent_pointers() const;
+    PointerList& in_pointers() const;
+    PointerList& out_pointers() const;
+    PointerList& self_pointers() const;
+    PointerList pointers(Data *n) const;
+
     void hideName(bool b);
     void hideValue(bool b);
-    /** Add a property to this node
-    * @param property Name of property
-    * @param value Value of the property. arg2 shoud be different of QVariant::Invalid.
-    */
     void addDynamicProperty(QString property, QVariant value);
-
-    /** Remove property arg1 from this node. If property arg1 don't exist in this node, nothing is made.
-    * @param property name os property to remove
-    */
     void removeDynamicProperty(QString property);
 
+public  slots:
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue input_pointers();
     QScriptValue output_pointers();
     QScriptValue loop_pointers();
-    QScriptValue connected_pointers(Datum *n);
+    QScriptValue connected_pointers(Data *n);
     void self_remove();
-
-    Pointer* addPointer(Datum* to);
+    Pointer* addPointer(Data* to);
 
 private:
-    DatumPrivate *d;
+    DataPrivate *d;
 
 signals:
     void removed();
     void changed();
 };
 
+class DataPrivate{
+public:
+  DataPrivate(Data *classPtr) : q(classPtr){}
+  
+    PointerList _in_pointers;
+    PointerList _out_pointers;
+    PointerList _self_pointers;
+
+    qreal _x;
+    qreal _y;
+    qreal _width;
+
+    bool _begin;
+    bool _end;
+    bool _changing;
+    bool _showName;
+    bool _showValue;
+
+    DataStructure *_dataStructure;
+    DataItem *_item;
+    
+    QString _name;
+    QColor _color;
+    QString _iconpackage;
+    QString _icon;
+
+    QVariant _value;  
+    QScriptValue _scriptvalue;
+    QScriptEngine *_engine; 
+    
+    void empty(PointerList &list) ;
+private:
+  Data *q;
+};
+
+inline const QVariant Data::value() const { return d->_value; }
+inline const QString& Data::name()  const { return d->_name;  }
+inline const QColor&  Data::color() const { return d->_color; }
+
+inline DataItem* Data::item() const { return d->_item; }
+
+inline qreal Data::x() const { return d->_x; }
+inline qreal Data::y() const { return d->_y; }
+
+inline qreal Data::width() const { return d->_width; }
+
+inline const QString& Data::icon() const { return d->_icon; }
+inline const QString& Data::iconPackage() const {  return d-> _iconpackage;  }
+
+inline PointerList& Data::in_pointers()   const { return d->_in_pointers;   }
+inline PointerList& Data::out_pointers()  const { return d->_out_pointers;  }
+inline PointerList& Data::self_pointers() const { return d->_self_pointers; }
 
 #endif

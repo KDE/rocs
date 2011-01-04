@@ -24,7 +24,7 @@
 #include "model_GraphDocument.h"
 #include <KDebug>
 
-OpenedFilesWidget::OpenedFilesWidget(DataTypeDocumentModel *model, QWidget* parent)
+OpenedFilesWidget::OpenedFilesWidget(DocumentModel *model, QWidget* parent)
         : QWidget(parent) {
     setupUi(this);
     _documentModel = model;
@@ -35,12 +35,12 @@ OpenedFilesWidget::OpenedFilesWidget(DataTypeDocumentModel *model, QWidget* pare
 
 void OpenedFilesWidget::on__btnNewFile_clicked() {
     _documentModel->insertRow(_documentModel->rowCount());
-    DataTypeDocument *g = _documentModel -> at( _documentModel->index(_documentModel->rowCount()-1,0) );
+    Document *g = _documentModel -> at( _documentModel->index(_documentModel->rowCount()-1,0) );
     emit activeDocumentChanged( g );
 }
 
 void OpenedFilesWidget::setActiveDocument(const QModelIndex& modelindex) {
-    DataTypeDocument *g = _documentModel -> at(modelindex);
+    Document *g = _documentModel -> at(modelindex);
     if (g == 0) return;
     emit activeDocumentChanged( g );
 }

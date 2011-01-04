@@ -2,23 +2,23 @@
 #include "Data.h"
 #include "MainWindow.h"
 #include <KDebug>
-#include "NodeItem.h"
-#include "DataType.h"
+#include "DataItem.h"
+#include "DataStructure.h"
 #include "model_GraphProperties.h"
-#include <DSPluginManager.h>
+#include <DataStructurePluginManager.h>
 
-DatumPropertiesWidget::DatumPropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
+DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
     setupUi(this);
     _item = 0;
     _datum = 0;
 }
 
-void DatumPropertiesWidget::setDatum(DatumItem *n, QPointF pos) {
+void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     if (_datum == n->datum())
       return;
 
     if (_datum){
-      disconnectDatum(_datum);
+      disconnectData(_datum);
     }
 
     _datum = n->datum();
@@ -54,11 +54,11 @@ void DatumPropertiesWidget::setDatum(DatumItem *n, QPointF pos) {
 
 }
 
-void DatumPropertiesWidget::reflectAttributes(){
+void DataPropertiesWidget::reflectAttributes(){
     if (extraItens->layout()){
       delete extraItens->layout();
     }
-    if(QLayout *lay = Rocs::DSPluginManager::instance()->datumExtraProperties(_datum, this)){
+    if(QLayout *lay = DataStructurePluginManager::self()->dataExtraProperties(_datum, this)){
       extraItens->setLayout(lay);
     }
    _color->setColor(_datum->color());
@@ -97,16 +97,16 @@ void DatumPropertiesWidget::reflectAttributes(){
     }
 }
 
-void DatumPropertiesWidget::on__images_activated(const QString& s)
+void DataPropertiesWidget::on__images_activated(const QString& s)
 {
   _datum->setIcon("rocs_"+s);
 }
 
-void DatumPropertiesWidget::on__color_activated(const QColor& c) {
+void DataPropertiesWidget::on__color_activated(const QColor& c) {
   _datum->setColor(c.name());
 }
 
-// void DatumPropertiesWidget::updateAutomateAttributes(bool b){
+// void DataPropertiesWidget::updateAutomateAttributes(bool b){
 // //     if (b) {
 // //         _begin->setChecked(_datum->begin());
 // //         _end->setChecked(_datum->end());
@@ -121,7 +121,7 @@ void DatumPropertiesWidget::on__color_activated(const QColor& c) {
 // //     }
 // }
 
-void DatumPropertiesWidget::on__addProperty_clicked(){
+void DataPropertiesWidget::on__addProperty_clicked(){
 
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
     model->addDynamicProperty(_propertyName->text(),
@@ -131,7 +131,7 @@ void DatumPropertiesWidget::on__addProperty_clicked(){
 
 }
 
-void DatumPropertiesWidget::disconnectDatum(Datum *n){
+void DataPropertiesWidget::disconnectData(Data *n){
 
     disconnect(n, SIGNAL(changed()), this, SLOT(reflectAttributes()));
     disconnect(n->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));

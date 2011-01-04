@@ -21,7 +21,7 @@
 #define ALIGNACTION_H
 
 #include <KAction>
-#include "NodeItem.h"
+#include "DataItem.h"
 #include "Data.h"
 
 
@@ -47,12 +47,12 @@ private:
     /*! align the data in the Y axis.
       \p l the list of selected data.
       */
-    void allignY(QList<DatumItem*>& l);
+    void allignY(QList<DataItem*>& l);
 
     /*! align the data in the X axis.
     \p l the list of selected data.
     */
-    void allignX(QList<DatumItem*>& l);
+    void allignX(QList<DataItem*>& l);
 
     /*! the orientation that this button will work on. */
     Orientation m_orientation;

@@ -23,11 +23,10 @@
 #include <QObject>
 #include "rocslib_export.h"
 
-class DataTypeDocument;
+class Document;
 
 #include <KComponentData>
 
-namespace Rocs{
 class ROCSLIB_EXPORT FilePluginInterface: public QObject
 {
   Q_OBJECT
@@ -36,9 +35,9 @@ public:
   virtual ~FilePluginInterface();
   virtual const QStringList extensions() const = 0; //Extensões suportadas
 
-  virtual DataTypeDocument * readFile(const QString &file) = 0; //return 0 se arq. inválido
+  virtual Document * readFile(const QString &file) = 0; //return 0 se arq. inválido
 
-  virtual bool writeFile(DataTypeDocument &graph, const QString & fileName)  = 0; //false se não gravou.
+  virtual bool writeFile(Document &graph, const QString & fileName)  = 0; //false se não gravou.
 
   virtual const QString lastError(); //return error
 
@@ -49,5 +48,5 @@ private:
   class Private;
   Private * d;
 };
-}
+
 #endif // FILEPLUGININTERFACE_H

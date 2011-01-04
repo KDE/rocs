@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=Rocs/DataStructurePlugin
+X-KDE-Derived=KPluginInfo
+Comment=Rocs Data Structure Plugin
+Comment[en_GB]=Rocs Data Structure Plugin
+Comment[es]=Complemento de estructura de datos para Rocs
+Comment[et]=Rocsi andmestruktuuri plugin
+Comment[gl]=Engadido da estrutura de datos de Rocs
+Comment[nb]=Rocs programtillegg for datastruktur
+Comment[nds]=Datenstruktuurmoduul för Rocs
+Comment[nl]=Plugin voor Rocs-gegevensstructuur
+Comment[pt]='Plugin' de Estrutura de Dados do Rocs
+Comment[pt_BR]=Plug-in de estrutura de dados do Rocs
+Comment[sv]=Rocs datastrukturinsticksprogram
+Comment[uk]=Додаток структури даних Rocs
+Comment[x-test]=xxRocs Data Structure Pluginxx
+Comment[zh_TW]=Rocs 資料結構外掛程式

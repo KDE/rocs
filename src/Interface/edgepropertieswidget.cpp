@@ -21,8 +21,8 @@
 #include "Pointer.h"
 #include "MainWindow.h"
 #include "model_GraphProperties.h"
-#include <DataType.h>
-#include <DSPluginManager.h>
+#include <DataStructure.h>
+#include <DataStructurePluginManager.h>
 
 PointerPropertiesWidget::PointerPropertiesWidget(MainWindow *parent): QWidget(parent) {
     setupUi(this);
@@ -64,7 +64,7 @@ void PointerPropertiesWidget::reflectAttributes(){
   if (_extraProperties->layout()){
     delete _extraProperties->layout();
   }
-  if (QLayout * lay = Rocs::DSPluginManager::instance()->pointerExtraProperties(_pointer, this)){
+  if (QLayout * lay = DataStructurePluginManager::self()->pointerExtraProperties(_pointer, this)){
       _extraProperties->setLayout(lay);
   }
    _name->setText(_pointer->name());

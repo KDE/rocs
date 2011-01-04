@@ -27,9 +27,6 @@
 #include <KDebug>
 #include <KMessageBox>
 
-
-namespace Rocs {
-
 class PluginManagerPrivate {
 public:
     PluginManagerPrivate() {
@@ -126,7 +123,7 @@ void PluginManager::loadToolsPlugins() {
 }
 
 
-KPluginInfo PluginManager::pluginInfo( Rocs::ToolsPluginInterface* plugin)
+KPluginInfo PluginManager::pluginInfo( ToolsPluginInterface* plugin)
 {
     return _d->toolsPluginsMap.key(plugin);
 }
@@ -195,4 +192,3 @@ FilePluginInterface *  PluginManager::filePluginsByExtension(QString ext) {
     return 0;
 }
 
-}

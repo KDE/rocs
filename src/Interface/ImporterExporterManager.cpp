@@ -25,6 +25,7 @@
 #include <PluginManager.h>
 #include <KPushButton>
 #include <kdebug.h>
+#include "Document.h"
 
 #include <QFile>
 
@@ -32,19 +33,14 @@
 #include <iostream>
 #include <string>
 
-
-using namespace Rocs;
-
 ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(parent), _scriptToRun(QString())
 {
-
 }
 
-bool ImporterExporterManager::exportFile(DataTypeDocument * doc) const
+bool ImporterExporterManager::exportFile(Document * doc) const
 {
     QString ext;
-    foreach ( FilePluginInterface *f, PluginManager::instance()->filePlugins() )
-    {
+    foreach ( FilePluginInterface *f, PluginManager::instance()->filePlugins() ) {
         ext.append ( f->extensions().join ( "" ) );
     }
     ext.append ( i18n ( "*|All files" ) );
@@ -53,48 +49,41 @@ bool ImporterExporterManager::exportFile(DataTypeDocument * doc) const
     KFileDialog exportDialog ( QString(),ext,qobject_cast< QWidget* >(parent()) );
     exportDialog.okButton()->setText ( i18n  ( "Export" ) );
     exportDialog.okButton()->setToolTip ( i18n ( "Export graphs to file" ) );
-    if ( exportDialog.exec() != KDialog::Accepted )
-    {
+    if ( exportDialog.exec() != KDialog::Accepted ) {
         return false;
     }
 
     kDebug() << "Exporting File..";
-    if ( exportDialog.selectedFile() == "" )
-    {
+    if ( exportDialog.selectedFile() == "" ) {
         return false;
     }
 
     ext = exportDialog.currentFilter().remove ( '*' );
     kDebug () <<" Selected to export: " << ext;
     QString file = exportDialog.selectedFile();
-    if ( !file.endsWith ( ext) )
-    {
+    if ( !file.endsWith ( ext) ){
         file.append ( ext );
     }
 
     FilePluginInterface * p = PluginManager::instance()->filePluginsByExtension ( ext );
-    if ( !p )
-    {
+    if ( !p ){
         kDebug() << "Cannot export file: " << file;
         return false;
     }
-
-//     _mutex.lock();
-    if ( !p->writeFile ( *doc, file ) )
-    {
+    
+    if ( !p->writeFile ( *doc, file ) ) {
         kDebug() << "Error writing file: " << p->lastError();
         return false;
     }
     kDebug() << "File Exported!" << file;
     return true;
-
 }
- DataTypeDocument* ImporterExporterManager::importFile()
+Document* ImporterExporterManager::importFile()
 {
 
     QString ext;
 
-    foreach ( Rocs::FilePluginInterface *f, Rocs::PluginManager::instance()->filePlugins() ){
+    foreach ( FilePluginInterface *f, PluginManager::instance()->filePlugins() ){
         ext.append ( f->extensions().join ( "" ) );
     }
     ext.append ( i18n ( "*|All files" ) );
@@ -110,7 +99,7 @@ bool ImporterExporterManager::exportFile(DataTypeDocument * doc) const
     if ( fileName == "" ) return 0;
 
     int index = fileName.lastIndexOf ( '.' );
-    Rocs::FilePluginInterface * f = 0;
+    FilePluginInterface * f = 0;
     if ( index == -1 )
     {
         kDebug() << "Cant open file without extension.";
@@ -118,14 +107,14 @@ bool ImporterExporterManager::exportFile(DataTypeDocument * doc) const
     }
 
     kDebug() << fileName.right ( fileName.count() - index );
-    f = Rocs::PluginManager::instance()->filePluginsByExtension ( fileName.right ( fileName.count() - index ) );
+    f = PluginManager::instance()->filePluginsByExtension ( fileName.right ( fileName.count() - index ) );
 
     if ( !f ){
         kDebug() <<  "Cannot handle extension "<<  fileName.right ( 3 );
         return 0;
     }
 
-    DataTypeDocument * gd = f->readFile ( fileName );
+    Document * gd = f->readFile ( fileName );
     if ( !gd ){
         kDebug() << "Error loading file" << fileName << f->lastError();
     }
@@ -133,12 +122,12 @@ bool ImporterExporterManager::exportFile(DataTypeDocument * doc) const
     return gd;
 }
 
-void Rocs::ImporterExporterManager::dialogExec()
+void ImporterExporterManager::dialogExec()
 {
 
 }
 
-bool Rocs::ImporterExporterManager::hasDialog()
+bool ImporterExporterManager::hasDialog()
 {
   return false;
 }

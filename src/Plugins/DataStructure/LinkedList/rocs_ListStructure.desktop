@@ -1,0 +1,27 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+#Icon=icon
+ServiceTypes=Rocs/DataStructurePlugin
+X-KDE-Library=rocs_ListStructure
+X-KDE-PluginInfo-Author=Wagner Reck
+X-KDE-PluginInfo-Email=wagner.reck@gmail.com
+X-KDE-PluginInfo-Name=Linked list
+X-KDE-PluginInfo-Version=0.0.1
+X-KDE-PluginInfo-Website=http://wiglot.wordpress.com
+X-KDE-PluginInfo-Category=Plugins
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+Name=Linked list
+Name[en_GB]=Linked list
+Name[es]=Lista enlazada
+Name[et]=Lingitud loend
+Name[gl]=Lista ligada
+Name[nb]=Lenket liste
+Name[nl]=Gekoppelde lijst
+Name[pt]=Lista ligada
+Name[pt_BR]=Lista ligada
+Name[sv]=Länkad lista
+Name[uk]=Лінійний список
+Name[x-test]=xxLinked listxx
+Name[zh_TW]=鍊結串列

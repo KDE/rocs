@@ -23,7 +23,7 @@
 #include <KButtonGroup>
 #include "ui_GraphPropertiesWidget.h"
 
-class DataType;
+class DataStructure;
 class Datum;
 class Pointer;
 
@@ -33,7 +33,7 @@ class GraphPropertiesWidget : public KButtonGroup, public Ui::GraphPropertiesWid
 {
     Q_OBJECT
 public:
-    GraphPropertiesWidget (DataType *g, MainWindow* parent = 0 );
+    GraphPropertiesWidget (DataStructure *g, MainWindow* parent = 0 );
     QRadioButton *radio() const;
 
 private slots:
@@ -58,7 +58,7 @@ private slots:
     void removeGraph();
 
   private:
-    DataType *_graph;
+    DataStructure *_graph;
     MainWindow *_mainWindow;
 
 };

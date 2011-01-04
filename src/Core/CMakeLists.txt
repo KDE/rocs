@@ -17,18 +17,19 @@
 #	 along with Step; if not, write to the Free Software
 #	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 
-
-
 set( rocscore_LIB_SRCS
-	graph.cpp
-	edge.cpp
-	graphDocument.cpp
-	node.cpp
-	graphGroups.cpp
-	krossBackend.cpp
-	qtScriptBackend.cpp
-	threadDocument.cpp
-	DynamicPropertiesList.cpp
+  Data.cpp
+  DataStructureDocument.cpp
+  DataStructureGroups.cpp
+  DataStructurePluginInterface.cpp
+  DataStructurePluginManager.cpp
+  DataType.cpp
+  DocumentManager.cpp
+  DynamicPropertiesList.cpp
+  KrossBackend.cpp
+  Pointer.cpp
+  QtScriptBackend.cpp
+  ThreadDocument.cpp
 )
 
 kde4_add_library( librocscore	STATIC ${rocscore_LIB_SRCS} )

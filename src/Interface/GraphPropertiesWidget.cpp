@@ -22,20 +22,21 @@
 #include "model_GraphProperties.h"
 #include <KDebug>
 #include <QGraphicsItem>
-#include "DataType.h"
-#include "graphDocument.h"
+#include "DataStructure.h"
+#include "Document.h"
 #include "Data.h"
 #include "Pointer.h"
 #include "MainWindow.h"
-#include "NodeItem.h"
-#include "OrientedEdgeItem.h"
+#include "DataItem.h"
+#include "PointerItem.h"
 #include "GraphScene.h"
 #include <KLocale>
 #include <QRadioButton>
-#include <DSPluginManager.h>
+#include <DataStructurePluginManager.h>
+#include "DocumentManager.h"
 
 
-GraphPropertiesWidget::GraphPropertiesWidget (DataType *g, MainWindow* parent )
+GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* parent )
         : KButtonGroup ( parent ) {
     setupUi(this);
     _mainWindow = parent;
@@ -44,26 +45,26 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataType *g, MainWindow* parent )
     _graph = g;
     _graphName->setText(_graph->name());
     _graphEdgeColor->setColor(_graph->pointerDefaultColor());
-    _graphNodeColor->setColor(_graph->datumDefaultColor());
+    _graphNodeColor->setColor(_graph->dataDefaultColor());
 //     _graphAutomate->setChecked(_graph->automate());
 //     _graphOriented->setChecked(_graph->directed());
     _graphVisible->setChecked( ! _graph->readOnly());
     _activateGraph->setChecked(true);
     _showEdgeNames->setChecked( _graph->pointerNameVisibility() );
     _showEdgeValues->setChecked(_graph->pointerValueVisibility());
-    _showNodeNames->setChecked( _graph->datumNameVisibility() );
-    _showNodeValues->setChecked(_graph->datumValueVisibility());
+    _showNodeNames->setChecked( _graph->dataNameVisibility() );
+    _showNodeValues->setChecked(_graph->dataValueVisibility());
 
     _editWidget->setVisible(_activateGraph->isChecked());
 
     delete _extraProperties->layout();
     
-    if (QLayout * lay = Rocs::DSPluginManager::instance()->dataTypeExtraProperties(g, _extraProperties)){
+    if (QLayout * lay = DataStructurePluginManager::self()->dataStructureExtraProperties(g, _extraProperties)){
         _extraProperties->setLayout(lay);
     }
 
-    DataTypeDocument *gDocument = qobject_cast<DataTypeDocument*>(g->parent());
-    connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataType(QString)));
+    Document *gDocument = qobject_cast<Document*>(g->parent());
+    connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataStructure(QString)));
     connect(this, SIGNAL(removeGraph()), g, SLOT(remove()));
 
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
@@ -92,10 +93,8 @@ void GraphPropertiesWidget::on__graphPointerColorApplyNow_clicked() {  emit poin
 void GraphPropertiesWidget::on__graphDatumColorApplyNow_clicked() {  emit datumColorsChanged(_graphNodeColor->color().name()); }
 
 void GraphPropertiesWidget::on__graphVisible_toggled(bool b){
-  _mainWindow->mutex().lock();
   _graph->setReadOnly( !b );
   _mainWindow->scene()->hideGraph( _graph, b );
-  _mainWindow->mutex().unlock();
 }
 
 QRadioButton *GraphPropertiesWidget::radio()const {
@@ -105,36 +104,32 @@ QRadioButton *GraphPropertiesWidget::radio()const {
 void GraphPropertiesWidget::on__activateGraph_toggled(bool b) {
     _editWidget->setVisible( b );
     if (b) {
-       _mainWindow->setActiveGraph(_graph);
+       DocumentManager::self()->activeDocument()->setActiveDataStructure(_graph);
     }
 }
 
 void GraphPropertiesWidget::on__graphDelete_clicked() {
-    if (! _mainWindow->mutex().tryLock())
-        return;
     bool createNewGraph = false;
     bool isActive = false;
 
-    if (_graph == _mainWindow->graph()){
+    if (_graph == DocumentManager::self()->activeDocument()->activeDataStructure()){
       isActive = true;
     }
 
-    DataTypeDocument *gd = qobject_cast<DataTypeDocument*>(_graph->parent());
+    Document *gd = qobject_cast<Document*>(_graph->parent());
 
-    if (gd->size() == 1){
-	createNewGraph = true;
+    if (gd->dataStructures().size() == 1){
+        createNewGraph = true;
     }
-
-
+    
     if (isActive) emit updateNeeded();
     radio()->group()->removeButton(radio());
-    _mainWindow->mutex().unlock();
 
-        /*! remove this graph from the document. */
+    /*! remove this graph from the document. */
     emit removeGraph();
 
     if (createNewGraph){
-	emit addGraph(i18n("Untitled0"));
+        emit addGraph(i18n("Untitled0"));
     }
 
     deleteLater();
@@ -143,4 +138,3 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
 void GraphPropertiesWidget::on__graphName_textChanged(const QString& s){
     _activateGraph->setText(s);
 }
-

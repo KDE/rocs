@@ -24,8 +24,8 @@
 #include <QStringList>
 #include <kgenericfactory.h>
 #include <KAboutData>
-#include <graphDocument.h>
-#include <DataType.h>
+#include <Document.h>
+#include <DataStructure.h>
 
 
 static const KAboutData aboutdata("rocs_makecompleteplugin", 0, ki18n("Make Complete") , "0.1" );
@@ -46,20 +46,18 @@ MakeCompleteToolPlugin::~MakeCompleteToolPlugin()
 
 QString MakeCompleteToolPlugin::run(QObject* doc ) const
 {
-    DataTypeDocument * graphDoc = qobject_cast<DataTypeDocument*> ( doc );
+    Document * graphDoc = qobject_cast<Document*> ( doc );
     if ( graphDoc )
     {
-        DataType * graph = graphDoc->activeDataType();
-        foreach ( Pointer *e, graph->pointers() )
-        {
+        DataStructure * graph = graphDoc->activeDataStructure();
+        foreach ( Pointer *e, graph->pointers() ) {
             graph->remove ( e );
         }
-        foreach ( Datum * n1, graph->data() )
-        {
-            foreach ( Datum * n2, graph->data() )
-            {
-                if ( n1 != n2 )
-                    graph->addPointer ( n1,n2 );
+        
+        int size_i = graph->dataList().size() - 1;
+        for(int i = 0; i < size_i; ++i){
+            for( int e = i+1; e < graph->dataList().size(); ++e){
+                    graph->addPointer ( graph->dataList().at(i),graph->dataList().at(e) );
             }
         }
     }

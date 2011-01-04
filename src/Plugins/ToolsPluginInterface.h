@@ -55,7 +55,6 @@ Q_DECLARE_INTERFACE(ToolsPluginInterface,
 // #include "kopete_export.h"
 
 #include <kplugininfo.h>
-namespace Rocs{
 
 /**
  * @brief Base class for all plugins or protocols.
@@ -143,7 +142,4 @@ private:
 	Private * const d;
 };
 
-
-
-}
 #endif

@@ -21,11 +21,11 @@
 #include "GraphVisualEditor.h"
 #include "GraphScene.h"
 #include "MainWindow.h"
-#include "NodeItem.h"
-#include "OrientedEdgeItem.h"
+#include "DataItem.h"
+#include "PointerItem.h"
 
-#include "graphDocument.h"
-#include "DataType.h"
+#include "Document.h"
+#include "DataStructure.h"
 #include "Data.h"
 #include "Pointer.h"
 
@@ -45,8 +45,8 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
         _leftNode(0),
         _rightNode(0) {
     _scene = 0;
-    _dataTypeDocument = 0;
-    _dataType = 0;
+    _document = 0;
+    _dataStructure = 0;
     _mainWindow = parent;
     setupWidgets();
 }
@@ -66,36 +66,33 @@ QGraphicsView* GraphVisualEditor::view() const {
     return _graphicsView;
 }
 
-void GraphVisualEditor::setActiveDataTypeDocument( DataTypeDocument *gd) {
+void GraphVisualEditor::setActiveDocument( Document *gd) {
 
-    if ( _dataTypeDocument != 0 ) {
-        releaseDataTypeDocument();
+    if ( _document != 0 ) {
+        releaseDocument();
     }
 
-    _dataTypeDocument = gd;
+    _document = gd;
     kDebug() << "Graph Document Set: " << gd->name();
-    _scene->setActiveDataTypeDocument( gd );
+    _scene->setActiveDocument( gd );
 
 }
 
-void GraphVisualEditor::releaseDataTypeDocument() {
+void GraphVisualEditor::releaseDocument() {
     _scene->clear();
-    if (_dataTypeDocument == 0){
-      return;
+    
+    foreach(DataStructure *ds, _document->dataStructures()){
+       ds->disconnect(this);
+
     }
-    int size = _dataTypeDocument->size();
-    for (int i = 0; i < size; i++) {
-       _dataTypeDocument->at(i)->disconnect(this);
-    }
-    if (_dataTypeDocument->size() != 0)
-      _scene->setActiveDataTypeDocument(0);
-    _dataTypeDocument = 0;
+    if (_document->dataStructures().size() != 0)
+      _scene->setActiveDocument(0);
 }
 
-void GraphVisualEditor::drawGraphOnScene( DataType */*g*/) {}
+//void GraphVisualEditor::drawGraphOnScene( DataStructure */*g*/) {}
 
-void GraphVisualEditor::setActiveGraph( DataType *g) {
-    _dataType = g;
+void GraphVisualEditor::setActiveGraph( DataStructure *g) {
+    _dataStructure = g;
     _scene->setActiveGraph(g);
 }
 
@@ -103,12 +100,12 @@ GraphScene* GraphVisualEditor::scene() const {
     return _scene;
 }
 
-QList<DatumItem*> GraphVisualEditor::selectedNodes() const {
-    QList<DatumItem*> tmpList;
+QList<DataItem*> GraphVisualEditor::selectedNodes() const {
+    QList<DataItem*> tmpList;
     QList<QGraphicsItem*> l = _scene->selectedItems();
     foreach(QGraphicsItem *i, l) {
-        if ( qgraphicsitem_cast<DatumItem*>(i) ) {
-            tmpList.append( qgraphicsitem_cast<DatumItem*>(i) );
+        if ( qgraphicsitem_cast<DataItem*>(i) ) {
+            tmpList.append( qgraphicsitem_cast<DataItem*>(i) );
         }
     }
     return tmpList;

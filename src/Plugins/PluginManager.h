@@ -26,8 +26,6 @@
 #include "rocslib_export.h"
 
 class KPluginInfo;
-
-namespace Rocs{
   
 class ROCSLIB_EXPORT PluginManager: public QObject
 {
@@ -71,5 +69,4 @@ class ROCSLIB_EXPORT PluginManager: public QObject
   
 };
 
-}
 #endif // TOOLSPLUGINMANAGER_H

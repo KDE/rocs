@@ -20,20 +20,21 @@
 
 #include "Pointer.h"
 #include "Data.h"
-#include "DataType.h"
+#include "DataStructure.h"
 #include "DynamicPropertiesList.h"
 #include <KDebug>
+#include <QColor>
 
 class PointerPrivate{
 public:
     PointerPrivate(){}
-    Datum *from;
-    Datum *to;
+    Data *from;
+    Data *to;
     int relativeIndex;
 
     QString value;
     QString name;
-    QString color;
+    QColor color;
 
     bool showName;
     bool showValue;
@@ -41,19 +42,19 @@ public:
     QString style;
     double width;
 
-     DataType *dataType;
+     DataStructure *dataStructure;
 
     QScriptValue scriptvalue;
     QScriptEngine *engine;
 };
 
-Pointer::Pointer(DataType *parent, Datum *from, Datum *to) :
+Pointer::Pointer(DataStructure *parent, Data *from, Data *to) :
         QObject(parent), d(new PointerPrivate())
 {
     d->from     = from;
     d->to       = to;
-    d->dataType = parent;
-    d->color    = d->dataType->pointerDefaultColor();
+    d->dataStructure = parent;
+    d->color    = d->dataStructure->pointerDefaultColor();
     
     connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
     connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
@@ -78,17 +79,17 @@ Pointer::~Pointer() {
     if (d->from == d->to) {
         if (d->from != 0){
           kDebug() << "Removing from a loop node";
-          d->from->removePointer(this, Datum::Self);
+          d->from->removePointer(this, Data::Self);
         }
     }
     else {
         kDebug() << "Removing from not a loop node.";
         if (d->from != 0){
-          d->from->removePointer(this, Datum::Out);
+          d->from->removePointer(this, Data::Out);
           kDebug() << "Removed from the from node";
         }
         if (d->to != 0){
-          d->to->removePointer(this, Datum::In);
+          d->to->removePointer(this, Data::In);
           kDebug() << "Removed from the to node";
         }
     }
@@ -103,15 +104,15 @@ void Pointer::emitChangedSignal(){
     emit changed(); 
 }
 
-DataType *Pointer::dataType() const{
-    return d->dataType; 
+DataStructure *Pointer::dataStructure() const{
+    return d->dataStructure; 
 }
 
-Datum *Pointer::from() const{
+Data *Pointer::from() const{
     return d->from;
 }
 
-Datum *Pointer::to() const{
+Data *Pointer::to() const{
     return d->to;
 }
 
@@ -123,7 +124,7 @@ const QString& Pointer::name() const{
     return d->name;
 }
 
-void Pointer::remove(Datum * node) {
+void Pointer::remove(Data * node) {
     if (node){
         if (node == d->from){
           d->from = 0;
@@ -133,7 +134,7 @@ void Pointer::remove(Datum * node) {
         }
     }
       emit removed();
-    d->dataType->remove(this);
+    d->dataStructure->remove(this);
 }
 
 
@@ -165,12 +166,12 @@ void Pointer::setName(const QString& name){
     emit changed();
 }
 
-void Pointer::setColor(const QString& color){
+void Pointer::setColor(const QColor& color){
     d->color = color;
     emit changed();
 }
 
-const QString& Pointer::color() const{
+const QColor& Pointer::color() const{
      return d->color;
 }
 
@@ -201,8 +202,6 @@ void Pointer::removeDynamicProperty(QString property){
   DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
-#ifdef USING_QTSCRIPT
-
 QScriptValue Pointer::start() {
     return d->from->scriptValue();
 }
@@ -221,4 +220,4 @@ QScriptValue Pointer::scriptValue() const {
 void Pointer::self_remove() {
     remove();
 }
-#endif
+

@@ -22,20 +22,20 @@
 
 #include <QAbstractListModel>
 
-class DataType;
+class DataStructure;
 class QModelIndex;
 
-class DataTypeDocument;
+class Document;
 
 
-class DataTypeLayersModel : public QAbstractListModel
+class DataStructureLayersModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
     /*! Default Constructor.
-    \param document the DataTypeDocument that will populate the model.
+    \param document the Document that will populate the model.
     \param parent the QObject that owns this Model.   */
-    explicit DataTypeLayersModel( DataTypeDocument *document, QObject *parent = 0);
+    explicit DataStructureLayersModel( Document *document, QObject *parent = 0);
 
     /*! Gives the number of rows on the model.
        \param parent a default constructed, unused, QModelIndex.
@@ -84,10 +84,10 @@ public:
     /*! select the graph at position index.
     \param index the position of the graph that you want to select.
     \return the graph at position Index.*/
-    DataType *at(const QModelIndex& index);
+    DataStructure *at(const QModelIndex& index);
 
 private:
-    DataTypeDocument *_document;
+    Document *_document;
 
 };
 

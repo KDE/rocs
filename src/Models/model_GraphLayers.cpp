@@ -18,34 +18,34 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "model_GraphLayers.h"
-#include "graphDocument.h"
-#include "DataType.h"
+#include "Document.h"
+#include "DataStructure.h"
 #include <QString>
 #include <QModelIndex>
 #include <KDebug>
 
-DataTypeLayersModel::DataTypeLayersModel( DataTypeDocument *document, QObject *parent)
+DataStructureLayersModel::DataStructureLayersModel( Document *document, QObject *parent)
         : QAbstractListModel( parent ) {
     _document = document;
 }
 
-int DataTypeLayersModel::rowCount(const QModelIndex&) const {
+int DataStructureLayersModel::rowCount(const QModelIndex&) const {
     if ( _document == 0) return 0;
-    return _document -> size();
+    return _document -> dataStructures().size();
 }
 
-QVariant DataTypeLayersModel::data(const QModelIndex &index, int role) const {
+QVariant DataStructureLayersModel::data(const QModelIndex &index, int role) const {
     if ( _document == 0) {
         return 0;
     }
-    if ( ( !index.isValid() ) || ( index.row() > _document -> size() ) || ( role != Qt::DisplayRole) ) {
+    if ( ( !index.isValid() ) || ( index.row() > _document ->dataStructures().size() ) || ( role != Qt::DisplayRole) ) {
         return QVariant();
     }
 
-    return _document->at(index.row())->property("name");
+    return _document->dataStructures().at(index.row())->property("name");
 }
 
-QVariant DataTypeLayersModel::headerData(int section, Qt::Orientation orientation, int role) const {
+QVariant DataStructureLayersModel::headerData(int section, Qt::Orientation orientation, int role) const {
     if ( _document == 0) {
         return QVariant();
     }
@@ -60,42 +60,42 @@ QVariant DataTypeLayersModel::headerData(int section, Qt::Orientation orientatio
 
 }
 
-Qt::ItemFlags DataTypeLayersModel::flags(const QModelIndex& index) const {
+Qt::ItemFlags DataStructureLayersModel::flags(const QModelIndex& index) const {
     if ( !index.isValid() ) {
         return Qt::ItemIsEnabled;
     }
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
-bool DataTypeLayersModel::setData(const QModelIndex& index, const QVariant& value, int role) {
+bool DataStructureLayersModel::setData(const QModelIndex& index, const QVariant& value, int role) {
     if ( index.isValid() && (role == Qt::ItemIsEditable)) {
-        DataType *g = _document->at(index.row());
+        DataStructure *g = _document->dataStructures().at(index.row());
         g-> setProperty("name",value.toString());
         return true;
     }
     return false;
 }
 
-bool DataTypeLayersModel::insertRows(int position, int , const QModelIndex&) {
+bool DataStructureLayersModel::insertRows(int position, int , const QModelIndex&) {
     if ( _document == 0) return false;
 
     beginInsertRows(QModelIndex(), position, position);
-    _document->addDataType(i18n("Untitled%1", rowCount()));
+    _document->addDataStructure(i18n("Untitled%1", rowCount()));
     kDebug() << "Called!";
     endInsertRows();
     return true;
 }
 
-bool DataTypeLayersModel::removeRows(int position, int rows, const QModelIndex&) {
+bool DataStructureLayersModel::removeRows(int position, int rows, const QModelIndex&) {
     if (_document == 0) return false;
     beginRemoveRows(QModelIndex(), position, position+rows-1);
-    _document->removeAt(position);
+    _document->dataStructures().removeAt(position);
     endRemoveRows();
     return true;
 }
 
-DataType *DataTypeLayersModel::at(const QModelIndex& index)
+DataStructure *DataStructureLayersModel::at(const QModelIndex& index)
 {
-    if (_document->size() == 0) return 0;
-    return _document->at(index.row());
+    if (_document->dataStructures().size() == 0) return 0;
+    return _document->dataStructures().at(index.row());
 }

@@ -16,18 +16,17 @@ include_directories(
 # Preparando a biblioteca padrão.
 
 set( rocs_core_SRCS
-#   Core/DocumentManager.cpp
-  Core/DSPluginManager.cpp
-  Core/DSPluginInterface.cpp
-  Core/DataType.cpp
-  Core/Data.cpp
-  Core/graphDocument.cpp
-  Core/Pointer.cpp
-  #Core/graphGroups.cpp
-  Core/krossBackend.cpp
-  Core/qtScriptBackend.cpp
-  Core/threadDocument.cpp
-  Core/DynamicPropertiesList.cpp
+Core/Data.cpp
+Core/DataStructure.cpp
+Core/Document.cpp
+Core/Group.cpp
+Core/DataStructurePluginInterface.cpp
+Core/DataStructurePluginManager.cpp
+Core/DocumentManager.cpp
+Core/DynamicPropertiesList.cpp
+Core/KrossBackend.cpp
+Core/Pointer.cpp
+Core/QtScriptBackend.cpp
 
   Plugins/FilePluginInterface.cpp
   Plugins/PluginManager.cpp
@@ -46,21 +45,20 @@ target_link_libraries( rocslib
 set( rocslib_LIB_HDRS
   Core/DynamicPropertiesList.h
   Core/Data.h
-  Core/DataType.h
-  Core/graphDocument.h
+  Core/DataStructure.h
+  Core/Document.h
   #Core/graphGroups.h
-  Core/krossBackend.h
+  Core/KrossBackend.h
   Core/Pointer.h
-  Core/qtScriptBackend.h
-  Core/threadDocument.h
+  Core/QtScriptBackend.h
   Core/rocslib_export.h
-  Core/rocs_typedefs.h
+  Core/Rocs_Typedefs.h
   Plugins/FilePluginInterface.h
   Plugins/PluginManager.h
   Plugins/ToolsPluginInterface.h
 
-  GraphicsItem/NodeItem.h
-  GraphicsItem/OrientedEdgeItem.h
+  GraphicsItem/DataItem.h
+  GraphicsItem/PointerItem.h
 )
 
 set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
@@ -68,19 +66,24 @@ set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERS
 install( TARGETS rocslib  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES ${rocslib_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel )
 ###################### Outros SRCS ############################
+#set ( kwelcomewidget_SRCS
+# KWelcomeWidget/kwelcomewidget.cpp
+#)
+
 set ( rocs_actions_SRCS
   Actions/AbstractAction.cpp
-  Actions/AddNode.cpp
-  Actions/AddEdge.cpp
-  Actions/MoveNode.cpp
-  Actions/Select.cpp
-  Actions/DeleteAction.cpp
+  Actions/AddConnection.cpp
+  Actions/AddData.cpp
   Actions/AlignAction.cpp
+  Actions/DeleteAction.cpp
+  Actions/MoveData.cpp
+  Actions/Select.cpp
 )
 
 set ( rocs_graphcisitem_SRCS
-  GraphicsItem/NodeItem.cpp
-  GraphicsItem/OrientedEdgeItem.cpp
+  GraphicsItem/DataItem.cpp
+  GraphicsItem/DataStructureItem.cpp
+  GraphicsItem/PointerItem.cpp
 )
 
 set( rocs_interface_SRCS
@@ -105,7 +108,6 @@ set( rocs_models_SRCS
   Models/model_GraphProperties.cpp
 )
 
-
 # set( rocs_undoredo_SRCS
 #   UndoRedo/URAddNode.cpp
 #   UndoRedo/URAddEdge.cpp
@@ -117,6 +119,7 @@ set ( rocs_script_SRC
 
 set(rocs_SRCS
   Main.cpp
+  ${kwelcomewidget_SRCS}
   ${rocs_actions_SRCS}
   ${rocs_graphcisitem_SRCS}
   ${rocs_interface_SRCS}
@@ -144,6 +147,7 @@ kde4_add_executable(rocs ${rocs_SRCS} ${rocs_Settings_SRCS} ${rocs_RCC_SRCS})
 target_link_libraries(rocs
   rocslib
   ${KDE4_KDEUI_LIBS}
+  ${KDE4_PLASMA_LIBS}
   ${KDE4_KROSSUI_LIBS}
   ${KDE4_KIO_LIBS}
   ${KDE4_KTEXTEDITOR_LIBS}
@@ -156,14 +160,14 @@ target_link_libraries(rocs
 
 install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( PROGRAMS rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs  )
 install( FILES rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
 
 install(FILES rocs.knsrc DESTINATION  ${CONFIG_INSTALL_DIR})
 
 install( FILES
-      Core/RocsDSPlugin.desktop
+      Core/RocsDataStructurePlugin.desktop
 	  Plugins/RocsToolsPlugin.desktop
 	  Plugins/RocsFilePlugin.desktop
 	DESTINATION
@@ -181,3 +185,4 @@ if(KDE4_BUILD_TESTS)
     enable_testing()
     add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)
+

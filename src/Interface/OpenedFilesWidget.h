@@ -24,9 +24,9 @@
 
 #include "ui_OpenedFilesWidget.h"
 
-class DataTypeDocumentModel;
+class DocumentModel;
 
-class DataTypeDocument;
+class Document;
 
 
 /*!
@@ -39,13 +39,13 @@ class OpenedFilesWidget : public QWidget, public Ui::OpenedFilesWidget {
 public:
     /*! default constructor.
     \param model the model that will populate the view.*/
-    explicit OpenedFilesWidget(DataTypeDocumentModel *model, QWidget* parent = 0);
+    explicit OpenedFilesWidget(DocumentModel *model, QWidget* parent = 0);
     void selectDefaultFile();
 signals:
     /*! when the active document changes, this signal is emmited.
     	\param document the new active document.
     */
-    void activeDocumentChanged( DataTypeDocument *document);
+    void activeDocumentChanged( Document *document);
 
 private slots:
     /*! when you click on the name of a document inside of the model, this method is invocked.
@@ -59,7 +59,7 @@ public	slots:
     void on__btnNewFile_clicked();
 
 private:
-    DataTypeDocumentModel *_documentModel;
+    DocumentModel *_documentModel;
 };
 
 #endif

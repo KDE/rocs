@@ -21,11 +21,13 @@
 
 #include "Select.h"
 #include "GraphScene.h"
-#include "DataType.h"
+#include "DataStructure.h"
 #include "Data.h"
+#include "DocumentManager.h"
+#include "Document.h"
 #include "Pointer.h"
-#include "NodeItem.h"
-#include "OrientedEdgeItem.h"
+#include "DataItem.h"
+#include "PointerItem.h"
 
 #include <KLocale>
 #include <KDebug>
@@ -43,7 +45,7 @@ SelectAction::SelectAction(GraphScene *scene, QObject *parent)
 SelectAction::~SelectAction() {}
 
 void SelectAction::executePress(QPointF pos) {
-    if (! _graph ) return;
+    if (! DocumentManager::self()->activeDocument()->activeDataStructure() ) return;
 
     _p1 = pos;
     _selectionRect = new QGraphicsRectItem();
@@ -53,7 +55,7 @@ void SelectAction::executePress(QPointF pos) {
 }
 
 void SelectAction::executeMove(QPointF pos) {
-    if (! _graph ) return;
+    if (! DocumentManager::self()->activeDocument()->activeDataStructure() ) return;
     if (_selectionRect == 0) return;
     QPointF p1 = _p1;
     /* Code to make setRect stop behaving wrongly */
@@ -73,7 +75,7 @@ void SelectAction::executeMove(QPointF pos) {
 }
 
 void SelectAction::executeRelease(QPointF pos) {
-    if (! _graph ) return;
+    if (! DocumentManager::self()->activeDocument()->activeDataStructure() ) return;
     if ( _selectionRect == 0) return;
 
     _graphScene->removeItem(_selectionRect);
@@ -98,7 +100,7 @@ void SelectAction::executeRelease(QPointF pos) {
 void SelectAction::multiSelect(QPointF pos) {
     QList<QGraphicsItem*> items = _graphScene->items(QRectF(_p1, pos));
     foreach(QGraphicsItem *i, items) {
-        if (!( qgraphicsitem_cast<DatumItem*>(i)
+        if (!( qgraphicsitem_cast<DataItem*>(i)
                 || qgraphicsitem_cast<OrientedEdgeItem*>(i))) {
             items.removeAll(i);
         }

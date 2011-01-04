@@ -4,7 +4,7 @@
 #include <DynamicPropertiesList.h>
 #include "Pointer.h"
 #include "Data.h"
-#include "DataType.h"
+#include "DataStructure.h"
 
 GraphPropertiesModel::GraphPropertiesModel( QObject *parent ) : QAbstractTableModel(parent) {
     // start all pointers to zero, so we don't crash things.
@@ -144,20 +144,20 @@ void GraphPropertiesModel::addDynamicProperty(QString name, QVariant value, QObj
 
     if (isGlobal) {
         if (Pointer * pointer = qobject_cast<Pointer*> (obj)) {
-            pointer->dataType()->addPointersDynamicProperty(name,value);
+            pointer->dataStructure()->addPointersDynamicProperty(name,value);
         }
-        if (Datum * datum = qobject_cast<Datum*> (obj)) {
-            datum->dataType()->addDatumsDynamicProperty(name,value);
+        if (Data * datum = qobject_cast<Data*> (obj)) {
+            datum->dataStructure()->addDataDynamicProperty(name,value);
         }
     } else {
         if (Pointer * pointer = qobject_cast<Pointer*> (obj)) {
             pointer->addDynamicProperty(name,value);
         }
-        if (Datum * datum = qobject_cast<Datum*> (obj)) {
+        if (Data * datum = qobject_cast<Data*> (obj)) {
             datum->addDynamicProperty(name,value);
         }
-        if (DataType * dataType = qobject_cast<DataType*> (obj)) {
-            dataType->addDynamicProperty(name, value);
+        if (DataStructure * dataStructure = qobject_cast<DataStructure*> (obj)) {
+            dataStructure->addDynamicProperty(name, value);
         }
     }
 

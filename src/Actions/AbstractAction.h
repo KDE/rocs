@@ -23,8 +23,8 @@
 #include <QObject>
 #include <QString>
 class GraphScene;
-class DataType;
-class DataTypeDocument;
+class DataStructure;
+class Document;
 
 /*!
 \brief the base class for custom actions.
@@ -44,19 +44,8 @@ public:
     */
     AbstractAction(GraphScene *scene, QObject *parent);
 
-    /*! Atualize the Graph Document that this action will work on
-      \p dataTypeDocument the pointer to the active  DataTypeDocument
-    */
-    virtual void setActiveDataTypeDocument( DataTypeDocument *dataTypeDocument);
-
-
     const QString& name() const;
 public slots:
-    /*! Atualize the Active Graph that this action will work on
-      \p graph the pointer to the active  Graph
-    */
-    virtual void setActiveGraph( DataType *graph);
-
     /*! Virtual,  executed when a mouse press occours on the scene.
     \p pos the position on screen that the execution will take part.
     */
@@ -87,11 +76,6 @@ public slots:
     void sendExecuteBit();
 
 protected:
-    /*! pointer to the active graph document */
-    DataTypeDocument *_dataTypeDocument;
-
-    /*! pointer to the active graph */
-    DataType *_graph;
 
     /*! pointer to the GraphicsScene with the drawing */
     GraphScene *_graphScene;

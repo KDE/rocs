@@ -24,11 +24,11 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include "GraphScene.h"
-#include "DataType.h"
+#include "DataStructure.h"
 #include "Data.h"
 #include "Pointer.h"
-#include "NodeItem.h"
-#include "OrientedEdgeItem.h"
+#include "DataItem.h"
+#include "PointerItem.h"
 
 DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent) {
     setText(i18n ( "Delete" ));
@@ -40,21 +40,18 @@ DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(s
 void DeleteAction::executePress(QPointF pos)
 {
     QGraphicsItem * item = _graphScene->itemAt(pos);
-    if ( DatumItem *n  = qgraphicsitem_cast<DatumItem*>(item) ) {
-        qDebug() << "Trying to remove node. DatumItem: " << n->objectName() ;
+    if ( DataItem *n  = qgraphicsitem_cast<DataItem*>(item) ) {
         n->datum()->remove();
     }
     else if ( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ) {
-        qDebug() << "Should have deleted the oriented node.";
         e->pointer()->remove();
     }
-    qDebug() << "Item Removed!";
 }
 
 void DeleteAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
     if (keyEvent->key() == Qt::Key_Delete) {
-        qDebug() << "you pressed the Delete key... big deal.";
+        
     }
 }
 

@@ -19,55 +19,26 @@
 
 #include "Data.h"
 #include "Pointer.h"
-#include "DataType.h"
+#include "DataStructure.h"
 #include <KDebug>
 #include <KGlobal>
 #include <kstandarddirs.h>
+#include <QColor>
 
 #include "DynamicPropertiesList.h"
-class DatumPrivate{
-public:
-  DatumPrivate(Datum *classPtr) : q(classPtr){}
-  
-    PointerList _in_pointers;
-    PointerList _out_pointers;
-    PointerList _self_pointers;
 
-    //! fixed properties
-    qreal _x;
-    qreal _y;
-    qreal _width;
-
-    bool _begin;
-    bool _end;
-    bool _changing;
-    bool _showName;
-    bool _showValue;
-
-    DataType *_dataType;
-
-    QString _name;
-    QString _color;
-    QString _iconpackage;
-    QString _icon;
-
-    QVariant _value;
-    QScriptValue _scriptvalue;
-    QScriptEngine *_engine;
-    
-    void empty(PointerList &list) {
-        for(int i = 0; i < list.size(); ++i){
-            list.at(i)->remove(q);
-        }
+void DataPrivate::empty(PointerList &list) {
+    for(int i = 0; i < list.size(); ++i){
+        list.at(i)->remove(q);
     }
-private:
-  Datum *q;
-};
+}
 
-DataType *Datum::dataType() const{ return d->_dataType; }
+DataStructure *Data::dataStructure() const{ return d->_dataStructure; }
 
-Datum::Datum(DataType *parent) : QObject(parent), d(new DatumPrivate(this)) {
-    d->_dataType = parent;
+Data::Data(DataStructure *parent) 
+: QObject(parent)
+, d(new DataPrivate(this)) {
+    d->_dataStructure = parent;
     d->_x = 0;
     d->_y = 0;
     d->_width = 0.5;
@@ -75,7 +46,7 @@ Datum::Datum(DataType *parent) : QObject(parent), d(new DatumPrivate(this)) {
     d->_showValue = true;
     d->_begin = false;
     d->_end = false;
-    d->_color = d->_dataType->datumDefaultColor();
+    d->_color = d->_dataStructure->dataDefaultColor();
     d->_changing = false;
     d->_value = 0;
     d->_icon = "rocs_default";
@@ -83,114 +54,87 @@ Datum::Datum(DataType *parent) : QObject(parent), d(new DatumPrivate(this)) {
     kDebug() << "Node successfully created" << d->_iconpackage;
 }
 
-Datum::~Datum() {
+Data::~Data() {
     emit removed();
     d->empty(d->_in_pointers);
     d->empty(d->_out_pointers);
     d->empty(d->_self_pointers);
 }
 
-bool Datum::showName() {
+bool Data::showName() {
     return d->_showName;
 }
 
-bool Datum::showValue() {
+bool Data::showValue() {
     return d->_showValue;
 }
 
-void Datum::hideName(bool b) {
+void Data::hideName(bool b) {
     d->_showName = b;
     emit changed();
 }
 
-void Datum::hideValue(bool b) {
+void Data::hideValue(bool b) {
     d->_showValue = b;
     emit changed();
 }
 
-void Datum::setIcon(const QString& s){
+void Data::setIcon(const QString& s){
     d->_icon = s;
     emit changed();
 }
 
-void Datum::setIconPackage(const QString& s){
+void Data::setIconPackage(const QString& s){
    d-> _iconpackage = s;
 }
 
-const QString& Datum::icon() const {
-    return d->_icon; 
-}
-
-const QString& Datum::iconPackage() const { 
-    return d-> _iconpackage; 
-}
-
-DataList Datum::adjacent_data() const
+DataList Data::adjacent_data() const
 {
-    QList<Datum*> adjacent;
+    QList<Data*> adjacent;
 
-    foreach(Pointer *e, d->_out_pointers) {
+   foreach(Pointer *e, d->_out_pointers) {
         adjacent.append( e->to()  );
-    }
+   }
 
-    if ( d->_dataType -> directed() ) {
-        foreach(Pointer *e, d->_self_pointers) {
-            adjacent.append( e->to() );
-        }
-        return adjacent;
-    }
+   foreach(Pointer *e, d->_self_pointers) {
+        adjacent.append( e->to() );
+   }
 
-    foreach(Pointer *e, d->_in_pointers) {
+   foreach(Pointer *e, d->_in_pointers) {
         adjacent.append( e->from() );
-    }
-    return adjacent;
+   }
+
+   return adjacent;
 }
 
-
-PointerList Datum::adjacent_pointers() const
+PointerList Data::adjacent_pointers() const
 {
     PointerList adjacent;
 
     adjacent << d->_out_pointers;
-
-    if ( d->_dataType -> directed() ) {
-        adjacent << d-> _self_pointers;
-    }else{
-      adjacent << d->_in_pointers;
-    }
+    adjacent << d-> _self_pointers;
+    adjacent << d->_in_pointers;
 
     return adjacent;
 }
 
-void Datum::addInPointer(Pointer *e) {
+void Data::addInPointer(Pointer *e) {
     d-> _in_pointers.append( e );
 }
 
-void Datum::addOutPointer(Pointer *e) {
+void Data::addOutPointer(Pointer *e) {
     d->_out_pointers.append( e  );
 }
 
-void Datum::addSelfPointer(Pointer *e) {
+void Data::addSelfPointer(Pointer *e) {
     d->_self_pointers.append( e );
 }
 
-PointerList Datum::in_pointers() const {
-    return d->_in_pointers;
+Pointer* Data::addPointer(Data* to) {
+    return d->_dataStructure->addPointer(this, to);
 }
 
-PointerList Datum::out_pointers() const {
-    return d->_out_pointers;
-}
-
-PointerList Datum::self_pointers() const {
-    return d->_self_pointers;
-}
-
-Pointer* Datum::addPointer(Datum* to) {
-    return d->_dataType->addPointer(this, to);
-}
-
-void Datum::removePointer(Pointer *e, int pointerList) {
+void Data::removePointer(Pointer *e, int pointerList) {
     switch (pointerList) {
     case In  : removePointer(e, d->_in_pointers);    break;
     case Out : removePointer(e, d->_out_pointers);   break;
@@ -198,12 +142,12 @@ void Datum::removePointer(Pointer *e, int pointerList) {
     }
 }
 
-void Datum::removePointer(Pointer* e, PointerList &list) {
+void Data::removePointer(Pointer* e, PointerList &list) {
     if (list.contains(e))
       list.removeOne(e);
 }
 
-PointerList Datum::pointers(Datum *n) {
+PointerList Data::pointers(Data *n) const {
     PointerList list;
     if (n == this) {
         return d->_self_pointers;
@@ -221,204 +165,129 @@ PointerList Datum::pointers(Datum *n) {
     return list;
 }
 
-void Datum::remove() {
-  d->_dataType->remove(this);
+void Data::remove() {
+  d->_dataStructure->remove(this);
 }
 
-//! Properties:
-void Datum::setX(int x) {
+void Data::setX(int x) {
     d->_x = x;
     if (! d->_changing) {
 	emit changed();
     }
 }
 
-qreal Datum::x() const {
-    return d->_x;
-}
-
-void Datum::setY(int y) {
+void Data::setY(int y) {
     d->_y  = y;
     if (! d->_changing) {
 	emit changed();
     }
 }
 
-void Datum::setWidth(qreal w) {
+void Data::setWidth(qreal w) {
     d->_width = w;
     if (! d->_changing) {
 	emit changed();
-        kDebug() << "Updating node drawing";
     }
 }
 
-void Datum::setPos(qreal x, qreal y) {
+void Data::setPos(qreal x, qreal y) {
     d->_x = x;
     d->_y = y;
     if (! d->_changing) {
 	emit changed();
     }
-
 }
 
-qreal Datum::y() const {
-    return d->_y;
-}
-
-qreal Datum::width() const {
-    return d->_width;
-}
-
-void Datum::setColor(const QString& s) {
+void Data::setColor(const QColor& s) {
     d->_color = s;
     if (! d->_changing) {
 	emit changed();
     }
 }
 
-const QString& Datum::color() const {
-    return d->_color;
-}
-
-void Datum::setName(const QString& s) {
+void Data::setName(const QString& s) {
     d->_name = s;
     if (! d->_changing) {
 	emit changed();
     }
 }
 
-const QString& Datum::name() const {
-    return d->_name;
-}
-
-void Datum::setBegin(bool begin) {
-    if (!begin) {
-        d->_begin = false;
-	if (d->_dataType->begin() == this){
-	    d->_dataType->setBegin(0);
-	}
-    }
-    else if (d->_dataType->begin() == this) {
-        return;
-    }
-    else if( d->_dataType->setBegin(this) ) {
-        d->_begin = true;
-    }else{
-        return;
-    }
-
-    if (! d->_changing) {
-	emit changed();
-    }
-}
-
-void Datum::setEnd(bool end) {
-    d->_end = end;
-
-    if (end) {
-        d->_dataType->addEnd(this);
-    } else {
-        d->_dataType->removeEnd(this);
-    }
-    if (! d->_changing) {
-	emit changed();
-    }
-}
-
-bool Datum::begin() const {
-    return d->_begin;
-}
-
-bool Datum::end() const {
-    return d->_end;
-}
-
-const QVariant Datum::value() const {
-    return d->_value;
-}
-
-void  Datum::setValue(const QVariant s) {
+void  Data::setValue(const QVariant& s) {
     d->_value = s;
     if (! d->_changing) {
       emit changed();
     }
 }
 
-void Datum::setValue(const QString& c){
-    d->_value = c;
-    if (d->_changing){
-      emit changed();
-    }
-}
-void Datum::startChange() {
+void Data::startChange() {
     d->_changing = true;
 }
 
-void Datum::endChange() {
+void Data::endChange() {
     d->_changing = false;
     emit changed();
 }
 
-void Datum::addDynamicProperty(QString property, QVariant value){
+void Data::addDynamicProperty(QString property, QVariant value){
     if (! setProperty(property.toUtf8(), value)  && value.isValid()){
       DynamicPropertiesList::New()->addProperty(this, property);
     }
 }
 
-void Datum::removeDynamicProperty(QString property){
+void Data::removeDynamicProperty(QString property){
     addDynamicProperty(property.toUtf8(), QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
-#ifdef USING_QTSCRIPT
-void Datum::self_remove() {
+void Data::self_remove() {
     remove();
 }
 
-QScriptValue Datum::scriptValue() const {
+QScriptValue Data::scriptValue() const {
     return d->_scriptvalue;
 }
 
-void Datum::setEngine(	QScriptEngine *engine ) {
+void Data::setEngine(	QScriptEngine *engine ) {
     d->_engine = engine;
     d->_scriptvalue = engine->newQObject(this);
 }
 
-QScriptValue Datum::adj_data() {
-    QList<Datum*> list = adjacent_data();
+
+QScriptValue Data::adj_data() {
+    QList<Data*> list = adjacent_data();
     QScriptValue array = d->_engine->newArray();
-    foreach(Datum* n, list) {
+    foreach(Data* n, list) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
 }
 
-QScriptValue Datum::adj_pointers() {
+QScriptValue Data::adj_pointers() {
     PointerList list = adjacent_pointers();
     return createScriptArray(list);
 }
 
-QScriptValue Datum::input_pointers() {
+QScriptValue Data::input_pointers() {
     PointerList list = in_pointers();
     return createScriptArray(list);
 }
 
-QScriptValue Datum::output_pointers() {
+QScriptValue Data::output_pointers() {
     PointerList list = out_pointers();
     return createScriptArray(list);
 }
 
-QScriptValue Datum::loop_pointers() {
+QScriptValue Data::loop_pointers() {
     PointerList list = self_pointers();
     return createScriptArray(list);
 }
 
-QScriptValue Datum::connected_pointers(Datum *n) {
+QScriptValue Data::connected_pointers(Data *n) {
     PointerList list = pointers(n);
     return createScriptArray(list);
 }
 
-QScriptValue Datum::createScriptArray(PointerList list) {
+QScriptValue Data::createScriptArray(PointerList list) {
     QScriptValue array = d->_engine->newArray();
     foreach(Pointer* e, list) {
         array.property("push").call(array, QScriptValueList() << e->scriptValue());
@@ -426,4 +295,3 @@ QScriptValue Datum::createScriptArray(PointerList list) {
     return array;
 }
 
-#endif

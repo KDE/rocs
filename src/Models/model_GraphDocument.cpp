@@ -18,29 +18,29 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include "model_GraphDocument.h"
-#include "graphDocument.h"
-#include "DataType.h"
+#include "Document.h"
+#include "DataStructure.h"
 #include <QString>
 #include <KDebug>
 #include <QModelIndex>
 
-DataTypeDocumentModel::DataTypeDocumentModel(QList< DataTypeDocument*>* documents, QObject *parent)
+DocumentModel::DocumentModel(QList< Document*>* documents, QObject *parent)
         : QAbstractListModel( parent ), _documents( (*documents) ) {
 
 }
 
-int DataTypeDocumentModel::rowCount(const QModelIndex&) const {
+int DocumentModel::rowCount(const QModelIndex&) const {
     return _documents.size();
 }
 
-QVariant DataTypeDocumentModel::data(const QModelIndex &index, int role) const {
+QVariant DocumentModel::data(const QModelIndex &index, int role) const {
     if (( !index.isValid() ) || ( index.row() > _documents.size() ) || ( role != Qt::DisplayRole)) {
         return QVariant();
     }
     return _documents.at(index.row())->name();
 }
 
-QVariant DataTypeDocumentModel::headerData(int section, Qt::Orientation orientation, int role) const {
+QVariant DocumentModel::headerData(int section, Qt::Orientation orientation, int role) const {
     if ( role != Qt::DisplayRole) {
         return QVariant();
     }
@@ -52,14 +52,14 @@ QVariant DataTypeDocumentModel::headerData(int section, Qt::Orientation orientat
 
 }
 
-Qt::ItemFlags DataTypeDocumentModel::flags(const QModelIndex& index) const {
+Qt::ItemFlags DocumentModel::flags(const QModelIndex& index) const {
     if ( !index.isValid() ) {
         return Qt::ItemIsEnabled;
     }
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
-bool DataTypeDocumentModel::setData(const QModelIndex& index, const QVariant& value, int role) {
+bool DocumentModel::setData(const QModelIndex& index, const QVariant& value, int role) {
     if ( index.isValid() && (role == Qt::ItemIsEditable)) {
         _documents.at(index.row())-> setName(value.toString());
         emit dataChanged(index, index);
@@ -68,23 +68,23 @@ bool DataTypeDocumentModel::setData(const QModelIndex& index, const QVariant& va
     return false;
 }
 
-bool DataTypeDocumentModel::insertRows(int position, int rows, const QModelIndex&) {
+bool DocumentModel::insertRows(int position, int rows, const QModelIndex&) {
     beginInsertRows(QModelIndex(), position, position+rows-1);
 
-    DataTypeDocument *doc = new  DataTypeDocument("untitled");
+    Document *doc = new  Document("untitled");
     _documents.append(doc);
     endInsertRows();
     return true;
 }
 
-bool DataTypeDocumentModel::removeRows(int position, int rows, const QModelIndex&) {
+bool DocumentModel::removeRows(int position, int rows, const QModelIndex&) {
     beginRemoveRows(QModelIndex(), position, position+rows-1);
     _documents.removeAt(position);
     endRemoveRows();
     return true;
 }
 
-DataTypeDocument *DataTypeDocumentModel::at(const QModelIndex& index) {
+Document *DocumentModel::at(const QModelIndex& index) {
     return _documents.at(index.row());
 }
 
