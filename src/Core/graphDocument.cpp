@@ -142,7 +142,7 @@ const QString& DataTypeDocument::documentPath() const {
 bool DataTypeDocument::saveAsInternalFormat(const QString& filename) {
     k_buf.clear();
 
-    KSaveFile saveFile( !filename.endsWith(".dataType") ? QString("%1.dataType").arg(filename) : filename);
+    KSaveFile saveFile( !filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
 
     if (!saveFile.open()) {
         kDebug() << "Error: File Not Open";
