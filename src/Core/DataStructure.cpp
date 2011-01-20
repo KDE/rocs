@@ -86,6 +86,7 @@ DataStructure::~DataStructure() {
     foreach(Data* n, d->_data) {
         remove(n);
     }
+    delete d;
 }
 
 void DataStructure::setReadOnly(bool r){

@@ -85,6 +85,7 @@ Document::~Document() {
 	DataStructure *g = d->_dataStructures.at(i);
         delete g;
     }
+    delete d;
 }
 
 QList<DataStructure*>& Document::dataStructures() const { return d->_dataStructures; }
