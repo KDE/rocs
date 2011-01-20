@@ -144,6 +144,11 @@ Rocs::DSPluginManager::DSPluginManager(QObject *parent) : QObject(parent),_d ( n
     _d->loadPlugins();
 }
 
+Rocs::DSPluginManager::~DSPluginManager()
+{
+    delete _d;
+}
+
 Rocs::DSPluginManager* Rocs::DSPluginManager::instance(QObject * parent) {
     if ( DSPluginManager::self == 0 ) {
         DSPluginManager::self = new DSPluginManager(parent);

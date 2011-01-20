@@ -41,6 +41,7 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
   Q_OBJECT
     static DSPluginManager * self;
     DSPluginManager(QObject* parent);
+    ~DSPluginManager();
   public:
     /** Accessor to the manager's instance.*/
     static DSPluginManager * instance(QObject * parent = 0);
