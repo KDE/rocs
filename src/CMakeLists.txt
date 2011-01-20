@@ -160,7 +160,7 @@ target_link_libraries(rocs
 
 install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( PROGRAMS rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs  )
 install( FILES rocs.kcfg DESTINATION  ${KCFG_INSTALL_DIR} )
 
