@@ -130,6 +130,11 @@ DataStructurePluginManager::DataStructurePluginManager() :_d ( new DataStructure
     _d->loadPlugins();
 }
 
+DataStructurePluginManager::~DataStructurePluginManager()
+{
+    delete _d;
+}
+
 DataStructurePluginManager* DataStructurePluginManager::self() {
     if ( !_self ){
       _self = new DataStructurePluginManager();

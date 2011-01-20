@@ -41,6 +41,8 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
   public:
     /** Accessor to the manager's instance.*/
     static DataStructurePluginManager * self();
+    
+    ~DataStructurePluginManager();
 
     /** build a new dataType using actual data structure. */
     DataStructure * createNewDataStructure(Document* parent, const QString& pluginName = QString());
