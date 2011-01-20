@@ -120,6 +120,7 @@ DataType::~DataType() {
     foreach(Datum* n, d->_data) {
         remove(n);
     }
+    delete d;
 }
 
 void DataType::setReadOnly(bool r){

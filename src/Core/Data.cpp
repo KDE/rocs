@@ -88,6 +88,7 @@ Datum::~Datum() {
     d->empty(d->_in_pointers);
     d->empty(d->_out_pointers);
     d->empty(d->_self_pointers);
+    delete d;
 }
 
 bool Datum::showName() {
