@@ -25,7 +25,6 @@
 
 class QGraphicsSceneMouseEvent;
 class Pointer;
-class Datum;
 class QGraphicsSimpleTextItem;
 
 /*! \brief the Edge drawing on screen.

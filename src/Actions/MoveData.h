@@ -26,7 +26,6 @@
 class QObject;
 class DataItem;
 class Data;
-class QGraphicsView;
 
 /*!
   \brief The 'Move Node' Action

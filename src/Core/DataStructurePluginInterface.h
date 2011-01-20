@@ -19,7 +19,6 @@ class KComponentData;
 
 #include "rocslib_export.h"
   
-class DataStructurePluginManager;
 
 class ROCSLIB_EXPORT DataStructurePluginInterface: public QObject
 {

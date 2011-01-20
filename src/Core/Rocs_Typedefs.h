@@ -3,7 +3,6 @@
 
 #include <QList>
 
-class DataStructure;
 class Data;
 class Pointer;
 

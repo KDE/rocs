@@ -22,12 +22,7 @@
 
 #include <QObject>
 
-class QMutex;
-class QWaitCondition;
-class Pointer;
-class Graph;
 class Data;
-class QGridLayout;
 class Document;
 #include "rocslib_export.h"
 

@@ -23,7 +23,7 @@
 
 #include "AbstractAction.h"
 #include <QObject>
-
+class DataStructure;
 /*!
   \brief The 'Add Node' Action
   This action holds the 'Add Node' icon and tooltips, and when it's executed,

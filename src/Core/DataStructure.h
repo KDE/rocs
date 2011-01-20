@@ -30,7 +30,6 @@
 #include <klocalizedstring.h>
 #include "rocslib_export.h"
 
-class QtScriptBackend;
 class Group;
 class Document;
 class Data;

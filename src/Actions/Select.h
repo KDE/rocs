@@ -25,7 +25,6 @@
 #include <QObject>
 #include <QPointF>
 
-class Datum;
 class QGraphicsRectItem;
 class QGraphicsItem;
 

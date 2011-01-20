@@ -35,7 +35,6 @@
 #include <klocalizedstring.h>
 #include "rocslib_export.h"
 
-class QtScriptBackend;
 //class GraphGroup;
 class DataTypeDocument;
 class Datum;

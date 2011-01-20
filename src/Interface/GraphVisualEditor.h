@@ -31,7 +31,6 @@ class Data;
 class GraphScene;
 class QToolButton;
 class MainWindow;
-class NodeItem;
 class QGraphicsView;
 
 class GraphVisualEditor : public QWidget {

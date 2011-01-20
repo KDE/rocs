@@ -24,9 +24,7 @@
 #include <QScriptString>
 #include "rocslib_export.h"
 
-class DataStructure;
 class Document;
-class KTextBrowser;
 
 
 class ToolsPluginInterface;

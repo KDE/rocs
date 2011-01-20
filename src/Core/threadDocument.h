@@ -26,8 +26,6 @@
 // class DocumentManager;
 
 class DataType;
-class Datum;
-class Pointer;
 
 class DataTypeDocument;
 class QtScriptBackend;

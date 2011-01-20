@@ -23,8 +23,6 @@
 #include <QObject>
 #include <QString>
 class GraphScene;
-class DataStructure;
-class Document;
 
 /*!
 \brief the base class for custom actions.

@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-class GroupPrivate;
 
 class Group : QObject{
     Q_OBJECT
