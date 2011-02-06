@@ -21,6 +21,7 @@ endif()
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
+add_subdirectory(doc)
 add_subdirectory(src)
 add_subdirectory(graphics)
 
