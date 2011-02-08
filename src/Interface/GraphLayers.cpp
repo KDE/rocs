@@ -27,15 +27,13 @@ GraphLayers::GraphLayers(MainWindow *parent) : QWidget(parent) {
     _buttonGroup = new QButtonGroup();
 }
 
-void GraphLayers::populate() {
+void GraphLayers::populate( DataTypeDocument *gd) {
     for ( int i = 1; i < layout()->count(); ++i) {
         layout()->itemAt(i)->widget()->deleteLater();
     }
     foreach(QAbstractButton *b, _buttonGroup->buttons()) {
         _buttonGroup->removeButton(b);
     }
-
-    DataTypeDocument *gd = _mainWindow->activeDocument();
     connect(gd, SIGNAL(dataTypeCreated(DataType*)), this, SLOT(addGraph(DataType*)),Qt::UniqueConnection);
 
     int total = gd->count();

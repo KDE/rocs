@@ -69,7 +69,7 @@ public:
     */
     DataType(DataTypeDocument *parent = 0);
 
-    DataType(DataType& other);
+    DataType(DataType& other, DataTypeDocument* parent = 0);
 
     /*! destructor */
     ~DataType();

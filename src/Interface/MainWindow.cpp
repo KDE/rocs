@@ -447,8 +447,9 @@ void MainWindow::setActiveDataTypeDocument ( DataTypeDocument* d )
     connect( _tDocument->engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()),Qt::UniqueConnection);
 
 
-    _GraphLayers->populate();
+    _GraphLayers->populate(d);
     _waitForDocument.wakeAll();
+//     setActiveGraph(d->activeDataType());
 }
 
 void MainWindow::releaseDocument ( DataTypeDocument* d ){
@@ -458,7 +459,7 @@ void MainWindow::releaseDocument ( DataTypeDocument* d ){
     _graphVisualEditor->releaseDataTypeDocument();
     d->disconnect(this);
     disconnect(d);
-    disconnect(d);
+//     disconnect(d);
     _GraphLayers->disconnect(d);
     d->engineBackend()->disconnect(this);
     d->engineBackend()->disconnect(_bottomTabs);

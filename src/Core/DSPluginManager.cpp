@@ -35,10 +35,10 @@ public:
         m_actualPlugin = 0;
     }
 
-    DataType* changeToDS ( DataType* dataType ) {
+    DataType* changeToDS ( DataType* dataType , DataTypeDocument * parent) {
         if ( m_actualPlugin ) {
 
-            return m_actualPlugin->changeToDS ( dataType );
+            return m_actualPlugin->changeToDS ( dataType, parent );
         }
         return dataType;
     }
@@ -174,9 +174,9 @@ void Rocs::DSPluginManager::changeActiveDS (const QString &newDS ) {
     }
 }
 
-DataType* Rocs::DSPluginManager::changeToDS ( DataType* dataType ) {
+DataType* Rocs::DSPluginManager::changeToDS ( DataType* dataType, DataTypeDocument * parent ) {
     dataType->beforeConvert();
-    return instance()->_d->changeToDS ( dataType );
+    return instance()->_d->changeToDS ( dataType , parent);
 
 }
 

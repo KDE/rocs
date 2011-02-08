@@ -50,8 +50,8 @@ ListPlugin::~ListPlugin()
 
 }
 
-DataType* ListPlugin::changeToDS ( DataType* graph) {
-    return new ListStructure(*graph);
+DataType* ListPlugin::changeToDS ( DataType* graph, DataTypeDocument* parent) {
+    return new ListStructure(*graph, parent);
 }
 
 DataType* ListPlugin::createDS ( DataTypeDocument* parent ){

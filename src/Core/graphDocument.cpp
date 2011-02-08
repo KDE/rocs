@@ -53,7 +53,9 @@ DataTypeDocument::DataTypeDocument(const DataTypeDocument& gd)
     _DSType = Rocs::DSPluginManager::instance()->actualPlugin();
     _engineBackend = new QtScriptBackend(this);
     for (int i = 0; i < gd.count(); ++i){
-        append(Rocs::DSPluginManager::instance()->changeToDS(gd.at(i)));
+        append(Rocs::DSPluginManager::instance()->changeToDS(gd.at(i), this));
+        if (gd._activeDataType == gd.at(i))
+            setActiveDataType(last());
     }
 }
 
@@ -64,9 +66,10 @@ DataTypeDocument::~DataTypeDocument() {
     kDebug() << size();
 
     for(int i = 0; i < size(); i ++){
-	DataType *g = at(i);
-	kDebug() << "Deleting dataType" << g->name();
-        delete g;
+       DataType *g = at(i);
+       kDebug() << "Deleting dataType" << g->name();
+//        delete g;
+       g->deleteLater();
     }
 }
 
@@ -297,7 +300,7 @@ void DataTypeDocument::convertToDS(QString newDS){
 //        DataTypeDocument * gDoc = new DataTypeDocument(*this);
        int numDataTypes = count();
         for (int i = 0 ; i < numDataTypes; ++i){
-            DataType * g = Rocs::DSPluginManager::instance()->changeToDS(at(i));
+            DataType * g = Rocs::DSPluginManager::instance()->changeToDS(at(i), this);
             if (at(i) == _activeDataType)
               _activeDataType = g;
             append(g);

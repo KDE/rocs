@@ -49,7 +49,7 @@ class ROCSLIB_EXPORT DSPluginManager : public QObject {
     static DataType * createNewDS(DataTypeDocument* parent, const QString& pluginName = QString());
 
     /** When the DS pluin  is changed, all the existent dataTypes must be 'rebuild' with the new DS. If is not possible to change to a new data structure without losing data, then user should be asked to continue or nor. If user say to not continue, all ready done job should be undo.*/
-    static DataType * changeToDS(DataType*);
+    static DataType * changeToDS(DataType* dataType, DataTypeDocument* parent);
 
     /** return the list of avaliable data structure plugins.*/
     static const QStringList listOfDS();

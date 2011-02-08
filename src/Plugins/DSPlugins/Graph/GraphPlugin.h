@@ -30,8 +30,7 @@ class /*ROCSLIB_EXPORT*/ GraphPlugin : public DSPluginInterface {
     GraphPlugin ( QObject* parent,  const QList<QVariant> & /* args*/ );
 
     virtual ~GraphPlugin();
-
-    virtual DataType* changeToDS ( DataType* );
+    virtual DataType* changeToDS(DataType* , DataTypeDocument* );
     virtual DataType* createDS ( DataTypeDocument* parent );
 
     virtual QGraphicsItem* pointerItem ( Pointer* ) const;

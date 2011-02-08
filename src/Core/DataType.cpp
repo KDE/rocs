@@ -75,11 +75,10 @@ DataType::DataType(DataTypeDocument *parent) : QObject(parent), d(new DataTypePr
     d->_pointerValuesVisible = true;
 }
 
-DataType::DataType(DataType& other): QObject(other.parent()),d(new DataTypePrivate){
+DataType::DataType(DataType& other, DataTypeDocument * parent): QObject(parent),d(new DataTypePrivate){
     d->_directed = other.directed();
     d->_automate = other.automate();
     d->_readOnly = other.readOnly();
-    d->_document = other.document();
     d->_begin = other.begin();
     calcRelativeCenter();
 
@@ -90,6 +89,8 @@ DataType::DataType(DataType& other): QObject(other.parent()),d(new DataTypePriva
     d->_pointerNamesVisible     = other.d->_pointerNamesVisible;
     d->_pointerValuesVisible    = other.d->_pointerValuesVisible;
 
+    d->_document = parent;
+
     QHash <Datum*, Datum* > datumToDatum;
     foreach(Datum *n, other.data()){
       Datum* newDatum = addDatum(n->name());
@@ -98,16 +99,23 @@ DataType::DataType(DataType& other): QObject(other.parent()),d(new DataTypePriva
       newDatum->setX(n->x());
       newDatum->setY(n->y());
       newDatum->setWidth(n->width());
+      newDatum->setBegin(n->begin());
+      newDatum->setIcon(n->icon());
+      
+      
       datumToDatum.insert(n, newDatum);
-
     }
     foreach(Pointer *e, other.d->_pointers){
       Datum* from =  datumToDatum.value(e->from());
       Datum* to =  datumToDatum.value(e->to());
 
-      Pointer* newPointer = addPointer(from, to);
-      newPointer->setColor(e->color());
-      newPointer->setValue(e->value());
+      if (Pointer* newPointer = addPointer(from, to)){
+         newPointer->setColor(e->color());
+         newPointer->setValue(e->value());
+         newPointer->setName(e->name());
+         newPointer->setStyle(e->style());
+         newPointer->setWidth(e->width());
+      }
     }
 }
 

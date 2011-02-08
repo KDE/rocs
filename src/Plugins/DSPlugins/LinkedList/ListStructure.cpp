@@ -26,21 +26,11 @@
 Rocs::ListStructure::ListStructure ( DataTypeDocument* parent ) : DataType ( parent ) {
   qDebug() << "Creating  a list structure";
   initialize();
-
-//   arrangeNodes();
 }
 
-Rocs::ListStructure::ListStructure(DataType& other): DataType(other)
+Rocs::ListStructure::ListStructure(DataType& other, DataTypeDocument* parent): DataType(other, parent)
 {
   initialize();
-//   setDirected(true);
-//   qDebug() << "Criando pelo construtor de cópia";
-//   _animationGroup = new QParallelAnimationGroup(this);
-//   setBegin(addDatum("P"));
-//   begin()->hideName(true);
-//   begin()->hideValue(false);
-
-//   arrangeNodes();
 
 }
 

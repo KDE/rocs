@@ -30,7 +30,7 @@ class ListStructure : public DataType {
 
     ListStructure ( DataTypeDocument* parent = 0 );
 
-    ListStructure(DataType& other);
+    ListStructure(DataType& other, DataTypeDocument* parent);
 
     virtual ~ListStructure();
   public slots:

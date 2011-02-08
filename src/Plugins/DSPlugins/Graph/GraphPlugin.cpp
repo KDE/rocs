@@ -47,8 +47,8 @@ GraphPlugin::~GraphPlugin()
 
 }
 
-DataType* GraphPlugin::changeToDS ( DataType* data) {
-    return new GraphStructure(*data);
+DataType* GraphPlugin::changeToDS ( DataType* data, DataTypeDocument* parent) {
+    return new GraphStructure(*data, parent);
 }
 
 DataType* GraphPlugin::createDS ( DataTypeDocument* parent )

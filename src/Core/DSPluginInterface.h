@@ -31,7 +31,7 @@ public:
 
   virtual ~DSPluginInterface();
   virtual DataType* createDS(DataTypeDocument * parent) = 0;
-  virtual DataType* changeToDS(DataType*) = 0;
+  virtual DataType* changeToDS(DataType*, DataTypeDocument*) = 0;
 
   QString name();
 

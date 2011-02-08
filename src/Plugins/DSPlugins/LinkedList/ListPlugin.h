@@ -31,8 +31,7 @@ class /*ROCSLIB_EXPORT*/ ListPlugin : public DSPluginInterface {
     ListPlugin ( QObject* parent,  const QList<QVariant> & /* args*/ );
 
     virtual ~ListPlugin();
-
-    virtual DataType* changeToDS ( DataType* );
+    virtual DataType* changeToDS(DataType* , DataTypeDocument* );
     virtual DataType* createDS ( DataTypeDocument* parent );
 
     virtual QGraphicsItem* pointerItem ( Pointer* ) const;

@@ -28,7 +28,7 @@ Rocs::GraphStructure::GraphStructure ( DataTypeDocument* parent ) : DataType ( p
   setDirected(false);
 }
 
-Rocs::GraphStructure::GraphStructure(DataType& other): DataType(other){
+Rocs::GraphStructure::GraphStructure(DataType& other, DataTypeDocument* parent): DataType(other, parent){
 
 }
 
