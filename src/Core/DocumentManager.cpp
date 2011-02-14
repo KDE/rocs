@@ -37,8 +37,6 @@ DocumentManager* DocumentManager::self(){
 
 DocumentManager::DocumentManager( QObject* parent):QObject(parent){
   m_actualDocument = 0;
-//   Document * doc = new Document(i18n("Untitled"), 800, 600);
-//   addDocument(doc);
 }
 
 DocumentManager::~DocumentManager(){
@@ -47,7 +45,6 @@ DocumentManager::~DocumentManager(){
       removeDocument(g);
   }
 }
-
 
 void DocumentManager::addDocument(Document* newDoc){
     if (!m_documents.contains(newDoc)){
@@ -78,58 +75,35 @@ void DocumentManager::changeDocument(Document* doc){
     }
     if (m_actualDocument != doc){
       if (m_actualDocument){
-//         _mutex.lock();
-        kDebug() << "Releasing Document";
          emit deactivateDocument(m_actualDocument);
-//          _docCondition.wait(&_mutex);
-//          _mutex.unlock();
         DataStructurePluginManager::self()->disconnect(m_actualDocument);
         doc->disconnect(SIGNAL(activeGraphChanged(Graph*)));
         doc->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
         doc->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
         doc->engineBackend()->disconnect(SIGNAL(finished()));
-//         m_actualDocument->deleteLater();
       }
       if (doc != 0){
-//           _mutex.lock();
           kDebug() << "Activing it!";
           emit activateDocument(doc);
-//           _docCondition.wait(&_mutex);
-//           _mutex.unlock();
       }
       m_actualDocument = doc;
-//       connect (DataStructurePluginManager::New(), SIGNAL(changingDataStructure(QString)), m_actualDocument, SLOT(convertToDataStructure(QString)));
-
+      connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)), m_actualDocument, SLOT(convertToDataStructure(QString)));
     }
 }
 
 void DocumentManager::removeDocument(Document* doc){
     if (m_documents.removeOne(doc) != 0){
-      if (m_actualDocument == doc){
-        if (m_documents.count() > 0){
-          changeDocument(m_documents.last()); //
-        }else{
-//           _mutex.lock();
-          kDebug() << "Releasing Document";
-          emit deactivateDocument(m_actualDocument);
-//           _docCondition.wait(&_mutex);
-//           _mutex.unlock();
-            m_actualDocument = 0;
-//          if (m_documents.count() > 0){
-//             changeDocument(m_documents.last());
-//          }else{
-//             addDocument(new Document(i18n("Untitled"), 800, 600));
-         }
-      }
-//       _mutex.lock();
-      emit documentRemoved(doc);
-
-//       _docCondition.wait(&_mutex);
-//       _mutex.unlock();
-      doc->deleteLater();
-    }/*else {
-      kDebug() << "document not found on list."
-    }*/
+        if (m_actualDocument == doc){
+            if (m_documents.count() > 0){
+                changeDocument(m_documents.last()); //
+            }else{
+                emit deactivateDocument(m_actualDocument);
+                m_actualDocument = 0;
+            }
+        }
+        emit documentRemoved(doc);
+        doc->deleteLater();
+    }
 }
 
 void DocumentManager::convertToDataStructure(QString ds){
