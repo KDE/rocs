@@ -117,7 +117,7 @@ void GraphScene::createItems(){
 }
 
 void GraphScene::connectGraphSignals(DataStructure *g){
-    connect( g, SIGNAL(datumCreated(Data*)), this, SLOT(createData(Data*)));
+    connect( g, SIGNAL(dataCreated(Data*)), this, SLOT(createData(Data*)));
     connect( g, SIGNAL(pointerCreated(Pointer*)), this, SLOT(createEdge(Pointer*)));
 }
 
