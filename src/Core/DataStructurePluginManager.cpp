@@ -41,40 +41,41 @@ DataStructure* changeToDataStructure ( DataStructure* dataStructure ) {
 }
 void loadPlugins() {
     loadDataStructurePlugins();
-    if (m_plugins.isEmpty())
+    if (m_plugins.isEmpty()){
         return;
+    }
     m_actualPlugin = pluginList().last();
 }
 
 KPluginInfo pluginInfo ( DataStructurePluginInterface* plugin ) {
     QString name = m_plugins.key(plugin);
-    foreach (KPluginInfo inf, m_DataStructurePluginsInfo) {
+    foreach (const KPluginInfo& inf, m_DataStructurePluginsInfo) {
         if (inf.name() == name) {
             return inf;
         }
     }
     return KPluginInfo();
 }
+
 DataStructure* createNewDataStructure ( Document* arg1 , const QString & pluginName ) {
     if (!pluginName.isEmpty()) {
-        DataStructurePluginInterface * plugin = m_plugins.value(pluginName);
-        if (plugin) {
+        if (DataStructurePluginInterface * plugin = m_plugins.value(pluginName)) {
             return plugin->createDataStructure ( arg1 );
         }
-    } else {
-        if ( m_actualPlugin ) {
-            return m_actualPlugin->createDataStructure ( arg1 );
-        }
+    } else if ( m_actualPlugin ) {
+        return m_actualPlugin->createDataStructure ( arg1 );
     }
     return 0;
 }
 
 DataStructurePluginInterface* plugin(const QString &pluginName) {
     DataStructurePluginInterface * plugin = m_plugins.value(pluginName);
-    if (plugin)
+    if (plugin){
         return plugin;
+    }
     return 0;
 }
+
 void setActivePlugin(const QString &pluginName) {
     if (DataStructurePluginInterface * plg = plugin(pluginName)) {
         m_actualPlugin = plg;

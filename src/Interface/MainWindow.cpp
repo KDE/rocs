@@ -96,6 +96,14 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
 
     setupToolsPluginsAction();
     setupDSPluginsAction();
+    
+    /* just for testing prurposes, 
+     * this should not be hardcoded here. 
+     * use KWelcomeWidget instead.
+     */
+    Document *defaultDoc = new Document(i18n("Untitled"));
+    DocumentManager::self()->addDocument(defaultDoc);
+    setActiveDocument(defaultDoc);
 }
 
 MainWindow::~MainWindow()
@@ -320,7 +328,7 @@ void MainWindow::setupDSPluginsAction()
           action->setChecked(true);
         }
         action->setActionGroup(group);
-        connect ( action, SIGNAL ( triggered ( bool ) ),DataStructurePluginManager::self(), SLOT ( changeActiveDS()) );
+        connect ( action, SIGNAL ( triggered ( bool ) ),DataStructurePluginManager::self(), SLOT ( changeActiveDataStructure()) );
         pluginList.append ( action );
     }
     plugActionList ( "DS_plugins", pluginList );
