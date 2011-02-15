@@ -62,7 +62,7 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
     void removeDocument(Document*);
     
     /** Convert document to new data structure. */
-    void convertToDataStructure(QString ds);
+    void convertToDataStructure();
 
     void loadDocument(QString fileName = QString());
 

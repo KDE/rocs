@@ -60,7 +60,6 @@ ListNode* Rocs::ListStructure::addNode ( QString name ) {
 
     ListNode *n = static_cast<ListNode*>(DataStructure::addData(new ListNode(this)));
     n->setName(name);
-    arrangeNodes();
     return n;
 }
 

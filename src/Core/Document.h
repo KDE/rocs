@@ -60,7 +60,6 @@ public slots:
     DataStructure *activeDataStructure() const ;
     void setActiveDataStructure(DataStructure *g);
 
-    void convertToDataStructure(QString newDataStructure); // <- I don't like this.
     void setHeight(qreal height);
     qreal height() const;
     void setWidth(qreal width);

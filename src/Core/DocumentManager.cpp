@@ -87,7 +87,8 @@ void DocumentManager::changeDocument(Document* doc){
           emit activateDocument(doc);
       }
       m_actualDocument = doc;
-      connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)), m_actualDocument, SLOT(convertToDataStructure(QString)));
+      connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)),
+               this, SLOT(convertToDataStructure()));
     }
 }
 
@@ -106,17 +107,19 @@ void DocumentManager::removeDocument(Document* doc){
     }
 }
 
-void DocumentManager::convertToDataStructure(QString ds){
+void DocumentManager::convertToDataStructure(){
   kDebug() << "-=-=-=-=-= Converting Data Structures -=-=-=-=-=";
-  
-  if (m_actualDocument)
-      m_actualDocument->convertToDataStructure(ds);
-
-      emit deactivateDocument(m_actualDocument);
-
-      kDebug() << "Activing it!";
-      emit activateDocument(m_actualDocument);
+  Document * newDoc = 0;
+  if (m_actualDocument){
+    newDoc = new Document(*m_actualDocument);
+    emit deactivateDocument(m_actualDocument);
+  }
+  else
+    loadDocument();
+  kDebug() << "Activing it!";
+  emit activateDocument(newDoc);
 }
+
 
 void DocumentManager::loadDocument ( QString name ){
   Document * doc;
@@ -143,12 +146,12 @@ void DocumentManager::loadDocument ( QString name ){
       doc = new Document( i18n ( "Untitled0" ) );
       doc->loadFromInternalFormat ( name );
       addDocument(doc);
-      
+
       if (m_actualDocument){
           emit deactivateDocument(m_actualDocument);
       }
       m_actualDocument = doc;
-      
+
       emit activateDocument(m_actualDocument);
    }
 }

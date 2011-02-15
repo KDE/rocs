@@ -44,7 +44,7 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_pointerValuesVisible = true;
 }
 
-DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent){
+DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent), d(new DataStructurePrivate){
     d->_readOnly = other.readOnly();
     d->_document = other.document();
     calcRelativeCenter();

@@ -64,9 +64,9 @@ Document::Document(const QString& name, int width,  int height, QObject *parent)
 
 
 Document::Document(const Document& gd)
-        : QObject(0)
+        : QObject(gd.parent()), d(new DocumentPrivate())
 {
-    QObject::setParent(gd.parent());
+//     QObject::setParent(gd.parent());
     d->_name = gd.name();
     d->_width = gd.width();
     d->_height = gd.height();
@@ -309,23 +309,23 @@ void Document::loadFromInternalFormat(const QString& filename) {
 }
 
 DataStructure *Document::activeDataStructure() const { return d->_activeDataStructure; }
-void Document::convertToDataStructure(QString newDataStructure){
-    if (newDataStructure == d->_dataStructureType) return;
-//        kDebug() << "Need convert doc from " << d->_dataStructureType << " to "<< newDataStructure ;
-        d->_dataStructureType = newDataStructure;
-//         Document * gDoc = new Document(*this);
-//        int numDataStructures = count();
-//         for (int i = 0 ; i < numDataStructures; ++i){
-//             DataStructure * g = DataStructurePluginManager::instance()->changeToDataStructure(at(i));
-//             if (at(i) == d->_activeDataStructure)
-//               d->_activeDataStructure = g;
-//             append(g);
-//         }
-//         for (int i = 0 ; i < numDataStructures; ++i){
-//             at(0)->deleteLater();
-//             removeAt(0);
-//         }
-//         return gDoc;
-//    }
-//     return 0;
-}
+// void Document::convertToDataStructure(QString newDataStructure){
+//     if (newDataStructure == d->_dataStructureType) return;
+// //        kDebug() << "Need convert doc from " << d->_dataStructureType << " to "<< newDataStructure ;
+//         d->_dataStructureType = newDataStructure;
+// //         Document * gDoc = new Document(*this);
+// //        int numDataStructures = count();
+// //         for (int i = 0 ; i < numDataStructures; ++i){
+// //             DataStructure * g = DataStructurePluginManager::instance()->changeToDataStructure(at(i));
+// //             if (at(i) == d->_activeDataStructure)
+// //               d->_activeDataStructure = g;
+// //             append(g);
+// //         }
+// //         for (int i = 0 ; i < numDataStructures; ++i){
+// //             at(0)->deleteLater();
+// //             removeAt(0);
+// //         }
+// //         return gDoc;
+// //    }
+// //     return 0;
+// }
