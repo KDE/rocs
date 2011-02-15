@@ -38,15 +38,15 @@ class DataStructurePrivate;
 
 class ROCSLIB_EXPORT DataStructure : public QObject {
     Q_OBJECT
-    
-    
+
+
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(QColor dataDefaultColor READ dataDefaultColor WRITE setDataDefaultColor)
     Q_PROPERTY(QColor pointerDefaultColor READ pointerDefaultColor WRITE setPointerDefaultColor)
 
 public:
     DataStructure(Document *parent = 0);
-    DataStructure(DataStructure& other);
+    DataStructure(DataStructure& other, Document* parent);
     ~DataStructure();
 
     void calcRelativeCenter();
@@ -59,7 +59,7 @@ public:
     QScriptValue scriptValue() const;
     void setEngine( QScriptEngine *engine );
     QScriptEngine *engine() const;
-    
+
     // getters
     bool dataNameVisibility() const;
     bool pointerNameVisibility() const;
@@ -71,9 +71,9 @@ public:
     const QList<Data*> dataList() const;
     const QList<Pointer*> pointers() const;
     const QList<Group*> groups() const;
-    
+
 public  slots:
-    
+
     virtual Data* addData(QString name);
     virtual Pointer* addPointer(Data* from, Data* to);
     Data* data(const QString& name = i18n("Untitled"));
@@ -81,22 +81,22 @@ public  slots:
     void remove(Data *n);
     void remove(Pointer *e);
     void remove(Group *g);
-    
+
     Group *addGroup(const QString& name);
     Data* addData(QString name, QPointF point);
     Pointer* addPointer(const QString& name_from, const QString& name_to);
-    
+
     void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void removeDynamicProperty(const QString& property);
 
     void addDataDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void addPointersDynamicProperty(const QString& property, QVariant value = QVariant(0));
-    
+
     void removeDataDynamicProperty(const QString& property);
-    void removePointersDynamicProperty(const QString& property);   
-    
+    void removePointersDynamicProperty(const QString& property);
+
     void remove();
-    
+
     // setters
     void setName(const QString& s);
     void setDataColor(const QColor& c);
@@ -107,7 +107,7 @@ public  slots:
     void setPointerNameVisibility(bool b);
     void setDataDefaultColor(const QColor& color);
     void setPointerDefaultColor(const QColor& color);
-    
+
 #ifdef USING_QTSCRIPT
 //     QScriptValue list_data();
 //     QScriptValue list_pointers();
@@ -126,7 +126,7 @@ signals:
 
 protected:
     Data* addData(Data *data);
-    
+
 private:
     DataStructurePrivate *d;
 };
@@ -135,10 +135,10 @@ class DataStructurePrivate{
 public:
     DataStructurePrivate(){}
     bool _directed;
-    
+
     QList<Data*> _data;
     QList<Pointer*> _pointers;
-    
+
     QList<Group*> _groups;
     qreal _top;
     qreal _bottom;

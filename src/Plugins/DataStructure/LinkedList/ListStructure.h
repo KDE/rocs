@@ -30,7 +30,7 @@ class ListStructure : public DataStructure {
 
     ListStructure ( Document* parent = 0 );
 
-    ListStructure(DataStructure& other);
+    ListStructure(DataStructure& other, Document* parent);
 
     virtual ~ListStructure();
   public slots:

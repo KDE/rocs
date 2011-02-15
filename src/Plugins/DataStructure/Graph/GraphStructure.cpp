@@ -28,7 +28,7 @@ Rocs::GraphStructure::GraphStructure ( Document* parent ) : DataStructure ( pare
 
 }
 
-Rocs::GraphStructure::GraphStructure(DataStructure& other): DataStructure(other){
+Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): DataStructure(other, parent){
 
 }
 

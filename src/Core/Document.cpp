@@ -34,7 +34,7 @@
 class DocumentPrivate{
 public:
     DocumentPrivate(){}
-    
+
     QString _buf;
     QString _lastSavedDocumentPath;
     QString _name;
@@ -46,8 +46,8 @@ public:
     QString _dataStructureType;
     QtScriptBackend* _engineBackend;
     QList<DataStructure*> _dataStructures;
-    
- 
+
+
 };
 
 Document::Document(const QString& name, int width,  int height, QObject *parent)
@@ -62,7 +62,7 @@ Document::Document(const QString& name, int width,  int height, QObject *parent)
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
 }
 
-/*
+
 Document::Document(const Document& gd)
         : QObject(0)
 {
@@ -70,13 +70,15 @@ Document::Document(const Document& gd)
     d->_name = gd.name();
     d->_width = gd.width();
     d->_height = gd.height();
-    d->_dataStructureType = DataStructurePluginManager::instance()->actualPlugin();
+    d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_engineBackend = new QtScriptBackend(this);
-    
+
     for (int i = 0; i < gd.dataStructures().count(); ++i){
-        append(DataStructurePluginManager::instance()->changeToDataStructure(gd.d->_dataStructures.at(i)));
+        d->_dataStructures.append(DataStructurePluginManager::self()->changeToDataStructure(
+                                                                                    gd.d->_dataStructures.at(i),
+                                                                                    this));
     }
-} */
+}
 
 // Default Destructor
 Document::~Document() {
@@ -285,7 +287,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
             QString nameFrom = eName.section("->", 0,0);
             QString nameTo = eName.section("->", 1,1);
 
-            tmpObject = tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()), 
+            tmpObject = tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()),
                                                      tmpDataStructure->dataList().at(nameTo.toInt()));
             kDebug() << "Pointer Created";
         }

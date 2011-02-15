@@ -18,7 +18,7 @@ class Document;
 class KComponentData;
 
 #include "rocslib_export.h"
-  
+
 
 class ROCSLIB_EXPORT DataStructurePluginInterface: public QObject
 {
@@ -29,7 +29,7 @@ public:
 
   virtual ~DataStructurePluginInterface();
   virtual DataStructure* createDataStructure(Document * parent) = 0;
-  virtual DataStructure* changeToDataStructure(DataStructure*) = 0;
+  virtual DataStructure* changeToDataStructure(DataStructure*, Document* parent) = 0;
 
   QString name();
 

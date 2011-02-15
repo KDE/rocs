@@ -29,7 +29,7 @@ class GraphStructure : public DataStructure {
 
     GraphStructure ( Document* parent = 0 );
 
-    GraphStructure(DataStructure& other);
+    GraphStructure(DataStructure& other, Document *parent);
 
     virtual ~GraphStructure();
   public slots:

@@ -48,7 +48,7 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     DataStructure * createNewDataStructure(Document* parent, const QString& pluginName = QString());
 
     /** When the DataStructure pluin  is changed, all the existent dataTypes must be 'rebuild' with the new DataStructure. If is not possible to change to a new data structure without losing data, then user should be asked to continue or nor. If user say to not continue, all ready done job should be undo.*/
-    DataStructure * changeToDataStructure(DataStructure*);
+    DataStructure * changeToDataStructure(DataStructure* dataStructure, Document* parent);
 
     /** return the list of avaliable data structure plugins.*/
     const QStringList listOfDataStructures();

@@ -33,14 +33,13 @@ Rocs::ListStructure::ListStructure ( Document* parent ) : DataStructure ( parent
   arrangeNodes();
 }
 
-Rocs::ListStructure::ListStructure(DataStructure& other): DataStructure(other)
+Rocs::ListStructure::ListStructure(DataStructure& other, Document * parent): DataStructure(other, parent)
 {
   qDebug() << "Criando pelo construtor de cópia";
   _animationGroup = new QParallelAnimationGroup(this);
   _front = addNode("P");
-  
+
   arrangeNodes();
-  
 }
 
 Rocs::ListStructure::~ListStructure() {
@@ -58,7 +57,7 @@ Pointer* Rocs::ListStructure::addEdge ( Data* from, Data* to ) {
 }
 
 ListNode* Rocs::ListStructure::addNode ( QString name ) {
-    
+
     ListNode *n = static_cast<ListNode*>(DataStructure::addData(new ListNode(this)));
     n->setName(name);
     arrangeNodes();
@@ -85,7 +84,7 @@ void Rocs::ListStructure::arrangeNodes(){
   for (int i = 0; i < dataList().count(); ++i){
       visited[i] = false;
   }
-  
+
   QPropertyAnimation * anim = new QPropertyAnimation(_front, "x");;
   anim->setDuration(500);
   anim->setStartValue(_front->x());

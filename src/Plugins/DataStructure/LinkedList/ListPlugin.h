@@ -32,7 +32,7 @@ class /*ROCSLIB_EXPORT*/ ListPlugin : public DataStructurePluginInterface {
 
     virtual ~ListPlugin();
 
-    virtual DataStructure* changeToDataStructure ( DataStructure* );
+    virtual DataStructure* changeToDataStructure ( DataStructure* graph, Document* parent );
     virtual DataStructure* createDataStructure ( Document* parent );
 
     virtual QGraphicsItem* pointerItem ( Pointer* ) const;

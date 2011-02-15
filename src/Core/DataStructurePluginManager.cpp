@@ -33,9 +33,9 @@ DataStructurePluginManagerPrivate(QObject * parent):m_parent(parent) {
     m_actualPlugin = 0;
 }
 
-DataStructure* changeToDataStructure ( DataStructure* dataStructure ) {
+DataStructure* changeToDataStructure ( DataStructure* dataStructure, Document * parent) {
     if ( m_actualPlugin ) {
-        return m_actualPlugin->changeToDataStructure ( dataStructure );
+        return m_actualPlugin->changeToDataStructure ( dataStructure,  parent);
     }
     return dataStructure;
 }
@@ -162,8 +162,8 @@ void DataStructurePluginManager::changeActiveDataStructure (const QString &newDa
     }
 }
 
-DataStructure* DataStructurePluginManager::changeToDataStructure ( DataStructure* dataStructure ) {
-    return _d->changeToDataStructure ( dataStructure );
+DataStructure* DataStructurePluginManager::changeToDataStructure ( DataStructure* dataStructure, Document * parent ) {
+    return _d->changeToDataStructure ( dataStructure, parent );
 
 }
 

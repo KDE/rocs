@@ -47,8 +47,8 @@ GraphPlugin::~GraphPlugin()
 
 }
 
-DataStructure* GraphPlugin::changeToDataStructure ( DataStructure* graph) {
-    return new GraphStructure(*graph);
+DataStructure* GraphPlugin::changeToDataStructure ( DataStructure* graph, Document * parent) {
+    return new GraphStructure(*graph, parent);
 }
 
 DataStructure* GraphPlugin::createDataStructure ( Document* parent )
@@ -110,7 +110,7 @@ QLayout*  GraphPlugin::dataTypeExtraProperties ( DataStructure* graph, QWidget* 
 {
   QGridLayout *lay = new QGridLayout(parentWidget);
     QCheckBox * _graphOriented = new QCheckBox (i18n("Graph is oriented"), parentWidget);
-    
+
     lay->addWidget(_graphOriented, 0,0);
     connect( _graphOriented, SIGNAL(toggled(bool)), graph, SLOT(setDirected(bool)));
     return lay;

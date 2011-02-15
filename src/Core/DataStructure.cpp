@@ -44,18 +44,18 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_pointerValuesVisible = true;
 }
 
-DataStructure::DataStructure(DataStructure& other): QObject(other.parent()){
+DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent){
     d->_readOnly = other.readOnly();
     d->_document = other.document();
     calcRelativeCenter();
-    
+
     d->_pointerDefaultColor     = other.pointerDefaultColor();
     d->_dataDefaultColor       =  other.dataDefaultColor();
     d->_dataNamesVisible       = other.d->_dataNamesVisible;
     d->_dataValuesVisible      = other.d->_dataValuesVisible;
     d->_pointerNamesVisible     = other.d->_pointerNamesVisible;
     d->_pointerValuesVisible    = other.d->_pointerValuesVisible;
-    
+
     QHash <Data*, Data* > dataTodata;
     foreach(Data* n, other.d->_data){
       Data* newdata = addData(n->name());
@@ -90,7 +90,7 @@ DataStructure::~DataStructure() {
 }
 
 void DataStructure::setReadOnly(bool r){
-    d->_readOnly = r; 
+    d->_readOnly = r;
 }
 
 void DataStructure::remove() {
@@ -236,23 +236,23 @@ void DataStructure::setDataColor(const QColor& c){
     QtConcurrent::blockingMap(d->_data, DataColorSetted(c));
 }
 
-void DataStructure::setPointersColor(const QColor& c){    
+void DataStructure::setPointersColor(const QColor& c){
     QtConcurrent::blockingMap(d->_pointers, PointerColorSetted(c));
 }
 
 void DataStructure::addDataDynamicProperty(const QString& property, QVariant value){
-    QtConcurrent::blockingMap(d->_data, DataDynamicPropertySetted(property, value)); 
+    QtConcurrent::blockingMap(d->_data, DataDynamicPropertySetted(property, value));
 }
 
 void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value){
-    QtConcurrent::blockingMap(d->_pointers, PointerDynamicPropertySetted(property, value)); 
+    QtConcurrent::blockingMap(d->_pointers, PointerDynamicPropertySetted(property, value));
 }
 
 void DataStructure::removeDataDynamicProperty(const QString& property){
-    QtConcurrent::blockingMap(d->_data, DataDynamicPropertyUnSetted(property)); 
+    QtConcurrent::blockingMap(d->_data, DataDynamicPropertyUnSetted(property));
 }
 void DataStructure::removePointersDynamicProperty(const QString& property){
-    QtConcurrent::blockingMap(d->_pointers, PointerDynamicPropertyUnSetted(property)); 
+    QtConcurrent::blockingMap(d->_pointers, PointerDynamicPropertyUnSetted(property));
 }
 
 void DataStructure::setDataNameVisibility(bool b){
@@ -289,7 +289,7 @@ void DataStructure::setEngine(	QScriptEngine *engine ) {
     for( int i = 0; i < d->_pointers.size(); ++i){
         d->_pointers.at(i)->setEngine(engine);
     }
-    
+
    foreach(Group *g, d->_groups) {
        QScriptValue array = d->_engine->newArray();
     //   foreach(Data * n, (*g) ) {

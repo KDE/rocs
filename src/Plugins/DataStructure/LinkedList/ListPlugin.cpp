@@ -50,9 +50,8 @@ ListPlugin::~ListPlugin()
 
 }
 
-DataStructure* ListPlugin::changeToDataStructure ( DataStructure* graph) {
-    kDebug() << "Graph default color:" << graph->dataDefaultColor();
-    return new ListStructure(*graph);
+DataStructure* ListPlugin::changeToDataStructure ( DataStructure* graph, Document* parent) {
+    return new ListStructure(*graph, parent);
 }
 
 DataStructure* ListPlugin::createDataStructure ( Document* parent )

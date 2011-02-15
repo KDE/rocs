@@ -38,7 +38,7 @@ public:
     enum Type {Simple = 0, Oriented};
 
     Document(const QString& name, int width = 800, int heigth = 600, QObject *parent = 0);
-   // Document(const Document& gd);
+   Document(const Document& gd);
     ~Document();
 
     bool isModified();
@@ -52,7 +52,7 @@ public:
 
     QtScriptBackend * engineBackend() const;
     QList<DataStructure*>& dataStructures() const;
-    
+
     void remove(DataStructure *dataStructure);
 
 public slots:
@@ -65,7 +65,7 @@ public slots:
     qreal height() const;
     void setWidth(qreal width);
     qreal width() const;
-    
+
 signals:
     void dataStructureCreated( DataStructure *g);
     void dataStructureRemoved(int i);
@@ -73,7 +73,7 @@ signals:
     void heightChanged(qreal height);
     void widthChanged(qreal width);
     void activeDataStructureChanged(DataStructure* g);
-    
+
 private:
     DocumentPrivate *d;
     void  savePropertiesInternalFormat(QObject *o);
