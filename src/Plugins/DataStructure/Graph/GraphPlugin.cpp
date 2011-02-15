@@ -28,6 +28,7 @@
 #include <knuminput.h>
 #include <QCheckBox>
 #include "OrientedEdgeItem.h"
+#include "Data.h"
 
 static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18n("Graph Structure") , "0.1" );
 using namespace Rocs;

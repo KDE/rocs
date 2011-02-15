@@ -70,24 +70,24 @@ void AlignAction::align() {
 }
 
 void AlignAction::allignY(QList<DataItem*>& l) {
-    qreal final = l[0]->datum()->y();
+    qreal final = l[0]->data()->y();
     
     if (m_orientation == VCenter || m_orientation == HCenter) {
-        qreal otherSide = l[l.size()-1]->datum()->y();
+        qreal otherSide = l[l.size()-1]->data()->y();
         final = (final + otherSide) / 2;
     }
     foreach(DataItem *i, l) {
-        i->datum()->setY(final);
+        i->data()->setY(final);
     }
 }
 
 void AlignAction::allignX(QList<DataItem*>& l) {
-    qreal final = l[0]->datum()->x();
+    qreal final = l[0]->data()->x();
     if (m_orientation == VCenter || m_orientation == HCenter) {
-        qreal otherSide = l[l.size()-1]->datum()->x();
+        qreal otherSide = l[l.size()-1]->data()->x();
         final = (final + otherSide) / 2;
     }
     foreach(DataItem *i, l) {
-        i->datum()->setX(final);
+        i->data()->setX(final);
     }
 }

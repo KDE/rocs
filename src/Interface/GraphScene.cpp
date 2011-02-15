@@ -155,7 +155,7 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
         return;
     }
 
-    Data *movableData = nitem->datum();
+    Data *movableData = nitem->data();
     int numDegrees = wheelEvent->delta();
     if (wheelEvent->orientation() == Qt::Vertical) {
         if (numDegrees > 0){
@@ -177,10 +177,9 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     if (mouseEvent->button() == Qt::MidButton) {
-        DataItem *nitem = qgraphicsitem_cast<DataItem*>(itemAt(mouseEvent->scenePos()));
-        if (!nitem) return;
-        Data *movableData = nitem->datum();
-        movableData->setWidth(1);
+        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(itemAt(mouseEvent->scenePos()))){
+            nItem->data()->setWidth(1);
+        }
     }
     else if( mouseEvent->button() == Qt::RightButton){
         QGraphicsItem *i = itemAt(mouseEvent->scenePos());

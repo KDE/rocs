@@ -47,7 +47,7 @@ private slots:
 
 private:
 
-    Data *_datum;
+    Data *_data;
     MainWindow *_mainWindow;
     DataItem *_item;
     QString _svgFile;

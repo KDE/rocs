@@ -51,7 +51,10 @@ void MoveDataAction::executePress(QPointF pos) {
     _movableNode = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos));
     if (!_movableNode ) return;
 
-    _data = _movableNode->datum();
+    _data = _movableNode->data();
+    if (_data){
+        qDebug() << "Got the data";
+    }
 }
 
 void MoveDataAction::executeMove(QPointF pos) {

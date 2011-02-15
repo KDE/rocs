@@ -41,7 +41,7 @@ void DeleteAction::executePress(QPointF pos)
 {
     QGraphicsItem * item = _graphScene->itemAt(pos);
     if ( DataItem *n  = qgraphicsitem_cast<DataItem*>(item) ) {
-        n->datum()->remove();
+        n->data()->remove();
     }
     else if ( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ) {
         e->pointer()->remove();

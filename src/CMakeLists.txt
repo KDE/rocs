@@ -16,21 +16,25 @@ include_directories(
 # Preparando a biblioteca padrão.
 
 set( rocs_core_SRCS
-Core/Data.cpp
-Core/DataStructure.cpp
-Core/Document.cpp
-Core/Group.cpp
-Core/DataStructurePluginInterface.cpp
-Core/DataStructurePluginManager.cpp
-Core/DocumentManager.cpp
-Core/DynamicPropertiesList.cpp
-Core/KrossBackend.cpp
-Core/Pointer.cpp
-Core/QtScriptBackend.cpp
+    Core/Data.cpp
+    Core/DataStructure.cpp
+    Core/Document.cpp
+    Core/Group.cpp
+    Core/DataStructurePluginInterface.cpp
+    Core/DataStructurePluginManager.cpp
+    Core/DocumentManager.cpp
+    Core/DynamicPropertiesList.cpp
+    Core/KrossBackend.cpp
+    Core/Pointer.cpp
+    Core/QtScriptBackend.cpp
 
-  Plugins/FilePluginInterface.cpp
-  Plugins/PluginManager.cpp
-  Plugins/ToolsPluginInterface.cpp
+    GraphicsItem/DataItem.cpp
+    GraphicsItem/DataStructureItem.cpp
+    GraphicsItem/PointerItem.cpp
+
+    Plugins/FilePluginInterface.cpp
+    Plugins/PluginManager.cpp
+    Plugins/ToolsPluginInterface.cpp
 )
 
 kde4_add_library( rocslib  SHARED ${rocs_core_SRCS} )
@@ -47,12 +51,12 @@ set( rocslib_LIB_HDRS
   Core/Data.h
   Core/DataStructure.h
   Core/Document.h
-  #Core/graphGroups.h
   Core/KrossBackend.h
   Core/Pointer.h
   Core/QtScriptBackend.h
   Core/rocslib_export.h
   Core/Rocs_Typedefs.h
+
   Plugins/FilePluginInterface.h
   Plugins/PluginManager.h
   Plugins/ToolsPluginInterface.h
@@ -78,12 +82,6 @@ set ( rocs_actions_SRCS
   Actions/DeleteAction.cpp
   Actions/MoveData.cpp
   Actions/Select.cpp
-)
-
-set ( rocs_graphcisitem_SRCS
-  GraphicsItem/DataItem.cpp
-  GraphicsItem/DataStructureItem.cpp
-  GraphicsItem/PointerItem.cpp
 )
 
 set( rocs_interface_SRCS
@@ -119,13 +117,10 @@ set ( rocs_script_SRC
 
 set(rocs_SRCS
   Main.cpp
-  ${kwelcomewidget_SRCS}
   ${rocs_actions_SRCS}
-  ${rocs_graphcisitem_SRCS}
   ${rocs_interface_SRCS}
   ${rocs_models_SRCS}
   ${rocs_script_SRC}
-  ${rocs_undoredo_SRCS}
 )
 
 kde4_add_ui_files(

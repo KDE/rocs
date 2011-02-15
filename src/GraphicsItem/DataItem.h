@@ -1,5 +1,5 @@
-#ifndef NODEITEM_H
-#define NODEITEM_H
+#ifndef DATAITEM_H
+#define DATAITEM_H
 
 #include <QGraphicsSvgItem>
 #include <QStateMachine>
@@ -12,15 +12,17 @@
 #include <QString>
 #include <QFont>
 
+#include "rocslib_export.h"
+
 class Data;
 
-class DataItem : public QGraphicsSvgItem{
+class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem{
   Q_OBJECT
 
   public:
     DataItem(Data *n);
-
-    Data* datum() const { return _datum; }
+    virtual ~DataItem();
+    Data* data() const { return _datum; }
     static QMap<QString, QSvgRenderer*> _renders;
     
   private:
@@ -33,7 +35,6 @@ class DataItem : public QGraphicsSvgItem{
     void updatePos();
     void updateSize();
   
-
 private:
     Data *_datum;
     QString _iconPackage;
@@ -45,7 +46,6 @@ private:
 
     qreal _originalWidth;
     qreal _width;
-    
 };
 
 #endif

@@ -10,20 +10,20 @@
 DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
     setupUi(this);
     _item = 0;
-    _datum = 0;
+    _data = 0;
 }
 
 void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
-    if (_datum == n->datum())
+    if (_data == n->data())
       return;
 
-    if (_datum){
-      disconnectData(_datum);
+    if (_data){
+      disconnectData(_data);
     }
 
-    _datum = n->datum();
+    _data = n->data();
     if (! _item ){
-      _svgFile = _datum->iconPackage();
+      _svgFile = _data->iconPackage();
     }
 
     _item = n;
@@ -34,21 +34,21 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     reflectAttributes();
 
 
-    connect(_datum, SIGNAL(changed()), this, SLOT(reflectAttributes()));
-//     connect(_datum->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
+    connect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
+//     connect(_data->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
 
-    connect( _showName,     SIGNAL(toggled(bool)),          _datum, SLOT(hideName(bool)));
-    connect( _showValue,    SIGNAL(toggled(bool)),          _datum, SLOT( hideValue(bool)));
-//     connect( _begin,        SIGNAL(toggled(bool)),          _datum, SLOT(setBegin(bool)));
-//     connect( _end,          SIGNAL(toggled(bool)),          _datum, SLOT(setEnd(bool)));
-    connect( _name,         SIGNAL(textChanged(QString)),   _datum, SLOT(setName(QString)));
-    connect( _value,        SIGNAL(textChanged(QString)),   _datum, SLOT(setValue(QString)));
-//     connect( _x,            SIGNAL(valueChanged(int)),      _datum, SLOT(setX(int)));
-//     connect( _y,            SIGNAL(valueChanged(int)),      _datum, SLOT(setY(int)));
-//     connect( _width,        SIGNAL(valueChanged(double)),   _datum, SLOT(setWidth(double)));
+    connect( _showName,     SIGNAL(toggled(bool)),          _data, SLOT(hideName(bool)));
+    connect( _showValue,    SIGNAL(toggled(bool)),          _data, SLOT( hideValue(bool)));
+//     connect( _begin,        SIGNAL(toggled(bool)),          _data, SLOT(setBegin(bool)));
+//     connect( _end,          SIGNAL(toggled(bool)),          _data, SLOT(setEnd(bool)));
+    connect( _name,         SIGNAL(textChanged(QString)),   _data, SLOT(setName(QString)));
+    connect( _value,        SIGNAL(textChanged(QString)),   _data, SLOT(setValue(QString)));
+//     connect( _x,            SIGNAL(valueChanged(int)),      _data, SLOT(setX(int)));
+//     connect( _y,            SIGNAL(valueChanged(int)),      _data, SLOT(setY(int)));
+//     connect( _width,        SIGNAL(valueChanged(double)),   _data, SLOT(setWidth(double)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_datum);
+    model->setDataSource(_data);
 
     _propertiesTable->setModel(model);
 
@@ -58,27 +58,27 @@ void DataPropertiesWidget::reflectAttributes(){
     if (extraItens->layout()){
       delete extraItens->layout();
     }
-    if(QLayout *lay = DataStructurePluginManager::self()->dataExtraProperties(_datum, this)){
+    if(QLayout *lay = DataStructurePluginManager::self()->dataExtraProperties(_data, this)){
       extraItens->setLayout(lay);
     }
-   _color->setColor(_datum->color());
-//    _x->setValue(_datum->x());
-//    _y->setValue(_datum->y());
-   _name->setText(_datum->name());
-   _value->setText(_datum->value().toString());
-//    _width->setValue(_datum->width());
-   _showName->setChecked(_datum->showName());
-   _showValue->setChecked(_datum->showValue());
-//    updateAutomateAttributes(qobject_cast< Graph* >(_datum->parent())->automate());
+   _color->setColor(_data->color());
+//    _x->setValue(_data->x());
+//    _y->setValue(_data->y());
+   _name->setText(_data->name());
+   _value->setText(_data->value().toString());
+//    _width->setValue(_data->width());
+   _showName->setChecked(_data->showName());
+   _showValue->setChecked(_data->showValue());
+//    updateAutomateAttributes(qobject_cast< Graph* >(_data->parent())->automate());
    _propertyName->setText("");
    _propertyValue->setText("");
    _isPropertyGlobal->setCheckState(Qt::Unchecked);
-   if (( _svgFile == _datum->iconPackage()) && (_images->count() != 0)){
+   if (( _svgFile == _data->iconPackage()) && (_images->count() != 0)){
       kDebug() << _svgFile << "already set, and images combo box is not empty";
       return;
    }
     _images->clear();
-    QFile svgFile(_item->datum()->iconPackage());
+    QFile svgFile(_item->data()->iconPackage());
     if (!svgFile.open(QIODevice::ReadOnly | QIODevice::Text)){
       kDebug() << "could not open file for reading";
       return;
@@ -99,17 +99,17 @@ void DataPropertiesWidget::reflectAttributes(){
 
 void DataPropertiesWidget::on__images_activated(const QString& s)
 {
-  _datum->setIcon("rocs_"+s);
+  _data->setIcon("rocs_"+s);
 }
 
 void DataPropertiesWidget::on__color_activated(const QColor& c) {
-  _datum->setColor(c.name());
+  _data->setColor(c.name());
 }
 
 // void DataPropertiesWidget::updateAutomateAttributes(bool b){
 // //     if (b) {
-// //         _begin->setChecked(_datum->begin());
-// //         _end->setChecked(_datum->end());
+// //         _begin->setChecked(_data->begin());
+// //         _end->setChecked(_data->end());
 // //         _begin->show();
 // //         _end->show();
 // //     }
@@ -126,7 +126,7 @@ void DataPropertiesWidget::on__addProperty_clicked(){
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
     model->addDynamicProperty(_propertyName->text(),
                             QVariant(_propertyValue->text()),
-                            _datum,
+                            _data,
                             (_isPropertyGlobal->checkState() == Qt::Checked));
 
 }

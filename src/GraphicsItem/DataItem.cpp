@@ -25,6 +25,12 @@ DataItem::DataItem(Data* n) : QGraphicsSvgItem(0){
     setupNode();
     setZValue(1);
     setFlag(ItemIsSelectable, true);
+    qDebug() << "Creating the wrong one";
+}
+
+DataItem::~DataItem()
+{
+
 }
 
 void DataItem::setupNode(){

@@ -61,7 +61,7 @@ void AddConnectionAction::executePress(QPointF pos) {
         _working = false;
         return;
     }
-    _startPos = QPointF(_from->datum()->x(), _from->datum()->y());
+    _startPos = QPointF(_from->data()->x(), _from->data()->y());
 }
 
 void AddConnectionAction::executeMove(QPointF pos) {
@@ -87,7 +87,7 @@ void AddConnectionAction::executeRelease(QPointF pos) {
 
     _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos));
     if (  _to ) {
-        DocumentManager::self()->activeDocument()->activeDataStructure()->addPointer( _from->datum(),  _to->datum() );
+        DocumentManager::self()->activeDocument()->activeDataStructure()->addPointer( _from->data(),  _to->data() );
     }
 
     _to = 0;
