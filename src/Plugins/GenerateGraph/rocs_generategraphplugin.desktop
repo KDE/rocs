@@ -1,0 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+#Icon=icon
+ServiceTypes=Rocs/ToolPlugin
+X-KDE-Library=rocs_generategraphplugin
+X-KDE-PluginInfo-Author=Andreas Cord-Landwehr
+X-KDE-PluginInfo-Email=cola@uni-paderborn.de
+X-KDE-PluginInfo-Name=Generate Graph Rocs Tool Plugin
+X-KDE-PluginInfo-Version=0.0.1
+X-KDE-PluginInfo-Website=http://wwwhni.uni-paderborn.de/alg/mitarbeiter/cola
+X-KDE-PluginInfo-Category=Plugins
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=false
+Name=Generate Graph
+Comment=This generates a new cool graph.
