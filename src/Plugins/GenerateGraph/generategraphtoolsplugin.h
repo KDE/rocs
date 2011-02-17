@@ -23,7 +23,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 #include "../ToolsPluginInterface.h"
-#include <DataType.h>
 
 
 class GenerateGraphToolPlugin : public ToolsPluginInterface

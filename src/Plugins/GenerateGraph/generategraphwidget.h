@@ -21,8 +21,8 @@
 #ifndef GENERATEGRAPHWIDGET_H
 #define GENERATEGRAPHWIDGET_H
 
-#include <DataType.h>
 #include <QDialog>
+#include <QtGui/QGridLayout>
 #include <QString>
 #include <model_GraphDocument.h>
 #include <Rocs_Typedefs.h>
@@ -32,18 +32,42 @@ class GenerateGraphWidget :
 {
     Q_OBJECT
 
+        // used for graph selection
+    enum GraphType {
+        MESH,
+        CIRCLE,
+        STAR,
+        RANDOM
+    };
+
     public:
         GenerateGraphWidget(Document* graphDoc, QWidget *parent = 0);
 //         ~GenerateGraphWidget();
 
     public slots:
-        void generateMesh();
-        void generateStar();
-        void generateCircle();
+        void generateGraph();
+
+
+    private slots:
+        /**
+         * set GUI options according to selected graph type at combo box
+         * \return  void
+         */
+        void setOptionsForGraphType(int selectedGraphType);
+        void setNumberOfNodes(int number) { numberOfNodes_ = number; };
+
 
     private:
+        void generateStar();
+        void generateCircle();
+        void generateMesh();
+
         Document* graphDoc_;
         static const double PI_ = 3.14159265358979323846;
+        int selectedGraphType_;
+        QGridLayout *gridLayout_;
+        QWidget* graphOptionsWidget_;
+        int numberOfNodes_;
 };
 
 #endif // GENERATEGRAPHWIDGET_H

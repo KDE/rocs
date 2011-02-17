@@ -19,45 +19,97 @@
 
 
 #include "generategraphwidget.h"
-#include <DataType.h>
 #include <Document.h>
 #include <DataStructure.h>
 
 #include <cmath>
 
 #include <QtGui/QGridLayout>
+#include <QtGui/QComboBox>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
+#include <QtGui/QSpinBox>
 
 class QPushButton;
 
 
 GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
-    : QDialog(parent)
+    :   QDialog(parent),
+        numberOfNodes_(10)
 {
     graphDoc_ = graphDoc;
 
+    setWindowTitle( "Generate Graph" );
+    setMinimumWidth( 200 );
+    setMinimumHeight( 150 );
 
-    QPushButton* buttonGenerateMesh = new QPushButton("Mesh Graph");
-    connect( buttonGenerateMesh, SIGNAL(clicked()), this, SLOT(generateMesh()));
+    QComboBox* comboSelectGraphType = new QComboBox();
 
-    QPushButton* buttonGenerateCircle = new QPushButton("Circle Graph");
-    connect( buttonGenerateCircle, SIGNAL(clicked()), this, SLOT(generateCircle()));
+    selectedGraphType_ = MESH;
+    comboSelectGraphType->insertItem(MESH, "Mesh Graph");
+    comboSelectGraphType->insertItem(CIRCLE, "Circle Graph");
+    comboSelectGraphType->insertItem(STAR, "Star Graph");
 
-    QPushButton* buttonGenerateStar = new QPushButton("Star Graph");
-    connect( buttonGenerateStar, SIGNAL(clicked()), this, SLOT(generateStar()));
+    QObject::connect(comboSelectGraphType, SIGNAL(activated(int)), this, SLOT(setOptionsForGraphType(int)));
 
-    //TODO connect to close of window
+        // Buttons
+    QPushButton* buttonGenerateGraph = new QPushButton("generate");
+    connect( buttonGenerateGraph, SIGNAL(clicked()), this, SLOT(generateGraph()));
 
-    // make layout
-    QGridLayout *grid = new QGridLayout();
-    grid->addWidget(buttonGenerateMesh, 0, 0);
-    grid->addWidget(buttonGenerateCircle, 1, 0);
-    grid->addWidget(buttonGenerateStar, 2, 0);
+        // make layout
+    gridLayout_ = new QGridLayout();
 
-    setLayout(grid);
+        // generate options GUI
+    graphOptionsWidget_ = new QWidget();
+    QLabel *labelNumberNodes = new QLabel(this);
+    labelNumberNodes->setText("Number of Nodes:");
+    QSpinBox *inputNumberNodes = new QSpinBox();
+
+    connect( inputNumberNodes, SIGNAL(valueChanged(int)), this, SLOT(setNumberOfNodes(int)));
+    inputNumberNodes->setValue(10);
+
+    QGridLayout* optionsLayout = new QGridLayout();
+    optionsLayout->addWidget(labelNumberNodes,0,0);
+    optionsLayout->addWidget(inputNumberNodes,0,1);
+    graphOptionsWidget_->setLayout(optionsLayout);
+
+    gridLayout_->addWidget(comboSelectGraphType, 0, 0);
+    gridLayout_->addWidget(graphOptionsWidget_, 1, 0);
+    gridLayout_->addWidget(buttonGenerateGraph, 2, 0);
+
+    setLayout(gridLayout_);
 }
+
+
+void GenerateGraphWidget::setOptionsForGraphType(int selectedGraphType)
+{
+    selectedGraphType_ = selectedGraphType;
+}
+
+
+void GenerateGraphWidget::generateGraph()
+{
+    switch(selectedGraphType_)
+    {
+        case MESH: {
+            generateMesh();
+            break;
+        }
+        case CIRCLE: {
+            generateCircle();
+            break;
+        }
+        case STAR: {
+            generateStar();
+            break;
+        }
+        default:
+            //TODO give some error message!
+            break;
+    }
+}
+
 
 void GenerateGraphWidget::generateMesh()
 {
@@ -65,9 +117,9 @@ void GenerateGraphWidget::generateMesh()
     if ( graphDoc )
     {
         DataStructure* graph = graphDoc->activeDataStructure();
+        int n = numberOfNodes_;
 
         // create mesh of NxN points
-        int n = 10;//TODO set by interface
         std::map< std::pair<int,int>, Data* > meshNodes;
         // create mesh nodes, store them in map
         for (int i=0; i<n; i++) {
@@ -98,6 +150,7 @@ void GenerateGraphWidget::generateMesh()
             }
         }
     }
+    close();
 }
 
 void GenerateGraphWidget::generateStar()
@@ -109,9 +162,9 @@ void GenerateGraphWidget::generateStar()
     if ( graphDoc )
     {
         DataStructure * graph = graphDoc->activeDataStructure();
+        int n = numberOfNodes_;
 
         // create mesh of NxN points
-        int n = 10;//TODO set by interface
         std::map< int, Data* > starNodes;
         // create mesh nodes, store them in map
         for (int i=1; i<=n; i++) {
@@ -135,6 +188,7 @@ void GenerateGraphWidget::generateStar()
                     );
         }
     }
+    close();
 }
 
 void GenerateGraphWidget::generateCircle()
@@ -146,9 +200,9 @@ void GenerateGraphWidget::generateCircle()
     if ( graphDoc )
     {
         DataStructure * graph = graphDoc->activeDataStructure();
+        int n = numberOfNodes_;
 
         // create mesh of NxN points
-        int n = 10;//TODO set by interface
         std::map< int, Data* > circleNodes;
         // create mesh nodes, store them in map
         for (int i=1; i<=n; i++) {
@@ -170,6 +224,7 @@ void GenerateGraphWidget::generateCircle()
                     circleNodes[1]
                     );
     }
+    close();
 }
 
 #include "generategraphwidget.moc"
