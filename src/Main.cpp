@@ -30,6 +30,7 @@
 #include "Interface/MainWindow.h"
 #include "Core/DataStructurePluginManager.h"
 
+
 int main ( int argc, char *argv[] ) {
     KAboutData aboutData ("rocs",
                           "rocs",
@@ -47,13 +48,13 @@ int main ( int argc, char *argv[] ) {
 
     KCmdLineArgs::init ( argc, argv, &aboutData );
     KApplication app;
-    
+
     if (DataStructurePluginManager::self()->listOfDataStructures().count() == 0){
           KMessageBox::detailedError(0,
                                  i18n("No Data Structure plugins found in the system. Exiting."),
                                  i18n("Rocs need at least one data structure plugin to continue.\n"
                                       "Try running kbuildsycoca4 from a console and after execute Rocs again."));
-      
+
     }else{
       MainWindow *window = new MainWindow();
       window->show();

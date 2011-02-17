@@ -58,7 +58,7 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* pare
     _editWidget->setVisible(_activateGraph->isChecked());
 
     delete _extraProperties->layout();
-    
+
     if (QLayout * lay = DataStructurePluginManager::self()->dataStructureExtraProperties(g, _extraProperties)){
         _extraProperties->setLayout(lay);
     }
@@ -71,15 +71,15 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* pare
     connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDatumDefaultColor(QColor)));
 
     connect( this, SIGNAL( pointerColorsChanged(QString)),      g, SLOT(setPointersColor(QString)));
-    connect( this, SIGNAL( datumColorsChanged(QString)),      g, SLOT(setDatumsColor(QString)));
+    connect( this, SIGNAL( datumColorsChanged(QString)),      g, SLOT(setDataColor(QString)));
     connect( this, SIGNAL( pointerDefaultColorSetted(QString)), g, SLOT(setPointerDefaultColor(QString)));
-    connect( this, SIGNAL( datumDefaultColorSetted(QString)), g, SLOT(setDatumDefaultColor(QString)));
+    connect( this, SIGNAL( datumDefaultColorSetted(QString)), g, SLOT(setDefaultDataColor(QString)));
 
 
     connect( _showEdgeNames,  SIGNAL(toggled(bool)), g, SLOT(setPointerNameVisibility(bool)));
     connect( _showEdgeValues, SIGNAL(toggled(bool)), g, SLOT(setPointerValueVisibility(bool)));
-    connect( _showNodeNames,  SIGNAL(toggled(bool)), g, SLOT(setDatumNameVisibility(bool)  ));
-    connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setDatumValueVisibility(bool) ));
+    connect( _showNodeNames,  SIGNAL(toggled(bool)), g, SLOT(setDataNameVisibility(bool)  ));
+    connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setDataValueVisibility(bool) ));
 
     connect( _graphName,      SIGNAL(textChanged(QString)), g, SLOT(setName(QString)));
 
@@ -121,7 +121,7 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
     if (gd->dataStructures().size() == 1){
         createNewGraph = true;
     }
-    
+
     if (isActive) emit updateNeeded();
     radio()->group()->removeButton(radio());
 

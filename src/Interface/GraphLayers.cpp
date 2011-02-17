@@ -37,7 +37,7 @@ void GraphLayers::populate() {
     }
 
     Document *gd = DocumentManager::self()->activeDocument();
-    connect(gd, SIGNAL(dataTypeCreated(DataStructure*)), this, SLOT(addGraph(DataStructure*)),Qt::UniqueConnection);
+    connect(gd, SIGNAL(dataStructureCreated(DataStructure*)), this, SLOT(addGraph(DataStructure*)),Qt::UniqueConnection);
 
     foreach(DataStructure *s, gd->dataStructures()){
 	  addGraph(s);

@@ -96,9 +96,9 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
 
     setupToolsPluginsAction();
     setupDSPluginsAction();
-    
-    /* just for testing prurposes, 
-     * this should not be hardcoded here. 
+
+    /* just for testing prurposes,
+     * this should not be hardcoded here.
      * use KWelcomeWidget instead.
      */
     Document *defaultDoc = new Document(i18n("Untitled"));
@@ -357,13 +357,13 @@ void MainWindow::setupDocumentsList(){
 void MainWindow::setActiveDocument ( Document* d )
 {
     _graphVisualEditor->setActiveDocument ( d );
-    
+
 //     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
 //                 engine(), SLOT (runTool( ToolsPluginInterface*,Document*)));
 
-    connect(d , SIGNAL(activeDataStructureChanged(DataStructure*)), 
-            _graphVisualEditor, SLOT(setActiveDataStructure(DataStructure*)));
-    
+    connect(d , SIGNAL(activeDataStructureChanged(DataStructure*)),
+            _graphVisualEditor, SLOT(setActiveGraph(DataStructure*)));
+
     connect(_GraphLayers, SIGNAL(createGraph(QString)),
             d, SLOT(addDataStructure(QString)));
 
@@ -506,7 +506,7 @@ void MainWindow::runToolPlugin()
     if (! action ){
       return;
     }
-    
+
     if (ToolsPluginInterface *plugin =  PluginManager::instance()->toolPlugins().value(action->data().toInt()) ){
       emit runTool ( plugin, DocumentManager::self()->activeDocument() );
     }
@@ -538,9 +538,9 @@ void MainWindow::executeScript(const QString& text) {
     QString script = text.isEmpty() ? _codeEditor->text() : text;
 
     IncludeManager inc;
-    
+
     script = inc.include(script, _codeEditor->document()->url().path(), _codeEditor->document()->documentName());
-    
+
     //if ( !engine()->isRunning() ){
 	//_bottomTabs->setStopString();
     //    engine()->setScript(script, DocumentManager::self()->activeDocument());

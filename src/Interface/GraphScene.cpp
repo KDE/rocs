@@ -90,7 +90,7 @@ void GraphScene::setActiveDocument(Document *gd) {
         return;
     }
     _graphDocument = gd;
-    
+
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
     QGraphicsRectItem *n = new QGraphicsRectItem(0,0, gd->width(), gd->height());
     n->setFlag(QGraphicsItem::ItemIsSelectable, false);
@@ -102,12 +102,12 @@ void GraphScene::setActiveDocument(Document *gd) {
         updateGraph(gd->dataStructures().at(i));
         connectGraphSignals(gd->dataStructures().at(i));
     }
-    
-    connect( gd, SIGNAL(dataTypeCreated(DataStructure*)),
+
+    connect( gd, SIGNAL(dataStructureCreated(DataStructure*)),
              this, SLOT(connectGraphSignals(DataStructure*)));
-    
+
     createItems();
-    
+
 }
 void GraphScene::createItems(){
     foreach(DataStructure *g, DocumentManager::self()->activeDocument()->dataStructures()){
@@ -209,9 +209,9 @@ void GraphScene::updateGraph(DataStructure *g) {
     foreach(Data *n, g->dataList()) {
         n->setName(n->name());
     }
-    
+
     foreach(Pointer *e, g->pointers()) {
-       e->setName(e->name()); 
+       e->setName(e->name());
     }
 }
 

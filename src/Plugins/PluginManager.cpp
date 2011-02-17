@@ -33,6 +33,7 @@ public:
         toolsPluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/ToolPlugin"));
         filePluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/FilePlugin"));
     }
+
     ~PluginManagerPrivate() {
 
     }
@@ -130,6 +131,7 @@ KPluginInfo PluginManager::pluginInfo( ToolsPluginInterface* plugin)
 
 QList< ToolsPluginInterface* > PluginManager::toolPlugins()
 {
+    loadToolsPlugins();
     QList < ToolsPluginInterface * > value;
     foreach (KPluginInfo info, _d->toolsPluginsMap.keys()) {
         if (info.isPluginEnabled()) {
