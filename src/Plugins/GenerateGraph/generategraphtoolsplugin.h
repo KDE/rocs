@@ -20,10 +20,9 @@
 #ifndef GENERATEGRAPHTOOLSPLUGIN_H
 #define GENERATEGRAPHTOOLSPLUGIN_H
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
 #include "../ToolsPluginInterface.h"
 
+class QObject;
 
 class GenerateGraphToolPlugin : public ToolsPluginInterface
 {
