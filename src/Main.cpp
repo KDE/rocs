@@ -45,7 +45,8 @@ int main ( int argc, char *argv[] ) {
 
     aboutData.addAuthor(ki18n("Tomaz Canabrava"), ki18n("Developer"), "tcanabrava@kde.org", "http://liveblue.wordpress.com");
     aboutData.addAuthor(ki18n("Wagner Reck"), ki18n("Developer"), "wagner.reck@gmail.com", "http://wiglot.wordpress.com");
-
+    aboutData.addAuthor(ki18n("Andreas Cord"), ki18n("phoenixx@uni-paderborn.de"), "wagner.reck@gmail.com", "http://wiglot.wordpress.com");
+    
     KCmdLineArgs::init ( argc, argv, &aboutData );
     KApplication app;
 
