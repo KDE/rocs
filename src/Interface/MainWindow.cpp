@@ -358,8 +358,8 @@ void MainWindow::setActiveDocument ( Document* d )
 {
     _graphVisualEditor->setActiveDocument ( d );
 
-//     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
-//                 engine(), SLOT (runTool( ToolsPluginInterface*,Document*)));
+    connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
+                d->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
 
     connect(d , SIGNAL(activeDataStructureChanged(DataStructure*)),
             _graphVisualEditor, SLOT(setActiveGraph(DataStructure*)));
