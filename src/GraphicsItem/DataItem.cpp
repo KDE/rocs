@@ -21,11 +21,11 @@ DataItem::DataItem(Data* n) : QGraphicsSvgItem(0){
     _font = QFont("Helvetica [Cronyx]", 18);
     
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
+    connect(n, SIGNAL(changed()), this, SLOT(setupNode()));
     
     setupNode();
     setZValue(1);
     setFlag(ItemIsSelectable, true);
-    qDebug() << "Creating the wrong one";
 }
 
 DataItem::~DataItem()

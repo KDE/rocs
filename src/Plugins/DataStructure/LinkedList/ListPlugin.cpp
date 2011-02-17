@@ -21,7 +21,7 @@
 #include "ListStructure.h"
 #include <KPluginFactory>
 #include <KAboutData>
-#include <NodeListItem.h>
+#include "NodeListItem.h"
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -29,6 +29,7 @@
 #include <kcombobox.h>
 #include "PointerItem.h"
 #include "Pointer.h"
+#include "Data.h"
 #include <Document.h>
 #include <KDebug>
 
@@ -62,7 +63,7 @@ DataStructure* ListPlugin::createDataStructure ( Document* parent )
 
 QGraphicsItem* Rocs::ListPlugin::dataItem(Data* node ) const
 {
-    return (new NodeListItem(node));
+    return (new NodeItem(node));
 }
 
 QGraphicsItem* Rocs::ListPlugin::pointerItem ( Pointer* edge) const

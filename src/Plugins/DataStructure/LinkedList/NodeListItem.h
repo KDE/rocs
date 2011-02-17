@@ -1,48 +1,15 @@
-#ifndef NODELISTITEM_H
-#define NODELISTITEM_H
+#ifndef LISTNODEITEM_H
+#define LISTNODEITEM_H
 
-#include <QGraphicsSvgItem>
-#include <QStateMachine>
-#include <QState>
-#include <QPropertyAnimation>
-#include <QSvgRenderer>
-#include <QGraphicsTextItem>
-#include <QGraphicsColorizeEffect>
-#include <QMap>
-#include <QString>
-#include <QFont>
-#include "Data.h"
+#include "DataItem.h"
 
-class NodeListItem : public QGraphicsSvgItem{
+class Data;
+
+class NodeItem : public DataItem{
   Q_OBJECT
-    qreal _originalWidth;
-    qreal _width;
-
   public:
-    NodeListItem(Data *n);
-
-    Data* node() const { return _node; }
-    static QMap<QString, QSvgRenderer*> _renders;
-
-  private slots:
-    void setupNode();
-    void updateRenderer();
-    void updateIcon();
-    void updateName();
-    void updateValue();
-    void updateColor();
-    void updatePos();
-    void updateSize();
-  private:
-    Data *_node;
-    QString _iconPackage;
-    QString _element;
-    QGraphicsSimpleTextItem *_name;
-    QGraphicsSimpleTextItem *_value;
-    QGraphicsColorizeEffect *_colorizer;
-    QFont _font;
+    NodeItem(Data *n);
+    virtual ~NodeItem();
 };
-
-// #include "node.h"
 
 #endif
