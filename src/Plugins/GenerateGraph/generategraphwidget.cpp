@@ -31,6 +31,9 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QSpinBox>
 
+#include <QtCore/QMap>
+#include <QtCore/QPair>
+
 class QPushButton;
 
 
@@ -92,64 +95,41 @@ void GenerateGraphWidget::generateGraph()
 {
     switch(selectedGraphType_)
     {
-        case MESH: {
-            generateMesh();
-            break;
-        }
-        case CIRCLE: {
-            generateCircle();
-            break;
-        }
-        case STAR: {
-            generateStar();
-            break;
-        }
-        default:
-            //TODO give some error message!
-            break;
+        case MESH:   generateMesh();   break;
+        case CIRCLE: generateCircle(); break;
+        case STAR:   generateStar();   break;
+        default:     break;
     }
 }
 
 
 void GenerateGraphWidget::generateMesh()
 {
-    Document* graphDoc = graphDoc_;
-    if ( graphDoc )
-    {
-        DataStructure* graph = graphDoc->activeDataStructure();
-        int n = numberOfNodes_;
-
-        // create mesh of NxN points
-        std::map< std::pair<int,int>, Data* > meshNodes;
-        // create mesh nodes, store them in map
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) {
-                meshNodes[std::make_pair(i,j)] = graph->addData(
-                    QString("%1-%2").arg(i).arg(j),
-                    QPointF(50+i*50, 50+j*50)
-                );
-            }
-        }
-        // connect mesh nodes
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) {
-                // right edge
-                if (j!=n) {
-                    graph->addPointer (
-                        meshNodes[std::make_pair(i,j)],
-                        meshNodes[std::make_pair(i,j+1)]
-                    );
-                }
-                //bottom edge
-                if (i!=n) {
-                    graph->addPointer (
-                        meshNodes[std::make_pair(i,j)],
-                        meshNodes[std::make_pair(i+1,j)]
-                    );
-                }
-            }
-        }
+    if (! graphDoc_ ){
+      return;
     }
+    
+    DataStructure* graph = graphDoc_->activeDataStructure();
+    int n = numberOfNodes_;
+
+    // create mesh of NxN points
+    QMap<QPair<int, int>, Data*> meshNodes;
+    
+    // create mesh nodes, store them in map
+    for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        meshNodes[qMakePair(i,j)] = graph->addData(QString("%1-%2").arg(i).arg(j),QPointF(50+i*50, 50+j*50));
+    }
+    }
+    
+    // connect mesh nodes
+    for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+        graph->addPointer ( meshNodes[qMakePair(i,j)], meshNodes[qMakePair(i,j+1)] ); // left
+        graph->addPointer ( meshNodes[qMakePair(i,j)], meshNodes[qMakePair(i+1,j)] );  // bottom.
+    }
+    }
+
     close();
 }
 
@@ -158,37 +138,27 @@ void GenerateGraphWidget::generateStar()
     int affineX = 300;
     int affineY = 300;
 
-    Document* graphDoc = graphDoc_;
-    if ( graphDoc )
-    {
-        DataStructure * graph = graphDoc->activeDataStructure();
-        int n = numberOfNodes_;
-
-        // create mesh of NxN points
-        std::map< int, Data* > starNodes;
-        // create mesh nodes, store them in map
-        for (int i=1; i<=n; i++) {
-                starNodes[i] = graph->addData(
-                    QString("%1").arg(i),
-                    QPointF(affineX + sin(i*2*PI_/n)*100, affineY + cos(i*2*PI_/n)*100)
-                );
-        }
-        // middle
-        starNodes[0] = graph->addData(
-                    QString("center"),
-                    QPointF(affineX, affineY)
-                );
-
-        // connect circle nodes
-        for (int i=1; i<=n; i++) {
-            // bottom edge
-            graph->addPointer (
-                    starNodes[0],
-                    starNodes[i]
-                    );
-        }
+    if ( !graphDoc_ ){
+      return;
     }
-    close();
+    DataStructure * graph = graphDoc_->activeDataStructure();
+    int n = numberOfNodes_;
+
+    // create mesh of NxN points
+    QList<Data*> starNodes;
+    
+    // create mesh nodes, store them in map
+    for (int i=1; i<=n; i++) {
+        starNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*100, affineY + cos(i*2*PI_/n)*100));
+    }
+    
+    // middle
+    starNodes.prepend( graph->addData(QString("center"),QPointF(affineX, affineY)) );
+
+    // connect circle nodes
+    for (int i=1; i<=n; i++) {
+        graph->addPointer (starNodes.at(0),starNodes.at(i));
+    }
 }
 
 void GenerateGraphWidget::generateCircle()
@@ -196,35 +166,26 @@ void GenerateGraphWidget::generateCircle()
     int affineX = 300;
     int affineY = 300;
 
-    Document* graphDoc = graphDoc_;
-    if ( graphDoc )
-    {
-        DataStructure * graph = graphDoc->activeDataStructure();
-        int n = numberOfNodes_;
-
-        // create mesh of NxN points
-        std::map< int, Data* > circleNodes;
-        // create mesh nodes, store them in map
-        for (int i=1; i<=n; i++) {
-                circleNodes[i] = graph->addData(
-                    QString("%1").arg(i),
-                    QPointF(affineX + sin(i*2*PI_/n)*100, affineY + cos(i*2*PI_/n)*100)
-                );
-        }
-        // connect circle nodes
-        for (int i=0; i<n; i++) {
-            // bottom edge
-            graph->addPointer (
-                    circleNodes[i],
-                    circleNodes[i+1]
-                    );
-        }
-        graph->addPointer (
-                    circleNodes[n],
-                    circleNodes[1]
-                    );
+    if (! graphDoc_ ){
+        return;
     }
-    close();
+
+    DataStructure * graph = graphDoc_->activeDataStructure();
+    int n = numberOfNodes_;
+
+    // create mesh of NxN points
+    QList<Data*> circleNodes;
+    
+    // create mesh nodes, store them in map
+    for (int i=1; i<=n; i++) {
+            circleNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*100, affineY + cos(i*2*PI_/n)*100));
+    }
+    
+    // connect circle nodes
+    for (int i=0; i<n; i++) {
+        graph->addPointer (circleNodes.at(i),circleNodes.at(i+1));
+    }
+    graph->addPointer (circleNodes.at(n-1),circleNodes.at(0));
 }
 
 #include "generategraphwidget.moc"

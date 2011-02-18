@@ -22,10 +22,10 @@
 #define GENERATEGRAPHWIDGET_H
 
 #include <QDialog>
-#include <QtGui/QGridLayout>
-#include <QString>
-#include <model_GraphDocument.h>
-#include <Rocs_Typedefs.h>
+
+class QGridLayout;
+class QWidget;
+class Document;
 
 class GenerateGraphWidget :
     public QDialog
