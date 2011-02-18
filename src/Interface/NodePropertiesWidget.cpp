@@ -93,14 +93,15 @@ void DataPropertiesWidget::reflectAttributes(){
 
     QXmlStreamReader reader(&svgFile);
     while(!reader.atEnd()){
-      reader.readNext();
-      if ( reader.attributes().hasAttribute("id")){
-          QString attribute = reader.attributes().value("id").toString();
-          if (attribute.startsWith("rocs_")){
-              attribute.remove("rocs_");
-              _images->addItem(attribute);
-          }
-      }
+        reader.readNext();
+        if (!reader.attributes().hasAttribute("id")){
+            continue;
+        }
+        QString attribute = reader.attributes().value("id").toString();
+        if (attribute.startsWith("rocs_")){
+            attribute.remove("rocs_");
+            _images->addItem(attribute);
+        }
     }
 }
 
