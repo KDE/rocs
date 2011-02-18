@@ -40,7 +40,9 @@ class GraphStructure : public DataStructure {
     QScriptValue node_byname(const QString& name);
 //     QScriptValue begin_node();
 //     QScriptValue end_nodes();
-
+    void setDirected(bool directed);
+private:
+    bool _directed;
 };
 }
 #endif // GRAPHSTRUCTURE_H

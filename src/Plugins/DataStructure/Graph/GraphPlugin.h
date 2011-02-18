@@ -37,11 +37,11 @@ class /*ROCSLIB_EXPORT*/ GraphPlugin : public DataStructurePluginInterface {
     virtual QGraphicsItem* pointerItem ( Pointer* ) const;
     virtual QGraphicsItem* dataItem ( Data* ) const;
 
-    virtual QLayout* datumExtraProperties ( Data* arg1, QWidget* arg2 ) const;
+    virtual QLayout* dataExtraProperties ( Data* arg1, QWidget* arg2 ) const;
 
     virtual QLayout* pointerExtraProperties ( Pointer* arg1, QWidget* arg2 ) const;
 
-    virtual QLayout* dataTypeExtraProperties ( DataStructure* graph, QWidget* parentWidget ) const;
+    virtual QLayout* dataStructureExtraProperties ( DataStructure* graph, QWidget* parentWidget ) const;
 
 };
 }

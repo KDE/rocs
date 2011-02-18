@@ -72,19 +72,6 @@ public:
     virtual void setEngine(	QScriptEngine *_engine );
     QScriptValue createScriptArray(PointerList list);
     
-        //setters
-    void setX(int x);
-    void setY(int y);
-    void setWidth(qreal w);
-    void setPos(qreal x, qreal y);
-    void setColor(const QColor& s);
-    void setName(const QString& s);
-    void setValue(const QVariant& v);
-    void setIcon(const QString& s);
-    void setIconPackage(const QString& s);
-    void setShowName(bool b);
-    void setShowValue(bool b);
-    
     //getters
     qreal x() const;
     qreal y() const;
@@ -96,6 +83,7 @@ public:
     const QString& iconPackage() const;
     bool showName() const;
     bool showValue() const;
+    bool changing() const;
     
     DataItem *item() const;
     
@@ -119,7 +107,19 @@ public  slots:
     QScriptValue connected_pointers(Data *n);
     void self_remove();
     Pointer* addPointer(Data* to);
-
+    
+    void setX(int x);
+    void setY(int y);
+    void setWidth(double w);
+    void setPos(qreal x, qreal y);
+    void setColor(const QColor& s);
+    void setName(const QString& s);
+    void setValue(const QVariant& v);
+    void setIcon(const QString& s);
+    void setIconPackage(const QString& s);
+    void setShowName(bool b);
+    void setShowValue(bool b);
+    
 private:
     DataPrivate *d;
 
@@ -183,4 +183,5 @@ inline PointerList& Data::self_pointers() const { return d->_self_pointers; }
 
 inline bool Data::showName() const { return d->_showName; }
 inline bool Data::showValue() const { return d->_showValue; }
+inline bool Data::changing() const { return d->_changing; }
 #endif

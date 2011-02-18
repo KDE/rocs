@@ -18,7 +18,7 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
       return;
 
     if (_data){
-        disconnect(n, SIGNAL(changed()), this, SLOT(reflectAttributes()));
+        disconnect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
     }
 
     _data = n->data();
@@ -62,28 +62,28 @@ void DataPropertiesWidget::applyChanges(){
 }
 
 void DataPropertiesWidget::reflectAttributes(){
-    if (extraItens->layout()){
-      delete extraItens->layout();
+    if (!extraItens->layout()){
+        _oldDataStructurePlugin = DataStructurePluginManager::self()->actualPlugin();
+        extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     }
     
-    if(QLayout *lay = DataStructurePluginManager::self()->dataExtraProperties(_data, this)){
-      extraItens->setLayout(lay);
-    }else{
-        qDebug() << "Could not create extra layouts";
+    if (_oldDataStructurePlugin != DataStructurePluginManager::self()->actualPlugin()){
+        extraItens->layout()->deleteLater();
+        extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     }
     
-   _color->setColor(_data->color());
-   _name->setText(_data->name());
-   _value->setText(_data->value().toString());
-   _showName->setChecked(_data->showName());
-   _showValue->setChecked(_data->showValue());
-   _propertyName->setText("");
-   _propertyValue->setText("");
-   _isPropertyGlobal->setCheckState(Qt::Unchecked);
-   if (( _svgFile == _data->iconPackage()) && (_images->count() != 0)){
-      kDebug() << _svgFile << "already set, and images combo box is not empty";
-      return;
-   }
+    _color->setColor(_data->color());
+    _name->setText(_data->name());
+    _value->setText(_data->value().toString());
+    _showName->setChecked(_data->showName());
+    _showValue->setChecked(_data->showValue());
+    _propertyName->setText("");
+    _propertyValue->setText("");
+    _isPropertyGlobal->setCheckState(Qt::Unchecked);
+    
+    if (( _svgFile == _data->iconPackage()) && (_images->count() != 0)){
+       return;
+    }
     _images->clear();
     QFile svgFile(_item->data()->iconPackage());
     if (!svgFile.open(QIODevice::ReadOnly | QIODevice::Text)){

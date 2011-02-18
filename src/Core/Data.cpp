@@ -184,10 +184,10 @@ void Data::setY(int y) {
     }
 }
 
-void Data::setWidth(qreal w) {
-    d->_width = w;
+void Data::setWidth(double w) {
+    d->_width = (qreal)w;
     if (! d->_changing) {
-	emit changed();
+        emit changed();
     }
 }
 

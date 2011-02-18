@@ -68,8 +68,9 @@ QGraphicsItem*  GraphPlugin::pointerItem ( Pointer* edge) const
 {
   return new OrientedEdgeItem(edge);
 }
-QLayout* GraphPlugin::datumExtraProperties ( Data* node, QWidget* parentWidget ) const
+QLayout* GraphPlugin::dataExtraProperties ( Data* node, QWidget* parentWidget ) const
 {
+  qDebug() << "Creating Extra Data Properties";
   QGridLayout * lay = new QGridLayout(parentWidget);
   QSpinBox * y = new QSpinBox(parentWidget);
   QSpinBox * x = new QSpinBox(parentWidget);
@@ -85,16 +86,17 @@ QLayout* GraphPlugin::datumExtraProperties ( Data* node, QWidget* parentWidget )
   x->setValue(node->x());
   size->setValue(node->width());
 
-  connect( x,            SIGNAL(valueChanged(int)),      node, SLOT(setX(int)));
-  connect( y,            SIGNAL(valueChanged(int)),      node, SLOT(setY(int)));
-  connect( size,        SIGNAL(valueChanged(double)),   node, SLOT(setWidth(double)));
+  connect( x,            SIGNAL(valueChanged(int)),             node, SLOT(setX(int)));
+  connect( y,            SIGNAL(valueChanged(int)),             node, SLOT(setY(int)));
+  connect( size,         SIGNAL(valueChanged(double)), node, SLOT(setWidth(double)));
+  
   QFrame * line = new QFrame(parentWidget);
   line->setFrameShape(QFrame::VLine);
 
   lay->addWidget(new QLabel(i18n("x"), parentWidget), 0,0);
   lay->addWidget(new QLabel(i18n("y"), parentWidget), 1,0);
   lay->addWidget(new QLabel(i18n("Size"), parentWidget), 0,3);
-  lay->addWidget(line, 0, 2);
+  lay->addWidget(line, 0, 2, 2, 1);
   lay->addWidget(x, 0,1);
   lay->addWidget(y, 1,1);
   lay->addWidget(size, 0,4);
@@ -107,7 +109,7 @@ QLayout*  GraphPlugin::pointerExtraProperties ( Pointer* arg1, QWidget* arg2 ) c
     return  DataStructurePluginInterface::pointerExtraProperties ( arg1, arg2 );
 }
 
-QLayout*  GraphPlugin::dataTypeExtraProperties ( DataStructure* graph, QWidget* parentWidget ) const
+QLayout*  GraphPlugin::dataStructureExtraProperties ( DataStructure* graph, QWidget* parentWidget ) const
 {
   QGridLayout *lay = new QGridLayout(parentWidget);
     QCheckBox * _graphOriented = new QCheckBox (i18n("Graph is oriented"), parentWidget);

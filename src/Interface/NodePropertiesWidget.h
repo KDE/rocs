@@ -52,6 +52,7 @@ private:
     MainWindow *_mainWindow;
     DataItem *_item;
     QString _svgFile;
+    QString _oldDataStructurePlugin;
 
 };
 #endif
