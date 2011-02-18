@@ -82,6 +82,8 @@ public:
     void setValue(const QVariant& v);
     void setIcon(const QString& s);
     void setIconPackage(const QString& s);
+    void setShowName(bool b);
+    void setShowValue(bool b);
     
     //getters
     qreal x() const;
@@ -92,6 +94,9 @@ public:
     const QVariant value() const;
     const QString& icon() const;
     const QString& iconPackage() const;
+    bool showName() const;
+    bool showValue() const;
+    
     DataItem *item() const;
     
     DataList adjacent_data() const;
@@ -101,8 +106,7 @@ public:
     PointerList& self_pointers() const;
     PointerList pointers(Data *n) const;
 
-    void hideName(bool b);
-    void hideValue(bool b);
+
     void addDynamicProperty(QString property, QVariant value);
     void removeDynamicProperty(QString property);
 
@@ -177,4 +181,6 @@ inline PointerList& Data::in_pointers()   const { return d->_in_pointers;   }
 inline PointerList& Data::out_pointers()  const { return d->_out_pointers;  }
 inline PointerList& Data::self_pointers() const { return d->_self_pointers; }
 
+inline bool Data::showName() const { return d->_showName; }
+inline bool Data::showValue() const { return d->_showValue; }
 #endif

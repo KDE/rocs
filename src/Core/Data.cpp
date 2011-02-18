@@ -70,12 +70,12 @@ bool Data::showValue() {
     return d->_showValue;
 }
 
-void Data::hideName(bool b) {
+void Data::setShowName(bool b) {
     d->_showName = b;
     emit changed();
 }
 
-void Data::hideValue(bool b) {
+void Data::setShowValue(bool b) {
     d->_showValue = b;
     emit changed();
 }

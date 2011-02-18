@@ -52,7 +52,7 @@ struct PointerDynamicPropertyUnSetted {
 struct DataNameVisibilitySetted {
   DataNameVisibilitySetted(bool visibility) : m_visibility(visibility){}
   typedef void result_type; 
-  void operator()(Data* &d){ d->hideName(m_visibility); }
+  void operator()(Data* &d){ d->setShowName(m_visibility); }
   bool m_visibility;
 };
 
@@ -66,7 +66,7 @@ struct PointerNameVisibilitySetted {
 struct DataValueVisibilitySetted {
   DataValueVisibilitySetted(bool visibility) : m_visibility(visibility){}
   typedef void result_type; 
-  void operator()(Data* &d){ d->hideValue(m_visibility); }
+  void operator()(Data* &d){ d->setShowValue(m_visibility); }
   bool m_visibility;
 };
 

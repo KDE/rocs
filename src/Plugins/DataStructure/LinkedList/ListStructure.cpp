@@ -26,8 +26,8 @@
 Rocs::ListStructure::ListStructure ( Document* parent ) : DataStructure ( parent ) {
   qDebug() << "Creating  a list structure";
   Data * p = addNode("P");
-  p->hideName(false);
-  p->hideValue(true);
+  p->setShowName(true);
+  p->setShowValue(false);
   //setBegin(p);
   _animationGroup = new QParallelAnimationGroup(this);
   arrangeNodes();

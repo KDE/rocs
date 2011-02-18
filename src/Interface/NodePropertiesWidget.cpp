@@ -18,7 +18,7 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
       return;
 
     if (_data){
-      disconnectData(_data);
+        disconnect(n, SIGNAL(changed()), this, SLOT(reflectAttributes()));
     }
 
     _data = n->data();
@@ -35,41 +35,48 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
 
 
     connect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
-//     connect(_data->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
-
-    connect( _showName,     SIGNAL(toggled(bool)),          _data, SLOT(hideName(bool)));
-    connect( _showValue,    SIGNAL(toggled(bool)),          _data, SLOT( hideValue(bool)));
-//     connect( _begin,        SIGNAL(toggled(bool)),          _data, SLOT(setBegin(bool)));
-//     connect( _end,          SIGNAL(toggled(bool)),          _data, SLOT(setEnd(bool)));
-    connect( _name,         SIGNAL(textChanged(QString)),   _data, SLOT(setName(QString)));
-    connect( _value,        SIGNAL(textChanged(QString)),   _data, SLOT(setValue(QString)));
-//     connect( _x,            SIGNAL(valueChanged(int)),      _data, SLOT(setX(int)));
-//     connect( _y,            SIGNAL(valueChanged(int)),      _data, SLOT(setY(int)));
-//     connect( _width,        SIGNAL(valueChanged(double)),   _data, SLOT(setWidth(double)));
+   
+    connect( _showName,     SIGNAL(toggled(bool)),          this, SLOT( applyChanges() ));
+    connect( _showValue,    SIGNAL(toggled(bool)),          this, SLOT( applyChanges() ));
+    connect( _name,         SIGNAL(textEdited(QString)),   this, SLOT( applyChanges() ));
+    connect( _value,        SIGNAL(textEdited(QString)),   this, SLOT( applyChanges() ));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data);
 
     _propertiesTable->setModel(model);
+}
 
+void DataPropertiesWidget::applyChanges(){
+    if (_data->name() != _name->text())
+        _data->setName(_name->text());
+    
+    if (_data->value() != _value->text())
+        _data->setValue(_value->text());
+    
+    if(_data->showName() != _showName->isChecked())
+        _data->setShowName(_showName->isChecked());
+    
+    if (_data->showValue() != _showValue->isChecked())
+        _data->setShowValue(_showValue->isChecked());
 }
 
 void DataPropertiesWidget::reflectAttributes(){
     if (extraItens->layout()){
       delete extraItens->layout();
     }
+    
     if(QLayout *lay = DataStructurePluginManager::self()->dataExtraProperties(_data, this)){
       extraItens->setLayout(lay);
+    }else{
+        qDebug() << "Could not create extra layouts";
     }
+    
    _color->setColor(_data->color());
-//    _x->setValue(_data->x());
-//    _y->setValue(_data->y());
    _name->setText(_data->name());
    _value->setText(_data->value().toString());
-//    _width->setValue(_data->width());
    _showName->setChecked(_data->showName());
    _showValue->setChecked(_data->showValue());
-//    updateAutomateAttributes(qobject_cast< Graph* >(_data->parent())->automate());
    _propertyName->setText("");
    _propertyValue->setText("");
    _isPropertyGlobal->setCheckState(Qt::Unchecked);
@@ -128,22 +135,5 @@ void DataPropertiesWidget::on__addProperty_clicked(){
                             QVariant(_propertyValue->text()),
                             _data,
                             (_isPropertyGlobal->checkState() == Qt::Checked));
-
-}
-
-void DataPropertiesWidget::disconnectData(Data *n){
-
-    disconnect(n, SIGNAL(changed()), this, SLOT(reflectAttributes()));
-    disconnect(n->parent(), SIGNAL(automateChanged(bool)), this, SLOT(updateAutomateAttributes(bool)));
-
-    disconnect( _showName,     SIGNAL(toggled(bool)),          n, SLOT(hideName(bool)));
-    disconnect( _showValue,    SIGNAL(toggled(bool)),          n, SLOT( hideValue(bool)));
-//     disconnect( _begin,        SIGNAL(toggled(bool)),          n, SLOT(setBegin(bool)));
-//     disconnect( _end,          SIGNAL(toggled(bool)),          n, SLOT(setEnd(bool)));
-    disconnect( _name,         SIGNAL(textChanged(QString)),   n, SLOT(setName(QString)));
-    disconnect( _value,        SIGNAL(textChanged(QString)),   n, SLOT(setValue(QString)));
-//     disconnect( _x,            SIGNAL(valueChanged(int)),      n, SLOT(setX(int)));
-//     disconnect( _y,            SIGNAL(valueChanged(int)),      n, SLOT(setY(int)));
-//     disconnect( _width,        SIGNAL(valueChanged(double)),   n, SLOT(setWidth(double)));
 
 }
