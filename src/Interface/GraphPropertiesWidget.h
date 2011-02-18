@@ -49,11 +49,6 @@ private slots:
 
   signals:
     void updateNeeded();
-    void pointerColorsChanged(QString color);
-    void datumColorsChanged(QString color);
-
-    void pointerDefaultColorSetted(QString color);
-    void datumDefaultColorSetted(QString color);
     void addGraph(QString name);
     void removeGraph();
 

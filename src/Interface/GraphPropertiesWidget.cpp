@@ -46,8 +46,6 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* pare
     _graphName->setText(_graph->name());
     _graphEdgeColor->setColor(_graph->pointerDefaultColor());
     _graphNodeColor->setColor(_graph->dataDefaultColor());
-//     _graphAutomate->setChecked(_graph->automate());
-//     _graphOriented->setChecked(_graph->directed());
     _graphVisible->setChecked( ! _graph->readOnly());
     _activateGraph->setChecked(true);
     _showEdgeNames->setChecked( _graph->pointerNameVisibility() );
@@ -70,27 +68,29 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* pare
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
     connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDatumDefaultColor(QColor)));
 
-    connect( this, SIGNAL( pointerColorsChanged(QString)),      g, SLOT(setPointersColor(QString)));
-    connect( this, SIGNAL( datumColorsChanged(QString)),      g, SLOT(setDataColor(QString)));
-    connect( this, SIGNAL( pointerDefaultColorSetted(QString)), g, SLOT(setPointerDefaultColor(QString)));
-    connect( this, SIGNAL( datumDefaultColorSetted(QString)), g, SLOT(setDefaultDataColor(QString)));
-
-
     connect( _showEdgeNames,  SIGNAL(toggled(bool)), g, SLOT(setPointerNameVisibility(bool)));
     connect( _showEdgeValues, SIGNAL(toggled(bool)), g, SLOT(setPointerValueVisibility(bool)));
     connect( _showNodeNames,  SIGNAL(toggled(bool)), g, SLOT(setDataNameVisibility(bool)  ));
     connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setDataValueVisibility(bool) ));
 
     connect( _graphName,      SIGNAL(textChanged(QString)), g, SLOT(setName(QString)));
-
-
-
 }
 
-void GraphPropertiesWidget::setPointerDefaultColor(QColor c){    emit pointerDefaultColorSetted(c.name()); }
-void GraphPropertiesWidget::setDatumDefaultColor(QColor c){    emit datumDefaultColorSetted(c.name()); }
-void GraphPropertiesWidget::on__graphPointerColorApplyNow_clicked() {  emit pointerColorsChanged(_graphEdgeColor->color().name()); }
-void GraphPropertiesWidget::on__graphDatumColorApplyNow_clicked() {  emit datumColorsChanged(_graphNodeColor->color().name()); }
+void GraphPropertiesWidget::setPointerDefaultColor(QColor c){ 
+    _graph->setPointerDefaultColor(c); 
+}
+
+void GraphPropertiesWidget::setDatumDefaultColor(QColor c){
+    _graph->setDataDefaultColor(c);
+}
+
+void GraphPropertiesWidget::on__graphPointerColorApplyNow_clicked() {  
+    _graph->setPointersColor(_graphEdgeColor->color()); 
+}
+
+void GraphPropertiesWidget::on__graphDatumColorApplyNow_clicked() { 
+    _graph->setDataColor(_graphNodeColor->color()); 
+}
 
 void GraphPropertiesWidget::on__graphVisible_toggled(bool b){
   _graph->setReadOnly( !b );
