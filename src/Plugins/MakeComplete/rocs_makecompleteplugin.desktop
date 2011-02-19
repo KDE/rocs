@@ -61,6 +61,7 @@ Comment[nl]=Vul alle graphs aan. Alle actuele randen zullen worden verwijderd.
 Comment[pl]=Zakończa wszystkie wykresy. Wszystkie bieżące krawędzie zostaną usunięte.
 Comment[pt]=Torna todos os gráficos completos. Todas as arestas actuais serão removidas.
 Comment[pt_BR]=Tornar todos os grafos completos. Todas as arestas atuais serão removidas.
+Comment[ru]=Превращает все графы в полные графы. Все существующие рёбра будут удалены.
 Comment[sv]=Gör alla grafer fullständiga. Alla verkliga bågar kommer att tas bort
 Comment[uk]=Зробити всі графи повними. Всі справжні ребра буде вилучено.
 Comment[x-test]=xxMake all graphs complete. All actual edges will be removed.xx
