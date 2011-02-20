@@ -17,7 +17,7 @@
 
 GraphLayers::GraphLayers(MainWindow *parent) : QScrollArea(parent) {
     _mainWindow = parent;
-    
+
     QHBoxLayout *hBoxLayout = new QHBoxLayout();
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
     
@@ -33,6 +33,7 @@ GraphLayers::GraphLayers(MainWindow *parent) : QScrollArea(parent) {
     
     vBoxLayout->addLayout(hBoxLayout);
     vBoxLayout->addStretch();
+    vBoxLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
     contents->setLayout(vBoxLayout);
     
     //setLayout(vBoxLayout);
