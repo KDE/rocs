@@ -1,17 +1,20 @@
 #ifndef GRAPHLAYERS_H
 #define GRAPHLAYERS_H
 
+#include <QScrollArea>
 #include <QWidget>
 class DataStructure;
 class QButtonGroup;
 class KLineEdit;
 class MainWindow;
 
-class GraphLayers : public QWidget {
+class GraphLayers : public QScrollArea {
     Q_OBJECT
     QButtonGroup *_buttonGroup;
     KLineEdit *_lineEdit;
     MainWindow *_mainWindow;
+protected:
+    void resizeEvent ( QResizeEvent * event );
 public:
     GraphLayers(MainWindow *parent = 0);
     void populate();

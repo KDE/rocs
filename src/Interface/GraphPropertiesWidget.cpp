@@ -40,7 +40,6 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* pare
         : KButtonGroup ( parent ) {
     setupUi(this);
     _mainWindow = parent;
-    //! do not lock here, it will create a racing condition.
 
     _graph = g;
     _graphName->setText(_graph->name());
@@ -54,10 +53,9 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* pare
     _showNodeValues->setChecked(_graph->dataValueVisibility());
 
     _editWidget->setVisible(_activateGraph->isChecked());
-
-    delete _extraProperties->layout();
-
-    if (QLayout * lay = DataStructurePluginManager::self()->dataStructureExtraProperties(g, _extraProperties)){
+    
+    if (!_extraProperties->layout()){
+        QLayout * lay = DataStructurePluginManager::self()->dataStructureExtraProperties(g, _extraProperties);
         _extraProperties->setLayout(lay);
     }
 

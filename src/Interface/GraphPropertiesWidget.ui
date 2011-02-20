@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>322</width>
-    <height>291</height>
+    <width>293</width>
+    <height>228</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,17 +22,17 @@
     <height>10000</height>
    </size>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
+  <property name="title">
+   <string/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="verticalSpacing">
     <number>0</number>
-   </property>
-   <property name="sizeConstraint">
-    <enum>QLayout::SetNoConstraint</enum>
    </property>
    <property name="margin">
     <number>0</number>
    </property>
-   <item>
+   <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
       <number>0</number>
@@ -81,7 +81,7 @@
      </item>
     </layout>
    </item>
-   <item>
+   <item row="1" column="0">
     <widget class="QWidget" name="_editWidget" native="true">
      <property name="maximumSize">
       <size>
@@ -90,12 +90,6 @@
       </size>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <property name="margin">
-       <number>0</number>
-      </property>
-      <property name="spacing">
-       <number>0</number>
-      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
@@ -106,10 +100,10 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2" colspan="2">
+      <item row="0" column="1" colspan="3">
        <widget class="KLineEdit" name="_graphName"/>
       </item>
-      <item row="1" column="0" colspan="2">
+      <item row="1" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Data Color:</string>
@@ -119,7 +113,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="1" column="1" colspan="3">
        <widget class="KColorCombo" name="_graphNodeColor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -129,19 +123,6 @@
         </property>
         <property name="toolTip">
          <string>Color for new nodes</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="KPushButton" name="_graphDatumColorApplyNow">
-        <property name="toolTip">
-         <string>Apply the current color to all nodes</string>
-        </property>
-        <property name="whatsThis">
-         <string>Apply the current color to all nodes on the drawing area</string>
-        </property>
-        <property name="text">
-         <string>All</string>
         </property>
        </widget>
       </item>
@@ -155,7 +136,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
+      <item row="2" column="1" colspan="3">
        <widget class="KColorCombo" name="_graphEdgeColor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -168,7 +149,106 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="3">
+      <item row="3" column="1" colspan="4">
+       <widget class="KSeparator" name="kseparator_2"/>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>Show names in:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>Show values in:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Data</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QCheckBox" name="_showNodeNames">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>Nodes</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="4">
+       <widget class="QCheckBox" name="_showNodeValues">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Pointers</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="2">
+       <widget class="QCheckBox" name="_showEdgeNames">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="3">
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>Edges</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="4">
+       <widget class="QCheckBox" name="_showEdgeValues">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="KSeparator" name="kseparator"/>
+      </item>
+      <item row="8" column="0" colspan="5">
+       <widget class="QFrame" name="_extraProperties">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="KPushButton" name="_graphDatumColorApplyNow">
+        <property name="toolTip">
+         <string>Apply the current color to all nodes</string>
+        </property>
+        <property name="whatsThis">
+         <string>Apply the current color to all nodes on the drawing area</string>
+        </property>
+        <property name="text">
+         <string>All</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
        <widget class="KPushButton" name="_graphPointerColorApplyNow">
         <property name="toolTip">
          <string>Apply the current color to all edges</string>
@@ -183,96 +263,6 @@
       </item>
      </layout>
     </widget>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>Show names in:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Data</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Pointers</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLabel" name="label_11">
-       <property name="text">
-        <string>Nodes</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>Show values in:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLabel" name="label_13">
-       <property name="text">
-        <string>Edges</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0" colspan="5">
-      <widget class="KSeparator" name="kseparator_2"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QCheckBox" name="_showNodeNames">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QCheckBox" name="_showNodeValues">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="_showEdgeNames">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="3">
-      <widget class="QCheckBox" name="_showEdgeValues">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0" colspan="5">
-      <widget class="QFrame" name="_extraProperties">
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="KSeparator" name="kseparator"/>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>

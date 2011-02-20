@@ -10,27 +10,55 @@
 #include <QHBoxLayout>
 #include <KDebug>
 #include <KLineEdit>
+#include <QWidget>
+
 #include "DocumentManager.h"
+#include <qscrollbar.h>
 
-GraphLayers::GraphLayers(MainWindow *parent) : QWidget(parent) {
+GraphLayers::GraphLayers(MainWindow *parent) : QScrollArea(parent) {
     _mainWindow = parent;
+    
     QHBoxLayout *hBoxLayout = new QHBoxLayout();
-
+    QVBoxLayout *vBoxLayout = new QVBoxLayout();
+    
+    QWidget *contents = new QWidget();
     KPushButton *btnADD = new KPushButton(KIcon("AddGraph"), i18n("Add"));
-    _lineEdit = new KLineEdit(this);
+    
+    _buttonGroup = new QButtonGroup();
+    _lineEdit = new KLineEdit();
+    
     connect(btnADD, SIGNAL(clicked()), this, SLOT(btnADDClicked()));
     hBoxLayout->addWidget(btnADD);
     hBoxLayout->addWidget(_lineEdit);
-    QVBoxLayout *l = new QVBoxLayout();
-    l->addLayout(hBoxLayout);
-    l->addStretch();
-    setLayout(l);
-    _buttonGroup = new QButtonGroup();
+    
+    vBoxLayout->addLayout(hBoxLayout);
+    vBoxLayout->addStretch();
+    contents->setLayout(vBoxLayout);
+    
+    //setLayout(vBoxLayout);
+    
+    hBoxLayout->setSpacing(0);
+    hBoxLayout->setContentsMargins(0,0,0,0);
+    vBoxLayout->setSpacing(0);
+    vBoxLayout->setContentsMargins(0,0,0,0);
+    contents->setMaximumHeight(999999);
+    setWidget(contents);
+    widget()->setMinimumSize(QScrollArea::size());
+    setFrameShape(NoFrame);
+}
+
+void GraphLayers::resizeEvent(QResizeEvent* event)
+{
+    QScrollArea::resizeEvent(event);
+    if(widget()){
+        widget()->setMinimumSize(contentsRect().width(), contentsRect().height());   
+        widget()->setMaximumWidth(contentsRect().width());
+    }
 }
 
 void GraphLayers::populate() {
-    for ( int i = 1; i < layout()->count(); ++i) {
-        layout()->itemAt(i)->widget()->deleteLater();
+    for ( int i = 1; i < widget()->layout()->count(); ++i) {
+        widget()->layout()->itemAt(i)->widget()->deleteLater();
     }
     foreach(QAbstractButton *b, _buttonGroup->buttons()) {
         _buttonGroup->removeButton(b);
@@ -56,7 +84,7 @@ void GraphLayers::addGraph(DataStructure *g){
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
     _buttonGroup->addButton(gp->radio());
     connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()),Qt::UniqueConnection);
-    qobject_cast<QVBoxLayout*>(layout())->insertWidget(1,gp);
+    qobject_cast<QVBoxLayout*>(widget()->layout())->insertWidget(1,gp);
 }
 
 void GraphLayers::selectFirstGraph(){
