@@ -11,13 +11,13 @@
 #include <KDebug>
 #include <KLineEdit>
 #include <QWidget>
-
+#include <QSizePolicy>
 #include "DocumentManager.h"
 #include <qscrollbar.h>
 
 GraphLayers::GraphLayers(MainWindow *parent) : QScrollArea(parent) {
     _mainWindow = parent;
-
+    
     QHBoxLayout *hBoxLayout = new QHBoxLayout();
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
     
@@ -45,14 +45,15 @@ GraphLayers::GraphLayers(MainWindow *parent) : QScrollArea(parent) {
     contents->setMaximumHeight(999999);
     setWidget(contents);
     widget()->setMinimumSize(QScrollArea::size());
+    widget()->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::MinimumExpanding);
     setFrameShape(NoFrame);
 }
 
 void GraphLayers::resizeEvent(QResizeEvent* event)
 {
     QScrollArea::resizeEvent(event);
-    if(widget()){
-        widget()->setMinimumSize(contentsRect().width(), contentsRect().height());   
+    if(widget()){  
+        widget()->setMinimumWidth(contentsRect().width());
         widget()->setMaximumWidth(contentsRect().width());
     }
 }

@@ -129,7 +129,8 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
     if (createNewGraph){
         emit addGraph(i18n("Untitled0"));
     }
-
+    hide();
+    parentWidget()->adjustSize();
     deleteLater();
 }
 
