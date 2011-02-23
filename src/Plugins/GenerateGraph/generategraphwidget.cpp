@@ -24,6 +24,8 @@
 
 #include <cmath>
 
+#include <KLocale>
+
 #include <QtGui/QGridLayout>
 #include <QtGui/QComboBox>
 #include <QtGui/QLabel>
@@ -43,21 +45,21 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
 {
     graphDoc_ = graphDoc;
 
-    setWindowTitle( "Generate Graph" );
+    setWindowTitle( i18n("Generate Graph") );
     setMinimumWidth( 200 );
     setMinimumHeight( 150 );
 
     QComboBox* comboSelectGraphType = new QComboBox();
 
     selectedGraphType_ = MESH;
-    comboSelectGraphType->insertItem(MESH, "Mesh Graph");
-    comboSelectGraphType->insertItem(CIRCLE, "Circle Graph");
-    comboSelectGraphType->insertItem(STAR, "Star Graph");
+    comboSelectGraphType->insertItem(MESH, i18n("Mesh Graph"));
+    comboSelectGraphType->insertItem(CIRCLE, i18n("Circle Graph"));
+    comboSelectGraphType->insertItem(STAR, i18n("Star Graph"));
 
     QObject::connect(comboSelectGraphType, SIGNAL(activated(int)), this, SLOT(setOptionsForGraphType(int)));
 
         // Buttons
-    QPushButton* buttonGenerateGraph = new QPushButton("generate");
+    QPushButton* buttonGenerateGraph = new QPushButton(i18n("generate"));
     connect( buttonGenerateGraph, SIGNAL(clicked()), this, SLOT(generateGraph()));
 
         // make layout
@@ -66,7 +68,7 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
         // generate options GUI
     graphOptionsWidget_ = new QWidget();
     QLabel *labelNumberNodes = new QLabel(this);
-    labelNumberNodes->setText("Number of Nodes:");
+    labelNumberNodes->setText(i18n("Number of Nodes:"));
     QSpinBox *inputNumberNodes = new QSpinBox();
 
     connect( inputNumberNodes, SIGNAL(valueChanged(int)), this, SLOT(setNumberOfNodes(int)));
