@@ -173,14 +173,14 @@ void Data::remove() {
 void Data::setX(int x) {
     d->_x = x;
     if (! d->_changing) {
-	emit changed();
+    emit changed();
     }
 }
 
 void Data::setY(int y) {
     d->_y  = y;
     if (! d->_changing) {
-	emit changed();
+    emit changed();
     }
 }
 
@@ -195,21 +195,21 @@ void Data::setPos(qreal x, qreal y) {
     d->_x = x;
     d->_y = y;
     if (! d->_changing) {
-	emit changed();
+    emit changed();
     }
 }
 
 void Data::setColor(const QColor& s) {
     d->_color = s;
     if (! d->_changing) {
-	emit changed();
+    emit changed();
     }
 }
 
 void Data::setName(const QString& s) {
     d->_name = s;
     if (! d->_changing) {
-	emit changed();
+    emit changed();
     }
 }
 
@@ -248,7 +248,7 @@ QScriptValue Data::scriptValue() const {
     return d->_scriptvalue;
 }
 
-void Data::setEngine(	QScriptEngine *engine ) {
+void Data::setEngine(    QScriptEngine *engine ) {
     d->_engine = engine;
     d->_scriptvalue = engine->newQObject(this);
 }
