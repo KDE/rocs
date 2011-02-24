@@ -18,10 +18,11 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef ORIENTEDEDGEITEM_H
-#define ORIENTEDEDGEITEM_H
+#ifndef ROCS_POINTERITEM_H
+#define ROCS_POINTERITEM_H
 
 #include <QGraphicsLineItem>
+#include "rocslib_export.h"
 
 class QGraphicsSceneMouseEvent;
 class Pointer;
@@ -30,14 +31,14 @@ class QGraphicsSimpleTextItem;
 /*! \brief the Edge drawing on screen.
   long explanation here...
 */
-class OrientedEdgeItem : public QObject, public QGraphicsPathItem {
+class ROCSLIB_EXPORT PointerItem : public QObject, public QGraphicsPathItem {
     Q_OBJECT
 public:
     /*! default constructor
     \param node the libgraph::Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
-    explicit OrientedEdgeItem(Pointer *pointer, QGraphicsItem *parent = 0);
-    virtual ~OrientedEdgeItem();
+    explicit PointerItem(Pointer *pointer, QGraphicsItem *parent = 0);
+    virtual ~PointerItem();
     /*! The type of the item */
     enum { Type = UserType + 3 };
 
@@ -49,10 +50,8 @@ public:
     }
 
     /*! Gets the pointer of the node */
-    Pointer* pointer() {
-        return _pointer;
-    }
-
+    Pointer* pointer() const{ return _pointer; }
+    int index() const { return _index; }
 protected:
     /*! when there's a mouse click on the node, this method is invocked
       \param event the mouse object
@@ -65,6 +64,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
     void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 );
+    virtual QPainterPath createCurves() = 0;
     
 public slots:
     void remove();
@@ -74,8 +74,8 @@ public slots:
 private:
     Pointer *_pointer;
     int _index;
-    bool _loop;
-    QPainterPath createCurves() const;
+
+  
     QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const;
     QPainterPath createLoop(QPointF pos) const;
     void connectSignals();

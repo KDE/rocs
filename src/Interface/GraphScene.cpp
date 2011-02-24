@@ -186,7 +186,7 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
             _datumPropertiesWidget->setData(nItem, mouseEvent->screenPos());
         }
-        else if (OrientedEdgeItem *eItem = qgraphicsitem_cast<OrientedEdgeItem*>(i)){
+        else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
             _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
         }
     }else if( mouseEvent -> button() == Qt::LeftButton){

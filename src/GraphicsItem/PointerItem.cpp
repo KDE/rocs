@@ -40,11 +40,10 @@
 #include <math.h>
 #include <QGraphicsSimpleTextItem>
 
-OrientedEdgeItem::OrientedEdgeItem( Pointer *pointer, QGraphicsItem *parent)
+PointerItem::PointerItem( Pointer *pointer, QGraphicsItem *parent)
         : QObject(0), QGraphicsPathItem(parent)
 {
     _pointer = pointer;
-    _loop = (_pointer->from() == pointer->to());
     _index = _pointer->relativeIndex();
     _name = new QGraphicsSimpleTextItem(this);
     _value = new QGraphicsSimpleTextItem(this);
@@ -52,128 +51,33 @@ OrientedEdgeItem::OrientedEdgeItem( Pointer *pointer, QGraphicsItem *parent)
     setFlag(ItemIsSelectable, true);
     connectSignals();
     updateAttributes();
-    setPath(createCurves());
 }
 
-OrientedEdgeItem::~OrientedEdgeItem() {
-//  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
-//  kDebug() << "Oriented Edge Removed";
+PointerItem::~PointerItem() {
+  //dynamic_cast<GraphScene*>(scene())->removeGItem(this);
+  qDebug() << "Oriented Edge Removed";
 }
 
-void OrientedEdgeItem::connectSignals() {
+void PointerItem::connectSignals() {
     connect(_pointer, SIGNAL(changed()), this, SLOT(updatePos()));
     connect (_pointer, SIGNAL(removed()), this, SLOT(remove()));
 }
 
-QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const {
-    QLineF line(Pos1, Pos2);
-    qreal angle = ::acos(line.dx() / line.length());
-    if (line.dy() >= 0) {
-        angle = TwoPi - angle;
+void PointerItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
+}
+
+void PointerItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/) {
+}
+
+void PointerItem::remove() {
+    qDebug() << "Removing the oriented edge.";
+    if (scene()){
+        scene()->removeItem(this);
     }
-    qreal arrowSize = 10;
-
-    QPointF destArrowP1 = Pos2 + QPointF(sin(angle - PI_3) * arrowSize,         cos(angle - PI_3) * arrowSize);
-    QPointF destArrowP2 = Pos2 + QPointF(sin(angle - Pi + PI_3) * arrowSize,    cos(angle - Pi + PI_3) * arrowSize);
-    QPolygonF arrow(QPolygonF() <<  destArrowP1 << Pos2 << destArrowP2);
-
-    /// Put the arrow on the center of the nodes.
-    qreal x = Pos2.x() - Pos1.x();
-    qreal y = Pos2.y() - Pos1.y();
-
-    x -= x/2;
-    y -= y/2;
-    arrow.translate(-x, -y );
-    return arrow;
-}
-
-QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
-    QPainterPath p;
-    DataStructure *g = qobject_cast<DataStructure*>(_pointer->parent());
-    qreal size = 30 + (20 * _index);
-    qreal angle = atan2((pos.x() - g->relativeCenter().x()), (pos.y() - g->relativeCenter().y()));
-    qreal posx = (pos.x()-(((size/2) * sin(angle)) * -1)-(size/2));
-    qreal posy = (pos.y()+(((size/2) * cos(angle)))-(size/2));
-    p.addEllipse( posx, posy, size, size);
-    return p;
-}
-
-QPainterPath OrientedEdgeItem::createCurves() const {
-    if (_pointer->from() == 0 || _pointer->to() == 0){
-	_pointer->self_remove();
-        return QPainterPath();
-    }
-
-    QPointF Pos1(_pointer->from()->x(), _pointer->from()->y());
-
-    if ( _loop ) return createLoop(Pos1);
-
-    QPointF Pos2(_pointer->to()->x(), _pointer->to()->y());
-    QPolygonF arrow = createArrow(Pos1,  Pos2);
-
-    if (Pos1.x() > Pos2.x()) {
-        qSwap(Pos1, Pos2);
-    }
-
-//     if (! _pointer->dataStructure()->directed()){
-// 	QPainterPath p;
-// 	p.moveTo(Pos1);
-// 	p.lineTo(Pos2);
-// 	return p;
-//     }
-
-    qreal x = Pos2.x() - Pos1.x();
-    qreal y = Pos2.y() - Pos1.y();
-    qreal angle = atan2(y,x);
-
-    /// Calculate the size of the inclination on the curve.
-    qreal theta = angle + PI_2;
-    qreal finalX = cos(theta);
-    qreal finalY = sin(theta);
-    int index = _index;
-
-    if (index & 1) { // If the number is Odd.
-        ++index;
-        finalX *= (-1);
-        finalY *= (-1);
-    }
-
-    qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
-
-    finalX *= size;
-    finalY *= size;
-    finalX += Pos1.x() + x/2;
-    finalY += Pos1.y() + y/2;
-
-    /// Draw the Arc.
-    QPainterPath p;
-    p.moveTo(Pos1);
-    p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
-
-    /// puts the arrow on its correct position
-    QPointF middle = p.pointAtPercent(0.5);
-
-    x = Pos1.x() + (Pos2.x() - Pos1.x())/2;
-    y = Pos1.y() + (Pos2.y() - Pos1.y())/2;
-    QLineF line2(QPointF(x,y) , middle);
-    arrow.translate(+line2.dx() , +line2.dy());
-    p.addPolygon(arrow);
-
-    return p;
-}
-
-void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
-}
-
-void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/) {
-}
-
-void OrientedEdgeItem::remove() {
-    scene()->removeItem(this);
     deleteLater();
 }
 
-void OrientedEdgeItem::updatePos() {
+void PointerItem::updatePos() {
     QLine q(_pointer->from()->x(), _pointer->from()->y(),    _pointer->to()->x(),  _pointer->to()->y());
     qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
     if (_pointer->from() != _pointer->to() && size < 20  ) {
@@ -184,7 +88,7 @@ void OrientedEdgeItem::updatePos() {
     updateAttributes();
 }
 
-void OrientedEdgeItem::updateAttributes() {
+void PointerItem::updateAttributes() {
     Qt::PenStyle s;
     if     (_pointer->style() == "dash"	){ s = Qt::DashLine;    }
     else if(_pointer->style() == "dot"	){ s = Qt::DotLine;     }
@@ -219,12 +123,12 @@ void OrientedEdgeItem::updateAttributes() {
     update();
 }
 
-void OrientedEdgeItem::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget){
+void PointerItem::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget){
   Q_UNUSED(option);
   Q_UNUSED(widget);
   
   if ( isSelected() ){
     painter->setPen(QPen(Qt::black, _pointer->width(),  Qt::DotLine));
   }
-  painter->drawPath(createCurves());
+  QGraphicsPathItem::paint(painter, option, widget);
 }

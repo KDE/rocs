@@ -125,6 +125,7 @@ const QString& Pointer::name() const{
 }
 
 void Pointer::remove(Data * node) {
+    emit removed();
     if (node){
         if (node == d->from){
           d->from = 0;
@@ -133,7 +134,6 @@ void Pointer::remove(Data * node) {
           d->to = 0;
         }
     }
-      emit removed();
     d->dataStructure->remove(this);
 }
 

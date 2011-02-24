@@ -100,8 +100,7 @@ void SelectAction::executeRelease(QPointF pos) {
 void SelectAction::multiSelect(QPointF pos) {
     QList<QGraphicsItem*> items = _graphScene->items(QRectF(_p1, pos));
     foreach(QGraphicsItem *i, items) {
-        if (!( qgraphicsitem_cast<DataItem*>(i)
-                || qgraphicsitem_cast<OrientedEdgeItem*>(i))) {
+        if (!( qgraphicsitem_cast<DataItem*>(i) || qgraphicsitem_cast<PointerItem*>(i))) {
             items.removeAll(i);
         }
     }

@@ -79,13 +79,19 @@ DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(p
 
 
 DataStructure::~DataStructure() {
+    qDebug() << "Deleting the pointers." << d->_pointers.size();
     foreach(Pointer* e,  d->_pointers) {
         remove(e);
     }
-
+    qDebug() << "Deleting the pointers." << d->_pointers.size();
+    
+    qDebug() << "Deleting the nodes." << d->_data.size();
     foreach(Data* n, d->_data) {
         remove(n);
     }
+    qDebug() << "Deleting the nodes." << d->_data.size();
+    
+    qDebug() << "Deleting itself.";
     delete d;
 }
 
@@ -95,7 +101,7 @@ void DataStructure::setReadOnly(bool r){
 
 void DataStructure::remove() {
   d->_document->remove(this);
-  delete this;
+  deleteLater();
 }
 
 Data* DataStructure::addData(QString name) {

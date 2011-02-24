@@ -40,28 +40,15 @@
 #include <QGraphicsSimpleTextItem>
 
 OrientedEdgeItem::OrientedEdgeItem( Pointer *edge, QGraphicsItem *parent)
-        : QObject(0), QGraphicsPathItem(parent)
+        : PointerItem(edge, parent)
 {
-    _edge = edge;
-    _loop = (_edge->from() == edge->to());
-    _index = _edge->relativeIndex();
-    _name = new QGraphicsSimpleTextItem(this);
-    _value = new QGraphicsSimpleTextItem(this);
-    setZValue( - _index);
-    setFlag(ItemIsSelectable, true);
-    connectSignals();
-    updateAttributes();
+    _loop = (pointer()->from() == pointer()->to());
     setPath(createCurves());
 }
 
 OrientedEdgeItem::~OrientedEdgeItem() {
 //  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
-//  kDebug() << "Oriented Edge Removed";
-}
-
-void OrientedEdgeItem::connectSignals() {
-    connect(_edge, SIGNAL(changed()), this, SLOT(updatePos()));
-    connect (_edge, SIGNAL(removed()), this, SLOT(remove()));
+  kDebug() << "Oriented Edge Removed";
 }
 
 QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const {
@@ -87,10 +74,10 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
 }
 
 QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
-    if ( !_edge ) return QPainterPath();
+    if ( !pointer() ) return QPainterPath();
     QPainterPath p;
-    DataStructure *g = qobject_cast<DataStructure*>(_edge->parent());
-    qreal size = 30 + (20 * _index);
+    DataStructure *g = qobject_cast<DataStructure*>(pointer()->parent());
+    qreal size = 30 + (20 * index());
     qreal angle = atan2((pos.x() - g->relativeCenter().x()), (pos.y() - g->relativeCenter().y()));
     qreal posx = (pos.x()-(((size/2) * sin(angle)) * -1)-(size/2));
     qreal posy = (pos.y()+(((size/2) * cos(angle)))-(size/2));
@@ -98,26 +85,26 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
     return p;
 }
 
-QPainterPath OrientedEdgeItem::createCurves() const {  
-    if ( !_edge ) return QPainterPath();
+QPainterPath OrientedEdgeItem::createCurves() {  
+    if ( !pointer() ) return QPainterPath();
     
-    if (_edge->from() == 0 || _edge->to() == 0){
-	_edge->self_remove();
+    if (pointer()->from() == 0 || pointer()->to() == 0){
+	pointer()->self_remove();
         return QPainterPath();
     }
 
-    QPointF Pos1(_edge->from()->x(), _edge->from()->y());
+    QPointF Pos1(pointer()->from()->x(), pointer()->from()->y());
 
     if ( _loop ) return createLoop(Pos1);
 
-    QPointF Pos2(_edge->to()->x(), _edge->to()->y());
+    QPointF Pos2(pointer()->to()->x(), pointer()->to()->y());
     QPolygonF arrow = createArrow(Pos1,  Pos2);
 
     if (Pos1.x() > Pos2.x()) {
         qSwap(Pos1, Pos2);
     }
 
-//     if (! _edge->dataStructure()->directed()){
+//     if (! pointer()->dataStructure()->directed()){
 // 	QPainterPath p;
 // 	p.moveTo(Pos1);
 // 	p.lineTo(Pos2);
@@ -132,15 +119,15 @@ QPainterPath OrientedEdgeItem::createCurves() const {
     qreal theta = angle + PI_2;
     qreal finalX = cos(theta);
     qreal finalY = sin(theta);
-    int index = _index;
+    int lastIndex = index();
 
-    if (index & 1) { // If the number is Odd.
-        ++index;
+    if (lastIndex & 1) { // If the number is Odd.
+        ++lastIndex;
         finalX *= (-1);
         finalY *= (-1);
     }
 
-    qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * index;
+    qreal size = sqrt(pow((x*0.1),2) + pow((y*0.1),2)) * lastIndex;
 
     finalX *= size;
     finalY *= size;
@@ -162,78 +149,6 @@ QPainterPath OrientedEdgeItem::createCurves() const {
     p.addPolygon(arrow);
 
     return p;
-}
-
-void OrientedEdgeItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
-}
-
-void OrientedEdgeItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/) {
-}
-
-void OrientedEdgeItem::remove() {
-    scene()->removeItem(this);
-    deleteLater();
-}
-
-void OrientedEdgeItem::updatePos() {
-//     GraphScene* gScene = dynamic_cast<GraphScene*>(scene());
-//     if (gScene->hideEdges()) {
-//         gScene->updateAfter(this);
-//     }
-    if( ! _edge ) remove();
-    
-    QLine q(_edge->from()->x(), _edge->from()->y(),    _edge->to()->x(),  _edge->to()->y());
-    qreal size = sqrt( pow(qreal(q.dx()), 2) + pow(qreal(q.dy()), 2));
-    if (_edge->from() != _edge->to() && size < 20  ) {
-        setPath(QPainterPath());
-    } else {
-        setPath(createCurves());
-    }
-    updateAttributes();
-}
-
-void OrientedEdgeItem::updateAttributes() {
-    Qt::PenStyle s;
-    if     (_edge->style() == "dash"	){ s = Qt::DashLine;    }
-    else if(_edge->style() == "dot"	){ s = Qt::DotLine;     }
-    else if(_edge->style() == "dash dot"){ s = Qt::DashDotLine; }
-    else if(_edge->style() == "solid"	){ s = Qt::SolidLine;   }
-    else                                 { s = Qt::SolidLine;   }
-
-    setPen(QPen(QBrush(QColor(_edge->color())), _edge->width(), s,Qt::RoundCap, Qt::RoundJoin));
-    _value->hide();
-    _name->hide();
-    QPointF middle = path().pointAtPercent(0.5);
-    _name->setText(_edge->name());
-    _value->setText(_edge->value());
-
-    if (_edge->from() == _edge->to()) {
-        qreal x1 = boundingRect().x() + boundingRect().width() + 5;
-        qreal y1 = boundingRect().y() + (boundingRect().height()/2) - 10;
-        _name->setPos(x1, y1);
-        _value->setPos(x1, y1+14);
-    }
-    else {
-        _name->setPos(middle.x() - _name->boundingRect().width()/2, middle.y());
-        _value->setPos(middle.x() - _name->boundingRect().width()/2, middle.y()-14);
-    }
-
-    if (_edge->showValue()) {
-        _value->show();
-    }
-    if (_edge->showName()) {
-        _name->show();
-    }
-    update();
-}
-
-void OrientedEdgeItem::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget){
-  Q_UNUSED(option);
-  Q_UNUSED(widget);
-  if ( isSelected() ){
-    painter->setPen(QPen(Qt::black, _edge->width(),  Qt::DotLine));
-  }
-  painter->drawPath(createCurves());
 }
 
 #include "OrientedEdgeItem.moc"

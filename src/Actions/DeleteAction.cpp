@@ -43,7 +43,7 @@ void DeleteAction::executePress(QPointF pos)
     if ( DataItem *n  = qgraphicsitem_cast<DataItem*>(item) ) {
         n->data()->remove();
     }
-    else if ( OrientedEdgeItem *e = qgraphicsitem_cast<OrientedEdgeItem*>(item) ) {
+    else if ( PointerItem *e = qgraphicsitem_cast<PointerItem*>(item) ) {
         e->pointer()->remove();
     }
 }
