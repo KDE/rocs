@@ -54,7 +54,7 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     }
 
     kDebug() << "Exporting File..";
-    if ( exportDialog.selectedFile() == "" ) {
+    if ( exportDialog.selectedFile().isEmpty()) {
         return false;
     }
 
@@ -96,7 +96,7 @@ Document* ImporterExporterManager::importFile()
 
     kDebug() << "Extensions:"<< ext;
     QString fileName = dialog.selectedFile();
-    if ( fileName == "" ) return 0;
+    if ( fileName.isEmpty() ) return 0;
 
     int index = fileName.lastIndexOf ( '.' );
     FilePluginInterface * f = 0;
