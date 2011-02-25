@@ -78,14 +78,14 @@ public:
     int relativeIndex() const;
 
     /*! remove this datum from the graph */
-    void remove(Datum* node = 0);
+    void remove();
 
     /*! forces emitting a signal that will update this pointer on screen */
     void emitChangedSignal();
 
     /*! returns the datastructure that owns this pointer. */
     DataType *dataType() const;
-    
+
 #ifdef USING_QTSCRIPT
     /*! if the qtscript is enabled for this rocs,
       this method returns the self-referenced script value for this pointer.
@@ -123,7 +123,7 @@ public  slots:
       \return the name of the pointer.
     */
     const QString& name() const;
-    
+
     /*! sets the name attribute of the pointer
       \p s the new name of this pointer
     */
@@ -178,7 +178,7 @@ public  slots:
     void self_remove();
 
 #endif
-    
+
 private:
   PointerPrivate * const d;
 

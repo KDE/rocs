@@ -101,8 +101,8 @@ DataType::DataType(DataType& other, DataTypeDocument * parent): QObject(parent),
       newDatum->setWidth(n->width());
       newDatum->setBegin(n->begin());
       newDatum->setIcon(n->icon());
-      
-      
+
+
       datumToDatum.insert(n, newDatum);
     }
     foreach(Pointer *e, other.d->_pointers){
@@ -266,8 +266,9 @@ void DataType::remove(Datum *n) {
 
 void DataType::remove(Pointer *e) {
     d->_pointers.removeOne( e );
+    if (e->to() || e->from())
+      e->remove();
     e->deleteLater();
-//     delete e;
 }
 
 void DataType::setDirected(bool directed) {

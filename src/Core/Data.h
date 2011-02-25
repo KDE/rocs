@@ -53,17 +53,17 @@ class  ROCSLIB_EXPORT Datum : public QObject {
 
 public:
     enum PointerLists {In, Out, Self};
-    
+
     Datum(DataType *parent);
     ~Datum();
-    
+
     void addInPointer(Pointer *e);
     void addOutPointer(Pointer *e);
     void addSelfPointer(Pointer *e);
-    void removePointer(Pointer *e, int pointerList);
+    void removePointer(Pointer *e, int pointerList = -1);
     void removePointer(Pointer *e, PointerList &list);
     void remove();
-    
+
     void startChange();
     void endChange();
     bool showName();

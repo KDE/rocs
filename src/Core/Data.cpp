@@ -28,7 +28,7 @@
 class DatumPrivate{
 public:
   DatumPrivate(Datum *classPtr) : q(classPtr){}
-  
+
     PointerList _in_pointers;
     PointerList _out_pointers;
     PointerList _self_pointers;
@@ -54,10 +54,10 @@ public:
     QVariant _value;
     QScriptValue _scriptvalue;
     QScriptEngine *_engine;
-    
+
     void empty(PointerList &list) {
         for(int i = 0; i < list.size(); ++i){
-            list.at(i)->remove(q);
+            list.at(i)->remove();
         }
     }
 private:
@@ -119,11 +119,11 @@ void Datum::setIconPackage(const QString& s){
 }
 
 const QString& Datum::icon() const {
-    return d->_icon; 
+    return d->_icon;
 }
 
-const QString& Datum::iconPackage() const { 
-    return d-> _iconpackage; 
+const QString& Datum::iconPackage() const {
+    return d-> _iconpackage;
 }
 
 DataList Datum::adjacent_data() const
@@ -193,6 +193,9 @@ Pointer* Datum::addPointer(Datum* to) {
 
 void Datum::removePointer(Pointer *e, int pointerList) {
     switch (pointerList) {
+    case -1  : removePointer(e, d->_in_pointers);
+               removePointer(e, d->_out_pointers);
+               removePointer(e, d->_self_pointers);  break;
     case In  : removePointer(e, d->_in_pointers);    break;
     case Out : removePointer(e, d->_out_pointers);   break;
     case Self: removePointer(e, d->_self_pointers);  break;
