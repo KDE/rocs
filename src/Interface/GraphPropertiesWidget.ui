@@ -49,7 +49,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Name of Data Structure Here</string>
+        <string comment="KDE::DoNotExtract">Name of Data Structure Here</string>
        </property>
       </widget>
      </item>
