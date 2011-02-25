@@ -76,7 +76,7 @@ void GraphLayers::populate() {
 
 void GraphLayers::btnADDClicked() {
     QString name = _lineEdit->text();
-    if (name == QString()) {
+    if (name.isEmpty()) {
         name = i18n("Untitled%1", DocumentManager::self()->activeDocument()->dataStructures().count());
     }
     emit  createGraph(name);
