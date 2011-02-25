@@ -28,8 +28,8 @@
 #include "DynamicPropertiesList.h"
 
 void DataPrivate::empty(PointerList &list) {
-    for(int i = 0; i < list.size(); ++i){
-        list.at(i)->remove();
+    while(!list.isEmpty()){
+        list.first()->remove();
     }
 }
 
