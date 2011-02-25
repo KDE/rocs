@@ -55,10 +55,10 @@ Pointer::Pointer(DataStructure *parent, Data *from, Data *to) :
     d->to       = to;
     d->dataStructure = parent;
     d->color    = d->dataStructure->pointerDefaultColor();
-    
+
     connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
     connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
-    
+
     if ( from == to ) {
         from -> addSelfPointer(this);
     }
@@ -101,11 +101,11 @@ int Pointer::relativeIndex() const{
 }
 
 void Pointer::emitChangedSignal(){
-    emit changed(); 
+    emit changed();
 }
 
 DataStructure *Pointer::dataStructure() const{
-    return d->dataStructure; 
+    return d->dataStructure;
 }
 
 Data *Pointer::from() const{
@@ -124,15 +124,15 @@ const QString& Pointer::name() const{
     return d->name;
 }
 
-void Pointer::remove(Data * node) {
+void Pointer::remove() {
     emit removed();
-    if (node){
-        if (node == d->from){
-          d->from = 0;
-        }
-        if (node == d->to){
-          d->to = 0;
-        }
+    if (d->from){
+      d->from->removePointer(this);
+      d->from = 0;
+    }
+    if (d->to){
+      d->to->removePointer(this);
+      d->to = 0;
     }
     d->dataStructure->remove(this);
 }
@@ -158,7 +158,7 @@ void Pointer::hideValue(bool b) {
 
 void Pointer::setValue(const QString& value){
     d->value = value;
-    emit changed();  
+    emit changed();
 }
 
 void Pointer::setName(const QString& name){
@@ -190,7 +190,7 @@ void Pointer::setStyle(const QString& s) {
     d->style = s;
     emit changed();
 }
-    
+
 void Pointer::addDynamicProperty(QString property, QVariant value){
   if (!setProperty(property.toUtf8(), value)  &&   value.isValid()){ //if is addeding and NOT is a Q_PROPERTY
       DynamicPropertiesList::New()->addProperty(this, property);

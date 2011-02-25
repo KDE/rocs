@@ -73,15 +73,15 @@ public:
     */
     int relativeIndex() const;
 
-    /*! remove this datum from the graph */
-    void remove(Data* node = 0);
+    /*! remove this pointer from the graph */
+    void remove();
 
     /*! forces emitting a signal that will update this pointer on screen */
     void emitChangedSignal();
 
     /*! returns the datastructure that owns this pointer. */
     DataStructure *dataStructure() const;
-    
+
 
     /*! if the qtscript is enabled for this rocs,
       this method returns the self-referenced script value for this pointer.
@@ -119,7 +119,7 @@ public  slots:
       \return the name of the pointer.
     */
     const QString& name() const;
-    
+
     /*! sets the name attribute of the pointer
       \p s the new name of this pointer
     */
@@ -171,7 +171,7 @@ public  slots:
      it will remove this pointer from the graph.
      */
     void self_remove();
-    
+
 private:
   PointerPrivate * const d;
 

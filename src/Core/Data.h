@@ -50,17 +50,17 @@ class  ROCSLIB_EXPORT Data : public QObject {
 
 public:
     enum ListType{In, Out, Self};
-    
+
     Data(DataStructure *parent);
     ~Data();
-    
+
     void addInPointer(Pointer *e);
     void addOutPointer(Pointer *e);
     void addSelfPointer(Pointer *e);
-    void removePointer(Pointer *e, int pointerList);
+    void removePointer(Pointer *e, int pointerList = -1);
     void removePointer(Pointer *e, PointerList &list);
     void remove();
-    
+
     void startChange();
     void endChange();
     bool showName();
@@ -71,7 +71,7 @@ public:
     QScriptValue scriptValue() const;
     virtual void setEngine(	QScriptEngine *_engine );
     QScriptValue createScriptArray(PointerList list);
-    
+
     //getters
     qreal x() const;
     qreal y() const;
@@ -84,9 +84,9 @@ public:
     bool showName() const;
     bool showValue() const;
     bool changing() const;
-    
+
     DataItem *item() const;
-    
+
     DataList adjacent_data() const;
     PointerList adjacent_pointers() const;
     PointerList& in_pointers() const;
@@ -107,7 +107,7 @@ public  slots:
     QScriptValue connected_pointers(Data *n);
     void self_remove();
     Pointer* addPointer(Data* to);
-    
+
     void setX(int x);
     void setY(int y);
     void setWidth(double w);
@@ -119,7 +119,7 @@ public  slots:
     void setIconPackage(const QString& s);
     void setShowName(bool b);
     void setShowValue(bool b);
-    
+
 private:
     DataPrivate *d;
 
@@ -131,7 +131,7 @@ signals:
 class DataPrivate{
 public:
   DataPrivate(Data *classPtr) : q(classPtr){}
-  
+
     PointerList _in_pointers;
     PointerList _out_pointers;
     PointerList _self_pointers;
@@ -148,16 +148,16 @@ public:
 
     DataStructure *_dataStructure;
     DataItem *_item;
-    
+
     QString _name;
     QColor _color;
     QString _iconpackage;
     QString _icon;
 
-    QVariant _value;  
+    QVariant _value;
     QScriptValue _scriptvalue;
-    QScriptEngine *_engine; 
-    
+    QScriptEngine *_engine;
+
     void empty(PointerList &list) ;
 private:
   Data *q;

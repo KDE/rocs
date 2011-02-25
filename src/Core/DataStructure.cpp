@@ -84,13 +84,13 @@ DataStructure::~DataStructure() {
         remove(e);
     }
     qDebug() << "Deleting the pointers." << d->_pointers.size();
-    
+
     qDebug() << "Deleting the nodes." << d->_data.size();
     foreach(Data* n, d->_data) {
         remove(n);
     }
     qDebug() << "Deleting the nodes." << d->_data.size();
-    
+
     qDebug() << "Deleting itself.";
     delete d;
 }
@@ -190,6 +190,8 @@ void DataStructure::remove(Data *n) {
 
 void DataStructure::remove(Pointer *e) {
     d->_pointers.removeOne( e );
+    if (e->to() || e->from())
+      e->remove();
     e->deleteLater();
 }
 

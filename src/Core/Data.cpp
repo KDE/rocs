@@ -29,13 +29,13 @@
 
 void DataPrivate::empty(PointerList &list) {
     for(int i = 0; i < list.size(); ++i){
-        list.at(i)->remove(q);
+        list.at(i)->remove();
     }
 }
 
 DataStructure *Data::dataStructure() const{ return d->_dataStructure; }
 
-Data::Data(DataStructure *parent) 
+Data::Data(DataStructure *parent)
 : QObject(parent)
 , d(new DataPrivate(this)) {
     d->_dataStructure = parent;
@@ -138,6 +138,9 @@ Pointer* Data::addPointer(Data* to) {
 
 void Data::removePointer(Pointer *e, int pointerList) {
     switch (pointerList) {
+    case -1  : removePointer(e, d->_in_pointers);
+               removePointer(e, d->_out_pointers);
+               removePointer(e, d->_self_pointers);
     case In  : removePointer(e, d->_in_pointers);    break;
     case Out : removePointer(e, d->_out_pointers);   break;
     case Self: removePointer(e, d->_self_pointers);  break;
