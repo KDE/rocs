@@ -25,7 +25,7 @@
 
 Rocs::ListStructure::ListStructure ( Document* parent ) : DataStructure ( parent ) {
   qDebug() << "Creating  a list structure";
-  Data * p = addNode("P");
+  Data * p = addData("P");
   p->setShowName(true);
   p->setShowValue(false);
   //setBegin(p);
@@ -35,10 +35,8 @@ Rocs::ListStructure::ListStructure ( Document* parent ) : DataStructure ( parent
 
 Rocs::ListStructure::ListStructure(DataStructure& other, Document * parent): DataStructure(other, parent)
 {
-  qDebug() << "Criando pelo construtor de cópia";
   _animationGroup = new QParallelAnimationGroup(this);
-  _front = addNode("P");
-
+  _front = static_cast<ListNode*>(addData("P"));
   arrangeNodes();
 }
 
@@ -46,7 +44,7 @@ Rocs::ListStructure::~ListStructure() {
 
 }
 
-Pointer* Rocs::ListStructure::addEdge ( Data* from, Data* to ) {
+Pointer* Rocs::ListStructure::addPointer ( Data* from, Data* to ) {
     foreach(Pointer *e, from->adjacent_pointers()){
       e->self_remove();
     }
@@ -56,7 +54,7 @@ Pointer* Rocs::ListStructure::addEdge ( Data* from, Data* to ) {
     return e;
 }
 
-ListNode* Rocs::ListStructure::addNode ( QString name ) {
+Data* Rocs::ListStructure::addData ( QString name ) {
 
     ListNode *n = static_cast<ListNode*>(DataStructure::addData(new ListNode(this)));
     n->setName(name);
@@ -68,7 +66,7 @@ QScriptValue Rocs::ListStructure::front() {
 }
 
 QScriptValue Rocs::ListStructure::createNode(const QString & name){
-    Data * n = addNode(name);
+    Data * n = addData(name);
     n->setEngine( engine() );
     return n->scriptValue();
 }

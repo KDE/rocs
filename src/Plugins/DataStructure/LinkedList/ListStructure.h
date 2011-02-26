@@ -37,9 +37,9 @@ class ListStructure : public DataStructure {
 
 //     virtual void setEngine ( QScriptEngine* engine );
 
-    virtual ListNode* addNode ( QString name );
+    virtual Data* addData ( QString name );
 
-    virtual Pointer* addEdge ( Data* from, Data* to );
+    virtual Pointer* addPointer ( Data* from, Data* to );
 
     void arrangeNodes();
 
