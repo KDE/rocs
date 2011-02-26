@@ -27,7 +27,7 @@
 #include <QLineEdit>
 #include <QCheckBox>
 #include <kcombobox.h>
-#include "PointerItem.h"
+#include "LinkedListPointerItem.h"
 #include "Pointer.h"
 #include "Data.h"
 #include <Document.h>
@@ -68,7 +68,7 @@ QGraphicsItem* Rocs::ListPlugin::dataItem(Data* node ) const
 
 QGraphicsItem* Rocs::ListPlugin::pointerItem ( Pointer* edge) const
 {
-    return new Rocs::LinkedList::PointerItem (edge);
+    return new LinkedListPointerItem (edge);
 }
 
 QLayout* Rocs::ListPlugin::nodeExtraProperties ( Data* node, QWidget* parentWidget) const
