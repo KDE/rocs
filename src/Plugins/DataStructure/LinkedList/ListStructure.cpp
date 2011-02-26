@@ -46,7 +46,7 @@ Rocs::ListStructure::~ListStructure() {
 
 Pointer* Rocs::ListStructure::addPointer ( Data* from, Data* to ) {
     foreach(Pointer *e, from->adjacent_pointers()){
-      e->self_remove();
+        e->remove();
     }
 
     Pointer * e =  DataStructure::addPointer ( from, to );
