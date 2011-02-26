@@ -36,26 +36,18 @@ GraphLayers::GraphLayers(MainWindow *parent) : QScrollArea(parent) {
     vBoxLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
     contents->setLayout(vBoxLayout);
     
-    //setLayout(vBoxLayout);
-    
     hBoxLayout->setSpacing(0);
     hBoxLayout->setContentsMargins(0,0,0,0);
     vBoxLayout->setSpacing(0);
     vBoxLayout->setContentsMargins(0,0,0,0);
-    contents->setMaximumHeight(999999);
     setWidget(contents);
-    widget()->setMinimumSize(QScrollArea::size());
-    widget()->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::MinimumExpanding);
     setFrameShape(NoFrame);
 }
 
 void GraphLayers::resizeEvent(QResizeEvent* event)
 {
     QScrollArea::resizeEvent(event);
-    if(widget()){  
-        widget()->setMinimumWidth(contentsRect().width());
-        widget()->setMaximumWidth(contentsRect().width());
-    }
+    widget()->setFixedWidth(contentsRect().width());
 }
 
 void GraphLayers::populate() {
@@ -85,7 +77,7 @@ void GraphLayers::btnADDClicked() {
 void GraphLayers::addGraph(DataStructure *g){
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
     _buttonGroup->addButton(gp->radio());
-    connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()),Qt::UniqueConnection);
+    connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()));
     qobject_cast<QVBoxLayout*>(widget()->layout())->insertWidget(1,gp);
 }
 
