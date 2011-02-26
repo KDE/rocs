@@ -40,7 +40,6 @@ DocumentManager::DocumentManager( QObject* parent):QObject(parent){
 }
 
 DocumentManager::~DocumentManager(){
-//   qDeleteAll(m_documents.begin(), m_documents.end());
   foreach (Document * g, m_documents){
       removeDocument(g);
   }
@@ -67,7 +66,6 @@ void DocumentManager::changeDocument(){
     }
 }
 
-
 void DocumentManager::changeDocument(Document* doc){
     if(!m_documents.contains(doc)){
       m_documents.append(doc);
@@ -76,14 +74,13 @@ void DocumentManager::changeDocument(Document* doc){
       if (m_actualDocument){
          emit deactivateDocument(m_actualDocument);
         DataStructurePluginManager::self()->disconnect(m_actualDocument);
-        doc->disconnect(SIGNAL(activeGraphChanged(Graph*)));
+        doc->disconnect(SIGNAL(activeDataStructureChanged(DataStructure*)));
         doc->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
         doc->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
         doc->engineBackend()->disconnect(SIGNAL(finished()));
       }
       m_actualDocument = doc;
       if (m_actualDocument){
-          kDebug() << "Emiting on ChangeDocument::activateDocument()";
           emit activateDocument();
       }
       connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)),
@@ -119,7 +116,6 @@ void DocumentManager::convertToDataStructure(){
   }
 }
 
-
 void DocumentManager::loadDocument ( QString name ){
   Document * doc;
   if ( name.isEmpty() ){
@@ -142,7 +138,6 @@ void DocumentManager::loadDocument ( QString name ){
   }else{
       doc = new Document( i18n ( "Untitled0" ) );
       doc->loadFromInternalFormat ( name );
-
    }
    addDocument(doc);
 }

@@ -21,14 +21,11 @@
 #define DATA_H
 
 #include <QObject>
-#include <QList>
 #include <QString>
 
 #include <QtScript>
-#include "QtScriptBackend.h"
 #include <QColor>
 
-#include "DataItem.h"
 #include "rocslib_export.h"
 #include "Rocs_Typedefs.h"
 

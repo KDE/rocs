@@ -83,13 +83,8 @@ void GraphVisualEditor::setActiveDocument( ) {
 
 void GraphVisualEditor::releaseDocument() {
     _scene->clear();
-    
     foreach(DataStructure *ds, _document->dataStructures()){
        ds->disconnect(this);
-
-    }
-    if (_document->dataStructures().size() != 0){
-        _scene->setActiveDocument();
     }
 }
 
