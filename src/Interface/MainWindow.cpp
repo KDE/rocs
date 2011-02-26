@@ -97,16 +97,21 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
     setupToolsPluginsAction();
     setupDSPluginsAction();
 
-    /* just for testing prurposes,
+    connect(DocumentManager::self(), SIGNAL(activateDocument()),   
+            this, SLOT(setActiveDocument()), Qt::UniqueConnection );
+    connect(DocumentManager::self(), SIGNAL(activateDocument()), 
+            _graphVisualEditor, SLOT(setActiveDocument()), Qt::UniqueConnection);
+    connect(DocumentManager::self(), SIGNAL(activateDocument()), 
+            _graphVisualEditor->scene(), SLOT(setActiveDocument()), Qt::UniqueConnection);
+    connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)), 
+            this, SLOT(releaseDocument(Document*)),Qt::UniqueConnection   );
+    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),   
+            this, SLOT(releaseDocument(Document*)),Qt::UniqueConnection   );
+
+     /* just for testing prurposes,
      * this should not be hardcoded here.
      * use KWelcomeWidget instead.
      */
-    connect(DocumentManager::self(), SIGNAL(activateDocument()),   this, SLOT(setActiveDocument()) );
-    connect(DocumentManager::self(), SIGNAL(activateDocument()),  _graphVisualEditor, SLOT(setActiveDocument()));
-    connect(DocumentManager::self(), SIGNAL(activateDocument()),  _graphVisualEditor->scene(), SLOT(setActiveDocument()));
-    
-    connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)), this, SLOT(releaseDocument(Document*))   );
-    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),    this, SLOT(releaseDocument(Document*))   );
     DocumentManager::self()->loadDocument();
 }
 
@@ -356,6 +361,7 @@ void MainWindow::setupDocumentsList(){
 
 void MainWindow::setActiveDocument ( )
 {
+    kDebug() << "Setting the document in the main widnow";
     Document *activeDocument = DocumentManager::self()->activeDocument();
     
     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
@@ -512,7 +518,7 @@ void MainWindow::runToolPlugin()
 void MainWindow::dsChanged(){
     kDebug() << "Data structure was changed, need to reload graphic part.";
 
-    setActiveDocument();
+//    setActiveDocument();
 //     QAction *action = qobject_cast<QAction *> ( sender() );
 //
 //     if (! action ){

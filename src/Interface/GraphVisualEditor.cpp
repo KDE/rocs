@@ -68,8 +68,10 @@ QGraphicsView* GraphVisualEditor::view() const {
 }
 
 void GraphVisualEditor::setActiveDocument( ) {
-
-    if ( _document != 0 ) {
+    kDebug() << "Setting the document in the editor";
+    if ( _document ==  DocumentManager::self()->activeDocument()) {
+        return;
+    }else if ( _document ){
         releaseDocument();
     }
 
@@ -77,10 +79,6 @@ void GraphVisualEditor::setActiveDocument( ) {
     
     connect(_document , SIGNAL(activeDataStructureChanged(DataStructure*)), 
             this ,       SLOT  (setActiveGraph(DataStructure*)));
-    
-    kDebug() << "Graph Document Set: " << _document->name();
-    _scene->setActiveDocument( );
-
 }
 
 void GraphVisualEditor::releaseDocument() {

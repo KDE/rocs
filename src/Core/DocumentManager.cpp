@@ -83,7 +83,7 @@ void DocumentManager::changeDocument(Document* doc){
       }
       m_actualDocument = doc;
       if (m_actualDocument){
-          kDebug() << "Activing it!";
+          kDebug() << "Emiting on ChangeDocument::activateDocument()";
           emit activateDocument();
       }
       connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)),
@@ -112,8 +112,7 @@ void DocumentManager::convertToDataStructure(){
   if (m_actualDocument){
     newDoc = new Document(*m_actualDocument);
     emit deactivateDocument(m_actualDocument);
-    m_actualDocument = newDoc;
-    emit activateDocument();
+    addDocument(newDoc);
   }
   else{
     loadDocument();
@@ -140,16 +139,10 @@ void DocumentManager::loadDocument ( QString name ){
       }
       doc = new Document( name );
       doc->addDataStructure ( i18n ( "Untitled0" ) );
-      addDocument(doc);
   }else{
       doc = new Document( i18n ( "Untitled0" ) );
       doc->loadFromInternalFormat ( name );
-      addDocument(doc);
 
-      if (m_actualDocument){
-          emit deactivateDocument(m_actualDocument);
-      }
    }
-   m_actualDocument = doc;
-   emit activateDocument();
+   addDocument(doc);
 }

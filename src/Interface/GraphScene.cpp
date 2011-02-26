@@ -84,12 +84,15 @@ void GraphScene::setAction(QAction *action) {
 }
 
 void GraphScene::setActiveDocument() {
-
+    kDebug() << "Setting the document in the scene";
     Document *gd = DocumentManager::self()->activeDocument();
-    if ( gd == 0) {
+    if (_graphDocument == gd){
+        return;
+    }else if ( gd == 0) {
         releaseDocument();
         return;
     }
+    
     _graphDocument = gd;
 
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
