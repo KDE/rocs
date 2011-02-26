@@ -55,7 +55,7 @@ public slots:
     	*/
     void setActiveGraph( DataStructure *g);
 
-    void setActiveDocument(Document *graphDocument);
+    void setActiveDocument();
     QList<DataItem*> selectedNodes() const;
 
 private:

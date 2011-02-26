@@ -69,7 +69,7 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
 
   signals:
     /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/
-    void activateDocument (Document*);
+    void activateDocument ();
     /** this signal is emited when actual active document is deactivate (by a removal or a change)*/
     void deactivateDocument(Document* doc);
     /** signal emited when a document was removed from list. if doc is the active document, both, deactivateDocument() and activeDocument() is called first */

@@ -83,9 +83,10 @@ void GraphScene::setAction(QAction *action) {
     _action = qobject_cast<AbstractAction*>(action);
 }
 
-void GraphScene::setActiveDocument(Document *gd) {
+void GraphScene::setActiveDocument() {
 
-    if (gd == 0) {
+    Document *gd = DocumentManager::self()->activeDocument();
+    if ( gd == 0) {
         releaseDocument();
         return;
     }
@@ -110,9 +111,9 @@ void GraphScene::setActiveDocument(Document *gd) {
 
 }
 void GraphScene::createItems(){
-    foreach(DataStructure *g, DocumentManager::self()->activeDocument()->dataStructures()){
+    foreach(DataStructure *g, _graphDocument->dataStructures()){
         foreach( Data *d, g->dataList()) createData( d );
-        foreach( Pointer *p, g->pointers()) createEdge( p);
+        foreach( Pointer *p, g->pointers()) createEdge( p );
     }
 }
 

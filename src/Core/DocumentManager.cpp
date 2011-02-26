@@ -57,7 +57,6 @@ void DocumentManager::addDocument(Document* newDoc){
 }
 
 void DocumentManager::changeDocument(){
-
     QAction *action = qobject_cast<QAction *> ( sender() );
 
     if (! action ){
@@ -82,11 +81,11 @@ void DocumentManager::changeDocument(Document* doc){
         doc->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
         doc->engineBackend()->disconnect(SIGNAL(finished()));
       }
-      if (doc != 0){
-          kDebug() << "Activing it!";
-          emit activateDocument(doc);
-      }
       m_actualDocument = doc;
+      if (m_actualDocument){
+          kDebug() << "Activing it!";
+          emit activateDocument();
+      }
       connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)),
                this, SLOT(convertToDataStructure()));
     }
@@ -113,11 +112,12 @@ void DocumentManager::convertToDataStructure(){
   if (m_actualDocument){
     newDoc = new Document(*m_actualDocument);
     emit deactivateDocument(m_actualDocument);
+    m_actualDocument = newDoc;
+    emit activateDocument();
   }
-  else
+  else{
     loadDocument();
-  kDebug() << "Activing it!";
-  emit activateDocument(newDoc);
+  }
 }
 
 
@@ -137,7 +137,6 @@ void DocumentManager::loadDocument ( QString name ){
           if ( ! found ){
               break;
           }
-          found = false;
       }
       doc = new Document( name );
       doc->addDataStructure ( i18n ( "Untitled0" ) );
@@ -150,8 +149,7 @@ void DocumentManager::loadDocument ( QString name ){
       if (m_actualDocument){
           emit deactivateDocument(m_actualDocument);
       }
-      m_actualDocument = doc;
-
-      emit activateDocument(m_actualDocument);
    }
+   m_actualDocument = doc;
+   emit activateDocument();
 }

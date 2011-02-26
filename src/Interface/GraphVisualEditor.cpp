@@ -37,6 +37,7 @@
 #include <KDebug>
 #include <QGraphicsView>
 #include <QPainter>
+#include <DocumentManager.h>
 
 GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
         : QWidget(parent),
@@ -66,15 +67,19 @@ QGraphicsView* GraphVisualEditor::view() const {
     return _graphicsView;
 }
 
-void GraphVisualEditor::setActiveDocument( Document *gd) {
+void GraphVisualEditor::setActiveDocument( ) {
 
     if ( _document != 0 ) {
         releaseDocument();
     }
 
-    _document = gd;
-    kDebug() << "Graph Document Set: " << gd->name();
-    _scene->setActiveDocument( gd );
+    _document = DocumentManager::self()->activeDocument();
+    
+    connect(_document , SIGNAL(activeDataStructureChanged(DataStructure*)), 
+            this ,       SLOT  (setActiveGraph(DataStructure*)));
+    
+    kDebug() << "Graph Document Set: " << _document->name();
+    _scene->setActiveDocument( );
 
 }
 
@@ -85,8 +90,9 @@ void GraphVisualEditor::releaseDocument() {
        ds->disconnect(this);
 
     }
-    if (_document->dataStructures().size() != 0)
-      _scene->setActiveDocument(0);
+    if (_document->dataStructures().size() != 0){
+        _scene->setActiveDocument();
+    }
 }
 
 //void GraphVisualEditor::drawGraphOnScene( DataStructure */*g*/) {}

@@ -91,7 +91,7 @@ private slots:
     void dsChanged();
 
 public slots:
-    void setActiveDocument(Document *d);
+    void setActiveDocument();
     void releaseDocument(Document *d);
     //void setActiveGraph(DataStructure *g);
     void runToolPlugin();

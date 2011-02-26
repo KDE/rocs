@@ -44,7 +44,6 @@ public:
     void updateGraph(DataStructure *g);
     void updateDocument();
     void setActiveGraph(DataStructure *g);
-    void setActiveDocument(Document *gd);
     void clearGraph();
 
     void setHideEdges(bool h);
@@ -59,7 +58,8 @@ public slots:
     QGraphicsItem* createEdge( Pointer *e);
     void connectGraphSignals(DataStructure *g);
     void createItems();
-
+    void setActiveDocument();
+    
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);

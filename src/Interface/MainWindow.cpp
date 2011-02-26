@@ -101,9 +101,13 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
      * this should not be hardcoded here.
      * use KWelcomeWidget instead.
      */
-    Document *defaultDoc = new Document(i18n("Untitled"));
-    DocumentManager::self()->addDocument(defaultDoc);
-    setActiveDocument(defaultDoc);
+    connect(DocumentManager::self(), SIGNAL(activateDocument()),   this, SLOT(setActiveDocument()) );
+    connect(DocumentManager::self(), SIGNAL(activateDocument()),  _graphVisualEditor, SLOT(setActiveDocument()));
+    connect(DocumentManager::self(), SIGNAL(activateDocument()),  _graphVisualEditor->scene(), SLOT(setActiveDocument()));
+    
+    connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)), this, SLOT(releaseDocument(Document*))   );
+    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),    this, SLOT(releaseDocument(Document*))   );
+    DocumentManager::self()->loadDocument();
 }
 
 MainWindow::~MainWindow()
@@ -277,21 +281,19 @@ void MainWindow::setupActions()
 
 void MainWindow::showSettings()
 {
-     KConfigDialog *dialog = new KConfigDialog(this,  "settings", Settings::self());
+     KConfigDialog dialog(this,  "settings", Settings::self());
 
-     IncludeManagerSettings * set = new IncludeManagerSettings(dialog);
+     IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
 
-     dialog->addPage(set,"Include Manager",QString(),"Include Manager",true);
-     connect(set, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
+     dialog.addPage(set,"Include Manager",QString(),"Include Manager",true);
+     connect(set, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
 //      connect(set, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
 
-     connect(dialog, SIGNAL(applyClicked()), set, SLOT(saveSettings()));
-     connect(dialog, SIGNAL(okClicked()), set, SLOT(saveSettings()));
+     connect(&dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
+     connect(&dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
+     connect(&dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
 
-     connect(dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
-
-
-     dialog->exec();
+     dialog.exec();
 }
 
 void MainWindow::setupToolsPluginsAction()
@@ -301,8 +303,7 @@ void MainWindow::setupToolsPluginsAction()
     unplugActionList ( "tools_plugins" );
     QList <  ToolsPluginInterface*> avaliablePlugins =  PluginManager::instance()->toolPlugins();
     int count = 0;
-    foreach (  ToolsPluginInterface* p, avaliablePlugins )
-    {
+    foreach (  ToolsPluginInterface* p, avaliablePlugins ){
         action = new KAction ( p->displayName(), this );
         action->setData(count++);
         connect ( action, SIGNAL ( triggered ( bool ) ),this, SLOT ( runToolPlugin() ) );
@@ -319,8 +320,7 @@ void MainWindow::setupDSPluginsAction()
     QList < DataStructurePluginInterface*> avaliablePlugins = DataStructurePluginManager::self()->pluginsList();
     QActionGroup * group = new QActionGroup(this);
     int count = 0;
-    foreach ( DataStructurePluginInterface* p, avaliablePlugins )
-    {
+    foreach ( DataStructurePluginInterface* p, avaliablePlugins ) {
         action = new KAction ( p->name(), this );
         action->setData(count++);
         action->setCheckable(true);
@@ -354,18 +354,15 @@ void MainWindow::setupDocumentsList(){
     plugActionList ( "Doc_List", pluginList );
 }
 
-void MainWindow::setActiveDocument ( Document* d )
+void MainWindow::setActiveDocument ( )
 {
-    _graphVisualEditor->setActiveDocument ( d );
-
+    Document *activeDocument = DocumentManager::self()->activeDocument();
+    
     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
-                d->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
-
-    connect(d , SIGNAL(activeDataStructureChanged(DataStructure*)),
-            _graphVisualEditor, SLOT(setActiveGraph(DataStructure*)));
+                activeDocument->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
 
     connect(_GraphLayers, SIGNAL(createGraph(QString)),
-            d, SLOT(addDataStructure(QString)));
+            activeDocument, SLOT(addDataStructure(QString)));
 
 //     connect(this, SIGNAL(startEvaluation()),
 //             engine(), SLOT(start()));
@@ -381,10 +378,10 @@ void MainWindow::releaseDocument ( Document* d ){
     if (d == 0){
       return;
     }
-    _graphVisualEditor->releaseDocument();
     d->disconnect(this);
     disconnect(d);
-    disconnect(d);
+
+    _graphVisualEditor->releaseDocument();
     _GraphLayers->disconnect(d);
     d->engineBackend()->disconnect(this);
     d->engineBackend()->disconnect(_bottomTabs);
@@ -515,7 +512,7 @@ void MainWindow::runToolPlugin()
 void MainWindow::dsChanged(){
     kDebug() << "Data structure was changed, need to reload graphic part.";
 
-    setActiveDocument(DocumentManager::self()->activeDocument());
+    setActiveDocument();
 //     QAction *action = qobject_cast<QAction *> ( sender() );
 //
 //     if (! action ){
