@@ -46,7 +46,7 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
 
 DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent), d(new DataStructurePrivate){
     d->_readOnly = other.readOnly();
-    d->_document = other.document();
+    d->_document = parent;
     calcRelativeCenter();
 
     d->_pointerDefaultColor     = other.pointerDefaultColor();
@@ -92,7 +92,7 @@ void DataStructure::setReadOnly(bool r){
     d->_readOnly = r;
 }
 
-void DataStructure::remove() {
+void DataStructure::remove() {  
   d->_document->remove(this);
   deleteLater();
 }

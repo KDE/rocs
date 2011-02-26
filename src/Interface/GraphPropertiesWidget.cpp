@@ -62,7 +62,8 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* pare
     Document *gDocument = qobject_cast<Document*>(g->parent());
     connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataStructure(QString)));
     connect(this, SIGNAL(removeGraph()), g, SLOT(remove()));
-
+    
+    
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
     connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDatumDefaultColor(QColor)));
 
@@ -110,18 +111,13 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
     bool createNewGraph = false;
 
     if (DocumentManager::self()->activeDocument()->dataStructures().size() == 1){
-        kDebug() << "Document size = zero, create a new data structure.";
         createNewGraph = true;
-    }else{
-        kDebug() << "Size of the active document: " 
-        << DocumentManager::self()->activeDocument()->dataStructures().size();
     }
 
     radio()->group()->removeButton(radio());
-
-    /*! remove this graph from the document. */
+    
     emit removeGraph();
-
+    
     if (createNewGraph){
         emit addGraph(i18n("Untitled0"));
     }

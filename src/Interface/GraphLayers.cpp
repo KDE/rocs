@@ -15,9 +15,11 @@
 #include "DocumentManager.h"
 #include <qscrollbar.h>
 
-GraphLayers::GraphLayers(MainWindow *parent) : QScrollArea(parent) {
-    _mainWindow = parent;
-    
+GraphLayers::GraphLayers(MainWindow *parent) : 
+    QScrollArea(parent)
+    , _mainWindow(parent)
+    , _activeDocument(0)
+{    
     QHBoxLayout *hBoxLayout = new QHBoxLayout();
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
     
@@ -50,8 +52,14 @@ void GraphLayers::resizeEvent(QResizeEvent* event)
     widget()->setFixedWidth(contentsRect().width());
 }
 
-void GraphLayers::populate() {
-    kDebug() << "Starting to populate the layers";
+void GraphLayers::setActiveDocument() {
+    
+    if (_activeDocument && _activeDocument != DocumentManager::self()->activeDocument()){
+        _activeDocument->disconnect(this);
+        disconnect(_activeDocument);
+    }
+
+    _activeDocument = DocumentManager::self()->activeDocument();
     for ( int i = 1; i < widget()->layout()->count(); ++i) {
         widget()->layout()->itemAt(i)->widget()->deleteLater();
     }
@@ -59,17 +67,15 @@ void GraphLayers::populate() {
         _buttonGroup->removeButton(b);
     }
 
-    Document *gd = DocumentManager::self()->activeDocument();
-    connect(gd, SIGNAL(dataStructureCreated(DataStructure*)), 
+    connect(_activeDocument, SIGNAL(dataStructureCreated(DataStructure*)), 
             this, SLOT(addGraph(DataStructure*)),Qt::UniqueConnection);
     
     connect(this, SIGNAL(createGraph(QString)), 
-            gd, SLOT(addDataStructure(QString)), Qt::UniqueConnection);
+            _activeDocument, SLOT(addDataStructure(QString)), Qt::UniqueConnection);
 
-    foreach(DataStructure *s, gd->dataStructures()){
-	  addGraph(s);
+    foreach(DataStructure *s, _activeDocument->dataStructures()){
+        addGraph(s);
     }
-    kDebug() << "Finished Populating";
 }
 
 void GraphLayers::btnADDClicked() {

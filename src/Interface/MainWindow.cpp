@@ -99,10 +99,6 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
 
     connect(DocumentManager::self(), SIGNAL(activateDocument()),   
             this, SLOT(setActiveDocument()), Qt::UniqueConnection );
-    connect(DocumentManager::self(), SIGNAL(activateDocument()), 
-            _graphVisualEditor, SLOT(setActiveDocument()), Qt::UniqueConnection);
-    connect(DocumentManager::self(), SIGNAL(activateDocument()), 
-            _graphVisualEditor->scene(), SLOT(setActiveDocument()), Qt::UniqueConnection);
     connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)), 
             this, SLOT(releaseDocument(Document*)),Qt::UniqueConnection   );
     connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),   
@@ -364,6 +360,9 @@ void MainWindow::setActiveDocument ( )
     kDebug() << "Setting the document in the main widnow";
     Document *activeDocument = DocumentManager::self()->activeDocument();
     
+    _graphVisualEditor->setActiveDocument();
+    _GraphLayers->setActiveDocument();
+    
     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
                 activeDocument->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
     
@@ -374,7 +373,7 @@ void MainWindow::setActiveDocument ( )
 //     connect( engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
 //     connect( engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
 
-    _GraphLayers->populate();
+    
 }
 
 void MainWindow::releaseDocument ( Document* d ){

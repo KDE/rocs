@@ -68,20 +68,21 @@ QGraphicsView* GraphVisualEditor::view() const {
 }
 
 void GraphVisualEditor::setActiveDocument( ) {
-    kDebug() << "Setting the document in the editor";
-    if ( _document ==  DocumentManager::self()->activeDocument()) {
-        return;
-    }else if ( _document ){
+    if ( _document !=  DocumentManager::self()->activeDocument()) {
         releaseDocument();
     }
-
     _document = DocumentManager::self()->activeDocument();
+    _scene->setActiveDocument();
     
     connect(_document , SIGNAL(activeDataStructureChanged(DataStructure*)), 
             this ,       SLOT  (setActiveGraph(DataStructure*)));
 }
 
 void GraphVisualEditor::releaseDocument() {
+    if (!_document){
+        return;
+    }
+    
     _scene->clear();
     foreach(DataStructure *ds, _document->dataStructures()){
        ds->disconnect(this);
