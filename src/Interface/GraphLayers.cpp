@@ -51,6 +51,7 @@ void GraphLayers::resizeEvent(QResizeEvent* event)
 }
 
 void GraphLayers::populate() {
+    kDebug() << "Starting to populate the layers";
     for ( int i = 1; i < widget()->layout()->count(); ++i) {
         widget()->layout()->itemAt(i)->widget()->deleteLater();
     }
@@ -59,11 +60,16 @@ void GraphLayers::populate() {
     }
 
     Document *gd = DocumentManager::self()->activeDocument();
-    connect(gd, SIGNAL(dataStructureCreated(DataStructure*)), this, SLOT(addGraph(DataStructure*)),Qt::UniqueConnection);
+    connect(gd, SIGNAL(dataStructureCreated(DataStructure*)), 
+            this, SLOT(addGraph(DataStructure*)),Qt::UniqueConnection);
+    
+    connect(this, SIGNAL(createGraph(QString)), 
+            gd, SLOT(addDataStructure(QString)), Qt::UniqueConnection);
 
     foreach(DataStructure *s, gd->dataStructures()){
 	  addGraph(s);
     }
+    kDebug() << "Finished Populating";
 }
 
 void GraphLayers::btnADDClicked() {

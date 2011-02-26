@@ -366,10 +366,7 @@ void MainWindow::setActiveDocument ( )
     
     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
                 activeDocument->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
-
-    connect(_GraphLayers, SIGNAL(createGraph(QString)),
-            activeDocument, SLOT(addDataStructure(QString)));
-
+    
 //     connect(this, SIGNAL(startEvaluation()),
 //             engine(), SLOT(start()));
 

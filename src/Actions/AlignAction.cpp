@@ -28,7 +28,6 @@ AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, QWid
         : KAction(KIcon(), tooltip, parent) {
     m_orientation = o;
     connect(this, SIGNAL(triggered()), this, SLOT(align()));
-    kDebug() << " Allign Action Created!";
     switch (o) {
       case Left :    setIcon(KIcon("rocsallignleft"));   break;
       case  Right :  setIcon(KIcon("rocsallignright"));  break; 

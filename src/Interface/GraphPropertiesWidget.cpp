@@ -108,19 +108,15 @@ void GraphPropertiesWidget::on__activateGraph_toggled(bool b) {
 
 void GraphPropertiesWidget::on__graphDelete_clicked() {
     bool createNewGraph = false;
-    bool isActive = false;
 
-    if (_graph == DocumentManager::self()->activeDocument()->activeDataStructure()){
-      isActive = true;
-    }
-
-    Document *gd = qobject_cast<Document*>(_graph->parent());
-
-    if (gd->dataStructures().size() == 1){
+    if (DocumentManager::self()->activeDocument()->dataStructures().size() == 1){
+        kDebug() << "Document size = zero, create a new data structure.";
         createNewGraph = true;
+    }else{
+        kDebug() << "Size of the active document: " 
+        << DocumentManager::self()->activeDocument()->dataStructures().size();
     }
 
-    if (isActive) emit updateNeeded();
     radio()->group()->removeButton(radio());
 
     /*! remove this graph from the document. */
