@@ -124,7 +124,11 @@ void GenerateGraphWidget::generateMesh()
       return;
     }
 
-    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure("Mesh Graph");
+    // use active data structure iff empty
+    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    if (graph->dataList().size()>0)
+        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Mesh Graph") );
+
     int n = numberOfNodes_;
 
     // create mesh of NxN points
@@ -156,7 +160,12 @@ void GenerateGraphWidget::generateStar()
     if ( !graphDoc_ ){
       return;
     }
-    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Star Graph") );
+
+    // use active data structure iff empty
+    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    if (graph->dataList().size()>0)
+        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Star Graph") );
+
     int n = numberOfNodes_;
 
     // create mesh of NxN points
@@ -187,7 +196,10 @@ void GenerateGraphWidget::generateCircle()
         return;
     }
 
-    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Ring Graph") );
+    // use active data structure iff empty
+    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    if (graph->dataList().size()>0)
+        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Ring Graph") );
 
     int n = numberOfNodes_;
 
@@ -233,7 +245,10 @@ void GenerateGraphWidget::generateRandomGraph()
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
     // put generated random graph at whiteboard
-    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
+    // use active data structure iff empty
+    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    if (graph->dataList().size()>0)
+        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
 
     // put nodes at whiteboard as generated
     QMap<int, Data*> nodes;
