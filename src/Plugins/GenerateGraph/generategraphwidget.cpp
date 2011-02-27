@@ -24,6 +24,7 @@
 #include <DocumentManager.h>
 
 #include <cmath>
+#include <ctime>
 
 #include <KLocale>
 
@@ -33,12 +34,21 @@
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QSpinBox>
-
 #include <QtCore/QMap>
 #include <QtCore/QPair>
 
-class QPushButton;
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/iteration_macros.hpp>
+#include <boost/graph/random.hpp>
+#include <boost/graph/random_layout.hpp>
+#include <boost/graph/topology.hpp>
+#include <boost/random/mersenne_twister.hpp>
 
+
+//TODO output usefull error message
+namespace boost { void throw_exception( std::exception const & ) {} } // do noop on exception
+
+class QPushButton;
 
 GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     :   QDialog(parent),
@@ -56,20 +66,21 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     comboSelectGraphType->insertItem(MESH, i18n("Mesh Graph"));
     comboSelectGraphType->insertItem(CIRCLE, i18n("Circle Graph"));
     comboSelectGraphType->insertItem(STAR, i18n("Star Graph"));
+    comboSelectGraphType->insertItem(RANDOM, i18n("Random Graph"));
 
     QObject::connect(comboSelectGraphType, SIGNAL(activated(int)), this, SLOT(setOptionsForGraphType(int)));
 
-        // Buttons
+    // Buttons
     QPushButton* buttonGenerateGraph = new QPushButton(i18n("generate"));
     connect( buttonGenerateGraph, SIGNAL(clicked()), this, SLOT(generateGraph()));
 
-        // make layout
+    // make layout
     gridLayout_ = new QGridLayout();
 
-        // generate options GUI
+    // generate options GUI
     graphOptionsWidget_ = new QWidget();
     QLabel *labelNumberNodes = new QLabel(this);
-    labelNumberNodes->setText(i18n("Number of Nodes:"));
+    labelNumberNodes->setText( i18n("Number of Nodes:") );
     QSpinBox *inputNumberNodes = new QSpinBox();
 
     connect( inputNumberNodes, SIGNAL(valueChanged(int)), this, SLOT(setNumberOfNodes(int)));
@@ -101,6 +112,7 @@ void GenerateGraphWidget::generateGraph()
         case MESH:   generateMesh();   break;
         case CIRCLE: generateCircle(); break;
         case STAR:   generateStar();   break;
+        case RANDOM: generateRandomGraph();   break;
         default:     break;
     }
 }
@@ -144,7 +156,7 @@ void GenerateGraphWidget::generateStar()
     if ( !graphDoc_ ){
       return;
     }
-    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure("Star Graph");
+    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Star Graph") );
     int n = numberOfNodes_;
 
     // create mesh of NxN points
@@ -175,7 +187,7 @@ void GenerateGraphWidget::generateCircle()
         return;
     }
 
-    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure("Ring Graph");
+    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Ring Graph") );
 
     int n = numberOfNodes_;
 
@@ -195,5 +207,53 @@ void GenerateGraphWidget::generateCircle()
 
     close();
 }
+
+void GenerateGraphWidget::generateRandomGraph()
+{
+    int n = numberOfNodes_;
+
+    BoostGraph randomGraph;
+    boost::mt19937 gen; //FIXME seed must be set dynamically and predictable
+    int seed = std::clock();
+    gen.seed (static_cast<unsigned int>(seed));
+    qDebug() << "Seed for random graph generation: " << seed;
+
+    //TODO make number of edges editable
+    boost::generate_random_graph<BoostGraph,boost::mt19937>(
+        randomGraph,
+        n,
+        n*2,   //TODO allow number of edges to be set
+        gen,
+        false   //TODO allow self-connections by menu options
+    );
+
+    // generate distribution topology and apply
+    boost::rectangle_topology< boost::mt19937 > topology(gen, 0, 0, 600, 600);
+    PositionMap positionMap = boost::get(&VertexProperties::point, randomGraph);
+    boost::random_graph_layout(randomGraph, positionMap, topology);
+
+    // put generated random graph at whiteboard
+    DataStructure* graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
+
+    // put nodes at whiteboard as generated
+    QMap<int, Data*> nodes;
+    int index=0;
+    BGL_FORALL_VERTICES(v, randomGraph, BoostGraph) {
+        randomGraph[v].index = index++;
+        nodes[randomGraph[v].index] = graph->addData(
+            QString("%1").arg(randomGraph[v].index),
+            QPointF(randomGraph[v].point[0],randomGraph[v].point[1])
+        );
+    }
+    BGL_FORALL_EDGES(e, randomGraph, BoostGraph) {
+        graph->addPointer (
+            nodes[randomGraph[boost::source<>(e, randomGraph)].index],
+            nodes[randomGraph[boost::target<>(e, randomGraph)].index]
+        );
+    }
+
+    close();
+}
+
 
 #include "generategraphwidget.moc"

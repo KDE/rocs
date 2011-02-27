@@ -23,6 +23,10 @@
 
 #include <QDialog>
 
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/topology.hpp>
+
+
 class QGridLayout;
 class QWidget;
 class Document;
@@ -32,7 +36,24 @@ class GenerateGraphWidget :
 {
     Q_OBJECT
 
-        // used for graph selection
+    typedef boost::square_topology<>::point_type Point;
+
+    struct VertexProperties
+    {
+        std::size_t index;
+        Point point;
+    };
+
+    typedef boost::adjacency_list<
+        boost::listS,
+        boost::listS,
+        boost::bidirectionalS,
+        VertexProperties
+    > BoostGraph;
+
+    typedef boost::property_map<BoostGraph, Point VertexProperties::*>::type PositionMap;
+
+    // used for graph selection
     enum GraphType {
         MESH,
         CIRCLE,
@@ -61,6 +82,7 @@ class GenerateGraphWidget :
         void generateStar();
         void generateCircle();
         void generateMesh();
+        void generateRandomGraph();
 
         Document* graphDoc_;
         static const double PI_ = 3.14159265358979323846;
