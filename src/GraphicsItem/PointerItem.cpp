@@ -59,7 +59,7 @@ PointerItem::~PointerItem() {
 }
 
 void PointerItem::connectSignals() {
-    connect(_pointer, SIGNAL(changed()), this, SLOT(updatePos()));
+    connect (_pointer, SIGNAL(changed()), this, SLOT(updatePos()));
     connect (_pointer, SIGNAL(removed()), this, SLOT(remove()));
 }
 
@@ -77,7 +77,7 @@ void PointerItem::remove() {
 }
 
 void PointerItem::updatePos() {
-    if (!_pointer || _pointer->from() || _pointer->to()){
+    if (!_pointer || !_pointer->from() || !_pointer->to()){
         return;
     }
     QLine q(_pointer->from()->x(), _pointer->from()->y(),    _pointer->to()->x(),  _pointer->to()->y());

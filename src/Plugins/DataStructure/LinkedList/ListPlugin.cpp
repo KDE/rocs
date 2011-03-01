@@ -69,7 +69,6 @@ QGraphicsItem* Rocs::ListPlugin::dataItem(Data* node ) const
 
 QGraphicsItem* Rocs::ListPlugin::pointerItem ( Pointer* edge) const
 {
-    qDebug() <<"Tipo do bixo ativo" << DocumentManager::self()->activeDocument()->activeDataStructure()->metaObject()->className();
     return new LinkedListPointerItem (edge);
 }
 

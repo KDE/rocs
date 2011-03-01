@@ -77,10 +77,6 @@ QPolygonF LinkedListPointerItem::createPath(const QPointF& pos1, const QPointF& 
 }
 
 QPainterPath LinkedListPointerItem::createCurves()  {
-    if (pointer()->from() == 0 || pointer()->to() == 0){
-        return QPainterPath();
-    }
-
     QPointF Pos1(pointer()->from()->x()+pointer()->to()->width()*40 + 20, pointer()->from()->y());
     QPointF Pos2(pointer()->to()->x()-pointer()->to()->width()*40 - 20, pointer()->to()->y());
 
