@@ -59,7 +59,6 @@ DataStructure* ListPlugin::changeToDataStructure ( DataStructure* graph, Documen
 DataStructure* ListPlugin::createDataStructure ( Document* parent )
 {
   return new ListStructure(parent);
-//     return new Graph(parent);
 }
 
 QGraphicsItem* Rocs::ListPlugin::dataItem(Data* node ) const
