@@ -24,24 +24,27 @@
 #include <QDebug>
 
 Rocs::ListStructure::ListStructure ( Document* parent ) : DataStructure ( parent ) {
-  qDebug() << "Creating  a list structure";
-  Data * p = addData("P");
-  p->setShowName(true);
-  p->setShowValue(false);
-  //setBegin(p);
   _animationGroup = new QParallelAnimationGroup(this);
+  createFront();
   arrangeNodes();
 }
 
 Rocs::ListStructure::ListStructure(DataStructure& other, Document * parent): DataStructure(other, parent)
 {
   _animationGroup = new QParallelAnimationGroup(this);
-  _front = static_cast<ListNode*>(addData("P"));
+  createFront();
   arrangeNodes();
 }
 
 Rocs::ListStructure::~ListStructure() {
 
+}
+
+void Rocs::ListStructure::createFront()
+{
+  _front = static_cast<ListNode*>(addData("P"));
+  _front->setShowName(true);
+  _front->setShowValue(false);
 }
 
 Pointer* Rocs::ListStructure::addPointer ( Data* from, Data* to ) {

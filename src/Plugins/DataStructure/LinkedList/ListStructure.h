@@ -51,6 +51,7 @@ private:
 
     ListNode * _front;
     QParallelAnimationGroup* _animationGroup;
+    void createFront();
 };
 }
 #endif // LISTSTRUCTURE_H
