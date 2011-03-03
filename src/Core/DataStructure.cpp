@@ -120,19 +120,39 @@ Data* DataStructure::addData(QString name, QPointF pos){
     return 0;
 }
 
-Pointer* DataStructure::addPointer(Data *from,Data *to) {
+Pointer* DataStructure::addPointer(Data *from, Data *to) {
     if (d->_readOnly) return 0;
 
-    if ( from == 0 || to == 0 ) {      return 0;   }
-
-    if ( ( from == to) && ( !directed() ) ) {
-        return 0;
-    } else if ((from->pointers(to).size() >= 1)&&(!directed())) {
-        return 0;
-    } else if ((d->_data.indexOf(from) == -1) || (d->_data.indexOf(to) == -1)) {
+    // do not create if data invalid
+    if ( from == 0 || to == 0 ) {
         return 0;
     }
-    //TODO check for double edges in one direction!
+    if ((d->_data.indexOf(from) == -1) || (d->_data.indexOf(to) == -1)) {
+        return 0;
+    }
+
+    // for un-directed graphs, only
+    if (!directed()) {
+        // self-edges
+        if (from == to) {
+            return 0;
+        }
+        // back-edges
+        if ( from->pointers(to).size() >= 1 ) {
+            return 0;
+        }
+    }
+
+    // for directed graphs, only
+    if (directed()) {
+        // do not add double edges
+        PointerList list = from->out_pointers();
+        foreach (Pointer *tmp, list) {
+            if (tmp->to() == to) {
+                return 0;
+            }
+        }
+    }
 
     Pointer *e  = new Pointer(this, from, to);
     d->_pointers.append( e );

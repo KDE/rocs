@@ -68,7 +68,7 @@ Pointer::Pointer(DataStructure *parent, Data *from, Data *to) :
         connect(to, SIGNAL(changed()), this, SIGNAL(changed()));
     }
 
-    d->relativeIndex  = d->to-> pointers(d->from).size();
+    d->relativeIndex  = d->to->pointers(d->from).size();
     d->showName       = true;
     d->showValue      = true;
     d->style          = "solid";
