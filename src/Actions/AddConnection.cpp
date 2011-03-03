@@ -50,10 +50,10 @@ AddConnectionAction::~AddConnectionAction() {
 
 void AddConnectionAction::executePress(QPointF pos) {
     if (_working) return;
-    if ( !  DocumentManager::self()->activeDocument()->activeDataStructure() 
+    if ( !  DocumentManager::self()->activeDocument()->activeDataStructure()
          || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly())
      return;
-    
+
     _working = true;
     _from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos));
 

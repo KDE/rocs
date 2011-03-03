@@ -24,13 +24,13 @@
 #include "Document.h"
 #include "DataStructure.h"
 
-Rocs::GraphStructure::GraphStructure ( Document* parent ) : DataStructure ( parent ),
-_directed(false) {
+Rocs::GraphStructure::GraphStructure ( Document* parent ) : DataStructure ( parent ) {
 
 }
 
-Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): DataStructure(other, parent){
-
+Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): DataStructure(other, parent)
+{
+    setDirected(false);
 }
 
 
@@ -78,6 +78,12 @@ QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
 
 void Rocs::GraphStructure::setDirected(bool directed)
 {
-    _directed = directed;
+    DataStructure::setDirected(directed);
     qDebug() << "Implement the rest...";
+    //TODO redraw, set layout
+}
+
+bool Rocs::GraphStructure::directed()
+{
+    return DataStructure::directed();
 }

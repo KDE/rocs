@@ -92,7 +92,7 @@ void DataStructure::setReadOnly(bool r){
     d->_readOnly = r;
 }
 
-void DataStructure::remove() {  
+void DataStructure::remove() {
   d->_document->remove(this);
   deleteLater();
 }
@@ -125,14 +125,14 @@ Pointer* DataStructure::addPointer(Data *from,Data *to) {
 
     if ( from == 0 || to == 0 ) {      return 0;   }
 
-
-    if ( ( from == to) && ( !d->_directed ) ) {
+    if ( ( from == to) && ( !directed() ) ) {
         return 0;
-    } else if ((from->pointers(to).size() >= 1)&&(!d->_directed)) {
+    } else if ((from->pointers(to).size() >= 1)&&(!directed())) {
         return 0;
     } else if ((d->_data.indexOf(from) == -1) || (d->_data.indexOf(to) == -1)) {
         return 0;
     }
+    //TODO check for double edges in one direction!
 
     Pointer *e  = new Pointer(this, from, to);
     d->_pointers.append( e );
@@ -298,4 +298,14 @@ void DataStructure::setEngine(	QScriptEngine *engine ) {
     //   }
        d->_engine->globalObject().setProperty(g->name(), array);
    }
+}
+
+bool DataStructure::directed()
+{
+    return d->_directed;
+}
+
+void DataStructure::setDirected(bool directed)
+{
+    d->_directed = directed;
 }

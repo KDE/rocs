@@ -92,7 +92,7 @@ void GraphScene::setActiveDocument() {
         releaseDocument();
         return;
     }
-    
+
     _graphDocument = gd;
 
     setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
