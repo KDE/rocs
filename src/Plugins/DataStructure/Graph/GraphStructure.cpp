@@ -24,7 +24,10 @@
 #include "Document.h"
 #include "DataStructure.h"
 
-Rocs::GraphStructure::GraphStructure ( Document* parent ) : DataStructure ( parent ) {
+Rocs::GraphStructure::GraphStructure ( Document* parent ) :
+    DataStructure ( parent ),
+    _directed(false)
+{
 
 }
 
@@ -37,7 +40,6 @@ Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): Da
 Rocs::GraphStructure::~GraphStructure() {
 
 }
-
 
 QScriptValue Rocs::GraphStructure::list_nodes() {
     QScriptValue array = engine()->newArray();
@@ -78,7 +80,7 @@ QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
 
 void Rocs::GraphStructure::setDirected(bool directed)
 {
-    DataStructure::setDirected(directed);
+    _directed = directed;
 
     foreach(Pointer* pointer, pointers()) {
        pointer->emitChangedSignal();
@@ -87,5 +89,44 @@ void Rocs::GraphStructure::setDirected(bool directed)
 
 bool Rocs::GraphStructure::directed()
 {
-    return DataStructure::directed();
+    return _directed;
+}
+
+Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
+    if (from->dataStructure()->readOnly()) return 0;
+
+    // do not create if data invalid
+    if ( from == 0 || to == 0 ) {
+        return 0;
+    }
+
+    // for un-directed graphs, only
+    Rocs::GraphStructure* graph = qobject_cast<Rocs::GraphStructure*>( from->dataStructure() );
+
+    if (!graph->directed()) {
+        // self-edges
+        if (from == to) {
+            return 0;
+        }
+        // back-edges
+        if ( from->pointers(to).size() >= 1 ) {
+            return 0;
+        }
+    }
+
+    // for directed graphs, only
+    if (graph->directed()) {
+        // do not add double edges
+        PointerList list = from->out_pointers();
+        foreach (Pointer *tmp, list) {
+            if (tmp->to() == to) {
+                return 0;
+            }
+        }
+    }
+
+    Pointer *e  = new Pointer(from->dataStructure(), from, to);
+    DataStructure::addPointer(e);
+
+    return e;
 }

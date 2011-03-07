@@ -19,6 +19,7 @@
 */
 
 #include "OrientedEdgeItem.h"
+#include "GraphStructure.h"
 
 #include "NodeItem.h"
 #include "GraphScene.h"
@@ -38,6 +39,7 @@
 #include <KDebug>
 #include <math.h>
 #include <QGraphicsSimpleTextItem>
+
 
 OrientedEdgeItem::OrientedEdgeItem( Pointer *edge, QGraphicsItem *parent)
         : PointerItem(edge, parent)
@@ -85,6 +87,7 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
     return p;
 }
 
+
 QPainterPath OrientedEdgeItem::createCurves() {
     if ( !pointer() ) return QPainterPath();
 
@@ -105,7 +108,8 @@ QPainterPath OrientedEdgeItem::createCurves() {
         qSwap(Pos1, Pos2);
     }
 
-    if (pointer()->dataStructure()->directed()==false){
+    Rocs::GraphStructure* graph = qobject_cast<Rocs::GraphStructure*>( pointer()->dataStructure() );
+    if (graph->directed()==false){
         QPainterPath p;
         p.moveTo(Pos1);
         p.lineTo(Pos2);

@@ -72,10 +72,7 @@ public:
     const QList<Pointer*> pointers() const;
     const QList<Group*> groups() const;
 
-    virtual bool directed();
-
 protected:
-    virtual void setDirected(bool directed);
 
 public  slots:
 
@@ -131,6 +128,7 @@ signals:
 
 protected:
     Data* addData(Data *data);
+    Pointer* addPointer(Pointer *pointer);
 
 private:
     DataStructurePrivate *d;
@@ -139,7 +137,6 @@ private:
 class DataStructurePrivate{
 public:
     DataStructurePrivate(){}
-    bool _directed;
 
     QList<Data*> _data;
     QList<Pointer*> _pointers;

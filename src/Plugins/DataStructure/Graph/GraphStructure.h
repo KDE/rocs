@@ -32,6 +32,9 @@ class GraphStructure : public DataStructure {
     GraphStructure(DataStructure& other, Document *parent);
 
     virtual ~GraphStructure();
+
+    Pointer* addPointer(Data *from, Data *to);
+
   public slots:
     QScriptValue list_nodes();
     QScriptValue list_edges();
@@ -42,6 +45,9 @@ class GraphStructure : public DataStructure {
 //     QScriptValue end_nodes();
     void setDirected(bool directed);
     bool directed();
+
+  private:
+    bool _directed;
 };
 }
 #endif // GRAPHSTRUCTURE_H

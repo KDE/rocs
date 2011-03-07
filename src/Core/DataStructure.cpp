@@ -30,7 +30,6 @@
 #include <QColor>
 
 DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStructurePrivate){
-    d->_directed = false;
     d->_automate = false;
     d->_readOnly = false;
     d->_document = parent;
@@ -112,6 +111,13 @@ Data* DataStructure::addData(Data *data){
     return data;
 }
 
+Pointer* DataStructure::addPointer(Pointer *pointer){
+    d->_pointers.append( pointer );
+    emit pointerCreated(pointer);
+    connect (pointer, SIGNAL(changed()), this, SIGNAL(changed()));
+    return pointer;
+}
+
 Data* DataStructure::addData(QString name, QPointF pos){
     if (Data *data = addData(name)){
         data->setPos(pos.x(), pos.y());
@@ -131,27 +137,13 @@ Pointer* DataStructure::addPointer(Data *from, Data *to) {
         return 0;
     }
 
-    // for un-directed graphs, only
-    if (!directed()) {
-        // self-edges
-        if (from == to) {
-            return 0;
-        }
-        // back-edges
-        if ( from->pointers(to).size() >= 1 ) {
-            return 0;
-        }
+    // self-edges
+    if (from == to) {
+        return 0;
     }
-
-    // for directed graphs, only
-    if (directed()) {
-        // do not add double edges
-        PointerList list = from->out_pointers();
-        foreach (Pointer *tmp, list) {
-            if (tmp->to() == to) {
-                return 0;
-            }
-        }
+    // back-edges
+    if ( from->pointers(to).size() >= 1 ) {
+        return 0;
     }
 
     Pointer *e  = new Pointer(this, from, to);
@@ -318,14 +310,4 @@ void DataStructure::setEngine(	QScriptEngine *engine ) {
     //   }
        d->_engine->globalObject().setProperty(g->name(), array);
    }
-}
-
-bool DataStructure::directed()
-{
-    return d->_directed;
-}
-
-void DataStructure::setDirected(bool directed)
-{
-    d->_directed = directed;
 }
