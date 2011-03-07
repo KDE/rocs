@@ -72,8 +72,9 @@ public:
     const QList<Pointer*> pointers() const;
     const QList<Group*> groups() const;
 
-protected:
     virtual bool directed();
+
+protected:
     virtual void setDirected(bool directed);
 
 public  slots:

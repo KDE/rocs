@@ -79,8 +79,10 @@ QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
 void Rocs::GraphStructure::setDirected(bool directed)
 {
     DataStructure::setDirected(directed);
-    qDebug() << "Implement the rest...";
-    //TODO redraw, set layout
+
+    foreach(Pointer* pointer, pointers()) {
+       pointer->emitChangedSignal();
+    }
 }
 
 bool Rocs::GraphStructure::directed()

@@ -85,9 +85,9 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
     return p;
 }
 
-QPainterPath OrientedEdgeItem::createCurves() {  
+QPainterPath OrientedEdgeItem::createCurves() {
     if ( !pointer() ) return QPainterPath();
-    
+
     if (pointer()->from() == 0 || pointer()->to() == 0){
 	pointer()->self_remove();
         return QPainterPath();
@@ -98,18 +98,19 @@ QPainterPath OrientedEdgeItem::createCurves() {
     if ( _loop ) return createLoop(Pos1);
 
     QPointF Pos2(pointer()->to()->x(), pointer()->to()->y());
+
     QPolygonF arrow = createArrow(Pos1,  Pos2);
 
     if (Pos1.x() > Pos2.x()) {
         qSwap(Pos1, Pos2);
     }
 
-//     if (! pointer()->dataStructure()->directed()){
-// 	QPainterPath p;
-// 	p.moveTo(Pos1);
-// 	p.lineTo(Pos2);
-// 	return p;
-//     }
+    if (pointer()->dataStructure()->directed()==false){
+        QPainterPath p;
+        p.moveTo(Pos1);
+        p.lineTo(Pos2);
+        return p;
+    }
 
     qreal x = Pos2.x() - Pos1.x();
     qreal y = Pos2.y() - Pos1.y();
@@ -139,14 +140,17 @@ QPainterPath OrientedEdgeItem::createCurves() {
     p.moveTo(Pos1);
     p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
 
+
     /// puts the arrow on its correct position
     QPointF middle = p.pointAtPercent(0.5);
 
     x = Pos1.x() + (Pos2.x() - Pos1.x())/2;
     y = Pos1.y() + (Pos2.y() - Pos1.y())/2;
     QLineF line2(QPointF(x,y) , middle);
+
     arrow.translate(+line2.dx() , +line2.dy());
     p.addPolygon(arrow);
+
 
     return p;
 }
