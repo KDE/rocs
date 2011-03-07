@@ -18,7 +18,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "OrientedEdgeItem.h"
+#include "EdgeItem.h"
 #include "GraphStructure.h"
 
 #include "NodeItem.h"
@@ -41,19 +41,19 @@
 #include <QGraphicsSimpleTextItem>
 
 
-OrientedEdgeItem::OrientedEdgeItem( Pointer *edge, QGraphicsItem *parent)
+EdgeItem::EdgeItem( Pointer *edge, QGraphicsItem *parent)
         : PointerItem(edge, parent)
 {
     _loop = (pointer()->from() == pointer()->to());
     setPath(createCurves());
 }
 
-OrientedEdgeItem::~OrientedEdgeItem() {
+EdgeItem::~EdgeItem() {
 //  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
   kDebug() << "Oriented Edge Removed";
 }
 
-QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const {
+QPolygonF EdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const {
     QLineF line(Pos1, Pos2);
     qreal angle = ::acos(line.dx() / line.length());
     if (line.dy() >= 0) {
@@ -75,7 +75,7 @@ QPolygonF OrientedEdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2
     return arrow;
 }
 
-QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
+QPainterPath EdgeItem::createLoop(QPointF pos) const {
     if ( !pointer() ) return QPainterPath();
     QPainterPath p;
     DataStructure *g = qobject_cast<DataStructure*>(pointer()->parent());
@@ -88,7 +88,7 @@ QPainterPath OrientedEdgeItem::createLoop(QPointF pos) const {
 }
 
 
-QPainterPath OrientedEdgeItem::createCurves() {
+QPainterPath EdgeItem::createCurves() {
     if ( !pointer() ) return QPainterPath();
 
     if (pointer()->from() == 0 || pointer()->to() == 0){
@@ -159,4 +159,4 @@ QPainterPath OrientedEdgeItem::createCurves() {
     return p;
 }
 
-#include "OrientedEdgeItem.moc"
+#include "EdgeItem.moc"

@@ -18,8 +18,8 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef ORIENTEDEDGEITEM_H
-#define ORIENTEDEDGEITEM_H
+#ifndef EDGEITEM_H
+#define EDGEITEM_H
 
 #include <QGraphicsLineItem>
 #include <QPointer>
@@ -33,14 +33,14 @@ class QGraphicsSimpleTextItem;
 /*! \brief the Edge drawing on screen.
   long explanation here...
 */
-class OrientedEdgeItem : public PointerItem {
+class EdgeItem : public PointerItem {
     Q_OBJECT
 public:
     /*! default constructor
     \param node the libgraph::Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
-    explicit OrientedEdgeItem(Pointer *edge, QGraphicsItem *parent = 0);
-    virtual ~OrientedEdgeItem();
+    explicit EdgeItem(Pointer *edge, QGraphicsItem *parent = 0);
+    virtual ~EdgeItem();
 
 private:
     bool _loop;
