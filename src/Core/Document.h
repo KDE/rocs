@@ -65,8 +65,8 @@ public slots:
 
     void setXLeft(qreal xLeftValue);
     void setXRight(qreal xRightValue);
-    void setYTop(qreal yLeftValue);
-    void setYBottom(qreal yRightValue);
+    void setYTop(qreal yTopValue);
+    void setYBottom(qreal yButtomValue);
 
     qreal xLeft() const;
     qreal yTop() const;
@@ -75,6 +75,12 @@ public slots:
 
     qreal height() const;
     qreal width() const;
+
+    /**
+     * estimates by looking at all node positions if a resize of the document is necessary.
+     */
+    void resizeDocumentRequestEstimation();
+
 
     /**
      * tests if given point is containted at document layer
@@ -89,6 +95,7 @@ signals:
     void heightChanged(qreal height);
     void widthChanged(qreal width);
     void activeDataStructureChanged(DataStructure* g);
+    void bordersOccupied();
 
 private:
     DocumentPrivate *d;

@@ -157,7 +157,7 @@ void Document::setYTop(qreal yTopValue)
 
 void Document::setYBottom(qreal yBottomValue)
 {
-    d->_xLeft = yBottomValue;
+    d->_yBottom = yBottomValue;
 }
 
 bool Document::isPointAtDocument(qreal x, qreal y)  const {
@@ -169,6 +169,35 @@ bool Document::isPointAtDocument(qreal x, qreal y)  const {
 
     return true;
 }
+
+void Document::resizeDocumentRequestEstimation()
+{
+    int size = dataStructures().size();
+    int border = 100;
+
+    for (int i = 0; i < size; i++) {
+        foreach( Data* n,  dataStructures().at(i)->dataList() ){
+            if (n->x() < d->_xLeft+border) {
+                setXLeft(d->_xLeft-border);
+                emit bordersOccupied();
+            }
+            if (n->x() > d->_xRight-border) {
+                setXRight(d->_xRight+border);
+                emit bordersOccupied();
+            }
+            if (n->y() < d->_yTop+border) {
+                setYTop(d->_yTop-border);
+                emit bordersOccupied();
+            }
+            if (n->y() > d->_yBottom-border) {
+                setYBottom(d->_yBottom+border);
+                emit bordersOccupied();
+            }
+        }
+    }
+    qDebug() << "resized";
+}
+
 
 bool Document::isPointAtDocument(QPointF point)  const {
     return isPointAtDocument(point.x(), point.y());

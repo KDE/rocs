@@ -58,6 +58,7 @@ public slots:
     void connectGraphSignals(DataStructure *g);
     void createItems();
     void setActiveDocument();
+    void resizeScene();
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
@@ -73,6 +74,7 @@ private:
     AbstractAction *_action;
     QMultiHash<DataStructure*, QGraphicsItem* > _hashGraphs;
     QList<QGraphicsItem*> _hidedEdges;
+    QGraphicsRectItem *_whiteboard;
     bool _hideEdges;
     DataPropertiesWidget *_datumPropertiesWidget;
     PointerPropertiesWidget *_pointerPropertiesWidget;

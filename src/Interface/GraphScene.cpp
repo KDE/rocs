@@ -72,10 +72,10 @@ void GraphScene::updateAfter(QGraphicsItem *item) {
 
 void GraphScene::hideGraph(DataStructure* g, bool visibility)
 {
-  QList<QGraphicsItem*> list = _hashGraphs.values(g);
-  foreach(QGraphicsItem *i, list){
-    i->setVisible(visibility);
-  }
+    QList<QGraphicsItem*> list = _hashGraphs.values(g);
+    foreach(QGraphicsItem *i, list){
+        i->setVisible(visibility);
+    }
 }
 
 
@@ -96,10 +96,10 @@ void GraphScene::setActiveDocument() {
     _graphDocument = gd;
 
     setSceneRect(QRectF(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() ));
-    QGraphicsRectItem *n = new QGraphicsRectItem(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() );
-    n->setFlag(QGraphicsItem::ItemIsSelectable, false);
-    n->setZValue(-1000);
-    addItem(n);
+    _whiteboard = new QGraphicsRectItem(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() );
+    _whiteboard->setFlag(QGraphicsItem::ItemIsSelectable, false);
+    _whiteboard->setZValue(-1000);
+    addItem(_whiteboard);
 
     int size = gd->dataStructures().size();
     for (int i = 0; i < size; i++) {
@@ -110,9 +110,12 @@ void GraphScene::setActiveDocument() {
     connect( gd, SIGNAL(dataStructureCreated(DataStructure*)),
              this, SLOT(connectGraphSignals(DataStructure*)));
 
-    createItems();
+    connect( gd, SIGNAL(bordersOccupied()),
+             this, SLOT(resizeScene()));
 
+    createItems();
 }
+
 void GraphScene::createItems(){
     foreach(DataStructure *g, _graphDocument->dataStructures()){
         foreach( Data *d, g->dataList()) createData( d );
@@ -126,12 +129,12 @@ void GraphScene::connectGraphSignals(DataStructure *g){
 }
 
 void GraphScene::releaseDocument(){
-  _graphDocument->disconnect(this);
-  disconnect(_graphDocument);
-  foreach(DataStructure *ds, _graphDocument->dataStructures()){
-    ds->disconnect(this);
-    disconnect(ds);
-  }
+    _graphDocument->disconnect(this);
+    disconnect(_graphDocument);
+    foreach(DataStructure *ds, _graphDocument->dataStructures()){
+        ds->disconnect(this);
+        disconnect(ds);
+    }
 }
 
 
@@ -149,7 +152,7 @@ QGraphicsItem *GraphScene::createEdge(Pointer *e) {
 }
 
 void GraphScene::mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent){
-  mouseEvent->accept();
+    mouseEvent->accept();
 }
 
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
@@ -230,4 +233,10 @@ void GraphScene::updateDocument() {
     for (int i = 0; i < size; i++) {
         updateGraph( _graphDocument->dataStructures().at(i) );
     }
+}
+
+void GraphScene::resizeScene() {
+    _whiteboard->setRect(
+        QRectF(_graphDocument->xLeft(),_graphDocument->yTop(), _graphDocument->xRight()-_graphDocument->xLeft(), _graphDocument->yBottom()-_graphDocument->yTop())
+    );
 }

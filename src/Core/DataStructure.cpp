@@ -23,6 +23,7 @@
 #include "QtScriptBackend.h"
 #include "Group.h"
 #include "Document.h"
+#include "DocumentManager.h"
 #include "DynamicPropertiesList.h"
 #include "ConcurrentHelpClasses.h"
 
@@ -41,6 +42,8 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_dataValuesVisible = true;
     d->_pointerNamesVisible = false;
     d->_pointerValuesVisible = true;
+
+    connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentRequestEstimation()));
 }
 
 DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent), d(new DataStructurePrivate){
@@ -49,31 +52,32 @@ DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(p
     calcRelativeCenter();
 
     d->_pointerDefaultColor     = other.pointerDefaultColor();
-    d->_dataDefaultColor       =  other.dataDefaultColor();
-    d->_dataNamesVisible       = other.d->_dataNamesVisible;
-    d->_dataValuesVisible      = other.d->_dataValuesVisible;
+    d->_dataDefaultColor        = other.dataDefaultColor();
+    d->_dataNamesVisible        = other.d->_dataNamesVisible;
+    d->_dataValuesVisible       = other.d->_dataValuesVisible;
     d->_pointerNamesVisible     = other.d->_pointerNamesVisible;
     d->_pointerValuesVisible    = other.d->_pointerValuesVisible;
 
     QHash <Data*, Data* > dataTodata;
     foreach(Data* n, other.d->_data){
-      Data* newdata = addData(n->name());
-      newdata->setColor(n->color());
-      newdata->setValue(n->value());
-      newdata->setX(n->x());
-      newdata->setY(n->y());
-      newdata->setWidth(n->width());
-      dataTodata.insert(n, newdata);
-
+        Data* newdata = addData(n->name());
+        newdata->setColor(n->color());
+        newdata->setValue(n->value());
+        newdata->setX(n->x());
+        newdata->setY(n->y());
+        newdata->setWidth(n->width());
+        dataTodata.insert(n, newdata);
     }
     foreach(Pointer *e, other.d->_pointers){
-      Data* from =  dataTodata.value(e->from());
-      Data* to =  dataTodata.value(e->to());
+        Data* from =  dataTodata.value(e->from());
+        Data* to =  dataTodata.value(e->to());
 
-      Pointer* newPointer = addPointer(from, to);
-      newPointer->setColor(e->color());
-      newPointer->setValue(e->value());
+        Pointer* newPointer = addPointer(from, to);
+        newPointer->setColor(e->color());
+        newPointer->setValue(e->value());
     }
+
+    connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentRequestEstimation()));
 }
 
 
@@ -107,6 +111,8 @@ Data* DataStructure::addData(QString name) {
 Data* DataStructure::addData(Data *data){
     d->_data.append( data );
     emit dataCreated( data );
+
+    qDebug() << "add data";
     connect ( data, SIGNAL(changed()), this, SIGNAL(changed()));
     return data;
 }
