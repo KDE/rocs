@@ -21,6 +21,7 @@
 #define DOCUMENT_H
 
 #include <QList>
+#include <QPointF>
 #include <QObject>
 #include "rocslib_export.h"
 
@@ -31,14 +32,16 @@ class DocumentPrivate;
 class ROCSLIB_EXPORT Document : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(    qreal width READ width WRITE setWidth)
-    Q_PROPERTY(    qreal height READ height WRITE setHeight)
+    Q_PROPERTY(    qreal xLeft READ xLeft WRITE setXLeft)
+    Q_PROPERTY(    qreal xRight READ xRight WRITE setXRight)
+    Q_PROPERTY(    qreal yTop READ yTop WRITE setYTop)
+    Q_PROPERTY(    qreal yBottom READ yBottom WRITE setYBottom)
 
 public:
     enum Type {Simple = 0, Oriented};
 
-    Document(const QString& name, int width = 800, int heigth = 600, QObject *parent = 0);
-   Document(const Document& gd);
+    Document(const QString& name, qreal xLeft=-300, qreal xRight=300, qreal yTop=-300, qreal yBottom=300, QObject *parent = 0);
+    Document(const Document& gd);
     ~Document();
 
     bool isModified();
@@ -60,10 +63,24 @@ public slots:
     DataStructure *activeDataStructure() const ;
     void setActiveDataStructure(DataStructure *g);
 
-    void setHeight(qreal height);
+    void setXLeft(qreal xLeftValue);
+    void setXRight(qreal xRightValue);
+    void setYTop(qreal yLeftValue);
+    void setYBottom(qreal yRightValue);
+
+    qreal xLeft() const;
+    qreal yTop() const;
+    qreal xRight() const;
+    qreal yBottom() const;
+
     qreal height() const;
-    void setWidth(qreal width);
     qreal width() const;
+
+    /**
+     * tests if given point is containted at document layer
+     */
+    bool isPointAtDocument(qreal x, qreal y) const;
+    bool isPointAtDocument(QPointF point) const;
 
 signals:
     void dataStructureCreated( DataStructure *g);

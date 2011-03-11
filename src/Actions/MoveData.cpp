@@ -1,8 +1,8 @@
-
-/* This file is part of Rocs,
+/* This file is part of Rocs, a KDE EDU project
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
+   Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
    Rocs is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -61,29 +61,29 @@ void MoveDataAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return;
     }
-    if ((pos.x() < 0) || (pos.x() > DocumentManager::self()->activeDocument()->width())) {
-        if (( pos.y() > 0) && (pos.y() < DocumentManager::self()->activeDocument()->height())) {
-            _data -> setY(pos.y());
+    if (!DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
+        if (pos.x() < DocumentManager::self()->activeDocument()->xLeft()) {
+            pos.setX(DocumentManager::self()->activeDocument()->xLeft());
+        }
+        if (pos.x() > DocumentManager::self()->activeDocument()->xRight()) {
+            pos.setX(DocumentManager::self()->activeDocument()->xRight());
+        }
+        if (pos.y() < DocumentManager::self()->activeDocument()->yTop()) {
+            pos.setY(DocumentManager::self()->activeDocument()->yTop());
+        }
+        if (pos.y() > DocumentManager::self()->activeDocument()->yBottom()) {
+            pos.setY(DocumentManager::self()->activeDocument()->yBottom());
         }
     }
-    else if ((pos.y() < 0) || (pos.y() > DocumentManager::self()->activeDocument()->height())) {
-        if (( pos.x() > 0) && (pos.x() < DocumentManager::self()->activeDocument()->width())) {
-            _data -> setX(pos.x());
-        }
-    }
-    else {
-        _data -> setPos(pos.x(), pos.y());
-    }
+
+    _data -> setPos(pos.x(), pos.y());
 }
 
 void MoveDataAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
         return;
     }
-    if (!( (pos.x() < 0) 
-       || (pos.y() < 0) 
-       || (pos.x() > DocumentManager::self()->activeDocument()->width()) 
-       || (pos.y() > DocumentManager::self()->activeDocument()->height() ) ) ) {
+    if (DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
         _data -> setY(pos.y());
         _data -> setX(pos.x());
     }

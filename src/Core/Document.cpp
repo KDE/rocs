@@ -2,6 +2,7 @@
    Copyright (C) 2008 by:
    Tomaz Canabrava <tomaz.canabrava@gmail.com>
    Ugo Sangiori <ugorox@gmail.com>
+   Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
    Rocs is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -38,8 +39,10 @@ public:
     QString _buf;
     QString _lastSavedDocumentPath;
     QString _name;
-    qreal _width;
-    qreal _height;
+    qreal _xLeft;
+    qreal _xRight;
+    qreal _yTop;
+    qreal _yBottom;
     bool _modified;
     bool _saved;
     DataStructure *_activeDataStructure;
@@ -50,12 +53,14 @@ public:
 
 };
 
-Document::Document(const QString& name, int width,  int height, QObject *parent)
+Document::Document(const QString& name, qreal xLeft, qreal xRight, qreal yTop, qreal yBottom, QObject *parent)
         : QObject(parent), d( new DocumentPrivate())
 {
     d->_name = name;
-    d->_width = width;
-    d->_height = height;
+    d->_xLeft = xLeft;
+    d->_xRight = xRight;
+    d->_yTop = yTop;
+    d->_yBottom = yBottom;
     d->_modified = false;
     d->_saved = false;
     d->_engineBackend = new QtScriptBackend(this);
@@ -68,8 +73,10 @@ Document::Document(const Document& gd)
 {
 //     QObject::setParent(gd.parent());
     d->_name = gd.name();
-    d->_width = gd.width();
-    d->_height = gd.height();
+    d->_xLeft = gd.xLeft();
+    d->_xRight = gd.xRight();
+    d->_yTop = gd.yTop();
+    d->_yBottom = gd.yBottom();
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_engineBackend = new QtScriptBackend(this);
 
@@ -107,24 +114,64 @@ QString Document::name() const {
     return d->_name;
 }
 
-// set the width of the drawable area
-void Document::setWidth(qreal width) {
-    d->_width = width;
-}
-
-//set the height of the drawable area
-void Document::setHeight(qreal height) {
-    d->_height = height;
-}
-
 // gets the wheight of the drawable area
 qreal Document::height() const {
-    return d->_height;
+    return d->_yBottom - d->_yTop;
 }
 
 // sets the width of the drawable area
 qreal Document::width() const {
-    return d->_width;
+    return d->_xRight - d->_xLeft;
+}
+
+qreal Document::xLeft() const {
+    return d->_xLeft;
+}
+
+qreal Document::xRight() const {
+    return d->_xRight;
+}
+
+qreal Document::yTop() const {
+    return d->_yTop;
+}
+
+qreal Document::yBottom() const {
+    return d->_yBottom;
+}
+
+void Document::setXLeft(qreal xLeftValue)
+{
+    d->_xLeft = xLeftValue;
+}
+
+void Document::setXRight(qreal xRightValue)
+{
+    d->_xRight = xRightValue;
+}
+
+void Document::setYTop(qreal yTopValue)
+{
+    d->_yTop = yTopValue;
+}
+
+void Document::setYBottom(qreal yBottomValue)
+{
+    d->_xLeft = yBottomValue;
+}
+
+bool Document::isPointAtDocument(qreal x, qreal y)  const {
+
+    if (x < d->_xLeft)      return false;
+    if (x > d->_xRight)     return false;
+    if (y < d->_yTop)       return false;
+    if (y > d->_yBottom)    return false;
+
+    return true;
+}
+
+bool Document::isPointAtDocument(QPointF point)  const {
+    return isPointAtDocument(point.x(), point.y());
 }
 
 bool Document::isModified(){

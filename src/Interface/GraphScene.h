@@ -1,5 +1,4 @@
 /***************************************************************************
- * main.cpp
  * This file is part of the KDE project
  * copyright (C)2004-2007 by Tomaz Canabrava (tomaz.canabrava@gmail.com)
  *
@@ -59,7 +58,7 @@ public slots:
     void connectGraphSignals(DataStructure *g);
     void createItems();
     void setActiveDocument();
-    
+
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);

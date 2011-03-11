@@ -214,8 +214,8 @@ Group* DataStructure::addGroup(const QString& name) {
 void DataStructure::calcRelativeCenter() {
    if (parent() != 0){
         Document *gd = qobject_cast<Document*>(parent());
-        d->_relativeCenter.setY(gd->height()/2);
-        d->_relativeCenter.setX(gd->width()/2);
+        d->_relativeCenter.setY((gd->yBottom()-gd->yTop())/2);
+        d->_relativeCenter.setX((gd->xRight()-gd->xLeft())/2);
     }else{
         d->_relativeCenter.setY(0);
         d->_relativeCenter.setX(0);

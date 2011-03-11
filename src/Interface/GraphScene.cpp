@@ -95,8 +95,8 @@ void GraphScene::setActiveDocument() {
 
     _graphDocument = gd;
 
-    setSceneRect(QRectF(0,0, gd->width(), gd->height() ));
-    QGraphicsRectItem *n = new QGraphicsRectItem(0,0, gd->width(), gd->height());
+    setSceneRect(QRectF(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() ));
+    QGraphicsRectItem *n = new QGraphicsRectItem(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() );
     n->setFlag(QGraphicsItem::ItemIsSelectable, false);
     n->setZValue(-1000);
     addItem(n);

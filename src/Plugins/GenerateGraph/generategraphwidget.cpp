@@ -154,8 +154,8 @@ void GenerateGraphWidget::generateMesh()
 
 void GenerateGraphWidget::generateStar()
 {
-    int affineX = 300;
-    int affineY = 300;
+    int affineX = 0;
+    int affineY = 0;
 
     if ( !graphDoc_ ){
       return;
@@ -189,8 +189,8 @@ void GenerateGraphWidget::generateStar()
 
 void GenerateGraphWidget::generateCircle()
 {
-    int affineX = 300;
-    int affineY = 300;
+    int affineX = 0;
+    int affineY = 0;
 
     if (! graphDoc_ ){
         return;
@@ -240,7 +240,7 @@ void GenerateGraphWidget::generateRandomGraph()
     );
 
     // generate distribution topology and apply
-    boost::rectangle_topology< boost::mt19937 > topology(gen, 0, 0, 600, 600);
+    boost::rectangle_topology< boost::mt19937 > topology(gen, -300, -300, 300, 300);
     PositionMap positionMap = boost::get(&VertexProperties::point, randomGraph);
     boost::random_graph_layout(randomGraph, positionMap, topology);
 

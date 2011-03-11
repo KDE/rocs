@@ -46,10 +46,9 @@ void AddNodeAction::executePress(QPointF pos) {
         return;
     }
 
-    if (pos.x() < 0) return;
-    else if (pos.y() < 0) return;
-    else if (pos.x() > DocumentManager::self()->activeDocument()->width()) return;
-    else if (pos.y() > DocumentManager::self()->activeDocument()->height()) return;
+    // check if point is valid for current document extension
+    if (!DocumentManager::self()->activeDocument()->isPointAtDocument(pos))
+        return;
 
     DocumentManager::self()->activeDocument()->activeDataStructure()->addData(i18n("untitled"), QPointF(pos.x(), pos.y()));
     qDebug() << "Point Clicked: " << QPointF(pos.x(), pos.y());
