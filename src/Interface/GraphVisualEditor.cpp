@@ -14,7 +14,7 @@
 	 GNU General Public License for more details.
 
 	 You should have received a copy of the GNU General Public License
-	 along with Step; if not, write to the Free Software
+	 along with Rocs; if not, write to the Free Software
 	 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA	02110-1301	USA
 */
 
@@ -39,12 +39,11 @@
 #include <QPainter>
 #include <DocumentManager.h>
 
-GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
-        : QWidget(parent),
-        _topNode(0),
-        _bottomNode(0),
-        _leftNode(0),
-        _rightNode(0) {
+GraphVisualEditor::GraphVisualEditor( qreal minWidth, qreal minHeight, MainWindow *parent) :
+    QWidget(parent),
+    _minWidth(minWidth),
+    _minHeight(minHeight)
+{
     _scene = 0;
     _document = 0;
     _dataStructure = 0;
@@ -55,7 +54,7 @@ GraphVisualEditor::GraphVisualEditor(MainWindow *parent)
 void GraphVisualEditor::setupWidgets() {
     QVBoxLayout *vLayout = new QVBoxLayout();
     vLayout->setContentsMargins(0,0,0,0);
-    _scene = new GraphScene(this);
+    _scene = new GraphScene(_minWidth, _minHeight, this);
     _graphicsView = new QGraphicsView();
     _graphicsView->setRenderHints(QPainter::Antialiasing);
     _graphicsView->setScene(_scene);
@@ -73,8 +72,8 @@ void GraphVisualEditor::setActiveDocument( ) {
     }
     _document = DocumentManager::self()->activeDocument();
     _scene->setActiveDocument();
-    
-    connect(_document , SIGNAL(activeDataStructureChanged(DataStructure*)), 
+
+    connect(_document , SIGNAL(activeDataStructureChanged(DataStructure*)),
             this ,       SLOT  (setActiveGraph(DataStructure*)));
 }
 
@@ -82,7 +81,7 @@ void GraphVisualEditor::releaseDocument() {
     if (!_document){
         return;
     }
-    
+
     _scene->clear();
     foreach(DataStructure *ds, _document->dataStructures()){
        ds->disconnect(this);

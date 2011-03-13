@@ -29,29 +29,29 @@
 DocumentManager *DocumentManager::_self = 0;
 
 DocumentManager* DocumentManager::self(){
-  if (!_self){
-    _self = new DocumentManager();
-  }
-  return _self;
+    if (!_self){
+        _self = new DocumentManager();
+    }
+    return _self;
 }
 
 DocumentManager::DocumentManager( QObject* parent):QObject(parent){
-  m_actualDocument = 0;
+    m_actualDocument = 0;
 }
 
 DocumentManager::~DocumentManager(){
-  foreach (Document * g, m_documents){
-      removeDocument(g);
-  }
+    foreach (Document * g, m_documents){
+        removeDocument(g);
+    }
 }
 
 void DocumentManager::addDocument(Document* newDoc){
     if (!m_documents.contains(newDoc)){
-       if (newDoc->dataStructures().count() == 0){
-          newDoc->addDataStructure();
-       }
-       m_documents.append(newDoc);
-       changeDocument(newDoc);
+        if (newDoc->dataStructures().count() == 0){
+            newDoc->addDataStructure();
+        }
+        m_documents.append(newDoc);
+        changeDocument(newDoc);
     }
 }
 

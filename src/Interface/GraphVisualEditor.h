@@ -38,17 +38,18 @@ class GraphVisualEditor : public QWidget {
 public:
     /*! Default Constructor
     \param parent the owner of this widget. */
-    GraphVisualEditor(MainWindow *parent = 0);
+    GraphVisualEditor(qreal minWidth, qreal minHeight, MainWindow *parent = 0);
 
     GraphScene *scene() const;
     QGraphicsView *view() const;
     MainWindow *mainWindow();
-    
+
+//     void resizeVisualEditor(qreal yTop, qreal xLeft, qreal yBottom, qreal xRight);
+
     /*! as the name says, it removes the current DataStructureDocument
     from the screen and releases it from the evil hands of GraphEditWidget.*/
-    
     void releaseDocument();
-    
+
 public slots:
     /*! set the current selected Graph.
     	\param graph the new active graph.
@@ -60,13 +61,12 @@ public slots:
 
 private:
     void setupWidgets();
+
     /*! as the name says, draw a graph on scene.
     \param g the graph to be drawn. */
     void drawGraphOnScene( DataStructure *g );
 
     QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
-
-
 
     GraphScene *_scene;
     Document *_document;
@@ -74,13 +74,10 @@ private:
 
     MainWindow *_mainWindow;
 
-    qreal _topNode;
-    qreal _bottomNode;
-    qreal _leftNode;
-    qreal _rightNode;
-
     QGraphicsView *_graphicsView;
 
+    qreal _minWidth;
+    qreal _minHeight;
 };
 
 #endif

@@ -38,7 +38,7 @@ class PointerPropertiesWidget;
 class GraphScene : public QGraphicsScene {
     Q_OBJECT
 public:
-    GraphScene(QObject *parent);
+    GraphScene( qreal minWidth, qreal minHeight, QObject *parent=0 );
     void setAction(QAction *action);
     void updateGraph(DataStructure *g);
     void updateDocument();
@@ -58,7 +58,10 @@ public slots:
     void connectGraphSignals(DataStructure *g);
     void createItems();
     void setActiveDocument();
-    void resizeScene();
+    void resize();
+
+signals:
+    void resized();
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
@@ -80,6 +83,8 @@ private:
     PointerPropertiesWidget *_pointerPropertiesWidget;
     bool _fade;
     void releaseDocument();
+    qreal _minWidth;
+    qreal _minHeight;
 };
 
 #endif

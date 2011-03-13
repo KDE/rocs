@@ -1,7 +1,8 @@
 /***************************************************************************
- * main.cpp
  * This file is part of the KDE project
- * copyright (C)2004-2007 by Tomaz Canabrava (tomaz.canabrava@gmail.com)
+ * Copyright (C) by
+ *  2004-2007   Tomaz Canabrava <tomaz.canabrava@gmail.com>
+ *  2011        Andreas Cord-Landwehr <cola@uni-paderborn.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -39,12 +40,18 @@
 #include "edgepropertieswidget.h"
 #include <DataStructurePluginManager.h>
 
-GraphScene::GraphScene(QObject *parent) : QGraphicsScene(parent) {
+GraphScene::GraphScene( qreal minWidth, qreal minHeight, QObject *parent) :
+    QGraphicsScene(parent)
+{
     _graphDocument = 0;
     _hideEdges = false;
     _datumPropertiesWidget = new DataPropertiesWidget(qobject_cast<MainWindow*>(parent));
     _pointerPropertiesWidget = new PointerPropertiesWidget(qobject_cast<MainWindow*>(parent));
     _action = 0;
+    _minHeight = minHeight;
+    _minWidth = minWidth;
+
+    setSceneRect(-minWidth/2, -minHeight/2, minWidth, minHeight);
 }
 
 bool GraphScene::hideEdges() {
@@ -93,9 +100,18 @@ void GraphScene::setActiveDocument() {
         return;
     }
 
+//     // adapt document to scene if too small
     _graphDocument = gd;
+    if (gd->width()<_minWidth) {
+        gd->setXLeft(gd->xLeft()-(_minWidth-gd->width())/2);
+        gd->setXRight(gd->xRight()+(_minWidth-gd->width())/2);
+    }
+    if (gd->height()<_minHeight) {
+        gd->setYTop(gd->yTop()-(_minHeight-gd->height())/2);
+        gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
+    }
 
-    setSceneRect(QRectF(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() ));
+    setSceneRect( QRectF(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() ));
     _whiteboard = new QGraphicsRectItem(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() );
     _whiteboard->setFlag(QGraphicsItem::ItemIsSelectable, false);
     _whiteboard->setZValue(-1000);
@@ -111,7 +127,7 @@ void GraphScene::setActiveDocument() {
              this, SLOT(connectGraphSignals(DataStructure*)));
 
     connect( gd, SIGNAL(bordersOccupied()),
-             this, SLOT(resizeScene()));
+             this, SLOT(resize()));
 
     createItems();
 }
@@ -203,9 +219,9 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-     if (mouseEvent->button() == Qt::LeftButton){
-	_action->executeRelease(mouseEvent->scenePos());
-     }
+    if (mouseEvent->button() == Qt::LeftButton){
+        _action->executeRelease(mouseEvent->scenePos());
+    }
 }
 
 void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
@@ -235,8 +251,12 @@ void GraphScene::updateDocument() {
     }
 }
 
-void GraphScene::resizeScene() {
+void GraphScene::resize() {
     _whiteboard->setRect(
         QRectF(_graphDocument->xLeft(),_graphDocument->yTop(), _graphDocument->xRight()-_graphDocument->xLeft(), _graphDocument->yBottom()-_graphDocument->yTop())
     );
+    setSceneRect(
+        QRectF(_graphDocument->xLeft(),_graphDocument->yTop(), _graphDocument->xRight()-_graphDocument->xLeft(), _graphDocument->yBottom()-_graphDocument->yTop())
+    );
+    emit resized();
 }

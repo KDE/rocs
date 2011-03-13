@@ -32,19 +32,19 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
     QList<Document*> m_documents;
     Document * m_actualDocument;
 
-   
+
   public:
     static DocumentManager* self();
-    
+
     virtual ~DocumentManager();
 
     //!inlines.
     /** Gets the document on the index i, returns null if notfound. */
-    Document* document(const int i) const; 
-    
+    Document* document(const int i) const;
+
     /** returns the active document, or null if there's none */
-    Document* activeDocument() const; 
-    
+    Document* activeDocument() const;
+
     /** returns the document list */
     QList< Document* > documentList() const ;
 
@@ -54,13 +54,13 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
     void changeDocument();
     /** Add a document to list and set as active document */
     void addDocument(Document*);
-    
+
     /** Remove the document from list. if the document is the active one,
      * then active document pass to be the last from list.
      * If it is the last one, an empty is created and set as active.
      */
     void removeDocument(Document*);
-    
+
     /** Convert document to new data structure. */
     void convertToDataStructure();
 
@@ -74,7 +74,7 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
     void deactivateDocument(Document* doc);
     /** signal emited when a document was removed from list. if doc is the active document, both, deactivateDocument() and activeDocument() is called first */
     void documentRemoved(Document* doc);
-    
+
 private:
     DocumentManager(QObject* parent = 0);
     static DocumentManager *_self;

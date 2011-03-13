@@ -14,7 +14,7 @@
      GNU General Public License for more details.
 
      You should have received a copy of the GNU General Public License
-     along with Step; if not, write to the Free Software
+     along with Rocs; if not, write to the Free Software
      Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
@@ -84,6 +84,7 @@
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
 
+
 MainWindow::MainWindow() :  KXmlGuiWindow()
 {
     setObjectName ( "RocsMainWindow" );
@@ -97,11 +98,11 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
     setupToolsPluginsAction();
     setupDSPluginsAction();
 
-    connect(DocumentManager::self(), SIGNAL(activateDocument()),   
+    connect(DocumentManager::self(), SIGNAL(activateDocument()),
             this, SLOT(setActiveDocument()), Qt::UniqueConnection );
-    connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)), 
+    connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)),
             this, SLOT(releaseDocument(Document*)),Qt::UniqueConnection   );
-    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),   
+    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
             this, SLOT(releaseDocument(Document*)),Qt::UniqueConnection   );
 
      /* just for testing prurposes,
@@ -143,7 +144,12 @@ void MainWindow::downloadNewExamples(){
 
 QWidget* MainWindow::setupRightPanel()
 {
-    _graphVisualEditor = new GraphVisualEditor ( this );
+    _graphVisualEditor = new GraphVisualEditor ( Settings::hSplitterSizeRight(), Settings::vSplitterSizeTop(), this );
+//     Document *doc = DocumentManager::self()->activeDocument();
+//     doc->setXLeft(-Settings::hSplitterSizeRight()/2);
+//     doc->setXRight(Settings::hSplitterSizeRight()/2);
+//     _graphVisualEditor->scene()->setSceneRect(-Settings::hSplitterSizeRight()/2,-250,Settings::hSplitterSizeRight(),500);
+
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
     _txtOutput = new KTextBrowser( this );
@@ -159,7 +165,10 @@ QWidget* MainWindow::setupRightPanel()
 
     _vSplitter = new QSplitter ( this );
     _vSplitter->setOrientation ( Qt::Vertical );
-    _vSplitter->addWidget ( _graphVisualEditor );
+
+    // graph editor whiteboard
+    _vSplitter->addWidget (_graphVisualEditor);
+
     _vSplitter->addWidget ( _bottomTabs );
     _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
     return _vSplitter;
@@ -351,7 +360,10 @@ void MainWindow::setupDocumentsList(){
         action->setActionGroup(group);
         connect ( action, SIGNAL ( triggered ( bool ) ), DocumentManager::self(), SLOT ( changeDocument()) );
         pluginList.append ( action );
+
+        connect ( doc, SIGNAL(bordersOccupied()), this, SLOT(resizeGraphVisualEditorScrollbars()));
     }
+
     plugActionList ( "Doc_List", pluginList );
 }
 
@@ -359,13 +371,13 @@ void MainWindow::setActiveDocument ( )
 {
     kDebug() << "Setting the document in the main widnow";
     Document *activeDocument = DocumentManager::self()->activeDocument();
-    
+
     _graphVisualEditor->setActiveDocument();
     _GraphLayers->setActiveDocument();
-    
+
     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
                 activeDocument->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
-    
+
 //     connect(this, SIGNAL(startEvaluation()),
 //             engine(), SLOT(start()));
 
@@ -373,7 +385,7 @@ void MainWindow::setActiveDocument ( )
 //     connect( engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
 //     connect( engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
 
-    
+
 }
 
 void MainWindow::releaseDocument ( Document* d ){

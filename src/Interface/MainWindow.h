@@ -54,9 +54,9 @@ public:
     /*! defalt constructor */
     MainWindow();
     ~MainWindow();
-    
+
     GraphScene *scene() const;
-    
+
 private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.

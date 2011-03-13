@@ -15,11 +15,12 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with Step; if not, write to the Free Software
+   along with Rocs; if not, write to the Free Software
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "Document.h"
+#include "DocumentManager.h"
 #include "DataStructure.h"
 #include <QString>
 #include <KSaveFile>
@@ -173,7 +174,7 @@ bool Document::isPointAtDocument(qreal x, qreal y)  const {
 void Document::resizeDocumentRequestEstimation()
 {
     int size = dataStructures().size();
-    int border = 100;
+    int border = 250;
 
     for (int i = 0; i < size; i++) {
         foreach( Data* n,  dataStructures().at(i)->dataList() ){
@@ -195,7 +196,6 @@ void Document::resizeDocumentRequestEstimation()
             }
         }
     }
-    qDebug() << "resized";
 }
 
 
@@ -232,7 +232,7 @@ const QString& Document::documentPath() const {
 }
 
 void Document::remove(DataStructure *dataStructure){
-  d->_dataStructures.removeOne(dataStructure);
+    d->_dataStructures.removeOne(dataStructure);
 }
 
 bool Document::saveAsInternalFormat(const QString& filename) {
