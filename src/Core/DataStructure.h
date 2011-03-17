@@ -29,6 +29,7 @@
 #include "Rocs_Typedefs.h"
 #include <klocalizedstring.h>
 #include "rocslib_export.h"
+#include "Document.h"
 
 class Group;
 class Document;
@@ -125,6 +126,7 @@ signals:
     void pointerCreated(Pointer *e);
     void complexityChanged(bool directed);
     void changed();
+    void resizeRequest(Document::Border border);
 
 protected:
     Data* addData(Data *data);

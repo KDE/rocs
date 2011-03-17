@@ -24,6 +24,7 @@
 #include "Group.h"
 #include "Document.h"
 #include "DocumentManager.h"
+#include "GraphScene.h"
 #include "DynamicPropertiesList.h"
 #include "ConcurrentHelpClasses.h"
 
@@ -43,7 +44,8 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_pointerNamesVisible = false;
     d->_pointerValuesVisible = true;
 
-    connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentRequestEstimation()));
+    connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
+    connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
 }
 
 DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent), d(new DataStructurePrivate){
@@ -77,7 +79,8 @@ DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(p
         newPointer->setValue(e->value());
     }
 
-    connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentRequestEstimation()));
+    connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
+    connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
 }
 
 
@@ -195,14 +198,37 @@ Data *DataStructure::data(const QString& name) {
 }
 
 void DataStructure::remove(Data *n) {
-    d->_data.removeOne( n  );
+    //Note: important for resize: remove node before emit resizeRequest
+    Document *doc = DocumentManager::self()->activeDocument();
+    bool left = false;
+    bool top = false;
+    bool bottom = false;
+    bool right = false;
+
+    if (doc!=0) {
+        if (n->x()<doc->xLeft()+2*GraphScene::kBORDER)      left = true;
+        if (n->x()>doc->xRight()-2*GraphScene::kBORDER)     right = true;
+        if (n->y()<doc->yTop()+2*GraphScene::kBORDER)       top = true;
+        if (n->y()>doc->yBottom()-2*GraphScene::kBORDER)    bottom = true;
+    }
+
+    // proceed delete
+    d->_data.removeOne( n );
     n->deleteLater();
+
+    // emit changes
+    if (left)   emit resizeRequest( Document::BorderLeft );
+    if (right)  emit resizeRequest( Document::BorderRight );
+    if (top)    emit resizeRequest( Document::BorderTop );
+    if (bottom) emit resizeRequest( Document::BorderBottom );
 }
 
 void DataStructure::remove(Pointer *e) {
     d->_pointers.removeOne( e );
-    if (e->to() || e->from())
-      e->remove();
+    if (e->to() || e->from()) {
+        e->remove();
+        emit changed();
+    }
     e->deleteLater();
 }
 

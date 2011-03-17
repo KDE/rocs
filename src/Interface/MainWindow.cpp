@@ -145,10 +145,6 @@ void MainWindow::downloadNewExamples(){
 QWidget* MainWindow::setupRightPanel()
 {
     _graphVisualEditor = new GraphVisualEditor ( Settings::hSplitterSizeRight(), Settings::vSplitterSizeTop(), this );
-//     Document *doc = DocumentManager::self()->activeDocument();
-//     doc->setXLeft(-Settings::hSplitterSizeRight()/2);
-//     doc->setXRight(Settings::hSplitterSizeRight()/2);
-//     _graphVisualEditor->scene()->setSceneRect(-Settings::hSplitterSizeRight()/2,-250,Settings::hSplitterSizeRight(),500);
 
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
@@ -360,8 +356,6 @@ void MainWindow::setupDocumentsList(){
         action->setActionGroup(group);
         connect ( action, SIGNAL ( triggered ( bool ) ), DocumentManager::self(), SLOT ( changeDocument()) );
         pluginList.append ( action );
-
-        connect ( doc, SIGNAL(bordersOccupied()), this, SLOT(resizeGraphVisualEditorScrollbars()));
     }
 
     plugActionList ( "Doc_List", pluginList );

@@ -39,6 +39,7 @@ class ROCSLIB_EXPORT Document : public QObject
 
 public:
     enum Type {Simple = 0, Oriented};
+    enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
     Document(const QString& name, qreal xLeft=-300, qreal xRight=300, qreal yTop=-300, qreal yBottom=300, QObject *parent = 0);
     Document(const Document& gd);
@@ -79,8 +80,8 @@ public slots:
     /**
      * estimates by looking at all node positions if a resize of the document is necessary.
      */
-    void resizeDocumentRequestEstimation();
-
+    void resizeDocumentIncrease();
+    void resizeDocumentBorder(Document::Border orientation);
 
     /**
      * tests if given point is containted at document layer
@@ -95,7 +96,7 @@ signals:
     void heightChanged(qreal height);
     void widthChanged(qreal width);
     void activeDataStructureChanged(DataStructure* g);
-    void bordersOccupied();
+    void resized();
 
 private:
     DocumentPrivate *d;

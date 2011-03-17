@@ -126,8 +126,7 @@ void GraphScene::setActiveDocument() {
     connect( gd, SIGNAL(dataStructureCreated(DataStructure*)),
              this, SLOT(connectGraphSignals(DataStructure*)));
 
-    connect( gd, SIGNAL(bordersOccupied()),
-             this, SLOT(resize()));
+    connect( gd, SIGNAL(resized()), this, SLOT(resize()));
 
     createItems();
 }

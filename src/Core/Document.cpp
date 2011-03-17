@@ -32,6 +32,7 @@
 //#include "dataStructureGroups.h"
 
 #include "DataStructurePluginManager.h"
+#include <GraphScene.h>
 
 class DocumentPrivate{
 public:
@@ -171,33 +172,94 @@ bool Document::isPointAtDocument(qreal x, qreal y)  const {
     return true;
 }
 
-void Document::resizeDocumentRequestEstimation()
+void Document::resizeDocumentIncrease()
 {
-    int size = dataStructures().size();
-    int border = 250;
+    int elements = dataStructures().size();
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < elements; i++) {
         foreach( Data* n,  dataStructures().at(i)->dataList() ){
-            if (n->x() < d->_xLeft+border) {
-                setXLeft(d->_xLeft-border);
-                emit bordersOccupied();
+            if (n->x() < d->_xLeft+GraphScene::kBORDER) {
+                setXLeft(d->_xLeft-GraphScene::kBORDER);
+                emit resized();
             }
-            if (n->x() > d->_xRight-border) {
-                setXRight(d->_xRight+border);
-                emit bordersOccupied();
+            if (n->x() > d->_xRight-GraphScene::kBORDER) {
+                setXRight(d->_xRight+GraphScene::kBORDER);
+                emit resized();
             }
-            if (n->y() < d->_yTop+border) {
-                setYTop(d->_yTop-border);
-                emit bordersOccupied();
+            if (n->y() < d->_yTop+GraphScene::kBORDER) {
+                setYTop(d->_yTop-GraphScene::kBORDER);
+                emit resized();
             }
-            if (n->y() > d->_yBottom-border) {
-                setYBottom(d->_yBottom+border);
-                emit bordersOccupied();
+            if (n->y() > d->_yBottom-GraphScene::kBORDER) {
+                setYBottom(d->_yBottom+GraphScene::kBORDER);
+                emit resized();
             }
         }
     }
 }
 
+void Document::resizeDocumentBorder(Document::Border orientation) {
+    bool empty = true;
+    int elements = dataStructures().size();
+
+    // scans doubled border of specified size: if empty or not
+    for (int i = 0; i < elements; i++) {
+    foreach( Data* n,  dataStructures().at(i)->dataList() ){
+        switch (orientation) {
+        case BorderLeft: {
+            if (n!=0 && n->x() < d->_xLeft+GraphScene::kBORDER*2) empty=false;
+            break;
+        }
+        case BorderRight: {
+            if (n!=0 && n->x() > d->_xRight-GraphScene::kBORDER*2) empty=false;
+            break;
+        }
+        case BorderTop: {
+            if (n!=0 && n->y() < d->_yTop+GraphScene::kBORDER*2) empty=false;
+            break;
+        }
+        case BorderBottom: {
+            if (n!=0 && n->y() > d->_yBottom-GraphScene::kBORDER*2) empty=false;
+            break;
+        }
+        }
+    }
+    }
+
+    //TODO connect to graphvisualeditor-size
+    if (empty==true) {
+        switch (orientation) {
+        case BorderLeft: {
+            if (d->_xRight-d->_xLeft < GraphScene::kBORDER*4)
+                return;
+            setXLeft(d->_xLeft+GraphScene::kBORDER);
+            emit resized();
+            break;
+        }
+        case BorderRight: {
+            if (d->_xRight-d->_xLeft < GraphScene::kBORDER*4)
+                return;
+            setXRight(d->_xRight-GraphScene::kBORDER);
+            emit resized();
+            break;
+        }
+        case BorderTop: {
+            if (d->_yBottom-d->_yTop < GraphScene::kBORDER*4)
+                return;
+            setYTop(d->_yTop+GraphScene::kBORDER);
+            emit resized();
+            break;
+        }
+        case BorderBottom: {
+            if (d->_yBottom-d->_yTop < GraphScene::kBORDER*4)
+                return;
+            setYBottom(d->_yBottom-GraphScene::kBORDER);
+            emit resized();
+            break;
+        }
+        }
+    }
+}
 
 bool Document::isPointAtDocument(QPointF point)  const {
     return isPointAtDocument(point.x(), point.y());
