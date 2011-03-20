@@ -154,8 +154,14 @@ void GenerateGraphWidget::generateMesh()
 
 void GenerateGraphWidget::generateStar()
 {
+    int n = numberOfNodes_;
+
     int affineX = 0;
     int affineY = 0;
+
+    // compute radius such that nodes have space ~50 between each other
+    // circle that border-length of 2*PI*radius
+    int radius = 50*n/(2*PI_);
 
     if ( !graphDoc_ ){
       return;
@@ -166,14 +172,12 @@ void GenerateGraphWidget::generateStar()
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Star Graph") );
 
-    int n = numberOfNodes_;
-
     // create mesh of NxN points
     QList<Data*> starNodes;
 
     // create mesh nodes, store them in map
     for (int i=1; i<=n; i++) {
-        starNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*100, affineY + cos(i*2*PI_/n)*100));
+        starNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*radius, affineY + cos(i*2*PI_/n)*radius));
     }
 
     // middle
@@ -189,8 +193,14 @@ void GenerateGraphWidget::generateStar()
 
 void GenerateGraphWidget::generateCircle()
 {
+    int n = numberOfNodes_;
+
     int affineX = 0;
     int affineY = 0;
+
+    // compute radius such that nodes have space ~50 between each other
+    // circle that border-length of 2*PI*radius
+    int radius = 50*n/(2*PI_);
 
     if (! graphDoc_ ){
         return;
@@ -201,14 +211,12 @@ void GenerateGraphWidget::generateCircle()
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Ring Graph") );
 
-    int n = numberOfNodes_;
-
     // create mesh of NxN points
     QList<Data*> circleNodes;
 
     // create mesh nodes, store them in map
     for (int i=1; i<=n; i++) {
-            circleNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*100, affineY + cos(i*2*PI_/n)*100));
+            circleNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*radius, affineY + cos(i*2*PI_/n)*radius));
     }
 
     // connect circle nodes
@@ -240,7 +248,7 @@ void GenerateGraphWidget::generateRandomGraph()
     );
 
     // generate distribution topology and apply
-    boost::rectangle_topology< boost::mt19937 > topology(gen, -300, -300, 300, 300);
+    boost::rectangle_topology< boost::mt19937 > topology(gen, -20*n, -20*n, 20*n, 20*n);
     PositionMap positionMap = boost::get(&VertexProperties::point, randomGraph);
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
