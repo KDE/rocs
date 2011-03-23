@@ -215,12 +215,12 @@ void GenerateGraphWidget::generateCircle()
     QList<Data*> circleNodes;
 
     // create mesh nodes, store them in map
-    for (int i=1; i<=n; i++) {
+    for (int i=0; i<n; i++) {
             circleNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*radius, affineY + cos(i*2*PI_/n)*radius));
     }
 
     // connect circle nodes
-    for (int i=0; i<n; i++) {
+    for (int i=0; i<n-1; i++) {
         graph->addPointer (circleNodes.at(i),circleNodes.at(i+1));
     }
     graph->addPointer (circleNodes.at(n-1),circleNodes.at(0));
