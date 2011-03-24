@@ -262,7 +262,7 @@ void MainWindow::setupActions()
     actionCollection()->addAction ( "new-graph", action );
     connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( newGraph() ) );
 
-    action = new KAction ("Donwload Examples", this);
+    action = new KAction ( i18n ( "Download Examples" ), this);
     actionCollection()->addAction ( "download", action );
     connect(action, SIGNAL(triggered(bool)), this, SLOT(downloadNewExamples()));
 
