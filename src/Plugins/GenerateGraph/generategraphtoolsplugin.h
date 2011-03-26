@@ -33,10 +33,6 @@ public:
     GenerateGraphToolPlugin(QObject* parent, const QList< QVariant >&);
     ~GenerateGraphToolPlugin();
     QString run(QObject* parent = 0) const;
-private:
-//     QString generateMesh (DataTypeDocument* graphDoc) const;
-//     QString generateCircle (DataTypeDocument* graphDoc) const;
-
 };
 
 #endif // GENERATEGRAPHTOOLSPLUGIN_H

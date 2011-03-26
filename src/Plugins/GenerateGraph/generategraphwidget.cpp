@@ -117,9 +117,14 @@ GenerateGraphWidget::~GenerateGraphWidget()
 
 void GenerateGraphWidget::generateMesh(int rows, int columns)
 {
+    DocumentManager::self()->activeDocument()->activeDataStructure()->updateRelativeCenter();
+    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+    
     if (! graphDoc_ ){
       return;
     }
+    if (rows<1)     rows=1;
+    if (columns<1)  columns=1;
 
     // use active data structure iff empty
     DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
@@ -132,7 +137,9 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     // create mesh nodes, store them in map
     for (int i = 0; i < columns; i++) {
     for (int j = 0; j < rows; j++) {
-        meshNodes[qMakePair(i,j)] = graph->addData(QString("%1-%2").arg(i).arg(j),QPointF(50+i*50, 50+j*50));
+        meshNodes[qMakePair(i,j)] = graph->addData( QString("%1-%2").arg(i).arg(j),
+                                                    QPointF(i*50, j*50)-QPoint((int)25*columns,(int)25*rows)+center
+                                                  );
     }
     }
 
@@ -147,9 +154,9 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
 
 void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 {
-    int affineX = 0;
-    int affineY = 0;
-
+    DocumentManager::self()->activeDocument()->activeDataStructure()->updateRelativeCenter();
+    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+    
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
     int radius = 50*numberSatelliteNodes/(2*PI_);
@@ -168,11 +175,14 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 
     // create mesh nodes, store them in map
     for (int i=1; i<=numberSatelliteNodes; i++) {
-        starNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/numberSatelliteNodes)*radius, affineY + cos(i*2*PI_/numberSatelliteNodes)*radius));
+        starNodes << graph->addData(
+            QString("%1").arg(i),
+            QPointF(sin(i*2*PI_/numberSatelliteNodes)*radius, cos(i*2*PI_/numberSatelliteNodes)*radius)+center
+        );
     }
 
     // middle
-    starNodes.prepend( graph->addData(QString("center"),QPointF(affineX, affineY)) );
+    starNodes.prepend( graph->addData(QString("center"),center) );
 
     // connect circle nodes
     for (int i=1; i<=numberSatelliteNodes; i++) {
@@ -182,8 +192,8 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 
 void GenerateGraphWidget::generateCircle(int numberNodes)
 {
-    int affineX = 0;
-    int affineY = 0;
+    DocumentManager::self()->activeDocument()->activeDataStructure()->updateRelativeCenter();
+    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
@@ -196,14 +206,14 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
     // use active data structure iff empty
     DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size()>0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Ring Graph") );
+        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Circle Graph") );
 
     // create mesh of NxN points
     QList<Data*> circleNodes;
 
     // create mesh nodes, store them in map
     for (int i=0; i<numberNodes; i++) {
-        circleNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/numberNodes)*radius, affineY + cos(i*2*PI_/numberNodes)*radius));
+        circleNodes << graph->addData(QString("%1").arg(i),QPointF(sin(i*2*PI_/numberNodes)*radius, cos(i*2*PI_/numberNodes)*radius)+center);
     }
 
     // connect circle nodes
@@ -215,6 +225,8 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
 
 void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges)
 {
+    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+
     BoostGraph randomGraph;
     boost::mt19937 gen;
     gen.seed (static_cast<unsigned int>(seed));
@@ -229,7 +241,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
     );
 
     // generate distribution topology and apply
-    boost::rectangle_topology< boost::mt19937 > topology(gen, -20*nodes, -20*nodes, 20*nodes, 20*nodes);
+    boost::rectangle_topology< boost::mt19937 > topology(gen, center.x()-20*nodes, center.y()-20*nodes, center.x()+20*nodes, center.y()+20*nodes);
     PositionMap positionMap = boost::get(&VertexProperties::point, randomGraph);
     boost::random_graph_layout(randomGraph, positionMap, topology);
 

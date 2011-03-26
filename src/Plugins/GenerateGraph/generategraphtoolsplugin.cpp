@@ -67,7 +67,5 @@ QString GenerateGraphToolPlugin::run(QObject* doc) const
 }
 
 
-
-
 // Q_EXPORT_PLUGIN2(makeCompleteToolsPlugin, MakeCompleteToolsPlugin)
 #include "generategraphtoolsplugin.moc"
