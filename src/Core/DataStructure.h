@@ -50,7 +50,7 @@ public:
     DataStructure(DataStructure& other, Document* parent);
     ~DataStructure();
 
-    void calcRelativeCenter();
+    void updateRelativeCenter();
     QPointF relativeCenter() const;
     Document *document() const;
 
@@ -177,6 +177,12 @@ inline bool DataStructure::pointerValueVisibility()        const { return d->_po
 inline const QColor& DataStructure::pointerDefaultColor()  const { return d->_pointerDefaultColor; }
 inline const QColor& DataStructure::dataDefaultColor()     const { return d->_dataDefaultColor;    }
 inline const QString& DataStructure::name()                const { return d->_name;                }
+
+/**
+ * returns cached relative center of datastructure
+ * center needs to be updated at resizes by using \see updateRelativeCenter()
+ * \return QPointF center of datastructure
+ */
 inline QPointF DataStructure::relativeCenter()             const { return d->_relativeCenter;      }
 
 inline QScriptValue DataStructure::scriptValue()           const { return d->_value;    }

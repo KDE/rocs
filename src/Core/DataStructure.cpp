@@ -36,7 +36,7 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_readOnly = false;
     d->_document = parent;
     d->_begin = 0;
-    calcRelativeCenter();
+    updateRelativeCenter();
     d->_dataDefaultColor = QColor("blue");
     d->_pointerDefaultColor = QColor("gray");
     d->_dataNamesVisible = true;
@@ -51,7 +51,7 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
 DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent), d(new DataStructurePrivate){
     d->_readOnly = other.readOnly();
     d->_document = parent;
-    calcRelativeCenter();
+    updateRelativeCenter();
 
     d->_pointerDefaultColor     = other.pointerDefaultColor();
     d->_dataDefaultColor        = other.dataDefaultColor();
@@ -221,6 +221,8 @@ void DataStructure::remove(Data *n) {
     if (right)  emit resizeRequest( Document::BorderRight );
     if (top)    emit resizeRequest( Document::BorderTop );
     if (bottom) emit resizeRequest( Document::BorderBottom );
+    
+    updateRelativeCenter();
 }
 
 void DataStructure::remove(Pointer *e) {
@@ -243,11 +245,11 @@ Group* DataStructure::addGroup(const QString& name) {
      return gg;
 }
 
-void DataStructure::calcRelativeCenter() {
+void DataStructure::updateRelativeCenter() {
    if (parent() != 0){
         Document *gd = qobject_cast<Document*>(parent());
-        d->_relativeCenter.setY((gd->yBottom()-gd->yTop())/2);
-        d->_relativeCenter.setX((gd->xRight()-gd->xLeft())/2);
+        d->_relativeCenter.setY((gd->yBottom()+gd->yTop())/2);
+        d->_relativeCenter.setX((gd->xRight()+gd->xLeft())/2);
     }else{
         d->_relativeCenter.setY(0);
         d->_relativeCenter.setX(0);
