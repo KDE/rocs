@@ -21,18 +21,21 @@
 #ifndef GENERATEGRAPHWIDGET_H
 #define GENERATEGRAPHWIDGET_H
 
-#include <QDialog>
+#include <QWidget>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
 
 
 class QGridLayout;
-class QWidget;
 class Document;
 
+namespace Ui {
+    class GenerateGraphWidget;
+}
+
 class GenerateGraphWidget :
-    public QDialog
+    public QWidget
 {
     Q_OBJECT
 
@@ -56,40 +59,40 @@ class GenerateGraphWidget :
     // used for graph selection
     enum GraphType {
         MESH,
-        CIRCLE,
         STAR,
+        CIRCLE,
         RANDOM
     };
 
     public:
         GenerateGraphWidget(Document* graphDoc, QWidget *parent = 0);
-//         ~GenerateGraphWidget();
+        ~GenerateGraphWidget();
 
     public slots:
+        void setGraphType(int type);
         void generateGraph();
 
-
-    private slots:
-        /**
-         * set GUI options according to selected graph type at combo box
-         * \return  void
-         */
-        void setOptionsForGraphType(int selectedGraphType);
-        void setNumberOfNodes(int number) { numberOfNodes_ = number; };
-
-
     private:
-        void generateStar();
-        void generateCircle();
-        void generateMesh();
-        void generateRandomGraph();
+        void generateCircle(int numberSatelliteNodes);
+        void generateMesh(int rows, int columns);
+        
+        /**
+         * generates a random graph given by following parameters
+         * \param   int nodes   number of nodes
+         * \param   int edges   number of randomly assigned edges
+         * \param   int seed    random seed for random number generator
+         * \param   bool selfEdges if true self edges are generated, otherwise not
+         */
+        void generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges);
+        void generateStar(int numberNodes);
 
         Document* graphDoc_;
         static const double PI_ = 3.14159265358979323846;
         int selectedGraphType_;
         QGridLayout *gridLayout_;
         QWidget* graphOptionsWidget_;
-        int numberOfNodes_;
+        
+        Ui::GenerateGraphWidget *ui;
 };
 
 #endif // GENERATEGRAPHWIDGET_H

@@ -41,7 +41,7 @@
 
 static const KAboutData aboutdata("rocs_generategraphplugin", 0, ki18n("Generate Graph") , "0.1" );
 
-K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin< GenerateGraphToolPlugin>(); )
+K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin<GenerateGraphToolPlugin>(); )
 K_EXPORT_PLUGIN( ToolsPluginFactory(aboutdata) )
 
 GenerateGraphToolPlugin::GenerateGraphToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
@@ -57,32 +57,11 @@ GenerateGraphToolPlugin::~GenerateGraphToolPlugin()
 
 QString GenerateGraphToolPlugin::run(QObject* doc) const
 {
-
     Document* graphDoc = qobject_cast<Document*> ( doc );
 
     GenerateGraphWidget* dialog = new GenerateGraphWidget(graphDoc, 0);
     dialog->show();
 
-// a = Qt::Application.new(ARGV)
-//
-// box = Qt::VBox.new()
-// box.resize(200, 120)
-//
-// quit = Qt::PushButton.new('Quit', box)
-// quit.setFont(Qt::Font.new('Times', 18, Qt::Font::Bold))
-//
-// a.connect(quit, SIGNAL('clicked()'), SLOT('quit()'))
-//
-// a.setMainWidget(box)
-// box.show
-
-
-
-//    dialog.setLayout();
-
-    // TODO
-    //DataTypeDocument* graphDoc = qobject_cast<DataTypeDocument*> ( doc );
-    //return this->generateMesh( graphDoc );
     return "";
 
 }

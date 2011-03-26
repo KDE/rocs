@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GenerateGraphWidget</class>
+ <widget class="QWidget" name="GenerateGraphWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>304</width>
+    <height>238</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Generate Graph</string>
+  </property>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>10</y>
+     <width>161</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Mesh Graph</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Star Graph</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Circle Graph</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Random Graph</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Graph Type:</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>36</y>
+     <width>281</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>271</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="page_mesh">
+    <widget class="QWidget" name="formLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>19</x>
+       <y>19</y>
+       <width>241</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="fromLayoutMesh">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_columns">
+        <property name="text">
+         <string>Number of Columns:</string>
+        </property>
+        <property name="buddy">
+         <cstring>meshColumns</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_rows">
+        <property name="text">
+         <string>Number of Rows:</string>
+        </property>
+        <property name="buddy">
+         <cstring>meshRows</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="meshColumns">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="meshRows">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_star">
+    <widget class="QWidget" name="formLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>19</x>
+       <y>29</y>
+       <width>231</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayoutStart">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_numberSatellite">
+        <property name="text">
+         <string>Sattelite Nodes:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="starSatelliteNodes">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_circle">
+    <widget class="QWidget" name="formLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>241</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayoutCircle">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_numberCircle">
+        <property name="text">
+         <string>Number of Nodes:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="circleNodes">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_random">
+    <widget class="QWidget" name="formLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>251</width>
+       <height>104</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayoutRandom">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_randomNodes">
+        <property name="text">
+         <string>Nodes:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="randomNodes">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_randomEdges">
+        <property name="text">
+         <string>Edges:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="randomEdges">
+        <property name="value">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_randomSelfEdges">
+        <property name="text">
+         <string>Allow self-edges:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_randomGeneratorSeed">
+        <property name="text">
+         <string>Generator Seed:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="randomGeneratorSeed">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="randomAllowSelfedges">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>200</y>
+     <width>99</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>generate</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>200</y>
+     <width>99</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>cancel</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>232</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>258</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>GenerateGraphWidget</receiver>
+   <slot>setGraphType(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>458</x>
+     <y>54</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>released()</signal>
+   <receiver>GenerateGraphWidget</receiver>
+   <slot>generateGraph()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>234</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>released()</signal>
+   <receiver>GenerateGraphWidget</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>140</x>
+     <y>318</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

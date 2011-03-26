@@ -18,14 +18,14 @@
 */
 
 
-#include "generategraphwidget.h"
+
 #include <Document.h>
 #include <DataStructure.h>
 #include <DocumentManager.h>
+#include "generategraphwidget.h"
+#include "ui_generategraphwidget.h"
 
 #include <cmath>
-#include <ctime>
-
 #include <KLocale>
 
 #include <QtGui/QGridLayout>
@@ -36,6 +36,8 @@
 #include <QtGui/QSpinBox>
 #include <QtCore/QMap>
 #include <QtCore/QPair>
+
+#include <QDesktopWidget>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/iteration_macros.hpp>
@@ -51,57 +53,27 @@ namespace boost { void throw_exception( std::exception const & ) {} } // do noop
 class QPushButton;
 
 GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
-    :   QDialog(parent),
-        numberOfNodes_(10)
+    :   QWidget(parent)
 {
-    graphDoc_ = graphDoc;
-
-    setWindowTitle( i18n("Generate Graph") );
-    setMinimumWidth( 200 );
-    setMinimumHeight( 150 );
-
-    QComboBox* comboSelectGraphType = new QComboBox();
-
+    ui = new Ui::GenerateGraphWidget;
     selectedGraphType_ = MESH;
-    comboSelectGraphType->insertItem(MESH, i18n("Mesh Graph"));
-    comboSelectGraphType->insertItem(CIRCLE, i18n("Circle Graph"));
-    comboSelectGraphType->insertItem(STAR, i18n("Star Graph"));
-    comboSelectGraphType->insertItem(RANDOM, i18n("Random Graph"));
-
-    QObject::connect(comboSelectGraphType, SIGNAL(activated(int)), this, SLOT(setOptionsForGraphType(int)));
-
-    // Buttons
-    QPushButton* buttonGenerateGraph = new QPushButton(i18n("generate"));
-    connect( buttonGenerateGraph, SIGNAL(clicked()), this, SLOT(generateGraph()));
-
-    // make layout
-    gridLayout_ = new QGridLayout();
-
-    // generate options GUI
-    graphOptionsWidget_ = new QWidget();
-    QLabel *labelNumberNodes = new QLabel(this);
-    labelNumberNodes->setText( i18n("Number of Nodes:") );
-    QSpinBox *inputNumberNodes = new QSpinBox();
-
-    connect( inputNumberNodes, SIGNAL(valueChanged(int)), this, SLOT(setNumberOfNodes(int)));
-    inputNumberNodes->setValue(10);
-
-    QGridLayout* optionsLayout = new QGridLayout();
-    optionsLayout->addWidget(labelNumberNodes,0,0);
-    optionsLayout->addWidget(inputNumberNodes,0,1);
-    graphOptionsWidget_->setLayout(optionsLayout);
-
-    gridLayout_->addWidget(comboSelectGraphType, 0, 0);
-    gridLayout_->addWidget(graphOptionsWidget_, 1, 0);
-    gridLayout_->addWidget(buttonGenerateGraph, 2, 0);
-
-    setLayout(gridLayout_);
+	ui->setupUi(this);
+    graphDoc_ = graphDoc;
+    
+    // put widget at center of screen
+    //TODO problems with two screens
+    QDesktopWidget desktop;
+    QRect rect = desktop.availableGeometry(desktop.primaryScreen()); 
+    QPoint center = rect.center();
+    center.setX(center.x() - (this->width()/2));
+    center.setY(center.y() - (this->height()/2));
+    move(center);
 }
 
 
-void GenerateGraphWidget::setOptionsForGraphType(int selectedGraphType)
+void GenerateGraphWidget::setGraphType(int type)
 {
-    selectedGraphType_ = selectedGraphType;
+    selectedGraphType_ = type;
 }
 
 
@@ -109,16 +81,41 @@ void GenerateGraphWidget::generateGraph()
 {
     switch(selectedGraphType_)
     {
-        case MESH:   generateMesh();   break;
-        case CIRCLE: generateCircle(); break;
-        case STAR:   generateStar();   break;
-        case RANDOM: generateRandomGraph();   break;
+        case MESH: {
+            generateMesh(ui->meshRows->value(), ui->meshColumns->value());
+            break; 
+        }
+        case CIRCLE: {
+            generateCircle(ui->circleNodes->value()); 
+            break;
+        }
+        case STAR: {
+            generateStar(ui->starSatelliteNodes->value());
+            break;
+        }
+        case RANDOM: {
+            generateRandomGraph(
+                ui->randomNodes->value(),
+                ui->randomEdges->value(),
+                ui->randomGeneratorSeed->value(),
+                ui->randomAllowSelfedges->isTristate()
+            );
+            break;
+        }
         default:     break;
     }
+    
+    close();
+    deleteLater();
+}
+
+GenerateGraphWidget::~GenerateGraphWidget()
+{
+    delete ui;
 }
 
 
-void GenerateGraphWidget::generateMesh()
+void GenerateGraphWidget::generateMesh(int rows, int columns)
 {
     if (! graphDoc_ ){
       return;
@@ -129,39 +126,33 @@ void GenerateGraphWidget::generateMesh()
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Mesh Graph") );
 
-    int n = numberOfNodes_;
-
     // create mesh of NxN points
     QMap<QPair<int, int>, Data*> meshNodes;
 
     // create mesh nodes, store them in map
-    for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
+    for (int i = 0; i < columns; i++) {
+    for (int j = 0; j < rows; j++) {
         meshNodes[qMakePair(i,j)] = graph->addData(QString("%1-%2").arg(i).arg(j),QPointF(50+i*50, 50+j*50));
     }
     }
 
     // connect mesh nodes
-    for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
+    for (int i = 0; i < columns; i++) {
+    for (int j = 0; j < rows; j++) {
         graph->addPointer ( meshNodes[qMakePair(i,j)], meshNodes[qMakePair(i,j+1)] ); // left
         graph->addPointer ( meshNodes[qMakePair(i,j)], meshNodes[qMakePair(i+1,j)] );  // bottom.
     }
     }
-
-    close();
 }
 
-void GenerateGraphWidget::generateStar()
+void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 {
-    int n = numberOfNodes_;
-
     int affineX = 0;
     int affineY = 0;
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
-    int radius = 50*n/(2*PI_);
+    int radius = 50*numberSatelliteNodes/(2*PI_);
 
     if ( !graphDoc_ ){
       return;
@@ -176,31 +167,27 @@ void GenerateGraphWidget::generateStar()
     QList<Data*> starNodes;
 
     // create mesh nodes, store them in map
-    for (int i=1; i<=n; i++) {
-        starNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*radius, affineY + cos(i*2*PI_/n)*radius));
+    for (int i=1; i<=numberSatelliteNodes; i++) {
+        starNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/numberSatelliteNodes)*radius, affineY + cos(i*2*PI_/numberSatelliteNodes)*radius));
     }
 
     // middle
     starNodes.prepend( graph->addData(QString("center"),QPointF(affineX, affineY)) );
 
     // connect circle nodes
-    for (int i=1; i<=n; i++) {
+    for (int i=1; i<=numberSatelliteNodes; i++) {
         graph->addPointer (starNodes.at(0),starNodes.at(i));
     }
-
-    close();
 }
 
-void GenerateGraphWidget::generateCircle()
+void GenerateGraphWidget::generateCircle(int numberNodes)
 {
-    int n = numberOfNodes_;
-
     int affineX = 0;
     int affineY = 0;
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
-    int radius = 50*n/(2*PI_);
+    int radius = 50*numberNodes/(2*PI_);
 
     if (! graphDoc_ ){
         return;
@@ -215,40 +202,34 @@ void GenerateGraphWidget::generateCircle()
     QList<Data*> circleNodes;
 
     // create mesh nodes, store them in map
-    for (int i=0; i<n; i++) {
-            circleNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/n)*radius, affineY + cos(i*2*PI_/n)*radius));
+    for (int i=0; i<numberNodes; i++) {
+        circleNodes << graph->addData(QString("%1").arg(i),QPointF(affineX + sin(i*2*PI_/numberNodes)*radius, affineY + cos(i*2*PI_/numberNodes)*radius));
     }
 
     // connect circle nodes
-    for (int i=0; i<n-1; i++) {
+    for (int i=0; i<numberNodes-1; i++) {
         graph->addPointer (circleNodes.at(i),circleNodes.at(i+1));
     }
-    graph->addPointer (circleNodes.at(n-1),circleNodes.at(0));
-
-    close();
+    graph->addPointer (circleNodes.at(numberNodes-1),circleNodes.at(0));
 }
 
-void GenerateGraphWidget::generateRandomGraph()
+void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges)
 {
-    int n = numberOfNodes_;
-
     BoostGraph randomGraph;
-    boost::mt19937 gen; //FIXME seed must be set dynamically and predictable
-    int seed = std::clock();
+    boost::mt19937 gen;
     gen.seed (static_cast<unsigned int>(seed));
-    qDebug() << "Seed for random graph generation: " << seed;
 
-    //TODO make number of edges editable
+    // generate graph
     boost::generate_random_graph<BoostGraph,boost::mt19937>(
         randomGraph,
-        n,
-        n*2,   //TODO allow number of edges to be set
+        nodes,
+        randomEdges,
         gen,
-        false   //TODO allow self-connections by menu options
+        selfEdges
     );
 
     // generate distribution topology and apply
-    boost::rectangle_topology< boost::mt19937 > topology(gen, -20*n, -20*n, 20*n, 20*n);
+    boost::rectangle_topology< boost::mt19937 > topology(gen, -20*nodes, -20*nodes, 20*nodes, 20*nodes);
     PositionMap positionMap = boost::get(&VertexProperties::point, randomGraph);
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
@@ -259,23 +240,21 @@ void GenerateGraphWidget::generateRandomGraph()
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
 
     // put nodes at whiteboard as generated
-    QMap<int, Data*> nodes;
+    QMap<int, Data*> mapNodes;
     int index=0;
     BGL_FORALL_VERTICES(v, randomGraph, BoostGraph) {
         randomGraph[v].index = index++;
-        nodes[randomGraph[v].index] = graph->addData(
+        mapNodes[randomGraph[v].index] = graph->addData(
             QString("%1").arg(randomGraph[v].index),
             QPointF(randomGraph[v].point[0],randomGraph[v].point[1])
         );
     }
     BGL_FORALL_EDGES(e, randomGraph, BoostGraph) {
         graph->addPointer (
-            nodes[randomGraph[boost::source<>(e, randomGraph)].index],
-            nodes[randomGraph[boost::target<>(e, randomGraph)].index]
+            mapNodes[randomGraph[boost::source<>(e, randomGraph)].index],
+            mapNodes[randomGraph[boost::target<>(e, randomGraph)].index]
         );
     }
-
-    close();
 }
 
 
