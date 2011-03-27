@@ -167,6 +167,7 @@ QWidget* MainWindow::setupRightPanel()
 
     _vSplitter->addWidget ( _bottomTabs );
     _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
+    
     return _vSplitter;
 }
 
@@ -402,10 +403,10 @@ GraphScene* MainWindow::scene() const
 
 void MainWindow::newGraph()
 {
-  if (DocumentManager::self()->activeDocument() != 0){
-    if ( saveIfChanged() == KMessageBox::Cancel ) return;
-  }
-  loadDocument();
+    if (DocumentManager::self()->activeDocument() != 0){
+        if ( saveIfChanged() == KMessageBox::Cancel ) return;
+    }
+    loadDocument();
 }
 
 void MainWindow::openGraph()

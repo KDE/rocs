@@ -51,6 +51,11 @@ GraphVisualEditor::GraphVisualEditor( qreal minWidth, qreal minHeight, MainWindo
     setupWidgets();
 }
 
+void GraphVisualEditor::resizeEvent (QResizeEvent  *event )
+{
+    _scene->updateMinSize(size().width(), size().height());
+}
+
 void GraphVisualEditor::setupWidgets() {
     QVBoxLayout *vLayout = new QVBoxLayout();
     vLayout->setContentsMargins(0,0,0,0);

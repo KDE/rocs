@@ -39,6 +39,11 @@ public:
     /*! Default Constructor
     \param parent the owner of this widget. */
     GraphVisualEditor(qreal minWidth, qreal minHeight, MainWindow *parent = 0);
+    
+    /**
+     * re-implementation of resize event to also setup the graph scene
+     */
+    void resizeEvent (QResizeEvent  *event );
 
     GraphScene *scene() const;
     QGraphicsView *view() const;
