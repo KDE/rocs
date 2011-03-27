@@ -149,7 +149,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_numberSatellite">
         <property name="text">
-         <string>Sattelite Nodes:</string>
+         <string>Satellite Nodes:</string>
         </property>
        </widget>
       </item>
