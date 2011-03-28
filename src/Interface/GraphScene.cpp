@@ -103,9 +103,12 @@ void GraphScene::hideGraph(DataStructure* g, bool visibility)
     }
 }
 
-
 void GraphScene::setAction(QAction *action) {
-    _action = qobject_cast<AbstractAction*>(action);
+    if(_action){
+        removeEventFilter(_action);
+    }
+    _action = qobject_cast<AbstractAction*>( action );
+    installEventFilter(action);
 }
 
 void GraphScene::setActiveDocument() {
@@ -118,7 +121,7 @@ void GraphScene::setActiveDocument() {
         return;
     }
 
-//     // adapt document to scene if too small
+     // adapt document to scene if too small
     _graphDocument = gd;
     if (gd->width()<_minWidth) {
         gd->setXLeft(gd->xLeft()-(_minWidth-gd->width())/2);
@@ -129,11 +132,11 @@ void GraphScene::setActiveDocument() {
         gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
     }
 
-    setSceneRect( QRectF(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() ));
-    _whiteboard = new QGraphicsRectItem(gd->xLeft(),gd->yTop(), gd->xRight()-gd->xLeft(), gd->yBottom()-gd->yTop() );
+    _whiteboard = new QGraphicsRectItem( );
     _whiteboard->setFlag(QGraphicsItem::ItemIsSelectable, false);
     _whiteboard->setZValue(-1000);
     addItem(_whiteboard);
+    resize();
 
     int size = gd->dataStructures().size();
     for (int i = 0; i < size; i++) {
@@ -149,7 +152,6 @@ void GraphScene::setActiveDocument() {
     createItems();
 }
 
-
 void GraphScene::createItems(){
     foreach(DataStructure *g, _graphDocument->dataStructures()){
         foreach( Data *d, g->dataList()) createData( d );
@@ -157,12 +159,10 @@ void GraphScene::createItems(){
     }
 }
 
-
 void GraphScene::connectGraphSignals(DataStructure *g){
     connect( g, SIGNAL(dataCreated(Data*)), this, SLOT(createData(Data*)));
     connect( g, SIGNAL(pointerCreated(Pointer*)), this, SLOT(createEdge(Pointer*)));
 }
-
 
 void GraphScene::releaseDocument(){
     _graphDocument->disconnect(this);
@@ -173,13 +173,11 @@ void GraphScene::releaseDocument(){
     }
 }
 
-
 QGraphicsItem *GraphScene::createData(Data *n) {
     DataItem *nItem = (DataItem*)(DataStructurePluginManager::self()->dataItem(n));
     addItem(nItem);
     return nItem;
 }
-
 
 QGraphicsItem *GraphScene::createEdge(Pointer *e) {
     QGraphicsItem *pointerItem = 0;
@@ -188,11 +186,9 @@ QGraphicsItem *GraphScene::createEdge(Pointer *e) {
     return pointerItem;
 }
 
-
 void GraphScene::mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent){
     mouseEvent->accept();
 }
-
 
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
     DataItem *nitem = qgraphicsitem_cast<DataItem*>(itemAt(wheelEvent->scenePos()));
@@ -216,12 +212,9 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
     wheelEvent->accept();
 }
 
-
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-    _action->executeMove(mouseEvent->scenePos());
-    //QGraphicsScene::mouseMoveEvent(mouseEvent);
+    Q_UNUSED(mouseEvent);
 }
-
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     if (mouseEvent->button() == Qt::MidButton) {
@@ -237,25 +230,17 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
         else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
             _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
         }
-    }else if( mouseEvent -> button() == Qt::LeftButton){
-        _action->executePress(mouseEvent->scenePos());
     }
     QGraphicsScene::mousePressEvent(mouseEvent);
 }
 
-
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
-    if (mouseEvent->button() == Qt::LeftButton){
-        _action->executeRelease(mouseEvent->scenePos());
-    }
     QGraphicsScene::mouseReleaseEvent(mouseEvent);
 }
-
 
 void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
     keyEvent->accept();
 }
-
 
 void GraphScene::updateGraph(DataStructure *g) {
     foreach(Data *n, g->dataList()) {
@@ -266,7 +251,6 @@ void GraphScene::updateGraph(DataStructure *g) {
        e->setName(e->name());
     }
 }
-
 
 void GraphScene::updateDocument() {
     if (_graphDocument == 0) {
@@ -281,13 +265,12 @@ void GraphScene::updateDocument() {
     }
 }
 
-
 void GraphScene::resize() {
-    _whiteboard->setRect(
-        QRectF(_graphDocument->xLeft(),_graphDocument->yTop(), _graphDocument->xRight()-_graphDocument->xLeft(), _graphDocument->yBottom()-_graphDocument->yTop())
-    );
-    setSceneRect(
-        QRectF(_graphDocument->xLeft(),_graphDocument->yTop(), _graphDocument->xRight()-_graphDocument->xLeft(), _graphDocument->yBottom()-_graphDocument->yTop())
-    );
+    QRectF newSize(_graphDocument->xLeft(), // x
+                   _graphDocument->yTop(),  // y
+                   _graphDocument->xRight()-_graphDocument->xLeft(), // width
+                   _graphDocument->yBottom()-_graphDocument->yTop()); // height
+    _whiteboard->setRect( newSize );
+    setSceneRect( newSize );
     emit resized();
 }

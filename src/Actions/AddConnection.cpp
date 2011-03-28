@@ -48,25 +48,30 @@ AddConnectionAction::~AddConnectionAction() {
     kDebug() << "Destroyed";
 }
 
-void AddConnectionAction::executePress(QPointF pos) {
-    if (_working) return;
-    if ( !  DocumentManager::self()->activeDocument()->activeDataStructure()
-         || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly())
-     return;
-
-    _working = true;
-    _from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos));
-
-    if ( ! _from ) {
-        _working = false;
-        return;
+bool AddConnectionAction::executePress(QPointF pos) {
+    if (_working){
+        return false;
     }
-    _startPos = QPointF(_from->data()->x(), _from->data()->y());
+    
+    if ( !  DocumentManager::self()->activeDocument()->activeDataStructure()
+         || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()){
+     return false;
+    }
+    
+    if ( _from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)) ) {
+        _working = true;
+        _startPos = QPointF(_from->data()->x(), _from->data()->y());
+        return true;
+    }
+
+    return false;
 }
 
-void AddConnectionAction::executeMove(QPointF pos) {
-    if ( !DocumentManager::self()->activeDocument()->activeDataStructure() ) return;
-    if ( !_from ) return;
+bool AddConnectionAction::executeMove(QPointF pos) {
+    if (   !DocumentManager::self()->activeDocument()->activeDataStructure() 
+        || !_from){
+        return false;
+    }
 
     if ( !_tmpLine ) {
         _tmpLine = new QGraphicsLineItem();
@@ -74,23 +79,25 @@ void AddConnectionAction::executeMove(QPointF pos) {
     }
 
     _tmpLine->setLine(_startPos.x(), _startPos.y(), pos.x(), pos.y());
+    return true;
 }
 
-void AddConnectionAction::executeRelease(QPointF pos) {
-    if ( !_working ) return;
-    if ( !DocumentManager::self()->activeDocument()->activeDataStructure() ) return;
-
-    if ( _tmpLine ) {
-        delete _tmpLine;
-        _tmpLine = 0;
+bool AddConnectionAction::executeRelease(QPointF pos) {
+    if ( !_working 
+     ||  !DocumentManager::self()->activeDocument()->activeDataStructure() ){
+        return false;
     }
 
-    _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos));
-    if (  _to ) {
-        DocumentManager::self()->activeDocument()->activeDataStructure()->addPointer( _from->data(),  _to->data() );
+    delete _tmpLine;
+    _tmpLine = 0;
+
+    if (  _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)) ) {
+        DocumentManager::self()->activeDocument()
+            ->activeDataStructure()->addPointer( _from->data(),  _to->data() );
     }
 
     _to = 0;
     _from = 0;
     _working = false;
+    return true;
 }

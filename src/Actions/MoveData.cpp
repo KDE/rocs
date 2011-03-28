@@ -44,48 +44,51 @@ MoveDataAction::~MoveDataAction() {
     kDebug() << "Destroyed";
 }
 
-void MoveDataAction::executePress(QPointF pos) {
+bool MoveDataAction::executePress(QPointF pos) {
     if ( !DocumentManager::self()->activeDocument()->activeDataStructure()) {
-        return;
+        return false;
     }
-    _movableNode = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos));
-    if (!_movableNode ) return;
+
+    if (! ( _movableNode = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)) )) 
+        return false;
 
     _data = _movableNode->data();
-    if (_data){
-        qDebug() << "Got the data";
-    }
+    return true;
 }
 
-void MoveDataAction::executeMove(QPointF pos) {
+bool MoveDataAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
-        return;
+        return false;
     }
+    
     if (!DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
-        if (pos.x() < DocumentManager::self()->activeDocument()->xLeft()) {
-            pos.setX(DocumentManager::self()->activeDocument()->xLeft());
+        Document *d = DocumentManager::self()->activeDocument();
+        if (pos.x() < d->xLeft()) {
+            pos.setX(d->xLeft());
         }
-        if (pos.x() > DocumentManager::self()->activeDocument()->xRight()) {
-            pos.setX(DocumentManager::self()->activeDocument()->xRight());
+        if (pos.x() > d->xRight()) {
+            pos.setX(d->xRight());
         }
-        if (pos.y() < DocumentManager::self()->activeDocument()->yTop()) {
-            pos.setY(DocumentManager::self()->activeDocument()->yTop());
+        if (pos.y() < d->yTop()) {
+            pos.setY(d->yTop());
         }
-        if (pos.y() > DocumentManager::self()->activeDocument()->yBottom()) {
-            pos.setY(DocumentManager::self()->activeDocument()->yBottom());
+        if (pos.y() > d->yBottom()) {
+            pos.setY(d->yBottom());
         }
     }
 
     _data -> setPos(pos.x(), pos.y());
+    return true;
 }
 
-void MoveDataAction::executeRelease(QPointF pos) {
+bool MoveDataAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
-        return;
+        return false;
     }
     if (DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
         _data -> setY(pos.y());
         _data -> setX(pos.x());
     }
     _movableNode = 0;
+    return true;
 }

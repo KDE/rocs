@@ -23,6 +23,8 @@
 #include "DataStructure.h"
 #include "Document.h"
 #include <QPointF>
+#include <QGraphicsSceneEvent>
+#include <QGraphicsSceneMouseEvent>
 #include <KDebug>
 
 AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
@@ -40,9 +42,32 @@ void AbstractAction::sendExecuteBit() {
 const QString& AbstractAction::name() const {
     return _name;
 }
-void AbstractAction::executePress(QPointF) {}
-void AbstractAction::executeMove(QPointF) {}
-void AbstractAction::executeRelease(QPointF) {}
-void AbstractAction::executeKeyPress(QKeyEvent*) {}
-void AbstractAction::executeKeyRelease(QKeyEvent*) {}
 
+bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
+    switch(event->type()){
+        case QEvent::GraphicsSceneMousePress : {
+            QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
+            return executePress(e->scenePos());
+        }
+        case QEvent::GraphicsSceneMouseMove  :{
+            QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
+            return executeMove(e->scenePos());
+        }
+        case QEvent::GraphicsSceneMouseRelease :{
+             QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
+            return executeRelease(e->scenePos());
+        }
+        case QEvent::GraphicsSceneMouseDoubleClick :{
+            QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
+            return executePress(e->scenePos());
+        }
+    }
+    return false;
+}
+
+bool AbstractAction::executePress(QPointF pos){   Q_UNUSED(pos); return false; }
+bool AbstractAction::executeMove(QPointF pos){    Q_UNUSED(pos); return false; }
+bool AbstractAction::executeRelease(QPointF pos) {Q_UNUSED(pos); return false; }
+
+bool AbstractAction::executeKeyPress(QKeyEvent *keyEvent){ Q_UNUSED(keyEvent);   return false; }
+bool AbstractAction::executeKeyRelease(QKeyEvent *keyEvent){ Q_UNUSED(keyEvent); return false; }

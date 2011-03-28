@@ -40,18 +40,15 @@ AddNodeAction::~AddNodeAction() {
     kDebug() << "Destroyed";
 }
 
-void AddNodeAction::executePress(QPointF pos) {
-    if (!  DocumentManager::self()->activeDocument()->activeDataStructure()
-        || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly() ) {
-        return;
+bool AddNodeAction::executePress(QPointF pos) {
+    if (  !DocumentManager::self()->activeDocument()->activeDataStructure()
+       ||  DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly() 
+       || !DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
+        return false;
     }
-
-    // check if point is valid for current document extension
-    if (!DocumentManager::self()->activeDocument()->isPointAtDocument(pos))
-        return;
-
-    DocumentManager::self()->activeDocument()->activeDataStructure()->addData(i18n("untitled"), QPointF(pos.x(), pos.y()));
-
-    qDebug() << "Point Clicked: " << QPointF(pos.x(), pos.y());
+    DocumentManager::self()->activeDocument()->activeDataStructure()
+            ->addData(i18n("untitled"), QPointF(pos.x(), pos.y()));
+            
+    return true;
 }
 

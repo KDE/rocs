@@ -47,32 +47,32 @@ public slots:
     /*! Virtual,  executed when a mouse press occours on the scene.
     \p pos the position on screen that the execution will take part.
     */
-    virtual void executePress(QPointF pos);
+    virtual bool executePress(QPointF pos);
 
     /*! Virtual, executed when a mouse move on the scene.
      \p pos the position on screen that the mouse is now.
     */
-    virtual void executeMove(QPointF pos);
+    virtual bool executeMove(QPointF pos);
 
     /*! virtual, executed when a mous click is released on the scene.
     \p pos the position where the release occourred.
     */
-    virtual void executeRelease(QPointF pos);
+    virtual bool executeRelease(QPointF pos);
 
     /*! virtual, executed when a keyboard key is pressed on the scene.
     \p keyEvent the key event from the scene.
     */
-    virtual void executeKeyPress(QKeyEvent *keyEvent);
+    virtual bool executeKeyPress(QKeyEvent *keyEvent);
 
     /*! virtual, executed when a keyboard key is released on the scene
       \p keyEvent the key event from the scene.
       */
-    virtual void executeKeyRelease(QKeyEvent *keyEvent);
-
+    virtual bool executeKeyRelease(QKeyEvent *keyEvent);
 
     /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
     void sendExecuteBit();
-
+    
+    bool eventFilter ( QObject * watched, QEvent * event );
 protected:
 
     /*! pointer to the GraphicsScene with the drawing */

@@ -44,84 +44,31 @@ SelectAction::SelectAction(GraphScene *scene, QObject *parent)
 
 SelectAction::~SelectAction() {}
 
-void SelectAction::executePress(QPointF pos) {
+bool SelectAction::executePress(QPointF pos) {
     if (! DocumentManager::self()->activeDocument()->activeDataStructure() ){
-      return;
+      return false;
     }
     _graphScene->views().at(0)->setInteractive(true);
     _graphScene->views().at(0)->setDragMode(QGraphicsView::RubberBandDrag);
     
-    _p1 = pos;
+    return true;
 }
 
-void SelectAction::executeRelease(QPointF pos) {
+bool SelectAction::executeRelease(QPointF pos) {
     if (! DocumentManager::self()->activeDocument()->activeDataStructure() ){
-      return;
+      return false;
     }
 
     QList<QGraphicsItem*> currentSelection = _graphScene->selectedItems();
     foreach(QGraphicsItem *i, currentSelection) {
-        i->setSelected(false);
-        i->update();
-    }
-
-    if (pos == _p1) {
-        singleSelect(pos);
-    }
-    else {
-        multiSelect(pos);
-    }
-}
-
-void SelectAction::multiSelect(QPointF pos) {
-    QList<QGraphicsItem*> items = _graphScene->items(QRectF(_p1, pos));
-    foreach(QGraphicsItem *i, items) {
         if (!( qgraphicsitem_cast<DataItem*>(i) || qgraphicsitem_cast<PointerItem*>(i))) {
-            items.removeAll(i);
+            currentSelection.removeOne(i);
         }
     }
-    if (items.size() == 1) {
-        singleSelect(items[0]->pos());
-        return;
-    }
-
-    foreach(QGraphicsItem *i, items) {
-        i->setSelected(true);
-        i->update();
-    }
+    _graphScene->views().at(0)->setDragMode(QGraphicsView::NoDrag);
+    
+    return true;
+    
 }
 
-#include <QtAlgorithms>
-bool zValue(QGraphicsItem *i1, QGraphicsItem *i2) {
-    return i1->zValue() < i2->zValue();
-}
-
-void SelectAction::singleSelect(QPointF pos) {
-    QGraphicsItem * item = 0;
-    QGraphicsEllipseItem *tmpItem = new QGraphicsEllipseItem(pos.x()-5,pos.y()-5,10,10);
-    _graphScene->addItem(tmpItem);
-
-    if (tmpItem->collidingItems().empty()) {
-        kDebug() << "No Collisions";
-        _graphScene->removeItem(tmpItem);
-        delete tmpItem;
-        return;
-    } else {
-        QList<QGraphicsItem*> items = tmpItem->collidingItems();
-
-        qSort(items.begin(), items.end(), zValue);
-        item = items.at(items.size()-1);
-        if (item->zValue() == -1000) {
-            emit ItemSelectedChanged(0);
-            delete tmpItem;
-            return;
-        }
-    }
-
-    item->setSelected(true);
-    emit ItemSelectedChanged(item);
-    item->update();
-    qDebug() << "Item Selected!";
-    delete tmpItem;
-}
 #include "Select.moc"

@@ -54,7 +54,7 @@ public slots:
       \param pos the position on the screen that the new node will be placed.
 
     */
-    void executePress(QPointF pos);
+    bool executePress(QPointF pos);
 
   signals:
     void addNode(QString name, QPointF pos);

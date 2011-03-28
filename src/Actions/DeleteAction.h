@@ -36,12 +36,12 @@ public:
     /*! start the node deletion algorithm on the specified point.
     \p pos the position of the click.
     */
-    void executePress(QPointF pos);
+    bool executePress(QPointF pos);
 
     /*! when somebody press the delete key, the system will try to delete all selected nodes.
     \p keyEvent the key to be processed.
     */
-    void executeKeyRelease(QKeyEvent* keyEvent);
+    bool executeKeyRelease(QKeyEvent* keyEvent);
 };
 
 #endif // DELETEACTION_H

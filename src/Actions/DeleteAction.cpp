@@ -37,21 +37,26 @@ DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(s
     _name = "delete";
 }
 
-void DeleteAction::executePress(QPointF pos)
+bool DeleteAction::executePress(QPointF pos)
 {
     QGraphicsItem * item = _graphScene->itemAt(pos);
     if ( DataItem *n  = qgraphicsitem_cast<DataItem*>(item) ) {
         n->data()->remove();
+        return true;
     }
     else if ( PointerItem *e = qgraphicsitem_cast<PointerItem*>(item) ) {
         e->pointer()->remove();
+        return true;
     }
+    return false;
 }
 
-void DeleteAction::executeKeyRelease(QKeyEvent* keyEvent)
+bool DeleteAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
     if (keyEvent->key() == Qt::Key_Delete) {
-        
+        qDebug() << "Delete Pressed";
+        return true;
     }
+    return false;
 }
 

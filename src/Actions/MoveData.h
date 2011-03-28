@@ -52,16 +52,16 @@ public slots:
       will be executed when the mouse press a button.
       \param pos the position onscreen of the click.
     */
-    void executePress(QPointF pos);
+    bool executePress(QPointF pos);
     /*! will be executed when the mouse moves.
       \param pos the current position of the cursor.
     */
-    void executeMove(QPointF pos);
+    bool executeMove(QPointF pos);
 
     /*! will be executed when the mouse releases a click
     \param pos the position of the cursor.
     */
-    void executeRelease(QPointF pos);
+    bool executeRelease(QPointF pos);
 
 protected:
     /*! the node that will be moved on screen */
