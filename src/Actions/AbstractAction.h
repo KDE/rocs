@@ -54,11 +54,16 @@ public slots:
     */
     virtual bool executeMove(QPointF pos);
 
-    /*! virtual, executed when a mous click is released on the scene.
+    /*! virtual, executed when a mouse click is released on the scene.
     \p pos the position where the release occourred.
     */
     virtual bool executeRelease(QPointF pos);
 
+     /*! virtual, executed when a mouse click is released on the scene.
+    \p pos the position where the release occourred.
+    */
+     
+    virtual bool executeDoubleClick(QPointF pos);
     /*! virtual, executed when a keyboard key is pressed on the scene.
     \p keyEvent the key event from the scene.
     */

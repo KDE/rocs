@@ -68,6 +68,6 @@ bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
 bool AbstractAction::executePress(QPointF pos){   Q_UNUSED(pos); return false; }
 bool AbstractAction::executeMove(QPointF pos){    Q_UNUSED(pos); return false; }
 bool AbstractAction::executeRelease(QPointF pos) {Q_UNUSED(pos); return false; }
-
+bool AbstractAction::executeDoubleClick(QPointF pos){ Q_UNUSED(pos); return false; }
 bool AbstractAction::executeKeyPress(QKeyEvent *keyEvent){ Q_UNUSED(keyEvent);   return false; }
 bool AbstractAction::executeKeyRelease(QKeyEvent *keyEvent){ Q_UNUSED(keyEvent); return false; }
