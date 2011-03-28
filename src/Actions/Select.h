@@ -55,10 +55,6 @@ public slots:
       \param pos the position onscreen of the click.
     */
     void executePress(QPointF pos);
-    /*! will be executed when the mouse moves.
-      \param pos the current position of the cursor.
-    */
-    void executeMove(QPointF pos);
 
     /*! will be executed when the mouse releases a click
     \param pos the position of the cursor.

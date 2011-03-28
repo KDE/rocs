@@ -219,7 +219,7 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
 
 void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     _action->executeMove(mouseEvent->scenePos());
-    mouseEvent->accept();
+    //QGraphicsScene::mouseMoveEvent(mouseEvent);
 }
 
 
@@ -240,7 +240,7 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     }else if( mouseEvent -> button() == Qt::LeftButton){
         _action->executePress(mouseEvent->scenePos());
     }
-    mouseEvent->accept();
+    QGraphicsScene::mousePressEvent(mouseEvent);
 }
 
 
@@ -248,6 +248,7 @@ void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     if (mouseEvent->button() == Qt::LeftButton){
         _action->executeRelease(mouseEvent->scenePos());
     }
+    QGraphicsScene::mouseReleaseEvent(mouseEvent);
 }
 
 

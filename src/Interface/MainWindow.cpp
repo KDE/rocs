@@ -93,17 +93,18 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
     setupActions();
     setupGUI();
 
-    statusBar()->hide();
+    //statusBar()->hide();
 
     setupToolsPluginsAction();
     setupDSPluginsAction();
 
-    connect(DocumentManager::self(), SIGNAL(activateDocument()),
-            this, SLOT(setActiveDocument()), Qt::UniqueConnection );
-    connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)),
-            this, SLOT(releaseDocument(Document*)),Qt::UniqueConnection   );
-    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
-            this, SLOT(releaseDocument(Document*)),Qt::UniqueConnection   );
+    DocumentManager *dm = DocumentManager::self();
+    connect(dm, SIGNAL(activateDocument()), 
+            this, SLOT(setActiveDocument()));
+    connect(dm, SIGNAL(deactivateDocument(Document*)),
+            this, SLOT(releaseDocument(Document*)));
+    connect(dm, SIGNAL(documentRemoved(Document*)),
+            this, SLOT(releaseDocument(Document*)));
 
      /* just for testing prurposes,
      * this should not be hardcoded here.
@@ -204,86 +205,37 @@ void MainWindow::setupActions()
     ac->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   _graphVisualEditor ) );
     ac->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,_graphVisualEditor ) );
     ac->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  _graphVisualEditor ) );
+    
+    createAction("document-new",     i18n("New Graph"),         "new-graph",         Qt::Key_N, SLOT(newGraph()),    this);
+    createAction("document-open",    i18n("Open Graph"),        "open-graph",        Qt::Key_0, SLOT(openGraph()),   this);
+    createAction("document-save",    i18n("Save Graph"),        "save-graph",        Qt::Key_S, SLOT(saveGraph()),   this);
+    createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     Qt::Key_W, SLOT(saveGraphAs()), this);
+    createAction("",                 i18n("Download Examples"), "download", Qt::Key_D, SLOT(downloadNewExamples()),  this);
+    
+    createAction("document-save-as", i18n("Possible Includes"), "possible_includes", Qt::Key_P, SLOT(showPossibleIncludes()), this);
+    
+    createAction("document-new",     i18n("New Script"),        "new-script",        Qt::Key_N, SLOT(newScript()),    _codeEditor);
+    createAction("document-open",    i18n("Open Script"),       "open-script",       Qt::Key_O, SLOT(openScript()),   _codeEditor);
+    createAction("document-save",    i18n("Save Script"),       "save-script",       Qt::Key_S, SLOT(saveScript()),   _codeEditor);
+    createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    Qt::Key_W, SLOT(saveScriptAs()), _codeEditor);
 
-    KAction* action = new KAction ( KIcon ( "document-new" ), i18n ( "New Graph" ),  _graphVisualEditor->view() );
-    action->setShortcut ( Qt::CTRL + Qt::Key_N );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "new-graph", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( newGraph() ) );
-
-    action = new KAction (i18n("Download Examples"), this);
-    actionCollection()->addAction ( "download", action );
-    connect(action, SIGNAL(triggered(bool)), this, SLOT(downloadNewExamples()));
-
-    action = new KAction ( KIcon ( "document-open" ),i18n ( "Open Graph..." ), _graphVisualEditor->view() );
-    action->setShortcut ( Qt::CTRL + Qt::Key_O );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "open-graph", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( openGraph() ) );
-
-    action = new KAction ( KIcon ( "document-save" ), i18n ( "Save Graph" ), _graphVisualEditor->view() );
-    action->setShortcut ( Qt::CTRL + Qt::Key_S );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "save-graph", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( saveGraph() ) );
-
-    action = new KAction ( KIcon ( "document-save-as" ),i18n ( "Save Graph As..." ), _graphVisualEditor->view() );
-    action->setShortcut ( Qt::CTRL + Qt::Key_W );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "save-graph-as", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( saveGraphAs() ) );
-
-    action = new KAction ( KIcon ( "document-new" ),i18n ( "New Script" ), this );
-    action->setShortcut ( Qt::CTRL + Qt::Key_N );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "new-script", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), _codeEditor, SLOT ( newScript() ) );
-
-    action = new KAction ( KIcon ( "document-open" ),i18n ( "Open Script..." ), this );
-    action->setShortcut ( Qt::CTRL + Qt::Key_O );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "open-script", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), _codeEditor, SLOT ( openScript() ) );
-
-    action = new KAction ( KIcon ( "document-save" ),i18n ( "Save Script" ), this );
-    action->setShortcut ( Qt::CTRL + Qt::Key_S );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "save-script", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), _codeEditor, SLOT ( saveScript() ) );
-
-    action = new KAction ( KIcon ( "document-save-as" ), i18n ( "Save Script As..." ), this );
-    action->setShortcut ( Qt::CTRL + Qt::Key_W );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "save-script-as", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), _codeEditor, SLOT ( saveScriptAs() ) );
-
-
-    if (  PluginManager::instance()->filePlugins().count() > 0 )
-    {
-        kDebug() << "Creating Actions (import export)..";
-        action = new KAction ( KIcon ( "document-save-as" ), i18n ( "Import" ), this );
-        action->setShortcut ( Qt::CTRL + Qt::Key_I );
-        action->setShortcutContext ( Qt::WidgetShortcut );
-        actionCollection()->addAction ( "import", action );
-        connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( importFile() ) );
-
-        action = new KAction ( KIcon ( "document-save-as" ), i18n ( "Export" ), this );
-        action->setShortcut ( Qt::CTRL + Qt::Key_E );
-        action->setShortcutContext ( Qt::WidgetShortcut );
-        actionCollection()->addAction ( "export", action );
-        connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( exportFile() ) );
+    kDebug() << "Creating Actions (import export)";
+    if (PluginManager::instance()->filePlugins().count()) {
+        createAction("document-save-as", i18n("Import"), "import", Qt::Key_I, SLOT(importFile()), this);
+        createAction("document-save-as", i18n("Export"), "export", Qt::Key_E, SLOT(exportFile()), this);
     }
-    else
-    {
-        kDebug() << "Not Creating Actions (import export).." <<  PluginManager::instance()->filePlugins().count();
-    }
-    action = new KAction ( KIcon ( "document-save-as" ), i18n ( "Possible Includes" ), this );
-    action->setShortcut ( Qt::CTRL + Qt::Key_P );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( "possible_includes", action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), this, SLOT ( showPossibleIncludes()) );
-
+    
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
+}
+
+void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName, 
+                              const QKeySequence& shortcut, const char* slot, QObject *parent)
+{
+    KAction* action = new KAction ( KIcon ( iconName ), actionTitle, parent );
+    action->setShortcut ( shortcut);
+    action->setShortcutContext ( Qt::WidgetShortcut );
+    actionCollection()->addAction ( actionName, action );
+    connect ( action, SIGNAL ( triggered ( bool ) ), parent, slot );
 }
 
 void MainWindow::showSettings()

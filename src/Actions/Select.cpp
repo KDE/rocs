@@ -32,56 +32,32 @@
 #include <KLocale>
 #include <KDebug>
 #include <QDebug>
+#include <QGraphicsView>
 
 SelectAction::SelectAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Select" ));
     setToolTip ( i18n ( "Select Items by clicking on them." ) );
     setIcon ( KIcon ( "rocsselect" ) );
-    _selectionRect = 0;
     _name = "select";
 }
 
 SelectAction::~SelectAction() {}
 
 void SelectAction::executePress(QPointF pos) {
-    if (! DocumentManager::self()->activeDocument()->activeDataStructure() ) return;
-
+    if (! DocumentManager::self()->activeDocument()->activeDataStructure() ){
+      return;
+    }
+    _graphScene->views().at(0)->setInteractive(true);
+    _graphScene->views().at(0)->setDragMode(QGraphicsView::RubberBandDrag);
+    
     _p1 = pos;
-    _selectionRect = new QGraphicsRectItem();
-    _selectionRect->setFlag(QGraphicsItem::ItemIsSelectable, false);
-    _graphScene->addItem(_selectionRect);
-    kDebug() << "Press Executed.";
-}
-
-void SelectAction::executeMove(QPointF pos) {
-    if (! DocumentManager::self()->activeDocument()->activeDataStructure() ) return;
-    if (_selectionRect == 0) return;
-    QPointF p1 = _p1;
-    /* Code to make setRect stop behaving wrongly */
-    if (p1.x() > pos.x()){
-      int x = pos.x();
-      pos.setX(p1.x());
-      p1.setX(x);
-    }
-    if (p1.y() > pos.y()){
-      int y = pos.y();
-      pos.setY(p1.y());
-      p1.setY(y);
-    }
-    /* end of code to make setRect stop behaving silly */
-
-    _selectionRect->setRect(QRectF(p1, pos));
 }
 
 void SelectAction::executeRelease(QPointF pos) {
-    if (! DocumentManager::self()->activeDocument()->activeDataStructure() ) return;
-    if ( _selectionRect == 0) return;
-
-    _graphScene->removeItem(_selectionRect);
-
-    delete _selectionRect;
-    _selectionRect = 0;
+    if (! DocumentManager::self()->activeDocument()->activeDataStructure() ){
+      return;
+    }
 
     QList<QGraphicsItem*> currentSelection = _graphScene->selectedItems();
     foreach(QGraphicsItem *i, currentSelection) {

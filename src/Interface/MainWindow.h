@@ -65,7 +65,9 @@ private: // Methods
     QWidget* setupRightPanel(); // setup the Right area of the panel, the GraphicsView, the editors and stuff
     int saveIfChanged();
     void finishLoadingUi();
-
+    void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
+                      const QKeySequence & shortcut , const char* slot, QObject *parent);
+    
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
 
