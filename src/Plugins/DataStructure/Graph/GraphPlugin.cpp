@@ -70,7 +70,6 @@ QGraphicsItem*  GraphPlugin::pointerItem ( Pointer* edge) const
 }
 QLayout* GraphPlugin::dataExtraProperties ( Data* node, QWidget* parentWidget ) const
 {
-  qDebug() << "Creating Extra Data Properties";
   QGridLayout * lay = new QGridLayout(parentWidget);
   QSpinBox * y = new QSpinBox(parentWidget);
   QSpinBox * x = new QSpinBox(parentWidget);

@@ -31,9 +31,10 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
 
     show(); activateWindow(); raise();
 
+    delete extraItens->layout();
+    extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
-
-
+    
     connect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
    
     connect( _showName,     SIGNAL(toggled(bool)),          this, SLOT( applyChanges() ));
@@ -64,11 +65,13 @@ void DataPropertiesWidget::applyChanges(){
 void DataPropertiesWidget::reflectAttributes(){
     if (!extraItens->layout()){
         _oldDataStructurePlugin = DataStructurePluginManager::self()->actualPlugin();
-        extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     }
     
     if (_oldDataStructurePlugin != DataStructurePluginManager::self()->actualPlugin()){
         extraItens->layout()->deleteLater();
+    }
+    
+    if (!extraItens->layout()){
         extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     }
     
