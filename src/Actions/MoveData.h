@@ -70,6 +70,8 @@ protected:
     /*! the model of the NodeItem,
     needs it to modify it's internal value when the move is finished */
     Data *_data;
+    QPointF _delta;
+    QMap<DataItem*, QPointF> _deltas;
 };
 
 #endif

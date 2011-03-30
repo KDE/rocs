@@ -51,8 +51,18 @@ bool MoveDataAction::executePress(QPointF pos) {
 
     if (! ( _movableNode = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)) )) 
         return false;
+    
+    _deltas.clear();
+    if (! _graphScene->selectedItems().contains(_movableNode) ){
+        _data = _movableNode->data();
+        _delta = pos - QPointF(_data->x(), _data->y());
+    }else foreach (QGraphicsItem *item, _graphScene->selectedItems()){
 
-    _data = _movableNode->data();
+        if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
+            QPointF delta = pos - QPointF(dItem->data()->x(), dItem->data()->y());
+            _deltas.insert(dItem, delta);
+        }
+    }
     return true;
 }
 
@@ -76,8 +86,15 @@ bool MoveDataAction::executeMove(QPointF pos) {
             pos.setY(d->yBottom());
         }
     }
-
-    _data -> setPos(pos.x(), pos.y());
+    
+    if (! _graphScene->selectedItems().contains(_movableNode) ){
+        _data -> setPos(pos.x() - _delta.x(), pos.y() - _delta.y());
+    }else foreach (QGraphicsItem *item, _graphScene->selectedItems()){
+        if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
+             dItem->data() -> setPos(pos.x() - _deltas.value(dItem).x(), 
+                                     pos.y() - _deltas.value(dItem).y());
+        }
+    }
     return true;
 }
 
@@ -85,10 +102,16 @@ bool MoveDataAction::executeRelease(QPointF pos) {
     if ( !_movableNode ) {
         return false;
     }
-    if (DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
-        _data -> setY(pos.y());
-        _data -> setX(pos.x());
+    
+    if (! _graphScene->selectedItems().contains(_movableNode) ){
+        _data -> setPos(pos.x() - _delta.x(), pos.y() - _delta.y());
+    }else foreach (QGraphicsItem *item, _graphScene->selectedItems()){
+        if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
+             dItem->data() -> setPos(pos.x() - _deltas.value(dItem).x(), 
+                                     pos.y() - _deltas.value(dItem).y());
+        }
     }
+    
     _movableNode = 0;
     return true;
 }
