@@ -53,6 +53,7 @@ GraphVisualEditor::GraphVisualEditor( qreal minWidth, qreal minHeight, MainWindo
 
 void GraphVisualEditor::resizeEvent (QResizeEvent  *event )
 {
+    Q_UNUSED(event);
     _scene->updateMinSize(size().width(), size().height());
 }
 

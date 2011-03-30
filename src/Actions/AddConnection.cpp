@@ -58,7 +58,7 @@ bool AddConnectionAction::executePress(QPointF pos) {
      return false;
     }
     
-    if ( _from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)) ) {
+    if ( (_from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
         _working = true;
         _startPos = QPointF(_from->data()->x(), _from->data()->y());
         return true;
@@ -91,7 +91,7 @@ bool AddConnectionAction::executeRelease(QPointF pos) {
     delete _tmpLine;
     _tmpLine = 0;
 
-    if (  _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)) ) {
+    if ( (  _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
         DocumentManager::self()->activeDocument()
             ->activeDataStructure()->addPointer( _from->data(),  _to->data() );
     }

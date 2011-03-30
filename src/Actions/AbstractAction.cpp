@@ -44,10 +44,13 @@ const QString& AbstractAction::name() const {
 }
 
 bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
+    Q_UNUSED(watched);
     switch(event->type()){
         case QEvent::GraphicsSceneMousePress : {
             QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
-            return executePress(e->scenePos());
+            if (e->button() == Qt::LeftButton){
+                return executePress(e->scenePos());
+            }
         }
         case QEvent::GraphicsSceneMouseMove  :{
             QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
@@ -61,6 +64,7 @@ bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
             QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
             return executePress(e->scenePos());
         }
+        default:  return false;
     }
     return false;
 }

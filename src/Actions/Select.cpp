@@ -45,6 +45,7 @@ SelectAction::SelectAction(GraphScene *scene, QObject *parent)
 SelectAction::~SelectAction() {}
 
 bool SelectAction::executePress(QPointF pos) {
+    Q_UNUSED(pos);
     if (! DocumentManager::self()->activeDocument()->activeDataStructure() ){
       return false;
     }
@@ -55,6 +56,7 @@ bool SelectAction::executePress(QPointF pos) {
 }
 
 bool SelectAction::executeRelease(QPointF pos) {
+    Q_UNUSED(pos);
     if (! DocumentManager::self()->activeDocument()->activeDataStructure() ){
       return false;
     }
