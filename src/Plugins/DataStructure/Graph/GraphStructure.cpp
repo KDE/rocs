@@ -81,7 +81,6 @@ QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
 void Rocs::GraphStructure::setDirected(bool directed)
 {
     _directed = directed;
-
     foreach(Pointer* pointer, pointers()) {
        pointer->emitChangedSignal();
     }
@@ -95,15 +94,11 @@ bool Rocs::GraphStructure::directed()
 Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
     if (from->dataStructure()->readOnly()) return 0;
 
-    // do not create if data invalid
     if ( from == 0 || to == 0 ) {
         return 0;
     }
 
-    // for un-directed graphs, only
-    Rocs::GraphStructure* graph = qobject_cast<Rocs::GraphStructure*>( from->dataStructure() );
-
-    if (!graph->directed()) {
+    if (!directed()) {
         // self-edges
         if (from == to) {
             return 0;
@@ -114,19 +109,5 @@ Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
         }
     }
 
-    // for directed graphs, only
-    if (graph->directed()) {
-        // do not add double edges
-        PointerList list = from->out_pointers();
-        foreach (Pointer *tmp, list) {
-            if (tmp->to() == to) {
-                return 0;
-            }
-        }
-    }
-
-    Pointer *e  = new Pointer(from->dataStructure(), from, to);
-    DataStructure::addPointer(e);
-
-    return e;
+    return DataStructure::addPointer(from, to);
 }

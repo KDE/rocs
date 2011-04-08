@@ -147,16 +147,8 @@ Pointer* DataStructure::addPointer(Data *from, Data *to) {
     if ( from == 0 || to == 0 ) {
         return 0;
     }
+    
     if ((d->_data.indexOf(from) == -1) || (d->_data.indexOf(to) == -1)) {
-        return 0;
-    }
-
-    // self-edges
-    if (from == to) {
-        return 0;
-    }
-    // back-edges
-    if ( from->pointers(to).size() >= 1 ) {
         return 0;
     }
 

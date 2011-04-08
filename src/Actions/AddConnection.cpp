@@ -92,8 +92,10 @@ bool AddConnectionAction::executeRelease(QPointF pos) {
     _tmpLine = 0;
 
     if ( (  _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
-        DocumentManager::self()->activeDocument()
-            ->activeDataStructure()->addPointer( _from->data(),  _to->data() );
+        DocumentManager::self()
+            ->activeDocument()
+            ->activeDataStructure()
+            ->addPointer( _from->data(),  _to->data() );
     }
 
     _to = 0;
