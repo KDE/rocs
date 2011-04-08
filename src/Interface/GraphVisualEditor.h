@@ -38,7 +38,7 @@ class GraphVisualEditor : public QWidget {
 public:
     /*! Default Constructor
     \param parent the owner of this widget. */
-    GraphVisualEditor(qreal minWidth, qreal minHeight, MainWindow *parent = 0);
+    GraphVisualEditor(MainWindow *parent = 0);
     
     /**
      * re-implementation of resize event to also setup the graph scene
@@ -80,9 +80,6 @@ private:
     MainWindow *_mainWindow;
 
     QGraphicsView *_graphicsView;
-
-    qreal _minWidth;
-    qreal _minHeight;
 };
 
 #endif

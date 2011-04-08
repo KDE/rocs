@@ -41,7 +41,13 @@ public:
     enum Type {Simple = 0, Oriented};
     enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
-    Document(const QString& name, qreal xLeft=-300, qreal xRight=300, qreal yTop=-300, qreal yBottom=300, QObject *parent = 0);
+    Document(   const QString& name,
+                qreal xLeft=-200,
+                qreal xRight=200,
+                qreal yTop=-200,
+                qreal yBottom=200,
+                QObject *parent = 0
+            );
     Document(const Document& gd);
     ~Document();
 

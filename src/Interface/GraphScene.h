@@ -38,7 +38,7 @@ class PointerPropertiesWidget;
 class GraphScene : public QGraphicsScene {
     Q_OBJECT
 public:
-    GraphScene( qreal minWidth, qreal minHeight, QObject *parent=0 );
+    GraphScene( QObject *parent=0 );
     
     void updateMinSize(qreal minWidth, qreal minHeight);
     static const qreal kBORDER = 250;

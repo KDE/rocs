@@ -40,7 +40,7 @@
 #include "edgepropertieswidget.h"
 #include <DataStructurePluginManager.h>
 
-GraphScene::GraphScene( qreal minWidth, qreal minHeight, QObject *parent) :
+GraphScene::GraphScene( QObject *parent) :
     QGraphicsScene(parent)
 {
     _graphDocument = 0;
@@ -48,15 +48,15 @@ GraphScene::GraphScene( qreal minWidth, qreal minHeight, QObject *parent) :
     _datumPropertiesWidget = new DataPropertiesWidget(qobject_cast<MainWindow*>(parent));
     _pointerPropertiesWidget = new PointerPropertiesWidget(qobject_cast<MainWindow*>(parent));
     _action = 0;
-    _minHeight = minHeight;
-    _minWidth = minWidth;
+    _minHeight = 0;
+    _minWidth = 0;
 
-    setSceneRect(-minWidth/2, -minHeight/2, minWidth/2, minHeight/2);
+    // first scene resize will resize to actual whiteboard size
+    setSceneRect(0, 0, 0, 0);
 }
 
 void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
 {
-    _minHeight = minHeight;
     _minWidth = minWidth;
     setSceneRect(-minWidth/2, -minHeight/2, minWidth/2, minHeight/2);
 
@@ -132,10 +132,6 @@ void GraphScene::setActiveDocument() {
         gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
     }
 
-//     _whiteboard = new QGraphicsRectItem( );
-//     _whiteboard->setFlag(QGraphicsItem::ItemIsSelectable, false);
-//     _whiteboard->setZValue(-1000);
-//     addItem(_whiteboard);
     resize();
 
     int size = gd->dataStructures().size();

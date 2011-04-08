@@ -39,10 +39,8 @@
 #include <QPainter>
 #include <DocumentManager.h>
 
-GraphVisualEditor::GraphVisualEditor( qreal minWidth, qreal minHeight, MainWindow *parent) :
-    QWidget(parent),
-    _minWidth(minWidth),
-    _minHeight(minHeight)
+GraphVisualEditor::GraphVisualEditor( MainWindow *parent) :
+    QWidget(parent)
 {
     _scene = 0;
     _document = 0;
@@ -60,7 +58,7 @@ void GraphVisualEditor::resizeEvent (QResizeEvent  *event )
 void GraphVisualEditor::setupWidgets() {
     QVBoxLayout *vLayout = new QVBoxLayout();
     vLayout->setContentsMargins(0,0,0,0);
-    _scene = new GraphScene(_minWidth, _minHeight, this);
+    _scene = new GraphScene( this );
     _graphicsView = new QGraphicsView();
     _graphicsView->setRenderHints(QPainter::Antialiasing);
     _graphicsView->setScene(_scene);

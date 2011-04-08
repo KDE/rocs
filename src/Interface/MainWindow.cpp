@@ -145,7 +145,7 @@ void MainWindow::downloadNewExamples(){
 
 QWidget* MainWindow::setupRightPanel()
 {
-    _graphVisualEditor = new GraphVisualEditor ( Settings::hSplitterSizeRight(), Settings::vSplitterSizeTop(), this );
+    _graphVisualEditor = new GraphVisualEditor ( this );
 
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
