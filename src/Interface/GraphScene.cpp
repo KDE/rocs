@@ -132,10 +132,10 @@ void GraphScene::setActiveDocument() {
         gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
     }
 
-    _whiteboard = new QGraphicsRectItem( );
-    _whiteboard->setFlag(QGraphicsItem::ItemIsSelectable, false);
-    _whiteboard->setZValue(-1000);
-    addItem(_whiteboard);
+//     _whiteboard = new QGraphicsRectItem( );
+//     _whiteboard->setFlag(QGraphicsItem::ItemIsSelectable, false);
+//     _whiteboard->setZValue(-1000);
+//     addItem(_whiteboard);
     resize();
 
     int size = gd->dataStructures().size();
@@ -270,7 +270,7 @@ void GraphScene::resize() {
                    _graphDocument->yTop(),  // y
                    _graphDocument->xRight()-_graphDocument->xLeft(), // width
                    _graphDocument->yBottom()-_graphDocument->yTop()); // height
-    _whiteboard->setRect( newSize );
+ //   _whiteboard->setRect( newSize );
     setSceneRect( newSize );
     emit resized();
 }
