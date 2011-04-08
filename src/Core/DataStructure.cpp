@@ -131,6 +131,30 @@ Data* DataStructure::addData(Data *data){
     return data;
 }
 
+QList<Data*> DataStructure::addDataList(QList<Data*> dataList){
+    Data* data;
+    foreach (data, dataList) {
+        d->_data.append( data );
+        emit dataCreated( data );
+
+        connect ( data, SIGNAL(changed()), this, SIGNAL(changed()));
+    }
+    return dataList;
+}
+
+QList<Data*> DataStructure::addDataList(QList< QPair<QString,QPointF> > dataList) {
+    QList<Data*> dataCreateList;
+    QPair<QString, QPointF> dataDefinition;
+    foreach (dataDefinition, dataList) {
+        if (Data *data = addData(dataDefinition.first)){
+            data->setPos(dataDefinition.second.x(), dataDefinition.second.y());
+            dataCreateList << data;
+        }
+    }
+    return addDataList(dataCreateList);
+}
+
+
 Pointer* DataStructure::addPointer(Pointer *pointer){
     d->_pointers.append( pointer );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();

@@ -170,23 +170,21 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Star Graph") );
 
-    // create mesh of NxN points
-    QList<Data*> starNodes;
-
-    // create mesh nodes, store them in map
+    QList< QPair<QString, QPointF> > starNodes;
     for (int i=1; i<=numberSatelliteNodes; i++) {
-        starNodes << graph->addData(
+        starNodes << qMakePair(
             QString("%1").arg(i),
             QPointF(sin(i*2*PI_/numberSatelliteNodes)*radius, cos(i*2*PI_/numberSatelliteNodes)*radius)+center
         );
     }
+    QList<Data*> nodeList = graph->addDataList(starNodes);
 
     // middle
-    starNodes.prepend( graph->addData(QString("center"),center) );
+    nodeList.prepend( graph->addData(QString("center"),center) );
 
     // connect circle nodes
     for (int i=1; i<=numberSatelliteNodes; i++) {
-        graph->addPointer (starNodes.at(0),starNodes.at(i));
+        graph->addPointer (nodeList.at(0),nodeList.at(i));
     }
 }
 
@@ -208,19 +206,22 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Circle Graph") );
 
-    // create mesh of NxN points
-    QList<Data*> circleNodes;
+    QList< QPair<QString, QPointF> > circleNodes;
 
     // create mesh nodes, store them in map
-    for (int i=0; i<numberNodes; i++) {
-        circleNodes << graph->addData(QString("%1").arg(i),QPointF(sin(i*2*PI_/numberNodes)*radius, cos(i*2*PI_/numberNodes)*radius)+center);
+    for (int i=1; i<=numberNodes; i++) {
+        circleNodes << qMakePair(
+            QString("%1").arg(i),
+            QPointF(sin(i*2*PI_/numberNodes)*radius, cos(i*2*PI_/numberNodes)*radius)+center
+        );
     }
+    QList<Data*> nodeList = graph->addDataList(circleNodes);
 
     // connect circle nodes
     for (int i=0; i<numberNodes-1; i++) {
-        graph->addPointer (circleNodes.at(i),circleNodes.at(i+1));
+        graph->addPointer (nodeList.at(i),nodeList.at(i+1));
     }
-    graph->addPointer (circleNodes.at(numberNodes-1),circleNodes.at(0));
+    graph->addPointer (nodeList.at(numberNodes-1),nodeList.at(0));
 }
 
 void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges)
