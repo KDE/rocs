@@ -42,6 +42,7 @@ public slots:
     void reflectAttributes();
     void on__addProperty_clicked();
     void disconnectPointer();
+    void setWidth(double v);
     
 private:
     Pointer *_pointer;

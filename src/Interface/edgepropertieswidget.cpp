@@ -53,11 +53,16 @@ void PointerPropertiesWidget::setPointer(Pointer *e, QPointF pos) {
 
     connect(_value,     SIGNAL(textChanged(QString)),   _pointer, SLOT(setValue(QString)));
     connect(_name,      SIGNAL(textChanged(QString)),   _pointer, SLOT(setName(QString)));
-    connect(_width,     SIGNAL(valueChanged(double)),    _pointer, SLOT(setWidth(double)));
+    connect(_width,     SIGNAL(valueChanged(double)),  this, SLOT(setWidth(double)));
     connect(_showName,  SIGNAL(toggled(bool)),          _pointer, SLOT(hideName(bool)));
     connect(_showValue, SIGNAL(toggled(bool)),          _pointer, SLOT(hideValue(bool)));
 
     reflectAttributes();
+}
+
+void PointerPropertiesWidget::setWidth(double v)
+{
+    _pointer->setWidth( static_cast<qreal>(v));
 }
 
 void PointerPropertiesWidget::reflectAttributes(){
