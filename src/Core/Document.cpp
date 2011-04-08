@@ -83,9 +83,11 @@ Document::Document(const Document& gd)
     d->_engineBackend = new QtScriptBackend(this);
 
     for (int i = 0; i < gd.dataStructures().count(); ++i){
-        d->_dataStructures.append(DataStructurePluginManager::self()->changeToDataStructure(
-                                                                                    gd.d->_dataStructures.at(i),
-                                                                                    this));
+        d->_dataStructures.append(
+            DataStructurePluginManager::self()->changeToDataStructure(
+                gd.d->_dataStructures.at(i),this
+            )
+        );
     }
 }
 

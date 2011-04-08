@@ -318,21 +318,18 @@ void MainWindow::setActiveDocument ( )
 {
     kDebug() << "Setting the document in the main widnow";
     Document *activeDocument = DocumentManager::self()->activeDocument();
-
+    QtScriptBackend *engine = activeDocument->engineBackend();
+    
     _graphVisualEditor->setActiveDocument();
     _GraphLayers->setActiveDocument();
 
     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
                 activeDocument->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
 
-//     connect(this, SIGNAL(startEvaluation()),
-//             engine(), SLOT(start()));
-
-//     connect( engine(), SIGNAL(sendDebug(QString)), this, SLOT(debugString(QString)));
-//     connect( engine(), SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-//     connect( engine(), SIGNAL(finished()),_bottomTabs, SLOT(setPlayString()));
-
-
+//     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
+     connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
+     connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
+     connect( engine, SIGNAL(finished()),   _bottomTabs, SLOT(setPlayString()));
 }
 
 void MainWindow::releaseDocument ( Document* d ){
@@ -471,7 +468,7 @@ void MainWindow::runToolPlugin()
 }
 
 void MainWindow::dsChanged(){
-    kDebug() << "Data structure was changed, need to reload graphic part.";
+//    kDebug() << "Data structure was changed, need to reload graphic part.";
 
 //    setActiveDocument();
 //     QAction *action = qobject_cast<QAction *> ( sender() );
@@ -497,16 +494,18 @@ void MainWindow::executeScript(const QString& text) {
 
     IncludeManager inc;
 
-    script = inc.include(script, _codeEditor->document()->url().path(), _codeEditor->document()->documentName());
+    script = inc.include(script, _codeEditor->document()->url().path(),
+                                 _codeEditor->document()->documentName());
 
-    //if ( !engine()->isRunning() ){
-	//_bottomTabs->setStopString();
-    //    engine()->setScript(script, DocumentManager::self()->activeDocument());
-    //    emit startEvaluation();
-    //}else{
-    //    _bottomTabs->setPlayString();
-    //    engine()->stop();
-    //}
+    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    if ( !engine->isRunning() ){
+        _bottomTabs->setStopString();
+        engine->setScript(script, DocumentManager::self()->activeDocument());
+        engine->start();
+    }else{
+       _bottomTabs->setPlayString();
+       engine->stop();
+    }
 }
 
 #endif

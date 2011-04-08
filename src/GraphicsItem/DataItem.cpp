@@ -81,7 +81,7 @@ void DataItem::updateIcon(){
 }
 
 void DataItem::updateColor(){
-   _colorizer->setColor( _datum->color());
+   _colorizer->setColor( _datum->color().value<QColor>());
    setGraphicsEffect(_colorizer);
     if (_name && _name->isVisible()){
      _name->update();

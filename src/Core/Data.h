@@ -40,7 +40,7 @@ class  ROCSLIB_EXPORT Data : public QObject {
     Q_PROPERTY(qreal y READ y WRITE setY)
     Q_PROPERTY(qreal width READ width WRITE setWidth)
     Q_PROPERTY(QString name READ name WRITE setName)
-    Q_PROPERTY(QColor color READ color WRITE setColor)
+    Q_PROPERTY(QVariant color READ color WRITE setColor)
     Q_PROPERTY(QVariant value READ value WRITE setValue)
     Q_PROPERTY(QString iconPackage READ iconPackage WRITE setIconPackage)
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
@@ -73,7 +73,7 @@ public:
     qreal x() const;
     qreal y() const;
     qreal width() const;
-    const QColor& color() const;
+    const QVariant color() const;
     const QString& name() const;
     const QVariant value() const;
     const QString& icon() const;
@@ -91,25 +91,19 @@ public:
     PointerList& self_pointers() const;
     PointerList pointers(Data *n) const;
 
+    Pointer* addPointer(Data* to);
 
     void addDynamicProperty(QString property, QVariant value);
     void removeDynamicProperty(QString property);
 
 public  slots:
-    QScriptValue adj_data();
-    QScriptValue adj_pointers();
-    QScriptValue input_pointers();
-    QScriptValue output_pointers();
-    QScriptValue loop_pointers();
-    QScriptValue connected_pointers(Data *n);
     void self_remove();
-    Pointer* addPointer(Data* to);
 
     void setX(int x);
     void setY(int y);
     void setWidth(double w);
     void setPos(qreal x, qreal y);
-    void setColor(const QColor& s);
+    void setColor(const QVariant& s);
     void setName(const QString& s);
     void setValue(const QVariant& v);
     void setIcon(const QString& s);
@@ -162,7 +156,7 @@ private:
 
 inline const QVariant Data::value() const { return d->_value; }
 inline const QString& Data::name()  const { return d->_name;  }
-inline const QColor&  Data::color() const { return d->_color; }
+inline const QVariant  Data::color() const { return d->_color; }
 
 inline DataItem* Data::item() const { return d->_item; }
 
