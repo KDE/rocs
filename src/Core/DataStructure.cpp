@@ -96,6 +96,7 @@ DataStructure::~DataStructure() {
 
 void DataStructure::setReadOnly(bool r){
     d->_readOnly = r;
+    d->_document->setModified();
 }
 
 void DataStructure::remove() {
@@ -108,18 +109,18 @@ Data* DataStructure::addData(QString name) {
 
     Data *n = new Data(this);
     n->setName(name);
-    QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesData.constBegin();
-    while (i != d->m_globalPropertiesData.constEnd()) {
-       n->addDynamicProperty(i.key(), i.value());
-       ++i;
-    }
     return addData(n);
 }
 
 Data* DataStructure::addData(Data *data){
     d->_data.append( data );
+    QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesData.constBegin();
+    while (i != d->m_globalPropertiesData.constEnd()) {
+       data->addDynamicProperty(i.key(), i.value());
+       ++i;
+    }
     emit dataCreated( data );
-
+    emit changed();
     qDebug() << "add data";
     connect ( data, SIGNAL(changed()), this, SIGNAL(changed()));
     return data;
@@ -127,7 +128,13 @@ Data* DataStructure::addData(Data *data){
 
 Pointer* DataStructure::addPointer(Pointer *pointer){
     d->_pointers.append( pointer );
+    QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
+    while (i != d->m_globalPropertiesPointer.constEnd()) {
+       pointer->addDynamicProperty(i.key(), i.value());
+       ++i;
+    }
     emit pointerCreated(pointer);
+    emit changed();
     connect (pointer, SIGNAL(changed()), this, SIGNAL(changed()));
     return pointer;
 }
@@ -143,7 +150,7 @@ Data* DataStructure::addData(QString name, QPointF pos){
 Pointer* DataStructure::addPointer(Data *from, Data *to) {
     if (d->_readOnly) return 0;
 
-    // do not create if data invalid
+    
     if ( from == 0 || to == 0 ) {
         return 0;
     }
@@ -153,15 +160,8 @@ Pointer* DataStructure::addPointer(Data *from, Data *to) {
     }
 
     Pointer *pointer  = new Pointer(this, from, to);
-    d->_pointers.append( pointer );
-    QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
-    while (i != d->m_globalPropertiesPointer.constEnd()) {
-       pointer->addDynamicProperty(i.key(), i.value());
-       ++i;
-    }
-    emit pointerCreated(pointer);
-    connect (pointer, SIGNAL(changed()), this, SIGNAL(changed()));
-    return pointer;
+
+    return addPointer(pointer);
 }
 
 Pointer* DataStructure::addPointer(const QString& name_from, const QString& name_to) {

@@ -69,6 +69,10 @@ Document::Document(const QString& name, qreal xLeft, qreal xRight, qreal yTop, q
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
 }
 
+void Document::setModified()
+{
+    d->_modified = true;
+}
 
 Document::Document(const Document& gd)
         : QObject(gd.parent()), d(new DocumentPrivate())
@@ -110,6 +114,7 @@ QtScriptBackend * Document::engineBackend() const{
 // Sets the current file name of the DataStructure Collection
 void Document::setName(const QString& name) {
     d->_name = name;
+    d->_modified = true;
     emit nameChanged(name);
 }
 
@@ -147,21 +152,25 @@ qreal Document::yBottom() const {
 void Document::setXLeft(qreal xLeftValue)
 {
     d->_xLeft = xLeftValue;
+    d->_modified = true;
 }
 
 void Document::setXRight(qreal xRightValue)
 {
     d->_xRight = xRightValue;
+    d->_modified = true;
 }
 
 void Document::setYTop(qreal yTopValue)
 {
     d->_yTop = yTopValue;
+    d->_modified = true;
 }
 
 void Document::setYBottom(qreal yBottomValue)
 {
     d->_yBottom = yBottomValue;
+    d->_modified = true;
 }
 
 bool Document::isPointAtDocument(qreal x, qreal y)  const {
@@ -275,6 +284,7 @@ void Document::setActiveDataStructure(DataStructure *g){
     if (d->_dataStructures.indexOf(g) != -1){
         d->_activeDataStructure = g;
         emit activeDataStructureChanged(g);
+        d->_modified = true;
     }
 }
 
@@ -283,6 +293,8 @@ DataStructure* Document::addDataStructure(QString name) {
     g->setName(name);
     d->_dataStructures.append(g);
     d->_activeDataStructure = g;
+    d->_modified = true;
+    connect(g, SIGNAL(changed()), this, SLOT(setModified()));
     emit dataStructureCreated(g);
     return g;
 }
@@ -297,6 +309,7 @@ const QString& Document::documentPath() const {
 
 void Document::remove(DataStructure *dataStructure){
     d->_dataStructures.removeOne(dataStructure);
+    d->_modified = true;
 }
 
 bool Document::saveAsInternalFormat(const QString& filename) {
@@ -317,19 +330,19 @@ bool Document::saveAsInternalFormat(const QString& filename) {
 
         d->_buf += QString("[DataStructure %1] \n").arg(i).toUtf8();
 
-	savePropertiesInternalFormat(g);
+        savePropertiesInternalFormat(g);
 
         foreach( Data *n, g->dataList()) {
-	     d->_buf += QString("[Data %1]\n").arg(g->dataList().indexOf(n)).toUtf8();
-	     savePropertiesInternalFormat(n);
+            d->_buf += QString("[Data %1]\n").arg(g->dataList().indexOf(n)).toUtf8();
+            savePropertiesInternalFormat(n);
         }
 
         int from, to;
         foreach( Pointer *e, g->pointers()) {
             from = g->dataList().indexOf(e->from());
             to = g->dataList().indexOf(e->to());
-	    d->_buf += QString("[Pointer %1->%2]\n").arg(from).arg(to).toUtf8();
-	    savePropertiesInternalFormat(e);
+            d->_buf += QString("[Pointer %1->%2]\n").arg(from).arg(to).toUtf8();
+            savePropertiesInternalFormat(e);
         }
 
         /*     buf += " \n \n ############ GROUPS ########### \n \n";
@@ -350,6 +363,7 @@ bool Document::saveAsInternalFormat(const QString& filename) {
         return false;
     }
     d->_lastSavedDocumentPath = filename;
+    d->_modified = false;
     return true;
 }
 
@@ -445,6 +459,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
 //            // tmpGroup->append( tmpDataStructure->data(str));
         }
     }
+    d->_modified = false;
     kDebug() << "DataStructure Document Loaded.";
 }
 

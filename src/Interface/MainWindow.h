@@ -41,6 +41,7 @@ class CodeEditor;
 class QScriptEngine;
 class QScriptEngineDebugger;
 class ToolsPluginInterface;
+class QCloseEvent;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -71,7 +72,9 @@ private: // Methods
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
 
-
+protected:
+    void closeEvent(QCloseEvent *event);
+    
 private slots:
      void showSettings();
     //Testing to connect to KGHNS3

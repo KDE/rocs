@@ -83,7 +83,8 @@
 #include <DataStructurePluginInterface.h>
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
-
+#include <QCloseEvent>
+#include <KMessageBox>
 
 MainWindow::MainWindow() :  KXmlGuiWindow()
 {
@@ -123,6 +124,19 @@ MainWindow::~MainWindow()
     Settings::self()->writeConfig();
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+ {
+    if( DocumentManager::self()->activeDocument()->isModified()){
+        switch(saveIfChanged()){
+            case KMessageBox::Cancel :
+                event->ignore(); return;
+            default: 
+                event->accept(); return;
+        }
+    }
+    event->accept();
+ }
+ 
 void MainWindow::setupWidgets()
 {
     _hSplitter = new QSplitter ( this );
