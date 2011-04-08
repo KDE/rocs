@@ -40,7 +40,7 @@ public:
     bool showValue;
 
     QString style;
-    double width;
+    qreal width;
 
      DataStructure *dataStructure;
 
@@ -178,7 +178,7 @@ const QColor& Pointer::color() const{
 qreal Pointer::width () const {
     return d->width;
 }
-void Pointer::setWidth(double w) {
+void Pointer::setWidth(qreal w) {
     d->width = w;
     emit changed();
 }

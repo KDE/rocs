@@ -203,8 +203,8 @@ void Data::setPos(qreal x, qreal y) {
     }
 }
 
-void Data::setColor(const QColor& s) {
-    d->_color = s;
+void Data::setColor(const QVariant& s) {
+    d->_color = s.value<QColor>();
     if (! d->_changing) {
     emit changed();
     }
@@ -258,40 +258,6 @@ void Data::setEngine(    QScriptEngine *engine ) {
 }
 
 
-QScriptValue Data::adj_data() {
-    QList<Data*> list = adjacent_data();
-    QScriptValue array = d->_engine->newArray();
-    foreach(Data* n, list) {
-        array.property("push").call(array, QScriptValueList() << n->scriptValue());
-    }
-    return array;
-}
-
-QScriptValue Data::adj_pointers() {
-    PointerList list = adjacent_pointers();
-    return createScriptArray(list);
-}
-
-QScriptValue Data::input_pointers() {
-    PointerList list = in_pointers();
-    return createScriptArray(list);
-}
-
-QScriptValue Data::output_pointers() {
-    PointerList list = out_pointers();
-    return createScriptArray(list);
-}
-
-QScriptValue Data::loop_pointers() {
-    PointerList list = self_pointers();
-    return createScriptArray(list);
-}
-
-QScriptValue Data::connected_pointers(Data *n) {
-    PointerList list = pointers(n);
-    return createScriptArray(list);
-}
-
 QScriptValue Data::createScriptArray(PointerList list) {
     QScriptValue array = d->_engine->newArray();
     foreach(Pointer* e, list) {
@@ -299,4 +265,3 @@ QScriptValue Data::createScriptArray(PointerList list) {
     }
     return array;
 }
-

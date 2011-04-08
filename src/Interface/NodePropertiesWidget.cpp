@@ -75,7 +75,7 @@ void DataPropertiesWidget::reflectAttributes(){
         extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     }
     
-    _color->setColor(_data->color());
+    _color->setColor(_data->color().value<QColor>());
     _name->setText(_data->name());
     _value->setText(_data->value().toString());
     _showName->setChecked(_data->showName());

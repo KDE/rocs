@@ -107,8 +107,6 @@ public slots:
       void startDocument(const QString& s);
       void startEvaluation();
       void stopEvaluation();
-      void endThreadDocument();
-
       void runTool(ToolsPluginInterface * plugin, Document * graphs);
 private: // Variables.
 

@@ -41,8 +41,6 @@ class GraphStructure : public DataStructure {
     QScriptValue add_node(const QString& name);
     QScriptValue add_edge(Data* from, Data* to);
     QScriptValue node_byname(const QString& name);
-//     QScriptValue begin_node();
-//     QScriptValue end_nodes();
     void setDirected(bool directed);
     bool directed();
 

@@ -52,7 +52,7 @@ class ROCSLIB_EXPORT Pointer : public QObject {
     Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(QString value READ value WRITE setValue)
     Q_PROPERTY(QString name READ name WRITE setName)
-    Q_PROPERTY(double width READ width WRITE setWidth)
+    Q_PROPERTY(qreal width READ width WRITE setWidth)
     Q_PROPERTY(QString style READ style WRITE setStyle)
 
 public:
@@ -136,7 +136,7 @@ public  slots:
     void setColor(const QColor& s);
 
     qreal width () const;
-    void setWidth(double w);
+    void setWidth(qreal w);
 
     const QString& style() const;
     void setStyle(const QString& s);

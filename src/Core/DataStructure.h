@@ -111,7 +111,7 @@ public  slots:
     void setDataDefaultColor(const QColor& color);
     void setPointerDefaultColor(const QColor& color);
 
-#ifdef USING_QTSCRIPT
+// #ifdef USING_QTSCRIPT
 //     QScriptValue list_data();
 //     QScriptValue list_pointers();
 //     QScriptValue add_data(const QString& name);
@@ -119,7 +119,7 @@ public  slots:
 //     QScriptValue data_byname(const QString& name);
 //     QScriptValue begin_data();
 //     QScriptValue end_data();
-#endif
+// #endif
 
 signals:
     void dataCreated(Data *n);
