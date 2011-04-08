@@ -133,11 +133,8 @@ void DataPropertiesWidget::on__color_activated(const QColor& c) {
 // }
 
 void DataPropertiesWidget::on__addProperty_clicked(){
-
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
-    model->addDynamicProperty(_propertyName->text(),
-                            QVariant(_propertyValue->text()),
-                            _data,
-                            (_isPropertyGlobal->checkState() == Qt::Checked));
+    model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
+                            _data, (_isPropertyGlobal->checkState() == Qt::Checked));
 
 }

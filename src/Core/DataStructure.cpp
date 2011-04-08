@@ -108,6 +108,11 @@ Data* DataStructure::addData(QString name) {
 
     Data *n = new Data(this);
     n->setName(name);
+    QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesData.constBegin();
+    while (i != d->m_globalPropertiesData.constEnd()) {
+       n->addDynamicProperty(i.key(), i.value());
+       ++i;
+    }
     return addData(n);
 }
 
@@ -155,11 +160,16 @@ Pointer* DataStructure::addPointer(Data *from, Data *to) {
         return 0;
     }
 
-    Pointer *e  = new Pointer(this, from, to);
-    d->_pointers.append( e );
-    emit pointerCreated(e);
-    connect (e, SIGNAL(changed()), this, SIGNAL(changed()));
-    return e;
+    Pointer *pointer  = new Pointer(this, from, to);
+    d->_pointers.append( pointer );
+    QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
+    while (i != d->m_globalPropertiesPointer.constEnd()) {
+       pointer->addDynamicProperty(i.key(), i.value());
+       ++i;
+    }
+    emit pointerCreated(pointer);
+    connect (pointer, SIGNAL(changed()), this, SIGNAL(changed()));
+    return pointer;
 }
 
 Pointer* DataStructure::addPointer(const QString& name_from, const QString& name_to) {
@@ -289,10 +299,12 @@ void DataStructure::setPointersColor(const QColor& c){
 
 void DataStructure::addDataDynamicProperty(const QString& property, QVariant value){
     QtConcurrent::blockingMap(d->_data, DataDynamicPropertySetted(property, value));
+    d->m_globalPropertiesData.insert(property, value);
 }
 
 void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value){
     QtConcurrent::blockingMap(d->_pointers, PointerDynamicPropertySetted(property, value));
+    d->m_globalPropertiesData.insert(property, value);
 }
 
 void DataStructure::removeDataDynamicProperty(const QString& property){

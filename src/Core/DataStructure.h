@@ -166,6 +166,8 @@ public:
 
     QScriptValue _value;
     QScriptEngine *_engine;
+    QMap<QString, QVariant> m_globalPropertiesData;
+    QMap<QString, QVariant> m_globalPropertiesPointer;
 };
 
 inline bool DataStructure::readOnly()                      const { return d->_readOnly;              }
