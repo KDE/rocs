@@ -25,6 +25,7 @@
 #include <QPointF>
 #include <QGraphicsSceneEvent>
 #include <QGraphicsSceneMouseEvent>
+#include <QKeyEvent>
 #include <KDebug>
 
 AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
@@ -63,6 +64,14 @@ bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
         case QEvent::GraphicsSceneMouseDoubleClick :{
             QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
             return executePress(e->scenePos());
+        }
+        case QEvent::KeyPress: {
+            QKeyEvent *e = static_cast<QKeyEvent*>(event);
+            return executeKeyPress(e);
+        }
+        case QEvent::KeyRelease: {
+            QKeyEvent *e = static_cast<QKeyEvent*>(event);
+            return executeKeyRelease(e);
         }
         default:  return false;
     }
