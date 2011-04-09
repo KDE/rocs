@@ -9,7 +9,6 @@
 #include <QMap>
 #include <QPainter>
 #include <QImage>
-#include "svgpixmap.h"
 
 DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ): 
     QWidget(0),
@@ -114,11 +113,11 @@ void DataPropertiesWidget::reflectAttributes(){
 
             QPainter painter;
             painter.begin(&iconImage);
-            renderer->render(painter, attribute);
+            renderer->render(&painter, attribute);
             painter.end();
 
             attribute.remove("rocs_");
-            _images->addItem(iconImage, attribute);
+            _images->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
         }
     }
 }

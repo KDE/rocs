@@ -98,7 +98,6 @@ set( rocs_interface_SRCS
   Interface/CodeEditor.cpp
   Interface/NodePropertiesWidget.cpp
   Interface/edgepropertieswidget.cpp
-  Interface/svgpixmap.cpp
 )
 
 set( rocs_models_SRCS

@@ -1,10 +1,6 @@
 install(
 FILES
-    computer.svg
     default.svg
-    sphere1.svg
-    sphere2.svg
-    world.svg
 DESTINATION 
     ${DATA_INSTALL_DIR}/rocs/iconpacks
 )
