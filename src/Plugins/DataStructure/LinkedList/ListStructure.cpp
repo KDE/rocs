@@ -37,7 +37,7 @@ Rocs::ListStructure::ListStructure(DataStructure& other, Document * parent): Dat
 }
 
 Rocs::ListStructure::~ListStructure() {
-
+  _animationGroup->deleteLater();;
 }
 
 void Rocs::ListStructure::createFront()

@@ -31,6 +31,8 @@ DocumentManager *DocumentManager::_self = 0;
 DocumentManager* DocumentManager::self(){
     if (!_self){
         _self = new DocumentManager();
+        connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)),
+                _self, SLOT(convertToDataStructure()));
     }
     return _self;
 }
@@ -83,8 +85,6 @@ void DocumentManager::changeDocument(Document* doc){
       if (m_actualDocument){
           emit activateDocument();
       }
-      connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)),
-               this, SLOT(convertToDataStructure()));
     }
 }
 
