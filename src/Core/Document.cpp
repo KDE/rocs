@@ -67,15 +67,15 @@ Document::Document(const QString& name, qreal xLeft, qreal xRight, qreal yTop, q
     d->_yBottom = yBottom;
     d->_minWidth = 0;
     d->_minHeight = 0;
-    d->_modified = false;
     d->_saved = false;
     d->_engineBackend = new QtScriptBackend(this);
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
+    d->_modified = false;
 }
 
-void Document::setModified()
+void Document::setModified(const bool mod)
 {
-    d->_modified = true;
+    d->_modified = mod;
 }
 
 Document::Document(const Document& gd)
@@ -156,25 +156,25 @@ qreal Document::yBottom() const {
 void Document::setXLeft(qreal xLeftValue)
 {
     d->_xLeft = xLeftValue;
-    d->_modified = true;
+    //d->_modified = true;
 }
 
 void Document::setXRight(qreal xRightValue)
 {
     d->_xRight = xRightValue;
-    d->_modified = true;
+    //d->_modified = true;
 }
 
 void Document::setYTop(qreal yTopValue)
 {
     d->_yTop = yTopValue;
-    d->_modified = true;
+    //d->_modified = true;
 }
 
 void Document::setYBottom(qreal yBottomValue)
 {
     d->_yBottom = yBottomValue;
-    d->_modified = true;
+    //d->_modified = true;
 }
 
 QSizeF Document::size()
@@ -195,13 +195,13 @@ bool Document::isPointAtDocument(qreal x, qreal y)  const {
 void Document::changeMinimalSize(qreal width, qreal height) {
     if (width>=0) d->_minWidth = width;
     if (height>=0) d->_minHeight = height;
-    
+
     if (width < d->_xRight - d->_xLeft) {
         d->_xLeft -= (d->_xRight- d->_xLeft - width)/2;
         d->_xRight += (d->_xRight- d->_xLeft - width)/2;
         emit resized();
     }
-    
+
     if (height < d->_yBottom - d->_yTop) {
         d->_yTop -= (d->_yBottom - d->_yTop - height)/2;
         d->_yBottom += (d->_yBottom - d->_yTop - height)/2;
@@ -303,7 +303,7 @@ bool Document::isPointAtDocument(QPointF point)  const {
     return isPointAtDocument(point.x(), point.y());
 }
 
-bool Document::isModified(){
+bool Document::isModified() const{
   return d->_modified;
 }
 

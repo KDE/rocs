@@ -100,7 +100,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
     setupDSPluginsAction();
 
     DocumentManager *dm = DocumentManager::self();
-    connect(dm, SIGNAL(activateDocument()), 
+    connect(dm, SIGNAL(activateDocument()),
             this, SLOT(setActiveDocument()));
     connect(dm, SIGNAL(deactivateDocument(Document*)),
             this, SLOT(releaseDocument(Document*)));
@@ -127,17 +127,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *event)
  {
-    if( DocumentManager::self()->activeDocument()->isModified()){
-        switch(saveIfChanged()){
-            case KMessageBox::Cancel :
-                event->ignore(); return;
-            default: 
-                event->accept(); return;
-        }
+    switch (saveIfChanged()) {
+      case KMessageBox::Cancel :
+          event->ignore();
+          return;
+      default:
+          event->accept();
+          return;
     }
-    event->accept();
  }
- 
+
 void MainWindow::setupWidgets()
 {
     _hSplitter = new QSplitter ( this );
@@ -183,7 +182,7 @@ QWidget* MainWindow::setupRightPanel()
 
     _vSplitter->addWidget ( _bottomTabs );
     _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
-    
+
     return _vSplitter;
 }
 
@@ -220,15 +219,15 @@ void MainWindow::setupActions()
     ac->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   _graphVisualEditor ) );
     ac->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,_graphVisualEditor ) );
     ac->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  _graphVisualEditor ) );
-    
+
     createAction("document-new",     i18n("New Graph"),         "new-graph",         Qt::Key_N, SLOT(newGraph()),    this);
     createAction("document-open",    i18n("Open Graph"),        "open-graph",        Qt::Key_0, SLOT(openGraph()),   this);
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        Qt::Key_S, SLOT(saveGraph()),   this);
     createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     Qt::Key_W, SLOT(saveGraphAs()), this);
     createAction("",                 i18n("Download Examples"), "download", Qt::Key_D, SLOT(downloadNewExamples()),  this);
-    
+
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", Qt::Key_P, SLOT(showPossibleIncludes()), this);
-    
+
     createAction("document-new",     i18n("New Script"),        "new-script",        Qt::Key_N, SLOT(newScript()),    _codeEditor);
     createAction("document-open",    i18n("Open Script"),       "open-script",       Qt::Key_O, SLOT(openScript()),   _codeEditor);
     createAction("document-save",    i18n("Save Script"),       "save-script",       Qt::Key_S, SLOT(saveScript()),   _codeEditor);
@@ -239,11 +238,11 @@ void MainWindow::setupActions()
         createAction("document-save-as", i18n("Import"), "import", Qt::Key_I, SLOT(importFile()), this);
         createAction("document-save-as", i18n("Export"), "export", Qt::Key_E, SLOT(exportFile()), this);
     }
-    
+
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
 }
 
-void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName, 
+void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                               const QKeySequence& shortcut, const char* slot, QObject *parent)
 {
     KAction* action = new KAction ( KIcon ( iconName ), actionTitle, parent );
@@ -334,7 +333,7 @@ void MainWindow::setActiveDocument ( )
     kDebug() << "Setting the document in the main widnow";
     Document *activeDocument = DocumentManager::self()->activeDocument();
     QtScriptBackend *engine = activeDocument->engineBackend();
-    
+
     _graphVisualEditor->setActiveDocument();
     _GraphLayers->setActiveDocument();
 
@@ -345,6 +344,7 @@ void MainWindow::setActiveDocument ( )
      connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
      connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
      connect( engine, SIGNAL(finished()),   _bottomTabs, SLOT(setPlayString()));
+     activeDocument->setModified(false);
 }
 
 void MainWindow::releaseDocument ( Document* d ){
@@ -391,13 +391,9 @@ void MainWindow::loadDocument ( const QString& name )
         return;
     }
 
-//      _graphVisualEditor->releaseDocument();
-
     emit startDocument( name );
 
-//     setActiveDocument ( _tDocument->document() );
-
-
+    DocumentManager::self()->activeDocument()->setModified(false);
 }
 
 void MainWindow::saveGraph(){
@@ -425,8 +421,7 @@ void MainWindow::saveGraphAs(){
 
 int MainWindow::saveIfChanged(){
     if ( DocumentManager::self()->activeDocument()->isModified() ){
-        int btnCode;
-        btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( "Do you want to save your unsaved document?" ) );
+        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( "Do you want to save your unsaved document?" ) );
         if ( btnCode == KMessageBox::Yes ){
             saveGraph();
         }

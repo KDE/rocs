@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>293</width>
-    <height>228</height>
+    <width>353</width>
+    <height>245</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -152,14 +152,14 @@
       <item row="3" column="1" colspan="4">
        <widget class="KSeparator" name="kseparator_2"/>
       </item>
-      <item row="4" column="0" colspan="2">
+      <item row="4" column="0" colspan="3">
        <widget class="QLabel" name="label_10">
         <property name="text">
          <string>Show names in:</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="3">
+      <item row="4" column="3" colspan="2">
        <widget class="QLabel" name="label_12">
         <property name="text">
          <string>Show values in:</string>

@@ -52,8 +52,8 @@ public:
     Document(const Document& gd);
     ~Document();
 
-    bool isModified();
-    
+    bool isModified() const;
+
     void setName(const QString& name);
     QString name() const;
 
@@ -69,7 +69,7 @@ public:
     QSizeF size();
 
 public slots:
-    void setModified();
+    void setModified(const bool mod = true);
     DataStructure *addDataStructure(QString name = "untitled");
     DataStructure *activeDataStructure() const ;
     void setActiveDataStructure(DataStructure *g);

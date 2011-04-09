@@ -139,5 +139,6 @@ void DocumentManager::loadDocument ( QString name ){
       doc = new Document( i18n ( "Untitled0" ) );
       doc->loadFromInternalFormat ( name );
    }
+   doc->setModified(false);
    addDocument(doc);
 }
