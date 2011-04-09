@@ -64,6 +64,12 @@ Data* Rocs::ListStructure::addData ( QString name ) {
     return n;
 }
 
+void Rocs::ListStructure::cleanUpBeforeConvert()
+{
+    remove(_front);
+}
+
+
 QScriptValue Rocs::ListStructure::front() {
   return _front->scriptValue();
 }

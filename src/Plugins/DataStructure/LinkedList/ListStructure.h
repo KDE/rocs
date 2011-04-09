@@ -33,6 +33,9 @@ class ListStructure : public DataStructure {
     ListStructure(DataStructure& other, Document* parent);
 
     virtual ~ListStructure();
+
+    void cleanUpBeforeConvert();
+
   public slots:
 
 //     virtual void setEngine ( QScriptEngine* engine );

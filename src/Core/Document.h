@@ -68,6 +68,10 @@ public:
     void remove(DataStructure *dataStructure);
     QSizeF size();
 
+    /** @brief clear data that only is usefull for a type of data structure and that cannot be converted to others from all data structeres of this document.
+    */
+    virtual void cleanUpBeforeConvert();
+
 public slots:
     void setModified(const bool mod = true);
     DataStructure *addDataStructure(QString name = "untitled");

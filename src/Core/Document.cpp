@@ -307,6 +307,13 @@ bool Document::isModified() const{
   return d->_modified;
 }
 
+void Document::cleanUpBeforeConvert()
+{
+  foreach (DataStructure * ds, d->_dataStructures)
+    ds->cleanUpBeforeConvert();
+}
+
+
 void Document::setActiveDataStructure(DataStructure *g){
     if (d->_dataStructures.indexOf(g) != -1){
         d->_activeDataStructure = g;

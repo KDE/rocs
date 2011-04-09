@@ -107,6 +107,7 @@ void DocumentManager::convertToDataStructure(){
   kDebug() << "-=-=-=-=-= Converting Data Structures -=-=-=-=-=";
   Document * newDoc = 0;
   if (m_actualDocument){
+    m_actualDocument->cleanUpBeforeConvert();
     newDoc = new Document(*m_actualDocument);
     emit deactivateDocument(m_actualDocument);
     addDocument(newDoc);

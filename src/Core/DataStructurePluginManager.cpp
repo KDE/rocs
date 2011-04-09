@@ -26,6 +26,8 @@
 
 #include <QHash>
 #include <QAction>
+#include "DataStructure.h"
+#include <KMessageBox>
 
 class DataStructurePluginManagerPrivate {
 public:

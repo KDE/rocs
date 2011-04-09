@@ -1,7 +1,7 @@
 #include "DataStructurePluginInterface.h"
 #include "DataStructurePluginManager.h"
 
-DataStructurePluginInterface::DataStructurePluginInterface ( const KComponentData& /*instance*/, QObject* parent ) 
+DataStructurePluginInterface::DataStructurePluginInterface ( const KComponentData& /*instance*/, QObject* parent )
 : QObject ( parent )
 {
 }
@@ -28,6 +28,7 @@ QLayout* DataStructurePluginInterface::dataExtraProperties ( Data* arg1, QWidget
     Q_UNUSED(arg2);
     return 0;
 }
+
 
 QString DataStructurePluginInterface::name()
 {
