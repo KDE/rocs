@@ -198,12 +198,12 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
     Data *movableData = nitem->data();
     int numDegrees = wheelEvent->delta();
     if (wheelEvent->orientation() == Qt::Vertical) {
-        if (numDegrees > 0){
-            movableData->setWidth(movableData->width()+0.25);
+        if (numDegrees > 0 && movableData->width() + 0.10 < 2.0){
+            movableData->setWidth(movableData->width()+0.1);
             nitem->update();
         }
-        else if (movableData->width() > 0.5){
-            movableData->setWidth(movableData->width()-0.25);
+        else if (movableData->width() - 0.10 > 0.15){
+            movableData->setWidth(movableData->width()-0.1);
             nitem->update();
         }
     }

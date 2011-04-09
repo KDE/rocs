@@ -33,24 +33,32 @@ void DataPrivate::empty(PointerList &list) {
     }
 }
 
+DataPrivate::DataPrivate(Data* classPtr, DataStructure *parent)
+:_x(0)
+,_y(0)
+,_width(0.3)
+,_begin(true)
+,_end(true)
+,_changing(false)
+,_showName(false)
+,_showValue(false)
+,_useColor(false)
+,_dataStructure(parent)
+,_color(_dataStructure->dataDefaultColor())
+,_iconpackage(KGlobal::dirs()->locate("appdata", "iconpacks/default.svg"))
+,_icon("rocs_default")
+,_value(0)
+, q(classPtr)
+{
+
+}
+
+
 DataStructure *Data::dataStructure() const{ return d->_dataStructure; }
 
 Data::Data(DataStructure *parent)
 : QObject(parent)
-, d(new DataPrivate(this)) {
-    d->_dataStructure = parent;
-    d->_x = 0;
-    d->_y = 0;
-    d->_width = 0.5;
-    d->_showName = true;
-    d->_showValue = true;
-    d->_begin = false;
-    d->_end = false;
-    d->_color = d->_dataStructure->dataDefaultColor();
-    d->_changing = false;
-    d->_value = 0;
-    d->_icon = "rocs_default";
-    d->_iconpackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
+, d(new DataPrivate(this, parent)) {
     kDebug() << "Node successfully created" << d->_iconpackage;
 }
 
@@ -83,6 +91,12 @@ void Data::setShowValue(bool b) {
 
 void Data::setIcon(const QString& s){
     d->_icon = s;
+    emit changed();
+}
+
+
+void Data::setUseColor(bool b){
+    d->_useColor = b;
     emit changed();
 }
 

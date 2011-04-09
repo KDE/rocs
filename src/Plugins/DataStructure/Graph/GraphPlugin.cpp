@@ -78,9 +78,9 @@ QLayout* GraphPlugin::dataExtraProperties ( Data* node, QWidget* parentWidget ) 
   y->setMaximum(9999);
   x->setMinimum(0);
   x->setMaximum(9999);
-  size->setMinimum(0.5);
-  size->setMaximum(999.0);
-  size->setSingleStep(0.25);
+  size->setMinimum(0.15);
+  size->setMaximum(3.0);
+  size->setSingleStep(0.15);
   y->setValue(node->y());
   x->setValue(node->x());
   size->setValue(node->width());

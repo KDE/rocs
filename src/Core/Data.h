@@ -44,6 +44,8 @@ class  ROCSLIB_EXPORT Data : public QObject {
     Q_PROPERTY(QVariant value READ value WRITE setValue)
     Q_PROPERTY(QString iconPackage READ iconPackage WRITE setIconPackage)
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
+    Q_PROPERTY(bool useColor READ useColor WRITE setUseColor)
+    
 
 public:
     enum ListType{In, Out, Self};
@@ -81,7 +83,7 @@ public:
     bool showName() const;
     bool showValue() const;
     bool changing() const;
-
+    bool useColor() const;
     DataItem *item() const;
 
     DataList adjacent_data() const;
@@ -110,6 +112,7 @@ public  slots:
     void setIconPackage(const QString& s);
     void setShowName(bool b);
     void setShowValue(bool b);
+    void setUseColor(bool b = true);
 
 private:
     DataPrivate *d;
@@ -121,7 +124,7 @@ signals:
 
 class DataPrivate{
 public:
-  DataPrivate(Data *classPtr) : q(classPtr){}
+  DataPrivate(Data *classPtr, DataStructure *parent);
 
     PointerList _in_pointers;
     PointerList _out_pointers;
@@ -136,7 +139,8 @@ public:
     bool _changing;
     bool _showName;
     bool _showValue;
-
+    bool _useColor;
+    
     DataStructure *_dataStructure;
     DataItem *_item;
 
@@ -148,7 +152,7 @@ public:
     QVariant _value;
     QScriptValue _scriptvalue;
     QScriptEngine *_engine;
-
+    
     void empty(PointerList &list) ;
 private:
   Data *q;
@@ -175,4 +179,6 @@ inline PointerList& Data::self_pointers() const { return d->_self_pointers; }
 inline bool Data::showName() const { return d->_showName; }
 inline bool Data::showValue() const { return d->_showValue; }
 inline bool Data::changing() const { return d->_changing; }
+inline bool Data::useColor() const { return d->_useColor; }
+
 #endif

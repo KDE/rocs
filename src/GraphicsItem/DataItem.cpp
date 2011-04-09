@@ -77,7 +77,7 @@ void DataItem::updateIcon(){
 
 void DataItem::updateColor(){
    QColor c(_datum->color().value<QColor>());
-   if (c.alpha() == 0){
+   if (!_datum->useColor()){
        delete _colorizer;
        setGraphicsEffect(0);
        _colorizer = 0;

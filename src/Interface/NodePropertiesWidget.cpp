@@ -42,8 +42,9 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     
     connect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
    
-    connect( _showName,     SIGNAL(toggled(bool)),          this, SLOT( applyChanges() ));
-    connect( _showValue,    SIGNAL(toggled(bool)),          this, SLOT( applyChanges() ));
+    connect( _showName,     SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
+    connect( _showValue,    SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
+    connect( _disableColor, SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
     connect( _name,         SIGNAL(textEdited(QString)),   this, SLOT( applyChanges() ));
     connect( _value,        SIGNAL(textEdited(QString)),   this, SLOT( applyChanges() ));
 
@@ -65,6 +66,10 @@ void DataPropertiesWidget::applyChanges(){
     
     if (_data->showValue() != _showValue->isChecked())
         _data->setShowValue(_showValue->isChecked());
+    
+    if (_data->useColor() ==_disableColor->isChecked()){
+        _data->setUseColor(!_data->useColor());
+    }
 }
 
 void DataPropertiesWidget::reflectAttributes(){
@@ -85,6 +90,7 @@ void DataPropertiesWidget::reflectAttributes(){
     _value->setText(_data->value().toString());
     _showName->setChecked(_data->showName());
     _showValue->setChecked(_data->showValue());
+    _disableColor->setChecked(!_data->useColor());
     _propertyName->setText("");
     _propertyValue->setText("");
     _isPropertyGlobal->setCheckState(Qt::Unchecked);
