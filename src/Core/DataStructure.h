@@ -78,6 +78,7 @@ protected:
 public  slots:
 
     virtual Data* addData(QString name);
+    virtual QList<Data*> addDataList(QList<Data*> dataList);
     virtual Pointer* addPointer(Data* from, Data* to);
     Data* data(const QString& name = i18n("Untitled"));
 
@@ -86,6 +87,7 @@ public  slots:
     void remove(Group *g);
 
     Group *addGroup(const QString& name);
+    QList<Data*> addDataList(QList< QPair<QString,QPointF> > dataList);
     Data* addData(QString name, QPointF point);
     Pointer* addPointer(const QString& name_from, const QString& name_to);
 
