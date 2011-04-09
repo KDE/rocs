@@ -76,9 +76,22 @@ void DataItem::updateIcon(){
 }
 
 void DataItem::updateColor(){
-   _colorizer->setColor( _datum->color().value<QColor>());
+   QColor c(_datum->color().value<QColor>());
+   if (c.alpha() == 0){
+       delete _colorizer;
+       setGraphicsEffect(0);
+       _colorizer = 0;
+       return;
+   }
+   
+   qDebug() << "color on the colorizer" << c;
+    delete _colorizer;
+    _colorizer = new QGraphicsColorizeEffect();
+    _colorizer->setColor( c );
+
+   qDebug() << "Meh";
    setGraphicsEffect(_colorizer);
-    if (_name && _name->isVisible()){
+   if (_name && _name->isVisible()){
      _name->update();
    }
    if( _value && _value->isVisible()){

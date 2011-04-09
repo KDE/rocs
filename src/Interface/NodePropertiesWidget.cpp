@@ -128,7 +128,13 @@ void DataPropertiesWidget::on__images_activated(const QString& s)
 }
 
 void DataPropertiesWidget::on__color_activated(const QColor& c) {
-  _data->setColor(c.name());
+  QColor color(c);
+  if (_disableColor->isChecked()){
+      color.setAlphaF(0.0);
+  }else{
+      color.setAlphaF(1.0);
+  }
+  _data->setColor(color);
 }
 
 // void DataPropertiesWidget::updateAutomateAttributes(bool b){
