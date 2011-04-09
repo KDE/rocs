@@ -111,7 +111,8 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
      * this should not be hardcoded here.
      * use KWelcomeWidget instead.
      */
-    DocumentManager::self()->loadDocument();
+     DocumentManager::self()->loadDocument();
+
 }
 
 MainWindow::~MainWindow()

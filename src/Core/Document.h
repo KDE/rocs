@@ -24,6 +24,7 @@
 #include <QPointF>
 #include <QObject>
 #include "rocslib_export.h"
+#include <QSize>
 
 class DataStructure;
 class QtScriptBackend;
@@ -65,6 +66,7 @@ public:
     QList<DataStructure*>& dataStructures() const;
 
     void remove(DataStructure *dataStructure);
+    QSizeF size();
 
 public slots:
     void setModified();
