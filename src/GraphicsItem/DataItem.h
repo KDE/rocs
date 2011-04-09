@@ -39,7 +39,6 @@ private:
 
     Data *_datum;
     QString _iconPackage;
-    QString _element;
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;
     QGraphicsColorizeEffect *_colorizer;

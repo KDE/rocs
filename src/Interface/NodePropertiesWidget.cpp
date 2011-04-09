@@ -6,11 +6,17 @@
 #include "DataStructure.h"
 #include "model_GraphProperties.h"
 #include <DataStructurePluginManager.h>
+#include <QMap>
+#include <QPainter>
+#include <QImage>
+#include "svgpixmap.h"
 
-DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ): QWidget(0) {
+DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ): 
+    QWidget(0),
+    _data(0),
+    _item(0){
     setupUi(this);
-    _item = 0;
-    _data = 0;
+    connect(_btnClose, SIGNAL(clicked()), this, SLOT(hide()));
 }
 
 void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
@@ -95,6 +101,8 @@ void DataPropertiesWidget::reflectAttributes(){
     }
 
     QXmlStreamReader reader(&svgFile);
+    QSvgRenderer *renderer = _item->_renders.value(svgFile.fileName());
+    
     while(!reader.atEnd()){
         reader.readNext();
         if (!reader.attributes().hasAttribute("id")){
@@ -102,8 +110,15 @@ void DataPropertiesWidget::reflectAttributes(){
         }
         QString attribute = reader.attributes().value("id").toString();
         if (attribute.startsWith("rocs_")){
+            QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);                                                                                                                                                                                 
+
+            QPainter painter;
+            painter.begin(&iconImage);
+            renderer->render(painter, attribute);
+            painter.end();
+
             attribute.remove("rocs_");
-            _images->addItem(attribute);
+            _images->addItem(iconImage, attribute);
         }
     }
 }

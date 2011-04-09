@@ -69,13 +69,8 @@ void DataItem::updateRenderer(){
 }
 
 void DataItem::updateIcon(){
-   if ( elementId().isEmpty() ){
-      _element = _datum->icon();
-      setElementId(_element);
-      setTransformOriginPoint(boundingRect().width()/2, boundingRect().width()/2);
-   }else if( elementId() != _datum->icon()){
-      _element = _datum->icon();
-      setElementId(_element);
+   if ( elementId().isEmpty() ||  elementId() != _datum->icon() ){
+      setElementId(_datum->icon());
       setTransformOriginPoint(boundingRect().width()/2, boundingRect().width()/2);
    }
 }

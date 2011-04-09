@@ -63,7 +63,7 @@ bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
         }
         case QEvent::GraphicsSceneMouseDoubleClick :{
             QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
-            return executePress(e->scenePos());
+            return executeDoubleClick(e->scenePos());
         }
         case QEvent::KeyPress: {
             QKeyEvent *e = static_cast<QKeyEvent*>(event);

@@ -98,6 +98,7 @@ set( rocs_interface_SRCS
   Interface/CodeEditor.cpp
   Interface/NodePropertiesWidget.cpp
   Interface/edgepropertieswidget.cpp
+  Interface/svgpixmap.cpp
 )
 
 set( rocs_models_SRCS
@@ -111,7 +112,7 @@ set( rocs_models_SRCS
 #   UndoRedo/URAddEdge.cpp
 # )
 
-set ( rocs_script_SRC
+set ( rocs_script_SRC 
         Scripts/IncludeManager.cpp
 )
 
