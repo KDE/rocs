@@ -61,7 +61,6 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     graphDoc_ = graphDoc;
     
     // put widget at center of screen
-    //TODO problems with two screens
     QDesktopWidget desktop;
     QRect rect = desktop.availableGeometry(desktop.screenNumber(parent)); 
     QPoint center = rect.center();

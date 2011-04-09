@@ -99,6 +99,7 @@ set( rocs_interface_SRCS
   Interface/CodeEditor.cpp
   Interface/NodePropertiesWidget.cpp
   Interface/edgepropertieswidget.cpp
+  Interface/ConfigureDefaultProperties.cpp
 )
 
 set( rocs_models_SRCS
@@ -131,6 +132,7 @@ kde4_add_ui_files(
 	Interface/NodePropertiesWidget.ui
 	Interface/EdgePropertiesWidget.ui
 	Interface/AddMultiNodes.ui
+	Interface/ConfigureDefaultProperties.ui
 )
 
 set (QT_USE_QTSCRIPT true)

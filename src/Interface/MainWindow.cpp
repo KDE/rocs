@@ -78,6 +78,7 @@
 #include <QMutexLocker>
 #include <QScriptEngineDebugger>
 #include "IncludeManagerSettings.h"
+#include "ConfigureDefaultProperties.h"
 #include <IncludeManager.h>
 #include "ImporterExporterManager.h"
 #include <DataStructurePluginInterface.h>
@@ -259,8 +260,10 @@ void MainWindow::showSettings()
      KConfigDialog dialog(this,  "settings", Settings::self());
 
      IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
+     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties( 0 );
 
      dialog.addPage(set,"Include Manager",QString(),"Include Manager",true);
+     dialog.addPage(defaultProperties,"Default Settings",QString(),"Default Settings",true);
      connect(set, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
 //      connect(set, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
 
@@ -343,10 +346,10 @@ void MainWindow::setActiveDocument ( )
                 activeDocument->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
 
 //     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
-     connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
-     connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-     connect( engine, SIGNAL(finished()),   _bottomTabs, SLOT(setPlayString()));
-     activeDocument->setModified(false);
+    connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
+    connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
+    connect( engine, SIGNAL(finished()),   _bottomTabs, SLOT(setPlayString()));
+    activeDocument->setModified(false);
 }
 
 void MainWindow::releaseDocument ( Document* d ){
