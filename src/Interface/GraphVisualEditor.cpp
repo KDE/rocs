@@ -61,6 +61,8 @@ void GraphVisualEditor::setupWidgets() {
     _scene = new GraphScene( this );
     _graphicsView = new QGraphicsView();
     _graphicsView->setRenderHints(QPainter::Antialiasing);
+    _graphicsView->setOptimizationFlags(QGraphicsView::DontAdjustForAntialiasing);
+    _graphicsView->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
     _graphicsView->setScene(_scene);
 //     _graphicsView->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     vLayout -> addWidget ( _graphicsView );

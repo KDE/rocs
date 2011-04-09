@@ -63,6 +63,12 @@ bool MoveDataAction::executePress(QPointF pos) {
             _deltas.insert(dItem, delta);
         }
     }
+    
+    if( _graphScene->items().count() > 600 ) // 5! + 25 itens on screen
+    {
+        _graphScene->views().at(0)->setRenderHints( QPainter::Antialiasing 
+                                                 & QPainter::TextAntialiasing );
+    }
     return true;
 }
 
@@ -113,5 +119,9 @@ bool MoveDataAction::executeRelease(QPointF pos) {
     }
     
     _movableNode = 0;
+    if( _graphScene->items().count() > 600 ) // 5! + 25 itens on screen
+    {
+        _graphScene->views()[0]->setRenderHint(QPainter::Antialiasing);
+    }
     return true;
 }

@@ -11,18 +11,19 @@
 
 QMap<QString, QSvgRenderer*> DataItem::_renders;    
 
-DataItem::DataItem(Data* n) : QGraphicsSvgItem(0){
-    _datum = n;
-    _name = 0;
-    _value = 0;
-    _originalWidth = _datum->width();
-    _iconPackage = _datum->iconPackage();
-    _colorizer = new QGraphicsColorizeEffect(this);
-    _font = QFont("Helvetica [Cronyx]", 18);
-    
+DataItem::DataItem(Data* n) 
+: QGraphicsSvgItem(0)
+,_datum(n)
+,_iconPackage(n->iconPackage())
+,_name(0)
+,_value(0)
+,_colorizer(0)
+,_font(QFont("Helvetica [Cronyx]", 18))
+,_originalWidth(n->width())
+{
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
     connect(n, SIGNAL(changed()), this, SLOT(setupNode()));
-    
+    setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     setupNode();
     setZValue(1);
     setFlag(ItemIsSelectable, true);
@@ -54,7 +55,6 @@ void DataItem::updateSize(){
   resetMatrix();
   _width = _datum->width();
   setScale(_datum->width());
-   kDebug() << "Scale" << scale() << "Node Width" << _datum->width() << "Shét" <<  _datum->width() - 0.5;
 }
 
 void DataItem::updateRenderer(){

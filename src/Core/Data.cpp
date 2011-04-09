@@ -59,7 +59,6 @@ DataStructure *Data::dataStructure() const{ return d->_dataStructure; }
 Data::Data(DataStructure *parent)
 : QObject(parent)
 , d(new DataPrivate(this, parent)) {
-    kDebug() << "Node successfully created" << d->_iconpackage;
 }
 
 Data::~Data() {
