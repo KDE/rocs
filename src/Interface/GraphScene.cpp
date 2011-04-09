@@ -57,6 +57,8 @@ GraphScene::GraphScene( QObject *parent) :
 
 void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
 {
+qDebug() << "min width update: "<< minWidth;
+qDebug() << "min height update: "<< minHeight;
     _minWidth = minWidth;
     setSceneRect(-minWidth/2, -minHeight/2, minWidth/2, minHeight/2);
 
@@ -69,6 +71,7 @@ void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
         gd->setYTop(gd->yTop()-(_minHeight-gd->height())/2);
         gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
     }
+    gd->changeMinimalSize(minWidth, minHeight);
     resize();
 }
 

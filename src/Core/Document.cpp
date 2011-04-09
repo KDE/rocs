@@ -45,6 +45,8 @@ public:
     qreal _xRight;
     qreal _yTop;
     qreal _yBottom;
+    qreal _minWidth;
+    qreal _minHeight;
     bool _modified;
     bool _saved;
     DataStructure *_activeDataStructure;
@@ -63,6 +65,8 @@ Document::Document(const QString& name, qreal xLeft, qreal xRight, qreal yTop, q
     d->_xRight = xRight;
     d->_yTop = yTop;
     d->_yBottom = yBottom;
+    d->_minWidth = 0;
+    d->_minHeight = 0;
     d->_modified = false;
     d->_saved = false;
     d->_engineBackend = new QtScriptBackend(this);
@@ -181,6 +185,24 @@ bool Document::isPointAtDocument(qreal x, qreal y)  const {
     if (y > d->_yBottom)    return false;
 
     return true;
+}
+
+void Document::changeMinimalSize(qreal width, qreal height) {
+    if (width>=0) d->_minWidth = width;
+    if (height>=0) d->_minHeight = height;
+    
+    if (width < d->_xRight - d->_xLeft) {
+        d->_xLeft -= (d->_xRight- d->_xLeft - width)/2;
+        d->_xRight += (d->_xRight- d->_xLeft - width)/2;
+        emit resized();
+    }
+    
+    if (height < d->_yBottom - d->_yTop) {
+        d->_yTop -= (d->_yBottom - d->_yTop - height)/2;
+        d->_yBottom += (d->_yBottom - d->_yTop - height)/2;
+        qDebug() << "test";
+        emit resized();
+    }
 }
 
 void Document::resizeDocumentIncrease()

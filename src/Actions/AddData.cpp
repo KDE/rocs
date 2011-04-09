@@ -43,7 +43,7 @@ AddNodeAction::~AddNodeAction() {
 bool AddNodeAction::executePress(QPointF pos) {
     if (  !DocumentManager::self()->activeDocument()->activeDataStructure()
        ||  DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly() 
-       || !DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
+    ) {
         return false;
     }
     DocumentManager::self()->activeDocument()->activeDataStructure()

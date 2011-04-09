@@ -41,7 +41,7 @@ public:
     GraphScene( QObject *parent=0 );
     
     void updateMinSize(qreal minWidth, qreal minHeight);
-    static const qreal kBORDER = 250;
+    static const qreal kBORDER = 200;
     void setAction(QAction *action);
     void updateGraph(DataStructure *g);
     void updateDocument();

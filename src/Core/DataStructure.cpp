@@ -46,6 +46,9 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
 
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
+    
+        
+    emit changed();
 }
 
 DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent), d(new DataStructurePrivate){
@@ -81,6 +84,8 @@ DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(p
 
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
+    
+    emit changed();
 }
 
 
@@ -144,6 +149,7 @@ Data* DataStructure::addData(QString name, QPointF pos){
         data->setPos(pos.x(), pos.y());
         return data;
     }
+    
     return 0;
 }
 

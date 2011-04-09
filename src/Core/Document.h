@@ -90,6 +90,7 @@ public slots:
      */
     void resizeDocumentIncrease();
     void resizeDocumentBorder(Document::Border orientation);
+    void changeMinimalSize(qreal width, qreal height);
 
     /**
      * tests if given point is containted at document layer
