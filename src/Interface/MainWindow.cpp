@@ -264,12 +264,19 @@ void MainWindow::showSettings()
 
      dialog.addPage(set,"Include Manager",QString(),"Include Manager",true);
      dialog.addPage(defaultProperties,"Default Settings",QString(),"Default Settings",true);
-     connect(set, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
-//      connect(set, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
+     
+     
+     connect(set,               SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
+     connect(defaultProperties, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
 
      connect(&dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
      connect(&dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
      connect(&dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
+     
+     connect(&dialog, SIGNAL(applyClicked()),   defaultProperties, SLOT(saveConfig()));
+     connect(&dialog, SIGNAL(okClicked()),      defaultProperties, SLOT(saveConfig()));
+     connect(&dialog, SIGNAL(defaultClicked()), defaultProperties, SLOT(readConfig()));
+     
 
      dialog.exec();
 }

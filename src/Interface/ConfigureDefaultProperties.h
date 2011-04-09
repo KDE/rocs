@@ -15,11 +15,25 @@ class ConfigureDefaultProperties :
     Q_OBJECT
 
 public:
-    ConfigureDefaultProperties( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    ConfigureDefaultProperties( QWidget* parent = 0 );
     ~ConfigureDefaultProperties();
+
+public slots:
+    void readConfig();
+    void saveConfig();
+    void setDisplayPositionName(int position);
+    void setDisplayPositionValue(int position);
+//     void saveSettings();
+// private slots:
+//     void includeChanged();
 
 private:
     Ui::ConfigureDefaultProperties *ui;
+    int _displayPositionName;
+    int _displayPositionValue;
+
+signals:
+    void changed(bool);
 };
 
 #endif // CONFIGUREDEFAULTPROPERTIES_H

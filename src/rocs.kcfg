@@ -35,4 +35,12 @@
             <label>Path where include manager seek for includes.</label>
         </entry>
     </group>
+    <group name="DefaultElementDisplay">
+        <entry name="dataNameDisplay" type="Enum">
+            <label>Position where name of data shall be shown.</label>
+        </entry>
+        <entry name="dataValueDisplay" type="Enum">
+            <label>Position where value of data shall be shown.</label>
+        </entry>
+    </group>
 </kcfg>
