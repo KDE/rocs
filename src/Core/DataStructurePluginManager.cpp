@@ -26,6 +26,8 @@
 
 #include <QHash>
 #include <QAction>
+#include "DataStructure.h"
+#include <KMessageBox>
 
 class DataStructurePluginManagerPrivate {
 public:
@@ -149,16 +151,16 @@ void DataStructurePluginManager::changeActiveDataStructure()
     if (! action ) {
         return;
     }
-    changeActiveDataStructure ( DataStructurePluginManager::self()->pluginsList().at(action->data().toInt() )->name() );
+    //Check if is a valid index
+    if (action->data().toInt() < pluginsList().count()){
+        changeActiveDataStructure ( DataStructurePluginManager::self()->pluginsList().at(action->data().toInt() )->name() );
+    }
 }
 
 void DataStructurePluginManager::changeActiveDataStructure (const QString &newDataStructure ) {
-    if ( listOfDataStructures().contains ( newDataStructure ) ) {
-
-        kDebug() << newDataStructure << _d->actualPluginName();
+    if ( listOfDataStructures().contains ( newDataStructure ) && newDataStructure  != _d->actualPluginName()) {
         _d->setActivePlugin(newDataStructure);
         emit changingDataStructure ( newDataStructure );
-        emit DataStructureChangedTo ( newDataStructure );
     }
 }
 

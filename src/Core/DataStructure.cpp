@@ -46,8 +46,6 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
 
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
-    
-        
     emit changed();
 }
 
@@ -84,7 +82,6 @@ DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(p
 
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
-    
     emit changed();
 }
 
@@ -173,18 +170,15 @@ Data* DataStructure::addData(QString name, QPointF pos){
         data->setPos(pos.x(), pos.y());
         return data;
     }
-    
     return 0;
 }
 
 Pointer* DataStructure::addPointer(Data *from, Data *to) {
     if (d->_readOnly) return 0;
 
-    
     if ( from == 0 || to == 0 ) {
         return 0;
     }
-    
     if ((d->_data.indexOf(from) == -1) || (d->_data.indexOf(to) == -1)) {
         return 0;
     }
@@ -253,7 +247,7 @@ void DataStructure::remove(Data *n) {
     if (right)  emit resizeRequest( Document::BorderRight );
     if (top)    emit resizeRequest( Document::BorderTop );
     if (bottom) emit resizeRequest( Document::BorderBottom );
-    
+
     updateRelativeCenter();
 }
 

@@ -40,7 +40,6 @@ class DataStructurePrivate;
 class ROCSLIB_EXPORT DataStructure : public QObject {
     Q_OBJECT
 
-
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(QColor dataDefaultColor READ dataDefaultColor WRITE setDataDefaultColor)
     Q_PROPERTY(QColor pointerDefaultColor READ pointerDefaultColor WRITE setPointerDefaultColor)
@@ -73,7 +72,9 @@ public:
     const QList<Pointer*> pointers() const;
     const QList<Group*> groups() const;
 
-protected:
+    /** @brief clear data that only is usefull for a type of data structure and that cannot be converted to others
+    */
+    virtual void cleanUpBeforeConvert(){ }
 
 public  slots:
 

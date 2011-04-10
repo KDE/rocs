@@ -37,7 +37,7 @@ Rocs::ListStructure::ListStructure(DataStructure& other, Document * parent): Dat
 }
 
 Rocs::ListStructure::~ListStructure() {
-
+  _animationGroup->deleteLater();;
 }
 
 void Rocs::ListStructure::createFront()
@@ -63,6 +63,12 @@ Data* Rocs::ListStructure::addData ( QString name ) {
     n->setName(name);
     return n;
 }
+
+void Rocs::ListStructure::cleanUpBeforeConvert()
+{
+    remove(_front);
+}
+
 
 QScriptValue Rocs::ListStructure::front() {
   return _front->scriptValue();
