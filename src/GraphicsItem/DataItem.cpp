@@ -102,6 +102,7 @@ void DataItem::updateColor(){
 void DataItem::updateName(){
    if ( !_name ){
     _name = new QGraphicsSimpleTextItem(i18n("Name: %1").arg(_datum->name()), this);
+    _name->setFlags(ItemIgnoresTransformations);
     _name->setFont(_font);
    }else if (_name->text() != _datum->name()){
     _name->setText(i18n("Name: %1").arg(_datum->name()));
@@ -114,6 +115,7 @@ void DataItem::updateName(){
 void DataItem::updateValue(){
    if ( !_value ){ 
       _value = new QGraphicsSimpleTextItem(i18n("Value: %1").arg(_datum->value().toString()), this);
+      _value->setFlags(ItemIgnoresTransformations);
       _value->setFont(_font);
    }else if (_value->text() != _datum->value().toString()){
       _value ->setText(i18n("Value: %1").arg(_datum->value().toString()));
