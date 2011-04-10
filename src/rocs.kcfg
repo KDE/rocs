@@ -36,11 +36,11 @@
         </entry>
     </group>
     <group name="DefaultElementDisplay">
-        <entry name="dataNameDisplay" type="Enum">
-            <label>Position where name of data shall be shown.</label>
+        <entry name="dataNodeDisplay" type="Enum">
+            <label>Position where name and value of a node shall be shown.</label>
         </entry>
-        <entry name="dataValueDisplay" type="Enum">
-            <label>Position where value of data shall be shown.</label>
+        <entry name="dataEdgeDisplay" type="Enum">
+            <label>Position where name and value of an edge shall be shown.</label>
         </entry>
     </group>
 </kcfg>

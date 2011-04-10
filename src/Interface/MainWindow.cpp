@@ -115,6 +115,9 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
      */
      DocumentManager::self()->loadDocument();
 
+    DocumentManager::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
+    DocumentManager::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
+
 }
 
 MainWindow::~MainWindow()

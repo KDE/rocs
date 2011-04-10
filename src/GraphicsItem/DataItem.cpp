@@ -8,6 +8,10 @@
 #include <QGraphicsScene>
 #include <KLocale>
 #include "Data.h"
+#include "settings.h"
+#include "Interface/ConfigureDefaultProperties.h"
+#include <DocumentManager.h>
+#include <DataStructure.h>
 
 QMap<QString, QSvgRenderer*> DataItem::_renders;    
 
@@ -51,21 +55,21 @@ void DataItem::updatePos(){
 }
 
 void DataItem::updateSize(){
-  if (_datum->width() == _width) return;
-  resetMatrix();
-  _width = _datum->width();
-  setScale(_datum->width());
+    if (_datum->width() == _width) return;
+    resetMatrix();
+    _width = _datum->width();
+    setScale(_datum->width());
 }
 
 void DataItem::updateRenderer(){
-  _iconPackage = _datum->iconPackage();
-  if( _renders.count(_iconPackage) == 0){
+    _iconPackage = _datum->iconPackage();
+    if( _renders.count(_iconPackage) == 0){
         QSvgRenderer *z = new QSvgRenderer(_datum->iconPackage());
         _renders.insert(_iconPackage, z);
         setSharedRenderer(z);
-  }else{
-      setSharedRenderer( _renders.value(_iconPackage) );
-  }
+    }else{
+        setSharedRenderer( _renders.value(_iconPackage) );
+    }
 }
 
 void DataItem::updateIcon(){
@@ -100,6 +104,7 @@ void DataItem::updateColor(){
 }
 
 void DataItem::updateName(){
+<<<<<<< HEAD
    if ( !_name ){
     _name = new QGraphicsSimpleTextItem(i18n("Name: %1").arg(_datum->name()), this);
     _name->setFlags(ItemIgnoresTransformations);
@@ -120,6 +125,74 @@ void DataItem::updateValue(){
    }else if (_value->text() != _datum->value().toString()){
       _value ->setText(i18n("Value: %1").arg(_datum->value().toString()));
    }
+=======
+    if ( !_name ){
+        _name = new QGraphicsSimpleTextItem(i18n("%1").arg(_datum->name()), this);
+        _name->setFont(_font);
+    }else if (_name->text() != _datum->name()){
+        _name->setText(i18n("%1").arg(_datum->name()));
+    }
+    _name->setVisible(_datum->showName());
+
+    switch(DocumentManager::self()->viewStyleDataNode()) {
+        case ConfigureDefaultProperties::ABOVE: {
+            if (_datum->dataStructure()->dataValueVisibility()) {
+                _name->setPos(0, -60);
+            } else {
+                _name->setPos(0, -35);
+            }
+            break;
+        }
+        case ConfigureDefaultProperties::CENTER: {
+            if (_datum->dataStructure()->dataValueVisibility()) {
+                _name->setPos(0, 15);
+            } else {
+                _name->setPos(0, 25);
+            }
+            break;
+        }
+        case ConfigureDefaultProperties::BELOW: {
+            _name->setPos(0, 75);
+            break;
+        }
+        default:
+            _name->setPos(0, 0);
+    }
+}
+
+void DataItem::updateValue(){
+    if ( !_value ){ 
+        _value = new QGraphicsSimpleTextItem(i18n("v=%1").arg(_datum->value().toString()), this);
+        _value->setFont(_font);
+    }else if (_value->text() != _datum->value().toString()){
+        _value ->setText(i18n("v=%1").arg(_datum->value().toString()));
+    }
+    
+    switch(DocumentManager::self()->viewStyleDataNode()) {
+        case ConfigureDefaultProperties::ABOVE: {
+            _value->setPos(0, -35);
+            break;
+        }
+        case ConfigureDefaultProperties::CENTER: {
+            if (_datum->dataStructure()->dataNameVisibility()) {
+                _value->setPos(0, 35);
+            } else {
+                _value->setPos(0, 25);
+            }
+            break;
+        }
+        case ConfigureDefaultProperties::BELOW: {
+            if (_datum->dataStructure()->dataNameVisibility()) {
+                _value->setPos(0, 95);
+            } else {
+                _value->setPos(0, 75);
+            }   
+            break;
+        }
+        default:
+            _value->setPos(0, 25);
+    }
+   
+>>>>>>> setup display of node data by global config
    _value->setVisible(_datum->showValue());
-   _value->setPos(0, 100);
 }

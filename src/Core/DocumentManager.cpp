@@ -148,3 +148,24 @@ void DocumentManager::loadDocument ( QString name ){
    doc->setModified(false);
    addDocument(doc);
 }
+
+void DocumentManager::setViewStyleDataNode(int style)
+{
+    _viewStyleDataNode = style;
+}
+
+void DocumentManager::setViewStyleDataEdge(int style)
+{
+    _viewStyleDataEdge = style;
+}
+
+int DocumentManager::viewStyleDataNode()
+{
+    return _viewStyleDataNode;
+}
+
+int DocumentManager::viewStyleDataEdge()
+{
+    return _viewStyleDataEdge;
+}
+

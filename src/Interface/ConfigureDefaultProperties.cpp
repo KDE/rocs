@@ -1,6 +1,8 @@
 #include "ConfigureDefaultProperties.h"
 #include "ui_ConfigureDefaultProperties.h"
 #include <settings.h>
+#include "DocumentManager.h"
+
 
 ConfigureDefaultProperties::ConfigureDefaultProperties( QWidget* parent) :
     QWidget(parent),
@@ -9,8 +11,8 @@ ConfigureDefaultProperties::ConfigureDefaultProperties( QWidget* parent) :
     ui->setupUi(this);
 
     readConfig();
-    ui->comboDefaultName->setCurrentIndex(_displayPositionName);
-    ui->comboDefaultValue->setCurrentIndex(_displayPositionValue);
+    ui->comboDefaultNode->setCurrentIndex(_displayPositionNode);
+    ui->comboDefaultEdge->setCurrentIndex(_displayPositionEdge);
 }
 
 ConfigureDefaultProperties::~ConfigureDefaultProperties()
@@ -19,23 +21,26 @@ ConfigureDefaultProperties::~ConfigureDefaultProperties()
 }
 
 void ConfigureDefaultProperties::readConfig() {
-    _displayPositionName = Settings::dataNameDisplay();
-    _displayPositionValue = Settings::dataValueDisplay();
+    _displayPositionNode = Settings::dataNodeDisplay();
+    _displayPositionEdge = Settings::dataEdgeDisplay();
 }
 
 void ConfigureDefaultProperties::saveConfig() {
-    Settings::setDataNameDisplay(_displayPositionName);
-    Settings::setDataValueDisplay(_displayPositionValue);
+    Settings::setDataNodeDisplay(_displayPositionNode);
+    Settings::setDataEdgeDisplay(_displayPositionEdge);
+    
+    DocumentManager::self()->setViewStyleDataNode(_displayPositionNode);
+    DocumentManager::self()->setViewStyleDataEdge(_displayPositionEdge);
 }
 
-void ConfigureDefaultProperties::setDisplayPositionName(int position) {
+void ConfigureDefaultProperties::setDisplayPositionNode(int position) {
     if (position<0) return;
-    _displayPositionName = position;
+    _displayPositionNode = position;
     emit changed(true);
 }
 
-void ConfigureDefaultProperties::setDisplayPositionValue(int position) {
+void ConfigureDefaultProperties::setDisplayPositionEdge(int position) {
     if (position<0) return;
-    _displayPositionValue = position;
+    _displayPositionEdge = position;
     emit changed(true);
 }

@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Default Node Representation</string>
+    <string>Default Information Display</string>
    </property>
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
@@ -42,21 +42,21 @@
       <enum>QFormLayout::ExpandingFieldsGrow</enum>
      </property>
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="labelNodePosition">
        <property name="text">
-        <string>Display of Names:</string>
+        <string>Node Information</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="labelEdgePosition">
        <property name="text">
-        <string>Display of Values:</string>
+        <string>Edge Information</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboDefaultValue">
+      <widget class="QComboBox" name="comboDefaultEdge">
        <property name="minimumSize">
         <size>
          <width>100</width>
@@ -75,13 +75,13 @@
        </item>
        <item>
         <property name="text">
-         <string>none</string>
+         <string>above</string>
         </property>
        </item>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QComboBox" name="comboDefaultName">
+      <widget class="QComboBox" name="comboDefaultNode">
        <property name="minimumSize">
         <size>
          <width>100</width>
@@ -103,7 +103,7 @@
        </item>
        <item>
         <property name="text">
-         <string>none</string>
+         <string>above</string>
         </property>
        </item>
       </widget>
@@ -128,10 +128,10 @@
  <resources/>
  <connections>
   <connection>
-   <sender>comboDefaultName</sender>
+   <sender>comboDefaultNode</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>ConfigureDefaultProperties</receiver>
-   <slot>setDisplayPositionName(int)</slot>
+   <slot>setDisplayPositionNode(int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>247</x>
@@ -144,10 +144,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>comboDefaultValue</sender>
+   <sender>comboDefaultEdge</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>ConfigureDefaultProperties</receiver>
-   <slot>setDisplayPositionValue(int)</slot>
+   <slot>setDisplayPositionEdge(int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>244</x>
@@ -161,7 +161,7 @@
   </connection>
  </connections>
  <slots>
-  <slot>setDisplayPositionName(int)</slot>
-  <slot>setDisplayPositionValue(int)</slot>
+  <slot>setDisplayPositionNode(int)</slot>
+  <slot>setDisplayPositionEdge(int)</slot>
  </slots>
 </ui>

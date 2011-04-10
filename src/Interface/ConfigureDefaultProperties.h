@@ -14,26 +14,30 @@ class ConfigureDefaultProperties :
 {
     Q_OBJECT
 
-public:
-    ConfigureDefaultProperties( QWidget* parent = 0 );
-    ~ConfigureDefaultProperties();
+    public:
+        ConfigureDefaultProperties( QWidget* parent = 0 );
+        ~ConfigureDefaultProperties();
 
-public slots:
-    void readConfig();
-    void saveConfig();
-    void setDisplayPositionName(int position);
-    void setDisplayPositionValue(int position);
-//     void saveSettings();
-// private slots:
-//     void includeChanged();
+        enum {
+            CENTER,
+            BELOW,
+            ABOVE
+        } DISPLAY_POSITION;
+            
 
-private:
-    Ui::ConfigureDefaultProperties *ui;
-    int _displayPositionName;
-    int _displayPositionValue;
+    public slots:
+        void readConfig();
+        void saveConfig();
+        void setDisplayPositionNode(int position);
+        void setDisplayPositionEdge(int position);
 
-signals:
-    void changed(bool);
+    private:
+        Ui::ConfigureDefaultProperties *ui;
+        int _displayPositionNode;
+        int _displayPositionEdge;
+
+    signals:
+        void changed(bool);
 };
 
 #endif // CONFIGUREDEFAULTPROPERTIES_H
