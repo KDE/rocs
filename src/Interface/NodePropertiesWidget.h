@@ -27,7 +27,7 @@ class Data;
 class MainWindow;
 class DataItem;
 #include <QPointF>
-
+#include <QPointer>
 /*! \brief Properties Area. */
 class DataPropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
 {
@@ -48,7 +48,7 @@ private slots:
 
 private:
 
-    Data *_data;
+    QPointer<Data> _data;
     MainWindow *_mainWindow;
     DataItem *_item;
     QString _svgFile;
