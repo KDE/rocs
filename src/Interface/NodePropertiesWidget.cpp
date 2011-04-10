@@ -96,6 +96,9 @@ void DataPropertiesWidget::reflectAttributes(){
     _isPropertyGlobal->setCheckState(Qt::Unchecked);
     
     if (( _svgFile == _data->iconPackage()) && (_images->count() != 0)){
+        QString icon = _data->icon();
+        icon.remove("rocs_");
+       _images->setCurrentItem(icon);
        return;
     }
     _images->clear();
@@ -126,6 +129,9 @@ void DataPropertiesWidget::reflectAttributes(){
             _images->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
         }
     }
+    QString icon = _data->icon();
+    icon.remove("rocs_");
+    _images->setCurrentItem(icon);
 }
 
 void DataPropertiesWidget::on__images_activated(const QString& s)
