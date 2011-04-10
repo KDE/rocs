@@ -85,6 +85,7 @@
 #include "DocumentManager.h"
 #include <QCloseEvent>
 #include <KMessageBox>
+#include "zoom.h"
 
 MainWindow::MainWindow() :  KXmlGuiWindow()
 {
@@ -210,6 +211,7 @@ void MainWindow::setupActions()
     g->addAction ( ac->addAction ( "add_edge", new AddConnectionAction ( gc, this ) ) );
     g->addAction ( ac->addAction ( "select", new SelectAction ( gc, this ) ) );
     g->addAction ( ac->addAction ( "delete", new DeleteAction ( gc, this ) ) );
+    g->addAction ( ac->addAction ( "zoom", new ZoomAction ( gc, this ) ) );
     actionCollection()->action ( "move_node" )->toggle();
     gc->setAction ( _moveDataAction );
 

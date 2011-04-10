@@ -22,7 +22,8 @@
 #include <KToggleAction>
 #include <QObject>
 #include <QString>
-class GraphScene;
+
+class QGraphicsSceneWheelEvent;class GraphScene;
 
 /*!
 \brief the base class for custom actions.
@@ -74,6 +75,8 @@ public slots:
       */
     virtual bool executeKeyRelease(QKeyEvent *keyEvent);
 
+    
+    virtual bool executeWellEvent(QGraphicsSceneWheelEvent *wEvent);
     /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
     void sendExecuteBit();
     

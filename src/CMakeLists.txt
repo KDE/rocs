@@ -82,6 +82,7 @@ set ( rocs_actions_SRCS
   Actions/DeleteAction.cpp
   Actions/MoveData.cpp
   Actions/Select.cpp
+  Actions/zoom.cpp 
 )
 
 set( rocs_interface_SRCS
