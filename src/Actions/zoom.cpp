@@ -78,12 +78,7 @@ bool ZoomAction::executeRelease(QPointF pos)
     if (!m_zoomRectItem)
         return false;
     
-    qreal left   = (m_beginZoom.x() < pos.x()) ? m_beginZoom.x() : pos.x(); 
-    qreal top    = (m_beginZoom.y() < pos.y()) ? m_beginZoom.y() : pos.y(); 
-    qreal bottom = (m_beginZoom.x() > pos.x()) ? m_beginZoom.x() : pos.x(); 
-    qreal right  = (m_beginZoom.y() > pos.y()) ? m_beginZoom.y() : pos.y();
-    
-    qDebug() << "top" << top << "left" << left << "bottom" << bottom << "right" << right;
+    m_view->fitInView(m_zoomRectItem->rect(),Qt::KeepAspectRatioByExpanding);
     delete m_zoomRectItem;
     m_zoomRectItem = 0;
     return true;
@@ -91,12 +86,8 @@ bool ZoomAction::executeRelease(QPointF pos)
 
 bool ZoomAction::executeDoubleClick(QPointF pos)
 {
-    return AbstractAction::executeDoubleClick(pos);
-}
-
-bool ZoomAction::executeKeyPress(QKeyEvent* keyEvent)
-{
-    return AbstractAction::executeKeyPress(keyEvent);
+    m_view->resetMatrix();
+    return true;
 }
 
 bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)

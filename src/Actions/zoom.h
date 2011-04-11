@@ -39,7 +39,6 @@ public:
     bool executeMove(QPointF pos);
     bool executeRelease(QPointF pos);
     bool executeDoubleClick(QPointF pos);
-    bool executeKeyPress(QKeyEvent* keyEvent);
     bool executeKeyRelease(QKeyEvent* keyEvent);
     bool executeWellEvent(QGraphicsSceneWheelEvent *wEvent);    
 private:
