@@ -104,30 +104,9 @@ void DataItem::updateColor(){
 }
 
 void DataItem::updateName(){
-<<<<<<< HEAD
-   if ( !_name ){
-    _name = new QGraphicsSimpleTextItem(i18n("Name: %1").arg(_datum->name()), this);
-    _name->setFlags(ItemIgnoresTransformations);
-    _name->setFont(_font);
-   }else if (_name->text() != _datum->name()){
-    _name->setText(i18n("Name: %1").arg(_datum->name()));
-   }
-   _name->setVisible(_datum->showName());
-   _name->setPos(0, 75);
-   
-}
-
-void DataItem::updateValue(){
-   if ( !_value ){ 
-      _value = new QGraphicsSimpleTextItem(i18n("Value: %1").arg(_datum->value().toString()), this);
-      _value->setFlags(ItemIgnoresTransformations);
-      _value->setFont(_font);
-   }else if (_value->text() != _datum->value().toString()){
-      _value ->setText(i18n("Value: %1").arg(_datum->value().toString()));
-   }
-=======
     if ( !_name ){
         _name = new QGraphicsSimpleTextItem(i18n("%1").arg(_datum->name()), this);
+        _name->setFlags(ItemIgnoresTransformations);
         _name->setFont(_font);
     }else if (_name->text() != _datum->name()){
         _name->setText(i18n("%1").arg(_datum->name()));
@@ -163,8 +142,9 @@ void DataItem::updateValue(){
 void DataItem::updateValue(){
     if ( !_value ){ 
         _value = new QGraphicsSimpleTextItem(i18n("v=%1").arg(_datum->value().toString()), this);
+        _value->setFlags(ItemIgnoresTransformations);
         _value->setFont(_font);
-    }else if (_value->text() != _datum->value().toString()){
+    } else if (_value->text() != _datum->value().toString()){
         _value ->setText(i18n("v=%1").arg(_datum->value().toString()));
     }
     
@@ -193,6 +173,5 @@ void DataItem::updateValue(){
             _value->setPos(0, 25);
     }
    
->>>>>>> setup display of node data by global config
    _value->setVisible(_datum->showValue());
 }
