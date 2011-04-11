@@ -22,7 +22,7 @@ DataItem::DataItem(Data* n)
 ,_name(0)
 ,_value(0)
 ,_colorizer(0)
-,_font(QFont("Helvetica [Cronyx]", 18))
+,_font(QFont("Helvetica [Cronyx]", 12))
 ,_originalWidth(n->width())
 {
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
@@ -116,22 +116,22 @@ void DataItem::updateName(){
     switch(GraphicsLayout::self()->viewStyleDataNode()) {
         case ConfigureDefaultProperties::ABOVE: {
             if (_datum->dataStructure()->dataValueVisibility()) {
-                _name->setPos(0, -60);
+                _name->setPos(0, -100);
             } else {
-                _name->setPos(0, -35);
+                _name->setPos(0, -55);
             }
             break;
         }
         case ConfigureDefaultProperties::CENTER: {
             if (_datum->dataStructure()->dataValueVisibility()) {
-                _name->setPos(0, 15);
+                _name->setPos(0, -20);
             } else {
-                _name->setPos(0, 25);
+                _name->setPos(0, 0);
             }
             break;
         }
         case ConfigureDefaultProperties::BELOW: {
-            _name->setPos(0, 75);
+            _name->setPos(0, 70);
             break;
         }
         default:
@@ -150,22 +150,22 @@ void DataItem::updateValue(){
     
     switch(GraphicsLayout::self()->viewStyleDataNode()) {
         case ConfigureDefaultProperties::ABOVE: {
-            _value->setPos(0, -35);
+            _value->setPos(0, -55);
             break;
         }
         case ConfigureDefaultProperties::CENTER: {
             if (_datum->dataStructure()->dataNameVisibility()) {
-                _value->setPos(0, 35);
+                _value->setPos(0, 30);
             } else {
-                _value->setPos(0, 25);
+                _value->setPos(0, 0);
             }
             break;
         }
         case ConfigureDefaultProperties::BELOW: {
             if (_datum->dataStructure()->dataNameVisibility()) {
-                _value->setPos(0, 95);
+                _value->setPos(0, 115);
             } else {
-                _value->setPos(0, 75);
+                _value->setPos(0, 70);
             }   
             break;
         }
