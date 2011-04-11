@@ -28,13 +28,9 @@ set( rocs_core_SRCS
     Core/Pointer.cpp
     Core/QtScriptBackend.cpp
 
-    GraphicsItem/DataItem.cpp
-    GraphicsItem/DataStructureItem.cpp
-    GraphicsItem/PointerItem.cpp
-
-    Plugins/FilePluginInterface.cpp
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
+    Plugins/FilePluginInterface.cpp
 )
 
 kde4_add_library( rocslib  SHARED ${rocs_core_SRCS} )
@@ -86,20 +82,24 @@ set ( rocs_actions_SRCS
 )
 
 set( rocs_interface_SRCS
-  Interface/ImporterExporterManager.cpp
-  Interface/IncludeManagerSettings.cpp
-  Interface/MainWindow.cpp
-  Interface/OpenedFilesWidget.cpp
-  Interface/GraphScene.cpp
-  Interface/Separator.cpp
-  Interface/GraphVisualEditor.cpp
-  Interface/GraphPropertiesWidget.cpp
-  Interface/GraphLayers.cpp
-  Interface/TabWidget.cpp
-  Interface/CodeEditor.cpp
-  Interface/NodePropertiesWidget.cpp
-  Interface/edgepropertieswidget.cpp
-  Interface/ConfigureDefaultProperties.cpp
+    Interface/ImporterExporterManager.cpp
+    Interface/IncludeManagerSettings.cpp
+    Interface/MainWindow.cpp
+    Interface/OpenedFilesWidget.cpp
+    Interface/GraphScene.cpp
+    Interface/Separator.cpp
+    Interface/GraphVisualEditor.cpp
+    Interface/GraphPropertiesWidget.cpp
+    Interface/GraphLayers.cpp
+    Interface/TabWidget.cpp
+    Interface/CodeEditor.cpp
+    Interface/NodePropertiesWidget.cpp
+    Interface/edgepropertieswidget.cpp
+    Interface/ConfigureDefaultProperties.cpp
+    
+    GraphicsItem/DataItem.cpp
+    GraphicsItem/DataStructureItem.cpp
+    GraphicsItem/PointerItem.cpp
 )
 
 set( rocs_models_SRCS

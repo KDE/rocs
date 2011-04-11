@@ -3,7 +3,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../Core ../Actions ../Inter
  
 set( rocsgraphics_LIB_SRCS
 	NodeItem.cpp
-	OrientedEdgeItem.cpp
+	EdgeItem.cpp
 )
 
 kde4_add_library( librocsgraphics	STATIC ${rocsgraphics_LIB_SRCS} )
