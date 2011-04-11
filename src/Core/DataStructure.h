@@ -83,14 +83,14 @@ public  slots:
     virtual Pointer* addPointer(Data* from, Data* to);
     Data* data(const QString& name = i18n("Untitled"));
 
-    void remove(Data *n);
-    void remove(Pointer *e);
-    void remove(Group *g);
+    virtual void remove(Data *n);
+    virtual void remove(Pointer *e);
+    virtual void remove(Group *g);
 
-    Group *addGroup(const QString& name);
-    QList<Data*> addDataList(QList< QPair<QString,QPointF> > dataList);
-    Data* addData(QString name, QPointF point);
-    Pointer* addPointer(const QString& name_from, const QString& name_to);
+    virtual Group *addGroup(const QString& name);
+    virtual QList<Data*> addDataList(QList< QPair<QString,QPointF> > dataList);
+    virtual Data* addData(QString name, QPointF point);
+    virtual Pointer* addPointer(const QString& name_from, const QString& name_to);
 
     void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void removeDynamicProperty(const QString& property);

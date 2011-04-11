@@ -91,6 +91,7 @@ Data* Rocs::ListStructure::addData ( QString name ) {
 
     ListNode *n = static_cast<ListNode*>(DataStructure::addData(new ListNode(this)));
     n->setName(name);
+    arrangeNodes();
     return n;
 }
 
@@ -102,6 +103,11 @@ void Rocs::ListStructure::cleanUpBeforeConvert()
 
 QScriptValue Rocs::ListStructure::front() {
   return _front->scriptValue();
+}
+
+void Rocs::ListStructure::remove(Pointer * ptr){
+    DataStructure::remove(ptr);
+    arrangeNodes();
 }
 
 QScriptValue Rocs::ListStructure::createNode(const QString & name){
@@ -170,8 +176,6 @@ void Rocs::ListStructure::arrangeNodes(){
       anim->setStartValue(n->y());
       anim->setEndValue(y);
       _animationGroup->addAnimation(anim);
-//       n->setX(x);
-//       n->setY(y);
       x += 60;
     }
   }

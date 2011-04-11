@@ -27,6 +27,9 @@ namespace Rocs{
 class ListStructure : public DataStructure {
   Q_OBJECT
   public:
+    using DataStructure::remove;
+    using DataStructure::addPointer;
+    using DataStructure::addData;
 
     ListStructure ( Document* parent = 0 );
 
@@ -45,6 +48,8 @@ class ListStructure : public DataStructure {
     virtual Pointer* addPointer ( Data* from, Data* to );
 
     void arrangeNodes();
+
+    virtual void remove(Pointer* e);
 
     QScriptValue front();
     QScriptValue createNode(const QString &name);
