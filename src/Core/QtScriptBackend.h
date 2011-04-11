@@ -19,6 +19,8 @@
 #ifndef QTSCRIPTBACKEND_H
 #define QTSCRIPTBACKEND_H
 
+#include "abstractrunbackend.h"
+
 #include <QtScript>
 #include <QScriptValue>
 #include <QScriptString>
@@ -30,38 +32,28 @@ class Document;
 class ToolsPluginInterface;
 
 
-class  ROCSLIB_EXPORT QtScriptBackend : public QObject{
+class  ROCSLIB_EXPORT QtScriptBackend : public AbstractRunBackend{
   Q_OBJECT
 public:
 //     QtScriptBackend();
     QtScriptBackend(QObject* parent = 0);
-    void setScript(const QString& s, Document *document);
-    void setDocument(Document *document);
-    void loadFile(const QString& file);
-    void debug(const QString& s);
-    void output(const QString& s);
     QScriptEngine *engine(){ return _engine; }
 
     /** return true if is evaluating a script or running a tool script. */
     bool isRunning();
-
-private:
-    void createGraphList();
+    virtual void start();
     
-    QString _script;
-    Document *_document;
+private:
+    
+    void createGraphList();
     QScriptEngine *_engine;
-
     bool _runningTool;
 
 signals:
-    void sendOutput(const QString& s);
-    void sendDebug(const QString& s);
     void engineCreated(QScriptEngine* e);
-    void finished();
 
   public slots:
-    void start();
+
 
     /** run a tool plugin in graph and later run it resulting script.*/
     void runTool(ToolsPluginInterface * plugin, Document *document);

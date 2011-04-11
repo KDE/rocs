@@ -15,6 +15,8 @@ include_directories(
 
 # Preparando a biblioteca padrão.
 
+find_library(ANALITZA_LIBS analitza)
+
 set( rocs_core_SRCS
     Core/Data.cpp
     Core/DataStructure.cpp
@@ -27,6 +29,8 @@ set( rocs_core_SRCS
     Core/KrossBackend.cpp
     Core/Pointer.cpp
     Core/QtScriptBackend.cpp
+    Core/analitzabackend.cpp
+    Core/abstractrunbackend.cpp 
 
     GraphicsItem/DataItem.cpp
     GraphicsItem/DataStructureItem.cpp
@@ -44,6 +48,7 @@ target_link_libraries( rocslib
   ${KDE4_KIO_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSCRIPTTOOLS_LIBRARY}
+  ${ANALITZA_LIBS}
 )
 
 set( rocslib_LIB_HDRS
@@ -112,7 +117,7 @@ set( rocs_models_SRCS
 #   UndoRedo/URAddEdge.cpp
 # )
 
-set ( rocs_script_SRC 
+set ( rocs_script_SRC  
         Scripts/IncludeManager.cpp
 )
 
@@ -142,6 +147,7 @@ kde4_add_executable(rocs ${rocs_SRCS} ${rocs_Settings_SRCS} ${rocs_RCC_SRCS})
 
 target_link_libraries(rocs
   rocslib
+
   ${KDE4_KDEUI_LIBS}
   ${KDE4_PLASMA_LIBS}
   ${KDE4_KROSSUI_LIBS}

@@ -334,7 +334,8 @@ void MainWindow::setActiveDocument ( )
 {
     kDebug() << "Setting the document in the main widnow";
     Document *activeDocument = DocumentManager::self()->activeDocument();
-    QtScriptBackend *engine = activeDocument->engineBackend();
+    //QtScriptBackend *engine = activeDocument->engineBackend();
+    AbstractRunBackend *engine = activeDocument->engineBackend();
 
     _graphVisualEditor->setActiveDocument();
     _GraphLayers->setActiveDocument();
@@ -342,7 +343,6 @@ void MainWindow::setActiveDocument ( )
     connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
                 activeDocument->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
 
-//     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
      connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
      connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
      connect( engine, SIGNAL(finished()),   _bottomTabs, SLOT(setPlayString()));
@@ -509,7 +509,8 @@ void MainWindow::executeScript(const QString& text) {
     script = inc.include(script, _codeEditor->document()->url().path(),
                                  _codeEditor->document()->documentName());
 
-    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    //QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    AbstractRunBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
     if ( !engine->isRunning() ){
         _bottomTabs->setStopString();
         engine->setScript(script, DocumentManager::self()->activeDocument());

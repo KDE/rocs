@@ -28,6 +28,8 @@
 #include <KDebug>
 #include "Data.h"
 #include "Pointer.h"
+#include "abstractrunbackend.h"
+#include "analitzabackend.h"
 
 //#include "dataStructureGroups.h"
 
@@ -52,7 +54,7 @@ public:
     bool _saved;
     DataStructure *_activeDataStructure;
     QPointer<DataStructurePluginInterface> _dataStructureType;
-    QtScriptBackend* _engineBackend;
+    AbstractRunBackend* _engineBackend;
     QList<DataStructure*> _dataStructures;
 
 
@@ -69,7 +71,8 @@ Document::Document(const QString& name, qreal xLeft, qreal xRight, qreal yTop, q
     d->_minWidth = 0;
     d->_minHeight = 0;
     d->_saved = false;
-    d->_engineBackend = new QtScriptBackend(this);
+    //d->_engineBackend = new QtScriptBackend(this);
+    d->_engineBackend = new AnalitzaBackend(this);
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_modified = false;
 }
@@ -89,7 +92,8 @@ Document::Document(const Document& gd)
     d->_yTop = gd.yTop();
     d->_yBottom = gd.yBottom();
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
-    d->_engineBackend = new QtScriptBackend(this);
+   // d->_engineBackend = new QtScriptBackend(this);
+    d->_engineBackend = new AnalitzaBackend(this);
 
     for (int i = 0; i < gd.dataStructures().count(); ++i){
         d->_dataStructures.append(
@@ -112,7 +116,7 @@ Document::~Document() {
 
 QList<DataStructure*>& Document::dataStructures() const { return d->_dataStructures; }
 
-QtScriptBackend * Document::engineBackend() const{
+AbstractRunBackend * Document::engineBackend() const{
     return d->_engineBackend;
 }
 

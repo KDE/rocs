@@ -80,7 +80,7 @@ bool QtScriptBackend::isRunning(){
   return _runningTool;
 }
 
-QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent){
+QtScriptBackend::QtScriptBackend(QObject* parent): AbstractRunBackend(parent){
     self = this;
     _engine = 0;
     _runningTool = false;
@@ -97,12 +97,6 @@ void QtScriptBackend::runTool(ToolsPluginInterface * plugin, Document *graphs){
     _runningTool = false;
 }
 
-void QtScriptBackend::setScript(const QString& s,Document *graphs ) {
-    _script = s;
-    _document = graphs;
-    kDebug() << "script Set" << _script;
-}
-
 void QtScriptBackend::createGraphList() {
     QScriptValue graphList = _engine->newArray();
     _engine->globalObject().setProperty("graphs", graphList);
@@ -113,28 +107,5 @@ void QtScriptBackend::createGraphList() {
     for (int i = 0; i < size; i++) {
         graphList.property("push").call(graphList, QScriptValueList() << _document->dataStructures().at(i)->scriptValue());
     }
-}
-
-void QtScriptBackend::loadFile(const QString& file) {
-    _script.clear();
-    QFile f(file);
-    if  (  !f.open(QIODevice::ReadOnly | QIODevice::Text ) ) {
-        kDebug() << "File not found";
-        return;
-    }
-
-    while ( ! f.atEnd() ) {
-        QByteArray line = f.readLine();
-        _script += line;
-    }
-    _script += '\n';
-}
-
-void QtScriptBackend::debug(const QString& str){
-     emit sendDebug(str);
-}
-
-void QtScriptBackend::output(const QString& str){
-    emit sendOutput(str);
 }
 

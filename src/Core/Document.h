@@ -28,7 +28,7 @@
 
 class DataStructurePluginInterface;
 class DataStructure;
-class QtScriptBackend;
+class AbstractRunBackend;
 class DocumentPrivate;
 
 class ROCSLIB_EXPORT Document : public QObject
@@ -63,7 +63,7 @@ public:
     bool saveAsInternalFormat(const QString& filename);
     void loadFromInternalFormat(const QString& filename);
 
-    QtScriptBackend * engineBackend() const;
+    AbstractRunBackend * engineBackend() const;
     QList<DataStructure*>& dataStructures() const;
 
     void remove(DataStructure *dataStructure);
