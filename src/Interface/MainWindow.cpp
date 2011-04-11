@@ -1,3 +1,4 @@
+
 /* This file is part of Rocs,
      Copyright (C) 2008 by:
      Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -87,6 +88,7 @@
 #include <QCloseEvent>
 #include <KMessageBox>
 #include "zoom.h"
+#include "../GraphicsItem/GraphicsLayout.h"
 
 MainWindow::MainWindow() :  KXmlGuiWindow()
 {
@@ -115,8 +117,8 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
      */
      DocumentManager::self()->loadDocument();
 
-    GraphVisualEditor::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
-    GraphVisualEditor::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
+    GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
+    GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
 }
 
 MainWindow::~MainWindow()

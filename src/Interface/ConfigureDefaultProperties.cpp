@@ -2,6 +2,7 @@
 #include "ui_ConfigureDefaultProperties.h"
 #include <settings.h>
 #include "Interface/GraphVisualEditor.h"
+#include "GraphicsLayout.h"
 
 
 ConfigureDefaultProperties::ConfigureDefaultProperties( QWidget* parent ) :
@@ -29,8 +30,8 @@ void ConfigureDefaultProperties::saveConfig() {
     Settings::setDataNodeDisplay(_displayPositionNode);
     Settings::setDataEdgeDisplay(_displayPositionEdge);
 
-    GraphVisualEditor::self()->setViewStyleDataNode(_displayPositionNode);
-    GraphVisualEditor::self()->setViewStyleDataEdge(_displayPositionEdge);
+    GraphicsLayout::self()->setViewStyleDataNode(_displayPositionNode);
+    GraphicsLayout::self()->setViewStyleDataEdge(_displayPositionEdge);
 }
 
 void ConfigureDefaultProperties::setDisplayPositionNode(int position) {

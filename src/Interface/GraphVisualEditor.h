@@ -52,9 +52,6 @@ public:
     /*! as the name says, it removes the current DataStructureDocument
     from the screen and releases it from the evil hands of GraphEditWidget.*/
     void releaseDocument();
-    
-    int viewStyleDataNode() const;
-    int viewStyleDataEdge() const;
 
 public slots:    
     /*! set the current selected Graph.
@@ -64,9 +61,6 @@ public slots:
 
     void setActiveDocument();
     QList<DataItem*> selectedNodes() const;
-
-    void setViewStyleDataNode(int style);
-    void setViewStyleDataEdge(int style);
 
 private:
     /*! Default Constructor
@@ -82,9 +76,6 @@ private:
     QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
 
     static GraphVisualEditor* _self;
-
-    int _viewStyleDataNode;
-    int _viewStyleDataEdge;
 
     GraphScene *_scene;
     Document *_document;

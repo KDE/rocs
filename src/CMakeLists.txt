@@ -15,6 +15,7 @@ include_directories(
 
 # Preparando a biblioteca padrão.
 
+
 set( rocs_core_SRCS
     Core/Data.cpp
     Core/DataStructure.cpp
@@ -31,6 +32,11 @@ set( rocs_core_SRCS
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
     Plugins/FilePluginInterface.cpp
+    
+    GraphicsItem/GraphicsLayout.cpp
+    GraphicsItem/DataItem.cpp
+    GraphicsItem/DataStructureItem.cpp
+    GraphicsItem/PointerItem.cpp
 )
 
 kde4_add_library( rocslib  SHARED ${rocs_core_SRCS} )
@@ -59,6 +65,7 @@ set( rocslib_LIB_HDRS
 
   GraphicsItem/DataItem.h
   GraphicsItem/PointerItem.h
+  GraphicsItem/GraphicsLayout.h
 )
 
 set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
@@ -96,10 +103,6 @@ set( rocs_interface_SRCS
     Interface/NodePropertiesWidget.cpp
     Interface/edgepropertieswidget.cpp
     Interface/ConfigureDefaultProperties.cpp
-    
-    GraphicsItem/DataItem.cpp
-    GraphicsItem/DataStructureItem.cpp
-    GraphicsItem/PointerItem.cpp
 )
 
 set( rocs_models_SRCS

@@ -3,8 +3,8 @@ add_subdirectory(MakeComplete)
 add_subdirectory(importPlainTXT)
 
 add_subdirectory(kmlParser)
-# TODO fix linking problems
-# add_subdirectory(DataStructure)
+
+add_subdirectory(DataStructure)
 
 # PLUGIN: graph generator
 # requires boost version >= 1.42
