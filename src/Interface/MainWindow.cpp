@@ -262,7 +262,7 @@ void MainWindow::showSettings()
      KConfigDialog dialog(this,  "settings", Settings::self());
 
      IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
-     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties( &dialog, _graphVisualEditor );
+     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties( &dialog );
 
      dialog.addPage(set,"Include Manager",QString(),"Include Manager",true);
      dialog.addPage(defaultProperties,"Default Settings",QString(),"Default Settings",true);

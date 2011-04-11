@@ -4,7 +4,7 @@
 #include "Interface/GraphVisualEditor.h"
 
 
-ConfigureDefaultProperties::ConfigureDefaultProperties( QWidget* parent, GraphVisualEditor* graphVisualeditor) :
+ConfigureDefaultProperties::ConfigureDefaultProperties( QWidget* parent ) :
     QWidget(parent),
     ui(new Ui::ConfigureDefaultProperties)
 {
@@ -28,12 +28,9 @@ void ConfigureDefaultProperties::readConfig() {
 void ConfigureDefaultProperties::saveConfig() {
     Settings::setDataNodeDisplay(_displayPositionNode);
     Settings::setDataEdgeDisplay(_displayPositionEdge);
-    
-    if (_graphVisualEditor==0)
-        return; 
 
-    _graphVisualEditor->setViewStyleDataNode(_displayPositionNode);
-    _graphVisualEditor->setViewStyleDataEdge(_displayPositionEdge);
+    GraphVisualEditor::self()->setViewStyleDataNode(_displayPositionNode);
+    GraphVisualEditor::self()->setViewStyleDataEdge(_displayPositionEdge);
 }
 
 void ConfigureDefaultProperties::setDisplayPositionNode(int position) {

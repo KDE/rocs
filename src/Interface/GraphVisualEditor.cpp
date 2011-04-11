@@ -129,11 +129,21 @@ QList<DataItem*> GraphVisualEditor::selectedNodes() const {
 void GraphVisualEditor::setViewStyleDataNode(int style)
 {
     _viewStyleDataNode = style;
+    QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
+    foreach (DataStructure* ds, dsList) {
+        ds->setDataNameVisibility( ds->dataNameVisibility() ); // triggers redraw of all nodes
+    }
+    _scene->update();
 }
 
 void GraphVisualEditor::setViewStyleDataEdge(int style)
 {
     _viewStyleDataEdge = style;
+    QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
+    foreach (DataStructure* ds, dsList) {
+        ds->setPointerNameVisibility( ds->pointerNameVisibility() ); // triggers redraw of all edges
+    }
+    _scene->update();
 }
 
 int GraphVisualEditor::viewStyleDataNode() const
