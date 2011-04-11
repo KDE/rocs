@@ -22,7 +22,7 @@ class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem{
   public:
     DataItem(Data *n);
     virtual ~DataItem();
-    Data* data() const { return _datum; }
+    Data* data() const { return _data; }
     static QMap<QString, QSvgRenderer*> _renders;
     
   private slots:
@@ -37,7 +37,7 @@ private:
     void updatePos();
     void updateSize();
 
-    Data *_datum;
+    Data *_data;
     QString _iconPackage;
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;
