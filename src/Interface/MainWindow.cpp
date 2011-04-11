@@ -115,9 +115,8 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
      */
      DocumentManager::self()->loadDocument();
 
-    DocumentManager::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
-    DocumentManager::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
-
+    GraphVisualEditor::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
+    GraphVisualEditor::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
 }
 
 MainWindow::~MainWindow()
@@ -164,7 +163,7 @@ void MainWindow::downloadNewExamples(){
 
 QWidget* MainWindow::setupRightPanel()
 {
-    _graphVisualEditor = new GraphVisualEditor ( this );
+    _graphVisualEditor = GraphVisualEditor::self();
 
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
@@ -263,7 +262,7 @@ void MainWindow::showSettings()
      KConfigDialog dialog(this,  "settings", Settings::self());
 
      IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
-     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties( 0 );
+     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties( &dialog, _graphVisualEditor );
 
      dialog.addPage(set,"Include Manager",QString(),"Include Manager",true);
      dialog.addPage(defaultProperties,"Default Settings",QString(),"Default Settings",true);

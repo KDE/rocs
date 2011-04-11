@@ -49,6 +49,15 @@ GraphVisualEditor::GraphVisualEditor( MainWindow *parent) :
     setupWidgets();
 }
 
+GraphVisualEditor* GraphVisualEditor::_self = 0;
+
+GraphVisualEditor* GraphVisualEditor::self() {
+    if (!_self){
+        _self = new GraphVisualEditor();
+    }
+    return _self;
+}
+
 void GraphVisualEditor::resizeEvent (QResizeEvent  *event )
 {
     Q_UNUSED(event);
@@ -115,4 +124,24 @@ QList<DataItem*> GraphVisualEditor::selectedNodes() const {
         }
     }
     return tmpList;
+}
+
+void GraphVisualEditor::setViewStyleDataNode(int style)
+{
+    _viewStyleDataNode = style;
+}
+
+void GraphVisualEditor::setViewStyleDataEdge(int style)
+{
+    _viewStyleDataEdge = style;
+}
+
+int GraphVisualEditor::viewStyleDataNode() const
+{
+    return _viewStyleDataNode;
+}
+
+int GraphVisualEditor::viewStyleDataEdge() const
+{
+    return _viewStyleDataEdge;
 }

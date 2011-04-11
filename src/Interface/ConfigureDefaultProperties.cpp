@@ -1,10 +1,10 @@
 #include "ConfigureDefaultProperties.h"
 #include "ui_ConfigureDefaultProperties.h"
 #include <settings.h>
-#include "DocumentManager.h"
+#include "Interface/GraphVisualEditor.h"
 
 
-ConfigureDefaultProperties::ConfigureDefaultProperties( QWidget* parent) :
+ConfigureDefaultProperties::ConfigureDefaultProperties( QWidget* parent, GraphVisualEditor* graphVisualeditor) :
     QWidget(parent),
     ui(new Ui::ConfigureDefaultProperties)
 {
@@ -29,8 +29,11 @@ void ConfigureDefaultProperties::saveConfig() {
     Settings::setDataNodeDisplay(_displayPositionNode);
     Settings::setDataEdgeDisplay(_displayPositionEdge);
     
-    DocumentManager::self()->setViewStyleDataNode(_displayPositionNode);
-    DocumentManager::self()->setViewStyleDataEdge(_displayPositionEdge);
+    if (_graphVisualEditor==0)
+        return; 
+
+    _graphVisualEditor->setViewStyleDataNode(_displayPositionNode);
+    _graphVisualEditor->setViewStyleDataEdge(_displayPositionEdge);
 }
 
 void ConfigureDefaultProperties::setDisplayPositionNode(int position) {

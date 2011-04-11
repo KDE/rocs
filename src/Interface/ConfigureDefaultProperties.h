@@ -2,7 +2,8 @@
 #define CONFIGUREDEFAULTPROPERTIES_H
 
 #include <QWidget>
-#include "ui_ConfigureDefaultProperties.h"
+
+class GraphVisualEditor;
 
 namespace Ui {
     class ConfigureDefaultProperties;
@@ -15,7 +16,7 @@ class ConfigureDefaultProperties :
     Q_OBJECT
 
     public:
-        ConfigureDefaultProperties( QWidget* parent = 0 );
+        ConfigureDefaultProperties( QWidget* parent = 0, GraphVisualEditor* graphVisualeditor=0 );
         ~ConfigureDefaultProperties();
 
         enum {
@@ -35,6 +36,7 @@ class ConfigureDefaultProperties :
         Ui::ConfigureDefaultProperties *ui;
         int _displayPositionNode;
         int _displayPositionEdge;
+        GraphVisualEditor * _graphVisualEditor;
 
     signals:
         void changed(bool);

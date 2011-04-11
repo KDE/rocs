@@ -8,10 +8,10 @@
 #include <QGraphicsScene>
 #include <KLocale>
 #include "Data.h"
-#include "settings.h"
 #include "Interface/ConfigureDefaultProperties.h"
 #include <DocumentManager.h>
 #include <DataStructure.h>
+#include "GraphVisualEditor.h"
 
 QMap<QString, QSvgRenderer*> DataItem::_renders;    
 
@@ -134,7 +134,7 @@ void DataItem::updateValue(){
     }
     _name->setVisible(_datum->showName());
 
-    switch(DocumentManager::self()->viewStyleDataNode()) {
+    switch(GraphVisualEditor::self()->viewStyleDataNode()) {
         case ConfigureDefaultProperties::ABOVE: {
             if (_datum->dataStructure()->dataValueVisibility()) {
                 _name->setPos(0, -60);
@@ -168,7 +168,7 @@ void DataItem::updateValue(){
         _value ->setText(i18n("v=%1").arg(_datum->value().toString()));
     }
     
-    switch(DocumentManager::self()->viewStyleDataNode()) {
+    switch(GraphVisualEditor::self()->viewStyleDataNode()) {
         case ConfigureDefaultProperties::ABOVE: {
             _value->setPos(0, -35);
             break;

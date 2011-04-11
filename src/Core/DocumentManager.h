@@ -69,9 +69,6 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
 
     void loadDocument(QString fileName = QString());
 
-    void setViewStyleDataNode(int style);
-    void setViewStyleDataEdge(int style);
-
   signals:
     /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/
     void activateDocument ();
@@ -83,9 +80,6 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
 private:
     DocumentManager(QObject* parent = 0);
     static DocumentManager *_self;
-    
-    int _viewStyleDataNode;
-    int _viewStyleDataEdge;
 };
 
 inline Document* DocumentManager::document(const int i) const { return (i < m_documents.count() && i >= 0) ? m_documents.at(i) : 0; }
