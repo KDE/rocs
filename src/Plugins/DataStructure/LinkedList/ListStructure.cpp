@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Plugin that implements a list structure in Rocs
+    Copyright (C) 2011 Wagner Reck
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,18 +23,48 @@
 #include "Pointer.h"
 #include <QDebug>
 
-Rocs::ListStructure::ListStructure ( Document* parent ) : DataStructure ( parent ) {
-  _animationGroup = new QParallelAnimationGroup(this);
+Rocs::ListStructure::ListStructure ( Document* parent )
+      : DataStructure ( parent )
+      , m_building(true) {
   createFront();
+  m_building = false;
+  init();
+}
+
+Rocs::ListStructure::ListStructure(DataStructure& other, Document * parent)
+      : DataStructure(other, parent)
+      , m_building(true)
+{
+    QHash <Data*, Data* > dataTodata;
+    foreach(Data* n, other.dataList()){
+        Data* newdata = addData(n->name());
+        newdata->setColor(n->color());
+        newdata->setValue(n->value());
+        newdata->setX(n->x());
+        newdata->setY(n->y());
+        newdata->setWidth(n->width());
+        dataTodata.insert(n, newdata);
+    }
+    foreach(Pointer *e, other.pointers()){
+        Data* from =  dataTodata.value(e->from());
+        Data* to =  dataTodata.value(e->to());
+
+        Pointer* newPointer = addPointer(from, to);
+        newPointer->setColor(e->color());
+        newPointer->setValue(e->value());
+    }
+    createFront();
+    m_building = false;
+    init();
+}
+
+
+void Rocs::ListStructure::init()
+{
+  _animationGroup = new QParallelAnimationGroup(this);
   arrangeNodes();
 }
 
-Rocs::ListStructure::ListStructure(DataStructure& other, Document * parent): DataStructure(other, parent)
-{
-  _animationGroup = new QParallelAnimationGroup(this);
-  createFront();
-  arrangeNodes();
-}
 
 Rocs::ListStructure::~ListStructure() {
   _animationGroup->deleteLater();;
@@ -48,7 +78,7 @@ void Rocs::ListStructure::createFront()
 }
 
 Pointer* Rocs::ListStructure::addPointer ( Data* from, Data* to ) {
-    foreach(Pointer *e, from->adjacent_pointers()){
+    foreach(Pointer *e, from->out_pointers()){
         e->remove();
     }
 
@@ -77,10 +107,13 @@ QScriptValue Rocs::ListStructure::front() {
 QScriptValue Rocs::ListStructure::createNode(const QString & name){
     Data * n = addData(name);
     n->setEngine( engine() );
+    arrangeNodes();
     return n->scriptValue();
 }
 
 void Rocs::ListStructure::arrangeNodes(){
+  if (m_building)
+    return;
   qreal x;
   qreal y;
   if (_animationGroup->state() != QAnimationGroup::Stopped){

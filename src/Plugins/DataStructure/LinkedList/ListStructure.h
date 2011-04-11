@@ -51,10 +51,13 @@ class ListStructure : public DataStructure {
 
 
 private:
+    void init();
+    void createFront();
 
     ListNode * _front;
     QParallelAnimationGroup* _animationGroup;
-    void createFront();
+
+    bool m_building;
 };
 }
 #endif // LISTSTRUCTURE_H

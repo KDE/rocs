@@ -33,6 +33,24 @@ Rocs::GraphStructure::GraphStructure ( Document* parent ) :
 
 Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): DataStructure(other, parent)
 {
+    QHash <Data*, Data* > dataTodata;
+    foreach(Data* n, other.dataList()){
+        Data* newdata = addData(n->name());
+        newdata->setColor(n->color());
+        newdata->setValue(n->value());
+        newdata->setX(n->x());
+        newdata->setY(n->y());
+        newdata->setWidth(n->width());
+        dataTodata.insert(n, newdata);
+    }
+    foreach(Pointer *e, other.pointers()){
+        Data* from =  dataTodata.value(e->from());
+        Data* to =  dataTodata.value(e->to());
+
+        Pointer* newPointer = addPointer(from, to);
+        newPointer->setColor(e->color());
+        newPointer->setValue(e->value());
+    }
     setDirected(false);
 }
 

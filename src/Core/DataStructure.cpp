@@ -61,24 +61,24 @@ DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(p
     d->_pointerNamesVisible     = other.d->_pointerNamesVisible;
     d->_pointerValuesVisible    = other.d->_pointerValuesVisible;
 
-    QHash <Data*, Data* > dataTodata;
-    foreach(Data* n, other.d->_data){
-        Data* newdata = addData(n->name());
-        newdata->setColor(n->color());
-        newdata->setValue(n->value());
-        newdata->setX(n->x());
-        newdata->setY(n->y());
-        newdata->setWidth(n->width());
-        dataTodata.insert(n, newdata);
-    }
-    foreach(Pointer *e, other.d->_pointers){
-        Data* from =  dataTodata.value(e->from());
-        Data* to =  dataTodata.value(e->to());
-
-        Pointer* newPointer = addPointer(from, to);
-        newPointer->setColor(e->color());
-        newPointer->setValue(e->value());
-    }
+//     QHash <Data*, Data* > dataTodata;
+//     foreach(Data* n, other.d->_data){
+//         Data* newdata = addData(n->name());
+//         newdata->setColor(n->color());
+//         newdata->setValue(n->value());
+//         newdata->setX(n->x());
+//         newdata->setY(n->y());
+//         newdata->setWidth(n->width());
+//         dataTodata.insert(n, newdata);
+//     }
+//     foreach(Pointer *e, other.pointers()){
+//         Data* from =  dataTodata.value(e->from());
+//         Data* to =  dataTodata.value(e->to());
+//
+//         Pointer* newPointer = addPointer(from, to);
+//         newPointer->setColor(e->color());
+//         newPointer->setValue(e->value());
+//     }
 
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
