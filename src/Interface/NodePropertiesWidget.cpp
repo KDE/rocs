@@ -19,8 +19,10 @@ DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ):
 }
 
 void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
-    if (_data == n->data())
+    if (_data == n->data()){
+      show(); activateWindow(); raise();
       return;
+    }
 
     if (_data){
         disconnect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
