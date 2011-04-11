@@ -26,6 +26,10 @@ namespace Rocs{
 class GraphStructure : public DataStructure {
   Q_OBJECT
   public:
+    //to avoid hide some methods
+    using DataStructure::remove;
+    using DataStructure::addPointer;
+    using DataStructure::addData;
 
     GraphStructure ( Document* parent = 0 );
 

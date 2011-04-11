@@ -41,7 +41,7 @@ ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 bool ZoomAction::executePress(QPointF pos)
 {
     delete m_zoomRectItem;
-    
+
     m_zoomRectItem = new QGraphicsRectItem(0,0,0,0);
     QColor color(Qt::green);
     color.setAlphaF(0.3);
@@ -49,7 +49,7 @@ bool ZoomAction::executePress(QPointF pos)
     m_zoomRectItem->setPen(QPen(QBrush(Qt::black), 1, Qt::SolidLine));
     m_zoomRectItem->setZValue(9);
     m_beginZoom = m_view->mapFromScene(pos);
-    
+
     _graphScene->addItem(m_zoomRectItem);
     return true;
 }
@@ -58,33 +58,33 @@ bool ZoomAction::executeMove(QPointF pos)
 {
     if (!m_zoomRectItem)
         return false;
-    
+
     QPoint movePos = m_view->mapFromScene(pos);
     qreal left   = (m_beginZoom.x() < movePos.x()) ? m_beginZoom.x() : movePos.x();
     qreal top    = (m_beginZoom.y() < movePos.y()) ? m_beginZoom.y() : movePos.y();
     qreal bottom = (m_beginZoom.y() > movePos.y()) ? m_beginZoom.y() : movePos.y();
     qreal right  = (m_beginZoom.x() > movePos.x()) ? m_beginZoom.x() : movePos.x();
-    
+
     QPointF topLeft(m_view->mapToScene(left, top));
     QPointF bottomRight(m_view->mapToScene(right, bottom));
-    
+
     m_zoomRectItem->setRect(QRectF(topLeft, bottomRight));
-    
+
     return true;
 }
 
-bool ZoomAction::executeRelease(QPointF pos)
+bool ZoomAction::executeRelease(QPointF)
 {
     if (!m_zoomRectItem)
         return false;
-    
+
     m_view->fitInView(m_zoomRectItem->rect(),Qt::KeepAspectRatioByExpanding);
     delete m_zoomRectItem;
     m_zoomRectItem = 0;
     return true;
 }
 
-bool ZoomAction::executeDoubleClick(QPointF pos)
+bool ZoomAction::executeDoubleClick(QPointF)
 {
     m_view->resetMatrix();
     return true;
