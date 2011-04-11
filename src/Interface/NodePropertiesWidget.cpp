@@ -74,10 +74,10 @@ void DataPropertiesWidget::applyChanges(){
 
 void DataPropertiesWidget::reflectAttributes(){
     if (!extraItens->layout()){
-        _oldDataStructurePlugin = DataStructurePluginManager::self()->actualPlugin();
+        _oldDataStructurePlugin = DataStructurePluginManager::self()->actualPluginName();
     }
     
-    if (_oldDataStructurePlugin != DataStructurePluginManager::self()->actualPlugin()){
+    if (_oldDataStructurePlugin != DataStructurePluginManager::self()->actualPluginName()){
         extraItens->layout()->deleteLater();
     }
     

@@ -25,6 +25,8 @@
 #include <QAction>
 #include "QtScriptBackend.h"
 #include <KLocale>
+#include <PluginManager.h>
+#include "DataStructurePluginInterface.h"
 
 DocumentManager *DocumentManager::_self = 0;
 
@@ -103,26 +105,29 @@ void DocumentManager::removeDocument(Document* doc){
     }
 }
 
-void DocumentManager::convertToDataStructure(){
-  kDebug() << "-=-=-=-=-= Converting Data Structures -=-=-=-=-=";
-  Document * newDoc = 0;
-  if (m_actualDocument){
-    m_actualDocument->cleanUpBeforeConvert();
-    newDoc = new Document(*m_actualDocument);
-    emit deactivateDocument(m_actualDocument);
-    addDocument(newDoc);
-  }
-  else{
-    loadDocument();
-  }
+void DocumentManager::convertToDataStructure() {
+    kDebug() << "-=-=-=-=-= Converting Data Structures -=-=-=-=-=";
+    Document * newDoc = 0;
+    if (m_actualDocument){
+        if (m_actualDocument->dataStructureTypeName() != DataStructurePluginManager::self()->actualPluginName()
+                && DataStructurePluginManager::self()->actualPlugin()->canConvertFrom(m_actualDocument)) {
+            //Verificar se é possível converter
+            m_actualDocument->cleanUpBeforeConvert();
+            newDoc = new Document(*m_actualDocument);
+            emit deactivateDocument(m_actualDocument);
+            addDocument(newDoc);
+        }
+    }else {
+        loadDocument();
+    }
 }
 
 void DocumentManager::loadDocument ( QString name ){
   Document * doc;
   if ( name.isEmpty() ){
-      bool found = false;
       int docNumber = 0;
       forever{
+          bool found = false;
           name = QString("%1%2").arg(i18n("Untitled")).arg(docNumber);
           foreach( Document *data, m_documents){
               if( data->name() == name){

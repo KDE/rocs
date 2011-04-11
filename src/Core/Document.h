@@ -26,6 +26,7 @@
 #include "rocslib_export.h"
 #include <QSize>
 
+class DataStructurePluginInterface;
 class DataStructure;
 class QtScriptBackend;
 class DocumentPrivate;
@@ -71,6 +72,11 @@ public:
     /** @brief clear data that only is usefull for a type of data structure and that cannot be converted to others from all data structeres of this document.
     */
     virtual void cleanUpBeforeConvert();
+
+    /** @brief return the name of data structure used to build this document. */
+    QString dataStructureTypeName()const;
+
+    DataStructurePluginInterface * dataStructurePlugin() const;
 
 public slots:
     void setModified(const bool mod = true);

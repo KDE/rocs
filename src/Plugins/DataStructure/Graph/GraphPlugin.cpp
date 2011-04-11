@@ -29,6 +29,7 @@
 #include <QCheckBox>
 #include "EdgeItem.h"
 #include "Data.h"
+#include <KMessageBox>
 
 static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18n("Graph Structure") , "0.1" );
 using namespace Rocs;
@@ -48,8 +49,8 @@ GraphPlugin::~GraphPlugin()
 
 }
 
-DataStructure* GraphPlugin::changeToDataStructure ( DataStructure* graph, Document * parent) {
-    return new GraphStructure(*graph, parent);
+DataStructure* GraphPlugin::convertToDataStructure ( DataStructure* ds, Document * parent) {
+  return new GraphStructure(*ds, parent);
 }
 
 DataStructure* GraphPlugin::createDataStructure ( Document* parent )
@@ -116,4 +117,10 @@ QLayout*  GraphPlugin::dataStructureExtraProperties ( DataStructure* graph, QWid
     lay->addWidget(_graphOriented, 0,0);
     connect( _graphOriented, SIGNAL(toggled(bool)), graph, SLOT(setDirected(bool)));
     return lay;
+}
+
+
+bool GraphPlugin::canConvertFrom(Document*) const
+{
+  return true;
 }

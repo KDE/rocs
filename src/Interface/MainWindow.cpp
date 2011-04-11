@@ -299,7 +299,7 @@ void MainWindow::setupDSPluginsAction()
         action = new KAction ( p->name(), this );
         action->setData(count++);
         action->setCheckable(true);
-        if (p->name() == DataStructurePluginManager::self()->actualPlugin()){
+        if (p->name() == DataStructurePluginManager::self()->actualPluginName()){
           action->setChecked(true);
         }
         action->setActionGroup(group);

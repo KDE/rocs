@@ -33,6 +33,7 @@
 
 #include "DataStructurePluginManager.h"
 #include <GraphScene.h>
+#include "DataStructurePluginInterface.h"
 
 class DocumentPrivate{
 public:
@@ -50,7 +51,7 @@ public:
     bool _modified;
     bool _saved;
     DataStructure *_activeDataStructure;
-    QString _dataStructureType;
+    QPointer<DataStructurePluginInterface> _dataStructureType;
     QtScriptBackend* _engineBackend;
     QList<DataStructure*> _dataStructures;
 
@@ -323,7 +324,8 @@ void Document::setActiveDataStructure(DataStructure *g){
 }
 
 DataStructure* Document::addDataStructure(QString name) {
-    DataStructure *g = DataStructurePluginManager::self()->createNewDataStructure(this, d->_dataStructureType);
+    DataStructure *g = DataStructurePluginManager::self()->createNewDataStructure(this,
+                                                                                  d->_dataStructureType->name());
     g->setName(name);
     d->_dataStructures.append(g);
     d->_activeDataStructure = g;
@@ -498,6 +500,17 @@ void Document::loadFromInternalFormat(const QString& filename) {
 }
 
 DataStructure *Document::activeDataStructure() const { return d->_activeDataStructure; }
+
+QString Document::dataStructureTypeName() const
+{
+  return d->_dataStructureType->name();
+}
+
+DataStructurePluginInterface* Document::dataStructurePlugin() const
+{
+  return d->_dataStructureType;
+}
+
 // void Document::convertToDataStructure(QString newDataStructure){
 //     if (newDataStructure == d->_dataStructureType) return;
 // //        kDebug() << "Need convert doc from " << d->_dataStructureType << " to "<< newDataStructure ;
