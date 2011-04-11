@@ -49,6 +49,11 @@ private:
     QGraphicsRectItem *m_zoomRectItem;
     QPointF m_beginZoom;
     QPointF m_endZoom;
+    int m_steps;
+    
+    void zoomOut();
+    void zoomIn();
+    void zoomReset();
 };
 
 #endif // ZOOM_H

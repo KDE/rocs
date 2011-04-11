@@ -25,6 +25,7 @@
 #include <QDebug>
 #include <KLocale>
 #include <QGraphicsSceneWheelEvent>
+#include <QKeyEvent>
 
 ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 : AbstractAction(scene, parent)
@@ -100,16 +101,25 @@ bool ZoomAction::executeKeyPress(QKeyEvent* keyEvent)
 
 bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
-    return AbstractAction::executeKeyRelease(keyEvent);
+    switch(keyEvent->key()){
+        case Qt::Key_Plus  : m_view->scale(1.25, 1.25); break;
+        case Qt::Key_Minus : m_view->scale(0.8, 0.8);   break;
+        case Qt::Key_5     : m_view->resetMatrix();     break;
+    }
+    keyEvent->accept();
+    return true;
 }
 
 bool ZoomAction::executeWellEvent(QGraphicsSceneWheelEvent* wEvent)
 {
     if (wEvent->delta() > 0){
-        m_view->scale(1.25, 1.25);
+        m_view->scale(0.8, 0.8);
+        m_view->centerOn(wEvent->scenePos());
     }else{
-        m_view->scale(1/1.25, 1/1.25);
+        m_view->scale(1.25, 1.25);
+        m_view->centerOn(wEvent->scenePos());
     }
+    wEvent->accept();
     return true;
 }
 
