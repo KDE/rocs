@@ -28,6 +28,8 @@
 #include <QAction>
 #include "DataStructure.h"
 #include <KMessageBox>
+#include "Data.h"
+#include "Pointer.h"
 
 class DataStructurePluginManagerPrivate {
 public:
@@ -37,7 +39,7 @@ DataStructurePluginManagerPrivate(QObject * parent):m_parent(parent) {
 
 DataStructure* changeToDataStructure ( DataStructure* dataStructure, Document * parent) {
     if ( m_actualPlugin ) {
-        return m_actualPlugin->changeToDataStructure ( dataStructure,  parent);
+        return m_actualPlugin->convertToDataStructure ( dataStructure,  parent);
     }
     return dataStructure;
 }
@@ -187,29 +189,44 @@ QList< DataStructurePluginInterface* > DataStructurePluginManager::pluginsList()
     return _d->pluginList();
 }
 
-QString DataStructurePluginManager::actualPlugin() const
+QString DataStructurePluginManager::actualPluginName() const
 {
     return _d->actualPluginName();
 }
+DataStructurePluginInterface* DataStructurePluginManager::actualPlugin()
+{
+  return _d->m_actualPlugin;
+}
+
 
 QGraphicsItem* DataStructurePluginManager::dataItem(Data* data)
 {
+    if(DataStructurePluginInterface * plg = data->dataStructure()->document()->dataStructurePlugin())
+      return plg->dataItem(data);
     return _d->m_actualPlugin->dataItem(data);
 }
 
 QGraphicsItem* DataStructurePluginManager::pointerItem ( Pointer* pointer ){
+    if(DataStructurePluginInterface * plg = pointer->dataStructure()->document()->dataStructurePlugin())
+      return plg->pointerItem(pointer);
     return _d->m_actualPlugin->pointerItem(pointer);;
 }
 
 QLayout* DataStructurePluginManager::pointerExtraProperties ( Pointer* pointer, QWidget* parent ){
+    if(DataStructurePluginInterface * plg = pointer->dataStructure()->document()->dataStructurePlugin())
+      return plg->pointerExtraProperties(pointer, parent);
     return _d->m_actualPlugin->pointerExtraProperties(pointer, parent);
 }
 
 QLayout* DataStructurePluginManager::dataStructureExtraProperties ( DataStructure* dataStructure, QWidget* parent ){
+    if(DataStructurePluginInterface * plg = dataStructure->document()->dataStructurePlugin())
+      return plg->dataStructureExtraProperties(dataStructure, parent);
     return _d->m_actualPlugin->dataStructureExtraProperties(dataStructure, parent);
 }
 
 QLayout* DataStructurePluginManager::dataExtraProperties ( Data* data, QWidget* parent ){
+    if(DataStructurePluginInterface * plg = data->dataStructure()->document()->dataStructurePlugin())
+      return plg->dataExtraProperties(data, parent);
     return _d->m_actualPlugin->dataExtraProperties(data, parent);
 }
 

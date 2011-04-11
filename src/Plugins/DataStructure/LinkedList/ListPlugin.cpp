@@ -33,6 +33,7 @@
 #include <Document.h>
 #include <KDebug>
 #include <DocumentManager.h>
+#include <KMessageBox>
 
 static const KAboutData aboutdata("rocs_ListStructure", 0, ki18n("Linked List Structure") , "0.1" );
 using namespace Rocs;
@@ -52,8 +53,8 @@ ListPlugin::~ListPlugin()
 
 }
 
-DataStructure* ListPlugin::changeToDataStructure ( DataStructure* graph, Document* parent) {
-    return new ListStructure(*graph, parent);
+DataStructure* ListPlugin::convertToDataStructure ( DataStructure* ds, Document* parent) {
+    return new ListStructure(*ds, parent);
 }
 
 DataStructure* ListPlugin::createDataStructure ( Document* parent )
@@ -85,5 +86,26 @@ QLayout* Rocs::ListPlugin::nodeExtraProperties ( Data* node, QWidget* parentWidg
 
 
   return lay;
+}
+
+bool ListPlugin::canConvertFrom(Document* doc) const
+{
+  QStringList errors;
+  foreach (DataStructure * ds, doc->dataStructures()){
+    foreach (Data *data, ds->dataList()){
+      if(data->out_pointers().count() > 1)
+        errors.append(i18n("Data \'%1\' had more than one(1) out pointers;").arg(data->name()));
+    }
+  }
+
+  //convert if no errors or user click continue
+  if (errors.isEmpty()
+      || KMessageBox::Continue == KMessageBox::warningContinueCancelList(0,
+                                                                    i18n("Cannot convert document \'%1\'")
+                                                                                        .arg(doc->name()),
+                                                                    errors)){
+    return true;
+  }
+  return false;
 }
 

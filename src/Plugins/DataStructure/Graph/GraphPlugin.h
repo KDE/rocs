@@ -31,8 +31,10 @@ class /*ROCSLIB_EXPORT*/ GraphPlugin : public DataStructurePluginInterface {
 
     virtual ~GraphPlugin();
 
-    virtual DataStructure* changeToDataStructure ( DataStructure* graph, Document* parent);
+    virtual DataStructure* convertToDataStructure ( DataStructure* graph, Document* parent);
     virtual DataStructure* createDataStructure ( Document* parent );
+
+    bool canConvertFrom(Document*) const;
 
     virtual QGraphicsItem* pointerItem ( Pointer* ) const;
     virtual QGraphicsItem* dataItem ( Data* ) const;

@@ -41,7 +41,7 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
   public:
     /** Accessor to the manager's instance.*/
     static DataStructurePluginManager * self();
-    
+
     ~DataStructurePluginManager();
 
     /** build a new dataType using actual data structure. */
@@ -56,6 +56,9 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     /** return informations about plugin.*/
     KPluginInfo pluginInfo ( DataStructurePluginInterface* plugin ) const;
 
+
+    /** return the active plugin that will be used in convertions and to build news data structures.*/
+    DataStructurePluginInterface* actualPlugin();
 
     QList < DataStructurePluginInterface*> pluginsList();
 
@@ -85,11 +88,11 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
       /** used to set change the data structure. */
     void changeActiveDataStructure();
     void changeActiveDataStructure( const QString& newDataStructure);
-    QString actualPlugin() const;
+    QString actualPluginName() const;
 
   private:
     DataStructurePluginManager();
-    
+
     static DataStructurePluginManager * _self;
     class DataStructurePluginManagerPrivate * const _d;
 };
