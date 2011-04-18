@@ -45,7 +45,7 @@ class  ROCSLIB_EXPORT Data : public QObject {
     Q_PROPERTY(QString iconPackage READ iconPackage WRITE setIconPackage)
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
     Q_PROPERTY(bool useColor READ useColor WRITE setUseColor)
-    
+
 
 public:
     enum ListType{In, Out, Self};
@@ -120,6 +120,7 @@ private:
 signals:
     void removed();
     void changed();
+    void posChanged();
 };
 
 class DataPrivate{
@@ -140,7 +141,7 @@ public:
     bool _showName;
     bool _showValue;
     bool _useColor;
-    
+
     DataStructure *_dataStructure;
     DataItem *_item;
 
@@ -152,7 +153,7 @@ public:
     QVariant _value;
     QScriptValue _scriptvalue;
     QScriptEngine *_engine;
-    
+
     void empty(PointerList &list) ;
 private:
   Data *q;
