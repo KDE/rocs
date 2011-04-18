@@ -188,17 +188,23 @@ void Data::remove() {
 }
 
 void Data::setX(int x) {
+  if (d->_x != x){
     d->_x = x;
+    emit posChanged();
     if (! d->_changing) {
-    emit changed();
+      emit changed();
     }
+  }
 }
 
 void Data::setY(int y) {
+  if(d->_y != y){
     d->_y  = y;
+    emit posChanged();
     if (! d->_changing) {
-    emit changed();
+      emit changed();
     }
+  }
 }
 
 void Data::setWidth(double w) {
@@ -209,11 +215,14 @@ void Data::setWidth(double w) {
 }
 
 void Data::setPos(qreal x, qreal y) {
+  if (d->_x != x || d->_y != y){
     d->_x = x;
     d->_y = y;
+    emit posChanged();
     if (! d->_changing) {
-    emit changed();
+      emit changed();
     }
+  }
 }
 
 void Data::setColor(const QVariant& s) {
