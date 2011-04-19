@@ -39,7 +39,6 @@ DataPrivate::DataPrivate(Data* classPtr, DataStructure *parent)
 ,_width(0.3)
 ,_begin(true)
 ,_end(true)
-,_changing(false)
 ,_showName(parent->dataNameVisibility())
 ,_showValue(parent->dataValueVisibility())
 ,_useColor(false)
@@ -81,27 +80,21 @@ bool Data::showValue() {
 void Data::setShowName(bool b) {
     if (d->_showName != b){
         d->_showName = b;
-        if (!changing()){
-            emit nameVisibilityChanged(b);
-        }        
+        emit nameVisibilityChanged(b);
     }
 }
 
 void Data::setShowValue(bool b) {
     if (d->_showValue != b){
         d->_showValue = b;
-        if (!changing()){
-            emit valueVisibilityChanged(b);
-        }
+        emit valueVisibilityChanged(b);
     }
 }
 
 void Data::setIcon(const QString& s){
     if (d->_icon != s){
         d->_icon = s;
-        if (!changing()){
-            emit iconChanged(s);
-        }
+        emit iconChanged(s);
     }
 }
 
@@ -109,9 +102,7 @@ void Data::setIcon(const QString& s){
 void Data::setUseColor(bool b){
     if (d->_useColor != b){
         d->_useColor = b;
-        if (!changing()){
-            emit useColorChanged(b);
-        }
+        emit useColorChanged(b);
     }
 }
 
@@ -206,27 +197,21 @@ void Data::remove() {
 void Data::setX(int x) {
   if (d->_x != x){
     d->_x = x;
-    if (! d->_changing) {
-      emit posChanged(QPointF(d->_x, d->_y));
-    }
+    emit posChanged(QPointF(d->_x, d->_y));
   }
 }
 
 void Data::setY(int y) {
   if(d->_y != y){
     d->_y  = y;
-    if (! d->_changing) {
-        emit posChanged(QPointF(d->_x, d->_y));
-    }
+    emit posChanged(QPointF(d->_x, d->_y));
   }
 }
 
 void Data::setWidth(double w) {
     if (d->_width != w){
         d->_width = (qreal)w;
-        if (! d->_changing) {
-            emit widthChanged(w);
-        }
+        emit widthChanged(w);
     }
 }
 
@@ -234,9 +219,7 @@ void Data::setPos(qreal x, qreal y) {
   if (d->_x != x || d->_y != y){
     d->_x = x;
     d->_y = y;
-    if (! d->_changing) {
-        emit posChanged(QPointF(d->_x, d->_y));
-    }
+    emit posChanged(QPointF(d->_x, d->_y));
   }
 }
 
@@ -244,27 +227,21 @@ void Data::setColor(const QVariant& s) {
     QColor c = s.value<QColor>();
     if (d->_color != c){
         d->_color = c;
-        if (! d->_changing) {
-            emit colorChanged(c);
-        }
+        emit colorChanged(c);
     }
 }
 
 void Data::setName(const QString& s) {
     if (d->_name != s){
         d->_name = s;
-        if (! d->_changing) {
-            emit nameChanged(s);
-        }
+        emit nameChanged(s);
     }
 }
 
 void  Data::setValue(const QVariant& s) {
     if (d->_value != s){
         d->_value = s;
-        if (! d->_changing) {
-            emit valueChanged(s);
-        }
+        emit valueChanged(s);
     }
 }
 
@@ -272,9 +249,7 @@ void  Data::setValue(const QString& s) {
     QVariant v(s);
     if (d->_value != v){
         d->_value = v;
-        if (! d->_changing) {
-            emit valueChanged(v);
-        }
+        emit valueChanged(v);
     }
 }
 

@@ -80,7 +80,6 @@ public:
     const QString& iconPackage() const;
     bool showName() const;
     bool showValue() const;
-    bool changing() const;
     bool useColor() const;
     DataItem *item() const;
 
@@ -143,7 +142,6 @@ public:
 
     bool _begin;
     bool _end;
-    bool _changing;
     bool _showName;
     bool _showValue;
     bool _useColor;
@@ -185,7 +183,6 @@ inline PointerList& Data::self_pointers() const { return d->_self_pointers; }
 
 inline bool Data::showName() const { return d->_showName; }
 inline bool Data::showValue() const { return d->_showValue; }
-inline bool Data::changing() const { return d->_changing; }
 inline bool Data::useColor() const { return d->_useColor; }
 
 #endif
