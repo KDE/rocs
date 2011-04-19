@@ -25,7 +25,7 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     }
 
     if (_data){
-        disconnect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
+        disconnect(_data, 0, this, 0);
     }
 
     _data = n->data();
