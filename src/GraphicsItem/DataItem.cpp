@@ -56,7 +56,7 @@ void DataItem::updatePos(){
 
 void DataItem::updateSize(){
     if (_data->width() == _width) return;
-    resetMatrix();
+    resetTransform();
     _width = _data->width();
     setScale(_data->width());
 }
