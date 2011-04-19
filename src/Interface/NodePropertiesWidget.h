@@ -42,7 +42,6 @@ private slots:
     void on__color_activated(const QColor& c);
     void on__images_activated(const QString& s);
     void reflectAttributes();
-    void applyChanges();
 //     void updateAutomateAttributes(bool b);
     void on__addProperty_clicked();
 

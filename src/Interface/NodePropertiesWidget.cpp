@@ -46,20 +46,12 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     connect( _showValue,    SIGNAL(toggled(bool)),         _data, SLOT(setShowValue(bool)));
     connect( _disableColor, SIGNAL(toggled(bool)),         _data, SLOT(setUseColor(bool)));
     connect( _name,         SIGNAL(textEdited(QString)),   _data, SLOT(setName(QString)));
-    connect( _value,        SIGNAL(textEdited(QString)),   _data, SLOT(setValue(QVariant)));
+    connect( _value,        SIGNAL(textEdited(QString)),   _data, SLOT(setValue(QString)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data);
 
     _propertiesTable->setModel(model);
-}
-
-void DataPropertiesWidget::applyChanges(){
-    _data->setName(_name->text());
-    _data->setValue(_value->text());
-    _data->setShowName(_showName->isChecked());
-    _data->setShowValue(_showValue->isChecked());
-    _data->setUseColor(!_data->useColor());
 }
 
 void DataPropertiesWidget::reflectAttributes(){

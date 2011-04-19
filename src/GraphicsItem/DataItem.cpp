@@ -34,6 +34,7 @@ DataItem::DataItem(Data* n)
     connect(n, SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateName()));
     connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateValue()));
     connect(n, SIGNAL(useColorChanged(bool)), this, SLOT(updateColor()));
+    connect(n, SIGNAL(widthChanged(double)), this, SLOT(updateSize()));
     
     setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     setupNode();
