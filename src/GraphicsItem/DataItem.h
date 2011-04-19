@@ -24,7 +24,7 @@ class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem{
     virtual ~DataItem();
     Data* data() const { return _data; }
     static QMap<QString, QSvgRenderer*> _renders;
-    
+    QRectF  boundingRect () const;
   private slots:
     void setupNode();
     void updateRenderer();

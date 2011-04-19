@@ -96,12 +96,12 @@ void DataItem::updateColor(){
         _colorizer = 0;
         return;
     }
-   
-    delete _colorizer;
+    
+   delete _colorizer;
     _colorizer = new QGraphicsColorizeEffect();
     _colorizer->setColor( c );
-
     setGraphicsEffect(_colorizer);
+    
     if (_name && _name->isVisible()){
         _name->update();
     }
@@ -110,6 +110,11 @@ void DataItem::updateColor(){
     }
 }
 
+QRectF DataItem::boundingRect() const
+{
+    return (QGraphicsSvgItem::boundingRect() | childrenBoundingRect());
+}
+    
 void DataItem::updateName(){
     if ( !_name ){
         _name = new QGraphicsSimpleTextItem(i18n("%1").arg(_data->name()), this);
