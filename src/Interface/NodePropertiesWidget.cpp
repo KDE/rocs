@@ -58,21 +58,11 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
 
 void DataPropertiesWidget::applyChanges(){
     _data->startChange();
-    if (_data->name() != _name->text())
-        _data->setName(_name->text());
-    
-    if (_data->value() != _value->text())
-        _data->setValue(_value->text());
-    
-    if(_data->showName() != _showName->isChecked())
-        _data->setShowName(_showName->isChecked());
-    
-    if (_data->showValue() != _showValue->isChecked())
-        _data->setShowValue(_showValue->isChecked());
-    
-    if (_data->useColor() ==_disableColor->isChecked()){
-        _data->setUseColor(!_data->useColor());
-    }
+    _data->setName(_name->text());
+    _data->setValue(_value->text());
+    _data->setShowName(_showName->isChecked());
+    _data->setShowValue(_showValue->isChecked());
+    _data->setUseColor(!_data->useColor());
     _data->endChange();
 }
 

@@ -208,9 +208,11 @@ void Data::setY(int y) {
 }
 
 void Data::setWidth(double w) {
-    d->_width = (qreal)w;
-    if (! d->_changing) {
-        emit changed();
+    if (d->_width != w){
+        d->_width = (qreal)w;
+        if (! d->_changing) {
+            emit changed();
+        }
     }
 }
 
@@ -218,31 +220,38 @@ void Data::setPos(qreal x, qreal y) {
   if (d->_x != x || d->_y != y){
     d->_x = x;
     d->_y = y;
-    emit posChanged();
     if (! d->_changing) {
+      emit posChanged();
       emit changed();
     }
   }
 }
 
 void Data::setColor(const QVariant& s) {
-    d->_color = s.value<QColor>();
-    if (! d->_changing) {
-    emit changed();
+    QColor c = s.value<QColor>();
+    if (d->_color != c){
+        d->_color = c;
+        if (! d->_changing) {
+            emit changed();
+        }
     }
 }
 
 void Data::setName(const QString& s) {
-    d->_name = s;
-    if (! d->_changing) {
-    emit changed();
+    if (d->_name != s){
+        d->_name = s;
+        if (! d->_changing) {
+            emit changed();
+        }
     }
 }
 
 void  Data::setValue(const QVariant& s) {
-    d->_value = s;
-    if (! d->_changing) {
-      emit changed();
+    if (d->_value != s){
+        d->_value = s;
+        if (! d->_changing) {
+        emit changed();
+        }
     }
 }
 
