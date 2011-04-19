@@ -104,9 +104,6 @@ int Pointer::relativeIndex() const{
     return d->relativeIndex;
 }
 
-void Pointer::emitChangedSignal(){
-    emit changed();
-}
 
 DataStructure *Pointer::dataStructure() const{
     return d->dataStructure;
