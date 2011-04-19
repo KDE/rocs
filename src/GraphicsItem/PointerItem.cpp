@@ -59,7 +59,7 @@ PointerItem::~PointerItem() {
 }
 
 void PointerItem::connectSignals() {
-    connect (_pointer, SIGNAL(changed()), this, SLOT(updatePos()));
+    connect (_pointer, SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect (_pointer, SIGNAL(removed()), this, SLOT(remove()));
 }
 

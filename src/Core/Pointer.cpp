@@ -57,8 +57,7 @@ Pointer::Pointer(DataStructure *parent, Data *from, Data *to) :
     d->color    = d->dataStructure->pointerDefaultColor();
 
     connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
-    connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
-    connect(from, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
+    connect(from, SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
 
 
     if ( from == to ) {
@@ -67,9 +66,7 @@ Pointer::Pointer(DataStructure *parent, Data *from, Data *to) :
     else {
         from -> addOutPointer(this);
         to -> addInPointer(this);
-        connect(to, SIGNAL(changed()), this, SIGNAL(changed()));
-        connect(to, SIGNAL(posChanged()), this, SIGNAL(posChanged()));
-
+        connect(to, SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
     }
 
     d->relativeIndex  = d->to->pointers(d->from).size();
