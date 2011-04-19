@@ -25,7 +25,12 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     }
 
     if (_data){
-        disconnect(_data, 0, this, 0);
+        _data->disconnect(this);
+        _showName->disconnect(_data);
+        _showValue->disconnect(_data);
+        _disableColor->disconnect(_data);
+        _name->disconnect(_data);
+        _value->disconnect(_data);
     }
 
     _data = n->data();
