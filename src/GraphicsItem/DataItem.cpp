@@ -109,7 +109,6 @@ void DataItem::updateName(){
     }else if (_name->text() != _data->name()){
         _name->setText(i18n("%1").arg(_data->name()));
     }
-    _name->setVisible(_data->showName());
 
     switch(GraphicsLayout::self()->viewStyleDataNode()) {
         case ConfigureDefaultProperties::ABOVE: {
@@ -135,7 +134,7 @@ void DataItem::updateName(){
         default:
             _name->setPos(0, 0);
     }
-    _name->setVisible(_data->showValue());
+    _name->setVisible(_data->showName());
 }
 
 void DataItem::updateValue(){
