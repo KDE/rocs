@@ -76,12 +76,6 @@ public:
     /*! remove this pointer from the graph */
     void remove();
 
-    /*! forces emitting a signal that will update this pointer on screen */
-    void emitChangedSignal();
-
-    /*! forces emitting posChanged that will update this pointer on screen */
-    void emitPosChangedSignal(){emit posChanged();}
-
     /*! returns the datastructure that owns this pointer. */
     DataStructure *dataStructure() const;
 

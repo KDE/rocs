@@ -100,7 +100,7 @@ void Rocs::GraphStructure::setDirected(bool directed)
 {
     _directed = directed;
     foreach(Pointer* pointer, pointers()) {
-       pointer->emitChangedSignal();
+       QMetaObject::invokeMethod(pointer, "changed");
     }
 }
 
