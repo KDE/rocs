@@ -111,7 +111,7 @@ public  slots:
     void setShowName(bool b);
     void setShowValue(bool b);
     void setUseColor(bool b = true);
-
+    void setValue(const QString& v);
 private:
     DataPrivate *d;
 

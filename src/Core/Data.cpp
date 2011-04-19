@@ -268,6 +268,16 @@ void  Data::setValue(const QVariant& s) {
     }
 }
 
+void  Data::setValue(const QString& s) {
+    QVariant v(s);
+    if (d->_value != v){
+        d->_value = v;
+        if (! d->_changing) {
+            emit valueChanged(v);
+        }
+    }
+}
+
 void Data::addDynamicProperty(QString property, QVariant value){
     if (! setProperty(property.toUtf8(), value)  && value.isValid()){
       DynamicPropertiesList::New()->addProperty(this, property);
