@@ -32,7 +32,7 @@ set( rocs_core_SRCS
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
     Plugins/FilePluginInterface.cpp
-    
+
     GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
     GraphicsItem/DataStructureItem.cpp
@@ -85,7 +85,7 @@ set ( rocs_actions_SRCS
   Actions/DeleteAction.cpp
   Actions/MoveData.cpp
   Actions/Select.cpp
-  Actions/zoom.cpp 
+  Actions/zoom.cpp
 )
 
 set( rocs_interface_SRCS
@@ -116,7 +116,8 @@ set( rocs_models_SRCS
 #   UndoRedo/URAddEdge.cpp
 # )
 
-set ( rocs_script_SRC 
+set ( rocs_script_SRC
+        Interface/PossibleIncludes.cpp
         Scripts/IncludeManager.cpp
 )
 
