@@ -57,6 +57,7 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
 }
 
 void DataPropertiesWidget::applyChanges(){
+    _data->startChange();
     if (_data->name() != _name->text())
         _data->setName(_name->text());
     
@@ -72,6 +73,7 @@ void DataPropertiesWidget::applyChanges(){
     if (_data->useColor() ==_disableColor->isChecked()){
         _data->setUseColor(!_data->useColor());
     }
+    _data->endChange();
 }
 
 void DataPropertiesWidget::reflectAttributes(){
