@@ -79,24 +79,40 @@ bool Data::showValue() {
 }
 
 void Data::setShowName(bool b) {
-    d->_showName = b;
-    emit changed();
+    if (d->_showName != b){
+        d->_showName = b;
+        if (!changing()){
+            emit nameVisibilityChanged(b);
+        }        
+    }
 }
 
 void Data::setShowValue(bool b) {
-    d->_showValue = b;
-    emit changed();
+    if (d->_showValue != b){
+        d->_showValue = b;
+        if (!changing()){
+            emit valueVisibilityChanged(b);
+        }
+    }
 }
 
 void Data::setIcon(const QString& s){
-    d->_icon = s;
-    emit changed();
+    if (d->_icon != s){
+        d->_icon = s;
+        if (!changing()){
+            emit iconChanged(s);
+        }
+    }
 }
 
 
 void Data::setUseColor(bool b){
-    d->_useColor = b;
-    emit changed();
+    if (d->_useColor != b){
+        d->_useColor = b;
+        if (!changing()){
+            emit useColorChanged(b);
+        }
+    }
 }
 
 void Data::setIconPackage(const QString& s){
@@ -191,8 +207,7 @@ void Data::setX(int x) {
   if (d->_x != x){
     d->_x = x;
     if (! d->_changing) {
-      emit posChanged();
-      emit changed();
+      emit posChanged(QPointF(d->_x, d->_y));
     }
   }
 }
@@ -201,8 +216,7 @@ void Data::setY(int y) {
   if(d->_y != y){
     d->_y  = y;
     if (! d->_changing) {
-      emit posChanged();
-      emit changed();
+        emit posChanged(QPointF(d->_x, d->_y));
     }
   }
 }
@@ -211,7 +225,7 @@ void Data::setWidth(double w) {
     if (d->_width != w){
         d->_width = (qreal)w;
         if (! d->_changing) {
-            emit changed();
+            emit widthChanged(w);
         }
     }
 }
@@ -221,8 +235,7 @@ void Data::setPos(qreal x, qreal y) {
     d->_x = x;
     d->_y = y;
     if (! d->_changing) {
-      emit posChanged();
-      emit changed();
+        emit posChanged(QPointF(d->_x, d->_y));
     }
   }
 }
@@ -232,7 +245,7 @@ void Data::setColor(const QVariant& s) {
     if (d->_color != c){
         d->_color = c;
         if (! d->_changing) {
-            emit changed();
+            emit colorChanged(c);
         }
     }
 }
@@ -241,7 +254,7 @@ void Data::setName(const QString& s) {
     if (d->_name != s){
         d->_name = s;
         if (! d->_changing) {
-            emit changed();
+            emit nameChanged(s);
         }
     }
 }
@@ -250,18 +263,9 @@ void  Data::setValue(const QVariant& s) {
     if (d->_value != s){
         d->_value = s;
         if (! d->_changing) {
-        emit changed();
+            emit valueChanged(s);
         }
     }
-}
-
-void Data::startChange() {
-    d->_changing = true;
-}
-
-void Data::endChange() {
-    d->_changing = false;
-    emit changed();
 }
 
 void Data::addDynamicProperty(QString property, QVariant value){

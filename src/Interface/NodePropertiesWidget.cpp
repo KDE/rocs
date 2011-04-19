@@ -41,14 +41,12 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     delete extraItens->layout();
     extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
-    
-    connect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
    
-    connect( _showName,     SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
-    connect( _showValue,    SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
-    connect( _disableColor, SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
-    connect( _name,         SIGNAL(textEdited(QString)),   this, SLOT( applyChanges() ));
-    connect( _value,        SIGNAL(textEdited(QString)),   this, SLOT( applyChanges() ));
+    connect( _showName,     SIGNAL(toggled(bool)),         _data, SLOT( setShowName(bool)));
+    connect( _showValue,    SIGNAL(toggled(bool)),         _data, SLOT(setShowValue(bool)));
+    connect( _disableColor, SIGNAL(toggled(bool)),         _data, SLOT(setUseColor(bool)));
+    connect( _name,         SIGNAL(textEdited(QString)),   _data, SLOT(setName(QString)));
+    connect( _value,        SIGNAL(textEdited(QString)),   _data, SLOT(setValue(QVariant)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data);
@@ -57,13 +55,11 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
 }
 
 void DataPropertiesWidget::applyChanges(){
-    _data->startChange();
     _data->setName(_name->text());
     _data->setValue(_value->text());
     _data->setShowName(_showName->isChecked());
     _data->setShowValue(_showValue->isChecked());
     _data->setUseColor(!_data->useColor());
-    _data->endChange();
 }
 
 void DataPropertiesWidget::reflectAttributes(){

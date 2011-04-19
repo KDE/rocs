@@ -26,7 +26,15 @@ DataItem::DataItem(Data* n)
 ,_originalWidth(n->width())
 {
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
-    connect(n, SIGNAL(changed()), this, SLOT(setupNode()));
+    connect(n, SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
+    connect(n, SIGNAL(nameChanged(QString)), this, SLOT(updateName()));
+    connect(n, SIGNAL(valueChanged(QVariant)), this, SLOT(updateValue()));
+    connect(n, SIGNAL(colorChanged(QColor)), this, SLOT(updateColor()));
+    connect(n, SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
+    connect(n, SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateName()));
+    connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateValue()));
+    connect(n, SIGNAL(useColorChanged(bool)), this, SLOT(updateColor()));
+    
     setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     setupNode();
     setZValue(1);
@@ -142,7 +150,7 @@ void DataItem::updateValue(){
         _value = new QGraphicsSimpleTextItem(i18n("v=%1").arg(_data->value().toString()), this);
         _value->setFlags(ItemIgnoresTransformations);
         _value->setFont(_font);
-    } else if (_value->text() != _data->value().toString()){
+    } else if (QVariant(_value->text()) != _data->value().toString()){
         _value ->setText(i18n("v=%1").arg(_data->value().toString()));
     }
     

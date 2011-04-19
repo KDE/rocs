@@ -60,8 +60,6 @@ public:
     void removePointer(Pointer *e, PointerList &list);
     void remove();
 
-    void startChange();
-    void endChange();
     bool showName();
     bool showValue();
 
@@ -119,8 +117,16 @@ private:
 
 signals:
     void removed();
-    void changed();
-    void posChanged();
+    void posChanged(const QPointF p);
+    void widthChanged(double w);
+    void colorChanged(const QColor& c);
+    void nameChanged(const QString& name);
+    void valueChanged(const QVariant& v);
+    void iconChanged(const QString& i);
+    void iconPackageChanged(const QString& i);
+    void nameVisibilityChanged(bool b);
+    void valueVisibilityChanged(bool b);
+    void useColorChanged(bool b);
 };
 
 class DataPrivate{

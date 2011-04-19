@@ -27,8 +27,6 @@ class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem{
     
   private slots:
     void setupNode();
-  
-private:
     void updateRenderer();
     void updateIcon();
     void updateName();
@@ -37,6 +35,7 @@ private:
     void updatePos();
     void updateSize();
 
+private:
     Data *_data;
     QString _iconPackage;
     QGraphicsSimpleTextItem *_name;
