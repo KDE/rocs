@@ -64,6 +64,7 @@
 #include "DeleteAction.h"
 #include "AlignAction.h"
 #include <KNS3/DownloadDialog>
+#include <knewstuff3/uploaddialog.h>
 
 // backends
 #include "QtScriptBackend.h"
@@ -164,6 +165,34 @@ void MainWindow::downloadNewExamples(){
     dialog.exec();
 }
 
+void MainWindow::uploadScript()
+{
+
+// create the dialog
+KNS3::UploadDialog dialog(this);
+
+// set it up to help the user fill it out
+// the file to be uploaded - this is important!
+QString str = _codeEditor->document()->url().toLocalFile();
+if(str.isEmpty()){
+  str = KFileDialog::getOpenFileName ( QString(), i18n ( "*.js|Script files" ), this, i18n ( "Rocs Script Files" ) );
+  if (str.isEmpty())
+    return;
+}
+dialog.setUploadFile(str);
+
+// a suggested title, the user can still change it
+// don't set it if you can't make a reasonable suggestion
+dialog.setUploadName(_codeEditor->document()->documentName());
+
+// a longer description, optional
+dialog.setDescription("Added your description here.");
+
+// show the dialog as modal (you can also use show of course)
+dialog.exec();
+}
+
+
 QWidget* MainWindow::setupRightPanel()
 {
     _graphVisualEditor = GraphVisualEditor::self();
@@ -233,6 +262,7 @@ void MainWindow::setupActions()
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        Qt::Key_S, SLOT(saveGraph()),   this);
     createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     Qt::Key_W, SLOT(saveGraphAs()), this);
     createAction("",                 i18n("Download Examples"), "download", Qt::Key_D, SLOT(downloadNewExamples()),  this);
+    createAction("",                 i18n("Upload script"),     "upload",   Qt::Key_U, SLOT(uploadScript()),  this);
 
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", Qt::Key_P, SLOT(showPossibleIncludes()), this);
 

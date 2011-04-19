@@ -68,17 +68,18 @@ private: // Methods
     void finishLoadingUi();
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                       const QKeySequence & shortcut , const char* slot, QObject *parent);
-    
+
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
 
 protected:
     void closeEvent(QCloseEvent *event);
-    
+
 private slots:
      void showSettings();
     //Testing to connect to KGHNS3
     void downloadNewExamples();
+    void uploadScript();
 
     void showPossibleIncludes();
 
