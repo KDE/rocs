@@ -190,8 +190,8 @@ void Data::remove() {
 void Data::setX(int x) {
   if (d->_x != x){
     d->_x = x;
-    emit posChanged();
     if (! d->_changing) {
+      emit posChanged();
       emit changed();
     }
   }
@@ -200,8 +200,8 @@ void Data::setX(int x) {
 void Data::setY(int y) {
   if(d->_y != y){
     d->_y  = y;
-    emit posChanged();
     if (! d->_changing) {
+      emit posChanged();
       emit changed();
     }
   }
