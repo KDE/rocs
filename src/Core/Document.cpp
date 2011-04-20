@@ -178,9 +178,9 @@ void Document::setYBottom(qreal yBottomValue)
     //d->_modified = true;
 }
 
-QSizeF Document::size()
+QRectF Document::size()
 {
-    return QSizeF(d->_xRight - d->_xLeft, d->_yBottom - d->_yTop );
+    return QRectF(d->_xLeft, d->_yTop,d->_xRight - d->_xLeft, d->_yBottom - d->_yTop );
 }
 
 bool Document::isPointAtDocument(qreal x, qreal y)  const {
