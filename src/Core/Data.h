@@ -111,6 +111,13 @@ public  slots:
     void setShowValue(bool b);
     void setUseColor(bool b = true);
     void setValue(const QString& v);
+
+    QScriptValue adj_data();
+    QScriptValue adj_pointers();
+    QScriptValue input_pointers();
+    QScriptValue output_pointers();
+    QScriptValue loop_pointers();
+    QScriptValue connected_pointers(Data *n);
 private:
     DataPrivate *d;
 
