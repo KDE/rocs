@@ -545,9 +545,7 @@ bool parse_renderop(const std::string& /*str*//*, DotRenderOpVec& arenderopvec*/
 bool parse(const std::string& str, DataTypeDocument * gd)
 {
   DotGrammar g;
-  if (phelper != 0){
-    delete phelper;
-  }
+  delete phelper;
   phelper = new DotGraphParsingHelper;
   phelper->gd = gd;
 
