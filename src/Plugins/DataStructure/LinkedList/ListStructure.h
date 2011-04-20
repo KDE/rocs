@@ -1,6 +1,7 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Plugin that implements a list structure in Rocs
+    Copyright (C) 2011 Wagner Reck
+
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,13 +38,11 @@ class ListStructure : public DataStructure {
 
     virtual ~ListStructure();
 
-    void cleanUpBeforeConvert();
-
   public slots:
 
-//     virtual void setEngine ( QScriptEngine* engine );
-
     virtual Data* addData ( QString name );
+
+    virtual void remove(Data* n);
 
     virtual Pointer* addPointer ( Data* from, Data* to );
 
@@ -51,7 +50,8 @@ class ListStructure : public DataStructure {
 
     virtual void remove(Pointer* e);
 
-    QScriptValue front();
+    QScriptValue begin();
+    void setBegin(ListNode* node);
     QScriptValue createNode(const QString &name);
 
 
@@ -59,8 +59,8 @@ private:
     void init();
     void createFront();
 
-    ListNode * _front;
-    QParallelAnimationGroup* _animationGroup;
+    ListNode * m_begin;
+    QParallelAnimationGroup* m_animationGroup;
 
     bool m_building;
 };
