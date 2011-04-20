@@ -113,11 +113,6 @@ void DataItem::updateColor(){
     _name->setBrush(QBrush(c));
     _value->setBrush(QBrush(c));
 }
-
-QRectF DataItem::boundingRect() const
-{
-    return (QGraphicsSvgItem::boundingRect() | childrenBoundingRect());
-}
     
 void DataItem::updateName(){
     if ( !_name ){
@@ -147,12 +142,9 @@ void DataItem::updateName(){
     _name->setVisible(_data->showName());
     
     if (_value && _value->isVisible()){
-        y +=  (( style == ConfigureDefaultProperties::ABOVE ) 
-              ? -20 
-              :  20 );
+        y +=  (( style == ConfigureDefaultProperties::ABOVE ) ? -20 :  20 );
     }
     _name->setPos(x,y);    
-   // _name->setBrush(QBrush(_data->color().value<QColor>()));
 }
 
 QGraphicsSimpleTextItem* DataItem::name() const
@@ -190,9 +182,6 @@ void DataItem::updateValue(){
                           : ( style == ConfigureDefaultProperties::BELOW ) ? 50 + (dataWidth/2) 
                           : 25 );
 
- 
-    qDebug() << "Setting Pos" << x << y;
     _value->setPos(x,y);
-   // _value->setBrush(QBrush(_data->color().value<QColor>()));
     _value->setVisible(_data->showValue());
 }
