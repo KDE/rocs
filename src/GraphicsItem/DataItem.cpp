@@ -44,7 +44,9 @@ DataItem::DataItem(Data* n)
 
 DataItem::~DataItem()
 {
-
+    delete _name;
+    delete _value;
+    delete _colorizer;
 }
 
 void DataItem::setupNode(){
