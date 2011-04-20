@@ -97,6 +97,8 @@ void DataItem::updateColor(){
     if (!_data->useColor()){
         delete _colorizer;
         setGraphicsEffect(0);
+        _name->setGraphicsEffect(0);
+        _value->setGraphicsEffect(0);
         _colorizer = 0;
         return;
     }
@@ -105,13 +107,8 @@ void DataItem::updateColor(){
     _colorizer = new QGraphicsColorizeEffect();
     _colorizer->setColor( c );
     setGraphicsEffect(_colorizer);
-    
-    if (_name && _name->isVisible()){
-        _name->update();
-    }
-    if( _value && _value->isVisible()){
-        _value->update();
-    }
+    _name->setGraphicsEffect(_colorizer);
+    _value->setGraphicsEffect(_colorizer);
 }
 
 QRectF DataItem::boundingRect() const
