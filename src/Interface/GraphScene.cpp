@@ -174,6 +174,8 @@ void GraphScene::releaseDocument(){
 QGraphicsItem *GraphScene::createData(Data *n) {
     DataItem *nItem = (DataItem*)(DataStructurePluginManager::self()->dataItem(n));
     addItem(nItem);
+    addItem(nItem->name());
+    addItem(nItem->value());
     return nItem;
 }
 

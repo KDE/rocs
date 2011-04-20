@@ -37,9 +37,9 @@ DataItem::DataItem(Data* n)
     connect(n, SIGNAL(widthChanged(double)), this, SLOT(updateSize()));
     
     setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-    setupNode();
     setZValue(1);
     setFlag(ItemIsSelectable, true);
+    setupNode();
 }
 
 DataItem::~DataItem()
@@ -48,19 +48,21 @@ DataItem::~DataItem()
 }
 
 void DataItem::setupNode(){
+    updateName();
+    updateValue();  
     updateRenderer();
     updateIcon();
-    updateName();
-    updateValue();
     updateColor();
-    updateSize();
-    updatePos();
+    updateSize(); 
+    updatePos(); 
     update();
 }
 
 void DataItem::updatePos(){
     int fixPos = boundingRect().width()/2;
     setPos(_data->x() - fixPos, _data->y() - fixPos);
+    updateName();
+    updateValue();
 }
 
 void DataItem::updateSize(){
@@ -68,6 +70,8 @@ void DataItem::updateSize(){
     resetTransform();
     _width = _data->width();
     setScale(_data->width());
+    updateName();
+    updateValue();
 }
 
 void DataItem::updateRenderer(){
@@ -117,73 +121,71 @@ QRectF DataItem::boundingRect() const
     
 void DataItem::updateName(){
     if ( !_name ){
-        _name = new QGraphicsSimpleTextItem(i18n("%1").arg(_data->name()), this);
+        _name = new QGraphicsSimpleTextItem(i18n("%1").arg(_data->name()));
         _name->setFlags(ItemIgnoresTransformations);
         _name->setFont(_font);
     }else if (_name->text() != _data->name()){
         _name->setText(i18n("%1").arg(_data->name()));
     }
 
+    // 80 is the boundingRect().width() and height().
+    // centering the Text on screen.
+    qreal x =  pos().x() + ((80 * scale())/2);
+    qreal y =  pos().y() + ((80 * scale())/2);
+    
     switch(GraphicsLayout::self()->viewStyleDataNode()) {
         case ConfigureDefaultProperties::ABOVE: {
-            if (_data->dataStructure()->dataValueVisibility()) {
-                _name->setPos(0, -100);
-            } else {
-                _name->setPos(0, -55);
-            }
-            break;
+            y += _data->dataStructure()->dataValueVisibility() ? -70 : -55;            
         }
         case ConfigureDefaultProperties::CENTER: {
-            if (_data->dataStructure()->dataValueVisibility()) {
-                _name->setPos(0, -20);
-            } else {
-                _name->setPos(0, 0);
-            }
-            break;
+            y += _data->dataStructure()->dataValueVisibility() ? 0 : 30;
         }
         case ConfigureDefaultProperties::BELOW: {
-            _name->setPos(0, 70);
-            break;
+            y += _data->dataStructure()->dataValueVisibility() ? -70 : -55;
         }
-        default:
-            _name->setPos(0, 0);
     }
+    qDebug() << "Setting Pos" << x << y;
+    _name->setPos(x,y);
     _name->setVisible(_data->showName());
+}
+
+QGraphicsSimpleTextItem* DataItem::name() const
+{
+    return _name;
+}
+
+QGraphicsSimpleTextItem* DataItem::value() const
+{
+    return _value;
 }
 
 void DataItem::updateValue(){
     if ( !_value ){ 
-        _value = new QGraphicsSimpleTextItem(i18n("v=%1").arg(_data->value().toString()), this);
+        _value = new QGraphicsSimpleTextItem(i18n("v=%1").arg(_data->value().toString()));
         _value->setFlags(ItemIgnoresTransformations);
         _value->setFont(_font);
     } else if (QVariant(_value->text()) != _data->value().toString()){
         _value ->setText(i18n("v=%1").arg(_data->value().toString()));
     }
     
+   // 80 is the boundingRect().width() and height().
+    // centering the Text on screen.
+    qreal x =  pos().x() + ((80 * scale())/2);
+    qreal y =  pos().y() + ((80 * scale())/2);
+    
     switch(GraphicsLayout::self()->viewStyleDataNode()) {
         case ConfigureDefaultProperties::ABOVE: {
-            _value->setPos(0, -55);
-            break;
+            y +=  -55;
         }
         case ConfigureDefaultProperties::CENTER: {
-            if (_data->dataStructure()->dataNameVisibility()) {
-                _value->setPos(0, 30);
-            } else {
-                _value->setPos(0, 0);
-            }
-            break;
+            y +=  30;
         }
         case ConfigureDefaultProperties::BELOW: {
-            if (_data->dataStructure()->dataNameVisibility()) {
-                _value->setPos(0, 115);
-            } else {
-                _value->setPos(0, 70);
-            }   
-            break;
+            y += 70;
         }
-        default:
-            _value->setPos(0, 25);
     }
+    qDebug() << "Setting Pos" << x << y;
+    _value->setPos(x,y);
    
     _value->setVisible(_data->showValue());
 }
