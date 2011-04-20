@@ -45,6 +45,7 @@ private:
     QGraphicsColorizeEffect *_colorizer;
     QGraphicsRectItem *_boundingRect;
     QFont _font;
+    int _oldStyle;
 
     qreal _originalWidth;
     qreal _width;

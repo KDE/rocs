@@ -23,6 +23,7 @@ DataItem::DataItem(Data* n)
 ,_value(0)
 ,_colorizer(0)
 ,_font(QFont("Helvetica [Cronyx]", 12))
+,_oldStyle(GraphicsLayout::self()->viewStyleDataNode())
 ,_originalWidth(n->width())
 {
     connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
@@ -46,7 +47,7 @@ DataItem::~DataItem()
 {
     delete _name;
     delete _value;
-    delete _colorizer;
+  //  delete _colorizer;
 }
 
 void DataItem::setupNode(){
@@ -99,8 +100,8 @@ void DataItem::updateColor(){
     if (!_data->useColor()){
         delete _colorizer;
         setGraphicsEffect(0);
-        _name->setGraphicsEffect(0);
-        _value->setGraphicsEffect(0);
+        _name->setBrush(QBrush(Qt::black));
+        _value->setBrush(QBrush(Qt::black));
         _colorizer = 0;
         return;
     }
@@ -109,8 +110,8 @@ void DataItem::updateColor(){
     _colorizer = new QGraphicsColorizeEffect();
     _colorizer->setColor( c );
     setGraphicsEffect(_colorizer);
-    _name->setGraphicsEffect(_colorizer);
-    _value->setGraphicsEffect(_colorizer);
+    _name->setBrush(QBrush(c));
+    _value->setBrush(QBrush(c));
 }
 
 QRectF DataItem::boundingRect() const
@@ -123,29 +124,35 @@ void DataItem::updateName(){
         _name = new QGraphicsSimpleTextItem(i18n("%1").arg(_data->name()));
         _name->setFlags(ItemIgnoresTransformations);
         _name->setFont(_font);
+        _name->setZValue(zValue()+1);
     }else if (_name->text() != _data->name()){
         _name->setText(i18n("%1").arg(_data->name()));
     }
-
-    // 80 is the boundingRect().width() and height().
-    // centering the Text on screen.
-    qreal x =  pos().x() + ((80 * scale())/2);
-    qreal y =  pos().y() + ((80 * scale())/2);
+   
+    int style = GraphicsLayout::self()->viewStyleDataNode();
     
-    switch(GraphicsLayout::self()->viewStyleDataNode()) {
-        case ConfigureDefaultProperties::ABOVE: {
-            y += _data->dataStructure()->dataValueVisibility() ? -70 : -55;            
-        }
-        case ConfigureDefaultProperties::CENTER: {
-            y += _data->dataStructure()->dataValueVisibility() ? 0 : 30;
-        }
-        case ConfigureDefaultProperties::BELOW: {
-            y += _data->dataStructure()->dataValueVisibility() ? -70 : -55;
-        }
+    qreal dataWidth = boundingRect().width() * scale();
+    
+    qreal x =  pos().x();
+    if ( style == ConfigureDefaultProperties::CENTER ){
+        x  += ((dataWidth > _name->boundingRect().width()+10)  
+            ? ((dataWidth - _name->boundingRect().width())/4)
+            : dataWidth + 30);
     }
-    qDebug() << "Setting Pos" << x << y;
-    _name->setPos(x,y);
+    
+    qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? - (dataWidth/2) 
+                          : ( style == ConfigureDefaultProperties::BELOW ) ? 50 + (dataWidth/2) 
+                          : 25 );
+
     _name->setVisible(_data->showName());
+    
+    if (_value && _value->isVisible()){
+        y +=  (( style == ConfigureDefaultProperties::ABOVE ) 
+              ? -20 
+              :  20 );
+    }
+    _name->setPos(x,y);    
+   // _name->setBrush(QBrush(_data->color().value<QColor>()));
 }
 
 QGraphicsSimpleTextItem* DataItem::name() const
@@ -163,28 +170,29 @@ void DataItem::updateValue(){
         _value = new QGraphicsSimpleTextItem(i18n("v=%1").arg(_data->value().toString()));
         _value->setFlags(ItemIgnoresTransformations);
         _value->setFont(_font);
+        _value->setZValue(zValue()+2);
     } else if (QVariant(_value->text()) != _data->value().toString()){
         _value ->setText(i18n("v=%1").arg(_data->value().toString()));
     }
     
-   // 80 is the boundingRect().width() and height().
-    // centering the Text on screen.
-    qreal x =  pos().x() + ((80 * scale())/2);
-    qreal y =  pos().y() + ((80 * scale())/2);
+   int style = GraphicsLayout::self()->viewStyleDataNode();
     
-    switch(GraphicsLayout::self()->viewStyleDataNode()) {
-        case ConfigureDefaultProperties::ABOVE: {
-            y +=  -55;
-        }
-        case ConfigureDefaultProperties::CENTER: {
-            y +=  30;
-        }
-        case ConfigureDefaultProperties::BELOW: {
-            y += 70;
-        }
+    qreal dataWidth = boundingRect().width() * scale();
+    
+    qreal x =  pos().x();
+    if ( style == ConfigureDefaultProperties::CENTER ){
+        x  += ((dataWidth > _value->boundingRect().width()+10)  
+            ? ((dataWidth - _value->boundingRect().width())/4)
+            : dataWidth + 30);
     }
+    
+    qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? - (dataWidth/2) 
+                          : ( style == ConfigureDefaultProperties::BELOW ) ? 50 + (dataWidth/2) 
+                          : 25 );
+
+ 
     qDebug() << "Setting Pos" << x << y;
     _value->setPos(x,y);
-   
+   // _value->setBrush(QBrush(_data->color().value<QColor>()));
     _value->setVisible(_data->showValue());
 }
