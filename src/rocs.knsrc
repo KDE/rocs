@@ -3,5 +3,5 @@ ProvidersUrl=http://download.kde.org/ocs/providers.xml
 Categories=Rocs Scripts
 UploadCategories=Rocs Scripts
 TargetDir=rocs/examples
-Uncompress=never
+Uncompress=archive
 CustomName=true

@@ -35,7 +35,7 @@
 #include <klocalizedstring.h>
 #include <KStatusBar>
 #include <KConfigDialog>
-
+#include <KTar>
 #include <kfiledialog.h>
 #include "TabWidget.h"
 
@@ -168,28 +168,36 @@ void MainWindow::downloadNewExamples(){
 void MainWindow::uploadScript()
 {
 
-// create the dialog
-KNS3::UploadDialog dialog(this);
+    KNS3::UploadDialog dialog(this);
 
-// set it up to help the user fill it out
-// the file to be uploaded - this is important!
-QString str = _codeEditor->document()->url().toLocalFile();
-if(str.isEmpty()){
-  str = KFileDialog::getOpenFileName ( QString(), i18n ( "*.js|Script files" ), this, i18n ( "Rocs Script Files" ) );
-  if (str.isEmpty())
-    return;
-}
-dialog.setUploadFile(str);
+//First select the opened doc.
+    KUrl str = _codeEditor->document()->url();
+    if (str.isEmpty()) {
+        //... then try to open
+        str = KFileDialog::getOpenFileName ( QString(), i18n ( "*.js|Script files" ),
+                                             this, i18n ( "Rocs Script Files" ) );
+        if (str.isEmpty())
+            return;
+    }
+//Compress the file to a temp file (How it can be made in KDE way ? )
+    QString local = QDir::temp().absoluteFilePath(str.fileName());
+    local.chop(3);
+    local.append(".tar.gz");
 
-// a suggested title, the user can still change it
-// don't set it if you can't make a reasonable suggestion
-dialog.setUploadName(_codeEditor->document()->documentName());
+//create compressed file and set to dialog.
+    KTar tar = KTar(local);
+    tar.open(QIODevice::WriteOnly);
+    tar.addLocalFile(str.toLocalFile(), str.fileName());
+    tar.close();
+    dialog.setUploadFile(local);
 
-// a longer description, optional
-dialog.setDescription("Added your description here.");
+    dialog.setUploadName(_codeEditor->document()->documentName());
+    dialog.setDescription("Added your description here.");
 
-// show the dialog as modal (you can also use show of course)
-dialog.exec();
+    dialog.exec();
+
+//Remove compressed file..
+    QDir::temp().remove(local);
 }
 
 
