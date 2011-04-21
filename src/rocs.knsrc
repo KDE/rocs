@@ -1,3 +1,7 @@
 [KNewStuff3]
-ProvidersUrl=http://edu.kde.org/rocs/downloads/providers.xml
+ProvidersUrl=http://download.kde.org/ocs/providers.xml
+Categories=Rocs Scripts
+UploadCategories=Rocs Scripts
 TargetDir=rocs/examples
+Uncompress=archive
+CustomName=true
