@@ -47,9 +47,9 @@ void GraphicsLayout::setViewStyleDataNode(int style)
     _viewStyleDataNode = style;
     QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
     foreach (DataStructure* ds, dsList) {
-        ds->setDataNameVisibility( ds->dataNameVisibility() ); // triggers redraw of all edges
+        ds->setDataNameVisibility( ds->dataNameVisibility() ); // triggers redraw of all nodes
     }
-//     _scene->update(); //TODO
+    emit changed();
 }
 
 
@@ -60,7 +60,7 @@ void GraphicsLayout::setViewStyleDataEdge(int style)
     foreach (DataStructure* ds, dsList) {
         ds->setPointerNameVisibility( ds->pointerNameVisibility() ); // triggers redraw of all edges
     }
-//     _scene->update(); //TODO
+    emit changed();
 }
 
 int GraphicsLayout::viewStyleDataNode() const

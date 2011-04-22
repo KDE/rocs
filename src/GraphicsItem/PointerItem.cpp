@@ -27,6 +27,7 @@
 #include "Pointer.h"
 #include "DataStructure.h"
 #include "math_constants.h"
+#include "GraphicsLayout.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -61,6 +62,9 @@ PointerItem::~PointerItem() {
 void PointerItem::connectSignals() {
     connect (_pointer, SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect (_pointer, SIGNAL(removed()), this, SLOT(remove()));
+    
+    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateName()));
+    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateValue()));
 }
 
 void PointerItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
