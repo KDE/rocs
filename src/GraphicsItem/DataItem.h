@@ -24,7 +24,6 @@ class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem{
     virtual ~DataItem();
     Data* data() const { return _data; }
     static QMap<QString, QSvgRenderer*> _renders;
-    QRectF  boundingRect () const;
     QGraphicsSimpleTextItem *name() const;
     QGraphicsSimpleTextItem *value() const;
   private slots:
@@ -45,6 +44,7 @@ private:
     QGraphicsColorizeEffect *_colorizer;
     QGraphicsRectItem *_boundingRect;
     QFont _font;
+    int _oldStyle;
 
     qreal _originalWidth;
     qreal _width;
