@@ -35,7 +35,7 @@
 #include <klocalizedstring.h>
 #include <KStatusBar>
 #include <KConfigDialog>
-
+#include <KTar>
 #include <kfiledialog.h>
 #include "TabWidget.h"
 
@@ -64,6 +64,7 @@
 #include "DeleteAction.h"
 #include "AlignAction.h"
 #include <KNS3/DownloadDialog>
+#include <knewstuff3/uploaddialog.h>
 
 // backends
 #include "QtScriptBackend.h"
@@ -164,6 +165,42 @@ void MainWindow::downloadNewExamples(){
     dialog.exec();
 }
 
+void MainWindow::uploadScript()
+{
+
+    KNS3::UploadDialog dialog(this);
+
+//First select the opened doc.
+    KUrl str = _codeEditor->document()->url();
+    if (str.isEmpty()) {
+        //... then try to open
+        str = KFileDialog::getOpenFileName ( QString(), i18n ( "*.js|Script files" ),
+                                             this, i18n ( "Rocs Script Files" ) );
+        if (str.isEmpty())
+            return;
+    }
+//Compress the file to a temp file (How it can be made in KDE way ? )
+    QString local = QDir::temp().absoluteFilePath(str.fileName());
+    local.chop(3);
+    local.append(".tar.gz");
+
+//create compressed file and set to dialog.
+    KTar tar = KTar(local);
+    tar.open(QIODevice::WriteOnly);
+    tar.addLocalFile(str.toLocalFile(), str.fileName());
+    tar.close();
+    dialog.setUploadFile(local);
+
+    dialog.setUploadName(_codeEditor->document()->documentName());
+    dialog.setDescription("Added your description here.");
+
+    dialog.exec();
+
+//Remove compressed file..
+    QDir::temp().remove(local);
+}
+
+
 QWidget* MainWindow::setupRightPanel()
 {
     _graphVisualEditor = GraphVisualEditor::self();
@@ -233,6 +270,7 @@ void MainWindow::setupActions()
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        Qt::Key_S, SLOT(saveGraph()),   this);
     createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     Qt::Key_W, SLOT(saveGraphAs()), this);
     createAction("",                 i18n("Download Examples"), "download", Qt::Key_D, SLOT(downloadNewExamples()),  this);
+    createAction("",                 i18n("Upload script"),     "upload",   Qt::Key_U, SLOT(uploadScript()),  this);
 
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", Qt::Key_P, SLOT(showPossibleIncludes()), this);
 

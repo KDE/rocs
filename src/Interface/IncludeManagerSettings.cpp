@@ -116,9 +116,7 @@ void IncludeManagerSettings::insertUrl()
 void IncludeManagerSettings::removeURL()
 {
     QListWidgetItem * itm = _list_View->takeItem(_list_View->currentRow());
-    if (itm) {
-        delete itm;
-    }
+    delete itm;
     includeChanged();
 
 }

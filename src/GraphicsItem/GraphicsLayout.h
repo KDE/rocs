@@ -42,6 +42,9 @@ private:
     int _viewStyleDataEdge;
 
     static GraphicsLayout* _self;
+    
+signals:
+    void changed();
 };
 
 #endif //GRAPHICSLAYOUT

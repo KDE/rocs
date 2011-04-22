@@ -47,7 +47,7 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
    
-    connect( _showName,     SIGNAL(toggled(bool)),         _data, SLOT( setShowName(bool)));
+    connect( _showName,     SIGNAL(toggled(bool)),         _data, SLOT(setShowName(bool)));
     connect( _showValue,    SIGNAL(toggled(bool)),         _data, SLOT(setShowValue(bool)));
     connect( _disableColor, SIGNAL(toggled(bool)),         _data, SLOT(setUseColor(bool)));
     connect( _name,         SIGNAL(textEdited(QString)),   _data, SLOT(setName(QString)));
