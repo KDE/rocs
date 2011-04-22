@@ -39,6 +39,8 @@ DataItem::DataItem(Data* n)
     
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateName()));
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateValue()));
+    connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateName()));
+    connect(n, SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateValue()));
     
     setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     setZValue(1);
@@ -138,12 +140,12 @@ void DataItem::updateName(){
             : dataWidth + 30);
     }
     
-    qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? - (dataWidth/2) 
-                          : ( style == ConfigureDefaultProperties::BELOW ) ? 50 + (dataWidth/2) 
-                          : 25 );
+    qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? + 15 - (dataWidth/2)
+                          : ( style == ConfigureDefaultProperties::BELOW ) ? 25 + (dataWidth/2)
+                          : 0 );
 
     _name->setVisible(_data->showName());
-    
+
     if (_value && _value->isVisible()){
         y +=  (( style == ConfigureDefaultProperties::ABOVE ) ? -20 :  20 );
     }
@@ -170,7 +172,7 @@ void DataItem::updateValue(){
         _value ->setText(i18n("v=%1").arg(_data->value().toString()));
     }
     
-   int style = GraphicsLayout::self()->viewStyleDataNode();
+    int style = GraphicsLayout::self()->viewStyleDataNode();
     
     qreal dataWidth = boundingRect().width() * scale();
     
@@ -180,10 +182,14 @@ void DataItem::updateValue(){
             ? ((dataWidth - _value->boundingRect().width())/4)
             : dataWidth + 30);
     }
-    
-    qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? - (dataWidth/2) 
-                          : ( style == ConfigureDefaultProperties::BELOW ) ? 50 + (dataWidth/2) 
-                          : 25 );
+
+    qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? + 15 - (dataWidth/2)
+                          : ( style == ConfigureDefaultProperties::BELOW ) ? 65 + (dataWidth/2)
+                          : 40 );
+
+    if ( !_name || !_name->isVisible()){
+        y +=  (( style == ConfigureDefaultProperties::BELOW ) ? -20 : -10 );
+    }
 
     _value->setPos(x,y);
     _value->setVisible(_data->showValue());
