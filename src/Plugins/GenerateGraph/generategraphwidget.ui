@@ -42,6 +42,11 @@
      <string>Random Graph</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>Erdös-Renyi Graph</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -265,6 +270,91 @@
       </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="randomAllowSelfedges">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_gnp">
+    <widget class="QWidget" name="formLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>251</width>
+       <height>104</height>
+      </rect>
+     </property>
+     <layout class="QFormLayout" name="formLayoutGNP">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_GNPNodes">
+        <property name="text">
+         <string>Nodes (n):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_GNPSelfEdges">
+        <property name="text">
+         <string>Allow self-edges:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="GNPNodes">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_GNPEdgeProbability">
+        <property name="text">
+         <string>Edge Probability (p):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_GNPGeneratorSeed">
+        <property name="text">
+         <string>Generator Seed:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="GNPGeneratorSeed">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999999</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="GNPEdgeProbability">
+        <property name="decimals">
+         <number>3</number>
+        </property>
+        <property name="minimum">
+         <double>0.001000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>1.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.250000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="GNPAllowSelfedges">
         <property name="text">
          <string/>
         </property>

@@ -45,6 +45,7 @@
 #include <boost/graph/random_layout.hpp>
 #include <boost/graph/topology.hpp>
 #include <boost/random/mersenne_twister.hpp>
+#include <boost/graph/erdos_renyi_generator.hpp>
 
 
 //TODO output usefull error message
@@ -98,6 +99,15 @@ void GenerateGraphWidget::generateGraph()
                 ui->randomEdges->value(),
                 ui->randomGeneratorSeed->value(),
                 ui->randomAllowSelfedges->isTristate()
+            );
+            break;
+        }
+        case ER_RANDOM: {
+            generateErdosRenyiRandomGraph(
+                ui->GNPNodes->value(),
+                ui->GNPEdgeProbability->value(),
+                ui->randomGeneratorSeed->value(),
+                ui->GNPAllowSelfedges->isTristate()
             );
             break;
         }
@@ -269,5 +279,46 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
     }
 }
 
+
+void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges)
+{
+    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+    
+    boost::mt19937 gen;
+    gen.seed (static_cast<unsigned int>(seed));
+
+    // generate graph
+    boost::adjacency_list<> test;
+    typedef boost::erdos_renyi_iterator<boost::mt19937, BoostGraph> ergen;
+    BoostGraph randomGraph(ergen(gen, nodes, edgeProbability, selfEdges), ergen(), nodes);
+    
+    // generate distribution topology and apply
+    boost::rectangle_topology< boost::mt19937 > topology(gen, center.x()-20*nodes, center.y()-20*nodes, center.x()+20*nodes, center.y()+20*nodes);
+    PositionMap positionMap = boost::get(&VertexProperties::point, randomGraph);
+    boost::random_graph_layout(randomGraph, positionMap, topology);
+
+    // put generated random graph at whiteboard
+    // use active data structure iff empty
+    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    if (graph->dataList().size()>0)
+        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
+
+    // put nodes at whiteboard as generated
+    QMap<int, Data*> mapNodes;
+    int index=0;
+    BGL_FORALL_VERTICES(v, randomGraph, BoostGraph) {
+        randomGraph[v].index = index++;
+        mapNodes[randomGraph[v].index] = graph->addData(
+            QString("%1").arg(randomGraph[v].index),
+            QPointF(randomGraph[v].point[0],randomGraph[v].point[1])
+        );
+    }
+    BGL_FORALL_EDGES(e, randomGraph, BoostGraph) {
+        graph->addPointer (
+            mapNodes[randomGraph[boost::source<>(e, randomGraph)].index],
+            mapNodes[randomGraph[boost::target<>(e, randomGraph)].index]
+        );
+    }
+}
 
 #include "generategraphwidget.moc"
