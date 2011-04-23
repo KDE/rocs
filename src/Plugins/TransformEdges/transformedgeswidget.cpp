@@ -24,6 +24,7 @@
 #include <DocumentManager.h>
 #include "transformedgeswidget.h"
 #include "ui_transformedgeswidget.h"
+#include "../DataStructure/Graph/GraphStructure.h"
 
 #include <cmath>
 #include <KLocale>
@@ -38,10 +39,12 @@
 #include <QtCore/QPair>
 
 #include <QDesktopWidget>
+#include <Pointer.h>
 
 
 //TODO output usefull error message
 namespace boost { void throw_exception( std::exception const & ) {} } // do noop on exception
+using namespace Rocs;
 
 class QPushButton;
 
@@ -99,7 +102,7 @@ void TransformEdgesWidget::executeTransform()
 
 void TransformEdgesWidget::makeComplete( DataStructure* graph )
 {
-    if ( graph )
+    if (graph)
     {
         foreach ( Pointer *e, graph->pointers() ) {
             graph->remove ( e );
@@ -116,7 +119,7 @@ void TransformEdgesWidget::makeComplete( DataStructure* graph )
 
 void TransformEdgesWidget::removeAllEdges( DataStructure* graph )
 {
-    if ( graph )
+    if (graph)
     {
         foreach ( Pointer *e, graph->pointers() ) {
             graph->remove ( e );
@@ -126,7 +129,22 @@ void TransformEdgesWidget::removeAllEdges( DataStructure* graph )
 
 void TransformEdgesWidget::reverseAllEdges( DataStructure* graph )
 {
-    // TODO
+    GraphStructure* graphDS = qobject_cast<Rocs::GraphStructure *>(graph);
+    if( !graphDS ) 
+        return;
+
+    if (graphDS->directed()==false)
+        return;
+        
+    QList< QPair<Data*, Data*> > newPointers;
+    foreach ( Pointer *e, graphDS->pointers() ) {
+        newPointers << QPair<Data*, Data*>(e->to(), e->from());
+        graph->remove ( e );
+    }
+    
+    for(int i=0; i<newPointers.count(); i++) {
+        graph->addPointer(newPointers[i].first, newPointers[i].second);
+    }
 }
 
 void TransformEdgesWidget::makeSpanningTree(DataStructure* graph)
