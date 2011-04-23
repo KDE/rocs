@@ -52,8 +52,9 @@ class TransformEdgesWidget :
 
     private:
         void makeComplete( DataStructure* graph );
-        void removeAllEdges();
-        void reverseAllEdges();
+        void removeAllEdges( DataStructure* graph );
+        void reverseAllEdges( DataStructure* graph );
+        void makeSpanningTree( DataStructure* graph );
 
         Document* graphDoc_;
         static const double PI_ = 3.14159265358979323846;

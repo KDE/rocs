@@ -81,12 +81,20 @@ void TransformEdgesWidget::executeTransform()
     DataStructure* graph;
     QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
 
+    // no graph datastructures given at document
+    if (ui->dataStructuresCombo->count()==0)
+        return;
+
     graph = dsList[ui->dataStructuresCombo->currentIndex()];
     if (!graph)
         return;
 
     if( ui->radioButtonMakeComplete->isChecked() )
         makeComplete( graph );
+    if( ui->radioButtonEraseEdges->isChecked() )
+        removeAllEdges( graph );
+    if( ui->radioButtonReverseEdges->isChecked() )
+        reverseAllEdges( graph );
 }
 
 void TransformEdgesWidget::makeComplete( DataStructure* graph )
@@ -106,6 +114,24 @@ void TransformEdgesWidget::makeComplete( DataStructure* graph )
     }
 }
 
+void TransformEdgesWidget::removeAllEdges( DataStructure* graph )
+{
+    if ( graph )
+    {
+        foreach ( Pointer *e, graph->pointers() ) {
+            graph->remove ( e );
+        }
+    }
+}
 
+void TransformEdgesWidget::reverseAllEdges( DataStructure* graph )
+{
+    // TODO
+}
+
+void TransformEdgesWidget::makeSpanningTree(DataStructure* graph)
+{
+    //TODO
+}
 
 #include "transformedgeswidget.moc"
