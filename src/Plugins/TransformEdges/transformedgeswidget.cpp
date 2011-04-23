@@ -58,9 +58,8 @@ TransformEdgesWidget::TransformEdgesWidget(Document* graphDoc, QWidget* parent)
     graphDoc_ = graphDoc;
     
     // put widget at center of screen
-    //TODO problems with two screens
     QDesktopWidget desktop;
-    QRect rect = desktop.availableGeometry(desktop.primaryScreen()); 
+    QRect rect = desktop.availableGeometry(desktop.screenNumber(parent)); 
     QPoint center = rect.center();
     center.setX(center.x() - (this->width()/2));
     center.setY(center.y() - (this->height()/2));
