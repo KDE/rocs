@@ -98,7 +98,12 @@ void TransformEdgesWidget::executeTransform()
         removeAllEdges( graph );
     if( ui->radioButtonReverseEdges->isChecked() )
         reverseAllEdges( graph );
+    if( ui->radioButtonMakeSpanningtree->isChecked() )
+        makeSpanningTree( graph );
+    if( ui->radioButtonConnectParts->isChecked() )
+        connectComponents( graph );
 }
+
 
 void TransformEdgesWidget::makeComplete( DataStructure* graph )
 {
@@ -117,6 +122,7 @@ void TransformEdgesWidget::makeComplete( DataStructure* graph )
     }
 }
 
+
 void TransformEdgesWidget::removeAllEdges( DataStructure* graph )
 {
     if (graph)
@@ -126,6 +132,7 @@ void TransformEdgesWidget::removeAllEdges( DataStructure* graph )
         }
     }
 }
+
 
 void TransformEdgesWidget::reverseAllEdges( DataStructure* graph )
 {
@@ -147,9 +154,19 @@ void TransformEdgesWidget::reverseAllEdges( DataStructure* graph )
     }
 }
 
+
 void TransformEdgesWidget::makeSpanningTree(DataStructure* graph)
 {
+    qDebug() << "now a spanning tree should be constructed";
     //TODO
 }
+
+
+void TransformEdgesWidget::connectComponents(DataStructure* graph)
+{
+    qDebug() << "now all remaining graph components should be connected";
+    //TODO
+}
+
 
 #include "transformedgeswidget.moc"

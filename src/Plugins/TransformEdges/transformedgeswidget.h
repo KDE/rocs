@@ -45,24 +45,65 @@ class TransformEdgesWidget :
         TransformEdgesWidget(Document* graphDoc, QWidget *parent=0);
         ~TransformEdgesWidget();
 
+        /**
+         * Add data structures to QComboBox of UI starting at position 0. Take care that
+         * the data structure IDs must be given in increasing ID order without gaps.
+         * Only data structures of documents of data structure type "Graph" are used.
+         *
+         * \param   QStringList dsNames names of data structures
+         * \return  void
+         */
         void addDataStructures(QStringList dsNames);
 
     public slots:
         void executeTransform();
 
     private:
+        /**
+         * Transform a given graph data structure to a complete graph.
+         *
+         * \param   DataStructure*  graph   the to be transformed graph
+         */
         void makeComplete( DataStructure* graph );
+        
+        /**
+         * Remove all edges from a given graph data structure.
+         *
+         * \param   DataStructure*  graph   the to be transformed graph
+         * \return  void
+         */        
         void removeAllEdges( DataStructure* graph );
+        
+        /**
+         * Remove all edges of a given directed graph data structure. If an undirected
+         * data structure is given no transformations are proceed.
+         *
+         * \param   DataStructure*  graph   the to be transformed graph
+         * \return  void
+         */
         void reverseAllEdges( DataStructure* graph );
+        
+        /**
+         * Transform given graph to a spanning tree by executing Prim's minimum spanning tree (MST)
+         * algorithm. All edges are assumed to have weight 1 if no weights are given. Otherwise,
+         * with given weights the specified values are used.
+         *
+         * \param   DataStructure*  graph   the to be transformed graph
+         * \return  void
+         */
         void makeSpanningTree( DataStructure* graph );
+        
+        /**
+         * Connect unconnnected components of a given graph data structure by executing
+         * the Depth-First-Search algorithm. New edges are the computed cross edges of DFS.
+         *
+         * \param   DataStructure*  graph   the to be transformed graph
+         * \return  void
+         */
+        void connectComponents ( DataStructure* graph );
 
         Document* graphDoc_;
-        static const double PI_ = 3.14159265358979323846;
-        int selectedGraphType_;
-        QGridLayout *gridLayout_;
-        QWidget* graphOptionsWidget_;
         Ui::TransformEdgesWidget *ui;
-        
 };
 
 #endif // TRANSFORMEDGESWIDGET_H
