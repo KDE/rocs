@@ -27,6 +27,7 @@
 #include "../DataStructure/Graph/GraphStructure.h"
 
 #include <cmath>
+#include <limits.h>
 #include <KLocale>
 
 #include <QtGui/QGridLayout>
@@ -40,6 +41,7 @@
 
 #include <QDesktopWidget>
 #include <Pointer.h>
+#include <Data.h>
 
 
 //TODO output usefull error message
@@ -155,10 +157,132 @@ void TransformEdgesWidget::reverseAllEdges( DataStructure* graph )
 }
 
 
-void TransformEdgesWidget::makeSpanningTree(DataStructure* graph)
+qreal TransformEdgesWidget::makeSpanningTree(DataStructure* graph)
 {
-    qDebug() << "now a spanning tree should be constructed";
-    //TODO
+    GraphStructure* graphDS = qobject_cast<Rocs::GraphStructure *>(graph);
+    if( !graphDS ) 
+        return 0;
+
+    QList<Data*> vertices = graphDS->dataList();
+    int n = vertices.size();
+
+    /*
+     * the resulting spanning tree (MST)
+     */
+    QList< QPair<int,int> > MST;
+
+    /*
+     * distance[i] denotes the distance between node i and the minimum spanning
+     * tree; initially this distance is infinity. Note that if i is already element
+     * in MST distance[i] is only a temporary variable and its value is undefined.
+     */
+    QMap<int, qreal> distance;
+    for( int i = 0; i < vertices.size(); i++) {
+        distance[i] = std::numeric_limits<unsigned int>::max();
+    }
+
+    /*
+     * Indicator variable that is true if node is in tree, false otherwise.
+     * Initially all nodes are marked to be not in MST.
+     */
+    QMap<int, bool> inTree; 
+    for (int i = 0; i < vertices.size(); i++) {
+        inTree[i] = false;
+    }
+
+    /* weight[i][j] denotes distance between nodes i and j. If no
+     * path is present between i and j in the previous tree the weight
+     * must be set to 0.
+     */
+    QMap< QPair<int,int>, qreal> weight;
+
+    for (int i=0; i<n; i++)
+    {
+    for (int j=0; j<n; j++)
+    {
+        if (i==j)   weight[QPair<int,int>(i,j)] = 0;
+        
+        PointerList out;
+        if (graphDS->directed())  
+            out = vertices[i]->out_pointers();
+        else 
+            out = vertices[i]->adjacent_pointers();
+                
+        for(int k=0; k<out.size(); k++) {
+            if (out[k]->to()==vertices[j]) {
+                if (out[k]->value()!="")
+                    weight[QPair<int,int>(i,j)] = out[k]->value().toDouble();
+                else
+                    weight[QPair<int,int>(i,j)] = 1;
+                
+            }
+        }
+    }
+    }
+
+    /* 
+     * successor[i] denotes the index of the node, to which i must be
+     * linked to in order to get distance distance[i]
+     */
+    QMap< int, int> successor; 
+
+    // start with first graph node
+    inTree[0] = true;
+    
+    // update distances
+    for (int i = 0; i < n; ++i) 
+    {
+        if ((weight[QPair<int,int>(0,i)] != 0) && (distance[i] > weight[QPair<int,int>(0,i)] )) {
+            distance[i] = weight[QPair<int,int>(0,i)] ;
+            successor[i] = 0;
+        }
+    }
+
+    qreal total = 0;
+    for(int treeSize = 1; treeSize < n; treeSize++) 
+    {
+        // Find node with the smallest distance to the tree
+        int min = -1;
+        for (int i = 0; i < n; ++i)
+        {
+            if (inTree[i]==false)
+            {
+                if ((min == -1) || (distance[min] > distance[i])) {
+                    min = i;
+                }
+            }
+        }
+
+        // add node to tree
+        MST << QPair<int,int>(successor[min], min);
+        inTree[min] = 1;
+        total += distance[min];
+
+        // update distances
+        for (int i = 0; i < n; ++i) 
+        {
+            if ((weight[QPair<int,int>(min,i)]  != 0) && (distance[i] > weight[QPair<int,int>(min,i)])) {
+                distance[i] = weight[QPair<int,int>(min,i)];
+                successor[i] = min;
+            }
+        }
+    }
+    
+    // erase all graph edges
+    removeAllEdges( graph );
+    
+    // refill with MST edges
+    for (int i=0; i<MST.size(); i++) {
+        Pointer* ptr = graph->addPointer(vertices[MST[i].first],vertices[MST[i].second]);
+        
+        if (weight[QPair<int,int>(MST[i].first,MST[i].second)]!=1) {
+            QString s;
+            s.setNum(weight[QPair<int,int>(MST[i].first,MST[i].second)]);
+            ptr->setValue(s);
+        }
+    }
+
+    return total;
 }
 
 

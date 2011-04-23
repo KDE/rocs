@@ -89,9 +89,9 @@ class TransformEdgesWidget :
          * with given weights the specified values are used.
          *
          * \param   DataStructure*  graph   the to be transformed graph
-         * \return  void
+         * \return  qreal   total weight of MST
          */
-        void makeSpanningTree( DataStructure* graph );
+        qreal makeSpanningTree( DataStructure* graph );
         
         /**
          * Connect unconnnected components of a given graph data structure by executing
