@@ -12,6 +12,7 @@ kde4_add_ui_files( TransformEdgesToolsPlugin_SRC transformedgeswidget.ui )
 
 kde4_add_plugin(rocs_transformedgesplugin ${TransformEdgesToolsPlugin_SRC} )
 target_link_libraries( rocs_transformedgesplugin
+                       rocs_GraphStructure
                        ${KDE4_KDEUI_LIBS}
                        rocslib)
                             
