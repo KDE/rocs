@@ -13,7 +13,7 @@ include_directories(
 )
 
 
-# Preparando a biblioteca padrão.
+# Prepare library.
 
 
 set( rocs_core_SRCS
@@ -32,6 +32,7 @@ set( rocs_core_SRCS
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
     Plugins/FilePluginInterface.cpp
+    Plugins/DataStructure/Graph/GraphStructure.cpp
 
     GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
@@ -62,6 +63,8 @@ set( rocslib_LIB_HDRS
   Plugins/FilePluginInterface.h
   Plugins/PluginManager.h
   Plugins/ToolsPluginInterface.h
+  Plugins/DataStructure/Graph/GraphStructure.h
+  Plugins/DataStructure/LinkedList/ListStructure.h
 
   GraphicsItem/DataItem.h
   GraphicsItem/PointerItem.h

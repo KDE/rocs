@@ -23,7 +23,7 @@
 #include "DataStructure.h"
 
 namespace Rocs{
-class GraphStructure : public DataStructure {
+class ROCSLIB_EXPORT GraphStructure : public DataStructure {
   Q_OBJECT
   public:
     typedef enum {
