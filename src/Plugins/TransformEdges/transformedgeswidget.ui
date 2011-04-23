@@ -11,9 +11,9 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Generate Graph</string>
+   <string>Transform Edges</string>
   </property>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="dataStructuresCombo">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -22,11 +22,6 @@
      <height>24</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>TODO current first one</string>
-    </property>
-   </item>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -54,7 +49,7 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pushButtonStart">
    <property name="geometry">
     <rect>
      <x>168</x>
@@ -67,7 +62,7 @@
     <string>start transform</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="pushButtonCancel">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -91,7 +86,7 @@
    </property>
    <layout class="QFormLayout" name="formLayout">
     <item row="0" column="0">
-     <widget class="QRadioButton" name="radioButton">
+     <widget class="QRadioButton" name="radioButtonMakeComplete">
       <property name="text">
        <string/>
       </property>
@@ -101,21 +96,21 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QRadioButton" name="radioButton_2">
+     <widget class="QRadioButton" name="radioButtonReverseEdges">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QRadioButton" name="radioButton_3">
+     <widget class="QRadioButton" name="radioButtonMakeSpanningtree">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QRadioButton" name="radioButton_4">
+     <widget class="QRadioButton" name="radioButtonConnectParts">
       <property name="text">
        <string/>
       </property>
@@ -153,5 +148,54 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButtonStart</sender>
+   <signal>released()</signal>
+   <receiver>TransformEdgesWidget</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>212</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>296</x>
+     <y>326</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonCancel</sender>
+   <signal>released()</signal>
+   <receiver>TransformEdgesWidget</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>213</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>87</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonStart</sender>
+   <signal>released()</signal>
+   <receiver>TransformEdgesWidget</receiver>
+   <slot>executeTransform()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>223</x>
+     <y>211</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>151</x>
+     <y>118</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

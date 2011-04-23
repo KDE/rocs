@@ -29,6 +29,7 @@
 
 class QGridLayout;
 class Document;
+class DataStructure;
 
 namespace Ui {
     class TransformEdgesWidget;
@@ -44,23 +45,23 @@ class TransformEdgesWidget :
         TransformEdgesWidget(Document* graphDoc, QWidget *parent=0);
         ~TransformEdgesWidget();
 
+        void addDataStructures(QStringList dsNames);
+
     public slots:
-//         void setGraphType(int type);
-//         void generateGraph();
+        void executeTransform();
 
     private:
-        void makeComplete();
+        void makeComplete( DataStructure* graph );
         void removeAllEdges();
         void reverseAllEdges();
-        
 
         Document* graphDoc_;
         static const double PI_ = 3.14159265358979323846;
         int selectedGraphType_;
         QGridLayout *gridLayout_;
         QWidget* graphOptionsWidget_;
-        
         Ui::TransformEdgesWidget *ui;
+        
 };
 
 #endif // TRANSFORMEDGESWIDGET_H

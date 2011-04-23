@@ -38,6 +38,7 @@
 #include <KLocalizedString>
 
 #include <map>
+#include <ui_transformedgeswidget.h>
 
 static const KAboutData aboutdata("rocs_transformedgesplugin", 0, ki18n("Transform Edges") , "0.1" );
 
@@ -60,6 +61,15 @@ QString TransformEdgesToolPlugin::run(QObject* doc) const
     Document* graphDoc = qobject_cast<Document*> ( doc );
 
     TransformEdgesWidget* dialog = new TransformEdgesWidget(graphDoc, 0);
+    
+    QList<DataStructure*> dsList = graphDoc->dataStructures();
+    QStringList dsNames;
+    foreach (DataStructure* ds, dsList) {
+        dsNames << ds->name();
+    }
+    
+    dialog->addDataStructures(dsNames);
+    
     dialog->show();
 
     return "";

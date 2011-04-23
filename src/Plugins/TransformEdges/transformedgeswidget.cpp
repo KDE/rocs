@@ -70,44 +70,42 @@ TransformEdgesWidget::~TransformEdgesWidget()
 }
 
 
+void TransformEdgesWidget::addDataStructures(QStringList dsNames)
+{
+    ui->dataStructuresCombo->insertItems(0, dsNames);
+}
 
-// void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
-// {
-//     DocumentManager::self()->activeDocument()->activeDataStructure()->updateRelativeCenter();
-//     QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
-//     
-//     // compute radius such that nodes have space ~50 between each other
-//     // circle that border-length of 2*PI*radius
-//     int radius = 50*numberSatelliteNodes/(2*PI_);
-// 
-//     if ( !graphDoc_ ){
-//       return;
-//     }
-// 
-//     // use active data structure iff empty
-//     DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
-//     if (graph->dataList().size()>0)
-//         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Star Graph") );
-// 
-//     // create mesh of NxN points
-//     QList<Data*> starNodes;
-// 
-//     // create mesh nodes, store them in map
-//     for (int i=1; i<=numberSatelliteNodes; i++) {
-//         starNodes << graph->addData(
-//             QString("%1").arg(i),
-//             QPointF(sin(i*2*PI_/numberSatelliteNodes)*radius, cos(i*2*PI_/numberSatelliteNodes)*radius)+center
-//         );
-//     }
-// 
-//     // middle
-//     starNodes.prepend( graph->addData(QString("center"),center) );
-// 
-//     // connect circle nodes
-//     for (int i=1; i<=numberSatelliteNodes; i++) {
-//         graph->addPointer (starNodes.at(0),starNodes.at(i));
-//     }
-// }
-// 
+
+void TransformEdgesWidget::executeTransform()
+{
+    DataStructure* graph;
+    QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
+
+    graph = dsList[ui->dataStructuresCombo->currentIndex()];
+    if (!graph)
+        return;
+
+    if( ui->radioButtonMakeComplete->isChecked() )
+        makeComplete( graph );
+}
+
+void TransformEdgesWidget::makeComplete( DataStructure* graph )
+{
+    if ( graph )
+    {
+        foreach ( Pointer *e, graph->pointers() ) {
+            graph->remove ( e );
+        }
+        
+        int size_i = graph->dataList().size() - 1;
+        for(int i = 0; i < size_i; ++i){
+            for( int e = i+1; e < graph->dataList().size(); ++e){
+                    graph->addPointer ( graph->dataList().at(i),graph->dataList().at(e) );
+            }
+        }
+    }
+}
+
+
 
 #include "transformedgeswidget.moc"
