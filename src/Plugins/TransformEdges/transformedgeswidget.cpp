@@ -101,8 +101,6 @@ void TransformEdgesWidget::executeTransform()
         reverseAllEdges( graph );
     if( ui->radioButtonMakeSpanningtree->isChecked() )
         makeSpanningTree( graph );
-    if( ui->radioButtonConnectParts->isChecked() )
-        connectComponents( graph );
 }
 
 
