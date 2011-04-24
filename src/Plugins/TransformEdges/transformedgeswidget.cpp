@@ -102,18 +102,26 @@ void TransformEdgesWidget::executeTransform()
 
 void TransformEdgesWidget::makeComplete( DataStructure* graph )
 {
-    if (graph)
-    {
-        foreach ( Pointer *e, graph->pointers() ) {
-            graph->remove ( e );
-        }
+    GraphStructure* graphDS = qobject_cast<Rocs::GraphStructure *>(graph);
+    if( !graphDS ) 
+        return;
         
-        int size_i = graph->dataList().size() - 1;
-        for(int i = 0; i < size_i; ++i){
-            for( int e = i+1; e < graph->dataList().size(); ++e){
-                    graph->addPointer ( graph->dataList().at(i),graph->dataList().at(e) );
-            }
+    bool directed = graphDS->directed();
+
+    foreach ( Pointer *e, graph->pointers() ) {
+        graph->remove ( e );
+    }
+    
+    int size_i = graph->dataList().size() - 1;
+    for(int i = 0; i < size_i; ++i)
+    {
+    for( int e = i+1; e < graph->dataList().size(); ++e)
+    {
+        graph->addPointer ( graph->dataList().at(i),graph->dataList().at(e) );
+        if (directed) {
+            graph->addPointer ( graph->dataList().at(e),graph->dataList().at(i) );
         }
+    }
     }
 }
 
