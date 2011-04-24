@@ -17,21 +17,15 @@
 
 */
 
-
-
-#include <Document.h>
-#include <DataStructure.h>
-#include <DocumentManager.h>
 #include "transformedgeswidget.h"
 #include "ui_transformedgeswidget.h"
-#include "../DataStructure/Graph/GraphStructure.h"
 
-#include <cmath>
 #include <limits.h>
 #include <KLocale>
 
-#include <QtGui/QGridLayout>
 #include <QtGui/QComboBox>
+#include <QtGui/QDesktopWidget>
+#include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
@@ -39,7 +33,10 @@
 #include <QtCore/QMap>
 #include <QtCore/QPair>
 
-#include <QDesktopWidget>
+#include <Document.h>
+#include <DataStructure.h>
+#include <DocumentManager.h>
+#include "../DataStructure/Graph/GraphStructure.h"
 #include <Pointer.h>
 #include <Data.h>
 
@@ -65,7 +62,6 @@ TransformEdgesWidget::TransformEdgesWidget(Document* graphDoc, QWidget* parent)
     center.setY(center.y() - (this->height()/2));
     move(center);
 }
-
 
 
 TransformEdgesWidget::~TransformEdgesWidget()
@@ -280,13 +276,6 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructure* graph)
     }
 
     return total;
-}
-
-
-void TransformEdgesWidget::connectComponents(DataStructure* graph)
-{
-    qDebug() << "now all remaining graph components should be connected";
-    //TODO
 }
 
 

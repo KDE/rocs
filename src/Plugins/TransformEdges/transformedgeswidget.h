@@ -92,15 +92,7 @@ class TransformEdgesWidget :
          * \return  qreal   total weight of MST
          */
         qreal makeSpanningTree( DataStructure* graph );
-        
-        /**
-         * Connect unconnnected components of a given graph data structure by executing
-         * the Depth-First-Search algorithm. New edges are the computed cross edges of DFS.
-         *
-         * \param   DataStructure*  graph   the to be transformed graph
-         * \return  void
-         */
-        void connectComponents ( DataStructure* graph );
+
 
         Document* graphDoc_;
         Ui::TransformEdgesWidget *ui;
