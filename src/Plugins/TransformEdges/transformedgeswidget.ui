@@ -118,7 +118,7 @@ p, li { white-space: pre-wrap; }
     <item>
      <widget class="QRadioButton" name="radioButtonReverseEdges">
       <property name="toolTip">
-       <string>This option reverses all edges of a directed graph. Note that this does not apply do undirected graphs.</string>
+       <string>This option reverses all edges of a directed graph. Note that this does not apply to undirected graphs.</string>
       </property>
       <property name="text">
        <string>Reverse Edges</string>
