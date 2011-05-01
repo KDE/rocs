@@ -40,6 +40,11 @@ class AssignValuesWidget :
 {
     Q_OBJECT
 
+    enum AssignMethod {
+        ID,
+        UNIFORM_INTEGER,
+        UNIFORM_FLOAT
+    };
 
     public:
         AssignValuesWidget(Document* graphDoc, QWidget *parent=0);
@@ -56,11 +61,20 @@ class AssignValuesWidget :
         void addDataStructures(QStringList dsNames);
 
     public slots:
-        void executeTransform();
+        void assignValues();
 
     private:
         Document* graphDoc_;
         Ui::AssignValuesWidget *ui;
+        
+        void assignIDsToNodes(DataStructure* ds, int start);
+        void assignIDsToEdges(DataStructure* ds, int start);
+        
+        void assignIntegersToNodes(DataStructure* ds, int lowerLimit, int upperLimit, int seed);
+        void assignIntegersToEdges(DataStructure* ds, int lowerLimit, int upperLimit, int seed);
+        
+        void assignFloatsToNodes(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed);
+        void assignFloatsToEdges(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed);
 };
 
 #endif // ASSIGNVALUESWIDGET_H

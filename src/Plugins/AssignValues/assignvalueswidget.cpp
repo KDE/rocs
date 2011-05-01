@@ -72,22 +72,33 @@ AssignValuesWidget::~AssignValuesWidget()
 
 void AssignValuesWidget::addDataStructures(QStringList dsNames)
 {
-//     ui->dataStructuresCombo->insertItems(0, dsNames);
+    ui->dataStructuresCombo->insertItems(0, dsNames);
 }
 
 
-void AssignValuesWidget::executeTransform()
+void AssignValuesWidget::assignValues()
 {
-//     DataStructure* graph;
-//     QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
+    DataStructure* ds;
+    QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
 // 
-//     // no graph datastructures given at document
-//     if (ui->dataStructuresCombo->count()==0)
-//         return;
-// 
-//     graph = dsList[ui->dataStructuresCombo->currentIndex()];
-//     if (!graph)
-//         return;
+    // no graph datastructures given at document
+    if (ui->dataStructuresCombo->count()==0)
+        return;
+
+    ds = dsList[ui->dataStructuresCombo->currentIndex()];
+    if (!ds)
+        return;
+        
+    switch((AssignMethod) ui->comboBoxMethod->currentIndex()) 
+    {
+        case ID: {
+            int start = ui->spinBoxIDStartValue->value();
+            qDebug() << "switch ID";
+            if (ui->checkBoxAssignNodes->isChecked())  assignIDsToNodes(ds, start);
+            if (ui->checkBoxAssignEdges->isChecked())  assignIDsToEdges(ds, start);
+            break;
+        }
+    }
 // 
 //     if( ui->radioButtonMakeComplete->isChecked() )
 //         makeComplete( graph );
@@ -97,6 +108,26 @@ void AssignValuesWidget::executeTransform()
 //         reverseAllEdges( graph );
 //     if( ui->radioButtonMakeSpanningtree->isChecked() )
 //         makeSpanningTree( graph );
+
+    close();
+}
+
+void AssignValuesWidget::assignIDsToNodes(DataStructure* ds, int start)
+{
+    QList<Data*> vertices = ds->dataList();
+
+    for (int i=0; i<vertices.size(); i++)
+    {
+        vertices[i]->setValue(QString::number(start++));
+    }
+}
+
+void AssignValuesWidget::assignIDsToEdges(DataStructure* ds, int start)
+{
+    QList<Pointer*> edges = ds->pointers();
+    
+    for (int i=0; i<edges.size(); i++)
+        edges[i]->setValue(QString::number(start++));
 }
 
 #include "assignvalueswidget.moc"

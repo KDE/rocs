@@ -64,7 +64,7 @@ p, li { white-space: pre-wrap; }
    <item row="6" column="0">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QWidget" name="formLayoutWidget">
@@ -99,9 +99,6 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
-      <zorder>formLayoutWidget</zorder>
-      <zorder>comboBoxMethod</zorder>
-      <zorder>comboBoxMethod</zorder>
      </widget>
      <widget class="QWidget" name="page_2">
       <widget class="QWidget" name="formLayoutWidget_2">
@@ -142,7 +139,17 @@ p, li { white-space: pre-wrap; }
          <widget class="QSpinBox" name="spinBoxIntegerUpperLimit"/>
         </item>
         <item row="2" column="1">
-         <widget class="QSpinBox" name="spinBoxIntegerGeneratorSeed"/>
+         <widget class="QSpinBox" name="spinBoxIntegerGeneratorSeed">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -186,7 +193,17 @@ p, li { white-space: pre-wrap; }
          <widget class="QDoubleSpinBox" name="spinBoxFloatUpperLimit"/>
         </item>
         <item row="2" column="1">
-         <widget class="QSpinBox" name="spinBoxFloatGeneratorSeed"/>
+         <widget class="QSpinBox" name="spinBoxFloatGeneratorSeed">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -280,6 +297,22 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>85</x>
      <y>324</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonStart</sender>
+   <signal>released()</signal>
+   <receiver>AssignValuesWidget</receiver>
+   <slot>assignValues()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>273</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>296</y>
     </hint>
    </hints>
   </connection>

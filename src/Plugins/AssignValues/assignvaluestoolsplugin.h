@@ -26,7 +26,7 @@ class QObject;
 
 class AssignValuesToolPlugin : public ToolsPluginInterface
 {
-    Q_OBJECT
+    Q_OBJECT  
 
 public:
     AssignValuesToolPlugin(QObject* parent, const QList< QVariant >&);

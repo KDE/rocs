@@ -62,22 +62,16 @@ QString AssignValuesToolPlugin::run(QObject* doc) const
 
     AssignValuesWidget* dialog = new AssignValuesWidget(graphDoc, 0);
     
-//     QList<DataStructure*> dsList = graphDoc->dataStructures();
-//     QStringList dsNames;
-//     
-//     // be sure that only graph-datastructures are accessed by this plugin
-//     if (graphDoc->dataStructureTypeName() == "Graph" ) {
-//     foreach (DataStructure* ds, dsList) {
-//         dsNames << ds->name();
-//     }
-//     }
-//     
-//     dialog->addDataStructures(dsNames);
+    // data structures to selector box
+    QList<DataStructure*> dsList = graphDoc->dataStructures();
+    QStringList dsNames;
+    foreach (DataStructure* ds, dsList) {
+        dsNames << ds->name();
+    }
+    dialog->addDataStructures(dsNames);
     
     dialog->show();
 
     return "";
 
 }
-
-// #include "tranformedgestoolsplugin.moc"
