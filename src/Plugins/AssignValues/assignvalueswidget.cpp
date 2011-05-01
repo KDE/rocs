@@ -94,13 +94,15 @@ void AssignValuesWidget::assignValues()
     if (!ds)
         return;
         
+    bool overrideValues = ui->checkBoxOverwriteValues->isChecked();
+        
     switch((AssignMethod) ui->comboBoxMethod->currentIndex()) 
     {
         case ID: {
             int start = ui->spinBoxIDStartValue->value();
 
-            if (ui->checkBoxAssignNodes->isChecked())  assignIDsToNodes(ds, start);
-            if (ui->checkBoxAssignEdges->isChecked())  assignIDsToEdges(ds, start);
+            if (ui->checkBoxAssignNodes->isChecked())  assignIDsToNodes(ds, start, overrideValues);
+            if (ui->checkBoxAssignEdges->isChecked())  assignIDsToEdges(ds, start, overrideValues);
             break;
         }
         case UNIFORM_INTEGER: {
@@ -108,8 +110,8 @@ void AssignValuesWidget::assignValues()
             int lowerLimit = ui->spinBoxIntegerLowerLimit->value();
             int upperLimit = ui->spinBoxIntegerUpperLimit->value();
 
-            if (ui->checkBoxAssignNodes->isChecked())  assignIntegersToNodes(ds, lowerLimit, upperLimit, seed);
-            if (ui->checkBoxAssignEdges->isChecked())  assignIntegersToEdges(ds, lowerLimit, upperLimit, seed);
+            if (ui->checkBoxAssignNodes->isChecked())  assignIntegersToNodes(ds, lowerLimit, upperLimit, seed, overrideValues);
+            if (ui->checkBoxAssignEdges->isChecked())  assignIntegersToEdges(ds, lowerLimit, upperLimit, seed, overrideValues);
             break;
         }
         case UNIFORM_FLOAT: {
@@ -117,8 +119,8 @@ void AssignValuesWidget::assignValues()
             qreal lowerLimit = ui->spinBoxFloatLowerLimit->value();
             qreal upperLimit = ui->spinBoxFloatUpperLimit->value();
 
-            if (ui->checkBoxAssignNodes->isChecked())  assignFloatsToNodes(ds, lowerLimit, upperLimit, seed);
-            if (ui->checkBoxAssignEdges->isChecked())  assignFloatsToEdges(ds, lowerLimit, upperLimit, seed);
+            if (ui->checkBoxAssignNodes->isChecked())  assignFloatsToNodes(ds, lowerLimit, upperLimit, seed, overrideValues);
+            if (ui->checkBoxAssignEdges->isChecked())  assignFloatsToEdges(ds, lowerLimit, upperLimit, seed, overrideValues);
             break;
         }
     }
@@ -126,26 +128,33 @@ void AssignValuesWidget::assignValues()
     close();
 }
 
-void AssignValuesWidget::assignIDsToNodes(DataStructure* ds, int start)
+
+void AssignValuesWidget::assignIDsToNodes(DataStructure* ds, int start, bool overrideValues)
 {
     QList<Data*> vertices = ds->dataList();
 
     for (int i=0; i<vertices.size(); i++)
     {
+        if (!overrideValues && !vertices[i]->value().isNull())
+            return;
         vertices[i]->setValue(QString::number(start++));
     }
 }
 
-void AssignValuesWidget::assignIDsToEdges(DataStructure* ds, int start)
+
+void AssignValuesWidget::assignIDsToEdges(DataStructure* ds, int start, bool overrideValues)
 {
     QList<Pointer*> edges = ds->pointers();
     
     for (int i=0; i<edges.size(); i++) {
+        if (!overrideValues && !edges[i]->value().trimmed().isEmpty())
+            return;
         edges[i]->setValue(QString::number(start++));
     }
 }
 
-void AssignValuesWidget::assignIntegersToNodes(DataStructure* ds, int lowerLimit, int upperLimit, int seed)
+
+void AssignValuesWidget::assignIntegersToNodes(DataStructure* ds, int lowerLimit, int upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -160,11 +169,14 @@ void AssignValuesWidget::assignIntegersToNodes(DataStructure* ds, int lowerLimit
 
     for (int i=0; i<vertices.size(); i++)
     {
+        if (!overrideValues && !vertices[i]->value().isNull())
+            return;
         vertices[i]->setValue(QString::number( die() ));
     }
 }
 
-void AssignValuesWidget::assignIntegersToEdges(DataStructure* ds, int lowerLimit, int upperLimit, int seed)
+
+void AssignValuesWidget::assignIntegersToEdges(DataStructure* ds, int lowerLimit, int upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -177,12 +189,15 @@ void AssignValuesWidget::assignIntegersToEdges(DataStructure* ds, int lowerLimit
 
     QList<Pointer*> edges = ds->pointers();
     
-    for (int i=0; i<edges.size(); i++)
+    for (int i=0; i<edges.size(); i++) {
+        if (!overrideValues && !edges[i]->value().trimmed().isEmpty())
+            return;
         edges[i]->setValue(QString::number( die() ));
+    }
 }
 
 
-void AssignValuesWidget::assignFloatsToNodes(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed)
+void AssignValuesWidget::assignFloatsToNodes(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -197,11 +212,14 @@ void AssignValuesWidget::assignFloatsToNodes(DataStructure* ds, qreal lowerLimit
 
     for (int i=0; i<vertices.size(); i++)
     {
+        if (!overrideValues && !vertices[i]->value().isNull())
+            return;
         vertices[i]->setValue(QString::number( die() ));
     }
 }
 
-void AssignValuesWidget::assignFloatsToEdges(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed)
+
+void AssignValuesWidget::assignFloatsToEdges(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -215,7 +233,11 @@ void AssignValuesWidget::assignFloatsToEdges(DataStructure* ds, qreal lowerLimit
     QList<Pointer*> edges = ds->pointers();
     
     for (int i=0; i<edges.size(); i++)
+    {
+        if (!overrideValues && !edges[i]->value().trimmed().isEmpty())
+            return;
         edges[i]->setValue(QString::number( die() ));
+    }
 }
 
 

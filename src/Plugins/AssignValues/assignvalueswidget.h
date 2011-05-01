@@ -67,14 +67,14 @@ class AssignValuesWidget :
         Document* graphDoc_;
         Ui::AssignValuesWidget *ui;
         
-        void assignIDsToNodes(DataStructure* ds, int start);
-        void assignIDsToEdges(DataStructure* ds, int start);
+        void assignIDsToNodes(DataStructure* ds, int start, bool overrideValues);
+        void assignIDsToEdges(DataStructure* ds, int start, bool overrideValues);
         
-        void assignIntegersToNodes(DataStructure* ds, int lowerLimit, int upperLimit, int seed);
-        void assignIntegersToEdges(DataStructure* ds, int lowerLimit, int upperLimit, int seed);
+        void assignIntegersToNodes(DataStructure* ds, int lowerLimit, int upperLimit, int seed, bool overrideValues);
+        void assignIntegersToEdges(DataStructure* ds, int lowerLimit, int upperLimit, int seed, bool overrideValues);
         
-        void assignFloatsToNodes(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed);
-        void assignFloatsToEdges(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed);
+        void assignFloatsToNodes(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+        void assignFloatsToEdges(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
 };
 
 #endif // ASSIGNVALUESWIDGET_H
