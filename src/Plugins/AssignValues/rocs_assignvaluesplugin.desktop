@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+#Icon=icon
+ServiceTypes=Rocs/ToolPlugin
+X-KDE-Library=rocs_assignvaluesplugin
+X-KDE-PluginInfo-Author=Andreas Cord-Landwehr
+X-KDE-PluginInfo-Email=cola@uni-paderborn.de
+X-KDE-PluginInfo-Name=Assign Values Rocs Tool Plugin
+X-KDE-PluginInfo-Version=0.0.1
+X-KDE-PluginInfo-Website=http://edu.kde.org/rocs/
+X-KDE-PluginInfo-Category=Plugins
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=false
+Name=Assign Values
+Name[x-test]=xxAssign Valuesxx
+Comment=Assign values to graph edges and nodes.
+Comment[x-test]=xxAssign values to graph edges and nodes.xx

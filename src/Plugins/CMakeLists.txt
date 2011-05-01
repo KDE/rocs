@@ -23,3 +23,4 @@ include_directories(${Boost_INCLUDE_DIRS})
 #add_subdirectory(dotParser)
 
 add_subdirectory(TransformEdges)
+add_subdirectory(AssignValues)
