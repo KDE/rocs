@@ -40,6 +40,10 @@
 #include <Pointer.h>
 #include <Data.h>
 
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int.hpp>
+#include <boost/random/variate_generator.hpp>
+
 
 //TODO output usefull error message
 namespace boost { void throw_exception( std::exception const & ) {} } // do noop on exception
@@ -93,21 +97,21 @@ void AssignValuesWidget::assignValues()
     {
         case ID: {
             int start = ui->spinBoxIDStartValue->value();
-            qDebug() << "switch ID";
+
             if (ui->checkBoxAssignNodes->isChecked())  assignIDsToNodes(ds, start);
             if (ui->checkBoxAssignEdges->isChecked())  assignIDsToEdges(ds, start);
             break;
         }
+        case UNIFORM_INTEGER: {
+            int seed = ui->spinBoxIntegerGeneratorSeed->value();
+            int lowerLimit = ui->spinBoxIntegerLowerLimit->value();
+            int upperLimit = ui->spinBoxIntegerUpperLimit->value();
+
+            if (ui->checkBoxAssignNodes->isChecked())  assignIntegersToNodes(ds, lowerLimit, upperLimit, seed);
+            if (ui->checkBoxAssignEdges->isChecked())  assignIntegersToEdges(ds, lowerLimit, upperLimit, seed);
+            break;
+        }
     }
-// 
-//     if( ui->radioButtonMakeComplete->isChecked() )
-//         makeComplete( graph );
-//     if( ui->radioButtonEraseEdges->isChecked() )
-//         removeAllEdges( graph );
-//     if( ui->radioButtonReverseEdges->isChecked() )
-//         reverseAllEdges( graph );
-//     if( ui->radioButtonMakeSpanningtree->isChecked() )
-//         makeSpanningTree( graph );
 
     close();
 }
@@ -126,8 +130,46 @@ void AssignValuesWidget::assignIDsToEdges(DataStructure* ds, int start)
 {
     QList<Pointer*> edges = ds->pointers();
     
-    for (int i=0; i<edges.size(); i++)
+    for (int i=0; i<edges.size(); i++) {
         edges[i]->setValue(QString::number(start++));
+    }
 }
+
+void AssignValuesWidget::assignIntegersToNodes(DataStructure* ds, int lowerLimit, int upperLimit, int seed)
+{
+    if (lowerLimit > upperLimit)
+        return;
+
+    boost::mt19937 gen;
+    gen.seed (static_cast<unsigned int>(seed));
+    
+    boost::uniform_int<> distribution(lowerLimit, upperLimit);
+    boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
+
+    QList<Data*> vertices = ds->dataList();
+
+    for (int i=0; i<vertices.size(); i++)
+    {
+        vertices[i]->setValue(QString::number( die() ));
+    }
+}
+
+void AssignValuesWidget::assignIntegersToEdges(DataStructure* ds, int lowerLimit, int upperLimit, int seed)
+{
+    if (lowerLimit > upperLimit)
+        return;
+
+    boost::mt19937 gen;
+    gen.seed (static_cast<unsigned int>(seed));
+    
+    boost::uniform_int<> distribution(lowerLimit, upperLimit);
+    boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
+
+    QList<Pointer*> edges = ds->pointers();
+    
+    for (int i=0; i<edges.size(); i++)
+        edges[i]->setValue(QString::number( die() ));
+}
+
 
 #include "assignvalueswidget.moc"

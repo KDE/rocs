@@ -50,6 +50,9 @@ p, li { white-space: pre-wrap; }
        <property name="text">
         <string>Nodes</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -133,10 +136,30 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QSpinBox" name="spinBoxIntegerLowerLimit"/>
+         <widget class="QSpinBox" name="spinBoxIntegerLowerLimit">
+          <property name="minimum">
+           <number>-99999</number>
+          </property>
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QSpinBox" name="spinBoxIntegerUpperLimit"/>
+         <widget class="QSpinBox" name="spinBoxIntegerUpperLimit">
+          <property name="minimum">
+           <number>-99999</number>
+          </property>
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+          <property name="value">
+           <number>100</number>
+          </property>
+         </widget>
         </item>
         <item row="2" column="1">
          <widget class="QSpinBox" name="spinBoxIntegerGeneratorSeed">
@@ -187,10 +210,33 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QDoubleSpinBox" name="spinBoxFloatLowerLimit"/>
+         <widget class="QDoubleSpinBox" name="spinBoxFloatLowerLimit">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="minimum">
+           <double>-99999.990000000005239</double>
+          </property>
+          <property name="value">
+           <double>0.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QDoubleSpinBox" name="spinBoxFloatUpperLimit"/>
+         <widget class="QDoubleSpinBox" name="spinBoxFloatUpperLimit">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="minimum">
+           <double>-99999.990000000005239</double>
+          </property>
+          <property name="maximum">
+           <double>99999.990000000005239</double>
+          </property>
+          <property name="value">
+           <double>10.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item row="2" column="1">
          <widget class="QSpinBox" name="spinBoxFloatGeneratorSeed">
