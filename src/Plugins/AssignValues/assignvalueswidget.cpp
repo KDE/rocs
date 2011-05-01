@@ -42,6 +42,7 @@
 
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int.hpp>
+#include <boost/random/uniform_real.hpp>
 #include <boost/random/variate_generator.hpp>
 
 
@@ -111,6 +112,15 @@ void AssignValuesWidget::assignValues()
             if (ui->checkBoxAssignEdges->isChecked())  assignIntegersToEdges(ds, lowerLimit, upperLimit, seed);
             break;
         }
+        case UNIFORM_FLOAT: {
+            int seed = ui->spinBoxIntegerGeneratorSeed->value();
+            qreal lowerLimit = ui->spinBoxFloatLowerLimit->value();
+            qreal upperLimit = ui->spinBoxFloatUpperLimit->value();
+
+            if (ui->checkBoxAssignNodes->isChecked())  assignFloatsToNodes(ds, lowerLimit, upperLimit, seed);
+            if (ui->checkBoxAssignEdges->isChecked())  assignFloatsToEdges(ds, lowerLimit, upperLimit, seed);
+            break;
+        }
     }
 
     close();
@@ -165,6 +175,43 @@ void AssignValuesWidget::assignIntegersToEdges(DataStructure* ds, int lowerLimit
     boost::uniform_int<> distribution(lowerLimit, upperLimit);
     boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
 
+    QList<Pointer*> edges = ds->pointers();
+    
+    for (int i=0; i<edges.size(); i++)
+        edges[i]->setValue(QString::number( die() ));
+}
+
+
+void AssignValuesWidget::assignFloatsToNodes(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed)
+{
+    if (lowerLimit > upperLimit)
+        return;
+
+    boost::mt19937 gen;
+    gen.seed (static_cast<unsigned int>(seed));
+    
+    boost::uniform_real<> distribution(lowerLimit, upperLimit);
+    boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
+    
+    QList<Data*> vertices = ds->dataList();
+
+    for (int i=0; i<vertices.size(); i++)
+    {
+        vertices[i]->setValue(QString::number( die() ));
+    }
+}
+
+void AssignValuesWidget::assignFloatsToEdges(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed)
+{
+    if (lowerLimit > upperLimit)
+        return;
+
+    boost::mt19937 gen;
+    gen.seed (static_cast<unsigned int>(seed));
+    
+    boost::uniform_real<> distribution(lowerLimit, upperLimit);
+    boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
+    
     QList<Pointer*> edges = ds->pointers();
     
     for (int i=0; i<edges.size(); i++)
