@@ -46,8 +46,6 @@
 #include <boost/random/variate_generator.hpp>
 
 
-//TODO output usefull error message
-namespace boost { void throw_exception( std::exception const & ) {} } // do noop on exception
 using namespace Rocs;
 
 class QPushButton;
@@ -85,8 +83,8 @@ void AssignValuesWidget::assignValues()
 {
     DataStructure* ds;
     QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
-// 
-    // no graph datastructures given at document
+
+    // no datastructures given at document
     if (ui->dataStructuresCombo->count()==0)
         return;
 
