@@ -20,6 +20,7 @@ endif()
 
 
 add_subdirectory(src)
+add_subdirectory(doc)
 add_subdirectory(graphics)
 
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
