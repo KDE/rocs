@@ -197,24 +197,28 @@ void Document::changeMinimalSize(qreal width, qreal height) {
     if (width>=0) d->_minWidth = width;
     if (height>=0) d->_minHeight = height;
 
-    if (width < d->_xRight - d->_xLeft) {
+    if (width > d->_xRight - d->_xLeft) {
         d->_xLeft -= (d->_xRight- d->_xLeft - width)/2;
         d->_xRight += (d->_xRight- d->_xLeft - width)/2;
         emit resized();
     }
+    else {
+        resizeDocumentBorder(BorderLeft);
+    }
 
-    if (height < d->_yBottom - d->_yTop) {
+    if (height > d->_yBottom - d->_yTop) {
         d->_yTop -= (d->_yBottom - d->_yTop - height)/2;
         d->_yBottom += (d->_yBottom - d->_yTop - height)/2;
-        qDebug() << "test";
         emit resized();
+    }
+    else {
+        resizeDocumentBorder(BorderTop);
     }
 }
 
 void Document::resizeDocumentIncrease()
 {
     int elements = dataStructures().size();
-
     for (int i = 0; i < elements; i++) {
         foreach( Data* n,  dataStructures().at(i)->dataList() ){
             if (n->x() < d->_xLeft+GraphScene::kBORDER) {

@@ -270,7 +270,7 @@ void GraphScene::resize() {
                    _graphDocument->yTop(),  // y
                    _graphDocument->xRight()-_graphDocument->xLeft(), // width
                    _graphDocument->yBottom()-_graphDocument->yTop()); // height
- //   _whiteboard->setRect( newSize );
+
     setSceneRect( newSize );
     emit resized();
 }
