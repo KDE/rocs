@@ -156,6 +156,7 @@ void TestDynamicProperties::removeGraphDynamicProperty() {
 
 }
 
+
 void TestDynamicProperties::removeToAllNodes() {
     Document d("unnamed");
     DataStructure *g = d.addDataStructure("A graph");
@@ -164,14 +165,18 @@ void TestDynamicProperties::removeToAllNodes() {
 //     g.add
     QByteArray property = "newProperty";
     g->addDataDynamicProperty ( property, QVariant ( 0 ) );
+
     QVERIFY2 ( n->property ( property ) != QVariant::Invalid, "Property not added." );
     QVERIFY2 ( n2->property ( property ) != QVariant::Invalid, "Property not added." );
-    g->addDataDynamicProperty ( property );
-    QVERIFY2 ( DynamicPropertiesList::New()->type ( n, property ) == None, "Property isn't None." );
+    
+    g->removeDataDynamicProperty ( property );
     QVERIFY2 ( n->property ( property ) == QVariant::Invalid, "Property not removed from node 1." );
-    QVERIFY2 ( n2->property ( property ) == QVariant::Invalid, "Property not removedfrom node 1." );
+    QVERIFY2 ( n2->property ( property ) == QVariant::Invalid, "Property not removedfrom node 2." );
+    QVERIFY2 ( DynamicPropertiesList::New()->type( n, property ) == None, "Property isn't None." );
 
 }
+
+
 void TestDynamicProperties::removeToAllEdges() {
     Document d("unnamed");
     DataStructure *g = d.addDataStructure("A graph");
@@ -191,6 +196,7 @@ void TestDynamicProperties::removeToAllEdges() {
 
 }
 
+
 void TestDynamicProperties::MultipleProperties() {
     Document d("unnamed");
     DataStructure *g = d.addDataStructure("A graph");
@@ -198,26 +204,28 @@ void TestDynamicProperties::MultipleProperties() {
     Data *n2 = g->addData ( "Node 2" );
     Data *n3 = g->addData ( "Node 3" );
     Pointer *e1 = g->addPointer ( n3, n1 );
-    g->addPointer ( n2, n1 );
-    g->addPointer ( n3, n2 );
+    Pointer *e2 = g->addPointer ( n2, n1 );
+    Pointer *e3 = g->addPointer ( n3, n2 );
 
     QByteArray property = "newProperty";
     g->addDataDynamicProperty ( property, QVariant ( 0 ) );
-    g->addDataDynamicProperty ( property, QVariant ( 0 ) );
+    g->addPointersDynamicProperty ( property, QVariant ( 0 ) );
 
     QVERIFY2 ( DynamicPropertiesList::New()->type ( n1, property ) == Global, "Property isn't global" );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( e1, property ) == Global, "Property isn't global" );
 
     n1->removeDynamicProperty ( property );
+    e1->removeDynamicProperty ( property );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( n1, property ) == Multiple, "Property isn't Multiple" );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( e1, property ) == Multiple, "Property isn't Multiple" );
 
     n2->removeDynamicProperty ( property );
+    e2->removeDynamicProperty ( property );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( n1, property ) == Unique, "Property isn't Unique" );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( e1, property ) == Unique, "Property isn't Unique" );
 
-
     n3->removeDynamicProperty ( property );
+    e3->removeDynamicProperty ( property );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( n1, property ) == None, "Property isn't None" );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( e1, property ) == None, "Property isn't Unique" );
 
