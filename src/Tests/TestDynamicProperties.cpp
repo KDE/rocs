@@ -19,20 +19,20 @@
 
 #include "TestDynamicProperties.h"
 
-#include "DataType.h"
+#include "DataStructure.h"
 #include "Data.h"
 #include "Pointer.h"
 #include "DynamicPropertiesList.h"
 
 #include <QTest>
-#include <DSPluginManager.h>
-
+#include <DataStructurePluginManager.h>
+#include <Document.h>
 
 // void TestDynamicProperties::initTestCase()
 // {
 //   foreach(RRocs::DSPluginManager::New()->listOfDS()
 // }
-#include <graphDocument.h>
+
 
 
 void TestDynamicProperties:: cleanup() {
@@ -41,9 +41,9 @@ void TestDynamicProperties:: cleanup() {
 
 
 void TestDynamicProperties::addNodeDynamicProperty() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    Datum *n = g->addDatum ( "Node" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+    Data *n = g->addData ( "Node" );
     QByteArray property = "newProperty";
     n->addDynamicProperty ( property, QVariant ( 0 ) );
     QVERIFY2 ( n->property ( property ) != QVariant::Invalid, "Property not added." );
@@ -52,10 +52,10 @@ void TestDynamicProperties::addNodeDynamicProperty() {
 }
 
 void TestDynamicProperties::addEdgeDynamicProperty() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    g->setDirected ( true );
-    Datum *n = g->addDatum ( "Node" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+//     g->setDirected ( true );
+    Data *n = g->addData ( "Node" );
     Pointer *e = g->addPointer ( n, n );
     QVERIFY2 (e != 0, "Pointer not created!");
     QByteArray property = "newProperty";
@@ -69,8 +69,8 @@ void TestDynamicProperties::addEdgeDynamicProperty() {
 
 void TestDynamicProperties::addGraphDynamicProperty() {
     DynamicPropertiesList::New()->clear();
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
     QByteArray property = "newProperty";
     g->addDynamicProperty ( property );
     QVERIFY2 ( g->property ( property ) != QVariant::Invalid, "Property not added." );
@@ -79,13 +79,13 @@ void TestDynamicProperties::addGraphDynamicProperty() {
 }
 
 void TestDynamicProperties::addToAllNodes() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    Datum *n = g->addDatum ( "Node1" );
-    Datum *n2 = g->addDatum ( "Node2" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+    Data *n = g->addData ( "Node1" );
+    Data *n2 = g->addData ( "Node2" );
 //     g.add
     QByteArray property = "newProperty";
-    g->addDatumsDynamicProperty ( property, QVariant ( 0 ) );
+    g->addDataDynamicProperty ( property, QVariant ( 0 ) );
     QVERIFY2 ( n->property ( property ) != QVariant::Invalid, "Property not added to Node1." );
     QVERIFY2 ( n2->property ( property ) != QVariant::Invalid, "Property not added to Node2." );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( n, property ) == Global, "Property isn't Global. (by node 1)" );
@@ -94,12 +94,12 @@ void TestDynamicProperties::addToAllNodes() {
 
 }
 void TestDynamicProperties::addToAllEdges() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
 //     g->setDirected ( true );
-    Datum *n1 = g->addDatum ( "Node" );
-    Datum *n2 = g->addDatum ( "Node" );
-    Datum *n3 = g->addDatum ( "Node" );
+    Data *n1 = g->addData ( "Node" );
+    Data *n2 = g->addData ( "Node" );
+    Data *n3 = g->addData ( "Node" );
     Pointer *e = g->addPointer ( n1,n2 );
     Pointer *e2 = g->addPointer ( n2,n3 );
     Pointer *e3 = g->addPointer ( n1,n3 );
@@ -113,10 +113,10 @@ void TestDynamicProperties::addToAllEdges() {
 }
 
 void TestDynamicProperties::removeNodeDynamicProperty() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    g->setDirected ( true );
-    Datum *n = g->addDatum ( "Node" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+//     g->setDirected ( true );
+    Data *n = g->addData ( "Node" );
     QByteArray property = "newProperty";
     n->addDynamicProperty ( property, QVariant ( 0 ) );
     QVERIFY2 ( n->property ( property ) != QVariant::Invalid, "Property not added." );
@@ -128,10 +128,10 @@ void TestDynamicProperties::removeNodeDynamicProperty() {
 }
 
 void TestDynamicProperties::removeEdgeDynamicProperty() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    g->setDirected ( true );
-    Datum *n = g->addDatum ( "Node" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+//     g->setDirected ( true );
+    Data *n = g->addData ( "Node" );
     Pointer *e = g->addPointer ( n, n );
     QByteArray property = "newProperty";
     e->addDynamicProperty ( property, QVariant ( 0 ) );
@@ -143,9 +143,9 @@ void TestDynamicProperties::removeEdgeDynamicProperty() {
 
 }
 void TestDynamicProperties::removeGraphDynamicProperty() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    g->setDirected ( true );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+//     g->setDirected ( true );
     QByteArray property = "newProperty";
     g->addDynamicProperty ( property, QVariant ( 0 ) );
     QVERIFY2 ( g->property ( property ) != QVariant::Invalid, "Property not added." );
@@ -157,26 +157,26 @@ void TestDynamicProperties::removeGraphDynamicProperty() {
 }
 
 void TestDynamicProperties::removeToAllNodes() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    Datum *n = g->addDatum ( "Node 1" );
-    Datum *n2 = g->addDatum ( "Node 2" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+    Data *n = g->addData ( "Node 1" );
+    Data *n2 = g->addData ( "Node 2" );
 //     g.add
     QByteArray property = "newProperty";
-    g->addDatumsDynamicProperty ( property, QVariant ( 0 ) );
+    g->addDataDynamicProperty ( property, QVariant ( 0 ) );
     QVERIFY2 ( n->property ( property ) != QVariant::Invalid, "Property not added." );
     QVERIFY2 ( n2->property ( property ) != QVariant::Invalid, "Property not added." );
-    g->removeDatumsDynamicProperty ( property );
+    g->addDataDynamicProperty ( property );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( n, property ) == None, "Property isn't None." );
     QVERIFY2 ( n->property ( property ) == QVariant::Invalid, "Property not removed from node 1." );
     QVERIFY2 ( n2->property ( property ) == QVariant::Invalid, "Property not removedfrom node 1." );
 
 }
 void TestDynamicProperties::removeToAllEdges() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    g->setDirected ( true );
-    Datum *n = g->addDatum ( "Node" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+//     g->setDirected ( true );
+    Data *n = g->addData ( "Node" );
     Pointer *e = g->addPointer ( n,n );
     Pointer *e2 = g->addPointer ( n,n );
     QByteArray property = "newProperty";
@@ -192,18 +192,18 @@ void TestDynamicProperties::removeToAllEdges() {
 }
 
 void TestDynamicProperties::MultipleProperties() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    Datum *n1 = g->addDatum ( "Node 1" );
-    Datum *n2 = g->addDatum ( "Node 2" );
-    Datum *n3 = g->addDatum ( "Node 3" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+    Data *n1 = g->addData ( "Node 1" );
+    Data *n2 = g->addData ( "Node 2" );
+    Data *n3 = g->addData ( "Node 3" );
     Pointer *e1 = g->addPointer ( n3, n1 );
     g->addPointer ( n2, n1 );
     g->addPointer ( n3, n2 );
 
     QByteArray property = "newProperty";
-    g->addDatumsDynamicProperty ( property, QVariant ( 0 ) );
-    g->addDatumsDynamicProperty ( property, QVariant ( 0 ) );
+    g->addDataDynamicProperty ( property, QVariant ( 0 ) );
+    g->addDataDynamicProperty ( property, QVariant ( 0 ) );
 
     QVERIFY2 ( DynamicPropertiesList::New()->type ( n1, property ) == Global, "Property isn't global" );
     QVERIFY2 ( DynamicPropertiesList::New()->type ( e1, property ) == Global, "Property isn't global" );
@@ -224,14 +224,14 @@ void TestDynamicProperties::MultipleProperties() {
 }
 
 void TestDynamicProperties::changeNames() {
-    DataTypeDocument d("unnamed");
-    DataType *g = d.addDataType("A graph");
-    Datum *n1 = g->addDatum ( "Node 1" );
-    Datum *n2 = g->addDatum ( "Node 2" );
+    Document d("unnamed");
+    DataStructure *g = d.addDataStructure("A graph");
+    Data *n1 = g->addData ( "Node 1" );
+    Data *n2 = g->addData ( "Node 2" );
     Pointer *e  = g->addPointer ( n1, n2 );
 
     QString property = "newProperty";
-    g->addDatumsDynamicProperty ( property, QVariant ( 0 ) );
+    g->addDataDynamicProperty ( property, QVariant ( 0 ) );
     g->addPointersDynamicProperty ( property, QVariant ( 0 ) );
     g->addDynamicProperty ( property, QVariant ( 0 ) );
 
