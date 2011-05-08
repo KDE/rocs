@@ -53,6 +53,8 @@ private:
     void zoomOut();
     void zoomIn();
     void zoomReset();
+    
+    qreal _zoomFactor;
 };
 
 #endif // ZOOM_H

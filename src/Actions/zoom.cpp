@@ -20,6 +20,8 @@
 
 #include "zoom.h"
 #include <GraphScene.h>
+#include <DocumentManager.h>
+#include <Document.h>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QDebug>
@@ -31,6 +33,7 @@ ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 : AbstractAction(scene, parent)
 ,m_view(scene->views().at(0))
 ,m_zoomRectItem(0)
+,_zoomFactor(1)
 {
     setText(i18n ( "Zoom" ));
     setToolTip ( i18n ( "Zoom the canvas by the wheel, or by dragging." ) );
@@ -103,11 +106,18 @@ bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 
 bool ZoomAction::executeWellEvent(QGraphicsSceneWheelEvent* wEvent)
 {
-    if (wEvent->delta() > 0){
-        m_view->scale(0.8, 0.8);
-        m_view->centerOn(wEvent->scenePos());
-    }else{
+    if (wEvent->delta() > 0){ // zoom out
+        if (
+            m_view->width()/_zoomFactor*1.25 < DocumentManager::self()->activeDocument()->width()
+            || m_view->height()/_zoomFactor*1.25 < DocumentManager::self()->activeDocument()->height()
+        ) {
+            m_view->scale(0.8, 0.8);
+            _zoomFactor *= 0.8;
+            m_view->centerOn(wEvent->scenePos());
+        }
+    }else{ // zoom in
         m_view->scale(1.25, 1.25);
+        _zoomFactor *= 1.25;
         m_view->centerOn(wEvent->scenePos());
     }
     wEvent->accept();
