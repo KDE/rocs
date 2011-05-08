@@ -37,20 +37,20 @@ class DocumentPrivate;
 class ROCSLIB_EXPORT Document : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(    qreal xLeft READ xLeft WRITE setXLeft)
-    Q_PROPERTY(    qreal xRight READ xRight WRITE setXRight)
-    Q_PROPERTY(    qreal yTop READ yTop WRITE setYTop)
-    Q_PROPERTY(    qreal yBottom READ yBottom WRITE setYBottom)
+    Q_PROPERTY(    qreal left READ left WRITE setLeft)
+    Q_PROPERTY(    qreal right READ right WRITE setRight)
+    Q_PROPERTY(    qreal top READ top WRITE setTop)
+    Q_PROPERTY(    qreal bottom READ bottom WRITE setBottom)
 
 public:
     enum Type {Simple = 0, Oriented};
     enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
     Document(   const QString& name,
-                qreal xLeft=-200,
-                qreal xRight=200,
-                qreal yTop=-200,
-                qreal yBottom=200,
+                qreal left=-200,
+                qreal right=200,
+                qreal top=-200,
+                qreal bottom=200,
                 QObject *parent = 0
             );
     Document(const Document& gd);
@@ -89,15 +89,15 @@ public slots:
     DataStructure *activeDataStructure() const ;
     void setActiveDataStructure(DataStructure *g);
 
-    void setXLeft(qreal xLeftValue);
-    void setXRight(qreal xRightValue);
-    void setYTop(qreal yTopValue);
-    void setYBottom(qreal yButtomValue);
+    void setLeft(qreal leftValue);
+    void setRight(qreal rightValue);
+    void setTop(qreal topValue);
+    void setBottom(qreal buttomValue);
 
-    qreal xLeft() const;
-    qreal yTop() const;
-    qreal xRight() const;
-    qreal yBottom() const;
+    qreal left() const;
+    qreal top() const;
+    qreal right() const;
+    qreal bottom() const;
 
     qreal height() const;
     qreal width() const;

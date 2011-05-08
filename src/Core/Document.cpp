@@ -42,10 +42,10 @@ public:
     QString _buf;
     QString _lastSavedDocumentPath;
     QString _name;
-    qreal _xLeft;
-    qreal _xRight;
-    qreal _yTop;
-    qreal _yBottom;
+    qreal _left;
+    qreal _right;
+    qreal _top;
+    qreal _bottom;
     qreal _minWidth;
     qreal _minHeight;
     bool _modified;
@@ -58,14 +58,14 @@ public:
 
 };
 
-Document::Document(const QString& name, qreal xLeft, qreal xRight, qreal yTop, qreal yBottom, QObject *parent)
+Document::Document(const QString& name, qreal left, qreal right, qreal top, qreal bottom, QObject *parent)
         : QObject(parent), d( new DocumentPrivate())
 {
     d->_name = name;
-    d->_xLeft = xLeft;
-    d->_xRight = xRight;
-    d->_yTop = yTop;
-    d->_yBottom = yBottom;
+    d->_left = left;
+    d->_right = right;
+    d->_top = top;
+    d->_bottom = bottom;
     d->_minWidth = 0;
     d->_minHeight = 0;
     d->_saved = false;
@@ -84,10 +84,10 @@ Document::Document(const Document& gd)
 {
 //     QObject::setParent(gd.parent());
     d->_name = gd.name();
-    d->_xLeft = gd.xLeft();
-    d->_xRight = gd.xRight();
-    d->_yTop = gd.yTop();
-    d->_yBottom = gd.yBottom();
+    d->_left = gd.left();
+    d->_right = gd.right();
+    d->_top = gd.top();
+    d->_bottom = gd.bottom();
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_engineBackend = new QtScriptBackend(this);
 
@@ -130,65 +130,65 @@ QString Document::name() const {
 
 // gets the wheight of the drawable area
 qreal Document::height() const {
-    return d->_yBottom - d->_yTop;
+    return d->_bottom - d->_top;
 }
 
 // sets the width of the drawable area
 qreal Document::width() const {
-    return d->_xRight - d->_xLeft;
+    return d->_right - d->_left;
 }
 
-qreal Document::xLeft() const {
-    return d->_xLeft;
+qreal Document::left() const {
+    return d->_left;
 }
 
-qreal Document::xRight() const {
-    return d->_xRight;
+qreal Document::right() const {
+    return d->_right;
 }
 
-qreal Document::yTop() const {
-    return d->_yTop;
+qreal Document::top() const {
+    return d->_top;
 }
 
-qreal Document::yBottom() const {
-    return d->_yBottom;
+qreal Document::bottom() const {
+    return d->_bottom;
 }
 
-void Document::setXLeft(qreal xLeftValue)
+void Document::setLeft(qreal leftValue)
 {
-    d->_xLeft = xLeftValue;
+    d->_left = leftValue;
     //d->_modified = true;
 }
 
-void Document::setXRight(qreal xRightValue)
+void Document::setRight(qreal rightValue)
 {
-    d->_xRight = xRightValue;
+    d->_right = rightValue;
     //d->_modified = true;
 }
 
-void Document::setYTop(qreal yTopValue)
+void Document::setTop(qreal topValue)
 {
-    d->_yTop = yTopValue;
+    d->_top = topValue;
     //d->_modified = true;
 }
 
-void Document::setYBottom(qreal yBottomValue)
+void Document::setBottom(qreal bottomValue)
 {
-    d->_yBottom = yBottomValue;
+    d->_bottom = bottomValue;
     //d->_modified = true;
 }
 
 QRectF Document::size()
 {
-    return QRectF(d->_xLeft, d->_yTop,d->_xRight - d->_xLeft, d->_yBottom - d->_yTop );
+    return QRectF(d->_left, d->_top,d->_right - d->_left, d->_bottom - d->_top );
 }
 
 bool Document::isPointAtDocument(qreal x, qreal y)  const {
 
-    if (x < d->_xLeft)      return false;
-    if (x > d->_xRight)     return false;
-    if (y < d->_yTop)       return false;
-    if (y > d->_yBottom)    return false;
+    if (x < d->_left)      return false;
+    if (x > d->_right)     return false;
+    if (y < d->_top)       return false;
+    if (y > d->_bottom)    return false;
 
     return true;
 }
@@ -197,18 +197,18 @@ void Document::changeMinimalSize(qreal width, qreal height) {
     if (width>=0) d->_minWidth = width;
     if (height>=0) d->_minHeight = height;
 
-    if (width > d->_xRight - d->_xLeft) {
-        d->_xLeft -= (d->_xRight- d->_xLeft - width)/2;
-        d->_xRight += (d->_xRight- d->_xLeft - width)/2;
+    if (width > d->_right - d->_left) {
+        d->_left -= (d->_right- d->_left - width)/2;
+        d->_right += (d->_right- d->_left - width)/2;
         emit resized();
     }
     else {
         resizeDocumentBorder(BorderLeft);
     }
 
-    if (height > d->_yBottom - d->_yTop) {
-        d->_yTop -= (d->_yBottom - d->_yTop - height)/2;
-        d->_yBottom += (d->_yBottom - d->_yTop - height)/2;
+    if (height > d->_bottom - d->_top) {
+        d->_top -= (d->_bottom - d->_top - height)/2;
+        d->_bottom += (d->_bottom - d->_top - height)/2;
         emit resized();
     }
     else {
@@ -221,20 +221,20 @@ void Document::resizeDocumentIncrease()
     int elements = dataStructures().size();
     for (int i = 0; i < elements; i++) {
         foreach( Data* n,  dataStructures().at(i)->dataList() ){
-            if (n->x() < d->_xLeft+GraphScene::kBORDER) {
-                setXLeft(d->_xLeft-GraphScene::kBORDER);
+            if (n->x() < d->_left+GraphScene::kBORDER) {
+                setLeft(d->_left-GraphScene::kBORDER);
                 emit resized();
             }
-            if (n->x() > d->_xRight-GraphScene::kBORDER) {
-                setXRight(d->_xRight+GraphScene::kBORDER);
+            if (n->x() > d->_right-GraphScene::kBORDER) {
+                setRight(d->_right+GraphScene::kBORDER);
                 emit resized();
             }
-            if (n->y() < d->_yTop+GraphScene::kBORDER) {
-                setYTop(d->_yTop-GraphScene::kBORDER);
+            if (n->y() < d->_top+GraphScene::kBORDER) {
+                setTop(d->_top-GraphScene::kBORDER);
                 emit resized();
             }
-            if (n->y() > d->_yBottom-GraphScene::kBORDER) {
-                setYBottom(d->_yBottom+GraphScene::kBORDER);
+            if (n->y() > d->_bottom-GraphScene::kBORDER) {
+                setBottom(d->_bottom+GraphScene::kBORDER);
                 emit resized();
             }
         }
@@ -250,19 +250,19 @@ void Document::resizeDocumentBorder(Document::Border orientation) {
     foreach( Data* n,  dataStructures().at(i)->dataList() ){
         switch (orientation) {
         case BorderLeft: {
-            if (n!=0 && n->x() < d->_xLeft+GraphScene::kBORDER*2) empty=false;
+            if (n!=0 && n->x() < d->_left+GraphScene::kBORDER*2) empty=false;
             break;
         }
         case BorderRight: {
-            if (n!=0 && n->x() > d->_xRight-GraphScene::kBORDER*2) empty=false;
+            if (n!=0 && n->x() > d->_right-GraphScene::kBORDER*2) empty=false;
             break;
         }
         case BorderTop: {
-            if (n!=0 && n->y() < d->_yTop+GraphScene::kBORDER*2) empty=false;
+            if (n!=0 && n->y() < d->_top+GraphScene::kBORDER*2) empty=false;
             break;
         }
         case BorderBottom: {
-            if (n!=0 && n->y() > d->_yBottom-GraphScene::kBORDER*2) empty=false;
+            if (n!=0 && n->y() > d->_bottom-GraphScene::kBORDER*2) empty=false;
             break;
         }
         }
@@ -273,30 +273,30 @@ void Document::resizeDocumentBorder(Document::Border orientation) {
     if (empty==true) {
         switch (orientation) {
         case BorderLeft: {
-            if (d->_xRight-d->_xLeft < GraphScene::kBORDER*4)
+            if (d->_right-d->_left < GraphScene::kBORDER*4)
                 return;
-            setXLeft(d->_xLeft+GraphScene::kBORDER);
+            setLeft(d->_left+GraphScene::kBORDER);
             emit resized();
             break;
         }
         case BorderRight: {
-            if (d->_xRight-d->_xLeft < GraphScene::kBORDER*4)
+            if (d->_right-d->_left < GraphScene::kBORDER*4)
                 return;
-            setXRight(d->_xRight-GraphScene::kBORDER);
+            setRight(d->_right-GraphScene::kBORDER);
             emit resized();
             break;
         }
         case BorderTop: {
-            if (d->_yBottom-d->_yTop < GraphScene::kBORDER*4)
+            if (d->_bottom-d->_top < GraphScene::kBORDER*4)
                 return;
-            setYTop(d->_yTop+GraphScene::kBORDER);
+            setTop(d->_top+GraphScene::kBORDER);
             emit resized();
             break;
         }
         case BorderBottom: {
-            if (d->_yBottom-d->_yTop < GraphScene::kBORDER*4)
+            if (d->_bottom-d->_top < GraphScene::kBORDER*4)
                 return;
-            setYBottom(d->_yBottom-GraphScene::kBORDER);
+            setBottom(d->_bottom-GraphScene::kBORDER);
             emit resized();
             break;
         }

@@ -62,12 +62,12 @@ void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
 
     Document *gd = DocumentManager::self()->activeDocument();
     if (gd->width()<_minWidth) {
-        gd->setXLeft(gd->xLeft()-(_minWidth-gd->width())/2);
-        gd->setXRight(gd->xRight()+(_minWidth-gd->width())/2);
+        gd->setLeft(gd->left()-(_minWidth-gd->width())/2);
+        gd->setRight(gd->right()+(_minWidth-gd->width())/2);
     }
     if (gd->height()<_minHeight) {
-        gd->setYTop(gd->yTop()-(_minHeight-gd->height())/2);
-        gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
+        gd->setTop(gd->top()-(_minHeight-gd->height())/2);
+        gd->setBottom(gd->bottom()+(_minHeight-gd->height())/2);
     }
     gd->changeMinimalSize(minWidth, minHeight);
     resize();
@@ -125,12 +125,12 @@ void GraphScene::setActiveDocument() {
      // adapt document to scene if too small
     _graphDocument = gd;
     if (gd->width()<_minWidth) {
-        gd->setXLeft(gd->xLeft()-(_minWidth-gd->width())/2);
-        gd->setXRight(gd->xRight()+(_minWidth-gd->width())/2);
+        gd->setLeft(gd->left()-(_minWidth-gd->width())/2);
+        gd->setRight(gd->right()+(_minWidth-gd->width())/2);
     }
     if (gd->height()<_minHeight) {
-        gd->setYTop(gd->yTop()-(_minHeight-gd->height())/2);
-        gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
+        gd->setTop(gd->top()-(_minHeight-gd->height())/2);
+        gd->setBottom(gd->bottom()+(_minHeight-gd->height())/2);
     }
 
     resize();
@@ -265,10 +265,10 @@ void GraphScene::updateDocument() {
 }
 
 void GraphScene::resize() {
-    QRectF newSize(_graphDocument->xLeft(), // x
-                   _graphDocument->yTop(),  // y
-                   _graphDocument->xRight()-_graphDocument->xLeft(), // width
-                   _graphDocument->yBottom()-_graphDocument->yTop()); // height
+    QRectF newSize(_graphDocument->left(), // x
+                   _graphDocument->top(),  // y
+                   _graphDocument->right()-_graphDocument->left(), // width
+                   _graphDocument->bottom()-_graphDocument->top()); // height
 
     setSceneRect( newSize );
     emit resized();

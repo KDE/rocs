@@ -79,17 +79,17 @@ bool MoveDataAction::executeMove(QPointF pos) {
     
     if (!DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
         Document *d = DocumentManager::self()->activeDocument();
-        if (pos.x() < d->xLeft()) {
-            pos.setX(d->xLeft());
+        if (pos.x() < d->left()) {
+            pos.setX(d->left());
         }
-        if (pos.x() > d->xRight()) {
-            pos.setX(d->xRight());
+        if (pos.x() > d->right()) {
+            pos.setX(d->right());
         }
-        if (pos.y() < d->yTop()) {
-            pos.setY(d->yTop());
+        if (pos.y() < d->top()) {
+            pos.setY(d->top());
         }
-        if (pos.y() > d->yBottom()) {
-            pos.setY(d->yBottom());
+        if (pos.y() > d->bottom()) {
+            pos.setY(d->bottom());
         }
     }
     

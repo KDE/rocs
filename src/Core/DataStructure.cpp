@@ -253,10 +253,10 @@ void DataStructure::remove(Data *n) {
     bool right = false;
 
     if (doc!=0) {
-        if (n->x()<doc->xLeft()+2*GraphScene::kBORDER)      left = true;
-        if (n->x()>doc->xRight()-2*GraphScene::kBORDER)     right = true;
-        if (n->y()<doc->yTop()+2*GraphScene::kBORDER)       top = true;
-        if (n->y()>doc->yBottom()-2*GraphScene::kBORDER)    bottom = true;
+        if (n->x()<doc->left()+2*GraphScene::kBORDER)      left = true;
+        if (n->x()>doc->right()-2*GraphScene::kBORDER)     right = true;
+        if (n->y()<doc->top()+2*GraphScene::kBORDER)       top = true;
+        if (n->y()>doc->bottom()-2*GraphScene::kBORDER)    bottom = true;
     }
 
     // proceed delete
@@ -295,8 +295,8 @@ Group* DataStructure::addGroup(const QString& name) {
 void DataStructure::updateRelativeCenter() {
    if (parent() != 0){
         Document *gd = qobject_cast<Document*>(parent());
-        d->_relativeCenter.setY((gd->yBottom()+gd->yTop())/2);
-        d->_relativeCenter.setX((gd->xRight()+gd->xLeft())/2);
+        d->_relativeCenter.setY((gd->bottom()+gd->top())/2);
+        d->_relativeCenter.setX((gd->right()+gd->left())/2);
     }else{
         d->_relativeCenter.setY(0);
         d->_relativeCenter.setX(0);

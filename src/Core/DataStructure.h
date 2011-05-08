@@ -97,6 +97,9 @@ public  slots:
     void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void removeDynamicProperty(const QString& property);
 
+    /**
+     * add dynamic property to all data elements of data structure
+     */
     void addDataDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void addPointersDynamicProperty(const QString& property, QVariant value = QVariant(0));
 
