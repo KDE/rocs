@@ -74,7 +74,7 @@ bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
         }
         case QEvent::GraphicsSceneWheel: {
             QGraphicsSceneWheelEvent *e = static_cast<QGraphicsSceneWheelEvent*>(event);
-            return executeWellEvent(e);
+            return executeWheelEvent(e);
         }
         default:  return false;
     }
@@ -87,4 +87,4 @@ bool AbstractAction::executeRelease(QPointF pos) {Q_UNUSED(pos); return false; }
 bool AbstractAction::executeDoubleClick(QPointF pos){ Q_UNUSED(pos); return false; }
 bool AbstractAction::executeKeyPress(QKeyEvent *keyEvent){ Q_UNUSED(keyEvent);   return false; }
 bool AbstractAction::executeKeyRelease(QKeyEvent *keyEvent){ Q_UNUSED(keyEvent); return false; }
-bool AbstractAction::executeWellEvent(QGraphicsSceneWheelEvent* wEvent){Q_UNUSED(wEvent); return false;}
+bool AbstractAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent){Q_UNUSED(wEvent); return false;}

@@ -40,7 +40,7 @@ public:
     bool executeRelease(QPointF pos);
     bool executeDoubleClick(QPointF pos);
     bool executeKeyRelease(QKeyEvent* keyEvent);
-    bool executeWellEvent(QGraphicsSceneWheelEvent *wEvent);    
+    bool executeWheelEvent(QGraphicsSceneWheelEvent *wEvent);    
 private:
     QRectF m_zoomArea;
     qreal m_currentZoomFactor;

@@ -112,7 +112,7 @@ bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
     return true;
 }
 
-bool ZoomAction::executeWellEvent(QGraphicsSceneWheelEvent* wEvent)
+bool ZoomAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent)
 {
     if (wEvent->delta() > 0){ // zoom out
         if (
