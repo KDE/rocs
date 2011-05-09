@@ -26,7 +26,6 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
 
-
 class QGridLayout;
 class Document;
 
@@ -47,21 +46,18 @@ class GenerateGraphWidget :
         Point point;
     };
 
-    typedef boost::adjacency_list<
-        boost::listS,
-        boost::listS,
-        boost::bidirectionalS,
-        VertexProperties
-    > BoostGraph;
+    typedef boost::adjacency_list<boost::listS,boost::listS,boost::bidirectionalS,VertexProperties>
+        BoostGraph;
 
     typedef boost::property_map<BoostGraph, Point VertexProperties::*>::type PositionMap;
-
+    
     // used for graph selection
     enum GraphType {
         MESH,
         STAR,
         CIRCLE,
-        RANDOM
+        RANDOM,
+        ER_RANDOM
     };
 
     public:
@@ -84,7 +80,21 @@ class GenerateGraphWidget :
          * \param   bool selfEdges if true self edges are generated, otherwise not
          */
         void generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges);
+        
+        /**
+         * generates graph with one center an the specified number of satellite nodes
+         * \param   int numberNodes   number of satellite nodes
+         */
         void generateStar(int numberNodes);
+
+        /**
+         * generates a Erdös-Renyi random graph given by following parameters
+         * \param   int nodes   number of nodes
+         * \param   int edgeProbability   between each two nodes add edge with this probability
+         * \param   int seed    random seed for random number generator
+         * \param   bool selfEdges if true self edges are generated, otherwise not
+         */
+        void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges);
 
         Document* graphDoc_;
         static const double PI_ = 3.14159265358979323846;

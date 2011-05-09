@@ -76,9 +76,6 @@ public:
     /*! remove this pointer from the graph */
     void remove();
 
-    /*! forces emitting a signal that will update this pointer on screen */
-    void emitChangedSignal();
-
     /*! returns the datastructure that owns this pointer. */
     DataStructure *dataStructure() const;
 
@@ -180,6 +177,8 @@ signals:
     void removed();
     /*! emmited when a datum connected to this pointer changes, or when this pointer changes. */
     void changed();
+    /** emmited when the position of one of points changes */
+    void posChanged();
 };
 
 #endif

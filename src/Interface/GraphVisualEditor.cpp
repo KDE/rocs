@@ -49,9 +49,19 @@ GraphVisualEditor::GraphVisualEditor( MainWindow *parent) :
     setupWidgets();
 }
 
+GraphVisualEditor* GraphVisualEditor::_self = 0;
+
+GraphVisualEditor* GraphVisualEditor::self() {
+    if (!_self){
+        _self = new GraphVisualEditor();
+    }
+    return _self;
+}
+
 void GraphVisualEditor::resizeEvent (QResizeEvent  *event )
 {
     Q_UNUSED(event);
+
     _scene->updateMinSize(size().width(), size().height());
 }
 

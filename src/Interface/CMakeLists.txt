@@ -19,6 +19,7 @@ set(librocsui_SRCS edgepropertieswidget.cpp
 	TabWidget.cpp
 	CodeEditor.cpp
 	NodePropertiesWidget.cpp
+	ConfigurateDefaultProperties.cpp
 )
 
 kde4_add_ui_files(

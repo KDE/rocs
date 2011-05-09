@@ -47,7 +47,9 @@ private:
     QPainterPath createCurves();
     QPainterPath createLoop(QPointF pos) const;
     QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const ;
-
+    
+public slots:
+    void updatePathLayout();
 };
 
 #endif

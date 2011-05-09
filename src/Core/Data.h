@@ -45,7 +45,7 @@ class  ROCSLIB_EXPORT Data : public QObject {
     Q_PROPERTY(QString iconPackage READ iconPackage WRITE setIconPackage)
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
     Q_PROPERTY(bool useColor READ useColor WRITE setUseColor)
-    
+
 
 public:
     enum ListType{In, Out, Self};
@@ -60,8 +60,6 @@ public:
     void removePointer(Pointer *e, PointerList &list);
     void remove();
 
-    void startChange();
-    void endChange();
     bool showName();
     bool showValue();
 
@@ -82,7 +80,6 @@ public:
     const QString& iconPackage() const;
     bool showName() const;
     bool showValue() const;
-    bool changing() const;
     bool useColor() const;
     DataItem *item() const;
 
@@ -113,13 +110,29 @@ public  slots:
     void setShowName(bool b);
     void setShowValue(bool b);
     void setUseColor(bool b = true);
+    void setValue(const QString& v);
 
+    QScriptValue adj_data();
+    QScriptValue adj_pointers();
+    QScriptValue input_pointers();
+    QScriptValue output_pointers();
+    QScriptValue loop_pointers();
+    QScriptValue connected_pointers(Data *n);
 private:
     DataPrivate *d;
 
 signals:
     void removed();
-    void changed();
+    void posChanged(const QPointF p);
+    void widthChanged(double w);
+    void colorChanged(const QColor& c);
+    void nameChanged(const QString& name);
+    void valueChanged(const QVariant& v);
+    void iconChanged(const QString& i);
+    void iconPackageChanged(const QString& i);
+    void nameVisibilityChanged(bool b);
+    void valueVisibilityChanged(bool b);
+    void useColorChanged(bool b);
 };
 
 class DataPrivate{
@@ -136,11 +149,10 @@ public:
 
     bool _begin;
     bool _end;
-    bool _changing;
     bool _showName;
     bool _showValue;
     bool _useColor;
-    
+
     DataStructure *_dataStructure;
     DataItem *_item;
 
@@ -152,7 +164,7 @@ public:
     QVariant _value;
     QScriptValue _scriptvalue;
     QScriptEngine *_engine;
-    
+
     void empty(PointerList &list) ;
 private:
   Data *q;
@@ -178,7 +190,6 @@ inline PointerList& Data::self_pointers() const { return d->_self_pointers; }
 
 inline bool Data::showName() const { return d->_showName; }
 inline bool Data::showValue() const { return d->_showValue; }
-inline bool Data::changing() const { return d->_changing; }
 inline bool Data::useColor() const { return d->_useColor; }
 
 #endif

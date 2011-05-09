@@ -25,8 +25,7 @@
 #include "DataStructure.h"
 
 Rocs::GraphStructure::GraphStructure ( Document* parent ) :
-    DataStructure ( parent ),
-    _directed(false)
+    DataStructure ( parent )
 {
 
 }
@@ -51,7 +50,7 @@ Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): Da
         newPointer->setColor(e->color());
         newPointer->setValue(e->value());
     }
-    setDirected(false);
+    setGraphType(UNDIRECTED);
 }
 
 
@@ -96,17 +95,22 @@ QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
     return n->scriptValue();
 }
 
-void Rocs::GraphStructure::setDirected(bool directed)
+void Rocs::GraphStructure::setGraphType(int type)
 {
-    _directed = directed;
+    _type = static_cast<GRAPH_TYPE>(type);
     foreach(Pointer* pointer, pointers()) {
-       pointer->emitChangedSignal();
+       QMetaObject::invokeMethod(pointer, "changed");
     }
+}
+
+Rocs::GraphStructure::GRAPH_TYPE  Rocs::GraphStructure::graphType()
+{
+    return _type;
 }
 
 bool Rocs::GraphStructure::directed()
 {
-    return _directed;
+    return (_type==DIRECTED||_type==MULTIGRAPH);
 }
 
 Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
@@ -116,7 +120,7 @@ Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
         return 0;
     }
 
-    if (!directed()) {
+    if ( _type==UNDIRECTED ) {
         // self-edges
         if (from == to) {
             return 0;
@@ -124,6 +128,16 @@ Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
         // back-edges
         if ( from->pointers(to).size() >= 1 ) {
             return 0;
+        }
+    }
+    
+    if ( _type==DIRECTED ) {
+        // do not add double edges
+        PointerList list = from->out_pointers();
+        foreach (Pointer *tmp, list) {
+            if (tmp->to() == to) {
+                return 0;
+            }
         }
     }
 

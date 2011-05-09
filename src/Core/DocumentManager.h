@@ -47,6 +47,9 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
 
     /** returns the document list */
     QList< Document* > documentList() const ;
+    
+    int viewStyleDataNode();
+    int viewStyleDataEdge();
 
   public slots:
     void changeDocument(Document*);
@@ -65,7 +68,6 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
     void convertToDataStructure();
 
     void loadDocument(QString fileName = QString());
-
 
   signals:
     /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/

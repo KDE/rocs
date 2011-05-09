@@ -174,6 +174,8 @@ void GraphScene::releaseDocument(){
 QGraphicsItem *GraphScene::createData(Data *n) {
     DataItem *nItem = (DataItem*)(DataStructurePluginManager::self()->dataItem(n));
     addItem(nItem);
+    addItem(nItem->name());
+    addItem(nItem->value());
     return nItem;
 }
 
@@ -268,7 +270,7 @@ void GraphScene::resize() {
                    _graphDocument->yTop(),  // y
                    _graphDocument->xRight()-_graphDocument->xLeft(), // width
                    _graphDocument->yBottom()-_graphDocument->yTop()); // height
- //   _whiteboard->setRect( newSize );
+
     setSceneRect( newSize );
     emit resized();
 }

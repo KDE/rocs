@@ -57,7 +57,8 @@ Pointer::Pointer(DataStructure *parent, Data *from, Data *to) :
     d->color    = d->dataStructure->pointerDefaultColor();
 
     connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
-    connect(from, SIGNAL(changed()), this, SIGNAL(changed()));
+    connect(from, SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
+
 
     if ( from == to ) {
         from -> addSelfPointer(this);
@@ -65,7 +66,7 @@ Pointer::Pointer(DataStructure *parent, Data *from, Data *to) :
     else {
         from -> addOutPointer(this);
         to -> addInPointer(this);
-        connect(to, SIGNAL(changed()), this, SIGNAL(changed()));
+        connect(to, SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
     }
 
     d->relativeIndex  = d->to->pointers(d->from).size();
@@ -100,9 +101,6 @@ int Pointer::relativeIndex() const{
     return d->relativeIndex;
 }
 
-void Pointer::emitChangedSignal(){
-    emit changed();
-}
 
 DataStructure *Pointer::dataStructure() const{
     return d->dataStructure;
@@ -167,8 +165,10 @@ void Pointer::setName(const QString& name){
 }
 
 void Pointer::setColor(const QColor& color){
+  if (d->color != color){
     d->color = color;
     emit changed();
+  }
 }
 
 const QColor& Pointer::color() const{

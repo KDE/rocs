@@ -13,7 +13,8 @@ include_directories(
 )
 
 
-# Preparando a biblioteca padrão.
+# Prepare library.
+
 
 find_library(ANALITZA_LIBS analitza)
 
@@ -32,13 +33,14 @@ set( rocs_core_SRCS
     Core/analitzabackend.cpp
     Core/abstractrunbackend.cpp 
 
+    Plugins/PluginManager.cpp
+    Plugins/ToolsPluginInterface.cpp
+    Plugins/FilePluginInterface.cpp
+
+    GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
     GraphicsItem/DataStructureItem.cpp
     GraphicsItem/PointerItem.cpp
-
-    Plugins/FilePluginInterface.cpp
-    Plugins/PluginManager.cpp
-    Plugins/ToolsPluginInterface.cpp
 )
 
 kde4_add_library( rocslib  SHARED ${rocs_core_SRCS} )
@@ -68,6 +70,7 @@ set( rocslib_LIB_HDRS
 
   GraphicsItem/DataItem.h
   GraphicsItem/PointerItem.h
+  GraphicsItem/GraphicsLayout.h
 )
 
 set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
@@ -87,23 +90,24 @@ set ( rocs_actions_SRCS
   Actions/DeleteAction.cpp
   Actions/MoveData.cpp
   Actions/Select.cpp
-  Actions/zoom.cpp 
+  Actions/zoom.cpp
 )
 
 set( rocs_interface_SRCS
-  Interface/ImporterExporterManager.cpp
-  Interface/IncludeManagerSettings.cpp
-  Interface/MainWindow.cpp
-  Interface/OpenedFilesWidget.cpp
-  Interface/GraphScene.cpp
-  Interface/Separator.cpp
-  Interface/GraphVisualEditor.cpp
-  Interface/GraphPropertiesWidget.cpp
-  Interface/GraphLayers.cpp
-  Interface/TabWidget.cpp
-  Interface/CodeEditor.cpp
-  Interface/NodePropertiesWidget.cpp
-  Interface/edgepropertieswidget.cpp
+    Interface/ImporterExporterManager.cpp
+    Interface/IncludeManagerSettings.cpp
+    Interface/MainWindow.cpp
+    Interface/OpenedFilesWidget.cpp
+    Interface/GraphScene.cpp
+    Interface/Separator.cpp
+    Interface/GraphVisualEditor.cpp
+    Interface/GraphPropertiesWidget.cpp
+    Interface/GraphLayers.cpp
+    Interface/TabWidget.cpp
+    Interface/CodeEditor.cpp
+    Interface/NodePropertiesWidget.cpp
+    Interface/edgepropertieswidget.cpp
+    Interface/ConfigureDefaultProperties.cpp
 )
 
 set( rocs_models_SRCS
@@ -117,7 +121,12 @@ set( rocs_models_SRCS
 #   UndoRedo/URAddEdge.cpp
 # )
 
+<<<<<<< HEAD
 set ( rocs_script_SRC  
+=======
+set ( rocs_script_SRC
+        Interface/PossibleIncludes.cpp
+>>>>>>> master
         Scripts/IncludeManager.cpp
 )
 
@@ -136,6 +145,7 @@ kde4_add_ui_files(
 	Interface/NodePropertiesWidget.ui
 	Interface/EdgePropertiesWidget.ui
 	Interface/AddMultiNodes.ui
+	Interface/ConfigureDefaultProperties.ui
 )
 
 set (QT_USE_QTSCRIPT true)
@@ -185,6 +195,6 @@ add_subdirectory(Scripts)
 #Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
     enable_testing()
-#    add_subdirectory(Tests)
+    add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)
 

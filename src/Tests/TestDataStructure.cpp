@@ -22,73 +22,70 @@
 
 #include "TestDataStructure.h"
 #include <QtTest>
-#include <DSPluginManager.h>
-#include <graphDocument.h>
-#include <DataType.h>
-#include <DSPluginInterface.h>
-
-using namespace Rocs;
+#include <DataStructurePluginManager.h>
+#include <Document.h>
+#include <DataStructure.h>
+#include <DataStructurePluginInterface.h>
 
 void TestDataStructure::inittestcase()
 {
-  if (DSPluginManager::instance()->pluginsList().count() == 0){
+  if (DataStructurePluginManager::self()->pluginsList().count() == 0){
     QFAIL("No plugin of DS, no way to continue!");
   }
 }
 
 void TestDataStructure::create(){
-    DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(1)->name());
-    DataTypeDocument doc("teste");
-    DataType * graph = doc.addDataType();
-    QCOMPARE (graph->metaObject()->className(), "Rocs::GraphStructure");
+    DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(1)->name());
+    Document doc("TestDocument");
+    DataStructure * ds = doc.addDataStructure();
+    QCOMPARE (ds->metaObject()->className(), "Rocs::DataStructure");
 }
 
 
 
 
 void TestDataStructure::changeAndCreate(){
-  DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(0)->name());
-  DataTypeDocument doc("teste");
-  DataType * graph = doc.addDataType();
-  QCOMPARE (graph->metaObject()->className(), "Rocs::ListStructure");
-
+    DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(0)->name());
+    Document doc("TestDocument");
+    DataStructure * ds = doc.addDataStructure();
+    QCOMPARE (ds->metaObject()->className(), "Rocs::ListStructure");
 }
 
 void TestDataStructure::convert()
 {
-    DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(1)->name());
-    DataTypeDocument doc("teste");
-    QSignalSpy spy(DSPluginManager::instance(), SIGNAL(changingDS(QString)));
+    DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(1)->name());
+    Document doc("TestDocument");
+    QSignalSpy spy(DataStructurePluginManager::self(), SIGNAL(changingDS(QString)));
 //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
-    DataType * graph = doc.addDataType("Graph1");
-    graph->addDatum("node1");
-    graph->addDatum("node2");
+    DataStructure * graph = doc.addDataStructure("Graph1");
+    graph->addData("node1");
+    graph->addData("node2");
     graph->addPointer("node1", "node2");
-    graph = doc.addDataType("Graph2");
-    graph->setDirected(true);
-    graph->addDatum("node1");
-    graph->addDatum("node2");
+    graph = doc.addDataStructure("Graph2");
+//     graph->setDirected(true);
+    graph->addData("node1");
+    graph->addData("node2");
     graph->addPointer("node1", "node2");
 
     //Change plugin.
-    DSPluginManager::instance()->changeActiveDS(DSPluginManager::instance()->pluginsList().at(0)->name());
-    QVERIFY (DSPluginManager::instance()->pluginsList().at(0)->name() == DSPluginManager::instance()->actualPlugin());
-    doc.convertToDS(DSPluginManager::instance()->actualPlugin());
-    DataTypeDocument * newDoc = &doc;
+    DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(0)->name());
+//     QVERIFY (DataStructurePluginManager::self()->pluginsList().at(0)->name() == DataStructurePluginManager::self()->actualPlugin());
+//     doc.convertToDS(DataStructurePluginManager::self()->actualPlugin());
+    Document * newDoc = &doc;
 
-    QCOMPARE(newDoc->count(), 2);
-    QVERIFY(newDoc->at(0)->directed());
-    QVERIFY(newDoc->at(1)->directed());
-    QCOMPARE(newDoc->at(0)->metaObject()->className(), "Rocs::ListStructure");
-    QCOMPARE(newDoc->at(1)->metaObject()->className(), "Rocs::ListStructure");
+    QCOMPARE(newDoc->dataStructures().count(), 2);
+//     QVERIFY(newDoc->at(0)->directed());
+//     QVERIFY(newDoc->at(1)->directed());
+    QCOMPARE(newDoc->dataStructures().at(0)->metaObject()->className(), "Rocs::ListStructure");
+    QCOMPARE(newDoc->dataStructures().at(1)->metaObject()->className(), "Rocs::ListStructure");
 
-    graph =  newDoc->at(0);
-    QCOMPARE (graph->data().count(), 3);
+    graph =  newDoc->dataStructures().at(0);
+    QCOMPARE (graph->dataList().count(), 3);
     QCOMPARE (graph->pointers().count(), 1);
 
-    graph =  newDoc->at(1);
-    QCOMPARE (graph->data().count(), 3);
+    graph =  newDoc->dataStructures().at(1);
+    QCOMPARE (graph->dataList().count(), 3);
     QCOMPARE (graph->pointers().count(), 1);
 
 }

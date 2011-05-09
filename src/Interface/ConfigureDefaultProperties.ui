@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigureDefaultProperties</class>
+ <widget class="QWidget" name="ConfigureDefaultProperties">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>320</width>
+    <height>240</height>
+   </rect>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>281</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Default Information Display</string>
+   </property>
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>231</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetNoConstraint</enum>
+     </property>
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelNodePosition">
+       <property name="text">
+        <string>Node Information</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelEdgePosition">
+       <property name="text">
+        <string>Edge Information</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="comboDefaultEdge">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>centered</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>below</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>above</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="comboDefaultNode">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maxVisibleItems">
+        <number>10</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>centered</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>below</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>above</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>281</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Execution Options</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>comboDefaultNode</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>ConfigureDefaultProperties</receiver>
+   <slot>setDisplayPositionNode(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>403</x>
+     <y>63</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboDefaultEdge</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>ConfigureDefaultProperties</receiver>
+   <slot>setDisplayPositionEdge(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>244</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>419</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>setDisplayPositionNode(int)</slot>
+  <slot>setDisplayPositionEdge(int)</slot>
+ </slots>
+</ui>

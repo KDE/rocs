@@ -19,11 +19,15 @@ if(${CMAKE_BUILD_TYPE} MATCHES coverage)
 endif()
 
 find_package(Boost REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
+macro_log_feature(Boost_FOUND "Boost C++ Libraries" "Required to build Rocs" "http://www.boost.org" TRUE "" "")
 
-add_subdirectory(doc)
-add_subdirectory(src)
-add_subdirectory(graphics)
+if (Boost_FOUND)
+   include_directories(${Boost_INCLUDE_DIRS})
+
+   add_subdirectory(doc)
+   add_subdirectory(src)
+   add_subdirectory(graphics)
+endif (Boost_FOUND)
 
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     macro_display_feature_log()

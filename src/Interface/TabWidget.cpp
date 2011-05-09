@@ -38,11 +38,7 @@ TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(paren
 }
 
 void TabWidget::createLayout() {
-    if (m_layout != 0) {
-        delete m_layout;
-        m_layout = 0;
-    }
-
+    delete m_layout;
     if ((m_orientation == TabOnLeft) || (m_orientation == TabOnRight) ) {
         m_layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
     }

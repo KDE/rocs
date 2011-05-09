@@ -27,6 +27,7 @@
 #include "Pointer.h"
 #include "DataStructure.h"
 #include "math_constants.h"
+#include "GraphicsLayout.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -55,12 +56,14 @@ PointerItem::PointerItem( Pointer *pointer, QGraphicsItem *parent)
 
 PointerItem::~PointerItem() {
   //dynamic_cast<GraphScene*>(scene())->removeGItem(this);
-  qDebug() << "Oriented Edge Removed";
 }
 
 void PointerItem::connectSignals() {
-    connect (_pointer, SIGNAL(changed()), this, SLOT(updatePos()));
+    connect (_pointer, SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect (_pointer, SIGNAL(removed()), this, SLOT(remove()));
+    connect (_pointer, SIGNAL(changed()), this, SLOT(updateAttributes()));
+    
+    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
 }
 
 void PointerItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {

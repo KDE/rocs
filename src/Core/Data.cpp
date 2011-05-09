@@ -39,9 +39,8 @@ DataPrivate::DataPrivate(Data* classPtr, DataStructure *parent)
 ,_width(0.3)
 ,_begin(true)
 ,_end(true)
-,_changing(false)
-,_showName(false)
-,_showValue(false)
+,_showName(parent->dataNameVisibility())
+,_showValue(parent->dataValueVisibility())
 ,_useColor(false)
 ,_dataStructure(parent)
 ,_color(_dataStructure->dataDefaultColor())
@@ -79,24 +78,32 @@ bool Data::showValue() {
 }
 
 void Data::setShowName(bool b) {
-    d->_showName = b;
-    emit changed();
+    if (d->_showName != b){
+        d->_showName = b;
+        emit nameVisibilityChanged(b);
+    }
 }
 
 void Data::setShowValue(bool b) {
-    d->_showValue = b;
-    emit changed();
+    if (d->_showValue != b){
+        d->_showValue = b;
+        emit valueVisibilityChanged(b);
+    }
 }
 
 void Data::setIcon(const QString& s){
-    d->_icon = s;
-    emit changed();
+    if (d->_icon != s){
+        d->_icon = s;
+        emit iconChanged(s);
+    }
 }
 
 
 void Data::setUseColor(bool b){
-    d->_useColor = b;
-    emit changed();
+    if (d->_useColor != b){
+        d->_useColor = b;
+        emit useColorChanged(b);
+    }
 }
 
 void Data::setIconPackage(const QString& s){
@@ -188,62 +195,62 @@ void Data::remove() {
 }
 
 void Data::setX(int x) {
+  if (d->_x != x){
     d->_x = x;
-    if (! d->_changing) {
-    emit changed();
-    }
+    emit posChanged(QPointF(d->_x, d->_y));
+  }
 }
 
 void Data::setY(int y) {
+  if(d->_y != y){
     d->_y  = y;
-    if (! d->_changing) {
-    emit changed();
-    }
+    emit posChanged(QPointF(d->_x, d->_y));
+  }
 }
 
 void Data::setWidth(double w) {
-    d->_width = (qreal)w;
-    if (! d->_changing) {
-        emit changed();
+    if (d->_width != w){
+        d->_width = (qreal)w;
+        emit widthChanged(w);
     }
 }
 
 void Data::setPos(qreal x, qreal y) {
+  if (d->_x != x || d->_y != y){
     d->_x = x;
     d->_y = y;
-    if (! d->_changing) {
-    emit changed();
-    }
+    emit posChanged(QPointF(d->_x, d->_y));
+  }
 }
 
 void Data::setColor(const QVariant& s) {
-    d->_color = s.value<QColor>();
-    if (! d->_changing) {
-    emit changed();
+    QColor c = s.value<QColor>();
+    if (d->_color != c){
+        d->_color = c;
+        emit colorChanged(c);
     }
 }
 
 void Data::setName(const QString& s) {
-    d->_name = s;
-    if (! d->_changing) {
-    emit changed();
+    if (d->_name != s){
+        d->_name = s;
+        emit nameChanged(s);
     }
 }
 
 void  Data::setValue(const QVariant& s) {
-    d->_value = s;
-    if (! d->_changing) {
-      emit changed();
+    if (d->_value != s){
+        d->_value = s;
+        emit valueChanged(s);
     }
 }
 
-void Data::startChange() {
-    d->_changing = true;
-}
-
-void Data::endChange() {
-    d->_changing = false;
-    emit changed();
+void  Data::setValue(const QString& s) {
+    QVariant v(s);
+    if (d->_value != v){
+        d->_value = v;
+        emit valueChanged(v);
+    }
 }
 
 void Data::addDynamicProperty(QString property, QVariant value){
@@ -270,6 +277,40 @@ void Data::setEngine(    QScriptEngine *engine ) {
     d->_scriptvalue = engine->newQObject(this);
 }
 
+
+QScriptValue Data::adj_data() {
+    QList<Data*> list = adjacent_data();
+    QScriptValue array = d->_engine->newArray();
+    foreach(Data* n, list) {
+        array.property("push").call(array, QScriptValueList() << n->scriptValue());
+    }
+    return array;
+}
+
+QScriptValue Data::adj_pointers() {
+    PointerList list = adjacent_pointers();
+    return createScriptArray(list);
+}
+
+QScriptValue Data::input_pointers() {
+    PointerList list = in_pointers();
+    return createScriptArray(list);
+}
+
+QScriptValue Data::output_pointers() {
+    PointerList list = out_pointers();
+    return createScriptArray(list);
+}
+
+QScriptValue Data::loop_pointers() {
+    PointerList list = self_pointers();
+    return createScriptArray(list);
+}
+
+QScriptValue Data::connected_pointers(Data *n) {
+    PointerList list = pointers(n);
+    return createScriptArray(list);
+}
 
 QScriptValue Data::createScriptArray(PointerList list) {
     QScriptValue array = d->_engine->newArray();

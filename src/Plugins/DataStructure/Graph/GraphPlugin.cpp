@@ -26,7 +26,7 @@
 #include <QSpinBox>
 #include <QLabel>
 #include <knuminput.h>
-#include <QCheckBox>
+#include <QComboBox>
 #include "EdgeItem.h"
 #include "Data.h"
 #include <KMessageBox>
@@ -111,11 +111,16 @@ QLayout*  GraphPlugin::pointerExtraProperties ( Pointer* arg1, QWidget* arg2 ) c
 
 QLayout*  GraphPlugin::dataStructureExtraProperties ( DataStructure* graph, QWidget* parentWidget ) const
 {
-  QGridLayout *lay = new QGridLayout(parentWidget);
-    QCheckBox * _graphOriented = new QCheckBox (i18n("Graph is oriented"), parentWidget);
-
-    lay->addWidget(_graphOriented, 0,0);
-    connect( _graphOriented, SIGNAL(toggled(bool)), graph, SLOT(setDirected(bool)));
+    QGridLayout *lay = new QGridLayout(parentWidget);
+    QLabel * _graphTypeText = new QLabel(i18n("Graph Type:"));
+    QComboBox * _graphTypeCombo = new QComboBox(parentWidget);
+    _graphTypeCombo->insertItem(GraphStructure::UNDIRECTED, i18n("Undirected Graph"));
+    _graphTypeCombo->insertItem(GraphStructure::DIRECTED,   i18n("Directed Graph"));
+    _graphTypeCombo->insertItem(GraphStructure::MULTIGRAPH, i18n("Multigraph"));
+   
+    lay->addWidget(_graphTypeText, 0,0);
+    lay->addWidget(_graphTypeCombo, 0,1);
+    connect( _graphTypeCombo, SIGNAL(currentIndexChanged(int)), graph, SLOT(setGraphType(int)));
     return lay;
 }
 

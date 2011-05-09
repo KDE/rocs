@@ -19,11 +19,18 @@ DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ):
 }
 
 void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
-    if (_data == n->data())
+    if (_data == n->data()){
+      show(); activateWindow(); raise();
       return;
+    }
 
     if (_data){
-        disconnect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
+        _data->disconnect(this);
+        _showName->disconnect(_data);
+        _showValue->disconnect(_data);
+        _disableColor->disconnect(_data);
+        _name->disconnect(_data);
+        _value->disconnect(_data);
     }
 
     _data = n->data();
@@ -39,37 +46,17 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     delete extraItens->layout();
     extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
-    
-    connect(_data, SIGNAL(changed()), this, SLOT(reflectAttributes()));
    
-    connect( _showName,     SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
-    connect( _showValue,    SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
-    connect( _disableColor, SIGNAL(toggled(bool)),         this, SLOT( applyChanges() ));
-    connect( _name,         SIGNAL(textEdited(QString)),   this, SLOT( applyChanges() ));
-    connect( _value,        SIGNAL(textEdited(QString)),   this, SLOT( applyChanges() ));
+    connect( _showName,     SIGNAL(toggled(bool)),         _data, SLOT(setShowName(bool)));
+    connect( _showValue,    SIGNAL(toggled(bool)),         _data, SLOT(setShowValue(bool)));
+    connect( _disableColor, SIGNAL(toggled(bool)),         _data, SLOT(setUseColor(bool)));
+    connect( _name,         SIGNAL(textEdited(QString)),   _data, SLOT(setName(QString)));
+    connect( _value,        SIGNAL(textEdited(QString)),   _data, SLOT(setValue(QString)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data);
 
     _propertiesTable->setModel(model);
-}
-
-void DataPropertiesWidget::applyChanges(){
-    if (_data->name() != _name->text())
-        _data->setName(_name->text());
-    
-    if (_data->value() != _value->text())
-        _data->setValue(_value->text());
-    
-    if(_data->showName() != _showName->isChecked())
-        _data->setShowName(_showName->isChecked());
-    
-    if (_data->showValue() != _showValue->isChecked())
-        _data->setShowValue(_showValue->isChecked());
-    
-    if (_data->useColor() ==_disableColor->isChecked()){
-        _data->setUseColor(!_data->useColor());
-    }
 }
 
 void DataPropertiesWidget::reflectAttributes(){
@@ -141,11 +128,6 @@ void DataPropertiesWidget::on__images_activated(const QString& s)
 
 void DataPropertiesWidget::on__color_activated(const QColor& c) {
   QColor color(c);
-  if (_disableColor->isChecked()){
-      color.setAlphaF(0.0);
-  }else{
-      color.setAlphaF(1.0);
-  }
   _data->setColor(color);
 }
 

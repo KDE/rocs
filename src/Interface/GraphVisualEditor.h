@@ -36,10 +36,8 @@ class QGraphicsView;
 class GraphVisualEditor : public QWidget {
     Q_OBJECT
 public:
-    /*! Default Constructor
-    \param parent the owner of this widget. */
-    GraphVisualEditor(MainWindow *parent = 0);
-    
+    static GraphVisualEditor* self();
+
     /**
      * re-implementation of resize event to also setup the graph scene
      */
@@ -55,7 +53,7 @@ public:
     from the screen and releases it from the evil hands of GraphEditWidget.*/
     void releaseDocument();
 
-public slots:
+public slots:    
     /*! set the current selected Graph.
     	\param graph the new active graph.
     	*/
@@ -65,6 +63,10 @@ public slots:
     QList<DataItem*> selectedNodes() const;
 
 private:
+    /*! Default Constructor
+    \param parent the owner of this widget. */
+    GraphVisualEditor(MainWindow *parent = 0);
+
     void setupWidgets();
 
     /*! as the name says, draw a graph on scene.
@@ -72,6 +74,8 @@ private:
     void drawGraphOnScene( DataStructure *g );
 
     QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
+
+    static GraphVisualEditor* _self;
 
     GraphScene *_scene;
     Document *_document;

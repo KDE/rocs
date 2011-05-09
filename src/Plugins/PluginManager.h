@@ -17,8 +17,8 @@
 
 */
 
-#ifndef TOOLSPLUGINMANAGER_H
-#define TOOLSPLUGINMANAGER_H
+#ifndef PLUGINMANAGER_H
+#define PLUGINMANAGER_H
 #include <QList>
 
 #include "ToolsPluginInterface.h"
@@ -69,4 +69,4 @@ class ROCSLIB_EXPORT PluginManager: public QObject
   
 };
 
-#endif // TOOLSPLUGINMANAGER_H
+#endif // PLUGINMANAGER_H

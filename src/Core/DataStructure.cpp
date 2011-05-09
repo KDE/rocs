@@ -123,19 +123,36 @@ Data* DataStructure::addData(Data *data){
     }
     emit dataCreated( data );
     emit changed();
-    qDebug() << "add data";
-    connect ( data, SIGNAL(changed()), this, SIGNAL(changed()));
+    
+    Data *n = data;
+    connect(n, SIGNAL(removed()),                    this, SIGNAL(changed()));
+    connect(n, SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
+    connect(n, SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
+    connect(n, SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
+    connect(n, SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
+    connect(n, SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
+    connect(n, SIGNAL(nameVisibilityChanged(bool)),  this, SIGNAL(changed()));
+    connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SIGNAL(changed()));
+    connect(n, SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
     return data;
 }
 
 QList<Data*> DataStructure::addDataList(QList<Data*> dataList){
-    Data* data;
-    foreach (data, dataList) {
-        d->_data.append( data );
-        emit dataCreated( data );
-
-        connect ( data, SIGNAL(changed()), this, SIGNAL(changed()));
+    Data* n;
+    foreach (n, dataList) {
+        d->_data.append( n );
+        emit dataCreated( n );
+        connect(n, SIGNAL(removed()),                    this, SIGNAL(changed()));
+        connect(n, SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
+        connect(n, SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
+        connect(n, SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
+        connect(n, SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
+        connect(n, SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
+        connect(n, SIGNAL(nameVisibilityChanged(bool)),  this, SIGNAL(changed()));
+        connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SIGNAL(changed()));
+        connect(n, SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
     }
+    emit changed();
     return dataList;
 }
 

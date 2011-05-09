@@ -46,11 +46,16 @@ EdgeItem::EdgeItem( Pointer *edge, QGraphicsItem *parent)
 {
     _loop = (pointer()->from() == pointer()->to());
     setPath(createCurves());
+    
+    connect (edge, SIGNAL(changed()), this, SLOT(updatePathLayout()));
 }
 
 EdgeItem::~EdgeItem() {
 //  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
-  kDebug() << "Oriented Edge Removed";
+}
+
+void EdgeItem::updatePathLayout() {
+    setPath(createCurves());
 }
 
 QPolygonF EdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const {

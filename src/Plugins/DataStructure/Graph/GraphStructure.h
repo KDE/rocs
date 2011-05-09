@@ -23,9 +23,19 @@
 #include "DataStructure.h"
 
 namespace Rocs{
-class GraphStructure : public DataStructure {
+class ROCSLIB_EXPORT GraphStructure : public DataStructure {
   Q_OBJECT
   public:
+    typedef enum {
+        UNDIRECTED,
+        DIRECTED,
+        MULTIGRAPH
+    } GRAPH_TYPE;
+  
+    //to avoid hide some methods
+    using DataStructure::remove;
+    using DataStructure::addPointer;
+    using DataStructure::addData;
 
     GraphStructure ( Document* parent = 0 );
 
@@ -41,11 +51,12 @@ class GraphStructure : public DataStructure {
     QScriptValue add_node(const QString& name);
     QScriptValue add_edge(Data* from, Data* to);
     QScriptValue node_byname(const QString& name);
-    void setDirected(bool directed);
     bool directed();
+    GRAPH_TYPE graphType();
+    void setGraphType(int type);
 
   private:
-    bool _directed;
+    GraphStructure::GRAPH_TYPE _type;
 };
 }
 #endif // GRAPHSTRUCTURE_H

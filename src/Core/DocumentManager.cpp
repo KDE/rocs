@@ -148,3 +148,4 @@ void DocumentManager::loadDocument ( QString name ){
    doc->setModified(false);
    addDocument(doc);
 }
+

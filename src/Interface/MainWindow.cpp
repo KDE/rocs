@@ -1,3 +1,4 @@
+
 /* This file is part of Rocs,
      Copyright (C) 2008 by:
      Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -34,7 +35,7 @@
 #include <klocalizedstring.h>
 #include <KStatusBar>
 #include <KConfigDialog>
-
+#include <KTar>
 #include <kfiledialog.h>
 #include "TabWidget.h"
 
@@ -63,6 +64,7 @@
 #include "DeleteAction.h"
 #include "AlignAction.h"
 #include <KNS3/DownloadDialog>
+#include <knewstuff3/uploaddialog.h>
 
 // backends
 #include "QtScriptBackend.h"
@@ -78,6 +80,7 @@
 #include <QMutexLocker>
 #include <QScriptEngineDebugger>
 #include "IncludeManagerSettings.h"
+#include "ConfigureDefaultProperties.h"
 #include <IncludeManager.h>
 #include "ImporterExporterManager.h"
 #include <DataStructurePluginInterface.h>
@@ -86,6 +89,8 @@
 #include <QCloseEvent>
 #include <KMessageBox>
 #include "zoom.h"
+#include "../GraphicsItem/GraphicsLayout.h"
+#include "PossibleIncludes.h"
 
 MainWindow::MainWindow() :  KXmlGuiWindow()
 {
@@ -114,6 +119,8 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
      */
      DocumentManager::self()->loadDocument();
 
+    GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
+    GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
 }
 
 MainWindow::~MainWindow()
@@ -158,9 +165,45 @@ void MainWindow::downloadNewExamples(){
     dialog.exec();
 }
 
+void MainWindow::uploadScript()
+{
+
+    KNS3::UploadDialog dialog(this);
+
+//First select the opened doc.
+    KUrl str = _codeEditor->document()->url();
+    if (str.isEmpty()) {
+        //... then try to open
+        str = KFileDialog::getOpenFileName ( QString(), i18n ( "*.js|Script files" ),
+                                             this, i18n ( "Rocs Script Files" ) );
+        if (str.isEmpty())
+            return;
+    }
+//Compress the file to a temp file (How it can be made in KDE way ? )
+    QString local = QDir::temp().absoluteFilePath(str.fileName());
+    local.chop(3);
+    local.append(".tar.gz");
+
+//create compressed file and set to dialog.
+    KTar tar = KTar(local);
+    tar.open(QIODevice::WriteOnly);
+    tar.addLocalFile(str.toLocalFile(), str.fileName());
+    tar.close();
+    dialog.setUploadFile(local);
+
+    dialog.setUploadName(_codeEditor->document()->documentName());
+    dialog.setDescription("Added your description here.");
+
+    dialog.exec();
+
+//Remove compressed file..
+    QDir::temp().remove(local);
+}
+
+
 QWidget* MainWindow::setupRightPanel()
 {
-    _graphVisualEditor = new GraphVisualEditor ( this );
+    _graphVisualEditor = GraphVisualEditor::self();
 
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
@@ -227,6 +270,7 @@ void MainWindow::setupActions()
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        Qt::Key_S, SLOT(saveGraph()),   this);
     createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     Qt::Key_W, SLOT(saveGraphAs()), this);
     createAction("",                 i18n("Download Examples"), "download", Qt::Key_D, SLOT(downloadNewExamples()),  this);
+    createAction("",                 i18n("Upload script"),     "upload",   Qt::Key_U, SLOT(uploadScript()),  this);
 
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", Qt::Key_P, SLOT(showPossibleIncludes()), this);
 
@@ -259,14 +303,23 @@ void MainWindow::showSettings()
      KConfigDialog dialog(this,  "settings", Settings::self());
 
      IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
+     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties( &dialog );
 
      dialog.addPage(set,"Include Manager",QString(),"Include Manager",true);
-     connect(set, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
-//      connect(set, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
+     dialog.addPage(defaultProperties,"Default Settings",QString(),"Default Settings",true);
+
+
+     connect(set,               SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
+     connect(defaultProperties, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
 
      connect(&dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
      connect(&dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
      connect(&dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
+
+     connect(&dialog, SIGNAL(applyClicked()),   defaultProperties, SLOT(saveConfig()));
+     connect(&dialog, SIGNAL(okClicked()),      defaultProperties, SLOT(saveConfig()));
+     connect(&dialog, SIGNAL(defaultClicked()), defaultProperties, SLOT(readConfig()));
+
 
      dialog.exec();
 }
@@ -461,7 +514,8 @@ void MainWindow::exportFile()
 
 void MainWindow::showPossibleIncludes()
 {
-   QDialog dialog(this);
+   PossibleIncludes dialog(this);
+
    dialog.exec();
 }
 

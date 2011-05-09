@@ -22,7 +22,7 @@
 #include <QObject>
 #include <QVariant>
 
-class DataTypeDocument;
+class Document;
 
 class GraphTests : public QObject {
     Q_OBJECT
@@ -47,7 +47,7 @@ private slots:
     void testQtScript();
 
 private:
-    DataTypeDocument *_graphDocument;
+    Document *_graphDocument;
 //     QVariantList Graphs;
 };
 
