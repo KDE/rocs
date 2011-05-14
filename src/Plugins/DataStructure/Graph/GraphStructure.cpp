@@ -23,11 +23,12 @@
 #include "Pointer.h"
 #include "Document.h"
 #include "DataStructure.h"
+#include <KMessageBox>
 
 Rocs::GraphStructure::GraphStructure ( Document* parent ) :
     DataStructure ( parent )
 {
-
+    setGraphType(UNDIRECTED);
 }
 
 Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): DataStructure(other, parent)
@@ -97,7 +98,108 @@ QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
 
 void Rocs::GraphStructure::setGraphType(int type)
 {
+    if (_type == type)
+        return;
+
+    if ((_type  == MULTIGRAPH && type != MULTIGRAPH )
+    || (_type == DIRECTED && type == UNDIRECTED)){
+        if (KMessageBox::warningContinueCancel(0,i18n("This action will probably remove some edges. do you want to continue?")) != KMessageBox::Continue){
+            return;
+        }
+    }
+    
     _type = static_cast<GRAPH_TYPE>(type);
+    switch(_type){
+    case UNDIRECTED :
+        foreach(Data *data, dataList()){
+            // Clear the 'self pointers', undirecetd graphs doesn't have self nodes.
+            foreach(Pointer* p, data->self_pointers()){
+               p->remove();
+            }
+            data->self_pointers().clear();
+            
+            // Clear the rest. there should be only one edge between two nodes.
+            foreach(Data *data2, dataList()){
+                if (data == data2){
+                    continue;
+                }
+                
+                bool foundOne = false;
+                foreach (Pointer *tmp, data->out_pointers()) {
+                    if (tmp->to() == data2) {
+                        if (!foundOne){
+                            foundOne = true;
+                        }else{
+                            data->out_pointers().removeOne(tmp);
+                            data2->in_pointers().removeOne(tmp);
+                            tmp->remove();
+                        }
+                    }
+                }
+                
+                foreach(Pointer *tmp, data->in_pointers()) {
+                    if (tmp->from() == data2) {
+                        if (!foundOne){
+                            foundOne = true;
+                        }else{
+                            data->in_pointers().removeOne(tmp);
+                            data2->out_pointers().removeOne(tmp);
+                            tmp->remove();
+                        }
+                    }
+                }
+            }
+        } break;
+    case DIRECTED :
+       foreach(Data *data, dataList()){
+            // Just One self pointer allowed.
+            bool foundSelfEdge = false;
+            foreach(Pointer* p, data->self_pointers()){
+               if (!foundSelfEdge){
+                   foundSelfEdge = true;
+               }else{
+                   data->self_pointers().removeOne(p);
+                   p->remove();
+               }
+            }
+            
+            // Just one going in, and one going out.
+            foreach(Data *data2, dataList()){
+                if (data == data2){
+                    continue;
+                }
+                
+                bool foundOneOut = false;
+                foreach (Pointer *tmp, data->out_pointers()) {
+                    if (tmp->to() == data2) {
+                        if (!foundOneOut){
+                            foundOneOut = true;
+                        }else{
+                            data->out_pointers().removeOne(tmp);
+                            data2->in_pointers().removeOne(tmp);
+                            tmp->remove();
+                        }
+                    }
+                }
+                
+                bool foundOneIn = false;
+                foreach(Pointer *tmp, data->in_pointers()) {
+                    if (tmp->from() == data2) {
+                        if (!foundOneIn){
+                            foundOneIn = true;
+                        }else{
+                            data->in_pointers().removeOne(tmp);
+                            data2->out_pointers().removeOne(tmp);
+                            tmp->remove();
+                        }
+                    }
+                }
+            }
+        } break;
+    default: break;
+        
+    }
+    
     foreach(Pointer* pointer, pointers()) {
        QMetaObject::invokeMethod(pointer, "changed");
     }
@@ -114,30 +216,25 @@ bool Rocs::GraphStructure::directed()
 }
 
 Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
-    if (from->dataStructure()->readOnly()) return 0;
-
-    if ( from == 0 || to == 0 ) {
-        return 0;
-    }
-
     if ( _type==UNDIRECTED ) {
-        // self-edges
-        if (from == to) {
+        if (from == to) {  // self-edges
             return 0;
         }
-        // back-edges
-        if ( from->pointers(to).size() >= 1 ) {
+
+        if ( from->pointers(to).size() >= 1 ) { // back-edges
             return 0;
         }
     }
     
-    if ( _type==DIRECTED ) {
-        // do not add double edges
+    if ( _type==DIRECTED ) {   // do not add double edges
         PointerList list = from->out_pointers();
         foreach (Pointer *tmp, list) {
             if (tmp->to() == to) {
                 return 0;
             }
+        }
+        if (from->self_pointers().size() >= 1){
+            return 0;
         }
     }
 

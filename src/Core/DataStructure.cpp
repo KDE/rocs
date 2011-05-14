@@ -191,12 +191,15 @@ Data* DataStructure::addData(QString name, QPointF pos){
 }
 
 Pointer* DataStructure::addPointer(Data *from, Data *to) {
-    if (d->_readOnly) return 0;
+    if (d->_readOnly)                   // If the data structure is in read only mode, no new stuff should be added.
+        return 0;
 
-    if ( from == 0 || to == 0 ) {
+    if ( !from || !to ) {               // one of the two required datas are null. do not add a pointer between a valid and a null datas.
         return 0;
     }
-    if ((d->_data.indexOf(from) == -1) || (d->_data.indexOf(to) == -1)) {
+    
+    if ( (d->_data.indexOf(from) == -1)  // the user is trying to connect datas from different graphs.
+      || (d->_data.indexOf(to) == -1)) {
         return 0;
     }
 
