@@ -24,6 +24,7 @@
 #include "ui_EdgePropertiesWidget.h"
 #include <QString>
 #include <QColor>
+#include <QPointer>
 
 class Pointer;
 class MainWindow;
@@ -45,7 +46,7 @@ public slots:
     void setWidth(double v);
     
 private:
-    Pointer *_pointer;
+    QPointer<Pointer> _pointer;
 };
 
 #endif // EDGEPROPERTIESWIDGET_H

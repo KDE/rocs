@@ -30,9 +30,13 @@ PointerPropertiesWidget::PointerPropertiesWidget(MainWindow *parent): QWidget(pa
 }
 
 void PointerPropertiesWidget::setPointer(Pointer *e, QPointF pos) {
-    if (_pointer == e)
-      return;
-
+    if (_pointer == e){
+      show();
+      activateWindow();
+      raise();
+      return;     
+    }
+    
     if (_pointer){
       disconnectPointer();
     }
@@ -63,7 +67,7 @@ void PointerPropertiesWidget::setPointer(Pointer *e, QPointF pos) {
 void PointerPropertiesWidget::setWidth(double v)
 {
     _pointer->setWidth( static_cast<qreal>(v));
-}
+}																																																	
 
 void PointerPropertiesWidget::reflectAttributes(){
   if (_extraProperties->layout()){
