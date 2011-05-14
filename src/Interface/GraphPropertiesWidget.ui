@@ -75,7 +75,7 @@
         <string>Delete the current active graph: delete all nodes and edges</string>
        </property>
        <property name="text">
-        <string extracomment="Do not translate, X is for delete">x</string>
+        <string comment="@action:button, stands for 'delete'" extracomment="Do not translate, X is for delete">x</string>
        </property>
       </widget>
      </item>
