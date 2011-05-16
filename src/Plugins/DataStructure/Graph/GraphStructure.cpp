@@ -23,6 +23,7 @@
 #include "Pointer.h"
 #include "Document.h"
 #include "DataStructure.h"
+#include "GraphNode.h"
 
 Rocs::GraphStructure::GraphStructure ( Document* parent ) :
     DataStructure ( parent )
@@ -130,7 +131,7 @@ Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
             return 0;
         }
     }
-    
+
     if ( _type==DIRECTED ) {
         // do not add double edges
         PointerList list = from->out_pointers();
@@ -142,4 +143,13 @@ Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
     }
 
     return DataStructure::addPointer(from, to);
+}
+
+Data* Rocs::GraphStructure::addData(QString name)
+{
+    if (readOnly()) return 0;
+
+    GraphNode *n = new GraphNode(this);
+    n->setName(name);
+    return addData(n);
 }
