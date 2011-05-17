@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Rocs/FilePlugin
 X-KDE-Derived=KPluginInfo
 Comment=Rocs File Plugin
+Comment[bs]=Rocs Datoteka dodatka
 Comment[ca]=Endollable de fitxer del Rocs
 Comment[ca@valencia]=Endollable de fitxer del Rocs
 Comment[cs]=Zásuvný modul souborů Rocs
