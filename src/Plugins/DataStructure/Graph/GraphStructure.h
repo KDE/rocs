@@ -31,7 +31,7 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
         DIRECTED,
         MULTIGRAPH
     } GRAPH_TYPE;
-  
+
     //to avoid hide some methods
     using DataStructure::remove;
     using DataStructure::addPointer;
@@ -44,6 +44,7 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
     virtual ~GraphStructure();
 
     Pointer* addPointer(Data *from, Data *to);
+    Data* addData(QString name);
 
   public slots:
     QScriptValue list_nodes();

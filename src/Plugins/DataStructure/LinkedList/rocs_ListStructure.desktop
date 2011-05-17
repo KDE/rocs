@@ -13,6 +13,7 @@ X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=Linked list
+Name[bs]=Ulančana lista
 Name[ca]=Llista enllaçada
 Name[ca@valencia]=Llista enllaçada
 Name[da]=Lænket liste

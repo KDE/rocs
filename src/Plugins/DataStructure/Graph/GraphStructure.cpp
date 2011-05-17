@@ -24,6 +24,7 @@
 #include "Document.h"
 #include "DataStructure.h"
 #include <KMessageBox>
+#include "GraphNode.h"
 
 Rocs::GraphStructure::GraphStructure ( Document* parent ) :
     DataStructure ( parent )
@@ -239,4 +240,13 @@ Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
     }
 
     return DataStructure::addPointer(from, to);
+}
+
+Data* Rocs::GraphStructure::addData(QString name)
+{
+    if (readOnly()) return 0;
+
+    GraphNode *n = new GraphNode(this);
+    n->setName(name);
+    return addData(n);
 }

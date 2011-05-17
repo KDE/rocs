@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Rocs
+Name[bs]=Rocs
 Name[ca]=Rocs
 Name[ca@valencia]=Rocs
 Name[cs]=Rocs
@@ -31,6 +32,7 @@ Name[x-test]=xxRocsxx
 Name[zh_CN]=Rocs
 Name[zh_TW]=繪圖_Rocs
 GenericName=Rocs Graph Theory
+GenericName[bs]=Rocs teorija grafova
 GenericName[ca]=Teoria de grafs Rocs
 GenericName[ca@valencia]=Teoria de grafs Rocs
 GenericName[da]=Rocs grafteori
@@ -63,6 +65,7 @@ Exec=rocs %i -caption "%c"
 Icon=Rocs
 Type=Application
 Comment=Graph Theory Tool for Professors and Students.
+Comment[bs]=Alate teorije grafova za profesore i studente
 Comment[ca]=Eina de teoria de grafs per a professors i estudiants.
 Comment[ca@valencia]=Eina de teoria de grafs per a professors i estudiants.
 Comment[da]=Værktøj til grafteori for undervisere og studerende.
