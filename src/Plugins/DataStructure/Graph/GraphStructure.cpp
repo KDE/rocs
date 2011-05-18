@@ -104,7 +104,7 @@ void Rocs::GraphStructure::setGraphType(int type)
 
     if ((_type  == MULTIGRAPH && type != MULTIGRAPH )
     || (_type == DIRECTED && type == UNDIRECTED)){
-        if (KMessageBox::warningContinueCancel(0,i18n("This action will probably remove some edges. do you want to continue?")) != KMessageBox::Continue){
+        if (KMessageBox::warningContinueCancel(0,i18n("This action will probably remove some edges. Do you want to continue?")) != KMessageBox::Continue){
             return;
         }
     }
