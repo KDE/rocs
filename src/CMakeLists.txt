@@ -35,7 +35,6 @@ set( rocs_core_SRCS
 
     GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
-    GraphicsItem/DataStructureItem.cpp
     GraphicsItem/PointerItem.cpp
 )
 
