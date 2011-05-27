@@ -1,7 +1,6 @@
-
 /*
-    Show the possible rocs' includes
-    Copyright (C) 2011  Wagner Reck wagner.reck@gmail.com
+    This file is part of Rocs.
+    Copyright 2011  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
