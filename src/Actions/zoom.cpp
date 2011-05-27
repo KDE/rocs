@@ -96,8 +96,16 @@ bool ZoomAction::executeDoubleClick(QPointF)
 bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
     switch(keyEvent->key()){
-        case Qt::Key_Plus  : m_view->scale(1.25, 1.25); break;
-        case Qt::Key_Minus : m_view->scale(0.8, 0.8);   break;
+        case Qt::Key_Plus  : {
+            m_view->scale(1.25, 1.25);
+            _zoomFactor *= 1.25;
+            break;
+        }
+        case Qt::Key_Minus : {
+            m_view->scale(0.8, 0.8);
+            _zoomFactor *= 0.8;
+            break;
+        }
         case Qt::Key_5     : m_view->resetMatrix();     break;
     }
     keyEvent->accept();
@@ -108,8 +116,8 @@ bool ZoomAction::executeWellEvent(QGraphicsSceneWheelEvent* wEvent)
 {
     if (wEvent->delta() > 0){ // zoom out
         if (
-            m_view->width()/_zoomFactor*1.25 < DocumentManager::self()->activeDocument()->width()
-            || m_view->height()/_zoomFactor*1.25 < DocumentManager::self()->activeDocument()->height()
+            m_view->width()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->width()
+            || m_view->height()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->height()
         ) {
             m_view->scale(0.8, 0.8);
             _zoomFactor *= 0.8;
@@ -120,6 +128,7 @@ bool ZoomAction::executeWellEvent(QGraphicsSceneWheelEvent* wEvent)
         _zoomFactor *= 1.25;
         m_view->centerOn(wEvent->scenePos());
     }
+//     qDebug() << "event position: "<< wEvent->scenePos();
     wEvent->accept();
     return true;
 }
