@@ -1,6 +1,7 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    This file is part of Rocs.
+    Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -14,7 +15,6 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #include "DynamicPropertiesList.h"
@@ -32,10 +32,10 @@ DynamicPropertiesList::DynamicPropertiesList(QObject* parent): QObject(parent){
 
 DynamicPropertiesList* DynamicPropertiesList::New()
 {
-  if (DynamicPropertiesList::self == 0){
-      DynamicPropertiesList::self = new DynamicPropertiesList();
-  }
-  return DynamicPropertiesList::self;
+    if (DynamicPropertiesList::self == 0){
+        DynamicPropertiesList::self = new DynamicPropertiesList();
+    }
+    return DynamicPropertiesList::self;
 }
 
 
@@ -104,61 +104,75 @@ void DynamicPropertiesList::removeProperty(QObject* obj,const QString& name)
 
 DynamicPropertyType DynamicPropertiesList::type(QObject* obj, const QString& name)
 {
-      Data * node = qobject_cast< Data* >(obj);
-      if (node){
-	  QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure());
-	  if( multimap == _NodesProperties.end()){ //Not exist a dataStructure yet
-	    return None;
-	  }
-	  QList <Data*> list = multimap.value().values(name);
+    // case obj is Data*
+    Data * node = qobject_cast< Data* >(obj);
+    if (node){
+    QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure());
+    if( multimap == _NodesProperties.end()){ //Not exist a dataStructure yet
+        return None;
+    }
+    
+    QList <Data*> list = multimap.value().values(name);
 
-	  if (node->dataStructure()->dataList().size() == list.size()){
-	      return Global;
-	  }
-	  switch(list.size()){
-	    case 0 :return None;
-	    case 1 :return Unique;
-	    default : return Multiple;
-	  }
-      }
+    //FIXME the following is a hack that eleminates duplicates
+    //happens eg with TestDynamicProperties::removeToAllNodes()
+    QSet <Data*> tmpSet = list.toSet();
+    list = tmpSet.toList();
+    
+    for(int i=0; i<list.size(); i++)
+    if (node->dataStructure()->dataList().size() == list.size()){
+        return Global;
+    }
+    switch(list.size()){
+        case 0  :   return None;
+        case 1  :   return Unique;
+        default :   return Multiple;
+    }
+    }
 
-      Pointer * edge = qobject_cast< Pointer* >(obj);
-      if (edge){
-	  QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure());
-	  if( multimap == _EdgesProperties.end()){ //Not exist a dataStructure yet
-		return None;
-	  }
-	  QList <Pointer*> list = multimap.value().values(name);
-	  if (edge->dataStructure()->pointers().size() == list.size()){
-	      return Global;
-	  }
-	  switch(list.size()){
-	    case 0 :return None;
-	    case 1 :return Unique;
-	    default : return Multiple;
-	  }
-      }
+    // case obj is Pointer*
+    Pointer * edge = qobject_cast< Pointer* >(obj);
+    if (edge){
+    QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure());
+    if( multimap == _EdgesProperties.end()){ //Not exist a dataStructure yet
+        return None;
+    }
+    QList <Pointer*> list = multimap.value().values(name);
+    
+    //FIXME the following is a hack that eleminates duplicates
+    //happens eg with TestDynamicProperties::removeToAllEdges()
+    QSet <Pointer*> tmpSet = list.toSet();
+    list = tmpSet.toList();
+    
+    if (edge->dataStructure()->pointers().size() == list.size()){
+        return Global;
+    }
+    switch(list.size()){
+        case 0  :   return None;
+        case 1  :   return Unique;
+        default :   return Multiple;
+    }
+    }
 
-      DataStructure * dataStructure = qobject_cast< DataStructure* >(obj);
-      if (dataStructure){
-	    if (_GraphProperties.values(name).size() == 0){
-	      return None;
-	    }else {
-		return Unique;
-	    }
-      }
-      return None;
+    DataStructure * dataStructure = qobject_cast< DataStructure* >(obj);
+    if (dataStructure){
+        if (_GraphProperties.values(name).size() == 0){
+        return None;
+        }else {
+        return Unique;
+        }
+    }
+    return None;
 }
 
 const QString DynamicPropertiesList::typeInText(QObject* obj, const QString& name)
 {
     switch (type(obj, name)){
-      case Unique: 	return i18n("Unique");
-      case Multiple: 	return i18n("Multiple");
-      case Global: 	return i18n("Global");
+      case Unique:      return i18n("Unique");
+      case Multiple:    return i18n("Multiple");
+      case Global:      return i18n("Global");
       case None:
-      default:
-        return i18n("None");
+      default:          return i18n("None");
     }
 }
 
