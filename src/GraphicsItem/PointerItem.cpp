@@ -36,7 +36,7 @@
 #include <QPolygonF>
 #include <QtAlgorithms>
 #include <KDebug>
-#include <math.h>
+#include <QtCore/qmath.h>
 #include <QGraphicsSimpleTextItem>
 
 PointerItem::PointerItem( Pointer *pointer, QGraphicsItem *parent)
@@ -82,7 +82,7 @@ void PointerItem::updatePos() {
         return;
     }
     QLine q(_pointer->from()->x(), _pointer->from()->y(),    _pointer->to()->x(),  _pointer->to()->y());
-    qreal size = sqrt( pow(q.dx(), 2) + pow(q.dy(), 2));
+    qreal size = qSqrt( qPow(q.dx(), 2) + qPow(q.dy(), 2));
     if (_pointer->from() != _pointer->to() && size < 20  ) {
         setPath(QPainterPath());
     } else {
