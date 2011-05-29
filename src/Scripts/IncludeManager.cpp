@@ -1,5 +1,6 @@
-/*  This file ist part of Rocs.
-    Copyright (C) 2011  Wagner Reck
+/* 
+    This file is part of Rocs.
+    Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as

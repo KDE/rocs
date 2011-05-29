@@ -1,6 +1,8 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    This file is part of Rocs.
+    Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2011  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -14,7 +16,6 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #include "GraphStructure.h"
