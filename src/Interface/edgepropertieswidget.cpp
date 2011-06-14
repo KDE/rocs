@@ -67,7 +67,7 @@ void PointerPropertiesWidget::setPointer(Pointer *e, QPointF pos) {
 void PointerPropertiesWidget::setWidth(double v)
 {
     _pointer->setWidth( static_cast<qreal>(v));
-}																																																	
+}
 
 void PointerPropertiesWidget::reflectAttributes(){
   if (_extraProperties->layout()){
@@ -110,7 +110,7 @@ void PointerPropertiesWidget::disconnectPointer(){
 
     disconnect(_value,     SIGNAL(textChanged(QString)),   _pointer, SLOT(setValue(QString)));
     disconnect(_name,      SIGNAL(textChanged(QString)),   _pointer, SLOT(setName(QString)));
-    disconnect(_width,     SIGNAL(valueChanged(double)),    _pointer, SLOT(setWidth(double)));
+    disconnect(_width,     SIGNAL(valueChanged(double)),    this, SLOT(setWidth(double)));
     disconnect(_showName,  SIGNAL(toggled(bool)),          _pointer, SLOT(hideName(bool)));
     disconnect(_showValue, SIGNAL(toggled(bool)),          _pointer, SLOT(hideValue(bool)));
 }

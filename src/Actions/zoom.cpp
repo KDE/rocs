@@ -49,7 +49,7 @@ bool ZoomAction::executePress(QPointF pos)
     QColor color(Qt::green);
     color.setAlphaF(0.3);
     m_zoomRectItem->setBrush(QBrush(color));
-    m_zoomRectItem->setPen(QPen(QBrush(Qt::black), 1, Qt::SolidLine));
+    m_zoomRectItem->setPen(QPen(QBrush(Qt::black), 0.1, Qt::SolidLine));
     m_zoomRectItem->setZValue(9);
     m_beginZoom = m_view->mapFromScene(pos);
 

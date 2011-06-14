@@ -35,13 +35,14 @@ class DataPropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
 public:
     DataPropertiesWidget (MainWindow* parent = 0 );
     void setData(DataItem *n, QPointF pos);
-    void disconnectData(Data* arg1);
+
 
 
 private slots:
     void on__color_activated(const QColor& c);
     void on__images_activated(const QString& s);
     void reflectAttributes();
+    void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
 //     void updateAutomateAttributes(bool b);
     void on__addProperty_clicked();
 
