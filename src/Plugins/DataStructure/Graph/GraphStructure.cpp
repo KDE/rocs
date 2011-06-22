@@ -102,6 +102,8 @@ void Rocs::GraphStructure::setGraphType(int type)
 {
     if (_type == type)
         return;
+    if (dataList().count()==0)
+        return;
 
     if ((_type  == MULTIGRAPH && type != MULTIGRAPH )
     || (_type == DIRECTED && type == UNDIRECTED)){
