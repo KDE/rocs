@@ -108,11 +108,11 @@ public slots:
     /** setup documents list.*/
     void setupDocumentsList();
 
-  signals:
-      void startDocument(const QString& s);
-      void startEvaluation();
-      void stopEvaluation();
-      void runTool(ToolsPluginInterface * plugin, Document * graphs);
+signals:
+    void startEvaluation();
+    void stopEvaluation();
+    void runTool(ToolsPluginInterface * plugin, Document * graphs);
+
 private: // Variables.
 
     // Left Area:

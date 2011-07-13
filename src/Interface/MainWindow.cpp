@@ -440,15 +440,12 @@ void MainWindow::openGraph()
 
 void MainWindow::loadDocument ( const QString& name )
 {
-    if ( !name.isEmpty() && !name.endsWith ( ".graph" ) )
-    {
+    if ( !name.isEmpty() && !name.endsWith ( ".graph" ) ){
         KMessageBox::sorry ( this, i18n ( "This does not seem to be a graph file." ), i18n ( "Invalid file" ) );
         return;
     }
-
-    emit startDocument( name );
-
-    DocumentManager::self()->activeDocument()->setModified(false);
+    
+    DocumentManager::self()->loadDocument(name);
 }
 
 void MainWindow::saveGraph(){

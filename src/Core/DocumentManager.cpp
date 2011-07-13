@@ -92,7 +92,7 @@ void DocumentManager::changeDocument(Document* doc){
 }
 
 void DocumentManager::removeDocument(Document* doc){
-    if (m_documents.removeOne(doc) != 0){
+    if (m_documents.removeOne(doc)){
         if (m_actualDocument == doc){
             if (m_documents.count() > 0){
                 changeDocument(m_documents.last()); //
@@ -124,6 +124,7 @@ void DocumentManager::convertToDataStructure() {
 }
 
 void DocumentManager::loadDocument ( QString name ){
+  qDebug() << "Carregando o documento";
   Document * doc;
   if ( name.isEmpty() ){
       int docNumber = 0;
@@ -143,6 +144,7 @@ void DocumentManager::loadDocument ( QString name ){
       doc = new Document( name );
       doc->addDataStructure ( i18n ( "Untitled0" ) );
   }else{
+      removeDocument(activeDocument());
       doc = new Document( i18n ( "Untitled0" ) );
       doc->loadFromInternalFormat ( name );
    }

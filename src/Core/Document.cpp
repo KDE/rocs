@@ -355,7 +355,7 @@ void Document::remove(DataStructure *dataStructure){
 bool Document::saveAsInternalFormat(const QString& filename) {
     d->_buf.clear();
 
-    KSaveFile saveFile( !filename.endsWith(".dataStructure") ? QString("%1.dataStructure").arg(filename) : filename);
+    KSaveFile saveFile( !filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
 
     if (!saveFile.open()) {
         kDebug() << "Error: File Not Open";
