@@ -134,7 +134,6 @@ kde4_add_ui_files(
 	Interface/GraphPropertiesWidget.ui
 	Interface/NodePropertiesWidget.ui
 	Interface/EdgePropertiesWidget.ui
-	Interface/AddMultiNodes.ui
 	Interface/ConfigureDefaultProperties.ui
 )
 

@@ -172,7 +172,7 @@ const QString DynamicPropertiesList::typeInText(QObject* obj, const QString& nam
       case Multiple:    return i18n("Multiple");
       case Global:      return i18n("Global");
       case None:
-      default:          return i18n("None");
+      default:          return i18nc("type of dynamic property","None");
     }
 }
 
