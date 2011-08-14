@@ -140,12 +140,12 @@ void DataItem::updateColor(){
     
 void DataItem::updateName(){
     if ( !_name ){
-        _name = new QGraphicsSimpleTextItem(i18n("%1").arg(_data->name()));
+        _name = new QGraphicsSimpleTextItem(i18n("%1", _data->name()));
         _name->setFlags(ItemIgnoresTransformations);
         _name->setFont(_font);
         _name->setZValue(zValue()+1);
     }else if (_name->text() != _data->name()){
-        _name->setText(i18n("%1").arg(_data->name()));
+        _name->setText(i18n("%1",_data->name()));
     }
    
     int style = GraphicsLayout::self()->viewStyleDataNode();
@@ -183,12 +183,12 @@ QGraphicsSimpleTextItem* DataItem::value() const
 
 void DataItem::updateValue(){
     if ( !_value ){ 
-        _value = new QGraphicsSimpleTextItem(i18n("v=%1").arg(_data->value().toString()));
+        _value = new QGraphicsSimpleTextItem(i18n("v=%1", _data->value().toString()));
         _value->setFlags(ItemIgnoresTransformations);
         _value->setFont(_font);
         _value->setZValue(zValue()+2);
     } else if (QVariant(_value->text()) != _data->value().toString()){
-        _value ->setText(i18n("v=%1").arg(_data->value().toString()));
+        _value ->setText(i18n("v=%1", _data->value().toString()));
     }
     
     int style = GraphicsLayout::self()->viewStyleDataNode();
