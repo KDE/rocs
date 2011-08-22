@@ -39,9 +39,8 @@ class GraphScene : public QGraphicsScene {
     Q_OBJECT
 public:
     GraphScene( QObject *parent=0 );
-
+    enum borderSize{ kBORDER = 50 };
     void updateMinSize(qreal minWidth, qreal minHeight);
-    static const qreal kBORDER = 50;
     void setAction(QAction *action);
     void updateGraph(DataStructure *g);
     void updateDocument();
