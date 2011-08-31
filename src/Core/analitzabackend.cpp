@@ -20,6 +20,27 @@
 
 #include "analitzabackend.h"
 #include <analitza/analyzer.h>
+#include <analitza/importqobjectmetatype.h>
+
+#include "Core/Data.h"
+
+using namespace Analitza;
+
+Q_DECLARE_METATYPE(AbstractRunBackend*);
+
+class Func : public Analitza::FunctionDefinition
+{
+public:
+    Func(const QVariant& value) : m_value(value) {}
+    
+    virtual Expression operator()(const QList< Expression >& )
+    {
+        return Expression::constructCustomObject(m_value, 0);
+    }
+    
+private:
+    QVariant m_value;
+};
 
 AnalitzaBackend::AnalitzaBackend(QObject* parent): AbstractRunBackend(parent)
 {}
@@ -29,6 +50,13 @@ void AnalitzaBackend::start()
     Analitza::Analyzer a;
     QTextStream stream(&_script);
 
+    ImportQMetaObject importer(&a);
+    importer.import(Data::staticMetaObject); //This reads all properties and functions in data and makes them available on the code
+    importer.import(AbstractRunBackend::staticMetaObject); //Also add the properties from this type
+    
+    a.builtinMethods()->insertFunction("backend", ExpressionType(ExpressionType::Lambda).addParameter(ExpressionType("AbstractRunBackend*")),
+                                       new Func(qVariantFromValue<AbstractRunBackend*>(this)));
+    
     a.importScript(&stream);
     if(!a.isCorrect())
         emit sendDebug(a.errors().join("\n"));
