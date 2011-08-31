@@ -54,8 +54,11 @@ void AnalitzaBackend::start()
     importer.import(Data::staticMetaObject); //This reads all properties and functions in data and makes them available on the code
     importer.import(AbstractRunBackend::staticMetaObject); //Also add the properties from this type
     
-    a.builtinMethods()->insertFunction("backend", ExpressionType(ExpressionType::Lambda).addParameter(ExpressionType("AbstractRunBackend*")),
-                                       new Func(qVariantFromValue<AbstractRunBackend*>(this)));
+    a.builtinMethods()->insertFunction(
+	"backend",
+	ExpressionType(ExpressionType::Lambda).addParameter(ExpressionType("AbstractRunBackend*")),
+	new Func(qVariantFromValue<AbstractRunBackend*>(this))
+    );
     
     a.importScript(&stream);
     if(!a.isCorrect())
