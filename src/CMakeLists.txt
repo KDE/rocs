@@ -120,12 +120,8 @@ set( rocs_models_SRCS
 #   UndoRedo/URAddEdge.cpp
 # )
 
-<<<<<<< HEAD
-set ( rocs_script_SRC  
-=======
 set ( rocs_script_SRC
         Interface/PossibleIncludes.cpp
->>>>>>> master
         Scripts/IncludeManager.cpp
 )
 
