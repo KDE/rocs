@@ -71,8 +71,8 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_minWidth = 0;
     d->_minHeight = 0;
     d->_saved = false;
-    //d->_engineBackend = new QtScriptBackend(this);
-    d->_engineBackend = new AnalitzaBackend(this);
+    d->_engineBackend = new QtScriptBackend(this);
+    //d->_engineBackend = new AnalitzaBackend(this);
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_modified = false;
 }
@@ -332,8 +332,8 @@ void Document::setActiveDataStructure(DataStructure *g){
 }
 
 DataStructure* Document::addDataStructure(QString name) {
-    DataStructure *g = DataStructurePluginManager::self()->createNewDataStructure(this,
-                                                                                  d->_dataStructureType->name());
+    DataStructure *g = DataStructurePluginManager::self()
+                            ->createNewDataStructure(this,d->_dataStructureType->name());
     g->setName(name);
     d->_dataStructures.append(g);
     d->_activeDataStructure = g;
