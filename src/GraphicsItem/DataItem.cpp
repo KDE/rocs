@@ -1,3 +1,22 @@
+/* 
+    This file is part of Rocs.
+    Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of 
+    the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "DataItem.h"
 #include <kstandarddirs.h>
 #include <QDir>
@@ -121,12 +140,12 @@ void DataItem::updateColor(){
     
 void DataItem::updateName(){
     if ( !_name ){
-        _name = new QGraphicsSimpleTextItem(i18n("%1").arg(_data->name()));
+        _name = new QGraphicsSimpleTextItem(i18n("%1", _data->name()));
         _name->setFlags(ItemIgnoresTransformations);
         _name->setFont(_font);
         _name->setZValue(zValue()+1);
     }else if (_name->text() != _data->name()){
-        _name->setText(i18n("%1").arg(_data->name()));
+        _name->setText(i18n("%1",_data->name()));
     }
    
     int style = GraphicsLayout::self()->viewStyleDataNode();
@@ -164,12 +183,12 @@ QGraphicsSimpleTextItem* DataItem::value() const
 
 void DataItem::updateValue(){
     if ( !_value ){ 
-        _value = new QGraphicsSimpleTextItem(i18n("v=%1").arg(_data->value().toString()));
+        _value = new QGraphicsSimpleTextItem(i18n("v=%1", _data->value().toString()));
         _value->setFlags(ItemIgnoresTransformations);
         _value->setFont(_font);
         _value->setZValue(zValue()+2);
     } else if (QVariant(_value->text()) != _data->value().toString()){
-        _value ->setText(i18n("v=%1").arg(_data->value().toString()));
+        _value ->setText(i18n("v=%1", _data->value().toString()));
     }
     
     int style = GraphicsLayout::self()->viewStyleDataNode();

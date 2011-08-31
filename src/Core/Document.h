@@ -1,22 +1,24 @@
-/* This file is part of Rocs,
-   Copyright (C) 2008 by:
-   Tomaz Canabrava <tomaz.canabrava@gmail.com>
-   Ugo Sangiori <ugorox@gmail.com>
+/* 
+    This file is part of Rocs.
+    Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
-   Rocs is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of 
+    the License, or (at your option) any later version.
 
-   Rocs is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with Rocs; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
@@ -35,20 +37,20 @@ class DocumentPrivate;
 class ROCSLIB_EXPORT Document : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(    qreal xLeft READ xLeft WRITE setXLeft)
-    Q_PROPERTY(    qreal xRight READ xRight WRITE setXRight)
-    Q_PROPERTY(    qreal yTop READ yTop WRITE setYTop)
-    Q_PROPERTY(    qreal yBottom READ yBottom WRITE setYBottom)
+    Q_PROPERTY(    qreal left READ left WRITE setLeft)
+    Q_PROPERTY(    qreal right READ right WRITE setRight)
+    Q_PROPERTY(    qreal top READ top WRITE setTop)
+    Q_PROPERTY(    qreal bottom READ bottom WRITE setBottom)
 
 public:
     enum Type {Simple = 0, Oriented};
     enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
     Document(   const QString& name,
-                qreal xLeft=-200,
-                qreal xRight=200,
-                qreal yTop=-200,
-                qreal yBottom=200,
+                qreal left=-200,
+                qreal right=200,
+                qreal top=-200,
+                qreal bottom=200,
                 QObject *parent = 0
             );
     Document(const Document& gd);
@@ -87,15 +89,15 @@ public slots:
     DataStructure *activeDataStructure() const ;
     void setActiveDataStructure(DataStructure *g);
 
-    void setXLeft(qreal xLeftValue);
-    void setXRight(qreal xRightValue);
-    void setYTop(qreal yTopValue);
-    void setYBottom(qreal yButtomValue);
+    void setLeft(qreal leftValue);
+    void setRight(qreal rightValue);
+    void setTop(qreal topValue);
+    void setBottom(qreal buttomValue);
 
-    qreal xLeft() const;
-    qreal yTop() const;
-    qreal xRight() const;
-    qreal yBottom() const;
+    qreal left() const;
+    qreal top() const;
+    qreal right() const;
+    qreal bottom() const;
 
     qreal height() const;
     qreal width() const;

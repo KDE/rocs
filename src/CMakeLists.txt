@@ -39,7 +39,6 @@ set( rocs_core_SRCS
 
     GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
-    GraphicsItem/DataStructureItem.cpp
     GraphicsItem/PointerItem.cpp
 )
 
@@ -144,7 +143,6 @@ kde4_add_ui_files(
 	Interface/GraphPropertiesWidget.ui
 	Interface/NodePropertiesWidget.ui
 	Interface/EdgePropertiesWidget.ui
-	Interface/AddMultiNodes.ui
 	Interface/ConfigureDefaultProperties.ui
 )
 

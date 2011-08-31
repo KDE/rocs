@@ -28,8 +28,9 @@ function color(avoidColors){
 //Return color of all(unic) the neibours.
 function neibourColors(node){
   adjColors = [];
-  adj = node.adj_nodes();
+  adj = node.adj_data();
   for (var k=0; k < adj.length; k++){
+      debug ("color: " +  adj[k].color)
       if (!inArray(adj[k].color, adjColors)){
 	  adjColors.push(adj[k].color);
       }
@@ -42,7 +43,7 @@ function neibourColors(node){
 //******Begin Here******
 
 nodes = graphs[0].list_nodes();
-colors = ["red", "blue", "green", "yellow", "cyan", "purple", "white"];
+colors = ["#ff0000", "#0000ff", "#00ff00", "#00ffff", "#ffff00", "#ff00ff", "#ffffff"];
 
 if (nodes.length != 0){
   
@@ -50,6 +51,7 @@ if (nodes.length != 0){
 
 //Initialize nodes.
 for (var i = 0; i < nodes.length; i++){
+    nodes[i].useColor = true
     nodes[i].color = "black";
     nodes[i].value = 0;
 }
@@ -72,8 +74,9 @@ while (notQuit){
 	if (queue[i].value == 0){
 	    queue[i].value = i+1-adjust;
 	    queue[i].color = color(neibourColors(queue[i]));
-	    adj = queue[i].adj_nodes();
+	    adj = queue[i].adj_data();
 	    //Queue adjacency nodes.
+	    debug("adj: " + queue[i].value+ adj.length)
 	    for (var count = 0; count < adj.length; count++){
 		if (adj[count].value == 0){
 		  queue.push(adj[count]);

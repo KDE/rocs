@@ -1,8 +1,8 @@
 /*
-    KMLParser.h is part of Rocs
-    Copyright (C) 2010  Wagner Reck <wagner.reck@gmail.com>
+    This file is part of Rocs.
+    Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
 
-    Rocs is free software: you can redistribute it and/or modify
+    This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -14,7 +14,6 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #ifndef KMLPARSER_H

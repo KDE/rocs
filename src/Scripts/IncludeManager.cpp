@@ -1,21 +1,19 @@
-/*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+/* 
+    This file is part of Rocs.
+    Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of 
+    the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "IncludeManager.h"
@@ -107,22 +105,28 @@ QString IncludeManager::processInclude ( QString arg1 ) {
     QString fileContent;
     QString file;
     int pos;
+    QString path;
     if (arg1.indexOf('(') != -1) {
         file=arg1.replace(')', '(').section('(',1,1).trimmed();
         // To avoid more ifs-elses
-        fileContent = i18n("debug(\"Cannot open file %1.\")").arg(file);
-        if (!_actualDir.exists(file)) {
-            QString filename = file;
-            if ((pos = file.lastIndexOf('/')) != -1) {  //add the path of file to list
-                QString path = file.left(pos+1);
+///TODO         fileContent = QString("debug(\"%1\")").arg(i18n("Cannot open file %2.")).arg(file); // String freeze for 4.7 un comment to 4.8
+        fileContent = QString("debug(\"%1\")").arg(i18n("debug(\"Cannot open file %1.\")").replace("\"","")).arg(file);
+        // Add the path first
+        if ((pos = file.lastIndexOf('/')) != -1) {  //add the path of file to list
+              path = file.left(pos+1);
 //                 QString filename = file.right(file.length() - pos +1);
                 if (!path.startsWith(QDir::rootPath())) {
                     path.prepend(_actualDir.absolutePath() + '/');
                 }
                 _tempPath << QDir(path);
-            }
-            file = seekFile(filename);
         }
+//         then, try to open
+        if (!_actualDir.exists(file)) {
+            file = seekFile(file);
+        }else
+          file = _actualDir.absoluteFilePath(file);
+
+
         if ( !file.isEmpty() ) {
             if ( !checkIfWasIncluded ( file ) ) {
                 _wasIncluded << file;
@@ -136,7 +140,8 @@ QString IncludeManager::processInclude ( QString arg1 ) {
             }
         }
     } else {
-        fileContent = i18n("debug(\"Invalid include directive: %1. Cannot find file in directive.\")").arg(arg1);
+        fileContent = QString("debug(\"%1\")").arg(i18n("debug(\"Invalid include directive: %1. Cannot find file in directive.\")").replace("\"","")).arg(arg1);
+///TODO uncomment to 4.8         fileContent = QString("debug(\"%1\")").arg(i18n("Invalid include directive: %2. Cannot find file in directive.")).arg(arg1);
     }
 
     return fileContent;

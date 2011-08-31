@@ -1,6 +1,6 @@
 /*
-    <one line to give the library's name and an idea of what it does.>
-    Copyright (C) 2011  <copyright holder> <email>
+    This file is part of Rocs.
+    Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,6 +20,8 @@
 
 #include "zoom.h"
 #include <GraphScene.h>
+#include <DocumentManager.h>
+#include <Document.h>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QDebug>
@@ -31,6 +33,7 @@ ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 : AbstractAction(scene, parent)
 ,m_view(scene->views().at(0))
 ,m_zoomRectItem(0)
+,_zoomFactor(1)
 {
     setText(i18n ( "Zoom" ));
     setToolTip ( i18n ( "Zoom the canvas by the wheel, or by dragging." ) );
@@ -46,7 +49,7 @@ bool ZoomAction::executePress(QPointF pos)
     QColor color(Qt::green);
     color.setAlphaF(0.3);
     m_zoomRectItem->setBrush(QBrush(color));
-    m_zoomRectItem->setPen(QPen(QBrush(Qt::black), 1, Qt::SolidLine));
+    m_zoomRectItem->setPen(QPen(QBrush(Qt::black), 0.1, Qt::SolidLine));
     m_zoomRectItem->setZValue(9);
     m_beginZoom = m_view->mapFromScene(pos);
 
@@ -93,23 +96,39 @@ bool ZoomAction::executeDoubleClick(QPointF)
 bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
     switch(keyEvent->key()){
-        case Qt::Key_Plus  : m_view->scale(1.25, 1.25); break;
-        case Qt::Key_Minus : m_view->scale(0.8, 0.8);   break;
+        case Qt::Key_Plus  : {
+            m_view->scale(1.25, 1.25);
+            _zoomFactor *= 1.25;
+            break;
+        }
+        case Qt::Key_Minus : {
+            m_view->scale(0.8, 0.8);
+            _zoomFactor *= 0.8;
+            break;
+        }
         case Qt::Key_5     : m_view->resetMatrix();     break;
     }
     keyEvent->accept();
     return true;
 }
 
-bool ZoomAction::executeWellEvent(QGraphicsSceneWheelEvent* wEvent)
+bool ZoomAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent)
 {
-    if (wEvent->delta() > 0){
-        m_view->scale(0.8, 0.8);
-        m_view->centerOn(wEvent->scenePos());
-    }else{
+    if (wEvent->delta() > 0){ // zoom out
+        if (
+            m_view->width()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->width()
+            || m_view->height()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->height()
+        ) {
+            m_view->scale(0.8, 0.8);
+            _zoomFactor *= 0.8;
+            m_view->centerOn(wEvent->scenePos());
+        }
+    }else{ // zoom in
         m_view->scale(1.25, 1.25);
+        _zoomFactor *= 1.25;
         m_view->centerOn(wEvent->scenePos());
     }
+//     qDebug() << "event position: "<< wEvent->scenePos();
     wEvent->accept();
     return true;
 }

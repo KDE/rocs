@@ -1,22 +1,21 @@
-/***************************************************************************
- * This file is part of the KDE project
- * Copyright (C) by
- *  2004-2007   Tomaz Canabrava <tomaz.canabrava@gmail.com>
- *  2011        Andreas Cord-Landwehr <cola@uni-paderborn.de>
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- * You should have received a copy of the GNU Library General Public License
- * along with this program; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301, USA.
- ***************************************************************************/
+/* 
+    This file is part of Rocs,
+    Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either 
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public 
+    License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "GraphScene.h"
 #include "AbstractAction.h"
@@ -63,12 +62,12 @@ void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
 
     Document *gd = DocumentManager::self()->activeDocument();
     if (gd->width()<_minWidth) {
-        gd->setXLeft(gd->xLeft()-(_minWidth-gd->width())/2);
-        gd->setXRight(gd->xRight()+(_minWidth-gd->width())/2);
+        gd->setLeft(gd->left()-(_minWidth-gd->width())/2);
+        gd->setRight(gd->right()+(_minWidth-gd->width())/2);
     }
     if (gd->height()<_minHeight) {
-        gd->setYTop(gd->yTop()-(_minHeight-gd->height())/2);
-        gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
+        gd->setTop(gd->top()-(_minHeight-gd->height())/2);
+        gd->setBottom(gd->bottom()+(_minHeight-gd->height())/2);
     }
     gd->changeMinimalSize(minWidth, minHeight);
     resize();
@@ -126,12 +125,12 @@ void GraphScene::setActiveDocument() {
      // adapt document to scene if too small
     _graphDocument = gd;
     if (gd->width()<_minWidth) {
-        gd->setXLeft(gd->xLeft()-(_minWidth-gd->width())/2);
-        gd->setXRight(gd->xRight()+(_minWidth-gd->width())/2);
+        gd->setLeft(gd->left()-(_minWidth-gd->width())/2);
+        gd->setRight(gd->right()+(_minWidth-gd->width())/2);
     }
     if (gd->height()<_minHeight) {
-        gd->setYTop(gd->yTop()-(_minHeight-gd->height())/2);
-        gd->setYBottom(gd->yBottom()+(_minHeight-gd->height())/2);
+        gd->setTop(gd->top()-(_minHeight-gd->height())/2);
+        gd->setBottom(gd->bottom()+(_minHeight-gd->height())/2);
     }
 
     resize();
@@ -266,10 +265,10 @@ void GraphScene::updateDocument() {
 }
 
 void GraphScene::resize() {
-    QRectF newSize(_graphDocument->xLeft(), // x
-                   _graphDocument->yTop(),  // y
-                   _graphDocument->xRight()-_graphDocument->xLeft(), // width
-                   _graphDocument->yBottom()-_graphDocument->yTop()); // height
+    QRectF newSize(_graphDocument->left(), // x
+                   _graphDocument->top(),  // y
+                   _graphDocument->right()-_graphDocument->left(), // width
+                   _graphDocument->bottom()-_graphDocument->top()); // height
 
     setSceneRect( newSize );
     emit resized();

@@ -1,3 +1,21 @@
+/* 
+    This file is part of Rocs.
+    Copyright 2009-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of 
+    the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "NodePropertiesWidget.h"
 #include "Data.h"
 #include "MainWindow.h"
@@ -49,7 +67,7 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
    
     connect( _showName,     SIGNAL(toggled(bool)),         _data, SLOT(setShowName(bool)));
     connect( _showValue,    SIGNAL(toggled(bool)),         _data, SLOT(setShowValue(bool)));
-    connect( _disableColor, SIGNAL(toggled(bool)),         _data, SLOT(setUseColor(bool)));
+    connect( _disableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
     connect( _name,         SIGNAL(textEdited(QString)),   _data, SLOT(setName(QString)));
     connect( _value,        SIGNAL(textEdited(QString)),   _data, SLOT(setValue(QString)));
 
@@ -57,6 +75,10 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     model->setDataSource(_data);
 
     _propertiesTable->setModel(model);
+}
+
+void DataPropertiesWidget::setUseColor(bool b){
+    _data->setUseColor(!b);
 }
 
 void DataPropertiesWidget::reflectAttributes(){
@@ -90,10 +112,7 @@ void DataPropertiesWidget::reflectAttributes(){
     }
     _images->clear();
     QFile svgFile(_item->data()->iconPackage());
-    if (!svgFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-      kDebug() << "could not open file for reading";
-      return;
-    }
+    svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
     QXmlStreamReader reader(&svgFile);
     QSvgRenderer *renderer = _item->_renders.value(svgFile.fileName());
@@ -121,30 +140,13 @@ void DataPropertiesWidget::reflectAttributes(){
     _images->setCurrentItem(icon);
 }
 
-void DataPropertiesWidget::on__images_activated(const QString& s)
-{
+void DataPropertiesWidget::on__images_activated(const QString& s){
   _data->setIcon("rocs_"+s);
 }
 
-void DataPropertiesWidget::on__color_activated(const QColor& c) {
-  QColor color(c);
-  _data->setColor(color);
+void DataPropertiesWidget::on__color_activated(const QColor& c){
+  _data->setColor(QColor(c));
 }
-
-// void DataPropertiesWidget::updateAutomateAttributes(bool b){
-// //     if (b) {
-// //         _begin->setChecked(_data->begin());
-// //         _end->setChecked(_data->end());
-// //         _begin->show();
-// //         _end->show();
-// //     }
-// //     else {
-// //         _begin->setChecked(false);
-// //         _end->setChecked(false);
-// //         _begin->hide();
-// //         _end->hide();
-// //     }
-// }
 
 void DataPropertiesWidget::on__addProperty_clicked(){
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());

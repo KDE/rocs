@@ -1,19 +1,22 @@
-/*
-    kopeteplugin.cpp - Kopete Plugin API
+/* 
+    This file is part of Rocs.
+    Copyright 2001-2002  Duncan Mac-Vicar Prett <duncan@kde.org>
+    Copyright 2002-2004  Olivier Goffart        <ogoffart@kde.org>
+    Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
 
-    Copyright (c) 2001-2002 by Duncan Mac-Vicar P. <duncan@kde.org>
-    Copyright (c) 2002-2004 by Olivier Goffart  <ogoffart @tiscalinet.be>
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either 
+    version 2.1 of the License, or (at your option) any later version.
 
-    Copyright (c) 2002-2004 by the Kopete developers  <kopete-devel@kde.org>
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
 
-    *************************************************************************
-    *                                                                       *
-    * This library is free software; you can redistribute it and/or         *
-    * modify it under the terms of the GNU Lesser General Public            *
-    * License as published by the Free Software Foundation; either          *
-    * version 2 of the License, or (at your option) any later version.      *
-    *                                                                       *
-    *************************************************************************
+    You should have received a copy of the GNU Lesser General Public 
+    License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "ToolsPluginInterface.h"

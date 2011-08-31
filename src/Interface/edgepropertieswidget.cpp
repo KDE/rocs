@@ -1,6 +1,7 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    This file is part of Rocs.
+    Copyright 2009-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -14,7 +15,6 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 */
 
 #include "edgepropertieswidget.h"
@@ -30,9 +30,13 @@ PointerPropertiesWidget::PointerPropertiesWidget(MainWindow *parent): QWidget(pa
 }
 
 void PointerPropertiesWidget::setPointer(Pointer *e, QPointF pos) {
-    if (_pointer == e)
-      return;
-
+    if (_pointer == e){
+      show();
+      activateWindow();
+      raise();
+      return;     
+    }
+    
     if (_pointer){
       disconnectPointer();
     }
@@ -106,7 +110,7 @@ void PointerPropertiesWidget::disconnectPointer(){
 
     disconnect(_value,     SIGNAL(textChanged(QString)),   _pointer, SLOT(setValue(QString)));
     disconnect(_name,      SIGNAL(textChanged(QString)),   _pointer, SLOT(setName(QString)));
-    disconnect(_width,     SIGNAL(valueChanged(double)),    _pointer, SLOT(setWidth(double)));
+    disconnect(_width,     SIGNAL(valueChanged(double)),    this, SLOT(setWidth(double)));
     disconnect(_showName,  SIGNAL(toggled(bool)),          _pointer, SLOT(hideName(bool)));
     disconnect(_showValue, SIGNAL(toggled(bool)),          _pointer, SLOT(hideValue(bool)));
 }

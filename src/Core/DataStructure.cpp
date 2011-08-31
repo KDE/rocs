@@ -1,21 +1,22 @@
-/***************************************************************************
- * main.cpp
- * This file is part of the KDE project
- * copyright (C)2004-2007 by Tomaz Canabrava (tomaz.canabrava@gmail.com)
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- * You should have received a copy of the GNU Library General Public License
- * along with this program; see the file COPYING.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301, USA.
- ***************************************************************************/
+/* 
+    This file is part of Rocs.
+    Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either 
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public 
+    License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "DataStructure.h"
 #include "Data.h"
@@ -191,12 +192,15 @@ Data* DataStructure::addData(QString name, QPointF pos){
 }
 
 Pointer* DataStructure::addPointer(Data *from, Data *to) {
-    if (d->_readOnly) return 0;
+    if (d->_readOnly)                   // If the data structure is in read only mode, no new stuff should be added.
+        return 0;
 
-    if ( from == 0 || to == 0 ) {
+    if ( !from || !to ) {               // one of the two required datas are null. do not add a pointer between a valid and a null datas.
         return 0;
     }
-    if ((d->_data.indexOf(from) == -1) || (d->_data.indexOf(to) == -1)) {
+    
+    if ( (d->_data.indexOf(from) == -1)  // the user is trying to connect datas from different graphs.
+      || (d->_data.indexOf(to) == -1)) {
         return 0;
     }
 
@@ -249,10 +253,10 @@ void DataStructure::remove(Data *n) {
     bool right = false;
 
     if (doc!=0) {
-        if (n->x()<doc->xLeft()+2*GraphScene::kBORDER)      left = true;
-        if (n->x()>doc->xRight()-2*GraphScene::kBORDER)     right = true;
-        if (n->y()<doc->yTop()+2*GraphScene::kBORDER)       top = true;
-        if (n->y()>doc->yBottom()-2*GraphScene::kBORDER)    bottom = true;
+        if (n->x()<doc->left()+2*GraphScene::kBORDER)      left = true;
+        if (n->x()>doc->right()-2*GraphScene::kBORDER)     right = true;
+        if (n->y()<doc->top()+2*GraphScene::kBORDER)       top = true;
+        if (n->y()>doc->bottom()-2*GraphScene::kBORDER)    bottom = true;
     }
 
     // proceed delete
@@ -291,8 +295,8 @@ Group* DataStructure::addGroup(const QString& name) {
 void DataStructure::updateRelativeCenter() {
    if (parent() != 0){
         Document *gd = qobject_cast<Document*>(parent());
-        d->_relativeCenter.setY((gd->yBottom()+gd->yTop())/2);
-        d->_relativeCenter.setX((gd->xRight()+gd->xLeft())/2);
+        d->_relativeCenter.setY((gd->bottom()+gd->top())/2);
+        d->_relativeCenter.setX((gd->right()+gd->left())/2);
     }else{
         d->_relativeCenter.setY(0);
         d->_relativeCenter.setX(0);

@@ -1,23 +1,22 @@
+/*  
+    This file is part of Rocs.
+    Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
 
-/* This file is part of Rocs,
-   Copyright (C) 2008 by:
-   Tomaz Canabrava <tomaz.canabrava@gmail.com>
-   Ugo Sangiori <ugorox@gmail.com>
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as
+    published by the Free Software Foundation; either version 2 of 
+    the License, or (at your option) any later version.
 
-   Rocs is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-   Rocs is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with Step; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 #include "AbstractAction.h"
 #include "GraphScene.h"
 #include "DataStructure.h"
@@ -75,7 +74,7 @@ bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
         }
         case QEvent::GraphicsSceneWheel: {
             QGraphicsSceneWheelEvent *e = static_cast<QGraphicsSceneWheelEvent*>(event);
-            return executeWellEvent(e);
+            return executeWheelEvent(e);
         }
         default:  return false;
     }
@@ -88,4 +87,4 @@ bool AbstractAction::executeRelease(QPointF pos) {Q_UNUSED(pos); return false; }
 bool AbstractAction::executeDoubleClick(QPointF pos){ Q_UNUSED(pos); return false; }
 bool AbstractAction::executeKeyPress(QKeyEvent *keyEvent){ Q_UNUSED(keyEvent);   return false; }
 bool AbstractAction::executeKeyRelease(QKeyEvent *keyEvent){ Q_UNUSED(keyEvent); return false; }
-bool AbstractAction::executeWellEvent(QGraphicsSceneWheelEvent* wEvent){Q_UNUSED(wEvent); return false;}
+bool AbstractAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent){Q_UNUSED(wEvent); return false;}

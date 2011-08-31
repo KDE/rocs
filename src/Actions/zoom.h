@@ -1,6 +1,6 @@
 /*
-    <one line to give the library's name and an idea of what it does.>
-    Copyright (C) 2011  <copyright holder> <email>
+    This file is part of Rocs.
+    Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -40,7 +40,7 @@ public:
     bool executeRelease(QPointF pos);
     bool executeDoubleClick(QPointF pos);
     bool executeKeyRelease(QKeyEvent* keyEvent);
-    bool executeWellEvent(QGraphicsSceneWheelEvent *wEvent);    
+    bool executeWheelEvent(QGraphicsSceneWheelEvent *wEvent);    
 private:
     QRectF m_zoomArea;
     qreal m_currentZoomFactor;
@@ -53,6 +53,8 @@ private:
     void zoomOut();
     void zoomIn();
     void zoomReset();
+    
+    qreal _zoomFactor;
 };
 
 #endif // ZOOM_H

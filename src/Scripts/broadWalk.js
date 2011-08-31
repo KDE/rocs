@@ -26,7 +26,7 @@ while (notQuit){
 	//is item not was preocessed, process it
 	if (queue[i].value == 0){
 	    queue[i].value = i+1-adjust
-	    adj = queue[i].adj_nodes()
+	    adj = queue[i].adj_data()
 	    //Queue adjacency nodes.
 	    for (var count = 0; count < adj.length; count++){
 		if (adj[count].value == 0){
