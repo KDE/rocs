@@ -92,18 +92,19 @@ void DocumentManager::changeDocument(Document* doc){
 }
 
 void DocumentManager::removeDocument(Document* doc){
-    if (m_documents.removeOne(doc) != 0){
-        if (m_actualDocument == doc){
-            if (m_documents.count() > 0){
-                changeDocument(m_documents.last()); //
-            }else{
-                emit deactivateDocument(m_actualDocument);
-                m_actualDocument = 0;
-            }
-        }
-        emit documentRemoved(doc);
-        doc->deleteLater();
+    if (m_documents.removeOne(doc) == 0)
+      return;
+    
+    if (m_actualDocument == doc){
+	if (m_documents.count() > 0){
+	    changeDocument(m_documents.last());
+	}else{
+	    emit deactivateDocument(m_actualDocument);
+	    m_actualDocument = 0;
+	}
     }
+    emit documentRemoved(doc);
+    doc->deleteLater();
 }
 
 void DocumentManager::convertToDataStructure() {
@@ -124,7 +125,8 @@ void DocumentManager::convertToDataStructure() {
 }
 
 void DocumentManager::loadDocument ( QString name ){
-  Document * doc;
+  Document * doc = new Document( name.isEmpty() ?  i18n ( "Untitled0" ) : name);
+  
   if ( name.isEmpty() ){
       int docNumber = 0;
       forever{
@@ -140,10 +142,8 @@ void DocumentManager::loadDocument ( QString name ){
               break;
           }
       }
-      doc = new Document( name );
       doc->addDataStructure ( i18n ( "Untitled0" ) );
   }else{
-      doc = new Document( i18n ( "Untitled0" ) );
       doc->loadFromInternalFormat ( name );
    }
    doc->setModified(false);
