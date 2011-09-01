@@ -202,9 +202,15 @@ void Pointer::removeDynamicProperty(QString property){
 }
 
 QScriptValue Pointer::start() {
+    // from==0 possible if this pointer is deleted
+    if (!d->from)
+        return QScriptValue();
     return d->from->scriptValue();
 }
 QScriptValue  Pointer::end() {
+  // to==0 possible if this pointer is deleted
+    if (!d->to)
+        return QScriptValue();
     return d->to->scriptValue();
 }
 
