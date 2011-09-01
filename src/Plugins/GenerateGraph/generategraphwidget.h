@@ -20,6 +20,7 @@
 #define GENERATEGRAPHWIDGET_H
 
 #include <QWidget>
+#include <KDialog>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
@@ -32,7 +33,7 @@ namespace Ui {
 }
 
 class GenerateGraphWidget :
-    public QWidget
+    public KDialog
 {
     Q_OBJECT
 

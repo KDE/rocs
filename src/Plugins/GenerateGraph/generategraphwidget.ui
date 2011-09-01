@@ -364,32 +364,6 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>200</y>
-     <width>99</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>generate</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>200</y>
-     <width>99</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>cancel</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections>
@@ -422,38 +396,6 @@
     <hint type="destinationlabel">
      <x>458</x>
      <y>54</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>released()</signal>
-   <receiver>GenerateGraphWidget</receiver>
-   <slot>generateGraph()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>234</x>
-     <y>210</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>430</x>
-     <y>311</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_2</sender>
-   <signal>released()</signal>
-   <receiver>GenerateGraphWidget</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>120</x>
-     <y>214</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>140</x>
-     <y>318</y>
     </hint>
    </hints>
   </connection>

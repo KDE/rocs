@@ -24,6 +24,7 @@
 
 #include <cmath>
 #include <KLocale>
+#include <KDialog>
 
 #include <QtGui/QGridLayout>
 #include <QtGui/QComboBox>
@@ -51,12 +52,21 @@ namespace boost { void throw_exception( std::exception const & ) {} } // do noop
 class QPushButton;
 
 GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
-    :   QWidget(parent)
+    :   KDialog(parent)
 {
-    ui = new Ui::GenerateGraphWidget;
     selectedGraphType_ = MESH;
-	ui->setupUi(this);
     graphDoc_ = graphDoc;
+  
+    QWidget *widget = new QWidget( this );
+    ui = new Ui::GenerateGraphWidget;
+    ui->setupUi(this);
+    setMainWidget(widget);
+    
+    // other KDialog options
+    setCaption( i18n("Generate Graph") );
+    setButtons( KDialog::Cancel | KDialog::Ok);
+     
+    connect( this, SIGNAL(okClicked()), this, SLOT(generateGraph()));
     
     // put widget at center of screen
     QDesktopWidget desktop;
