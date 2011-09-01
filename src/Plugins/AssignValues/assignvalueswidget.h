@@ -23,6 +23,7 @@
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
+#include <KDialog>
 
 
 class QGridLayout;
@@ -34,7 +35,7 @@ namespace Ui {
 }
 
 class AssignValuesWidget :
-    public QWidget
+    public KDialog
 {
     Q_OBJECT
 

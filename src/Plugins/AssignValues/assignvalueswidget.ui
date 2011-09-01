@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>313</width>
+    <width>218</width>
     <height>270</height>
    </rect>
   </property>
@@ -70,13 +70,19 @@ p, li { white-space: pre-wrap; }
       <number>0</number>
      </property>
      <widget class="QWidget" name="page">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>115</height>
+       </size>
+      </property>
       <widget class="QWidget" name="formLayoutWidget">
        <property name="geometry">
         <rect>
          <x>-1</x>
          <y>0</y>
-         <width>331</width>
-         <height>81</height>
+         <width>133</width>
+         <height>24</height>
         </rect>
        </property>
        <layout class="QFormLayout" name="formLayout">
@@ -109,15 +115,31 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>351</width>
-         <height>79</height>
+         <width>178</width>
+         <height>76</height>
         </rect>
        </property>
        <layout class="QFormLayout" name="formLayout_2">
+        <property name="fieldGrowthPolicy">
+         <enum>QFormLayout::ExpandingFieldsGrow</enum>
+        </property>
         <item row="0" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
            <string>Lower Limit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="spinBoxIntegerLowerLimit">
+          <property name="minimum">
+           <number>-99999</number>
+          </property>
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+          <property name="value">
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -135,10 +157,10 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="spinBoxIntegerLowerLimit">
+        <item row="2" column="1">
+         <widget class="QSpinBox" name="spinBoxIntegerGeneratorSeed">
           <property name="minimum">
-           <number>-99999</number>
+           <number>1</number>
           </property>
           <property name="maximum">
            <number>99999</number>
@@ -161,19 +183,6 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QSpinBox" name="spinBoxIntegerGeneratorSeed">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>99999</number>
-          </property>
-          <property name="value">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
      </widget>
@@ -183,8 +192,8 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>341</width>
-         <height>80</height>
+         <width>206</width>
+         <height>76</height>
         </rect>
        </property>
        <layout class="QFormLayout" name="formLayout_3">
@@ -256,24 +265,6 @@ p, li { white-space: pre-wrap; }
      </widget>
     </widget>
    </item>
-   <item row="8" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QPushButton" name="buttonCancel">
-       <property name="text">
-        <string>cancel</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonStart">
-       <property name="text">
-        <string>assign values</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
    <item row="5" column="0">
     <widget class="QComboBox" name="comboBoxMethod">
      <item>
@@ -327,38 +318,6 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>308</x>
      <y>165</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonCancel</sender>
-   <signal>released()</signal>
-   <receiver>AssignValuesWidget</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>90</x>
-     <y>251</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>85</x>
-     <y>324</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonStart</sender>
-   <signal>released()</signal>
-   <receiver>AssignValuesWidget</receiver>
-   <slot>assignValues()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>273</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>271</x>
-     <y>296</y>
     </hint>
    </hints>
   </connection>

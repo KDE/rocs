@@ -21,6 +21,7 @@
 
 #include <limits.h>
 #include <KLocale>
+#include <KDialog>
 
 #include <QtGui/QComboBox>
 #include <QtGui/QDesktopWidget>
@@ -50,10 +51,19 @@ using namespace Rocs;
 class QPushButton;
 
 AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
-    :   QWidget(parent)
+    :   KDialog(parent)
 {
+    QWidget *widget = new QWidget( this );
     ui = new Ui::AssignValuesWidget;
-	ui->setupUi(this);
+    ui->setupUi(widget);
+    setMainWidget(widget);
+    
+    // other KDialog options
+    setCaption( i18n("Assign Values") );
+    setButtons( KDialog::Cancel | KDialog::Ok);
+     
+    connect( this, SIGNAL(okClicked()), this, SLOT(assignValues()));
+
     graphDoc_ = graphDoc;
     
     // put widget at center of screen
