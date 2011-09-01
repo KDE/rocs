@@ -21,6 +21,7 @@
 
 #include <limits.h>
 #include <KLocale>
+#include <KDialog>
 
 #include <QtGui/QComboBox>
 #include <QtGui/QDesktopWidget>
@@ -47,11 +48,20 @@ using namespace Rocs;
 class QPushButton;
 
 TransformEdgesWidget::TransformEdgesWidget(Document* graphDoc, QWidget* parent)
-    :   QWidget(parent)
+    :   KDialog(parent)
 {
-    ui = new Ui::TransformEdgesWidget;
-	ui->setupUi(this);
     graphDoc_ = graphDoc;
+  
+    QWidget *widget = new QWidget( this );
+    ui = new Ui::TransformEdgesWidget;
+    ui->setupUi(this);
+    setMainWidget(widget);
+    
+    // other KDialog options
+    setCaption( i18n("Transform Edges") );
+    setButtons( KDialog::Cancel | KDialog::Ok);
+      
+    connect( this, SIGNAL(okClicked()), this, SLOT(executeTransform()));
     
     // put widget at center of screen
     QDesktopWidget desktop;

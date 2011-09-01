@@ -56,32 +56,6 @@ p, li { white-space: pre-wrap; }
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButtonStart">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>180</y>
-     <width>111</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>start transform</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButtonCancel">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>180</y>
-     <width>99</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>cancel</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -143,54 +117,5 @@ p, li { white-space: pre-wrap; }
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButtonStart</sender>
-   <signal>released()</signal>
-   <receiver>TransformEdgesWidget</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>254</x>
-     <y>192</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>296</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonCancel</sender>
-   <signal>released()</signal>
-   <receiver>TransformEdgesWidget</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>85</x>
-     <y>193</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>87</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonStart</sender>
-   <signal>released()</signal>
-   <receiver>TransformEdgesWidget</receiver>
-   <slot>executeTransform()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>223</x>
-     <y>191</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>151</x>
-     <y>118</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -309,13 +309,13 @@ bool Document::isPointAtDocument(QPointF point)  const {
 }
 
 bool Document::isModified() const{
-  return d->_modified;
+    return d->_modified;
 }
 
 void Document::cleanUpBeforeConvert()
 {
-  foreach (DataStructure * ds, d->_dataStructures)
-    ds->cleanUpBeforeConvert();
+    foreach (DataStructure * ds, d->_dataStructures)
+        ds->cleanUpBeforeConvert();
 }
 
 

@@ -20,6 +20,7 @@
 #define TRANSFORMEDGESWIDGET_H
 
 #include <QWidget>
+#include <KDialog>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
@@ -34,7 +35,7 @@ namespace Ui {
 }
 
 class TransformEdgesWidget :
-    public QWidget
+    public KDialog
 {
     Q_OBJECT
 
