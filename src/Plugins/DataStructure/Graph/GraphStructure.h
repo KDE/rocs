@@ -25,40 +25,61 @@
 
 namespace Rocs{
 class ROCSLIB_EXPORT GraphStructure : public DataStructure {
-  Q_OBJECT
-  public:
-    typedef enum {
-        UNDIRECTED,
-        DIRECTED,
-        MULTIGRAPH
-    } GRAPH_TYPE;
+    Q_OBJECT
+    public:
+        typedef enum {
+            UNDIRECTED,
+            DIRECTED,
+            MULTIGRAPH
+        } GRAPH_TYPE;
 
-    //to avoid hide some methods
-    using DataStructure::remove;
-    using DataStructure::addPointer;
-    using DataStructure::addData;
+      //to avoid hide some methods
+      using DataStructure::remove;
+      using DataStructure::addPointer;
+      using DataStructure::addData;
 
-    GraphStructure ( Document* parent = 0 );
+      GraphStructure ( Document* parent = 0 );
 
-    GraphStructure(DataStructure& other, Document *parent);
+      GraphStructure(DataStructure& other, Document *parent);
 
-    virtual ~GraphStructure();
+      virtual ~GraphStructure();
 
-    Pointer* addPointer(Data *from, Data *to);
-    Data* addData(QString name);
+      Pointer* addPointer(Data *from, Data *to);
+      Data* addData(QString name);
 
-  public slots:
-    QScriptValue list_nodes();
-    QScriptValue list_edges();
-    QScriptValue add_node(const QString& name);
-    QScriptValue add_edge(Data* from, Data* to);
-    QScriptValue node_byname(const QString& name);
-    bool directed();
-    GRAPH_TYPE graphType();
-    void setGraphType(int type);
+    public slots:
+        /**
+         * returns a list of all nodes of the graph as array
+         */
+        QScriptValue list_nodes();
+        
+        /**
+         * returns a list of all edges of the graph as array
+         */
+        QScriptValue list_edges();
+        
+        QScriptValue add_node(const QString& name);
+        QScriptValue add_edge(Data* from, Data* to);
+        QScriptValue node_byname(const QString& name);
+        
+        /**
+         * Computes the Dijkstra's shortest path algorithm to compute
+         * the shortes path from "from" to "to". Note: this shortest path
+         * algorithm works only for graphs with all edges values non-negative.
+         * The algorithm has time complexity O(V log V + E).
+         * 
+         * \param from the node from which the computation starts
+         * \param to the node to which the shortest path shall be computed
+         * \return the edge set of the shortest path
+         */
+        QScriptValue dijkstra_shortest_path(Data* from, Data* to);
+        
+        bool directed();
+        GRAPH_TYPE graphType();
+        void setGraphType(int type);
 
-  private:
-    GraphStructure::GRAPH_TYPE _type;
+    private:
+        GraphStructure::GRAPH_TYPE _type;
 };
 }
 #endif // GRAPHSTRUCTURE_H
