@@ -69,7 +69,7 @@ void QtScriptBackend::start()
     QString error = _engine->evaluate(_script).toString();
 
     emit finished();
-    emit sendDebug(error);
+    emit sendDebug("<b style=\"color: red\">"+error+"</b>");
 }
 
 bool QtScriptBackend::isRunning(){
