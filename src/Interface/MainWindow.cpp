@@ -216,6 +216,9 @@ void MainWindow::uploadScript()
 
 QWidget* MainWindow::setupScriptPanel()
 {
+    _hScriptSplitter = new QSplitter( this );
+    _hScriptSplitter->setOrientation( Qt::Horizontal );
+  
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
     _txtOutput = new KTextBrowser( this );
@@ -223,13 +226,15 @@ QWidget* MainWindow::setupScriptPanel()
     _bottomTabs = new TabWidget ( TabWidget::TabOnBottom, this );
     _bottomTabs->addWidget ( _codeEditor,  i18n ( "Editor" ), KIcon ( "accessories-text-editor" ) );
     _bottomTabs->addWidget ( _txtDebug, i18n ( "Debugger" ), KIcon ( "tools-report-bug" ) );
-    _bottomTabs->addWidget ( _txtOutput, i18n("Output"), KIcon ("tools-document"));
-
+    
     _runScript = new KAction ( KIcon ( "system-run" ), i18n ( "Run" ), this );
     connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
     _bottomTabs->addAction ( _runScript );
 
-    return _bottomTabs;
+    _hScriptSplitter->addWidget(_bottomTabs);
+    _hScriptSplitter->addWidget(_txtOutput ); //, i18n("Output"), KIcon ("tools-document")); //FIXME
+
+    return _hScriptSplitter;
 }
 
 QWidget* MainWindow::setupWhiteboardPanel()

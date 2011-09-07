@@ -133,6 +133,7 @@ private: // Variables.
     //! Needed to restore the size of the splitter after closing / opening the UI.
     QSplitter *_vSplitter;
     QSplitter *_hSplitter;
+    QSplitter *_hScriptSplitter;
 
     //! all the actions that I need to reference later.
     MoveDataAction *_moveDataAction;
