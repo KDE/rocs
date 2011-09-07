@@ -135,5 +135,6 @@ void QtScriptBackend::debug(const QString& str){
 
 void QtScriptBackend::output(const QString& str){
     emit sendOutput(str);
+    emit sendDebug("<b>"+str+"</b>");
 }
 
