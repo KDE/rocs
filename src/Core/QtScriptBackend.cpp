@@ -29,12 +29,12 @@
 static QtScriptBackend *self;
 
 static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {
-    self->debug(QString("%1 \n").arg(context->argument(0).toString()));
+    self->debug(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
 static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engine*/){
-    self->output(QString("%1 \n").arg(context->argument(0).toString()));
+    self->output(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
