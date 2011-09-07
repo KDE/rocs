@@ -26,6 +26,10 @@
 #include <KActionCollection>
 #include <KIcon>
 #include <QSplitter>
+#include <QStackedWidget>
+#include <QVBoxLayout>
+#include <QComboBox>
+#include <QLabel>
 #include <KDebug>
 #include <KApplication>
 #include <KTextBrowser>
@@ -117,7 +121,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
      * this should not be hardcoded here.
      * use KWelcomeWidget instead.
      */
-     DocumentManager::self()->loadDocument();
+    DocumentManager::self()->loadDocument();
 
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
     GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
@@ -128,7 +132,9 @@ MainWindow::~MainWindow()
     Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );
     Settings::setVSplitterSizeBottom ( _vSplitter->sizes() [1] );
     Settings::setHSplitterSizeLeft ( _hSplitter->sizes() [0] );
-    Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
+    Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );  
+    Settings::setHScriptSplitterSizeLeft ( _hScriptSplitter->sizes() [0] );
+    Settings::setHScriptSplitterSizeRight ( _hScriptSplitter->sizes() [1] );
 
     Settings::self()->writeConfig();
 }
@@ -166,7 +172,7 @@ void MainWindow::setupWidgets()
     _vSplitter->addWidget ( _hSplitter );
     _vSplitter->addWidget ( scriptPanel );
     
-    
+    _hScriptSplitter->setSizes ( QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() );
     _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
     _hSplitter->setSizes ( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight() );
 
@@ -225,15 +231,38 @@ QWidget* MainWindow::setupScriptPanel()
 
     _bottomTabs = new TabWidget ( TabWidget::TabOnBottom, this );
     _bottomTabs->addWidget ( _codeEditor,  i18n ( "Editor" ), KIcon ( "accessories-text-editor" ) );
-    _bottomTabs->addWidget ( _txtDebug, i18n ( "Debugger" ), KIcon ( "tools-report-bug" ) );
+
     
     _runScript = new KAction ( KIcon ( "system-run" ), i18n ( "Run" ), this );
     connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
     _bottomTabs->addAction ( _runScript );
 
-    _hScriptSplitter->addWidget(_bottomTabs);
-    _hScriptSplitter->addWidget(_txtOutput ); //, i18n("Output"), KIcon ("tools-document")); //FIXME
+    QStackedWidget *stackedListing = new QStackedWidget;
+        stackedListing->addWidget(_txtOutput);
+        stackedListing->addWidget(_txtDebug);
 
+    QComboBox *selectListing = new QComboBox;
+        selectListing->addItem( KIcon ( "accessories-text-editor" ), i18n("Program Messages"));
+        selectListing->addItem( KIcon ( "tools-report-bug" ), i18n("Debug Messages"));
+        
+    QWidget *header = new QWidget( this );
+    QHBoxLayout *headerLayout = new QHBoxLayout;
+        headerLayout->addWidget(new QLabel(i18n("Output source")));
+        headerLayout->addWidget(selectListing);
+        header->setLayout(headerLayout);
+        
+    QVBoxLayout *listing = new QVBoxLayout;
+        listing->addWidget( header );
+        listing->addWidget( stackedListing );
+    QWidget *listingWidget = new QWidget(this);
+    listingWidget->setLayout( listing );
+    
+    connect(    selectListing, SIGNAL(currentIndexChanged(int)) , 
+                stackedListing, SLOT(setCurrentIndex(int)) );
+    
+    _hScriptSplitter->addWidget(_bottomTabs);
+    _hScriptSplitter->addWidget( listingWidget );
+    
     return _hScriptSplitter;
 }
 

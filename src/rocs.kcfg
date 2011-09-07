@@ -29,6 +29,12 @@
 		<entry name="hSplitterSizeRight" type="Int" hidden="true">
 			<default> 500 </default>
 		</entry>
+        <entry name="hScriptSplitterSizeLeft" type="Int" hidden="true">
+            <default> 500 </default>
+        </entry>
+        <entry name="hScriptSplitterSizeRight" type="Int" hidden="true">
+            <default> 500 </default>
+        </entry>
 	</group>
 	<group name="IncludeManager">
         <entry name="includePath" type="StringList">
