@@ -63,7 +63,7 @@ private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.
 
-    QWidget* setupLeftPanel(); // Setup the left actionbar panel & related widgets..
+    QWidget* setupWhiteboardPanel(); // Setup the left actionbar panel & related widgets..
     QWidget* setupScriptPanel(); // setup the panel with the editors and stuff
     int saveIfChanged();
     void finishLoadingUi();

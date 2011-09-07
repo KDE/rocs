@@ -152,7 +152,7 @@ void MainWindow::setupWidgets()
     _vSplitter->setOrientation ( Qt::Vertical );
 
     // setup upper half
-    QWidget *leftPanel  = setupLeftPanel();         // graph properties
+    QWidget *leftPanel  = setupWhiteboardPanel();         // graph properties
     _graphVisualEditor = GraphVisualEditor::self(); // graph editor whiteboard
     
     _hSplitter = new QSplitter ( this );
@@ -232,7 +232,7 @@ QWidget* MainWindow::setupScriptPanel()
     return _bottomTabs;
 }
 
-QWidget* MainWindow::setupLeftPanel()
+QWidget* MainWindow::setupWhiteboardPanel()
 {
     _GraphLayers = new GraphLayers ( this );
     return _GraphLayers;
