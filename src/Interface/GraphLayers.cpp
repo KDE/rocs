@@ -67,7 +67,8 @@ GraphLayers::GraphLayers(MainWindow *parent) :
 void GraphLayers::resizeEvent(QResizeEvent* event)
 {
     QScrollArea::resizeEvent(event);
-    widget()->setFixedWidth(contentsRect().width());
+    widget()->setFixedWidth(contentsRect().width()); //! do not remove the duplicated line below. 
+    widget()->setFixedWidth(contentsRect().width()); //! it looks it just works like this. -.-'
 }
 
 void GraphLayers::setActiveDocument() {

@@ -113,7 +113,7 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
         createNewGraph = true;
     }
 
-    radio()->group()->removeButton(radio());
+    _activateGraph->group()->removeButton(radio());
     
     emit removeGraph();
     
@@ -121,6 +121,9 @@ void GraphPropertiesWidget::on__graphDelete_clicked() {
         emit addGraph(i18n("Untitled0"));
     }
     hide();
+    QLayout *layout = parentWidget()->layout();
+    layout->removeWidget(this);
+    
     deleteLater();
 }
 
