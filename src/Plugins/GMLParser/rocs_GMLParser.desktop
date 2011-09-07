@@ -30,6 +30,7 @@ Name[it]=File GML
 Name[km]=ឯកសារ GML
 Name[ko]=GML 파일
 Name[lt]=GML failas
+Name[lv]=GML fails
 Name[nb]=GML-fil
 Name[nds]=GML-Datei
 Name[nl]=GML-bestand
@@ -54,11 +55,15 @@ Comment[de]=GML-Dateien lesen und schreiben.
 Comment[en_GB]=Read and write GML files.
 Comment[es]=Leer y escribir archivos GML.
 Comment[et]=GML-failide lugemine ja kirjutamine.
-Comment[fr]=Lecture et écriture des fichiers GML.
+Comment[fr]=Lit et écrit des fichiers GML.
 Comment[gl]=Ler e escribir ficheiros GML.
 Comment[it]=Legge e scrive file GML.
 Comment[km]=អាន និង​សរសេរ​ឯកសារ​ GML ។
 Comment[ko]=GML 파일을 읽고 씁니다.
+<<<<<<< HEAD
+=======
+Comment[lv]=Lasa un raksta GML failus.
+>>>>>>> 4.7
 Comment[nb]=Les og skriv GML-filer.
 Comment[nds]=GML-Dateien lesen un schrieven
 Comment[nl]=Lezen en schrijven van GML-bestanden.

@@ -92,7 +92,7 @@ void DocumentManager::changeDocument(Document* doc){
 }
 
 void DocumentManager::removeDocument(Document* doc){
-    if (m_documents.removeOne(doc) != 0){
+    if (m_documents.removeOne(doc)){
         if (m_actualDocument == doc){
             if (m_documents.count() > 0){
                 changeDocument(m_documents.last()); //
@@ -107,7 +107,6 @@ void DocumentManager::removeDocument(Document* doc){
 }
 
 void DocumentManager::convertToDataStructure() {
-    kDebug() << "-=-=-=-=-= Converting Data Structures -=-=-=-=-=";
     Document * newDoc = 0;
     if (m_actualDocument){
         if (m_actualDocument->dataStructureTypeName() != DataStructurePluginManager::self()->actualPluginName()
@@ -143,6 +142,7 @@ void DocumentManager::loadDocument ( QString name ){
       doc = new Document( name );
       doc->addDataStructure ( i18n ( "Untitled0" ) );
   }else{
+      removeDocument(activeDocument());
       doc = new Document( i18n ( "Untitled0" ) );
       doc->loadFromInternalFormat ( name );
    }
