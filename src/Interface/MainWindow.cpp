@@ -147,17 +147,30 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::setupWidgets()
 {
+    // splits the main window horizontal
+    _vSplitter = new QSplitter ( this );
+    _vSplitter->setOrientation ( Qt::Vertical );
+
+    // setup upper half
+    QWidget *leftPanel  = setupLeftPanel();         // graph properties
+    _graphVisualEditor = GraphVisualEditor::self(); // graph editor whiteboard
+    
     _hSplitter = new QSplitter ( this );
-
-    QWidget *rightPanel = setupRightPanel();
-    QWidget *leftPanel  = setupLeftPanel();
-
-
-    _hSplitter->addWidget ( leftPanel );
-    _hSplitter->addWidget ( rightPanel );
+    _hSplitter->setOrientation( Qt::Horizontal );
+    _hSplitter->addWidget (leftPanel);
+    _hSplitter->addWidget (_graphVisualEditor);
+    
+    // setup lower half
+    QWidget *scriptPanel = setupScriptPanel();
+  
+    _vSplitter->addWidget ( _hSplitter );
+    _vSplitter->addWidget ( scriptPanel );
+    
+    
+    _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
     _hSplitter->setSizes ( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight() );
 
-    setCentralWidget ( _hSplitter );
+    setCentralWidget ( _vSplitter );
 }
 
 void MainWindow::downloadNewExamples(){
@@ -201,10 +214,8 @@ void MainWindow::uploadScript()
 }
 
 
-QWidget* MainWindow::setupRightPanel()
+QWidget* MainWindow::setupScriptPanel()
 {
-    _graphVisualEditor = GraphVisualEditor::self();
-
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
     _txtOutput = new KTextBrowser( this );
@@ -218,16 +229,7 @@ QWidget* MainWindow::setupRightPanel()
     connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
     _bottomTabs->addAction ( _runScript );
 
-    _vSplitter = new QSplitter ( this );
-    _vSplitter->setOrientation ( Qt::Vertical );
-
-    // graph editor whiteboard
-    _vSplitter->addWidget (_graphVisualEditor);
-
-    _vSplitter->addWidget ( _bottomTabs );
-    _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
-
-    return _vSplitter;
+    return _bottomTabs;
 }
 
 QWidget* MainWindow::setupLeftPanel()
