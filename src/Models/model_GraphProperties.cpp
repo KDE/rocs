@@ -115,8 +115,11 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource) {
 
     // insert the information.
 
-    beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size()-1);
-    endInsertRows();
+    if (dataSource->dynamicPropertyNames().size() > 0){
+        beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size()-1);
+        endInsertRows();
+    }
+
 
 }
 
