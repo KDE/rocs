@@ -102,14 +102,14 @@ void TabWidget::addAction(KAction *a) {
     _runAction = a;
     
 }
-
+/*
 void TabWidget::setPlayString(){
     m_tabs->tab(m_numOfActions+m_numOfTabs)->setText(i18n("Run"));
 }
 
 void TabWidget::setStopString(){
     m_tabs->tab(m_numOfActions+m_numOfTabs)->setText(i18n("Stop"));
-}
+}*/
 
 void TabWidget::releaseActionButton(int index) {
     m_tabs->setTab(m_activeTab, true);

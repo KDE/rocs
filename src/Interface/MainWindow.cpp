@@ -30,6 +30,7 @@
 #include <QVBoxLayout>
 #include <QComboBox>
 #include <QLabel>
+#include <QToolBar>
 #include <KDebug>
 #include <KApplication>
 #include <KTextBrowser>
@@ -95,6 +96,7 @@
 #include "zoom.h"
 #include "../GraphicsItem/GraphicsLayout.h"
 #include "PossibleIncludes.h"
+#include <QLayout>
 
 MainWindow::MainWindow() :  KXmlGuiWindow()
 {
@@ -172,7 +174,7 @@ void MainWindow::setupWidgets()
     _vSplitter->addWidget ( _hSplitter );
     _vSplitter->addWidget ( scriptPanel );
     
-    _hScriptSplitter->setSizes ( QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() );
+    _hScriptSplitter->setSizes ( QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() << 80 );
     _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
     _hSplitter->setSizes ( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight() );
 
@@ -221,7 +223,7 @@ void MainWindow::uploadScript()
 
 
 QWidget* MainWindow::setupScriptPanel()
-{
+{     
     _hScriptSplitter = new QSplitter( this );
     _hScriptSplitter->setOrientation( Qt::Horizontal );
   
@@ -229,41 +231,42 @@ QWidget* MainWindow::setupScriptPanel()
     _txtDebug = new KTextBrowser ( this );
     _txtOutput = new KTextBrowser( this );
 
-    _bottomTabs = new TabWidget ( TabWidget::TabOnBottom, this );
-    _bottomTabs->addWidget ( _codeEditor,  i18n ( "Editor" ), KIcon ( "accessories-text-editor" ) );
-
-    
-    _runScript = new KAction ( KIcon ( "system-run" ), i18n ( "Run" ), this );
-    connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
-    _bottomTabs->addAction ( _runScript );
-
     QStackedWidget *stackedListing = new QStackedWidget;
-        stackedListing->addWidget(_txtOutput);
-        stackedListing->addWidget(_txtDebug);
+    stackedListing->addWidget(_txtOutput);
+    stackedListing->addWidget(_txtDebug);
 
     QComboBox *selectListing = new QComboBox;
-        selectListing->addItem( KIcon ( "accessories-text-editor" ), i18n("Program Messages"));
-        selectListing->addItem( KIcon ( "tools-report-bug" ), i18n("Debug Messages"));
+    selectListing->addItem( KIcon ( "accessories-text-editor" ), i18n("Program Messages"));
+    selectListing->addItem( KIcon ( "tools-report-bug" ), i18n("Debug Messages"));
         
     QWidget *header = new QWidget( this );
-    QHBoxLayout *headerLayout = new QHBoxLayout;
-        headerLayout->addWidget(new QLabel(i18n("Output source")));
-        headerLayout->addWidget(selectListing);
-        header->setLayout(headerLayout);
-        
-    QVBoxLayout *listing = new QVBoxLayout;
-        listing->addWidget( header );
-        listing->addWidget( stackedListing );
-    QWidget *listingWidget = new QWidget(this);
-    listingWidget->setLayout( listing );
+    header->setLayout( new QHBoxLayout );
+    header->layout()->addWidget(new QLabel(i18n("Output source")));
+    header->layout()->addWidget(selectListing);
     
+    QWidget *listingWidget = new QWidget(this);
+    listingWidget->setLayout( new QVBoxLayout );
+    listingWidget->layout()->addWidget( header );
+    listingWidget->layout()->addWidget( stackedListing );
+    
+    QToolBar *executeCommands = new QToolBar;
+    executeCommands->setToolButtonStyle( Qt::ToolButtonTextUnderIcon );
+    _runScript = new KAction ( KIcon ( "system-run" ), i18n ( "Run" ), this );
+    executeCommands->addAction(_runScript);
+    
+    connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );    
     connect(    selectListing, SIGNAL(currentIndexChanged(int)) , 
                 stackedListing, SLOT(setCurrentIndex(int)) );
     
-    _hScriptSplitter->addWidget(_bottomTabs);
+    _hScriptSplitter->addWidget( _codeEditor );
     _hScriptSplitter->addWidget( listingWidget );
     
-    return _hScriptSplitter;
+    QWidget *scriptInterface = new QWidget( this );
+    scriptInterface->setLayout( new QHBoxLayout );
+    scriptInterface->layout()->addWidget( _hScriptSplitter );
+    scriptInterface->layout()->addWidget( executeCommands );
+    
+    return scriptInterface;
 }
 
 QWidget* MainWindow::setupWhiteboardPanel()
@@ -434,7 +437,7 @@ void MainWindow::setActiveDocument ( )
 //     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
     connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
     connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-    connect( engine, SIGNAL(finished()),   _bottomTabs, SLOT(setPlayString()));
+//     connect( engine, SIGNAL(finished()),   _bottomTabs, SLOT(setPlayString()));  //FIXME removed for now
     activeDocument->setModified(false);
 }
 
@@ -598,11 +601,11 @@ void MainWindow::executeScript(const QString& text) {
 
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
     if ( !engine->isRunning() ){
-        _bottomTabs->setStopString();
+//         _bottomTabs->setStopString(); //FIXME
         engine->setScript(script, DocumentManager::self()->activeDocument());
         engine->start();
     }else{
-       _bottomTabs->setPlayString();
+//        _bottomTabs->setPlayString(); //FIXME
        engine->stop();
     }
 }
