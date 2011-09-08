@@ -60,12 +60,14 @@ Data::Data(DataStructure *parent)
 }
 
 Data::~Data() {
-    emit removed();
+    d->_dataStructure->remove(this);
+    
     d->empty(d->_in_pointers);
     d->empty(d->_out_pointers);
     d->empty(d->_self_pointers);
 
     delete d;
+    emit removed();
 }
 
 bool Data::showName() {
