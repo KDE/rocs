@@ -220,23 +220,27 @@ void Document::resizeDocumentIncrease()
 {
     int elements = dataStructures().size();
     for (int i = 0; i < elements; i++) {
+        bool resizeDocument = false;
         foreach( Data* n,  dataStructures().at(i)->dataList() ){
             if (n->x() < d->_left+GraphScene::kBORDER) {
                 setLeft(d->_left-GraphScene::kBORDER);
-                emit resized();
+                resizeDocument = true;
             }
             if (n->x() > d->_right-GraphScene::kBORDER) {
                 setRight(d->_right+GraphScene::kBORDER);
-                emit resized();
+                resizeDocument = true;
             }
             if (n->y() < d->_top+GraphScene::kBORDER) {
                 setTop(d->_top-GraphScene::kBORDER);
-                emit resized();
+                resizeDocument = true;
             }
             if (n->y() > d->_bottom-GraphScene::kBORDER) {
                 setBottom(d->_bottom+GraphScene::kBORDER);
-                emit resized();
+                resizeDocument = true;
             }
+        }
+        if (resizeDocument) {
+            emit resized();
         }
     }
 }
