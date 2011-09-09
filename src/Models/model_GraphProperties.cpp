@@ -43,7 +43,6 @@ int GraphPropertiesModel::rowCount(const QModelIndex &parent) const {
 }
 
 int GraphPropertiesModel::columnCount ( const QModelIndex & parent ) const {
-    // should always be 2. //! WARNING: wtf? should always be 2 but return 3?
     Q_UNUSED(parent);
     return 3; //Name - Value - Type
 }
@@ -60,21 +59,13 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const {
         return QVariant();
     }
 
-    // if it's the first column, return it's name.
-    // if it's the second column, return it's data.
+    const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
+    
+    return  ( index.column() == 0 ) ? propertyName
+          : ( index.column() == 1 ) ?  _dataSource->property( propertyName )
+          : ( index.column() == 2 ) ? DynamicPropertiesList::New()->typeInText(_dataSource, propertyName)
+          : QVariant();
 
-    if (index.column() == 0) {
-        return _dataSource->dynamicPropertyNames()[index.row()];
-    }
-    else if (index.column() == 1) {
-        return _dataSource->property( _dataSource->dynamicPropertyNames()[index.row()]);
-    } else if (index.column() == 2) {
-        return DynamicPropertiesList::New()->typeInText(_dataSource,
-                _dataSource->dynamicPropertyNames()[index.row()]);
-    }
-
-    // if it's anything else, it's an error, return a default value constructed QVariant.
-    return QVariant();
 }
 
 QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientation, int role) const {
@@ -115,8 +106,11 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource) {
 
     // insert the information.
 
-    beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size()-1);
-    endInsertRows();
+    if (dataSource->dynamicPropertyNames().size() > 0){
+        beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size()-1);
+        endInsertRows();
+    }
+
 
 }
 
