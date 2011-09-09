@@ -437,7 +437,7 @@ void MainWindow::setActiveDocument ( )
 //     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
     connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
     connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-//     connect( engine, SIGNAL(finished()),   _bottomTabs, SLOT(setPlayString()));  //FIXME removed for now
+    connect( engine, SIGNAL(finished()), this, SLOT(setPlayString()));
     activeDocument->setModified(false);
 }
 
@@ -601,16 +601,25 @@ void MainWindow::executeScript(const QString& text) {
 
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
     if ( !engine->isRunning() ){
-//         _bottomTabs->setStopString(); //FIXME
+        setStopString();
         engine->setScript(script, DocumentManager::self()->activeDocument());
         engine->start();
     }else{
-//        _bottomTabs->setPlayString(); //FIXME
+       setPlayString();
        engine->stop();
     }
 }
 
 #endif
+
+
+void MainWindow::setPlayString(){
+    _runScript->setText(i18n("Run"));
+}
+
+void MainWindow::setStopString(){
+    _runScript->setText(i18n("Stop"));
+}
 
 void MainWindow::outputString ( const QString& s ) { _txtOutput->append ( s ); }
 void MainWindow::debugString ( const QString& s )  { _txtDebug->append ( s );  }

@@ -107,6 +107,8 @@ public slots:
 
     /** setup documents list.*/
     void setupDocumentsList();
+    void setPlayString();
+    void setStopString();
 
 signals:
     void startEvaluation();

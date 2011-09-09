@@ -47,13 +47,10 @@ private:
     int m_activeTab;
     int m_numOfTabs; // kmultitabbar is silly and doesn't let me query how much tabs I have.
     int m_numOfActions; // same
+    
 signals:
     void widgetActivated(int id);
     void actionTriggered(int id);
-
-public slots:
-  void setPlayString();
-  void setStopString();
 
 private slots:
     void releaseButton(int id);
