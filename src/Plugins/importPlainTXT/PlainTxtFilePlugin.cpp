@@ -50,7 +50,7 @@ const QStringList PlainTXTFilePlugin::extensions() const {
 
 Document * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
     Document * graphDoc = new Document ( "Untitled" );
-    DataStructure * graph = graphDoc->addDataStructure();
+    DataStructurePtr graph = graphDoc->addDataStructure();
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
     if ( !f.open ( QFile::ReadOnly ) ) {
@@ -68,7 +68,7 @@ Document * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
             edges << QPair<QString, QString> ( list.at ( 0 ), list.at ( 1 ) ) ;
             break;
         case 3:{
-           Data *d = graph->addData ( list.at ( 0 ) );
+           DataPtr d = graph->addData ( list.at ( 0 ) );
             d->setX ( list.at ( 1 ).toInt() );
             d->setY ( list.at ( 2 ).toInt() );
             break;
@@ -90,9 +90,9 @@ bool PlainTXTFilePlugin::writeFile ( Document &graph , const QString &filename )
     QFile file ( filename );
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
-        DataStructure *g = graph.activeDataStructure();
+        DataStructurePtr g = graph.activeDataStructure();
         if (g){
-            foreach ( Data *n, g->dataList() ) {
+            foreach ( DataPtr n, g->dataList() ) {
                 out << n->name();
                 out << " ";
                 out << n->x();
@@ -100,7 +100,7 @@ bool PlainTXTFilePlugin::writeFile ( Document &graph , const QString &filename )
                 out << n->y();
                 out << '\n';
             }
-            foreach ( Pointer *e, g->pointers() ) {
+            foreach ( PointerPtr e, g->pointers() ) {
                 out << e->from()->name() << " " << e->to()->name() << '\n';
             }
             return true;

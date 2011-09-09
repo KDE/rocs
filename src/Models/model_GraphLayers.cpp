@@ -68,7 +68,7 @@ Qt::ItemFlags DataStructureLayersModel::flags(const QModelIndex& index) const {
 
 bool DataStructureLayersModel::setData(const QModelIndex& index, const QVariant& value, int role) {
     if ( index.isValid() && (role == Qt::ItemIsEditable)) {
-        DataStructure *g = _document->dataStructures().at(index.row());
+        DataStructurePtr g = _document->dataStructures().at(index.row());
         g-> setProperty("name",value.toString());
         return true;
     }
@@ -93,8 +93,8 @@ bool DataStructureLayersModel::removeRows(int position, int rows, const QModelIn
     return true;
 }
 
-DataStructure *DataStructureLayersModel::at(const QModelIndex& index)
+DataStructurePtr DataStructureLayersModel::at(const QModelIndex& index)
 {
-    if (_document->dataStructures().size() == 0) return 0;
+    if (_document->dataStructures().size() == 0) return DataStructurePtr ();
     return _document->dataStructures().at(index.row());
 }

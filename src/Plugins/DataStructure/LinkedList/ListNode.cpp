@@ -20,7 +20,7 @@
 #include <Pointer.h>
 #include "KDebug"
 
-ListNode::ListNode(DataStructure* parent): Data(parent)
+ListNode::ListNode(DataStructurePtr parent): Data(parent)
 {
 
 }
@@ -32,22 +32,22 @@ ListNode::~ListNode()
 }
 
 QScriptValue ListNode::front(){
-  if (ListNode * n = next()){
+  if (boost::shared_ptr<ListNode> n = next()){
       return n->scriptValue();
   }
   return 0;
 }
 
-void ListNode::pointTo(ListNode* to )
+void ListNode::pointTo(boost::shared_ptr<ListNode> to )
 {
     addPointer(to);
 }
 
-ListNode * ListNode::next() const{
+boost::shared_ptr<ListNode> ListNode::next() const{
     if (out_pointers().count() == 1 ){
-        if(ListNode * n = qobject_cast<ListNode*>( out_pointers().at(0)->to())){
+        if(boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>( out_pointers().at(0)->to())){
           return n;
         }
     }
-    return 0;
+    return boost::shared_ptr<ListNode>();
 }

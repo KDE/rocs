@@ -36,29 +36,40 @@
 
 namespace boost { void throw_exception( std::exception const & ) {} }
 
+DataStructurePtr Rocs::GraphStructure::create(Document *parent) {
+    return DataStructure::create<GraphStructure>(parent);
+}
+
+DataStructurePtr Rocs::GraphStructure::create(DataStructurePtr other, Document *parent) {
+    boost::shared_ptr<GraphStructure> ds = boost::static_pointer_cast<GraphStructure>(DataStructure::create<GraphStructure>(parent));
+    ds->importStructure(other);
+    return ds;
+}
+
 Rocs::GraphStructure::GraphStructure ( Document* parent ) :
     DataStructure ( parent )
 {
+    qDebug() << "GraphStructure constructor (empty graph)";
     setGraphType(UNDIRECTED);
 }
 
-Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): DataStructure(other, parent)
+void Rocs::GraphStructure::importStructure(DataStructurePtr other)
 {
-    QHash <Data*, Data* > dataTodata;
-    foreach(Data* n, other.dataList()){
-        Data* newdata = addData(n->name());
+    QHash <Data*, DataPtr > dataTodata;
+    foreach(DataPtr n, other->dataList()){
+        DataPtr newdata = addData(n->name());
         newdata->setColor(n->color());
         newdata->setValue(n->value());
         newdata->setX(n->x());
         newdata->setY(n->y());
         newdata->setWidth(n->width());
-        dataTodata.insert(n, newdata);
+        dataTodata.insert(n.get(), newdata);
     }
-    foreach(Pointer *e, other.pointers()){
-        Data* from =  dataTodata.value(e->from());
-        Data* to =  dataTodata.value(e->to());
+    foreach(PointerPtr e, other->pointers()){
+        DataPtr from =  dataTodata.value(e->from().get());
+        DataPtr to =  dataTodata.value(e->to().get());
 
-        Pointer* newPointer = addPointer(from, to);
+        PointerPtr newPointer = addPointer(from, to);
         newPointer->setColor(e->color());
         newPointer->setValue(e->value());
     }
@@ -67,12 +78,12 @@ Rocs::GraphStructure::GraphStructure(DataStructure& other, Document* parent): Da
 
 
 Rocs::GraphStructure::~GraphStructure() {
-
+    qDebug() << "GraphStructure desctructor";
 }
 
 QScriptValue Rocs::GraphStructure::list_nodes() {
     QScriptValue array = engine()->newArray();
-    foreach(Data* n, dataList()) {
+    foreach(DataPtr n, dataList()) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
@@ -80,20 +91,20 @@ QScriptValue Rocs::GraphStructure::list_nodes() {
 
 QScriptValue Rocs::GraphStructure::list_edges() {
     QScriptValue array = engine()->newArray();
-    foreach(Pointer* n, pointers()) {
+    foreach(PointerPtr n, pointers()) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
 }
 
 QScriptValue Rocs::GraphStructure::add_node(const QString& name) {
-    Data* n = addData(name);
+    DataPtr n = addData(name);
     n->setEngine(engine());
     return n->scriptValue();
 }
 
-QScriptValue Rocs::GraphStructure::add_edge(Data* from, Data* to) {
-    Pointer *e = addPointer(from, to);
+QScriptValue Rocs::GraphStructure::add_edge(DataPtr from, DataPtr to) {
+    PointerPtr e = addPointer(from, to);
     if (e){
       e->setEngine(engine());
       return e->scriptValue();
@@ -103,11 +114,11 @@ QScriptValue Rocs::GraphStructure::add_edge(Data* from, Data* to) {
 }
 
 QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
-    Data *n = data(name);
+    DataPtr n = data(name);
     return n->scriptValue();
 }
 
-QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* from, Data* to) {
+QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(DataPtr from, DataPtr to) {
     QScriptValue path_edges = engine()->newArray();
       
     typedef boost::adjacency_list < boost::listS, boost::vecS, boost::directedS,
@@ -118,20 +129,20 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* from, Data* to) 
 
     // create IDs for all nodes
     QMap<Data*,int> node_mapping;
-    QMap<std::pair<int,int>,Pointer*> edge_mapping; // to map all edges back afterwards
+    QMap<std::pair<int,int>, PointerPtr > edge_mapping; // to map all edges back afterwards
     int counter = 0;
-    BOOST_FOREACH (Data* data, this->dataList()) {
-        node_mapping[data] = counter++;
+    BOOST_FOREACH (DataPtr data, this->dataList()) {
+        node_mapping[data.get()] = counter++;
     }
     
     QVector<Edge> edges(this->pointers().count());
     QVector<qreal> weights(this->pointers().count());
     
     counter = 0;
-    BOOST_FOREACH( Pointer* p, this->pointers() )
+    BOOST_FOREACH( PointerPtr p, this->pointers() )
     {
-         edges[counter] = Edge(node_mapping[p->from()], node_mapping[p->to()]);
-         edge_mapping[std::make_pair<int,int>(node_mapping[p->from()], node_mapping[p->to()])] = p;
+         edges[counter] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
+         edge_mapping[std::make_pair<int,int>(node_mapping[p->from().get()], node_mapping[p->to().get()])] = p;
          if (!p->value().isEmpty()) {
               weights[counter] = p->value().toDouble();
          } else {
@@ -148,8 +159,8 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* from, Data* to) 
              );
     
     // compute Dijkstra
-    vertex_descriptor source = boost::vertex(node_mapping[from], g);
-    vertex_descriptor target = boost::vertex(node_mapping[to], g);
+    vertex_descriptor source = boost::vertex(node_mapping[from.get()], g);
+    vertex_descriptor target = boost::vertex(node_mapping[to.get()], g);
     QVector<vertex_descriptor> p(boost::num_vertices(g));
     QVector<int> dist(boost::num_vertices(g));
     boost::dijkstra_shortest_paths( g, 
@@ -191,21 +202,21 @@ void Rocs::GraphStructure::setGraphType(int type)
     _type = static_cast<GRAPH_TYPE>(type);
     switch(_type){
     case UNDIRECTED :
-        foreach(Data *data, dataList()){
+        foreach(DataPtr data, dataList()){
             // Clear the 'self pointers', undirecetd graphs doesn't have self nodes.
-            foreach(Pointer* p, data->self_pointers()){
+            foreach(PointerPtr p, data->self_pointers()){
                p->remove();
             }
             data->self_pointers().clear();
             
             // Clear the rest. there should be only one edge between two nodes.
-            foreach(Data *data2, dataList()){
+            foreach(DataPtr data2, dataList()){
                 if (data == data2){
                     continue;
                 }
                 
                 bool foundOne = false;
-                foreach (Pointer *tmp, data->out_pointers()) {
+                foreach (PointerPtr tmp, data->out_pointers()) {
                     if (tmp->to() == data2) {
                         if (!foundOne){
                             foundOne = true;
@@ -217,7 +228,7 @@ void Rocs::GraphStructure::setGraphType(int type)
                     }
                 }
                 
-                foreach(Pointer *tmp, data->in_pointers()) {
+                foreach(PointerPtr tmp, data->in_pointers()) {
                     if (tmp->from() == data2) {
                         if (!foundOne){
                             foundOne = true;
@@ -231,10 +242,10 @@ void Rocs::GraphStructure::setGraphType(int type)
             }
         } break;
     case DIRECTED :
-       foreach(Data *data, dataList()){
+       foreach(DataPtr data, dataList()){
             // Just One self pointer allowed.
             bool foundSelfEdge = false;
-            foreach(Pointer* p, data->self_pointers()){
+            foreach(PointerPtr p, data->self_pointers()){
                if (!foundSelfEdge){
                    foundSelfEdge = true;
                }else{
@@ -244,13 +255,13 @@ void Rocs::GraphStructure::setGraphType(int type)
             }
             
             // Just one going in, and one going out.
-            foreach(Data *data2, dataList()){
+            foreach(DataPtr data2, dataList()){
                 if (data == data2){
                     continue;
                 }
                 
                 bool foundOneOut = false;
-                foreach (Pointer *tmp, data->out_pointers()) {
+                foreach (PointerPtr tmp, data->out_pointers()) {
                     if (tmp->to() == data2) {
                         if (!foundOneOut){
                             foundOneOut = true;
@@ -263,7 +274,7 @@ void Rocs::GraphStructure::setGraphType(int type)
                 }
                 
                 bool foundOneIn = false;
-                foreach(Pointer *tmp, data->in_pointers()) {
+                foreach(PointerPtr tmp, data->in_pointers()) {
                     if (tmp->from() == data2) {
                         if (!foundOneIn){
                             foundOneIn = true;
@@ -280,8 +291,8 @@ void Rocs::GraphStructure::setGraphType(int type)
         
     }
     
-    foreach(Pointer* pointer, pointers()) {
-       QMetaObject::invokeMethod(pointer, "changed");
+    foreach(PointerPtr pointer, pointers()) {
+       QMetaObject::invokeMethod(pointer.get(), "changed");
     }
 }
 
@@ -295,37 +306,38 @@ bool Rocs::GraphStructure::directed()
     return (_type==DIRECTED||_type==MULTIGRAPH);
 }
 
-Pointer* Rocs::GraphStructure::addPointer(Data *from, Data *to) {
+PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to) {
     if ( _type==UNDIRECTED ) {
         if (from == to) {  // self-edges
-            return 0;
+            return PointerPtr();
         }
 
         if ( from->pointers(to).size() >= 1 ) { // back-edges
-            return 0;
+            return PointerPtr();
         }
     }
     
     if ( _type==DIRECTED ) {   // do not add double edges
         PointerList list = from->out_pointers();
-        foreach (Pointer *tmp, list) {
+        foreach (PointerPtr tmp, list) {
             if (tmp->to() == to) {
-                return 0;
+                return PointerPtr();
             }
         }
         if (from->self_pointers().size() >= 1){
-            return 0;
+            return PointerPtr();
         }
     }
 
     return DataStructure::addPointer(from, to);
 }
 
-Data* Rocs::GraphStructure::addData(QString name)
+DataPtr Rocs::GraphStructure::addData(QString name)
 {
-    if (readOnly()) return 0;
+    if (readOnly()) 
+        return DataPtr();
 
-    GraphNode *n = new GraphNode(this);
+    boost::shared_ptr<GraphNode> n = boost::static_pointer_cast<GraphNode>( GraphNode::create(getDataStructure()) );
     n->setName(name);
     return addData(n);
 }

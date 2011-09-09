@@ -20,13 +20,14 @@
 #define LISTNODEITEM_H
 
 #include "DataItem.h"
+#include <boost/shared_ptr.hpp>
 
 class Data;
 
 class NodeItem : public DataItem{
   Q_OBJECT
   public:
-    NodeItem(Data *n);
+    NodeItem(DataPtr n);
     virtual ~NodeItem();
 };
 

@@ -35,7 +35,7 @@
 #include "DocumentManager.h"
 
 
-GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* parent )
+GraphPropertiesWidget::GraphPropertiesWidget (DataStructurePtr g, MainWindow* parent )
         : KButtonGroup ( parent ) {
     setupUi(this);
     _mainWindow = parent;
@@ -60,18 +60,18 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructure *g, MainWindow* pare
 
     Document *gDocument = qobject_cast<Document*>(g->parent());
     connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataStructure(QString)));
-    connect(this, SIGNAL(removeGraph()), g, SLOT(remove()));
+    connect(this, SIGNAL(removeGraph()), g.get(), SLOT(remove()));
     
     
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
     connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDatumDefaultColor(QColor)));
 
-    connect( _showEdgeNames,  SIGNAL(toggled(bool)), g, SLOT(setPointerNameVisibility(bool)));
-    connect( _showEdgeValues, SIGNAL(toggled(bool)), g, SLOT(setPointerValueVisibility(bool)));
-    connect( _showNodeNames,  SIGNAL(toggled(bool)), g, SLOT(setDataNameVisibility(bool)  ));
-    connect( _showNodeValues, SIGNAL(toggled(bool)), g, SLOT(setDataValueVisibility(bool) ));
+    connect( _showEdgeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setPointerNameVisibility(bool)));
+    connect( _showEdgeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setPointerValueVisibility(bool)));
+    connect( _showNodeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setDataNameVisibility(bool)  ));
+    connect( _showNodeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setDataValueVisibility(bool) ));
 
-    connect( _graphName,      SIGNAL(textChanged(QString)), g, SLOT(setName(QString)));
+    connect( _graphName,      SIGNAL(textChanged(QString)), g.get(), SLOT(setName(QString)));
 }
 
 void GraphPropertiesWidget::setPointerDefaultColor(QColor c){ 

@@ -20,11 +20,16 @@
 #define ROCS_TYPEDEFS_H
 
 #include <QList>
+#include <boost/shared_ptr.hpp>
 
 class Data;
 class Pointer;
+class DataStructure;
 
-typedef QList<Data*> DataList;
-typedef QList<Pointer*> PointerList;
+typedef QList< boost::shared_ptr<Data> > DataList;
+typedef QList< boost::shared_ptr<Pointer> > PointerList;
+typedef boost::shared_ptr<Data> DataPtr;
+typedef boost::shared_ptr<Pointer> PointerPtr;
+typedef boost::shared_ptr<DataStructure> DataStructurePtr;
 
 #endif

@@ -21,7 +21,9 @@
 #define ROCS_POINTERITEM_H
 
 #include <QGraphicsLineItem>
+#include <boost/shared_ptr.hpp>
 #include "rocslib_export.h"
+#include "Rocs_Typedefs.h"
 
 class QGraphicsSceneMouseEvent;
 class Pointer;
@@ -36,7 +38,7 @@ public:
     /*! default constructor
     \param node the libgraph::Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
-    explicit PointerItem(Pointer *pointer, QGraphicsItem *parent = 0);
+    explicit PointerItem(PointerPtr pointer, QGraphicsItem *parent = 0);
     virtual ~PointerItem();
     /*! The type of the item */
     enum { Type = UserType + 3 };
@@ -49,7 +51,7 @@ public:
     }
 
     /*! Gets the pointer of the node */
-    Pointer* pointer() const{ return _pointer; }
+    PointerPtr pointer() const{ return _pointer; }
     int index() const { return _index; }
 protected:
     /*! when there's a mouse click on the node, this method is invocked
@@ -71,7 +73,7 @@ public slots:
     void updateAttributes();
     
 private:
-    Pointer *_pointer;
+    PointerPtr _pointer;
     int _index;
 
   

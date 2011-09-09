@@ -39,13 +39,13 @@
 #include <QGraphicsSimpleTextItem>
 #include <QtCore/qmath.h>
 
-EdgeItem::EdgeItem( Pointer *edge, QGraphicsItem *parent)
+EdgeItem::EdgeItem( PointerPtr edge, QGraphicsItem *parent)
         : PointerItem(edge, parent)
 {
     _loop = (pointer()->from() == pointer()->to());
     setPath(createCurves());
     
-    connect (edge, SIGNAL(changed()), this, SLOT(updatePathLayout()));
+    connect (edge.get(), SIGNAL(changed()), this, SLOT(updatePathLayout()));
 }
 
 EdgeItem::~EdgeItem() {
@@ -111,7 +111,7 @@ QPainterPath EdgeItem::createCurves() {
         qSwap(Pos1, Pos2);
     }
 
-    Rocs::GraphStructure* graph = qobject_cast<Rocs::GraphStructure*>( pointer()->dataStructure() );
+    boost::shared_ptr<Rocs::GraphStructure> graph = boost::static_pointer_cast<Rocs::GraphStructure>( pointer()->dataStructure() );
     if (graph->directed()==false){
         QPainterPath p;
         p.moveTo(Pos1);

@@ -29,6 +29,7 @@
 #include <KMessageBox>
 #include "Data.h"
 #include "Pointer.h"
+#include <boost/shared_ptr.hpp>
 
 class DataStructurePluginManagerPrivate {
 public:
@@ -36,7 +37,7 @@ DataStructurePluginManagerPrivate(QObject * parent):m_parent(parent) {
     m_actualPlugin = 0;
 }
 
-DataStructure* changeToDataStructure ( DataStructure* dataStructure, Document * parent) {
+DataStructurePtr changeToDataStructure ( DataStructurePtr dataStructure, Document * parent) {
     if ( m_actualPlugin ) {
         return m_actualPlugin->convertToDataStructure ( dataStructure,  parent);
     }
@@ -60,7 +61,7 @@ KPluginInfo pluginInfo ( DataStructurePluginInterface* plugin ) {
     return KPluginInfo();
 }
 
-DataStructure* createNewDataStructure ( Document* arg1 , const QString & pluginName ) {
+DataStructurePtr createNewDataStructure ( Document* arg1 , const QString & pluginName ) {
     if (!pluginName.isEmpty()) {
         if (DataStructurePluginInterface * plugin = m_plugins.value(pluginName)) {
             return plugin->createDataStructure ( arg1 );
@@ -68,7 +69,7 @@ DataStructure* createNewDataStructure ( Document* arg1 , const QString & pluginN
     } else if ( m_actualPlugin ) {
         return m_actualPlugin->createDataStructure ( arg1 );
     }
-    return 0;
+    return DataStructurePtr();
 }
 
 DataStructurePluginInterface* plugin(const QString &pluginName) {
@@ -165,12 +166,12 @@ void DataStructurePluginManager::changeActiveDataStructure (const QString &newDa
     }
 }
 
-DataStructure* DataStructurePluginManager::changeToDataStructure ( DataStructure* dataStructure, Document * parent ) {
+DataStructurePtr DataStructurePluginManager::changeToDataStructure ( DataStructurePtr dataStructure, Document * parent ) {
     return _d->changeToDataStructure ( dataStructure, parent );
 
 }
 
-DataStructure* DataStructurePluginManager::createNewDataStructure ( Document* parent , const QString & pluginName) {
+DataStructurePtr DataStructurePluginManager::createNewDataStructure ( Document* parent , const QString & pluginName) {
     return _d->createNewDataStructure(parent, pluginName);
 
 }
@@ -198,32 +199,32 @@ DataStructurePluginInterface* DataStructurePluginManager::actualPlugin()
 }
 
 
-QGraphicsItem* DataStructurePluginManager::dataItem(Data* data)
+QGraphicsItem* DataStructurePluginManager::dataItem( DataPtr data)
 {
     if(DataStructurePluginInterface * plg = data->dataStructure()->document()->dataStructurePlugin())
       return plg->dataItem(data);
     return _d->m_actualPlugin->dataItem(data);
 }
 
-QGraphicsItem* DataStructurePluginManager::pointerItem ( Pointer* pointer ){
+QGraphicsItem* DataStructurePluginManager::pointerItem ( PointerPtr pointer ){
     if(DataStructurePluginInterface * plg = pointer->dataStructure()->document()->dataStructurePlugin())
       return plg->pointerItem(pointer);
     return _d->m_actualPlugin->pointerItem(pointer);;
 }
 
-QLayout* DataStructurePluginManager::pointerExtraProperties ( Pointer* pointer, QWidget* parent ){
+QLayout* DataStructurePluginManager::pointerExtraProperties ( PointerPtr pointer, QWidget* parent ){
     if(DataStructurePluginInterface * plg = pointer->dataStructure()->document()->dataStructurePlugin())
       return plg->pointerExtraProperties(pointer, parent);
     return _d->m_actualPlugin->pointerExtraProperties(pointer, parent);
 }
 
-QLayout* DataStructurePluginManager::dataStructureExtraProperties ( DataStructure* dataStructure, QWidget* parent ){
+QLayout* DataStructurePluginManager::dataStructureExtraProperties ( DataStructurePtr dataStructure, QWidget* parent ){
     if(DataStructurePluginInterface * plg = dataStructure->document()->dataStructurePlugin())
       return plg->dataStructureExtraProperties(dataStructure, parent);
     return _d->m_actualPlugin->dataStructureExtraProperties(dataStructure, parent);
 }
 
-QLayout* DataStructurePluginManager::dataExtraProperties ( Data* data, QWidget* parent ){
+QLayout* DataStructurePluginManager::dataExtraProperties ( DataPtr data, QWidget* parent ){
     if(DataStructurePluginInterface * plg = data->dataStructure()->document()->dataStructurePlugin())
       return plg->dataExtraProperties(data, parent);
     return _d->m_actualPlugin->dataExtraProperties(data, parent);

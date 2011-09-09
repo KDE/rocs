@@ -21,6 +21,7 @@
 #define SUI_GRAPHPROPERTIESWIDGET_H
 
 #include <KButtonGroup>
+#include "Rocs_Typedefs.h"
 #include "ui_GraphPropertiesWidget.h"
 
 class DataStructure;
@@ -33,7 +34,7 @@ class GraphPropertiesWidget : public KButtonGroup, public Ui::GraphPropertiesWid
 {
     Q_OBJECT
 public:
-    GraphPropertiesWidget (DataStructure *g, MainWindow* parent = 0 );
+    GraphPropertiesWidget (DataStructurePtr g, MainWindow* parent = 0 );
     QRadioButton *radio() const;
 
 private slots:
@@ -53,7 +54,7 @@ private slots:
     void removeGraph();
 
   private:
-    DataStructure *_graph;
+    DataStructurePtr _graph;
     MainWindow *_mainWindow;
 
 };

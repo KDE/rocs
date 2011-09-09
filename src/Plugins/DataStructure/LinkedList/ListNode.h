@@ -20,20 +20,21 @@
 #define LISTNODE_H
 
 #include <Data.h>
+#include <boost/shared_ptr.hpp>
 
 
 class ListNode : public Data
 {
   Q_OBJECT
   public:
-    ListNode(DataStructure* parent);
+    ListNode(DataStructurePtr parent);
     ~ListNode();
 
-    ListNode * next() const;
+    boost::shared_ptr<ListNode> next() const;
 
   public slots:
     QScriptValue front();
-    void pointTo(ListNode *);
+    void pointTo(boost::shared_ptr<ListNode> to);
 
 
 };

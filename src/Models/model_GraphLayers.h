@@ -20,6 +20,7 @@
 #define MODEL_GRAPHLAYERS_H
 
 #include <QAbstractListModel>
+#include "Rocs_Typedefs.h"
 
 class DataStructure;
 class QModelIndex;
@@ -83,7 +84,7 @@ public:
     /*! select the graph at position index.
     \param index the position of the graph that you want to select.
     \return the graph at position Index.*/
-    DataStructure *at(const QModelIndex& index);
+    DataStructurePtr at(const QModelIndex& index);
 
 private:
     Document *_document;

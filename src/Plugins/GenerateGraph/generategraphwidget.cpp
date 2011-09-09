@@ -143,12 +143,12 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     if (columns<1)  columns=1;
 
     // use active data structure iff empty
-    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Mesh Graph") );
 
     // create mesh of NxN points
-    QMap<QPair<int, int>, Data*> meshNodes;
+    QMap<QPair<int, int>, DataPtr > meshNodes;
 
     // create mesh nodes, store them in map
     for (int i = 0; i < columns; i++) {
@@ -182,7 +182,7 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
     }
 
     // use active data structure iff empty
-    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Star Graph") );
 
@@ -193,7 +193,7 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
             QPointF(sin(i*2*PI_/numberSatelliteNodes)*radius, cos(i*2*PI_/numberSatelliteNodes)*radius)+center
         );
     }
-    QList<Data*> nodeList = graph->addDataList(starNodes);
+    QList< DataPtr > nodeList = graph->addDataList(starNodes);
 
     // middle
     nodeList.prepend( graph->addData(QString("center"),center) );
@@ -218,7 +218,7 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
     }
 
     // use active data structure iff empty
-    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Circle Graph") );
 
@@ -231,7 +231,7 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
             QPointF(sin(i*2*PI_/numberNodes)*radius, cos(i*2*PI_/numberNodes)*radius)+center
         );
     }
-    QList<Data*> nodeList = graph->addDataList(circleNodes);
+    QList< DataPtr > nodeList = graph->addDataList(circleNodes);
 
     // connect circle nodes
     for (int i=0; i<numberNodes-1; i++) {
@@ -264,12 +264,12 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
 
     // put generated random graph at whiteboard
     // use active data structure iff empty
-    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
 
     // put nodes at whiteboard as generated
-    QMap<int, Data*> mapNodes;
+    QMap<int, DataPtr > mapNodes;
     int index=0;
     BGL_FORALL_VERTICES(v, randomGraph, BoostGraph) {
         randomGraph[v].index = index++;
@@ -306,12 +306,12 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 
     // put generated random graph at whiteboard
     // use active data structure iff empty
-    DataStructure* graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size()>0)
         graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
 
     // put nodes at whiteboard as generated
-    QMap<int, Data*> mapNodes;
+    QMap<int, DataPtr > mapNodes;
     int index=0;
     BGL_FORALL_VERTICES(v, randomGraph, BoostGraph) {
         randomGraph[v].index = index++;

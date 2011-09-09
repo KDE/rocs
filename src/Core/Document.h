@@ -26,8 +26,10 @@
 #include <QPointF>
 #include <QObject>
 #include "rocslib_export.h"
+#include "Rocs_Typedefs.h"
 #include <QSize>
 #include <QRectF>
+#include <boost/shared_ptr.hpp>
 
 class DataStructurePluginInterface;
 class DataStructure;
@@ -67,9 +69,9 @@ public:
     void loadFromInternalFormat(const QString& filename);
 
     QtScriptBackend * engineBackend() const;
-    QList<DataStructure*>& dataStructures() const;
+    QList< DataStructurePtr >& dataStructures() const;
 
-    void remove(DataStructure *dataStructure);
+    void remove(DataStructurePtr dataStructure);
     /** return the size of document' (visual) area
      */
     QRectF size();
@@ -85,9 +87,9 @@ public:
 
 public slots:
     void setModified(const bool mod = true);
-    DataStructure *addDataStructure(QString name = "untitled");
-    DataStructure *activeDataStructure() const ;
-    void setActiveDataStructure(DataStructure *g);
+    DataStructurePtr addDataStructure(QString name = "untitled");
+    DataStructurePtr activeDataStructure() const ;
+    void setActiveDataStructure(DataStructurePtr g);
 
     void setLeft(qreal leftValue);
     void setRight(qreal rightValue);
@@ -116,16 +118,16 @@ public slots:
     bool isPointAtDocument(QPointF point) const;
 
 signals:
-    void dataStructureCreated( DataStructure *g);
+    void dataStructureCreated(DataStructurePtr g);
     void dataStructureRemoved(int i);
     void nameChanged(QString name);
     void heightChanged(qreal height);
     void widthChanged(qreal width);
-    void activeDataStructureChanged(DataStructure* g);
+    void activeDataStructureChanged(DataStructurePtr g);
     void resized();
 
 private:
-    DocumentPrivate *d;
+    boost::shared_ptr<DocumentPrivate> d;
     void  savePropertiesInternalFormat(QObject *o);
 };
 

@@ -26,13 +26,15 @@
 
 #include "DynamicPropertiesList.h"
 
+namespace boost { void throw_exception( std::exception const & ) {} } 
+
 void DataPrivate::empty(PointerList &list) {
     while(!list.isEmpty()){
         list.first()->remove();
     }
 }
 
-DataPrivate::DataPrivate(Data* classPtr, DataStructure *parent)
+DataPrivate::DataPrivate(DataStructurePtr parent)
 :_x(0)
 ,_y(0)
 ,_width(0.3)
@@ -46,28 +48,38 @@ DataPrivate::DataPrivate(Data* classPtr, DataStructure *parent)
 ,_iconpackage(KGlobal::dirs()->locate("appdata", "iconpacks/default.svg"))
 ,_icon("rocs_default")
 ,_value(0)
-, q(classPtr)
 {
-
+    _in_pointers = QList< PointerPtr >();
+    _out_pointers = QList< PointerPtr >();
+    _self_pointers = QList< PointerPtr >();
 }
 
 
-DataStructure *Data::dataStructure() const{ return d->_dataStructure; }
+DataStructurePtr Data::dataStructure() const{ return d->_dataStructure; }
 
-Data::Data(DataStructure *parent)
-: QObject(parent)
-, d(new DataPrivate(this, parent)) {
+DataPtr Data::create(DataStructurePtr parent) {
+    DataPtr pi(new Data(parent));
+    pi->d->q = pi;
+    return pi;
+}
+
+DataPtr Data::getData() const {
+    DataPtr px(d->q);
+    return px;
+}
+
+Data::Data(DataStructurePtr parent)
+ : QObject(parent.get()), d(new DataPrivate(parent)) {
 }
 
 Data::~Data() {
-    d->_dataStructure->remove(this);
-    
-    d->empty(d->_in_pointers);
-    d->empty(d->_out_pointers);
-    d->empty(d->_self_pointers);
-
-    delete d;
     emit removed();
+    
+    if (d) {
+        d->empty(d->_in_pointers);
+        d->empty(d->_out_pointers);
+        d->empty(d->_self_pointers);
+    }
 }
 
 bool Data::showName() {
@@ -111,19 +123,23 @@ void Data::setIconPackage(const QString& s){
    d-> _iconpackage = s;
 }
 
+void Data::setDataItem(boost::shared_ptr<DataItem> item) {
+    d->_item = item;
+}
+
 DataList Data::adjacent_data() const
 {
-    QList<Data*> adjacent;
+    QList< DataPtr > adjacent;
 
-   foreach(Pointer *e, d->_out_pointers) {
+   foreach(PointerPtr e, d->_out_pointers) {
         adjacent.append( e->to()  );
    }
 
-   foreach(Pointer *e, d->_self_pointers) {
+   foreach(PointerPtr e, d->_self_pointers) {
         adjacent.append( e->to() );
    }
 
-   foreach(Pointer *e, d->_in_pointers) {
+   foreach(PointerPtr e, d->_in_pointers) {
         adjacent.append( e->from() );
    }
 
@@ -141,23 +157,23 @@ PointerList Data::adjacent_pointers() const
     return adjacent;
 }
 
-void Data::addInPointer(Pointer *e) {
-    d-> _in_pointers.append( e );
+void Data::addInPointer(PointerPtr e) {
+    d->_in_pointers.append( e );
 }
 
-void Data::addOutPointer(Pointer *e) {
+void Data::addOutPointer(PointerPtr e) {
     d->_out_pointers.append( e  );
 }
 
-void Data::addSelfPointer(Pointer *e) {
+void Data::addSelfPointer(PointerPtr e) {
     d->_self_pointers.append( e );
 }
 
-Pointer* Data::addPointer(Data* to) {
-    return d->_dataStructure->addPointer(this, to);
+PointerPtr Data::addPointer(DataPtr to) {
+    return d->_dataStructure->addPointer(this->getData(), to);
 }
 
-void Data::removePointer(Pointer *e, int pointerList) {
+void Data::removePointer(PointerPtr e, int pointerList) {
     switch (pointerList) {
     case -1  : removePointer(e, d->_in_pointers);
                removePointer(e, d->_out_pointers);
@@ -168,22 +184,22 @@ void Data::removePointer(Pointer *e, int pointerList) {
     }
 }
 
-void Data::removePointer(Pointer* e, PointerList &list) {
+void Data::removePointer(PointerPtr e, PointerList &list) {
     if (list.contains(e))
       list.removeOne(e);
 }
 
-PointerList Data::pointers(Data *n) const {
+PointerList Data::pointers(DataPtr n) const {
     PointerList list;
-    if (n == this) {
+    if (n == getData()) {
         return d->_self_pointers;
     }
-    foreach (Pointer *tmp, d->_out_pointers) {
+    foreach (PointerPtr tmp, d->_out_pointers) {
         if (tmp->to() == n) {
             list.append(tmp);
         }
     }
-    foreach(Pointer *tmp, d->_in_pointers) {
+    foreach(PointerPtr tmp, d->_in_pointers) {
         if (tmp->from() == n) {
             list.append(tmp);
         }
@@ -192,7 +208,15 @@ PointerList Data::pointers(Data *n) const {
 }
 
 void Data::remove() {
-  d->_dataStructure->remove(this);
+    qDebug() << "Data::remove()";
+    emit removed();
+   
+    d->empty(d->_in_pointers);
+    d->empty(d->_out_pointers);
+    d->empty(d->_self_pointers);
+
+    d->_dataStructure->remove(this->getData());
+    d->_dataStructure.reset();  // allow datastructure to be destroyed
 }
 
 void Data::setX(int x) {
@@ -280,9 +304,9 @@ void Data::setEngine(    QScriptEngine *engine ) {
 
 
 QScriptValue Data::adj_data() {
-    QList<Data*> list = adjacent_data();
+    QList< DataPtr > list = adjacent_data();
     QScriptValue array = d->_engine->newArray();
-    foreach(Data* n, list) {
+    foreach(DataPtr n, list) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
@@ -308,14 +332,14 @@ QScriptValue Data::loop_pointers() {
     return createScriptArray(list);
 }
 
-QScriptValue Data::connected_pointers(Data *n) {
+QScriptValue Data::connected_pointers(DataPtr n) {
     PointerList list = pointers(n);
     return createScriptArray(list);
 }
 
 QScriptValue Data::createScriptArray(PointerList list) {
     QScriptValue array = d->_engine->newArray();
-    foreach(Pointer* e, list) {
+    foreach(PointerPtr e, list) {
         array.property("push").call(array, QScriptValueList() << e->scriptValue());
     }
     return array;

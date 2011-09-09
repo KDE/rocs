@@ -21,6 +21,8 @@
 #define MOVEDATA_H
 
 #include "AbstractAction.h"
+#include <boost/shared_ptr.hpp>
+#include "Rocs_Typedefs.h"
 
 class QObject;
 class DataItem;
@@ -68,7 +70,7 @@ protected:
 
     /*! the model of the NodeItem,
     needs it to modify it's internal value when the move is finished */
-    Data *_data;
+    DataPtr _data;
     QPointF _delta;
     QMap<DataItem*, QPointF> _deltas;
 };

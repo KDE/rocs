@@ -22,6 +22,8 @@
 
 #include "AbstractAction.h"
 #include <QObject>
+#include <Rocs_Typedefs.h>
+
 class DataStructure;
 /*!
   \brief The 'Add Node' Action
@@ -45,7 +47,7 @@ public:
     */
     ~AddNodeAction();
 
-    void setActiveGraph( DataStructure *graph);
+    void setActiveGraph( DataStructurePtr graph);
 
 public slots:
     /*!

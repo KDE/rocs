@@ -28,15 +28,31 @@
 #include "GraphScene.h"
 #include "DynamicPropertiesList.h"
 #include "ConcurrentHelpClasses.h"
+#include "MainWindow.h"
+
+#include <boost/shared_ptr.hpp>
 
 #include <KDebug>
 #include <QColor>
+#include <DataItem.h>
+
+DataStructurePtr DataStructure::create(Document *parent) {
+    return create<DataStructure>(parent);
+}
+
+DataStructurePtr DataStructure::create(DataStructurePtr other, Document *parent) {
+    return create<DataStructure>(other, parent);
+}
+
+DataStructurePtr DataStructure::getDataStructure() const {
+    DataStructurePtr px(d->q);
+    return px;
+}
 
 DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStructurePrivate){
     d->_automate = false;
     d->_readOnly = false;
     d->_document = parent;
-    d->_begin = 0;
     updateRelativeCenter();
     d->_dataDefaultColor = QColor("blue");
     d->_pointerDefaultColor = QColor("gray");
@@ -50,51 +66,49 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     emit changed();
 }
 
-DataStructure::DataStructure(DataStructure& other, Document * parent): QObject(parent), d(new DataStructurePrivate){
-    d->_readOnly = other.readOnly();
-    d->_document = parent;
+void DataStructure::importStructure(DataStructurePtr other){
+    d->_readOnly = other->readOnly();
     updateRelativeCenter();
 
-    d->_pointerDefaultColor     = other.pointerDefaultColor();
-    d->_dataDefaultColor        = other.dataDefaultColor();
-    d->_dataNamesVisible        = other.d->_dataNamesVisible;
-    d->_dataValuesVisible       = other.d->_dataValuesVisible;
-    d->_pointerNamesVisible     = other.d->_pointerNamesVisible;
-    d->_pointerValuesVisible    = other.d->_pointerValuesVisible;
+    d->_pointerDefaultColor     = other->pointerDefaultColor();
+    d->_dataDefaultColor        = other->dataDefaultColor();
+    d->_dataNamesVisible        = other->d->_dataNamesVisible;
+    d->_dataValuesVisible       = other->d->_dataValuesVisible;
+    d->_pointerNamesVisible     = other->d->_pointerNamesVisible;
+    d->_pointerValuesVisible    = other->d->_pointerValuesVisible;
 
-//     QHash <Data*, Data* > dataTodata;
-//     foreach(Data* n, other.d->_data){
-//         Data* newdata = addData(n->name());
-//         newdata->setColor(n->color());
-//         newdata->setValue(n->value());
-//         newdata->setX(n->x());
-//         newdata->setY(n->y());
-//         newdata->setWidth(n->width());
-//         dataTodata.insert(n, newdata);
-//     }
-//     foreach(Pointer *e, other.pointers()){
-//         Data* from =  dataTodata.value(e->from());
-//         Data* to =  dataTodata.value(e->to());
-//
-//         Pointer* newPointer = addPointer(from, to);
-//         newPointer->setColor(e->color());
-//         newPointer->setValue(e->value());
-//     }
+    QHash <Data*, DataPtr > dataTodata;
+    foreach(DataPtr n, other->dataList()){
+        DataPtr newdata = addData(n->name());
+        newdata->setColor(n->color());
+        newdata->setValue(n->value());
+        newdata->setX(n->x());
+        newdata->setY(n->y());
+        newdata->setWidth(n->width());
+        dataTodata.insert(n.get(), newdata);
+    }
+    foreach(PointerPtr e, other->pointers()){
+        DataPtr from =  dataTodata.value(e->from().get());
+        DataPtr to =  dataTodata.value(e->to().get());
 
-    connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
-    connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
+        PointerPtr newPointer = addPointer(from, to);
+        newPointer->setColor(e->color());
+        newPointer->setValue(e->value());
+    }
+
+    connect (this, SIGNAL(changed()), d->_document, SLOT(resizeDocumentIncrease()));
+    connect (this, SIGNAL(resizeRequest(Document::Border)), d->_document, SLOT(resizeDocumentBorder(Document::Border)));
     emit changed();
 }
 
 
 DataStructure::~DataStructure() {
-    foreach(Pointer* e,  d->_pointers) {
-        remove(e);
+    foreach(PointerPtr e,  d->_pointers) {
+        e->remove();
     }
-    foreach(Data* n, d->_data) {
-        remove(n);
+    foreach(DataPtr n, d->_data) {
+        n->remove();
     }
-    delete d;
 }
 
 void DataStructure::setReadOnly(bool r){
@@ -103,19 +117,24 @@ void DataStructure::setReadOnly(bool r){
 }
 
 void DataStructure::remove() {
-  d->_document->remove(this);
-  deleteLater();
+    foreach(PointerPtr e,  d->_pointers) {
+        remove(e);
+    }
+    foreach(DataPtr n, d->_data) {
+        n->remove();
+    }
+    d->_document->remove(getDataStructure());
 }
 
-Data* DataStructure::addData(QString name) {
-    if (d->_readOnly) return 0;
+DataPtr DataStructure::addData(QString name) {
+    if (d->_readOnly) return DataPtr();
 
-    Data *n = new Data(this);
+    DataPtr n = Data::create( this->getDataStructure() );
     n->setName(name);
     return addData(n);
 }
 
-Data* DataStructure::addData(Data *data){
+DataPtr DataStructure::addData(DataPtr data){
     d->_data.append( data );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesData.constBegin();
     while (i != d->m_globalPropertiesData.constEnd()) {
@@ -125,43 +144,42 @@ Data* DataStructure::addData(Data *data){
     emit dataCreated( data );
     emit changed();
     
-    Data *n = data;
-    connect(n, SIGNAL(removed()),                    this, SIGNAL(changed()));
-    connect(n, SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
-    connect(n, SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
-    connect(n, SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
-    connect(n, SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
-    connect(n, SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
-    connect(n, SIGNAL(nameVisibilityChanged(bool)),  this, SIGNAL(changed()));
-    connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SIGNAL(changed()));
-    connect(n, SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
+//     connect(data.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
+    connect(data.get(), SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(nameVisibilityChanged(bool)),  this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(valueVisibilityChanged(bool)), this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
     return data;
 }
 
-QList<Data*> DataStructure::addDataList(QList<Data*> dataList){
-    Data* n;
+QList< DataPtr > DataStructure::addDataList(QList< DataPtr > dataList){
+    DataPtr n;
     foreach (n, dataList) {
         d->_data.append( n );
         emit dataCreated( n );
-        connect(n, SIGNAL(removed()),                    this, SIGNAL(changed()));
-        connect(n, SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
-        connect(n, SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
-        connect(n, SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
-        connect(n, SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
-        connect(n, SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
-        connect(n, SIGNAL(nameVisibilityChanged(bool)),  this, SIGNAL(changed()));
-        connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SIGNAL(changed()));
-        connect(n, SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
+//         connect(n.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
+        connect(n.get(), SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
+        connect(n.get(), SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
+        connect(n.get(), SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
+        connect(n.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
+        connect(n.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
+        connect(n.get(), SIGNAL(nameVisibilityChanged(bool)),  this, SIGNAL(changed()));
+        connect(n.get(), SIGNAL(valueVisibilityChanged(bool)), this, SIGNAL(changed()));
+        connect(n.get(), SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
     }
     emit changed();
     return dataList;
 }
 
-QList<Data*> DataStructure::addDataList(QList< QPair<QString,QPointF> > dataList) {
-    QList<Data*> dataCreateList;
+QList< DataPtr > DataStructure::addDataList(QList< QPair<QString,QPointF> > dataList) {
+    QList< DataPtr > dataCreateList;
     QPair<QString, QPointF> dataDefinition;
     foreach (dataDefinition, dataList) {
-        if (Data *data = addData(dataDefinition.first)){
+        if (DataPtr data = addData(dataDefinition.first)){
             data->setPos(dataDefinition.second.x(), dataDefinition.second.y());
             dataCreateList << data;
         }
@@ -170,7 +188,7 @@ QList<Data*> DataStructure::addDataList(QList< QPair<QString,QPointF> > dataList
 }
 
 
-Pointer* DataStructure::addPointer(Pointer *pointer){
+PointerPtr DataStructure::addPointer(PointerPtr pointer){
     d->_pointers.append( pointer );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
     while (i != d->m_globalPropertiesPointer.constEnd()) {
@@ -179,44 +197,44 @@ Pointer* DataStructure::addPointer(Pointer *pointer){
     }
     emit pointerCreated(pointer);
     emit changed();
-    connect (pointer, SIGNAL(changed()), this, SIGNAL(changed()));
+    connect (pointer.get(), SIGNAL(changed()), this, SIGNAL(changed()));
     return pointer;
 }
 
-Data* DataStructure::addData(QString name, QPointF pos){
-    if (Data *data = addData(name)){
+DataPtr DataStructure::addData(QString name, QPointF pos){
+    if (DataPtr data = addData(name)){
         data->setPos(pos.x(), pos.y());
         return data;
     }
-    return 0;
+    return DataPtr();
 }
 
-Pointer* DataStructure::addPointer(Data *from, Data *to) {
+PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to) {
     if (d->_readOnly)                   // If the data structure is in read only mode, no new stuff should be added.
-        return 0;
+        return PointerPtr();
 
     if ( !from || !to ) {               // one of the two required datas are null. do not add a pointer between a valid and a null datas.
-        return 0;
+        return PointerPtr();
     }
     
     if ( (d->_data.indexOf(from) == -1)  // the user is trying to connect datas from different graphs.
       || (d->_data.indexOf(to) == -1)) {
-        return 0;
+        return PointerPtr();
     }
 
-    Pointer *pointer  = new Pointer(this, from, to);
+    PointerPtr pointer = Pointer::create(getDataStructure(), from, to);
 
     return addPointer(pointer);
 }
 
-Pointer* DataStructure::addPointer(const QString& name_from, const QString& name_to) {
-    if (d->_readOnly) return 0;
-    Data *from = 0;
-    Data *to   = 0;
+PointerPtr DataStructure::addPointer(const QString& name_from, const QString& name_to) {
+    if (d->_readOnly) return PointerPtr();
+    
+    DataPtr from, to;
 
     QString tmpName;
 
-    foreach( Data* n,  d->_data) {
+    foreach( DataPtr n,  d->_data) {
         tmpName = n->name();
 
         if (tmpName == name_from) {
@@ -225,7 +243,7 @@ Pointer* DataStructure::addPointer(const QString& name_from, const QString& name
         if (tmpName == name_to) {
             to = n;
         }
-        if ((to != 0) && (from != 0)) {
+        if (to && from) {
             break;
         }
     }
@@ -233,18 +251,18 @@ Pointer* DataStructure::addPointer(const QString& name_from, const QString& name
     return addPointer(from, to);
 }
 
-Data *DataStructure::data(const QString& name) {
+DataPtr DataStructure::data(const QString& name) {
     QString tmpName;
-    foreach( Data * n,  d->_data) {
+    foreach( DataPtr n,  d->_data) {
         tmpName = n->name();
         if (tmpName == name) {
             return n;
         }
     }
-    return 0;
+    return DataPtr();
 }
 
-void DataStructure::remove(Data *n) {
+void DataStructure::remove(DataPtr n) {
     //Note: important for resize: remove node before emit resizeRequest
     Document *doc = DocumentManager::self()->activeDocument();
     bool left = false;
@@ -259,9 +277,8 @@ void DataStructure::remove(Data *n) {
         if (n->y()>doc->bottom()-2*GraphScene::kBORDER)    bottom = true;
     }
 
-    // proceed delete
+    // data is deleted if reference-count is at zero
     d->_data.removeOne( n );
-    n->deleteLater();
 
     // emit changes
     if (left)   emit resizeRequest( Document::BorderLeft );
@@ -272,7 +289,7 @@ void DataStructure::remove(Data *n) {
     updateRelativeCenter();
 }
 
-void DataStructure::remove(Pointer *e) {
+void DataStructure::remove(PointerPtr e) {
     d->_pointers.removeOne( e );
     if (e->to() || e->from()) {
         e->remove();

@@ -21,6 +21,8 @@
 
 #include <QGraphicsScene>
 #include <QMultiHash>
+#include <boost/shared_ptr.hpp>
+#include "Rocs_Typedefs.h"
 
 class AbstractAction;
 class QAction;
@@ -42,9 +44,9 @@ public:
     enum borderSize{ kBORDER = 50 };
     void updateMinSize(qreal minWidth, qreal minHeight);
     void setAction(QAction *action);
-    void updateGraph(DataStructure *g);
+    void updateGraph(DataStructurePtr g);
     void updateDocument();
-    void setActiveGraph(DataStructure *g);
+    void setActiveGraph(DataStructurePtr g);
     void clearGraph();
 
     void setHideEdges(bool h);
@@ -52,12 +54,12 @@ public:
     void updateAfter(QGraphicsItem *item);
     bool fade() const{ return _fade; }
     void fade(bool b){ _fade = b; }
-    void hideGraph( DataStructure *g, bool visibility);
+    void hideGraph(DataStructurePtr g, bool visibility);
 
 public slots:
-    QGraphicsItem* createData(Data * n);
-    QGraphicsItem* createEdge( Pointer *e);
-    void connectGraphSignals(DataStructure *g);
+    QGraphicsItem* createData( DataPtr n);
+    QGraphicsItem* createEdge( PointerPtr e);
+    void connectGraphSignals(DataStructurePtr g);
     void createItems();
     void setActiveDocument();
     void resize();
@@ -75,7 +77,7 @@ protected:
 
 private:
     Document *_graphDocument;
-    DataStructure *_graph;
+    DataStructurePtr _graph;
     AbstractAction *_action;
     QMultiHash<DataStructure*, QGraphicsItem* > _hashGraphs;
     QList<QGraphicsItem*> _hidedEdges;

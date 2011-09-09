@@ -25,6 +25,7 @@
 #include <QString>
 #include <QColor>
 #include <QPointer>
+#include "Rocs_Typedefs.h"
 
 class Pointer;
 class MainWindow;
@@ -35,7 +36,7 @@ class PointerPropertiesWidget : public QWidget, public Ui::EdgePropertiesWidget
     Q_OBJECT
 public:
     PointerPropertiesWidget(MainWindow *parent);
-    void setPointer(Pointer *e, QPointF pos);
+    void setPointer(PointerPtr e, QPointF pos);
 
 public slots:
     void on__color_activated(const QColor& c);
@@ -46,7 +47,7 @@ public slots:
     void setWidth(double v);
     
 private:
-    QPointer<Pointer> _pointer;
+    PointerPtr _pointer;
 };
 
 #endif // EDGEPROPERTIESWIDGET_H

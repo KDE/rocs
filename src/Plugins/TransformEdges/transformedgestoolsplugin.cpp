@@ -61,12 +61,12 @@ QString TransformEdgesToolPlugin::run(QObject* doc) const
 
     TransformEdgesWidget* dialog = new TransformEdgesWidget(graphDoc, 0);
     
-    QList<DataStructure*> dsList = graphDoc->dataStructures();
+    QList< DataStructurePtr > dsList = graphDoc->dataStructures();
     QStringList dsNames;
     
     // be sure that only graph-datastructures are accessed by this plugin
     if (graphDoc->dataStructureTypeName() == "Graph" ) {
-    foreach (DataStructure* ds, dsList) {
+    foreach (DataStructurePtr ds, dsList) {
         dsNames << ds->name();
     }
     }

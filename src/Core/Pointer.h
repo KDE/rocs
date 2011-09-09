@@ -26,8 +26,11 @@
 #include <QColor>
 #include <QScriptValue>
 #include "QtScriptBackend.h"
+#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 
 #include "rocslib_export.h"
+#include "Rocs_Typedefs.h"
 
 class Data;
 class PointerPrivate;
@@ -56,14 +59,11 @@ class ROCSLIB_EXPORT Pointer : public QObject {
     Q_PROPERTY(QString style READ style WRITE setStyle)
 
 public:
-    /*! default constructor, an pointer connects two datums.
-    \p parent a Graph
-    \p from the first datum
-    \p to the second datum */
-    Pointer(DataStructure *parent, Data *from, Data *to);
+    static PointerPtr create(DataStructurePtr parent, DataPtr from, DataPtr to);
+    PointerPtr getPointer() const;
 
     /*! default destructor */
-    ~Pointer();
+    virtual ~Pointer();
 
     /*! relative index is the index that this pointer has relative to the datums that it's bound to.
     eg. if the datums have 2 or more pointers connecteds between them, it will have a unique
@@ -77,7 +77,7 @@ public:
     void remove();
 
     /*! returns the datastructure that owns this pointer. */
-    DataStructure *dataStructure() const;
+    DataStructurePtr dataStructure() const;
 
 
     /*! if the qtscript is enabled for this rocs,
@@ -96,12 +96,12 @@ public  slots:
     /*! return the first datum of this pointer
       \return Data* pointer for the first datum of this pointer.
     */
-    Data* from() const;
+     DataPtr from() const;
 
     /*! return the second datum of this pointer
       \return Data* pointer for the second datum of this pointer.
     */
-    Data* to() const ;
+     DataPtr to() const ;
 
     /*! return the value of this pointer
     \return the value of the pointer.
@@ -168,9 +168,17 @@ public  slots:
      it will remove this pointer from the graph.
      */
     void self_remove();
+    
+protected:
+    /*! default constructor, an pointer connects two datums.
+    \p parent a Graph
+    \p from the first datum
+    \p to the second datum */
+    Pointer(DataStructurePtr parent, DataPtr from, DataPtr to);
+
 
 private:
-  PointerPrivate * const d;
+    boost::shared_ptr<PointerPrivate> const d;
 
 signals:
     /*! emmited when this pointer is removed. */

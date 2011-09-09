@@ -86,13 +86,13 @@ void GraphLayers::setActiveDocument() {
         _buttonGroup->removeButton(b);
     }
 
-    connect(_activeDocument, SIGNAL(dataStructureCreated(DataStructure*)), 
-            this, SLOT(addGraph(DataStructure*)),Qt::UniqueConnection);
+    connect(_activeDocument, SIGNAL(dataStructureCreated(DataStructurePtr)), 
+            this, SLOT(addGraph(DataStructurePtr)),Qt::UniqueConnection);
     
     connect(this, SIGNAL(createGraph(QString)), 
             _activeDocument, SLOT(addDataStructure(QString)), Qt::UniqueConnection);
 
-    foreach(DataStructure *s, _activeDocument->dataStructures()){
+    foreach(DataStructurePtr s, _activeDocument->dataStructures()){
         addGraph(s);
     }
 }
@@ -105,7 +105,7 @@ void GraphLayers::btnADDClicked() {
     emit  createGraph(name);
 }
 
-void GraphLayers::addGraph(DataStructure *g){
+void GraphLayers::addGraph(DataStructurePtr g){
     GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
     _buttonGroup->addButton(gp->radio());
     connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()));

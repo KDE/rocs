@@ -32,19 +32,19 @@ class /*ROCSLIB_EXPORT*/ GraphPlugin : public DataStructurePluginInterface {
 
     virtual ~GraphPlugin();
 
-    virtual DataStructure* convertToDataStructure ( DataStructure* graph, Document* parent);
-    virtual DataStructure* createDataStructure ( Document* parent );
+    virtual DataStructurePtr convertToDataStructure ( DataStructurePtr graph, Document* parent);
+    virtual DataStructurePtr createDataStructure ( Document* parent );
 
     bool canConvertFrom(Document*) const;
 
-    virtual QGraphicsItem* pointerItem ( Pointer* ) const;
-    virtual QGraphicsItem* dataItem ( Data* ) const;
+    virtual QGraphicsItem* pointerItem ( PointerPtr ) const;
+    virtual QGraphicsItem* dataItem ( DataPtr ) const;
 
-    virtual QLayout* dataExtraProperties ( Data* arg1, QWidget* arg2 ) const;
+    virtual QLayout* dataExtraProperties ( DataPtr arg1, QWidget* arg2 ) const;
 
-    virtual QLayout* pointerExtraProperties ( Pointer* arg1, QWidget* arg2 ) const;
+    virtual QLayout* pointerExtraProperties ( PointerPtr arg1, QWidget* arg2 ) const;
 
-    virtual QLayout* dataStructureExtraProperties ( DataStructure* graph, QWidget* parentWidget ) const;
+    virtual QLayout* dataStructureExtraProperties ( DataStructurePtr graph, QWidget* parentWidget ) const;
 
 };
 }

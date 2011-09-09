@@ -48,27 +48,26 @@ GraphPlugin::~GraphPlugin()
 
 }
 
-DataStructure* GraphPlugin::convertToDataStructure ( DataStructure* ds, Document * parent) {
-  return new GraphStructure(*ds, parent);
-}
-
-DataStructure* GraphPlugin::createDataStructure ( Document* parent )
+DataStructurePtr GraphPlugin::convertToDataStructure ( DataStructurePtr ds, Document * parent) 
 {
-  return new GraphStructure(parent);
-//     return new Graph(parent);
+  return GraphStructure::create(ds, parent);
 }
 
-QGraphicsItem*  GraphPlugin::dataItem(Data* node) const
+DataStructurePtr GraphPlugin::createDataStructure ( Document* parent ) 
 {
-    QGraphicsItem * item = new NodeItem(node);
-    return item;
+  return GraphStructure::create(parent);
 }
 
-QGraphicsItem*  GraphPlugin::pointerItem ( Pointer* edge) const
+QGraphicsItem*  GraphPlugin::dataItem(DataPtr node) const
+{
+    return new NodeItem(node);
+}
+
+QGraphicsItem*  GraphPlugin::pointerItem ( PointerPtr edge) const
 {
     return new EdgeItem(edge);
 }
-QLayout* GraphPlugin::dataExtraProperties ( Data* node, QWidget* parentWidget ) const
+QLayout* GraphPlugin::dataExtraProperties ( DataPtr node, QWidget* parentWidget ) const
 {
   QGridLayout * lay = new QGridLayout(parentWidget);
   QSpinBox * y = new QSpinBox(parentWidget);
@@ -85,9 +84,9 @@ QLayout* GraphPlugin::dataExtraProperties ( Data* node, QWidget* parentWidget ) 
   x->setValue(node->x());
   size->setValue(node->width());
 
-  connect( x,            SIGNAL(valueChanged(int)),             node, SLOT(setX(int)));
-  connect( y,            SIGNAL(valueChanged(int)),             node, SLOT(setY(int)));
-  connect( size,         SIGNAL(valueChanged(double)), node, SLOT(setWidth(double)));
+  connect( x,            SIGNAL(valueChanged(int)),             node.get(), SLOT(setX(int)));
+  connect( y,            SIGNAL(valueChanged(int)),             node.get(), SLOT(setY(int)));
+  connect( size,         SIGNAL(valueChanged(double)), node.get(), SLOT(setWidth(double)));
 
   QFrame * line = new QFrame(parentWidget);
   line->setFrameShape(QFrame::VLine);
@@ -103,12 +102,12 @@ QLayout* GraphPlugin::dataExtraProperties ( Data* node, QWidget* parentWidget ) 
   return lay;
 }
 
-QLayout*  GraphPlugin::pointerExtraProperties ( Pointer* arg1, QWidget* arg2 ) const
+QLayout*  GraphPlugin::pointerExtraProperties ( PointerPtr arg1, QWidget* arg2 ) const
 {
     return  DataStructurePluginInterface::pointerExtraProperties ( arg1, arg2 );
 }
 
-QLayout*  GraphPlugin::dataStructureExtraProperties ( DataStructure* graph, QWidget* parentWidget ) const
+QLayout*  GraphPlugin::dataStructureExtraProperties ( DataStructurePtr graph, QWidget* parentWidget ) const
 {
     QGridLayout *lay = new QGridLayout(parentWidget);
     QLabel * _graphTypeText = new QLabel(i18n("Graph Type:"));
@@ -119,7 +118,11 @@ QLayout*  GraphPlugin::dataStructureExtraProperties ( DataStructure* graph, QWid
    
     lay->addWidget(_graphTypeText, 0,0);
     lay->addWidget(_graphTypeCombo, 0,1);
-    connect( _graphTypeCombo, SIGNAL(currentIndexChanged(int)), graph, SLOT(setGraphType(int)));
+        
+    GraphStructure * tmp = dynamic_cast<GraphStructure *>(boost::static_pointer_cast<GraphStructure>(graph).get());
+        
+    connect( _graphTypeCombo, SIGNAL(currentIndexChanged(int)), tmp, SLOT(setGraphType(int)));
+              
     return lay;
 }
 

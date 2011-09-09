@@ -56,6 +56,8 @@ bool DeleteAction::executeKeyRelease(QKeyEvent* keyEvent)
     if (keyEvent->key() == Qt::Key_Delete) {
         foreach (QGraphicsItem *item, _graphScene->selectedItems()){
             if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
+                _graphScene->removeItem(item);
+                dItem->deleteLater();
                 dItem->data()->remove();
             }
             if (PointerItem *pItem = qgraphicsitem_cast<PointerItem*>(item)){

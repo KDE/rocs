@@ -79,7 +79,7 @@ void DocumentManager::changeDocument(Document* doc){
       if (m_actualDocument){
          emit deactivateDocument(m_actualDocument);
         DataStructurePluginManager::self()->disconnect(m_actualDocument);
-        doc->disconnect(SIGNAL(activeDataStructureChanged(DataStructure*)));
+        doc->disconnect(SIGNAL(activeDataStructureChanged(DataStructurePtr)));
         doc->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
         doc->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
         doc->engineBackend()->disconnect(SIGNAL(finished()));

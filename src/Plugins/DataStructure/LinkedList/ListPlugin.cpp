@@ -52,26 +52,26 @@ ListPlugin::~ListPlugin()
 
 }
 
-DataStructure* ListPlugin::convertToDataStructure ( DataStructure* ds, Document* parent) {
-    return new ListStructure(*ds, parent);
+DataStructurePtr ListPlugin::convertToDataStructure ( DataStructurePtr ds, Document* parent) {
+    return ListStructure::create(ds, parent);
 }
 
-DataStructure* ListPlugin::createDataStructure ( Document* parent )
+DataStructurePtr ListPlugin::createDataStructure ( Document* parent )
 {
-  return new ListStructure(parent);
+  return ListStructure::create(parent);
 }
 
-QGraphicsItem* Rocs::ListPlugin::dataItem(Data* node ) const
+QGraphicsItem* Rocs::ListPlugin::dataItem(DataPtr node ) const
 {
     return (new NodeItem(node));
 }
 
-QGraphicsItem* Rocs::ListPlugin::pointerItem ( Pointer* edge) const
+QGraphicsItem* Rocs::ListPlugin::pointerItem ( PointerPtr edge) const
 {
     return new LinkedListPointerItem (edge);
 }
 
-QLayout* Rocs::ListPlugin::nodeExtraProperties ( Data* node, QWidget* parentWidget) const
+QLayout* Rocs::ListPlugin::nodeExtraProperties ( DataPtr node, QWidget* parentWidget) const
 {
   QGridLayout * lay = new QGridLayout(parentWidget);
   QLabel *_value = new QLabel(i18n("Front value"), parentWidget);
@@ -90,8 +90,8 @@ QLayout* Rocs::ListPlugin::nodeExtraProperties ( Data* node, QWidget* parentWidg
 bool ListPlugin::canConvertFrom(Document* doc) const
 {
   QStringList errors;
-  foreach (DataStructure * ds, doc->dataStructures()){
-    foreach (Data *data, ds->dataList()){
+  foreach (DataStructurePtr ds, doc->dataStructures()){
+    foreach (DataPtr data, ds->dataList()){
       if(data->out_pointers().count() > 1)
         errors.append(i18n("Data \'%1\' had more than one(1) out pointers;").arg(data->name()));
     }

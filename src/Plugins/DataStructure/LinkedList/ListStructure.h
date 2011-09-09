@@ -21,6 +21,7 @@
 #define LISTSTRUCTURE_H
 
 #include "DataStructure.h"
+#include <boost/shared_ptr.hpp>
 
 class ListNode;
 namespace Rocs{
@@ -31,26 +32,29 @@ class ListStructure : public DataStructure {
     using DataStructure::addPointer;
     using DataStructure::addData;
 
+    static DataStructurePtr create(Document *parent);
+    static DataStructurePtr create(DataStructurePtr other, Document *parent);
+
     ListStructure ( Document* parent = 0 );
 
-    ListStructure(DataStructure& other, Document* parent);
+    void importStructure(DataStructurePtr other);
 
     virtual ~ListStructure();
 
   public slots:
 
-    virtual Data* addData ( QString name );
+    virtual DataPtr addData ( QString name );
 
-    virtual void remove(Data* n);
+    virtual void remove(DataPtr n);
 
-    virtual Pointer* addPointer ( Data* from, Data* to );
+    virtual PointerPtr addPointer ( DataPtr from, DataPtr to );
 
     void arrangeNodes();
 
-    virtual void remove(Pointer* e);
+    virtual void remove(PointerPtr e);
 
     QScriptValue begin();
-    void setBegin(ListNode* node);
+    void setBegin(boost::shared_ptr<ListNode> node);
     QScriptValue createNode(const QString &name);
 
 
@@ -58,7 +62,7 @@ private:
     void init();
     void createFront();
 
-    ListNode * m_begin;
+    boost::shared_ptr<ListNode> m_begin;
     QParallelAnimationGroup* m_animationGroup;
 
     bool m_building;

@@ -30,7 +30,7 @@
 
 DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ): 
     QWidget(0),
-    _data(0),
+    _data(),
     _item(0){
     setupUi(this);
     connect(_btnClose, SIGNAL(clicked()), this, SLOT(hide()));
@@ -44,11 +44,11 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
 
     if (_data){
         _data->disconnect(this);
-        _showName->disconnect(_data);
-        _showValue->disconnect(_data);
-        _disableColor->disconnect(_data);
-        _name->disconnect(_data);
-        _value->disconnect(_data);
+        _showName->disconnect(_data.get());
+        _showValue->disconnect(_data.get());
+        _disableColor->disconnect(_data.get());
+        _name->disconnect(_data.get());
+        _value->disconnect(_data.get());
     }
 
     _data = n->data();
@@ -65,14 +65,14 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
    
-    connect( _showName,     SIGNAL(toggled(bool)),         _data, SLOT(setShowName(bool)));
-    connect( _showValue,    SIGNAL(toggled(bool)),         _data, SLOT(setShowValue(bool)));
+    connect( _showName,     SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowName(bool)));
+    connect( _showValue,    SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowValue(bool)));
     connect( _disableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
-    connect( _name,         SIGNAL(textEdited(QString)),   _data, SLOT(setName(QString)));
-    connect( _value,        SIGNAL(textEdited(QString)),   _data, SLOT(setValue(QString)));
+    connect( _name,         SIGNAL(textEdited(QString)),   _data.get(), SLOT(setName(QString)));
+    connect( _value,        SIGNAL(textEdited(QString)),   _data.get(), SLOT(setValue(QString)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_data);
+    model->setDataSource(_data.get());
 
     _propertiesTable->setModel(model);
 }
@@ -151,6 +151,6 @@ void DataPropertiesWidget::on__color_activated(const QColor& c){
 void DataPropertiesWidget::on__addProperty_clicked(){
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
     model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
-                            _data, (_isPropertyGlobal->checkState() == Qt::Checked));
+                            _data.get(), (_isPropertyGlobal->checkState() == Qt::Checked));
 
 }

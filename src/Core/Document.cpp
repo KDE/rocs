@@ -29,6 +29,8 @@
 #include "Data.h"
 #include "Pointer.h"
 
+#include <boost/shared_ptr.hpp>
+
 //#include "dataStructureGroups.h"
 
 #include "DataStructurePluginManager.h"
@@ -50,10 +52,10 @@ public:
     qreal _minHeight;
     bool _modified;
     bool _saved;
-    DataStructure *_activeDataStructure;
+    DataStructurePtr _activeDataStructure;
     QPointer<DataStructurePluginInterface> _dataStructureType;
     QtScriptBackend* _engineBackend;
-    QList<DataStructure*> _dataStructures;
+    QList< DataStructurePtr > _dataStructures;
 
 
 };
@@ -102,15 +104,12 @@ Document::Document(const Document& gd)
 
 // Default Destructor
 Document::~Document() {
-
     for(int i = 0; i < d->_dataStructures.size(); i ++){
-	DataStructure *g = d->_dataStructures.at(i);
-        delete g;
+        d->_dataStructures.clear();
     }
-    delete d;
 }
 
-QList<DataStructure*>& Document::dataStructures() const { return d->_dataStructures; }
+QList< DataStructurePtr >& Document::dataStructures() const { return d->_dataStructures; }
 
 QtScriptBackend * Document::engineBackend() const{
     return d->_engineBackend;
@@ -221,7 +220,7 @@ void Document::resizeDocumentIncrease()
     int elements = dataStructures().size();
     for (int i = 0; i < elements; i++) {
         bool resizeDocument = false;
-        foreach( Data* n,  dataStructures().at(i)->dataList() ){
+        foreach( DataPtr n,  dataStructures().at(i)->dataList() ){
             if (n->x() < d->_left+GraphScene::kBORDER) {
                 setLeft(d->_left-GraphScene::kBORDER);
                 resizeDocument = true;
@@ -251,7 +250,7 @@ void Document::resizeDocumentBorder(Document::Border orientation) {
 
     // scans doubled border of specified size: if empty or not
     for (int i = 0; i < elements; i++) {
-    foreach( Data* n,  dataStructures().at(i)->dataList() ){
+    foreach( DataPtr n,  dataStructures().at(i)->dataList() ){
         switch (orientation) {
         case BorderLeft: {
             if (n!=0 && n->x() < d->_left+GraphScene::kBORDER*2) empty=false;
@@ -318,12 +317,12 @@ bool Document::isModified() const{
 
 void Document::cleanUpBeforeConvert()
 {
-    foreach (DataStructure * ds, d->_dataStructures)
+    foreach (DataStructurePtr ds, d->_dataStructures)
         ds->cleanUpBeforeConvert();
 }
 
 
-void Document::setActiveDataStructure(DataStructure *g){
+void Document::setActiveDataStructure(DataStructurePtr g){
     if (d->_dataStructures.indexOf(g) != -1){
         d->_activeDataStructure = g;
         emit activeDataStructureChanged(g);
@@ -331,14 +330,14 @@ void Document::setActiveDataStructure(DataStructure *g){
     }
 }
 
-DataStructure* Document::addDataStructure(QString name) {
-    DataStructure *g = DataStructurePluginManager::self()->createNewDataStructure(this,
+DataStructurePtr Document::addDataStructure(QString name) {
+    DataStructurePtr g = DataStructurePluginManager::self()->createNewDataStructure(this,
                                                                                   d->_dataStructureType->name());
     g->setName(name);
     d->_dataStructures.append(g);
     d->_activeDataStructure = g;
     d->_modified = true;
-    connect(g, SIGNAL(changed()), this, SLOT(setModified()));
+    connect(g.get(), SIGNAL(changed()), this, SLOT(setModified()));
     emit dataStructureCreated(g);
     return g;
 }
@@ -351,8 +350,9 @@ const QString& Document::documentPath() const {
     return d->_lastSavedDocumentPath;
 }
 
-void Document::remove(DataStructure *dataStructure){
+void Document::remove(DataStructurePtr dataStructure){
     d->_dataStructures.removeOne(dataStructure);
+    qDebug() << "Document::remove(Datastructure)";
     d->_modified = true;
 }
 
@@ -370,23 +370,23 @@ bool Document::saveAsInternalFormat(const QString& filename) {
     stream.setCodec("UTF-8");
 
     for (int i = 0; i < d->_dataStructures.count(); i++) {
-        DataStructure *g = d->_dataStructures.at(i);
+        DataStructurePtr g = d->_dataStructures.at(i);
 
         d->_buf += QString("[DataStructure %1] \n").arg(i).toUtf8();
 
-        savePropertiesInternalFormat(g);
+        savePropertiesInternalFormat(g.get());
 
-        foreach( Data *n, g->dataList()) {
+        foreach( DataPtr n, g->dataList()) {
             d->_buf += QString("[Data %1]\n").arg(g->dataList().indexOf(n)).toUtf8();
-            savePropertiesInternalFormat(n);
+            savePropertiesInternalFormat(n.get());
         }
 
         int from, to;
-        foreach( Pointer *e, g->pointers()) {
+        foreach( PointerPtr e, g->pointers()) {
             from = g->dataList().indexOf(e->from());
             to = g->dataList().indexOf(e->to());
             d->_buf += QString("[Pointer %1->%2]\n").arg(from).arg(to).toUtf8();
-            savePropertiesInternalFormat(e);
+            savePropertiesInternalFormat(e.get());
         }
 
         /*     buf += " \n \n ############ GROUPS ########### \n \n";
@@ -446,9 +446,10 @@ void Document::loadFromInternalFormat(const QString& filename) {
         return;
     }
 
-    DataStructure* tmpDataStructure = 0;
+    DataStructurePtr tmpDataStructure;
    //DataStructureGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
+    DataPtr tmpDataPtr;
 
 
     QTextStream in(&f);
@@ -466,7 +467,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
             gName.remove(']');
             tmpDataStructure = DataStructurePluginManager::self()->createNewDataStructure(this);
             tmpDataStructure->setName(gName.toAscii());
-            tmpObject = tmpDataStructure;
+//             tmpObject = tmpDataStructure;
             d->_dataStructures.append(tmpDataStructure);
             kDebug() << "DataStructure Created";
         }
@@ -474,7 +475,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
         else if (str.startsWith("[Data")) {
             QString nName = str.section(' ',1,1);
             nName.remove(']');
-            tmpObject = tmpDataStructure->addData(nName);
+            tmpDataPtr = tmpDataStructure->addData(nName);
             kDebug() << "Data Created";
         }
 
@@ -485,7 +486,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
             QString nameFrom = eName.section("->", 0,0);
             QString nameTo = eName.section("->", 1,1);
 
-            tmpObject = tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()),
+            tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()),
                                                      tmpDataStructure->dataList().at(nameTo.toInt()));
             kDebug() << "Pointer Created";
         }
@@ -497,7 +498,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
         else if (str.contains(':')) {
             QString propertyName = str.section(':',0,0).trimmed();
             QString propertyValue = str.section(':',1,1).trimmed();
-            tmpObject->setProperty( propertyName.toUtf8() , propertyValue );
+            tmpDataStructure.get()->setProperty( propertyName.toUtf8() , propertyValue );
         }
         else {
 //            // tmpGroup->append( tmpDataStructure->data(str));
@@ -507,7 +508,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
     kDebug() << "DataStructure Document Loaded.";
 }
 
-DataStructure *Document::activeDataStructure() const { return d->_activeDataStructure; }
+DataStructurePtr Document::activeDataStructure() const { return d->_activeDataStructure; }
 
 QString Document::dataStructureTypeName() const
 {

@@ -21,6 +21,21 @@
 #include "ListNode.h"
 #include "Pointer.h"
 #include <QDebug>
+#include <boost/shared_ptr.hpp>
+
+
+namespace boost { void throw_exception( std::exception const & ) {} }
+
+DataStructurePtr Rocs::ListStructure::create(Document *parent) {
+    return DataStructure::create<ListStructure>(parent);
+}
+
+DataStructurePtr Rocs::ListStructure::create(DataStructurePtr other, Document *parent) {
+    boost::shared_ptr<ListStructure> ds = boost::static_pointer_cast<ListStructure>(DataStructure::create<ListStructure>(parent));
+    ds->importStructure(other);
+    return ds;
+}
+
 
 Rocs::ListStructure::ListStructure ( Document* parent )
       : DataStructure ( parent )
@@ -29,25 +44,23 @@ Rocs::ListStructure::ListStructure ( Document* parent )
       init();
 }
 
-Rocs::ListStructure::ListStructure(DataStructure& other, Document * parent)
-      : DataStructure(other, parent)
-      , m_building(true)
-{
-    QHash <Data*, Data* > dataTodata;
-    foreach(Data* n, other.dataList()){
-        Data* newdata = addData(n->name());
+void Rocs::ListStructure::importStructure(DataStructurePtr other) {
+    m_building = true;
+    QHash < Data*, DataPtr > dataTodata;
+    foreach(DataPtr n, other->dataList()){
+        DataPtr newdata = addData(n->name());
         newdata->setColor(n->color());
         newdata->setValue(n->value());
         newdata->setX(n->x());
         newdata->setY(n->y());
         newdata->setWidth(n->width());
-        dataTodata.insert(n, newdata);
+        dataTodata.insert(n.get(), newdata);
     }
-    foreach(Pointer *e, other.pointers()){
-        Data* from =  dataTodata.value(e->from());
-        Data* to =  dataTodata.value(e->to());
+    foreach(PointerPtr e, other->pointers()){
+        DataPtr from =  dataTodata.value(e->from().get());
+        DataPtr to =  dataTodata.value(e->to().get());
 
-        Pointer* newPointer = addPointer(from, to);
+        PointerPtr newPointer = addPointer(from, to);
         newPointer->setColor(e->color());
         newPointer->setValue(e->value());
     }
@@ -60,10 +73,10 @@ void Rocs::ListStructure::init()
 {
   m_animationGroup = new QParallelAnimationGroup(this);
   if (!dataList().isEmpty()){
-      m_begin = qobject_cast< ListNode* >( dataList().first());
+      m_begin = boost::static_pointer_cast<ListNode>( dataList().first());
       arrangeNodes();
   }else{
-      m_begin = 0;
+      m_begin = boost::shared_ptr<ListNode>();
   }
 }
 
@@ -72,38 +85,39 @@ Rocs::ListStructure::~ListStructure() {
   m_animationGroup->deleteLater();;
 }
 
-Pointer* Rocs::ListStructure::addPointer ( Data* from, Data* to ) {
-    foreach(Pointer *e, from->out_pointers()){
+PointerPtr Rocs::ListStructure::addPointer ( DataPtr from, DataPtr to ) {
+    foreach(PointerPtr e, from->out_pointers()){
         e->remove();
     }
 
-    Pointer * e =  DataStructure::addPointer ( from, to );
+    PointerPtr e =  DataStructure::addPointer ( from, to );
     arrangeNodes();
     return e;
 }
 
-Data* Rocs::ListStructure::addData ( QString name ) {
-
-    ListNode *n = static_cast<ListNode*>(DataStructure::addData(new ListNode(this)));
+DataPtr Rocs::ListStructure::addData ( QString name ) {
+    boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>( ListNode::create(getDataStructure()) );
     n->setName(name);
+
     if (m_building)
       return n;
     if (m_begin){
-      ListNode * tmp = m_begin;
+      boost::shared_ptr<ListNode> tmp = m_begin;
       while (tmp->next() != 0)      tmp = tmp->next();
 
       tmp->pointTo(n);
     }else{
       m_begin = n;
     }
+    addData(n);
     arrangeNodes();
     return n;
 }
 
-void Rocs::ListStructure::remove(Data* n)
+void Rocs::ListStructure::remove(DataPtr n)
 {
     if (m_begin == n){
-      m_begin = dynamic_cast<ListNode*>( n)->next();
+        m_begin = boost::static_pointer_cast<ListNode>(n)->next();
     }
     DataStructure::remove(n);
     arrangeNodes();
@@ -114,20 +128,20 @@ QScriptValue Rocs::ListStructure::begin() {
   return m_begin->scriptValue();
 }
 
-void Rocs::ListStructure::setBegin(ListNode * node)
+void Rocs::ListStructure::setBegin(boost::shared_ptr< ListNode > node)
 {
     m_begin = node;
     arrangeNodes();
 }
 
 
-void Rocs::ListStructure::remove(Pointer * ptr){
+void Rocs::ListStructure::remove(PointerPtr ptr){
     DataStructure::remove(ptr);
     arrangeNodes();
 }
 
 QScriptValue Rocs::ListStructure::createNode(const QString & name){
-    ListNode *n = static_cast<ListNode*>(DataStructure::addData(new ListNode(this)));
+    boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(DataStructure::addData(ListNode::create(getDataStructure())));
     n->setName(name);
     n->setEngine( engine() );
     arrangeNodes();
@@ -136,7 +150,8 @@ QScriptValue Rocs::ListStructure::createNode(const QString & name){
 
 void Rocs::ListStructure::arrangeNodes(){
   if (m_building)
-    return;
+        return;
+
   QRectF size = document()->size();
   qreal x;
   qreal y = size.top() + 100;;
@@ -149,7 +164,7 @@ void Rocs::ListStructure::arrangeNodes(){
   }
 
    QPropertyAnimation * anim;
-   ListNode * n = m_begin;
+   boost::shared_ptr<ListNode> n = m_begin;
    if (n){
     x = size.left() + 50;
     do{
@@ -163,12 +178,12 @@ void Rocs::ListStructure::arrangeNodes(){
       }else{
         x  += 70 + n->width()*40;
       }
-      anim = new QPropertyAnimation(n, "x");;
+      anim = new QPropertyAnimation(n.get(), "x");;
       anim->setDuration(500);
       anim->setStartValue(n->x());
       anim->setEndValue(x);
       m_animationGroup->addAnimation(anim);
-      anim = new QPropertyAnimation(n, "y");;
+      anim = new QPropertyAnimation(n.get(), "y");;
       anim->setDuration(500);
       anim->setStartValue(n->y());
       anim->setEndValue(y);
@@ -177,14 +192,14 @@ void Rocs::ListStructure::arrangeNodes(){
   }
   x = 50 + size.left();
   y += 100;
-  foreach (Data * n, dataList()){
+  foreach (DataPtr n, dataList()){
     if (!visited[dataList().indexOf(n)]){
-      anim = new QPropertyAnimation(n, "x");;
+      anim = new QPropertyAnimation(n.get(), "x");;
       anim->setDuration(500);
       anim->setStartValue(n->x());
       anim->setEndValue(x);
       m_animationGroup->addAnimation(anim);
-      anim = new QPropertyAnimation(n, "y");;
+      anim = new QPropertyAnimation(n.get(), "y");;
       anim->setDuration(500);
       anim->setStartValue(n->y());
       anim->setEndValue(y);

@@ -17,6 +17,7 @@
 */
 
 #include "NodeListItem.h"
+#include <boost/shared_ptr.hpp>
 
-NodeItem::NodeItem(Data* n) : DataItem(n){}
+NodeItem::NodeItem(DataPtr n) : DataItem(n){}
 NodeItem::~NodeItem(){};

@@ -21,6 +21,7 @@
 #define SUI_NODEPROPERTIESWIDGET_H
 
 #include <QWidget>
+#include "Rocs_Typedefs.h"
 #include "ui_NodePropertiesWidget.h"
 
 class Data;
@@ -48,7 +49,7 @@ private slots:
 
 private:
 
-    QPointer<Data> _data;
+    DataPtr  _data;
     MainWindow *_mainWindow;
     DataItem *_item;
     QString _svgFile;

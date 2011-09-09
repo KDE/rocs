@@ -31,15 +31,15 @@ class /*ROCSLIB_EXPORT*/ ListPlugin : public DataStructurePluginInterface {
 
     virtual ~ListPlugin();
 
-    virtual DataStructure* convertToDataStructure ( DataStructure* graph, Document* parent );
-    virtual DataStructure* createDataStructure ( Document* parent );
+    virtual DataStructurePtr convertToDataStructure ( DataStructurePtr graph, Document* parent );
+    virtual DataStructurePtr createDataStructure ( Document* parent );
 
     virtual bool canConvertFrom(Document* doc) const;
 
-    virtual QGraphicsItem* pointerItem ( Pointer* ) const;
-    virtual QGraphicsItem* dataItem ( Data* ) const;
+    virtual QGraphicsItem* pointerItem ( PointerPtr ) const;
+    virtual QGraphicsItem* dataItem ( DataPtr ) const;
 
-    virtual QLayout* nodeExtraProperties ( Data* arg1, QWidget* arg2 ) const;
+    virtual QLayout* nodeExtraProperties ( DataPtr arg1, QWidget* arg2 ) const;
 
 
 

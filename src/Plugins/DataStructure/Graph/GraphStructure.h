@@ -34,18 +34,21 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
         } GRAPH_TYPE;
 
       //to avoid hide some methods
-      using DataStructure::remove;
-      using DataStructure::addPointer;
-      using DataStructure::addData;
+    using DataStructure::remove;
+    using DataStructure::addPointer;
+    using DataStructure::addData;
 
-      GraphStructure ( Document* parent = 0 );
+    static DataStructurePtr create(Document *parent);
+    static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
-      GraphStructure(DataStructure& other, Document *parent);
+    GraphStructure ( Document* parent = 0 );
+    
+    void importStructure(DataStructurePtr other);
 
-      virtual ~GraphStructure();
+    ~GraphStructure();
 
-      Pointer* addPointer(Data *from, Data *to);
-      Data* addData(QString name);
+    PointerPtr addPointer(DataPtr from, DataPtr to);
+    DataPtr addData(QString name);
 
     public slots:
         /**
@@ -59,7 +62,7 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
         QScriptValue list_edges();
         
         QScriptValue add_node(const QString& name);
-        QScriptValue add_edge(Data* from, Data* to);
+        QScriptValue add_edge(DataPtr from, DataPtr to);
         QScriptValue node_byname(const QString& name);
         
         /**
@@ -72,7 +75,7 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
          * \param to the node to which the shortest path shall be computed
          * \return the edge set of the shortest path
          */
-        QScriptValue dijkstra_shortest_path(Data* from, Data* to);
+        QScriptValue dijkstra_shortest_path(DataPtr from, DataPtr to);
         
         bool directed();
         GRAPH_TYPE graphType();

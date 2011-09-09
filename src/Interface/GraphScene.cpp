@@ -86,7 +86,7 @@ void GraphScene::setHideEdges(bool h) {
     }
 }
 
-void GraphScene::setActiveGraph(DataStructure *g) {
+void GraphScene::setActiveGraph(DataStructurePtr g) {
     kDebug() << "Active Graph Set";
     _graph = g;
 }
@@ -96,9 +96,9 @@ void GraphScene::updateAfter(QGraphicsItem *item) {
     _hidedEdges << item;
 }
 
-void GraphScene::hideGraph(DataStructure* g, bool visibility)
+void GraphScene::hideGraph(DataStructurePtr g, bool visibility)
 {
-    QList<QGraphicsItem*> list = _hashGraphs.values(g);
+    QList<QGraphicsItem*> list = _hashGraphs.values(g.get());
     foreach(QGraphicsItem *i, list){
         i->setVisible(visibility);
     }
@@ -141,8 +141,8 @@ void GraphScene::setActiveDocument() {
         connectGraphSignals(gd->dataStructures().at(i));
     }
 
-    connect( gd, SIGNAL(dataStructureCreated(DataStructure*)),
-             this, SLOT(connectGraphSignals(DataStructure*)));
+    connect( gd, SIGNAL(dataStructureCreated(DataStructurePtr)),
+             this, SLOT(connectGraphSignals(DataStructurePtr)));
 
     connect( gd, SIGNAL(resized()), this, SLOT(resize()));
 
@@ -150,35 +150,36 @@ void GraphScene::setActiveDocument() {
 }
 
 void GraphScene::createItems(){
-    foreach(DataStructure *g, _graphDocument->dataStructures()){
-        foreach( Data *d, g->dataList()) createData( d );
-        foreach( Pointer *p, g->pointers()) createEdge( p );
+    foreach(DataStructurePtr g, _graphDocument->dataStructures()){
+        foreach( DataPtr d, g->dataList()) createData( d );
+        foreach( PointerPtr p, g->pointers()) createEdge( p );
     }
 }
 
-void GraphScene::connectGraphSignals(DataStructure *g){
-    connect( g, SIGNAL(dataCreated(Data*)), this, SLOT(createData(Data*)));
-    connect( g, SIGNAL(pointerCreated(Pointer*)), this, SLOT(createEdge(Pointer*)));
+void GraphScene::connectGraphSignals(DataStructurePtr g){
+    connect( g.get(), SIGNAL(dataCreated(DataPtr)), this, SLOT(createData(DataPtr)));
+    connect( g.get(), SIGNAL(pointerCreated(PointerPtr)), this, SLOT(createEdge(PointerPtr)));
 }
 
 void GraphScene::releaseDocument(){
     _graphDocument->disconnect(this);
     disconnect(_graphDocument);
-    foreach(DataStructure *ds, _graphDocument->dataStructures()){
+    foreach(DataStructurePtr ds, _graphDocument->dataStructures()){
         ds->disconnect(this);
-        disconnect(ds);
+        disconnect(ds.get());
     }
 }
 
-QGraphicsItem *GraphScene::createData(Data *n) {
+QGraphicsItem *GraphScene::createData(DataPtr n) {
     DataItem *nItem = (DataItem*)(DataStructurePluginManager::self()->dataItem(n));
     addItem(nItem);
     addItem(nItem->name());
     addItem(nItem->value());
+    
     return nItem;
 }
 
-QGraphicsItem *GraphScene::createEdge(Pointer *e) {
+QGraphicsItem *GraphScene::createEdge(PointerPtr e) {
     QGraphicsItem *pointerItem = 0;
     pointerItem = DataStructurePluginManager::self()->pointerItem(e);
     addItem(pointerItem);
@@ -196,7 +197,7 @@ void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
         return;
     }
 
-    Data *movableData = nitem->data();
+    DataPtr movableData = nitem->data();
     int numDegrees = wheelEvent->delta();
     if (wheelEvent->orientation() == Qt::Vertical) {
         if (numDegrees > 0 && movableData->width() + 0.10 < 2.0){
@@ -241,12 +242,12 @@ void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
     keyEvent->accept();
 }
 
-void GraphScene::updateGraph(DataStructure *g) {
-    foreach(Data *n, g->dataList()) {
+void GraphScene::updateGraph(DataStructurePtr g) {
+    foreach(DataPtr n, g->dataList()) {
         n->setName(n->name());
     }
 
-    foreach(Pointer *e, g->pointers()) {
+    foreach(PointerPtr e, g->pointers()) {
        e->setName(e->name());
     }
 }

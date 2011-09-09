@@ -36,7 +36,7 @@
 #include <math.h>
 
 
-LinkedListPointerItem::LinkedListPointerItem( Pointer *edge, QGraphicsItem *parent)
+LinkedListPointerItem::LinkedListPointerItem( PointerPtr edge, QGraphicsItem *parent)
         : PointerItem(edge,parent)
 {
     setPath(createCurves());
@@ -46,7 +46,7 @@ LinkedListPointerItem::~LinkedListPointerItem(){}
 
 
 QPolygonF LinkedListPointerItem::createEndArrow() const{
-  Data * to = pointer()->to();
+  DataPtr to = pointer()->to();
   QPointF pos1(to->x()-to->width()*40-20, to->y());
   QPointF pos2(to->x()-to->width()*40, to->y());
   QLineF line (pos1, pos2);

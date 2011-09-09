@@ -90,8 +90,8 @@ void AssignValuesWidget::addDataStructures(QStringList dsNames)
 
 void AssignValuesWidget::assignValues()
 {
-    DataStructure* ds;
-    QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
+    DataStructurePtr ds;
+    QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
 
     // no datastructures given at document
     if (ui->dataStructuresCombo->count()==0)
@@ -136,9 +136,9 @@ void AssignValuesWidget::assignValues()
 }
 
 
-void AssignValuesWidget::assignIDsToNodes(DataStructure* ds, int start, bool overrideValues)
+void AssignValuesWidget::assignIDsToNodes(DataStructurePtr ds, int start, bool overrideValues)
 {
-    QList<Data*> vertices = ds->dataList();
+    QList< DataPtr > vertices = ds->dataList();
 
     for (int i=0; i<vertices.size(); i++)
     {
@@ -149,9 +149,9 @@ void AssignValuesWidget::assignIDsToNodes(DataStructure* ds, int start, bool ove
 }
 
 
-void AssignValuesWidget::assignIDsToEdges(DataStructure* ds, int start, bool overrideValues)
+void AssignValuesWidget::assignIDsToEdges(DataStructurePtr ds, int start, bool overrideValues)
 {
-    QList<Pointer*> edges = ds->pointers();
+    QList< PointerPtr > edges = ds->pointers();
     
     for (int i=0; i<edges.size(); i++) {
         if (!overrideValues && !edges[i]->value().trimmed().isEmpty())
@@ -161,7 +161,7 @@ void AssignValuesWidget::assignIDsToEdges(DataStructure* ds, int start, bool ove
 }
 
 
-void AssignValuesWidget::assignIntegersToNodes(DataStructure* ds, int lowerLimit, int upperLimit, int seed, bool overrideValues)
+void AssignValuesWidget::assignIntegersToNodes(DataStructurePtr ds, int lowerLimit, int upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -172,7 +172,7 @@ void AssignValuesWidget::assignIntegersToNodes(DataStructure* ds, int lowerLimit
     boost::uniform_int<> distribution(lowerLimit, upperLimit);
     boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
 
-    QList<Data*> vertices = ds->dataList();
+    QList< DataPtr > vertices = ds->dataList();
 
     for (int i=0; i<vertices.size(); i++)
     {
@@ -183,7 +183,7 @@ void AssignValuesWidget::assignIntegersToNodes(DataStructure* ds, int lowerLimit
 }
 
 
-void AssignValuesWidget::assignIntegersToEdges(DataStructure* ds, int lowerLimit, int upperLimit, int seed, bool overrideValues)
+void AssignValuesWidget::assignIntegersToEdges(DataStructurePtr ds, int lowerLimit, int upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -194,7 +194,7 @@ void AssignValuesWidget::assignIntegersToEdges(DataStructure* ds, int lowerLimit
     boost::uniform_int<> distribution(lowerLimit, upperLimit);
     boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
 
-    QList<Pointer*> edges = ds->pointers();
+    QList< PointerPtr > edges = ds->pointers();
     
     for (int i=0; i<edges.size(); i++) {
         if (!overrideValues && !edges[i]->value().trimmed().isEmpty())
@@ -204,7 +204,7 @@ void AssignValuesWidget::assignIntegersToEdges(DataStructure* ds, int lowerLimit
 }
 
 
-void AssignValuesWidget::assignFloatsToNodes(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
+void AssignValuesWidget::assignFloatsToNodes(DataStructurePtr ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -215,7 +215,7 @@ void AssignValuesWidget::assignFloatsToNodes(DataStructure* ds, qreal lowerLimit
     boost::uniform_real<> distribution(lowerLimit, upperLimit);
     boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
     
-    QList<Data*> vertices = ds->dataList();
+    QList< DataPtr > vertices = ds->dataList();
 
     for (int i=0; i<vertices.size(); i++)
     {
@@ -226,7 +226,7 @@ void AssignValuesWidget::assignFloatsToNodes(DataStructure* ds, qreal lowerLimit
 }
 
 
-void AssignValuesWidget::assignFloatsToEdges(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
+void AssignValuesWidget::assignFloatsToEdges(DataStructurePtr ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -237,7 +237,7 @@ void AssignValuesWidget::assignFloatsToEdges(DataStructure* ds, qreal lowerLimit
     boost::uniform_real<> distribution(lowerLimit, upperLimit);
     boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
     
-    QList<Pointer*> edges = ds->pointers();
+    QList< PointerPtr > edges = ds->pointers();
     
     for (int i=0; i<edges.size(); i++)
     {

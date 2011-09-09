@@ -26,8 +26,8 @@ class Data;
 class NodeItem : public DataItem{
   Q_OBJECT
   public:
-    NodeItem(Data *n);
-    virtual ~NodeItem();
+    NodeItem(DataPtr n);
+    ~NodeItem();
 };
 
 #endif

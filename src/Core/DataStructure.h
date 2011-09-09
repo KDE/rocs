@@ -24,12 +24,15 @@
 #include <QObject>
 #include <QList>
 #include <QString>
-
 #include <QtScript>
 #include <QColor>
 
-#include "Rocs_Typedefs.h"
 #include <klocalizedstring.h>
+
+#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
+
+#include "Rocs_Typedefs.h"
 #include "rocslib_export.h"
 #include "Document.h"
 
@@ -39,6 +42,43 @@ class Data;
 class Pointer;
 class DataStructurePrivate;
 
+class DataStructurePrivate{
+public:
+    DataStructurePrivate(){}
+
+    /**
+     * self pointer to DataStructure
+     */
+    boost::weak_ptr<DataStructure> q;
+    
+    QList< DataPtr > _data;
+    QList< PointerPtr> _pointers;
+
+    QList<Group*> _groups;
+    qreal _top;
+    qreal _bottom;
+    qreal _left;
+    qreal _right;
+
+    QPointF _relativeCenter;
+    QString _name;
+    QColor _dataDefaultColor;
+    QColor _pointerDefaultColor;
+    bool _automate;
+    Document *_document;
+    bool _readOnly;
+
+    bool _dataNamesVisible;
+    bool _pointerNamesVisible;
+    bool _dataValuesVisible;
+    bool _pointerValuesVisible;
+
+    QScriptValue _value;
+    QScriptEngine *_engine;
+    QMap<QString, QVariant> m_globalPropertiesData;
+    QMap<QString, QVariant> m_globalPropertiesPointer;
+};
+
 class ROCSLIB_EXPORT DataStructure : public QObject {
     Q_OBJECT
 
@@ -47,9 +87,12 @@ class ROCSLIB_EXPORT DataStructure : public QObject {
     Q_PROPERTY(QColor pointerDefaultColor READ pointerDefaultColor WRITE setPointerDefaultColor)
 
 public:
-    DataStructure(Document *parent = 0);
-    DataStructure(DataStructure& other, Document* parent);
-    ~DataStructure();
+    static DataStructurePtr create(Document *parent = 0);
+    static DataStructurePtr create(DataStructurePtr other, Document *parent = 0);
+
+    virtual DataStructurePtr getDataStructure() const;
+
+    virtual ~DataStructure();
 
     void updateRelativeCenter();
     QPointF relativeCenter() const;
@@ -70,8 +113,8 @@ public:
     const QColor& pointerDefaultColor() const;
     const QColor& dataDefaultColor() const;
     const QString& name() const;
-    const QList<Data*> dataList() const;
-    const QList<Pointer*> pointers() const;
+    const QList< DataPtr > dataList() const;
+    const QList< PointerPtr > pointers() const;
     const QList<Group*> groups() const;
 
     /** @brief clear data that only is usefull for a type of data structure and that cannot be converted to others
@@ -80,19 +123,19 @@ public:
 
 public  slots:
 
-    virtual Data* addData(QString name);
-    virtual QList<Data*> addDataList(QList<Data*> dataList);
-    virtual Pointer* addPointer(Data* from, Data* to);
-    Data* data(const QString& name = i18n("Untitled"));
+    virtual DataPtr addData(QString name);
+    virtual QList< DataPtr > addDataList(QList< DataPtr > dataList);
+    virtual PointerPtr addPointer(DataPtr from, DataPtr to);
+    DataPtr data(const QString& name = i18n("Untitled"));
 
-    virtual void remove(Data *n);
-    virtual void remove(Pointer *e);
+    virtual void remove(DataPtr n);
+    virtual void remove(PointerPtr e);
     virtual void remove(Group *g);
 
     virtual Group *addGroup(const QString& name);
-    virtual QList<Data*> addDataList(QList< QPair<QString,QPointF> > dataList);
-    virtual Data* addData(QString name, QPointF point);
-    virtual Pointer* addPointer(const QString& name_from, const QString& name_to);
+    virtual QList< DataPtr > addDataList(QList< QPair<QString,QPointF> > dataList);
+    virtual DataPtr addData(QString name, QPointF point);
+    virtual PointerPtr addPointer(const QString& name_from, const QString& name_to);
 
     void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void removeDynamicProperty(const QString& property);
@@ -106,6 +149,9 @@ public  slots:
     void removeDataDynamicProperty(const QString& property);
     void removePointersDynamicProperty(const QString& property);
 
+    /**
+     * if this datastructure shall be deleted, call ONLY this function
+     */
     void remove();
 
     // setters
@@ -130,53 +176,43 @@ public  slots:
 // #endif
 
 signals:
-    void dataCreated(Data *n);
-    void pointerCreated(Pointer *e);
+    void dataCreated(DataPtr n);
+    void pointerCreated(PointerPtr e);
     void complexityChanged(bool directed);
     void changed();
     void resizeRequest(Document::Border border);
 
 protected:
-    Data* addData(Data *data);
-    Pointer* addPointer(Pointer *pointer);
-
+    DataPtr addData(DataPtr data);
+    PointerPtr addPointer(PointerPtr pointer);
+    
+protected:
+    DataStructure(Document *parent = 0);
+    
+    /**
+     * overwrites the current DataStructure with all values (Data and Pointer) 
+     * from the given datastructure object.
+     * \param boost::shared_ptr<DataStructure> other
+     * \return void
+     */
+    virtual void importStructure(DataStructurePtr other);
+    template<typename T> static DataStructurePtr create(Document *parent = 0) {
+        DataStructurePtr pi(new T(parent));
+        pi->d->q=pi;
+        return pi;
+    }
+    template<typename T> static DataStructurePtr create(DataStructurePtr other, Document *parent = 0) {
+        DataStructurePtr pi(new T(parent));
+        pi->d->q=pi;
+        pi->importStructure(other);
+        return pi;
+    }
+    
 private:
-    DataStructurePrivate *d;
+    boost::shared_ptr<DataStructurePrivate> d;
 };
 
-class DataStructurePrivate{
-public:
-    DataStructurePrivate(){}
 
-    QList<Data*> _data;
-    QList<Pointer*> _pointers;
-
-    QList<Group*> _groups;
-    qreal _top;
-    qreal _bottom;
-    qreal _left;
-    qreal _right;
-
-    QPointF _relativeCenter;
-    QString _name;
-    Data* _begin;
-    DataList _ends;
-    QColor _dataDefaultColor;
-    QColor _pointerDefaultColor;
-    bool _automate;
-    Document *_document;
-    bool _readOnly;
-
-    bool _dataNamesVisible;
-    bool _pointerNamesVisible;
-    bool _dataValuesVisible;
-    bool _pointerValuesVisible;
-
-    QScriptValue _value;
-    QScriptEngine *_engine;
-    QMap<QString, QVariant> m_globalPropertiesData;
-    QMap<QString, QVariant> m_globalPropertiesPointer;
-};
 
 inline bool DataStructure::readOnly()                      const { return d->_readOnly;              }
 inline bool DataStructure::dataValueVisibility()           const { return d->_dataValuesVisible;     }
@@ -199,8 +235,8 @@ inline QScriptValue DataStructure::scriptValue()           const { return d->_va
 inline QScriptEngine *DataStructure::engine()              const { return d->_engine;   }
 inline Document *DataStructure::document()                 const { return d->_document; }
 
-inline const QList<Data*>    DataStructure::dataList()     const { return d->_data;     }
-inline const QList<Pointer*> DataStructure::pointers()     const { return d->_pointers; }
+inline const QList< DataPtr > DataStructure::dataList()     const { return d->_data;     }
+inline const QList< PointerPtr > DataStructure::pointers()     const { return d->_pointers; }
 inline const QList<Group*>   DataStructure::groups()       const { return d->_groups;   }
 
 #endif

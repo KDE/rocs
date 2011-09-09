@@ -27,8 +27,10 @@
 class PointerPrivate{
 public:
     PointerPrivate(){}
-    Data *from;
-    Data *to;
+    boost::weak_ptr<Pointer> q; // self pointer
+    
+    DataPtr from;
+    DataPtr to;
     int relativeIndex;
 
     QString value;
@@ -41,59 +43,70 @@ public:
     QString style;
     qreal width;
 
-     DataStructure *dataStructure;
+    DataStructurePtr dataStructure;
 
     QScriptValue scriptvalue;
     QScriptEngine *engine;
 };
 
-Pointer::Pointer(DataStructure *parent, Data *from, Data *to) :
-        QObject(parent), d(new PointerPrivate())
-{
-    d->from     = from;
-    d->to       = to;
-    d->dataStructure = parent;
-    d->color    = d->dataStructure->pointerDefaultColor();
-
-    connect(parent, SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
-    connect(from, SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
-
-
+PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to) {
+    PointerPtr pi(new Pointer(parent, from, to));
+    pi->d->q = pi;
+    qDebug() << "Pointer::create: " << pi.get();
+    
     if ( from == to ) {
-        from -> addSelfPointer(this);
+        from->addSelfPointer(pi);
     }
     else {
-        from -> addOutPointer(this);
-        to -> addInPointer(this);
-        connect(to, SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
-    }
+        from->addOutPointer(pi);
+        to->addInPointer(pi);
+        connect(to.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
+    }   
+    
+    return pi;
+}
 
-    d->relativeIndex  = d->to->pointers(d->from).size();
-    d->showName       = true;
-    d->showValue      = true;
-    d->style          = "solid";
-    d->width          = 1;
+PointerPtr Pointer::getPointer() const {
+    PointerPtr px(d->q);
+    return px;
+}
+
+Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to) :
+        QObject(parent.get()), d(new PointerPrivate())
+{
+    d->from          = from;
+    d->to            = to;
+    d->dataStructure = parent;
+    d->color         = d->dataStructure->pointerDefaultColor();
+    d->showName      = true;
+    d->showValue     = true;
+    d->style         = "solid";
+    d->width         = 1;
+    d->relativeIndex = d->to->pointers(d->from).size();
+    
+    connect(parent.get(), SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
+    connect(from.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
 }
 
 Pointer::~Pointer() {
+    qDebug() << "Pointer::~Pointer(...)";
     if (d->from == d->to) {
-        if (d->from != 0){
+        if (d->from){
           kDebug() << "Removing from a loop node";
-          d->from->removePointer(this, Data::Self);
+          d->from->removePointer(getPointer(), Data::Self);
         }
     }
     else {
         kDebug() << "Removing from not a loop node.";
-        if (d->from != 0){
-          d->from->removePointer(this, Data::Out);
+        if (d->from){
+          d->from->removePointer(getPointer(), Data::Out);
           kDebug() << "Removed from the from node";
         }
-        if (d->to != 0){
-          d->to->removePointer(this, Data::In);
+        if (d->to){
+          d->to->removePointer(getPointer(), Data::In);
           kDebug() << "Removed from the to node";
         }
     }
-    delete d;
 }
 
 int Pointer::relativeIndex() const{
@@ -101,15 +114,15 @@ int Pointer::relativeIndex() const{
 }
 
 
-DataStructure *Pointer::dataStructure() const{
+DataStructurePtr Pointer::dataStructure() const{
     return d->dataStructure;
 }
 
-Data *Pointer::from() const{
+DataPtr Pointer::from() const{
     return d->from;
 }
 
-Data *Pointer::to() const{
+DataPtr Pointer::to() const{
     return d->to;
 }
 
@@ -124,14 +137,14 @@ const QString& Pointer::name() const{
 void Pointer::remove() {
     emit removed();
     if (d->from){
-      d->from->removePointer(this);
-      d->from = 0;
+        d->from->removePointer(getPointer());
+        d->from.reset();
     }
     if (d->to){
-      d->to->removePointer(this);
-      d->to = 0;
+        d->to->removePointer(getPointer());
+        d->to.reset();
     }
-    d->dataStructure->remove(this);
+    d->dataStructure->remove(getPointer());
 }
 
 

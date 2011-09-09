@@ -21,8 +21,9 @@
 #define DATASTRUCTUREPLUGINMANAGER_H
 
 #include <QObject>
-
+#include <boost/shared_ptr.hpp>
 #include "rocslib_export.h"
+#include "Rocs_Typedefs.h"
 
 class QLayout;
 class QGraphicsItem;
@@ -45,10 +46,10 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     ~DataStructurePluginManager();
 
     /** build a new dataType using actual data structure. */
-    DataStructure * createNewDataStructure(Document* parent, const QString& pluginName = QString());
+    DataStructurePtr createNewDataStructure(Document* parent, const QString& pluginName = QString());
 
     /** When the DataStructure pluin  is changed, all the existent dataTypes must be 'rebuild' with the new DataStructure. If is not possible to change to a new data structure without losing data, then user should be asked to continue or nor. If user say to not continue, all ready done job should be undo.*/
-    DataStructure * changeToDataStructure(DataStructure* dataStructure, Document* parent);
+    DataStructurePtr changeToDataStructure(DataStructurePtr dataStructure, Document* parent);
 
     /** return the list of avaliable data structure plugins.*/
     const QStringList listOfDataStructures();
@@ -63,17 +64,17 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     QList < DataStructurePluginInterface*> pluginsList();
 
     /** return the data dataTypeic item that will be drawed by canvas . */
-    QGraphicsItem * dataItem(Data* data);
+    QGraphicsItem * dataItem( DataPtr data);
     /** return the pointer dataTypeic item that will be drawed by canvas . */
-    QGraphicsItem * pointerItem(Pointer* pointer);
+    QGraphicsItem * pointerItem(PointerPtr pointer);
 
 
     /** Create extra widgets to data properties window. If no extra properties is needed the is returned 0*/
-    QLayout * dataExtraProperties(Data* data, QWidget * parent);
+    QLayout * dataExtraProperties(DataPtr data, QWidget * parent);
     /** Create extra widgets to pointer properties window. If no extra properties is needed the is returned 0*/
-    QLayout * pointerExtraProperties(Pointer* pointer, QWidget * parent);
+    QLayout * pointerExtraProperties(PointerPtr pointer, QWidget * parent);
     /** Create extra widgets to dataType properties window. If no extra properties is needed the is returned 0*/
-    QLayout * dataStructureExtraProperties(DataStructure* dataType, QWidget * parent);
+    QLayout * dataStructureExtraProperties(DataStructurePtr dataType, QWidget * parent);
 
   signals:
     /** signal emited when is changing the data structure to \newDataStructure */

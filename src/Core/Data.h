@@ -25,6 +25,9 @@
 #include <QtScript>
 #include <QColor>
 
+#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
+
 #include "rocslib_export.h"
 #include "Rocs_Typedefs.h"
 
@@ -45,24 +48,24 @@ class  ROCSLIB_EXPORT Data : public QObject {
     Q_PROPERTY(QString icon READ icon WRITE setIcon)
     Q_PROPERTY(bool useColor READ useColor WRITE setUseColor)
 
-
 public:
+    virtual ~Data();
     enum ListType{In, Out, Self};
 
-    Data(DataStructure *parent);
-    ~Data();
+    static DataPtr create(DataStructurePtr parent);
+    virtual DataPtr getData() const;
 
-    void addInPointer(Pointer *e);
-    void addOutPointer(Pointer *e);
-    void addSelfPointer(Pointer *e);
-    void removePointer(Pointer *e, int pointerList = -1);
-    void removePointer(Pointer *e, PointerList &list);
+    void addInPointer(PointerPtr e);
+    void addOutPointer(PointerPtr e);
+    void addSelfPointer(PointerPtr e);
+    void removePointer(PointerPtr e, int pointerList = -1);
+    void removePointer(PointerPtr e, PointerList &list);
     void remove();
 
     bool showName();
     bool showValue();
 
-    DataStructure *dataStructure() const;
+    DataStructurePtr dataStructure() const;
 
     QScriptValue scriptValue() const;
     virtual void setEngine(	QScriptEngine *_engine );
@@ -80,16 +83,16 @@ public:
     bool showName() const;
     bool showValue() const;
     bool useColor() const;
-    DataItem *item() const;
+    boost::shared_ptr<DataItem> item() const;
 
     DataList adjacent_data() const;
     PointerList adjacent_pointers() const;
     PointerList& in_pointers() const;
     PointerList& out_pointers() const;
     PointerList& self_pointers() const;
-    PointerList pointers(Data *n) const;
+    PointerList pointers(DataPtr n) const;
 
-    Pointer* addPointer(Data* to);
+    PointerPtr addPointer(DataPtr to);
 
     void addDynamicProperty(QString property, QVariant value);
     void removeDynamicProperty(QString property);
@@ -110,15 +113,23 @@ public  slots:
     void setShowValue(bool b);
     void setUseColor(bool b = true);
     void setValue(const QString& v);
+    void setDataItem(boost::shared_ptr<DataItem> item);
 
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue input_pointers();
     QScriptValue output_pointers();
     QScriptValue loop_pointers();
-    QScriptValue connected_pointers(Data *n);
+    QScriptValue connected_pointers( DataPtr n);
+    
+protected:
+    Data(DataStructurePtr parent);
+    
 private:
-    DataPrivate *d;
+    boost::shared_ptr<DataPrivate> d;
+    Data(Data const &);
+    Data & operator=(Data const &);
+
 
 signals:
     void removed();
@@ -136,7 +147,12 @@ signals:
 
 class DataPrivate{
 public:
-  DataPrivate(Data *classPtr, DataStructure *parent);
+    DataPrivate(DataStructurePtr parent);
+    
+    /**
+     * self pointer to Data object
+     */
+    boost::weak_ptr<Data> q;
 
     PointerList _in_pointers;
     PointerList _out_pointers;
@@ -152,8 +168,8 @@ public:
     bool _showValue;
     bool _useColor;
 
-    DataStructure *_dataStructure;
-    DataItem *_item;
+    DataStructurePtr _dataStructure;
+    boost::shared_ptr<DataItem> _item;
 
     QString _name;
     QColor _color;
@@ -165,15 +181,15 @@ public:
     QScriptEngine *_engine;
 
     void empty(PointerList &list) ;
-private:
-  Data *q;
+// private:
+//     Data *q;
 };
 
 inline const QVariant Data::value() const { return d->_value; }
 inline const QString& Data::name()  const { return d->_name;  }
 inline const QVariant  Data::color() const { return d->_color; }
 
-inline DataItem* Data::item() const { return d->_item; }
+inline boost::shared_ptr<DataItem>  Data::item() const { return d->_item; }
 
 inline qreal Data::x() const { return d->_x; }
 inline qreal Data::y() const { return d->_y; }

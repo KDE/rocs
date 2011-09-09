@@ -42,10 +42,10 @@ DynamicPropertiesList* DynamicPropertiesList::New()
 void DynamicPropertiesList::addProperty(QObject* obj,const QString& name)
 {
       if (Data * node = qobject_cast< Data* >(obj)){
-	  QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure());
+	  QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
 	  if( multimap == _NodesProperties.end()){ //Not exist a dataStructure yet
 	      QMultiMap <QString, Data* > newMap;
-	      multimap = _NodesProperties.insert(node->dataStructure(),newMap);
+	      multimap = _NodesProperties.insert(node->dataStructure().get(),newMap);
 	  }
 
 	  multimap.value().insert(name, node);
@@ -54,10 +54,10 @@ void DynamicPropertiesList::addProperty(QObject* obj,const QString& name)
       }
 
       if (Pointer * edge = qobject_cast< Pointer* >(obj)){
-	  QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure());
+	  QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure().get());
 	  if( multimap == _EdgesProperties.end()){ //Not exist a dataStructure yet
 	      QMultiMap <QString, Pointer* > newMap;
-	      multimap = _EdgesProperties.insert(edge->dataStructure(),newMap);
+	      multimap = _EdgesProperties.insert(edge->dataStructure().get(),newMap);
 	  }
 	  multimap.value().insert(name, edge);
 	  return;
@@ -76,7 +76,7 @@ void DynamicPropertiesList::removeProperty(QObject* obj,const QString& name)
 {
       Data * node = qobject_cast< Data* >(obj);
       if (node){
-	  QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure());
+	  QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
 	  if( multimap == _NodesProperties.end()){ //Not exist a dataStructure yet
 	    return;
 	  }
@@ -87,7 +87,7 @@ void DynamicPropertiesList::removeProperty(QObject* obj,const QString& name)
 
       Pointer * edge = qobject_cast< Pointer* >(obj);
       if (edge){
-	  QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure());
+	  QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure().get());
 	  if( multimap == _EdgesProperties.end()){ //Not exist a dataStructure yet
 		return;
 	  }
@@ -107,7 +107,7 @@ DynamicPropertyType DynamicPropertiesList::type(QObject* obj, const QString& nam
     // case obj is Data*
     Data * node = qobject_cast< Data* >(obj);
     if (node){
-    QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure());
+    QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
     if( multimap == _NodesProperties.end()){ //Not exist a dataStructure yet
         return None;
     }
@@ -133,7 +133,7 @@ DynamicPropertyType DynamicPropertiesList::type(QObject* obj, const QString& nam
     // case obj is Pointer*
     Pointer * edge = qobject_cast< Pointer* >(obj);
     if (edge){
-    QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure());
+    QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure().get());
     if( multimap == _EdgesProperties.end()){ //Not exist a dataStructure yet
         return None;
     }
@@ -198,7 +198,7 @@ void DynamicPropertiesList::clear(DataStructure* dataStructure)
 void DynamicPropertiesList::changePropertyName(QString name, QString newName, QObject* object){
       Data * node = qobject_cast< Data* >(object);
       if (node){
-	  QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure());
+	  QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
 	  if( multimap == _NodesProperties.end()){ //Not exist a dataStructure yet
 		return;
 	  }	
@@ -209,7 +209,7 @@ void DynamicPropertiesList::changePropertyName(QString name, QString newName, QO
       }		
       Pointer * edge = qobject_cast< Pointer* >(object);
       if (edge){
-	  QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure());
+	  QMap< DataStructure*,  QMultiMap <QString, Pointer* > >::iterator multimap = _EdgesProperties.find(edge->dataStructure().get());
 	  if( multimap == _EdgesProperties.end()){ //Not exist a dataStructure yet
 		return;
 	  }

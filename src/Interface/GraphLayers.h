@@ -21,6 +21,9 @@
 
 #include <QScrollArea>
 #include <QWidget>
+#include <boost/shared_ptr.hpp>
+#include "Rocs_Typedefs.h"
+
 class DataStructure;
 class QButtonGroup;
 class KLineEdit;
@@ -42,7 +45,7 @@ public:
 
 public slots:
     void btnADDClicked();
-    void addGraph(DataStructure *g);
+    void addGraph(DataStructurePtr g);
     void selectFirstGraph();
 
 signals:

@@ -24,6 +24,7 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
 #include <KDialog>
+#include "Rocs_Typedefs.h"
 
 
 class QGridLayout;
@@ -73,7 +74,7 @@ class AssignValuesWidget :
          * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
          * \return  void
          */
-        void assignIDsToNodes(DataStructure* ds, int start, bool overrideValues);
+        void assignIDsToNodes(DataStructurePtr ds, int start, bool overrideValues);
         
         /**
          * Assign integers in increasing order starting at 'start' to all edges.
@@ -82,7 +83,7 @@ class AssignValuesWidget :
          * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
          * \return  void
          */
-        void assignIDsToEdges(DataStructure* ds, int start, bool overrideValues);
+        void assignIDsToEdges(DataStructurePtr ds, int start, bool overrideValues);
         
         /**
          * Assign integers uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister 
@@ -95,7 +96,7 @@ class AssignValuesWidget :
          * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
          * \return  void
          */
-        void assignIntegersToNodes(DataStructure* ds, int lowerLimit, int upperLimit, int seed, bool overrideValues);
+        void assignIntegersToNodes(DataStructurePtr ds, int lowerLimit, int upperLimit, int seed, bool overrideValues);
         
         /**
          * Assign integers uniformly at random from range [lowerLimit,upperLimit] to edges. Using Mersenne-Twister 
@@ -108,7 +109,7 @@ class AssignValuesWidget :
          * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
          * \return  void
          */
-        void assignIntegersToEdges(DataStructure* ds, int lowerLimit, int upperLimit, int seed, bool overrideValues);
+        void assignIntegersToEdges(DataStructurePtr ds, int lowerLimit, int upperLimit, int seed, bool overrideValues);
         
         /**
          * Assign float values uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister 
@@ -121,7 +122,7 @@ class AssignValuesWidget :
          * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
          * \return  void
          */
-        void assignFloatsToNodes(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+        void assignFloatsToNodes(DataStructurePtr ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
         
         /**
          * Assign float values uniformly at random from range [lowerLimit,upperLimit] to edges. Using Mersenne-Twister 
@@ -134,7 +135,7 @@ class AssignValuesWidget :
          * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
          * \return  void
          */
-        void assignFloatsToEdges(DataStructure* ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+        void assignFloatsToEdges(DataStructurePtr ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
 };
 
 #endif // ASSIGNVALUESWIDGET_H

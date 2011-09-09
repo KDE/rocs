@@ -44,7 +44,6 @@ GraphVisualEditor::GraphVisualEditor( MainWindow *parent) :
 {
     _scene = 0;
     _document = 0;
-    _dataStructure = 0;
     _mainWindow = parent;
     setupWidgets();
 }
@@ -90,8 +89,8 @@ void GraphVisualEditor::setActiveDocument( ) {
     _document = DocumentManager::self()->activeDocument();
     _scene->setActiveDocument();
 
-    connect(_document , SIGNAL(activeDataStructureChanged(DataStructure*)),
-            this ,       SLOT  (setActiveGraph(DataStructure*)));
+    connect(_document , SIGNAL(activeDataStructureChanged(DataStructurePtr)),
+            this ,       SLOT  (setActiveGraph(DataStructurePtr)));
 }
 
 void GraphVisualEditor::releaseDocument() {
@@ -100,14 +99,14 @@ void GraphVisualEditor::releaseDocument() {
     }
 
     _scene->clear();
-    foreach(DataStructure *ds, _document->dataStructures()){
+    foreach(DataStructurePtr ds, _document->dataStructures()){
        ds->disconnect(this);
     }
 }
 
 //void GraphVisualEditor::drawGraphOnScene( DataStructure */*g*/) {}
 
-void GraphVisualEditor::setActiveGraph( DataStructure *g) {
+void GraphVisualEditor::setActiveGraph( DataStructurePtr g) {
     _dataStructure = g;
     _scene->setActiveGraph(g);
 }

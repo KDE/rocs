@@ -34,7 +34,7 @@
 
 QMap<QString, QSvgRenderer*> DataItem::_renders;    
 
-DataItem::DataItem(Data* n) 
+DataItem::DataItem(DataPtr n) 
 : QGraphicsSvgItem(0)
 ,_data(n)
 ,_iconPackage(n->iconPackage())
@@ -45,21 +45,21 @@ DataItem::DataItem(Data* n)
 ,_oldStyle(GraphicsLayout::self()->viewStyleDataNode())
 ,_originalWidth(n->width())
 {
-    connect(n, SIGNAL(removed()), this, SLOT(deleteLater()));
-    connect(n, SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
-    connect(n, SIGNAL(nameChanged(QString)), this, SLOT(updateName()));
-    connect(n, SIGNAL(valueChanged(QVariant)), this, SLOT(updateValue()));
-    connect(n, SIGNAL(colorChanged(QColor)), this, SLOT(updateColor()));
-    connect(n, SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
-    connect(n, SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateName()));
-    connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateValue()));
-    connect(n, SIGNAL(useColorChanged(bool)), this, SLOT(updateColor()));
-    connect(n, SIGNAL(widthChanged(double)), this, SLOT(updateSize()));
+    connect(n.get(), SIGNAL(removed()), this, SLOT(deleteLater())); //FIXME removed for now, maybe crash?
+    connect(n.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
+    connect(n.get(), SIGNAL(nameChanged(QString)), this, SLOT(updateName()));
+    connect(n.get(), SIGNAL(valueChanged(QVariant)), this, SLOT(updateValue()));
+    connect(n.get(), SIGNAL(colorChanged(QColor)), this, SLOT(updateColor()));
+    connect(n.get(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
+    connect(n.get(), SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateName()));
+    connect(n.get(), SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateValue()));
+    connect(n.get(), SIGNAL(useColorChanged(bool)), this, SLOT(updateColor()));
+    connect(n.get(), SIGNAL(widthChanged(double)), this, SLOT(updateSize()));
     
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateName()));
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateValue()));
-    connect(n, SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateName()));
-    connect(n, SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateValue()));
+    connect(n.get(), SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateName()));
+    connect(n.get(), SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateValue()));
     
     setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     setZValue(1);
@@ -71,7 +71,6 @@ DataItem::~DataItem()
 {
     delete _name;
     delete _value;
-  //  delete _colorizer;
 }
 
 void DataItem::setupNode(){

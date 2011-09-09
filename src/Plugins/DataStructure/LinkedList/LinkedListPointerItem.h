@@ -37,7 +37,7 @@ public:
     /*! default constructor
     \param node the libgraph::Node that this item will interact to.
     \param parent the QGraphicsITem that this Item belongs to. */
-    explicit LinkedListPointerItem(Pointer *edge, QGraphicsItem *parent = 0);
+    explicit LinkedListPointerItem(PointerPtr edge, QGraphicsItem *parent = 0);
     virtual ~LinkedListPointerItem();
 
 private:

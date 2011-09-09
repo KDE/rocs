@@ -29,19 +29,19 @@ DataStructurePluginInterface::~DataStructurePluginInterface()
 }
 
 
-QLayout* DataStructurePluginInterface::pointerExtraProperties ( Pointer* arg1, QWidget* arg2 ) const {
+QLayout* DataStructurePluginInterface::pointerExtraProperties ( PointerPtr arg1, QWidget* arg2 ) const {
     Q_UNUSED(arg1);
     Q_UNUSED(arg2);
     return 0;
 }
 
-QLayout* DataStructurePluginInterface::dataStructureExtraProperties ( DataStructure* arg1, QWidget* arg2 ) const {
+QLayout* DataStructurePluginInterface::dataStructureExtraProperties ( DataStructurePtr arg1, QWidget* arg2 ) const {
     Q_UNUSED(arg1);
     Q_UNUSED(arg2);
     return 0;
 }
 
-QLayout* DataStructurePluginInterface::dataExtraProperties ( Data* arg1, QWidget* arg2 ) const {
+QLayout* DataStructurePluginInterface::dataExtraProperties ( DataPtr arg1, QWidget* arg2 ) const {
     Q_UNUSED(arg1);
     Q_UNUSED(arg2);
     return 0;

@@ -18,7 +18,7 @@
 
 #include "GraphNode.h"
 
-GraphNode::GraphNode(DataStructure* parent): Data(parent)
+GraphNode::GraphNode(DataStructurePtr parent): Data(parent)
 {
 
 }
@@ -43,7 +43,7 @@ QScriptValue GraphNode::adj_edges()
   return Data::adj_pointers();
 }
 
-QScriptValue GraphNode::connected_edges(Data* n)
+QScriptValue GraphNode::connected_edges(DataPtr n)
 {
   return Data::connected_pointers(n);
 }

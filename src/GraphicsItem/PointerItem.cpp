@@ -39,7 +39,7 @@
 #include <QtCore/qmath.h>
 #include <QGraphicsSimpleTextItem>
 
-PointerItem::PointerItem( Pointer *pointer, QGraphicsItem *parent)
+PointerItem::PointerItem( PointerPtr pointer, QGraphicsItem *parent)
         : QObject(0), QGraphicsPathItem(parent)
 {
     _pointer = pointer;
@@ -57,9 +57,9 @@ PointerItem::~PointerItem() {
 }
 
 void PointerItem::connectSignals() {
-    connect (_pointer, SIGNAL(posChanged()), this, SLOT(updatePos()));
-    connect (_pointer, SIGNAL(removed()), this, SLOT(remove()));
-    connect (_pointer, SIGNAL(changed()), this, SLOT(updateAttributes()));
+    connect (_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
+    connect (_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
+    connect (_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
     
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
 }

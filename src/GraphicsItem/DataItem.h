@@ -30,8 +30,10 @@
 #include <QMap>
 #include <QString>
 #include <QFont>
+#include <boost/shared_ptr.hpp>
 
 #include "rocslib_export.h"
+#include "Rocs_Typedefs.h"
 
 class Data;
 
@@ -39,12 +41,14 @@ class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem{
   Q_OBJECT
 
   public:
-    DataItem(Data *n);
+    DataItem(DataPtr n);
     virtual ~DataItem();
-    Data* data() const { return _data; }
+    DataPtr data() const { return _data; }
     static QMap<QString, QSvgRenderer*> _renders;
     QGraphicsSimpleTextItem *name() const;
     QGraphicsSimpleTextItem *value() const;
+    void remove();
+    
   private slots:
     void setupNode();
     void updateRenderer();
@@ -56,7 +60,7 @@ class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem{
     void updateSize();
 
 private:
-    Data *_data;
+    DataPtr _data;
     QString _iconPackage;
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;

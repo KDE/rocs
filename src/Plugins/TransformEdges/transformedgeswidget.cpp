@@ -87,8 +87,8 @@ void TransformEdgesWidget::addDataStructures(QStringList dsNames)
 
 void TransformEdgesWidget::executeTransform()
 {
-    DataStructure* graph;
-    QList<DataStructure*> dsList = DocumentManager::self()->activeDocument()->dataStructures();
+    DataStructurePtr graph;
+    QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
 
     // no graph datastructures given at document
     if (ui->dataStructuresCombo->count()==0)
@@ -109,15 +109,15 @@ void TransformEdgesWidget::executeTransform()
 }
 
 
-void TransformEdgesWidget::makeComplete( DataStructure* graph )
+void TransformEdgesWidget::makeComplete( DataStructurePtr graph )
 {
-    GraphStructure* graphDS = qobject_cast<Rocs::GraphStructure *>(graph);
+    boost::shared_ptr<GraphStructure> graphDS = boost::static_pointer_cast<GraphStructure>(graph);
     if( !graphDS ) 
         return;
         
     bool directed = graphDS->directed();
 
-    foreach ( Pointer *e, graph->pointers() ) {
+    foreach ( PointerPtr e, graph->pointers() ) {
         graph->remove ( e );
     }
     
@@ -135,29 +135,29 @@ void TransformEdgesWidget::makeComplete( DataStructure* graph )
 }
 
 
-void TransformEdgesWidget::removeAllEdges( DataStructure* graph )
+void TransformEdgesWidget::removeAllEdges( DataStructurePtr graph )
 {
     if (graph)
     {
-        foreach ( Pointer *e, graph->pointers() ) {
+        foreach ( PointerPtr e, graph->pointers() ) {
             graph->remove ( e );
         }
     }
 }
 
 
-void TransformEdgesWidget::reverseAllEdges( DataStructure* graph )
+void TransformEdgesWidget::reverseAllEdges( DataStructurePtr graph )
 {
-    GraphStructure* graphDS = qobject_cast<Rocs::GraphStructure *>(graph);
+    boost::shared_ptr<GraphStructure>  graphDS = boost::static_pointer_cast<GraphStructure>(graph);
     if( !graphDS ) 
         return;
 
     if (graphDS->directed()==false)
         return;
         
-    QList< QPair<Data*, Data*> > newPointers;
-    foreach ( Pointer *e, graphDS->pointers() ) {
-        newPointers << QPair<Data*, Data*>(e->to(), e->from());
+    QList< QPair< DataPtr, DataPtr > > newPointers;
+    foreach ( PointerPtr e, graphDS->pointers() ) {
+        newPointers << QPair< DataPtr, DataPtr >(e->to(), e->from());
         graph->remove ( e );
     }
     
@@ -167,13 +167,13 @@ void TransformEdgesWidget::reverseAllEdges( DataStructure* graph )
 }
 
 
-qreal TransformEdgesWidget::makeSpanningTree(DataStructure* graph)
+qreal TransformEdgesWidget::makeSpanningTree( DataStructurePtr graph)
 {
-    GraphStructure* graphDS = qobject_cast<Rocs::GraphStructure *>(graph);
+    boost::shared_ptr<GraphStructure>  graphDS = boost::static_pointer_cast<GraphStructure>(graph);
     if( !graphDS ) 
         return 0;
 
-    QList<Data*> vertices = graphDS->dataList();
+    QList< DataPtr > vertices = graphDS->dataList();
     int n = vertices.size();
 
     /*
@@ -283,7 +283,7 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructure* graph)
     
     // refill with MST edges
     for (int i=0; i<MST.size(); i++) {
-        Pointer* ptr = graph->addPointer(vertices[MST[i].first],vertices[MST[i].second]);
+        PointerPtr ptr = graph->addPointer(vertices[MST[i].first],vertices[MST[i].second]);
         
         if (weight[QPair<int,int>(MST[i].first,MST[i].second)]!=1) {
             QString s;

@@ -25,6 +25,8 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
 
+#include "Rocs_Typedefs.h"
+
 
 class QGridLayout;
 class Document;
@@ -63,7 +65,7 @@ class TransformEdgesWidget :
          *
          * \param   DataStructure*  graph   the to be transformed graph
          */
-        void makeComplete( DataStructure* graph );
+        void makeComplete( DataStructurePtr graph );
         
         /**
          * Remove all edges from a given graph data structure.
@@ -71,7 +73,7 @@ class TransformEdgesWidget :
          * \param   DataStructure*  graph   the to be transformed graph
          * \return  void
          */        
-        void removeAllEdges( DataStructure* graph );
+        void removeAllEdges( DataStructurePtr graph );
         
         /**
          * Remove all edges of a given directed graph data structure. If an undirected
@@ -80,7 +82,7 @@ class TransformEdgesWidget :
          * \param   DataStructure*  graph   the to be transformed graph
          * \return  void
          */
-        void reverseAllEdges( DataStructure* graph );
+        void reverseAllEdges( DataStructurePtr graph );
         
         /**
          * Transform given graph to a spanning tree by executing Prim's minimum spanning tree (MST)
@@ -90,7 +92,7 @@ class TransformEdgesWidget :
          * \param   DataStructure*  graph   the to be transformed graph
          * \return  qreal   total weight of MST
          */
-        qreal makeSpanningTree( DataStructure* graph );
+        qreal makeSpanningTree( DataStructurePtr graph );
 
 
         Document* graphDoc_;
