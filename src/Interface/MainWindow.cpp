@@ -241,7 +241,7 @@ QWidget* MainWindow::setupScriptPanel()
         
     QWidget *header = new QWidget( this );
     header->setLayout( new QHBoxLayout );
-    header->layout()->addWidget(new QLabel(i18n("Output source")));
+    header->layout()->addWidget(new QLabel(i18n("Select output:")));
     header->layout()->addWidget(selectListing);
     
     QWidget *listingWidget = new QWidget(this);
