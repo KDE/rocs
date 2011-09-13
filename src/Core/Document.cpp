@@ -71,7 +71,7 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_minWidth = 0;
     d->_minHeight = 0;
     d->_saved = false;
-    d->_engineBackend = new QtScriptBackend(this);
+    d->_engineBackend = new AnalitzaBackend(this);
     //d->_engineBackend = new AnalitzaBackend(this);
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_modified = false;
