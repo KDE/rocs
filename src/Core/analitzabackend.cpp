@@ -23,6 +23,8 @@
 #include <analitza/importqobjectmetatype.h>
 
 #include "Core/Data.h"
+#include "Core/DataStructure.h"
+#include "Core/Pointer.h"
 
 using namespace Analitza;
 
@@ -42,26 +44,33 @@ private:
     QVariant m_value;
 };
 
-AnalitzaBackend::AnalitzaBackend(QObject* parent): AbstractRunBackend(parent)
-{}
+AnalitzaBackend::AnalitzaBackend(QObject* parent)
+: AbstractRunBackend(parent)
+, analyzer()
+, importer(&analyzer)
+{
+    importer.import(Data::staticMetaObject);
+    importer.import(DataStructure::staticMetaObject);
+    importer.import(Pointer::staticMetaObject);
+    importer.import(AbstractRunBackend::staticMetaObject);
+    
+    analyzer.builtinMethods()->insertFunction(
+        "backend",
+        ExpressionType(ExpressionType::Lambda).addParameter(ExpressionType("AbstractRunBackend*")),
+        new Func(qVariantFromValue<AbstractRunBackend*>(this))
+    );
+}
+
+void AnalitzaBackend::addMetaClass(QMetaObject& o){
+    importer.import(o);
+}
 
 void AnalitzaBackend::start()
 {
-    Analitza::Analyzer a;
     QTextStream stream(&_script);
 
-    ImportQMetaObject importer(&a);
-    importer.import(Data::staticMetaObject); //This reads all properties and functions in data and makes them available on the code
-    importer.import(AbstractRunBackend::staticMetaObject); //Also add the properties from this type
-    
-    a.builtinMethods()->insertFunction(
-	"backend",
-	ExpressionType(ExpressionType::Lambda).addParameter(ExpressionType("AbstractRunBackend*")),
-	new Func(qVariantFromValue<AbstractRunBackend*>(this))
-    );
-    
-    a.importScript(&stream);
-    if(!a.isCorrect())
-        emit sendDebug(a.errors().join("\n"));
+    analyzer.importScript(&stream);
+    if(!analyzer.isCorrect())
+        emit sendDebug(analyzer.errors().join("\n"));
     emit finished();
 }

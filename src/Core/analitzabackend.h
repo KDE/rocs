@@ -22,13 +22,22 @@
 #define ANALITZABACKEND_H
 
 #include "abstractrunbackend.h"
+#include <QMetaObject>
+#include <analitza/analyzer.h>
+#include <analitza/importqobjectmetatype.h>
 
 class AnalitzaBackend  : public AbstractRunBackend
 {
 public:
     explicit AnalitzaBackend(QObject* parent = 0);
-    virtual void start();
     
+    void addMetaClass(QMetaObject& o);
+    void start();
+    
+    
+private:
+    Analitza::Analyzer analyzer;
+    ImportQMetaObject importer;
 };
 
 #endif // ANALITZABACKEND_H
