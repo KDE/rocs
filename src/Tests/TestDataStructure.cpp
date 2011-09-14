@@ -26,6 +26,7 @@
 #include <Document.h>
 #include <DataStructure.h>
 #include <DataStructurePluginInterface.h>
+#include "Rocs_Typedefs.h"
 
 void TestDataStructure::inittestcase()
 {
@@ -37,7 +38,7 @@ void TestDataStructure::inittestcase()
 void TestDataStructure::create(){
     DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(1)->name());
     Document doc("TestDocument");
-    DataStructure * ds = doc.addDataStructure();
+    DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE (ds->metaObject()->className(), "Rocs::DataStructure");
 }
 
@@ -47,7 +48,7 @@ void TestDataStructure::create(){
 void TestDataStructure::changeAndCreate(){
     DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(0)->name());
     Document doc("TestDocument");
-    DataStructure * ds = doc.addDataStructure();
+    DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE (ds->metaObject()->className(), "Rocs::ListStructure");
 }
 
@@ -58,7 +59,7 @@ void TestDataStructure::convert()
     QSignalSpy spy(DataStructurePluginManager::self(), SIGNAL(changingDS(QString)));
 //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
-    DataStructure * graph = doc.addDataStructure("Graph1");
+    DataStructurePtr graph = doc.addDataStructure("Graph1");
     graph->addData("node1");
     graph->addData("node2");
     graph->addPointer("node1", "node2");
