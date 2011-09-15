@@ -49,7 +49,6 @@ DataStructurePtr Rocs::GraphStructure::create(DataStructurePtr other, Document *
 Rocs::GraphStructure::GraphStructure ( Document* parent ) :
     DataStructure ( parent )
 {
-    qDebug() << "GraphStructure constructor (empty graph)";
     setGraphType(UNDIRECTED);
 }
 
@@ -78,7 +77,6 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
 
 
 Rocs::GraphStructure::~GraphStructure() {
-    qDebug() << "GraphStructure desctructor";
 }
 
 QScriptValue Rocs::GraphStructure::list_nodes() {
@@ -103,7 +101,13 @@ QScriptValue Rocs::GraphStructure::add_node(const QString& name) {
     return n->scriptValue();
 }
 
-QScriptValue Rocs::GraphStructure::add_edge(DataPtr from, DataPtr to) {
+QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw) {
+    if (fromRaw==0 || toRaw==0)
+        return QScriptValue();
+    
+    DataPtr from = fromRaw->getData();
+    DataPtr to = toRaw->getData();
+  
     PointerPtr e = addPointer(from, to);
     if (e){
       e->setEngine(engine());
@@ -114,11 +118,17 @@ QScriptValue Rocs::GraphStructure::add_edge(DataPtr from, DataPtr to) {
 }
 
 QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
-    DataPtr n = data(name);
+    DataPtr n = addData(name);
     return n->scriptValue();
 }
 
-QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(DataPtr from, DataPtr to) {
+QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* toRaw) {
+      if (fromRaw==0 || toRaw==0)
+        return QScriptValue();
+    
+    DataPtr from = fromRaw->getData();
+    DataPtr to = toRaw->getData();
+    
     QScriptValue path_edges = engine()->newArray();
       
     typedef boost::adjacency_list < boost::listS, boost::vecS, boost::directedS,

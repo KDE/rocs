@@ -299,7 +299,7 @@ QScriptValue Data::scriptValue() const {
 
 void Data::setEngine(    QScriptEngine *engine ) {
     d->_engine = engine;
-    d->_scriptvalue = engine->newQObject(this);
+    d->_scriptvalue = engine->newQObject( getData().get() );
 }
 
 

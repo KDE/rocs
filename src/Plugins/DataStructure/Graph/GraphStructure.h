@@ -42,14 +42,12 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
     GraphStructure ( Document* parent = 0 );
-    
-    void importStructure(DataStructurePtr other);
-
     ~GraphStructure();
+    void importStructure(DataStructurePtr other);
 
     PointerPtr addPointer(DataPtr from, DataPtr to);
     DataPtr addData(QString name);
-
+    
     public slots:
         /**
          * returns a list of all nodes of the graph as array
@@ -62,7 +60,7 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
         QScriptValue list_edges();
         
         QScriptValue add_node(const QString& name);
-        QScriptValue add_edge(DataPtr from, DataPtr to);
+        QScriptValue add_edge(Data* fromRaw, Data* toRaw);
         QScriptValue node_byname(const QString& name);
         
         /**
@@ -75,7 +73,7 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
          * \param to the node to which the shortest path shall be computed
          * \return the edge set of the shortest path
          */
-        QScriptValue dijkstra_shortest_path(DataPtr from, DataPtr to);
+        QScriptValue dijkstra_shortest_path(Data* fromRaw, Data* toRaw);
         
         bool directed();
         GRAPH_TYPE graphType();

@@ -18,9 +18,14 @@
 
 #include "GraphNode.h"
 
+DataPtr GraphNode::create(DataStructurePtr parent)
+{
+    return Data::create<GraphNode>(parent);
+}
+
+
 GraphNode::GraphNode(DataStructurePtr parent): Data(parent)
 {
-
 }
 
 void GraphNode::setEngine(QScriptEngine* _engine)
@@ -43,9 +48,11 @@ QScriptValue GraphNode::adj_edges()
   return Data::adj_pointers();
 }
 
-QScriptValue GraphNode::connected_edges(DataPtr n)
-{
-  return Data::connected_pointers(n);
+QScriptValue GraphNode::connected_edges(Data* n)
+{   
+    if (n==0)
+        return QScriptValue();
+    return Data::connected_pointers( n->getData() );
 }
 
 QScriptValue GraphNode::input_edges()

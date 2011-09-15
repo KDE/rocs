@@ -27,6 +27,7 @@ class ListNode : public Data
 {
   Q_OBJECT
   public:
+    static DataPtr create(DataStructurePtr parent);
     ListNode(DataStructurePtr parent);
     ~ListNode();
 

@@ -36,6 +36,44 @@ class Pointer;
 class DataPrivate;
 class DataStructure;
 
+class DataPrivate{
+public:
+    DataPrivate(DataStructurePtr parent);
+    
+    /**
+     * self pointer to Data object
+     */
+    boost::weak_ptr<Data> q;
+
+    PointerList _in_pointers;
+    PointerList _out_pointers;
+    PointerList _self_pointers;
+
+    qreal _x;
+    qreal _y;
+    qreal _width;
+
+    bool _begin;
+    bool _end;
+    bool _showName;
+    bool _showValue;
+    bool _useColor;
+
+    DataStructurePtr _dataStructure;
+    boost::shared_ptr<DataItem> _item;
+
+    QString _name;
+    QColor _color;
+    QString _iconpackage;
+    QString _icon;
+
+    QVariant _value;
+    QScriptValue _scriptvalue;
+    QScriptEngine *_engine;
+
+    void empty(PointerList &list) ;
+};
+
 class  ROCSLIB_EXPORT Data : public QObject {
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX)
@@ -124,6 +162,11 @@ public  slots:
     
 protected:
     Data(DataStructurePtr parent);
+    template<typename T> static DataPtr create(DataStructurePtr parent) {
+        DataPtr pi(new T(parent));
+        pi->d->q=pi;
+        return pi;
+    }
     
 private:
     boost::shared_ptr<DataPrivate> d;
@@ -145,45 +188,6 @@ signals:
     void useColorChanged(bool b);
 };
 
-class DataPrivate{
-public:
-    DataPrivate(DataStructurePtr parent);
-    
-    /**
-     * self pointer to Data object
-     */
-    boost::weak_ptr<Data> q;
-
-    PointerList _in_pointers;
-    PointerList _out_pointers;
-    PointerList _self_pointers;
-
-    qreal _x;
-    qreal _y;
-    qreal _width;
-
-    bool _begin;
-    bool _end;
-    bool _showName;
-    bool _showValue;
-    bool _useColor;
-
-    DataStructurePtr _dataStructure;
-    boost::shared_ptr<DataItem> _item;
-
-    QString _name;
-    QColor _color;
-    QString _iconpackage;
-    QString _icon;
-
-    QVariant _value;
-    QScriptValue _scriptvalue;
-    QScriptEngine *_engine;
-
-    void empty(PointerList &list) ;
-// private:
-//     Data *q;
-};
 
 inline const QVariant Data::value() const { return d->_value; }
 inline const QString& Data::name()  const { return d->_name;  }

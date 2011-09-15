@@ -27,7 +27,8 @@ class GraphNode : public Data
   Q_OBJECT
 
 public:
-
+    static DataPtr create(DataStructurePtr parent);
+    GraphNode(DataStructurePtr parent);
 
     virtual void setEngine(QScriptEngine* _engine);
     virtual ~GraphNode();
@@ -37,9 +38,7 @@ public slots:
     QScriptValue input_edges();
     QScriptValue output_edges();
     QScriptValue loop_edges();
-    QScriptValue connected_edges(DataPtr n);
-protected:
-    GraphNode(DataStructurePtr parent);
+    QScriptValue connected_edges(Data* n);
 };
 
 #endif // GRAPHNODE_H

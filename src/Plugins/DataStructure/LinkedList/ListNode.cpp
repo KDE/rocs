@@ -20,6 +20,12 @@
 #include <Pointer.h>
 #include "KDebug"
 
+DataPtr ListNode::create(DataStructurePtr parent)
+{
+    return Data::create<ListNode>(parent);
+}
+
+
 ListNode::ListNode(DataStructurePtr parent): Data(parent)
 {
 

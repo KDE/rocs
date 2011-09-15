@@ -621,8 +621,8 @@ void MainWindow::stopScript() {
 
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
 
-   disableStopAction();
-   engine->stop();
+    disableStopAction();
+    engine->stop();
 }
 
 #endif
