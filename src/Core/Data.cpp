@@ -209,14 +209,16 @@ PointerList Data::pointers(DataPtr n) const {
 
 void Data::remove() {
     qDebug() << "Data::remove()";
-    emit removed();
-   
+    if (d->_dataStructure) {
+        d->_dataStructure->remove(getData());
+        d->_dataStructure.reset();  // allow datastructure to be destroyed
+    }
+    
     d->empty(d->_in_pointers);
     d->empty(d->_out_pointers);
     d->empty(d->_self_pointers);
 
-    d->_dataStructure->remove(this->getData());
-    d->_dataStructure.reset();  // allow datastructure to be destroyed
+    emit removed();
 }
 
 void Data::setX(int x) {

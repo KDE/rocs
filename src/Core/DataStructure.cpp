@@ -118,7 +118,7 @@ void DataStructure::setReadOnly(bool r){
 
 void DataStructure::remove() {
     foreach(PointerPtr e,  d->_pointers) {
-        remove(e);
+        e->remove();
     }
     foreach(DataPtr n, d->_data) {
         n->remove();
@@ -291,11 +291,7 @@ void DataStructure::remove(DataPtr n) {
 
 void DataStructure::remove(PointerPtr e) {
     d->_pointers.removeOne( e );
-    if (e->to() || e->from()) {
-        e->remove();
-        emit changed();
-    }
-    e->deleteLater();
+    emit changed();
 }
 
 void DataStructure::remove(Group *g) {
