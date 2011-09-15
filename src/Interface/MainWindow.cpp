@@ -251,10 +251,15 @@ QWidget* MainWindow::setupScriptPanel()
     
     QToolBar *executeCommands = new QToolBar;
     executeCommands->setToolButtonStyle( Qt::ToolButtonTextUnderIcon );
+    executeCommands->setOrientation(Qt::Vertical);
     _runScript = new KAction ( KIcon ( "system-run" ), i18n ( "Run" ), this );
+    _stopScript = new KAction ( KIcon ( "process-stop" ), i18n ( "Stop" ), this );
+    _stopScript->setEnabled(false);
     executeCommands->addAction(_runScript);
+    executeCommands->addAction(_stopScript);
     
-    connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );    
+    connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
+    connect ( _stopScript, SIGNAL ( triggered() ), this, SLOT ( stopScript() ) );
     connect(    selectListing, SIGNAL(currentIndexChanged(int)) , 
                 stackedListing, SLOT(setCurrentIndex(int)) );
     
@@ -586,7 +591,7 @@ void MainWindow::dsChanged(){
 #ifdef USING_QTSCRIPT
 
 void MainWindow::executeScript(const QString& text) {
-    kDebug() << "Going to execut the script";
+    kDebug() << "Going to execute the script";
     if (_txtDebug == 0)   return;
     if ( scene() == 0)    return;
 
@@ -600,25 +605,35 @@ void MainWindow::executeScript(const QString& text) {
                                  _codeEditor->document()->documentName());
 
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
-    if ( !engine->isRunning() ){
-        setStopString();
-        engine->setScript(script, DocumentManager::self()->activeDocument());
-        engine->start();
-    }else{
-       setPlayString();
-       engine->stop();
+    if (engine->isRunning() ) {
+        engine->stop();
     }
+
+    enableStopAction();
+    engine->setScript(script, DocumentManager::self()->activeDocument());
+    engine->start();
+}
+
+void MainWindow::stopScript() {
+    kDebug() << "Going to stop the script";
+    if (_txtDebug == 0)   return;
+    if ( scene() == 0)    return;
+
+    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+
+   disableStopAction();
+   engine->stop();
 }
 
 #endif
 
 
-void MainWindow::setPlayString(){
-    _runScript->setText(i18n("Run"));
+void MainWindow::enableStopAction(){
+    _stopScript->setEnabled(true);
 }
 
-void MainWindow::setStopString(){
-    _runScript->setText(i18n("Stop"));
+void MainWindow::disableStopAction(){
+    _stopScript->setEnabled(false);
 }
 
 void MainWindow::outputString ( const QString& s ) { _txtOutput->append ( s ); }

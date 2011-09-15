@@ -85,6 +85,7 @@ private slots:
     void showPossibleIncludes();
 
     void executeScript(const QString &text = QString());
+    void stopScript();
     void newGraph();
     void openGraph();
     void saveGraph();
@@ -107,8 +108,8 @@ public slots:
 
     /** setup documents list.*/
     void setupDocumentsList();
-    void setPlayString();
-    void setStopString();
+    void disableStopAction();
+    void enableStopAction();
 
 signals:
     void startEvaluation();
@@ -131,6 +132,7 @@ private: // Variables.
     // Other Bunch of stuff.
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
     KAction *_runScript;
+    KAction *_stopScript;
 
     //! Needed to restore the size of the splitter after closing / opening the UI.
     QSplitter *_vSplitter;
