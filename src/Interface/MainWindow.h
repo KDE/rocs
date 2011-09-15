@@ -43,6 +43,7 @@ class QScriptEngine;
 class QScriptEngineDebugger;
 class ToolsPluginInterface;
 class QCloseEvent;
+class QComboBox;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -110,6 +111,8 @@ public slots:
     void setupDocumentsList();
     void disableStopAction();
     void enableStopAction();
+    /** opens debug output listing **/
+    void showDebugOutput();
 
 signals:
     void startEvaluation();
@@ -138,6 +141,8 @@ private: // Variables.
     QSplitter *_vSplitter;
     QSplitter *_hSplitter;
     QSplitter *_hScriptSplitter;
+    
+    QComboBox *_selectListing;
 
     //! all the actions that I need to reference later.
     MoveDataAction *_moveDataAction;

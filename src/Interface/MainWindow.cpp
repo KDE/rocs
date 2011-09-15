@@ -235,14 +235,14 @@ QWidget* MainWindow::setupScriptPanel()
     stackedListing->addWidget(_txtOutput);
     stackedListing->addWidget(_txtDebug);
 
-    QComboBox *selectListing = new QComboBox;
-    selectListing->addItem( KIcon ( "accessories-text-editor" ), i18n("Program Messages"));
-    selectListing->addItem( KIcon ( "tools-report-bug" ), i18n("Debug Messages"));
+    _selectListing = new QComboBox;
+    _selectListing->addItem( KIcon ( "accessories-text-editor" ), i18n("Program Messages"));
+    _selectListing->addItem( KIcon ( "tools-report-bug" ), i18n("Debug Messages"));
         
     QWidget *header = new QWidget( this );
     header->setLayout( new QHBoxLayout );
     header->layout()->addWidget(new QLabel(i18n("Select output:")));
-    header->layout()->addWidget(selectListing);
+    header->layout()->addWidget(_selectListing);
     
     QWidget *listingWidget = new QWidget(this);
     listingWidget->setLayout( new QVBoxLayout );
@@ -260,7 +260,7 @@ QWidget* MainWindow::setupScriptPanel()
     
     connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
     connect ( _stopScript, SIGNAL ( triggered() ), this, SLOT ( stopScript() ) );
-    connect(    selectListing, SIGNAL(currentIndexChanged(int)) , 
+    connect(    _selectListing, SIGNAL(currentIndexChanged(int)) , 
                 stackedListing, SLOT(setCurrentIndex(int)) );
     
     _hScriptSplitter->addWidget( _codeEditor );
@@ -441,6 +441,7 @@ void MainWindow::setActiveDocument ( )
 
 //     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
     connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
+    connect( engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
     connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
     connect( engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
     activeDocument->setModified(false);
@@ -630,6 +631,11 @@ void MainWindow::enableStopAction(){
 
 void MainWindow::disableStopAction(){
     _stopScript->setEnabled(false);
+}
+
+void MainWindow::showDebugOutput()
+{
+    _selectListing->setCurrentIndex(1);
 }
 
 void MainWindow::outputString ( const QString& s ) { _txtOutput->append ( s ); }

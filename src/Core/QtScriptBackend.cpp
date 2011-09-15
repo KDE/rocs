@@ -67,9 +67,11 @@ void QtScriptBackend::start()
     _engine->setProcessEventsInterval(100); //! TODO: Make that changable.
     
     QString error = _engine->evaluate(_script).toString();
-
+    if (_engine->hasUncaughtException()) {
+        emit scriptError();
+        emit sendDebug("<b style=\"color: red\">"+error+"</b>");
+    }
     emit finished();
-    emit sendDebug("<b style=\"color: red\">"+error+"</b>");
 }
 
 bool QtScriptBackend::isRunning(){
@@ -130,7 +132,7 @@ void QtScriptBackend::loadFile(const QString& file) {
 }
 
 void QtScriptBackend::debug(const QString& str){
-     emit sendDebug(str);
+    emit sendDebug(str);
 }
 
 void QtScriptBackend::output(const QString& str){
