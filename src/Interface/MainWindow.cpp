@@ -442,7 +442,7 @@ void MainWindow::setActiveDocument ( )
 //     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
     connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
     connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-    connect( engine, SIGNAL(finished()), this, SLOT(setPlayString()));
+    connect( engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
     activeDocument->setModified(false);
 }
 
@@ -510,10 +510,6 @@ void MainWindow::saveGraphAs(){
 
     d->saveAsInternalFormat ( KFileDialog::getSaveFileName() );
 }
-
-// void MainWindow::debug ( const QString& s ){
-//     _txtDebug->insertPlainText ( s );
-// }
 
 int MainWindow::saveIfChanged(){
     if ( DocumentManager::self()->activeDocument()->isModified() ){
