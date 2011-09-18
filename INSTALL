@@ -1,9 +1,12 @@
 Basic Installation
 ==================
 
-   These are generic installation instructions.
+These are generic installation instructions.
 
-   download the entire playground/edu folder from kde-svn, 
-   go to techbase.kde.org to configure your system for a kde-build
-   then do a cmakekde on playground/edu.
+First, download the released tar.gz source files from http://download.kde.org or fetch the project 
+by GIT from https://projects.kde.org/projects/kde/kdeedu/rocs. 
+Second, cf. to http://techbase.kde.org/Projects/Edu/Rocs on how to configure your system.
+Third, run Rocs by running the binary "rocs".
 
+Alternatively, all major Linux distributions (and also the KDE on Windows Project) ship
+precompiled versions of the latest release Rocs.
