@@ -240,6 +240,7 @@ void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 
 void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
     keyEvent->accept();
+    emit (keyPressed(keyEvent));
 }
 
 void GraphScene::updateGraph(DataStructurePtr g) {

@@ -66,6 +66,7 @@ public slots:
 
 signals:
     void resized();
+    void keyPressed(QKeyEvent* key);
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);

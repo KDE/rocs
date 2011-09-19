@@ -37,6 +37,7 @@ public:
     */
     bool executePress(QPointF pos);
 
+public slots:
     /*! when somebody press the delete key, the system will try to delete all selected nodes.
     \p keyEvent the key to be processed.
     */
