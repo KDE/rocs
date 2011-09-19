@@ -25,6 +25,7 @@
 #include "Rocs_Typedefs.h"
 
 class QObject;
+class QKeyEvent;
 class DataItem;
 class Data;
 
@@ -58,11 +59,15 @@ public slots:
       \param pos the current position of the cursor.
     */
     bool executeMove(QPointF pos);
-
     /*! will be executed when the mouse releases a click
     \param pos the position of the cursor.
     */
     bool executeRelease(QPointF pos);
+    /*! will be executed when the mouse moves.
+      \param pos the current position of the cursor.
+    */
+    bool executeArrowKeyMove(QKeyEvent* keyEvent);
+
 
 protected:
     /*! the node that will be moved on screen */

@@ -27,6 +27,7 @@
 #include "DataItem.h"
 #include <KLocale>
 #include <QGraphicsView>
+#include <QKeyEvent>
 
 #include <KDebug>
 //#include "settings.h"
@@ -38,6 +39,8 @@ MoveDataAction::MoveDataAction(GraphScene *scene, QObject *parent)
     setIcon ( KIcon ( "pointer" ) );
     _movableNode = 0;
     _name = "move";
+    
+    connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeArrowKeyMove(QKeyEvent*)));
 }
 
 MoveDataAction::~MoveDataAction() {
@@ -124,4 +127,40 @@ bool MoveDataAction::executeRelease(QPointF pos) {
         _graphScene->views()[0]->setRenderHint(QPainter::Antialiasing);
     }
     return true;
+}
+
+bool MoveDataAction::executeArrowKeyMove(QKeyEvent* keyEvent)
+{
+    // compute move direction
+    QPointF move;
+    switch (keyEvent->key()) {
+        case Qt::Key_Up: {
+            move = QPointF(0,-10);
+            break;
+        }
+        case Qt::Key_Down: {
+            move = QPointF(0,10);
+            break;
+        }
+        case Qt::Key_Left: {
+            move = QPointF(-10,0);
+            break;
+        }
+        case Qt::Key_Right: {
+            move = QPointF(10,0);
+            break;
+        }
+        default:
+            return false;
+    }
+
+    // move all selcted items
+    foreach (QGraphicsItem *item, _graphScene->selectedItems())
+    {
+        if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
+             dItem->data()-> setPos( dItem->data()->x() + move.x(), 
+                                     dItem->data()->y() + move.y());
+        }
+    }
+   return true;
 }
