@@ -109,6 +109,7 @@ void GraphScene::setAction(QAction *action) {
         removeEventFilter(_action);
     }
     _action = qobject_cast<AbstractAction*>( action );
+    action->setChecked(true);
     installEventFilter(action);
 }
 

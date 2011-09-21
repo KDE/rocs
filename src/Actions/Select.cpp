@@ -76,6 +76,10 @@ bool SelectAction::executeRelease(QPointF pos) {
 
 bool SelectAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
+    if (keyEvent->key() == Qt::Key_Escape) {
+        _graphScene->setAction(this);
+        return true;
+    }
     if (keyEvent->matches(QKeySequence::SelectAll)) {
         foreach (QGraphicsItem *item, _graphScene->items()){
             if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){

@@ -129,8 +129,7 @@ bool MoveDataAction::executeRelease(QPointF pos) {
     return true;
 }
 
-bool MoveDataAction::executeArrowKeyMove(QKeyEvent* keyEvent)
-{
+bool MoveDataAction::executeArrowKeyMove(QKeyEvent* keyEvent) {
     // compute move direction
     QPointF move;
     switch (keyEvent->key()) {

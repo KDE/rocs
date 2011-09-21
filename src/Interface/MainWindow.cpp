@@ -290,24 +290,24 @@ void MainWindow::setupActions()
 
     _moveDataAction = new MoveDataAction ( gc, this );
 
-    KActionCollection *ac = actionCollection();
+    _paletteActions = actionCollection();
     QActionGroup *g = new QActionGroup ( this );
 
-    g->addAction ( ac->addAction ( "move_node", _moveDataAction ) );
-    g->addAction ( ac->addAction ( "add_node", new AddNodeAction ( gc, this ) ) );
-    g->addAction ( ac->addAction ( "add_edge", new AddConnectionAction ( gc, this ) ) );
-    g->addAction ( ac->addAction ( "select", new SelectAction ( gc, this ) ) );
-    g->addAction ( ac->addAction ( "delete", new DeleteAction ( gc, this ) ) );
-    g->addAction ( ac->addAction ( "zoom", new ZoomAction ( gc, this ) ) );
+    g->addAction ( _paletteActions->addAction ( "move_node", _moveDataAction ) );
+    g->addAction ( _paletteActions->addAction ( "add_node", new AddNodeAction ( gc, this ) ) );
+    g->addAction ( _paletteActions->addAction ( "add_edge", new AddConnectionAction ( gc, this ) ) );
+    g->addAction ( _paletteActions->addAction ( "select", new SelectAction ( gc, this ) ) );
+    g->addAction ( _paletteActions->addAction ( "delete", new DeleteAction ( gc, this ) ) );
+    g->addAction ( _paletteActions->addAction ( "zoom", new ZoomAction ( gc, this ) ) );
     actionCollection()->action ( "move_node" )->toggle();
     gc->setAction ( _moveDataAction );
 
-    ac->addAction ( "align-hbottom",new AlignAction ( i18n ( "Align on the base" ),  AlignAction::Bottom, _graphVisualEditor ) );
-    ac->addAction ( "align-hcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::HCenter,_graphVisualEditor ) );
-    ac->addAction ( "align-htop",   new AlignAction ( i18n ( "Align on the top" ),   AlignAction::Top,    _graphVisualEditor ) );
-    ac->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   _graphVisualEditor ) );
-    ac->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,_graphVisualEditor ) );
-    ac->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18n ( "Align on the base" ),  AlignAction::Bottom, _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::HCenter,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-htop",   new AlignAction ( i18n ( "Align on the top" ),   AlignAction::Top,    _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  _graphVisualEditor ) );
 
     createAction("document-new",     i18n("New Graph"),         "new-graph",         Qt::Key_N, SLOT(newGraph()),    this);
     createAction("document-open",    i18n("Open Graph"),        "open-graph",        Qt::Key_0, SLOT(openGraph()),   this);
