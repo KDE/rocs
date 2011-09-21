@@ -31,6 +31,7 @@
 #include <KDebug>
 #include <QDebug>
 #include <QGraphicsView>
+#include <QKeyEvent>
 
 SelectAction::SelectAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
@@ -38,6 +39,8 @@ SelectAction::SelectAction(GraphScene *scene, QObject *parent)
     setToolTip ( i18n ( "Select Items by clicking on them." ) );
     setIcon ( KIcon ( "rocsselect" ) );
     _name = "select";
+    
+    connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeKeyRelease(QKeyEvent*)));
 }
 
 SelectAction::~SelectAction() {}
@@ -70,5 +73,19 @@ bool SelectAction::executeRelease(QPointF pos) {
     return true;
     
 }
+
+bool SelectAction::executeKeyRelease(QKeyEvent* keyEvent)
+{
+    if (keyEvent->matches(QKeySequence::SelectAll)) {
+        foreach (QGraphicsItem *item, _graphScene->items()){
+            if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
+                dItem->setSelected(true);
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
 
 #include "Select.moc"

@@ -60,6 +60,8 @@ public slots:
     */
     bool executeRelease(QPointF pos);
 
+    bool executeKeyRelease(QKeyEvent* keyEvent);
+
 signals:
     /*! signal sended when the selection changes. */
     void ItemSelectedChanged(QGraphicsItem *o);
