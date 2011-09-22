@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MoveData.h"
+#include "SelectMoveAction.h"
 #include "GraphScene.h"
 #include "DataStructure.h"
 #include "DocumentManager.h"
@@ -32,10 +32,10 @@
 #include <KDebug>
 //#include "settings.h"
 
-MoveDataAction::MoveDataAction(GraphScene *scene, QObject *parent)
+SelectMoveAction::SelectMoveAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
-    setText(i18n ( "Move Node" ));
-    setToolTip ( i18n ( "Moves a node around the drawing area." ) );
+    setText(i18n ( "Move" ));
+    setToolTip ( i18n ( "Select and move items." ) );
     setIcon ( KIcon ( "pointer" ) );
     _movableNode = 0;
     _name = "move";
@@ -43,18 +43,23 @@ MoveDataAction::MoveDataAction(GraphScene *scene, QObject *parent)
     connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeArrowKeyMove(QKeyEvent*)));
 }
 
-MoveDataAction::~MoveDataAction() {
+SelectMoveAction::~SelectMoveAction() {
     kDebug() << "Destroyed";
 }
 
-bool MoveDataAction::executePress(QPointF pos) {
+bool SelectMoveAction::executePress(QPointF pos) {
     if ( !DocumentManager::self()->activeDocument()->activeDataStructure()) {
         return false;
     }
 
-    if (! ( _movableNode = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)) )) 
-        return false;
-    
+    // if now data item at clicked point: switch to select mode
+    if (! ( _movableNode = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)) )) {
+        _graphScene->views().at(0)->setInteractive(true);
+        _graphScene->views().at(0)->setDragMode(QGraphicsView::RubberBandDrag);
+        return true;
+    }
+
+    // otherwise we have a node to move
     _deltas.clear();
     if (! _graphScene->selectedItems().contains(_movableNode) ){
         _data = _movableNode->data();
@@ -66,7 +71,7 @@ bool MoveDataAction::executePress(QPointF pos) {
             _deltas.insert(dItem, delta);
         }
     }
-    
+
     if( _graphScene->items().count() > 600 ) // 5! + 25 itens on screen
     {
         _graphScene->views().at(0)->setRenderHints( QPainter::Antialiasing 
@@ -75,7 +80,7 @@ bool MoveDataAction::executePress(QPointF pos) {
     return true;
 }
 
-bool MoveDataAction::executeMove(QPointF pos) {
+bool SelectMoveAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return false;
     }
@@ -107,11 +112,13 @@ bool MoveDataAction::executeMove(QPointF pos) {
     return true;
 }
 
-bool MoveDataAction::executeRelease(QPointF pos) {
+bool SelectMoveAction::executeRelease(QPointF pos) {
+    _graphScene->views().at(0)->setDragMode(QGraphicsView::NoDrag); 
+
     if ( !_movableNode ) {
         return false;
     }
-    
+
     if (! _graphScene->selectedItems().contains(_movableNode) ){
         _data -> setPos(pos.x() - _delta.x(), pos.y() - _delta.y());
     }else foreach (QGraphicsItem *item, _graphScene->selectedItems()){
@@ -129,10 +136,25 @@ bool MoveDataAction::executeRelease(QPointF pos) {
     return true;
 }
 
-bool MoveDataAction::executeArrowKeyMove(QKeyEvent* keyEvent) {
-    // compute move direction
+bool SelectMoveAction::executeArrowKeyMove(QKeyEvent* keyEvent) {
+
+    // consider key sequences
+    if (keyEvent->matches(QKeySequence::SelectAll)) {
+        foreach (QGraphicsItem *item, _graphScene->items()){
+            if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
+                dItem->setSelected(true);
+            }
+        }
+        return true;
+    }
+
+    // consider single keys    
     QPointF move;
     switch (keyEvent->key()) {
+        case Qt::Key_Escape: {
+            _graphScene->setAction( this );
+            break;
+        }
         case Qt::Key_Up: {
             move = QPointF(0,-10);
             break;

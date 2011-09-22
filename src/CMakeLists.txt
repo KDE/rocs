@@ -82,8 +82,7 @@ set ( rocs_actions_SRCS
   Actions/AddData.cpp
   Actions/AlignAction.cpp
   Actions/DeleteAction.cpp
-  Actions/MoveData.cpp
-  Actions/Select.cpp
+  Actions/SelectMoveAction.cpp
   Actions/zoom.cpp
 )
 

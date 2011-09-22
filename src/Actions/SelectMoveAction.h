@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -17,24 +18,27 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ACTION_SELECT_H
-#define ACTION_SELECT_H
+#ifndef SELECTMOVEACTION_H
+#define SELECTMOVEACTION_H
 
 #include "AbstractAction.h"
-#include <QObject>
-#include <QPointF>
+#include <boost/shared_ptr.hpp>
+#include "Rocs_Typedefs.h"
 
+class QObject;
+class QKeyEvent;
 class QGraphicsRectItem;
 class QGraphicsItem;
+class DataItem;
+class Data;
 
 /*!
-  \brief The 'Add Node' Action
-  This action holds the 'Add Node' icon and tooltips, and when it's executed,
-  it will place a new node on the QGraphicsView that holds all the items.
+  \brief The 'Move Node' Action
+  This action holds the 'Move Node' icon and tooltips, and when it's executed,
+  it will move the selected node around the screen.
 */
 
-class SelectAction : public AbstractAction
-{
+class SelectMoveAction : public AbstractAction {
     Q_OBJECT
 public:
     /*!
@@ -42,26 +46,42 @@ public:
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
 
-    explicit SelectAction(GraphScene *scene, QObject *parent = 0);
+    explicit SelectMoveAction(GraphScene *scene, QObject *parent = 0);
 
     /*!
       Default Destructor
     */
-    ~SelectAction();
+    ~SelectMoveAction();
 public slots:
     /*!
       will be executed when the mouse press a button.
       \param pos the position onscreen of the click.
     */
     bool executePress(QPointF pos);
-
+    /*! will be executed when the mouse moves.
+      \param pos the current position of the cursor.
+    */
+    bool executeMove(QPointF pos);
     /*! will be executed when the mouse releases a click
     \param pos the position of the cursor.
     */
     bool executeRelease(QPointF pos);
+    /*! will be executed when the mouse moves.
+      \param pos the current position of the cursor.
+    */
+    bool executeArrowKeyMove(QKeyEvent* keyEvent);
 
-    bool executeKeyRelease(QKeyEvent* keyEvent);
 
+protected:
+    /*! the node that will be moved on screen */
+    DataItem *_movableNode;
+
+    /*! the model of the NodeItem,
+    needs it to modify it's internal value when the move is finished */
+    DataPtr _data;
+    QPointF _delta;
+    QMap<DataItem*, QPointF> _deltas;
+    
 signals:
     /*! signal sended when the selection changes. */
     void ItemSelectedChanged(QGraphicsItem *o);
@@ -69,7 +89,6 @@ signals:
 private:
     /*! onscreen temporary rectangle for the selected items */
     QGraphicsRectItem *_selectionRect;
-
 };
 
 #endif

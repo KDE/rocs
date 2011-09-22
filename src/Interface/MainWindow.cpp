@@ -64,8 +64,7 @@
 #include "AbstractAction.h"
 #include "AddData.h"
 #include "AddConnection.h"
-#include "MoveData.h"
-#include "Select.h"
+#include "SelectMoveAction.h"
 #include "DeleteAction.h"
 #include "AlignAction.h"
 #include <KNS3/DownloadDialog>
@@ -288,19 +287,18 @@ void MainWindow::setupActions()
 
     GraphScene *gc = _graphVisualEditor->scene();
 
-    _moveDataAction = new MoveDataAction ( gc, this );
+    _selectMoveAction = new SelectMoveAction ( gc, this );
 
     _paletteActions = actionCollection();
     QActionGroup *g = new QActionGroup ( this );
 
-    g->addAction ( _paletteActions->addAction ( "move_node", _moveDataAction ) );
+    g->addAction ( _paletteActions->addAction ( "selectmove", _selectMoveAction ) );
     g->addAction ( _paletteActions->addAction ( "add_node", new AddNodeAction ( gc, this ) ) );
     g->addAction ( _paletteActions->addAction ( "add_edge", new AddConnectionAction ( gc, this ) ) );
-    g->addAction ( _paletteActions->addAction ( "select", new SelectAction ( gc, this ) ) );
     g->addAction ( _paletteActions->addAction ( "delete", new DeleteAction ( gc, this ) ) );
     g->addAction ( _paletteActions->addAction ( "zoom", new ZoomAction ( gc, this ) ) );
-    actionCollection()->action ( "move_node" )->toggle();
-    gc->setAction ( _moveDataAction );
+    actionCollection()->action ( "selectmove" )->toggle();
+    gc->setAction ( _selectMoveAction );
 
     _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18n ( "Align on the base" ),  AlignAction::Bottom, _graphVisualEditor ) );
     _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::HCenter,_graphVisualEditor ) );
