@@ -36,7 +36,7 @@ SelectMoveAction::SelectMoveAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Move" ));
     setToolTip ( i18n ( "Select and move items." ) );
-    setIcon ( KIcon ( "pointer" ) );
+    setIcon ( KIcon ( "rocsselectmove" ) );
     _movableNode = 0;
     _name = "move";
     
