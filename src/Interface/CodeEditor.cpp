@@ -107,6 +107,7 @@ void CodeEditor::newScript() {
     _docArea->addWidget(_docViews.last());
     changeCurrentDocument( _docViews.count() - 1 );
     connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
+    updateTabText(_scriptDocs.last());
     kDebug()<< "New script created.";
 }
 
@@ -121,6 +122,16 @@ void CodeEditor::saveScript() {
 void CodeEditor::updateTabText(KTextEditor::Document* t){
     int index = _scriptDocs.indexOf(t);
     _tabDocs->setTabText(index, t->documentName());
+    
+    if (t->documentName().endsWith(".js", Qt::CaseInsensitive)) {
+        _tabDocs->setTabIcon(index, KIcon("application-javascript"));
+    }
+    else if (t->documentName().endsWith(".py", Qt::CaseInsensitive)) {
+        _tabDocs->setTabIcon(index, KIcon("text-x-python"));
+    }
+    else {
+        _tabDocs->setTabIcon(index, KIcon("text-x-generic"));
+    }
 }
 
 void CodeEditor::openScript() {
@@ -138,7 +149,8 @@ void CodeEditor::openScript() {
     _tabDocs->addTab(_scriptDocs.last()->documentName());
     _docArea->addWidget(_docViews.last());
 
-    connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(atualizeTabText(KTextEditor::Document*)));
+    connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
+    updateTabText(d);
     changeCurrentDocument( _docViews.count() - 1 );
 
     kDebug() << "Being Called";
