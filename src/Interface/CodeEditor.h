@@ -53,10 +53,10 @@ public slots:
     void openScript();
     void saveScriptAs();
 
-  private slots:
+private slots:
     void closeDocument(int index);
     void changeCurrentDocument(int index);
-    void atualizeTabText(KTextEditor::Document* t);
+    void updateTabText(KTextEditor::Document* t);
 
 private:
 

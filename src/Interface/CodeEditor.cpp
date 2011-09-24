@@ -106,7 +106,7 @@ void CodeEditor::newScript() {
     _tabDocs->addTab(_scriptDocs.last()->documentName());
     _docArea->addWidget(_docViews.last());
     changeCurrentDocument( _docViews.count() - 1 );
-    connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(atualizeTabText(KTextEditor::Document*)));
+    connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
     kDebug()<< "New script created.";
 }
 
@@ -118,7 +118,7 @@ void CodeEditor::saveScript() {
     _activeDocument->documentSave();
 }
 
-void CodeEditor::atualizeTabText(KTextEditor::Document* t){
+void CodeEditor::updateTabText(KTextEditor::Document* t){
     int index = _scriptDocs.indexOf(t);
     _tabDocs->setTabText(index, t->documentName());
 }
