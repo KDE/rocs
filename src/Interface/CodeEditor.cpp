@@ -114,15 +114,6 @@ void CodeEditor::newScript() {
     kDebug()<< "New script created.";
 }
 
-void CodeEditor::saveScript() {
-    if ((_docViews.empty()) ||  (_scriptDocs.empty())) {
-        return;
-    }
-
-    _activeDocument->documentSave();
-    updateTabText(_activeDocument);
-}
-
 void CodeEditor::updateTabText(KTextEditor::Document* text){
     int index = _scriptDocs.indexOf(text);
     _tabDocs->setTabText(index, text->documentName());
@@ -168,13 +159,54 @@ void CodeEditor::openScript() {
 
 }
 
-void CodeEditor::saveScriptAs() {
+void CodeEditor::saveScript(KTextEditor::Document *doc=0) {
+qDebug() << "my doc is: "<< doc;
     if ((_docViews.empty()) ||  (_scriptDocs.empty())) {
         return;
     }
+    if (doc==0) {
+        doc = _activeDocument;
+    }
+    if (doc->isModified()==false) {
+        return;
+    }
+    doc->documentSave();
+    updateTabText(doc);
+}
 
-    _activeDocument->documentSaveAs();
-    updateTabText(_activeDocument);
+void CodeEditor::saveScriptAs(KTextEditor::Document *doc=0) {
+    if ((_docViews.empty()) ||  (_scriptDocs.empty())) {
+        return;
+    }
+    if (doc==0) {
+        doc = _activeDocument;
+    }
+    doc->documentSaveAs();
+    updateTabText(doc);
+}
+
+void CodeEditor::saveAllScripts() {
+    if (_scriptDocs.empty()) {
+        return;
+    }
+    foreach (KTextEditor::Document *text, _scriptDocs) {
+        if (text->url().isEmpty()) {
+            if (text->isModified()==false) 
+                continue;
+            saveScriptAs(text);
+        }
+        else {
+            saveScript(text);
+        }
+    }
+}
+
+void CodeEditor::saveActiveScript(){
+    saveScript();
+}
+
+void CodeEditor::saveActiveScriptAs(){
+    saveScriptAs();
 }
 
 QString CodeEditor::text() const {

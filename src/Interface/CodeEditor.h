@@ -54,9 +54,10 @@ public:
 
 public slots:
     void newScript();
-    void saveScript();
+    void saveActiveScript();
+    void saveActiveScriptAs();
+    void saveAllScripts();
     void openScript();
-    void saveScriptAs();
 
 private slots:
     void closeDocument(int index);
@@ -64,6 +65,17 @@ private slots:
     void updateTabText(KTextEditor::Document* text);
 
 private:
+    /** Save the given script or if no text document is given, the currently active script is
+     *  saved.
+     * \param doc optional document to be saved
+     */
+    void saveScript(KTextEditor::Document *doc);
+    /** Save given script as new file or if no text document given, the currently active script
+     *  is saved as a new file.
+     * \param doc optional document to be saved
+     */
+    void saveScriptAs(KTextEditor::Document *doc);
+    /** Call \see saveScript for all documents in the code editor */
     QStackedWidget *_docArea;
     KTabBar *_tabDocs; //! the tabs of the opened documents.
     QList<KTextEditor::View*> _docViews; //! this is the view where you edit your scripts

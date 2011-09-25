@@ -318,8 +318,8 @@ void MainWindow::setupActions()
 
     createAction("document-new",     i18n("New Script"),        "new-script",        Qt::Key_N, SLOT(newScript()),    _codeEditor);
     createAction("document-open",    i18n("Open Script"),       "open-script",       Qt::Key_O, SLOT(openScript()),   _codeEditor);
-    createAction("document-save",    i18n("Save Script"),       "save-script",       Qt::Key_S, SLOT(saveScript()),   _codeEditor);
-    createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    Qt::Key_W, SLOT(saveScriptAs()), _codeEditor);
+    createAction("document-save",    i18n("Save Script"),       "save-script",       Qt::Key_S, SLOT(saveActiveScript()),   _codeEditor);
+    createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    Qt::Key_W, SLOT(saveActiveScriptAs()), _codeEditor);
 
     kDebug() << "Creating Actions (import export)";
     if (PluginManager::instance()->filePlugins().count()) {
@@ -511,9 +511,27 @@ void MainWindow::saveGraphAs(){
 }
 
 int MainWindow::saveIfChanged(){
-    if ( DocumentManager::self()->activeDocument()->isModified() ){
-        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( "Do you want to save your unsaved document?" ) );
+    if ( DocumentManager::self()->activeDocument()->isModified() && !_codeEditor->isModified() ){
+        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( 
+            "Changes on your graph document are unsaved. Do you want to save your changes?" ) );
         if ( btnCode == KMessageBox::Yes ){
+            saveGraph();
+        }
+        return btnCode;
+    }
+    if ( !DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified() ){
+        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( 
+            "Changes on your script files are unsaved. Do you want to save all unsaved scripts?" ) );
+        if ( btnCode == KMessageBox::Yes ){
+            _codeEditor->saveAllScripts();
+        }
+        return btnCode;
+    }
+    if ( DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified() ){
+        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( 
+            "Changes on your script files and on your graph document are unsaved. Do you want to save your graph document and all unsaved scripts?" ) );
+        if ( btnCode == KMessageBox::Yes ){
+            _codeEditor->saveAllScripts();
             saveGraph();
         }
         return btnCode;
