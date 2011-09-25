@@ -51,7 +51,7 @@ public:
      * \return true if any document in the code-editor is modified, otherwise false
      */
     bool isModified() const;
-
+    
 public slots:
     void newScript();
     void saveActiveScript();

@@ -74,6 +74,9 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructurePtr g, MainWindow* pa
     connect( _graphName,      SIGNAL(textChanged(QString)), g.get(), SLOT(setName(QString)));
 }
 
+GraphPropertiesWidget::~GraphPropertiesWidget(){
+}
+
 void GraphPropertiesWidget::setPointerDefaultColor(QColor c){ 
     _graph->setPointerDefaultColor(c); 
 }

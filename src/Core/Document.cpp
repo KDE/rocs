@@ -442,15 +442,12 @@ void Document::savePropertiesInternalFormat(QObject *o) {
 void Document::loadFromInternalFormat(const QString& filename) {
     QFile f(filename);
     if ( !f.open(QIODevice::ReadOnly | QIODevice::Text) ) {
-        kDebug() << "File not open " << filename.toUtf8();
+        qDebug() << "File not open " << filename.toUtf8();
         return;
     }
-
     DataStructurePtr tmpDataStructure;
-   //DataStructureGroup *tmpGroup = 0;
     QObject *tmpObject = 0;
     DataPtr tmpDataPtr;
-
 
     QTextStream in(&f);
     in.setCodec("UTF-8");
@@ -467,16 +464,29 @@ void Document::loadFromInternalFormat(const QString& filename) {
             gName.remove(']');
             tmpDataStructure = DataStructurePluginManager::self()->createNewDataStructure(this);
             tmpDataStructure->setName(gName.toAscii());
-//             tmpObject = tmpDataStructure;
             d->_dataStructures.append(tmpDataStructure);
-            kDebug() << "DataStructure Created";
         }
 
         else if (str.startsWith("[Data")) {
             QString nName = str.section(' ',1,1);
             nName.remove(']');
             tmpDataPtr = tmpDataStructure->addData(nName);
-            kDebug() << "Data Created";
+            QString dataLine = in.readLine().simplified();
+            qreal posX = 0;
+            qreal posY = 0;
+            while (!in.atEnd() && !dataLine.isEmpty()) {
+                if (dataLine.startsWith("x :")) {
+                    posX = dataLine.section(' ',2).toInt();
+                }
+                if (dataLine.startsWith("y :"))
+                    posY = dataLine.section(' ',2).toInt();
+                if (dataLine.startsWith("value :"))
+                    tmpDataPtr->setValue(dataLine.section(' ',2).toInt());
+                if (dataLine.startsWith("color :"))
+                    tmpDataPtr->setColor(dataLine.section(' ',2));
+                dataLine = in.readLine().simplified();
+            }
+            tmpDataPtr->setPos(posX, posY);
         }
 
         else if (str.startsWith("[Pointer")) {
@@ -486,9 +496,17 @@ void Document::loadFromInternalFormat(const QString& filename) {
             QString nameFrom = eName.section("->", 0,0);
             QString nameTo = eName.section("->", 1,1);
 
-            tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()),
+            PointerPtr tmpPointer = tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()),
                                                      tmpDataStructure->dataList().at(nameTo.toInt()));
-            kDebug() << "Pointer Created";
+            QString dataLine = in.readLine().simplified();
+            while (!in.atEnd() && !dataLine.isEmpty()) {
+                if (dataLine.startsWith("width :"))
+                    tmpPointer->setWidth(dataLine.section(' ',2).toInt());
+                if (dataLine.startsWith("value :"))
+                    tmpPointer->setValue(dataLine.section(' ',2));
+                dataLine = in.readLine().simplified();
+            }
+            qDebug() << "Pointer Created";
         }
         else if (str.startsWith("[Group")) {
             /*QString gName = str.section(" ",1,1);
@@ -505,7 +523,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
         }
     }
     d->_modified = false;
-    kDebug() << "DataStructure Document Loaded.";
+    qDebug() << "DataStructure Document Loaded.";
 }
 
 DataStructurePtr Document::activeDataStructure() const { return d->_activeDataStructure; }

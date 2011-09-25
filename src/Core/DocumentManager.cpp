@@ -123,30 +123,29 @@ void DocumentManager::convertToDataStructure() {
 }
 
 void DocumentManager::loadDocument ( QString name ){
-  Document * doc;
-  if ( name.isEmpty() ){
-      int docNumber = 0;
-      forever{
-          bool found = false;
-          name = QString("%1%2").arg(i18n("Untitled")).arg(docNumber);
-          foreach( Document *data, m_documents){
-              if( data->name() == name){
-                  found = true;
-                  docNumber += 1;
-              }
-          }
-          if ( ! found ){
-              break;
-          }
-      }
-      doc = new Document( name );
-      doc->addDataStructure ( i18n ( "Untitled0" ) );
-  }else{
-      removeDocument(activeDocument());
-      doc = new Document( i18n ( "Untitled0" ) );
-      doc->loadFromInternalFormat ( name );
-   }
-   doc->setModified(false);
-   addDocument(doc);
+    Document * doc;
+    if ( name.isEmpty() ){
+        int docNumber = 0;
+        forever{
+            bool found = false;
+            name = QString("%1%2").arg(i18n("Untitled")).arg(docNumber);
+            foreach( Document *data, m_documents){
+                if( data->name() == name){
+                    found = true;
+                    docNumber += 1;
+                }
+            }
+            if ( ! found ){
+                break;
+            }
+        }
+        doc = new Document( name );
+        doc->addDataStructure ( i18n ( "Untitled0" ) );
+    }else{
+        doc = new Document( i18n ( "Untitled0" ) );
+        doc->loadFromInternalFormat ( name );
+    }
+    doc->setModified(false);
+    addDocument(doc);
 }
 

@@ -35,6 +35,7 @@ class GraphPropertiesWidget : public KButtonGroup, public Ui::GraphPropertiesWid
     Q_OBJECT
 public:
     GraphPropertiesWidget (DataStructurePtr g, MainWindow* parent = 0 );
+    ~GraphPropertiesWidget();
     QRadioButton *radio() const;
 
 private slots:
