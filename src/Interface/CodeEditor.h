@@ -1,6 +1,7 @@
 /* 
     This file is part of Rocs.
     Copyright 2009-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -46,6 +47,10 @@ public:
     KTextEditor::View *view() const {
         return _activeView;
     }
+    /** This method gives modification state of code-editor texts.
+     * \return true if any document in the code-editor is modified, otherwise false
+     */
+    bool isModified() const;
 
 public slots:
     void newScript();
@@ -56,10 +61,9 @@ public slots:
 private slots:
     void closeDocument(int index);
     void changeCurrentDocument(int index);
-    void updateTabText(KTextEditor::Document* t);
+    void updateTabText(KTextEditor::Document* text);
 
 private:
-
     QStackedWidget *_docArea;
     KTabBar *_tabDocs; //! the tabs of the opened documents.
     QList<KTextEditor::View*> _docViews; //! this is the view where you edit your scripts

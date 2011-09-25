@@ -1,6 +1,7 @@
 /* 
     This file is part of Rocs.
     Copyright 2009-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -107,6 +108,8 @@ void CodeEditor::newScript() {
     _docArea->addWidget(_docViews.last());
     changeCurrentDocument( _docViews.count() - 1 );
     connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
+    connect(_activeDocument, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
+    
     updateTabText(_scriptDocs.last());
     kDebug()<< "New script created.";
 }
@@ -117,16 +120,23 @@ void CodeEditor::saveScript() {
     }
 
     _activeDocument->documentSave();
+    updateTabText(_activeDocument);
 }
 
-void CodeEditor::updateTabText(KTextEditor::Document* t){
-    int index = _scriptDocs.indexOf(t);
-    _tabDocs->setTabText(index, t->documentName());
+void CodeEditor::updateTabText(KTextEditor::Document* text){
+    int index = _scriptDocs.indexOf(text);
+    _tabDocs->setTabText(index, text->documentName());
     
-    if (t->documentName().endsWith(".js", Qt::CaseInsensitive)) {
+    // tell user if current modifications are unsaved
+    if (text->isModified()) {
+        _tabDocs->setTabIcon(index, KIcon("document-save"));
+        return;
+    }
+
+    if (text->documentName().endsWith(".js", Qt::CaseInsensitive)) {
         _tabDocs->setTabIcon(index, KIcon("application-javascript"));
     }
-    else if (t->documentName().endsWith(".py", Qt::CaseInsensitive)) {
+    else if (text->documentName().endsWith(".py", Qt::CaseInsensitive)) {
         _tabDocs->setTabIcon(index, KIcon("text-x-python"));
     }
     else {
@@ -149,7 +159,8 @@ void CodeEditor::openScript() {
     _tabDocs->addTab(_scriptDocs.last()->documentName());
     _docArea->addWidget(_docViews.last());
 
-    connect(_activeDocument, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
+    connect(d, SIGNAL(documentNameChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
+    connect(d, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
     updateTabText(d);
     changeCurrentDocument( _docViews.count() - 1 );
 
@@ -163,8 +174,17 @@ void CodeEditor::saveScriptAs() {
     }
 
     _activeDocument->documentSaveAs();
+    updateTabText(_activeDocument);
 }
 
 QString CodeEditor::text() const {
     return _activeDocument->text().toAscii();
+}
+
+bool CodeEditor::isModified() const {
+    bool modified = false;
+    foreach (KTextEditor::Document *text, _scriptDocs) {
+        if (text->isModified()) modified = true;
+    }
+    return modified;
 }
