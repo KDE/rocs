@@ -52,7 +52,7 @@ private slots:
   signals:
     void updateNeeded();
     void addGraph(QString name);
-    void removeGraph();
+    void removeGraph(DataStructurePtr);
 
   private:
     DataStructurePtr _graph;

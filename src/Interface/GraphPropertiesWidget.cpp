@@ -60,7 +60,7 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructurePtr g, MainWindow* pa
 
     Document *gDocument = qobject_cast<Document*>(g->parent());
     connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataStructure(QString)));
-    connect(this, SIGNAL(removeGraph()), g.get(), SLOT(remove()));
+    connect(this, SIGNAL(removeGraph(DataStructurePtr)), g.get(), SLOT(remove()));
     
     
     connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
@@ -110,24 +110,7 @@ void GraphPropertiesWidget::on__activateGraph_toggled(bool b) {
 }
 
 void GraphPropertiesWidget::on__graphDelete_clicked() {
-    bool createNewGraph = false;
-
-    if (DocumentManager::self()->activeDocument()->dataStructures().size() == 1){
-        createNewGraph = true;
-    }
-
-    _activateGraph->group()->removeButton(radio());
-    
-    emit removeGraph();
-    
-    if (createNewGraph){
-        emit addGraph(i18n("Untitled0"));
-    }
-    hide();
-    QLayout *layout = parentWidget()->layout();
-    layout->removeWidget(this);
-    
-    deleteLater();
+    emit removeGraph(_graph);
 }
 
 void GraphPropertiesWidget::on__graphName_textChanged(const QString& s){
