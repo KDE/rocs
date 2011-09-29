@@ -44,15 +44,15 @@ private slots:
     void align();
 
 private:
-    /*! align the data in the Y axis.
-      \p l the list of selected data.
-      */
-    void allignY(QList<DataItem*>& l);
+    /** align the data items on y-axis
+     * \param l the list of selected data.
+     */
+    void alignY(QList<DataItem*>& l);
 
-    /*! align the data in the X axis.
-    \p l the list of selected data.
+    /** align the data items on x-axis
+     *\param l the list of selected data.
     */
-    void allignX(QList<DataItem*>& l);
+    void alignX(QList<DataItem*>& l);
 
     /*! the orientation that this button will work on. */
     Orientation m_orientation;

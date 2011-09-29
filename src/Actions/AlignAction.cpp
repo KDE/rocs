@@ -48,27 +48,27 @@ void AlignAction::align() {
     case Left :
     case VCenter :
         qSort(l.begin(), l.end(),  leftLessThan);
-        allignX(l);
+        alignX(l);
         break;
     case Bottom :
     case HCenter :
         qSort(l.begin(), l.end(), bottomLessThan);
-        allignY(l);
+        alignY(l);
         break;
     case Right :
         qSort(l.begin(), l.end(), rightLessThan);
-        allignX(l);
+        alignX(l);
         break;
     case Top :
         qSort( l.begin(), l.end(), topLessThan);
-        allignY(l);
+        alignY(l);
         break;
     }
 
     gEditor->scene()->setHideEdges(false);
 }
 
-void AlignAction::allignY(QList<DataItem*>& l) {
+void AlignAction::alignY(QList<DataItem*>& l) {
     qreal final = l[0]->data()->y();
     
     if (m_orientation == VCenter || m_orientation == HCenter) {
@@ -80,7 +80,7 @@ void AlignAction::allignY(QList<DataItem*>& l) {
     }
 }
 
-void AlignAction::allignX(QList<DataItem*>& l) {
+void AlignAction::alignX(QList<DataItem*>& l) {
     qreal final = l[0]->data()->x();
     if (m_orientation == VCenter || m_orientation == HCenter) {
         qreal otherSide = l[l.size()-1]->data()->x();
