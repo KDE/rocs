@@ -32,6 +32,7 @@
 #include <QSizePolicy>
 #include "DocumentManager.h"
 #include <qscrollbar.h>
+#include <QLayout>
 
 GraphLayers::GraphLayers(MainWindow *parent) : 
     QScrollArea(parent)
@@ -87,13 +88,13 @@ void GraphLayers::setActiveDocument() {
     }
 
     connect(_activeDocument, SIGNAL(dataStructureCreated(DataStructurePtr)), 
-            this, SLOT(addGraph(DataStructurePtr)),Qt::UniqueConnection);
+            this, SLOT(createLayer(DataStructurePtr)),Qt::UniqueConnection);
     
     connect(this, SIGNAL(createGraph(QString)), 
             _activeDocument, SLOT(addDataStructure(QString)), Qt::UniqueConnection);
 
     foreach(DataStructurePtr s, _activeDocument->dataStructures()){
-        addGraph(s);
+        createLayer(s);
     }
 }
 
@@ -105,13 +106,44 @@ void GraphLayers::btnADDClicked() {
     emit  createGraph(name);
 }
 
-void GraphLayers::addGraph(DataStructurePtr g){
-    GraphPropertiesWidget *gp = new GraphPropertiesWidget(g,_mainWindow);
-    _buttonGroup->addButton(gp->radio());
-    connect(gp, SIGNAL(updateNeeded()), this, SLOT(selectFirstGraph()));
-    qobject_cast<QVBoxLayout*>(widget()->layout())->insertWidget(1,gp);
+void GraphLayers::createLayer(DataStructurePtr dataStructure)
+{
+    GraphPropertiesWidget *properties = new GraphPropertiesWidget(dataStructure,_mainWindow);
+
+    connect(properties, SIGNAL(updateNeeded()), 
+	    this, SLOT(selectFirstGraph()));
+    connect(properties, SIGNAL(removeGraph(DataStructurePtr)), 
+	    this, 	SLOT(removeLayer(DataStructurePtr)));
+    
+    _buttonGroup->addButton(properties->radio());
+    
+    qobject_cast<QVBoxLayout*>(widget()->layout())->insertWidget(1,properties);
+    m_layers.insert(dataStructure, properties);
+    
 }
 
-void GraphLayers::selectFirstGraph(){
-  _buttonGroup->buttons()[0]->click();
+void GraphLayers::removeLayer(DataStructurePtr dataStructure)
+{
+    GraphPropertiesWidget *properties = m_layers.value(dataStructure);
+    bool selectOther 	= properties->radio()->isChecked();
+    bool createAnother 	= (DocumentManager::self()->activeDocument()->dataStructures().size() == 0);
+
+    _buttonGroup->removeButton(properties->radio());
+    
+    widget()->layout()->removeWidget(properties);
+    m_layers.remove(dataStructure);
+    properties->deleteLater();
+    
+    if (createAnother){
+	btnADDClicked();
+    }
+    
+    if (selectOther){
+	selectFirstGraph();
+    }
+}
+
+void GraphLayers::selectFirstGraph()
+{
+  _buttonGroup->buttons().at(_buttonGroup->buttons().size()-1)->click();
 }

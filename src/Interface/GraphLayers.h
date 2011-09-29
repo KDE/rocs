@@ -23,12 +23,14 @@
 #include <QWidget>
 #include <boost/shared_ptr.hpp>
 #include "Rocs_Typedefs.h"
+#include <QMap>
 
 class DataStructure;
 class QButtonGroup;
 class KLineEdit;
 class MainWindow;
 class Document;
+class GraphPropertiesWidget;
 
 class GraphLayers : public QScrollArea {
     Q_OBJECT
@@ -45,7 +47,8 @@ public:
 
 public slots:
     void btnADDClicked();
-    void addGraph(DataStructurePtr g);
+    void createLayer(DataStructurePtr g);
+    void removeLayer(DataStructurePtr g);
     void selectFirstGraph();
 
 signals:
@@ -53,6 +56,7 @@ signals:
 
 private:
     Document *_activeDocument;
+    QMap<DataStructurePtr, GraphPropertiesWidget*> m_layers;
 };
 
 #endif
