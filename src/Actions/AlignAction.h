@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -29,7 +30,7 @@ class AlignAction : public KAction {
     Q_OBJECT
 public:
     /*! this enum has all the possibilities of orientations for the aligns. */
-    enum Orientation {Left, Right, Top, Bottom, HCenter, VCenter};
+    enum Orientation {Left, Right, Top, Bottom, HCenter, VCenter, Circle, MinimalCuts, Tree};
 
     /*! creates a new align button.
       \p actionName the name of the button
@@ -45,14 +46,20 @@ private slots:
 
 private:
     /** align the data items on y-axis
-     * \param l the list of selected data.
+     * \param l the non-empty list of selected data.
      */
     void alignY(QList<DataItem*>& l);
 
     /** align the data items on x-axis
-     *\param l the list of selected data.
+     *\param l the non-empty list of selected data.
     */
     void alignX(QList<DataItem*>& l);
+
+    /** align the data items on circle, given by maximal diameter of input set.
+     * the data is moved according the previous  angles.
+     * \param dataList the non-empty list of selected data
+     */
+    void alignCircle(QList<DataItem*>& dataList);
 
     /*! the orientation that this button will work on. */
     Orientation m_orientation;
