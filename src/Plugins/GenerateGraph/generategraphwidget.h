@@ -37,20 +37,20 @@ class GenerateGraphWidget :
 {
     Q_OBJECT
 
-    typedef boost::square_topology<>::point_type Point;
-
-    struct VertexProperties
-    {
-        std::size_t index;
-        Point point;
-    };
-
-    typedef boost::adjacency_list<boost::listS,boost::listS,boost::bidirectionalS,VertexProperties>
-        BoostGraph;
-
-    typedef boost::property_map<BoostGraph, Point VertexProperties::*>::type PositionMap;
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, 
+                       boost::property<boost::vertex_name_t, std::string> > 
+         Graph;
+         
+    typedef boost::rectangle_topology<> topology_type;
     
-    // used for graph selection
+    typedef topology_type::point_type point_type;
+    
+    typedef std::vector<point_type> PositionVec;
+    
+    typedef boost::iterator_property_map<PositionVec::iterator, 
+                                boost::property_map<Graph, boost::vertex_index_t>::type>
+        PositionMap;
+
     enum GraphType {
         MESH,
         STAR,
