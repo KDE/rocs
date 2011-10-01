@@ -30,7 +30,7 @@ class AlignAction : public KAction {
     Q_OBJECT
 public:
     /*! this enum has all the possibilities of orientations for the aligns. */
-    enum Orientation {Left, Right, Top, Bottom, HCenter, VCenter, Circle, MinimalCuts, Tree};
+    enum Orientation {Left, Right, Top, Bottom, HCenter, VCenter, Circle, MinCutTree};
 
     /*! creates a new align button.
       \p actionName the name of the button
@@ -41,25 +41,32 @@ public:
     AlignAction(const QString& tooltip,AlignAction::Orientation o, QWidget *parent);
 
 private slots:
-    /*! run the align algorithm in the selected data. */
+    /** Run the previously specified align algorithm for the selected set of data. items.
+     */
     void align();
 
 private:
-    /** align the data items on y-axis
+    /** Align the data items on y-axis.
      * \param l the non-empty list of selected data.
      */
     void alignY(QList<DataItem*>& l);
 
-    /** align the data items on x-axis
+    /** Align the data items on x-axis.
      *\param l the non-empty list of selected data.
     */
     void alignX(QList<DataItem*>& l);
 
-    /** align the data items on circle, given by maximal diameter of input set.
+    /** Align the data items on circle, given by maximal diameter of input set.
      * the data is moved according the previous  angles.
      * \param dataList the non-empty list of selected data
      */
     void alignCircle(QList<DataItem*>& dataList);
+
+    /** Align the data items on a tree with (approximately) minimal number of cuts.
+     * This utilzes the Fruchtman-Reingold algorithm, implemented by the Boost Graph Library.
+     * \param dataList the non-empty list of selected data
+     */
+    void alignMinCutTree(QList<DataItem*>& dataList);
 
     /*! the orientation that this button will work on. */
     Orientation m_orientation;
