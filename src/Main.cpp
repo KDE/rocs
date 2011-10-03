@@ -38,10 +38,9 @@ int main ( int argc, char *argv[] ) {
                           "1.5",
                           ki18n ( "Graph Theory Tool" ),
                           KAboutData::License_GPL,
-                          ki18n ( "(c) 2009" ),
-                          ki18n ( "Rocs - Data Structure Training" ),
-                          "",
-                          "submit@bugs.kde.org" );
+                          ki18n ( "(c) 2009-2011 Rocs Developers" ),
+                          ki18n ( "Rocs - Data Structure Analysis" )
+                          );
 
     aboutData.addAuthor(ki18n("Tomaz Canabrava"), ki18n("Developer"), "tcanabrava@kde.org", "http://liveblue.wordpress.com");
     aboutData.addAuthor(ki18n("Wagner Reck"), ki18n("Developer"), "wagner.reck@gmail.com", "http://wiglot.wordpress.com");
