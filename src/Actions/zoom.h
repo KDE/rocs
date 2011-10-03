@@ -54,7 +54,7 @@ private:
     void zoomIn();
     void zoomReset();
     
-    qreal _zoomFactor;
+    static qreal _zoomFactor;
 };
 
 #endif // ZOOM_H

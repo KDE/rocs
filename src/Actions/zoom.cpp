@@ -29,11 +29,12 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 
+qreal ZoomAction::_zoomFactor = 1;
+
 ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 : AbstractAction(scene, parent)
 ,m_view(scene->views().at(0))
 ,m_zoomRectItem(0)
-,_zoomFactor(1)
 {
     setText(i18n ( "Zoom" ));
     setToolTip ( i18n ( "Zoom the canvas by the wheel, or by dragging." ) );
