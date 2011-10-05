@@ -542,8 +542,13 @@ void Document::loadFromInternalFormat(const QString& filename) {
             
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith("Width :"))     setWidth(dataLine.section(' ',2).toInt());
-                else if (dataLine.startsWith("Height :"))    setHeight(dataLine.section(' ',2).toInt());
+                /**/ if (dataLine.startsWith("top :"))      setTop(dataLine.section(' ',2).toInt());
+                else if (dataLine.startsWith("bottom :"))   setBottom(dataLine.section(' ',2).toInt());
+                else if (dataLine.startsWith("left :"))     setLeft(dataLine.section(' ',2).toInt());
+                else if (dataLine.startsWith("right :"))    setRight(dataLine.section(' ',2).toInt());
+                
+           // TODO: Wagner, How this thing works?
+           //     else if (dataLine.startsWith("DataStructurePlugin :") DataStructurePluginManager::self()->
                 else if ( !dataLine.isEmpty())               break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();    
             }
