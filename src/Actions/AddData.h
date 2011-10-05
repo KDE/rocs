@@ -39,7 +39,6 @@ public:
       \param type the Type for 'Add Node' action. must be unique.
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
-
     explicit AddNodeAction( GraphScene *scene, QObject *parent = 0);
 
     /*!

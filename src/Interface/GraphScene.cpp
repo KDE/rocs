@@ -38,6 +38,11 @@
 #include "MainWindow.h"
 #include "edgepropertieswidget.h"
 #include <DataStructurePluginManager.h>
+#include <QMenu>
+
+#include "AddData.h"
+
+#include "DeleteAction.h"
 
 GraphScene::GraphScene( QObject *parent) :
     QGraphicsScene(parent)
@@ -220,13 +225,14 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
         }
     }
     else if( mouseEvent->button() == Qt::RightButton){
-        QGraphicsItem *i = itemAt(mouseEvent->scenePos());
-        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-            _datumPropertiesWidget->setData(nItem, mouseEvent->screenPos());
-        }
-        else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
-            _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
-        }
+        qDebug() << "mouse click screen pos: " << mouseEvent->scenePos();
+//         QGraphicsItem *i = itemAt(mouseEvent->scenePos());
+//         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
+//             _datumPropertiesWidget->setData(nItem, mouseEvent->screenPos());
+//         }
+//         else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
+//             _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
+//         }
     }
     QGraphicsScene::mousePressEvent(mouseEvent);
 }
@@ -252,6 +258,41 @@ void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
     keyEvent->accept();
     emit (keyPressed(keyEvent));
 }
+
+
+void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
+    event->accept();
+
+    QMenu menu;
+    QMenu *menuZoom = menu.addMenu( i18n("Zoom") );
+    AddNodeAction *addAction = new AddNodeAction(this);
+    DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
+    menu.addAction( addAction);
+
+
+    QGraphicsItem *i = itemAt(event->scenePos());
+    if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
+        if (i->isSelected())
+            menu.addAction( deleteAction );
+    }
+
+
+
+    QAction* selectedItem = menu.exec(event->screenPos());
+    if (selectedItem == addAction) {
+        qDebug() << "Scene Add Action";
+        addAction->executePress(event->scenePos());
+    }
+    if (selectedItem == deleteAction) {
+        qDebug() << "Scene Delete Action";
+        deleteAction->executePress(event->scenePos());
+    }
+    else
+    {
+        // nothing was chosen
+    }
+}
+
 
 void GraphScene::updateGraph(DataStructurePtr g) {
     foreach(DataPtr n, g->dataList()) {
