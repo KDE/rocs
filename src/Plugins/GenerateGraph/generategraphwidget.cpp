@@ -42,6 +42,7 @@
 #include <boost/graph/random.hpp>
 #include <boost/graph/random_layout.hpp>
 #include <boost/graph/topology.hpp>
+#include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/graph/erdos_renyi_generator.hpp>
 
@@ -244,12 +245,12 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
 {
     QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
 
-    BoostGraph randomGraph;
+    Graph randomGraph;
     boost::mt19937 gen;
     gen.seed (static_cast<unsigned int>(seed));
 
     // generate graph
-    boost::generate_random_graph<BoostGraph,boost::mt19937>(
+    boost::generate_random_graph<Graph,boost::mt19937>(
         randomGraph,
         nodes,
         randomEdges,
@@ -259,30 +260,41 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
 
     // generate distribution topology and apply
     boost::rectangle_topology< boost::mt19937 > topology(gen, center.x()-20*nodes, center.y()-20*nodes, center.x()+20*nodes, center.y()+20*nodes);
-    PositionMap positionMap = boost::get(&VertexProperties::point, randomGraph);
+    PositionVec position_vec(boost::num_vertices( randomGraph ));
+    PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, randomGraph));
+
     boost::random_graph_layout(randomGraph, positionMap, topology);
+
+    // minimize cuts by Fruchtman-Reingold layout algorithm
+    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
+        (   randomGraph,
+            positionMap,
+            topology,
+            boost::cooling(boost::linear_cooling<double>(100)) 
+        );
 
     // put generated random graph at whiteboard
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size()>0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
+        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("RandomGraph") );
 
     // put nodes at whiteboard as generated
     QMap<int, DataPtr > mapNodes;
     int index=0;
-    BGL_FORALL_VERTICES(v, randomGraph, BoostGraph) {
-        randomGraph[v].index = index++;
-        mapNodes[randomGraph[v].index] = graph->addData(
-            QString("%1").arg(randomGraph[v].index),
-            QPointF(randomGraph[v].point[0],randomGraph[v].point[1])
-        );
+    boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
+    for (boost::tie(vi, vi_end) = boost::vertices(randomGraph); vi != vi_end; ++vi) {
+        mapNodes[*vi] = graph->addData(
+                QString("%1").arg( index++ ),
+                QPointF(positionMap[*vi][0],positionMap[*vi][1])
+            );
     }
-    BGL_FORALL_EDGES(e, randomGraph, BoostGraph) {
-        graph->addPointer (
-            mapNodes[randomGraph[boost::source<>(e, randomGraph)].index],
-            mapNodes[randomGraph[boost::target<>(e, randomGraph)].index]
-        );
+    
+    boost::graph_traits<Graph>::edge_iterator ei, ei_end;
+    for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei !=ei_end; ++ei) {
+        graph->addPointer ( mapNodes[boost::source(*ei, randomGraph)],
+                            mapNodes[boost::target(*ei, randomGraph)]);
+            
     }
 }
 
@@ -295,36 +307,45 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     gen.seed (static_cast<unsigned int>(seed));
 
     // generate graph
-    boost::adjacency_list<> test;
-    typedef boost::erdos_renyi_iterator<boost::mt19937, BoostGraph> ergen;
-    BoostGraph randomGraph(ergen(gen, nodes, edgeProbability, selfEdges), ergen(), nodes);
+    typedef boost::erdos_renyi_iterator<boost::mt19937, Graph> ergen;
+    Graph randomGraph(ergen(gen, nodes, edgeProbability, selfEdges), ergen(), nodes);
     
     // generate distribution topology and apply
     boost::rectangle_topology< boost::mt19937 > topology(gen, center.x()-20*nodes, center.y()-20*nodes, center.x()+20*nodes, center.y()+20*nodes);
-    PositionMap positionMap = boost::get(&VertexProperties::point, randomGraph);
+    PositionVec position_vec(boost::num_vertices( randomGraph ));
+    PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, randomGraph));
     boost::random_graph_layout(randomGraph, positionMap, topology);
 
     // put generated random graph at whiteboard
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size()>0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("Random Graph") );
+        graph = DocumentManager::self()->activeDocument()->addDataStructure( i18n("RandomGraph") );
+
+    // minimize cuts by Fruchtman-Reingold layout algorithm
+    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
+        (   randomGraph,
+            positionMap,
+            topology,
+            boost::cooling(boost::linear_cooling<double>(100)) 
+        );
 
     // put nodes at whiteboard as generated
     QMap<int, DataPtr > mapNodes;
     int index=0;
-    BGL_FORALL_VERTICES(v, randomGraph, BoostGraph) {
-        randomGraph[v].index = index++;
-        mapNodes[randomGraph[v].index] = graph->addData(
-            QString("%1").arg(randomGraph[v].index),
-            QPointF(randomGraph[v].point[0],randomGraph[v].point[1])
-        );
+    boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
+    for (boost::tie(vi, vi_end) = boost::vertices(randomGraph); vi != vi_end; ++vi) {
+        mapNodes[*vi] = graph->addData(
+                QString("%1").arg( index++ ),
+                QPointF(positionMap[*vi][0],positionMap[*vi][1])
+            );
     }
-    BGL_FORALL_EDGES(e, randomGraph, BoostGraph) {
-        graph->addPointer (
-            mapNodes[randomGraph[boost::source<>(e, randomGraph)].index],
-            mapNodes[randomGraph[boost::target<>(e, randomGraph)].index]
-        );
+    
+    boost::graph_traits<Graph>::edge_iterator ei, ei_end;
+    for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei !=ei_end; ++ei) {
+        graph->addPointer ( mapNodes[boost::source(*ei, randomGraph)],
+                            mapNodes[boost::target(*ei, randomGraph)]);
+            
     }
 }
 

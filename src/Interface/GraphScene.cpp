@@ -187,10 +187,6 @@ QGraphicsItem *GraphScene::createEdge(PointerPtr e) {
     return pointerItem;
 }
 
-void GraphScene::mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent){
-    mouseEvent->accept();
-}
-
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) {
     DataItem *nitem = qgraphicsitem_cast<DataItem*>(itemAt(wheelEvent->scenePos()));
     if (!nitem) {
@@ -233,6 +229,19 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
         }
     }
     QGraphicsScene::mousePressEvent(mouseEvent);
+}
+
+void  GraphScene::mouseDoubleClickEvent ( QGraphicsSceneMouseEvent *mouseEvent ) {
+   if( mouseEvent->button() == Qt::LeftButton){
+        QGraphicsItem *i = itemAt(mouseEvent->scenePos());
+        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
+            _datumPropertiesWidget->setData(nItem, mouseEvent->screenPos());
+        }
+        else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
+            _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
+        }
+    }
+    QGraphicsScene::mouseDoubleClickEvent(mouseEvent);
 }
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {

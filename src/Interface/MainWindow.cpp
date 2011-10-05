@@ -306,6 +306,8 @@ void MainWindow::setupActions()
     _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   _graphVisualEditor ) );
     _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,_graphVisualEditor ) );
     _paletteActions->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-circle", new AlignAction ( i18n ( "Align on a circle" ),  AlignAction::Circle,  _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-tree", new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree,  _graphVisualEditor ) );
 
     createAction("document-new",     i18n("New Graph"),         "new-graph",         Qt::Key_N, SLOT(newGraph()),    this);
     createAction("document-open",    i18n("Open Graph"),        "open-graph",        Qt::Key_0, SLOT(openGraph()),   this);
