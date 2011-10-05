@@ -558,18 +558,23 @@ void Document::loadFromInternalFormat(const QString& filename) {
                     posX = dataLine.section(' ',2).toInt();
                     qDebug() << "Setting X " << posX;
                 }
-                if (dataLine.startsWith("y :")){
+                else if (dataLine.startsWith("y :")){
                     posY = dataLine.section(' ',2).toInt();
                     qDebug() << "Setting Y " << posY;
                 }
-                if (dataLine.startsWith("value :"))
+                else if (dataLine.startsWith("value :"))
                     tmpDataPtr->setValue(dataLine.section(' ',2).toInt());
-                if (dataLine.startsWith("color :"))
+                else if (dataLine.startsWith("color :"))
                     tmpDataPtr->setColor(dataLine.section(' ',2));
-                if (dataLine.startsWith("name :")){
+                else if (dataLine.startsWith("name :")){
                     tmpDataPtr->setName(dataLine.section(' ', 2));
                 }
+                else if ( !dataLine.isEmpty()){
+                    break;
+                }
                 dataLine = in.readLine().simplified();
+                
+                
             }
             tmpDataPtr->setPos(posX, posY);
             qDebug() << tmpDataPtr->x() << tmpDataPtr->y();
@@ -587,10 +592,15 @@ void Document::loadFromInternalFormat(const QString& filename) {
                                                      tmpDataStructure->dataList().at(nameTo.toInt()));
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                if (dataLine.startsWith("width :"))
+                if (dataLine.startsWith("width :")){
                     tmpPointer->setWidth(dataLine.section(' ',2).toInt());
-                if (dataLine.startsWith("value :"))
+                }
+                else if (dataLine.startsWith("value :")){
                     tmpPointer->setValue(dataLine.section(' ',2));
+                }
+                else if ( !dataLine.isEmpty()){
+                    break;
+                }
                 dataLine = in.readLine().simplified();
             }
             tmpObject = tmpPointer.get();
@@ -604,6 +614,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
             QString propertyName = str.section(':',0,0).trimmed();
             QString propertyValue = str.section(':',1,1).trimmed();
             tmpObject->setProperty( propertyName.toUtf8() , propertyValue );
+            qDebug() << "Setting " << propertyName << propertyValue << "on" << tmpObject->property("name");
         }
         //else {
         //      tmpGroup->append( tmpDataStructure->data(str));
