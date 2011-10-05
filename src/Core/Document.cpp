@@ -356,7 +356,79 @@ void Document::remove(DataStructurePtr dataStructure){
     d->_modified = true;
 }
 
-bool Document::saveAsInternalFormat(const QString& filename) {
+/**
+ * A Document Internal format may look like this:
+ * 
+ * #                                '#'s are comments.
+ *                              
+ * [Document Properties]            # Canvas Size and Data Structure initialization.
+ * Width  : [integer]               
+ * Height : [integer]               
+ * DataStructurePlugin : [string]   
+ * 
+ * # Data Structre Definitions.
+ * # Data Structures are layered, so there can be N of them.
+ * # Every Data and Pointer below a declaration of a DataStructure
+ * # belongs to that data structure.
+ * 
+ * [DataStructure Name1] 
+ * 
+ * DataColor    : [RGB in hex]  # Color of newly created Datas ( Nodes )
+ * Pointercolor : [RBG in Hex]  # Color of newly created Datas ( Nodes )
+ * name         : [string]      # Name of the data structure acessible in the scripting interface.
+ * 
+ * visibility : [bool]           # is this DataStructure visible?
+ * 
+ * ShowNamesInData      : [bool] # should the canvas show the name of the data on the screen?
+ * ShowNamesInNPointers : [bool] # ↑
+ * ShowValuesInData     : [bool] # ↑
+ * ShowValuesInPointers : [bool] # ↑
+ * 
+ * PluginDefinedProperty1 : propertyValue; # the plugins can define other properties for the data structure.
+ * PluginDefinedProperty1 : propertyValue;
+ * PluginDefinedProperty1 : propertyValue;
+ * 
+ * UserDefinedProperty1 : propertyValue1 # the user can define other properties for the data structure.
+ * UserDefinedProperty2 : propertyValue2
+ * UserDefinedProperty3 : propertyValue3
+ * 
+ * [Data 1] 
+ * x     : [integer]
+ * y     : [integer]
+ * color : [string in "0xFFFFFF" format]
+ * name  : [string]
+ * value : [string]
+ * size  : [float]
+ * 
+ * property1 : propertyValue1
+ * property2 : propertyValue2
+ * property3 : propertyValue3
+ *
+ * [Data 2] <- same as above.
+ * x     : [integer]
+ * y     : [integer]
+ * color : [string in "0xFFFFFF" format]
+ * name  : [string]
+ * value : [string]
+ * size  : [float]
+ * 
+ * property1 : propertyValue1
+ * property2 : propertyValue2
+ * property3 : propertyValue3
+ * 
+ * [Pointer 1 -> 2]
+ * name     : [string]
+ * value    : [string]
+ * style    : [string]
+ * color    : [string in "0xFFFFFF" format]
+ * width    : [float]
+ * 
+ * property1 : propertyValue1
+ * property2 : propertyValue2
+ * property3 : propertyValue3
+ */
+
+ bool Document::saveAsInternalFormat(const QString& filename) {
     d->_buf.clear();
 
     KSaveFile saveFile( !filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
@@ -368,7 +440,13 @@ bool Document::saveAsInternalFormat(const QString& filename) {
 
     QTextStream stream(&saveFile);
     stream.setCodec("UTF-8");
-
+    
+     d->_buf = QString("[Document Properties] \n")
+             % QString("Width : ") % QString::number(width()) % QChar('\n')
+             % QString("Height : ") % QString::number(height()) % QChar('\n')
+             % QString("DataStructurePlugin : ") % DataStructurePluginManager::self()->actualPlugin()->name() % QChar('\n')
+             % QChar('\n');
+            
     for (int i = 0; i < d->_dataStructures.count(); i++) {
         DataStructurePtr g = d->_dataStructures.at(i);
 
@@ -458,35 +536,44 @@ void Document::loadFromInternalFormat(const QString& filename) {
         if (str.startsWith('#')) { //! Ignore it, commented line.
             continue;
         }
-
+        else if(str.startsWith("[Document Properties]")){
+            tmpObject = this;
+        }
         else if (str.startsWith("[DataStructure")) {
             QString gName = str.section(' ',1,1);
             gName.remove(']');
             tmpDataStructure = DataStructurePluginManager::self()->createNewDataStructure(this);
             tmpDataStructure->setName(gName.toAscii());
             d->_dataStructures.append(tmpDataStructure);
+            tmpObject = tmpDataStructure.get();
         }
 
         else if (str.startsWith("[Data")) {
-            QString nName = str.section(' ',1,1);
-            nName.remove(']');
-            tmpDataPtr = tmpDataStructure->addData(nName);
+            tmpDataPtr = tmpDataStructure->addData(QString());
             QString dataLine = in.readLine().simplified();
             qreal posX = 0;
             qreal posY = 0;
             while (!in.atEnd() && !dataLine.isEmpty()) {
                 if (dataLine.startsWith("x :")) {
                     posX = dataLine.section(' ',2).toInt();
+                    qDebug() << "Setting X " << posX;
                 }
-                if (dataLine.startsWith("y :"))
+                if (dataLine.startsWith("y :")){
                     posY = dataLine.section(' ',2).toInt();
+                    qDebug() << "Setting Y " << posY;
+                }
                 if (dataLine.startsWith("value :"))
                     tmpDataPtr->setValue(dataLine.section(' ',2).toInt());
                 if (dataLine.startsWith("color :"))
                     tmpDataPtr->setColor(dataLine.section(' ',2));
+                if (dataLine.startsWith("name :")){
+                    tmpDataPtr->setName(dataLine.section(' ', 2));
+                }
                 dataLine = in.readLine().simplified();
             }
             tmpDataPtr->setPos(posX, posY);
+            qDebug() << tmpDataPtr->x() << tmpDataPtr->y();
+            tmpObject = tmpDataPtr.get();
         }
 
         else if (str.startsWith("[Pointer")) {
@@ -506,7 +593,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
                     tmpPointer->setValue(dataLine.section(' ',2));
                 dataLine = in.readLine().simplified();
             }
-            qDebug() << "Pointer Created";
+            tmpObject = tmpPointer.get();
         }
         else if (str.startsWith("[Group")) {
             /*QString gName = str.section(" ",1,1);
@@ -516,11 +603,11 @@ void Document::loadFromInternalFormat(const QString& filename) {
         else if (str.contains(':')) {
             QString propertyName = str.section(':',0,0).trimmed();
             QString propertyValue = str.section(':',1,1).trimmed();
-            tmpDataStructure.get()->setProperty( propertyName.toUtf8() , propertyValue );
+            tmpObject->setProperty( propertyName.toUtf8() , propertyValue );
         }
-        else {
-//            // tmpGroup->append( tmpDataStructure->data(str));
-        }
+        //else {
+        //      tmpGroup->append( tmpDataStructure->data(str));
+        //}
     }
     d->_modified = false;
     qDebug() << "DataStructure Document Loaded.";
