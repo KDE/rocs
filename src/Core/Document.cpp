@@ -393,8 +393,8 @@ void Document::remove(DataStructurePtr dataStructure){
  * UserDefinedProperty3 : propertyValue3
  * 
  * [Data 1] 
- * x     : [integer]
- * y     : [integer]
+ * x     : [real]
+ * y     : [real]
  * color : [string in "0xFFFFFF" format]
  * name  : [string]
  * value : [string]
