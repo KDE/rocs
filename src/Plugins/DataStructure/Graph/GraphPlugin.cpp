@@ -73,9 +73,9 @@ QLayout* GraphPlugin::dataExtraProperties ( DataPtr node, QWidget* parentWidget 
   QSpinBox * y = new QSpinBox(parentWidget);
   QSpinBox * x = new QSpinBox(parentWidget);
   KDoubleNumInput * size = new KDoubleNumInput(parentWidget);
-  y->setMinimum(0);
+  y->setMinimum(-9999);
   y->setMaximum(9999);
-  x->setMinimum(0);
+  x->setMinimum(-9999);
   x->setMaximum(9999);
   size->setMinimum(0.15);
   size->setMaximum(3.0);

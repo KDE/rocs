@@ -569,8 +569,8 @@ void Document::loadFromInternalFormat(const QString& filename) {
             qreal posX = 0;
             qreal posY = 0;
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith("x :"))         posX = dataLine.section(' ',2).toInt();
-                else if (dataLine.startsWith("y :"))         posY = dataLine.section(' ',2).toInt();
+                /**/ if (dataLine.startsWith("x :"))         posX = dataLine.section(' ',2).toFloat();
+                else if (dataLine.startsWith("y :"))         posY = dataLine.section(' ',2).toFloat();
                 else if (dataLine.startsWith("value :"))     tmpDataPtr->setValue(dataLine.section(' ',2).toInt());
                 else if (dataLine.startsWith("color :"))     tmpDataPtr->setColor(dataLine.section(' ',2));
                 else if (dataLine.startsWith("name :"))      tmpDataPtr->setName(dataLine.section(' ', 2));
