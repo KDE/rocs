@@ -276,12 +276,15 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     
     AddNodeAction *addAction = new AddNodeAction(this);
     DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
-    menu.addAction( addAction);
+    menu.addAction(addAction);
+    menu.addAction(deleteAction);
 
     QGraphicsItem *i = itemAt(event->scenePos());
     if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-        if (i->isSelected())
-            menu.addAction( deleteAction );
+        // set i selected
+    }
+    else {
+        deleteAction->setDisabled(true);
     }
 
     QAction* selectedItem = menu.exec(event->screenPos());
