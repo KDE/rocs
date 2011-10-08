@@ -39,9 +39,11 @@
 namespace boost {
 void throw_exception( std::exception const & ) {} } // do noop on exception
 
-AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, QWidget *parent)
-        : KAction(KIcon(), tooltip, parent) {
+AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, GraphScene *scene, QWidget *parent)
+        : KAction(KIcon(), tooltip, parent) 
+{
     m_orientation = o;
+    _graphScene = scene;
     connect(this, SIGNAL(triggered()), this, SLOT(align()));
     switch (o) {
     case Left :
@@ -72,11 +74,16 @@ AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, QWid
 }
 
 void AlignAction::align() {
-    GraphVisualEditor *gEditor = qobject_cast<GraphVisualEditor*>(parent());
-    QList<DataItem*> l = gEditor->selectedNodes();
+    QList<DataItem*> l;
+    QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
+    foreach(QGraphicsItem *i, itemList) {
+        if ( qgraphicsitem_cast<DataItem*>(i) ) {
+            l.append( qgraphicsitem_cast<DataItem*>(i) );
+        }
+    }
 
     if (l.size() < 1) return;
-    gEditor->scene()->setHideEdges(true);
+    _graphScene->setHideEdges(true);
     switch (m_orientation) {
     case Left :
     case VCenter :
@@ -104,7 +111,7 @@ void AlignAction::align() {
         break;
     }
 
-    gEditor->scene()->setHideEdges(false);
+    _graphScene->setHideEdges(false);
 }
 
 void AlignAction::alignY(QList<DataItem*>& dataItemList) {

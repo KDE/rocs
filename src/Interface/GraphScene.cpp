@@ -40,6 +40,7 @@
 #include <DataStructurePluginManager.h>
 #include <QMenu>
 
+#include "AlignAction.h"
 #include "AddDataAction.h"
 #include "DeleteAction.h"
 #include "ZoomAction.h"
@@ -224,16 +225,6 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
             nItem->data()->setWidth(1);
         }
     }
-    else if( mouseEvent->button() == Qt::RightButton){
-        qDebug() << "mouse click screen pos: " << mouseEvent->scenePos();
-//         QGraphicsItem *i = itemAt(mouseEvent->scenePos());
-//         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-//             _datumPropertiesWidget->setData(nItem, mouseEvent->screenPos());
-//         }
-//         else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
-//             _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
-//         }
-    }
     QGraphicsScene::mousePressEvent(mouseEvent);
 }
 
@@ -280,11 +271,23 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     menu.addAction(addAction);
     menu.addAction(deleteAction);
     menu.addAction(propertyAction);
+    
+    QMenu *menuAlign = menu.addMenu( i18n("Align") );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0 ) );
 
     QGraphicsItem *i = itemAt(event->scenePos());
     if (!(qgraphicsitem_cast<DataItem*>(i))&& !(qgraphicsitem_cast<PointerItem*>(i))){
         deleteAction->setDisabled(true);
         propertyAction->setDisabled(true);
+        if (selectedItems().count()==0) {
+            menuAlign->setDisabled(true);
+        }
     }
 
     QAction* selectedItem = menu.exec(event->screenPos());

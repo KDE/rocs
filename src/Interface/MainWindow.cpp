@@ -311,14 +311,14 @@ void MainWindow::setupActions()
     actionCollection()->action ( "selectmove" )->toggle();
     gc->setAction ( _selectMoveAction );
 
-    _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18n ( "Align on the base" ),  AlignAction::Bottom, _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::HCenter,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-htop",   new AlignAction ( i18n ( "Align on the top" ),   AlignAction::Top,    _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-circle", new AlignAction ( i18n ( "Align on a circle" ),  AlignAction::Circle,  _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-tree", new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree,  _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18n ( "Align on the base" ),  AlignAction::Bottom, gc, _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::HCenter,gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-htop",   new AlignAction ( i18n ( "Align on the top" ),   AlignAction::Top,    gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-circle", new AlignAction ( i18n ( "Align on a circle" ),  AlignAction::Circle,  gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-tree", new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, gc, _graphVisualEditor ) );
 
     createAction("document-new",     i18n("New Graph"),         "new-graph",         Qt::Key_N, SLOT(newGraph()),    this);
     createAction("document-open",    i18n("Open Graph"),        "open-graph",        Qt::Key_0, SLOT(openGraph()),   this);

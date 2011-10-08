@@ -24,7 +24,7 @@
 #include <KAction>
 #include "DataItem.h"
 #include "Data.h"
-
+#include "GraphScene.h"
 
 class AlignAction : public KAction {
     Q_OBJECT
@@ -38,7 +38,7 @@ public:
       \param o the orientation that this button will work on.
       \param parent the parent widget
     */
-    AlignAction(const QString& tooltip,AlignAction::Orientation o, QWidget *parent);
+    AlignAction(const QString& tooltip,AlignAction::Orientation o, GraphScene *scene, QWidget *parent);
 
 private slots:
     /** Run the previously specified align algorithm for the selected set of data. items.
@@ -71,6 +71,7 @@ private:
     /*! the orientation that this button will work on. */
     Orientation m_orientation;
 
+    GraphScene *_graphScene;
 };
 
 #endif
