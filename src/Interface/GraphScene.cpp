@@ -276,15 +276,15 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     
     AddNodeAction *addAction = new AddNodeAction(this);
     DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
+    QAction *propertyAction = new QAction("Properties", this); //FIXME remove hack
     menu.addAction(addAction);
     menu.addAction(deleteAction);
+    menu.addAction(propertyAction);
 
     QGraphicsItem *i = itemAt(event->scenePos());
-    if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-        // set i selected
-    }
-    else {
+    if (!(qgraphicsitem_cast<DataItem*>(i))&& !(qgraphicsitem_cast<PointerItem*>(i))){
         deleteAction->setDisabled(true);
+        propertyAction->setDisabled(true);
     }
 
     QAction* selectedItem = menu.exec(event->screenPos());
@@ -304,6 +304,15 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     }
     if (selectedItem == zoomResetAction) {
         zoomAction->zoomReset();
+    }
+    if (selectedItem == propertyAction) {
+        QGraphicsItem *i = itemAt(event->scenePos());
+        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
+            _datumPropertiesWidget->setData(nItem, event->screenPos());
+        }
+        else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
+            _pointerPropertiesWidget->setPointer(eItem->pointer(), event->screenPos());
+        }
     }
     else
     {
