@@ -41,8 +41,8 @@
 #include <QMenu>
 
 #include "AddData.h"
-
 #include "DeleteAction.h"
+#include "zoom.h"
 
 GraphScene::GraphScene( QObject *parent) :
     QGraphicsScene(parent)
@@ -264,19 +264,25 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     event->accept();
 
     QMenu menu;
+
+    ZoomAction *zoomAction = new ZoomAction(this, 0);
+    QAction* zoomInAction = new QAction( i18n("In"), zoomAction);
+    QAction *zoomOutAction = new QAction(i18n("Out"), zoomAction);
+    QAction *zoomResetAction = new QAction(i18n("Reset"), zoomAction);
     QMenu *menuZoom = menu.addMenu( i18n("Zoom") );
+    menuZoom->addAction( zoomInAction );
+    menuZoom->addAction( zoomOutAction );
+    menuZoom->addAction( zoomResetAction );
+    
     AddNodeAction *addAction = new AddNodeAction(this);
     DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
     menu.addAction( addAction);
-
 
     QGraphicsItem *i = itemAt(event->scenePos());
     if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
         if (i->isSelected())
             menu.addAction( deleteAction );
     }
-
-
 
     QAction* selectedItem = menu.exec(event->screenPos());
     if (selectedItem == addAction) {
@@ -286,6 +292,15 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     if (selectedItem == deleteAction) {
         qDebug() << "Scene Delete Action";
         deleteAction->executePress(event->scenePos());
+    }
+    if (selectedItem == zoomInAction) {
+        zoomAction->zoomIn(event->scenePos());
+    }
+    if (selectedItem == zoomOutAction) {
+        zoomAction->zoomOut(event->scenePos());
+    }
+    if (selectedItem == zoomResetAction) {
+        zoomAction->zoomReset();
     }
     else
     {
