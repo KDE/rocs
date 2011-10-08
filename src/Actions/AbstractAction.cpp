@@ -48,6 +48,13 @@ bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
             if (e->button() == Qt::LeftButton){
                 return executePress(e->scenePos());
             }
+            // a right click shall not trigger any QAction parent class function
+            // since this is reserved for the context menu
+            // TODO add specific entries to graph scene context menu here
+            if (e->button() == Qt::RightButton) {
+                e->accept();
+                return true;
+            }
         }
         case QEvent::GraphicsSceneMouseMove  :{
             QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);

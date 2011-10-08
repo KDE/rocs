@@ -18,8 +18,8 @@
 */
 
 
-#ifndef ZOOM_H
-#define ZOOM_H
+#ifndef ZOOMACTION_H
+#define ZOOMACTION_H
 
 #include <AbstractAction.h>
 #include <QRectF>

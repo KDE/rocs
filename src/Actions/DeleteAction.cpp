@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -39,11 +40,18 @@ DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(s
     connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeKeyRelease(QKeyEvent*)));
 }
 
-bool DeleteAction::executePress(QPointF pos)
-{
+bool DeleteAction::executePress(QPointF pos) {
     QGraphicsItem * item = _graphScene->itemAt(pos);
     if ( DataItem *n  = qgraphicsitem_cast<DataItem*>(item) ) {
-        n->data()->remove();
+        if (n->isSelected()) {
+        foreach (QGraphicsItem *selectedItem, _graphScene->selectedItems())
+            if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(selectedItem)) {
+                dItem->data()->remove();
+            }
+        }
+        else {    
+            n->data()->remove();
+        }
         return true;
     }
     else if ( PointerItem *e = qgraphicsitem_cast<PointerItem*>(item) ) {
