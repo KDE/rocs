@@ -62,11 +62,13 @@
 
 // Action Related Includes
 #include "AbstractAction.h"
-#include "AddData.h"
-#include "AddConnection.h"
+#include "AddDataAction.h"
+#include "AddConnectionAction.h"
+#include "ZoomAction.h"
 #include "SelectMoveAction.h"
 #include "DeleteAction.h"
 #include "AlignAction.h"
+
 #include <KNS3/DownloadDialog>
 #include <knewstuff3/uploaddialog.h>
 
@@ -92,7 +94,6 @@
 #include "DocumentManager.h"
 #include <QCloseEvent>
 #include <KMessageBox>
-#include "zoom.h"
 #include "../GraphicsItem/GraphicsLayout.h"
 #include "PossibleIncludes.h"
 #include <QLayout>
@@ -288,13 +289,13 @@ void MainWindow::setupActions()
     GraphScene *gc = _graphVisualEditor->scene();
 
     _selectMoveAction = new SelectMoveAction (gc, this);
-    AddNodeAction* addNodeAction = new AddNodeAction(gc, this );
+    AddDataAction* addDataAction = new AddDataAction(gc, this );
     AddConnectionAction* addConnectionAction = new AddConnectionAction(gc, this);
     DeleteAction* deleteAction = new DeleteAction(gc, this);
     ZoomAction* zoomAction = new ZoomAction(gc, this);
 
     connect(_selectMoveAction, SIGNAL(triggered()), _selectMoveAction, SLOT( sendExecuteBit() ));
-    connect(addNodeAction, SIGNAL(triggered()), addNodeAction, SLOT( sendExecuteBit() ));
+    connect(addDataAction, SIGNAL(triggered()), addDataAction, SLOT( sendExecuteBit() ));
     connect(addConnectionAction, SIGNAL(triggered()), addConnectionAction, SLOT( sendExecuteBit() ));
     connect(deleteAction, SIGNAL(triggered()), deleteAction, SLOT( sendExecuteBit() ));
     connect(zoomAction, SIGNAL(triggered()), zoomAction, SLOT( sendExecuteBit() ));
@@ -303,7 +304,7 @@ void MainWindow::setupActions()
     QActionGroup *g = new QActionGroup ( this );
 
     g->addAction ( _paletteActions->addAction ( "selectmove", _selectMoveAction ) );
-    g->addAction ( _paletteActions->addAction ( "add_node", addNodeAction ) );
+    g->addAction ( _paletteActions->addAction ( "add_node", addDataAction ) );
     g->addAction ( _paletteActions->addAction ( "add_edge", addConnectionAction ) );
     g->addAction ( _paletteActions->addAction ( "delete", deleteAction ) );
     g->addAction ( _paletteActions->addAction ( "zoom", zoomAction ) );

@@ -18,7 +18,7 @@
 */
 
 
-#include "zoom.h"
+#include "ZoomAction.h"
 #include <GraphScene.h>
 #include <DocumentManager.h>
 #include <Document.h>

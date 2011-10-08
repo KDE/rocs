@@ -40,9 +40,9 @@
 #include <DataStructurePluginManager.h>
 #include <QMenu>
 
-#include "AddData.h"
+#include "AddDataAction.h"
 #include "DeleteAction.h"
-#include "zoom.h"
+#include "ZoomAction.h"
 
 GraphScene::GraphScene( QObject *parent) :
     QGraphicsScene(parent)
@@ -274,9 +274,9 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     menuZoom->addAction( zoomOutAction );
     menuZoom->addAction( zoomResetAction );
     
-    AddNodeAction *addAction = new AddNodeAction(this);
+    AddDataAction *addAction = new AddDataAction(this);
     DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
-    QAction *propertyAction = new QAction("Properties", this); //FIXME remove hack
+    QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
     menu.addAction(addAction);
     menu.addAction(deleteAction);
     menu.addAction(propertyAction);

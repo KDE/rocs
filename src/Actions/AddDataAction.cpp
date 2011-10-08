@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "AddData.h"
+#include "AddDataAction.h"
 #include "GraphScene.h"
 #include "DataStructure.h"
 #include "DataItem.h"
@@ -27,7 +27,7 @@
 #include <KDebug>
 #include <DocumentManager.h>
 
-AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent)
+AddDataAction::AddDataAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Add Node" ));
     setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
@@ -35,11 +35,11 @@ AddNodeAction::AddNodeAction(GraphScene *scene, QObject *parent)
     _name = "add-node";
 }
 
-AddNodeAction::~AddNodeAction() {
+AddDataAction::~AddDataAction() {
     kDebug() << "Destroyed";
 }
 
-bool AddNodeAction::executePress(QPointF pos) {
+bool AddDataAction::executePress(QPointF pos) {
     if (  !DocumentManager::self()->activeDocument()->activeDataStructure()
        ||  DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly() 
     ) {
