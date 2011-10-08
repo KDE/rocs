@@ -30,9 +30,6 @@
 AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
         : KToggleAction(parent) {
     _graphScene = scene;
-
-    connect(this, SIGNAL(triggered()),
-            this, SLOT( sendExecuteBit() ));
 }
 
 void AbstractAction::sendExecuteBit() {

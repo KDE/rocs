@@ -287,16 +287,26 @@ void MainWindow::setupActions()
 
     GraphScene *gc = _graphVisualEditor->scene();
 
-    _selectMoveAction = new SelectMoveAction ( gc, this );
+    _selectMoveAction = new SelectMoveAction (gc, this);
+    AddNodeAction* addNodeAction = new AddNodeAction(gc, this );
+    AddConnectionAction* addConnectionAction = new AddConnectionAction(gc, this);
+    DeleteAction* deleteAction = new DeleteAction(gc, this);
+    ZoomAction* zoomAction = new ZoomAction(gc, this);
+
+    connect(_selectMoveAction, SIGNAL(triggered()), _selectMoveAction, SLOT( sendExecuteBit() ));
+    connect(addNodeAction, SIGNAL(triggered()), addNodeAction, SLOT( sendExecuteBit() ));
+    connect(addConnectionAction, SIGNAL(triggered()), addConnectionAction, SLOT( sendExecuteBit() ));
+    connect(deleteAction, SIGNAL(triggered()), deleteAction, SLOT( sendExecuteBit() ));
+    connect(zoomAction, SIGNAL(triggered()), zoomAction, SLOT( sendExecuteBit() ));
 
     _paletteActions = actionCollection();
     QActionGroup *g = new QActionGroup ( this );
 
     g->addAction ( _paletteActions->addAction ( "selectmove", _selectMoveAction ) );
-    g->addAction ( _paletteActions->addAction ( "add_node", new AddNodeAction ( gc, this ) ) );
-    g->addAction ( _paletteActions->addAction ( "add_edge", new AddConnectionAction ( gc, this ) ) );
-    g->addAction ( _paletteActions->addAction ( "delete", new DeleteAction ( gc, this ) ) );
-    g->addAction ( _paletteActions->addAction ( "zoom", new ZoomAction ( gc, this ) ) );
+    g->addAction ( _paletteActions->addAction ( "add_node", addNodeAction ) );
+    g->addAction ( _paletteActions->addAction ( "add_edge", addConnectionAction ) );
+    g->addAction ( _paletteActions->addAction ( "delete", deleteAction ) );
+    g->addAction ( _paletteActions->addAction ( "zoom", zoomAction ) );
     actionCollection()->action ( "selectmove" )->toggle();
     gc->setAction ( _selectMoveAction );
 
