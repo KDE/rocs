@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PARSECMAKEGENERATED_H
-#define PARSECMAKEGENERATED_H
+#ifndef PARSEDOTTEST_H
+#define PARSEDOTTEST_H
 
 #include <QtCore/QObject>
 
@@ -30,4 +30,4 @@ class ParseDotTest : public QObject
     void WithSubgraph();
 };
 
-#endif // PARSECMAKEGENERATED_H
+#endif // PARSEDOTTEST

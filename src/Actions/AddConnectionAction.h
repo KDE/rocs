@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ACTION_ADDCONNECTION_H
-#define ACTION_ADDCONNECTION_H
+#ifndef ADDCONNECTIONACTION_H
+#define ADDCONNECTIONACTION_H
 
 #include "AbstractAction.h"
 #include <QObject>
@@ -85,4 +85,4 @@ private:
 
 };
 
-#endif
+#endif // ADDCONNECTIONACTION_H

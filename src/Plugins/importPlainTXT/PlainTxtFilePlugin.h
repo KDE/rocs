@@ -17,8 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KMLFILEPLUGIN_H
-#define KMLFILEPLUGIN_H
+#ifndef PLAINTXTFILEPLUGIN_H
+#define PLAINTXTFILEPLUGIN_H
+
 #include "../FilePluginInterface.h"
 
 class PlainTXTFilePlugin: public FilePluginInterface
@@ -42,4 +43,4 @@ class PlainTXTFilePlugin: public FilePluginInterface
         void setError ( QString arg1 );
 };
 
-#endif // KMLFILEPLUGIN_H
+#endif // PLAINTXTFILEPLUGIN_H

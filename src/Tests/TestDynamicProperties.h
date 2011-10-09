@@ -17,9 +17,10 @@
 
 */
 
-#ifndef TESTDINAMICPROPERTIES_H
-#define TESTDINAMICPROPERTIES_H
-#include <QObject>
+#ifndef TESTDYNAMICPROPERTIES_H
+#define TESTDYNAMICPROPERTIES_H
+
+#include <QtCore/QObject>
 
 class TestDynamicProperties:  public QObject
 {
@@ -48,4 +49,4 @@ private slots:
   void changeNames();
 };
 
-#endif // TESTDINAMICPROPERTIES_H
+#endif // TESTDYNAMICPROPERTIES_H

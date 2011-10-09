@@ -19,10 +19,10 @@
 */
 
 #include "TestIncludeManager.h"
-#include <QtTest>
-#include <IncludeManager.h>
+#include <QtTest/QTest>
+#include <QtCore/QFile>
+#include "IncludeManager.h"
 #include <KLocalizedString>
-#include <QFile>
 #include <KDebug>
 
 void TestIncludeManager::inittestcase() {

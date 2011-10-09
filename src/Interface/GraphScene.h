@@ -21,7 +21,6 @@
 
 #include <QGraphicsScene>
 #include <QMultiHash>
-#include <boost/shared_ptr.hpp>
 #include "Rocs_Typedefs.h"
 
 class AbstractAction;

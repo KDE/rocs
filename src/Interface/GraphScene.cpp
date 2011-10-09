@@ -18,32 +18,34 @@
 */
 
 #include "GraphScene.h"
-#include "AbstractAction.h"
 
-#include "Pointer.h"
-#include "Document.h"
-#include "DataItem.h"
-#include "PointerItem.h"
-#include <QGraphicsItem>
-#include <QGraphicsSceneMouseEvent>
-#include <QGraphicsSceneWheelEvent>
-#include <QKeyEvent>
-#include <KDebug>
 #include "Data.h"
 #include "Pointer.h"
-#include "Document.h"
 #include "DataStructure.h"
-#include "DocumentManager.h"
-#include "NodePropertiesWidget.h"
-#include "MainWindow.h"
-#include "edgepropertieswidget.h"
+#include "Document.h"
 #include <DataStructurePluginManager.h>
-#include <QMenu>
+#include "DocumentManager.h"
 
+#include "MainWindow.h"
+#include "DataItem.h"
+#include "PointerItem.h"
+#include "NodePropertiesWidget.h"
+#include "edgepropertieswidget.h"
+
+#include "AbstractAction.h"
 #include "AlignAction.h"
 #include "AddDataAction.h"
 #include "DeleteAction.h"
 #include "ZoomAction.h"
+
+#include <QGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsSceneWheelEvent>
+#include <QKeyEvent>
+#include <QMenu>
+
+#include <KDebug>
+
 
 GraphScene::GraphScene( QObject *parent) :
     QGraphicsScene(parent)

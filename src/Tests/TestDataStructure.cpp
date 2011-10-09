@@ -19,13 +19,11 @@
 
 #include "TestDataStructure.h"
 
-
-#include "TestDataStructure.h"
-#include <QtTest>
-#include <DataStructurePluginManager.h>
-#include <Document.h>
-#include <DataStructure.h>
-#include <DataStructurePluginInterface.h>
+#include <QtTest/QTest>
+#include "DataStructurePluginManager.h"
+#include "Document.h"
+#include "DataStructure.h"
+#include "DataStructurePluginInterface.h"
 #include "Rocs_Typedefs.h"
 
 void TestDataStructure::inittestcase()

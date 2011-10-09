@@ -20,36 +20,39 @@
 */
 
 #include "MainWindow.h"
+
 //Qt related includes
+#include <QtGui/QCloseEvent>
+#include <QtGui/QComboBox>
+#include <QtGui/QGraphicsView>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
+#include <QtGui/QSplitter>
+#include <QtGui/QStackedWidget>
+#include <QtGui/QToolBar>
+#include <QtGui/QVBoxLayout>
 
 // KDE Related Includes
 #include <KActionCollection>
-#include <KIcon>
-#include <QSplitter>
-#include <QStackedWidget>
-#include <QVBoxLayout>
-#include <QComboBox>
-#include <QLabel>
-#include <QToolBar>
-#include <KDebug>
 #include <KApplication>
+#include <KDebug>
+#include <KIcon>
+#include <KPushButton>
+#include <KStatusBar>
+#include <KTar>
 #include <KTextBrowser>
 #include <KMessageBox>
-#include <KApplication>
-#include <QGraphicsView>
 #include <klocalizedstring.h>
-#include <KStatusBar>
 #include <KConfigDialog>
-#include <KTar>
 #include <kfiledialog.h>
-#include "TabWidget.h"
 
 // UI RELATED INCLUDES
-
 #include "GraphLayers.h"
 #include "GraphVisualEditor.h"
 #include "GraphScene.h"
 #include "CodeEditor.h"
+#include "TabWidget.h"
+#include "GraphicsLayout.h"
 
 // MODEL Related Includes
 #include "model_GraphDocument.h"
@@ -82,7 +85,6 @@
 #include <QActionGroup>
 
 #include "../Plugins/PluginManager.h"
-#include <KPushButton>
 #include <QMutexLocker>
 #include <QScriptEngineDebugger>
 #include "IncludeManagerSettings.h"
@@ -92,11 +94,10 @@
 #include <DataStructurePluginInterface.h>
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
-#include <QCloseEvent>
-#include <KMessageBox>
-#include "../GraphicsItem/GraphicsLayout.h"
+
+
+
 #include "PossibleIncludes.h"
-#include <QLayout>
 
 MainWindow::MainWindow() :  KXmlGuiWindow()
 {
