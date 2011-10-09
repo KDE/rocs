@@ -19,6 +19,7 @@
 
 #include "TestDataStructure.h"
 
+#include <QtTest/QSignalSpy>
 #include <QtTest/QTest>
 #include "DataStructurePluginManager.h"
 #include "Document.h"
