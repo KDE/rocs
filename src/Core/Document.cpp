@@ -553,7 +553,10 @@ void Document::loadFromInternalFormat(const QString& filename) {
                 else if (dataLine.startsWith("right :"))    setRight(dataLine.section(' ',2).toInt());
                 
            // TODO: Wagner, How this thing works?
-           //     else if (dataLine.startsWith("DataStructurePlugin :") DataStructurePluginManager::self()->
+                else if (dataLine.startsWith("DataStructurePlugin :")){
+                    DataStructurePluginManager::self()->setDataStructurePlugin(dataLine.section(' ',2));
+                    d->_dataStructureType =  DataStructurePluginManager::self()->actualPlugin();
+                }
                 else if ( !dataLine.isEmpty())               break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();    
             }
