@@ -31,8 +31,20 @@
 #include "Pointer.h"
 #include <boost/shared_ptr.hpp>
 
+DataStructurePluginManager* DataStructurePluginManager::_self = 0;
+
+// ----------------------------------- D - Pointer ---------------------------------
+
 class DataStructurePluginManagerPrivate {
 public:
+    
+typedef KPluginInfo::List KPluginList;
+
+KPluginList m_DataStructurePluginsInfo;
+DataStructurePluginInterface * m_actualPlugin;
+QHash<QString, DataStructurePluginInterface*> m_plugins;
+QObject* m_parent;
+
 DataStructurePluginManagerPrivate(QObject * parent):m_parent(parent) {
     m_actualPlugin = 0;
 }
@@ -73,11 +85,7 @@ DataStructurePtr createNewDataStructure ( Document* arg1 , const QString & plugi
 }
 
 DataStructurePluginInterface* plugin(const QString &pluginName) {
-    DataStructurePluginInterface * plugin = m_plugins.value(pluginName);
-    if (plugin){
-        return plugin;
-    }
-    return 0;
+    return  m_plugins.value(pluginName, 0);
 }
 
 void setActivePlugin(const QString &pluginName) {
@@ -85,20 +93,6 @@ void setActivePlugin(const QString &pluginName) {
         m_actualPlugin = plg;
     }
 }
-
-QStringList listOfDataStructures() const                  { return m_plugins.keys(); }
-QList <DataStructurePluginInterface*> pluginList() const { return m_plugins.values(); }
-QString actualPluginName() const                         { return m_actualPlugin->name(); }
-
-
-
-typedef KPluginInfo::List KPluginList;
-
-KPluginList m_DataStructurePluginsInfo;
-DataStructurePluginInterface * m_actualPlugin;
-QHash<QString, DataStructurePluginInterface*> m_plugins;
-QObject* m_parent;
-
 
 bool loadDataStructurePlugin ( KPluginInfo & pluginInfo ) {
 //         KPluginInfo kpi =  pluginInfoFromName ( name );
@@ -127,9 +121,14 @@ void loadDataStructurePlugins() {
         loadDataStructurePlugin ( info );
     }
 }
+
+QStringList listOfDataStructures() const                 { return m_plugins.keys();       }
+QList <DataStructurePluginInterface*> pluginList() const { return m_plugins.values();     }
+QString actualPluginName() const                         { return m_actualPlugin->name(); }
+
 };
 
-DataStructurePluginManager* DataStructurePluginManager::_self = 0;
+// ----------------------------------- Class  ---------------------------------
 
 DataStructurePluginManager::DataStructurePluginManager() :_d ( new DataStructurePluginManagerPrivate(this) ) {
     _d->loadPlugins();
@@ -163,7 +162,7 @@ void DataStructurePluginManager::setDataStructurePlugin()
 }
 
 void DataStructurePluginManager::setDataStructurePlugin (const QString &pluginName ) {
-    if (! listOfDataStructures().contains ( pluginName ) {
+    if (! listOfDataStructures().contains ( pluginName ) ){
         return;
     }
     if ( pluginName  == _d->actualPluginName()) {
@@ -198,7 +197,7 @@ QList< DataStructurePluginInterface* > DataStructurePluginManager::pluginsList()
     return _d->pluginList();
 }
 
-QString DataStructurePluginManager::actualPluginName() const
+QString DataStructurePluginManager::pluginName() const
 {
     return _d->actualPluginName();
 }
@@ -238,5 +237,3 @@ QLayout* DataStructurePluginManager::dataExtraProperties ( DataPtr data, QWidget
       return plg->dataExtraProperties(data, parent);
     return _d->m_actualPlugin->dataExtraProperties(data, parent);
 }
-
-

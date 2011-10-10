@@ -109,7 +109,7 @@ void DocumentManager::removeDocument(Document* doc){
 void DocumentManager::convertToDataStructure() {
     Document * newDoc = 0;
     if (m_actualDocument){
-        if (m_actualDocument->dataStructureTypeName() != DataStructurePluginManager::self()->actualPluginName()
+        if (m_actualDocument->dataStructureTypeName() != DataStructurePluginManager::self()->pluginName()
                 && DataStructurePluginManager::self()->actualPlugin()->canConvertFrom(m_actualDocument)) {
             //Verificar se é possível converter
             m_actualDocument->cleanUpBeforeConvert();

@@ -83,10 +83,10 @@ void DataPropertiesWidget::setUseColor(bool b){
 
 void DataPropertiesWidget::reflectAttributes(){
     if (!extraItens->layout()){
-        _oldDataStructurePlugin = DataStructurePluginManager::self()->actualPluginName();
+        _oldDataStructurePlugin = DataStructurePluginManager::self()->pluginName();
     }
     
-    if (_oldDataStructurePlugin != DataStructurePluginManager::self()->actualPluginName()){
+    if (_oldDataStructurePlugin != DataStructurePluginManager::self()->pluginName()){
         extraItens->layout()->deleteLater();
     }
     
