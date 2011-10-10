@@ -172,7 +172,7 @@ void DataStructurePluginManager::setDataStructurePlugin (const QString &pluginNa
     qDebug() << "Setting " << pluginName << "As the active plugin for data structures.";
     
     _d->setActivePlugin(pluginName);
-    emit changingDataStructurePlugin ( pluginName );
+    //emit changingDataStructurePlugin ( pluginName );
     
 }
 
