@@ -34,7 +34,7 @@ DocumentManager *DocumentManager::_self = 0;
 DocumentManager* DocumentManager::self(){
     if (!_self){
         _self = new DocumentManager();
-        connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructure(QString)),
+        connect (DataStructurePluginManager::self(), SIGNAL(changingDataStructurePlugin(QString)),
                 _self, SLOT(convertToDataStructure()));
     }
     return _self;
