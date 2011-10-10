@@ -147,7 +147,7 @@ DataStructurePluginManager* DataStructurePluginManager::self() {
     return _self;
 }
 
-void DataStructurePluginManager::changeActiveDataStructure()
+void DataStructurePluginManager::setDataStructurePlugin()
 {
     QAction *action = qobject_cast<QAction *> ( sender() );
     if (! action ) {
@@ -155,15 +155,21 @@ void DataStructurePluginManager::changeActiveDataStructure()
     }
     //Check if is a valid index
     if (action->data().toInt() < pluginsList().count()){
-        changeActiveDataStructure ( DataStructurePluginManager::self()->pluginsList().at(action->data().toInt() )->name() );
+        setDataStructurePlugin ( pluginsList().at(action->data().toInt() )->name() );
     }
 }
 
-void DataStructurePluginManager::changeActiveDataStructure (const QString &newDataStructure ) {
-    if ( listOfDataStructures().contains ( newDataStructure ) && newDataStructure  != _d->actualPluginName()) {
-        _d->setActivePlugin(newDataStructure);
-        emit changingDataStructure ( newDataStructure );
+void DataStructurePluginManager::setDataStructurePlugin (const QString &pluginName ) {
+    if (! listOfDataStructures().contains ( pluginName ) {
+        return;
     }
+    if ( pluginName  == _d->actualPluginName()) {
+        return;
+    }
+     
+    _d->setActivePlugin(pluginName);
+    emit changingDataStructurePlugin ( pluginName );
+    
 }
 
 DataStructurePtr DataStructurePluginManager::changeToDataStructure ( DataStructurePtr dataStructure, Document * parent ) {
