@@ -118,6 +118,7 @@ void DocumentManager::convertToDataStructure() {
             newDoc = new Document(*m_actualDocument);
             emit deactivateDocument(m_actualDocument);
             addDocument(newDoc);
+            qDebug() << " Data Structure converted to " << DataStructurePluginManager::self()->pluginName();
         }
     }else {
         loadDocument();
