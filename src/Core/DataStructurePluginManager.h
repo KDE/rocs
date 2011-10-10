@@ -43,9 +43,10 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     /** Accessor to the manager's instance.*/
     static DataStructurePluginManager * self();
 
+    /** default destructor */
     ~DataStructurePluginManager();
 
-    /** build a new dataType using actual data structure. */
+    /** build a new DataStructure using the active plugin. */
     DataStructurePtr createNewDataStructure(Document* parent, const QString& pluginName = QString());
 
     /** When the DataStructure pluin  is changed, 
