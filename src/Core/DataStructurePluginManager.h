@@ -48,7 +48,12 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     /** build a new dataType using actual data structure. */
     DataStructurePtr createNewDataStructure(Document* parent, const QString& pluginName = QString());
 
-    /** When the DataStructure pluin  is changed, all the existent dataTypes must be 'rebuild' with the new DataStructure. If is not possible to change to a new data structure without losing data, then user should be asked to continue or nor. If user say to not continue, all ready done job should be undo.*/
+    /** When the DataStructure pluin  is changed, 
+     * all the existent dataTypes must be 'rebuild' with the new DataStructure. 
+     * If is not possible to change to a new data structure without losing data, 
+     * then user should be asked to continue or not. 
+     * If user say to not continue, do not change it.
+     */
     DataStructurePtr changeToDataStructure(DataStructurePtr dataStructure, Document* parent);
 
     /** return the list of avaliable data structure plugins.*/
@@ -58,38 +63,51 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     KPluginInfo pluginInfo ( DataStructurePluginInterface* plugin ) const;
 
 
-    /** return the active plugin that will be used in convertions and to build news data structures.*/
+    /** 
+     * \return the active plugin that will be used in convertions 
+     * and to build news data structures.
+     */
     DataStructurePluginInterface* actualPlugin();
 
     QList < DataStructurePluginInterface*> pluginsList();
 
-    /** return the data dataTypeic item that will be drawed by canvas . */
+    /** \return the data Visible item for the data that will be drawed by canvas . */
     QGraphicsItem * dataItem( DataPtr data);
-    /** return the pointer dataTypeic item that will be drawed by canvas . */
+    
+    /** \return the visible pointer item that will be drawed by canvas . */
     QGraphicsItem * pointerItem(PointerPtr pointer);
 
 
-    /** Create extra widgets to data properties window. If no extra properties is needed the is returned 0*/
+    /** Create extra widgets to data properties window. 
+     *If no extra properties are needed, a null pointer is returned.
+     */
     QLayout * dataExtraProperties(DataPtr data, QWidget * parent);
-    /** Create extra widgets to pointer properties window. If no extra properties is needed the is returned 0*/
+    
+    /** Create extra widgets to pointer properties window. 
+     *If no extra properties are needed, a null pointer is returned.
+     */
     QLayout * pointerExtraProperties(PointerPtr pointer, QWidget * parent);
-    /** Create extra widgets to dataType properties window. If no extra properties is needed the is returned 0*/
+    
+    /** Create extra widgets to the DataStructure properties window.
+     * If no extra properties are needed, a null pointer is returned.
+     * */
     QLayout * dataStructureExtraProperties(DataStructurePtr dataType, QWidget * parent);
 
   signals:
-    /** signal emited when is changing the data structure to \newDataStructure */
-    void changingDataStructure(const QString &newDataStructure);
+      
+    /** signal emited when is changing the plugin data structure to newPlugin */
+    void changingDataStructurePlugin(const QString &pluginName);
 
-    /** this signal is emited at end of change of DataStructure. This is used to say that the change was a success.*/
-    void DataStructureChangedTo(const QString &newDataStructure);
-
-
+    /** this signal is emited at end of change of DataStructure. 
+    *This is used to say that the change was sucessfull.
+     */
+    void DataStructurePluginChanged(const QString &newDataStructure);
 
   public slots:
-      /** used to set change the data structure. */
-    void changeActiveDataStructure();
-    void changeActiveDataStructure( const QString& newDataStructure);
-    QString actualPluginName() const;
+    /** used to set change the data structure. */
+    void setDataStructurePlugin();
+    void setDataStructurePlugin( const QString &pluginName );
+    QString pluginName() const;
 
   private:
     DataStructurePluginManager();

@@ -54,4 +54,4 @@ QString DataStructurePluginInterface::name()
       return DataStructurePluginManager::self()->pluginInfo(this).name();
     }
     return QString();
-  }
+}

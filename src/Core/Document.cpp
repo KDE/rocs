@@ -74,6 +74,11 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_engineBackend = new QtScriptBackend(this);
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_modified = false;
+    
+    qDebug() << "------=======------======";
+    qDebug() << " Document Constructor ";
+    qDebug() << d->_dataStructureType->name();
+    qDebug() << "------=======------======";
 }
 
 void Document::setModified(const bool mod)
