@@ -96,8 +96,8 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
 
   signals:
       
-//     /** signal emited when is changing the plugin data structure to newPlugin */
-//     void changingDataStructurePlugin(const QString &pluginName);
+    /** signal emited when is changing the plugin data structure to newPlugin */
+    void changingDataStructurePlugin(const QString &pluginName);
 
     /** this signal is emited at end of change of DataStructure. 
     *This is used to say that the change was sucessfull.

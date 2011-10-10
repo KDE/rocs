@@ -107,6 +107,8 @@ void DocumentManager::removeDocument(Document* doc){
 }
 
 void DocumentManager::convertToDataStructure() {
+    qDebug() << "-----------------======== Converting Data Structure ========-----------";
+    
     Document * newDoc = 0;
     if (m_actualDocument){
         if (m_actualDocument->dataStructureTypeName() != DataStructurePluginManager::self()->pluginName()
@@ -120,6 +122,8 @@ void DocumentManager::convertToDataStructure() {
     }else {
         loadDocument();
     }
+    
+    qDebug() << "----------=========== Conversion Finished ============-----------";
 }
 
 void DocumentManager::loadDocument ( QString name ){
