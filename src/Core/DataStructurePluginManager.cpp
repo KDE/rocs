@@ -153,10 +153,13 @@ void DataStructurePluginManager::setDataStructurePlugin()
     if (! action ) {
         return;
     }
-    //Check if is a valid index
-    if (action->data().toInt() < pluginsList().count()){
-        setDataStructurePlugin ( pluginsList().at(action->data().toInt() )->name() );
+    
+    int actionIndex = action->data().toInt();
+    if ( actionIndex >= pluginsList().count()){
+        return;
     }
+    
+    setDataStructurePlugin ( pluginsList().at( actionIndex )->name() );
 }
 
 void DataStructurePluginManager::setDataStructurePlugin (const QString &pluginName ) {
