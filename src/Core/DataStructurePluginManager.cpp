@@ -157,7 +157,7 @@ void DataStructurePluginManager::setDataStructurePlugin()
     if ( actionIndex >= pluginsList().count()){
         return;
     }
-    
+    qDebug() << "Setting the data structure plugin to" << pluginsList().at( actionIndex )->name() ;
     setDataStructurePlugin ( pluginsList().at( actionIndex )->name() );
 }
 
@@ -168,7 +168,9 @@ void DataStructurePluginManager::setDataStructurePlugin (const QString &pluginNa
     if ( pluginName  == _d->actualPluginName()) {
         return;
     }
-     
+    
+    qDebug() << "Setting " << pluginName << "As the active plugin for data structures.";
+    
     _d->setActivePlugin(pluginName);
     emit changingDataStructurePlugin ( pluginName );
     

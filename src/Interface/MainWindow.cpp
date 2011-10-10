@@ -389,18 +389,26 @@ void MainWindow::setupDSPluginsAction()
     QList <QAction*> pluginList;
     QAction* action = 0;
     unplugActionList ( "DS_plugins" );
+    
     QList < DataStructurePluginInterface*> avaliablePlugins = DataStructurePluginManager::self()->pluginsList();
+    
     QActionGroup * group = new QActionGroup(this);
+    
     int count = 0;
     foreach ( DataStructurePluginInterface* p, avaliablePlugins ) {
         action = new KAction ( p->name(), this );
         action->setData(count++);
         action->setCheckable(true);
+        
         if (p->name() == DataStructurePluginManager::self()->pluginName()){
           action->setChecked(true);
         }
+        
         action->setActionGroup(group);
-        connect ( action, SIGNAL ( triggered ( bool ) ),DataStructurePluginManager::self(), SLOT ( changeActiveDataStructure()) );
+        
+        connect ( action, SIGNAL (triggered(bool)),
+                  DataStructurePluginManager::self(), SLOT(setDataStructurePlugin()));
+        
         pluginList.append ( action );
     }
     plugActionList ( "DS_plugins", pluginList );
