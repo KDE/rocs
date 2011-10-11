@@ -84,7 +84,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="page_mesh">
     <widget class="QWidget" name="formLayoutWidget">
@@ -163,6 +163,9 @@
         <property name="minimum">
          <number>1</number>
         </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
         <property name="value">
          <number>10</number>
         </property>
@@ -194,6 +197,9 @@
         <property name="minimum">
          <number>1</number>
         </property>
+        <property name="maximum">
+         <number>999</number>
+        </property>
         <property name="value">
          <number>10</number>
         </property>
@@ -224,6 +230,9 @@
        <widget class="QSpinBox" name="randomNodes">
         <property name="minimum">
          <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>999</number>
         </property>
         <property name="value">
          <number>10</number>
