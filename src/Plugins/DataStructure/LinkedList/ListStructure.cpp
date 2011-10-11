@@ -99,8 +99,10 @@ DataPtr Rocs::ListStructure::addData ( QString name ) {
     boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>( ListNode::create(getDataStructure()) );
     n->setName(name);
 
-    if (m_building)
-      return n;
+    if (m_building) {
+        return addData(n);;
+    }
+        
     if (m_begin){
       boost::shared_ptr<ListNode> tmp = m_begin;
       while (tmp->next() != 0)      tmp = tmp->next();
