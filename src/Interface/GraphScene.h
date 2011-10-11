@@ -21,7 +21,6 @@
 
 #include <QGraphicsScene>
 #include <QMultiHash>
-#include <boost/shared_ptr.hpp>
 #include "Rocs_Typedefs.h"
 
 class AbstractAction;
@@ -33,6 +32,7 @@ class Document;
 class DataStructure;
 class QGraphicsSceneMouseEvent;
 class QGraphicsSceneWheelEvent;
+class QGraphicsSceneContextMenuEvent;
 class QKeyEvent;
 class DataPropertiesWidget;
 class PointerPropertiesWidget;
@@ -67,12 +67,17 @@ public slots:
 signals:
     void resized();
     void keyPressed(QKeyEvent* key);
+    void addData(QPointF pos);
+    void removeSelected();
+    void zoom(qreal amount);
+    
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
     void mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent);
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent* event);
     void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent);
     void keyPressEvent(QKeyEvent *keyEvent);
 

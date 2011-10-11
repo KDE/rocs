@@ -18,26 +18,34 @@
 */
 
 #include "GraphScene.h"
-#include "AbstractAction.h"
 
+#include "Data.h"
 #include "Pointer.h"
+#include "DataStructure.h"
 #include "Document.h"
+#include <DataStructurePluginManager.h>
+#include "DocumentManager.h"
+
+#include "MainWindow.h"
 #include "DataItem.h"
 #include "PointerItem.h"
+#include "NodePropertiesWidget.h"
+#include "edgepropertieswidget.h"
+
+#include "AbstractAction.h"
+#include "AlignAction.h"
+#include "AddDataAction.h"
+#include "DeleteAction.h"
+#include "ZoomAction.h"
+
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
+#include <QMenu>
+
 #include <KDebug>
-#include "Data.h"
-#include "Pointer.h"
-#include "Document.h"
-#include "DataStructure.h"
-#include "DocumentManager.h"
-#include "NodePropertiesWidget.h"
-#include "MainWindow.h"
-#include "edgepropertieswidget.h"
-#include <DataStructurePluginManager.h>
+
 
 GraphScene::GraphScene( QObject *parent) :
     QGraphicsScene(parent)
@@ -219,15 +227,6 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
             nItem->data()->setWidth(1);
         }
     }
-    else if( mouseEvent->button() == Qt::RightButton){
-        QGraphicsItem *i = itemAt(mouseEvent->scenePos());
-        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-            _datumPropertiesWidget->setData(nItem, mouseEvent->screenPos());
-        }
-        else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
-            _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
-        }
-    }
     QGraphicsScene::mousePressEvent(mouseEvent);
 }
 
@@ -252,6 +251,80 @@ void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
     keyEvent->accept();
     emit (keyPressed(keyEvent));
 }
+
+
+void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
+    event->accept();
+
+    QMenu menu;
+
+    ZoomAction *zoomAction = new ZoomAction(this, 0);
+    QAction* zoomInAction = new QAction( i18n("In"), zoomAction);
+    QAction *zoomOutAction = new QAction(i18n("Out"), zoomAction);
+    QAction *zoomResetAction = new QAction(i18n("Reset"), zoomAction);
+    QMenu *menuZoom = menu.addMenu( i18n("Zoom") );
+    menuZoom->addAction( zoomInAction );
+    menuZoom->addAction( zoomOutAction );
+    menuZoom->addAction( zoomResetAction );
+    
+    AddDataAction *addAction = new AddDataAction(this);
+    DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
+    QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
+    menu.addAction(addAction);
+    menu.addAction(deleteAction);
+    menu.addAction(propertyAction);
+    
+    QMenu *menuAlign = menu.addMenu( i18n("Align") );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
+    menuAlign->addAction ( new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0 ) );
+
+    QGraphicsItem *i = itemAt(event->scenePos());
+    if (!(qgraphicsitem_cast<DataItem*>(i))&& !(qgraphicsitem_cast<PointerItem*>(i))){
+        deleteAction->setDisabled(true);
+        propertyAction->setDisabled(true);
+        if (selectedItems().count()==0) {
+            menuAlign->setDisabled(true);
+        }
+    }
+
+    QAction* selectedItem = menu.exec(event->screenPos());
+    if (selectedItem == addAction) {
+        qDebug() << "Scene Add Action";
+        addAction->executePress(event->scenePos());
+    }
+    if (selectedItem == deleteAction) {
+        qDebug() << "Scene Delete Action";
+        deleteAction->executePress(event->scenePos());
+    }
+    if (selectedItem == zoomInAction) {
+        zoomAction->zoomIn(event->scenePos());
+    }
+    if (selectedItem == zoomOutAction) {
+        zoomAction->zoomOut(event->scenePos());
+    }
+    if (selectedItem == zoomResetAction) {
+        zoomAction->zoomReset();
+    }
+    if (selectedItem == propertyAction) {
+        QGraphicsItem *i = itemAt(event->scenePos());
+        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
+            _datumPropertiesWidget->setData(nItem, event->screenPos());
+        }
+        else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
+            _pointerPropertiesWidget->setPointer(eItem->pointer(), event->screenPos());
+        }
+    }
+    else
+    {
+        // nothing was chosen
+    }
+}
+
 
 void GraphScene::updateGraph(DataStructurePtr g) {
     foreach(DataPtr n, g->dataList()) {

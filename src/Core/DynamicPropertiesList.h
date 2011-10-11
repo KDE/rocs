@@ -17,17 +17,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DINAMICPROPERTIESLIST_H
-#define DINAMICPROPERTIESLIST_H
-#include <QObject>
-#include <QList>
+#ifndef DYNAMICPROPERTIESLIST_H
+#define DYNAMICPROPERTIESLIST_H
+
+#include "rocslib_export.h"
+#include <QtCore/QMap>
+#include <QtCore/QObject>
+#include <QtCore/QList>
 
 class Data;
 class DataStructure;
 class Pointer;
-
-#include "rocslib_export.h"
-#include <QMap>
 
 enum DynamicPropertyType{
       None,
@@ -68,4 +68,4 @@ public:
 
 };
 
-#endif // DINAMICPROPERTIESLIST_H
+#endif // DYNAMICPROPERTIESLIST_H

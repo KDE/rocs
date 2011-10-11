@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOTPARSER_H
-#define DOTPARSER_H
+#ifndef GMLPARSER_H
+#define GMLPARSER_H
 
 #include <QObject>
 
@@ -52,4 +52,4 @@ class GMLParser: public Rocs::FilePluginInterface
 
 };
 
-#endif // DOTPARSER_H
+#endif // GMLPARSER_H

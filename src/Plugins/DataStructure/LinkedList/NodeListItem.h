@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LISTNODEITEM_H
-#define LISTNODEITEM_H
+#ifndef NODELISTITEM_H
+#define NODELISTITEM_H
 
 #include "DataItem.h"
 #include <boost/shared_ptr.hpp>
@@ -31,4 +31,4 @@ class NodeItem : public DataItem{
     virtual ~NodeItem();
 };
 
-#endif
+#endif // NODELISTITEM_H

@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    This file is part of Rocs.
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,9 +17,10 @@
 
 */
 
-#ifndef TESTDINAMICPROPERTIES_H
-#define TESTDINAMICPROPERTIES_H
-#include <QObject>
+#ifndef TESTDYNAMICPROPERTIES_H
+#define TESTDYNAMICPROPERTIES_H
+
+#include <QtCore/QObject>
 
 class TestDynamicProperties:  public QObject
 {
@@ -48,4 +49,4 @@ private slots:
   void changeNames();
 };
 
-#endif // TESTDINAMICPROPERTIES_H
+#endif // TESTDYNAMICPROPERTIES_H

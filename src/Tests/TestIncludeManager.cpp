@@ -1,6 +1,6 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    This file is part of Rocs.
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,10 +19,10 @@
 */
 
 #include "TestIncludeManager.h"
-#include <QtTest>
-#include <IncludeManager.h>
+#include <QtTest/QTest>
+#include <QtCore/QFile>
+#include "IncludeManager.h"
 #include <KLocalizedString>
-#include <QFile>
 #include <KDebug>
 
 void TestIncludeManager::inittestcase() {

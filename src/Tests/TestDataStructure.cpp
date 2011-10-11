@@ -1,6 +1,6 @@
 /*
-    A Roc's test Case
-    Copyright (C) 2010  Wagner Reck <wagner.reck@gmail.com>
+    This file is part of Rocs.
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,13 +19,12 @@
 
 #include "TestDataStructure.h"
 
-
-#include "TestDataStructure.h"
-#include <QtTest>
-#include <DataStructurePluginManager.h>
-#include <Document.h>
-#include <DataStructure.h>
-#include <DataStructurePluginInterface.h>
+#include <QtTest/QSignalSpy>
+#include <QtTest/QTest>
+#include "DataStructurePluginManager.h"
+#include "Document.h"
+#include "DataStructure.h"
+#include "DataStructurePluginInterface.h"
 #include "Rocs_Typedefs.h"
 
 void TestDataStructure::inittestcase()

@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "AddConnection.h"
+#include "AddConnectionAction.h"
 #include "GraphScene.h"
 #include "DataStructure.h"
 #include "Data.h"

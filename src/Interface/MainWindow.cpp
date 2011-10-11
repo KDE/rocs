@@ -20,36 +20,39 @@
 */
 
 #include "MainWindow.h"
+
 //Qt related includes
+#include <QtGui/QCloseEvent>
+#include <QtGui/QComboBox>
+#include <QtGui/QGraphicsView>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
+#include <QtGui/QSplitter>
+#include <QtGui/QStackedWidget>
+#include <QtGui/QToolBar>
+#include <QtGui/QVBoxLayout>
 
 // KDE Related Includes
 #include <KActionCollection>
-#include <KIcon>
-#include <QSplitter>
-#include <QStackedWidget>
-#include <QVBoxLayout>
-#include <QComboBox>
-#include <QLabel>
-#include <QToolBar>
-#include <KDebug>
 #include <KApplication>
+#include <KDebug>
+#include <KIcon>
+#include <KPushButton>
+#include <KStatusBar>
+#include <KTar>
 #include <KTextBrowser>
 #include <KMessageBox>
-#include <KApplication>
-#include <QGraphicsView>
 #include <klocalizedstring.h>
-#include <KStatusBar>
 #include <KConfigDialog>
-#include <KTar>
 #include <kfiledialog.h>
-#include "TabWidget.h"
 
 // UI RELATED INCLUDES
-
 #include "GraphLayers.h"
 #include "GraphVisualEditor.h"
 #include "GraphScene.h"
 #include "CodeEditor.h"
+#include "TabWidget.h"
+#include "GraphicsLayout.h"
 
 // MODEL Related Includes
 #include "model_GraphDocument.h"
@@ -62,11 +65,13 @@
 
 // Action Related Includes
 #include "AbstractAction.h"
-#include "AddData.h"
-#include "AddConnection.h"
+#include "AddDataAction.h"
+#include "AddConnectionAction.h"
+#include "ZoomAction.h"
 #include "SelectMoveAction.h"
 #include "DeleteAction.h"
 #include "AlignAction.h"
+
 #include <KNS3/DownloadDialog>
 #include <knewstuff3/uploaddialog.h>
 
@@ -80,7 +85,6 @@
 #include <QActionGroup>
 
 #include "../Plugins/PluginManager.h"
-#include <KPushButton>
 #include <QMutexLocker>
 #include <QScriptEngineDebugger>
 #include "IncludeManagerSettings.h"
@@ -90,12 +94,10 @@
 #include <DataStructurePluginInterface.h>
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
-#include <QCloseEvent>
-#include <KMessageBox>
-#include "zoom.h"
-#include "../GraphicsItem/GraphicsLayout.h"
+
+
+
 #include "PossibleIncludes.h"
-#include <QLayout>
 
 MainWindow::MainWindow() :  KXmlGuiWindow()
 {
@@ -287,27 +289,37 @@ void MainWindow::setupActions()
 
     GraphScene *gc = _graphVisualEditor->scene();
 
-    _selectMoveAction = new SelectMoveAction ( gc, this );
+    _selectMoveAction = new SelectMoveAction (gc, this);
+    AddDataAction* addDataAction = new AddDataAction(gc, this );
+    AddConnectionAction* addConnectionAction = new AddConnectionAction(gc, this);
+    DeleteAction* deleteAction = new DeleteAction(gc, this);
+    ZoomAction* zoomAction = new ZoomAction(gc, this);
+
+    connect(_selectMoveAction, SIGNAL(triggered()), _selectMoveAction, SLOT( sendExecuteBit() ));
+    connect(addDataAction, SIGNAL(triggered()), addDataAction, SLOT( sendExecuteBit() ));
+    connect(addConnectionAction, SIGNAL(triggered()), addConnectionAction, SLOT( sendExecuteBit() ));
+    connect(deleteAction, SIGNAL(triggered()), deleteAction, SLOT( sendExecuteBit() ));
+    connect(zoomAction, SIGNAL(triggered()), zoomAction, SLOT( sendExecuteBit() ));
 
     _paletteActions = actionCollection();
     QActionGroup *g = new QActionGroup ( this );
 
     g->addAction ( _paletteActions->addAction ( "selectmove", _selectMoveAction ) );
-    g->addAction ( _paletteActions->addAction ( "add_node", new AddNodeAction ( gc, this ) ) );
-    g->addAction ( _paletteActions->addAction ( "add_edge", new AddConnectionAction ( gc, this ) ) );
-    g->addAction ( _paletteActions->addAction ( "delete", new DeleteAction ( gc, this ) ) );
-    g->addAction ( _paletteActions->addAction ( "zoom", new ZoomAction ( gc, this ) ) );
+    g->addAction ( _paletteActions->addAction ( "add_node", addDataAction ) );
+    g->addAction ( _paletteActions->addAction ( "add_edge", addConnectionAction ) );
+    g->addAction ( _paletteActions->addAction ( "delete", deleteAction ) );
+    g->addAction ( _paletteActions->addAction ( "zoom", zoomAction ) );
     actionCollection()->action ( "selectmove" )->toggle();
     gc->setAction ( _selectMoveAction );
 
-    _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18n ( "Align on the base" ),  AlignAction::Bottom, _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::HCenter,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-htop",   new AlignAction ( i18n ( "Align on the top" ),   AlignAction::Top,    _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-circle", new AlignAction ( i18n ( "Align on a circle" ),  AlignAction::Circle,  _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-tree", new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree,  _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18n ( "Align on the base" ),  AlignAction::Bottom, gc, _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::HCenter,gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-htop",   new AlignAction ( i18n ( "Align on the top" ),   AlignAction::Top,    gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18n ( "Align on the left" ),  AlignAction::Left,   gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18n ( "Align on the center" ),AlignAction::VCenter,gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-vright", new AlignAction ( i18n ( "Align on the right" ), AlignAction::Right,  gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-circle", new AlignAction ( i18n ( "Align on a circle" ),  AlignAction::Circle,  gc,_graphVisualEditor ) );
+    _paletteActions->addAction ( "align-tree", new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, gc, _graphVisualEditor ) );
 
     createAction("document-new",     i18n("New Graph"),         "new-graph",         Qt::Key_N, SLOT(newGraph()),    this);
     createAction("document-open",    i18n("Open Graph"),        "open-graph",        Qt::Key_0, SLOT(openGraph()),   this);

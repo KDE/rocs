@@ -23,7 +23,8 @@
 #include <QObject>
 #include <QString>
 
-class QGraphicsSceneWheelEvent;class GraphScene;
+class QGraphicsSceneWheelEvent;
+class GraphScene;
 
 /*!
 \brief the base class for custom actions.

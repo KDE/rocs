@@ -18,8 +18,8 @@
 */
 
 
-#ifndef ZOOM_H
-#define ZOOM_H
+#ifndef ZOOMACTION_H
+#define ZOOMACTION_H
 
 #include <AbstractAction.h>
 #include <QRectF>
@@ -40,7 +40,11 @@ public:
     bool executeRelease(QPointF pos);
     bool executeDoubleClick(QPointF pos);
     bool executeKeyRelease(QKeyEvent* keyEvent);
-    bool executeWheelEvent(QGraphicsSceneWheelEvent *wEvent);    
+    bool executeWheelEvent(QGraphicsSceneWheelEvent *wEvent);
+    void zoomOut(QPointF zoomCenter);
+    void zoomIn(QPointF zoomCenter);
+    void zoomReset();
+    
 private:
     QRectF m_zoomArea;
     qreal m_currentZoomFactor;
@@ -49,12 +53,8 @@ private:
     QPointF m_beginZoom;
     QPointF m_endZoom;
     int m_steps;
-    
-    void zoomOut();
-    void zoomIn();
-    void zoomReset();
-    
-    qreal _zoomFactor;
+      
+    static qreal _zoomFactor;
 };
 
 #endif // ZOOM_H

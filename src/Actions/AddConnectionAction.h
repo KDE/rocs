@@ -17,13 +17,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ACTION_ADDNODE_H
-#define ACTION_ADDNODE_H
+#ifndef ADDCONNECTIONACTION_H
+#define ADDCONNECTIONACTION_H
 
 #include "AbstractAction.h"
 #include <QObject>
-#include <Rocs_Typedefs.h>
-
+#include <QPointF>
+class QGraphicsLineItem;
+class DataItem;
+class Data;
 class DataStructure;
 /*!
   \brief The 'Add Node' Action
@@ -31,34 +33,56 @@ class DataStructure;
   it will place a new node on the QGraphicsView that holds all the items.
 */
 
-class AddNodeAction : public AbstractAction {
+class AddConnectionAction : public AbstractAction {
     Q_OBJECT
 public:
     /*!
       Default constructor
-      \param type the Type for 'Add Node' action. must be unique.
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
 
-    explicit AddNodeAction( GraphScene *scene, QObject *parent = 0);
-
+    explicit AddConnectionAction(GraphScene *scene, QObject *parent = 0);
+    void setActiveGraph(DataStructure* graph);
     /*!
       Default Destructor
     */
-    ~AddNodeAction();
-
-    void setActiveGraph( DataStructurePtr graph);
-
+    ~AddConnectionAction();
 public slots:
     /*!
-      this will be executed if type is the same as this action's type.
-      \param pos the position on the screen that the new node will be placed.
-
+      will be executed when the mouse press a button.
+      \param pos the position onscreen of the click.
     */
     bool executePress(QPointF pos);
+    /*! will be executed when the mouse moves.
+      \param pos the current position of the cursor.
+    */
+    bool executeMove(QPointF pos);
+
+    /*! will be executed when the mouse releases a click
+    \param pos the position of the cursor.
+    */
+    bool executeRelease(QPointF pos);
+
+private:
+    /*! pointer to the node that suffered the mouse-click */
+    DataItem *_from;
+
+    /*! pointer to the node that suffered the mouse-release-click */
+    DataItem *_to;
+
+    /*! a temporary line that will connect the two Nodes. */
+    QGraphicsLineItem *_tmpLine;
+
+    /*! the point of the first click while adding a new edge */
+    QPointF _startPos;
+
+    /*! this boolean is true when we are actually adding a new edge,
+    false when we are not. */
+    bool _working;
 
   signals:
-    void addNode(QString name, QPointF pos);
+    void addConnection(Data *from, Data *to);
+
 };
 
-#endif
+#endif // ADDCONNECTIONACTION_H

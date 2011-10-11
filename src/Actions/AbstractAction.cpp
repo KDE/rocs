@@ -30,9 +30,6 @@
 AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
         : KToggleAction(parent) {
     _graphScene = scene;
-
-    connect(this, SIGNAL(triggered()),
-            this, SLOT( sendExecuteBit() ));
 }
 
 void AbstractAction::sendExecuteBit() {
@@ -50,6 +47,13 @@ bool AbstractAction::eventFilter ( QObject * watched, QEvent * event ){
             QGraphicsSceneMouseEvent *e = static_cast<QGraphicsSceneMouseEvent*>(event);
             if (e->button() == Qt::LeftButton){
                 return executePress(e->scenePos());
+            }
+            // a right click shall not trigger any QAction parent class function
+            // since this is reserved for the context menu
+            // TODO add specific entries to graph scene context menu here
+            if (e->button() == Qt::RightButton) {
+                e->accept();
+                return true;
             }
         }
         case QEvent::GraphicsSceneMouseMove  :{

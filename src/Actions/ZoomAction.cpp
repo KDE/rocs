@@ -18,7 +18,7 @@
 */
 
 
-#include "zoom.h"
+#include "ZoomAction.h"
 #include <GraphScene.h>
 #include <DocumentManager.h>
 #include <Document.h>
@@ -29,11 +29,12 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 
+qreal ZoomAction::_zoomFactor = 1;
+
 ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 : AbstractAction(scene, parent)
 ,m_view(scene->views().at(0))
 ,m_zoomRectItem(0)
-,_zoomFactor(1)
 {
     setText(i18n ( "Zoom" ));
     setToolTip ( i18n ( "Zoom the canvas by the wheel, or by dragging." ) );
@@ -89,7 +90,7 @@ bool ZoomAction::executeRelease(QPointF)
 
 bool ZoomAction::executeDoubleClick(QPointF)
 {
-    m_view->resetMatrix();
+    zoomReset();
     return true;
 }
 
@@ -115,23 +116,32 @@ bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 bool ZoomAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent)
 {
     if (wEvent->delta() > 0){ // zoom out
-        if (
-            m_view->width()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->width()
-            || m_view->height()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->height()
-        ) {
-            m_view->scale(0.8, 0.8);
-            _zoomFactor *= 0.8;
-            m_view->centerOn(wEvent->scenePos());
-        }
+        zoomOut(wEvent->scenePos());
     }else{ // zoom in
-        m_view->scale(1.25, 1.25);
-        _zoomFactor *= 1.25;
-        m_view->centerOn(wEvent->scenePos());
+        zoomIn(wEvent->scenePos());
     }
 //     qDebug() << "event position: "<< wEvent->scenePos();
     wEvent->accept();
     return true;
 }
 
+void ZoomAction::zoomIn(QPointF zoomCenter) {
+    m_view->scale(1.25, 1.25);
+    _zoomFactor *= 1.25;
+    m_view->centerOn(zoomCenter);
+}
 
+void ZoomAction::zoomOut(QPointF zoomCenter) {
+    if (
+        m_view->width()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->width()
+        || m_view->height()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->height()
+    ) {
+        m_view->scale(0.8, 0.8);
+        _zoomFactor *= 0.8;
+        m_view->centerOn(zoomCenter);
+    }
+}
 
+void ZoomAction::zoomReset() {
+    m_view->resetMatrix();
+}

@@ -16,26 +16,26 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <Document.h>
-#include <DataStructure.h>
-#include <DocumentManager.h>
 #include "generategraphwidget.h"
 #include "ui_generategraphwidget.h"
+
+#include "Document.h"
+#include "DataStructure.h"
+#include "DocumentManager.h"
 
 #include <cmath>
 #include <KLocale>
 #include <KDialog>
 
-#include <QtGui/QGridLayout>
 #include <QtGui/QComboBox>
+#include <QtGui/QDesktopWidget>
+#include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QSpinBox>
 #include <QtCore/QMap>
 #include <QtCore/QPair>
-
-#include <QDesktopWidget>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/iteration_macros.hpp>

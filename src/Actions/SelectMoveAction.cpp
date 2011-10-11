@@ -57,6 +57,8 @@ bool SelectMoveAction::executePress(QPointF pos) {
         _graphScene->views().at(0)->setInteractive(true);
         _graphScene->views().at(0)->setDragMode(QGraphicsView::RubberBandDrag);
         return true;
+    } else {
+        _movableNode->setSelected(true);
     }
 
     // otherwise we have a node to move
