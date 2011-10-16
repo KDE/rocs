@@ -35,7 +35,7 @@ void TestDataStructure::inittestcase()
 }
 
 void TestDataStructure::create(){
-    DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(1)->name());
+    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(1)->name());
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE (ds->metaObject()->className(), "Rocs::DataStructure");
@@ -45,7 +45,7 @@ void TestDataStructure::create(){
 
 
 void TestDataStructure::changeAndCreate(){
-    DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(0)->name());
+    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(0)->name());
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE (ds->metaObject()->className(), "Rocs::ListStructure");
@@ -53,7 +53,7 @@ void TestDataStructure::changeAndCreate(){
 
 void TestDataStructure::convert()
 {
-    DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(1)->name());
+    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(1)->name());
     Document doc("TestDocument");
     QSignalSpy spy(DataStructurePluginManager::self(), SIGNAL(changingDS(QString)));
 //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
@@ -69,7 +69,7 @@ void TestDataStructure::convert()
     graph->addPointer("node1", "node2");
 
     //Change plugin.
-    DataStructurePluginManager::self()->changeActiveDataStructure(DataStructurePluginManager::self()->pluginsList().at(0)->name());
+    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(0)->name());
 //     QVERIFY (DataStructurePluginManager::self()->pluginsList().at(0)->name() == DataStructurePluginManager::self()->actualPlugin());
 //     doc.convertToDS(DataStructurePluginManager::self()->actualPlugin());
     Document * newDoc = &doc;
