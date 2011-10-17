@@ -80,8 +80,8 @@ void AlignAction::align() {
     QList<DataItem*> l;
     QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
     foreach(QGraphicsItem *i, itemList) {
-        if ( qgraphicsitem_cast<DataItem*>(i) ) {
-            l.append( qgraphicsitem_cast<DataItem*>(i) );
+        if ( DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i) ) {
+            l.append( dataItem );
         }
     }
 
