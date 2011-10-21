@@ -18,8 +18,8 @@ if(${CMAKE_BUILD_TYPE} MATCHES coverage)
   set (CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS}" )
 endif()
 
-find_package(Boost REQUIRED)
-macro_log_feature(Boost_FOUND "Boost C++ Libraries" "Required to build Rocs" "http://www.boost.org" TRUE "" "")
+find_package(Boost "1.39" REQUIRED)
+macro_log_feature(Boost_FOUND "Boost C++ Libraries" "Required to build Rocs" "http://www.boost.org" TRUE "1.39" "")
 
 if (Boost_FOUND)
    include_directories(${Boost_INCLUDE_DIRS})
