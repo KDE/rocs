@@ -22,7 +22,7 @@
 
 #include <QObject>
 
-#include "Plugins/FilePluginInterface.h"
+#include "FilePluginInterface.h"
 #include "Rocs_Typedefs.h"
 class Pointer;
 class Data;

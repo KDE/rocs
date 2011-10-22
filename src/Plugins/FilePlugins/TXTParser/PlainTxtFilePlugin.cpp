@@ -18,7 +18,7 @@
 */
 
 #include "PlainTxtFilePlugin.h"
-#include "../../Core/Document.h"
+#include "Document.h"
 #include <KAboutData>
 #include <KGenericFactory>
 #include <QFile>

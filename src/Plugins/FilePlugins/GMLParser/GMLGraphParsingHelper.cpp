@@ -38,9 +38,9 @@
 
 #include <QFile>
 #include<QUuid>
-#include "Core/DynamicPropertiesList.h"
+#include "DynamicPropertiesList.h"
 #include "Document.h"
-#include <Pointer.h>
+#include "Pointer.h"
 
 // using namespace std;
 using namespace Rocs;

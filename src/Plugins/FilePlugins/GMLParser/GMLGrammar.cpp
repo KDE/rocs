@@ -19,7 +19,7 @@
 #include "GMLGrammar.h"
 
 #include "GMLGraphParsingHelper.h"
-#include "Core/Document.h"
+#include "Document.h"
 
 #include <kdebug.h>
 

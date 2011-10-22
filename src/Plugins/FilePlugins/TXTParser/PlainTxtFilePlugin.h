@@ -20,7 +20,7 @@
 #ifndef PLAINTXTFILEPLUGIN_H
 #define PLAINTXTFILEPLUGIN_H
 
-#include "../FilePluginInterface.h"
+#include "FilePluginInterface.h"
 
 class PlainTXTFilePlugin: public FilePluginInterface
 {

@@ -23,10 +23,8 @@
 #include <list>
 #include <string>
 #include <QStringList>
-#include "Core/DataStructure.h"
-#include "Core/Data.h"
-// class Node;
-// class Graph;
+#include "DataStructure.h"
+#include "Data.h"
 #include "Rocs_Typedefs.h"
 
 #include <QObject>

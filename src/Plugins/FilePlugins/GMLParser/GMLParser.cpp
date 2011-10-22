@@ -19,14 +19,16 @@
 
 #include "GMLParser.h"
 
-#include "Core/Document.h"
-#include <Pointer.h>
-#include <KAboutData>
-#include <KGenericFactory>
-#include <QFile>
-#include "Core/DataStructure.h"
+#include "Document.h"
+#include "Pointer.h"
+#include "DataStructure.h"
 #include "GMLGraphParsingHelper.h"
 #include "GMLGrammar.h"
+
+#include <KAboutData>
+#include <KGenericFactory>
+
+#include <QFile>
 
 static const KAboutData aboutdata ( "rocs_gmlplugin", 0, ki18n ( "Open and Save GML files" ) , "0.1" );
 
