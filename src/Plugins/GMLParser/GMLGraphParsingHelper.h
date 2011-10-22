@@ -23,10 +23,11 @@
 #include <list>
 #include <string>
 #include <QStringList>
-#include "Core/DataType.h"
+#include "Core/DataStructure.h"
 #include "Core/Data.h"
 // class Node;
 // class Graph;
+#include "Rocs_Typedefs.h"
 
 #include <QObject>
 namespace Rocs
@@ -58,10 +59,10 @@ namespace GMLPlugin{
 
     State _actualState;
 
-    DataType* actualGraph;
-    Datum* actualNode;
-    Pointer* actualEdge;
-    DataTypeDocument* gd;
+    DataStructurePtr actualGraph;
+    DataPtr actualNode;
+    PointerPtr actualEdge;
+    Document* gd;
     QStringList _properties;
     QHash<QString, QString> _edgeProperties;
   };

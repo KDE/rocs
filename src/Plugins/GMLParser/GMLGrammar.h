@@ -30,7 +30,7 @@
 #include <iostream>
 #include <string>
 
-class DataTypeDocument;
+class Document;
 class QString;
 
 namespace Rocs{
@@ -52,7 +52,7 @@ namespace GMLPlugin
     void t();
     void t1();
 
-    bool parse(QString& content, DataTypeDocument* doc);
+    bool parse(QString& content, Document* doc);
 
     template <typename Iterator>
     struct roman : boost::spirit::qi::grammar<Iterator, unsigned()>

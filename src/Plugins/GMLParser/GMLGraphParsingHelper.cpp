@@ -39,7 +39,7 @@
 #include <QFile>
 #include<QUuid>
 #include "Core/DynamicPropertiesList.h"
-#include <graphDocument.h>
+#include "Document.h"
 #include <Pointer.h>
 
 // using namespace std;
@@ -53,12 +53,11 @@ extern GMLGraphParsingHelper* phelper;
 GMLGraphParsingHelper::GMLGraphParsingHelper():
          edgeSource(),
          edgeTarget(),
-         _actualState(begin),
-         actualGraph(0),
-         actualNode(0),
-         actualEdge(0),
-         gd(0){
-
+         _actualState(begin)
+{
+    actualGraph.reset();
+    actualNode.reset();
+    actualEdge.reset();
 }
 
 void GMLGraphParsingHelper::startList(const QString& key){
@@ -86,14 +85,14 @@ void GMLGraphParsingHelper::endList(){
   }
   switch (_actualState){
     case begin: kDebug () << "Ending a list without begin a item??"; break;
-    case node: actualNode = 0;
+    case node: actualNode.reset();
                _actualState = graph;
                break;
-    case edge: actualEdge = 0;
+    case edge: actualEdge.reset();
                _actualState = graph;
                break;
     case graph:
-              actualGraph = 0;
+              actualGraph.reset();
               _actualState = begin;
               break;
   }
@@ -171,7 +170,7 @@ void GMLGraphParsingHelper::setAtribute(const QString& key, const QString& value
 
 void GMLGraphParsingHelper::createGraph(){
     if (_actualState == begin){
-      actualGraph = gd->addDataType();
+      actualGraph = gd->addDataStructure();
       _actualState = graph;
     }
 }
@@ -180,7 +179,7 @@ void GMLGraphParsingHelper::createNode(){
   if (_actualState == graph){
     kDebug () << "Creating a node";
     _actualState = node;
-    actualNode = actualGraph->addDatum("NewNode");
+    actualNode = actualGraph->addData("NewNode");
   }
 }
 
@@ -188,19 +187,19 @@ void GMLGraphParsingHelper::createNode(){
 
 void GMLGraphParsingHelper::createEdge(){
     if (!edgeSource.isEmpty() && !edgeTarget.isEmpty()){
-      kDebug() << "Creating a edge";
-      _actualState = edge;
-      actualEdge = actualGraph->addPointer(edgeSource, edgeTarget);
-      edgeSource = edgeTarget = QString();
-      while( ! _edgeProperties.isEmpty()){
-        QString property = _edgeProperties.keys().at(0);
-        actualEdge->addDynamicProperty(property, _edgeProperties.value(property));
-        _edgeProperties.remove(property);
-      }
+        kDebug() << "Creating a edge";
+        _actualState = edge;
+        actualEdge = actualGraph->addPointer(edgeSource, edgeTarget);
+        edgeSource = edgeTarget = QString();
+        while( ! _edgeProperties.isEmpty()){
+            QString property = _edgeProperties.keys().at(0);
+            actualEdge->addDynamicProperty(property, _edgeProperties.value(property));
+            _edgeProperties.remove(property);
+        }
     }else if (_actualState == graph){
-      kDebug () << "changing state Edge";
-      _actualState = edge;
-      actualEdge = 0;
+        kDebug () << "changing state Edge";
+        _actualState = edge;
+        actualEdge.reset();
     }
 }
 

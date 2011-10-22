@@ -17,7 +17,7 @@ ENDIF("${Boost_VERSION}" VERSION_LESS 104030)
 include_directories(${Boost_INCLUDE_DIRS})
 
 #removed until fix build with Boost
-# add_subdirectory(GMLParser)
+add_subdirectory(GMLParser)
 # add_subdirectory(dotParser)
 
 add_subdirectory(TransformEdges)

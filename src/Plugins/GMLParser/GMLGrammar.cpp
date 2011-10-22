@@ -19,7 +19,7 @@
 #include "GMLGrammar.h"
 
 #include "GMLGraphParsingHelper.h"
-#include "graphDocument.h"
+#include "Core/Document.h"
 
 #include <kdebug.h>
 
@@ -33,18 +33,17 @@ namespace GMLPlugin{
 GMLGraphParsingHelper* phelper = 0;
 std::string lastKey = "";
 QObject * lastInserted = 0;
-DataType * actualdataType = 0;
-Datum * actualNode = 0;
-Pointer * actualEdge = 0;
-
-DataTypeDocument *document = 0;
+DataStructurePtr actualdataType;
+DataPtr actualNode;
+PointerPtr actualEdge;
+Document *document = 0;
 
 void beginList(){
     phelper->startList(QString::fromStdString(lastKey));
 }
 
 void endList(){
-  phelper->endList();
+    phelper->endList();
 }
 
 void gotKey(const std::string& key){
@@ -91,7 +90,7 @@ void gotValue(const std::string& Value){
       std::cout << "Found " << key << ".\n";
     }
 
-bool parse( QString &content, DataTypeDocument * doc){
+bool parse( QString &content, Document * doc){
     unsigned result;
     phelper = new GMLGraphParsingHelper;
     phelper->gd = doc;

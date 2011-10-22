@@ -19,12 +19,12 @@
 
 #include "GMLParser.h"
 
-#include "Core/graphDocument.h"
+#include "Core/Document.h"
 #include <Pointer.h>
 #include <KAboutData>
 #include <KGenericFactory>
 #include <QFile>
-#include <Core/DataType.h>
+#include "Core/DataStructure.h"
 #include "GMLGraphParsingHelper.h"
 #include "GMLGrammar.h"
 
@@ -52,8 +52,8 @@ const QStringList GMLParser::extensions() const {
 }
 
 
-DataTypeDocument* GMLParser::readFile ( const QString& fileName ) {
-    DataTypeDocument * graphDoc = new DataTypeDocument ( "Untitled" );
+Document* GMLParser::readFile ( const QString& fileName ) {
+    Document * graphDoc = new Document ( "Untitled" );
 //     Graph * graph = graphDoc->addGraph();
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
@@ -73,20 +73,22 @@ DataTypeDocument* GMLParser::readFile ( const QString& fileName ) {
 
 
 
-bool GMLParser::writeFile ( DataTypeDocument& graph, const QString& filename ) {
+bool GMLParser::writeFile ( Document& graph, const QString& filename ) {
     QFile file ( filename );
     QVariantList subgraphs;
     if ( file.open ( QFile::WriteOnly | QFile::Text) ) {
         QTextStream out (&file);
         out << "Version 1\n";
         out << "Vendor \"Rocs\"\n";
-        for (int i = 0 ; i < graph.count(); ++i){
-          DataType *g = graph.at(i);
+        for (int i = 0 ; i < graph.dataStructures().count(); ++i){
+          DataStructurePtr g = graph.dataStructures().at(i);
 //         Graph *g = graph.activeGraph();
-            out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
+//FIXME uncommented following directed() check sind this is moved to subclass
+//need to add toggle
+//             out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
             out << QString("id \"%1\" \n").arg(g->name());
 
-            foreach ( Datum *n, g->data() ) {
+            foreach( DataPtr n, g->dataList() ) {
                 out << QString("node [\n id \"%1\" \n").arg(n->name());
 //                 foreach (QByteArray p, n->dynamicPropertyNames()){
 //                    out << p << " " << n->property(p).toString() << "\n";
@@ -95,7 +97,7 @@ bool GMLParser::writeFile ( DataTypeDocument& graph, const QString& filename ) {
                 out << "]\n";
 
             }
-            foreach ( Pointer *e, g->pointers() ) {
+            foreach( PointerPtr e, g->pointers() ) {
                 out << "edge [\n";
 //                  foreach (QByteArray p, e->dynamicPropertyNames()){
 //                    out << p << " " << e->property(p).toString() << "\n";
@@ -112,7 +114,7 @@ bool GMLParser::writeFile ( DataTypeDocument& graph, const QString& filename ) {
     return false;
 }
 
-QString const GMLParser::processEdge(Pointer*e ) const
+QString const GMLParser::processEdge(PointerPtr e) const
 {
     QString edge;
     edge.append(QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->name(), e->to()->name()));
@@ -131,7 +133,7 @@ QString const GMLParser::processEdge(Pointer*e ) const
     return edge;
 }
 
-QString const GMLParser::processNode(Datum* n) const
+QString const GMLParser::processNode(DataPtr n) const
 {
       QString node;
       node.append(QString("  x %1 \n  y %2 \n").arg(n->x()).arg(n->y()));

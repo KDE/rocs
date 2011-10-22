@@ -22,11 +22,12 @@
 
 #include <QObject>
 
-#include <Plugins/FilePluginInterface.h>
+#include "Plugins/FilePluginInterface.h"
+#include "Rocs_Typedefs.h"
 class Pointer;
-class Datum;
+class Data;
 
-class GMLParser: public Rocs::FilePluginInterface
+class GMLParser: public FilePluginInterface
 {
   Q_OBJECT
   public:
@@ -35,9 +36,9 @@ class GMLParser: public Rocs::FilePluginInterface
 
     const QStringList extensions() const; //Extensões suportadas
 
-    DataTypeDocument * readFile(const QString& fileName) ; //return 0 se arq. inválido
+    Document * readFile(const QString& fileName) ; //return 0 se arq. inválido
 
-    bool writeFile(DataTypeDocument& graph, const QString& filename) ; //false se não gravou.
+    bool writeFile(Document& graph, const QString& filename) ; //false se não gravou.
 
 
     virtual const QString lastError();
@@ -47,8 +48,8 @@ class GMLParser: public Rocs::FilePluginInterface
     private:
         QString _lastError;
         void setError ( QString arg1 );
-        QString const processNode(Datum*) const;
-        QString const processEdge(Pointer* e) const;
+        QString const processNode(DataPtr) const;
+        QString const processEdge(PointerPtr e) const;
 
 };
 
