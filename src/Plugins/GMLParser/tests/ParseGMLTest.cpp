@@ -16,12 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ParseDotTest.h"
+#include "ParseGMLTest.h"
 #include <QTest>
 #include <string>
-#include <Core/graphDocument.h>
+#include "Core/Document.h"
 #include "../GMLGrammar.h"
-#include <Core/graph.h>
+#include "DataStructure.h"
 #include <Core/DynamicPropertiesList.h>
 #include <KDebug>
 
@@ -71,5 +71,6 @@ void ParseDotTest::WithSubgraph()
 }
 
 
-QTEST_MAIN ( ParseDotTest )
-#include <ParseDotTest.moc>
+QTEST_MAIN ( ParseGMLTest )
+
+#include <ParseGMLTest.moc>
