@@ -8,6 +8,8 @@ find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 remove_definitions(-DQT_NO_STL)
 
+set (CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS}" )
+
 include_directories(
   ${KDE4_INCLUDES}
   ${QT_INCLUDES}
@@ -15,7 +17,6 @@ include_directories(
 
 if(${CMAKE_BUILD_TYPE} MATCHES coverage)
   set (CMAKE_CXX_COMPILER cov++)
-  set (CMAKE_CXX_FLAGS "${KDE4_ENABLE_EXCEPTIONS}" )
 endif()
 
 find_package(Boost "1.39" REQUIRED)
