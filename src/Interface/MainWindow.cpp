@@ -335,10 +335,11 @@ void MainWindow::setupActions()
     createAction("document-save",    i18n("Save Script"),       "save-script",       Qt::Key_S, SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    Qt::Key_W, SLOT(saveActiveScriptAs()), _codeEditor);
 
-    kDebug() << "Creating Actions (import export)";
-    if (PluginManager::instance()->filePlugins().count()) {
-        createAction("document-save-as", i18n("Import"), "import", Qt::Key_I, SLOT(importFile()), this);
-        createAction("document-save-as", i18n("Export"), "export", Qt::Key_E, SLOT(exportFile()), this);
+    // eventually create hooks for file plugins
+    PluginManager::instance()->loadFilePlugins();
+    if (PluginManager::instance()->filePlugins().count()>0) {
+        createAction("document-save-as", i18n("Import Graph"), "import", Qt::Key_I, SLOT(importFile()), this);
+        createAction("document-save-as", i18n("Export Graph"), "export", Qt::Key_E, SLOT(exportFile()), this);
     }
 
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );

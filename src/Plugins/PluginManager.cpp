@@ -79,7 +79,6 @@ PluginManager::PluginManager()
 
 PluginManager::~PluginManager()
 {
-
     delete _d;
 }
 
@@ -142,11 +141,13 @@ QList< ToolsPluginInterface* > PluginManager::toolPlugins()
     return value;
 }
 
-
+QList< FilePluginInterface* > PluginManager::filePlugins() const {
+    qDebug() << "PluginManager::filePlugins() --- count = " << _filePlugins.count();
+    return _filePlugins;
+}
 
 void PluginManager::loadFilePlugins() {
-
-    kDebug() << "Load File plugins";
+    qDebug() << "PluginManager::loadFilePlugins()";
 
     foreach (FilePluginInterface * f, _filePlugins) {
         delete f;
@@ -172,12 +173,12 @@ void PluginManager::loadFilePlugins() {
         FilePluginInterface *plugin = factory->create<FilePluginInterface>(this);
 
         if (plugin) {
-            kDebug() << "Loaded plugin: " << service->name();
+            qDebug() << "Loaded plugin: " << service->name();
             _filePlugins.append(plugin);
 
             //emit pluginLoaded(plugin);
         } else {
-            kDebug() << "Can't load plugin: " << service->name();
+            qDebug() << "Can't load plugin: " << service->name();
         }
     }
 }

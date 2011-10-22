@@ -55,7 +55,7 @@ class ROCSLIB_EXPORT PluginManager: public QObject
     void loadFilePlugins();
     
     QList < ToolsPluginInterface*> toolPlugins();
-    QList < FilePluginInterface*> filePlugins(){return _filePlugins;}
+    QList < FilePluginInterface*> filePlugins() const;
     
     KPluginInfo pluginInfo( ToolsPluginInterface * plugin);
     
