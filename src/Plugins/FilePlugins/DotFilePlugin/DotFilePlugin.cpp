@@ -24,6 +24,9 @@
 
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/topology.hpp>
+#include <boost/graph/random_layout.hpp>
+#include <boost/graph/fruchterman_reingold.hpp>
+#include <boost/random/mersenne_twister.hpp>
 
 #include <KAboutData>
 #include <KGenericFactory>
@@ -112,9 +115,26 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
         return 0;
     }
     
-    // TODO Apply Layout
+    // Apply Layout
+    // TODO move all general purpose layout funcitons to support library
+    typedef boost::iterator_property_map<PositionVec::iterator, 
+                                boost::property_map<Graph, boost::vertex_index_t>::type>
+        PositionMap;
+    boost::mt19937 gen;
+    gen.seed (static_cast<unsigned int>(1));
+    // generate distribution topology and apply
+    boost::rectangle_topology< boost::mt19937 > topology(gen, -200, -200, 200, 200);
+    PositionVec position_vec(boost::num_vertices( importGraph ));
+    PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, importGraph));
+    boost::random_graph_layout(importGraph, positionMap, topology);
+    // minimize cuts by Fruchtman-Reingold layout algorithm
+    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
+        (   importGraph,
+            positionMap,
+            topology,
+            boost::cooling(boost::linear_cooling<double>(100)) 
+        );
 
-    
     // convert graphviz format to Document
     DataStructurePtr datastructure = graphDoc->addDataStructure(i18n("dotImport"));
 
@@ -123,12 +143,13 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
     int index=0;
     boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
     for (boost::tie(vi, vi_end) = boost::vertices(importGraph); vi != vi_end; ++vi) {
+        // FIXME implement the property import
         mapNodes[*vi] = datastructure->addData(
                 QString("%1").arg( index++ ),
-                QPointF(0,0)
+                QPointF(positionMap[*vi][0],positionMap[*vi][1])
             );
     }
-    
+
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(importGraph); ei !=ei_end; ++ei) {
         datastructure->addPointer ( mapNodes[boost::source(*ei, importGraph)],
@@ -141,6 +162,7 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
 
 
 bool DotFilePlugin::writeFile ( Document& graph, const QString& filename ) {
+    setError("This Functionality is not implemented, yet!");
     // TODO
     return false;
 }

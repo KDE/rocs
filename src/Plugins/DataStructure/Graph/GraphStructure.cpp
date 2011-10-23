@@ -104,14 +104,14 @@ QScriptValue Rocs::GraphStructure::add_node(const QString& name) {
 QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw) {
     if (fromRaw==0 || toRaw==0)
         return QScriptValue();
-    
+
     DataPtr from = fromRaw->getData();
     DataPtr to = toRaw->getData();
   
-    PointerPtr e = addPointer(from, to);
-    if (e){
-      e->setEngine(engine());
-      return e->scriptValue();
+    PointerPtr edge = addPointer(from, to);
+    if (edge){
+        edge->setEngine(engine());
+        return edge->scriptValue();
     }
 
     return QScriptValue();
