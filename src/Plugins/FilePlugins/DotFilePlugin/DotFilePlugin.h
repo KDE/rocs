@@ -52,8 +52,6 @@ public:
    
     virtual const QString lastError();
 
-    virtual const QString scriptToRun();
-
 private:
     QString _lastError;
     void setError(QString arg);
