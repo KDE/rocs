@@ -28,6 +28,7 @@ set( rocs_core_SRCS
     Core/KrossBackend.cpp
     Core/Pointer.cpp
     Core/QtScriptBackend.cpp
+    Core/Modifiers/Topology.cpp
 
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
@@ -57,6 +58,8 @@ set( rocslib_LIB_HDRS
   Core/QtScriptBackend.h
   Core/rocslib_export.h
   Core/Rocs_Typedefs.h
+
+  Core/Modifiers/Topology.h
 
   Plugins/FilePluginInterface.h
   Plugins/PluginManager.h

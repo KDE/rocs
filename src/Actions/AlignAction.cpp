@@ -25,6 +25,8 @@
 #include "generics.h"
 #include "DataStructure.h"
 #include "Pointer.h"
+#include "Core/Modifiers/Topology.h"
+
 #include <KDebug>
 
 
@@ -35,6 +37,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/random/linear_congruential.hpp>
 #include <QPair>
+#include <boost/graph/graph_concepts.hpp>
 
 namespace boost {
 void throw_exception( std::exception const & ) {} } // do noop on exception
@@ -162,75 +165,11 @@ void AlignAction::alignCircle(QList< DataItem* >& dataItemList) {
 }
 
 void AlignAction::alignMinCutTree(QList< DataItem* >& dataItemList) {
-    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS,
-        boost::property<boost::vertex_name_t, std::string> >
-        Graph;
-    typedef boost::rectangle_topology<> topology_type;
-    typedef topology_type::point_type point_type;
-    typedef QVector<point_type> PositionVec;
-    typedef boost::iterator_property_map<PositionVec::iterator,
-        boost::property_map<Graph, boost::vertex_index_t>::type> 
-        PositionMap;
-    typedef boost::graph_traits<Graph>::vertex_descriptor Vertex;
-    typedef QPair<int, int> Edge;
-
-    PositionVec position_vec(dataItemList.count());
-
-    // set box inside which we may reposition
-    QList<qreal> xList;
-    QList<qreal> yList;
+    DataList modificationList;
     foreach(DataItem *i, dataItemList) {
-        xList << i->data()->x();
-        yList << i->data()->y();
+        modificationList.append(i->data());
     }
-    qSort(xList.begin(), xList.end());
-    qSort(yList.begin(), yList.end());
-    topology_type topology( xList.first(), yList.first(), xList.last(), yList.last());
-
-    // create IDs for all nodes
-    QMap<Data*,int> node_mapping;
-    QMap<QPair<int,int>, PointerPtr > edge_mapping; // to map all edges back afterwards
-    int counter = 0;
-    foreach(DataItem *data, dataItemList) {
-        node_mapping[data->data().get()] = counter++;
-    }
-
-    DataStructurePtr ds = dataItemList.first()->data()->dataStructure();
-    QVector<Edge> edges(ds->pointers().count());
-
-    counter = 0;
-    foreach( PointerPtr p, ds->pointers() ){
-        edges[counter++] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
-    }
-
-    // setup the graph
-    Graph graph(
-        edges.begin(),
-        edges.end(),
-        dataItemList.count()
-    );
-
-    PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, graph));
-    counter = 0;
-    foreach(DataItem *data, dataItemList) {
-        positionMap[counter][0] = data->data()->x();
-        positionMap[counter][1] = data->data()->y();
-        counter++;
-    }
-
-    // minimize cuts by Fruchtman-Reingold layout algorithm
-    boost::fruchterman_reingold_force_directed_layout< topology_type, Graph, PositionMap >
-    (   graph,
-        positionMap,
-        topology,
-        boost::cooling(boost::linear_cooling<double>(100))
-    );
-
-    // put nodes at whiteboard as generated
-    foreach(DataItem *data, dataItemList) {
-        Vertex v = boost::vertex(node_mapping[data->data().get()], graph);
-        data->data()->setX( positionMap[v][0] );
-        data->data()->setY( positionMap[v][1] );
-    }
+    Topology topology = Topology();
+    topology.applyMinCutTreeAlignment(modificationList);
 }
 
