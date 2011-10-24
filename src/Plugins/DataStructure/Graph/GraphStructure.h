@@ -67,6 +67,7 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
          * Computes the Dijkstra's shortest path algorithm to compute
          * the shortes path from "from" to "to". Note: this shortest path
          * algorithm works only for graphs with all edges values non-negative.
+         * For undirected graphs reverse edges are add automatically.
          * The algorithm has time complexity O(V log V + E).
          * 
          * \param from the node from which the computation starts

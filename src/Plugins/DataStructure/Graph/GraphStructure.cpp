@@ -130,7 +130,7 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
     DataPtr to = toRaw->getData();
     
     QScriptValue path_edges = engine()->newArray();
-      
+
     typedef boost::adjacency_list < boost::listS, boost::vecS, boost::directedS,
         boost::no_property, boost::property < boost::edge_weight_t, qreal > > graph_t;
     typedef boost::graph_traits < graph_t >::vertex_descriptor vertex_descriptor;
@@ -145,8 +145,9 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
         node_mapping[data.get()] = counter++;
     }
     
-    QVector<Edge> edges(this->pointers().count());
-    QVector<qreal> weights(this->pointers().count());
+    // use doubled size for case of undirected edges
+    QVector<Edge> edges(this->pointers().count()*2);
+    QVector<qreal> weights(this->pointers().count()*2);
     
     counter = 0;
     BOOST_FOREACH( PointerPtr p, this->pointers() )
@@ -159,6 +160,17 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
               weights[counter] = 1;
          }
          counter++;
+         // if graph is directed, also add back-edges
+         if(!this->directed()) {
+              edges[counter] = Edge(node_mapping[p->to().get()], node_mapping[p->from().get()]);
+              edge_mapping[std::make_pair<int,int>(node_mapping[p->to().get()], node_mapping[p->from().get()])] = p;
+              if (!p->value().isEmpty()) {
+                    weights[counter] = p->value().toDouble();
+              } else {
+                    weights[counter] = 1;
+              }
+              counter++;
+         }
     }
      
     // setup the graph
