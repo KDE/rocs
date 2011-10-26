@@ -38,7 +38,7 @@ SelectMoveHandAction::SelectMoveHandAction(GraphScene *scene, QObject *parent)
     setToolTip ( i18n ( "Select and move items." ) );
     setIcon ( KIcon ( "rocsselectmove" ) );
     _movableNode = 0;
-    _name = "move";
+    _name = "rocs-hand-select-move";
     
     connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeArrowKeyMove(QKeyEvent*)));
 }

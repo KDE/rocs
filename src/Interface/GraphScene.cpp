@@ -289,13 +289,15 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
 
     // puzzling the menu together
     AddDataAction *addAction = new AddDataAction(this);
-    DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
+    DeleteAction *deleteDataStructureAction = new DeleteAction(this, 0);
+    DeleteAction *deleteSelectedAction = new DeleteAction(this, 0);
+    DeleteAction *deleteItemAction = new DeleteAction(this, 0);
     QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
     menuSelected->addMenu(menuAlign);
-    menuSelected->addAction(deleteAction);
+    menuSelected->addAction(deleteSelectedAction);
     menuSelected->addAction(propertyAction);
     menuDataStructure->addMenu(menuAlign);
-    menuDataStructure->addAction(deleteAction);
+    menuDataStructure->addAction(deleteDataStructureAction);
     menuDataStructure->addAction(propertyAction);
     
     // activate/deactivate context depending on where the user click
@@ -306,16 +308,27 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
         menuDataStructure->setDisabled(true);
         menu.addAction(addAction);
         menu.addMenu(menuZoom);
+    } else {
+        menu.addAction(deleteItemAction);
     }
 
+    // TODO this is not a nice code
+    // refactor this for SC 4.9
     QAction* selectedItem = menu.exec(event->screenPos());
     if (selectedItem == addAction) {
         qDebug() << "Scene Add Action";
         addAction->executePress(event->scenePos());
     }
-    if (selectedItem == deleteAction) {
-        qDebug() << "Scene Delete Action";
-        deleteAction->executePress(event->scenePos());
+    if (selectedItem == deleteItemAction) {
+        deleteItemAction->executePress(event->scenePos());
+    }
+    if (selectedItem == deleteDataStructureAction) {
+        deleteItemAction->setDeleteTarget(DeleteAction::DATA_STRUCTURE);
+        deleteItemAction->executePress(event->scenePos());
+    }
+    if (selectedItem == deleteSelectedAction) {
+        deleteItemAction->setDeleteTarget(DeleteAction::SELECTED);
+        deleteItemAction->executePress(event->scenePos());
     }
     if (selectedItem == zoomInAction) {
         zoomAction->zoomIn(event->scenePos());

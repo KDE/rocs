@@ -33,24 +33,36 @@
 
 DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent) {
     setText(i18n ( "Delete" ));
-    setToolTip ( i18n ( "Delete items by clicking on them." ) );
-    setIcon ( KIcon ( "rocsdelete" ) );
     _name = "delete";
+    setCheckable(false);
+    _target = ITEM;
 
     connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeKeyRelease(QKeyEvent*)));
 }
 
+void DeleteAction::setDeleteTarget(DeleteTarget target) {
+    _target = target;
+}
+
+
 bool DeleteAction::executePress(QPointF pos) {
     QGraphicsItem * item = _graphScene->itemAt(pos);
     if ( DataItem *n  = qgraphicsitem_cast<DataItem*>(item) ) {
-        if (n->isSelected()) {
-        foreach (QGraphicsItem *selectedItem, _graphScene->selectedItems())
-            if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(selectedItem)) {
-                dItem->data()->remove();
-            }
-        }
-        else {    
-            n->data()->remove();
+        switch(_target) {
+            case SELECTED: {
+                foreach (QGraphicsItem *selectedItem, _graphScene->selectedItems())
+                    if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(selectedItem)) {
+                        dItem->data()->remove();
+                    }
+                break;
+                }
+            case DATA_STRUCTURE: {
+                n->data()->dataStructure()->remove();
+                break;
+                }
+            case ITEM:
+            default:
+                n->data()->remove();
         }
         return true;
     }

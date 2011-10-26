@@ -30,8 +30,7 @@
 AddDataAction::AddDataAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Add Node" ));
-    setToolTip ( i18n ( "Creates a new node at the click position on the drawing area." ) );
-    setIcon ( KIcon ( "rocsaddnode" ) );
+    setToolTip ( i18n ( "Creates a new node at the click position." ) );
     _name = "add-node";
 }
 

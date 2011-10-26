@@ -26,6 +26,12 @@
 class DeleteAction : public AbstractAction
 {
 public:
+    typedef enum {
+        ITEM,
+        SELECTED,
+        DATA_STRUCTURE
+    } DeleteTarget;
+
     /*! default constructor
     \p scene the graph scene
     \p parent the mainwindow
@@ -37,11 +43,16 @@ public:
     */
     bool executePress(QPointF pos);
 
+    void setDeleteTarget(DeleteTarget target);
+    
 public slots:
     /*! when somebody press the delete key, the system will try to delete all selected nodes.
     \p keyEvent the key to be processed.
     */
     bool executeKeyRelease(QKeyEvent* keyEvent);
+
+private:
+    DeleteTarget _target;
 };
 
 #endif // DELETEACTION_H

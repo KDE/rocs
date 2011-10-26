@@ -40,7 +40,7 @@ AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, QObject *par
     _to   = 0;
     _tmpLine  = 0;
     _working = false;
-    _name = "add-edge";
+    _name = "rocs-hand-add-edge";
 }
 
 AddConnectionHandAction::~AddConnectionHandAction() {

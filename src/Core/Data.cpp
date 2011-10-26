@@ -151,7 +151,7 @@ PointerList Data::adjacent_pointers() const
     PointerList adjacent;
 
     adjacent << d->_out_pointers;
-    adjacent << d-> _self_pointers;
+    adjacent << d->_self_pointers;
     adjacent << d->_in_pointers;
 
     return adjacent;
