@@ -29,7 +29,6 @@
 
 #include <KDebug>
 
-
 #include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/graph/random_layout.hpp>
 #include <boost/graph/adjacency_list.hpp>
@@ -141,27 +140,12 @@ void AlignAction::alignX(QList<DataItem*>& dataItemList) {
 }
 
 void AlignAction::alignCircle(QList< DataItem* >& dataItemList) {
-    QList<qreal> xList;
-    QList<qreal> yList;
-    QPoint center = QPoint(0,0);
+    DataList modificationList;
     foreach(DataItem *i, dataItemList) {
-        xList << i->data()->x();
-        yList << i->data()->y();
-        center.setX(center.x() + i->data()->x());
-        center.setY(center.y() + i->data()->y());
+        modificationList.append(i->data());
     }
-    center.setX( center.x()/xList.length() );
-    center.setY( center.y()/yList.length() );
-    qSort(xList.begin(), xList.end());
-    qSort(yList.begin(), yList.end());
-
-    qreal radius = fmax(abs(xList.first()-xList.last()),abs(yList.first()-yList.last()))/2;
-
-    foreach(DataItem *i, dataItemList) {
-        qreal centerDistance = sqrt( pow(i->data()->x()-center.x(),2) + pow(i->data()->y()-center.y(),2) );
-        i->data()->setX(center.x() + (i->data()->x() - center.x())/centerDistance*radius);
-        i->data()->setY(center.y() + (i->data()->y() - center.y())/centerDistance*radius);
-    }
+    Topology topology = Topology();
+    topology.applyCircleAlignment(modificationList);
 }
 
 void AlignAction::alignMinCutTree(QList< DataItem* >& dataItemList) {

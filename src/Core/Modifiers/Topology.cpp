@@ -29,6 +29,7 @@
 #include <QVector>
 
 #include <boost/graph/fruchterman_reingold.hpp>
+#include <boost/graph/circle_layout.hpp>
 #include <boost/graph/random_layout.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
@@ -48,17 +49,6 @@ Topology::~Topology()
 }
 
 void Topology::applyMinCutTreeAlignment(DataList dataList) {
-    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS,
-        boost::property<boost::vertex_name_t, std::string> >
-        Graph;
-    typedef boost::rectangle_topology<> topology_type;
-    typedef topology_type::point_type point_type;
-    typedef QVector<point_type> PositionVec;
-    typedef boost::iterator_property_map<PositionVec::iterator,
-        boost::property_map<Graph, boost::vertex_index_t>::type> 
-        PositionMap;
-    typedef boost::graph_traits<Graph>::vertex_descriptor Vertex;
-    typedef QPair<int, int> Edge;
 
     PositionVec position_vec(dataList.count());
 
@@ -119,3 +109,65 @@ void Topology::applyMinCutTreeAlignment(DataList dataList) {
         data->setY( positionMap[v][1] );
     }
 }
+
+void Topology::applyCircleAlignment(DataList dataList) {
+    PositionVec position_vec(dataList.count());
+
+    // set box inside which we may reposition
+    QList<qreal> xList;
+    QList<qreal> yList;
+    foreach(DataPtr data, dataList) {
+        xList << data->x();
+        yList << data->y();
+    }
+    qSort(xList.begin(), xList.end());
+    qSort(yList.begin(), yList.end());
+    
+    qreal radius = fmax(abs(xList.first()-xList.last()),abs(yList.first()-yList.last()))/2;
+
+    // create IDs for all nodes
+    QMap<Data*,int> node_mapping;
+    QMap<QPair<int,int>, PointerPtr > edge_mapping; // to map all edges back afterwards
+    int counter = 0;
+    foreach(DataPtr data, dataList) {
+        node_mapping[data.get()] = counter++;
+    }
+
+    DataStructurePtr ds = dataList.first()->dataStructure();
+    QVector<Edge> edges(ds->pointers().count());
+
+    counter = 0;
+    foreach( PointerPtr p, ds->pointers() ){
+        edges[counter++] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
+    }
+
+    // setup the graph
+    Graph graph(
+        edges.begin(),
+        edges.end(),
+        dataList.count()
+    );
+
+    PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, graph));
+    counter = 0;
+    foreach(DataPtr data, dataList) {
+        positionMap[counter][0] = data->x();
+        positionMap[counter][1] = data->y();
+        counter++;
+    }
+
+    // layout to circle
+    boost::circle_graph_layout< Graph, PositionMap >
+    (   graph,
+        positionMap,
+        radius
+    );
+
+    // put nodes at whiteboard as generated
+    foreach(DataPtr data, dataList) {
+        Vertex v = boost::vertex(node_mapping[data.get()], graph);
+        data->setX( positionMap[v][0] );
+        data->setY( positionMap[v][1] );
+    }
+}
+

@@ -21,6 +21,16 @@
 #ifndef TOPOLOGY_H
 #define TOPOLOGY_H
 
+#include <QtCore/QVector>
+#include <QtCore/QPair>
+
+#include <boost/graph/fruchterman_reingold.hpp>
+#include <boost/graph/random_layout.hpp>
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/topology.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/random/linear_congruential.hpp>
+
 #include "Rocs_Typedefs.h"
 
 /** \brief this class provides topology modifiers for data structures
@@ -31,11 +41,22 @@
  */
 class Topology
 {
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS,
+        boost::property<boost::vertex_name_t, std::string> >
+        Graph;
+    typedef boost::rectangle_topology<> topology_type;
+    typedef topology_type::point_type point_type;
+    typedef QVector<point_type> PositionVec;
+    typedef boost::iterator_property_map<PositionVec::iterator,
+        boost::property_map<Graph, boost::vertex_index_t>::type> 
+        PositionMap;
+    typedef boost::graph_traits<Graph>::vertex_descriptor Vertex;
+    typedef QPair<int, int> Edge;
 
 public:
     Topology();
     virtual ~Topology();
-    
+ 
     /** \brief applies Fruchterman-Reingold cut minimization
      * 
      * For the given data set this algorithm applies the Boost implementation
@@ -47,6 +68,16 @@ public:
      * \return void
      */
     void applyMinCutTreeAlignment(DataList dataList);
+
+    /** \brief applies Circle topology to data set
+     * 
+     * For the given data set this algorithm applies the Boost implementation
+     * to create a circle layout.
+     * \param dataList is the list of data
+     * \return void
+     */
+    void applyCircleAlignment(DataList dataList);
+
 };
 
 #endif // TOPOLOGY_H
