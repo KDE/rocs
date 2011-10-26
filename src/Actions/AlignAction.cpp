@@ -25,6 +25,7 @@
 #include "generics.h"
 #include "DataStructure.h"
 #include "Pointer.h"
+#include "DataItem.h"
 #include "Core/Modifiers/Topology.h"
 
 #include <KDebug>
@@ -41,7 +42,7 @@
 namespace boost {
 void throw_exception( std::exception const & ) {} } // do noop on exception
 
-AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, GraphScene *scene, QWidget *parent)
+AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, GraphScene *scene, QWidget *parent)
         : KAction(KIcon(), tooltip, parent) 
 {
     m_orientation = o;
@@ -75,85 +76,89 @@ AlignAction::AlignAction(const QString& tooltip,AlignAction::Orientation o, Grap
     }
 }
 
+void AlignAction::setDataStructure(DataStructurePtr dataStructure) {
+    _dataStructure = dataStructure; 
+}
+
+void AlignAction::unsetDataStructure(DataStructurePtr dataStructure) {
+    _dataStructure.reset();
+}
+
+
 void AlignAction::align() {
-    QList<DataItem*> l;
-    QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
-    foreach(QGraphicsItem *i, itemList) {
-        if ( DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i) ) {
-            l.append( dataItem );
+    DataList dataList;
+    if (!_dataStructure) {
+        QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
+        foreach(QGraphicsItem *i, itemList) {
+            if ( DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i) ) {
+                dataList.append( dataItem->data() );
+            }
         }
+    } else {
+        dataList = _dataStructure->dataList();
     }
 
-    if (l.size() < 1) return;
+    if (dataList.size() < 1) return;
     _graphScene->setHideEdges(true);
     switch (m_orientation) {
     case Left :
     case VCenter :
-        qSort(l.begin(), l.end(),  leftLessThan);
-        alignX(l);
+        qSort(dataList.begin(), dataList.end(),  leftLessThan);
+        alignX(dataList);
         break;
     case Bottom :
     case HCenter :
-        qSort(l.begin(), l.end(), bottomLessThan);
-        alignY(l);
+        qSort(dataList.begin(), dataList.end(), bottomLessThan);
+        alignY(dataList);
         break;
     case Right :
-        qSort(l.begin(), l.end(), rightLessThan);
-        alignX(l);
+        qSort(dataList.begin(), dataList.end(), rightLessThan);
+        alignX(dataList);
         break;
     case Top :
-        qSort( l.begin(), l.end(), topLessThan);
-        alignY(l);
+        qSort( dataList.begin(), dataList.end(), topLessThan);
+        alignY(dataList);
         break;
     case Circle :
-        alignCircle(l);
+        alignCircle(dataList);
         break;
     case MinCutTree :
-        alignMinCutTree(l);
+        alignMinCutTree(dataList);
         break;
     }
 
     _graphScene->setHideEdges(false);
 }
 
-void AlignAction::alignY(QList<DataItem*>& dataItemList) {
-    qreal final = dataItemList[0]->data()->y();
+void AlignAction::alignY(DataList dataList) {
+    qreal final = dataList[0]->y();
 
     if (m_orientation == VCenter || m_orientation == HCenter) {
-        qreal otherSide = dataItemList[dataItemList.size()-1]->data()->y();
+        qreal otherSide = dataList[dataList.size()-1]->y();
         final = (final + otherSide) / 2;
     }
-    foreach(DataItem *i, dataItemList) {
-        i->data()->setY(final);
+    foreach(DataPtr data, dataList) {
+        data->setY(final);
     }
 }
 
-void AlignAction::alignX(QList<DataItem*>& dataItemList) {
-    qreal final = dataItemList[0]->data()->x();
+void AlignAction::alignX(DataList dataList) {
+    qreal final = dataList[0]->x();
     if (m_orientation == VCenter || m_orientation == HCenter) {
-        qreal otherSide = dataItemList[dataItemList.size()-1]->data()->x();
+        qreal otherSide = dataList[dataList.size()-1]->x();
         final = (final + otherSide) / 2;
     }
-    foreach(DataItem *i, dataItemList) {
-        i->data()->setX(final);
+    foreach(DataPtr data, dataList) {
+        data->setX(final);
     }
 }
 
-void AlignAction::alignCircle(QList< DataItem* >& dataItemList) {
-    DataList modificationList;
-    foreach(DataItem *i, dataItemList) {
-        modificationList.append(i->data());
-    }
+void AlignAction::alignCircle(DataList dataList) {
     Topology topology = Topology();
-    topology.applyCircleAlignment(modificationList);
+    topology.applyCircleAlignment(dataList);
 }
 
-void AlignAction::alignMinCutTree(QList< DataItem* >& dataItemList) {
-    DataList modificationList;
-    foreach(DataItem *i, dataItemList) {
-        modificationList.append(i->data());
-    }
+void AlignAction::alignMinCutTree(DataList dataList) {
     Topology topology = Topology();
-    topology.applyMinCutTreeAlignment(modificationList);
+    topology.applyMinCutTreeAlignment(dataList);
 }
-

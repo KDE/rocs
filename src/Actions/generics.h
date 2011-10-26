@@ -20,12 +20,14 @@
 #ifndef GENERICS_H
 #define GENERICS_H
 
-#include "../GraphicsItem/DataItem.h"
+#include "Data.h"
+#include "Rocs_Typedefs.h"
+
 /*! for the AlignNodes class, checks if a node is more in the left than the other.
 \p n1 first node
 \p n2 second node
 */
-bool leftLessThan(DataItem *n1, DataItem *n2) {
+bool leftLessThan(DataPtr n1, DataPtr n2) {
     return n1->x() < n2->x();
 }
 
@@ -33,7 +35,7 @@ bool leftLessThan(DataItem *n1, DataItem *n2) {
 \p n1 first node
 \p n2 second node
 */
-bool rightLessThan(DataItem *n1, DataItem *n2) {
+bool rightLessThan(DataPtr n1, DataPtr n2) {
     return n1->x() > n2->x();
 }
 
@@ -41,7 +43,7 @@ bool rightLessThan(DataItem *n1, DataItem *n2) {
 \p n1 first node
 \p n2 second node
 */
-bool topLessThan(DataItem *n1, DataItem *n2) {
+bool topLessThan(DataPtr n1, DataPtr n2) {
     return n1->y() < n2->y();
 }
 
@@ -49,7 +51,7 @@ bool topLessThan(DataItem *n1, DataItem *n2) {
 \p n1 first node
 \p n2 second node
 */
-bool bottomLessThan(DataItem *n1, DataItem *n2) {
+bool bottomLessThan(DataPtr n1, DataPtr n2) {
     return n1->y() > n2->y();
 }
 

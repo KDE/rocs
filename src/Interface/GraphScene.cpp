@@ -316,7 +316,6 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     // refactor this for SC 4.9
     QAction* selectedItem = menu.exec(event->screenPos());
     if (selectedItem == addAction) {
-        qDebug() << "Scene Add Action";
         addAction->executePress(event->scenePos());
     }
     if (selectedItem == deleteItemAction) {
