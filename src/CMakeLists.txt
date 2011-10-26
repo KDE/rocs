@@ -81,12 +81,14 @@ install( FILES ${rocslib_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COM
 
 set ( rocs_actions_SRCS
   Actions/AbstractAction.cpp
-  Actions/AddConnectionAction.cpp
+  Actions/AddConnectionHandAction.cpp
   Actions/AddDataAction.cpp
   Actions/AlignAction.cpp
   Actions/DeleteAction.cpp
-  Actions/SelectMoveAction.cpp
   Actions/ZoomAction.cpp
+  Actions/AddDataHandAction.cpp
+  Actions/DeleteHandAction.cpp
+  Actions/SelectMoveHandAction.cpp
 )
 
 set( rocs_interface_SRCS

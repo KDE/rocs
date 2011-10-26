@@ -65,12 +65,12 @@
 
 // Action Related Includes
 #include "AbstractAction.h"
-#include "AddDataAction.h"
-#include "AddConnectionAction.h"
-#include "ZoomAction.h"
-#include "SelectMoveAction.h"
-#include "DeleteAction.h"
+#include "AddDataHandAction.h"
+#include "AddConnectionHandAction.h"
+#include "SelectMoveHandAction.h"
+#include "DeleteHandAction.h"
 #include "AlignAction.h"
+#include "ZoomAction.h"
 
 #include <KNS3/DownloadDialog>
 #include <knewstuff3/uploaddialog.h>
@@ -289,10 +289,10 @@ void MainWindow::setupActions()
 
     GraphScene *gc = _graphVisualEditor->scene();
 
-    _selectMoveAction = new SelectMoveAction (gc, this);
-    AddDataAction* addDataAction = new AddDataAction(gc, this );
-    AddConnectionAction* addConnectionAction = new AddConnectionAction(gc, this);
-    DeleteAction* deleteAction = new DeleteAction(gc, this);
+    _selectMoveAction = new SelectMoveHandAction (gc, this);
+    AddDataHandAction* addDataAction = new AddDataHandAction(gc, this );
+    AddConnectionHandAction* addConnectionAction = new AddConnectionHandAction(gc, this);
+    DeleteHandAction* deleteAction = new DeleteHandAction(gc, this);
     ZoomAction* zoomAction = new ZoomAction(gc, this);
 
     connect(_selectMoveAction, SIGNAL(triggered()), _selectMoveAction, SLOT( sendExecuteBit() ));

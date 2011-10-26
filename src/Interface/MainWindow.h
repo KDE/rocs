@@ -36,7 +36,7 @@ class KTextBrowser;
 class QSplitter;
 class GraphScene;
 class KAction;
-class SelectMoveAction;
+class SelectMoveHandAction;
 class TabWidget;
 class CodeEditor;
 class QScriptEngine;
@@ -145,7 +145,7 @@ private: // Variables.
     QComboBox *_selectListing;
 
     //! all the actions that I need to reference later.
-    SelectMoveAction *_selectMoveAction;
+    SelectMoveHandAction *_selectMoveAction;
 
     QScriptEngineDebugger *_scriptDbg;
 };

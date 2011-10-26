@@ -37,7 +37,6 @@
 #include "AddDataAction.h"
 #include "DeleteAction.h"
 #include "ZoomAction.h"
-#include "SelectMoveAction.h"
 
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
@@ -292,7 +291,6 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     AddDataAction *addAction = new AddDataAction(this);
     DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
     QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
-    SelectMoveAction *selectAction = new SelectMoveAction(this);
     menuSelected->addMenu(menuAlign);
     menuSelected->addAction(deleteAction);
     menuSelected->addAction(propertyAction);
@@ -309,7 +307,6 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
         menu.addAction(addAction);
         menu.addMenu(menuZoom);
     }
-    menu.addAction(selectAction);
 
     QAction* selectedItem = menu.exec(event->screenPos());
     if (selectedItem == addAction) {

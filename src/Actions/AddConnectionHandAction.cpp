@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "AddConnectionAction.h"
+#include "AddConnectionHandAction.h"
 #include "GraphScene.h"
 #include "DataStructure.h"
 #include "Data.h"
@@ -30,7 +30,7 @@
 #include <DocumentManager.h>
 #include <Document.h>
 
-AddConnectionAction::AddConnectionAction(GraphScene *scene, QObject *parent)
+AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Add Edge" ));
     setToolTip ( i18n ( "Creates a new edge between 2 nodes" ) );
@@ -43,11 +43,11 @@ AddConnectionAction::AddConnectionAction(GraphScene *scene, QObject *parent)
     _name = "add-edge";
 }
 
-AddConnectionAction::~AddConnectionAction() {
+AddConnectionHandAction::~AddConnectionHandAction() {
     kDebug() << "Destroyed";
 }
 
-bool AddConnectionAction::executePress(QPointF pos) {
+bool AddConnectionHandAction::executePress(QPointF pos) {
     if (_working){
         return false;
     }
@@ -66,7 +66,7 @@ bool AddConnectionAction::executePress(QPointF pos) {
     return false;
 }
 
-bool AddConnectionAction::executeMove(QPointF pos) {
+bool AddConnectionHandAction::executeMove(QPointF pos) {
     if (   !DocumentManager::self()->activeDocument()->activeDataStructure() 
         || !_from){
         return false;
@@ -81,7 +81,7 @@ bool AddConnectionAction::executeMove(QPointF pos) {
     return true;
 }
 
-bool AddConnectionAction::executeRelease(QPointF pos) {
+bool AddConnectionHandAction::executeRelease(QPointF pos) {
     if ( !_working 
      ||  !DocumentManager::self()->activeDocument()->activeDataStructure() ){
         return false;

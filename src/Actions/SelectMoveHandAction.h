@@ -18,8 +18,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SELECTMOVEACTION_H
-#define SELECTMOVEACTION_H
+#ifndef SELECTMOVEHANDACTION_H
+#define SELECTMOVEHANDACTION_H
 
 #include "AbstractAction.h"
 #include <boost/shared_ptr.hpp>
@@ -38,7 +38,7 @@ class Data;
   it will move the selected node around the screen.
 */
 
-class SelectMoveAction : public AbstractAction {
+class SelectMoveHandAction : public AbstractAction {
     Q_OBJECT
 public:
     /*!
@@ -46,12 +46,12 @@ public:
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
 
-    explicit SelectMoveAction(GraphScene *scene, QObject *parent = 0);
+    explicit SelectMoveHandAction(GraphScene *scene, QObject *parent = 0);
 
     /*!
       Default Destructor
     */
-    ~SelectMoveAction();
+    ~SelectMoveHandAction();
 public slots:
     /*!
       will be executed when the mouse press a button.

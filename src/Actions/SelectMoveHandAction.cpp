@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "SelectMoveAction.h"
+#include "SelectMoveHandAction.h"
 #include "GraphScene.h"
 #include "DataStructure.h"
 #include "DocumentManager.h"
@@ -32,7 +32,7 @@
 #include <KDebug>
 //#include "settings.h"
 
-SelectMoveAction::SelectMoveAction(GraphScene *scene, QObject *parent)
+SelectMoveHandAction::SelectMoveHandAction(GraphScene *scene, QObject *parent)
         : AbstractAction(scene, parent) {
     setText(i18n ( "Move" ));
     setToolTip ( i18n ( "Select and move items." ) );
@@ -43,11 +43,11 @@ SelectMoveAction::SelectMoveAction(GraphScene *scene, QObject *parent)
     connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeArrowKeyMove(QKeyEvent*)));
 }
 
-SelectMoveAction::~SelectMoveAction() {
+SelectMoveHandAction::~SelectMoveHandAction() {
     kDebug() << "Destroyed";
 }
 
-bool SelectMoveAction::executePress(QPointF pos) {
+bool SelectMoveHandAction::executePress(QPointF pos) {
     if ( !DocumentManager::self()->activeDocument()->activeDataStructure()) {
         return false;
     }
@@ -82,7 +82,7 @@ bool SelectMoveAction::executePress(QPointF pos) {
     return true;
 }
 
-bool SelectMoveAction::executeMove(QPointF pos) {
+bool SelectMoveHandAction::executeMove(QPointF pos) {
     if ( ! _movableNode ) {
         return false;
     }
@@ -114,7 +114,7 @@ bool SelectMoveAction::executeMove(QPointF pos) {
     return true;
 }
 
-bool SelectMoveAction::executeRelease(QPointF pos) {
+bool SelectMoveHandAction::executeRelease(QPointF pos) {
     _graphScene->views().at(0)->setDragMode(QGraphicsView::NoDrag); 
 
     if ( !_movableNode ) {
@@ -138,7 +138,7 @@ bool SelectMoveAction::executeRelease(QPointF pos) {
     return true;
 }
 
-bool SelectMoveAction::executeArrowKeyMove(QKeyEvent* keyEvent) {
+bool SelectMoveHandAction::executeArrowKeyMove(QKeyEvent* keyEvent) {
 
     // consider key sequences
     if (keyEvent->matches(QKeySequence::SelectAll)) {

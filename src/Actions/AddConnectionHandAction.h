@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDCONNECTIONACTION_H
-#define ADDCONNECTIONACTION_H
+#ifndef ADDCONNECTIONHANDACTION_H
+#define ADDCONNECTIONHANDACTION_H
 
 #include "AbstractAction.h"
 #include <QObject>
@@ -33,7 +33,7 @@ class DataStructure;
   it will place a new node on the QGraphicsView that holds all the items.
 */
 
-class AddConnectionAction : public AbstractAction {
+class AddConnectionHandAction : public AbstractAction {
     Q_OBJECT
 public:
     /*!
@@ -41,12 +41,12 @@ public:
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
 
-    explicit AddConnectionAction(GraphScene *scene, QObject *parent = 0);
+    explicit AddConnectionHandAction(GraphScene *scene, QObject *parent = 0);
     void setActiveGraph(DataStructure* graph);
     /*!
       Default Destructor
     */
-    ~AddConnectionAction();
+    ~AddConnectionHandAction();
 public slots:
     /*!
       will be executed when the mouse press a button.
@@ -85,4 +85,4 @@ private:
 
 };
 
-#endif // ADDCONNECTIONACTION_H
+#endif // ADDCONNECTIONHANDACTION_H
