@@ -42,12 +42,16 @@
 namespace boost {
 void throw_exception( std::exception const & ) {} } // do noop on exception
 
-AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, GraphScene *scene, QWidget *parent)
+AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, GraphScene *scene, QWidget *parent, bool addConnect)
         : KAction(KIcon(), tooltip, parent) 
 {
     m_orientation = o;
     _graphScene = scene;
-    connect(this, SIGNAL(triggered()), this, SLOT(align()));
+
+    if (addConnect) {
+        connect(this, SIGNAL(triggered()), this, SLOT(align()));
+    }
+    
     switch (o) {
     case Left :
         setIcon(KIcon("rocsalignleft"));
@@ -80,7 +84,7 @@ void AlignAction::setDataStructure(DataStructurePtr dataStructure) {
     _dataStructure = dataStructure; 
 }
 
-void AlignAction::unsetDataStructure(DataStructurePtr dataStructure) {
+void AlignAction::unsetDataStructure() {
     _dataStructure.reset();
 }
 

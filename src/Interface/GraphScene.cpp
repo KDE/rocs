@@ -278,26 +278,42 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     menuZoom->addAction( zoomResetAction );
         
     // alignment menu
-    QMenu *menuAlign = new QMenu( i18n("Align") );
-    menuAlign->addAction ( new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0 ) );
-    menuAlign->addAction ( new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this,0 ) );
-    menuAlign->addAction ( new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this,0 ) );
-    menuAlign->addAction ( new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0 ) );
-    menuAlign->addAction ( new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0 ) );
-    menuAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
-    menuAlign->addAction ( new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0 ) );
+    QMenu *menuDataStructureAlign = new QMenu( i18n("Align") );
+    QAction *alignDataStructureBottom = new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0, false );
+    QAction *alignDataStructureCenter = new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this,0, false );
+    QAction *alignDataStructureTop    = new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this,0, false );
+    QAction *alignDataStructureLeft   = new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0, false );
+    QAction *alignDataStructureRight  = new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0, false );
+    QAction *alignDataStructureCircle = new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0, false );
+    QAction *alignDataStructureTree   = new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0, false );
+    menuDataStructureAlign->addAction ( alignDataStructureBottom );
+    menuDataStructureAlign->addAction ( alignDataStructureCenter );
+    menuDataStructureAlign->addAction ( alignDataStructureTop );
+    menuDataStructureAlign->addAction ( alignDataStructureLeft );
+    menuDataStructureAlign->addAction ( alignDataStructureRight );
+    menuDataStructureAlign->addAction ( alignDataStructureCircle );
+    menuDataStructureAlign->addAction ( alignDataStructureTree );
 
+    QMenu *menuSelectedAlign = new QMenu( i18n("Align") );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0 ) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this,0 ) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this,0 ) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0 ) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0 ) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0 ) );
+
+    
     // puzzling the menu together
     AddDataAction *addAction = new AddDataAction(this);
     DeleteAction *deleteDataStructureAction = new DeleteAction(this, 0);
     DeleteAction *deleteSelectedAction = new DeleteAction(this, 0);
     DeleteAction *deleteItemAction = new DeleteAction(this, 0);
     QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
-    menuSelected->addMenu(menuAlign);
+    menuSelected->addMenu(menuSelectedAlign);
     menuSelected->addAction(deleteSelectedAction);
-    menuDataStructure->addMenu(menuAlign);
+    menuDataStructure->addMenu(menuDataStructureAlign);
     menuDataStructure->addAction(deleteDataStructureAction);
-    menuDataStructure->addAction(propertyAction);
     
     // activate/deactivate context depending on where the user click
     if (selectedItems().count()==0) {
@@ -338,6 +354,23 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     if (selectedItem == zoomResetAction) {
         zoomAction->zoomReset();
     }
+    if ( selectedItem == alignDataStructureBottom ||
+        selectedItem == alignDataStructureTop ||
+        selectedItem == alignDataStructureCenter ||
+        selectedItem == alignDataStructureLeft ||
+        selectedItem == alignDataStructureRight ||
+        selectedItem == alignDataStructureCircle ||
+        selectedItem == alignDataStructureTree )
+    {
+        AlignAction* action = static_cast<AlignAction*>(selectedItem);
+        QGraphicsItem *i = itemAt(event->scenePos());
+        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
+            action->setDataStructure(nItem->data()->dataStructure());
+        }
+        action->align();
+        action->unsetDataStructure();
+    }
+    
     if (selectedItem == propertyAction) {
         QGraphicsItem *i = itemAt(event->scenePos());
         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){

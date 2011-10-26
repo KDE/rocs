@@ -37,13 +37,14 @@ public:
       \param tooltip some helper text.
       \param o the orientation that this button will work on.
       \param parent the parent widget
+      \param if true (default) trigger-signal is connected to align slot, else if false this need to be set by hand
     */
-    AlignAction(const QString& tooltip,AlignAction::Orientation o, GraphScene *scene, QWidget *parent);
+    AlignAction(const QString& tooltip,AlignAction::Orientation o, GraphScene *scene, QWidget *parent, bool addConnect=true);
     
     void setDataStructure(DataStructurePtr dataStructure);
-    void unsetDataStructure(DataStructurePtr dataStructure);
+    void unsetDataStructure();
     
-private slots:
+public slots:
     /** Run the previously specified align algorithm for the selected set of data. items.
      */
     void align();
