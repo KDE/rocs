@@ -37,6 +37,7 @@
 #include "AddDataAction.h"
 #include "DeleteAction.h"
 #include "ZoomAction.h"
+#include "SelectMoveAction.h"
 
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
@@ -255,26 +256,30 @@ void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
 
 void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     event->accept();
-
-    QMenu menu;
-
+    QMenu menu; // the context menu
+    QMenu *menuDataStructure = menu.addMenu( i18n("Data Structure") );
+    QMenu *menuSelected = menu.addMenu( i18n("Selected") );
+    
+    
+    // prepare some context information
+    bool contextAtItem = false;
+    QGraphicsItem *i = itemAt(event->scenePos());
+    if ((qgraphicsitem_cast<DataItem*>(i)) || (qgraphicsitem_cast<PointerItem*>(i))){
+        contextAtItem = true;
+    }
+    
+    // zoom menu
+    QMenu *menuZoom = new QMenu( i18n("Zoom") );
     ZoomAction *zoomAction = new ZoomAction(this, 0);
     QAction* zoomInAction = new QAction( i18n("In"), zoomAction);
     QAction *zoomOutAction = new QAction(i18n("Out"), zoomAction);
     QAction *zoomResetAction = new QAction(i18n("Reset"), zoomAction);
-    QMenu *menuZoom = menu.addMenu( i18n("Zoom") );
     menuZoom->addAction( zoomInAction );
     menuZoom->addAction( zoomOutAction );
     menuZoom->addAction( zoomResetAction );
-    
-    AddDataAction *addAction = new AddDataAction(this);
-    DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
-    QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
-    menu.addAction(addAction);
-    menu.addAction(deleteAction);
-    menu.addAction(propertyAction);
-    
-    QMenu *menuAlign = menu.addMenu( i18n("Align") );
+        
+    // alignment menu
+    QMenu *menuAlign = new QMenu( i18n("Align") );
     menuAlign->addAction ( new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0 ) );
     menuAlign->addAction ( new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this,0 ) );
     menuAlign->addAction ( new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this,0 ) );
@@ -283,14 +288,28 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     menuAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
     menuAlign->addAction ( new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0 ) );
 
-    QGraphicsItem *i = itemAt(event->scenePos());
-    if (!(qgraphicsitem_cast<DataItem*>(i))&& !(qgraphicsitem_cast<PointerItem*>(i))){
-        deleteAction->setDisabled(true);
-        propertyAction->setDisabled(true);
-        if (selectedItems().count()==0) {
-            menuAlign->setDisabled(true);
-        }
+    // puzzling the menu together
+    AddDataAction *addAction = new AddDataAction(this);
+    DeleteAction *deleteAction = new DeleteAction(this, 0); //FIXME remove hack
+    QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
+    SelectMoveAction *selectAction = new SelectMoveAction(this);
+    menuSelected->addMenu(menuAlign);
+    menuSelected->addAction(deleteAction);
+    menuSelected->addAction(propertyAction);
+    menuDataStructure->addMenu(menuAlign);
+    menuDataStructure->addAction(deleteAction);
+    menuDataStructure->addAction(propertyAction);
+    
+    // activate/deactivate context depending on where the user click
+    if (selectedItems().count()==0) {
+        menuSelected->setDisabled(true);
     }
+    if (!contextAtItem) {
+        menuDataStructure->setDisabled(true);
+        menu.addAction(addAction);
+        menu.addMenu(menuZoom);
+    }
+    menu.addAction(selectAction);
 
     QAction* selectedItem = menu.exec(event->screenPos());
     if (selectedItem == addAction) {
