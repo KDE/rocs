@@ -295,7 +295,6 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
     menuSelected->addMenu(menuAlign);
     menuSelected->addAction(deleteSelectedAction);
-    menuSelected->addAction(propertyAction);
     menuDataStructure->addMenu(menuAlign);
     menuDataStructure->addAction(deleteDataStructureAction);
     menuDataStructure->addAction(propertyAction);
@@ -309,6 +308,7 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
         menu.addAction(addAction);
         menu.addMenu(menuZoom);
     } else {
+        menu.addAction(propertyAction);
         menu.addAction(deleteItemAction);
     }
 
