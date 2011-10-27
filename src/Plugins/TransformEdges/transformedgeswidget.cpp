@@ -118,7 +118,7 @@ void TransformEdgesWidget::makeComplete( DataStructurePtr graph )
     bool directed = graphDS->directed();
 
     foreach ( PointerPtr e, graph->pointers() ) {
-        graph->remove ( e );
+        e->remove();
     }
     
     int size_i = graph->dataList().size() - 1;
@@ -140,7 +140,7 @@ void TransformEdgesWidget::removeAllEdges( DataStructurePtr graph )
     if (graph)
     {
         foreach ( PointerPtr e, graph->pointers() ) {
-            graph->remove ( e );
+            e->remove();
         }
     }
 }
@@ -158,7 +158,7 @@ void TransformEdgesWidget::reverseAllEdges( DataStructurePtr graph )
     QList< QPair< DataPtr, DataPtr > > newPointers;
     foreach ( PointerPtr e, graphDS->pointers() ) {
         newPointers << QPair< DataPtr, DataPtr >(e->to(), e->from());
-        graph->remove ( e );
+        e->remove();
     }
     
     for(int i=0; i<newPointers.count(); i++) {
