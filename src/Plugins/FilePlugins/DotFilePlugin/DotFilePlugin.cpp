@@ -34,6 +34,7 @@
 #include <KGenericFactory>
 
 #include <QFile>
+#include <QPair>
 
 using namespace boost;
 
@@ -118,7 +119,7 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
     }
     
     // Apply Layout
-    // TODO move all general purpose layout funcitons to support library
+    // TODO move all general purpose layout functions to support library
     typedef boost::iterator_property_map<PositionVec::iterator, 
                                 boost::property_map<Graph, boost::vertex_index_t>::type>
         PositionMap;
@@ -165,9 +166,46 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
 
 
 bool DotFilePlugin::writeFile ( Document& graph, const QString& filename ) {
-    setError("This Functionality is not implemented, yet!");
-    // TODO
-    return false;
+    typedef boost::property < vertex_name_t, std::string, boost::property < vertex_color_t, qreal > > 
+        VertexProperty;
+    typedef boost::property < edge_weight_t, qreal > 
+        EdgeProperty;
+    typedef boost::property < graph_name_t, std::string > 
+        GraphProperty;
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::directedS, 
+            VertexProperty, EdgeProperty, GraphProperty > 
+        Graph;
+    typedef QPair<int, int> Edge;
+
+    DataList dataList = graph.activeDataStructure()->dataList();
+        
+    // create IDs for all nodes
+    QMap<Data*,int> node_mapping;
+    QMap<QPair<int,int>, PointerPtr > edge_mapping; // to map all edges back afterwards
+    int counter = 0;
+    foreach(DataPtr data, dataList) {
+        node_mapping[data.get()] = counter++;
+    }
+
+    DataStructurePtr ds = dataList.first()->dataStructure();
+    QVector<Edge> edges(ds->pointers().count());
+
+    counter = 0;
+    foreach( PointerPtr p, ds->pointers() ){
+        edges[counter++] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
+    }
+
+    // setup the graph
+    Graph serializeGraph( edges.begin(), edges.end(), dataList.count() );
+    
+    // write to file
+    std::ofstream fileStream;
+    QFile file(filename);
+    fileStream.open(file.fileName().toLocal8Bit());
+    boost::write_graphviz(fileStream, serializeGraph);
+
+    
+    return true;
 }
 
 
