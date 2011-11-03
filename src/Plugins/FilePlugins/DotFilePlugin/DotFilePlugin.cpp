@@ -21,6 +21,8 @@
 
 #include "Document.h"
 #include "DataStructure.h"
+#include "Data.h"
+#include "Pointer.h"
 
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/topology.hpp>
@@ -81,8 +83,8 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
     property_map<Graph, vertex_name_t>::type name = get(vertex_name, importGraph);
     dp.property("node_id", name);
     
-    property_map<Graph, vertex_color_t>::type mass = get(vertex_color, importGraph);
-    dp.property("mass",mass);
+    property_map<Graph, vertex_color_t>::type color = get(vertex_color, importGraph);
+    dp.property("color",color);
 
     property_map<Graph, edge_weight_t>::type weight = get(edge_weight, importGraph);
     dp.property("weight",weight);
@@ -143,18 +145,19 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
     int index=0;
     boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
     for (boost::tie(vi, vi_end) = boost::vertices(importGraph); vi != vi_end; ++vi) {
-        // FIXME implement the property import
+        // TODO imported data values can be extended
         mapNodes[*vi] = datastructure->addData(
-                QString("%1").arg( index++ ),
+                QString::fromStdString(get(name, *vi) ),
                 QPointF(positionMap[*vi][0],positionMap[*vi][1])
             );
+        mapNodes[*vi]->setColor( get(color, *vi ) );
     }
 
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(importGraph); ei !=ei_end; ++ei) {
-        datastructure->addPointer ( mapNodes[boost::source(*ei, importGraph)],
+        PointerPtr newEdge = datastructure->addPointer ( mapNodes[boost::source(*ei, importGraph)],
                             mapNodes[boost::target(*ei, importGraph)]);
-            
+        newEdge->setValue( QString::number(get(weight, *ei)));
     }
     
     return graphDoc;

@@ -129,6 +129,11 @@ public  slots:
     DataPtr data(const QString& name = i18n("Untitled"));
 
     virtual void remove(DataPtr n);
+    
+    /**
+     * Unregister pointer from data structure. Do not use this for actual removal of pointer.
+     * To remove a pointer \see Pointer::remove().
+     */
     virtual void remove(PointerPtr e);
     virtual void remove(Group *g);
 
