@@ -89,6 +89,7 @@ set ( rocs_actions_SRCS
   Actions/ZoomAction.cpp
   Actions/AddDataHandAction.cpp
   Actions/DeleteHandAction.cpp
+  Actions/AssignValueAction.cpp
   Actions/SelectMoveHandAction.cpp
 )
 

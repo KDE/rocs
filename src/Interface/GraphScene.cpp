@@ -34,6 +34,7 @@
 
 #include "AbstractAction.h"
 #include "AlignAction.h"
+#include "AssignValueAction.h"
 #include "AddDataAction.h"
 #include "DeleteAction.h"
 #include "ZoomAction.h"
@@ -262,9 +263,11 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     
     // prepare some context information
     bool contextAtItem = false;
+    DataStructurePtr contextDataStructure;
     QGraphicsItem *i = itemAt(event->scenePos());
-    if ((qgraphicsitem_cast<DataItem*>(i)) || (qgraphicsitem_cast<PointerItem*>(i))){
+    if (DataItem *dataItem = (qgraphicsitem_cast<DataItem*>(i))){
         contextAtItem = true;
+        contextDataStructure = dataItem->data()->dataStructure();
     }
     
     // zoom menu
@@ -303,6 +306,11 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
     menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0 ) );
 
+    QMenu *menuDataStructureAssignValues = new QMenu( i18n("Assign Values") );
+    menuDataStructureAssignValues->addAction ( new AssignValueAction ( i18n("Enumerate"), this, AssignValueAction::Enumerate, contextDataStructure, 0));
+    
+    QMenu *menuSelectedAssignValues = new QMenu( i18n("Assign Values") );
+    menuSelectedAssignValues->addAction ( new AssignValueAction ( i18n("Enumerate"), this, AssignValueAction::Enumerate, 0));
     
     // puzzling the menu together
     AddDataAction *addAction = new AddDataAction(this);
@@ -311,8 +319,10 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     DeleteAction *deleteItemAction = new DeleteAction(this, 0);
     QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
     menuSelected->addMenu(menuSelectedAlign);
+    menuSelected->addMenu(menuSelectedAssignValues);
     menuSelected->addAction(deleteSelectedAction);
     menuDataStructure->addMenu(menuDataStructureAlign);
+    menuDataStructure->addMenu(menuDataStructureAssignValues);
     menuDataStructure->addAction(deleteDataStructureAction);
     
     // activate/deactivate context depending on where the user click
