@@ -21,9 +21,8 @@
 #ifndef ASSIGNVALUEACTION_H
 #define ASSIGNVALUEACTION_H
 
-#include "Data.h"
-
 #include <KAction>
+#include "Rocs_Typedefs.h"
 
 class GraphScene;
 
@@ -34,26 +33,33 @@ public:
 
     enum AssignMethod {Enumerate, RandomInteger, RandomReal};
 
-
-    /*! Creates a new assign value action. If a DataStructure is set all data values of this DataStructure are
-      updated according to the specified. Else the currently selected set of nodes is aligned.
-      \param actionName the name of the button
-      \param tooltip some helper text.
-      \param o the orientation that this button will work on.
-      \param parent the parent widget
-      \param if true (default) trigger-signal is connected to align slot, else if false this need to be set by hand
-    */
+    /** Creates a new assign value action that assigns values to selected data items.
+     * \param name of the action
+     * \param graphscene that contains the data items for the context menu
+     * \param method how values shall be assigned
+     * \param parent the parent widget
+     */
     AssignValueAction(const QString& name, GraphScene *scene, AssignMethod method, QWidget *parent);
-    
+
+    /** Creates a new assign value action. If a DataStructure is set all data values of this DataStructure are
+     * updated according to the specified. Else the currently selected set of nodes is aligned.
+     * \param name of the action
+     * \param graphscene that contains the data items for the context menu
+     * \param method how values shall be assigned
+     * \param ds data structure from which all data values shall be overwritten
+     * \param parent the parent widget
+     */
     AssignValueAction(const QString& name, GraphScene *scene, AssignMethod method, DataStructurePtr ds, QWidget *parent);
     
 public slots:
     void enumerateDataStructure();
     void enumerateSelected();
-
+    void assignRandomIntegersDataStructure();
+    void assignRandomIntegersSelected();
+    void assignRandomRealsDataStructure();
+    void assignRandomRealsSelected();
 
 private:
-
     GraphScene *_graphScene;
     DataStructurePtr _dataStructure;
 };

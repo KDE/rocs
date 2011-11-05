@@ -306,11 +306,15 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
     menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0 ) );
 
-    QMenu *menuDataStructureAssignValues = new QMenu( i18n("Assign Values") );
+    QMenu *menuDataStructureAssignValues = new QMenu( i18n("Values") );
     menuDataStructureAssignValues->addAction ( new AssignValueAction ( i18n("Enumerate"), this, AssignValueAction::Enumerate, contextDataStructure, 0));
+    menuDataStructureAssignValues->addAction ( new AssignValueAction ( i18n("Random Integers"), this, AssignValueAction::RandomInteger, contextDataStructure, 0));
+    menuDataStructureAssignValues->addAction ( new AssignValueAction ( i18n("Random Reals"), this, AssignValueAction::RandomReal, contextDataStructure, 0));
     
-    QMenu *menuSelectedAssignValues = new QMenu( i18n("Assign Values") );
+    QMenu *menuSelectedAssignValues = new QMenu( i18n("Values") );
     menuSelectedAssignValues->addAction ( new AssignValueAction ( i18n("Enumerate"), this, AssignValueAction::Enumerate, 0));
+    menuSelectedAssignValues->addAction ( new AssignValueAction ( i18n("Random Integers"), this, AssignValueAction::RandomInteger, 0));
+    menuSelectedAssignValues->addAction ( new AssignValueAction ( i18n("Random Reals"), this, AssignValueAction::RandomReal, 0));
     
     // puzzling the menu together
     AddDataAction *addAction = new AddDataAction(this);
