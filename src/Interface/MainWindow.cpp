@@ -71,6 +71,7 @@
 #include "DeleteHandAction.h"
 #include "AlignAction.h"
 #include "ZoomAction.h"
+#include "DeleteAction.h"
 
 #include <KNS3/DownloadDialog>
 #include <knewstuff3/uploaddialog.h>
@@ -321,7 +322,7 @@ void MainWindow::setupActions()
     _paletteActions->addAction ( "align-circle", new AlignAction ( i18n ( "Align on a circle" ),  AlignAction::Circle,  gc,_graphVisualEditor ) );
     _paletteActions->addAction ( "align-tree", new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, gc, _graphVisualEditor ) );
 
-
+    // Menu actions
     createAction("document-new",     i18n("New Graph"),         "new-graph",         SLOT(newGraph()),    this);
     createAction("document-open",    i18n("Open Graph"),        "open-graph",        SLOT(openGraph()),   this);
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        SLOT(saveGraph()),   this);
@@ -344,6 +345,9 @@ void MainWindow::setupActions()
         createAction("document-save", i18n("Export Graph"), "export-graph", SLOT(exportFile()), this);
     }
 
+    // EDIT actions
+    actionCollection()->addAction("delete-selected", new DeleteAction( i18n("Delete"), _graphVisualEditor->scene(), 0) );
+    
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
 }
 

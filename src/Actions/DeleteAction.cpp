@@ -27,67 +27,45 @@
 #include "GraphScene.h"
 #include "DataStructure.h"
 #include "Data.h"
-#include "Pointer.h"
 #include "DataItem.h"
-#include "PointerItem.h"
-
-DeleteAction::DeleteAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent) {
-    setText(i18n ( "Delete" ));
-    _name = "delete";
-    setCheckable(false);
-    _target = ITEM;
-
-    connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeKeyRelease(QKeyEvent*)));
-}
-
-void DeleteAction::setDeleteTarget(DeleteTarget target) {
-    _target = target;
-}
 
 
-bool DeleteAction::executePress(QPointF pos) {
-    QGraphicsItem * item = _graphScene->itemAt(pos);
-    if ( DataItem *n  = qgraphicsitem_cast<DataItem*>(item) ) {
-        switch(_target) {
-            case SELECTED: {
-                foreach (QGraphicsItem *selectedItem, _graphScene->selectedItems())
-                    if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(selectedItem)) {
-                        dItem->data()->remove();
-                    }
-                break;
-                }
-            case DATA_STRUCTURE: {
-                n->data()->dataStructure()->remove();
-                break;
-                }
-            case ITEM:
-            default:
-                n->data()->remove();
-        }
-        return true;
-    }
-    else if ( PointerItem *e = qgraphicsitem_cast<PointerItem*>(item) ) {
-        e->pointer()->remove();
-        return true;
-    }
-    return false;
-}
-
-bool DeleteAction::executeKeyRelease(QKeyEvent* keyEvent)
+DeleteAction::DeleteAction(const QString& name, GraphScene *scene, QWidget *parent)
+        : KAction(KIcon(), name, parent) 
 {
-    if (keyEvent->key() == Qt::Key_Delete) {
-        foreach (QGraphicsItem *item, _graphScene->selectedItems()){
-            if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
-                _graphScene->removeItem(item);
-                dItem->deleteLater();
-                dItem->data()->remove();
-            }
-            if (PointerItem *pItem = qgraphicsitem_cast<PointerItem*>(item)){
-                pItem->pointer()->remove();
-            }
-        }
-        return true;
-    }
-    return false;
+    _graphScene = scene;
+    connect (this, SIGNAL(triggered()), this, SLOT(executeDelete()));
 }
 
+DeleteAction::DeleteAction(const QString& name, GraphScene *scene, DataPtr data, QWidget *parent)
+        : KAction(KIcon(), name, parent) 
+{
+    _graphScene = scene;
+    _data = data;
+    connect (this, SIGNAL(triggered()), this, SLOT(executeDelete()));
+}
+
+DeleteAction::DeleteAction(const QString& name, GraphScene *scene, DataStructurePtr dataStructure, QWidget *parent)
+        : KAction(KIcon(), name, parent) 
+{
+    _graphScene = scene;
+    _dataStructure = dataStructure;
+    connect (this, SIGNAL(triggered()), this, SLOT(executeDelete()));
+}
+
+
+void DeleteAction::executeDelete() {
+    if (_data) {
+        _data->remove();
+        return;
+    }
+    if (_dataStructure) {
+        _dataStructure->remove();
+        return;
+    }
+    foreach (QGraphicsItem *selectedItem, _graphScene->selectedItems()) {
+        if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(selectedItem)) {
+            dItem->data()->remove();
+        }
+    }
+}

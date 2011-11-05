@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -20,39 +21,47 @@
 #ifndef DELETEACTION_H
 #define DELETEACTION_H
 
-#include "AbstractAction.h"
+#include <KAction>
+
+#include "Rocs_Typedefs.h"
+
+class GraphScene;
 
 /*! this class defines the delete button on the pallete. */
-class DeleteAction : public AbstractAction
+class DeleteAction : public KAction
 {
+    Q_OBJECT
 public:
-    typedef enum {
-        ITEM,
-        SELECTED,
-        DATA_STRUCTURE
-    } DeleteTarget;
+    /** Constructor for delete action that deletes all selected data items.
+     * \param name of this action
+     * \param scene the graph scene
+     * \param parent the mainwindow
+     */
+    DeleteAction(const QString& name, GraphScene *scene, QWidget *parent);
 
-    /*! default constructor
-    \p scene the graph scene
-    \p parent the mainwindow
-    */
-    DeleteAction(GraphScene* scene, QObject* parent);
+    /** Constructor for delete action that deletes specified data item.
+     * \param name of this action
+     * \param data item that shall be deleted
+     * \param scene the graph scene
+     * \param parent the mainwindow
+     */
+    DeleteAction(const QString& name, GraphScene *scene, DataPtr data, QWidget *parent);
 
-    /*! start the node deletion algorithm on the specified point.
-    \p pos the position of the click.
-    */
-    bool executePress(QPointF pos);
+    /** Constructor for delete action that deletes specified data structure.
+     * \param name of this action
+     * \param dataStructure that shall be deleted
+     * \param scene the graph scene
+     * \param parent the mainwindow
+     */
+    DeleteAction(const QString& name, GraphScene *scene, DataStructurePtr dataStructure, QWidget *parent);
 
-    void setDeleteTarget(DeleteTarget target);
-    
 public slots:
-    /*! when somebody press the delete key, the system will try to delete all selected nodes.
-    \p keyEvent the key to be processed.
-    */
-    bool executeKeyRelease(QKeyEvent* keyEvent);
+    void executeDelete();
 
 private:
-    DeleteTarget _target;
+    GraphScene *_graphScene;
+    DataPtr _data;
+    DataStructurePtr _dataStructure;
 };
 
 #endif // DELETEACTION_H

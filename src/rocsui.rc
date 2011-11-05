@@ -40,6 +40,18 @@
                 <Text>Conversions</Text>
                 <ActionList name="DS_plugins" />
             </Menu>
+            <Menu>
+                <text>Layout</text>
+                <Action name="align-htop"/>
+                <Action name="align-hcenter"/>
+                <Action name="align-hbottom"/>
+                <Action name="align-vleft"/>
+                <Action name="align-vcenter"/>
+                <Action name="align-vright" />
+                <Action name="align-circle" />
+                <Action name="align-tree" />
+            </Menu>
+            <Action name="delete-selected" />
         </Menu>
         <Menu name="tools">
             <Text> Tools </Text>
@@ -63,6 +75,8 @@
         <Action name="align-vleft"/>
         <Action name="align-vcenter"/>
         <Action name="align-vright" />
+        <Action name="align-circle" />
+        <Action name="align-tree" />
     </ToolBar>
 </gui>
 
