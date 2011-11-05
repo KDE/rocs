@@ -70,7 +70,9 @@ private: // Methods
     void finishLoadingUi();
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                       const QKeySequence & shortcut , const char* slot, QObject *parent);
-
+    void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
+                      const char* slot, QObject *parent);
+                      
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
 
@@ -91,6 +93,7 @@ private slots:
     void openGraph();
     void saveGraph();
     void saveGraphAs();
+    void saveAll();
     void loadDocument(const QString& name = QString());
 
     void importFile();

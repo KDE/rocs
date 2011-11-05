@@ -7,65 +7,62 @@
                          http://www.kde.org/standards/kxmlgui/1.0/kxmlgui.xsd" >
 
   <MenuBar>
-    <Menu name="file" >
-      <Menu name="graph">
-        <Text>Graph</Text>
-        <Action name="new-graph" />
-        <Action name="open-graph" />
-        <Action name="save-graph" />
-        <Action name="save-graph-as" />
-      </Menu>
-      <Menu name="Script">
-        <Text>Script</Text>
-        <Action name="new-script" />
-        <Action name="open-script" />
-        <Action name="save-script" />
-        <Action name="save-script-as" />
-      </Menu>
-      <Action name="download" />
-      <Action name="upload" />
-      <Action name="import" />
-      <Action name="export" />
-    </Menu>
-    <Menu name="Includes">
-        <Text>Includes</Text>
-        <Action name="possible_includes" />
-    </Menu>
-    <Menu name="tools">
-      <Text> Tools </Text>
-      <ActionList name="tools_plugins" />
-    </Menu>
+        <Menu name="file" >
+            <Menu name="new">
+                <Text>New</Text>
+                <Action name="new-graph" />
+                <Action name="new-script" />
+            </Menu>
+            <Action name="open-graph" />
+            <Action name="open-script" />
+            <Action name="save-all" />
+            <Separator/>
+            <Menu name="graph">
+                <Text>Graph</Text>
+                <Action name="save-graph" />
+                <Action name="save-graph-as" />
+                <Action name="import-graph" />
+                <Action name="export-graph" />
+            </Menu>
+            <Menu name="script">
+                <Text>Script</Text>
+                <Action name="save-script" />
+                <Action name="save-script-as" />
+            </Menu>
+            <Separator/>
+            <Action name="download" />
+            <Action name="upload" />
+            <Action name="possible_includes" />
+        </Menu>
+        <Menu name="edit">
+            <Text>Edit</Text>
+            <Menu name="conversions">
+                <Text>Conversions</Text>
+                <ActionList name="DS_plugins" />
+            </Menu>
+        </Menu>
+        <Menu name="tools">
+            <Text> Tools </Text>
+            <ActionList name="tools_plugins" />
+        </Menu>
+    </MenuBar>
 
-
-    <Menu name="Conversions">
-      <Text> Conversions </Text>
-      <ActionList name="DS_plugins" />
-    </Menu>
-
-<!--
-    <Menu name="Documents">
-      <Text> Documents </Text>
-      <ActionList name="Doc_List" />
-    </Menu>
--->
-  </MenuBar>
-
-  <ToolBar name="main" >
-    <text>Main Toolbar</text>
-      <Action name="selectmove" />
-      <Action name="add_node" />
-      <Action name="add_edge" />
-      <Action name="delete" />
-      <Action name="zoom" />
-  </ToolBar>
-  <ToolBar name="layout">
-      <text>Layout Toolbar</text>
-      <Action name="align-htop"/>
-      <Action name="align-hcenter"/>
-      <Action name="align-hbottom"/>
-      <Action name="align-vleft"/>
-      <Action name="align-vcenter"/>
-      <Action name="align-vright" />
-  </ToolBar>
+    <ToolBar name="main" >
+        <text>Main Toolbar</text>
+        <Action name="selectmove" />
+        <Action name="add_node" />
+        <Action name="add_edge" />
+        <Action name="delete" />
+        <Action name="zoom" />
+    </ToolBar>
+    <ToolBar name="layout">
+        <text>Layout Toolbar</text>
+        <Action name="align-htop"/>
+        <Action name="align-hcenter"/>
+        <Action name="align-hbottom"/>
+        <Action name="align-vleft"/>
+        <Action name="align-vcenter"/>
+        <Action name="align-vright" />
+    </ToolBar>
 </gui>
 

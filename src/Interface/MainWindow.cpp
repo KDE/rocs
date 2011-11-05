@@ -321,25 +321,27 @@ void MainWindow::setupActions()
     _paletteActions->addAction ( "align-circle", new AlignAction ( i18n ( "Align on a circle" ),  AlignAction::Circle,  gc,_graphVisualEditor ) );
     _paletteActions->addAction ( "align-tree", new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, gc, _graphVisualEditor ) );
 
-    createAction("document-new",     i18n("New Graph"),         "new-graph",         Qt::Key_N, SLOT(newGraph()),    this);
-    createAction("document-open",    i18n("Open Graph"),        "open-graph",        Qt::Key_0, SLOT(openGraph()),   this);
-    createAction("document-save",    i18n("Save Graph"),        "save-graph",        Qt::Key_S, SLOT(saveGraph()),   this);
-    createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     Qt::Key_W, SLOT(saveGraphAs()), this);
-    createAction("",                 i18n("Download Examples"), "download", Qt::Key_D, SLOT(downloadNewExamples()),  this);
-    createAction("",                 i18n("Upload script"),     "upload",   Qt::Key_U, SLOT(uploadScript()),  this);
 
-    createAction("document-save-as", i18n("Possible Includes"), "possible_includes", Qt::Key_P, SLOT(showPossibleIncludes()), this);
+    createAction("document-new",     i18n("New Graph"),         "new-graph",         SLOT(newGraph()),    this);
+    createAction("document-open",    i18n("Open Graph"),        "open-graph",        SLOT(openGraph()),   this);
+    createAction("document-save",    i18n("Save Graph"),        "save-graph",        SLOT(saveGraph()),   this);
+    createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     SLOT(saveGraphAs()), this);
+    createAction("",                 i18n("Download Examples"), "download",          SLOT(downloadNewExamples()),  this);
+    createAction("",                 i18n("Upload script"),     "upload",            SLOT(uploadScript()),  this);
+    createAction("document-save",    i18n("Save All"),          "save-all",        Qt::Key_S, SLOT(saveAll()),   this);
+    
+    createAction("document-save-as", i18n("Possible Includes"), "possible_includes", SLOT(showPossibleIncludes()), this);
 
-    createAction("document-new",     i18n("New Script"),        "new-script",        Qt::Key_N, SLOT(newScript()),    _codeEditor);
-    createAction("document-open",    i18n("Open Script"),       "open-script",       Qt::Key_O, SLOT(openScript()),   _codeEditor);
-    createAction("document-save",    i18n("Save Script"),       "save-script",       Qt::Key_S, SLOT(saveActiveScript()),   _codeEditor);
-    createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    Qt::Key_W, SLOT(saveActiveScriptAs()), _codeEditor);
+    createAction("document-new",     i18n("New Script"),        "new-script",        SLOT(newScript()),    _codeEditor);
+    createAction("document-open",    i18n("Open Script"),       "open-script",       SLOT(openScript()),   _codeEditor);
+    createAction("document-save",    i18n("Save Script"),       "save-script",       SLOT(saveActiveScript()),   _codeEditor);
+    createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
 
     // eventually create hooks for file plugins
     PluginManager::instance()->loadFilePlugins();
     if (PluginManager::instance()->filePlugins().count()>0) {
-        createAction("document-save-as", i18n("Import Graph"), "import", Qt::Key_I, SLOT(importFile()), this);
-        createAction("document-save-as", i18n("Export Graph"), "export", Qt::Key_E, SLOT(exportFile()), this);
+        createAction("document-open", i18n("Import Graph"), "import-graph", SLOT(importFile()), this);
+        createAction("document-save", i18n("Export Graph"), "export-graph", SLOT(exportFile()), this);
     }
 
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
@@ -354,6 +356,16 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
     actionCollection()->addAction ( actionName, action );
     connect ( action, SIGNAL ( triggered ( bool ) ), parent, slot );
 }
+
+void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
+                              const char* slot, QObject *parent)
+{
+    KAction* action = new KAction ( KIcon ( iconName ), actionTitle, parent );
+    action->setShortcutContext ( Qt::WidgetShortcut );
+    actionCollection()->addAction ( actionName, action );
+    connect ( action, SIGNAL ( triggered ( bool ) ), parent, slot );
+}
+
 
 void MainWindow::showSettings()
 {
@@ -532,6 +544,12 @@ void MainWindow::saveGraphAs(){
 
     d->saveAsInternalFormat ( KFileDialog::getSaveFileName() );
 }
+
+void MainWindow::saveAll() {
+    saveGraph();
+    _codeEditor->saveAllScripts();
+}
+
 
 int MainWindow::saveIfChanged(){
     if ( DocumentManager::self()->activeDocument()->isModified() && !_codeEditor->isModified() ){
