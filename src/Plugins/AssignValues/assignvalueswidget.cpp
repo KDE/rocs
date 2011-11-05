@@ -19,6 +19,14 @@
 #include "assignvalueswidget.h"
 #include "ui_assignvalueswidget.h"
 
+
+#include "Document.h"
+#include "DataStructure.h"
+#include "DocumentManager.h"
+#include "Pointer.h"
+#include "Data.h"
+#include "Modifiers/ValueModifier.h"
+
 #include <limits.h>
 #include <KLocale>
 #include <KDialog>
@@ -33,20 +41,11 @@
 #include <QtCore/QMap>
 #include <QtCore/QPair>
 
-#include <Document.h>
-#include <DataStructure.h>
-#include <DocumentManager.h>
-#include "../DataStructure/Graph/GraphStructure.h"
-#include <Pointer.h>
-#include <Data.h>
-
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int.hpp>
 #include <boost/random/uniform_real.hpp>
 #include <boost/random/variate_generator.hpp>
 
-
-using namespace Rocs;
 
 class QPushButton;
 
@@ -102,14 +101,20 @@ void AssignValuesWidget::assignValues()
         return;
         
     bool overrideValues = ui->checkBoxOverwriteValues->isChecked();
-        
+    ValueModifier modifier;
+   
+   
     switch((AssignMethod) ui->comboBoxMethod->currentIndex()) 
     {
         case ID: {
             int start = ui->spinBoxIDStartValue->value();
 
-            if (ui->checkBoxAssignNodes->isChecked())  assignIDsToNodes(ds, start, overrideValues);
-            if (ui->checkBoxAssignEdges->isChecked())  assignIDsToEdges(ds, start, overrideValues);
+            if (ui->checkBoxAssignNodes->isChecked()) {
+                modifier.enumerate(ds->dataList(), start, overrideValues);
+            }
+            if (ui->checkBoxAssignEdges->isChecked()) {
+                modifier.enumerate(ds->pointers(), start, overrideValues);
+            }
             break;
         }
         case UNIFORM_INTEGER: {
@@ -117,8 +122,12 @@ void AssignValuesWidget::assignValues()
             int lowerLimit = ui->spinBoxIntegerLowerLimit->value();
             int upperLimit = ui->spinBoxIntegerUpperLimit->value();
 
-            if (ui->checkBoxAssignNodes->isChecked())  assignIntegersToNodes(ds, lowerLimit, upperLimit, seed, overrideValues);
-            if (ui->checkBoxAssignEdges->isChecked())  assignIntegersToEdges(ds, lowerLimit, upperLimit, seed, overrideValues);
+            if (ui->checkBoxAssignNodes->isChecked()) {
+                modifier.assignRandomIntegers(ds->dataList(), lowerLimit, upperLimit, seed, overrideValues);
+            }
+            if (ui->checkBoxAssignEdges->isChecked()) {
+                modifier.assignRandomIntegers(ds->pointers(), lowerLimit, upperLimit, seed, overrideValues);
+            }
             break;
         }
         case UNIFORM_FLOAT: {
@@ -126,126 +135,17 @@ void AssignValuesWidget::assignValues()
             qreal lowerLimit = ui->spinBoxFloatLowerLimit->value();
             qreal upperLimit = ui->spinBoxFloatUpperLimit->value();
 
-            if (ui->checkBoxAssignNodes->isChecked())  assignFloatsToNodes(ds, lowerLimit, upperLimit, seed, overrideValues);
-            if (ui->checkBoxAssignEdges->isChecked())  assignFloatsToEdges(ds, lowerLimit, upperLimit, seed, overrideValues);
+            if (ui->checkBoxAssignNodes->isChecked()) {
+                modifier.assignRandomReals(ds->dataList(), lowerLimit, upperLimit, seed, overrideValues);
+            }
+            if (ui->checkBoxAssignEdges->isChecked()) {
+                modifier.assignRandomReals(ds->pointers(), lowerLimit, upperLimit, seed, overrideValues);
+            }
             break;
         }
     }
 
     close();
 }
-
-
-void AssignValuesWidget::assignIDsToNodes(DataStructurePtr ds, int start, bool overrideValues)
-{
-    QList< DataPtr > vertices = ds->dataList();
-
-    for (int i=0; i<vertices.size(); i++)
-    {
-        if (!overrideValues && !vertices[i]->value().isNull())
-            return;
-        vertices[i]->setValue(QString::number(start++));
-    }
-}
-
-
-void AssignValuesWidget::assignIDsToEdges(DataStructurePtr ds, int start, bool overrideValues)
-{
-    QList< PointerPtr > edges = ds->pointers();
-    
-    for (int i=0; i<edges.size(); i++) {
-        if (!overrideValues && !edges[i]->value().trimmed().isEmpty())
-            return;
-        edges[i]->setValue(QString::number(start++));
-    }
-}
-
-
-void AssignValuesWidget::assignIntegersToNodes(DataStructurePtr ds, int lowerLimit, int upperLimit, int seed, bool overrideValues)
-{
-    if (lowerLimit > upperLimit)
-        return;
-
-    boost::mt19937 gen;
-    gen.seed (static_cast<unsigned int>(seed));
-    
-    boost::uniform_int<> distribution(lowerLimit, upperLimit);
-    boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
-
-    QList< DataPtr > vertices = ds->dataList();
-
-    for (int i=0; i<vertices.size(); i++)
-    {
-        if (!overrideValues && !vertices[i]->value().isNull())
-            return;
-        vertices[i]->setValue(QString::number( die() ));
-    }
-}
-
-
-void AssignValuesWidget::assignIntegersToEdges(DataStructurePtr ds, int lowerLimit, int upperLimit, int seed, bool overrideValues)
-{
-    if (lowerLimit > upperLimit)
-        return;
-
-    boost::mt19937 gen;
-    gen.seed (static_cast<unsigned int>(seed));
-    
-    boost::uniform_int<> distribution(lowerLimit, upperLimit);
-    boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
-
-    QList< PointerPtr > edges = ds->pointers();
-    
-    for (int i=0; i<edges.size(); i++) {
-        if (!overrideValues && !edges[i]->value().trimmed().isEmpty())
-            return;
-        edges[i]->setValue(QString::number( die() ));
-    }
-}
-
-
-void AssignValuesWidget::assignFloatsToNodes(DataStructurePtr ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
-{
-    if (lowerLimit > upperLimit)
-        return;
-
-    boost::mt19937 gen;
-    gen.seed (static_cast<unsigned int>(seed));
-    
-    boost::uniform_real<> distribution(lowerLimit, upperLimit);
-    boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
-    
-    QList< DataPtr > vertices = ds->dataList();
-
-    for (int i=0; i<vertices.size(); i++)
-    {
-        if (!overrideValues && !vertices[i]->value().isNull())
-            return;
-        vertices[i]->setValue(QString::number( die() ));
-    }
-}
-
-
-void AssignValuesWidget::assignFloatsToEdges(DataStructurePtr ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
-{
-    if (lowerLimit > upperLimit)
-        return;
-
-    boost::mt19937 gen;
-    gen.seed (static_cast<unsigned int>(seed));
-    
-    boost::uniform_real<> distribution(lowerLimit, upperLimit);
-    boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
-    
-    QList< PointerPtr > edges = ds->pointers();
-    
-    for (int i=0; i<edges.size(); i++)
-    {
-        if (!overrideValues && !edges[i]->value().trimmed().isEmpty())
-            return;
-        edges[i]->setValue(QString::number( die() ));
-    }
-}
-
 
 #include "assignvalueswidget.moc"

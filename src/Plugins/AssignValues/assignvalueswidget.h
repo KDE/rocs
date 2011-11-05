@@ -46,96 +46,26 @@ class AssignValuesWidget :
         UNIFORM_FLOAT
     };
 
-    public:
-        AssignValuesWidget(Document* graphDoc, QWidget *parent=0);
-        ~AssignValuesWidget();
+public:
+    AssignValuesWidget(Document* graphDoc, QWidget *parent=0);
+    ~AssignValuesWidget();
 
-        /**
-         * Add data structures to QComboBox of UI starting at position 0. Take care that
-         * the data structure IDs must be given in increasing ID order without gaps.
-         * Only data structures of documents of data structure type "Graph" are used.
-         *
-         * \param   QStringList dsNames names of data structures
-         * \return  void
-         */
-        void addDataStructures(QStringList dsNames);
+    /**
+        * Add data structures to QComboBox of UI starting at position 0. Take care that
+        * the data structure IDs must be given in increasing ID order without gaps.
+        * Only data structures of documents of data structure type "Graph" are used.
+        *
+        * \param   QStringList dsNames names of data structures
+        * \return  void
+        */
+    void addDataStructures(QStringList dsNames);
 
-    public slots:
-        void assignValues();
+public slots:
+    void assignValues();
 
-    private:
-        Document* graphDoc_;
-        Ui::AssignValuesWidget *ui;
-        
-        /**
-         * Assign integers in increasing order starting at 'start' to all nodes.
-         *
-         * \param   DataStructure*  ds  the to be changed data structure
-         * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
-         * \return  void
-         */
-        void assignIDsToNodes(DataStructurePtr ds, int start, bool overrideValues);
-        
-        /**
-         * Assign integers in increasing order starting at 'start' to all edges.
-         *
-         * \param   DataStructure*  ds  the to be changed data structure
-         * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
-         * \return  void
-         */
-        void assignIDsToEdges(DataStructurePtr ds, int start, bool overrideValues);
-        
-        /**
-         * Assign integers uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister 
-         * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without 
-         * any operation.
-         *
-         * \param   DataStructure*  ds  the to be changed data structure
-         * \param   qreal   lowerLimit  lower limit for random number interval
-         * \param   qreal   upperLimit  upper limit for random number interval
-         * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
-         * \return  void
-         */
-        void assignIntegersToNodes(DataStructurePtr ds, int lowerLimit, int upperLimit, int seed, bool overrideValues);
-        
-        /**
-         * Assign integers uniformly at random from range [lowerLimit,upperLimit] to edges. Using Mersenne-Twister 
-         * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without 
-         * any operation.
-         *
-         * \param   DataStructure*  ds  the to be changed data structure
-         * \param   qreal   lowerLimit  lower limit for random number interval
-         * \param   qreal   upperLimit  upper limit for random number interval
-         * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
-         * \return  void
-         */
-        void assignIntegersToEdges(DataStructurePtr ds, int lowerLimit, int upperLimit, int seed, bool overrideValues);
-        
-        /**
-         * Assign float values uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister 
-         * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without 
-         * any operation.
-         *
-         * \param   DataStructure*  ds  the to be changed data structure
-         * \param   qreal   lowerLimit  lower limit for random number interval
-         * \param   qreal   upperLimit  upper limit for random number interval
-         * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
-         * \return  void
-         */
-        void assignFloatsToNodes(DataStructurePtr ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
-        
-        /**
-         * Assign float values uniformly at random from range [lowerLimit,upperLimit] to edges. Using Mersenne-Twister 
-         * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without 
-         * any operation.
-         *
-         * \param   DataStructure*  ds  the to be changed data structure
-         * \param   qreal   lowerLimit  lower limit for random number interval
-         * \param   qreal   upperLimit  upper limit for random number interval
-         * \param   bool    overrideValues  if true, given values at variables are overwritten; otherwise not
-         * \return  void
-         */
-        void assignFloatsToEdges(DataStructurePtr ds, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+private:
+    Document* graphDoc_;
+    Ui::AssignValuesWidget *ui;
 };
 
 #endif // ASSIGNVALUESWIDGET_H

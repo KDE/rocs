@@ -29,6 +29,7 @@ set( rocs_core_SRCS
     Core/Pointer.cpp
     Core/QtScriptBackend.cpp
     Core/Modifiers/Topology.cpp
+    Core/Modifiers/ValueModifier.cpp
 
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
