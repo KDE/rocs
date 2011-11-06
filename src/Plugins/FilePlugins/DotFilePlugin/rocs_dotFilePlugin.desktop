@@ -20,6 +20,7 @@ Name[pt_BR]=Plug-in de arquivos do Dot
 Name[sv]=Dot filinsticksprogram
 Name[uk]=Додаток роботи з файлами dot
 Name[x-test]=xxDot File Pluginxx
+Name[zh_CN]=Dot 文件插件
 Comment=Read and write Graphviz files.
 Comment[bg]=Четене и запис на файлове Graphviz
 Comment[bs]=Čitanje i pisanje Graphwiz datoteka
