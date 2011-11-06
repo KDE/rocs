@@ -60,16 +60,64 @@ const QStringList DotFilePlugin::extensions() const {
 }
 
 
-Document* DotFilePlugin::readFile ( const QString& fileName ) {
-    typedef boost::property < vertex_name_t, std::string, boost::property < vertex_color_t, qreal > > 
+Document* DotFilePlugin::readFile( const QString& fileName) {
+    // read file
+    QFile f ( fileName );
+    if ( !f.open ( QFile::ReadOnly ) ) {
+        setError ( i18n ( "Cannot open the file: %1. Error %2" ).arg ( fileName ).arg ( f.errorString() ) );
+        return 0;
+    }
+    QString content = f.readAll();
+    
+    // try to parse the file
+    Document* graphDoc;
+    try {
+        graphDoc=parseGraphvizUndirected(content);
+    }
+    catch (boost::directed_graph_error) {
+        qDebug() << "try reading as directed";
+        try {
+            graphDoc=parseGraphvizDirected(content);
+        }
+        catch (boost::bad_lexical_cast) {
+            qDebug() << "Bad lexical cast when parsing graphviz file";
+            delete graphDoc;
+            return 0;
+        }
+        catch (boost::undirected_graph_error) {
+            qDebug() << "this actually should not happen for a proper graph";
+            delete graphDoc;
+            return 0;
+        }
+        return graphDoc;
+    }
+    catch (boost::bad_graphviz_syntax) {
+        setError(i18n("Could not parse Graphviz file due to syntax errors."));
+        delete graphDoc;
+        return 0;
+    }
+    
+    return graphDoc;
+}
+
+Document* DotFilePlugin::parseGraphvizUndirected(const QString& graphvizContent)
+{
+    typedef boost::property< vertex_name_t, std::string, 
+            boost::property< vertex_color_t, qreal,
+            boost::property< vertex_shape_t, std::string > > > 
         VertexProperty;
-    typedef boost::property < edge_weight_t, qreal > 
+    typedef boost::property < edge_weight_t, qreal,
+            boost::property< edge_name_t, std::string > > 
         EdgeProperty;
     typedef boost::property < graph_name_t, std::string > 
         GraphProperty;
-    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::directedS, 
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, 
             VertexProperty, EdgeProperty, GraphProperty > 
         Graph;
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS, 
+            VertexProperty, EdgeProperty, GraphProperty > 
+        Graph;
+      
     typedef boost::rectangle_topology<> topology_type;
     typedef topology_type::point_type point_type;
     typedef QVector<point_type> PositionVec;
@@ -87,33 +135,42 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
     property_map<Graph, vertex_color_t>::type color = get(vertex_color, importGraph);
     dp.property("color",color);
 
+    property_map<Graph, edge_name_t>::type edgeName = get(edge_name, importGraph);
+    dp.property("label",edgeName);
+    
     property_map<Graph, edge_weight_t>::type weight = get(edge_weight, importGraph);
     dp.property("weight",weight);
-
-    // read file
-    QFile f ( fileName );
-    if ( !f.open ( QFile::ReadOnly ) ) {
-        setError ( i18n ( "Cannot open the file: %1. Error %2" ).arg ( fileName ).arg ( f.errorString() ) );
-        delete graphDoc;
-        return 0;
-    }
-    QString content = f.readAll();
 
     // Use ref_property_map to turn a graph property into a property map
     boost::ref_property_map<Graph*,std::string> gname(get_property(importGraph,graph_name));
     dp.property("name", gname);
 
+    // Use ref_property_map to turn a graph property into a property map
+    boost::property_map<Graph,vertex_shape_t>::type vertexShape = get(vertex_shape_t(), importGraph);
+    dp.property("shape", vertexShape);
+    
     // try to parse the file
     try {
-        bool parse = boost::read_graphviz(QString(content).toStdString(),importGraph,dp,"node_id");
+        bool parse = boost::read_graphviz(QString(graphvizContent).toStdString(),importGraph,dp,"node_id");
         if (!parse) {
-            setError(i18n("Graphviz parser returned unsuccessfully for file %1.").arg(fileName));
+            setError(i18n("Graphviz parser returned unsuccessfully for file."));
+            qDebug() << "Graphviz parser returned unsuccessfully for file";
             delete graphDoc;
             return 0;
         }
     }
     catch (boost::bad_graphviz_syntax) {
         setError(i18n("Could not parse Graphviz file due to syntax errors."));
+        delete graphDoc;
+        return 0;
+    }
+    catch (boost::bad_lexical_cast) {
+        qDebug() << "throw bad lexical cast exception in DotFilePlugin";
+        delete graphDoc;
+        return 0;
+    }
+    catch (boost::property_not_found) {
+        qDebug() << "stopped processing: not all DOT properties are known";
         delete graphDoc;
         return 0;
     }
@@ -160,7 +217,128 @@ Document* DotFilePlugin::readFile ( const QString& fileName ) {
                             mapNodes[boost::target(*ei, importGraph)]);
         newEdge->setValue( QString::number(get(weight, *ei)));
     }
+    return graphDoc;
+}
+
+
+Document* DotFilePlugin::parseGraphvizDirected(const QString& graphvizContent)
+{
+    typedef boost::property< vertex_name_t, std::string, 
+            boost::property< vertex_color_t, qreal,
+            boost::property< vertex_shape_t, std::string > > > 
+        VertexProperty;
+    typedef boost::property < edge_weight_t, qreal,
+            boost::property< edge_name_t, std::string > > 
+        EdgeProperty;
+    typedef boost::property < graph_name_t, std::string > 
+        GraphProperty;
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::directedS, 
+            VertexProperty, EdgeProperty, GraphProperty > 
+        Graph;
+    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::directedS, 
+            VertexProperty, EdgeProperty, GraphProperty > 
+        Graph;
+      
+    typedef boost::rectangle_topology<> topology_type;
+    typedef topology_type::point_type point_type;
+    typedef QVector<point_type> PositionVec;
+
+    // Construct an empty graph and prepare the dynamic_property_maps.
+    Document* graphDoc = new Document ( "Untitled" );
+    Graph importGraph(0);
     
+    // set up graph properties that shall be parsed
+    dynamic_properties dp;
+
+    property_map<Graph, vertex_name_t>::type name = get(vertex_name, importGraph);
+    dp.property("node_id", name);
+    
+    property_map<Graph, vertex_color_t>::type color = get(vertex_color, importGraph);
+    dp.property("color",color);
+
+    property_map<Graph, edge_name_t>::type edgeName = get(edge_name, importGraph);
+    dp.property("label",edgeName);
+    
+    property_map<Graph, edge_weight_t>::type weight = get(edge_weight, importGraph);
+    dp.property("weight",weight);
+
+    // Use ref_property_map to turn a graph property into a property map
+    boost::ref_property_map<Graph*,std::string> gname(get_property(importGraph,graph_name));
+    dp.property("name", gname);
+
+    // Use ref_property_map to turn a graph property into a property map
+    boost::property_map<Graph,vertex_shape_t>::type vertexShape = get(vertex_shape_t(), importGraph);
+    dp.property("shape", vertexShape);
+    
+    // try to parse the file
+    try {
+        bool parse = boost::read_graphviz(QString(graphvizContent).toStdString(),importGraph,dp,"node_id");
+        if (!parse) {
+            setError(i18n("Graphviz parser returned unsuccessfully for file."));
+            qDebug() << "Graphviz parser returned unsuccessfully for file";
+            delete graphDoc;
+            return 0;
+        }
+    }
+    catch (boost::bad_graphviz_syntax) {
+        setError(i18n("Could not parse Graphviz file due to syntax errors."));
+        qDebug() << "bad graphviz file syntax";
+        delete graphDoc;
+        return 0;
+    }
+    catch (boost::bad_lexical_cast) {
+        qDebug() << "throw bad lexical cast exception in DotFilePlugin";
+        delete graphDoc;
+        return 0;
+    }
+    catch (boost::property_not_found) {
+        qDebug() << "stopped processing: not all DOT properties are known";
+        delete graphDoc;
+        return 0;
+    }
+    
+    // Apply Layout
+    // TODO move all general purpose layout functions to support library
+    typedef boost::iterator_property_map<PositionVec::iterator, 
+                                boost::property_map<Graph, boost::vertex_index_t>::type>
+        PositionMap;
+    boost::mt19937 gen;
+    gen.seed (static_cast<unsigned int>(1));
+    // generate distribution topology and apply
+    boost::rectangle_topology< boost::mt19937 > topology(gen, -200, -200, 200, 200);
+    PositionVec position_vec(boost::num_vertices( importGraph ));
+    PositionMap positionMap(position_vec.begin(), get(boost::vertex_index, importGraph));
+    boost::random_graph_layout(importGraph, positionMap, topology);
+    // minimize cuts by Fruchtman-Reingold layout algorithm
+    boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
+        (   importGraph,
+            positionMap,
+            topology,
+            boost::cooling(boost::linear_cooling<double>(100)) 
+        );
+
+    // convert graphviz format to Document
+    DataStructurePtr datastructure = graphDoc->addDataStructure(i18n("dotImport"));
+
+    // put nodes at whiteboard as generated
+    QMap<int, DataPtr > mapNodes;
+    int index=0;
+    boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
+    for (boost::tie(vi, vi_end) = boost::vertices(importGraph); vi != vi_end; ++vi) {
+        // TODO imported data values can be extended
+        mapNodes[*vi] = datastructure->addData(
+                QString::fromStdString(get(name, *vi) ),
+                QPointF(positionMap[*vi][0],positionMap[*vi][1])
+            );
+        mapNodes[*vi]->setColor( get(color, *vi ) );
+    }
+
+    boost::graph_traits<Graph>::edge_iterator ei, ei_end;
+    for (boost::tie(ei, ei_end) = boost::edges(importGraph); ei !=ei_end; ++ei) {
+        PointerPtr newEdge = datastructure->addPointer ( mapNodes[boost::source(*ei, importGraph)],
+                            mapNodes[boost::target(*ei, importGraph)]);
+        newEdge->setValue( QString::number(get(weight, *ei)));
+    }
     return graphDoc;
 }
 

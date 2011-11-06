@@ -22,6 +22,9 @@
 #include <QObject>
 
 #include "FilePluginInterface.h"
+
+#include <boost/graph/adjacency_list.hpp>
+
 #include "Rocs_Typedefs.h"
 class Document;
 
@@ -29,6 +32,8 @@ class DotFilePlugin: public FilePluginInterface
 {
     Q_OBJECT
 public:
+    struct vertex_shape_t { typedef boost::vertex_property_tag kind; };
+
     explicit DotFilePlugin(QObject* parent, const QList< QVariant >&);
     ~DotFilePlugin();
 
@@ -36,8 +41,12 @@ public:
      * \param QString reference specifying the filename
      * \return Document pointer
      */
-    Document* readFile(const QString& filename);
+    Document* readFile(const QString& fileName);
 
+    Document* parseGraphvizUndirected(const QString& graphvizContent);
+    
+    Document* parseGraphvizDirected(const QString& graphvizContent);
+    
     /** \brief write specified data structure document to file
      * \param Document  the document containing list of data structures 
      * \param QString  filename of the file the graph shall be serialized to
