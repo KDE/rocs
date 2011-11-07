@@ -13,6 +13,7 @@ X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=Dot File Plugin
+Name[de]=Dot-Datei-Modul
 Name[es]=Complemento de archivo Dot
 Name[nl]=Plug-in voor Dot-bestand
 Name[pt]='Plugin' de Ficheiros do Dot
