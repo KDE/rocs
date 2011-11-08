@@ -9,7 +9,7 @@
   <MenuBar>
         <Menu name="file" >
             <Menu name="new">
-                <Text>New</Text>
+                <text>New</text>
                 <Action name="new-graph" />
                 <Action name="new-script" />
             </Menu>
@@ -18,14 +18,14 @@
             <Action name="save-all" />
             <Separator/>
             <Menu name="graph">
-                <Text>Graph</Text>
+                <text>Graph</text>
                 <Action name="save-graph" />
                 <Action name="save-graph-as" />
                 <Action name="import-graph" />
                 <Action name="export-graph" />
             </Menu>
             <Menu name="script">
-                <Text>Script</Text>
+                <text>Script</text>
                 <Action name="save-script" />
                 <Action name="save-script-as" />
             </Menu>
@@ -35,9 +35,9 @@
             <Action name="possible_includes" />
         </Menu>
         <Menu name="edit">
-            <Text>Edit</Text>
+            <text>Edit</text>
             <Menu name="conversions">
-                <Text>Conversions</Text>
+                <text>Conversions</text>
                 <ActionList name="DS_plugins" />
             </Menu>
             <Menu>
@@ -54,7 +54,7 @@
             <Action name="delete-selected" />
         </Menu>
         <Menu name="tools">
-            <Text> Tools </Text>
+            <text>Tools</text>
             <ActionList name="tools_plugins" />
         </Menu>
     </MenuBar>
