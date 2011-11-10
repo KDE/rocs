@@ -18,16 +18,19 @@
 */
 
 #include "KMLParser.h"
-#include "Core/graphDocument.h"
+
+#include "Core/Document.h"
+#include "Core/DataStructure.h"
+#include <Core/Data.h>
+#include "KMLHandler.h"
+
+#include <KDebug>
 #include <KAboutData>
 #include <KGenericFactory>
+
 #include <QFile>
-#include <KDebug>
-#include <Core/DataType.h>
-#include <Core/Data.h>
 #include <QXmlResultItems>
 #include <QXmlNodeModelIndex>
-#include "KMLHandler.h"
 
 static const KAboutData aboutdata ( "rocs_kmlplugin", 0, ki18n ( "Open and Save Keyhole Markup Language files" ) , "0.1" );
 
@@ -43,10 +46,10 @@ KMLParser::KMLParser ( QObject* parent, const QList< QVariant >& ) :
 }
 
 
-bool KMLParser::writeFile(DataTypeDocument& graph, const QString& fileName)
+bool KMLParser::writeFile(Document& graph, const QString& fileName)
 {
     QFile file(fileName);
-    DataType * g = graph.activeDataType();
+    DataStructurePtr g = graph.activeDataStructure();
     if (!file.open(QIODevice::WriteOnly|QIODevice::Text)) {
         _lastError = i18n("Cannot open file %1: %2").arg(fileName).arg(file.errorString());
         return false;
@@ -59,7 +62,7 @@ bool KMLParser::writeFile(DataTypeDocument& graph, const QString& fileName)
     xmlWriter.writeNamespace("http://www.opengis.net/kml/2.2");
     xmlWriter.writeStartElement("Document");
     if (g->pointers().isEmpty()) {
-        foreach(Datum * n, g->data()) {
+        foreach(DataPtr n, g->data()) {
             xmlWriter.writeStartElement("Placemark");
             xmlWriter.writeStartElement("name");
             xmlWriter.writeCharacters(n->name());
@@ -83,22 +86,22 @@ bool KMLParser::writeFile(DataTypeDocument& graph, const QString& fileName)
         xmlWriter.writeStartElement("Placemark");
         xmlWriter.writeStartElement("name");
         {
-            QString s = g->data().at(0)->name();
+            QString s = g->dataList().at(0)->name();
             s.chop(2);
             xmlWriter.writeCharacters(s);
         }
         xmlWriter.writeEndElement();
         xmlWriter.writeStartElement("description");
 
-        if (g->data().at(0)->property("description").isValid()) {
-            xmlWriter.writeCharacters(g->data().at(0)->property("description").toString());
+        if (g->dataList().at(0)->property("description").isValid()) {
+            xmlWriter.writeCharacters(g->dataList().at(0)->property("description").toString());
         }
         xmlWriter.writeEndElement();
 
         xmlWriter.writeStartElement("LineString");
         xmlWriter.writeStartElement("coordinates");
 
-        foreach (Datum* n, g->data()) {
+        foreach (DataPtr n, g->data()) {
         if (n->property("Longitude").isValid()) {
                 xmlWriter.writeCharacters(QString("%1,%2,%3\n").arg(n->property("Longitude").toString(),
                                           n->property("Latitude").toString(),
@@ -115,10 +118,10 @@ bool KMLParser::writeFile(DataTypeDocument& graph, const QString& fileName)
     return true;
 }
 
-DataTypeDocument* KMLParser::readFile(const QString& file)
+Document* KMLParser::readFile(const QString& file)
 {
-    DataTypeDocument * graphDoc = new DataTypeDocument("KML File");
-    DataType * g = graphDoc->addDataType();
+    Document * graphDoc = new Document("KML File");
+    DataStructurePtr g = graphDoc->addDataStructure();
 
     KMLHandler handler(g);
     QFile f(file);
@@ -147,7 +150,7 @@ const QString KMLParser::lastError()
 
 const QString KMLParser::scriptToRun()
 {
-    return Rocs::FilePluginInterface::scriptToRun();
+    return FilePluginInterface::scriptToRun();
 }
 
 }

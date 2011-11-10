@@ -27,8 +27,8 @@ namespace Rocs{
 
   public:
       KMLParser(QObject* parent, const QList< QVariant >& opts);
-      virtual bool writeFile(DataTypeDocument& graph, const QString& fileName);
-      virtual DataTypeDocument* readFile(const QString& file);
+      virtual bool writeFile(Document& graph, const QString& fileName);
+      virtual Document* readFile(const QString& file);
       virtual const QStringList extensions() const;
       virtual const QString scriptToRun();
       virtual const QString lastError();

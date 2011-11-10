@@ -19,12 +19,12 @@
 
 #include "KMLHandler.h"
 #include <KDebug>
-#include <Core/DataType.h>
-#include <Core/Data.h>
+#include "Core/DataStructure.h"
+#include "Core/Data.h"
 
 
 
-KMLHandler::KMLHandler(DataType* doc): QXmlDefaultHandler(), m_graph(doc)
+KMLHandler::KMLHandler(DataStructurePtr doc): QXmlDefaultHandler(), m_graph(doc)
 {
 
 }
@@ -43,7 +43,7 @@ bool KMLHandler::characters(const QString& str)
 
 bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName)
 {
-  Datum * n = 0;
+  DataPtr n;
     if (qName == "coordinates") {
         m_coordinates = currentText;
     } else if (qName == "name") {
@@ -54,7 +54,7 @@ bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
         if (m_name.isEmpty()) {
             m_name = QString::number(qrand());
         }
-        n = m_graph->addDatum(m_name);
+        n = m_graph->addData(m_name);
         QStringList values = m_coordinates.split(',');
         if (values.count() >=2) {
 
@@ -76,13 +76,13 @@ bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
     if (qName == "LineString" && !m_coordinates.isEmpty()) {
         QStringList points = m_coordinates.split('\n');
         int count = 0;
-        Datum * n_old = 0;
+        DataPtr n_old;
         foreach (QString point, points) {
             count++;
 
             QStringList values = point.split(',');
             if (values.count() >=2) {
-               n = m_graph->addDatum(m_name + "_" + QString::number(count+1));
+               n = m_graph->addData(m_name + '_' + QString::number(count+1));
 
                 n->setX(values.at(0).toDouble());
                 n->addDynamicProperty("Longitude", values.at(0).toDouble());
@@ -95,7 +95,7 @@ bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
             if (!m_description.isEmpty()) {
                 n->addDynamicProperty("Description", m_description);
             }
-            if (n_old != 0){
+            if (n_old){
               m_graph->addPointer(n_old, n);
             }
             n_old = n;
