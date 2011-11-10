@@ -190,7 +190,8 @@ void GMLGraphParsingHelper::createEdge(){
         kDebug() << "Creating a edge";
         _actualState = edge;
         actualEdge = actualGraph->addPointer(edgeSource, edgeTarget);
-        edgeSource = edgeTarget = QString();
+        edgeSource.clear();;
+        edgeTarget.clear();
         while( ! _edgeProperties.isEmpty()){
             QString property = _edgeProperties.keys().at(0);
             actualEdge->addDynamicProperty(property, _edgeProperties.value(property));
