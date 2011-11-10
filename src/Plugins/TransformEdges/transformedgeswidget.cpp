@@ -41,8 +41,6 @@
 #include <Data.h>
 
 
-//TODO output usefull error message
-namespace boost { void throw_exception( std::exception const & ) {} } // do noop on exception
 using namespace Rocs;
 
 class QPushButton;
@@ -220,7 +218,7 @@ qreal TransformEdgesWidget::makeSpanningTree( DataStructurePtr graph)
                 
         for(int k=0; k<out.size(); k++) {
             if (out[k]->to()==vertices[j]) {
-                if (out[k]->value()!="")
+                if (!out[k]->value().isEmpty())
                     weight[QPair<int,int>(i,j)] = out[k]->value().toDouble();
                 else
                     weight[QPair<int,int>(i,j)] = 1;

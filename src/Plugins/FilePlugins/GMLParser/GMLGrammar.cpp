@@ -67,7 +67,7 @@ void gotKey(const std::string& key){
 }
 
 void gotValue(const std::string& Value){
-  if (Value == ""){
+  if (Value.empty()){
     return; //end of the list.
   }else{
     phelper->setAtribute(QString::fromStdString(lastKey), QString::fromStdString(Value));
