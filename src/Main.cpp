@@ -35,7 +35,7 @@ int main ( int argc, char *argv[] ) {
     KAboutData aboutData ("rocs",
                           "rocs",
                           ki18n ( "Rocs" ),
-                          "1.5",
+                          "1.5.95",
                           ki18n ( "Graph Theory Tool" ),
                           KAboutData::License_GPL,
                           ki18n ( "(c) 2009-2011 Rocs Developers" ),
@@ -51,8 +51,8 @@ int main ( int argc, char *argv[] ) {
 
     if (DataStructurePluginManager::self()->listOfDataStructures().count() == 0){
           KMessageBox::detailedError(0,
-                                 i18n("No Data Structure plugins found in the system. Exiting."),
-                                 i18n("Rocs need at least one data structure plugin to continue.\n"
+                                 i18n("No Data Structure plugins found on your system. Exiting."),
+                                 i18n("Rocs needs at least one data structure plugin to continue.\n"
                                       "Try running kbuildsycoca4 from a console and after execute Rocs again."));
 
     }else{
