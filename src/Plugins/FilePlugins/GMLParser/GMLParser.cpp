@@ -60,13 +60,13 @@ Document* GMLParser::readFile ( const QString& fileName ) {
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
     if ( !f.open ( QIODevice::ReadOnly | QIODevice::Text ) ) {
-        setError ( i18n ( "Cannot open the file: %1. Error %2" ).arg ( fileName ).arg ( f.errorString() ) );
+        setError( i18n("Cannot open the file: %1. Error %2", fileName, f.errorString()) );
         delete graphDoc;
         return 0;
     }
     QString content = f.readAll();
      if (!Rocs::GMLPlugin::parse(content, graphDoc)) {
-         setError(i18n("cannot parse the file %1.").arg(fileName));
+         setError(i18n("cannot parse the file %1.", fileName));
          delete graphDoc;
          return 0;
     }
@@ -112,7 +112,7 @@ bool GMLParser::writeFile ( Document& graph, const QString& filename ) {
         }
         return true;
     }
-    setError(i18n("Cannot open file %1 to write document. Error: %2").arg(filename).arg(file.errorString()));
+    setError(i18n("Cannot open file %1 to write document. Error: %2", filename, file.errorString()));
     return false;
 }
 

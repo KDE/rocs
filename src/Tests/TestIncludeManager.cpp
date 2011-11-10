@@ -83,7 +83,7 @@ void TestIncludeManager::findInclude() {
 
     man.addPath(QDir::currentPath());
 
-    QCOMPARE (man.include(str,QDir::currentPath(), "file.js"), i18n("debug(\"Cannot open file %1.\")\n").arg("otherFile.js"));
+    QCOMPARE (man.include(str,QDir::currentPath(), "file.js"), QString("debug(\"Cannot open file %1.\")\n").arg("otherFile.js"));
 }
 
 void TestIncludeManager::ignoreComments()

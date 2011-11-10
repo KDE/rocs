@@ -109,8 +109,7 @@ QString IncludeManager::processInclude ( QString arg1 ) {
     if (arg1.indexOf('(') != -1) {
         file=arg1.replace(')', '(').section('(',1,1).trimmed();
         // To avoid more ifs-elses
-///TODO         fileContent = QString("debug(\"%1\")").arg(i18n("Cannot open file %2.")).arg(file); // String freeze for 4.7 un comment to 4.8
-        fileContent = QString("debug(\"%1\")").arg(i18n("debug(\"Cannot open file %1.\")").replace("\"","")).arg(file);
+        fileContent = QString("debug(\"%1\")").arg(i18n("Cannot open file %2.", file));
         // Add the path first
         if ((pos = file.lastIndexOf('/')) != -1) {  //add the path of file to list
               path = file.left(pos+1);
@@ -140,8 +139,7 @@ QString IncludeManager::processInclude ( QString arg1 ) {
             }
         }
     } else {
-        fileContent = QString("debug(\"%1\")").arg(i18n("debug(\"Invalid include directive: %1. Cannot find file in directive.\")").remove('"')).arg(arg1);
-///TODO uncomment to 4.8         fileContent = QString("debug(\"%1\")").arg(i18n("Invalid include directive: %2. Cannot find file in directive.")).arg(arg1);
+        fileContent = QString("debug(\"%1\")").arg(i18n("Invalid include directive: %1. Cannot find file in directive.",arg1));
     }
 
     return fileContent;

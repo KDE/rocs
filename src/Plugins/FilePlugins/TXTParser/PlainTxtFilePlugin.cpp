@@ -54,7 +54,7 @@ Document * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
     QList < QPair<QString, QString> > edges;
     QFile f ( fileName );
     if ( !f.open ( QFile::ReadOnly ) ) {
-        setError ( i18n ( "Cannot open the file: %1. Error %2" ).arg ( fileName ).arg ( f.errorString() ) );
+        setError( i18n("Cannot open the file: %1. Error %2", fileName, f.errorString() ));
         delete graphDoc;
         return 0;
     }
@@ -74,7 +74,7 @@ Document * PlainTXTFilePlugin::readFile ( const QString &fileName ) {
             break;
         }
         default:
-            kDebug() << i18n ( "Ignoring line: %1" ).arg ( list.join ( " " ) );
+            kDebug() << QString("Ignoring line: %1").arg( list.join ( " " ) );
             break;
 
         }
@@ -107,7 +107,7 @@ bool PlainTXTFilePlugin::writeFile ( Document &graph , const QString &filename )
         }
         setError(i18n("No active graph in this document."));
     }
-    setError(i18n("Cannot open file %1 to write document. Error: %2").arg(filename).arg(file.errorString()));
+    setError(i18n("Cannot open file %1 to write document. Error: %2", filename, file.errorString()));
     return false;
 }
 

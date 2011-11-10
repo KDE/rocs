@@ -51,7 +51,7 @@ bool KMLParser::writeFile(Document& graph, const QString& fileName)
     QFile file(fileName);
     DataStructurePtr g = graph.activeDataStructure();
     if (!file.open(QIODevice::WriteOnly|QIODevice::Text)) {
-        _lastError = i18n("Cannot open file %1: %2").arg(fileName).arg(file.errorString());
+        _lastError = i18n("Cannot open file %1: %2", fileName, file.errorString());
         return false;
     }
     QXmlStreamWriter xmlWriter(&file);

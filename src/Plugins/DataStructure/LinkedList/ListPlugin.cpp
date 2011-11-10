@@ -89,22 +89,23 @@ QLayout* Rocs::ListPlugin::nodeExtraProperties ( DataPtr node, QWidget* parentWi
 
 bool ListPlugin::canConvertFrom(Document* doc) const
 {
-  QStringList errors;
-  foreach (DataStructurePtr ds, doc->dataStructures()){
-    foreach (DataPtr data, ds->dataList()){
-      if(data->out_pointers().count() > 1)
-        errors.append(i18n("Data \'%1\' had more than one(1) out pointers;").arg(data->name()));
+    QStringList errors;
+    foreach (DataStructurePtr ds, doc->dataStructures()){
+        foreach (DataPtr data, ds->dataList()){
+        if(data->out_pointers().count() > 1)
+            errors.append(i18n("Data \'%1\' had more than one(1) out pointers;", data->name()));
+        }
     }
-  }
 
-  //convert if no errors or user click continue
-  if (errors.isEmpty()
-      || KMessageBox::Continue == KMessageBox::warningContinueCancelList(0,
-                                                                    i18n("Cannot convert document \'%1\'")
-                                                                                        .arg(doc->name()),
-                                                                    errors)){
-    return true;
-  }
-  return false;
+    //convert if no errors or user click continue
+    if (errors.isEmpty()
+        || KMessageBox::Continue == KMessageBox::warningContinueCancelList(
+                                        0,
+                                        i18n("Cannot convert document \'%1\'", doc->name()),
+                                        errors)
+    ){
+        return true;
+    }
+    return false;
 }
 

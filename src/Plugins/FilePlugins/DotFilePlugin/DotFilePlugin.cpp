@@ -64,7 +64,7 @@ Document* DotFilePlugin::readFile( const QString& fileName) {
     // read file
     QFile f ( fileName );
     if ( !f.open ( QFile::ReadOnly ) ) {
-        setError ( i18n ( "Cannot open the file: %1. Error %2" ).arg ( fileName ).arg ( f.errorString() ) );
+        setError( i18n("Cannot open the file: %1. Error %2", fileName, f.errorString()) );
         return 0;
     }
     QString content = f.readAll();
