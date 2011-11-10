@@ -260,10 +260,9 @@ QWidget* MainWindow::setupScriptPanel()
     executeCommands->addAction(_runScript);
     executeCommands->addAction(_stopScript);
     
-    connect ( _runScript, SIGNAL ( triggered() ), this, SLOT ( executeScript() ) );
-    connect ( _stopScript, SIGNAL ( triggered() ), this, SLOT ( stopScript() ) );
-    connect(    _selectListing, SIGNAL(currentIndexChanged(int)) , 
-                stackedListing, SLOT(setCurrentIndex(int)) );
+    connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
+    connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
+    connect(_selectListing, SIGNAL(currentIndexChanged(int)), stackedListing, SLOT(setCurrentIndex(int)));
     
     _hScriptSplitter->addWidget( _codeEditor );
     _hScriptSplitter->addWidget( listingWidget );
@@ -358,7 +357,7 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
     action->setShortcut ( shortcut);
     action->setShortcutContext ( Qt::WidgetShortcut );
     actionCollection()->addAction ( actionName, action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), parent, slot );
+    connect(action, SIGNAL(triggered(bool)), parent, slot );
 }
 
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
@@ -367,7 +366,7 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
     KAction* action = new KAction ( KIcon ( iconName ), actionTitle, parent );
     action->setShortcutContext ( Qt::WidgetShortcut );
     actionCollection()->addAction ( actionName, action );
-    connect ( action, SIGNAL ( triggered ( bool ) ), parent, slot );
+    connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
 
 
@@ -407,10 +406,10 @@ void MainWindow::setupToolsPluginsAction()
     foreach (  ToolsPluginInterface* p, avaliablePlugins ){
         action = new KAction ( p->displayName(), this );
         action->setData(count++);
-        connect ( action, SIGNAL ( triggered ( bool ) ),this, SLOT ( runToolPlugin() ) );
-        pluginList.append ( action );
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
+        pluginList.append( action );
     }
-    plugActionList ( "tools_plugins", pluginList );
+    plugActionList( "tools_plugins", pluginList );
 }
 
 void MainWindow::setupDSPluginsAction()
@@ -457,7 +456,7 @@ void MainWindow::setupDocumentsList(){
           action->setChecked(true);
         }
         action->setActionGroup(group);
-        connect ( action, SIGNAL ( triggered ( bool ) ), DocumentManager::self(), SLOT ( changeDocument()) );
+        connect(action, SIGNAL(triggered(bool)), DocumentManager::self(), SLOT(changeDocument()));
         pluginList.append ( action );
     }
 
@@ -473,8 +472,8 @@ void MainWindow::setActiveDocument ( )
     _graphVisualEditor->setActiveDocument();
     _GraphLayers->setActiveDocument();
 
-    connect ( this, SIGNAL(runTool(  ToolsPluginInterface*,Document*)),
-                activeDocument->engineBackend(), SLOT (runTool( ToolsPluginInterface*,Document*)));
+    connect ( this, SIGNAL(runTool(ToolsPluginInterface*,Document*)),
+                activeDocument->engineBackend(), SLOT(runTool(ToolsPluginInterface*,Document*)));
 
 //     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
     connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));

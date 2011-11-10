@@ -27,8 +27,7 @@ OpenedFilesWidget::OpenedFilesWidget(DocumentModel *model, QWidget* parent)
     setupUi(this);
     _documentModel = model;
     _openedFilesListView->setModel(model);
-    connect(_openedFilesListView, SIGNAL(clicked(const QModelIndex&)),
-            this, SLOT(setActiveDocument(const QModelIndex&)));
+    connect(_openedFilesListView,SIGNAL(clicked(QModelIndex)),this,SLOT(setActiveDocument(QModelIndex)));
 }
 
 void OpenedFilesWidget::on__btnNewFile_clicked() {

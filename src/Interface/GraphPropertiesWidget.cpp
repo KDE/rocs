@@ -68,8 +68,8 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructurePtr g, MainWindow* pa
 
     connect( _showEdgeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setPointerNameVisibility(bool)));
     connect( _showEdgeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setPointerValueVisibility(bool)));
-    connect( _showNodeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setDataNameVisibility(bool)  ));
-    connect( _showNodeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setDataValueVisibility(bool) ));
+    connect( _showNodeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setDataNameVisibility(bool)));
+    connect( _showNodeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setDataValueVisibility(bool)));
 
     connect( _graphName,      SIGNAL(textChanged(QString)), g.get(), SLOT(setName(QString)));
 }
