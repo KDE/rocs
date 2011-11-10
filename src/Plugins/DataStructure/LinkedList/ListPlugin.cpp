@@ -17,21 +17,25 @@
 */
 
 #include "ListPlugin.h"
+
+#include "DocumentManager.h"
+#include "Document.h"
 #include "ListStructure.h"
-#include <KPluginFactory>
-#include <KAboutData>
-#include "NodeListItem.h"
-#include <QGridLayout>
-#include <QLabel>
-#include <QLineEdit>
-#include <QCheckBox>
-#include <kcombobox.h>
-#include "LinkedListPointerItem.h"
 #include "Pointer.h"
 #include "Data.h"
-#include <Document.h>
+#include "LinkedListPointerItem.h"
+#include "NodeListItem.h"
+
+#include <KAboutData>
+#include <KComboBox>
+#include <KLineEdit>
+#include <KPluginFactory>
+
+#include <QtGui/QCheckBox>
+#include <QtGui/QGridLayout>
+#include <QtGui/QLabel>
+
 #include <KDebug>
-#include <DocumentManager.h>
 #include <KMessageBox>
 
 static const KAboutData aboutdata("rocs_ListStructure", 0, ki18n("Linked List Structure") , "0.1" );
@@ -75,7 +79,7 @@ QLayout* Rocs::ListPlugin::nodeExtraProperties ( DataPtr node, QWidget* parentWi
 {
   QGridLayout * lay = new QGridLayout(parentWidget);
   QLabel *_value = new QLabel(i18n("Front value"), parentWidget);
-  QLineEdit *_valueLine = new QLineEdit(parentWidget);
+  KLineEdit *_valueLine = new KLineEdit(parentWidget);
   _valueLine->setReadOnly(true);
   if (node->out_pointers().count() == 1){
     _valueLine->setText(node->out_pointers().at(0)->to()->value().toString());
@@ -108,4 +112,3 @@ bool ListPlugin::canConvertFrom(Document* doc) const
     }
     return false;
 }
-

@@ -17,18 +17,23 @@
 */
 
 #include "GraphPlugin.h"
+
 #include "GraphStructure.h"
-#include <KPluginFactory>
-#include <KAboutData>
-#include <NodeItem.h>
-#include <QGridLayout>
-#include <QSpinBox>
-#include <QLabel>
-#include <knuminput.h>
-#include <QComboBox>
+#include "NodeItem.h"
 #include "EdgeItem.h"
 #include "Data.h"
+
+#include <KAboutData>
+#include <KPluginFactory>
+#include <knuminput.h>
 #include <KMessageBox>
+#include <KComboBox>
+
+#include <QtGui/QGridLayout>
+#include <QtGui/QSpinBox>
+#include <QtGui/QLabel>
+
+
 
 static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18n("Graph Structure") , "0.1" );
 using namespace Rocs;
@@ -111,7 +116,7 @@ QLayout*  GraphPlugin::dataStructureExtraProperties ( DataStructurePtr graph, QW
 {
     QGridLayout *lay = new QGridLayout(parentWidget);
     QLabel * _graphTypeText = new QLabel(i18n("Graph Type:"));
-    QComboBox * _graphTypeCombo = new QComboBox(parentWidget);
+    KComboBox * _graphTypeCombo = new KComboBox(parentWidget);
     _graphTypeCombo->insertItem(GraphStructure::UNDIRECTED, i18n("Undirected Graph"));
     _graphTypeCombo->insertItem(GraphStructure::DIRECTED,   i18n("Directed Graph"));
     _graphTypeCombo->insertItem(GraphStructure::MULTIGRAPH, i18n("Multigraph"));

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Transform Edges</string>
   </property>
-  <widget class="QComboBox" name="dataStructuresCombo">
+  <widget class="KComboBox" name="dataStructuresCombo">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -85,7 +85,7 @@ p, li { white-space: pre-wrap; }
        <string>This option removes all edges from the given graph.</string>
       </property>
       <property name="text">
-       <string>Remove Edges</string>
+       <string>Remove all Edges</string>
       </property>
      </widget>
     </item>
@@ -95,7 +95,7 @@ p, li { white-space: pre-wrap; }
        <string>This option reverses all edges of a directed graph. Note that this does not apply to undirected graphs.</string>
       </property>
       <property name="text">
-       <string>Reverse Edges</string>
+       <string>Reverse all Edges</string>
       </property>
      </widget>
     </item>
@@ -116,6 +116,13 @@ p, li { white-space: pre-wrap; }
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -22,8 +22,8 @@
 #include <limits.h>
 #include <KLocale>
 #include <KDialog>
+#include <KComboBox>
 
-#include <QtGui/QComboBox>
 #include <QtGui/QDesktopWidget>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>

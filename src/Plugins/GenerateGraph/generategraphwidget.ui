@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Generate Graph</string>
   </property>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="KComboBox" name="comboBox">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -374,6 +374,13 @@
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
