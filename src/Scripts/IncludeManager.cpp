@@ -140,7 +140,7 @@ QString IncludeManager::processInclude ( QString arg1 ) {
             }
         }
     } else {
-        fileContent = QString("debug(\"%1\")").arg(i18n("debug(\"Invalid include directive: %1. Cannot find file in directive.\")").replace("\"","")).arg(arg1);
+        fileContent = QString("debug(\"%1\")").arg(i18n("debug(\"Invalid include directive: %1. Cannot find file in directive.\")").remove('"')).arg(arg1);
 ///TODO uncomment to 4.8         fileContent = QString("debug(\"%1\")").arg(i18n("Invalid include directive: %2. Cannot find file in directive.")).arg(arg1);
     }
 
@@ -163,7 +163,7 @@ QString IncludeManager::seekFile ( const QString & arg1 ) {
 
 void IncludeManager::addPath(const QString& str)
 {
-  QString tmp = !str.endsWith('/')? str + "/": str;
+  QString tmp = !str.endsWith('/')? str + '/': str;
 
   if (!tempPath().contains(tmp)){
     _tempPath << QDir(tmp);
