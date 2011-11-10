@@ -48,7 +48,7 @@ void PossibleIncludes::updateIncludeList()
     list.removeDuplicates();
     foreach (const QString &str, list){
         QDir dir (str);
-        foreach(QString file, dir.entryList(QStringList() << "*.js")){
+        foreach(const QString &file, dir.entryList(QStringList() << "*.js")){
           m_list->addItem(dir.absoluteFilePath(file));
         }
     }

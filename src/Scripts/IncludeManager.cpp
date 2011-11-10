@@ -173,7 +173,7 @@ void IncludeManager::addPath(const QString& str)
 
 void IncludeManager::addPath ( const QStringList& str )
 {
-    foreach ( QString s, str ) {
+    foreach (const QString &s, str ) {
 
         QDir dir(s);
         if ( !_tempPath.contains ( dir ) ) {
@@ -185,7 +185,7 @@ void IncludeManager::addPath ( const QStringList& str )
 QStringList const IncludeManager::tempPath() const
 {
     QStringList list;
-    foreach (QDir dir, _tempPath) {
+    foreach (const QDir &dir, _tempPath) {
         list << dir.path() + '/';
     }
     return list;

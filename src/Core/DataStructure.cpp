@@ -157,8 +157,7 @@ DataPtr DataStructure::addData(DataPtr data){
 }
 
 QList< DataPtr > DataStructure::addDataList(QList< DataPtr > dataList){
-    DataPtr n;
-    foreach (n, dataList) {
+    foreach (DataPtr n, dataList) {
         d->_data.append( n );
         emit dataCreated( n );
 //         connect(n.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now

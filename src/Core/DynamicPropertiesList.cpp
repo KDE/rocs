@@ -182,7 +182,7 @@ void DynamicPropertiesList::clear(DataStructure* dataStructure)
 {
     if (dataStructure != 0){
 	_EdgesProperties.values(dataStructure).clear();
-	foreach (QString name,  _GraphProperties.keys(dataStructure) ){
+	foreach (const QString &name,  _GraphProperties.keys(dataStructure) ){
 	    _GraphProperties.remove(name, dataStructure);
 	}
 
