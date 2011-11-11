@@ -48,7 +48,11 @@ Topology::~Topology()
 
 }
 
-void Topology::applyMinCutTreeAlignment(DataList dataList) {
+void Topology::applyMinCutTreeAlignment(DataList dataList) 
+{
+    // dataList must be at least of length 2, and two nodes cannot have crossing edges
+    if (dataList.count() < 3)
+        return;
 
     PositionVec position_vec(dataList.count());
 
