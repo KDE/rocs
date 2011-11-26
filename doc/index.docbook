@@ -32,7 +32,7 @@
 
 <abstract>
 <para>
-&rocs; is a graph theory viewer tool for KDE.
+&rocs; is a graph theory tool for KDE.
 </para>
 </abstract>
 
@@ -50,18 +50,19 @@
 
 <chapter id="introduction">
 <title>Introduction</title>
-<para>&rocs; aims to be a Graph Theory IDE for helping professors to show the
-results of a graph algorithm and also helping students to do the
-algorithms.</para>
-
-<para>&rocs; has a scripting module, done in Qt Script, that interacts with the
-drawn graph and every change in the graph with the script is reflected on the drawn one.</para>
+<para>&rocs; is a Graph Theory IDE for everybody interested in designing and analyzing graph algorithms. This explicitly includes
+<itemizedlist>
+	<listitem>lecturers who eventually want to demonstrate algorithms to their students,</listitem>
+	<listitem>students who want to understand and see how an algorithm works,</listitem>
+	<listitem>and everybody who has to design graph algorithms and needs at tool for prototype testing.</listitem>
+</itemizedlist>
+For all these users, &rocs; provides an easy to use graph editor to set up graphs, a powerful Qt Script scripting engine to execute algorithms, and several helper tools to set up your graphs and data structures for your experiments. So the usual workflow is to write an algorithm, create a graph, and see in real-time how the algorithm works at the the graph.</para>
 </chapter>
 
 <chapter id="using-rocs">
 <title>Using &rocs;</title>
 <para>
-The user interface is divided in two parts:
+The user interface is divided into three logical parts:
 </para> 
 
 <itemizedlist>
