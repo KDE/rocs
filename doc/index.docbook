@@ -188,10 +188,8 @@ The user interface is divided into several logical parts as presented at the scr
 
 <sect1 id="user-interface-graph-properties">
 	<title>Graph Properties</title>
-	<para>
-	On the left sidebar you can find the options for each opened graph. All these options are global 
-	per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.
-	</para>
+	<para>On the left sidebar you can find the options for each opened graph. All these options are global 
+	per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.</para>
 
 	<itemizedlist>
 	<listitem><para>
@@ -224,13 +222,22 @@ The user interface is divided into several logical parts as presented at the scr
 </chapter>
 
 <chapter id="using-rocs">
-<title>Scripting &rocs;</title>
-<para>After the graph is on screen, you can start creating the script for it. The language uses a
-Javascript syntax and following are the Graph, Node and Edge objects.</para>
+<title>Using &rocs;</title>
+<para>Usually the first step is to create a graph with the visual graph editor. You can do this either by hand, this is adding nodes and connecting them, or by using one of the helper algorithms that can be found <guimenu>Tools</guimenu> <guimenuitem>Generate Graph</guimenuitem>. Eventually, you also want to use the <guimenu>Tools</guimenu> <guimenuitem>Assign Values</guimenuitem> helper tools to assign your graph nodes and edges with initial values. Finally you need to give your graph a name. This name then will be the identifier that you must use for the scripting engine.</para>
 
-<sect1 id="script-graph">
-<title>Graph</title>
+<sect1 id="using-rocs-scripting">
+<title>Scripting</title>
+<para>&rocs; use a JavaScript like scripting language. This is, essentially that definition of variables and functions and their use are done exactly like in JavaScript. Besides, &rocs; provides a set of functions that let you access the graphs at the visual graph editor whiteboard and their elements.
+</para>
+
+<sect2><title>Accessing a Graph</title>
+<para>In the scripting interface you can access a graph by simply typing its name and using this as an object with one of the following functions. To access a node or an edge you must get an identifier from the graph object</para>
+<variablelist>
+<varlistentry>
+<term>Graph Objects</term>
+<listitem>
 <programlisting>
+// functions
      array list_nodes();
      array list_edges();
      node add_node(name);
@@ -238,30 +245,31 @@ Javascript syntax and following are the Graph, Node and Edge objects.</para>
      node node_byname(QString&amp; name);
      node begin_node();
      array end_nodes();
-</programlisting> 
-<para>Graph variables that can be changed:</para>
-<programlisting>
+
+// variables
      bool directed
      bool automate
      string name
      string nodeDefaultColor // in HEXA
      string edgeDefaultColor  // in HEXA 
 </programlisting>
-</sect1>
+</listitem>
+</varlistentry>
 
-<sect1 id="script-nodes">
-<title>Nodes</title>
+<varlistentry>
+<term>Node Objects</term>
+<listitem>
 <programlisting>
+// functions
      array adj_nodes();
      array adj_edges();
-     array  input_edges();
+     array input_edges();
      array output_edges();
      array loop_edges();
      array connected_edges(Node *n);
      void self_remove();
-</programlisting> 
-<para>Node Variables:</para>
-<programlisting>
+
+// variables
     double x
     double y
     double width
@@ -271,10 +279,12 @@ Javascript syntax and following are the Graph, Node and Edge objects.</para>
     bool begin
     bool end
 </programlisting>
-</sect1>
+</listitem>
+</varlistentry>
 
-<sect1 id="script-edges">
-<title>Edges</title>
+<varlistentry>
+<term>Edge Objects</term>
+<listitem>
 <programlisting>
     string color ( em hexa )
     string value
@@ -287,13 +297,30 @@ Javascript syntax and following are the Graph, Node and Edge objects.</para>
 
     void self_remove();
 </programlisting> 
-</sect1>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect2>
 
-<sect1 id="script-graph-algorithms">
+<sect2 id="script-graph-algorithms">
 <title>Graph Algorithms</title>
-<programlisting>
-    array dijkstra_shortest_path(Node* from, Node* to); // returns edges of shortest path
-</programlisting>
+<para>Sometimes it is useful if you can use functions for standard tasks, like computing shortest distances between two nodes. Currently we support the following algorithms that can be called from the scripting engine with nodes from the same graph.</para>
+<variablelist>
+<varlistentry>
+<term>Shortest Path Computation</term>
+<listitem>
+	<para>Computes the shortest path between the nodes <emphasis>start</emphasis> and <emphasis>end</emphasis>. Both nodes must be of the same graph. This computation respects if the graph is directed or undirected.</para>
+	<funcsynopsis>
+	<funcprototype>
+	<funcdef>array <function>dijkstra_shortest_path</function></funcdef>
+	<paramdef>Node* <parameter><replaceable>start</replaceable></parameter></paramdef>
+	<paramdef>Node* <parameter><replaceable>end</replaceable></parameter></paramdef>
+	</funcprototype>
+	</funcsynopsis>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect2>
 </sect1>
 
 <sect1 id="script-example">
@@ -304,7 +331,7 @@ graph:</para>
 /* A simple example that sets the color of the 4 first nodes in the first 
 graph: */
  
-var colours = new Array("red", "green", "blue", "yellow");
+var colors = new Array("red", "green", "blue", "yellow");
 
 /* graphs is an array of graphs, you can access a graph by its index in the 
 array or by its name, so if the first graph's name is Untitled0, the following 
@@ -312,14 +339,14 @@ sentence are right  */
 var list1= graphs[0].list_nodes(); //  1st form.
 var list2=Untitled0.list_nodes();              // 2nd form
  
- for ( var i = 0; i &lt; colours.length; i++){
+ for ( var i = 0; i &lt; colors.length; i++){
         if (i > list2.length) break;
-        list2[i].color = colours[i]
+        list2[i].color = colors[i]
  }
 </programlisting>
 </sect1>
-
 </chapter>
+
 
 <chapter id="commands">
 <title>Command Reference</title>
