@@ -57,13 +57,13 @@
 
 <chapter id="introduction">
 <title>Introduction</title>
-<para>&rocs; is a Graph Theory IDE for everybody interested in designing and analyzing graph algorithms. This explicitly includes
+<para>&rocs; is a Graph Theory IDE for everybody interested in designing and analyzing graph algorithms. This explicitly includes</para>
 <itemizedlist>
-	<listitem>lecturers who eventually want to demonstrate algorithms to their students,</listitem>
-	<listitem>students who want to understand and see how an algorithm works,</listitem>
-	<listitem>and everybody who has to design graph algorithms and needs at tool for prototype testing.</listitem>
+	<listitem><para>lecturers who eventually want to demonstrate algorithms to their students,</para></listitem>
+	<listitem><para>students who want to understand and see how an algorithm works,</para></listitem>
+	<listitem><para>and everybody who has to design graph algorithms and needs at tool for prototype testing.</para></listitem>
 </itemizedlist>
-For all these users, &rocs; provides an easy to use graph editor to set up graphs, a powerful Qt Script scripting engine to execute algorithms, and several helper tools to set up your graphs and data structures for your experiments. So the usual workflow is to write an algorithm, create a graph, and see in real-time how the algorithm works at the the graph.</para>
+<para>For all these users, &rocs; provides an easy to use graph editor to set up graphs, a powerful Qt Script scripting engine to execute algorithms, and several helper tools to set up your graphs and data structures for your experiments. So the usual workflow is to write an algorithm, create a graph, and see in real-time how the algorithm works at the the graph.</para>
 
 <screenshot>
 <screeninfo>A Screenshot of &rocs;.</screeninfo>
@@ -82,6 +82,7 @@ For all these users, &rocs; provides an easy to use graph editor to set up graph
 <title>The &rocs; User Interface</title>
 
 <sect1 id="user-interface-all">
+<title>General Elements of the User Interface</title>
 <para>
 The user interface is divided into several logical parts as presented at the screenshot below.
 </para> 
@@ -128,8 +129,8 @@ The user interface is divided into several logical parts as presented at the scr
 <title>Toolbars</title>
 <para>There are different possible toolbars for the visual graph editor that allow you to access features by only one click. At the default setting, the following toolbars are shown:</para>
 <itemizedlist>
-	<listitem>Main Toolbar</listitem>
-	<listitem>Alignment Toolbar</listitem>
+	<listitem><para>Main Toolbar</para></listitem>
+	<listitem><para>Alignment Toolbar</para></listitem>
 </itemizedlist>
 
 <sect2 id="user-interface-toolbars-main">
@@ -356,9 +357,9 @@ var list2=Untitled0.list_nodes();              // 2nd form
 	<title>Import and Export</title>
 	<para>&rocs; currently supports import and export of the following file formats:</para>
 	<itemizedlist>
-		<listitem>DOT files, also known as Graphviz files.</listitem>
-		<listitem>GML files</listitem>
-		<listitem>Plain-Text files.</listitem>
+		<listitem><para>DOT files, also known as Graphviz files.</para></listitem>
+		<listitem><para>GML files</para></listitem>
+		<listitem><para>Plain-Text files.</para></listitem>
 	</itemizedlist>
 	<para>Currently, for most of these file types only few values are imported. The imported values include nodes and their corresponding connections, names of all elements, values, and if given also coordinates.</para>
 </sect1>
@@ -450,17 +451,17 @@ choose different shortcut keys for different actions.
 </para>
 <para>Program Copyright:</para>
 <itemizedlist>
-	<listitem>Copyright 2008       Ugo Sangiori (ugorox AT gmail.com)</listitem>
-	<listitem>Copyright 2008-2011  Tomaz Canabrava (tcanabrava AT kde.org)</listitem>
-	<listitem>Copyright 2008-2011  Wagner Reck (wagner.reck AT gmail.com)</listitem>
-	<listitem>Copyright 2011 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</listitem>
+	<listitem><para>Copyright 2008       Ugo Sangiori (ugorox AT gmail.com)</para></listitem>
+	<listitem><para>Copyright 2008-2011  Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
+	<listitem><para>Copyright 2008-2011  Wagner Reck (wagner.reck AT gmail.com)</para></listitem>
+	<listitem><para>Copyright 2011 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para></listitem>
 </itemizedlist>
 
 <para>Documentation Copyright:</para>
 <itemizedlist>
-	<listitem>Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</listitem>
-	<listitem>Documentation copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</listitem>
-	<listitem>Documentation copyright 2011 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</listitem>
+	<listitem><para>Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para></listitem>
+	<listitem><para>Documentation copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
+	<listitem><para>Documentation copyright 2011 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para></listitem>
 </itemizedlist>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
