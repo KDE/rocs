@@ -57,89 +57,173 @@
 	<listitem>and everybody who has to design graph algorithms and needs at tool for prototype testing.</listitem>
 </itemizedlist>
 For all these users, &rocs; provides an easy to use graph editor to set up graphs, a powerful Qt Script scripting engine to execute algorithms, and several helper tools to set up your graphs and data structures for your experiments. So the usual workflow is to write an algorithm, create a graph, and see in real-time how the algorithm works at the the graph.</para>
+
+<screenshot>
+<screeninfo>A Screenshot of &rocs;.</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="rocs-screenshot.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>A Screenshot of &rocs;.</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+</chapter>
+
+<chapter id="user-interface">
+<title>The &rocs; User Interface</title>
+
+<sect1 id="user-interface-all">
+<para>
+The user interface is divided into several logical parts as presented at the screenshot below.
+</para> 
+<screenshot>
+	<screeninfo>GUI elements of the &rocs; interface.</screeninfo>
+	<mediaobject>
+	<imageobject>
+	<imagedata fileref="rocs-interfaces.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	<phrase>GUI elements of the &rocs; interface.</phrase>
+	</textobject>
+	</mediaobject>
+</screenshot>
+<variablelist>
+<varlistentry>
+	<term>Visual Graph Editor Toolbar</term>
+	<listitem><para>to be able to draw or modify graphs at the Visual Graph Editor whiteboard, you first need to select a tool here</para></listitem>
+</varlistentry>
+<varlistentry>
+	<term>Visual Graph Editor</term>
+	<listitem><para>This is the area where you can draw your graphs. Right click at the whiteboard, graph elements, or selected graph elements opens a context menu depending on what you click.</para></listitem>
+</varlistentry>
+<varlistentry>
+	<term>Graph Properties</term>
+	<listitem><para>This gives a complete list of all different graphs currently at the Visual Graph Editor whiteboard. Here you can modifications to, e.g., the graph name, visible properties like node names or values, or define default colors for the graph elements.</para></listitem>
+</varlistentry>
+<varlistentry>
+	<term>Script Editor</term>
+	<listitem><para>In this text editor you can write algorithms in a Qt Script (for our purposes this is essentially the same as JavaScript). You can work on several algorithms at the same time by opening or creating new script tabs at the main menu. The small disk symbol at a tab appears if current changes are unsaved.</para></listitem>
+</varlistentry>
+<varlistentry>
+	<term>Debug &amp; Script Output</term>
+	<listitem><para>This text area either writes debug information or the script output of your algorithm, depending on selection of the output setting. If the script throws an error automatically the debug output is selected. Further, the debug output presents all program output messages, too.</para></listitem>
+</varlistentry>
+<varlistentry>
+	<term>Script Execution</term>
+	<listitem><para>This menu controls execution of the algorithms. You can execute the script that is currently open at the script editor at the graph at the Visual Graph Editor whiteboard by pressing <guiicon>Start</guiicon>. While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.</para></listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="user-interface-toolbars">
+<title>Toolbars</title>
+<para>There are different possible toolbars for the visual graph editor that allow you to access features by only one click. At the default setting, the following toolbars are shown:</para>
+<itemizedlist>
+	<listitem>Main Toolbar</listitem>
+	<listitem>Alignment Toolbar</listitem>
+</itemizedlist>
+
+<sect2 id="user-interface-toolbars-main">
+<title>Main Toolbar</title>
+<para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the visual graph editor whiteboard:</para>
+<itemizedlist>
+<listitem><para>
+<guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some nodes and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements.</para></listitem>
+<listitem><para>
+<guilabel>Add Node</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new node that belongs to the currently selected graph.</para></listitem>
+<listitem><para>
+<guilabel>Add Edge</guilabel>: Click at one node, keep the mouse pressed and draw a line to another node to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (e.g., in an undirected graph you are not allowed to add multiple edges between two nodes).</para></listitem>
+<listitem><para>
+<guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
+<listitem><para>
+<guilabel>Zoom</guilabel>: Click at the whiteboard, keep the mouse pressed, and by this draw a rectangle. The whiteboard will be zoomed to the selected area.</para></listitem>
+</itemizedlist>
+<screenshot>
+<screeninfo>The Main Toolbar.</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="rocs-toolbar-main.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Main Toolbar.</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+	
+<sect2 id="user-interface-toolbars-alignment">
+<title>Alignment Toolbar</title>
+<para>You can add the optional <emphasis>Alignment Toolbar</emphasis>. Pressing an action at this toolbar has direct effect to the currently selected nodes:</para>
+<itemizedlist>
+<listitem><para>
+<guilabel>Align on the top</guilabel>: Align the nodes at the vertical position of the top-most node. This only affects the vertical positions.</para></listitem>
+<listitem><para>
+<guilabel>Align on the center</guilabel>: Align the nodes at the vertical position given by the center of all selected nodes vertical positions. This only affects the vertical positions.</para></listitem>
+<listitem><para>
+<guilabel>Align on the base</guilabel>: Align the nodes at the vertical position of the bottom-most node. This only affects the vertical positions.</para></listitem>
+<listitem><para>
+<guilabel>Align on the horizontal center</guilabel>: Align the nodes at the horizontal position of the top-most node. This only affects the horizontal positions.</para></listitem>
+<listitem><para>
+<guilabel>Align on the right</guilabel>: Align the nodes at the horizontal position of the right-most node. This only affects the horizontal positions.</para></listitem>
+<listitem><para>
+<guilabel>Align on a circle</guilabel>: Aligns the nodes at a circle of diameter equals to the maximal distance of the nodes. The nodes are positioned in the same sequence as given by view from the center of gravity of these nodes.</para></listitem>
+<listitem><para>
+<guilabel>Minimize Crossing Edges</guilabel>: Applies the Fruchterman-Reingold algorithm to minimize (approximatively) the number of crossing edges.</para></listitem>
+</itemizedlist>
+<screenshot>
+<screeninfo>The Alignment Toolbar.</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="rocs-toolbar-alignment.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Alignment Toolbar.</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+</sect1>
+
+<sect1 id="user-interface-graph-properties">
+	<title>Graph Properties</title>
+	<para>
+	On the left sidebar you can find the options for each opened graph. All these options are global 
+	per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.
+	</para>
+
+	<itemizedlist>
+	<listitem><para>
+	<guilabel>Graph Name</guilabel>: This is the name that your algorithm must use to access the graph.
+	</para></listitem>
+	<listitem><para>
+	<guilabel>Node Color</guilabel> for new created nodes, you can change the node color for all current nodes 
+	by clicking the <guilabel>All</guilabel> button
+	</para></listitem>
+	<listitem><para>
+	<guilabel>Edge Color</guilabel>
+	</para></listitem>
+	</itemizedlist>
+	<para>The last row of options consists of toggled buttons:</para>
+	<itemizedlist>
+	<listitem><para>
+	<guilabel>Show names in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
+	</para></listitem>
+	<listitem><para>
+	<guilabel>Show values in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
+	</para></listitem>
+	<!--listitem><para>
+	<guilabel>Graph is oriented</guilabel>
+	</para></listitem>
+	<listitem><para>
+	<guilabel>Graph is Automate</guilabel>
+	</para></listitem-->
+	</itemizedlist>
+</sect1>
 </chapter>
 
 <chapter id="using-rocs">
-<title>Using &rocs;</title>
-<para>
-The user interface is divided into three logical parts:
-</para> 
-
-<itemizedlist>
-<listitem><para>
-the top right part is where you draw your graphs, and the bottom right one is where you 
-create your algorithms,
-</para></listitem>
-<listitem><para>
-the left sidebar is where all your open graphs stay, you can open multiple 
-graphs per file.
-</para></listitem>
-</itemizedlist>
-
-
-<sect1 id="rocs-features">
-<title>&rocs; global settings</title>
-<para>
-On the left sidebar you can find the options for each opened graph, all these options are global 
-per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.</para>
-<itemizedlist>
-<listitem><para>
-<guilabel>Graph Name</guilabel>
-</para></listitem>
-<listitem><para>
-<guilabel>Node Color</guilabel> for new created nodes, you can change the node color for all current nodes 
-by clicking the <guilabel>All</guilabel> button
-</para></listitem>
-<listitem><para>
-<guilabel>Edge Color</guilabel>
-</para></listitem>
-</itemizedlist>
-<para>The last row of options consists in toggled buttons:</para>
-<itemizedlist>
-<listitem><para>
-<guilabel>Show names in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
-</para></listitem>
-<listitem><para>
-<guilabel>Show values in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
-</para></listitem>
-<!--listitem><para>
-<guilabel>Graph is oriented</guilabel>
-</para></listitem>
-<listitem><para>
-<guilabel>Graph is Automate</guilabel>
-</para></listitem-->
-</itemizedlist>
-</sect1>
-
-<sect1 id="rocs-toolbars">
-<title>&rocs; toolbars</title>
-<para>There are two toolbars, on the top. The main one has the following tools:</para>
-<itemizedlist>
-<listitem><para>
-<guilabel>Move Node</guilabel>: moves a node around the drawing area.</para></listitem>
-<listitem><para>
-<guilabel>Add Node</guilabel>: creates a new node at the clicked position on the drawing area.</para></listitem>
-<listitem><para>
-<guilabel>Add Edge</guilabel>: creates a new edge between two nodes.</para></listitem>
-<listitem><para>
-<guilabel>Select</guilabel>: select items by clicking on them.</para></listitem>
-<listitem><para>
-<guilabel>Delete</guilabel>: delete items by clicking on them.</para></listitem>
-<listitem><para>
-Use the align tools to place selected nodes.</para></listitem>
-</itemizedlist>
-
-<para>A right mouse click on a node or edge brings you the property dialog for that node 
-or edge.</para>
-<para>The layout toolbar consists in various aligns icons.</para>
-
-<para>To align nodes, choose the <guiicon>Select</guiicon> tool, click and drag a rectangle, then choose 
-the alignement  that you want.
-</para>
-</sect1>
-</chapter>
-
-<chapter id="scripting-rocs">
 <title>Scripting &rocs;</title>
 <para>After the graph is on screen, you can start creating the script for it. The language uses a
 Javascript syntax and following are the Graph, Node and Edge objects.</para>
