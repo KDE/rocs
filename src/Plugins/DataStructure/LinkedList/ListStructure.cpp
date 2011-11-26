@@ -86,7 +86,7 @@ Rocs::ListStructure::~ListStructure() {
 }
 
 PointerPtr Rocs::ListStructure::addPointer ( DataPtr from, DataPtr to ) {
-    foreach(PointerPtr e, from->out_pointers()){
+    foreach(PointerPtr e, from->out_pointers() + from->self_pointers()){
         e->remove();
     }
 
