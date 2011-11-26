@@ -18,17 +18,24 @@
 </personname>
 <email>tomaz.canabrava@gmail.com</email>
 </author>
+<author>
+<personname>
+<firstname>Andreas</firstname>
+<surname>Cord-Landwehr</surname>
+</personname>
+<email>cordlandwehr@googlemail.com</email>
+</author>
+
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
-<copyright>
-<year>2009</year>
-<holder>Tomaz Canabrava</holder>
-</copyright>
-<legalnotice>&FDLNotice;</legalnotice>
+<copyright><year>2009</year><holder>Tomaz Canabrava</holder></copyright>
+<copyright><year>2011</year><holder>Andreas Cord-Landwehr</holder></copyright>
 
-<date>2009-11-05</date>
-<releaseinfo>1.0</releaseinfo>
+<date>2011-11-26</date>
+<releaseinfo>1.1</releaseinfo>
+
+<legalnotice>&FDLNotice;</legalnotice>
 
 <abstract>
 <para>
@@ -436,19 +443,25 @@ choose different shortcut keys for different actions.
 
 
 <chapter id="credits">
-
 <title>Credits and License</title>
 
 <para>
 &rocs;
 </para>
-<para>
-Program copyright 2009 Tomaz Canabrava tcanabrava at kde dot org
-</para>
+<para>Program Copyright:</para>
+<itemizedlist>
+	<listitem>Copyright 2008       Ugo Sangiori (ugorox AT gmail.com)</listitem>
+	<listitem>Copyright 2008-2011  Tomaz Canabrava (tcanabrava AT kde.org)</listitem>
+	<listitem>Copyright 2008-2011  Wagner Reck (wagner.reck AT gmail.com)</listitem>
+	<listitem>Copyright 2011 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</listitem>
+</itemizedlist>
 
-<para>
-Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail; and Tomaz Canabrava tcanabrava at kde dot org
-</para>
+<para>Documentation Copyright:</para>
+<itemizedlist>
+	<listitem>Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</listitem>
+	<listitem>Documentation copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</listitem>
+	<listitem>Documentation copyright 2011 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</listitem>
+</itemizedlist>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 &underFDL;               <!-- FDL: do not remove -->
