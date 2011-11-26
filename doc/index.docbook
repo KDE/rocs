@@ -345,6 +345,16 @@ var list2=Untitled0.list_nodes();              // 2nd form
  }
 </programlisting>
 </sect1>
+<sect1>
+	<title>Import and Export</title>
+	<para>&rocs; currently supports import and export of the following file formats:</para>
+	<itemizedlist>
+		<listitem>DOT files, also known as Graphviz files.</listitem>
+		<listitem>GML files</listitem>
+		<listitem>Plain-Text files.</listitem>
+	</itemizedlist>
+	<para>Currently, for most of these file types only few values are imported. The imported values include nodes and their corresponding connections, names of all elements, values, and if given also coordinates.</para>
+</sect1>
 </chapter>
 
 
