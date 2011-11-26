@@ -4,7 +4,7 @@
   <!ENTITY kappname "&rocs;">
   <!ENTITY package "kdeedu">
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % English "INCLUDE"> 
+  <!ENTITY % English "INCLUDE">
 ]>
 <book lang="&language;">
 
@@ -85,7 +85,7 @@
 <title>General Elements of the User Interface</title>
 <para>
 The user interface is divided into several logical parts as presented at the screenshot below.
-</para> 
+</para>
 <screenshot>
 	<screeninfo>GUI elements of the &rocs; interface.</screeninfo>
 	<mediaobject>
@@ -108,7 +108,7 @@ The user interface is divided into several logical parts as presented at the scr
 </varlistentry>
 <varlistentry>
 	<term>Graph Properties</term>
-	<listitem><para>This gives a complete list of all different graphs currently at the Visual Graph Editor whiteboard. Here you can modifications to, e.g., the graph name, visible properties like node names or values, or define default colors for the graph elements.</para></listitem>
+	<listitem><para>This gives a complete list of all different graphs currently at the Visual Graph Editor whiteboard. Here you can make modifications to, &eg;, the graph name, visible properties like node names or values, or define default colors for the graph elements.</para></listitem>
 </varlistentry>
 <varlistentry>
 	<term>Script Editor</term>
@@ -142,7 +142,7 @@ The user interface is divided into several logical parts as presented at the scr
 <listitem><para>
 <guilabel>Add Node</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new node that belongs to the currently selected graph.</para></listitem>
 <listitem><para>
-<guilabel>Add Edge</guilabel>: Click at one node, keep the mouse pressed and draw a line to another node to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (e.g., in an undirected graph you are not allowed to add multiple edges between two nodes).</para></listitem>
+<guilabel>Add Edge</guilabel>: Click at one node, keep the mouse pressed and draw a line to another node to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two nodes).</para></listitem>
 <listitem><para>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
 <listitem><para>
@@ -160,7 +160,7 @@ The user interface is divided into several logical parts as presented at the scr
 </mediaobject>
 </screenshot>
 </sect2>
-	
+
 <sect2 id="user-interface-toolbars-alignment">
 <title>Alignment Toolbar</title>
 <para>You can add the optional <emphasis>Alignment Toolbar</emphasis>. Pressing an action at this toolbar has direct effect to the currently selected nodes:</para>
@@ -172,7 +172,10 @@ The user interface is divided into several logical parts as presented at the scr
 <listitem><para>
 <guilabel>Align on the base</guilabel>: Align the nodes at the vertical position of the bottom-most node. This only affects the vertical positions.</para></listitem>
 <listitem><para>
-<guilabel>Align on the horizontal center</guilabel>: Align the nodes at the horizontal position of the top-most node. This only affects the horizontal positions.</para></listitem>
+<guilabel>Align on the left</guilabel>: Align the nodes at the horizontal position of the left-most node. This only affects the horizontal positions.</para></listitem>
+<listitem><para>
+<guilabel>Align on the horizontal center</guilabel>: Align the nodes at the horizontal position of the top-most node. This only affects the horizontal
+positions.</para></listitem>
 <listitem><para>
 <guilabel>Align on the right</guilabel>: Align the nodes at the horizontal position of the right-most node. This only affects the horizontal positions.</para></listitem>
 <listitem><para>
@@ -196,7 +199,7 @@ The user interface is divided into several logical parts as presented at the scr
 
 <sect1 id="user-interface-graph-properties">
 	<title>Graph Properties</title>
-	<para>On the left sidebar you can find the options for each opened graph. All these options are global 
+	<para>On the left sidebar you can find the options for each opened graph. All these options are global
 	per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.</para>
 
 	<itemizedlist>
@@ -204,7 +207,7 @@ The user interface is divided into several logical parts as presented at the scr
 	<guilabel>Graph Name</guilabel>: This is the name that your algorithm must use to access the graph.
 	</para></listitem>
 	<listitem><para>
-	<guilabel>Node Color</guilabel> for new created nodes, you can change the node color for all current nodes 
+	<guilabel>Node Color</guilabel> for new created nodes, you can change the node color for all current nodes
 	by clicking the <guilabel>All</guilabel> button
 	</para></listitem>
 	<listitem><para>
@@ -259,7 +262,7 @@ The user interface is divided into several logical parts as presented at the scr
      bool automate
      string name
      string nodeDefaultColor // in HEXA
-     string edgeDefaultColor  // in HEXA 
+     string edgeDefaultColor  // in HEXA
 </programlisting>
 </listitem>
 </varlistentry>
@@ -304,7 +307,7 @@ The user interface is divided into several logical parts as presented at the scr
     node  end();
 
     void self_remove();
-</programlisting> 
+</programlisting>
 </listitem>
 </varlistentry>
 </variablelist>
@@ -333,20 +336,20 @@ The user interface is divided into several logical parts as presented at the scr
 
 <sect1 id="script-example">
 <title>Example</title>
-<para>Here is a simple script example that sets the color of the 4 first nodes in the first 
+<para>Here is a simple script example that sets the color of the 4 first nodes in the first
 graph:</para>
 <programlisting>
-/* A simple example that sets the color of the 4 first nodes in the first 
+/* A simple example that sets the color of the 4 first nodes in the first
 graph: */
- 
+
 var colors = new Array("red", "green", "blue", "yellow");
 
-/* graphs is an array of graphs, you can access a graph by its index in the 
-array or by its name, so if the first graph's name is Untitled0, the following 
+/* graphs is an array of graphs, you can access a graph by its index in the
+array or by its name, so if the first graph's name is Untitled0, the following
 sentence are right  */
 var list1= graphs[0].list_nodes(); //  1st form.
 var list2=Untitled0.list_nodes();              // 2nd form
- 
+
  for ( var i = 0; i &lt; colors.length; i++){
         if (i > list2.length) break;
         list2[i].color = colors[i]
@@ -399,7 +402,7 @@ var list2=Untitled0.list_nodes();              // 2nd form
 <guimenu>Settings</guimenu>
 <guisubmenu>Toolbars Shown</guisubmenu>
 </menuchoice></term>
-<listitem><para><action>Toggle</action> the <guimenuitem>Main</guimenuitem>, 
+<listitem><para><action>Toggle</action> the <guimenuitem>Main</guimenuitem>,
 and <guimenuitem>Layout</guimenuitem> toolbars.</para></listitem>
 </varlistentry>
 
