@@ -215,7 +215,7 @@ void MainWindow::uploadScript()
     dialog.setUploadFile(local);
 
     dialog.setUploadName(_codeEditor->document()->documentName());
-    dialog.setDescription("Added your description here.");
+    dialog.setDescription(i18n("Added your description here."));
 
     dialog.exec();
 
@@ -377,8 +377,8 @@ void MainWindow::showSettings()
      IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
      ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties( &dialog );
 
-     dialog.addPage(set,"Include Manager",QString(),"Include Manager",true);
-     dialog.addPage(defaultProperties,"Default Settings",QString(),"Default Settings",true);
+     dialog.addPage(set,i18n("Include Manager"),QString(),i18n("Include Manager"),true);
+     dialog.addPage(defaultProperties,i18n("Default Settings"),QString(),i18n("Default Settings"),true);
 
 
      connect(set,               SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
