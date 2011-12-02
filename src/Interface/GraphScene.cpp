@@ -294,7 +294,7 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     QAction *alignDataStructureLeft   = new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0, false );
     QAction *alignDataStructureRight  = new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0, false );
     QAction *alignDataStructureCircle = new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0, false );
-    QAction *alignDataStructureTree   = new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0, false );
+    QAction *alignDataStructureTree   = new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, this,0, false );
     menuDataStructureAlign->addAction ( alignDataStructureBottom );
     menuDataStructureAlign->addAction ( alignDataStructureCenter );
     menuDataStructureAlign->addAction ( alignDataStructureTop );
@@ -310,7 +310,7 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0 ) );
     menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0 ) );
     menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
-    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Tree" ),  AlignAction::MinCutTree, this,0 ) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, this,0 ) );
 
     QMenu *menuDataStructureAssignValues = new QMenu( i18n("Values") );
     menuDataStructureAssignValues->addAction ( new AssignValueAction ( i18n("Enumerate"), this, AssignValueAction::Enumerate, contextDataStructure, 0));
