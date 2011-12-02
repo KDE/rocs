@@ -44,7 +44,7 @@ GraphPropertiesWidget::GraphPropertiesWidget (DataStructurePtr g, MainWindow* pa
     _graphName->setText(_graph->name());
     _graphEdgeColor->setColor(_graph->pointerDefaultColor());
     _graphNodeColor->setColor(_graph->dataDefaultColor());
-    _graphVisible->setChecked( ! _graph->readOnly());
+//     _graphVisible->setChecked( ! _graph->readOnly());
     _activateGraph->setChecked(true);
     _showEdgeNames->setChecked( _graph->pointerNameVisibility() );
     _showEdgeValues->setChecked(_graph->pointerValueVisibility());
@@ -95,6 +95,7 @@ void GraphPropertiesWidget::on__graphDatumColorApplyNow_clicked() {
 
 void GraphPropertiesWidget::on__graphVisible_toggled(bool b){
   _graph->setReadOnly( !b );
+  qDebug() << "toggle visibility to " << b;
   _mainWindow->scene()->hideGraph( _graph, b );
 }
 

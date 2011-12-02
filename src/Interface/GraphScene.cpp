@@ -107,10 +107,14 @@ void GraphScene::updateAfter(QGraphicsItem *item) {
 
 void GraphScene::hideGraph(DataStructurePtr g, bool visibility)
 {
-    QList<QGraphicsItem*> list = _hashGraphs.values(g.get());
-    foreach(QGraphicsItem *i, list){
-        i->setVisible(visibility);
-    }
+    // FIXME in 4.9 this function is not working, but also not called
+    // Reason: it depends on collecting item values in _hashGraphs but
+    // without major changes it is not possible to remove deleted items reliable
+    // from that hash
+//     QList<QGraphicsItem*> list = _hashGraphs.values(g);
+//     foreach(QGraphicsItem *i, list){
+//         i->setVisible(visibility);
+//     }
 }
 
 void GraphScene::setAction(QAction *action) {

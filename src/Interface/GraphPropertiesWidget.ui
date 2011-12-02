@@ -54,19 +54,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="_graphVisible">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="KPushButton" name="_graphDelete">
        <property name="toolTip">
         <string>Delete the active graph</string>
