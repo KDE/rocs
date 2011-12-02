@@ -26,10 +26,11 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
 
+#include "rocslib_export.h"
 #include "Rocs_Typedefs.h"
 
 
-class ValueModifier
+class ROCSLIB_EXPORT ValueModifier
 {
 
 public:

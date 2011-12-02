@@ -31,6 +31,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/random/linear_congruential.hpp>
 
+#include "rocslib_export.h"
 #include "Rocs_Typedefs.h"
 
 /** \brief this class provides topology modifiers for data structures
@@ -39,7 +40,7 @@
  * make unique changes or connected to specific re-format signals to
  * apply a given topology after every change of the structure.
  */
-class Topology
+class ROCSLIB_EXPORT Topology
 {
     typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS,
         boost::property<boost::vertex_name_t, std::string> >
