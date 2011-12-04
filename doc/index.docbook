@@ -32,8 +32,8 @@
 <copyright><year>2009</year><holder>Tomaz Canabrava</holder></copyright>
 <copyright><year>2011</year><holder>Andreas Cord-Landwehr</holder></copyright>
 
-<date>2011-11-26</date>
-<releaseinfo>1.1</releaseinfo>
+<date>2011-12-04</date>
+<releaseinfo>1.1 &kde; 4.8</releaseinfo>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
@@ -120,7 +120,7 @@ The user interface is divided into several logical parts as presented at the scr
 </varlistentry>
 <varlistentry>
 	<term>Script Execution</term>
-	<listitem><para>This menu controls execution of the algorithms. You can execute the script that is currently open at the script editor at the graph at the Visual Graph Editor whiteboard by pressing <guiicon>Start</guiicon>. While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.</para></listitem>
+	<listitem><para>This area controls execution of the algorithms. You can execute the script that is currently open at the script editor at the graph at the Visual Graph Editor whiteboard by pressing <guiicon>Run</guiicon>. While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.</para></listitem>
 </varlistentry>
 </variablelist>
 </sect1>
@@ -138,7 +138,7 @@ The user interface is divided into several logical parts as presented at the scr
 <para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the visual graph editor whiteboard:</para>
 <itemizedlist>
 <listitem><para>
-<guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some nodes and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements.</para></listitem>
+<guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some nodes and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
 <listitem><para>
 <guilabel>Add Node</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new node that belongs to the currently selected graph.</para></listitem>
 <listitem><para>
@@ -146,7 +146,8 @@ The user interface is divided into several logical parts as presented at the scr
 <listitem><para>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
 <listitem><para>
-<guilabel>Zoom</guilabel>: Click at the whiteboard, keep the mouse pressed, and by this draw a rectangle. The whiteboard will be zoomed to the selected area.</para></listitem>
+<guilabel>Zoom</guilabel>: Click at the whiteboard, keep the &LMB; pressed, and by this draw a rectangle. The whiteboard will be zoomed to the selected area. Using the mousewheel to zoom in or out as well. 
+A double click with the &LMB; restores the original zoom.</para></listitem>
 </itemizedlist>
 <screenshot>
 <screeninfo>The Main Toolbar.</screeninfo>
@@ -166,21 +167,45 @@ The user interface is divided into several logical parts as presented at the scr
 <para>You can add the optional <emphasis>Alignment Toolbar</emphasis>. Pressing an action at this toolbar has direct effect to the currently selected nodes:</para>
 <itemizedlist>
 <listitem><para>
-<guilabel>Align on the top</guilabel>: Align the nodes at the vertical position of the top-most node. This only affects the vertical positions.</para></listitem>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsaligntop.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Top</guilabel>: Align the nodes at the vertical position of the top-most node. This only affects the vertical positions.</para></listitem>
 <listitem><para>
-<guilabel>Align on the center</guilabel>: Align the nodes at the vertical position given by the center of all selected nodes vertical positions. This only affects the vertical positions.</para></listitem>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsalignvmiddle.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Center</guilabel>: Align the nodes at the vertical position given by the center of all selected nodes vertical positions. This only affects the vertical positions.</para></listitem>
 <listitem><para>
-<guilabel>Align on the base</guilabel>: Align the nodes at the vertical position of the bottom-most node. This only affects the vertical positions.</para></listitem>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsalignbottom.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Base</guilabel>: Align the nodes at the vertical position of the bottom-most node. This only affects the vertical positions.</para></listitem>
 <listitem><para>
-<guilabel>Align on the left</guilabel>: Align the nodes at the horizontal position of the left-most node. This only affects the horizontal positions.</para></listitem>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsalignleft.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Left</guilabel>: Align the nodes at the horizontal position of the left-most node. This only affects the horizontal positions.</para></listitem>
 <listitem><para>
-<guilabel>Align on the horizontal center</guilabel>: Align the nodes at the horizontal position of the top-most node. This only affects the horizontal
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsalignhmiddle.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Center</guilabel>: Align the nodes at the horizontal position of the top-most node. This only affects the horizontal
 positions.</para></listitem>
 <listitem><para>
-<guilabel>Align on the right</guilabel>: Align the nodes at the horizontal position of the right-most node. This only affects the horizontal positions.</para></listitem>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsalignright.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Right</guilabel>: Align the nodes at the horizontal position of the right-most node. This only affects the horizontal positions.</para></listitem>
 <listitem><para>
-<guilabel>Align on a circle</guilabel>: Aligns the nodes at a circle of diameter equals to the maximal distance of the nodes. The nodes are positioned in the same sequence as given by view from the center of gravity of these nodes.</para></listitem>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsaligncircle.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Circle</guilabel>: Aligns the nodes at a circle of diameter equals to the maximal distance of the nodes. The nodes are positioned in the same sequence as given by view from the center of gravity of these nodes.</para></listitem>
 <listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsaligntree.png" format="PNG"/></imageobject>
+</inlinemediaobject>
 <guilabel>Minimize Crossing Edges</guilabel>: Applies the Fruchterman-Reingold algorithm to minimize (approximatively) the number of crossing edges.</para></listitem>
 </itemizedlist>
 <screenshot>
@@ -204,37 +229,32 @@ positions.</para></listitem>
 
 	<itemizedlist>
 	<listitem><para>
-	<guilabel>Graph Name</guilabel>: This is the name that your algorithm must use to access the graph.
+	<guilabel>Name</guilabel>: This is the name that your algorithm must use to access the graph.
 	</para></listitem>
 	<listitem><para>
-	<guilabel>Node Color</guilabel> for new created nodes, you can change the node color for all current nodes
+	<guilabel>Data Color</guilabel> for new created nodes, you can change the node color for all current nodes
 	by clicking the <guilabel>All</guilabel> button
 	</para></listitem>
 	<listitem><para>
-	<guilabel>Edge Color</guilabel>
+	  <guilabel>Pointer Color</guilabel> <!--FIXME color of edges?-->
 	</para></listitem>
 	</itemizedlist>
 	<para>The last row of options consists of toggled buttons:</para>
 	<itemizedlist>
 	<listitem><para>
-	<guilabel>Show names in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
+	<guilabel>Show names in:</guilabel> <guilabel>Data</guilabel> or <guilabel>Pointers</guilabel>.
 	</para></listitem>
 	<listitem><para>
 	<guilabel>Show values in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
 	</para></listitem>
-	<!--listitem><para>
-	<guilabel>Graph is oriented</guilabel>
-	</para></listitem>
-	<listitem><para>
-	<guilabel>Graph is Automate</guilabel>
-	</para></listitem-->
+	<!-- FIXME missing Graph Type Undirected Graph, Directed Graph, Multigraph -->
 	</itemizedlist>
 </sect1>
 </chapter>
 
 <chapter id="using-rocs">
 <title>Using &rocs;</title>
-<para>Usually the first step is to create a graph with the visual graph editor. You can do this either by hand, this is adding nodes and connecting them, or by using one of the helper algorithms that can be found <guimenu>Tools</guimenu> <guimenuitem>Generate Graph</guimenuitem>. Eventually, you also want to use the <guimenu>Tools</guimenu> <guimenuitem>Assign Values</guimenuitem> helper tools to assign your graph nodes and edges with initial values. Finally you need to give your graph a name. This name then will be the identifier that you must use for the scripting engine.</para>
+<para>Usually the first step is to create a graph with the visual graph editor. You can do this either by hand, this is adding nodes and connecting them, or by using one of the helper algorithms that can be found <menuchoice><guimenu>Tools</guimenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>. Eventually, you also want to use the <menuchoice><guimenu>Tools</guimenu> <guimenuitem>Assign Values</guimenuitem></menuchoice> helper tools to assign your graph nodes and edges with initial values. Finally you need to give your graph a name. This name then will be the identifier that you must use for the scripting engine.</para>
 
 <sect1 id="using-rocs-scripting">
 <title>Scripting</title>
@@ -367,84 +387,6 @@ var list2=Untitled0.list_nodes();              // 2nd form
 	<para>Currently, for most of these file types only few values are imported. The imported values include nodes and their corresponding connections, names of all elements, values, and if given also coordinates.</para>
 </sect1>
 </chapter>
-
-
-<chapter id="commands">
-<title>Command Reference</title>
-
-<sect1 id="rocs-mainwindow">
-<title>Menus and Shortcut Keys</title>
-
-<sect2>
-<title>The <guimenu>File</guimenu> Menu</title>
-<variablelist>
-<varlistentry>
-<term><menuchoice>
-<shortcut>
-<keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Quit</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Quits</action> &rocs;</para></listitem>
-</varlistentry>
-</variablelist>
-
-</sect2>
-
-
-<sect2>
-<title>The <guimenu>Settings</guimenu> Menu</title>
-
-<variablelist>
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu>
-<guisubmenu>Toolbars Shown</guisubmenu>
-</menuchoice></term>
-<listitem><para><action>Toggle</action> the <guimenuitem>Main</guimenuitem>,
-and <guimenuitem>Layout</guimenuitem> toolbars.</para></listitem>
-</varlistentry>
-
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu>
-<guimenuitem>Show Statusbar</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Toggle</action> the statusbar.</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu>
-<guimenuitem>Configure Shortcuts...</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Open</action> standard &kde; setting dialog that allows you to
-choose different shortcut keys for different actions.
-</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Settings</guimenu>
-<guimenuitem>Configure Toolbars...</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Configure</action> the items you want to put in the toolbar.
-</para></listitem>
-</varlistentry>
-
-</variablelist>
-
-</sect2>
-
-<sect2>
-<title>The <guimenu>Help</guimenu> Menu</title>
-&help.menu.documentation;
-</sect2>
-</sect1>
-</chapter>
-
 
 <chapter id="credits">
 <title>Credits and License</title>
