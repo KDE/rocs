@@ -47,10 +47,10 @@
 #include <boost/graph/erdos_renyi_generator.hpp>
 
 
+const double GenerateGraphWidget::PI_ = 3.14159265358979323846;
+
 //TODO output usefull error message
 namespace boost { void throw_exception( std::exception const & ) {} } // do noop on exception
-
-class QPushButton;
 
 GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     :   KDialog(parent)

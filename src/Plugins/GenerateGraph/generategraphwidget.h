@@ -96,7 +96,7 @@ class GenerateGraphWidget :
         void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges);
 
         Document* graphDoc_;
-        static const double PI_ = 3.14159265358979323846;
+        static const double PI_;
         int selectedGraphType_;
         QGridLayout *gridLayout_;
         QWidget* graphOptionsWidget_;
