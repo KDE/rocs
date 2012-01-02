@@ -18,6 +18,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#undef QT_STRICT_ITERATORS // boost property map can't work with iterators being classes
+
 #include "GraphStructure.h"
 #include "KDebug"
 #include "Data.h"
