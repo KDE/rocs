@@ -1,4 +1,4 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
@@ -7,7 +7,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -128,7 +128,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow()
     DocumentManager::self()->loadDocument();
 
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
-    GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());   
+    GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
 }
 
 MainWindow::~MainWindow()
@@ -136,7 +136,7 @@ MainWindow::~MainWindow()
     Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );
     Settings::setVSplitterSizeBottom ( _vSplitter->sizes() [1] );
     Settings::setHSplitterSizeLeft ( _hSplitter->sizes() [0] );
-    Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );  
+    Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
     Settings::setHScriptSplitterSizeLeft ( _hScriptSplitter->sizes() [0] );
     Settings::setHScriptSplitterSizeRight ( _hScriptSplitter->sizes() [1] );
 
@@ -164,18 +164,18 @@ void MainWindow::setupWidgets()
     // setup upper half
     QWidget *leftPanel  = setupWhiteboardPanel();         // graph properties
     _graphVisualEditor = GraphVisualEditor::self(); // graph editor whiteboard
-    
+
     _hSplitter = new QSplitter ( this );
     _hSplitter->setOrientation( Qt::Horizontal );
     _hSplitter->addWidget (leftPanel);
     _hSplitter->addWidget (_graphVisualEditor);
-    
+
     // setup lower half
     QWidget *scriptPanel = setupScriptPanel();
-  
+
     _vSplitter->addWidget ( _hSplitter );
     _vSplitter->addWidget ( scriptPanel );
-    
+
     _hScriptSplitter->setSizes ( QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() << 80 );
     _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
     _hSplitter->setSizes ( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight() );
@@ -225,10 +225,10 @@ void MainWindow::uploadScript()
 
 
 QWidget* MainWindow::setupScriptPanel()
-{     
+{
     _hScriptSplitter = new QSplitter( this );
     _hScriptSplitter->setOrientation( Qt::Horizontal );
-  
+
     _codeEditor = new CodeEditor ( this );
     _txtDebug = new KTextBrowser ( this );
     _txtOutput = new KTextBrowser( this );
@@ -240,17 +240,17 @@ QWidget* MainWindow::setupScriptPanel()
     _selectListing = new QComboBox;
     _selectListing->addItem( KIcon ( "accessories-text-editor" ), i18n("Program Messages"));
     _selectListing->addItem( KIcon ( "tools-report-bug" ), i18n("Debug Messages"));
-        
+
     QWidget *header = new QWidget( this );
     header->setLayout( new QHBoxLayout );
     header->layout()->addWidget(new QLabel(i18n("Select output:")));
     header->layout()->addWidget(_selectListing);
-    
+
     QWidget *listingWidget = new QWidget(this);
     listingWidget->setLayout( new QVBoxLayout );
     listingWidget->layout()->addWidget( header );
     listingWidget->layout()->addWidget( stackedListing );
-    
+
     QToolBar *executeCommands = new QToolBar;
     executeCommands->setToolButtonStyle( Qt::ToolButtonTextUnderIcon );
     executeCommands->setOrientation(Qt::Vertical);
@@ -259,19 +259,19 @@ QWidget* MainWindow::setupScriptPanel()
     _stopScript->setEnabled(false);
     executeCommands->addAction(_runScript);
     executeCommands->addAction(_stopScript);
-    
+
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
     connect(_selectListing, SIGNAL(currentIndexChanged(int)), stackedListing, SLOT(setCurrentIndex(int)));
-    
+
     _hScriptSplitter->addWidget( _codeEditor );
     _hScriptSplitter->addWidget( listingWidget );
-    
+
     QWidget *scriptInterface = new QWidget( this );
     scriptInterface->setLayout( new QHBoxLayout );
     scriptInterface->layout()->addWidget( _hScriptSplitter );
     scriptInterface->layout()->addWidget( executeCommands );
-    
+
     return scriptInterface;
 }
 
@@ -329,7 +329,7 @@ void MainWindow::setupActions()
     createAction("",                 i18n("Download Examples"), "download",          SLOT(downloadNewExamples()),  this);
     createAction("",                 i18n("Upload script"),     "upload",            SLOT(uploadScript()),  this);
     createAction("document-save",    i18n("Save All"),          "save-all",        Qt::Key_S, SLOT(saveAll()),   this);
-    
+
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", SLOT(showPossibleIncludes()), this);
 
     createAction("document-new",     i18n("New Script"),        "new-script",        SLOT(newScript()),    _codeEditor);
@@ -346,7 +346,7 @@ void MainWindow::setupActions()
 
     // EDIT actions
     actionCollection()->addAction("delete-selected", new DeleteAction( i18n("Delete"), _graphVisualEditor->scene(), 0) );
-    
+
     KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
 }
 
@@ -417,26 +417,26 @@ void MainWindow::setupDSPluginsAction()
     QList <QAction*> pluginList;
     QAction* action = 0;
     unplugActionList ( "DS_plugins" );
-    
+
     QList < DataStructurePluginInterface*> avaliablePlugins = DataStructurePluginManager::self()->pluginsList();
-    
+
     QActionGroup * group = new QActionGroup(this);
-    
+
     int count = 0;
     foreach ( DataStructurePluginInterface* p, avaliablePlugins ) {
         action = new KAction ( p->name(), this );
         action->setData(count++);
         action->setCheckable(true);
-        
+
         if (p->name() == DataStructurePluginManager::self()->pluginName()){
           action->setChecked(true);
         }
-        
+
         action->setActionGroup(group);
-        
+
         connect ( action, SIGNAL (triggered(bool)),
                   DataStructurePluginManager::self(), SLOT(setDataStructurePlugin()));
-        
+
         pluginList.append ( action );
     }
     plugActionList ( "DS_plugins", pluginList );
@@ -525,7 +525,7 @@ void MainWindow::loadDocument ( const QString& name )
         KMessageBox::sorry ( this, i18n ( "This does not seem to be a graph file." ), i18n ( "Invalid file" ) );
         return;
     }
-    
+
     DocumentManager::self()->loadDocument(name);
 }
 
@@ -556,7 +556,7 @@ void MainWindow::saveAll() {
 
 int MainWindow::saveIfChanged(){
     if ( DocumentManager::self()->activeDocument()->isModified() && !_codeEditor->isModified() ){
-        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( 
+        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n (
             "Changes on your graph document are unsaved. Do you want to save your changes?" ) );
         if ( btnCode == KMessageBox::Yes ){
             saveGraph();
@@ -564,7 +564,7 @@ int MainWindow::saveIfChanged(){
         return btnCode;
     }
     if ( !DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified() ){
-        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( 
+        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n (
             "Changes on your script files are unsaved. Do you want to save all unsaved scripts?" ) );
         if ( btnCode == KMessageBox::Yes ){
             _codeEditor->saveAllScripts();
@@ -572,7 +572,7 @@ int MainWindow::saveIfChanged(){
         return btnCode;
     }
     if ( DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified() ){
-        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n ( 
+        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n (
             "Changes on your script files and on your graph document are unsaved. Do you want to save your graph document and all unsaved scripts?" ) );
         if ( btnCode == KMessageBox::Yes ){
             _codeEditor->saveAllScripts();
@@ -655,11 +655,12 @@ void MainWindow::executeScript(const QString& text) {
     _txtDebug->clear();
 
     QString script = text.isEmpty() ? _codeEditor->text() : text;
-
+    QString scriptPath = _codeEditor->document()->url().path();
     IncludeManager inc;
 
-    script = inc.include(script, _codeEditor->document()->url().path(),
-                                 _codeEditor->document()->documentName());
+    script = inc.include(script,
+                         scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
+                         _codeEditor->document()->documentName());
 
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
     if (engine->isRunning() ) {

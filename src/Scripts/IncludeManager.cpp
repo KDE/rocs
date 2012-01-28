@@ -44,7 +44,7 @@ QString IncludeManager::include ( const QString& script, const QString& actualPa
     int pos;
     bool inComment = false;
     if (!actualPath.isEmpty()) {
-        _actualDir = QDir(actualPath.section('/', 0, -2)); // try the path of saved file
+        _actualDir = QDir(actualPath); // try the path of saved file
         _tempPath << _actualDir;
         if (!seekFile(filename).isNull()){
           _wasIncluded << seekFile(filename);
