@@ -659,13 +659,12 @@ void MainWindow::executeScriptFull(const QString& text) {
 
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
-    IncludeManager inc;
-
-    script = inc.include(script,
+    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    engine->includeManager().initialize(Settings::includePath());
+    script = engine->includeManager().include(script,
                          scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
                          _codeEditor->document()->documentName());
 
-    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
     if (engine->isRunning() ) {
         engine->stop();
     }

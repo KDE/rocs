@@ -28,7 +28,6 @@ class ROCSLIB_EXPORT IncludeManager {
     private:
         QList <QDir> _tempPath;
         QString processInclude ( QString arg1 );
-        QString seekFile ( const QString& arg1 );
         QStringList _wasIncluded;
         QDir _actualDir;
 
@@ -44,12 +43,18 @@ class ROCSLIB_EXPORT IncludeManager {
         filename should be path to file not only the name of file.
         */
         bool checkIfWasIncluded(const QString &file){
-	  return _wasIncluded.contains(file);
+            return _wasIncluded.contains(file);
         }
+        /** @brief Try find the fileName in the paths' list. If found, returns an absolute path to the file, otherwise return QString().
+         *  In the case of fileName be a absolute path to file, the fileName is returned.
+         */
+        QString seekFile ( const QString& arg1 );
 
         /** insert aditional path to seek files.*/
         void addPath(const QString& str);
         void addPath(const QStringList & str);
+
+        void initialize(const QStringList& tempPath = QStringList());
 
 };
 

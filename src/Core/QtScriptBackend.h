@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -13,7 +13,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 #ifndef QTSCRIPTBACKEND_H
@@ -23,6 +23,7 @@
 #include <QScriptValue>
 #include <QScriptString>
 #include "rocslib_export.h"
+#include <IncludeManager.h>
 
 class QScriptEngineDebugger;
 class Document;
@@ -42,8 +43,13 @@ public:
     void interrupt(); /** interrupts execution of the script **/
     QScriptEngine *engine(){ return _engine; }
 
+    void includeFile(const QString&);
+
     /** return true if is evaluating a script or running a tool script. */
     bool isRunning();
+
+    IncludeManager& includeManager(){return m_includeManager;}
+
 
 signals:
     void sendOutput(const QString& s);
@@ -53,7 +59,7 @@ signals:
     void finished();
 
 public slots:
-    /** 
+    /**
      * execute the preset script
      * emits SIGNAL finished() when execution is finished.
      */
@@ -69,17 +75,19 @@ public slots:
 
     */
     void stop();
-    
+
 
 private:
     void createGraphList();
-    
+
     QString _script;
     Document *_document;
     QScriptEngine *_engine;
     QScriptEngineDebugger *_engineSteps;    // used for stepped execution
 
+    IncludeManager m_includeManager;
     bool _runningTool;
+
 };
 
 #endif

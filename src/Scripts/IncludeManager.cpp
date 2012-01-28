@@ -22,21 +22,28 @@
 #include <KLocalizedString>
 #include <QDir>
 #include <KDebug>
-#include <settings.h>
 #include <KGlobal>
 #include <kstandarddirs.h>
 
 IncludeManager::IncludeManager() {
     addPath(KGlobal::dirs()->findDirs("appdata", "examples"));
 
-    QStringList list = Settings::includePath();
-
-    while(!list.isEmpty()){
-      addPath(list.last());
-      list.removeLast();
-    }
+//     QStringList list = Settings::includePath();
+//
+//     while(!list.isEmpty()){
+//       addPath(list.last());
+//       list.removeLast();
+//     }
 //     kDebug() << _tempPath;
 
+}
+void IncludeManager::initialize(const QStringList& tempPath)
+{
+    _tempPath.clear();
+    _wasIncluded.clear();
+
+    addPath(KGlobal::dirs()->findDirs("appdata", "examples"));
+    addPath(tempPath);
 }
 
 
@@ -150,6 +157,12 @@ QString IncludeManager::seekFile ( const QString & arg1 ) {
     if (arg1.isEmpty()){
       return QString();
     }
+    if (arg1.indexOf('/') != -1 ){
+        QDir dir (arg1.section('/', 0, -2));
+        if (dir.isAbsolute() && dir.exists(arg1))
+            return arg1;
+    }
+
     for (int count = _tempPath.count() - 1; count >= 0; -- count) {
         if (_tempPath.at(count).exists(arg1.trimmed())) {
             return _tempPath.at(count).absoluteFilePath(arg1.trimmed());

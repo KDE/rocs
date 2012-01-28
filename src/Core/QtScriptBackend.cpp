@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -13,7 +13,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -42,6 +42,11 @@ static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engi
 
 static QScriptValue interrupt_script(QScriptContext *context, QScriptEngine* /*engine*/) {
     self->interrupt();
+    return QScriptValue();
+}
+
+static QScriptValue include_script(QScriptContext *context, QScriptEngine* /*engine*/){
+    self->includeFile(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
@@ -75,6 +80,7 @@ void QtScriptBackend::execute() {
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
     _engine->globalObject().setProperty("interrupt", engine()->newFunction(interrupt_script));
+    _engine->globalObject().setProperty("include", engine()->newFunction(include_script));
 
     int size = _document->dataStructures().size();
     for (int i = 0; i < size; i++) {
@@ -82,7 +88,7 @@ void QtScriptBackend::execute() {
     }
     createGraphList();
     _engine->setProcessEventsInterval(100); //! TODO: Make that changable.
-    
+
     QString error = _engine->evaluate(_script).toString();
     if (_engine && _engine->hasUncaughtException()) {
         emit scriptError();
@@ -116,7 +122,7 @@ void QtScriptBackend::executeStep() {
         }
         createGraphList();
         _engine->setProcessEventsInterval(100);
-    
+
         QString error = _engine->evaluate(_script).toString();
         if (_engine && _engine->hasUncaughtException()) {
             emit scriptError();
@@ -199,6 +205,23 @@ void QtScriptBackend::output(const QString& str){
 void QtScriptBackend::continueExecutionStep() {
     if( _engine && _engineSteps && _engine->isEvaluating() ) {
         _engineSteps->action( QScriptEngineDebugger::ContinueAction )->trigger();
+    }
+}
+void QtScriptBackend::includeFile(const QString & includedFile){
+    QString fileName = m_includeManager.seekFile(includedFile);
+
+    if (m_includeManager.checkIfWasIncluded(fileName))
+        return;
+
+    QFile f(fileName);
+    if (f.open(QFile::ReadOnly)){
+        QString script = m_includeManager.include(f.readAll(), fileName.section('/',0,-2), fileName.section('/',-1));
+        QString error = _engine->evaluate(script, includedFile).toString();
+        if (_engine && _engine->hasUncaughtException()) {
+            emit scriptError();
+            emit sendDebug(i18n("<b style=\"color: red\"> Error in include file %1</b>").arg(includedFile));
+            emit sendDebug("<b style=\"color: red\">"+error+"</b>");
+        }
     }
 }
 

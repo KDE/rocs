@@ -39,6 +39,8 @@ set( rocs_core_SRCS
     GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
     GraphicsItem/PointerItem.cpp
+
+    Scripts/IncludeManager.cpp
 )
 
 kde4_add_library( rocslib  SHARED ${rocs_core_SRCS} )
@@ -128,7 +130,6 @@ set( rocs_models_SRCS
 
 set ( rocs_script_SRC
         Interface/PossibleIncludes.cpp
-        Scripts/IncludeManager.cpp
 )
 
 set(rocs_SRCS
