@@ -82,7 +82,6 @@
 #include <ktexteditor/view.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
-#include <qscriptenginedebugger.h>
 #include <QActionGroup>
 
 #include "../Plugins/PluginManager.h"
@@ -100,7 +99,7 @@
 
 #include "PossibleIncludes.h"
 
-MainWindow::MainWindow() :  KXmlGuiWindow()
+MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(new QScriptEngineDebugger(this))
 {
     setObjectName ( "RocsMainWindow" );
 
@@ -483,6 +482,8 @@ void MainWindow::setActiveDocument ( )
     connect( engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
     connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
     connect( engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
+    connect( engine, SIGNAL(engineCreated(QScriptEngine*)), this, SLOT(scriptEngineCreated(QScriptEngine*)));
+
     activeDocument->setModified(false);
 }
 
@@ -657,6 +658,11 @@ void MainWindow::executeScriptFull(const QString& text) {
 
     _txtDebug->clear();
 
+    _scriptDbg->detach();
+//     _scriptDbg->standardWindow()->show();
+    _scriptDbg->setAutoShowStandardWindow(true);
+
+
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
@@ -731,3 +737,9 @@ void MainWindow::showDebugOutput()
 
 void MainWindow::outputString ( const QString& s ) { _txtOutput->append ( s ); }
 void MainWindow::debugString ( const QString& s )  { _txtDebug->append ( s );  }
+
+void MainWindow::scriptEngineCreated(QScriptEngine* eng)
+{
+    _scriptDbg->attachTo(eng);
+}
+

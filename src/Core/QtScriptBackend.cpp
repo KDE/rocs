@@ -73,10 +73,10 @@ void QtScriptBackend::stop() {
 
 void QtScriptBackend::execute() {
     stop();
-
-    _engine = new QScriptEngine();
-    emit engineCreated(_engine);
-
+    if (!_engine){
+        _engine = new QScriptEngine();
+        emit engineCreated(_engine);
+    }
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
     _engine->globalObject().setProperty("interrupt", engine()->newFunction(interrupt_script));
@@ -89,7 +89,7 @@ void QtScriptBackend::execute() {
     createGraphList();
     _engine->setProcessEventsInterval(100); //! TODO: Make that changable.
 
-    QString error = _engine->evaluate(_script).toString();
+    QString error = _engine->evaluate(_script, i18n("Rocs Console script")).toString();
     if (_engine && _engine->hasUncaughtException()) {
         emit scriptError();
         emit sendDebug("<b style=\"color: red\">"+error+"</b>");
