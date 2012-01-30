@@ -93,6 +93,7 @@ void QtScriptBackend::execute() {
     if (_engine && _engine->hasUncaughtException()) {
         emit scriptError();
         emit sendDebug("<b style=\"color: red\">"+error+"</b>");
+        emit sendDebug("<b style=\"color: red\">"+_engine->uncaughtExceptionBacktrace().join("\n")+"</b>");
     }
     emit finished();
 }
@@ -222,6 +223,7 @@ void QtScriptBackend::includeFile(const QString & includedFile){
             emit scriptError();
             emit sendDebug(i18n("<b style=\"color: red\"> Error in include file %1</b>").arg(includedFile));
             emit sendDebug("<b style=\"color: red\">"+error+"</b>");
+            emit sendDebug("<b style=\"color: red\">"+_engine->uncaughtExceptionBacktrace().join("\n")+"</b>");
         }
     }
 }
