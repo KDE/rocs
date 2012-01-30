@@ -216,6 +216,7 @@ void QtScriptBackend::includeFile(const QString & includedFile){
     QFile f(fileName);
     if (f.open(QFile::ReadOnly)){
         QString script = m_includeManager.include(f.readAll(), fileName.section('/',0,-2), fileName.section('/',-1));
+        _engine->currentContext()->setActivationObject( _engine->currentContext()->parentContext()->activationObject());
         QString error = _engine->evaluate(script, includedFile).toString();
         if (_engine && _engine->hasUncaughtException()) {
             emit scriptError();
