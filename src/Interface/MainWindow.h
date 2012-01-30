@@ -60,6 +60,12 @@ public:
 
     GraphScene *scene() const;
 
+    enum ScriptMode{
+        Execute,
+        DebugMode,
+        DebugOnlyInCaseOfError
+    };
+
 private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.
@@ -92,6 +98,10 @@ private slots:
      * \param text string that will be printed at result shell
      */
     void executeScriptFull(const QString &text = QString());
+    void executeScript(const ScriptMode mode, const QString &text = QString());
+
+    void debugScript();
+
     
     /**
      * execute script until next "step" command is found in script
@@ -167,6 +177,7 @@ private: // Variables.
     SelectMoveHandAction *_selectMoveAction;
 
     QScriptEngineDebugger *_scriptDbg;
+    KAction* _debugScript;
 };
 
 #endif

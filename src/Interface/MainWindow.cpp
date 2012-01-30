@@ -255,14 +255,17 @@ QWidget* MainWindow::setupScriptPanel()
     executeCommands->setOrientation(Qt::Vertical);
     _runScript = new KAction( KIcon( "system-run" ), i18nc( "Script Execution", "Run" ), this );
     _stepRunScript = new KAction( KIcon( "go-next" ), i18nc( "Script Execution", "One Step" ), this );
+    _debugScript = new KAction ( KIcon ("debug-run"), i18n ( "Debug" ), this );
     _stopScript = new KAction( KIcon( "process-stop" ), i18nc( "Script Execution", "Stop" ), this );
     _stopScript->setEnabled(false);
     executeCommands->addAction( _runScript );
     executeCommands->addAction( _stepRunScript );
+    executeCommands->addAction(_debugScript);
     executeCommands->addAction( _stopScript );
 
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScriptFull()));
     connect(_stepRunScript, SIGNAL(triggered()), this, SLOT(executeScriptOneStep()));
+    connect(_debugScript, SIGNAL(triggered()), this, SLOT(debugScript()));
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
     connect(_selectListing, SIGNAL(currentIndexChanged(int)), stackedListing, SLOT(setCurrentIndex(int)));
 
@@ -652,20 +655,29 @@ void MainWindow::dsChanged(){
 #ifdef USING_QTSCRIPT
 
 void MainWindow::executeScriptFull(const QString& text) {
-    kDebug() << "Going to execute the script";
+    executeScript(MainWindow::Execute, text);
+}
+
+void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString& text)
+{
+        kDebug() << "Going to execute the script";
     if (_txtDebug == 0)   return;
     if ( scene() == 0)    return;
 
     _txtDebug->clear();
 
-    _scriptDbg->detach();
-//     _scriptDbg->standardWindow()->show();
-    _scriptDbg->setAutoShowStandardWindow(true);
-
-
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    if (engine->engine() && mode != Execute){
+
+        _scriptDbg->detach();
+    //     _scriptDbg->standardWindow()->show();
+        _scriptDbg->setAutoShowStandardWindow(true);
+
+        _scriptDbg->attachTo(engine->engine());
+        _scriptDbg->action(QScriptEngineDebugger::InterruptAction)->trigger();
+    }
     engine->includeManager().initialize(Settings::includePath());
     script = engine->includeManager().include(script,
                          scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
@@ -708,6 +720,7 @@ void MainWindow::executeScriptOneStep(const QString& text) {
 }
 
 
+
 void MainWindow::stopScript() {
     kDebug() << "Going to stop the script";
     if (_txtDebug == 0)   return;
@@ -718,6 +731,12 @@ void MainWindow::stopScript() {
     disableStopAction();
     engine->stop();
 }
+
+void MainWindow::debugScript()
+{
+    executeScript(DebugMode);
+}
+
 
 #endif
 
