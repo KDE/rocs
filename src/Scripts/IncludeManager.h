@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -22,7 +22,9 @@
 #include <QStringList>
 #include <QDir>
 
-class IncludeManager {
+#include "rocslib_export.h"
+
+class ROCSLIB_EXPORT IncludeManager {
     private:
         QList <QDir> _tempPath;
         QString processInclude ( QString arg1 );

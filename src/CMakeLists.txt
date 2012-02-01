@@ -59,6 +59,8 @@ set( rocslib_LIB_HDRS
   Core/QtScriptBackend.h
   Core/rocslib_export.h
   Core/Rocs_Typedefs.h
+  Core/DataStructurePluginInterface.h
+  Core/DataStructurePluginManager.h
 
   Core/Modifiers/Topology.h
 
@@ -69,6 +71,8 @@ set( rocslib_LIB_HDRS
   GraphicsItem/DataItem.h
   GraphicsItem/PointerItem.h
   GraphicsItem/GraphicsLayout.h
+
+  Scripts/IncludeManager.h
 )
 
 set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
