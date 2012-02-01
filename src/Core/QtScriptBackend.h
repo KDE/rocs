@@ -23,7 +23,7 @@
 #include <QScriptValue>
 #include <QScriptString>
 #include "rocslib_export.h"
-#include <IncludeManager.h>
+#include "IncludeManager.h"
 
 class QScriptEngineDebugger;
 class Document;
