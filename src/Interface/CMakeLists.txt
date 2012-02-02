@@ -11,9 +11,9 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES}
 set(librocsui_SRCS edgepropertieswidget.cpp
 	MainWindow.cpp
 	OpenedFilesWidget.cpp
-	GraphScene.cpp
+	VisualEditor/GraphScene.cpp
 	Separator.cpp
-	GraphVisualEditor.cpp
+	VisualEditor/GraphVisualEditor.cpp
 	GraphPropertiesWidget.cpp
 	GraphLayers.cpp
 	TabWidget.cpp

@@ -7,6 +7,7 @@ include_directories(
     Actions/
     GraphicsItem/
     Interface/
+    Interface/VisualEditor
     Models/
     Plugins/
     Scripts/
@@ -102,9 +103,7 @@ set( rocs_interface_SRCS
     Interface/IncludeManagerSettings.cpp
     Interface/MainWindow.cpp
     Interface/OpenedFilesWidget.cpp
-    Interface/GraphScene.cpp
     Interface/Separator.cpp
-    Interface/GraphVisualEditor.cpp
     Interface/GraphPropertiesWidget.cpp
     Interface/GraphLayers.cpp
     Interface/TabWidget.cpp
@@ -112,6 +111,8 @@ set( rocs_interface_SRCS
     Interface/NodePropertiesWidget.cpp
     Interface/edgepropertieswidget.cpp
     Interface/ConfigureDefaultProperties.cpp
+	Interface/VisualEditor/GraphScene.cpp
+    Interface/VisualEditor/GraphVisualEditor.cpp
 )
 
 set( rocs_models_SRCS
@@ -195,4 +196,3 @@ if(KDE4_BUILD_TESTS)
     enable_testing()
     add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)
-
