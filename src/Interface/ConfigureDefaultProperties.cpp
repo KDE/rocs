@@ -19,7 +19,7 @@
 #include "ConfigureDefaultProperties.h"
 #include "ui_ConfigureDefaultProperties.h"
 #include <settings.h>
-#include "Interface/GraphVisualEditor.h"
+#include "GraphVisualEditor.h"
 #include "GraphicsLayout.h"
 
 

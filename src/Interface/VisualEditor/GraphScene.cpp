@@ -260,16 +260,92 @@ void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
 
 void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     event->accept();
-    QMenu menu; // the context menu
-    QMenu *menuDataStructure = menu.addMenu( i18n("Data Structure") );
-    QMenu *menuSelected = menu.addMenu( i18n("Selected") );
+    _contextMenu = createContextMenu(event->screenPos());
+    _contextMenu->exec(event->screenPos());
     
+//     // TODO this is not a nice code
+//     // refactor this for SC 4.9
     
+//     if (selectedItem == addAction) {
+//         addAction->executePress(event->scenePos());
+//     }
+//     if ( selectedItem == alignDataStructureBottom ||
+//         selectedItem == alignDataStructureTop ||
+//         selectedItem == alignDataStructureCenter ||
+//         selectedItem == alignDataStructureLeft ||
+//         selectedItem == alignDataStructureRight ||
+//         selectedItem == alignDataStructureCircle ||
+//         selectedItem == alignDataStructureTree )
+//     {
+//         AlignAction* action = static_cast<AlignAction*>(selectedItem);
+//         QGraphicsItem *i = itemAt(event->scenePos());
+//         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
+//             action->setDataStructure(nItem->data()->dataStructure());
+//         }
+//         action->align();
+//         action->unsetDataStructure();
+//     }
+//     
+//     if (selectedItem == propertyAction) {
+//         QGraphicsItem *i = itemAt(event->scenePos());
+//         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
+//             _datumPropertiesWidget->setData(nItem, event->screenPos());
+//         }
+//         else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
+//             _pointerPropertiesWidget->setPointer(eItem->pointer(), event->screenPos());
+//         }
+//     }
+//     else
+//     {
+//         // nothing was chosen
+//     }
+}
+
+
+void GraphScene::updateGraph(DataStructurePtr g) {
+    foreach(DataPtr n, g->dataList()) {
+        n->setName(n->name());
+    }
+
+    foreach(PointerPtr e, g->pointers()) {
+       e->setName(e->name());
+    }
+}
+
+void GraphScene::updateDocument() {
+    if (_graphDocument == 0) {
+        return;
+    }
+
+    clear();
+    int size = _graphDocument->dataStructures().size();
+
+    for (int i = 0; i < size; i++) {
+        updateGraph( _graphDocument->dataStructures().at(i) );
+    }
+}
+
+void GraphScene::resize() {
+    QRectF newSize(_graphDocument->left(), // x
+                   _graphDocument->top(),  // y
+                   _graphDocument->right()-_graphDocument->left(), // width
+                   _graphDocument->bottom()-_graphDocument->top()); // height
+
+    setSceneRect( newSize );
+    emit resized();
+}
+
+QMenu* GraphScene::createContextMenu(QPoint position)
+{
+    QMenu *menu = new QMenu; // the context menu
+    QMenu *menuDataStructure = menu->addMenu( i18n("Data Structure") );
+    QMenu *menuSelected = menu->addMenu( i18n("Selected") );
+
     // prepare some context information
     bool contextAtItem = false;
     DataStructurePtr contextDataStructure;
     DataPtr contextData;    
-    QGraphicsItem *i = itemAt(event->scenePos());
+    QGraphicsItem *i = itemAt(position);
     if (DataItem *dataItem = (qgraphicsitem_cast<DataItem*>(i))){
         contextAtItem = true;
         contextDataStructure = dataItem->data()->dataStructure();
@@ -285,7 +361,10 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     menuZoom->addAction( zoomInAction );
     menuZoom->addAction( zoomOutAction );
     menuZoom->addAction( zoomResetAction );
-        
+    connect( zoomInAction, SIGNAL(triggered(bool)), zoomAction, SLOT(zoomInCenter()));
+    connect( zoomOutAction, SIGNAL(triggered(bool)), zoomAction, SLOT(zoomOutCenter()));
+    connect( zoomResetAction, SIGNAL(triggered(bool)), zoomAction, SLOT(zoomReset()));
+
     // alignment menu
     QMenu *menuDataStructureAlign = new QMenu( i18n("Align") );
     QAction *alignDataStructureBottom = new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0, false );
@@ -341,90 +420,13 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     }
     if (!contextAtItem) {
         menuDataStructure->setDisabled(true);
-        menu.addAction(addAction);
-        menu.addMenu(menuZoom);
+        menu->addAction(addAction);
+        menu->addMenu(menuZoom);
     } else {
-        menu.addAction(propertyAction);
-        menu.addAction(deleteItemAction);
-    }
-
-    // TODO this is not a nice code
-    // refactor this for SC 4.9
-    QAction* selectedItem = menu.exec(event->screenPos());
-    if (selectedItem == addAction) {
-        addAction->executePress(event->scenePos());
-    }
-    if (selectedItem == zoomInAction) {
-        zoomAction->zoomIn(event->scenePos());
-    }
-    if (selectedItem == zoomOutAction) {
-        zoomAction->zoomOut(event->scenePos());
-    }
-    if (selectedItem == zoomResetAction) {
-        zoomAction->zoomReset();
-    }
-    if ( selectedItem == alignDataStructureBottom ||
-        selectedItem == alignDataStructureTop ||
-        selectedItem == alignDataStructureCenter ||
-        selectedItem == alignDataStructureLeft ||
-        selectedItem == alignDataStructureRight ||
-        selectedItem == alignDataStructureCircle ||
-        selectedItem == alignDataStructureTree )
-    {
-        AlignAction* action = static_cast<AlignAction*>(selectedItem);
-        QGraphicsItem *i = itemAt(event->scenePos());
-        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-            action->setDataStructure(nItem->data()->dataStructure());
-        }
-        action->align();
-        action->unsetDataStructure();
+        menu->addAction(propertyAction);
+        menu->addAction(deleteItemAction);
     }
     
-    if (selectedItem == propertyAction) {
-        QGraphicsItem *i = itemAt(event->scenePos());
-        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-            _datumPropertiesWidget->setData(nItem, event->screenPos());
-        }
-        else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
-            _pointerPropertiesWidget->setPointer(eItem->pointer(), event->screenPos());
-        }
-    }
-    else
-    {
-        // nothing was chosen
-    }
+    return menu;
 }
 
-
-void GraphScene::updateGraph(DataStructurePtr g) {
-    foreach(DataPtr n, g->dataList()) {
-        n->setName(n->name());
-    }
-
-    foreach(PointerPtr e, g->pointers()) {
-       e->setName(e->name());
-    }
-}
-
-void GraphScene::updateDocument() {
-    if (_graphDocument == 0) {
-        return;
-    }
-
-    clear();
-    int size = _graphDocument->dataStructures().size();
-
-    for (int i = 0; i < size; i++) {
-        updateGraph( _graphDocument->dataStructures().at(i) );
-    }
-}
-
-void GraphScene::resize() {
-    QRectF newSize(_graphDocument->left(), // x
-                   _graphDocument->top(),  // y
-                   _graphDocument->right()-_graphDocument->left(), // width
-                   _graphDocument->bottom()-_graphDocument->top()); // height
-
-    setSceneRect( newSize );
-    emit resized();
-}

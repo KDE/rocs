@@ -111,7 +111,7 @@ set( rocs_interface_SRCS
     Interface/NodePropertiesWidget.cpp
     Interface/edgepropertieswidget.cpp
     Interface/ConfigureDefaultProperties.cpp
-	Interface/VisualEditor/GraphScene.cpp
+    Interface/VisualEditor/GraphScene.cpp
     Interface/VisualEditor/GraphVisualEditor.cpp
 )
 

@@ -34,6 +34,7 @@ class QGraphicsSceneMouseEvent;
 class QGraphicsSceneWheelEvent;
 class QGraphicsSceneContextMenuEvent;
 class QKeyEvent;
+class QMenu;
 class DataPropertiesWidget;
 class PointerPropertiesWidget;
 
@@ -82,6 +83,8 @@ protected:
     void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
+    QMenu * createContextMenu(QPoint position);
+    QMenu *_contextMenu;
     Document *_graphDocument;
     DataStructurePtr _graph;
     AbstractAction *_action;

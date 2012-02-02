@@ -32,6 +32,7 @@ class QGraphicsSceneWheelEvent;
 
 class ZoomAction : public AbstractAction
 {
+    Q_OBJECT
 
 public:
     ZoomAction(GraphScene* scene, QObject* parent);
@@ -41,8 +42,12 @@ public:
     bool executeDoubleClick(QPointF pos);
     bool executeKeyRelease(QKeyEvent* keyEvent);
     bool executeWheelEvent(QGraphicsSceneWheelEvent *wEvent);
+    
+public slots:
     void zoomOut(QPointF zoomCenter);
     void zoomIn(QPointF zoomCenter);
+    void zoomInCenter();
+    void zoomOutCenter();
     void zoomReset();
     
 private:

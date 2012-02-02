@@ -125,21 +125,31 @@ bool ZoomAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent)
     return true;
 }
 
-void ZoomAction::zoomIn(QPointF zoomCenter) {
+void ZoomAction::zoomInCenter() {
     m_view->scale(1.25, 1.25);
     _zoomFactor *= 1.25;
+}
+
+
+void ZoomAction::zoomIn(QPointF zoomCenter) {
+    zoomInCenter();
     m_view->centerOn(zoomCenter);
 }
 
-void ZoomAction::zoomOut(QPointF zoomCenter) {
+void ZoomAction::zoomOutCenter() {
     if (
         m_view->width()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->width()
         || m_view->height()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->height()
     ) {
         m_view->scale(0.8, 0.8);
         _zoomFactor *= 0.8;
-        m_view->centerOn(zoomCenter);
     }
+}
+
+
+void ZoomAction::zoomOut(QPointF zoomCenter) {
+    zoomOutCenter();
+   m_view->centerOn(zoomCenter);
 }
 
 void ZoomAction::zoomReset() {
