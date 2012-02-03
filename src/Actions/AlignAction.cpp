@@ -1,8 +1,8 @@
 /*
     This file is part of Rocs.
-    Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
-    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2008       Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -22,7 +22,6 @@
 #include <KIcon>
 #include "GraphVisualEditor.h"
 #include "GraphScene.h"
-#include "generics.h"
 #include "DataStructure.h"
 #include "Pointer.h"
 #include "DataItem.h"
@@ -39,19 +38,27 @@
 #include <QPair>
 #include <boost/graph/graph_concepts.hpp>
 
-namespace boost {
-void throw_exception( std::exception const & ) {} } // do noop on exception
 
-AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, GraphScene *scene, QWidget *parent, bool addConnect)
-        : KAction(KIcon(), tooltip, parent) 
+AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, GraphScene* gc)
+        : KAction(KIcon(), tooltip, gc) 
 {
-    m_orientation = o;
-    _graphScene = scene;
+    _graphScene = gc;
+    setupOrientation(o);
 
-    if (addConnect) {
-        connect(this, SIGNAL(triggered()), this, SLOT(align()));
-    }
-    
+    connect(this, SIGNAL(triggered()), this, SLOT(align())); 
+}
+
+void AlignAction::registerData(DataList dataList) {
+    _registeredData = dataList;
+}
+
+void AlignAction::unsetData() {
+    _registeredData.clear();
+}
+
+void AlignAction::setupOrientation(AlignAction::Orientation o)
+{
+    _orientation = o;
     switch (o) {
     case Left :
         setIcon(KIcon("rocsalignleft"));
@@ -80,18 +87,10 @@ AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, Gra
     }
 }
 
-void AlignAction::setDataStructure(DataStructurePtr dataStructure) {
-    _dataStructure = dataStructure; 
-}
-
-void AlignAction::unsetDataStructure() {
-    _dataStructure.reset();
-}
-
 
 void AlignAction::align() {
     DataList dataList;
-    if (!_dataStructure) {
+    if (_registeredData.empty()) {
         QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
         foreach(QGraphicsItem *i, itemList) {
             if ( DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i) ) {
@@ -99,12 +98,12 @@ void AlignAction::align() {
             }
         }
     } else {
-        dataList = _dataStructure->dataList();
+        dataList = _registeredData;
     }
 
     if (dataList.size() < 1) return;
     _graphScene->setHideEdges(true);
-    switch (m_orientation) {
+    switch (_orientation) {
     case Left :
     case VCenter :
         qSort(dataList.begin(), dataList.end(),  leftLessThan);
@@ -132,12 +131,13 @@ void AlignAction::align() {
     }
 
     _graphScene->setHideEdges(false);
+    unsetData();
 }
 
 void AlignAction::alignY(DataList dataList) {
     qreal final = dataList[0]->y();
 
-    if (m_orientation == VCenter || m_orientation == HCenter) {
+    if (_orientation == VCenter || _orientation == HCenter) {
         qreal otherSide = dataList[dataList.size()-1]->y();
         final = (final + otherSide) / 2;
     }
@@ -148,7 +148,7 @@ void AlignAction::alignY(DataList dataList) {
 
 void AlignAction::alignX(DataList dataList) {
     qreal final = dataList[0]->x();
-    if (m_orientation == VCenter || m_orientation == HCenter) {
+    if (_orientation == VCenter || _orientation == HCenter) {
         qreal otherSide = dataList[dataList.size()-1]->x();
         final = (final + otherSide) / 2;
     }

@@ -38,15 +38,28 @@ AddDataAction::~AddDataAction() {
     kDebug() << "Destroyed";
 }
 
-bool AddDataAction::executePress(QPointF pos) {
+bool AddDataAction::executePress(QPointF pos)
+{
     if (  !DocumentManager::self()->activeDocument()->activeDataStructure()
        ||  DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly() 
     ) {
         return false;
     }
-    DocumentManager::self()->activeDocument()->activeDataStructure()
+    DataPtr tmp = DocumentManager::self()->activeDocument()->activeDataStructure()
             ->addData(i18n("untitled"), QPointF(pos.x(), pos.y()));
-            
+    qDebug()  << " the data's actual position: " << tmp.get()->x() << ", " << tmp.get()->y() ;
     return true;
 }
 
+
+void AddDataAction::setAddPosition(QPointF position)
+{
+    qDebug() << "add node at position " << position;
+    _position = position;
+}
+
+
+bool AddDataAction::executePress()
+{
+    return executePress(_position);
+}

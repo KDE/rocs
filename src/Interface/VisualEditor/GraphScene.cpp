@@ -260,32 +260,12 @@ void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
 
 void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     event->accept();
-    _contextMenu = createContextMenu(event->screenPos());
+    _contextMenu = createContextMenu(event->scenePos());
     _contextMenu->exec(event->screenPos());
     
+   
 //     // TODO this is not a nice code
 //     // refactor this for SC 4.9
-    
-//     if (selectedItem == addAction) {
-//         addAction->executePress(event->scenePos());
-//     }
-//     if ( selectedItem == alignDataStructureBottom ||
-//         selectedItem == alignDataStructureTop ||
-//         selectedItem == alignDataStructureCenter ||
-//         selectedItem == alignDataStructureLeft ||
-//         selectedItem == alignDataStructureRight ||
-//         selectedItem == alignDataStructureCircle ||
-//         selectedItem == alignDataStructureTree )
-//     {
-//         AlignAction* action = static_cast<AlignAction*>(selectedItem);
-//         QGraphicsItem *i = itemAt(event->scenePos());
-//         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-//             action->setDataStructure(nItem->data()->dataStructure());
-//         }
-//         action->align();
-//         action->unsetDataStructure();
-//     }
-//     
 //     if (selectedItem == propertyAction) {
 //         QGraphicsItem *i = itemAt(event->scenePos());
 //         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
@@ -335,7 +315,7 @@ void GraphScene::resize() {
     emit resized();
 }
 
-QMenu* GraphScene::createContextMenu(QPoint position)
+QMenu* GraphScene::createContextMenu(QPointF position)
 {
     QMenu *menu = new QMenu; // the context menu
     QMenu *menuDataStructure = menu->addMenu( i18n("Data Structure") );
@@ -344,7 +324,7 @@ QMenu* GraphScene::createContextMenu(QPoint position)
     // prepare some context information
     bool contextAtItem = false;
     DataStructurePtr contextDataStructure;
-    DataPtr contextData;    
+    DataPtr contextData;
     QGraphicsItem *i = itemAt(position);
     if (DataItem *dataItem = (qgraphicsitem_cast<DataItem*>(i))){
         contextAtItem = true;
@@ -367,13 +347,24 @@ QMenu* GraphScene::createContextMenu(QPoint position)
 
     // alignment menu
     QMenu *menuDataStructureAlign = new QMenu( i18n("Align") );
-    QAction *alignDataStructureBottom = new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0, false );
-    QAction *alignDataStructureCenter = new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this,0, false );
-    QAction *alignDataStructureTop    = new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this,0, false );
-    QAction *alignDataStructureLeft   = new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0, false );
-    QAction *alignDataStructureRight  = new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0, false );
-    QAction *alignDataStructureCircle = new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0, false );
-    QAction *alignDataStructureTree   = new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, this,0, false );
+    AlignAction *alignDataStructureBottom = new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this);
+    AlignAction *alignDataStructureCenter = new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this);
+    AlignAction *alignDataStructureTop    = new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this);
+    AlignAction *alignDataStructureLeft   = new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this);
+    AlignAction *alignDataStructureRight  = new AlignAction ( i18n ( "Right" ), AlignAction::Right, this);
+    AlignAction *alignDataStructureCircle = new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this);
+    AlignAction *alignDataStructureTree   = new AlignAction ( i18n ( "Minimize Crossing Edges" ), AlignAction::MinCutTree, this);
+
+    if (contextDataStructure){
+        alignDataStructureBottom->registerData(contextDataStructure->dataList());
+        alignDataStructureCenter->registerData(contextDataStructure->dataList());
+        alignDataStructureTop->registerData(contextDataStructure->dataList());
+        alignDataStructureLeft->registerData(contextDataStructure->dataList());
+        alignDataStructureRight->registerData(contextDataStructure->dataList());
+        alignDataStructureCircle->registerData(contextDataStructure->dataList());
+        alignDataStructureTree->registerData(contextDataStructure->dataList());
+    }
+    
     menuDataStructureAlign->addAction ( alignDataStructureBottom );
     menuDataStructureAlign->addAction ( alignDataStructureCenter );
     menuDataStructureAlign->addAction ( alignDataStructureTop );
@@ -383,13 +374,13 @@ QMenu* GraphScene::createContextMenu(QPoint position)
     menuDataStructureAlign->addAction ( alignDataStructureTree );
 
     QMenu *menuSelectedAlign = new QMenu( i18n("Align") );
-    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this,0 ) );
-    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this,0 ) );
-    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this,0 ) );
-    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this,0 ) );
-    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Right" ), AlignAction::Right, this,0 ) );
-    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this,0 ) );
-    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, this,0 ) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Bottom" ),  AlignAction::Bottom, this) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Center" ),AlignAction::HCenter,this) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Top" ),   AlignAction::Top, this) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Left" ),  AlignAction::Left, this) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Right" ), AlignAction::Right, this) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Circle" ),  AlignAction::Circle, this) );
+    menuSelectedAlign->addAction ( new AlignAction ( i18n ( "Minimize Crossing Edges" ),  AlignAction::MinCutTree, this) );
 
     QMenu *menuDataStructureAssignValues = new QMenu( i18n("Values") );
     menuDataStructureAssignValues->addAction ( new AssignValueAction ( i18n("Enumerate"), this, AssignValueAction::Enumerate, contextDataStructure, 0));
@@ -402,7 +393,9 @@ QMenu* GraphScene::createContextMenu(QPoint position)
     menuSelectedAssignValues->addAction ( new AssignValueAction ( i18n("Random Reals"), this, AssignValueAction::RandomReal, 0));
     
     // puzzling the menu together
-    AddDataAction *addAction = new AddDataAction(this);
+    AddDataAction *addNodeAction = new AddDataAction(this);
+    addNodeAction->setAddPosition(position);
+    connect( addNodeAction, SIGNAL(triggered(bool)), addNodeAction, SLOT(executePress()));
     DeleteAction *deleteDataStructureAction = new DeleteAction( i18n("Delete"), this, contextDataStructure, 0);
     DeleteAction *deleteSelectedAction = new DeleteAction( i18n("Delete"), this, 0);
     DeleteAction *deleteItemAction = new DeleteAction( i18n("Delete"), this, contextData, 0);
@@ -420,7 +413,7 @@ QMenu* GraphScene::createContextMenu(QPoint position)
     }
     if (!contextAtItem) {
         menuDataStructure->setDisabled(true);
-        menu->addAction(addAction);
+        menu->addAction(addNodeAction);
         menu->addMenu(menuZoom);
     } else {
         menu->addAction(propertyAction);

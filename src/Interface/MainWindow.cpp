@@ -312,14 +312,14 @@ void MainWindow::setupActions()
     actionCollection()->action ( "selectmove" )->toggle();
     gc->setAction ( _selectMoveAction );
 
-    _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18nc( "Alignment", "Base" ),  AlignAction::Bottom, gc, _graphVisualEditor ) );
-    _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18nc( "Alignment", "Center" ),AlignAction::HCenter,gc,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-htop",   new AlignAction ( i18nc( "Alignment", "Top" ),   AlignAction::Top,    gc,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18nc( "Alignment", "Left" ),  AlignAction::Left,   gc,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18nc( "Alignment", "Center" ),AlignAction::VCenter,gc,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-vright", new AlignAction ( i18nc( "Alignment", "Right" ), AlignAction::Right,  gc,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-circle", new AlignAction ( i18nc( "Alignment", "Circle" ),  AlignAction::Circle,  gc,_graphVisualEditor ) );
-    _paletteActions->addAction ( "align-tree", new AlignAction ( i18nc( "Alignment", "Minimize Crossing Edges" ),  AlignAction::MinCutTree, gc, _graphVisualEditor ) );
+    _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18nc( "Alignment", "Base" ),  AlignAction::Bottom, gc ) );
+    _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18nc( "Alignment", "Center" ),AlignAction::HCenter,gc ) );
+    _paletteActions->addAction ( "align-htop",   new AlignAction ( i18nc( "Alignment", "Top" ),   AlignAction::Top,    gc ) );
+    _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18nc( "Alignment", "Left" ),  AlignAction::Left,   gc ) );
+    _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18nc( "Alignment", "Center" ),AlignAction::VCenter,gc ) );
+    _paletteActions->addAction ( "align-vright", new AlignAction ( i18nc( "Alignment", "Right" ), AlignAction::Right,  gc ) );
+    _paletteActions->addAction ( "align-circle", new AlignAction ( i18nc( "Alignment", "Circle" ),  AlignAction::Circle, gc ) );
+    _paletteActions->addAction ( "align-tree", new AlignAction ( i18nc( "Alignment", "Minimize Crossing Edges" ), AlignAction::MinCutTree, gc ) );
 
     // Menu actions
     createAction("document-new",     i18n("New Graph"),         "new-graph",         SLOT(newGraph()),    this);

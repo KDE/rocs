@@ -47,6 +47,8 @@ public:
 
     void setActiveGraph( DataStructurePtr graph);
 
+    void setAddPosition(QPointF position);
+    
 public slots:
     /*!
       this will be executed if type is the same as this action's type.
@@ -55,8 +57,13 @@ public slots:
     */
     bool executePress(QPointF pos);
 
-  signals:
+    bool executePress();
+    
+signals:
     void addNode(QString name, QPointF pos);
+    
+private:
+    QPointF _position; // add data at this point
 };
 
 #endif

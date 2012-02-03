@@ -51,7 +51,6 @@ bool AddConnectionHandAction::executePress(QPointF pos) {
     if (_working){
         return false;
     }
-    
     if ( !  DocumentManager::self()->activeDocument()->activeDataStructure()
          || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()){
      return false;

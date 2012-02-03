@@ -1,8 +1,8 @@
 /*  
     This file is part of Rocs.
-    Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
-    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2008       Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -28,28 +28,37 @@
 class AlignAction : public KAction {
     Q_OBJECT
 public:
-    /*! this enum has all the possibilities of orientations for the aligns. */
+    /*! enumerates available alignments supported by this action */
     enum Orientation {Left, Right, Top, Bottom, HCenter, VCenter, Circle, MinCutTree};
-
-    /*! Creates a new align button. If a DataStructure is set this DataStructure is aligned
-      according to the specified topology. Else the currently selected set of nodes is aligned.
+    
+    /** Creates a new align button. If a data is registered, this data is aligned
+      according to the specified topology. Else, the currently selected set of nodes is aligned.
       \param actionName the name of the button
       \param tooltip some helper text.
       \param o the orientation that this button will work on.
+      \param gc the graph scene containing the nodes
       \param parent the parent widget
-      \param if true (default) trigger-signal is connected to align slot, else if false this need to be set by hand
-    */
-    AlignAction(const QString& tooltip,AlignAction::Orientation o, GraphScene *scene, QWidget *parent, bool addConnect=true);
+     */
+    AlignAction(const QString& tooltip,AlignAction::Orientation o, GraphScene *gc);
     
-    void setDataStructure(DataStructurePtr dataStructure);
-    void unsetDataStructure();
+    /** register data to be aligned
+     * \param dataList
+     */
+    void registerData(DataList dataList);
     
+    /** unset registered data */
+    void unsetData();
+   
 public slots:
-    /** Run the previously specified align algorithm for the selected set of data. items.
+    /** Run the previously specified align algorithm for the selected set of data.
+     * If data is set by \see registerData(...) this data is aligned and the
+     * registered data is unset after this operation.
      */
     void align();
 
 private:
+    void setupOrientation(Orientation o);
+
     /** Align the data items on y-axis.
      * \param l the non-empty list of selected data.
      */
@@ -72,12 +81,42 @@ private:
      */
     void alignMinCutTree(DataList dataList);
 
-    /*! the orientation that this button will work on. */
-    Orientation m_orientation;
+    /** checks if a node is more in the left than the other.
+     * \param n1 first node
+     * \param n2 second node
+     */
+    static bool leftLessThan(DataPtr n1, DataPtr n2) {
+        return n1->x() < n2->x();
+    }
 
-    GraphScene *_graphScene;
+    /** checks if a node is more in the right than the other.
+     * \param n1 first node
+     * \param n2 second node
+     */
+    static bool rightLessThan(DataPtr n1, DataPtr n2) {
+        return n1->x() > n2->x();
+    }
+
+    /** checks if a node is more in the top than the other.
+     * \param n1 first node
+     * \param n2 second node
+     */
+    static bool topLessThan(DataPtr n1, DataPtr n2) {
+        return n1->y() < n2->y();
+    }
+
+    /** checks if a node is more in the bottom than the other.
+     * \param n1 first node
+     * \param n2 second node
+     */
+    static bool bottomLessThan(DataPtr n1, DataPtr n2) {
+        return n1->y() > n2->y();
+    }
     
-    DataStructurePtr _dataStructure;
+    
+    Orientation _orientation;   // the configured orientation
+    DataList _registeredData;   // possibly registered 
+    GraphScene *_graphScene;    // graph scene that contains selected nodes
 };
 
 #endif

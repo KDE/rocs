@@ -83,7 +83,7 @@ protected:
     void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
-    QMenu * createContextMenu(QPoint position);
+    QMenu * createContextMenu(QPointF position);
     QMenu *_contextMenu;
     Document *_graphDocument;
     DataStructurePtr _graph;
