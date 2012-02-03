@@ -107,7 +107,7 @@ DataPtr Rocs::ListStructure::addData ( QString name ) {
       boost::shared_ptr<ListNode> tmp = m_begin;
       while (tmp->next() != 0)      tmp = tmp->next();
 
-      tmp->pointTo(n);
+      tmp->pointTo(n.get());
     }else{
       m_begin = n;
     }
@@ -130,9 +130,9 @@ QScriptValue Rocs::ListStructure::begin() {
   return m_begin->scriptValue();
 }
 
-void Rocs::ListStructure::setBegin(boost::shared_ptr< ListNode > node)
+void Rocs::ListStructure::setBegin(Data* node)
 {
-    m_begin = node;
+    m_begin = boost::static_pointer_cast<ListNode>(node->getData());
     arrangeNodes();
 }
 

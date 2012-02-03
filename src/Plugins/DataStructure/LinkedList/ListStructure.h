@@ -54,7 +54,7 @@ class ListStructure : public DataStructure {
     virtual void remove(PointerPtr e);
 
     QScriptValue begin();
-    void setBegin(boost::shared_ptr<ListNode> node);
+    void setBegin(Data* node);
     QScriptValue createNode(const QString &name);
 
 

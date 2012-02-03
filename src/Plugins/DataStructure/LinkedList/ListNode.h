@@ -35,7 +35,7 @@ class ListNode : public Data
 
   public slots:
     QScriptValue front();
-    void pointTo(boost::shared_ptr<ListNode> to);
+    void pointTo(ListNode* to);
 
 
 };
