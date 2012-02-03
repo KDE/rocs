@@ -44,9 +44,9 @@ QScriptValue ListNode::front(){
   return 0;
 }
 
-void ListNode::pointTo(boost::shared_ptr<ListNode> to )
+void ListNode::pointTo(ListNode* to )
 {
-    addPointer(to);
+    addPointer(to->getData());
 }
 
 boost::shared_ptr<ListNode> ListNode::next() const{
