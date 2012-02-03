@@ -1,11 +1,11 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -55,10 +55,11 @@ bool AddConnectionHandAction::executePress(QPointF pos) {
          || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()){
      return false;
     }
-    
+
     if ( (_from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
         _working = true;
         _startPos = QPointF(_from->data()->x(), _from->data()->y());
+        _from->data()->setProperty("ClickPosition",QVariant::fromValue<QPointF>( _from->mapFromScene(pos)));
         return true;
     }
 
@@ -66,7 +67,7 @@ bool AddConnectionHandAction::executePress(QPointF pos) {
 }
 
 bool AddConnectionHandAction::executeMove(QPointF pos) {
-    if (   !DocumentManager::self()->activeDocument()->activeDataStructure() 
+    if (   !DocumentManager::self()->activeDocument()->activeDataStructure()
         || !_from){
         return false;
     }
@@ -81,7 +82,7 @@ bool AddConnectionHandAction::executeMove(QPointF pos) {
 }
 
 bool AddConnectionHandAction::executeRelease(QPointF pos) {
-    if ( !_working 
+    if ( !_working
      ||  !DocumentManager::self()->activeDocument()->activeDataStructure() ){
         return false;
     }
@@ -90,13 +91,15 @@ bool AddConnectionHandAction::executeRelease(QPointF pos) {
     _tmpLine = 0;
 
     if ( (  _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
+        _to->data()->setProperty("ClickPosition", _to->mapFromScene(pos));
         DocumentManager::self()
             ->activeDocument()
             ->activeDataStructure()
             ->addPointer( _from->data(),  _to->data() );
+        _to->data()->setProperty("ClickPosition", QVariant());
     }
-
     _to = 0;
+    _from->data()->setProperty("ClickPosition", QVariant());
     _from = 0;
     _working = false;
     return true;
