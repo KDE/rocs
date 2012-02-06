@@ -31,6 +31,7 @@
 #include <QtGui/QStackedWidget>
 #include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
+#include <QToolButton>
 
 // KDE Related Includes
 #include <KActionCollection>
@@ -45,6 +46,7 @@
 #include <klocalizedstring.h>
 #include <KConfigDialog>
 #include <kfiledialog.h>
+#include <KMenu>
 
 // UI RELATED INCLUDES
 #include "GraphLayers.h"
@@ -255,17 +257,29 @@ QWidget* MainWindow::setupScriptPanel()
     executeCommands->setOrientation(Qt::Vertical);
     _runScript = new KAction( KIcon( "system-run" ), i18nc( "Script Execution", "Run" ), this );
     _stepRunScript = new KAction( KIcon( "go-next" ), i18nc( "Script Execution", "One Step" ), this );
-    _debugScript = new KAction ( KIcon ("debug-run"), i18n ( "Debug" ), this );
+    _debugScript = new KAction ( KIcon ("debug-run"), i18n ( "Debug run" ), this );
+    _interruptScript = new KAction ( KIcon ("debug-run-cursor"), i18n ( "Interrupt at first line" ), this );
     _stopScript = new KAction( KIcon( "process-stop" ), i18nc( "Script Execution", "Stop" ), this );
     _stopScript->setEnabled(false);
     executeCommands->addAction( _runScript );
     executeCommands->addAction( _stepRunScript );
+    QToolButton *dbgBtn = new QToolButton(executeCommands);
+    KMenu * menu = new KMenu(dbgBtn);
+    menu->addAction(_debugScript);
+    menu->addAction(_interruptScript);
+    menu->setActiveAction(_debugScript);
+    menu->setDefaultAction(_debugScript);
+    menu->setIcon(_debugScript->icon());
+    dbgBtn->setMenu(menu);
+    dbgBtn->setDefaultAction(_debugScript);
+    executeCommands->addWidget(dbgBtn);
     executeCommands->addAction(_debugScript);
     executeCommands->addAction( _stopScript );
 
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScriptFull()));
     connect(_stepRunScript, SIGNAL(triggered()), this, SLOT(executeScriptOneStep()));
     connect(_debugScript, SIGNAL(triggered()), this, SLOT(debugScript()));
+    connect(_interruptScript, SIGNAL(triggered()), this, SLOT(debugScript()));
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
     connect(_selectListing, SIGNAL(currentIndexChanged(int)), stackedListing, SLOT(setCurrentIndex(int)));
 
@@ -663,11 +677,15 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     if (_txtDebug == 0)   return;
     if ( scene() == 0)    return;
 
-    _txtDebug->clear();
 
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    if (engine->isRunning() ) {
+        engine->stop();
+    }
+
+    _txtDebug->clear();
     if (_scriptDbg){
         _scriptDbg->detach();
         _scriptDbg->deleteLater();
@@ -677,7 +695,7 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
         _scriptDbg = new QScriptEngineDebugger(this);
         _scriptDbg->setAutoShowStandardWindow(true);
         _scriptDbg->attachTo(engine->engine());
-//         if (mode == MainWindow::DebugMode)
+        if (mode == MainWindow::DebugMode)
             _scriptDbg->action(QScriptEngineDebugger::InterruptAction)->trigger();
     }
     engine->includeManager().initialize(Settings::includePath());
@@ -685,11 +703,8 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
                          scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
                          _codeEditor->document()->documentName());
 
-    if (engine->isRunning() ) {
-        engine->stop();
-    }
-
     enableStopAction();
+
     engine->setScript(script, DocumentManager::self()->activeDocument());
     engine->execute();
 }
@@ -737,7 +752,11 @@ void MainWindow::stopScript() {
 
 void MainWindow::debugScript()
 {
-    executeScript(DebugMode);
+    QAction *action = qobject_cast<QAction *> ( sender() );
+    if (action == _interruptScript)
+        executeScript(DebugMode);
+    else
+        executeScript(DebugOnlyInCaseOfError);
 }
 
 

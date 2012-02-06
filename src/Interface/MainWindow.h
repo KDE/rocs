@@ -176,6 +176,7 @@ private: // Variables.
 
     QScriptEngineDebugger *_scriptDbg;
     KAction* _debugScript;
+    KAction* _interruptScript;
 };
 
 #endif
