@@ -72,11 +72,16 @@ void QtScriptBackend::stop() {
 }
 
 void QtScriptBackend::execute() {
-    stop();
-    if (!_engine){
-        _engine = new QScriptEngine();
-        emit engineCreated(_engine);
+//     stop();
+    if (_engine){
+//         delete _engine;
     }
+
+    if (_engine->isEvaluating()){
+        _engine->abortEvaluation();
+    }
+    _engine->collectGarbage();
+    _engine->pushContext();
     _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
     _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
     _engine->globalObject().setProperty("interrupt", engine()->newFunction(interrupt_script));
@@ -95,6 +100,7 @@ void QtScriptBackend::execute() {
         emit sendDebug("<b style=\"color: red\">"+error+"</b>");
         emit sendDebug("<b style=\"color: red\">"+_engine->uncaughtExceptionBacktrace().join("\n")+"</b>");
     }
+    _engine->popContext();
     emit finished();
 }
 
@@ -145,7 +151,8 @@ bool QtScriptBackend::isRunning(){
 
 QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent){
     self = this;
-    _engine = 0;
+
+    _engine = new QScriptEngine();
     _engineSteps = 0;
     _runningTool = false;
 }

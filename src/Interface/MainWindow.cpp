@@ -99,7 +99,7 @@
 
 #include "PossibleIncludes.h"
 
-MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(new QScriptEngineDebugger(this))
+MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
 {
     setObjectName ( "RocsMainWindow" );
 
@@ -485,7 +485,6 @@ void MainWindow::setActiveDocument ( )
     connect( engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
     connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
     connect( engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
-    connect( engine, SIGNAL(engineCreated(QScriptEngine*)), this, SLOT(scriptEngineCreated(QScriptEngine*)));
 
     activeDocument->setModified(false);
 }
@@ -669,14 +668,17 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
-    if (engine->engine() && mode != Execute){
-
+    if (_scriptDbg){
         _scriptDbg->detach();
-    //     _scriptDbg->standardWindow()->show();
+        _scriptDbg->deleteLater();
+        _scriptDbg = 0;
+    }
+    if ( mode != Execute){
+        _scriptDbg = new QScriptEngineDebugger(this);
         _scriptDbg->setAutoShowStandardWindow(true);
-
         _scriptDbg->attachTo(engine->engine());
-        _scriptDbg->action(QScriptEngineDebugger::InterruptAction)->trigger();
+//         if (mode == MainWindow::DebugMode)
+            _scriptDbg->action(QScriptEngineDebugger::InterruptAction)->trigger();
     }
     engine->includeManager().initialize(Settings::includePath());
     script = engine->includeManager().include(script,
@@ -729,6 +731,7 @@ void MainWindow::stopScript() {
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
 
     disableStopAction();
+
     engine->stop();
 }
 
@@ -756,9 +759,4 @@ void MainWindow::showDebugOutput()
 
 void MainWindow::outputString ( const QString& s ) { _txtOutput->append ( s ); }
 void MainWindow::debugString ( const QString& s )  { _txtDebug->append ( s );  }
-
-void MainWindow::scriptEngineCreated(QScriptEngine* eng)
-{
-    _scriptDbg->attachTo(eng);
-}
 

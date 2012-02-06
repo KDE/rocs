@@ -140,8 +140,6 @@ public slots:
     void enableStopAction();
     /** opens debug output listing **/
     void showDebugOutput();
-
-    void scriptEngineCreated(QScriptEngine*);
 signals:
     void startEvaluation();
     void stopEvaluation();
