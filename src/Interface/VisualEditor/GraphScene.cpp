@@ -53,7 +53,7 @@ GraphScene::GraphScene( QObject *parent) :
 {
     _graphDocument = 0;
     _hideEdges = false;
-    _datumPropertiesWidget = new DataPropertiesWidget(qobject_cast<MainWindow*>(parent));
+    _dataPropertiesWidget = new DataPropertiesWidget(qobject_cast<MainWindow*>(parent));
     _pointerPropertiesWidget = new PointerPropertiesWidget(qobject_cast<MainWindow*>(parent));
     _action = 0;
     _minHeight = 0;
@@ -239,7 +239,7 @@ void  GraphScene::mouseDoubleClickEvent ( QGraphicsSceneMouseEvent *mouseEvent )
    if( mouseEvent->button() == Qt::LeftButton){
         QGraphicsItem *i = itemAt(mouseEvent->scenePos());
         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-            _datumPropertiesWidget->setData(nItem, mouseEvent->screenPos());
+            _dataPropertiesWidget->setData(nItem, mouseEvent->screenPos());
         }
         else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
             _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
@@ -260,25 +260,8 @@ void GraphScene::keyPressEvent(QKeyEvent *keyEvent) {
 
 void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {
     event->accept();
-    _contextMenu = createContextMenu(event->scenePos());
+    _contextMenu = createContextMenu(event->scenePos(), event->screenPos());
     _contextMenu->exec(event->screenPos());
-    
-   
-//     // TODO this is not a nice code
-//     // refactor this for SC 4.9
-//     if (selectedItem == propertyAction) {
-//         QGraphicsItem *i = itemAt(event->scenePos());
-//         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)){
-//             _datumPropertiesWidget->setData(nItem, event->screenPos());
-//         }
-//         else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)){
-//             _pointerPropertiesWidget->setPointer(eItem->pointer(), event->screenPos());
-//         }
-//     }
-//     else
-//     {
-//         // nothing was chosen
-//     }
 }
 
 
@@ -315,7 +298,7 @@ void GraphScene::resize() {
     emit resized();
 }
 
-QMenu* GraphScene::createContextMenu(QPointF position)
+QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPosition)
 {
     QMenu *menu = new QMenu; // the context menu
     QMenu *menuDataStructure = menu->addMenu( i18n("Data Structure") );
@@ -325,11 +308,19 @@ QMenu* GraphScene::createContextMenu(QPointF position)
     bool contextAtItem = false;
     DataStructurePtr contextDataStructure;
     DataPtr contextData;
-    QGraphicsItem *i = itemAt(position);
-    if (DataItem *dataItem = (qgraphicsitem_cast<DataItem*>(i))){
+    PointerPtr contextPointer;
+    QGraphicsItem *item = itemAt(scenePosition);
+    DataItem *dataItem;
+    PointerItem *pointerItem;
+    if (dataItem = (qgraphicsitem_cast<DataItem*>(item))){
         contextAtItem = true;
         contextDataStructure = dataItem->data()->dataStructure();
         contextData = dataItem->data();
+    }
+    if (pointerItem = (qgraphicsitem_cast<PointerItem*>(item))){
+        contextAtItem = true;
+        contextDataStructure = pointerItem->pointer()->dataStructure();
+        contextPointer = pointerItem->pointer();
     }
     
     // zoom menu
@@ -394,12 +385,22 @@ QMenu* GraphScene::createContextMenu(QPointF position)
     
     // puzzling the menu together
     AddDataAction *addNodeAction = new AddDataAction(this);
-    addNodeAction->setAddPosition(position);
+    addNodeAction->setAddPosition(scenePosition);
     connect( addNodeAction, SIGNAL(triggered(bool)), addNodeAction, SLOT(executePress()));
     DeleteAction *deleteDataStructureAction = new DeleteAction( i18n("Delete"), this, contextDataStructure, 0);
     DeleteAction *deleteSelectedAction = new DeleteAction( i18n("Delete"), this, 0);
     DeleteAction *deleteItemAction = new DeleteAction( i18n("Delete"), this, contextData, 0);
+    
     QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
+    if (contextData) {
+        _dataPropertiesWidget->setData(dataItem, screenPosition); //>set
+        connect(propertyAction, SIGNAL(triggered(bool)), _dataPropertiesWidget, SLOT(show()));
+    }
+    if (contextPointer) {
+        _pointerPropertiesWidget->setPointer(contextPointer, screenPosition); //>set
+        connect(propertyAction, SIGNAL(triggered(bool)), _pointerPropertiesWidget, SLOT(show()));
+    }
+    
     menuSelected->addMenu(menuSelectedAlign);
     menuSelected->addMenu(menuSelectedAssignValues);
     menuSelected->addAction(deleteSelectedAction);

@@ -38,10 +38,8 @@ DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ):
 
 void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     if (_data == n->data()){
-      show(); activateWindow(); raise();
-      return;
+        return;
     }
-
     if (_data){
         _data->disconnect(this);
         _showName->disconnect(_data.get());
@@ -53,13 +51,11 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
 
     _data = n->data();
     if (! _item ){
-      _svgFile = _data->iconPackage();
+        _svgFile = _data->iconPackage();
     }
 
     _item = n;
     move(pos.x()+ 10,  pos.y() + 10);
-
-    show(); activateWindow(); raise();
 
     delete extraItens->layout();
     extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
@@ -76,6 +72,19 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
 
     _propertiesTable->setModel(model);
 }
+
+void DataPropertiesWidget::setActive(bool active) {
+    if (active) {
+        setVisible(true);
+        activateWindow();
+        raise();
+        return;
+    }
+    else {
+        setVisible(false);
+    }
+}
+
 
 void DataPropertiesWidget::setUseColor(bool b){
     _data->setUseColor(!b);

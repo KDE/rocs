@@ -29,14 +29,7 @@ PointerPropertiesWidget::PointerPropertiesWidget(MainWindow *parent): QWidget(pa
     _pointer = PointerPtr();
 }
 
-void PointerPropertiesWidget::setPointer(PointerPtr e, QPointF pos) {
-    if (_pointer == e){
-      show();
-      activateWindow();
-      raise();
-      return;     
-    }
-    
+void PointerPropertiesWidget::setPointer(PointerPtr e, QPointF pos) {    
     if (_pointer){
       disconnectPointer();
     }
@@ -48,11 +41,6 @@ void PointerPropertiesWidget::setPointer(PointerPtr e, QPointF pos) {
 
     _propertiesTable->setModel(model);
 
-
-    show();
-    activateWindow();
-    raise();
-
     connect(_pointer.get(),      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
 
     connect(_value,     SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setValue(QString)));
@@ -62,6 +50,18 @@ void PointerPropertiesWidget::setPointer(PointerPtr e, QPointF pos) {
     connect(_showValue, SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideValue(bool)));
 
     reflectAttributes();
+}
+
+void PointerPropertiesWidget::setActive(bool active) {
+    if (active) {
+        setVisible(true);
+        activateWindow();
+        raise();
+        return;
+    }
+    else {
+        setVisible(false);
+    }
 }
 
 void PointerPropertiesWidget::setWidth(double v)

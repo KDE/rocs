@@ -39,6 +39,8 @@ public:
     void setPointer(PointerPtr e, QPointF pos);
 
 public slots:
+    /** shows the widget; this is a wrapper for \see setActive(true) **/
+    void show() { setActive(true); }; 
     void on__color_activated(const QColor& c);
     void on__style_activated(int index);
     void reflectAttributes();
@@ -47,6 +49,8 @@ public slots:
     void setWidth(double v);
     
 private:
+    void setActive(bool active);
+
     PointerPtr _pointer;
 };
 

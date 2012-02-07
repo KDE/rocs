@@ -83,7 +83,7 @@ protected:
     void keyPressEvent(QKeyEvent *keyEvent);
 
 private:
-    QMenu * createContextMenu(QPointF position);
+    QMenu * createContextMenu(QPointF scenePosition, QPointF screenPosition);
     QMenu *_contextMenu;
     Document *_graphDocument;
     DataStructurePtr _graph;
@@ -92,7 +92,7 @@ private:
     QList<QGraphicsItem*> _hidedEdges;
     QGraphicsRectItem *_whiteboard;
     bool _hideEdges;
-    DataPropertiesWidget *_datumPropertiesWidget;
+    DataPropertiesWidget *_dataPropertiesWidget;
     PointerPropertiesWidget *_pointerPropertiesWidget;
     bool _fade;
     void releaseDocument();

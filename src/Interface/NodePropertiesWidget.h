@@ -37,7 +37,9 @@ public:
     DataPropertiesWidget (MainWindow* parent = 0 );
     void setData(DataItem *n, QPointF pos);
 
-
+public slots:
+    /** shows the widget; this is a wrapper for \see setActive(true) **/
+    void show() { setActive(true); }; 
 
 private slots:
     void on__color_activated(const QColor& c);
@@ -48,7 +50,8 @@ private slots:
     void on__addProperty_clicked();
 
 private:
-
+    void setActive(bool active);
+    
     DataPtr  _data;
     MainWindow *_mainWindow;
     DataItem *_item;
