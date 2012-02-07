@@ -104,7 +104,7 @@ DataPtr Rocs::ListStructure::addData ( QString name, int dataType) {
     if (m_building) {
         return addData(n);;
     }
-        
+
     if (m_begin){
       boost::shared_ptr<ListNode> tmp = m_begin;
       while (tmp->next() != 0)      tmp = tmp->next();
@@ -123,6 +123,8 @@ void Rocs::ListStructure::remove(DataPtr n)
     if (m_begin == n){
         m_begin = boost::static_pointer_cast<ListNode>(n)->next();
     }
+    foreach(PointerPtr p, n->in_pointers())
+        p->remove();
     DataStructure::remove(n);
     arrangeNodes();
 }
