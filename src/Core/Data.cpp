@@ -34,7 +34,7 @@ void DataPrivate::empty(PointerList &list) {
     }
 }
 
-DataPrivate::DataPrivate(DataStructurePtr parent)
+DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer)
 :_x(0)
 ,_y(0)
 ,_width(0.3)
@@ -48,6 +48,7 @@ DataPrivate::DataPrivate(DataStructurePtr parent)
 ,_iconpackage(KGlobal::dirs()->locate("appdata", "iconpacks/default.svg"))
 ,_icon("rocs_default")
 ,_value(0)
+,_uniqueIdentifier(uniqueIdentifer)
 {
     _in_pointers = QList< PointerPtr >();
     _out_pointers = QList< PointerPtr >();
@@ -57,8 +58,8 @@ DataPrivate::DataPrivate(DataStructurePtr parent)
 
 DataStructurePtr Data::dataStructure() const{ return d->_dataStructure; }
 
-DataPtr Data::create(DataStructurePtr parent) {
-    DataPtr pi(new Data(parent));
+DataPtr Data::create(DataStructurePtr parent, int uniqueIdentifier) {
+    DataPtr pi(new Data(parent, uniqueIdentifier));
     pi->d->q = pi;
     return pi;
 }
@@ -68,8 +69,10 @@ DataPtr Data::getData() const {
     return px;
 }
 
-Data::Data(DataStructurePtr parent)
- : QObject(parent.get()), d(new DataPrivate(parent)) {
+Data::Data(DataStructurePtr parent, int uniqueIdentifier)
+ :  QObject(parent.get()),
+    d(new DataPrivate(parent, uniqueIdentifier))
+{
 }
 
 Data::~Data() {
@@ -220,6 +223,11 @@ void Data::remove() {
 
     emit removed();
 }
+
+int Data::identifier() const {
+    return d->_uniqueIdentifier;
+}
+
 
 void Data::setX(int x) {
   if (d->_x != x){

@@ -38,7 +38,7 @@ class DataStructure;
 
 class DataPrivate{
 public:
-    DataPrivate(DataStructurePtr parent);
+    DataPrivate(DataStructurePtr parent, int uniqueIdentifer);
     
     /**
      * self pointer to Data object
@@ -62,6 +62,7 @@ public:
     DataStructurePtr _dataStructure;
     boost::shared_ptr<DataItem> _item;
 
+    int _uniqueIdentifier;
     QString _name;
     QColor _color;
     QString _iconpackage;
@@ -90,7 +91,7 @@ public:
     virtual ~Data();
     enum ListType{In, Out, Self};
 
-    static DataPtr create(DataStructurePtr parent);
+    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier);
     virtual DataPtr getData() const;
 
     void addInPointer(PointerPtr e);
@@ -99,6 +100,7 @@ public:
     void removePointer(PointerPtr e, int pointerList = -1);
     void removePointer(PointerPtr e, PointerList &list);
     void remove();
+    int identifier() const;
 
     bool showName();
     bool showValue();
@@ -161,16 +163,16 @@ public  slots:
     QScriptValue connected_pointers( DataPtr n);
     
 protected:
-    Data(DataStructurePtr parent);
-    template<typename T> static DataPtr create(DataStructurePtr parent) {
-        DataPtr pi(new T(parent));
+    Data(DataStructurePtr parent, int uniqueIdentifer);
+    template<typename T> static DataPtr create(DataStructurePtr parent, int uniqueIdentifier) {
+        DataPtr pi(new T(parent, uniqueIdentifier));
         pi->d->q=pi;
         return pi;
     }
     
 private:
     boost::shared_ptr<DataPrivate> d;
-    Data(Data const &);
+    Data(Data const &, int uniqueIdentifer);
     Data & operator=(Data const &);
 
 

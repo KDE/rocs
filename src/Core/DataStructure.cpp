@@ -60,6 +60,7 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_dataValuesVisible = true;
     d->_pointerNamesVisible = false;
     d->_pointerValuesVisible = true;
+    d->_identifierCount = 1;
 
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
@@ -126,10 +127,14 @@ void DataStructure::remove() {
     d->_document->remove(getDataStructure());
 }
 
+int DataStructure::generateUniqueIdentifier() {
+    return d->_identifierCount++;
+}
+
 DataPtr DataStructure::addData(QString name) {
     if (d->_readOnly) return DataPtr();
 
-    DataPtr n = Data::create( this->getDataStructure() );
+    DataPtr n = Data::create( this->getDataStructure(), generateUniqueIdentifier() );
     n->setName(name);
     return addData(n);
 }

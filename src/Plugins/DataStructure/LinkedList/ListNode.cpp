@@ -20,13 +20,13 @@
 #include <Pointer.h>
 #include "KDebug"
 
-DataPtr ListNode::create(DataStructurePtr parent)
+DataPtr ListNode::create(DataStructurePtr parent, int uniqueIdentifier)
 {
-    return Data::create<ListNode>(parent);
+    return Data::create<ListNode>(parent, uniqueIdentifier);
 }
 
 
-ListNode::ListNode(DataStructurePtr parent): Data(parent)
+ListNode::ListNode(DataStructurePtr parent, int uniqueIdentifier): Data(parent, uniqueIdentifier)
 {
 
 }

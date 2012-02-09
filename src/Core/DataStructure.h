@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -53,6 +53,8 @@ public:
     
     QList< DataPtr > _data;
     QList< PointerPtr> _pointers;
+    
+    int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
     QList<Group*> _groups;
     qreal _top;
@@ -190,6 +192,7 @@ signals:
 protected:
     DataPtr addData(DataPtr data);
     PointerPtr addPointer(PointerPtr pointer);
+    int generateUniqueIdentifier();
     
 protected:
     DataStructure(Document *parent = 0);
@@ -221,7 +224,7 @@ private:
 
 inline bool DataStructure::readOnly()                      const { return d->_readOnly;              }
 inline bool DataStructure::dataValueVisibility()           const { return d->_dataValuesVisible;     }
-inline bool DataStructure::dataNameVisibility()            const { return d-> _dataNamesVisible;     }
+inline bool DataStructure::dataNameVisibility()            const { return d->_dataNamesVisible;     }
 inline bool DataStructure::pointerNameVisibility()         const { return d->_pointerNamesVisible;   }
 inline bool DataStructure::pointerValueVisibility()        const { return d->_pointerValuesVisible;  }
 

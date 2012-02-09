@@ -96,7 +96,9 @@ PointerPtr Rocs::ListStructure::addPointer ( DataPtr from, DataPtr to ) {
 }
 
 DataPtr Rocs::ListStructure::addData ( QString name ) {
-    boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>( ListNode::create(getDataStructure()) );
+    boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>( 
+        ListNode::create(getDataStructure(), generateUniqueIdentifier()) 
+    );
     n->setName(name);
 
     if (m_building) {
@@ -143,7 +145,9 @@ void Rocs::ListStructure::remove(PointerPtr ptr){
 }
 
 QScriptValue Rocs::ListStructure::createNode(const QString & name){
-    boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(DataStructure::addData(ListNode::create(getDataStructure())));
+    boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(
+        DataStructure::addData(ListNode::create(getDataStructure(), generateUniqueIdentifier()))
+    );
     n->setName(name);
     n->setEngine( engine() );
     arrangeNodes();
