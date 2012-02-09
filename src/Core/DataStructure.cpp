@@ -255,11 +255,9 @@ PointerPtr DataStructure::addPointer(const QString& name_from, const QString& na
     return addPointer(from, to);
 }
 
-DataPtr DataStructure::data(const QString& name) {
-    QString tmpName;
-    foreach( DataPtr n,  d->_data) {
-        tmpName = n->name();
-        if (tmpName == name) {
+DataPtr DataStructure::getData(int uniqueIdentifier) {
+    foreach( DataPtr n, d->_data ) {
+        if (n->identifier() == uniqueIdentifier) {
             return n;
         }
     }

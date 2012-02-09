@@ -128,7 +128,13 @@ public  slots:
     virtual DataPtr addData(QString name);
     virtual QList< DataPtr > addDataList(QList< DataPtr > dataList);
     virtual PointerPtr addPointer(DataPtr from, DataPtr to);
-    DataPtr data(const QString& name = i18n("Untitled"));
+    
+    /**
+     * get data by unique identifier
+     * iterates over all data elements, running time O(n)
+     * \param identifier
+     */
+    DataPtr getData(int uniqueIdentifier);
 
     virtual void remove(DataPtr n);
     
