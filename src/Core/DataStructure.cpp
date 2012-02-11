@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -104,12 +104,30 @@ void DataStructure::importStructure(DataStructurePtr other){
 
 
 DataStructure::~DataStructure() {
-    foreach(PointerPtr e,  d->_pointers) {
-        e->remove();
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    foreach(PointerPtr pointer,  pointerType) {
+        pointer->remove();
     }
-    foreach(DataPtr n, d->_data) {
-        n->remove();
     }
+    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(DataPtr data, dataType) {
+        data->remove();
+    }
+    }
+}
+
+const DataList DataStructure::dataList(int dataType) const {
+    if (dataType < d->_dataTypeLists.size()) {
+        return d->_dataTypeLists.at(dataType);
+    }
+    return DataList();
+}
+
+const PointerList DataStructure::pointers(int pointerType) const {
+    if (pointerType < d->_dataTypeLists.size()) {
+        return d->_pointerTypeLists.at(pointerType);
+    }
+    return PointerList();
 }
 
 void DataStructure::setReadOnly(bool r){
@@ -118,11 +136,15 @@ void DataStructure::setReadOnly(bool r){
 }
 
 void DataStructure::remove() {
-    foreach(PointerPtr e,  d->_pointers) {
-        e->remove();
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    foreach(PointerPtr pointer,  pointerType) {
+        pointer->remove();
     }
-    foreach(DataPtr n, d->_data) {
-        n->remove();
+    }
+    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(DataPtr data, dataType) {
+        data->remove();
+    }
     }
     d->_document->remove(getDataStructure());
 }
@@ -131,7 +153,7 @@ int DataStructure::generateUniqueIdentifier() {
     return d->_identifierCount++;
 }
 
-DataPtr DataStructure::addData(QString name) {
+DataPtr DataStructure::addData(QString name, int dataType) {
     if (d->_readOnly) return DataPtr();
 
     DataPtr n = Data::create( this->getDataStructure(), generateUniqueIdentifier() );
@@ -139,8 +161,10 @@ DataPtr DataStructure::addData(QString name) {
     return addData(n);
 }
 
-DataPtr DataStructure::addData(DataPtr data){
-    d->_data.append( data );
+DataPtr DataStructure::addData(DataPtr data, int dataType){
+    Q_ASSERT(dataType<0 || dataType>=d->_dataTypeLists.size());
+
+    d->_dataTypeLists[dataType].append( data );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesData.constBegin();
     while (i != d->m_globalPropertiesData.constEnd()) {
        data->addDynamicProperty(i.key(), i.value());
@@ -161,9 +185,11 @@ DataPtr DataStructure::addData(DataPtr data){
     return data;
 }
 
-QList< DataPtr > DataStructure::addDataList(QList< DataPtr > dataList){
+QList< DataPtr > DataStructure::addDataList(QList< DataPtr > dataList, int dataType){
+    Q_ASSERT(dataType<0 || dataType>=d->_dataTypeLists.size());
+
     foreach (DataPtr n, dataList) {
-        d->_data.append( n );
+        d->_dataTypeLists[dataType].append( n );
         emit dataCreated( n );
 //         connect(n.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
         connect(n.get(), SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
@@ -179,11 +205,11 @@ QList< DataPtr > DataStructure::addDataList(QList< DataPtr > dataList){
     return dataList;
 }
 
-QList< DataPtr > DataStructure::addDataList(QList< QPair<QString,QPointF> > dataList) {
+QList< DataPtr > DataStructure::addDataList(QList< QPair<QString,QPointF> > dataList, int dataType) {
     QList< DataPtr > dataCreateList;
     QPair<QString, QPointF> dataDefinition;
     foreach (dataDefinition, dataList) {
-        if (DataPtr data = addData(dataDefinition.first)){
+        if (DataPtr data = addData(dataDefinition.first, dataType)){
             data->setPos(dataDefinition.second.x(), dataDefinition.second.y());
             dataCreateList << data;
         }
@@ -192,8 +218,10 @@ QList< DataPtr > DataStructure::addDataList(QList< QPair<QString,QPointF> > data
 }
 
 
-PointerPtr DataStructure::addPointer(PointerPtr pointer){
-    d->_pointers.append( pointer );
+PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType){
+    Q_ASSERT(pointerType<0 || pointerType>=d->_pointerTypeLists.size());
+    
+    d->_pointerTypeLists[pointerType].append( pointer );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
     while (i != d->m_globalPropertiesPointer.constEnd()) {
        pointer->addDynamicProperty(i.key(), i.value());
@@ -205,40 +233,43 @@ PointerPtr DataStructure::addPointer(PointerPtr pointer){
     return pointer;
 }
 
-DataPtr DataStructure::addData(QString name, QPointF pos){
-    if (DataPtr data = addData(name)){
+DataPtr DataStructure::addData(QString name, QPointF pos, int dataType){
+    if (DataPtr data = addData(name, dataType)){
         data->setPos(pos.x(), pos.y());
         return data;
     }
     return DataPtr();
 }
 
-PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to) {
+PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType) {
     if (d->_readOnly)                   // If the data structure is in read only mode, no new stuff should be added.
         return PointerPtr();
 
     if ( !from || !to ) {               // one of the two required datas are null. do not add a pointer between a valid and a null datas.
         return PointerPtr();
     }
-    
-    if ( (d->_data.indexOf(from) == -1)  // the user is trying to connect datas from different graphs.
-      || (d->_data.indexOf(to) == -1)) {
+
+    if ( from->dataStructure() != to->dataStructure())  // the user is trying to connect datas from different graphs.
+    {
         return PointerPtr();
     }
-
+//FIXME set pointerType
     PointerPtr pointer = Pointer::create(getDataStructure(), from, to);
 
     return addPointer(pointer);
 }
 
-PointerPtr DataStructure::addPointer(const QString& name_from, const QString& name_to) {
+PointerPtr DataStructure::addPointer(const QString& name_from, const QString& name_to, int pointerType) {
+//FIXME reimplement by ids
+// using of strings allows uncontrollable behavior
     if (d->_readOnly) return PointerPtr();
-    
+
     DataPtr from, to;
 
     QString tmpName;
 
-    foreach( DataPtr n,  d->_data) {
+    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach( DataPtr n, dataType) {
         tmpName = n->name();
 
         if (tmpName == name_from) {
@@ -251,15 +282,18 @@ PointerPtr DataStructure::addPointer(const QString& name_from, const QString& na
             break;
         }
     }
+    }
 
-    return addPointer(from, to);
+    return addPointer(from, to, pointerType);
 }
 
 DataPtr DataStructure::getData(int uniqueIdentifier) {
-    foreach( DataPtr n, d->_data ) {
-        if (n->identifier() == uniqueIdentifier) {
-            return n;
+    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(DataPtr data, dataType) {
+        if (data->identifier() == uniqueIdentifier) {
+            return data;
         }
+    }
     }
     return DataPtr();
 }
@@ -279,8 +313,11 @@ void DataStructure::remove(DataPtr n) {
         if (n->y()>doc->bottom()-2*GraphScene::kBORDER)    bottom = true;
     }
 
-    // data is deleted if reference-count is at zero
-    d->_data.removeOne( n );
+    // find data among all types and delete it
+    //TODO improved performance: use type information to access list
+    foreach(DataList dataType, d->_dataTypeLists) {
+        dataType.removeOne(n);
+    }
 
     // emit changes
     if (left)   emit resizeRequest( Document::BorderLeft );
@@ -292,7 +329,10 @@ void DataStructure::remove(DataPtr n) {
 }
 
 void DataStructure::remove(PointerPtr e) {
-    d->_pointers.removeOne( e );
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    //TODO improved performance: use type information to access list
+        pointerType.removeOne( e );
+    }
     emit changed();
 }
 
@@ -342,48 +382,68 @@ void DataStructure::removeDynamicProperty(const QString& property){
 }
 
 void DataStructure::setDataColor(const QColor& c){
-    QtConcurrent::blockingMap(d->_data, DataColorSetted(c));
+    foreach(DataList dataType, d->_dataTypeLists) {
+        QtConcurrent::blockingMap(dataType, DataColorSetted(c));
+    }
 }
 
 void DataStructure::setPointersColor(const QColor& c){
-    QtConcurrent::blockingMap(d->_pointers, PointerColorSetted(c));
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+        QtConcurrent::blockingMap(pointerType, PointerColorSetted(c));
+    }
 }
 
 void DataStructure::addDataDynamicProperty(const QString& property, QVariant value){
-    QtConcurrent::blockingMap(d->_data, DataDynamicPropertySetted(property, value));
+    foreach(DataList dataType, d->_dataTypeLists) {
+        QtConcurrent::blockingMap(dataType, DataDynamicPropertySetted(property, value));
+    }
     d->m_globalPropertiesData.insert(property, value);
 }
 
 void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value){
-    QtConcurrent::blockingMap(d->_pointers, PointerDynamicPropertySetted(property, value));
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+        QtConcurrent::blockingMap(pointerType, PointerDynamicPropertySetted(property, value));
+    }
     d->m_globalPropertiesData.insert(property, value);
 }
 
 void DataStructure::removeDataDynamicProperty(const QString& property){
-    QtConcurrent::blockingMap(d->_data, DataDynamicPropertyUnSetted(property));
+    foreach(DataList dataType, d->_dataTypeLists) {
+        QtConcurrent::blockingMap(dataType, DataDynamicPropertyUnSetted(property));
+    }
 }
 void DataStructure::removePointersDynamicProperty(const QString& property){
-    QtConcurrent::blockingMap(d->_pointers, PointerDynamicPropertyUnSetted(property));
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+        QtConcurrent::blockingMap(pointerType, PointerDynamicPropertyUnSetted(property));
+    }
 }
 
 void DataStructure::setDataNameVisibility(bool b){
-  d->_dataNamesVisible = b;
-  QtConcurrent::blockingMap(d->_data, DataNameVisibilitySetted(b));
+    d->_dataNamesVisible = b;
+    foreach(DataList dataType, d->_dataTypeLists) {
+        QtConcurrent::blockingMap(dataType, DataNameVisibilitySetted(b));
+    }
 }
 
 void DataStructure::setPointerNameVisibility(bool b){
-  d->_pointerNamesVisible = b;
-  QtConcurrent::blockingMap(d->_pointers, PointerNameVisibilitySetted(b));
+    d->_pointerNamesVisible = b;
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+        QtConcurrent::blockingMap(pointerType, PointerNameVisibilitySetted(b));
+    }
 }
 
 void DataStructure::setDataValueVisibility(bool b){
-  d-> _dataValuesVisible = b;
-  QtConcurrent::blockingMap(d->_data, DataValueVisibilitySetted(b));
+    d-> _dataValuesVisible = b;
+    foreach(DataList dataType, d->_dataTypeLists) {
+        QtConcurrent::blockingMap(dataType, DataValueVisibilitySetted(b));
+    }
 }
 
 void DataStructure::setPointerValueVisibility(bool b){
-  d->_pointerValuesVisible = b;
-  QtConcurrent::blockingMap(d->_pointers, PointerValueVisibilitySetted(b));
+    d->_pointerValuesVisible = b;
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+        QtConcurrent::blockingMap(pointerType, PointerValueVisibilitySetted(b));
+    }
 }
 
 void DataStructure::setEngine(	QScriptEngine *engine ) {
@@ -394,14 +454,19 @@ void DataStructure::setEngine(	QScriptEngine *engine ) {
         d->_engine->globalObject().setProperty(d->_name, d->_value);
     }
 
-    for( int i = 0; i < d->_data.size(); ++i){
-        d->_data.at(i)->setEngine(engine);
+    foreach(DataList dataType, d->_dataTypeLists) {
+    for( int i = 0; i < dataType.size(); ++i){
+        dataType.at(i)->setEngine(engine);
     }
-    for( int i = 0; i < d->_pointers.size(); ++i){
-        d->_pointers.at(i)->setEngine(engine);
     }
-
-   foreach(Group *g, d->_groups) {
+    
+    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    for( int i = 0; i < pointerType.size(); ++i){
+        pointerType.at(i)->setEngine(engine);
+    }
+    }
+    
+    foreach(Group *g, d->_groups) {
        QScriptValue array = d->_engine->newArray();
     //   foreach(Data * n, (*g) ) {
     //       array.property("push").call(array, QScriptValueList() << n->scriptValue());

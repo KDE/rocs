@@ -85,7 +85,7 @@ Rocs::ListStructure::~ListStructure() {
   m_animationGroup->deleteLater();;
 }
 
-PointerPtr Rocs::ListStructure::addPointer ( DataPtr from, DataPtr to ) {
+PointerPtr Rocs::ListStructure::addPointer ( DataPtr from, DataPtr to, int pointerType ) {
     foreach(PointerPtr e, from->out_pointers() + from->self_pointers()){
         e->remove();
     }
@@ -95,7 +95,7 @@ PointerPtr Rocs::ListStructure::addPointer ( DataPtr from, DataPtr to ) {
     return e;
 }
 
-DataPtr Rocs::ListStructure::addData ( QString name ) {
+DataPtr Rocs::ListStructure::addData ( QString name, int dataType) {
     boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>( 
         ListNode::create(getDataStructure(), generateUniqueIdentifier()) 
     );

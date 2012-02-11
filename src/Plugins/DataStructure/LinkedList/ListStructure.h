@@ -43,11 +43,11 @@ class ListStructure : public DataStructure {
 
   public slots:
 
-    virtual DataPtr addData ( QString name );
+    virtual DataPtr addData(QString name, int dataType=0);
 
     virtual void remove(DataPtr n);
 
-    virtual PointerPtr addPointer ( DataPtr from, DataPtr to );
+    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
 
     void arrangeNodes();
 

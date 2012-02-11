@@ -45,8 +45,8 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
     ~GraphStructure();
     void importStructure(DataStructurePtr other);
 
-    PointerPtr addPointer(DataPtr from, DataPtr to);
-    DataPtr addData(QString name);
+    PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
+    DataPtr addData(QString name, int dataType=0);
     
     public slots:
         /**

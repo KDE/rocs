@@ -330,7 +330,7 @@ bool Rocs::GraphStructure::directed()
     return (_type==DIRECTED||_type==MULTIGRAPH);
 }
 
-PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to) {
+PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointerType) {
     if ( _type==UNDIRECTED ) {
         if (from == to) {  // self-edges
             return PointerPtr();
@@ -356,7 +356,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to) {
     return DataStructure::addPointer(from, to);
 }
 
-DataPtr Rocs::GraphStructure::addData(QString name)
+DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
 {
     if (readOnly()) 
         return DataPtr();

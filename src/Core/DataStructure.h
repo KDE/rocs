@@ -51,8 +51,8 @@ public:
      */
     boost::weak_ptr<DataStructure> q;
     
-    QList< DataPtr > _data;
-    QList< PointerPtr> _pointers;
+    QList<DataList> _dataTypeLists;         // list if data elements associated to specific type
+    QList<PointerList> _pointerTypeLists;   // list of pointers associated to specific type
     
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
@@ -115,8 +115,8 @@ public:
     const QColor& pointerDefaultColor() const;
     const QColor& dataDefaultColor() const;
     const QString& name() const;
-    const QList< DataPtr > dataList() const;
-    const QList< PointerPtr > pointers() const;
+    const DataList dataList(int dataType=0) const;
+    const PointerList pointers(int pointerType=0) const;
     const QList<Group*> groups() const;
 
     /** @brief clear data that only is usefull for a type of data structure and that cannot be converted to others
@@ -125,9 +125,9 @@ public:
 
 public  slots:
 
-    virtual DataPtr addData(QString name);
-    virtual QList< DataPtr > addDataList(QList< DataPtr > dataList);
-    virtual PointerPtr addPointer(DataPtr from, DataPtr to);
+    virtual DataPtr addData(QString name, int dataType=0);
+    virtual DataList addDataList(DataList dataList, int dataType=0);
+    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
     
     /**
      * get data by unique identifier
@@ -146,9 +146,9 @@ public  slots:
     virtual void remove(Group *g);
 
     virtual Group *addGroup(const QString& name);
-    virtual QList< DataPtr > addDataList(QList< QPair<QString,QPointF> > dataList);
-    virtual DataPtr addData(QString name, QPointF point);
-    virtual PointerPtr addPointer(const QString& name_from, const QString& name_to);
+    virtual QList< DataPtr > addDataList(QList< QPair<QString,QPointF> > dataList, int dataType=0);
+    virtual DataPtr addData(QString name, QPointF point, int dataType=0);
+    virtual PointerPtr addPointer(const QString& name_from, const QString& name_to, int pointerType=0);
 
     void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void removeDynamicProperty(const QString& property);
@@ -196,8 +196,8 @@ signals:
     void resizeRequest(Document::Border border);
 
 protected:
-    DataPtr addData(DataPtr data);
-    PointerPtr addPointer(PointerPtr pointer);
+    DataPtr addData(DataPtr data, int dataType=0);
+    PointerPtr addPointer(PointerPtr pointer, int pointerType=0);
     int generateUniqueIdentifier();
     
 protected:
@@ -249,8 +249,6 @@ inline QScriptValue DataStructure::scriptValue()           const { return d->_va
 inline QScriptEngine *DataStructure::engine()              const { return d->_engine;   }
 inline Document *DataStructure::document()                 const { return d->_document; }
 
-inline const QList< DataPtr > DataStructure::dataList()     const { return d->_data;     }
-inline const QList< PointerPtr > DataStructure::pointers()     const { return d->_pointers; }
 inline const QList<Group*>   DataStructure::groups()       const { return d->_groups;   }
 
 #endif
