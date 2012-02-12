@@ -59,7 +59,7 @@ class ROCSLIB_EXPORT Pointer : public QObject {
     Q_PROPERTY(QString style READ style WRITE setStyle)
 
 public:
-    static PointerPtr create(DataStructurePtr parent, DataPtr from, DataPtr to);
+    static PointerPtr create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType);
     PointerPtr getPointer() const;
 
     /*! default destructor */
@@ -172,9 +172,11 @@ public  slots:
 protected:
     /*! default constructor, an pointer connects two datums.
     \p parent a Graph
-    \p from the first datum
-    \p to the second datum */
-    Pointer(DataStructurePtr parent, DataPtr from, DataPtr to);
+    \p from the first data element
+    \p to the second data element
+    \p pointerType the type of this pointer (default is 0)
+    */
+    Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType=0);
 
 
 private:

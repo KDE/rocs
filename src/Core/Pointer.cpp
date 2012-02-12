@@ -36,6 +36,7 @@ public:
     QString value;
     QString name;
     QColor color;
+    int pointerType;
 
     bool showName;
     bool showValue;
@@ -49,8 +50,8 @@ public:
     QScriptEngine *engine;
 };
 
-PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to) {
-    PointerPtr pi(new Pointer(parent, from, to));
+PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) {
+    PointerPtr pi(new Pointer(parent, from, to, pointerType));
     pi->d->q = pi;
     qDebug() << "Pointer::create: " << pi.get();
     
@@ -71,7 +72,7 @@ PointerPtr Pointer::getPointer() const {
     return px;
 }
 
-Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to) :
+Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) :
         QObject(parent.get()), d(new PointerPrivate())
 {
     d->from          = from;
@@ -83,6 +84,7 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to) :
     d->style         = "solid";
     d->width         = 1;
     d->relativeIndex = d->to->pointers(d->from).size();
+    d->pointerType   = pointerType;
     
     connect(parent.get(), SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
     connect(from.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
