@@ -61,7 +61,12 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_pointerNamesVisible = false;
     d->_pointerValuesVisible = true;
     d->_identifierCount = 1;
-
+    
+    // create type lists
+    d->_dataTypeLists.append(DataList());
+    d->_pointerTypeLists.append(PointerList());
+    qDebug() << "items in data type list" << d->_dataTypeLists.size();
+    
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
     emit changed();
@@ -162,7 +167,7 @@ DataPtr DataStructure::addData(QString name, int dataType) {
 }
 
 DataPtr DataStructure::addData(DataPtr data, int dataType){
-    Q_ASSERT(dataType<0 || dataType>=d->_dataTypeLists.size());
+    Q_ASSERT(dataType>=0 && dataType<=d->_dataTypeLists.size());
 
     d->_dataTypeLists[dataType].append( data );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesData.constBegin();
@@ -186,7 +191,7 @@ DataPtr DataStructure::addData(DataPtr data, int dataType){
 }
 
 QList< DataPtr > DataStructure::addDataList(QList< DataPtr > dataList, int dataType){
-    Q_ASSERT(dataType<0 || dataType>=d->_dataTypeLists.size());
+    Q_ASSERT(dataType>=0 && dataType<d->_dataTypeLists.size());
 
     foreach (DataPtr n, dataList) {
         d->_dataTypeLists[dataType].append( n );
@@ -219,7 +224,7 @@ QList< DataPtr > DataStructure::addDataList(QList< QPair<QString,QPointF> > data
 
 
 PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType){
-    Q_ASSERT(pointerType<0 || pointerType>=d->_pointerTypeLists.size());
+    Q_ASSERT(pointerType>=0 && pointerType<d->_pointerTypeLists.size());
     
     d->_pointerTypeLists[pointerType].append( pointer );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
