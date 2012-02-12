@@ -34,7 +34,7 @@ void DataPrivate::empty(PointerList &list) {
     }
 }
 
-DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer)
+DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataType)
 :_x(0)
 ,_y(0)
 ,_width(0.3)
@@ -49,6 +49,7 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer)
 ,_icon("rocs_default")
 ,_value(0)
 ,_uniqueIdentifier(uniqueIdentifer)
+,_dataType(dataType)
 {
     _in_pointers = QList< PointerPtr >();
     _out_pointers = QList< PointerPtr >();
@@ -58,8 +59,8 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer)
 
 DataStructurePtr Data::dataStructure() const{ return d->_dataStructure; }
 
-DataPtr Data::create(DataStructurePtr parent, int uniqueIdentifier) {
-    DataPtr pi(new Data(parent, uniqueIdentifier));
+DataPtr Data::create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
+    DataPtr pi(new Data(parent, uniqueIdentifier, dataType));
     pi->d->q = pi;
     return pi;
 }
@@ -69,9 +70,9 @@ DataPtr Data::getData() const {
     return px;
 }
 
-Data::Data(DataStructurePtr parent, int uniqueIdentifier)
+Data::Data(DataStructurePtr parent, int uniqueIdentifier, int dataType)
  :  QObject(parent.get()),
-    d(new DataPrivate(parent, uniqueIdentifier))
+    d(new DataPrivate(parent, uniqueIdentifier, dataType))
 {
 }
 
@@ -223,11 +224,6 @@ void Data::remove() {
 
     emit removed();
 }
-
-int Data::identifier() const {
-    return d->_uniqueIdentifier;
-}
-
 
 void Data::setX(int x) {
   if (d->_x != x){

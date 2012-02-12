@@ -38,7 +38,7 @@ class DataStructure;
 
 class DataPrivate{
 public:
-    DataPrivate(DataStructurePtr parent, int uniqueIdentifer);
+    DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataType);
     
     /**
      * self pointer to Data object
@@ -63,6 +63,7 @@ public:
     boost::shared_ptr<DataItem> _item;
 
     int _uniqueIdentifier;
+    int _dataType;
     QString _name;
     QColor _color;
     QString _iconpackage;
@@ -91,7 +92,7 @@ public:
     virtual ~Data();
     enum ListType{In, Out, Self};
 
-    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier);
+    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
     virtual DataPtr getData() const;
 
     void addInPointer(PointerPtr e);
@@ -100,7 +101,6 @@ public:
     void removePointer(PointerPtr e, int pointerList = -1);
     void removePointer(PointerPtr e, PointerList &list);
     void remove();
-    int identifier() const;
 
     bool showName();
     bool showValue();
@@ -123,7 +123,9 @@ public:
     bool showName() const;
     bool showValue() const;
     bool useColor() const;
-    boost::shared_ptr<DataItem> item() const;
+    boost::shared_ptr<DataItem> item() const;   //TODO reallyl needed?
+    int identifier() const;
+    int dataType() const;
 
     DataList adjacent_data() const;
     PointerList adjacent_pointers() const;
@@ -163,16 +165,16 @@ public  slots:
     QScriptValue connected_pointers( DataPtr n);
     
 protected:
-    Data(DataStructurePtr parent, int uniqueIdentifer);
-    template<typename T> static DataPtr create(DataStructurePtr parent, int uniqueIdentifier) {
-        DataPtr pi(new T(parent, uniqueIdentifier));
+    Data(DataStructurePtr parent, int uniqueIdentifer, int dataType);
+    template<typename T> static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
+        DataPtr pi(new T(parent, uniqueIdentifier, dataType));
         pi->d->q=pi;
         return pi;
     }
     
 private:
     boost::shared_ptr<DataPrivate> d;
-    Data(Data const &, int uniqueIdentifer);
+    Data(Data const &, int uniqueIdentifer, int dataType);
     Data & operator=(Data const &);
 
 
@@ -212,5 +214,7 @@ inline PointerList& Data::self_pointers() const { return d->_self_pointers; }
 inline bool Data::showName() const { return d->_showName; }
 inline bool Data::showValue() const { return d->_showValue; }
 inline bool Data::useColor() const { return d->_useColor; }
+inline int Data::identifier() const { return d->_uniqueIdentifier; }
+inline int Data::dataType() const { return d->_dataType; }
 
 #endif

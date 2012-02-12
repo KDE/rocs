@@ -27,8 +27,8 @@ class ListNode : public Data
 {
   Q_OBJECT
   public:
-    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier);
-    ListNode(DataStructurePtr parent, int uniqueIdentifier);
+    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
+    ListNode(DataStructurePtr parent, int uniqueIdentifier, int dataType);
     ~ListNode();
 
     boost::shared_ptr<ListNode> next() const;

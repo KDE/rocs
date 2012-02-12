@@ -27,8 +27,8 @@ class GraphNode : public Data
   Q_OBJECT
 
 public:
-    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier);
-    GraphNode(DataStructurePtr parent, int uniqueIdentifier);
+    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
+    GraphNode(DataStructurePtr parent, int uniqueIdentifier, int dataType);
 
     virtual void setEngine(QScriptEngine* _engine);
     virtual ~GraphNode();

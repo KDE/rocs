@@ -156,7 +156,7 @@ int DataStructure::generateUniqueIdentifier() {
 DataPtr DataStructure::addData(QString name, int dataType) {
     if (d->_readOnly) return DataPtr();
 
-    DataPtr n = Data::create( this->getDataStructure(), generateUniqueIdentifier() );
+    DataPtr n = Data::create( this->getDataStructure(), generateUniqueIdentifier(), dataType );
     n->setName(name);
     return addData(n);
 }

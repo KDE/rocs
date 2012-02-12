@@ -18,13 +18,14 @@
 
 #include "GraphNode.h"
 
-DataPtr GraphNode::create(DataStructurePtr parent, int uniqueIdentifier)
+DataPtr GraphNode::create(DataStructurePtr parent, int uniqueIdentifier, int dataType)
 {
-    return Data::create<GraphNode>(parent, uniqueIdentifier);
+    return Data::create<GraphNode>(parent, uniqueIdentifier, dataType);
 }
 
 
-GraphNode::GraphNode(DataStructurePtr parent, int uniqueIdentifier): Data(parent, uniqueIdentifier)
+GraphNode::GraphNode(DataStructurePtr parent, int uniqueIdentifier, int dataType): 
+    Data(parent, uniqueIdentifier, dataType)
 {
 }
 

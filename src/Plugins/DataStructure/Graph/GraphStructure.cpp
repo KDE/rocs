@@ -362,7 +362,7 @@ DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
         return DataPtr();
 
     boost::shared_ptr<GraphNode> n = boost::static_pointer_cast<GraphNode>( 
-        GraphNode::create(getDataStructure(), generateUniqueIdentifier())
+        GraphNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
     );
     n->setName(name);
     return addData(n);
