@@ -63,8 +63,8 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_identifierCount = 1;
     
     // create type lists
-    d->_dataTypeLists.append(DataList());
-    d->_pointerTypeLists.append(PointerList());
+    d->_dataTypeLists.insert(0,DataList());
+    d->_pointerTypeLists.insert(0,PointerList());
     qDebug() << "items in data type list" << d->_dataTypeLists.size();
     
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
@@ -123,16 +123,60 @@ DataStructure::~DataStructure() {
 
 const DataList DataStructure::dataList(int dataType) const {
     if (dataType < d->_dataTypeLists.size()) {
-        return d->_dataTypeLists.at(dataType);
+        return d->_dataTypeLists[dataType];
     }
     return DataList();
 }
 
 const PointerList DataStructure::pointers(int pointerType) const {
     if (pointerType < d->_dataTypeLists.size()) {
-        return d->_pointerTypeLists.at(pointerType);
+        return d->_pointerTypeLists[pointerType];
     }
     return PointerList();
+}
+
+int DataStructure::registerDataType(QString name) {
+    int identifier = d->_dataTypeLists.size()+1;
+    d->_dataTypeLists.insert(identifier,DataList());
+    d->_dataTypes.insert(identifier,name);
+    return identifier;
+}
+
+int DataStructure::registerPointerType(QString name) {
+    int identifier = d->_pointerTypeLists.size()+1;
+    d->_pointerTypeLists.insert(identifier,PointerList());
+    d->_pointerTypes.insert(identifier,name);
+    return identifier;
+}
+
+QString DataStructure::getDataTypeName(int dataType) const {
+    return d->_dataTypes[dataType];
+}
+
+QString DataStructure::getPointerTypeName(int pointerType) const {
+    return d->_pointerTypes[pointerType];
+}
+
+bool DataStructure::removeDataType(int dataType) {
+    if(dataType==0) return false;
+    
+    foreach(DataPtr data, d->_dataTypeLists[dataType]) {
+        data->remove();
+    }
+    d->_dataTypeLists[dataType].clear();
+    d->_dataTypeLists.remove(dataType);
+    return d->_dataTypes.remove(dataType)>0;
+}
+
+bool DataStructure::removePointerType(int pointerType) {
+    if(pointerType==0) return false;
+    
+    foreach(PointerPtr data, d->_pointerTypeLists[pointerType]) {
+        data->remove();
+    }
+    d->_pointerTypeLists[pointerType].clear();
+    d->_pointerTypeLists.remove(pointerType);
+    return d->_pointerTypes.remove(pointerType)>0;
 }
 
 void DataStructure::setReadOnly(bool r){

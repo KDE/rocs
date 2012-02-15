@@ -51,8 +51,10 @@ public:
      */
     boost::weak_ptr<DataStructure> q;
     
-    QList<DataList> _dataTypeLists;         // list if data elements associated to specific type
-    QList<PointerList> _pointerTypeLists;   // list of pointers associated to specific type
+    QMap<int,DataList> _dataTypeLists;         // list if data elements associated to specific type
+    QMap<int,PointerList> _pointerTypeLists;   // list of pointers associated to specific type
+    QMap<int,QString> _dataTypes;           // list of data types
+    QMap<int,QString> _pointerTypes;        // list of pointer types
     
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
@@ -93,7 +95,6 @@ public:
     static DataStructurePtr create(DataStructurePtr other, Document *parent = 0);
 
     virtual DataStructurePtr getDataStructure() const;
-
     virtual ~DataStructure();
 
     void updateRelativeCenter();
@@ -107,7 +108,34 @@ public:
     void setEngine( QScriptEngine *engine );
     QScriptEngine *engine() const;
 
+    /** register new type for data elements
+     * \param name of the dataType
+     * \return positive integer >0 if successfully registered, else <=0
+     */
+    int registerDataType(QString name);
+    
+    /** register new type for pointers
+     * \param name of the pointerType
+     * \return positive integer >0 if successfully registered, else <=0
+     */
+    int registerPointerType(QString name);    
+    
+    /** removes this data type and all data elements of this type
+     * \param dataType is positive id>0
+     * \return true if a dataType was removed
+     */
+    bool removeDataType(int dataType);
+
+    /** removes this pointer type and all data elements of this type
+     * \param pointerType is positive id>0
+     * \return true if a dataType was removed
+     */
+    bool removePointerType(int pointerType);
+    
     // getters
+    QString getDataTypeName(int dataType) const;
+    QString getPointerTypeName(int pointerType) const;
+    
     bool dataNameVisibility() const;
     bool pointerNameVisibility() const;
     bool dataValueVisibility() const;
@@ -123,8 +151,7 @@ public:
     */
     virtual void cleanUpBeforeConvert(){ }
 
-public  slots:
-
+public slots:
     virtual DataPtr addData(QString name, int dataType=0);
     virtual DataList addDataList(DataList dataList, int dataType=0);
     virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
