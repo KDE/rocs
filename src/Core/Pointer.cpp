@@ -53,7 +53,6 @@ public:
 PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) {
     PointerPtr pi(new Pointer(parent, from, to, pointerType));
     pi->d->q = pi;
-    qDebug() << "Pointer::create: " << pi.get();
     
     if ( from == to ) {
         from->addSelfPointer(pi);
@@ -91,7 +90,6 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
 }
 
 Pointer::~Pointer() {
-    qDebug() << "Pointer::~Pointer(...)";
     if (d->from == d->to) {
         if (d->from){
           kDebug() << "Removing from a loop node";

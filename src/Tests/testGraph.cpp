@@ -1,6 +1,7 @@
 /* 
     This file is part of Rocs.
     Copyright 2004-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -43,10 +44,11 @@ void GraphTests::initTestCase(){
 void GraphTests::cleanupTestCase(){
     _graphDocument->deleteLater();
 }
+
 void GraphTests::cleanup(){
-  for (int i = 0 ; i < _graphDocument->dataStructures().count(); ++i){
-//     foreach(DataType *g, _graphDocument) {
-        _graphDocument->dataStructures().at(i)->deleteLater();;
+    _data.clear();
+    for (int i=0; i<_graphDocument->dataStructures().count(); ++i){
+        _graphDocument->dataStructures().at(i)->remove();
     }
     _graphDocument->dataStructures().clear();
 }
@@ -55,17 +57,17 @@ void GraphTests::createPentagon(bool directed) {
     _graphDocument->addDataStructure("untitled1");
 //     _graphDocument->dataStructures().at(0)->setDirected(directed);
     _graphDocument->dataStructures().at(0)->setProperty("name","Graph1");
-    _graphDocument->dataStructures().at(0)->addData("a");
-    _graphDocument->dataStructures().at(0)->addData("b");
-    _graphDocument->dataStructures().at(0)->addData("c");
-    _graphDocument->dataStructures().at(0)->addData("d");
-    _graphDocument->dataStructures().at(0)->addData("e");
+    _data.insert("a",_graphDocument->dataStructures().at(0)->addData("a"));
+    _data.insert("b",_graphDocument->dataStructures().at(0)->addData("b"));
+    _data.insert("c",_graphDocument->dataStructures().at(0)->addData("c"));
+    _data.insert("d",_graphDocument->dataStructures().at(0)->addData("d"));
+    _data.insert("e",_graphDocument->dataStructures().at(0)->addData("e"));
 
-    _graphDocument->dataStructures().at(0)->addPointer("a", "b");
-    _graphDocument->dataStructures().at(0)->addPointer("b", "c");
-    _graphDocument->dataStructures().at(0)->addPointer("c", "d");
-    _graphDocument->dataStructures().at(0)->addPointer("d", "e");
-    _graphDocument->dataStructures().at(0)->addPointer("e", "a");
+    _graphDocument->dataStructures().at(0)->addPointer(_data["a"], _data["b"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["b"], _data["c"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["c"], _data["d"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["d"], _data["e"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["e"], _data["a"]);
 }
 
 void GraphTests::create3x3(bool directed) {
@@ -73,28 +75,29 @@ void GraphTests::create3x3(bool directed) {
     _graphDocument->addDataStructure("untitled2");
 //     _graphDocument->dataStructures().at(0)->setDirected(directed);
     _graphDocument->dataStructures().at(0)->setProperty("name", "Graph2");
-    _graphDocument->dataStructures().at(0)->addData("a");
-    _graphDocument->dataStructures().at(0)->addData("b");
-    _graphDocument->dataStructures().at(0)->addData("c");
-    _graphDocument->dataStructures().at(0)->addData("d");
-    _graphDocument->dataStructures().at(0)->addData("e");
-    _graphDocument->dataStructures().at(0)->addData("f");
-    _graphDocument->dataStructures().at(0)->addData("g");
-    _graphDocument->dataStructures().at(0)->addData("h");
-    _graphDocument->dataStructures().at(0)->addData("i");
-
-    _graphDocument->dataStructures().at(0)->addPointer("a", "b");
-    _graphDocument->dataStructures().at(0)->addPointer("b", "c");
-    _graphDocument->dataStructures().at(0)->addPointer("c", "d");
-    _graphDocument->dataStructures().at(0)->addPointer("d", "e");
-    _graphDocument->dataStructures().at(0)->addPointer("e", "f");
-    _graphDocument->dataStructures().at(0)->addPointer("f", "g");
-    _graphDocument->dataStructures().at(0)->addPointer("g", "h");
-    _graphDocument->dataStructures().at(0)->addPointer("h", "a");
-    _graphDocument->dataStructures().at(0)->addPointer("i", "b");
-    _graphDocument->dataStructures().at(0)->addPointer("i", "d");
-    _graphDocument->dataStructures().at(0)->addPointer("i", "f");
-    _graphDocument->dataStructures().at(0)->addPointer("i", "h");
+    
+    _data.insert("a",_graphDocument->dataStructures().at(0)->addData("a"));
+    _data.insert("b",_graphDocument->dataStructures().at(0)->addData("b"));
+    _data.insert("c",_graphDocument->dataStructures().at(0)->addData("c"));
+    _data.insert("d",_graphDocument->dataStructures().at(0)->addData("d"));
+    _data.insert("e",_graphDocument->dataStructures().at(0)->addData("e"));
+    _data.insert("f",_graphDocument->dataStructures().at(0)->addData("f"));
+    _data.insert("g",_graphDocument->dataStructures().at(0)->addData("g"));
+    _data.insert("h",_graphDocument->dataStructures().at(0)->addData("h"));
+    _data.insert("i",_graphDocument->dataStructures().at(0)->addData("i"));
+    
+    _graphDocument->dataStructures().at(0)->addPointer(_data["a"], _data["b"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["b"], _data["c"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["c"], _data["d"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["d"], _data["e"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["e"], _data["f"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["f"], _data["g"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["g"], _data["h"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["h"], _data["a"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["i"], _data["b"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["i"], _data["d"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["i"], _data["f"]);
+    _graphDocument->dataStructures().at(0)->addPointer(_data["i"], _data["h"]);
 }
 
 void GraphTests::createSimpleGraph() {
@@ -104,60 +107,56 @@ void GraphTests::createSimpleGraph() {
     QVERIFY2( _graphDocument->dataStructures().at(0)->dataList().size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2( _graphDocument->dataStructures().at(0)->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
 
-
-
-
     foreach( DataPtr n, _graphDocument->dataStructures().at(0)->dataList() ) {
         QVERIFY2( n->out_pointers().size() == 1, "ERROR: Number of out pointers is not 1");
         QVERIFY2( n->in_pointers().size() == 1, "ERROR: Number of in pointers is not 1");
         QVERIFY2( n->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-        QVERIFY2( n->adjacent_pointers().size() == 2, "ERRORR: Number of adjacent pointers is not 2");
+        QVERIFY2( n->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
 }
 
 void GraphTests::manipulateSimpleGraph() {
     create3x3();
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->self_pointers().size() == 0, "ERROR: Number of data is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_pointers().size() == 2, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["a"]->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->self_pointers().size() == 0, "ERROR: Number of data is not 0 ");
+    QVERIFY2( _data["a"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["a"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->out_pointers().size() == 1, "ERROR: Number of pointer is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->in_pointers().size() == 2, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->self_pointers().size() == 0, "ERROR: Number of data is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_data().size() == 3, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_pointers().size() == 3, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["b"]->out_pointers().size() == 1, "ERROR: Number of pointer is not 1 ");
+    QVERIFY2( _data["b"]->in_pointers().size() == 2, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->self_pointers().size() == 0, "ERROR: Number of data is not 0 ");
+    QVERIFY2( _data["b"]->adjacent_data().size() == 3, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["b"]->adjacent_pointers().size() == 3, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->out_pointers().size() == 4, "ERROR: Number of pointer is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->in_pointers().size() == 0, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->adjacent_data().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->adjacent_pointers().size() == 4, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["i"]->out_pointers().size() == 4, "ERROR: Number of pointer is not 1 ");
+    QVERIFY2( _data["i"]->in_pointers().size() == 0, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["i"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["i"]->adjacent_data().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["i"]->adjacent_pointers().size() == 4, "ERROR: Number of adjacent pointers is not 2");
 
-    DataPtr n = _graphDocument->dataStructures().at(0)->data("i");
-    qDebug() << n->property("name");
-    _graphDocument->dataStructures().at(0)->remove(n);
+    _graphDocument->dataStructures().at(0)->remove(_data["i"]);
+    _data.remove("i"); //TODO only now the data is destroyed since a reference still exists
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_pointers().size() == 2, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["a"]->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["a"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["a"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->in_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_pointers().size() == 2, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["b"]->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->in_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["b"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["b"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i") == 0, "ERROR: Node  'i'  was not removed. ");
+    QVERIFY2( _data["i"] == 0, "ERROR: Node  'i'  was not removed. ");
 
 }
 
 void GraphTests::createDirectedGraph() {
-//   /* Creates a simple Graph with 5 data and connects them with pointers. */
+    /* Creates a simple Graph with 5 data and connects them with pointers. */
     createPentagon(true);
     QCOMPARE( _graphDocument->dataStructures().count(), 1);
     QVERIFY2( _graphDocument->dataStructures().at(0)->dataList().size() == 5, "ERROR: Number of data is not 5 ");
@@ -166,50 +165,49 @@ void GraphTests::createDirectedGraph() {
     foreach( DataPtr n, _graphDocument->dataStructures().at(0)->dataList() ) {
         QVERIFY2( n->out_pointers().size() == 1, "ERROR: Number of out pointers is not 1");
         QVERIFY2( n->in_pointers().size() == 1, "ERROR: Number of in pointers is not 1");
-        QVERIFY2( n->adjacent_data().size() == 1, "ERROR: Number of Adjacent Nodes is not 2");
-        QVERIFY2( n->adjacent_pointers().size() == 1, "ERRORR: Number of adjacent pointers is not 2");
+        QVERIFY2( n->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+        QVERIFY2( n->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
-
 }
 
 void GraphTests::manipulateDirectedGraph() {
     /*   creates a 3x3 graph, play with some properties.... */
     create3x3(true);
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_data().size() == 1, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_pointers().size() == 1, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["a"]->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["a"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["a"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->in_pointers().size() == 2, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_data().size() == 1, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_pointers().size() == 1, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["b"]->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->in_pointers().size() == 2, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["b"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["b"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->out_pointers().size() == 4, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->in_pointers().size() == 0, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->adjacent_data().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->adjacent_pointers().size() == 4, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["i"]->out_pointers().size() == 4, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["i"]->in_pointers().size() == 0, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["i"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["i"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["i"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    DataPtr n = _graphDocument->dataStructures().at(0)->data("i");
+    DataPtr n = _data["i"];
     _graphDocument->dataStructures().at(0)->remove(n);
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_data().size() == 1, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_pointers().size() == 1, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["a"]->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["a"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["a"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->in_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_data().size() == 1, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_pointers().size() == 1, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["b"]->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->in_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["b"]->adjacent_data().size() == 1, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["b"]->adjacent_pointers().size() == 1, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i") == 0, "ERROR: Node  'i'  was not removed. ");
+    QVERIFY2( _data["i"] == 0, "ERROR: Node  'i'  was not removed. ");
 
 }
 /*
@@ -337,7 +335,7 @@ void GraphTests::saveTestFile() {
 void  GraphTests::loadTestFile() {
     _graphDocument->loadFromInternalFormat("pentagono.datatype");
 
-    QCOMPARE (_graphDocument->dataStructures().count(), 1);
+    QVERIFY2 (_graphDocument->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
 
     QVERIFY2( _graphDocument->dataStructures().at(0)->dataList().size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2( _graphDocument->dataStructures().at(0)->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
@@ -346,45 +344,47 @@ void  GraphTests::loadTestFile() {
         QVERIFY2( n->out_pointers().size() == 1, "ERROR: Number of out pointers is not 1");
         QVERIFY2( n->in_pointers().size() == 1, "ERROR: Number of in pointers is not 1");
         QVERIFY2( n->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-        QVERIFY2( n->adjacent_pointers().size() == 2, "ERRORR: Number of adjacent pointers is not 2");
+        QVERIFY2( n->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
 
+    // sort out what is A,B,I
+    
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_pointers().size() == 2, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["a"]->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["a"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["a"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->in_pointers().size() == 2, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_data().size() == 3, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_pointers().size() == 3, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["b"]->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->in_pointers().size() == 2, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["b"]->adjacent_data().size() == 3, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["b"]->adjacent_pointers().size() == 3, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->out_pointers().size() == 4, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->in_pointers().size() == 0, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->adjacent_data().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i")->adjacent_pointers().size() == 4, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["i"]->out_pointers().size() == 4, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["i"]->in_pointers().size() == 0, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["i"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["i"]->adjacent_data().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["i"]->adjacent_pointers().size() == 4, "ERROR: Number of adjacent pointers is not 2");
 
-    DataPtr n = _graphDocument->dataStructures().at(0)->data("i");
+    DataPtr n = _data["i"];
     qDebug() << n->property("name");
     _graphDocument->dataStructures().at(0)->remove(n);
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("a")->adjacent_pointers().size() == 2, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["a"]->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["a"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
+    QVERIFY2( _data["a"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["a"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->out_pointers().size() == 1, "ERROR: Number of pointer is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->in_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->self_pointers().size() == 0, "ERROR: Number of pointer is not 0 ");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("b")->adjacent_pointers().size() == 2, "ERRORR: Number of adjacent pointers is not 2");
+    QVERIFY2( _data["b"]->out_pointers().size() == 1, "ERROR: Number of pointer is not 1 ");
+    QVERIFY2( _data["b"]->in_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
+    QVERIFY2( _data["b"]->self_pointers().size() == 0, "ERROR: Number of pointer is not 0 ");
+    QVERIFY2( _data["b"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+    QVERIFY2( _data["b"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
 
-    QVERIFY2( _graphDocument->dataStructures().at(0)->data("i") == 0, "ERROR: Node  'i'  was not removed. ");
+    QVERIFY2( _data["i"] == 0, "ERROR: Node  'i'  was not removed. ");
 }
 
 QTEST_KDEMAIN_CORE(GraphTests)

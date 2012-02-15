@@ -19,8 +19,11 @@
 #ifndef TESTGRAPH_H
 #define TESTGRAPH_H
 
+#include "Rocs_Typedefs.h"
+
 #include <QObject>
 #include <QVariant>
+#include <QMap>
 
 class Document;
 
@@ -48,6 +51,7 @@ private slots:
 
 private:
     Document *_graphDocument;
+    QMap<QString,DataPtr> _data;
 //     QVariantList Graphs;
 };
 
