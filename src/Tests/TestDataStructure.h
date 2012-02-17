@@ -38,12 +38,12 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
     void createSimpleGraph();
-    void manipulateSimpleGraph();
-    void createDirectedGraph();
-    void manipulateDirectedGraph();
-    void saveTestFile();
-    void loadTestFile();
-    void testQtScript();
+//     void manipulateSimpleGraph();
+//     void createDirectedGraph();
+//     void manipulateDirectedGraph();
+//     void saveTestFile();
+//     void loadTestFile();
+//     void testQtScript();
 
 private:
     Document *_graphDocument;
