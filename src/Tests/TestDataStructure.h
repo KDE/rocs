@@ -1,6 +1,6 @@
-/*
+/* 
     This file is part of Rocs.
-    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2004-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,20 +18,36 @@
 
 #ifndef TESTDATASTRUCTURE_H
 #define TESTDATASTRUCTURE_H
+
+#include "Rocs_Typedefs.h"
+
 #include <QObject>
+#include <QVariant>
+#include <QMap>
 
-class TestDataStructure: public QObject
-{
+class Document;
+
+class TestDataStructure : public QObject {
     Q_OBJECT
-    private slots:
-        void inittestcase();
+public:
+    TestDataStructure();
+    void createPentagon(bool directed = false);
+    void create3x3(bool directed = false);
+private slots:
+    void cleanup();
+    void initTestCase();
+    void cleanupTestCase();
+    void createSimpleGraph();
+    void manipulateSimpleGraph();
+    void createDirectedGraph();
+    void manipulateDirectedGraph();
+    void saveTestFile();
+    void loadTestFile();
+    void testQtScript();
 
-        void create();
-
-        void changeAndCreate();
-
-        void convert();
-
+private:
+    Document *_graphDocument;
+    QMap<QString,DataPtr> _data;
 };
 
-#endif // TESTDATASTRUCTURE_H
+#endif

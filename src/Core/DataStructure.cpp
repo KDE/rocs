@@ -171,8 +171,8 @@ bool DataStructure::removeDataType(int dataType) {
 bool DataStructure::removePointerType(int pointerType) {
     if(pointerType==0) return false;
     
-    foreach(PointerPtr data, d->_pointerTypeLists[pointerType]) {
-        data->remove();
+    foreach(PointerPtr pointer, d->_pointerTypeLists[pointerType]) {
+        pointer->remove();
     }
     d->_pointerTypeLists[pointerType].clear();
     d->_pointerTypeLists.remove(pointerType);
