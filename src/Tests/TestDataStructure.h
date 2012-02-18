@@ -1,6 +1,7 @@
 /* 
     This file is part of Rocs.
     Copyright 2004-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -36,6 +37,7 @@ public:
 private slots:
     void cleanup();
     void initTestCase();
+    void addDeleteDataTest();
     void cleanupTestCase();
     void createSimpleGraph();
 //     void manipulateSimpleGraph();

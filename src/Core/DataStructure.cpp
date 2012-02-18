@@ -361,10 +361,12 @@ void DataStructure::remove(DataPtr n) {
 
     // find data among all types and delete it
     //TODO improved performance: use type information to access list
-    foreach(DataList dataType, d->_dataTypeLists) {
-        dataType.removeOne(n);
+    QMap<int, DataList>::iterator i = d->_dataTypeLists.begin();
+    while (i != d->_dataTypeLists.end()) {
+        i->removeOne(n);
+        ++i;
     }
-
+    
     // emit changes
     if (left)   emit resizeRequest( Document::BorderLeft );
     if (right)  emit resizeRequest( Document::BorderRight );

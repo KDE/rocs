@@ -53,6 +53,25 @@ void TestDataStructure::cleanup(){
     _graphDocument->dataStructures().clear();
 }
 
+void TestDataStructure::addDeleteDataTest() {
+    _graphDocument->addDataStructure("AddDeleteTest");
+    DataList dataList;
+    
+    // create 3 data elements
+    for(int i=0; i<10; i++) {
+        dataList.append(_graphDocument->dataStructures().at(0)->addData(QString(i)));
+    }
+    QVERIFY2( _graphDocument->dataStructures().at(0)->dataList().size() == 10, "ERROR: Number of data elements is not 10");
+
+    // remove all data elements
+    foreach(DataPtr data, dataList) {
+        data->remove();
+    }
+    
+    QVERIFY2( _graphDocument->dataStructures().at(0)->dataList().size() == 0, "ERROR: Not all data elements were deleted");
+}
+
+
 void TestDataStructure::createPentagon(bool directed) {
     _graphDocument->addDataStructure("untitled1");
 //     _graphDocument->dataStructures().at(0)->setDirected(directed);

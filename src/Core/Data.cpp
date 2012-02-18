@@ -212,7 +212,6 @@ PointerList Data::pointers(DataPtr n) const {
 }
 
 void Data::remove() {
-    qDebug() << "Data::remove()";
     if (d->_dataStructure) {
         d->_dataStructure->remove(getData());
         d->_dataStructure.reset();  // allow datastructure to be destroyed
