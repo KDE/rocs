@@ -24,7 +24,6 @@
 
 #include <QObject>
 #include <QVariant>
-#include <QMap>
 
 class Document;
 
@@ -32,8 +31,7 @@ class TestDataStructure : public QObject {
     Q_OBJECT
 public:
     TestDataStructure();
-    void createPentagon(bool directed = false);
-    void create3x3(bool directed = false);
+
 private slots:
     void cleanup();
     void initTestCase();
@@ -41,16 +39,12 @@ private slots:
     void pointerAddDeleteTest();
     void cleanupTestCase();
     void createSimpleGraph();
-//     void manipulateSimpleGraph();
-//     void createDirectedGraph();
-//     void manipulateDirectedGraph();
 //     void saveTestFile();
 //     void loadTestFile();
 //     void testQtScript();
 
 private:
     Document *_graphDocument;
-    QMap<QString,DataPtr> _data;
 };
 
 #endif
