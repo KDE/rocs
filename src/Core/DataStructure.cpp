@@ -376,9 +376,11 @@ void DataStructure::remove(DataPtr n) {
 }
 
 void DataStructure::remove(PointerPtr e) {
-    foreach(PointerList pointerType, d->_pointerTypeLists) {
     //TODO improved performance: use type information to access list
-        pointerType.removeOne( e );
+    QMap<int, PointerList>::iterator i = d->_pointerTypeLists.begin();
+    while (i != d->_pointerTypeLists.end()) {
+        i->removeOne(e);
+        ++i;
     }
     emit changed();
 }

@@ -37,7 +37,8 @@ public:
 private slots:
     void cleanup();
     void initTestCase();
-    void addDeleteDataTest();
+    void dataAddDeleteTest();
+    void pointerAddDeleteTest();
     void cleanupTestCase();
     void createSimpleGraph();
 //     void manipulateSimpleGraph();

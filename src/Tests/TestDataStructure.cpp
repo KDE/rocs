@@ -53,11 +53,11 @@ void TestDataStructure::cleanup(){
     _graphDocument->dataStructures().clear();
 }
 
-void TestDataStructure::addDeleteDataTest() {
+void TestDataStructure::dataAddDeleteTest() {
     _graphDocument->addDataStructure("AddDeleteTest");
     DataList dataList;
     
-    // create 3 data elements
+    // create 10 data elements
     for(int i=0; i<10; i++) {
         dataList.append(_graphDocument->dataStructures().at(0)->addData(QString(i)));
     }
@@ -69,6 +69,45 @@ void TestDataStructure::addDeleteDataTest() {
     }
     
     QVERIFY2( _graphDocument->dataStructures().at(0)->dataList().size() == 0, "ERROR: Not all data elements were deleted");
+}
+
+void TestDataStructure::pointerAddDeleteTest() {
+    // test for undirected pointers
+    _graphDocument->addDataStructure("AddDeleteTest");
+    DataList dataList;
+    
+    // create 10 data elements
+    // x x x x x x x x x x
+    for(int i=0; i<10; i++) {
+        dataList.append(_graphDocument->dataStructures().at(0)->addData(QString(i)));
+    }
+    QVERIFY2( _graphDocument->dataStructures().at(0)->dataList().size() == 10, "ERROR: Number of data elements is not 10");
+
+    // connect data elements to a line
+    // x-x-x-x-x-x-x-x-x-x
+    for(int i=0; i<dataList.size()-1; i++) {
+        _graphDocument->dataStructures().at(0)->addPointer(dataList[i],dataList[i+1]);
+    }
+    QVERIFY2( _graphDocument->dataStructures().at(0)->pointers().size() == 9, "ERROR: Number of data elements is not 9");
+    QVERIFY2( dataList[0]->adjacent_pointers().size() == 1, "ERROR: data gives wrong number of pointers");
+    QVERIFY2( dataList[1]->adjacent_pointers().size() == 2, "ERROR: data gives wrong number of pointers");
+    
+    // remove first pointer from list
+    // x x-x-x-x-x-x-x-x-x
+    _graphDocument->dataStructures().at(0)->pointers().first()->remove();
+    QVERIFY2( _graphDocument->dataStructures().at(0)->pointers().size() == 8, "ERROR: pointer was not removed");
+    QVERIFY2( dataList[0]->adjacent_pointers().size() == 0, "ERROR: data gives wrong number of pointers");
+    QVERIFY2( dataList[1]->adjacent_pointers().size() == 1, "ERROR: data gives wrong number of pointers");
+    
+    // remove second node, should trigger deletion of second pointer
+    // x o x-x-x-x-x-x-x-x
+    dataList[1]->remove();
+    QVERIFY2( _graphDocument->dataStructures().at(0)->pointers().size() == 7, "ERROR: data deletion did not remove its pointers");
+    
+    // remove fourth node, should trigger deletion of its two adjacend pointers
+    // x o x o x-x-x-x-x-x
+    dataList[3]->remove();
+    QVERIFY2( _graphDocument->dataStructures().at(0)->pointers().size() == 5, "ERROR: data deletion did not remove its both pointers");   
 }
 
 
