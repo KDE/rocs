@@ -65,7 +65,6 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     // create type lists
     d->_dataTypeLists.insert(0,DataList());
     d->_pointerTypeLists.insert(0,PointerList());
-    qDebug() << "items in data type list" << d->_dataTypeLists.size();
     
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));

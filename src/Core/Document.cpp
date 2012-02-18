@@ -357,7 +357,6 @@ const QString& Document::documentPath() const {
 
 void Document::remove(DataStructurePtr dataStructure){
     d->_dataStructures.removeOne(dataStructure);
-    qDebug() << "Document::remove(Datastructure)";
     d->_modified = true;
 }
 
