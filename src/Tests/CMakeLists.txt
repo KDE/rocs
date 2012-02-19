@@ -22,8 +22,10 @@ add_test(TestDataStructure TestDataStructure)
 
 
 # DynamicPropertiesList
-set( testDinamicProperties_SRCS TestDynamicProperties.cpp)
-kde4_add_executable(TestDynamicProperties ${testDinamicProperties_SRCS})
+set( testDynamicProperties_SRCS
+    TestDynamicProperties.cpp
+)
+kde4_add_executable(TestDynamicProperties ${testDynamicProperties_SRCS})
 target_link_libraries( TestDynamicProperties
     rocslib
     ${KDE4_KROSSUI_LIBS}

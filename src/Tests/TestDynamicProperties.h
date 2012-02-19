@@ -21,13 +21,17 @@
 
 #include <QtCore/QObject>
 
+class Document;
+
 class TestDynamicProperties:  public QObject
 {
      Q_OBJECT
+ public:
+    TestDynamicProperties();
+     
 private slots:
-//   void initTestCase();
-
   void cleanup();
+  void initTestCase();
 
   void addNodeDynamicProperty();
   void addEdgeDynamicProperty();
@@ -46,6 +50,9 @@ private slots:
   void MultipleProperties();
 
   void changeNames();
+  
+private:
+    Document *_document;
 };
 
 #endif // TESTDYNAMICPROPERTIES_H
