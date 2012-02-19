@@ -1,6 +1,7 @@
 /* 
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,11 +24,10 @@
 #include <QScriptString>
 #include "rocslib_export.h"
 
+class QScriptEngineDebugger;
 class Document;
-
-
 class ToolsPluginInterface;
-
+class QSignalSpy;
 
 class  ROCSLIB_EXPORT QtScriptBackend : public QObject{
   Q_OBJECT
@@ -39,19 +39,11 @@ public:
     void loadFile(const QString& file);
     void debug(const QString& s);
     void output(const QString& s);
+    void interrupt(); /** interrupts execution of the script **/
     QScriptEngine *engine(){ return _engine; }
 
     /** return true if is evaluating a script or running a tool script. */
     bool isRunning();
-
-private:
-    void createGraphList();
-    
-    QString _script;
-    Document *_document;
-    QScriptEngine *_engine;
-
-    bool _runningTool;
 
 signals:
     void sendOutput(const QString& s);
@@ -60,8 +52,14 @@ signals:
     void engineCreated(QScriptEngine* e);
     void finished();
 
-  public slots:
-    void start();
+public slots:
+    /** 
+     * execute the preset script
+     * emits SIGNAL finished() when execution is finished.
+     */
+    void execute();
+    void executeStep();
+    void continueExecutionStep();
 
     /** run a tool plugin in graph and later run it resulting script.*/
     void runTool(ToolsPluginInterface * plugin, Document *document);
@@ -71,6 +69,17 @@ signals:
 
     */
     void stop();
+    
+
+private:
+    void createGraphList();
+    
+    QString _script;
+    Document *_document;
+    QScriptEngine *_engine;
+    QScriptEngineDebugger *_engineSteps;    // used for stepped execution
+
+    bool _runningTool;
 };
 
 #endif

@@ -262,8 +262,8 @@ QWidget* MainWindow::setupScriptPanel()
     executeCommands->addAction( _stepRunScript );
     executeCommands->addAction( _stopScript );
 
-    connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
-    connect(_stepRunScript, SIGNAL(triggered()), this, SLOT(executeStepScript()));
+    connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScriptFull()));
+    connect(_stepRunScript, SIGNAL(triggered()), this, SLOT(executeScriptOneStep()));
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
     connect(_selectListing, SIGNAL(currentIndexChanged(int)), stackedListing, SLOT(setCurrentIndex(int)));
 
@@ -602,7 +602,7 @@ void MainWindow::importFile(){
     }
 
     if (!importer.scriptToRun().isEmpty()){
-      executeScript(importer.scriptToRun());
+        executeScriptFull(importer.scriptToRun());
     }
 }
 
@@ -650,7 +650,7 @@ void MainWindow::dsChanged(){
 
 #ifdef USING_QTSCRIPT
 
-void MainWindow::executeScript(const QString& text) {
+void MainWindow::executeScriptFull(const QString& text) {
     kDebug() << "Going to execute the script";
     if (_txtDebug == 0)   return;
     if ( scene() == 0)    return;
@@ -672,32 +672,34 @@ void MainWindow::executeScript(const QString& text) {
 
     enableStopAction();
     engine->setScript(script, DocumentManager::self()->activeDocument());
-    engine->start();
+    engine->execute();
 }
 
-void MainWindow::executeStepScript(const QString& text) {
-    qDebug() << "Need to be implement: currently only common execution";
+void MainWindow::executeScriptOneStep(const QString& text) {
+    qDebug() << "execution next step";
     if (_txtDebug == 0)   return;
     if ( scene() == 0)    return;
 
     _txtDebug->clear();
 
-    QString script = text.isEmpty() ? _codeEditor->text() : text;
-    QString scriptPath = _codeEditor->document()->url().path();
-    IncludeManager inc;
-
-    script = inc.include(script,
-                         scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
-                         _codeEditor->document()->documentName());
-
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
-    if (engine->isRunning() ) {
-        engine->stop();
-    }
 
+    //TODO disable start action
     enableStopAction();
-    engine->setScript(script, DocumentManager::self()->activeDocument());
-    engine->start(); 
+    if (!engine->isRunning()){
+        QString script = text.isEmpty() ? _codeEditor->text() : text;
+        QString scriptPath = _codeEditor->document()->url().path();
+        IncludeManager inc;
+
+        script = inc.include(script,
+                            scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
+                            _codeEditor->document()->documentName());
+
+        engine->setScript(script, DocumentManager::self()->activeDocument());
+        engine->executeStep();
+        return;
+    }
+    engine->continueExecutionStep();
 }
 
 

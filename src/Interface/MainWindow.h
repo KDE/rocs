@@ -87,12 +87,21 @@ private slots:
 
     void showPossibleIncludes();
 
-    void executeScript(const QString &text = QString());
+    /**
+     * execute the given script and print results
+     * \param text string that will be printed at result shell
+     */
+    void executeScriptFull(const QString &text = QString());
     
     /**
-     * execute until next pause command found in script
+     * execute script until next "step" command is found in script
+     * \param text string that will be printed at result shell
      */
-    void executeStepScript(const QString &text = QString());
+    void executeScriptOneStep(const QString &text = QString());
+    
+    /**
+     * stop script execution
+     */
     void stopScript();
     void newGraph();
     void openGraph();
