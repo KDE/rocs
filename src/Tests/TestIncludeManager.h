@@ -16,28 +16,28 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-*/
+ */
 
 #ifndef TESTINCLUDEMANAGER_H
 #define TESTINCLUDEMANAGER_H
 
 #include <QObject>
 
-
-class TestIncludeManager : public QObject {
+class TestIncludeManager : public QObject
+{
     Q_OBJECT
-    private slots:
-        void inittestcase();
+private slots:
+    void inittestcase();
 
-        void includeSimple();
+    void includeSimple();
 
-        void appendToTempPath();
+    void appendToTempPath();
 
-        void doublePathInsert();
+    void doublePathInsert();
 
-        void findInclude();
+    void findInclude();
 
-        void ignoreComments();
+    void ignoreComments();
 };
 
 #endif // TESTINCLUDEMANAGER_H

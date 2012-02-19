@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include "TestPlugins.h"
 
@@ -28,26 +28,23 @@
 
 void TestPlugins::inittestcase()
 {
-  if (DataStructurePluginManager::self()->pluginsList().count() == 0){
-    QFAIL("No plugin of DS, no way to continue!");
-  }
+    if ( DataStructurePluginManager::self()->pluginsList().count() == 0 ) {
+        QFAIL( "No plugin of DS, no way to continue!" );
+    }
 }
 
-void TestPlugins::create(){
-    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(1)->name());
-    Document doc("TestDocument");
+void TestPlugins::create() {
+    DataStructurePluginManager::self()->setDataStructurePlugin( DataStructurePluginManager::self()->pluginsList().at( 1 )->name() );
+    Document doc( "TestDocument" );
     DataStructurePtr ds = doc.addDataStructure();
-    QCOMPARE (ds->metaObject()->className(), "Rocs::GraphStructure");
+    QCOMPARE( ds->metaObject()->className(), "Rocs::GraphStructure" );
 }
 
-
-
-
-void TestPlugins::changeAndCreate(){
-    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(0)->name());
-    Document doc("TestDocument");
+void TestPlugins::changeAndCreate() {
+    DataStructurePluginManager::self()->setDataStructurePlugin( DataStructurePluginManager::self()->pluginsList().at( 0 )->name() );
+    Document doc( "TestDocument" );
     DataStructurePtr ds = doc.addDataStructure();
-    QCOMPARE (ds->metaObject()->className(), "Rocs::ListStructure");
+    QCOMPARE( ds->metaObject()->className(), "Rocs::ListStructure" );
 }
 
 void TestPlugins::convert()
@@ -72,7 +69,7 @@ void TestPlugins::convert()
 // //     QVERIFY (DataStructurePluginManager::self()->pluginsList().at(0)->name() == DataStructurePluginManager::self()->actualPlugin());
 // //     doc.convertToDS(DataStructurePluginManager::self()->actualPlugin());
 //     Document * newDoc = &doc;
-// 
+//
 //     QCOMPARE(newDoc->dataStructures().count(), 2);
 //     QVERIFY(newDoc->at(0)->directed());
 //     QVERIFY(newDoc->at(1)->directed());
@@ -82,11 +79,10 @@ void TestPlugins::convert()
 //     graph =  newDoc->dataStructures().at(0);
 //     QCOMPARE (graph->dataList().count(), 2);
 //     QCOMPARE (graph->pointers().count(), 1);
-// 
+//
 //     graph =  newDoc->dataStructures().at(1);
 //     QCOMPARE (graph->dataList().count(), 2);
 //     QCOMPARE (graph->pointers().count(), 1);
-
 }
 
-QTEST_MAIN ( TestPlugins )
+QTEST_MAIN( TestPlugins )
