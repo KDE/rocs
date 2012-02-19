@@ -88,6 +88,11 @@ private slots:
     void showPossibleIncludes();
 
     void executeScript(const QString &text = QString());
+    
+    /**
+     * execute until next pause command found in script
+     */
+    void executeStepScript(const QString &text = QString());
     void stopScript();
     void newGraph();
     void openGraph();
@@ -138,6 +143,7 @@ private: // Variables.
     // Other Bunch of stuff.
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
     KAction *_runScript;
+    KAction *_stepRunScript;
     KAction *_stopScript;
 
     //! Needed to restore the size of the splitter after closing / opening the UI.

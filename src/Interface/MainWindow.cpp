@@ -254,13 +254,16 @@ QWidget* MainWindow::setupScriptPanel()
     QToolBar *executeCommands = new QToolBar;
     executeCommands->setToolButtonStyle( Qt::ToolButtonTextUnderIcon );
     executeCommands->setOrientation(Qt::Vertical);
-    _runScript = new KAction ( KIcon ( "system-run" ), i18n ( "Run" ), this );
-    _stopScript = new KAction ( KIcon ( "process-stop" ), i18n ( "Stop" ), this );
+    _runScript = new KAction( KIcon( "system-run" ), i18nc( "Script Execution", "Run" ), this );
+    _stepRunScript = new KAction( KIcon( "go-next" ), i18nc( "Script Execution", "One Step" ), this );
+    _stopScript = new KAction( KIcon( "process-stop" ), i18nc( "Script Execution", "Stop" ), this );
     _stopScript->setEnabled(false);
-    executeCommands->addAction(_runScript);
-    executeCommands->addAction(_stopScript);
+    executeCommands->addAction( _runScript );
+    executeCommands->addAction( _stepRunScript );
+    executeCommands->addAction( _stopScript );
 
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
+    connect(_stepRunScript, SIGNAL(triggered()), this, SLOT(executeStepScript()));
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
     connect(_selectListing, SIGNAL(currentIndexChanged(int)), stackedListing, SLOT(setCurrentIndex(int)));
 
@@ -671,6 +674,32 @@ void MainWindow::executeScript(const QString& text) {
     engine->setScript(script, DocumentManager::self()->activeDocument());
     engine->start();
 }
+
+void MainWindow::executeStepScript(const QString& text) {
+    qDebug() << "Need to be implement: currently only common execution";
+    if (_txtDebug == 0)   return;
+    if ( scene() == 0)    return;
+
+    _txtDebug->clear();
+
+    QString script = text.isEmpty() ? _codeEditor->text() : text;
+    QString scriptPath = _codeEditor->document()->url().path();
+    IncludeManager inc;
+
+    script = inc.include(script,
+                         scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
+                         _codeEditor->document()->documentName());
+
+    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    if (engine->isRunning() ) {
+        engine->stop();
+    }
+
+    enableStopAction();
+    engine->setScript(script, DocumentManager::self()->activeDocument());
+    engine->start(); 
+}
+
 
 void MainWindow::stopScript() {
     kDebug() << "Going to stop the script";
