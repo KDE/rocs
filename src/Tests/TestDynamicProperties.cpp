@@ -32,6 +32,7 @@ TestDynamicProperties::TestDynamicProperties() {
 }
 
 void TestDynamicProperties::initTestCase() {
+    QVERIFY2( DataStructurePluginManager::self()->pluginsList().count() > 0, "DataStruture Plugins not loaded");
     _document = new Document( "untitled" );
 }
 
@@ -55,7 +56,7 @@ void TestDynamicProperties::addEdgeDynamicProperty() {
 
     DataPtr n = g->addData( "Node" );
     PointerPtr e = g->addPointer( n, n );
-    QVERIFY2( e.get() != 0, "Pointer not created!" );
+    QVERIFY2( e->getPointer().get() != 0, "Pointer not created!" );
     QByteArray property = "newProperty";
     e->addDynamicProperty( property, QVariant( 0 ) );
     QVERIFY2( e->property( property ) != QVariant::Invalid, "Property not added." );
@@ -78,7 +79,7 @@ void TestDynamicProperties::addToAllNodes() {
     DataPtr n2 = g->addData( "Node2" );
 
     QByteArray property = "newProperty";
-    g->addDataDynamicProperty( property, QVariant( 0 ) );
+    g->addDataDynamicProperty( property );
     QVERIFY2( n->property( property ) != QVariant::Invalid, "Property not added to Node1." );
     QVERIFY2( n2->property( property ) != QVariant::Invalid, "Property not added to Node2." );
     QVERIFY2( DynamicPropertiesList::New()->type( n.get(), property ) == Global, "Property isn't Global. (by node 1)" );
