@@ -273,7 +273,6 @@ QWidget* MainWindow::setupScriptPanel()
     dbgBtn->setMenu(menu);
     dbgBtn->setDefaultAction(_debugScript);
     executeCommands->addWidget(dbgBtn);
-    executeCommands->addAction(_debugScript);
     executeCommands->addAction( _stopScript );
 
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScriptFull()));
