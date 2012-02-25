@@ -1,4 +1,4 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
@@ -6,7 +6,7 @@
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -14,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -50,7 +50,7 @@ public:
      * self pointer to DataStructure
      */
     boost::weak_ptr<DataStructure> q;
-    
+
     QList< DataPtr > _data;
     QList< PointerPtr> _pointers;
 
@@ -129,7 +129,7 @@ public  slots:
     DataPtr data(const QString& name = i18n("Untitled"));
 
     virtual void remove(DataPtr n);
-    
+
     /**
      * Unregister pointer from data structure. Do not use this for actual removal of pointer.
      * To remove a pointer \see Pointer::remove().
@@ -190,12 +190,12 @@ signals:
 protected:
     DataPtr addData(DataPtr data);
     PointerPtr addPointer(PointerPtr pointer);
-    
+
 protected:
     DataStructure(Document *parent = 0);
-    
+
     /**
-     * overwrites the current DataStructure with all values (Data and Pointer) 
+     * overwrites the current DataStructure with all values (Data and Pointer)
      * from the given datastructure object.
      * \param boost::shared_ptr<DataStructure> other
      * \return void
@@ -212,7 +212,7 @@ protected:
         pi->importStructure(other);
         return pi;
     }
-    
+
 private:
     boost::shared_ptr<DataStructurePrivate> d;
 };

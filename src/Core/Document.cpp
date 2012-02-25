@@ -1,4 +1,4 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
@@ -7,7 +7,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -74,7 +74,7 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_engineBackend = new QtScriptBackend(this);
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_modified = false;
-    
+
     qDebug() << "------=======------======";
     qDebug() << " Document Constructor ";
     qDebug() << d->_dataStructureType->name();
@@ -363,48 +363,48 @@ void Document::remove(DataStructurePtr dataStructure){
 
 /**
  * A Document Internal format may look like this:
- * 
+ *
  * #                                '#'s are comments.
- *                              
+ *
  * [Document Properties]            # Canvas Size and Data Structure initialization.
- * Width  : [integer]               
- * Height : [integer]               
- * DataStructurePlugin : [string]   
- * 
+ * Width  : [integer]
+ * Height : [integer]
+ * DataStructurePlugin : [string]
+ *
  * # Data Structre Definitions.
  * # Data Structures are layered, so there can be N of them.
  * # Every Data and Pointer below a declaration of a DataStructure
  * # belongs to that data structure.
- * 
- * [DataStructure Name1] 
- * 
+ *
+ * [DataStructure Name1]
+ *
  * DataColor    : [RGB in hex]  # Color of newly created Datas ( Nodes )
  * Pointercolor : [RBG in Hex]  # Color of newly created Datas ( Nodes )
  * name         : [string]      # Name of the data structure acessible in the scripting interface.
- * 
+ *
  * visibility : [bool]           # is this DataStructure visible?
- * 
+ *
  * ShowNamesInData      : [bool] # should the canvas show the name of the data on the screen?
  * ShowNamesInNPointers : [bool] # ↑
  * ShowValuesInData     : [bool] # ↑
  * ShowValuesInPointers : [bool] # ↑
- * 
+ *
  * PluginDefinedProperty1 : propertyValue; # the plugins can define other properties for the data structure.
  * PluginDefinedProperty1 : propertyValue;
  * PluginDefinedProperty1 : propertyValue;
- * 
+ *
  * UserDefinedProperty1 : propertyValue1 # the user can define other properties for the data structure.
  * UserDefinedProperty2 : propertyValue2
  * UserDefinedProperty3 : propertyValue3
- * 
- * [Data 1] 
+ *
+ * [Data 1]
  * x     : [real]
  * y     : [real]
  * color : [string in "0xFFFFFF" format]
  * name  : [string]
  * value : [string]
  * size  : [float]
- * 
+ *
  * property1 : propertyValue1
  * property2 : propertyValue2
  * property3 : propertyValue3
@@ -416,18 +416,18 @@ void Document::remove(DataStructurePtr dataStructure){
  * name  : [string]
  * value : [string]
  * size  : [float]
- * 
+ *
  * property1 : propertyValue1
  * property2 : propertyValue2
  * property3 : propertyValue3
- * 
+ *
  * [Pointer 1 -> 2]
  * name     : [string]
  * value    : [string]
  * style    : [string]
  * color    : [string in "0xFFFFFF" format]
  * width    : [float]
- * 
+ *
  * property1 : propertyValue1
  * property2 : propertyValue2
  * property3 : propertyValue3
@@ -445,7 +445,7 @@ void Document::remove(DataStructurePtr dataStructure){
 
     QTextStream stream(&saveFile);
     stream.setCodec("UTF-8");
-    
+
      d->_buf = QString("[Document Properties] \n")
              % QString("top : ") % QString::number(top()) % QChar('\n')
              % QString("bottom : ") % QString::number(bottom()) % QChar('\n')
@@ -453,7 +453,7 @@ void Document::remove(DataStructurePtr dataStructure){
              % QString("right : ") % QString::number(right()) % QChar('\n')
              % QString("DataStructurePlugin : ") % DataStructurePluginManager::self()->actualPlugin()->name() % QChar('\n')
              % QChar('\n');
-            
+
     for (int i = 0; i < d->_dataStructures.count(); i++) {
         DataStructurePtr g = d->_dataStructures.at(i);
 
@@ -544,21 +544,21 @@ void Document::loadFromInternalFormat(const QString& filename) {
             continue;
         }
         else if(str.startsWith("[Document Properties]")){
-            
+
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
                 /**/ if (dataLine.startsWith("top :"))      setTop(dataLine.section(' ',2).toInt());
                 else if (dataLine.startsWith("bottom :"))   setBottom(dataLine.section(' ',2).toInt());
                 else if (dataLine.startsWith("left :"))     setLeft(dataLine.section(' ',2).toInt());
                 else if (dataLine.startsWith("right :"))    setRight(dataLine.section(' ',2).toInt());
-                
+
            // TODO: Wagner, How this thing works?
                 else if (dataLine.startsWith("DataStructurePlugin :")){
                     DataStructurePluginManager::self()->setDataStructurePlugin(dataLine.section(' ',2));
                     d->_dataStructureType =  DataStructurePluginManager::self()->actualPlugin();
                 }
                 else if ( !dataLine.isEmpty())               break; // go to the last if and finish populating.
-                dataLine = in.readLine().simplified();    
+                dataLine = in.readLine().simplified();
             }
             tmpObject = this;
         }
@@ -599,7 +599,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
 
             PointerPtr tmpPointer = tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()),
                                                      tmpDataStructure->dataList().at(nameTo.toInt()));
-            
+
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
                 /**/ if (dataLine.startsWith("width :"))     tmpPointer->setWidth(dataLine.section(' ',2).toInt());
@@ -607,7 +607,7 @@ void Document::loadFromInternalFormat(const QString& filename) {
                 else if (dataLine.startsWith("color :"))     tmpPointer->setColor(dataLine.section(' ',2));
                 else if (dataLine.startsWith("width :"))     tmpPointer->setColor(dataLine.section(' ',2).toFloat());
                 else if (dataLine.startsWith("style :"))     tmpPointer->setColor(dataLine.section(' ',2));
-                
+
                 else if ( !dataLine.isEmpty())                break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
@@ -637,6 +637,12 @@ QString Document::dataStructureTypeName() const
 {
   return d->_dataStructureType->name();
 }
+
+QString Document::dataStructureInternalName() const
+{
+   return  d->_dataStructureType->internalName();
+}
+
 
 DataStructurePluginInterface* Document::dataStructurePlugin() const
 {

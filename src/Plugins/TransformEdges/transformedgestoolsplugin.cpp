@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -60,19 +60,19 @@ QString TransformEdgesToolPlugin::run(QObject* doc) const
     Document* graphDoc = qobject_cast<Document*> ( doc );
 
     TransformEdgesWidget* dialog = new TransformEdgesWidget(graphDoc, 0);
-    
+
     QList< DataStructurePtr > dsList = graphDoc->dataStructures();
     QStringList dsNames;
-    
+
     // be sure that only graph-datastructures are accessed by this plugin
-    if (graphDoc->dataStructureTypeName() == "Graph" ) {
-    foreach (DataStructurePtr ds, dsList) {
-        dsNames << ds->name();
+    if (graphDoc->dataStructureInternalName() == "Graph" ) {
+        foreach (DataStructurePtr ds, dsList) {
+            dsNames << ds->name();
+        }
     }
-    }
-    
+
     dialog->addDataStructures(dsNames);
-    
+
     dialog->show();
 
     return "";
