@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -57,7 +57,16 @@ public:
    */
   virtual bool canConvertFrom(Document* doc) const = 0;
 
+  /** @brief return the translated name to be used in user visible strings
+   */
   QString name();
+
+  /** @brief return the internal name from plugin.
+   * This string is not translated and should be used to differentiate
+   * the data structures. It is useful when some piece of code is only
+   * applicable to some kind of structures
+   */
+  QString internalName();
 
   virtual QGraphicsItem * dataItem (DataPtr data) const = 0;
   virtual QGraphicsItem * pointerItem (PointerPtr pointer) const = 0;

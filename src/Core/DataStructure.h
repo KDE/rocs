@@ -1,4 +1,4 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
@@ -6,7 +6,7 @@
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -14,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -50,7 +50,7 @@ public:
      * self pointer to DataStructure
      */
     boost::weak_ptr<DataStructure> q;
-    
+
     QMap<int,DataList> _dataTypeLists;         // list if data elements associated to specific type
     QMap<int,PointerList> _pointerTypeLists;   // list of pointers associated to specific type
     QMap<int,QString> _dataTypes;           // list of data types
@@ -105,7 +105,7 @@ public:
     bool readOnly() const ;
 
     QScriptValue scriptValue() const;
-    void setEngine( QScriptEngine *engine );
+    virtual void setEngine( QScriptEngine *engine );
     QScriptEngine *engine() const;
 
     /** register new type for data elements
@@ -164,7 +164,7 @@ public slots:
     DataPtr getData(int uniqueIdentifier);
 
     virtual void remove(DataPtr n);
-    
+
     /**
      * Unregister pointer from data structure. Do not use this for actual removal of pointer.
      * To remove a pointer \see Pointer::remove().
@@ -226,12 +226,12 @@ protected:
     DataPtr addData(DataPtr data, int dataType=0);
     PointerPtr addPointer(PointerPtr pointer, int pointerType=0);
     int generateUniqueIdentifier();
-    
+
 protected:
     DataStructure(Document *parent = 0);
-    
+
     /**
-     * overwrites the current DataStructure with all values (Data and Pointer) 
+     * overwrites the current DataStructure with all values (Data and Pointer)
      * from the given datastructure object.
      * \param boost::shared_ptr<DataStructure> other
      * \return void
@@ -248,7 +248,7 @@ protected:
         pi->importStructure(other);
         return pi;
     }
-    
+
 private:
     boost::shared_ptr<DataStructurePrivate> d;
 };
