@@ -351,12 +351,12 @@ void Rocs::GraphStructure::setGraphType(int type)
     }
 }
 
-Rocs::GraphStructure::GRAPH_TYPE Rocs::GraphStructure::graphType()
+Rocs::GraphStructure::GRAPH_TYPE Rocs::GraphStructure::graphType() const
 {
     return _type;
 }
 
-bool Rocs::GraphStructure::directed()
+bool Rocs::GraphStructure::directed() const
 {
     return (_type == DIRECTED || _type == MULTIGRAPH);
 }
