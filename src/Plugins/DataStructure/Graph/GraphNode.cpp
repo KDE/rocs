@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include "GraphNode.h"
 #include "GraphStructure.h"
@@ -26,8 +26,7 @@ DataPtr GraphNode::create(DataStructurePtr parent, int uniqueIdentifier, int dat
     return Data::create<GraphNode>(parent, uniqueIdentifier, dataType);
 }
 
-
-GraphNode::GraphNode(DataStructurePtr parent, int uniqueIdentifier, int dataType):
+GraphNode::GraphNode(DataStructurePtr parent, int uniqueIdentifier, int dataType) :
     Data(parent, uniqueIdentifier, dataType)
 {
 }
@@ -39,57 +38,56 @@ void GraphNode::setEngine(QScriptEngine* _engine)
 
 GraphNode::~GraphNode()
 {
-
 }
 
 QScriptValue GraphNode::adj_nodes()
 {
-  return Data::adj_data();
+    return Data::adj_data();
 }
 
 QScriptValue GraphNode::adj_edges()
 {
-  return Data::adj_pointers();
+    return Data::adj_pointers();
 }
 
 QScriptValue GraphNode::connected_edges(Data* n)
 {
-    if (n==0)
+    if (n == 0)
         return QScriptValue();
-    return Data::connected_pointers( n->getData() );
+    return Data::connected_pointers(n->getData());
 }
 
 QScriptValue GraphNode::input_edges()
 {
-  return Data::input_pointers();
+    return Data::input_pointers();
 }
 
 QScriptValue GraphNode::loop_edges()
 {
-  return Data::loop_pointers();
+    return Data::loop_pointers();
 }
 
 QScriptValue GraphNode::output_edges()
 {
-  return Data::output_pointers();
+    return Data::output_pointers();
 }
 
-QScriptValue GraphNode::overlayEdges(int overlay) {
-    boost::shared_ptr<Rocs::GraphStructure> ds = boost::static_pointer_cast<Rocs::GraphStructure>( dataStructure() );
+QScriptValue GraphNode::overlayEdges(int overlay)
+{
+    boost::shared_ptr<Rocs::GraphStructure> ds = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure());
     if (ds->directed()) {
         PointerList list;
-        foreach( PointerPtr n, out_pointers() ){
-            if( n->pointerType()!=overlay ) {
+        foreach(PointerPtr n, out_pointers()) {
+            if (n->pointerType() != overlay) {
                 continue;
             }
             list.append(n);
         }
         return createScriptArray(list);
-    }
-    else {
+    } else {
         PointerList list;
-        foreach( PointerPtr n, adjacent_pointers() ){
-            if( n->pointerType()!=overlay ) {
+        foreach(PointerPtr n, adjacent_pointers()) {
+            if (n->pointerType() != overlay) {
                 continue;
             }
             list.append(n);

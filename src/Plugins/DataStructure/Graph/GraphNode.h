@@ -14,17 +14,16 @@
 
     You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #ifndef GRAPHNODE_H
 #define GRAPHNODE_H
 
 #include <Data.h>
 
-
 class GraphNode : public Data
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
     static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);

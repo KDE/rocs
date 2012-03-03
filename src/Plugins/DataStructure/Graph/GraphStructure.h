@@ -16,24 +16,26 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #ifndef GRAPHSTRUCTURE_H
 #define GRAPHSTRUCTURE_H
 
 #include "DataStructure.h"
 
-namespace Rocs{
-class ROCSLIB_EXPORT GraphStructure : public DataStructure {
+namespace Rocs
+{
+class ROCSLIB_EXPORT GraphStructure : public DataStructure
+{
     Q_OBJECT
-    public:
-        typedef enum {
-            UNDIRECTED,
-            DIRECTED,
-            MULTIGRAPH
-        } GRAPH_TYPE;
+public:
+    typedef enum {
+        UNDIRECTED,
+        DIRECTED,
+        MULTIGRAPH
+    } GRAPH_TYPE;
 
-      //to avoid hide some methods
+    //to avoid hide some methods
     using DataStructure::remove;
     using DataStructure::addPointer;
     using DataStructure::addData;
@@ -41,80 +43,80 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
-    GraphStructure ( Document* parent = 0 );
+    GraphStructure(Document* parent = 0);
     ~GraphStructure();
     void importStructure(DataStructurePtr other);
 
-    PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
-    DataPtr addData(QString name, int dataType=0);
+    PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType = 0);
+    DataPtr addData(QString name, int dataType = 0);
 
-    public slots:
-        /**
-         * returns a list of all nodes of the graph as array
-         */
-        QScriptValue list_nodes();
+public slots:
+    /**
+     * returns a list of all nodes of the graph as array
+     */
+    QScriptValue list_nodes();
 
-        /**
-         * returns a list of all edges of the graph as array
-         */
-        QScriptValue list_edges();
+    /**
+     * returns a list of all edges of the graph as array
+     */
+    QScriptValue list_edges();
 
-        /**
-         * Gives array of edges of specified overlay. If overlay
-         * does not exist an empty array is returned.
-         * \param overlay integer that identifies the overlay
-         * \return QScriptValue array
-         */
-        QScriptValue overlayEdges(int overlay);
+    /**
+     * Gives array of edges of specified overlay. If overlay
+     * does not exist an empty array is returned.
+     * \param overlay integer that identifies the overlay
+     * \return QScriptValue array
+     */
+    QScriptValue overlayEdges(int overlay);
 
-        /**
-         * Creates new overlay.
-         * \param name name of the new overlay
-         * \return QScriptValue integer that identifies the overlay
-         */
-        QScriptValue addOverlay(const QString& name);
+    /**
+     * Creates new overlay.
+     * \param name name of the new overlay
+     * \return QScriptValue integer that identifies the overlay
+     */
+    QScriptValue addOverlay(const QString& name);
 
-        /**
-         * Removes specified overlay and all edges that it contains.
-         * \param overlay is identifier of this overlay
-         * \return QScriptValue boolean if operation was successful
-         */
-        QScriptValue removeOverlay(int overlay);
+    /**
+     * Removes specified overlay and all edges that it contains.
+     * \param overlay is identifier of this overlay
+     * \return QScriptValue boolean if operation was successful
+     */
+    QScriptValue removeOverlay(int overlay);
 
-        QScriptValue add_node(const QString& name);
-        QScriptValue add_edge(Data* fromRaw, Data* toRaw);
-        QScriptValue node_byname(const QString& name);
+    QScriptValue add_node(const QString& name);
+    QScriptValue add_edge(Data* fromRaw, Data* toRaw);
+    QScriptValue node_byname(const QString& name);
 
-        /**
-         * Creates a new overlay edge from \param fromRaw to \param toRaw
-         * at overlay \param overlay. If the overlay does not exist no pointer
-         * is created.
-         * \param fromRaw is origin of pointer
-         * \param toRaw is target of pointer
-         * \param overlay is the overlay for the to created pointer
-         * \return script value for the new pointer
-         */
-        QScriptValue addOverlayEdge(Data* fromRaw, Data* toRaw, int overlay);
+    /**
+     * Creates a new overlay edge from \param fromRaw to \param toRaw
+     * at overlay \param overlay. If the overlay does not exist no pointer
+     * is created.
+     * \param fromRaw is origin of pointer
+     * \param toRaw is target of pointer
+     * \param overlay is the overlay for the to created pointer
+     * \return script value for the new pointer
+     */
+    QScriptValue addOverlayEdge(Data* fromRaw, Data* toRaw, int overlay);
 
-        /**
-         * Computes the Dijkstra's shortest path algorithm to compute
-         * the shortes path from \param from to \param to. Note: this shortest path
-         * algorithm works only for graphs with all edges values non-negative.
-         * For undirected graphs reverse edges are add automatically.
-         * The algorithm has time complexity O(V log V + E).
-         *
-         * \param from the node from which the computation starts
-         * \param to the node to which the shortest path shall be computed
-         * \return the edge set of the shortest path
-         */
-        QScriptValue dijkstra_shortest_path(Data* fromRaw, Data* toRaw);
+    /**
+     * Computes the Dijkstra's shortest path algorithm to compute
+     * the shortes path from \param from to \param to. Note: this shortest path
+     * algorithm works only for graphs with all edges values non-negative.
+     * For undirected graphs reverse edges are add automatically.
+     * The algorithm has time complexity O(V log V + E).
+     *
+     * \param from the node from which the computation starts
+     * \param to the node to which the shortest path shall be computed
+     * \return the edge set of the shortest path
+     */
+    QScriptValue dijkstra_shortest_path(Data* fromRaw, Data* toRaw);
 
-        bool directed();
-        GRAPH_TYPE graphType();
-        void setGraphType(int type);
+    bool directed();
+    GRAPH_TYPE graphType();
+    void setGraphType(int type);
 
-    private:
-        GraphStructure::GRAPH_TYPE _type;
+private:
+    GraphStructure::GRAPH_TYPE _type;
 };
 }
 #endif // GRAPHSTRUCTURE_H

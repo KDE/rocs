@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -14,10 +14,10 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #include "NodeItem.h"
 #include <boost/shared_ptr.hpp>
 
-NodeItem::NodeItem(DataPtr n) : DataItem(n){}
-NodeItem::~NodeItem(){};
+NodeItem::NodeItem(DataPtr n) : DataItem(n) {}
+NodeItem::~NodeItem() {};
