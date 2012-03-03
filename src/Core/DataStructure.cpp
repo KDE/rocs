@@ -1,4 +1,4 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
@@ -6,7 +6,7 @@
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -14,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -61,11 +61,11 @@ DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStru
     d->_pointerNamesVisible = false;
     d->_pointerValuesVisible = true;
     d->_identifierCount = 1;
-    
+
     // create type lists
     d->_dataTypeLists.insert(0,DataList());
     d->_pointerTypeLists.insert(0,PointerList());
-    
+
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
     emit changed();
@@ -121,14 +121,14 @@ DataStructure::~DataStructure() {
 }
 
 const DataList DataStructure::dataList(int dataType) const {
-    if (dataType < d->_dataTypeLists.size()) {
+    if( d->_dataTypeLists.contains( dataType ) ) {
         return d->_dataTypeLists[dataType];
     }
     return DataList();
 }
 
 const PointerList DataStructure::pointers(int pointerType) const {
-    if (pointerType < d->_dataTypeLists.size()) {
+    if( d->_pointerTypeLists.contains( pointerType ) ) {
         return d->_pointerTypeLists[pointerType];
     }
     return PointerList();
@@ -158,7 +158,7 @@ QString DataStructure::getPointerTypeName(int pointerType) const {
 
 bool DataStructure::removeDataType(int dataType) {
     if(dataType==0) return false;
-    
+
     foreach(DataPtr data, d->_dataTypeLists[dataType]) {
         data->remove();
     }
@@ -168,8 +168,10 @@ bool DataStructure::removeDataType(int dataType) {
 }
 
 bool DataStructure::removePointerType(int pointerType) {
-    if(pointerType==0) return false;
-    
+    if( pointerType==0 || !d->_pointerTypeLists.contains(pointerType) ) {
+        return false;
+    }
+
     foreach(PointerPtr pointer, d->_pointerTypeLists[pointerType]) {
         pointer->remove();
     }
@@ -220,7 +222,7 @@ DataPtr DataStructure::addData(DataPtr data, int dataType){
     }
     emit dataCreated( data );
     emit changed();
-    
+
 //     connect(data.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
     connect(data.get(), SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
@@ -268,7 +270,7 @@ QList< DataPtr > DataStructure::addDataList(QList< QPair<QString,QPointF> > data
 
 PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType){
     Q_ASSERT(pointerType>=0 && pointerType<d->_pointerTypeLists.size());
-    
+
     d->_pointerTypeLists[pointerType].append( pointer );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
     while (i != d->m_globalPropertiesPointer.constEnd()) {
@@ -365,7 +367,7 @@ void DataStructure::remove(DataPtr n) {
         i->removeOne(n);
         ++i;
     }
-    
+
     // emit changes
     if (left)   emit resizeRequest( Document::BorderLeft );
     if (right)  emit resizeRequest( Document::BorderRight );
@@ -508,13 +510,13 @@ void DataStructure::setEngine(	QScriptEngine *engine ) {
         dataType.at(i)->setEngine(engine);
     }
     }
-    
+
     foreach(PointerList pointerType, d->_pointerTypeLists) {
     for( int i = 0; i < pointerType.size(); ++i){
         pointerType.at(i)->setEngine(engine);
     }
     }
-    
+
     foreach(Group *g, d->_groups) {
        QScriptValue array = d->_engine->newArray();
     //   foreach(Data * n, (*g) ) {

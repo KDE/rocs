@@ -55,7 +55,7 @@ public:
     QMap<int,PointerList> _pointerTypeLists;   // list of pointers associated to specific type
     QMap<int,QString> _dataTypes;           // list of data types
     QMap<int,QString> _pointerTypes;        // list of pointer types
-    
+
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
     QList<Group*> _groups;
@@ -113,29 +113,30 @@ public:
      * \return positive integer >0 if successfully registered, else <=0
      */
     int registerDataType(QString name);
-    
+
     /** register new type for pointers
      * \param name of the pointerType
      * \return positive integer >0 if successfully registered, else <=0
      */
-    int registerPointerType(QString name);    
-    
+    int registerPointerType(QString name);
+
     /** removes this data type and all data elements of this type
      * \param dataType is positive id>0
      * \return true if a dataType was removed
      */
     bool removeDataType(int dataType);
 
-    /** removes this pointer type and all data elements of this type
+    /** Removes this pointer type and all data elements of this type.
+     * Aborts and returns "false" if pointer type is "0" or if the pointertype does not exists.
      * \param pointerType is positive id>0
      * \return true if a dataType was removed
      */
     bool removePointerType(int pointerType);
-    
+
     // getters
     QString getDataTypeName(int dataType) const;
     QString getPointerTypeName(int pointerType) const;
-    
+
     bool dataNameVisibility() const;
     bool pointerNameVisibility() const;
     bool dataValueVisibility() const;
@@ -143,7 +144,21 @@ public:
     const QColor& pointerDefaultColor() const;
     const QColor& dataDefaultColor() const;
     const QString& name() const;
+
+    /**
+     * Gives list of data elements of specified type if type exists.
+     * If dataType does not exists, returns empty list.
+     * \param dataType is type of data elements to be returned
+     * \return DataList of data elements of specified type
+     */
     const DataList dataList(int dataType=0) const;
+
+    /**
+     * Gives list of pointers of specified type if type exists.
+     * If pointerType does not exists, returns empty list.
+     * \param pointerType is type of pointers to be returned
+     * \return PointerList of pointers of specified type
+     */
     const PointerList pointers(int pointerType=0) const;
     const QList<Group*> groups() const;
 
@@ -155,7 +170,7 @@ public slots:
     virtual DataPtr addData(QString name, int dataType=0);
     virtual DataList addDataList(DataList dataList, int dataType=0);
     virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
-    
+
     /**
      * get data by unique identifier
      * iterates over all data elements, running time O(n)

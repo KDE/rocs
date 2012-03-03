@@ -6,7 +6,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -47,35 +47,58 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
 
     PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
     DataPtr addData(QString name, int dataType=0);
-    
+
     public slots:
         /**
          * returns a list of all nodes of the graph as array
          */
         QScriptValue list_nodes();
-        
+
         /**
          * returns a list of all edges of the graph as array
          */
         QScriptValue list_edges();
-        
+
+        /**
+         * Gives array of edges of specified overlay. If overlay
+         * does not exist an empty array is returned.
+         * \param overlay integer that identifies the overlay
+         * \return QScriptValue array
+         */
+        QScriptValue overlayEdges(int overlay);
+
+        /**
+         * Creates new overlay.
+         * \param name name of the new overlay
+         * \return QScriptValue integer that identifies the overlay
+         */
+        QScriptValue addOverlay(const QString& name);
+
+        /**
+         * Removes specified overlay and all edges that it contains.
+         * \param overlay is identifier of this overlay
+         * \return QScriptValue boolean if operation was successful
+         */
+        QScriptValue removeOverlay(int overlay);
+
+
         QScriptValue add_node(const QString& name);
         QScriptValue add_edge(Data* fromRaw, Data* toRaw);
         QScriptValue node_byname(const QString& name);
-        
+
         /**
          * Computes the Dijkstra's shortest path algorithm to compute
          * the shortes path from "from" to "to". Note: this shortest path
          * algorithm works only for graphs with all edges values non-negative.
          * For undirected graphs reverse edges are add automatically.
          * The algorithm has time complexity O(V log V + E).
-         * 
+         *
          * \param from the node from which the computation starts
          * \param to the node to which the shortest path shall be computed
          * \return the edge set of the shortest path
          */
         QScriptValue dijkstra_shortest_path(Data* fromRaw, Data* toRaw);
-        
+
         bool directed();
         GRAPH_TYPE graphType();
         void setGraphType(int type);

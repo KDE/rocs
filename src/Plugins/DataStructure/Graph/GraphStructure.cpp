@@ -1,12 +1,12 @@
 /*
     This file is part of Rocs.
-    Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011       Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2011       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -35,8 +35,6 @@
 #include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <boost/graph/graph_concepts.hpp>
 
-
-namespace boost { void throw_exception( std::exception const & ) {} }
 
 DataStructurePtr Rocs::GraphStructure::create(Document *parent) {
     return DataStructure::create<GraphStructure>(parent);
@@ -81,6 +79,24 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
 Rocs::GraphStructure::~GraphStructure() {
 }
 
+QScriptValue Rocs::GraphStructure::addOverlay(const QString& name) {
+    return engine()->toScriptValue<int>( registerPointerType(name) );
+}
+
+
+QScriptValue Rocs::GraphStructure::removeOverlay(int overlay) {
+    return engine()->toScriptValue<bool>( removePointerType(overlay) );
+}
+
+QScriptValue Rocs::GraphStructure::overlayEdges(int overlay){
+    QScriptValue array = engine()->newArray();
+    foreach(PointerPtr n, pointers(overlay)) {
+        array.property("push").call(array, QScriptValueList() << n->scriptValue());
+    }
+    return array;
+}
+
+
 QScriptValue Rocs::GraphStructure::list_nodes() {
     QScriptValue array = engine()->newArray();
     foreach(DataPtr n, dataList()) {
@@ -109,7 +125,7 @@ QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw) {
 
     DataPtr from = fromRaw->getData();
     DataPtr to = toRaw->getData();
-  
+
     PointerPtr edge = addPointer(from, to);
     if (edge){
         edge->setEngine(engine());
@@ -127,10 +143,10 @@ QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
 QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* toRaw) {
       if (fromRaw==0 || toRaw==0)
         return QScriptValue();
-    
+
     DataPtr from = fromRaw->getData();
     DataPtr to = toRaw->getData();
-    
+
     QScriptValue path_edges = engine()->newArray();
 
     typedef boost::adjacency_list < boost::listS, boost::vecS, boost::directedS,
@@ -146,11 +162,11 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
     BOOST_FOREACH (DataPtr data, this->dataList()) {
         node_mapping[data.get()] = counter++;
     }
-    
+
     // use doubled size for case of undirected edges
     QVector<Edge> edges(this->pointers().count()*2);
     QVector<qreal> weights(this->pointers().count()*2);
-    
+
     counter = 0;
     BOOST_FOREACH( PointerPtr p, this->pointers() )
     {
@@ -174,21 +190,21 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
               counter++;
          }
     }
-     
+
     // setup the graph
-    graph_t g(  edges.begin(), 
-                edges.end(), 
-                weights.begin(), 
+    graph_t g(  edges.begin(),
+                edges.end(),
+                weights.begin(),
                 this->dataList().count()
              );
-    
+
     // compute Dijkstra
     vertex_descriptor source = boost::vertex(node_mapping[from.get()], g);
     vertex_descriptor target = boost::vertex(node_mapping[to.get()], g);
     QVector<vertex_descriptor> p(boost::num_vertices(g));
     QVector<int> dist(boost::num_vertices(g));
-    boost::dijkstra_shortest_paths( g, 
-                                    source, 
+    boost::dijkstra_shortest_paths( g,
+                                    source,
                                     boost::predecessor_map(p.begin()).distance_map(dist.begin())
                                   );
 
@@ -199,7 +215,7 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
     do {
         if (edge_mapping.contains(std::make_pair<int,int>(p[predecessor],predecessor))){
         path_edges.property("push").call(
-            path_edges, 
+            path_edges,
             QScriptValueList() << edge_mapping[std::make_pair<int,int>(p[predecessor],predecessor)]->scriptValue()
         );
         }
@@ -222,7 +238,7 @@ void Rocs::GraphStructure::setGraphType(int type)
             return;
         }
     }
-    
+
     _type = static_cast<GRAPH_TYPE>(type);
     switch(_type){
     case UNDIRECTED :
@@ -232,13 +248,13 @@ void Rocs::GraphStructure::setGraphType(int type)
                p->remove();
             }
             data->self_pointers().clear();
-            
+
             // Clear the rest. there should be only one edge between two nodes.
             foreach(DataPtr data2, dataList()){
                 if (data == data2){
                     continue;
                 }
-                
+
                 bool foundOne = false;
                 foreach (PointerPtr tmp, data->out_pointers()) {
                     if (tmp->to() == data2) {
@@ -251,7 +267,7 @@ void Rocs::GraphStructure::setGraphType(int type)
                         }
                     }
                 }
-                
+
                 foreach(PointerPtr tmp, data->in_pointers()) {
                     if (tmp->from() == data2) {
                         if (!foundOne){
@@ -277,13 +293,13 @@ void Rocs::GraphStructure::setGraphType(int type)
                    p->remove();
                }
             }
-            
+
             // Just one going in, and one going out.
             foreach(DataPtr data2, dataList()){
                 if (data == data2){
                     continue;
                 }
-                
+
                 bool foundOneOut = false;
                 foreach (PointerPtr tmp, data->out_pointers()) {
                     if (tmp->to() == data2) {
@@ -296,7 +312,7 @@ void Rocs::GraphStructure::setGraphType(int type)
                         }
                     }
                 }
-                
+
                 bool foundOneIn = false;
                 foreach(PointerPtr tmp, data->in_pointers()) {
                     if (tmp->from() == data2) {
@@ -312,9 +328,9 @@ void Rocs::GraphStructure::setGraphType(int type)
             }
         } break;
     default: break;
-        
+
     }
-    
+
     foreach(PointerPtr pointer, pointers()) {
        QMetaObject::invokeMethod(pointer.get(), "changed");
     }
@@ -340,7 +356,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
             return PointerPtr();
         }
     }
-    
+
     if ( _type==DIRECTED ) {   // do not add double edges
         PointerList list = from->out_pointers();
         foreach (PointerPtr tmp, list) {
@@ -358,12 +374,13 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
 
 DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
 {
-    if (readOnly()) 
+    if (readOnly())
         return DataPtr();
 
-    boost::shared_ptr<GraphNode> n = boost::static_pointer_cast<GraphNode>( 
+    boost::shared_ptr<GraphNode> n = boost::static_pointer_cast<GraphNode>(
         GraphNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
     );
     n->setName(name);
     return addData(n);
 }
+
