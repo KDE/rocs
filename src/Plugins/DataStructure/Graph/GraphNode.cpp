@@ -1,10 +1,11 @@
-/* 
+/*
     This file is part of Rocs,
     Copyright 2011  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -12,11 +13,13 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "GraphNode.h"
+#include "GraphStructure.h"
+#include "Pointer.h"
 
 DataPtr GraphNode::create(DataStructurePtr parent, int uniqueIdentifier, int dataType)
 {
@@ -24,7 +27,7 @@ DataPtr GraphNode::create(DataStructurePtr parent, int uniqueIdentifier, int dat
 }
 
 
-GraphNode::GraphNode(DataStructurePtr parent, int uniqueIdentifier, int dataType): 
+GraphNode::GraphNode(DataStructurePtr parent, int uniqueIdentifier, int dataType):
     Data(parent, uniqueIdentifier, dataType)
 {
 }
@@ -50,7 +53,7 @@ QScriptValue GraphNode::adj_edges()
 }
 
 QScriptValue GraphNode::connected_edges(Data* n)
-{   
+{
     if (n==0)
         return QScriptValue();
     return Data::connected_pointers( n->getData() );
@@ -71,3 +74,26 @@ QScriptValue GraphNode::output_edges()
   return Data::output_pointers();
 }
 
+QScriptValue GraphNode::overlayEdges(int overlay) {
+    boost::shared_ptr<Rocs::GraphStructure> ds = boost::static_pointer_cast<Rocs::GraphStructure>( dataStructure() );
+    if (ds->directed()) {
+        PointerList list;
+        foreach( PointerPtr n, out_pointers() ){
+            if( n->pointerType()!=overlay ) {
+                continue;
+            }
+            list.append(n);
+        }
+        return createScriptArray(list);
+    }
+    else {
+        PointerList list;
+        foreach( PointerPtr n, adjacent_pointers() ){
+            if( n->pointerType()!=overlay ) {
+                continue;
+            }
+            list.append(n);
+        }
+        return createScriptArray(list);
+    }
+}

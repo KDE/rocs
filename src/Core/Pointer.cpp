@@ -1,11 +1,12 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -13,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -28,7 +29,7 @@ class PointerPrivate{
 public:
     PointerPrivate(){}
     boost::weak_ptr<Pointer> q; // self pointer
-    
+
     DataPtr from;
     DataPtr to;
     int relativeIndex;
@@ -53,7 +54,7 @@ public:
 PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) {
     PointerPtr pi(new Pointer(parent, from, to, pointerType));
     pi->d->q = pi;
-    
+
     if ( from == to ) {
         from->addSelfPointer(pi);
     }
@@ -61,8 +62,8 @@ PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, in
         from->addOutPointer(pi);
         to->addInPointer(pi);
         connect(to.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
-    }   
-    
+    }
+
     return pi;
 }
 
@@ -84,7 +85,7 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->width         = 1;
     d->relativeIndex = d->to->pointers(d->from).size();
     d->pointerType   = pointerType;
-    
+
     connect(parent.get(), SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
     connect(from.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
 }
@@ -132,6 +133,10 @@ const QString& Pointer::value() const{
 
 const QString& Pointer::name() const{
     return d->name;
+}
+
+int Pointer::pointerType() const {
+    return d->pointerType;
 }
 
 void Pointer::remove() {

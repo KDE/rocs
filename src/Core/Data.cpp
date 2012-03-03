@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -25,8 +25,6 @@
 #include <QColor>
 
 #include "DynamicPropertiesList.h"
-
-namespace boost { void throw_exception( std::exception const & ) {} } 
 
 void DataPrivate::empty(PointerList &list) {
     while(!list.isEmpty()){
@@ -78,7 +76,7 @@ Data::Data(DataStructurePtr parent, int uniqueIdentifier, int dataType)
 
 Data::~Data() {
     emit removed();
-    
+
     if (d) {
         d->empty(d->_in_pointers);
         d->empty(d->_out_pointers);
@@ -216,7 +214,7 @@ void Data::remove() {
         d->_dataStructure->remove(getData());
         d->_dataStructure.reset();  // allow datastructure to be destroyed
     }
-    
+
     d->empty(d->_in_pointers);
     d->empty(d->_out_pointers);
     d->empty(d->_self_pointers);

@@ -1,11 +1,12 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -13,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -125,12 +126,18 @@ public  slots:
     /*! gets the color attribute of the pointer
       \return the string value of the pointer.
     */
-    const QColor& color() const ;
+    const QColor& color() const;
 
     /*! sets the color attribute of the pointer
       \p s the new color of the pointer in the format "#000000" or by it's english name ("red" for example)
     */
     void setColor(const QColor& s);
+
+    /**
+     * gives type of this pointer
+     * \return pointer type
+     */
+    int pointerType() const;
 
     qreal width () const;
     void setWidth(qreal w);
@@ -168,7 +175,7 @@ public  slots:
      it will remove this pointer from the graph.
      */
     void self_remove();
-    
+
 protected:
     /*! default constructor, an pointer connects two datums.
     \p parent a Graph
