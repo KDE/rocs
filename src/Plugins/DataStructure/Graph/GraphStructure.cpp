@@ -380,7 +380,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
         }
     }
 
-    return DataStructure::addPointer(from, to);
+    return DataStructure::addPointer(from, to, pointerType);
 }
 
 DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
@@ -392,5 +392,5 @@ DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
                                          GraphNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
                                      );
     n->setName(name);
-    return addData(n);
+    return addData(n, dataType);
 }

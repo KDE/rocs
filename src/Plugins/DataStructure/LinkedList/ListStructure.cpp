@@ -90,19 +90,19 @@ PointerPtr Rocs::ListStructure::addPointer ( DataPtr from, DataPtr to, int point
         e->remove();
     }
 
-    PointerPtr e =  DataStructure::addPointer ( from, to );
+    PointerPtr e =  DataStructure::addPointer(from, to, pointerType);
     arrangeNodes();
     return e;
 }
 
 DataPtr Rocs::ListStructure::addData ( QString name, int dataType) {
-    boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>( 
-        ListNode::create(getDataStructure(), generateUniqueIdentifier(), dataType) 
+    boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(
+        ListNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
     );
     n->setName(name);
 
     if (m_building) {
-        return addData(n);;
+        return addData(n, dataType);;
     }
 
     if (m_begin){
@@ -113,7 +113,7 @@ DataPtr Rocs::ListStructure::addData ( QString name, int dataType) {
     }else{
       m_begin = n;
     }
-    addData(n);
+    addData(n, dataType);
     arrangeNodes();
     return n;
 }

@@ -30,26 +30,31 @@
 #include <Document.h>
 #include <DataStructurePluginManager.h>
 
-TestDataStructure::TestDataStructure() {
+TestDataStructure::TestDataStructure()
+{
 }
 
-void TestDataStructure::initTestCase() {
-    QVERIFY( DataStructurePluginManager::self()->pluginsList().count()  > 0 );
+void TestDataStructure::initTestCase()
+{
+    QVERIFY( DataStructurePluginManager::self()->pluginsList().count() > 0 );
     _graphDocument = new Document( "untitled" );
 }
 
-void TestDataStructure::cleanupTestCase() {
+void TestDataStructure::cleanupTestCase()
+{
     _graphDocument->deleteLater();
 }
 
-void TestDataStructure::cleanup() {
+void TestDataStructure::cleanup()
+{
     for ( int i = 0; i < _graphDocument->dataStructures().count(); ++i ) {
         _graphDocument->dataStructures().at( i )->remove();
     }
     _graphDocument->dataStructures().clear();
 }
 
-void TestDataStructure::dataAddDeleteTest() {
+void TestDataStructure::dataAddDeleteTest()
+{
     _graphDocument->addDataStructure( "AddDeleteTest" );
     DataList dataList;
 
@@ -67,7 +72,8 @@ void TestDataStructure::dataAddDeleteTest() {
     QVERIFY2( _graphDocument->dataStructures().at( 0 )->dataList().size() == 0, "ERROR: Not all data elements were deleted" );
 }
 
-void TestDataStructure::pointerAddDeleteTest() {
+void TestDataStructure::pointerAddDeleteTest()
+{
     // test for undirected pointers
     _graphDocument->addDataStructure( "AddDeleteTest" );
     DataList dataList;
@@ -106,7 +112,8 @@ void TestDataStructure::pointerAddDeleteTest() {
     QVERIFY2( _graphDocument->dataStructures().at( 0 )->pointers().size() == 5, "ERROR: data deletion did not remove its both pointers" );
 }
 
-void TestDataStructure::createSimpleGraph() {
+void TestDataStructure::createSimpleGraph()
+{
     QMap<QString, DataPtr> dataList;
     /* Creates a simple Graph with 5 datums and connects them with pointers. */
     _graphDocument->addDataStructure( "untitled1" );
@@ -135,6 +142,47 @@ void TestDataStructure::createSimpleGraph() {
     }
 }
 
+void TestDataStructure::dataTypesTest()
+{
+    // TODO repeat this test with every data structure as well as the default DataStructure
+    _graphDocument->addDataStructure("pointerTypeTest");
+    DataList dataListDefault, dataList1, dataList2;
+    QVERIFY2(_graphDocument->dataStructures().at(0)->dataTypeList().size() == 1, "ERROR: no default data type created");
+
+    // register two further data types
+    int type1 = _graphDocument->dataStructures().at(0)->registerDataType("type1");
+    int type2 = _graphDocument->dataStructures().at(0)->registerDataType("type2");
+    QVERIFY2(_graphDocument->dataStructures().at(0)->dataTypeList().size() == 3, "ERROR: data types were not created");
+
+    // create data elements
+    for(int i=0; i<3; i++) {
+        dataListDefault.append(_graphDocument->dataStructures().at(0)->addData(QString(i)));
+        dataList1.append(_graphDocument->dataStructures().at(0)->addData(QString(i), type1));
+        dataList2.append(_graphDocument->dataStructures().at(0)->addData(QString(i), type2));
+    }
+    QVERIFY2(_graphDocument->dataStructures().at(0)->dataList().size() == 3, "ERROR: data elements were not created of correct type");
+    QVERIFY2(_graphDocument->dataStructures().at(0)->dataList(type1).size() == 3, "ERROR: data elements were not created of correct type");
+    QVERIFY2(_graphDocument->dataStructures().at(0)->dataList(type2).size() == 3, "ERROR: data elements were not created of correct type");
+    QVERIFY2(dataListDefault.at(0)->dataType()==0, "ERROR: not correct autoset of type");
+    QVERIFY2(dataList1.at(0)->dataType()==type1, "ERROR: not correct autoset of type");
+    QVERIFY2(dataList2.at(0)->dataType()==type2, "ERROR: not correct autoset of type");
+
+    // add pointers
+    _graphDocument->dataStructures().at(0)->addPointer(dataListDefault[0], dataList1[0]);
+    _graphDocument->dataStructures().at(0)->addPointer(dataList1[0], dataList2[0]);
+    _graphDocument->dataStructures().at(0)->addPointer(dataList2[0], dataListDefault[0]);
+    QVERIFY2(_graphDocument->dataStructures().at(0)->pointers(0).size() == 3, "ERROR: pointers were not correctly created");
+
+    // remove data type
+    _graphDocument->dataStructures().at(0)->removeDataType(type2);
+    QVERIFY2(_graphDocument->dataStructures().at(0)->pointers(0).size() == 1, "ERROR: pointers were not correctly deleted");
+}
+
+
+void TestDataStructure::pointerTypesTest()
+{
+
+}
 /*
    void TestDataStructure::testKrossQtjs(){
    //   createPentagon();

@@ -212,11 +212,13 @@ int DataStructure::generateUniqueIdentifier() {
 }
 
 DataPtr DataStructure::addData(QString name, int dataType) {
-    if (d->_readOnly) return DataPtr();
+    if (d->_readOnly) {
+        return DataPtr();
+    }
 
-    DataPtr n = Data::create( this->getDataStructure(), generateUniqueIdentifier(), dataType );
+    DataPtr n = Data::create(this->getDataStructure(), generateUniqueIdentifier(), dataType);
     n->setName(name);
-    return addData(n);
+    return addData(n, dataType);
 }
 
 DataPtr DataStructure::addData(DataPtr data, int dataType){
@@ -313,7 +315,7 @@ PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType) 
         return PointerPtr();
     }
     PointerPtr pointer = Pointer::create(getDataStructure(), from, to, pointerType);
-    return addPointer(pointer);
+    return addPointer(pointer, pointerType);
 }
 
 PointerPtr DataStructure::addPointer(const QString& name_from, const QString& name_to, int pointerType) {

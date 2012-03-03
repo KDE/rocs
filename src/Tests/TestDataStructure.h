@@ -40,6 +40,8 @@ private slots:
     void pointerAddDeleteTest();
     void cleanupTestCase();
     void createSimpleGraph();
+    void pointerTypesTest();
+    void dataTypesTest();
 //     void saveTestFile();
 //     void loadTestFile();
 //     void testQtScript();
