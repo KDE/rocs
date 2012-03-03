@@ -185,7 +185,6 @@ protected:
     */
     Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType=0);
 
-
 private:
     boost::shared_ptr<PointerPrivate> const d;
 

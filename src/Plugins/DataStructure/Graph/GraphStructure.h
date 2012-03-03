@@ -81,14 +81,24 @@ class ROCSLIB_EXPORT GraphStructure : public DataStructure {
          */
         QScriptValue removeOverlay(int overlay);
 
-
         QScriptValue add_node(const QString& name);
         QScriptValue add_edge(Data* fromRaw, Data* toRaw);
         QScriptValue node_byname(const QString& name);
 
         /**
+         * Creates a new overlay edge from \param fromRaw to \param toRaw
+         * at overlay \param overlay. If the overlay does not exist no pointer
+         * is created.
+         * \param fromRaw is origin of pointer
+         * \param toRaw is target of pointer
+         * \param overlay is the overlay for the to created pointer
+         * \return script value for the new pointer
+         */
+        QScriptValue addOverlayEdge(Data* fromRaw, Data* toRaw, int overlay);
+
+        /**
          * Computes the Dijkstra's shortest path algorithm to compute
-         * the shortes path from "from" to "to". Note: this shortest path
+         * the shortes path from \param from to \param to. Note: this shortest path
          * algorithm works only for graphs with all edges values non-negative.
          * For undirected graphs reverse edges are add automatically.
          * The algorithm has time complexity O(V log V + E).

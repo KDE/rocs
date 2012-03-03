@@ -156,6 +156,14 @@ QString DataStructure::getPointerTypeName(int pointerType) const {
     return d->_pointerTypes[pointerType];
 }
 
+QList< int > DataStructure::dataTypeList() const {
+    return d->_dataTypeLists.keys();
+}
+
+QList< int > DataStructure::pointerTypeList() const {
+    return d->_pointerTypeLists.keys();
+}
+
 bool DataStructure::removeDataType(int dataType) {
     if(dataType==0) return false;
 
@@ -292,6 +300,8 @@ DataPtr DataStructure::addData(QString name, QPointF pos, int dataType){
 }
 
 PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType) {
+    Q_ASSERT(pointerTypeList().contains( pointerType ) );
+
     if (d->_readOnly)                   // If the data structure is in read only mode, no new stuff should be added.
         return PointerPtr();
 

@@ -137,6 +137,18 @@ public:
     QString getDataTypeName(int dataType) const;
     QString getPointerTypeName(int pointerType) const;
 
+    /**
+     * Getter for all registered data types.
+     * \return list of all data type ids
+     */
+    QList<int> dataTypeList() const;
+
+    /**
+     * Getter for all registered pointer types.
+     * \return list of all pointer type ids
+     */
+    QList<int> pointerTypeList() const;
+
     bool dataNameVisibility() const;
     bool pointerNameVisibility() const;
     bool dataValueVisibility() const;
@@ -169,6 +181,14 @@ public:
 public slots:
     virtual DataPtr addData(QString name, int dataType=0);
     virtual DataList addDataList(DataList dataList, int dataType=0);
+
+    /**
+     * Creates new pointer from data element "from" to data element "to" of
+     * given type "pointerType". The pointer type must exist.
+     * \param from data element where the pointer starts
+     * \param to data element where the pointer ends
+     * \param pointerType is the type of this pointer
+     */
     virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
 
     /**

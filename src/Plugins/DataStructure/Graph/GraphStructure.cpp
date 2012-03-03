@@ -120,13 +120,21 @@ QScriptValue Rocs::GraphStructure::add_node(const QString& name) {
 }
 
 QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw) {
+    return addOverlayEdge(fromRaw, toRaw, 0);
+}
+
+QScriptValue Rocs::GraphStructure::addOverlayEdge(Data* fromRaw, Data* toRaw, int overlay) {
     if (fromRaw==0 || toRaw==0)
         return QScriptValue();
+
+    if (!pointerTypeList().contains(overlay)){
+        return QScriptValue();
+    }
 
     DataPtr from = fromRaw->getData();
     DataPtr to = toRaw->getData();
 
-    PointerPtr edge = addPointer(from, to);
+    PointerPtr edge = addPointer(from, to, overlay);
     if (edge){
         edge->setEngine(engine());
         return edge->scriptValue();
@@ -134,6 +142,7 @@ QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw) {
 
     return QScriptValue();
 }
+
 
 QScriptValue Rocs::GraphStructure::node_byname(const QString& name) {
     DataPtr n = addData(name);
