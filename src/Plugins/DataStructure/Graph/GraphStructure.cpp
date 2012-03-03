@@ -131,9 +131,9 @@ QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw)
 
 QScriptValue Rocs::GraphStructure::addOverlayEdge(Data* fromRaw, Data* toRaw, int overlay)
 {
-    if (fromRaw == 0 || toRaw == 0)
+    if (fromRaw == 0 || toRaw == 0) {
         return QScriptValue();
-
+    }
     if (!pointerTypeList().contains(overlay)) {
         return QScriptValue();
     }
@@ -152,9 +152,9 @@ QScriptValue Rocs::GraphStructure::addOverlayEdge(Data* fromRaw, Data* toRaw, in
 
 QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* toRaw)
 {
-    if (fromRaw == 0 || toRaw == 0)
+    if (fromRaw == 0 || toRaw == 0) {
         return QScriptValue();
-
+    }
     DataPtr from = fromRaw->getData();
     DataPtr to = toRaw->getData();
 
@@ -237,11 +237,12 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
 
 void Rocs::GraphStructure::setGraphType(int type)
 {
-    if (_type == type)
+    if (_type == type) {
         return;
-    if (dataList().count() == 0)
+    }
+    if (dataList().count() == 0) {
         return;
-
+    }
     if ((_type  == MULTIGRAPH && type != MULTIGRAPH)
             || (_type == DIRECTED && type == UNDIRECTED)) {
         if (KMessageBox::warningContinueCancel(0, i18n("This action will probably remove some edges. Do you want to continue?")) != KMessageBox::Continue) {
@@ -384,9 +385,9 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
 
 DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
 {
-    if (readOnly())
+    if (readOnly()) {
         return DataPtr();
-
+    }
     boost::shared_ptr<GraphNode> n = boost::static_pointer_cast<GraphNode>(
                                          GraphNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
                                      );
