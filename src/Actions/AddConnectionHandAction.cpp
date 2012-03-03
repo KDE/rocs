@@ -59,6 +59,7 @@ bool AddConnectionHandAction::executePress(QPointF pos) {
     if ( (_from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
         _working = true;
         _startPos = QPointF(_from->data()->x(), _from->data()->y());
+        //FIXME workaround for rooted tree creation
         _from->data()->setProperty("ClickPosition",QVariant::fromValue<QPointF>( _from->mapFromScene(pos)));
         return true;
     }
@@ -91,6 +92,7 @@ bool AddConnectionHandAction::executeRelease(QPointF pos) {
     _tmpLine = 0;
 
     if ( (  _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
+        //FIXME workaround for rooted tree creation
         _to->data()->setProperty("ClickPosition", _to->mapFromScene(pos));
         DocumentManager::self()
             ->activeDocument()

@@ -27,6 +27,7 @@
 #include <KLocalizedString>
 #include <QByteArray>
 
+#include "rocsversion.h"
 #include "Interface/MainWindow.h"
 #include "Core/DataStructurePluginManager.h"
 
@@ -35,7 +36,7 @@ int main ( int argc, char *argv[] ) {
     KAboutData aboutData ("rocs",
                           "rocs",
                           ki18n ( "Rocs" ),
-                          "1.6.0",
+                          ROCS_VERSION_STR,
                           ki18n ( "Graph Theory Tool" ),
                           KAboutData::License_GPL,
                           ki18n ( "(c) 2009-2011 Rocs Developers" ),
