@@ -43,12 +43,12 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataT
 ,_showValue(parent->dataValueVisibility())
 ,_useColor(false)
 ,_dataStructure(parent)
+,_uniqueIdentifier(uniqueIdentifer)
+,_dataType(dataType)
 ,_color(_dataStructure->dataDefaultColor())
 ,_iconpackage(KGlobal::dirs()->locate("appdata", "iconpacks/default.svg"))
 ,_icon("rocs_default")
 ,_value(0)
-,_uniqueIdentifier(uniqueIdentifer)
-,_dataType(dataType)
 {
     _in_pointers = QList< PointerPtr >();
     _out_pointers = QList< PointerPtr >();
