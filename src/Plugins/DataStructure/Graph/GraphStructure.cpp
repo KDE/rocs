@@ -359,19 +359,22 @@ bool Rocs::GraphStructure::directed() const
 PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 {
     if (_type == UNDIRECTED) {
-        if (from == to) {    // self-edges
+        // do not add self-loops if graph is undirected
+        if (from == to) {
             return PointerPtr();
         }
-
-        if (from->pointers(to).size() >= 1) {     // back-edges
-            return PointerPtr();
+        // do not add back-edges if graph is undirected
+        foreach( PointerPtr pointer, from->pointers(to)) {
+            if (pointer->pointerType()==pointerType) {
+                return PointerPtr();
+            }
         }
     }
 
     if (_type == DIRECTED) {     // do not add double edges
         PointerList list = from->out_pointers();
         foreach(PointerPtr tmp, list) {
-            if (tmp->to() == to) {
+            if (tmp->to() == to && tmp->pointerType()==pointerType) {
                 return PointerPtr();
             }
         }

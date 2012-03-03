@@ -23,6 +23,7 @@
 #include <KGlobal>
 #include <kstandarddirs.h>
 #include <QColor>
+#include <QMap>
 
 #include "DynamicPropertiesList.h"
 
@@ -131,21 +132,23 @@ void Data::setDataItem(boost::shared_ptr<DataItem> item) {
 
 DataList Data::adjacent_data() const
 {
-    QList< DataPtr > adjacent;
+    // use QMap as the DataPtr elements are not hashable
+    // and we can speed up process by using the uniqe IDs
+    QMap<int,DataPtr> adjacent;
 
-   foreach(PointerPtr e, d->_out_pointers) {
-        adjacent.append( e->to()  );
-   }
+    foreach(PointerPtr e, d->_out_pointers) {
+        adjacent[e->to()->identifier()] = e->to();
+    }
 
-   foreach(PointerPtr e, d->_self_pointers) {
-        adjacent.append( e->to() );
-   }
+    foreach(PointerPtr e, d->_self_pointers) {
+        adjacent[e->to()->identifier()] = e->to();
+    }
 
-   foreach(PointerPtr e, d->_in_pointers) {
-        adjacent.append( e->from() );
-   }
+    foreach(PointerPtr e, d->_in_pointers) {
+        adjacent[e->from()->identifier()] = e->from();
+    }
 
-   return adjacent;
+    return adjacent.values();
 }
 
 PointerList Data::adjacent_pointers() const

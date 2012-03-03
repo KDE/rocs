@@ -181,7 +181,41 @@ void TestDataStructure::dataTypesTest()
 
 void TestDataStructure::pointerTypesTest()
 {
+    // TODO repeat this test with every data structure as well as the default DataStructure
+    _graphDocument->addDataStructure("pointerTypeTest");
+    DataList dataList;
+    QVERIFY2(_graphDocument->dataStructures().at(0)->pointerTypeList().size() == 1, "ERROR: no default pointer type created");
 
+    // create data elements
+    for(int i=0; i<10; i++) {
+        dataList.append(_graphDocument->dataStructures().at(0)->addData(QString(i)));
+    }
+
+    // register two further data types
+    int type1 = _graphDocument->dataStructures().at(0)->registerPointerType("type1");
+    QVERIFY2(_graphDocument->dataStructures().at(0)->pointerTypeList().size() == 2, "ERROR: pointer types were not created");
+
+    // connect data elements to a lines
+    for(int i = 0; i<4; i++) {
+        _graphDocument->dataStructures().at(0)->addPointer(dataList[i], dataList[i + 1]);
+    }
+    for(int i = 0; i<9; i++) {
+        _graphDocument->dataStructures().at(0)->addPointer(dataList[i], dataList[i + 1], type1);
+    }
+    QVERIFY2(_graphDocument->dataStructures().at(0)->pointers().size()==4, "ERROR: wrong number of pointers");
+    QVERIFY2(_graphDocument->dataStructures().at(0)->pointers(type1).size()==9, "ERROR: wrong number of pointers");
+    QVERIFY(dataList[0]->adjacent_data().size()==1);
+    QVERIFY(dataList[1]->adjacent_data().size()==2);
+    QVERIFY(dataList[5]->adjacent_data().size()==2);
+
+    // remove first node
+    dataList[0]->remove();
+    QVERIFY2(_graphDocument->dataStructures().at(0)->pointers().size()==3, "ERROR: wrong number of pointers");
+    QVERIFY2(_graphDocument->dataStructures().at(0)->pointers(type1).size()==8, "ERROR: wrong number of pointers");
+
+    _graphDocument->dataStructures().at(0)->removePointerType(type1);
+    QVERIFY(dataList[2]->adjacent_data().size()==2);
+    QVERIFY(dataList[6]->adjacent_data().size()==0);
 }
 /*
    void TestDataStructure::testKrossQtjs(){

@@ -279,7 +279,7 @@ QList< DataPtr > DataStructure::addDataList(QList< QPair<QString,QPointF> > data
 
 
 PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType){
-    Q_ASSERT(pointerType>=0 && pointerType<d->_pointerTypeLists.size());
+    Q_ASSERT(d->_pointerTypeLists.contains(pointerType));
 
     d->_pointerTypeLists[pointerType].append( pointer );
     QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
@@ -304,14 +304,14 @@ DataPtr DataStructure::addData(QString name, QPointF pos, int dataType){
 PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType) {
     Q_ASSERT(pointerTypeList().contains( pointerType ) );
 
-    if (d->_readOnly)                   // If the data structure is in read only mode, no new stuff should be added.
+    if (d->_readOnly) {                  // If the data structure is in read only mode, no new stuff should be added.
         return PointerPtr();
-
+    }
     if ( !from || !to ) {               // one of the two required datas are null. do not add a pointer between a valid and a null datas.
         return PointerPtr();
     }
 
-    if ( from->dataStructure() != to->dataStructure()) { // the user is trying to connect datas from different graphs.
+    if (from->dataStructure() != to->dataStructure()) { // the user is trying to connect datas from different graphs.
         return PointerPtr();
     }
     PointerPtr pointer = Pointer::create(getDataStructure(), from, to, pointerType);
@@ -321,8 +321,9 @@ PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType) 
 PointerPtr DataStructure::addPointer(const QString& name_from, const QString& name_to, int pointerType) {
 //FIXME reimplement by ids
 // using of strings allows uncontrollable behavior
-    if (d->_readOnly) return PointerPtr();
-
+    if (d->_readOnly) {
+        return PointerPtr();
+    }
     DataPtr from, to;
 
     QString tmpName;

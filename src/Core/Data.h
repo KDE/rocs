@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -39,7 +39,7 @@ class DataStructure;
 class DataPrivate{
 public:
     DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataType);
-    
+
     /**
      * self pointer to Data object
      */
@@ -123,10 +123,15 @@ public:
     bool showName() const;
     bool showValue() const;
     bool useColor() const;
-    boost::shared_ptr<DataItem> item() const;   //TODO reallyl needed?
+    boost::shared_ptr<DataItem> item() const;   //TODO really needed?
     int identifier() const;
     int dataType() const;
 
+    /**
+     * Gives a list of adjacent data elements. Each adjacent
+     * data element is contained exactly once in this list.
+     * \return DataList with adjacent data
+     */
     DataList adjacent_data() const;
     PointerList adjacent_pointers() const;
     PointerList& in_pointers() const;
@@ -163,7 +168,7 @@ public  slots:
     QScriptValue output_pointers();
     QScriptValue loop_pointers();
     QScriptValue connected_pointers( DataPtr n);
-    
+
 protected:
     Data(DataStructurePtr parent, int uniqueIdentifer, int dataType);
     template<typename T> static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
@@ -171,7 +176,7 @@ protected:
         pi->d->q=pi;
         return pi;
     }
-    
+
 private:
     boost::shared_ptr<DataPrivate> d;
     Data(Data const &, int uniqueIdentifer, int dataType);
