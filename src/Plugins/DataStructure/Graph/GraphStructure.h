@@ -124,7 +124,6 @@ public slots:
      * \return script value for the new node
      */
     QScriptValue add_node(const QString& name);
-    QScriptValue node_byname(const QString& name);
 
     /**
      * Creates a new overlay edge from \param fromRaw to \param toRaw

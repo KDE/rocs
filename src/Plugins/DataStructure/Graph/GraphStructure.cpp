@@ -150,12 +150,6 @@ QScriptValue Rocs::GraphStructure::addOverlayEdge(Data* fromRaw, Data* toRaw, in
     return QScriptValue();
 }
 
-QScriptValue Rocs::GraphStructure::node_byname(const QString& name)
-{
-    DataPtr n = addData(name);
-    return n->scriptValue();
-}
-
 QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* toRaw)
 {
     if (fromRaw == 0 || toRaw == 0)
