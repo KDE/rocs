@@ -21,3 +21,8 @@ target_link_libraries(rocs_GraphStructure
 install(TARGETS rocs_GraphStructure  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install( FILES  rocs_GraphStructure.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+
+if(KDE4_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory( Tests )
+endif(KDE4_BUILD_TESTS)
