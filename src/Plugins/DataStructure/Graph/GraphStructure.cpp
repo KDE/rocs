@@ -364,8 +364,8 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
             return PointerPtr();
         }
         // do not add back-edges if graph is undirected
-        foreach( PointerPtr pointer, from->pointers(to)) {
-            if (pointer->pointerType()==pointerType) {
+        foreach(PointerPtr pointer, from->pointers(to)) {
+            if (pointer->pointerType() == pointerType) {
                 return PointerPtr();
             }
         }
@@ -374,7 +374,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
     if (_type == DIRECTED) {     // do not add double edges
         PointerList list = from->out_pointers();
         foreach(PointerPtr tmp, list) {
-            if (tmp->to() == to && tmp->pointerType()==pointerType) {
+            if (tmp->to() == to && tmp->pointerType() == pointerType) {
                 return PointerPtr();
             }
         }
