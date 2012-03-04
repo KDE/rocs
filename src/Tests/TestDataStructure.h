@@ -34,20 +34,18 @@ public:
     TestDataStructure();
 
 private slots:
-    void cleanup();
-    void initTestCase();
     void dataAddDeleteTest();
     void pointerAddDeleteTest();
     void cleanupTestCase();
     void createSimpleGraph();
-    void pointerTypesTest();
     void dataTypesTest();
+    void pointerTypesTest();
 //     void saveTestFile();
 //     void loadTestFile();
 //     void testQtScript();
 
 private:
-    Document *_graphDocument;
+    Document* _document;
 };
 
 #endif
