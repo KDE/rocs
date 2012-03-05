@@ -28,9 +28,10 @@
 class DataStructure;
 class Data;
 class Pointer;
+class MainWindow;
 
 /*! \brief Properties Area, not used yet. */
-class MainWindow;
+
 class DataStructurePropertiesWidget
     : public KButtonGroup, public Ui::DataStructurePropertiesWidget
 {
@@ -41,15 +42,15 @@ public:
     QRadioButton *radio() const;
 
 private slots:
-    void on__graphPointerColorApplyNow_clicked();
-    void on__graphDatumColorApplyNow_clicked();
-    void on__graphDelete_clicked();
-    void on__graphName_textChanged(const QString& s);
+    void on__dataStructurePointerColorApplyNow_clicked();
+    void on__dataStructureDataColorApplyNow_clicked();
+    void on__dataStructureDelete_clicked();
+    void on__dataStructureName_textChanged(const QString& s);
 
     void on__activateGraph_toggled(bool b);
-    void on__graphVisible_toggled(bool b);
+    void on__dataStructureVisible_toggled(bool b);
     void setPointerDefaultColor(QColor c);
-    void setDatumDefaultColor(QColor c);
+    void setDataDefaultColor(QColor c);
 
 signals:
     void updateNeeded();
@@ -57,7 +58,7 @@ signals:
     void removeGraph(DataStructurePtr);
 
 private:
-    DataStructurePtr _graph;
+    DataStructurePtr _dataStructure;
     MainWindow *_mainWindow;
 };
 #endif

@@ -54,7 +54,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="_graphDelete">
+      <widget class="KPushButton" name="_dataStructureDelete">
        <property name="toolTip">
         <string>Delete the active graph</string>
        </property>
@@ -88,7 +88,7 @@
        </widget>
       </item>
       <item row="0" column="1" colspan="3">
-       <widget class="KLineEdit" name="_graphName"/>
+       <widget class="KLineEdit" name="_dataStructureName"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
@@ -101,7 +101,7 @@
        </widget>
       </item>
       <item row="1" column="1" colspan="3">
-       <widget class="KColorCombo" name="_graphNodeColor">
+       <widget class="KColorCombo" name="_dataStructureNodeColor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -124,7 +124,7 @@
        </widget>
       </item>
       <item row="2" column="1" colspan="3">
-       <widget class="KColorCombo" name="_graphEdgeColor">
+       <widget class="KColorCombo" name="_dataStructureEdgeColor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -223,7 +223,7 @@
        </widget>
       </item>
       <item row="1" column="4">
-       <widget class="KPushButton" name="_graphDatumColorApplyNow">
+       <widget class="KPushButton" name="_dataStructureDataColorApplyNow">
         <property name="toolTip">
          <string>Apply the current color to all nodes</string>
         </property>
@@ -236,7 +236,7 @@
        </widget>
       </item>
       <item row="2" column="4">
-       <widget class="KPushButton" name="_graphPointerColorApplyNow">
+       <widget class="KPushButton" name="_dataStructurePointerColorApplyNow">
         <property name="toolTip">
          <string>Apply the current color to all edges</string>
         </property>
