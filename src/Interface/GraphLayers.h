@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2009-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -30,7 +30,7 @@ class QButtonGroup;
 class KLineEdit;
 class MainWindow;
 class Document;
-class GraphPropertiesWidget;
+class DataStructurePropertiesWidget;
 
 class GraphLayers : public QScrollArea {
     Q_OBJECT
@@ -56,7 +56,7 @@ signals:
 
 private:
     Document *_activeDocument;
-    QMap<DataStructurePtr, GraphPropertiesWidget*> m_layers;
+    QMap<DataStructurePtr, DataStructurePropertiesWidget*> m_layers;
 };
 
 #endif

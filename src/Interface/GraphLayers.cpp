@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2009-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -17,7 +17,7 @@
 */
 
 #include "GraphLayers.h"
-#include "GraphPropertiesWidget.h"
+#include "DataStructurePropertiesWidget.h"
 #include "Document.h"
 #include "DataStructure.h"
 #include "MainWindow.h"
@@ -34,29 +34,29 @@
 #include <qscrollbar.h>
 #include <QLayout>
 
-GraphLayers::GraphLayers(MainWindow *parent) : 
+GraphLayers::GraphLayers(MainWindow *parent) :
     QScrollArea(parent)
     , _mainWindow(parent)
     , _activeDocument(0)
-{    
+{
     QHBoxLayout *hBoxLayout = new QHBoxLayout();
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
-    
+
     QWidget *contents = new QWidget();
     KPushButton *btnADD = new KPushButton(KIcon("AddGraph"), i18n("Add"));
-    
+
     _buttonGroup = new QButtonGroup();
     _lineEdit = new KLineEdit();
-    
+
     connect(btnADD, SIGNAL(clicked()), this, SLOT(btnADDClicked()));
     hBoxLayout->addWidget(btnADD);
     hBoxLayout->addWidget(_lineEdit);
-    
+
     vBoxLayout->addLayout(hBoxLayout);
     vBoxLayout->addStretch();
     vBoxLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
     contents->setLayout(vBoxLayout);
-    
+
     hBoxLayout->setSpacing(0);
     hBoxLayout->setContentsMargins(0,0,0,0);
     vBoxLayout->setSpacing(0);
@@ -68,12 +68,12 @@ GraphLayers::GraphLayers(MainWindow *parent) :
 void GraphLayers::resizeEvent(QResizeEvent* event)
 {
     QScrollArea::resizeEvent(event);
-    widget()->setFixedWidth(contentsRect().width()); //! do not remove the duplicated line below. 
+    widget()->setFixedWidth(contentsRect().width()); //! do not remove the duplicated line below.
     widget()->setFixedWidth(contentsRect().width()); //! it looks it just works like this. -.-'
 }
 
 void GraphLayers::setActiveDocument() {
-    
+
     if (_activeDocument && _activeDocument != DocumentManager::self()->activeDocument()){
         _activeDocument->disconnect(this);
         disconnect(_activeDocument);
@@ -87,10 +87,10 @@ void GraphLayers::setActiveDocument() {
         _buttonGroup->removeButton(b);
     }
 
-    connect(_activeDocument, SIGNAL(dataStructureCreated(DataStructurePtr)), 
+    connect(_activeDocument, SIGNAL(dataStructureCreated(DataStructurePtr)),
             this, SLOT(createLayer(DataStructurePtr)),Qt::UniqueConnection);
-    
-    connect(this, SIGNAL(createGraph(QString)), 
+
+    connect(this, SIGNAL(createGraph(QString)),
             _activeDocument, SLOT(addDataStructure(QString)), Qt::UniqueConnection);
 
     foreach(DataStructurePtr s, _activeDocument->dataStructures()){
@@ -108,36 +108,36 @@ void GraphLayers::btnADDClicked() {
 
 void GraphLayers::createLayer(DataStructurePtr dataStructure)
 {
-    GraphPropertiesWidget *properties = new GraphPropertiesWidget(dataStructure,_mainWindow);
+    DataStructurePropertiesWidget *properties = new DataStructurePropertiesWidget(dataStructure,_mainWindow);
 
-    connect(properties, SIGNAL(updateNeeded()), 
+    connect(properties, SIGNAL(updateNeeded()),
 	    this, SLOT(selectFirstGraph()));
-    connect(properties, SIGNAL(removeGraph(DataStructurePtr)), 
+    connect(properties, SIGNAL(removeGraph(DataStructurePtr)),
 	    this, 	SLOT(removeLayer(DataStructurePtr)));
-    
+
     _buttonGroup->addButton(properties->radio());
-    
+
     qobject_cast<QVBoxLayout*>(widget()->layout())->insertWidget(1,properties);
     m_layers.insert(dataStructure, properties);
-    
+
 }
 
 void GraphLayers::removeLayer(DataStructurePtr dataStructure)
 {
-    GraphPropertiesWidget *properties = m_layers.value(dataStructure);
+    DataStructurePropertiesWidget *properties = m_layers.value(dataStructure);
     bool selectOther 	= properties->radio()->isChecked();
     bool createAnother 	= (DocumentManager::self()->activeDocument()->dataStructures().size() == 0);
 
     _buttonGroup->removeButton(properties->radio());
-    
+
     widget()->layout()->removeWidget(properties);
     m_layers.remove(dataStructure);
     properties->deleteLater();
-    
+
     if (createAnother){
 	btnADDClicked();
     }
-    
+
     if (selectOther){
 	selectFirstGraph();
     }

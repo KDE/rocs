@@ -1,11 +1,12 @@
-/* 
+/*
     This file is part of Rocs,
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -17,25 +18,25 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SUI_GRAPHPROPERTIESWIDGET_H
-#define SUI_GRAPHPROPERTIESWIDGET_H
+#ifndef SUI_DATASTRUCTUREPROPERTIESWIDGET_H
+#define SUI_DATASTRUCTUREPROPERTIESWIDGET_H
 
 #include <KButtonGroup>
 #include "Rocs_Typedefs.h"
-#include "ui_GraphPropertiesWidget.h"
+#include "ui_DataStructurePropertiesWidget.h"
 
 class DataStructure;
-class Datum;
+class Data;
 class Pointer;
 
 /*! \brief Properties Area, not used yet. */
 class MainWindow;
-class GraphPropertiesWidget : public KButtonGroup, public Ui::GraphPropertiesWidget
+class DataStructurePropertiesWidget : public KButtonGroup, public Ui::DataStructurePropertiesWidget
 {
     Q_OBJECT
 public:
-    GraphPropertiesWidget (DataStructurePtr g, MainWindow* parent = 0 );
-    ~GraphPropertiesWidget();
+    DataStructurePropertiesWidget (DataStructurePtr g, MainWindow* parent = 0 );
+    ~DataStructurePropertiesWidget();
     QRadioButton *radio() const;
 
 private slots:

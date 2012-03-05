@@ -112,7 +112,7 @@ set( rocs_interface_SRCS
     Interface/MainWindow.cpp
     Interface/OpenedFilesWidget.cpp
     Interface/Separator.cpp
-    Interface/GraphPropertiesWidget.cpp
+    Interface/DataStructurePropertiesWidget.cpp
     Interface/GraphLayers.cpp
     Interface/TabWidget.cpp
     Interface/CodeEditor.cpp
@@ -144,7 +144,7 @@ set( rocs_SRCS
 kde4_add_ui_files(
     rocs_SRCS
     Interface/OpenedFilesWidget.ui
-    Interface/GraphPropertiesWidget.ui
+    Interface/DataStructurePropertiesWidget.ui
     Interface/NodePropertiesWidget.ui
     Interface/EdgePropertiesWidget.ui
     Interface/ConfigureDefaultProperties.ui
