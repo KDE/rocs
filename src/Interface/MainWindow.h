@@ -49,7 +49,8 @@ class QComboBox;
 #define USING_QTSCRIPT 1
 #endif
 
-class MainWindow : public KXmlGuiWindow {
+class MainWindow : public KXmlGuiWindow
+{
     Q_OBJECT
 
 
@@ -60,7 +61,7 @@ public:
 
     GraphScene *scene() const;
 
-    enum ScriptMode{
+    enum ScriptMode {
         Execute,
         DebugMode,
         DebugOnlyInCaseOfError
@@ -86,7 +87,7 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private slots:
-     void showSettings();
+    void showSettings();
     //Testing to connect to KGHNS3
     void downloadNewExamples();
     void uploadScript();
@@ -102,13 +103,13 @@ private slots:
 
     void debugScript();
 
-    
+
     /**
      * execute script until next "step" command is found in script
      * \param text string that will be printed at result shell
      */
     void executeScriptOneStep(const QString &text = QString());
-    
+
     /**
      * stop script execution
      */

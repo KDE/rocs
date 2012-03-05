@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -40,14 +40,16 @@ public:
 
 public slots:
     /** shows the widget; this is a wrapper for \see setActive(true) **/
-    void show() { setActive(true); }; 
+    void show() {
+        setActive(true);
+    };
     void on__color_activated(const QColor& c);
     void on__style_activated(int index);
     void reflectAttributes();
     void on__addProperty_clicked();
     void disconnectPointer();
     void setWidth(double v);
-    
+
 private:
     void setActive(bool active);
 

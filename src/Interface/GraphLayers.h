@@ -32,14 +32,15 @@ class MainWindow;
 class Document;
 class DataStructurePropertiesWidget;
 
-class GraphLayers : public QScrollArea {
+class GraphLayers : public QScrollArea
+{
     Q_OBJECT
     QButtonGroup *_buttonGroup;
     KLineEdit *_lineEdit;
     MainWindow *_mainWindow;
 
 protected:
-    void resizeEvent ( QResizeEvent * event );
+    void resizeEvent(QResizeEvent * event);
 
 public:
     GraphLayers(MainWindow *parent = 0);
@@ -52,7 +53,7 @@ public slots:
     void selectFirstGraph();
 
 signals:
-  void  createGraph(const QString& s);
+    void  createGraph(const QString& s);
 
 private:
     Document *_activeDocument;

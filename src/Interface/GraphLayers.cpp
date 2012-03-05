@@ -58,9 +58,9 @@ GraphLayers::GraphLayers(MainWindow *parent) :
     contents->setLayout(vBoxLayout);
 
     hBoxLayout->setSpacing(0);
-    hBoxLayout->setContentsMargins(0,0,0,0);
+    hBoxLayout->setContentsMargins(0, 0, 0, 0);
     vBoxLayout->setSpacing(0);
-    vBoxLayout->setContentsMargins(0,0,0,0);
+    vBoxLayout->setContentsMargins(0, 0, 0, 0);
     setWidget(contents);
     setFrameShape(NoFrame);
 }
@@ -72,33 +72,35 @@ void GraphLayers::resizeEvent(QResizeEvent* event)
     widget()->setFixedWidth(contentsRect().width()); //! it looks it just works like this. -.-'
 }
 
-void GraphLayers::setActiveDocument() {
+void GraphLayers::setActiveDocument()
+{
 
-    if (_activeDocument && _activeDocument != DocumentManager::self()->activeDocument()){
+    if (_activeDocument && _activeDocument != DocumentManager::self()->activeDocument()) {
         _activeDocument->disconnect(this);
         disconnect(_activeDocument);
     }
 
     _activeDocument = DocumentManager::self()->activeDocument();
-    for ( int i = 1; i < widget()->layout()->count(); ++i) {
+    for (int i = 1; i < widget()->layout()->count(); ++i) {
         widget()->layout()->itemAt(i)->widget()->deleteLater();
     }
-    foreach(QAbstractButton *b, _buttonGroup->buttons()) {
+    foreach(QAbstractButton * b, _buttonGroup->buttons()) {
         _buttonGroup->removeButton(b);
     }
 
     connect(_activeDocument, SIGNAL(dataStructureCreated(DataStructurePtr)),
-            this, SLOT(createLayer(DataStructurePtr)),Qt::UniqueConnection);
+            this, SLOT(createLayer(DataStructurePtr)), Qt::UniqueConnection);
 
     connect(this, SIGNAL(createGraph(QString)),
             _activeDocument, SLOT(addDataStructure(QString)), Qt::UniqueConnection);
 
-    foreach(DataStructurePtr s, _activeDocument->dataStructures()){
+    foreach(DataStructurePtr s, _activeDocument->dataStructures()) {
         createLayer(s);
     }
 }
 
-void GraphLayers::btnADDClicked() {
+void GraphLayers::btnADDClicked()
+{
     QString name = _lineEdit->text();
     if (name.isEmpty()) {
         name = i18n("Untitled%1", DocumentManager::self()->activeDocument()->dataStructures().count());
@@ -108,16 +110,16 @@ void GraphLayers::btnADDClicked() {
 
 void GraphLayers::createLayer(DataStructurePtr dataStructure)
 {
-    DataStructurePropertiesWidget *properties = new DataStructurePropertiesWidget(dataStructure,_mainWindow);
+    DataStructurePropertiesWidget *properties = new DataStructurePropertiesWidget(dataStructure, _mainWindow);
 
     connect(properties, SIGNAL(updateNeeded()),
-	    this, SLOT(selectFirstGraph()));
+            this, SLOT(selectFirstGraph()));
     connect(properties, SIGNAL(removeGraph(DataStructurePtr)),
-	    this, 	SLOT(removeLayer(DataStructurePtr)));
+            this,   SLOT(removeLayer(DataStructurePtr)));
 
     _buttonGroup->addButton(properties->radio());
 
-    qobject_cast<QVBoxLayout*>(widget()->layout())->insertWidget(1,properties);
+    qobject_cast<QVBoxLayout*>(widget()->layout())->insertWidget(1, properties);
     m_layers.insert(dataStructure, properties);
 
 }
@@ -125,8 +127,8 @@ void GraphLayers::createLayer(DataStructurePtr dataStructure)
 void GraphLayers::removeLayer(DataStructurePtr dataStructure)
 {
     DataStructurePropertiesWidget *properties = m_layers.value(dataStructure);
-    bool selectOther 	= properties->radio()->isChecked();
-    bool createAnother 	= (DocumentManager::self()->activeDocument()->dataStructures().size() == 0);
+    bool selectOther    = properties->radio()->isChecked();
+    bool createAnother  = (DocumentManager::self()->activeDocument()->dataStructures().size() == 0);
 
     _buttonGroup->removeButton(properties->radio());
 
@@ -134,16 +136,16 @@ void GraphLayers::removeLayer(DataStructurePtr dataStructure)
     m_layers.remove(dataStructure);
     properties->deleteLater();
 
-    if (createAnother){
-	btnADDClicked();
+    if (createAnother) {
+        btnADDClicked();
     }
 
-    if (selectOther){
-	selectFirstGraph();
+    if (selectOther) {
+        selectFirstGraph();
     }
 }
 
 void GraphLayers::selectFirstGraph()
 {
-  _buttonGroup->buttons().at(_buttonGroup->buttons().size()-1)->click();
+    _buttonGroup->buttons().at(_buttonGroup->buttons().size() - 1)->click();
 }

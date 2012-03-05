@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2009-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -28,19 +28,21 @@
 #include <QPainter>
 #include <QImage>
 
-DataPropertiesWidget::DataPropertiesWidget (MainWindow* /*parent*/  ): 
+DataPropertiesWidget::DataPropertiesWidget(MainWindow* /*parent*/):
     QWidget(0),
     _data(),
-    _item(0){
+    _item(0)
+{
     setupUi(this);
     connect(_btnClose, SIGNAL(clicked()), this, SLOT(hide()));
 }
 
-void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
-    if (_data == n->data()){
+void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
+{
+    if (_data == n->data()) {
         return;
     }
-    if (_data){
+    if (_data) {
         _data->disconnect(this);
         _showName->disconnect(_data.get());
         _showValue->disconnect(_data.get());
@@ -50,22 +52,22 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     }
 
     _data = n->data();
-    if (! _item ){
+    if (! _item) {
         _svgFile = _data->iconPackage();
     }
 
     _item = n;
-    move(pos.x()+ 10,  pos.y() + 10);
+    move(pos.x() + 10,  pos.y() + 10);
 
     delete extraItens->layout();
     extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
-   
-    connect( _showName,     SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowName(bool)));
-    connect( _showValue,    SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowValue(bool)));
-    connect( _disableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
-    connect( _name,         SIGNAL(textEdited(QString)),   _data.get(), SLOT(setName(QString)));
-    connect( _value,        SIGNAL(textEdited(QString)),   _data.get(), SLOT(setValue(QString)));
+
+    connect(_showName,     SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowName(bool)));
+    connect(_showValue,    SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowValue(bool)));
+    connect(_disableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
+    connect(_name,         SIGNAL(textEdited(QString)),   _data.get(), SLOT(setName(QString)));
+    connect(_value,        SIGNAL(textEdited(QString)),   _data.get(), SLOT(setValue(QString)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data.get());
@@ -73,36 +75,38 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos) {
     _propertiesTable->setModel(model);
 }
 
-void DataPropertiesWidget::setActive(bool active) {
+void DataPropertiesWidget::setActive(bool active)
+{
     if (active) {
         setVisible(true);
         activateWindow();
         raise();
         return;
-    }
-    else {
+    } else {
         setVisible(false);
     }
 }
 
 
-void DataPropertiesWidget::setUseColor(bool b){
+void DataPropertiesWidget::setUseColor(bool b)
+{
     _data->setUseColor(!b);
 }
 
-void DataPropertiesWidget::reflectAttributes(){
-    if (!extraItens->layout()){
+void DataPropertiesWidget::reflectAttributes()
+{
+    if (!extraItens->layout()) {
         _oldDataStructurePlugin = DataStructurePluginManager::self()->pluginName();
     }
-    
-    if (_oldDataStructurePlugin != DataStructurePluginManager::self()->pluginName()){
+
+    if (_oldDataStructurePlugin != DataStructurePluginManager::self()->pluginName()) {
         extraItens->layout()->deleteLater();
     }
-    
-    if (!extraItens->layout()){
+
+    if (!extraItens->layout()) {
         extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     }
-    
+
     _color->setColor(_data->color().value<QColor>());
     _name->setText(_data->name());
     _value->setText(_data->value().toString());
@@ -112,12 +116,12 @@ void DataPropertiesWidget::reflectAttributes(){
     _propertyName->setText("");
     _propertyValue->setText("");
     _isPropertyGlobal->setCheckState(Qt::Unchecked);
-    
-    if (( _svgFile == _data->iconPackage()) && (_images->count() != 0)){
+
+    if ((_svgFile == _data->iconPackage()) && (_images->count() != 0)) {
         QString icon = _data->icon();
         icon.remove("rocs_");
-       _images->setCurrentItem(icon);
-       return;
+        _images->setCurrentItem(icon);
+        return;
     }
     _images->clear();
     QFile svgFile(_item->data()->iconPackage());
@@ -125,15 +129,15 @@ void DataPropertiesWidget::reflectAttributes(){
 
     QXmlStreamReader reader(&svgFile);
     QSvgRenderer *renderer = _item->_renders.value(svgFile.fileName());
-    
-    while(!reader.atEnd()){
+
+    while (!reader.atEnd()) {
         reader.readNext();
-        if (!reader.attributes().hasAttribute("id")){
+        if (!reader.attributes().hasAttribute("id")) {
             continue;
         }
         QString attribute = reader.attributes().value("id").toString();
-        if (attribute.startsWith("rocs_")){
-            QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);                                                                                                                                                                                 
+        if (attribute.startsWith("rocs_")) {
+            QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
 
             QPainter painter;
             painter.begin(&iconImage);
@@ -149,17 +153,20 @@ void DataPropertiesWidget::reflectAttributes(){
     _images->setCurrentItem(icon);
 }
 
-void DataPropertiesWidget::on__images_activated(const QString& s){
-  _data->setIcon("rocs_"+s);
+void DataPropertiesWidget::on__images_activated(const QString& s)
+{
+    _data->setIcon("rocs_" + s);
 }
 
-void DataPropertiesWidget::on__color_activated(const QColor& c){
-  _data->setColor(QColor(c));
+void DataPropertiesWidget::on__color_activated(const QColor& c)
+{
+    _data->setColor(QColor(c));
 }
 
-void DataPropertiesWidget::on__addProperty_clicked(){
+void DataPropertiesWidget::on__addProperty_clicked()
+{
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
     model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
-                            _data.get(), (_isPropertyGlobal->checkState() == Qt::Checked));
+                              _data.get(), (_isPropertyGlobal->checkState() == Qt::Checked));
 
 }

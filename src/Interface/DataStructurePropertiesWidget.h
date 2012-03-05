@@ -31,11 +31,12 @@ class Pointer;
 
 /*! \brief Properties Area, not used yet. */
 class MainWindow;
-class DataStructurePropertiesWidget : public KButtonGroup, public Ui::DataStructurePropertiesWidget
+class DataStructurePropertiesWidget
+    : public KButtonGroup, public Ui::DataStructurePropertiesWidget
 {
     Q_OBJECT
 public:
-    DataStructurePropertiesWidget (DataStructurePtr g, MainWindow* parent = 0 );
+    DataStructurePropertiesWidget(DataStructurePtr g, MainWindow* parent = 0);
     ~DataStructurePropertiesWidget();
     QRadioButton *radio() const;
 
@@ -50,14 +51,13 @@ private slots:
     void setPointerDefaultColor(QColor c);
     void setDatumDefaultColor(QColor c);
 
-  signals:
+signals:
     void updateNeeded();
     void addGraph(QString name);
     void removeGraph(DataStructurePtr);
 
-  private:
+private:
     DataStructurePtr _graph;
     MainWindow *_mainWindow;
-
 };
 #endif

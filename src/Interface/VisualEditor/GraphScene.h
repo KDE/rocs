@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs,
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either 
+    License as published by the Free Software Foundation; either
     version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -38,11 +38,12 @@ class QMenu;
 class DataPropertiesWidget;
 class PointerPropertiesWidget;
 
-class GraphScene : public QGraphicsScene {
+class GraphScene : public QGraphicsScene
+{
     Q_OBJECT
 public:
-    GraphScene( QObject *parent=0 );
-    enum borderSize{ kBORDER = 50 };
+    GraphScene(QObject *parent = 0);
+    enum borderSize { kBORDER = 50 };
     void updateMinSize(qreal minWidth, qreal minHeight);
     void setAction(QAction *action);
     void updateGraph(DataStructurePtr g);
@@ -53,13 +54,17 @@ public:
     void setHideEdges(bool h);
     bool hideEdges();
     void updateAfter(QGraphicsItem *item);
-    bool fade() const{ return _fade; }
-    void fade(bool b){ _fade = b; }
+    bool fade() const {
+        return _fade;
+    }
+    void fade(bool b) {
+        _fade = b;
+    }
     void hideGraph(DataStructurePtr g, bool visibility);
 
 public slots:
-    QGraphicsItem* createData( DataPtr n);
-    QGraphicsItem* createEdge( PointerPtr e);
+    QGraphicsItem* createData(DataPtr n);
+    QGraphicsItem* createEdge(PointerPtr e);
     void connectGraphSignals(DataStructurePtr g);
     void createItems();
     void setActiveDocument();
@@ -71,16 +76,15 @@ signals:
     void addData(QPointF pos);
     void removeSelected();
     void zoom(qreal amount);
-    
 
 protected:
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
-    void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
-    void mouseDoubleClickEvent (QGraphicsSceneMouseEvent * mouseEvent);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
+    void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* mouseEvent);
     void contextMenuEvent(QGraphicsSceneContextMenuEvent* event);
-    void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent);
-    void keyPressEvent(QKeyEvent *keyEvent);
+    void wheelEvent(QGraphicsSceneWheelEvent* wheelEvent);
+    void keyPressEvent(QKeyEvent* keyEvent);
 
 private:
     QMenu * createContextMenu(QPointF scenePosition, QPointF screenPosition);

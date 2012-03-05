@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -28,13 +28,13 @@
 
 PossibleIncludes::PossibleIncludes(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
 {
-  QGridLayout * lay = new QGridLayout(this);
-  m_list = new QListWidget(this);
+    QGridLayout * lay = new QGridLayout(this);
+    m_list = new QListWidget(this);
 
-  lay->addWidget(m_list);
-  setLayout(lay);
-  updateIncludeList();
-  resize(450,200);
+    lay->addWidget(m_list);
+    setLayout(lay);
+    updateIncludeList();
+    resize(450, 200);
 }
 
 
@@ -46,10 +46,10 @@ void PossibleIncludes::updateIncludeList()
     QStringList list = KGlobal::dirs()->findDirs("appdata", "examples") + Settings::includePath();
 
     list.removeDuplicates();
-    foreach (const QString &str, list){
-        QDir dir (str);
-        foreach(const QString &file, dir.entryList(QStringList() << "*.js")){
-          m_list->addItem(dir.absoluteFilePath(file));
+    foreach(const QString & str, list) {
+        QDir dir(str);
+        foreach(const QString & file, dir.entryList(QStringList() << "*.js")) {
+            m_list->addItem(dir.absoluteFilePath(file));
         }
     }
 }

@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -28,10 +28,11 @@ class Document;
 
 
 /*!
-	\brief The Opened Files widget.
-	This Holds the list of opened Graph Files
+    \brief The Opened Files widget.
+    This Holds the list of opened Graph Files
 */
-class OpenedFilesWidget : public QWidget, public Ui::OpenedFilesWidget {
+class OpenedFilesWidget : public QWidget, public Ui::OpenedFilesWidget
+{
     Q_OBJECT
 
 public:
@@ -41,9 +42,9 @@ public:
     void selectDefaultFile();
 signals:
     /*! when the active document changes, this signal is emmited.
-    	\param document the new active document.
+        \param document the new active document.
     */
-    void activeDocumentChanged( Document *document);
+    void activeDocumentChanged(Document *document);
 
 private slots:
     /*! when you click on the name of a document inside of the model, this method is invocked.
@@ -52,7 +53,7 @@ private slots:
 
     void setActiveDocument(const QModelIndex& model);
 
-public	slots:
+public  slots:
     /*! executed when btnNewFileis clicked. */
     void on__btnNewFile_clicked();
 

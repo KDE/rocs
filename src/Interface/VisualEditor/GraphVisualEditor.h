@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -33,7 +33,8 @@ class QToolButton;
 class MainWindow;
 class QGraphicsView;
 
-class GraphVisualEditor : public QWidget {
+class GraphVisualEditor : public QWidget
+{
     Q_OBJECT
 public:
     static GraphVisualEditor* self();
@@ -41,7 +42,7 @@ public:
     /**
      * re-implementation of resize event to also setup the graph scene
      */
-    void resizeEvent (QResizeEvent  *event );
+    void resizeEvent(QResizeEvent  *event);
 
     GraphScene *scene() const;
     QGraphicsView *view() const;
@@ -53,11 +54,11 @@ public:
     from the screen and releases it from the evil hands of GraphEditWidget.*/
     void releaseDocument();
 
-public slots:    
+public slots:
     /*! set the current selected Graph.
-    	\param graph the new active graph.
-    	*/
-    void setActiveGraph( DataStructurePtr g);
+        \param graph the new active graph.
+        */
+    void setActiveGraph(DataStructurePtr g);
 
     void setActiveDocument();
     QList<DataItem*> selectedNodes() const;
@@ -71,7 +72,7 @@ private:
 
     /*! as the name says, draw a graph on scene.
     \param g the graph to be drawn. */
-    void drawGraphOnScene( DataStructurePtr g );
+    void drawGraphOnScene(DataStructurePtr g);
 
     QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
 

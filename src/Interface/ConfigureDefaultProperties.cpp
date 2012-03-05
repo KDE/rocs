@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -23,7 +23,7 @@
 #include "GraphicsLayout.h"
 
 
-ConfigureDefaultProperties::ConfigureDefaultProperties( QWidget* parent ) :
+ConfigureDefaultProperties::ConfigureDefaultProperties(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::ConfigureDefaultProperties)
 {
@@ -39,12 +39,14 @@ ConfigureDefaultProperties::~ConfigureDefaultProperties()
     delete ui;
 }
 
-void ConfigureDefaultProperties::readConfig() {
+void ConfigureDefaultProperties::readConfig()
+{
     _displayPositionNode = Settings::dataNodeDisplay();
     _displayPositionEdge = Settings::dataEdgeDisplay();
 }
 
-void ConfigureDefaultProperties::saveConfig() {
+void ConfigureDefaultProperties::saveConfig()
+{
     Settings::setDataNodeDisplay(_displayPositionNode);
     Settings::setDataEdgeDisplay(_displayPositionEdge);
 
@@ -52,14 +54,16 @@ void ConfigureDefaultProperties::saveConfig() {
     GraphicsLayout::self()->setViewStyleDataEdge(_displayPositionEdge);
 }
 
-void ConfigureDefaultProperties::setDisplayPositionNode(int position) {
-    if (position<0) return;
+void ConfigureDefaultProperties::setDisplayPositionNode(int position)
+{
+    if (position < 0) return;
     _displayPositionNode = position;
     emit changed(true);
 }
 
-void ConfigureDefaultProperties::setDisplayPositionEdge(int position) {
-    if (position<0) return;
+void ConfigureDefaultProperties::setDisplayPositionEdge(int position)
+{
+    if (position < 0) return;
     _displayPositionEdge = position;
     emit changed(true);
 }

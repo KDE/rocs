@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -27,7 +27,8 @@
 #include <KAction>
 #include <KLocale>
 
-TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(parent) {
+TabWidget::TabWidget(TabWidget::Orientation o, QWidget *parent) : QWidget(parent)
+{
     m_orientation = o;
     m_layout = 0;
     m_numOfTabs = 0;
@@ -37,12 +38,12 @@ TabWidget::TabWidget( TabWidget::Orientation o, QWidget *parent) : QWidget(paren
     createLayout();
 }
 
-void TabWidget::createLayout() {
+void TabWidget::createLayout()
+{
     delete m_layout;
-    if ((m_orientation == TabOnLeft) || (m_orientation == TabOnRight) ) {
+    if ((m_orientation == TabOnLeft) || (m_orientation == TabOnRight)) {
         m_layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
-    }
-    else {
+    } else {
         m_layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
     }
     m_layout->setSizeConstraint(QLayout::SetMaximumSize);
@@ -60,11 +61,11 @@ void TabWidget::createLayout() {
     }
 }
 
-void TabWidget::controlPanel(int index) {
-    if ( m_widgets -> currentIndex() == index) {
-        m_widgets ->setVisible(! m_widgets -> isVisible() );
-    }
-    else {
+void TabWidget::controlPanel(int index)
+{
+    if (m_widgets -> currentIndex() == index) {
+        m_widgets ->setVisible(! m_widgets -> isVisible());
+    } else {
         m_widgets->setCurrentIndex(index);
         releaseButton(index);
         emit widgetActivated(index);
@@ -72,38 +73,42 @@ void TabWidget::controlPanel(int index) {
     kDebug() << "Widget Size: " << size();
 }
 
-void TabWidget::releaseButton(int index) {
-    if ( m_activeTab == index ) {
-        m_tabs -> setTab( m_activeTab, true );
+void TabWidget::releaseButton(int index)
+{
+    if (m_activeTab == index) {
+        m_tabs -> setTab(m_activeTab, true);
         return;
     }
-    m_tabs -> setTab( m_activeTab, false );
+    m_tabs -> setTab(m_activeTab, false);
     m_activeTab = index;
 }
 
-void TabWidget::addWidget(QWidget *w, const QString& text,const KIcon& icon) {
+void TabWidget::addWidget(QWidget *w, const QString& text, const KIcon& icon)
+{
     m_widgets -> addWidget(w);
     m_tabs -> appendTab(icon.pixmap(16), m_numOfTabs, text);
-    
-    if (m_numOfTabs == 0){
-      m_tabs->setTab(m_numOfTabs, true);
+
+    if (m_numOfTabs == 0) {
+        m_tabs->setTab(m_numOfTabs, true);
     }
-      
+
     connect(m_tabs->tab(m_numOfTabs), SIGNAL(clicked(int)), this, SLOT(controlPanel(int)));
     m_numOfTabs++;
 }
 
-void TabWidget::addAction(KAction *a) {
-    int pos = m_numOfTabs+m_numOfActions;
-    m_tabs -> appendTab( a->icon().pixmap(16), pos, a->text());
+void TabWidget::addAction(KAction *a)
+{
+    int pos = m_numOfTabs + m_numOfActions;
+    m_tabs -> appendTab(a->icon().pixmap(16), pos, a->text());
     m_tabs -> addAction(a);
     connect(m_tabs->tab(pos), SIGNAL(clicked(int)), a, SLOT(trigger()));
     connect(m_tabs->tab(pos), SIGNAL(clicked(int)), this, SLOT(releaseActionButton(int)));
     _runAction = a;
-    
+
 }
 
-void TabWidget::releaseActionButton(int index) {
+void TabWidget::releaseActionButton(int index)
+{
     m_tabs->setTab(m_activeTab, true);
     m_tabs->setTab(index, false);
 }

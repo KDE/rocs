@@ -36,8 +36,9 @@
 #include "DocumentManager.h"
 
 
-DataStructurePropertiesWidget::DataStructurePropertiesWidget (DataStructurePtr g, MainWindow* parent )
-        : KButtonGroup ( parent ) {
+DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr g, MainWindow* parent)
+    : KButtonGroup(parent)
+{
     setupUi(this);
     _mainWindow = parent;
 
@@ -47,14 +48,14 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget (DataStructurePtr g
     _graphNodeColor->setColor(_graph->dataDefaultColor());
 //     _graphVisible->setChecked( ! _graph->readOnly());
     _activateGraph->setChecked(true);
-    _showEdgeNames->setChecked( _graph->pointerNameVisibility() );
+    _showEdgeNames->setChecked(_graph->pointerNameVisibility());
     _showEdgeValues->setChecked(_graph->pointerValueVisibility());
-    _showNodeNames->setChecked( _graph->dataNameVisibility() );
+    _showNodeNames->setChecked(_graph->dataNameVisibility());
     _showNodeValues->setChecked(_graph->dataValueVisibility());
 
     _editWidget->setVisible(_activateGraph->isChecked());
 
-    if (!_extraProperties->layout()){
+    if (!_extraProperties->layout()) {
         QLayout * lay = DataStructurePluginManager::self()->dataStructureExtraProperties(g, _extraProperties);
         _extraProperties->setLayout(lay);
     }
@@ -63,58 +64,67 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget (DataStructurePtr g
     connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataStructure(QString)));
     connect(this, SIGNAL(removeGraph(DataStructurePtr)), g.get(), SLOT(remove()));
 
+    connect(_graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
+    connect(_graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDatumDefaultColor(QColor)));
 
-    connect( _graphEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
-    connect( _graphNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDatumDefaultColor(QColor)));
+    connect(_showEdgeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setPointerNameVisibility(bool)));
+    connect(_showEdgeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setPointerValueVisibility(bool)));
+    connect(_showNodeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setDataNameVisibility(bool)));
+    connect(_showNodeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setDataValueVisibility(bool)));
 
-    connect( _showEdgeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setPointerNameVisibility(bool)));
-    connect( _showEdgeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setPointerValueVisibility(bool)));
-    connect( _showNodeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setDataNameVisibility(bool)));
-    connect( _showNodeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setDataValueVisibility(bool)));
-
-    connect( _graphName,      SIGNAL(textChanged(QString)), g.get(), SLOT(setName(QString)));
+    connect(_graphName,      SIGNAL(textChanged(QString)), g.get(), SLOT(setName(QString)));
 }
 
-DataStructurePropertiesWidget::~DataStructurePropertiesWidget(){
+DataStructurePropertiesWidget::~DataStructurePropertiesWidget()
+{
 }
 
-void DataStructurePropertiesWidget::setPointerDefaultColor(QColor c){
+void DataStructurePropertiesWidget::setPointerDefaultColor(QColor c)
+{
     _graph->setPointerDefaultColor(c);
 }
 
-void DataStructurePropertiesWidget::setDatumDefaultColor(QColor c){
+void DataStructurePropertiesWidget::setDatumDefaultColor(QColor c)
+{
     _graph->setDataDefaultColor(c);
 }
 
-void DataStructurePropertiesWidget::on__graphPointerColorApplyNow_clicked() {
+void DataStructurePropertiesWidget::on__graphPointerColorApplyNow_clicked()
+{
     _graph->setPointersColor(_graphEdgeColor->color());
 }
 
-void DataStructurePropertiesWidget::on__graphDatumColorApplyNow_clicked() {
+void DataStructurePropertiesWidget::on__graphDatumColorApplyNow_clicked()
+{
     _graph->setDataColor(_graphNodeColor->color());
 }
 
-void DataStructurePropertiesWidget::on__graphVisible_toggled(bool b){
-    _graph->setReadOnly( !b );
+void DataStructurePropertiesWidget::on__graphVisible_toggled(bool b)
+{
+    _graph->setReadOnly(!b);
     qDebug() << "toggle visibility to " << b;
-    _mainWindow->scene()->hideGraph( _graph, b );
+    _mainWindow->scene()->hideGraph(_graph, b);
 }
 
-QRadioButton *DataStructurePropertiesWidget::radio()const {
+QRadioButton *DataStructurePropertiesWidget::radio()const
+{
     return _activateGraph;
 }
 
-void DataStructurePropertiesWidget::on__activateGraph_toggled(bool b) {
-    _editWidget->setVisible( b );
+void DataStructurePropertiesWidget::on__activateGraph_toggled(bool b)
+{
+    _editWidget->setVisible(b);
     if (b) {
-       DocumentManager::self()->activeDocument()->setActiveDataStructure(_graph);
+        DocumentManager::self()->activeDocument()->setActiveDataStructure(_graph);
     }
 }
 
-void DataStructurePropertiesWidget::on__graphDelete_clicked() {
+void DataStructurePropertiesWidget::on__graphDelete_clicked()
+{
     emit removeGraph(_graph);
 }
 
-void DataStructurePropertiesWidget::on__graphName_textChanged(const QString& s){
+void DataStructurePropertiesWidget::on__graphName_textChanged(const QString& s)
+{
     _activateGraph->setText(s);
 }

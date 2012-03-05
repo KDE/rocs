@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -24,19 +24,20 @@
 #include <kurlrequester.h>
 
 
-IncludeManagerSettings::IncludeManagerSettings ( QWidget* parent, Qt::WindowFlags f ) : QWidget ( parent, f ) {
+IncludeManagerSettings::IncludeManagerSettings(QWidget* parent, Qt::WindowFlags f) : QWidget(parent, f)
+{
 
     _list_View = new QListWidget(this);
     QGridLayout * lay = new QGridLayout(this);
     _url = new KUrlRequester(this);
-    _url->setMode(KFile::Directory|KFile::LocalOnly|KFile::ExistingOnly);;
+    _url->setMode(KFile::Directory | KFile::LocalOnly | KFile::ExistingOnly);;
     KPushButton * add = new KPushButton(KIcon("list-add"), QString(), this);
     KPushButton * del = new KPushButton(KIcon("list-remove"), QString(),  this);
 
-    lay->addWidget(_url,0,0);
-    lay->addWidget(_list_View,1,0);
-    lay->addWidget(add,0,1);
-    lay->addWidget(del,1,1, Qt::AlignTop|Qt::AlignLeft);
+    lay->addWidget(_url, 0, 0);
+    lay->addWidget(_list_View, 1, 0);
+    lay->addWidget(add, 0, 1);
+    lay->addWidget(del, 1, 1, Qt::AlignTop | Qt::AlignLeft);
     add->setDefault(true);
     this->setLayout(lay);
     readConfig();
@@ -50,7 +51,8 @@ IncludeManagerSettings::IncludeManagerSettings ( QWidget* parent, Qt::WindowFlag
 }
 
 
-IncludeManagerSettings::~IncludeManagerSettings() {
+IncludeManagerSettings::~IncludeManagerSettings()
+{
 
 }
 
@@ -63,15 +65,17 @@ IncludeManagerSettings::~IncludeManagerSettings() {
 // }
 
 
-void IncludeManagerSettings::readConfig() {
+void IncludeManagerSettings::readConfig()
+{
 
     QStringList list(Settings::includePath());
     for (int i = 0 ; i < list.count(); ++i) {
-        QListWidgetItem * item = new QListWidgetItem(list.at(i),_list_View);
+        QListWidgetItem * item = new QListWidgetItem(list.at(i), _list_View);
         _list_View->addItem(item);
     }
 }
-void IncludeManagerSettings::saveSettings() {
+void IncludeManagerSettings::saveSettings()
+{
     QStringList list;
     for (int i = 0 ; i < _list_View->count(); ++i) {
         list.append(_list_View->item(i)->text());
@@ -82,7 +86,7 @@ void IncludeManagerSettings::saveSettings() {
 
 void IncludeManagerSettings::insertUrl()
 {
-    if (_url->text().isEmpty()){
+    if (_url->text().isEmpty()) {
 //         if (editing != 0){
 //           _list_View->takeItem(_list_View->row(editing));
 //           delete editing;
@@ -92,18 +96,18 @@ void IncludeManagerSettings::insertUrl()
     }
 
     QString text = _url->text().startsWith(QDir::rootPath())
-                   ?_url->text()
-                   :QDir::homePath() + '/' + _url->text();
+                   ? _url->text()
+                   : QDir::homePath() + '/' + _url->text();
 
-    if (!text.endsWith('/')){
-      text.append('/');
+    if (!text.endsWith('/')) {
+        text.append('/');
     }
 
     if (_list_View->findItems(text, Qt::MatchExactly).count() != 0) {
         return; //Allready have this item.
     }
 
-    QListWidgetItem * item = new QListWidgetItem(text,_list_View);
+    QListWidgetItem * item = new QListWidgetItem(text, _list_View);
 //     item->setFlags(Qt::ItemIsEditable);
     _list_View->addItem(item);
     _url->clear();
@@ -120,7 +124,8 @@ void IncludeManagerSettings::removeURL()
 }
 
 
-void IncludeManagerSettings::includeChanged() {
+void IncludeManagerSettings::includeChanged()
+{
 
     emit changed(true);
 }

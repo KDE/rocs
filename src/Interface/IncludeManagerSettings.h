@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -24,11 +24,12 @@
 #include <QLineEdit>
 #include <kurlrequester.h>
 
-class IncludeManagerSettings : public QWidget {
+class IncludeManagerSettings : public QWidget
+{
     Q_OBJECT
 public:
 
-    IncludeManagerSettings ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    IncludeManagerSettings(QWidget* parent = 0, Qt::WindowFlags f = 0);
 
     virtual ~IncludeManagerSettings();
 

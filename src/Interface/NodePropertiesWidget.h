@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -34,12 +34,14 @@ class DataPropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
 {
     Q_OBJECT
 public:
-    DataPropertiesWidget (MainWindow* parent = 0 );
+    DataPropertiesWidget(MainWindow* parent = 0);
     void setData(DataItem *n, QPointF pos);
 
 public slots:
     /** shows the widget; this is a wrapper for \see setActive(true) **/
-    void show() { setActive(true); }; 
+    void show() {
+        setActive(true);
+    };
 
 private slots:
     void on__color_activated(const QColor& c);
@@ -51,7 +53,7 @@ private slots:
 
 private:
     void setActive(bool active);
-    
+
     DataPtr  _data;
     MainWindow *_mainWindow;
     DataItem *_item;

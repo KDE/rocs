@@ -103,7 +103,7 @@
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
 {
-    setObjectName ( "RocsMainWindow" );
+    setObjectName("RocsMainWindow");
 
     setupWidgets();
     setupActions();
@@ -122,10 +122,10 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
     connect(dm, SIGNAL(documentRemoved(Document*)),
             this, SLOT(releaseDocument(Document*)));
 
-     /* just for testing prurposes,
-     * this should not be hardcoded here.
-     * use KWelcomeWidget instead.
-     */
+    /* just for testing prurposes,
+    * this should not be hardcoded here.
+    * use KWelcomeWidget instead.
+    */
     DocumentManager::self()->loadDocument();
 
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
@@ -134,57 +134,58 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
 
 MainWindow::~MainWindow()
 {
-    Settings::setVSplitterSizeTop ( _vSplitter->sizes() [0] );
-    Settings::setVSplitterSizeBottom ( _vSplitter->sizes() [1] );
-    Settings::setHSplitterSizeLeft ( _hSplitter->sizes() [0] );
-    Settings::setHSplitterSizeRight ( _hSplitter->sizes() [1] );
-    Settings::setHScriptSplitterSizeLeft ( _hScriptSplitter->sizes() [0] );
-    Settings::setHScriptSplitterSizeRight ( _hScriptSplitter->sizes() [1] );
+    Settings::setVSplitterSizeTop(_vSplitter->sizes() [0]);
+    Settings::setVSplitterSizeBottom(_vSplitter->sizes() [1]);
+    Settings::setHSplitterSizeLeft(_hSplitter->sizes() [0]);
+    Settings::setHSplitterSizeRight(_hSplitter->sizes() [1]);
+    Settings::setHScriptSplitterSizeLeft(_hScriptSplitter->sizes() [0]);
+    Settings::setHScriptSplitterSizeRight(_hScriptSplitter->sizes() [1]);
 
     Settings::self()->writeConfig();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
- {
+{
     switch (saveIfChanged()) {
-      case KMessageBox::Cancel :
-          event->ignore();
-          return;
-      default:
-          event->accept();
-          return;
+    case KMessageBox::Cancel :
+        event->ignore();
+        return;
+    default:
+        event->accept();
+        return;
     }
- }
+}
 
 void MainWindow::setupWidgets()
 {
     // splits the main window horizontal
-    _vSplitter = new QSplitter ( this );
-    _vSplitter->setOrientation ( Qt::Vertical );
+    _vSplitter = new QSplitter(this);
+    _vSplitter->setOrientation(Qt::Vertical);
 
     // setup upper half
     QWidget *leftPanel  = setupWhiteboardPanel();         // graph properties
     _graphVisualEditor = GraphVisualEditor::self(); // graph editor whiteboard
 
-    _hSplitter = new QSplitter ( this );
-    _hSplitter->setOrientation( Qt::Horizontal );
-    _hSplitter->addWidget (leftPanel);
-    _hSplitter->addWidget (_graphVisualEditor);
+    _hSplitter = new QSplitter(this);
+    _hSplitter->setOrientation(Qt::Horizontal);
+    _hSplitter->addWidget(leftPanel);
+    _hSplitter->addWidget(_graphVisualEditor);
 
     // setup lower half
     QWidget *scriptPanel = setupScriptPanel();
 
-    _vSplitter->addWidget ( _hSplitter );
-    _vSplitter->addWidget ( scriptPanel );
+    _vSplitter->addWidget(_hSplitter);
+    _vSplitter->addWidget(scriptPanel);
 
-    _hScriptSplitter->setSizes ( QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() << 80 );
-    _vSplitter->setSizes ( QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom() );
-    _hSplitter->setSizes ( QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight() );
+    _hScriptSplitter->setSizes(QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() << 80);
+    _vSplitter->setSizes(QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom());
+    _hSplitter->setSizes(QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight());
 
-    setCentralWidget ( _vSplitter );
+    setCentralWidget(_vSplitter);
 }
 
-void MainWindow::downloadNewExamples(){
+void MainWindow::downloadNewExamples()
+{
     KNS3::DownloadDialog dialog("rocs.knsrc", this);
     dialog.exec();
 }
@@ -198,8 +199,8 @@ void MainWindow::uploadScript()
     KUrl str = _codeEditor->document()->url();
     if (str.isEmpty()) {
         //... then try to open
-        str = KFileDialog::getOpenFileName ( QString(), i18n ( "*.js|Script files" ),
-                                             this, i18n ( "Rocs Script Files" ) );
+        str = KFileDialog::getOpenFileName(QString(), i18n("*.js|Script files"),
+                                           this, i18n("Rocs Script Files"));
         if (str.isEmpty())
             return;
     }
@@ -227,42 +228,42 @@ void MainWindow::uploadScript()
 
 QWidget* MainWindow::setupScriptPanel()
 {
-    _hScriptSplitter = new QSplitter( this );
-    _hScriptSplitter->setOrientation( Qt::Horizontal );
+    _hScriptSplitter = new QSplitter(this);
+    _hScriptSplitter->setOrientation(Qt::Horizontal);
 
-    _codeEditor = new CodeEditor ( this );
-    _txtDebug = new KTextBrowser ( this );
-    _txtOutput = new KTextBrowser( this );
+    _codeEditor = new CodeEditor(this);
+    _txtDebug = new KTextBrowser(this);
+    _txtOutput = new KTextBrowser(this);
 
     QStackedWidget *stackedListing = new QStackedWidget;
     stackedListing->addWidget(_txtOutput);
     stackedListing->addWidget(_txtDebug);
 
     _selectListing = new QComboBox;
-    _selectListing->addItem( KIcon ( "accessories-text-editor" ), i18n("Program Messages"));
-    _selectListing->addItem( KIcon ( "tools-report-bug" ), i18n("Debug Messages"));
+    _selectListing->addItem(KIcon("accessories-text-editor"), i18n("Program Messages"));
+    _selectListing->addItem(KIcon("tools-report-bug"), i18n("Debug Messages"));
 
-    QWidget *header = new QWidget( this );
-    header->setLayout( new QHBoxLayout );
+    QWidget *header = new QWidget(this);
+    header->setLayout(new QHBoxLayout);
     header->layout()->addWidget(new QLabel(i18n("Select output:")));
     header->layout()->addWidget(_selectListing);
 
     QWidget *listingWidget = new QWidget(this);
-    listingWidget->setLayout( new QVBoxLayout );
-    listingWidget->layout()->addWidget( header );
-    listingWidget->layout()->addWidget( stackedListing );
+    listingWidget->setLayout(new QVBoxLayout);
+    listingWidget->layout()->addWidget(header);
+    listingWidget->layout()->addWidget(stackedListing);
 
     QToolBar *executeCommands = new QToolBar;
-    executeCommands->setToolButtonStyle( Qt::ToolButtonTextUnderIcon );
+    executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     executeCommands->setOrientation(Qt::Vertical);
-    _runScript = new KAction( KIcon( "system-run" ), i18nc( "Script Execution", "Run" ), this );
-    _stepRunScript = new KAction( KIcon( "go-next" ), i18nc( "Script Execution", "One Step" ), this );
-    _debugScript = new KAction ( KIcon ("debug-run"), i18n ( "Debug run" ), this );
-    _interruptScript = new KAction ( KIcon ("debug-run-cursor"), i18n ( "Interrupt at first line" ), this );
-    _stopScript = new KAction( KIcon( "process-stop" ), i18nc( "Script Execution", "Stop" ), this );
+    _runScript = new KAction(KIcon("system-run"), i18nc("Script Execution", "Run"), this);
+    _stepRunScript = new KAction(KIcon("go-next"), i18nc("Script Execution", "One Step"), this);
+    _debugScript = new KAction(KIcon("debug-run"), i18n("Debug run"), this);
+    _interruptScript = new KAction(KIcon("debug-run-cursor"), i18n("Interrupt at first line"), this);
+    _stopScript = new KAction(KIcon("process-stop"), i18nc("Script Execution", "Stop"), this);
     _stopScript->setEnabled(false);
-    executeCommands->addAction( _runScript );
-    executeCommands->addAction( _stepRunScript );
+    executeCommands->addAction(_runScript);
+    executeCommands->addAction(_stepRunScript);
     QToolButton *dbgBtn = new QToolButton(executeCommands);
     KMenu * menu = new KMenu(dbgBtn);
     menu->addAction(_debugScript);
@@ -273,7 +274,7 @@ QWidget* MainWindow::setupScriptPanel()
     dbgBtn->setMenu(menu);
     dbgBtn->setDefaultAction(_debugScript);
     executeCommands->addWidget(dbgBtn);
-    executeCommands->addAction( _stopScript );
+    executeCommands->addAction(_stopScript);
 
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScriptFull()));
     connect(_stepRunScript, SIGNAL(triggered()), this, SLOT(executeScriptOneStep()));
@@ -282,62 +283,62 @@ QWidget* MainWindow::setupScriptPanel()
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
     connect(_selectListing, SIGNAL(currentIndexChanged(int)), stackedListing, SLOT(setCurrentIndex(int)));
 
-    _hScriptSplitter->addWidget( _codeEditor );
-    _hScriptSplitter->addWidget( listingWidget );
+    _hScriptSplitter->addWidget(_codeEditor);
+    _hScriptSplitter->addWidget(listingWidget);
 
-    QWidget *scriptInterface = new QWidget( this );
-    scriptInterface->setLayout( new QHBoxLayout );
-    scriptInterface->layout()->addWidget( _hScriptSplitter );
-    scriptInterface->layout()->addWidget( executeCommands );
+    QWidget *scriptInterface = new QWidget(this);
+    scriptInterface->setLayout(new QHBoxLayout);
+    scriptInterface->layout()->addWidget(_hScriptSplitter);
+    scriptInterface->layout()->addWidget(executeCommands);
 
     return scriptInterface;
 }
 
 QWidget* MainWindow::setupWhiteboardPanel()
 {
-    _GraphLayers = new GraphLayers ( this );
+    _GraphLayers = new GraphLayers(this);
     return _GraphLayers;
 }
 
 void MainWindow::setupActions()
 {
     kDebug() << "Entering in Setup Actions";
-    KStandardAction::quit ( kapp,SLOT ( quit() ),actionCollection() );
+    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
 
     GraphScene *gc = _graphVisualEditor->scene();
 
-    _selectMoveAction = new SelectMoveHandAction (gc, this);
-    AddDataHandAction* addDataAction = new AddDataHandAction(gc, this );
+    _selectMoveAction = new SelectMoveHandAction(gc, this);
+    AddDataHandAction* addDataAction = new AddDataHandAction(gc, this);
     AddConnectionHandAction* addConnectionAction = new AddConnectionHandAction(gc, this);
     DeleteHandAction* deleteAction = new DeleteHandAction(gc, this);
     ZoomAction* zoomAction = new ZoomAction(gc, this);
 
-    connect(_selectMoveAction, SIGNAL(triggered()), _selectMoveAction, SLOT( sendExecuteBit() ));
-    connect(addDataAction, SIGNAL(triggered()), addDataAction, SLOT( sendExecuteBit() ));
-    connect(addConnectionAction, SIGNAL(triggered()), addConnectionAction, SLOT( sendExecuteBit() ));
-    connect(deleteAction, SIGNAL(triggered()), deleteAction, SLOT( sendExecuteBit() ));
-    connect(zoomAction, SIGNAL(triggered()), zoomAction, SLOT( sendExecuteBit() ));
+    connect(_selectMoveAction, SIGNAL(triggered()), _selectMoveAction, SLOT(sendExecuteBit()));
+    connect(addDataAction, SIGNAL(triggered()), addDataAction, SLOT(sendExecuteBit()));
+    connect(addConnectionAction, SIGNAL(triggered()), addConnectionAction, SLOT(sendExecuteBit()));
+    connect(deleteAction, SIGNAL(triggered()), deleteAction, SLOT(sendExecuteBit()));
+    connect(zoomAction, SIGNAL(triggered()), zoomAction, SLOT(sendExecuteBit()));
 
     _paletteActions = actionCollection();
-    QActionGroup *g = new QActionGroup ( this );
+    QActionGroup *g = new QActionGroup(this);
 
-    g->addAction ( _paletteActions->addAction ( "selectmove", _selectMoveAction ) );
-    g->addAction ( _paletteActions->addAction ( "add_node", addDataAction ) );
-    g->addAction ( _paletteActions->addAction ( "add_edge", addConnectionAction ) );
-    g->addAction ( _paletteActions->addAction ( "delete", deleteAction ) );
-    g->addAction ( _paletteActions->addAction ( "zoom", zoomAction ) );
-    actionCollection()->action ( "selectmove" )->toggle();
-    gc->setAction ( _selectMoveAction );
+    g->addAction(_paletteActions->addAction("selectmove", _selectMoveAction));
+    g->addAction(_paletteActions->addAction("add_node", addDataAction));
+    g->addAction(_paletteActions->addAction("add_edge", addConnectionAction));
+    g->addAction(_paletteActions->addAction("delete", deleteAction));
+    g->addAction(_paletteActions->addAction("zoom", zoomAction));
+    actionCollection()->action("selectmove")->toggle();
+    gc->setAction(_selectMoveAction);
 
-    _paletteActions->addAction ( "align-hbottom",new AlignAction ( i18nc( "Alignment", "Base" ),  AlignAction::Bottom, gc ) );
-    _paletteActions->addAction ( "align-hcenter",new AlignAction ( i18nc( "Alignment", "Center" ),AlignAction::HCenter,gc ) );
-    _paletteActions->addAction ( "align-htop",   new AlignAction ( i18nc( "Alignment", "Top" ),   AlignAction::Top,    gc ) );
-    _paletteActions->addAction ( "align-vleft",  new AlignAction ( i18nc( "Alignment", "Left" ),  AlignAction::Left,   gc ) );
-    _paletteActions->addAction ( "align-vcenter",new AlignAction ( i18nc( "Alignment", "Center" ),AlignAction::VCenter,gc ) );
-    _paletteActions->addAction ( "align-vright", new AlignAction ( i18nc( "Alignment", "Right" ), AlignAction::Right,  gc ) );
-    _paletteActions->addAction ( "align-circle", new AlignAction ( i18nc( "Alignment", "Circle" ),  AlignAction::Circle, gc ) );
-    _paletteActions->addAction ( "align-tree", new AlignAction ( i18nc( "Alignment", "Minimize Crossing Edges" ), AlignAction::MinCutTree, gc ) );
+    _paletteActions->addAction("align-hbottom", new AlignAction(i18nc("Alignment", "Base"),  AlignAction::Bottom, gc));
+    _paletteActions->addAction("align-hcenter", new AlignAction(i18nc("Alignment", "Center"), AlignAction::HCenter, gc));
+    _paletteActions->addAction("align-htop",   new AlignAction(i18nc("Alignment", "Top"),   AlignAction::Top,    gc));
+    _paletteActions->addAction("align-vleft",  new AlignAction(i18nc("Alignment", "Left"),  AlignAction::Left,   gc));
+    _paletteActions->addAction("align-vcenter", new AlignAction(i18nc("Alignment", "Center"), AlignAction::VCenter, gc));
+    _paletteActions->addAction("align-vright", new AlignAction(i18nc("Alignment", "Right"), AlignAction::Right,  gc));
+    _paletteActions->addAction("align-circle", new AlignAction(i18nc("Alignment", "Circle"),  AlignAction::Circle, gc));
+    _paletteActions->addAction("align-tree", new AlignAction(i18nc("Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
 
     // Menu actions
     createAction("document-new",     i18n("New Graph"),         "new-graph",         SLOT(newGraph()),    this);
@@ -357,131 +358,132 @@ void MainWindow::setupActions()
 
     // eventually create hooks for file plugins
     PluginManager::instance()->loadFilePlugins();
-    if (PluginManager::instance()->filePlugins().count()>0) {
+    if (PluginManager::instance()->filePlugins().count() > 0) {
         createAction("document-open", i18n("Import Graph"), "import-graph", SLOT(importFile()), this);
         createAction("document-save", i18n("Export Graph"), "export-graph", SLOT(exportFile()), this);
     }
 
     // EDIT actions
-    actionCollection()->addAction("delete-selected", new DeleteAction( i18n("Delete"), _graphVisualEditor->scene(), 0) );
+    actionCollection()->addAction("delete-selected", new DeleteAction(i18n("Delete"), _graphVisualEditor->scene(), 0));
 
-    KStandardAction::quit ( kapp, SLOT ( quit() ),  actionCollection() );
+    KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
 
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                               const QKeySequence& shortcut, const char* slot, QObject *parent)
 {
-    KAction* action = new KAction ( KIcon ( iconName ), actionTitle, parent );
-    action->setShortcut ( shortcut);
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( actionName, action );
-    connect(action, SIGNAL(triggered(bool)), parent, slot );
+    KAction* action = new KAction(KIcon(iconName), actionTitle, parent);
+    action->setShortcut(shortcut);
+    action->setShortcutContext(Qt::WidgetShortcut);
+    actionCollection()->addAction(actionName, action);
+    connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
 
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                               const char* slot, QObject *parent)
 {
-    KAction* action = new KAction ( KIcon ( iconName ), actionTitle, parent );
-    action->setShortcutContext ( Qt::WidgetShortcut );
-    actionCollection()->addAction ( actionName, action );
+    KAction* action = new KAction(KIcon(iconName), actionTitle, parent);
+    action->setShortcutContext(Qt::WidgetShortcut);
+    actionCollection()->addAction(actionName, action);
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
 
 
 void MainWindow::showSettings()
 {
-     KConfigDialog dialog(this,  "settings", Settings::self());
+    KConfigDialog dialog(this,  "settings", Settings::self());
 
-     IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
-     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties( &dialog );
+    IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
+    ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties(&dialog);
 
-     dialog.addPage(set,i18n("Include Manager"),QString(),i18n("Include Manager"),true);
-     dialog.addPage(defaultProperties,i18n("Default Settings"),QString(),i18n("Default Settings"),true);
-
-
-     connect(set,               SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
-     connect(defaultProperties, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
-
-     connect(&dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
-     connect(&dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
-     connect(&dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
-
-     connect(&dialog, SIGNAL(applyClicked()),   defaultProperties, SLOT(saveConfig()));
-     connect(&dialog, SIGNAL(okClicked()),      defaultProperties, SLOT(saveConfig()));
-     connect(&dialog, SIGNAL(defaultClicked()), defaultProperties, SLOT(readConfig()));
+    dialog.addPage(set, i18n("Include Manager"), QString(), i18n("Include Manager"), true);
+    dialog.addPage(defaultProperties, i18n("Default Settings"), QString(), i18n("Default Settings"), true);
 
 
-     dialog.exec();
+    connect(set,               SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
+    connect(defaultProperties, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
+
+    connect(&dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
+    connect(&dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
+    connect(&dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
+
+    connect(&dialog, SIGNAL(applyClicked()),   defaultProperties, SLOT(saveConfig()));
+    connect(&dialog, SIGNAL(okClicked()),      defaultProperties, SLOT(saveConfig()));
+    connect(&dialog, SIGNAL(defaultClicked()), defaultProperties, SLOT(readConfig()));
+
+
+    dialog.exec();
 }
 
 void MainWindow::setupToolsPluginsAction()
 {
     QList <QAction*> pluginList;
     QAction* action = 0;
-    unplugActionList ( "tools_plugins" );
+    unplugActionList("tools_plugins");
     QList <  ToolsPluginInterface*> avaliablePlugins =  PluginManager::instance()->toolPlugins();
     int count = 0;
-    foreach (  ToolsPluginInterface* p, avaliablePlugins ){
-        action = new KAction ( p->displayName(), this );
+    foreach(ToolsPluginInterface * p, avaliablePlugins) {
+        action = new KAction(p->displayName(), this);
         action->setData(count++);
         connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
-        pluginList.append( action );
+        pluginList.append(action);
     }
-    plugActionList( "tools_plugins", pluginList );
+    plugActionList("tools_plugins", pluginList);
 }
 
 void MainWindow::setupDSPluginsAction()
 {
     QList <QAction*> pluginList;
     QAction* action = 0;
-    unplugActionList ( "DS_plugins" );
+    unplugActionList("DS_plugins");
 
     QList < DataStructurePluginInterface*> avaliablePlugins = DataStructurePluginManager::self()->pluginsList();
 
     QActionGroup * group = new QActionGroup(this);
 
     int count = 0;
-    foreach ( DataStructurePluginInterface* p, avaliablePlugins ) {
-        action = new KAction ( p->name(), this );
+    foreach(DataStructurePluginInterface * p, avaliablePlugins) {
+        action = new KAction(p->name(), this);
         action->setData(count++);
         action->setCheckable(true);
 
-        if (p->name() == DataStructurePluginManager::self()->pluginName()){
-          action->setChecked(true);
+        if (p->name() == DataStructurePluginManager::self()->pluginName()) {
+            action->setChecked(true);
         }
 
         action->setActionGroup(group);
 
-        connect ( action, SIGNAL (triggered(bool)),
-                  DataStructurePluginManager::self(), SLOT(setDataStructurePlugin()));
+        connect(action, SIGNAL(triggered(bool)),
+                DataStructurePluginManager::self(), SLOT(setDataStructurePlugin()));
 
-        pluginList.append ( action );
+        pluginList.append(action);
     }
-    plugActionList ( "DS_plugins", pluginList );
+    plugActionList("DS_plugins", pluginList);
 }
 
-void MainWindow::setupDocumentsList(){
+void MainWindow::setupDocumentsList()
+{
     QList <QAction*> pluginList;
     QAction* action = 0;
-    unplugActionList ( "Doc_List" );
+    unplugActionList("Doc_List");
     QActionGroup * group = new QActionGroup(this);
     int count = 0;
-    foreach(Document * doc, DocumentManager::self()->documentList()){
-        action = new KAction ( doc->name(), this );
+    foreach(Document * doc, DocumentManager::self()->documentList()) {
+        action = new KAction(doc->name(), this);
         action->setData(count++);
         action->setCheckable(true);
-        if (doc == DocumentManager::self()->activeDocument()){
-          action->setChecked(true);
+        if (doc == DocumentManager::self()->activeDocument()) {
+            action->setChecked(true);
         }
         action->setActionGroup(group);
         connect(action, SIGNAL(triggered(bool)), DocumentManager::self(), SLOT(changeDocument()));
-        pluginList.append ( action );
+        pluginList.append(action);
     }
 
-    plugActionList ( "Doc_List", pluginList );
+    plugActionList("Doc_List", pluginList);
 }
 
-void MainWindow::setActiveDocument ( )
+void MainWindow::setActiveDocument()
 {
     kDebug() << "Setting the document in the main widnow";
     Document *activeDocument = DocumentManager::self()->activeDocument();
@@ -490,21 +492,22 @@ void MainWindow::setActiveDocument ( )
     _graphVisualEditor->setActiveDocument();
     _GraphLayers->setActiveDocument();
 
-    connect ( this, SIGNAL(runTool(ToolsPluginInterface*,Document*)),
-                activeDocument->engineBackend(), SLOT(runTool(ToolsPluginInterface*,Document*)));
+    connect(this, SIGNAL(runTool(ToolsPluginInterface*, Document*)),
+            activeDocument->engineBackend(), SLOT(runTool(ToolsPluginInterface*, Document*)));
 
 //     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
-    connect( engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
-    connect( engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
-    connect( engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
-    connect( engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
+    connect(engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
+    connect(engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
+    connect(engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
+    connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
 
     activeDocument->setModified(false);
 }
 
-void MainWindow::releaseDocument ( Document* d ){
-    if (d == 0){
-      return;
+void MainWindow::releaseDocument(Document* d)
+{
+    if (d == 0) {
+        return;
     }
     d->disconnect(this);
     disconnect(d);
@@ -522,78 +525,82 @@ GraphScene* MainWindow::scene() const
 
 void MainWindow::newGraph()
 {
-    if (DocumentManager::self()->activeDocument() != 0){
-        if ( saveIfChanged() == KMessageBox::Cancel ) return;
+    if (DocumentManager::self()->activeDocument() != 0) {
+        if (saveIfChanged() == KMessageBox::Cancel) return;
     }
     loadDocument();
 }
 
 void MainWindow::openGraph()
 {
-    if ( saveIfChanged() == KMessageBox::Cancel ) return;
-    QString fileName = KFileDialog::getOpenFileName ( QString(), i18n ( "*.graph|Graph files\n*|All files" ), this, i18n ( "Graph Files" ) );
-    if ( fileName == "" ) return;
+    if (saveIfChanged() == KMessageBox::Cancel) return;
+    QString fileName = KFileDialog::getOpenFileName(QString(), i18n("*.graph|Graph files\n*|All files"), this, i18n("Graph Files"));
+    if (fileName == "") return;
 //      ImporterExporterManager imp(this);
 //     imp.openDocument();
-    loadDocument ( fileName );
+    loadDocument(fileName);
 }
 
-void MainWindow::loadDocument ( const QString& name )
+void MainWindow::loadDocument(const QString& name)
 {
-    if ( !name.isEmpty() && !name.endsWith ( ".graph" ) ){
-        KMessageBox::sorry ( this, i18n ( "This does not seem to be a graph file." ), i18n ( "Invalid file" ) );
+    if (!name.isEmpty() && !name.endsWith(".graph")) {
+        KMessageBox::sorry(this, i18n("This does not seem to be a graph file."), i18n("Invalid file"));
         return;
     }
 
     DocumentManager::self()->loadDocument(name);
 }
 
-void MainWindow::saveGraph(){
+void MainWindow::saveGraph()
+{
     Document *d = DocumentManager::self()->activeDocument();
-    if ( d->documentPath().isEmpty() ){
+    if (d->documentPath().isEmpty()) {
         saveGraphAs();
-    }else{
-        d->savedDocumentAt ( d->documentPath() );
+    } else {
+        d->savedDocumentAt(d->documentPath());
     }
 }
 
-void MainWindow::saveGraphAs(){
+void MainWindow::saveGraphAs()
+{
     Document *d = DocumentManager::self()->activeDocument();
-    if ( d == 0 ){
+    if (d == 0) {
         kDebug() << "Graph Document is NULL";
         return;
     }
 
-    d->saveAsInternalFormat ( KFileDialog::getSaveFileName() );
+    d->saveAsInternalFormat(KFileDialog::getSaveFileName());
 }
 
-void MainWindow::saveAll() {
+void MainWindow::saveAll()
+{
     saveGraph();
     _codeEditor->saveAllScripts();
 }
 
 
-int MainWindow::saveIfChanged(){
-    if ( DocumentManager::self()->activeDocument()->isModified() && !_codeEditor->isModified() ){
-        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n (
-            "Changes on your graph document are unsaved. Do you want to save your changes?" ) );
-        if ( btnCode == KMessageBox::Yes ){
+int MainWindow::saveIfChanged()
+{
+    if (DocumentManager::self()->activeDocument()->isModified() && !_codeEditor->isModified()) {
+        const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
+                                "Changes on your graph document are unsaved. Do you want to save your changes?"));
+        if (btnCode == KMessageBox::Yes) {
             saveGraph();
         }
         return btnCode;
     }
-    if ( !DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified() ){
-        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n (
-            "Changes on your script files are unsaved. Do you want to save all unsaved scripts?" ) );
-        if ( btnCode == KMessageBox::Yes ){
+    if (!DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified()) {
+        const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
+                                "Changes on your script files are unsaved. Do you want to save all unsaved scripts?"));
+        if (btnCode == KMessageBox::Yes) {
             _codeEditor->saveAllScripts();
         }
         return btnCode;
     }
-    if ( DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified() ){
-        const int btnCode = KMessageBox::warningYesNoCancel ( this, i18n (
-            "Changes on your script files and on your graph document are unsaved. Do you want to save your graph document and all unsaved scripts?" ) );
-        if ( btnCode == KMessageBox::Yes ){
+    if (DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified()) {
+        const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
+                                "Changes on your script files and on your graph document are unsaved. Do you want to save your graph document and all unsaved scripts?"));
+        if (btnCode == KMessageBox::Yes) {
             _codeEditor->saveAllScripts();
             saveGraph();
         }
@@ -602,10 +609,11 @@ int MainWindow::saveIfChanged(){
     return KMessageBox::No;
 }
 
-void MainWindow::importFile(){
+void MainWindow::importFile()
+{
     ImporterExporterManager importer(this);
     Document * gd = importer.importFile();
-    if (gd == 0){
+    if (gd == 0) {
         return;
     }
 
@@ -613,11 +621,11 @@ void MainWindow::importFile(){
 
     _graphVisualEditor->scene()->createItems();
 
-    if (importer.hasDialog()){
-      importer.dialogExec();
+    if (importer.hasDialog()) {
+        importer.dialogExec();
     }
 
-    if (!importer.scriptToRun().isEmpty()){
+    if (!importer.scriptToRun().isEmpty()) {
         executeScriptFull(importer.scriptToRun());
     }
 }
@@ -631,26 +639,27 @@ void MainWindow::exportFile()
 
 void MainWindow::showPossibleIncludes()
 {
-   PossibleIncludes dialog(this);
+    PossibleIncludes dialog(this);
 
-   dialog.exec();
+    dialog.exec();
 }
 
 void MainWindow::runToolPlugin()
 {
     kDebug() << "seeking for a plugin";
-    QAction *action = qobject_cast<QAction *> ( sender() );
+    QAction *action = qobject_cast<QAction *> (sender());
 
-    if (! action ){
-      return;
+    if (! action) {
+        return;
     }
 
-    if (ToolsPluginInterface *plugin =  PluginManager::instance()->toolPlugins().value(action->data().toInt()) ){
-      emit runTool ( plugin, DocumentManager::self()->activeDocument() );
+    if (ToolsPluginInterface *plugin =  PluginManager::instance()->toolPlugins().value(action->data().toInt())) {
+        emit runTool(plugin, DocumentManager::self()->activeDocument());
     }
 }
 
-void MainWindow::dsChanged(){
+void MainWindow::dsChanged()
+{
 //    kDebug() << "Data structure was changed, need to reload graphic part.";
 
 //    setActiveDocument();
@@ -666,31 +675,32 @@ void MainWindow::dsChanged(){
 
 #ifdef USING_QTSCRIPT
 
-void MainWindow::executeScriptFull(const QString& text) {
+void MainWindow::executeScriptFull(const QString& text)
+{
     executeScript(MainWindow::Execute, text);
 }
 
 void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString& text)
 {
-        kDebug() << "Going to execute the script";
+    kDebug() << "Going to execute the script";
     if (_txtDebug == 0)   return;
-    if ( scene() == 0)    return;
+    if (scene() == 0)    return;
 
 
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
-    if (engine->isRunning() ) {
+    if (engine->isRunning()) {
         engine->stop();
     }
 
     _txtDebug->clear();
-    if (_scriptDbg){
+    if (_scriptDbg) {
         _scriptDbg->detach();
         _scriptDbg->deleteLater();
         _scriptDbg = 0;
     }
-    if ( mode != Execute){
+    if (mode != Execute) {
         _scriptDbg = new QScriptEngineDebugger(this);
         _scriptDbg->setAutoShowStandardWindow(true);
         _scriptDbg->attachTo(engine->engine());
@@ -699,8 +709,8 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     }
     engine->includeManager().initialize(Settings::includePath());
     script = engine->includeManager().include(script,
-                         scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
-                         _codeEditor->document()->documentName());
+             scriptPath.isEmpty() ? scriptPath : scriptPath.section('/', 0, -2),
+             _codeEditor->document()->documentName());
 
     enableStopAction();
 
@@ -708,10 +718,11 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     engine->execute();
 }
 
-void MainWindow::executeScriptOneStep(const QString& text) {
+void MainWindow::executeScriptOneStep(const QString& text)
+{
     qDebug() << "execution next step";
     if (_txtDebug == 0)   return;
-    if ( scene() == 0)    return;
+    if (scene() == 0)    return;
 
     _txtDebug->clear();
 
@@ -719,14 +730,14 @@ void MainWindow::executeScriptOneStep(const QString& text) {
 
     //TODO disable start action
     enableStopAction();
-    if (!engine->isRunning()){
+    if (!engine->isRunning()) {
         QString script = text.isEmpty() ? _codeEditor->text() : text;
         QString scriptPath = _codeEditor->document()->url().path();
         IncludeManager inc;
 
         script = inc.include(script,
-                            scriptPath.isEmpty()? scriptPath : scriptPath.section('/', 0, -2),
-                            _codeEditor->document()->documentName());
+                             scriptPath.isEmpty() ? scriptPath : scriptPath.section('/', 0, -2),
+                             _codeEditor->document()->documentName());
 
         engine->setScript(script, DocumentManager::self()->activeDocument());
         engine->executeStep();
@@ -737,10 +748,11 @@ void MainWindow::executeScriptOneStep(const QString& text) {
 
 
 
-void MainWindow::stopScript() {
+void MainWindow::stopScript()
+{
     kDebug() << "Going to stop the script";
     if (_txtDebug == 0)   return;
-    if ( scene() == 0)    return;
+    if (scene() == 0)    return;
 
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
 
@@ -751,7 +763,7 @@ void MainWindow::stopScript() {
 
 void MainWindow::debugScript()
 {
-    QAction *action = qobject_cast<QAction *> ( sender() );
+    QAction *action = qobject_cast<QAction *> (sender());
     if (action == _interruptScript)
         executeScript(DebugMode);
     else
@@ -762,11 +774,13 @@ void MainWindow::debugScript()
 #endif
 
 
-void MainWindow::enableStopAction(){
+void MainWindow::enableStopAction()
+{
     _stopScript->setEnabled(true);
 }
 
-void MainWindow::disableStopAction(){
+void MainWindow::disableStopAction()
+{
     _stopScript->setEnabled(false);
 }
 
@@ -775,6 +789,12 @@ void MainWindow::showDebugOutput()
     _selectListing->setCurrentIndex(1);
 }
 
-void MainWindow::outputString ( const QString& s ) { _txtOutput->append ( s ); }
-void MainWindow::debugString ( const QString& s )  { _txtDebug->append ( s );  }
+void MainWindow::outputString(const QString& s)
+{
+    _txtOutput->append(s);
+}
+void MainWindow::debugString(const QString& s)
+{
+    _txtDebug->append(s);
+}
 

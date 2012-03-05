@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -21,40 +21,41 @@
 
 #include <QWidget>
 
-namespace Ui {
-    class ConfigureDefaultProperties;
+namespace Ui
+{
+class ConfigureDefaultProperties;
 }
 
-class ConfigureDefaultProperties : 
+class ConfigureDefaultProperties :
     public QWidget
 // , Ui::ConfigureDefaultProperties
 {
     Q_OBJECT
 
-    public:
-        ConfigureDefaultProperties( QWidget* parent = 0 );
-        ~ConfigureDefaultProperties();
+public:
+    ConfigureDefaultProperties(QWidget* parent = 0);
+    ~ConfigureDefaultProperties();
 
-        enum {
-            CENTER,
-            BELOW,
-            ABOVE
-        } DISPLAY_POSITION;
-            
+    enum {
+        CENTER,
+        BELOW,
+        ABOVE
+    } DISPLAY_POSITION;
 
-    public slots:
-        void readConfig();
-        void saveConfig();
-        void setDisplayPositionNode(int position);
-        void setDisplayPositionEdge(int position);
 
-    private:
-        Ui::ConfigureDefaultProperties *ui;
-        int _displayPositionNode;
-        int _displayPositionEdge;
+public slots:
+    void readConfig();
+    void saveConfig();
+    void setDisplayPositionNode(int position);
+    void setDisplayPositionEdge(int position);
 
-    signals:
-        void changed(bool);
+private:
+    Ui::ConfigureDefaultProperties *ui;
+    int _displayPositionNode;
+    int _displayPositionEdge;
+
+signals:
+    void changed(bool);
 };
 
 #endif // CONFIGUREDEFAULTPROPERTIES_H
