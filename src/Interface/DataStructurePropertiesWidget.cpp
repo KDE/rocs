@@ -34,6 +34,8 @@
 
 #include <KLocale>
 #include <KDebug>
+#include <KAction>
+#include <KColorCombo>
 
 #include <QGraphicsItem>
 #include <QRadioButton>
@@ -45,16 +47,74 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr g,
     setupUi(this);
     _mainWindow = parent;
 
+    // create default data element setups
+    QLabel* dataElementName = new QLabel("Data", this);
+    _dataTypeColor = new KColorCombo(this);
+    _dataTypeColor->setColor(g->dataDefaultColor());
+    _dataTypeColor->setToolTip(i18n("Set default color for data elements"));
+
+    KPushButton* dataTypeShowName = new KPushButton(this);
+    dataTypeShowName->setIcon(KIcon("rocstexticon"));
+    dataTypeShowName->setCheckable(true);
+    dataTypeShowName->setChecked(true);
+    dataTypeShowName->setToolTip("Show names of data elements");
+    dataTypeShowName->setFixedWidth(24);
+
+    KPushButton* dataTypeShowValue = new KPushButton(this);
+    dataTypeShowValue->setIcon(KIcon("rocsvalueicon"));
+    dataTypeShowValue->setCheckable(true);
+    dataTypeShowValue->setChecked(true);
+    dataTypeShowValue->setToolTip(i18n("Show values of data elements"));
+    dataTypeShowValue->setFixedWidth(24);
+
+//     KPushButton* dataTypeDisplay = new KPushButton(this);
+//     dataTypeDisplay->setIcon(KIcon("rocseyeblack"));
+//     dataTypeDisplay->setCheckable(true);
+//     dataTypeDisplay->setChecked(true);
+//     dataTypeDisplay->setFixedWidth(24);
+
+    _dataTypeProperties->addWidget(dataElementName,1,1);
+    _dataTypeProperties->addWidget(_dataTypeColor,1,2);
+    _dataTypeProperties->addWidget(dataTypeShowName,1,3);
+    _dataTypeProperties->addWidget(dataTypeShowValue,1,4);
+//     _dataTypeProperties->addWidget(dataTypeDisplay,1,5);
+
+    // create default data element setups
+    QLabel* pointerElementName = new QLabel(i18n("Pointer"), this);
+    _pointerTypeColor = new KColorCombo(this);
+    _pointerTypeColor->setColor(g->pointerDefaultColor());
+    _pointerTypeColor->setToolTip(i18n("Set default color for pointers"));
+
+    KPushButton* pointerTypeShowName = new KPushButton(this);
+    pointerTypeShowName->setIcon(KIcon("rocstexticon"));
+    pointerTypeShowName->setCheckable(true);
+    pointerTypeShowName->setChecked(true);
+    pointerTypeShowName->setToolTip(i18n("Show names of pointers"));
+    pointerTypeShowName->setFixedWidth(24);
+
+    KPushButton* pointerTypeShowValue = new KPushButton(this);
+    pointerTypeShowValue->setIcon(KIcon("rocsvalueicon"));
+    pointerTypeShowValue->setCheckable(true);
+    pointerTypeShowValue->setChecked(true);
+    pointerTypeShowValue->setToolTip(i18n("Show values of pointers"));
+    pointerTypeShowValue->setFixedWidth(24);
+
+//     KPushButton* pointerTypeDisplay = new KPushButton(this);
+//     pointerTypeDisplay->setIcon(KIcon("rocseyeblack"));
+//     pointerTypeDisplay->setCheckable(true);
+//     pointerTypeDisplay->setChecked(true);
+//     pointerTypeDisplay->setFixedWidth(24);
+
+    _dataTypeProperties->addWidget(pointerElementName,2,1);
+    _dataTypeProperties->addWidget(_pointerTypeColor,2,2);
+    _dataTypeProperties->addWidget(pointerTypeShowName,2,3);
+    _dataTypeProperties->addWidget(pointerTypeShowValue,2,4);
+//     _dataTypeProperties->addWidget(pointerTypeDisplay,2,5);
+
     _dataStructure = g;
     _dataStructureName->setText(_dataStructure->name());
-    _dataStructureEdgeColor->setColor(_dataStructure->pointerDefaultColor());
-    _dataStructureNodeColor->setColor(_dataStructure->dataDefaultColor());
 //     _dataStructureVisible->setChecked( ! _dataStructure->readOnly());
     _activateGraph->setChecked(true);
-    _showEdgeNames->setChecked(_dataStructure->pointerNameVisibility());
-    _showEdgeValues->setChecked(_dataStructure->pointerValueVisibility());
-    _showNodeNames->setChecked(_dataStructure->dataNameVisibility());
-    _showNodeValues->setChecked(_dataStructure->dataValueVisibility());
 
     _editWidget->setVisible(_activateGraph->isChecked());
 
@@ -64,16 +124,17 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr g,
     }
 
     Document *gDocument = qobject_cast<Document*>(g->parent());
+    connect(dataTypeShowName, SIGNAL(toggled(bool)),g.get(), SLOT(setDataNameVisibility(bool)));
+    connect(dataTypeShowValue, SIGNAL(toggled(bool)),g.get(), SLOT(setDataValueVisibility(bool)));
+    connect(_dataTypeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
+
+    connect(pointerTypeShowName,  SIGNAL(toggled(bool)), g.get(), SLOT(setPointerNameVisibility(bool)));
+    connect(pointerTypeShowValue, SIGNAL(toggled(bool)), g.get(), SLOT(setPointerValueVisibility(bool)));
+    connect(_pointerTypeColor, SIGNAL(activated(QColor)), this, SLOT(setDataDefaultColor(QColor)));
+
+
     connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataStructure(QString)));
     connect(this, SIGNAL(removeGraph(DataStructurePtr)), g.get(), SLOT(remove()));
-
-    connect(_dataStructureEdgeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
-    connect(_dataStructureNodeColor, SIGNAL(activated(QColor)), this, SLOT(setDataDefaultColor(QColor)));
-
-    connect(_showEdgeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setPointerNameVisibility(bool)));
-    connect(_showEdgeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setPointerValueVisibility(bool)));
-    connect(_showNodeNames,  SIGNAL(toggled(bool)), g.get(), SLOT(setDataNameVisibility(bool)));
-    connect(_showNodeValues, SIGNAL(toggled(bool)), g.get(), SLOT(setDataValueVisibility(bool)));
 
     connect(_dataStructureName,      SIGNAL(textChanged(QString)), g.get(), SLOT(setName(QString)));
 }
@@ -92,15 +153,15 @@ void DataStructurePropertiesWidget::setDataDefaultColor(QColor c)
     _dataStructure->setDataDefaultColor(c);
 }
 
-void DataStructurePropertiesWidget::on__dataStructurePointerColorApplyNow_clicked()
-{
-    _dataStructure->setPointersColor(_dataStructureEdgeColor->color());
-}
+// void DataStructurePropertiesWidget::on__dataStructurePointerColorApplyNow_clicked()
+// {
+//     _dataStructure->setPointersColor(_pointerTypeColor->color());
+// }
 
-void DataStructurePropertiesWidget::on__dataStructureDataColorApplyNow_clicked()
-{
-    _dataStructure->setDataColor(_dataStructureNodeColor->color());
-}
+// void DataStructurePropertiesWidget::on__dataStructureDataColorApplyNow_clicked()
+// {
+//     _dataStructure->setDataColor(_dataTypeColor->color());
+// }
 
 void DataStructurePropertiesWidget::on__dataStructureVisible_toggled(bool b)
 {

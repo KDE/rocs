@@ -29,6 +29,7 @@ class DataStructure;
 class Data;
 class Pointer;
 class MainWindow;
+class KColorCombo;
 
 /*! \brief Properties Area, not used yet. */
 
@@ -42,8 +43,8 @@ public:
     QRadioButton *radio() const;
 
 private slots:
-    void on__dataStructurePointerColorApplyNow_clicked();
-    void on__dataStructureDataColorApplyNow_clicked();
+//     void on__dataStructurePointerColorApplyNow_clicked();
+//     void on__dataStructureDataColorApplyNow_clicked();
     void on__dataStructureDelete_clicked();
     void on__dataStructureName_textChanged(const QString& s);
 
@@ -59,6 +60,8 @@ signals:
 
 private:
     DataStructurePtr _dataStructure;
+    KColorCombo* _pointerTypeColor;
+    KColorCombo* _dataTypeColor;
     MainWindow *_mainWindow;
 };
 #endif
