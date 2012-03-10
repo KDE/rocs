@@ -253,6 +253,10 @@ public slots:
 signals:
     void dataCreated(DataPtr n);
     void pointerCreated(PointerPtr e);
+    void dataTypeCreated(int identifier);
+    void pointerTypeCreated(int identifier);
+    void dataTypeRemoved(int identifier);
+    void pointerTypeRemoved(int identifier);
     void complexityChanged(bool directed);
     void changed();
     void resizeRequest(Document::Border border);

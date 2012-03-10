@@ -138,6 +138,7 @@ int DataStructure::registerDataType(QString name) {
     int identifier = d->_dataTypeLists.size()+1;
     d->_dataTypeLists.insert(identifier,DataList());
     d->_dataTypes.insert(identifier,name);
+    emit(dataTypeCreated(identifier));
     return identifier;
 }
 
@@ -145,6 +146,7 @@ int DataStructure::registerPointerType(QString name) {
     int identifier = d->_pointerTypeLists.size()+1;
     d->_pointerTypeLists.insert(identifier,PointerList());
     d->_pointerTypes.insert(identifier,name);
+    emit(pointerTypeCreated(identifier));
     return identifier;
 }
 
@@ -172,6 +174,7 @@ bool DataStructure::removeDataType(int dataType) {
     }
     d->_dataTypeLists[dataType].clear();
     d->_dataTypeLists.remove(dataType);
+    emit(dataTypeRemoved(dataType));
     return d->_dataTypes.remove(dataType)>0;
 }
 
@@ -185,6 +188,7 @@ bool DataStructure::removePointerType(int pointerType) {
     }
     d->_pointerTypeLists[pointerType].clear();
     d->_pointerTypeLists.remove(pointerType);
+    emit(pointerTypeRemoved(pointerType));
     return d->_pointerTypes.remove(pointerType)>0;
 }
 

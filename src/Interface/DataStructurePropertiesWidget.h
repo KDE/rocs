@@ -43,6 +43,11 @@ public:
     QRadioButton *radio() const;
 
 private slots:
+    void registerDataType(int identifier);
+    void unregisterDataType(int identifier);
+    void registerPointerType(int identifier);
+    void unregisterPointerType(int identifier);
+
 //     void on__dataStructurePointerColorApplyNow_clicked();
 //     void on__dataStructureDataColorApplyNow_clicked();
     void on__dataStructureDelete_clicked();
@@ -59,6 +64,9 @@ signals:
     void removeGraph(DataStructurePtr);
 
 private:
+    bool createDataTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure);
+    bool createPointerTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure);
+
     DataStructurePtr _dataStructure;
     KColorCombo* _pointerTypeColor;
     KColorCombo* _dataTypeColor;
