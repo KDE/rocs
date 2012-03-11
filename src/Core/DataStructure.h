@@ -229,6 +229,59 @@ public slots:
     // setters
     void setName(const QString& s);
 
+    /**
+     * Set all colors of all data elements of given \param dataType to the given value of \param color.
+     * This is a fast implementation that starts several threads for updating all data elements in parallel.
+     *
+     * \param color is the color to be set
+     * \param dataType is the identifier of the data type for that this function has affect.
+     */
+    void setDataColor(QColor color, int dataType);
+
+    /**
+     * Set all names of all data elements of given \param dataType to the given value of \param visible.
+     * This is a fast implementation that starts several threads for updating all data elements in parallel.
+     *
+     * \param visible must be true if data names shall be shown, false if hidden
+     * \param dataType is the identifier of the data type for that this function has affect.
+     */
+    void setDataNameVisibility(bool visible, int dataType);
+
+    /**
+     * Set all values of all data of given \param dataType to the given value of \param visible.
+     * This is a fast implementation that starts several threads for updating all data types in parallel.
+     *
+     * \param visible must be true if data values shall be shown, false if hidden
+     * \param dataType is the identifier of the data type for that this function has affect.
+     */
+    void setDataValueVisibility(bool visible, int dataType);
+
+    /**
+     * Set all colors of all data of given \param dataType to the given value of \param color.
+     * This is a fast implementation that starts several threads for updating all data types in parallel.
+     *
+     * \param color is the color to be set
+     * \param dataType is the identifier of the data type for that this function has affect.
+     */
+    void setPointerColor(QColor color, int dataType);
+
+    /**
+     * Set all names of all pointers of given \param pointerType to the given value of \param visible.
+     * This is a fast implementation that starts several threads for updating all pointers in parallel.
+     *
+     * \param visible must be true if pointer names shall be shown, false if hidden
+     * \param pointerType is the identifier of the pointer type for that this function has affect.
+     */
+    void setPointerNameVisibility(bool visible, int pointerType);
+
+    /**
+     * Set all values of all pointers of given \param pointerType to the given value of \param visible.
+     * This is a fast implementation that starts several threads for updating all pointers in parallel.
+     *
+     * \param visible must be true if pointer values shall be shown, false if hidden
+     * \param pointerType is the identifier of the pointer type for that this function has affect.
+     */
+    void setPointerValueVisibility(bool visible, int pointerType);
 
 // #ifdef USING_QTSCRIPT
 //     QScriptValue list_data();
@@ -266,14 +319,18 @@ protected:
      * \return void
      */
     virtual void importStructure(DataStructurePtr other);
+
+    void initialize();
     template<typename T> static DataStructurePtr create(Document *parent = 0) {
         DataStructurePtr pi(new T(parent));
         pi->d->q=pi;
+        pi->initialize();
         return pi;
     }
     template<typename T> static DataStructurePtr create(DataStructurePtr other, Document *parent = 0) {
         DataStructurePtr pi(new T(parent));
         pi->d->q=pi;
+        pi->initialize();
         pi->importStructure(other);
         return pi;
     }

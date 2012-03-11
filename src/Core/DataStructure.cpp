@@ -46,6 +46,23 @@ DataStructurePtr DataStructure::create(DataStructurePtr other, Document *parent)
     return create<DataStructure>(other, parent);
 }
 
+void DataStructure::initialize()
+{
+    d->_automate = false;
+    d->_readOnly = false;
+    updateRelativeCenter();
+    d->_identifierCount = 1;
+
+    // create type lists
+    d->_dataTypes.insert(0, DataType::create(getDataStructure(), 0));
+    d->_dataTypeLists.insert(0,DataList());
+
+    d->_pointerTypes.insert(0, PointerType::create(getDataStructure(), 0));
+    d->_pointerTypeLists.insert(0, PointerList());
+
+    emit changed();
+}
+
 DataStructurePtr DataStructure::getDataStructure() const {
     DataStructurePtr px(d->q);
     return px;
@@ -53,32 +70,17 @@ DataStructurePtr DataStructure::getDataStructure() const {
 
 DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStructurePrivate)
 {
-    d->_automate = false;
-    d->_readOnly = false;
     d->_document = parent;
-    updateRelativeCenter();
-    d->_dataDefaultColor = QColor("blue");
-    d->_dataNamesVisible = true;
-    d->_dataValuesVisible = true;
-    d->_identifierCount = 1;
-
-    // create type lists
-    d->_dataTypes.insert(0, DataType::create(0));
-    d->_dataTypeLists.insert(0,DataList());
-
-    d->_pointerTypes.insert(0, PointerType::create(0));
-    d->_pointerTypeLists.insert(0, PointerList());
-
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect (this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
-    emit changed();
+    // futher initialization is done by separate call to initialize()
 }
 
 void DataStructure::importStructure(DataStructurePtr other){
     d->_readOnly = other->readOnly();
     updateRelativeCenter();
 
-//FIXME add import for defaults
+//FIXME implement import for types
 //     d->_pointerDefaultColor     = other->pointerDefaultColor();
 //     d->_dataDefaultColor        = other->dataDefaultColor();
 //     d->_dataNamesVisible        = other->d->_dataNamesVisible;
@@ -140,7 +142,7 @@ const PointerList DataStructure::pointers(int pointerType) const {
 
 int DataStructure::registerDataType(QString name) {
     int identifier = d->_dataTypeLists.size()+1;
-    DataTypePtr dataType = DataType::create(identifier);
+    DataTypePtr dataType = DataType::create(getDataStructure(), identifier);
     dataType->setName(name);
 
     d->_dataTypeLists.insert(identifier,DataList());
@@ -152,7 +154,7 @@ int DataStructure::registerDataType(QString name) {
 
 int DataStructure::registerPointerType(QString name) {
     int identifier = d->_pointerTypeLists.size()+1;
-    PointerTypePtr pointerType = PointerType::create(identifier);
+    PointerTypePtr pointerType = PointerType::create(getDataStructure(), identifier);
     pointerType->setName(name);
 
     d->_pointerTypeLists.insert(identifier,PointerList());
@@ -283,7 +285,7 @@ DataPtr DataStructure::addData(DataPtr data, int dataType){
     return data;
 }
 
-QList< DataPtr > DataStructure::addDataList(QList< DataPtr > dataList, int dataType){
+DataList DataStructure::addDataList(DataList dataList, int dataType){
     Q_ASSERT(dataType>=0 && dataType<d->_dataTypeLists.size());
 
     foreach (DataPtr n, dataList) {
@@ -303,7 +305,7 @@ QList< DataPtr > DataStructure::addDataList(QList< DataPtr > dataList, int dataT
     return dataList;
 }
 
-QList< DataPtr > DataStructure::addDataList(QList< QPair<QString,QPointF> > dataList, int dataType) {
+DataList DataStructure::addDataList(QList< QPair<QString,QPointF> > dataList, int dataType) {
     QList< DataPtr > dataCreateList;
     QPair<QString, QPointF> dataDefinition;
     foreach (dataDefinition, dataList) {
@@ -464,13 +466,6 @@ void DataStructure::setName(const QString& s) {
     d->_name = s;
 }
 
-// void DataStructure::setDataDefaultColor(const QColor& color) {
-//     d->_dataDefaultColor = color;
-// }
-/*
-void DataStructure::setPointerTypeDefaultColor(const QColor& color, int pointerType) {
-    d->_pointerDefaultColor = color;
-}*/
 
 void DataStructure::addDynamicProperty(const QString& property, QVariant value){
     if ( !setProperty(property.toUtf8(), value) && value.isValid()){
@@ -478,22 +473,12 @@ void DataStructure::addDynamicProperty(const QString& property, QVariant value){
     }
 }
 
+
 void DataStructure::removeDynamicProperty(const QString& property){
     this->addDynamicProperty(property, QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
-// void DataStructure::setDataColor(const QColor& c){
-//     foreach(DataList dataType, d->_dataTypeLists) {
-//         QtConcurrent::blockingMap(dataType, DataColorSetted(c));
-//     }
-// }
-
-// void DataStructure::setPointersColor(const QColor& c){
-//     foreach(PointerList pointerType, d->_pointerTypeLists) {
-//         QtConcurrent::blockingMap(pointerType, PointerColorSetted(c));
-//     }
-// }
 
 void DataStructure::addDataDynamicProperty(const QString& property, QVariant value){
     foreach(DataList dataType, d->_dataTypeLists) {
@@ -520,34 +505,36 @@ void DataStructure::removePointersDynamicProperty(const QString& property){
     }
 }
 
-//FIXME
-// void DataStructure::setDataNameVisibility(bool b){
-//     d->_dataNamesVisible = b;
-//     foreach(DataList dataType, d->_dataTypeLists) {
-//         QtConcurrent::blockingMap(dataType, DataNameVisibilitySetted(b));
-//     }
-// }
 
-// void DataStructure::setPointerNameVisibility(bool b){
-//     d->_pointerNamesVisible = b;
-//     foreach(PointerList pointerType, d->_pointerTypeLists) {
-//         QtConcurrent::blockingMap(pointerType, PointerNameVisibilitySetted(b));
-//     }
-// }
+void DataStructure::setDataColor(QColor color, int dataType){
+    QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataColorSetted(color));
+}
 
-// void DataStructure::setDataValueVisibility(bool b){
-//     d-> _dataValuesVisible = b;
-//     foreach(DataList dataType, d->_dataTypeLists) {
-//         QtConcurrent::blockingMap(dataType, DataValueVisibilitySetted(b));
-//     }
-// }
 
-// void DataStructure::setPointerValueVisibility(bool b){
-//     d->_pointerValuesVisible = b;
-//     foreach(PointerList pointerType, d->_pointerTypeLists) {
-//         QtConcurrent::blockingMap(pointerType, PointerValueVisibilitySetted(b));
-//     }
-// }
+void DataStructure::setPointerColor(QColor color, int pointerType){
+    QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerColorSetted(color));
+}
+
+
+void DataStructure::setDataNameVisibility(bool visible, int dataType){
+    QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataNameVisibilitySetted(visible));
+}
+
+
+void DataStructure::setDataValueVisibility(bool visible, int dataType){
+    QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataValueVisibilitySetted(visible));
+}
+
+
+void DataStructure::setPointerNameVisibility(bool visible, int pointerType){
+    QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerNameVisibilitySetted(visible));
+}
+
+
+void DataStructure::setPointerValueVisibility(bool visible, int pointerType){
+    QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerValueVisibilitySetted(visible));
+}
+
 
 void DataStructure::setEngine(	QScriptEngine *engine ) {
     d-> _engine = engine;

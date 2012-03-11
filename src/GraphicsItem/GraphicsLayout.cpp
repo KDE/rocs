@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright (C) 2011 Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright (C) 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -23,6 +23,8 @@
 #include "Data.h"
 #include "Pointer.h"
 #include "DocumentManager.h"
+#include <DataType.h>
+#include <PointerType.h>
 
 GraphicsLayout::GraphicsLayout(QObject* parent) : QObject(parent)
 { }
@@ -45,9 +47,11 @@ void GraphicsLayout::setViewStyleDataNode(int style)
 {
     _viewStyleDataNode = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
-    foreach (DataStructurePtr ds, dsList) {
-        //FIXME
-//         ds->setDataNameVisibility( ds->dataNameVisibility() ); // triggers redraw of all nodes
+    foreach(DataStructurePtr ds, dsList) {
+    foreach(int identifier, ds->dataTypeList()) {
+        // update all data elements
+        ds->setDataNameVisibility(ds->dataType(identifier)->isNameVisible(), identifier);
+    }
     }
     emit changed();
 }
@@ -57,8 +61,11 @@ void GraphicsLayout::setViewStyleDataEdge(int style)
 {
     _viewStyleDataEdge = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
-    foreach (DataStructurePtr ds, dsList) {
-        //FIXME ds->setPointerNameVisibility( ds->pointerNameVisibility() ); // triggers redraw of all edges
+    foreach(DataStructurePtr ds, dsList) {
+    foreach(int identifier, ds->pointerTypeList()) {
+        // update all pointers
+        ds->setPointerNameVisibility(ds->pointerType(identifier)->isNameVisible(), identifier);
+    }
     }
     emit changed();
 }
