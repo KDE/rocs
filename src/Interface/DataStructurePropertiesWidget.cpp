@@ -108,7 +108,11 @@ void DataStructurePropertiesWidget::registerDataType(int identifier)
 
 void DataStructurePropertiesWidget::unregisterDataType(int identifier)
 {
-
+    if (!_dataTypeWidgets.contains(identifier)) {
+        return;
+    }
+    delete _dataTypeWidgets[identifier];
+    _dataTypeWidgets.remove(identifier);
 }
 
 void DataStructurePropertiesWidget::registerPointerType(int identifier)
@@ -118,7 +122,11 @@ void DataStructurePropertiesWidget::registerPointerType(int identifier)
 
 void DataStructurePropertiesWidget::unregisterPointerType(int identifier)
 {
-
+    if (!_pointerTypeWidgets.contains(identifier)) {
+        return;
+    }
+    delete _pointerTypeWidgets[identifier];
+    _pointerTypeWidgets.remove(identifier);
 }
 
 void DataStructurePropertiesWidget::on__dataStructureVisible_toggled(bool b)
@@ -185,17 +193,19 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
 //     dataTypeDisplay->setFixedWidth(24);
 
     dataPropertyWidget->setLayout(dataPropertyLayout);
-    dataPropertyLayout->addWidget(dataElementName,1,1);
-    dataPropertyLayout->addWidget(_dataTypeColor,1,2);
-    dataPropertyLayout->addWidget(dataTypeShowName,1,3);
-    dataPropertyLayout->addWidget(dataTypeShowValue,1,4);
+    dataPropertyLayout->addWidget(dataElementName, 1, 1);
+    dataPropertyLayout->addWidget(_dataTypeColor, 1, 2);
+    dataPropertyLayout->addWidget(dataTypeShowName, 1, 3);
+    dataPropertyLayout->addWidget(dataTypeShowValue, 1, 4);
 //     _dataTypeProperties->addWidget(dataTypeDisplay,1,5);
 
     _typeProperties->addWidget(dataPropertyWidget);
 
-    connect(dataTypeShowName, SIGNAL(toggled(bool)),dataStructure.get(), SLOT(setDataNameVisibility(bool)));
-    connect(dataTypeShowValue, SIGNAL(toggled(bool)),dataStructure.get(), SLOT(setDataValueVisibility(bool)));
+    connect(dataTypeShowName, SIGNAL(toggled(bool)), dataStructure.get(), SLOT(setDataNameVisibility(bool)));
+    connect(dataTypeShowValue, SIGNAL(toggled(bool)), dataStructure.get(), SLOT(setDataValueVisibility(bool)));
     connect(_dataTypeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
+
+    _dataTypeWidgets.insert(typeIdentifier, dataPropertyWidget);
 
     return true;
 }
@@ -232,10 +242,10 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
 //     pointerTypeDisplay->setFixedWidth(24);
 
     pointerPropertyWidget->setLayout(pointerPropertyLayout);
-    pointerPropertyLayout->addWidget(pointerElementName,1,1);
-    pointerPropertyLayout->addWidget(_pointerTypeColor,1,2);
-    pointerPropertyLayout->addWidget(pointerTypeShowName,1,3);
-    pointerPropertyLayout->addWidget(pointerTypeShowValue,1,4);
+    pointerPropertyLayout->addWidget(pointerElementName, 1, 1);
+    pointerPropertyLayout->addWidget(_pointerTypeColor, 1, 2);
+    pointerPropertyLayout->addWidget(pointerTypeShowName, 1, 3);
+    pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 4);
 // //     _dataTypeProperties->addWidget(pointerTypeDisplay,2,5);
 
     _typeProperties->addWidget(pointerPropertyWidget); //FIXME add to specific widget for pointers
@@ -243,6 +253,8 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     connect(pointerTypeShowName,  SIGNAL(toggled(bool)), dataStructure.get(), SLOT(setPointerNameVisibility(bool)));
     connect(pointerTypeShowValue, SIGNAL(toggled(bool)), dataStructure.get(), SLOT(setPointerValueVisibility(bool)));
     connect(_pointerTypeColor, SIGNAL(activated(QColor)), this, SLOT(setDataDefaultColor(QColor)));
+
+    _pointerTypeWidgets.insert(typeIdentifier, pointerPropertyWidget);
 
     return true;
 }

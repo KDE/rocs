@@ -71,5 +71,7 @@ private:
     KColorCombo* _pointerTypeColor;
     KColorCombo* _dataTypeColor;
     MainWindow *_mainWindow;
+    QMap<int, QWidget*> _dataTypeWidgets;
+    QMap<int, QWidget*> _pointerTypeWidgets;
 };
 #endif
