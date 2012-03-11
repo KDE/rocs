@@ -68,7 +68,7 @@ DataStructurePtr DataStructure::getDataStructure() const {
     return px;
 }
 
-DataStructure::DataStructure(Document *parent) : QObject(parent), d(new DataStructurePrivate)
+DataStructure::DataStructure(Document *parent) : d(new DataStructurePrivate)
 {
     d->_document = parent;
     connect (this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));

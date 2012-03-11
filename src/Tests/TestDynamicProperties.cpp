@@ -54,8 +54,9 @@ void TestDynamicProperties::addNodeDynamicProperty() {
 void TestDynamicProperties::addEdgeDynamicProperty() {
     DataStructurePtr g = _document->addDataStructure( "A graph" );
 
-    DataPtr n = g->addData( "Node" );
-    PointerPtr e = g->addPointer( n, n );
+    DataPtr n1 = g->addData( "Node1" );
+    DataPtr n2 = g->addData( "Node2" );
+    PointerPtr e = g->addPointer( n1, n2 );
     QVERIFY2( e->getPointer().get() != 0, "Pointer not created!" );
     QByteArray property = "newProperty";
     e->addDynamicProperty( property, QVariant( 0 ) );
@@ -120,8 +121,9 @@ void TestDynamicProperties::removeNodeDynamicProperty() {
 void TestDynamicProperties::removeEdgeDynamicProperty() {
     DataStructurePtr g = _document->addDataStructure( "A graph" );
 
-    DataPtr n = g->addData( "Node" );
-    PointerPtr e = g->addPointer( n, n );
+    DataPtr n1 = g->addData( "Node" );
+    DataPtr n2 = g->addData( "Node" );
+    PointerPtr e = g->addPointer( n1, n2 );
     QByteArray property = "newProperty";
     e->addDynamicProperty( property, QVariant( 0 ) );
     QVERIFY2( e->property( property ) != QVariant::Invalid, "Property not added." );
@@ -130,6 +132,7 @@ void TestDynamicProperties::removeEdgeDynamicProperty() {
     QVERIFY2( DynamicPropertiesList::New()->type( e.get(), property ) == None, "Property isn't None." );
     QVERIFY2( e->dynamicPropertyNames().size() == 0, "Still having property." );
 }
+
 void TestDynamicProperties::removeGraphDynamicProperty() {
     DataStructurePtr g = _document->addDataStructure( "A graph" );
 
