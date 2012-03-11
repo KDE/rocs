@@ -26,6 +26,7 @@
 #include <QMap>
 
 #include "DynamicPropertiesList.h"
+#include "DataType.h"
 
 void DataPrivate::empty(PointerList &list) {
     while(!list.isEmpty()){
@@ -39,20 +40,20 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataT
 ,_width(0.3)
 ,_begin(true)
 ,_end(true)
-,_showName(parent->dataNameVisibility())
-,_showValue(parent->dataValueVisibility())
+,_showName(parent->dataType(dataType)->isNameVisible())
+,_showValue(parent->dataType(dataType)->isValueVisible())
 ,_useColor(false)
 ,_dataStructure(parent)
 ,_uniqueIdentifier(uniqueIdentifer)
 ,_dataType(dataType)
-,_color(_dataStructure->dataDefaultColor())
+,_color(parent->dataType(dataType)->defaultColor())
 ,_iconpackage(KGlobal::dirs()->locate("appdata", "iconpacks/default.svg"))
 ,_icon("rocs_default")
 ,_value(0)
 {
-    _in_pointers = QList< PointerPtr >();
-    _out_pointers = QList< PointerPtr >();
-    _self_pointers = QList< PointerPtr >();
+    _in_pointers = PointerList();
+    _out_pointers = PointerList();
+    _self_pointers = PointerList();
 }
 
 

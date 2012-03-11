@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -24,12 +24,16 @@
 
 class Data;
 class Pointer;
+class DataType;
+class PointerType;
 class DataStructure;
 
 typedef QList< boost::shared_ptr<Data> > DataList;
 typedef QList< boost::shared_ptr<Pointer> > PointerList;
 typedef boost::shared_ptr<Data> DataPtr;
 typedef boost::shared_ptr<Pointer> PointerPtr;
+typedef boost::shared_ptr<DataType> DataTypePtr;
+typedef boost::shared_ptr<PointerType> PointerTypePtr;
 typedef boost::shared_ptr<DataStructure> DataStructurePtr;
 
 #endif

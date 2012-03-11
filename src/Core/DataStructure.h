@@ -51,10 +51,10 @@ public:
      */
     boost::weak_ptr<DataStructure> q;
 
-    QMap<int,DataList> _dataTypeLists;         // list if data elements associated to specific type
-    QMap<int,PointerList> _pointerTypeLists;   // list of pointers associated to specific type
-    QMap<int,QString> _dataTypes;           // list of data types
-    QMap<int,QString> _pointerTypes;        // list of pointer types
+    QMap<int, DataList> _dataTypeLists;         // list if data elements associated to specific type
+    QMap<int, PointerList> _pointerTypeLists;   // list of pointers associated to specific type
+    QMap<int, DataTypePtr> _dataTypes;           // list of data types
+    QMap<int, PointerTypePtr> _pointerTypes;        // list of pointer types
 
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
@@ -67,15 +67,12 @@ public:
     QPointF _relativeCenter;
     QString _name;
     QColor _dataDefaultColor;
-    QColor _pointerDefaultColor;
     bool _automate;
     Document *_document;
     bool _readOnly;
 
     bool _dataNamesVisible;
-    bool _pointerNamesVisible;
     bool _dataValuesVisible;
-    bool _pointerValuesVisible;
 
     QScriptValue _value;
     QScriptEngine *_engine;
@@ -87,8 +84,8 @@ class ROCSLIB_EXPORT DataStructure : public QObject {
     Q_OBJECT
 
     Q_PROPERTY(QString name READ name WRITE setName)
-    Q_PROPERTY(QColor dataDefaultColor READ dataDefaultColor WRITE setDataDefaultColor)
-    Q_PROPERTY(QColor pointerDefaultColor READ pointerDefaultColor WRITE setPointerDefaultColor)
+//     Q_PROPERTY(QColor dataDefaultColor READ dataDefaultColor WRITE setDataDefaultColor) //FIXME disabled for now: incompatible to current layout
+//     Q_PROPERTY(QColor pointerDefaultColor READ pointerDefaultColor WRITE setPointerDefaultColor) //FIXME disabled for now: incompatible to current layout
 
 public:
     static DataStructurePtr create(Document *parent = 0);
@@ -133,6 +130,9 @@ public:
      */
     bool removePointerType(int pointerType);
 
+    PointerTypePtr pointerType(int pointerType) const;
+    DataTypePtr dataType(int dataType) const;
+
     // getters
     QString getDataTypeName(int dataType) const;
     QString getPointerTypeName(int pointerType) const;
@@ -150,10 +150,7 @@ public:
     QList<int> pointerTypeList() const;
 
     bool dataNameVisibility() const;
-    bool pointerNameVisibility() const;
     bool dataValueVisibility() const;
-    bool pointerValueVisibility() const;
-    const QColor& pointerDefaultColor() const;
     const QColor& dataDefaultColor() const;
     const QString& name() const;
 
@@ -231,14 +228,7 @@ public slots:
 
     // setters
     void setName(const QString& s);
-    void setDataColor(const QColor& c);
-    void setPointersColor(const QColor& c);
-    void setDataNameVisibility(bool b);
-    void setPointerValueVisibility(bool b);
-    void setDataValueVisibility(bool b);
-    void setPointerNameVisibility(bool b);
-    void setDataDefaultColor(const QColor& color);
-    void setPointerDefaultColor(const QColor& color);
+
 
 // #ifdef USING_QTSCRIPT
 //     QScriptValue list_data();
@@ -295,13 +285,6 @@ private:
 
 
 inline bool DataStructure::readOnly()                      const { return d->_readOnly;              }
-inline bool DataStructure::dataValueVisibility()           const { return d->_dataValuesVisible;     }
-inline bool DataStructure::dataNameVisibility()            const { return d->_dataNamesVisible;     }
-inline bool DataStructure::pointerNameVisibility()         const { return d->_pointerNamesVisible;   }
-inline bool DataStructure::pointerValueVisibility()        const { return d->_pointerValuesVisible;  }
-
-inline const QColor& DataStructure::pointerDefaultColor()  const { return d->_pointerDefaultColor; }
-inline const QColor& DataStructure::dataDefaultColor()     const { return d->_dataDefaultColor;    }
 inline const QString& DataStructure::name()                const { return d->_name;                }
 
 /**

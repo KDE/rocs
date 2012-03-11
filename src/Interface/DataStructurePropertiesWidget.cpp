@@ -24,7 +24,9 @@
 #include "DataStructure.h"
 #include "Document.h"
 #include "Data.h"
+#include "DataType.h"
 #include "Pointer.h"
+#include "PointerType.h"
 #include "MainWindow.h"
 #include "DataItem.h"
 #include "PointerItem.h"
@@ -74,37 +76,20 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr da
     connect(dataStructure.get(), SIGNAL(pointerTypeCreated(int)), this, SLOT(registerPointerType(int)));
     connect(dataStructure.get(), SIGNAL(pointerTypeRemoved(int)), this, SLOT(unregisterPointerType(int)));
 
-    connect(_dataStructureName,      SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
+    connect(_dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
 }
+
 
 DataStructurePropertiesWidget::~DataStructurePropertiesWidget()
 {
 }
 
-void DataStructurePropertiesWidget::setPointerDefaultColor(QColor c)
-{
-    _dataStructure->setPointerDefaultColor(c);
-}
-
-void DataStructurePropertiesWidget::setDataDefaultColor(QColor c)
-{
-    _dataStructure->setDataDefaultColor(c);
-}
-
-// void DataStructurePropertiesWidget::on__dataStructurePointerColorApplyNow_clicked()
-// {
-//     _dataStructure->setPointersColor(_pointerTypeColor->color());
-// }
-
-// void DataStructurePropertiesWidget::on__dataStructureDataColorApplyNow_clicked()
-// {
-//     _dataStructure->setDataColor(_dataTypeColor->color());
-// }
 
 void DataStructurePropertiesWidget::registerDataType(int identifier)
 {
     createDataTypeInformationWidget(identifier, _dataStructure);
 }
+
 
 void DataStructurePropertiesWidget::unregisterDataType(int identifier)
 {
@@ -115,10 +100,12 @@ void DataStructurePropertiesWidget::unregisterDataType(int identifier)
     _dataTypeWidgets.remove(identifier);
 }
 
+
 void DataStructurePropertiesWidget::registerPointerType(int identifier)
 {
     createPointerTypeInformationWidget(identifier, _dataStructure);
 }
+
 
 void DataStructurePropertiesWidget::unregisterPointerType(int identifier)
 {
@@ -129,17 +116,12 @@ void DataStructurePropertiesWidget::unregisterPointerType(int identifier)
     _pointerTypeWidgets.remove(identifier);
 }
 
-void DataStructurePropertiesWidget::on__dataStructureVisible_toggled(bool b)
-{
-    _dataStructure->setReadOnly(!b);
-    qDebug() << "toggle visibility to " << b;
-    _mainWindow->scene()->hideGraph(_dataStructure, b);
-}
 
 QRadioButton *DataStructurePropertiesWidget::radio()const
 {
     return _activateGraph;
 }
+
 
 void DataStructurePropertiesWidget::on__activateGraph_toggled(bool b)
 {
@@ -149,10 +131,12 @@ void DataStructurePropertiesWidget::on__activateGraph_toggled(bool b)
     }
 }
 
+
 void DataStructurePropertiesWidget::on__dataStructureDelete_clicked()
 {
     emit removeGraph(_dataStructure);
 }
+
 
 void DataStructurePropertiesWidget::on__dataStructureName_textChanged(const QString& s)
 {
@@ -162,14 +146,17 @@ void DataStructurePropertiesWidget::on__dataStructureName_textChanged(const QStr
 
 bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
 {
-    //FIXME set specific for typeIdentifier
+    if(!dataStructure->dataTypeList().contains(typeIdentifier)){
+        return false;
+    }
+
     // create default data element setups
     QWidget* dataPropertyWidget = new QWidget(this);
     QGridLayout* dataPropertyLayout = new QGridLayout(dataPropertyWidget);
 
     QLabel* dataElementName = new QLabel("Data", dataPropertyWidget);
     _dataTypeColor = new KColorCombo(dataPropertyWidget);
-    _dataTypeColor->setColor(dataStructure->dataDefaultColor());
+    _dataTypeColor->setColor(dataStructure->dataType(typeIdentifier)->defaultColor());
     _dataTypeColor->setToolTip(i18n("Set default color for data elements"));
 
     KPushButton* dataTypeShowName = new KPushButton(dataPropertyWidget);
@@ -201,24 +188,32 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
 
     _typeProperties->addWidget(dataPropertyWidget);
 
-    connect(dataTypeShowName, SIGNAL(toggled(bool)), dataStructure.get(), SLOT(setDataNameVisibility(bool)));
-    connect(dataTypeShowValue, SIGNAL(toggled(bool)), dataStructure.get(), SLOT(setDataValueVisibility(bool)));
-    connect(_dataTypeColor, SIGNAL(activated(QColor)), this, SLOT(setPointerDefaultColor(QColor)));
+    connect(dataTypeShowName, SIGNAL(toggled(bool)),
+        dataStructure->dataType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
+    connect(dataTypeShowValue, SIGNAL(toggled(bool)),
+        dataStructure->dataType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
+    connect(_dataTypeColor, SIGNAL(activated(QColor)),
+        dataStructure->dataType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
 
     _dataTypeWidgets.insert(typeIdentifier, dataPropertyWidget);
 
     return true;
 }
 
+
 bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
 {
+    if(!dataStructure->pointerTypeList().contains(typeIdentifier)){
+        return false;
+    }
+
     // create default data element setups
     QWidget* pointerPropertyWidget = new QWidget(this);
     QGridLayout* pointerPropertyLayout = new QGridLayout(pointerPropertyWidget);
 
     QLabel* pointerElementName = new QLabel(i18n("Pointer"), pointerPropertyWidget);
     _pointerTypeColor = new KColorCombo(pointerPropertyWidget);
-    _pointerTypeColor->setColor(dataStructure->pointerDefaultColor());
+    _pointerTypeColor->setColor(dataStructure->pointerType(typeIdentifier)->defaultColor());
     _pointerTypeColor->setToolTip(i18n("Set default color for pointers"));
 
     KPushButton* pointerTypeShowName = new KPushButton(pointerPropertyWidget);
@@ -248,14 +243,17 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 4);
 // //     _dataTypeProperties->addWidget(pointerTypeDisplay,2,5);
 
-    _typeProperties->addWidget(pointerPropertyWidget); //FIXME add to specific widget for pointers
+    //TODO add to specific widget for pointers
+    _typeProperties->addWidget(pointerPropertyWidget);
 
-    connect(pointerTypeShowName,  SIGNAL(toggled(bool)), dataStructure.get(), SLOT(setPointerNameVisibility(bool)));
-    connect(pointerTypeShowValue, SIGNAL(toggled(bool)), dataStructure.get(), SLOT(setPointerValueVisibility(bool)));
-    connect(_pointerTypeColor, SIGNAL(activated(QColor)), this, SLOT(setDataDefaultColor(QColor)));
+    connect(pointerTypeShowName,  SIGNAL(toggled(bool)),
+        dataStructure->pointerType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
+    connect(pointerTypeShowValue, SIGNAL(toggled(bool)),
+        dataStructure->pointerType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
+    connect(_pointerTypeColor, SIGNAL(activated(QColor)),
+        dataStructure->pointerType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
 
     _pointerTypeWidgets.insert(typeIdentifier, pointerPropertyWidget);
 
     return true;
 }
-

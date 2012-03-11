@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -46,7 +46,8 @@ void GraphicsLayout::setViewStyleDataNode(int style)
     _viewStyleDataNode = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
     foreach (DataStructurePtr ds, dsList) {
-        ds->setDataNameVisibility( ds->dataNameVisibility() ); // triggers redraw of all nodes
+        //FIXME
+//         ds->setDataNameVisibility( ds->dataNameVisibility() ); // triggers redraw of all nodes
     }
     emit changed();
 }
@@ -57,7 +58,7 @@ void GraphicsLayout::setViewStyleDataEdge(int style)
     _viewStyleDataEdge = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
     foreach (DataStructurePtr ds, dsList) {
-        ds->setPointerNameVisibility( ds->pointerNameVisibility() ); // triggers redraw of all edges
+        //FIXME ds->setPointerNameVisibility( ds->pointerNameVisibility() ); // triggers redraw of all edges
     }
     emit changed();
 }

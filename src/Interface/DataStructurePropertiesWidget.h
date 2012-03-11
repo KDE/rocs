@@ -71,11 +71,7 @@ private slots:
 //     void on__dataStructureDataColorApplyNow_clicked();
     void on__dataStructureDelete_clicked();
     void on__dataStructureName_textChanged(const QString& s);
-
     void on__activateGraph_toggled(bool b);
-    void on__dataStructureVisible_toggled(bool b);
-    void setPointerDefaultColor(QColor c);
-    void setDataDefaultColor(QColor c);
 
 signals:
     void updateNeeded();

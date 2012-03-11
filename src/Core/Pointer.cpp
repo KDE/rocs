@@ -19,6 +19,7 @@
 */
 
 #include "Pointer.h"
+#include "PointerType.h"
 #include "Data.h"
 #include "DataStructure.h"
 #include "DynamicPropertiesList.h"
@@ -78,9 +79,9 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->from          = from;
     d->to            = to;
     d->dataStructure = parent;
-    d->color         = d->dataStructure->pointerDefaultColor();
-    d->showName      = true;
-    d->showValue     = true;
+    d->color         = d->dataStructure->pointerType(pointerType)->defaultColor();
+    d->showName      = d->dataStructure->pointerType(pointerType)->isNameVisible();
+    d->showValue     = d->dataStructure->pointerType(pointerType)->isValueVisible();
     d->style         = "solid";
     d->width         = 1;
     d->relativeIndex = d->to->pointers(d->from).size();

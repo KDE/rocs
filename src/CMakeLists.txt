@@ -24,6 +24,8 @@ include_directories(
 
 # Prepare library.
 set( rocs_core_SRCS
+    Core/DataType.cpp
+    Core/PointerType.cpp
     Core/Data.cpp
     Core/DataStructure.cpp
     Core/Document.cpp
