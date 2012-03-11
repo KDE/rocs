@@ -43,9 +43,28 @@ public:
     QRadioButton *radio() const;
 
 private slots:
+    /** Use this SLOT to register a new data element type to be displayed at the data structure
+     * widget.
+     * \param identifier is the unique identifier for this data element type
+     */
     void registerDataType(int identifier);
+
+    /** Use this SLOT to remove the widget for the date element type as as specified by \param identifier
+     * from the data structure widget.
+     *
+     * \param identifier is the unique identifier for this pointer type
+     */
     void unregisterDataType(int identifier);
+
+    /** Use this SLOT to register a new pointer type to be displayed at the data structure widget.
+     * \param identifier is the unique identifier for this pointer type
+     */
     void registerPointerType(int identifier);
+
+    /** Use this SLOT to remove the widget for the pointer type as as specified by \param identifier
+     * from the data structure widget.
+     * \param identifier is the unique identifier for this pointer type
+     */
     void unregisterPointerType(int identifier);
 
 //     void on__dataStructurePointerColorApplyNow_clicked();
