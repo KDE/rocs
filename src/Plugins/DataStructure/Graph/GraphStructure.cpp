@@ -50,7 +50,7 @@ DataStructurePtr Rocs::GraphStructure::create(DataStructurePtr other, Document *
 Rocs::GraphStructure::GraphStructure(Document* parent) :
     DataStructure(parent)
 {
-    setGraphType(UNDIRECTED);
+    _type = UNDIRECTED;
 }
 
 void Rocs::GraphStructure::importStructure(DataStructurePtr other)
