@@ -37,9 +37,10 @@
 #include <GraphScene.h>
 #include "DataStructurePluginInterface.h"
 
-class DocumentPrivate{
+class DocumentPrivate
+{
 public:
-    DocumentPrivate(){}
+    DocumentPrivate() {}
 
     QString _buf;
     QString _lastSavedDocumentPath;
@@ -61,7 +62,7 @@ public:
 };
 
 Document::Document(const QString& name, qreal left, qreal right, qreal top, qreal bottom, QObject *parent)
-        : QObject(parent), d( new DocumentPrivate())
+    : QObject(parent), d(new DocumentPrivate())
 {
     d->_name = name;
     d->_left = left;
@@ -87,7 +88,7 @@ void Document::setModified(const bool mod)
 }
 
 Document::Document(const Document& gd)
-        : QObject(gd.parent()), d(new DocumentPrivate())
+    : QObject(gd.parent()), d(new DocumentPrivate())
 {
 //     QObject::setParent(gd.parent());
     d->_name = gd.name();
@@ -98,63 +99,76 @@ Document::Document(const Document& gd)
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_engineBackend = new QtScriptBackend(this);
 
-    for (int i = 0; i < gd.dataStructures().count(); ++i){
+    for (int i = 0; i < gd.dataStructures().count(); ++i) {
         d->_dataStructures.append(
             DataStructurePluginManager::self()->changeToDataStructure(
-                gd.d->_dataStructures.at(i),this
+                gd.d->_dataStructures.at(i), this
             )
         );
     }
 }
 
 // Default Destructor
-Document::~Document() {
-    for(int i = 0; i < d->_dataStructures.size(); i ++){
+Document::~Document()
+{
+    for (int i = 0; i < d->_dataStructures.size(); i ++) {
         d->_dataStructures.clear();
     }
 }
 
-QList< DataStructurePtr >& Document::dataStructures() const { return d->_dataStructures; }
+QList< DataStructurePtr >& Document::dataStructures() const
+{
+    return d->_dataStructures;
+}
 
-QtScriptBackend * Document::engineBackend() const{
+QtScriptBackend * Document::engineBackend() const
+{
     return d->_engineBackend;
 }
 
 // Sets the current file name of the DataStructure Collection
-void Document::setName(const QString& name) {
+void Document::setName(const QString& name)
+{
     d->_name = name;
     d->_modified = true;
     emit nameChanged(name);
 }
 
 // Gets the name of the DataStructure
-QString Document::name() const {
+QString Document::name() const
+{
     return d->_name;
 }
 
 // gets the wheight of the drawable area
-qreal Document::height() const {
+qreal Document::height() const
+{
     return d->_bottom - d->_top;
 }
 
 // sets the width of the drawable area
-qreal Document::width() const {
+qreal Document::width() const
+{
     return d->_right - d->_left;
 }
 
-qreal Document::left() const {
+qreal Document::left() const
+{
     return d->_left;
 }
 
-qreal Document::right() const {
+qreal Document::right() const
+{
     return d->_right;
 }
 
-qreal Document::top() const {
+qreal Document::top() const
+{
     return d->_top;
 }
 
-qreal Document::bottom() const {
+qreal Document::bottom() const
+{
     return d->_bottom;
 }
 
@@ -184,10 +198,11 @@ void Document::setBottom(qreal bottomValue)
 
 QRectF Document::size()
 {
-    return QRectF(d->_left, d->_top,d->_right - d->_left, d->_bottom - d->_top );
+    return QRectF(d->_left, d->_top, d->_right - d->_left, d->_bottom - d->_top);
 }
 
-bool Document::isPointAtDocument(qreal x, qreal y)  const {
+bool Document::isPointAtDocument(qreal x, qreal y)  const
+{
 
     if (x < d->_left)      return false;
     if (x > d->_right)     return false;
@@ -197,25 +212,24 @@ bool Document::isPointAtDocument(qreal x, qreal y)  const {
     return true;
 }
 
-void Document::changeMinimalSize(qreal width, qreal height) {
-    if (width>=0) d->_minWidth = width;
-    if (height>=0) d->_minHeight = height;
+void Document::changeMinimalSize(qreal width, qreal height)
+{
+    if (width >= 0) d->_minWidth = width;
+    if (height >= 0) d->_minHeight = height;
 
     if (width > d->_right - d->_left) {
-        d->_left -= (d->_right- d->_left - width)/2;
-        d->_right += (d->_right- d->_left - width)/2;
+        d->_left -= (d->_right - d->_left - width) / 2;
+        d->_right += (d->_right - d->_left - width) / 2;
         emit resized();
-    }
-    else {
+    } else {
         resizeDocumentBorder(BorderLeft);
     }
 
     if (height > d->_bottom - d->_top) {
-        d->_top -= (d->_bottom - d->_top - height)/2;
-        d->_bottom += (d->_bottom - d->_top - height)/2;
+        d->_top -= (d->_bottom - d->_top - height) / 2;
+        d->_bottom += (d->_bottom - d->_top - height) / 2;
         emit resized();
-    }
-    else {
+    } else {
         resizeDocumentBorder(BorderTop);
     }
 }
@@ -225,21 +239,21 @@ void Document::resizeDocumentIncrease()
     int elements = dataStructures().size();
     for (int i = 0; i < elements; i++) {
         bool resizeDocument = false;
-        foreach( DataPtr n,  dataStructures().at(i)->dataList() ){
-            if (n->x() < d->_left+GraphScene::kBORDER) {
-                setLeft(d->_left-GraphScene::kBORDER);
+        foreach(DataPtr n,  dataStructures().at(i)->dataList()) {
+            if (n->x() < d->_left + GraphScene::kBORDER) {
+                setLeft(d->_left - GraphScene::kBORDER);
                 resizeDocument = true;
             }
-            if (n->x() > d->_right-GraphScene::kBORDER) {
-                setRight(d->_right+GraphScene::kBORDER);
+            if (n->x() > d->_right - GraphScene::kBORDER) {
+                setRight(d->_right + GraphScene::kBORDER);
                 resizeDocument = true;
             }
-            if (n->y() < d->_top+GraphScene::kBORDER) {
-                setTop(d->_top-GraphScene::kBORDER);
+            if (n->y() < d->_top + GraphScene::kBORDER) {
+                setTop(d->_top - GraphScene::kBORDER);
                 resizeDocument = true;
             }
-            if (n->y() > d->_bottom-GraphScene::kBORDER) {
-                setBottom(d->_bottom+GraphScene::kBORDER);
+            if (n->y() > d->_bottom - GraphScene::kBORDER) {
+                setBottom(d->_bottom + GraphScene::kBORDER);
                 resizeDocument = true;
             }
         }
@@ -249,62 +263,63 @@ void Document::resizeDocumentIncrease()
     }
 }
 
-void Document::resizeDocumentBorder(Document::Border orientation) {
+void Document::resizeDocumentBorder(Document::Border orientation)
+{
     bool empty = true;
     int elements = dataStructures().size();
 
     // scans doubled border of specified size: if empty or not
     for (int i = 0; i < elements; i++) {
-    foreach( DataPtr n,  dataStructures().at(i)->dataList() ){
-        switch (orientation) {
-        case BorderLeft: {
-            if (n!=0 && n->x() < d->_left+GraphScene::kBORDER*2) empty=false;
-            break;
+        foreach(DataPtr n,  dataStructures().at(i)->dataList()) {
+            switch (orientation) {
+            case BorderLeft: {
+                if (n != 0 && n->x() < d->_left + GraphScene::kBORDER * 2) empty = false;
+                break;
+            }
+            case BorderRight: {
+                if (n != 0 && n->x() > d->_right - GraphScene::kBORDER * 2) empty = false;
+                break;
+            }
+            case BorderTop: {
+                if (n != 0 && n->y() < d->_top + GraphScene::kBORDER * 2) empty = false;
+                break;
+            }
+            case BorderBottom: {
+                if (n != 0 && n->y() > d->_bottom - GraphScene::kBORDER * 2) empty = false;
+                break;
+            }
+            }
         }
-        case BorderRight: {
-            if (n!=0 && n->x() > d->_right-GraphScene::kBORDER*2) empty=false;
-            break;
-        }
-        case BorderTop: {
-            if (n!=0 && n->y() < d->_top+GraphScene::kBORDER*2) empty=false;
-            break;
-        }
-        case BorderBottom: {
-            if (n!=0 && n->y() > d->_bottom-GraphScene::kBORDER*2) empty=false;
-            break;
-        }
-        }
-    }
     }
 
     //TODO connect to graphvisualeditor-size
-    if (empty==true) {
+    if (empty == true) {
         switch (orientation) {
         case BorderLeft: {
-            if (d->_right-d->_left < GraphScene::kBORDER*4)
+            if (d->_right - d->_left < GraphScene::kBORDER * 4)
                 return;
-            setLeft(d->_left+GraphScene::kBORDER);
+            setLeft(d->_left + GraphScene::kBORDER);
             emit resized();
             break;
         }
         case BorderRight: {
-            if (d->_right-d->_left < GraphScene::kBORDER*4)
+            if (d->_right - d->_left < GraphScene::kBORDER * 4)
                 return;
-            setRight(d->_right-GraphScene::kBORDER);
+            setRight(d->_right - GraphScene::kBORDER);
             emit resized();
             break;
         }
         case BorderTop: {
-            if (d->_bottom-d->_top < GraphScene::kBORDER*4)
+            if (d->_bottom - d->_top < GraphScene::kBORDER * 4)
                 return;
-            setTop(d->_top+GraphScene::kBORDER);
+            setTop(d->_top + GraphScene::kBORDER);
             emit resized();
             break;
         }
         case BorderBottom: {
-            if (d->_bottom-d->_top < GraphScene::kBORDER*4)
+            if (d->_bottom - d->_top < GraphScene::kBORDER * 4)
                 return;
-            setBottom(d->_bottom-GraphScene::kBORDER);
+            setBottom(d->_bottom - GraphScene::kBORDER);
             emit resized();
             break;
         }
@@ -312,32 +327,36 @@ void Document::resizeDocumentBorder(Document::Border orientation) {
     }
 }
 
-bool Document::isPointAtDocument(QPointF point)  const {
+bool Document::isPointAtDocument(QPointF point)  const
+{
     return isPointAtDocument(point.x(), point.y());
 }
 
-bool Document::isModified() const{
+bool Document::isModified() const
+{
     return d->_modified;
 }
 
 void Document::cleanUpBeforeConvert()
 {
-    foreach (DataStructurePtr ds, d->_dataStructures)
-        ds->cleanUpBeforeConvert();
+    foreach(DataStructurePtr ds, d->_dataStructures)
+    ds->cleanUpBeforeConvert();
 }
 
 
-void Document::setActiveDataStructure(DataStructurePtr g){
-    if (d->_dataStructures.indexOf(g) != -1){
+void Document::setActiveDataStructure(DataStructurePtr g)
+{
+    if (d->_dataStructures.indexOf(g) != -1) {
         d->_activeDataStructure = g;
         emit activeDataStructureChanged(g);
         d->_modified = true;
     }
 }
 
-DataStructurePtr Document::addDataStructure(QString name) {
+DataStructurePtr Document::addDataStructure(QString name)
+{
     DataStructurePtr g = DataStructurePluginManager::self()->createNewDataStructure(this,
-                                                                                  d->_dataStructureType->name());
+                         d->_dataStructureType->name());
     g->setName(name);
     d->_dataStructures.append(g);
     d->_activeDataStructure = g;
@@ -347,15 +366,18 @@ DataStructurePtr Document::addDataStructure(QString name) {
     return g;
 }
 
-void Document::savedDocumentAt(const QString& fileName) {
+void Document::savedDocumentAt(const QString& fileName)
+{
     d->_lastSavedDocumentPath = fileName;
 }
 
-const QString& Document::documentPath() const {
+const QString& Document::documentPath() const
+{
     return d->_lastSavedDocumentPath;
 }
 
-void Document::remove(DataStructurePtr dataStructure){
+void Document::remove(DataStructurePtr dataStructure)
+{
     d->_dataStructures.removeOne(dataStructure);
     d->_modified = true;
 }
@@ -432,10 +454,11 @@ void Document::remove(DataStructurePtr dataStructure){
  * property3 : propertyValue3
  */
 
- bool Document::saveAsInternalFormat(const QString& filename) {
+bool Document::saveAsInternalFormat(const QString& filename)
+{
     d->_buf.clear();
 
-    KSaveFile saveFile( !filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
+    KSaveFile saveFile(!filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
 
     if (!saveFile.open()) {
         kDebug() << "Error: File Not Open";
@@ -445,13 +468,13 @@ void Document::remove(DataStructurePtr dataStructure){
     QTextStream stream(&saveFile);
     stream.setCodec("UTF-8");
 
-     d->_buf = QString("[Document Properties] \n")
-             % QString("top : ") % QString::number(top()) % QChar('\n')
-             % QString("bottom : ") % QString::number(bottom()) % QChar('\n')
-             % QString("left : ") % QString::number(left()) % QChar('\n')
-             % QString("right : ") % QString::number(right()) % QChar('\n')
-             % QString("DataStructurePlugin : ") % DataStructurePluginManager::self()->actualPlugin()->name() % QChar('\n')
-             % QChar('\n');
+    d->_buf = QString("[Document Properties] \n")
+              % QString("top : ") % QString::number(top()) % QChar('\n')
+              % QString("bottom : ") % QString::number(bottom()) % QChar('\n')
+              % QString("left : ") % QString::number(left()) % QChar('\n')
+              % QString("right : ") % QString::number(right()) % QChar('\n')
+              % QString("DataStructurePlugin : ") % DataStructurePluginManager::self()->actualPlugin()->name() % QChar('\n')
+              % QChar('\n');
 
     for (int i = 0; i < d->_dataStructures.count(); i++) {
         DataStructurePtr g = d->_dataStructures.at(i);
@@ -460,13 +483,13 @@ void Document::remove(DataStructurePtr dataStructure){
 
         savePropertiesInternalFormat(g.get());
 
-        foreach( DataPtr n, g->dataList()) {
+        foreach(DataPtr n, g->dataList()) {
             d->_buf += QString("[Data %1]\n").arg(g->dataList().indexOf(n)).toUtf8();
             savePropertiesInternalFormat(n.get());
         }
 
         int from, to;
-        foreach( PointerPtr e, g->pointers()) {
+        foreach(PointerPtr e, g->pointers()) {
             from = g->dataList().indexOf(e->from());
             to = g->dataList().indexOf(e->to());
             d->_buf += QString("[Pointer %1->%2]\n").arg(from).arg(to).toUtf8();
@@ -495,37 +518,38 @@ void Document::remove(DataStructurePtr dataStructure){
     return true;
 }
 
-void Document::savePropertiesInternalFormat(QObject *o) {
+void Document::savePropertiesInternalFormat(QObject *o)
+{
     const QMetaObject *metaObject = o->metaObject();
     int propertyCount = metaObject->propertyCount();
 
-    for ( int i = 0; i < propertyCount; ++i) {
+    for (int i = 0; i < propertyCount; ++i) {
         QMetaProperty metaProperty = metaObject->property(i);
         const char *name = metaProperty.name();
         QVariant value = o->property(name);
 
-        if ( QString("objectName").compare(metaProperty.name()) == 0) {
+        if (QString("objectName").compare(metaProperty.name()) == 0) {
             continue;
-        }
-        else if( QString("name").compare(metaProperty.name()) == 0 ) {
-          QString namevalue = QString("%1 : %2 \n" ).arg(name).arg(value.toString());
+        } else if (QString("name").compare(metaProperty.name()) == 0) {
+            QString namevalue = QString("%1 : %2 \n").arg(name).arg(value.toString());
         }
 
-        d->_buf +=  QString("%1 : %2 \n" ).arg(name, value.toString());
+        d->_buf +=  QString("%1 : %2 \n").arg(name, value.toString());
     }
 
     QList<QByteArray> propertyNames = o->dynamicPropertyNames();
-    foreach(const QByteArray& name, propertyNames) {
+    foreach(const QByteArray & name, propertyNames) {
         QVariant value = o->property(name);
-        d->_buf +=  QString("%1 : %2 \n" ).arg(name, value.toString()).toUtf8();
+        d->_buf +=  QString("%1 : %2 \n").arg(name, value.toString()).toUtf8();
     }
 
     d->_buf += '\n';
 }
 
-void Document::loadFromInternalFormat(const QString& filename) {
+void Document::loadFromInternalFormat(const QString& filename)
+{
     QFile f(filename);
-    if ( !f.open(QIODevice::ReadOnly | QIODevice::Text) ) {
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "File not open " << filename.toUtf8();
         return;
     }
@@ -541,28 +565,25 @@ void Document::loadFromInternalFormat(const QString& filename) {
 
         if (str.startsWith('#')) { //! Ignore it, commented line.
             continue;
-        }
-        else if(str.startsWith("[Document Properties]")){
+        } else if (str.startsWith("[Document Properties]")) {
 
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith("top :"))      setTop(dataLine.section(' ',2).toInt());
-                else if (dataLine.startsWith("bottom :"))   setBottom(dataLine.section(' ',2).toInt());
-                else if (dataLine.startsWith("left :"))     setLeft(dataLine.section(' ',2).toInt());
-                else if (dataLine.startsWith("right :"))    setRight(dataLine.section(' ',2).toInt());
+                /**/ if (dataLine.startsWith("top :"))      setTop(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith("bottom :"))   setBottom(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith("left :"))     setLeft(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith("right :"))    setRight(dataLine.section(' ', 2).toInt());
 
-           // TODO: Wagner, How this thing works?
-                else if (dataLine.startsWith("DataStructurePlugin :")){
-                    DataStructurePluginManager::self()->setDataStructurePlugin(dataLine.section(' ',2));
+                // TODO: Wagner, How this thing works?
+                else if (dataLine.startsWith("DataStructurePlugin :")) {
+                    DataStructurePluginManager::self()->setDataStructurePlugin(dataLine.section(' ', 2));
                     d->_dataStructureType =  DataStructurePluginManager::self()->actualPlugin();
-                }
-                else if ( !dataLine.isEmpty())               break; // go to the last if and finish populating.
+                } else if (!dataLine.isEmpty())               break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
             tmpObject = this;
-        }
-        else if (str.startsWith("[DataStructure")) {
-            QString gName = str.section(' ',1,1);
+        } else if (str.startsWith("[DataStructure")) {
+            QString gName = str.section(' ', 1, 1);
             gName.remove(']');
             tmpDataStructure = DataStructurePluginManager::self()->createNewDataStructure(this);
             tmpDataStructure->setName(gName.toAscii());
@@ -576,12 +597,12 @@ void Document::loadFromInternalFormat(const QString& filename) {
             qreal posX = 0;
             qreal posY = 0;
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith("x :"))         posX = dataLine.section(' ',2).toFloat();
-                else if (dataLine.startsWith("y :"))         posY = dataLine.section(' ',2).toFloat();
-                else if (dataLine.startsWith("value :"))     tmpDataPtr->setValue(dataLine.section(' ',2).toInt());
-                else if (dataLine.startsWith("color :"))     tmpDataPtr->setColor(dataLine.section(' ',2));
+                /**/ if (dataLine.startsWith("x :"))         posX = dataLine.section(' ', 2).toFloat();
+                else if (dataLine.startsWith("y :"))         posY = dataLine.section(' ', 2).toFloat();
+                else if (dataLine.startsWith("value :"))     tmpDataPtr->setValue(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith("color :"))     tmpDataPtr->setColor(dataLine.section(' ', 2));
                 else if (dataLine.startsWith("name :"))      tmpDataPtr->setName(dataLine.section(' ', 2));
-                else if ( !dataLine.isEmpty())               break; // go to the last if and finish populating.
+                else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
             tmpDataPtr->setPos(posX, posY);
@@ -590,37 +611,35 @@ void Document::loadFromInternalFormat(const QString& filename) {
         }
 
         else if (str.startsWith("[Pointer")) {
-            QString eName = str.section(' ',1,1);
+            QString eName = str.section(' ', 1, 1);
             eName.remove(']');
 
-            QString nameFrom = eName.section("->", 0,0);
-            QString nameTo = eName.section("->", 1,1);
+            QString nameFrom = eName.section("->", 0, 0);
+            QString nameTo = eName.section("->", 1, 1);
 
             PointerPtr tmpPointer = tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()),
-                                                     tmpDataStructure->dataList().at(nameTo.toInt()));
+                                    tmpDataStructure->dataList().at(nameTo.toInt()));
 
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith("width :"))     tmpPointer->setWidth(dataLine.section(' ',2).toInt());
-                else if (dataLine.startsWith("value :"))     tmpPointer->setValue(dataLine.section(' ',2));
-                else if (dataLine.startsWith("color :"))     tmpPointer->setColor(dataLine.section(' ',2));
-                else if (dataLine.startsWith("width :"))     tmpPointer->setColor(dataLine.section(' ',2).toFloat());
-                else if (dataLine.startsWith("style :"))     tmpPointer->setColor(dataLine.section(' ',2));
+                /**/ if (dataLine.startsWith("width :"))     tmpPointer->setWidth(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith("value :"))     tmpPointer->setValue(dataLine.section(' ', 2));
+                else if (dataLine.startsWith("color :"))     tmpPointer->setColor(dataLine.section(' ', 2));
+                else if (dataLine.startsWith("width :"))     tmpPointer->setColor(dataLine.section(' ', 2).toFloat());
+                else if (dataLine.startsWith("style :"))     tmpPointer->setColor(dataLine.section(' ', 2));
 
-                else if ( !dataLine.isEmpty())                break; // go to the last if and finish populating.
+                else if (!dataLine.isEmpty())                break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
             tmpObject = tmpPointer.get();
-        }
-        else if (str.startsWith("[Group")) {
+        } else if (str.startsWith("[Group")) {
             /*QString gName = str.section(" ",1,1);
             gName.remove(']');
             tmpGroup = tmpDataStructure->addGroup(gName); */
-        }
-        else if (str.contains(':')) {
-            QString propertyName = str.section(':',0,0).trimmed();
-            QString propertyValue = str.section(':',1,1).trimmed();
-            tmpObject->setProperty( propertyName.toUtf8() , propertyValue );
+        } else if (str.contains(':')) {
+            QString propertyName = str.section(':', 0, 0).trimmed();
+            QString propertyValue = str.section(':', 1, 1).trimmed();
+            tmpObject->setProperty(propertyName.toUtf8() , propertyValue);
         }
         //else {
         //      tmpGroup->append( tmpDataStructure->data(str));
@@ -630,22 +649,25 @@ void Document::loadFromInternalFormat(const QString& filename) {
     qDebug() << "DataStructure Document Loaded.";
 }
 
-DataStructurePtr Document::activeDataStructure() const { return d->_activeDataStructure; }
+DataStructurePtr Document::activeDataStructure() const
+{
+    return d->_activeDataStructure;
+}
 
 QString Document::dataStructureTypeName() const
 {
-  return d->_dataStructureType->name();
+    return d->_dataStructureType->name();
 }
 
 QString Document::dataStructureInternalName() const
 {
-   return  d->_dataStructureType->internalName();
+    return  d->_dataStructureType->internalName();
 }
 
 
 DataStructurePluginInterface* Document::dataStructurePlugin() const
 {
-  return d->_dataStructureType;
+    return d->_dataStructureType;
 }
 
 // void Document::convertToDataStructure(QString newDataStructure){

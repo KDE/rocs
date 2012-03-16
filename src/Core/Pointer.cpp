@@ -26,9 +26,10 @@
 #include <KDebug>
 #include <QColor>
 
-class PointerPrivate{
+class PointerPrivate
+{
 public:
-    PointerPrivate(){}
+    PointerPrivate() {}
     boost::weak_ptr<Pointer> q; // self pointer
 
     DataPtr from;
@@ -53,14 +54,14 @@ public:
     QScriptEngine *engine;
 };
 
-PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) {
+PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType)
+{
     PointerPtr pi(new Pointer(parent, from, to, pointerType));
     pi->d->q = pi;
 
-    if ( from == to ) {
+    if (from == to) {
         from->addSelfPointer(pi);
-    }
-    else {
+    } else {
         from->addOutPointer(pi);
         to->addInPointer(pi);
         connect(to.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
@@ -69,13 +70,14 @@ PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, in
     return pi;
 }
 
-PointerPtr Pointer::getPointer() const {
+PointerPtr Pointer::getPointer() const
+{
     PointerPtr px(d->q);
     return px;
 }
 
 Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) :
-        QObject(parent.get()), d(new PointerPrivate())
+    QObject(parent.get()), d(new PointerPrivate())
 {
     d->from          = from;
     d->to            = to;
@@ -93,62 +95,70 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     connect(from.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
 }
 
-Pointer::~Pointer() {
+Pointer::~Pointer()
+{
     if (d->from == d->to) {
-        if (d->from){
-          kDebug() << "Removing from a loop node";
-          d->from->removePointer(getPointer(), Data::Self);
+        if (d->from) {
+            kDebug() << "Removing from a loop node";
+            d->from->removePointer(getPointer(), Data::Self);
         }
-    }
-    else {
+    } else {
         kDebug() << "Removing from not a loop node.";
-        if (d->from){
-          d->from->removePointer(getPointer(), Data::Out);
-          kDebug() << "Removed from the from node";
+        if (d->from) {
+            d->from->removePointer(getPointer(), Data::Out);
+            kDebug() << "Removed from the from node";
         }
-        if (d->to){
-          d->to->removePointer(getPointer(), Data::In);
-          kDebug() << "Removed from the to node";
+        if (d->to) {
+            d->to->removePointer(getPointer(), Data::In);
+            kDebug() << "Removed from the to node";
         }
     }
 }
 
-int Pointer::relativeIndex() const{
+int Pointer::relativeIndex() const
+{
     return d->relativeIndex;
 }
 
 
-DataStructurePtr Pointer::dataStructure() const{
+DataStructurePtr Pointer::dataStructure() const
+{
     return d->dataStructure;
 }
 
-DataPtr Pointer::from() const{
+DataPtr Pointer::from() const
+{
     return d->from;
 }
 
-DataPtr Pointer::to() const{
+DataPtr Pointer::to() const
+{
     return d->to;
 }
 
-const QString& Pointer::value() const{
+const QString& Pointer::value() const
+{
     return d->value;
 }
 
-const QString& Pointer::name() const{
+const QString& Pointer::name() const
+{
     return d->name;
 }
 
-int Pointer::pointerType() const {
+int Pointer::pointerType() const
+{
     return d->pointerType;
 }
 
-void Pointer::remove() {
+void Pointer::remove()
+{
     emit removed();
-    if (d->from){
+    if (d->from) {
         d->from->removePointer(getPointer());
         d->from.reset();
     }
-    if (d->to){
+    if (d->to) {
         d->to->removePointer(getPointer());
         d->to.reset();
     }
@@ -156,20 +166,24 @@ void Pointer::remove() {
 }
 
 
-bool Pointer::showName() {
+bool Pointer::showName()
+{
     return d->showName;
 }
 
-bool Pointer::showValue() {
+bool Pointer::showValue()
+{
     return d->showValue;
 }
 
-void Pointer::hideName(bool b) {
+void Pointer::hideName(bool b)
+{
     d->showName = b;
     emit changed();
 }
 
-void Pointer::hideValue(bool b) {
+void Pointer::hideValue(bool b)
+{
     d->showValue = b;
     emit changed();
 }
@@ -185,79 +199,94 @@ bool Pointer::isVisible() const
     return d->visible;
 }
 
-void Pointer::setValue(const QString& value){
+void Pointer::setValue(const QString& value)
+{
     d->value = value;
     emit changed();
 }
 
-void Pointer::setName(const QString& name){
+void Pointer::setName(const QString& name)
+{
     d->name = name;
     emit changed();
 }
 
-void Pointer::setColor(const QColor& color){
-  if (d->color != color){
-    d->color = color;
-    emit changed();
-  }
+void Pointer::setColor(const QColor& color)
+{
+    if (d->color != color) {
+        d->color = color;
+        emit changed();
+    }
 }
 
-const QColor& Pointer::color() const{
-     return d->color;
+const QColor& Pointer::color() const
+{
+    return d->color;
 }
 
-qreal Pointer::width () const {
+qreal Pointer::width() const
+{
     return d->width;
 }
 
-void Pointer::setWidth(qreal w) {
+void Pointer::setWidth(qreal w)
+{
     d->width = w;
     emit changed();
 }
 
-const QString& Pointer::style() const {
+const QString& Pointer::style() const
+{
     return d->style;
 }
 
-void Pointer::setStyle(const QString& s) {
+void Pointer::setStyle(const QString& s)
+{
     d->style = s;
     emit changed();
 }
 
-void Pointer::addDynamicProperty(QString property, QVariant value){
-  if (!setProperty(property.toUtf8(), value)  &&   value.isValid()){ //if is addeding and NOT is a Q_PROPERTY
-      DynamicPropertiesList::New()->addProperty(this, property);
-  }
+void Pointer::addDynamicProperty(QString property, QVariant value)
+{
+    if (!setProperty(property.toUtf8(), value)  &&   value.isValid()) { //if is addeding and NOT is a Q_PROPERTY
+        DynamicPropertiesList::New()->addProperty(this, property);
+    }
 }
 
-void Pointer::removeDynamicProperty(QString property){
-  addDynamicProperty(property.toUtf8(), QVariant::Invalid);
-  DynamicPropertiesList::New()->removeProperty(this, property);
+void Pointer::removeDynamicProperty(QString property)
+{
+    addDynamicProperty(property.toUtf8(), QVariant::Invalid);
+    DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
-QScriptValue Pointer::start() {
+QScriptValue Pointer::start()
+{
     // from==0 possible if this pointer is deleted
     if (!d->from)
         return QScriptValue();
     return d->from->scriptValue();
 }
 
-QScriptValue Pointer::end() {
-  // to==0 possible if this pointer is deleted
+QScriptValue Pointer::end()
+{
+    // to==0 possible if this pointer is deleted
     if (!d->to)
         return QScriptValue();
     return d->to->scriptValue();
 }
 
-void Pointer::setEngine(	QScriptEngine *engine ) {
+void Pointer::setEngine(QScriptEngine *engine)
+{
     d->engine = engine;
     d->scriptvalue = d->engine->newQObject(this);
 }
 
-QScriptValue Pointer::scriptValue() const {
+QScriptValue Pointer::scriptValue() const
+{
     return  d->scriptvalue;
 }
 
-void Pointer::self_remove() {
+void Pointer::self_remove()
+{
     remove();
 }

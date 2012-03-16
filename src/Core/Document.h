@@ -39,21 +39,21 @@ class DocumentPrivate;
 class ROCSLIB_EXPORT Document : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(    qreal left READ left WRITE setLeft)
-    Q_PROPERTY(    qreal right READ right WRITE setRight)
-    Q_PROPERTY(    qreal top READ top WRITE setTop)
-    Q_PROPERTY(    qreal bottom READ bottom WRITE setBottom)
+    Q_PROPERTY(qreal left READ left WRITE setLeft)
+    Q_PROPERTY(qreal right READ right WRITE setRight)
+    Q_PROPERTY(qreal top READ top WRITE setTop)
+    Q_PROPERTY(qreal bottom READ bottom WRITE setBottom)
 
 public:
     enum Type {Simple = 0, Oriented};
     enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
-    Document(   const QString& name,
-                qreal left=-200,
-                qreal right=200,
-                qreal top=-200,
-                qreal bottom=200,
-                QObject *parent = 0
+    Document(const QString& name,
+             qreal left = -200,
+             qreal right = 200,
+             qreal top = -200,
+             qreal bottom = 200,
+             QObject *parent = 0
             );
     Document(const Document& gd);
     ~Document();

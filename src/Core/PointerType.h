@@ -39,7 +39,8 @@ class DataStructure;
 */
 
 
-class ROCSLIB_EXPORT PointerType : public QObject {
+class ROCSLIB_EXPORT PointerType : public QObject
+{
     Q_OBJECT
 
 public:

@@ -36,7 +36,8 @@ class Pointer;
 class DataPrivate;
 class DataStructure;
 
-class DataPrivate{
+class DataPrivate
+{
 public:
     DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataType);
 
@@ -77,7 +78,8 @@ public:
     void empty(PointerList &list) ;
 };
 
-class  ROCSLIB_EXPORT Data : public QObject {
+class  ROCSLIB_EXPORT Data : public QObject
+{
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX)
     Q_PROPERTY(qreal y READ y WRITE setY)
@@ -91,7 +93,7 @@ class  ROCSLIB_EXPORT Data : public QObject {
 
 public:
     virtual ~Data();
-    enum ListType{In, Out, Self};
+    enum ListType {In, Out, Self};
 
     static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
     virtual DataPtr getData() const;
@@ -109,7 +111,7 @@ public:
     DataStructurePtr dataStructure() const;
 
     QScriptValue scriptValue() const;
-    virtual void setEngine(	QScriptEngine *_engine );
+    virtual void setEngine(QScriptEngine *_engine);
     QScriptValue createScriptArray(PointerList list);
 
     //getters
@@ -170,13 +172,13 @@ public  slots:
     QScriptValue input_pointers();
     QScriptValue output_pointers();
     QScriptValue loop_pointers();
-    QScriptValue connected_pointers( DataPtr n);
+    QScriptValue connected_pointers(DataPtr n);
 
 protected:
     Data(DataStructurePtr parent, int uniqueIdentifer, int dataType);
     template<typename T> static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
         DataPtr pi(new T(parent, uniqueIdentifier, dataType));
-        pi->d->q=pi;
+        pi->d->q = pi;
         return pi;
     }
 
@@ -202,28 +204,79 @@ signals:
 };
 
 
-inline const QVariant Data::value() const { return d->_value; }
-inline const QString& Data::name()  const { return d->_name;  }
-inline const QVariant  Data::color() const { return d->_color; }
+inline const QVariant Data::value() const
+{
+    return d->_value;
+}
+inline const QString& Data::name()  const
+{
+    return d->_name;
+}
+inline const QVariant  Data::color() const
+{
+    return d->_color;
+}
 
-inline boost::shared_ptr<DataItem>  Data::item() const { return d->_item; }
+inline boost::shared_ptr<DataItem>  Data::item() const
+{
+    return d->_item;
+}
 
-inline qreal Data::x() const { return d->_x; }
-inline qreal Data::y() const { return d->_y; }
+inline qreal Data::x() const
+{
+    return d->_x;
+}
+inline qreal Data::y() const
+{
+    return d->_y;
+}
 
-inline qreal Data::width() const { return d->_width; }
+inline qreal Data::width() const
+{
+    return d->_width;
+}
 
-inline const QString& Data::icon() const { return d->_icon; }
-inline const QString& Data::iconPackage() const {  return d-> _iconpackage;  }
+inline const QString& Data::icon() const
+{
+    return d->_icon;
+}
+inline const QString& Data::iconPackage() const
+{
+    return d-> _iconpackage;
+}
 
-inline PointerList& Data::in_pointers()   const { return d->_in_pointers;   }
-inline PointerList& Data::out_pointers()  const { return d->_out_pointers;  }
-inline PointerList& Data::self_pointers() const { return d->_self_pointers; }
+inline PointerList& Data::in_pointers()   const
+{
+    return d->_in_pointers;
+}
+inline PointerList& Data::out_pointers()  const
+{
+    return d->_out_pointers;
+}
+inline PointerList& Data::self_pointers() const
+{
+    return d->_self_pointers;
+}
 
-inline bool Data::showName() const { return d->_showName; }
-inline bool Data::showValue() const { return d->_showValue; }
-inline bool Data::useColor() const { return d->_useColor; }
-inline int Data::identifier() const { return d->_uniqueIdentifier; }
-inline int Data::dataType() const { return d->_dataType; }
+inline bool Data::showName() const
+{
+    return d->_showName;
+}
+inline bool Data::showValue() const
+{
+    return d->_showValue;
+}
+inline bool Data::useColor() const
+{
+    return d->_useColor;
+}
+inline int Data::identifier() const
+{
+    return d->_uniqueIdentifier;
+}
+inline int Data::dataType() const
+{
+    return d->_dataType;
+}
 
 #endif

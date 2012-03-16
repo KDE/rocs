@@ -36,7 +36,7 @@ class ROCSLIB_EXPORT ValueModifier
 public:
     ValueModifier();
     virtual ~ValueModifier();
-        
+
     /**
         * Assign integers in increasing order starting at 'start' to all nodes.
         *
@@ -45,7 +45,7 @@ public:
         * \return  void
         */
     void enumerate(QList<DataPtr> dataList, int start, bool overrideValues);
-    
+
     /**
         * Assign integers in increasing order starting at 'start' to all edges.
         *
@@ -54,10 +54,10 @@ public:
         * \return  void
         */
     void enumerate(QList<PointerPtr> pointers, int start, bool overrideValues);
-    
+
     /**
-        * Assign integers uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister 
-        * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without 
+        * Assign integers uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister
+        * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without
         * any operation.
         *
         * \param   list of data that shall get random integer values
@@ -67,10 +67,10 @@ public:
         * \return  void
         */
     void assignRandomIntegers(QList<DataPtr> dataList, int lowerLimit, int upperLimit, int seed, bool overrideValues);
-    
+
     /**
-        * Assign integers uniformly at random from range [lowerLimit,upperLimit] to edges. Using Mersenne-Twister 
-        * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without 
+        * Assign integers uniformly at random from range [lowerLimit,upperLimit] to edges. Using Mersenne-Twister
+        * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without
         * any operation.
         *
         * \param   list of pointers that shall get random integer values
@@ -80,10 +80,10 @@ public:
         * \return  void
         */
     void assignRandomIntegers(QList<PointerPtr> pointers, int lowerLimit, int upperLimit, int seed, bool overrideValues);
-    
+
     /**
-        * Assign float values uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister 
-        * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without 
+        * Assign float values uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister
+        * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without
         * any operation.
         *
         * \param   list of data that shall get random float values
@@ -93,10 +93,10 @@ public:
         * \return  void
         */
     void assignRandomReals(QList<DataPtr> dataList, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
-    
+
     /**
-        * Assign float values uniformly at random from range [lowerLimit,upperLimit] to edges. Using Mersenne-Twister 
-        * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without 
+        * Assign float values uniformly at random from range [lowerLimit,upperLimit] to edges. Using Mersenne-Twister
+        * random number generator, initialized by 'seed'. If not lowerLimit < upperLimit the function returns without
         * any operation.
         *
         * \param   list of pointers that shall get random float values

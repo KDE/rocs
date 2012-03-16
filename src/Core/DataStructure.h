@@ -42,9 +42,10 @@ class Data;
 class Pointer;
 class DataStructurePrivate;
 
-class DataStructurePrivate{
+class DataStructurePrivate
+{
 public:
-    DataStructurePrivate(){}
+    DataStructurePrivate() {}
 
     /**
      * self pointer to DataStructure
@@ -80,7 +81,8 @@ public:
     QMap<QString, QVariant> m_globalPropertiesPointer;
 };
 
-class ROCSLIB_EXPORT DataStructure : public QObject {
+class ROCSLIB_EXPORT DataStructure : public QObject
+{
     Q_OBJECT
 
     Q_PROPERTY(QString name READ name WRITE setName)
@@ -98,11 +100,11 @@ public:
     QPointF relativeCenter() const;
     Document *document() const;
 
-    void setReadOnly( bool r) ;
+    void setReadOnly(bool r) ;
     bool readOnly() const ;
 
     QScriptValue scriptValue() const;
-    virtual void setEngine( QScriptEngine *engine );
+    virtual void setEngine(QScriptEngine *engine);
     QScriptEngine *engine() const;
 
     /** register new type for data elements
@@ -160,7 +162,7 @@ public:
      * \param dataType is type of data elements to be returned
      * \return DataList of data elements of specified type
      */
-    const DataList dataList(int dataType=0) const;
+    const DataList dataList(int dataType = 0) const;
 
     /**
      * Gives list of pointers of specified type if type exists.
@@ -168,16 +170,16 @@ public:
      * \param pointerType is type of pointers to be returned
      * \return PointerList of pointers of specified type
      */
-    const PointerList pointers(int pointerType=0) const;
+    const PointerList pointers(int pointerType = 0) const;
     const QList<Group*> groups() const;
 
     /** @brief clear data that only is usefull for a type of data structure and that cannot be converted to others
     */
-    virtual void cleanUpBeforeConvert(){ }
+    virtual void cleanUpBeforeConvert() { }
 
 public slots:
-    virtual DataPtr addData(QString name, int dataType=0);
-    virtual DataList addDataList(DataList dataList, int dataType=0);
+    virtual DataPtr addData(QString name, int dataType = 0);
+    virtual DataList addDataList(DataList dataList, int dataType = 0);
 
     /**
      * Creates new pointer from data element "from" to data element "to" of
@@ -186,7 +188,7 @@ public slots:
      * \param to data element where the pointer ends
      * \param pointerType is the type of this pointer
      */
-    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
+    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType = 0);
 
     /**
      * get data by unique identifier
@@ -205,9 +207,9 @@ public slots:
     virtual void remove(Group *g);
 
     virtual Group *addGroup(const QString& name);
-    virtual QList< DataPtr > addDataList(QList< QPair<QString,QPointF> > dataList, int dataType=0);
-    virtual DataPtr addData(QString name, QPointF point, int dataType=0);
-    virtual PointerPtr addPointer(const QString& name_from, const QString& name_to, int pointerType=0);
+    virtual QList< DataPtr > addDataList(QList< QPair<QString, QPointF> > dataList, int dataType = 0);
+    virtual DataPtr addData(QString name, QPointF point, int dataType = 0);
+    virtual PointerPtr addPointer(const QString& name_from, const QString& name_to, int pointerType = 0);
 
     void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void removeDynamicProperty(const QString& property);
@@ -324,8 +326,8 @@ signals:
     void resizeRequest(Document::Border border);
 
 protected:
-    DataPtr addData(DataPtr data, int dataType=0);
-    PointerPtr addPointer(PointerPtr pointer, int pointerType=0);
+    DataPtr addData(DataPtr data, int dataType = 0);
+    PointerPtr addPointer(PointerPtr pointer, int pointerType = 0);
     int generateUniqueIdentifier();
 
 protected:
@@ -342,13 +344,13 @@ protected:
     void initialize();
     template<typename T> static DataStructurePtr create(Document *parent = 0) {
         DataStructurePtr pi(new T(parent));
-        pi->d->q=pi;
+        pi->d->q = pi;
         pi->initialize();
         return pi;
     }
     template<typename T> static DataStructurePtr create(DataStructurePtr other, Document *parent = 0) {
         DataStructurePtr pi(new T(parent));
-        pi->d->q=pi;
+        pi->d->q = pi;
         pi->initialize();
         pi->importStructure(other);
         return pi;
@@ -360,20 +362,41 @@ private:
 
 
 
-inline bool DataStructure::readOnly()                      const { return d->_readOnly;              }
-inline const QString& DataStructure::name()                const { return d->_name;                }
+inline bool DataStructure::readOnly() const
+{
+    return d->_readOnly;
+}
+inline const QString& DataStructure::name() const
+{
+    return d->_name;
+}
 
 /**
  * returns cached relative center of datastructure
  * center needs to be updated at resizes by using \see updateRelativeCenter()
  * \return QPointF center of datastructure
  */
-inline QPointF DataStructure::relativeCenter()             const { return d->_relativeCenter;      }
+inline QPointF DataStructure::relativeCenter() const
+{
+    return d->_relativeCenter;
+}
 
-inline QScriptValue DataStructure::scriptValue()           const { return d->_value;    }
-inline QScriptEngine *DataStructure::engine()              const { return d->_engine;   }
-inline Document *DataStructure::document()                 const { return d->_document; }
+inline QScriptValue DataStructure::scriptValue() const
+{
+    return d->_value;
+}
+inline QScriptEngine *DataStructure::engine() const
+{
+    return d->_engine;
+}
+inline Document *DataStructure::document() const
+{
+    return d->_document;
+}
 
-inline const QList<Group*>   DataStructure::groups()       const { return d->_groups;   }
+inline const QList<Group*>   DataStructure::groups() const
+{
+    return d->_groups;
+}
 
 #endif

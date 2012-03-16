@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -35,10 +35,11 @@ class Pointer;
 class DataStructurePluginInterface;
 
 
-class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
-  Q_OBJECT
+class ROCSLIB_EXPORT DataStructurePluginManager : public QObject
+{
+    Q_OBJECT
 
-  public:
+public:
     /** Accessor to the manager's instance.*/
     static DataStructurePluginManager * self();
 
@@ -48,10 +49,10 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     /** build a new DataStructure using the active plugin. */
     DataStructurePtr createNewDataStructure(Document* parent, const QString& pluginName = QString());
 
-    /** When the DataStructure pluin  is changed, 
-     * all the existent dataTypes must be 'rebuild' with the new DataStructure. 
-     * If is not possible to change to a new data structure without losing data, 
-     * then user should be asked to continue or not. 
+    /** When the DataStructure pluin  is changed,
+     * all the existent dataTypes must be 'rebuild' with the new DataStructure.
+     * If is not possible to change to a new data structure without losing data,
+     * then user should be asked to continue or not.
      * If user say to not continue, do not change it.
      */
     DataStructurePtr changeToDataStructure(DataStructurePtr dataStructure, Document* parent);
@@ -60,11 +61,11 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     const QStringList listOfDataStructures();
 
     /** return informations about plugin.*/
-    KPluginInfo pluginInfo ( DataStructurePluginInterface* plugin ) const;
+    KPluginInfo pluginInfo(DataStructurePluginInterface* plugin) const;
 
 
-    /** 
-     * \return the active plugin that will be used in convertions 
+    /**
+     * \return the active plugin that will be used in convertions
      * and to build news data structures.
      */
     DataStructurePluginInterface* actualPlugin();
@@ -72,44 +73,44 @@ class ROCSLIB_EXPORT DataStructurePluginManager : public QObject {
     QList < DataStructurePluginInterface*> pluginsList();
 
     /** \return the data Visible item for the data that will be drawed by canvas . */
-    QGraphicsItem * dataItem( DataPtr data);
-    
+    QGraphicsItem * dataItem(DataPtr data);
+
     /** \return the visible pointer item that will be drawed by canvas . */
     QGraphicsItem * pointerItem(PointerPtr pointer);
 
 
-    /** Create extra widgets to data properties window. 
+    /** Create extra widgets to data properties window.
      *If no extra properties are needed, a null pointer is returned.
      */
     QLayout * dataExtraProperties(DataPtr data, QWidget * parent);
-    
-    /** Create extra widgets to pointer properties window. 
+
+    /** Create extra widgets to pointer properties window.
      *If no extra properties are needed, a null pointer is returned.
      */
     QLayout * pointerExtraProperties(PointerPtr pointer, QWidget * parent);
-    
+
     /** Create extra widgets to the DataStructure properties window.
      * If no extra properties are needed, a null pointer is returned.
      * */
     QLayout * dataStructureExtraProperties(DataStructurePtr dataType, QWidget * parent);
 
-  signals:
-      
+signals:
+
     /** signal emited when is changing the plugin data structure to newPlugin */
     void changingDataStructurePlugin(const QString &pluginName);
 
-    /** this signal is emited at end of change of DataStructure. 
+    /** this signal is emited at end of change of DataStructure.
     *This is used to say that the change was sucessfull.
      */
     void DataStructurePluginChanged(const QString &newDataStructure);
 
-  public slots:
+public slots:
     /** used to set change the data structure. */
     void setDataStructurePlugin();
-    void setDataStructurePlugin( const QString &pluginName );
+    void setDataStructurePlugin(const QString &pluginName);
     QString pluginName() const;
 
-  private:
+private:
     DataStructurePluginManager();
 
     static DataStructurePluginManager * _self;

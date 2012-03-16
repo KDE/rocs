@@ -30,35 +30,40 @@
 
 static QtScriptBackend *self;
 
-static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/) {
+static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/)
+{
     self->debug(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
-static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engine*/) {
+static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engine*/)
+{
     self->output(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
-static QScriptValue interrupt_script(QScriptContext *context, QScriptEngine* /*engine*/) {
+static QScriptValue interrupt_script(QScriptContext *context, QScriptEngine* /*engine*/)
+{
     self->interrupt();
     return QScriptValue();
 }
 
-static QScriptValue include_script(QScriptContext *context, QScriptEngine* /*engine*/){
+static QScriptValue include_script(QScriptContext *context, QScriptEngine* /*engine*/)
+{
     self->includeFile(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
-void QtScriptBackend::stop() {
+void QtScriptBackend::stop()
+{
     if (!_engine) return;
 
     // abort possibly running execution
-    if ( _engine->isEvaluating() ){
+    if (_engine->isEvaluating()) {
         _engine->abortEvaluation();
     }
     // check for stepped execution
-    if( _engineSteps ) {
+    if (_engineSteps) {
         disconnect(this, SIGNAL(interrupted()), 0, 0);
         _engineSteps->action(QScriptEngineDebugger::ContinueAction)->trigger();
         _engineSteps->detach();
@@ -71,13 +76,14 @@ void QtScriptBackend::stop() {
     emit finished();
 }
 
-void QtScriptBackend::execute() {
+void QtScriptBackend::execute()
+{
 //     stop();
-    if (_engine){
+    if (_engine) {
 //         delete _engine;
     }
 
-    if (_engine->isEvaluating()){
+    if (_engine->isEvaluating()) {
         _engine->abortEvaluation();
     }
     _engine->collectGarbage();
@@ -97,28 +103,29 @@ void QtScriptBackend::execute() {
     QString error = _engine->evaluate(_script, i18n("Rocs Console script")).toString();
     if (_engine && _engine->hasUncaughtException()) {
         emit scriptError();
-        emit sendDebug("<b style=\"color: red\">"+error+"</b>");
-        emit sendDebug("<b style=\"color: red\">"+_engine->uncaughtExceptionBacktrace().join("\n")+"</b>");
+        emit sendDebug("<b style=\"color: red\">" + error + "</b>");
+        emit sendDebug("<b style=\"color: red\">" + _engine->uncaughtExceptionBacktrace().join("\n") + "</b>");
     }
     _engine->popContext();
     emit finished();
 }
 
-void QtScriptBackend::executeStep() {
+void QtScriptBackend::executeStep()
+{
     // prepare new engine if execution not running yet
-    if ( !_engine ) {
-        _engine = new QScriptEngine( this );
-        emit engineCreated( _engine );
+    if (!_engine) {
+        _engine = new QScriptEngine(this);
+        emit engineCreated(_engine);
     }
 
     // create step-executor if not present
-    if( !_engineSteps ) {
-        _engineSteps = new QScriptEngineDebugger( this );
-         _engineSteps->setAutoShowStandardWindow(false); // we do not want to have a debugger window
-        _engineSteps->attachTo( _engine );
+    if (!_engineSteps) {
+        _engineSteps = new QScriptEngineDebugger(this);
+        _engineSteps->setAutoShowStandardWindow(false); // we do not want to have a debugger window
+        _engineSteps->attachTo(_engine);
     }
 
-    if( !_engine->isEvaluating() ) {
+    if (!_engine->isEvaluating()) {
         _engine->globalObject().setProperty("debug",  engine()->newFunction(debug_script));
         _engine->globalObject().setProperty("output", engine()->newFunction(output_script));
         _engine->globalObject().setProperty("interrupt", engine()->newFunction(interrupt_script));
@@ -133,23 +140,25 @@ void QtScriptBackend::executeStep() {
         QString error = _engine->evaluate(_script).toString();
         if (_engine && _engine->hasUncaughtException()) {
             emit scriptError();
-            emit sendDebug("<b style=\"color: red\">"+error+"</b>");
+            emit sendDebug("<b style=\"color: red\">" + error + "</b>");
         }
     }
 
-    if( !_engine || !_engine->isEvaluating() ) {
+    if (!_engine || !_engine->isEvaluating()) {
         emit finished();
     }
 }
 
-bool QtScriptBackend::isRunning(){
-    if ((_engine) && (_engine->isEvaluating())){
+bool QtScriptBackend::isRunning()
+{
+    if ((_engine) && (_engine->isEvaluating())) {
         return true;
     }
     return _runningTool;
 }
 
-QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent){
+QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent)
+{
     self = this;
 
     _engine = new QScriptEngine();
@@ -158,23 +167,26 @@ QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent){
 }
 
 
-void QtScriptBackend::runTool(ToolsPluginInterface * plugin, Document *graphs){
+void QtScriptBackend::runTool(ToolsPluginInterface * plugin, Document *graphs)
+{
     _runningTool = true;
     _document = graphs;
     _script = plugin->run(graphs);
-    if ( !_script.isEmpty()){
+    if (!_script.isEmpty()) {
         execute();
     }
     _runningTool = false;
 }
 
-void QtScriptBackend::setScript(const QString& s,Document *graphs ) {
+void QtScriptBackend::setScript(const QString& s, Document *graphs)
+{
     _script = s;
     _document = graphs;
     kDebug() << "script Set" << _script;
 }
 
-void QtScriptBackend::createGraphList() {
+void QtScriptBackend::createGraphList()
+{
     QScriptValue graphList = _engine->newArray();
     _engine->globalObject().setProperty("graphs", graphList);
 
@@ -186,56 +198,62 @@ void QtScriptBackend::createGraphList() {
     }
 }
 
-void QtScriptBackend::loadFile(const QString& file) {
+void QtScriptBackend::loadFile(const QString& file)
+{
     _script.clear();
     QFile f(file);
-    if  (  !f.open(QIODevice::ReadOnly | QIODevice::Text ) ) {
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
         kDebug() << "File not found";
         return;
     }
 
-    while ( ! f.atEnd() ) {
+    while (! f.atEnd()) {
         QByteArray line = f.readLine();
         _script += line;
     }
     _script += '\n';
 }
 
-void QtScriptBackend::debug(const QString& str){
+void QtScriptBackend::debug(const QString& str)
+{
     emit sendDebug(str);
 }
 
-void QtScriptBackend::output(const QString& str){
+void QtScriptBackend::output(const QString& str)
+{
     emit sendOutput(str);
-    emit sendDebug("<b>"+str+"</b>");
+    emit sendDebug("<b>" + str + "</b>");
 }
 
-void QtScriptBackend::continueExecutionStep() {
-    if( _engine && _engineSteps && _engine->isEvaluating() ) {
-        _engineSteps->action( QScriptEngineDebugger::ContinueAction )->trigger();
+void QtScriptBackend::continueExecutionStep()
+{
+    if (_engine && _engineSteps && _engine->isEvaluating()) {
+        _engineSteps->action(QScriptEngineDebugger::ContinueAction)->trigger();
     }
 }
-void QtScriptBackend::includeFile(const QString & includedFile){
+void QtScriptBackend::includeFile(const QString & includedFile)
+{
     QString fileName = m_includeManager.seekFile(includedFile);
 
     if (m_includeManager.checkIfWasIncluded(fileName))
         return;
 
     QFile f(fileName);
-    if (f.open(QFile::ReadOnly)){
-        QString script = m_includeManager.include(f.readAll(), fileName.section('/',0,-2), fileName.section('/',-1));
-        _engine->currentContext()->setActivationObject( _engine->currentContext()->parentContext()->activationObject());
+    if (f.open(QFile::ReadOnly)) {
+        QString script = m_includeManager.include(f.readAll(), fileName.section('/', 0, -2), fileName.section('/', -1));
+        _engine->currentContext()->setActivationObject(_engine->currentContext()->parentContext()->activationObject());
         QString error = _engine->evaluate(script, includedFile).toString();
         if (_engine && _engine->hasUncaughtException()) {
             emit scriptError();
             emit sendDebug(i18n("<b style=\"color: red\"> Error in include file %1</b>").arg(includedFile));
-            emit sendDebug("<b style=\"color: red\">"+error+"</b>");
-            emit sendDebug("<b style=\"color: red\">"+_engine->uncaughtExceptionBacktrace().join("\n")+"</b>");
+            emit sendDebug("<b style=\"color: red\">" + error + "</b>");
+            emit sendDebug("<b style=\"color: red\">" + _engine->uncaughtExceptionBacktrace().join("\n") + "</b>");
         }
     }
 }
 
-void QtScriptBackend::interrupt(){
+void QtScriptBackend::interrupt()
+{
     if (!_engine->isEvaluating())
         return;
 

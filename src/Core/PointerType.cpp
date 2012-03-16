@@ -22,9 +22,10 @@
 #include <boost/weak_ptr.hpp>
 
 
-class PointerTypePrivate{
+class PointerTypePrivate
+{
 public:
-    PointerTypePrivate(){}
+    PointerTypePrivate() {}
     boost::weak_ptr<PointerType> q; // self pointer
 
     QString _name;
@@ -37,7 +38,8 @@ public:
 };
 
 
-PointerTypePtr PointerType::create(DataStructurePtr dataStructure, int identifier) {
+PointerTypePtr PointerType::create(DataStructurePtr dataStructure, int identifier)
+{
     PointerTypePtr pi(new PointerType(dataStructure, identifier));
     pi->d->q = pi;
 

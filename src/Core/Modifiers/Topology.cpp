@@ -48,7 +48,7 @@ Topology::~Topology()
 
 }
 
-void Topology::applyMinCutTreeAlignment(DataList dataList) 
+void Topology::applyMinCutTreeAlignment(DataList dataList)
 {
     // dataList must be at least of length 2, and two nodes cannot have crossing edges
     if (dataList.count() < 3)
@@ -65,11 +65,11 @@ void Topology::applyMinCutTreeAlignment(DataList dataList)
     }
     qSort(xList.begin(), xList.end());
     qSort(yList.begin(), yList.end());
-    topology_type topology( xList.first(), yList.first(), xList.last(), yList.last());
+    topology_type topology(xList.first(), yList.first(), xList.last(), yList.last());
 
     // create IDs for all nodes
-    QMap<Data*,int> node_mapping;
-    QMap<QPair<int,int>, PointerPtr > edge_mapping; // to map all edges back afterwards
+    QMap<Data*, int> node_mapping;
+    QMap<QPair<int, int>, PointerPtr > edge_mapping; // to map all edges back afterwards
     int counter = 0;
     foreach(DataPtr data, dataList) {
         node_mapping[data.get()] = counter++;
@@ -79,7 +79,7 @@ void Topology::applyMinCutTreeAlignment(DataList dataList)
     QVector<Edge> edges(ds->pointers().count());
 
     counter = 0;
-    foreach( PointerPtr p, ds->pointers() ){
+    foreach(PointerPtr p, ds->pointers()) {
         edges[counter++] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
     }
 
@@ -100,21 +100,22 @@ void Topology::applyMinCutTreeAlignment(DataList dataList)
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
     boost::fruchterman_reingold_force_directed_layout< topology_type, Graph, PositionMap >
-    (   graph,
-        positionMap,
-        topology,
-        boost::cooling(boost::linear_cooling<double>(100))
+    (graph,
+     positionMap,
+     topology,
+     boost::cooling(boost::linear_cooling<double>(100))
     );
 
     // put nodes at whiteboard as generated
     foreach(DataPtr data, dataList) {
         Vertex v = boost::vertex(node_mapping[data.get()], graph);
-        data->setX( positionMap[v][0] );
-        data->setY( positionMap[v][1] );
+        data->setX(positionMap[v][0]);
+        data->setY(positionMap[v][1]);
     }
 }
 
-void Topology::applyCircleAlignment(DataList dataList) {
+void Topology::applyCircleAlignment(DataList dataList)
+{
     PositionVec position_vec(dataList.count());
 
     // set box inside which we may reposition
@@ -126,12 +127,12 @@ void Topology::applyCircleAlignment(DataList dataList) {
     }
     qSort(xList.begin(), xList.end());
     qSort(yList.begin(), yList.end());
-    
-    qreal radius = fmax(abs(xList.first()-xList.last()),abs(yList.first()-yList.last()))/2;
+
+    qreal radius = fmax(abs(xList.first() - xList.last()), abs(yList.first() - yList.last())) / 2;
 
     // create IDs for all nodes
-    QMap<Data*,int> node_mapping;
-    QMap<QPair<int,int>, PointerPtr > edge_mapping; // to map all edges back afterwards
+    QMap<Data*, int> node_mapping;
+    QMap<QPair<int, int>, PointerPtr > edge_mapping; // to map all edges back afterwards
     int counter = 0;
     foreach(DataPtr data, dataList) {
         node_mapping[data.get()] = counter++;
@@ -141,7 +142,7 @@ void Topology::applyCircleAlignment(DataList dataList) {
     QVector<Edge> edges(ds->pointers().count());
 
     counter = 0;
-    foreach( PointerPtr p, ds->pointers() ){
+    foreach(PointerPtr p, ds->pointers()) {
         edges[counter++] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
     }
 
@@ -162,16 +163,16 @@ void Topology::applyCircleAlignment(DataList dataList) {
 
     // layout to circle
     boost::circle_graph_layout< Graph, PositionMap >
-    (   graph,
-        positionMap,
-        radius
+    (graph,
+     positionMap,
+     radius
     );
 
     // put nodes at whiteboard as generated
     foreach(DataPtr data, dataList) {
         Vertex v = boost::vertex(node_mapping[data.get()], graph);
-        data->setX( positionMap[v][0] );
-        data->setY( positionMap[v][1] );
+        data->setX(positionMap[v][0]);
+        data->setY(positionMap[v][1]);
     }
 }
 

@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2009-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -22,15 +22,16 @@
 #include <QObject>
 
 
-class Group : QObject{
+class Group : QObject
+{
     Q_OBJECT
 public:
-  Group(QObject *parent = 0);
-  void setName(const QString& name);
-  const QString& name() const;
-  
+    Group(QObject *parent = 0);
+    void setName(const QString& name);
+    const QString& name() const;
+
 private:
-  QString _name;
+    QString _name;
 };
 
 #endif

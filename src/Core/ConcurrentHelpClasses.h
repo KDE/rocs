@@ -25,89 +25,113 @@
 #include <boost/shared_ptr.hpp>
 
 struct DataColorSetted {
-  DataColorSetted(const QColor& c) : m_color(c){}
-  typedef void result_type;
-  void operator()(DataPtr d){  d->setColor(m_color);  }
-  const QColor& m_color;
+    DataColorSetted(const QColor& c) : m_color(c) {}
+    typedef void result_type;
+    void operator()(DataPtr d) {
+        d->setColor(m_color);
+    }
+    const QColor& m_color;
 };
 
 struct PointerColorSetted {
-  PointerColorSetted(const QColor& c) : m_color(c){}
-  typedef void result_type;
-  void operator()(PointerPtr d){ d->setColor(m_color); }
-  const QColor& m_color;
+    PointerColorSetted(const QColor& c) : m_color(c) {}
+    typedef void result_type;
+    void operator()(PointerPtr d) {
+        d->setColor(m_color);
+    }
+    const QColor& m_color;
 };
 
 struct DataDynamicPropertySetted {
-  DataDynamicPropertySetted(const QString& property, const QVariant& value) : m_property(property), m_value(value){}
-  typedef void result_type;
-  void operator()(DataPtr d){   d->addDynamicProperty(m_property, m_value);  }
-  const QString& m_property;
-  const QVariant& m_value;
+    DataDynamicPropertySetted(const QString& property, const QVariant& value) : m_property(property), m_value(value) {}
+    typedef void result_type;
+    void operator()(DataPtr d) {
+        d->addDynamicProperty(m_property, m_value);
+    }
+    const QString& m_property;
+    const QVariant& m_value;
 };
 
 struct PointerDynamicPropertySetted {
-  PointerDynamicPropertySetted(const QString& property, const QVariant& value) : m_property(property), m_value(value){}
-  typedef void result_type;
-  void operator()(PointerPtr d){  d->addDynamicProperty(m_property, m_value);  }
-  const QString& m_property;
-  const QVariant& m_value;
+    PointerDynamicPropertySetted(const QString& property, const QVariant& value) : m_property(property), m_value(value) {}
+    typedef void result_type;
+    void operator()(PointerPtr d) {
+        d->addDynamicProperty(m_property, m_value);
+    }
+    const QString& m_property;
+    const QVariant& m_value;
 };
 
 struct DataDynamicPropertyUnSetted {
-  DataDynamicPropertyUnSetted(const QString& property) : m_property(property) {}
-  typedef void result_type;
-  void operator()(DataPtr d){ d->removeDynamicProperty(m_property);   }
-  const QString& m_property;
+    DataDynamicPropertyUnSetted(const QString& property) : m_property(property) {}
+    typedef void result_type;
+    void operator()(DataPtr d) {
+        d->removeDynamicProperty(m_property);
+    }
+    const QString& m_property;
 };
 
 struct PointerDynamicPropertyUnSetted {
-  PointerDynamicPropertyUnSetted(const QString& property) : m_property(property){}
-  typedef void result_type;
-  void operator()(PointerPtr d){ d->removeDynamicProperty(m_property); }
-  const QString& m_property;
+    PointerDynamicPropertyUnSetted(const QString& property) : m_property(property) {}
+    typedef void result_type;
+    void operator()(PointerPtr d) {
+        d->removeDynamicProperty(m_property);
+    }
+    const QString& m_property;
 };
 
 struct DataNameVisibilitySetted {
-  DataNameVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type;
-  void operator()(DataPtr d){ d->setShowName(m_visibility); }
-  bool m_visibility;
+    DataNameVisibilitySetted(bool visibility) : m_visibility(visibility) {}
+    typedef void result_type;
+    void operator()(DataPtr d) {
+        d->setShowName(m_visibility);
+    }
+    bool m_visibility;
 };
 
 struct PointerNameVisibilitySetted {
-  PointerNameVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type;
-  void operator()(PointerPtr d){ d->hideName(m_visibility); }
-  bool m_visibility;
+    PointerNameVisibilitySetted(bool visibility) : m_visibility(visibility) {}
+    typedef void result_type;
+    void operator()(PointerPtr d) {
+        d->hideName(m_visibility);
+    }
+    bool m_visibility;
 };
 
 struct DataValueVisibilitySetted {
-  DataValueVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type;
-  void operator()(DataPtr d){ d->setShowValue(m_visibility); }
-  bool m_visibility;
+    DataValueVisibilitySetted(bool visibility) : m_visibility(visibility) {}
+    typedef void result_type;
+    void operator()(DataPtr d) {
+        d->setShowValue(m_visibility);
+    }
+    bool m_visibility;
 };
 
 struct PointerValueVisibilitySetted {
-  PointerValueVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type;
-  void operator()(PointerPtr d){ d->hideValue(m_visibility); }
-  bool m_visibility;
+    PointerValueVisibilitySetted(bool visibility) : m_visibility(visibility) {}
+    typedef void result_type;
+    void operator()(PointerPtr d) {
+        d->hideValue(m_visibility);
+    }
+    bool m_visibility;
 };
 
 struct DataVisibilitySetted {
-  DataVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type;
-  void operator()(DataPtr d){ d->setVisible(m_visibility); }
-  bool m_visibility;
+    DataVisibilitySetted(bool visibility) : m_visibility(visibility) {}
+    typedef void result_type;
+    void operator()(DataPtr d) {
+        d->setVisible(m_visibility);
+    }
+    bool m_visibility;
 };
 
 struct PointerVisibilitySetted {
-  PointerVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type;
-  void operator()(PointerPtr d){ d->setVisible(m_visibility); }
-  bool m_visibility;
+    PointerVisibilitySetted(bool visibility) : m_visibility(visibility) {}
+    typedef void result_type;
+    void operator()(PointerPtr d) {
+        d->setVisible(m_visibility);
+    }
+    bool m_visibility;
 };
 
 #endif

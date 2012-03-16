@@ -30,8 +30,9 @@ class Document;
 class ToolsPluginInterface;
 class QSignalSpy;
 
-class  ROCSLIB_EXPORT QtScriptBackend : public QObject{
-  Q_OBJECT
+class  ROCSLIB_EXPORT QtScriptBackend : public QObject
+{
+    Q_OBJECT
 public:
 //     QtScriptBackend();
     QtScriptBackend(QObject* parent = 0);
@@ -41,14 +42,18 @@ public:
     void debug(const QString& s);
     void output(const QString& s);
     void interrupt(); /** interrupts execution of the script **/
-    QScriptEngine *engine(){ return _engine; }
+    QScriptEngine *engine() {
+        return _engine;
+    }
 
     void includeFile(const QString&);
 
     /** return true if is evaluating a script or running a tool script. */
     bool isRunning();
 
-    IncludeManager& includeManager(){return m_includeManager;}
+    IncludeManager& includeManager() {
+        return m_includeManager;
+    }
 
 
 signals:

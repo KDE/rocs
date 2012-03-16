@@ -6,7 +6,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -29,12 +29,12 @@ class Document;
 
 class ROCSLIB_EXPORT DocumentManager : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
     QList<Document*> m_documents;
     Document * m_actualDocument;
 
 
-  public:
+public:
     static DocumentManager* self();
 
     virtual ~DocumentManager();
@@ -48,11 +48,11 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
 
     /** returns the document list */
     QList< Document* > documentList() const ;
-    
+
     int viewStyleDataNode();
     int viewStyleDataEdge();
 
-  public slots:
+public slots:
     void changeDocument(Document*);
 
     void changeDocument();
@@ -70,9 +70,9 @@ class ROCSLIB_EXPORT DocumentManager : public QObject
 
     void loadDocument(QString fileName = QString());
 
-  signals:
+signals:
     /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/
-    void activateDocument ();
+    void activateDocument();
     /** this signal is emited when actual active document is deactivate (by a removal or a change)*/
     void deactivateDocument(Document* doc);
     /** signal emited when a document was removed from list. if doc is the active document, both, deactivateDocument() and activeDocument() is called first */
@@ -83,7 +83,16 @@ private:
     static DocumentManager *_self;
 };
 
-inline Document* DocumentManager::document(const int i) const { return (i < m_documents.count() && i >= 0) ? m_documents.at(i) : 0; }
-inline Document* DocumentManager::activeDocument() const {   return m_actualDocument; }
-inline QList< Document* > DocumentManager::documentList() const {  return m_documents; }
+inline Document* DocumentManager::document(const int i) const
+{
+    return (i < m_documents.count() && i >= 0) ? m_documents.at(i) : 0;
+}
+inline Document* DocumentManager::activeDocument() const
+{
+    return m_actualDocument;
+}
+inline QList< Document* > DocumentManager::documentList() const
+{
+    return m_documents;
+}
 #endif // DOCUMENTMANAGER_H

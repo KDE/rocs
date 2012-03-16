@@ -19,8 +19,8 @@
 #include "DataStructurePluginInterface.h"
 #include "DataStructurePluginManager.h"
 
-DataStructurePluginInterface::DataStructurePluginInterface ( const KComponentData& /*instance*/, QObject* parent )
-: QObject ( parent )
+DataStructurePluginInterface::DataStructurePluginInterface(const KComponentData& /*instance*/, QObject* parent)
+    : QObject(parent)
 {
 }
 
@@ -29,19 +29,22 @@ DataStructurePluginInterface::~DataStructurePluginInterface()
 }
 
 
-QLayout* DataStructurePluginInterface::pointerExtraProperties ( PointerPtr arg1, QWidget* arg2 ) const {
+QLayout* DataStructurePluginInterface::pointerExtraProperties(PointerPtr arg1, QWidget* arg2) const
+{
     Q_UNUSED(arg1);
     Q_UNUSED(arg2);
     return 0;
 }
 
-QLayout* DataStructurePluginInterface::dataStructureExtraProperties ( DataStructurePtr arg1, QWidget* arg2 ) const {
+QLayout* DataStructurePluginInterface::dataStructureExtraProperties(DataStructurePtr arg1, QWidget* arg2) const
+{
     Q_UNUSED(arg1);
     Q_UNUSED(arg2);
     return 0;
 }
 
-QLayout* DataStructurePluginInterface::dataExtraProperties ( DataPtr arg1, QWidget* arg2 ) const {
+QLayout* DataStructurePluginInterface::dataExtraProperties(DataPtr arg1, QWidget* arg2) const
+{
     Q_UNUSED(arg1);
     Q_UNUSED(arg2);
     return 0;
@@ -50,8 +53,8 @@ QLayout* DataStructurePluginInterface::dataExtraProperties ( DataPtr arg1, QWidg
 
 QString DataStructurePluginInterface::name()
 {
-    if(DataStructurePluginManager::self()->pluginInfo(this).isValid()){
-      return DataStructurePluginManager::self()->pluginInfo(this).name();
+    if (DataStructurePluginManager::self()->pluginInfo(this).isValid()) {
+        return DataStructurePluginManager::self()->pluginInfo(this).name();
     }
     return QString();
 }
@@ -59,8 +62,8 @@ QString DataStructurePluginInterface::name()
 
 QString DataStructurePluginInterface::internalName()
 {
-        if(DataStructurePluginManager::self()->pluginInfo(this).isValid()){
-      return DataStructurePluginManager::self()->pluginInfo(this).pluginName();
+    if (DataStructurePluginManager::self()->pluginInfo(this).isValid()) {
+        return DataStructurePluginManager::self()->pluginInfo(this).pluginName();
     }
     return QString();
 }

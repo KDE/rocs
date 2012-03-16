@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -29,41 +29,41 @@ class Data;
 class DataStructure;
 class Pointer;
 
-enum DynamicPropertyType{
-      None,
-      Unique,
-      Multiple,
-      Global
+enum DynamicPropertyType {
+    None,
+    Unique,
+    Multiple,
+    Global
 };
 
 
 class ROCSLIB_EXPORT DynamicPropertiesList : public QObject
 {
-  Q_OBJECT
-  QMap< DataStructure*,  QMultiMap <QString, Data* > > _NodesProperties;
-  QMap< DataStructure*,  QMultiMap <QString, Pointer* > > _EdgesProperties;
-  QMultiMap <QString, DataStructure*> _GraphProperties;
+    Q_OBJECT
+    QMap< DataStructure*,  QMultiMap <QString, Data* > > _NodesProperties;
+    QMap< DataStructure*,  QMultiMap <QString, Pointer* > > _EdgesProperties;
+    QMultiMap <QString, DataStructure*> _GraphProperties;
 
-  static DynamicPropertiesList * self;
+    static DynamicPropertiesList * self;
 
-  DynamicPropertiesList(QObject* parent = 0);
+    DynamicPropertiesList(QObject* parent = 0);
 
 public:
 
-  static DynamicPropertiesList * New();
+    static DynamicPropertiesList * New();
 
-  void addProperty(QObject *obj,const QString& name);
-  void removeProperty(QObject *obj,const QString& name);
+    void addProperty(QObject *obj, const QString& name);
+    void removeProperty(QObject *obj, const QString& name);
 
-  DynamicPropertyType type(QObject *obj,const QString& name);
-  const QString typeInText(QObject* obj,const QString& name);
+    DynamicPropertyType type(QObject *obj, const QString& name);
+    const QString typeInText(QObject* obj, const QString& name);
 
 //   const QStringList properties (QObject * obj);
 
-  void clear(DataStructure * dataStructure = 0);
+    void clear(DataStructure * dataStructure = 0);
 
-  /** Change property name in all objects from same graph of object.*/
-  void changePropertyName(QString name, QString newName, QObject* object);
+    /** Change property name in all objects from same graph of object.*/
+    void changePropertyName(QString name, QString newName, QObject* object);
 
 
 };

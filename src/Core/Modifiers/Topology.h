@@ -35,34 +35,34 @@
 #include "Rocs_Typedefs.h"
 
 /** \brief this class provides topology modifiers for data structures
- * 
- * Methods of this class either can be applied to data structures to 
+ *
+ * Methods of this class either can be applied to data structures to
  * make unique changes or connected to specific re-format signals to
  * apply a given topology after every change of the structure.
  */
 class ROCSLIB_EXPORT Topology
 {
-    typedef boost::adjacency_list<boost::listS, boost::vecS, boost::undirectedS,
-        boost::property<boost::vertex_name_t, std::string> >
-        Graph;
+    typedef boost::adjacency_list < boost::listS, boost::vecS, boost::undirectedS,
+            boost::property<boost::vertex_name_t, std::string> >
+            Graph;
     typedef boost::rectangle_topology<> topology_type;
     typedef topology_type::point_type point_type;
     typedef QVector<point_type> PositionVec;
-    typedef boost::iterator_property_map<PositionVec::iterator,
-        boost::property_map<Graph, boost::vertex_index_t>::type> 
-        PositionMap;
+    typedef boost::iterator_property_map < PositionVec::iterator,
+            boost::property_map<Graph, boost::vertex_index_t>::type >
+            PositionMap;
     typedef boost::graph_traits<Graph>::vertex_descriptor Vertex;
     typedef QPair<int, int> Edge;
 
 public:
     Topology();
     virtual ~Topology();
- 
+
     /** \brief applies Fruchterman-Reingold cut minimization
-     * 
+     *
      * For the given data set this algorithm applies the Boost implementation
      * of the Frutherman-Reingold force directed layout algorithm to minimize
-     * crossing edges. Data must be element of the same data structure. The 
+     * crossing edges. Data must be element of the same data structure. The
      * crossings of all present edges contained in this data structure are
      * minimized. This method directly modifies the data.
      * \param dataList is the list of data
@@ -71,7 +71,7 @@ public:
     void applyMinCutTreeAlignment(DataList dataList);
 
     /** \brief applies Circle topology to data set
-     * 
+     *
      * For the given data set this algorithm applies the Boost implementation
      * to create a circle layout.
      * \param dataList is the list of data

@@ -48,7 +48,8 @@ class DataStructure;
 * new properties can be added on the fly via pointer.addProp(propertyname) , and accessed by pointer.propertyName.
 */
 
-class ROCSLIB_EXPORT Pointer : public QObject {
+class ROCSLIB_EXPORT Pointer : public QObject
+{
     Q_OBJECT
 
     /*! all properties are accessible from the scripting engine via .propertyName */
@@ -90,19 +91,19 @@ public:
     /*! if qtscript is enabled for this rocs,
     this method will set the engine for this single object
     \p engine the QScriptEngine that will work on the object */
-    void setEngine(	QScriptEngine *engine );
+    void setEngine(QScriptEngine *engine);
 
 
 public  slots:
     /*! return the first datum of this pointer
       \return Data* pointer for the first datum of this pointer.
     */
-     DataPtr from() const;
+    DataPtr from() const;
 
     /*! return the second datum of this pointer
       \return Data* pointer for the second datum of this pointer.
     */
-     DataPtr to() const ;
+    DataPtr to() const ;
 
     /*! return the value of this pointer
     \return the value of the pointer.
@@ -111,7 +112,7 @@ public  slots:
 
     /*! sets the value attribute of this pointer
     \p s the new value of this pointer. */
-    void setValue (const QString& s);
+    void setValue(const QString& s);
 
     /*! returns the name attribute of the pointer.
       \return the name of the pointer.
@@ -121,7 +122,7 @@ public  slots:
     /*! sets the name attribute of the pointer
       \p s the new name of this pointer
     */
-    void setName (const QString& s) ;
+    void setName(const QString& s) ;
 
     /*! gets the color attribute of the pointer
       \return the string value of the pointer.
@@ -139,7 +140,7 @@ public  slots:
      */
     int pointerType() const;
 
-    qreal width () const;
+    qreal width() const;
     void setWidth(qreal w);
 
     const QString& style() const;
@@ -186,7 +187,7 @@ protected:
     \p to the second data element
     \p pointerType the type of this pointer (default is 0)
     */
-    Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType=0);
+    Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType = 0);
 
 private:
     boost::shared_ptr<PointerPrivate> const d;
