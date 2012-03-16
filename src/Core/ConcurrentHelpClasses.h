@@ -96,6 +96,13 @@ struct PointerValueVisibilitySetted {
   bool m_visibility;
 };
 
+struct DataVisibilitySetted {
+  DataVisibilitySetted(bool visibility) : m_visibility(visibility){}
+  typedef void result_type;
+  void operator()(DataPtr d){ d->setVisible(m_visibility); }
+  bool m_visibility;
+};
+
 struct PointerVisibilitySetted {
   PointerVisibilitySetted(bool visibility) : m_visibility(visibility){}
   typedef void result_type;

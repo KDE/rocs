@@ -527,6 +527,8 @@ void DataStructure::setDataValueVisibility(bool visible, int dataType){
 
 void DataStructure::setDataVisibility(bool visible, int dataType)
 {
+    // set visibility of data elements
+    QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataVisibilitySetted(visible));
     // TODO
 }
 

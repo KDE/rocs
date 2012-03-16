@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -32,9 +32,9 @@
 #include <DataStructure.h>
 #include "GraphicsLayout.h"
 
-QMap<QString, QSvgRenderer*> DataItem::_renders;    
+QMap<QString, QSvgRenderer*> DataItem::_renders;
 
-DataItem::DataItem(DataPtr n) 
+DataItem::DataItem(DataPtr n)
 : QGraphicsSvgItem(0)
 ,_data(n)
 ,_iconPackage(n->iconPackage())
@@ -53,14 +53,15 @@ DataItem::DataItem(DataPtr n)
     connect(n.get(), SIGNAL(posChanged(QPointF)), this, SLOT(updatePos()));
     connect(n.get(), SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateName()));
     connect(n.get(), SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateValue()));
+    connect(n.get(), SIGNAL(visibilityChanged(bool)), this, SLOT(updateVisibility(bool)));
     connect(n.get(), SIGNAL(useColorChanged(bool)), this, SLOT(updateColor()));
     connect(n.get(), SIGNAL(widthChanged(double)), this, SLOT(updateSize()));
-    
+
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateName()));
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateValue()));
     connect(n.get(), SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateName()));
     connect(n.get(), SIGNAL(nameVisibilityChanged(bool)), this, SLOT(updateValue()));
-    
+
     setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     setZValue(1);
     setFlag(ItemIsSelectable, true);
@@ -75,12 +76,12 @@ DataItem::~DataItem()
 
 void DataItem::setupNode(){
     updateName();
-    updateValue();  
+    updateValue();
     updateRenderer();
     updateIcon();
     updateColor();
-    updateSize(); 
-    updatePos(); 
+    updateSize();
+    updatePos();
     update();
 }
 
@@ -118,6 +119,21 @@ void DataItem::updateIcon(){
     }
 }
 
+void DataItem::updateVisibility(bool visible)
+{
+    if(visible==true) {
+        this->show();
+        _name->setVisible(_data->showName());
+        _value->setVisible(_data->showValue());
+    }
+    else {
+        this->hide();
+        _value->setVisible(false);
+        _name->setVisible(false);
+    }
+}
+
+
 void DataItem::updateColor(){
     QColor c(_data->color().value<QColor>());
     if (!_data->useColor()){
@@ -128,7 +144,7 @@ void DataItem::updateColor(){
         _colorizer = 0;
         return;
     }
-    
+
    delete _colorizer;
     _colorizer = new QGraphicsColorizeEffect();
     _colorizer->setColor( c );
@@ -136,7 +152,7 @@ void DataItem::updateColor(){
     _name->setBrush(QBrush(c));
     _value->setBrush(QBrush(c));
 }
-    
+
 void DataItem::updateName(){
     if ( !_name ){
         _name = new QGraphicsSimpleTextItem(i18n("%1", _data->name()));
@@ -146,18 +162,18 @@ void DataItem::updateName(){
     }else if (_name->text() != _data->name()){
         _name->setText(i18n("%1",_data->name()));
     }
-   
+
     int style = GraphicsLayout::self()->viewStyleDataNode();
-    
+
     qreal dataWidth = boundingRect().width() * scale();
-    
+
     qreal x =  pos().x();
     if ( style == ConfigureDefaultProperties::CENTER ){
-        x  += ((dataWidth > _name->boundingRect().width()+10)  
+        x  += ((dataWidth > _name->boundingRect().width()+10)
             ? ((dataWidth - _name->boundingRect().width())/4)
             : dataWidth + 30);
     }
-    
+
     qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? + 15 - (dataWidth/2)
                           : ( style == ConfigureDefaultProperties::BELOW ) ? 25 + (dataWidth/2)
                           : 0 );
@@ -167,7 +183,7 @@ void DataItem::updateName(){
     if (_value && _value->isVisible()){
         y +=  (( style == ConfigureDefaultProperties::ABOVE ) ? -20 :  20 );
     }
-    _name->setPos(x,y);    
+    _name->setPos(x,y);
 }
 
 QGraphicsSimpleTextItem* DataItem::name() const
@@ -181,7 +197,7 @@ QGraphicsSimpleTextItem* DataItem::value() const
 }
 
 void DataItem::updateValue(){
-    if ( !_value ){ 
+    if ( !_value ){
         _value = new QGraphicsSimpleTextItem(i18n("v=%1", _data->value().toString()));
         _value->setFlags(ItemIgnoresTransformations);
         _value->setFont(_font);
@@ -189,14 +205,14 @@ void DataItem::updateValue(){
     } else if (QVariant(_value->text()) != _data->value().toString()){
         _value ->setText(i18n("v=%1", _data->value().toString()));
     }
-    
+
     int style = GraphicsLayout::self()->viewStyleDataNode();
-    
+
     qreal dataWidth = boundingRect().width() * scale();
-    
+
     qreal x =  pos().x();
     if ( style == ConfigureDefaultProperties::CENTER ){
-        x  += ((dataWidth > _value->boundingRect().width()+10)  
+        x  += ((dataWidth > _value->boundingRect().width()+10)
             ? ((dataWidth - _value->boundingRect().width())/4)
             : dataWidth + 30);
     }

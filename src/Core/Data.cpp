@@ -42,6 +42,7 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataT
 ,_end(true)
 ,_showName(parent->dataType(dataType)->isNameVisible())
 ,_showValue(parent->dataType(dataType)->isValueVisible())
+,_visible(parent->dataType(dataType)->isVisible())
 ,_useColor(false)
 ,_dataStructure(parent)
 ,_uniqueIdentifier(uniqueIdentifer)
@@ -122,6 +123,19 @@ void Data::setUseColor(bool b){
         emit useColorChanged(b);
     }
 }
+
+bool Data::isVisible() const
+{
+    return d->_visible;
+}
+
+
+void Data::setVisible(bool visible)
+{
+    d->_visible = visible;
+    emit visibilityChanged(visible);
+}
+
 
 void Data::setIconPackage(const QString& s){
    d-> _iconpackage = s;

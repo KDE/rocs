@@ -57,6 +57,7 @@ public:
     bool _end;
     bool _showName;
     bool _showValue;
+    bool _visible;
     bool _useColor;
 
     DataStructurePtr _dataStructure;
@@ -122,6 +123,7 @@ public:
     const QString& iconPackage() const;
     bool showName() const;
     bool showValue() const;
+    bool isVisible() const;
     bool useColor() const;
     boost::shared_ptr<DataItem> item() const;   //TODO really needed?
     int identifier() const;
@@ -159,6 +161,7 @@ public  slots:
     void setShowName(bool b);
     void setShowValue(bool b);
     void setUseColor(bool b = true);
+    void setVisible(bool visible);
     void setValue(const QString& v);
     void setDataItem(boost::shared_ptr<DataItem> item);
 
@@ -194,6 +197,7 @@ signals:
     void iconPackageChanged(const QString& i);
     void nameVisibilityChanged(bool b);
     void valueVisibilityChanged(bool b);
+    void visibilityChanged(bool visible);
     void useColorChanged(bool b);
 };
 
