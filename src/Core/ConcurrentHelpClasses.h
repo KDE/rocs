@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -63,36 +63,43 @@ struct DataDynamicPropertyUnSetted {
 
 struct PointerDynamicPropertyUnSetted {
   PointerDynamicPropertyUnSetted(const QString& property) : m_property(property){}
-  typedef void result_type; 
+  typedef void result_type;
   void operator()(PointerPtr d){ d->removeDynamicProperty(m_property); }
   const QString& m_property;
 };
 
 struct DataNameVisibilitySetted {
   DataNameVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type; 
+  typedef void result_type;
   void operator()(DataPtr d){ d->setShowName(m_visibility); }
   bool m_visibility;
 };
 
 struct PointerNameVisibilitySetted {
   PointerNameVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type; 
+  typedef void result_type;
   void operator()(PointerPtr d){ d->hideName(m_visibility); }
   bool m_visibility;
 };
 
 struct DataValueVisibilitySetted {
   DataValueVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type; 
+  typedef void result_type;
   void operator()(DataPtr d){ d->setShowValue(m_visibility); }
   bool m_visibility;
 };
 
 struct PointerValueVisibilitySetted {
   PointerValueVisibilitySetted(bool visibility) : m_visibility(visibility){}
-  typedef void result_type; 
+  typedef void result_type;
   void operator()(PointerPtr d){ d->hideValue(m_visibility); }
+  bool m_visibility;
+};
+
+struct PointerVisibilitySetted {
+  PointerVisibilitySetted(bool visibility) : m_visibility(visibility){}
+  typedef void result_type;
+  void operator()(PointerPtr d){ d->setVisible(m_visibility); }
   bool m_visibility;
 };
 

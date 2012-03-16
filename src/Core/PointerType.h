@@ -50,12 +50,14 @@ public:
     int identifier() const;
     bool isNameVisible() const;
     bool isValueVisible() const;
+    bool isVisible() const;
     QColor defaultColor() const;
 
 public slots:
     void setName(QString name);
     void setNameVisible(bool visible);
     void setValueVisible(bool visible);
+    void setVisible(bool visible);
     void setDefaultColor(QColor color);
 
 protected:

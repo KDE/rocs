@@ -42,6 +42,7 @@ public:
 
     bool showName;
     bool showValue;
+    bool visible;
 
     QString style;
     qreal width;
@@ -78,6 +79,7 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
 {
     d->from          = from;
     d->to            = to;
+    d->visible       = true;
     d->dataStructure = parent;
     d->color         = d->dataStructure->pointerType(pointerType)->defaultColor();
     d->showName      = d->dataStructure->pointerType(pointerType)->isNameVisible();
@@ -170,6 +172,17 @@ void Pointer::hideName(bool b) {
 void Pointer::hideValue(bool b) {
     d->showValue = b;
     emit changed();
+}
+
+void Pointer::setVisible(bool visible)
+{
+    d->visible = visible;
+    emit changed();
+}
+
+bool Pointer::isVisible() const
+{
+    return d->visible;
 }
 
 void Pointer::setValue(const QString& value){

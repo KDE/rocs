@@ -257,6 +257,15 @@ public slots:
     void setDataValueVisibility(bool visible, int dataType);
 
     /**
+     * Set all data items for all data elements of given \param dataType to the given value of \param visible.
+     * This is a fast implementation that starts several threads for updating all data elements in parallel.
+     *
+     * \param visible must be true if data item shall be shown, false if hidden
+     * \param dataType is the identifier of the data type for that this function has affect.
+     */
+    void setDataVisibility(bool visible, int dataType);
+
+    /**
      * Set all colors of all data of given \param dataType to the given value of \param color.
      * This is a fast implementation that starts several threads for updating all data types in parallel.
      *
@@ -282,6 +291,16 @@ public slots:
      * \param pointerType is the identifier of the pointer type for that this function has affect.
      */
     void setPointerValueVisibility(bool visible, int pointerType);
+
+    /**
+     * Set all pointer items for pointers of given \param pointerType to the given value of \param visible.
+     * This is a fast implementation that starts several threads for updating all pointers in parallel.
+     *
+     * \param visible must be true if pointer shall be shown, false if hidden
+     * \param pointerType is the identifier of the pointer type for that this function has affect.
+     */
+    void setPointerVisibility(bool visible, int pointerType);
+
 
 // #ifdef USING_QTSCRIPT
 //     QScriptValue list_data();

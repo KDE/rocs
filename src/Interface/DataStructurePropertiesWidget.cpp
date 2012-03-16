@@ -230,18 +230,19 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     pointerTypeShowValue->setToolTip(i18n("Show values of pointers"));
     pointerTypeShowValue->setFixedWidth(24);
 
-//     KPushButton* pointerTypeDisplay = new KPushButton(this);
-//     pointerTypeDisplay->setIcon(KIcon("rocseyeblack"));
-//     pointerTypeDisplay->setCheckable(true);
-//     pointerTypeDisplay->setChecked(true);
-//     pointerTypeDisplay->setFixedWidth(24);
+    KPushButton* pointerTypeVisible = new KPushButton(this);
+    pointerTypeVisible->setIcon(KIcon("rocseyeblack"));
+    pointerTypeVisible->setCheckable(true);
+    pointerTypeVisible->setChecked(true);
+    pointerTypeVisible->setToolTip(i18n("Set visibility of pointers"));
+    pointerTypeVisible->setFixedWidth(24);
 
     pointerPropertyWidget->setLayout(pointerPropertyLayout);
     pointerPropertyLayout->addWidget(pointerElementName, 1, 1);
     pointerPropertyLayout->addWidget(_pointerTypeColor, 1, 2);
     pointerPropertyLayout->addWidget(pointerTypeShowName, 1, 3);
     pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 4);
-// //     _dataTypeProperties->addWidget(pointerTypeDisplay,2,5);
+    pointerPropertyLayout->addWidget(pointerTypeVisible,1,5);
 
     //TODO add to specific widget for pointers
     _typeProperties->addWidget(pointerPropertyWidget);
@@ -252,6 +253,8 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
         dataStructure->pointerType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
     connect(_pointerTypeColor, SIGNAL(activated(QColor)),
         dataStructure->pointerType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
+    connect(pointerTypeVisible, SIGNAL(toggled(bool)),
+        dataStructure->pointerType(typeIdentifier).get(), SLOT(setVisible(bool)));
 
     _pointerTypeWidgets.insert(typeIdentifier, pointerPropertyWidget);
 

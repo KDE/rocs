@@ -156,10 +156,13 @@ public  slots:
     */
     void removeDynamicProperty(QString property);
 
+    // TODO coding style for visibility functions
     bool showName();
     bool showValue();
     void hideName(bool b);
     void hideValue(bool b);
+    void setVisible(bool visible);
+    bool isVisible() const;
 
     /*! this method can be used inside of the script interface.
     \return the first datum of this pointer.

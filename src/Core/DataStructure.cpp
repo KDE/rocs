@@ -525,6 +525,10 @@ void DataStructure::setDataValueVisibility(bool visible, int dataType){
     QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataValueVisibilitySetted(visible));
 }
 
+void DataStructure::setDataVisibility(bool visible, int dataType)
+{
+    // TODO
+}
 
 void DataStructure::setPointerNameVisibility(bool visible, int pointerType){
     QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerNameVisibilitySetted(visible));
@@ -535,6 +539,10 @@ void DataStructure::setPointerValueVisibility(bool visible, int pointerType){
     QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerValueVisibilitySetted(visible));
 }
 
+void DataStructure::setPointerVisibility(bool visible, int pointerType)
+{
+    QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerVisibilitySetted(visible));
+}
 
 void DataStructure::setEngine(	QScriptEngine *engine ) {
     d-> _engine = engine;

@@ -32,6 +32,7 @@ public:
     QColor _defaultColor;
     bool _valueVisibility;
     bool _nameVisibility;
+    bool _visibility;
     DataStructurePtr _dataStructure;
 };
 
@@ -51,6 +52,7 @@ PointerType::PointerType(DataStructurePtr dataStructure, int identifier):
     d->_defaultColor = QColor("gray");
     d->_nameVisibility = false;
     d->_valueVisibility = true;
+    d->_visibility = true;
     d->_dataStructure = dataStructure;
 }
 
@@ -102,6 +104,18 @@ bool PointerType::isValueVisible() const
     return d->_valueVisibility;
 }
 
+
+void PointerType::setVisible(bool visible)
+{
+    d->_visibility = visible;
+    d->_dataStructure->setPointerVisibility(visible, d->_identifier);
+}
+
+
+bool PointerType::isVisible() const
+{
+    return d->_visibility;
+}
 
 void PointerType::setDefaultColor(QColor color)
 {

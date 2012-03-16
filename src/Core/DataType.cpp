@@ -32,6 +32,7 @@ public:
     int _identifier;
     bool _valueVisibility;
     bool _nameVisibility;
+    bool _visibility;
     DataStructurePtr _dataStructure;
 };
 
@@ -51,6 +52,7 @@ DataType::DataType(DataStructurePtr dataStructure, int identifier):
     d->_defaultColor = QColor("blue");
     d->_nameVisibility = true;
     d->_valueVisibility = true;
+    d->_visibility = true;
     d->_dataStructure = dataStructure;
 }
 
@@ -101,6 +103,18 @@ bool DataType::isValueVisible() const
     return d->_valueVisibility;
 }
 
+
+void DataType::setVisible(bool visible)
+{
+    d->_visibility = visible;
+    d->_dataStructure->setDataVisibility(visible, d->_identifier);
+}
+
+
+bool DataType::isVisible() const
+{
+    return d->_visibility;
+}
 
 void DataType::setDefaultColor(QColor color)
 {

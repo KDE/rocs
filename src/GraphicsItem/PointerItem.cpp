@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008      Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -60,7 +60,7 @@ void PointerItem::connectSignals() {
     connect (_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect (_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
     connect (_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
-    
+
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
 }
 
@@ -102,6 +102,7 @@ void PointerItem::updateAttributes() {
     setPen(QPen(QBrush(QColor(_pointer->color())), _pointer->width(), s,Qt::RoundCap, Qt::RoundJoin));
     _value->hide();
     _name->hide();
+    this->hide();
     QPointF middle = path().pointAtPercent(0.5);
     _name->setText(_pointer->name());
     _value->setText(_pointer->value());
@@ -117,19 +118,24 @@ void PointerItem::updateAttributes() {
         _value->setPos(middle.x() - _name->boundingRect().width()/2, middle.y()-14);
     }
 
-    if (_pointer->showValue()) {
-        _value->show();
+    // overall visibility for pointer
+    if( _pointer->isVisible()) {
+        if (_pointer->showValue()) {
+            _value->show();
+        }
+        if (_pointer->showName()) {
+            _name->show();
+        }
+        this->show();
     }
-    if (_pointer->showName()) {
-        _name->show();
-    }
+
     update();
 }
 
 void PointerItem::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget){
   Q_UNUSED(option);
   Q_UNUSED(widget);
-  
+
   if ( isSelected() ){
     painter->setPen(QPen(Qt::black, _pointer->width(),  Qt::DotLine));
   }
