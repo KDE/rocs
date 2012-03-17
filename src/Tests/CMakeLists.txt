@@ -12,11 +12,11 @@ set (TestDataStructure_SRCS
 kde4_add_executable(TestDataStructure ${TestDataStructure_SRCS} )
 target_link_libraries( TestDataStructure
     rocslib
-  ${KDE4_KROSSUI_LIBS}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTTEST_LIBRARY}
-  ${KDE4_KDECORE_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
+    ${KDE4_KROSSUI_LIBS}
+    ${QT_QTGUI_LIBRARY}
+    ${QT_QTTEST_LIBRARY}
+    ${KDE4_KDECORE_LIBS}
+    ${QT_QTSCRIPT_LIBRARY}
 )
 add_test(TestDataStructure TestDataStructure)
 
@@ -43,14 +43,29 @@ set(rocs_KCFGS ../settings.kcfgc)
 kde4_add_kcfg_files(rocs_Settings_SRCS_TEST ${rocs_KCFGS} )
 kde4_add_executable( TestIncludeManager ${test_IncludeManager_SRC} ${rocs_Settings_SRCS_TEST})
 target_link_libraries( TestIncludeManager
-        # ${KDE4_KROSSUI_LIBS}
-        ${QT_QTTEST_LIBRARY}
-        ${KDE4_KDECORE_LIBS}
-        ${QT_QTSCRIPT_LIBRARY}
-        ${KDE4_KIO_LIBS}
+    # ${KDE4_KROSSUI_LIBS}
+    ${QT_QTTEST_LIBRARY}
+    ${KDE4_KDECORE_LIBS}
+    ${QT_QTSCRIPT_LIBRARY}
+    ${KDE4_KIO_LIBS}
 )
 add_test(TestIncludeManager TestIncludeManager)
 
+
+# loading and saving tests
+set (TestLoadSave_SRCS
+    TestLoadSave.cpp
+)
+kde4_add_executable(TestLoadSave ${TestLoadSave_SRCS} )
+target_link_libraries( TestLoadSave
+    rocslib
+    ${KDE4_KROSSUI_LIBS}
+    ${QT_QTGUI_LIBRARY}
+    ${QT_QTTEST_LIBRARY}
+    ${KDE4_KDECORE_LIBS}
+    ${QT_QTSCRIPT_LIBRARY}
+)
+add_test(TestLoadSave TestLoadSave)
 
 
 #Data structure Plugins

@@ -101,6 +101,7 @@ void TestDataStructure::pointerAddDeleteTest()
     QVERIFY2(ds->pointers().size() == 5, "ERROR: data deletion did not remove its both pointers" );
 }
 
+
 void TestDataStructure::createSimpleGraph()
 {
     QMap<QString, DataPtr> dataList;
@@ -131,6 +132,7 @@ void TestDataStructure::createSimpleGraph()
         QVERIFY2( n->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2" );
     }
 }
+
 
 void TestDataStructure::dataTypesTest()
 {
@@ -331,65 +333,5 @@ void TestDataStructure::pointerTypesTest()
 //     results = engine->engine()->evaluate(script);
 //     QVERIFY2( results.toNumber() == 2, results.toString().toAscii());
 // }
-/*
-   void TestDataStructure::saveTestFile() {
-    createPentagon();
-    _graphDocument->saveAsInternalFormat("pentagono");
-   }
-
-   void  TestDataStructure::loadTestFile() {
-    _graphDocument->loadFromInternalFormat("pentagono.datatype");
-
-    QVERIFY2 (_graphDocument->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
-
-    QVERIFY2( ds->dataList().size() == 5, "ERROR: Number of data is not 5 ");
-    QVERIFY2( ds->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
-
-    foreach( DataPtr n, ds->dataList() ) {
-        QVERIFY2( n->out_pointers().size() == 1, "ERROR: Number of out pointers is not 1");
-        QVERIFY2( n->in_pointers().size() == 1, "ERROR: Number of in pointers is not 1");
-        QVERIFY2( n->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-        QVERIFY2( n->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
-    }
-
-    // sort out what is A,B,I
-
-
-    QVERIFY2( _data["a"]->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["a"]->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["a"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _data["a"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _data["a"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
-
-    QVERIFY2( _data["b"]->out_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["b"]->in_pointers().size() == 2, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["b"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _data["b"]->adjacent_data().size() == 3, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _data["b"]->adjacent_pointers().size() == 3, "ERROR: Number of adjacent pointers is not 2");
-
-    QVERIFY2( _data["i"]->out_pointers().size() == 4, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["i"]->in_pointers().size() == 0, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["i"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _data["i"]->adjacent_data().size() == 4, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _data["i"]->adjacent_pointers().size() == 4, "ERROR: Number of adjacent pointers is not 2");
-
-    DataPtr n = _data["i"];
-    qDebug() << n->property("name");
-    ds->remove(n);
-
-    QVERIFY2( _data["a"]->out_pointers().size()  == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["a"]->in_pointers().size()   == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["a"]->self_pointers().size() == 0, "ERROR: Number of pointers is not 0 ");
-    QVERIFY2( _data["a"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _data["a"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
-
-    QVERIFY2( _data["b"]->out_pointers().size() == 1, "ERROR: Number of pointer is not 1 ");
-    QVERIFY2( _data["b"]->in_pointers().size() == 1, "ERROR: Number of pointers is not 1 ");
-    QVERIFY2( _data["b"]->self_pointers().size() == 0, "ERROR: Number of pointer is not 0 ");
-    QVERIFY2( _data["b"]->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-    QVERIFY2( _data["b"]->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
-
-    QVERIFY2( _data["i"] == 0, "ERROR: Node  'i'  was not removed. ");
-   }*/
 
 QTEST_KDEMAIN_CORE( TestDataStructure )
