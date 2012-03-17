@@ -109,18 +109,6 @@ void GraphScene::updateAfter(QGraphicsItem *item)
     _hidedEdges << item;
 }
 
-void GraphScene::hideGraph(DataStructurePtr g, bool visibility)
-{
-    // FIXME in 4.9 this function is not working, but also not called
-    // Reason: it depends on collecting item values in _hashGraphs but
-    // without major changes it is not possible to remove deleted items reliable
-    // from that hash
-//     QList<QGraphicsItem*> list = _hashGraphs.values(g);
-//     foreach(QGraphicsItem *i, list){
-//         i->setVisible(visibility);
-//     }
-}
-
 void GraphScene::setAction(QAction *action)
 {
     if (_action) {
@@ -331,12 +319,12 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     QGraphicsItem *item = itemAt(scenePosition);
     DataItem *dataItem;
     PointerItem *pointerItem;
-    if (dataItem = (qgraphicsitem_cast<DataItem*>(item))) {
+    if ((dataItem = (qgraphicsitem_cast<DataItem*>(item)))) {
         contextAtItem = true;
         contextDataStructure = dataItem->data()->dataStructure();
         contextData = dataItem->data();
     }
-    if (pointerItem = (qgraphicsitem_cast<PointerItem*>(item))) {
+    if ((pointerItem = (qgraphicsitem_cast<PointerItem*>(item)))) {
         contextAtItem = true;
         contextDataStructure = pointerItem->pointer()->dataStructure();
         contextPointer = pointerItem->pointer();

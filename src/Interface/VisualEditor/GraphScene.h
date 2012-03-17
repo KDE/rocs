@@ -60,7 +60,6 @@ public:
     void fade(bool b) {
         _fade = b;
     }
-    void hideGraph(DataStructurePtr g, bool visibility);
 
 public slots:
     QGraphicsItem* createData(DataPtr n);
