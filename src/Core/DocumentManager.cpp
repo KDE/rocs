@@ -135,7 +135,7 @@ void DocumentManager::convertToDataStructure()
     qDebug() << "----------=========== Conversion Finished ============-----------";
 }
 
-void DocumentManager::loadDocument(QString name)
+Document* DocumentManager::loadDocument(QString name)
 {
     Document * doc;
     if (name.isEmpty()) {
@@ -161,5 +161,6 @@ void DocumentManager::loadDocument(QString name)
     }
     doc->setModified(false);
     addDocument(doc);
+    return doc;
 }
 

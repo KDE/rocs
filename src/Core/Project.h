@@ -20,11 +20,15 @@
 #ifndef PROJECT_H
 #define PROJECT_H
 
+#include "rocslib_export.h"
+#include "Rocs_Typedefs.h"
+
 #include <boost/scoped_ptr.hpp>
 #include <QList>
 
 class ProjectPrivate;
 class QString;
+class Document;
 
 /**
  * \class Project
@@ -34,7 +38,7 @@ class QString;
  * by the project file are a (not necessarily strict) superset of file currently displayed at
  * the main window widget.
  */
-class Project
+class ROCSLIB_EXPORT Project
 {
 
 public:
@@ -54,6 +58,13 @@ public:
     void addGraphDocumentFile(QString file);
     void removeGraphDocumentFile(QString file);
     QList<QString> graphDocumentFiles() const;
+
+    /**
+     * Add a new graph document to the project hat does not have a filename, yet.
+     */
+    void addGraphDocumentNew(Document* document);
+    void removeGraphDocumentNew(Document* document);
+    void saveGraphDocumentNew(Document* document);
 
     void setJournalFile(QString file);
     QString journalFile() const;

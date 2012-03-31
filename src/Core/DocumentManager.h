@@ -68,7 +68,7 @@ public slots:
     /** Convert document to new data structure. */
     void convertToDataStructure();
 
-    void loadDocument(QString fileName = QString());
+    Document* loadDocument(QString fileName = QString());
 
 signals:
     /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/

@@ -123,6 +123,9 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
     connect(dm, SIGNAL(documentRemoved(Document*)),
             this, SLOT(releaseDocument(Document*)));
 
+    // TODO: use welcome widget instead of creating default empty project
+    _currentProject = new Project;
+
     /* just for testing prurposes,
     * this should not be hardcoded here.
     * use KWelcomeWidget instead.
@@ -342,8 +345,8 @@ void MainWindow::setupActions()
     _paletteActions->addAction("align-tree", new AlignAction(i18nc("Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
 
     // Menu actions
-    createAction("document-new",     i18n("New Graph"),         "new-graph",         SLOT(newGraph()),    this);
-    createAction("document-open",    i18n("Open Graph"),        "open-graph",        SLOT(openGraph()),   this);
+    createAction("document-new",     i18n("Add New Graph"),     "new-graph",         SLOT(newGraph()),    this);
+    createAction("document-open",    i18n("Import Rocs Graph"),        "open-graph",        SLOT(openGraph()),   this);
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        SLOT(saveGraph()),   this);
     createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     SLOT(saveGraphAs()), this);
     createAction("",                 i18n("Download Examples"), "download",          SLOT(downloadNewExamples()),  this);
@@ -352,7 +355,7 @@ void MainWindow::setupActions()
 
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", SLOT(showPossibleIncludes()), this);
 
-    createAction("document-new",     i18n("New Script"),        "new-script",        SLOT(newScript()),    _codeEditor);
+    createAction("document-new",     i18n("Add New Script"),        "new-script",        SLOT(newScript()),    _codeEditor);
     createAction("document-open",    i18n("Open Script"),       "open-script",       SLOT(openScript()),   _codeEditor);
     createAction("document-save",    i18n("Save Script"),       "save-script",       SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
@@ -524,12 +527,12 @@ GraphScene* MainWindow::scene() const
     return _graphVisualEditor->scene();
 }
 
-void MainWindow::newGraph()
+void MainWindow::addEmptyGraphDocument()
 {
-    if (DocumentManager::self()->activeDocument() != 0) {
-        if (saveIfChanged() == KMessageBox::Cancel) return;
-    }
-    loadDocument();
+    qDebug() << "add empty graph document to project";
+    _currentProject->addGraphDocumentNew(
+        DocumentManager::self()->loadDocument()
+    );
 }
 
 void MainWindow::openGraph()
@@ -571,6 +574,7 @@ void MainWindow::saveGraphAs()
     }
 
     d->saveAsInternalFormat(KFileDialog::getSaveFileName());
+    _currentProject->saveGraphDocumentNew(d);
 }
 
 void MainWindow::saveAll()

@@ -197,8 +197,9 @@ void CodeEditor::saveAllScripts()
     }
     foreach(KTextEditor::Document * text, _scriptDocs) {
         if (text->url().isEmpty()) {
-            if (text->isModified() == false)
+            if (text->isModified() == false) {
                 continue;
+            }
             saveScriptAs(text);
         } else {
             saveScript(text);

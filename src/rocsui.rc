@@ -9,11 +9,14 @@
   <MenuBar>
         <Menu name="file" >
             <Menu name="new">
-                <text>New</text>
+                <text>Project</text>
                 <Action name="new-graph" />
+                <Action name="open-graph" />
+                <Action name="import-graph" />
                 <Action name="new-script" />
             </Menu>
-            <Action name="open-graph" />
+            <Action name="change-project" />
+            <Action name="save-project" />
             <Action name="open-script" />
             <Action name="save-all" />
             <Separator/>
@@ -21,7 +24,6 @@
                 <text>Graph</text>
                 <Action name="save-graph" />
                 <Action name="save-graph-as" />
-                <Action name="import-graph" />
                 <Action name="export-graph" />
             </Menu>
             <Menu name="script">

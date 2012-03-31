@@ -18,6 +18,7 @@
 
 
 #include "Project.h"
+#include "Document.h"
 
 #include <QString>
 #include <QList>
@@ -31,6 +32,7 @@ public:
     QString _projectPath;
     QList<QString> _codeFiles;
     QList<QString> _graphDocumentFiles;
+    QList<Document*> _graphDocumentNew;
     QString _journalFile;
 };
 
@@ -93,6 +95,22 @@ void Project::removeGraphDocumentFile(QString file)
 QList< QString > Project::graphDocumentFiles() const
 {
     return d->_graphDocumentFiles;
+}
+
+void Project::addGraphDocumentNew(Document* document)
+{
+    d->_graphDocumentNew.append(document);
+}
+
+void Project::removeGraphDocumentNew(Document* document)
+{
+    d->_graphDocumentNew.removeAll(document);
+}
+
+void Project::saveGraphDocumentNew(Document* document)
+{
+    removeGraphDocumentNew(document);
+    addGraphDocumentFile(document->documentPath());
 }
 
 void Project::setJournalFile(QString file)

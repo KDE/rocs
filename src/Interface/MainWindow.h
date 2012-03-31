@@ -32,6 +32,7 @@ class GraphVisualEditor;
 class KActionCollection;
 class Document;
 class DataStructure;
+class Project;
 class KTextBrowser;
 class QSplitter;
 class GraphScene;
@@ -114,7 +115,13 @@ private slots:
      * stop script execution
      */
     void stopScript();
-    void newGraph();
+
+    /**
+     * Create new empty graph document for this project.
+     * This can be a new document or an existing one.
+     * Graph document is added to project.
+     */
+    void addEmptyGraphDocument();
     void openGraph();
     void saveGraph();
     void saveGraphAs();
@@ -147,6 +154,7 @@ signals:
     void runTool(ToolsPluginInterface * plugin, Document * graphs);
 
 private: // Variables.
+    Project* _currentProject;
 
     // Left Area:
     GraphLayers* _GraphLayers; //! Area where the data and edges will be modified.
