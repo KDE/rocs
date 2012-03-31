@@ -30,6 +30,7 @@ set( rocs_core_SRCS
     Core/DataStructure.cpp
     Core/Document.cpp
     Core/Group.cpp
+    Core/Project.cpp
     Core/DataStructurePluginInterface.cpp
     Core/DataStructurePluginManager.cpp
     Core/DocumentManager.cpp
