@@ -21,6 +21,7 @@
 #define PROJECT_H
 
 #include <boost/scoped_ptr.hpp>
+#include <QList>
 
 class ProjectPrivate;
 class QString;
@@ -29,7 +30,9 @@ class QString;
  * \class Project
  * \brief A "Project" object represents the compilation of file pointers that form a Rocs project.
  *
- * Use this class to
+ * Use this class to maintain the set of all files belonging to the project. Thus, files specified
+ * by the project file are a (not necessarily strict) superset of file currently displayed at
+ * the main window widget.
  */
 class Project
 {
@@ -38,8 +41,22 @@ public:
     Project();
     virtual ~Project();
 
+    void setProjectPath(QString directory);
+    QString projectPath() const;
+
     void setName(QString name);
     QString name() const;
+
+    void addCodeFile(QString file);
+    void removeCodeFile(QString file);
+    QList<QString> codeFiles() const;
+
+    void addGraphDocumentFile(QString file);
+    void removeGraphDocumentFile(QString file);
+    QList<QString> graphDocumentFiles() const;
+
+    void setJournalFile(QString file);
+    QString journalFile() const;
 
 private:
     boost::scoped_ptr<ProjectPrivate> d;

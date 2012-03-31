@@ -62,6 +62,7 @@
 // Graph Related Includes
 #include "Document.h"
 #include "DataStructure.h"
+#include "Project.h"
 
 #include "settings.h"
 
