@@ -29,7 +29,6 @@
 #include <kconfiggroup.h>
 #include <ktemporaryfile.h>
 #include <kdebug.h>
-#include <ksharedconfig.h>
 
 class ProjectPrivate
 {
@@ -43,13 +42,13 @@ public:
     QMap<int, QString> _graphFileGroup;
     QList<Document*> _graphDocumentNew;
     QString _journalFile;
-    KSharedConfig::Ptr _config;
+    KConfig* _config;
     bool _temporary;
 
     KConfigGroup initKConfigObject() {
         // helper method for Project::open()
         kDebug() << "Creating KConfig object temporary project file: " << _projectFile;
-        _config = KSharedConfig::openConfig(_projectFile);
+        _config = new KConfig(_projectFile);
 
         KConfigGroup projectGroup(_config, "Project");
 
@@ -256,6 +255,20 @@ bool Project::writeProjectFile()
 
     return true;
 }
+
+
+bool Project::writeProjectFile(QString file)
+{
+    // do not save to the old file
+    d->_config->markAsClean();
+
+    // copy and save
+    KConfig* temp = d->_config->copyTo(file);
+    delete d->_config;
+    d->_config = temp;
+    return writeProjectFile();
+}
+
 
 bool Project::isTemporary()
 {

@@ -90,6 +90,12 @@ public:
 
     bool writeProjectFile();
 
+    /**
+     * Save project file under \p file that is given as absolute file path.
+     * \param file is the target file
+     */
+    bool writeProjectFile(QString file);
+
 private:
     bool writeNewProjectFile();
     boost::scoped_ptr<ProjectPrivate> d;
