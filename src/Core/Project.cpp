@@ -23,6 +23,13 @@
 #include <QString>
 #include <QList>
 
+#include <kurl.h>
+#include <kconfig.h>
+#include <kconfiggroup.h>
+#include <ktemporaryfile.h>
+#include <kdebug.h>
+#include <ksharedconfig.h>
+
 class ProjectPrivate
 {
 public:
@@ -30,17 +37,50 @@ public:
 
     QString _name;
     QString _projectPath;
+    QString _projectFile;
     QList<QString> _codeFiles;
     QList<QString> _graphDocumentFiles;
     QList<Document*> _graphDocumentNew;
     QString _journalFile;
+    KSharedConfig::Ptr _config;
+    bool _temporary;
+
+    KConfigGroup initKConfigObject() {
+        // helper method for Project::open()
+        kDebug() << "Creating KConfig object temporary project file: " << _projectFile;
+        _config = KSharedConfig::openConfig(_projectFile);
+        KConfigGroup projectGroup(_config, "Project");
+
+        return projectGroup;
+    }
 };
 
 
-Project::Project()
+Project::Project() :
+    d(new ProjectPrivate)
 {
-
+    KTemporaryFile temp;
+    temp.setPrefix("project");
+    temp.setSuffix(".rocs");
+    temp.setAutoRemove(false);
+    temp.open();
+    d->_projectFile = temp.fileName();
+    d->initKConfigObject();
+    d->_temporary = true;
 }
+
+Project::Project(QString projectFile) :
+    d(new ProjectPrivate)
+{
+    d->_projectFile = projectFile;
+    d->initKConfigObject();
+    if (!d->_config->isConfigWritable(true)) {
+        d->_temporary = true;
+    } else {
+        d->_temporary = false;
+    }
+}
+
 
 Project::~Project()
 {
@@ -121,4 +161,22 @@ void Project::setJournalFile(QString file)
 QString Project::journalFile() const
 {
     return d->_journalFile;
+}
+
+bool Project::writeNewProjectFile()
+{
+    if (!d->_config->isConfigWritable(true)) {
+        kDebug() << "Cannot write to project config file.";
+        return false;
+    }
+    KConfigGroup group = d->_config->group("Project");
+    group.writeEntry("Name", d->_name);
+    d->_config->sync();
+
+    return true;
+}
+
+bool Project::isTemporary()
+{
+    return d->_temporary;
 }

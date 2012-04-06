@@ -26,6 +26,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <QList>
 
+class KUrl;
 class ProjectPrivate;
 class QString;
 class Document;
@@ -42,7 +43,19 @@ class ROCSLIB_EXPORT Project
 {
 
 public:
+    /**
+     * Constructor for project that creates a new project with empty configuration.
+     * A temporary project file is used and \see temporary() will return true until
+     * project is saved.
+     */
     Project();
+
+    /**
+     * Constructor for project that creates a project by configuration given
+     * in file \p projectFile.
+     * \param projectFile is the absolute path to the project file
+     */
+    Project(QString projectFile);
     virtual ~Project();
 
     void setProjectPath(QString directory);
@@ -69,7 +82,14 @@ public:
     void setJournalFile(QString file);
     QString journalFile() const;
 
+    /**
+     * Specifies if the project file is only temporary or not.
+     * The status changes to non-temporary if a temporary file is saved.
+     */
+    bool isTemporary();
+
 private:
+    bool writeNewProjectFile();
     boost::scoped_ptr<ProjectPrivate> d;
 };
 
