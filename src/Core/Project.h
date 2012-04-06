@@ -88,9 +88,10 @@ public:
      */
     bool isTemporary();
 
+    bool writeProjectFile();
+
 private:
     bool writeNewProjectFile();
-    bool writeProjectFile();
     boost::scoped_ptr<ProjectPrivate> d;
 };
 

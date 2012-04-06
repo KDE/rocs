@@ -75,14 +75,15 @@ Project::Project() :
     d(new ProjectPrivate)
 {
     KTemporaryFile temp;
-    temp.setPrefix("project");
-    temp.setSuffix(".rocs");
+    temp.setPrefix("rocsproject");
+    temp.setSuffix(".tmp");
     temp.setAutoRemove(false);
     temp.open();
     d->_projectFile = temp.fileName();
     d->initKConfigObject();
     d->_temporary = true;
 }
+
 
 Project::Project(QString projectFile) :
     d(new ProjectPrivate)
@@ -239,7 +240,7 @@ bool Project::writeProjectFile()
         // TODO change to order given by editor
         codeFileIDs.append(group.readEntry("identifier"));
     }
-    projectGroup.writeEntry("GraphFiles", codeFileIDs);
+    projectGroup.writeEntry("CodeFiles", codeFileIDs);
 
     QStringList graphFileIDs;
     foreach(QString fileGroup, d->_graphFileGroup.values()) {
@@ -251,6 +252,7 @@ bool Project::writeProjectFile()
 
     // write back
     d->_config->sync();
+    d->_temporary = false;
 
     return true;
 }

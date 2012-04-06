@@ -21,10 +21,12 @@
 #include "Data.h"
 #include "Pointer.h"
 #include <qtest_kde.h>
+#include <ktemporaryfile.h>
 
 #include <Document.h>
 #include <DataStructurePluginManager.h>
 #include <DocumentManager.h>
+#include <Project.h>
 
 TestLoadSave::TestLoadSave()
 {
@@ -77,6 +79,32 @@ void TestLoadSave::serializeUnserializeTest()
 
 }
 
+
+void TestLoadSave::projectLoadSaveTest()
+{
+    KTemporaryFile temp;
+    temp.setPrefix("rocsproject");
+    temp.setSuffix(".tmp");
+    temp.setAutoRemove(false);
+    temp.open();
+
+    // prepare project and save
+    Project* testProject = new Project(temp.fileName());
+    testProject->setName("new test name");
+    testProject->addCodeFile("/path/to/code");
+    testProject->addGraphFile("/path/to/graph");
+    testProject->writeProjectFile();
+
+    // load project
+    Project* testProject2 = new Project(temp.fileName());
+    QVERIFY2( testProject2->name().compare("new test name")==0, "ERROR: red filename differs.");
+    QVERIFY( testProject2->codeFiles().count()==1);
+    QVERIFY( testProject2->codeFiles().at(0).compare("/path/to/code")==0);
+    QVERIFY( testProject2->graphFiles().at(0).compare("/path/to/graph")==0);
+
+    delete testProject;
+    delete testProject2;
+}
 
 
 QTEST_KDEMAIN_CORE(TestLoadSave)
