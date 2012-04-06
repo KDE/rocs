@@ -64,13 +64,13 @@ public:
     void setName(QString name);
     QString name() const;
 
-    void addCodeFile(QString file);
-    void removeCodeFile(QString file);
+    int addCodeFile(QString file);
+    void removeCodeFile(int fileID);
     QList<QString> codeFiles() const;
 
-    void addGraphDocumentFile(QString file);
-    void removeGraphDocumentFile(QString file);
-    QList<QString> graphDocumentFiles() const;
+    int addGraphFile(QString file);
+    void removeGraphFile(int fileID);
+    QList<QString> graphFiles() const;
 
     /**
      * Add a new graph document to the project hat does not have a filename, yet.
@@ -90,6 +90,7 @@ public:
 
 private:
     bool writeNewProjectFile();
+    bool writeProjectFile();
     boost::scoped_ptr<ProjectPrivate> d;
 };
 

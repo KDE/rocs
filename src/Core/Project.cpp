@@ -21,6 +21,7 @@
 #include "Document.h"
 
 #include <QString>
+#include <QMap>
 #include <QList>
 
 #include <kurl.h>
@@ -38,8 +39,8 @@ public:
     QString _name;
     QString _projectPath;
     QString _projectFile;
-    QList<QString> _codeFiles;
-    QList<QString> _graphDocumentFiles;
+    QMap<int, QString> _codeFileGroup;
+    QMap<int, QString> _graphFileGroup;
     QList<Document*> _graphDocumentNew;
     QString _journalFile;
     KSharedConfig::Ptr _config;
@@ -49,7 +50,21 @@ public:
         // helper method for Project::open()
         kDebug() << "Creating KConfig object temporary project file: " << _projectFile;
         _config = KSharedConfig::openConfig(_projectFile);
+
         KConfigGroup projectGroup(_config, "Project");
+
+        QStringList codeFileIDs = projectGroup.readEntry("CodeFiles", QStringList());
+        foreach(QString offset, codeFileIDs) {
+            _codeFileGroup.insert(offset.toInt(), "CodeFile" + offset);
+        }
+
+        QStringList graphFileIDs = projectGroup.readEntry("GraphFiles", QStringList());
+        foreach(QString offset, graphFileIDs) {
+            _graphFileGroup.insert(offset.toInt(), "GraphFile" + offset);
+        }
+
+        KConfigGroup journalGroup(_config, "Journal");
+        _journalFile = journalGroup.readEntry("JournalFile", QString());
 
         return projectGroup;
     }
@@ -89,12 +104,14 @@ Project::~Project()
 
 void Project::setName(QString name)
 {
-    d->_name = name;
+    KConfigGroup projectGroup(d->_config, "Project");
+    projectGroup.writeEntry("Name",name);
 }
 
 QString Project::name() const
 {
-    return d->_name;
+    KConfigGroup projectGroup(d->_config, "Project");
+    return projectGroup.readEntry("Name", QString());
 }
 
 void Project::setProjectPath(QString directory)
@@ -107,34 +124,69 @@ QString Project::projectPath() const
     return d->_projectPath;
 }
 
-void Project::addCodeFile(QString file)
+int Project::addCodeFile(QString file)
 {
-    d->_codeFiles.append(file);
+    QList<int> keys = d->_codeFileGroup.uniqueKeys();
+    int newKey = 1;
+    if (keys.count() > 0) {
+        newKey = keys.last() + 1;
+    }
+
+    KConfigGroup newGroup(d->_config, "CodeFile" + QString("%1").arg(newKey));
+    newGroup.writeEntry("file", file);
+    newGroup.writeEntry("identifier", newKey);
+    d->_codeFileGroup.insert(newKey, "CodeFile" + QString("%1").arg(newKey));
+
+    return newKey;
 }
 
-void Project::removeCodeFile(QString file)
+void Project::removeCodeFile(int fileID)
 {
-    d->_codeFiles.removeAll(file);
+    d->_config->deleteGroup(d->_codeFileGroup[fileID]);
+    d->_codeFileGroup.remove(fileID);
 }
 
 QList< QString > Project::codeFiles() const
 {
-    return d->_codeFiles;
+    QList<QString> files;
+    foreach(QString fileGroup, d->_codeFileGroup.values()) {
+        KConfigGroup group(d->_config, fileGroup);
+        files.append(group.readEntry("file"));
+    }
+    return files;
+
 }
 
-void Project::addGraphDocumentFile(QString file)
+int Project::addGraphFile(QString file)
 {
-    d->_graphDocumentFiles.append(file);
+    QList<int> keys = d->_graphFileGroup.uniqueKeys();
+    int newKey = 1;
+    if (keys.count() > 0) {
+        newKey = keys.last() + 1;
+    }
+
+    KConfigGroup newGroup(d->_config, "GraphFile" + QString("%1").arg(newKey));
+    newGroup.writeEntry("file", file);
+    newGroup.writeEntry("identifier", newKey);
+    d->_graphFileGroup.insert(newKey, "GraphFile" + QString("%1").arg(newKey));
+
+    return newKey;
 }
 
-void Project::removeGraphDocumentFile(QString file)
+void Project::removeGraphFile(int fileID)
 {
-    d->_graphDocumentFiles.removeAll(file);
+    d->_config->deleteGroup(d->_graphFileGroup[fileID]);
+    d->_graphFileGroup.remove(fileID);
 }
 
-QList< QString > Project::graphDocumentFiles() const
+QList< QString > Project::graphFiles() const
 {
-    return d->_graphDocumentFiles;
+    QList< QString > files;
+    foreach(QString fileGroup, d->_graphFileGroup.values()) {
+        KConfigGroup group(d->_config, fileGroup);
+        files.append(group.readEntry("file"));
+    }
+    return files;
 }
 
 void Project::addGraphDocumentNew(Document* document)
@@ -150,7 +202,7 @@ void Project::removeGraphDocumentNew(Document* document)
 void Project::saveGraphDocumentNew(Document* document)
 {
     removeGraphDocumentNew(document);
-    addGraphDocumentFile(document->documentPath());
+    addGraphFile(document->documentPath());
 }
 
 void Project::setJournalFile(QString file)
@@ -171,6 +223,33 @@ bool Project::writeNewProjectFile()
     }
     KConfigGroup group = d->_config->group("Project");
     group.writeEntry("Name", d->_name);
+    d->_config->sync();
+
+    return true;
+}
+
+bool Project::writeProjectFile()
+{
+    // update file reference lists
+    KConfigGroup projectGroup(d->_config, "Project");
+
+    QStringList codeFileIDs;
+    foreach(QString fileGroup, d->_codeFileGroup.values()) {
+        KConfigGroup group(d->_config, fileGroup);
+        // TODO change to order given by editor
+        codeFileIDs.append(group.readEntry("identifier"));
+    }
+    projectGroup.writeEntry("GraphFiles", codeFileIDs);
+
+    QStringList graphFileIDs;
+    foreach(QString fileGroup, d->_graphFileGroup.values()) {
+        KConfigGroup group(d->_config, fileGroup);
+        // TODO change to order given by editor
+        graphFileIDs.append(group.readEntry("identifier"));
+    }
+    projectGroup.writeEntry("GraphFiles", graphFileIDs);
+
+    // write back
     d->_config->sync();
 
     return true;
