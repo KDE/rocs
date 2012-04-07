@@ -52,7 +52,6 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
     _layout->setSpacing(0);
     _layout->setMargin(0);
 
-    newScript();
     setLayout(_layout);
 }
 

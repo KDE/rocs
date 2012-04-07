@@ -81,6 +81,13 @@ private: // Methods
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                       const char* slot, QObject *parent);
 
+    /**
+     * Create an empty project configuration with one graph document and one code file.
+     * All files are temporary until saved.
+     * \return project pointer
+     */
+    Project* createNewProject();
+
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
 

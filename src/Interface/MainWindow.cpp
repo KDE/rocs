@@ -124,13 +124,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
             this, SLOT(releaseDocument(Document*)));
 
     // TODO: use welcome widget instead of creating default empty project
-    _currentProject = new Project;
-
-    /* just for testing prurposes,
-    * this should not be hardcoded here.
-    * use KWelcomeWidget instead.
-    */
-    DocumentManager::self()->loadDocument();
+    _currentProject = createNewProject();
 
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
     GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
@@ -186,6 +180,16 @@ void MainWindow::setupWidgets()
     _hSplitter->setSizes(QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight());
 
     setCentralWidget(_vSplitter);
+}
+
+Project* MainWindow::createNewProject()
+{
+    Project* newProject = new Project();
+    // create new document and add this to project new
+    newProject->addGraphDocumentNew( DocumentManager::self()->loadDocument() );
+    _codeEditor->newScript();
+
+    return newProject;
 }
 
 void MainWindow::downloadNewExamples()
