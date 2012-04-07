@@ -11,14 +11,13 @@
             <Menu name="new">
                 <text>Project</text>
                 <Action name="new-graph" />
-                <Action name="open-graph" />
-                <Action name="import-graph" />
                 <Action name="new-script" />
+                <Action name="import-graph" />
+                <Action name="import-script" />
             </Menu>
-            <Action name="change-project" />
+            <Action name="open-project" />
             <Action name="save-project" />
-            <Action name="open-script" />
-            <Action name="save-all" />
+            <Action name="change-project" />
             <Separator/>
             <Menu name="graph">
                 <text>Graph</text>

@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -186,8 +186,8 @@ Project* MainWindow::createNewProject()
 {
     Project* newProject = new Project();
     // create new document and add this to project new
-    newProject->addGraphDocumentNew( DocumentManager::self()->loadDocument() );
-    _codeEditor->newScript();
+    newProject->addGraphFileNew( DocumentManager::self()->loadDocument() );
+    newProject->addCodeFileNew( _codeEditor->newScript() );
 
     return newProject;
 }
@@ -349,13 +349,14 @@ void MainWindow::setupActions()
     _paletteActions->addAction("align-tree", new AlignAction(i18nc("Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
 
     // Menu actions
+    createAction("document-save", i18n("Save Project"), "save-project", Qt::Key_S, SLOT(saveProject()), this);
+    createAction("document-open", i18n("Open Project"), "open-project", Qt::Key_O, SLOT(openProject()), this);
     createAction("document-new",     i18n("Add New Graph"),     "new-graph",         SLOT(newGraph()),    this);
     createAction("document-open",    i18n("Import Rocs Graph"),        "open-graph",        SLOT(openGraph()),   this);
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        SLOT(saveGraph()),   this);
     createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     SLOT(saveGraphAs()), this);
     createAction("",                 i18n("Download Examples"), "download",          SLOT(downloadNewExamples()),  this);
     createAction("",                 i18n("Upload script"),     "upload",            SLOT(uploadScript()),  this);
-    createAction("document-save",    i18n("Save All"),          "save-all",        Qt::Key_S, SLOT(saveAll()),   this);
 
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", SLOT(showPossibleIncludes()), this);
 
@@ -534,7 +535,7 @@ GraphScene* MainWindow::scene() const
 void MainWindow::addEmptyGraphDocument()
 {
     qDebug() << "add empty graph document to project";
-    _currentProject->addGraphDocumentNew(
+    _currentProject->addGraphFileNew(
         DocumentManager::self()->loadDocument()
     );
 }
@@ -543,11 +544,12 @@ void MainWindow::openGraph()
 {
     if (saveIfChanged() == KMessageBox::Cancel) return;
     QString fileName = KFileDialog::getOpenFileName(QString(), i18n("*.graph|Graph files\n*|All files"), this, i18n("Graph Files"));
-    if (fileName == "") return;
+    if (fileName.isEmpty()) return;
 //      ImporterExporterManager imp(this);
 //     imp.openDocument();
     loadDocument(fileName);
 }
+
 
 void MainWindow::loadDocument(const QString& name)
 {
@@ -559,32 +561,74 @@ void MainWindow::loadDocument(const QString& name)
     DocumentManager::self()->loadDocument(name);
 }
 
+
+void MainWindow::saveProject()
+{
+    // save graphs and scripts
+    saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
+    saveScripts();
+
+    if (_currentProject->isTemporary()){
+        QString file = KFileDialog::getSaveFileName(QString(), i18n("*.rocs|Rocs project files\n*|All files"), this, i18n("Save Project"));
+        _currentProject->writeProjectFile(file);
+    }
+    else {
+        _currentProject->writeProjectFile();
+    }
+}
+
+
+void MainWindow::openProject()
+{
+    //FIXME currently silently closes old project
+//     saveAll();
+    delete _currentProject;
+    QString file = KFileDialog::getOpenFileName( QString(),
+                                                 i18n("*.rocs|Rocs project files\n*|All files"),
+                                                 this,
+                                                 i18n("Open Project Files"));
+    _currentProject = new Project(file);
+    foreach (QString graphFile, _currentProject->graphFiles()) {
+        loadDocument(graphFile);
+    }
+    foreach (KUrl codeFile, _currentProject->codeFiles()) {
+        _codeEditor->openScript(codeFile);
+        //TODO set curser line
+    }
+}
+
+void MainWindow::saveScripts()
+{
+    foreach (KTextEditor::Document* textDocument, _currentProject->codeFilesNew()) {
+        QString file = KFileDialog::getSaveFileName( QString(),
+                                                 i18n("*.js|Rocs script documents\n*|All files"),
+                                                 this,
+                                                 i18n("Save Script Document"));
+        _currentProject->saveCodeFileNew(textDocument, file);
+    }
+    _codeEditor->saveAllScripts();
+}
+
+
 void MainWindow::saveGraph()
 {
     Document *d = DocumentManager::self()->activeDocument();
-    if (d->documentPath().isEmpty()) {
+    if (d->fileUrl().isEmpty()) {
         saveGraphAs();
     } else {
-        d->savedDocumentAt(d->documentPath());
+        d->save();
     }
 }
+
 
 void MainWindow::saveGraphAs()
 {
     Document *d = DocumentManager::self()->activeDocument();
-    if (d == 0) {
-        kDebug() << "Graph Document is NULL";
-        return;
-    }
-
-    d->saveAsInternalFormat(KFileDialog::getSaveFileName());
-    _currentProject->saveGraphDocumentNew(d);
-}
-
-void MainWindow::saveAll()
-{
-    saveGraph();
-    _codeEditor->saveAllScripts();
+    QString file = KFileDialog::getSaveFileName( QString(),
+                                                 i18n("*.graph|Rocs graph documents\n*|All files"),
+                                                 this,
+                                                 i18n("Save Graph Document"));
+    _currentProject->saveGraphFileAs(d, file);
 }
 
 

@@ -31,6 +31,11 @@ class ProjectPrivate;
 class QString;
 class Document;
 
+namespace KTextEditor
+{
+    class Document;
+}
+
 /**
  * \class Project
  * \brief A "Project" object represents the compilation of file pointers that form a Rocs project.
@@ -66,7 +71,15 @@ public:
 
     int addCodeFile(QString file);
     void removeCodeFile(int fileID);
-    QList<QString> codeFiles() const;
+    QList<KUrl> codeFiles() const;
+    QList<KTextEditor::Document*> codeFilesNew() const;
+
+    /**
+     * Add a new code document to the project hat does not have a filename, yet.
+     */
+    void addCodeFileNew(KTextEditor::Document* document);
+    void removeCodeFileNew(KTextEditor::Document* document);
+    void saveCodeFileNew(KTextEditor::Document* document, KUrl file);
 
     int addGraphFile(QString file);
     void removeGraphFile(int fileID);
@@ -75,9 +88,12 @@ public:
     /**
      * Add a new graph document to the project hat does not have a filename, yet.
      */
-    void addGraphDocumentNew(Document* document);
-    void removeGraphDocumentNew(Document* document);
-    void saveGraphDocumentNew(Document* document);
+    void addGraphFileNew(Document* document);
+
+    /**
+     * Save existing graph document file under new filename
+     */
+    void saveGraphFileAs(Document* document, QString file);
 
     void setJournalFile(QString file);
     QString journalFile() const;
@@ -97,6 +113,9 @@ public:
     bool writeProjectFile(QString file);
 
 private:
+    void removeGraphFileNew(Document* document);
+    void saveGraphFileNew(Document* document, QString file);
+
     bool writeNewProjectFile();
     boost::scoped_ptr<ProjectPrivate> d;
 };

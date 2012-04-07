@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -63,9 +63,23 @@ public:
     void setName(const QString& name);
     QString name() const;
 
-    void savedDocumentAt(const QString& fileName);
-    const QString& documentPath() const;
-    bool saveAsInternalFormat(const QString& filename);
+    /**
+     * Save graph document in former file.
+     * It is expected that \see fileUrl() is not empty.
+     */
+    void save();
+
+    /**
+     * Save graph document under the given \p fileUrl. Old file is not changed.
+     * \param file is expected to be local file
+     */
+    void saveAs(const QString& fileUrl);
+
+    /**
+     * Path to file this graph document was last saved to.
+     */
+    const QString& fileUrl() const;
+
     void loadFromInternalFormat(const QString& filename);
 
     QtScriptBackend * engineBackend() const;
@@ -131,7 +145,8 @@ signals:
 
 private:
     boost::shared_ptr<DocumentPrivate> d;
-    void  savePropertiesInternalFormat(QObject *o);
+    bool saveAsInternalFormat(const QString& filename);
+    void savePropertiesInternalFormat(QObject *o);
 };
 
 #endif

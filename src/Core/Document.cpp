@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -366,12 +366,18 @@ DataStructurePtr Document::addDataStructure(QString name)
     return g;
 }
 
-void Document::savedDocumentAt(const QString& fileName)
+void Document::save()
 {
-    d->_lastSavedDocumentPath = fileName;
+    Q_ASSERT(!fileUrl().isEmpty());
+    saveAsInternalFormat(fileUrl());
 }
 
-const QString& Document::documentPath() const
+void Document::saveAs(const QString& fileUrl)
+{
+    saveAsInternalFormat(fileUrl);
+}
+
+const QString& Document::fileUrl() const
 {
     return d->_lastSavedDocumentPath;
 }

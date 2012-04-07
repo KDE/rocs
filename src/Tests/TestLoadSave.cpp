@@ -54,7 +54,7 @@ void TestLoadSave::serializeUnserializeTest()
     ds->addPointer( dataList["e"], dataList["a"] );
 
     // serialize into file "serializetest.graph"
-    DocumentManager::self()->activeDocument()->saveAsInternalFormat("serializetest");
+    DocumentManager::self()->activeDocument()->saveAs("serializetest");
     DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
     Document* testDoc = new Document("testDoc");
 
@@ -99,7 +99,7 @@ void TestLoadSave::projectLoadSaveTest()
     Project* testProject2 = new Project(temp.fileName());
     QVERIFY2( testProject2->name().compare("new test name")==0, "ERROR: red filename differs.");
     QVERIFY( testProject2->codeFiles().count()==1);
-    QVERIFY( testProject2->codeFiles().at(0).compare("/path/to/code")==0);
+    QVERIFY( testProject2->codeFiles().at(0).toLocalFile().compare("/path/to/code")==0);
     QVERIFY( testProject2->graphFiles().at(0).compare("/path/to/graph")==0);
 
     delete testProject;

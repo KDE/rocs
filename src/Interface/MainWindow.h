@@ -111,7 +111,6 @@ private slots:
 
     void debugScript();
 
-
     /**
      * execute script until next "step" command is found in script
      * \param text string that will be printed at result shell
@@ -129,10 +128,12 @@ private slots:
      * Graph document is added to project.
      */
     void addEmptyGraphDocument();
+    void saveProject();
+    void openProject();
     void openGraph();
     void saveGraph();
     void saveGraphAs();
-    void saveAll();
+    void saveScripts();
     void loadDocument(const QString& name = QString());
 
     void importFile();

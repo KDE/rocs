@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2009-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -55,9 +55,10 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
     setLayout(_layout);
 }
 
+
 void CodeEditor::closeDocument(int index)
 {
-    kDebug() << _scriptDocs.size();
+    Q_ASSERT(index < _scriptDocs.size());
     if (_scriptDocs.size() == 1) {
         kDebug() << "Just one, creating new script";
         newScript();
@@ -88,6 +89,7 @@ void CodeEditor::closeDocument(int index)
     }
 }
 
+
 void CodeEditor::changeCurrentDocument(int index)
 {
     _activeDocument = _scriptDocs.at(index);
@@ -96,7 +98,8 @@ void CodeEditor::changeCurrentDocument(int index)
     _tabDocs->setCurrentIndex(index);
 }
 
-void CodeEditor::newScript()
+
+KTextEditor::Document* CodeEditor::newScript()
 {
     _scriptDocs  << _editor->createDocument(0);
 
@@ -114,7 +117,18 @@ void CodeEditor::newScript()
 
     updateTabText(_scriptDocs.last());
     kDebug() << "New script created.";
+
+    return _scriptDocs.last();
 }
+
+
+KTextEditor::Document* CodeEditor::newScript(KUrl file)
+{
+    KTextEditor::Document* script = newScript();
+    script->saveAs(file);
+    return script;
+}
+
 
 void CodeEditor::updateTabText(KTextEditor::Document* text)
 {
@@ -136,10 +150,19 @@ void CodeEditor::updateTabText(KTextEditor::Document* text)
     }
 }
 
+
 void CodeEditor::openScript()
 {
     KUrl fileUrl = KFileDialog::getOpenUrl();
-    if (!fileUrl.isValid()) return;
+    openScript(fileUrl);
+}
+
+
+void CodeEditor::openScript(KUrl fileUrl)
+{
+    if (!fileUrl.isValid()) {
+        return;
+    }
 
     KTextEditor::Document *d = _editor->createDocument(0);
     d->openUrl(fileUrl);
@@ -158,8 +181,8 @@ void CodeEditor::openScript()
     changeCurrentDocument(_docViews.count() - 1);
 
     kDebug() << "Being Called";
-
 }
+
 
 void CodeEditor::saveScript(KTextEditor::Document *doc = 0)
 {
@@ -173,9 +196,14 @@ void CodeEditor::saveScript(KTextEditor::Document *doc = 0)
     if (doc->isModified() == false) {
         return;
     }
+    if (doc->url().isEmpty()) {
+        saveScriptAs(doc);
+        return;
+    }
     doc->documentSave();
     updateTabText(doc);
 }
+
 
 void CodeEditor::saveScriptAs(KTextEditor::Document *doc = 0)
 {
@@ -189,8 +217,10 @@ void CodeEditor::saveScriptAs(KTextEditor::Document *doc = 0)
     updateTabText(doc);
 }
 
+
 void CodeEditor::saveAllScripts()
 {
+    //FIXME this should only happen for scripts with url
     if (_scriptDocs.empty()) {
         return;
     }
@@ -206,20 +236,24 @@ void CodeEditor::saveAllScripts()
     }
 }
 
+
 void CodeEditor::saveActiveScript()
 {
     saveScript();
 }
+
 
 void CodeEditor::saveActiveScriptAs()
 {
     saveScriptAs();
 }
 
+
 QString CodeEditor::text() const
 {
     return _activeDocument->text().toAscii();
 }
+
 
 bool CodeEditor::isModified() const
 {

@@ -33,6 +33,7 @@ class Editor;
 }
 class QVBoxLayout;
 class QStackedWidget;
+class KUrl;
 
 class CodeEditor : public QWidget
 {
@@ -59,11 +60,26 @@ public:
     bool isModified() const;
 
 public slots:
-    void newScript();
+    /**
+     * Creates new script
+     */
+    KTextEditor::Document* newScript();
+    /**
+     * Creates new script at given file.
+     * \param file is absolute filename
+     */
+    KTextEditor::Document* newScript(KUrl file);
     void saveActiveScript();
     void saveActiveScriptAs();
     void saveAllScripts();
     void openScript();
+    void openScript(KUrl fileUrl);
+
+    /** Save the given script or if no text document is given, the currently active script is
+     *  saved. Opens Save-as dialog if text document has no path (is new).
+     * \param doc optional document to be saved
+     */
+    void saveScript(KTextEditor::Document *doc);
 
 private slots:
     void closeDocument(int index);
@@ -71,11 +87,6 @@ private slots:
     void updateTabText(KTextEditor::Document* text);
 
 private:
-    /** Save the given script or if no text document is given, the currently active script is
-     *  saved.
-     * \param doc optional document to be saved
-     */
-    void saveScript(KTextEditor::Document *doc);
     /** Save given script as new file or if no text document given, the currently active script
      *  is saved as a new file.
      * \param doc optional document to be saved

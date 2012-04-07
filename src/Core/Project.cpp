@@ -29,6 +29,7 @@
 #include <kconfiggroup.h>
 #include <ktemporaryfile.h>
 #include <kdebug.h>
+#include <ktexteditor/document.h>
 
 class ProjectPrivate
 {
@@ -38,9 +39,10 @@ public:
     QString _name;
     QString _projectPath;
     QString _projectFile;
-    QMap<int, QString> _codeFileGroup;
+    QMap<int, KUrl> _codeFileGroup;
     QMap<int, QString> _graphFileGroup;
-    QList<Document*> _graphDocumentNew;
+    QList<Document*> _graphFileNew;
+    QList<KTextEditor::Document*> _codeFileNew;
     QString _journalFile;
     KConfig* _config;
     bool _temporary;
@@ -108,21 +110,25 @@ void Project::setName(QString name)
     projectGroup.writeEntry("Name",name);
 }
 
+
 QString Project::name() const
 {
     KConfigGroup projectGroup(d->_config, "Project");
     return projectGroup.readEntry("Name", QString());
 }
 
+
 void Project::setProjectPath(QString directory)
 {
     d->_projectPath = directory;
 }
 
+
 QString Project::projectPath() const
 {
     return d->_projectPath;
 }
+
 
 int Project::addCodeFile(QString file)
 {
@@ -140,22 +146,54 @@ int Project::addCodeFile(QString file)
     return newKey;
 }
 
+
 void Project::removeCodeFile(int fileID)
 {
-    d->_config->deleteGroup(d->_codeFileGroup[fileID]);
+    d->_config->deleteGroup(d->_codeFileGroup[fileID].toLocalFile());
     d->_codeFileGroup.remove(fileID);
 }
 
-QList< QString > Project::codeFiles() const
+
+QList< KUrl > Project::codeFiles() const
 {
-    QList<QString> files;
-    foreach(QString fileGroup, d->_codeFileGroup.values()) {
-        KConfigGroup group(d->_config, fileGroup);
-        files.append(group.readEntry("file"));
+    QList<KUrl> files;
+    foreach(KUrl fileGroup, d->_codeFileGroup.values()) {
+        KConfigGroup group(d->_config, fileGroup.toLocalFile());
+        files.append(KUrl::fromPath(group.readEntry("file")));
     }
     return files;
-
 }
+
+
+QList< KTextEditor::Document* > Project::codeFilesNew() const
+{
+    return d->_codeFileNew;
+}
+
+
+void Project::addCodeFileNew(KTextEditor::Document* document)
+{
+    d->_codeFileNew.append(document);
+}
+
+
+void Project::removeCodeFileNew(KTextEditor::Document* document)
+{
+    d->_codeFileNew.removeAll(document);
+}
+
+
+void Project::saveCodeFileNew(KTextEditor::Document* document, KUrl file)
+{
+    qDebug() << "XXXXXXXXXXXXXXXXX";
+    qDebug() << "toLocalFile: " << file.toLocalFile();
+    qDebug() << "path: " << file.path();
+
+    removeCodeFileNew(document);
+    document->saveAs(file);
+    addCodeFile(file.toLocalFile());
+}
+
 
 int Project::addGraphFile(QString file)
 {
@@ -173,11 +211,13 @@ int Project::addGraphFile(QString file)
     return newKey;
 }
 
+
 void Project::removeGraphFile(int fileID)
 {
     d->_config->deleteGroup(d->_graphFileGroup[fileID]);
     d->_graphFileGroup.remove(fileID);
 }
+
 
 QList< QString > Project::graphFiles() const
 {
@@ -189,31 +229,56 @@ QList< QString > Project::graphFiles() const
     return files;
 }
 
-void Project::addGraphDocumentNew(Document* document)
+
+void Project::addGraphFileNew(Document* document)
 {
-    d->_graphDocumentNew.append(document);
+    d->_graphFileNew.append(document);
 }
 
-void Project::removeGraphDocumentNew(Document* document)
+
+void Project::removeGraphFileNew(Document* document)
 {
-    d->_graphDocumentNew.removeAll(document);
+    d->_graphFileNew.removeAll(document);
 }
 
-void Project::saveGraphDocumentNew(Document* document)
+
+void Project::saveGraphFileNew(Document* document, QString file)
 {
-    removeGraphDocumentNew(document);
-    addGraphFile(document->documentPath());
+    removeGraphFileNew(document);
+    document->saveAs(file);
+    addGraphFile(document->fileUrl());
 }
+
+
+void Project::saveGraphFileAs(Document* document, QString file)
+{
+    Q_ASSERT(document);
+    if (d == 0) {
+        return;
+    }
+
+    if (d->_graphFileNew.contains(document)) {
+        saveGraphFileNew(document, file);
+        return;
+    }
+    // TODO the following is probably error prone
+    int filekey = d->_graphFileGroup.key(document->fileUrl());
+    d->_graphFileGroup[filekey] = file;
+    document->saveAs(file);
+}
+
 
 void Project::setJournalFile(QString file)
 {
     d->_journalFile = file;
 }
 
+
 QString Project::journalFile() const
 {
     return d->_journalFile;
 }
+
 
 bool Project::writeNewProjectFile()
 {
@@ -228,14 +293,15 @@ bool Project::writeNewProjectFile()
     return true;
 }
 
+
 bool Project::writeProjectFile()
 {
     // update file reference lists
     KConfigGroup projectGroup(d->_config, "Project");
 
     QStringList codeFileIDs;
-    foreach(QString fileGroup, d->_codeFileGroup.values()) {
-        KConfigGroup group(d->_config, fileGroup);
+    foreach(KUrl fileGroup, d->_codeFileGroup.values()) {
+        KConfigGroup group(d->_config, fileGroup.toLocalFile());
         // TODO change to order given by editor
         codeFileIDs.append(group.readEntry("identifier"));
     }
