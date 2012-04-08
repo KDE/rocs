@@ -43,9 +43,10 @@
 #include <KTar>
 #include <KTextBrowser>
 #include <KMessageBox>
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <KConfigDialog>
-#include <kfiledialog.h>
+#include <KFileDialog>
+#include <KInputDialog>
 #include <KMenu>
 
 // UI RELATED INCLUDES
@@ -351,7 +352,9 @@ void MainWindow::setupActions()
     // Menu actions
     createAction("document-save", i18n("Save Project"), "save-project", Qt::Key_S, SLOT(saveProject()), this);
     createAction("document-open", i18n("Open Project"), "open-project", Qt::Key_O, SLOT(openProject()), this);
-    createAction("document-new",     i18n("Add New Graph"),     "new-graph",         SLOT(newGraph()),    this);
+    createAction("", i18n("Change Name"), "set-project-name", SLOT(setProjectName()), this);
+    createAction("document-new",     i18n("New Graph Document"),     "new-graph",         SLOT(newGraph()),    this);
+    createAction("document-new",     i18n("New Script File"),     "new-script",         SLOT(newScript()),    this);
     createAction("document-open",    i18n("Import Rocs Graph"),        "open-graph",        SLOT(openGraph()),   this);
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        SLOT(saveGraph()),   this);
     createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     SLOT(saveGraphAs()), this);
@@ -359,8 +362,6 @@ void MainWindow::setupActions()
     createAction("",                 i18n("Upload script"),     "upload",            SLOT(uploadScript()),  this);
 
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", SLOT(showPossibleIncludes()), this);
-
-    createAction("document-new",     i18n("Add New Script"),        "new-script",        SLOT(newScript()),    _codeEditor);
     createAction("document-open",    i18n("Open Script"),       "open-script",       SLOT(openScript()),   _codeEditor);
     createAction("document-save",    i18n("Save Script"),       "save-script",       SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
@@ -568,8 +569,14 @@ void MainWindow::saveProject()
     saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
     saveScripts();
 
-    if (_currentProject->isTemporary()){
-        QString file = KFileDialog::getSaveFileName(QString(), i18n("*.rocs|Rocs project files\n*|All files"), this, i18n("Save Project"));
+    if (_currentProject->isTemporary()) {
+        QString file = KFileDialog::getSaveFileName( QString(),
+                                                     i18n("*.rocs|Rocs project files\n*|All files"),
+                                                     this,
+                                                     i18n("Save Project")
+                                                   );
+        KUrl directory = KUrl::fromPath(file);
+        _currentProject->setProjectDirectory(directory.directory());
         _currentProject->writeProjectFile(file);
     }
     else {
@@ -597,6 +604,17 @@ void MainWindow::openProject()
     }
 }
 
+
+void MainWindow::setProjectName()
+{
+    QString name = KInputDialog::getText( i18n("Set Project Name"),
+                                              i18n("Name:"),
+                                              _currentProject->name()
+                                            );
+    _currentProject->setName(name);
+}
+
+
 void MainWindow::saveScripts()
 {
     foreach (KTextEditor::Document* textDocument, _currentProject->codeFilesNew()) {
@@ -607,6 +625,20 @@ void MainWindow::saveScripts()
         _currentProject->saveCodeFileNew(textDocument, file);
     }
     _codeEditor->saveAllScripts();
+}
+
+
+void MainWindow::newScript()
+{
+    QString file = KFileDialog::getSaveFileName( _currentProject->projectDirectory(),
+                                                 i18n("*.js|Rocs script document\n*|All files"),
+                                                 this,
+                                                 i18n("Enter Filename for the New Script File"));
+    if (file.isEmpty()) {
+        kDebug() << "Filename is empty and no script file was created.";
+        return;
+    }
+    _codeEditor->newScript(KUrl::fromLocalFile(file));
 }
 
 
@@ -629,6 +661,20 @@ void MainWindow::saveGraphAs()
                                                  this,
                                                  i18n("Save Graph Document"));
     _currentProject->saveGraphFileAs(d, file);
+}
+
+
+void MainWindow::newGraph()
+{
+    QString file = KFileDialog::getSaveFileName( _currentProject->projectDirectory(),
+                                                 i18n("*.graph|Rocs graph documents\n*|All files"),
+                                                 this,
+                                                 i18n("Enter Filename for the New Graph Document"));
+    if (file.isEmpty()) {
+        kDebug() << "Filename is empty and no script file was created.";
+        return;
+    }
+    _currentProject->addGraphFile(file);
 }
 
 

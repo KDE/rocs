@@ -130,10 +130,13 @@ private slots:
     void addEmptyGraphDocument();
     void saveProject();
     void openProject();
+    void setProjectName();
     void openGraph();
     void saveGraph();
     void saveGraphAs();
+    void newGraph();
     void saveScripts();
+    void newScript();
     void loadDocument(const QString& name = QString());
 
     void importFile();

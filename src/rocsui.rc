@@ -10,6 +10,7 @@
         <Menu name="file" >
             <Menu name="new">
                 <text>Project</text>
+                <Action name="set-project-name" />
                 <Action name="new-graph" />
                 <Action name="new-script" />
                 <Action name="import-graph" />

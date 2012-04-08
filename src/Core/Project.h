@@ -63,8 +63,8 @@ public:
     Project(QString projectFile);
     virtual ~Project();
 
-    void setProjectPath(QString directory);
-    QString projectPath() const;
+    void setProjectDirectory(QString directory);
+    QString projectDirectory() const;
 
     void setName(QString name);
     QString name() const;

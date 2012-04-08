@@ -37,7 +37,7 @@ public:
     ProjectPrivate() {}
 
     QString _name;
-    QString _projectPath;
+    QString _projectDirectory;
     QString _projectFile;
     QMap<int, KUrl> _codeFileGroup;
     QMap<int, QString> _graphFileGroup;
@@ -118,15 +118,15 @@ QString Project::name() const
 }
 
 
-void Project::setProjectPath(QString directory)
+void Project::setProjectDirectory(QString directory)
 {
-    d->_projectPath = directory;
+    d->_projectDirectory = directory;
 }
 
 
-QString Project::projectPath() const
+QString Project::projectDirectory() const
 {
-    return d->_projectPath;
+    return d->_projectDirectory;
 }
 
 
