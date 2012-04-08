@@ -1,11 +1,11 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -28,7 +28,7 @@
 
 class GraphPropertiesModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
     /*! Default Constructor.
       \param parent the QObject that owns this Model.   */
@@ -42,7 +42,7 @@ public:
     /*! Gives the number or columns on the model.
      \param parent a default constructed, unused, QModelIndex.
      \return the const value 2. */
-    int columnCount ( const QModelIndex & parent = QModelIndex() ) const;
+    int columnCount(const QModelIndex & parent = QModelIndex()) const;
 
     /*! Return the data of a item on the model.
     \param index the position of the item.
@@ -62,9 +62,9 @@ public:
     void setDataSource(QObject *dataSource);
 
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
-    
+
     Qt::ItemFlags flags(const QModelIndex &index) const;
-    
+
     /**Add properti to data source and insert a new row,*/
     void addDynamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal);
 

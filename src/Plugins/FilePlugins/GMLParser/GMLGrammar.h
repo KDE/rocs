@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -33,56 +33,55 @@
 class Document;
 class QString;
 
-namespace Rocs{
+namespace Rocs
+{
 namespace GMLPlugin
 {
-    namespace qi = boost::spirit::qi;
-    namespace ascii = boost::spirit::ascii;
+namespace qi = boost::spirit::qi;
+namespace ascii = boost::spirit::ascii;
 
 
-    void gotKey(const std::string &key);
+void gotKey(const std::string &key);
 
-    void gotValue(const std::string &Value);
+void gotValue(const std::string &Value);
 
-    void beginList();
+void beginList();
 
 
-    void endList();
+void endList();
 
-    void t();
-    void t1();
+void t();
+void t1();
 
-    bool parse(QString& content, Document* doc);
+bool parse(QString& content, Document* doc);
 
-    template <typename Iterator>
-    struct roman : boost::spirit::qi::grammar<Iterator, unsigned()>
-    {
-        roman() : roman::base_type(start)
-        {
-            using qi::eps;
-            using qi::double_;
-            using qi::lexeme;
-            using qi::_val;
-            using ascii::char_;
-            using qi::_1;
+template <typename Iterator>
+struct roman : boost::spirit::qi::grammar<Iterator, unsigned()> {
+    roman() : roman::base_type(start) {
+    using qi::eps;
+    using qi::double_;
+    using qi::lexeme;
+    using qi::_val;
+    using ascii::char_;
+    using qi::_1;
 
-            start = List;
-            List = -KeyValue >> *(+WhiteSpace >> KeyValue) >> *WhiteSpace;
-            KeyValue = *(WhiteSpace) >> Key[&gotKey] >> +WhiteSpace >> Value[&gotValue] ;
-            Key = (char_("a-zA-Z")[_val += _1] >> *char_("a-zA-Z0-9_")[_val += _1]);
-            Value = -Sign[_val += _1] >> +char_("0-9")[_val += _1] >> -(( char_('.')[_val += _1] >> +char_("0-9")[_val += _1]))
-                    | String[_val = _1]
-                    | char_('[')[beginList] >> *WhiteSpace >> List >> *WhiteSpace>> char_(']')[endList] ;
-            String = lexeme[char_('"') >> *((char_ - '"') | char_('/'))[_val += _1] >> char_('"')];
-            Sign = (char_('+')|char_('-'))[_val += _1];
-            WhiteSpace = ascii::space;
-        }
+    start = List;
+    List = -KeyValue >> *(+WhiteSpace >> KeyValue) >> *WhiteSpace;
+    KeyValue = *(WhiteSpace) >> Key[&gotKey] >> +WhiteSpace >> Value[&gotValue] ;
+    Key = (char_("a-zA-Z")[_val += _1] >> *char_("a-zA-Z0-9_")[_val += _1]);
+    Value = -Sign[_val += _1] >> +char_("0-9")[_val += _1] >> -((char_('.')[_val += _1] >> +char_("0-9")[_val += _1]))
+            | String[_val = _1]
+            | char_('[')[beginList] >> *WhiteSpace >> List >> *WhiteSpace >> char_(']')[endList] ;
+    String = lexeme[char_('"') >> *((char_ - '"') | char_('/'))[_val += _1] >> char_('"')];
+    Sign = (char_('+') | char_('-'))[_val += _1];
+    WhiteSpace = ascii::space;
+}
 
-        boost::spirit::qi::rule<Iterator, unsigned()> start;
-        boost::spirit::qi::rule<Iterator> List, KeyValue ;
-        boost::spirit::qi::rule<Iterator, std::string()> Key, Value, String, Sign;
-        boost::spirit::qi::rule<Iterator> WhiteSpace/*, Comments*/;
-    };
+boost::spirit::qi::rule<Iterator, unsigned()> start;
+boost::spirit::qi::rule<Iterator> List, KeyValue ;
+boost::spirit::qi::rule<Iterator, std::string()> Key, Value, String, Sign;
+boost::spirit::qi::rule<Iterator> WhiteSpace/*, Comments*/;
+};
 }
 }
 // // #include "dotrenderop.h"

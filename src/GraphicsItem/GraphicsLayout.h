@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -22,26 +22,27 @@
 #include <QObject>
 #include "rocslib_export.h"
 
-class ROCSLIB_EXPORT GraphicsLayout : public QObject {
+class ROCSLIB_EXPORT GraphicsLayout : public QObject
+{
     Q_OBJECT
 public:
     static GraphicsLayout* self();
-    
+
     ~GraphicsLayout();
-    
+
     void setViewStyleDataNode(int style);
     void setViewStyleDataEdge(int style);
-    
+
     int viewStyleDataNode() const;
     int viewStyleDataEdge() const;
 
 private:
-    GraphicsLayout( QObject* parent=0 );
+    GraphicsLayout(QObject* parent = 0);
     int _viewStyleDataNode;
     int _viewStyleDataEdge;
 
     static GraphicsLayout* _self;
-    
+
 signals:
     void changed();
 };

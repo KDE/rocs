@@ -40,19 +40,21 @@
 
 
 AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, GraphScene* gc)
-        : KAction(KIcon(), tooltip, gc) 
+    : KAction(KIcon(), tooltip, gc)
 {
     _graphScene = gc;
     setupOrientation(o);
 
-    connect(this, SIGNAL(triggered()), this, SLOT(align())); 
+    connect(this, SIGNAL(triggered()), this, SLOT(align()));
 }
 
-void AlignAction::registerData(DataList dataList) {
+void AlignAction::registerData(DataList dataList)
+{
     _registeredData = dataList;
 }
 
-void AlignAction::unsetData() {
+void AlignAction::unsetData()
+{
     _registeredData.clear();
 }
 
@@ -88,13 +90,14 @@ void AlignAction::setupOrientation(AlignAction::Orientation o)
 }
 
 
-void AlignAction::align() {
+void AlignAction::align()
+{
     DataList dataList;
     if (_registeredData.empty()) {
         QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
-        foreach(QGraphicsItem *i, itemList) {
-            if ( DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i) ) {
-                dataList.append( dataItem->data() );
+        foreach(QGraphicsItem * i, itemList) {
+            if (DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i)) {
+                dataList.append(dataItem->data());
             }
         }
     } else {
@@ -119,7 +122,7 @@ void AlignAction::align() {
         alignX(dataList);
         break;
     case Top :
-        qSort( dataList.begin(), dataList.end(), topLessThan);
+        qSort(dataList.begin(), dataList.end(), topLessThan);
         alignY(dataList);
         break;
     case Circle :
@@ -134,11 +137,12 @@ void AlignAction::align() {
     unsetData();
 }
 
-void AlignAction::alignY(DataList dataList) {
+void AlignAction::alignY(DataList dataList)
+{
     qreal final = dataList[0]->y();
 
     if (_orientation == VCenter || _orientation == HCenter) {
-        qreal otherSide = dataList[dataList.size()-1]->y();
+        qreal otherSide = dataList[dataList.size() - 1]->y();
         final = (final + otherSide) / 2;
     }
     foreach(DataPtr data, dataList) {
@@ -146,10 +150,11 @@ void AlignAction::alignY(DataList dataList) {
     }
 }
 
-void AlignAction::alignX(DataList dataList) {
+void AlignAction::alignX(DataList dataList)
+{
     qreal final = dataList[0]->x();
     if (_orientation == VCenter || _orientation == HCenter) {
-        qreal otherSide = dataList[dataList.size()-1]->x();
+        qreal otherSide = dataList[dataList.size() - 1]->x();
         final = (final + otherSide) / 2;
     }
     foreach(DataPtr data, dataList) {
@@ -157,12 +162,14 @@ void AlignAction::alignX(DataList dataList) {
     }
 }
 
-void AlignAction::alignCircle(DataList dataList) {
+void AlignAction::alignCircle(DataList dataList)
+{
     Topology topology = Topology();
     topology.applyCircleAlignment(dataList);
 }
 
-void AlignAction::alignMinCutTree(DataList dataList) {
+void AlignAction::alignMinCutTree(DataList dataList)
+{
     Topology topology = Topology();
     topology.applyMinCutTreeAlignment(dataList);
 }

@@ -187,8 +187,8 @@ Project* MainWindow::createNewProject()
 {
     Project* newProject = new Project();
     // create new document and add this to project new
-    newProject->addGraphFileNew( DocumentManager::self()->loadDocument() );
-    newProject->addCodeFileNew( _codeEditor->newScript() );
+    newProject->addGraphFileNew(DocumentManager::self()->loadDocument());
+    newProject->addCodeFileNew(_codeEditor->newScript());
 
     return newProject;
 }
@@ -581,18 +581,17 @@ void MainWindow::saveProject()
 {
     // save graphs and scripts
     if (_currentProject->isTemporary()) {
-        QString file = KFileDialog::getSaveFileName( QString(),
-                                                     i18n("*.rocs|Rocs project files\n*|All files"),
-                                                     this,
-                                                     i18n("Save Project")
+        QString file = KFileDialog::getSaveFileName(QString(),
+                       i18n("*.rocs|Rocs project files\n*|All files"),
+                       this,
+                       i18n("Save Project")
                                                    );
         // we need to set project directory first to allow correcte relative paths
         _currentProject->setProjectDirectory(file);
         saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
         saveScripts();
         _currentProject->writeProjectFile(file);
-    }
-    else {
+    } else {
         saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
         saveScripts();
         _currentProject->writeProjectFile();
@@ -607,22 +606,22 @@ void MainWindow::openProject()
     DocumentManager::self()->closeAllDocuments();
 
     delete _currentProject;
-    QString file = KFileDialog::getOpenFileName( QString(),
-                                                 i18n("*.rocs|Rocs project files\n*|All files"),
-                                                 this,
-                                                 i18n("Open Project Files"));
+    QString file = KFileDialog::getOpenFileName(QString(),
+                   i18n("*.rocs|Rocs project files\n*|All files"),
+                   this,
+                   i18n("Open Project Files"));
     _currentProject = new Project(file);
-    foreach (KUrl graphFile, _currentProject->graphFiles()) {
+    foreach(KUrl graphFile, _currentProject->graphFiles()) {
         DocumentManager::self()->loadDocument(graphFile.toLocalFile()); //TODO documents should use kurls
     }
-    if (_currentProject->graphFiles().count()==0) {
+    if (_currentProject->graphFiles().count() == 0) {
         _currentProject->addGraphFileNew(DocumentManager::self()->loadDocument());
     }
-    foreach (KUrl codeFile, _currentProject->codeFiles()) {
+    foreach(KUrl codeFile, _currentProject->codeFiles()) {
         _codeEditor->openScript(codeFile);
         //TODO set curser line
     }
-    if (_currentProject->codeFiles().count()==0) {
+    if (_currentProject->codeFiles().count() == 0) {
         _currentProject->addCodeFileNew(_codeEditor->newScript());
     }
 }
@@ -630,21 +629,21 @@ void MainWindow::openProject()
 
 void MainWindow::setProjectName()
 {
-    QString name = KInputDialog::getText( i18n("Set Project Name"),
-                                              i18n("Name:"),
-                                              _currentProject->name()
-                                            );
+    QString name = KInputDialog::getText(i18n("Set Project Name"),
+                                         i18n("Name:"),
+                                         _currentProject->name()
+                                        );
     _currentProject->setName(name);
 }
 
 
 void MainWindow::saveScripts()
 {
-    foreach (KTextEditor::Document* textDocument, _currentProject->codeFilesNew()) {
-        QString file = KFileDialog::getSaveFileName( QString(),
-                                                 i18n("*.js|Rocs script documents\n*|All files"),
-                                                 this,
-                                                 i18n("Save Script Document"));
+    foreach(KTextEditor::Document * textDocument, _currentProject->codeFilesNew()) {
+        QString file = KFileDialog::getSaveFileName(QString(),
+                       i18n("*.js|Rocs script documents\n*|All files"),
+                       this,
+                       i18n("Save Script Document"));
         _currentProject->saveCodeFileNew(textDocument, file);
     }
     _codeEditor->saveAllScripts();
@@ -653,10 +652,10 @@ void MainWindow::saveScripts()
 
 void MainWindow::newScript()
 {
-    QString file = KFileDialog::getSaveFileName( _currentProject->projectDirectory(),
-                                                 i18n("*.js|Rocs script document\n*|All files"),
-                                                 this,
-                                                 i18n("Enter Filename for the New Script File"));
+    QString file = KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
+                   i18n("*.js|Rocs script document\n*|All files"),
+                   this,
+                   i18n("Enter Filename for the New Script File"));
     if (file.isEmpty()) {
         kDebug() << "Filename is empty and no script file was created.";
         return;
@@ -679,20 +678,20 @@ void MainWindow::saveGraph()
 void MainWindow::saveGraphAs()
 {
     Document *d = DocumentManager::self()->activeDocument();
-    QString file = KFileDialog::getSaveFileName( QString(),
-                                                 i18n("*.graph|Rocs graph documents\n*|All files"),
-                                                 this,
-                                                 i18n("Save Graph Document"));
+    QString file = KFileDialog::getSaveFileName(QString(),
+                   i18n("*.graph|Rocs graph documents\n*|All files"),
+                   this,
+                   i18n("Save Graph Document"));
     _currentProject->saveGraphFileAs(d, file);
 }
 
 
 void MainWindow::newGraph()
 {
-    QString file = KFileDialog::getSaveFileName( _currentProject->projectDirectory(),
-                                                 i18n("*.graph|Rocs graph documents\n*|All files"),
-                                                 this,
-                                                 i18n("Enter Filename for the New Graph Document"));
+    QString file = KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
+                   i18n("*.graph|Rocs graph documents\n*|All files"),
+                   this,
+                   i18n("Enter Filename for the New Graph Document"));
     if (file.isEmpty()) {
         kDebug() << "Filename is empty and no script file was created.";
         return;

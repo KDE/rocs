@@ -39,51 +39,57 @@
 #include <QtCore/qmath.h>
 #include <QGraphicsSimpleTextItem>
 
-PointerItem::PointerItem( PointerPtr pointer, QGraphicsItem *parent)
-        : QObject(0), QGraphicsPathItem(parent)
+PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
+    : QObject(0), QGraphicsPathItem(parent)
 {
     _pointer = pointer;
     _index = _pointer->relativeIndex();
     _name = new QGraphicsSimpleTextItem(this);
     _value = new QGraphicsSimpleTextItem(this);
-    setZValue( - _index);
+    setZValue(- _index);
     setFlag(ItemIsSelectable, true);
     connectSignals();
     updateAttributes();
 }
 
-PointerItem::~PointerItem() {
-  //dynamic_cast<GraphScene*>(scene())->removeGItem(this);
+PointerItem::~PointerItem()
+{
+    //dynamic_cast<GraphScene*>(scene())->removeGItem(this);
 }
 
-void PointerItem::connectSignals() {
-    connect (_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
-    connect (_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
-    connect (_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
+void PointerItem::connectSignals()
+{
+    connect(_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
+    connect(_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
+    connect(_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
 
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
 }
 
-void PointerItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/) {
+void PointerItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/)
+{
 }
 
-void PointerItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/) {
+void PointerItem::mouseReleaseEvent(QGraphicsSceneMouseEvent */*event*/)
+{
 }
 
-void PointerItem::remove() {
-    if (scene()){
+void PointerItem::remove()
+{
+    if (scene()) {
         scene()->removeItem(this);
     }
     deleteLater();
 }
 
-void PointerItem::updatePos() {
-    if (!_pointer || !_pointer->from() || !_pointer->to()){
+void PointerItem::updatePos()
+{
+    if (!_pointer || !_pointer->from() || !_pointer->to()) {
         return;
     }
     QLine q(_pointer->from()->x(), _pointer->from()->y(),    _pointer->to()->x(),  _pointer->to()->y());
-    qreal size = qSqrt( qPow(q.dx(), 2) + qPow(q.dy(), 2));
-    if (_pointer->from() != _pointer->to() && size < 20  ) {
+    qreal size = qSqrt(qPow(q.dx(), 2) + qPow(q.dy(), 2));
+    if (_pointer->from() != _pointer->to() && size < 20) {
         setPath(QPainterPath());
     } else {
         setPath(createCurves());
@@ -91,15 +97,22 @@ void PointerItem::updatePos() {
     updateAttributes();
 }
 
-void PointerItem::updateAttributes() {
+void PointerItem::updateAttributes()
+{
     Qt::PenStyle s;
-    if     (_pointer->style() == "dash"	){ s = Qt::DashLine;    }
-    else if(_pointer->style() == "dot"	){ s = Qt::DotLine;     }
-    else if(_pointer->style() == "dash dot"){ s = Qt::DashDotLine; }
-    else if(_pointer->style() == "solid"	){ s = Qt::SolidLine;   }
-    else                                 { s = Qt::SolidLine;   }
+    if (_pointer->style() == "dash") {
+        s = Qt::DashLine;
+    } else if (_pointer->style() == "dot") {
+        s = Qt::DotLine;
+    } else if (_pointer->style() == "dash dot") {
+        s = Qt::DashDotLine;
+    } else if (_pointer->style() == "solid") {
+        s = Qt::SolidLine;
+    } else                                 {
+        s = Qt::SolidLine;
+    }
 
-    setPen(QPen(QBrush(QColor(_pointer->color())), _pointer->width(), s,Qt::RoundCap, Qt::RoundJoin));
+    setPen(QPen(QBrush(QColor(_pointer->color())), _pointer->width(), s, Qt::RoundCap, Qt::RoundJoin));
     _value->hide();
     _name->hide();
     this->hide();
@@ -109,17 +122,16 @@ void PointerItem::updateAttributes() {
 
     if (_pointer->from() == _pointer->to()) {
         qreal x1 = boundingRect().x() + boundingRect().width() + 5;
-        qreal y1 = boundingRect().y() + (boundingRect().height()/2) - 10;
+        qreal y1 = boundingRect().y() + (boundingRect().height() / 2) - 10;
         _name->setPos(x1, y1);
-        _value->setPos(x1, y1+14);
-    }
-    else {
-        _name->setPos(middle.x() - _name->boundingRect().width()/2, middle.y());
-        _value->setPos(middle.x() - _name->boundingRect().width()/2, middle.y()-14);
+        _value->setPos(x1, y1 + 14);
+    } else {
+        _name->setPos(middle.x() - _name->boundingRect().width() / 2, middle.y());
+        _value->setPos(middle.x() - _name->boundingRect().width() / 2, middle.y() - 14);
     }
 
     // overall visibility for pointer
-    if( _pointer->isVisible()) {
+    if (_pointer->isVisible()) {
         if (_pointer->showValue()) {
             _value->show();
         }
@@ -132,12 +144,13 @@ void PointerItem::updateAttributes() {
     update();
 }
 
-void PointerItem::paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget){
-  Q_UNUSED(option);
-  Q_UNUSED(widget);
+void PointerItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+{
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
 
-  if ( isSelected() ){
-    painter->setPen(QPen(Qt::black, _pointer->width(),  Qt::DotLine));
-  }
-  QGraphicsPathItem::paint(painter, option, widget);
+    if (isSelected()) {
+        painter->setPen(QPen(Qt::black, _pointer->width(),  Qt::DotLine));
+    }
+    QGraphicsPathItem::paint(painter, option, widget);
 }

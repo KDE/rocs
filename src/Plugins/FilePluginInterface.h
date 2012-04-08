@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -28,24 +28,26 @@ class Document;
 
 class ROCSLIB_EXPORT FilePluginInterface: public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  FilePluginInterface(const KComponentData &instance, QObject* parent);
-  virtual ~FilePluginInterface();
-  virtual const QStringList extensions() const = 0; //Extensões suportadas
+    FilePluginInterface(const KComponentData &instance, QObject* parent);
+    virtual ~FilePluginInterface();
+    virtual const QStringList extensions() const = 0; //Extensões suportadas
 
-  virtual Document * readFile(const QString &file) = 0; //return 0 se arq. inválido
+    virtual Document * readFile(const QString &file) = 0; //return 0 se arq. inválido
 
-  virtual bool writeFile(Document &graph, const QString & fileName)  = 0; //false se não gravou.
+    virtual bool writeFile(Document &graph, const QString & fileName)  = 0; //false se não gravou.
 
-  virtual const QString lastError(); //return error
+    virtual const QString lastError(); //return error
 
-  /** script to run after load the file*/
-  virtual const QString scriptToRun(){return QString();}
+    /** script to run after load the file*/
+    virtual const QString scriptToRun() {
+        return QString();
+    }
 
 private:
-  class Private;
-  Private * d;
+    class Private;
+    Private * d;
 };
 
 #endif // FILEPLUGININTERFACE_H

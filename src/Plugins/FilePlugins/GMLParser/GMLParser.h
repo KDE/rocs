@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -29,8 +29,8 @@ class Data;
 
 class GMLParser: public FilePluginInterface
 {
-  Q_OBJECT
-  public:
+    Q_OBJECT
+public:
     explicit GMLParser(QObject* parent, const QList< QVariant >&);
     ~GMLParser();
 
@@ -45,11 +45,11 @@ class GMLParser: public FilePluginInterface
 
     virtual const QString scriptToRun();
 
-    private:
-        QString _lastError;
-        void setError ( QString arg1 );
-        QString const processNode(DataPtr) const;
-        QString const processEdge(PointerPtr e) const;
+private:
+    QString _lastError;
+    void setError(QString arg1);
+    QString const processNode(DataPtr) const;
+    QString const processEdge(PointerPtr e) const;
 
 };
 

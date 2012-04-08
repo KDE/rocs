@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -24,10 +24,12 @@
 #include <boost/shared_ptr.hpp>
 
 class ListNode;
-namespace Rocs{
-class ListStructure : public DataStructure {
-  Q_OBJECT
-  public:
+namespace Rocs
+{
+class ListStructure : public DataStructure
+{
+    Q_OBJECT
+public:
     using DataStructure::remove;
     using DataStructure::addPointer;
     using DataStructure::addData;
@@ -35,19 +37,19 @@ class ListStructure : public DataStructure {
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
-    ListStructure ( Document* parent = 0 );
+    ListStructure(Document* parent = 0);
 
     void importStructure(DataStructurePtr other);
 
     virtual ~ListStructure();
 
-  public slots:
+public slots:
 
-    virtual DataPtr addData(QString name, int dataType=0);
+    virtual DataPtr addData(QString name, int dataType = 0);
 
     virtual void remove(DataPtr n);
 
-    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType=0);
+    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType = 0);
 
     void arrangeNodes();
 

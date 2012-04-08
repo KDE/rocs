@@ -32,13 +32,13 @@
 qreal ZoomAction::_zoomFactor = 1;
 
 ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
-: AbstractAction(scene, parent)
-,m_view(scene->views().at(0))
-,m_zoomRectItem(0)
+    : AbstractAction(scene, parent)
+    , m_view(scene->views().at(0))
+    , m_zoomRectItem(0)
 {
-    setText(i18n ( "Zoom" ));
-    setToolTip ( i18n ( "Zoom the canvas by the wheel, or by dragging." ) );
-    setIcon ( KIcon ( "page-zoom" ) );
+    setText(i18n("Zoom"));
+    setToolTip(i18n("Zoom the canvas by the wheel, or by dragging."));
+    setIcon(KIcon("page-zoom"));
     _name = "zoom";
 }
 
@@ -46,7 +46,7 @@ bool ZoomAction::executePress(QPointF pos)
 {
     delete m_zoomRectItem;
 
-    m_zoomRectItem = new QGraphicsRectItem(0,0,0,0);
+    m_zoomRectItem = new QGraphicsRectItem(0, 0, 0, 0);
     QColor color(Qt::green);
     color.setAlphaF(0.3);
     m_zoomRectItem->setBrush(QBrush(color));
@@ -82,7 +82,7 @@ bool ZoomAction::executeRelease(QPointF)
     if (!m_zoomRectItem)
         return false;
 
-    m_view->fitInView(m_zoomRectItem->rect(),Qt::KeepAspectRatioByExpanding);
+    m_view->fitInView(m_zoomRectItem->rect(), Qt::KeepAspectRatioByExpanding);
     delete m_zoomRectItem;
     m_zoomRectItem = 0;
     return true;
@@ -96,18 +96,18 @@ bool ZoomAction::executeDoubleClick(QPointF)
 
 bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
-    switch(keyEvent->key()){
-        case Qt::Key_Plus  : {
-            m_view->scale(1.25, 1.25);
-            _zoomFactor *= 1.25;
-            break;
-        }
-        case Qt::Key_Minus : {
-            m_view->scale(0.8, 0.8);
-            _zoomFactor *= 0.8;
-            break;
-        }
-        case Qt::Key_5     : m_view->resetMatrix();     break;
+    switch (keyEvent->key()) {
+    case Qt::Key_Plus  : {
+        m_view->scale(1.25, 1.25);
+        _zoomFactor *= 1.25;
+        break;
+    }
+    case Qt::Key_Minus : {
+        m_view->scale(0.8, 0.8);
+        _zoomFactor *= 0.8;
+        break;
+    }
+    case Qt::Key_5     : m_view->resetMatrix();     break;
     }
     keyEvent->accept();
     return true;
@@ -115,9 +115,9 @@ bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 
 bool ZoomAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent)
 {
-    if (wEvent->delta() > 0){ // zoom out
+    if (wEvent->delta() > 0) { // zoom out
         zoomOut(wEvent->scenePos());
-    }else{ // zoom in
+    } else { // zoom in
         zoomIn(wEvent->scenePos());
     }
 //     qDebug() << "event position: "<< wEvent->scenePos();
@@ -125,21 +125,24 @@ bool ZoomAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent)
     return true;
 }
 
-void ZoomAction::zoomInCenter() {
+void ZoomAction::zoomInCenter()
+{
     m_view->scale(1.25, 1.25);
     _zoomFactor *= 1.25;
 }
 
 
-void ZoomAction::zoomIn(QPointF zoomCenter) {
+void ZoomAction::zoomIn(QPointF zoomCenter)
+{
     zoomInCenter();
     m_view->centerOn(zoomCenter);
 }
 
-void ZoomAction::zoomOutCenter() {
+void ZoomAction::zoomOutCenter()
+{
     if (
-        m_view->width()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->width()
-        || m_view->height()/_zoomFactor*1.25 < 5*DocumentManager::self()->activeDocument()->height()
+        m_view->width() / _zoomFactor * 1.25 < 5 * DocumentManager::self()->activeDocument()->width()
+        || m_view->height() / _zoomFactor * 1.25 < 5 * DocumentManager::self()->activeDocument()->height()
     ) {
         m_view->scale(0.8, 0.8);
         _zoomFactor *= 0.8;
@@ -147,11 +150,13 @@ void ZoomAction::zoomOutCenter() {
 }
 
 
-void ZoomAction::zoomOut(QPointF zoomCenter) {
+void ZoomAction::zoomOut(QPointF zoomCenter)
+{
     zoomOutCenter();
-   m_view->centerOn(zoomCenter);
+    m_view->centerOn(zoomCenter);
 }
 
-void ZoomAction::zoomReset() {
+void ZoomAction::zoomReset()
+{
     m_view->resetMatrix();
 }

@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -21,21 +21,22 @@
 
 #include <Plugins/FilePluginInterface.h>
 
-namespace Rocs{
-  class KMLParser : public FilePluginInterface
-  {
+namespace Rocs
+{
+class KMLParser : public FilePluginInterface
+{
 
-  public:
-      KMLParser(QObject* parent, const QList< QVariant >& opts);
-      virtual bool writeFile(Document& graph, const QString& fileName);
-      virtual Document* readFile(const QString& file);
-      virtual const QStringList extensions() const;
-      virtual const QString scriptToRun();
-      virtual const QString lastError();
+public:
+    KMLParser(QObject* parent, const QList< QVariant >& opts);
+    virtual bool writeFile(Document& graph, const QString& fileName);
+    virtual Document* readFile(const QString& file);
+    virtual const QStringList extensions() const;
+    virtual const QString scriptToRun();
+    virtual const QString lastError();
 
 private:
-QString _lastError;
+    QString _lastError;
 
-  };
+};
 }
 #endif // KMLPARSER_H

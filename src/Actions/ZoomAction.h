@@ -42,14 +42,14 @@ public:
     bool executeDoubleClick(QPointF pos);
     bool executeKeyRelease(QKeyEvent* keyEvent);
     bool executeWheelEvent(QGraphicsSceneWheelEvent *wEvent);
-    
+
 public slots:
     void zoomOut(QPointF zoomCenter);
     void zoomIn(QPointF zoomCenter);
     void zoomInCenter();
     void zoomOutCenter();
     void zoomReset();
-    
+
 private:
     QRectF m_zoomArea;
     qreal m_currentZoomFactor;
@@ -58,7 +58,7 @@ private:
     QPointF m_beginZoom;
     QPointF m_endZoom;
     int m_steps;
-      
+
     static qreal _zoomFactor;
 };
 

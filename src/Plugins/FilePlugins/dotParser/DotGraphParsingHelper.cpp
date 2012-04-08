@@ -44,25 +44,25 @@ namespace KGraphViewer
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<int>::max()
 
 DotGraphParsingHelper::DotGraphParsingHelper():
-        attrid(),
-        valid(),
-        attributed(),
-        subdataTypeid(),
-        uniq(0),
-        attributes(),
-        dataTypeAttributes(),
-        datumAttributes(),
-        pointersAttributes(),
-        dataTypeAttributesStack(),
-        datumAttributesStack(),
-        pointersAttributesStack(),
-        edgebounds(),
-        z(0),
-        maxZ(0),
-        dataType(0),
+    attrid(),
+    valid(),
+    attributed(),
+    subdataTypeid(),
+    uniq(0),
+    attributes(),
+    dataTypeAttributes(),
+    datumAttributes(),
+    pointersAttributes(),
+    dataTypeAttributesStack(),
+    datumAttributesStack(),
+    pointersAttributesStack(),
+    edgebounds(),
+    z(0),
+    maxZ(0),
+    dataType(0),
 //   gs(0),
-        gn(0),
-        ge(0)
+    gn(0),
+    ge(0)
 {
 }
 
@@ -71,19 +71,15 @@ void DotGraphParsingHelper::setdataTypeelementattributes(QObject* ge, const Attr
     AttributesMap::const_iterator it, it_end;
     it = attributes.begin();
     it_end = attributes.end();
-    for (; it != it_end; it++)
-    {
-        kDebug() << "    " << QString::fromStdString((*it).first) << "\t=\t'" << QString::fromStdString((*it).second) <<"'";
+    for (; it != it_end; it++) {
+        kDebug() << "    " << QString::fromStdString((*it).first) << "\t=\t'" << QString::fromStdString((*it).second) << "'";
         kDebug() << ge->metaObject()->className();
-        if ((*it).first=="label" && strcmp(ge->metaObject()->className(), "Edge") == 0 )
-        {
+        if ((*it).first == "label" && strcmp(ge->metaObject()->className(), "Edge") == 0) {
 
             QString label = QString::fromUtf8((*it).second.c_str());
-            label.replace("\\n","\n");
+            label.replace("\\n", "\n");
             ge->setProperty("name", label);
-        }
-        else
-        {
+        } else {
 //       (*ge).attributes()[QString::fromStdString((*it).first)] =
             DynamicPropertiesList::New()->addProperty(ge, QString::fromStdString((*it).first));
             ge->setProperty((*it).first.c_str(), QString::fromStdString((*it).second));
@@ -99,14 +95,14 @@ void DotGraphParsingHelper::setdataTypeattributes()
     setdataTypeelementattributes(dataType, dataTypeAttributes);
 }
 
-void DotGraphParsingHelper::setsubdataTypeattributes(){
+void DotGraphParsingHelper::setsubdataTypeattributes()
+{
 }
 
 void DotGraphParsingHelper::setdatumattributes()
 {
 
-    if (gn == 0)
-    {
+    if (gn == 0) {
         return;
     }
     setdataTypeelementattributes(gn, datumAttributes);
@@ -120,42 +116,32 @@ void DotGraphParsingHelper::setedgeattributes()
 
 void DotGraphParsingHelper::setattributedlist()
 {
-    if (attributed == "graph")
-    {
-        if (attributes.find("bb") != attributes.end())
-        {
+    if (attributed == "graph") {
+        if (attributes.find("bb") != attributes.end()) {
             std::vector< int > v;
             parse_integers(attributes["bb"].c_str(), v);
-            if (v.size()>=4)
-            {
+            if (v.size() >= 4) {
                 kDebug() << "setting width and height to " << v[2] << v[3];
             }
         }
         AttributesMap::const_iterator it, it_end;
         it = attributes.begin();
         it_end = attributes.end();
-        for (; it != it_end; it++)
-        {
+        for (; it != it_end; it++) {
             dataTypeAttributes[(*it).first] = (*it).second;
         }
-    }
-    else if (attributed == "datum")
-    {
+    } else if (attributed == "datum") {
         AttributesMap::const_iterator it, it_end;
         it = attributes.begin();
         it_end = attributes.end();
-        for (; it != it_end; it++)
-        {
+        for (; it != it_end; it++) {
             datumAttributes[(*it).first] = (*it).second;
         }
-    }
-    else if (attributed == "edge")
-    {
+    } else if (attributed == "edge") {
         AttributesMap::const_iterator it, it_end;
         it = attributes.begin();
         it_end = attributes.end();
-        for (; it != it_end; it++)
-        {
+        for (; it != it_end; it++) {
 //       kDebug() << "    " << QString::fromStdString((*it).first) << " = " <<  QString::fromStdString((*it).second);
             pointersAttributes[(*it).first] = (*it).second;
         }
@@ -168,8 +154,7 @@ void DotGraphParsingHelper::createdatum(const std::string& datumid)
     QString id = QString::fromStdString(datumid);
     kDebug() << id;
     gn = dynamic_cast<Datum*>(dataType->datum(id));
-    if (gn==0 )//&& dataType->data().size() < KGV_MAX_ITEMS_TO_LOAD)
-    {
+    if (gn == 0) { //&& dataType->data().size() < KGV_MAX_ITEMS_TO_LOAD)
         kDebug() << "Creating a new datum" << subdataTypeid;
         gn = dataType->addDatum(id);
 
@@ -182,7 +167,8 @@ void DotGraphParsingHelper::createdatum(const std::string& datumid)
     edgebounds.clear();
 }
 
-void DotGraphParsingHelper::createsubdataType(){
+void DotGraphParsingHelper::createsubdataType()
+{
 }
 
 void DotGraphParsingHelper::createedges()
@@ -191,14 +177,12 @@ void DotGraphParsingHelper::createedges()
     std::string datum1Name, datum2Name;
     datum1Name = edgebounds.front();
     edgebounds.pop_front();
-    while (!edgebounds.empty())
-    {
+    while (!edgebounds.empty()) {
         datum2Name = edgebounds.front();
         edgebounds.pop_front();
 
         Datum* gn1 = dataType->datum(QString::fromStdString(datum1Name));
-        if (gn1 == 0)
-        {
+        if (gn1 == 0) {
 //       kDebug() << "new datum 1";
             gn1 = dataType->addDatum(QString::fromStdString(datum1Name));
 
@@ -208,8 +192,7 @@ void DotGraphParsingHelper::createedges()
 //             gn1 = dataType->datum(QString::fromStdString(datum1Name));
         }
         Datum* gn2 = dataType->datum(QString::fromStdString(datum2Name));
-        if (gn2 == 0)
-        {
+        if (gn2 == 0) {
 //       kDebug() << "new datum 1";
             gn2 = dataType->addDatum(QString::fromStdString(datum2Name));
 
@@ -217,8 +200,7 @@ void DotGraphParsingHelper::createedges()
                 gn2->addDynamicProperty("SubGraph", subdataTypeid.last());
             }
         }
-        if (gn1 == 0 || gn2 == 0)
-        {
+        if (gn1 == 0 || gn2 == 0) {
             kError() << "Unable to find or create edge bound(s) gn1=" << gn1 << "; gn2=" << gn2;
         }
 

@@ -28,7 +28,8 @@ class Pointer;
 class Datum;
 
 
-class URAddEdge : public QUndoCommand {
+class URAddEdge : public QUndoCommand
+{
 public:
     URAddEdge(Pointer *e);
     void redo();

@@ -1,4 +1,4 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
@@ -6,7 +6,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -31,30 +31,31 @@
 
 
 DeleteAction::DeleteAction(const QString& name, GraphScene *scene, QWidget *parent)
-        : KAction(KIcon(), name, parent) 
+    : KAction(KIcon(), name, parent)
 {
     _graphScene = scene;
-    connect (this, SIGNAL(triggered()), this, SLOT(executeDelete()));
+    connect(this, SIGNAL(triggered()), this, SLOT(executeDelete()));
 }
 
 DeleteAction::DeleteAction(const QString& name, GraphScene *scene, DataPtr data, QWidget *parent)
-        : KAction(KIcon(), name, parent) 
+    : KAction(KIcon(), name, parent)
 {
     _graphScene = scene;
     _data = data;
-    connect (this, SIGNAL(triggered()), this, SLOT(executeDelete()));
+    connect(this, SIGNAL(triggered()), this, SLOT(executeDelete()));
 }
 
 DeleteAction::DeleteAction(const QString& name, GraphScene *scene, DataStructurePtr dataStructure, QWidget *parent)
-        : KAction(KIcon(), name, parent) 
+    : KAction(KIcon(), name, parent)
 {
     _graphScene = scene;
     _dataStructure = dataStructure;
-    connect (this, SIGNAL(triggered()), this, SLOT(executeDelete()));
+    connect(this, SIGNAL(triggered()), this, SLOT(executeDelete()));
 }
 
 
-void DeleteAction::executeDelete() {
+void DeleteAction::executeDelete()
+{
     if (_data) {
         _data->remove();
         return;
@@ -63,7 +64,7 @@ void DeleteAction::executeDelete() {
         _dataStructure->remove();
         return;
     }
-    foreach (QGraphicsItem *selectedItem, _graphScene->selectedItems()) {
+    foreach(QGraphicsItem * selectedItem, _graphScene->selectedItems()) {
         if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(selectedItem)) {
             dItem->data()->remove();
         }

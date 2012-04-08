@@ -58,7 +58,7 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
 void CodeEditor::closeAllScripts()
 {
     // index list updates automatically (is QList)
-    for (int i=_scriptDocs.size(); i>=0; i--) {
+    for (int i = _scriptDocs.size(); i >= 0; i--) {
         closeDocument(0);
     }
 }

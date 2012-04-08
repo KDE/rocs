@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2009 Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008      Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -38,8 +38,9 @@ static const qreal PI_4 = Pi / 4.0;
 /// The Value of PI_8
 static const qreal PI_8 = Pi / 8.0;
 
-qreal rabs(qreal x) {
-    if (x<0) return x*-1;
+qreal rabs(qreal x)
+{
+    if (x < 0) return x * -1;
     return x;
 }
 #endif

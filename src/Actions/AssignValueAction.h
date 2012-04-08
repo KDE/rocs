@@ -50,7 +50,7 @@ public:
      * \param parent the parent widget
      */
     AssignValueAction(const QString& name, GraphScene *scene, AssignMethod method, DataStructurePtr ds, QWidget *parent);
-    
+
 public slots:
     void enumerateDataStructure();
     void enumerateSelected();

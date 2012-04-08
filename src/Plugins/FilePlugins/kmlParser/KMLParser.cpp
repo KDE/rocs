@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -32,16 +32,18 @@
 #include <QXmlResultItems>
 #include <QXmlNodeModelIndex>
 
-static const KAboutData aboutdata ( "rocs_kmlplugin", 0, ki18n ( "Open and Save Keyhole Markup Language files" ) , "0.1" );
+static const KAboutData aboutdata("rocs_kmlplugin", 0, ki18n("Open and Save Keyhole Markup Language files") , "0.1");
 
 
-K_PLUGIN_FACTORY ( FilePLuginFactory, registerPlugin< Rocs::KMLParser >(); )
-K_EXPORT_PLUGIN ( FilePLuginFactory ( aboutdata ) )
+K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< Rocs::KMLParser >();)
+K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
 
-namespace Rocs {
-KMLParser::KMLParser ( QObject* parent, const QList< QVariant >& ) :
-        FilePluginInterface ( FilePLuginFactory::componentData(), parent ) {
+namespace Rocs
+{
+KMLParser::KMLParser(QObject* parent, const QList< QVariant >&) :
+    FilePluginInterface(FilePLuginFactory::componentData(), parent)
+{
 
 }
 
@@ -50,7 +52,7 @@ bool KMLParser::writeFile(Document& graph, const QString& fileName)
 {
     QFile file(fileName);
     DataStructurePtr g = graph.activeDataStructure();
-    if (!file.open(QIODevice::WriteOnly|QIODevice::Text)) {
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         _lastError = i18n("Cannot open file %1: %2", fileName, file.errorString());
         return false;
     }
@@ -101,8 +103,8 @@ bool KMLParser::writeFile(Document& graph, const QString& fileName)
         xmlWriter.writeStartElement("LineString");
         xmlWriter.writeStartElement("coordinates");
 
-        foreach (DataPtr n, g->data()) {
-        if (n->property("Longitude").isValid()) {
+        foreach(DataPtr n, g->data()) {
+            if (n->property("Longitude").isValid()) {
                 xmlWriter.writeCharacters(QString("%1,%2,%3\n").arg(n->property("Longitude").toString(),
                                           n->property("Latitude").toString(),
                                           n->property("Elevation").toString()));
@@ -141,7 +143,7 @@ Document* KMLParser::readFile(const QString& file)
 const QStringList KMLParser::extensions() const
 {
     return QStringList()
-           << i18n ( "*.kml|Keyhole Markup Language Files" ) + '\n';
+           << i18n("*.kml|Keyhole Markup Language Files") + '\n';
 }
 const QString KMLParser::lastError()
 {

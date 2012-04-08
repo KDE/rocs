@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -27,7 +27,8 @@
 #include <KDebug>
 #include <KMessageBox>
 
-class PluginManagerPrivate {
+class PluginManagerPrivate
+{
 public:
     PluginManagerPrivate() {
         toolsPluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/ToolPlugin"));
@@ -38,7 +39,7 @@ public:
 
     }
     KPluginInfo PluginInfoFromName(const QString &arg1) {
-        foreach (KPluginInfo info, toolsPluginsInfo) {
+        foreach(KPluginInfo info, toolsPluginsInfo) {
             if (info.name() == arg1) {
                 return info;
             }
@@ -83,21 +84,23 @@ PluginManager::~PluginManager()
 }
 
 
-void PluginManager::loadPlugins() {
+void PluginManager::loadPlugins()
+{
     loadFilePlugins();
     loadToolsPlugins();
 }
 
-bool PluginManager::loadToolPlugin(QString name) {
+bool PluginManager::loadToolPlugin(QString name)
+{
     kDebug() << "Loading Tools Plugins ++++";
     KPluginInfo kpi =  _d->PluginInfoFromName(name);
 
     if (kpi.isValid()) {
         QString error;
 
-        ToolsPluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<ToolsPluginInterface>( QString::fromLatin1( "Rocs/ToolPlugin" ), QString::fromLatin1( "[Name]=='%1'" ).arg( name ), this, QVariantList(), &error );
+        ToolsPluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<ToolsPluginInterface>(QString::fromLatin1("Rocs/ToolPlugin"), QString::fromLatin1("[Name]=='%1'").arg(name), this, QVariantList(), &error);
 
-        if (plugin ) {
+        if (plugin) {
             _d->toolsPluginsMap.insert(kpi, plugin);
             kpi.setPluginEnabled(true);
             return true;
@@ -113,17 +116,18 @@ bool PluginManager::loadToolPlugin(QString name) {
     return false;
 }
 
-void PluginManager::loadToolsPlugins() {
+void PluginManager::loadToolsPlugins()
+{
 
     kDebug() << "Load Tools plugins";
 
-    foreach (KPluginInfo info, _d->toolsPluginsInfo) {
+    foreach(KPluginInfo info, _d->toolsPluginsInfo) {
         loadToolPlugin(info.name());
     }
 }
 
 
-KPluginInfo PluginManager::pluginInfo( ToolsPluginInterface* plugin)
+KPluginInfo PluginManager::pluginInfo(ToolsPluginInterface* plugin)
 {
     return _d->toolsPluginsMap.key(plugin);
 }
@@ -132,7 +136,7 @@ QList< ToolsPluginInterface* > PluginManager::toolPlugins()
 {
     loadToolsPlugins();
     QList < ToolsPluginInterface * > value;
-    foreach (KPluginInfo info, _d->toolsPluginsMap.keys()) {
+    foreach(KPluginInfo info, _d->toolsPluginsMap.keys()) {
         if (info.isPluginEnabled()) {
             value.append(_d->toolsPluginsMap[info]);
         }
@@ -141,15 +145,17 @@ QList< ToolsPluginInterface* > PluginManager::toolPlugins()
     return value;
 }
 
-QList< FilePluginInterface* > PluginManager::filePlugins() const {
+QList< FilePluginInterface* > PluginManager::filePlugins() const
+{
     qDebug() << "PluginManager::filePlugins() --- count = " << _filePlugins.count();
     return _filePlugins;
 }
 
-void PluginManager::loadFilePlugins() {
+void PluginManager::loadFilePlugins()
+{
     qDebug() << "PluginManager::loadFilePlugins()";
 
-    foreach (FilePluginInterface * f, _filePlugins) {
+    foreach(FilePluginInterface * f, _filePlugins) {
         delete f;
     }
     _filePlugins.clear();
@@ -157,15 +163,13 @@ void PluginManager::loadFilePlugins() {
     KService::List offers = KServiceTypeTrader::self()->query("Rocs/FilePlugin");
 
     KService::List::const_iterator iter;
-    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter)
-    {
+    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
         QString error;
         KService::Ptr service = *iter;
 
         KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
-        if (!factory)
-        {
+        if (!factory) {
             kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
             continue;
         }
@@ -182,12 +186,14 @@ void PluginManager::loadFilePlugins() {
         }
     }
 }
-KPluginInfo pluginInfo(const ToolsPluginInterface * /*plugin*/) {
+KPluginInfo pluginInfo(const ToolsPluginInterface * /*plugin*/)
+{
     return KPluginInfo();
 }
 
-FilePluginInterface *  PluginManager::filePluginsByExtension(QString ext) {
-    foreach (FilePluginInterface * p,  _filePlugins) {
+FilePluginInterface *  PluginManager::filePluginsByExtension(QString ext)
+{
+    foreach(FilePluginInterface * p,  _filePlugins) {
         if (p->extensions().join(";").contains(ext, Qt::CaseInsensitive)) {
             return p;
         }

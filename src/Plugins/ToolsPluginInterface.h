@@ -1,4 +1,4 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2001-2002  Duncan Mac-Vicar Prett <duncan@kde.org>
     Copyright 2002-2003  Martijn Klingens       <klingens@kde.org>
@@ -8,7 +8,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -82,62 +82,62 @@ Comment=Plugin that do some nice stuff
  * The constructor of your plugin should looks like this:
  *
  * \code
-	typedef KGenericFactory<MyPlugin> MyPluginFactory;
-	static const KAboutData aboutdata("kopete_myplugin", 0, ki18n("MyPlugin") , "1.0" );
-	K_EXPORT_COMPONENT_FACTORY( kopete_myplugin, MyPluginFactory( &aboutdata )  )
+    typedef KGenericFactory<MyPlugin> MyPluginFactory;
+    static const KAboutData aboutdata("kopete_myplugin", 0, ki18n("MyPlugin") , "1.0" );
+    K_EXPORT_COMPONENT_FACTORY( kopete_myplugin, MyPluginFactory( &aboutdata )  )
 
-	MyPlugin::MyPlugin( QObject *parent, const char *name, const QStringList &  args  )
-		: Kopete::Plugin( MyPluginFactory::componentData(), parent, name )
-	{
-		//...
-	}
+    MyPlugin::MyPlugin( QObject *parent, const char *name, const QStringList &  args  )
+        : Kopete::Plugin( MyPluginFactory::componentData(), parent, name )
+    {
+        //...
+    }
  \endcode
   */
 
 class ROCSLIB_EXPORT ToolsPluginInterface : public QObject, public KXMLGUIClient
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	ToolsPluginInterface(const KComponentData &instance, QObject* parent );
-	virtual ~ToolsPluginInterface();
+    ToolsPluginInterface(const KComponentData &instance, QObject* parent);
+    virtual ~ToolsPluginInterface();
 
-	/**
-	 * Returns the KPluginInfo object associated with this plugin
-	 */
-	KPluginInfo pluginInfo();
+    /**
+     * Returns the KPluginInfo object associated with this plugin
+     */
+    KPluginInfo pluginInfo();
 
-	/**
-	 * Get the name of the icon for this plugin. The icon name is taken from the
-	 * .desktop file.
-	 *
-	 * May return an empty string if the .desktop file for this plugin specifies
-	 * no icon name to use.
-	 *
-	 * This is a convenience method that simply calls @ref pluginInfo()->icon().
-	 */
-	QString pluginIcon() ;
+    /**
+     * Get the name of the icon for this plugin. The icon name is taken from the
+     * .desktop file.
+     *
+     * May return an empty string if the .desktop file for this plugin specifies
+     * no icon name to use.
+     *
+     * This is a convenience method that simply calls @ref pluginInfo()->icon().
+     */
+    QString pluginIcon() ;
 
-	/**
-	 * Returns the display name of this plugin.
-	 *
-	 * This is a convenience method that simply calls @ref pluginInfo()->name().
-	 */
-	QString displayName() ;
+    /**
+     * Returns the display name of this plugin.
+     *
+     * This is a convenience method that simply calls @ref pluginInfo()->name().
+     */
+    QString displayName() ;
 
-	/**
-	 * @brief Get the plugin id
-	 * @return the plugin's id which is gotten by calling QObject::metaObject()->className().
-	 */
-	QString pluginId() ;
+    /**
+     * @brief Get the plugin id
+     * @return the plugin's id which is gotten by calling QObject::metaObject()->className().
+     */
+    QString pluginId() ;
 
-	/** @brief Implements this function and return the script to run
-	* @param document is actual Document (graph).
-	*/
-	virtual QString run (QObject * document) const  = 0;
+    /** @brief Implements this function and return the script to run
+    * @param document is actual Document (graph).
+    */
+    virtual QString run(QObject * document) const  = 0;
 private:
-	class Private;
-	Private * const d;
+    class Private;
+    Private * const d;
 };
 
 #endif

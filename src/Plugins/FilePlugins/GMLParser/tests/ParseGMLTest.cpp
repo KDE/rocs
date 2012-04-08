@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -26,51 +26,51 @@
 #include <KDebug>
 
 static const std::string str_subgraph = "digraph trees {"
-"  subgraph t {"
-"    0 -> \"1\" [label = \"A\"];"
-"    0 -> \"2\" [label = \"B\"];"
-"  }"
-"  subgraph u {"
-"    Animal -> Cat [label = \"feline\"];"
-"    Animal -> Dot [label = \"canine\"];"
-"  }"
-"}";
+                                        "  subgraph t {"
+                                        "    0 -> \"1\" [label = \"A\"];"
+                                        "    0 -> \"2\" [label = \"B\"];"
+                                        "  }"
+                                        "  subgraph u {"
+                                        "    Animal -> Cat [label = \"feline\"];"
+                                        "    Animal -> Dot [label = \"canine\"];"
+                                        "  }"
+                                        "}";
 
 static const std::string str = "digraph GG {"
-"node ["
-"  fontsize = \"12\""
-"];"
-"    \"node5\" [ label=\"/usr/lib/libQtCore.so\", shape=\"ellipse\"];"
-"    \"node6\" [ label=\"/usr/lib/libQtGui.so\", shape=\"ellipse\"];"
-"    \"node0\" [ label=\"CCP\", shape=\"house\"];"
-"    \"node3\" [ label=\"CCPAlgorithms\", shape=\"polygon\"];"
-"    \"node4\" [ label=\"CCPClusterView\", shape=\"polygon\"];"
-"    \"node2\" [ label=\"CCPIOLib\", shape=\"polygon\"];"
-"    \"node1\" [ label=\"CCPModelLib\", shape=\"polygon\"];"
-"    \"node0\" -> \"node5\""
-"    \"node0\" -> \"node6\""
-"    \"node0\" -> \"node1\""
-"    \"node0\" -> \"node2\""
-"    \"node0\" -> \"node3\""
-"    \"node0\" -> \"node4\""
-"    \"node2\" -> \"node5\""
-"    \"node4\" -> \"node5\""
-"    \"node4\" -> \"node6\""
-"    \"node4\" -> \"node1\""
-"}";
+                               "node ["
+                               "  fontsize = \"12\""
+                               "];"
+                               "    \"node5\" [ label=\"/usr/lib/libQtCore.so\", shape=\"ellipse\"];"
+                               "    \"node6\" [ label=\"/usr/lib/libQtGui.so\", shape=\"ellipse\"];"
+                               "    \"node0\" [ label=\"CCP\", shape=\"house\"];"
+                               "    \"node3\" [ label=\"CCPAlgorithms\", shape=\"polygon\"];"
+                               "    \"node4\" [ label=\"CCPClusterView\", shape=\"polygon\"];"
+                               "    \"node2\" [ label=\"CCPIOLib\", shape=\"polygon\"];"
+                               "    \"node1\" [ label=\"CCPModelLib\", shape=\"polygon\"];"
+                               "    \"node0\" -> \"node5\""
+                               "    \"node0\" -> \"node6\""
+                               "    \"node0\" -> \"node1\""
+                               "    \"node0\" -> \"node2\""
+                               "    \"node0\" -> \"node3\""
+                               "    \"node0\" -> \"node4\""
+                               "    \"node2\" -> \"node5\""
+                               "    \"node4\" -> \"node5\""
+                               "    \"node4\" -> \"node6\""
+                               "    \"node4\" -> \"node1\""
+                               "}";
 
 void ParseDotTest::parseCMakeGenerated()
 {
     GraphDocument doc("A test");
-    QVERIFY (parse(str, &doc));
+    QVERIFY(parse(str, &doc));
 }
 void ParseDotTest::WithSubgraph()
 {
     GraphDocument doc("A test");
-    QVERIFY (parse(str_subgraph, &doc));
+    QVERIFY(parse(str_subgraph, &doc));
 }
 
 
-QTEST_MAIN ( ParseGMLTest )
+QTEST_MAIN(ParseGMLTest)
 
 #include <ParseGMLTest.moc>

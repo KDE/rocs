@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -34,7 +34,7 @@ void rocs_KMLParserTest::cleanupTestCase()
 void rocs_KMLParserTest::someTest()
 {
     QWARN("A STUB!");
-    QCOMPARE(1,1);
+    QCOMPARE(1, 1);
 }
 
 

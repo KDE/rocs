@@ -146,7 +146,7 @@ void DataStructurePropertiesWidget::on__dataStructureName_textChanged(const QStr
 
 bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
 {
-    if(!dataStructure->dataTypeList().contains(typeIdentifier)){
+    if (!dataStructure->dataTypeList().contains(typeIdentifier)) {
         return false;
     }
 
@@ -184,18 +184,18 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataPropertyLayout->addWidget(_dataTypeColor, 1, 2);
     dataPropertyLayout->addWidget(dataTypeShowName, 1, 3);
     dataPropertyLayout->addWidget(dataTypeShowValue, 1, 4);
-    dataPropertyLayout->addWidget(dataTypeVisible,1,5);
+    dataPropertyLayout->addWidget(dataTypeVisible, 1, 5);
 
     _typeProperties->addWidget(dataPropertyWidget);
 
     connect(dataTypeShowName, SIGNAL(toggled(bool)),
-        dataStructure->dataType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
+            dataStructure->dataType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
     connect(dataTypeShowValue, SIGNAL(toggled(bool)),
-        dataStructure->dataType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
+            dataStructure->dataType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
     connect(_dataTypeColor, SIGNAL(activated(QColor)),
-        dataStructure->dataType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
+            dataStructure->dataType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
     connect(dataTypeVisible, SIGNAL(toggled(bool)),
-        dataStructure->dataType(typeIdentifier).get(), SLOT(setVisible(bool)));
+            dataStructure->dataType(typeIdentifier).get(), SLOT(setVisible(bool)));
 
     _dataTypeWidgets.insert(typeIdentifier, dataPropertyWidget);
 
@@ -205,7 +205,7 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
 
 bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
 {
-    if(!dataStructure->pointerTypeList().contains(typeIdentifier)){
+    if (!dataStructure->pointerTypeList().contains(typeIdentifier)) {
         return false;
     }
 
@@ -244,19 +244,19 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     pointerPropertyLayout->addWidget(_pointerTypeColor, 1, 2);
     pointerPropertyLayout->addWidget(pointerTypeShowName, 1, 3);
     pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 4);
-    pointerPropertyLayout->addWidget(pointerTypeVisible,1,5);
+    pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 5);
 
     //TODO add to specific widget for pointers
     _typeProperties->addWidget(pointerPropertyWidget);
 
     connect(pointerTypeShowName,  SIGNAL(toggled(bool)),
-        dataStructure->pointerType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
+            dataStructure->pointerType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
     connect(pointerTypeShowValue, SIGNAL(toggled(bool)),
-        dataStructure->pointerType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
+            dataStructure->pointerType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
     connect(_pointerTypeColor, SIGNAL(activated(QColor)),
-        dataStructure->pointerType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
+            dataStructure->pointerType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
     connect(pointerTypeVisible, SIGNAL(toggled(bool)),
-        dataStructure->pointerType(typeIdentifier).get(), SLOT(setVisible(bool)));
+            dataStructure->pointerType(typeIdentifier).get(), SLOT(setVisible(bool)));
 
     _pointerTypeWidgets.insert(typeIdentifier, pointerPropertyWidget);
 

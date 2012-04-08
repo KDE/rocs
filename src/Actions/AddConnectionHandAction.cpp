@@ -31,10 +31,11 @@
 #include <Document.h>
 
 AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, QObject *parent)
-        : AbstractAction(scene, parent) {
-    setText(i18n ( "Add Edge" ));
-    setToolTip ( i18n ( "Creates a new edge between 2 nodes" ) );
-    setIcon ( KIcon ( "rocsaddedge" ) );
+    : AbstractAction(scene, parent)
+{
+    setText(i18n("Add Edge"));
+    setToolTip(i18n("Creates a new edge between 2 nodes"));
+    setIcon(KIcon("rocsaddedge"));
 
     _from = 0;
     _to   = 0;
@@ -43,37 +44,40 @@ AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, QObject *par
     _name = "rocs-hand-add-edge";
 }
 
-AddConnectionHandAction::~AddConnectionHandAction() {
+AddConnectionHandAction::~AddConnectionHandAction()
+{
     kDebug() << "Destroyed";
 }
 
-bool AddConnectionHandAction::executePress(QPointF pos) {
-    if (_working){
+bool AddConnectionHandAction::executePress(QPointF pos)
+{
+    if (_working) {
         return false;
     }
-    if ( !  DocumentManager::self()->activeDocument()->activeDataStructure()
-         || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()){
-     return false;
+    if (!  DocumentManager::self()->activeDocument()->activeDataStructure()
+            || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()) {
+        return false;
     }
 
-    if ( (_from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
+    if ((_from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)))) {
         _working = true;
         _startPos = QPointF(_from->data()->x(), _from->data()->y());
         //FIXME workaround for rooted tree creation
-        _from->data()->setProperty("ClickPosition",QVariant::fromValue<QPointF>( _from->mapFromScene(pos)));
+        _from->data()->setProperty("ClickPosition", QVariant::fromValue<QPointF>(_from->mapFromScene(pos)));
         return true;
     }
 
     return false;
 }
 
-bool AddConnectionHandAction::executeMove(QPointF pos) {
-    if (   !DocumentManager::self()->activeDocument()->activeDataStructure()
-        || !_from){
+bool AddConnectionHandAction::executeMove(QPointF pos)
+{
+    if (!DocumentManager::self()->activeDocument()->activeDataStructure()
+            || !_from) {
         return false;
     }
 
-    if ( !_tmpLine ) {
+    if (!_tmpLine) {
         _tmpLine = new QGraphicsLineItem();
         _graphScene->addItem(_tmpLine);
     }
@@ -82,22 +86,23 @@ bool AddConnectionHandAction::executeMove(QPointF pos) {
     return true;
 }
 
-bool AddConnectionHandAction::executeRelease(QPointF pos) {
-    if ( !_working
-     ||  !DocumentManager::self()->activeDocument()->activeDataStructure() ){
+bool AddConnectionHandAction::executeRelease(QPointF pos)
+{
+    if (!_working
+            ||  !DocumentManager::self()->activeDocument()->activeDataStructure()) {
         return false;
     }
 
     delete _tmpLine;
     _tmpLine = 0;
 
-    if ( (  _to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos))) ) {
+    if ((_to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)))) {
         //FIXME workaround for rooted tree creation
         _to->data()->setProperty("ClickPosition", _to->mapFromScene(pos));
         DocumentManager::self()
-            ->activeDocument()
-            ->activeDataStructure()
-            ->addPointer( _from->data(),  _to->data() );
+        ->activeDocument()
+        ->activeDataStructure()
+        ->addPointer(_from->data(),  _to->data());
         _to->data()->setProperty("ClickPosition", QVariant());
     }
     _to = 0;

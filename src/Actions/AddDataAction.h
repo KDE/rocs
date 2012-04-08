@@ -1,11 +1,11 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -30,7 +30,8 @@
   it will place a new node on the QGraphicsView that holds all the items.
 */
 
-class AddDataAction : public AbstractAction {
+class AddDataAction : public AbstractAction
+{
     Q_OBJECT
 public:
     /*!
@@ -38,17 +39,17 @@ public:
       \param type the Type for 'Add Node' action. must be unique.
       \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
     */
-    explicit AddDataAction( GraphScene *scene, QObject *parent = 0);
+    explicit AddDataAction(GraphScene *scene, QObject *parent = 0);
 
     /*!
       Default Destructor
     */
     ~AddDataAction();
 
-    void setActiveGraph( DataStructurePtr graph);
+    void setActiveGraph(DataStructurePtr graph);
 
     void setAddPosition(QPointF position);
-    
+
 public slots:
     /*!
       this will be executed if type is the same as this action's type.
@@ -58,10 +59,10 @@ public slots:
     bool executePress(QPointF pos);
 
     bool executePress();
-    
+
 signals:
     void addNode(QString name, QPointF pos);
-    
+
 private:
     QPointF _position; // add data at this point
 };

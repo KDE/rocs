@@ -31,10 +31,10 @@
 
 
 AssignValueAction::AssignValueAction(const QString& name, GraphScene *scene, AssignMethod method, QWidget *parent)
-        : KAction(KIcon(), name, parent) 
+    : KAction(KIcon(), name, parent)
 {
     _graphScene = scene;
-    switch(method) {
+    switch (method) {
     case Enumerate:
         connect(this, SIGNAL(triggered()), this, SLOT(enumerateSelected()));
         break;
@@ -51,11 +51,11 @@ AssignValueAction::AssignValueAction(const QString& name, GraphScene *scene, Ass
 
 
 AssignValueAction::AssignValueAction(const QString& name, GraphScene *scene, AssignMethod method, DataStructurePtr ds, QWidget *parent)
-        : KAction(KIcon(), name, parent) 
+    : KAction(KIcon(), name, parent)
 {
     _graphScene = scene;
     _dataStructure = ds;
-    switch(method) {
+    switch (method) {
     case Enumerate:
         connect(this, SIGNAL(triggered()), this, SLOT(enumerateDataStructure()));
         break;
@@ -71,7 +71,8 @@ AssignValueAction::AssignValueAction(const QString& name, GraphScene *scene, Ass
 }
 
 
-void AssignValueAction::enumerateDataStructure() {
+void AssignValueAction::enumerateDataStructure()
+{
     if (_dataStructure) {
         ValueModifier modifier;
         modifier.enumerate(_dataStructure->dataList(), 1, true);
@@ -83,16 +84,17 @@ void AssignValueAction::enumerateSelected()
 {
     DataList dataList;
     QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
-    foreach(QGraphicsItem *i, itemList) {
-        if ( DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i) ) {
-            dataList.append( dataItem->data() );
+    foreach(QGraphicsItem * i, itemList) {
+        if (DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i)) {
+            dataList.append(dataItem->data());
         }
     }
     ValueModifier modifier;
     modifier.enumerate(dataList, 1, true);
 }
 
-void AssignValueAction::assignRandomIntegersDataStructure() {
+void AssignValueAction::assignRandomIntegersDataStructure()
+{
     if (_dataStructure) {
         ValueModifier modifier;
         //FIXME use really random seed
@@ -101,12 +103,13 @@ void AssignValueAction::assignRandomIntegersDataStructure() {
 }
 
 
-void AssignValueAction::assignRandomIntegersSelected() {
+void AssignValueAction::assignRandomIntegersSelected()
+{
     DataList dataList;
     QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
-    foreach(QGraphicsItem *i, itemList) {
-        if ( DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i) ) {
-            dataList.append( dataItem->data() );
+    foreach(QGraphicsItem * i, itemList) {
+        if (DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i)) {
+            dataList.append(dataItem->data());
         }
     }
     ValueModifier modifier;
@@ -114,7 +117,8 @@ void AssignValueAction::assignRandomIntegersSelected() {
 }
 
 
-void AssignValueAction::assignRandomRealsDataStructure() {
+void AssignValueAction::assignRandomRealsDataStructure()
+{
     if (_dataStructure) {
         ValueModifier modifier;
         //FIXME use really random seed
@@ -123,12 +127,13 @@ void AssignValueAction::assignRandomRealsDataStructure() {
 }
 
 
-void AssignValueAction::assignRandomRealsSelected() {
+void AssignValueAction::assignRandomRealsSelected()
+{
     DataList dataList;
     QList<QGraphicsItem*> itemList = _graphScene->selectedItems();
-    foreach(QGraphicsItem *i, itemList) {
-        if ( DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i) ) {
-            dataList.append( dataItem->data() );
+    foreach(QGraphicsItem * i, itemList) {
+        if (DataItem *dataItem = qgraphicsitem_cast<DataItem*>(i)) {
+            dataList.append(dataItem->data());
         }
     }
     ValueModifier modifier;

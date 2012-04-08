@@ -37,19 +37,22 @@
 
 class Data;
 
-class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem{
-  Q_OBJECT
+class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem
+{
+    Q_OBJECT
 
-  public:
+public:
     DataItem(DataPtr n);
     virtual ~DataItem();
-    DataPtr data() const { return _data; }
+    DataPtr data() const {
+        return _data;
+    }
     static QMap<QString, QSvgRenderer*> _renders;
     QGraphicsSimpleTextItem *name() const;
     QGraphicsSimpleTextItem *value() const;
     void remove();
 
-  private slots:
+private slots:
     void setupNode();
     void updateRenderer();
     void updateIcon();

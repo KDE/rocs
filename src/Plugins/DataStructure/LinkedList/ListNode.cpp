@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -38,22 +38,24 @@ ListNode::~ListNode()
 
 }
 
-QScriptValue ListNode::front(){
-  if (boost::shared_ptr<ListNode> n = next()){
-      return n->scriptValue();
-  }
-  return 0;
+QScriptValue ListNode::front()
+{
+    if (boost::shared_ptr<ListNode> n = next()) {
+        return n->scriptValue();
+    }
+    return 0;
 }
 
-void ListNode::pointTo(ListNode* to )
+void ListNode::pointTo(ListNode* to)
 {
     addPointer(to->getData());
 }
 
-boost::shared_ptr<ListNode> ListNode::next() const{
-    if (out_pointers().count() == 1 ){
-        if(boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>( out_pointers().at(0)->to())){
-          return n;
+boost::shared_ptr<ListNode> ListNode::next() const
+{
+    if (out_pointers().count() == 1) {
+        if (boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(out_pointers().at(0)->to())) {
+            return n;
         }
     }
     return boost::shared_ptr<ListNode>();

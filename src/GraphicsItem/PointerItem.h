@@ -1,11 +1,11 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2008-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008      Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -32,7 +32,8 @@ class QGraphicsSimpleTextItem;
 /*! \brief the Edge drawing on screen.
   long explanation here...
 */
-class ROCSLIB_EXPORT PointerItem : public QObject, public QGraphicsPathItem {
+class ROCSLIB_EXPORT PointerItem : public QObject, public QGraphicsPathItem
+{
     Q_OBJECT
 public:
     /*! default constructor
@@ -51,8 +52,12 @@ public:
     }
 
     /*! Gets the pointer of the node */
-    PointerPtr pointer() const{ return _pointer; }
-    int index() const { return _index; }
+    PointerPtr pointer() const {
+        return _pointer;
+    }
+    int index() const {
+        return _index;
+    }
 protected:
     /*! when there's a mouse click on the node, this method is invocked
       \param event the mouse object
@@ -64,19 +69,19 @@ protected:
     */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-    void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0 );
+    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
     virtual QPainterPath createCurves() = 0;
-    
+
 public slots:
     void remove();
     void updatePos();
     void updateAttributes();
-    
+
 private:
     PointerPtr _pointer;
     int _index;
 
-  
+
     QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const;
     QPainterPath createLoop(QPointF pos) const;
     void connectSignals();

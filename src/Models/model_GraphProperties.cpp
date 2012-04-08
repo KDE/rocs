@@ -1,11 +1,11 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -25,13 +25,15 @@
 #include "Data.h"
 #include "DataStructure.h"
 
-GraphPropertiesModel::GraphPropertiesModel( QObject *parent ) : QAbstractTableModel(parent) {
+GraphPropertiesModel::GraphPropertiesModel(QObject *parent) : QAbstractTableModel(parent)
+{
     // start all pointers to zero, so we don't crash things.
     _dataSource = 0;
     _metaObject = 0;
 }
 
-int GraphPropertiesModel::rowCount(const QModelIndex &parent) const {
+int GraphPropertiesModel::rowCount(const QModelIndex &parent) const
+{
     Q_UNUSED(parent);
     // if there's no dataSource, there's no data. return zero.
     // else return the size of properties of the object.
@@ -42,33 +44,36 @@ int GraphPropertiesModel::rowCount(const QModelIndex &parent) const {
     return _dataSource->dynamicPropertyNames().size();
 }
 
-int GraphPropertiesModel::columnCount ( const QModelIndex & parent ) const {
+int GraphPropertiesModel::columnCount(const QModelIndex & parent) const
+{
     Q_UNUSED(parent);
     return 3; //Name - Value - Type
 }
 
-QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const {
+QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const
+{
     // error conditions, return a default value constructed QVariant().
-    if ( !index.isValid() ) {
+    if (!index.isValid()) {
         return QVariant();
     }
-    if ( index.row() >= _dataSource->dynamicPropertyNames().size() ) {
+    if (index.row() >= _dataSource->dynamicPropertyNames().size()) {
         return QVariant();
     }
-    if ( role != Qt::DisplayRole ) {
+    if (role != Qt::DisplayRole) {
         return QVariant();
     }
 
     const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
-    
-    return  ( index.column() == 0 ) ? propertyName
-          : ( index.column() == 1 ) ?  _dataSource->property( propertyName )
-          : ( index.column() == 2 ) ? DynamicPropertiesList::New()->typeInText(_dataSource, propertyName)
-          : QVariant();
+
+    return (index.column() == 0) ? propertyName
+           : (index.column() == 1) ?  _dataSource->property(propertyName)
+           : (index.column() == 2) ? DynamicPropertiesList::New()->typeInText(_dataSource, propertyName)
+           : QVariant();
 
 }
 
-QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientation, int role) const {
+QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
     // if the role is not for displaying anything, return a default empty value.
     if (role != Qt::DisplayRole) {
         return QVariant();
@@ -84,19 +89,20 @@ QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientati
     return QVariant();
 }
 
-void GraphPropertiesModel::setDataSource(QObject *dataSource) {
+void GraphPropertiesModel::setDataSource(QObject *dataSource)
+{
     // if there isn't any datasource being send, just remove everything from the model and exit.
     if (dataSource == 0) {
         int count = rowCount();
         if (count == 0) return;
-        beginRemoveRows(QModelIndex(), 0, count-1);
+        beginRemoveRows(QModelIndex(), 0, count - 1);
         endRemoveRows();
         return;
     }
 
     // clear the model for the new data.
-    if ( _dataSource) {
-        beginRemoveRows(QModelIndex(), 0, _dataSource->dynamicPropertyNames().size()-1);
+    if (_dataSource) {
+        beginRemoveRows(QModelIndex(), 0, _dataSource->dynamicPropertyNames().size() - 1);
         endRemoveRows();
     }
 
@@ -106,15 +112,16 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource) {
 
     // insert the information.
 
-    if (dataSource->dynamicPropertyNames().size() > 0){
-        beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size()-1);
+    if (dataSource->dynamicPropertyNames().size() > 0) {
+        beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size() - 1);
         endInsertRows();
     }
 
 
 }
 
-Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const {
+Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const
+{
     if (index.isValid()) {
         if (index.column() != 2) {//Can't change type for now
             return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
@@ -125,10 +132,11 @@ Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const {
     return Qt::ItemIsEnabled;
 }
 
-bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,  int role) {
+bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,  int role)
+{
     if (index.isValid() && role == Qt::EditRole) {
         switch (index.column()) {
-                /* Change name. DinamicPropertiesList take part"                    name                                        new name        object  */
+            /* Change name. DinamicPropertiesList take part"                    name                                        new name        object  */
         case 0: DynamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;
         case 1:  _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()], value);     break; /* just change the values */
         default: kDebug() << "shoudn't enter here ¬¬";   return false;
@@ -142,39 +150,40 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
 
 }
 
-void GraphPropertiesModel::addDynamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal) {
+void GraphPropertiesModel::addDynamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal)
+{
     /*Need check if the propertie allready exists*/
     bool insertingRow = false;
-    if (name.isEmpty()){
-       kWarning() << "Cannot add am empty property";
-       return;
+    if (name.isEmpty()) {
+        kWarning() << "Cannot add am empty property";
+        return;
     }
 
-    if ( ! obj->dynamicPropertyNames().contains(name.toUtf8())){
+    if (! obj->dynamicPropertyNames().contains(name.toUtf8())) {
         beginInsertRows(QModelIndex(), rowCount(), rowCount());
         insertingRow = true;
     }
 
     if (isGlobal) {
         if (Pointer * pointer = qobject_cast<Pointer*> (obj)) {
-            pointer->dataStructure()->addPointersDynamicProperty(name,value);
+            pointer->dataStructure()->addPointersDynamicProperty(name, value);
         }
         if (Data * datum = qobject_cast<Data*> (obj)) {
-            datum->dataStructure()->addDataDynamicProperty(name,value);
+            datum->dataStructure()->addDataDynamicProperty(name, value);
         }
     } else {
         if (Pointer * pointer = qobject_cast<Pointer*> (obj)) {
-            pointer->addDynamicProperty(name,value);
+            pointer->addDynamicProperty(name, value);
         }
         if (Data * datum = qobject_cast<Data*> (obj)) {
-            datum->addDynamicProperty(name,value);
+            datum->addDynamicProperty(name, value);
         }
         if (DataStructure * dataStructure = qobject_cast<DataStructure*> (obj)) {
             dataStructure->addDynamicProperty(name, value);
         }
     }
 
-    if (insertingRow){ /* if inserting, need finish*/
+    if (insertingRow) { /* if inserting, need finish*/
         endInsertRows();
     }
-  }
+}

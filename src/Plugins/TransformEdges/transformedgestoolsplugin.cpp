@@ -39,10 +39,10 @@
 #include <map>
 #include <ui_transformedgeswidget.h>
 
-static const KAboutData aboutdata("rocs_transformedgesplugin", 0, ki18n("Transform Edges") , "0.1" );
+static const KAboutData aboutdata("rocs_transformedgesplugin", 0, ki18n("Transform Edges") , "0.1");
 
-K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin<TransformEdgesToolPlugin>(); )
-K_EXPORT_PLUGIN( ToolsPluginFactory(aboutdata) )
+K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<TransformEdgesToolPlugin>();)
+K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))
 
 TransformEdgesToolPlugin::TransformEdgesToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
     ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
@@ -57,7 +57,7 @@ TransformEdgesToolPlugin::~TransformEdgesToolPlugin()
 
 QString TransformEdgesToolPlugin::run(QObject* doc) const
 {
-    Document* graphDoc = qobject_cast<Document*> ( doc );
+    Document* graphDoc = qobject_cast<Document*> (doc);
 
     TransformEdgesWidget* dialog = new TransformEdgesWidget(graphDoc, 0);
 
@@ -65,8 +65,8 @@ QString TransformEdgesToolPlugin::run(QObject* doc) const
     QStringList dsNames;
 
     // be sure that only graph-datastructures are accessed by this plugin
-    if (graphDoc->dataStructureInternalName() == "Graph" ) {
-        foreach (DataStructurePtr ds, dsList) {
+    if (graphDoc->dataStructureInternalName() == "Graph") {
+        foreach(DataStructurePtr ds, dsList) {
             dsNames << ds->name();
         }
     }

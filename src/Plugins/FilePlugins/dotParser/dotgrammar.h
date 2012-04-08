@@ -80,23 +80,20 @@ void valid_op(char const* first, char const* last);
 bool parse_renderop(const std::string& str/*, DotRenderOpVec& arenderopvec*/);
 bool parse_numeric_color(char const* str, QColor& c);
 
-struct DotGrammar : public boost::spirit::classic::grammar<DotGrammar>
-{
-  template <typename ScannerT>
-  struct definition
-  {
-    definition(DotGrammar const& self);
+struct DotGrammar : public boost::spirit::classic::grammar<DotGrammar> {
+    template <typename ScannerT>
+    struct definition {
+        definition(DotGrammar const& self);
 
-    boost::spirit::classic::rule<ScannerT> dataType, ID, tag, stmt_list, stmt, attr_stmt,
-    attr_list, a_list, edge_stmt, edgeop,
-    edgeRHS, node_stmt, node_id,
-    port, subdataType, compass_pt;
+        boost::spirit::classic::rule<ScannerT> dataType, ID, tag, stmt_list, stmt, attr_stmt,
+              attr_list, a_list, edge_stmt, edgeop,
+              edgeRHS, node_stmt, node_id,
+              port, subdataType, compass_pt;
 
-    boost::spirit::classic::rule<ScannerT> const& start() const
-    {
-      return dataType;
-    }
-  };
+        boost::spirit::classic::rule<ScannerT> const& start() const {
+            return dataType;
+        }
+    };
 
 };
 

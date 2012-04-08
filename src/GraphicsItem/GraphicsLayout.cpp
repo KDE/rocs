@@ -29,14 +29,16 @@
 GraphicsLayout::GraphicsLayout(QObject* parent) : QObject(parent)
 { }
 
-GraphicsLayout::~GraphicsLayout() {
+GraphicsLayout::~GraphicsLayout()
+{
 
 }
 
 GraphicsLayout* GraphicsLayout::_self = 0;
 
-GraphicsLayout* GraphicsLayout::self() {
-    if (!_self){
+GraphicsLayout* GraphicsLayout::self()
+{
+    if (!_self) {
         _self = new GraphicsLayout();
     }
     return _self;
@@ -48,10 +50,10 @@ void GraphicsLayout::setViewStyleDataNode(int style)
     _viewStyleDataNode = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
     foreach(DataStructurePtr ds, dsList) {
-    foreach(int identifier, ds->dataTypeList()) {
-        // update all data elements
-        ds->setDataNameVisibility(ds->dataType(identifier)->isNameVisible(), identifier);
-    }
+        foreach(int identifier, ds->dataTypeList()) {
+            // update all data elements
+            ds->setDataNameVisibility(ds->dataType(identifier)->isNameVisible(), identifier);
+        }
     }
     emit changed();
 }
@@ -62,10 +64,10 @@ void GraphicsLayout::setViewStyleDataEdge(int style)
     _viewStyleDataEdge = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
     foreach(DataStructurePtr ds, dsList) {
-    foreach(int identifier, ds->pointerTypeList()) {
-        // update all pointers
-        ds->setPointerNameVisibility(ds->pointerType(identifier)->isNameVisible(), identifier);
-    }
+        foreach(int identifier, ds->pointerTypeList()) {
+            // update all pointers
+            ds->setPointerNameVisibility(ds->pointerType(identifier)->isNameVisible(), identifier);
+        }
     }
     emit changed();
 }

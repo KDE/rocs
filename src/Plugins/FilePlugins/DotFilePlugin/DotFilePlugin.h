@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -32,7 +32,9 @@ class DotFilePlugin: public FilePluginInterface
 {
     Q_OBJECT
 public:
-    struct vertex_shape_t { typedef boost::vertex_property_tag kind; };
+    struct vertex_shape_t {
+        typedef boost::vertex_property_tag kind;
+    };
 
     explicit DotFilePlugin(QObject* parent, const QList< QVariant >&);
     ~DotFilePlugin();
@@ -44,11 +46,11 @@ public:
     Document* readFile(const QString& fileName);
 
     Document* parseGraphvizUndirected(const QString& graphvizContent);
-    
+
     Document* parseGraphvizDirected(const QString& graphvizContent);
-    
+
     /** \brief write specified data structure document to file
-     * \param Document  the document containing list of data structures 
+     * \param Document  the document containing list of data structures
      * \param QString  filename of the file the graph shall be serialized to
      * \return false if unsuccessfull, true if graph was read
      */
@@ -58,7 +60,7 @@ public:
      * \return QStringList
      */
     const QStringList extensions() const;
-   
+
     virtual const QString lastError();
 
 private:

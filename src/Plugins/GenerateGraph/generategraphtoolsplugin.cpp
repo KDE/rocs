@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -38,10 +38,10 @@
 
 #include <map>
 
-static const KAboutData aboutdata("rocs_generategraphplugin", 0, ki18n("Generate Graph") , "0.1" );
+static const KAboutData aboutdata("rocs_generategraphplugin", 0, ki18n("Generate Graph") , "0.1");
 
-K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin<GenerateGraphToolPlugin>(); )
-K_EXPORT_PLUGIN( ToolsPluginFactory(aboutdata) )
+K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<GenerateGraphToolPlugin>();)
+K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))
 
 GenerateGraphToolPlugin::GenerateGraphToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
     ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
@@ -56,7 +56,7 @@ GenerateGraphToolPlugin::~GenerateGraphToolPlugin()
 
 QString GenerateGraphToolPlugin::run(QObject* doc) const
 {
-    Document* graphDoc = qobject_cast<Document*> ( doc );
+    Document* graphDoc = qobject_cast<Document*> (doc);
 
     GenerateGraphWidget* dialog = new GenerateGraphWidget(graphDoc, 0);
     dialog->show();

@@ -31,16 +31,16 @@
 namespace Rocs
 {
 
-namespace GMLPlugin{
+namespace GMLPlugin
+{
 // class DotGraph;
 // class GraphSubgraph;
 // class GraphNode;
 // class GraphEdge;
 // class GraphElement;
 
-  struct GMLGraphParsingHelper
-  {
-    enum State{begin, graph, node, edge};
+struct GMLGraphParsingHelper {
+    enum State {begin, graph, node, edge};
 
     GMLGraphParsingHelper();
 
@@ -63,7 +63,7 @@ namespace GMLPlugin{
     Document* gd;
     QStringList _properties;
     QHash<QString, QString> _edgeProperties;
-  };
+};
 }
 }
 

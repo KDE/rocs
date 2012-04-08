@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -43,7 +43,7 @@ bool KMLHandler::characters(const QString& str)
 
 bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName)
 {
-  DataPtr n;
+    DataPtr n;
     if (qName == "coordinates") {
         m_coordinates = currentText;
     } else if (qName == "name") {
@@ -56,13 +56,13 @@ bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
         }
         n = m_graph->addData(m_name);
         QStringList values = m_coordinates.split(',');
-        if (values.count() >=2) {
+        if (values.count() >= 2) {
 
             n->setX(values.at(0).toDouble());
             n->addDynamicProperty("Longitude", values.at(0).toDouble());
             n->setY(values.at(1).toDouble());
             n->addDynamicProperty("Latitude", values.at(1).toDouble());
-            if (values.count() >2) {
+            if (values.count() > 2) {
                 n->addDynamicProperty("Elevation", values.at(2).toDouble());
             }
         }
@@ -77,26 +77,26 @@ bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
         QStringList points = m_coordinates.split('\n');
         int count = 0;
         DataPtr n_old;
-        foreach (QString point, points) {
+        foreach(QString point, points) {
             count++;
 
             QStringList values = point.split(',');
-            if (values.count() >=2) {
-               n = m_graph->addData(m_name + '_' + QString::number(count+1));
+            if (values.count() >= 2) {
+                n = m_graph->addData(m_name + '_' + QString::number(count + 1));
 
                 n->setX(values.at(0).toDouble());
                 n->addDynamicProperty("Longitude", values.at(0).toDouble());
                 n->setY(values.at(1).toDouble());
                 n->addDynamicProperty("Latitude", values.at(1).toDouble());
-                if (values.count() >2) {
+                if (values.count() > 2) {
                     n->addDynamicProperty("Elevation", values.at(2).toDouble());
                 }
             }
             if (!m_description.isEmpty()) {
                 n->addDynamicProperty("Description", m_description);
             }
-            if (n_old){
-              m_graph->addPointer(n_old, n);
+            if (n_old) {
+                m_graph->addPointer(n_old, n);
             }
             n_old = n;
         }

@@ -27,7 +27,8 @@
 class DataType;
 class Datum;
 
-class URAddNode : public QUndoCommand {
+class URAddNode : public QUndoCommand
+{
 public:
     URAddNode(Datum *g);
     void undo();

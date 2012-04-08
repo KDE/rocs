@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -39,10 +39,10 @@
 #include <map>
 #include <ui_assignvalueswidget.h>
 
-static const KAboutData aboutdata("rocs_assignvaluesplugin", 0, ki18n("Assign Values") , "0.1" );
+static const KAboutData aboutdata("rocs_assignvaluesplugin", 0, ki18n("Assign Values") , "0.1");
 
-K_PLUGIN_FACTORY( ToolsPluginFactory, registerPlugin<AssignValuesToolPlugin>(); )
-K_EXPORT_PLUGIN( ToolsPluginFactory(aboutdata) )
+K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<AssignValuesToolPlugin>();)
+K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))
 
 AssignValuesToolPlugin::AssignValuesToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
     ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
@@ -57,18 +57,18 @@ AssignValuesToolPlugin::~AssignValuesToolPlugin()
 
 QString AssignValuesToolPlugin::run(QObject* doc) const
 {
-    Document* graphDoc = qobject_cast<Document*> ( doc );
+    Document* graphDoc = qobject_cast<Document*> (doc);
 
     AssignValuesWidget* dialog = new AssignValuesWidget(graphDoc, 0);
-    
+
     // data structures to selector box
     QList< DataStructurePtr > dsList = graphDoc->dataStructures();
     QStringList dsNames;
-    foreach (DataStructurePtr ds, dsList) {
+    foreach(DataStructurePtr ds, dsList) {
         dsNames << ds->name();
     }
     dialog->addDataStructures(dsNames);
-    
+
     dialog->show();
 
     return "";

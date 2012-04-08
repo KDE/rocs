@@ -1,4 +1,4 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
@@ -6,7 +6,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -31,30 +31,30 @@
 #include "DataItem.h"
 #include "PointerItem.h"
 
-DeleteHandAction::DeleteHandAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent) {
-    setText(i18n ( "Delete" ));
-    setToolTip ( i18n ( "Delete items by clicking on them." ) );
-    setIcon ( KIcon ( "rocsdelete" ) );
+DeleteHandAction::DeleteHandAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent)
+{
+    setText(i18n("Delete"));
+    setToolTip(i18n("Delete items by clicking on them."));
+    setIcon(KIcon("rocsdelete"));
     _name = "rocs-hand-delete";
 
-    connect (_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeKeyRelease(QKeyEvent*)));
+    connect(_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeKeyRelease(QKeyEvent*)));
 }
 
-bool DeleteHandAction::executePress(QPointF pos) {
+bool DeleteHandAction::executePress(QPointF pos)
+{
     QGraphicsItem * item = _graphScene->itemAt(pos);
-    if ( DataItem *n  = qgraphicsitem_cast<DataItem*>(item) ) {
+    if (DataItem *n  = qgraphicsitem_cast<DataItem*>(item)) {
         if (n->isSelected()) {
-        foreach (QGraphicsItem *selectedItem, _graphScene->selectedItems())
+            foreach(QGraphicsItem * selectedItem, _graphScene->selectedItems())
             if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(selectedItem)) {
                 dItem->data()->remove();
             }
-        }
-        else {    
+        } else {
             n->data()->remove();
         }
         return true;
-    }
-    else if ( PointerItem *e = qgraphicsitem_cast<PointerItem*>(item) ) {
+    } else if (PointerItem *e = qgraphicsitem_cast<PointerItem*>(item)) {
         e->pointer()->remove();
         return true;
     }
@@ -64,13 +64,13 @@ bool DeleteHandAction::executePress(QPointF pos) {
 bool DeleteHandAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
     if (keyEvent->key() == Qt::Key_Delete) {
-        foreach (QGraphicsItem *item, _graphScene->selectedItems()){
-            if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)){
+        foreach(QGraphicsItem * item, _graphScene->selectedItems()) {
+            if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)) {
                 _graphScene->removeItem(item);
                 dItem->deleteLater();
                 dItem->data()->remove();
             }
-            if (PointerItem *pItem = qgraphicsitem_cast<PointerItem*>(item)){
+            if (PointerItem *pItem = qgraphicsitem_cast<PointerItem*>(item)) {
                 pItem->pointer()->remove();
             }
         }

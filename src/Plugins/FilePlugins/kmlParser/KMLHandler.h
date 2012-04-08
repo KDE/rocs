@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -27,9 +27,9 @@
 
 class KMLHandler: public QXmlDefaultHandler
 {
-  public:
-  KMLHandler(DataStructurePtr doc);
-  ~KMLHandler();
+public:
+    KMLHandler(DataStructurePtr doc);
+    ~KMLHandler();
 
 
     bool startElement(const QString &namespaceURI, const QString &localName,
@@ -42,9 +42,9 @@ class KMLHandler: public QXmlDefaultHandler
 
 //     QString method(){return this->m_method;}
 
-    QString arg(int index){
-        if (index < args.size()){
-           return args.at(index);
+    QString arg(int index) {
+        if (index < args.size()) {
+            return args.at(index);
         }
         return QString("");
     }

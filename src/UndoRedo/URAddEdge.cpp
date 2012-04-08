@@ -22,17 +22,20 @@
 #include "DataStructureBase.h"
 #include "edge.h"
 
-URAddEdge::URAddEdge(Pointer *e) {
+URAddEdge::URAddEdge(Pointer *e)
+{
     _edge = e;
     _from = e->from();
     _to = e->to();
     _graph = qobject_cast<DataType*>(e->parent());
 }
 
-void URAddEdge::redo() {
+void URAddEdge::redo()
+{
     _edge->remove();
 }
 
-void URAddEdge::undo() {
+void URAddEdge::undo()
+{
     _graph->addEdge(_from, _to);
 }

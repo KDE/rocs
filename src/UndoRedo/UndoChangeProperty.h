@@ -23,7 +23,8 @@
 
 #include <QUndoCommand>
 
-class UndoAddEdge : public QUndoCommand {
+class UndoAddEdge : public QUndoCommand
+{
 public:
     UndoAddEdge(QObject *g);
 

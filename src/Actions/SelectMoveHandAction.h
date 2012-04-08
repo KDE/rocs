@@ -1,4 +1,4 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
@@ -6,7 +6,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -38,7 +38,8 @@ class Data;
   it will move the selected node around the screen.
 */
 
-class SelectMoveHandAction : public AbstractAction {
+class SelectMoveHandAction : public AbstractAction
+{
     Q_OBJECT
 public:
     /*!
@@ -81,7 +82,7 @@ protected:
     DataPtr _data;
     QPointF _delta;
     QMap<DataItem*, QPointF> _deltas;
-    
+
 signals:
     /*! signal sended when the selection changes. */
     void ItemSelectedChanged(QGraphicsItem *o);

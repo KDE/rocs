@@ -4,7 +4,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -23,23 +23,25 @@
 
 class Document;
 
-namespace Rocs{
+namespace Rocs
+{
 
-class /*ROCSLIB_EXPORT*/ ListPlugin : public DataStructurePluginInterface {
-  public:
-    ListPlugin ( QObject* parent,  const QList<QVariant> & /* args*/ );
+class /*ROCSLIB_EXPORT*/ ListPlugin : public DataStructurePluginInterface
+{
+public:
+    ListPlugin(QObject* parent,  const QList<QVariant> & /* args*/);
 
     virtual ~ListPlugin();
 
-    virtual DataStructurePtr convertToDataStructure ( DataStructurePtr graph, Document* parent );
-    virtual DataStructurePtr createDataStructure ( Document* parent );
+    virtual DataStructurePtr convertToDataStructure(DataStructurePtr graph, Document* parent);
+    virtual DataStructurePtr createDataStructure(Document* parent);
 
     virtual bool canConvertFrom(Document* doc) const;
 
-    virtual QGraphicsItem* pointerItem ( PointerPtr ) const;
-    virtual QGraphicsItem* dataItem ( DataPtr ) const;
+    virtual QGraphicsItem* pointerItem(PointerPtr) const;
+    virtual QGraphicsItem* dataItem(DataPtr) const;
 
-    virtual QLayout* nodeExtraProperties ( DataPtr arg1, QWidget* arg2 ) const;
+    virtual QLayout* nodeExtraProperties(DataPtr arg1, QWidget* arg2) const;
 
 
 

@@ -1,10 +1,10 @@
-/* 
+/*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -27,8 +27,10 @@
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 #define BOOST_SPIRIT_DEBUG 1
 
-namespace Rocs{
-namespace GMLPlugin{
+namespace Rocs
+{
+namespace GMLPlugin
+{
 
 GMLGraphParsingHelper* phelper = 0;
 std::string lastKey = "";
@@ -38,16 +40,19 @@ DataPtr actualNode;
 PointerPtr actualEdge;
 Document *document = 0;
 
-void beginList(){
+void beginList()
+{
     phelper->startList(QString::fromStdString(lastKey));
 }
 
-void endList(){
+void endList()
+{
     phelper->endList();
 }
 
-void gotKey(const std::string& key){
-  lastKey = key.c_str();
+void gotKey(const std::string& key)
+{
+    lastKey = key.c_str();
 //   QString k = key.c_str();
 //   if (k.compare("dataType", Qt::CaseInsensitive) == 0){
 //     kDebug() << "create a graph";
@@ -66,11 +71,12 @@ void gotKey(const std::string& key){
 
 }
 
-void gotValue(const std::string& Value){
-  if (Value.empty()){
-    return; //end of the list.
-  }else{
-    phelper->setAtribute(QString::fromStdString(lastKey), QString::fromStdString(Value));
+void gotValue(const std::string& Value)
+{
+    if (Value.empty()) {
+        return; //end of the list.
+    } else {
+        phelper->setAtribute(QString::fromStdString(lastKey), QString::fromStdString(Value));
 //     if (lastInserted){
 //       if (lastKey == "id"){
 //         lastInserted->setProperty("name", Value.c_str());
@@ -79,18 +85,21 @@ void gotValue(const std::string& Value){
 //     }else{
 //       kDebug() << "ignoring keyvalue: "<< lastKey.c_str() << Value.c_str();
 //     }
-  }
+    }
 }
 
 
-    void t(){
-      std::cout << "Found whitespace.\n";
-    }
-    void t1(const std::string &key){
-      std::cout << "Found " << key << ".\n";
-    }
+void t()
+{
+    std::cout << "Found whitespace.\n";
+}
+void t1(const std::string &key)
+{
+    std::cout << "Found " << key << ".\n";
+}
 
-bool parse( QString &content, Document * doc){
+bool parse(QString &content, Document * doc)
+{
     unsigned result;
     phelper = new GMLGraphParsingHelper;
     phelper->gd = doc;
@@ -102,8 +111,8 @@ bool parse( QString &content, Document * doc){
 //     std::string content = file.readAll().data();
 //     kDebug() << QString::fromStdString(content);
     int index;
-    while ( ( index = content.indexOf('#') ) != -1){
-      content.remove(index, content.indexOf('\n', index) - index);
+    while ((index = content.indexOf('#')) != -1) {
+        content.remove(index, content.indexOf('\n', index) - index);
     }
     std::string str = content.toStdString();
     iterator_type iter = str.begin();
@@ -111,24 +120,21 @@ bool parse( QString &content, Document * doc){
 
     bool r = parse(iter, end, roman_parser, result);
 
-        if (r && iter == end)
-        {
-            std::cout << "-------------------------\n";
-            std::cout << "Parsing succeeded\n";
-            std::cout << "result = " << result << std::endl;
-            std::cout << "-------------------------\n";
-        }
-        else
-        {
-            std::string rest(iter, end);
-            std::cout << "-------------------------\n";
-            std::cout << "Parsing failed\n";
-            std::cout << "stopped at: \": " << rest << "\"\n";
-            std::cout << "-------------------------\n";
-        }
+    if (r && iter == end) {
+        std::cout << "-------------------------\n";
+        std::cout << "Parsing succeeded\n";
+        std::cout << "result = " << result << std::endl;
+        std::cout << "-------------------------\n";
+    } else {
+        std::string rest(iter, end);
+        std::cout << "-------------------------\n";
+        std::cout << "Parsing failed\n";
+        std::cout << "stopped at: \": " << rest << "\"\n";
+        std::cout << "-------------------------\n";
+    }
 
-        delete phelper;
-        return r;
+    delete phelper;
+    return r;
 }
 }
 }

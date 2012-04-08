@@ -23,18 +23,21 @@
 #include "node.h"
 
 
-URAddNode::URAddNode(Datum *g) {
+URAddNode::URAddNode(Datum *g)
+{
     _graph = qobject_cast<DataType*>(g->parent());
     _node = g;
     _pos.setX(_node->x());
     _pos.setY(_node->y());
 }
 
-void URAddNode::undo() {
+void URAddNode::undo()
+{
     _node->remove();
 }
 
-void URAddNode::redo() {
+void URAddNode::redo()
+{
     Datum *n = _graph->addNode(i18n("Untitled"));
     n->setPos(_pos.x(), _pos.y());
 }

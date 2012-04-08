@@ -1,11 +1,11 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -33,7 +33,8 @@ class DataStructure;
   it will place a new node on the QGraphicsView that holds all the items.
 */
 
-class AddConnectionHandAction : public AbstractAction {
+class AddConnectionHandAction : public AbstractAction
+{
     Q_OBJECT
 public:
     /*!
@@ -80,7 +81,7 @@ private:
     false when we are not. */
     bool _working;
 
-  signals:
+signals:
     void addConnection(Data *from, Data *to);
 
 };

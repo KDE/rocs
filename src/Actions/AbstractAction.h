@@ -1,10 +1,10 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -61,10 +61,10 @@ public slots:
     */
     virtual bool executeRelease(QPointF pos);
 
-     /*! virtual, executed when a mouse click is released on the scene.
+    /*! virtual, executed when a mouse click is released on the scene.
     \p pos the position where the release occourred.
     */
-     
+
     virtual bool executeDoubleClick(QPointF pos);
     /*! virtual, executed when a keyboard key is pressed on the scene.
     \p keyEvent the key event from the scene.
@@ -76,12 +76,12 @@ public slots:
       */
     virtual bool executeKeyRelease(QKeyEvent *keyEvent);
 
-    
+
     virtual bool executeWheelEvent(QGraphicsSceneWheelEvent *wEvent);
     /*! sends this action to be the executed thing with mouse interaction on the GraphicsView */
     void sendExecuteBit();
-    
-    bool eventFilter ( QObject * watched, QEvent * event );
+
+    bool eventFilter(QObject * watched, QEvent * event);
 protected:
 
     /*! pointer to the GraphicsScene with the drawing */

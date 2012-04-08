@@ -39,49 +39,50 @@ namespace KGraphViewer
 // class GraphEdge;
 // class GraphElement;
 
-struct DotGraphParsingHelper
-{
-  typedef std::map< std::string, std::string > AttributesMap;
+struct DotGraphParsingHelper {
+    typedef std::map< std::string, std::string > AttributesMap;
 
-  DotGraphParsingHelper();
+    DotGraphParsingHelper();
 
-  void createdatum(const std::string& nodeid);
-  void createsubdataType();
-  void setdataTypeattributes();
-  void setsubdataTypeattributes();
-      void setdatumattributes();
-  void setedgeattributes();
-  void setattributedlist();
-  void createedges();
-  void edgebound(const std::string& bound) {edgebounds.push_back(bound);}
-  void finalactions();
-  void setdataTypeelementattributes(QObject* ge, const KGraphViewer::DotGraphParsingHelper::AttributesMap& attributes);
+    void createdatum(const std::string& nodeid);
+    void createsubdataType();
+    void setdataTypeattributes();
+    void setsubdataTypeattributes();
+    void setdatumattributes();
+    void setedgeattributes();
+    void setattributedlist();
+    void createedges();
+    void edgebound(const std::string& bound) {
+        edgebounds.push_back(bound);
+    }
+    void finalactions();
+    void setdataTypeelementattributes(QObject* ge, const KGraphViewer::DotGraphParsingHelper::AttributesMap& attributes);
 
-  std::string attrid;
-  std::string valid;
-  std::string attributed;
-  QStringList subdataTypeid;
+    std::string attrid;
+    std::string valid;
+    std::string attributed;
+    QStringList subdataTypeid;
 //   std::string subgraphid;
-  unsigned int uniq;
+    unsigned int uniq;
 
-  AttributesMap attributes;
-  AttributesMap dataTypeAttributes;
-  AttributesMap datumAttributes;
-  AttributesMap pointersAttributes;
-  std::list< AttributesMap > dataTypeAttributesStack;
-  std::list< AttributesMap > datumAttributesStack;
-  std::list< AttributesMap > pointersAttributesStack;
+    AttributesMap attributes;
+    AttributesMap dataTypeAttributes;
+    AttributesMap datumAttributes;
+    AttributesMap pointersAttributes;
+    std::list< AttributesMap > dataTypeAttributesStack;
+    std::list< AttributesMap > datumAttributesStack;
+    std::list< AttributesMap > pointersAttributesStack;
 
-  std::list< std::string > edgebounds;
+    std::list< std::string > edgebounds;
 
-  unsigned int z;
-  unsigned int maxZ;
+    unsigned int z;
+    unsigned int maxZ;
 
-  DataType* dataType;
+    DataType* dataType;
 
 //   GraphSubgraph* gs;
-  Datum* gn;
-  Pointer* ge;
+    Datum* gn;
+    Pointer* ge;
     DataTypeDocument* gd;
 };
 

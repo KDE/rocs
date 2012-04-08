@@ -35,15 +35,15 @@
 QMap<QString, QSvgRenderer*> DataItem::_renders;
 
 DataItem::DataItem(DataPtr n)
-: QGraphicsSvgItem(0)
-,_data(n)
-,_iconPackage(n->iconPackage())
-,_name(0)
-,_value(0)
-,_colorizer(0)
-,_font(QFont("Helvetica [Cronyx]", 12))
-,_oldStyle(GraphicsLayout::self()->viewStyleDataNode())
-,_originalWidth(n->width())
+    : QGraphicsSvgItem(0)
+    , _data(n)
+    , _iconPackage(n->iconPackage())
+    , _name(0)
+    , _value(0)
+    , _colorizer(0)
+    , _font(QFont("Helvetica [Cronyx]", 12))
+    , _oldStyle(GraphicsLayout::self()->viewStyleDataNode())
+    , _originalWidth(n->width())
 {
     connect(n.get(), SIGNAL(removed()), this, SLOT(deleteLater())); //FIXME removed for now, maybe crash?
     connect(n.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
@@ -74,7 +74,8 @@ DataItem::~DataItem()
     delete _value;
 }
 
-void DataItem::setupNode(){
+void DataItem::setupNode()
+{
     updateName();
     updateValue();
     updateRenderer();
@@ -85,14 +86,16 @@ void DataItem::setupNode(){
     update();
 }
 
-void DataItem::updatePos(){
-    int fixPos = boundingRect().width()/2;
+void DataItem::updatePos()
+{
+    int fixPos = boundingRect().width() / 2;
     setPos(_data->x() - fixPos, _data->y() - fixPos);
     updateName();
     updateValue();
 }
 
-void DataItem::updateSize(){
+void DataItem::updateSize()
+{
     if (_data->width() == _width) return;
     resetTransform();
     _width = _data->width();
@@ -101,32 +104,33 @@ void DataItem::updateSize(){
     updateValue();
 }
 
-void DataItem::updateRenderer(){
+void DataItem::updateRenderer()
+{
     _iconPackage = _data->iconPackage();
-    if( _renders.count(_iconPackage) == 0){
+    if (_renders.count(_iconPackage) == 0) {
         QSvgRenderer *z = new QSvgRenderer(_data->iconPackage());
         _renders.insert(_iconPackage, z);
         setSharedRenderer(z);
-    }else{
-        setSharedRenderer( _renders.value(_iconPackage) );
+    } else {
+        setSharedRenderer(_renders.value(_iconPackage));
     }
 }
 
-void DataItem::updateIcon(){
-    if ( elementId().isEmpty() ||  elementId() != _data->icon() ){
+void DataItem::updateIcon()
+{
+    if (elementId().isEmpty() ||  elementId() != _data->icon()) {
         setElementId(_data->icon());
-        setTransformOriginPoint(boundingRect().width()/2, boundingRect().width()/2);
+        setTransformOriginPoint(boundingRect().width() / 2, boundingRect().width() / 2);
     }
 }
 
 void DataItem::updateVisibility(bool visible)
 {
-    if(visible==true) {
+    if (visible == true) {
         this->show();
         _name->setVisible(_data->showName());
         _value->setVisible(_data->showValue());
-    }
-    else {
+    } else {
         this->hide();
         _value->setVisible(false);
         _name->setVisible(false);
@@ -134,9 +138,10 @@ void DataItem::updateVisibility(bool visible)
 }
 
 
-void DataItem::updateColor(){
+void DataItem::updateColor()
+{
     QColor c(_data->color().value<QColor>());
-    if (!_data->useColor()){
+    if (!_data->useColor()) {
         delete _colorizer;
         setGraphicsEffect(0);
         _name->setBrush(QBrush(Qt::black));
@@ -145,22 +150,23 @@ void DataItem::updateColor(){
         return;
     }
 
-   delete _colorizer;
+    delete _colorizer;
     _colorizer = new QGraphicsColorizeEffect();
-    _colorizer->setColor( c );
+    _colorizer->setColor(c);
     setGraphicsEffect(_colorizer);
     _name->setBrush(QBrush(c));
     _value->setBrush(QBrush(c));
 }
 
-void DataItem::updateName(){
-    if ( !_name ){
+void DataItem::updateName()
+{
+    if (!_name) {
         _name = new QGraphicsSimpleTextItem(i18n("%1", _data->name()));
         _name->setFlags(ItemIgnoresTransformations);
         _name->setFont(_font);
-        _name->setZValue(zValue()+1);
-    }else if (_name->text() != _data->name()){
-        _name->setText(i18n("%1",_data->name()));
+        _name->setZValue(zValue() + 1);
+    } else if (_name->text() != _data->name()) {
+        _name->setText(i18n("%1", _data->name()));
     }
 
     int style = GraphicsLayout::self()->viewStyleDataNode();
@@ -168,22 +174,22 @@ void DataItem::updateName(){
     qreal dataWidth = boundingRect().width() * scale();
 
     qreal x =  pos().x();
-    if ( style == ConfigureDefaultProperties::CENTER ){
-        x  += ((dataWidth > _name->boundingRect().width()+10)
-            ? ((dataWidth - _name->boundingRect().width())/4)
-            : dataWidth + 30);
+    if (style == ConfigureDefaultProperties::CENTER) {
+        x  += ((dataWidth > _name->boundingRect().width() + 10)
+               ? ((dataWidth - _name->boundingRect().width()) / 4)
+               : dataWidth + 30);
     }
 
-    qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? + 15 - (dataWidth/2)
-                          : ( style == ConfigureDefaultProperties::BELOW ) ? 25 + (dataWidth/2)
-                          : 0 );
+    qreal y =  pos().y() + ((style == ConfigureDefaultProperties::ABOVE) ? + 15 - (dataWidth / 2)
+                            : (style == ConfigureDefaultProperties::BELOW) ? 25 + (dataWidth / 2)
+                            : 0);
 
     _name->setVisible(_data->showName());
 
-    if (_value && _value->isVisible()){
-        y +=  (( style == ConfigureDefaultProperties::ABOVE ) ? -20 :  20 );
+    if (_value && _value->isVisible()) {
+        y += ((style == ConfigureDefaultProperties::ABOVE) ? -20 :  20);
     }
-    _name->setPos(x,y);
+    _name->setPos(x, y);
 }
 
 QGraphicsSimpleTextItem* DataItem::name() const
@@ -196,13 +202,14 @@ QGraphicsSimpleTextItem* DataItem::value() const
     return _value;
 }
 
-void DataItem::updateValue(){
-    if ( !_value ){
+void DataItem::updateValue()
+{
+    if (!_value) {
         _value = new QGraphicsSimpleTextItem(i18n("v=%1", _data->value().toString()));
         _value->setFlags(ItemIgnoresTransformations);
         _value->setFont(_font);
-        _value->setZValue(zValue()+2);
-    } else if (QVariant(_value->text()) != _data->value().toString()){
+        _value->setZValue(zValue() + 2);
+    } else if (QVariant(_value->text()) != _data->value().toString()) {
         _value ->setText(i18n("v=%1", _data->value().toString()));
     }
 
@@ -211,20 +218,20 @@ void DataItem::updateValue(){
     qreal dataWidth = boundingRect().width() * scale();
 
     qreal x =  pos().x();
-    if ( style == ConfigureDefaultProperties::CENTER ){
-        x  += ((dataWidth > _value->boundingRect().width()+10)
-            ? ((dataWidth - _value->boundingRect().width())/4)
-            : dataWidth + 30);
+    if (style == ConfigureDefaultProperties::CENTER) {
+        x  += ((dataWidth > _value->boundingRect().width() + 10)
+               ? ((dataWidth - _value->boundingRect().width()) / 4)
+               : dataWidth + 30);
     }
 
-    qreal y =  pos().y() + (( style == ConfigureDefaultProperties::ABOVE ) ? + 15 - (dataWidth/2)
-                          : ( style == ConfigureDefaultProperties::BELOW ) ? 65 + (dataWidth/2)
-                          : 40 );
+    qreal y =  pos().y() + ((style == ConfigureDefaultProperties::ABOVE) ? + 15 - (dataWidth / 2)
+                            : (style == ConfigureDefaultProperties::BELOW) ? 65 + (dataWidth / 2)
+                            : 40);
 
-    if ( !_name || !_name->isVisible()){
-        y +=  (( style == ConfigureDefaultProperties::BELOW ) ? -20 : -10 );
+    if (!_name || !_name->isVisible()) {
+        y += ((style == ConfigureDefaultProperties::BELOW) ? -20 : -10);
     }
 
-    _value->setPos(x,y);
+    _value->setPos(x, y);
     _value->setVisible(_data->showValue());
 }

@@ -34,7 +34,7 @@
 #include <boost/throw_exception.hpp>
 namespace boost
 {
-  void throw_exception(std::exception const &) {}
+void throw_exception(std::exception const &) {}
 }
 
 
@@ -61,44 +61,44 @@ const boost::spirit::classic::distinct_parser<> keyword_p("0-9a-zA-Z_");
 template <typename ScannerT>
 DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
 {
-  dataType  = (!(keyword_p("strict")[&strict]) >> (keyword_p("dataType")[&undidataType] | keyword_p("didataType")[&didataType])
-  >> !ID[&dataTypeid] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
-  ID = (
-  ( ( (anychar_p - punct_p) | '_' ) >> *( (anychar_p - punct_p) | '_' ) )
-  | real_p
-  | ( '"' >>  *( (ch_p('\\') >> '"') | (anychar_p - '"') ) >>  '"' )
-  | ( ch_p('<') >>  *( (anychar_p  - '<' - '>') | tag ) >>  '>' )
-  );
-  tag = ('<' >> *( anychar_p  - '>') >> '>');
-  stmt_list  =  stmt >> !(ch_p(';')) >> !( stmt_list ) ;
-  stmt  =  (
-  attr_stmt
-  |  subdataType
-  |  edge_stmt
-  |  node_stmt
-  |  ( ID >> '=' >> ID )
-  );
+    dataType  = (!(keyword_p("strict")[&strict]) >> (keyword_p("dataType")[&undidataType] | keyword_p("didataType")[&didataType])
+                 >> !ID[&dataTypeid] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
+    ID = (
+             (((anychar_p - punct_p) | '_') >> *((anychar_p - punct_p) | '_'))
+             | real_p
+             | ('"' >>  *((ch_p('\\') >> '"') | (anychar_p - '"')) >>  '"')
+             | (ch_p('<') >>  *((anychar_p  - '<' - '>') | tag) >>  '>')
+         );
+    tag = ('<' >> *(anychar_p  - '>') >> '>');
+    stmt_list  =  stmt >> !(ch_p(';')) >> !(stmt_list) ;
+    stmt  = (
+                attr_stmt
+                |  subdataType
+                |  edge_stmt
+                |  node_stmt
+                | (ID >> '=' >> ID)
+            );
 
-  attr_stmt  = (
-  (keyword_p("dataType")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])[&setdataTypeattributes]
-  | (keyword_p("node")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])
-  | (keyword_p("edge")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])
-  ) ;
+    attr_stmt  = (
+                     (keyword_p("dataType")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])[&setdataTypeattributes]
+                     | (keyword_p("node")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])
+                     | (keyword_p("edge")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])
+                 ) ;
 
-  attr_list  = ch_p('[') >> !( a_list ) >> ch_p(']');
-  a_list  =  ((ID[&attrid] >> !( '=' >> ID[&valid] ))[&addattr] >> !(',' >> a_list ));
-  edge_stmt  =  ( (node_id[&edgebound] | subdataType) >>  edgeRHS >> !( attr_list[assign_a(phelper->attributed,"edge")] ) )[&pushAttrList][&setattributedlist][&createedges][&popAttrList];
-  edgeRHS  =  edgeop[&checkedgeop] >> (node_id[&edgebound] | subdataType) >> !( edgeRHS );
-  edgeop = str_p("->") | str_p("--");
-  node_stmt  = ( node_id[&createnode] >> !( attr_list ) )[assign_a(phelper->attributed,"node")][&pushAttrList][&setattributedlist][&setnodeattributes][&popAttrList];
-  node_id  =  (ID >> !( port ));
-  port  =  ( ch_p(':') >> ID >> !( ':' >> compass_pt ) )
-  |  ( ':' >> compass_pt );
-  subdataType  =  ( !( keyword_p("subgraph") >> !( ID[&subdataTypeid] ) ) >> ch_p('{')[&createsubdataType][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
-  |  ( keyword_p("subgraph") >> ID[&subdataTypeid]);
-  compass_pt  =  (keyword_p("n") | keyword_p("ne") | keyword_p("e")
-  | keyword_p("se") | keyword_p("s") | keyword_p("sw")
-  | keyword_p("w") | keyword_p("nw") );
+    attr_list  = ch_p('[') >> !(a_list) >> ch_p(']');
+    a_list  = ((ID[&attrid] >> !('=' >> ID[&valid]))[&addattr] >> !(',' >> a_list));
+    edge_stmt  = ((node_id[&edgebound] | subdataType) >>  edgeRHS >> !(attr_list[assign_a(phelper->attributed, "edge")]))[&pushAttrList][&setattributedlist][&createedges][&popAttrList];
+    edgeRHS  =  edgeop[&checkedgeop] >> (node_id[&edgebound] | subdataType) >> !(edgeRHS);
+    edgeop = str_p("->") | str_p("--");
+    node_stmt  = (node_id[&createnode] >> !(attr_list))[assign_a(phelper->attributed, "node")][&pushAttrList][&setattributedlist][&setnodeattributes][&popAttrList];
+    node_id  = (ID >> !(port));
+    port  = (ch_p(':') >> ID >> !(':' >> compass_pt))
+            | (':' >> compass_pt);
+    subdataType  = (!(keyword_p("subgraph") >> !(ID[&subdataTypeid])) >> ch_p('{')[&createsubdataType][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
+                   | (keyword_p("subgraph") >> ID[&subdataTypeid]);
+    compass_pt  = (keyword_p("n") | keyword_p("ne") | keyword_p("e")
+                   | keyword_p("se") | keyword_p("s") | keyword_p("sw")
+                   | keyword_p("w") | keyword_p("nw"));
 }
 
 
@@ -106,14 +106,13 @@ DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
 
 void incrz(char const /*first*/)
 {
-  if (phelper)
-  {
+    if (phelper) {
 //     phelper->z++;
 //     if (phelper->z > phelper->maxZ)
 //     {
 //       phelper->maxZ = phelper->z;
 //     }
-  }
+    }
 }
 
 void anychar(char const /*c*/)
@@ -123,18 +122,17 @@ void anychar(char const /*c*/)
 
 void decrz(char const /*first*/)
 {
-  if (phelper)
-  {
+    if (phelper) {
 //     phelper->z--;
 //     kDebug() << QString::fromStdString(phelper->subdataTypeid);
-    phelper->subdataTypeid.removeLast();
-  }
+        phelper->subdataTypeid.removeLast();
+    }
 }
 
 void dump(char const* first, char const* last)
 {
-  std::string str(first, last);
-  kError() << ">>>> " << QString::fromStdString(str) << " <<<<" << endl;
+    std::string str(first, last);
+    kError() << ">>>> " << QString::fromStdString(str) << " <<<<" << endl;
 }
 
 void strict(char const* /*first*/, char const* /*last*/)
@@ -144,130 +142,123 @@ void strict(char const* /*first*/, char const* /*last*/)
 
 void gotid(char const* first, char const* last)
 {
-  std::string id(first,last);
+    std::string id(first, last);
 //   kDebug() << "Got ID  = '"<<QString::fromStdString(phelper->attrid)<<"'";
 }
 
 void undidataType(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "Setting dataType as undirected";
-  if (phelper->dataType == 0){
-    phelper->dataType = phelper->gd->addDataType("");
-  }
-  phelper->dataType->setDirected(false);
+    if (phelper->dataType == 0) {
+        phelper->dataType = phelper->gd->addDataType("");
+    }
+    phelper->dataType->setDirected(false);
 }
 
 void didataType(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "Setting dataType as directed";
-  if (phelper->dataType == 0){
-    phelper->dataType = phelper->gd->addDataType("");
-  }
-  phelper->dataType->setDirected(true);
+    if (phelper->dataType == 0) {
+        phelper->dataType = phelper->gd->addDataType("");
+    }
+    phelper->dataType->setDirected(true);
 }
 
 void dataTypeid(char const* first, char const* last)
 {
 //   kDebug() << QString::fromStdString(std::string(first,last));
-  if (phelper->dataType == 0){
-    phelper->dataType =phelper->gd->addDataType(QString::fromStdString(std::string(first,last)));
-  }
-  phelper->dataType->setName(QString::fromStdString(std::string(first,last)));
+    if (phelper->dataType == 0) {
+        phelper->dataType = phelper->gd->addDataType(QString::fromStdString(std::string(first, last)));
+    }
+    phelper->dataType->setName(QString::fromStdString(std::string(first, last)));
 }
 
 void attrid(char const* first, char const* last)
 {
-  if (phelper)
-  {
-    std::string id(first,last);
-    if (id.size()>0 && id[0] == '"') id = id.substr(1);
-    if (id.size()>0 && id[id.size()-1] == '"') id = id.substr(0,id.size()-1);
-    phelper->attrid = id;
-    phelper->valid = "";
+    if (phelper) {
+        std::string id(first, last);
+        if (id.size() > 0 && id[0] == '"') id = id.substr(1);
+        if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
+        phelper->attrid = id;
+        phelper->valid = "";
 //     kDebug() << "Got attr ID  = '"<<QString::fromStdString(phelper->attrid)<<"'";
-  }
+    }
 }
 
 void subdataTypeid(char const* first, char const* last)
 {
-  std::string id(first,last);
+    std::string id(first, last);
 //   kDebug() << QString::fromStdString(id);
-  if (phelper)
-  {
-    if (id.size()>0 && id[0] == '"') id = id.substr(1);
-    if (id.size()>0 && id[id.size()-1] == '"') id = id.substr(0,id.size()-1);
+    if (phelper) {
+        if (id.size() > 0 && id[0] == '"') id = id.substr(1);
+        if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
 //     phelper->subdataTypeid
-    phelper->subdataTypeid.append(QString::fromStdString(id));
+        phelper->subdataTypeid.append(QString::fromStdString(id));
 //     kDebug() << "Got subdataType id = '"<<phelper->subdataTypeid<<"'";
-  }
+    }
 }
 
 void valid(char const* first, char const* last)
 {
-  std::string id(first,last);
-  if (phelper)
-  {
-    if (id.size()>0 && id[0] == '"') id = id.substr(1);
-    if (id.size()>0 && id[id.size()-1] == '"') id = id.substr(0,id.size()-1);
-    phelper->valid = id;
+    std::string id(first, last);
+    if (phelper) {
+        if (id.size() > 0 && id[0] == '"') id = id.substr(1);
+        if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
+        phelper->valid = id;
 //     kDebug() << "Got attr val = '"<<QString::fromStdString(id)<<"'";
-  }
+    }
 }
 
 void addattr(char const* /*first*/, char const* /*last*/)
 {
-  if (phelper)
-  {
-    phelper->attributes.insert(std::make_pair(phelper->attrid,phelper->valid));
-  }
+    if (phelper) {
+        phelper->attributes.insert(std::make_pair(phelper->attrid, phelper->valid));
+    }
 }
 
 void pushAttrListC(char const /*c*/)
 {
-  pushAttrList(0,0);
+    pushAttrList(0, 0);
 }
 
 void pushAttrList(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "Pushing attributes";
-  if (phelper)
-  {
-    phelper->dataTypeAttributesStack.push_back(phelper->dataTypeAttributes);
-    phelper->datumAttributesStack.push_back(phelper->datumAttributes);
-    phelper->pointersAttributesStack.push_back(phelper->pointersAttributes);
-  }
+    if (phelper) {
+        phelper->dataTypeAttributesStack.push_back(phelper->dataTypeAttributes);
+        phelper->datumAttributesStack.push_back(phelper->datumAttributes);
+        phelper->pointersAttributesStack.push_back(phelper->pointersAttributes);
+    }
 }
 
 void popAttrListC(char const /*c*/)
 {
-  popAttrList(0,0);
+    popAttrList(0, 0);
 }
 
 void popAttrList(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "Poping attributes";
-  if (phelper)
-  {
-    phelper->dataTypeAttributes = phelper->dataTypeAttributesStack.back();
-    phelper->dataTypeAttributesStack.pop_back();
-    phelper->datumAttributes = phelper->datumAttributesStack.back();
-    phelper->datumAttributesStack.pop_back();
-    phelper->pointersAttributes = phelper->pointersAttributesStack.back();
-    phelper->pointersAttributesStack.pop_back();
-  }
+    if (phelper) {
+        phelper->dataTypeAttributes = phelper->dataTypeAttributesStack.back();
+        phelper->dataTypeAttributesStack.pop_back();
+        phelper->datumAttributes = phelper->datumAttributesStack.back();
+        phelper->datumAttributesStack.pop_back();
+        phelper->pointersAttributes = phelper->pointersAttributesStack.back();
+        phelper->pointersAttributesStack.pop_back();
+    }
 //   kDebug() << "Poped";
 }
 
 void createnode(char const* first, char const* last)
 {
 //   kDebug() << (void*)first << (void*)last << QString::fromStdString(std::string(first,last));
-  if (phelper!=0 && first!=0 && last != 0)
-  {
-    std::string id(first,last);
-    if (id.size()>0 && id[0] == '"') id = id.substr(1);
-    if (id.size()>0 && id[id.size()-1] == '"') id = id.substr(0,id.size()-1);
-    phelper->createdatum(id);
-  }
+    if (phelper != 0 && first != 0 && last != 0) {
+        std::string id(first, last);
+        if (id.size() > 0 && id[0] == '"') id = id.substr(1);
+        if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
+        phelper->createdatum(id);
+    }
 }
 
 void createsubdataType(char const /*c*/)
@@ -281,180 +272,169 @@ void createsubdataType(char const /*c*/)
 void setdataTypeattributes(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "setdataTypeattributes with z = " << phelper->z;
-  if (phelper)
-  {
+    if (phelper) {
 //     if (phelper->z == 1) // main dataType
 //     {
-      phelper->setdataTypeattributes();
+        phelper->setdataTypeattributes();
 //     }
 //     else
 //     {
 //       phelper->setsubdataTypeattributes();
 //     }
-  }
+    }
 }
 
 void setnodeattributes(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "setnodeattributes with z = " << phelper->z;
-  if (phelper)
-  {
-    phelper->setdatumattributes();
-  }
+    if (phelper) {
+        phelper->setdatumattributes();
+    }
 }
 
 void setattributedlist(char const* /*first*/, char const* /*last*/)
 {
-  if (phelper)
-  {
-    phelper->setattributedlist();
-  }
+    if (phelper) {
+        phelper->setattributedlist();
+    }
 }
 
 void checkedgeop(char const* first, char const* last)
 {
-  std::string str(first,last);
-  if (phelper)
-  {
-     if ( ( (phelper->dataType->directed()) && (str == "->") ) ||
-        ( (!phelper->dataType->directed()) && (str == "--") ) )
-       return;
+    std::string str(first, last);
+    if (phelper) {
+        if (((phelper->dataType->directed()) && (str == "->")) ||
+                ((!phelper->dataType->directed()) && (str == "--")))
+            return;
 
-    kError() << "Error !! uncoherent relation : directed = '" << phelper->dataType->directed() << "' and op = '" << QString::fromStdString(str) << "'" << endl;
-  }
+        kError() << "Error !! uncoherent relation : directed = '" << phelper->dataType->directed() << "' and op = '" << QString::fromStdString(str) << "'" << endl;
+    }
 }
 
 void edgebound(char const* first, char const* last)
 {
 //   kDebug() << "edgebound: " << QString::fromStdString(std::string(first,last));
-  if (phelper)
-  {
-    std::string id(first,last);
-    if (id.size()>0 && id[0] == '"') id = id.substr(1);
-    if (id.size()>0 && id[id.size()-1] == '"') id = id.substr(0,id.size()-1);
-    phelper->edgebound(id);
-  }
+    if (phelper) {
+        std::string id(first, last);
+        if (id.size() > 0 && id[0] == '"') id = id.substr(1);
+        if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
+        phelper->edgebound(id);
+    }
 }
 
 void createedges(char const* /*first*/, char const* /*last*/)
 {
-  if (phelper)
-  {
-    phelper->createedges();
-  }
+    if (phelper) {
+        phelper->createedges();
+    }
 }
 
 void finalactions(char const* /*first*/, char const* /*last*/)
 {
-  if (phelper)
-  {
-    phelper->finalactions();
-  }
+    if (phelper) {
+        phelper->finalactions();
+    }
 }
 
 bool parse_point(char const* str, QPoint& p)
 {
-  int x,y;
-  bool res;
-  res = parse(str,
-              (
-                int_p[assign_a(x)] >> ',' >> int_p[assign_a(y)]
-              )
-              ,
-              +space_p).full;
-  if (!res) return false;
-  p = QPoint(x,y);
-  return true;
+    int x, y;
+    bool res;
+    res = parse(str,
+                (
+                    int_p[assign_a(x)] >> ',' >> int_p[assign_a(y)]
+                )
+                ,
+                +space_p).full;
+    if (!res) return false;
+    p = QPoint(x, y);
+    return true;
 }
 
 bool parse_numeric_color(char const* str, QColor& c)
 {
-  if (str==0) return false;
-  int r,g,b,a;
-  bool res;
-  uint_parser<unsigned, 16, 2, 2> hex2digits_p;
-  res = parse(str,
-              (
-                ch_p('#') >>
-                hex2digits_p[assign_a(r)] >>
-                hex2digits_p[assign_a(g)] >>
-                hex2digits_p[assign_a(b)] >>
-                !hex2digits_p[assign_a(a)]
-              )
-              ,
-              +space_p).full;
-  if (res)
-  {
-    c.setRgb(r,g,b);
-    return true;
-  }
+    if (str == 0) return false;
+    int r, g, b, a;
+    bool res;
+    uint_parser<unsigned, 16, 2, 2> hex2digits_p;
+    res = parse(str,
+                (
+                    ch_p('#') >>
+                    hex2digits_p[assign_a(r)] >>
+                    hex2digits_p[assign_a(g)] >>
+                    hex2digits_p[assign_a(b)] >>
+                    !hex2digits_p[assign_a(a)]
+                )
+                ,
+                +space_p).full;
+    if (res) {
+        c.setRgb(r, g, b);
+        return true;
+    }
 
-  double h,s,v;
-  res = parse(str,
-              (
-                real_p[assign_a(h)] >> !ch_p(',') >> real_p[assign_a(s)] >> !ch_p(',') >> real_p[assign_a(v)]
-              )
-              ,
-              +space_p).full;
-  if (res)
-  {
-    c.setHsv(int(255*h),int(255*s),int(255*v));
-    return true;
-  }
-  return false;
+    double h, s, v;
+    res = parse(str,
+                (
+                    real_p[assign_a(h)] >> !ch_p(',') >> real_p[assign_a(s)] >> !ch_p(',') >> real_p[assign_a(v)]
+                )
+                ,
+                +space_p).full;
+    if (res) {
+        c.setHsv(int(255 * h), int(255 * s), int(255 * v));
+        return true;
+    }
+    return false;
 }
 
 bool parse_real(char const* str, double& d)
 {
-  return parse(str,
-               (
-                 real_p[assign_a(d)]
-               )
-               ,
-               +space_p).full;
+    return parse(str,
+                 (
+                     real_p[assign_a(d)]
+                 )
+                 ,
+                 +space_p).full;
 }
 
 bool parse_integers(char const* str, std::vector<int>& v)
 {
-  return parse(str,
-               (
-                 int_p[push_back_a(v)] >> *(',' >> int_p[push_back_a(v)])
-               )
-               ,
-               +space_p).full;
+    return parse(str,
+                 (
+                     int_p[push_back_a(v)] >> *(',' >> int_p[push_back_a(v)])
+                 )
+                 ,
+                 +space_p).full;
 }
 
 bool parse_spline(char const* str, QVector< QPair< float, float > >& points)
 {
 //   kDebug() << "Parsing spline..." << QString::fromStdString(str);
-  char e = 'n', s = 'n';
-  int sx,sy,ex,ey;
-  QPair< float, float > p;
-  bool res;
-  res = parse(str,
-              (
-                !(ch_p('e')[assign_a(e)] >> ',' >> int_p[assign_a(ex)] >> ',' >> int_p[assign_a(ey)])
-                >> !(ch_p('s')[assign_a(s)] >> ',' >> int_p[assign_a(sx)] >> ',' >> int_p[assign_a(sy)])
-                >> ((int_p[assign_a(p.first)] >> ',' >> int_p[assign_a(p.second)]))[push_back_a(points,p)]
-                >> +(
-                      (int_p[assign_a(p.first)] >> ',' >> int_p[assign_a(p.second)])[push_back_a(points,p)] >>
-                      (int_p[assign_a(p.first)] >> ',' >> int_p[assign_a(p.second)])[push_back_a(points,p)] >>
-                      (int_p[assign_a(p.first)] >> ',' >> int_p[assign_a(p.second)])[push_back_a(points,p)]
+    char e = 'n', s = 'n';
+    int sx, sy, ex, ey;
+    QPair< float, float > p;
+    bool res;
+    res = parse(str,
+                (
+                    !(ch_p('e')[assign_a(e)] >> ',' >> int_p[assign_a(ex)] >> ',' >> int_p[assign_a(ey)])
+                    >> !(ch_p('s')[assign_a(s)] >> ',' >> int_p[assign_a(sx)] >> ',' >> int_p[assign_a(sy)])
+                    >> ((int_p[assign_a(p.first)] >> ',' >> int_p[assign_a(p.second)]))[push_back_a(points, p)]
+                    >> +(
+                        (int_p[assign_a(p.first)] >> ',' >> int_p[assign_a(p.second)])[push_back_a(points, p)] >>
+                        (int_p[assign_a(p.first)] >> ',' >> int_p[assign_a(p.second)])[push_back_a(points, p)] >>
+                        (int_p[assign_a(p.first)] >> ',' >> int_p[assign_a(p.second)])[push_back_a(points, p)]
                     )
-              )
-              ,
-              +space_p).full;
-  if (!res) return false;
-  if (s == 's')
-  {
+                )
+                ,
+                +space_p).full;
+    if (!res) return false;
+    if (s == 's') {
 //     kDebug() << "inserting the s point";
-    points.insert(points.begin(), qMakePair(float(sx),float(sy)));
-  }
-  if (e == 'e')
-  {
+        points.insert(points.begin(), qMakePair(float(sx), float(sy)));
+    }
+    if (e == 'e') {
 //     points.insert(points.begin(), qMakePair(float(ex),float(ey)));
-  }
-  return true;
+    }
+    return true;
 }
 
 // DotRenderOp renderop ;
@@ -468,7 +448,7 @@ void init_op()
 
 void valid_op(char const* first, char const* last)
 {
-  std::string s(first, last);
+    std::string s(first, last);
 //   renderop.renderop = QString::fromUtf8(therenderop.c_str());
 //   renderop.str = QString::fromUtf8(thestr.c_str());
 
@@ -481,7 +461,7 @@ void valid_op(char const* first, char const* last)
 
 bool parse_renderop(const std::string& /*str*//*, DotRenderOpVec& arenderopvec*/)
 {
-  return false;
+    return false;
 }
 // //   kDebug() << QString::fromUtf8(str.c_str()) << str.size();
 //   if (str.empty())
@@ -544,11 +524,11 @@ bool parse_renderop(const std::string& /*str*//*, DotRenderOpVec& arenderopvec*/
 
 bool parse(const std::string& str, DataTypeDocument * gd)
 {
-  DotGrammar g;
-  delete phelper;
-  phelper = new DotGraphParsingHelper;
-  phelper->gd = gd;
+    DotGrammar g;
+    delete phelper;
+    phelper = new DotGraphParsingHelper;
+    phelper->gd = gd;
 
-  return boost::spirit::classic::parse(str.c_str(), g >> end_p, (+boost::spirit::classic::space_p|boost::spirit::classic::comment_p("/*", "*/"))).full;
+    return boost::spirit::classic::parse(str.c_str(), g >> end_p, (+boost::spirit::classic::space_p | boost::spirit::classic::comment_p("/*", "*/"))).full;
 }
 

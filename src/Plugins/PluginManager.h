@@ -5,7 +5,7 @@
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -26,47 +26,47 @@
 #include "rocslib_export.h"
 
 class KPluginInfo;
-  
+
 class ROCSLIB_EXPORT PluginManager: public QObject
 {
-  Q_OBJECT
-  private:
-      //QList<ToolsPluginInterface*> _toolPlugins;
-      QList<FilePluginInterface*> _filePlugins;
-      
-      PluginManager();
+    Q_OBJECT
+private:
+    //QList<ToolsPluginInterface*> _toolPlugins;
+    QList<FilePluginInterface*> _filePlugins;
 
-      static PluginManager * self;
-      
-      /**The D Pointer*/
-      class PluginManagerPrivate * _d;
-  public:
-    
+    PluginManager();
+
+    static PluginManager * self;
+
+    /**The D Pointer*/
+    class PluginManagerPrivate * _d;
+public:
+
     static PluginManager * instance();
     ~PluginManager();
-    
+
     void loadPlugins();
-    
-    
+
+
     bool loadToolPlugin(QString arg1);
-    
+
     void loadToolsPlugins();
-    
+
     void loadFilePlugins();
-    
+
     QList < ToolsPluginInterface*> toolPlugins();
     QList < FilePluginInterface*> filePlugins() const;
-    
-    KPluginInfo pluginInfo( ToolsPluginInterface * plugin);
-    
-    KPluginInfo pluginInfo( FilePluginInterface * plugin);
-    
-    /** Returns plugin that can handle extension \p ext 
+
+    KPluginInfo pluginInfo(ToolsPluginInterface * plugin);
+
+    KPluginInfo pluginInfo(FilePluginInterface * plugin);
+
+    /** Returns plugin that can handle extension \p ext
     \param ext File extension (like 'TXT', 'cpp', '.Cpp', '*.js')
     \return File plugin to handle files with that extension or 0 if there is no plugin to handle it.
     */
     FilePluginInterface *  filePluginsByExtension(QString ext);
-  
+
 };
 
 #endif // PLUGINMANAGER_H

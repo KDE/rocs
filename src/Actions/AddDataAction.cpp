@@ -1,11 +1,11 @@
-/*  
+/*
     This file is part of Rocs.
     Copyright 2008  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008  Ugo Sangiori <ugorox@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of 
+    published by the Free Software Foundation; either version 2 of
     the License, or (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -28,25 +28,27 @@
 #include <DocumentManager.h>
 
 AddDataAction::AddDataAction(GraphScene *scene, QObject *parent)
-        : AbstractAction(scene, parent) {
-    setText(i18n ( "Add Node" ));
-    setToolTip ( i18n ( "Creates a new node at the click position." ) );
+    : AbstractAction(scene, parent)
+{
+    setText(i18n("Add Node"));
+    setToolTip(i18n("Creates a new node at the click position."));
     _name = "add-node";
 }
 
-AddDataAction::~AddDataAction() {
+AddDataAction::~AddDataAction()
+{
     kDebug() << "Destroyed";
 }
 
 bool AddDataAction::executePress(QPointF pos)
 {
-    if (  !DocumentManager::self()->activeDocument()->activeDataStructure()
-       ||  DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly() 
-    ) {
+    if (!DocumentManager::self()->activeDocument()->activeDataStructure()
+            ||  DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()
+       ) {
         return false;
     }
     DataPtr tmp = DocumentManager::self()->activeDocument()->activeDataStructure()
-            ->addData(i18n("untitled"), QPointF(pos.x(), pos.y()));
+                  ->addData(i18n("untitled"), QPointF(pos.x(), pos.y()));
     qDebug()  << " the data's actual position: " << tmp.get()->x() << ", " << tmp.get()->y() ;
     return true;
 }
