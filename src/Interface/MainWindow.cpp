@@ -350,10 +350,11 @@ void MainWindow::setupActions()
     _paletteActions->addAction("align-tree", new AlignAction(i18nc("Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
 
     // Menu actions
+    createAction("document-new", i18n("New Project"), "new-project", Qt::Key_N, SLOT(newProject()), this);
     createAction("document-save", i18n("Save Project"), "save-project", Qt::Key_S, SLOT(saveProject()), this);
     createAction("document-open", i18n("Open Project"), "open-project", Qt::Key_O, SLOT(openProject()), this);
-    createAction("", i18n("Change Name"), "set-project-name", SLOT(setProjectName()), this);
-    createAction("document-new",     i18n("New Graph Document"),     "new-graph",         SLOT(newGraph()),    this);
+    createAction("", i18n("Set Name"), "set-project-name", SLOT(setProjectName()), this);
+    createAction("document-new", i18n("New Graph Document"), "new-graph", SLOT(newGraph()), this);
     createAction("document-new",     i18n("New Script File"),     "new-script",         SLOT(newScript()),    this);
     createAction("document-open",    i18n("Import Rocs Graph"),        "open-graph",        SLOT(openGraph()),   this);
     createAction("document-save",    i18n("Save Graph"),        "save-graph",        SLOT(saveGraph()),   this);
@@ -563,6 +564,19 @@ void MainWindow::loadDocument(const QString& name)
 }
 
 
+void MainWindow::newProject()
+{
+    saveIfChanged();
+    _codeEditor->closeAllScripts();
+    DocumentManager::self()->closeAllDocuments();
+
+    delete _currentProject;
+    _currentProject = new Project();
+    _currentProject->addCodeFileNew(_codeEditor->newScript());
+    _currentProject->addGraphFileNew(DocumentManager::self()->loadDocument());
+}
+
+
 void MainWindow::saveProject()
 {
     // save graphs and scripts
@@ -588,8 +602,10 @@ void MainWindow::saveProject()
 
 void MainWindow::openProject()
 {
-    //FIXME currently silently closes old project
-//     saveAll();
+    saveIfChanged();
+    _codeEditor->closeAllScripts();
+    DocumentManager::self()->closeAllDocuments();
+
     delete _currentProject;
     QString file = KFileDialog::getOpenFileName( QString(),
                                                  i18n("*.rocs|Rocs project files\n*|All files"),
@@ -599,9 +615,15 @@ void MainWindow::openProject()
     foreach (KUrl graphFile, _currentProject->graphFiles()) {
         DocumentManager::self()->loadDocument(graphFile.toLocalFile()); //TODO documents should use kurls
     }
+    if (_currentProject->graphFiles().count()==0) {
+        _currentProject->addGraphFileNew(DocumentManager::self()->loadDocument());
+    }
     foreach (KUrl codeFile, _currentProject->codeFiles()) {
         _codeEditor->openScript(codeFile);
         //TODO set curser line
+    }
+    if (_currentProject->codeFiles().count()==0) {
+        _currentProject->addCodeFileNew(_codeEditor->newScript());
     }
 }
 
@@ -709,6 +731,7 @@ int MainWindow::saveIfChanged()
     return KMessageBox::No;
 }
 
+
 void MainWindow::importFile()
 {
     ImporterExporterManager importer(this);
@@ -730,6 +753,7 @@ void MainWindow::importFile()
     }
 }
 
+
 void MainWindow::exportFile()
 {
     ImporterExporterManager exp(this);
@@ -737,12 +761,14 @@ void MainWindow::exportFile()
     exp.exportFile(DocumentManager::self()->activeDocument());
 }
 
+
 void MainWindow::showPossibleIncludes()
 {
     PossibleIncludes dialog(this);
 
     dialog.exec();
 }
+
 
 void MainWindow::runToolPlugin()
 {
@@ -757,6 +783,7 @@ void MainWindow::runToolPlugin()
         emit runTool(plugin, DocumentManager::self()->activeDocument());
     }
 }
+
 
 void MainWindow::dsChanged()
 {
@@ -779,6 +806,7 @@ void MainWindow::executeScriptFull(const QString& text)
 {
     executeScript(MainWindow::Execute, text);
 }
+
 
 void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString& text)
 {
@@ -817,6 +845,7 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     engine->setScript(script, DocumentManager::self()->activeDocument());
     engine->execute();
 }
+
 
 void MainWindow::executeScriptOneStep(const QString& text)
 {

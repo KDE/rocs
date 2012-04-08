@@ -97,6 +97,15 @@ void DocumentManager::changeDocument(Document* doc)
     }
 }
 
+
+void DocumentManager::closeAllDocuments()
+{
+    foreach (Document* document, documentList()) {
+        removeDocument(document);
+    }
+}
+
+
 void DocumentManager::removeDocument(Document* doc)
 {
     if (m_documents.removeOne(doc)) {

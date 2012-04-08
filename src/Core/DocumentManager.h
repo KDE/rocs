@@ -59,6 +59,8 @@ public slots:
     /** Add a document to list and set as active document */
     void addDocument(Document*);
 
+    void closeAllDocuments();
+
     /** Remove the document from list. if the document is the active one,
      * then active document pass to be the last from list.
      * If it is the last one, an empty is created and set as active.

@@ -54,6 +54,7 @@ public:
     KTextEditor::View *view() const {
         return _activeView;
     }
+
     /** This method gives modification state of code-editor texts.
      * \return true if any document in the code-editor is modified, otherwise false
      */
@@ -74,6 +75,7 @@ public slots:
     void saveAllScripts();
     void openScript();
     void openScript(KUrl fileUrl);
+    void closeAllScripts();
 
     /** Save the given script or if no text document is given, the currently active script is
      *  saved. Opens Save-as dialog if text document has no path (is new).

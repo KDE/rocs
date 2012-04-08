@@ -55,18 +55,19 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
     setLayout(_layout);
 }
 
+void CodeEditor::closeAllScripts()
+{
+    // index list updates automatically (is QList)
+    for (int i=_scriptDocs.size(); i>=0; i--) {
+        closeDocument(0);
+    }
+}
+
 
 void CodeEditor::closeDocument(int index)
 {
     Q_ASSERT(index < _scriptDocs.size());
-    if (_scriptDocs.size() == 1) {
-        kDebug() << "Just one, creating new script";
-        newScript();
-        _scriptDocs.removeAt(0);
-        _docArea->removeWidget(_docArea->widget(0));
-        _docViews.removeAt(0);
-        _tabDocs->removeTab(0);
-    } else if (index == 0) {
+    if (index == 0) {
         kDebug() << "Deleting the first";
         _activeDocument = _scriptDocs.at(1);
         _activeView = _docViews.at(1);

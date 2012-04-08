@@ -128,6 +128,7 @@ private slots:
      * Graph document is added to project.
      */
     void addEmptyGraphDocument();
+    void newProject();
     void saveProject();
     void openProject();
     void setProjectName();

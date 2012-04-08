@@ -19,6 +19,7 @@
             <Action name="open-project" />
             <Action name="save-project" />
             <Action name="change-project" />
+            <Action name="new-project" />
             <Separator/>
             <Menu name="graph">
                 <text>Graph</text>
