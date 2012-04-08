@@ -63,13 +63,13 @@ public:
     Project(QString projectFile);
     virtual ~Project();
 
-    void setProjectDirectory(QString directory);
+    void setProjectDirectory(KUrl directory);
     QString projectDirectory() const;
 
     void setName(QString name);
     QString name() const;
 
-    int addCodeFile(QString file);
+    int addCodeFile(KUrl file);
     void removeCodeFile(int fileID);
     QList<KUrl> codeFiles() const;
     QList<KTextEditor::Document*> codeFilesNew() const;
@@ -81,9 +81,9 @@ public:
     void removeCodeFileNew(KTextEditor::Document* document);
     void saveCodeFileNew(KTextEditor::Document* document, KUrl file);
 
-    int addGraphFile(QString file);
+    int addGraphFile(KUrl file);
     void removeGraphFile(int fileID);
-    QList<QString> graphFiles() const;
+    QList<KUrl> graphFiles() const;
 
     /**
      * Add a new graph document to the project hat does not have a filename, yet.

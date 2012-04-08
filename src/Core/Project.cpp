@@ -24,7 +24,7 @@
 #include <QMap>
 #include <QList>
 
-#include <kurl.h>
+#include <KUrl>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <ktemporaryfile.h>
@@ -53,6 +53,8 @@ public:
         _config = new KConfig(_projectFile);
 
         KConfigGroup projectGroup(_config, "Project");
+        _projectDirectory = projectGroup.readEntry("Directory", QString());
+        _name= projectGroup.readEntry("Name", QString());
 
         QStringList codeFileIDs = projectGroup.readEntry("CodeFiles", QStringList());
         foreach(QString offset, codeFileIDs) {
@@ -118,9 +120,9 @@ QString Project::name() const
 }
 
 
-void Project::setProjectDirectory(QString directory)
+void Project::setProjectDirectory(KUrl directory)
 {
-    d->_projectDirectory = directory;
+    d->_projectDirectory = directory.directory(KUrl::AppendTrailingSlash);
 }
 
 
@@ -130,7 +132,7 @@ QString Project::projectDirectory() const
 }
 
 
-int Project::addCodeFile(QString file)
+int Project::addCodeFile(KUrl file)
 {
     QList<int> keys = d->_codeFileGroup.uniqueKeys();
     int newKey = 1;
@@ -139,7 +141,7 @@ int Project::addCodeFile(QString file)
     }
 
     KConfigGroup newGroup(d->_config, "CodeFile" + QString("%1").arg(newKey));
-    newGroup.writeEntry("file", file);
+    newGroup.writeEntry("file", KUrl::relativePath(projectDirectory(),file.toLocalFile()));
     newGroup.writeEntry("identifier", newKey);
     d->_codeFileGroup.insert(newKey, "CodeFile" + QString("%1").arg(newKey));
 
@@ -149,7 +151,7 @@ int Project::addCodeFile(QString file)
 
 void Project::removeCodeFile(int fileID)
 {
-    d->_config->deleteGroup(d->_codeFileGroup[fileID].toLocalFile());
+    d->_config->deleteGroup("CodeFile"+fileID);
     d->_codeFileGroup.remove(fileID);
 }
 
@@ -159,7 +161,12 @@ QList< KUrl > Project::codeFiles() const
     QList<KUrl> files;
     foreach(KUrl fileGroup, d->_codeFileGroup.values()) {
         KConfigGroup group(d->_config, fileGroup.toLocalFile());
-        files.append(KUrl::fromPath(group.readEntry("file")));
+        QString file = group.readEntry("file");
+        if (KUrl::isRelativeUrl(file)) {
+            files.append( KUrl(projectDirectory(), group.readEntry("file")));
+        } else {
+            files.append( KUrl::fromLocalFile(group.readEntry("file")));
+        }
     }
     return files;
 }
@@ -185,17 +192,13 @@ void Project::removeCodeFileNew(KTextEditor::Document* document)
 
 void Project::saveCodeFileNew(KTextEditor::Document* document, KUrl file)
 {
-    qDebug() << "XXXXXXXXXXXXXXXXX";
-    qDebug() << "toLocalFile: " << file.toLocalFile();
-    qDebug() << "path: " << file.path();
-
     removeCodeFileNew(document);
     document->saveAs(file);
-    addCodeFile(file.toLocalFile());
+    addCodeFile(file);
 }
 
 
-int Project::addGraphFile(QString file)
+int Project::addGraphFile(KUrl file)
 {
     QList<int> keys = d->_graphFileGroup.uniqueKeys();
     int newKey = 1;
@@ -204,7 +207,7 @@ int Project::addGraphFile(QString file)
     }
 
     KConfigGroup newGroup(d->_config, "GraphFile" + QString("%1").arg(newKey));
-    newGroup.writeEntry("file", file);
+    newGroup.writeEntry("file", KUrl::relativePath(projectDirectory(), file.toLocalFile()));
     newGroup.writeEntry("identifier", newKey);
     d->_graphFileGroup.insert(newKey, "GraphFile" + QString("%1").arg(newKey));
 
@@ -214,17 +217,22 @@ int Project::addGraphFile(QString file)
 
 void Project::removeGraphFile(int fileID)
 {
-    d->_config->deleteGroup(d->_graphFileGroup[fileID]);
+    d->_config->deleteGroup("GraphFile"+fileID);
     d->_graphFileGroup.remove(fileID);
 }
 
 
-QList< QString > Project::graphFiles() const
+QList< KUrl > Project::graphFiles() const
 {
-    QList< QString > files;
-    foreach(QString fileGroup, d->_graphFileGroup.values()) {
-        KConfigGroup group(d->_config, fileGroup);
-        files.append(group.readEntry("file"));
+    QList< KUrl > files;
+    foreach(KUrl fileGroup, d->_graphFileGroup.values()) {
+        KConfigGroup group(d->_config, fileGroup.toLocalFile());
+        QString file = group.readEntry("file");
+        if (KUrl::isRelativeUrl(file)) {
+            files.append( KUrl(projectDirectory(), group.readEntry("file")));
+        } else {
+            files.append( KUrl::fromLocalFile(group.readEntry("file")));
+        }
     }
     return files;
 }
@@ -246,7 +254,7 @@ void Project::saveGraphFileNew(Document* document, QString file)
 {
     removeGraphFileNew(document);
     document->saveAs(file);
-    addGraphFile(document->fileUrl());
+    addGraphFile(KUrl::fromLocalFile(document->fileUrl()));
 }
 
 
@@ -288,6 +296,7 @@ bool Project::writeNewProjectFile()
     }
     KConfigGroup group = d->_config->group("Project");
     group.writeEntry("Name", d->_name);
+    group.writeEntry("Directory", d->_projectDirectory);
     d->_config->sync();
 
     return true;
@@ -298,6 +307,8 @@ bool Project::writeProjectFile()
 {
     // update file reference lists
     KConfigGroup projectGroup(d->_config, "Project");
+    projectGroup.writeEntry("Name", d->_name);
+    projectGroup.writeEntry("Directory", d->_projectDirectory);
 
     QStringList codeFileIDs;
     foreach(KUrl fileGroup, d->_codeFileGroup.values()) {

@@ -566,20 +566,21 @@ void MainWindow::loadDocument(const QString& name)
 void MainWindow::saveProject()
 {
     // save graphs and scripts
-    saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
-    saveScripts();
-
     if (_currentProject->isTemporary()) {
         QString file = KFileDialog::getSaveFileName( QString(),
                                                      i18n("*.rocs|Rocs project files\n*|All files"),
                                                      this,
                                                      i18n("Save Project")
                                                    );
-        KUrl directory = KUrl::fromPath(file);
-        _currentProject->setProjectDirectory(directory.directory());
+        // we need to set project directory first to allow correcte relative paths
+        _currentProject->setProjectDirectory(file);
+        saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
+        saveScripts();
         _currentProject->writeProjectFile(file);
     }
     else {
+        saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
+        saveScripts();
         _currentProject->writeProjectFile();
     }
 }
@@ -595,8 +596,8 @@ void MainWindow::openProject()
                                                  this,
                                                  i18n("Open Project Files"));
     _currentProject = new Project(file);
-    foreach (QString graphFile, _currentProject->graphFiles()) {
-        loadDocument(graphFile);
+    foreach (KUrl graphFile, _currentProject->graphFiles()) {
+        DocumentManager::self()->loadDocument(graphFile.toLocalFile()); //TODO documents should use kurls
     }
     foreach (KUrl codeFile, _currentProject->codeFiles()) {
         _codeEditor->openScript(codeFile);

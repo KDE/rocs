@@ -555,6 +555,7 @@ void Document::savePropertiesInternalFormat(QObject *o)
 void Document::loadFromInternalFormat(const QString& filename)
 {
     QFile f(filename);
+    d->_lastSavedDocumentPath = filename;
     if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "File not open " << filename.toUtf8();
         return;

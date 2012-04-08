@@ -91,16 +91,16 @@ void TestLoadSave::projectLoadSaveTest()
     // prepare project and save
     Project* testProject = new Project(temp.fileName());
     testProject->setName("new test name");
-    testProject->addCodeFile("/path/to/code");
-    testProject->addGraphFile("/path/to/graph");
+    testProject->addCodeFile(KUrl::fromLocalFile("/path/to/code.js"));
+    testProject->addGraphFile(KUrl::fromLocalFile("/path/to/graph.graph"));
     testProject->writeProjectFile();
 
     // load project
     Project* testProject2 = new Project(temp.fileName());
     QVERIFY2( testProject2->name().compare("new test name")==0, "ERROR: red filename differs.");
     QVERIFY( testProject2->codeFiles().count()==1);
-    QVERIFY( testProject2->codeFiles().at(0).toLocalFile().compare("/path/to/code")==0);
-    QVERIFY( testProject2->graphFiles().at(0).compare("/path/to/graph")==0);
+    QVERIFY( testProject2->codeFiles().at(0).toLocalFile().compare("/path/to/code.js")==0);
+    QVERIFY( testProject2->graphFiles().at(0).toLocalFile().compare("/path/to/graph.graph")==0);
 
     delete testProject;
     delete testProject2;
