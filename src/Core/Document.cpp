@@ -57,8 +57,6 @@ public:
     QPointer<DataStructurePluginInterface> _dataStructureType;
     QtScriptBackend* _engineBackend;
     QList< DataStructurePtr > _dataStructures;
-
-
 };
 
 Document::Document(const QString& name, qreal left, qreal right, qreal top, qreal bottom, QObject *parent)

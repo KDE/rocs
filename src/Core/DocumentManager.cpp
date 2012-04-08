@@ -100,7 +100,7 @@ void DocumentManager::changeDocument(Document* doc)
 
 void DocumentManager::closeAllDocuments()
 {
-    foreach (Document* document, documentList()) {
+    foreach(Document * document, documentList()) {
         removeDocument(document);
     }
 }

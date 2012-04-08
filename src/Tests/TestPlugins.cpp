@@ -28,23 +28,25 @@
 
 void TestPlugins::inittestcase()
 {
-    if ( DataStructurePluginManager::self()->pluginsList().count() == 0 ) {
-        QFAIL( "No plugin of DS, no way to continue!" );
+    if (DataStructurePluginManager::self()->pluginsList().count() == 0) {
+        QFAIL("No plugin of DS, no way to continue!");
     }
 }
 
-void TestPlugins::create() {
-    DataStructurePluginManager::self()->setDataStructurePlugin( DataStructurePluginManager::self()->pluginsList().at( 1 )->name() );
-    Document doc( "TestDocument" );
+void TestPlugins::create()
+{
+    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(1)->name());
+    Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
-    QCOMPARE( ds->metaObject()->className(), "Rocs::GraphStructure" );
+    QCOMPARE(ds->metaObject()->className(), "Rocs::GraphStructure");
 }
 
-void TestPlugins::changeAndCreate() {
-    DataStructurePluginManager::self()->setDataStructurePlugin( DataStructurePluginManager::self()->pluginsList().at( 0 )->name() );
-    Document doc( "TestDocument" );
+void TestPlugins::changeAndCreate()
+{
+    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(0)->name());
+    Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
-    QCOMPARE( ds->metaObject()->className(), "Rocs::ListStructure" );
+    QCOMPARE(ds->metaObject()->className(), "Rocs::ListStructure");
 }
 
 void TestPlugins::convert()
@@ -85,4 +87,4 @@ void TestPlugins::convert()
 //     QCOMPARE (graph->pointers().count(), 1);
 }
 
-QTEST_MAIN( TestPlugins )
+QTEST_MAIN(TestPlugins)
