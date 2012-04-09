@@ -667,7 +667,7 @@ void MainWindow::newScript()
 void MainWindow::saveGraph(Document* document = 0)
 {
     if (document == 0) {
-        Document *d = DocumentManager::self()->activeDocument();
+        document = DocumentManager::self()->activeDocument();
     }
     Q_ASSERT(document);
     if (document->fileUrl().isEmpty()) {
@@ -731,7 +731,7 @@ int MainWindow::saveIfChanged()
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
                                 "Changes on your graph document are unsaved. Do you want to save your changes?"));
         if (btnCode == KMessageBox::Yes) {
-            saveAllGraphs(); //FIXME this must iterate over all graphs
+            saveAllGraphs();
         }
         return btnCode;
     }
