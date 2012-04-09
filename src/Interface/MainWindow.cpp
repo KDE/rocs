@@ -588,11 +588,11 @@ void MainWindow::saveProject()
                                                    );
         // we need to set project directory first to allow correcte relative paths
         _currentProject->setProjectDirectory(file);
-        saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
+        saveAllGraphs();
         saveScripts();
         _currentProject->writeProjectFile(file);
     } else {
-        saveGraph(); //FIXME should iterate over all graph files (as soon as the are used again...)
+        saveAllGraphs();
         saveScripts();
         _currentProject->writeProjectFile();
     }
@@ -664,25 +664,43 @@ void MainWindow::newScript()
 }
 
 
-void MainWindow::saveGraph()
+void MainWindow::saveGraph(Document* document = 0)
 {
-    Document *d = DocumentManager::self()->activeDocument();
-    if (d->fileUrl().isEmpty()) {
-        saveGraphAs();
+    if (document == 0) {
+        Document *d = DocumentManager::self()->activeDocument();
+    }
+    Q_ASSERT(document);
+    if (document->fileUrl().isEmpty()) {
+        saveGraphAs(document);
     } else {
-        d->save();
+        document->save();
     }
 }
 
 
-void MainWindow::saveGraphAs()
+void MainWindow::saveAllGraphs()
 {
-    Document *d = DocumentManager::self()->activeDocument();
+    foreach(Document * document, DocumentManager::self()->documentList()) {
+        if (document->fileUrl().isEmpty()) {
+            saveGraphAs(document);
+        } else if (document->isModified()) {
+            document->save();
+        }
+    }
+}
+
+
+void MainWindow::saveGraphAs(Document* document = 0)
+{
+    if (document == 0) {
+        document = DocumentManager::self()->activeDocument();
+    }
+    Q_ASSERT(document);
     QString file = KFileDialog::getSaveFileName(QString(),
                    i18n("*.graph|Rocs graph documents\n*|All files"),
                    this,
                    i18n("Save Graph Document"));
-    _currentProject->saveGraphFileAs(d, file);
+    _currentProject->saveGraphFileAs(document, file);
 }
 
 
@@ -702,11 +720,18 @@ void MainWindow::newGraph()
 
 int MainWindow::saveIfChanged()
 {
-    if (DocumentManager::self()->activeDocument()->isModified() && !_codeEditor->isModified()) {
+    bool anyGraphDocumentModified = false;
+    foreach(Document * document, DocumentManager::self()->documentList()) {
+        if (document->isModified()) {
+            anyGraphDocumentModified = true;
+            break;
+        }
+    }
+    if (anyGraphDocumentModified && !_codeEditor->isModified()) {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
                                 "Changes on your graph document are unsaved. Do you want to save your changes?"));
         if (btnCode == KMessageBox::Yes) {
-            saveGraph();
+            saveAllGraphs(); //FIXME this must iterate over all graphs
         }
         return btnCode;
     }
@@ -718,12 +743,12 @@ int MainWindow::saveIfChanged()
         }
         return btnCode;
     }
-    if (DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified()) {
+    if (anyGraphDocumentModified && _codeEditor->isModified()) {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
                                 "Changes on your script files and on your graph document are unsaved. Do you want to save your graph document and all unsaved scripts?"));
         if (btnCode == KMessageBox::Yes) {
             _codeEditor->saveAllScripts();
-            saveGraph();
+            saveAllGraphs();
         }
         return btnCode;
     }

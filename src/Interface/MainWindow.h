@@ -133,8 +133,25 @@ private slots:
     void openProject();
     void setProjectName();
     void openGraph();
-    void saveGraph();
-    void saveGraphAs();
+
+    /**
+     * Save graph document \p document if document is specified.
+     * Otherwise if \p document is 0 save current active document.
+     * \param docoument is reference to the to be saved graph document or 0
+     */
+    void saveGraph(Document* document);
+
+    /**
+     * Save all graphs currently registered by DocumentMananger
+     */
+    void saveAllGraphs();
+
+    /**
+     * Save graph document \p document under new file name if document is specified.
+     * Otherwise if \p document is 0 save current active document under new file name.
+     * \param docoument is reference to the to be saved graph document or 0
+     */
+    void saveGraphAs(Document* document);
     void newGraph();
     void saveScripts();
     void newScript();
