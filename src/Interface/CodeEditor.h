@@ -69,12 +69,12 @@ public slots:
      * Creates new script at given file.
      * \param file is absolute filename
      */
-    KTextEditor::Document* newScript(KUrl file);
+    KTextEditor::Document* newScript(const KUrl& file);
     void saveActiveScript();
     void saveActiveScriptAs();
     void saveAllScripts();
     void openScript();
-    void openScript(KUrl fileUrl);
+    void openScript(const KUrl& fileUrl);
     void closeAllScripts();
 
     /** Save the given script or if no text document is given, the currently active script is
