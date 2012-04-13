@@ -55,6 +55,12 @@ public:
 public slots:
     void changeDocument(Document*);
 
+    /**
+     * Change to document with given \p index.
+     * \param index is expected to be a valid index
+     */
+    void changeDocument(int index);
+
     void changeDocument();
     /** Add a document to list and set as active document */
     void addDocument(Document*);
@@ -79,6 +85,7 @@ signals:
     void deactivateDocument(Document* doc);
     /** signal emited when a document was removed from list. if doc is the active document, both, deactivateDocument() and activeDocument() is called first */
     void documentRemoved(Document* doc);
+    void documentListChanged();
 
 private:
     DocumentManager(QObject* parent = 0);

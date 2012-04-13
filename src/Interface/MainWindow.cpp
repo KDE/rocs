@@ -48,6 +48,7 @@
 #include <KFileDialog>
 #include <KInputDialog>
 #include <KMenu>
+#include <KComboBox>
 
 // UI RELATED INCLUDES
 #include "GraphLayers.h"
@@ -90,6 +91,7 @@
 
 #include "../Plugins/PluginManager.h"
 #include <QMutexLocker>
+#include <QFormLayout>
 #include <QScriptEngineDebugger>
 #include "IncludeManagerSettings.h"
 #include "ConfigureDefaultProperties.h"
@@ -116,13 +118,14 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
     setupToolsPluginsAction();
     setupDSPluginsAction();
 
-    DocumentManager *dm = DocumentManager::self();
-    connect(dm, SIGNAL(activateDocument()),
-            this, SLOT(setActiveDocument()));
-    connect(dm, SIGNAL(deactivateDocument(Document*)),
-            this, SLOT(releaseDocument(Document*)));
-    connect(dm, SIGNAL(documentRemoved(Document*)),
-            this, SLOT(releaseDocument(Document*)));
+    connect(DocumentManager::self(), SIGNAL(activateDocument()),
+        this, SLOT(setActiveDocument()));
+    connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)),
+        this, SLOT(releaseDocument(Document*)));
+    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
+        this, SLOT(releaseDocument(Document*)));
+    connect( DocumentManager::self(), SIGNAL(documentListChanged()),
+        this, SLOT(updateGraphDocumentList()));
 
     // TODO: use welcome widget instead of creating default empty project
     _currentProject = createNewProject();
@@ -305,13 +308,28 @@ QWidget* MainWindow::setupScriptPanel()
 
 QWidget* MainWindow::setupWhiteboardPanel()
 {
+    QWidget *panel = new QWidget(this);
+    _graphSelector = new KComboBox(this);
     _GraphLayers = new GraphLayers(this);
-    return _GraphLayers;
+
+    // arrange widgets
+    QWidget* selectorForm = new QWidget(panel);
+    QFormLayout* selectorFormLayout = new QFormLayout;
+    selectorForm->setLayout(selectorFormLayout);
+    selectorFormLayout->addRow(i18n("Graph Document:"), _graphSelector);
+
+    connect( _graphSelector, SIGNAL(currentIndexChanged(int)),
+        DocumentManager::self(), SLOT(changeDocument(int)));
+
+    panel->setLayout(new QVBoxLayout);
+    panel->layout()->addWidget(selectorForm);
+    panel->layout()->addWidget(_GraphLayers);
+    return panel;
 }
 
 void MainWindow::setupActions()
 {
-    kDebug() << "Entering in Setup Actions";
+    kDebug() << "create and connect actions";
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
 
@@ -496,7 +514,7 @@ void MainWindow::setupDocumentsList()
 
 void MainWindow::setActiveDocument()
 {
-    kDebug() << "Setting the document in the main widnow";
+    kDebug() << "Setting the document in the main window";
     Document *activeDocument = DocumentManager::self()->activeDocument();
     QtScriptBackend *engine = activeDocument->engineBackend();
 
@@ -536,11 +554,20 @@ GraphScene* MainWindow::scene() const
 
 void MainWindow::addEmptyGraphDocument()
 {
-    qDebug() << "add empty graph document to project";
     _currentProject->addGraphFileNew(
         DocumentManager::self()->loadDocument()
     );
 }
+
+
+void MainWindow::updateGraphDocumentList()
+{
+    _graphSelector->clear();
+    foreach(Document* document, DocumentManager::self()->documentList()) {
+        _graphSelector->addItem(document->name());
+    }
+}
+
 
 void MainWindow::openGraph()
 {
@@ -714,7 +741,9 @@ void MainWindow::newGraph()
         kDebug() << "Filename is empty and no script file was created.";
         return;
     }
+    DocumentManager::self()->loadDocument(file);
     _currentProject->addGraphFile(file);
+
 }
 
 
@@ -808,7 +837,7 @@ void MainWindow::runToolPlugin()
     }
 }
 
-
+//FIXME empty slot, remove
 void MainWindow::dsChanged()
 {
 //    kDebug() << "Data structure was changed, need to reload graphic part.";

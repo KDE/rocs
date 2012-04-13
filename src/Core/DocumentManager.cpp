@@ -62,7 +62,19 @@ void DocumentManager::addDocument(Document* newDoc)
         m_documents.append(newDoc);
         changeDocument(newDoc);
     }
+    emit documentListChanged();
 }
+
+
+void DocumentManager::changeDocument(int index)
+{
+    Q_ASSERT(index>=0 && index<documentList().length());
+    if (index<0 || index>=documentList().length()) {
+        return;
+    }
+    changeDocument(documentList().at(index));
+}
+
 
 void DocumentManager::changeDocument()
 {
@@ -75,6 +87,7 @@ void DocumentManager::changeDocument()
         changeDocument(doc);
     }
 }
+
 
 void DocumentManager::changeDocument(Document* doc)
 {
@@ -120,6 +133,7 @@ void DocumentManager::removeDocument(Document* doc)
         emit documentRemoved(doc);
         doc->deleteLater();
     }
+    emit documentListChanged();
 }
 
 void DocumentManager::convertToDataStructure()
@@ -170,6 +184,7 @@ Document* DocumentManager::loadDocument(QString name)
     }
     doc->setModified(false);
     addDocument(doc);
+
     return doc;
 }
 

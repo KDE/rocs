@@ -27,6 +27,7 @@
 #include <QMutex>
 
 class KPushButton;
+class KComboBox;
 class GraphLayers;
 class GraphVisualEditor;
 class KActionCollection;
@@ -128,6 +129,11 @@ private slots:
      * Graph document is added to project.
      */
     void addEmptyGraphDocument();
+
+    /**
+     * Updates selector combobox for graph documents.
+     */
+    void updateGraphDocumentList();
     void newProject();
     void saveProject();
     void openProject();
@@ -177,6 +183,7 @@ public slots:
     void enableStopAction();
     /** opens debug output listing **/
     void showDebugOutput();
+
 signals:
     void startEvaluation();
     void stopEvaluation();
@@ -187,6 +194,7 @@ private: // Variables.
 
     // Left Area:
     GraphLayers* _GraphLayers; //! Area where the data and edges will be modified.
+    KComboBox* _graphSelector;
     KPushButton *_btnAddGraph;
 
     // Right Area:
