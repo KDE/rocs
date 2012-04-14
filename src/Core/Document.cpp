@@ -564,12 +564,12 @@ void Document::savePropertiesInternalFormat(QObject *o)
     d->_buf += '\n';
 }
 
-void Document::loadFromInternalFormat(const QString& filename)
+void Document::loadFromInternalFormat(const KUrl& fileUrl)
 {
-    QFile f(filename);
-    d->_lastSavedDocumentPath = filename;
+    QFile f(fileUrl.toLocalFile());
+    d->_lastSavedDocumentPath = fileUrl.toLocalFile();
     if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "File not open " << filename.toUtf8();
+        qDebug() << "File not open " << fileUrl.toLocalFile().toUtf8();
         return;
     }
     DataStructurePtr tmpDataStructure;

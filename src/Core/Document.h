@@ -31,6 +31,7 @@
 #include <QRectF>
 #include <boost/shared_ptr.hpp>
 
+class KUrl;
 class DataStructurePluginInterface;
 class DataStructure;
 class QtScriptBackend;
@@ -80,7 +81,7 @@ public:
      */
     const QString& fileUrl() const;
 
-    void loadFromInternalFormat(const QString& filename);
+    void loadFromInternalFormat(const KUrl& fileUrl);
 
     QtScriptBackend * engineBackend() const;
     QList< DataStructurePtr >& dataStructures() const;

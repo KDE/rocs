@@ -23,6 +23,7 @@
 
 #include <QObject>
 
+class KUrl;
 class Data;
 class Document;
 #include "rocslib_export.h"
@@ -62,6 +63,7 @@ public slots:
     void changeDocument(int index);
 
     void changeDocument();
+
     /** Add a document to list and set as active document */
     void addDocument(Document*);
 
@@ -76,7 +78,18 @@ public slots:
     /** Convert document to new data structure. */
     void convertToDataStructure();
 
-    Document* loadDocument(QString fileName = QString());
+    /**
+     * Creates and loads a new graph document.
+     * \return created document
+     */
+    Document* newDocument();
+
+    /**
+     * Loads graph document specified by \p documentUrl.
+     * \param documentUrl is Url specifying the to be opened document
+     * \return loaded document
+     */
+    Document* openDocument(const KUrl& documentUrl);
 
 signals:
     /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/

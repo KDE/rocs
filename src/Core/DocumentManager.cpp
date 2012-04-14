@@ -152,38 +152,46 @@ void DocumentManager::convertToDataStructure()
             qDebug() << " Data Structure converted to " << DataStructurePluginManager::self()->pluginName();
         }
     } else {
-        loadDocument();
+        newDocument();
     }
 
     qDebug() << "----------=========== Conversion Finished ============-----------";
 }
 
-Document* DocumentManager::loadDocument(QString name)
+Document* DocumentManager::newDocument()
 {
     Document* doc;
-    if (name.isEmpty()) {
-        // find unused name
-        QList<QString> usedNames;
-        foreach(Document* document, m_documents) {
-            usedNames.append(document->name());
-        }
-        // For at least one i in this range, the name is not used, yet.
-        for (int i=0; i<m_documents.length()+1; ++i) {
-            name = QString("%1 %2").arg(i18n("Document")).arg(i);
-            if (!usedNames.contains(name)) {
-                break;
-            }
-        }
-        doc = new Document(name);
-        doc->addDataStructure();
-    } else {
-        doc = new Document(name);
-        doc->loadFromInternalFormat(name);
-    }
+    QString name;
 
+    // find unused name
+    QList<QString> usedNames;
+    foreach(Document* document, m_documents) {
+        usedNames.append(document->name());
+    }
+    // For at least one i in this range, the name is not used, yet.
+    for (int i=0; i<m_documents.length()+1; ++i) {
+        name = QString("%1 %2").arg(i18n("Document")).arg(i);
+        if (!usedNames.contains(name)) {
+            break;
+        }
+    }
+    doc = new Document(name);
+    doc->addDataStructure();
     doc->setModified(false);
     addDocument(doc);
 
     return doc;
 }
 
+
+Document* DocumentManager::openDocument(const KUrl& documentUrl)
+{
+    Document* doc;
+
+    doc = new Document(documentUrl.fileName());
+    doc->loadFromInternalFormat(documentUrl);
+    doc->setModified(false);
+    addDocument(doc);
+
+    return doc;
+}

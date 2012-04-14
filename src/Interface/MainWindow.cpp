@@ -190,7 +190,7 @@ Project* MainWindow::createNewProject()
 {
     Project* newProject = new Project();
     // create new document and add this to project new
-    newProject->addGraphFileNew(DocumentManager::self()->loadDocument());
+    newProject->addGraphFileNew(DocumentManager::self()->newDocument());
     newProject->addCodeFileNew(_codeEditor->newScript());
 
     return newProject;
@@ -555,7 +555,7 @@ GraphScene* MainWindow::scene() const
 void MainWindow::addEmptyGraphDocument()
 {
     _currentProject->addGraphFileNew(
-        DocumentManager::self()->loadDocument()
+        DocumentManager::self()->newDocument()
     );
 }
 
@@ -587,7 +587,7 @@ void MainWindow::loadDocument(const QString& name)
         return;
     }
 
-    DocumentManager::self()->loadDocument(name);
+    DocumentManager::self()->openDocument(KUrl::fromLocalFile(name));
 }
 
 
@@ -600,7 +600,7 @@ void MainWindow::newProject()
     delete _currentProject;
     _currentProject = new Project();
     _currentProject->addCodeFileNew(_codeEditor->newScript());
-    _currentProject->addGraphFileNew(DocumentManager::self()->loadDocument());
+    _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
 }
 
 
@@ -639,10 +639,10 @@ void MainWindow::openProject()
                    i18n("Open Project Files"));
     _currentProject = new Project(file);
     foreach(KUrl graphFile, _currentProject->graphFiles()) {
-        DocumentManager::self()->loadDocument(graphFile.toLocalFile()); //TODO documents should use kurls
+        DocumentManager::self()->openDocument(graphFile); //TODO documents should use kurls
     }
     if (_currentProject->graphFiles().count() == 0) {
-        _currentProject->addGraphFileNew(DocumentManager::self()->loadDocument());
+        _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
     }
     foreach(KUrl codeFile, _currentProject->codeFiles()) {
         _codeEditor->openScript(codeFile);
@@ -741,9 +741,8 @@ void MainWindow::newGraph()
         kDebug() << "Filename is empty and no script file was created.";
         return;
     }
-    DocumentManager::self()->loadDocument(file);
+    DocumentManager::self()->openDocument(KUrl::fromLocalFile(file));
     _currentProject->addGraphFile(file);
-
 }
 
 
