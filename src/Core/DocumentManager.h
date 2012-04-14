@@ -31,30 +31,46 @@ class Document;
 class ROCSLIB_EXPORT DocumentManager : public QObject
 {
     Q_OBJECT
-    QList<Document*> m_documents;
-    Document * m_actualDocument;
-
 
 public:
     static DocumentManager* self();
 
     virtual ~DocumentManager();
 
-    //!inlines.
-    /** Gets the document on the index i, returns null if notfound. */
+    /**
+     * Returns document with index \p i in document list. Note that index can change due to
+     * various operations. Signal \see documentListChanged() is emitted if this happens.
+     * \param index of document in document list
+     * \return the document
+     */
     Document* document(const int i) const;
 
-    /** returns the active document, or null if there's none */
+    /**
+     * Returns the currently active document, or 0 if there document list is empty.
+     * \return currently active document
+     */
     Document* activeDocument() const;
 
-    /** returns the document list */
+    /**
+     * Returns the document list of the document manager.
+     * Position of document in this list is temporary document index.
+     * List order can change by \see removeDocument().
+     * \return list with documents
+     */
     QList< Document* > documentList() const ;
 
     int viewStyleDataNode();
     int viewStyleDataEdge();
 
 public slots:
-    void changeDocument(Document*);
+    /** Convert document to new data structure. */
+    void convertToDataStructure();
+
+    /**
+     * Change active document to be \p document.
+     * \param document is the document to be set active.
+     */
+    void changeDocument(Document* document);
 
     /**
      * Change to document with given \p index.
@@ -64,19 +80,26 @@ public slots:
 
     void changeDocument();
 
-    /** Add a document to list and set as active document */
-    void addDocument(Document*);
-
+    /**
+     * Close all documents from document list.
+     * This method does not write data to document files.
+     */
     void closeAllDocuments();
 
-    /** Remove the document from list. if the document is the active one,
-     * then active document pass to be the last from list.
-     * If it is the last one, an empty is created and set as active.
+    /**
+     * Add document to document list and set this document as active document.
+     * \param document that shall be added to document list
      */
-    void removeDocument(Document*);
+    void addDocument(Document* document);
 
-    /** Convert document to new data structure. */
-    void convertToDataStructure();
+    /**
+     * Remove document from document list. If the document is currently active,
+     * then the last document from document list becomes active. If document
+     * list contains only this document, a new (empty) document is created.
+     * This method does not write data to document files.
+     * \param document that shall be removed
+     */
+    void removeDocument(Document* document);
 
     /**
      * Creates and loads a new graph document.
@@ -85,36 +108,56 @@ public slots:
     Document* newDocument();
 
     /**
-     * Loads graph document specified by \p documentUrl.
+     * Loads graph document specified by \p documentUrl and adds document to document list.
+     * Sets loaded document as active document.
      * \param documentUrl is Url specifying the to be opened document
      * \return loaded document
      */
     Document* openDocument(const KUrl& documentUrl);
 
 signals:
-    /** signal emited when a new document is made active (ex. when changeDocument() or addDocument() was called)*/
+    /**
+     * Signal is emitted if the currently active document changes
+     */
     void activateDocument();
-    /** this signal is emited when actual active document is deactivate (by a removal or a change)*/
-    void deactivateDocument(Document* doc);
-    /** signal emited when a document was removed from list. if doc is the active document, both, deactivateDocument() and activeDocument() is called first */
-    void documentRemoved(Document* doc);
+
+    /**
+     * Signal is emitted if the currently active document is deactivated.
+     * (This can be caused by a removal or a change.)
+     */
+    void deactivateDocument(Document* document);
+
+    /**
+     * Signal is emitted if \p document was removed from list.
+     * If \p document is the active document, both, deactivateDocument() and activeDocument()
+     * were called before this signal.
+     */
+    void documentRemoved(Document* document);
+
+    /**
+     * Signal is emitted if the document list changes and older document index values get invalid.
+     */
     void documentListChanged();
 
 private:
     DocumentManager(QObject* parent = 0);
     static DocumentManager *_self;
+    QList<Document*> _documents;
+    Document *_activeDocument;
 };
 
 inline Document* DocumentManager::document(const int i) const
 {
-    return (i < m_documents.count() && i >= 0) ? m_documents.at(i) : 0;
+    return (i < _documents.count() && i >= 0) ? _documents.at(i) : 0;
 }
+
 inline Document* DocumentManager::activeDocument() const
 {
-    return m_actualDocument;
+    return _activeDocument;
 }
+
 inline QList< Document* > DocumentManager::documentList() const
 {
-    return m_documents;
+    return _documents;
 }
 #endif // DOCUMENTMANAGER_H

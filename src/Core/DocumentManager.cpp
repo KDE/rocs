@@ -43,24 +43,24 @@ DocumentManager* DocumentManager::self()
 
 DocumentManager::DocumentManager(QObject* parent): QObject(parent)
 {
-    m_actualDocument = 0;
+    _activeDocument = 0;
 }
 
 DocumentManager::~DocumentManager()
 {
-    foreach(Document * g, m_documents) {
+    foreach(Document * g, _documents) {
         removeDocument(g);
     }
 }
 
-void DocumentManager::addDocument(Document* newDoc)
+void DocumentManager::addDocument(Document* document)
 {
-    if (!m_documents.contains(newDoc)) {
-        if (newDoc->dataStructures().count() == 0) {
-            newDoc->addDataStructure();
+    if (!_documents.contains(document)) {
+        if (document->dataStructures().count() == 0) {
+            document->addDataStructure();
         }
-        m_documents.append(newDoc);
-        changeDocument(newDoc);
+        _documents.append(document);
+        changeDocument(document);
     }
     emit documentListChanged();
 }
@@ -83,28 +83,28 @@ void DocumentManager::changeDocument()
     if (! action) {
         return;
     }
-    if (Document *doc = m_documents.value(action->data().toInt())) {
+    if (Document *doc = _documents.value(action->data().toInt())) {
         changeDocument(doc);
     }
 }
 
 
-void DocumentManager::changeDocument(Document* doc)
+void DocumentManager::changeDocument(Document* document)
 {
-    if (!m_documents.contains(doc)) {
-        m_documents.append(doc);
+    if (!_documents.contains(document)) {
+        _documents.append(document);
     }
-    if (m_actualDocument != doc) {
-        if (m_actualDocument) {
-            emit deactivateDocument(m_actualDocument);
-            DataStructurePluginManager::self()->disconnect(m_actualDocument);
-            doc->disconnect(SIGNAL(activeDataStructureChanged(DataStructurePtr)));
-            doc->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
-            doc->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
-            doc->engineBackend()->disconnect(SIGNAL(finished()));
+    if (_activeDocument != document) {
+        if (_activeDocument) {
+            emit deactivateDocument(_activeDocument);
+            DataStructurePluginManager::self()->disconnect(_activeDocument);
+            document->disconnect(SIGNAL(activeDataStructureChanged(DataStructurePtr)));
+            document->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
+            document->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
+            document->engineBackend()->disconnect(SIGNAL(finished()));
         }
-        m_actualDocument = doc;
-        if (m_actualDocument) {
+        _activeDocument = document;
+        if (_activeDocument) {
             emit activateDocument();
         }
     }
@@ -119,35 +119,35 @@ void DocumentManager::closeAllDocuments()
 }
 
 
-void DocumentManager::removeDocument(Document* doc)
+void DocumentManager::removeDocument(Document* document)
 {
-    if (m_documents.removeOne(doc)) {
-        if (m_actualDocument == doc) {
-            if (m_documents.count() > 0) {
-                changeDocument(m_documents.last()); //
+    if (_documents.removeOne(document)) {
+        if (_activeDocument == document) {
+            if (_documents.count() > 0) {
+                changeDocument(_documents.last()); //
             } else {
-                emit deactivateDocument(m_actualDocument);
-                m_actualDocument = 0;
+                emit deactivateDocument(_activeDocument);
+                _activeDocument = 0;
             }
         }
-        emit documentRemoved(doc);
-        doc->deleteLater();
+        emit documentRemoved(document);
+        document->deleteLater();
     }
     emit documentListChanged();
 }
 
 void DocumentManager::convertToDataStructure()
 {
-    qDebug() << "-----------------======== Converting Data Structure ========-----------";
+    kDebug() << "-----------------======== Converting Data Structure ========-----------";
 
     Document * newDoc = 0;
-    if (m_actualDocument) {
-        if (m_actualDocument->dataStructureTypeName() != DataStructurePluginManager::self()->pluginName()
-                && DataStructurePluginManager::self()->actualPlugin()->canConvertFrom(m_actualDocument)) {
+    if (_activeDocument) {
+        if (_activeDocument->dataStructureTypeName() != DataStructurePluginManager::self()->pluginName()
+                && DataStructurePluginManager::self()->actualPlugin()->canConvertFrom(_activeDocument)) {
             //Verificar se é possível converter
-            m_actualDocument->cleanUpBeforeConvert();
-            newDoc = new Document(*m_actualDocument);
-            emit deactivateDocument(m_actualDocument);
+            _activeDocument->cleanUpBeforeConvert();
+            newDoc = new Document(*_activeDocument);
+            emit deactivateDocument(_activeDocument);
             addDocument(newDoc);
             qDebug() << " Data Structure converted to " << DataStructurePluginManager::self()->pluginName();
         }
@@ -155,7 +155,7 @@ void DocumentManager::convertToDataStructure()
         newDocument();
     }
 
-    qDebug() << "----------=========== Conversion Finished ============-----------";
+    kDebug() << "----------=========== Conversion Finished ============-----------";
 }
 
 Document* DocumentManager::newDocument()
@@ -165,11 +165,11 @@ Document* DocumentManager::newDocument()
 
     // find unused name
     QList<QString> usedNames;
-    foreach(Document * document, m_documents) {
+    foreach(Document * document, _documents) {
         usedNames.append(document->name());
     }
     // For at least one i in this range, the name is not used, yet.
-    for (int i = 0; i < m_documents.length() + 1; ++i) {
+    for (int i = 0; i < _documents.length() + 1; ++i) {
         name = QString("%1 %2").arg(i18n("Document")).arg(i);
         if (!usedNames.contains(name)) {
             break;
