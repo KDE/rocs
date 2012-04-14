@@ -104,7 +104,14 @@ public:
 
 public slots:
     void setModified(const bool mod = true);
-    DataStructurePtr addDataStructure(QString name = "untitled");
+
+    /**
+     * Add data structure to graph document with name \p name.
+     * If no name is given, the name of the used data structure is used.
+     * \param name is the optional name of the to be created data structure
+     * \return shared pointer to the data structure
+     */
+    DataStructurePtr addDataStructure(QString name = "");
     DataStructurePtr activeDataStructure() const ;
     void setActiveDataStructure(DataStructurePtr g);
 

@@ -102,10 +102,7 @@ void GraphLayers::setActiveDocument()
 void GraphLayers::btnADDClicked()
 {
     QString name = _lineEdit->text();
-    if (name.isEmpty()) {
-        name = i18n("Untitled%1", DocumentManager::self()->activeDocument()->dataStructures().count());
-    }
-    emit  createGraph(name);
+    emit createGraph(name);
 }
 
 void GraphLayers::createLayer(DataStructurePtr dataStructure)

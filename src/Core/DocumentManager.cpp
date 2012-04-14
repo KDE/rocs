@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -160,28 +160,27 @@ void DocumentManager::convertToDataStructure()
 
 Document* DocumentManager::loadDocument(QString name)
 {
-    Document * doc;
+    Document* doc;
     if (name.isEmpty()) {
-        int docNumber = 0;
-        forever {
-            bool found = false;
-            name = QString("%1%2").arg(i18n("Untitled")).arg(docNumber);
-            foreach(Document *data, m_documents) {
-                if (data->name() == name) {
-                    found = true;
-                    docNumber += 1;
-                }
-            }
-            if (! found) {
+        // find unused name
+        QList<QString> usedNames;
+        foreach(Document* document, m_documents) {
+            usedNames.append(document->name());
+        }
+        // For at least one i in this range, the name is not used, yet.
+        for (int i=0; i<m_documents.length()+1; ++i) {
+            name = QString("%1 %2").arg(i18n("Document")).arg(i);
+            if (!usedNames.contains(name)) {
                 break;
             }
         }
         doc = new Document(name);
-        doc->addDataStructure(i18n("Untitled0"));
+        doc->addDataStructure();
     } else {
-        doc = new Document(i18n("Untitled0"));
+        doc = new Document(name);
         doc->loadFromInternalFormat(name);
     }
+
     doc->setModified(false);
     addDocument(doc);
 

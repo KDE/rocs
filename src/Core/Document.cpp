@@ -355,6 +355,20 @@ DataStructurePtr Document::addDataStructure(QString name)
 {
     DataStructurePtr g = DataStructurePluginManager::self()->createNewDataStructure(this,
                          d->_dataStructureType->name());
+    if (name.isEmpty()) {
+        // find unused name
+        QList<QString> usedNames;
+        foreach(DataStructurePtr dataStructure, d->_dataStructures) {
+            usedNames.append(dataStructure->name());
+        }
+        // For at least one i in this range, the name is not used, yet.
+        for (int i=0; i<dataStructures().length()+1; ++i) {
+            name = QString("%1%2").arg(d->_dataStructureType->name()).arg(i);
+            if (!usedNames.contains(name)) {
+                break;
+            }
+        }
+    }
     g->setName(name);
     d->_dataStructures.append(g);
     d->_activeDataStructure = g;
