@@ -362,7 +362,7 @@ DataStructurePtr Document::addDataStructure(QString name)
             usedNames.append(dataStructure->name());
         }
         // For at least one i in this range, the name is not used, yet.
-        for (int i=0; i<dataStructures().length()+1; ++i) {
+        for (int i = 0; i < dataStructures().length() + 1; ++i) {
             name = QString("%1%2").arg(d->_dataStructureType->name()).arg(i);
             if (!usedNames.contains(name)) {
                 break;

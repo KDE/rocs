@@ -119,13 +119,13 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
     setupDSPluginsAction();
 
     connect(DocumentManager::self(), SIGNAL(activateDocument()),
-        this, SLOT(setActiveDocument()));
+            this, SLOT(setActiveDocument()));
     connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)),
-        this, SLOT(releaseDocument(Document*)));
+            this, SLOT(releaseDocument(Document*)));
     connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
-        this, SLOT(releaseDocument(Document*)));
-    connect( DocumentManager::self(), SIGNAL(documentListChanged()),
-        this, SLOT(updateGraphDocumentList()));
+            this, SLOT(releaseDocument(Document*)));
+    connect(DocumentManager::self(), SIGNAL(documentListChanged()),
+            this, SLOT(updateGraphDocumentList()));
 
     // TODO: use welcome widget instead of creating default empty project
     _currentProject = createNewProject();
@@ -318,8 +318,8 @@ QWidget* MainWindow::setupWhiteboardPanel()
     selectorForm->setLayout(selectorFormLayout);
     selectorFormLayout->addRow(i18n("Graph Document:"), _graphSelector);
 
-    connect( _graphSelector, SIGNAL(currentIndexChanged(int)),
-        DocumentManager::self(), SLOT(changeDocument(int)));
+    connect(_graphSelector, SIGNAL(currentIndexChanged(int)),
+            DocumentManager::self(), SLOT(changeDocument(int)));
 
     panel->setLayout(new QVBoxLayout);
     panel->layout()->addWidget(selectorForm);
@@ -563,7 +563,7 @@ void MainWindow::addEmptyGraphDocument()
 void MainWindow::updateGraphDocumentList()
 {
     _graphSelector->clear();
-    foreach(Document* document, DocumentManager::self()->documentList()) {
+    foreach(Document * document, DocumentManager::self()->documentList()) {
         _graphSelector->addItem(document->name());
     }
 }

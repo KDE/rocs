@@ -68,8 +68,8 @@ void DocumentManager::addDocument(Document* newDoc)
 
 void DocumentManager::changeDocument(int index)
 {
-    Q_ASSERT(index>=0 && index<documentList().length());
-    if (index<0 || index>=documentList().length()) {
+    Q_ASSERT(index >= 0 && index < documentList().length());
+    if (index < 0 || index >= documentList().length()) {
         return;
     }
     changeDocument(documentList().at(index));
@@ -165,11 +165,11 @@ Document* DocumentManager::newDocument()
 
     // find unused name
     QList<QString> usedNames;
-    foreach(Document* document, m_documents) {
+    foreach(Document * document, m_documents) {
         usedNames.append(document->name());
     }
     // For at least one i in this range, the name is not used, yet.
-    for (int i=0; i<m_documents.length()+1; ++i) {
+    for (int i = 0; i < m_documents.length() + 1; ++i) {
         name = QString("%1 %2").arg(i18n("Document")).arg(i);
         if (!usedNames.contains(name)) {
             break;
