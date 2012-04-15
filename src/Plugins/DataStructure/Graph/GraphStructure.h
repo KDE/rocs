@@ -78,6 +78,7 @@ public:
      */
     GRAPH_TYPE graphType() const;
 
+public slots:
     /**
      * Setter for graph type. No conversations are performed.
      * \param type as specified  by enum GRAPH_TYPE
@@ -85,7 +86,6 @@ public:
      */
     void setGraphType(int type);
 
-public slots:
     /**
      * returns a list of all nodes of the graph as array
      */
