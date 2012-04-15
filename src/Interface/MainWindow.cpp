@@ -309,13 +309,14 @@ QWidget* MainWindow::setupScriptPanel()
 QWidget* MainWindow::setupWhiteboardPanel()
 {
     QWidget *panel = new QWidget(this);
+
     _graphSelector = new KComboBox(this);
     _GraphLayers = new GraphLayers(this);
 
     // arrange widgets
     QWidget* selectorForm = new QWidget(panel);
-    QFormLayout* selectorFormLayout = new QFormLayout;
-    selectorForm->setLayout(selectorFormLayout);
+    QFormLayout* selectorFormLayout = new QFormLayout(selectorForm);
+    selectorFormLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
     selectorFormLayout->addRow(i18n("Graph Document:"), _graphSelector);
 
     connect(_graphSelector, SIGNAL(currentIndexChanged(int)),
@@ -324,6 +325,8 @@ QWidget* MainWindow::setupWhiteboardPanel()
     panel->setLayout(new QVBoxLayout);
     panel->layout()->addWidget(selectorForm);
     panel->layout()->addWidget(_GraphLayers);
+    selectorForm->setLayout(selectorFormLayout);
+
     return panel;
 }
 
