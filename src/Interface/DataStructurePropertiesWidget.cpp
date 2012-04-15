@@ -65,9 +65,7 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr da
         _extraProperties->setLayout(lay);
     }
 
-    Document *gDocument = qobject_cast<Document*>(dataStructure->parent());
-
-    connect(this, SIGNAL(addGraph(QString)), gDocument, SLOT(addDataStructure(QString)));
+    connect(this, SIGNAL(addGraph(QString)), dataStructure->document(), SLOT(addDataStructure(QString)));
     connect(this, SIGNAL(removeGraph(DataStructurePtr)), dataStructure.get(), SLOT(remove()));
 
     // react on new data types and pointer types
