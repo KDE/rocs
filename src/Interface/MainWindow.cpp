@@ -694,7 +694,13 @@ void MainWindow::newScript()
 }
 
 
-void MainWindow::saveGraph(Document* document = 0)
+void MainWindow::saveGraph()
+{
+    saveGraph(DocumentManager::self()->activeDocument());
+}
+
+
+void MainWindow::saveGraph(Document* document)
 {
     if (document == 0) {
         document = DocumentManager::self()->activeDocument();
@@ -720,7 +726,13 @@ void MainWindow::saveAllGraphs()
 }
 
 
-void MainWindow::saveGraphAs(Document* document = 0)
+void MainWindow::saveGraphAs()
+{
+    saveGraphAs(DocumentManager::self()->activeDocument());
+}
+
+
+void MainWindow::saveGraphAs(Document* document)
 {
     if (document == 0) {
         document = DocumentManager::self()->activeDocument();

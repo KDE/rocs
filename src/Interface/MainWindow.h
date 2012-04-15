@@ -141,6 +141,11 @@ private slots:
     void openGraph();
 
     /**
+     * Save currently active graph document.
+     */
+    void saveGraph();
+
+    /**
      * Save graph document \p document if document is specified.
      * Otherwise if \p document is 0 save current active document.
      * \param docoument is reference to the to be saved graph document or 0
@@ -151,6 +156,11 @@ private slots:
      * Save all graphs currently registered by DocumentMananger
      */
     void saveAllGraphs();
+
+    /**
+     * Save graph currently active document under new file name.
+     */
+    void saveGraphAs();
 
     /**
      * Save graph document \p document under new file name if document is specified.
