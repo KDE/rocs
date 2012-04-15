@@ -35,6 +35,7 @@
 
 // KDE Related Includes
 #include <KActionCollection>
+#include <KActionMenu>
 #include <KApplication>
 #include <KDebug>
 #include <KIcon>
@@ -48,6 +49,7 @@
 #include <KFileDialog>
 #include <KInputDialog>
 #include <KMenu>
+#include <KToolBar>
 #include <KComboBox>
 
 // UI RELATED INCLUDES
@@ -265,28 +267,28 @@ QWidget* MainWindow::setupScriptPanel()
     listingWidget->layout()->addWidget(header);
     listingWidget->layout()->addWidget(stackedListing);
 
-    QToolBar *executeCommands = new QToolBar;
+    KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     executeCommands->setOrientation(Qt::Vertical);
     _runScript = new KAction(KIcon("system-run"), i18nc("Script Execution", "Run"), this);
     _stepRunScript = new KAction(KIcon("go-next"), i18nc("Script Execution", "One Step"), this);
-    _debugScript = new KAction(KIcon("debug-run"), i18n("Debug run"), this);
-    _interruptScript = new KAction(KIcon("debug-run-cursor"), i18n("Interrupt at first line"), this);
     _stopScript = new KAction(KIcon("process-stop"), i18nc("Script Execution", "Stop"), this);
     _stopScript->setEnabled(false);
     executeCommands->addAction(_runScript);
     executeCommands->addAction(_stepRunScript);
-    QToolButton *dbgBtn = new QToolButton(executeCommands);
-    KMenu * menu = new KMenu(dbgBtn);
-    menu->addAction(_debugScript);
-    menu->addAction(_interruptScript);
-    menu->setActiveAction(_debugScript);
-    menu->setDefaultAction(_debugScript);
-    menu->setIcon(_debugScript->icon());
-    dbgBtn->setMenu(menu);
-    dbgBtn->setDefaultAction(_debugScript);
-    executeCommands->addWidget(dbgBtn);
+
+    // debug controls submenu
+    _debugMenu = new KActionMenu(KIcon("debug-run"), i18n("Debug"), this);
+    _debugScript = new KAction(KIcon("debug-run"), i18n("Debug run"), _debugMenu);
+    _interruptScript = new KAction(KIcon("debug-run-cursor"), i18n("Interrupt at first line"), _debugMenu);
+    _debugMenu->addAction(_debugScript);
+    _debugMenu->addAction(_interruptScript);
+    executeCommands->addWidget(_debugMenu->createWidget(executeCommands));
     executeCommands->addAction(_stopScript);
+
+    // set toolbar visibility defaults
+    showExecutionButtonDebug(Settings::excutionModeDebugVisible());
+    showExecutionButtonOneStep(Settings::excutionModeOneStepVisible());
 
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScriptFull()));
     connect(_stepRunScript, SIGNAL(triggered()), this, SLOT(executeScriptOneStep()));
@@ -443,6 +445,10 @@ void MainWindow::showSettings()
     connect(&dialog, SIGNAL(okClicked()),      defaultProperties, SLOT(saveConfig()));
     connect(&dialog, SIGNAL(defaultClicked()), defaultProperties, SLOT(readConfig()));
 
+    connect(defaultProperties, SIGNAL(showExecuteModeDebugChanged(bool)),
+            this, SLOT(showExecutionButtonDebug(bool)));
+    connect(defaultProperties, SIGNAL(showExecuteModeOneStepChanged(bool)),
+            this, SLOT(showExecutionButtonOneStep(bool)));
 
     dialog.exec();
 }
@@ -851,21 +857,6 @@ void MainWindow::runToolPlugin()
     }
 }
 
-//FIXME empty slot, remove
-void MainWindow::dsChanged()
-{
-//    kDebug() << "Data structure was changed, need to reload graphic part.";
-
-//    setActiveDocument();
-//     QAction *action = qobject_cast<QAction *> ( sender() );
-//
-//     if (! action ){
-//       return;
-//     }
-//     DataStructurePluginInterface *plugin = DataStructurePluginManager::instance()->pluginsList().at(action->data().toInt() );
-//
-//     kDebug() << "Changed " << plugin->name();
-}
 
 #ifdef USING_QTSCRIPT
 
@@ -992,5 +983,15 @@ void MainWindow::outputString(const QString& s)
 void MainWindow::debugString(const QString& s)
 {
     _txtDebug->append(s);
+}
+
+void MainWindow::showExecutionButtonDebug(bool visible)
+{
+    _debugMenu->setVisible(visible);
+}
+
+void MainWindow::showExecutionButtonOneStep(bool visible)
+{
+    _stepRunScript->setVisible(visible);
 }
 

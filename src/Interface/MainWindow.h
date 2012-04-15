@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2009-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -46,6 +46,7 @@ class QScriptEngineDebugger;
 class ToolsPluginInterface;
 class QCloseEvent;
 class QComboBox;
+class KActionMenu;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -177,12 +178,9 @@ private slots:
     void exportFile();
     void setupToolsPluginsAction();
 
-    void dsChanged();
-
 public slots:
     void setActiveDocument();
     void releaseDocument(Document *d);
-    //void setActiveGraph(DataStructure *g);
     void runToolPlugin();
     void outputString(const QString& s);
     void debugString(const QString& s);
@@ -193,6 +191,18 @@ public slots:
     void enableStopAction();
     /** opens debug output listing **/
     void showDebugOutput();
+
+    /**
+     * Show button to execute script in debug mode.
+     * \param visible specifies whether button shall be shown or not
+     */
+    void showExecutionButtonDebug(bool visible);
+
+    /**
+     * Show button to exectue script for one command.
+     * \param visible specifies whether button shall be shown or not
+     */
+    void showExecutionButtonOneStep(bool visible);
 
 signals:
     void startEvaluation();
@@ -219,6 +229,7 @@ private: // Variables.
     KAction *_runScript;
     KAction *_stepRunScript;
     KAction *_stopScript;
+    KActionMenu *_debugMenu;
 
     //! Needed to restore the size of the splitter after closing / opening the UI.
     QSplitter *_vSplitter;

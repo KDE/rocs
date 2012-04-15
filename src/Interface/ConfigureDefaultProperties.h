@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright (C) 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright (C) 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -28,7 +28,6 @@ class ConfigureDefaultProperties;
 
 class ConfigureDefaultProperties :
     public QWidget
-// , Ui::ConfigureDefaultProperties
 {
     Q_OBJECT
 
@@ -48,14 +47,32 @@ public slots:
     void saveConfig();
     void setDisplayPositionNode(int position);
     void setDisplayPositionEdge(int position);
+    void setExecutionModeDebugVisible(bool visible);
+    void setExecutionModeOneStepVisible(bool visible);
 
 private:
     Ui::ConfigureDefaultProperties *ui;
     int _displayPositionNode;
     int _displayPositionEdge;
+    bool _excutionModeDebugVisible;
+    bool _excutionModeOneStepVisible;
 
 signals:
+    /**
+     * Signal is emitted if values are changed, but before
+     * changed values are saved.
+     */
     void changed(bool);
+
+    /**
+     * Signal is emitted when value is saved.
+     */
+    void showExecuteModeDebugChanged(bool visible);
+
+    /**
+     * Signal is emitted when value is saved.
+     */
+    void showExecuteModeOneStepChanged(bool visible);
 };
 
 #endif // CONFIGUREDEFAULTPROPERTIES_H

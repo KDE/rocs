@@ -49,4 +49,12 @@
             <label>Position where name and value of an edge shall be shown.</label>
         </entry>
     </group>
+    <group name="DefaultExecutionModeDisplay">
+        <entry name="excutionModeDebugVisible" type="Bool">
+            <label>Specifies whether execution button for debug execution shall be shown.</label>
+        </entry>
+        <entry name="excutionModeOneStepVisible" type="Bool">
+            <label>Specifies whether execution button for stepped execution shall be shown.</label>
+        </entry>
+    </group>
 </kcfg>

@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright (C) 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright (C) 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -30,40 +30,72 @@ ConfigureDefaultProperties::ConfigureDefaultProperties(QWidget* parent) :
     ui->setupUi(this);
 
     readConfig();
-    ui->comboDefaultNode->setCurrentIndex(_displayPositionNode);
-    ui->comboDefaultEdge->setCurrentIndex(_displayPositionEdge);
+    ui->nodeInformationComboBox->setCurrentIndex(_displayPositionNode);
+    ui->edgeInformationComboBox->setCurrentIndex(_displayPositionEdge);
+    ui->showDebugExecutionCheckBox->setChecked(_excutionModeDebugVisible);
+    ui->showOneStepExecutionCheckBox->setChecked(_excutionModeOneStepVisible);
 }
+
 
 ConfigureDefaultProperties::~ConfigureDefaultProperties()
 {
     delete ui;
 }
 
+
 void ConfigureDefaultProperties::readConfig()
 {
     _displayPositionNode = Settings::dataNodeDisplay();
     _displayPositionEdge = Settings::dataEdgeDisplay();
+    _excutionModeDebugVisible = Settings::excutionModeDebugVisible();
+    _excutionModeOneStepVisible = Settings::excutionModeOneStepVisible();
 }
+
 
 void ConfigureDefaultProperties::saveConfig()
 {
     Settings::setDataNodeDisplay(_displayPositionNode);
     Settings::setDataEdgeDisplay(_displayPositionEdge);
+    Settings::setExcutionModeDebugVisible(_excutionModeDebugVisible);
+    Settings::setExcutionModeOneStepVisible(_excutionModeOneStepVisible);
 
     GraphicsLayout::self()->setViewStyleDataNode(_displayPositionNode);
     GraphicsLayout::self()->setViewStyleDataEdge(_displayPositionEdge);
+
+    emit showExecuteModeDebugChanged(_excutionModeDebugVisible);
+    emit showExecuteModeOneStepChanged(_excutionModeOneStepVisible);
 }
+
 
 void ConfigureDefaultProperties::setDisplayPositionNode(int position)
 {
-    if (position < 0) return;
+    if (position < 0) {
+        return;
+    }
     _displayPositionNode = position;
     emit changed(true);
 }
 
+
 void ConfigureDefaultProperties::setDisplayPositionEdge(int position)
 {
-    if (position < 0) return;
+    if (position < 0) {
+        return;
+    }
     _displayPositionEdge = position;
+    emit changed(true);
+}
+
+
+void ConfigureDefaultProperties::setExecutionModeDebugVisible(bool visible)
+{
+    _excutionModeDebugVisible = visible;
+    emit changed(true);
+}
+
+
+void ConfigureDefaultProperties::setExecutionModeOneStepVisible(bool visible)
+{
+    _excutionModeOneStepVisible = visible;
     emit changed(true);
 }
