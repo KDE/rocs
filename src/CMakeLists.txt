@@ -91,10 +91,7 @@ set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERS
 
 install( TARGETS rocslib  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES ${rocslib_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel )
-###################### Outros SRCS ############################
-#set ( kwelcomewidget_SRCS
-# KWelcomeWidget/kwelcomewidget.cpp
-#)
+
 
 set ( rocs_actions_SRCS
     Actions/AbstractAction.cpp
@@ -115,13 +112,13 @@ set( rocs_interface_SRCS
     Interface/MainWindow.cpp
     Interface/OpenedFilesWidget.cpp
     Interface/Separator.cpp
-    Interface/DataStructurePropertiesWidget.cpp
     Interface/GraphLayers.cpp
     Interface/TabWidget.cpp
     Interface/CodeEditor.cpp
-    Interface/NodePropertiesWidget.cpp
-    Interface/edgepropertieswidget.cpp
     Interface/ConfigureDefaultProperties.cpp
+    Interface/DataPropertiesWidget.cpp
+    Interface/DataStructurePropertiesWidget.cpp
+    Interface/PointerPropertiesWidget.cpp
     Interface/VisualEditor/GraphScene.cpp
     Interface/VisualEditor/GraphVisualEditor.cpp
 )
@@ -148,11 +145,12 @@ kde4_add_ui_files(
     rocs_SRCS
     Interface/OpenedFilesWidget.ui
     Interface/DataStructurePropertiesWidget.ui
-    Interface/NodePropertiesWidget.ui
-    Interface/EdgePropertiesWidget.ui
+    Interface/DataPropertiesWidget.ui
+    Interface/PointerPropertiesWidget.ui
     Interface/ConfigureDefaultProperties.ui
 )
 
+# we currently only support QtScript
 set( QT_USE_QTSCRIPT true )
 
 set( rocs_KCFGS settings.kcfgc )
@@ -197,7 +195,7 @@ install( FILES
 add_subdirectory( Plugins )
 add_subdirectory( Scripts )
 
-#Build Tests if KDE_TEST is on
+# Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
     enable_testing()
     add_subdirectory( Tests )

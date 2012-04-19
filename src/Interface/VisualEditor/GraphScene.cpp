@@ -29,8 +29,8 @@
 #include "MainWindow.h"
 #include "DataItem.h"
 #include "PointerItem.h"
-#include "NodePropertiesWidget.h"
-#include "edgepropertieswidget.h"
+#include "DataPropertiesWidget.h"
+#include "PointerPropertiesWidget.h"
 
 #include "AbstractAction.h"
 #include "AlignAction.h"

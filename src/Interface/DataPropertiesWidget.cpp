@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "NodePropertiesWidget.h"
+#include "DataPropertiesWidget.h"
 #include "Data.h"
 #include "MainWindow.h"
 #include <KDebug>

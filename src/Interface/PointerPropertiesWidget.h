@@ -17,11 +17,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EDGEPROPERTIESWIDGET_H
-#define EDGEPROPERTIESWIDGET_H
+#ifndef POINTERPROPERTIESWIDGET_H
+#define POINTERPROPERTIESWIDGET_H
 
 #include <QtGui/QWidget>
-#include "ui_EdgePropertiesWidget.h"
+#include "ui_PointerPropertiesWidget.h"
 #include <QString>
 #include <QColor>
 #include <QPointer>
@@ -31,7 +31,7 @@ class Pointer;
 class MainWindow;
 #include <QPointF>
 
-class PointerPropertiesWidget : public QWidget, public Ui::EdgePropertiesWidget
+class PointerPropertiesWidget : public QWidget, public Ui::PointerPropertiesWidget
 {
     Q_OBJECT
 public:
@@ -56,4 +56,4 @@ private:
     PointerPtr _pointer;
 };
 
-#endif // EDGEPROPERTIESWIDGET_H
+#endif // POINTERPROPERTIESWIDGET_H

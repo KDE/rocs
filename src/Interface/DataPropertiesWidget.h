@@ -17,12 +17,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SUI_NODEPROPERTIESWIDGET_H
-#define SUI_NODEPROPERTIESWIDGET_H
+#ifndef SUI_DATAPROPERTIESWIDGET_H
+#define SUI_DATAPROPERTIESWIDGET_H
 
 #include <QWidget>
 #include "Rocs_Typedefs.h"
-#include "ui_NodePropertiesWidget.h"
+#include "ui_DataPropertiesWidget.h"
 
 class Data;
 class MainWindow;
@@ -30,7 +30,7 @@ class DataItem;
 #include <QPointF>
 #include <QPointer>
 /*! \brief Properties Area. */
-class DataPropertiesWidget : public QWidget, public Ui::NodePropertiesWidget
+class DataPropertiesWidget : public QWidget, public Ui::DataPropertiesWidget
 {
     Q_OBJECT
 public:

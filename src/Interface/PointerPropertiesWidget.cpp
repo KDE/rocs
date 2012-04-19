@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "edgepropertieswidget.h"
+#include "PointerPropertiesWidget.h"
 #include "Pointer.h"
 #include "MainWindow.h"
 #include "model_GraphProperties.h"

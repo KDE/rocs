@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EdgePropertiesWidget</class>
- <widget class="QWidget" name="EdgePropertiesWidget">
+ <class>DataPropertiesWidget</class>
+ <widget class="QWidget" name="DataPropertiesWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>418</width>
-    <height>420</height>
+    <width>527</width>
+    <height>433</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
-   <string>Edge Properties</string>
+   <string>Node Properties</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Name:</string>
      </property>
@@ -25,21 +37,30 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="KLineEdit" name="_name">
-     <property name="toolTip">
-      <string>Edge name</string>
+    <widget class="KLineEdit" name="_name"/>
+   </item>
+   <item row="0" column="2">
+    <widget class="QCheckBox" name="_showName">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="0" column="2" rowspan="3">
+   <item row="0" column="3" rowspan="3">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </item>
-   <item row="0" column="3">
-    <widget class="QLabel" name="label_3">
+   <item row="0" column="4">
+    <widget class="QLabel" name="label_6">
+     <property name="toolTip">
+      <string>Node color</string>
+     </property>
      <property name="text">
       <string>Color:</string>
      </property>
@@ -48,15 +69,21 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="4">
+   <item row="0" column="5">
     <widget class="KColorCombo" name="_color">
      <property name="toolTip">
-      <string>Edge color</string>
+      <string>Node color</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Value:</string>
      </property>
@@ -66,107 +93,44 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="KLineEdit" name="_value">
-     <property name="toolTip">
-      <string>Edge value</string>
-     </property>
-    </widget>
+    <widget class="KLineEdit" name="_value"/>
    </item>
-   <item row="1" column="3">
-    <widget class="QLabel" name="label_4">
-     <property name="toolTip">
-      <string>Edge width</string>
-     </property>
+   <item row="1" column="2">
+    <widget class="QCheckBox" name="_showValue">
      <property name="text">
-      <string>Width:</string>
+      <string/>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="1" column="4">
-    <widget class="KDoubleNumInput" name="_width"/>
+   <item row="1" column="4" colspan="2">
+    <widget class="QCheckBox" name="_disableColor">
+     <property name="text">
+      <string>Disable Color</string>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Style:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <string>Image</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="KComboBox" name="_style">
-     <property name="toolTip">
-      <string>Edge style</string>
+   <item row="2" column="1" colspan="2">
+    <widget class="KComboBox" name="_images"/>
+   </item>
+   <item row="3" column="0" colspan="6">
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-     <item>
-      <property name="text">
-       <string>solid</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>dash</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>dot</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>dash dot</string>
-      </property>
-     </item>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>Show</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KPushButton" name="_showName">
-       <property name="toolTip">
-        <string>Show/hide edge name</string>
-       </property>
-       <property name="text">
-        <string>Name</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KPushButton" name="_showValue">
-       <property name="toolTip">
-        <string>Show/add edge value</string>
-       </property>
-       <property name="text">
-        <string>Value</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="4" column="0" colspan="5">
-    <widget class="QFrame" name="_extraProperties">
+   <item row="4" column="0" colspan="6">
+    <widget class="QFrame" name="extraItens">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -175,16 +139,16 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="0" rowspan="2" colspan="2">
+   <item row="5" column="0" rowspan="2" colspan="5">
     <widget class="QTableView" name="_propertiesTable"/>
    </item>
-   <item row="6" column="2" colspan="3">
+   <item row="5" column="5">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
       <string>Add Property</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0" colspan="2">
+      <item row="0" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
          <string>Name</string>
@@ -194,7 +158,7 @@
       <item row="1" column="0" colspan="2">
        <widget class="KLineEdit" name="_propertyName"/>
       </item>
-      <item row="2" column="0" colspan="2">
+      <item row="2" column="0">
        <widget class="QLabel" name="label_8">
         <property name="text">
          <string>Value</string>
@@ -204,17 +168,10 @@
       <item row="3" column="0" colspan="2">
        <widget class="KLineEdit" name="_propertyValue"/>
       </item>
-      <item row="4" column="0">
+      <item row="4" column="0" colspan="2">
        <widget class="QCheckBox" name="_isPropertyGlobal">
         <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>Global</string>
+         <string>Apply to all nodes</string>
         </property>
        </widget>
       </item>
@@ -241,14 +198,46 @@
      </layout>
     </widget>
    </item>
+   <item row="6" column="5">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>42</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="7" column="0" colspan="6">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="_btnClose">
+       <property name="text">
+        <string>Close</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KDoubleNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
   <customwidget>
    <class>KPushButton</class>
    <extends>QPushButton</extends>
@@ -272,34 +261,11 @@
  </customwidgets>
  <tabstops>
   <tabstop>_name</tabstop>
-  <tabstop>_style</tabstop>
-  <tabstop>_color</tabstop>
   <tabstop>_showName</tabstop>
-  <tabstop>_showValue</tabstop>
   <tabstop>_propertiesTable</tabstop>
-  <tabstop>_propertyName</tabstop>
-  <tabstop>_propertyValue</tabstop>
-  <tabstop>_isPropertyGlobal</tabstop>
-  <tabstop>_addProperty</tabstop>
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>_propertyName</sender>
-   <signal>returnPressed()</signal>
-   <receiver>_addProperty</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>103</x>
-     <y>275</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>300</x>
-     <y>277</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>_propertyValue</sender>
    <signal>returnPressed()</signal>
@@ -307,12 +273,28 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>214</x>
-     <y>286</y>
+     <x>223</x>
+     <y>352</y>
     </hint>
     <hint type="destinationlabel">
-     <x>289</x>
-     <y>287</y>
+     <x>314</x>
+     <y>350</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_propertyName</sender>
+   <signal>returnPressed()</signal>
+   <receiver>_addProperty</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>318</x>
+     <y>338</y>
     </hint>
    </hints>
   </connection>
