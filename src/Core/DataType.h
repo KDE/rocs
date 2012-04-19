@@ -48,6 +48,7 @@ public:
     ~DataType();
 
     QString name() const;
+    QString icon() const;
     int identifier() const;
     bool isNameVisible() const;
     bool isValueVisible() const;
@@ -56,6 +57,7 @@ public:
 
 public slots:
     void setName(QString name);
+    void setIcon(QString icon);
     void setNameVisible(bool visible);
     void setValueVisible(bool visible);
     void setVisible(bool visible);

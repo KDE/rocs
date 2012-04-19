@@ -29,6 +29,7 @@ public:
     boost::weak_ptr<DataType> q; // self pointer
 
     QString _name;
+    QString _icon;
     QColor _defaultColor;
     int _identifier;
     bool _valueVisibility;
@@ -52,6 +53,7 @@ DataType::DataType(DataStructurePtr dataStructure, int identifier):
 {
     d->_identifier = identifier;
     d->_defaultColor = QColor("blue");
+    d->_icon = "rocs_default";
     d->_nameVisibility = true;
     d->_valueVisibility = true;
     d->_visibility = true;
@@ -73,10 +75,21 @@ void DataType::setName(QString name)
     d->_name = name;
 }
 
-
 QString DataType::name() const
 {
     return d->_name;
+}
+
+
+void DataType::setIcon(QString icon)
+{
+    d->_icon = icon;
+}
+
+
+QString DataType::icon() const
+{
+    return d->_icon;
 }
 
 

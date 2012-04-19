@@ -34,8 +34,11 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <KDebug>
 #include <QColor>
+
+#include <KDebug>
+#include <KStandardDirs>
+
 #include <DataItem.h>
 
 DataStructurePtr DataStructure::create(Document *parent)
@@ -54,6 +57,8 @@ void DataStructure::initialize()
     d->_readOnly = false;
     updateRelativeCenter();
     d->_identifierCount = 1;
+
+    d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
 
     // create type lists
     d->_dataTypes.insert(0, DataType::create(getDataStructure(), 0));
@@ -182,6 +187,11 @@ QString DataStructure::getDataTypeName(int dataType) const
 QString DataStructure::getPointerTypeName(int pointerType) const
 {
     return d->_pointerTypes[pointerType]->name();
+}
+
+QString DataStructure::getDataTypeIcon(int dataType) const
+{
+    return d->_dataTypes[dataType]->icon();
 }
 
 QList< int > DataStructure::dataTypeList() const

@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -19,22 +20,23 @@
 #ifndef DATA_H
 #define DATA_H
 
+
+#include "rocslib_export.h"
+#include "Rocs_Typedefs.h"
+#include "DataStructure.h"
+#include "DataType.h"
+
 #include <QObject>
 #include <QString>
-
 #include <QtScript>
 #include <QColor>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 
-#include "rocslib_export.h"
-#include "Rocs_Typedefs.h"
-
 class DataItem;
 class Pointer;
 class DataPrivate;
-class DataStructure;
 
 class DataPrivate
 {
@@ -68,8 +70,6 @@ public:
     int _dataType;
     QString _name;
     QColor _color;
-    QString _iconpackage;
-    QString _icon;
 
     QVariant _value;
     QScriptValue _scriptvalue;
@@ -87,8 +87,6 @@ class  ROCSLIB_EXPORT Data : public QObject
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(QVariant color READ color WRITE setColor)
     Q_PROPERTY(QVariant value READ value WRITE setValue)
-    Q_PROPERTY(QString iconPackage READ iconPackage WRITE setIconPackage)
-    Q_PROPERTY(QString icon READ icon WRITE setIcon)
     Q_PROPERTY(bool useColor READ useColor WRITE setUseColor)
 
 public:
@@ -121,7 +119,7 @@ public:
     const QVariant color() const;
     const QString& name() const;
     const QVariant value() const;
-    const QString& icon() const;
+    QString icon() const;
     const QString& iconPackage() const;
     bool showName() const;
     bool showValue() const;
@@ -158,8 +156,6 @@ public  slots:
     void setColor(const QVariant& s);
     void setName(const QString& s);
     void setValue(const QVariant& v);
-    void setIcon(const QString& s);
-    void setIconPackage(const QString& s);
     void setShowName(bool b);
     void setShowValue(bool b);
     void setUseColor(bool b = true);
@@ -195,8 +191,6 @@ signals:
     void colorChanged(const QColor& c);
     void nameChanged(const QString& name);
     void valueChanged(const QVariant& v);
-    void iconChanged(const QString& i);
-    void iconPackageChanged(const QString& i);
     void nameVisibilityChanged(bool b);
     void valueVisibilityChanged(bool b);
     void visibilityChanged(bool visible);
@@ -217,9 +211,14 @@ inline const QVariant  Data::color() const
     return d->_color;
 }
 
-inline boost::shared_ptr<DataItem>  Data::item() const
+inline boost::shared_ptr<DataItem> Data::item() const
 {
     return d->_item;
+}
+
+inline const QString& Data::iconPackage() const
+{
+    return d->_dataStructure->iconPackage();
 }
 
 inline qreal Data::x() const
@@ -236,13 +235,9 @@ inline qreal Data::width() const
     return d->_width;
 }
 
-inline const QString& Data::icon() const
+inline QString Data::icon() const
 {
-    return d->_icon;
-}
-inline const QString& Data::iconPackage() const
-{
-    return d-> _iconpackage;
+    return d->_dataStructure->getDataTypeIcon(d->_dataType);
 }
 
 inline PointerList& Data::in_pointers()   const

@@ -57,6 +57,8 @@ public:
     QMap<int, DataTypePtr> _dataTypes;           // list of data types
     QMap<int, PointerTypePtr> _pointerTypes;        // list of pointer types
 
+    QString _iconPackage;   // available icons for data types
+
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
     QList<Group*> _groups;
@@ -135,9 +137,14 @@ public:
     PointerTypePtr pointerType(int pointerType) const;
     DataTypePtr dataType(int dataType) const;
 
+    //TODO in the future (>= KDE SC 4.10) allow direct access to data types
     // getters
     QString getDataTypeName(int dataType) const;
     QString getPointerTypeName(int pointerType) const;
+
+    // getters
+    QString getDataTypeIcon(int dataType) const;
+
 
     /**
      * Getter for all registered data types.
@@ -153,7 +160,11 @@ public:
 
     bool dataNameVisibility() const;
     bool dataValueVisibility() const;
+
     const QColor& dataDefaultColor() const;
+
+    const QString& iconPackage() const;
+
     const QString& name() const;
 
     /**
@@ -366,6 +377,12 @@ inline bool DataStructure::readOnly() const
 {
     return d->_readOnly;
 }
+
+inline const QString& DataStructure::iconPackage() const
+{
+    return d->_iconPackage;
+}
+
 inline const QString& DataStructure::name() const
 {
     return d->_name;

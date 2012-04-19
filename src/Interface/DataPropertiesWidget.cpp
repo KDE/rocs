@@ -155,7 +155,9 @@ void DataPropertiesWidget::reflectAttributes()
 
 void DataPropertiesWidget::on__images_activated(const QString& s)
 {
-    _data->setIcon("rocs_" + s);
+// TODO remove this option
+
+//     _data->setIcon("rocs_" + s);
 }
 
 void DataPropertiesWidget::on__color_activated(const QColor& c)

@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,7 +22,6 @@
 #include "DataStructure.h"
 #include <KDebug>
 #include <KGlobal>
-#include <kstandarddirs.h>
 #include <QColor>
 #include <QMap>
 
@@ -49,8 +49,6 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataT
     , _uniqueIdentifier(uniqueIdentifer)
     , _dataType(dataType)
     , _color(parent->dataType(dataType)->defaultColor())
-    , _iconpackage(KGlobal::dirs()->locate("appdata", "iconpacks/default.svg"))
-    , _icon("rocs_default")
     , _value(0)
 {
     _in_pointers = PointerList();
@@ -120,14 +118,6 @@ void Data::setShowValue(bool b)
     }
 }
 
-void Data::setIcon(const QString& s)
-{
-    if (d->_icon != s) {
-        d->_icon = s;
-        emit iconChanged(s);
-    }
-}
-
 
 void Data::setUseColor(bool b)
 {
@@ -149,11 +139,6 @@ void Data::setVisible(bool visible)
     emit visibilityChanged(visible);
 }
 
-
-void Data::setIconPackage(const QString& s)
-{
-    d-> _iconpackage = s;
-}
 
 void Data::setDataItem(boost::shared_ptr<DataItem> item)
 {
