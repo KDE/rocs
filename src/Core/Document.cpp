@@ -417,8 +417,8 @@ void Document::remove(DataStructurePtr dataStructure)
  *
  * [DataStructure Name1]
  *
- * DataColor    : [RGB in hex]  # Color of newly created Datas ( Nodes )
- * Pointercolor : [RBG in Hex]  # Color of newly created Datas ( Nodes )
+ * DataColor    : [RGB in hex]  # Color of newly created Data elements ( Nodes )
+ * Pointercolor : [RBG in Hex]  # Color of newly created Data elements ( Nodes )
  * name         : [string]      # Name of the data structure acessible in the scripting interface.
  *
  * visibility : [bool]           # is this DataStructure visible?

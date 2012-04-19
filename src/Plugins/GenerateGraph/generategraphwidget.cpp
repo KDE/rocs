@@ -47,7 +47,7 @@
 #include <boost/graph/erdos_renyi_generator.hpp>
 
 
-//TODO output usefull error message
+//TODO output useful error message
 namespace boost
 {
 void throw_exception(std::exception const &) {}

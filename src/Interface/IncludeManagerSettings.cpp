@@ -104,7 +104,7 @@ void IncludeManagerSettings::insertUrl()
     }
 
     if (_list_View->findItems(text, Qt::MatchExactly).count() != 0) {
-        return; //Allready have this item.
+        return; // Already have this item.
     }
 
     QListWidgetItem * item = new QListWidgetItem(text, _list_View);

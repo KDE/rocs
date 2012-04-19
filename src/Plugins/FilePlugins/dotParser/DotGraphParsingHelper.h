@@ -84,6 +84,7 @@ struct DotGraphParsingHelper {
     Datum* gn;
     Pointer* ge;
     DataTypeDocument* gd;
+    int unique;
 };
 
 }

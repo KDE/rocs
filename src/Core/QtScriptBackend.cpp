@@ -98,7 +98,7 @@ void QtScriptBackend::execute()
         _document->dataStructures().at(i)->setEngine(_engine);
     }
     createGraphList();
-    _engine->setProcessEventsInterval(100); //! TODO: Make that changable.
+    _engine->setProcessEventsInterval(100); //! TODO: Make that changeable.
 
     QString error = _engine->evaluate(_script, i18n("Rocs Console script")).toString();
     if (_engine && _engine->hasUncaughtException()) {
@@ -191,7 +191,7 @@ void QtScriptBackend::createGraphList()
     _engine->globalObject().setProperty("graphs", graphList);
 
     // Add all the graphs on the array as an array, and if it has a name,
-    // also add it for direct acess with it's name.
+    // also add it for direct access with it's name.
     int size = _document->dataStructures().size();
     for (int i = 0; i < size; i++) {
         graphList.property("push").call(graphList, QScriptValueList() << _document->dataStructures().at(i)->scriptValue());

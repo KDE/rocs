@@ -152,7 +152,7 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
 
 void GraphPropertiesModel::addDynamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal)
 {
-    /*Need check if the propertie allready exists*/
+    // Need check if the propertie already exists
     bool insertingRow = false;
     if (name.isEmpty()) {
         kWarning() << "Cannot add am empty property";

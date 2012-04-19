@@ -372,7 +372,7 @@ PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
     if (d->_readOnly) {                  // If the data structure is in read only mode, no new stuff should be added.
         return PointerPtr();
     }
-    if (!from || !to) {                 // one of the two required datas are null. do not add a pointer between a valid and a null datas.
+    if (!from || !to) {                 // If one of the two required data elements is 0, then do not add a pointer.
         return PointerPtr();
     }
 

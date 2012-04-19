@@ -48,7 +48,7 @@ DotGraphParsingHelper::DotGraphParsingHelper():
     valid(),
     attributed(),
     subdataTypeid(),
-    uniq(0),
+    unique(0),
     attributes(),
     dataTypeAttributes(),
     datumAttributes(),
