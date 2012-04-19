@@ -170,7 +170,7 @@ Document* DocumentManager::newDocument()
     }
     // For at least one i in this range, the name is not used, yet.
     for (int i = 0; i < _documents.length() + 1; ++i) {
-        name = QString("%1 %2").arg(i18n("Document")).arg(i);
+        name = QString("%1 %2").arg(i18nc("document that contains graphs or data structures as a visual representation", "Document")).arg(i);
         if (!usedNames.contains(name)) {
             break;
         }

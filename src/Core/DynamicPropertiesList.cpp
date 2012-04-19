@@ -169,9 +169,9 @@ DynamicPropertyType DynamicPropertiesList::type(QObject* obj, const QString& nam
 const QString DynamicPropertiesList::typeInText(QObject* obj, const QString& name)
 {
     switch (type(obj, name)) {
-    case Unique:      return i18n("Unique");
-    case Multiple:    return i18n("Multiple");
-    case Global:      return i18n("Global");
+    case Unique:      return i18nc("dynamic property that is present exactly once", "Unique");
+    case Multiple:    return i18nc("dynamic property that is present multiple times", "Multiple");
+    case Global:      return i18nc("dynamic property that is present at all elements", "Global");
     case None:
     default:          return i18nc("type of dynamic property", "None");
     }

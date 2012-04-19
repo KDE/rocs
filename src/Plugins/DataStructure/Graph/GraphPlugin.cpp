@@ -91,8 +91,8 @@ QLayout* GraphPlugin::dataExtraProperties(DataPtr node, QWidget* parentWidget) c
     QFrame * line = new QFrame(parentWidget);
     line->setFrameShape(QFrame::VLine);
 
-    lay->addWidget(new QLabel(i18n("x"), parentWidget), 0, 0);
-    lay->addWidget(new QLabel(i18n("y"), parentWidget), 1, 0);
+    lay->addWidget(new QLabel(i18nc("coordinate axis", "x"), parentWidget), 0, 0);
+    lay->addWidget(new QLabel(i18nc("coordinate axis", "y"), parentWidget), 1, 0);
     lay->addWidget(new QLabel(i18n("Size"), parentWidget), 0, 3);
     lay->addWidget(line, 0, 2, 2, 1);
     lay->addWidget(x, 0, 1);

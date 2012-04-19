@@ -116,7 +116,7 @@ bool DotParser::writeFile(DataTypeDocument& graph, const QString& filename)
         }
         setError(i18n("No active graph in this document."));
     }
-    setError(i18n("Cannot open file %1 to write document. Error: %2").arg(filename).arg(file.errorString()));
+    setError(i18n("Cannot open file %1 to write document. Error: %2", filename, file.errorString()));
     return false;
 }
 

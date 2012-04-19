@@ -278,8 +278,8 @@ QWidget* MainWindow::setupScriptPanel()
     executeCommands->addAction(_stepRunScript);
 
     // debug controls submenu
-    _debugMenu = new KActionMenu(KIcon("debug-run"), i18n("Debug"), this);
-    _debugScript = new KAction(KIcon("debug-run"), i18n("Debug run"), _debugMenu);
+    _debugMenu = new KActionMenu(KIcon("debug-run"), i18nc("Menu with buttons for debug actions", "Debug"), this);
+    _debugScript = new KAction(KIcon("debug-run"), i18nc("button to start a debug execution", "Debug run"), _debugMenu);
     _interruptScript = new KAction(KIcon("debug-run-cursor"), i18n("Interrupt at first line"), _debugMenu);
     _debugMenu->addAction(_debugScript);
     _debugMenu->addAction(_interruptScript);
@@ -666,7 +666,7 @@ void MainWindow::openProject()
 void MainWindow::setProjectName()
 {
     QString name = KInputDialog::getText(i18n("Set Project Name"),
-                                         i18n("Name:"),
+                                         i18nc("name of the project", "Name:"),
                                          _currentProject->name()
                                         );
     _currentProject->setName(name);

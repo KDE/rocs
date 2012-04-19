@@ -345,13 +345,13 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
 
     // alignment menu
     QMenu *menuDataStructureAlign = new QMenu(i18n("Align"));
-    AlignAction *alignDataStructureBottom = new AlignAction(i18n("Bottom"),  AlignAction::Bottom, this);
-    AlignAction *alignDataStructureCenter = new AlignAction(i18n("Center"), AlignAction::HCenter, this);
-    AlignAction *alignDataStructureTop    = new AlignAction(i18n("Top"),   AlignAction::Top, this);
-    AlignAction *alignDataStructureLeft   = new AlignAction(i18n("Left"),  AlignAction::Left, this);
-    AlignAction *alignDataStructureRight  = new AlignAction(i18n("Right"), AlignAction::Right, this);
-    AlignAction *alignDataStructureCircle = new AlignAction(i18n("Circle"),  AlignAction::Circle, this);
-    AlignAction *alignDataStructureTree   = new AlignAction(i18n("Minimize Crossing Edges"), AlignAction::MinCutTree, this);
+    AlignAction *alignDataStructureBottom = new AlignAction(i18nc("align elements at bottom", "Bottom"),  AlignAction::Bottom, this);
+    AlignAction *alignDataStructureCenter = new AlignAction(i18nc("align elements at center", "Center"), AlignAction::HCenter, this);
+    AlignAction *alignDataStructureTop    = new AlignAction(i18nc("align elements at top", "Top"),   AlignAction::Top, this);
+    AlignAction *alignDataStructureLeft   = new AlignAction(i18nc("align elements left", "Left"),  AlignAction::Left, this);
+    AlignAction *alignDataStructureRight  = new AlignAction(i18nc("align elements right", "Right"), AlignAction::Right, this);
+    AlignAction *alignDataStructureCircle = new AlignAction(i18nc("align elements as a circle", "Circle"),  AlignAction::Circle, this);
+    AlignAction *alignDataStructureTree   = new AlignAction(i18nc("align elements such that crossing edges are minimized", "Minimize Crossing Edges"), AlignAction::MinCutTree, this);
 
     if (contextDataStructure) {
         alignDataStructureBottom->registerData(contextDataStructure->dataList());
@@ -372,13 +372,13 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     menuDataStructureAlign->addAction(alignDataStructureTree);
 
     QMenu *menuSelectedAlign = new QMenu(i18n("Align"));
-    menuSelectedAlign->addAction(new AlignAction(i18n("Bottom"),  AlignAction::Bottom, this));
-    menuSelectedAlign->addAction(new AlignAction(i18n("Center"), AlignAction::HCenter, this));
-    menuSelectedAlign->addAction(new AlignAction(i18n("Top"),   AlignAction::Top, this));
-    menuSelectedAlign->addAction(new AlignAction(i18n("Left"),  AlignAction::Left, this));
-    menuSelectedAlign->addAction(new AlignAction(i18n("Right"), AlignAction::Right, this));
-    menuSelectedAlign->addAction(new AlignAction(i18n("Circle"),  AlignAction::Circle, this));
-    menuSelectedAlign->addAction(new AlignAction(i18n("Minimize Crossing Edges"),  AlignAction::MinCutTree, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements at bottom", "Bottom"),  AlignAction::Bottom, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements at center", "Center"), AlignAction::HCenter, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements at top", "Top"),   AlignAction::Top, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements left", "Left"),  AlignAction::Left, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements right", "Right"), AlignAction::Right, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements as a circle", "Circle"),  AlignAction::Circle, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements such that crossing edges are minimized", "Minimize Crossing Edges"),  AlignAction::MinCutTree, this));
 
     QMenu *menuDataStructureAssignValues = new QMenu(i18n("Values"));
     menuDataStructureAssignValues->addAction(new AssignValueAction(i18n("Enumerate"), this, AssignValueAction::Enumerate, contextDataStructure, 0));

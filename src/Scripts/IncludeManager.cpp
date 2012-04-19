@@ -118,7 +118,7 @@ QString IncludeManager::processInclude(QString arg1)
     if (arg1.indexOf('(') != -1) {
         file = arg1.replace(')', '(').section('(', 1, 1).trimmed();
         // To avoid more ifs-elses
-        fileContent = QString("debug(\"%1\")").arg(i18n("Cannot open file %2.", file));
+        fileContent = QString("debug(\"%1\")").arg(i18n("Cannot open file %1.", file));
         // Add the path first
         if ((pos = file.lastIndexOf('/')) != -1) {  //add the path of file to list
             path = file.left(pos + 1);

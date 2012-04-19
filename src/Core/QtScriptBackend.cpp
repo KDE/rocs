@@ -245,7 +245,7 @@ void QtScriptBackend::includeFile(const QString & includedFile)
         QString error = _engine->evaluate(script, includedFile).toString();
         if (_engine && _engine->hasUncaughtException()) {
             emit scriptError();
-            emit sendDebug(i18n("<b style=\"color: red\"> Error in include file %1</b>").arg(includedFile));
+            emit sendDebug(i18n("<b style=\"color: red\"> Error in include file %1</b>", includedFile));
             emit sendDebug("<b style=\"color: red\">" + error + "</b>");
             emit sendDebug("<b style=\"color: red\">" + _engine->uncaughtExceptionBacktrace().join("\n") + "</b>");
         }
