@@ -135,7 +135,8 @@ private slots:
      * Updates selector combobox for graph documents.
      */
     void updateGraphDocumentList();
-    void newProject();
+    void newProject(); //TODO maybe not needed anymore, check after finish of new project assistant
+    void newProjectAssistant();
     void saveProject();
     void openProject();
     void setProjectName();

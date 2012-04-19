@@ -613,6 +613,12 @@ void MainWindow::newProject()
 }
 
 
+void MainWindow::newProjectAssistant()
+{
+    //TODO needs to be implemented
+}
+
+
 void MainWindow::saveProject()
 {
     // save graphs and scripts
