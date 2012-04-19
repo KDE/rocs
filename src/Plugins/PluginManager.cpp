@@ -136,7 +136,7 @@ QList< ToolsPluginInterface* > PluginManager::toolPlugins()
 {
     loadToolsPlugins();
     QList < ToolsPluginInterface * > value;
-    foreach(KPluginInfo info, _d->toolsPluginsMap.keys()) {
+    foreach(const KPluginInfo& info, _d->toolsPluginsMap.keys()) {
         if (info.isPluginEnabled()) {
             value.append(_d->toolsPluginsMap[info]);
         }

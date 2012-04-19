@@ -119,12 +119,12 @@ void DataStructure::importStructure(DataStructurePtr other)
 
 DataStructure::~DataStructure()
 {
-    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    foreach(const PointerList& pointerType, d->_pointerTypeLists) {
         foreach(PointerPtr pointer,  pointerType) {
             pointer->remove();
         }
     }
-    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(const DataList& dataType, d->_dataTypeLists) {
         foreach(DataPtr data, dataType) {
             data->remove();
         }
@@ -251,12 +251,12 @@ void DataStructure::setReadOnly(bool r)
 
 void DataStructure::remove()
 {
-    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    foreach(const PointerList& pointerType, d->_pointerTypeLists) {
         foreach(PointerPtr pointer,  pointerType) {
             pointer->remove();
         }
     }
-    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(const DataList& dataType, d->_dataTypeLists) {
         foreach(DataPtr data, dataType) {
             data->remove();
         }
@@ -394,7 +394,7 @@ PointerPtr DataStructure::addPointer(const QString& name_from, const QString& na
 
     QString tmpName;
 
-    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(const DataList& dataType, d->_dataTypeLists) {
         foreach(DataPtr n, dataType) {
             tmpName = n->name();
 
@@ -415,7 +415,7 @@ PointerPtr DataStructure::addPointer(const QString& name_from, const QString& na
 
 DataPtr DataStructure::getData(int uniqueIdentifier)
 {
-    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(const DataList& dataType, d->_dataTypeLists) {
         foreach(DataPtr data, dataType) {
             if (data->identifier() == uniqueIdentifier) {
                 return data;
@@ -517,7 +517,7 @@ void DataStructure::removeDynamicProperty(const QString& property)
 
 void DataStructure::addDataDynamicProperty(const QString& property, QVariant value)
 {
-    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(const DataList& dataType, d->_dataTypeLists) {
         QtConcurrent::blockingMap(dataType, DataDynamicPropertySetted(property, value));
     }
     d->m_globalPropertiesData.insert(property, value);
@@ -525,7 +525,7 @@ void DataStructure::addDataDynamicProperty(const QString& property, QVariant val
 
 void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value)
 {
-    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    foreach(const PointerList& pointerType, d->_pointerTypeLists) {
         QtConcurrent::blockingMap(pointerType, PointerDynamicPropertySetted(property, value));
     }
     d->m_globalPropertiesData.insert(property, value);
@@ -533,13 +533,13 @@ void DataStructure::addPointersDynamicProperty(const QString& property, QVariant
 
 void DataStructure::removeDataDynamicProperty(const QString& property)
 {
-    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(const DataList& dataType, d->_dataTypeLists) {
         QtConcurrent::blockingMap(dataType, DataDynamicPropertyUnSetted(property));
     }
 }
 void DataStructure::removePointersDynamicProperty(const QString& property)
 {
-    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    foreach(const PointerList& pointerType, d->_pointerTypeLists) {
         QtConcurrent::blockingMap(pointerType, PointerDynamicPropertyUnSetted(property));
     }
 }
@@ -604,13 +604,13 @@ void DataStructure::setEngine(QScriptEngine *engine)
         d->_engine->globalObject().setProperty(d->_name, d->_value);
     }
 
-    foreach(DataList dataType, d->_dataTypeLists) {
+    foreach(const DataList& dataType, d->_dataTypeLists) {
         for (int i = 0; i < dataType.size(); ++i) {
             dataType.at(i)->setEngine(engine);
         }
     }
 
-    foreach(PointerList pointerType, d->_pointerTypeLists) {
+    foreach(const PointerList& pointerType, d->_pointerTypeLists) {
         for (int i = 0; i < pointerType.size(); ++i) {
             pointerType.at(i)->setEngine(engine);
         }

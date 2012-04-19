@@ -135,7 +135,7 @@ QString const DotParser::processEdge(Pointer*e) const
         edge.append("[");
         edge.append(QString(" label = \"%2\" ").arg(e->name()));
     }
-    foreach(QByteArray property, e->dynamicPropertyNames()) {
+    foreach(const QByteArray& property, e->dynamicPropertyNames()) {
         if (property != "SubGraph") {
             if (firstProperty == true) {
                 firstProperty = false;
@@ -161,7 +161,7 @@ QString const DotParser::processNode(Datum* n) const
         node = QString("%1").arg(n->name());
 
     bool firstProperty = true;
-    foreach(QByteArray property, n->dynamicPropertyNames()) {
+    foreach(const QByteArray& property, n->dynamicPropertyNames()) {
         if (property != "NodeName" && property != "SubGraph") {
             if (firstProperty == true) {
                 firstProperty = false;

@@ -647,13 +647,13 @@ void MainWindow::openProject()
                    this,
                    i18n("Open Project Files"));
     _currentProject = new Project(file);
-    foreach(KUrl graphFile, _currentProject->graphFiles()) {
+    foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
         DocumentManager::self()->openDocument(graphFile); //TODO documents should use kurls
     }
     if (_currentProject->graphFiles().count() == 0) {
         _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
     }
-    foreach(KUrl codeFile, _currentProject->codeFiles()) {
+    foreach(const KUrl& codeFile, _currentProject->codeFiles()) {
         _codeEditor->openScript(codeFile);
         //TODO set curser line
     }

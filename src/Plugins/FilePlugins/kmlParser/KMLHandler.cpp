@@ -77,7 +77,7 @@ bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
         QStringList points = m_coordinates.split('\n');
         int count = 0;
         DataPtr n_old;
-        foreach(QString point, points) {
+        foreach(const QString& point, points) {
             count++;
 
             QStringList values = point.split(',');

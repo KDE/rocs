@@ -133,7 +133,7 @@ QString const GMLParser::processEdge(PointerPtr e) const
     edge.append(QString(" value \"%1\"\n").arg(e->value()));
 
 
-    foreach(QByteArray p, e->dynamicPropertyNames()) {
+    foreach(const QByteArray& p, e->dynamicPropertyNames()) {
         edge.append(QString("%1 %2\n").arg(QString(p)).arg(e->property(p).toString()));
     }
 
@@ -150,7 +150,7 @@ QString const GMLParser::processNode(DataPtr n) const
     node.append(QString(" iconPackage \"%1\"\n").arg(n->iconPackage()));
     node.append(QString(" icon \"%1\"\n").arg(n->icon()));
 
-    foreach(QByteArray p, n->dynamicPropertyNames()) {
+    foreach(const QByteArray& p, n->dynamicPropertyNames()) {
         QString s = p ;
 
         node.append(QString("%1 \"%2\"\n").arg(s.replace('.', '_')).arg(n->property(p).toString()));

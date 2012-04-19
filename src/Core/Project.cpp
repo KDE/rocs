@@ -55,12 +55,12 @@ public:
         _projectDirectory = projectGroup.readEntry("Directory", QString());
 
         QStringList codeFileIDs = projectGroup.readEntry("CodeFiles", QStringList());
-        foreach(QString offset, codeFileIDs) {
+        foreach(const QString& offset, codeFileIDs) {
             _codeFileGroup.insert(offset.toInt(), "CodeFile" + offset);
         }
 
         QStringList graphFileIDs = projectGroup.readEntry("GraphFiles", QStringList());
-        foreach(QString offset, graphFileIDs) {
+        foreach(const QString& offset, graphFileIDs) {
             _graphFileGroup.insert(offset.toInt(), "GraphFile" + offset);
         }
 
@@ -157,7 +157,7 @@ void Project::removeCodeFile(int fileID)
 QList< KUrl > Project::codeFiles() const
 {
     QList<KUrl> files;
-    foreach(KUrl fileGroup, d->_codeFileGroup.values()) {
+    foreach(const KUrl& fileGroup, d->_codeFileGroup.values()) {
         KConfigGroup group(d->_config, fileGroup.toLocalFile());
         QString file = group.readEntry("file");
         if (KUrl::isRelativeUrl(file)) {
@@ -223,7 +223,7 @@ void Project::removeGraphFile(int fileID)
 QList< KUrl > Project::graphFiles() const
 {
     QList< KUrl > files;
-    foreach(KUrl fileGroup, d->_graphFileGroup.values()) {
+    foreach(const KUrl& fileGroup, d->_graphFileGroup.values()) {
         KConfigGroup group(d->_config, fileGroup.toLocalFile());
         QString file = group.readEntry("file");
         if (KUrl::isRelativeUrl(file)) {
@@ -322,7 +322,7 @@ bool Project::writeProjectFile(QString fileUrl)
     projectGroup.writeEntry("Directory", d->_projectDirectory);
 
     QStringList codeFileIDs;
-    foreach(KUrl fileGroup, d->_codeFileGroup.values()) {
+    foreach(const KUrl& fileGroup, d->_codeFileGroup.values()) {
         KConfigGroup group(d->_config, fileGroup.toLocalFile());
         // TODO change to order given by editor
         codeFileIDs.append(group.readEntry("identifier"));
@@ -330,7 +330,7 @@ bool Project::writeProjectFile(QString fileUrl)
     projectGroup.writeEntry("CodeFiles", codeFileIDs);
 
     QStringList graphFileIDs;
-    foreach(QString fileGroup, d->_graphFileGroup.values()) {
+    foreach(const QString& fileGroup, d->_graphFileGroup.values()) {
         KConfigGroup group(d->_config, fileGroup);
         // TODO change to order given by editor
         graphFileIDs.append(group.readEntry("identifier"));
