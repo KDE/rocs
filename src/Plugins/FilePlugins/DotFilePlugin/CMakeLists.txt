@@ -19,7 +19,7 @@ if(Boost_FOUND AND Boost_MINOR_VERSION GREATER 42)
   add_definitions(-DQT_STL)
   target_link_libraries(rocs_dotFilePlugin
     ${KDE4_KDEUI_LIBS}
-    ${Boost_GRAPH_LIBRARY} 
+    ${Boost_GRAPH_LIBRARY}
     rocslib
   )
 
