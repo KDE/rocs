@@ -48,7 +48,7 @@ class AssignValuesWidget :
     };
 
 public:
-    AssignValuesWidget(Document* graphDoc, QWidget *parent = 0);
+    explicit AssignValuesWidget(Document* graphDoc, QWidget *parent = 0);
     ~AssignValuesWidget();
 
     /**

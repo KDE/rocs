@@ -38,7 +38,7 @@ class DataStructurePropertiesWidget
 {
     Q_OBJECT
 public:
-    DataStructurePropertiesWidget(DataStructurePtr g, MainWindow* parent = 0);
+    explicit DataStructurePropertiesWidget(DataStructurePtr g, MainWindow* parent = 0);
     ~DataStructurePropertiesWidget();
     QRadioButton *radio() const;
 

@@ -29,7 +29,7 @@ class IncludeManagerSettings : public QWidget
     Q_OBJECT
 public:
 
-    IncludeManagerSettings(QWidget* parent = 0, Qt::WindowFlags f = 0);
+    explicit IncludeManagerSettings(QWidget* parent = 0, Qt::WindowFlags f = 0);
 
     virtual ~IncludeManagerSettings();
 

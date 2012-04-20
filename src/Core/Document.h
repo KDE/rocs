@@ -49,7 +49,7 @@ public:
     enum Type {Simple = 0, Oriented};
     enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
-    Document(const QString& name,
+    explicit Document(const QString& name,
              qreal left = -200,
              qreal right = 200,
              qreal top = -200,

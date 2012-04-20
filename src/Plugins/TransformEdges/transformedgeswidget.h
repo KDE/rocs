@@ -44,7 +44,7 @@ class TransformEdgesWidget :
 
 
 public:
-    TransformEdgesWidget(Document* graphDoc, QWidget *parent = 0);
+    explicit TransformEdgesWidget(Document* graphDoc, QWidget *parent = 0);
     ~TransformEdgesWidget();
 
     /**

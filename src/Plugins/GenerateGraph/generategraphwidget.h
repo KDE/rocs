@@ -61,7 +61,7 @@ class GenerateGraphWidget :
     };
 
 public:
-    GenerateGraphWidget(Document* graphDoc, QWidget *parent = 0);
+    explicit GenerateGraphWidget(Document* graphDoc, QWidget *parent = 0);
     ~GenerateGraphWidget();
 
 public slots:

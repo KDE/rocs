@@ -35,7 +35,7 @@ class TabWidget : public QWidget
     KAction* _runAction;
 public:
     enum Orientation {TabOnLeft, TabOnRight, TabOnTop, TabOnBottom};
-    TabWidget(TabWidget::Orientation o, QWidget *parent = 0);
+    explicit TabWidget(TabWidget::Orientation o, QWidget *parent = 0);
     void addWidget(QWidget *w, const QString& text, const KIcon& icon);
     void addAction(KAction *a);
 
