@@ -148,7 +148,7 @@ public  slots:
 
     /** Add a property to this pointer
     * @param property Name of property
-    * @param value Value of the property. value shoud be different of QVariant::Invalid.
+    * @param value Value of the property. value should be different of QVariant::Invalid.
     */
     void addDynamicProperty(QString Property, QVariant value);
 

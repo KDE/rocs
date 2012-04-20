@@ -207,7 +207,7 @@ public:
      * given, save the project in file \p fileUrl. If the project is temporary, i.e., isTemporary() returns
      * true, a file URL is mandatory.
      * \param fileUrl is the target file, expected as absolute path
-     * \return true if save was successfull, otherwise false
+     * \return true if save was successful, otherwise false
      */
     bool writeProjectFile(QString fileUrl = QString());
 

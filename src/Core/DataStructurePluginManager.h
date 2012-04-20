@@ -57,10 +57,10 @@ public:
      */
     DataStructurePtr changeToDataStructure(DataStructurePtr dataStructure, Document* parent);
 
-    /** return the list of avaliable data structure plugins.*/
+    /** return the list of available data structure plugins.*/
     const QStringList listOfDataStructures();
 
-    /** return informations about plugin.*/
+    /** return information about plugin.*/
     KPluginInfo pluginInfo(DataStructurePluginInterface* plugin) const;
 
 
@@ -96,11 +96,11 @@ public:
 
 signals:
 
-    /** signal emited when is changing the plugin data structure to newPlugin */
+    /** signal emitted when is changing the plugin data structure to newPlugin */
     void changingDataStructurePlugin(const QString &pluginName);
 
-    /** this signal is emited at end of change of DataStructure.
-    *This is used to say that the change was sucessfull.
+    /** this signal is emitted at end of change of DataStructure.
+    *This is used to say that the change was successful.
      */
     void DataStructurePluginChanged(const QString &newDataStructure);
 

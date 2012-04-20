@@ -51,7 +51,7 @@ public:
      */
     QString seekFile(const QString& arg1);
 
-    /** insert aditional path to seek files.*/
+    /** insert additional path to seek files.*/
     void addPath(const QString& str);
     void addPath(const QStringList & str);
 

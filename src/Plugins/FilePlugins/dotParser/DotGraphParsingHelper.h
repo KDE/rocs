@@ -63,7 +63,7 @@ struct DotGraphParsingHelper {
     std::string attributed;
     QStringList subdataTypeid;
 //   std::string subgraphid;
-    unsigned int uniq;
+    unsigned int unique;
 
     AttributesMap attributes;
     AttributesMap dataTypeAttributes;

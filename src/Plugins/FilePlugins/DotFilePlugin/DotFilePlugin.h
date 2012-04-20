@@ -39,7 +39,7 @@ public:
     explicit DotFilePlugin(QObject* parent, const QList< QVariant >&);
     ~DotFilePlugin();
 
-    /** \brief read file given by the specifed fileName
+    /** \brief read file given by the specified fileName
      * \param QString reference specifying the filename
      * \return Document pointer
      */

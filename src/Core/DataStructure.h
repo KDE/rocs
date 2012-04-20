@@ -173,7 +173,7 @@ public:
     const PointerList pointers(int pointerType = 0) const;
     const QList<Group*> groups() const;
 
-    /** @brief clear data that only is usefull for a type of data structure and that cannot be converted to others
+    /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others
     */
     virtual void cleanUpBeforeConvert() { }
 

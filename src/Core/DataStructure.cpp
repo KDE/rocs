@@ -376,7 +376,7 @@ PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
         return PointerPtr();
     }
 
-    if (from->dataStructure() != to->dataStructure()) { // the user is trying to connect datas from different graphs.
+    if (from->dataStructure() != to->dataStructure()) { // the user is trying to connect data elements from different graphs.
         return PointerPtr();
     }
     PointerPtr pointer = Pointer::create(getDataStructure(), from, to, pointerType);
