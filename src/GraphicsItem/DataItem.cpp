@@ -45,8 +45,8 @@ DataItem::DataItem(DataPtr n)
     , _oldStyle(GraphicsLayout::self()->viewStyleDataNode())
     , _originalWidth(n->width())
 {
-    connect(n.get(), SIGNAL(removed()), this, SLOT(deleteLater())); //FIXME removed for now, maybe crash?
-    connect(n.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
+    connect(n.get(), SIGNAL(removed()), this, SLOT(deleteLater()));
+    connect(n.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));   //FIXME update connections
     connect(n.get(), SIGNAL(nameChanged(QString)), this, SLOT(updateName()));
     connect(n.get(), SIGNAL(valueChanged(QVariant)), this, SLOT(updateValue()));
     connect(n.get(), SIGNAL(colorChanged(QColor)), this, SLOT(updateColor()));

@@ -37,6 +37,7 @@ class QKeyEvent;
 class QMenu;
 class DataPropertiesWidget;
 class PointerPropertiesWidget;
+class DataStructurePropertiesFullWidget;
 
 class GraphScene : public QGraphicsScene
 {
@@ -69,6 +70,9 @@ public slots:
     void setActiveDocument();
     void resize();
 
+private slots:
+    void showDataStructurePropertiesDialog(DataStructurePtr dataStructure);
+
 signals:
     void resized();
     void keyPressed(QKeyEvent* key);
@@ -97,6 +101,7 @@ private:
     bool _hideEdges;
     DataPropertiesWidget *_dataPropertiesWidget;
     PointerPropertiesWidget *_pointerPropertiesWidget;
+    DataStructurePropertiesFullWidget *_dataStructurePropertiesWidget;
     bool _fade;
     void releaseDocument();
     qreal _minWidth;

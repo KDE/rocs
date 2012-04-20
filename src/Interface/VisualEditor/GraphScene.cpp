@@ -31,6 +31,7 @@
 #include "PointerItem.h"
 #include "DataPropertiesWidget.h"
 #include "PointerPropertiesWidget.h"
+#include "DataStructurePropertiesFullWidget.h"
 
 #include "AbstractAction.h"
 #include "AlignAction.h"
@@ -55,6 +56,7 @@ GraphScene::GraphScene(QObject *parent) :
     _hideEdges = false;
     _dataPropertiesWidget = new DataPropertiesWidget(qobject_cast<MainWindow*>(parent));
     _pointerPropertiesWidget = new PointerPropertiesWidget(qobject_cast<MainWindow*>(parent));
+    _dataStructurePropertiesWidget = new DataStructurePropertiesFullWidget(qobject_cast<MainWindow*>(parent));
     _action = 0;
     _minHeight = 0;
     _minWidth = 0;
@@ -399,6 +401,10 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     DeleteAction *deleteItemAction = new DeleteAction(i18n("Delete"), this, contextData, 0);
 
     QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
+    QAction *dataStructurePropertyAction = new QAction(i18n("Data Structure"), this);
+    _dataStructurePropertiesWidget->setDataStructure(contextDataStructure, screenPosition);
+    connect(dataStructurePropertyAction, SIGNAL(triggered(bool)),
+            _dataStructurePropertiesWidget, SLOT(show()));
     if (contextData) {
         _dataPropertiesWidget->setData(dataItem, screenPosition); //>set
         connect(propertyAction, SIGNAL(triggered(bool)), _dataPropertiesWidget, SLOT(show()));
@@ -427,7 +433,15 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
         menu->addAction(propertyAction);
         menu->addAction(deleteItemAction);
     }
+    menu->addAction(dataStructurePropertyAction);
 
     return menu;
 }
+
+
+void GraphScene::showDataStructurePropertiesDialog(DataStructurePtr dataStructure)
+{
+    qDebug() << "FIXME: create dialog";
+}
+
 
