@@ -55,7 +55,7 @@ void TestIncludeManager::appendToTempPath()
     man.include(QString());
     QVERIFY(man.tempPath().contains(path1));
 //     kDebug () << man.tempPath();
-    QVERIFY(man.tempPath().contains(path2 + "/"));
+    QVERIFY(man.tempPath().contains(path2 + '/'));
 }
 
 void TestIncludeManager::doublePathInsert()
