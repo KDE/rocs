@@ -136,12 +136,13 @@ QList< ToolsPluginInterface* > PluginManager::toolPlugins()
 {
     loadToolsPlugins();
     QList < ToolsPluginInterface * > value;
-    foreach(const KPluginInfo& info, _d->toolsPluginsMap.keys()) {
-        if (info.isPluginEnabled()) {
-            value.append(_d->toolsPluginsMap[info]);
+
+    QMap<KPluginInfo, ToolsPluginInterface*>::const_iterator iter;
+    for (iter = _d->toolsPluginsMap.constBegin(); iter != _d->toolsPluginsMap.constEnd(); ++iter) {
+        if (iter.key().isPluginEnabled()){
+            value.append(_d->toolsPluginsMap[iter.key()]);
         }
     }
-
     return value;
 }
 
