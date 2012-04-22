@@ -73,6 +73,7 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr da
     connect(dataStructure.get(), SIGNAL(dataTypeRemoved(int)), this, SLOT(unregisterDataType(int)));
     connect(dataStructure.get(), SIGNAL(pointerTypeCreated(int)), this, SLOT(registerPointerType(int)));
     connect(dataStructure.get(), SIGNAL(pointerTypeRemoved(int)), this, SLOT(unregisterPointerType(int)));
+    connect(dataStructure.get(), SIGNAL(nameChanged(QString)), _dataStructureName, SLOT(setText(QString)));
 
     connect(_dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
 }

@@ -513,6 +513,7 @@ void DataStructure::updateRelativeCenter()
 void DataStructure::setName(const QString& s)
 {
     d->_name = s;
+    emit(nameChanged(d->_name));
 }
 
 

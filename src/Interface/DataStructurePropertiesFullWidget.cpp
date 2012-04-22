@@ -40,12 +40,20 @@ void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataSt
 {
     if (_dataStructure) {
         disconnect(_dataStructure.get());
+        foreach(QWidget* oldWidget, _dataTypeWigets) {
+            oldWidget->deleteLater();
+        }
+        _dataTypeWigets.clear();
     }
     _dataStructure = dataStructure;
+    dataStructureName->setText(_dataStructure->name());
+
     setupDataTypes();
     move(pos.x() + 10,  pos.y() + 10);
 
-    connect (_dataStructure.get(), SIGNAL(dataTypeRemoved(int)), this, SLOT(removeDataType(int)));
+    connect (_dataStructure.get(), SIGNAL(dataTypeRemoved(int)),
+            this, SLOT(removeDataType(int)));
+    connect(dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
 }
 
 void DataStructurePropertiesFullWidget::addDataType()
@@ -62,8 +70,6 @@ void DataStructurePropertiesFullWidget::removeDataType(int dataType)
         _dataTypeWigets[dataType]->deleteLater();
     }
     _dataTypeWigets.remove(dataType);
-
-    qDebug() << "remove data type widget: " << dataType;
 }
 
 
@@ -76,18 +82,22 @@ void DataStructurePropertiesFullWidget::setupDataTypes()
 
 QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
 {
-    qDebug() << "create data type widget: " << dataType;
     // create default data element setups
     QWidget* dataTypeWidget = new QWidget(this);
     dataTypeWidget->setLayout(new QHBoxLayout);
     QLabel* dataTypeIdentifier = new QLabel(QString::number(dataType), dataTypeWidget);
     dataTypeWidget->layout()->addWidget(dataTypeIdentifier);
 
-    KLineEdit* dataTypeName = new KLineEdit(_dataStructure->getDataTypeName(dataType), dataTypeWidget);
+    KLineEdit* dataTypeName = new KLineEdit(_dataStructure->dataType(dataType)->name(), dataTypeWidget);
     dataTypeWidget->layout()->addWidget(dataTypeName);
+    connect(dataTypeName, SIGNAL(textEdited(QString)),
+            _dataStructure->dataType(dataType).get(), SLOT(setName(QString)));
 
     KColorCombo* dataTypeColor = new KColorCombo(dataTypeWidget);
+    dataTypeColor->setColor(_dataStructure->dataType(dataType)->defaultColor());
     dataTypeWidget->layout()->addWidget(dataTypeColor);
+    connect(dataTypeColor, SIGNAL(activated(QColor)),
+            _dataStructure->dataType(dataType).get(), SLOT(setDefaultColor(QColor)));
 
     // default data type can not be deleted
     if (dataType!=0) {

@@ -333,6 +333,7 @@ signals:
     void dataTypeRemoved(int identifier);
     void pointerTypeRemoved(int identifier);
     void complexityChanged(bool directed);
+    void nameChanged(const QString& name);
     void changed();
     void resizeRequest(Document::Border border);
 
