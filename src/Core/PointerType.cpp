@@ -70,7 +70,7 @@ void PointerType::setName(QString name)
 }
 
 
-QString PointerType::name() const
+const QString& PointerType::name() const
 {
     return d->_name;
 }

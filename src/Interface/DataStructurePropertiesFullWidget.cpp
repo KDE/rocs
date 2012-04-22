@@ -17,19 +17,86 @@
 */
 
 #include "DataStructurePropertiesFullWidget.h"
+#include <Data.h>
 
 #include <QWidget>
+#include <QString>
+
 #include <KDebug>
+#include <KLineEdit>
+#include <KColorCombo>
+#include <KPushButton>
 
 DataStructurePropertiesFullWidget::DataStructurePropertiesFullWidget(QWidget* parent)
     : QWidget(parent)
 {
     setupUi(this);
+
+    connect(buttonAddDataType, SIGNAL(clicked(bool)), this, SLOT(addDataType()));
 }
 
 
 void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataStructure, QPointF pos)
 {
+    if (_dataStructure) {
+        disconnect(_dataStructure.get());
+    }
     _dataStructure = dataStructure;
+    setupDataTypes();
     move(pos.x() + 10,  pos.y() + 10);
+
+    connect (_dataStructure.get(), SIGNAL(dataTypeRemoved(int)), this, SLOT(removeDataType(int)));
 }
+
+void DataStructurePropertiesFullWidget::addDataType()
+{
+    int dataTypeIdentifier = _dataStructure->registerDataType(i18n("type"));
+    dataTypes->addWidget(createDataTypeWidget(dataTypeIdentifier));
+}
+
+
+void DataStructurePropertiesFullWidget::removeDataType(int dataType)
+{
+    if (_dataTypeWigets.contains(dataType) && _dataTypeWigets[dataType]) {
+        dataTypes->removeWidget(_dataTypeWigets[dataType]);
+        _dataTypeWigets[dataType]->deleteLater();
+    }
+    _dataTypeWigets.remove(dataType);
+
+    qDebug() << "remove data type widget: " << dataType;
+}
+
+
+void DataStructurePropertiesFullWidget::setupDataTypes()
+{
+    foreach (int dataTypeIdentifier, _dataStructure->dataTypeList()) {
+        dataTypes->addWidget(createDataTypeWidget(dataTypeIdentifier));
+    }
+}
+
+QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
+{
+    qDebug() << "create data type widget: " << dataType;
+    // create default data element setups
+    QWidget* dataTypeWidget = new QWidget(this);
+    dataTypeWidget->setLayout(new QHBoxLayout);
+    QLabel* dataTypeIdentifier = new QLabel(QString::number(dataType), dataTypeWidget);
+    dataTypeWidget->layout()->addWidget(dataTypeIdentifier);
+
+    KLineEdit* dataTypeName = new KLineEdit(_dataStructure->getDataTypeName(dataType), dataTypeWidget);
+    dataTypeWidget->layout()->addWidget(dataTypeName);
+
+    KColorCombo* dataTypeColor = new KColorCombo(dataTypeWidget);
+    dataTypeWidget->layout()->addWidget(dataTypeColor);
+
+    // default data type can not be deleted
+    if (dataType!=0) {
+        KPushButton* dataTypeDelete = new KPushButton("x", dataTypeWidget);
+        dataTypeWidget->layout()->addWidget(dataTypeDelete);
+        connect (dataTypeDelete, SIGNAL(clicked(bool)), _dataStructure->dataType(dataType).get(), SLOT(remove()));
+    }
+
+    _dataTypeWigets.insert(dataType, dataTypeWidget);
+    return dataTypeWidget;
+}
+

@@ -75,7 +75,7 @@ void DataType::setName(QString name)
     d->_name = name;
 }
 
-QString DataType::name() const
+const QString& DataType::name() const
 {
     return d->_name;
 }
@@ -140,4 +140,9 @@ void DataType::setDefaultColor(QColor color)
 QColor DataType::defaultColor() const
 {
     return d->_defaultColor;
+}
+
+void DataType::remove()
+{
+    d->_dataStructure->removeDataType(identifier());
 }

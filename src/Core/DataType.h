@@ -47,7 +47,7 @@ public:
     static DataTypePtr create(DataStructurePtr dataStructure, int identifier);
     ~DataType();
 
-    QString name() const;
+    const QString& name() const;
     QString icon() const;
     int identifier() const;
     bool isNameVisible() const;
@@ -62,6 +62,7 @@ public slots:
     void setValueVisible(bool visible);
     void setVisible(bool visible);
     void setDefaultColor(QColor color);
+    void remove();
 
 protected:
     /** Default constructor. To create DataType elements use \see DataType::create(...).

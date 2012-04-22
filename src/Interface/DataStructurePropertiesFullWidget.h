@@ -24,6 +24,7 @@
 
 #include <QWidget>
 
+
 /*!
     \brief Properties widget for KDialog.
 */
@@ -38,7 +39,19 @@ public:
 public slots:
     void setDataStructure(DataStructurePtr dataStructure, QPointF pos);
 
+private slots:
+    void addDataType();
+    void removeDataType(int dataType);
+
 private:
+    void setupDataTypes();
+
+    /**
+     * creates and adds to list
+     */
+    QWidget* createDataTypeWidget(int dataType);
+
+    QMap<int,QWidget*> _dataTypeWigets;
     DataStructurePtr _dataStructure;
 };
 

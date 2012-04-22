@@ -47,7 +47,7 @@ public:
     static PointerTypePtr create(DataStructurePtr parent, int identifier);
     ~PointerType();
 
-    QString name() const;
+    const QString& name() const;
     int identifier() const;
     bool isNameVisible() const;
     bool isValueVisible() const;

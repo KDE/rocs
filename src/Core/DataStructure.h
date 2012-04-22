@@ -139,8 +139,8 @@ public:
 
     //TODO in the future (>= KDE SC 4.10) allow direct access to data types
     // getters
-    QString getDataTypeName(int dataType) const;
-    QString getPointerTypeName(int pointerType) const;
+    const QString& getDataTypeName(int dataType) const;
+    const QString& getPointerTypeName(int pointerType) const;
 
     // getters
     QString getDataTypeIcon(int dataType) const;

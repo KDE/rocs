@@ -179,12 +179,12 @@ int DataStructure::registerPointerType(QString name)
 }
 
 
-QString DataStructure::getDataTypeName(int dataType) const
+const QString& DataStructure::getDataTypeName(int dataType) const
 {
     return d->_dataTypes[dataType]->name();
 }
 
-QString DataStructure::getPointerTypeName(int pointerType) const
+const QString& DataStructure::getPointerTypeName(int pointerType) const
 {
     return d->_pointerTypes[pointerType]->name();
 }
