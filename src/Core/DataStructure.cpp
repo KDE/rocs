@@ -154,7 +154,10 @@ const PointerList DataStructure::pointers(int pointerType) const
 
 int DataStructure::registerDataType(QString name)
 {
-    int identifier = d->_dataTypeLists.size() + 1;
+    QList<int> usedIdentifier = d->_dataTypeLists.keys();
+    qSort(usedIdentifier);
+    int identifier = usedIdentifier.last() + 1;
+
     DataTypePtr dataType = DataType::create(getDataStructure(), identifier);
     dataType->setName(name);
 
@@ -167,7 +170,10 @@ int DataStructure::registerDataType(QString name)
 
 int DataStructure::registerPointerType(QString name)
 {
-    int identifier = d->_pointerTypeLists.size() + 1;
+    QList<int> usedIdentifier = d->_pointerTypeLists.keys();
+    qSort(usedIdentifier);
+    int identifier = usedIdentifier.last() + 1;
+
     PointerTypePtr pointerType = PointerType::create(getDataStructure(), identifier);
     pointerType->setName(name);
 
