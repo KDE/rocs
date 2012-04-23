@@ -64,6 +64,9 @@ public slots:
     void setDefaultColor(QColor color);
     void remove();
 
+signals:
+    void defaultColorChanged(QColor color);
+
 protected:
     /** Default constructor. To create DataType elements use \see DataType::create(...).
      *\param parent is the parent DataStructure

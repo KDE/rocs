@@ -39,6 +39,7 @@
 #include <KAction>
 #include <KColorCombo>
 
+#include <QString>
 #include <QGraphicsItem>
 #include <QRadioButton>
 
@@ -153,10 +154,7 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     QWidget* dataPropertyWidget = new QWidget(this);
     QGridLayout* dataPropertyLayout = new QGridLayout(dataPropertyWidget);
 
-    QLabel* dataElementName = new QLabel("Data", dataPropertyWidget);
-    _dataTypeColor = new KColorCombo(dataPropertyWidget);
-    _dataTypeColor->setColor(dataStructure->dataType(typeIdentifier)->defaultColor());
-    _dataTypeColor->setToolTip(i18n("Set default color for data elements"));
+    QLabel* dataElementName = new QLabel(QString("Data %1").arg(typeIdentifier), dataPropertyWidget);
 
     KPushButton* dataTypeShowName = new KPushButton(dataPropertyWidget);
     dataTypeShowName->setIcon(KIcon("rocstexticon"));
@@ -180,10 +178,9 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
 
     dataPropertyWidget->setLayout(dataPropertyLayout);
     dataPropertyLayout->addWidget(dataElementName, 1, 1);
-    dataPropertyLayout->addWidget(_dataTypeColor, 1, 2);
-    dataPropertyLayout->addWidget(dataTypeShowName, 1, 3);
-    dataPropertyLayout->addWidget(dataTypeShowValue, 1, 4);
-    dataPropertyLayout->addWidget(dataTypeVisible, 1, 5);
+    dataPropertyLayout->addWidget(dataTypeShowName, 1, 2);
+    dataPropertyLayout->addWidget(dataTypeShowValue, 1, 3);
+    dataPropertyLayout->addWidget(dataTypeVisible, 1, 4);
 
     _typeProperties->addWidget(dataPropertyWidget);
 
@@ -191,8 +188,6 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
             dataStructure->dataType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
     connect(dataTypeShowValue, SIGNAL(toggled(bool)),
             dataStructure->dataType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
-    connect(_dataTypeColor, SIGNAL(activated(QColor)),
-            dataStructure->dataType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
     connect(dataTypeVisible, SIGNAL(toggled(bool)),
             dataStructure->dataType(typeIdentifier).get(), SLOT(setVisible(bool)));
 

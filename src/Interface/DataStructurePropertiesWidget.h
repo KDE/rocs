@@ -67,8 +67,6 @@ private slots:
      */
     void unregisterPointerType(int identifier);
 
-//     void on__dataStructurePointerColorApplyNow_clicked();
-//     void on__dataStructureDataColorApplyNow_clicked();
     void on__dataStructureDelete_clicked();
     void on__dataStructureName_textChanged(const QString& s);
     void on__activateGraph_toggled(bool b);
@@ -84,7 +82,6 @@ private:
 
     DataStructurePtr _dataStructure;
     KColorCombo* _pointerTypeColor;
-    KColorCombo* _dataTypeColor;
     MainWindow *_mainWindow;
     QMap<int, QWidget*> _dataTypeWidgets;
     QMap<int, QWidget*> _pointerTypeWidgets;

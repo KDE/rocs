@@ -134,6 +134,7 @@ bool DataType::isVisible() const
 void DataType::setDefaultColor(QColor color)
 {
     d->_defaultColor = color;
+    emit defaultColorChanged(color);
 }
 
 
