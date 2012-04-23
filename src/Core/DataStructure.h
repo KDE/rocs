@@ -137,15 +137,6 @@ public:
     PointerTypePtr pointerType(int pointerType) const;
     DataTypePtr dataType(int dataType) const;
 
-    //TODO in the future (>= KDE SC 4.10) allow direct access to data types
-    // getters
-    const QString& getDataTypeName(int dataType) const;
-    const QString& getPointerTypeName(int pointerType) const;
-
-    // getters
-    QString getDataTypeIcon(int dataType) const;
-
-
     /**
      * Getter for all registered data types.
      * \return list of all data type ids

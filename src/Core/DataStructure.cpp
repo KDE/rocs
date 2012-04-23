@@ -184,22 +184,6 @@ int DataStructure::registerPointerType(QString name)
     return identifier;
 }
 
-
-const QString& DataStructure::getDataTypeName(int dataType) const
-{
-    return d->_dataTypes[dataType]->name();
-}
-
-const QString& DataStructure::getPointerTypeName(int pointerType) const
-{
-    return d->_pointerTypes[pointerType]->name();
-}
-
-QString DataStructure::getDataTypeIcon(int dataType) const
-{
-    return d->_dataTypes[dataType]->icon();
-}
-
 QList< int > DataStructure::dataTypeList() const
 {
     return d->_dataTypeLists.keys();
