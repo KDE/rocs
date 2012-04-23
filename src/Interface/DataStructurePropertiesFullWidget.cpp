@@ -59,14 +59,14 @@ void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataSt
 void DataStructurePropertiesFullWidget::addDataType()
 {
     int dataTypeIdentifier = _dataStructure->registerDataType(i18n("type"));
-    dataTypes->addWidget(createDataTypeWidget(dataTypeIdentifier));
+    dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
 }
 
 
 void DataStructurePropertiesFullWidget::removeDataType(int dataType)
 {
     if (_dataTypeWigets.contains(dataType) && _dataTypeWigets[dataType]) {
-        dataTypes->removeWidget(_dataTypeWigets[dataType]);
+        dataTypes->layout()->removeWidget(_dataTypeWigets[dataType]);
         _dataTypeWigets[dataType]->deleteLater();
     }
     _dataTypeWigets.remove(dataType);
@@ -76,7 +76,7 @@ void DataStructurePropertiesFullWidget::removeDataType(int dataType)
 void DataStructurePropertiesFullWidget::setupDataTypes()
 {
     foreach (int dataTypeIdentifier, _dataStructure->dataTypeList()) {
-        dataTypes->addWidget(createDataTypeWidget(dataTypeIdentifier));
+        dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
     }
 }
 
@@ -86,6 +86,7 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
     QWidget* dataTypeWidget = new QWidget(this);
     dataTypeWidget->setLayout(new QHBoxLayout);
     QLabel* dataTypeIdentifier = new QLabel(QString::number(dataType), dataTypeWidget);
+    dataTypeIdentifier->setToolTip(i18n("Unique identifier for the data type."));
     dataTypeWidget->layout()->addWidget(dataTypeIdentifier);
 
     KLineEdit* dataTypeName = new KLineEdit(_dataStructure->dataType(dataType)->name(), dataTypeWidget);
@@ -94,6 +95,7 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
             _dataStructure->dataType(dataType).get(), SLOT(setName(QString)));
 
     KColorCombo* dataTypeColor = new KColorCombo(dataTypeWidget);
+    dataTypeColor->setFixedWidth(50);
     dataTypeColor->setColor(_dataStructure->dataType(dataType)->defaultColor());
     dataTypeWidget->layout()->addWidget(dataTypeColor);
     connect(dataTypeColor, SIGNAL(activated(QColor)),
@@ -103,10 +105,9 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
     if (dataType!=0) {
         KPushButton* dataTypeDelete = new KPushButton("x", dataTypeWidget);
         dataTypeWidget->layout()->addWidget(dataTypeDelete);
-        connect (dataTypeDelete, SIGNAL(clicked(bool)), _dataStructure->dataType(dataType).get(), SLOT(remove()));
+        connect(dataTypeDelete, SIGNAL(clicked(bool)), _dataStructure->dataType(dataType).get(), SLOT(remove()));
     }
 
     _dataTypeWigets.insert(dataType, dataTypeWidget);
     return dataTypeWidget;
 }
-
