@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs,
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -402,9 +402,11 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
 
     QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
     QAction *dataStructurePropertyAction = new QAction(i18n("Data Structure"), this);
-    _dataStructurePropertiesWidget->setDataStructure(contextDataStructure, screenPosition);
-    connect(dataStructurePropertyAction, SIGNAL(triggered(bool)),
-            _dataStructurePropertiesWidget, SLOT(show()));
+    if (contextDataStructure) {
+        _dataStructurePropertiesWidget->setDataStructure(contextDataStructure, screenPosition);
+        connect(dataStructurePropertyAction, SIGNAL(triggered(bool)),
+                _dataStructurePropertiesWidget, SLOT(show()));
+    }
     if (contextData) {
         _dataPropertiesWidget->setData(dataItem, screenPosition); //>set
         connect(propertyAction, SIGNAL(triggered(bool)), _dataPropertiesWidget, SLOT(show()));
@@ -433,7 +435,9 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
         menu->addAction(propertyAction);
         menu->addAction(deleteItemAction);
     }
-    menu->addAction(dataStructurePropertyAction);
+    if (contextDataStructure) {
+        menu->addAction(dataStructurePropertyAction);
+    }
 
     return menu;
 }

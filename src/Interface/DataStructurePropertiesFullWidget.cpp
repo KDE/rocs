@@ -128,7 +128,6 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
                 painter.end();
 
                 attribute.remove("rocs_");
-                KIcon* asdf;
                 dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
             }
         }
