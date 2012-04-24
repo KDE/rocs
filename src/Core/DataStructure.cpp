@@ -294,7 +294,6 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
     emit changed();
 
 //     connect(data.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
-    connect(data.get(), SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
@@ -313,7 +312,6 @@ DataList DataStructure::addDataList(DataList dataList, int dataType)
         d->_dataTypeLists[dataType].append(n);
         emit dataCreated(n);
 //         connect(n.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
-        connect(n.get(), SIGNAL(iconChanged(QString)),         this, SIGNAL(changed()));
         connect(n.get(), SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
         connect(n.get(), SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
         connect(n.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));

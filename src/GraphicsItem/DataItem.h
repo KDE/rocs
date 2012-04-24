@@ -47,7 +47,9 @@ public:
     DataPtr data() const {
         return _data;
     }
-    static QMap<QString, QSvgRenderer*> _renders;
+    static QSvgRenderer* sharedRenderer(QString iconPackage);
+    static QSvgRenderer* registerSharedRenderer(QString iconPackage);
+    static void removeSharedRenderer(QString iconPackage);
     QGraphicsSimpleTextItem *name() const;
     QGraphicsSimpleTextItem *value() const;
     void remove();
@@ -64,8 +66,8 @@ private slots:
     void updateSize();
 
 private:
+    static QMap<QString, QSvgRenderer*> _sharedRenderers;
     DataPtr _data;
-    QString _iconPackage;
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;
     QGraphicsColorizeEffect *_colorizer;

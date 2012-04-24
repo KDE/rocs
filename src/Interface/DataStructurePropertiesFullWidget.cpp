@@ -42,6 +42,7 @@ DataStructurePropertiesFullWidget::DataStructurePropertiesFullWidget(QWidget* pa
 
 void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataStructure, QPointF pos)
 {
+    Q_ASSERT(dataStructure);
     if (_dataStructure) {
         disconnect(_dataStructure.get());
         foreach(QWidget* oldWidget, _dataTypeWigets) {
@@ -90,7 +91,7 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
     QWidget* dataTypeWidget = new QWidget(this);
     dataTypeWidget->setLayout(new QHBoxLayout);
     QLabel* dataTypeIdentifier = new QLabel(QString::number(dataType), dataTypeWidget);
-    dataTypeIdentifier->setToolTip(i18n("Unique identifier for the data type."));
+    dataTypeIdentifier->setToolTip(i18n("Unique identifier for data type."));
     dataTypeWidget->layout()->addWidget(dataTypeIdentifier);
 
     KLineEdit* dataTypeName = new KLineEdit(_dataStructure->dataType(dataType)->name(), dataTypeWidget);
@@ -111,7 +112,7 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
         svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
         QXmlStreamReader reader(&svgFile);
-        QSvgRenderer *renderer = DataItem::_renders.value(svgFile.fileName());
+        QSvgRenderer *renderer = DataItem::sharedRenderer(svgFile.fileName());
         while (!reader.atEnd()) {
             reader.readNext();
             if (!reader.attributes().hasAttribute("id")) {
@@ -127,6 +128,7 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
                 painter.end();
 
                 attribute.remove("rocs_");
+                KIcon* asdf;
                 dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
             }
         }

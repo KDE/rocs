@@ -66,6 +66,7 @@ public slots:
 
 signals:
     void defaultColorChanged(QColor color);
+    void iconChanged(QString icon);
 
 protected:
     /** Default constructor. To create DataType elements use \see DataType::create(...).

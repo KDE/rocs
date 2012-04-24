@@ -83,7 +83,8 @@ const QString& DataType::name() const
 
 void DataType::setIcon(QString icon)
 {
-    d->_icon = icon;
+    d->_icon = "rocs_" + icon;
+    emit iconChanged(d->_icon);
 }
 
 

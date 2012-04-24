@@ -32,12 +32,34 @@
 #include <DataStructure.h>
 #include "GraphicsLayout.h"
 
-QMap<QString, QSvgRenderer*> DataItem::_renders;
+QMap<QString, QSvgRenderer*> DataItem::_sharedRenderers;
+
+QSvgRenderer* DataItem::sharedRenderer(QString iconPackage)
+{
+    return _sharedRenderers.value(iconPackage);
+}
+
+
+QSvgRenderer* DataItem::registerSharedRenderer(QString iconPackage)
+{
+    if (!_sharedRenderers.contains(iconPackage)) {
+        QSvgRenderer *z = new QSvgRenderer(iconPackage);
+        _sharedRenderers.insert(iconPackage, z);
+    }
+    return _sharedRenderers.value(iconPackage);
+}
+
+
+void DataItem::removeSharedRenderer(QString iconPackage)
+{
+    _sharedRenderers.value(iconPackage)->deleteLater();
+    _sharedRenderers.remove(iconPackage);
+}
+
 
 DataItem::DataItem(DataPtr n)
     : QGraphicsSvgItem(0)
     , _data(n)
-    , _iconPackage(n->iconPackage())
     , _name(0)
     , _value(0)
     , _colorizer(0)
@@ -46,7 +68,8 @@ DataItem::DataItem(DataPtr n)
     , _originalWidth(n->width())
 {
     connect(n.get(), SIGNAL(removed()), this, SLOT(deleteLater()));
-    connect(n.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));   //FIXME update connections
+    connect(n->dataStructure()->dataType(n->dataType()).get(), SIGNAL(iconChanged(QString)),
+            this, SLOT(updateIcon()));
     connect(n.get(), SIGNAL(nameChanged(QString)), this, SLOT(updateName()));
     connect(n.get(), SIGNAL(valueChanged(QVariant)), this, SLOT(updateValue()));
     connect(n.get(), SIGNAL(colorChanged(QColor)), this, SLOT(updateColor()));
@@ -106,20 +129,20 @@ void DataItem::updateSize()
 
 void DataItem::updateRenderer()
 {
-    _iconPackage = _data->iconPackage();
-    if (_renders.count(_iconPackage) == 0) {
-        QSvgRenderer *z = new QSvgRenderer(_data->iconPackage());
-        _renders.insert(_iconPackage, z);
+    QString iconPackage = _data->iconPackage();
+    if (_sharedRenderers.count(iconPackage) == 0 || !_sharedRenderers.contains(iconPackage)) {
+        QSvgRenderer *z = new QSvgRenderer(iconPackage);
+        _sharedRenderers.insert(iconPackage, z);
         setSharedRenderer(z);
     } else {
-        setSharedRenderer(_renders.value(_iconPackage));
+        setSharedRenderer(_sharedRenderers.value(iconPackage));
     }
 }
 
 void DataItem::updateIcon()
 {
     QString icon = _data->dataStructure()->dataType(_data->dataType())->icon();
-    if (elementId().isEmpty() ||  elementId() != icon) {
+    if (elementId().isEmpty() || elementId() != icon) {
         setElementId(icon);
         setTransformOriginPoint(boundingRect().width() / 2, boundingRect().width() / 2);
     }
