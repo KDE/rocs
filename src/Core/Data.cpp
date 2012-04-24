@@ -145,6 +145,15 @@ void Data::setDataItem(boost::shared_ptr<DataItem> item)
     d->_item = item;
 }
 
+
+void Data::setDataType(int dataType)
+{
+    d->_dataType = dataType;
+    d->_dataStructure->updateData(getData());
+    emit dataTypeChanged(dataType);
+}
+
+
 DataList Data::adjacent_data() const
 {
     // use QMap as the DataPtr elements are not hashable

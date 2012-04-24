@@ -162,6 +162,7 @@ public  slots:
     void setVisible(bool visible);
     void setValue(const QString& v);
     void setDataItem(boost::shared_ptr<DataItem> item);
+    void setDataType(int dataType);
 
     QScriptValue adj_data();
     QScriptValue adj_pointers();
@@ -195,6 +196,7 @@ signals:
     void valueVisibilityChanged(bool b);
     void visibilityChanged(bool visible);
     void useColorChanged(bool b);
+    void dataTypeChanged(int dataType);
 };
 
 

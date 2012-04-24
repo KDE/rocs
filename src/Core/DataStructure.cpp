@@ -243,6 +243,24 @@ PointerTypePtr DataStructure::pointerType(int pointerType) const
 }
 
 
+void DataStructure::updateData(DataPtr data)
+{
+    foreach(int dataType, dataTypeList()) {
+        d->_dataTypeLists[dataType].removeAll(data);
+    }
+    d->_dataTypeLists[data->dataType()].append(data);
+}
+
+
+void DataStructure::updatePointer(PointerPtr pointer)
+{
+    foreach(int pointerType, pointerTypeList()) {
+        d->_pointerTypeLists[pointerType].removeAll(pointer);
+    }
+    d->_pointerTypeLists[pointer->pointerType()].append(pointer);
+}
+
+
 void DataStructure::setReadOnly(bool r)
 {
     d->_readOnly = r;

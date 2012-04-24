@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -49,6 +50,7 @@ private slots:
     void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
 //     void updateAutomateAttributes(bool b);
     void on__addProperty_clicked();
+    void setDataType(QString dataType);
 
 private:
     void setActive(bool active);

@@ -138,6 +138,18 @@ public:
     DataTypePtr dataType(int dataType) const;
 
     /**
+     * Updates registration of data in internal reference list.
+     * \param data that is set with new type
+     */
+    void updateData(DataPtr data);
+
+    /**
+     * Updates registration of pointer in internal reference list.
+     * \param pointer that is set with new type
+     */
+    void updatePointer(PointerPtr pointer);
+
+    /**
      * Getter for all registered data types.
      * \return list of all data type ids
      */

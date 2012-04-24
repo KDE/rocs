@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2009-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -54,6 +55,13 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
     _item = n;
     move(pos.x() + 10,  pos.y() + 10);
 
+    // data types
+    _dataType->clear();
+    foreach (int dataType, _data->dataStructure()->dataTypeList()) {
+        QString dataTypeString = QString::number(dataType);
+        _dataType->addItem(dataTypeString);
+    }
+
     delete extraItens->layout();
     extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
@@ -63,6 +71,7 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
     connect(_disableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
     connect(_name,         SIGNAL(textEdited(QString)),   _data.get(), SLOT(setName(QString)));
     connect(_value,        SIGNAL(textEdited(QString)),   _data.get(), SLOT(setValue(QString)));
+    connect(_dataType,     SIGNAL(activated(QString)),    this, SLOT(setDataType(QString)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data.get());
@@ -113,12 +122,19 @@ void DataPropertiesWidget::reflectAttributes()
     _propertyName->setText("");
     _propertyValue->setText("");
     _isPropertyGlobal->setCheckState(Qt::Unchecked);
+    _dataType->setCurrentItem(QString::number(_data->dataType()));
 }
 
 
 void DataPropertiesWidget::on__color_activated(const QColor& c)
 {
     _data->setColor(QColor(c));
+}
+
+
+void DataPropertiesWidget::setDataType(QString dataType)
+{
+    _data->setDataType(dataType.toInt());
 }
 
 
