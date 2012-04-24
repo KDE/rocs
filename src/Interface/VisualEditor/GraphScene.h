@@ -70,9 +70,6 @@ public slots:
     void setActiveDocument();
     void resize();
 
-private slots:
-    void showDataStructurePropertiesDialog(DataStructurePtr dataStructure);
-
 signals:
     void resized();
     void keyPressed(QKeyEvent* key);

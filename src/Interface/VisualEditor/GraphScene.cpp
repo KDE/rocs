@@ -441,11 +441,3 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
 
     return menu;
 }
-
-
-void GraphScene::showDataStructurePropertiesDialog(DataStructurePtr dataStructure)
-{
-    qDebug() << "FIXME: create dialog";
-}
-
-
