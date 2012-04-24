@@ -322,6 +322,7 @@ bool Project::writeProjectFile(QString fileUrl)
     projectGroup.writeEntry("Directory", d->_projectDirectory);
 
     QStringList codeFileIDs;
+
     foreach(const KUrl& fileGroup, d->_codeFileGroup) {
         KConfigGroup group(d->_config, fileGroup.toLocalFile());
         // TODO change to order given by editor

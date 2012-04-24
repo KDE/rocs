@@ -25,8 +25,6 @@
 #include "model_GraphProperties.h"
 #include <DataStructurePluginManager.h>
 #include <QMap>
-#include <QPainter>
-#include <QImage>
 
 DataPropertiesWidget::DataPropertiesWidget(MainWindow* /*parent*/):
     QWidget(0),
@@ -36,6 +34,7 @@ DataPropertiesWidget::DataPropertiesWidget(MainWindow* /*parent*/):
     setupUi(this);
     connect(_btnClose, SIGNAL(clicked()), this, SLOT(hide()));
 }
+
 
 void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
 {
@@ -52,10 +51,6 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
     }
 
     _data = n->data();
-    if (! _item) {
-        _svgFile = _data->iconPackage();
-    }
-
     _item = n;
     move(pos.x() + 10,  pos.y() + 10);
 
@@ -75,6 +70,7 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
     _propertiesTable->setModel(model);
 }
 
+
 void DataPropertiesWidget::setActive(bool active)
 {
     if (active) {
@@ -92,6 +88,7 @@ void DataPropertiesWidget::setUseColor(bool b)
 {
     _data->setUseColor(!b);
 }
+
 
 void DataPropertiesWidget::reflectAttributes()
 {
@@ -116,54 +113,14 @@ void DataPropertiesWidget::reflectAttributes()
     _propertyName->setText("");
     _propertyValue->setText("");
     _isPropertyGlobal->setCheckState(Qt::Unchecked);
-
-    if ((_svgFile == _data->iconPackage()) && (_images->count() != 0)) {
-        QString icon = _data->icon();
-        icon.remove("rocs_");
-        _images->setCurrentItem(icon);
-        return;
-    }
-    _images->clear();
-    QFile svgFile(_item->data()->iconPackage());
-    svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
-
-    QXmlStreamReader reader(&svgFile);
-    QSvgRenderer *renderer = _item->_renders.value(svgFile.fileName());
-
-    while (!reader.atEnd()) {
-        reader.readNext();
-        if (!reader.attributes().hasAttribute("id")) {
-            continue;
-        }
-        QString attribute = reader.attributes().value("id").toString();
-        if (attribute.startsWith("rocs_")) {
-            QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
-
-            QPainter painter;
-            painter.begin(&iconImage);
-            renderer->render(&painter, attribute);
-            painter.end();
-
-            attribute.remove("rocs_");
-            _images->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
-        }
-    }
-    QString icon = _data->icon();
-    icon.remove("rocs_");
-    _images->setCurrentItem(icon);
 }
 
-void DataPropertiesWidget::on__images_activated(const QString& s)
-{
-// TODO remove this option
-
-//     _data->setIcon("rocs_" + s);
-}
 
 void DataPropertiesWidget::on__color_activated(const QColor& c)
 {
     _data->setColor(QColor(c));
 }
+
 
 void DataPropertiesWidget::on__addProperty_clicked()
 {

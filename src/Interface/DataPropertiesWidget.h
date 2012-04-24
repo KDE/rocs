@@ -44,8 +44,7 @@ public slots:
     };
 
 private slots:
-    void on__color_activated(const QColor& c);
-    void on__images_activated(const QString& s);
+    void on__color_activated(const QColor& c);;
     void reflectAttributes();
     void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
 //     void updateAutomateAttributes(bool b);
@@ -57,7 +56,6 @@ private:
     DataPtr  _data;
     MainWindow *_mainWindow;
     DataItem *_item;
-    QString _svgFile;
     QString _oldDataStructurePlugin;
 
 };

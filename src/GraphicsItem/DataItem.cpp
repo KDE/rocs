@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
-    Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2011  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011       Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -118,8 +118,9 @@ void DataItem::updateRenderer()
 
 void DataItem::updateIcon()
 {
-    if (elementId().isEmpty() ||  elementId() != _data->icon()) {
-        setElementId(_data->icon());
+    QString icon = _data->dataStructure()->dataType(_data->dataType())->icon();
+    if (elementId().isEmpty() ||  elementId() != icon) {
+        setElementId(icon);
         setTransformOriginPoint(boundingRect().width() / 2, boundingRect().width() / 2);
     }
 }
