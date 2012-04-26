@@ -20,7 +20,6 @@
 
 #include "PropertiesDialogAction.h"
 
-#include <QDebug>
 #include <QPointer>
 #include <DataStructurePropertiesFullWidget.h>
 #include <DataPropertiesWidget.h>
