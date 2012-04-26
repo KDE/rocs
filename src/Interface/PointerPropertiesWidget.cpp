@@ -24,10 +24,15 @@
 #include <DataStructure.h>
 #include <DataStructurePluginManager.h>
 
-PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, MainWindow* parent)
-    : QWidget(parent)
+PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* parent)
+    : KDialog(parent)
 {
-    setupUi(this);
+    ui = new Ui::PointerPropertiesWidget;
+    ui->setupUi(mainWidget());
+    setCaption(i18n("Pointer Properties"));
+    setButtons(Ok); //TODO implement changes for (Ok | Cancel)
+
+    connect(this, SIGNAL(okClicked()), SLOT(close()));
     setPointer(pointer);
 }
 
@@ -42,15 +47,15 @@ void PointerPropertiesWidget::setPointer(PointerPtr e)
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_pointer.get());
 
-    _propertiesTable->setModel(model);
+    ui->_propertiesTable->setModel(model);
 
     connect(_pointer.get(),      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
 
-    connect(_value,     SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setValue(QString)));
-    connect(_name,      SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setName(QString)));
-    connect(_width,     SIGNAL(valueChanged(double)),  this, SLOT(setWidth(double)));
-    connect(_showName,  SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideName(bool)));
-    connect(_showValue, SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideValue(bool)));
+    connect(ui->_value,     SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setValue(QString)));
+    connect(ui->_name,      SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setName(QString)));
+    connect(ui->_width,     SIGNAL(valueChanged(double)),  this, SLOT(setWidth(double)));
+    connect(ui->_showName,  SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideName(bool)));
+    connect(ui->_showValue, SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideValue(bool)));
 
     reflectAttributes();
 }
@@ -62,19 +67,6 @@ void PointerPropertiesWidget::setPosition(QPointF screenPosition)
 }
 
 
-void PointerPropertiesWidget::setActive(bool active)
-{
-    if (active) {
-        setVisible(true);
-        activateWindow();
-        raise();
-        return;
-    } else {
-        setVisible(false);
-    }
-}
-
-
 void PointerPropertiesWidget::setWidth(double v)
 {
     _pointer->setWidth(static_cast<qreal>(v));
@@ -83,19 +75,19 @@ void PointerPropertiesWidget::setWidth(double v)
 
 void PointerPropertiesWidget::reflectAttributes()
 {
-    if (_extraProperties->layout()) {
-        delete _extraProperties->layout();
+    if (ui->_extraProperties->layout()) {
+        delete ui->_extraProperties->layout();
     }
     if (QLayout * lay = DataStructurePluginManager::self()->pointerExtraProperties(_pointer, this)) {
-        _extraProperties->setLayout(lay);
+        ui->_extraProperties->setLayout(lay);
     }
-    _name->setText(_pointer->name());
-    _value->setText(_pointer->value());
-    _color->setColor(_pointer->color());
-    _width->setValue(_pointer->width());
-    _propertyName->setText("");
-    _propertyValue->setText("");
-    _isPropertyGlobal->setCheckState(Qt::Unchecked);
+    ui->_name->setText(_pointer->name());
+    ui->_value->setText(_pointer->value());
+    ui->_color->setColor(_pointer->color());
+    ui->_width->setValue(_pointer->width());
+    ui->_propertyName->setText("");
+    ui->_propertyValue->setText("");
+    ui->_isPropertyGlobal->setCheckState(Qt::Unchecked);
 }
 
 
@@ -119,9 +111,9 @@ void PointerPropertiesWidget::on__style_activated(int index)
 void PointerPropertiesWidget::on__addProperty_clicked()
 {
 
-    GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
-    model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
-                              _pointer.get(), (_isPropertyGlobal->checkState() == Qt::Checked));
+    GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
+    model->addDynamicProperty(ui->_propertyName->text(), QVariant(ui->_propertyValue->text()),
+                              _pointer.get(), (ui->_isPropertyGlobal->checkState() == Qt::Checked));
 }
 
 
@@ -129,9 +121,9 @@ void PointerPropertiesWidget::disconnectPointer()
 {
     disconnect(_pointer.get(),      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
 
-    disconnect(_value,     SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setValue(QString)));
-    disconnect(_name,      SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setName(QString)));
-    disconnect(_width,     SIGNAL(valueChanged(double)),    this, SLOT(setWidth(double)));
-    disconnect(_showName,  SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideName(bool)));
-    disconnect(_showValue, SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideValue(bool)));
+    disconnect(ui->_value,     SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setValue(QString)));
+    disconnect(ui->_name,      SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setName(QString)));
+    disconnect(ui->_width,     SIGNAL(valueChanged(double)),    this, SLOT(setWidth(double)));
+    disconnect(ui->_showName,  SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideName(bool)));
+    disconnect(ui->_showValue, SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideValue(bool)));
 }

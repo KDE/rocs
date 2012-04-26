@@ -27,12 +27,17 @@
 #include <DataStructurePluginManager.h>
 #include <QMap>
 
-DataPropertiesWidget::DataPropertiesWidget(DataPtr data, MainWindow* /*parent*/):
-    QWidget(0)
+DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
+    : KDialog(parent)
 {
-    setupUi(this);
+    ui = new Ui::DataPropertiesWidget;
+    ui->setupUi(mainWidget());
+    setCaption(i18n("Data Element Properties"));
+    setButtons(Ok); //TODO implement changes for (Ok | Cancel)
+
+    connect(this, SIGNAL(okClicked()), SLOT(close()));
+
     setData(data);
-    connect(_btnClose, SIGNAL(clicked()), this, SLOT(hide()));
 }
 
 
@@ -43,12 +48,12 @@ void DataPropertiesWidget::setData(DataPtr data)
     }
     if (_data) {
         _data->disconnect(this);
-        _showName->disconnect(_data.get());
-        _showValue->disconnect(_data.get());
-        _disableColor->disconnect(_data.get());
-        _name->disconnect(_data.get());
-        _value->disconnect(_data.get());
-        _dataType->clear();
+        ui->_showName->disconnect(_data.get());
+        ui->_showValue->disconnect(_data.get());
+        ui->_disableColor->disconnect(_data.get());
+        ui->_name->disconnect(_data.get());
+        ui->_value->disconnect(_data.get());
+        ui->_dataType->clear();
     }
 
     _data = data;
@@ -56,24 +61,24 @@ void DataPropertiesWidget::setData(DataPtr data)
     // data types
     foreach (int dataType, _data->dataStructure()->dataTypeList()) {
         QString dataTypeString = QString::number(dataType);
-        _dataType->addItem(dataTypeString);
+        ui->_dataType->addItem(dataTypeString);
     }
 
-    delete extraItens->layout();
-    extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
+    delete ui->extraItens->layout();
+    ui->extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
 
-    connect(_showName,     SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowName(bool)));
-    connect(_showValue,    SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowValue(bool)));
-    connect(_disableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
-    connect(_name,         SIGNAL(textEdited(QString)),   _data.get(), SLOT(setName(QString)));
-    connect(_value,        SIGNAL(textEdited(QString)),   _data.get(), SLOT(setValue(QString)));
-    connect(_dataType,     SIGNAL(activated(QString)),    this, SLOT(setDataType(QString)));
+    connect(ui->_showName,     SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowName(bool)));
+    connect(ui->_showValue,    SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowValue(bool)));
+    connect(ui->_disableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
+    connect(ui->_name,         SIGNAL(textEdited(QString)),   _data.get(), SLOT(setName(QString)));
+    connect(ui->_value,        SIGNAL(textEdited(QString)),   _data.get(), SLOT(setValue(QString)));
+    connect(ui->_dataType,     SIGNAL(activated(QString)),    this, SLOT(setDataType(QString)));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data.get());
 
-    _propertiesTable->setModel(model);
+    ui->_propertiesTable->setModel(model);
 }
 
 
@@ -91,28 +96,28 @@ void DataPropertiesWidget::setUseColor(bool b)
 
 void DataPropertiesWidget::reflectAttributes()
 {
-    if (!extraItens->layout()) {
+    if (!ui->extraItens->layout()) {
         _oldDataStructurePlugin = DataStructurePluginManager::self()->pluginName();
     }
 
     if (_oldDataStructurePlugin != DataStructurePluginManager::self()->pluginName()) {
-        extraItens->layout()->deleteLater();
+        ui->extraItens->layout()->deleteLater();
     }
 
-    if (!extraItens->layout()) {
-        extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
+    if (!ui->extraItens->layout()) {
+        ui->extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     }
 
-    _color->setColor(_data->color().value<QColor>());
-    _name->setText(_data->name());
-    _value->setText(_data->value().toString());
-    _showName->setChecked(_data->showName());
-    _showValue->setChecked(_data->showValue());
-    _disableColor->setChecked(!_data->useColor());
-    _propertyName->setText("");
-    _propertyValue->setText("");
-    _isPropertyGlobal->setCheckState(Qt::Unchecked);
-    _dataType->setCurrentItem(QString::number(_data->dataType()));
+    ui->_color->setColor(_data->color().value<QColor>());
+    ui->_name->setText(_data->name());
+    ui->_value->setText(_data->value().toString());
+    ui->_showName->setChecked(_data->showName());
+    ui->_showValue->setChecked(_data->showValue());
+    ui->_disableColor->setChecked(!_data->useColor());
+    ui->_propertyName->setText("");
+    ui->_propertyValue->setText("");
+    ui->_isPropertyGlobal->setCheckState(Qt::Unchecked);
+    ui->_dataType->setCurrentItem(QString::number(_data->dataType()));
 }
 
 
@@ -130,8 +135,8 @@ void DataPropertiesWidget::setDataType(QString dataType)
 
 void DataPropertiesWidget::on__addProperty_clicked()
 {
-    GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(_propertiesTable->model());
-    model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
-                              _data.get(), (_isPropertyGlobal->checkState() == Qt::Checked));
+    GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
+    model->addDynamicProperty(ui->_propertyName->text(), QVariant(ui->_propertyValue->text()),
+                              _data.get(), (ui->_isPropertyGlobal->checkState() == Qt::Checked));
 
 }

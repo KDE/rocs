@@ -31,11 +31,11 @@ class DataItem;
 #include <QPointF>
 #include <QPointer>
 /*! \brief Properties Area. */
-class DataPropertiesWidget : public QWidget, public Ui::DataPropertiesWidget
+class DataPropertiesWidget: public KDialog
 {
     Q_OBJECT
 public:
-    DataPropertiesWidget(DataPtr data, MainWindow* parent = 0);
+    DataPropertiesWidget(DataPtr data, QWidget* parent = 0);
     void setPosition(QPointF screenPosition);
     void setData(DataPtr data);
 
@@ -48,6 +48,7 @@ private slots:
 
 private:
     DataPtr _data;
+    Ui::DataPropertiesWidget* ui;
     QString _oldDataStructurePlugin;
 };
 #endif

@@ -21,6 +21,7 @@
 #include "PropertiesDialogAction.h"
 
 #include <QDebug>
+#include <QPointer>
 #include <DataStructurePropertiesFullWidget.h>
 #include <DataPropertiesWidget.h>
 #include <PointerPropertiesWidget.h>
@@ -59,27 +60,28 @@ void PropertiesDialogAction::showDialog()
         if (!_dataStructure) {
             return;
         }
-        DataStructurePropertiesFullWidget* widget = new DataStructurePropertiesFullWidget;
-        widget->setDataStructure(_dataStructure, _screenPosition);
-        widget->show();
+        QPointer<DataStructurePropertiesFullWidget> dialog = new DataStructurePropertiesFullWidget;
+        dialog->setDataStructure(_dataStructure);
+        dialog->setPosition(_screenPosition);
+        dialog->exec();
         break;
     }
     case DATA: {
         if (!_data) {
             return;
         }
-        DataPropertiesWidget* widget = new DataPropertiesWidget(_data);
-        widget->setPosition(_screenPosition);
-        widget->show();
+        QPointer<DataPropertiesWidget> dialog = new DataPropertiesWidget(_data);
+        dialog->setPosition(_screenPosition);
+        dialog->exec();
         break;
     }
     case POINTER: {
         if (!_pointer) {
             return;
         }
-        PointerPropertiesWidget* widget = new PointerPropertiesWidget(_pointer);
-        widget->setPosition(_screenPosition);
-        widget->show();
+        QPointer<PointerPropertiesWidget> dialog = new PointerPropertiesWidget(_pointer);
+        dialog->setPosition(_screenPosition);
+        dialog->exec();
         break;
     }
     default:

@@ -29,7 +29,7 @@
     \brief Properties widget for KDialog.
 */
 class DataStructurePropertiesFullWidget :
-    public QWidget, public Ui::DataStructurePropertiesFullWidget
+    public KDialog
 {
     Q_OBJECT
 
@@ -37,7 +37,8 @@ public:
     explicit DataStructurePropertiesFullWidget(QWidget* parent = 0);
 
 public slots:
-    void setDataStructure(DataStructurePtr dataStructure, QPointF pos);
+    void setDataStructure(DataStructurePtr dataStructure);
+    void setPosition(QPointF screenPosition);
 
 private slots:
     void addDataType();
@@ -53,6 +54,7 @@ private:
 
     QMap<int,QWidget*> _dataTypeWigets;
     DataStructurePtr _dataStructure;
+    Ui::DataStructurePropertiesFullWidget *ui;
 };
 
 #endif

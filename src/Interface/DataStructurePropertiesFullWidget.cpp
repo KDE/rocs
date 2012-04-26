@@ -18,6 +18,7 @@
 
 #include "DataStructurePropertiesFullWidget.h"
 #include <Data.h>
+#include <DataItem.h>
 
 #include <QWidget>
 #include <QString>
@@ -29,18 +30,23 @@
 #include <KColorCombo>
 #include <KPushButton>
 #include <KComboBox>
-#include <DataItem.h>
+#include <KDialog>
+#include <KVBox>
 
 DataStructurePropertiesFullWidget::DataStructurePropertiesFullWidget(QWidget* parent)
-    : QWidget(parent)
+    : KDialog(parent)
 {
-    setupUi(this);
+    ui = new Ui::DataStructurePropertiesFullWidget;
+    ui->setupUi(mainWidget());
+    setCaption(i18n("Data Structure Properties"));
+    setButtons(Ok); //TODO implement changes for (Ok | Cancel)
 
-    connect(buttonAddDataType, SIGNAL(clicked(bool)), this, SLOT(addDataType()));
+    connect(ui->buttonAddDataType, SIGNAL(clicked(bool)), this, SLOT(addDataType()));
+    connect(this, SIGNAL(okClicked()), SLOT(close()));
 }
 
 
-void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataStructure, QPointF pos)
+void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataStructure)
 {
     Q_ASSERT(dataStructure);
     if (_dataStructure) {
@@ -51,27 +57,34 @@ void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataSt
         _dataTypeWigets.clear();
     }
     _dataStructure = dataStructure;
-    dataStructureName->setText(_dataStructure->name());
+    ui->dataStructureName->setText(_dataStructure->name());
 
     setupDataTypes();
-    move(pos.x() + 10,  pos.y() + 10);
+
 
     connect (_dataStructure.get(), SIGNAL(dataTypeRemoved(int)),
             this, SLOT(removeDataType(int)));
-    connect(dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
+    connect(ui->dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
 }
+
+
+void DataStructurePropertiesFullWidget::setPosition(QPointF screenPosition)
+{
+    move(screenPosition.x() + 10,  screenPosition.y() + 10);
+}
+
 
 void DataStructurePropertiesFullWidget::addDataType()
 {
     int dataTypeIdentifier = _dataStructure->registerDataType(i18n("type"));
-    dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
+    ui->dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
 }
 
 
 void DataStructurePropertiesFullWidget::removeDataType(int dataType)
 {
     if (_dataTypeWigets.contains(dataType) && _dataTypeWigets[dataType]) {
-        dataTypes->layout()->removeWidget(_dataTypeWigets[dataType]);
+        ui->dataTypes->layout()->removeWidget(_dataTypeWigets[dataType]);
         _dataTypeWigets[dataType]->deleteLater();
     }
     _dataTypeWigets.remove(dataType);
@@ -81,9 +94,10 @@ void DataStructurePropertiesFullWidget::removeDataType(int dataType)
 void DataStructurePropertiesFullWidget::setupDataTypes()
 {
     foreach (int dataTypeIdentifier, _dataStructure->dataTypeList()) {
-        dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
+        ui->dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
     }
 }
+
 
 QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
 {

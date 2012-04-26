@@ -31,19 +31,15 @@ class Pointer;
 class MainWindow;
 #include <QPointF>
 
-class PointerPropertiesWidget : public QWidget, public Ui::PointerPropertiesWidget
+class PointerPropertiesWidget : public KDialog
 {
     Q_OBJECT
 public:
-    PointerPropertiesWidget(PointerPtr pointer, MainWindow *parent = 0);
+    PointerPropertiesWidget(PointerPtr pointer, QWidget *parent = 0);
     void setPointer(PointerPtr e);
     void setPosition(QPointF screenPosition);
 
 public slots:
-    /** shows the widget; this is a wrapper for \see setActive(true) **/
-    void show() {
-        setActive(true);
-    };
     void on__color_activated(const QColor& c);
     void on__style_activated(int index);
     void reflectAttributes();
@@ -55,7 +51,7 @@ private:
     void setActive(bool active);
 
     PointerPtr _pointer;
-    QPointF _screenPosition;
+    Ui::PointerPropertiesWidget* ui;
 };
 
 #endif // POINTERPROPERTIESWIDGET_H

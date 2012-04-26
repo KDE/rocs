@@ -45,6 +45,7 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 #include <QMenu>
+#include <QPointer>
 
 #include <KDebug>
 
@@ -240,13 +241,13 @@ void  GraphScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton) {
         QGraphicsItem *i = itemAt(mouseEvent->scenePos());
         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)) {
-            DataPropertiesWidget* widget = new DataPropertiesWidget(nItem->data());
-            widget->setPosition(mouseEvent->screenPos());
-            widget->show();
+            QPointer<DataPropertiesWidget> dialog = new DataPropertiesWidget(nItem->data());
+            dialog->setPosition(mouseEvent->screenPos());
+            dialog->exec();
         } else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)) {
-            PointerPropertiesWidget* widget = new PointerPropertiesWidget(eItem->pointer());
-            widget->setPosition(mouseEvent->screenPos());
-            widget->show();
+            QPointer<PointerPropertiesWidget> dialog = new PointerPropertiesWidget(eItem->pointer());
+            dialog->setPosition(mouseEvent->screenPos());
+            dialog->exec();
         }
     }
     QGraphicsScene::mouseDoubleClickEvent(mouseEvent);
