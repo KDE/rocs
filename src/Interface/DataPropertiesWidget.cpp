@@ -33,6 +33,7 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     ui->setupUi(mainWidget());
     setCaption(i18n("Data Element Properties"));
     setButtons(Ok); //TODO implement changes for (Ok | Cancel)
+    setAttribute(Qt::WA_DeleteOnClose);
 
     connect(this, SIGNAL(okClicked()), SLOT(close()));
 

@@ -40,6 +40,7 @@ DataStructurePropertiesFullWidget::DataStructurePropertiesFullWidget(QWidget* pa
     ui->setupUi(mainWidget());
     setCaption(i18n("Data Structure Properties"));
     setButtons(Ok); //TODO implement changes for (Ok | Cancel)
+    setAttribute(Qt::WA_DeleteOnClose);
 
     connect(ui->buttonAddDataType, SIGNAL(clicked(bool)), this, SLOT(addDataType()));
     connect(this, SIGNAL(okClicked()), SLOT(close()));
