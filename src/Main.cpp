@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
                          ROCS_VERSION_STR,
                          ki18n("Graph Theory Tool"),
                          KAboutData::License_GPL,
-                         ki18n("(c) 2009-2011 Rocs Developers"),
+                         ki18n("(c) 2009-2012 Rocs Developers"),
                          ki18n("Rocs - Data Structure Analysis")
                         );
 
