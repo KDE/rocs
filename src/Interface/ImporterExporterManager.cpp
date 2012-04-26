@@ -28,7 +28,7 @@
 #include "Document.h"
 
 #include <QFile>
-
+#include <QPointer>
 
 #include <iostream>
 #include <string>
@@ -46,21 +46,21 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     ext.append(i18n("*|All files"));
 
 
-    KFileDialog exportDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
-    exportDialog.okButton()->setText(i18n("Export"));
-    exportDialog.okButton()->setToolTip(i18n("Export graphs to file"));
-    if (exportDialog.exec() != KDialog::Accepted) {
+    QPointer<KFileDialog> exportDialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
+    exportDialog->okButton()->setText(i18n("Export"));
+    exportDialog->okButton()->setToolTip(i18n("Export graphs to file"));
+    if (exportDialog->exec() != KDialog::Accepted) {
         return false;
     }
 
     kDebug() << "Exporting File..";
-    if (exportDialog.selectedFile().isEmpty()) {
+    if (exportDialog->selectedFile().isEmpty()) {
         return false;
     }
 
-    ext = exportDialog.currentFilter().remove('*');
+    ext = exportDialog->currentFilter().remove('*');
     kDebug() << " Selected to export: " << ext;
-    QString file = exportDialog.selectedFile();
+    QString file = exportDialog->selectedFile();
     if (!file.endsWith(ext)) {
         file.append(ext);
     }
@@ -78,9 +78,9 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     kDebug() << "File Exported!" << file;
     return true;
 }
+
 Document* ImporterExporterManager::importFile()
 {
-
     QString ext;
 
     foreach(FilePluginInterface * f, PluginManager::instance()->filePlugins()) {
@@ -88,14 +88,14 @@ Document* ImporterExporterManager::importFile()
     }
     ext.append(i18n("*|All files"));
 
-    KFileDialog dialog(QString(), ext, qobject_cast< QWidget* >(parent()));
-    dialog.setCaption(i18n("Graph Files"));
-    if (!dialog.exec()) {
+    QPointer<KFileDialog> dialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
+    dialog->setCaption(i18n("Graph Files"));
+    if (!dialog->exec()) {
         return 0;
     }
 
     kDebug() << "Extensions:" << ext;
-    QString fileName = dialog.selectedFile();
+    QString fileName = dialog->selectedFile();
     if (fileName.isEmpty()) return 0;
 
     int index = fileName.lastIndexOf('.');

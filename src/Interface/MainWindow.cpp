@@ -32,6 +32,7 @@
 #include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
 #include <QToolButton>
+#include <QPointer>
 
 // KDE Related Includes
 #include <KActionCollection>
@@ -207,7 +208,7 @@ void MainWindow::downloadNewExamples()
 void MainWindow::uploadScript()
 {
 
-    KNS3::UploadDialog dialog(this);
+    QPointer<KNS3::UploadDialog> dialog = new KNS3::UploadDialog(this);
 
 //First select the opened doc.
     KUrl str = _codeEditor->document()->url();
@@ -228,12 +229,12 @@ void MainWindow::uploadScript()
     tar.open(QIODevice::WriteOnly);
     tar.addLocalFile(str.toLocalFile(), str.fileName());
     tar.close();
-    dialog.setUploadFile(local);
+    dialog->setUploadFile(local);
 
-    dialog.setUploadName(_codeEditor->document()->documentName());
-    dialog.setDescription(i18n("Added your description here."));
+    dialog->setUploadName(_codeEditor->document()->documentName());
+    dialog->setDescription(i18n("Added your description here."));
 
-    dialog.exec();
+    dialog->exec();
 
 //Remove compressed file..
     QDir::temp().remove(local);
