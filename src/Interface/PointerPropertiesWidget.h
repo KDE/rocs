@@ -35,8 +35,9 @@ class PointerPropertiesWidget : public QWidget, public Ui::PointerPropertiesWidg
 {
     Q_OBJECT
 public:
-    PointerPropertiesWidget(MainWindow *parent);
-    void setPointer(PointerPtr e, QPointF pos);
+    PointerPropertiesWidget(PointerPtr pointer, MainWindow *parent = 0);
+    void setPointer(PointerPtr e);
+    void setPosition(QPointF screenPosition);
 
 public slots:
     /** shows the widget; this is a wrapper for \see setActive(true) **/
@@ -54,6 +55,7 @@ private:
     void setActive(bool active);
 
     PointerPtr _pointer;
+    QPointF _screenPosition;
 };
 
 #endif // POINTERPROPERTIESWIDGET_H

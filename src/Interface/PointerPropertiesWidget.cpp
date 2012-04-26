@@ -24,19 +24,20 @@
 #include <DataStructure.h>
 #include <DataStructurePluginManager.h>
 
-PointerPropertiesWidget::PointerPropertiesWidget(MainWindow *parent): QWidget(parent)
+PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, MainWindow* parent)
+    : QWidget(parent)
 {
     setupUi(this);
-    _pointer = PointerPtr();
+    setPointer(pointer);
 }
 
-void PointerPropertiesWidget::setPointer(PointerPtr e, QPointF pos)
+
+void PointerPropertiesWidget::setPointer(PointerPtr e)
 {
     if (_pointer) {
         disconnectPointer();
     }
     _pointer = e;
-    move(pos.x() + 10,  pos.y() + 10);
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_pointer.get());
@@ -54,6 +55,13 @@ void PointerPropertiesWidget::setPointer(PointerPtr e, QPointF pos)
     reflectAttributes();
 }
 
+
+void PointerPropertiesWidget::setPosition(QPointF screenPosition)
+{
+    move(screenPosition.x() + 10,  screenPosition.y() + 10);
+}
+
+
 void PointerPropertiesWidget::setActive(bool active)
 {
     if (active) {
@@ -66,10 +74,12 @@ void PointerPropertiesWidget::setActive(bool active)
     }
 }
 
+
 void PointerPropertiesWidget::setWidth(double v)
 {
     _pointer->setWidth(static_cast<qreal>(v));
 }
+
 
 void PointerPropertiesWidget::reflectAttributes()
 {
@@ -88,10 +98,12 @@ void PointerPropertiesWidget::reflectAttributes()
     _isPropertyGlobal->setCheckState(Qt::Unchecked);
 }
 
+
 void PointerPropertiesWidget::on__color_activated(const QColor& c)
 {
     _pointer->setColor(c.name());
 }
+
 
 void PointerPropertiesWidget::on__style_activated(int index)
 {
@@ -103,6 +115,7 @@ void PointerPropertiesWidget::on__style_activated(int index)
     }
 }
 
+
 void PointerPropertiesWidget::on__addProperty_clicked()
 {
 
@@ -110,6 +123,7 @@ void PointerPropertiesWidget::on__addProperty_clicked()
     model->addDynamicProperty(_propertyName->text(), QVariant(_propertyValue->text()),
                               _pointer.get(), (_isPropertyGlobal->checkState() == Qt::Checked));
 }
+
 
 void PointerPropertiesWidget::disconnectPointer()
 {

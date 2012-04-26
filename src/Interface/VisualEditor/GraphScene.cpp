@@ -31,13 +31,13 @@
 #include "PointerItem.h"
 #include "DataPropertiesWidget.h"
 #include "PointerPropertiesWidget.h"
-#include "DataStructurePropertiesFullWidget.h"
 
 #include "AbstractAction.h"
 #include "AlignAction.h"
 #include "AssignValueAction.h"
 #include "AddDataAction.h"
 #include "DeleteAction.h"
+#include "PropertiesDialogAction.h"
 #include "ZoomAction.h"
 
 #include <QGraphicsItem>
@@ -54,9 +54,6 @@ GraphScene::GraphScene(QObject *parent) :
 {
     _graphDocument = 0;
     _hideEdges = false;
-    _dataPropertiesWidget = new DataPropertiesWidget(qobject_cast<MainWindow*>(parent));
-    _pointerPropertiesWidget = new PointerPropertiesWidget(qobject_cast<MainWindow*>(parent));
-    _dataStructurePropertiesWidget = new DataStructurePropertiesFullWidget(qobject_cast<MainWindow*>(parent));
     _action = 0;
     _minHeight = 0;
     _minWidth = 0;
@@ -243,9 +240,13 @@ void  GraphScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton) {
         QGraphicsItem *i = itemAt(mouseEvent->scenePos());
         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)) {
-            _dataPropertiesWidget->setData(nItem, mouseEvent->screenPos());
+            DataPropertiesWidget* widget = new DataPropertiesWidget(nItem->data());
+            widget->setPosition(mouseEvent->screenPos());
+            widget->show();
         } else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)) {
-            _pointerPropertiesWidget->setPointer(eItem->pointer(), mouseEvent->screenPos());
+            PointerPropertiesWidget* widget = new PointerPropertiesWidget(eItem->pointer());
+            widget->setPosition(mouseEvent->screenPos());
+            widget->show();
         }
     }
     QGraphicsScene::mouseDoubleClickEvent(mouseEvent);
@@ -364,6 +365,11 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
         alignDataStructureCircle->registerData(contextDataStructure->dataList());
         alignDataStructureTree->registerData(contextDataStructure->dataList());
     }
+    if (contextAtItem) {
+        PropertiesDialogAction *dataStructurePropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextDataStructure, this);
+        dataStructurePropertiesAction->setPostion(screenPosition);
+        menuDataStructure->addAction(dataStructurePropertiesAction);
+    }
 
     menuDataStructureAlign->addAction(alignDataStructureBottom);
     menuDataStructureAlign->addAction(alignDataStructureCenter);
@@ -393,28 +399,12 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     menuSelectedAssignValues->addAction(new AssignValueAction(i18n("Random Reals"), this, AssignValueAction::RandomReal, 0));
 
     // puzzling the menu together
-    AddDataAction *addNodeAction = new AddDataAction(this);
-    addNodeAction->setAddPosition(scenePosition);
-    connect(addNodeAction, SIGNAL(triggered(bool)), addNodeAction, SLOT(executePress()));
+    AddDataAction *addDataAction = new AddDataAction(this);
+    addDataAction->setAddPosition(scenePosition);
+    connect(addDataAction, SIGNAL(triggered(bool)), addDataAction, SLOT(executePress()));
     DeleteAction *deleteDataStructureAction = new DeleteAction(i18n("Delete"), this, contextDataStructure, 0);
     DeleteAction *deleteSelectedAction = new DeleteAction(i18n("Delete"), this, 0);
     DeleteAction *deleteItemAction = new DeleteAction(i18n("Delete"), this, contextData, 0);
-
-    QAction *propertyAction = new QAction(i18n("Properties"), this); //FIXME remove hack
-    QAction *dataStructurePropertyAction = new QAction(i18n("Data Structure"), this);
-    if (contextDataStructure) {
-        _dataStructurePropertiesWidget->setDataStructure(contextDataStructure, screenPosition);
-        connect(dataStructurePropertyAction, SIGNAL(triggered(bool)),
-                _dataStructurePropertiesWidget, SLOT(show()));
-    }
-    if (contextData) {
-        _dataPropertiesWidget->setData(dataItem, screenPosition); //>set
-        connect(propertyAction, SIGNAL(triggered(bool)), _dataPropertiesWidget, SLOT(show()));
-    }
-    if (contextPointer) {
-        _pointerPropertiesWidget->setPointer(contextPointer, screenPosition); //>set
-        connect(propertyAction, SIGNAL(triggered(bool)), _pointerPropertiesWidget, SLOT(show()));
-    }
 
     menuSelected->addMenu(menuSelectedAlign);
     menuSelected->addMenu(menuSelectedAssignValues);
@@ -429,14 +419,21 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     }
     if (!contextAtItem) {
         menuDataStructure->setDisabled(true);
-        menu->addAction(addNodeAction);
+        menu->addAction(addDataAction);
         menu->addMenu(menuZoom);
-    } else {
-        menu->addAction(propertyAction);
-        menu->addAction(deleteItemAction);
     }
-    if (contextDataStructure) {
-        menu->addAction(dataStructurePropertyAction);
+    if (contextData) {
+        PropertiesDialogAction *dataPropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextData, this);
+        dataPropertiesAction->setPostion(screenPosition);
+        menu->addAction(dataPropertiesAction);
+    }
+    if (contextPointer) {
+        PropertiesDialogAction *pointerPropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextPointer, this);
+        pointerPropertiesAction->setPostion(screenPosition);
+        menu->addAction(pointerPropertiesAction);
+    }
+    if (contextAtItem) {
+        menu->addAction(deleteItemAction);
     }
 
     return menu;

@@ -35,30 +35,19 @@ class DataPropertiesWidget : public QWidget, public Ui::DataPropertiesWidget
 {
     Q_OBJECT
 public:
-    DataPropertiesWidget(MainWindow* parent = 0);
-    void setData(DataItem *n, QPointF pos);
-
-public slots:
-    /** shows the widget; this is a wrapper for \see setActive(true) **/
-    void show() {
-        setActive(true);
-    };
+    DataPropertiesWidget(DataPtr data, MainWindow* parent = 0);
+    void setPosition(QPointF screenPosition);
+    void setData(DataPtr data);
 
 private slots:
     void on__color_activated(const QColor& c);;
     void reflectAttributes();
     void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
-//     void updateAutomateAttributes(bool b);
     void on__addProperty_clicked();
     void setDataType(QString dataType);
 
 private:
-    void setActive(bool active);
-
-    DataPtr  _data;
-    MainWindow *_mainWindow;
-    DataItem *_item;
+    DataPtr _data;
     QString _oldDataStructurePlugin;
-
 };
 #endif

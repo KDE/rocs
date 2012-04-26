@@ -35,9 +35,6 @@ class QGraphicsSceneWheelEvent;
 class QGraphicsSceneContextMenuEvent;
 class QKeyEvent;
 class QMenu;
-class DataPropertiesWidget;
-class PointerPropertiesWidget;
-class DataStructurePropertiesFullWidget;
 
 class GraphScene : public QGraphicsScene
 {
@@ -96,9 +93,6 @@ private:
     QList<QGraphicsItem*> _hidedEdges;
     QGraphicsRectItem *_whiteboard;
     bool _hideEdges;
-    DataPropertiesWidget *_dataPropertiesWidget;
-    PointerPropertiesWidget *_pointerPropertiesWidget;
-    DataStructurePropertiesFullWidget *_dataStructurePropertiesWidget;
     bool _fade;
     void releaseDocument();
     qreal _minWidth;

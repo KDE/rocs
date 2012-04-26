@@ -104,6 +104,7 @@ set ( rocs_actions_SRCS
     Actions/DeleteHandAction.cpp
     Actions/AssignValueAction.cpp
     Actions/SelectMoveHandAction.cpp
+    Actions/PropertiesDialogAction.cpp
 )
 
 set( rocs_interface_SRCS

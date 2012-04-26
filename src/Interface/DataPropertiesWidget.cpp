@@ -27,19 +27,18 @@
 #include <DataStructurePluginManager.h>
 #include <QMap>
 
-DataPropertiesWidget::DataPropertiesWidget(MainWindow* /*parent*/):
-    QWidget(0),
-    _data(),
-    _item(0)
+DataPropertiesWidget::DataPropertiesWidget(DataPtr data, MainWindow* /*parent*/):
+    QWidget(0)
 {
     setupUi(this);
+    setData(data);
     connect(_btnClose, SIGNAL(clicked()), this, SLOT(hide()));
 }
 
 
-void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
+void DataPropertiesWidget::setData(DataPtr data)
 {
-    if (_data == n->data()) {
+    if (_data == data) {
         return;
     }
     if (_data) {
@@ -49,14 +48,12 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
         _disableColor->disconnect(_data.get());
         _name->disconnect(_data.get());
         _value->disconnect(_data.get());
+        _dataType->clear();
     }
 
-    _data = n->data();
-    _item = n;
-    move(pos.x() + 10,  pos.y() + 10);
+    _data = data;
 
     // data types
-    _dataType->clear();
     foreach (int dataType, _data->dataStructure()->dataTypeList()) {
         QString dataTypeString = QString::number(dataType);
         _dataType->addItem(dataTypeString);
@@ -80,16 +77,9 @@ void DataPropertiesWidget::setData(DataItem *n, QPointF pos)
 }
 
 
-void DataPropertiesWidget::setActive(bool active)
+void DataPropertiesWidget::setPosition(QPointF screenPosition)
 {
-    if (active) {
-        setVisible(true);
-        activateWindow();
-        raise();
-        return;
-    } else {
-        setVisible(false);
-    }
+    move(screenPosition.x() + 10, screenPosition.y() + 10);
 }
 
 
