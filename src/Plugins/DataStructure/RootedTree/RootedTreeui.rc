@@ -1,0 +1,10 @@
+<!DOCTYPE kpartgui>
+<kpartplugin name="RootedTree" library="rocs_RootedTreeStructure" version="%{VERSION}">
+<!--MenuBar>
+ <Menu name="tools">
+    <!Text>&amp;Tools</Text>
+    <separator group="tools_operations" />
+    <Action name="tools_rootedtree" group="tools_operations"/>
+ </Menu>
+</MenuBar-->
+</kpartplugin>
