@@ -141,12 +141,12 @@ void DocumentManager::convertToDataStructure()
 
     Document * newDoc = 0;
     if (_activeDocument) {
+        //Check if need to convert (diferent DS) and if is possible to convert without data lost.
         if (_activeDocument->dataStructureTypeName() != DataStructurePluginManager::self()->pluginName()
                 && DataStructurePluginManager::self()->actualPlugin()->canConvertFrom(_activeDocument)) {
-            //Verificar se é possível converter
             _activeDocument->cleanUpBeforeConvert();
             newDoc = new Document(*_activeDocument);
-            emit deactivateDocument(_activeDocument);
+            removeDocument(_activeDocument);
             addDocument(newDoc);
             qDebug() << " Data Structure converted to " << DataStructurePluginManager::self()->pluginName();
         }
