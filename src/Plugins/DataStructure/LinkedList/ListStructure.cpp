@@ -115,15 +115,18 @@ DataPtr Rocs::ListStructure::addData(QString name, int dataType)
         return addData(n, dataType);;
     }
 
+    addData(n, dataType);
     if (m_begin) {
         boost::shared_ptr<ListNode> tmp = m_begin;
-        while (tmp->next() != 0)      tmp = tmp->next();
-
-        tmp->pointTo(n.get());
+        while (tmp->next()) {
+            tmp = tmp->next();
+        }
+        if (tmp) {
+            tmp->pointTo(n);
+        }
     } else {
         m_begin = n;
     }
-    addData(n, dataType);
     arrangeNodes();
     return n;
 }
