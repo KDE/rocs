@@ -30,7 +30,7 @@ private slots:
     void createList();
     void createRootedTree();
 
-    void convert();
+    void convertGraphToLinkedList();
 };
 
 #endif // TESTPLUGINS_H

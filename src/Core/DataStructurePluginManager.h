@@ -71,6 +71,8 @@ public:
     DataStructurePluginInterface* actualPlugin();
 
     QList < DataStructurePluginInterface*> pluginsList();
+    
+    DataStructurePluginInterface* plugin(const QString & internalName ) const;
 
     /** \return the data Visible item for the data that will be drawed by canvas . */
     QGraphicsItem * dataItem(DataPtr data);

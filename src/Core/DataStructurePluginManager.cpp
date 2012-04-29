@@ -88,6 +88,14 @@ public:
     DataStructurePluginInterface* plugin(const QString &pluginName) {
         return  m_plugins.value(pluginName, 0);
     }
+    
+    DataStructurePluginInterface* pluginByInternalName(const QString &pluginName){
+            foreach(DataStructurePluginInterface* plg, pluginList()){
+                    if (plg->internalName() == pluginName)
+                        return plg;
+            }
+            return 0;
+    }
 
     void setActivePlugin(const QString &pluginName) {
         if (DataStructurePluginInterface * plg = plugin(pluginName)) {
@@ -220,6 +228,11 @@ QString DataStructurePluginManager::pluginName() const
 DataStructurePluginInterface* DataStructurePluginManager::actualPlugin()
 {
     return _d->m_actualPlugin;
+}
+
+DataStructurePluginInterface* DataStructurePluginManager::plugin(const QString& internalName) const
+{
+    return _d->pluginByInternalName(internalName);
 }
 
 
