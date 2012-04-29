@@ -25,6 +25,7 @@
 #include "DataStructure.h"
 #include "DataStructurePluginInterface.h"
 #include "Rocs_Typedefs.h"
+#include <QDebug>
 
 void TestPlugins::inittestcase()
 {
@@ -35,7 +36,15 @@ void TestPlugins::inittestcase()
 
 void TestPlugins::createGraph()
 {
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructurePluginInterface * pl = 0;
+    foreach(DataStructurePluginInterface * g, DataStructurePluginManager::self()->pluginsList())
+        if (g->internalName() == QLatin1String("Graph")){
+            pl = g;
+            break;
+        }
+    QVERIFY2(pl,"Graph plugin not found");
+    
+    DataStructurePluginManager::self()->setDataStructurePlugin(pl->name());
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE(ds->metaObject()->className(), "Rocs::GraphStructure");
@@ -43,7 +52,18 @@ void TestPlugins::createGraph()
 
 void TestPlugins::createList()
 {
-    DataStructurePluginManager::self()->setDataStructurePlugin("LinkedList");
+    DataStructurePluginInterface * pl = 0;
+    foreach(DataStructurePluginInterface * g, DataStructurePluginManager::self()->pluginsList()){
+        qDebug() << g->internalName();
+        if (g->internalName() == QLatin1String("Linked list")){
+            pl = g;
+            break;
+        }
+    }
+    
+    QVERIFY2(pl,"Linked list plugin not found");
+    
+    DataStructurePluginManager::self()->setDataStructurePlugin(pl->name());
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE(ds->metaObject()->className(), "Rocs::ListStructure");
@@ -51,7 +71,18 @@ void TestPlugins::createList()
 
 void TestPlugins::createRootedTree()
 {
-    DataStructurePluginManager::self()->setDataStructurePlugin("RootedTree");
+    DataStructurePluginInterface * pl = 0;
+    foreach(DataStructurePluginInterface * g, DataStructurePluginManager::self()->pluginsList()){
+        qDebug() << g->internalName();
+        if (g->internalName() == QLatin1String("RootedTree")){
+            pl = g;
+            break;
+        }
+    }
+        
+    QVERIFY2(pl,"Rooted Tree list plugin not found");
+    
+    DataStructurePluginManager::self()->setDataStructurePlugin(pl->name());
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE(ds->metaObject()->className(), "RootedTreeStructure");
