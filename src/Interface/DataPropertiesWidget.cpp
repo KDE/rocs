@@ -24,6 +24,7 @@
 #include "DataItem.h"
 #include "DataStructure.h"
 #include "model_GraphProperties.h"
+
 #include <DataStructurePluginManager.h>
 
 DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
@@ -50,7 +51,7 @@ void DataPropertiesWidget::setData(DataPtr data)
         _data->disconnect(this);
         ui->_showName->disconnect(_data.get());
         ui->_showValue->disconnect(_data.get());
-        ui->_disableColor->disconnect(_data.get());
+        ui->_enableColor->disconnect(_data.get());
         ui->_name->disconnect(_data.get());
         ui->_value->disconnect(_data.get());
         ui->_dataType->clear();
@@ -70,10 +71,13 @@ void DataPropertiesWidget::setData(DataPtr data)
 
     connect(ui->_showName,     SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowName(bool)));
     connect(ui->_showValue,    SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowValue(bool)));
-    connect(ui->_disableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
+    connect(ui->_enableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
     connect(ui->_name,         SIGNAL(textEdited(QString)),   _data.get(), SLOT(setName(QString)));
     connect(ui->_value,        SIGNAL(textEdited(QString)),   _data.get(), SLOT(setValue(QString)));
     connect(ui->_dataType,     SIGNAL(activated(QString)),    this, SLOT(setDataType(QString)));
+    connect(ui->_color,		SIGNAL(activated(QColor)), this, SLOT(colorChanged(QColor)));
+    connect(ui->_addProperty,	SIGNAL(clicked(bool)), 	   this, SLOT(addProperty()));
+    
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data.get());
@@ -90,7 +94,7 @@ void DataPropertiesWidget::setPosition(QPointF screenPosition)
 
 void DataPropertiesWidget::setUseColor(bool b)
 {
-    _data->setUseColor(!b);
+    _data->setUseColor(b);
 }
 
 
@@ -113,7 +117,7 @@ void DataPropertiesWidget::reflectAttributes()
     ui->_value->setText(_data->value().toString());
     ui->_showName->setChecked(_data->showName());
     ui->_showValue->setChecked(_data->showValue());
-    ui->_disableColor->setChecked(!_data->useColor());
+    ui->_enableColor->setChecked(_data->useColor());
     ui->_propertyName->setText("");
     ui->_propertyValue->setText("");
     ui->_isPropertyGlobal->setCheckState(Qt::Unchecked);
@@ -121,10 +125,11 @@ void DataPropertiesWidget::reflectAttributes()
 }
 
 
-void DataPropertiesWidget::on__color_activated(const QColor& c)
+void DataPropertiesWidget::colorChanged(const QColor& c)
 {
     _data->setColor(QColor(c));
 }
+
 
 
 void DataPropertiesWidget::setDataType(QString dataType)
@@ -133,7 +138,7 @@ void DataPropertiesWidget::setDataType(QString dataType)
 }
 
 
-void DataPropertiesWidget::on__addProperty_clicked()
+void DataPropertiesWidget::addProperty()
 {
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
     model->addDynamicProperty(ui->_propertyName->text(), QVariant(ui->_propertyValue->text()),

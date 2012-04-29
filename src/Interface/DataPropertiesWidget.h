@@ -40,10 +40,10 @@ public:
     void setData(DataPtr data);
 
 private slots:
-    void on__color_activated(const QColor& c);;
+    void colorChanged(const QColor& c);;
     void reflectAttributes();
     void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
-    void on__addProperty_clicked();
+    void addProperty();
     void setDataType(QString dataType);
 
 private:

@@ -106,9 +106,18 @@
     </widget>
    </item>
    <item row="1" column="4" colspan="2">
-    <widget class="QCheckBox" name="_disableColor">
+    <widget class="QCheckBox" name="_enableColor">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="text">
-      <string>Disable Color</string>
+      <string>Enable Color</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
