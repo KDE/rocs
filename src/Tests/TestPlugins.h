@@ -26,9 +26,9 @@ class TestPlugins : public QObject
 private slots:
     void inittestcase();
 
-    void create();
-
-    void changeAndCreate();
+    void createGraph();
+    void createList();
+    void createRootedTree();
 
     void convert();
 };

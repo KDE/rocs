@@ -33,20 +33,28 @@ void TestPlugins::inittestcase()
     }
 }
 
-void TestPlugins::create()
+void TestPlugins::createGraph()
 {
-    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(1)->name());
+    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE(ds->metaObject()->className(), "Rocs::GraphStructure");
 }
 
-void TestPlugins::changeAndCreate()
+void TestPlugins::createList()
 {
-    DataStructurePluginManager::self()->setDataStructurePlugin(DataStructurePluginManager::self()->pluginsList().at(0)->name());
+    DataStructurePluginManager::self()->setDataStructurePlugin("LinkedList");
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
     QCOMPARE(ds->metaObject()->className(), "Rocs::ListStructure");
+}
+
+void TestPlugins::createRootedTree()
+{
+    DataStructurePluginManager::self()->setDataStructurePlugin("RootedTree");
+    Document doc("TestDocument");
+    DataStructurePtr ds = doc.addDataStructure();
+    QCOMPARE(ds->metaObject()->className(), "RootedTreeStructure");
 }
 
 void TestPlugins::convert()
