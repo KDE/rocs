@@ -584,24 +584,24 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
 
         if (str.startsWith('#')) { //! Ignore it, commented line.
             continue;
-        } else if (str.startsWith("[Document Properties]")) {
+        } else if (str.startsWith(QLatin1String("[Document Properties]"))) {
 
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith("top :"))      setTop(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith("bottom :"))   setBottom(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith("left :"))     setLeft(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith("right :"))    setRight(dataLine.section(' ', 2).toInt());
+                /**/ if (dataLine.startsWith(QLatin1String("top :")))      setTop(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith(QLatin1String("bottom :")))   setBottom(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith(QLatin1String("left :")))     setLeft(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith(QLatin1String("right :")))    setRight(dataLine.section(' ', 2).toInt());
 
                 // TODO: Wagner, How this thing works?
-                else if (dataLine.startsWith("DataStructurePlugin :")) {
+                else if (dataLine.startsWith(QLatin1String("DataStructurePlugin :"))) {
                     DataStructurePluginManager::self()->setDataStructurePlugin(dataLine.section(' ', 2));
                     d->_dataStructureType =  DataStructurePluginManager::self()->actualPlugin();
                 } else if (!dataLine.isEmpty())               break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
             tmpObject = this;
-        } else if (str.startsWith("[DataStructure")) {
+        } else if (str.startsWith(QLatin1String("[DataStructure"))) {
             QString gName = str.section(' ', 1, 1);
             gName.remove(']');
             tmpDataStructure = DataStructurePluginManager::self()->createNewDataStructure(this);
@@ -610,17 +610,17 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
             tmpObject = tmpDataStructure.get();
         }
 
-        else if (str.startsWith("[Data")) {
+        else if (str.startsWith(QLatin1String("[Data"))) {
             tmpDataPtr = tmpDataStructure->addData(QString());
             QString dataLine = in.readLine().simplified();
             qreal posX = 0;
             qreal posY = 0;
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith("x :"))         posX = dataLine.section(' ', 2).toFloat();
-                else if (dataLine.startsWith("y :"))         posY = dataLine.section(' ', 2).toFloat();
-                else if (dataLine.startsWith("value :"))     tmpDataPtr->setValue(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith("color :"))     tmpDataPtr->setColor(dataLine.section(' ', 2));
-                else if (dataLine.startsWith("name :"))      tmpDataPtr->setName(dataLine.section(' ', 2));
+                /**/ if (dataLine.startsWith(QLatin1String("x :")))         posX = dataLine.section(' ', 2).toFloat();
+                else if (dataLine.startsWith(QLatin1String("y :")))         posY = dataLine.section(' ', 2).toFloat();
+                else if (dataLine.startsWith(QLatin1String("value :")))     tmpDataPtr->setValue(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith(QLatin1String("color :")))     tmpDataPtr->setColor(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("name :")))      tmpDataPtr->setName(dataLine.section(' ', 2));
                 else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
@@ -629,7 +629,7 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
             tmpObject = tmpDataPtr.get();
         }
 
-        else if (str.startsWith("[Pointer")) {
+        else if (str.startsWith(QLatin1String("[Pointer"))) {
             QString eName = str.section(' ', 1, 1);
             eName.remove(']');
 
@@ -641,17 +641,17 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
 
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith("width :"))     tmpPointer->setWidth(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith("value :"))     tmpPointer->setValue(dataLine.section(' ', 2));
-                else if (dataLine.startsWith("color :"))     tmpPointer->setColor(dataLine.section(' ', 2));
-                else if (dataLine.startsWith("width :"))     tmpPointer->setColor(dataLine.section(' ', 2).toFloat());
-                else if (dataLine.startsWith("style :"))     tmpPointer->setColor(dataLine.section(' ', 2));
+                /**/ if (dataLine.startsWith(QLatin1String("width :")))     tmpPointer->setWidth(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith(QLatin1String("value :")))     tmpPointer->setValue(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("color :")))     tmpPointer->setColor(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("width :")))     tmpPointer->setColor(dataLine.section(' ', 2).toFloat());
+                else if (dataLine.startsWith(QLatin1String("style :")))     tmpPointer->setColor(dataLine.section(' ', 2));
 
                 else if (!dataLine.isEmpty())                break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
             tmpObject = tmpPointer.get();
-        } else if (str.startsWith("[Group")) {
+        } else if (str.startsWith(QLatin1String("[Group"))) {
             /*QString gName = str.section(" ",1,1);
             gName.remove(']');
             tmpGroup = tmpDataStructure->addGroup(gName); */

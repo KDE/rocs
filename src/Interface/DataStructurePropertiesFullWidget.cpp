@@ -134,7 +134,7 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
                 continue;
             }
             QString attribute = reader.attributes().value("id").toString();
-            if (attribute.startsWith("rocs_")) {
+            if (attribute.startsWith(QLatin1String("rocs_"))) {
                 QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
 
                 QPainter painter;

@@ -142,9 +142,9 @@ void CodeEditor::updateTabText(KTextEditor::Document* text)
         return;
     }
 
-    if (text->documentName().endsWith(".js", Qt::CaseInsensitive)) {
+    if (text->documentName().endsWith(QLatin1String(".js"), Qt::CaseInsensitive)) {
         _tabDocs->setTabIcon(index, KIcon("application-javascript"));
-    } else if (text->documentName().endsWith(".py", Qt::CaseInsensitive)) {
+    } else if (text->documentName().endsWith(QLatin1String(".py"), Qt::CaseInsensitive)) {
         _tabDocs->setTabIcon(index, KIcon("text-x-python"));
     } else {
         _tabDocs->setTabIcon(index, KIcon("text-x-generic"));

@@ -592,7 +592,7 @@ void MainWindow::openGraph()
 
 void MainWindow::loadDocument(const QString& name)
 {
-    if (!name.isEmpty() && !name.endsWith(".graph")) {
+    if (!name.isEmpty() && !name.endsWith(QLatin1String(".graph"))) {
         KMessageBox::sorry(this, i18n("This does not seem to be a graph file."), i18n("Invalid file"));
         return;
     }
