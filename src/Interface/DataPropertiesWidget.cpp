@@ -24,6 +24,7 @@
 #include "DataItem.h"
 #include "DataStructure.h"
 #include "model_GraphProperties.h"
+#include <QPainter>
 
 #include <DataStructurePluginManager.h>
 
@@ -35,8 +36,41 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
 
     connect(ui->buttonBox, SIGNAL(rejected()), SLOT(close()));
-
+    connect(ui->exportNewType, SIGNAL(clicked()), SLOT(addDataType()));
     setData(data);
+    
+        if (!_data->dataStructure()->iconPackage().isEmpty()) {
+        QFile svgFile(_data->dataStructure()->iconPackage());
+        svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
+
+        QXmlStreamReader reader(&svgFile);
+        QSvgRenderer *renderer = DataItem::sharedRenderer(svgFile.fileName());
+        while (!reader.atEnd()) {
+            reader.readNext();
+            if (!reader.attributes().hasAttribute("id")) {
+                continue;
+            }
+            QString attribute = reader.attributes().value("id").toString();
+            if (attribute.startsWith(QLatin1String("rocs_"))) {
+                QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
+
+                QPainter painter;
+                painter.begin(&iconImage);
+                renderer->render(&painter, attribute);
+                painter.end();
+
+                attribute.remove("rocs_");
+                ui->dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
+            }
+        }
+        if (!_data->dataStructure()->dataType(_data->dataType())->icon().isEmpty()) {
+            QString icon = _data->dataStructure()->dataType(_data->dataType())->icon();
+            icon.remove("rocs_");
+            ui->dataTypeIcon->setCurrentItem(icon);
+        }
+        connect(ui->dataTypeIcon, SIGNAL(currentIndexChanged(QString)),
+                _data->dataStructure()->dataType(_data->dataType()).get(), SLOT(setIcon(QString)));
+    }
 }
 
 
@@ -57,12 +91,15 @@ void DataPropertiesWidget::setData(DataPtr data)
 
     _data = data;
 
-    // data types
-    foreach (int dataType, _data->dataStructure()->dataTypeList()) {
-        QString dataTypeString = QString::number(dataType);
+    
+    // Populate Data Types combo
+    foreach (int dataTypeNumber, _data->dataStructure()->dataTypeList()) {
+	DataTypePtr dataType = _data->dataStructure()->dataType(dataTypeNumber);
+        QString dataTypeString = dataType->name();
         ui->_dataType->addItem(dataTypeString);
     }
-
+    
+    
     delete ui->extraItens->layout();
     ui->extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
@@ -116,7 +153,9 @@ void DataPropertiesWidget::reflectAttributes()
     ui->_showName->setChecked(_data->showName());
     ui->_showValue->setChecked(_data->showValue());
     ui->_enableColor->setChecked(_data->useColor());
-    ui->_dataType->setCurrentItem(QString::number(_data->dataType()));
+    
+    DataTypePtr dataType = _data->dataStructure()->dataType(_data->dataType());
+    ui->_dataType->setCurrentItem(dataType->name());
 }
 
 
@@ -129,12 +168,29 @@ void DataPropertiesWidget::colorChanged(const QColor& c)
 
 void DataPropertiesWidget::setDataType(QString dataType)
 {
-    _data->setDataType(dataType.toInt());
+    int dataTypeValue = 0;
+    foreach (dataTypeValue, _data->dataStructure()->dataTypeList()) {
+      DataTypePtr ptr = _data->dataStructure()->dataType(dataTypeValue);
+      if (ptr->name() == dataType){
+	  break;
+      }
+    }
+    
+    _data->setDataType(dataTypeValue);
 }
-
 
 void DataPropertiesWidget::addProperty()
 {
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
     model->addDynamicProperty(i18n("untitled %1").arg(model->rowCount()), 0, _data.get(), false);
+}
+
+void DataPropertiesWidget::addDataType()
+{
+    DataStructurePtr ds = _data->dataStructure();
+    int dataTypeIdentifier = ds->registerDataType(ui->newTypeName->text());
+    DataTypePtr datatype = ds->dataType(dataTypeIdentifier);
+    datatype->setIcon(ui->dataTypeIcon->currentText());
+    ui->_dataType->addItem(datatype->name());
+    ui->_dataType->setCurrentItem(datatype->name());
 }

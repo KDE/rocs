@@ -45,7 +45,8 @@ private slots:
     void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
     void addProperty();
     void setDataType(QString dataType);
-
+    void addDataType();
+    
 private:
     DataPtr _data;
     Ui::DataPropertiesWidget* ui;
