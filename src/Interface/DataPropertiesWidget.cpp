@@ -77,7 +77,7 @@ void DataPropertiesWidget::setData(DataPtr data)
     connect(ui->_dataType,     SIGNAL(activated(QString)),    this, SLOT(setDataType(QString)));
     connect(ui->_color,		SIGNAL(activated(QColor)), this, SLOT(colorChanged(QColor)));
     connect(ui->_addProperty,	SIGNAL(clicked(bool)), 	   this, SLOT(addProperty()));
-    
+
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data.get());

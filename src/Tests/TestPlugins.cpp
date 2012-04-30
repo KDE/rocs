@@ -34,11 +34,22 @@ void TestPlugins::inittestcase()
     }
 }
 
+void TestPlugins::standardPluginsLoaded()
+{
+    QList<QString> pluginNames;
+    foreach (DataStructurePluginInterface* plugin, DataStructurePluginManager::self()->pluginsList()) {
+         pluginNames.append(plugin->internalName());
+    }
+    QVERIFY2(pluginNames.contains("Graph"), "Could not found Graph plugin");
+    QVERIFY2(pluginNames.contains("Linked list"), "Could not found LinkedList plugin");
+    QVERIFY2(pluginNames.contains("RootedTree"), "Could not found Graph plugin");
+}
+
 void TestPlugins::createGraph()
 {
     DataStructurePluginInterface * pl = DataStructurePluginManager::self()->plugin("Graph");
-    QVERIFY2(pl,"Graph plugin not found");
-    
+    QVERIFY2(pl,"Could create data structure of type Graph");
+
     DataStructurePluginManager::self()->setDataStructurePlugin(pl->name());
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
@@ -48,8 +59,8 @@ void TestPlugins::createGraph()
 void TestPlugins::createList()
 {
     DataStructurePluginInterface * pl = DataStructurePluginManager::self()->plugin("Linked list");
-    QVERIFY2(pl,"Graph plugin not found");
-    
+    QVERIFY2(pl,"Could create data structure of type LinkedList");
+
     DataStructurePluginManager::self()->setDataStructurePlugin(pl->name());
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
@@ -59,8 +70,8 @@ void TestPlugins::createList()
 void TestPlugins::createRootedTree()
 {
     DataStructurePluginInterface * pl = DataStructurePluginManager::self()->plugin("RootedTree");
-    QVERIFY2(pl,"Rooted tree plugin not found");
-    
+    QVERIFY2(pl,"Could create data structure of type RootedTree");
+
     DataStructurePluginManager::self()->setDataStructurePlugin(pl->name());
     Document doc("TestDocument");
     DataStructurePtr ds = doc.addDataStructure();
@@ -70,13 +81,13 @@ void TestPlugins::createRootedTree()
 void TestPlugins::convertGraphToLinkedList()
 {
     DataStructurePluginInterface * plGraph = DataStructurePluginManager::self()->plugin("Graph");
-            
+
     QVERIFY2(plGraph,"Graph plugin not found");
-    
+
     DataStructurePluginInterface * plList = DataStructurePluginManager::self()->plugin("Linked list");
-    
+
     QVERIFY2(plList,"Linked list plugin not found");
-    
+
     DataStructurePluginManager::self()->setDataStructurePlugin(plGraph->name());
     Document doc("TestDocument");
 //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
@@ -95,7 +106,6 @@ void TestPlugins::convertGraphToLinkedList()
 
     QCOMPARE(list->dataList().count(), 3);
     QCOMPARE(list->pointers().count(), 1);
-
 }
 
 QTEST_MAIN(TestPlugins)
