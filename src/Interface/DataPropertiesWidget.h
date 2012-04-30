@@ -31,7 +31,7 @@ class DataItem;
 #include <QPointF>
 #include <QPointer>
 /*! \brief Properties Area. */
-class DataPropertiesWidget: public KDialog
+class DataPropertiesWidget: public QDialog
 {
     Q_OBJECT
 public:

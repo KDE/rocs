@@ -28,15 +28,13 @@
 #include <DataStructurePluginManager.h>
 
 DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
     ui = new Ui::DataPropertiesWidget;
-    ui->setupUi(mainWidget());
-    setCaption(i18n("Data Element Properties"));
-    setButtons(Ok); //TODO implement changes for (Ok | Cancel)
+    ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
 
-    connect(this, SIGNAL(okClicked()), SLOT(close()));
+    connect(ui->buttonBox, SIGNAL(rejected()), SLOT(close()));
 
     setData(data);
 }
@@ -118,9 +116,6 @@ void DataPropertiesWidget::reflectAttributes()
     ui->_showName->setChecked(_data->showName());
     ui->_showValue->setChecked(_data->showValue());
     ui->_enableColor->setChecked(_data->useColor());
-    ui->_propertyName->setText("");
-    ui->_propertyValue->setText("");
-    ui->_isPropertyGlobal->setCheckState(Qt::Unchecked);
     ui->_dataType->setCurrentItem(QString::number(_data->dataType()));
 }
 
@@ -141,7 +136,5 @@ void DataPropertiesWidget::setDataType(QString dataType)
 void DataPropertiesWidget::addProperty()
 {
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
-    model->addDynamicProperty(ui->_propertyName->text(), QVariant(ui->_propertyValue->text()),
-                              _data.get(), (ui->_isPropertyGlobal->checkState() == Qt::Checked));
-
+    model->addDynamicProperty(i18n("untitled %1").arg(model->rowCount()), 0, _data.get(), false);
 }
