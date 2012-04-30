@@ -59,13 +59,13 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const
     if (index.row() >= _dataSource->dynamicPropertyNames().size()) {
         return QVariant();
     }
-    if (role != Qt::DisplayRole) {
+    if (role != Qt::DisplayRole && role != Qt::EditRole) {
         return QVariant();
     }
 
     const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
 
-    return (index.column() == 0) ? propertyName
+    return   (index.column() == 0) ? propertyName
            : (index.column() == 1) ?  _dataSource->property(propertyName)
            : (index.column() == 2) ? DynamicPropertiesList::New()->typeInText(_dataSource, propertyName)
            : QVariant();
@@ -135,6 +135,11 @@ Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const
 bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,  int role)
 {
     if (index.isValid() && role == Qt::EditRole) {
+	const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
+	if (index.column() == 0 && value.toString() == QString(propertyName) ){
+	  return false;
+	}  
+	
         switch (index.column()) {
             /* Change name. DinamicPropertiesList take part"                    name                                        new name        object  */
         case 0: DynamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;
