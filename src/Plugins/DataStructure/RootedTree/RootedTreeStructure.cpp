@@ -82,6 +82,7 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
             DataPtr n = queue.dequeue();
             if (!visited.contains(n.get())){
                 visited.insert(n.get());
+            }
                 int childCount = 0;
                 RootedTreeNode* newdataRootedNode = qobject_cast< RootedTreeNode* >(fromOtherToNew.value(n.get()).get());
                 //Set the number of Max number of childrem
@@ -105,9 +106,8 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
                         rooted->setNodeParent(DataPtr(newdataRootedNode));   
                     }
                 }
-                //Set the correct number of childrem
-                newdataRootedNode->setNumberOfChilds(childCount);
-            }
+                //Set the correct number of childrem (2 if there is no child.
+                newdataRootedNode->setNumberOfChilds(childCount == 0 ? 2:childCount);
         }
     }
 }
@@ -195,3 +195,4 @@ void RootedTreeStructure::setShowAllPointers(const bool v)
     emit changed();
   }
 }
+

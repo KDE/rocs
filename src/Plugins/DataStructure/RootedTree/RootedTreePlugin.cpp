@@ -29,6 +29,7 @@
 #include <knuminput.h>
 #include <KMessageBox>
 #include <KComboBox>
+#include <KMessageBox>
 #include <QVBoxLayout>
 #include <QCheckBox>
 
@@ -97,7 +98,39 @@ QLayout*  RootedTreePlugin::dataStructureExtraProperties ( DataStructurePtr grap
 }
 
 
-bool RootedTreePlugin::canConvertFrom(Document*) const
+bool RootedTreePlugin::canConvertFrom(Document* doc) const
 {
-  return true;
+    QStringList errors;
+    QSet<Data*> visited;
+    QSet<Data*> cycles;
+    QQueue<DataPtr> queue;
+    foreach (DataStructurePtr ds, doc->dataStructures()){
+        foreach(DataPtr p, ds->dataList()){
+            if (visited.contains(p.get()))
+                continue;
+            visited.insert(p.get());
+            queue.enqueue(p);
+            while (!queue.isEmpty()){
+                DataPtr c = queue.dequeue();
+                foreach ( DataPtr n, c->adjacent_data()){
+                    if (visited.contains(n.get())){
+                        if (!cycles.contains(n.get())){
+                            errors << i18n("There is cycles in node %1. Some data will be lost").arg(n->showName());
+                            cycles.insert(n.get());
+                        }
+                    }else{
+                        queue.enqueue(n);
+                        visited.insert(n.get());
+                    }
+                }
+            }
+        }
+    }
+    if (!errors.isEmpty()){
+        if (KMessageBox::Continue != KMessageBox::warningContinueCancelList(0,
+                                                                        i18n("Cannot convert document \'%1\'", doc->name()),
+                                                                        errors))
+            return false;
+    }
+    return true;
 }
