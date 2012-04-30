@@ -19,7 +19,7 @@
 #include "TestPlugins.h"
 
 #include <QtTest/QSignalSpy>
-#include <QtTest/QTest>
+#include <qtest_kde.h>
 #include "DataStructurePluginManager.h"
 #include "Document.h"
 #include "DataStructure.h"
@@ -108,4 +108,38 @@ void TestPlugins::convertGraphToLinkedList()
     QCOMPARE(list->pointers().count(), 1);
 }
 
-QTEST_MAIN(TestPlugins)
+void TestPlugins::convertGraphToRootedTree()
+{
+
+    DataStructurePluginInterface * plGraph = DataStructurePluginManager::self()->plugin("Graph");
+    
+    QVERIFY2(plGraph,"Graph plugin not found");
+    
+    DataStructurePluginInterface * plTree = DataStructurePluginManager::self()->plugin("RootedTree");
+    
+    QVERIFY2(plTree,"Rooted plugin not found");
+    
+    DataStructurePluginManager::self()->setDataStructurePlugin(plGraph->name());
+    Document doc("TestDocument");
+    //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
+    //Create a simple graph
+    DataStructurePtr tree = doc.addDataStructure("Graph1");
+    tree->addData("node1");
+    tree->addData("node2");
+    tree->addData("node3");
+    tree->addPointer("node1", "node2");
+    tree->addPointer("node1", "node3");
+    
+    //Change plugin.
+    DataStructurePluginManager::self()->setDataStructurePlugin(plTree->name());
+    
+    DataStructurePtr list = plTree->convertToDataStructure(tree, &doc);
+    
+    QCOMPARE(list->dataList().count(), 3);
+    QCOMPARE(list->pointers().count(), 4);
+//     QVERIFY(list->)
+    
+}
+
+
+QTEST_KDEMAIN_CORE(TestPlugins)

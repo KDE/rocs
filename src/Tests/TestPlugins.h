@@ -33,6 +33,8 @@ private slots:
     void createRootedTree();
 
     void convertGraphToLinkedList();
+    
+    void convertGraphToRootedTree();
 };
 
 #endif // TESTPLUGINS_H

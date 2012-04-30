@@ -77,6 +77,8 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
         newdata->setX(p->x());
         newdata->setY(p->y());
         newdata->setWidth(p->width());
+        if (!rootNode().get())
+            set_root_node(qobject_cast< RootedTreeNode* >(newdata.get()));
         fromOtherToNew.insert(p.get(), newdata);
         while(!queue.isEmpty()){
             DataPtr n = queue.dequeue();
@@ -172,7 +174,9 @@ void RootedTreeStructure::set_root_node(RootedTreeNode* node)
 
 DataPtr RootedTreeStructure::rootNode() const
 {
-    return m_rootNode->getData();
+    if (m_rootNode)
+        return m_rootNode->getData();
+    return DataPtr();
 }
 
 void RootedTreeStructure::setEngine(QScriptEngine* engine)
