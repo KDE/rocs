@@ -77,6 +77,7 @@ private:
 
     qreal _originalWidth;
     qreal _width;
+    DataTypePtr _oldDataType;
 };
 
 #endif

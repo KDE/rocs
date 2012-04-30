@@ -69,7 +69,7 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
             ui->dataTypeIcon->setCurrentItem(icon);
         }
         connect(ui->dataTypeIcon, SIGNAL(currentIndexChanged(QString)),
-                _data->dataStructure()->dataType(_data->dataType()).get(), SLOT(setIcon(QString)));
+                this, SLOT(setIcon(QString)));
     }
 }
 
@@ -156,6 +156,7 @@ void DataPropertiesWidget::reflectAttributes()
     
     DataTypePtr dataType = _data->dataStructure()->dataType(_data->dataType());
     ui->_dataType->setCurrentItem(dataType->name());
+    ui->dataTypeIcon->setCurrentItem(dataType->icon());
 }
 
 
@@ -169,14 +170,16 @@ void DataPropertiesWidget::colorChanged(const QColor& c)
 void DataPropertiesWidget::setDataType(QString dataType)
 {
     int dataTypeValue = 0;
+    DataTypePtr ptr;
     foreach (dataTypeValue, _data->dataStructure()->dataTypeList()) {
-      DataTypePtr ptr = _data->dataStructure()->dataType(dataTypeValue);
+      ptr = _data->dataStructure()->dataType(dataTypeValue);
       if (ptr->name() == dataType){
 	  break;
       }
     }
     
     _data->setDataType(dataTypeValue);
+    ui->dataTypeIcon->setCurrentItem(ptr->icon().remove("rocs_"));
 }
 
 void DataPropertiesWidget::addProperty()
@@ -187,6 +190,10 @@ void DataPropertiesWidget::addProperty()
 
 void DataPropertiesWidget::addDataType()
 {
+    if(ui->newTypeName->text().isEmpty()){
+      return;
+    }
+    
     DataStructurePtr ds = _data->dataStructure();
     int dataTypeIdentifier = ds->registerDataType(ui->newTypeName->text());
     DataTypePtr datatype = ds->dataType(dataTypeIdentifier);
@@ -194,3 +201,10 @@ void DataPropertiesWidget::addDataType()
     ui->_dataType->addItem(datatype->name());
     ui->_dataType->setCurrentItem(datatype->name());
 }
+
+void DataPropertiesWidget::setIcon(const QString& icon)
+{
+  int dataTypeValue = _data->dataType();
+  _data->dataStructure()->dataType(dataTypeValue)->setIcon(icon);
+}
+
