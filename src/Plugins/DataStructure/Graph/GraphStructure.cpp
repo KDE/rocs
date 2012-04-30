@@ -55,6 +55,7 @@ Rocs::GraphStructure::GraphStructure(Document* parent) :
 
 void Rocs::GraphStructure::importStructure(DataStructurePtr other)
 {
+    setGraphType(UNDIRECTED);
     QHash <Data*, DataPtr> dataTodata;
     foreach(DataPtr n, other->dataList()) {
         DataPtr newdata = addData(n->name());
@@ -70,10 +71,12 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
         DataPtr to =  dataTodata.value(e->to().get());
 
         PointerPtr newPointer = addPointer(from, to);
-        newPointer->setColor(e->color());
-        newPointer->setValue(e->value());
+        if (newPointer.get()){
+            newPointer->setColor(e->color());
+            newPointer->setValue(e->value());
+        }
     }
-    setGraphType(UNDIRECTED);
+    
 }
 
 Rocs::GraphStructure::~GraphStructure()

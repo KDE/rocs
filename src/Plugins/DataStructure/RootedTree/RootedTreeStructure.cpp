@@ -63,23 +63,52 @@ RootedTreeStructure::RootedTreeStructure ( Document* parent ) :
 
 void RootedTreeStructure::importStructure(DataStructurePtr other)
 {
-    QHash <Data*, DataPtr > dataTodata;
-    foreach(DataPtr n, other->dataList()){
-        DataPtr newdata = addData(n->name(), 0);
-        newdata->setColor(n->color());
-        newdata->setValue(n->value());
-        newdata->setX(n->x());
-        newdata->setY(n->y());
-        newdata->setWidth(n->width());
-        dataTodata.insert(n.get(), newdata);
-    }
-    foreach(PointerPtr e, other->pointers()){
-        DataPtr from =  dataTodata.value(e->from().get());
-        DataPtr to =  dataTodata.value(e->to().get());
-
-        PointerPtr newPointer = addPointer(from, to, 0);
-        newPointer->setColor(e->color());
-        newPointer->setValue(e->value());
+    QSet <Data*> visited;
+    QQueue<DataPtr> queue;
+    QHash <Data*, DataPtr> fromOtherToNew;
+    
+    foreach(DataPtr p, other->dataList()){
+        if (visited.contains(p.get()))
+            continue;
+        queue.enqueue(p);
+        DataPtr newdata = addData(p->name(), 0);
+        newdata->setColor(p->color());
+        newdata->setValue(p->value());
+        newdata->setX(p->x());
+        newdata->setY(p->y());
+        newdata->setWidth(p->width());
+        fromOtherToNew.insert(p.get(), newdata);
+        while(!queue.isEmpty()){
+            DataPtr n = queue.dequeue();
+            if (!visited.contains(n.get())){
+                visited.insert(n.get());
+                int childCount = 0;
+                RootedTreeNode* newdataRootedNode = qobject_cast< RootedTreeNode* >(fromOtherToNew.value(n.get()).get());
+                //Set the number of Max number of childrem
+                newdataRootedNode->setNumberOfChilds(n->adjacent_data().count());
+                foreach(boost::shared_ptr <Data > c, n->adjacent_data()){
+                    if (!visited.contains(c.get())){
+                        visited.insert(c.get());
+                        queue.enqueue(c);
+                        DataPtr childdata = addData(c->name(), 0);
+                        childdata->setColor(c->color());
+                        childdata->setValue(c->value());
+                        childdata->setX(c->x());
+                        childdata->setY(c->y());
+                        childdata->setWidth(c->width());
+                        fromOtherToNew.insert(c.get(), childdata);
+                        
+                        //set the child at childCount position
+                        newdataRootedNode->setChild(childdata, childCount++);
+                        //Set the parent
+                        RootedTreeNode* rooted = qobject_cast< RootedTreeNode* >(childdata.get());
+                        rooted->setNodeParent(DataPtr(newdataRootedNode));   
+                    }
+                }
+                //Set the correct number of childrem
+                newdataRootedNode->setNumberOfChilds(childCount);
+            }
+        }
     }
 }
 
