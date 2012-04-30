@@ -88,13 +88,14 @@ public:
     DataStructurePluginInterface* plugin(const QString &pluginName) {
         return  m_plugins.value(pluginName, 0);
     }
-    
+
     DataStructurePluginInterface* pluginByInternalName(const QString &pluginName){
-            foreach(DataStructurePluginInterface* plg, pluginList()){
-                    if (plg->internalName() == pluginName)
-                        return plg;
+        foreach(DataStructurePluginInterface* plg, pluginList()) {
+            if (plg->internalName() == pluginName) {
+                return plg;
             }
-            return 0;
+        }
+        return 0;
     }
 
     void setActivePlugin(const QString &pluginName) {
@@ -174,7 +175,7 @@ void DataStructurePluginManager::setDataStructurePlugin()
     if (actionIndex >= pluginsList().count()) {
         return;
     }
-    qDebug() << "Setting the data structure plugin to" << pluginsList().at(actionIndex)->name() ;
+    kDebug() << "Setting the data structure plugin to" << pluginsList().at(actionIndex)->name() ;
     setDataStructurePlugin(pluginsList().at(actionIndex)->name());
 }
 
@@ -187,17 +188,15 @@ void DataStructurePluginManager::setDataStructurePlugin(const QString &pluginNam
         return;
     }
 
-    qDebug() << "Setting " << pluginName << "As the active plugin for data structures.";
+    kDebug() << "Setting " << pluginName << "As the active plugin for data structures.";
 
     _d->setActivePlugin(pluginName);
     emit changingDataStructurePlugin(pluginName);
-
 }
 
 DataStructurePtr DataStructurePluginManager::changeToDataStructure(DataStructurePtr dataStructure, Document * parent)
 {
     return _d->changeToDataStructure(dataStructure, parent);
-
 }
 
 DataStructurePtr DataStructurePluginManager::createNewDataStructure(Document* parent , const QString & pluginName)

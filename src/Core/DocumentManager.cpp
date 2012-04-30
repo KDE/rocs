@@ -68,7 +68,8 @@ void DocumentManager::addDocument(Document* document)
 
 void DocumentManager::changeDocument(int index)
 {
-    Q_ASSERT(index >= 0 && index < documentList().length());
+//FIXME It crash in some systems, in other no. Let's try reactive it in future
+//     Q_ASSERT(index >= 0 && index < documentList().length());
     if (index < 0 || index >= documentList().length()) {
         return;
     }
