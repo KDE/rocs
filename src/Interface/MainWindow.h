@@ -26,6 +26,7 @@
 #include <kmessagebox.h>
 #include <QMutex>
 
+class QAction;
 class KPushButton;
 class KComboBox;
 class GraphLayers;
@@ -231,6 +232,7 @@ private: // Variables.
     KAction *_stepRunScript;
     KAction *_stopScript;
     KActionMenu *_debugMenu;
+    QList<QAction*> _toolsPlugins;
 
     //! Needed to restore the size of the splitter after closing / opening the UI.
     QSplitter *_vSplitter;
@@ -245,6 +247,8 @@ private: // Variables.
     QScriptEngineDebugger *_scriptDbg;
     KAction* _debugScript;
     KAction* _interruptScript;
+    
+    void createToolsPluginsAction();
 };
 
 #endif
