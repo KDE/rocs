@@ -137,7 +137,6 @@ void TestPlugins::convertGraphToRootedTree()
     
     QCOMPARE(list->dataList().count(), 3);
     QCOMPARE(list->pointers().count(), 4);
-//     QVERIFY(list->)
     
 }
 

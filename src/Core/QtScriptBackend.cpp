@@ -44,6 +44,7 @@ static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engi
 
 static QScriptValue interrupt_script(QScriptContext *context, QScriptEngine* /*engine*/)
 {
+    Q_UNUSED(context);
     self->interrupt();
     return QScriptValue();
 }

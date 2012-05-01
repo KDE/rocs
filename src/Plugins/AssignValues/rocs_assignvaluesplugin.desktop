@@ -12,6 +12,7 @@ X-KDE-PluginInfo-Website=http://edu.kde.org/rocs/
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=false
+X-Rocs-SupportedDataStructures=Graph
 Name=Assign Values
 Name[bs]=Dodijeli vrijednosti
 Name[ca]=Assigna valors

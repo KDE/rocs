@@ -454,20 +454,34 @@ void MainWindow::showSettings()
     dialog.exec();
 }
 
-void MainWindow::setupToolsPluginsAction()
-{
-    QList <QAction*> pluginList;
+void MainWindow::createToolsPluginsAction(){
     QAction* action = 0;
-    unplugActionList("tools_plugins");
     QList <  ToolsPluginInterface*> avaliablePlugins =  PluginManager::instance()->toolPlugins();
     int count = 0;
     foreach(ToolsPluginInterface * p, avaliablePlugins) {
         action = new KAction(p->displayName(), this);
         action->setData(count++);
         connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
-        pluginList.append(action);
+        connect(p, SIGNAL(enabled(bool)), action, SLOT(setEnabled(bool)));
+        _toolsPlugins << action;
     }
-    plugActionList("tools_plugins", pluginList);
+}
+
+void MainWindow::setupToolsPluginsAction()
+{
+    if (_toolsPlugins.isEmpty())
+        createToolsPluginsAction();
+    
+    QAction* action = 0;
+    foreach(action, _toolsPlugins) {
+        ToolsPluginInterface *p = PluginManager::instance()->toolPlugins().at(action->data().toInt());
+        action->setEnabled(p->supportedDataStructures().isEmpty() || //no list of supported DS
+                           (DocumentManager::self()->activeDocument() &&  
+                             p->supportedDataStructures().contains(DocumentManager::self()->activeDocument()->dataStructureInternalName()))
+                          );
+    }
+    unplugActionList( "tools_plugins" );
+    plugActionList("tools_plugins", _toolsPlugins);
 }
 
 void MainWindow::setupDSPluginsAction()
@@ -541,6 +555,7 @@ void MainWindow::setActiveDocument()
     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
 
     activeDocument->setModified(false);
+    setupToolsPluginsAction();
 }
 
 void MainWindow::releaseDocument(Document* d)

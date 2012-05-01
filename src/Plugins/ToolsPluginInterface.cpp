@@ -63,6 +63,13 @@ QString ToolsPluginInterface::pluginIcon()
 }
 
 
+QStringList ToolsPluginInterface::supportedDataStructures()
+{
+    KPluginInfo info = pluginInfo();
+    return info.property(QLatin1String("X-Rocs-SupportedDataStructures")).toStringList();
+}
+
+
 KPluginInfo ToolsPluginInterface::pluginInfo()
 {
     return PluginManager::instance()->pluginInfo(this);

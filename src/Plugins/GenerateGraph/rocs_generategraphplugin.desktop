@@ -12,6 +12,7 @@ X-KDE-PluginInfo-Website=http://wwwhni.uni-paderborn.de/alg/mitarbeiter/cola
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=false
+X-Rocs-SupportedDataStructures=Graph
 Name=Generate Graph
 Name[bg]=Създаване на графика
 Name[bs]=Generiši Graf
