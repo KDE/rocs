@@ -42,7 +42,8 @@ DataStructurePtr Rocs::GraphStructure::create(Document *parent)
 
 DataStructurePtr Rocs::GraphStructure::create(DataStructurePtr other, Document *parent)
 {
-    boost::shared_ptr<GraphStructure> ds = boost::static_pointer_cast<GraphStructure>(DataStructure::create<GraphStructure>(parent));
+    boost::shared_ptr<GraphStructure> ds = boost::static_pointer_cast<GraphStructure>(Rocs::GraphStructure::create(parent));
+    
     ds->importStructure(other);
     return ds;
 }

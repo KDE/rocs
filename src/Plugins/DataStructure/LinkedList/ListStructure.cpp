@@ -36,7 +36,7 @@ DataStructurePtr Rocs::ListStructure::create(Document *parent)
 
 DataStructurePtr Rocs::ListStructure::create(DataStructurePtr other, Document *parent)
 {
-    boost::shared_ptr<ListStructure> ds = boost::static_pointer_cast<ListStructure>(DataStructure::create<ListStructure>(parent));
+    boost::shared_ptr<ListStructure> ds = boost::static_pointer_cast<ListStructure>(create(parent));
     ds->importStructure(other);
     return ds;
 }

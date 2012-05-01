@@ -47,7 +47,8 @@ DataStructurePtr RootedTreeStructure::create(Document *parent) {
 }
 
 DataStructurePtr RootedTreeStructure::create(DataStructurePtr other, Document *parent) {
-    boost::shared_ptr<RootedTreeStructure> ds = boost::static_pointer_cast<RootedTreeStructure>(DataStructure::create<RootedTreeStructure>(parent));
+    boost::shared_ptr<RootedTreeStructure> ds = boost::static_pointer_cast<RootedTreeStructure>(RootedTreeStructure::create(parent));
+    
     ds->importStructure(other);
     return ds;
 }
