@@ -61,11 +61,16 @@ void DataStructure::initialize()
     d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
 
     // create type lists
-    d->_dataTypes.insert(0, DataType::create(getDataStructure(), 0));
-    d->_dataTypeLists.insert(0, DataList());
-
-    d->_pointerTypes.insert(0, PointerType::create(getDataStructure(), 0));
-    d->_pointerTypeLists.insert(0, PointerList());
+    foreach (int identifier, d->_document->dataTypeList()) {
+        registerDataType(identifier);
+    }
+    foreach (int identifier, d->_document->pointerTypeList()) {
+        registerPointerType(identifier);
+    }
+    connect(document(), SIGNAL(dataTypeCreated(int)), this, SLOT(registerDataType(int)));
+    connect(document(), SIGNAL(pointerTypeCreated(int)), this, SLOT(registerPointerType(int)));
+    connect(document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(removeDataType(int)));
+    connect(document(), SIGNAL(pointerTypeRemoved(int)), this, SLOT(removePointerType(int)));
 
     emit changed();
 }
@@ -81,7 +86,7 @@ DataStructure::DataStructure(Document *parent) : d(new DataStructurePrivate)
     d->_document = parent;
     connect(this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
     connect(this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
-    // futher initialization is done by separate call to initialize()
+    // further initialization is done by separate call to initialize()
 }
 
 void DataStructure::importStructure(DataStructurePtr other)
@@ -125,7 +130,7 @@ void DataStructure::importStructure(DataStructurePtr other)
 DataStructure::~DataStructure()
 {
     foreach(const PointerList& pointerType, d->_pointerTypeLists) {
-        foreach(PointerPtr pointer,  pointerType) {
+        foreach(PointerPtr pointer, pointerType) {
             pointer->remove();
         }
     }
@@ -136,6 +141,7 @@ DataStructure::~DataStructure()
     }
 }
 
+
 const DataList DataStructure::dataList(int dataType) const
 {
     if (d->_dataTypeLists.contains(dataType)) {
@@ -143,6 +149,7 @@ const DataList DataStructure::dataList(int dataType) const
     }
     return DataList();
 }
+
 
 const PointerList DataStructure::pointers(int pointerType) const
 {
@@ -152,52 +159,38 @@ const PointerList DataStructure::pointers(int pointerType) const
     return PointerList();
 }
 
-int DataStructure::registerDataType(QString name)
+
+void DataStructure::registerDataType(int identifier)
 {
-    QList<int> usedIdentifier = d->_dataTypeLists.keys();
-    qSort(usedIdentifier);
-    int identifier = usedIdentifier.last() + 1;
-
-    DataTypePtr dataType = DataType::create(getDataStructure(), identifier);
-    dataType->setName(name);
-
+    if (!d->_document->dataType(identifier)) {
+        kDebug() << "DataType not registered at DataStructure: not valid";
+        return;
+    }
     d->_dataTypeLists.insert(identifier, DataList());
-    d->_dataTypes.insert(identifier, dataType);
-
-    emit(dataTypeCreated(identifier));
-    return identifier;
+    d->_dataTypeVisibility.insert(identifier, true);
+    d->_dataTypeNameVisibility.insert(identifier, true);
+    d->_dataTypeValueVisibility.insert(identifier, true);
 }
 
-int DataStructure::registerPointerType(QString name)
+
+void DataStructure::registerPointerType(int identifier)
 {
-    QList<int> usedIdentifier = d->_pointerTypeLists.keys();
-    qSort(usedIdentifier);
-    int identifier = usedIdentifier.last() + 1;
-
-    PointerTypePtr pointerType = PointerType::create(getDataStructure(), identifier);
-    pointerType->setName(name);
-
+    if (!d->_document->pointerType(identifier)) {
+        kDebug() << "PointerType not registered at DataStructure: not valid";
+        return;
+    }
     d->_pointerTypeLists.insert(identifier, PointerList());
-    d->_pointerTypes.insert(identifier, pointerType);
-
-    emit(pointerTypeCreated(identifier));
-    return identifier;
+    d->_pointerTypeVisibility.insert(identifier, true);
+    d->_pointerTypeNameVisibility.insert(identifier, true);
+    d->_pointerTypeValueVisibility.insert(identifier, true);
 }
 
-QList< int > DataStructure::dataTypeList() const
-{
-    return d->_dataTypeLists.keys();
-}
 
-QList< int > DataStructure::pointerTypeList() const
-{
-    return d->_pointerTypeLists.keys();
-}
-
-bool DataStructure::removeDataType(int dataType)
+void DataStructure::removeDataType(int dataType)
 {
     if (dataType == 0) {
-        return false;
+        kDebug() << "Could not remove non-existing DataType";
+        return;
     }
 
     foreach(DataPtr data, d->_dataTypeLists[dataType]) {
@@ -205,14 +198,17 @@ bool DataStructure::removeDataType(int dataType)
     }
     d->_dataTypeLists[dataType].clear();
     d->_dataTypeLists.remove(dataType);
-    emit(dataTypeRemoved(dataType));
-    return d->_dataTypes.remove(dataType) > 0;
+    d->_dataTypeVisibility.remove(dataType);
+    d->_dataTypeNameVisibility.remove(dataType);
+    d->_dataTypeValueVisibility.remove(dataType);
 }
 
-bool DataStructure::removePointerType(int pointerType)
+
+void DataStructure::removePointerType(int pointerType)
 {
     if (pointerType == 0 || !d->_pointerTypeLists.contains(pointerType)) {
-        return false;
+        kDebug() << "Could not remove non-existing PointerType";
+        return;
     }
 
     foreach(PointerPtr pointer, d->_pointerTypeLists[pointerType]) {
@@ -220,32 +216,51 @@ bool DataStructure::removePointerType(int pointerType)
     }
     d->_pointerTypeLists[pointerType].clear();
     d->_pointerTypeLists.remove(pointerType);
-    emit(pointerTypeRemoved(pointerType));
-    return d->_pointerTypes.remove(pointerType) > 0;
+    d->_pointerTypeVisibility.remove(pointerType);
+    d->_pointerTypeNameVisibility.remove(pointerType);
+    d->_pointerTypeValueVisibility.remove(pointerType);
 }
 
-DataTypePtr DataStructure::dataType(int dataType) const
+
+bool DataStructure::isDataNameVisible(int dataType) const
 {
-    Q_ASSERT(d->_dataTypes.contains(dataType));
-    if (!d->_dataTypes.contains(dataType)) {
-        return DataTypePtr();
-    }
-    return d->_dataTypes[dataType];
+    return d->_dataTypeNameVisibility.value(dataType);
 }
 
-PointerTypePtr DataStructure::pointerType(int pointerType) const
+
+bool DataStructure::isDataValueVisible(int dataType) const
 {
-    Q_ASSERT(d->_pointerTypes.contains(pointerType));
-    if (!d->_pointerTypes.contains(pointerType)) {
-        return PointerTypePtr();
-    }
-    return d->_pointerTypes[pointerType];
+    return d->_dataTypeValueVisibility.value(dataType);
+}
+
+
+bool DataStructure::isDataVisible(int dataType) const
+{
+    return d->_dataTypeVisibility.value(dataType);
+}
+
+
+bool DataStructure::isPointerNameVisible(int pointerType) const
+{
+    return d->_pointerTypeNameVisibility.value(pointerType);
+}
+
+
+bool DataStructure::isPointerValueVisible(int pointerType) const
+{
+    return d->_pointerTypeValueVisibility.value(pointerType);
+}
+
+
+bool DataStructure::isPointerVisible(int pointerType) const
+{
+    return d->_pointerTypeVisibility.value(pointerType);
 }
 
 
 void DataStructure::updateData(DataPtr data)
 {
-    foreach(int dataType, dataTypeList()) {
+    foreach(int dataType, d->_document->dataTypeList()) {
         d->_dataTypeLists[dataType].removeAll(data);
     }
     d->_dataTypeLists[data->dataType()].append(data);
@@ -254,7 +269,7 @@ void DataStructure::updateData(DataPtr data)
 
 void DataStructure::updatePointer(PointerPtr pointer)
 {
-    foreach(int pointerType, pointerTypeList()) {
+    foreach(int pointerType, d->_document->pointerTypeList()) {
         d->_pointerTypeLists[pointerType].removeAll(pointer);
     }
     d->_pointerTypeLists[pointer->pointerType()].append(pointer);
@@ -383,7 +398,7 @@ DataPtr DataStructure::addData(QString name, QPointF pos, int dataType)
 
 PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 {
-    Q_ASSERT(pointerTypeList().contains(pointerType));
+    Q_ASSERT(d->_document->pointerTypeList().contains(pointerType));
 
     if (d->_readOnly) {                  // If the data structure is in read only mode, no new stuff should be added.
         return PointerPtr();
@@ -554,6 +569,7 @@ void DataStructure::removeDataDynamicProperty(const QString& property)
         QtConcurrent::blockingMap(dataType, DataDynamicPropertyUnSetted(property));
     }
 }
+
 void DataStructure::removePointersDynamicProperty(const QString& property)
 {
     foreach(const PointerList& pointerType, d->_pointerTypeLists) {
@@ -576,17 +592,33 @@ void DataStructure::setPointerColor(QColor color, int pointerType)
 
 void DataStructure::setDataNameVisibility(bool visible, int dataType)
 {
+    d->_dataTypeNameVisibility[dataType] = visible;
     QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataNameVisibilitySetted(visible));
+}
+
+
+void DataStructure::toggleDataNameVisibility(int dataType)
+{
+    setDataNameVisibility(!isDataNameVisible(dataType), dataType);
 }
 
 
 void DataStructure::setDataValueVisibility(bool visible, int dataType)
 {
+    d->_dataTypeValueVisibility[dataType] = visible;
     QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataValueVisibilitySetted(visible));
 }
 
+
+void DataStructure::toggleDataValueVisibility(int dataType)
+{
+    setDataValueVisibility(!isDataValueVisible(dataType), dataType);
+}
+
+
 void DataStructure::setDataVisibility(bool visible, int dataType)
 {
+    d->_dataTypeVisibility[dataType] = visible;
     // set visibility of data elements
     QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataVisibilitySetted(visible));
     foreach(DataPtr data, dataList(dataType)) {
@@ -596,21 +628,51 @@ void DataStructure::setDataVisibility(bool visible, int dataType)
     }
 }
 
+
+void DataStructure::toggleDataVisibility(int dataType)
+{
+    setDataVisibility(!isDataVisible(dataType), dataType);
+}
+
+
 void DataStructure::setPointerNameVisibility(bool visible, int pointerType)
 {
+    d->_pointerTypeNameVisibility[pointerType] = visible;
     QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerNameVisibilitySetted(visible));
+}
+
+
+void DataStructure::togglePointerNameVisibility(int pointerType)
+{
+    setPointerNameVisibility(!isPointerNameVisible(pointerType), pointerType);
 }
 
 
 void DataStructure::setPointerValueVisibility(bool visible, int pointerType)
 {
+    d->_pointerTypeValueVisibility[pointerType] = visible;
     QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerValueVisibilitySetted(visible));
 }
 
+
+void DataStructure::togglePointerValueVisibility(int pointerType)
+{
+    setPointerValueVisibility(!isPointerValueVisible(pointerType), pointerType);
+}
+
+
 void DataStructure::setPointerVisibility(bool visible, int pointerType)
 {
+    d->_pointerTypeVisibility[pointerType] = visible;
     QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerVisibilitySetted(visible));
 }
+
+
+void DataStructure::togglePointerVisibility(int pointerType)
+{
+    setPointerVisibility(!isPointerVisible(pointerType), pointerType);
+}
+
 
 void DataStructure::setEngine(QScriptEngine *engine)
 {

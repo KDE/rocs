@@ -34,28 +34,25 @@ public:
     bool _valueVisibility;
     bool _nameVisibility;
     bool _visibility;
-    DataStructurePtr _dataStructure;
+    Document* _document;
 };
 
 
-PointerTypePtr PointerType::create(DataStructurePtr dataStructure, int identifier)
+PointerTypePtr PointerType::create(Document* document, int identifier)
 {
-    PointerTypePtr pi(new PointerType(dataStructure, identifier));
+    PointerTypePtr pi(new PointerType(document, identifier));
     pi->d->q = pi;
 
     return pi;
 }
 
 
-PointerType::PointerType(DataStructurePtr dataStructure, int identifier):
+PointerType::PointerType(Document* document, int identifier):
     d(new PointerTypePrivate())
 {
     d->_identifier = identifier;
     d->_defaultColor = QColor("gray");
-    d->_nameVisibility = false;
-    d->_valueVisibility = true;
-    d->_visibility = true;
-    d->_dataStructure = dataStructure;
+    d->_document = document;
 }
 
 
@@ -78,45 +75,6 @@ const QString& PointerType::name() const
 int PointerType::identifier() const
 {
     return d->_identifier;
-}
-
-
-void PointerType::setNameVisible(bool visible)
-{
-    d->_nameVisibility = visible;
-    d->_dataStructure->setPointerNameVisibility(visible, d->_identifier);
-}
-
-
-bool PointerType::isNameVisible() const
-{
-    return d->_nameVisibility;
-}
-
-
-void PointerType::setValueVisible(bool visible)
-{
-    d->_valueVisibility = visible;
-    d->_dataStructure->setPointerValueVisibility(visible, d->_identifier);
-}
-
-
-bool PointerType::isValueVisible() const
-{
-    return d->_valueVisibility;
-}
-
-
-void PointerType::setVisible(bool visible)
-{
-    d->_visibility = visible;
-    d->_dataStructure->setPointerVisibility(visible, d->_identifier);
-}
-
-
-bool PointerType::isVisible() const
-{
-    return d->_visibility;
 }
 
 void PointerType::setDefaultColor(QColor color)

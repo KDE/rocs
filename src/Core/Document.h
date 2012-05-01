@@ -103,6 +103,46 @@ public:
 
     DataStructurePluginInterface * dataStructurePlugin() const;
 
+    /** register new type for data elements
+     * \param name of the dataType
+     * \return positive integer >0 if successfully registered, else <=0
+     */
+    int registerDataType(QString name);
+
+    /** register new type for pointers
+     * \param name of the pointerType
+     * \return positive integer >0 if successfully registered, else <=0
+     */
+    int registerPointerType(QString name);
+
+    /** removes this data type and all data elements of this type
+     * \param dataType is positive id>0
+     * \return true if a dataType was removed
+     */
+    bool removeDataType(int dataType);
+
+    /** Removes this pointer type and all data elements of this type.
+     * Aborts and returns "false" if pointer type is "0" or if the pointertype does not exists.
+     * \param pointerType is positive id>0
+     * \return true if a dataType was removed
+     */
+    bool removePointerType(int pointerType);
+
+    PointerTypePtr pointerType(int pointerType) const;
+    DataTypePtr dataType(int dataType) const;
+
+    /**
+     * Getter for all registered data types.
+     * \return list of all data type ids
+     */
+    QList<int> dataTypeList() const;
+
+    /**
+     * Getter for all registered pointer types.
+     * \return list of all pointer type ids
+     */
+    QList<int> pointerTypeList() const;
+
 public slots:
     void setModified(const bool mod = true);
 
@@ -145,6 +185,10 @@ public slots:
 signals:
     void dataStructureCreated(DataStructurePtr g);
     void dataStructureRemoved(int i);
+    void dataTypeCreated(int identifier);
+    void pointerTypeCreated(int identifier);
+    void dataTypeRemoved(int identifier);
+    void pointerTypeRemoved(int identifier);
     void nameChanged(QString name);
     void heightChanged(qreal height);
     void widthChanged(qreal width);

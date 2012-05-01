@@ -83,9 +83,9 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->to            = to;
     d->visible       = true;
     d->dataStructure = parent;
-    d->color         = d->dataStructure->pointerType(pointerType)->defaultColor();
-    d->showName      = d->dataStructure->pointerType(pointerType)->isNameVisible();
-    d->showValue     = d->dataStructure->pointerType(pointerType)->isValueVisible();
+    d->color         = d->dataStructure->document()->pointerType(pointerType)->defaultColor();
+    d->showName      = d->dataStructure->isPointerNameVisible(pointerType);
+    d->showValue     = d->dataStructure->isPointerValueVisible(pointerType);
     d->style         = "solid";
     d->width         = 1;
     d->relativeIndex = d->to->pointers(d->from).size();

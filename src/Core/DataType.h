@@ -31,6 +31,7 @@
 class Data;
 class DataTypePrivate;
 class DataStructure;
+class Document;
 
 /**
 * \class DataType
@@ -44,23 +45,17 @@ class ROCSLIB_EXPORT DataType : public QObject
     Q_OBJECT
 
 public:
-    static DataTypePtr create(DataStructurePtr dataStructure, int identifier);
+    static DataTypePtr create(Document* document, int identifier);
     ~DataType();
 
     const QString& name() const;
     QString icon() const;
     int identifier() const;
-    bool isNameVisible() const;
-    bool isValueVisible() const;
-    bool isVisible() const;
     QColor defaultColor() const;
 
 public slots:
     void setName(QString name);
     void setIcon(QString icon);
-    void setNameVisible(bool visible);
-    void setValueVisible(bool visible);
-    void setVisible(bool visible);
     void setDefaultColor(QColor color);
     void remove();
 
@@ -73,7 +68,7 @@ protected:
      *\param parent is the parent DataStructure
      *\param identifier is the unique identifier for this type
      */
-    DataType(DataStructurePtr dataStructure, int identifier);
+    DataType(Document* document, int identifier);
 
 private:
     boost::shared_ptr<DataTypePrivate> const d;

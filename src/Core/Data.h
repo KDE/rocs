@@ -239,7 +239,7 @@ inline qreal Data::width() const
 
 inline QString Data::icon() const
 {
-    return d->_dataStructure->dataType(d->_dataType)->icon();
+    return d->_dataStructure->document()->dataType(d->_dataType)->icon();
 }
 
 inline PointerList& Data::in_pointers()   const

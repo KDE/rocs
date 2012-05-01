@@ -76,21 +76,11 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
             newPointer->setValue(e->value());
         }
     }
-    
+
 }
 
 Rocs::GraphStructure::~GraphStructure()
 {
-}
-
-QScriptValue Rocs::GraphStructure::addOverlay(const QString& name)
-{
-    return engine()->toScriptValue<int>(registerPointerType(name));
-}
-
-QScriptValue Rocs::GraphStructure::removeOverlay(int overlay)
-{
-    return engine()->toScriptValue<bool>(removePointerType(overlay));
 }
 
 QScriptValue Rocs::GraphStructure::overlayEdges(int overlay)
@@ -137,7 +127,7 @@ QScriptValue Rocs::GraphStructure::addOverlayEdge(Data* fromRaw, Data* toRaw, in
     if (fromRaw == 0 || toRaw == 0) {
         return QScriptValue();
     }
-    if (!pointerTypeList().contains(overlay)) {
+    if (!document()->pointerTypeList().contains(overlay)) {
         return QScriptValue();
     }
 

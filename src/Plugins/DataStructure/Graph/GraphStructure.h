@@ -105,20 +105,6 @@ public slots:
     QScriptValue overlayEdges(int overlay);
 
     /**
-     * Creates new overlay.
-     * \param name name of the new overlay
-     * \return QScriptValue integer that identifies the overlay
-     */
-    QScriptValue addOverlay(const QString& name);
-
-    /**
-     * Removes specified overlay and all edges that it contains.
-     * \param overlay is identifier of this overlay
-     * \return QScriptValue boolean if operation was successful
-     */
-    QScriptValue removeOverlay(int overlay);
-
-    /**
      * Creates a new node with specified \param name.
      * \param name of the new node
      * \return script value for the new node

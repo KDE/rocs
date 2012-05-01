@@ -41,14 +41,14 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataT
     , _width(0.3)
     , _begin(true)
     , _end(true)
-    , _showName(parent->dataType(dataType)->isNameVisible())
-    , _showValue(parent->dataType(dataType)->isValueVisible())
-    , _visible(parent->dataType(dataType)->isVisible())
+    , _showName(parent->isDataNameVisible(dataType))
+    , _showValue(parent->isDataValueVisible(dataType))
+    , _visible(parent->isDataVisible(dataType))
     , _useColor(false)
     , _dataStructure(parent)
     , _uniqueIdentifier(uniqueIdentifer)
     , _dataType(dataType)
-    , _color(parent->dataType(dataType)->defaultColor())
+    , _color(parent->document()->dataType(dataType)->defaultColor())
     , _value(0)
 {
     _in_pointers = PointerList();

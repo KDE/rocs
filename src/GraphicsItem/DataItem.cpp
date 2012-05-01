@@ -68,7 +68,7 @@ DataItem::DataItem(DataPtr n)
     , _originalWidth(n->width())
 {
     connect(n.get(), SIGNAL(removed()), this, SLOT(deleteLater()));
-    connect(n->dataStructure()->dataType(n->dataType()).get(), SIGNAL(iconChanged(QString)),
+    connect(n->dataStructure()->document()->dataType(n->dataType()).get(), SIGNAL(iconChanged(QString)),
             this, SLOT(updateIcon()));
     connect(n.get(), SIGNAL(nameChanged(QString)), this, SLOT(updateName()));
     connect(n.get(), SIGNAL(valueChanged(QVariant)), this, SLOT(updateValue()));
@@ -142,7 +142,7 @@ void DataItem::updateRenderer()
 
 void DataItem::updateIcon()
 {
-    QString icon = _data->dataStructure()->dataType(_data->dataType())->icon();
+    QString icon = _data->dataStructure()->document()->dataType(_data->dataType())->icon();
     if (elementId().isEmpty() || elementId() != icon) {
         setElementId(icon);
         setTransformOriginPoint(boundingRect().width() / 2, boundingRect().width() / 2);

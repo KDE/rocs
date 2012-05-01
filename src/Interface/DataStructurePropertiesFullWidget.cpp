@@ -63,7 +63,7 @@ void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataSt
     setupDataTypes();
 
 
-    connect (_dataStructure.get(), SIGNAL(dataTypeRemoved(int)),
+    connect (_dataStructure->document(), SIGNAL(dataTypeRemoved(int)),
             this, SLOT(removeDataType(int)));
     connect(ui->dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
 }
@@ -77,7 +77,7 @@ void DataStructurePropertiesFullWidget::setPosition(QPointF screenPosition)
 
 void DataStructurePropertiesFullWidget::addDataType()
 {
-    int dataTypeIdentifier = _dataStructure->registerDataType(i18n("type"));
+    int dataTypeIdentifier = _dataStructure->document()->registerDataType(i18n("type"));
     ui->dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
 }
 
@@ -94,7 +94,7 @@ void DataStructurePropertiesFullWidget::removeDataType(int dataType)
 
 void DataStructurePropertiesFullWidget::setupDataTypes()
 {
-    foreach (int dataTypeIdentifier, _dataStructure->dataTypeList()) {
+    foreach (int dataTypeIdentifier, _dataStructure->document()->dataTypeList()) {
         ui->dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
     }
 }
@@ -109,17 +109,17 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
     dataTypeIdentifier->setToolTip(i18n("Unique identifier for data type."));
     dataTypeWidget->layout()->addWidget(dataTypeIdentifier);
 
-    KLineEdit* dataTypeName = new KLineEdit(_dataStructure->dataType(dataType)->name(), dataTypeWidget);
+    KLineEdit* dataTypeName = new KLineEdit(_dataStructure->document()->dataType(dataType)->name(), dataTypeWidget);
     dataTypeWidget->layout()->addWidget(dataTypeName);
     connect(dataTypeName, SIGNAL(textEdited(QString)),
-            _dataStructure->dataType(dataType).get(), SLOT(setName(QString)));
+            _dataStructure->document()->dataType(dataType).get(), SLOT(setName(QString)));
 
     KColorCombo* dataTypeColor = new KColorCombo(dataTypeWidget);
     dataTypeColor->setFixedWidth(50);
-    dataTypeColor->setColor(_dataStructure->dataType(dataType)->defaultColor());
+    dataTypeColor->setColor(_dataStructure->document()->dataType(dataType)->defaultColor());
     dataTypeWidget->layout()->addWidget(dataTypeColor);
     connect(dataTypeColor, SIGNAL(activated(QColor)),
-            _dataStructure->dataType(dataType).get(), SLOT(setDefaultColor(QColor)));
+            _dataStructure->document()->dataType(dataType).get(), SLOT(setDefaultColor(QColor)));
 
     KComboBox* dataTypeIcon = new KComboBox(dataTypeWidget);
     if (!_dataStructure->iconPackage().isEmpty()) {
@@ -146,21 +146,21 @@ QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
                 dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
             }
         }
-        if (!_dataStructure->dataType(dataType)->icon().isEmpty()) {
-            QString icon = _dataStructure->dataType(dataType)->icon();
+        if (!_dataStructure->document()->dataType(dataType)->icon().isEmpty()) {
+            QString icon = _dataStructure->document()->dataType(dataType)->icon();
             icon.remove("rocs_");
             dataTypeIcon->setCurrentItem(icon);
         }
         dataTypeWidget->layout()->addWidget(dataTypeIcon);
         connect(dataTypeIcon, SIGNAL(currentIndexChanged(QString)),
-                _dataStructure->dataType(dataType).get(), SLOT(setIcon(QString)));
+                _dataStructure->document()->dataType(dataType).get(), SLOT(setIcon(QString)));
     }
 
     // default data type can not be deleted
     if (dataType!=0) {
         KPushButton* dataTypeDelete = new KPushButton("x", dataTypeWidget);
         dataTypeWidget->layout()->addWidget(dataTypeDelete);
-        connect(dataTypeDelete, SIGNAL(clicked(bool)), _dataStructure->dataType(dataType).get(), SLOT(remove()));
+        connect(dataTypeDelete, SIGNAL(clicked(bool)), _dataStructure->document()->dataType(dataType).get(), SLOT(remove()));
     }
 
     _dataTypeWigets.insert(dataType, dataTypeWidget);

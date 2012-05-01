@@ -70,11 +70,11 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr da
     connect(this, SIGNAL(removeGraph(DataStructurePtr)), dataStructure.get(), SLOT(remove()));
 
     // react on new data types and pointer types
-    connect(dataStructure.get(), SIGNAL(dataTypeCreated(int)), this, SLOT(registerDataType(int)));
-    connect(dataStructure.get(), SIGNAL(dataTypeRemoved(int)), this, SLOT(unregisterDataType(int)));
-    connect(dataStructure.get(), SIGNAL(pointerTypeCreated(int)), this, SLOT(registerPointerType(int)));
-    connect(dataStructure.get(), SIGNAL(pointerTypeRemoved(int)), this, SLOT(unregisterPointerType(int)));
-    connect(dataStructure.get(), SIGNAL(nameChanged(QString)), _dataStructureName, SLOT(setText(QString)));
+    connect(dataStructure->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(registerDataType(int)));
+    connect(dataStructure->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(unregisterDataType(int)));
+    connect(dataStructure->document(), SIGNAL(pointerTypeCreated(int)), this, SLOT(registerPointerType(int)));
+    connect(dataStructure->document(), SIGNAL(pointerTypeRemoved(int)), this, SLOT(unregisterPointerType(int)));
+    connect(dataStructure->document(), SIGNAL(nameChanged(QString)), _dataStructureName, SLOT(setText(QString)));
 
     connect(_dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
 }
@@ -146,7 +146,7 @@ void DataStructurePropertiesWidget::on__dataStructureName_textChanged(const QStr
 
 bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
 {
-    if (!dataStructure->dataTypeList().contains(typeIdentifier)) {
+    if (!dataStructure->document()->dataTypeList().contains(typeIdentifier)) {
         return false;
     }
 
@@ -184,12 +184,20 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
 
     _typeProperties->addWidget(dataPropertyWidget);
 
-    connect(dataTypeShowName, SIGNAL(toggled(bool)),
-            dataStructure->dataType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
-    connect(dataTypeShowValue, SIGNAL(toggled(bool)),
-            dataStructure->dataType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
-    connect(dataTypeVisible, SIGNAL(toggled(bool)),
-            dataStructure->dataType(typeIdentifier).get(), SLOT(setVisible(bool)));
+    QSignalMapper* signalMapper = new QSignalMapper(this);
+    signalMapper->setMapping(dataTypeShowName, typeIdentifier);
+    connect(dataTypeShowName, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
+    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataNameVisibility(int)));
+
+    signalMapper = new QSignalMapper(this);
+    signalMapper->setMapping(dataTypeShowValue, typeIdentifier);
+    connect(dataTypeShowValue, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
+    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataValueVisibility(int)));
+
+    signalMapper = new QSignalMapper(this);
+    signalMapper->setMapping(dataTypeVisible, typeIdentifier);
+    connect(dataTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
+    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataVisibility(int)));
 
     _dataTypeWidgets.insert(typeIdentifier, dataPropertyWidget);
 
@@ -199,7 +207,7 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
 
 bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
 {
-    if (!dataStructure->pointerTypeList().contains(typeIdentifier)) {
+    if (!dataStructure->document()->pointerTypeList().contains(typeIdentifier)) {
         return false;
     }
 
@@ -208,9 +216,6 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     QGridLayout* pointerPropertyLayout = new QGridLayout(pointerPropertyWidget);
 
     QLabel* pointerElementName = new QLabel(i18n("Pointer"), pointerPropertyWidget);
-    _pointerTypeColor = new KColorCombo(pointerPropertyWidget);
-    _pointerTypeColor->setColor(dataStructure->pointerType(typeIdentifier)->defaultColor());
-    _pointerTypeColor->setToolTip(i18n("Set default color for pointers"));
 
     KPushButton* pointerTypeShowName = new KPushButton(pointerPropertyWidget);
     pointerTypeShowName->setIcon(KIcon("rocstexticon"));
@@ -235,22 +240,27 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
 
     pointerPropertyWidget->setLayout(pointerPropertyLayout);
     pointerPropertyLayout->addWidget(pointerElementName, 1, 1);
-    pointerPropertyLayout->addWidget(_pointerTypeColor, 1, 2);
-    pointerPropertyLayout->addWidget(pointerTypeShowName, 1, 3);
-    pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 4);
-    pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 5);
+    pointerPropertyLayout->addWidget(pointerTypeShowName, 1, 2);
+    pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 3);
+    pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 4);
 
     //TODO add to specific widget for pointers
     _typeProperties->addWidget(pointerPropertyWidget);
 
-    connect(pointerTypeShowName,  SIGNAL(toggled(bool)),
-            dataStructure->pointerType(typeIdentifier).get(), SLOT(setNameVisible(bool)));
-    connect(pointerTypeShowValue, SIGNAL(toggled(bool)),
-            dataStructure->pointerType(typeIdentifier).get(), SLOT(setValueVisible(bool)));
-    connect(_pointerTypeColor, SIGNAL(activated(QColor)),
-            dataStructure->pointerType(typeIdentifier).get(), SLOT(setDefaultColor(QColor)));
-    connect(pointerTypeVisible, SIGNAL(toggled(bool)),
-            dataStructure->pointerType(typeIdentifier).get(), SLOT(setVisible(bool)));
+    QSignalMapper* signalMapper = new QSignalMapper(this);
+    signalMapper->setMapping(pointerTypeShowName, typeIdentifier);
+    connect(pointerTypeShowName, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
+    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(togglePointerNameVisibility(int)));
+
+    signalMapper = new QSignalMapper(this);
+    signalMapper->setMapping(pointerTypeShowValue, typeIdentifier);
+    connect(pointerTypeShowValue, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
+    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(togglePointerValueVisibility(int)));
+
+    signalMapper = new QSignalMapper(this);
+    signalMapper->setMapping(pointerTypeVisible, typeIdentifier);
+    connect(pointerTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
+    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(togglePointerVisibility(int)));
 
     _pointerTypeWidgets.insert(typeIdentifier, pointerPropertyWidget);
 

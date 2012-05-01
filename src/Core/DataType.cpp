@@ -35,29 +35,26 @@ public:
     bool _valueVisibility;
     bool _nameVisibility;
     bool _visibility;
-    DataStructurePtr _dataStructure;
+    Document* _document;
 };
 
 
-DataTypePtr DataType::create(DataStructurePtr dataStructure, int identifier)
+DataTypePtr DataType::create(Document* document, int identifier)
 {
-    DataTypePtr pi(new DataType(dataStructure, identifier));
+    DataTypePtr pi(new DataType(document, identifier));
     pi->d->q = pi;
 
     return pi;
 }
 
 
-DataType::DataType(DataStructurePtr dataStructure, int identifier):
+DataType::DataType(Document* document, int identifier):
     d(new DataTypePrivate())
 {
     d->_identifier = identifier;
     d->_defaultColor = QColor("blue");
     d->_icon = "rocs_default";
-    d->_nameVisibility = true;
-    d->_valueVisibility = true;
-    d->_visibility = true;
-    d->_dataStructure = dataStructure;
+    d->_document = document;
 }
 
 
@@ -94,44 +91,6 @@ QString DataType::icon() const
 }
 
 
-void DataType::setNameVisible(bool visible)
-{
-    d->_nameVisibility = visible;
-    d->_dataStructure->setDataNameVisibility(visible, d->_identifier);
-}
-
-
-bool DataType::isNameVisible() const
-{
-    return d->_nameVisibility;
-}
-
-
-void DataType::setValueVisible(bool visible)
-{
-    d->_valueVisibility = visible;
-    d->_dataStructure->setDataValueVisibility(visible, d->_identifier);
-}
-
-
-bool DataType::isValueVisible() const
-{
-    return d->_valueVisibility;
-}
-
-
-void DataType::setVisible(bool visible)
-{
-    d->_visibility = visible;
-    d->_dataStructure->setDataVisibility(visible, d->_identifier);
-}
-
-
-bool DataType::isVisible() const
-{
-    return d->_visibility;
-}
-
 void DataType::setDefaultColor(QColor color)
 {
     d->_defaultColor = color;
@@ -146,5 +105,5 @@ QColor DataType::defaultColor() const
 
 void DataType::remove()
 {
-    d->_dataStructure->removeDataType(identifier());
+    d->_document->removeDataType(identifier());
 }

@@ -53,9 +53,13 @@ public:
     boost::weak_ptr<DataStructure> q;
 
     QMap<int, DataList> _dataTypeLists;         // list if data elements associated to specific type
+    QMap<int, bool> _dataTypeNameVisibility;
+    QMap<int, bool> _dataTypeValueVisibility;
+    QMap<int, bool> _dataTypeVisibility;
     QMap<int, PointerList> _pointerTypeLists;   // list of pointers associated to specific type
-    QMap<int, DataTypePtr> _dataTypes;           // list of data types
-    QMap<int, PointerTypePtr> _pointerTypes;        // list of pointer types
+    QMap<int, bool> _pointerTypeNameVisibility;
+    QMap<int, bool> _pointerTypeValueVisibility;
+    QMap<int, bool> _pointerTypeVisibility;
 
     QString _iconPackage;   // available icons for data types
 
@@ -109,34 +113,6 @@ public:
     virtual void setEngine(QScriptEngine *engine);
     QScriptEngine *engine() const;
 
-    /** register new type for data elements
-     * \param name of the dataType
-     * \return positive integer >0 if successfully registered, else <=0
-     */
-    int registerDataType(QString name);
-
-    /** register new type for pointers
-     * \param name of the pointerType
-     * \return positive integer >0 if successfully registered, else <=0
-     */
-    int registerPointerType(QString name);
-
-    /** removes this data type and all data elements of this type
-     * \param dataType is positive id>0
-     * \return true if a dataType was removed
-     */
-    bool removeDataType(int dataType);
-
-    /** Removes this pointer type and all data elements of this type.
-     * Aborts and returns "false" if pointer type is "0" or if the pointertype does not exists.
-     * \param pointerType is positive id>0
-     * \return true if a dataType was removed
-     */
-    bool removePointerType(int pointerType);
-
-    PointerTypePtr pointerType(int pointerType) const;
-    DataTypePtr dataType(int dataType) const;
-
     /**
      * Updates registration of data in internal reference list.
      * \param data that is set with new type
@@ -150,21 +126,40 @@ public:
     void updatePointer(PointerPtr pointer);
 
     /**
-     * Getter for all registered data types.
-     * \return list of all data type ids
+     * Returns true if data element names of specified data type are visible, otherwise false.
+     * \param dataType for that visibility information are returned
      */
-    QList<int> dataTypeList() const;
+    bool isDataNameVisible(int dataType) const;
 
     /**
-     * Getter for all registered pointer types.
-     * \return list of all pointer type ids
+     * Returns true if data element values of specified data type are visible, otherwise false.
+     * \param dataType for that visibility information are returned
      */
-    QList<int> pointerTypeList() const;
+    bool isDataValueVisible(int dataType) const;
 
-    bool dataNameVisibility() const;
-    bool dataValueVisibility() const;
+    /**
+     * Returns true if data elements of specified data type are visible, otherwise false.
+     * \param dataType for that visibility information are returned
+     */
+    bool isDataVisible(int dataType) const;
 
-    const QColor& dataDefaultColor() const;
+    /**
+     * Returns true if pointer names of specified pointer type are visible, otherwise false.
+     * \param pointerType for that visibility information are returned
+     */
+    bool isPointerNameVisible(int pointerType) const;
+
+    /**
+     * Returns true if pointer values of specified pointer type are visible, otherwise false.
+     * \param pointerType for that visibility information are returned
+     */
+    bool isPointerValueVisible(int pointerType) const;
+
+    /**
+     * Returns true if pointers of specified pointer type are visible, otherwise false.
+     * \param pointerType for that visibility information are returned
+     */
+    bool isPointerVisible(int pointerType) const;
 
     const QString& iconPackage() const;
 
@@ -263,6 +258,8 @@ public slots:
      */
     void setDataNameVisibility(bool visible, int dataType);
 
+    void toggleDataNameVisibility(int dataType);
+
     /**
      * Set all values of all data of given \param dataType to the given value of \param visible.
      * This is a fast implementation that starts several threads for updating all data types in parallel.
@@ -272,6 +269,8 @@ public slots:
      */
     void setDataValueVisibility(bool visible, int dataType);
 
+    void toggleDataValueVisibility(int dataType);
+
     /**
      * Set all data items for all data elements of given \param dataType to the given value of \param visible.
      * This is a fast implementation that starts several threads for updating all data elements in parallel.
@@ -280,6 +279,8 @@ public slots:
      * \param dataType is the identifier of the data type for that this function has affect.
      */
     void setDataVisibility(bool visible, int dataType);
+
+    void toggleDataVisibility(int dataType);
 
     /**
      * Set all colors of all data of given \param dataType to the given value of \param color.
@@ -299,6 +300,8 @@ public slots:
      */
     void setPointerNameVisibility(bool visible, int pointerType);
 
+    void togglePointerNameVisibility(int pointerType);
+
     /**
      * Set all values of all pointers of given \param pointerType to the given value of \param visible.
      * This is a fast implementation that starts several threads for updating all pointers in parallel.
@@ -307,6 +310,8 @@ public slots:
      * \param pointerType is the identifier of the pointer type for that this function has affect.
      */
     void setPointerValueVisibility(bool visible, int pointerType);
+
+    void togglePointerValueVisibility(int pointerType);
 
     /**
      * Set all pointer items for pointers of given \param pointerType to the given value of \param visible.
@@ -317,6 +322,7 @@ public slots:
      */
     void setPointerVisibility(bool visible, int pointerType);
 
+    void togglePointerVisibility(int pointerType);
 
 // #ifdef USING_QTSCRIPT
 //     QScriptValue list_data();
@@ -328,13 +334,38 @@ public slots:
 //     QScriptValue end_data();
 // #endif
 
+private slots:
+    /**
+     * Only for internal use of the data structure: Slot that is connected signal
+     * Document::dataTypeCreated(...). this method registers data type for this data structure.
+     * \param identifier is the data type identifier of data type that will be registered
+     */
+    void registerDataType(int identifier);
+
+    /**
+     * Only for internal use of the data structure: Slot that is connected signal
+     * Document::pointerTypeCreated(...). this method registers pointer type for this data structure.
+     * \param identifier is the pointer type identifier of pointer type that will be registered
+     */
+    void registerPointerType(int identifier);
+
+    /**
+     * Only for internal use of the data structure: Slot that is connected signal
+     * Document::dataTypeRemoved(...). this method removes data type for this data structure.
+     * \param identifier is the data type identifier of data type that will be removed
+     */
+    void removeDataType(int identifier);
+
+    /**
+     * Only for internal use of the data structure: Slot that is connected signal
+     * Document::pointerTypeRemoved(...). this method removes pointer type for this data structure.
+     * \param identifier is the pointer type identifier of pointer type that will be removed
+     */
+    void removePointerType(int identifier);
+
 signals:
     void dataCreated(DataPtr n);
     void pointerCreated(PointerPtr e);
-    void dataTypeCreated(int identifier);
-    void pointerTypeCreated(int identifier);
-    void dataTypeRemoved(int identifier);
-    void pointerTypeRemoved(int identifier);
     void complexityChanged(bool directed);
     void nameChanged(const QString& name);
     void changed();

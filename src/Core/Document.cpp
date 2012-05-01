@@ -28,6 +28,10 @@
 #include <KDebug>
 #include "Data.h"
 #include "Pointer.h"
+#include <QMap>
+
+#include "PointerType.h"
+#include "DataType.h"
 
 #include <boost/shared_ptr.hpp>
 
@@ -57,6 +61,10 @@ public:
     QPointer<DataStructurePluginInterface> _dataStructureType;
     QtScriptBackend* _engineBackend;
     QList< DataStructurePtr > _dataStructures;
+
+    // data and pointer types
+    QMap<int, DataTypePtr> _dataTypes;           // list of data types
+    QMap<int, PointerTypePtr> _pointerTypes;        // list of pointer types
 };
 
 Document::Document(const QString& name, qreal left, qreal right, qreal top, qreal bottom, QObject *parent)
@@ -73,6 +81,10 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_engineBackend = new QtScriptBackend(this);
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_modified = false;
+
+    // default types
+    d->_dataTypes.insert(0, DataType::create(this, 0));
+    d->_pointerTypes.insert(0, PointerType::create(this, 0));
 
     qDebug() << "------=======------======";
     qDebug() << " Document Constructor ";
@@ -97,6 +109,9 @@ Document::Document(const Document& gd)
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_engineBackend = new QtScriptBackend(this);
 
+    // default types
+    //FIXME add types from former document
+
     for (int i = 0; i < gd.dataStructures().count(); ++i) {
         d->_dataStructures.append(
             DataStructurePluginManager::self()->changeToDataStructure(
@@ -112,6 +127,82 @@ Document::~Document()
     for (int i = 0; i < d->_dataStructures.size(); i ++) {
         d->_dataStructures.clear();
     }
+}
+
+int Document::registerDataType(QString name)
+{
+    QList<int> usedIdentifier = d->_dataTypes.keys();
+    qSort(usedIdentifier);
+    int identifier = usedIdentifier.last() + 1;
+
+    DataTypePtr dataType = DataType::create(this, identifier);
+    dataType->setName(name);
+
+    d->_dataTypes.insert(identifier, dataType);
+
+    emit(dataTypeCreated(identifier));
+    return identifier;
+}
+
+int Document::registerPointerType(QString name)
+{
+    QList<int> usedIdentifier = d->_pointerTypes.keys();
+    qSort(usedIdentifier);
+    int identifier = usedIdentifier.last() + 1;
+
+    PointerTypePtr pointerType = PointerType::create(this, identifier);
+    pointerType->setName(name);
+
+    d->_pointerTypes.insert(identifier, pointerType);
+
+    emit(pointerTypeCreated(identifier));
+    return identifier;
+}
+
+QList< int > Document::dataTypeList() const
+{
+    return d->_dataTypes.keys();
+}
+
+QList< int > Document::pointerTypeList() const
+{
+    return d->_pointerTypes.keys();
+}
+
+bool Document::removeDataType(int dataType)
+{
+    if (dataType == 0) {
+        return false;
+    }
+    emit(dataTypeRemoved(dataType));
+    return d->_dataTypes.remove(dataType) > 0;
+}
+
+bool Document::removePointerType(int pointerType)
+{
+    if (pointerType == 0 || !d->_pointerTypes.contains(pointerType)) {
+        return false;
+    }
+    emit(pointerTypeRemoved(pointerType));
+    return d->_pointerTypes.remove(pointerType) > 0;
+}
+
+DataTypePtr Document::dataType(int dataType) const
+{
+    Q_ASSERT(d->_dataTypes.contains(dataType));
+    if (!d->_dataTypes.contains(dataType)) {
+        return DataTypePtr();
+    }
+    return d->_dataTypes[dataType];
+}
+
+PointerTypePtr Document::pointerType(int pointerType) const
+{
+    Q_ASSERT(d->_pointerTypes.contains(pointerType));
+    if (!d->_pointerTypes.contains(pointerType)) {
+        return PointerTypePtr();
+    }
+    return d->_pointerTypes[pointerType];
 }
 
 QList< DataStructurePtr >& Document::dataStructures() const

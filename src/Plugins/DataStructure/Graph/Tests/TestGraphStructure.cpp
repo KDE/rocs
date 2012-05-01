@@ -139,12 +139,12 @@ void TestGraphStructure::dataTypesTest()
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
 
     DataList dataListDefault, dataList1, dataList2;
-    QVERIFY2(ds->dataTypeList().size() == 1, "ERROR: no default data type created");
+    QVERIFY2(ds->document()->dataTypeList().size() == 1, "ERROR: no default data type created");
 
     // register two further data types
-    int type1 = ds->registerDataType("type1");
-    int type2 = ds->registerDataType("type2");
-    QVERIFY2(ds->dataTypeList().size() == 3, "ERROR: data types were not created");
+    int type1 = ds->document()->registerDataType("type1");
+    int type2 = ds->document()->registerDataType("type2");
+    QVERIFY2(ds->document()->dataTypeList().size() == 3, "ERROR: data types were not created");
 
     // create data elements
     for (int i = 0; i < 3; i++) {
@@ -172,7 +172,7 @@ void TestGraphStructure::dataTypesTest()
     QVERIFY2(ds->pointers(0).size() == 3, "ERROR: pointers were not correctly created");
 
     // remove data type
-    ds->removeDataType(type2);
+    ds->document()->removeDataType(type2);
     QVERIFY2(ds->pointers(0).size() == 1, "ERROR: pointers were not correctly deleted");
 }
 
@@ -183,7 +183,7 @@ void TestGraphStructure::pointerTypesTest()
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
 
     DataList dataList;
-    QVERIFY2(ds->pointerTypeList().size() == 1, "ERROR: no default pointer type created");
+    QVERIFY2(ds->document()->pointerTypeList().size() == 1, "ERROR: no default pointer type created");
 
     // create data elements
     for (int i = 0; i < 10; i++) {
@@ -191,8 +191,8 @@ void TestGraphStructure::pointerTypesTest()
     }
 
     // register two further data types
-    int type1 = ds->registerPointerType("type1");
-    QVERIFY2(ds->pointerTypeList().size() == 2, "ERROR: pointer types were not created");
+    int type1 = ds->document()->registerPointerType("type1");
+    QVERIFY2(ds->document()->pointerTypeList().size() == 2, "ERROR: pointer types were not created");
 
     // connect data elements to a lines
     for (int i = 0; i < 4; i++) {
@@ -212,7 +212,7 @@ void TestGraphStructure::pointerTypesTest()
     QVERIFY2(ds->pointers().size() == 3, "ERROR: wrong number of pointers");
     QVERIFY2(ds->pointers(type1).size() == 8, "ERROR: wrong number of pointers");
 
-    ds->removePointerType(type1);
+    ds->document()->removePointerType(type1);
     QVERIFY(dataList[2]->adjacent_data().size() == 2);
     QVERIFY(dataList[6]->adjacent_data().size() == 0);
 }

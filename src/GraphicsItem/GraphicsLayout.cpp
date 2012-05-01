@@ -50,9 +50,9 @@ void GraphicsLayout::setViewStyleDataNode(int style)
     _viewStyleDataNode = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
     foreach(DataStructurePtr ds, dsList) {
-        foreach(int identifier, ds->dataTypeList()) {
+        foreach(int identifier, ds->document()->dataTypeList()) {
             // update all data elements
-            ds->setDataNameVisibility(ds->dataType(identifier)->isNameVisible(), identifier);
+            ds->setDataNameVisibility(ds->isDataNameVisible(identifier), identifier);
         }
     }
     emit changed();
@@ -64,9 +64,9 @@ void GraphicsLayout::setViewStyleDataEdge(int style)
     _viewStyleDataEdge = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
     foreach(DataStructurePtr ds, dsList) {
-        foreach(int identifier, ds->pointerTypeList()) {
+        foreach(int identifier, ds->document()->pointerTypeList()) {
             // update all pointers
-            ds->setPointerNameVisibility(ds->pointerType(identifier)->isNameVisible(), identifier);
+            ds->setPointerNameVisibility(ds->isPointerNameVisible(identifier), identifier);
         }
     }
     emit changed();

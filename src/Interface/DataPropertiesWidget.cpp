@@ -60,7 +60,7 @@ void DataPropertiesWidget::setData(DataPtr data)
     _data = data;
 
     // data types
-    foreach (int dataType, _data->dataStructure()->dataTypeList()) {
+    foreach (int dataType, _data->dataStructure()->document()->dataTypeList()) {
         QString dataTypeString = QString::number(dataType);
         ui->_dataType->addItem(dataTypeString);
     }
