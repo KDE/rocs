@@ -31,7 +31,6 @@
 #include <KPushButton>
 #include <KComboBox>
 #include <KDialog>
-#include <KVBox>
 
 DataStructurePropertiesFullWidget::DataStructurePropertiesFullWidget(QWidget* parent)
     : KDialog(parent)
@@ -62,10 +61,10 @@ void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataSt
 
     setupDataTypes();
 
-
-    connect (_dataStructure->document(), SIGNAL(dataTypeRemoved(int)),
+    connect(_dataStructure->document(), SIGNAL(dataTypeRemoved(int)),
             this, SLOT(removeDataType(int)));
-    connect(ui->dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
+    connect(ui->dataStructureName, SIGNAL(textChanged(QString)),
+            dataStructure.get(), SLOT(setName(QString)));
 }
 
 

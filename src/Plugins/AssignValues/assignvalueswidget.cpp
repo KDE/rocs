@@ -52,12 +52,9 @@ class QPushButton;
 AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
     :   KDialog(parent)
 {
-    QWidget *widget = new QWidget(this);
     ui = new Ui::AssignValuesWidget;
-    ui->setupUi(widget);
-    setMainWidget(widget);
+    ui->setupUi(mainWidget());
 
-    // other KDialog options
     setCaption(i18n("Assign Values"));
     setButtons(KDialog::Cancel | KDialog::Ok);
 

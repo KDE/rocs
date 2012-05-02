@@ -31,7 +31,7 @@ PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* pa
     ui = new Ui::PointerPropertiesWidget;
     ui->setupUi(mainWidget());
     setCaption(i18n("Pointer Properties"));
-    setButtons(Ok); //TODO implement changes for (Ok | Cancel)
+    setButtons(Close); //TODO implement changes for (Ok | Cancel)
     setAttribute(Qt::WA_DeleteOnClose);
 
     connect(this, SIGNAL(okClicked()), SLOT(close()));

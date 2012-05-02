@@ -41,7 +41,7 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     connect(ui->exportNewType, SIGNAL(clicked()), SLOT(addDataType()));
     setData(data);
 
-        if (!_data->dataStructure()->iconPackage().isEmpty()) {
+    if (!_data->dataStructure()->iconPackage().isEmpty()) {
         QFile svgFile(_data->dataStructure()->iconPackage());
         svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
@@ -105,15 +105,22 @@ void DataPropertiesWidget::setData(DataPtr data)
     ui->extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
 
-    connect(ui->_showName,     SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowName(bool)));
-    connect(ui->_showValue,    SIGNAL(toggled(bool)),         _data.get(), SLOT(setShowValue(bool)));
-    connect(ui->_enableColor, SIGNAL(toggled(bool)),         this, SLOT(setUseColor(bool)));
-    connect(ui->_name,         SIGNAL(textEdited(QString)),   _data.get(), SLOT(setName(QString)));
-    connect(ui->_value,        SIGNAL(textEdited(QString)),   _data.get(), SLOT(setValue(QString)));
-    connect(ui->_dataType,     SIGNAL(activated(QString)),    this, SLOT(setDataType(QString)));
-    connect(ui->_color,		SIGNAL(activated(QColor)), this, SLOT(colorChanged(QColor)));
-    connect(ui->_addProperty,	SIGNAL(clicked(bool)), 	   this, SLOT(addProperty()));
-
+    connect(ui->_showName, SIGNAL(toggled(bool)),
+            _data.get(), SLOT(setShowName(bool)));
+    connect(ui->_showValue, SIGNAL(toggled(bool)),
+            _data.get(), SLOT(setShowValue(bool)));
+    connect(ui->_enableColor, SIGNAL(toggled(bool)),
+            this, SLOT(setUseColor(bool)));
+    connect(ui->_name, SIGNAL(textEdited(QString)),
+            _data.get(), SLOT(setName(QString)));
+    connect(ui->_value, SIGNAL(textEdited(QString)),
+            _data.get(), SLOT(setValue(QString)));
+    connect(ui->_dataType, SIGNAL(activated(QString)),
+            this, SLOT(setDataType(QString)));
+    connect(ui->_color, SIGNAL(activated(QColor)),
+            this, SLOT(colorChanged(QColor)));
+    connect(ui->_addProperty, SIGNAL(clicked(bool)),
+            this, SLOT(addProperty()));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data.get());
