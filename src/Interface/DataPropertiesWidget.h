@@ -21,7 +21,7 @@
 #ifndef SUI_DATAPROPERTIESWIDGET_H
 #define SUI_DATAPROPERTIESWIDGET_H
 
-#include <QWidget>
+#include <KDialog>
 #include "Rocs_Typedefs.h"
 #include "ui_DataPropertiesWidget.h"
 
@@ -34,6 +34,7 @@ class DataItem;
 class DataPropertiesWidget: public KDialog
 {
     Q_OBJECT
+
 public:
     DataPropertiesWidget(DataPtr data, QWidget* parent = 0);
     void setPosition(QPointF screenPosition);
@@ -45,7 +46,8 @@ private slots:
     void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
     void addProperty();
     void setDataType(QString dataType);
-
+    void addDataType();
+    void setIcon(const QString& icon);
 private:
     DataPtr _data;
     Ui::DataPropertiesWidget* ui;

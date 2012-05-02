@@ -66,10 +66,11 @@ DataItem::DataItem(DataPtr n)
     , _font(QFont("Helvetica [Cronyx]", 12))
     , _oldStyle(GraphicsLayout::self()->viewStyleDataNode())
     , _originalWidth(n->width())
+    , _oldDataType(n->dataStructure()->document()->dataType(n->dataType()))
 {
+
     connect(n.get(), SIGNAL(removed()), this, SLOT(deleteLater()));
-    connect(n->dataStructure()->document()->dataType(n->dataType()).get(), SIGNAL(iconChanged(QString)),
-            this, SLOT(updateIcon()));
+    connect(_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
     connect(n.get(), SIGNAL(nameChanged(QString)), this, SLOT(updateName()));
     connect(n.get(), SIGNAL(valueChanged(QVariant)), this, SLOT(updateValue()));
     connect(n.get(), SIGNAL(colorChanged(QColor)), this, SLOT(updateColor()));
@@ -100,6 +101,12 @@ DataItem::~DataItem()
 
 void DataItem::setupNode()
 {
+    if (_data.get()->dataStructure()->document()->dataType(_data.get()->dataType()) != _oldDataType) {
+        disconnect(_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
+        _oldDataType = _data.get()->dataStructure()->document()->dataType(_data.get()->dataType());
+        connect(_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
+    }
+
     updateName();
     updateValue();
     updateRenderer();
@@ -120,7 +127,9 @@ void DataItem::updatePos()
 
 void DataItem::updateSize()
 {
-    if (_data->width() == _width) return;
+    if (_data->width() == _width) {
+        return;
+    }
     resetTransform();
     _width = _data->width();
     setScale(_data->width());
