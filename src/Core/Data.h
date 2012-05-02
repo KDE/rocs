@@ -220,7 +220,7 @@ inline boost::shared_ptr<DataItem> Data::item() const
 
 inline const QString& Data::iconPackage() const
 {
-    return d->_dataStructure->iconPackage();
+    return d->_dataStructure->document()->iconPackage();
 }
 
 inline qreal Data::x() const

@@ -120,6 +120,9 @@ set( rocs_interface_SRCS
     Interface/DataPropertiesWidget.cpp
     Interface/DataStructurePropertiesWidget.cpp
     Interface/DataStructurePropertiesFullWidget.cpp
+    Interface/DataStructurePage.cpp
+    Interface/DataTypePage.cpp
+    Interface/PointerTypePage.cpp
     Interface/PointerPropertiesWidget.cpp
     Interface/VisualEditor/GraphScene.cpp
     Interface/VisualEditor/GraphVisualEditor.cpp
@@ -147,7 +150,9 @@ kde4_add_ui_files(
     rocs_SRCS
     Interface/OpenedFilesWidget.ui
     Interface/DataStructurePropertiesWidget.ui
-    Interface/DataStructurePropertiesFullWidget.ui
+    Interface/DataStructurePage.ui
+    Interface/DataTypePage.ui
+    Interface/PointerTypePage.ui
     Interface/DataPropertiesWidget.ui
     Interface/PointerPropertiesWidget.ui
     Interface/ConfigureDefaultProperties.ui

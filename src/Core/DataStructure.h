@@ -61,8 +61,6 @@ public:
     QMap<int, bool> _pointerTypeValueVisibility;
     QMap<int, bool> _pointerTypeVisibility;
 
-    QString _iconPackage;   // available icons for data types
-
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
     QList<Group*> _groups;
@@ -407,16 +405,11 @@ private:
 };
 
 
-
 inline bool DataStructure::readOnly() const
 {
     return d->_readOnly;
 }
 
-inline const QString& DataStructure::iconPackage() const
-{
-    return d->_iconPackage;
-}
 
 inline const QString& DataStructure::name() const
 {

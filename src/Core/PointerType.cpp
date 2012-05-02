@@ -64,6 +64,7 @@ PointerType::~PointerType()
 void PointerType::setName(QString name)
 {
     d->_name = name;
+    emit(nameChanged(d->_name));
 }
 
 
@@ -80,6 +81,7 @@ int PointerType::identifier() const
 void PointerType::setDefaultColor(QColor color)
 {
     d->_defaultColor = color;
+    emit(colorChanged(d->_defaultColor));
 }
 
 

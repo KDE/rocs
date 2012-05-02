@@ -40,6 +40,7 @@
 #include "DataStructurePluginManager.h"
 #include <GraphScene.h>
 #include "DataStructurePluginInterface.h"
+#include <KStandardDirs>
 
 class DocumentPrivate
 {
@@ -65,6 +66,8 @@ public:
     // data and pointer types
     QMap<int, DataTypePtr> _dataTypes;           // list of data types
     QMap<int, PointerTypePtr> _pointerTypes;        // list of pointer types
+
+    QString _iconPackage;   // available icons for data types
 };
 
 Document::Document(const QString& name, qreal left, qreal right, qreal top, qreal bottom, QObject *parent)
@@ -81,6 +84,8 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_engineBackend = new QtScriptBackend(this);
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_modified = false;
+
+    d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
 
     // default types
     d->_dataTypes.insert(0, DataType::create(this, 0));
@@ -108,13 +113,14 @@ Document::Document(const Document& gd)
     d->_bottom = gd.bottom();
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_engineBackend = new QtScriptBackend(this);
+    d->_iconPackage = gd.iconPackage();
 
     // default types
     //FIXME add types from former document
     kDebug() << "Addeding just the default methods";
     d->_dataTypes.insert(0, DataType::create(this, 0));
     d->_pointerTypes.insert(0, PointerType::create(this, 0));
-    
+
     for (int i = 0; i < gd.dataStructures().count(); ++i) {
         d->_dataStructures.append(
             DataStructurePluginManager::self()->changeToDataStructure(
@@ -171,6 +177,13 @@ QList< int > Document::pointerTypeList() const
 {
     return d->_pointerTypes.keys();
 }
+
+
+const QString& Document::iconPackage() const
+{
+    return d->_iconPackage;
+}
+
 
 bool Document::removeDataType(int dataType)
 {

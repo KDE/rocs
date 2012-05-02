@@ -56,6 +56,10 @@ public slots:
     void setName(QString name);
     void setDefaultColor(QColor color);
 
+signals:
+    void nameChanged(const QString& name);
+    void colorChanged(const QColor& color);
+
 protected:
     /** Default constructor. To create PointerType elements use \see PointerType::create(...).
      *\param parent is the parent DataStructure

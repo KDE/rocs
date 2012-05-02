@@ -37,8 +37,6 @@
 #include <QColor>
 
 #include <KDebug>
-#include <KStandardDirs>
-
 #include <DataItem.h>
 
 DataStructurePtr DataStructure::create(Document *parent)
@@ -57,8 +55,6 @@ void DataStructure::initialize()
     d->_readOnly = false;
     updateRelativeCenter();
     d->_identifierCount = 1;
-
-    d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
 
     // create type lists
     foreach (int identifier, d->_document->dataTypeList()) {

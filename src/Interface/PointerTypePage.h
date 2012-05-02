@@ -16,37 +16,43 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SUI_DATA_STRUCTURE_PROPERTIES_FULL_WIDGET_H
-#define SUI_DATA_STRUCTURE_PROPERTIES_FULL_WIDGET_H
+#ifndef SUI_POINTER_TYPE_PAGE_H
+#define SUI_POINTER_TYPE_PAGE_H
+
+#include "ui_PointerTypePage.h"
 
 #include "Rocs_Typedefs.h"
 
-#include <KDialog>
+#include <QWidget>
+#include <bitset>
 
-class DataStructurePage;
-class DataTypePage;
-class PointerTypePage;
+class Document;
 
 /*!
-    \brief Properties widget for KDialog.
+    \brief Properties page for PointerType.
 */
-class DataStructurePropertiesFullWidget :
-    public KDialog
+class PointerTypePage :
+    public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit DataStructurePropertiesFullWidget(QWidget* parent = 0);
+    explicit PointerTypePage(QWidget* parent = 0);
 
 public slots:
-    void setDataStructure(DataStructurePtr dataStructure);
-    void setPosition(QPointF screenPosition);
+    void setDocument(Document* document);
+
+private slots:
+    void setCurrentType(int index);
+    void setTypeName();
+    void setTypeDefaultColor();
+    void createNewType();
+    void removeType();
+    void updateCurrentTypeName();
 
 private:
-    DataStructurePage* _dataStructurePage;
-    DataTypePage* _dataTypePage;
-    PointerTypePage* _pointerTypePage;
-    DataStructurePtr _dataStructure;
+    Document* _document;
+    Ui::PointerTypePage *ui;
 };
 
 #endif

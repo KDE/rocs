@@ -17,6 +17,10 @@
 */
 
 #include "DataStructurePropertiesFullWidget.h"
+
+#include "DataStructurePage.h"
+#include "DataTypePage.h"
+#include "PointerTypePage.h"
 #include <Data.h>
 #include <DataItem.h>
 
@@ -31,137 +35,40 @@
 #include <KPushButton>
 #include <KComboBox>
 #include <KDialog>
+#include <KTabWidget>
+#include <QLayout>
+#include <QLabel>
 
 DataStructurePropertiesFullWidget::DataStructurePropertiesFullWidget(QWidget* parent)
     : KDialog(parent)
 {
-    ui = new Ui::DataStructurePropertiesFullWidget;
-    ui->setupUi(mainWidget());
-    setCaption(i18n("Data Structure Properties"));
-    setButtons(Ok); //TODO implement changes for (Ok | Cancel)
-    setAttribute(Qt::WA_DeleteOnClose);
+    KTabWidget *tabWidget = new KTabWidget(this);
+    _dataStructurePage = new DataStructurePage(this);
+    _dataTypePage = new DataTypePage(this);
+    _pointerTypePage = new PointerTypePage(this);
 
-    connect(ui->buttonAddDataType, SIGNAL(clicked(bool)), this, SLOT(addDataType()));
-    connect(this, SIGNAL(okClicked()), SLOT(close()));
+    tabWidget->addTab(_dataStructurePage, i18n("Data Structure"));
+    tabWidget->addTab(_dataTypePage, i18n("Data Types"));
+    tabWidget->addTab(_pointerTypePage, i18n("Pointer Types"));
+
+    setMainWidget(tabWidget);
+
+    setCaption(i18n("Data Structure Properties"));
+    setButtons(Close);
+    setAttribute(Qt::WA_DeleteOnClose);
 }
 
 
 void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataStructure)
 {
     Q_ASSERT(dataStructure);
-    if (_dataStructure) {
-        disconnect(_dataStructure.get());
-        foreach(QWidget* oldWidget, _dataTypeWigets) {
-            oldWidget->deleteLater();
-        }
-        _dataTypeWigets.clear();
-    }
-    _dataStructure = dataStructure;
-    ui->dataStructureName->setText(_dataStructure->name());
-
-    setupDataTypes();
-
-    connect(_dataStructure->document(), SIGNAL(dataTypeRemoved(int)),
-            this, SLOT(removeDataType(int)));
-    connect(ui->dataStructureName, SIGNAL(textChanged(QString)),
-            dataStructure.get(), SLOT(setName(QString)));
+    _dataStructurePage->setDataStructure(dataStructure);
+    _dataTypePage->setDocument(dataStructure->document());
+    _pointerTypePage->setDocument(dataStructure->document());
 }
 
 
 void DataStructurePropertiesFullWidget::setPosition(QPointF screenPosition)
 {
     move(screenPosition.x() + 10,  screenPosition.y() + 10);
-}
-
-
-void DataStructurePropertiesFullWidget::addDataType()
-{
-    int dataTypeIdentifier = _dataStructure->document()->registerDataType(i18n("type"));
-    ui->dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
-}
-
-
-void DataStructurePropertiesFullWidget::removeDataType(int dataType)
-{
-    if (_dataTypeWigets.contains(dataType) && _dataTypeWigets[dataType]) {
-        ui->dataTypes->layout()->removeWidget(_dataTypeWigets[dataType]);
-        _dataTypeWigets[dataType]->deleteLater();
-    }
-    _dataTypeWigets.remove(dataType);
-}
-
-
-void DataStructurePropertiesFullWidget::setupDataTypes()
-{
-    foreach (int dataTypeIdentifier, _dataStructure->document()->dataTypeList()) {
-        ui->dataTypes->layout()->addWidget(createDataTypeWidget(dataTypeIdentifier));
-    }
-}
-
-
-QWidget* DataStructurePropertiesFullWidget::createDataTypeWidget(int dataType)
-{
-    // create default data element setups
-    QWidget* dataTypeWidget = new QWidget(this);
-    dataTypeWidget->setLayout(new QHBoxLayout);
-    QLabel* dataTypeIdentifier = new QLabel(QString::number(dataType), dataTypeWidget);
-    dataTypeIdentifier->setToolTip(i18n("Unique identifier for data type."));
-    dataTypeWidget->layout()->addWidget(dataTypeIdentifier);
-
-    KLineEdit* dataTypeName = new KLineEdit(_dataStructure->document()->dataType(dataType)->name(), dataTypeWidget);
-    dataTypeWidget->layout()->addWidget(dataTypeName);
-    connect(dataTypeName, SIGNAL(textEdited(QString)),
-            _dataStructure->document()->dataType(dataType).get(), SLOT(setName(QString)));
-
-    KColorCombo* dataTypeColor = new KColorCombo(dataTypeWidget);
-    dataTypeColor->setFixedWidth(50);
-    dataTypeColor->setColor(_dataStructure->document()->dataType(dataType)->defaultColor());
-    dataTypeWidget->layout()->addWidget(dataTypeColor);
-    connect(dataTypeColor, SIGNAL(activated(QColor)),
-            _dataStructure->document()->dataType(dataType).get(), SLOT(setDefaultColor(QColor)));
-
-    KComboBox* dataTypeIcon = new KComboBox(dataTypeWidget);
-    if (!_dataStructure->iconPackage().isEmpty()) {
-        QFile svgFile(_dataStructure->iconPackage());
-        svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
-
-        QXmlStreamReader reader(&svgFile);
-        QSvgRenderer *renderer = DataItem::sharedRenderer(svgFile.fileName());
-        while (!reader.atEnd()) {
-            reader.readNext();
-            if (!reader.attributes().hasAttribute("id")) {
-                continue;
-            }
-            QString attribute = reader.attributes().value("id").toString();
-            if (attribute.startsWith(QLatin1String("rocs_"))) {
-                QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
-
-                QPainter painter;
-                painter.begin(&iconImage);
-                renderer->render(&painter, attribute);
-                painter.end();
-
-                attribute.remove("rocs_");
-                dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
-            }
-        }
-        if (!_dataStructure->document()->dataType(dataType)->icon().isEmpty()) {
-            QString icon = _dataStructure->document()->dataType(dataType)->icon();
-            icon.remove("rocs_");
-            dataTypeIcon->setCurrentItem(icon);
-        }
-        dataTypeWidget->layout()->addWidget(dataTypeIcon);
-        connect(dataTypeIcon, SIGNAL(currentIndexChanged(QString)),
-                _dataStructure->document()->dataType(dataType).get(), SLOT(setIcon(QString)));
-    }
-
-    // default data type can not be deleted
-    if (dataType!=0) {
-        KPushButton* dataTypeDelete = new KPushButton("x", dataTypeWidget);
-        dataTypeWidget->layout()->addWidget(dataTypeDelete);
-        connect(dataTypeDelete, SIGNAL(clicked(bool)), _dataStructure->document()->dataType(dataType).get(), SLOT(remove()));
-    }
-
-    _dataTypeWigets.insert(dataType, dataTypeWidget);
-    return dataTypeWidget;
 }

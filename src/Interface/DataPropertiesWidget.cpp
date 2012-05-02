@@ -41,8 +41,8 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     connect(ui->exportNewType, SIGNAL(clicked()), SLOT(addDataType()));
     setData(data);
 
-    if (!_data->dataStructure()->iconPackage().isEmpty()) {
-        QFile svgFile(_data->dataStructure()->iconPackage());
+    if (!_data->dataStructure()->document()->iconPackage().isEmpty()) {
+        QFile svgFile(_data->dataStructure()->document()->iconPackage());
         svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
         QXmlStreamReader reader(&svgFile);
@@ -200,7 +200,7 @@ void DataPropertiesWidget::addProperty()
 void DataPropertiesWidget::addDataType()
 {
     if(ui->newTypeName->text().isEmpty()){
-      return;
+        return;
     }
 
     DataStructurePtr ds = _data->dataStructure();
