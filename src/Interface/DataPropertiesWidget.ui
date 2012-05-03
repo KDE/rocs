@@ -148,7 +148,7 @@
    <item>
     <widget class="QGroupBox" name="Apearance">
      <property name="title">
-      <string>Apearance</string>
+      <string>Appearance</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
