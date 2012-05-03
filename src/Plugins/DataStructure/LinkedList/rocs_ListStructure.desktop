@@ -14,5 +14,7 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=Linked List
 Name[nl]=Gekoppelde lijst
+Name[pt]=Lista Ligada
 Name[uk]=Зв’язний список
 Name[x-test]=xxLinked Listxx
+Name[zh_TW]=鍊結串列
