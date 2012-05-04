@@ -116,7 +116,7 @@ bool RootedTreePlugin::canConvertFrom(Document* doc) const
                 foreach ( DataPtr n, c->adjacent_data()){
                     if (visited.contains(n.get())){
                         if (!cycles.contains(n.get())){
-                            errors << i18n("There is cycles in node %1. Some data will be lost").arg(n->showName());
+                            errors << i18n("There are cycles at node %1. Data will be lost by conversion.", n->showName());
                             cycles.insert(n.get());
                         }
                     }else{
