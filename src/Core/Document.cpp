@@ -41,6 +41,7 @@
 #include <GraphScene.h>
 #include "DataStructurePluginInterface.h"
 #include <KStandardDirs>
+#include <DataItem.h>
 
 class DocumentPrivate
 {
@@ -86,6 +87,9 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_modified = false;
 
     d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
+    if (!DataItem::sharedRenderer(d->_iconPackage)) {
+         DataItem::registerSharedRenderer(d->_iconPackage);
+    }
 
     // default types
     d->_dataTypes.insert(0, DataType::create(this, 0));
@@ -113,7 +117,11 @@ Document::Document(const Document& gd)
     d->_bottom = gd.bottom();
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_engineBackend = new QtScriptBackend(this);
+
     d->_iconPackage = gd.iconPackage();
+    if (!DataItem::sharedRenderer(d->_iconPackage)) {
+         DataItem::registerSharedRenderer(d->_iconPackage);
+    }
 
     // default types
     //FIXME add types from former document

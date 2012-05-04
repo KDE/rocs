@@ -47,6 +47,7 @@ class QScriptEngineDebugger;
 class ToolsPluginInterface;
 class QCloseEvent;
 class QComboBox;
+class QToolButton;
 class KActionMenu;
 
 #ifndef USING_QTSCRIPT
@@ -216,8 +217,9 @@ private: // Variables.
 
     // Left Area:
     GraphLayers* _GraphLayers; //! Area where the data and edges will be modified.
-    KComboBox* _graphSelector;
+    KComboBox* _documentSelectorCombo;
     KPushButton *_btnAddGraph;
+    QToolButton* _documentPropertiesButton;
 
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
@@ -247,7 +249,7 @@ private: // Variables.
     QScriptEngineDebugger *_scriptDbg;
     KAction* _debugScript;
     KAction* _interruptScript;
-    
+
     void createToolsPluginsAction();
 };
 

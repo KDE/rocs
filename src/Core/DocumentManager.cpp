@@ -181,6 +181,10 @@ Document* DocumentManager::newDocument()
     doc->setModified(false);
     addDocument(doc);
 
+    if (_activeDocument==0) {
+        _activeDocument = doc;
+    }
+
     return doc;
 }
 

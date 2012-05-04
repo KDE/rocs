@@ -33,6 +33,7 @@
 #include <QtGui/QVBoxLayout>
 #include <QToolButton>
 #include <QPointer>
+#include <QGridLayout>
 
 // KDE Related Includes
 #include <KActionCollection>
@@ -107,6 +108,7 @@
 
 
 #include "PossibleIncludes.h"
+#include <PropertiesDialogAction.h>
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
 {
@@ -194,6 +196,7 @@ Project* MainWindow::createNewProject()
     Project* newProject = new Project();
     // create new document and add this to project new
     newProject->addGraphFileNew(DocumentManager::self()->newDocument());
+    setActiveDocument();
     newProject->addCodeFileNew(_codeEditor->newScript());
 
     return newProject;
@@ -313,22 +316,31 @@ QWidget* MainWindow::setupWhiteboardPanel()
 {
     QWidget *panel = new QWidget(this);
 
-    _graphSelector = new KComboBox(this);
+    _documentSelectorCombo = new KComboBox(this);
     _GraphLayers = new GraphLayers(this);
 
     // arrange widgets
     QWidget* selectorForm = new QWidget(panel);
-    QFormLayout* selectorFormLayout = new QFormLayout(selectorForm);
-    selectorFormLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
-    selectorFormLayout->addRow(i18n("Graph Document:"), _graphSelector);
+    QGridLayout* documentLayout = new QGridLayout(selectorForm);
+    selectorForm->setLayout(documentLayout);
 
-    connect(_graphSelector, SIGNAL(currentIndexChanged(int)),
+    // at first setup document does not exists
+    // this is later set when MainWindow::setActiveDocument() is called
+    PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18n("Properties"), DocumentManager::self()->activeDocument(), this);
+    _documentPropertiesButton = new QToolButton(panel);
+    _documentPropertiesButton->setDefaultAction(propertiesAction);
+    _documentPropertiesButton->setIcon(KIcon("document-properties"));
+
+    documentLayout->addWidget(new QLabel(i18n("Graph Document:")),1,1);
+    documentLayout->addWidget(_documentSelectorCombo,1,2);
+    documentLayout->addWidget(_documentPropertiesButton,1,3);
+
+    connect(_documentSelectorCombo, SIGNAL(activated(int)),
             DocumentManager::self(), SLOT(changeDocument(int)));
 
     panel->setLayout(new QVBoxLayout);
     panel->layout()->addWidget(selectorForm);
     panel->layout()->addWidget(_GraphLayers);
-    selectorForm->setLayout(selectorFormLayout);
 
     return panel;
 }
@@ -471,12 +483,12 @@ void MainWindow::setupToolsPluginsAction()
 {
     if (_toolsPlugins.isEmpty())
         createToolsPluginsAction();
-    
+
     QAction* action = 0;
     foreach(action, _toolsPlugins) {
         ToolsPluginInterface *p = PluginManager::instance()->toolPlugins().at(action->data().toInt());
         action->setEnabled(p->supportedDataStructures().isEmpty() || //no list of supported DS
-                           (DocumentManager::self()->activeDocument() &&  
+                           (DocumentManager::self()->activeDocument() &&
                              p->supportedDataStructures().contains(DocumentManager::self()->activeDocument()->dataStructureInternalName()))
                           );
     }
@@ -545,6 +557,15 @@ void MainWindow::setActiveDocument()
     _graphVisualEditor->setActiveDocument();
     _GraphLayers->setActiveDocument();
 
+    // set button for document properties
+    if (_documentPropertiesButton->defaultAction()) {
+    qDebug() << "XXXX now setting active document: " << activeDocument;
+        _documentPropertiesButton->defaultAction()->deleteLater();
+        PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18n("Properties"), activeDocument, this);
+        _documentPropertiesButton->setDefaultAction(propertiesAction);
+        _documentPropertiesButton->setIcon(KIcon("document-properties"));
+    }
+
     connect(this, SIGNAL(runTool(ToolsPluginInterface*, Document*)),
             activeDocument->engineBackend(), SLOT(runTool(ToolsPluginInterface*, Document*)));
 
@@ -587,9 +608,9 @@ void MainWindow::addEmptyGraphDocument()
 
 void MainWindow::updateGraphDocumentList()
 {
-    _graphSelector->clear();
+    _documentSelectorCombo->clear();
     foreach(Document * document, DocumentManager::self()->documentList()) {
-        _graphSelector->addItem(document->name());
+        _documentSelectorCombo->addItem(document->name());
     }
 }
 

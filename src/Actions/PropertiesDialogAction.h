@@ -25,18 +25,21 @@
 #include <Rocs_Typedefs.h>
 
 class QPointF;
+class Document;
 
 class PropertiesDialogAction : public KAction
 {
     Q_OBJECT
 
     enum DialogType {
+        DOCUMENT,
         DATASTRUCTURE,
         DATA,
         POINTER
     };
 
 public:
+    PropertiesDialogAction(QString text, Document* document, QObject* parent);
     PropertiesDialogAction(QString text, DataStructurePtr dataStructure, QObject* parent);
     PropertiesDialogAction(QString text, DataPtr data, QObject* parent);
     PropertiesDialogAction(QString text, PointerPtr pointer, QObject* parent);
@@ -47,6 +50,7 @@ public slots:
     void showDialog();
 
 private:
+    Document* _document;
     DataStructurePtr _dataStructure;
     DataPtr _data;
     PointerPtr _pointer;

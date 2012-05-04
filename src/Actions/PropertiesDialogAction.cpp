@@ -22,8 +22,23 @@
 
 #include <QPointer>
 #include <DataStructurePropertiesFullWidget.h>
+#include <DocumentPropertiesDialog.h>
 #include <DataPropertiesWidget.h>
 #include <PointerPropertiesWidget.h>
+#include <DocumentManager.h>
+#include <Document.h>
+
+#include <QDebug>
+
+
+PropertiesDialogAction::PropertiesDialogAction(QString text, Document* document, QObject* parent)
+    : KAction(text, parent)
+{
+    _document = document;
+    _dialogType = DOCUMENT;
+    connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
+}
+
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, DataStructurePtr dataStructure, QObject* parent)
     : KAction(text, parent)
@@ -55,6 +70,16 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, PointerPtr pointer,
 void PropertiesDialogAction::showDialog()
 {
     switch (_dialogType) {
+    case DOCUMENT: {
+        if (!_document) {
+            return;
+        }
+        QPointer<DocumentPropertiesDialog> dialog = new DocumentPropertiesDialog;
+        dialog->setDocument(_document);
+        dialog->setPosition(_screenPosition);
+        dialog->exec();
+        break;
+    }
     case DATASTRUCTURE: {
         if (!_dataStructure) {
             return;
