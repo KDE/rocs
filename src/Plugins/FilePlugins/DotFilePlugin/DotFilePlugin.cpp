@@ -73,7 +73,7 @@ Document* DotFilePlugin::readFile(const QString& fileName)
     QString content = f.readAll();
 
     // try to parse the file
-    Document* graphDoc;
+    Document* graphDoc = 0;
     try {
         graphDoc = parseGraphvizUndirected(content);
     } catch (boost::directed_graph_error) {
@@ -196,7 +196,6 @@ Document* DotFilePlugin::parseGraphvizUndirected(const QString& graphvizContent)
 
     // put nodes at whiteboard as generated
     QMap<int, DataPtr > mapNodes;
-    int index = 0;
     boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
     for (boost::tie(vi, vi_end) = boost::vertices(importGraph); vi != vi_end; ++vi) {
         // TODO imported data values can be extended
@@ -315,7 +314,6 @@ Document* DotFilePlugin::parseGraphvizDirected(const QString& graphvizContent)
 
     // put nodes at whiteboard as generated
     QMap<int, DataPtr > mapNodes;
-    int index = 0;
     boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
     for (boost::tie(vi, vi_end) = boost::vertices(importGraph); vi != vi_end; ++vi) {
         // TODO imported data values can be extended
