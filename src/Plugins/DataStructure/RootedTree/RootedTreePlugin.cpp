@@ -29,11 +29,8 @@
 #include <knuminput.h>
 #include <KMessageBox>
 #include <KComboBox>
-#include <KMessageBox>
 #include <QVBoxLayout>
 #include <QCheckBox>
-
-
 
 
 static const KAboutData aboutdata("rocs_RootedTreeStructure", 0, ki18n("RootedTree Structure") , "0.1" );
@@ -50,7 +47,6 @@ RootedTreePlugin::RootedTreePlugin(QObject* parent, const QList< QVariant >& /*a
 
 RootedTreePlugin::~RootedTreePlugin()
 {
-
 }
 
 DataStructurePtr RootedTreePlugin::convertToDataStructure(DataStructurePtr ds, Document * parent)
