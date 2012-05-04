@@ -52,6 +52,7 @@ PointerType::PointerType(Document* document, int identifier):
 {
     d->_identifier = identifier;
     d->_defaultColor = QColor("gray");
+    d->_name = i18n("Connection");
     d->_document = document;
 }
 
