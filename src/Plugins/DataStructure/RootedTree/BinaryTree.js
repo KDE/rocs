@@ -44,18 +44,18 @@ function printInOrder(root){
     }
 }
 function minimun(root){
-  if (root == undefined)
-    return root;
-  if (root.left_child() == undefined)
-      return root
-  return minimun(root.left_child())
+    if (root == undefined)
+        return root;
+    if (root.left_child() == undefined)
+        return root
+    return minimun(root.left_child())
 }
 function maximun(root){
-  if (root == undefined)
-    return root;
-  if (root.right_child() == undefined)
-      return root
-  return maximun(root.right_child())
+    if (root == undefined)
+        return root;
+    if (root.right_child() == undefined)
+        return root
+    return maximun(root.right_child())
 }
 function successor(root){
     if (root.right_child() != undefined)
@@ -78,64 +78,64 @@ function predecessor(root){
     return p;
 }
 function leftRotate(root){
-  if (root.rightChild == undefined)
-    return
-  y = root.rightChild
-  root.add_right_child(y.left_child())
-  if (y.leftChild != undefined)
-    y.leftChild.add_node_parent(root)
-    
-  if (root.nodeParent == undefined)
-    graphs[0].set_root_node(y)
-  else{
-    if (root == root.nodeParent.left_child() )
-      root.nodeParent.add_left_child(y)
-    else
-      root.nodeParent.add_right_child(y)
-  }
-  y.add_left_child(root)
-  root.add_node_parent(y)
+    if (root.rightChild == undefined)
+        return
+    y = root.rightChild
+    root.add_right_child(y.left_child())
+    if (y.leftChild != undefined)
+        y.leftChild.add_node_parent(root)
+
+    if (root.nodeParent == undefined)
+        graphs[0].set_root_node(y)
+    else{
+        if (root == root.nodeParent.left_child() )
+        root.nodeParent.add_left_child(y)
+        else
+        root.nodeParent.add_right_child(y)
+    }
+    y.add_left_child(root)
+    root.add_node_parent(y)
 }
 
 function rightRotate(root){
-  if (root.left_child() == undefined)
-    return
-  y = root.left_child()
-  root.add_left_child(y.right_child())
-  if (y.right_child() != undefined)
-    y.right_child().add_node_parent(root)
-    
-  if (root.node_parent() == undefined)
-    graphs[0].set_root_node(y)
-  else{
-    if (root == root.node_parent().left_child() )
-      root.node_parent().add_left_child(y)
-    else
-      root.node_parent().add_right_child(y)
-  }
-  y.add_right_child(root)
-  root.add_node_parent(y)
+    if (root.left_child() == undefined)
+        return
+    y = root.left_child()
+    root.add_left_child(y.right_child())
+    if (y.right_child() != undefined)
+        y.right_child().add_node_parent(root)
+
+    if (root.node_parent() == undefined)
+        graphs[0].set_root_node(y)
+    else{
+        if (root == root.node_parent().left_child() )
+        root.node_parent().add_left_child(y)
+        else
+        root.node_parent().add_right_child(y)
+    }
+    y.add_right_child(root)
+    root.add_node_parent(y)
 }
 
 function height(root){
     if (root == undefined)
-      return -1;
+        return -1;
     l = height(root.left_child())
     r = height(root.right_child())
     if (l < r)
-      return r + 1
+        return r + 1
     else
-      return l + 1
+        return l + 1
 }
 
 
 function adjustNodePosition(root){
     if (root == undefined)
-      return;
+        return;
     root.adjustPosition()
     adjustNodePosition(root.left_child());
     adjustNodePosition(root.right_child());
-  
+
 }
 
 binaryTreeInsert(graphs[0].root_node(), 2)

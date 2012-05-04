@@ -36,7 +36,6 @@ class RootedTreeEdgeItem : public PointerItem {
     QPointF m_endPoint;
     QPointF m_startPoint;
     QPointF startPoint();
-
     QPointF endPoint() const;
 
 public:
@@ -51,6 +50,7 @@ public:
     virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
     virtual QRectF boundingRect() const;
+
 public slots:
     void updatePathLayout();
 };

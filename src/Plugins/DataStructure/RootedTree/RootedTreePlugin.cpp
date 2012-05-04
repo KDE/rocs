@@ -43,8 +43,8 @@ K_PLUGIN_FACTORY( DSPluginFactory, registerPlugin< RootedTreePlugin>(); )
 K_EXPORT_PLUGIN( DSPluginFactory(aboutdata) )
 
 
-RootedTreePlugin::RootedTreePlugin ( QObject* parent, const QList< QVariant >& /*args*/ )
-       : DataStructurePluginInterface( DSPluginFactory::componentData(), parent)
+RootedTreePlugin::RootedTreePlugin(QObject* parent, const QList< QVariant >& /*args*/ )
+    : DataStructurePluginInterface(DSPluginFactory::componentData(), parent)
 {
 }
 
@@ -53,14 +53,14 @@ RootedTreePlugin::~RootedTreePlugin()
 
 }
 
-DataStructurePtr RootedTreePlugin::convertToDataStructure ( DataStructurePtr ds, Document * parent)
+DataStructurePtr RootedTreePlugin::convertToDataStructure(DataStructurePtr ds, Document * parent)
 {
-  return RootedTreeStructure::create(ds, parent);
+    return RootedTreeStructure::create(ds, parent);
 }
 
 DataStructurePtr RootedTreePlugin::createDataStructure ( Document* parent )
 {
-  return RootedTreeStructure::create(parent);
+    return RootedTreeStructure::create(parent);
 }
 
 QGraphicsItem*  RootedTreePlugin::dataItem(DataPtr node) const
@@ -68,21 +68,21 @@ QGraphicsItem*  RootedTreePlugin::dataItem(DataPtr node) const
     return new RootedTreeNodeItem(node);
 }
 
-QGraphicsItem*  RootedTreePlugin::pointerItem ( PointerPtr edge) const
+QGraphicsItem*  RootedTreePlugin::pointerItem(PointerPtr edge) const
 {
     return new RootedTreeEdgeItem(edge);
 }
-QLayout* RootedTreePlugin::dataExtraProperties ( DataPtr /*node*/, QWidget* /*parentWidget*/ ) const
+QLayout* RootedTreePlugin::dataExtraProperties(DataPtr /*node*/, QWidget* /*parentWidget*/) const
 {
-  return 0;
+    return 0;
 }
 
-QLayout*  RootedTreePlugin::pointerExtraProperties ( PointerPtr arg1, QWidget* arg2 ) const
+QLayout*  RootedTreePlugin::pointerExtraProperties(PointerPtr arg1, QWidget* arg2) const
 {
-    return  DataStructurePluginInterface::pointerExtraProperties ( arg1, arg2 );
+    return  DataStructurePluginInterface::pointerExtraProperties(arg1, arg2);
 }
 
-QLayout*  RootedTreePlugin::dataStructureExtraProperties ( DataStructurePtr graph, QWidget* parentWidget ) const
+QLayout*  RootedTreePlugin::dataStructureExtraProperties(DataStructurePtr graph, QWidget* parentWidget) const
 {
 //    if (!m_layout){
     RootedTreeStructure * ds = qobject_cast< RootedTreeStructure* >(graph.get());
@@ -92,7 +92,7 @@ QLayout*  RootedTreePlugin::dataStructureExtraProperties ( DataStructurePtr grap
     connect(showPointer, SIGNAL(toggled(bool)), ds, SLOT(setShowAllPointers(bool)));
     connect(ds, SIGNAL(showPointersChanged(bool)), showPointer, SLOT(setChecked(bool)));
 //    }
-   
+
    showPointer->setChecked(ds->isShowingAllPointers());
    return layout;
 }
@@ -106,8 +106,9 @@ bool RootedTreePlugin::canConvertFrom(Document* doc) const
     QQueue<DataPtr> queue;
     foreach (DataStructurePtr ds, doc->dataStructures()){
         foreach(DataPtr p, ds->dataList()){
-            if (visited.contains(p.get()))
+            if (visited.contains(p.get())) {
                 continue;
+            }
             visited.insert(p.get());
             queue.enqueue(p);
             while (!queue.isEmpty()){
@@ -130,7 +131,9 @@ bool RootedTreePlugin::canConvertFrom(Document* doc) const
         if (KMessageBox::Continue != KMessageBox::warningContinueCancelList(0,
                                                                         i18n("Cannot convert document \'%1\'", doc->name()),
                                                                         errors))
+        {
             return false;
+        }
     }
     return true;
 }

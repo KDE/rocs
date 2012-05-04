@@ -24,14 +24,15 @@
 
 class RootedTreeNode : public Data
 {
-  Q_OBJECT
-  
-  Q_PROPERTY(quint32 numberOfChilds READ numberOfChilds WRITE setNumberOfChilds)
-  Q_PROPERTY(QScriptValue leftChild READ left_child)
-  Q_PROPERTY(QScriptValue rightChild READ right_child)
-  Q_PROPERTY(QScriptValue nodeParent READ node_parent)
-  
-  qint32 m_nChilds;
+    Q_OBJECT
+
+    Q_PROPERTY(quint32 numberOfChilds READ numberOfChilds WRITE setNumberOfChilds)
+    Q_PROPERTY(QScriptValue leftChild READ left_child)
+    Q_PROPERTY(QScriptValue rightChild READ right_child)
+    Q_PROPERTY(QScriptValue nodeParent READ node_parent)
+
+    qint32 m_nChilds;
+
 public:
     static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
     RootedTreeNode(DataStructurePtr parent, int uniqueIdentifier, int dataType);
@@ -45,7 +46,7 @@ public slots:
     DataPtr nodeParent() const;
     /** return the i (0 to n-1) child */
     DataPtr child(const quint32 i) const;
-    
+
     DataList children() const;
 
     PointerPtr addLeftChild(DataPtr child) const;
@@ -62,17 +63,15 @@ public slots:
     QScriptValue right_child() const;
     QScriptValue child_at(quint32 idx) const;
     QScriptValue node_parent() const;
-    
+
     /**return the list of valid children */
     QScriptValue children_list() const;
 
     quint32 numberOfChilds() const;
-    
-    void setNumberOfChilds(const qint32 number);
-    
-    void adjustPosition();
-    
 
+    void setNumberOfChilds(const qint32 number);
+
+    void adjustPosition();
 };
 
 Q_DECLARE_METATYPE(RootedTreeNode*)

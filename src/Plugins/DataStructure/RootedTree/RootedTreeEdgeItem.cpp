@@ -48,8 +48,8 @@ static const qreal PI_3 = Pi / 3.0;
 /// Arrow size
 static const qreal ArrowSize = 10.0;
 
-RootedTreeEdgeItem::RootedTreeEdgeItem( PointerPtr edge, QGraphicsItem *parent)
-        : PointerItem(edge, parent)
+RootedTreeEdgeItem::RootedTreeEdgeItem(PointerPtr edge, QGraphicsItem *parent)
+    : PointerItem(edge, parent)
 {
     connect (edge.get(), SIGNAL(changed()), this, SLOT(updatePathLayout()));
 //     setPath(createCurves());
@@ -73,7 +73,7 @@ QPointF RootedTreeEdgeItem::startPoint()
     if (scene()){
         if(QGraphicsItem * item = scene()->itemAt(pointer()->from()->x(), pointer()->from()->y())){
             if ((pointer()->property("TreeEdge").isValid())){
-		RootedTreeNode* fromNode = qobject_cast<RootedTreeNode*>(pointer()->from().get());
+                RootedTreeNode* fromNode = qobject_cast<RootedTreeNode*>(pointer()->from().get());
                 const qreal pointersSize = pointer()->dataStructure()->property("PointersRegion").toReal();
                 qint16 childCount = fromNode->numberOfChilds();
                 const qreal size = pointer()->dataStructure()->property("NodeSize").toReal();
@@ -89,13 +89,15 @@ QPointF RootedTreeEdgeItem::startPoint()
                 }
             }
         }
-        else
+        else {
             m_startPoint = QPointF(pointer()->from()->x(),pointer()->from()->y());
+        }
     }
 
     m_endPoint = endPoint();
     return m_startPoint;
 }
+
 
 QPointF RootedTreeEdgeItem::endPoint() const
 {
@@ -105,12 +107,13 @@ QPointF RootedTreeEdgeItem::endPoint() const
     }
     const qreal size = pointer()->dataStructure()->property("NodeSize").toReal();
     if(QGraphicsItem * item = scene()->itemAt(pointer()->to()->x(), pointer()->to()->y())) {
-        if (pointer()->property("TreeEdge").isValid() && pointer()->property("TreeEdge").toInt() != -1)
+        if (pointer()->property("TreeEdge").isValid() && pointer()->property("TreeEdge").toInt() != -1) {
             return item->mapToScene( size/2, -size * 0.05);
-        else if (RootedTreeNode* parentNode = qobject_cast<RootedTreeNode*>(pointer()->to().get())) {
+        } else if (RootedTreeNode* parentNode = qobject_cast<RootedTreeNode*>(pointer()->to().get())) {
             for(quint32 count = 0; count <= parentNode->numberOfChilds(); ++count) {
-                if (parentNode->child(count).get() &&  parentNode->child(count).get() == pointer()->from().get())
+                if (parentNode->child(count).get() &&  parentNode->child(count).get() == pointer()->from().get()) {
                     return item->mapToScene( (count+1) * size/parentNode->numberOfChilds() , size*1.65);
+                }
             }
             return item->mapToScene( size/2 , size*1.65);
         }
@@ -122,16 +125,18 @@ QPointF RootedTreeEdgeItem::endPoint() const
 
 void RootedTreeEdgeItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/)
 {
-    if (pointer()->to() && pointer()->from() ) {
+    if (pointer()->to() && pointer()->from()) {
         m_startPoint = startPoint();
         m_endPoint = endPoint();
         QLineF line(m_startPoint, m_endPoint);
         if (!m_startPoint.isNull()) {
-            
-            if (!pointer()->dataStructure()->property("ShowAllPointers").toBool())
-                if (pointer()->property("TreeEdge").toInt() == -1)
+
+            if (!pointer()->dataStructure()->property("ShowAllPointers").toBool()) {
+                if (pointer()->property("TreeEdge").toInt() == -1) {
                     return;
-            
+                }
+            }
+
             painter->drawLine(line);
 
             qreal angle = acos(line.dx() / line.length());
@@ -151,9 +156,10 @@ void RootedTreeEdgeItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
 
 }
 
+
 QRectF RootedTreeEdgeItem::boundingRect() const
 {
-    if (pointer()->to().get() && pointer()->from().get() && pointer()->property("TreeEdge").toInt() != -1) {
+    if (pointer()->to() && pointer()->from() && pointer()->property("TreeEdge").toInt() != -1) {
         if (!m_startPoint.isNull()) {
             qreal penWidth = 1;
             qreal extra = (penWidth + ArrowSize) / 2.0;
@@ -163,6 +169,5 @@ QRectF RootedTreeEdgeItem::boundingRect() const
     return QRectF();
 
 }
-
 
 #include "RootedTreeEdgeItem.moc"

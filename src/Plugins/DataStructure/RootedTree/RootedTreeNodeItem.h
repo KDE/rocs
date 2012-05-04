@@ -23,9 +23,11 @@
 
 class Data;
 
-class RootedTreeNodeItem : public DataItem{
-  Q_OBJECT
-  public:
+class RootedTreeNodeItem : public DataItem
+{
+    Q_OBJECT
+
+public:
     RootedTreeNodeItem(DataPtr n);
     ~RootedTreeNodeItem();
 

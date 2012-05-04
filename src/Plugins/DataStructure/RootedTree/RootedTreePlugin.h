@@ -20,14 +20,14 @@
 #ifndef ROOTEDTREEPLUGIN_H
 #define ROOTEDTREEPLUGIN_H
 
-//#include "rocslib_export.h"
 #include "DataStructurePluginInterface.h"
 #include "Document.h"
 
 namespace Rocs{
 
 class /*ROCSLIB_EXPORT*/ RootedTreePlugin : public DataStructurePluginInterface {
-  public:
+
+public:
     RootedTreePlugin ( QObject* parent,  const QList<QVariant> & /* args*/ );
 
     virtual ~RootedTreePlugin();

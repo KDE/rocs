@@ -26,15 +26,14 @@ class RootedTreeNode;
 
 class ROCSLIB_EXPORT RootedTreeStructure : public DataStructure {
     Q_OBJECT
-    
+
     Q_PROPERTY(bool ShowAllPointers READ isShowingAllPointers WRITE setShowAllPointers NOTIFY showPointersChanged)
-    
+
     RootedTreeNode* m_rootNode;
-    
+
     bool m_showPointers;
 
-    public:
-
+public:
     //to avoid hide some methods
     using DataStructure::addData;
     using DataStructure::addPointer;
@@ -51,28 +50,26 @@ class ROCSLIB_EXPORT RootedTreeStructure : public DataStructure {
 
     void setEngine(QScriptEngine* engine);
     DataPtr rootNode() const;
-    
-    
+
     /** return true if all the pointers need to be draw. */
     bool isShowingAllPointers() const;
 
-    public slots:
-        /** @brief Create a new data (tree node)
-         Note that it only create but not insert it into the tree.
-         */
+public slots:
+    /** @brief Create a new data (tree node)
+        Note that it only create but not insert it into the tree.
+        */
+    QScriptValue add_data(const QString& name);
 
-        QScriptValue add_data(const QString& name);
+    void set_root_node(RootedTreeNode* node);
+    QScriptValue root_node() const;
 
-        void set_root_node(RootedTreeNode* node);
-        QScriptValue root_node() const;
-	
-	/** set if all the pointers should be draw or not. All pointers is a complete draw
-	 * of this data structure, including pointers to parents and children division on nodes. */
-	void setShowAllPointers(const bool v);
+    /** set if all the pointers should be draw or not. All pointers is a complete draw
+    * of this data structure, including pointers to parents and children division on nodes. */
+    void setShowAllPointers(const bool v);
 
-    signals:
-	/** signal emitted on change of pointers visibility*/
-        void showPointersChanged(const bool);
+signals:
+    /** signal emitted on change of pointers visibility*/
+    void showPointersChanged(const bool);
 
 };
 #endif // ROOTEDTREESTRUCTURE_H

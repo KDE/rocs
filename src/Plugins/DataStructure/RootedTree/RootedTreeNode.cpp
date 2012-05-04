@@ -25,10 +25,10 @@
 
 DataPtr RootedTreeNode::create(DataStructurePtr parent, int uniqueIdentifier, int dataType)
 {
-        return Data::create<RootedTreeNode>(parent, uniqueIdentifier, dataType);
+    return Data::create<RootedTreeNode>(parent, uniqueIdentifier, dataType);
 }
 
-RootedTreeNode::RootedTreeNode(DataStructurePtr parent, int uniqueIdentifier, int dataType): 
+RootedTreeNode::RootedTreeNode(DataStructurePtr parent, int uniqueIdentifier, int dataType):
     Data(parent, uniqueIdentifier, dataType), m_nChilds(-1)
 {
 }
@@ -36,42 +36,45 @@ RootedTreeNode::RootedTreeNode(DataStructurePtr parent, int uniqueIdentifier, in
 
 RootedTreeNode::~RootedTreeNode()
 {
-  
+
 }
 
 quint32 RootedTreeNode::numberOfChilds() const
 {
-  if (m_nChilds != -1)
-    return m_nChilds;
-  if (dataStructure()->property("ChildCount").isValid())
-    return dataStructure()->property("ChildCount").toUInt();
-  return 2;
+    if (m_nChilds != -1) {
+        return m_nChilds;
+    }
+    if (dataStructure()->property("ChildCount").isValid()) {
+        return dataStructure()->property("ChildCount").toUInt();
+    }
+    return 2;
 }
 
 void RootedTreeNode::setNumberOfChilds(const qint32 number)
 {
-  if (number != m_nChilds){
-    
-    for (qint32 i = number; i < m_nChilds; ++i)
-	setChild(DataPtr(), i);
-    m_nChilds = number;
-  }
+    if (number != m_nChilds){
+        for (qint32 i = number; i < m_nChilds; ++i) {
+            setChild(DataPtr(), i);
+        }
+        m_nChilds = number;
+    }
 }
 
 
 DataList RootedTreeNode::children() const
 {
-  DataList list;
-  foreach (PointerPtr ptr, out_pointers())
-        if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge") != -1)
+    DataList list;
+    foreach (PointerPtr ptr, out_pointers())
+        if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge") != -1) {
             list << ptr->to();
-  return list;
+        }
+    return list;
 }
 
 
 PointerPtr RootedTreeNode::addRigthChild(DataPtr child) const
 {
-  return setChild(child, numberOfChilds()-1);
+    return setChild(child, numberOfChilds()-1);
 }
 
 DataPtr RootedTreeNode::rightChild() const
@@ -79,23 +82,24 @@ DataPtr RootedTreeNode::rightChild() const
     return child(numberOfChilds()-1);
 }
 
+
 PointerPtr RootedTreeNode::addLeftChild(DataPtr child) const
 {
-  return setChild(child, 0);
+    return setChild(child, 0);
 }
+
 
 DataPtr RootedTreeNode::leftChild() const
 {
-
     return child(0);
 }
 
 
-
 PointerPtr RootedTreeNode::setNodeParent(DataPtr parent) const
 {
-    foreach (PointerPtr p, pointers(nodeParent()))
+    foreach (PointerPtr p, pointers(nodeParent())) {
         p->remove();
+    }
     if (parent.get()){
         PointerPtr ptr = dataStructure()->addPointer(this->getData(), parent);
         ptr->setProperty("TreeEdge", -1);
@@ -104,125 +108,151 @@ PointerPtr RootedTreeNode::setNodeParent(DataPtr parent) const
     return PointerPtr();
 }
 
+
 DataPtr RootedTreeNode::nodeParent() const
 {
-    foreach (PointerPtr ptr, out_pointers())
-        if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge").toInt() < 0)
+    foreach (PointerPtr ptr, out_pointers()) {
+        if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge").toInt() < 0) {
             return ptr->to();
+        }
+    }
     return DataPtr();
 }
+
 
 DataPtr RootedTreeNode::child(const quint32 i) const
 {
-    if (i >= numberOfChilds())
+    if (i >= numberOfChilds()) {
         return DataPtr();
-    foreach (PointerPtr ptr, out_pointers())
-        if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge").toUInt() == i)
+    }
+    foreach (PointerPtr ptr, out_pointers()) {
+        if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge").toUInt() == i) {
             return ptr->to();
+        }
+    }
     return DataPtr();
 }
 
+
 PointerPtr RootedTreeNode::setChild(DataPtr c, quint32 idx) const{
 
-    if (idx < numberOfChilds()){ 
-      foreach (PointerPtr p, pointers(child(idx)))
-	  p->remove();
-  //         child(idx)->remove();
-      if (c.get()){
-	  PointerPtr ptr = dataStructure()->addPointer(this->getData(), c->getData());
-	  ptr->setProperty("TreeEdge", idx);
-	  return ptr;
-      }
+    if (idx < numberOfChilds()){
+        foreach (PointerPtr p, pointers(child(idx))) {
+            p->remove();
+        }
+//      child(idx)->remove();
+        if (c.get()){
+            PointerPtr ptr = dataStructure()->addPointer(this->getData(), c->getData());
+            ptr->setProperty("TreeEdge", idx);
+            return ptr;
+        }
     }
     return PointerPtr();
 }
 
+
 QScriptValue RootedTreeNode::add_child(RootedTreeNode* childNode, quint32 idx) const
 {
     if (idx < numberOfChilds() && childNode){
-	PointerPtr p = setChild(childNode->getData(), idx);
-	if (p.get())
-	  return p->scriptValue();
+        PointerPtr pointer = setChild(childNode->getData(), idx);
+        if (!pointer) {
+            return pointer->scriptValue();
+        }
     }
     setChild(DataPtr(), idx);
     return QScriptValue();
 }
 
+
 QScriptValue RootedTreeNode::add_left_child(RootedTreeNode* child) const
 {
     if (!child){
         addLeftChild(DataPtr());
-    }else{
-        PointerPtr ptr = addLeftChild(child->getData());
-        if (!ptr.get())
-            return ptr->scriptValue();
+    } else {
+        PointerPtr pointer = addLeftChild(child->getData());
+        if (!pointer) {
+            return pointer->scriptValue();
+        }
     }
     return QScriptValue();
-
 }
+
 
 QScriptValue RootedTreeNode::add_right_child(RootedTreeNode* child) const
 {
     if (!child){
         addRigthChild(DataPtr());
-    }else{
-        PointerPtr ptr = addRigthChild(child->getData());
-        if (!ptr.get())
-            return ptr->scriptValue();
+    } else {
+        PointerPtr pointer = addRigthChild(child->getData());
+        if (!pointer) {
+            return pointer->scriptValue();
+        }
     }
     return QScriptValue();
 }
+
 
 QScriptValue RootedTreeNode::add_node_parent(RootedTreeNode* parentNode) const
 {
     if (!parentNode){
         setNodeParent(DataPtr());
-    }else{
-        PointerPtr ptr = setNodeParent(parentNode->getData());
-        if (!ptr.get())
-            return ptr->scriptValue();
+    } else {
+        PointerPtr pointer = setNodeParent(parentNode->getData());
+        if (!pointer) {
+            return pointer->scriptValue();
+        }
     }
     return QScriptValue();
 }
 
+
 QScriptValue RootedTreeNode::child_at(quint32 idx) const
 {
-    DataPtr ptr = child(idx);
-    if (!ptr.get())
-        return ptr->scriptValue();
+    DataPtr data = child(idx);
+    if (!data) {
+        return data->scriptValue();
+    }
     return QScriptValue();
 }
+
 
 QScriptValue RootedTreeNode::left_child() const
 {
-    DataPtr ptr = leftChild();
-    if (ptr.get())
-        return ptr->scriptValue();
+    DataPtr data = leftChild();
+    if (data) {
+        return data->scriptValue();
+    }
     return QScriptValue();
 }
+
 
 QScriptValue RootedTreeNode::right_child() const
 {
-    DataPtr ptr = rightChild();
-    if (ptr.get())
-        return ptr->scriptValue();
+    DataPtr data = rightChild();
+    if (data) {
+        return data->scriptValue();
+    }
     return QScriptValue();
 }
+
 
 QScriptValue RootedTreeNode::node_parent() const
 {
-    DataPtr ptr = nodeParent();
-    if (ptr.get())
-        return ptr->scriptValue();
+    DataPtr data = nodeParent();
+    if (data) {
+        return data->scriptValue();
+    }
     return QScriptValue();
 }
 
+
 QScriptValue RootedTreeNode::children_list() const
 {
-    QScriptValue v =  dataStructure()->engine()->newArray();
-    foreach (const DataPtr &child, children())
-      v.property("push").call(v, QScriptValueList() << child->scriptValue());
-    return v;
+    QScriptValue value =  dataStructure()->engine()->newArray();
+    foreach (const DataPtr &child, children()) {
+        value.property("push").call(value, QScriptValueList() << child->scriptValue());
+    }
+    return value;
 }
 
 
@@ -230,7 +260,7 @@ void RootedTreeNode::adjustPosition()
 {
     DataPtr parent = nodeParent();
     const QRectF size = dataStructure()->document()->size();
-    if (parent.get()){
+    if (parent){
         qreal adjust = 0.0;
         foreach (PointerPtr p, nodeParent()->pointers(this->getData())){
             if (p->property("TreeEdge").toInt() >= 0){
@@ -244,9 +274,11 @@ void RootedTreeNode::adjustPosition()
                      hSize * numberOfChilds() * adjust;
         qreal posY = parent->y() + vSize;
         setPos(posX, posY);
-    }else if (qobject_cast<RootedTreeStructure*>(dataStructure().get())->rootNode().get() == this)
+    } else if (qobject_cast<RootedTreeStructure*>(dataStructure().get())->rootNode().get() == this) {
         setPos(size.center().x(), size.top() + 100);
+    }
 }
+
 
 qint8 RootedTreeNode::height() const
 {
