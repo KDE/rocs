@@ -49,7 +49,7 @@ DataTypePage::DataTypePage(QWidget* parent)
             this, SLOT(setTypeName()));
     connect(ui->typeDefaultColor, SIGNAL(activated(QColor)),
             this, SLOT(setTypeDefaultColor()));
-    connect(ui->typeIcon, SIGNAL(currentIndexChanged(QString)),
+    connect(ui->typeIcon, SIGNAL(activated(QString)),
             this, SLOT(setIcon()));
 }
 
@@ -136,7 +136,6 @@ void DataTypePage::setCurrentType(int index)
             icon.remove("rocs_");
             ui->typeIcon->setCurrentItem(icon);
         }
-
     }
 }
 
