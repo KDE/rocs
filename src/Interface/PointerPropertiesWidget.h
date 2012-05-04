@@ -36,7 +36,7 @@ class PointerPropertiesWidget : public KDialog
 {
     Q_OBJECT
 public:
-    PointerPropertiesWidget(PointerPtr pointer, QWidget *parent = 0);
+    explicit PointerPropertiesWidget(PointerPtr pointer, QWidget *parent = 0);
     void setPointer(PointerPtr e);
     void setPosition(QPointF screenPosition);
 

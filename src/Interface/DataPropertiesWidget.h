@@ -36,7 +36,7 @@ class DataPropertiesWidget: public KDialog
     Q_OBJECT
 
 public:
-    DataPropertiesWidget(DataPtr data, QWidget* parent = 0);
+    explicit DataPropertiesWidget(DataPtr data, QWidget* parent = 0);
     void setPosition(QPointF screenPosition);
     void setData(DataPtr data);
 
