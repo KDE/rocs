@@ -91,7 +91,7 @@ public:
      */
     QRectF size();
 
-    /** @brief clear data that only is usefull for a type of data structure and that cannot be converted to others from all data structeres of this document.
+    /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others from all data structeres of this document.
     */
     virtual void cleanUpBeforeConvert();
 
