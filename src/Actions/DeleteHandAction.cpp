@@ -35,7 +35,7 @@ DeleteHandAction::DeleteHandAction(GraphScene* scene, QObject* parent): Abstract
 {
     setText(i18n("Delete"));
     setToolTip(i18n("Delete items by clicking on them."));
-    setIcon(KIcon("rocsdelete"));
+    setIcon(KIcon("rocsdeletedata"));
     _name = "rocs-hand-delete";
 
     connect(_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeKeyRelease(QKeyEvent*)));

@@ -43,10 +43,12 @@ GraphLayers::GraphLayers(MainWindow *parent) :
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
 
     QWidget *contents = new QWidget();
-    KPushButton *btnADD = new KPushButton(KIcon("AddGraph"), i18n("Add"));
+    KPushButton *btnADD = new KPushButton(KIcon("rocsnew"), i18n("Add"));
+    btnADD->setToolTip(i18n("Add a new data structure with the specified name"));
 
     _buttonGroup = new QButtonGroup();
     _lineEdit = new KLineEdit();
+    _lineEdit->setPlaceholderText(i18n("Identifier for new Data Structure"));
 
     connect(btnADD, SIGNAL(clicked()), this, SLOT(btnADDClicked()));
     hBoxLayout->addWidget(btnADD);

@@ -38,6 +38,7 @@
 #include <KDebug>
 #include <KAction>
 #include <KColorCombo>
+#include <KPushButton>
 
 #include <QString>
 #include <QGraphicsItem>

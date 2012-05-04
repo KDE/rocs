@@ -33,7 +33,7 @@ AddDataHandAction::AddDataHandAction(GraphScene *scene, QObject *parent)
 {
     setText(i18n("Add Node"));
     setToolTip(i18n("Creates a new node at the click position on the drawing area."));
-    setIcon(KIcon("rocsaddnode"));
+    setIcon(KIcon("rocsadddata"));
     _name = "rocs-hand-add-node";
 }
 

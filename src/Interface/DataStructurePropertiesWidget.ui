@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>298</width>
-    <height>193</height>
+    <height>215</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -189,15 +189,24 @@
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="_dataStructureDelete">
+      <widget class="KIconButton" name="_dataStructureDelete">
        <property name="toolTip">
-        <string>Delete the active graph</string>
+        <string>Delete this data structure</string>
        </property>
        <property name="whatsThis">
-        <string>Delete the current active graph: delete all nodes and edges</string>
+        <string>Delete the current data structure: delete all data elements and all pointers</string>
        </property>
-       <property name="text">
-        <string comment="@action:button" extracomment="Do not translate, X is for delete">x</string>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+       <property name="icon">
+        <string>rocsdeletegrey</string>
+       </property>
+       <property name="iconSize">
+        <number>12</number>
+       </property>
+       <property name="strictIconSize">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -206,6 +215,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KIconButton</class>
+   <extends>QPushButton</extends>
+   <header>kicondialog.h</header>
+  </customwidget>
   <customwidget>
    <class>KButtonGroup</class>
    <extends>QGroupBox</extends>
@@ -221,11 +235,6 @@
    <class>KSeparator</class>
    <extends>QFrame</extends>
    <header>kseparator.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
