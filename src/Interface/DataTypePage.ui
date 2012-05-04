@@ -84,6 +84,26 @@
      <item row="2" column="1">
       <widget class="KColorCombo" name="typeDefaultColor"/>
      </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Identifier:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="typeIdentifier">
+       <property name="toolTip">
+        <string>This is the unique identifier for the data type.</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

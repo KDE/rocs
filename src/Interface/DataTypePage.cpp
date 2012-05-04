@@ -104,6 +104,7 @@ void DataTypePage::setCurrentType(int index)
 
     ui->typeName->setText(_document->dataType(type)->name());
     ui->typeDefaultColor->setColor(_document->dataType(type)->defaultColor());
+    ui->typeIdentifier->setText(QString::number(type));
 
     // icon selector
     if (!_document->iconPackage().isEmpty()) {

@@ -83,6 +83,7 @@ void PointerTypePage::setCurrentType(int index)
     ui->typeName->setText(_document->pointerType(type)->name());
     //TODO insert style
     ui->typeDefaultColor->setColor(_document->pointerType(type)->defaultColor());
+    ui->typeIdentifier->setText(QString::number(type));
 }
 
 
