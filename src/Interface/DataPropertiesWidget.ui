@@ -214,12 +214,16 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Icon</string>
+           <string>Type Icon:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="KComboBox" name="dataTypeIcon"/>
+         <widget class="KComboBox" name="dataTypeIcon">
+          <property name="toolTip">
+           <string>Select the icon that is used for all data elements of this type.</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

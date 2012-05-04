@@ -45,7 +45,7 @@ private slots:
     void reflectAttributes();
     void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
     void addProperty();
-    void setDataType(QString dataType);
+    void setDataType(int dataTypeIndex);
     void addDataType();
     void setIcon(const QString& icon);
 private:

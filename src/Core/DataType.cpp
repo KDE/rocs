@@ -67,6 +67,7 @@ int DataType::identifier() const
     return d->_identifier;
 }
 
+
 void DataType::setName(QString name)
 {
     d->_name = name;
