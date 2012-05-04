@@ -92,17 +92,19 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
             RootedTreeNode* newdataRootedNode = qobject_cast< RootedTreeNode* >(fromOtherToNew.value(n.get()).get());
             //Set the number of Max number of childrem
             newdataRootedNode->setNumberOfChilds(n->adjacent_data().count());
-            foreach(boost::shared_ptr <Data > c, n->adjacent_data()){
-                if (!visited.contains(c.get())){
-                    visited.insert(c.get());
-                    queue.enqueue(c);
-                    DataPtr childdata = addData(c->name(), 0);
-                    childdata->setColor(c->color());
-                    childdata->setValue(c->value());
-                    childdata->setX(c->x());
-                    childdata->setY(c->y());
-                    childdata->setWidth(c->width());
-                    fromOtherToNew.insert(c.get(), childdata);
+
+            DataList::const_iterator iter;
+            for (iter = n->adjacent_data().constBegin(); iter != n->adjacent_data().constEnd(); ++iter) {
+                if (!visited.contains(iter->get())){
+                    visited.insert(iter->get());
+                    queue.enqueue(*iter);
+                    DataPtr childdata = addData((*iter)->name(), 0);
+                    childdata->setColor((*iter)->color());
+                    childdata->setValue((*iter)->value());
+                    childdata->setX((*iter)->x());
+                    childdata->setY((*iter)->y());
+                    childdata->setWidth((*iter)->width());
+                    fromOtherToNew.insert(iter->get(), childdata);
 
                     //set the child at childCount position
                     newdataRootedNode->setChild(childdata, childCount++);

@@ -356,12 +356,13 @@ DataList DataStructure::addDataList(DataList dataList, int dataType)
 DataList DataStructure::addDataList(QList< QPair<QString, QPointF> > dataList, int dataType)
 {
     QList< DataPtr > dataCreateList;
-    QPair<QString, QPointF> dataDefinition;
-    foreach(dataDefinition, dataList) {
-        if (DataPtr data = addData(dataDefinition.first, dataType)) {
-            data->setPos(dataDefinition.second.x(), dataDefinition.second.y());
+    QList< QPair<QString, QPointF> >::const_iterator dataDefinition = dataList.constBegin();
+    while (dataDefinition != dataList.constEnd()) {
+        if (DataPtr data = addData(dataDefinition->first, dataType)) {
+            data->setPos(dataDefinition->second.x(), dataDefinition->second.y());
             dataCreateList << data;
         }
+        ++dataDefinition;
     }
     return addDataList(dataCreateList);
 }
