@@ -21,6 +21,7 @@
 #include <DataItem.h>
 #include <PointerType.h>
 #include <Pointer.h>
+#include <DocumentManager.h>
 
 #include <QWidget>
 #include <QString>
@@ -68,6 +69,14 @@ void PointerTypePage::setDocument(Document* document)
 
     ui->typeSelector->setCurrentIndex(0); // default type 0 always exists
     setCurrentType(0);
+}
+
+
+void PointerTypePage::setPointerType(PointerTypePtr pointerType)
+{
+    //FIXME current workaround: select current active document as parent document
+    setDocument(DocumentManager::self()->activeDocument());
+    ui->typeSelector->setCurrentIndex(ui->typeSelector->findData(QVariant(pointerType->identifier())));
 }
 
 

@@ -33,6 +33,7 @@
 #include "GraphScene.h"
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
+#include <PropertiesDialogAction.h>
 
 #include <KLocale>
 #include <KDebug>
@@ -160,8 +161,10 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     QMenu* dataTypeMenu = new QMenu(dataTypeButton);
     dataTypeButton->setFlat(true);
     dataTypeButton->setStyleSheet("text-align: left");
-    dataTypeButton->setDelayedMenu(dataTypeMenu);
-//     dataTypeMenu->addAction();
+    dataTypeButton->setMenu(dataTypeMenu);
+    dataTypeMenu->addAction(
+            new PropertiesDialogAction("Properties", dataStructure->document()->dataType(typeIdentifier), dataPropertyWidget)
+        );
 
     // TODO move icon creator to data type
     // create icon for data type
@@ -252,7 +255,15 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     QWidget* pointerPropertyWidget = new QWidget(this);
     QGridLayout* pointerPropertyLayout = new QGridLayout(pointerPropertyWidget);
 
-    QLabel* pointerElementName = new QLabel(i18n("Pointer"), pointerPropertyWidget);
+    KPushButton* pointerTypeButton = new KPushButton(this);
+    QMenu* pointerTypeMenu = new QMenu(pointerTypeButton);
+    pointerTypeButton->setText(dataStructure->document()->pointerType(typeIdentifier)->name());
+    pointerTypeButton->setFlat(true);
+    pointerTypeButton->setStyleSheet("text-align: left");
+    pointerTypeButton->setMenu(pointerTypeMenu);
+    pointerTypeMenu->addAction(
+            new PropertiesDialogAction("Properties", dataStructure->document()->pointerType(typeIdentifier), pointerPropertyWidget)
+        );
 
     KPushButton* pointerTypeShowName = new KPushButton(pointerPropertyWidget);
     pointerTypeShowName->setIcon(KIcon("rocstexticon"));
@@ -276,7 +287,7 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     pointerTypeVisible->setFixedWidth(24);
 
     pointerPropertyWidget->setLayout(pointerPropertyLayout);
-    pointerPropertyLayout->addWidget(pointerElementName, 1, 1);
+    pointerPropertyLayout->addWidget(pointerTypeButton, 1, 1);
     pointerPropertyLayout->addWidget(pointerTypeShowName, 1, 2);
     pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 3);
     pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 4);

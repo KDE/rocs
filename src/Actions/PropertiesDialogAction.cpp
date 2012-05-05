@@ -24,11 +24,14 @@
 #include <DataStructurePropertiesDialog.h>
 #include <DocumentPropertiesDialog.h>
 #include <DataPropertiesWidget.h>
+#include <DataTypePage.h>
 #include <PointerPropertiesWidget.h>
+#include <PointerTypePage.h>
 #include <DocumentManager.h>
 #include <Document.h>
 
 #include <QDebug>
+#include <KTabWidget>
 
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, Document* document, QObject* parent)
@@ -66,6 +69,23 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, PointerPtr pointer,
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
+
+PropertiesDialogAction::PropertiesDialogAction(QString text, DataTypePtr dataType, QObject* parent)
+    : KAction(text, parent)
+{
+    _dataType = dataType;
+    _dialogType = DATATYPE;
+    connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
+}
+
+
+PropertiesDialogAction::PropertiesDialogAction(QString text, PointerTypePtr pointerType, QObject* parent)
+    : KAction(text, parent)
+{
+    _pointerType = pointerType;
+    _dialogType = POINTERTYPE;
+    connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
+}
 
 void PropertiesDialogAction::showDialog()
 {
@@ -132,13 +152,55 @@ void PropertiesDialogAction::showDialog()
         dialog->exec();
         break;
     }
+    case DATATYPE: {
+        if (!_dataType) {
+            return;
+        }
+        QPointer<KDialog> dialog = new KDialog;
+        DataTypePage* typePage = new DataTypePage(dialog);
+        typePage->setDataType(_dataType);
+        dialog->setMainWidget(typePage);
+        dialog->setCaption(i18n("Data Type Properties"));
+        dialog->setButtons(KDialog::Close);
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+        if (_screenPosition.isNull()) {
+            // value -3 means: center on screen that currently contains the mouse pointer.
+            KDialog::centerOnScreen(dialog, -3);
+        }
+        else {
+            dialog->move(_screenPosition.x() + 10, _screenPosition.y() + 10);
+        }
+        dialog->exec();
+        break;
+    }
+    case POINTERTYPE: {
+        if (!_pointerType) {
+            return;
+        }
+        QPointer<KDialog> dialog = new KDialog;
+        PointerTypePage* typePage = new PointerTypePage(dialog);
+        typePage->setPointerType(_pointerType);
+        dialog->setMainWidget(typePage);
+        dialog->setCaption(i18n("Pointer Type Properties"));
+        dialog->setButtons(KDialog::Close);
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+        if (_screenPosition.isNull()) {
+            // value -3 means: center on screen that currently contains the mouse pointer.
+            KDialog::centerOnScreen(dialog, -3);
+        }
+        else {
+            dialog->move(_screenPosition.x() + 10, _screenPosition.y() + 10);
+        }
+        dialog->exec();
+        break;
+    }
     default:
         break;
     }
 }
 
 
-void PropertiesDialogAction::setPostion(QPointF screenPosition)
+void PropertiesDialogAction::setPosition(QPointF screenPosition)
 {
     _screenPosition = screenPosition;
 }

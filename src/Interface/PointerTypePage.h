@@ -41,6 +41,7 @@ public:
 
 public slots:
     void setDocument(Document* document);
+    void setPointerType(PointerTypePtr pointerType);
 
 private slots:
     void setCurrentType(int index);

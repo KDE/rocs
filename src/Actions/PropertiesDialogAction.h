@@ -35,7 +35,9 @@ class PropertiesDialogAction : public KAction
         DOCUMENT,
         DATASTRUCTURE,
         DATA,
-        POINTER
+        DATATYPE,
+        POINTER,
+        POINTERTYPE
     };
 
 public:
@@ -43,8 +45,10 @@ public:
     PropertiesDialogAction(QString text, DataStructurePtr dataStructure, QObject* parent);
     PropertiesDialogAction(QString text, DataPtr data, QObject* parent);
     PropertiesDialogAction(QString text, PointerPtr pointer, QObject* parent);
+    PropertiesDialogAction(QString text, DataTypePtr dataType, QObject* parent);
+    PropertiesDialogAction(QString text, PointerTypePtr pointerType, QObject* parent);
 
-    void setPostion(QPointF screenPosition);
+    void setPosition(QPointF screenPosition);
 
 public slots:
     void showDialog();
@@ -54,6 +58,8 @@ private:
     DataStructurePtr _dataStructure;
     DataPtr _data;
     PointerPtr _pointer;
+    DataTypePtr _dataType;
+    PointerTypePtr _pointerType;
     QPointF _screenPosition;
 
     DialogType _dialogType;

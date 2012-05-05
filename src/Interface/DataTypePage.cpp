@@ -19,6 +19,7 @@
 #include "DataTypePage.h"
 #include <Data.h>
 #include <DataItem.h>
+#include <DocumentManager.h>
 
 #include <QWidget>
 #include <QString>
@@ -71,6 +72,13 @@ void DataTypePage::setDocument(Document* document)
     setCurrentType(0);
 }
 
+
+void DataTypePage::setDataType(DataTypePtr dataType)
+{
+    //FIXME current workaround: select current active document as parent document
+    setDocument(DocumentManager::self()->activeDocument());
+    ui->typeSelector->setCurrentIndex(ui->typeSelector->findData(QVariant(dataType->identifier())));
+}
 
 void DataTypePage::setTypeName()
 {

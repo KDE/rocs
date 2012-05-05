@@ -368,7 +368,7 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     }
     if (contextAtItem) {
         PropertiesDialogAction *dataStructurePropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextDataStructure, this);
-        dataStructurePropertiesAction->setPostion(screenPosition);
+        dataStructurePropertiesAction->setPosition(screenPosition);
         menuDataStructure->addAction(dataStructurePropertiesAction);
     }
 
@@ -425,12 +425,12 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     }
     if (contextData) {
         PropertiesDialogAction *dataPropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextData, this);
-        dataPropertiesAction->setPostion(screenPosition);
+        dataPropertiesAction->setPosition(screenPosition);
         menu->addAction(dataPropertiesAction);
     }
     if (contextPointer) {
         PropertiesDialogAction *pointerPropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextPointer, this);
-        pointerPropertiesAction->setPostion(screenPosition);
+        pointerPropertiesAction->setPosition(screenPosition);
         menu->addAction(pointerPropertiesAction);
     }
     if (contextAtItem) {

@@ -40,6 +40,7 @@ public:
 
 public slots:
     void setDocument(Document* document);
+    void setDataType(DataTypePtr dataType);
 
 private slots:
     void setCurrentType(int index);
