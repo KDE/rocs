@@ -76,7 +76,13 @@ void PropertiesDialogAction::showDialog()
         }
         QPointer<DocumentPropertiesDialog> dialog = new DocumentPropertiesDialog;
         dialog->setDocument(_document);
-        dialog->setPosition(_screenPosition);
+        if (_screenPosition.isNull()) {
+            // value -3 means: center on screen that currently contains the mouse pointer.
+            KDialog::centerOnScreen(dialog, -3);
+        }
+        else {
+            dialog->setPosition(_screenPosition);
+        }
         dialog->exec();
         break;
     }
@@ -86,7 +92,13 @@ void PropertiesDialogAction::showDialog()
         }
         QPointer<DataStructurePropertiesDialog> dialog = new DataStructurePropertiesDialog;
         dialog->setDataStructure(_dataStructure);
-        dialog->setPosition(_screenPosition);
+        if (_screenPosition.isNull()) {
+            // value -3 means: center on screen that currently contains the mouse pointer.
+            KDialog::centerOnScreen(dialog, -3);
+        }
+        else {
+            dialog->setPosition(_screenPosition);
+        }
         dialog->exec();
         break;
     }
@@ -95,7 +107,13 @@ void PropertiesDialogAction::showDialog()
             return;
         }
         QPointer<DataPropertiesWidget> dialog = new DataPropertiesWidget(_data);
-        dialog->setPosition(_screenPosition);
+        if (_screenPosition.isNull()) {
+            // value -3 means: center on screen that currently contains the mouse pointer.
+            KDialog::centerOnScreen(dialog, -3);
+        }
+        else {
+            dialog->setPosition(_screenPosition);
+        }
         dialog->exec();
         break;
     }
@@ -104,7 +122,13 @@ void PropertiesDialogAction::showDialog()
             return;
         }
         QPointer<PointerPropertiesWidget> dialog = new PointerPropertiesWidget(_pointer);
-        dialog->setPosition(_screenPosition);
+        if (_screenPosition.isNull()) {
+            // value -3 means: center on screen that currently contains the mouse pointer.
+            KDialog::centerOnScreen(dialog, -3);
+        }
+        else {
+            dialog->setPosition(_screenPosition);
+        }
         dialog->exec();
         break;
     }
