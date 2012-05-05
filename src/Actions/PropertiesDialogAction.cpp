@@ -39,6 +39,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, Document* document,
 {
     _document = document;
     _dialogType = DOCUMENT;
+    this->setIcon(KIcon("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -48,6 +49,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataStructurePtr da
 {
     _dataStructure = dataStructure;
     _dialogType = DATASTRUCTURE;
+    this->setIcon(KIcon("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -57,6 +59,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataPtr data, QObje
 {
     _data = data;
     _dialogType = DATA;
+    this->setIcon(KIcon("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -66,6 +69,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, PointerPtr pointer,
 {
     _pointer = pointer;
     _dialogType = POINTER;
+    this->setIcon(KIcon("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -75,6 +79,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataTypePtr dataTyp
 {
     _dataType = dataType;
     _dialogType = DATATYPE;
+    this->setIcon(KIcon("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -84,6 +89,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, PointerTypePtr poin
 {
     _pointerType = pointerType;
     _dialogType = POINTERTYPE;
+    this->setIcon(KIcon("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
