@@ -119,7 +119,7 @@ set( rocs_interface_SRCS
     Interface/ConfigureDefaultProperties.cpp
     Interface/DataPropertiesWidget.cpp
     Interface/DataStructurePropertiesWidget.cpp
-    Interface/DataStructurePropertiesFullWidget.cpp
+    Interface/DataStructurePropertiesDialog.cpp
     Interface/DocumentPropertiesDialog.cpp
     Interface/DataStructurePage.cpp
     Interface/DataTypePage.cpp

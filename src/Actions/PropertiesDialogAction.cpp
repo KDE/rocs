@@ -21,7 +21,7 @@
 #include "PropertiesDialogAction.h"
 
 #include <QPointer>
-#include <DataStructurePropertiesFullWidget.h>
+#include <DataStructurePropertiesDialog.h>
 #include <DocumentPropertiesDialog.h>
 #include <DataPropertiesWidget.h>
 #include <PointerPropertiesWidget.h>
@@ -84,7 +84,7 @@ void PropertiesDialogAction::showDialog()
         if (!_dataStructure) {
             return;
         }
-        QPointer<DataStructurePropertiesFullWidget> dialog = new DataStructurePropertiesFullWidget;
+        QPointer<DataStructurePropertiesDialog> dialog = new DataStructurePropertiesDialog;
         dialog->setDataStructure(_dataStructure);
         dialog->setPosition(_screenPosition);
         dialog->exec();

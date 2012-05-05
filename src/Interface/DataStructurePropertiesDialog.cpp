@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "DataStructurePropertiesFullWidget.h"
+#include "DataStructurePropertiesDialog.h"
 
 #include "DataStructurePage.h"
 #include "DataTypePage.h"
@@ -39,7 +39,7 @@
 #include <QLayout>
 #include <QLabel>
 
-DataStructurePropertiesFullWidget::DataStructurePropertiesFullWidget(QWidget* parent)
+DataStructurePropertiesDialog::DataStructurePropertiesDialog(QWidget* parent)
     : KDialog(parent)
 {
     KTabWidget *tabWidget = new KTabWidget(this);
@@ -59,7 +59,7 @@ DataStructurePropertiesFullWidget::DataStructurePropertiesFullWidget(QWidget* pa
 }
 
 
-void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataStructure)
+void DataStructurePropertiesDialog::setDataStructure(DataStructurePtr dataStructure)
 {
     Q_ASSERT(dataStructure);
     _dataStructurePage->setDataStructure(dataStructure);
@@ -68,7 +68,7 @@ void DataStructurePropertiesFullWidget::setDataStructure(DataStructurePtr dataSt
 }
 
 
-void DataStructurePropertiesFullWidget::setPosition(QPointF screenPosition)
+void DataStructurePropertiesDialog::setPosition(QPointF screenPosition)
 {
     move(screenPosition.x() + 10,  screenPosition.y() + 10);
 }

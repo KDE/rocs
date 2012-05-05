@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SUI_DATA_STRUCTURE_PROPERTIES_FULL_WIDGET_H
-#define SUI_DATA_STRUCTURE_PROPERTIES_FULL_WIDGET_H
+#ifndef SUI_DATA_STRUCTURE_PROPERTIES_DIALOG_H
+#define SUI_DATA_STRUCTURE_PROPERTIES_DIALOG_H
 
 #include "Rocs_Typedefs.h"
 
@@ -28,15 +28,15 @@ class DataTypePage;
 class PointerTypePage;
 
 /*!
-    \brief Properties widget for KDialog.
+    \brief Properties widget for DataStructure.
 */
-class DataStructurePropertiesFullWidget :
+class DataStructurePropertiesDialog :
     public KDialog
 {
     Q_OBJECT
 
 public:
-    explicit DataStructurePropertiesFullWidget(QWidget* parent = 0);
+    explicit DataStructurePropertiesDialog(QWidget* parent = 0);
 
 public slots:
     void setDataStructure(DataStructurePtr dataStructure);
