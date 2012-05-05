@@ -559,7 +559,6 @@ void MainWindow::setActiveDocument()
 
     // set button for document properties
     if (_documentPropertiesButton->defaultAction()) {
-    qDebug() << "XXXX now setting active document: " << activeDocument;
         _documentPropertiesButton->defaultAction()->deleteLater();
         PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18n("Properties"), activeDocument, this);
         _documentPropertiesButton->setDefaultAction(propertiesAction);
