@@ -151,7 +151,7 @@ void DataItem::updateRenderer()
 
 void DataItem::updateIcon()
 {
-    QString icon = _data->dataStructure()->document()->dataType(_data->dataType())->icon();
+    QString icon = _data->dataStructure()->document()->dataType(_data->dataType())->iconName();
     if (elementId().isEmpty() || elementId() != icon) {
         setElementId(icon);
         setTransformOriginPoint(boundingRect().width() / 2, boundingRect().width() / 2);

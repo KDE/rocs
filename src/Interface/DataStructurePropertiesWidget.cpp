@@ -41,7 +41,6 @@
 #include <KColorCombo>
 #include <KPushButton>
 
-#include <QPainter>
 #include <QString>
 #include <QGraphicsItem>
 #include <QRadioButton>
@@ -102,6 +101,7 @@ void DataStructurePropertiesWidget::unregisterDataType(int identifier)
     }
     delete _dataTypeWidgets[identifier];
     _dataTypeWidgets.remove(identifier);
+    _dataTypeButtons.remove(identifier);
 }
 
 
@@ -154,6 +154,8 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
         return false;
     }
 
+    DataTypePtr dataType = dataStructure->document()->dataType(typeIdentifier);
+
     // create default data element setups
     QWidget* dataPropertyWidget = new QWidget(this);
     QGridLayout* dataPropertyLayout = new QGridLayout(dataPropertyWidget);
@@ -163,38 +165,10 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataTypeButton->setStyleSheet("text-align: left");
     dataTypeButton->setMenu(dataTypeMenu);
     dataTypeMenu->addAction(
-            new PropertiesDialogAction("Properties", dataStructure->document()->dataType(typeIdentifier), dataPropertyWidget)
+            new PropertiesDialogAction("Properties", dataType, dataPropertyWidget)
         );
-
-    // TODO move icon creator to data type
-    // create icon for data type
-    if (!dataStructure->document()->iconPackage().isEmpty()) {
-        QFile svgFile(dataStructure->document()->iconPackage());
-        svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
-
-        QXmlStreamReader reader(&svgFile);
-        QSvgRenderer *renderer = DataItem::sharedRenderer(svgFile.fileName());
-        while (!reader.atEnd()) {
-            reader.readNext();
-            if (!reader.attributes().hasAttribute("id")) {
-                continue;
-            }
-            QString attribute = reader.attributes().value("id").toString();
-            if (attribute.startsWith(dataStructure->document()->dataType(typeIdentifier)->icon())) {
-                QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
-
-                QPainter painter;
-                painter.begin(&iconImage);
-                renderer->render(&painter, attribute);
-                painter.end();
-
-                attribute.remove("rocs_");
-                dataTypeButton->setIcon(KIcon(QPixmap::fromImage(iconImage)));
-                break;
-            }
-        }
-    }
-    dataTypeButton->setText(dataStructure->document()->dataType(typeIdentifier)->name());
+    dataTypeButton->setIcon(dataType->icon());
+    dataTypeButton->setText(dataType->name());
 
     KPushButton* dataTypeShowName = new KPushButton(dataPropertyWidget);
     dataTypeShowName->setIcon(KIcon("rocstexticon"));
@@ -239,7 +213,10 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     connect(dataTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
     connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataVisibility(int)));
 
+    connect(dataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateDataTypeIcons()));
+
     _dataTypeWidgets.insert(typeIdentifier, dataPropertyWidget);
+    _dataTypeButtons.insert(typeIdentifier, dataTypeButton);
 
     return true;
 }
@@ -314,3 +291,16 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
 
     return true;
 }
+
+
+void DataStructurePropertiesWidget::updateDataTypeIcons()
+{
+    QMap<int, KPushButton*>::const_iterator dataTypeWidget = _dataTypeButtons.constBegin();
+    while (dataTypeWidget != _dataTypeButtons.constEnd()) {
+        Document* activeDocument = DocumentManager::self()->activeDocument();
+        DataTypePtr dataType = activeDocument->dataType(dataTypeWidget.key());
+        dataTypeWidget.value()->setIcon(dataType->icon());
+        ++dataTypeWidget;
+    }
+}
+

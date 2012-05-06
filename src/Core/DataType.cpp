@@ -21,6 +21,10 @@
 #include "DataStructure.h"
 #include <boost/weak_ptr.hpp>
 
+#include <QPainter>
+#include <QSvgRenderer>
+#include <DataItem.h>
+#include <boost/graph/graph_concepts.hpp>
 
 class DataTypePrivate
 {
@@ -87,7 +91,39 @@ void DataType::setIcon(QString icon)
 }
 
 
-QString DataType::icon() const
+KIcon DataType::icon() const
+{
+    // create icon for data type
+    if (!d->_document->iconPackage().isEmpty()) {
+        QFile svgFile(d->_document->iconPackage());
+        svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
+
+        QXmlStreamReader reader(&svgFile);
+        QSvgRenderer *renderer = DataItem::sharedRenderer(svgFile.fileName());
+        while (!reader.atEnd()) {
+            reader.readNext();
+            if (!reader.attributes().hasAttribute("id")) {
+                continue;
+            }
+            QString attribute = reader.attributes().value("id").toString();
+            if (attribute.startsWith(d->_icon)) {
+                QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
+
+                QPainter painter;
+                painter.begin(&iconImage);
+                renderer->render(&painter, attribute);
+                painter.end();
+
+                attribute.remove("rocs_");
+                return KIcon(QPixmap::fromImage(iconImage));
+            }
+        }
+    }
+    return KIcon();
+}
+
+
+QString DataType::iconName() const
 {
     return d->_icon;
 }

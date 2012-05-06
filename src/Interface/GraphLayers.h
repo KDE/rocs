@@ -53,7 +53,7 @@ public slots:
     void selectFirstGraph();
 
 signals:
-    void  createGraph(const QString& s);
+    void createGraph(const QString& s);
 
 private:
     Document *_activeDocument;

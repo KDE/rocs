@@ -44,7 +44,7 @@ AddDataHandAction::AddDataHandAction(GraphScene *scene, DataTypePtr dataType, QO
 {
     setText(i18n("Add %1", dataType->name()));
     setToolTip(i18n("Creates a new node at the click position on the drawing area."));
-    setIcon(KIcon("rocsadddata"));
+    setIcon(dataType->icon());
     _name = "rocs-hand-add-node";
 }
 
@@ -80,3 +80,11 @@ bool AddDataHandAction::executePress(QPointF pos)
     }
     return true;
 }
+
+void AddDataHandAction::updateIcon()
+{
+    if (_dataType) {
+        setIcon(_dataType->icon());
+    }
+}
+

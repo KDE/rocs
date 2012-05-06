@@ -139,8 +139,8 @@ void DataTypePage::setCurrentType(int index)
                 ui->typeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
             }
         }
-        if (!_document->dataType(type)->icon().isEmpty()) {
-            QString icon = _document->dataType(type)->icon();
+        if (!_document->dataType(type)->iconName().isEmpty()) {
+            QString icon = _document->dataType(type)->iconName();
             icon.remove("rocs_");
             ui->typeIcon->setCurrentItem(icon);
         }

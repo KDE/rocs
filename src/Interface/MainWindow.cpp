@@ -579,7 +579,6 @@ void MainWindow::setActiveDocument()
     connect(activeDocument, SIGNAL(dataTypeRemoved(int)), this, SLOT(updateToolbarTypeActions()));
     connect(activeDocument, SIGNAL(pointerTypeRemoved(int)), this, SLOT(updateToolbarTypeActions()));
 
-
     // Engine toolbar
     connect(this, SIGNAL(runTool(ToolsPluginInterface*, Document*)),
             activeDocument->engineBackend(), SLOT(runTool(ToolsPluginInterface*, Document*)));
@@ -609,6 +608,7 @@ void MainWindow::updateToolbarTypeActions()
         }
 
         _addDataActionMenu->menu()->addAction(addDataAction);
+        connect(type.get(), SIGNAL(iconChanged(QString)), addDataAction, SLOT(updateIcon()));
         connect(addDataAction, SIGNAL(triggered()), addDataAction, SLOT(sendExecuteBit()));
     }
 

@@ -65,8 +65,8 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
                 ui->dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
             }
         }
-        if (!_data->dataStructure()->document()->dataType(_data->dataType())->icon().isEmpty()) {
-            QString icon = _data->dataStructure()->document()->dataType(_data->dataType())->icon();
+        if (!_data->dataStructure()->document()->dataType(_data->dataType())->iconName().isEmpty()) {
+            QString icon = _data->dataStructure()->document()->dataType(_data->dataType())->iconName();
             icon.remove("rocs_");
             ui->dataTypeIcon->setCurrentItem(icon);
         }
@@ -162,7 +162,7 @@ void DataPropertiesWidget::reflectAttributes()
 
     DataTypePtr dataType = _data->dataStructure()->document()->dataType(_data->dataType());
     ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));
-    ui->dataTypeIcon->setCurrentItem(dataType->icon());
+    ui->dataTypeIcon->setCurrentItem(dataType->iconName());
 }
 
 
@@ -199,7 +199,7 @@ void DataPropertiesWidget::addDataType()
 
     ui->_dataType->addItem(datatype->name(), QVariant(dataTypeIdentifier));
     ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(dataTypeIdentifier)));
-    ui->dataTypeIcon->setCurrentItem(datatype->icon());
+    ui->dataTypeIcon->setCurrentItem(datatype->iconName());
 }
 
 

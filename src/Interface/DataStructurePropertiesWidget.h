@@ -30,6 +30,7 @@ class Data;
 class Pointer;
 class MainWindow;
 class KColorCombo;
+class KPushButton;
 
 /*! \brief Properties Area, not used yet. */
 
@@ -67,6 +68,8 @@ private slots:
      */
     void unregisterPointerType(int identifier);
 
+    void updateDataTypeIcons();
+
     void on__dataStructureDelete_clicked();
     void on__dataStructureName_textChanged(const QString& s);
     void on__activateGraph_toggled(bool b);
@@ -84,6 +87,7 @@ private:
     KColorCombo* _pointerTypeColor;
     MainWindow *_mainWindow;
     QMap<int, QWidget*> _dataTypeWidgets;
+    QMap<int, KPushButton*> _dataTypeButtons;
     QMap<int, QWidget*> _pointerTypeWidgets;
 };
 #endif

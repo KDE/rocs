@@ -24,6 +24,7 @@
 #include <QtScript>
 #include <QString>
 #include <QColor>
+#include <KIcon>
 
 #include "rocslib_export.h"
 #include "Rocs_Typedefs.h"
@@ -49,7 +50,13 @@ public:
     ~DataType();
 
     const QString& name() const;
-    QString icon() const;
+    QString iconName() const;
+
+    /**
+     * Generates KIcon for data type at run time. This icon is not cached.
+     * \return icon according to current iconPackage and iconName
+     */
+    KIcon icon() const;
     int identifier() const;
     QColor defaultColor() const;
 

@@ -67,6 +67,8 @@ public slots:
      */
     bool executePress(QPointF pos);
 
+    void updateIcon();
+
 signals:
     void addNode(QString name, QPointF pos);
 
