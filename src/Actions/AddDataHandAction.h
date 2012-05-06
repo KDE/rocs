@@ -25,39 +25,53 @@
 #include <Rocs_Typedefs.h>
 
 /*!
-  \brief The 'Add Node' Action
-  This action holds the 'Add Node' icon and tooltips, and when it's executed,
-  it will place a new node on the QGraphicsView that holds all the items.
+  \brief The 'Add Data' Action
+  This action holds the 'Add Data' icon and tooltips, and when it's executed,
+  it will place a new data element on the QGraphicsView that holds all the items.
 */
 
 class AddDataHandAction : public AbstractAction
 {
     Q_OBJECT
 public:
-    /*!
-      Default constructor
-      \param type the Type for 'Add Node' action. must be unique.
-      \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
-    */
+    /**
+     * Default constructor
+     * Creates add-node action that adds data elements of default \see DataType 0.
+     * \param scene is the graph scene at which data elements shall be added
+     * \param parent the Parent QObject that will hold this action.
+     */
     explicit AddDataHandAction(GraphScene *scene, QObject *parent = 0);
 
-    /*!
-      Default Destructor
+    /**
+     * Default constructor
+     * Creates add-node action that adds nodes of default \see DataType 0.
+     * \param scene is the graph scene at which data elements shall be added
+     * \param dataType the type of that new data elements shall be created
+     * \param parent the Parent QOBject that will hold this action.
     */
+    explicit AddDataHandAction(GraphScene *scene, DataTypePtr dataType, QObject *parent = 0);
+
     ~AddDataHandAction();
 
-    void setActiveGraph(DataStructurePtr graph);
+    /**
+     * Set \see DataType of which data elements are created.
+     * \param dataType is the dataType associated to the action
+     */
+    void setDataType(DataTypePtr dataType);
 
 public slots:
-    /*!
-      this will be executed if type is the same as this action's type.
-      \param pos the position on the screen that the new node will be placed.
-
-    */
+    /**
+     * This method creates data element for previously specified type at position \p pos.
+     * \param pos the position on the screen that the new data element will be placed
+     * \return true if the data element could be added, otherwise false
+     */
     bool executePress(QPointF pos);
 
 signals:
     void addNode(QString name, QPointF pos);
+
+private:
+    DataTypePtr _dataType;
 };
 
 #endif

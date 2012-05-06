@@ -181,6 +181,11 @@ private slots:
     void exportFile();
     void setupToolsPluginsAction();
 
+    /**
+     * Update add data and add pointer actions at graphical editor toolbar
+     */
+    void updateToolbarTypeActions();
+
 public slots:
     void setActiveDocument();
     void releaseDocument(Document *d);
@@ -230,6 +235,8 @@ private: // Variables.
 
     // Other Bunch of stuff.
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
+    KActionMenu *_addDataActionMenu;
+    KActionMenu *_addPointerActionMenu;
     KAction *_runScript;
     KAction *_stepRunScript;
     KAction *_stopScript;

@@ -353,15 +353,21 @@ void MainWindow::setupActions()
 
     GraphScene *gc = _graphVisualEditor->scene();
 
+    _addDataActionMenu = new KActionMenu(KIcon("rocsadddata"), i18n("Add Data"), this);
+    _addDataActionMenu->setIconText(i18n("Add Data"));
+    _addDataActionMenu->setToolTip( i18n("Add new data element") );
+    _addDataActionMenu->setDelayed(true);
+
+    _addPointerActionMenu = new KActionMenu(KIcon("rocsaddedge"), i18n("Add Connection"), this);
+    _addPointerActionMenu->setIconText(i18n("Add Connection"));
+    _addPointerActionMenu->setToolTip( i18n("Add a new connection between two data elements of selected type") );
+    _addPointerActionMenu->setDelayed(true);
+
     _selectMoveAction = new SelectMoveHandAction(gc, this);
-    AddDataHandAction* addDataAction = new AddDataHandAction(gc, this);
-    AddConnectionHandAction* addConnectionAction = new AddConnectionHandAction(gc, this);
     DeleteHandAction* deleteAction = new DeleteHandAction(gc, this);
     ZoomAction* zoomAction = new ZoomAction(gc, this);
 
     connect(_selectMoveAction, SIGNAL(triggered()), _selectMoveAction, SLOT(sendExecuteBit()));
-    connect(addDataAction, SIGNAL(triggered()), addDataAction, SLOT(sendExecuteBit()));
-    connect(addConnectionAction, SIGNAL(triggered()), addConnectionAction, SLOT(sendExecuteBit()));
     connect(deleteAction, SIGNAL(triggered()), deleteAction, SLOT(sendExecuteBit()));
     connect(zoomAction, SIGNAL(triggered()), zoomAction, SLOT(sendExecuteBit()));
 
@@ -369,8 +375,8 @@ void MainWindow::setupActions()
     QActionGroup *g = new QActionGroup(this);
 
     g->addAction(_paletteActions->addAction("selectmove", _selectMoveAction));
-    g->addAction(_paletteActions->addAction("add_node", addDataAction));
-    g->addAction(_paletteActions->addAction("add_edge", addConnectionAction));
+    g->addAction(_paletteActions->addAction("add_node", _addDataActionMenu));
+    g->addAction(_paletteActions->addAction("add_edge", _addPointerActionMenu));
     g->addAction(_paletteActions->addAction("delete", deleteAction));
     g->addAction(_paletteActions->addAction("zoom", zoomAction));
     actionCollection()->action("selectmove")->toggle();
@@ -481,8 +487,9 @@ void MainWindow::createToolsPluginsAction(){
 
 void MainWindow::setupToolsPluginsAction()
 {
-    if (_toolsPlugins.isEmpty())
+    if (_toolsPlugins.isEmpty()) {
         createToolsPluginsAction();
+    }
 
     QAction* action = 0;
     foreach(action, _toolsPlugins) {
@@ -565,9 +572,17 @@ void MainWindow::setActiveDocument()
         _documentPropertiesButton->setIcon(KIcon("document-properties"));
     }
 
+    // Graphical Data Structure Editor toolbar
+    updateToolbarTypeActions();
+    connect(activeDocument, SIGNAL(dataTypeCreated(int)), this, SLOT(updateToolbarTypeActions()));
+    connect(activeDocument, SIGNAL(pointerTypeCreated(int)), this, SLOT(updateToolbarTypeActions()));
+    connect(activeDocument, SIGNAL(dataTypeRemoved(int)), this, SLOT(updateToolbarTypeActions()));
+    connect(activeDocument, SIGNAL(pointerTypeRemoved(int)), this, SLOT(updateToolbarTypeActions()));
+
+
+    // Engine toolbar
     connect(this, SIGNAL(runTool(ToolsPluginInterface*, Document*)),
             activeDocument->engineBackend(), SLOT(runTool(ToolsPluginInterface*, Document*)));
-
 //     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
     connect(engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
     connect(engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
@@ -577,6 +592,41 @@ void MainWindow::setActiveDocument()
     activeDocument->setModified(false);
     setupToolsPluginsAction();
 }
+
+
+void MainWindow::updateToolbarTypeActions()
+{
+    Document *activeDocument = DocumentManager::self()->activeDocument();
+
+    _addDataActionMenu->menu()->clear();
+    foreach (int identifier, activeDocument->dataTypeList()) {
+        DataTypePtr type = activeDocument->dataType(identifier);
+        AddDataHandAction* addDataAction = new AddDataHandAction(scene(), type, _addDataActionMenu->menu());
+        addDataAction->setCheckable(false);
+
+        if (identifier == 0) { // set default action to menu
+            connect(_addDataActionMenu, SIGNAL(triggered()), addDataAction, SLOT(sendExecuteBit()));
+        }
+
+        _addDataActionMenu->menu()->addAction(addDataAction);
+        connect(addDataAction, SIGNAL(triggered()), addDataAction, SLOT(sendExecuteBit()));
+    }
+
+    _addPointerActionMenu->menu()->clear();
+    foreach (int identifier, activeDocument->pointerTypeList()) {
+        PointerTypePtr type = activeDocument->pointerType(identifier);
+        AddConnectionHandAction* addPointerAction = new AddConnectionHandAction(scene(), type, _addPointerActionMenu->menu());
+        addPointerAction->setCheckable(false);
+
+        if (identifier == 0) { // set default action to menu
+            connect(_addPointerActionMenu, SIGNAL(triggered()), addPointerAction, SLOT(sendExecuteBit()));
+        }
+
+        _addPointerActionMenu->menu()->addAction(addPointerAction);
+        connect(addPointerAction, SIGNAL(triggered()), addPointerAction, SLOT(sendExecuteBit()));
+    }
+}
+
 
 void MainWindow::releaseDocument(Document* d)
 {

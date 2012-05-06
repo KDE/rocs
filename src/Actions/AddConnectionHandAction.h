@@ -23,31 +23,39 @@
 #include "AbstractAction.h"
 #include <QObject>
 #include <QPointF>
+#include <Rocs_Typedefs.h>
+
 class QGraphicsLineItem;
 class DataItem;
 class Data;
 class DataStructure;
 /*!
-  \brief The 'Add Node' Action
-  This action holds the 'Add Node' icon and tooltips, and when it's executed,
-  it will place a new node on the QGraphicsView that holds all the items.
+  \brief The 'Add Connection' Action
 */
 
 class AddConnectionHandAction : public AbstractAction
 {
     Q_OBJECT
 public:
-    /*!
-      Default constructor
-      \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
-    */
-
+    /**
+     * Default constructor
+     * Creates add-edge action that adds data elements of default \see PointerType 0.
+     * \param scene is the graph scene at which pointers shall be added
+     * \param parent the Parent QOBject that will hold this action.
+     */
     explicit AddConnectionHandAction(GraphScene *scene, QObject *parent = 0);
-    void setActiveGraph(DataStructure* graph);
-    /*!
-      Default Destructor
+
+    /**
+     * Default constructor
+     * Creates add-node action that adds nodes of default \see DataType 0.
+     * \param scene is the graph scene at which pointers shall be added
+     * \param dataType the type of that new connections shall be created
+     * \param parent the parent QObject that will hold this action
     */
+    explicit AddConnectionHandAction(GraphScene *scene, PointerTypePtr dataType, QObject *parent = 0);
+
     ~AddConnectionHandAction();
+
 public slots:
     /*!
       will be executed when the mouse press a button.
@@ -84,6 +92,8 @@ private:
 signals:
     void addConnection(Data *from, Data *to);
 
+private:
+    PointerTypePtr _pointerType;
 };
 
 #endif // ADDCONNECTIONHANDACTION_H

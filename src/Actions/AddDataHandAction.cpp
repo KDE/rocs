@@ -29,9 +29,20 @@
 #include <DocumentManager.h>
 
 AddDataHandAction::AddDataHandAction(GraphScene *scene, QObject *parent)
-    : AbstractAction(scene, parent)
+    : AbstractAction(scene, parent),
+      _dataType(DataTypePtr())
 {
-    setText(i18n("Add Node"));
+    setText(i18n("Add Data"));
+    setToolTip(i18n("Creates a new node at the click position on the drawing area."));
+    setIcon(KIcon("rocsadddata"));
+    _name = "rocs-hand-add-node";
+}
+
+AddDataHandAction::AddDataHandAction(GraphScene *scene, DataTypePtr dataType, QObject *parent)
+    : AbstractAction(scene, parent),
+      _dataType(dataType)
+{
+    setText(i18n("Add %1", dataType->name()));
     setToolTip(i18n("Creates a new node at the click position on the drawing area."));
     setIcon(KIcon("rocsadddata"));
     _name = "rocs-hand-add-node";
@@ -42,6 +53,12 @@ AddDataHandAction::~AddDataHandAction()
     kDebug() << "Destroyed";
 }
 
+void AddDataHandAction::setDataType(DataTypePtr dataType)
+{
+    _dataType = dataType;
+    setText(i18n("Add %1", dataType->name()));
+}
+
 bool AddDataHandAction::executePress(QPointF pos)
 {
     if (!DocumentManager::self()->activeDocument()->activeDataStructure()
@@ -49,8 +66,17 @@ bool AddDataHandAction::executePress(QPointF pos)
        ) {
         return false;
     }
-    DocumentManager::self()->activeDocument()->activeDataStructure()
-    ->addData(i18n("untitled"), QPointF(pos.x(), pos.y()));
 
+    // if no dataType set, we use default data type
+    int dataTypeIdentifier = 0;
+    if (_dataType) {
+        dataTypeIdentifier = _dataType->identifier();
+    }
+
+    if (DocumentManager::self()->activeDocument()->activeDataStructure()
+        ->addData(i18n("untitled"), QPointF(pos.x(), pos.y()), dataTypeIdentifier))
+    {
+        return true;
+    }
     return true;
 }

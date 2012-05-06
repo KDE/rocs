@@ -24,16 +24,33 @@
 #include "Pointer.h"
 #include "DataItem.h"
 #include "PointerItem.h"
-#include <KLocale>
+#include <PointerType.h>
 
+#include <KLocale>
 #include <KDebug>
 #include <DocumentManager.h>
 #include <Document.h>
 
 AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, QObject *parent)
-    : AbstractAction(scene, parent)
+    : AbstractAction(scene, parent),
+      _pointerType(PointerTypePtr())
 {
     setText(i18n("Add Edge"));
+    setToolTip(i18n("Creates a new edge between 2 nodes"));
+    setIcon(KIcon("rocsaddedge"));
+
+    _from = 0;
+    _to   = 0;
+    _tmpLine  = 0;
+    _working = false;
+    _name = "rocs-hand-add-edge";
+}
+
+AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, PointerTypePtr pointerType, QObject *parent)
+    : AbstractAction(scene, parent),
+      _pointerType(pointerType)
+{
+    setText(i18n("Add %1", pointerType->name()));
     setToolTip(i18n("Creates a new edge between 2 nodes"));
     setIcon(KIcon("rocsaddedge"));
 
@@ -88,21 +105,25 @@ bool AddConnectionHandAction::executeMove(QPointF pos)
 
 bool AddConnectionHandAction::executeRelease(QPointF pos)
 {
-    if (!_working
-            ||  !DocumentManager::self()->activeDocument()->activeDataStructure()) {
+    DataStructurePtr activeDataStructure = DocumentManager::self()->activeDocument()->activeDataStructure();
+
+    if (!_working || !activeDataStructure) {
         return false;
     }
 
     delete _tmpLine;
     _tmpLine = 0;
 
+    // if no dataType set, we use default data type
+    int pointerTypeIdentifier = 0;
+    if (_pointerType) {
+        pointerTypeIdentifier = _pointerType->identifier();
+    }
+
     if ((_to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)))) {
         //FIXME workaround for rooted tree creation
         _to->data()->setProperty("ClickPosition", _to->mapFromScene(pos));
-        DocumentManager::self()
-        ->activeDocument()
-        ->activeDataStructure()
-        ->addPointer(_from->data(),  _to->data());
+        activeDataStructure->addPointer(_from->data(),  _to->data(), pointerTypeIdentifier);
         _to->data()->setProperty("ClickPosition", QVariant());
     }
     _to = 0;
