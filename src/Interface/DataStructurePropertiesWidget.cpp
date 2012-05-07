@@ -196,7 +196,7 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataPropertyLayout->addWidget(dataTypeShowValue, 1, 3);
     dataPropertyLayout->addWidget(dataTypeVisible, 1, 4);
 
-    _typeProperties->addWidget(dataPropertyWidget);
+    _dataTypes->addWidget(dataPropertyWidget);
 
     QSignalMapper* signalMapper = new QSignalMapper(this);
     signalMapper->setMapping(dataTypeShowName, typeIdentifier);
@@ -269,8 +269,7 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 3);
     pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 4);
 
-    //TODO add to specific widget for pointers
-    _typeProperties->addWidget(pointerPropertyWidget);
+    _pointerTypes->addWidget(pointerPropertyWidget);
 
     QSignalMapper* signalMapper = new QSignalMapper(this);
     signalMapper->setMapping(pointerTypeShowName, typeIdentifier);
