@@ -650,15 +650,14 @@ bool Document::saveAsInternalFormat(const QString& filename)
         savePropertiesInternalFormat(dataStructure->get());
 
         foreach(DataPtr n, (*dataStructure)->dataList()) {
-            d->_buffer += QString("[Data %1]\n").arg((*dataStructure)->dataList().indexOf(n)).toUtf8();
+            d->_buffer += QString("[Data %1]\n").arg(QString::number(n->identifier()));
             savePropertiesInternalFormat(n.get());
         }
 
-        int from, to;
         foreach(PointerPtr e, (*dataStructure)->pointers()) {
-            from = (*dataStructure)->dataList().indexOf(e->from());
-            to = (*dataStructure)->dataList().indexOf(e->to());
-            d->_buffer += QString("[Pointer %1->%2]\n").arg(from).arg(to).toUtf8();
+            d->_buffer += QString("[Pointer %1->%2]\n").
+                arg(QString::number(e->from()->identifier())).
+                arg(QString::number(e->to()->identifier())).toUtf8();
             savePropertiesInternalFormat(e.get());
         }
         ++dataStructure;
@@ -716,7 +715,7 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
     }
     DataStructurePtr tmpDataStructure;
     QObject *tmpObject = 0;
-    DataPtr tmpDataPtr;
+    QMap<int, DataPtr> dataMap;
 
     QTextStream in(&f);
     in.setCodec("UTF-8");
@@ -784,23 +783,25 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
         }
 
         else if (str.startsWith(QLatin1String("[Data "))) {
-            qDebug() << "CREATE DATA";
-            tmpDataPtr = tmpDataStructure->addData(QString());
+            QString identifier = str.section(' ', 1);
+            identifier.remove(']');
+            DataPtr tmpData = tmpDataStructure->addData(QString());
+            dataMap.insert(identifier.toInt(), tmpData);
+
             QString dataLine = in.readLine().simplified();
             qreal posX = 0;
             qreal posY = 0;
             while (!in.atEnd() && !dataLine.isEmpty()) {
                 /**/ if (dataLine.startsWith(QLatin1String("x :")))         posX = dataLine.section(' ', 2).toFloat();
                 else if (dataLine.startsWith(QLatin1String("y :")))         posY = dataLine.section(' ', 2).toFloat();
-                else if (dataLine.startsWith(QLatin1String("value :")))     tmpDataPtr->setValue(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith(QLatin1String("color :")))     tmpDataPtr->setColor(dataLine.section(' ', 2));
-                else if (dataLine.startsWith(QLatin1String("name :")))      tmpDataPtr->setName(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("value :")))     tmpData->setValue(dataLine.section(' ', 2).toInt());
+                else if (dataLine.startsWith(QLatin1String("color :")))     tmpData->setColor(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("name :")))      tmpData->setName(dataLine.section(' ', 2));
                 else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
-            tmpDataPtr->setPos(posX, posY);
-            qDebug() << tmpDataPtr->x() << tmpDataPtr->y();
-            tmpObject = tmpDataPtr.get();
+            tmpData->setPos(posX, posY);
+            tmpObject = tmpData.get();
         }
 
         else if (str.startsWith(QLatin1String("[Pointer "))) {
@@ -810,8 +811,7 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
             QString nameFrom = eName.section("->", 0, 0);
             QString nameTo = eName.section("->", 1, 1);
 
-            PointerPtr tmpPointer = tmpDataStructure->addPointer(tmpDataStructure->dataList().at(nameFrom.toInt()),
-                                    tmpDataStructure->dataList().at(nameTo.toInt()));
+            PointerPtr tmpPointer = tmpDataStructure->addPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()]);
 
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
