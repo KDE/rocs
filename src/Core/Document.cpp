@@ -48,7 +48,7 @@ class DocumentPrivate
 public:
     DocumentPrivate() {}
 
-    QString _buf;
+    QString _buffer;
     QString _lastSavedDocumentPath;
     QString _name;
     qreal _left;
@@ -146,11 +146,14 @@ Document::~Document()
     }
 }
 
-int Document::registerDataType(QString name)
+int Document::registerDataType(QString name, int identifier)
 {
-    QList<int> usedIdentifier = d->_dataTypes.keys();
-    qSort(usedIdentifier);
-    int identifier = usedIdentifier.last() + 1;
+    // create new identifier if identifier is already in use or 0
+    if (identifier==0 || d->_dataTypes.contains(identifier)) {
+        QList<int> usedIdentifier = d->_dataTypes.keys();
+        qSort(usedIdentifier);
+        identifier = usedIdentifier.last() + 1;
+    }
 
     DataTypePtr dataType = DataType::create(this, identifier);
     dataType->setName(name);
@@ -161,11 +164,14 @@ int Document::registerDataType(QString name)
     return identifier;
 }
 
-int Document::registerPointerType(QString name)
+int Document::registerPointerType(QString name, int identifier)
 {
-    QList<int> usedIdentifier = d->_pointerTypes.keys();
-    qSort(usedIdentifier);
-    int identifier = usedIdentifier.last() + 1;
+    // create new identifier if identifier is already in use or 0
+    if (identifier==0 || d->_pointerTypes.contains(identifier)) {
+        QList<int> usedIdentifier = d->_pointerTypes.keys();
+        qSort(usedIdentifier);
+        identifier = usedIdentifier.last() + 1;
+    }
 
     PointerTypePtr pointerType = PointerType::create(this, identifier);
     pointerType->setName(name);
@@ -525,7 +531,18 @@ void Document::remove(DataStructurePtr dataStructure)
  * Height : [integer]
  * DataStructurePlugin : [string]
  *
- * # Data Structre Definitions.
+ * # data types
+ * [DataType Identifier1]
+ * Name     : [string]
+ * IconName : [string]
+ * Color    : [RGB in hex]
+ *
+ * # pointer types
+ * [PointerType Identifier1]
+ * Name  : [string]
+ * Color : [RGB in hex]
+ *
+ * # Data Structure Definitions.
  * # Data Structures are layered, so there can be N of them.
  * # Every Data and Pointer below a declaration of a DataStructure
  * # belongs to that data structure.
@@ -589,7 +606,7 @@ void Document::remove(DataStructurePtr dataStructure)
 
 bool Document::saveAsInternalFormat(const QString& filename)
 {
-    d->_buf.clear();
+    d->_buffer.clear();
 
     KSaveFile saveFile(!filename.endsWith(".graph") ? QString("%1.graph").arg(filename) : filename);
 
@@ -601,7 +618,7 @@ bool Document::saveAsInternalFormat(const QString& filename)
     QTextStream stream(&saveFile);
     stream.setCodec("UTF-8");
 
-    d->_buf = QString("[Document Properties] \n")
+    d->_buffer = QString("[Document Properties] \n")
               % QString("top : ") % QString::number(top()) % QChar('\n')
               % QString("bottom : ") % QString::number(bottom()) % QChar('\n')
               % QString("left : ") % QString::number(left()) % QChar('\n')
@@ -609,38 +626,48 @@ bool Document::saveAsInternalFormat(const QString& filename)
               % QString("DataStructurePlugin : ") % DataStructurePluginManager::self()->actualPlugin()->name() % QChar('\n')
               % QChar('\n');
 
-    for (int i = 0; i < d->_dataStructures.count(); i++) {
-        DataStructurePtr g = d->_dataStructures.at(i);
+    foreach(int dataTypeIdentifier, dataTypeList()) {
+        d->_buffer += QString("[DataType %1]").arg(QString::number(dataTypeIdentifier)) % QChar('\n')
+            % QString("Name : ") % dataType(dataTypeIdentifier)->name() % QChar('\n')
+            % QString("IconName : ") % dataType(dataTypeIdentifier)->iconName() % QChar('\n')
+            % QString("Color : ") % dataType(dataTypeIdentifier)->defaultColor().name() % QChar('\n')
+            % QChar('\n');
+    }
 
-        d->_buf += QString("[DataStructure %1] \n").arg(i).toUtf8();
+    foreach(int pointerTypeIdentifier, pointerTypeList()) {
+        d->_buffer += QString("[PointerType %1]").arg(QString::number(pointerTypeIdentifier)) % QChar('\n')
+            % QString("Name : ") % dataType(pointerTypeIdentifier)->name() % QChar('\n')
+            % QString("Color : ") % dataType(pointerTypeIdentifier)->defaultColor().name() % QChar('\n')
+            % QChar('\n');
+    }
 
-        savePropertiesInternalFormat(g.get());
+    // iterate over all data structures
+    QList<DataStructurePtr>::const_iterator dataStructure = d->_dataStructures.constBegin();
+    int identifier=0;
+    while (dataStructure != d->_dataStructures.constEnd()) {
+        d->_buffer += QString("[DataStructure %1] \n").arg(identifier++).toUtf8();
 
-        foreach(DataPtr n, g->dataList()) {
-            d->_buf += QString("[Data %1]\n").arg(g->dataList().indexOf(n)).toUtf8();
+        savePropertiesInternalFormat(dataStructure->get());
+
+        foreach(DataPtr n, (*dataStructure)->dataList()) {
+            d->_buffer += QString("[Data %1]\n").arg((*dataStructure)->dataList().indexOf(n)).toUtf8();
             savePropertiesInternalFormat(n.get());
         }
 
         int from, to;
-        foreach(PointerPtr e, g->pointers()) {
-            from = g->dataList().indexOf(e->from());
-            to = g->dataList().indexOf(e->to());
-            d->_buf += QString("[Pointer %1->%2]\n").arg(from).arg(to).toUtf8();
+        foreach(PointerPtr e, (*dataStructure)->pointers()) {
+            from = (*dataStructure)->dataList().indexOf(e->from());
+            to = (*dataStructure)->dataList().indexOf(e->to());
+            d->_buffer += QString("[Pointer %1->%2]\n").arg(from).arg(to).toUtf8();
             savePropertiesInternalFormat(e.get());
         }
-
-        /*     buf += " \n \n ############ GROUPS ########### \n \n";
-             foreach( DataStructureGroup *gg, g->groups()) {
-                 buf += QString("[Group %1] \n").arg((long) gg);
-
-                 foreach( ::Data *n, gg->data() ) {
-                     buf += QString("%1\n").arg((long)n);
-                 }
-             } */
+        ++dataStructure;
     }
-    kDebug() << d->_buf;
+    kDebug() << "------- /// BEGIN internal file format /// -------";
+    kDebug() << d->_buffer;
+    kDebug() << "------- /// internal file format END /// -------";
 
-    stream << d->_buf;
+    stream << d->_buffer;
 
     if (!saveFile.finalize()) {
         kDebug() << "Error, file not saved.";
@@ -667,16 +694,16 @@ void Document::savePropertiesInternalFormat(QObject *o)
             QString namevalue = QString("%1 : %2 \n").arg(name).arg(value.toString());
         }
 
-        d->_buf +=  QString("%1 : %2 \n").arg(name, value.toString());
+        d->_buffer +=  QString("%1 : %2 \n").arg(name, value.toString());
     }
 
     QList<QByteArray> propertyNames = o->dynamicPropertyNames();
     foreach(const QByteArray & name, propertyNames) {
         QVariant value = o->property(name);
-        d->_buf +=  QString("%1 : %2 \n").arg(name, value.toString()).toUtf8();
+        d->_buffer +=  QString("%1 : %2 \n").arg(name, value.toString()).toUtf8();
     }
 
-    d->_buf += '\n';
+    d->_buffer += '\n';
 }
 
 void Document::loadFromInternalFormat(const KUrl& fileUrl)
@@ -725,7 +752,39 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
             tmpObject = tmpDataStructure.get();
         }
 
-        else if (str.startsWith(QLatin1String("[Data"))) {
+        else if (str.startsWith(QLatin1String("[DataType"))) {
+            QString identifier = str.section(' ', 1);
+            identifier.remove(']');
+            int tmpDataTypeId = registerDataType(QString(), identifier.toInt());
+            DataTypePtr tmpDataType = dataType(tmpDataTypeId);
+
+            QString dataLine = in.readLine().simplified();
+            while (!in.atEnd() && !dataLine.isEmpty()) {
+                /**/ if (dataLine.startsWith(QLatin1String("Name :")))      tmpDataType->setName(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("IconName :")))  tmpDataType->setIcon(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("Color :")))     tmpDataType->setDefaultColor(QColor(dataLine.section(' ', 2)));
+                else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
+                dataLine = in.readLine().simplified();
+            }
+        }
+
+        else if (str.startsWith(QLatin1String("[PointerType"))) {
+            QString identifier = str.section(' ', 1);
+            identifier.remove(']');
+            int tmpPointerTypeId = registerPointerType(QString(), identifier.toInt());
+            PointerTypePtr tmpPointerType = pointerType(tmpPointerTypeId);
+
+            QString dataLine = in.readLine().simplified();
+            while (!in.atEnd() && !dataLine.isEmpty()) {
+                /**/ if (dataLine.startsWith(QLatin1String("Name :")))      tmpPointerType->setName(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("Color :")))     tmpPointerType->setDefaultColor(QColor(dataLine.section(' ', 2)));
+                else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
+                dataLine = in.readLine().simplified();
+            }
+        }
+
+        else if (str.startsWith(QLatin1String("[Data "))) {
+            qDebug() << "CREATE DATA";
             tmpDataPtr = tmpDataStructure->addData(QString());
             QString dataLine = in.readLine().simplified();
             qreal posX = 0;
@@ -744,7 +803,7 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
             tmpObject = tmpDataPtr.get();
         }
 
-        else if (str.startsWith(QLatin1String("[Pointer"))) {
+        else if (str.startsWith(QLatin1String("[Pointer "))) {
             QString eName = str.section(' ', 1, 1);
             eName.remove(']');
 
@@ -766,6 +825,7 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
                 dataLine = in.readLine().simplified();
             }
             tmpObject = tmpPointer.get();
+
         } else if (str.startsWith(QLatin1String("[Group"))) {
             /*QString gName = str.section(" ",1,1);
             gName.remove(']');

@@ -143,6 +143,7 @@ const DataList DataStructure::dataList(int dataType) const
     if (d->_dataTypeLists.contains(dataType)) {
         return d->_dataTypeLists[dataType];
     }
+    kDebug() << "returning empty data list: data type not registered";
     return DataList();
 }
 
@@ -152,6 +153,7 @@ const PointerList DataStructure::pointers(int pointerType) const
     if (d->_pointerTypeLists.contains(pointerType)) {
         return d->_pointerTypeLists[pointerType];
     }
+    kDebug() << "returning empty pointer list: pointer type not registered";
     return PointerList();
 }
 

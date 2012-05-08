@@ -82,7 +82,9 @@ void TestLoadSave::serializeUnserializeTest()
 void TestLoadSave::serializeUnserializeTypesTest()
 {
     QMap<QString, DataPtr> dataList;
-    // Creates a simple Graph with 5 data elements and connect them with pointers.
+
+    // start with new document!
+    DocumentManager::self()->addDocument(new Document("testTypes"));
     Document* document = DocumentManager::self()->activeDocument();
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->activeDataStructure();
 
@@ -106,13 +108,14 @@ void TestLoadSave::serializeUnserializeTypesTest()
     DocumentManager::self()->changeDocument(testDoc);
     DocumentManager::self()->activeDocument()->loadFromInternalFormat(KUrl::fromLocalFile("serializetest.graph"));
     document = DocumentManager::self()->activeDocument();
-    ds = DocumentManager::self()->activeDocument()->dataStructures().at(1);
+    ds = document->dataStructures().at(0);
 
     // default data structure also present
     QVERIFY2(document->dataType(dataTypeID), "ERROR: Data type not present");
     QVERIFY2(document->pointerType(pointerTypeID), "ERROR: Pointer type not present");
-    QVERIFY2(ds->dataList().at(0)->dataType()==dataTypeID, "ERROR: type of data element changed");
-    QVERIFY2(ds->pointers().at(0)->pointerType()==pointerTypeID, "ERROR: type of pointer changed");
+    QVERIFY2(ds->dataList(dataTypeID).size() > 0, "ERROR: type of data element changed");
+    QVERIFY2(ds->pointers(pointerTypeID).size() > 0, "ERROR: type of pointer changed");
+
 }
 
 

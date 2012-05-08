@@ -103,17 +103,20 @@ public:
 
     DataStructurePluginInterface * dataStructurePlugin() const;
 
-    /** register new type for data elements
+    /** Register new type for data elements. If identifier is alreade in use or if no identifier is
+     * provided, a new identifier is created.
      * \param name of the dataType
-     * \return positive integer >0 if successfully registered, else <=0
+     * \param identifier is optional identifier for data type
+     * \return positive integer > 0 if successfully registered, else <=0
      */
-    int registerDataType(QString name);
+    int registerDataType(QString name, int identifier=0);
 
-    /** register new type for pointers
+    /** Register new type for pointers. If identifier is alreade in use or if no identifier is
+     * provided, a new identifier is created.
      * \param name of the pointerType
      * \return positive integer >0 if successfully registered, else <=0
      */
-    int registerPointerType(QString name);
+    int registerPointerType(QString name, int identifier=0);
 
     /** removes this data type and all data elements of this type
      * \param dataType is positive id>0
