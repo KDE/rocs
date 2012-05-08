@@ -76,7 +76,43 @@ void TestLoadSave::serializeUnserializeTest()
         QVERIFY2(n->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
         QVERIFY2(n->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
+}
 
+
+void TestLoadSave::serializeUnserializeTypesTest()
+{
+    QMap<QString, DataPtr> dataList;
+    // Creates a simple Graph with 5 data elements and connect them with pointers.
+    Document* document = DocumentManager::self()->activeDocument();
+    DataStructurePtr ds = DocumentManager::self()->activeDocument()->activeDataStructure();
+
+    // register 2nd data and pointer type
+    int dataTypeID = document->registerDataType("testDatatype");
+    int pointerTypeID = document->registerPointerType("testPointertype");
+
+    // add test data
+    ds->setProperty("name", "Graph1");
+    dataList.insert("a", ds->addData("a", dataTypeID));
+    dataList.insert("b", ds->addData("b", dataTypeID));
+    ds->addPointer(dataList["a"], dataList["b"], pointerTypeID);
+
+    // serialize into file "serializetest.graph"
+    DocumentManager::self()->activeDocument()->saveAs("serializetest");
+    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    Document* testDoc = new Document("testDoc");
+
+    // unserialize and test properties
+    DocumentManager::self()->addDocument(testDoc);
+    DocumentManager::self()->changeDocument(testDoc);
+    DocumentManager::self()->activeDocument()->loadFromInternalFormat(KUrl::fromLocalFile("serializetest.graph"));
+    document = DocumentManager::self()->activeDocument();
+    ds = DocumentManager::self()->activeDocument()->dataStructures().at(1);
+
+    // default data structure also present
+    QVERIFY2(document->dataType(dataTypeID), "ERROR: Data type not present");
+    QVERIFY2(document->pointerType(pointerTypeID), "ERROR: Pointer type not present");
+    QVERIFY2(ds->dataList().at(0)->dataType()==dataTypeID, "ERROR: type of data element changed");
+    QVERIFY2(ds->pointers().at(0)->pointerType()==pointerTypeID, "ERROR: type of pointer changed");
 }
 
 

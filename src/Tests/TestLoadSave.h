@@ -34,6 +34,7 @@ public:
 
 private slots:
     void serializeUnserializeTest();
+    void serializeUnserializeTypesTest();
     void projectLoadSaveTest();
 };
 
