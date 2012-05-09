@@ -46,6 +46,7 @@ DataStructurePtr RootedTreeStructure::create(Document *parent) {
     return DataStructure::create<RootedTreeStructure>(parent);
 }
 
+
 DataStructurePtr RootedTreeStructure::create(DataStructurePtr other, Document *parent) {
     boost::shared_ptr<RootedTreeStructure> ds = boost::static_pointer_cast<RootedTreeStructure>(RootedTreeStructure::create(parent));
 
@@ -53,36 +54,44 @@ DataStructurePtr RootedTreeStructure::create(DataStructurePtr other, Document *p
     return ds;
 }
 
+
 RootedTreeStructure::RootedTreeStructure ( Document* parent ) :
     DataStructure ( parent ), m_rootNode(0)
 {
-  addDynamicProperty("NodeSize", 100);
-  addDynamicProperty("ChildCount", 2);
-  addDynamicProperty("PointersRegion", 0.3);
-  setShowAllPointers(false);
+    addDynamicProperty("NodeSize", 100);
+    addDynamicProperty("ChildCount", 2);
+    addDynamicProperty("PointersRegion", 0.3);
+    setShowAllPointers(false);
 }
+
 
 void RootedTreeStructure::importStructure(DataStructurePtr other)
 {
-    QSet <Data*> visited;
-    QQueue<DataPtr> queue;
-    QHash <Data*, DataPtr> fromOtherToNew;
+    QSet <Data*> visited; // used to track which data elements were already processed
+    QQueue<DataPtr> queue; // list of unprocessed data elements
+    QHash <Data*, DataPtr> fromOtherToNew; // mapping from old to new data elements
 
-    foreach(DataPtr p, other->dataList()){
-        if (visited.contains(p.get())) {
+    foreach(DataPtr dataOther, other->dataList()){
+        if (visited.contains(dataOther.get())) {
             continue;
         }
-        queue.enqueue(p);
-        DataPtr newdata = addData(p->name(), 0);
-        newdata->setColor(p->color());
-        newdata->setValue(p->value());
-        newdata->setX(p->x());
-        newdata->setY(p->y());
-        newdata->setWidth(p->width());
-        if (!rootNode().get()) {
-            set_root_node(qobject_cast< RootedTreeNode* >(newdata.get()));
+        queue.enqueue(dataOther);
+
+        // add data element to tree and register mapping
+        DataPtr dataTree = addData(dataOther->name(), 0);
+        dataTree->setColor(dataOther->color());
+        dataTree->setValue(dataOther->value());
+        dataTree->setX(dataOther->x());
+        dataTree->setY(dataOther->y());
+        dataTree->setWidth(dataOther->width());
+        fromOtherToNew.insert(dataOther.get(), dataTree);
+
+        // if no tree root is present, set this data element as root
+        if (!rootNode()) {
+            set_root_node(qobject_cast<RootedTreeNode*>(dataTree.get()));
         }
-        fromOtherToNew.insert(p.get(), newdata);
+
+        // process all already met unprocessed data elements
         while(!queue.isEmpty()) {
             DataPtr n = queue.dequeue();
             if (!visited.contains(n.get())) {
@@ -90,21 +99,20 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
             }
             int childCount = 0;
             RootedTreeNode* newdataRootedNode = qobject_cast< RootedTreeNode* >(fromOtherToNew.value(n.get()).get());
-            //Set the number of Max number of childrem
             newdataRootedNode->setNumberOfChilds(n->adjacent_data().count());
 
-            DataList::const_iterator iter;
-            for (iter = n->adjacent_data().constBegin(); iter != n->adjacent_data().constEnd(); ++iter) {
-                if (!visited.contains(iter->get())){
-                    visited.insert(iter->get());
-                    queue.enqueue(*iter);
-                    DataPtr childdata = addData((*iter)->name(), 0);
-                    childdata->setColor((*iter)->color());
-                    childdata->setValue((*iter)->value());
-                    childdata->setX((*iter)->x());
-                    childdata->setY((*iter)->y());
-                    childdata->setWidth((*iter)->width());
-                    fromOtherToNew.insert(iter->get(), childdata);
+            // iterate all neighbors and process them if not already elements in tree
+            foreach (DataPtr adjacentData, n->adjacent_data()) {
+                if (!visited.contains(adjacentData.get())){
+                    visited.insert(adjacentData.get());
+                    queue.enqueue(adjacentData);
+                    DataPtr childdata = addData(adjacentData->name(), 0);
+                    childdata->setColor(adjacentData->color());
+                    childdata->setValue(adjacentData->value());
+                    childdata->setX(adjacentData->x());
+                    childdata->setY(adjacentData->y());
+                    childdata->setWidth(adjacentData->width());
+                    fromOtherToNew.insert(adjacentData.get(), childdata);
 
                     //set the child at childCount position
                     newdataRootedNode->setChild(childdata, childCount++);
@@ -113,7 +121,7 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
                     rooted->setNodeParent(DataPtr(newdataRootedNode));
                 }
             }
-            //Set the correct number of childrem (2 if there is no child.
+            // set the correct number of childrem (2 if there is no child)
             newdataRootedNode->setNumberOfChilds(childCount == 0 ? 2:childCount);
         }
     }
@@ -123,7 +131,6 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
 RootedTreeStructure::~RootedTreeStructure()
 {
 }
-
 
 
 QScriptValue RootedTreeStructure::add_data(const QString& name)
