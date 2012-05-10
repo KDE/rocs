@@ -58,8 +58,7 @@ AssignValuesToolPlugin::~AssignValuesToolPlugin()
 QString AssignValuesToolPlugin::run(QObject* doc) const
 {
     Document* graphDoc = qobject_cast<Document*> (doc);
-
-    AssignValuesWidget* dialog = new AssignValuesWidget(graphDoc, 0);
+    QPointer<AssignValuesWidget> dialog = new AssignValuesWidget(graphDoc);
 
     // data structures to selector box
     QList< DataStructurePtr > dsList = graphDoc->dataStructures();
@@ -69,8 +68,6 @@ QString AssignValuesToolPlugin::run(QObject* doc) const
     }
     dialog->addDataStructures(dsNames);
 
-    dialog->show();
-
+    dialog->exec();
     return "";
-
 }

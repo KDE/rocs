@@ -52,22 +52,15 @@ TransformEdgesWidget::TransformEdgesWidget(Document* graphDoc, QWidget* parent)
 
     QWidget *widget = new QWidget(this);
     ui = new Ui::TransformEdgesWidget;
-    ui->setupUi(this);
+    ui->setupUi(widget);
     setMainWidget(widget);
 
     // other KDialog options
     setCaption(i18n("Transform Edges"));
     setButtons(KDialog::Cancel | KDialog::Ok);
+    KDialog::centerOnScreen(widget, -3);
 
     connect(this, SIGNAL(okClicked()), this, SLOT(executeTransform()));
-
-    // put widget at center of screen
-    QDesktopWidget desktop;
-    QRect rect = desktop.availableGeometry(desktop.screenNumber(parent));
-    QPoint center = rect.center();
-    center.setX(center.x() - (this->width() / 2));
-    center.setY(center.y() - (this->height() / 2));
-    move(center);
 }
 
 

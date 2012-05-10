@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright (C) 2011 Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright (C) 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -26,7 +26,6 @@ class QObject;
 class GenerateGraphToolPlugin : public ToolsPluginInterface
 {
     Q_OBJECT
-//   Q_INTERFACES(ToolsPluginInterface)
 
 public:
     GenerateGraphToolPlugin(QObject* parent, const QList< QVariant >&);

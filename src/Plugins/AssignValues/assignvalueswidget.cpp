@@ -52,23 +52,18 @@ class QPushButton;
 AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
     :   KDialog(parent)
 {
+    QWidget *widget = new QWidget(this);
     ui = new Ui::AssignValuesWidget;
-    ui->setupUi(mainWidget());
+    ui->setupUi(widget);
+    setMainWidget(widget);
 
     setCaption(i18n("Assign Values"));
     setButtons(KDialog::Cancel | KDialog::Ok);
+    KDialog::centerOnScreen(widget, -3);
 
     connect(this, SIGNAL(okClicked()), this, SLOT(assignValues()));
 
     graphDoc_ = graphDoc;
-
-    // put widget at center of screen
-    QDesktopWidget desktop;
-    QRect rect = desktop.availableGeometry(desktop.screenNumber(parent));
-    QPoint center = rect.center();
-    center.setX(center.x() - (this->width() / 2));
-    center.setY(center.y() - (this->height() / 2));
-    move(center);
 }
 
 

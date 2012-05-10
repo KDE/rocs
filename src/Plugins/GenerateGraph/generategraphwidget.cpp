@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright (C) 2011 Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright (C) 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -47,14 +47,6 @@
 #include <boost/graph/erdos_renyi_generator.hpp>
 
 
-//TODO output useful error message
-namespace boost
-{
-void throw_exception(std::exception const &) {}
-} // do noop on exception
-
-class QPushButton;
-
 GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     :   KDialog(parent)
 {
@@ -63,22 +55,16 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
 
     QWidget *widget = new QWidget(this);
     ui = new Ui::GenerateGraphWidget;
-    ui->setupUi(this);
+    ui->setupUi(widget);
     setMainWidget(widget);
 
     // other KDialog options
     setCaption(i18n("Generate Graph"));
     setButtons(KDialog::Cancel | KDialog::Ok);
+    KDialog::centerOnScreen(widget, -3);
 
     connect(this, SIGNAL(okClicked()), this, SLOT(generateGraph()));
-
-    // put widget at center of screen
-    QDesktopWidget desktop;
-    QRect rect = desktop.availableGeometry(desktop.screenNumber(parent));
-    QPoint center = rect.center();
-    center.setX(center.x() - (this->width() / 2));
-    center.setY(center.y() - (this->height() / 2));
-    move(center);
+    connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setGraphType(int)));
 }
 
 

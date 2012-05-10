@@ -59,7 +59,7 @@ QString TransformEdgesToolPlugin::run(QObject* doc) const
 {
     Document* graphDoc = qobject_cast<Document*> (doc);
 
-    TransformEdgesWidget* dialog = new TransformEdgesWidget(graphDoc, 0);
+    QPointer<TransformEdgesWidget> dialog = new TransformEdgesWidget(graphDoc, 0);
 
     QList< DataStructurePtr > dsList = graphDoc->dataStructures();
     QStringList dsNames;
@@ -72,11 +72,7 @@ QString TransformEdgesToolPlugin::run(QObject* doc) const
     }
 
     dialog->addDataStructures(dsNames);
-
-    dialog->show();
-
+    dialog->exec();
     return "";
-
 }
 
-// #include "tranformedgestoolsplugin.moc"

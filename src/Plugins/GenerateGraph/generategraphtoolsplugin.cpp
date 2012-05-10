@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright (C) 2011 Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright (C) 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -58,8 +58,8 @@ QString GenerateGraphToolPlugin::run(QObject* doc) const
 {
     Document* graphDoc = qobject_cast<Document*> (doc);
 
-    GenerateGraphWidget* dialog = new GenerateGraphWidget(graphDoc, 0);
-    dialog->show();
+    QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget(graphDoc);
+    dialog->exec();
 
     return "";
 
