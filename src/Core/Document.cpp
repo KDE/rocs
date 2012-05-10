@@ -569,6 +569,7 @@ void Document::remove(DataStructurePtr dataStructure)
  * UserDefinedProperty3 : propertyValue3
  *
  * [Data 1]
+ * type  : [int]
  * x     : [real]
  * y     : [real]
  * color : [string in "0xFFFFFF" format]
@@ -581,6 +582,7 @@ void Document::remove(DataStructurePtr dataStructure)
  * property3 : propertyValue3
  *
  * [Data 2] <- same as above.
+ * type  : [int]
  * x     : [integer]
  * y     : [integer]
  * color : [string in "0xFFFFFF" format]
@@ -593,6 +595,7 @@ void Document::remove(DataStructurePtr dataStructure)
  * property3 : propertyValue3
  *
  * [Pointer 1 -> 2]
+ * type     : [int]
  * name     : [string]
  * value    : [string]
  * style    : [string]
@@ -649,16 +652,22 @@ bool Document::saveAsInternalFormat(const QString& filename)
 
         savePropertiesInternalFormat(dataStructure->get());
 
-        foreach(DataPtr n, (*dataStructure)->dataList()) {
+        foreach(int type, dataTypeList()) {
+        foreach(DataPtr n, (*dataStructure)->dataList(type)) {
             d->_buffer += QString("[Data %1]\n").arg(QString::number(n->identifier()));
+            d->_buffer += QString("type : ") % QString::number(n->dataType()) % QChar('\n');
             savePropertiesInternalFormat(n.get());
         }
+        }
 
-        foreach(PointerPtr e, (*dataStructure)->pointers()) {
+        foreach(int type, pointerTypeList()) {
+        foreach(PointerPtr e, (*dataStructure)->pointers(type)) {
             d->_buffer += QString("[Pointer %1->%2]\n").
                 arg(QString::number(e->from()->identifier())).
                 arg(QString::number(e->to()->identifier())).toUtf8();
+            d->_buffer += QString("type : ") % QString::number(e->pointerType()) % QChar('\n');
             savePropertiesInternalFormat(e.get());
+        }
         }
         ++dataStructure;
     }
@@ -707,10 +716,17 @@ void Document::savePropertiesInternalFormat(QObject *o)
 
 void Document::loadFromInternalFormat(const KUrl& fileUrl)
 {
+    // delete existing data structures to create clean import
+    QList<DataStructurePtr>::const_iterator iter = dataStructures().constBegin();
+    while (iter != dataStructures().constEnd()) {
+        remove(*iter);
+        ++iter;
+    }
+
     QFile f(fileUrl.toLocalFile());
     d->_lastSavedDocumentPath = fileUrl.toLocalFile();
     if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "File not open " << fileUrl.toLocalFile().toUtf8();
+        kDebug() << "Could not load file in write mode: " << fileUrl.toLocalFile().toUtf8();
         return;
     }
     DataStructurePtr tmpDataStructure;
@@ -783,64 +799,91 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
         }
 
         else if (str.startsWith(QLatin1String("[Data "))) {
-            QString identifier = str.section(' ', 1);
-            identifier.remove(']');
-            DataPtr tmpData = tmpDataStructure->addData(QString());
-            dataMap.insert(identifier.toInt(), tmpData);
+            DataPtr tmpData;
 
             QString dataLine = in.readLine().simplified();
+            int type = 0;
             qreal posX = 0;
             qreal posY = 0;
+            QString value = "";
+            QString color = "";
+            QString name = "";
             while (!in.atEnd() && !dataLine.isEmpty()) {
                 /**/ if (dataLine.startsWith(QLatin1String("x :")))         posX = dataLine.section(' ', 2).toFloat();
                 else if (dataLine.startsWith(QLatin1String("y :")))         posY = dataLine.section(' ', 2).toFloat();
-                else if (dataLine.startsWith(QLatin1String("value :")))     tmpData->setValue(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith(QLatin1String("color :")))     tmpData->setColor(dataLine.section(' ', 2));
-                else if (dataLine.startsWith(QLatin1String("name :")))      tmpData->setName(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("type :")))      type = dataLine.section(' ', 2).toInt();
+                else if (dataLine.startsWith(QLatin1String("value :")))     value = dataLine.section(' ', 2);
+                else if (dataLine.startsWith(QLatin1String("color :")))     color = dataLine.section(' ', 2);
+                else if (dataLine.startsWith(QLatin1String("name :")))      name = dataLine.section(' ', 2);
                 else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
+            if (dataTypeList().contains(type)) {
+                tmpData = tmpDataStructure->addData(name, type);
+            } else {
+                kDebug() << "Create data element of type 0, since type " << type << " was not registered.";
+                tmpData = tmpDataStructure->addData(name, 0);
+            }
+            tmpData->setValue(value);
+            tmpData->setColor(color);
             tmpData->setPos(posX, posY);
+
+            // add to data element map
+            QString identifier = str.section(' ', 1);
+            identifier.remove(']');
+            dataMap.insert(identifier.toInt(), tmpData);
             tmpObject = tmpData.get();
         }
 
         else if (str.startsWith(QLatin1String("[Pointer "))) {
+            PointerPtr tmpPointer;
             QString eName = str.section(' ', 1, 1);
             eName.remove(']');
 
             QString nameFrom = eName.section("->", 0, 0);
             QString nameTo = eName.section("->", 1, 1);
 
-            PointerPtr tmpPointer = tmpDataStructure->addPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()]);
-
             QString dataLine = in.readLine().simplified();
+            int width = 0;
+            QString value = "";
+            int type = 0;
+            QString color = "";
+            QString style = "";
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith(QLatin1String("width :")))     tmpPointer->setWidth(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith(QLatin1String("value :")))     tmpPointer->setValue(dataLine.section(' ', 2));
-                else if (dataLine.startsWith(QLatin1String("color :")))     tmpPointer->setColor(dataLine.section(' ', 2));
-                else if (dataLine.startsWith(QLatin1String("width :")))     tmpPointer->setColor(dataLine.section(' ', 2).toFloat());
-                else if (dataLine.startsWith(QLatin1String("style :")))     tmpPointer->setColor(dataLine.section(' ', 2));
-
+                /**/ if (dataLine.startsWith(QLatin1String("width :")))     width = dataLine.section(' ', 2).toInt();
+                else if (dataLine.startsWith(QLatin1String("value :")))     value = dataLine.section(' ', 2);
+                else if (dataLine.startsWith(QLatin1String("type :")))      type = dataLine.section(' ', 2).toInt();
+                else if (dataLine.startsWith(QLatin1String("color :")))     color = dataLine.section(' ', 2);
+                else if (dataLine.startsWith(QLatin1String("style :")))     style = dataLine.section(' ', 2);
                 else if (!dataLine.isEmpty())                break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
+            if (pointerTypeList().contains(type)) {
+                tmpPointer = tmpDataStructure->addPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], type);
+            } else {
+                kDebug() << "Create pointer of type 0, since type " << type << " was not registered.";
+                tmpPointer = tmpDataStructure->addPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], 0);
+            }
+            tmpPointer->setWidth(width);
+            tmpPointer->setValue(value);
+            tmpPointer->setColor(color);
+            tmpPointer->setStyle(style);
             tmpObject = tmpPointer.get();
+        }
 
-        } else if (str.startsWith(QLatin1String("[Group"))) {
+        else if (str.startsWith(QLatin1String("[Group"))) {
             /*QString gName = str.section(" ",1,1);
             gName.remove(']');
             tmpGroup = tmpDataStructure->addGroup(gName); */
-        } else if (str.contains(':')) {
+        }
+
+        else if (str.contains(':')) {
             QString propertyName = str.section(':', 0, 0).trimmed();
             QString propertyValue = str.section(':', 1, 1).trimmed();
             tmpObject->setProperty(propertyName.toUtf8() , propertyValue);
         }
-        //else {
-        //      tmpGroup->append( tmpDataStructure->data(str));
-        //}
     }
     d->_modified = false;
-    qDebug() << "DataStructure Document Loaded.";
 }
 
 DataStructurePtr Document::activeDataStructure() const

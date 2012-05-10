@@ -115,7 +115,6 @@ void TestLoadSave::serializeUnserializeTypesTest()
     QVERIFY2(document->pointerType(pointerTypeID), "ERROR: Pointer type not present");
     QVERIFY2(ds->dataList(dataTypeID).size() > 0, "ERROR: type of data element changed");
     QVERIFY2(ds->pointers(pointerTypeID).size() > 0, "ERROR: type of pointer changed");
-
 }
 
 
