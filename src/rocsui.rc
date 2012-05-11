@@ -8,27 +8,23 @@
 
   <MenuBar>
         <Menu name="file" >
-            <Menu name="new">
-                <text>Project</text>
-                <Action name="set-project-name" />
-                <Action name="new-graph" />
-                <Action name="new-script" />
-                <Action name="import-graph" />
-                <Action name="import-script" />
-            </Menu>
             <Action name="open-project" />
             <Action name="save-project" />
             <Action name="change-project" />
             <Action name="new-project" />
-            <Separator/>
-            <Menu name="graph">
-                <text>Graph</text>
-                <Action name="save-graph" />
-                <Action name="save-graph-as" />
-                <Action name="export-graph" />
-            </Menu>
-            <Menu name="script">
-                <text>Script</text>
+        </Menu>
+        <Menu name="project" >
+            <text>Project</text>
+            <Action name="set-project-name" />
+            <Action name="new-graph" />
+            <Action name="new-script" />
+            <Action name="import-graph" />
+            <Action name="import-script" />
+        </Menu>
+        <Menu name="script">
+            <text>Script Document</text>
+            <Menu name="script_file">
+                <text>Script File</text>
                 <Action name="save-script" />
                 <Action name="save-script-as" />
             </Menu>
@@ -37,28 +33,38 @@
             <Action name="upload" />
             <Action name="possible_includes" />
         </Menu>
-        <Menu name="edit">
-            <text>Edit</text>
+        <Menu name="graph">
+            <text>Graph Document</text>
+            <Menu name="graph_file">
+                <text>Graph File</text>
+                <Action name="save-graph" />
+                <Action name="save-graph-as" />
+                <Action name="export-graph" />
+            </Menu>
+            <Separator/>
             <Menu name="conversions">
-                <text>Conversions</text>
+                <text>Convert To</text>
                 <ActionList name="DS_plugins" />
             </Menu>
-            <Menu>
-                <text>Layout</text>
-                <Action name="align-htop"/>
-                <Action name="align-hcenter"/>
-                <Action name="align-hbottom"/>
-                <Action name="align-vleft"/>
-                <Action name="align-vcenter"/>
-                <Action name="align-vright" />
-                <Action name="align-circle" />
-                <Action name="align-tree" />
+            <Menu name="graph_selected">
+                <text>Edit Selected Data</text>
+                <Menu>
+                    <text>Layout</text>
+                    <Action name="align-htop"/>
+                    <Action name="align-hcenter"/>
+                    <Action name="align-hbottom"/>
+                    <Action name="align-vleft"/>
+                    <Action name="align-vcenter"/>
+                    <Action name="align-vright" />
+                    <Action name="align-circle" />
+                    <Action name="align-tree" />
+                </Menu>
+                <Action name="delete-selected" />
             </Menu>
-            <Action name="delete-selected" />
-        </Menu>
-        <Menu name="tools">
-            <text>Tools</text>
-            <ActionList name="tools_plugins" />
+            <Menu>
+                <text>Tools</text>
+                <ActionList name="tools_plugins" />
+            </Menu>
         </Menu>
     </MenuBar>
 
