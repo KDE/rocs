@@ -87,7 +87,7 @@ QGraphicsView* GraphVisualEditor::view() const
 
 void GraphVisualEditor::setActiveDocument()
 {
-    if (_document !=  DocumentManager::self()->activeDocument()) {
+    if (_document != DocumentManager::self()->activeDocument()) {
         releaseDocument();
     }
     _document = DocumentManager::self()->activeDocument();
@@ -102,7 +102,6 @@ void GraphVisualEditor::releaseDocument()
     if (!_document) {
         return;
     }
-
     _scene->clear();
     foreach(DataStructurePtr ds, _document->dataStructures()) {
         ds->disconnect(this);

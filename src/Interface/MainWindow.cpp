@@ -196,7 +196,6 @@ Project* MainWindow::createNewProject()
     Project* newProject = new Project();
     // create new document and add this to project new
     newProject->addGraphFileNew(DocumentManager::self()->newDocument());
-    setActiveDocument();
     newProject->addCodeFileNew(_codeEditor->newScript());
 
     return newProject;
@@ -472,34 +471,32 @@ void MainWindow::showSettings()
     dialog.exec();
 }
 
-void MainWindow::createToolsPluginsAction(){
-    QAction* action = 0;
-    QList <  ToolsPluginInterface*> avaliablePlugins =  PluginManager::instance()->toolPlugins();
-    int count = 0;
-    foreach(ToolsPluginInterface * p, avaliablePlugins) {
-        action = new KAction(p->displayName(), this);
-        action->setData(count++);
-        connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
-        connect(p, SIGNAL(enabled(bool)), action, SLOT(setEnabled(bool)));
-        _toolsPlugins << action;
-    }
-}
-
 void MainWindow::setupToolsPluginsAction()
 {
     if (_toolsPlugins.isEmpty()) {
         createToolsPluginsAction();
     }
 
-    QAction* action = 0;
-    foreach(action, _toolsPlugins) {
-        ToolsPluginInterface *p = PluginManager::instance()->toolPlugins().at(action->data().toInt());
-        action->setEnabled(p->supportedDataStructures().isEmpty() || //no list of supported DS
-                           (DocumentManager::self()->activeDocument() &&
-                             p->supportedDataStructures().contains(DocumentManager::self()->activeDocument()->dataStructureInternalName()))
+    foreach(QAction* action, _toolsPlugins) {
+        ToolsPluginInterface *plugin = PluginManager::instance()->toolPlugins().at(action->data().toInt());
+        action->setEnabled(
+                DocumentManager::self()->activeDocument() &&
+                plugin->supportedDataStructures().contains(DocumentManager::self()->activeDocument()->dataStructureInternalName())
                           );
     }
-    unplugActionList( "tools_plugins" );
+}
+
+void MainWindow::createToolsPluginsAction(){
+    QAction* action = 0;
+    QList<ToolsPluginInterface*> avaliablePlugins =  PluginManager::instance()->toolPlugins();
+    int count = 0;
+    foreach(ToolsPluginInterface * plugin, avaliablePlugins) {
+        action = new KAction(plugin->displayName(), this);
+        action->setData(count++);
+        connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
+        _toolsPlugins << action;
+    }
+    unplugActionList("tools_plugins");
     plugActionList("tools_plugins", _toolsPlugins);
 }
 
@@ -943,7 +940,6 @@ void MainWindow::runToolPlugin()
     if (! action) {
         return;
     }
-
     if (ToolsPluginInterface *plugin =  PluginManager::instance()->toolPlugins().value(action->data().toInt())) {
         emit runTool(plugin, DocumentManager::self()->activeDocument());
     }
@@ -999,9 +995,12 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
 
 void MainWindow::executeScriptOneStep(const QString& text)
 {
-    qDebug() << "execution next step";
-    if (_txtDebug == 0)   return;
-    if (scene() == 0)    return;
+    if (_txtDebug == 0) {
+        return;
+    }
+    if (scene() == 0) {
+        return;
+    }
 
     _txtDebug->clear();
 

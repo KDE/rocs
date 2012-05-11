@@ -187,6 +187,11 @@ private slots:
     void updateToolbarTypeActions();
 
 public slots:
+    /**
+     * Sets the current active document given by \see DocumentManager::activeDocument() as
+     * active document. Use with case, since this method creates connections to the current Document.
+     * If already one document is active, \see releaseDocument(d) must be called before this.
+     */
     void setActiveDocument();
     void releaseDocument(Document *d);
     void runToolPlugin();
