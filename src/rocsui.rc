@@ -16,10 +16,13 @@
         <Menu name="project" >
             <text>Project</text>
             <Action name="set-project-name" />
-            <Action name="new-graph" />
+            <Separator/>
             <Action name="new-script" />
+            <Action name="add-script" />
+            <Separator/>
+            <Action name="new-graph" />
+            <Action name="add-graph" />
             <Action name="import-graph" />
-            <Action name="import-script" />
         </Menu>
         <Menu name="script">
             <text>Script Document</text>

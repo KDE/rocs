@@ -393,17 +393,17 @@ void MainWindow::setupActions()
     _paletteActions->addAction("align-tree", new AlignAction(i18nc("Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
 
     // Menu actions
-    createAction("document-new", i18n("New Project"), "new-project", Qt::Key_N, SLOT(newProject()), this);
-    createAction("document-save", i18n("Save Project"), "save-project", Qt::Key_S, SLOT(saveProject()), this);
-    createAction("document-open", i18n("Open Project"), "open-project", Qt::Key_O, SLOT(openProject()), this);
-    createAction("", i18n("Set Name"), "set-project-name", SLOT(setProjectName()), this);
-    createAction("document-new", i18n("New Graph Document"), "new-graph", SLOT(newGraph()), this);
-    createAction("document-new",     i18n("New Script File"),     "new-script",         SLOT(newScript()),    this);
-    createAction("document-open",    i18n("Import Rocs Graph"),        "open-graph",        SLOT(openGraph()),   this);
-    createAction("document-save",    i18n("Save Graph"),        "save-graph",        SLOT(saveGraph()),   this);
-    createAction("document-save-as", i18n("Save Graph as"),     "save-graph-as",     SLOT(saveGraphAs()), this);
-    createAction("",                 i18n("Download Examples"), "download",          SLOT(downloadNewExamples()),  this);
-    createAction("",                 i18n("Upload script"),     "upload",            SLOT(uploadScript()),  this);
+    createAction("document-new",        i18n("New Project"),        "new-project", Qt::Key_N, SLOT(newProject()), this);
+    createAction("document-save",       i18n("Save Project"),       "save-project", Qt::Key_S, SLOT(saveProject()), this);
+    createAction("document-open",       i18n("Open Project"),       "open-project", Qt::Key_O, SLOT(openProject()), this);
+    createAction("document-properties", i18n("Set Name"),           "set-project-name", SLOT(setProjectName()), this);
+    createAction("document-new",        i18n("New Graph Document"), "new-graph", SLOT(newGraph()), this);
+    createAction("document-new",        i18n("New Script File"),    "new-script",         SLOT(newScript()),    this);
+    createAction("document-open",       i18n("Import Rocs Graph"),  "add-graph",        SLOT(importGraph()),   this);
+    createAction("document-save",       i18n("Save Graph"),         "save-graph",        SLOT(saveGraph()),   this);
+    createAction("document-save-as",    i18n("Save Graph as"),      "save-graph-as",     SLOT(saveGraphAs()), this);
+    createAction("",                    i18n("Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
+    createAction("",                    i18n("Upload script"),      "upload",            SLOT(uploadScript()),  this);
 
     createAction("document-save-as", i18n("Possible Includes"), "possible_includes", SLOT(showPossibleIncludes()), this);
     createAction("document-open",    i18n("Open Script"),       "open-script",       SLOT(openScript()),   _codeEditor);
@@ -663,13 +663,21 @@ void MainWindow::updateGraphDocumentList()
 }
 
 
-void MainWindow::openGraph()
+void MainWindow::importGraph()
 {
-    if (saveIfChanged() == KMessageBox::Cancel) return;
-    QString fileName = KFileDialog::getOpenFileName(QString(), i18n("*.graph|Graph files\n*|All files"), this, i18n("Graph Files"));
-    if (fileName.isEmpty()) return;
-//      ImporterExporterManager imp(this);
-//     imp.openDocument();
+    KUrl startDirectory;
+    if (!_currentProject->isTemporary()) {
+        startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
+    }
+
+    QString fileName = KFileDialog::getOpenFileName( startDirectory,
+                                                     i18n("*.graph|Graph files\n*|All files"),
+                                                     this,
+                                                     i18n("Import Graph File"));
+    if (fileName.isEmpty()) {
+        return;
+    }
+    _currentProject->addCodeFile(fileName);
     loadDocument(fileName);
 }
 

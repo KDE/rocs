@@ -89,19 +89,21 @@ Document* ImporterExporterManager::importFile()
     ext.append(i18n("*|All files"));
 
     QPointer<KFileDialog> dialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
-    dialog->setCaption(i18n("Graph Files"));
+    dialog->setCaption(i18n("Import Graph File into Project"));
     if (!dialog->exec()) {
         return 0;
     }
 
     kDebug() << "Extensions:" << ext;
     QString fileName = dialog->selectedFile();
-    if (fileName.isEmpty()) return 0;
+    if (fileName.isEmpty()) {
+        return 0;
+    }
 
     int index = fileName.lastIndexOf('.');
     FilePluginInterface * f = 0;
     if (index == -1) {
-        kDebug() << "Cant open file without extension.";
+        kDebug() << "Cannot open file without extension.";
         return 0;
     }
 

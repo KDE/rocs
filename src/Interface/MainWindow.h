@@ -142,7 +142,12 @@ private slots:
     void saveProject();
     void openProject();
     void setProjectName();
-    void openGraph();
+
+    /**
+     * Import dialog to add graph document to project.
+     * Imported graph document is directly set as active document.
+     */
+    void importGraph();
 
     /**
      * Update window caption according to current project.
