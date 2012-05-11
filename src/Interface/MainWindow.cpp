@@ -110,6 +110,7 @@
 #include "PossibleIncludes.h"
 #include <PropertiesDialogAction.h>
 
+
 MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
@@ -134,6 +135,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
 
     // TODO: use welcome widget instead of creating default empty project
     _currentProject = createNewProject();
+    updateCaption();
 
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
     GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
@@ -693,6 +695,7 @@ void MainWindow::newProject()
     _currentProject = new Project();
     _currentProject->addCodeFileNew(_codeEditor->newScript());
     _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
+    updateCaption();
 }
 
 
@@ -716,6 +719,7 @@ void MainWindow::saveProject()
         saveAllGraphs();
         saveScripts();
         _currentProject->writeProjectFile(file);
+        updateCaption();
     } else {
         saveAllGraphs();
         saveScripts();
@@ -737,7 +741,7 @@ void MainWindow::openProject()
                    i18n("Open Project Files"));
     _currentProject = new Project(file);
     foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
-        DocumentManager::self()->openDocument(graphFile); //TODO documents should use kurls
+        DocumentManager::self()->openDocument(graphFile);
     }
     if (_currentProject->graphFiles().count() == 0) {
         _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
@@ -749,6 +753,8 @@ void MainWindow::openProject()
     if (_currentProject->codeFiles().count() == 0) {
         _currentProject->addCodeFileNew(_codeEditor->newScript());
     }
+
+    updateCaption();
 }
 
 
@@ -760,6 +766,25 @@ void MainWindow::setProjectName()
                                         );
     _currentProject->setName(name);
 }
+
+void MainWindow::updateCaption()
+{
+    if (!_currentProject) {
+        return;
+    }
+
+    QString caption = "";
+    if (!_currentProject->name().isEmpty()) {
+        caption.append(_currentProject->name());
+    }
+    else if (_currentProject->isTemporary()) {
+        caption.append(i18n("[ untitled ]"));
+    } else {
+        caption.append(_currentProject->projectFile());
+    }
+    setCaption(caption);
+}
+
 
 
 void MainWindow::saveScripts()

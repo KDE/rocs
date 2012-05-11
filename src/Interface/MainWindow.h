@@ -145,6 +145,11 @@ private slots:
     void openGraph();
 
     /**
+     * Update window caption according to current project.
+     */
+    void updateCaption();
+
+    /**
      * Save currently active graph document.
      */
     void saveGraph();

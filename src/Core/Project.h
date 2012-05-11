@@ -77,6 +77,8 @@ public:
      */
     QString projectDirectory() const;
 
+    const QString& projectFile() const;
+
     /**
      * Set project name.
      * \param name is the new name of the project

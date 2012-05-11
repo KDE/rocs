@@ -130,6 +130,13 @@ QString Project::projectDirectory() const
 }
 
 
+const QString& Project::projectFile() const
+{
+    return d->_projectFile;
+}
+
+
+
 int Project::addCodeFile(KUrl file)
 {
     QList<int> keys = d->_codeFileGroup.uniqueKeys();
