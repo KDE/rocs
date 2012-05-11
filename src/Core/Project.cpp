@@ -317,6 +317,7 @@ bool Project::writeProjectFile(QString fileUrl)
     if (!fileUrl.isEmpty()) {
         // do not save to the old file
         d->_config->markAsClean();
+        d->_projectFile = fileUrl;
 
         // copy and save
         KConfig* temp = d->_config->copyTo(fileUrl);
