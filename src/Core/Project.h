@@ -99,6 +99,12 @@ public:
     bool isTemporary();
 
     /**
+     * Returns true if the poject is modified.
+     * \return modification status
+     */
+    bool isModified() const;
+
+    /**
      * Get list of all code files of the project that have a path.
      * \return list of URLs
      */

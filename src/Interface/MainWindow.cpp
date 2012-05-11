@@ -911,6 +911,17 @@ void MainWindow::newGraph()
 
 int MainWindow::saveIfChanged()
 {
+    if (_currentProject->isModified()) {
+        const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
+                                "Changes on your project are unsaved. Do you want to save your changes?"));
+        if (btnCode == KMessageBox::Yes) {
+            _currentProject->writeProjectFile();
+            saveAllGraphs();
+            _codeEditor->saveAllScripts();
+        }
+        return btnCode;
+    }
+
     bool anyGraphDocumentModified = false;
     foreach(Document * document, DocumentManager::self()->documentList()) {
         if (document->isModified()) {

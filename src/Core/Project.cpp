@@ -45,6 +45,7 @@ public:
     QString _journalFile;
     KConfig* _config;
     bool _temporary;
+    bool _modified;
 
     KConfigGroup initKConfigObject() {
         // helper method for Project::open()
@@ -83,6 +84,7 @@ Project::Project() :
     d->_projectFile = temp.fileName();
     d->initKConfigObject();
     d->_temporary = true;
+    d->_modified = false;
 }
 
 
@@ -96,6 +98,7 @@ Project::Project(QString projectFile) :
     } else {
         d->_temporary = false;
     }
+    d->_modified = false;
 }
 
 
@@ -108,6 +111,7 @@ void Project::setName(QString name)
 {
     KConfigGroup projectGroup(d->_config, "Project");
     projectGroup.writeEntry("Name", name);
+    d->_modified = true;
 }
 
 
@@ -136,7 +140,6 @@ const QString& Project::projectFile() const
 }
 
 
-
 int Project::addCodeFile(KUrl file)
 {
     QList<int> keys = d->_codeFileGroup.uniqueKeys();
@@ -149,6 +152,7 @@ int Project::addCodeFile(KUrl file)
     newGroup.writeEntry("file", KUrl::relativePath(projectDirectory(), file.toLocalFile()));
     newGroup.writeEntry("identifier", newKey);
     d->_codeFileGroup.insert(newKey, "CodeFile" + QString("%1").arg(newKey));
+    d->_modified = true;
 
     return newKey;
 }
@@ -215,6 +219,7 @@ int Project::addGraphFile(KUrl file)
     newGroup.writeEntry("file", KUrl::relativePath(projectDirectory(), file.toLocalFile()));
     newGroup.writeEntry("identifier", newKey);
     d->_graphFileGroup.insert(newKey, "GraphFile" + QString("%1").arg(newKey));
+    d->_modified = true;
 
     return newKey;
 }
@@ -284,6 +289,7 @@ void Project::saveGraphFileAs(Document* document, QString file)
 void Project::setJournalFile(KUrl file)
 {
     d->_journalFile = file.toLocalFile();
+    d->_modified = true;
 }
 
 
@@ -302,6 +308,7 @@ bool Project::writeNewProjectFile()
     KConfigGroup group = d->_config->group("Project");
     group.writeEntry("Directory", d->_projectDirectory);
     d->_config->sync();
+    d->_modified = false;
 
     return true;
 }
@@ -349,6 +356,7 @@ bool Project::writeProjectFile(QString fileUrl)
     // write back
     d->_config->sync();
     d->_temporary = false;
+    d->_modified = false;
 
     return true;
 }
@@ -358,3 +366,10 @@ bool Project::isTemporary()
 {
     return d->_temporary;
 }
+
+
+bool Project::isModified() const
+{
+    return d->_modified;
+}
+
