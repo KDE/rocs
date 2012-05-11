@@ -36,10 +36,12 @@ TestLoadSave::TestLoadSave()
 
 void TestLoadSave::serializeUnserializeTest()
 {
+    DocumentManager::self()->addDocument(new Document("testSerialization"));
+    Document* document = DocumentManager::self()->activeDocument();
     QMap<QString, DataPtr> dataList;
-    // Creates a simple Graph with 5 data elements and connect them with pointers.
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->activeDataStructure();
 
+    // Creates a simple Graph with 5 data elements and connect them with pointers.
+    DataStructurePtr ds = document->activeDataStructure();
     ds->setProperty("name", "Graph1");
     dataList.insert("a", ds->addData("a"));
     dataList.insert("b", ds->addData("b"));
@@ -64,9 +66,9 @@ void TestLoadSave::serializeUnserializeTest()
     DocumentManager::self()->activeDocument()->loadFromInternalFormat(KUrl::fromLocalFile("serializetest.graph"));
 
     // default data structure also present
-    QVERIFY2(DocumentManager::self()->activeDocument()->dataStructures().count() == 2, "ERROR: DataStructure not loaded");
+    QVERIFY2(DocumentManager::self()->activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
 
-    ds = DocumentManager::self()->activeDocument()->dataStructures().at(1);
+    ds = DocumentManager::self()->activeDocument()->dataStructures().at(0);
     QVERIFY2(ds->dataList().size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2(ds->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
 
