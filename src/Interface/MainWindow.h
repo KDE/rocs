@@ -150,6 +150,12 @@ private slots:
     void importGraph();
 
     /**
+     * Import dialog to add graph document to project.
+     * Imported graph document is directly set as active document.
+     */
+    void importScript();
+
+    /**
      * Update window caption according to current project.
      */
     void updateCaption();

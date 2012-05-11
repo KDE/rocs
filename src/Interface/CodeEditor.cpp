@@ -152,13 +152,6 @@ void CodeEditor::updateTabText(KTextEditor::Document* text)
 }
 
 
-void CodeEditor::openScript()
-{
-    KUrl fileUrl = KFileDialog::getOpenUrl();
-    openScript(fileUrl);
-}
-
-
 void CodeEditor::openScript(const KUrl& fileUrl)
 {
     if (!fileUrl.isValid()) {

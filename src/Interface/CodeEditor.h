@@ -73,7 +73,6 @@ public slots:
     void saveActiveScript();
     void saveActiveScriptAs();
     void saveAllScripts();
-    void openScript();
     void openScript(const KUrl& fileUrl);
     void closeAllScripts();
 

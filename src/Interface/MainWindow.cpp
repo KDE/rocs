@@ -405,10 +405,10 @@ void MainWindow::setupActions()
     createAction("",                    i18n("Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
     createAction("",                    i18n("Upload script"),      "upload",            SLOT(uploadScript()),  this);
 
-    createAction("document-save-as", i18n("Possible Includes"), "possible_includes", SLOT(showPossibleIncludes()), this);
-    createAction("document-open",    i18n("Open Script"),       "open-script",       SLOT(openScript()),   _codeEditor);
-    createAction("document-save",    i18n("Save Script"),       "save-script",       SLOT(saveActiveScript()),   _codeEditor);
-    createAction("document-save-as", i18n("Save Script as"),    "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
+    createAction("document-save-as", i18n("Possible Includes"),   "possible_includes", SLOT(showPossibleIncludes()), this);
+    createAction("document-open",    i18n("Import Script"),       "add-script",       SLOT(importScript()),   this);
+    createAction("document-save",    i18n("Save Script"),         "save-script",       SLOT(saveActiveScript()),   _codeEditor);
+    createAction("document-save-as", i18n("Save Script as"),      "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
 
     // eventually create hooks for file plugins
     PluginManager::instance()->loadFilePlugins();
@@ -670,15 +670,35 @@ void MainWindow::importGraph()
         startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
     }
 
-    QString fileName = KFileDialog::getOpenFileName( startDirectory,
+    QString fileUrl = KFileDialog::getOpenFileName( startDirectory,
                                                      i18n("*.graph|Graph files\n*|All files"),
                                                      this,
-                                                     i18n("Import Graph File"));
-    if (fileName.isEmpty()) {
+                                                     i18n("Add Existing Graph File to Project"));
+    if (fileUrl.isEmpty()) {
         return;
     }
-    _currentProject->addCodeFile(fileName);
-    loadDocument(fileName);
+    _currentProject->addGraphFile(fileUrl);
+    loadDocument(fileUrl);
+}
+
+
+void MainWindow::importScript()
+{
+    KUrl startDirectory;
+    if (!_currentProject->isTemporary()) {
+        startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
+    }
+
+    QString fileUrl = KFileDialog::getOpenFileName(  startDirectory,
+                                                     QString(),
+                                                     this,
+                                                     i18n("Add Existing Script File to Project"));
+    if (fileUrl.isEmpty()) {
+        return;
+    }
+
+    _currentProject->addCodeFile(fileUrl);
+    _codeEditor->openScript(fileUrl);
 }
 
 
