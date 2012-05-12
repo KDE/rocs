@@ -43,11 +43,11 @@ public:
 private slots:
     void colorChanged(const QColor& c);;
     void reflectAttributes();
-    void setUseColor(bool b); //! Temporary fix because of the string-freeze. remove this for 4.8
+    void setUseColor(bool b);
     void addProperty();
     void setDataType(int dataTypeIndex);
-    void addDataType();
-    void setIcon(int index);
+    void updateDataTypes();
+
 private:
     DataPtr _data;
     Ui::DataPropertiesWidget* ui;

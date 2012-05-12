@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>431</width>
-    <height>513</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -145,6 +145,13 @@
          <item row="2" column="1">
           <widget class="KComboBox" name="_dataType"/>
          </item>
+         <item row="2" column="2">
+          <widget class="QToolButton" name="_editType">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -158,8 +165,31 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="1">
+         <widget class="KColorCombo" name="_color">
+          <property name="toolTip">
+           <string>Node color</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QCheckBox" name="_enableColor">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Enable Color</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
          <widget class="QLabel" name="label_6">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -178,71 +208,6 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="KColorCombo" name="_color">
-          <property name="toolTip">
-           <string>Node color</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="_enableColor">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>Enable Color</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Type Icon:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="KComboBox" name="dataTypeIcon">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>48</width>
-            <height>48</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Select the icon that is used for all data elements of this type.</string>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>48</width>
-            <height>48</height>
-           </size>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
      </layout>
@@ -251,7 +216,7 @@
    <item>
     <widget class="QGroupBox" name="DataDefinitions">
      <property name="title">
-      <string>Data Definition</string>
+      <string>Data Structure Specific Properties</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
@@ -261,7 +226,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QFrame" name="extraItens">
+       <widget class="QFrame" name="extraItems">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -279,21 +244,7 @@
       <string>Dynamic Properties</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="1">
-       <widget class="QPushButton" name="exportNewType">
-        <property name="text">
-         <string>Export as new Type</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLineEdit" name="newTypeName">
-        <property name="placeholderText">
-         <string>Name</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="3">
+      <item row="0" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QTableView" name="_propertiesTable"/>
@@ -302,8 +253,11 @@
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <widget class="KPushButton" name="_addProperty">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add new dynamic property to data element.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
-             <string>+</string>
+             <string/>
             </property>
            </widget>
           </item>

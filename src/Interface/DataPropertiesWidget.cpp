@@ -23,6 +23,7 @@
 #include <KDebug>
 #include "DataItem.h"
 #include "DataStructure.h"
+#include "PropertiesDialogAction.h"
 #include "model_GraphProperties.h"
 #include <QPainter>
 
@@ -33,46 +34,20 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
 {
     ui = new Ui::DataPropertiesWidget;
     ui->setupUi(mainWidget());
+    ui->_addProperty->setIcon(KIcon("rocsnew"));
+
+    // edit data types by separate dialog
+    QPointer<PropertiesDialogAction> dataTypePropertiesAction = new PropertiesDialogAction(
+            i18n("Edit Data Types"), data->dataStructure()->document()->dataType(data->dataType()), this);
+    ui->_editType->setDefaultAction(dataTypePropertiesAction);
+    ui->_editType->setIcon(KIcon("document-properties"));
+    connect(data->dataStructure()->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(updateDataTypes()));
+    connect(data->dataStructure()->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(updateDataTypes()));
+
     setCaption(i18n("Data Element Properties"));
     setButtons(Close); //TODO implement changes for (Ok | Cancel)
-
     setAttribute(Qt::WA_DeleteOnClose);
-
-    connect(ui->exportNewType, SIGNAL(clicked()), SLOT(addDataType()));
     setData(data);
-
-    if (!_data->dataStructure()->document()->iconPackage().isEmpty()) {
-        QFile svgFile(_data->dataStructure()->document()->iconPackage());
-        svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
-
-        QXmlStreamReader reader(&svgFile);
-        QSvgRenderer *renderer = DataItem::sharedRenderer(svgFile.fileName());
-        while (!reader.atEnd()) {
-            reader.readNext();
-            if (!reader.attributes().hasAttribute("id")) {
-                continue;
-            }
-            QString attribute = reader.attributes().value("id").toString();
-            if (attribute.startsWith(QLatin1String("rocs_"))) {
-                QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
-
-                QPainter painter;
-                painter.begin(&iconImage);
-                renderer->render(&painter, attribute);
-                painter.end();
-
-                attribute.remove("rocs_");
-                ui->dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), "", QVariant(attribute));
-            }
-        }
-        if (!_data->dataStructure()->document()->dataType(_data->dataType())->iconName().isEmpty()) {
-            QString icon = _data->dataStructure()->document()->dataType(_data->dataType())->iconName();
-            icon.remove("rocs_");
-            ui->dataTypeIcon->setCurrentIndex(ui->dataTypeIcon->findData(icon));
-        }
-        connect(ui->dataTypeIcon, SIGNAL(activated(int)),
-                this, SLOT(setIcon(int)));
-    }
 }
 
 
@@ -93,14 +68,10 @@ void DataPropertiesWidget::setData(DataPtr data)
 
     _data = data;
 
-    // setup data types combobox
-    foreach (int dataType, _data->dataStructure()->document()->dataTypeList()) {
-        QString dataTypeString = _data->dataStructure()->document()->dataType(dataType)->name();
-        ui->_dataType->addItem(dataTypeString, QVariant(dataType));
-    }
+    updateDataTypes();
 
-    delete ui->extraItens->layout();
-    ui->extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
+    delete ui->extraItems->layout();
+    ui->extraItems->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
 
     connect(ui->_showName, SIGNAL(toggled(bool)),
@@ -141,16 +112,16 @@ void DataPropertiesWidget::setUseColor(bool b)
 
 void DataPropertiesWidget::reflectAttributes()
 {
-    if (!ui->extraItens->layout()) {
+    if (!ui->extraItems->layout()) {
         _oldDataStructurePlugin = DataStructurePluginManager::self()->pluginName();
     }
 
     if (_oldDataStructurePlugin != DataStructurePluginManager::self()->pluginName()) {
-        ui->extraItens->layout()->deleteLater();
+        ui->extraItems->layout()->deleteLater();
     }
 
-    if (!ui->extraItens->layout()) {
-        ui->extraItens->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
+    if (!ui->extraItems->layout()) {
+        ui->extraItems->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     }
 
     ui->_color->setColor(_data->color().value<QColor>());
@@ -162,7 +133,6 @@ void DataPropertiesWidget::reflectAttributes()
 
     DataTypePtr dataType = _data->dataStructure()->document()->dataType(_data->dataType());
     ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));
-    ui->dataTypeIcon->setCurrentIndex(ui->dataTypeIcon->findData(QVariant(dataType->iconName())));
 }
 
 
@@ -175,40 +145,23 @@ void DataPropertiesWidget::colorChanged(const QColor& c)
 void DataPropertiesWidget::setDataType(int dataTypeIndex)
 {
     _data->setDataType(ui->_dataType->itemData(dataTypeIndex).toInt());
-    ui->dataTypeIcon->setCurrentIndex(ui->dataTypeIcon->findData(QVariant(_data->icon())));
 }
 
+void DataPropertiesWidget::updateDataTypes()
+{
+    ui->_dataType->clear();
+    // setup data types combobox
+    foreach (int dataType, _data->dataStructure()->document()->dataTypeList()) {
+        QString dataTypeString = _data->dataStructure()->document()->dataType(dataType)->name();
+        ui->_dataType->addItem(dataTypeString, QVariant(dataType));
+    }
+    if (_data) {
+        ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));
+    }
+}
 
 void DataPropertiesWidget::addProperty()
 {
     GraphPropertiesModel *model = qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
     model->addDynamicProperty(i18n("untitled %1", model->rowCount()), 0, _data.get(), false);
-}
-
-
-void DataPropertiesWidget::addDataType()
-{
-    if (ui->newTypeName->text().isEmpty()){
-        return;
-    }
-
-    DataStructurePtr ds = _data->dataStructure();
-    int dataTypeIdentifier = ds->document()->registerDataType(ui->newTypeName->text());
-    DataTypePtr datatype = ds->document()->dataType(dataTypeIdentifier);
-
-    QString iconName = ui->dataTypeIcon->itemData(ui->dataTypeIcon->currentIndex()).toString();
-    datatype->setIcon(iconName);
-
-    ui->_dataType->addItem(datatype->name(), QVariant(dataTypeIdentifier));
-    ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(dataTypeIdentifier)));
-    ui->dataTypeIcon->setCurrentItem(datatype->iconName());
-}
-
-
-void DataPropertiesWidget::setIcon(int index)
-{
-    int dataTypeValue = _data->dataType();
-    _data->dataStructure()->document()->dataType(dataTypeValue)->setIcon(
-            ui->dataTypeIcon->itemData(index).toString()
-            );
 }
