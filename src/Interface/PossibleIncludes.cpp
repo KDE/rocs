@@ -24,19 +24,20 @@
 #include <settings.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
+#include <KDialog>
 #include <QDir>
+#include <KLocale>
 
-PossibleIncludes::PossibleIncludes(QWidget* parent, Qt::WindowFlags f): QDialog(parent, f)
+PossibleIncludes::PossibleIncludes(QWidget* parent, Qt::WindowFlags f):
+    KDialog(parent, f)
 {
-    QGridLayout * lay = new QGridLayout(this);
     m_list = new QListWidget(this);
-
-    lay->addWidget(m_list);
-    setLayout(lay);
     updateIncludeList();
+    setMainWidget(m_list);
     resize(450, 200);
+    setCaption(i18n("Possible Includes for Script Engine"));
+    setButtons(Close);
 }
-
 
 
 void PossibleIncludes::updateIncludeList()

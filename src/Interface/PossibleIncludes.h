@@ -19,15 +19,16 @@
 #ifndef POSSIBLEINCLUDES_H
 #define POSSIBLEINCLUDES_H
 
-#include <QDialog>
+#include <KDialog>
 
 class QListWidget;
 
-class PossibleIncludes : public QDialog
+class PossibleIncludes
+    : public KDialog
 {
-
 public:
     explicit PossibleIncludes(QWidget* parent = 0, Qt::WindowFlags f = 0);
+
 private:
     QListWidget* m_list;
     void updateIncludeList();

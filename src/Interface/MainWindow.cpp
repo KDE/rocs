@@ -402,10 +402,10 @@ void MainWindow::setupActions()
     createAction("document-open",       i18n("Import Rocs Graph"),  "add-graph",        SLOT(importGraph()),   this);
     createAction("document-save",       i18n("Save Graph"),         "save-graph",        SLOT(saveGraph()),   this);
     createAction("document-save-as",    i18n("Save Graph as"),      "save-graph-as",     SLOT(saveGraphAs()), this);
-    createAction("",                    i18n("Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
-    createAction("",                    i18n("Upload script"),      "upload",            SLOT(uploadScript()),  this);
+    createAction("get-hot-new-stuff",   i18n("Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
+    createAction("get-hot-new-stuff",   i18n("Upload script"),      "upload",            SLOT(uploadScript()),  this);
 
-    createAction("document-save-as", i18n("Possible Includes"),   "possible_includes", SLOT(showPossibleIncludes()), this);
+    createAction("help-hint", i18n("Possible Includes"),          "possible_includes", SLOT(showPossibleIncludes()), this);
     createAction("document-open",    i18n("Import Script"),       "add-script",       SLOT(importScript()),   this);
     createAction("document-save",    i18n("Save Script"),         "save-script",       SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-save-as", i18n("Save Script as"),      "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
@@ -991,7 +991,6 @@ void MainWindow::exportFile()
 void MainWindow::showPossibleIncludes()
 {
     PossibleIncludes dialog(this);
-
     dialog.exec();
 }
 
