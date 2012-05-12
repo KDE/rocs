@@ -47,7 +47,7 @@ private slots:
     void addProperty();
     void setDataType(int dataTypeIndex);
     void addDataType();
-    void setIcon(const QString& icon);
+    void setIcon(int index);
 private:
     DataPtr _data;
     Ui::DataPropertiesWidget* ui;

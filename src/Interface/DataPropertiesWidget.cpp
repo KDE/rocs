@@ -62,16 +62,16 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
                 painter.end();
 
                 attribute.remove("rocs_");
-                ui->dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
+                ui->dataTypeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), "", QVariant(attribute));
             }
         }
         if (!_data->dataStructure()->document()->dataType(_data->dataType())->iconName().isEmpty()) {
             QString icon = _data->dataStructure()->document()->dataType(_data->dataType())->iconName();
             icon.remove("rocs_");
-            ui->dataTypeIcon->setCurrentItem(icon);
+            ui->dataTypeIcon->setCurrentIndex(ui->dataTypeIcon->findData(icon));
         }
-        connect(ui->dataTypeIcon, SIGNAL(activated(QString)),
-                this, SLOT(setIcon(QString)));
+        connect(ui->dataTypeIcon, SIGNAL(activated(int)),
+                this, SLOT(setIcon(int)));
     }
 }
 
@@ -162,7 +162,7 @@ void DataPropertiesWidget::reflectAttributes()
 
     DataTypePtr dataType = _data->dataStructure()->document()->dataType(_data->dataType());
     ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));
-    ui->dataTypeIcon->setCurrentItem(dataType->iconName());
+    ui->dataTypeIcon->setCurrentIndex(ui->dataTypeIcon->findData(QVariant(dataType->iconName())));
 }
 
 
@@ -175,7 +175,7 @@ void DataPropertiesWidget::colorChanged(const QColor& c)
 void DataPropertiesWidget::setDataType(int dataTypeIndex)
 {
     _data->setDataType(ui->_dataType->itemData(dataTypeIndex).toInt());
-    ui->dataTypeIcon->setCurrentItem(_data->icon());
+    ui->dataTypeIcon->setCurrentIndex(ui->dataTypeIcon->findData(QVariant(_data->icon())));
 }
 
 
@@ -195,7 +195,9 @@ void DataPropertiesWidget::addDataType()
     DataStructurePtr ds = _data->dataStructure();
     int dataTypeIdentifier = ds->document()->registerDataType(ui->newTypeName->text());
     DataTypePtr datatype = ds->document()->dataType(dataTypeIdentifier);
-    datatype->setIcon(ui->dataTypeIcon->currentText());
+
+    QString iconName = ui->dataTypeIcon->itemData(ui->dataTypeIcon->currentIndex()).toString();
+    datatype->setIcon(iconName);
 
     ui->_dataType->addItem(datatype->name(), QVariant(dataTypeIdentifier));
     ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(dataTypeIdentifier)));
@@ -203,8 +205,10 @@ void DataPropertiesWidget::addDataType()
 }
 
 
-void DataPropertiesWidget::setIcon(const QString& icon)
+void DataPropertiesWidget::setIcon(int index)
 {
     int dataTypeValue = _data->dataType();
-    _data->dataStructure()->document()->dataType(dataTypeValue)->setIcon(icon);
+    _data->dataStructure()->document()->dataType(dataTypeValue)->setIcon(
+            ui->dataTypeIcon->itemData(index).toString()
+            );
 }
