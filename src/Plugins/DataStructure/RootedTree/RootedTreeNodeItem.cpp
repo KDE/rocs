@@ -20,10 +20,14 @@
 #include "RootedTreeNode.h"
 #include <boost/shared_ptr.hpp>
 #include <QPainter>
+#include <QGraphicsScene>
 #include "DataStructure.h"
 
 
-RootedTreeNodeItem::RootedTreeNodeItem(DataPtr n) : DataItem(n){}
+RootedTreeNodeItem::RootedTreeNodeItem(DataPtr n) : DataItem(n){
+
+
+}
 
 RootedTreeNodeItem::~RootedTreeNodeItem(){};
 
@@ -56,7 +60,9 @@ void RootedTreeNodeItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     }
 
     const qreal size  = node->dataStructure()->property("NodeSize").toReal();
+    qDebug() << "multipointer? " << data()->dataStructure()->property("ShowAllPointers").toBool();
     if (data()->dataStructure()->property("ShowAllPointers").toBool()){
+      
         const qreal pointersSize = node->dataStructure()->property("PointersRegion").toReal();
         qint16 childCount = node->numberOfChilds();
 
@@ -85,4 +91,3 @@ void RootedTreeNodeItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     }
 //         painter->drawEllipse(boundingRect());
 }
-

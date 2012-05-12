@@ -213,6 +213,7 @@ bool RootedTreeStructure::isShowingAllPointers() const{
 void RootedTreeStructure::setShowAllPointers(const bool v)
 {
     if (v != m_showPointers){
+	qDebug() << "Changing!";
         m_showPointers = v;
         emit showPointersChanged(m_showPointers);
         emit changed();

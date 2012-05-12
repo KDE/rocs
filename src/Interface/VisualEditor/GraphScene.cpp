@@ -101,6 +101,7 @@ void GraphScene::setActiveGraph(DataStructurePtr g)
 {
     kDebug() << "Active Graph Set";
     _graph = g;
+    connect( _graph.get(), SIGNAL(changed()), this, SLOT(update()), Qt::UniqueConnection);
 }
 
 void GraphScene::updateAfter(QGraphicsItem *item)
@@ -187,7 +188,6 @@ QGraphicsItem *GraphScene::createData(DataPtr n)
     addItem(nItem);
     addItem(nItem->name());
     addItem(nItem->value());
-
     return nItem;
 }
 

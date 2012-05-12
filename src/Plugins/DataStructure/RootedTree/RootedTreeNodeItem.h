@@ -20,6 +20,8 @@
 #define ROOTEDTREENODEITEM_H
 
 #include "DataItem.h"
+#include <QVariant>
+#include <QGraphicsScene>
 
 class Data;
 
@@ -34,6 +36,7 @@ public:
     QRectF boundingRect() const;
 
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
+
 };
 
 #endif //ROOTEDTREENODEITEM_H
