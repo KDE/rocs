@@ -549,18 +549,28 @@ void DataStructure::removeDynamicProperty(const QString& property)
 void DataStructure::addDataDynamicProperty(const QString& property, QVariant value)
 {
     foreach(const DataList& dataType, d->_dataTypeLists) {
-        QtConcurrent::blockingMap(dataType, DataDynamicPropertySetted(property, value));
+        DataList::const_iterator data = dataType.constBegin();
+        while (data != dataType.constEnd()) {
+            (*data)->addDynamicProperty(property, value);
+            ++data;
+        }
     }
     d->m_globalPropertiesData.insert(property, value);
 }
 
+
 void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value)
 {
     foreach(const PointerList& pointerType, d->_pointerTypeLists) {
-        QtConcurrent::blockingMap(pointerType, PointerDynamicPropertySetted(property, value));
+        PointerList::const_iterator pointer = pointerType.constBegin();
+        while (pointer != pointerType.constEnd()) {
+            (*pointer)->addDynamicProperty(property, value);
+            ++pointer;
+        }
     }
     d->m_globalPropertiesData.insert(property, value);
 }
+
 
 void DataStructure::removeDataDynamicProperty(const QString& property)
 {
