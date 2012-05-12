@@ -97,7 +97,9 @@ void DataTypePage::setTypeDefaultColor()
 void DataTypePage::setIcon()
 {
     int type = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
-    _document->dataType(type)->setIcon(ui->typeIcon->currentText());
+    _document->dataType(type)->setIcon(
+            ui->typeIcon->itemData(ui->typeIcon->currentIndex()).toString()
+            );
 }
 
 
@@ -136,13 +138,13 @@ void DataTypePage::setCurrentType(int index)
                 painter.end();
 
                 attribute.remove("rocs_");
-                ui->typeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), attribute);
+                ui->typeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), "", QVariant(attribute));
             }
         }
         if (!_document->dataType(type)->iconName().isEmpty()) {
             QString icon = _document->dataType(type)->iconName();
             icon.remove("rocs_");
-            ui->typeIcon->setCurrentItem(icon);
+            ui->typeIcon->setCurrentIndex(ui->typeIcon->findData(icon));
         }
     }
 }
