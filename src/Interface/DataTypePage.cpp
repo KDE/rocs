@@ -131,7 +131,9 @@ void DataTypePage::setCurrentType(int index)
             QString attribute = reader.attributes().value("id").toString();
             if (attribute.startsWith(QLatin1String("rocs_"))) {
                 QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
-
+		
+		iconImage.fill(Qt::transparent);
+		
                 QPainter painter;
                 painter.begin(&iconImage);
                 renderer->render(&painter, attribute);
