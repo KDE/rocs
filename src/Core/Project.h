@@ -60,7 +60,8 @@ public:
      * in file \p projectFile.
      * \param projectFile is the absolute path to the project file
      */
-    Project(QString projectFile);
+    Project(KUrl projectFile);
+
     virtual ~Project();
 
     /**

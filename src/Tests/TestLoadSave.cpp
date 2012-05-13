@@ -129,14 +129,14 @@ void TestLoadSave::projectLoadSaveTest()
     temp.open();
 
     // prepare project and save
-    Project* testProject = new Project(temp.fileName());
+    Project* testProject = new Project(KUrl::fromLocalFile(temp.fileName()));
     testProject->setName("new test name");
     testProject->addCodeFile(KUrl::fromLocalFile("/path/to/code.js"));
     testProject->addGraphFile(KUrl::fromLocalFile("/path/to/graph.graph"));
     testProject->writeProjectFile();
 
     // load project
-    Project* testProject2 = new Project(temp.fileName());
+    Project* testProject2 = new Project(KUrl::fromLocalFile(temp.fileName()));
     QVERIFY2(testProject2->name().compare("new test name") == 0, "ERROR: project name changed");
     QVERIFY(testProject2->codeFiles().count() == 1);
     QVERIFY2(

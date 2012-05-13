@@ -89,10 +89,10 @@ Project::Project() :
 }
 
 
-Project::Project(QString projectFile) :
+Project::Project(KUrl projectFile) :
     d(new ProjectPrivate)
 {
-    d->_projectFile = KUrl::fromLocalFile(projectFile);
+    d->_projectFile = projectFile;
     d->initKConfigObject();
     if (!d->_config->isConfigWritable(true)) {
         d->_temporary = true;

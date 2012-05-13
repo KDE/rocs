@@ -768,7 +768,7 @@ void MainWindow::openProject()
                    i18n("*.rocs|Rocs project files\n*|All files"),
                    this,
                    i18n("Open Project Files"));
-    _currentProject = new Project(file);
+    _currentProject = new Project(KUrl::fromLocalFile(file));
     foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
         DocumentManager::self()->openDocument(graphFile);
     }
@@ -999,7 +999,7 @@ void MainWindow::exportProject()
         kDebug() << "Filename is empty and no script file was created.";
         return;
     }
-    _currentProject->exportProject(file);
+    _currentProject->exportProject(KUrl::fromLocalFile(file));
 }
 
 
