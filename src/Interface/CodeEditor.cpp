@@ -66,12 +66,13 @@ void CodeEditor::closeAllScripts()
 
 void CodeEditor::closeDocument(int index)
 {
-    Q_ASSERT(index < _scriptDocs.size());
     if (index == 0) {
         kDebug() << "Deleting the first";
-        _activeDocument = _scriptDocs.at(1);
-        _activeView = _docViews.at(1);
-        _docArea->setCurrentIndex(1);
+        if (_scriptDocs.size() >= 2) {
+            _activeDocument = _scriptDocs.at(1);
+            _activeView = _docViews.at(1);
+            _docArea->setCurrentIndex(1);
+        }
         _scriptDocs.removeAt(0);
         _docArea->removeWidget(_docArea->widget(0));
         _docViews.removeAt(0);
@@ -93,6 +94,10 @@ void CodeEditor::closeDocument(int index)
 
 void CodeEditor::changeCurrentDocument(int index)
 {
+    if (_scriptDocs.size() < index || index < 0) {
+        kDebug() << "Do not change to non-existing code document.";
+        return;
+    }
     _activeDocument = _scriptDocs.at(index);
     _activeView = _docViews.at(index);
     _docArea->setCurrentIndex(index);
