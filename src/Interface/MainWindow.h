@@ -195,6 +195,7 @@ private slots:
 
     void importFile();
     void exportFile();
+    void importProject();
     void exportProject();
     void setupToolsPluginsAction();
 

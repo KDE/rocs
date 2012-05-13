@@ -37,7 +37,6 @@ class ProjectPrivate
 public:
     ProjectPrivate() {}
 
-    QString _projectDirectory;
     KUrl _projectFile;
     QMap<int, QString> _codeFileGroup;
     QMap<int, QString> _graphFileGroup;
@@ -54,8 +53,6 @@ public:
         _config = new KConfig(_projectFile.toLocalFile());
 
         KConfigGroup projectGroup(_config, "Project");
-        _projectDirectory = projectGroup.readEntry("Directory", QString());
-
         QStringList codeFileIDs = projectGroup.readEntry("CodeFiles", QStringList());
         foreach(const QString& offset, codeFileIDs) {
             _codeFileGroup.insert(offset.toInt(), "CodeFile" + offset);
@@ -93,6 +90,30 @@ Project::Project(KUrl projectFile) :
     d(new ProjectPrivate)
 {
     d->_projectFile = projectFile;
+
+    d->initKConfigObject();
+    if (!d->_config->isConfigWritable(true)) {
+        d->_temporary = true;
+    } else {
+        d->_temporary = false;
+    }
+    d->_modified = false;
+}
+
+
+Project::Project(KUrl projectArchive, KUrl projectDirectory) :
+    d(new ProjectPrivate)
+{
+    // extract archive into project directory
+    KTar tar(projectArchive.toLocalFile());
+    if (!tar.open(QIODevice::ReadOnly)) {
+        kDebug() << "Could not open export archive to read.";
+        return;
+    }
+    tar.directory()->copyTo(projectDirectory.path(), true);
+    KUrl projectFile = projectDirectory.resolved(KUrl("project.rocs"));
+
+    d->_projectFile = projectFile;
     d->initKConfigObject();
     if (!d->_config->isConfigWritable(true)) {
         d->_temporary = true;
@@ -123,15 +144,12 @@ QString Project::name() const
 }
 
 
-void Project::setProjectDirectory(KUrl directory)
-{
-    d->_projectDirectory = directory.directory(KUrl::AppendTrailingSlash);
-}
-
-
 QString Project::projectDirectory() const
 {
-    return d->_projectDirectory;
+    if (d->_temporary == true) {
+        return "";
+    }
+    return d->_projectFile.directory(KUrl::AppendTrailingSlash);
 }
 
 
@@ -306,8 +324,6 @@ bool Project::writeNewProjectFile()
         kDebug() << "Cannot write to project config file.";
         return false;
     }
-    KConfigGroup group = d->_config->group("Project");
-    group.writeEntry("Directory", d->_projectDirectory);
     d->_config->sync();
     d->_modified = false;
 
@@ -335,10 +351,8 @@ bool Project::writeProjectFile(QString fileUrl)
 
     // update file reference lists
     KConfigGroup projectGroup(d->_config, "Project");
-    projectGroup.writeEntry("Directory", d->_projectDirectory);
 
     QStringList codeFileIDs;
-
     foreach(const QString& fileGroup, d->_codeFileGroup) {
         KConfigGroup group(d->_config, fileGroup);
         // TODO change to order given by editor
@@ -424,7 +438,7 @@ bool Project::exportProject(KUrl exportUrl)
     KConfigGroup projectGroup(exportConfig, "Project");
     projectGroup.writeEntry("Directory", "");
     exportConfig->sync();
-    tar.addLocalFile(tmpProjectConfig.fileName(), d->_projectFile.fileName());
+    tar.addLocalFile(tmpProjectConfig.fileName(), "project.rocs");
 
     tar.close(); // write tar
     tmpProjectConfig.close(); // delete temporary config

@@ -62,14 +62,14 @@ public:
      */
     Project(KUrl projectFile);
 
-    virtual ~Project();
-
     /**
-     * Set project working directory. The base URL of \p directory is used
-     * for this. If submitting the directory make sure to append a "/" at the end.
-     * \param directory is a file in the working directory or the directory itself ended by slash
+     * Constructor for project that creates a project by configuration given
+     * in file \p projectFile inside directory \p projectDirectory
+     * \param projectFile is the absolute path to the project file
      */
-    void setProjectDirectory(KUrl directory);
+    Project(KUrl projectArchive, KUrl projectDirectory);
+
+    virtual ~Project();
 
     /**
      * Gives the working directory of the project. If no directory was set or the loaded

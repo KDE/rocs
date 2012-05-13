@@ -397,6 +397,7 @@ void MainWindow::setupActions()
     createAction("document-save",       i18n("Save Project"),       "save-project", Qt::Key_S, SLOT(saveProject()), this);
     createAction("document-open",       i18n("Open Project"),       "open-project", Qt::Key_O, SLOT(openProject()), this);
     createAction("document-save",       i18n("Export Project"),     "export-project", SLOT(exportProject()), this);
+    createAction("document-open",       i18n("Import Project"),     "import-project", SLOT(importProject()), this);
     createAction("document-properties", i18n("Set Name"),           "set-project-name", SLOT(setProjectName()), this);
     createAction("document-new",        i18n("New Graph Document"), "new-graph", SLOT(newGraph()), this);
     createAction("document-new",        i18n("New Script File"),    "new-script",         SLOT(newScript()),    this);
@@ -744,7 +745,6 @@ void MainWindow::saveProject()
                        i18n("Save Project")
                                                    );
         // we need to set project directory first to allow correcte relative paths
-        _currentProject->setProjectDirectory(file);
         saveAllGraphs();
         saveScripts();
         _currentProject->writeProjectFile(file);
@@ -986,6 +986,49 @@ void MainWindow::exportFile()
     ImporterExporterManager exp(this);
 
     exp.exportFile(DocumentManager::self()->activeDocument());
+}
+
+
+void MainWindow::importProject()
+{
+    // save current project
+    saveIfChanged();
+    _codeEditor->closeAllScripts();
+    DocumentManager::self()->closeAllDocuments();
+
+    // get import information
+    QString importFile = KFileDialog::getOpenFileName(_currentProject->projectDirectory(),
+                   i18n("*.tar.gz|Export as tar.gz Archive"),
+                   this,
+                   i18n("Project Archive to Import"));
+
+    QString newLocation = KFileDialog::getExistingDirectory(_currentProject->projectDirectory(),
+                   this,
+                   i18n("Select Project Directory for Import"));
+
+    if (importFile.isEmpty() || newLocation.isEmpty()) {
+        kDebug() << "Filename is empty and no script file was created.";
+        return;
+    }
+    // delete old project
+    delete _currentProject;
+
+    // extract and open project
+    _currentProject = new Project(KUrl::fromLocalFile(importFile),KUrl::fromPath(newLocation.append('/')));
+    foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
+        DocumentManager::self()->openDocument(graphFile);
+    }
+    if (_currentProject->graphFiles().count() == 0) {
+        _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
+    }
+    foreach(const KUrl& codeFile, _currentProject->codeFiles()) {
+        _codeEditor->openScript(codeFile);
+        //TODO set curser line
+    }
+    if (_currentProject->codeFiles().count() == 0) {
+        _currentProject->addCodeFileNew(_codeEditor->newScript());
+    }
+    updateCaption();
 }
 
 
