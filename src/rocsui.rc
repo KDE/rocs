@@ -12,6 +12,10 @@
             <Action name="save-project" />
             <Action name="change-project" />
             <Action name="new-project" />
+            <Separator/>
+            <Action name="import-project" />
+            <Action name="export-project" />
+            <Separator/>
         </Menu>
         <Menu name="project" >
             <text>Project</text>

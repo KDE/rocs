@@ -77,7 +77,7 @@ public:
      */
     QString projectDirectory() const;
 
-    const QString& projectFile() const;
+    const KUrl& projectFile() const;
 
     /**
      * Set project name.
@@ -208,7 +208,7 @@ public:
      * Returns URL to local file containing the project journal.
      * \return URL to local file
      */
-    KUrl journalFile() const;
+    const KUrl& journalFile() const;
 
     /**
      * Save the project to its current file if empty or no filename is given. Otherwise if filename is
@@ -218,6 +218,13 @@ public:
      * \return true if save was successful, otherwise false
      */
     bool writeProjectFile(QString fileUrl = QString());
+
+    /**
+     * Exports the project with all its components (scripts, graph, journal) to a archive file.
+     * \param exportUrl is the path to the newly created archive
+     * \return true if archive was created, else false
+     */
+    bool exportProject(KUrl exportUrl);
 
 private:
     bool writeNewProjectFile();

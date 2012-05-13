@@ -30,6 +30,7 @@
 #include <KTemporaryFile>
 #include <KDebug>
 #include <KTextEditor/Document>
+#include <KTar>
 
 class ProjectPrivate
 {
@@ -37,20 +38,20 @@ public:
     ProjectPrivate() {}
 
     QString _projectDirectory;
-    QString _projectFile;
-    QMap<int, KUrl> _codeFileGroup;
+    KUrl _projectFile;
+    QMap<int, QString> _codeFileGroup;
     QMap<int, QString> _graphFileGroup;
     QList<Document*> _graphFileNew;
     QList<KTextEditor::Document*> _codeFileNew;
-    QString _journalFile;
+    KUrl _journalFile;
     KConfig* _config;
     bool _temporary;
     bool _modified;
 
     KConfigGroup initKConfigObject() {
         // helper method for Project::open()
-        kDebug() << "Creating KConfig object temporary project file: " << _projectFile;
-        _config = new KConfig(_projectFile);
+        kDebug() << "Creating KConfig object temporary project file: " << _projectFile.toLocalFile();
+        _config = new KConfig(_projectFile.toLocalFile());
 
         KConfigGroup projectGroup(_config, "Project");
         _projectDirectory = projectGroup.readEntry("Directory", QString());
@@ -66,7 +67,7 @@ public:
         }
 
         KConfigGroup journalGroup(_config, "Journal");
-        _journalFile = journalGroup.readEntry("JournalFile", QString());
+        _journalFile = KUrl::fromLocalFile(journalGroup.readEntry("JournalFile", QString()));
 
         return projectGroup;
     }
@@ -81,7 +82,7 @@ Project::Project() :
     temp.setSuffix(".tmp");
     temp.setAutoRemove(false);
     temp.open();
-    d->_projectFile = temp.fileName();
+    d->_projectFile = KUrl::fromLocalFile(temp.fileName());
     d->initKConfigObject();
     d->_temporary = true;
     d->_modified = false;
@@ -91,7 +92,7 @@ Project::Project() :
 Project::Project(QString projectFile) :
     d(new ProjectPrivate)
 {
-    d->_projectFile = projectFile;
+    d->_projectFile = KUrl::fromLocalFile(projectFile);
     d->initKConfigObject();
     if (!d->_config->isConfigWritable(true)) {
         d->_temporary = true;
@@ -134,7 +135,7 @@ QString Project::projectDirectory() const
 }
 
 
-const QString& Project::projectFile() const
+const KUrl& Project::projectFile() const
 {
     return d->_projectFile;
 }
@@ -168,8 +169,8 @@ void Project::removeCodeFile(int fileID)
 QList< KUrl > Project::codeFiles() const
 {
     QList<KUrl> files;
-    foreach(const KUrl& fileGroup, d->_codeFileGroup) {
-        KConfigGroup group(d->_config, fileGroup.toLocalFile());
+    foreach(const QString& fileGroup, d->_codeFileGroup) {
+        KConfigGroup group(d->_config, fileGroup);
         QString file = group.readEntry("file");
         if (KUrl::isRelativeUrl(file)) {
             files.append(KUrl(projectDirectory(), group.readEntry("file")));
@@ -235,8 +236,8 @@ void Project::removeGraphFile(int fileID)
 QList< KUrl > Project::graphFiles() const
 {
     QList< KUrl > files;
-    foreach(const KUrl& fileGroup, d->_graphFileGroup) {
-        KConfigGroup group(d->_config, fileGroup.toLocalFile());
+    foreach(const QString& fileGroup, d->_graphFileGroup) {
+        KConfigGroup group(d->_config, fileGroup);
         QString file = group.readEntry("file");
         if (KUrl::isRelativeUrl(file)) {
             files.append(KUrl(projectDirectory(), group.readEntry("file")));
@@ -288,14 +289,14 @@ void Project::saveGraphFileAs(Document* document, QString file)
 
 void Project::setJournalFile(KUrl file)
 {
-    d->_journalFile = file.toLocalFile();
+    d->_journalFile = file;
     d->_modified = true;
 }
 
 
-KUrl Project::journalFile() const
+const KUrl& Project::journalFile() const
 {
-    return KUrl::fromPath(d->_journalFile);
+    return d->_journalFile;
 }
 
 
@@ -324,7 +325,7 @@ bool Project::writeProjectFile(QString fileUrl)
     if (!fileUrl.isEmpty()) {
         // do not save to the old file
         d->_config->markAsClean();
-        d->_projectFile = fileUrl;
+        d->_projectFile = KUrl::fromLocalFile(fileUrl);
 
         // copy and save
         KConfig* temp = d->_config->copyTo(fileUrl);
@@ -338,8 +339,8 @@ bool Project::writeProjectFile(QString fileUrl)
 
     QStringList codeFileIDs;
 
-    foreach(const KUrl& fileGroup, d->_codeFileGroup) {
-        KConfigGroup group(d->_config, fileGroup.toLocalFile());
+    foreach(const QString& fileGroup, d->_codeFileGroup) {
+        KConfigGroup group(d->_config, fileGroup);
         // TODO change to order given by editor
         codeFileIDs.append(group.readEntry("identifier"));
     }
@@ -357,6 +358,76 @@ bool Project::writeProjectFile(QString fileUrl)
     d->_config->sync();
     d->_temporary = false;
     d->_modified = false;
+
+    return true;
+}
+
+
+bool Project::exportProject(KUrl exportUrl)
+{
+    KTar tar(exportUrl.toLocalFile());
+    if (!tar.open(QIODevice::WriteOnly)) {
+        kDebug() << "Could not open export archive to write.";
+        return false;
+    }
+
+    // create project configuration for export
+    KTemporaryFile tmpProjectConfig;
+    tmpProjectConfig.setPrefix("export");
+    tmpProjectConfig.setSuffix(".rocs");
+    tmpProjectConfig.open();
+    KConfig* exportConfig = d->_config->copyTo(tmpProjectConfig.fileName());
+
+    // add all scripts to tarball
+    QMap<int, QString>::const_iterator iter = d->_codeFileGroup.constBegin();
+    while (iter != d->_codeFileGroup.constEnd()) {
+        KConfigGroup group(exportConfig, (*iter));
+
+        // get file url and add to Tar
+        QString configFileString = group.readEntry("file");
+        KUrl file;
+        if (KUrl::isRelativeUrl(configFileString)) {
+            file = KUrl(projectDirectory(), configFileString);
+        } else {
+            file = KUrl::fromLocalFile(configFileString);
+        }
+        tar.addLocalFile(file.toLocalFile(), file.fileName());
+
+        // update export project config in case of out-of-project-dir files
+        group.writeEntry("file", KUrl::relativePath(projectDirectory(), file.fileName()));
+        ++iter;
+    }
+
+    iter = d->_graphFileGroup.constBegin();
+    while (iter != d->_graphFileGroup.constEnd()) {
+        KConfigGroup group(exportConfig, (*iter));
+
+        // get file url and add to Tar
+        QString configFileString = group.readEntry("file");
+        KUrl file;
+        if (KUrl::isRelativeUrl(configFileString)) {
+            file = KUrl(projectDirectory(), configFileString);
+        } else {
+            file = KUrl::fromLocalFile(configFileString);
+        }
+        tar.addLocalFile(file.toLocalFile(), file.fileName());
+
+        // update export project config in case of out-of-project-dir files
+        group.writeEntry("file", KUrl::relativePath(projectDirectory(), file.fileName()));
+        ++iter;
+    }
+    if (!d->_journalFile.isEmpty()) {
+        tar.addLocalFile(d->_journalFile.toLocalFile(), d->_journalFile.fileName());
+    }
+
+    // write project to export
+    KConfigGroup projectGroup(exportConfig, "Project");
+    projectGroup.writeEntry("Directory", "");
+    exportConfig->sync();
+    tar.addLocalFile(tmpProjectConfig.fileName(), d->_projectFile.fileName());
+
+    tar.close(); // write tar
+    tmpProjectConfig.close(); // delete temporary config
 
     return true;
 }

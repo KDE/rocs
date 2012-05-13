@@ -396,6 +396,7 @@ void MainWindow::setupActions()
     createAction("document-new",        i18n("New Project"),        "new-project", Qt::Key_N, SLOT(newProject()), this);
     createAction("document-save",       i18n("Save Project"),       "save-project", Qt::Key_S, SLOT(saveProject()), this);
     createAction("document-open",       i18n("Open Project"),       "open-project", Qt::Key_O, SLOT(openProject()), this);
+    createAction("document-save",       i18n("Export Project"),     "export-project", SLOT(exportProject()), this);
     createAction("document-properties", i18n("Set Name"),           "set-project-name", SLOT(setProjectName()), this);
     createAction("document-new",        i18n("New Graph Document"), "new-graph", SLOT(newGraph()), this);
     createAction("document-new",        i18n("New Script File"),    "new-script",         SLOT(newScript()),    this);
@@ -808,7 +809,7 @@ void MainWindow::updateCaption()
     else if (_currentProject->isTemporary()) {
         caption.append(i18n("[ untitled ]"));
     } else {
-        caption.append(_currentProject->projectFile());
+        caption.append(_currentProject->projectFile().toLocalFile());
     }
     setCaption(caption);
 }
@@ -985,6 +986,20 @@ void MainWindow::exportFile()
     ImporterExporterManager exp(this);
 
     exp.exportFile(DocumentManager::self()->activeDocument());
+}
+
+
+void MainWindow::exportProject()
+{
+    QString file = KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
+                   i18n("*.tar.gz|Export as tar.gz Archive"),
+                   this,
+                   i18n("Export Project"));
+    if (file.isEmpty()) {
+        kDebug() << "Filename is empty and no script file was created.";
+        return;
+    }
+    _currentProject->exportProject(file);
 }
 
 
