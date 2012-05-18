@@ -42,24 +42,6 @@ struct PointerColorSetted {
     const QColor& m_color;
 };
 
-struct DataDynamicPropertyUnSetted {
-    DataDynamicPropertyUnSetted(const QString& property) : m_property(property) {}
-    typedef void result_type;
-    void operator()(DataPtr d) {
-        d->removeDynamicProperty(m_property);
-    }
-    const QString& m_property;
-};
-
-struct PointerDynamicPropertyUnSetted {
-    PointerDynamicPropertyUnSetted(const QString& property) : m_property(property) {}
-    typedef void result_type;
-    void operator()(PointerPtr d) {
-        d->removeDynamicProperty(m_property);
-    }
-    const QString& m_property;
-};
-
 struct DataNameVisibilitySetted {
     DataNameVisibilitySetted(bool visibility) : m_visibility(visibility) {}
     typedef void result_type;

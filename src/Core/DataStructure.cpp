@@ -548,6 +548,7 @@ void DataStructure::removeDynamicProperty(const QString& property)
 
 void DataStructure::addDataDynamicProperty(const QString& property, QVariant value)
 {
+    // do not change properties concurrently, not thread safe
     foreach(const DataList& dataType, d->_dataTypeLists) {
         DataList::const_iterator data = dataType.constBegin();
         while (data != dataType.constEnd()) {
@@ -561,6 +562,7 @@ void DataStructure::addDataDynamicProperty(const QString& property, QVariant val
 
 void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value)
 {
+    // do not change properties concurrently, not thread safe
     foreach(const PointerList& pointerType, d->_pointerTypeLists) {
         PointerList::const_iterator pointer = pointerType.constBegin();
         while (pointer != pointerType.constEnd()) {
@@ -574,16 +576,28 @@ void DataStructure::addPointersDynamicProperty(const QString& property, QVariant
 
 void DataStructure::removeDataDynamicProperty(const QString& property)
 {
+    // do not change properties concurrently, not thread safe
     foreach(const DataList& dataType, d->_dataTypeLists) {
-        QtConcurrent::blockingMap(dataType, DataDynamicPropertyUnSetted(property));
+        DataList::const_iterator data = dataType.constBegin();
+        while (data != dataType.constEnd()) {
+            (*data)->removeDynamicProperty(property);
+            ++data;
+        }
     }
+    d->m_globalPropertiesData.remove(property);
 }
 
 void DataStructure::removePointersDynamicProperty(const QString& property)
 {
+    // do not change properties concurrently, not thread safe
     foreach(const PointerList& pointerType, d->_pointerTypeLists) {
-        QtConcurrent::blockingMap(pointerType, PointerDynamicPropertyUnSetted(property));
+        PointerList::const_iterator pointer = pointerType.constBegin();
+        while (pointer != pointerType.constEnd()) {
+            (*pointer)->removeDynamicProperty(property);
+            ++pointer;
+        }
     }
+    d->m_globalPropertiesData.remove(property);
 }
 
 
