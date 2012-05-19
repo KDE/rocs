@@ -832,7 +832,7 @@ void MainWindow::saveScripts()
 void MainWindow::newScript()
 {
     QString file = KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
-                   i18n("*.js|Rocs script document\n*|All files"),
+                   i18n("*.js|Rocs script documents\n*|All files"),
                    this,
                    i18n("Enter Filename for the New Script File"));
     if (file.isEmpty()) {
