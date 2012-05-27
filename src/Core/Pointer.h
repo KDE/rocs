@@ -124,6 +124,12 @@ public  slots:
     */
     void setName(const QString& s) ;
 
+    /**
+     * Change pointer type of the pointer. The specified pointer type must exist.
+     * \param pointerType is the new pointer type
+     */
+    void setPointerType(int pointerType);
+
     /*! gets the color attribute of the pointer
       \return the string value of the pointer.
     */
@@ -165,6 +171,9 @@ public  slots:
     void setVisible(bool visible);
     bool isVisible() const;
 
+    QScriptValue type();
+    QScriptValue set_type(int type);
+
     /*! this method can be used inside of the script interface.
     \return the first datum of this pointer.
     */
@@ -199,6 +208,7 @@ signals:
     void changed();
     /** emmited when the position of one of points changes */
     void posChanged();
+    void pointerTypeChanged(int pointerType);
 };
 
 #endif

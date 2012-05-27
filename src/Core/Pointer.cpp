@@ -211,6 +211,14 @@ void Pointer::setName(const QString& name)
     emit changed();
 }
 
+void Pointer::setPointerType(int pointerType)
+{
+    Q_ASSERT(d->dataStructure->document()->pointerTypeList().contains(pointerType));
+    d->pointerType = pointerType;
+    d->dataStructure->updatePointer(getPointer());
+    emit pointerTypeChanged(pointerType);
+}
+
 void Pointer::setColor(const QColor& color)
 {
     if (d->color != color) {
@@ -257,6 +265,21 @@ void Pointer::removeDynamicProperty(QString property)
 {
     addDynamicProperty(property.toUtf8(), QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property);
+}
+
+QScriptValue Pointer::set_type(int pointerType)
+{
+    if (!d->dataStructure->document()->pointerTypeList().contains(pointerType)) {
+        kDebug() << "pointer type does not exist."; //TODO give script error
+        return d->dataStructure->engine()->newVariant(false);
+    }
+    setPointerType(pointerType);
+    return d->dataStructure->engine()->newVariant(true);
+}
+
+QScriptValue Pointer::type()
+{
+    return d->dataStructure->engine()->newVariant(d->pointerType);
 }
 
 QScriptValue Pointer::start()

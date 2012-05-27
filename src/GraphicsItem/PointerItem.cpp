@@ -62,6 +62,7 @@ void PointerItem::connectSignals()
     connect(_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect(_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
     connect(_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
+    connect(_pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
 
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
 }
