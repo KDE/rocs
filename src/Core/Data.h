@@ -164,6 +164,8 @@ public  slots:
     void setDataItem(boost::shared_ptr<DataItem> item);
     void setDataType(int dataType);
 
+    QScriptValue type();
+    QScriptValue set_type(int type);
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue input_pointers();

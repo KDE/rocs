@@ -148,6 +148,7 @@ void Data::setDataItem(boost::shared_ptr<DataItem> item)
 
 void Data::setDataType(int dataType)
 {
+    Q_ASSERT(d->_dataStructure->document()->dataTypeList().contains(dataType));
     d->_dataType = dataType;
     d->_dataStructure->updateData(getData());
     emit dataTypeChanged(dataType);
@@ -353,6 +354,20 @@ void Data::setEngine(QScriptEngine *engine)
     d->_scriptvalue = engine->newQObject(getData().get());
 }
 
+QScriptValue Data::set_type(int dataType)
+{
+    if (!d->_dataStructure->document()->dataTypeList().contains(dataType)) {
+        kDebug() << "data type does not exist."; //TODO give script error
+        return d->_dataStructure->engine()->newVariant(false);
+    }
+    setDataType(dataType);
+    return d->_dataStructure->engine()->newVariant(true);
+}
+
+QScriptValue Data::type()
+{
+    return d->_dataStructure->engine()->newVariant(d->_dataType);
+}
 
 QScriptValue Data::adj_data()
 {
