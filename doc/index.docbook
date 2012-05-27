@@ -361,7 +361,7 @@ positions.</para></listitem>
 </sect1>
 
 <sect1 id="user-interface-graph-properties">
-	<title>Graph Properties</title>
+	<title>Data Structure Properties</title>
 	<para>On the left sidebar you can find the options for each opened graph. All these options are global
 	per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.</para>
 
@@ -437,6 +437,8 @@ positions.</para></listitem>
      array loop_edges();
      array connected_edges(Node *n);
      void self_remove();
+     int type();
+     bool set_type(int typeIdentifier);
 
 // variables
     double x
@@ -460,6 +462,8 @@ positions.</para></listitem>
     string name
     double width
     string style ( dot, dash, dash dot, solid )
+    int type();
+    bool set_type(int typeIdentifier);
 
     node start();
     node  end();
