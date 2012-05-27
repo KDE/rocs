@@ -134,10 +134,85 @@ For such use cases you can define data types. Each data type has its own icon an
 </sect1>
 
 <sect1 id="introduction-tutorial">
-<title>First Steps</title>
+<title>Tutorial</title>
 <para>
-First steps to set up a project.
+In this section we want to create an example project to explore some of the most important functions of &rocs;.
+The goal is to create a graph and a script that illustrates a simple 2-approximate algorithm for the <emphasis>minimum vertex cover</emphasis> problem.
+The minimum vertex cover problem is the problem to find a subset of graph nodes C of minimal size such that each graph edge is connected to at least one node in C.
+This problem is known to be NP-hard and we want to illustrate how to find an approximation of factor 2 by finding a matching in the given graph (in the following we use the common terms for graph algorithms: graph is the data structure, nodes are the data elements, edges are the pointers).
 </para>
+<para>
+Our goal is to visualize the correspondence of the matching and the minimum vertex cover.
+For this, we want to specify two pointer types, one to display matching edges and one type to display ordinary edges, as well as two data types that we use to distinguish nodes contained in C and those not contained in C.
+</para>
+
+<sect2>
+<title>Generate a Graph</title>
+<para>
+For the graph plugin, &rocs; ships a helper tool that can generate graphs. We go to the menu <guisubmenu>Graph Document</guisubmenu>, select submenu <guisubmenu>Tools</guisubmenu> and select the menu item <guimenuitem>Generate Graph</guimenuitem>.
+There we generate a "Random Graph" with 30 nodes, 90 edges, and with seed 1 (the seed is the starting seed for the random graph generator; using the same seed multiple times results in same and reproducible graphs).
+Finally, we modify the graph name at the data structure panel and call the graph <literal>testgraph</literal>.
+</para>
+</sect2>
+
+<sect2>
+<title>Create Types</title>
+<para>
+We use the <guibutton>Document Properties Button</guibutton> at the data structure panel to open the properties dialog for data and pointer types of the current graph document. 
+For the data types we add a new type called "C", which automatically gets ID <literal>1</literal>.
+For this type we select the server picture as icon.
+Furthermore, we switch to the pointer type page and add a new pointer type called "matching".
+This gets automatically ID <literal>1</literal> and we set the color to blue.
+</para>
+</sect2>
+
+<sect2>
+<title>The Algorithm</title>
+<para>
+At last we have to implement the approximation algorithm. For this we use the following implementation:
+</para>
+<programlisting>
+var E = testgraph.list_edges(); // set of unprocessed edges
+var C = new Array();            // matching edges
+while (E.length > 0) {
+    var e = E[0];        // we take first edge e={u,v}
+    var u = e.start();
+    var v = e.end();
+    e.set_type(1);        // set edge to be a matching edge
+    E.shift();            // remove e (i.e., E[0]) from edge list
+    C.push(u);            // add u to C
+    C.push(v);            // add v to C
+
+    // mark u,v as nodes in C
+    u.set_type(1);
+    v.set_type(1);
+
+    // remove from E all edges incident to u or v
+    var adjacent = u.adj_edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // find the index
+        if (index!=-1) {
+            E.splice(index, 1); // remove it if really found
+        }
+    }
+    var adjacent = v.adj_edges();
+    for (var i=0; i &lt; adjacent.length; i++) {
+        var index = E.indexOf(adjacent[i]); // find the index
+        if (index!=-1) {
+            E.splice(index, 1); // remove it if really found
+        }
+    }
+}
+output("Vertex Cover contains " + C.length + " nodes.");
+</programlisting>
+</sect2>
+
+<sect2>
+<title>Execute the Algorithm</title>
+<para>
+Finally we want to execute the algorithm. For this we can start the execution by the <guibutton>Run Button</guibutton> at the script control panel.
+</para>
+</sect2>
 </sect1>
 </chapter>
 
