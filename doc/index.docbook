@@ -30,10 +30,10 @@
 </authorgroup>
 
 <copyright><year>2009</year><holder>Tomaz Canabrava</holder></copyright>
-<copyright><year>2011</year><holder>Andreas Cord-Landwehr</holder></copyright>
+<copyright><year>2011-2012</year><holder>Andreas Cord-Landwehr</holder></copyright>
 
 <date>2011-12-04</date>
-<releaseinfo>1.1 &kde; 4.8</releaseinfo>
+<releaseinfo>1.7 &kde; 4.9</releaseinfo>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
@@ -539,16 +539,16 @@ var list2=Untitled0.list_nodes();              // 2nd form
 <para>Program Copyright:</para>
 <itemizedlist>
 	<listitem><para>Copyright 2008       Ugo Sangiori (ugorox AT gmail.com)</para></listitem>
-	<listitem><para>Copyright 2008-2011  Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
-	<listitem><para>Copyright 2008-2011  Wagner Reck (wagner.reck AT gmail.com)</para></listitem>
-	<listitem><para>Copyright 2011 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para></listitem>
+	<listitem><para>Copyright 2008-2012  Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
+	<listitem><para>Copyright 2008-2012  Wagner Reck (wagner.reck AT gmail.com)</para></listitem>
+	<listitem><para>Copyright 2011-2012 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para></listitem>
 </itemizedlist>
 
 <para>Documentation Copyright:</para>
 <itemizedlist>
 	<listitem><para>Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para></listitem>
 	<listitem><para>Documentation copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
-	<listitem><para>Documentation copyright 2011 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para></listitem>
+	<listitem><para>Documentation copyright 2011-2012 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para></listitem>
 </itemizedlist>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
