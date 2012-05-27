@@ -57,9 +57,15 @@
 
 <chapter id="introduction">
 <title>Introduction</title>
+<para>
+In this chapter we provide an overview on &rocs;. For the reader who wants to directly start using &rocs; we suggest to read <xref linkend="introduction-nutshell"/> and while writing scripts using <xref linkend="using-rocs-scripting" /> as a reference.
+</para>
+
+<sect1 id="introduction-goals">
+<title>Goals and Target Audience</title>
 <para>&rocs; is a Graph Theory IDE for everybody interested in designing and analyzing graph algorithms. This explicitly includes</para>
 <itemizedlist>
-	<listitem><para>lecturers who eventually want to demonstrate algorithms to their students,</para></listitem>
+	<listitem><para>lecturers who want to demonstrate algorithms to their students,</para></listitem>
 	<listitem><para>students who want to understand and see how an algorithm works,</para></listitem>
 	<listitem><para>and everybody who has to design graph algorithms and needs at tool for prototype testing.</para></listitem>
 </itemizedlist>
@@ -76,6 +82,63 @@
 </textobject>
 </mediaobject>
 </screenshot>
+</sect1>
+
+<sect1 id="introduction-nutshell">
+<title>&rocs; in a Nutshell</title>
+<para>
+In this section we provide a compact overview of the core elements of &rocs;.
+We explain the important notions of data structures, data structure plugins, and element types. Knowledge of these elements is useful to understand how data structures can be created and modified in &rocs;.
+</para>
+<para>
+In general &rocs; works with projects: when opening &rocs; an empty project is created and you can replace it by loading or importing another project.
+Hereby, a project itself consists of <emphasis>graph documents</emphasis> and <emphasis>scripts</emphasis>.
+</para>
+
+<sect2>
+<title>Graph Documents and Data Structure Plugins</title>
+<para>
+A graph document represents the content of a whiteboard in the visual graph editor.
+Hereby, a graph document can contain several data structures at once, but only one data structure plugin.
+Data structure plugins are present for several graph types (general graphs, linked lists, rooted trees) and provide for their specific graph types additional functionality. That can be automatic positioning of the elements, special icon sets, or an extended set of script functions for use in your algorithms. (for details look at the corresponding handbook section). It is possible to change the data structure plugin of a graph document, though information can be lost (e.g., edges of a circle in a general graph won't be added to a tree, if you switch to the rooted tree plugin).
+</para>
+<para>
+Graph documents form also the base for defining pointer types and data types.
+</para>
+</sect2>
+
+<sect2>
+<title>Data Structures</title>
+<para>
+Data structures are the base of all work in &rocs;. You can add one or several of them to a graph document, add data elements (nodes, datums) and pointers to them, and modify them by scripts. For this, each data structure has its unique name by which it can be accessed from your scripts. Due to your choice of the current data structure plugin it can happen that you cannot modify the data structures arbitrarily (e.g., a tree should never contain a cycle). The data structure plugin is determined by the data structure plugin associated with the corresponding graph document that contains the data structure.
+</para>
+</sect2>
+
+<sect2>
+<title>Pointer Types</title>
+<para>
+By pointer types you can define different types of pointers to be used in your data structures.
+This is, a pointer type can get an individual layout (essentially a color) and it is easy to access only pointers of a specific type from your scripts.
+Typical use cases for pointers can be to implement meta-edges at your data structures that visualize relationships between data elements (e.g., visualize communication interests). But also, if your scripts shall identify specific kinds of edges (e.g., tree and cross edges at the depth first search algorithm), pointer types can be an elegant way to implement that. 
+</para>
+</sect2>
+
+<sect2>
+<title>Data Types</title>
+<para>
+In several data structure problems, a set of data elements should be parted into groups of different types (e.g., clustering problems or covering problems). 
+Or it is useful for the execution of an algorithm to specify a data element type to express a specific type (e.g., breath first search).
+For such use cases you can define data types. Each data type has its own icon and data types of some type can easily be accessed from your scripts.
+</para>
+</sect2>
+</sect1>
+
+<sect1 id="introduction-tutorial">
+<title>First Steps</title>
+<para>
+First steps to set up a project.
+</para>
+</sect1>
 </chapter>
 
 <chapter id="user-interface">
