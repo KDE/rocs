@@ -496,28 +496,6 @@ positions.</para></listitem>
 </sect2>
 </sect1>
 
-<sect1 id="script-example">
-<title>Example</title>
-<para>Here is a simple script example that sets the color of the 4 first nodes in the first
-graph:</para>
-<programlisting>
-/* A simple example that sets the color of the 4 first nodes in the first
-graph: */
-
-var colors = new Array("red", "green", "blue", "yellow");
-
-/* graphs is an array of graphs, you can access a graph by its index in the
-array or by its name, so if the first graph's name is Untitled0, the following
-sentence are right  */
-var list1= graphs[0].list_nodes(); //  1st form.
-var list2=Untitled0.list_nodes();              // 2nd form
-
- for ( var i = 0; i &lt; colors.length; i++){
-        if (i > list2.length) break;
-        list2[i].color = colors[i]
- }
-</programlisting>
-</sect1>
 <sect1>
 	<title>Import and Export</title>
 	<para>&rocs; currently supports import and export of the following file formats:</para>
