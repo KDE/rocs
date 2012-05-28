@@ -69,7 +69,7 @@ In this chapter we provide an overview on &rocs;. For the reader who wants to di
 	<listitem><para>students who want to understand and see how an algorithm works,</para></listitem>
 	<listitem><para>and everybody who has to design graph algorithms and needs at tool for prototype testing.</para></listitem>
 </itemizedlist>
-<para>For all these users, &rocs; provides an easy to use graph editor to set up graphs, a powerful Qt Script scripting engine to execute algorithms, and several helper tools to set up your graphs and data structures for your experiments. So the usual workflow is to write an algorithm, create a graph, and see in real-time how the algorithm works at the the graph.</para>
+<para>For all these users, &rocs; provides an easy to use graph editor to set up graphs, a powerful Qt Script scripting engine to execute algorithms, and several helper tools to set up your graphs and data structures for your experiments. So the usual workflow is to write an algorithm, create a graph, and see in real-time how the algorithm works at the graph.</para>
 
 <screenshot>
 <screeninfo>A Screenshot of &rocs;.</screeninfo>
