@@ -160,7 +160,7 @@ For this, we want to specify two pointer types, one to display matching edges an
 <sect2>
 <title>Generate a Graph</title>
 <para>
-For the graph plugin, &rocs; ships a helper tool that can generate graphs. We go to the menu <guisubmenu>Graph Document</guisubmenu>, select submenu <guisubmenu>Tools</guisubmenu> and select the menu item <guimenuitem>Generate Graph</guimenuitem>.
+For the graph plugin, &rocs; ships a helper tool that can generate graphs. We go to <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
 There we generate a "Random Graph" with 30 nodes, 90 edges, and with seed 1 (the seed is the starting seed for the random graph generator; using the same seed multiple times results in same and reproducible graphs).
 Finally, we modify the graph name at the data structure panel and call the graph <literal>testgraph</literal>.
 </para>
