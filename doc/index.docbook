@@ -289,9 +289,9 @@ The user interface is divided into several logical parts as presented at the scr
 <listitem><para>
 <guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some nodes and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
 <listitem><para>
-<guilabel>Add Node</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new node that belongs to the currently selected graph.</para></listitem>
+<guilabel>Add Data</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new node that belongs to the currently selected graph.</para></listitem>
 <listitem><para>
-<guilabel>Add Edge</guilabel>: Click at one node, keep the mouse pressed and draw a line to another node to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two nodes).</para></listitem>
+<guilabel>Add Connection</guilabel>: Click at one node, keep the mouse pressed and draw a line to another node to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two nodes).</para></listitem>
 <listitem><para>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
 <listitem><para>
@@ -373,6 +373,7 @@ positions.</para></listitem>
 
 <sect1 id="user-interface-graph-properties">
 	<title>Data Structure Properties</title>
+	<!-- FIXME outdated-->
 	<para>On the left sidebar you can find the options for each opened graph. All these options are global
 	per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.</para>
 
@@ -659,6 +660,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 
 <sect1>
 	<title>Import and Export</title>
+	<!-- FIXME outdated?-->
 	<para>&rocs; currently supports import and export of the following file formats:</para>
 	<itemizedlist>
 		<listitem><para>DOT files, also known as Graphviz files.</para></listitem>
