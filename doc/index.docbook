@@ -500,7 +500,7 @@ Each pointer object provides the following methods:
 <sect1 id="scripting-plugin-graph">
 <title>The Graph Plugin</title>
 <sect2>
-<title>Graph Algorithms</title>
+<title>Graph Properties and Functions</title>
 
 <sect3>
 <title>The Graph Structure</title>
@@ -559,6 +559,43 @@ The graph plugin provides some special functions that can be used from the scrip
 </listitem>
 </varlistentry>
 </variablelist>
+</sect2>
+</sect1>
+
+<sect1 id="scripting-plugin-linkedlist">
+<title>The Linked List Plugin</title>
+<sect2>
+<title>Linked List Properties and Functions</title>
+
+<sect3>
+<title>The Linked List Structure</title>
+<para>
+Given a data structure object of type "Linked List", you can call the following member functions:
+</para>
+<programlisting>
+    node begin();
+    setBegin():
+    createNode();
+</programlisting>
+</sect3>
+
+<sect3>
+<title>Linked List Nodes</title>
+<para>
+Given a data structure object of type "Linked List", you can call the following member functions on the graph nodes additionally to the properties provided by the Data elements:
+</para>
+<programlisting>
+    node front();
+    pointTo(target);
+</programlisting>
+</sect3>
+
+<sect3>
+<title>Linked List Edges</title>
+<para>
+Given edges of a data structure of type "Linked List", only the properties of the base data structure are available.
+</para>
+</sect3>
 </sect2>
 </sect1>
 
