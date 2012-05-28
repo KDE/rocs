@@ -72,7 +72,7 @@ QScriptValue GraphNode::output_edges()
     return Data::output_pointers();
 }
 
-QScriptValue GraphNode::overlayEdges(int overlay)
+QScriptValue GraphNode::overlay_edges(int overlay)
 {
     boost::shared_ptr<Rocs::GraphStructure> ds = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure());
     if (ds->directed()) {

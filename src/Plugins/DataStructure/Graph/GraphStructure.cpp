@@ -43,7 +43,7 @@ DataStructurePtr Rocs::GraphStructure::create(Document *parent)
 DataStructurePtr Rocs::GraphStructure::create(DataStructurePtr other, Document *parent)
 {
     boost::shared_ptr<GraphStructure> ds = boost::static_pointer_cast<GraphStructure>(Rocs::GraphStructure::create(parent));
-    
+
     ds->importStructure(other);
     return ds;
 }
@@ -84,7 +84,7 @@ Rocs::GraphStructure::~GraphStructure()
 {
 }
 
-QScriptValue Rocs::GraphStructure::overlayEdges(int overlay)
+QScriptValue Rocs::GraphStructure::overlay_edges(int overlay)
 {
     QScriptValue array = engine()->newArray();
     foreach(PointerPtr n, pointers(overlay)) {
@@ -120,10 +120,10 @@ QScriptValue Rocs::GraphStructure::add_node(const QString& name)
 
 QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw)
 {
-    return addOverlayEdge(fromRaw, toRaw, 0);
+    return add_overlay_edge(fromRaw, toRaw, 0);
 }
 
-QScriptValue Rocs::GraphStructure::addOverlayEdge(Data* fromRaw, Data* toRaw, int overlay)
+QScriptValue Rocs::GraphStructure::add_overlay_edge(Data* fromRaw, Data* toRaw, int overlay)
 {
     if (fromRaw == 0 || toRaw == 0) {
         return QScriptValue();

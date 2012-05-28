@@ -46,7 +46,7 @@ public slots:
      * output plus input edges if graph is directed or undirected, respectively.
      * \param overlay is identifier for overlay.
      */
-    QScriptValue overlayEdges(int overlay);
+    QScriptValue overlay_edges(int overlay);
 };
 
 #endif // GRAPHNODE_H

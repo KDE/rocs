@@ -90,8 +90,6 @@ class ROCSLIB_EXPORT DataStructure : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QString name READ name WRITE setName)
-//     Q_PROPERTY(QColor dataDefaultColor READ dataDefaultColor WRITE setDataDefaultColor) //FIXME disabled for now: incompatible to current layout
-//     Q_PROPERTY(QColor pointerDefaultColor READ pointerDefaultColor WRITE setPointerDefaultColor) //FIXME disabled for now: incompatible to current layout
 
 public:
     static DataStructurePtr create(Document *parent = 0);

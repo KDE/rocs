@@ -102,7 +102,7 @@ public slots:
      * \param overlay integer that identifies the overlay
      * \return QScriptValue array
      */
-    QScriptValue overlayEdges(int overlay);
+    QScriptValue overlay_edges(int overlay);
 
     /**
      * Creates a new node with specified \param name.
@@ -120,7 +120,7 @@ public slots:
      * \param overlay is the overlay for the to created pointer
      * \return script value for the new pointer
      */
-    QScriptValue addOverlayEdge(Data* fromRaw, Data* toRaw, int overlay);
+    QScriptValue add_overlay_edge(Data* fromRaw, Data* toRaw, int overlay);
 
     /**
      * Creates a new edge from \param fromRaw to \param toRaw.
