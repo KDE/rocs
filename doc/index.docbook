@@ -58,18 +58,29 @@
 <chapter id="introduction">
 <title>Introduction</title>
 <para>
-In this chapter we provide an overview on &rocs;. For the reader who wants to directly start using &rocs; we suggest to read <xref linkend="introduction-nutshell"/> and while writing scripts using <xref linkend="using-rocs-scripting" /> as a reference.
+In this chapter we provide an overview of &rocs;.
+For the reader who wants to directly start using &rocs;, we suggest to read at least <xref linkend="introduction-nutshell"/> and using <xref linkend="using-rocs-scripting" /> as a reference for writing scripts.
 </para>
 
 <sect1 id="introduction-goals">
-<title>Goals and Target Audience</title>
+<title>Goals, Target Audience and Workflow</title>
 <para>&rocs; is a Graph Theory IDE for everybody interested in designing and analyzing graph algorithms. This explicitly includes</para>
 <itemizedlist>
-	<listitem><para>lecturers who want to demonstrate algorithms to their students,</para></listitem>
-	<listitem><para>students who want to understand and see how an algorithm works,</para></listitem>
-	<listitem><para>and everybody who has to design graph algorithms and needs at tool for prototype testing.</para></listitem>
+    <listitem><para>lecturers who want to demonstrate algorithms to their students,</para></listitem>
+    <listitem><para>students who want to understand and see how their algorithm works,</para></listitem>
+    <listitem><para>and everybody who is interested in data structures and algorithms.</para></listitem>
 </itemizedlist>
-<para>For all these users, &rocs; provides an easy to use graph editor to set up graphs, a powerful Qt Script scripting engine to execute algorithms, and several helper tools to set up your graphs and data structures for your experiments. So the usual workflow is to write an algorithm, create a graph, and see in real-time how the algorithm works at the graph.</para>
+
+<para>For all these users, &rocs; provides an easy to use data structure editor to set up graphs, lists or trees, a powerful QtScript scripting engine to execute algorithms, and several helper tools to set up your data structures for your simulations and experiments.
+</para>
+
+<para>
+The typical workflow when using &rocs; is to start by creating a graph with the visual graph editor.
+You can do this either by hand, this is adding data elements and connect them, or by using one of the helper algorithms (if available for the current data structure plugin) that can be found at <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Tools</guimenuitem> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
+Further, you can assign values to the data structure elements, either by hand or using <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Tools</guimenuitem> <guimenuitem>Assign Values</guimenuitem></menuchoice>.
+Finally, you can write your algorithm in JavaScript and execute it at the just created data structure.
+The changes made by your algorithm are directly visible at the visual graph editor whiteboard.
+</para>
 
 <screenshot>
 <screeninfo>A Screenshot of &rocs;.</screeninfo>
@@ -392,7 +403,7 @@ positions.</para></listitem>
 
 <chapter id="using-rocs">
 <title>Using &rocs;</title>
-<para>Usually the first step is to create a graph with the visual graph editor. You can do this either by hand, this is adding nodes and connecting them, or by using one of the helper algorithms that can be found <menuchoice><guimenu>Tools</guimenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>. Eventually, you also want to use the <menuchoice><guimenu>Tools</guimenu> <guimenuitem>Assign Values</guimenuitem></menuchoice> helper tools to assign your graph nodes and edges with initial values. Finally you need to give your graph a name. This name then will be the identifier that you must use for the scripting engine.</para>
+
 
 <sect1 id="using-rocs-scripting">
 <title>Scripting</title>
