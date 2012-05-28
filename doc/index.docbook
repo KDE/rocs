@@ -59,7 +59,7 @@
 <title>Introduction</title>
 <para>
 In this chapter we provide an overview of &rocs;.
-For the reader who wants to directly start using &rocs;, we suggest to read at least <xref linkend="introduction-nutshell"/> and using <xref linkend="using-rocs-scripting" /> as a reference for writing scripts.
+For the reader who wants to directly start using &rocs;, we suggest to read at least <xref linkend="introduction-nutshell"/> and using <xref linkend="scripting" /> as a reference for writing scripts.
 </para>
 
 <sect1 id="introduction-goals">
@@ -401,106 +401,161 @@ positions.</para></listitem>
 </sect1>
 </chapter>
 
-<chapter id="using-rocs">
-<title>Using &rocs;</title>
+<chapter id="scripting">
+<title>Writing and Executing Algorithms in &rocs;</title>
 
-
-<sect1 id="using-rocs-scripting">
-<title>Scripting</title>
-<para>&rocs; use a JavaScript like scripting language. This is, essentially that definition of variables and functions and their use are done exactly like in JavaScript. Besides, &rocs; provides a set of functions that let you access the graphs at the visual graph editor whiteboard and their elements.
+<para>
+&rocs; internally uses the QtScript scripting engine, which is a specific JavaScript engine.
+This means, all algorithms that you implement must use JavaScript.
+How JavaScript works and how to write JavaScript code is not covered in this handbook, though we explain how to access data structures, data elements and pointers of your data data structures from the scripting engine.
+Since you never use the basic data structure object but one that is provided by the currently used data structure plugin, the functionality of the data structure is extended by the corresponding plugin and you should have a look at the specialized functionality.
+Especially, data structure plugins use the common terms from their domain (nodes and edges in graphs, leafs and roots in trees, etc.)
+</para>
+<para>
+It is important to know that changes done by the scripting engine are directly reflected at the properties at the visual graph editor whiteboard.
+Hence, the scripts actually modify the data structures.
 </para>
 
-<sect2><title>Accessing a Graph</title>
-<para>In the scripting interface you can access a graph by simply typing its name and using this as an object with one of the following functions. To access a node or an edge you must get an identifier from the graph object</para>
-<variablelist>
-<varlistentry>
-<term>Graph Objects</term>
-<listitem>
+<sect1 id="scripting-data-structure">
+<title>The Base Data Structure Elements</title>
+<para>
+Every plugin provides a special set of functions an properties for its data structures and their elements.
+But also every plugin provides the properties and functions that are defined for the base data structure.
+Hence, everything explained in this sections is available for every data structure plugin.
+</para>
+<sect2><title>Base Data Structures Properties</title>
+<para>
+Data structures are identified by their names.
+Assuming you created a data structure with name <literal>testgraph</literal>, then you can access the data structure simply by writing this identifier.
+For example, to get an array with all data elements in the given data structure, you can write <literal>testgraph.list_nodes();</literal> in the script.
+</para>
+
+<sect3>
+<title>Base Data Structure Properties and Functions</title>
+<para>
+Each data structure <literal>testgraph</literal> has the following properties that can be red or written by <literal>testgraph.property</literal>:
+</para>
 <programlisting>
-// functions
-     array list_nodes();
-     array list_edges();
-     node add_node(name);
-     edge add_edge(from, to);
-     node node_byname(QString&amp; name);
-     node begin_node();
-     array end_nodes();
-
-// variables
-     bool directed
-     bool automate
-     string name
-     string nodeDefaultColor // in HEXA
-     string edgeDefaultColor  // in HEXA
+     string name  // identification of the data structure
 </programlisting>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>Node Objects</term>
-<listitem>
-<programlisting>
-// functions
-     array adj_nodes();
-     array adj_edges();
-     array input_edges();
-     array output_edges();
-     array loop_edges();
-     array connected_edges(Node *n);
-     void self_remove();
-     int type();
-     bool set_type(int typeIdentifier);
-
-// variables
-    double x
-    double y
-    double width
-    string value
-    string name
-    string color  // in HEXA
-    bool begin
-    bool end
-</programlisting>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>Edge Objects</term>
-<listitem>
-<programlisting>
-    string color ( em hexa )
-    string value
-    string name
-    double width
-    string style ( dot, dash, dash dot, solid )
-    int type();
-    bool set_type(int typeIdentifier);
-
-    node start();
-    node  end();
-
-    void self_remove();
-</programlisting>
-</listitem>
-</varlistentry>
-</variablelist>
+</sect3>
 </sect2>
 
-<sect2 id="script-graph-algorithms">
+<sect2>
+<title>Base Data Element Properties and Functions</title>
+<para>
+Each data element has the following properties that can be red or written:
+</para>
+<programlisting>
+    double x      // x coordinate of current position
+    double y      // y coordinate of current position
+    double width  // size
+    string value  // value
+    string name   // name
+    string color  // color in HEXA
+</programlisting>
+
+<para>
+Each data element object provides the following methods:
+</para>
+<programlisting>
+    int type();                         // data type of data element
+    int set_type(int);                  // set data type of the data element
+    array adj_data();                   // list of adjacent data
+    array adj_pointers();               // list of adjacent pointers
+    array input_pointers();             // list of input pointers
+    array output_pointers();            // list of output pointers
+    array loop_pointers();              // list of pointers forming a self-loop
+    array connected_pointers(target);   // list of pointers pointing to 'target'
+    void self_remove();                 // remove this data element
+</programlisting>
+</sect2>
+
+<sect2>
+<title>Base Pointer Properties and Functions</title>
+<para>
+Each pointer has the following properties that can be red or written:
+</para>
+<programlisting>
+    string color  // color in HEXA
+    string value  // value
+    string name   // name
+    double width  // width
+    string style  // value out of: dot, dash, dash dot, solid
+</programlisting>
+
+<para>
+Each pointer object provides the following methods:
+</para>
+<programlisting>
+    int type();                         // pointer type of pointer
+    int set_type(int);                  // set pointer type of the pointer
+    node start();                       // start node of the pointer
+    node end();                         // target node of the pointer
+    void self_remove();                 // remove this pointer
+</programlisting>
+</sect2>
+</sect1>
+
+<sect1 id="scripting-plugin-graph">
+<title>The Graph Plugin</title>
+<sect2>
 <title>Graph Algorithms</title>
-<para>Sometimes it is useful if you can use functions for standard tasks, like computing shortest distances between two nodes. Currently we support the following algorithms that can be called from the scripting engine with nodes from the same graph.</para>
+
+<sect3>
+<title>The Graph Structure</title>
+<para>
+Given a data structure object of type "Graph", you can call the following member functions:
+</para>
+<programlisting>
+    array list_nodes();                   // list of all nodes of the graph
+    array list_edges();                   // list of all nodes of the graph
+    node add_node(name);                  // add new node and returns it
+    edge add_edge(from, to);              // add new edge from 'from' to 'to' and returns it
+    array overlay_edges(int overlayID);   // list of all edges in given overlay
+    edge add_overlay_edge(int overlayID); // add edge of given pointer type/in specified overlay
+</programlisting>
+</sect3>
+
+<sect3>
+<title>Graph Nodes</title>
+<para>
+Given a data structure object of type "Graph", you can call the following member functions on the graph nodes additionally to the properties provided by the Data elements:
+</para>
+<programlisting>
+    array adj_nodes();                    // list of all adjacent nodes
+    array adj_edges();                    // list of connected edges
+    array input_edges();                  // list of input edges
+    array output_edges();                 // list of all output edges
+    array loop_edges();                   // list of all edges looping to the node
+    array connected_edges(node target);   // all edges that connect this to to node 'target'
+</programlisting>
+</sect3>
+
+<sect3>
+<title>Graph Edges</title>
+<para>
+Given edges of a data structure of type "Graph", only the properties of the base data structure are available.
+</para>
+</sect3>
+</sect2>
+
+<sect2>
+<title>Graph Structure Algorithms</title>
+<para>
+The graph plugin provides some special functions that can be used from the scripting engine.</para>
 <variablelist>
 <varlistentry>
 <term>Shortest Path Computation</term>
 <listitem>
-	<para>Computes the shortest path between the nodes <emphasis>start</emphasis> and <emphasis>end</emphasis>. Both nodes must be of the same graph. This computation respects if the graph is directed or undirected.</para>
-	<funcsynopsis>
-	<funcprototype>
-	<funcdef>array <function>dijkstra_shortest_path</function></funcdef>
-	<paramdef>Node* <parameter><replaceable>start</replaceable></parameter></paramdef>
-	<paramdef>Node* <parameter><replaceable>end</replaceable></parameter></paramdef>
-	</funcprototype>
-	</funcsynopsis>
+    <para>Compute the shortest path between the nodes <emphasis>start</emphasis> and <emphasis>end</emphasis>. Both nodes must be of the same graph. This computation respects if the graph is directed or undirected.</para>
+    <funcsynopsis>
+    <funcprototype>
+    <funcdef>array <function>dijkstra_shortest_path</function></funcdef>
+    <paramdef>Node* <parameter><replaceable>start</replaceable></parameter></paramdef>
+    <paramdef>Node* <parameter><replaceable>end</replaceable></parameter></paramdef>
+    </funcprototype>
+    </funcsynopsis>
 </listitem>
 </varlistentry>
 </variablelist>
