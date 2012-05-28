@@ -599,6 +599,64 @@ Given edges of a data structure of type "Linked List", only the properties of th
 </sect2>
 </sect1>
 
+<sect1 id="scripting-plugin-rootedtree">
+<title>The Rooted Tree Plugin</title>
+<sect2>
+<title>Rooted Tree Properties and Functions</title>
+
+<sect3>
+<title>The Rooted Tree Structure</title>
+<para>
+Given a data structure object of type "Rooted Tree", the following properties can be red or written:
+</para>
+<programlisting>
+    ShowAllPointers
+</programlisting>
+<para>
+Given a data structure object of type "Rooted Tree", you can call the following member functions:
+</para>
+<programlisting>
+    node add_data(name);
+    void set_root_node(node);
+    node root_node();
+</programlisting>
+</sect3>
+
+<sect3>
+<title>Rooted Tree Nodes</title>
+<para>
+Given a node object of type "Rooted Tree", the following properties can be red or written:
+</para>
+<programlisting>
+    numberOfChilds
+    left_child       // read only
+    right_child      // read only
+    node_parent      // read only
+</programlisting>
+<para>
+Given a node object of type "Rooted Tree", you can call the following member functions:
+</para>
+<programlisting>
+    add_left_child(child);
+    add_right_child(child);
+    add_child(child, index);
+    add_node_parent(child);
+    left_child();
+    right_child();
+    child_at(index);
+    node_parent();
+</programlisting>
+</sect3>
+
+<sect3>
+<title>Rooted Tree Edges</title>
+<para>
+Given edges of a data structure of type "Rooted Tree", only the properties of the base data structure are available.
+</para>
+</sect3>
+</sect2>
+</sect1>
+
 <sect1>
 	<title>Import and Export</title>
 	<para>&rocs; currently supports import and export of the following file formats:</para>
