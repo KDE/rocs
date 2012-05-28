@@ -165,7 +165,7 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataTypeButton->setStyleSheet("text-align: left");
     dataTypeButton->setMenu(dataTypeMenu);
     dataTypeMenu->addAction(
-            new PropertiesDialogAction("Properties", dataType, dataPropertyWidget)
+            new PropertiesDialogAction(i18n("Properties"), dataType, dataPropertyWidget)
         );
     dataTypeButton->setIcon(dataType->icon());
     dataTypeButton->setText(dataType->name());
@@ -239,7 +239,7 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     pointerTypeButton->setStyleSheet("text-align: left");
     pointerTypeButton->setMenu(pointerTypeMenu);
     pointerTypeMenu->addAction(
-            new PropertiesDialogAction("Properties", dataStructure->document()->pointerType(typeIdentifier), pointerPropertyWidget)
+            new PropertiesDialogAction(i18n("Properties"), dataStructure->document()->pointerType(typeIdentifier), pointerPropertyWidget)
         );
 
     KPushButton* pointerTypeShowName = new KPushButton(pointerPropertyWidget);
