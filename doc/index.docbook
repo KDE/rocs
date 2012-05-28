@@ -512,7 +512,7 @@ Given a data structure object of type "Graph", you can call the following member
     array list_nodes();                   // list of all nodes of the graph
     array list_edges();                   // list of all nodes of the graph
     node add_node(name);                  // add new node and returns it
-    edge add_edge(from, to);              // add new edge from 'from' to 'to' and returns it
+    edge add_edge(node from, node to);    // add new edge from 'from' to 'to' and returns it
     array overlay_edges(int overlayID);   // list of all edges in given overlay
     edge add_overlay_edge(int overlayID); // add edge of given pointer type/in specified overlay
 </programlisting>
@@ -574,9 +574,9 @@ The graph plugin provides some special functions that can be used from the scrip
 Given a data structure object of type "Linked List", you can call the following member functions:
 </para>
 <programlisting>
-    node begin();
-    setBegin():
-    createNode();
+    node begin();                           // gives the head node of the linked list
+    setBegin(node begin):                   // set node begin as begin of list and rearrange list
+    createNode();                           // create a new list node
 </programlisting>
 </sect3>
 
@@ -586,8 +586,7 @@ Given a data structure object of type "Linked List", you can call the following 
 Given a data structure object of type "Linked List", you can call the following member functions on the graph nodes additionally to the properties provided by the Data elements:
 </para>
 <programlisting>
-    node front();
-    pointTo(target);
+    node front();                           // returns the node's predecessor
 </programlisting>
 </sect3>
 
@@ -611,15 +610,15 @@ Given edges of a data structure of type "Linked List", only the properties of th
 Given a data structure object of type "Rooted Tree", the following properties can be read or written:
 </para>
 <programlisting>
-    ShowAllPointers
+    ShowAllPointers     // set to true if show all edges, set to false if multiple edges shall be compressed
 </programlisting>
 <para>
 Given a data structure object of type "Rooted Tree", you can call the following member functions:
 </para>
 <programlisting>
-    node add_data(name);
-    void set_root_node(node);
-    node root_node();
+    node add_data(string name);         // add a node to tree with given name
+    void set_root_node(node root);      // set root as root node of the tree
+    node root_node();                   // return root node of the tree
 </programlisting>
 </sect3>
 
@@ -629,23 +628,23 @@ Given a data structure object of type "Rooted Tree", you can call the following 
 Given a node object of type "Rooted Tree", the following properties can be read or written:
 </para>
 <programlisting>
-    numberOfChilds
-    left_child       // read only
-    right_child      // read only
-    node_parent      // read only
+    int numberOfChilds                  // set number of (allowed) childs for this node
+    node left_child                     // read only: node that is the left child
+    node right_child                    // read only: node that is the right child
+    node node_parent                    // read only: node that is the parent
 </programlisting>
 <para>
 Given a node object of type "Rooted Tree", you can call the following member functions:
 </para>
 <programlisting>
-    add_left_child(child);
-    add_right_child(child);
-    add_child(child, index);
-    add_node_parent(child);
-    left_child();
-    right_child();
-    child_at(index);
-    node_parent();
+    node add_left_child(node child);    // add left child
+    node add_right_child(node child);   // add right child
+    node add_child(node child, int i);  // add a child as the i-th child of the node
+    node add_node_parent(node child);   // add parent (only successful if no parent set, yet)
+    node left_child();                  // return right child
+    node right_child();                 // return left child
+    node child_at(int i);               // return the i-th child of the node
+    node node_parent();                 // return the node's parent
 </programlisting>
 </sect3>
 
