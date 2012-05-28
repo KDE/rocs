@@ -174,7 +174,7 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataTypeShowName->setIcon(KIcon("rocstexticon"));
     dataTypeShowName->setCheckable(true);
     dataTypeShowName->setChecked(true);
-    dataTypeShowName->setToolTip("Show names of data elements");
+    dataTypeShowName->setToolTip(i18n("Show names of data elements"));
     dataTypeShowName->setFixedWidth(24);
 
     KPushButton* dataTypeShowValue = new KPushButton(dataPropertyWidget);
