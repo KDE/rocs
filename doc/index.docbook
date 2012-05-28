@@ -420,7 +420,7 @@ Hence, the scripts actually modify the data structures.
 <sect1 id="scripting-data-structure">
 <title>The Base Data Structure Elements</title>
 <para>
-Every plugin provides a special set of functions an properties for its data structures and their elements.
+Every plugin provides a special set of functions and properties for its data structures and their elements.
 But also every plugin provides the properties and functions that are defined for the base data structure.
 Hence, everything explained in this sections is available for every data structure plugin.
 </para>
@@ -434,7 +434,7 @@ For example, to get an array with all data elements in the given data structure,
 <sect3>
 <title>Base Data Structure Properties and Functions</title>
 <para>
-Each data structure <literal>testgraph</literal> has the following properties that can be red or written by <literal>testgraph.property</literal>:
+Each data structure <literal>testgraph</literal> has the following properties that can be read or written by <literal>testgraph.property</literal>:
 </para>
 <programlisting>
      string name  // identification of the data structure
@@ -445,7 +445,7 @@ Each data structure <literal>testgraph</literal> has the following properties th
 <sect2>
 <title>Base Data Element Properties and Functions</title>
 <para>
-Each data element has the following properties that can be red or written:
+Each data element has the following properties that can be read or written:
 </para>
 <programlisting>
     double x      // x coordinate of current position
@@ -475,7 +475,7 @@ Each data element object provides the following methods:
 <sect2>
 <title>Base Pointer Properties and Functions</title>
 <para>
-Each pointer has the following properties that can be red or written:
+Each pointer has the following properties that can be read or written:
 </para>
 <programlisting>
     string color  // color in HEXA
@@ -608,7 +608,7 @@ Given edges of a data structure of type "Linked List", only the properties of th
 <sect3>
 <title>The Rooted Tree Structure</title>
 <para>
-Given a data structure object of type "Rooted Tree", the following properties can be red or written:
+Given a data structure object of type "Rooted Tree", the following properties can be read or written:
 </para>
 <programlisting>
     ShowAllPointers
@@ -626,7 +626,7 @@ Given a data structure object of type "Rooted Tree", you can call the following 
 <sect3>
 <title>Rooted Tree Nodes</title>
 <para>
-Given a node object of type "Rooted Tree", the following properties can be red or written:
+Given a node object of type "Rooted Tree", the following properties can be read or written:
 </para>
 <programlisting>
     numberOfChilds
