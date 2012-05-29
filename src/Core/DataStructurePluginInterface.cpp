@@ -62,8 +62,9 @@ QString DataStructurePluginInterface::name()
 
 QString DataStructurePluginInterface::internalName()
 {
-    if (DataStructurePluginManager::self()->pluginInfo(this).isValid()) {
-        return DataStructurePluginManager::self()->pluginInfo(this).pluginName();
+    KPluginInfo pluginInfo = DataStructurePluginManager::self()->pluginInfo(this);
+    if (pluginInfo.isValid()) {
+        return pluginInfo.property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
     }
     return QString();
 }

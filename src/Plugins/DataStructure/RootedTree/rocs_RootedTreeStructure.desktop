@@ -12,6 +12,7 @@ X-KDE-PluginInfo-Website=http://edu.kde.org/rocs
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
+X-Rocs-DataStructureIdentifier=RootedTree
 Comment=RootedTree
 Comment[es]=Árbol con raíz
 Comment[et]=Juurega puu

@@ -12,6 +12,7 @@ X-KDE-PluginInfo-Website=http://wiglot.wordpress.com
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
+X-Rocs-DataStructureIdentifier=Graph
 Name=Graph
 Name[ast]=Graph
 Name[bg]=Графика

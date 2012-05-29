@@ -41,7 +41,7 @@ void TestPlugins::standardPluginsLoaded()
          pluginNames.append(plugin->internalName());
     }
     QVERIFY2(pluginNames.contains("Graph"), "Could not found Graph plugin");
-    QVERIFY2(pluginNames.contains("Linked list"), "Could not found LinkedList plugin");
+    QVERIFY2(pluginNames.contains("LinkedList"), "Could not found LinkedList plugin");
     QVERIFY2(pluginNames.contains("RootedTree"), "Could not found Graph plugin");
 }
 
@@ -58,7 +58,7 @@ void TestPlugins::createGraph()
 
 void TestPlugins::createList()
 {
-    DataStructurePluginInterface * pl = DataStructurePluginManager::self()->plugin("Linked list");
+    DataStructurePluginInterface * pl = DataStructurePluginManager::self()->plugin("LinkedList");
     QVERIFY2(pl,"Could create data structure of type LinkedList");
 
     DataStructurePluginManager::self()->setDataStructurePlugin(pl->name());
@@ -84,9 +84,9 @@ void TestPlugins::convertGraphToLinkedList()
 
     QVERIFY2(plGraph,"Graph plugin not found");
 
-    DataStructurePluginInterface * plList = DataStructurePluginManager::self()->plugin("Linked list");
+    DataStructurePluginInterface * plList = DataStructurePluginManager::self()->plugin("LinkedList");
 
-    QVERIFY2(plList,"Linked list plugin not found");
+    QVERIFY2(plList,"LinkedList plugin not found");
 
     DataStructurePluginManager::self()->setDataStructurePlugin(plGraph->name());
     Document doc("TestDocument");
@@ -112,13 +112,13 @@ void TestPlugins::convertGraphToRootedTree()
 {
 
     DataStructurePluginInterface * plGraph = DataStructurePluginManager::self()->plugin("Graph");
-    
+
     QVERIFY2(plGraph,"Graph plugin not found");
-    
+
     DataStructurePluginInterface * plTree = DataStructurePluginManager::self()->plugin("RootedTree");
-    
+
     QVERIFY2(plTree,"Rooted plugin not found");
-    
+
     DataStructurePluginManager::self()->setDataStructurePlugin(plGraph->name());
     Document doc("TestDocument");
     //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
@@ -129,15 +129,15 @@ void TestPlugins::convertGraphToRootedTree()
     tree->addData("node3");
     tree->addPointer("node1", "node2");
     tree->addPointer("node1", "node3");
-    
+
     //Change plugin.
     DataStructurePluginManager::self()->setDataStructurePlugin(plTree->name());
-    
+
     DataStructurePtr list = plTree->convertToDataStructure(tree, &doc);
-    
+
     QCOMPARE(list->dataList().count(), 3);
     QCOMPARE(list->pointers().count(), 4);
-    
+
 }
 
 
