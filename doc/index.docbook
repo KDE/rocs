@@ -628,7 +628,7 @@ Given a data structure object of type "Rooted Tree", you can call the following 
 Given a node object of type "Rooted Tree", the following properties can be read or written:
 </para>
 <programlisting>
-    int numberOfChilds                  // set number of (allowed) childs for this node
+    int numberOfChilds                  // set the number of (allowed) children for this node
     node left_child                     // read only: node that is the left child
     node right_child                    // read only: node that is the right child
     node node_parent                    // read only: node that is the parent
