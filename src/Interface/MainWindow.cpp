@@ -520,7 +520,7 @@ void MainWindow::setupDSPluginsAction()
         action->setData(count++);
         action->setCheckable(true);
 
-        if (p->name() == DataStructurePluginManager::self()->pluginName()) {
+        if (p->internalName() == DataStructurePluginManager::self()->actualPlugin()->internalName()) {
             action->setChecked(true);
         }
 

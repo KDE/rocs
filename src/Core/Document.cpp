@@ -626,7 +626,7 @@ bool Document::saveAsInternalFormat(const QString& filename)
               % QString("bottom : ") % QString::number(bottom()) % QChar('\n')
               % QString("left : ") % QString::number(left()) % QChar('\n')
               % QString("right : ") % QString::number(right()) % QChar('\n')
-              % QString("DataStructurePlugin : ") % DataStructurePluginManager::self()->actualPlugin()->name() % QChar('\n')
+              % QString("DataStructurePlugin : ") % DataStructurePluginManager::self()->actualPlugin()->internalName() % QChar('\n')
               % QChar('\n');
 
     foreach(int dataTypeIdentifier, dataTypeList()) {
@@ -749,11 +749,11 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
                 else if (dataLine.startsWith(QLatin1String("bottom :")))   setBottom(dataLine.section(' ', 2).toInt());
                 else if (dataLine.startsWith(QLatin1String("left :")))     setLeft(dataLine.section(' ', 2).toInt());
                 else if (dataLine.startsWith(QLatin1String("right :")))    setRight(dataLine.section(' ', 2).toInt());
-
-                // TODO: Wagner, How this thing works?
                 else if (dataLine.startsWith(QLatin1String("DataStructurePlugin :"))) {
-                    DataStructurePluginManager::self()->setDataStructurePlugin(dataLine.section(' ', 2));
-                    d->_dataStructureType =  DataStructurePluginManager::self()->actualPlugin();
+                    // set plugin by unique plugin identifier
+                    QString pluginIdentifier = dataLine.section(' ', 2);
+                    DataStructurePluginManager::self()->setDataStructurePlugin(pluginIdentifier);
+                    d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
                 } else if (!dataLine.isEmpty())               break; // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }

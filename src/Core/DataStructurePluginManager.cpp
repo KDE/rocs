@@ -85,21 +85,17 @@ public:
         return DataStructurePtr();
     }
 
-    DataStructurePluginInterface* plugin(const QString &pluginName) {
-        return  m_plugins.value(pluginName, 0);
-    }
-
-    DataStructurePluginInterface* pluginByInternalName(const QString &pluginName){
+    DataStructurePluginInterface* pluginByInternalName(const QString &pluginIdentifier){
         foreach(DataStructurePluginInterface* plg, pluginList()) {
-            if (plg->internalName() == pluginName) {
+            if (plg->internalName() == pluginIdentifier) {
                 return plg;
             }
         }
         return 0;
     }
 
-    void setActivePlugin(const QString &pluginName) {
-        if (DataStructurePluginInterface * plg = plugin(pluginName)) {
+    void setActivePlugin(const QString &pluginIdentifier) {
+        if (DataStructurePluginInterface * plg = pluginByInternalName(pluginIdentifier)) {
             m_actualPlugin = plg;
         }
     }
@@ -166,6 +162,7 @@ DataStructurePluginManager* DataStructurePluginManager::self()
 
 void DataStructurePluginManager::setDataStructurePlugin()
 {
+    //TODO this is highly fragile code
     QAction *action = qobject_cast<QAction *> (sender());
     if (! action) {
         return;
@@ -175,23 +172,24 @@ void DataStructurePluginManager::setDataStructurePlugin()
     if (actionIndex >= pluginsList().count()) {
         return;
     }
-    kDebug() << "Setting the data structure plugin to" << pluginsList().at(actionIndex)->name() ;
-    setDataStructurePlugin(pluginsList().at(actionIndex)->name());
+    kDebug() << "Setting the data structure plugin to" << pluginsList().at(actionIndex)->internalName() ;
+    setDataStructurePlugin(pluginsList().at(actionIndex)->internalName());
 }
 
-void DataStructurePluginManager::setDataStructurePlugin(const QString &pluginName)
+void DataStructurePluginManager::setDataStructurePlugin(const QString &pluginIdentifier)
 {
-    if (! listOfDataStructures().contains(pluginName)) {
+    DataStructurePluginInterface* plugin = _d->pluginByInternalName(pluginIdentifier);
+    if (!plugin) {
         return;
     }
-    if (pluginName  == _d->actualPluginName()) {
+    if (_d->m_actualPlugin && pluginIdentifier == _d->m_actualPlugin->internalName()) {
         return;
     }
 
-    kDebug() << "Setting " << pluginName << "As the active plugin for data structures.";
+    kDebug() << "Setting as active plugin: "<< pluginIdentifier;
 
-    _d->setActivePlugin(pluginName);
-    emit changingDataStructurePlugin(pluginName);
+    _d->setActivePlugin(pluginIdentifier);
+    emit changingDataStructurePlugin(pluginIdentifier);
 }
 
 DataStructurePtr DataStructurePluginManager::changeToDataStructure(DataStructurePtr dataStructure, Document * parent)

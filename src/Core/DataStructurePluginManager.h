@@ -71,7 +71,7 @@ public:
     DataStructurePluginInterface* actualPlugin();
 
     QList < DataStructurePluginInterface*> pluginsList();
-    
+
     DataStructurePluginInterface* plugin(const QString & internalName ) const;
 
     /** \return the data Visible item for the data that will be drawed by canvas . */
@@ -109,7 +109,11 @@ signals:
 public slots:
     /** used to set change the data structure. */
     void setDataStructurePlugin();
-    void setDataStructurePlugin(const QString &pluginName);
+
+    /**
+     * \param unique identifier for the plugin
+     */
+    void setDataStructurePlugin(const QString &pluginIdentifier);
     QString pluginName() const;
 
 private:
