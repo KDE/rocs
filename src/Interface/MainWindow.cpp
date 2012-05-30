@@ -393,9 +393,9 @@ void MainWindow::setupActions()
     _paletteActions->addAction("align-tree", new AlignAction(i18nc("Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
 
     // Menu actions
-    createAction("document-new",        i18n("New Project"),        "new-project", Qt::Key_N, SLOT(newProject()), this);
-    createAction("document-save",       i18n("Save Project"),       "save-project", Qt::Key_S, SLOT(saveProject()), this);
-    createAction("document-open",       i18n("Open Project"),       "open-project", Qt::Key_O, SLOT(openProject()), this);
+    createAction("document-new",        i18n("New Project"),        "new-project", QKeySequence::New, SLOT(newProject()), this);
+    createAction("document-save",       i18n("Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
+    createAction("document-open",       i18n("Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
     createAction("document-export",     i18n("Export Project"),     "export-project", SLOT(exportProject()), this);
     createAction("document-import",     i18n("Import Project"),     "import-project", SLOT(importProject()), this);
     createAction("document-properties", i18n("Set Name"),           "set-project-name", SLOT(setProjectName()), this);
