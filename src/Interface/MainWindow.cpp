@@ -396,27 +396,27 @@ void MainWindow::setupActions()
     createAction("document-new",        i18n("New Project"),        "new-project", Qt::Key_N, SLOT(newProject()), this);
     createAction("document-save",       i18n("Save Project"),       "save-project", Qt::Key_S, SLOT(saveProject()), this);
     createAction("document-open",       i18n("Open Project"),       "open-project", Qt::Key_O, SLOT(openProject()), this);
-    createAction("document-save",       i18n("Export Project"),     "export-project", SLOT(exportProject()), this);
-    createAction("document-open",       i18n("Import Project"),     "import-project", SLOT(importProject()), this);
+    createAction("document-export",     i18n("Export Project"),     "export-project", SLOT(exportProject()), this);
+    createAction("document-import",     i18n("Import Project"),     "import-project", SLOT(importProject()), this);
     createAction("document-properties", i18n("Set Name"),           "set-project-name", SLOT(setProjectName()), this);
     createAction("document-new",        i18n("New Graph Document"), "new-graph", SLOT(newGraph()), this);
     createAction("document-new",        i18n("New Script File"),    "new-script",         SLOT(newScript()),    this);
-    createAction("document-open",       i18n("Import Rocs Graph"),  "add-graph",        SLOT(importGraph()),   this);
+    createAction("document-import",     i18n("Import Rocs Graph"),  "add-graph",        SLOT(importGraph()),   this);
     createAction("document-save",       i18n("Save Graph"),         "save-graph",        SLOT(saveGraph()),   this);
     createAction("document-save-as",    i18n("Save Graph as"),      "save-graph-as",     SLOT(saveGraphAs()), this);
     createAction("get-hot-new-stuff",   i18n("Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
     createAction("get-hot-new-stuff",   i18n("Upload script"),      "upload",            SLOT(uploadScript()),  this);
 
     createAction("help-hint", i18n("Possible Includes"),          "possible_includes", SLOT(showPossibleIncludes()), this);
-    createAction("document-open",    i18n("Import Script"),       "add-script",       SLOT(importScript()),   this);
+    createAction("document-import",  i18n("Import Script"),       "add-script",       SLOT(importScript()),   this);
     createAction("document-save",    i18n("Save Script"),         "save-script",       SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-save-as", i18n("Save Script as"),      "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
 
     // eventually create hooks for file plugins
     PluginManager::instance()->loadFilePlugins();
     if (PluginManager::instance()->filePlugins().count() > 0) {
-        createAction("document-open", i18n("Import Graph"), "import-graph", SLOT(importFile()), this);
-        createAction("document-save", i18n("Export Graph"), "export-graph", SLOT(exportFile()), this);
+        createAction("document-import", i18n("Import Graph"), "import-graph", SLOT(importFile()), this);
+        createAction("document-export", i18n("Export Graph"), "export-graph", SLOT(exportFile()), this);
     }
 
     // EDIT actions
