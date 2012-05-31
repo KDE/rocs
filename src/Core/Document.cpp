@@ -770,7 +770,11 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
         else if (str.startsWith(QLatin1String("[DataType"))) {
             QString identifier = str.section(' ', 1);
             identifier.remove(']');
-            int tmpDataTypeId = registerDataType(QString(), identifier.toInt());
+            int tmpDataTypeId = identifier.toInt();
+            if (tmpDataTypeId != 0) { // if == 0, this is default and default is automatically created
+                kDebug() << "Could not register data type with identifier " << tmpDataTypeId << ", it is already in use.";
+                tmpDataTypeId = registerDataType(QString(), identifier.toInt());
+            }
             DataTypePtr tmpDataType = dataType(tmpDataTypeId);
 
             QString dataLine = in.readLine().simplified();
@@ -786,7 +790,11 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
         else if (str.startsWith(QLatin1String("[PointerType"))) {
             QString identifier = str.section(' ', 1);
             identifier.remove(']');
-            int tmpPointerTypeId = registerPointerType(QString(), identifier.toInt());
+            int tmpPointerTypeId = identifier.toInt();
+            if (tmpPointerTypeId != 0) { // if == 0, this is default and default is automatically created
+                kDebug() << "Could not register pointer type with identifier " << tmpPointerTypeId << ", it is already in use.";
+                tmpPointerTypeId = registerPointerType(QString(), identifier.toInt());
+            }
             PointerTypePtr tmpPointerType = pointerType(tmpPointerTypeId);
 
             QString dataLine = in.readLine().simplified();
