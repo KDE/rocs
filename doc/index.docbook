@@ -514,7 +514,9 @@ Given a data structure object of type "Graph", you can call the following member
     node add_node(name);                  // add new node and returns it
     edge add_edge(node from, node to);    // add new edge from 'from' to 'to' and returns it
     array overlay_edges(int overlayID);   // list of all edges in given overlay
-    edge add_overlay_edge(int overlayID); // add edge of given pointer type/in specified overlay
+    edge add_overlay_edge(node from,
+                          node to,
+                          int overlayID); // add edge of given pointer type/in specified overlay
 </programlisting>
 </sect3>
 
