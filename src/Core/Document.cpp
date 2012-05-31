@@ -780,7 +780,11 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
                 /**/ if (dataLine.startsWith(QLatin1String("Name :")))      tmpDataType->setName(dataLine.section(' ', 2));
-                else if (dataLine.startsWith(QLatin1String("IconName :")))  tmpDataType->setIcon(dataLine.section(' ', 2));
+                else if (dataLine.startsWith(QLatin1String("IconName :"))) {
+                    QString iconString = dataLine.section(' ', 2);
+                    // remove rocs_ prefix
+                    tmpDataType->setIcon(iconString.remove("rocs_"));
+                }
                 else if (dataLine.startsWith(QLatin1String("Color :")))     tmpDataType->setDefaultColor(QColor(dataLine.section(' ', 2)));
                 else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();

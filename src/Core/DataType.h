@@ -62,6 +62,11 @@ public:
 
 public slots:
     void setName(QString name);
+    
+    /**
+     * Set icon of data elements of this type.
+     * "rocs_" prefix of icons must be removed before setting this.
+     */
     void setIcon(QString icon);
     void setDefaultColor(QColor color);
     void remove();
