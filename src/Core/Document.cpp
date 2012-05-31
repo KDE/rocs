@@ -639,8 +639,8 @@ bool Document::saveAsInternalFormat(const QString& filename)
 
     foreach(int pointerTypeIdentifier, pointerTypeList()) {
         d->_buffer += QString("[PointerType %1]").arg(QString::number(pointerTypeIdentifier)) % QChar('\n')
-            % QString("Name : ") % dataType(pointerTypeIdentifier)->name() % QChar('\n')
-            % QString("Color : ") % dataType(pointerTypeIdentifier)->defaultColor().name() % QChar('\n')
+            % QString("Name : ") % pointerType(pointerTypeIdentifier)->name() % QChar('\n')
+            % QString("Color : ") % pointerType(pointerTypeIdentifier)->defaultColor().name() % QChar('\n')
             % QChar('\n');
     }
 
