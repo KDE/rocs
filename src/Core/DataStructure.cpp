@@ -366,7 +366,7 @@ DataList DataStructure::addDataList(QList< QPair<QString, QPointF> > dataList, i
         }
         ++dataDefinition;
     }
-    return addDataList(dataCreateList);
+    return dataCreateList;
 }
 
 
