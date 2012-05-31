@@ -54,8 +54,13 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr da
     _mainWindow = parent;
 
     // create default data element setups
-    createDataTypeInformationWidget(0, dataStructure);
-    createPointerTypeInformationWidget(0, dataStructure);
+    foreach (int type, dataStructure->document()->dataTypeList()) {
+        createDataTypeInformationWidget(type, dataStructure);
+    }
+    foreach (int type, dataStructure->document()->pointerTypeList()) {
+        createPointerTypeInformationWidget(type, dataStructure);
+    }
+
 
     _dataStructure = dataStructure;
     _dataStructureName->setText(_dataStructure->name());
