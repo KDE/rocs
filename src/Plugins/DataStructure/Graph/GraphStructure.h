@@ -32,7 +32,8 @@ public:
     typedef enum {
         UNDIRECTED,
         DIRECTED,
-        MULTIGRAPH
+        MULTIGRAPH_UNDIRECTED,
+        MULTIGRAPH_DIRECTED
     } GRAPH_TYPE;
 
     //to avoid hide some methods

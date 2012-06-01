@@ -114,7 +114,14 @@ QLayout*  GraphPlugin::dataStructureExtraProperties(DataStructurePtr graph, QWid
     KComboBox * _graphTypeCombo = new KComboBox(parentWidget);
     _graphTypeCombo->insertItem(GraphStructure::UNDIRECTED, i18n("Undirected Graph"));
     _graphTypeCombo->insertItem(GraphStructure::DIRECTED,   i18n("Directed Graph"));
-    _graphTypeCombo->insertItem(GraphStructure::MULTIGRAPH, i18n("Multigraph"));
+    _graphTypeCombo->insertItem(
+            GraphStructure::MULTIGRAPH_UNDIRECTED, 
+            i18nc("undirected graph for which several edges between same nodes may exist", "Undirected Multigraph")
+                               );
+    _graphTypeCombo->insertItem(
+            GraphStructure::MULTIGRAPH_DIRECTED,
+            i18nc("directed graph for which several same orientated edges between same nodes may exist", "Directed Multigraph")
+                               );
 
     lay->addWidget(_graphTypeText, 0, 0);
     lay->addWidget(_graphTypeCombo, 0, 1);

@@ -237,7 +237,7 @@ void Rocs::GraphStructure::setGraphType(int type)
     if (dataList().count() == 0) {
         return;
     }
-    if ((_type  == MULTIGRAPH && type != MULTIGRAPH)
+    if (((_type  == MULTIGRAPH_UNDIRECTED || _type==MULTIGRAPH_DIRECTED) && type != _type)
             || (_type == DIRECTED && type == UNDIRECTED)) {
         if (KMessageBox::warningContinueCancel(0, i18n("This action will probably remove some edges. Do you want to continue?")) != KMessageBox::Continue) {
             return;
@@ -347,7 +347,7 @@ Rocs::GraphStructure::GRAPH_TYPE Rocs::GraphStructure::graphType() const
 
 bool Rocs::GraphStructure::directed() const
 {
-    return (_type == DIRECTED || _type == MULTIGRAPH);
+    return (_type == DIRECTED || _type == MULTIGRAPH_DIRECTED);
 }
 
 PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
