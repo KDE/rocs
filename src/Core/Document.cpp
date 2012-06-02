@@ -754,7 +754,9 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
                     QString pluginIdentifier = dataLine.section(' ', 2);
                     DataStructurePluginManager::self()->setDataStructurePlugin(pluginIdentifier);
                     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
-                } else if (!dataLine.isEmpty())               break; // go to the last if and finish populating.
+                } else if (!dataLine.isEmpty()) {
+                    break; // go to the last if and finish populating.
+                }
                 dataLine = in.readLine().simplified();
             }
             tmpObject = this;
@@ -836,15 +838,17 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
                 kDebug() << "Create data element of type 0, since type " << type << " was not registered.";
                 tmpData = tmpDataStructure->addData(name, 0);
             }
-            tmpData->setValue(value);
-            tmpData->setColor(color);
-            tmpData->setPos(posX, posY);
+            if (tmpData) {
+                tmpData->setValue(value);
+                tmpData->setColor(color);
+                tmpData->setPos(posX, posY);
 
-            // add to data element map
-            QString identifier = str.section(' ', 1);
-            identifier.remove(']');
-            dataMap.insert(identifier.toInt(), tmpData);
-            tmpObject = tmpData.get();
+                // add to data element map
+                QString identifier = str.section(' ', 1);
+                identifier.remove(']');
+                dataMap.insert(identifier.toInt(), tmpData);
+                tmpObject = tmpData.get();
+            }
         }
 
         else if (str.startsWith(QLatin1String("[Pointer "))) {
@@ -876,11 +880,13 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
                 kDebug() << "Create pointer of type 0, since type " << type << " was not registered.";
                 tmpPointer = tmpDataStructure->addPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], 0);
             }
-            tmpPointer->setWidth(width);
-            tmpPointer->setValue(value);
-            tmpPointer->setColor(color);
-            tmpPointer->setStyle(style);
-            tmpObject = tmpPointer.get();
+            if (tmpPointer) {
+                tmpPointer->setWidth(width);
+                tmpPointer->setValue(value);
+                tmpPointer->setColor(color);
+                tmpPointer->setStyle(style);
+                tmpObject = tmpPointer.get();
+            }
         }
 
         else if (str.startsWith(QLatin1String("[Group"))) {
