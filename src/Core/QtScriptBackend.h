@@ -46,7 +46,10 @@ public:
         return _engine;
     }
 
-    void includeFile(const QString&);
+    /**
+     * Include script from other script file.
+     */
+    void include(const QString&);
 
     /** return true if is evaluating a script or running a tool script. */
     bool isRunning();

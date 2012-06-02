@@ -51,7 +51,7 @@ static QScriptValue interrupt_script(QScriptContext *context, QScriptEngine* /*e
 
 static QScriptValue include_script(QScriptContext *context, QScriptEngine* /*engine*/)
 {
-    self->includeFile(QString("%1").arg(context->argument(0).toString()));
+    self->include(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
@@ -232,7 +232,7 @@ void QtScriptBackend::continueExecutionStep()
         _engineSteps->action(QScriptEngineDebugger::ContinueAction)->trigger();
     }
 }
-void QtScriptBackend::includeFile(const QString & includedFile)
+void QtScriptBackend::include(const QString & includedFile)
 {
     QString fileName = m_includeManager.seekFile(includedFile);
 
