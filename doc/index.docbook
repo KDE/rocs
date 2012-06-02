@@ -236,62 +236,87 @@ Finally we want to execute the algorithm. For this we can start the execution by
 The user interface is divided into several logical parts as presented at the screenshot below.
 </para>
 <screenshot>
-	<screeninfo>GUI elements of the &rocs; interface.</screeninfo>
-	<mediaobject>
-	<imageobject>
-	<imagedata fileref="rocs-interfaces.png" format="PNG" />
-	</imageobject>
-	<textobject>
-	<phrase>GUI elements of the &rocs; interface.</phrase>
-	</textobject>
-	</mediaobject>
+    <screeninfo>GUI elements of the &rocs; interface.</screeninfo>
+    <mediaobject>
+    <imageobject>
+    <imagedata fileref="rocs-interfaces.png" format="PNG" />
+    </imageobject>
+    <textobject>
+    <phrase>GUI elements of the &rocs; interface.</phrase>
+    </textobject>
+    </mediaobject>
 </screenshot>
 <variablelist>
 <varlistentry>
-	<term>Visual Graph Editor Toolbar</term>
-	<listitem><para>to be able to draw or modify graphs at the Visual Graph Editor whiteboard, you first need to select a tool here</para></listitem>
+    <term>Visual Graph Editor</term>
+    <listitem><para>This is the whiteboard where to create and modify your data structures. Right click at the whiteboard, at data elements, or at pointers to open context menus. You can use the tools from the <emphasis>Visual Graph Editor Toolbar</emphasis> to modify the elements at the visual graph editor whiteboard.</para></listitem>
 </varlistentry>
 <varlistentry>
-	<term>Visual Graph Editor</term>
-	<listitem><para>This is the area where you can draw your graphs. Right click at the whiteboard, graph elements, or selected graph elements opens a context menu depending on what you click.</para></listitem>
+    <term>Visual Graph Editor Toolbar</term>
+    <listitem><para>
+        These are the tools to be used to modify the data structures at the visual graph editor whiteboard.
+        Using the <guibutton>Add Data</guibutton> or <guibutton>Add Connection</guibutton> to create new data elements, adds new data elements or new pointers, respectively, to the currently selected data structure in the <emphasis>Graph Properties Widget</emphasis>.
+        Note that <guibutton>Add Data</guibutton> and <guibutton>Add Connection</guibutton> both have context menus to select the data or pointer type of that the new elements shall be created.
+        For details see <xref linkend="user-interface-toolbars" />.
+    </para></listitem>
 </varlistentry>
 <varlistentry>
-	<term>Graph Properties</term>
-	<listitem><para>This gives a complete list of all different graphs currently at the Visual Graph Editor whiteboard. Here you can make modifications to, &eg;, the graph name, visible properties like node names or values, or define default colors for the graph elements.</para></listitem>
+    <term>Graph Properties</term>
+    <listitem><para>
+        At top you can select the current graph document, open its configuration dialog, and add new data structures to the current graph document (&ie; to the current whiteboard).
+        Below you can select the current data structure.
+        There you can modify which data element and pointer properties (names, values, objects) are visible by pressing the respective buttons.
+        By click at the data and pointer type names you can access their configuration dialogs.
+        For details see <xref linkend="user-interface-graph-properties" />.
+    </para></listitem>
 </varlistentry>
 <varlistentry>
-	<term>Script Editor</term>
-	<listitem><para>In this text editor you can write algorithms in a Qt Script (for our purposes this is essentially the same as JavaScript). You can work on several algorithms at the same time by opening or creating new script tabs at the main menu. The small disk symbol at a tab appears if current changes are unsaved.</para></listitem>
+    <term>Script Editor</term>
+    <listitem><para>
+        In this text editor you can write algorithms as explained in detail in <xref linkend="scripting" />.
+        You can work on several script documents simultaneously by using several tabs.
+        The disk symbol at a tab appears if the script contains unsaved changes.
+    </para></listitem>
 </varlistentry>
 <varlistentry>
-	<term>Debug &amp; Script Output</term>
-	<listitem><para>This text area either writes debug information or the script output of your algorithm, depending on selection of the output setting. If the script throws an error automatically the debug output is selected. Further, the debug output presents all program output messages, too.</para></listitem>
+    <term>Debug &amp; Script Output</term>
+    <listitem><para>
+        This text area either shows debug information or the script output of your algorithm, depending on selection of the output setting.
+        If the script throws an error, automatically the debug output is selected.
+        Besides the debug messages, the debug output also contains all messages.
+    </para></listitem>
 </varlistentry>
 <varlistentry>
-	<term>Script Execution</term>
-	<listitem><para>This area controls execution of the algorithms. You can execute the script that is currently open at the script editor at the graph at the Visual Graph Editor whiteboard by pressing <guiicon>Run</guiicon>. While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.</para></listitem>
+    <term>Controls</term>
+    <listitem><para>
+        In this area you can find the controls for script executions.
+        You can execute the script that is currently open at the script editor by pressing <guiicon>Run</guiicon>.
+        While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.
+        Note that the <guibutton>One Step</guibutton> execution only stops at specific keywords (see <xref linkend="scripting" />).
+    </para></listitem>
 </varlistentry>
 </variablelist>
 </sect1>
 
 <sect1 id="user-interface-toolbars">
 <title>Toolbars</title>
-<para>There are different possible toolbars for the visual graph editor that allow you to access features by only one click. At the default setting, the following toolbars are shown:</para>
+<para>There are different toolbars for the visual graph editor that allow you to access features by only one click. Per default, the following toolbars are shown:</para>
 <itemizedlist>
-	<listitem><para>Main Toolbar</para></listitem>
-	<listitem><para>Alignment Toolbar</para></listitem>
+    <listitem><para>Main Toolbar</para></listitem>
+    <listitem><para>Alignment Toolbar</para></listitem>
 </itemizedlist>
-
+<!--  -->
 <sect2 id="user-interface-toolbars-main">
 <title>Main Toolbar</title>
 <para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the visual graph editor whiteboard:</para>
 <itemizedlist>
 <listitem><para>
-<guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some nodes and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
+<guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or pointers to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
 <listitem><para>
-<guilabel>Add Data</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new node that belongs to the currently selected graph.</para></listitem>
+<guilabel>Add Data</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
+By keeping the mouse pointer pressed at the button, a context menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
 <listitem><para>
-<guilabel>Add Connection</guilabel>: Click at one node, keep the mouse pressed and draw a line to another node to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two nodes).</para></listitem>
+<guilabel>Add Connection</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a context menu shows up at which the pointer type of the new created pointers can be selected (only if different pointer types exist).</para></listitem>
 <listitem><para>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
 <listitem><para>
@@ -319,7 +344,7 @@ A double click with the &LMB; restores the original zoom.</para></listitem>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsaligntop.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Top</guilabel>: Align the nodes at the vertical position of the top-most node. This only affects the vertical positions.</para></listitem>
+<guilabel>Top</guilabel>: Align the nodes at the vertical position of the top-most data element. This only affects the vertical positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignvmiddle.png" format="PNG"/></imageobject>
@@ -329,33 +354,33 @@ A double click with the &LMB; restores the original zoom.</para></listitem>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignbottom.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Base</guilabel>: Align the nodes at the vertical position of the bottom-most node. This only affects the vertical positions.</para></listitem>
+<guilabel>Base</guilabel>: Align the nodes at the vertical position of the bottom-most data element. This only affects the vertical positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignleft.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Left</guilabel>: Align the nodes at the horizontal position of the left-most node. This only affects the horizontal positions.</para></listitem>
+<guilabel>Left</guilabel>: Align the nodes at the horizontal position of the left-most data element. This only affects the horizontal positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignhmiddle.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Center</guilabel>: Align the nodes at the horizontal position of the top-most node. This only affects the horizontal
+<guilabel>Center</guilabel>: Align the data elements at the horizontal position of the top-most data element. This only affects the horizontal
 positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignright.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Right</guilabel>: Align the nodes at the horizontal position of the right-most node. This only affects the horizontal positions.</para></listitem>
+<guilabel>Right</guilabel>: Align the data elements at the horizontal position of the right-most data element. This only affects the horizontal positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsaligncircle.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Circle</guilabel>: Aligns the nodes at a circle of diameter equals to the maximal distance of the nodes. The nodes are positioned in the same sequence as given by view from the center of gravity of these nodes.</para></listitem>
+<guilabel>Circle</guilabel>: Aligns the data elements at a circle of diameter equals to the maximal distance of the data elements. The data elements are positioned in the same sequence as given by view from the center of gravity of these data elements.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsaligntree.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Minimize Crossing Edges</guilabel>: Applies the Fruchterman-Reingold algorithm to minimize (approximatively) the number of crossing edges.</para></listitem>
+<guilabel>Minimize Crossing Edges</guilabel>: Rearrange the selected data elements to minimize the number of crossing connections (application of the Fruchterman-Reingold algorithm).</para></listitem>
 </itemizedlist>
 <screenshot>
 <screeninfo>The Alignment Toolbar.</screeninfo>
@@ -372,33 +397,91 @@ positions.</para></listitem>
 </sect1>
 
 <sect1 id="user-interface-graph-properties">
-	<title>Data Structure Properties</title>
-	<!-- FIXME outdated-->
-	<para>On the left sidebar you can find the options for each opened graph. All these options are global
-	per graph and can be changed per node and edge with the Node Properties and the Edge Properties dialogs.</para>
+<title>The Graph Properties Panel</title>
+<para>
+    At top of the panel the current graph document can be selected.
+    Below of this, new data structures can be created or existing data structures can be configured.
+</para>
 
-	<itemizedlist>
-	<listitem><para>
-	<guilabel>Name</guilabel>: This is the name that your algorithm must use to access the graph.
-	</para></listitem>
-	<listitem><para>
-	<guilabel>Data Color</guilabel> for new created nodes, you can change the node color for all current nodes
-	by clicking the <guilabel>All</guilabel> button
-	</para></listitem>
-	<listitem><para>
-	  <guilabel>Pointer Color</guilabel> <!--FIXME color of edges?-->
-	</para></listitem>
-	</itemizedlist>
-	<para>The last row of options consists of toggled buttons:</para>
-	<itemizedlist>
-	<listitem><para>
-	<guilabel>Show names in:</guilabel> <guilabel>Data</guilabel> or <guilabel>Pointers</guilabel>.
-	</para></listitem>
-	<listitem><para>
-	<guilabel>Show values in:</guilabel> <guilabel>Nodes</guilabel> or <guilabel>Edges</guilabel>.
-	</para></listitem>
-	<!-- FIXME missing Graph Type Undirected Graph, Directed Graph, Multigraph -->
-	</itemizedlist>
+<sect2 id="user-interface-graph-properties-document">
+<title>Document Selection and Properties</title>
+<para>
+    At top of the panel, you can select the current graph document.
+    The graph document represents the whiteboard that is shown in the visual graph editor.
+    To create a new graph document or to add an existing one to the project, use <menuchoice><guimenu>Project</guimenu> <guimenuitem>New Graph Document</guimenuitem></menuchoice> or <menuchoice><guimenu>Project</guimenu> <guimenuitem>Import &rocs; Graph</guimenuitem></menuchoice>.
+    You can also import graph documents from third party applications (for this, see <xref linkend="import-export" />).
+    By pressing <guibutton>Properties</guibutton>, the properties of the graph document can be accessed.
+</para>
+</sect2>
+
+<sect2 id="user-interface-graph-properties-datastructure-create">
+<title>Create New Data Structure</title>
+<para>
+    You can create a new data structure by inserting an identifier (without spaces or special characters) and then press <guibutton>Add</guibutton>.
+    The identifier then on is used to access the data structure from algorithms.
+</para>
+</sect2>
+
+<sect2 id="user-interface-graph-properties-datastructure-config">
+<title>Configure Data Structure</title>
+<para>
+    All available data structures from the current graph document are shown in a selection list.
+    When selecting one, configurations for the corresponding data structure are shown:
+</para>
+    
+<itemizedlist>
+    <listitem><para>
+    <guibutton>Delete</guibutton>: Delete this data structure.
+    </para></listitem>
+    <listitem><para>
+    <guilabel>Name:</guilabel> This is the identifier of the data structure. This identifier is used to access the data structure from algorithms.
+    </para></listitem>
+    <listitem><para>
+    <guilabel>Display Options</guilabel>
+        Below, all data and pointer types of the data structure are shown.
+        By pressing the name, the configuration dialogs for the corresponding types can be opened.
+        Further, visibility of data elements and pointers, names, and values of elements of given type can be controlled by pressing the corresponding buttons.
+    </para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2 id="user-interface-graph-properties-datastructure-individual">
+<title>Configure Plugin Options of Data Structure</title>
+<para>
+    Each data structure plugin can add options to the data structure configuration dialog.
+    The standard data structure plugins provide the following options:
+</para>
+    
+<sect3>
+<title>Graph Plugin</title>
+<para>
+    Use <guilabel>Graph Type</guilabel> to select the type of the graph. The meaning of this types is as follows:
+</para>
+<itemizedlist>
+    <listitem><para>
+    <guilabel>Directed Graph</guilabel>: Graph with directed edges at which several same orientated edges between same nodes are not allowed.
+    </para></listitem>
+    <listitem><para>
+    <guilabel>Undirected Graph</guilabel>: Graph with undirected edges at which several edges between same nodes are not allowed.
+    </para></listitem>
+    <listitem><para>
+    <guilabel>Directed Multigraph</guilabel>: Graph with directed edges at which several same orientated edges between same nodes are allowed.
+    </para></listitem>
+    <listitem><para>
+    <guilabel>Undirected Multigraph</guilabel>: Graph with undirected edges at which several edges between same nodes are allowed.
+    </para></listitem>
+</itemizedlist>
+</sect3>
+
+<sect3>
+<title>Rooted Tree Plugin</title>
+<para>
+    By checking the <guilabel>Show all Pointers</guilabel> property, all pointers between the tree nodes are shown.
+    If unchecked, multiple pointers between same nodes are collapsed to one.
+</para>
+</sect3>
+
+</sect2>
 </sect1>
 </chapter>
 
@@ -659,7 +742,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 </sect2>
 </sect1>
 
-<sect1>
+<sect1 id="import-export">
 	<title>Import and Export</title>
 	<!-- FIXME outdated?-->
 	<para>&rocs; currently supports import and export of the following file formats:</para>
