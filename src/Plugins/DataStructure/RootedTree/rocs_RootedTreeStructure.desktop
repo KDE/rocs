@@ -14,6 +14,7 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-Rocs-DataStructureIdentifier=RootedTree
 Name=Rooted Tree
+Name[hu]=Gyökeres fa
 Name[nl]=Boomstructuur met basis
 Name[pt]=Árvore com Raiz
 Name[pt_BR]=Árvore com raiz
