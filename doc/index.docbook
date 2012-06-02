@@ -796,17 +796,31 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 </itemizedlist>
 </sect2>
 </sect1>
+</chapter>
 
-<sect1 id="import-export">
-	<title>Import and Export</title>
-	<!-- FIXME outdated?-->
-	<para>&rocs; currently supports import and export of the following file formats:</para>
-	<itemizedlist>
-		<listitem><para>DOT files, also known as Graphviz files.</para></listitem>
-		<listitem><para>GML files</para></listitem>
-		<listitem><para>Plain-Text files.</para></listitem>
-	</itemizedlist>
-	<para>Currently, for most of these file types only few values are imported. The imported values include nodes and their corresponding connections, names of all elements, values, and if given also coordinates.</para>
+<chapter id="import-export">
+<title>Import and Export</title>
+<sect1 id="import-export-projects">
+    <title>Exchange &rocs; Projects</title>
+    <para>
+        &rocs; projects an be imported and exported as archived <literal>.tar.gz</literal> files.
+        These archives can be used to exchange projects.
+        Import and Export can be done with <menuchoice><guimenu>File</guimenu> <guimenuitem>Import Project</guimenuitem></menuchoice> and <menuchoice><guimenu>File</guimenu> <guimenuitem>Export Project</guimenuitem></menuchoice>, respectively.
+    </para>
+</sect1>
+
+<sect1 id="import-export-graphs">
+    <title>Import of Graph Documents</title>
+    <para>&rocs; currently supports import and export of the following file formats:</para>
+    <itemizedlist>
+        <listitem><para>DOT files, also known as Graphviz files.</para></listitem>
+        <listitem><para>GML files</para></listitem>
+        <listitem><para>Plain-Text files.</para></listitem>
+    </itemizedlist>
+    <para>
+        The support for most of these files is very basic and only supports basic values.
+        Imported are data elements and their corresponding connections, names of all elements, values, and coordinates.
+    </para>
 </sect1>
 </chapter>
 
