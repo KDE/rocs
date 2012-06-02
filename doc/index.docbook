@@ -742,6 +742,61 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 </sect2>
 </sect1>
 
+<sect1 id="scripting-controls">
+<title>Controlling the Script Execution</title>
+<para>
+</para>    
+
+<sect2>
+<title>Include Files</title>
+<para>
+    Your script documents can include other scripts.
+    This can be useful to reduce the size of script documents and improve readability.
+    Using <menuchoice><guimenu>Script Document</guimenu> <guimenuitem>Possible Includes</guimenuitem></menuchoice> you get a list of script files already shipped with &rocs; that could be included.
+    To can include a script file with the following command:
+</para>
+<programlisting>
+    include_script(string path);            // relative or absolute path to script file
+</programlisting>
+</sect2>
+
+<sect2 id="scripting-output">
+<title>Script Output</title>
+<para>
+    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &and; Script Output</emphasis>.
+    If the scripting engine detects a syntax error in your script, the error is also displayed as debug message.
+    Note that all program messages are also displayed at the debug output (displayed as bold text).
+</para>
+<para>
+    You can control the text that is displayed at the script output by the following functions:
+</para>
+<programlisting>
+    output(string message);            // displays the message as script output
+    debug(string message);             // displays the message as debug output
+</programlisting>
+</sect2>
+
+<sect2 id="scripting-controlling">
+<title>Control Script Execution</title>
+<para>
+    There are different execution modes for your scripts.
+</para>
+<para>
+    You can control the text that is displayed at the script output by the following functions:
+</para>
+<itemizedlist>
+    <listitem><para><guilabel>Start</guilabel>: Execute the script until it finishes.</para></listitem>
+    <listitem><para><guilabel>Stop</guilabel>: Stop script execution (only available if a script is executing).</para></listitem>
+    <listitem><para><guilabel>One Step</guilabel>: Execute script until one step ends. A step ends when the script calls the function <literal>interrupt()</literal>:</para>
+    <programlisting>
+        interrupt();    // ends a step
+    </programlisting>
+    </listitem>
+    <listitem><para><guilabel>Debug</guilabel>: Execute script in debug mode. this opens the QtScript debug dialog.</para></listitem>
+</itemizedlist>
+</sect2>
+</sect1>
+
 <sect1 id="import-export">
 	<title>Import and Export</title>
 	<!-- FIXME outdated?-->
