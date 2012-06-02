@@ -510,7 +510,7 @@ Given a data structure object of type "Graph", you can call the following member
 </para>
 <programlisting>
     array list_nodes();                   // list of all nodes of the graph
-    array list_edges();                   // list of all nodes of the graph
+    array list_edges();                   // list of all edges of the graph
     node add_node(name);                  // add new node and returns it
     edge add_edge(node from, node to);    // add new edge from 'from' to 'to' and returns it
     array overlay_edges(int overlayID);   // list of all edges in given overlay
