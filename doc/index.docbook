@@ -354,22 +354,22 @@ A double click with the &LMB; restores the original zoom.</para></listitem>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsaligntop.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Top</guilabel>: Align the nodes at the vertical position of the top-most data element. This only affects the vertical positions.</para></listitem>
+<guilabel>Top</guilabel>: Align the data elements at the vertical position of the top-most data element. This only affects the vertical positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignvmiddle.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Center</guilabel>: Align the nodes at the vertical position given by the center of all selected nodes vertical positions. This only affects the vertical positions.</para></listitem>
+<guilabel>Center</guilabel>: Align the data elements at the vertical position given by the center of all selected data elements vertical positions. This only affects the vertical positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignbottom.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Base</guilabel>: Align the nodes at the vertical position of the bottom-most data element. This only affects the vertical positions.</para></listitem>
+<guilabel>Base</guilabel>: Align the data elements at the vertical position of the bottom-most data element. This only affects the vertical positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignleft.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Left</guilabel>: Align the nodes at the horizontal position of the left-most data element. This only affects the horizontal positions.</para></listitem>
+<guilabel>Left</guilabel>: Align the data elements at the horizontal position of the left-most data element. This only affects the horizontal positions.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsalignhmiddle.png" format="PNG"/></imageobject>
