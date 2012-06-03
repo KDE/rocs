@@ -173,6 +173,7 @@ public  slots:
 
     QScriptValue type();
     QScriptValue set_type(int type);
+    void add_property(QString name, QString value);
 
     /*! this method can be used inside of the script interface.
     \return the first datum of this pointer.

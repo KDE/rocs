@@ -369,6 +369,11 @@ QScriptValue Data::type()
     return d->_dataStructure->engine()->newVariant(d->_dataType);
 }
 
+void Data::add_property(QString name, QString value)
+{
+    addDynamicProperty(name, value);
+}
+
 QScriptValue Data::adj_data()
 {
     QList< DataPtr > list = adjacent_data();

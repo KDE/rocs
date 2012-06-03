@@ -166,6 +166,7 @@ public  slots:
 
     QScriptValue type();
     QScriptValue set_type(int type);
+    void add_property(QString name, QString value);
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue input_pointers();

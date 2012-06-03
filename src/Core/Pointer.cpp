@@ -282,6 +282,11 @@ QScriptValue Pointer::type()
     return d->dataStructure->engine()->newVariant(d->pointerType);
 }
 
+void Pointer::add_property(QString name, QString value)
+{
+    addDynamicProperty(name, value);
+}
+
 QScriptValue Pointer::start()
 {
     // from==0 possible if this pointer is deleted
