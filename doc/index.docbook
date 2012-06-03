@@ -142,6 +142,16 @@ Or it is useful for the execution of an algorithm to specify a data element type
 For such use cases you can define data types. Each data type has its own icon and data types of some type can easily be accessed from your scripts.
 </para>
 </sect2>
+
+<sect2>
+<title>Dynamic Properties</title>
+<para>
+Every data element and pointer has the two properties <literal>name</literal> and <literal>value</literal>.
+To extend the properties of data elements and pointers, you can add <emphasis>dynamic properties</emphasis> to them.
+Each dynamic property is identified by its name and can contain any string.
+To add dynamic properties, use the <guilabel>Data Properties</guilabel> and <guilabel>Pointer Properties</guilabel> dialogs from the context menus of the respective elements or the script functions as explained in <xref linkend="scripting-data-structure" />.
+</para>
+</sect2>
 </sect1>
 
 <sect1 id="introduction-tutorial">
@@ -538,6 +548,9 @@ Each data element has the following properties that can be read or written:
     string name   // name
     string color  // color in HEXA
 </programlisting>
+<para>
+Further, every dynamic property of a data element can be accessed by its name.
+</para>
 
 <para>
 Each data element object provides the following methods:
@@ -545,6 +558,8 @@ Each data element object provides the following methods:
 <programlisting>
     int type();                         // data type of data element
     int set_type(int);                  // set data type of the data element
+    void add_property(string name,      // add dynamic property to data element with specified name and value
+                      string value);
     array adj_data();                   // list of adjacent data
     array adj_pointers();               // list of adjacent pointers
     array input_pointers();             // list of input pointers
@@ -567,6 +582,9 @@ Each pointer has the following properties that can be read or written:
     double width  // width
     string style  // value out of: dot, dash, dash dot, solid
 </programlisting>
+<para>
+Further, every dynamic property of a pointer can be accessed by its name.
+</para>
 
 <para>
 Each pointer object provides the following methods:
@@ -574,6 +592,8 @@ Each pointer object provides the following methods:
 <programlisting>
     int type();                         // pointer type of pointer
     int set_type(int);                  // set pointer type of the pointer
+    void add_property(string name,      // add dynamic property to data element with specified name and value
+                      string value);
     node start();                       // start node of the pointer
     node end();                         // target node of the pointer
     void self_remove();                 // remove this pointer
