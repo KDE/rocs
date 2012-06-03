@@ -805,14 +805,30 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
     You can control the text that is displayed at the script output by the following functions:
 </para>
 <itemizedlist>
-    <listitem><para><guilabel>Start</guilabel>: Execute the script until it finishes.</para></listitem>
-    <listitem><para><guilabel>Stop</guilabel>: Stop script execution (only available if a script is executing).</para></listitem>
-    <listitem><para><guilabel>One Step</guilabel>: Execute script until one step ends. A step ends when the script calls the function <literal>interrupt()</literal>:</para>
+    <listitem><para>
+        <inlinemediaobject><imageobject>
+        <imagedata fileref="rocs-control-engine-run.png" format="PNG"/></imageobject>
+        </inlinemediaobject>
+        <guilabel>Start</guilabel>: Execute the script until it finishes.</para></listitem>
+    <listitem><para>
+        <inlinemediaobject><imageobject>
+        <imagedata fileref="rocs-control-engine-stop.png" format="PNG"/></imageobject>
+        </inlinemediaobject>
+        <guilabel>Stop</guilabel>: Stop script execution (only available if a script is executing).</para></listitem>
+    <listitem><para>
+        <inlinemediaobject><imageobject>
+        <imagedata fileref="rocs-control-engine-step.png" format="PNG"/></imageobject>
+        </inlinemediaobject>
+        <guilabel>One Step</guilabel>: Execute script until one step ends. A step ends when the script calls the function <literal>interrupt()</literal>:</para>
     <programlisting>
         interrupt();    // ends a step
     </programlisting>
     </listitem>
-    <listitem><para><guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>
+    <listitem><para>
+        <inlinemediaobject><imageobject>
+        <imagedata fileref="rocs-control-engine-debug.png" format="PNG"/></imageobject>
+        </inlinemediaobject>
+        <guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>
 </itemizedlist>
 </sect2>
 </sect1>
