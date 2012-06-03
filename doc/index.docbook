@@ -418,7 +418,7 @@ positions.</para></listitem>
 <title>Create New Data Structure</title>
 <para>
     You can create a new data structure by inserting an identifier (without spaces or special characters) and then press <guibutton>Add</guibutton>.
-    The identifier then on is used to access the data structure from algorithms.
+    The identifier is used to access the data structure from algorithms.
 </para>
 </sect2>
 
@@ -455,7 +455,7 @@ positions.</para></listitem>
 <sect3>
 <title>Graph Plugin</title>
 <para>
-    Use <guilabel>Graph Type</guilabel> to select the type of the graph. The meaning of this types is as follows:
+    Use <guilabel>Graph Type</guilabel> to select the type of the graph. The meaning of these types is as follows:
 </para>
 <itemizedlist>
     <listitem><para>
@@ -476,7 +476,7 @@ positions.</para></listitem>
 <sect3>
 <title>Rooted Tree Plugin</title>
 <para>
-    By checking the <guilabel>Show all Pointers</guilabel> property, all pointers between the tree nodes are shown.
+    By checking the <guilabel>Show all pointers</guilabel> property, all pointers between the tree nodes are shown.
     If unchecked, multiple pointers between same nodes are collapsed to one.
 </para>
 </sect3>
@@ -753,7 +753,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
     Your script documents can include other scripts.
     This can be useful to reduce the size of script documents and improve readability.
     Using <menuchoice><guimenu>Script Document</guimenu> <guimenuitem>Possible Includes</guimenuitem></menuchoice> you get a list of script files already shipped with &rocs; that could be included.
-    To can include a script file with the following command:
+    You can include a script file with the following command:
 </para>
 <programlisting>
     include_script(string path);            // relative or absolute path to script file
@@ -792,7 +792,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
         interrupt();    // ends a step
     </programlisting>
     </listitem>
-    <listitem><para><guilabel>Debug</guilabel>: Execute script in debug mode. this opens the QtScript debug dialog.</para></listitem>
+    <listitem><para><guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>
 </itemizedlist>
 </sect2>
 </sect1>
@@ -803,7 +803,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 <sect1 id="import-export-projects">
     <title>Exchange &rocs; Projects</title>
     <para>
-        &rocs; projects an be imported and exported as archived <literal>.tar.gz</literal> files.
+        &rocs; projects can be imported and exported as archived <literal>.tar.gz</literal> files.
         These archives can be used to exchange projects.
         Import and Export can be done with <menuchoice><guimenu>File</guimenu> <guimenuitem>Import Project</guimenuitem></menuchoice> and <menuchoice><guimenu>File</guimenu> <guimenuitem>Export Project</guimenuitem></menuchoice>, respectively.
     </para>
