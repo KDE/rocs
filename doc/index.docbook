@@ -658,8 +658,20 @@ The graph plugin provides some special functions that can be used from the scrip
     <funcsynopsis>
     <funcprototype>
     <funcdef>array <function>dijkstra_shortest_path</function></funcdef>
-    <paramdef>Node* <parameter><replaceable>start</replaceable></parameter></paramdef>
-    <paramdef>Node* <parameter><replaceable>end</replaceable></parameter></paramdef>
+    <paramdef>node <parameter><replaceable>start</replaceable></parameter></paramdef>
+    <paramdef>node <parameter><replaceable>end</replaceable></parameter></paramdef>
+    </funcprototype>
+    </funcsynopsis>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>Shortest Path Distances</term>
+<listitem>
+    <para>Compute the shortest path distances from node <emphasis>start</emphasis> to all other nodes of the graph. This computation respects if the graph is directed or undirected.</para>
+    <funcsynopsis>
+    <funcprototype>
+    <funcdef>array <function>distances</function></funcdef>
+    <paramdef>node <parameter><replaceable>start</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
 </listitem>

@@ -79,6 +79,18 @@ public:
      */
     GRAPH_TYPE graphType() const;
 
+    /**
+     * Computes the Dijkstra's shortest path algorithm to compute
+     * all shortest path distances from \p from. Note: this shortest path
+     * algorithm works only for graphs with all edges values non-negative.
+     * For undirected graphs reverse edges are add automatically.
+     * The algorithm has time complexity O(V log V + E).
+     *
+     * \param from the node from which the computation starts
+     * \return list is map with keys = target elements, values = path to target
+     */
+    QMap<DataPtr,PointerList> dijkstraShortestPaths(DataPtr from);
+    
 public slots:
     /**
      * Setter for graph type. No conversations are performed.
@@ -144,6 +156,18 @@ public slots:
      */
     QScriptValue dijkstra_shortest_path(Data* fromRaw, Data* toRaw);
 
+    /**
+     * Computes the Dijkstra's shortest path algorithm to compute
+     * all shortest path distances from \p from. If edge has value 0, the edge value
+     * is set to 1. Note: this shortest path algorithm works only for graphs with all 
+     * edges values non-negative. For undirected graphs reverse edges are add automatically.
+     * The algorithm has time complexity O(V log V + E).
+     *
+     * \param from the node from which the computation starts
+     * \return the edge set of the shortest path
+     */
+    QScriptValue distances(Data* fromRaw);
+    
 private:
     GraphStructure::GRAPH_TYPE _type;
 };

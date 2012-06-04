@@ -34,6 +34,7 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <boost/graph/graph_concepts.hpp>
+#include <qstring.h>
 
 DataStructurePtr Rocs::GraphStructure::create(Document *parent)
 {
@@ -152,7 +153,48 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
     DataPtr from = fromRaw->getData();
     DataPtr to = toRaw->getData();
 
-    QScriptValue path_edges = engine()->newArray();
+    QMap<DataPtr,PointerList> shortestPaths = dijkstraShortestPaths(from);
+    QScriptValue pathEdges = engine()->newArray();
+    foreach (PointerPtr edge, shortestPaths[to]) {
+        pathEdges.property("push").call(
+            pathEdges,
+            QScriptValueList() << edge->scriptValue()
+        );
+    }
+    return pathEdges;
+}
+
+QScriptValue Rocs::GraphStructure::distances(Data* fromRaw)
+{
+    if (fromRaw == 0) {
+        return QScriptValue();
+    }
+    DataPtr from = fromRaw->getData();
+
+    QMap<DataPtr,PointerList> shortestPaths = dijkstraShortestPaths(from);
+    QScriptValue distances = engine()->newArray();
+    foreach (DataPtr target, dataList()) {
+        qreal length = 0;
+        foreach (PointerPtr edge, shortestPaths[target]) {
+            if (!edge->value().isEmpty()) {
+                length += edge->value().toDouble();
+            } else {
+                length += 1;
+            }
+        }
+        distances.property("push").call(
+            distances,
+            QScriptValueList() << length
+        );
+    }
+    return distances;
+}
+
+QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr from)
+{
+    if (!from) {
+        return QMap<DataPtr,PointerList>();
+    }
 
     typedef boost::adjacency_list < boost::listS, boost::vecS, boost::directedS,
             boost::no_property, boost::property <boost::edge_weight_t, qreal> > graph_t;
@@ -199,12 +241,11 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
     graph_t g(edges.begin(),
               edges.end(),
               weights.begin(),
-              this->dataList().count()
+              dataList().count()
              );
 
     // compute Dijkstra
     vertex_descriptor source = boost::vertex(node_mapping[from.get()], g);
-    vertex_descriptor target = boost::vertex(node_mapping[to.get()], g);
     QVector<vertex_descriptor> p(boost::num_vertices(g));
     QVector<int> dist(boost::num_vertices(g));
     boost::dijkstra_shortest_paths(g,
@@ -215,18 +256,23 @@ QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* t
     // qDebug() << "length of shortest path : " << dist[node_mapping[to]];
 
     // walk search tree and setup solution
-    vertex_descriptor predecessor = target;
-    do {
-        if (edge_mapping.contains(std::make_pair<int, int>(p[predecessor], predecessor))) {
-            path_edges.property("push").call(
-                path_edges,
-                QScriptValueList() << edge_mapping[std::make_pair < int, int > (p[predecessor], predecessor)]->scriptValue()
-            );
-        }
-        predecessor = p[predecessor];
-    } while (p[predecessor] != predecessor);
-
-    return path_edges;
+    QMap<DataPtr,PointerList> shortestPaths = QMap<DataPtr,PointerList>();
+    DataList::const_iterator toIter = dataList().constBegin();
+    while (toIter != dataList().constEnd()){
+        PointerList path = PointerList();
+        vertex_descriptor target = boost::vertex(node_mapping[toIter->get()], g);
+        vertex_descriptor predecessor = target;
+        do {
+            if (edge_mapping.contains(std::make_pair<int, int>(p[predecessor], predecessor))) {
+                path.append(edge_mapping[std::make_pair < int, int > (p[predecessor], predecessor)]);
+            }
+            predecessor = p[predecessor];
+        } while (p[predecessor] != predecessor);
+        
+        shortestPaths.insert((*toIter), path);
+        ++toIter;
+    }
+    return shortestPaths;
 }
 
 void Rocs::GraphStructure::setGraphType(int type)
