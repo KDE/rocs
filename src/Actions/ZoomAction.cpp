@@ -115,7 +115,7 @@ bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 
 bool ZoomAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent)
 {
-    if (wEvent->delta() > 0) { // zoom out
+    if (wEvent->delta() < 0) { // zoom out
         zoomOut(wEvent->scenePos());
     } else { // zoom in
         zoomIn(wEvent->scenePos());
