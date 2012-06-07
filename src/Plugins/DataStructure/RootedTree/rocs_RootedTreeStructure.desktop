@@ -14,6 +14,7 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-Rocs-DataStructureIdentifier=RootedTree
 Name=Rooted Tree
+Name[da]=Træ med rod
 Name[et]=Juurega puu
 Name[hu]=Gyökeres fa
 Name[it]=Albero con radice
