@@ -64,41 +64,20 @@ QString IncludeManager::include(const QString& script, const QString& actualPath
         } else {
             _actualDir = QDir(); //No path in list? use application path!
         }
-
     }
     QStringList lines = script.split('\n');
     for (int i = 0; i < lines.count(); ++i) {
-        if (lines[i].indexOf("//") != -1) {
-            /*lines[i] = */
-            lines[i].truncate(lines[i].indexOf("//"));//Ignores after '//'
-        }
-        if (inComment) {
-            if ((pos = lines[i].indexOf("*/")) != -1) {
-                lines[i].remove(0, pos + 2);
-                inComment = false;
-            } else {
-                lines.removeAt(i);
-                --i;
-                continue;
-            }
-        }
-        while ((pos = lines[i].indexOf("/*")) != -1) {
-            int pos2;
-            if ((pos2 = lines[i].indexOf("*/", pos + 2)) != -1) {
-                lines[i].remove(pos, pos2 - pos + 2);
-            } else {
-                lines[i].remove(pos, lines[i].count());
 
-                inComment = true;
-            }
+        if ((pos = lines[i].indexOf("/*")) != -1) { // entering multi line comment
+            inComment = true;
         }
-        if (lines[i].isEmpty()) {
-            lines.removeAt(i);
-            --i;
-            continue;
+        if (inComment && (pos = lines[i].indexOf("*/")) != -1) { // leaving multi line comment
+            lines[i].remove(0, pos + 2);
+            inComment = false;
         }
+        
         QRegExp reg("^\\s*include\\s*\\(\\s*.*.js\\s*\\)");
-        if (lines[i].indexOf(reg) != -1) {
+        if (!inComment && lines[i].indexOf(reg) != -1) {
             QString ret = processInclude(reg.cap());
             lines[i].replace(reg.cap(), ret);
         }
