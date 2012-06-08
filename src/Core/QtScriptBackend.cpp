@@ -107,7 +107,9 @@ void QtScriptBackend::execute()
         emit sendDebug("<b style=\"color: red\">" + error + "</b>");
         emit sendDebug("<b style=\"color: red\">" + _engine->uncaughtExceptionBacktrace().join("\n") + "</b>");
     }
-    _engine->popContext();
+    if (_engine) {
+        _engine->popContext();
+    }
     emit finished();
 }
 
