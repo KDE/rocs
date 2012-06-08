@@ -36,8 +36,6 @@ private slots:
     void doublePathInsert();
 
     void findInclude();
-
-    void ignoreComments();
 };
 
 #endif // TESTINCLUDEMANAGER_H
