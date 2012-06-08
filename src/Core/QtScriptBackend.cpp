@@ -57,7 +57,9 @@ static QScriptValue include_script(QScriptContext *context, QScriptEngine* /*eng
 
 void QtScriptBackend::stop()
 {
-    if (!_engine) return;
+    if (!_engine) {
+        return;
+    }
 
     // abort possibly running execution
     if (_engine->isEvaluating()) {
@@ -79,9 +81,9 @@ void QtScriptBackend::stop()
 
 void QtScriptBackend::execute()
 {
-//     stop();
-    if (_engine) {
-//         delete _engine;
+    if (!_engine) {
+        _engine = new QScriptEngine(this);
+        emit engineCreated(_engine);
     }
 
     if (_engine->isEvaluating()) {
