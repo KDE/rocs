@@ -1,8 +1,49 @@
-v 2.0
+The Rocs Changelog
+==================
 
-Support for more than just one script open at a time 
-Redone the Graphcis to use SVG, in all it’s scalable smoothness. 
-Reworked the internal libs so they are more fast, secure and failproof. 
-Finished the initial implementation of dinamic properties 
-Initial Plugin Support 
-lots of bugfixes and code cleanup 
+Rocs 1.7 (KDE SC 4.9)
+--------
+* New data and pointer types.
+* Data Structure Plugins:
+  - New Rooted Tree Plugin
+* New project support.
+* Algorithm Execution:
+  - New debug execution mode.
+  - New stepped execution mode.
+
+Rocs 1.6.0 (KDE SC 4.8)
+--------
+* UI cleanup: script editor next to script output.
+* Visual Graph Editor: Context menus.
+* New Plugins:
+  - Generae Graphs
+  - Assign Values
+
+Rocs in KDE SC 4.7
+--------
+* Finished the Graph API.
+* Using GraphicsView for the Visual Graph Editor.
+* Ported to KDE4.
+
+Rocs in KDE SC 4.6
+--------
+* Data Structure Plugin System
+  - Graph Plugin
+  - List Plugin
+* Graph Structure Imports/Exports
+  - GraphViz
+  - GML
+  - TXT
+
+Rocs in KDE SC 4.5
+--------
+* Themeable node graphics.
+* Dialog cleanups.
+* Support for multi script files.
+* New Threading Support.
+* Plugin support in C++ and JavaScript.
+* Dynamic Properties redone.
+
+Rocs 1.0 (KDE SC 4.4)
+--------
+* Rocs joins KDE Edu.
