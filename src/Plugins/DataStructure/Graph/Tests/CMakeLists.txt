@@ -9,6 +9,7 @@ set (TestGraphStructure_SRCS
 kde4_add_executable(TestGraphStructure ${TestGraphStructure_SRCS} )
 target_link_libraries( TestGraphStructure
     rocslib
+    rocs_GraphStructure
     ${KDE4_KROSSUI_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTTEST_LIBRARY}

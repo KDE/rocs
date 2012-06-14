@@ -182,6 +182,19 @@ public:
     */
     virtual void cleanUpBeforeConvert() { }
 
+    /**
+     * Gives a map with plugin specific properties of the data structure.
+     * \return map keys are property names, values are property values.
+     */
+    virtual QMap<QString,QString> pluginProperties() const;
+
+    /**
+     * Set plugin specific properties of data structure.
+     * \param identifier is the unique identifier for this property
+     * \param value is the to be set value for the property
+     */
+    virtual void setPluginProperty(QString /*identifier*/, QString /*property*/) { }
+
 public slots:
     virtual DataPtr addData(QString name, int dataType = 0);
     virtual DataList addDataList(DataList dataList, int dataType = 0);

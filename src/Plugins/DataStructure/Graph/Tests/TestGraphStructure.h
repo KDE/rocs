@@ -40,6 +40,7 @@ private slots:
     void createSimpleGraph();
     void dataTypesTest();
     void pointerTypesTest();
+    void serializeUnserializePluginExtraProperties();
 
 private:
     Document* _document;

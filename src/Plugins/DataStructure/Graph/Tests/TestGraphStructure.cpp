@@ -19,6 +19,7 @@
 
 #include "TestGraphStructure.h"
 #include "DataStructure.h"
+#include "../GraphStructure.h"
 #include "Data.h"
 #include "Pointer.h"
 #include "KrossBackend.h"
@@ -215,6 +216,35 @@ void TestGraphStructure::pointerTypesTest()
     ds->document()->removePointerType(type1);
     QVERIFY(dataList[2]->adjacent_data().size() == 2);
     QVERIFY(dataList[6]->adjacent_data().size() == 0);
+}
+
+void TestGraphStructure::serializeUnserializePluginExtraProperties()
+{
+    DocumentManager::self()->addDocument(new Document("testSerialization"));
+    Document* document = DocumentManager::self()->activeDocument();
+    QMap<QString, DataPtr> dataList;
+
+    // Creates a simple Graph with 5 data elements and connect them with pointers.
+    DataStructurePtr ds = document->activeDataStructure();
+    ds->setProperty("name", "Graph1");
+    boost::static_pointer_cast<Rocs::GraphStructure>(ds)->setGraphType(Rocs::GraphStructure::MULTIGRAPH_UNDIRECTED);
+
+    // serialize into file "serializetest.graph"
+    DocumentManager::self()->activeDocument()->saveAs("graphserializetest");
+    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    Document* testDoc = new Document("testDoc");
+
+    //unserialize and test properties
+    DocumentManager::self()->addDocument(testDoc);
+    DocumentManager::self()->changeDocument(testDoc);
+    DocumentManager::self()->activeDocument()->loadFromInternalFormat(KUrl::fromLocalFile("graphserializetest.graph"));
+
+    // compare graph type
+    QVERIFY2(DocumentManager::self()->activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
+    ds = DocumentManager::self()->activeDocument()->dataStructures().at(0);
+    Rocs::GraphStructure::GRAPH_TYPE graphType = boost::static_pointer_cast<Rocs::GraphStructure>(ds)->graphType();
+    QVERIFY2(graphType == Rocs::GraphStructure::MULTIGRAPH_UNDIRECTED, "ERROR: graph type not loaded correctly");
+
 }
 
 QTEST_KDEMAIN_CORE(TestGraphStructure)

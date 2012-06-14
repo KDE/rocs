@@ -726,3 +726,8 @@ void DataStructure::setEngine(QScriptEngine *engine)
         d->_engine->globalObject().setProperty(g->name(), array);
     }
 }
+
+QMap<QString, QString> DataStructure::pluginProperties() const
+{
+    return QMap<QString,QString>();
+}

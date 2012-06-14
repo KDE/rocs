@@ -80,6 +80,20 @@ public:
     GRAPH_TYPE graphType() const;
 
     /**
+     * Gives a map with plugin specific properties of the data structure.
+     * Implementation of virtual method \see DataStructure::pluginProperties()
+     * \return map keys are property names, values are property values.
+     */
+    QMap<QString, QString> pluginProperties() const;
+
+    /**
+     * Set plugin specific properties of data structure.
+     * \param identifier is the unique identifier for this property
+     * \param value is the to be set value for the property
+     */
+    void setPluginProperty(QString identifier, QString property);
+
+    /**
      * Computes the Dijkstra's shortest path algorithm to compute
      * all shortest path distances from \p from. Note: this shortest path
      * algorithm works only for graphs with all edges values non-negative.
@@ -90,7 +104,7 @@ public:
      * \return list is map with keys = target elements, values = path to target
      */
     QMap<DataPtr,PointerList> dijkstraShortestPaths(DataPtr from);
-    
+
 public slots:
     /**
      * Setter for graph type. No conversations are performed.
@@ -159,7 +173,7 @@ public slots:
     /**
      * Computes the Dijkstra's shortest path algorithm to compute
      * all shortest path distances from \p from. If edge has value 0, the edge value
-     * is set to 1. Note: this shortest path algorithm works only for graphs with all 
+     * is set to 1. Note: this shortest path algorithm works only for graphs with all
      * edges values non-negative. For undirected graphs reverse edges are add automatically.
      * The algorithm has time complexity O(V log V + E).
      *
@@ -167,7 +181,7 @@ public slots:
      * \return the edge set of the shortest path
      */
     QScriptValue distances(Data* fromRaw);
-    
+
 private:
     GraphStructure::GRAPH_TYPE _type;
 };

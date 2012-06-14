@@ -649,6 +649,12 @@ bool Document::saveAsInternalFormat(const QString& filename)
     int identifier=0;
     while (dataStructure != d->_dataStructures.constEnd()) {
         d->_buffer += QString("[DataStructure %1] \n").arg(identifier++).toUtf8();
+        QMap<QString, QString> properties = (*dataStructure)->pluginProperties();
+        QMap<QString, QString>::const_iterator propertyIter = properties.constBegin();
+        while (propertyIter != properties.constEnd()) {
+            d->_buffer += QString("X-plugin-%1 : %2").arg(propertyIter.key()).arg(propertyIter.value()) % QChar('\n');
+            ++propertyIter;
+        }
 
         savePropertiesInternalFormat(dataStructure->get());
 
@@ -767,6 +773,13 @@ void Document::loadFromInternalFormat(const KUrl& fileUrl)
             tmpDataStructure->setName(gName.toAscii());
             d->_dataStructures.append(tmpDataStructure);
             tmpObject = tmpDataStructure.get();
+        }
+
+        // plugin specific settings for data structure
+        else if (str.startsWith(QLatin1String("X-plugin-")) && tmpObject && dynamic_cast<DataStructure*>(tmpObject)) {
+            QString identifier = str.section(':', 0, 0).trimmed().remove("X-plugin-");
+            QString property = str.section(':', 1, 1).trimmed();
+            dynamic_cast<DataStructure*>(tmpObject)->getDataStructure()->setPluginProperty(identifier, property);
         }
 
         else if (str.startsWith(QLatin1String("[DataType"))) {

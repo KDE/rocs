@@ -268,7 +268,7 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
             }
             predecessor = p[predecessor];
         } while (p[predecessor] != predecessor);
-        
+
         shortestPaths.insert((*toIter), path);
         ++toIter;
     }
@@ -280,10 +280,7 @@ void Rocs::GraphStructure::setGraphType(int type)
     if (_type == type) {
         return;
     }
-    if (dataList().count() == 0) {
-        return;
-    }
-    if (((_type  == MULTIGRAPH_UNDIRECTED || _type==MULTIGRAPH_DIRECTED) && type != _type)
+    if (((_type == MULTIGRAPH_UNDIRECTED || _type == MULTIGRAPH_DIRECTED) && type != _type)
             || (_type == DIRECTED && type == UNDIRECTED)) {
         if (KMessageBox::warningContinueCancel(0, i18n("This action will probably remove some edges. Do you want to continue?")) != KMessageBox::Continue) {
             return;
@@ -436,4 +433,21 @@ DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
                                      );
     n->setName(name);
     return addData(n, dataType);
+}
+
+QMap<QString, QString> Rocs::GraphStructure::pluginProperties() const
+{
+    QMap<QString,QString> properties = QMap<QString,QString>();
+    properties.insert("type", QString("%1").arg(_type));
+    return properties;
+}
+
+void Rocs::GraphStructure::setPluginProperty(QString identifier, QString property)
+{
+    if (identifier.startsWith(QLatin1String("type"))) {
+        setGraphType(property.toInt());
+    }
+    else {
+        kDebug() << "Skipping unknown graph structure property: " << identifier << " / " << property;
+    }
 }
