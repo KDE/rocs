@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -14,32 +14,29 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
-#ifndef LISTNODE_H
-#define LISTNODE_H
+#ifndef TESTLINKEDLISTSTRUCTURE_H
+#define TESTLINKEDLISTSTRUCTURE_H
 
-#include <Data.h>
-#include <boost/shared_ptr.hpp>
+#include "Rocs_Typedefs.h"
 
+#include <QObject>
+#include <QVariant>
 
-class ROCSLIB_EXPORT ListNode : public Data
+class Document;
+
+class TestLinkedListStructure : public QObject
 {
     Q_OBJECT
 public:
-    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
-    ListNode(DataStructurePtr parent, int uniqueIdentifier, int dataType);
-    ~ListNode();
+    TestLinkedListStructure();
 
-    /**
-     * Return target of out-pointer if exactly one outgoing pointer exists, otherwise returns empty node.
-     * \return next node
-     */
-    boost::shared_ptr<ListNode> next() const;
+private slots:
+    void listModificationTest();
 
-public slots:
-    QScriptValue front();
-    void pointTo(boost::shared_ptr<ListNode> to);
+private:
+    Document* _document;
 };
 
-#endif // LISTNODE_H
+#endif

@@ -26,7 +26,7 @@
 class ListNode;
 namespace Rocs
 {
-class ListStructure : public DataStructure
+class ROCSLIB_EXPORT ListStructure : public DataStructure
 {
     Q_OBJECT
 public:
