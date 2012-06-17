@@ -19,11 +19,13 @@
 #ifndef LISTNODE_H
 #define LISTNODE_H
 
+#include "rocs_liststructure_export.h"
+
 #include <Data.h>
 #include <boost/shared_ptr.hpp>
 
 
-class ROCSLIB_EXPORT ListNode : public Data
+class ROCS_LISTSTRUCTURE_EXPORT ListNode : public Data
 {
     Q_OBJECT
 public:
