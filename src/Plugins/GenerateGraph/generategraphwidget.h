@@ -25,6 +25,8 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
 
+#define PI_ 3.14159265358979323846
+
 class QGridLayout;
 class Document;
 
@@ -97,7 +99,6 @@ private:
     void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges);
 
     Document* graphDoc_;
-    static const double PI_ = 3.14159265358979323846;
     int selectedGraphType_;
     QGridLayout *gridLayout_;
     QWidget* graphOptionsWidget_;
