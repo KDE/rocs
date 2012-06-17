@@ -38,11 +38,12 @@ add_test(TestDynamicProperties TestDynamicProperties)
 
 
 # Include Manager
-set( test_IncludeManager_SRC TestIncludeManager.cpp ../Scripts/IncludeManager.cpp)
+set( test_IncludeManager_SRC TestIncludeManager.cpp)
 set(rocs_KCFGS ../settings.kcfgc)
 kde4_add_kcfg_files(rocs_Settings_SRCS_TEST ${rocs_KCFGS} )
 kde4_add_executable( TestIncludeManager ${test_IncludeManager_SRC} ${rocs_Settings_SRCS_TEST})
 target_link_libraries( TestIncludeManager
+    rocslib
     # ${KDE4_KROSSUI_LIBS}
     ${QT_QTTEST_LIBRARY}
     ${KDE4_KDECORE_LIBS}
