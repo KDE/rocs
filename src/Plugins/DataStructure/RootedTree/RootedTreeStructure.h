@@ -24,7 +24,7 @@
 
 class RootedTreeNode;
 
-class ROCSLIB_EXPORT RootedTreeStructure : public DataStructure {
+class RootedTreeStructure : public DataStructure {
     Q_OBJECT
 
     Q_PROPERTY(bool ShowAllPointers READ isShowingAllPointers WRITE setShowAllPointers NOTIFY showPointersChanged)

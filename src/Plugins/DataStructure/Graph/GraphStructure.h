@@ -21,11 +21,12 @@
 #ifndef GRAPHSTRUCTURE_H
 #define GRAPHSTRUCTURE_H
 
+#include "rocs_graphstructure_export.h"
 #include "DataStructure.h"
 
 namespace Rocs
 {
-class ROCSLIB_EXPORT GraphStructure : public DataStructure
+class ROCS_GRAPHSTRUCTURE_EXPORT GraphStructure : public DataStructure
 {
     Q_OBJECT
 public:
