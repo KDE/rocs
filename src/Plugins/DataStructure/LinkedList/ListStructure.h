@@ -20,13 +20,14 @@
 #ifndef LISTSTRUCTURE_H
 #define LISTSTRUCTURE_H
 
+#include "rocs_liststructure_export.h"
 #include "DataStructure.h"
 #include <boost/shared_ptr.hpp>
 
 class ListNode;
 namespace Rocs
 {
-class ROCSLIB_EXPORT ListStructure : public DataStructure
+class ROCS_LISTSTRUCTURE_EXPORT ListStructure : public DataStructure
 {
     Q_OBJECT
 public:
