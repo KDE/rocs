@@ -358,11 +358,13 @@ void MainWindow::setupActions()
     _addDataActionMenu->setIconText(i18n("Add Data"));
     _addDataActionMenu->setToolTip( i18n("Add new data element") );
     _addDataActionMenu->setDelayed(true);
+    _addDataActionMenu->setCheckable(true);
 
     _addPointerActionMenu = new KActionMenu(KIcon("rocsaddedge"), i18n("Add Connection"), this);
     _addPointerActionMenu->setIconText(i18n("Add Connection"));
     _addPointerActionMenu->setToolTip( i18n("Add a new connection between two data elements of selected type") );
     _addPointerActionMenu->setDelayed(true);
+    _addPointerActionMenu->setCheckable(true);
 
     _selectMoveAction = new SelectMoveHandAction(gc, this);
     DeleteHandAction* deleteAction = new DeleteHandAction(gc, this);
