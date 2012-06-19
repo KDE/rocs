@@ -69,7 +69,7 @@ target_link_libraries( TestLoadSave
 add_test(TestLoadSave TestLoadSave)
 
 
-#Data structure Plugins
+# test data structure plugin interface
 set( test_Plugins_SRC TestPlugins.cpp)
 kde4_add_executable( TestPlugins ${test_Plugins_SRC})
 target_link_libraries( TestPlugins
@@ -80,3 +80,16 @@ target_link_libraries( TestPlugins
         ${KDE4_KIO_LIBS}
 )
 add_test(TestPlugins TestPlugins)
+
+
+# test script engine
+set( test_ScriptEngine_SRC TestScriptEngine.cpp)
+kde4_add_executable( TestScriptEngine ${test_ScriptEngine_SRC})
+target_link_libraries( TestScriptEngine
+        rocslib
+        ${QT_QTTEST_LIBRARY}
+        ${KDE4_KDECORE_LIBS}
+        ${QT_QTSCRIPT_LIBRARY}
+        ${KDE4_KIO_LIBS}
+)
+add_test(TestScriptEngine TestScriptEngine)
