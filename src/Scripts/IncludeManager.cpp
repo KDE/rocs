@@ -72,7 +72,6 @@ QString IncludeManager::include(const QString& script, const QString& actualPath
             inComment = true;
         }
         if (inComment && (pos = lines[i].indexOf("*/")) != -1) { // leaving multi line comment
-            lines[i].remove(0, pos + 2);
             inComment = false;
         }
         
@@ -85,7 +84,6 @@ QString IncludeManager::include(const QString& script, const QString& actualPath
     }
     QString str = lines.join("\n");
     return str;
-
 }
 
 QString IncludeManager::processInclude(QString arg1)

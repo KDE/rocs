@@ -75,21 +75,39 @@ void TestScriptEngine::ignoreComments()
     Document* graphDoc = DocumentManager::self()->activeDocument();
     QtScriptBackend *engine = graphDoc->engineBackend();
 
+    QString test;
+    QScriptValue result;
+    
     // start engine
-    QScriptValue result = engine->engine()->evaluate(QString("// broken"));
-    QVERIFY2(!result.toString().contains("Error"), "Comment // was not ignored, script with syntax error was executed.");
+    test = QString("// broken");
+    result = engine->engine()->evaluate(test);
+    QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");
+    result = engine->engine()->evaluate(engine->includeManager().include(test));
+    QVERIFY2(!result.toString().contains("Error"), "Comment in file with processed includes was not ignored, script with syntax error was executed.");
+       
+    test = QString("//broken");
+    result = engine->engine()->evaluate(test);
+    QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");
+    result = engine->engine()->evaluate(engine->includeManager().include(test));
+    QVERIFY2(!result.toString().contains("Error"), "Comment in file with processed includes was not ignored, script with syntax error was executed.");
 
-    result = engine->engine()->evaluate(QString("//broken"));
-    QVERIFY2(!result.toString().contains("Error"), "Comment // was not ignored, script with syntax error was executed.");
+    test = QString("/* broken */");
+    result = engine->engine()->evaluate(test);
+    QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");
+    result = engine->engine()->evaluate(engine->includeManager().include(test));
+    QVERIFY2(!result.toString().contains("Error"), "Comment in file with processed includes was not ignored, script with syntax error was executed.");
+    
+    test = QString("/*\n broken\n */");
+    result = engine->engine()->evaluate(test);
+    QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");
+    result = engine->engine()->evaluate(engine->includeManager().include(test));
+    QVERIFY2(!result.toString().contains("Error"), "Comment in file with processed includes was not ignored, script with syntax error was executed.");
 
-    result = engine->engine()->evaluate(QString("/* broken */"));
-    QVERIFY2(!result.toString().contains("Error"), "Comment /* */ was not ignored, script with syntax error was executed.");
-
-    result = engine->engine()->evaluate(QString("var i=1; \n /* \n broken\n */ var j=2;"));
-    QVERIFY2(!result.toString().contains("Error"), "Multiline comment was not ignored, script with syntax error was executed.");
-
-    result = engine->engine()->evaluate(QString("var i=1; \n /* \n * broken\n */ var j=2;"));
-    QVERIFY2(!result.toString().contains("Error"), "Multiline comment was not ignored, script with syntax error was executed.");
+    test = QString("/**\n * broken\n */");
+    result = engine->engine()->evaluate(test);
+    QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");
+    result = engine->engine()->evaluate(engine->includeManager().include(test));
+    QVERIFY2(!result.toString().contains("Error"), "Comment in file with processed includes was not ignored, script with syntax error was executed.");
 }
 
 QTEST_KDEMAIN_CORE(TestScriptEngine)
