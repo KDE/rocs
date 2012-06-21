@@ -744,9 +744,12 @@ void MainWindow::saveProject()
         QString file = KFileDialog::getSaveFileName(QString(),
                        i18n("*.rocs|Rocs project files\n*|All files"),
                        this,
-                       i18n("Save Project")
-                                                   );
+                       i18n("Save Project"));
+
         // we need to set project directory first to allow correcte relative paths
+        _currentProject->setProjectFile(KUrl::fromLocalFile(file));
+
+        // save files and finally write project to file
         saveAllGraphs();
         saveScripts();
         _currentProject->writeProjectFile(file);

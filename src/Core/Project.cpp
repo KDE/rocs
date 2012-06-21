@@ -159,6 +159,13 @@ const KUrl& Project::projectFile() const
 }
 
 
+void Project::setProjectFile(KUrl fileUrl)
+{
+    d->_projectFile = fileUrl;
+    d->_temporary = false;
+}
+
+
 int Project::addCodeFile(KUrl file)
 {
     QList<int> keys = d->_codeFileGroup.uniqueKeys();

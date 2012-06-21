@@ -81,6 +81,12 @@ public:
     const KUrl& projectFile() const;
 
     /**
+     * Set path of project to \p fileUrl and set project to being non-temporary.
+     * \param fileUrl is the designated path to the project
+     */
+    void setProjectFile(KUrl fileUrl);
+
+    /**
      * Set project name.
      * \param name is the new name of the project
      */
