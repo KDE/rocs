@@ -998,8 +998,6 @@ void MainWindow::importProject()
 {
     // save current project
     saveIfChanged();
-    _codeEditor->closeAllScripts();
-    DocumentManager::self()->closeAllDocuments();
 
     // get import information
     QString importFile = KFileDialog::getOpenFileName(_currentProject->projectDirectory(),
@@ -1007,18 +1005,27 @@ void MainWindow::importProject()
                    this,
                    i18n("Project Archive to Import"));
 
+    if (importFile.isEmpty()) {
+        kDebug() << "No file specified for import: aborting.";
+        return;
+    }
+
     QString newLocation = KFileDialog::getExistingDirectory(_currentProject->projectDirectory(),
                    this,
                    i18n("Select Project Directory for Import"));
 
-    if (importFile.isEmpty() || newLocation.isEmpty()) {
-        kDebug() << "Filename is empty and no script file was created.";
+    if (newLocation.isEmpty()) {
+        kDebug() << "No storage directory specified for import: aborting.";
         return;
     }
-    // delete old project
+
+    // import project specified: close everything and delete old project
+    _codeEditor->closeAllScripts();
+    DocumentManager::self()->closeAllDocuments();
     delete _currentProject;
 
-    // extract and open project
+    // extract and open new project
+    // at the end of this _currentProject must exist
     _currentProject = new Project(KUrl::fromLocalFile(importFile),KUrl::fromPath(newLocation.append('/')));
     foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
         DocumentManager::self()->openDocument(graphFile);
