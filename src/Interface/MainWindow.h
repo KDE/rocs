@@ -195,7 +195,13 @@ private slots:
 
     void importFile();
     void exportFile();
+
+    /**
+     * Import a new project from internal Rocs project file. This method guarantees that
+     * when finishing a project, a graph document, and a script file exist.
+     */
     void importProject();
+
     void exportProject();
     void setupToolsPluginsAction();
 
