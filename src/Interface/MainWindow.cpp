@@ -765,14 +765,25 @@ void MainWindow::saveProject()
 void MainWindow::openProject()
 {
     saveIfChanged();
-    _codeEditor->closeAllScripts();
-    DocumentManager::self()->closeAllDocuments();
 
-    delete _currentProject;
+    // show open dialog
     QString file = KFileDialog::getOpenFileName(QString(),
                    i18n("*.rocs|Rocs project files\n*|All files"),
                    this,
                    i18n("Open Project Files"));
+
+    if (file.isEmpty()) {
+        kDebug() << "No project file specified to open: aborting.";
+        return;
+    }
+
+    // import project specified: close everything and delete old project
+    _codeEditor->closeAllScripts();
+    DocumentManager::self()->closeAllDocuments();
+    delete _currentProject;
+
+    // extract and open new project
+    // at the end of this _currentProject must exist
     _currentProject = new Project(KUrl::fromLocalFile(file));
     foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
         DocumentManager::self()->openDocument(graphFile);
