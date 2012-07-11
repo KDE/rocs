@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -21,6 +22,21 @@
 
 #include <QStringList>
 #include <QObject>
+#include <Document.h>
+#include <KUrl>
+
+class FilePluginInterfacePrivate
+{
+public:
+    FilePluginInterfacePrivate() {
+        lastError = FilePluginInterface::None;
+    }
+
+    FilePluginInterface::Error lastError;
+    Document* graphDocument;
+    KUrl file;
+};
+
 
 FilePluginInterface::FilePluginInterface(const KComponentData& /*instance*/, QObject* parent):
     QObject(parent)
@@ -34,7 +50,32 @@ FilePluginInterface::~FilePluginInterface()
 
 }
 
-const QString FilePluginInterface::lastError()
+
+bool FilePluginInterface::hasError() const
 {
-    return QString("Default Error.");
+    return d->lastError != FilePluginInterface::None;
+}
+
+
+FilePluginInterface::Error FilePluginInterface::error() const
+{
+    return d->lastError;
+}
+
+
+bool FilePluginInterface::isGraphDocument() const
+{
+    return (d->graphDocument && d->graphDocument->dataStructures().count() > 0);
+}
+
+
+Document* FilePluginInterface::graphDocument()
+{
+    return d->graphDocument;
+}
+
+
+void FilePluginInterface::setFile(const KUrl& file)
+{
+    d->file = file;
 }

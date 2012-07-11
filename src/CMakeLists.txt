@@ -16,6 +16,7 @@ include_directories(
     GraphicsItem/
     Interface/
     Interface/VisualEditor
+    LoadSave/
     Models/
     Plugins/
     Scripts/
@@ -43,7 +44,8 @@ set( rocs_core_SRCS
 
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
-    Plugins/FilePluginInterface.cpp
+
+    LoadSave/FilePluginInterface.cpp
 
     GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
@@ -78,7 +80,7 @@ set( rocslib_LIB_HDRS
 
     Plugins/FilePluginInterface.h
     Plugins/PluginManager.h
-    Plugins/ToolsPluginInterface.h
+    LoadSave/ToolsPluginInterface.h
 
     GraphicsItem/DataItem.h
     GraphicsItem/PointerItem.h

@@ -20,7 +20,7 @@
 #include "ImporterExporterManager.h"
 #include <KFileDialog>
 #include <KLocalizedString>
-#include "Plugins/FilePluginInterface.h"
+#include "LoadSave/FilePluginInterface.h"
 #include <KDebug>
 #include <PluginManager.h>
 #include <KPushButton>
@@ -65,14 +65,16 @@ bool ImporterExporterManager::exportFile(Document * doc) const
         file.append(ext);
     }
 
-    FilePluginInterface * p = PluginManager::instance()->filePluginsByExtension(ext);
-    if (!p) {
+    FilePluginInterface * filePlugin = PluginManager::instance()->filePluginsByExtension(ext);
+    if (!filePlugin) {
         kDebug() << "Cannot export file: " << file;
         return false;
     }
 
-    if (!p->writeFile(*doc, file)) {
-        kDebug() << "Error writing file: " << p->lastError();
+    filePlugin->setFile(KUrl::fromLocalFile(file));
+    filePlugin->writeFile(*doc);
+    if (filePlugin->hasError()) {
+        kDebug() << "Error writing file: " << filePlugin->errorString();
         return false;
     }
     kDebug() << "File Exported!" << file;
@@ -101,26 +103,29 @@ Document* ImporterExporterManager::importFile()
     }
 
     int index = fileName.lastIndexOf('.');
-    FilePluginInterface * f = 0;
+    FilePluginInterface * filePlugin = 0;
     if (index == -1) {
         kDebug() << "Cannot open file without extension.";
         return 0;
     }
 
     kDebug() << fileName.right(fileName.count() - index);
-    f = PluginManager::instance()->filePluginsByExtension(fileName.right(fileName.count() - index));
+    filePlugin = PluginManager::instance()->filePluginsByExtension(fileName.right(fileName.count() - index));
 
-    if (!f) {
+    if (!filePlugin) {
         kDebug() <<  "Cannot handle extension " <<  fileName.right(3);
         return 0;
     }
 
-    Document * gd = f->readFile(fileName);
-    if (!gd) {
-        kDebug() << "Error loading file" << fileName << f->lastError();
+    filePlugin->setFile(fileName);
+    filePlugin->readFile();
+    if (!filePlugin->hasError()) {
+        kDebug() << "Error loading file" << fileName << filePlugin->errorString();
+        return 0;
     }
-    _scriptToRun = f->scriptToRun();
-    return gd;
+    else {
+        return filePlugin->graphDocument();
+    }
 }
 
 void ImporterExporterManager::dialogExec()
