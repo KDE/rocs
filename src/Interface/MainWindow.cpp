@@ -236,7 +236,7 @@ void MainWindow::uploadScript()
     dialog->setUploadFile(local);
 
     dialog->setUploadName(_codeEditor->document()->documentName());
-    dialog->setDescription(i18n("Added your description here."));
+    dialog->setDescription(i18n("Add your description here."));
 
     dialog->exec();
 
