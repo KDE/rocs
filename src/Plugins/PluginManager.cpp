@@ -20,7 +20,7 @@
 #include "PluginManager.h"
 
 #include "ToolsPluginInterface.h"
-#include "FilePluginInterface.h"
+#include "GraphFilePluginInterface.h"
 
 #include <KServiceTypeTrader>
 #include <KPluginInfo>
@@ -51,7 +51,7 @@ public:
     KPluginList filePluginsInfo;
 
     QMap<KPluginInfo,  ToolsPluginInterface*> toolsPluginsMap;
-    QMap<KPluginInfo,  FilePluginInterface*> filePluginsMap;
+    QMap<KPluginInfo,  GraphFilePluginInterface*> filePluginsMap;
 
 };
 
@@ -146,7 +146,7 @@ QList< ToolsPluginInterface* > PluginManager::toolPlugins()
     return value;
 }
 
-QList< FilePluginInterface* > PluginManager::filePlugins() const
+QList< GraphFilePluginInterface* > PluginManager::filePlugins() const
 {
     qDebug() << "PluginManager::filePlugins() --- count = " << _filePlugins.count();
     return _filePlugins;
@@ -156,7 +156,7 @@ void PluginManager::loadFilePlugins()
 {
     qDebug() << "PluginManager::loadFilePlugins()";
 
-    foreach(FilePluginInterface * f, _filePlugins) {
+    foreach(GraphFilePluginInterface * f, _filePlugins) {
         delete f;
     }
     _filePlugins.clear();
@@ -175,7 +175,7 @@ void PluginManager::loadFilePlugins()
             continue;
         }
 
-        FilePluginInterface *plugin = factory->create<FilePluginInterface>(this);
+        GraphFilePluginInterface *plugin = factory->create<GraphFilePluginInterface>(this);
 
         if (plugin) {
             qDebug() << "Loaded plugin: " << service->name();
@@ -192,9 +192,9 @@ KPluginInfo pluginInfo(const ToolsPluginInterface * /*plugin*/)
     return KPluginInfo();
 }
 
-FilePluginInterface *  PluginManager::filePluginsByExtension(QString ext)
+GraphFilePluginInterface* PluginManager::filePluginsByExtension(QString ext)
 {
-    foreach(FilePluginInterface * p,  _filePlugins) {
+    foreach(GraphFilePluginInterface * p,  _filePlugins) {
         if (p->extensions().join(";").contains(ext, Qt::CaseInsensitive)) {
             return p;
         }

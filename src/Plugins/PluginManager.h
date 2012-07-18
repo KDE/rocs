@@ -22,7 +22,7 @@
 #include <QList>
 
 #include "ToolsPluginInterface.h"
-#include "FilePluginInterface.h"
+#include "GraphFilePluginInterface.h"
 #include "rocslib_export.h"
 
 class KPluginInfo;
@@ -32,7 +32,7 @@ class ROCSLIB_EXPORT PluginManager: public QObject
     Q_OBJECT
 private:
     //QList<ToolsPluginInterface*> _toolPlugins;
-    QList<FilePluginInterface*> _filePlugins;
+    QList<GraphFilePluginInterface*> _filePlugins;
 
     PluginManager();
 
@@ -55,17 +55,17 @@ public:
     void loadFilePlugins();
 
     QList < ToolsPluginInterface*> toolPlugins();
-    QList < FilePluginInterface*> filePlugins() const;
+    QList < GraphFilePluginInterface*> filePlugins() const;
 
     KPluginInfo pluginInfo(ToolsPluginInterface * plugin);
 
-    KPluginInfo pluginInfo(FilePluginInterface * plugin);
+    KPluginInfo pluginInfo(GraphFilePluginInterface * plugin);
 
     /** Returns plugin that can handle extension \p ext
     \param ext File extension (like 'TXT', 'cpp', '.Cpp', '*.js')
     \return File plugin to handle files with that extension or 0 if there is no plugin to handle it.
     */
-    FilePluginInterface *  filePluginsByExtension(QString ext);
+    GraphFilePluginInterface *  filePluginsByExtension(QString ext);
 
 };
 

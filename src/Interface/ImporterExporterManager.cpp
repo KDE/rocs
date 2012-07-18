@@ -20,7 +20,7 @@
 #include "ImporterExporterManager.h"
 #include <KFileDialog>
 #include <KLocalizedString>
-#include "LoadSave/FilePluginInterface.h"
+#include "LoadSave/GraphFilePluginInterface.h"
 #include <KDebug>
 #include <PluginManager.h>
 #include <KPushButton>
@@ -40,7 +40,7 @@ ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(paren
 bool ImporterExporterManager::exportFile(Document * doc) const
 {
     QString ext;
-    foreach(FilePluginInterface * f, PluginManager::instance()->filePlugins()) {
+    foreach(GraphFilePluginInterface * f, PluginManager::instance()->filePlugins()) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
@@ -65,7 +65,7 @@ bool ImporterExporterManager::exportFile(Document * doc) const
         file.append(ext);
     }
 
-    FilePluginInterface * filePlugin = PluginManager::instance()->filePluginsByExtension(ext);
+    GraphFilePluginInterface * filePlugin = PluginManager::instance()->filePluginsByExtension(ext);
     if (!filePlugin) {
         kDebug() << "Cannot export file: " << file;
         return false;
@@ -85,7 +85,7 @@ Document* ImporterExporterManager::importFile()
 {
     QString ext;
 
-    foreach(FilePluginInterface * f, PluginManager::instance()->filePlugins()) {
+    foreach(GraphFilePluginInterface * f, PluginManager::instance()->filePlugins()) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
@@ -103,7 +103,7 @@ Document* ImporterExporterManager::importFile()
     }
 
     int index = fileName.lastIndexOf('.');
-    FilePluginInterface * filePlugin = 0;
+    GraphFilePluginInterface * filePlugin = 0;
     if (index == -1) {
         kDebug() << "Cannot open file without extension.";
         return 0;

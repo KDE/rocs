@@ -18,64 +18,64 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "FilePluginInterface.h"
+#include "GraphFilePluginInterface.h"
 
 #include <QStringList>
 #include <QObject>
 #include <Document.h>
 #include <KUrl>
 
-class FilePluginInterfacePrivate
+class GraphFilePluginInterfacePrivate
 {
 public:
-    FilePluginInterfacePrivate() {
-        lastError = FilePluginInterface::None;
+    GraphFilePluginInterfacePrivate() {
+        lastError = GraphFilePluginInterface::None;
     }
 
-    FilePluginInterface::Error lastError;
+    GraphFilePluginInterface::Error lastError;
     Document* graphDocument;
     KUrl file;
 };
 
 
-FilePluginInterface::FilePluginInterface(const KComponentData& /*instance*/, QObject* parent):
+GraphFilePluginInterface::GraphFilePluginInterface(const KComponentData& /*instance*/, QObject* parent):
     QObject(parent)
 {
 
 }
 
 
-FilePluginInterface::~FilePluginInterface()
+GraphFilePluginInterface::~GraphFilePluginInterface()
 {
 
 }
 
 
-bool FilePluginInterface::hasError() const
+bool GraphFilePluginInterface::hasError() const
 {
-    return d->lastError != FilePluginInterface::None;
+    return d->lastError != GraphFilePluginInterface::None;
 }
 
 
-FilePluginInterface::Error FilePluginInterface::error() const
+GraphFilePluginInterface::Error GraphFilePluginInterface::error() const
 {
     return d->lastError;
 }
 
 
-bool FilePluginInterface::isGraphDocument() const
+bool GraphFilePluginInterface::isGraphDocument() const
 {
     return (d->graphDocument && d->graphDocument->dataStructures().count() > 0);
 }
 
 
-Document* FilePluginInterface::graphDocument()
+Document* GraphFilePluginInterface::graphDocument()
 {
     return d->graphDocument;
 }
 
 
-void FilePluginInterface::setFile(const KUrl& file)
+void GraphFilePluginInterface::setFile(const KUrl& file)
 {
     d->file = file;
 }

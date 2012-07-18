@@ -45,7 +45,7 @@ set( rocs_core_SRCS
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
 
-    LoadSave/FilePluginInterface.cpp
+    LoadSave/GraphFilePluginInterface.cpp
 
     GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
@@ -78,9 +78,9 @@ set( rocslib_LIB_HDRS
 
     Core/Modifiers/Topology.h
 
-    Plugins/FilePluginInterface.h
+    LoadSave/GraphFilePluginInterface.h
     Plugins/PluginManager.h
-    LoadSave/ToolsPluginInterface.h
+    Plugins/ToolsPluginInterface.h
 
     GraphicsItem/DataItem.h
     GraphicsItem/PointerItem.h
@@ -198,7 +198,7 @@ install( FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
 install( FILES
     Core/RocsDataStructurePlugin.desktop
     Plugins/RocsToolsPlugin.desktop
-    Plugins/RocsFilePlugin.desktop
+    LoadSave/RocsGraphFilePlugin.desktop
     DESTINATION
     ${SERVICETYPES_INSTALL_DIR}
 )

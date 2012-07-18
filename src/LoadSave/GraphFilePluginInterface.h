@@ -18,18 +18,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILEPLUGININTERFACE_H
-#define FILEPLUGININTERFACE_H
+#ifndef GRAPHFILEPLUGININTERFACE_H
+#define GRAPHFILEPLUGININTERFACE_H
 #include <QObject>
 #include "rocslib_export.h"
 
 class KUrl;
 class Document;
-class FilePluginInterfacePrivate;
+class GraphFilePluginInterfacePrivate;
 
 #include <KComponentData>
 
-class ROCSLIB_EXPORT FilePluginInterface: public QObject
+class ROCSLIB_EXPORT GraphFilePluginInterface: public QObject
 {
     Q_OBJECT
 
@@ -39,8 +39,8 @@ public:
         FileIsReadOnly
     };
 
-    FilePluginInterface(const KComponentData &instance, QObject* parent);
-    virtual ~FilePluginInterface();
+    GraphFilePluginInterface(const KComponentData &instance, QObject* parent);
+    virtual ~GraphFilePluginInterface();
 
     void setFile(const KUrl& file);
 
@@ -85,7 +85,7 @@ public:
 
 
 private:
-    FilePluginInterfacePrivate *d;
+    GraphFilePluginInterfacePrivate *d;
 };
 
 #endif // FILEPLUGININTERFACE_H

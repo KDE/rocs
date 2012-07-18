@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=Rocs/FilePlugin
+X-KDE-ServiceType=Rocs/GraphFilePlugin
 X-KDE-Derived=KPluginInfo
 Comment=Rocs File Plugin
 Comment[bs]=Rocs Datoteka dodatka
