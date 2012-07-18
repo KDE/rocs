@@ -98,7 +98,9 @@ DataPtr RootedTreeNode::leftChild() const
 PointerPtr RootedTreeNode::setNodeParent(DataPtr parent) const
 {
     foreach (PointerPtr p, pointers(nodeParent())) {
-        p->remove();
+        if (p->property("TreeEdge").isValid() && p->property("TreeEdge").toInt() == -1){
+            p->remove();
+        }
     }
     if (parent.get()){
         PointerPtr ptr = dataStructure()->addPointer(this->getData(), parent);
