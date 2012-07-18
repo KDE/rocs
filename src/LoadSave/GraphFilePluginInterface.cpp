@@ -51,6 +51,12 @@ GraphFilePluginInterface::~GraphFilePluginInterface()
 }
 
 
+GraphFilePluginInterface::PluginType GraphFilePluginInterface::pluginCapability() const
+{
+    return ImportAndExport;
+}
+
+
 bool GraphFilePluginInterface::hasError() const
 {
     return d->lastError != GraphFilePluginInterface::None;

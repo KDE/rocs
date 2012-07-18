@@ -39,10 +39,24 @@ public:
         FileIsReadOnly
     };
 
+    enum PluginType {
+        ImportOnly,
+        ExportOnly,
+        ImportAndExport
+    };
+
     GraphFilePluginInterface(const KComponentData &instance, QObject* parent);
     virtual ~GraphFilePluginInterface();
 
     void setFile(const KUrl& file);
+
+    /**
+     * Returns \p PluginType to indicate wether the plugin only provides import, only export
+     * or both capabilities. This method should be used to determine in which file dialogs
+     * the plugin shall be included.
+     * \return is by default PluginType::ImportAndExport
+     */
+    virtual PluginType pluginCapability() const;
 
     /**
      * Return true if last read or write operation caused an error.
