@@ -18,17 +18,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PLAINTXTFILEPLUGIN_H
-#define PLAINTXTFILEPLUGIN_H
+#ifndef TGFFILEFORMATPLUGIN_H
+#define TGFFILEFORMATPLUGIN_H
 
 #include "GraphFilePluginInterface.h"
 
-class PlainTXTFilePlugin: public GraphFilePluginInterface
+class TgfFileFormatPlugin: public GraphFilePluginInterface
 {
     Q_OBJECT
 public:
-    explicit PlainTXTFilePlugin(QObject* parent, const QList< QVariant >&);
-    ~PlainTXTFilePlugin();
+
+    explicit TgfFileFormatPlugin(QObject* parent, const QList< QVariant >&);
+    ~TgfFileFormatPlugin();
 
     /**
      * File extensions that are common for this file type.
@@ -48,4 +49,4 @@ public:
     virtual void readFile();
 };
 
-#endif // PLAINTXTFILEPLUGIN_H
+#endif // TGFFILEFORMATPLUGIN_H

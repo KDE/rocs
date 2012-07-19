@@ -40,8 +40,8 @@ using namespace boost;
 
 static const KAboutData aboutdata("rocs_dotFilePlugin", 0, ki18n("Open and Save Graphviz files") , "0.1");
 
-K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin<DotFilePlugin>();)
-K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
+K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<DotFilePlugin>();)
+K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
 
 
 DotFilePlugin::~DotFilePlugin()
@@ -51,7 +51,7 @@ DotFilePlugin::~DotFilePlugin()
 
 
 DotFilePlugin::DotFilePlugin(QObject* parent, const QList< QVariant >&) :
-    FilePluginInterface(FilePLuginFactory::componentData(), parent)
+    FilePluginInterface(FilePluginFactory::componentData(), parent)
 {
 }
 

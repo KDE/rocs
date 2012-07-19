@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "PlainTxtFilePlugin.h"
+#include "TgfFileFormatPlugin.h"
 #include "Document.h"
 #include <KAboutData>
 #include <KGenericFactory>
@@ -29,32 +29,30 @@
 #include <Pointer.h>
 
 
-static const KAboutData aboutdata("rocs_plaintxtplugin", 0, ki18n("Open and Save Plain TXT files") , "0.1");
+static const KAboutData aboutdata("rocs_tgffileformat", 0, ki18n("Open and Save Graph Documents in Trivial Graph Format") , "0.1");
 
-K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< PlainTXTFilePlugin>();)
-K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
+K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<TgfFileFormatPlugin>();)
+K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
 
 
-PlainTXTFilePlugin::~PlainTXTFilePlugin()
+TgfFileFormatPlugin::TgfFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
+    GraphFilePluginInterface(FilePluginFactory::componentData(), parent)
 {
 
 }
 
-PlainTXTFilePlugin::PlainTXTFilePlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
+TgfFileFormatPlugin::~TgfFileFormatPlugin()
 {
-
 }
 
-const QStringList PlainTXTFilePlugin::extensions() const
+const QStringList TgfFileFormatPlugin::extensions() const
 {
-    //TODO explain better
     return QStringList()
-           << i18n("*.txt|Plain TXT Files") + '\n';
+           << i18n("*.tgf|Trivial Graph Format") + '\n';
 }
 
 
-void PlainTXTFilePlugin::readFile()
+void TgfFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document("Untitled");
     //TODO select graph data structure
@@ -94,7 +92,7 @@ void PlainTXTFilePlugin::readFile()
     setError(None);
 }
 
-void PlainTXTFilePlugin::writeFile(Document &graph )
+void TgfFileFormatPlugin::writeFile(Document &graph )
 {
     QFile fileHandle(file().toLocalFile());
     if (fileHandle.open(QFile::WriteOnly | QFile::Text)) {
