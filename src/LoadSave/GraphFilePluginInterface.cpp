@@ -24,6 +24,7 @@
 #include <QObject>
 #include <Document.h>
 #include <KUrl>
+#include <KDebug>
 
 class GraphFilePluginInterfacePrivate
 {
@@ -33,15 +34,16 @@ public:
     }
 
     GraphFilePluginInterface::Error lastError;
+    QString lastErrorString;
     Document* graphDocument;
     KUrl file;
 };
 
 
 GraphFilePluginInterface::GraphFilePluginInterface(const KComponentData& /*instance*/, QObject* parent):
-    QObject(parent)
+    QObject(parent),
+    d(new GraphFilePluginInterfacePrivate)
 {
-
 }
 
 
@@ -69,15 +71,34 @@ GraphFilePluginInterface::Error GraphFilePluginInterface::error() const
 }
 
 
+QString GraphFilePluginInterface::errorString() const
+{
+    return d->lastErrorString;
+}
+
+
+void GraphFilePluginInterface::setError(GraphFilePluginInterface::Error error, QString message)
+{
+    d->lastError = error;
+    d->lastErrorString = message;
+}
+
+
 bool GraphFilePluginInterface::isGraphDocument() const
 {
     return (d->graphDocument && d->graphDocument->dataStructures().count() > 0);
 }
 
 
-Document* GraphFilePluginInterface::graphDocument()
+Document* GraphFilePluginInterface::graphDocument() const
 {
     return d->graphDocument;
+}
+
+
+void GraphFilePluginInterface::setGraphDocument(Document* document)
+{
+    d->graphDocument = document;
 }
 
 
@@ -85,3 +106,10 @@ void GraphFilePluginInterface::setFile(const KUrl& file)
 {
     d->file = file;
 }
+
+
+const KUrl& GraphFilePluginInterface::file() const
+{
+    return d->file;
+}
+

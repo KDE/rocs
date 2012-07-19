@@ -36,7 +36,10 @@ class ROCSLIB_EXPORT GraphFilePluginInterface: public QObject
 public:
     enum Error {
         None,
-        FileIsReadOnly
+        Unknown,
+        FileIsReadOnly,
+        NoGraphFound,
+        CouldNotRecognizeFileFormat
     };
 
     enum PluginType {
@@ -66,12 +69,12 @@ public:
     /**
      * Returns last error
      */
-    virtual Error error() const;
+    Error error() const;
 
     /**
      * Return explenation of last error in human readable text.
      */
-    virtual QString errorString() = 0;
+    QString errorString() const;
 
     /**
      * File extensions that are common for this file type.
@@ -95,10 +98,29 @@ public:
      */
     virtual bool isGraphDocument() const;
 
-    virtual Document* graphDocument();
+    virtual Document* graphDocument() const;
 
+
+protected:
+    /**
+     * Return file that is used for write/read.
+     */
+    const KUrl& file() const;
+
+    /**
+     * Set graph document.
+     */
+    void setGraphDocument(Document* document);
+
+    /**
+     * Set last error.
+     * \param error is type of error, \see GraphFilePluginInterface::Error
+     * \param message is optional description for error
+     */
+    void setError(Error error, QString message=QString());
 
 private:
+
     GraphFilePluginInterfacePrivate *d;
 };
 
