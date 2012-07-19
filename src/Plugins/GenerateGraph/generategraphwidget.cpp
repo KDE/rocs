@@ -134,7 +134,7 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("Mesh Graph"));
+        graph = DocumentManager::self()->activeDocument()->addDataStructure(); //FIXME: in 4.10: new string "MeshXX"
 
     // create mesh of NxN points
     QMap<QPair<int, int>, DataPtr > meshNodes;
@@ -173,7 +173,7 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("Star Graph"));
+        graph = DocumentManager::self()->activeDocument()->addDataStructure(); //FIXME: in 4.10: new string "StarXX"
 
     QList< QPair<QString, QPointF> > starNodes;
     for (int i = 1; i <= numberSatelliteNodes; i++) {
@@ -209,7 +209,7 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("Circle Graph"));
+        graph = DocumentManager::self()->activeDocument()->addDataStructure(); //FIXME: in 4.10: new string "CircleXX"
 
     QList< QPair<QString, QPointF> > circleNodes;
 
