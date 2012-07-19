@@ -265,7 +265,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("RandomGraph"));
+        graph = DocumentManager::self()->activeDocument()->addDataStructure(); //FIXME: in 4.10: new string "RandomXX"
 
     // put nodes at whiteboard as generated
     QMap<int, DataPtr > mapNodes;
@@ -308,7 +308,7 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("RandomGraph"));
+        graph = DocumentManager::self()->activeDocument()->addDataStructure(); //FIXME: in 4.10: new string "RandomXX"
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
     boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
