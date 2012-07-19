@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -21,6 +22,7 @@
 #include "Document.h"
 #include <KAboutData>
 #include <KGenericFactory>
+#include <KUrl>
 #include <QFile>
 #include <DataStructure.h>
 #include <Data.h>
@@ -39,31 +41,33 @@ PlainTXTFilePlugin::~PlainTXTFilePlugin()
 }
 
 PlainTXTFilePlugin::PlainTXTFilePlugin(QObject* parent, const QList< QVariant >&) :
-    FilePluginInterface(FilePLuginFactory::componentData(), parent)
+    GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
 {
 
 }
 
 const QStringList PlainTXTFilePlugin::extensions() const
 {
+    //TODO explain better
     return QStringList()
            << i18n("*.txt|Plain TXT Files") + '\n';
 }
 
 
-Document * PlainTXTFilePlugin::readFile(const QString &fileName)
+void PlainTXTFilePlugin::readFile()
 {
     Document * graphDoc = new Document("Untitled");
+    //TODO select graph data structure
     DataStructurePtr graph = graphDoc->addDataStructure();
     QList < QPair<QString, QString> > edges;
-    QFile f(fileName);
-    if (!f.open(QFile::ReadOnly)) {
-        setError(i18n("Cannot open the file: %1. Error %2", fileName, f.errorString()));
+    QFile fileHandle(file().toLocalFile());
+    if (!fileHandle.open(QFile::ReadOnly)) {
+        setError(CouldNotOpenFile, i18n("Could not open file \"%1\" in read mode: %2", file().toLocalFile(), fileHandle.errorString()));
         delete graphDoc;
-        return 0;
+        return;
     }
-    while (!f.atEnd()) {
-        QStringList list = QString(f.readLine()).trimmed().split(' ', QString::SkipEmptyParts);
+    while (!fileHandle.atEnd()) {
+        QStringList list = QString(fileHandle.readLine()).trimmed().split(' ', QString::SkipEmptyParts);
         switch (list.count()) {
         case 1:
             graph->addData(list.at(0));
@@ -87,14 +91,14 @@ Document * PlainTXTFilePlugin::readFile(const QString &fileName)
         graph->addPointer(edges.at(i).first, edges.at(i).second);
         kDebug() << edges.at(i);
     }
-    return graphDoc;
+    setError(None);
 }
 
-bool PlainTXTFilePlugin::writeFile(Document &graph , const QString &filename)
+void PlainTXTFilePlugin::writeFile(Document &graph )
 {
-    QFile file(filename);
-    if (file.open(QFile::WriteOnly | QFile::Text)) {
-        QTextStream out(&file);
+    QFile fileHandle(file().toLocalFile());
+    if (fileHandle.open(QFile::WriteOnly | QFile::Text)) {
+        QTextStream out(&fileHandle);
         DataStructurePtr g = graph.activeDataStructure();
         if (g) {
             foreach(DataPtr n, g->dataList()) {
@@ -108,21 +112,10 @@ bool PlainTXTFilePlugin::writeFile(Document &graph , const QString &filename)
             foreach(PointerPtr e, g->pointers()) {
                 out << e->from()->name() << " " << e->to()->name() << '\n';
             }
-            return true;
+            setError(None);
+            return;
         }
-        setError(i18n("No active graph in this document."));
+        setError(NoGraphFound, i18n("No graph was found."));
     }
-    setError(i18n("Cannot open file %1 to write document. Error: %2", filename, file.errorString()));
-    return false;
-}
-
-const QString PlainTXTFilePlugin::lastError()
-{
-    return _lastError;
-}
-
-
-void PlainTXTFilePlugin::setError(QString arg1)
-{
-    _lastError = arg1;
+    setError(FileIsReadOnly, i18n("Could not open file \"%1\" in write mode: %2", file().fileName(), fileHandle.errorString()));
 }

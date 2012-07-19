@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -20,27 +21,31 @@
 #ifndef PLAINTXTFILEPLUGIN_H
 #define PLAINTXTFILEPLUGIN_H
 
-#include "FilePluginInterface.h"
+#include "GraphFilePluginInterface.h"
 
-class PlainTXTFilePlugin: public FilePluginInterface
+class PlainTXTFilePlugin: public GraphFilePluginInterface
 {
     Q_OBJECT
 public:
     explicit PlainTXTFilePlugin(QObject* parent, const QList< QVariant >&);
     ~PlainTXTFilePlugin();
 
-    const QStringList extensions() const; //Extensões suportadas
+    /**
+     * File extensions that are common for this file type.
+     */
+    virtual const QStringList extensions() const;
 
-    Document * readFile(const QString& fileName) ; //return 0 se arq. inválido
+    /**
+     * Writes given graph document to formerly specified file \see setFile().
+     * \param graph is graphDocument to be serialized
+     */
+    virtual void writeFile(Document &graph);
 
-    bool writeFile(Document& graph, const QString& filename) ; //false se não gravou.
-
-
-    virtual const QString lastError();
-
-private:
-    QString _lastError;
-    void setError(QString arg1);
+    /**
+     * Open given file and imports it into internal format.
+     * \param file is url of a local file
+     */
+    virtual void readFile();
 };
 
 #endif // PLAINTXTFILEPLUGIN_H

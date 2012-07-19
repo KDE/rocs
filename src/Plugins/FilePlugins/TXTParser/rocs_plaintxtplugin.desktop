@@ -2,11 +2,11 @@
 Encoding=UTF-8
 Type=Service
 #Icon=icon
-ServiceTypes=Rocs/FilePlugin
+ServiceTypes=Rocs/GraphFilePlugin
 X-KDE-Library=rocs_plaintxt
 X-KDE-PluginInfo-Author=Wagner Reck
 X-KDE-PluginInfo-Email=wagner.reck@gmail.com
-X-KDE-PluginInfo-Name=Rocs PlaiTxt Fileplugin
+X-KDE-PluginInfo-Name=Rocs PlainTxt Fileplugin
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://wiglot.wordpress.com
 X-KDE-PluginInfo-Category=Plugins

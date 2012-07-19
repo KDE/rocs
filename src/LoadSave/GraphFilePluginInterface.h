@@ -38,6 +38,7 @@ public:
         None,
         Unknown,
         FileIsReadOnly,
+        CouldNotOpenFile,
         NoGraphFound,
         CouldNotRecognizeFileFormat
     };
