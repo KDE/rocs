@@ -94,26 +94,31 @@ void TgfFileFormatPlugin::readFile()
 
 void TgfFileFormatPlugin::writeFile(Document &graph )
 {
+    // TODO allow selection which data structure shall be exported
     QFile fileHandle(file().toLocalFile());
-    if (fileHandle.open(QFile::WriteOnly | QFile::Text)) {
-        QTextStream out(&fileHandle);
-        DataStructurePtr g = graph.activeDataStructure();
-        if (g) {
-            foreach(DataPtr n, g->dataList()) {
-                out << n->name();
-                out << " ";
-                out << n->x();
-                out << " ";
-                out << n->y();
-                out << '\n';
-            }
-            foreach(PointerPtr e, g->pointers()) {
-                out << e->from()->name() << " " << e->to()->name() << '\n';
-            }
-            setError(None);
-            return;
-        }
-        setError(NoGraphFound, i18n("No graph was found."));
+    if (!fileHandle.open(QFile::WriteOnly | QFile::Text)) {
+        setError(FileIsReadOnly, i18n("Could not open file \"%1\" in write mode: %2", file().fileName(), fileHandle.errorString()));
+        return;
     }
-    setError(FileIsReadOnly, i18n("Could not open file \"%1\" in write mode: %2", file().fileName(), fileHandle.errorString()));
+
+    QTextStream out(&fileHandle);
+    DataStructurePtr g = graph.activeDataStructure();
+    if (!g) {
+        setError(NoGraphFound, i18n("No data structure specified for output in this document."));
+        return;
+    }
+
+    // export data elements
+    foreach(DataPtr n, g->dataList()) {
+        out << n->identifier();
+        out << " ";
+        out << n->name();
+        out << '\n';
+    }
+    out << "#\n";
+    // export pointers
+    foreach(PointerPtr e, g->pointers()) {
+        out << e->from()->identifier() << " " << e->to()->identifier() << " " << e->value() <<'\n';
+    }
+    setError(None);
 }

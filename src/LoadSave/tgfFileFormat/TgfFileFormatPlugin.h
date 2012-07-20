@@ -23,6 +23,21 @@
 
 #include "GraphFilePluginInterface.h"
 
+/** \brief class TgfFileFormatPlugin: Import and Export Plugin for TGF
+ *
+ * This plugin class allows reading and writing of Trivial Graph Format (TGF) files.
+ * TGF is a simple file format that can store directed graphs by a list of nodes and list of edges.
+ * Each node and each edge can have exactly one label.
+ *
+ * Format Specification:
+ *  - The file starts with a list of nodes (one node per line), followed by a line with the only
+ *    character "#", followed by a list of edges (one edge per line).
+ *  - A node consists of an integer (identifier), followed by a space, followed by an arbitrary string.
+ *  - An edge consists of two integers (identifiers) separated by a space, followed by a space,
+ *    followed by an arbitray string. It is assumed that the directed edge points from the first
+ *    identifier to the second identifier.
+ */
+
 class TgfFileFormatPlugin: public GraphFilePluginInterface
 {
     Q_OBJECT
