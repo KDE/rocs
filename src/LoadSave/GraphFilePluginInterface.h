@@ -40,6 +40,7 @@ public:
         FileIsReadOnly,
         CouldNotOpenFile,
         NoGraphFound,
+        EncodingProblem,
         CouldNotRecognizeFileFormat
     };
 

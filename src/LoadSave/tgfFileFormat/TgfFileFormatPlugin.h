@@ -42,7 +42,6 @@ class TgfFileFormatPlugin: public GraphFilePluginInterface
 {
     Q_OBJECT
 public:
-
     explicit TgfFileFormatPlugin(QObject* parent, const QList< QVariant >&);
     ~TgfFileFormatPlugin();
 
@@ -62,6 +61,12 @@ public:
      * \param file is url of a local file
      */
     virtual void readFile();
+
+private:
+    enum ReadMode {
+        Nodes,
+        Edges
+    };
 };
 
 #endif // TGFFILEFORMATPLUGIN_H

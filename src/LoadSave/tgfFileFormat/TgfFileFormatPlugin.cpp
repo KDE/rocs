@@ -57,38 +57,51 @@ void TgfFileFormatPlugin::readFile()
     Document * graphDoc = new Document("Untitled");
     //TODO select graph data structure
     DataStructurePtr graph = graphDoc->addDataStructure();
-    QList < QPair<QString, QString> > edges;
+
+    // map node identifier from file to created data elements
+    QMap<int,DataPtr> nodeMap;
+
     QFile fileHandle(file().toLocalFile());
     if (!fileHandle.open(QFile::ReadOnly)) {
         setError(CouldNotOpenFile, i18n("Could not open file \"%1\" in read mode: %2", file().toLocalFile(), fileHandle.errorString()));
         delete graphDoc;
         return;
     }
-    while (!fileHandle.atEnd()) {
-        QStringList list = QString(fileHandle.readLine()).trimmed().split(' ', QString::SkipEmptyParts);
-        switch (list.count()) {
-        case 1:
-            graph->addData(list.at(0));
-            break;
-        case 2:
-            edges << QPair<QString, QString> (list.at(0), list.at(1)) ;
-            break;
-        case 3: {
-            DataPtr d = graph->addData(list.at(0));
-            d->setX(list.at(1).toInt());
-            d->setY(list.at(2).toInt());
-            break;
-        }
-        default:
-            kDebug() << QString("Ignoring line: %1").arg(list.join(" "));
-            break;
 
+    ReadMode mode = Nodes;
+    while (!fileHandle.atEnd()) {
+        QString line = QString(fileHandle.readLine()).trimmed();
+
+        if (line.startsWith('#')) { // recognize seperator before edge list
+            mode = Edges;
+            continue;
+        }
+
+        if (mode == Nodes) { // read node
+            int identifier = line.section(' ', 0, 0).toInt();
+            QString label = line.section(' ', 1);    // get label, everything after first space
+            DataPtr data = graph->addData(label.simplified());
+            if (nodeMap.contains(identifier)) {
+                setError(EncodingProblem, i18n("Could not parse file. Identifier \"%1\" is used more than once.", identifier));
+                return;
+            }
+            nodeMap[identifier] = data;
+            continue;
+        }
+
+        if (mode == Edges) { // node edge
+            int from = line.section(' ', 0, 0).toInt();
+            int to = line.section(' ', 1, 1).toInt();
+            QString value = line.section(' ', 2);
+            if (!nodeMap.contains(from) || !nodeMap.contains(to)) {
+                setError(EncodingProblem, i18n("Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes.", from, to));
+                return;
+            }
+            PointerPtr pointer = graph->addPointer(nodeMap[from], nodeMap[to]);
+            pointer->setValue(value.simplified());
         }
     }
-    for (int i = 0; i < edges.count(); ++i) {
-        graph->addPointer(edges.at(i).first, edges.at(i).second);
-        kDebug() << edges.at(i);
-    }
+    setGraphDocument(graphDoc);
     setError(None);
 }
 
