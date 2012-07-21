@@ -161,7 +161,7 @@ void PluginManager::loadFilePlugins()
     }
     _filePlugins.clear();
 
-    KService::List offers = KServiceTypeTrader::self()->query("Rocs/FilePlugin");
+    KService::List offers = KServiceTypeTrader::self()->query("Rocs/GraphFilePlugin");
 
     KService::List::const_iterator iter;
     for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
