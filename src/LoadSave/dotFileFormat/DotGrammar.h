@@ -1,19 +1,21 @@
-/* This file is part of KGraphViewer.
-   Copyright (C) 2006-2007 Gael de Chalendar <kleag@free.fr>
+/*
+    This file is part of Rocs.
+    Copyright 2006-2007  Gael de Chalendar <kleag@free.fr>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
-   KGraphViewer is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation, version 2.
+    Rocs is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation, version 2.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301, USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301, USA
 */
 
 /*
@@ -22,8 +24,6 @@
 
 #ifndef DOT_GRAMMAR_H
 #define DOT_GRAMMAR_H
-
-// #include "dotrenderop.h"
 
 #include <boost/throw_exception.hpp>
 #include <boost/spirit/include/classic_core.hpp>
@@ -42,16 +42,21 @@
 
 class Document;
 
-bool parse(const std::string& str, Document* gd);
+/**
+ * Parse the given string \p str that represents the textual respresentation of a
+ * graph in DOT/Graphviz format. The given document \p graphDoc must
+ * be of plugin type "Graph.
+ */
+bool parse(const std::string& str, Document* graphDoc);
 
 void gotid(char const* first, char const* last);
 void dump(char const* first, char const* last);
 void strict(char const* first, char const* last);
-void undidataType(char const* first, char const* last);
-void didataType(char const* first, char const* last);
-void dataTypeid(char const* first, char const* last);
+void undirectedDataStructure(char const* first, char const* last);
+void directedDataStructure(char const* first, char const* last);
+void dataStructureId(char const* first, char const* last);
 void attrid(char const* first, char const* last);
-void subdataTypeid(char const* first, char const* last);
+void subDataStructureId(char const* first, char const* last);
 void valid(char const* first, char const* last);
 void addattr(char const* first, char const* last);
 void pushAttrListC(char const c);

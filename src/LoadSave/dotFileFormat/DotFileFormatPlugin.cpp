@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -26,16 +27,18 @@
 
 #include <DataStructure.h>
 #include <Document.h>
+#include <DataStructurePluginManager.h>
+#include "../Plugins/DataStructure/Graph/GraphStructure.h"
 #include "DotGraphParsingHelper.h"
 #include "DotGrammar.h"
 
-static const KAboutData aboutdata("rocs_dotplugin", 0, ki18n("Open and Save Graphviz files") , "0.1");
+static const KAboutData aboutdata("rocs_dotfileformat", 0, ki18n("Read and write Graphviz graph documents.") , "0.1");
 
 
 extern KGraphViewer::DotGraphParsingHelper* phelper;
 
-K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< DotFileFormatPlugin>();)
-K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
+K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<DotFileFormatPlugin>();)
+K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
 
 
 DotFileFormatPlugin::~DotFileFormatPlugin()
@@ -44,7 +47,7 @@ DotFileFormatPlugin::~DotFileFormatPlugin()
 }
 
 DotFileFormatPlugin::DotFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
+    GraphFilePluginInterface(FilePluginFactory::componentData(), parent)
 {
 
 }
@@ -58,7 +61,10 @@ const QStringList DotFileFormatPlugin::extensions() const
 
 void DotFileFormatPlugin::readFile()
 {
-    Document * graphDoc = new Document("Untitled");
+    Document * graphDoc = new Document(i18n("Import"));
+    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructurePtr graph = graphDoc->addDataStructure();
+//     Rocs::GraphStructure graph;  //TODO
 //     Graph * graph = graphDoc->addGraph();
     QList < QPair<QString, QString> > edges;
     QFile fileHandle(file().toLocalFile());
@@ -68,7 +74,7 @@ void DotFileFormatPlugin::readFile()
         return;
     }
     QString content = fileHandle.readAll();
-    if (!parse(content.toStdString(), graphDoc)) {
+    if (!parse(content.toStdString(), graphDoc)) { //TODO change interface and pass graph structure
         setError(EncodingProblem, i18n("Could not parse file \"%1\".", file().toLocalFile()));
         delete graphDoc;
         return;

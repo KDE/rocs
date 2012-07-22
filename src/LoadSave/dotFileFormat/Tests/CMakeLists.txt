@@ -9,6 +9,7 @@ set(TestDotFileFromatPlugin_SRCS
 kde4_add_unit_test(TestDotFileFromatPlugin ${TestDotFileFromatPlugin_SRCS})
 target_link_libraries(TestDotFileFromatPlugin
     rocslib
+    rocs_GraphStructure
     ${QT_QTTEST_LIBRARY}
     ${KDE4_KDECORE_LIBS}
 )

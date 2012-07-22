@@ -80,6 +80,8 @@ public:
      */
     GRAPH_TYPE graphType() const;
 
+    bool multigraph() const;
+
     /**
      * Gives a map with plugin specific properties of the data structure.
      * Implementation of virtual method \see DataStructure::pluginProperties()
@@ -113,6 +115,8 @@ public slots:
      * \return void
      */
     void setGraphType(int type);
+
+    void setDirected(bool directed);
 
     /**
      * returns a list of all nodes of the graph as array

@@ -1,19 +1,21 @@
-/* This file is part of KGraphViewer.
-   Copyright (C) 2006-2007 Gael de Chalendar <kleag@free.fr>
+/*
+    This file is part of Rocs.
+    Copyright 2006-2007  Gael de Chalendar <kleag@free.fr>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
-   KGraphViewer is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation, version 2.
+    Rocs is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation, version 2.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301, USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301, USA
 */
 
 #include "DotGrammar.h"
@@ -56,8 +58,8 @@ const boost::spirit::classic::distinct_parser<> keyword_p("0-9a-zA-Z_");
 template <typename ScannerT>
 DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
 {
-    dataType  = (!(keyword_p("strict")[&strict]) >> (keyword_p("dataType")[&undidataType] | keyword_p("didataType")[&didataType])
-                 >> !ID[&dataTypeid] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
+    dataType  = (!(keyword_p("strict")[&strict]) >> (keyword_p("dataType")[&undirectedDataStructure] | keyword_p("didataType")[&directedDataStructure])
+                 >> !ID[&dataStructureId] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
     ID = (
              (((anychar_p - punct_p) | '_') >> *((anychar_p - punct_p) | '_'))
              | real_p
@@ -89,8 +91,8 @@ DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
     node_id  = (ID >> !(port));
     port  = (ch_p(':') >> ID >> !(':' >> compass_pt))
             | (':' >> compass_pt);
-    subdataType  = (!(keyword_p("subgraph") >> !(ID[&subdataTypeid])) >> ch_p('{')[&createsubdataType][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
-                   | (keyword_p("subgraph") >> ID[&subdataTypeid]);
+    subdataType  = (!(keyword_p("subgraph") >> !(ID[&subDataStructureId])) >> ch_p('{')[&createsubdataType][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
+                   | (keyword_p("subgraph") >> ID[&subDataStructureId]);
     compass_pt  = (keyword_p("n") | keyword_p("ne") | keyword_p("e")
                    | keyword_p("se") | keyword_p("s") | keyword_p("sw")
                    | keyword_p("w") | keyword_p("nw"));
@@ -141,31 +143,36 @@ void gotid(char const* first, char const* last)
 //   kDebug() << "Got ID  = '"<<QString::fromStdString(phelper->attrid)<<"'";
 }
 
-void undidataType(char const* /*first*/, char const* /*last*/)
+void undirectedDataStructure(char const* /*first*/, char const* /*last*/)
 {
-//   kDebug() << "Setting dataType as undirected";
-    if (phelper->dataStructure == 0) {
-        phelper->dataStructure = phelper->gd->addDataStructure("");
+    kDebug() << "Create new datastructure of type: Graph directed";
+    if(!phelper->dataStructure) {
+        DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
+        phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
     }
-//     phelper->dataStructure->setDirected(false); //FIXME
+    phelper->dataStructure->setDirected(false);
 }
 
-void didataType(char const* /*first*/, char const* /*last*/)
+void directedDataStructure(char const* /*first*/, char const* /*last*/)
 {
-//   kDebug() << "Setting dataType as directed";
-    if (phelper->dataStructure == 0) {
-        phelper->dataStructure = phelper->gd->addDataStructure("");
+    kDebug() << "Create new datastructure of type: Graph undirected";
+    if (!phelper->dataStructure) {
+        DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
+        phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
     }
-//     phelper->dataStructure->setDirected(true); //FIXME
+    phelper->dataStructure->setDirected(true);
 }
 
-void dataTypeid(char const* first, char const* last)
+void dataStructureId(char const* first, char const* last)
 {
-//   kDebug() << QString::fromStdString(std::string(first,last));
-    if (phelper->dataStructure == 0) {
-        phelper->dataStructure = phelper->gd->addDataStructure(QString::fromStdString(std::string(first, last)));
+    QString name = QString::fromStdString(std::string(first, last));
+    kDebug() << "Set datastructure name: " << name;
+    if (!phelper->dataStructure) {
+
+        DataStructurePtr dataStructure = phelper->gd->addDataStructure(name);
+        phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
     }
-    phelper->dataStructure->setName(QString::fromStdString(std::string(first, last)));
+    phelper->dataStructure->setName(name);
 }
 
 void attrid(char const* first, char const* last)
@@ -180,7 +187,7 @@ void attrid(char const* first, char const* last)
     }
 }
 
-void subdataTypeid(char const* first, char const* last)
+void subDataStructureId(char const* first, char const* last)
 {
     std::string id(first, last);
 //   kDebug() << QString::fromStdString(id);
@@ -296,15 +303,14 @@ void setattributedlist(char const* /*first*/, char const* /*last*/)
 
 void checkedgeop(char const* first, char const* last)
 {
-//FIXME
-//     std::string str(first, last);
-//     if (phelper) {
-//         if (((phelper->dataStructure->directed()) && (str == "->")) ||
-//                 ((!phelper->dataStructure->directed()) && (str == "--")))
-//             return;
-//
-//         kError() << "Error !! uncoherent relation : directed = '" << phelper->dataStructure->directed() << "' and op = '" << QString::fromStdString(str) << "'" << endl;
-//     }
+    std::string str(first, last);
+    if (phelper) {
+        if (((phelper->dataStructure->directed()) && (str == "->")) ||
+                ((!phelper->dataStructure->directed()) && (str == "--")))
+            return;
+
+        kError() << "Error !! uncoherent relation : directed = '" << phelper->dataStructure->directed() << "' and op = '" << QString::fromStdString(str) << "'" << endl;
+    }
 }
 
 void edgebound(char const* first, char const* last)
@@ -518,12 +524,12 @@ bool parse_renderop(const std::string& /*str*//*, DotRenderOpVec& arenderopvec*/
 //   return res;
 // }
 
-bool parse(const std::string& str, Document * gd)
+bool parse(const std::string& str, Document * graphDoc)
 {
     DotGrammar g;
     delete phelper;
     phelper = new DotGraphParsingHelper;
-    phelper->gd = gd;
+    phelper->gd = graphDoc;
 
     return boost::spirit::classic::parse(str.c_str(), g >> end_p, (+boost::spirit::classic::space_p | boost::spirit::classic::comment_p("/*", "*/"))).full;
 }

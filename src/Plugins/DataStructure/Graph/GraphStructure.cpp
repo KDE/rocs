@@ -383,6 +383,29 @@ void Rocs::GraphStructure::setGraphType(int type)
     }
 }
 
+void Rocs::GraphStructure::setDirected(bool directed)
+{
+    if (directed) {
+        if (multigraph()) {
+            setGraphType(MULTIGRAPH_DIRECTED);
+            return;
+        }
+        if (!multigraph()) {
+            setGraphType(DIRECTED);
+            return;
+        }
+    } else {
+        if (multigraph()) {
+            setGraphType(MULTIGRAPH_UNDIRECTED);
+            return;
+        }
+        if (!multigraph()) {
+            setGraphType(UNDIRECTED);
+            return;
+        }
+    }
+}
+
 Rocs::GraphStructure::GRAPH_TYPE Rocs::GraphStructure::graphType() const
 {
     return _type;
@@ -392,6 +415,12 @@ bool Rocs::GraphStructure::directed() const
 {
     return (_type == DIRECTED || _type == MULTIGRAPH_DIRECTED);
 }
+
+bool Rocs::GraphStructure::multigraph() const
+{
+    return (_type == MULTIGRAPH_DIRECTED || _type == MULTIGRAPH_UNDIRECTED);
+}
+
 
 PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 {

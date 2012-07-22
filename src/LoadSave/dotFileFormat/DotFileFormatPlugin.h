@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -51,7 +52,6 @@ public:
     virtual void readFile();
 
 private:
-    QString _lastError;
     QString const processNode(Data*) const;
     QString const processEdge(Pointer* e) const;
 
