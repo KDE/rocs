@@ -28,6 +28,7 @@
 #include <Data.h>
 #include <Pointer.h>
 #include <Modifiers/Topology.h>
+#include <DataStructurePluginManager.h>
 
 
 static const KAboutData aboutdata("rocs_tgffileformat", 0, ki18n("Open and Save Graph Documents in Trivial Graph Format") , "0.1");
@@ -57,6 +58,7 @@ void TgfFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document("Untitled");
     //TODO select graph data structure
+    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
     DataStructurePtr graph = graphDoc->addDataStructure();
 
     // map node identifier from file to created data elements
