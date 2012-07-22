@@ -28,6 +28,8 @@
 #include <QPair>
 #include <QVector>
 
+#include <KDebug>
+
 #include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/graph/circle_layout.hpp>
 #include <boost/graph/random_layout.hpp>
@@ -114,21 +116,23 @@ void Topology::applyMinCutTreeAlignment(DataList dataList)
     }
 }
 
-void Topology::applyCircleAlignment(DataList dataList)
+void Topology::applyCircleAlignment(DataList dataList, qreal radius)
 {
     PositionVec position_vec(dataList.count());
 
-    // set box inside which we may reposition
-    QList<qreal> xList;
-    QList<qreal> yList;
-    foreach(DataPtr data, dataList) {
-        xList << data->x();
-        yList << data->y();
-    }
-    qSort(xList.begin(), xList.end());
-    qSort(yList.begin(), yList.end());
+    if(radius == 0) {
+        // set box inside which we may reposition
+        QList<qreal> xList;
+        QList<qreal> yList;
+        foreach(DataPtr data, dataList) {
+            xList << data->x();
+            yList << data->y();
+        }
+        qSort(xList.begin(), xList.end());
+        qSort(yList.begin(), yList.end());
 
-    qreal radius = fmax(abs(xList.first() - xList.last()), abs(yList.first() - yList.last())) / 2;
+        radius = fmax(abs(xList.first() - xList.last()), abs(yList.first() - yList.last())) / 2;
+    }
 
     // create IDs for all nodes
     QMap<Data*, int> node_mapping;
@@ -174,5 +178,33 @@ void Topology::applyCircleAlignment(DataList dataList)
         data->setX(positionMap[v][0]);
         data->setY(positionMap[v][1]);
     }
+}
+
+
+void Topology::directedGraphDefaultTopology(DataStructurePtr dataStructure)
+{
+    //TODO: port to graphviz layout functions
+    kDebug() << "Temporary implementation, should be replaced soon.";
+
+    QList<DataPtr> allDataList;
+    foreach(int type, dataStructure->document()->dataTypeList()) {
+        allDataList << dataStructure->dataList(type);
+    }
+    applyCircleAlignment(allDataList, 300);
+    applyMinCutTreeAlignment(allDataList);
+}
+
+
+void Topology::undirectedGraphDefaultTopology(DataStructurePtr dataStructure)
+{
+    //TODO: port to graphviz layout functions
+    kDebug() << "Temporary implementation, should be replaced soon.";
+
+    QList<DataPtr> allDataList;
+    foreach(int type, dataStructure->document()->dataTypeList()) {
+        allDataList << dataStructure->dataList(type);
+    }
+    applyCircleAlignment(allDataList, 300);
+    applyMinCutTreeAlignment(allDataList);
 }
 

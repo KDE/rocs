@@ -73,12 +73,30 @@ public:
     /** \brief applies Circle topology to data set
      *
      * For the given data set this algorithm applies the Boost implementation
-     * to create a circle layout.
+     * to create a circle layout. If a radius is specified, the circle will get the specified radius,
+     * otherwise with no radius set the diameter of the minimal bounding box of all data element positions
+     * is used to determine the radius.
      * \param dataList is the list of data
+     * \param radius to optionally specify target radius
      * \return void
      */
-    void applyCircleAlignment(DataList dataList);
+    void applyCircleAlignment(DataList dataList, qreal radius=0);
 
+    /** \brief applies a default topology for undirected graphs
+     *
+     * Use this method to apply a best-fit topology to an undirected graph (though the
+     * data structure need not to be of type "Graph") only based on the node connections.
+     * I.e., no possible present coordinates are respected.
+     */
+    void directedGraphDefaultTopology(DataStructurePtr dataStructure);
+
+    /** \brief applies a default topology for undirected graphs
+     *
+     * Use this method to apply a best-fit topology to an undirected graph (though the
+     * data structure need not to be of type "Graph") only based on the node connections.
+     * I.e., no possible present coordinates are respected.
+     */
+    void undirectedGraphDefaultTopology(DataStructurePtr dataStructure);
 };
 
 #endif // TOPOLOGY_H

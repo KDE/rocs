@@ -27,6 +27,7 @@
 #include <DataStructure.h>
 #include <Data.h>
 #include <Pointer.h>
+#include <Modifiers/Topology.h>
 
 
 static const KAboutData aboutdata("rocs_tgffileformat", 0, ki18n("Open and Save Graph Documents in Trivial Graph Format") , "0.1");
@@ -101,6 +102,8 @@ void TgfFileFormatPlugin::readFile()
             pointer->setValue(value.simplified());
         }
     }
+    Topology layouter;
+    layouter.directedGraphDefaultTopology(graph);
     setGraphDocument(graphDoc);
     setError(None);
 }

@@ -119,7 +119,7 @@ Document* ImporterExporterManager::importFile()
 
     filePlugin->setFile(fileName);
     filePlugin->readFile();
-    if (!filePlugin->hasError()) {
+    if (filePlugin->hasError()) {
         kDebug() << "Error loading file" << fileName << filePlugin->errorString();
         return 0;
     }
