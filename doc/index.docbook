@@ -501,7 +501,7 @@ positions.</para></listitem>
 <para>
 &rocs; internally uses the QtScript scripting engine, which is a specific JavaScript engine.
 This means, all algorithms that you implement must use JavaScript.
-How JavaScript works and how to write JavaScript code is not covered in this handbook, though we explain how to access data structures, data elements and pointers of your data data structures from the scripting engine.
+How JavaScript works and how to write JavaScript code is not covered in this handbook, though we explain how to access data structures, data elements and pointers of your data structures from the scripting engine.
 Since you never use the basic data structure object but one that is provided by the currently used data structure plugin, the functionality of the data structure is extended by the corresponding plugin and you should have a look at the specialized functionality.
 Especially, data structure plugins use the common terms from their domain (nodes and edges in graphs, leafs and roots in trees, etc.)
 </para>
