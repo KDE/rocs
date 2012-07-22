@@ -16,27 +16,22 @@
    02110-1301, USA
 */
 
-#include "dotgrammar.h"
+#include "DotGrammar.h"
 // #include "dotdataType.h"
 // #include "dotdefaults.h"
 // #include "dataTypenode.h"
 // #include "dataTypeedge.h"
 #include "DotGraphParsingHelper.h"
-#include "graphDocument.h"
+#include <Document.h>
 
 #include <iostream>
 
-#include <kdebug.h>
+#include <KDebug>
 
 #include <QFile>
 
 #include <boost/spirit/include/classic_confix.hpp>
 #include <boost/throw_exception.hpp>
-namespace boost
-{
-void throw_exception(std::exception const &) {}
-}
-
 
 using namespace std;
 using namespace boost;
@@ -137,7 +132,7 @@ void dump(char const* first, char const* last)
 
 void strict(char const* /*first*/, char const* /*last*/)
 {
-//   if (phelper) phelper;//->dataType->strict(true);
+//   if (phelper) phelper;//->dataStructure->strict(true);
 }
 
 void gotid(char const* first, char const* last)
@@ -149,28 +144,28 @@ void gotid(char const* first, char const* last)
 void undidataType(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "Setting dataType as undirected";
-    if (phelper->dataType == 0) {
-        phelper->dataType = phelper->gd->addDataType("");
+    if (phelper->dataStructure == 0) {
+        phelper->dataStructure = phelper->gd->addDataStructure("");
     }
-    phelper->dataType->setDirected(false);
+//     phelper->dataStructure->setDirected(false); //FIXME
 }
 
 void didataType(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "Setting dataType as directed";
-    if (phelper->dataType == 0) {
-        phelper->dataType = phelper->gd->addDataType("");
+    if (phelper->dataStructure == 0) {
+        phelper->dataStructure = phelper->gd->addDataStructure("");
     }
-    phelper->dataType->setDirected(true);
+//     phelper->dataStructure->setDirected(true); //FIXME
 }
 
 void dataTypeid(char const* first, char const* last)
 {
 //   kDebug() << QString::fromStdString(std::string(first,last));
-    if (phelper->dataType == 0) {
-        phelper->dataType = phelper->gd->addDataType(QString::fromStdString(std::string(first, last)));
+    if (phelper->dataStructure == 0) {
+        phelper->dataStructure = phelper->gd->addDataStructure(QString::fromStdString(std::string(first, last)));
     }
-    phelper->dataType->setName(QString::fromStdString(std::string(first, last)));
+    phelper->dataStructure->setName(QString::fromStdString(std::string(first, last)));
 }
 
 void attrid(char const* first, char const* last)
@@ -225,8 +220,8 @@ void pushAttrList(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "Pushing attributes";
     if (phelper) {
-        phelper->dataTypeAttributesStack.push_back(phelper->dataTypeAttributes);
-        phelper->datumAttributesStack.push_back(phelper->datumAttributes);
+        phelper->dataStructureAttributesStack.push_back(phelper->dataStructureAttributes);
+        phelper->dataAttributesStack.push_back(phelper->dataAttributes);
         phelper->pointersAttributesStack.push_back(phelper->pointersAttributes);
     }
 }
@@ -240,10 +235,10 @@ void popAttrList(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "Poping attributes";
     if (phelper) {
-        phelper->dataTypeAttributes = phelper->dataTypeAttributesStack.back();
-        phelper->dataTypeAttributesStack.pop_back();
-        phelper->datumAttributes = phelper->datumAttributesStack.back();
-        phelper->datumAttributesStack.pop_back();
+        phelper->dataStructureAttributes = phelper->dataStructureAttributesStack.back();
+        phelper->dataStructureAttributesStack.pop_back();
+        phelper->dataAttributes = phelper->dataAttributesStack.back();
+        phelper->dataAttributesStack.pop_back();
         phelper->pointersAttributes = phelper->pointersAttributesStack.back();
         phelper->pointersAttributesStack.pop_back();
     }
@@ -275,7 +270,7 @@ void setdataTypeattributes(char const* /*first*/, char const* /*last*/)
     if (phelper) {
 //     if (phelper->z == 1) // main dataType
 //     {
-        phelper->setdataTypeattributes();
+        phelper->setdataStructureattributes();
 //     }
 //     else
 //     {
@@ -288,7 +283,7 @@ void setnodeattributes(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "setnodeattributes with z = " << phelper->z;
     if (phelper) {
-        phelper->setdatumattributes();
+        phelper->setDataAttributes();
     }
 }
 
@@ -301,14 +296,15 @@ void setattributedlist(char const* /*first*/, char const* /*last*/)
 
 void checkedgeop(char const* first, char const* last)
 {
-    std::string str(first, last);
-    if (phelper) {
-        if (((phelper->dataType->directed()) && (str == "->")) ||
-                ((!phelper->dataType->directed()) && (str == "--")))
-            return;
-
-        kError() << "Error !! uncoherent relation : directed = '" << phelper->dataType->directed() << "' and op = '" << QString::fromStdString(str) << "'" << endl;
-    }
+//FIXME
+//     std::string str(first, last);
+//     if (phelper) {
+//         if (((phelper->dataStructure->directed()) && (str == "->")) ||
+//                 ((!phelper->dataStructure->directed()) && (str == "--")))
+//             return;
+//
+//         kError() << "Error !! uncoherent relation : directed = '" << phelper->dataStructure->directed() << "' and op = '" << QString::fromStdString(str) << "'" << endl;
+//     }
 }
 
 void edgebound(char const* first, char const* last)
@@ -522,7 +518,7 @@ bool parse_renderop(const std::string& /*str*//*, DotRenderOpVec& arenderopvec*/
 //   return res;
 // }
 
-bool parse(const std::string& str, DataTypeDocument * gd)
+bool parse(const std::string& str, Document * gd)
 {
     DotGrammar g;
     delete phelper;

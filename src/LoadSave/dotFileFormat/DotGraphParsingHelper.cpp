@@ -18,7 +18,7 @@
 
 
 #include "DotGraphParsingHelper.h"
-#include "dotgrammar.h"
+#include "DotGrammar.h"
 
 #include <boost/throw_exception.hpp>
 #include <boost/spirit/include/classic_core.hpp>
@@ -33,7 +33,7 @@
 
 #include <QFile>
 #include<QUuid>
-#include "Core/DynamicPropertiesList.h"
+#include "DynamicPropertiesList.h"
 
 using namespace std;
 
@@ -50,16 +50,15 @@ DotGraphParsingHelper::DotGraphParsingHelper():
     subdataTypeid(),
     unique(0),
     attributes(),
-    dataTypeAttributes(),
-    datumAttributes(),
+    dataStructureAttributes(),
+    dataAttributes(),
     pointersAttributes(),
-    dataTypeAttributesStack(),
-    datumAttributesStack(),
+    dataStructureAttributesStack(),
+    dataAttributesStack(),
     pointersAttributesStack(),
     edgebounds(),
     z(0),
     maxZ(0),
-    dataType(0),
 //   gs(0),
     gn(0),
     ge(0)
@@ -89,23 +88,23 @@ void DotGraphParsingHelper::setdataTypeelementattributes(QObject* ge, const Attr
 
 }
 
-void DotGraphParsingHelper::setdataTypeattributes()
+void DotGraphParsingHelper::setdataStructureattributes()
 {
 
-    setdataTypeelementattributes(dataType, dataTypeAttributes);
+    setdataTypeelementattributes(dataStructure.get(), dataStructureAttributes);
 }
 
-void DotGraphParsingHelper::setsubdataTypeattributes()
+void DotGraphParsingHelper::setsubdataStructureattributes()
 {
 }
 
-void DotGraphParsingHelper::setdatumattributes()
+void DotGraphParsingHelper::setDataAttributes()
 {
 
     if (gn == 0) {
         return;
     }
-    setdataTypeelementattributes(gn, datumAttributes);
+    setdataTypeelementattributes(gn, dataAttributes);
 }
 
 void DotGraphParsingHelper::setedgeattributes()
@@ -128,14 +127,14 @@ void DotGraphParsingHelper::setattributedlist()
         it = attributes.begin();
         it_end = attributes.end();
         for (; it != it_end; it++) {
-            dataTypeAttributes[(*it).first] = (*it).second;
+            dataStructureAttributes[(*it).first] = (*it).second;
         }
     } else if (attributed == "datum") {
         AttributesMap::const_iterator it, it_end;
         it = attributes.begin();
         it_end = attributes.end();
         for (; it != it_end; it++) {
-            datumAttributes[(*it).first] = (*it).second;
+            dataAttributes[(*it).first] = (*it).second;
         }
     } else if (attributed == "edge") {
         AttributesMap::const_iterator it, it_end;
@@ -153,10 +152,10 @@ void DotGraphParsingHelper::createdatum(const std::string& datumid)
 {
     QString id = QString::fromStdString(datumid);
     kDebug() << id;
-    gn = dynamic_cast<Datum*>(dataType->datum(id));
+    gn = dynamic_cast<Data*>(dataStructure->getData(id.toInt()).get()); //FIXME does not work
     if (gn == 0) { //&& dataType->data().size() < KGV_MAX_ITEMS_TO_LOAD)
         kDebug() << "Creating a new datum" << subdataTypeid;
-        gn = dataType->addDatum(id);
+        gn = dataStructure->addData(id).get();
 
         if (!subdataTypeid.isEmpty()) {
             gn->addDynamicProperty("SubGraph", subdataTypeid.last());
@@ -173,6 +172,8 @@ void DotGraphParsingHelper::createsubdataType()
 
 void DotGraphParsingHelper::createedges()
 {
+    //FIXME the following logic is screwed, since the parser code tries to work with data names
+    //      which was removed in favor for real IDs
 //   kDebug();
     std::string datum1Name, datum2Name;
     datum1Name = edgebounds.front();
@@ -181,20 +182,20 @@ void DotGraphParsingHelper::createedges()
         datum2Name = edgebounds.front();
         edgebounds.pop_front();
 
-        Datum* gn1 = dataType->datum(QString::fromStdString(datum1Name));
+        DataPtr gn1 = dataStructure->getData(QString::fromStdString(datum1Name).toInt()); //FIXME does not work
         if (gn1 == 0) {
 //       kDebug() << "new datum 1";
-            gn1 = dataType->addDatum(QString::fromStdString(datum1Name));
+            gn1 = dataStructure->addData(QString::fromStdString(datum1Name));
 
             if (!subdataTypeid.isEmpty()) {
                 gn1->addDynamicProperty("SubGraph", subdataTypeid.last());
             }
 //             gn1 = dataType->datum(QString::fromStdString(datum1Name));
         }
-        Datum* gn2 = dataType->datum(QString::fromStdString(datum2Name));
+        DataPtr gn2 = dataStructure->getData(QString::fromStdString(datum2Name).toInt()); //FIXME does not work
         if (gn2 == 0) {
 //       kDebug() << "new datum 1";
-            gn2 = dataType->addDatum(QString::fromStdString(datum2Name));
+            gn2 = dataStructure->addData(QString::fromStdString(datum2Name));
 
             if (!subdataTypeid.isEmpty()) {
                 gn2->addDynamicProperty("SubGraph", subdataTypeid.last());
@@ -204,7 +205,7 @@ void DotGraphParsingHelper::createedges()
             kError() << "Unable to find or create edge bound(s) gn1=" << gn1 << "; gn2=" << gn2;
         }
 
-        ge = dataType->addPointer(gn1, gn2);
+        ge = dataStructure->addPointer(gn1, gn2).get();
         if (!subdataTypeid.isEmpty()) {
             ge->addDynamicProperty("SubGraph", subdataTypeid.last());
         }

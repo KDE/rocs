@@ -40,9 +40,9 @@
 #include <string>
 #include <sstream>
 
-class DataTypeDocument;
+class Document;
 
-bool parse(const std::string& str, DataTypeDocument* gd);
+bool parse(const std::string& str, Document* gd);
 
 void gotid(char const* first, char const* last);
 void dump(char const* first, char const* last);

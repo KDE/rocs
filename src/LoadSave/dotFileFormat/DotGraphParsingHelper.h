@@ -23,10 +23,10 @@
 #include <list>
 #include <string>
 #include <QStringList>
-#include "Core/DataType.h"
-#include "Core/Data.h"
-#include "Core/graphDocument.h"
-#include "Core/Pointer.h"
+#include <DataStructure.h>
+#include <Data.h>
+#include <Document.h>
+#include <Pointer.h>
 // class Node;
 // class Graph;
 
@@ -46,9 +46,9 @@ struct DotGraphParsingHelper {
 
     void createdatum(const std::string& nodeid);
     void createsubdataType();
-    void setdataTypeattributes();
-    void setsubdataTypeattributes();
-    void setdatumattributes();
+    void setdataStructureattributes();
+    void setsubdataStructureattributes();
+    void setDataAttributes();
     void setedgeattributes();
     void setattributedlist();
     void createedges();
@@ -66,11 +66,11 @@ struct DotGraphParsingHelper {
     unsigned int unique;
 
     AttributesMap attributes;
-    AttributesMap dataTypeAttributes;
-    AttributesMap datumAttributes;
+    AttributesMap dataStructureAttributes;
+    AttributesMap dataAttributes;
     AttributesMap pointersAttributes;
-    std::list< AttributesMap > dataTypeAttributesStack;
-    std::list< AttributesMap > datumAttributesStack;
+    std::list< AttributesMap > dataStructureAttributesStack;
+    std::list< AttributesMap > dataAttributesStack;
     std::list< AttributesMap > pointersAttributesStack;
 
     std::list< std::string > edgebounds;
@@ -78,13 +78,13 @@ struct DotGraphParsingHelper {
     unsigned int z;
     unsigned int maxZ;
 
-    DataType* dataType;
+    DataStructurePtr dataStructure;
 
 //   GraphSubgraph* gs;
-    Datum* gn;
+    Data* gn;
     Pointer* ge;
-    DataTypeDocument* gd;
-    int unique;
+    Document* gd;
+//     int unique;
 };
 
 }

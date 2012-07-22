@@ -17,110 +17,115 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "DotParser.h"
+#include "DotFileFormatPlugin.h"
 
-#include "Core/graphDocument.h"
 #include <KAboutData>
 #include <KGenericFactory>
+#include <KUrl>
 #include <QFile>
-#include <Core/DataType.h>
+
+#include <DataStructure.h>
+#include <Document.h>
 #include "DotGraphParsingHelper.h"
-#include "dotgrammar.h"
+#include "DotGrammar.h"
 
 static const KAboutData aboutdata("rocs_dotplugin", 0, ki18n("Open and Save Graphviz files") , "0.1");
 
 
 extern KGraphViewer::DotGraphParsingHelper* phelper;
 
-K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< DotParser>();)
+K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< DotFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
 
-DotParser::~DotParser()
+DotFileFormatPlugin::~DotFileFormatPlugin()
 {
 
 }
 
-DotParser::DotParser(QObject* parent, const QList< QVariant >&) :
-    FilePluginInterface(FilePLuginFactory::componentData(), parent)
+DotFileFormatPlugin::DotFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
+    GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
 {
 
 }
 
-const QStringList DotParser::extensions() const
+const QStringList DotFileFormatPlugin::extensions() const
 {
     return QStringList()
            << i18n("*.dot|Graphviz Files") + '\n';
 }
 
 
-DataTypeDocument* DotParser::readFile(const QString& fileName)
+void DotFileFormatPlugin::readFile()
 {
-    DataTypeDocument * graphDoc = new DataTypeDocument("Untitled");
+    Document * graphDoc = new Document("Untitled");
 //     Graph * graph = graphDoc->addGraph();
     QList < QPair<QString, QString> > edges;
-    QFile f(fileName);
-    if (!f.open(QFile::ReadOnly)) {
-        setError(i18n("Cannot open the file: %1. Error %2", fileName, f.errorString()));
+    QFile fileHandle(file().toLocalFile());
+    if (!fileHandle.open(QFile::ReadOnly)) {
+        setError(CouldNotOpenFile, i18n("Could not open file \"%1\" in read mode: %2", file().toLocalFile(), fileHandle.errorString()));
         delete graphDoc;
-        return 0;
+        return;
     }
-    QString content = f.readAll();
+    QString content = fileHandle.readAll();
     if (!parse(content.toStdString(), graphDoc)) {
-        setError(i18n("cannot parse the file %1.", fileName));
+        setError(EncodingProblem, i18n("Could not parse file \"%1\".", file().toLocalFile()));
         delete graphDoc;
-        return 0;
+        return;
     }
-    return graphDoc;
+    setGraphDocument(graphDoc);
+    setError(None);
 }
 
 
 
-bool DotParser::writeFile(DataTypeDocument& graph, const QString& filename)
+void DotFileFormatPlugin::writeFile(Document &graph)
 {
-    QFile file(filename);
+    //FIXME switch to use of shared pointers
+    QFile fileHandle(file().toLocalFile());
     QVariantList subgraphs;
-    if (file.open(QFile::WriteOnly | QFile::Text)) {
-        QTextStream out(&file);
-        DataType *g = graph.activeDataType();
+    if (fileHandle.open(QFile::WriteOnly | QFile::Text)) {
+        QTextStream out(&fileHandle);
+        DataStructurePtr g = graph.activeDataStructure(); //FIXME should be selectable
         if (g) {
-            out << QString("%1 %2 {\n").arg(g->directed() ? "digraph" : "graph").arg(g->name());
-            foreach(Datum * n, g->data()) {
+//             out << QString("%1 %2 {\n").arg(g->directed() ? "digraph" : "graph").arg(g->name()); //FIXME
+            foreach(DataPtr n, g->dataList()) {
                 if (n->dynamicPropertyNames().contains("SubGraph")) {
                     if (!subgraphs.contains(n->property("SubGraph"))) {
                         subgraphs << n->property("SubGraph");
                         out << QString("subgraph %1 {\n").arg(n->property("SubGraph").toString());
-                        foreach(Datum * nTmp, g->data()) {
+                        foreach(DataPtr nTmp, g->dataList()) {
                             if (nTmp->property("SubGraph").isValid() && nTmp->property("SubGraph") == subgraphs.last()) {
-                                out << processNode(nTmp);
+                                out << processNode(nTmp.get());
                             }
                         }
-                        foreach(Pointer * e, g->pointers()) {
+                        foreach(PointerPtr e, g->pointers()) {
                             if (e->property("SubGraph").isValid() && e->property("SubGraph") == subgraphs.last()) { //Only edges from outer graph
-                                out << processEdge(e);
+                                out << processEdge(e.get());
                             }
                         }
                         out << "}\n";
                     }
                 } else {
-                    out << processNode(n);
+                    out << processNode(n.get());
                 }
             }
-            foreach(Pointer * e, g->pointers()) {
+            foreach(PointerPtr e, g->pointers()) {
                 if (!e->dynamicPropertyNames().contains("SubGraph")) { //Only edges from outer graph
-                    out << processEdge(e);
+                    out << processEdge(e.get());
                 }
             }
             out << "}\n";
-            return true;
+            setError(None);
+            return;
         }
-        setError(i18n("No active graph in this document."));
+        setError(NoGraphFound, i18n("No active graph in this document."));
     }
-    setError(i18n("Cannot open file %1 to write document. Error: %2", filename, file.errorString()));
-    return false;
+    setError(FileIsReadOnly, i18n("Cannot open file %1 to write document. Error: %2", file().fileName(), fileHandle.errorString()));
+    return;
 }
 
-QString const DotParser::processEdge(Pointer*e) const
+QString const DotFileFormatPlugin::processEdge(Pointer*e) const
 {
     QString edge;
     edge.append(QString(" %1 -> %2 ").arg(e->from()->property("NodeName").isValid() ?
@@ -152,7 +157,7 @@ QString const DotParser::processEdge(Pointer*e) const
     return edge;
 }
 
-QString const DotParser::processNode(Datum* n) const
+QString const DotFileFormatPlugin::processNode(Data* n) const
 {
     QString node;
     if (n->property("NodeName").isValid())
@@ -182,30 +187,4 @@ QString const DotParser::processNode(Datum* n) const
     return node;
 }
 
-const QString DotParser::lastError()
-{
-    return _lastError;
-}
-
-
-void DotParser::setError(QString arg1)
-{
-    _lastError = arg1;
-}
-
-const QString DotParser::scriptToRun()
-{
-    return QString("include ( arrangeNodes.js )\n"
-                   "for (g = 0; g < graphs.length; ++g){\n"
-                   "  nodes = graphs[g].list_nodes();\n"
-                   "  for (var i = 0; i < nodes.length; i++){\n"
-                   "    nodes[i].addDynamicProperty(\"NodeName\", nodes[i].name);\n"
-                   "    if (nodes[i].label != undefined)\n"
-                   "       nodes[i].name = nodes[i].label;\n"
-                   "  }\n"
-                   "}"
-                  );
-}
-
-
-#include "DotParser.moc"
+#include "DotFileFormatPlugin.moc"

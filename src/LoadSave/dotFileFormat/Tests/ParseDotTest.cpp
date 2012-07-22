@@ -19,10 +19,10 @@
 #include "ParseDotTest.h"
 #include <QTest>
 #include <string>
-#include <Core/graphDocument.h>
-#include "../dotgrammar.h"
-#include <Core/DataType.h>
-#include <Core/DynamicPropertiesList.h>
+#include <Document.h>
+#include "../DotGrammar.h"
+#include <DataStructure.h>
+#include <DynamicPropertiesList.h>
 #include <KDebug>
 
 static const std::string str_subgraph = "digraph trees {"
@@ -61,12 +61,12 @@ static const std::string str = "digraph GG {"
 
 void ParseDotTest::parseCMakeGenerated()
 {
-    DataTypeDocument doc("A test");
+    Document doc("A test");
     QVERIFY(parse(str, &doc));
 }
 void ParseDotTest::WithSubgraph()
 {
-    DataTypeDocument doc("A test");
+    Document doc("A test");
     QVERIFY(parse(str_subgraph, &doc));
 }
 
