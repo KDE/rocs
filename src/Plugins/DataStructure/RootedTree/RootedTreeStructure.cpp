@@ -150,19 +150,22 @@ PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataTyp
         const qreal pointersSize = property("PointersRegion").toReal();
         const qreal size = property("NodeSize").toReal();
         if (isShowingAllPointers()){
-            if (pos.y() <= size * pointersSize ){
-                ptr->setProperty("TreeEdge", -1);//Add as parent;
-                kDebug() << "Added as parent";
-            }
-            else if (pos.y() >= size * (1+pointersSize)) {
+            qint8 treeEdge = -1;
+            if (pos.y() > size * pointersSize ){
                 RootedTreeNode * fromNode = qobject_cast<RootedTreeNode*>(from.get());
+        
                 const qint16 childCount = fromNode->numberOfChilds();
                 const qreal division = ((childCount * pointersSize) > 1 ?
                                         childCount * pointersSize * size:
                                         size) / childCount;
-                qint32 childPos = static_cast<qint32> (pos.x()/division);
-                ptr->setProperty("TreeEdge", childPos);
+                treeEdge = static_cast<qint32> (pos.x()/division);
             }
+            foreach (const PointerPtr &p, from->out_pointers()) {
+                if (p != ptr && p->property("TreeEdge").isValid() && p->property("TreeEdge").toInt() == treeEdge){
+                    p->remove();
+                }
+            }
+            ptr->setProperty("TreeEdge", treeEdge);//Add as parent;
         }else{
             //Need a fix to this click position
             to->setProperty("ClickPosition", QVariant());
