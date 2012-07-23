@@ -61,6 +61,8 @@ GraphScene::GraphScene(QObject *parent) :
 
     // first scene resize will resize to actual whiteboard size
     setSceneRect(0, 0, 0, 0);
+    //FIXME Avoid crash in Rooted Tree structure. This is a Workaround, we need a beter solution.
+    setItemIndexMethod(NoIndex);;
 }
 
 void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
