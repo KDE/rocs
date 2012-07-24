@@ -795,7 +795,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 <sect2 id="scripting-output">
 <title>Script Output</title>
 <para>
-    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &and; Script Output</emphasis>.
+    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &amp; Script Output</emphasis>.
     If the scripting engine detects a syntax error in your script, the error is also displayed as debug message.
     Note that all program messages are also displayed at the debug output (displayed as bold text).
 </para>
