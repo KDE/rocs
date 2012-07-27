@@ -35,7 +35,7 @@
 static const KAboutData aboutdata("rocs_dotfileformat", 0, ki18n("Read and write Graphviz graph documents.") , "0.1");
 
 
-extern KGraphViewer::DotGraphParsingHelper* phelper;
+extern DotParser::DotGraphParsingHelper* phelper;
 
 K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<DotFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))

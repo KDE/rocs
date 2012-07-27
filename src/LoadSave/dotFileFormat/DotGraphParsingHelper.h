@@ -29,7 +29,7 @@
 #include <Pointer.h>
 
 #include <QObject>
-namespace KGraphViewer
+namespace DotParser
 {
 
 struct DotGraphParsingHelper {
@@ -53,9 +53,9 @@ struct DotGraphParsingHelper {
         edgebounds.append(bound);
     }
     void finalactions();
-    void setdataTypeelementattributes(QObject* graphElement, const KGraphViewer::DotGraphParsingHelper::AttributesMap& attributes);
+    void setDataStructureElementAttributes(QObject* graphElement, const DotParser::DotGraphParsingHelper::AttributesMap& attributes);
 
-    QString attrid;
+    QString attributeId;
     QString valid;
     std::string attributed;
     QStringList subdataTypeid;

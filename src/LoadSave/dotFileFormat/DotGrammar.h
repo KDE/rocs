@@ -55,7 +55,7 @@ void strict(char const* first, char const* last);
 void undirectedDataStructure(char const* first, char const* last);
 void directedDataStructure(char const* first, char const* last);
 void dataStructureId(char const* first, char const* last);
-void attrid(char const* first, char const* last);
+void attributeId(char const* first, char const* last);
 void subDataStructureId(char const* first, char const* last);
 void valid(char const* first, char const* last);
 void addattr(char const* first, char const* last);

@@ -27,13 +27,13 @@
 #include <QFile>
 #include "DynamicPropertiesList.h"
 
-extern KGraphViewer::DotGraphParsingHelper* phelper;
+extern DotParser::DotGraphParsingHelper* phelper;
 
-namespace KGraphViewer
+namespace DotParser
 {
 
 DotGraphParsingHelper::DotGraphParsingHelper():
-    attrid(),
+    attributeId(),
     valid(),
     attributed(),
     subdataTypeid(),
@@ -54,7 +54,7 @@ DotGraphParsingHelper::DotGraphParsingHelper():
 {
 }
 
-void DotGraphParsingHelper::setdataTypeelementattributes(QObject* graphElement, const AttributesMap& attributes)
+void DotGraphParsingHelper::setDataStructureElementAttributes(QObject* graphElement, const AttributesMap& attributes)
 {
     AttributesMap::const_iterator it, it_end;
     it = attributes.begin();
@@ -75,7 +75,7 @@ void DotGraphParsingHelper::setdataTypeelementattributes(QObject* graphElement, 
 
 void DotGraphParsingHelper::setDataStructureAttributes()
 {
-    setdataTypeelementattributes(dataStructure.get(), dataStructureAttributes);
+    setDataStructureElementAttributes(dataStructure.get(), dataStructureAttributes);
 }
 
 void DotGraphParsingHelper::setSubDataStructureAttributes()
@@ -87,7 +87,7 @@ void DotGraphParsingHelper::setDataAttributes()
     if (!currentDataPtr) {
         return;
     }
-    setdataTypeelementattributes(currentDataPtr.get(), dataAttributes);
+    setDataStructureElementAttributes(currentDataPtr.get(), dataAttributes);
 }
 
 void DotGraphParsingHelper::setPointerAttributes()
@@ -95,7 +95,7 @@ void DotGraphParsingHelper::setPointerAttributes()
     if (!currentPointerPtr) {
         return;
     }
-    setdataTypeelementattributes(currentPointerPtr.get(), pointersAttributes);
+    setDataStructureElementAttributes(currentPointerPtr.get(), pointersAttributes);
 }
 
 void DotGraphParsingHelper::setAttributedList()

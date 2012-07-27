@@ -35,7 +35,7 @@ using namespace std;
 using namespace boost;
 using namespace boost::spirit::classic;
 
-using namespace KGraphViewer;
+using namespace DotParser;
 
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 #define BOOST_SPIRIT_DEBUG 1
@@ -81,7 +81,7 @@ DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
                  ) ;
 
     attr_list  = ch_p('[') >> !(a_list) >> ch_p(']');
-    a_list  = ((ID[&attrid] >> !('=' >> ID[&valid]))[&addattr] >> !(',' >> a_list));
+    a_list  = ((ID[&attributeId] >> !('=' >> ID[&valid]))[&addattr] >> !(',' >> a_list));
     edge_stmt  = ((node_id[&edgebound] | subdataType) >>  edgeRHS >> !(attr_list[assign_a(phelper->attributed, "edge")]))[&pushAttrList][&setattributedlist][&createedges][&popAttrList];
     edgeRHS  =  edgeop[&checkedgeop] >> (node_id[&edgebound] | subdataType) >> !(edgeRHS);
     edgeop = str_p("->") | str_p("--");
@@ -173,13 +173,13 @@ void dataStructureId(char const* first, char const* last)
     phelper->dataStructure->setName(name);
 }
 
-void attrid(char const* first, char const* last)
+void attributeId(char const* first, char const* last)
 {
     if (phelper) {
         std::string id(first, last);
         if (id.size() > 0 && id[0] == '"') id = id.substr(1);
         if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
-        phelper->attrid = QString::fromStdString(id);
+        phelper->attributeId = QString::fromStdString(id);
         phelper->valid = QString();
 //     kDebug() << "Got attr ID  = '"<<QString::fromStdString(phelper->attrid)<<"'";
     }
@@ -216,7 +216,7 @@ void valid(char const* first, char const* last)
 void addattr(char const* /*first*/, char const* /*last*/)
 {
     if (phelper) {
-        phelper->attributes.insert(phelper->attrid, phelper->valid);
+        phelper->attributes.insert(phelper->attributeId, phelper->valid);
     }
 }
 
