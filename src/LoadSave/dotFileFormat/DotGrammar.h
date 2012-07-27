@@ -90,13 +90,13 @@ struct DotGrammar : public boost::spirit::classic::grammar<DotGrammar> {
     struct definition {
         definition(DotGrammar const& self);
 
-        boost::spirit::classic::rule<ScannerT> dataType, ID, tag, stmt_list, stmt, attr_stmt,
+        boost::spirit::classic::rule<ScannerT> dataStructure, ID, tag, stmt_list, stmt, attr_stmt,
               attr_list, a_list, edge_stmt, edgeop,
               edgeRHS, node_stmt, node_id,
               port, subdataType, compass_pt;
 
         boost::spirit::classic::rule<ScannerT> const& start() const {
-            return dataType;
+            return dataStructure;
         }
     };
 

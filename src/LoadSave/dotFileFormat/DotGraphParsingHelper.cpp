@@ -34,7 +34,7 @@
 #include <kdebug.h>
 
 #include <QFile>
-#include<QUuid>
+#include <QUuid>
 #include "DynamicPropertiesList.h"
 
 using namespace std;
@@ -61,61 +61,61 @@ DotGraphParsingHelper::DotGraphParsingHelper():
     edgebounds(),
     z(0),
     maxZ(0),
-//   gs(0),
-    gn(0),
-    ge(0)
+    currentDataPtr(),
+    currentPointerPtr(),
+    dataMap()
 {
 }
 
-void DotGraphParsingHelper::setdataTypeelementattributes(QObject* ge, const AttributesMap& attributes)
+void DotGraphParsingHelper::setdataTypeelementattributes(QObject* graphElement, const AttributesMap& attributes)
 {
     AttributesMap::const_iterator it, it_end;
     it = attributes.begin();
     it_end = attributes.end();
     for (; it != it_end; it++) {
         kDebug() << "    " << QString::fromStdString((*it).first) << "\t=\t'" << QString::fromStdString((*it).second) << "'";
-        kDebug() << ge->metaObject()->className();
-        if ((*it).first == "label" && strcmp(ge->metaObject()->className(), "Edge") == 0) {
+        kDebug() << graphElement->metaObject()->className();
+        if ((*it).first == "label" && strcmp(graphElement->metaObject()->className(), "Edge") == 0) {
 
             QString label = QString::fromUtf8((*it).second.c_str());
             label.replace("\\n", "\n");
-            ge->setProperty("name", label);
+            graphElement->setProperty("name", label);
         } else {
 //       (*ge).attributes()[QString::fromStdString((*it).first)] =
-            DynamicPropertiesList::New()->addProperty(ge, QString::fromStdString((*it).first));
-            ge->setProperty((*it).first.c_str(), QString::fromStdString((*it).second));
+            DynamicPropertiesList::New()->addProperty(graphElement, QString::fromStdString((*it).first));
+            graphElement->setProperty((*it).first.c_str(), QString::fromStdString((*it).second));
         }
     }
 
 
 }
 
-void DotGraphParsingHelper::setdataStructureattributes()
+void DotGraphParsingHelper::setDataStructureAttributes()
 {
-
     setdataTypeelementattributes(dataStructure.get(), dataStructureAttributes);
 }
 
-void DotGraphParsingHelper::setsubdataStructureattributes()
+void DotGraphParsingHelper::setSubDataStructureAttributes()
 {
 }
 
 void DotGraphParsingHelper::setDataAttributes()
 {
-
-    if (gn == 0) {
+    if (!currentDataPtr) {
         return;
     }
-    setdataTypeelementattributes(gn, dataAttributes);
+    setdataTypeelementattributes(currentDataPtr.get(), dataAttributes);
 }
 
-void DotGraphParsingHelper::setedgeattributes()
+void DotGraphParsingHelper::setPointerAttributes()
 {
-    setdataTypeelementattributes(ge, pointersAttributes);
-
+    if (!currentPointerPtr) {
+        return;
+    }
+    setdataTypeelementattributes(currentPointerPtr.get(), pointersAttributes);
 }
 
-void DotGraphParsingHelper::setattributedlist()
+void DotGraphParsingHelper::setAttributedList()
 {
     if (attributed == "graph") {
         if (attributes.find("bb") != attributes.end()) {
@@ -150,77 +150,74 @@ void DotGraphParsingHelper::setattributedlist()
     attributes.clear();
 }
 
-void DotGraphParsingHelper::createdatum(const std::string& datumid)
+void DotGraphParsingHelper::createData(const std::string& identifier)
 {
-    QString id = QString::fromStdString(datumid);
-    kDebug() << id;
-    gn = dynamic_cast<Data*>(dataStructure->getData(id.toInt()).get()); //FIXME does not work
-    if (gn == 0) { //&& dataType->data().size() < KGV_MAX_ITEMS_TO_LOAD)
-        kDebug() << "Creating a new datum" << subdataTypeid;
-        gn = dataStructure->addData(id).get();
+    QString id = QString::fromStdString(identifier);
+    edgebounds.clear(); //TODO explain meaning of this
 
-        if (!subdataTypeid.isEmpty()) {
-            gn->addDynamicProperty("SubGraph", subdataTypeid.last());
-//       kDebug () << gn->dynamicPropertyNames();
-        }
-
+    if (dataMap.contains(id)) {
+        kDebug() << "Omitting data element, ID is already used: "<< id;
+        return;
     }
-    edgebounds.clear();
+
+    kDebug() << "Creating new data element: " << subdataTypeid;
+    currentDataPtr = dataStructure->addData(id);
+    dataMap.insert(id, currentDataPtr);
+
+    if (!subdataTypeid.isEmpty()) { //TODO no proper subgraph implementation exists
+        currentDataPtr->addDynamicProperty("SubGraph", subdataTypeid.last());
+    }
 }
 
-void DotGraphParsingHelper::createsubdataType()
+void DotGraphParsingHelper::createSubDataStructure()
 {
+    kDebug() << "NOT IMPLEMENTED!";
 }
 
-void DotGraphParsingHelper::createedges()
+void DotGraphParsingHelper::createPointers()
 {
-    //FIXME the following logic is screwed, since the parser code tries to work with data names
-    //      which was removed in favor for real IDs
-//   kDebug();
-    std::string datum1Name, datum2Name;
-    datum1Name = edgebounds.front();
+    //TODO explain meaning of edge bounds
+
+    QString fromId, toId;
+    fromId = QString::fromStdString(edgebounds.front());
     edgebounds.pop_front();
     while (!edgebounds.empty()) {
-        datum2Name = edgebounds.front();
+        toId = QString::fromStdString(edgebounds.front());
         edgebounds.pop_front();
 
-        DataPtr gn1 = dataStructure->getData(QString::fromStdString(datum1Name).toInt()); //FIXME does not work
-        if (gn1 == 0) {
-//       kDebug() << "new datum 1";
-            gn1 = dataStructure->addData(QString::fromStdString(datum1Name));
-
-            if (!subdataTypeid.isEmpty()) {
-                gn1->addDynamicProperty("SubGraph", subdataTypeid.last());
-            }
-//             gn1 = dataType->datum(QString::fromStdString(datum1Name));
-        }
-        DataPtr gn2 = dataStructure->getData(QString::fromStdString(datum2Name).toInt()); //FIXME does not work
-        if (gn2 == 0) {
-//       kDebug() << "new datum 1";
-            gn2 = dataStructure->addData(QString::fromStdString(datum2Name));
-
-            if (!subdataTypeid.isEmpty()) {
-                gn2->addDynamicProperty("SubGraph", subdataTypeid.last());
+        // if necessary create from id
+        if (!dataMap.contains(fromId)) {
+            DataPtr from = dataStructure->addData(fromId);
+            dataMap.insert(fromId, from);
+            if (!subdataTypeid.isEmpty()) { //TODO no proper subgraph implementation exists
+                from->addDynamicProperty("SubGraph", subdataTypeid.last());
             }
         }
-        if (gn1 == 0 || gn2 == 0) {
-            kError() << "Unable to find or create edge bound(s) gn1=" << gn1 << "; gn2=" << gn2;
-        }
+        DataPtr from = dataMap[fromId];
 
-        ge = dataStructure->addPointer(gn1, gn2).get();
+        // if necessary create to node
+        if (!dataMap.contains(toId)) {
+            DataPtr to = dataStructure->addData(toId);
+            dataMap.insert(toId, to);
+            if (!subdataTypeid.isEmpty()) { //TODO no proper subgraph implementation exists
+                to->addDynamicProperty("SubGraph", subdataTypeid.last());
+            }
+        }
+        DataPtr to = dataMap[toId];
+
+        currentPointerPtr = dataStructure->addPointer(from, to);
         if (!subdataTypeid.isEmpty()) {
-            ge->addDynamicProperty("SubGraph", subdataTypeid.last());
+            currentPointerPtr->addDynamicProperty("SubGraph", subdataTypeid.last());
         }
-        setedgeattributes();
+        setPointerAttributes();
 
-        datum1Name = datum2Name;
+        fromId = toId;
     }
     edgebounds.clear();
 }
 
 void DotGraphParsingHelper::finalactions()
 {
-
 }
 
 }

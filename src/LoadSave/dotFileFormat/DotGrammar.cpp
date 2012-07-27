@@ -19,10 +19,6 @@
 */
 
 #include "DotGrammar.h"
-// #include "dotdataType.h"
-// #include "dotdefaults.h"
-// #include "dataTypenode.h"
-// #include "dataTypeedge.h"
 #include "DotGraphParsingHelper.h"
 #include <Document.h>
 
@@ -58,8 +54,10 @@ const boost::spirit::classic::distinct_parser<> keyword_p("0-9a-zA-Z_");
 template <typename ScannerT>
 DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
 {
-    dataType  = (!(keyword_p("strict")[&strict]) >> (keyword_p("dataType")[&undirectedDataStructure] | keyword_p("didataType")[&directedDataStructure])
-                 >> !ID[&dataStructureId] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
+    dataStructure = (!(keyword_p("strict")[&strict])
+        >> (keyword_p("dataType")[&undirectedDataStructure] | keyword_p("didataType")[&directedDataStructure])
+        >> !ID[&dataStructureId] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
+
     ID = (
              (((anychar_p - punct_p) | '_') >> *((anychar_p - punct_p) | '_'))
              | real_p
@@ -166,7 +164,7 @@ void directedDataStructure(char const* /*first*/, char const* /*last*/)
 void dataStructureId(char const* first, char const* last)
 {
     QString name = QString::fromStdString(std::string(first, last));
-    kDebug() << "Set datastructure name: " << name;
+    kDebug() << "Set data structure name: " << name;
     if (!phelper->dataStructure) {
 
         DataStructurePtr dataStructure = phelper->gd->addDataStructure(name);
@@ -259,7 +257,7 @@ void createnode(char const* first, char const* last)
         std::string id(first, last);
         if (id.size() > 0 && id[0] == '"') id = id.substr(1);
         if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
-        phelper->createdatum(id);
+        phelper->createData(id);
     }
 }
 
@@ -277,7 +275,7 @@ void setdataTypeattributes(char const* /*first*/, char const* /*last*/)
     if (phelper) {
 //     if (phelper->z == 1) // main dataType
 //     {
-        phelper->setdataStructureattributes();
+        phelper->setDataStructureAttributes();
 //     }
 //     else
 //     {
@@ -297,7 +295,7 @@ void setnodeattributes(char const* /*first*/, char const* /*last*/)
 void setattributedlist(char const* /*first*/, char const* /*last*/)
 {
     if (phelper) {
-        phelper->setattributedlist();
+        phelper->setAttributedList();
     }
 }
 
@@ -327,7 +325,7 @@ void edgebound(char const* first, char const* last)
 void createedges(char const* /*first*/, char const* /*last*/)
 {
     if (phelper) {
-        phelper->createedges();
+        phelper->createPointers();
     }
 }
 

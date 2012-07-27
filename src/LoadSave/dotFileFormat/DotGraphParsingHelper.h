@@ -30,8 +30,6 @@
 #include <Data.h>
 #include <Document.h>
 #include <Pointer.h>
-// class Node;
-// class Graph;
 
 #include <QObject>
 namespace KGraphViewer
@@ -47,14 +45,18 @@ struct DotGraphParsingHelper {
 
     DotGraphParsingHelper();
 
-    void createdatum(const std::string& nodeid);
-    void createsubdataType();
-    void setdataStructureattributes();
-    void setsubdataStructureattributes();
+    /**
+     * Creates new data element and registers the identifier in data map.
+     */
+    void createData(const std::string& identifier);
+    void createSubDataStructure();
+    void setDataStructureAttributes();
+    void setSubDataStructureAttributes();
     void setDataAttributes();
-    void setedgeattributes();
-    void setattributedlist();
-    void createedges();
+    void setPointerAttributes();
+    void setAttributedList();
+
+    void createPointers();
     void edgebound(const std::string& bound) {
         edgebounds.push_back(bound);
     }
@@ -84,10 +86,10 @@ struct DotGraphParsingHelper {
     boost::shared_ptr<Rocs::GraphStructure> dataStructure;
 
 //   GraphSubgraph* gs;
-    Data* gn;
-    Pointer* ge;
+    DataPtr currentDataPtr;
+    PointerPtr currentPointerPtr;
     Document* gd;   // graph document of type "Graph", ensured when document is created
-//     int unique;
+    QMap<QString, DataPtr> dataMap; // for mapping data element ids
 };
 
 }
