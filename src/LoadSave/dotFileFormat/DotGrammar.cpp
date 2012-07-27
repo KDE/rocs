@@ -75,21 +75,21 @@ DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
             );
 
     attr_stmt  = (
-                     (keyword_p("dataType")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])[&setdataTypeattributes]
-                     | (keyword_p("node")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])
-                     | (keyword_p("edge")[assign_a(phelper->attributed)] >> attr_list[&setattributedlist])
+                     (keyword_p("dataType")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])[&setDataStructureAttributes]
+                     | (keyword_p("node")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])
+                     | (keyword_p("edge")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])
                  ) ;
 
     attr_list  = ch_p('[') >> !(a_list) >> ch_p(']');
     a_list  = ((ID[&attributeId] >> !('=' >> ID[&valid]))[&addattr] >> !(',' >> a_list));
-    edge_stmt  = ((node_id[&edgebound] | subdataType) >>  edgeRHS >> !(attr_list[assign_a(phelper->attributed, "edge")]))[&pushAttrList][&setattributedlist][&createedges][&popAttrList];
+    edge_stmt  = ((node_id[&edgebound] | subdataType) >>  edgeRHS >> !(attr_list[assign_a(phelper->attributed, "edge")]))[&pushAttrList][&setAttributedList][&createPointers][&popAttrList];
     edgeRHS  =  edgeop[&checkedgeop] >> (node_id[&edgebound] | subdataType) >> !(edgeRHS);
     edgeop = str_p("->") | str_p("--");
-    node_stmt  = (node_id[&createnode] >> !(attr_list))[assign_a(phelper->attributed, "node")][&pushAttrList][&setattributedlist][&setnodeattributes][&popAttrList];
+    node_stmt  = (node_id[&createData] >> !(attr_list))[assign_a(phelper->attributed, "node")][&pushAttrList][&setAttributedList][&setDataAttributes][&popAttrList];
     node_id  = (ID >> !(port));
     port  = (ch_p(':') >> ID >> !(':' >> compass_pt))
             | (':' >> compass_pt);
-    subdataType  = (!(keyword_p("subgraph") >> !(ID[&subDataStructureId])) >> ch_p('{')[&createsubdataType][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
+    subdataType  = (!(keyword_p("subgraph") >> !(ID[&subDataStructureId])) >> ch_p('{')[&createSubDataStructure][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
                    | (keyword_p("subgraph") >> ID[&subDataStructureId]);
     compass_pt  = (keyword_p("n") | keyword_p("ne") | keyword_p("e")
                    | keyword_p("se") | keyword_p("s") | keyword_p("sw")
@@ -254,7 +254,7 @@ void popAttrList(char const* /*first*/, char const* /*last*/)
 //   kDebug() << "Poped";
 }
 
-void createnode(char const* first, char const* last)
+void createData(char const* first, char const* last)
 {
 //   kDebug() << (void*)first << (void*)last << QString::fromStdString(std::string(first,last));
     if (phelper != 0 && first != 0 && last != 0) {
@@ -265,7 +265,7 @@ void createnode(char const* first, char const* last)
     }
 }
 
-void createsubdataType(char const /*c*/)
+void createSubDataStructure(char const /*c*/)
 {
 //   if (phelper)
 //   {
@@ -273,7 +273,7 @@ void createsubdataType(char const /*c*/)
 //   }
 }
 
-void setdataTypeattributes(char const* /*first*/, char const* /*last*/)
+void setDataStructureAttributes(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "setdataTypeattributes with z = " << phelper->z;
     if (phelper) {
@@ -288,7 +288,7 @@ void setdataTypeattributes(char const* /*first*/, char const* /*last*/)
     }
 }
 
-void setnodeattributes(char const* /*first*/, char const* /*last*/)
+void setDataAttributes(char const* /*first*/, char const* /*last*/)
 {
 //   kDebug() << "setnodeattributes with z = " << phelper->z;
     if (phelper) {
@@ -296,7 +296,7 @@ void setnodeattributes(char const* /*first*/, char const* /*last*/)
     }
 }
 
-void setattributedlist(char const* /*first*/, char const* /*last*/)
+void setAttributedList(char const* /*first*/, char const* /*last*/)
 {
     if (phelper) {
         phelper->setAttributedList();
@@ -326,7 +326,7 @@ void edgebound(char const* first, char const* last)
     }
 }
 
-void createedges(char const* /*first*/, char const* /*last*/)
+void createPointers(char const* /*first*/, char const* /*last*/)
 {
     if (phelper) {
         phelper->createPointers();
