@@ -22,28 +22,15 @@
 #include "DotGraphParsingHelper.h"
 #include "DotGrammar.h"
 
-#include <boost/throw_exception.hpp>
-#include <boost/spirit/include/classic_core.hpp>
-#include <boost/spirit/include/classic_distinct.hpp>
-#include <boost/spirit/include/classic_loops.hpp>
-#include <boost/spirit/include/classic_confix.hpp>
-
-
-#include <iostream>
-
-#include <kdebug.h>
+#include <KDebug>
 
 #include <QFile>
-#include <QUuid>
 #include "DynamicPropertiesList.h"
-
-using namespace std;
 
 extern KGraphViewer::DotGraphParsingHelper* phelper;
 
 namespace KGraphViewer
 {
-#define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<int>::max()
 
 DotGraphParsingHelper::DotGraphParsingHelper():
     attrid(),
@@ -73,21 +60,17 @@ void DotGraphParsingHelper::setdataTypeelementattributes(QObject* graphElement, 
     it = attributes.begin();
     it_end = attributes.end();
     for (; it != it_end; it++) {
-        kDebug() << "    " << QString::fromStdString((*it).first) << "\t=\t'" << QString::fromStdString((*it).second) << "'";
+        kDebug() << "    " << it.key() << "\t=\t'" << it.value() << "'";
         kDebug() << graphElement->metaObject()->className();
-        if ((*it).first == "label" && strcmp(graphElement->metaObject()->className(), "Edge") == 0) {
-
-            QString label = QString::fromUtf8((*it).second.c_str());
+        if (it.key() == "label" && strcmp(graphElement->metaObject()->className(), "Edge") == 0) {
+            QString label = it.value();
             label.replace("\\n", "\n");
             graphElement->setProperty("name", label);
         } else {
-//       (*ge).attributes()[QString::fromStdString((*it).first)] =
-            DynamicPropertiesList::New()->addProperty(graphElement, QString::fromStdString((*it).first));
-            graphElement->setProperty((*it).first.c_str(), QString::fromStdString((*it).second));
+            DynamicPropertiesList::New()->addProperty(graphElement, it.key());
+            graphElement->setProperty(it.key().toStdString().c_str(), it.value());
         }
     }
-
-
 }
 
 void DotGraphParsingHelper::setDataStructureAttributes()
@@ -120,7 +103,7 @@ void DotGraphParsingHelper::setAttributedList()
     if (attributed == "graph") {
         if (attributes.find("bb") != attributes.end()) {
             std::vector< int > v;
-            parse_integers(attributes["bb"].c_str(), v);
+            parse_integers(attributes["bb"].toStdString().c_str(), v);
             if (v.size() >= 4) {
                 kDebug() << "setting width and height to " << v[2] << v[3];
             }
@@ -129,40 +112,38 @@ void DotGraphParsingHelper::setAttributedList()
         it = attributes.begin();
         it_end = attributes.end();
         for (; it != it_end; it++) {
-            dataStructureAttributes[(*it).first] = (*it).second;
+            dataStructureAttributes[it.key()] = it.value();
         }
     } else if (attributed == "datum") {
         AttributesMap::const_iterator it, it_end;
         it = attributes.begin();
         it_end = attributes.end();
         for (; it != it_end; it++) {
-            dataAttributes[(*it).first] = (*it).second;
+            dataAttributes[it.key()] = it.value();
         }
     } else if (attributed == "edge") {
         AttributesMap::const_iterator it, it_end;
         it = attributes.begin();
         it_end = attributes.end();
         for (; it != it_end; it++) {
-//       kDebug() << "    " << QString::fromStdString((*it).first) << " = " <<  QString::fromStdString((*it).second);
-            pointersAttributes[(*it).first] = (*it).second;
+            pointersAttributes[it.key()] = it.value();
         }
     }
     attributes.clear();
 }
 
-void DotGraphParsingHelper::createData(const std::string& identifier)
+void DotGraphParsingHelper::createData(QString identifier)
 {
-    QString id = QString::fromStdString(identifier);
     edgebounds.clear(); //TODO explain meaning of this
 
-    if (dataMap.contains(id)) {
-        kDebug() << "Omitting data element, ID is already used: "<< id;
+    if (dataMap.contains(identifier)) {
+        kDebug() << "Omitting data element, ID is already used: "<< identifier;
         return;
     }
 
     kDebug() << "Creating new data element: " << subdataTypeid;
-    currentDataPtr = dataStructure->addData(id);
-    dataMap.insert(id, currentDataPtr);
+    currentDataPtr = dataStructure->addData(identifier);
+    dataMap.insert(identifier, currentDataPtr);
 
     if (!subdataTypeid.isEmpty()) { //TODO no proper subgraph implementation exists
         currentDataPtr->addDynamicProperty("SubGraph", subdataTypeid.last());
@@ -176,14 +157,16 @@ void DotGraphParsingHelper::createSubDataStructure()
 
 void DotGraphParsingHelper::createPointers()
 {
-    //TODO explain meaning of edge bounds
-
     QString fromId, toId;
-    fromId = QString::fromStdString(edgebounds.front());
-    edgebounds.pop_front();
-    while (!edgebounds.empty()) {
-        toId = QString::fromStdString(edgebounds.front());
-        edgebounds.pop_front();
+    //TODO explain meaning of edge bounds
+    if (edgebounds.isEmpty()) {
+        return;
+    }
+    fromId = edgebounds.first();
+    edgebounds.removeFirst();
+    while (!edgebounds.isEmpty()) {
+        toId = edgebounds.first();
+        edgebounds.removeFirst();
 
         // if necessary create from id
         if (!dataMap.contains(fromId)) {

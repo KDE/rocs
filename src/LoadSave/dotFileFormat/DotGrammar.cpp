@@ -179,8 +179,8 @@ void attrid(char const* first, char const* last)
         std::string id(first, last);
         if (id.size() > 0 && id[0] == '"') id = id.substr(1);
         if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
-        phelper->attrid = id;
-        phelper->valid = "";
+        phelper->attrid = QString::fromStdString(id);
+        phelper->valid = QString();
 //     kDebug() << "Got attr ID  = '"<<QString::fromStdString(phelper->attrid)<<"'";
     }
 }
@@ -200,19 +200,23 @@ void subDataStructureId(char const* first, char const* last)
 
 void valid(char const* first, char const* last)
 {
-    std::string id(first, last);
-    if (phelper) {
-        if (id.size() > 0 && id[0] == '"') id = id.substr(1);
-        if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
-        phelper->valid = id;
-//     kDebug() << "Got attr val = '"<<QString::fromStdString(id)<<"'";
+    if (!phelper) {
+        return;
     }
+    std::string id(first, last);
+    if (id.size() > 0 && id[0] == '"') {
+        id = id.substr(1);
+    }
+    if (id.size() > 0 && id[id.size() - 1] == '"') {
+        id = id.substr(0, id.size() - 1);
+    }
+    phelper->valid = QString::fromStdString(id);
 }
 
 void addattr(char const* /*first*/, char const* /*last*/)
 {
     if (phelper) {
-        phelper->attributes.insert(std::make_pair(phelper->attrid, phelper->valid));
+        phelper->attributes.insert(phelper->attrid, phelper->valid);
     }
 }
 
@@ -257,7 +261,7 @@ void createnode(char const* first, char const* last)
         std::string id(first, last);
         if (id.size() > 0 && id[0] == '"') id = id.substr(1);
         if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
-        phelper->createData(id);
+        phelper->createData(QString::fromStdString(id));
     }
 }
 
@@ -318,7 +322,7 @@ void edgebound(char const* first, char const* last)
         std::string id(first, last);
         if (id.size() > 0 && id[0] == '"') id = id.substr(1);
         if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
-        phelper->edgebound(id);
+        phelper->addEdgeBound(QString::fromStdString(id));
     }
 }
 

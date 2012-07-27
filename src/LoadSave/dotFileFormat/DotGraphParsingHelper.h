@@ -21,9 +21,6 @@
 #ifndef DOT_GRAPHPARSINGHELPER_H
 #define DOT_GRAPHPARSINGHELPER_H
 
-#include <map>
-#include <list>
-#include <string>
 #include <QStringList>
 #include <DataStructure.h>
 #include "../Plugins/DataStructure/Graph/GraphStructure.h"
@@ -34,21 +31,16 @@
 #include <QObject>
 namespace KGraphViewer
 {
-// class DotGraph;
-// class GraphSubgraph;
-// class GraphNode;
-// class GraphEdge;
-// class GraphElement;
 
 struct DotGraphParsingHelper {
-    typedef std::map< std::string, std::string > AttributesMap;
+    typedef QMap<QString,QString> AttributesMap;
 
     DotGraphParsingHelper();
 
     /**
      * Creates new data element and registers the identifier in data map.
      */
-    void createData(const std::string& identifier);
+    void createData(QString identifier);
     void createSubDataStructure();
     void setDataStructureAttributes();
     void setSubDataStructureAttributes();
@@ -57,38 +49,36 @@ struct DotGraphParsingHelper {
     void setAttributedList();
 
     void createPointers();
-    void edgebound(const std::string& bound) {
-        edgebounds.push_back(bound);
+    void addEdgeBound(QString bound) {
+        edgebounds.append(bound);
     }
     void finalactions();
-    void setdataTypeelementattributes(QObject* ge, const KGraphViewer::DotGraphParsingHelper::AttributesMap& attributes);
+    void setdataTypeelementattributes(QObject* graphElement, const KGraphViewer::DotGraphParsingHelper::AttributesMap& attributes);
 
-    std::string attrid;
-    std::string valid;
+    QString attrid;
+    QString valid;
     std::string attributed;
     QStringList subdataTypeid;
-//   std::string subgraphid;
     unsigned int unique;
 
     AttributesMap attributes;
     AttributesMap dataStructureAttributes;
     AttributesMap dataAttributes;
     AttributesMap pointersAttributes;
-    std::list< AttributesMap > dataStructureAttributesStack;
-    std::list< AttributesMap > dataAttributesStack;
-    std::list< AttributesMap > pointersAttributesStack;
+    QList< AttributesMap > dataStructureAttributesStack;
+    QList< AttributesMap > dataAttributesStack;
+    QList< AttributesMap > pointersAttributesStack;
 
-    std::list< std::string > edgebounds;
+    QStringList edgebounds;
 
     unsigned int z;
     unsigned int maxZ;
 
     boost::shared_ptr<Rocs::GraphStructure> dataStructure;
 
-//   GraphSubgraph* gs;
     DataPtr currentDataPtr;
     PointerPtr currentPointerPtr;
-    Document* gd;   // graph document of type "Graph", ensured when document is created
+    Document* gd;                   // graph document of type "Graph", ensured when document is created
     QMap<QString, DataPtr> dataMap; // for mapping data element ids
 };
 
