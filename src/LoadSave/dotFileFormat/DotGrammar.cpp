@@ -54,46 +54,77 @@ const boost::spirit::classic::distinct_parser<> keyword_p("0-9a-zA-Z_");
 template <typename ScannerT>
 DotGrammar::definition<ScannerT>::definition(DotGrammar const& /*self*/)
 {
-    dataStructure = (!(keyword_p("strict")[&strict])
-        >> (keyword_p("dataType")[&undirectedDataStructure] | keyword_p("didataType")[&directedDataStructure])
-        >> !ID[&dataStructureId] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
+    // grammar definition of the DOT language as specified by Graphviz DOT language specification,
+    // see below:
+    //   graph      :  [ strict ] (graph | digraph) [ ID ] '{' stmt_list '}'
+    //   stmt_list  :  [ stmt [ ';' ] [ stmt_list ] ]
+    //   stmt       :  node_stmt
+    //              |  edge_stmt
+    //              |  attr_stmt
+    //              |  ID '=' ID
+    //              |  subgraph
+    //   attr_stmt  :  (graph | node | edge) attr_list
+    //   attr_list  :  '[' [ a_list ] ']' [ attr_list ]
+    //   a_list     :  ID [ '=' ID ] [ ',' ] [ a_list ]
+    //   edge_stmt  :  (node_id | subgraph) edgeRHS [ attr_list ]
+    //   edgeRHS    :  edgeop (node_id | subgraph) [ edgeRHS ]
+    //   node_stmt  :  node_id [ attr_list ]
+    //   node_id    :  ID [ port ]
+    //   port       :  ':' ID [ ':' compass_pt ]
+    //              |  ':' compass_pt
+    //   subgraph   :  [ subgraph [ ID ] ] '{' stmt_list '}'
+    //   compass_pt :  (n | ne | e | se | s | sw | w | nw | c | _)
+    //
+    // Further specifications for keywords and identifier available in DOT documentation.
+    // Usually availabel under: /usr/share/doc/graphviz/html/info/lang.html
 
+    // DOT file
+    graph = (!(keyword_p("strict")[&strict])
+            >> (keyword_p("graph")[&undirectedDataStructure] | keyword_p("digraph")[&directedDataStructure])
+            >> !ID[&dataStructureId] >> ch_p('{') >> !stmt_list >> ch_p('}'))[&finalactions];
+    stmt_list =  stmt >> !(ch_p(';')) >> !(stmt_list) ;
+    stmt = ( node_stmt
+           | edge_stmt
+           | attr_stmt
+           | (ID >> '=' >> ID)
+           | subgraph
+           );
+    attr_stmt = ( (keyword_p("graph")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])[&setDataStructureAttributes]
+                | (keyword_p("node")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])
+                | (keyword_p("edge")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])
+                ) ;
+    attr_list = ch_p('[') >> !(a_list) >> ch_p(']');
+    a_list = ((ID[&attributeId] >> !('=' >> ID[&valid]))[&addattr] >> !(',' >> a_list));
+    edge_stmt = (
+                    (node_id[&edgebound] | subgraph) >> edgeRHS >> !(attr_list[assign_a(phelper->attributed, "edge")])
+                )[&pushAttrList][&setAttributedList][&createPointers][&popAttrList];
+    edgeRHS  =  edgeop[&checkedgeop] >> (node_id[&edgebound] | subgraph) >> !(edgeRHS);
+    node_stmt  = (
+                     node_id[&createData] >> !(attr_list)
+                 )[assign_a(phelper->attributed, "node")][&pushAttrList][&setAttributedList][&setDataAttributes][&popAttrList];
+    node_id = (ID >> !(port));
+    port = (ch_p(':') >> ID >> !(':' >> compass_pt))
+           | (':' >> compass_pt);
+    subgraph = (
+                    !(keyword_p("subgraph") >> !(ID[&subDataStructureId]))
+                    >> ch_p('{')[&createSubDataStructure][&incrz][&pushAttrListC]
+                    >> stmt_list
+                    >> ch_p('}') [&decrz][&popAttrListC]
+               )
+               | (keyword_p("subgraph") >> ID[&subDataStructureId]);
+    compass_pt  = (keyword_p("n") | keyword_p("ne") | keyword_p("e")
+                  | keyword_p("se") | keyword_p("s") | keyword_p("sw")
+                  | keyword_p("w") | keyword_p("nw"));
+
+    // Identifiers
+    tag = ('<' >> *(anychar_p  - '>') >> '>');
+    edgeop = str_p("->") | str_p("--");
     ID = (
              (((anychar_p - punct_p) | '_') >> *((anychar_p - punct_p) | '_'))
              | real_p
              | ('"' >>  *((ch_p('\\') >> '"') | (anychar_p - '"')) >>  '"')
              | (ch_p('<') >>  *((anychar_p  - '<' - '>') | tag) >>  '>')
          );
-    tag = ('<' >> *(anychar_p  - '>') >> '>');
-    stmt_list  =  stmt >> !(ch_p(';')) >> !(stmt_list) ;
-    stmt  = (
-                attr_stmt
-                |  subdataType
-                |  edge_stmt
-                |  node_stmt
-                | (ID >> '=' >> ID)
-            );
-
-    attr_stmt  = (
-                     (keyword_p("dataType")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])[&setDataStructureAttributes]
-                     | (keyword_p("node")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])
-                     | (keyword_p("edge")[assign_a(phelper->attributed)] >> attr_list[&setAttributedList])
-                 ) ;
-
-    attr_list  = ch_p('[') >> !(a_list) >> ch_p(']');
-    a_list  = ((ID[&attributeId] >> !('=' >> ID[&valid]))[&addattr] >> !(',' >> a_list));
-    edge_stmt  = ((node_id[&edgebound] | subdataType) >>  edgeRHS >> !(attr_list[assign_a(phelper->attributed, "edge")]))[&pushAttrList][&setAttributedList][&createPointers][&popAttrList];
-    edgeRHS  =  edgeop[&checkedgeop] >> (node_id[&edgebound] | subdataType) >> !(edgeRHS);
-    edgeop = str_p("->") | str_p("--");
-    node_stmt  = (node_id[&createData] >> !(attr_list))[assign_a(phelper->attributed, "node")][&pushAttrList][&setAttributedList][&setDataAttributes][&popAttrList];
-    node_id  = (ID >> !(port));
-    port  = (ch_p(':') >> ID >> !(':' >> compass_pt))
-            | (':' >> compass_pt);
-    subdataType  = (!(keyword_p("subgraph") >> !(ID[&subDataStructureId])) >> ch_p('{')[&createSubDataStructure][&incrz][&pushAttrListC] >> stmt_list >> ch_p('}') [&decrz][&popAttrListC])
-                   | (keyword_p("subgraph") >> ID[&subDataStructureId]);
-    compass_pt  = (keyword_p("n") | keyword_p("ne") | keyword_p("e")
-                   | keyword_p("se") | keyword_p("s") | keyword_p("sw")
-                   | keyword_p("w") | keyword_p("nw"));
 }
 
 
