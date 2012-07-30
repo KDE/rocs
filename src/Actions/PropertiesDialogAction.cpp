@@ -166,7 +166,7 @@ void PropertiesDialogAction::showDialog()
         DataTypePage* typePage = new DataTypePage(dialog);
         typePage->setDataType(_dataType);
         dialog->setMainWidget(typePage);
-        dialog->setCaption(i18n("Data Type Properties"));
+        dialog->setCaption(i18nc("@title:window", "Data Type Properties"));
         dialog->setButtons(KDialog::Close);
         dialog->setAttribute(Qt::WA_DeleteOnClose);
         if (_screenPosition.isNull()) {
@@ -187,7 +187,7 @@ void PropertiesDialogAction::showDialog()
         PointerTypePage* typePage = new PointerTypePage(dialog);
         typePage->setPointerType(_pointerType);
         dialog->setMainWidget(typePage);
-        dialog->setCaption(i18n("Pointer Type Properties"));
+        dialog->setCaption(i18nc("@title:window", "Pointer Type Properties"));
         dialog->setButtons(KDialog::Close);
         dialog->setAttribute(Qt::WA_DeleteOnClose);
         if (_screenPosition.isNull()) {

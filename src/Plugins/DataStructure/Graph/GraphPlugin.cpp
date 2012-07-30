@@ -33,7 +33,7 @@
 #include <QtGui/QSpinBox>
 #include <QtGui/QLabel>
 
-static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18n("Graph Structure"), "0.1");
+static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18nc("@title Displayed plugin name", "Graph Structure"), "0.1");
 using namespace Rocs;
 
 K_PLUGIN_FACTORY(DSPluginFactory, registerPlugin<GraphPlugin>();)
@@ -112,15 +112,15 @@ QLayout*  GraphPlugin::dataStructureExtraProperties(DataStructurePtr graph, QWid
     QGridLayout *lay = new QGridLayout(parentWidget);
     QLabel * _graphTypeText = new QLabel(i18n("Graph Type:"));
     KComboBox * _graphTypeCombo = new KComboBox(parentWidget);
-    _graphTypeCombo->insertItem(GraphStructure::UNDIRECTED, i18n("Undirected Graph"));
-    _graphTypeCombo->insertItem(GraphStructure::DIRECTED,   i18n("Directed Graph"));
+    _graphTypeCombo->insertItem(GraphStructure::UNDIRECTED, i18nc("@label:inlistbox", "Undirected Graph"));
+    _graphTypeCombo->insertItem(GraphStructure::DIRECTED,   i18nc("@label:inlistbox", "Directed Graph"));
     _graphTypeCombo->insertItem(
-            GraphStructure::MULTIGRAPH_UNDIRECTED, 
-            i18nc("undirected graph for which several edges between same nodes may exist", "Undirected Multigraph")
+            GraphStructure::MULTIGRAPH_UNDIRECTED,
+            i18nc("@label:inlistbox Undirected graph for which several edges between same nodes may exist", "Undirected Multigraph")
                                );
     _graphTypeCombo->insertItem(
             GraphStructure::MULTIGRAPH_DIRECTED,
-            i18nc("directed graph for which several same orientated edges between same nodes may exist", "Directed Multigraph")
+            i18nc("@label:inlistbox Directed graph for which several same orientated edges between same nodes may exist", "Directed Multigraph")
                                );
 
     lay->addWidget(_graphTypeText, 0, 0);

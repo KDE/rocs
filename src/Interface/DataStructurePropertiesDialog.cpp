@@ -47,13 +47,13 @@ DataStructurePropertiesDialog::DataStructurePropertiesDialog(QWidget* parent)
     _dataTypePage = new DataTypePage(this);
     _pointerTypePage = new PointerTypePage(this);
 
-    tabWidget->addTab(_dataStructurePage, i18n("Data Structure"));
-    tabWidget->addTab(_dataTypePage, i18n("Data Types"));
-    tabWidget->addTab(_pointerTypePage, i18n("Pointer Types"));
+    tabWidget->addTab(_dataStructurePage, i18nc("@title:tab", "Data Structure"));
+    tabWidget->addTab(_dataTypePage, i18nc("@title:tab", "Data Types"));
+    tabWidget->addTab(_pointerTypePage, i18nc("@title:tab", "Pointer Types"));
 
     setMainWidget(tabWidget);
 
-    setCaption(i18n("Data Structure Properties"));
+    setCaption(i18nc("@title:window", "Data Structure Properties"));
     setButtons(Close);
     setAttribute(Qt::WA_DeleteOnClose);
 }

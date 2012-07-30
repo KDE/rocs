@@ -33,7 +33,7 @@
 #include <QCheckBox>
 
 
-static const KAboutData aboutdata("rocs_RootedTreeStructure", 0, ki18n("RootedTree Structure") , "0.1" );
+static const KAboutData aboutdata("rocs_RootedTreeStructure", 0, ki18nc("@title Displayed plugin name", "RootedTree Structure") , "0.1" );
 using namespace Rocs;
 
 K_PLUGIN_FACTORY( DSPluginFactory, registerPlugin< RootedTreePlugin>(); )
@@ -83,7 +83,7 @@ QLayout*  RootedTreePlugin::dataStructureExtraProperties(DataStructurePtr graph,
 //    if (!m_layout){
     RootedTreeStructure * ds = qobject_cast< RootedTreeStructure* >(graph.get());
     QVBoxLayout* layout = new QVBoxLayout(parentWidget);
-    QCheckBox * showPointer = new QCheckBox(i18n("Show all pointers"),parentWidget);
+    QCheckBox * showPointer = new QCheckBox(i18nc("@option:check", "Show all pointers"),parentWidget);
     layout->addWidget(showPointer);
     connect(showPointer, SIGNAL(toggled(bool)), ds, SLOT(setShowAllPointers(bool)));
     connect(ds, SIGNAL(showPointersChanged(bool)), showPointer, SLOT(setChecked(bool)));

@@ -36,17 +36,29 @@ int main(int argc, char *argv[])
 {
     KAboutData aboutData("rocs",
                          "rocs",
-                         ki18n("Rocs"),
+                         ki18nc("@title Displayed program name", "Rocs"),
                          ROCS_VERSION_STR,
-                         ki18n("Graph Theory Tool"),
+                         ki18nc("@title KAboutData: short program description", "Graph Theory Tool"),
                          KAboutData::License_GPL,
-                         ki18n("(c) 2009-2012 Rocs Developers"),
-                         ki18n("Rocs - Data Structure Analysis")
+                         ki18nc("@info:credit", "(c) 2009-2012 Rocs Developers"),
+                         ki18nc("@title Short program description", "Rocs - Data Structure Analysis")
                         );
 
-    aboutData.addAuthor(ki18n("Tomaz Canabrava"), ki18n("Developer"), "tcanabrava@kde.org", "http://liveblue.wordpress.com");
-    aboutData.addAuthor(ki18n("Wagner Reck"), ki18n("Developer"), "wagner.reck@gmail.com", "http://wiglot.wordpress.com");
-    aboutData.addAuthor(ki18n("Andreas Cord-Landwehr"), ki18n("Developer"), "cola@uni-paderborn.de", "http://cordlandwehr.wordpress.com");
+    aboutData.addAuthor(ki18nc("@info:credit Developer name",
+                        "Tomaz Canabrava"),
+                        ki18nc("@info:credit Role", "Developer"),
+                        "tcanabrava@kde.org",
+                        "http://liveblue.wordpress.com");
+
+    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Wagner Reck"),
+                        ki18nc("@info:credit Role", "Developer"),
+                        "wagner.reck@gmail.com",
+                        "http://wiglot.wordpress.com");
+
+    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Andreas Cord-Landwehr"),
+                        ki18nc("@info:credit Role", "Developer"),
+                        "cola@uni-paderborn.de",
+                        "http://cordlandwehr.wordpress.com");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
     KApplication app;

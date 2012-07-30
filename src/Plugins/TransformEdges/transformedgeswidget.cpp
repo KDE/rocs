@@ -56,7 +56,7 @@ TransformEdgesWidget::TransformEdgesWidget(Document* graphDoc, QWidget* parent)
     setMainWidget(widget);
 
     // other KDialog options
-    setCaption(i18n("Transform Edges"));
+    setCaption(i18nc("@title:window", "Transform Edges"));
     setButtons(KDialog::Cancel | KDialog::Ok);
     KDialog::centerOnScreen(widget, -3);
 

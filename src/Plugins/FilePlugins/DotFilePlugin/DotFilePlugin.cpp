@@ -38,7 +38,7 @@
 
 using namespace boost;
 
-static const KAboutData aboutdata("rocs_dotFilePlugin", 0, ki18n("Open and Save Graphviz files") , "0.1");
+static const KAboutData aboutdata("rocs_dotFilePlugin", 0, ki18nc("@title Displayed plugin name", "Open and Save Graphviz files") , "0.1");
 
 K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin<DotFilePlugin>();)
 K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))

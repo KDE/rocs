@@ -27,7 +27,7 @@
 #include <Pointer.h>
 
 
-static const KAboutData aboutdata("rocs_plaintxtplugin", 0, ki18n("Open and Save Plain TXT files") , "0.1");
+static const KAboutData aboutdata("rocs_plaintxtplugin", 0, ki18nc("@title Displayed plugin name", "Open and Save Plain TXT files") , "0.1");
 
 K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< PlainTXTFilePlugin>();)
 K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))

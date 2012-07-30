@@ -30,14 +30,13 @@
 AddDataAction::AddDataAction(GraphScene *scene, QObject *parent)
     : AbstractAction(scene, parent)
 {
-    setText(i18n("Add Node"));
-    setToolTip(i18n("Creates a new node at the click position."));
+    setText(i18nc("@action:intoolbar", "Add Data"));
+    setToolTip(i18nc("@info:tooltip", "Creates a new node at the click position."));
     _name = "add-node";
 }
 
 AddDataAction::~AddDataAction()
 {
-    kDebug() << "Destroyed";
 }
 
 bool AddDataAction::executePress(QPointF pos)

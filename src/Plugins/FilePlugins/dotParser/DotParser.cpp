@@ -27,7 +27,7 @@
 #include "DotGraphParsingHelper.h"
 #include "dotgrammar.h"
 
-static const KAboutData aboutdata("rocs_dotplugin", 0, ki18n("Open and Save Graphviz files") , "0.1");
+static const KAboutData aboutdata("rocs_dotplugin", 0, ki18nc("@title Displayed plugin name", "Open and Save Graphviz files") , "0.1");
 
 
 extern KGraphViewer::DotGraphParsingHelper* phelper;
