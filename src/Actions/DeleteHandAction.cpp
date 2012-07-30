@@ -33,8 +33,8 @@
 
 DeleteHandAction::DeleteHandAction(GraphScene* scene, QObject* parent): AbstractAction(scene, parent)
 {
-    setText(i18n("Delete"));
-    setToolTip(i18n("Delete items by clicking on them."));
+    setText(i18nc("@action:intoolbar", "Delete"));
+    setToolTip(i18nc("@info:tooltip", "Delete items by clicking on them."));
     setIcon(KIcon("rocsdeletedata"));
     _name = "rocs-hand-delete";
 

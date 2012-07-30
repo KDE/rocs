@@ -501,7 +501,7 @@ positions.</para></listitem>
 <para>
 &rocs; internally uses the QtScript scripting engine, which is a specific JavaScript engine.
 This means, all algorithms that you implement must use JavaScript.
-How JavaScript works and how to write JavaScript code is not covered in this handbook, though we explain how to access data structures, data elements and pointers of your data data structures from the scripting engine.
+How JavaScript works and how to write JavaScript code is not covered in this handbook, though we explain how to access data structures, data elements and pointers of your data structures from the scripting engine.
 Since you never use the basic data structure object but one that is provided by the currently used data structure plugin, the functionality of the data structure is extended by the corresponding plugin and you should have a look at the specialized functionality.
 Especially, data structure plugins use the common terms from their domain (nodes and edges in graphs, leafs and roots in trees, etc.)
 </para>
@@ -795,7 +795,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 <sect2 id="scripting-output">
 <title>Script Output</title>
 <para>
-    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &and; Script Output</emphasis>.
+    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &amp; Script Output</emphasis>.
     If the scripting engine detects a syntax error in your script, the error is also displayed as debug message.
     Note that all program messages are also displayed at the debug output (displayed as bold text).
 </para>

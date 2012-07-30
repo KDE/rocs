@@ -32,7 +32,7 @@
 #include <QXmlResultItems>
 #include <QXmlNodeModelIndex>
 
-static const KAboutData aboutdata("rocs_kmlplugin", 0, ki18n("Open and Save Keyhole Markup Language files") , "0.1");
+static const KAboutData aboutdata("rocs_kmlplugin", 0, ki18nc("@title Displayed plugin name", "Open and Save Keyhole Markup Language files") , "0.1");
 
 
 K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< Rocs::KMLParser >();)

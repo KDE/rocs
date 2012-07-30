@@ -33,12 +33,12 @@ DocumentPropertiesDialog::DocumentPropertiesDialog(QWidget* parent)
     _dataTypePage = new DataTypePage(this);
     _pointerTypePage = new PointerTypePage(this);
 
-    tabWidget->addTab(_dataTypePage, i18n("Data Types"));
-    tabWidget->addTab(_pointerTypePage, i18n("Pointer Types"));
+    tabWidget->addTab(_dataTypePage, i18nc("@title:tab", "Data Types"));
+    tabWidget->addTab(_pointerTypePage, i18nc("@title:tab", "Pointer Types"));
 
     setMainWidget(tabWidget);
 
-    setCaption(i18n("Document Properties"));
+    setCaption(i18nc("@title:window", "Document Properties"));
     setButtons(Close);
     setAttribute(Qt::WA_DeleteOnClose);
 }

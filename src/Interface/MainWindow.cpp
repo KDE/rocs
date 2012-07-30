@@ -236,7 +236,7 @@ void MainWindow::uploadScript()
     dialog->setUploadFile(local);
 
     dialog->setUploadName(_codeEditor->document()->documentName());
-    dialog->setDescription(i18n("Added your description here."));
+    dialog->setDescription(i18n("Add your description here."));
 
     dialog->exec();
 
@@ -259,12 +259,12 @@ QWidget* MainWindow::setupScriptPanel()
     stackedListing->addWidget(_txtDebug);
 
     _selectListing = new QComboBox;
-    _selectListing->addItem(KIcon("accessories-text-editor"), i18n("Program Messages"));
-    _selectListing->addItem(KIcon("tools-report-bug"), i18n("Debug Messages"));
+    _selectListing->addItem(KIcon("accessories-text-editor"), i18nc("@item:inlistbox Select output", "Program Messages"));
+    _selectListing->addItem(KIcon("tools-report-bug"), i18nc("@item:inlistbox Select output", "Debug Messages"));
 
     QWidget *header = new QWidget(this);
     header->setLayout(new QHBoxLayout);
-    header->layout()->addWidget(new QLabel(i18n("Select output:")));
+    header->layout()->addWidget(new QLabel(i18nc("@label:listbox", "Select output:")));
     header->layout()->addWidget(_selectListing);
 
     QWidget *listingWidget = new QWidget(this);
@@ -275,17 +275,17 @@ QWidget* MainWindow::setupScriptPanel()
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     executeCommands->setOrientation(Qt::Vertical);
-    _runScript = new KAction(KIcon("system-run"), i18nc("Script Execution", "Run"), this);
-    _stepRunScript = new KAction(KIcon("go-next"), i18nc("Script Execution", "One Step"), this);
-    _stopScript = new KAction(KIcon("process-stop"), i18nc("Script Execution", "Stop"), this);
+    _runScript = new KAction(KIcon("system-run"), i18nc("@action:intoolbar Script Execution", "Run"), this);
+    _stepRunScript = new KAction(KIcon("go-next"), i18nc("@action:intoolbar Script Execution", "One Step"), this);
+    _stopScript = new KAction(KIcon("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
     _stopScript->setEnabled(false);
     executeCommands->addAction(_runScript);
     executeCommands->addAction(_stepRunScript);
 
     // debug controls submenu
-    _debugMenu = new KActionMenu(KIcon("debug-run"), i18nc("Menu with buttons for debug actions", "Debug"), this);
-    _debugScript = new KAction(KIcon("debug-run"), i18nc("button to start a debug execution", "Debug run"), _debugMenu);
-    _interruptScript = new KAction(KIcon("debug-run-cursor"), i18n("Interrupt at first line"), _debugMenu);
+    _debugMenu = new KActionMenu(KIcon("debug-run"), i18nc("@title:menu Debug execution", "Debug"), this);
+    _debugScript = new KAction(KIcon("debug-run"), i18nc("@action:inmenu Debug execution", "Debug run"), _debugMenu);
+    _interruptScript = new KAction(KIcon("debug-run-cursor"), i18nc("@action:inmenu Debug execution", "Interrupt at first line"), _debugMenu);
     _debugMenu->addAction(_debugScript);
     _debugMenu->addAction(_interruptScript);
     executeCommands->addWidget(_debugMenu->createWidget(executeCommands));
@@ -327,12 +327,12 @@ QWidget* MainWindow::setupWhiteboardPanel()
 
     // at first setup document does not exists
     // this is later set when MainWindow::setActiveDocument() is called
-    PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18n("Properties"), DocumentManager::self()->activeDocument(), this);
+    PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), DocumentManager::self()->activeDocument(), this);
     _documentPropertiesButton = new QToolButton(panel);
     _documentPropertiesButton->setDefaultAction(propertiesAction);
     _documentPropertiesButton->setIcon(KIcon("document-properties"));
 
-    documentLayout->addWidget(new QLabel(i18n("Graph Document:")),1,1);
+    documentLayout->addWidget(new QLabel(i18nc("@label:listbox", "Graph Document:")),1,1);
     documentLayout->addWidget(_documentSelectorCombo,1,2);
     documentLayout->addWidget(_documentPropertiesButton,1,3);
 
@@ -354,15 +354,15 @@ void MainWindow::setupActions()
 
     GraphScene *gc = _graphVisualEditor->scene();
 
-    _addDataActionMenu = new KActionMenu(KIcon("rocsadddata"), i18n("Add Data"), this);
-    _addDataActionMenu->setIconText(i18n("Add Data"));
-    _addDataActionMenu->setToolTip( i18n("Add new data element") );
+    _addDataActionMenu = new KActionMenu(KIcon("rocsadddata"), i18nc("@title:menu", "Add Data"), this);
+    _addDataActionMenu->setIconText(i18nc("@action:intoolbar", "Add Data"));
+    _addDataActionMenu->setToolTip(i18nc("@info:tooltip", "Add new data element"));
     _addDataActionMenu->setDelayed(true);
     _addDataActionMenu->setCheckable(true);
 
-    _addPointerActionMenu = new KActionMenu(KIcon("rocsaddedge"), i18n("Add Connection"), this);
-    _addPointerActionMenu->setIconText(i18n("Add Connection"));
-    _addPointerActionMenu->setToolTip( i18n("Add a new connection between two data elements of selected type") );
+    _addPointerActionMenu = new KActionMenu(KIcon("rocsaddedge"), i18nc("@title:menu", "Add Connection"), this);
+    _addPointerActionMenu->setIconText(i18nc("@action:intoolbar", "Add Connection"));
+    _addPointerActionMenu->setToolTip(i18nc("@info:tooltip", "Add a new connection between two data elements of selected type"));
     _addPointerActionMenu->setDelayed(true);
     _addPointerActionMenu->setCheckable(true);
 
@@ -385,44 +385,44 @@ void MainWindow::setupActions()
     actionCollection()->action("selectmove")->toggle();
     gc->setAction(_selectMoveAction);
 
-    _paletteActions->addAction("align-hbottom", new AlignAction(i18nc("Alignment", "Base"),  AlignAction::Bottom, gc));
-    _paletteActions->addAction("align-hcenter", new AlignAction(i18nc("Alignment", "Center"), AlignAction::HCenter, gc));
-    _paletteActions->addAction("align-htop",   new AlignAction(i18nc("Alignment", "Top"),   AlignAction::Top,    gc));
-    _paletteActions->addAction("align-vleft",  new AlignAction(i18nc("Alignment", "Left"),  AlignAction::Left,   gc));
-    _paletteActions->addAction("align-vcenter", new AlignAction(i18nc("Alignment", "Center"), AlignAction::VCenter, gc));
-    _paletteActions->addAction("align-vright", new AlignAction(i18nc("Alignment", "Right"), AlignAction::Right,  gc));
-    _paletteActions->addAction("align-circle", new AlignAction(i18nc("Alignment", "Circle"),  AlignAction::Circle, gc));
-    _paletteActions->addAction("align-tree", new AlignAction(i18nc("Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
+    _paletteActions->addAction("align-hbottom", new AlignAction(i18nc("@action:intoolbar Alignment", "Base"),  AlignAction::Bottom, gc));
+    _paletteActions->addAction("align-hcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::HCenter, gc));
+    _paletteActions->addAction("align-htop",   new AlignAction(i18nc("@action:intoolbar Alignment", "Top"),   AlignAction::Top,    gc));
+    _paletteActions->addAction("align-vleft",  new AlignAction(i18nc("@action:intoolbar Alignment", "Left"),  AlignAction::Left,   gc));
+    _paletteActions->addAction("align-vcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::VCenter, gc));
+    _paletteActions->addAction("align-vright", new AlignAction(i18nc("@action:intoolbar Alignment", "Right"), AlignAction::Right,  gc));
+    _paletteActions->addAction("align-circle", new AlignAction(i18nc("@action:intoolbar Alignment", "Circle"),  AlignAction::Circle, gc));
+    _paletteActions->addAction("align-tree", new AlignAction(i18nc("@action:intoolbar Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
 
     // Menu actions
-    createAction("document-new",        i18n("New Project"),        "new-project", QKeySequence::New, SLOT(newProject()), this);
-    createAction("document-save",       i18n("Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
-    createAction("document-open",       i18n("Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
-    createAction("document-export",     i18n("Export Project"),     "export-project", SLOT(exportProject()), this);
-    createAction("document-import",     i18n("Import Project"),     "import-project", SLOT(importProject()), this);
-    createAction("document-properties", i18n("Set Name"),           "set-project-name", SLOT(setProjectName()), this);
-    createAction("document-new",        i18n("New Graph Document"), "new-graph", SLOT(newGraph()), this);
-    createAction("document-new",        i18n("New Script File"),    "new-script",         SLOT(newScript()),    this);
-    createAction("document-import",     i18n("Import Rocs Graph"),  "add-graph",        SLOT(importGraph()),   this);
-    createAction("document-save",       i18n("Save Graph"),         "save-graph",        SLOT(saveGraph()),   this);
-    createAction("document-save-as",    i18n("Save Graph as"),      "save-graph-as",     SLOT(saveGraphAs()), this);
-    createAction("get-hot-new-stuff",   i18n("Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
-    createAction("get-hot-new-stuff",   i18n("Upload script"),      "upload",            SLOT(uploadScript()),  this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(newProject()), this);
+    createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
+    createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
+    createAction("document-export",     i18nc("@action:inmenu", "Export Project"),     "export-project", SLOT(exportProject()), this);
+    createAction("document-import",     i18nc("@action:inmenu", "Import Project"),     "import-project", SLOT(importProject()), this);
+    createAction("document-properties", i18nc("@action:inmenu", "Set Name"),           "set-project-name", SLOT(setProjectName()), this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph", SLOT(newGraph()), this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",         SLOT(newScript()),    this);
+    createAction("document-import",     i18nc("@action:inmenu", "Import Rocs Graph"),  "add-graph",        SLOT(importGraph()),   this);
+    createAction("document-save",       i18nc("@action:inmenu", "Save Graph"),         "save-graph",        SLOT(saveGraph()),   this);
+    createAction("document-save-as",    i18nc("@action:inmenu", "Save Graph as"),      "save-graph-as",     SLOT(saveGraphAs()), this);
+    createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
+    createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Upload script"),      "upload",            SLOT(uploadScript()),  this);
 
-    createAction("help-hint", i18n("Possible Includes"),          "possible_includes", SLOT(showPossibleIncludes()), this);
-    createAction("document-import",  i18n("Import Script"),       "add-script",       SLOT(importScript()),   this);
-    createAction("document-save",    i18n("Save Script"),         "save-script",       SLOT(saveActiveScript()),   _codeEditor);
-    createAction("document-save-as", i18n("Save Script as"),      "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
+    createAction("help-hint", i18nc("@action:inmenu", "Possible Includes"),          "possible_includes", SLOT(showPossibleIncludes()), this);
+    createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",       SLOT(importScript()),   this);
+    createAction("document-save",    i18nc("@action:inmenu", "Save Script"),         "save-script",       SLOT(saveActiveScript()),   _codeEditor);
+    createAction("document-save-as", i18nc("@action:inmenu", "Save Script as"),      "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
 
     // eventually create hooks for file plugins
     PluginManager::instance()->loadFilePlugins();
     if (PluginManager::instance()->filePlugins().count() > 0) {
-        createAction("document-import", i18n("Import Graph"), "import-graph", SLOT(importFile()), this);
-        createAction("document-export", i18n("Export Graph"), "export-graph", SLOT(exportFile()), this);
+        createAction("document-import", i18nc("@action:inmenu", "Import Graph"), "import-graph", SLOT(importFile()), this);
+        createAction("document-export", i18nc("@action:inmenu", "Export Graph"), "export-graph", SLOT(exportFile()), this);
     }
 
     // EDIT actions
-    actionCollection()->addAction("delete-selected", new DeleteAction(i18n("Delete"), _graphVisualEditor->scene(), 0));
+    actionCollection()->addAction("delete-selected", new DeleteAction(i18nc("@action:intoolbar", "Delete"), _graphVisualEditor->scene(), 0));
 
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
@@ -454,8 +454,8 @@ void MainWindow::showSettings()
     IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties(&dialog);
 
-    dialog.addPage(set, i18n("Include Manager"), QString(), i18n("Include Manager"), true);
-    dialog.addPage(defaultProperties, i18n("Default Settings"), QString(), i18n("Default Settings"), true);
+    dialog.addPage(set, i18nc("@title:tab", "Include Manager"), QString(), i18nc("@title:tab", "Include Manager"), true);
+    dialog.addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
 
 
     connect(set,               SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
@@ -570,7 +570,7 @@ void MainWindow::setActiveDocument()
     // set button for document properties
     if (_documentPropertiesButton->defaultAction()) {
         _documentPropertiesButton->defaultAction()->deleteLater();
-        PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18n("Properties"), activeDocument, this);
+        PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), activeDocument, this);
         _documentPropertiesButton->setDefaultAction(propertiesAction);
         _documentPropertiesButton->setIcon(KIcon("document-properties"));
     }
@@ -677,7 +677,7 @@ void MainWindow::importGraph()
     QString fileUrl = KFileDialog::getOpenFileName( startDirectory,
                                                      i18n("*.graph|Graph files\n*|All files"),
                                                      this,
-                                                     i18n("Add Existing Graph File to Project"));
+                                                     i18nc("@title:window", "Add Existing Graph File to Project"));
     if (fileUrl.isEmpty()) {
         return;
     }
@@ -696,7 +696,7 @@ void MainWindow::importScript()
     QString fileUrl = KFileDialog::getOpenFileName(  startDirectory,
                                                      QString(),
                                                      this,
-                                                     i18n("Add Existing Script File to Project"));
+                                                     i18nc("@title:window", "Add Existing Script File to Project"));
     if (fileUrl.isEmpty()) {
         return;
     }
@@ -709,7 +709,7 @@ void MainWindow::importScript()
 void MainWindow::loadDocument(const QString& name)
 {
     if (!name.isEmpty() && !name.endsWith(QLatin1String(".graph"))) {
-        KMessageBox::sorry(this, i18n("This does not seem to be a graph file."), i18n("Invalid file"));
+        KMessageBox::sorry(this, i18nc("@info", "This does not seem to be a graph file."), i18nc("@title:window", "Invalid File"));
         return;
     }
 
@@ -744,7 +744,7 @@ void MainWindow::saveProject()
         QString file = KFileDialog::getSaveFileName(QString(),
                        i18n("*.rocs|Rocs project files\n*|All files"),
                        this,
-                       i18n("Save Project"));
+                       i18nc("@title:window", "Save Project"));
 
         // we need to set project directory first to allow correcte relative paths
         _currentProject->setProjectFile(KUrl::fromLocalFile(file));
@@ -770,7 +770,7 @@ void MainWindow::openProject()
     QString file = KFileDialog::getOpenFileName(QString(),
                    i18n("*.rocs|Rocs project files\n*|All files"),
                    this,
-                   i18n("Open Project Files"));
+                   i18nc("@title:window", "Open Project Files"));
 
     if (file.isEmpty()) {
         kDebug() << "No project file specified to open: aborting.";
@@ -805,8 +805,8 @@ void MainWindow::openProject()
 
 void MainWindow::setProjectName()
 {
-    QString name = KInputDialog::getText(i18n("Set Project Name"),
-                                         i18nc("name of the project", "Name:"),
+    QString name = KInputDialog::getText(i18nc("@title:window", "Set Project Name"),
+                                         i18nc("@label:textbox name of the project", "Name:"),
                                          _currentProject->name()
                                         );
     _currentProject->setName(name);
@@ -823,7 +823,7 @@ void MainWindow::updateCaption()
         caption.append(_currentProject->name());
     }
     else if (_currentProject->isTemporary()) {
-        caption.append(i18n("[ untitled ]"));
+        caption.append(i18nc("caption text for temporary project", "[ untitled ]"));
     } else {
         caption.append(_currentProject->projectFile().toLocalFile());
     }
@@ -838,7 +838,7 @@ void MainWindow::saveScripts()
         QString file = KFileDialog::getSaveFileName(QString(),
                        i18n("*.js|Rocs script documents\n*|All files"),
                        this,
-                       i18n("Save Script Document"));
+                       i18nc("@title:window", "Save Script Document"));
         _currentProject->saveCodeFileNew(textDocument, file);
     }
     _codeEditor->saveAllScripts();
@@ -850,7 +850,7 @@ void MainWindow::newScript()
     QString file = KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
                    i18n("*.js|Rocs script documents\n*|All files"),
                    this,
-                   i18n("Enter Filename for the New Script File"));
+                   i18nc("@title:window", "Enter Filename for the New Script File"));
     if (file.isEmpty()) {
         kDebug() << "Filename is empty and no script file was created.";
         return;
@@ -906,7 +906,7 @@ void MainWindow::saveGraphAs(Document* document)
     QString file = KFileDialog::getSaveFileName(QString(),
                    i18n("*.graph|Rocs graph documents\n*|All files"),
                    this,
-                   i18n("Save Graph Document"));
+                   i18nc("@title:window", "Save Graph Document"));
     _currentProject->saveGraphFileAs(document, file);
 }
 
@@ -916,7 +916,7 @@ void MainWindow::newGraph()
     QString file = KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
                    i18n("*.graph|Rocs graph documents\n*|All files"),
                    this,
-                   i18n("Enter Filename for the New Graph Document"));
+                   i18nc("@title:window", "Enter Filename for the New Graph Document"));
     if (file.isEmpty()) {
         kDebug() << "Filename is empty and no script file was created.";
         return;
@@ -929,7 +929,8 @@ void MainWindow::newGraph()
 int MainWindow::saveIfChanged()
 {
     if (_currentProject->isModified()) {
-        const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
+        const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
+                                "@info",
                                 "Changes on your project are unsaved. Do you want to save your changes?"));
         if (btnCode == KMessageBox::Yes) {
             _currentProject->writeProjectFile();
@@ -947,7 +948,8 @@ int MainWindow::saveIfChanged()
         }
     }
     if (anyGraphDocumentModified && !_codeEditor->isModified()) {
-        const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
+        const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
+                                "@info",
                                 "Changes on your graph document are unsaved. Do you want to save your changes?"));
         if (btnCode == KMessageBox::Yes) {
             saveAllGraphs();
@@ -955,7 +957,8 @@ int MainWindow::saveIfChanged()
         return btnCode;
     }
     if (!DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified()) {
-        const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
+        const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
+                                "@info",
                                 "Changes on your script files are unsaved. Do you want to save all unsaved scripts?"));
         if (btnCode == KMessageBox::Yes) {
             _codeEditor->saveAllScripts();
@@ -963,7 +966,8 @@ int MainWindow::saveIfChanged()
         return btnCode;
     }
     if (anyGraphDocumentModified && _codeEditor->isModified()) {
-        const int btnCode = KMessageBox::warningYesNoCancel(this, i18n(
+        const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
+                                "@info",
                                 "Changes on your script files and on your graph document are unsaved. Do you want to save your graph document and all unsaved scripts?"));
         if (btnCode == KMessageBox::Yes) {
             _codeEditor->saveAllScripts();
@@ -1014,7 +1018,7 @@ void MainWindow::importProject()
     QString importFile = KFileDialog::getOpenFileName(_currentProject->projectDirectory(),
                    i18n("*.tar.gz|Export as tar.gz Archive"),
                    this,
-                   i18n("Project Archive to Import"));
+                   i18nc("@title:window", "Project Archive to Import"));
 
     if (importFile.isEmpty()) {
         kDebug() << "No file specified for import: aborting.";
@@ -1023,7 +1027,7 @@ void MainWindow::importProject()
 
     QString newLocation = KFileDialog::getExistingDirectory(_currentProject->projectDirectory(),
                    this,
-                   i18n("Select Project Directory for Import"));
+                   i18nc("@title:window", "Select Project Directory for Import"));
 
     if (newLocation.isEmpty()) {
         kDebug() << "No storage directory specified for import: aborting.";
@@ -1060,7 +1064,7 @@ void MainWindow::exportProject()
     QString file = KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
                    i18n("*.tar.gz|Export as tar.gz Archive"),
                    this,
-                   i18n("Export Project"));
+                   i18nc("@title:window", "Export Project"));
     if (file.isEmpty()) {
         kDebug() << "Filename is empty and no script file was created.";
         return;

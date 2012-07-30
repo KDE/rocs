@@ -30,7 +30,7 @@
 
 #include <QFile>
 
-static const KAboutData aboutdata("rocs_gmlplugin", 0, ki18n("Open and Save GML files") , "0.1");
+static const KAboutData aboutdata("rocs_gmlplugin", 0, ki18nc("@title Displayed plugin name", "Open and Save GML files") , "0.1");
 
 
 extern Rocs::GMLPlugin::GMLGraphParsingHelper* phelper;

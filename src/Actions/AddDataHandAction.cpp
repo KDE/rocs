@@ -32,8 +32,8 @@ AddDataHandAction::AddDataHandAction(GraphScene *scene, QObject *parent)
     : AbstractAction(scene, parent),
       _dataType(DataTypePtr())
 {
-    setText(i18n("Add Data"));
-    setToolTip(i18n("Creates a new node at the click position on the drawing area."));
+    setText(i18nc("@action:intoolbar", "Add Data"));
+    setToolTip(i18nc("@info:tooltip", "Creates a new node at the click position on the drawing area."));
     setIcon(KIcon("rocsadddata"));
     _name = "rocs-hand-add-node";
 }
@@ -42,15 +42,14 @@ AddDataHandAction::AddDataHandAction(GraphScene *scene, DataTypePtr dataType, QO
     : AbstractAction(scene, parent),
       _dataType(dataType)
 {
-    setText(i18n("Add %1", dataType->name()));
-    setToolTip(i18n("Creates a new node at the click position on the drawing area."));
+    setText(i18nc("@action:intoolbar", "Add %1", dataType->name()));
+    setToolTip(i18nc("@info:tooltip", "Creates a new node at the click position on the drawing area."));
     setIcon(dataType->icon());
     _name = "rocs-hand-add-node";
 }
 
 AddDataHandAction::~AddDataHandAction()
 {
-    kDebug() << "Destroyed";
 }
 
 void AddDataHandAction::setDataType(DataTypePtr dataType)

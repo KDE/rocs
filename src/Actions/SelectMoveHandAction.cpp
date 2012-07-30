@@ -35,8 +35,8 @@
 SelectMoveHandAction::SelectMoveHandAction(GraphScene *scene, QObject *parent)
     : AbstractAction(scene, parent)
 {
-    setText(i18n("Move"));
-    setToolTip(i18n("Select and move items."));
+    setText(i18nc("@action:intoolbar", "Move"));
+    setToolTip(i18nc("@info:tooltip", "Select and move items."));
     setIcon(KIcon("rocsselectmove"));
     _movableNode = 0;
     _name = "rocs-hand-select-move";
@@ -46,7 +46,6 @@ SelectMoveHandAction::SelectMoveHandAction(GraphScene *scene, QObject *parent)
 
 SelectMoveHandAction::~SelectMoveHandAction()
 {
-    kDebug() << "Destroyed";
 }
 
 bool SelectMoveHandAction::executePress(QPointF pos)

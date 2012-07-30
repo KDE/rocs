@@ -35,8 +35,8 @@ AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, QObject *par
     : AbstractAction(scene, parent),
       _pointerType(PointerTypePtr())
 {
-    setText(i18n("Add Edge"));
-    setToolTip(i18n("Creates a new edge between 2 nodes"));
+    setText(i18nc("@action:intoolbar", "Add Edge"));
+    setToolTip(i18nc("@info:tooltip", "Creates a new edge between 2 nodes"));
     setIcon(KIcon("rocsaddedge"));
 
     _from = 0;
@@ -50,8 +50,8 @@ AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, PointerTypeP
     : AbstractAction(scene, parent),
       _pointerType(pointerType)
 {
-    setText(i18n("Add %1", pointerType->name()));
-    setToolTip(i18n("Creates a new edge between 2 nodes"));
+    setText(i18nc("@action:intoolbar", "Add %1", pointerType->name()));
+    setToolTip(i18nc("@info:tooltip", "Creates a new edge between 2 nodes"));
     setIcon(KIcon("rocsaddedge"));
 
     _from = 0;
@@ -63,7 +63,6 @@ AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, PointerTypeP
 
 AddConnectionHandAction::~AddConnectionHandAction()
 {
-    kDebug() << "Destroyed";
 }
 
 bool AddConnectionHandAction::executePress(QPointF pos)

@@ -39,7 +39,7 @@
 #include <map>
 #include <ui_transformedgeswidget.h>
 
-static const KAboutData aboutdata("rocs_transformedgesplugin", 0, ki18n("Transform Edges") , "0.1");
+static const KAboutData aboutdata("rocs_transformedgesplugin", 0, ki18nc("@title Displayed plugin name", "Transform Edges") , "0.1");
 
 K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<TransformEdgesToolPlugin>();)
 K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))

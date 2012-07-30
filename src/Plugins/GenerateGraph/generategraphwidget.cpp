@@ -59,7 +59,7 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     setMainWidget(widget);
 
     // other KDialog options
-    setCaption(i18n("Generate Graph"));
+    setCaption(i18nc("@title:window", "Generate Graph"));
     setButtons(KDialog::Cancel | KDialog::Ok);
     KDialog::centerOnScreen(widget, -3);
 

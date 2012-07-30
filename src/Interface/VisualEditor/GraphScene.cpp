@@ -312,8 +312,8 @@ void GraphScene::resize()
 QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPosition)
 {
     QMenu *menu = new QMenu; // the context menu
-    QMenu *menuDataStructure = menu->addMenu(i18n("Data Structure"));
-    QMenu *menuSelected = menu->addMenu(i18n("Selected"));
+    QMenu *menuDataStructure = menu->addMenu(i18nc("@title:menu", "Data Structure"));
+    QMenu *menuSelected = menu->addMenu(i18nc("@title:menu", "Selected"));
 
     // prepare some context information
     bool contextAtItem = false;
@@ -335,11 +335,11 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     }
 
     // zoom menu
-    QMenu *menuZoom = new QMenu(i18n("Zoom"));
+    QMenu *menuZoom = new QMenu(i18nc("@title:menu", "Zoom"));
     ZoomAction *zoomAction = new ZoomAction(this, 0);
-    QAction* zoomInAction = new QAction(i18n("In"), zoomAction);
-    QAction *zoomOutAction = new QAction(i18n("Out"), zoomAction);
-    QAction *zoomResetAction = new QAction(i18n("Reset"), zoomAction);
+    QAction* zoomInAction = new QAction(i18nc("@action:inmenu Zoom", "In"), zoomAction);
+    QAction *zoomOutAction = new QAction(i18nc("@action:inmenu Zoom", "Out"), zoomAction);
+    QAction *zoomResetAction = new QAction(i18nc("@action:inmenu Zoom", "Reset"), zoomAction);
     menuZoom->addAction(zoomInAction);
     menuZoom->addAction(zoomOutAction);
     menuZoom->addAction(zoomResetAction);
@@ -349,13 +349,13 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
 
     // alignment menu
     QMenu *menuDataStructureAlign = new QMenu(i18n("Align"));
-    AlignAction *alignDataStructureBottom = new AlignAction(i18nc("align elements at bottom", "Bottom"),  AlignAction::Bottom, this);
-    AlignAction *alignDataStructureCenter = new AlignAction(i18nc("align elements at center", "Center"), AlignAction::HCenter, this);
-    AlignAction *alignDataStructureTop    = new AlignAction(i18nc("align elements at top", "Top"),   AlignAction::Top, this);
-    AlignAction *alignDataStructureLeft   = new AlignAction(i18nc("align elements left", "Left"),  AlignAction::Left, this);
-    AlignAction *alignDataStructureRight  = new AlignAction(i18nc("align elements right", "Right"), AlignAction::Right, this);
-    AlignAction *alignDataStructureCircle = new AlignAction(i18nc("align elements as a circle", "Circle"),  AlignAction::Circle, this);
-    AlignAction *alignDataStructureTree   = new AlignAction(i18nc("align elements such that crossing edges are minimized", "Minimize Crossing Edges"), AlignAction::MinCutTree, this);
+    AlignAction *alignDataStructureBottom = new AlignAction(i18nc("@action:inmenu align elements at bottom", "Bottom"),  AlignAction::Bottom, this);
+    AlignAction *alignDataStructureCenter = new AlignAction(i18nc("@action:inmenu align elements at center", "Center"), AlignAction::HCenter, this);
+    AlignAction *alignDataStructureTop    = new AlignAction(i18nc("@action:inmenu align elements at top", "Top"),   AlignAction::Top, this);
+    AlignAction *alignDataStructureLeft   = new AlignAction(i18nc("@action:inmenu align elements left", "Left"),  AlignAction::Left, this);
+    AlignAction *alignDataStructureRight  = new AlignAction(i18nc("@action:inmenu align elements right", "Right"), AlignAction::Right, this);
+    AlignAction *alignDataStructureCircle = new AlignAction(i18nc("@action:inmenu align elements as a circle", "Circle"),  AlignAction::Circle, this);
+    AlignAction *alignDataStructureTree   = new AlignAction(i18nc("@action:inmenu align elements such that crossing edges are minimized", "Minimize Crossing Edges"), AlignAction::MinCutTree, this);
 
     if (contextDataStructure) {
         alignDataStructureBottom->registerData(contextDataStructure->dataList());
@@ -367,7 +367,7 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
         alignDataStructureTree->registerData(contextDataStructure->dataList());
     }
     if (contextAtItem) {
-        PropertiesDialogAction *dataStructurePropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextDataStructure, this);
+        PropertiesDialogAction *dataStructurePropertiesAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), contextDataStructure, this);
         dataStructurePropertiesAction->setPosition(screenPosition);
         menuDataStructure->addAction(dataStructurePropertiesAction);
     }
@@ -381,31 +381,31 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     menuDataStructureAlign->addAction(alignDataStructureTree);
 
     QMenu *menuSelectedAlign = new QMenu(i18n("Align"));
-    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements at bottom", "Bottom"),  AlignAction::Bottom, this));
-    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements at center", "Center"), AlignAction::HCenter, this));
-    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements at top", "Top"),   AlignAction::Top, this));
-    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements left", "Left"),  AlignAction::Left, this));
-    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements right", "Right"), AlignAction::Right, this));
-    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements as a circle", "Circle"),  AlignAction::Circle, this));
-    menuSelectedAlign->addAction(new AlignAction(i18nc("align elements such that crossing edges are minimized", "Minimize Crossing Edges"),  AlignAction::MinCutTree, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("@action:inmenu align elements at bottom", "Bottom"),  AlignAction::Bottom, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("@action:inmenu align elements at center", "Center"), AlignAction::HCenter, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("@action:inmenu align elements at top", "Top"),   AlignAction::Top, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("@action:inmenu align elements left", "Left"),  AlignAction::Left, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("@action:inmenu align elements right", "Right"), AlignAction::Right, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("@action:inmenu align elements as a circle", "Circle"),  AlignAction::Circle, this));
+    menuSelectedAlign->addAction(new AlignAction(i18nc("@action:inmenu align elements such that crossing edges are minimized", "Minimize Crossing Edges"),  AlignAction::MinCutTree, this));
 
-    QMenu *menuDataStructureAssignValues = new QMenu(i18n("Values"));
-    menuDataStructureAssignValues->addAction(new AssignValueAction(i18n("Enumerate"), this, AssignValueAction::Enumerate, contextDataStructure, 0));
-    menuDataStructureAssignValues->addAction(new AssignValueAction(i18n("Random Integers"), this, AssignValueAction::RandomInteger, contextDataStructure, 0));
-    menuDataStructureAssignValues->addAction(new AssignValueAction(i18n("Random Reals"), this, AssignValueAction::RandomReal, contextDataStructure, 0));
+    QMenu *menuDataStructureAssignValues = new QMenu(i18nc("@title:menu Assign values", "Values"));
+    menuDataStructureAssignValues->addAction(new AssignValueAction(i18nc("@action:inmenu Value", "Enumerate"), this, AssignValueAction::Enumerate, contextDataStructure, 0));
+    menuDataStructureAssignValues->addAction(new AssignValueAction(i18nc("@action:inmenu Value", "Random Integers"), this, AssignValueAction::RandomInteger, contextDataStructure, 0));
+    menuDataStructureAssignValues->addAction(new AssignValueAction(i18nc("@action:inmenu Value", "Random Reals"), this, AssignValueAction::RandomReal, contextDataStructure, 0));
 
-    QMenu *menuSelectedAssignValues = new QMenu(i18n("Values"));
-    menuSelectedAssignValues->addAction(new AssignValueAction(i18n("Enumerate"), this, AssignValueAction::Enumerate, 0));
-    menuSelectedAssignValues->addAction(new AssignValueAction(i18n("Random Integers"), this, AssignValueAction::RandomInteger, 0));
-    menuSelectedAssignValues->addAction(new AssignValueAction(i18n("Random Reals"), this, AssignValueAction::RandomReal, 0));
+    QMenu *menuSelectedAssignValues = new QMenu(i18nc("@title:menu Assign values","Values"));
+    menuSelectedAssignValues->addAction(new AssignValueAction(i18nc("@action:inmenu Value", "Enumerate"), this, AssignValueAction::Enumerate, 0));
+    menuSelectedAssignValues->addAction(new AssignValueAction(i18nc("@action:inmenu Value", "Random Integers"), this, AssignValueAction::RandomInteger, 0));
+    menuSelectedAssignValues->addAction(new AssignValueAction(i18nc("@action:inmenu Value", "Random Reals"), this, AssignValueAction::RandomReal, 0));
 
     // puzzling the menu together
     AddDataAction *addDataAction = new AddDataAction(this);
     addDataAction->setAddPosition(scenePosition);
     connect(addDataAction, SIGNAL(triggered(bool)), addDataAction, SLOT(executePress()));
-    DeleteAction *deleteDataStructureAction = new DeleteAction(i18n("Delete"), this, contextDataStructure, 0);
-    DeleteAction *deleteSelectedAction = new DeleteAction(i18n("Delete"), this, 0);
-    DeleteAction *deleteItemAction = new DeleteAction(i18n("Delete"), this, contextData, 0);
+    DeleteAction *deleteDataStructureAction = new DeleteAction(i18nc("@action:inmenu", "Delete"), this, contextDataStructure, 0);
+    DeleteAction *deleteSelectedAction = new DeleteAction(i18nc("@action:inmenu", "Delete"), this, 0);
+    DeleteAction *deleteItemAction = new DeleteAction(i18nc("@action:inmenu", "Delete"), this, contextData, 0);
 
     menuSelected->addMenu(menuSelectedAlign);
     menuSelected->addMenu(menuSelectedAssignValues);
@@ -424,12 +424,12 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
         menu->addMenu(menuZoom);
     }
     if (contextData) {
-        PropertiesDialogAction *dataPropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextData, this);
+        PropertiesDialogAction *dataPropertiesAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), contextData, this);
         dataPropertiesAction->setPosition(screenPosition);
         menu->addAction(dataPropertiesAction);
     }
     if (contextPointer) {
-        PropertiesDialogAction *pointerPropertiesAction = new PropertiesDialogAction(i18n("Properties"), contextPointer, this);
+        PropertiesDialogAction *pointerPropertiesAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), contextPointer, this);
         pointerPropertiesAction->setPosition(screenPosition);
         menu->addAction(pointerPropertiesAction);
     }

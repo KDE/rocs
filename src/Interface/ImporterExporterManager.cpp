@@ -47,8 +47,8 @@ bool ImporterExporterManager::exportFile(Document * doc) const
 
 
     QPointer<KFileDialog> exportDialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
-    exportDialog->okButton()->setText(i18n("Export"));
-    exportDialog->okButton()->setToolTip(i18n("Export graphs to file"));
+    exportDialog->okButton()->setText(i18nc("@action:button", "Export"));
+    exportDialog->okButton()->setToolTip(i18nc("@info:tooltip", "Export graphs to file"));
     if (exportDialog->exec() != KDialog::Accepted) {
         return false;
     }
@@ -91,7 +91,7 @@ Document* ImporterExporterManager::importFile()
     ext.append(i18n("*|All files"));
 
     QPointer<KFileDialog> dialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
-    dialog->setCaption(i18n("Import Graph File into Project"));
+    dialog->setCaption(i18nc("@title:window", "Import Graph File into Project"));
     if (!dialog->exec()) {
         return 0;
     }

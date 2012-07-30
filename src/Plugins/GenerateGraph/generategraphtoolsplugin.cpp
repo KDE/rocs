@@ -38,7 +38,7 @@
 
 #include <map>
 
-static const KAboutData aboutdata("rocs_generategraphplugin", 0, ki18n("Generate Graph") , "0.1");
+static const KAboutData aboutdata("rocs_generategraphplugin", 0, ki18nc("@Title Displayed plugin name", "Generate Graph") , "0.1");
 
 K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<GenerateGraphToolPlugin>();)
 K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))

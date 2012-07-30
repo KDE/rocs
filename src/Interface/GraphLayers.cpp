@@ -43,8 +43,8 @@ GraphLayers::GraphLayers(MainWindow *parent) :
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
 
     QWidget *contents = new QWidget();
-    KPushButton *btnADD = new KPushButton(KIcon("rocsnew"), i18n("Add"));
-    btnADD->setToolTip(i18n("Add a new data structure with the specified name"));
+    KPushButton *btnADD = new KPushButton(KIcon("rocsnew"), i18nc("@action:button", "Add"));
+    btnADD->setToolTip(i18nc("@info:tooltip", "Add a new data structure with the specified name"));
 
     _buttonGroup = new QButtonGroup();
     _lineEdit = new KLineEdit();

@@ -38,7 +38,7 @@
 #include <KDebug>
 #include <KMessageBox>
 
-static const KAboutData aboutdata("rocs_ListStructure", 0, ki18n("Linked List Structure") , "0.1");
+static const KAboutData aboutdata("rocs_ListStructure", 0, ki18nc("@title Displayed plugin name", "Linked List Structure") , "0.1");
 using namespace Rocs;
 
 K_PLUGIN_FACTORY(DSPluginFactory, registerPlugin< ListPlugin>();)
@@ -98,7 +98,7 @@ bool ListPlugin::canConvertFrom(Document* doc) const
     foreach(DataStructurePtr ds, doc->dataStructures()) {
         foreach(DataPtr data, ds->dataList()) {
             if (data->out_pointers().count() > 1)
-                errors.append(i18n("Data \'%1\' had more than one(1) out pointers;", data->name()));
+                errors.append(i18n("Data \'%1\' has more than one out pointer.", data->name()));
         }
     }
 

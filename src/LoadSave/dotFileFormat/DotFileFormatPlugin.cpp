@@ -32,7 +32,7 @@
 #include "DotGraphParsingHelper.h"
 #include "DotGrammar.h"
 
-static const KAboutData aboutdata("rocs_dotfileformat", 0, ki18n("Read and write Graphviz graph documents.") , "0.1");
+static const KAboutData aboutdata("rocs_dotfileformat", 0, ki18nc("@title Displayed plugin name", "Read and write Graphviz graph documents.") , "0.1");
 
 
 extern DotParser::DotGraphParsingHelper* phelper;

@@ -170,7 +170,7 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataTypeButton->setStyleSheet("text-align: left");
     dataTypeButton->setMenu(dataTypeMenu);
     dataTypeMenu->addAction(
-            new PropertiesDialogAction(i18n("Properties"), dataType, dataPropertyWidget)
+            new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataType, dataPropertyWidget)
         );
     dataTypeButton->setIcon(dataType->icon());
     dataTypeButton->setText(dataType->name());
@@ -179,14 +179,14 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataTypeShowName->setIcon(KIcon("rocstexticon"));
     dataTypeShowName->setCheckable(true);
     dataTypeShowName->setChecked(true);
-    dataTypeShowName->setToolTip(i18n("Show names of data elements"));
+    dataTypeShowName->setToolTip(i18nc("@info:tooltip", "Show names of data elements"));
     dataTypeShowName->setFixedWidth(24);
 
     KPushButton* dataTypeShowValue = new KPushButton(dataPropertyWidget);
     dataTypeShowValue->setIcon(KIcon("rocsvalueicon"));
     dataTypeShowValue->setCheckable(true);
     dataTypeShowValue->setChecked(true);
-    dataTypeShowValue->setToolTip(i18n("Show values of data elements"));
+    dataTypeShowValue->setToolTip(i18nc("@info:tooltip", "Show values of data elements"));
     dataTypeShowValue->setFixedWidth(24);
 
     KPushButton* dataTypeVisible = new KPushButton(this);
@@ -244,28 +244,28 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     pointerTypeButton->setStyleSheet("text-align: left");
     pointerTypeButton->setMenu(pointerTypeMenu);
     pointerTypeMenu->addAction(
-            new PropertiesDialogAction(i18n("Properties"), dataStructure->document()->pointerType(typeIdentifier), pointerPropertyWidget)
+            new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataStructure->document()->pointerType(typeIdentifier), pointerPropertyWidget)
         );
 
     KPushButton* pointerTypeShowName = new KPushButton(pointerPropertyWidget);
     pointerTypeShowName->setIcon(KIcon("rocstexticon"));
     pointerTypeShowName->setCheckable(true);
     pointerTypeShowName->setChecked(true);
-    pointerTypeShowName->setToolTip(i18n("Show names of pointers"));
+    pointerTypeShowName->setToolTip(i18nc("@info:tooltip", "Show names of pointers"));
     pointerTypeShowName->setFixedWidth(24);
 
     KPushButton* pointerTypeShowValue = new KPushButton(pointerPropertyWidget);
     pointerTypeShowValue->setIcon(KIcon("rocsvalueicon"));
     pointerTypeShowValue->setCheckable(true);
     pointerTypeShowValue->setChecked(true);
-    pointerTypeShowValue->setToolTip(i18n("Show values of pointers"));
+    pointerTypeShowValue->setToolTip(i18nc("@info:tooltip", "Show values of pointers"));
     pointerTypeShowValue->setFixedWidth(24);
 
     KPushButton* pointerTypeVisible = new KPushButton(this);
     pointerTypeVisible->setIcon(KIcon("rocseyeblack"));
     pointerTypeVisible->setCheckable(true);
     pointerTypeVisible->setChecked(true);
-    pointerTypeVisible->setToolTip(i18n("Set visibility of pointers"));
+    pointerTypeVisible->setToolTip(i18nc("@info:tooltip", "Set visibility of pointers"));
     pointerTypeVisible->setFixedWidth(24);
 
     pointerPropertyWidget->setLayout(pointerPropertyLayout);
