@@ -52,12 +52,11 @@ struct DotGraphParsingHelper {
     void addEdgeBound(QString bound) {
         edgebounds.append(bound);
     }
-    void finalactions();
     void setDataStructureElementAttributes(QObject* graphElement, const DotParser::DotGraphParsingHelper::AttributesMap& attributes);
 
     QString attributeId;
     QString valid;
-    std::string attributed;
+    std::string attributed; //FIXME change to enum
     QStringList subdataTypeid;
     unsigned int unique;
 

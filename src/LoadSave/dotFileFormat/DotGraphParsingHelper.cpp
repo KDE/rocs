@@ -103,7 +103,8 @@ void DotGraphParsingHelper::setAttributedList()
     if (attributed == "graph") {
         if (attributes.find("bb") != attributes.end()) {
             std::vector< int > v;
-            parse_integers(attributes["bb"].toStdString().c_str(), v);
+//FIXME add integer parser
+//             parse_integers(attributes["bb"].toStdString().c_str(), v);
             if (v.size() >= 4) {
                 kDebug() << "setting width and height to " << v[2] << v[3];
             }
@@ -114,7 +115,7 @@ void DotGraphParsingHelper::setAttributedList()
         for (; it != it_end; it++) {
             dataStructureAttributes[it.key()] = it.value();
         }
-    } else if (attributed == "datum") {
+    } else if (attributed == "node") {
         AttributesMap::const_iterator it, it_end;
         it = attributes.begin();
         it_end = attributes.end();
@@ -159,7 +160,7 @@ void DotGraphParsingHelper::createPointers()
 {
     kDebug() << "createPointers() entered";
     QString fromId, toId;
-    //TODO explain meaning of edge bounds
+
     if (edgebounds.isEmpty()) {
         return;
     }
@@ -199,10 +200,6 @@ void DotGraphParsingHelper::createPointers()
         fromId = toId;
     }
     edgebounds.clear();
-}
-
-void DotGraphParsingHelper::finalactions()
-{
 }
 
 }

@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -22,10 +23,13 @@
 #include <Document.h>
 #include "../DotGrammar.h"
 #include <DataStructure.h>
+#include <DataStructurePluginManager.h>
 #include <DynamicPropertiesList.h>
 #include <KDebug>
 
-static const std::string str_subgraph = "digraph trees {"
+static const std::string simple = "digraph simple {a -> b; c; d -> e}";
+
+static const std::string subgraph = "digraph trees {"
                                         "  subgraph t {"
                                         "    0 -> \"1\" [label = \"A\"];"
                                         "    0 -> \"2\" [label = \"B\"];"
@@ -36,40 +40,27 @@ static const std::string str_subgraph = "digraph trees {"
                                         "  }"
                                         "}";
 
-static const std::string str = "digraph GG {"
-                               "node ["
-                               "  fontsize = \"12\""
-                               "];"
-                               "    \"node5\" [ label=\"/usr/lib/libQtCore.so\", shape=\"ellipse\"];"
-                               "    \"node6\" [ label=\"/usr/lib/libQtGui.so\", shape=\"ellipse\"];"
-                               "    \"node0\" [ label=\"CCP\", shape=\"house\"];"
-                               "    \"node3\" [ label=\"CCPAlgorithms\", shape=\"polygon\"];"
-                               "    \"node4\" [ label=\"CCPClusterView\", shape=\"polygon\"];"
-                               "    \"node2\" [ label=\"CCPIOLib\", shape=\"polygon\"];"
-                               "    \"node1\" [ label=\"CCPModelLib\", shape=\"polygon\"];"
-                               "    \"node0\" -> \"node5\""
-                               "    \"node0\" -> \"node6\""
-                               "    \"node0\" -> \"node1\""
-                               "    \"node0\" -> \"node2\""
-                               "    \"node0\" -> \"node3\""
-                               "    \"node0\" -> \"node4\""
-                               "    \"node2\" -> \"node5\""
-                               "    \"node4\" -> \"node5\""
-                               "    \"node4\" -> \"node6\""
-                               "    \"node4\" -> \"node1\""
-                               "}";
-
-void ParseDotTest::parseCMakeGenerated()
+void ParseDotTest::init()
 {
-    Document doc("A test");
-    qDebug() << " Test graph: " << QString::fromStdString(str);
-
-    QVERIFY(parse(str, &doc));
+    // test for graph data structure plugin
+    if (DataStructurePluginManager::self()->pluginsList().count() == 0) {
+        QFAIL("No plugin of DS, no way to continue!");
+    }
+    DataStructurePluginInterface * pl = DataStructurePluginManager::self()->plugin("Graph");
+    QVERIFY2(pl,"Could create data structure of type Graph");
 }
-void ParseDotTest::WithSubgraph()
+
+void ParseDotTest::simpleGraphParsing()
 {
-    Document doc("A test");
-    QVERIFY(parse(str_subgraph, &doc));
+    Document doc("testSimple");
+    QVERIFY(parse(simple, &doc));
+}
+
+
+void ParseDotTest::parseSubgraphs()
+{
+    Document doc("testSubgraphs");
+    QVERIFY(parse(subgraph, &doc));
 }
 
 
