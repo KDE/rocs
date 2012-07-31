@@ -174,7 +174,7 @@ void gotid(char const* first, char const* last)
 
 void undirectedDataStructure(char const* /*first*/, char const* /*last*/)
 {
-    kDebug() << "Create new datastructure of type: Graph directed";
+    kDebug() << "Create new datastructure of type: Graph undirected";
     if(!phelper->dataStructure) {
         DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
@@ -184,7 +184,7 @@ void undirectedDataStructure(char const* /*first*/, char const* /*last*/)
 
 void directedDataStructure(char const* /*first*/, char const* /*last*/)
 {
-    kDebug() << "Create new datastructure of type: Graph undirected";
+    kDebug() << "Create new datastructure of type: Graph directed";
     if (!phelper->dataStructure) {
         DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
@@ -287,11 +287,18 @@ void popAttrList(char const* /*first*/, char const* /*last*/)
 
 void createData(char const* first, char const* last)
 {
+    if (!phelper || first == 0 || last == 0) {
+        return;
+    }
 //   kDebug() << (void*)first << (void*)last << QString::fromStdString(std::string(first,last));
-    if (phelper != 0 && first != 0 && last != 0) {
-        std::string id(first, last);
-        if (id.size() > 0 && id[0] == '"') id = id.substr(1);
-        if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
+    std::string id(first, last);
+    if (id.size() > 0 && id[0] == '"') {
+        id = id.substr(1);
+    }
+    if (id.size() > 0 && id[id.size() - 1] == '"') {
+        id = id.substr(0, id.size() - 1);
+    }
+    if (!phelper->dataMap.contains(QString::fromStdString(id))) {
         phelper->createData(QString::fromStdString(id));
     }
 }
@@ -348,7 +355,7 @@ void checkedgeop(char const* first, char const* last)
 
 void edgebound(char const* first, char const* last)
 {
-//   kDebug() << "edgebound: " << QString::fromStdString(std::string(first,last));
+   kDebug() << "edgebound: " << QString::fromStdString(std::string(first,last));
     if (phelper) {
         std::string id(first, last);
         if (id.size() > 0 && id[0] == '"') id = id.substr(1);

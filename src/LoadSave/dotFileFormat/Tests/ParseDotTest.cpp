@@ -62,6 +62,8 @@ static const std::string str = "digraph GG {"
 void ParseDotTest::parseCMakeGenerated()
 {
     Document doc("A test");
+    qDebug() << " Test graph: " << QString::fromStdString(str);
+
     QVERIFY(parse(str, &doc));
 }
 void ParseDotTest::WithSubgraph()

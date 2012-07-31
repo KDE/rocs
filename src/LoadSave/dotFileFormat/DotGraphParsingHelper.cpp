@@ -141,7 +141,7 @@ void DotGraphParsingHelper::createData(QString identifier)
         return;
     }
 
-    kDebug() << "Creating new data element: " << subdataTypeid;
+    kDebug() << "Creating new data element: " << identifier;
     currentDataPtr = dataStructure->addData(identifier);
     dataMap.insert(identifier, currentDataPtr);
 
@@ -157,6 +157,7 @@ void DotGraphParsingHelper::createSubDataStructure()
 
 void DotGraphParsingHelper::createPointers()
 {
+    kDebug() << "createPointers() entered";
     QString fromId, toId;
     //TODO explain meaning of edge bounds
     if (edgebounds.isEmpty()) {
@@ -189,6 +190,7 @@ void DotGraphParsingHelper::createPointers()
         DataPtr to = dataMap[toId];
 
         currentPointerPtr = dataStructure->addPointer(from, to);
+        kDebug() << "Creating new pointer: " << from->name() << " -> " << to->name();
         if (!subdataTypeid.isEmpty()) {
             currentPointerPtr->addDynamicProperty("SubGraph", subdataTypeid.last());
         }
