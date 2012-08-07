@@ -58,6 +58,9 @@
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
+       <property name="buddy">
+        <cstring>_dataStructureName</cstring>
+       </property>
       </widget>
      </item>
     </layout>
@@ -175,7 +178,7 @@
               <x>0</x>
               <y>0</y>
               <width>268</width>
-              <height>231</height>
+              <height>229</height>
              </rect>
             </property>
             <property name="sizePolicy">

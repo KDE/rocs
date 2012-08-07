@@ -79,6 +79,9 @@
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
+           <property name="buddy">
+            <cstring>_name</cstring>
+           </property>
           </widget>
          </item>
          <item row="0" column="1">
@@ -111,6 +114,9 @@
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
+           <property name="buddy">
+            <cstring>_value</cstring>
+           </property>
           </widget>
          </item>
          <item row="1" column="1">
@@ -139,6 +145,9 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>_dataType</cstring>
            </property>
           </widget>
          </item>
@@ -205,6 +214,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="buddy">
+           <cstring>_color</cstring>
           </property>
          </widget>
         </item>
