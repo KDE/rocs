@@ -161,11 +161,11 @@ void DataTypePage::updateCurrentTypeName()
 
 void DataTypePage::createNewType()
 {
-    int newType = _document->registerDataType(ui->newTypeName->text());
-    ui->newTypeName->clear();
+    int newType = _document->registerDataType(QString());
     ui->typeSelector->addItem(_document->dataType(newType)->name(), QVariant(newType));
     ui->typeSelector->setCurrentIndex(ui->typeSelector->count()-1);
     setCurrentType(ui->typeSelector->count()-1);
+    ui->typeName->setFocus();
 }
 
 
