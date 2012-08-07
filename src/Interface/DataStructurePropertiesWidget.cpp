@@ -67,7 +67,7 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr da
 //     _dataStructureVisible->setChecked( ! _dataStructure->readOnly());
     _activateGraph->setChecked(true);
 
-    _editWidget->setVisible(_activateGraph->isChecked());
+    _displayOptions->setVisible(_activateGraph->isChecked());
 
     if (!_extraProperties->layout()) {
         QLayout * lay = DataStructurePluginManager::self()->dataStructureExtraProperties(dataStructure, _extraProperties);
@@ -132,10 +132,10 @@ QRadioButton *DataStructurePropertiesWidget::radio()const
 }
 
 
-void DataStructurePropertiesWidget::on__activateGraph_toggled(bool b)
+void DataStructurePropertiesWidget::on__activateGraph_toggled(bool visible)
 {
-    _editWidget->setVisible(b);
-    if (b) {
+    _displayOptions->setVisible(visible);
+    if (visible) {
         DocumentManager::self()->activeDocument()->setActiveDataStructure(_dataStructure);
     }
 }
