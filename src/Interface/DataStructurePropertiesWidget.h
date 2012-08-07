@@ -72,7 +72,6 @@ private slots:
     void updatePointerTypeButtons();
 
     void on__dataStructureDelete_clicked();
-    void on__dataStructureName_textChanged(const QString& s);
     void on__activateGraph_toggled(bool b);
 
 signals:

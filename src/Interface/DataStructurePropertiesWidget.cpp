@@ -148,12 +148,6 @@ void DataStructurePropertiesWidget::on__dataStructureDelete_clicked()
 }
 
 
-void DataStructurePropertiesWidget::on__dataStructureName_textChanged(const QString& s)
-{
-    _activateGraph->setText(s);
-}
-
-
 bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
 {
     if (!dataStructure->document()->dataTypeList().contains(typeIdentifier)) {
