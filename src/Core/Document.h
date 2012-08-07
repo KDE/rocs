@@ -157,7 +157,7 @@ public slots:
      * \param name is the optional name of the to be created data structure
      * \return shared pointer to the data structure
      */
-    DataStructurePtr addDataStructure(QString name = "");
+    DataStructurePtr addDataStructure(QString name = QString());
     DataStructurePtr activeDataStructure() const ;
     void setActiveDataStructure(DataStructurePtr g);
 
