@@ -163,8 +163,10 @@ void GraphScene::setActiveDocument()
 void GraphScene::createItems()
 {
     foreach(DataStructurePtr g, _graphDocument->dataStructures()) {
-        foreach(DataPtr d, g->dataList()) createData(d);
-        foreach(PointerPtr p, g->pointers()) createEdge(p);
+        foreach(int type, _graphDocument->dataTypeList())
+            foreach(DataPtr d, g->dataList(type)) createData(d);
+        foreach(int type, _graphDocument->pointerTypeList())
+            foreach(PointerPtr p, g->pointers(type)) createEdge(p);
     }
 }
 
