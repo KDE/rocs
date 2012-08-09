@@ -119,11 +119,11 @@ void PointerTypePage::updateCurrentTypeName()
 
 void PointerTypePage::createNewType()
 {
-    int newType = _document->registerPointerType(QString());
-    ui->typeSelector->addItem(QString(), QVariant(newType));
+    int newType = _document->registerPointerType(ui->newTypeName->text());
+    ui->newTypeName->clear();
+    ui->typeSelector->addItem(_document->pointerType(newType)->name(), QVariant(newType));
     ui->typeSelector->setCurrentIndex(ui->typeSelector->count()-1);
     setCurrentType(ui->typeSelector->count()-1);
-    ui->typeName->setFocus();
 }
 
 
