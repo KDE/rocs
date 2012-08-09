@@ -52,6 +52,8 @@ using namespace boost::spirit;
  */
 bool parse(const std::string& str, Document* graphDoc);
 
+bool parseIntegers(const std::string& str, std::vector<int>& v);
+
 void setStrict();
 void undirectedDataStructure();
 void directedDataStructure();

@@ -103,8 +103,7 @@ void DotGraphParsingHelper::setAttributedList()
     if (attributed == "graph") {
         if (attributes.find("bb") != attributes.end()) {
             std::vector< int > v;
-//FIXME add integer parser
-//             parse_integers(attributes["bb"].toStdString().c_str(), v);
+            parseIntegers(attributes["bb"].toStdString().c_str(), v);
             if (v.size() >= 4) {
                 kDebug() << "setting width and height to " << v[2] << v[3];
             }

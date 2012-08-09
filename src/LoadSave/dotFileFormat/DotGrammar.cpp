@@ -22,13 +22,8 @@
 #include "DotGraphParsingHelper.h"
 #include <Document.h>
 
-#include <iostream>
-
 #include <KDebug>
-
 #include <QFile>
-
-#include <iostream>
 
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_int.hpp>
@@ -39,6 +34,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/spirit/include/phoenix_core.hpp>
 #include <boost/spirit/include/phoenix_operator.hpp>
+#include <boost/spirit/include/phoenix_stl.hpp>
 
 using namespace std;
 using namespace boost;
@@ -472,6 +468,25 @@ void createPointers()
     phelper->createPointers();
 }
 
+bool parseIntegers(const std::string& str, std::vector<int>& v)
+{
+    using boost::spirit::qi::int_;
+    using boost::spirit::qi::phrase_parse;
+    using boost::spirit::qi::_1;
+    using boost::spirit::ascii::space;
+    using boost::phoenix::push_back;
+    using boost::phoenix::ref;
+
+    return phrase_parse(str.begin(), str.end(),
+        //  Begin grammar
+        (
+            int_[push_back(ref(v), _1)]
+                >> *(',' >> int_[push_back(ref(v), _1)])
+        )
+        ,
+        //  End grammar
+        space);
+}
 
 bool parse(const std::string& str, Document * graphDoc)
 {
