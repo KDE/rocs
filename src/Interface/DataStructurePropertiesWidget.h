@@ -68,7 +68,8 @@ private slots:
      */
     void unregisterPointerType(int identifier);
 
-    void updateDataTypeIcons();
+    void updateDataTypeButtons();
+    void updatePointerTypeButtons();
 
     void on__dataStructureDelete_clicked();
     void on__dataStructureName_textChanged(const QString& s);
@@ -88,6 +89,7 @@ private:
     MainWindow *_mainWindow;
     QMap<int, QWidget*> _dataTypeWidgets;
     QMap<int, KPushButton*> _dataTypeButtons;
+    QMap<int, KPushButton*> _pointerTypeButtons;
     QMap<int, QWidget*> _pointerTypeWidgets;
 };
 #endif
