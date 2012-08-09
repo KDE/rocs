@@ -28,6 +28,7 @@
 #include <DataStructure.h>
 #include <Document.h>
 #include <DataStructurePluginManager.h>
+#include <Modifiers/Topology.h>
 #include "../Plugins/DataStructure/Graph/GraphStructure.h"
 #include "DotGraphParsingHelper.h"
 #include "DotGrammar.h"
@@ -52,6 +53,7 @@ DotFileFormatPlugin::DotFileFormatPlugin(QObject* parent, const QList< QVariant 
 
 }
 
+
 const QStringList DotFileFormatPlugin::extensions() const
 {
     return QStringList()
@@ -63,9 +65,7 @@ void DotFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document(i18n("Import"));
     DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
-    DataStructurePtr graph = graphDoc->addDataStructure();
-//     Rocs::GraphStructure graph;  //TODO
-//     Graph * graph = graphDoc->addGraph();
+
     QList < QPair<QString, QString> > edges;
     QFile fileHandle(file().toLocalFile());
     if (!fileHandle.open(QFile::ReadOnly)) {
@@ -79,10 +79,11 @@ void DotFileFormatPlugin::readFile()
         delete graphDoc;
         return;
     }
+    Topology layouter;
+    layouter.directedGraphDefaultTopology(graphDoc->activeDataStructure());
     setGraphDocument(graphDoc);
     setError(None);
 }
-
 
 
 void DotFileFormatPlugin::writeFile(Document &graph)

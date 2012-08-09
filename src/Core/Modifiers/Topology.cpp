@@ -118,6 +118,10 @@ void Topology::applyMinCutTreeAlignment(DataList dataList)
 
 void Topology::applyCircleAlignment(DataList dataList, qreal radius)
 {
+    if (dataList.length() == 0) {
+        return;
+    }
+
     PositionVec position_vec(dataList.count());
 
     if(radius == 0) {
