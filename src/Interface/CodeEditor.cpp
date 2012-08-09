@@ -111,17 +111,6 @@ KTextEditor::Document* CodeEditor::newScript()
 
 #ifdef USING_QTSCRIPT
     _scriptDocs.last()->setMode("JavaScript");
-    _scriptDocs.last()->setText(
-        i18nc("Example script that shows up in the text editor by default.",
-        "// This is Rocs' editor.\n"
-        "// You can write a JavaScript program here.\n"
-        "output(\"\\nWelcome to Rocs!\");\n"
-        "// Name our graph above Graph0 and add a few nodes and edges.\n"
-        "// Then click the run button on the right side.\n"
-        "output(\"Graph0 has \" + Graph0.list_nodes().length + \" nodes\");\n"
-        "output(\"and \" + Graph0.list_edges().length + \" edges\");\n"
-        )
-    );
 #endif
 
     _docViews << qobject_cast<KTextEditor::View*>(_scriptDocs.last()->createView(this));
