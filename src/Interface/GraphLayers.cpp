@@ -43,16 +43,13 @@ GraphLayers::GraphLayers(MainWindow *parent) :
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
 
     QWidget *contents = new QWidget();
-    KPushButton *btnADD = new KPushButton(KIcon("rocsnew"), i18nc("@action:button", "Add"));
-    btnADD->setToolTip(i18nc("@info:tooltip", "Add a new data structure with the specified name"));
+    KPushButton *btnADD = new KPushButton(KIcon("rocsnew"), i18nc("@action:button", "Add Data Structure"));
+    btnADD->setToolTip(i18nc("@info:tooltip", "Add a new data structure."));
 
     _buttonGroup = new QButtonGroup();
-    _lineEdit = new KLineEdit();
-    _lineEdit->setPlaceholderText(i18n("Identifier for new Data Structure"));
-
     connect(btnADD, SIGNAL(clicked()), this, SLOT(btnADDClicked()));
     hBoxLayout->addWidget(btnADD);
-    hBoxLayout->addWidget(_lineEdit);
+    hBoxLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding));
 
     vBoxLayout->addLayout(hBoxLayout);
     vBoxLayout->addStretch();
@@ -103,8 +100,7 @@ void GraphLayers::setActiveDocument()
 
 void GraphLayers::btnADDClicked()
 {
-    QString name = _lineEdit->text();
-    emit createGraph(name);
+    emit createGraph(QString());
 }
 
 void GraphLayers::createLayer(DataStructurePtr dataStructure)

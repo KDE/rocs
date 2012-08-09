@@ -76,6 +76,7 @@ int DataType::identifier() const
 void DataType::setName(QString name)
 {
     d->_name = name;
+    emit nameChanged(d->_name);
 }
 
 const QString& DataType::name() const

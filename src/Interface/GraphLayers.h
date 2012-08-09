@@ -36,7 +36,6 @@ class GraphLayers : public QScrollArea
 {
     Q_OBJECT
     QButtonGroup *_buttonGroup;
-    KLineEdit *_lineEdit;
     MainWindow *_mainWindow;
 
 protected:

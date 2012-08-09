@@ -161,8 +161,10 @@ void GraphScene::setActiveDocument()
 void GraphScene::createItems()
 {
     foreach(DataStructurePtr g, _graphDocument->dataStructures()) {
-        foreach(DataPtr d, g->dataList()) createData(d);
-        foreach(PointerPtr p, g->pointers()) createEdge(p);
+        foreach(int type, _graphDocument->dataTypeList())
+            foreach(DataPtr d, g->dataList(type)) createData(d);
+        foreach(int type, _graphDocument->pointerTypeList())
+            foreach(PointerPtr p, g->pointers(type)) createEdge(p);
     }
 }
 
@@ -402,6 +404,7 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     // puzzling the menu together
     AddDataAction *addDataAction = new AddDataAction(this);
     addDataAction->setAddPosition(scenePosition);
+    addDataAction->setCheckable(false); // it doesn't make sense to have a checkbox in the right click menu
     connect(addDataAction, SIGNAL(triggered(bool)), addDataAction, SLOT(executePress()));
     DeleteAction *deleteDataStructureAction = new DeleteAction(i18nc("@action:inmenu", "Delete"), this, contextDataStructure, 0);
     DeleteAction *deleteSelectedAction = new DeleteAction(i18nc("@action:inmenu", "Delete"), this, 0);

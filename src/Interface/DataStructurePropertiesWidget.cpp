@@ -67,7 +67,7 @@ DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr da
 //     _dataStructureVisible->setChecked( ! _dataStructure->readOnly());
     _activateGraph->setChecked(true);
 
-    _editWidget->setVisible(_activateGraph->isChecked());
+    _displayOptions->setVisible(_activateGraph->isChecked());
 
     if (!_extraProperties->layout()) {
         QLayout * lay = DataStructurePluginManager::self()->dataStructureExtraProperties(dataStructure, _extraProperties);
@@ -123,6 +123,7 @@ void DataStructurePropertiesWidget::unregisterPointerType(int identifier)
     }
     delete _pointerTypeWidgets[identifier];
     _pointerTypeWidgets.remove(identifier);
+    _pointerTypeButtons.remove(identifier);
 }
 
 
@@ -132,10 +133,10 @@ QRadioButton *DataStructurePropertiesWidget::radio()const
 }
 
 
-void DataStructurePropertiesWidget::on__activateGraph_toggled(bool b)
+void DataStructurePropertiesWidget::on__activateGraph_toggled(bool visible)
 {
-    _editWidget->setVisible(b);
-    if (b) {
+    _displayOptions->setVisible(visible);
+    if (visible) {
         DocumentManager::self()->activeDocument()->setActiveDataStructure(_dataStructure);
     }
 }
@@ -218,7 +219,8 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     connect(dataTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
     connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataVisibility(int)));
 
-    connect(dataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateDataTypeIcons()));
+    connect(dataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateDataTypeButtons()));
+    connect(dataType.get(), SIGNAL(nameChanged(QString)), this, SLOT(updateDataTypeButtons()));
 
     _dataTypeWidgets.insert(typeIdentifier, dataPropertyWidget);
     _dataTypeButtons.insert(typeIdentifier, dataTypeButton);
@@ -233,18 +235,20 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
         return false;
     }
 
+    PointerTypePtr pointerType = dataStructure->document()->pointerType(typeIdentifier);
+
     // create default data element setups
     QWidget* pointerPropertyWidget = new QWidget(this);
     QGridLayout* pointerPropertyLayout = new QGridLayout(pointerPropertyWidget);
 
     KPushButton* pointerTypeButton = new KPushButton(this);
     QMenu* pointerTypeMenu = new QMenu(pointerTypeButton);
-    pointerTypeButton->setText(dataStructure->document()->pointerType(typeIdentifier)->name());
+    pointerTypeButton->setText(pointerType->name());
     pointerTypeButton->setFlat(true);
     pointerTypeButton->setStyleSheet("text-align: left");
     pointerTypeButton->setMenu(pointerTypeMenu);
     pointerTypeMenu->addAction(
-            new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataStructure->document()->pointerType(typeIdentifier), pointerPropertyWidget)
+            new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget)
         );
 
     KPushButton* pointerTypeShowName = new KPushButton(pointerPropertyWidget);
@@ -291,20 +295,35 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     connect(pointerTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
     connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(togglePointerVisibility(int)));
 
+    connect(pointerType.get(), SIGNAL(nameChanged(QString)), this, SLOT(updatePointerTypeButtons()));
+
     _pointerTypeWidgets.insert(typeIdentifier, pointerPropertyWidget);
+    _pointerTypeButtons.insert(typeIdentifier, pointerTypeButton);
 
     return true;
 }
 
 
-void DataStructurePropertiesWidget::updateDataTypeIcons()
+void DataStructurePropertiesWidget::updateDataTypeButtons()
 {
     QMap<int, KPushButton*>::const_iterator dataTypeWidget = _dataTypeButtons.constBegin();
     while (dataTypeWidget != _dataTypeButtons.constEnd()) {
         Document* activeDocument = DocumentManager::self()->activeDocument();
         DataTypePtr dataType = activeDocument->dataType(dataTypeWidget.key());
         dataTypeWidget.value()->setIcon(dataType->icon());
+        dataTypeWidget.value()->setText(dataType->name());
         ++dataTypeWidget;
     }
 }
 
+
+void DataStructurePropertiesWidget::updatePointerTypeButtons()
+{
+    QMap<int, KPushButton*>::const_iterator pointerTypeWidget = _pointerTypeButtons.constBegin();
+    while (pointerTypeWidget != _pointerTypeButtons.constEnd()) {
+        Document* activeDocument = DocumentManager::self()->activeDocument();
+        PointerTypePtr pointerType = activeDocument->pointerType(pointerTypeWidget.key());
+        pointerTypeWidget.value()->setText(pointerType->name());
+        ++pointerTypeWidget;
+    }
+}

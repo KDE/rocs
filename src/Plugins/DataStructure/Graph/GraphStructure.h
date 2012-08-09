@@ -119,14 +119,30 @@ public slots:
     void setDirected(bool directed);
 
     /**
-     * returns a list of all nodes of the graph as array
+     * Returns a list of all nodes of the graph.
+     * \return array containing the nodes
      */
     QScriptValue list_nodes();
 
     /**
-     * returns a list of all edges of the graph as array
+     * Returns a list of all nodes of given \p type in the graph.
+     * \param type is the overlay for the to created pointer
+     * \return array containing the nodes
+     */
+    QScriptValue list_nodes(int type);
+
+    /**
+     * Returns a list of all edges of the graph.
+     * \return array containing the edges
      */
     QScriptValue list_edges();
+
+    /**
+     * Returns a list of all edges of given \p type in the graph.
+     * \param type is the overlay for the to created pointer
+     * \return array containing the edges
+     */
+    QScriptValue list_edges(int type);
 
     /**
      * Gives array of edges of specified overlay. If overlay

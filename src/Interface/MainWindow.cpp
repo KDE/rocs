@@ -281,6 +281,10 @@ QWidget* MainWindow::setupScriptPanel()
     _stopScript->setEnabled(false);
     executeCommands->addAction(_runScript);
     executeCommands->addAction(_stepRunScript);
+    // add actions to action collection to be able to set shortcuts on them in the ui
+    actionCollection()->addAction("_runScript", _runScript);
+    actionCollection()->addAction("_stepRunScript", _stepRunScript);
+    actionCollection()->addAction("_stopScript", _stopScript);
 
     // debug controls submenu
     _debugMenu = new KActionMenu(KIcon("debug-run"), i18nc("@title:menu Debug execution", "Debug"), this);
@@ -290,6 +294,8 @@ QWidget* MainWindow::setupScriptPanel()
     _debugMenu->addAction(_interruptScript);
     executeCommands->addWidget(_debugMenu->createWidget(executeCommands));
     executeCommands->addAction(_stopScript);
+    actionCollection()->addAction("_debugScript", _debugScript);
+    actionCollection()->addAction("_interruptScript", _interruptScript);
 
     // set toolbar visibility defaults
     showExecutionButtonDebug(Settings::excutionModeDebugVisible());

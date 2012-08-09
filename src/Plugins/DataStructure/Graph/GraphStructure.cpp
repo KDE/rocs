@@ -87,6 +87,7 @@ Rocs::GraphStructure::~GraphStructure()
 
 QScriptValue Rocs::GraphStructure::overlay_edges(int overlay)
 {
+    //FIXME deprecate this method
     QScriptValue array = engine()->newArray();
     foreach(PointerPtr n, pointers(overlay)) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
@@ -97,7 +98,18 @@ QScriptValue Rocs::GraphStructure::overlay_edges(int overlay)
 QScriptValue Rocs::GraphStructure::list_nodes()
 {
     QScriptValue array = engine()->newArray();
-    foreach(DataPtr n, dataList()) {
+    foreach(int type, document()->dataTypeList()) {
+    foreach(DataPtr n, dataList(type)) {
+        array.property("push").call(array, QScriptValueList() << n->scriptValue());
+    }
+    }
+    return array;
+}
+
+QScriptValue Rocs::GraphStructure::list_nodes(int type)
+{
+    QScriptValue array = engine()->newArray();
+    foreach(DataPtr n, dataList(type)) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
@@ -106,7 +118,18 @@ QScriptValue Rocs::GraphStructure::list_nodes()
 QScriptValue Rocs::GraphStructure::list_edges()
 {
     QScriptValue array = engine()->newArray();
-    foreach(PointerPtr n, pointers()) {
+    foreach(int type, document()->pointerTypeList()) {
+    foreach(PointerPtr n, pointers(type)) {
+        array.property("push").call(array, QScriptValueList() << n->scriptValue());
+    }
+    }
+    return array;
+}
+
+QScriptValue Rocs::GraphStructure::list_edges(int type)
+{
+    QScriptValue array = engine()->newArray();
+    foreach(PointerPtr n, pointers(type)) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
     }
     return array;
