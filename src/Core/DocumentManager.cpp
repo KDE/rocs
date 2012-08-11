@@ -204,3 +204,25 @@ Document* DocumentManager::openDocument(const KUrl& documentUrl)
     addDocument(doc);
     return doc;
 }
+
+
+void DocumentManager::saveDocumentAs(Document* document, const KUrl& documentUrl)
+{
+    exportDocument(document, documentUrl);
+    document->setFileUrl(documentUrl);
+    document->setModified(false);
+    return;
+}
+
+void DocumentManager::exportDocument(Document* document, const KUrl& documentUrl)
+{
+    GraphFilePluginInterface* serializer = PluginManager::instance()->defaultGraphFilePlugin();
+    serializer->setFile(documentUrl);
+    serializer->writeFile(*document);
+    if (serializer->error() != GraphFilePluginInterface::None) {
+        kDebug() << "Could not save file. Serializer returned error: " << serializer->errorString();
+        return;
+    }
+
+    return;
+}

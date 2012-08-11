@@ -501,12 +501,12 @@ DataStructurePtr Document::addDataStructure(QString name)
 void Document::save()
 {
     Q_ASSERT(!fileUrl().isEmpty());
-    saveAsInternalFormat(fileUrl());
+    DocumentManager::self()->saveDocumentAs(this, KUrl::fromLocalFile(fileUrl()));
 }
 
 void Document::saveAs(const QString& fileUrl)
 {
-    saveAsInternalFormat(fileUrl);
+    DocumentManager::self()->saveDocumentAs(this, KUrl::fromLocalFile(fileUrl));
 }
 
 const QString& Document::fileUrl() const
@@ -523,21 +523,6 @@ void Document::remove(DataStructurePtr dataStructure)
 {
     d->_dataStructures.removeOne(dataStructure);
     d->_modified = true;
-}
-
-bool Document::saveAsInternalFormat(const QString& filename)
-{
-    GraphFilePluginInterface* serializer = PluginManager::instance()->defaultGraphFilePlugin();
-    serializer->setFile(KUrl::fromLocalFile(filename));
-    serializer->writeFile(*this);
-    if (serializer->error() != GraphFilePluginInterface::None) {
-        kDebug() << "Could not save file. Serializer returned error: " << serializer->errorString();
-        return false;
-    }
-
-    d->_lastSavedDocumentPath = filename;
-    d->_modified = false;
-    return true;
 }
 
 DataStructurePtr Document::activeDataStructure() const
@@ -568,24 +553,3 @@ void Document::setDataStructurePlugin(QString pluginIdentifier)
         d->_dataStructureType = plugin;
     }
 }
-
-// void Document::convertToDataStructure(QString newDataStructure){
-//     if (newDataStructure == d->_dataStructureType) return;
-// //        kDebug() << "Need convert doc from " << d->_dataStructureType << " to "<< newDataStructure ;
-//         d->_dataStructureType = newDataStructure;
-// //         Document * gDoc = new Document(*this);
-// //        int numDataStructures = count();
-// //         for (int i = 0 ; i < numDataStructures; ++i){
-// //             DataStructure * g = DataStructurePluginManager::instance()->changeToDataStructure(at(i));
-// //             if (at(i) == d->_activeDataStructure)
-// //               d->_activeDataStructure = g;
-// //             append(g);
-// //         }
-// //         for (int i = 0 ; i < numDataStructures; ++i){
-// //             at(0)->deleteLater();
-// //             removeAt(0);
-// //         }
-// //         return gDoc;
-// //    }
-// //     return 0;
-// }
