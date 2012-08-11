@@ -1,4 +1,4 @@
-project(RocsTgfFileFromatPlugin)
+project(RocsTgfFileFormatPlugin)
 
 set(tgfFileFromatPlugin_SRCS
     TgfFileFormatPlugin.cpp
