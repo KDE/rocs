@@ -237,7 +237,7 @@ void TestGraphStructure::serializeUnserializePluginExtraProperties()
     //unserialize and test properties
     DocumentManager::self()->addDocument(testDoc);
     DocumentManager::self()->changeDocument(testDoc);
-    DocumentManager::self()->activeDocument()->loadFromInternalFormat(KUrl::fromLocalFile("graphserializetest.graph"));
+    DocumentManager::self()->openDocument(KUrl::fromLocalFile("graphserializetest.graph"));
 
     // compare graph type
     QVERIFY2(DocumentManager::self()->activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");

@@ -191,12 +191,18 @@ Document* DocumentManager::newDocument()
 
 Document* DocumentManager::openDocument(const KUrl& documentUrl)
 {
-    Document* doc;
+    // TODO extend PluginManager API to allow calling of specific graphloader
+    GraphFilePluginInterface* loader = PluginManager::instance()->filePluginsByExtension("graph");
 
-    doc = new Document(documentUrl.fileName());
-    doc->loadFromInternalFormat(documentUrl);
+    loader->setFile(documentUrl);
+    loader->readFile();
+    if (loader->error() != GraphFilePluginInterface::None) {
+        kDebug() << "Could not load file. Graph loader returned error: " << loader->errorString();
+        return new Document(documentUrl.fileName());;
+    }
+    Document* doc = loader->graphDocument();
+    doc->setName(documentUrl.fileName());
     doc->setModified(false);
     addDocument(doc);
-
     return doc;
 }
