@@ -25,7 +25,6 @@
             <Action name="add-script" />
             <Separator/>
             <Action name="new-graph" />
-            <Action name="add-graph" />
             <Action name="import-graph" />
         </Menu>
         <Menu name="script">
@@ -45,7 +44,6 @@
             <Menu name="graph_file">
                 <text>Graph File</text>
                 <Action name="save-graph" />
-                <Action name="save-graph-as" />
                 <Action name="export-graph" />
             </Menu>
             <Separator/>

@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -21,6 +22,7 @@
 
 #include "ToolsPluginInterface.h"
 #include "GraphFilePluginInterface.h"
+#include "RocsGraphFileFormatPlugin.h"
 
 #include <KServiceTypeTrader>
 #include <KPluginInfo>
@@ -52,15 +54,11 @@ public:
 
     QMap<KPluginInfo,  ToolsPluginInterface*> toolsPluginsMap;
     QMap<KPluginInfo,  GraphFilePluginInterface*> filePluginsMap;
-
+    GraphFilePluginInterface* _defaultGraphFilePlugin;
 };
 
 
-
-
 PluginManager * PluginManager::self = 0;
-
-
 
 
 PluginManager * PluginManager::instance()
@@ -118,7 +116,6 @@ bool PluginManager::loadToolPlugin(QString name)
 
 void PluginManager::loadToolsPlugins()
 {
-
     kDebug() << "Load Tools plugins";
 
     foreach(KPluginInfo info, _d->toolsPluginsInfo) {
@@ -186,7 +183,12 @@ void PluginManager::loadFilePlugins()
             qDebug() << "Can't load plugin: " << service->name();
         }
     }
+
+    // load non-dynamic file plugins
+    GraphFilePluginInterface *plugin = new RocsGraphFileFormatPlugin(this, QList<QVariant>());
+    _filePlugins.append(plugin);
 }
+
 KPluginInfo pluginInfo(const ToolsPluginInterface * /*plugin*/)
 {
     return KPluginInfo();
@@ -202,3 +204,7 @@ GraphFilePluginInterface* PluginManager::filePluginsByExtension(QString ext)
     return 0;
 }
 
+GraphFilePluginInterface* PluginManager::defaultGraphFilePlugin()
+{
+    return _d->_defaultGraphFilePlugin;
+}

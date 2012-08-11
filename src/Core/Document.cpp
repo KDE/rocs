@@ -527,9 +527,7 @@ void Document::remove(DataStructurePtr dataStructure)
 
 bool Document::saveAsInternalFormat(const QString& filename)
 {
-    // TODO extend PluginManager API to allow calling of specific serializer
-    GraphFilePluginInterface* serializer = PluginManager::instance()->filePluginsByExtension("graph");
-
+    GraphFilePluginInterface* serializer = PluginManager::instance()->defaultGraphFilePlugin();
     serializer->setFile(KUrl::fromLocalFile(filename));
     serializer->writeFile(*this);
     if (serializer->error() != GraphFilePluginInterface::None) {

@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -47,15 +48,14 @@ public:
 
     void loadPlugins();
 
-
     bool loadToolPlugin(QString arg1);
 
     void loadToolsPlugins();
 
     void loadFilePlugins();
 
-    QList < ToolsPluginInterface*> toolPlugins();
-    QList < GraphFilePluginInterface*> filePlugins() const;
+    QList <ToolsPluginInterface*> toolPlugins();
+    QList <GraphFilePluginInterface*> filePlugins() const;
 
     KPluginInfo pluginInfo(ToolsPluginInterface * plugin);
 
@@ -65,7 +65,9 @@ public:
     \param ext File extension (like 'TXT', 'cpp', '.Cpp', '*.js')
     \return File plugin to handle files with that extension or 0 if there is no plugin to handle it.
     */
-    GraphFilePluginInterface *  filePluginsByExtension(QString ext);
+    GraphFilePluginInterface* filePluginsByExtension(QString ext);
+
+    GraphFilePluginInterface* defaultGraphFilePlugin();
 
 };
 

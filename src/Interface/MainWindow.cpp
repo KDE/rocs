@@ -404,28 +404,21 @@ void MainWindow::setupActions()
     createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(newProject()), this);
     createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
-    createAction("document-export",     i18nc("@action:inmenu", "Export Project"),     "export-project", SLOT(exportProject()), this);
-    createAction("document-import",     i18nc("@action:inmenu", "Import Project"),     "import-project", SLOT(importProject()), this);
-    createAction("document-properties", i18nc("@action:inmenu", "Set Name"),           "set-project-name", SLOT(setProjectName()), this);
-    createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph", SLOT(newGraph()), this);
-    createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",         SLOT(newScript()),    this);
-    createAction("document-import",     i18nc("@action:inmenu", "Import Rocs Graph"),  "add-graph",        SLOT(importGraph()),   this);
+    createAction("document-export",     i18nc("@action:inmenu", "Export Project"),     "export-project",    SLOT(exportProject()), this);
+    createAction("document-import",     i18nc("@action:inmenu", "Import Project"),     "import-project",    SLOT(importProject()), this);
+    createAction("document-properties", i18nc("@action:inmenu", "Set Name"),           "set-project-name",  SLOT(setProjectName()), this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(newGraph()), this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(newScript()),    this);
+    createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraph()),   this);
     createAction("document-save",       i18nc("@action:inmenu", "Save Graph"),         "save-graph",        SLOT(saveGraph()),   this);
-    createAction("document-save-as",    i18nc("@action:inmenu", "Save Graph as"),      "save-graph-as",     SLOT(saveGraphAs()), this);
+    createAction("document-export",     i18nc("@action:inmenu", "Export Graph"),       "export-graph",      SLOT(exportFile()), this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Upload script"),      "upload",            SLOT(uploadScript()),  this);
 
-    createAction("help-hint", i18nc("@action:inmenu", "Possible Includes"),          "possible_includes", SLOT(showPossibleIncludes()), this);
-    createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",       SLOT(importScript()),   this);
-    createAction("document-save",    i18nc("@action:inmenu", "Save Script"),         "save-script",       SLOT(saveActiveScript()),   _codeEditor);
-    createAction("document-save-as", i18nc("@action:inmenu", "Save Script as"),      "save-script-as",    SLOT(saveActiveScriptAs()), _codeEditor);
-
-    // eventually create hooks for file plugins
-    PluginManager::instance()->loadFilePlugins();
-    if (PluginManager::instance()->filePlugins().count() > 0) {
-        createAction("document-import", i18nc("@action:inmenu", "Import Graph"), "import-graph", SLOT(importFile()), this);
-        createAction("document-export", i18nc("@action:inmenu", "Export Graph"), "export-graph", SLOT(exportFile()), this);
-    }
+    createAction("help-hint", i18nc("@action:inmenu", "Possible Includes"),          "possible_includes",   SLOT(showPossibleIncludes()), this);
+    createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importScript()),   this);
+    createAction("document-save",    i18nc("@action:inmenu", "Save Script"),         "save-script",         SLOT(saveActiveScript()),   _codeEditor);
+    createAction("document-save-as", i18nc("@action:inmenu", "Save Script as"),      "save-script-as",      SLOT(saveActiveScriptAs()), _codeEditor);
 
     // EDIT actions
     actionCollection()->addAction("delete-selected", new DeleteAction(i18nc("@action:intoolbar", "Delete"), _graphVisualEditor->scene(), 0));

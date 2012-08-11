@@ -191,9 +191,7 @@ Document* DocumentManager::newDocument()
 
 Document* DocumentManager::openDocument(const KUrl& documentUrl)
 {
-    // TODO extend PluginManager API to allow calling of specific graphloader
-    GraphFilePluginInterface* loader = PluginManager::instance()->filePluginsByExtension("graph");
-
+    GraphFilePluginInterface* loader = PluginManager::instance()->defaultGraphFilePlugin();
     loader->setFile(documentUrl);
     loader->readFile();
     if (loader->error() != GraphFilePluginInterface::None) {

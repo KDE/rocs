@@ -1,3 +1,1 @@
-add_subdirectory(tgfFileFormat)
-add_subdirectory(dotFileFormat)
-add_subdirectory(rocsGraphFileFormat)
+add_subdirectory(Plugins)
