@@ -22,10 +22,8 @@
 #define DOTFILEFORMATPLUGIN_H
 
 #include <QObject>
-
 #include <GraphFilePluginInterface.h>
-class Pointer;
-class Data;
+#include "Rocs_Typedefs.h"
 
 class DotFileFormatPlugin: public GraphFilePluginInterface
 {
@@ -52,8 +50,8 @@ public:
     virtual void readFile();
 
 private:
-    QString const processNode(Data*) const;
-    QString const processEdge(Pointer* e) const;
+    QString const processNode(DataPtr node) const;
+    QString const processEdge(PointerPtr edge) const;
 
 };
 

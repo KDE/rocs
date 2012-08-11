@@ -32,6 +32,7 @@
 #include "../Plugins/DataStructure/Graph/GraphStructure.h"
 #include "DotGraphParsingHelper.h"
 #include "DotGrammar.h"
+#include "Rocs_Typedefs.h"
 
 static const KAboutData aboutdata("rocs_dotfileformat", 0, ki18nc("@title Displayed plugin name", "Read and write Graphviz graph documents.") , "0.1");
 
@@ -86,112 +87,121 @@ void DotFileFormatPlugin::readFile()
 }
 
 
-void DotFileFormatPlugin::writeFile(Document &graph)
+void DotFileFormatPlugin::writeFile(Document &document)
 {
-    //FIXME switch to use of shared pointers
+    DataStructurePtr graph = document.activeDataStructure();
+    //TODO make export graph selectable
+    if (!graph) {
+        setError(NoGraphFound, i18n("No active graph in this document."));
+        return;
+    }
+
     QFile fileHandle(file().toLocalFile());
     QVariantList subgraphs;
-    if (fileHandle.open(QFile::WriteOnly | QFile::Text)) {
+    if (!fileHandle.open(QFile::WriteOnly | QFile::Text)) {
+        setError(FileIsReadOnly, i18n("Cannot open file %1 to write document. Error: %2", file().fileName(), fileHandle.errorString()));
+        return;
+    } else {
         QTextStream out(&fileHandle);
-        DataStructurePtr g = graph.activeDataStructure(); //FIXME should be selectable
-        if (g) {
-//             out << QString("%1 %2 {\n").arg(g->directed() ? "digraph" : "graph").arg(g->name()); //FIXME
-            foreach(DataPtr n, g->dataList()) {
-                if (n->dynamicPropertyNames().contains("SubGraph")) {
-                    if (!subgraphs.contains(n->property("SubGraph"))) {
-                        subgraphs << n->property("SubGraph");
-                        out << QString("subgraph %1 {\n").arg(n->property("SubGraph").toString());
-                        foreach(DataPtr nTmp, g->dataList()) {
-                            if (nTmp->property("SubGraph").isValid() && nTmp->property("SubGraph") == subgraphs.last()) {
-                                out << processNode(nTmp.get());
-                            }
+
+        foreach(int type, document.dataTypeList()) {
+        foreach(DataPtr n, graph->dataList(type)) {
+            // TODO refactor when proper subgraph model is present
+            if (n->dynamicPropertyNames().contains("SubGraph")) {
+                if (!subgraphs.contains(n->property("SubGraph"))) {
+                    subgraphs << n->property("SubGraph");
+                    out << QString("subgraph %1 {\n").arg(n->property("SubGraph").toString());
+                    foreach(int type, document.dataTypeList()) {
+                    foreach(DataPtr nTmp, graph->dataList(type)) {
+                        if (nTmp->property("SubGraph").isValid() && nTmp->property("SubGraph") == subgraphs.last()) {
+                            out << processNode(nTmp);
                         }
-                        foreach(PointerPtr e, g->pointers()) {
-                            if (e->property("SubGraph").isValid() && e->property("SubGraph") == subgraphs.last()) { //Only edges from outer graph
-                                out << processEdge(e.get());
-                            }
-                        }
-                        out << "}\n";
                     }
-                } else {
-                    out << processNode(n.get());
+                    }
+                    foreach(int type, document.pointerTypeList()) {
+                    foreach(PointerPtr edge, graph->pointers(type)) {
+                        if (edge->property("SubGraph").isValid() && edge->property("SubGraph") == subgraphs.last()) { //only edges from outer graph
+                            out << processEdge(edge);
+                        }
+                    }
+                    }
+                    out << "}\n";
                 }
+            } else {
+                out << processNode(n);
             }
-            foreach(PointerPtr e, g->pointers()) {
-                if (!e->dynamicPropertyNames().contains("SubGraph")) { //Only edges from outer graph
-                    out << processEdge(e.get());
-                }
-            }
-            out << "}\n";
-            setError(None);
-            return;
         }
-        setError(NoGraphFound, i18n("No active graph in this document."));
+        }
+        foreach(int type, document.pointerTypeList()) {
+        foreach(PointerPtr edge, graph->pointers(type)) {
+            if (!edge->dynamicPropertyNames().contains("SubGraph")) { //only edges from outer graph
+                out << processEdge(edge);
+            }
+        }
+        }
+        out << "}\n";
+        setError(None);
+        return;
     }
-    setError(FileIsReadOnly, i18n("Cannot open file %1 to write document. Error: %2", file().fileName(), fileHandle.errorString()));
-    return;
 }
 
-QString const DotFileFormatPlugin::processEdge(Pointer*e) const
+QString const DotFileFormatPlugin::processEdge(PointerPtr edge) const
 {
-    QString edge;
-    edge.append(QString(" %1 -> %2 ").arg(e->from()->property("NodeName").isValid() ?
-                                          e->from()->property("NodeName").toString() :
-                                          e->from()->name())
-                .arg(e->to()->property("NodeName").isValid() ?
-                     e->to()->property("NodeName").toString() :
-                     e->to()->name()));
+    QString edgeStr;
+    edgeStr.append(QString(" %1 -> %2 ").arg(edge->from()->property("NodeName").isValid() ?
+                                          edge->from()->property("NodeName").toString() :
+                                          edge->from()->name())
+                .arg(edge->to()->property("NodeName").isValid() ?
+                     edge->to()->property("NodeName").toString() :
+                     edge->to()->name()));
     bool firstProperty = true;
-    if (!e->name().isEmpty()) {
+    if (!edge->name().isEmpty()) {
         firstProperty = false;
-        edge.append("[");
-        edge.append(QString(" label = \"%2\" ").arg(e->name()));
+        edgeStr.append("[");
+        edgeStr.append(QString(" label = \"%2\" ").arg(edge->name()));
     }
-    foreach(const QByteArray& property, e->dynamicPropertyNames()) {
+    foreach(const QByteArray& property, edge->dynamicPropertyNames()) {
         if (property != "SubGraph") {
             if (firstProperty == true) {
                 firstProperty = false;
-                edge.append("[");
+                edgeStr.append("[");
             } else {
-                edge.append(", ");
+                edgeStr.append(", ");
             }
-            edge.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(e->property(property).toString()));
+            edgeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(edge->property(property).toString()));
         }
     }
-    if (!firstProperty) //At least one property was inserted
-        edge.append("]");
-    edge.append(";\n");
-    return edge;
+    if (!firstProperty) { //At least one property was inserted
+        edgeStr.append("]");
+    }
+    return edgeStr.append(";\n");
 }
 
-QString const DotFileFormatPlugin::processNode(Data* n) const
+QString const DotFileFormatPlugin::processNode(DataPtr node) const
 {
-    QString node;
-    if (n->property("NodeName").isValid())
-        node = QString("%1").arg(n->property("NodeName").toString());
-    else
-        node = QString("%1").arg(n->name());
+    QString nodeStr;
+    if (node->property("NodeName").isValid()) {
+        nodeStr = QString("%1").arg(node->property("NodeName").toString());
+    } else {
+        nodeStr = QString("%1").arg(node->name());
+    }
 
     bool firstProperty = true;
-    foreach(const QByteArray& property, n->dynamicPropertyNames()) {
+    foreach(const QByteArray& property, node->dynamicPropertyNames()) {
         if (property != "NodeName" && property != "SubGraph") {
             if (firstProperty == true) {
                 firstProperty = false;
-                node.append("[");
+                nodeStr.append("[");
             } else {
-                node.append(", ");
+                nodeStr.append(", ");
             }
-            node.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(n->property(property).toString()));
+            nodeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(node->property(property).toString()));
         }
     }
-    //Need save X and Y??
     if (!firstProperty) { //At least one property was inserted
-        node.append("]");
-    } else { //No needs os nodes definition, it doesn't have any property.
-        return QString();
+        nodeStr.append("]");
     }
-    node.append(";\n");
-    return node;
+    return nodeStr.append(";\n");
 }
 
 #include "DotFileFormatPlugin.moc"
