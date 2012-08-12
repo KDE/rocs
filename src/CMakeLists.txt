@@ -45,6 +45,7 @@ set( rocs_core_SRCS
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
 
+    LoadSave/GraphFileBackendManager.cpp
     LoadSave/GraphFilePluginInterface.cpp
     LoadSave/RocsGraphFileFormatPlugin.cpp
 

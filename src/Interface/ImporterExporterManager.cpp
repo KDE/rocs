@@ -22,16 +22,12 @@
 #include <KLocalizedString>
 #include "LoadSave/GraphFilePluginInterface.h"
 #include <KDebug>
-#include <PluginManager.h>
+#include <GraphFileBackendManager.h>
 #include <KPushButton>
-#include <kdebug.h>
 #include "Document.h"
 
 #include <QFile>
 #include <QPointer>
-
-#include <iostream>
-#include <string>
 
 ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(parent), _scriptToRun(QString())
 {
@@ -40,7 +36,7 @@ ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(paren
 bool ImporterExporterManager::exportFile(Document * doc) const
 {
     QString ext;
-    foreach(GraphFilePluginInterface * f, PluginManager::instance()->filePlugins()) {
+    foreach(GraphFilePluginInterface * f, GraphFileBackendManager::self()->backends()) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
@@ -65,7 +61,7 @@ bool ImporterExporterManager::exportFile(Document * doc) const
         file.append(ext);
     }
 
-    GraphFilePluginInterface * filePlugin = PluginManager::instance()->filePluginsByExtension(ext);
+    GraphFilePluginInterface * filePlugin = GraphFileBackendManager::self()->backendByExtension(ext);
     if (!filePlugin) {
         kDebug() << "Cannot export file: " << file;
         return false;
@@ -85,7 +81,7 @@ Document* ImporterExporterManager::importFile()
 {
     QString ext;
 
-    foreach(GraphFilePluginInterface * f, PluginManager::instance()->filePlugins()) {
+    foreach(GraphFilePluginInterface * f, GraphFileBackendManager::self()->backends()) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
@@ -110,7 +106,7 @@ Document* ImporterExporterManager::importFile()
     }
 
     kDebug() << fileName.right(fileName.count() - index);
-    filePlugin = PluginManager::instance()->filePluginsByExtension(fileName.right(fileName.count() - index));
+    filePlugin = GraphFileBackendManager::self()->backendByExtension(fileName.right(fileName.count() - index));
 
     if (!filePlugin) {
         kDebug() <<  "Cannot handle extension " <<  fileName.right(3);

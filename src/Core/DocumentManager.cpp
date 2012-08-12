@@ -26,7 +26,7 @@
 #include <QAction>
 #include "QtScriptBackend.h"
 #include <KLocale>
-#include <PluginManager.h>
+#include <GraphFileBackendManager.h>
 #include "DataStructurePluginInterface.h"
 
 DocumentManager *DocumentManager::_self = 0;
@@ -191,7 +191,7 @@ Document* DocumentManager::newDocument()
 
 Document* DocumentManager::openDocument(const KUrl& documentUrl)
 {
-    GraphFilePluginInterface* loader = PluginManager::instance()->defaultGraphFilePlugin();
+    GraphFilePluginInterface* loader = GraphFileBackendManager::self()->defaultBackend();
     loader->setFile(documentUrl);
     loader->readFile();
     if (loader->error() != GraphFilePluginInterface::None) {
@@ -216,7 +216,7 @@ void DocumentManager::saveDocumentAs(Document* document, const KUrl& documentUrl
 
 void DocumentManager::exportDocument(Document* document, const KUrl& documentUrl)
 {
-    GraphFilePluginInterface* serializer = PluginManager::instance()->defaultGraphFilePlugin();
+    GraphFilePluginInterface* serializer = GraphFileBackendManager::self()->defaultBackend();
     serializer->setFile(documentUrl);
     serializer->writeFile(*document);
     if (serializer->error() != GraphFilePluginInterface::None) {

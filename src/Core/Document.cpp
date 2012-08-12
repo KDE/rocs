@@ -537,9 +537,8 @@ QString Document::dataStructureTypeName() const
 
 QString Document::dataStructureInternalName() const
 {
-    return  d->_dataStructureType->internalName();
+    return d->_dataStructureType->internalName();
 }
-
 
 DataStructurePluginInterface* Document::dataStructurePlugin() const
 {
