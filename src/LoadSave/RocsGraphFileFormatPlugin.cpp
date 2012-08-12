@@ -43,7 +43,9 @@ K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
 class RocsGraphFileFormatPluginPrivate
 {
 public:
-    RocsGraphFileFormatPluginPrivate() {}
+    RocsGraphFileFormatPluginPrivate() :
+        _buffer()
+    {}
 
     QString _buffer;
 };
@@ -52,12 +54,14 @@ public:
 RocsGraphFileFormatPlugin::RocsGraphFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
     GraphFilePluginInterface(FilePluginFactory::componentData(), parent)
 {
-
+    d = new RocsGraphFileFormatPluginPrivate;
 }
+
 
 RocsGraphFileFormatPlugin::~RocsGraphFileFormatPlugin()
 {
 }
+
 
 const QStringList RocsGraphFileFormatPlugin::extensions() const
 {
