@@ -68,10 +68,36 @@ GraphFileBackendManager::~GraphFileBackendManager()
     delete d;
 }
 
-
-QList< GraphFilePluginInterface* > GraphFileBackendManager::backends() const
+QList<GraphFilePluginInterface*> GraphFileBackendManager::backends() const
 {
     return d->backends;
+}
+
+
+QList<GraphFilePluginInterface*> GraphFileBackendManager::backends(PluginType type) const
+{
+    QList<GraphFilePluginInterface*> backends;
+    foreach(GraphFilePluginInterface* backend, d->backends) {
+        switch(type) {
+            case Import:
+                if (backend->pluginCapability() == GraphFilePluginInterface::ImportOnly
+                    || backend->pluginCapability() == GraphFilePluginInterface::ImportAndExport)
+                {
+                    backends.append(backend);
+                }
+                break;
+            case Export:
+                if (backend->pluginCapability() == GraphFilePluginInterface::ExportOnly
+                    || backend->pluginCapability() == GraphFilePluginInterface::ImportAndExport)
+                {
+                    backends.append(backend);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return backends;
 }
 
 

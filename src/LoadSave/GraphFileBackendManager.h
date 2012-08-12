@@ -39,6 +39,11 @@ class ROCSLIB_EXPORT GraphFileBackendManager: public QObject
     Q_OBJECT
 
 public:
+    enum PluginType {
+        Import,
+        Export
+    };
+
     /**
      * Returns self reference to backend manager. First call of this method initializes
      * file backend manager and loads plugins.
@@ -51,6 +56,14 @@ public:
      * \return list of plugin interfaces of loaded backends
      */
     QList <GraphFilePluginInterface*> backends() const;
+
+    /**
+     * Returns list of all loaded backends with specified capability (\see PluginType).
+     * Backends are loaded with first call to \see self().
+     * \param capability of the plugin
+     * \return list of plugin interfaces of loaded backends
+     */
+    QList <GraphFilePluginInterface*> backends(PluginType type) const;
 
     /**
      * Returns an arbitrary loaded plugin that can handle extension \p ext. If no backend specifies

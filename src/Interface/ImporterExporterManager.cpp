@@ -36,7 +36,8 @@ ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(paren
 bool ImporterExporterManager::exportFile(Document * doc) const
 {
     QString ext;
-    foreach(GraphFilePluginInterface * f, GraphFileBackendManager::self()->backends()) {
+    QList<GraphFilePluginInterface*> exportBackends = GraphFileBackendManager::self()->backends(GraphFileBackendManager::Export);
+    foreach(GraphFilePluginInterface * f, exportBackends) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
@@ -80,8 +81,8 @@ bool ImporterExporterManager::exportFile(Document * doc) const
 Document* ImporterExporterManager::importFile()
 {
     QString ext;
-
-    foreach(GraphFilePluginInterface * f, GraphFileBackendManager::self()->backends()) {
+    QList<GraphFilePluginInterface*> importBackends = GraphFileBackendManager::self()->backends(GraphFileBackendManager::Import);
+    foreach(GraphFilePluginInterface * f, importBackends) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
