@@ -1,15 +1,15 @@
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-set(TestTgfFileFromatPlugin_SRCS
+set(TestTgfFileFormatPlugin_SRCS
     TestTgfFileFormatPlugin.cpp
     ../TgfFileFormatPlugin.cpp
 )
 
-kde4_add_unit_test(TestTgfFileFromatPlugin ${TestTgfFileFromatPlugin_SRCS})
-target_link_libraries(TestTgfFileFromatPlugin
+kde4_add_unit_test(TestTgfFileFormatPlugin ${TestTgfFileFormatPlugin_SRCS})
+target_link_libraries(TestTgfFileFormatPlugin
     rocslib
     ${QT_QTTEST_LIBRARY}
     ${KDE4_KDECORE_LIBS}
 )
-add_test(TestTgfFileFromatPlugin TestTgfFileFromatPlugin)
+add_test(TestTgfFileFormatPlugin TestTgfFileFormatPlugin)
