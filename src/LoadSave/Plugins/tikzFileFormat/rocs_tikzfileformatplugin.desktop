@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+ServiceTypes=Rocs/GraphFilePlugin
+X-KDE-Library=rocs_tikzfileformat
+X-KDE-PluginInfo-Author=Andreas Cord-Landwehr
+X-KDE-PluginInfo-Name=rocs_tikzfileformat
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Category=Plugins
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+Name=Rocs PGF/TikZ Graph File Export Plugin
+Comment=Writes graph documents in PGF/TikZ format for use in LaTeX documents
