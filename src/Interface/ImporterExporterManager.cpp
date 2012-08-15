@@ -24,6 +24,8 @@
 #include <KDebug>
 #include <GraphFileBackendManager.h>
 #include <KPushButton>
+#include <KMessageBox>
+#include <KGuiItem>
 #include "Document.h"
 
 #include <QFile>
@@ -50,31 +52,44 @@ bool ImporterExporterManager::exportFile(Document * doc) const
         return false;
     }
 
-    kDebug() << "Exporting File..";
     if (exportDialog->selectedFile().isEmpty()) {
         return false;
     }
 
+    // set file ending
+    KUrl file;
     ext = exportDialog->currentFilter().remove('*');
-    kDebug() << " Selected to export: " << ext;
-    QString file = exportDialog->selectedFile();
-    if (!file.endsWith(ext)) {
-        file.append(ext);
+    if (exportDialog->selectedFile().endsWith(ext)) {
+        file = KUrl::fromLocalFile(exportDialog->selectedFile());
+    } else {
+        file = KUrl::fromLocalFile(exportDialog->selectedFile().append(ext));
     }
 
+    // test if any file is overwritten
+    if (QFile::exists(exportDialog->selectedFile())) {
+        if (KMessageBox::warningContinueCancel(qobject_cast< QWidget* >(parent()), i18n(
+                "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you "
+                "do not want to overwrite it, change the file name to "
+                "something else.</p>", file.prettyUrl()),
+            i18n("File Exists"), KGuiItem(i18n("Overwrite") ))
+            == KMessageBox::Cancel ) {
+            return false;
+        }
+    }
+
+    // select plugin by extension
     GraphFilePluginInterface * filePlugin = GraphFileBackendManager::self()->backendByExtension(ext);
     if (!filePlugin) {
-        kDebug() << "Cannot export file: " << file;
+        kDebug() << "Cannot export file: " << file.toLocalFile();
         return false;
     }
 
-    filePlugin->setFile(KUrl::fromLocalFile(file));
+    filePlugin->setFile(file);
     filePlugin->writeFile(*doc);
     if (filePlugin->hasError()) {
-        kDebug() << "Error writing file: " << filePlugin->errorString();
+        kDebug() << "Error occured when writing file: " << filePlugin->errorString();
         return false;
     }
-    kDebug() << "File Exported!" << file;
     return true;
 }
 
