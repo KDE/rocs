@@ -81,19 +81,54 @@ void TikzFileFormatPlugin::writeFile(Document &graph )
         return;
     }
 
+    // use this value to scale all coordinates
+    int resize = 50;
+
     // start picture
     out << "\\begin{tikzpicture}\n";
 
+    // style information
+    out << "\\tikzstyle{value} = [font=\\small]\n";
+    foreach(int type, graph.dataTypeList()) {
+        // TODO set type specific style information
+        QString dataTypeStyle = QString("\\tikzstyle{data%1}=[circle,thin,fill=black!25,minimum size=20pt,inner sep=0pt]").
+            arg(type);
+        out << dataTypeStyle << "\n";
+    }
+    foreach(int type, graph.pointerTypeList()) {
+        // TODO set type specific style information
+        QString pointerTypeStyle = QString("\\tikzstyle{edge%1} = [draw,thick,-]").
+            arg(type);
+        out << pointerTypeStyle << "\n";
+    }
+
     // export data elements
-    foreach(DataPtr n, g->dataList()) {
-        out << "\\node(" << n->identifier() <<") at (" << n->x() << "," << n->y() <<"){" << n->name() <<"};";
-        out << '\n';
+    // y-axis is mirrowed in tikz-format
+    foreach(int type, graph.dataTypeList()) {
+        foreach(DataPtr n, g->dataList(type)) {
+            QString dataStr = QString("\\node[data%1] (%2) at (%3,%4) [label=left:%5]  {%6};").
+                arg(n->dataType()).
+                arg(n->identifier()).
+                arg(n->x()/resize).
+                arg(n->y()*(-1)/resize).
+                arg(n->name()).
+                arg(n->value().toString());
+            out << dataStr;
+            out << '\n';
+        }
     }
 
     // export pointers
-    foreach(PointerPtr e, g->pointers()) {
-        out << "\\draw(" << e->from()->identifier() << ")--("<< e->to()->identifier() <<");";
-        out << '\n';
+    foreach(int type, graph.pointerTypeList()) {
+        foreach(PointerPtr e, g->pointers(type)) {
+            QString pointerStr = QString("\\path[edge%1] (%2) -- node[value] {%3} (%4);").
+                arg(e->pointerType()).
+                arg(e->from()->identifier()).
+                arg(e->value()).
+                arg(e->to()->identifier());
+            out << pointerStr;
+            out << '\n';
+        }
     }
 
     out << "\\end{tikzpicture}\n";
