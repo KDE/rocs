@@ -41,7 +41,8 @@ public:
         CouldNotOpenFile,
         NoGraphFound,
         EncodingProblem,
-        CouldNotRecognizeFileFormat
+        CouldNotRecognizeFileFormat,
+        NotSupportedOperation
     };
 
     enum PluginType {
