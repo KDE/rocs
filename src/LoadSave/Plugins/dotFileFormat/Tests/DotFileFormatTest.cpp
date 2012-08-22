@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ParseDotTest.h"
+#include "DotFileFormatTest.h"
 #include <QTest>
 #include <string>
 #include <Document.h>
@@ -40,7 +40,7 @@ static const std::string subgraph = "digraph trees {"
                                         "  }"
                                         "}";
 
-void ParseDotTest::init()
+void DotFileFormatTest::init()
 {
     // test for graph data structure plugin
     if (DataStructurePluginManager::self()->pluginsList().count() == 0) {
@@ -50,19 +50,19 @@ void ParseDotTest::init()
     QVERIFY2(pl,"Could create data structure of type Graph");
 }
 
-void ParseDotTest::simpleGraphParsing()
+void DotFileFormatTest::simpleGraphParsing()
 {
     Document doc("testSimple");
     QVERIFY(parse(simple, &doc));
 }
 
 
-void ParseDotTest::parseSubgraphs()
+void DotFileFormatTest::parseSubgraphs()
 {
     Document doc("testSubgraphs");
     QVERIFY(parse(subgraph, &doc));
 }
 
 
-QTEST_MAIN(ParseDotTest)
-#include <ParseDotTest.moc>
+QTEST_MAIN(DotFileFormatTest)
+#include <DotFileFormatTest.moc>

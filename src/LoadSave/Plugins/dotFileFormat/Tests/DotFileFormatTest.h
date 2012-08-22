@@ -17,13 +17,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PARSEDOTTEST_H
-#define PARSEDOTTEST_H
+#ifndef DOTFILEFORMATTEST_H
+#define DOTFILEFORMATTEST_H
 
 #include <QtCore/QObject>
 
 
-class ParseDotTest : public QObject
+class DotFileFormatTest : public QObject
 {
     Q_OBJECT
 
@@ -33,4 +33,4 @@ private slots:
     void parseSubgraphs();
 };
 
-#endif // PARSEDOTTEST
+#endif // DOTFILEFORMATTEST_H
