@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -16,27 +17,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "rocs_KMLParserTest.h"
-#include <QtTest/QTest>
 
-void rocs_KMLParserTest::initTestCase()
-{}
+#ifndef KMLFILEFORMATTEST_H
+#define KMLFILEFORMATTEST_H
 
-void rocs_KMLParserTest::init()
-{}
+#include <QtCore/QObject>
 
-void rocs_KMLParserTest::cleanup()
-{}
-
-void rocs_KMLParserTest::cleanupTestCase()
-{}
-
-void rocs_KMLParserTest::someTest()
+class KmlFileFormatTest : public QObject
 {
-    QWARN("A STUB!");
-    QCOMPARE(1, 1);
-}
+    Q_OBJECT
+private slots:
+    void init();
 
+    void someTest();
+};
 
-QTEST_MAIN(rocs_KMLParserTest)
-#include "rocs_KMLParserTest.moc"
+#endif // KMLFILEFORMATTEST_H

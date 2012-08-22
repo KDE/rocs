@@ -22,7 +22,8 @@
 
 #include "Document.h"
 #include "DataStructure.h"
-#include <Data.h>
+#include <DataStructurePluginManager.h>
+#include "Data.h"
 #include "KmlHandler.h"
 
 #include <KDebug>
@@ -50,11 +51,11 @@ KmlFileFormatPlugin::~KmlFileFormatPlugin()
 }
 
 
-void KmlFileFormatPlugin::writeFile(Document& graph)
+void KmlFileFormatPlugin::writeFile(Document& document)
 {
     // TODO allow selection which data structure shall be exported
     QFile fileHandle(file().toLocalFile());
-    DataStructurePtr g = graph.activeDataStructure();
+    DataStructurePtr graph = document.activeDataStructure();
     if (!fileHandle.open(QIODevice::WriteOnly | QIODevice::Text)) {
         setError(FileIsReadOnly, i18n("Cannot open file %1: %2", file().fileName(), fileHandle.errorString()));
         return;
@@ -66,8 +67,8 @@ void KmlFileFormatPlugin::writeFile(Document& graph)
     xmlWriter.writeStartElement("kml");
     xmlWriter.writeNamespace("http://www.opengis.net/kml/2.2");
     xmlWriter.writeStartElement("Document");
-    if (g->pointers().isEmpty()) {
-        foreach(DataPtr n, g->dataList()) {
+    if (graph->pointers().isEmpty()) {
+        foreach(DataPtr n, graph->dataList()) {
             xmlWriter.writeStartElement("Placemark");
             xmlWriter.writeStartElement("name");
             xmlWriter.writeCharacters(n->name());
@@ -91,22 +92,22 @@ void KmlFileFormatPlugin::writeFile(Document& graph)
         xmlWriter.writeStartElement("Placemark");
         xmlWriter.writeStartElement("name");
         {
-            QString s = g->dataList().at(0)->name();
+            QString s = graph->dataList().at(0)->name();
             s.chop(2);
             xmlWriter.writeCharacters(s);
         }
         xmlWriter.writeEndElement();
         xmlWriter.writeStartElement("description");
 
-        if (g->dataList().at(0)->property("description").isValid()) {
-            xmlWriter.writeCharacters(g->dataList().at(0)->property("description").toString());
+        if (graph->dataList().at(0)->property("description").isValid()) {
+            xmlWriter.writeCharacters(graph->dataList().at(0)->property("description").toString());
         }
         xmlWriter.writeEndElement();
 
         xmlWriter.writeStartElement("LineString");
         xmlWriter.writeStartElement("coordinates");
 
-        foreach(DataPtr n, g->dataList()) {
+        foreach(DataPtr n, graph->dataList()) {
             if (n->property("Longitude").isValid()) {
                 xmlWriter.writeCharacters(QString("%1,%2,%3\n").arg(n->property("Longitude").toString(),
                                           n->property("Latitude").toString(),
@@ -124,18 +125,20 @@ void KmlFileFormatPlugin::writeFile(Document& graph)
     return;
 }
 
+
 void KmlFileFormatPlugin::readFile()
 {
-    Document * graphDoc = new Document("KML File");
-    DataStructurePtr g = graphDoc->addDataStructure();
+    Document * graphDoc = new Document(i18n("Import"));
+    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructurePtr graph = graphDoc->addDataStructure();
 
-    KmlHandler handler(g);
+    KmlHandler handler(graph);
     QFile fileHandle(file().toLocalFile());
     QXmlInputSource source(&fileHandle);
-    QXmlSimpleReader sr;
-    sr.setContentHandler(&handler);
-    sr.setErrorHandler(&handler);
-    if (!sr.parse(&source)) {
+    QXmlSimpleReader xmlReader;
+    xmlReader.setContentHandler(&handler);
+    xmlReader.setErrorHandler(&handler);
+    if (!xmlReader.parse(&source)) {
         setError(EncodingProblem, handler.errorString());
         delete graphDoc;
         return;
@@ -144,6 +147,7 @@ void KmlFileFormatPlugin::readFile()
     setGraphDocument(graphDoc);
     return;
 }
+
 
 const QStringList KmlFileFormatPlugin::extensions() const
 {

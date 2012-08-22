@@ -35,11 +35,13 @@ KmlHandler::~KmlHandler()
 
 }
 
+
 bool KmlHandler::characters(const QString& str)
 {
     currentText += str;
     return true;
 }
+
 
 bool KmlHandler::endElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName)
 {
@@ -121,10 +123,8 @@ bool KmlHandler::fatalError(const QXmlParseException& exception)
 }
 
 
-
 bool KmlHandler::startElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& /*qName*/, const QXmlAttributes& /*attributes*/)
 {
     currentText.clear();
     return true;
-
 }
