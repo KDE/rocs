@@ -13,4 +13,4 @@ target_link_libraries(TestDotFileFormatPlugin
     ${QT_QTTEST_LIBRARY}
     ${KDE4_KDECORE_LIBS}
 )
-add_test(TestDotFileFromatPlugin TestDotFileFromatPlugin)
+add_test(TestDotFileFormatPlugin TestDotFileFormatPlugin)

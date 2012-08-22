@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -17,111 +18,121 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "GMLParser.h"
+#include "GmlFileFormatPlugin.h"
 
 #include "Document.h"
 #include "Pointer.h"
 #include "DataStructure.h"
-#include "GMLGraphParsingHelper.h"
-#include "GMLGrammar.h"
+#include "DataStructurePluginManager.h"
+#include "GmlGraphParsingHelper.h"
+#include "GmlGrammar.h"
 
 #include <KAboutData>
 #include <KGenericFactory>
 
 #include <QFile>
 
-static const KAboutData aboutdata("rocs_gmlplugin", 0, ki18nc("@title Displayed plugin name", "Open and Save GML files") , "0.1");
+static const KAboutData aboutdata("rocs_gmlfileformat", 0, ki18nc("@title Displayed plugin name", "Open and Save GML files") , "0.1");
 
 
-extern Rocs::GMLPlugin::GMLGraphParsingHelper* phelper;
+extern GmlParser::GmlGraphParsingHelper* phelper;
 
-K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< GMLParser>();)
+K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin<GmlFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
 
-GMLParser::~GMLParser()
+GmlFileFormatPlugin::~GmlFileFormatPlugin()
 {
 
 }
 
-GMLParser::GMLParser(QObject* parent, const QList< QVariant >&) :
-    FilePluginInterface(FilePLuginFactory::componentData(), parent)
+
+GmlFileFormatPlugin::GmlFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
+    GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
 {
 
 }
 
-const QStringList GMLParser::extensions() const
+
+const QStringList GmlFileFormatPlugin::extensions() const
 {
     return QStringList()
            << i18n("*.gml|Graph Markup Language Files") + '\n';
 }
 
 
-Document* GMLParser::readFile(const QString& fileName)
+void GmlFileFormatPlugin::readFile()
 {
-    Document * graphDoc = new Document("Untitled");
-//     Graph * graph = graphDoc->addGraph();
+    Document * graphDoc = new Document(i18n("Import"));
+    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+
     QList < QPair<QString, QString> > edges;
-    QFile f(fileName);
-    if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        setError(i18n("Cannot open the file: %1. Error %2", fileName, f.errorString()));
+    QFile fileHandle(file().toLocalFile());
+    if (!fileHandle.open(QFile::ReadOnly)) {
+        setError(CouldNotOpenFile, i18n("Could not open file \"%1\" in read mode: %2", file().toLocalFile(), fileHandle.errorString()));
         delete graphDoc;
-        return 0;
+        return;
     }
-    QString content = f.readAll();
-    if (!Rocs::GMLPlugin::parse(content, graphDoc)) {
-        setError(i18n("cannot parse the file %1.", fileName));
+    QString content = fileHandle.readAll();
+    if (!GmlParser::parse(content, graphDoc)) { //TODO change interface and pass graph structure
+        setError(EncodingProblem, i18n("Could not parse file \"%1\".", file().toLocalFile()));
         delete graphDoc;
-        return 0;
+        return;
     }
-    return graphDoc;
+    setGraphDocument(graphDoc);
+    setError(None);
 }
 
 
-
-bool GMLParser::writeFile(Document& graph, const QString& filename)
+void GmlFileFormatPlugin::writeFile(Document& document)
 {
-    QFile file(filename);
+    DataStructurePtr graph = document.activeDataStructure();
+    //TODO make export graph selectable
+    if (!graph) {
+        setError(NoGraphFound, i18n("No active graph in this document."));
+        return;
+    }
+
+    QFile fileHandle(file().toLocalFile());
     QVariantList subgraphs;
-    if (file.open(QFile::WriteOnly | QFile::Text)) {
-        QTextStream out(&file);
-        out << "Version 1\n";
-        out << "Vendor \"Rocs\"\n";
-        for (int i = 0 ; i < graph.dataStructures().count(); ++i) {
-            DataStructurePtr g = graph.dataStructures().at(i);
+    if (!fileHandle.open(QFile::WriteOnly | QFile::Text)) {
+        setError(FileIsReadOnly, i18n("Cannot open file %1 to write document. Error: %2", file().fileName(), fileHandle.errorString()));
+        return;
+    } else {
+        QTextStream out(&fileHandle);
+    //FIXME finish port: types
 //         Graph *g = graph.activeGraph();
 //FIXME uncommented following directed() check sind this is moved to subclass
 //need to add toggle
 //             out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
-            out << QString("id \"%1\" \n").arg(g->name());
+        out << QString("id \"%1\" \n").arg(graph->name());
 
-            foreach(DataPtr n, g->dataList()) {
-                out << QString("node [\n id \"%1\" \n").arg(n->name());
+        foreach(DataPtr n, graph->dataList()) {
+            out << QString("node [\n id \"%1\" \n").arg(n->name());
 //                 foreach (QByteArray p, n->dynamicPropertyNames()){
 //                    out << p << " " << n->property(p).toString() << "\n";
 //                  }
-                out << processNode(n);
-                out << "]\n";
+            out << processNode(n);
+            out << "]\n";
 
-            }
-            foreach(PointerPtr e, g->pointers()) {
-                out << "edge [\n";
+        }
+        foreach(PointerPtr e, graph->pointers()) {
+            out << "edge [\n";
 //                  foreach (QByteArray p, e->dynamicPropertyNames()){
 //                    out << p << " " << e->property(p).toString() << "\n";
 //                  }
-                out << processEdge(e);
+            out << processEdge(e);
 
-                out << "]\n";
-            }
             out << "]\n";
         }
-        return true;
+        out << "]\n";
     }
-    setError(i18n("Cannot open file %1 to write document. Error: %2", filename, file.errorString()));
-    return false;
+    setError(None);
+    return;
 }
 
-QString const GMLParser::processEdge(PointerPtr e) const
+
+QString const GmlFileFormatPlugin::processEdge(PointerPtr e) const
 {
     QString edge;
     edge.append(QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->name(), e->to()->name()));
@@ -140,7 +151,8 @@ QString const GMLParser::processEdge(PointerPtr e) const
     return edge;
 }
 
-QString const GMLParser::processNode(DataPtr n) const
+
+QString const GmlFileFormatPlugin::processNode(DataPtr n) const
 {
     QString node;
     node.append(QString("  x %1 \n  y %2 \n").arg(n->x()).arg(n->y()));
@@ -159,30 +171,5 @@ QString const GMLParser::processNode(DataPtr n) const
     return node;
 }
 
-const QString GMLParser::lastError()
-{
-    return _lastError;
-}
 
-
-void GMLParser::setError(QString arg1)
-{
-    _lastError = arg1;
-}
-
-const QString GMLParser::scriptToRun()
-{
-    return QString(/*"include ( arrangeNodes.js )\n"
-                     "for (g = 0; g < graphs.length; ++g){\n"
-                     "  nodes = graphs[g].list_nodes();\n"
-                     "  for (var i = 0; i < nodes.length; i++){\n"
-                     "    nodes[i].addDynamicProperty(\"NodeName\", nodes[i].name);\n"
-                     "    if (nodes[i].label != undefined)\n"
-                     "       nodes[i].name = nodes[i].label;\n"
-                     "  }\n"
-                     "}"*/
-           );
-}
-
-
-#include "GMLParser.moc"
+#include "GmlFileFormatPlugin.moc"

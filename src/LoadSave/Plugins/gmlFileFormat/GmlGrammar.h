@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -33,9 +34,7 @@
 class Document;
 class QString;
 
-namespace Rocs
-{
-namespace GMLPlugin
+namespace GmlParser
 {
 namespace qi = boost::spirit::qi;
 namespace ascii = boost::spirit::ascii;
@@ -53,7 +52,7 @@ void endList();
 void t();
 void t1();
 
-bool parse(QString& content, Document* doc);
+bool parse(const QString& content, Document* doc);
 
 template <typename Iterator>
 struct roman : boost::spirit::qi::grammar<Iterator, unsigned()> {
@@ -82,7 +81,6 @@ boost::spirit::qi::rule<Iterator> List, KeyValue ;
 boost::spirit::qi::rule<Iterator, std::string()> Key, Value, String, Sign;
 boost::spirit::qi::rule<Iterator> WhiteSpace/*, Comments*/;
 };
-}
 }
 // // #include "dotrenderop.h"
 //
@@ -162,6 +160,3 @@ struct DotGrammar : public boost::spirit::classic::grammar<DotGrammar>
 };*/
 
 #endif
-
-
-

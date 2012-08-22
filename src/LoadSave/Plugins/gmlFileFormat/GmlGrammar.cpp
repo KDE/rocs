@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -16,23 +17,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "GMLGrammar.h"
+#include "GmlGrammar.h"
 
-#include "GMLGraphParsingHelper.h"
+#include "GmlGraphParsingHelper.h"
 #include "Document.h"
 
-#include <kdebug.h>
+#include <KDebug>
 
 
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 #define BOOST_SPIRIT_DEBUG 1
 
-namespace Rocs
-{
-namespace GMLPlugin
+namespace GmlParser
 {
 
-GMLGraphParsingHelper* phelper = 0;
+GmlGraphParsingHelper* phelper = 0;
 std::string lastKey = "";
 QObject * lastInserted = 0;
 DataStructurePtr actualdataType;
@@ -98,23 +97,22 @@ void t1(const std::string &key)
     std::cout << "Found " << key << ".\n";
 }
 
-bool parse(QString &content, Document * doc)
+bool parse(const QString& content, Document * doc)
 {
+    QString tmpContent = content;
     unsigned result;
-    phelper = new GMLGraphParsingHelper;
+    phelper = new GmlGraphParsingHelper;
     phelper->gd = doc;
     typedef std::string::const_iterator iterator_type;
-    typedef GMLPlugin::roman<iterator_type> roman;
+    typedef GmlParser::roman<iterator_type> roman;
 
     roman roman_parser; // Our grammar
 
-//     std::string content = file.readAll().data();
-//     kDebug() << QString::fromStdString(content);
     int index;
-    while ((index = content.indexOf('#')) != -1) {
-        content.remove(index, content.indexOf('\n', index) - index);
+    while ((index = tmpContent.indexOf('#')) != -1) {
+        tmpContent.remove(index, tmpContent.indexOf('\n', index) - index);
     }
-    std::string str = content.toStdString();
+    std::string str = tmpContent.toStdString();
     iterator_type iter = str.begin();
     iterator_type end = str.end();
 
@@ -135,6 +133,5 @@ bool parse(QString &content, Document * doc)
 
     delete phelper;
     return r;
-}
 }
 }

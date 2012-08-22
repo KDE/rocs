@@ -1,29 +1,28 @@
-/* This file is part of KGraphViewer.
-   Copyright (C) 2006-2007 Gael de Chalendar <kleag@free.fr>
+/*
+    This file is part of Rocs.
+    Copyright 2006-2007  Gael de Chalendar <kleag@free.fr>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
-   KGraphViewer is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation, version 2.
+    Rocs is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation, version 2.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301, USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301, USA
 */
 
-
-#include "GMLGraphParsingHelper.h"
-// #include "dotgraph.h"
-#include "GMLGrammar.h"
-// #include "dotdefaults.h"
-//#include "graphsubgraph.h"
-// #include "graphnode.h"
-// #include "graphedge.h"
+#include "GmlGraphParsingHelper.h"
+#include "GmlGrammar.h"
+#include "DynamicPropertiesList.h"
+#include "Document.h"
+#include "Pointer.h"
 
 #include <boost/throw_exception.hpp>
 #include <boost/spirit/include/classic_core.hpp>
@@ -31,26 +30,15 @@
 #include <boost/spirit/include/classic_loops.hpp>
 #include <boost/spirit/include/classic_confix.hpp>
 
-
-#include <iostream>
-
-#include <kdebug.h>
-
+#include <KDebug>
 #include <QFile>
-#include<QUuid>
-#include "DynamicPropertiesList.h"
-#include "Document.h"
-#include "Pointer.h"
 
-// using namespace std;
-using namespace Rocs;
-using namespace GMLPlugin;
+extern GmlParser::GmlGraphParsingHelper* phelper;
 
-extern GMLGraphParsingHelper* phelper;
+namespace GmlParser
+{
 
-#define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<int>::max()
-
-GMLGraphParsingHelper::GMLGraphParsingHelper():
+GmlGraphParsingHelper::GmlGraphParsingHelper():
     edgeSource(),
     edgeTarget(),
     _actualState(begin)
@@ -60,7 +48,7 @@ GMLGraphParsingHelper::GMLGraphParsingHelper():
     actualEdge.reset();
 }
 
-void GMLGraphParsingHelper::startList(const QString& key)
+void GmlGraphParsingHelper::startList(const QString& key)
 {
     kDebug() << "starting a list with key:" << key;
     if (_actualState == begin && key.compare("graph", Qt::CaseInsensitive) == 0) {
@@ -79,7 +67,7 @@ void GMLGraphParsingHelper::startList(const QString& key)
 }
 
 
-void GMLGraphParsingHelper::endList()
+void GmlGraphParsingHelper::endList()
 {
     if (!_properties.isEmpty()) {
         _properties.removeLast();
@@ -98,11 +86,10 @@ void GMLGraphParsingHelper::endList()
         _actualState = begin;
         break;
     }
-
-
 }
 
-const QString GMLGraphParsingHelper::processKey(const QString& key)
+
+const QString GmlGraphParsingHelper::processKey(const QString& key)
 {
     QString ret = key;
     if (key.compare("id", Qt::CaseInsensitive) == 0) {
@@ -113,7 +100,7 @@ const QString GMLGraphParsingHelper::processKey(const QString& key)
 }
 
 
-void GMLGraphParsingHelper::setAtribute(const QString& key, const QString& value)
+void GmlGraphParsingHelper::setAtribute(const QString& key, const QString& value)
 {
     kDebug() << "Setting attibute " << key;
     switch (_actualState) {
@@ -171,7 +158,7 @@ void GMLGraphParsingHelper::setAtribute(const QString& key, const QString& value
 }
 
 
-void GMLGraphParsingHelper::createGraph()
+void GmlGraphParsingHelper::createGraph()
 {
     if (_actualState == begin) {
         actualGraph = gd->addDataStructure();
@@ -179,7 +166,8 @@ void GMLGraphParsingHelper::createGraph()
     }
 }
 
-void GMLGraphParsingHelper::createNode()
+
+void GmlGraphParsingHelper::createNode()
 {
     if (_actualState == graph) {
         kDebug() << "Creating a node";
@@ -189,8 +177,7 @@ void GMLGraphParsingHelper::createNode()
 }
 
 
-
-void GMLGraphParsingHelper::createEdge()
+void GmlGraphParsingHelper::createEdge()
 {
     if (!edgeSource.isEmpty() && !edgeTarget.isEmpty()) {
         kDebug() << "Creating a edge";
@@ -210,3 +197,4 @@ void GMLGraphParsingHelper::createEdge()
     }
 }
 
+}
