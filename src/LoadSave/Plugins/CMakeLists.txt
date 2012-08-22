@@ -1,3 +1,4 @@
 add_subdirectory(tgfFileFormat)
 add_subdirectory(dotFileFormat)
 add_subdirectory(tikzFileFormat)
+add_subdirectory(kmlFileFormat)

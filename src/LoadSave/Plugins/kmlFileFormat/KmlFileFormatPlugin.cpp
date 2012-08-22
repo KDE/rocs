@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -17,12 +18,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "KMLParser.h"
+#include "KmlFileFormatPlugin.h"
 
-#include "Core/Document.h"
-#include "Core/DataStructure.h"
-#include <Core/Data.h>
-#include "KMLHandler.h"
+#include "Document.h"
+#include "DataStructure.h"
+#include <Data.h>
+#include "KmlHandler.h"
 
 #include <KDebug>
 #include <KAboutData>
@@ -32,31 +33,33 @@
 #include <QXmlResultItems>
 #include <QXmlNodeModelIndex>
 
-static const KAboutData aboutdata("rocs_kmlplugin", 0, ki18nc("@title Displayed plugin name", "Open and Save Keyhole Markup Language files") , "0.1");
 
+static const KAboutData aboutdata("rocs_kmlfileformat", 0, ki18nc("@title Display plugin name", "Open and Save Keyhole Markup Language files") , "0.1");
 
-K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin< Rocs::KMLParser >();)
+K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin<KmlFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
 
-namespace Rocs
+KmlFileFormatPlugin::KmlFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
+    GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
 {
-KMLParser::KMLParser(QObject* parent, const QList< QVariant >&) :
-    FilePluginInterface(FilePLuginFactory::componentData(), parent)
-{
+}
 
+KmlFileFormatPlugin::~KmlFileFormatPlugin()
+{
 }
 
 
-bool KMLParser::writeFile(Document& graph, const QString& fileName)
+void KmlFileFormatPlugin::writeFile(Document& graph)
 {
-    QFile file(fileName);
+    // TODO allow selection which data structure shall be exported
+    QFile fileHandle(file().toLocalFile());
     DataStructurePtr g = graph.activeDataStructure();
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        _lastError = i18n("Cannot open file %1: %2", fileName, file.errorString());
-        return false;
+    if (!fileHandle.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        setError(FileIsReadOnly, i18n("Cannot open file %1: %2", file().fileName(), fileHandle.errorString()));
+        return;
     }
-    QXmlStreamWriter xmlWriter(&file);
+    QXmlStreamWriter xmlWriter(&fileHandle);
 
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
@@ -64,7 +67,7 @@ bool KMLParser::writeFile(Document& graph, const QString& fileName)
     xmlWriter.writeNamespace("http://www.opengis.net/kml/2.2");
     xmlWriter.writeStartElement("Document");
     if (g->pointers().isEmpty()) {
-        foreach(DataPtr n, g->data()) {
+        foreach(DataPtr n, g->dataList()) {
             xmlWriter.writeStartElement("Placemark");
             xmlWriter.writeStartElement("name");
             xmlWriter.writeCharacters(n->name());
@@ -103,7 +106,7 @@ bool KMLParser::writeFile(Document& graph, const QString& fileName)
         xmlWriter.writeStartElement("LineString");
         xmlWriter.writeStartElement("coordinates");
 
-        foreach(DataPtr n, g->data()) {
+        foreach(DataPtr n, g->dataList()) {
             if (n->property("Longitude").isValid()) {
                 xmlWriter.writeCharacters(QString("%1,%2,%3\n").arg(n->property("Longitude").toString(),
                                           n->property("Latitude").toString(),
@@ -117,44 +120,36 @@ bool KMLParser::writeFile(Document& graph, const QString& fileName)
 
     }
     xmlWriter.writeEndDocument();
-    return true;
+    setError(None);
+    return;
 }
 
-Document* KMLParser::readFile(const QString& file)
+void KmlFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document("KML File");
     DataStructurePtr g = graphDoc->addDataStructure();
 
-    KMLHandler handler(g);
-    QFile f(file);
-    QXmlInputSource source(&f);
+    KmlHandler handler(g);
+    QFile fileHandle(file().toLocalFile());
+    QXmlInputSource source(&fileHandle);
     QXmlSimpleReader sr;
     sr.setContentHandler(&handler);
     sr.setErrorHandler(&handler);
     if (!sr.parse(&source)) {
-        _lastError = handler.errorString();
+        setError(EncodingProblem, handler.errorString());
         delete graphDoc;
-        return 0;
+        return;
     }
 
-    return graphDoc;
+    setGraphDocument(graphDoc);
+    return;
 }
 
-const QStringList KMLParser::extensions() const
+const QStringList KmlFileFormatPlugin::extensions() const
 {
     return QStringList()
            << i18n("*.kml|Keyhole Markup Language Files") + '\n';
 }
-const QString KMLParser::lastError()
-{
-    return _lastError;
-}
 
-const QString KMLParser::scriptToRun()
-{
-    return FilePluginInterface::scriptToRun();
-}
-
-}
-#include "KMLParser.moc"
+#include "KmlFileFormatPlugin.moc"
 

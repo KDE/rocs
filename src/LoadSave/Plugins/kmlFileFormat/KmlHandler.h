@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -21,15 +22,15 @@
 #ifndef KMLHANDLER_H
 #define KMLHANDLER_H
 
-#include <Core/DataStructure.h>
+#include <DataStructure.h>
 #include <QXmlDefaultHandler>
 
 
-class KMLHandler: public QXmlDefaultHandler
+class KmlHandler: public QXmlDefaultHandler
 {
 public:
-    KMLHandler(DataStructurePtr doc);
-    ~KMLHandler();
+    KmlHandler(DataStructurePtr doc);
+    ~KmlHandler();
 
 
     bool startElement(const QString &namespaceURI, const QString &localName,
@@ -39,8 +40,6 @@ public:
     bool characters(const QString &str);
     bool fatalError(const QXmlParseException &exception);
     QString errorString() const;
-
-//     QString method(){return this->m_method;}
 
     QString arg(int index) {
         if (index < args.size()) {

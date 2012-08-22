@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -17,31 +18,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "KMLHandler.h"
+#include "KmlHandler.h"
+#include "DataStructure.h"
+#include "Data.h"
 #include <KDebug>
-#include "Core/DataStructure.h"
-#include "Core/Data.h"
 
 
-
-KMLHandler::KMLHandler(DataStructurePtr doc): QXmlDefaultHandler(), m_graph(doc)
+KmlHandler::KmlHandler(DataStructurePtr doc): QXmlDefaultHandler(), m_graph(doc)
 {
 
 }
 
 
-KMLHandler::~KMLHandler()
+KmlHandler::~KmlHandler()
 {
 
 }
 
-bool KMLHandler::characters(const QString& str)
+bool KmlHandler::characters(const QString& str)
 {
     currentText += str;
     return true;
 }
 
-bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName)
+bool KmlHandler::endElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& qName)
 {
     DataPtr n;
     if (qName == "coordinates") {
@@ -109,20 +109,20 @@ bool KMLHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
 }
 
 
-QString KMLHandler::errorString() const
+QString KmlHandler::errorString() const
 {
     return QXmlDefaultHandler::errorString();
 }
 
 
-bool KMLHandler::fatalError(const QXmlParseException& exception)
+bool KmlHandler::fatalError(const QXmlParseException& exception)
 {
     return QXmlDefaultHandler::fatalError(exception);
 }
 
 
 
-bool KMLHandler::startElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& /*qName*/, const QXmlAttributes& /*attributes*/)
+bool KmlHandler::startElement(const QString& /*namespaceURI*/, const QString& /*localName*/, const QString& /*qName*/, const QXmlAttributes& /*attributes*/)
 {
     currentText.clear();
     return true;
