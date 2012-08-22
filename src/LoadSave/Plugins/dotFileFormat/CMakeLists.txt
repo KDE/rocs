@@ -1,12 +1,12 @@
-project(RocsDotFileFromatPlugin)
+project(RocsDotFileFormatPlugin)
 
-set(dotFileFromatPlugin_SRCS
+set(dotFileFormatPlugin_SRCS
     DotFileFormatPlugin.cpp
     DotGrammar.cpp
     DotGraphParsingHelper.cpp
 )
 
-kde4_add_plugin(rocs_dotfileformat ${dotFileFromatPlugin_SRCS})
+kde4_add_plugin(rocs_dotfileformat ${dotFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_dotfileformat
     rocslib

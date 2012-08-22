@@ -29,7 +29,7 @@
 #include <DataStructurePluginManager.h>
 
 
-static const KAboutData aboutdata("rocs_tikzfileformat", 0, ki18n("Open and Save Graph Documents in PGF/TikZ Format") , "0.1");
+static const KAboutData aboutdata("rocs_tikzfileformat", 0, ki18nc("@title Display plugin name", "Open and Save Graph Documents in PGF/TikZ Format") , "0.1");
 
 K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<TikzFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
@@ -65,7 +65,7 @@ void TikzFileFormatPlugin::readFile()
 }
 
 
-void TikzFileFormatPlugin::writeFile(Document &graph )
+void TikzFileFormatPlugin::writeFile(Document &graph)
 {
     // TODO allow selection which data structure shall be exported
     QFile fileHandle(file().toLocalFile());
