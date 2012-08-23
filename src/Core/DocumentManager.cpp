@@ -137,6 +137,7 @@ void DocumentManager::removeDocument(Document* document)
     emit documentListChanged();
 }
 
+
 void DocumentManager::convertToDataStructure()
 {
     kDebug() << "-----------------======== Converting Data Structure ========-----------";
@@ -158,6 +159,7 @@ void DocumentManager::convertToDataStructure()
 
     kDebug() << "----------=========== Conversion Finished ============-----------";
 }
+
 
 Document* DocumentManager::newDocument()
 {
