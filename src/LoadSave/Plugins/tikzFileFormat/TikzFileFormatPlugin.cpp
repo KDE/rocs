@@ -48,7 +48,7 @@ TikzFileFormatPlugin::~TikzFileFormatPlugin()
 const QStringList TikzFileFormatPlugin::extensions() const
 {
     return QStringList()
-           << i18n("*.pgf|TikZ (PGF) format") + '\n';
+           << i18n("*.pgf|TikZ (PGF) Format") + '\n';
 }
 
 
