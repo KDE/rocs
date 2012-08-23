@@ -100,14 +100,12 @@ void GmlFileFormatPlugin::writeFile(Document& document)
         return;
     } else {
         QTextStream out(&fileHandle);
-    //FIXME finish port: types
-//         Graph *g = graph.activeGraph();
 //FIXME uncommented following directed() check sind this is moved to subclass
 //need to add toggle
 //             out << QString("graph [\n directed %1 \n").arg(g->directed()?"1":"0");
         out << QString("id \"%1\" \n").arg(graph->name());
 
-        foreach(DataPtr n, graph->dataList()) {
+        foreach(DataPtr n, graph->dataListAll()) {
             out << QString("node [\n id \"%1\" \n").arg(n->name());
 //                 foreach (QByteArray p, n->dynamicPropertyNames()){
 //                    out << p << " " << n->property(p).toString() << "\n";
@@ -116,7 +114,7 @@ void GmlFileFormatPlugin::writeFile(Document& document)
             out << "]\n";
 
         }
-        foreach(PointerPtr e, graph->pointers()) {
+        foreach(PointerPtr e, graph->pointerListAll()) {
             out << "edge [\n";
 //                  foreach (QByteArray p, e->dynamicPropertyNames()){
 //                    out << p << " " << e->property(p).toString() << "\n";
