@@ -43,14 +43,12 @@ K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
 GmlFileFormatPlugin::~GmlFileFormatPlugin()
 {
-
 }
 
 
 GmlFileFormatPlugin::GmlFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
     GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
 {
-
 }
 
 

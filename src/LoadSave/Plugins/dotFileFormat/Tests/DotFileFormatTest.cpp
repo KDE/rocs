@@ -63,6 +63,4 @@ void DotFileFormatTest::parseSubgraphs()
     QVERIFY(parse(subgraph, &doc));
 }
 
-
 QTEST_MAIN(DotFileFormatTest)
-#include <DotFileFormatTest.moc>

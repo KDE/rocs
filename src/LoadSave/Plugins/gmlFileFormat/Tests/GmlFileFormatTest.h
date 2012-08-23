@@ -26,8 +26,8 @@ class GmlFileFormatTest : public QObject
 {
     Q_OBJECT
 private slots:
-    void parseCMakeGenerated();
-    void WithSubgraph();
+    void parseTest();
+    void serializeTest();
 };
 
 #endif // GMLFILEFORMATTEST_H
