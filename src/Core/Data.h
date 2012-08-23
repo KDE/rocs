@@ -85,6 +85,7 @@ class  ROCSLIB_EXPORT Data : public QObject
     Q_PROPERTY(qreal y READ y WRITE setY)
     Q_PROPERTY(qreal width READ width WRITE setWidth)
     Q_PROPERTY(QString name READ name WRITE setName)
+    Q_PROPERTY(int id READ identifier)
     Q_PROPERTY(QVariant color READ color WRITE setColor)
     Q_PROPERTY(QVariant value READ value WRITE setValue)
     Q_PROPERTY(bool useColor READ useColor WRITE setUseColor)

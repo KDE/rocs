@@ -545,6 +545,7 @@ Each data element has the following properties that can be read or written:
     double y      // y coordinate of current position
     double width  // size
     string value  // value
+    int id        // unique identifier for data element
     string name   // name
     string color  // color in HEXA
 </programlisting>
