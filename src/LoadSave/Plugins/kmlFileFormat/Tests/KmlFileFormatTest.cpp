@@ -18,17 +18,41 @@
 */
 
 #include "KmlFileFormatTest.h"
+#include "../KmlFileFormatPlugin.h"
+#include "DocumentManager.h"
+#include "Data.h"
+#include "Pointer.h"
 #include <QtTest/QTest>
 
 void KmlFileFormatTest::init()
 {}
 
-void KmlFileFormatTest::someTest()
+void KmlFileFormatTest::serializeTest()
 {
-    QWARN("A STUB!");
-    QCOMPARE(1, 1);
+    DocumentManager::self()->addDocument(new Document("testSerialization"));
+    Document* document = DocumentManager::self()->activeDocument();
+    QMap<QString, DataPtr> dataList;
+
+    // Creates a simple Graph with 5 data elements and connect them with pointers.
+    DataStructurePtr ds = document->activeDataStructure();
+    ds->setProperty("name", "Graph1");
+    dataList.insert("a", ds->addData("first node"));
+    dataList.insert("b", ds->addData("b"));
+    dataList.insert("c", ds->addData("c"));
+    dataList.insert("d", ds->addData("d"));
+    dataList.insert("e", ds->addData("e"));
+
+    ds->addPointer(dataList["a"], dataList["b"])->setValue("test value");
+    ds->addPointer(dataList["b"], dataList["c"]);
+    ds->addPointer(dataList["c"], dataList["d"]);
+    ds->addPointer(dataList["d"], dataList["e"]);
+    ds->addPointer(dataList["e"], dataList["a"]);
+
+    // create exporter plugin
+    KmlFileFormatPlugin serializer(this, QList<QVariant>());
+    serializer.setFile(KUrl::fromLocalFile("test.kml"));
+    serializer.writeFile(*document);
+    QVERIFY(serializer.hasError() == false);
 }
 
-
 QTEST_MAIN(KmlFileFormatTest)
-#include "KmlFileFormatTest.moc"

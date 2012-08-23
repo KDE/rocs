@@ -28,8 +28,7 @@ class KmlFileFormatTest : public QObject
     Q_OBJECT
 private slots:
     void init();
-
-    void someTest();
+    void serializeTest();
 };
 
 #endif // KMLFILEFORMATTEST_H
