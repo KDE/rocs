@@ -1,4 +1,4 @@
-project(RocsKmlFileFromatPlugin)
+project(RocsKmlFileFormatPlugin)
 
 set(kmlFileFormatPlugin_SRCS
     KmlFileFormatPlugin.cpp
