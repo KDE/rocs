@@ -1,4 +1,0 @@
-add_subdirectory(TXTParser)
-add_subdirectory(kmlParser)
-add_subdirectory(GMLParser)
-add_subdirectory(DotFilePlugin)

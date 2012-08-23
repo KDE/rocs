@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -22,7 +23,6 @@
 #include <QList>
 
 #include "ToolsPluginInterface.h"
-#include "FilePluginInterface.h"
 #include "rocslib_export.h"
 
 class KPluginInfo;
@@ -31,9 +31,6 @@ class ROCSLIB_EXPORT PluginManager: public QObject
 {
     Q_OBJECT
 private:
-    //QList<ToolsPluginInterface*> _toolPlugins;
-    QList<FilePluginInterface*> _filePlugins;
-
     PluginManager();
 
     static PluginManager * self;
@@ -47,26 +44,13 @@ public:
 
     void loadPlugins();
 
-
     bool loadToolPlugin(QString arg1);
 
     void loadToolsPlugins();
 
-    void loadFilePlugins();
-
-    QList < ToolsPluginInterface*> toolPlugins();
-    QList < FilePluginInterface*> filePlugins() const;
+    QList <ToolsPluginInterface*> toolPlugins();
 
     KPluginInfo pluginInfo(ToolsPluginInterface * plugin);
-
-    KPluginInfo pluginInfo(FilePluginInterface * plugin);
-
-    /** Returns plugin that can handle extension \p ext
-    \param ext File extension (like 'TXT', 'cpp', '.Cpp', '*.js')
-    \return File plugin to handle files with that extension or 0 if there is no plugin to handle it.
-    */
-    FilePluginInterface *  filePluginsByExtension(QString ext);
-
 };
 
 #endif // PLUGINMANAGER_H

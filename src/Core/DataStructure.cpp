@@ -148,6 +148,16 @@ const DataList DataStructure::dataList(int dataType) const
 }
 
 
+DataList DataStructure::dataListAll() const
+{
+    DataList allData;
+    foreach(int type, document()->dataTypeList()) {
+        allData.append(dataList(type));
+    }
+    return allData;
+}
+
+
 const PointerList DataStructure::pointers(int pointerType) const
 {
     if (d->_pointerTypeLists.contains(pointerType)) {
@@ -155,6 +165,16 @@ const PointerList DataStructure::pointers(int pointerType) const
     }
     kDebug() << "returning empty pointer list: pointer type not registered";
     return PointerList();
+}
+
+
+PointerList DataStructure::pointerListAll() const
+{
+    PointerList allPointers;
+    foreach(int type, document()->pointerTypeList()) {
+        allPointers.append(pointers(type));
+    }
+    return allPointers;
 }
 
 

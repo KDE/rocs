@@ -30,6 +30,7 @@
 #include <QSize>
 #include <QRectF>
 #include <boost/shared_ptr.hpp>
+#include <KUrl>
 
 class KUrl;
 class DataStructurePluginInterface;
@@ -77,9 +78,14 @@ public:
     void saveAs(const QString& fileUrl);
 
     /**
-     * Path to file this graph document was last saved to.
+     * Return path used for saving.
      */
     const QString& fileUrl() const;
+
+    /**
+     * Set file path used for saving.
+     */
+    void setFileUrl(KUrl fileUrl);
 
     void loadFromInternalFormat(const KUrl& fileUrl);
 
@@ -102,6 +108,12 @@ public:
     QString dataStructureInternalName()const;
 
     DataStructurePluginInterface * dataStructurePlugin() const;
+
+    /**
+     * Set data structure plugin for this document. This function is only safe if the document
+     * is empty, otherwise behavior is undefined.
+     */
+    void setDataStructurePlugin(QString pluginIdentifier);
 
     /** Register new type for data elements. If identifier is alreade in use or if no identifier is
      * provided, a new identifier is created.
@@ -203,7 +215,6 @@ signals:
 private:
     boost::shared_ptr<DocumentPrivate> d;
     bool saveAsInternalFormat(const QString& filename);
-    void savePropertiesInternalFormat(QObject *o);
 };
 
 #endif

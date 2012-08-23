@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+ServiceTypes=Rocs/GraphFilePlugin
+X-KDE-Library=rocs_kmlfileformat
+X-KDE-PluginInfo-Author=Wagner Reck, Andreas Cord-Landwehr
+X-KDE-PluginInfo-Name=rocs_kmlfileformat
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Category=Plugins
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+Name=Rocs KML Graph File Plugin
+Comment=Read and write Keyhole Markup Language documents (KML)

@@ -57,6 +57,7 @@ Rocs::GraphStructure::GraphStructure(Document* parent) :
 
 void Rocs::GraphStructure::importStructure(DataStructurePtr other)
 {
+    //FIXME this import does not correctly import different types
     setGraphType(UNDIRECTED);
     QHash <Data*, DataPtr> dataTodata;
     foreach(DataPtr n, other->dataList()) {
@@ -78,7 +79,6 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
             newPointer->setValue(e->value());
         }
     }
-
 }
 
 Rocs::GraphStructure::~GraphStructure()
@@ -196,7 +196,7 @@ QScriptValue Rocs::GraphStructure::distances(Data* fromRaw)
 
     QMap<DataPtr,PointerList> shortestPaths = dijkstraShortestPaths(from);
     QScriptValue distances = engine()->newArray();
-    foreach (DataPtr target, dataList()) {
+    foreach (DataPtr target, dataListAll()) {
         qreal length = 0;
         foreach (PointerPtr edge, shortestPaths[target]) {
             if (!edge->value().isEmpty()) {
@@ -215,6 +215,11 @@ QScriptValue Rocs::GraphStructure::distances(Data* fromRaw)
 
 QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr from)
 {
+    // use copys of these lists to be safe agains changes of
+    // data/pointer lists while computing shortest paths
+    DataList dataListAll = this->dataListAll();
+    PointerList pointerListAll = this->pointerListAll();
+
     if (!from) {
         return QMap<DataPtr,PointerList>();
     }
@@ -226,21 +231,21 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
     typedef std::pair<int, int> Edge;
 
     // create IDs for all nodes
-    QMap<Data*, int> node_mapping;
+    QMap<int, int> node_mapping;
     QMap<std::pair<int, int>, PointerPtr> edge_mapping; // to map all edges back afterwards
     int counter = 0;
-    BOOST_FOREACH(DataPtr data, this->dataList()) {
-        node_mapping[data.get()] = counter++;
+    foreach(DataPtr data, dataListAll) {
+        node_mapping[data->identifier()] = counter++;
     }
 
     // use doubled size for case of undirected edges
-    QVector<Edge> edges(this->pointers().count() * 2);
-    QVector<qreal> weights(this->pointers().count() * 2);
+    QVector<Edge> edges(pointerListAll.count() * 2);
+    QVector<qreal> weights(pointerListAll.count() * 2);
 
     counter = 0;
-    BOOST_FOREACH(PointerPtr p, this->pointers()) {
-        edges[counter] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
-        edge_mapping[std::make_pair < int, int > (node_mapping[p->from().get()], node_mapping[p->to().get()])] = p;
+    foreach(PointerPtr p, pointerListAll) {
+        edges[counter] = Edge(node_mapping[p->from()->identifier()], node_mapping[p->to()->identifier()]);
+        edge_mapping[std::make_pair < int, int > (node_mapping[p->from()->identifier()], node_mapping[p->to()->identifier()])] = p;
         if (!p->value().isEmpty()) {
             weights[counter] = p->value().toDouble();
         } else {
@@ -249,8 +254,8 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
         counter++;
         // if graph is directed, also add back-edges
         if (!this->directed()) {
-            edges[counter] = Edge(node_mapping[p->to().get()], node_mapping[p->from().get()]);
-            edge_mapping[std::make_pair < int, int > (node_mapping[p->to().get()], node_mapping[p->from().get()])] = p;
+            edges[counter] = Edge(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()]);
+            edge_mapping[std::make_pair< int, int >(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()])] = p;
             if (!p->value().isEmpty()) {
                 weights[counter] = p->value().toDouble();
             } else {
@@ -264,11 +269,11 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
     graph_t g(edges.begin(),
               edges.end(),
               weights.begin(),
-              dataList().count()
+              dataListAll.count()
              );
 
     // compute Dijkstra
-    vertex_descriptor source = boost::vertex(node_mapping[from.get()], g);
+    vertex_descriptor source = boost::vertex(node_mapping[from->identifier()], g);
     QVector<vertex_descriptor> p(boost::num_vertices(g));
     QVector<int> dist(boost::num_vertices(g));
     boost::dijkstra_shortest_paths(g,
@@ -276,14 +281,13 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
                                    boost::predecessor_map(p.begin()).distance_map(dist.begin())
                                   );
 
-    // qDebug() << "length of shortest path : " << dist[node_mapping[to]];
-
     // walk search tree and setup solution
     QMap<DataPtr,PointerList> shortestPaths = QMap<DataPtr,PointerList>();
-    DataList::const_iterator toIter = dataList().constBegin();
-    while (toIter != dataList().constEnd()){
+
+    DataList::iterator toIter = dataListAll.begin();
+    while (toIter != dataListAll.end()){
         PointerList path = PointerList();
-        vertex_descriptor target = boost::vertex(node_mapping[toIter->get()], g);
+        vertex_descriptor target = boost::vertex(node_mapping[(*toIter)->identifier()], g);
         vertex_descriptor predecessor = target;
         do {
             if (edge_mapping.contains(std::make_pair<int, int>(p[predecessor], predecessor))) {
@@ -406,6 +410,29 @@ void Rocs::GraphStructure::setGraphType(int type)
     }
 }
 
+void Rocs::GraphStructure::setDirected(bool directed)
+{
+    if (directed) {
+        if (multigraph()) {
+            setGraphType(MULTIGRAPH_DIRECTED);
+            return;
+        }
+        if (!multigraph()) {
+            setGraphType(DIRECTED);
+            return;
+        }
+    } else {
+        if (multigraph()) {
+            setGraphType(MULTIGRAPH_UNDIRECTED);
+            return;
+        }
+        if (!multigraph()) {
+            setGraphType(UNDIRECTED);
+            return;
+        }
+    }
+}
+
 Rocs::GraphStructure::GRAPH_TYPE Rocs::GraphStructure::graphType() const
 {
     return _type;
@@ -415,6 +442,12 @@ bool Rocs::GraphStructure::directed() const
 {
     return (_type == DIRECTED || _type == MULTIGRAPH_DIRECTED);
 }
+
+bool Rocs::GraphStructure::multigraph() const
+{
+    return (_type == MULTIGRAPH_DIRECTED || _type == MULTIGRAPH_UNDIRECTED);
+}
+
 
 PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 {

@@ -170,12 +170,25 @@ public:
     const DataList dataList(int dataType = 0) const;
 
     /**
+     * Gives list of all data elements of all existing types.
+     * \return DataList of data elements
+     */
+    DataList dataListAll() const;
+
+    /**
      * Gives list of pointers of specified type if type exists.
      * If pointerType does not exists, returns empty list.
      * \param pointerType is type of pointers to be returned
      * \return PointerList of pointers of specified type
      */
     const PointerList pointers(int pointerType = 0) const;
+
+    /**
+     * Gives list all pointers of all existing types.
+     * \return PointerList of pointers
+     */
+    PointerList pointerListAll() const;
+
     const QList<Group*> groups() const;
 
     /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others

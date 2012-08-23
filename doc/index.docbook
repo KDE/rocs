@@ -130,14 +130,14 @@ Data structures are the base of all work in &rocs;. You can add one or several o
 <para>
 By pointer types you can define different types of pointers to be used in your data structures.
 This is, a pointer type can get an individual layout (essentially a color) and it is easy to access only pointers of a specific type from your scripts.
-Typical use cases for pointers can be to implement meta-edges at your data structures that visualize relationships between data elements (e.g., visualize communication interests). But also, if your scripts shall identify specific kinds of edges (e.g., tree and cross edges at the depth first search algorithm), pointer types can be an elegant way to implement that. 
+Typical use cases for pointers can be to implement meta-edges at your data structures that visualize relationships between data elements (e.g., visualize communication interests). But also, if your scripts shall identify specific kinds of edges (e.g., tree and cross edges at the depth first search algorithm), pointer types can be an elegant way to implement that.
 </para>
 </sect2>
 
 <sect2>
 <title>Data Types</title>
 <para>
-In several data structure problems, a set of data elements should be parted into groups of different types (e.g., clustering problems or covering problems). 
+In several data structure problems, a set of data elements should be parted into groups of different types (e.g., clustering problems or covering problems).
 Or it is useful for the execution of an algorithm to specify a data element type to express a specific type (e.g., breath first search).
 For such use cases you can define data types. Each data type has its own icon and data types of some type can easily be accessed from your scripts.
 </para>
@@ -179,7 +179,7 @@ Finally, we modify the graph name at the data structure panel and call the graph
 <sect2>
 <title>Create Types</title>
 <para>
-We use the <guibutton>Document Properties Button</guibutton> at the data structure panel to open the properties dialog for data and pointer types of the current graph document. 
+We use the <guibutton>Document Properties Button</guibutton> at the data structure panel to open the properties dialog for data and pointer types of the current graph document.
 For the data types we add a new type called "C", which automatically gets ID <literal>1</literal>.
 For this type we select the server picture as icon.
 Furthermore, we switch to the pointer type page and add a new pointer type called "matching".
@@ -330,7 +330,7 @@ By keeping the mouse pointer pressed at the button, a context menu shows up at w
 <listitem><para>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
 <listitem><para>
-<guilabel>Zoom</guilabel>: Click at the whiteboard, keep the &LMB; pressed, and by this draw a rectangle. The whiteboard will be zoomed to the selected area. Using the mousewheel to zoom in or out as well. 
+<guilabel>Zoom</guilabel>: Click at the whiteboard, keep the &LMB; pressed, and by this draw a rectangle. The whiteboard will be zoomed to the selected area. Using the mousewheel to zoom in or out as well.
 A double click with the &LMB; restores the original zoom.</para></listitem>
 </itemizedlist>
 <screenshot>
@@ -438,7 +438,7 @@ positions.</para></listitem>
     All available data structures from the current graph document are shown in a selection list.
     When selecting one, configurations for the corresponding data structure are shown:
 </para>
-    
+
 <itemizedlist>
     <listitem><para>
     <guibutton>Delete</guibutton>: Delete this data structure.
@@ -461,7 +461,7 @@ positions.</para></listitem>
     Each data structure plugin can add options to the data structure configuration dialog.
     The standard data structure plugins provide the following options:
 </para>
-    
+
 <sect3>
 <title>Graph Plugin</title>
 <para>
@@ -545,6 +545,7 @@ Each data element has the following properties that can be read or written:
     double y      // y coordinate of current position
     double width  // size
     string value  // value
+    int id        // unique identifier for data element
     string name   // name
     string color  // color in HEXA
 </programlisting>
@@ -777,7 +778,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 <sect1 id="scripting-controls">
 <title>Controlling the Script Execution</title>
 <para>
-</para>    
+</para>
 
 <sect2>
 <title>Include Files</title>
@@ -858,17 +859,45 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 </sect1>
 
 <sect1 id="import-export-graphs">
-    <title>Import of Graph Documents</title>
+    <title>Import and Export of Graph Documents</title>
     <para>&rocs; currently supports import and export of the following file formats:</para>
     <itemizedlist>
-        <listitem><para>DOT files, also known as Graphviz files.</para></listitem>
+        <listitem><para>DOT files, also known as Graphviz files</para></listitem>
         <listitem><para>GML files</para></listitem>
-        <listitem><para>Plain-Text files.</para></listitem>
+        <listitem><para>Trivial Graph Format files</para></listitem>
     </itemizedlist>
-    <para>
-        The support for most of these files is very basic and only supports basic values.
-        Imported are data elements and their corresponding connections, names of all elements, values, and coordinates.
-    </para>
+
+<sect2 id="format-specification-tgf">
+<title>Trivial Graph Format</title>
+<para>
+    The <emphasis>Trivial Graph Format</emphasis> (TGF) is a simple text-based file format for describing graphs.
+    A TGF file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges.
+    In this format it is only possible to have one label per node and one valued per edge.
+    &rocs; interprets imported graphs as undirected graphs.
+    Exported graphs will contain two edges per connection if connections are bidirectional.
+</para>
+
+<sect3>
+<title>Format Specification</title>
+    <itemizedlist>
+        <listitem><para>The file starts with a list of nodes (one node per line), followed by a line with the only character "#", followed by a list of edges (one edge per line).</para></listitem>
+        <listitem><para>A node consists of an integer (identifier), followed by a space, followed by an arbitrary string.</para></listitem>
+        <listitem><para>An edge consists of two integers (identifiers) separated by a space, followed by a space, followed by an arbitray string. It is assumed that the directed edge points from the first identifier to the second identifier.</para></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title>Example</title>
+<programlisting>
+1 starting node
+2 transmitter
+3 sink
+#
+1 2 blue
+2 1 red
+2 3 green
+</programlisting>
+</sect3>
+</sect2>
 </sect1>
 </chapter>
 

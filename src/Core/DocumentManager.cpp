@@ -26,7 +26,7 @@
 #include <QAction>
 #include "QtScriptBackend.h"
 #include <KLocale>
-#include <PluginManager.h>
+#include <GraphFileBackendManager.h>
 #include "DataStructurePluginInterface.h"
 
 DocumentManager *DocumentManager::_self = 0;
@@ -137,6 +137,7 @@ void DocumentManager::removeDocument(Document* document)
     emit documentListChanged();
 }
 
+
 void DocumentManager::convertToDataStructure()
 {
     kDebug() << "-----------------======== Converting Data Structure ========-----------";
@@ -158,6 +159,7 @@ void DocumentManager::convertToDataStructure()
 
     kDebug() << "----------=========== Conversion Finished ============-----------";
 }
+
 
 Document* DocumentManager::newDocument()
 {
@@ -191,12 +193,38 @@ Document* DocumentManager::newDocument()
 
 Document* DocumentManager::openDocument(const KUrl& documentUrl)
 {
-    Document* doc;
-
-    doc = new Document(documentUrl.fileName());
-    doc->loadFromInternalFormat(documentUrl);
+    GraphFilePluginInterface* loader = GraphFileBackendManager::self()->defaultBackend();
+    loader->setFile(documentUrl);
+    loader->readFile();
+    if (loader->error() != GraphFilePluginInterface::None) {
+        kDebug() << "Could not load file. Graph loader returned error: " << loader->errorString();
+        return new Document(documentUrl.fileName());;
+    }
+    Document* doc = loader->graphDocument();
+    doc->setName(documentUrl.fileName());
     doc->setModified(false);
     addDocument(doc);
-
     return doc;
+}
+
+
+void DocumentManager::saveDocumentAs(Document* document, const KUrl& documentUrl)
+{
+    exportDocument(document, documentUrl);
+    document->setFileUrl(documentUrl);
+    document->setModified(false);
+    return;
+}
+
+void DocumentManager::exportDocument(Document* document, const KUrl& documentUrl)
+{
+    GraphFilePluginInterface* serializer = GraphFileBackendManager::self()->defaultBackend();
+    serializer->setFile(documentUrl);
+    serializer->writeFile(*document);
+    if (serializer->error() != GraphFilePluginInterface::None) {
+        kDebug() << "Could not save file. Serializer returned error: " << serializer->errorString();
+        return;
+    }
+
+    return;
 }

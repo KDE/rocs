@@ -115,6 +115,23 @@ public slots:
      */
     Document* openDocument(const KUrl& documentUrl);
 
+    /**
+     * Save graph document \p document at url \p documentUrl. The internal file url for the
+     * document is reset with \p documentUrl and the modification state is set to false.
+     * To save document without chaning its properties \see exportDocument(...).
+     * \param document is the graph document to be save
+     * \param documentUrl is the target file for saving
+     */
+    void saveDocumentAs(Document* document, const KUrl& documentUrl);
+
+    /**
+     * Save graph document \p document at url \p documentUrl. The document is not changed by this
+     * operation.
+     * \param document is the graph document to be save
+     * \param documentUrl is the target file for saving
+     */
+    void exportDocument(Document* document, const KUrl& documentUrl);
+
 signals:
     /**
      * Signal is emitted if the currently active document changes

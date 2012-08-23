@@ -20,18 +20,16 @@
 #include "ImporterExporterManager.h"
 #include <KFileDialog>
 #include <KLocalizedString>
-#include "Plugins/FilePluginInterface.h"
+#include "LoadSave/GraphFilePluginInterface.h"
 #include <KDebug>
-#include <PluginManager.h>
+#include <GraphFileBackendManager.h>
 #include <KPushButton>
-#include <kdebug.h>
+#include <KMessageBox>
+#include <KGuiItem>
 #include "Document.h"
 
 #include <QFile>
 #include <QPointer>
-
-#include <iostream>
-#include <string>
 
 ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(parent), _scriptToRun(QString())
 {
@@ -40,7 +38,8 @@ ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(paren
 bool ImporterExporterManager::exportFile(Document * doc) const
 {
     QString ext;
-    foreach(FilePluginInterface * f, PluginManager::instance()->filePlugins()) {
+    QList<GraphFilePluginInterface*> exportBackends = GraphFileBackendManager::self()->backends(GraphFileBackendManager::Export);
+    foreach(GraphFilePluginInterface * f, exportBackends) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
@@ -53,37 +52,52 @@ bool ImporterExporterManager::exportFile(Document * doc) const
         return false;
     }
 
-    kDebug() << "Exporting File..";
     if (exportDialog->selectedFile().isEmpty()) {
         return false;
     }
 
+    // set file ending
+    KUrl file;
     ext = exportDialog->currentFilter().remove('*');
-    kDebug() << " Selected to export: " << ext;
-    QString file = exportDialog->selectedFile();
-    if (!file.endsWith(ext)) {
-        file.append(ext);
+    if (exportDialog->selectedFile().endsWith(ext)) {
+        file = KUrl::fromLocalFile(exportDialog->selectedFile());
+    } else {
+        file = KUrl::fromLocalFile(exportDialog->selectedFile().append(ext));
     }
 
-    FilePluginInterface * p = PluginManager::instance()->filePluginsByExtension(ext);
-    if (!p) {
-        kDebug() << "Cannot export file: " << file;
+    // test if any file is overwritten
+    if (QFile::exists(exportDialog->selectedFile())) {
+        if (KMessageBox::warningContinueCancel(qobject_cast< QWidget* >(parent()), i18n(
+                "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you "
+                "do not want to overwrite it, change the file name to "
+                "something else.</p>", file.prettyUrl()),
+            i18n("File Exists"), KGuiItem(i18n("Overwrite") ))
+            == KMessageBox::Cancel ) {
+            return false;
+        }
+    }
+
+    // select plugin by extension
+    GraphFilePluginInterface * filePlugin = GraphFileBackendManager::self()->backendByExtension(ext);
+    if (!filePlugin) {
+        kDebug() << "Cannot export file: " << file.toLocalFile();
         return false;
     }
 
-    if (!p->writeFile(*doc, file)) {
-        kDebug() << "Error writing file: " << p->lastError();
+    filePlugin->setFile(file);
+    filePlugin->writeFile(*doc);
+    if (filePlugin->hasError()) {
+        kDebug() << "Error occured when writing file: " << filePlugin->errorString();
         return false;
     }
-    kDebug() << "File Exported!" << file;
     return true;
 }
 
 Document* ImporterExporterManager::importFile()
 {
     QString ext;
-
-    foreach(FilePluginInterface * f, PluginManager::instance()->filePlugins()) {
+    QList<GraphFilePluginInterface*> importBackends = GraphFileBackendManager::self()->backends(GraphFileBackendManager::Import);
+    foreach(GraphFilePluginInterface * f, importBackends) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
@@ -101,26 +115,29 @@ Document* ImporterExporterManager::importFile()
     }
 
     int index = fileName.lastIndexOf('.');
-    FilePluginInterface * f = 0;
+    GraphFilePluginInterface * filePlugin = 0;
     if (index == -1) {
         kDebug() << "Cannot open file without extension.";
         return 0;
     }
 
     kDebug() << fileName.right(fileName.count() - index);
-    f = PluginManager::instance()->filePluginsByExtension(fileName.right(fileName.count() - index));
+    filePlugin = GraphFileBackendManager::self()->backendByExtension(fileName.right(fileName.count() - index));
 
-    if (!f) {
+    if (!filePlugin) {
         kDebug() <<  "Cannot handle extension " <<  fileName.right(3);
         return 0;
     }
 
-    Document * gd = f->readFile(fileName);
-    if (!gd) {
-        kDebug() << "Error loading file" << fileName << f->lastError();
+    filePlugin->setFile(fileName);
+    filePlugin->readFile();
+    if (filePlugin->hasError()) {
+        kDebug() << "Error loading file" << fileName << filePlugin->errorString();
+        return 0;
     }
-    _scriptToRun = f->scriptToRun();
-    return gd;
+    else {
+        return filePlugin->graphDocument();
+    }
 }
 
 void ImporterExporterManager::dialogExec()

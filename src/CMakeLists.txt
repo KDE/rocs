@@ -16,6 +16,7 @@ include_directories(
     GraphicsItem/
     Interface/
     Interface/VisualEditor
+    LoadSave/
     Models/
     Plugins/
     Scripts/
@@ -43,7 +44,10 @@ set( rocs_core_SRCS
 
     Plugins/PluginManager.cpp
     Plugins/ToolsPluginInterface.cpp
-    Plugins/FilePluginInterface.cpp
+
+    LoadSave/GraphFileBackendManager.cpp
+    LoadSave/GraphFilePluginInterface.cpp
+    LoadSave/RocsGraphFileFormatPlugin.cpp
 
     GraphicsItem/GraphicsLayout.cpp
     GraphicsItem/DataItem.cpp
@@ -76,7 +80,7 @@ set( rocslib_LIB_HDRS
 
     Core/Modifiers/Topology.h
 
-    Plugins/FilePluginInterface.h
+    LoadSave/GraphFilePluginInterface.h
     Plugins/PluginManager.h
     Plugins/ToolsPluginInterface.h
 
@@ -196,12 +200,13 @@ install( FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
 install( FILES
     Core/RocsDataStructurePlugin.desktop
     Plugins/RocsToolsPlugin.desktop
-    Plugins/RocsFilePlugin.desktop
+    LoadSave/RocsGraphFilePlugin.desktop
     DESTINATION
     ${SERVICETYPES_INSTALL_DIR}
 )
 
 add_subdirectory( Plugins )
+add_subdirectory( LoadSave )
 add_subdirectory( Scripts )
 
 # Build Tests if KDE_TEST is on
@@ -209,3 +214,4 @@ if(KDE4_BUILD_TESTS)
     enable_testing()
     add_subdirectory( Tests )
 endif(KDE4_BUILD_TESTS)
+

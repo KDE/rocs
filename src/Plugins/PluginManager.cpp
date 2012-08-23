@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -20,7 +21,8 @@
 #include "PluginManager.h"
 
 #include "ToolsPluginInterface.h"
-#include "FilePluginInterface.h"
+#include "GraphFilePluginInterface.h"
+#include "RocsGraphFileFormatPlugin.h"
 
 #include <KServiceTypeTrader>
 #include <KPluginInfo>
@@ -32,7 +34,6 @@ class PluginManagerPrivate
 public:
     PluginManagerPrivate() {
         toolsPluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/ToolPlugin"));
-        filePluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/FilePlugin"));
     }
 
     ~PluginManagerPrivate() {
@@ -48,19 +49,12 @@ public:
     }
     typedef KPluginInfo::List KPluginList;
     KPluginList toolsPluginsInfo;
-    KPluginList filePluginsInfo;
 
     QMap<KPluginInfo,  ToolsPluginInterface*> toolsPluginsMap;
-    QMap<KPluginInfo,  FilePluginInterface*> filePluginsMap;
-
 };
 
 
-
-
 PluginManager * PluginManager::self = 0;
-
-
 
 
 PluginManager * PluginManager::instance()
@@ -86,9 +80,9 @@ PluginManager::~PluginManager()
 
 void PluginManager::loadPlugins()
 {
-    loadFilePlugins();
     loadToolsPlugins();
 }
+
 
 bool PluginManager::loadToolPlugin(QString name)
 {
@@ -116,9 +110,9 @@ bool PluginManager::loadToolPlugin(QString name)
     return false;
 }
 
+
 void PluginManager::loadToolsPlugins()
 {
-
     kDebug() << "Load Tools plugins";
 
     foreach(KPluginInfo info, _d->toolsPluginsInfo) {
@@ -131,6 +125,7 @@ KPluginInfo PluginManager::pluginInfo(ToolsPluginInterface* plugin)
 {
     return _d->toolsPluginsMap.key(plugin);
 }
+
 
 QList< ToolsPluginInterface* > PluginManager::toolPlugins()
 {
@@ -146,59 +141,8 @@ QList< ToolsPluginInterface* > PluginManager::toolPlugins()
     return value;
 }
 
-QList< FilePluginInterface* > PluginManager::filePlugins() const
-{
-    qDebug() << "PluginManager::filePlugins() --- count = " << _filePlugins.count();
-    return _filePlugins;
-}
 
-void PluginManager::loadFilePlugins()
-{
-    qDebug() << "PluginManager::loadFilePlugins()";
-
-    foreach(FilePluginInterface * f, _filePlugins) {
-        delete f;
-    }
-    _filePlugins.clear();
-
-    KService::List offers = KServiceTypeTrader::self()->query("Rocs/FilePlugin");
-
-    KService::List::const_iterator iter;
-    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
-        QString error;
-        KService::Ptr service = *iter;
-
-        KPluginFactory *factory = KPluginLoader(service->library()).factory();
-
-        if (!factory) {
-            kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
-            continue;
-        }
-
-        FilePluginInterface *plugin = factory->create<FilePluginInterface>(this);
-
-        if (plugin) {
-            qDebug() << "Loaded plugin: " << service->name();
-            _filePlugins.append(plugin);
-
-            //emit pluginLoaded(plugin);
-        } else {
-            qDebug() << "Can't load plugin: " << service->name();
-        }
-    }
-}
 KPluginInfo pluginInfo(const ToolsPluginInterface * /*plugin*/)
 {
     return KPluginInfo();
 }
-
-FilePluginInterface *  PluginManager::filePluginsByExtension(QString ext)
-{
-    foreach(FilePluginInterface * p,  _filePlugins) {
-        if (p->extensions().join(";").contains(ext, Qt::CaseInsensitive)) {
-            return p;
-        }
-    }
-    return 0;
-}
-
