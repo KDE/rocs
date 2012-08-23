@@ -57,7 +57,7 @@ GmlFileFormatPlugin::GmlFileFormatPlugin(QObject* parent, const QList< QVariant 
 const QStringList GmlFileFormatPlugin::extensions() const
 {
     return QStringList()
-           << i18n("*.gml|Graph Markup Language Files") + '\n';
+           << i18n("*.gml|Graph Markup Language Format") + '\n';
 }
 
 

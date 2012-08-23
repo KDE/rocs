@@ -51,6 +51,13 @@ KmlFileFormatPlugin::~KmlFileFormatPlugin()
 }
 
 
+const QStringList KmlFileFormatPlugin::extensions() const
+{
+    return QStringList()
+           << i18n("*.kml|Keyhole Markup Language Format") + '\n';
+}
+
+
 void KmlFileFormatPlugin::writeFile(Document& document)
 {
     // TODO allow selection which data structure shall be exported
@@ -146,13 +153,6 @@ void KmlFileFormatPlugin::readFile()
 
     setGraphDocument(graphDoc);
     return;
-}
-
-
-const QStringList KmlFileFormatPlugin::extensions() const
-{
-    return QStringList()
-           << i18n("*.kml|Keyhole Markup Language Files") + '\n';
 }
 
 #include "KmlFileFormatPlugin.moc"
