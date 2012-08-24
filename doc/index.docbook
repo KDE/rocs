@@ -872,7 +872,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 <para>
     The <emphasis>Trivial Graph Format</emphasis> (TGF) is a simple text-based file format for describing graphs.
     A TGF file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges.
-    In this format it is only possible to have one label per node and one valued per edge.
+    In this format it is only possible to have one label per node and one value per edge.
     &rocs; interprets imported graphs as undirected graphs.
     Exported graphs will contain two edges per connection if connections are bidirectional.
 </para>
