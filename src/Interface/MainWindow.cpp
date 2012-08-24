@@ -1015,7 +1015,7 @@ void MainWindow::importProject()
 
     // get import information
     QString importFile = KFileDialog::getOpenFileName(_currentProject->projectDirectory(),
-                   i18n("*.tar.gz|Export as tar.gz Archive"),
+                   i18n("*.tar.gz|Import from tar.gz Archive"),
                    this,
                    i18nc("@title:window", "Project Archive to Import"));
 
