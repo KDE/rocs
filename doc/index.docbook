@@ -882,7 +882,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
     <itemizedlist>
         <listitem><para>The file starts with a list of nodes (one node per line), followed by a line with the only character "#", followed by a list of edges (one edge per line).</para></listitem>
         <listitem><para>A node consists of an integer (identifier), followed by a space, followed by an arbitrary string.</para></listitem>
-        <listitem><para>An edge consists of two integers (identifiers) separated by a space, followed by a space, followed by an arbitray string. It is assumed that the directed edge points from the first identifier to the second identifier.</para></listitem>
+        <listitem><para>An edge consists of two integers (identifiers) separated by a space, followed by a space, followed by an arbitrary string. It is assumed that the directed edge points from the first identifier to the second identifier.</para></listitem>
     </itemizedlist>
 </sect3>
 <sect3>
