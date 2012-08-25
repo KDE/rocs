@@ -153,7 +153,7 @@ PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataTyp
             qint8 treeEdge = -1;
             if (pos.y() > size * pointersSize ){
                 RootedTreeNode * fromNode = qobject_cast<RootedTreeNode*>(from.get());
-        
+
                 const qint16 childCount = fromNode->numberOfChilds();
                 const qreal division = ((childCount * pointersSize) > 1 ?
                                         childCount * pointersSize * size:
@@ -170,7 +170,7 @@ PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataTyp
             //Need a fix to this click position
             to->setProperty("ClickPosition", QVariant());
             from->setProperty("ClickPosition", QVariant());
-            //add the data as one of the childs (first null child)
+            //add the data as one of the children (first null child)
             bool found = false;
             RootedTreeNode * fromNode = qobject_cast<RootedTreeNode*>(from.get());
             for (quint32 i = 0; i < fromNode->numberOfChilds(); ++i){
@@ -180,12 +180,12 @@ PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataTyp
                     break;
                 }
             }
-            //If from data is full of childs, increase number of childs
+            //If from data is full of children, increase number of children
             if (!found){
                 fromNode->setNumberOfChilds(fromNode->numberOfChilds() + 1);
                 ptr->setProperty("TreeEdge", fromNode->numberOfChilds()-1);
             }
-            
+
             // Set from as parent of to
             RootedTreeNode * toNode = qobject_cast<RootedTreeNode*>(to.get());
             toNode->setNodeParent(from);

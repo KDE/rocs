@@ -310,7 +310,7 @@ void attributeId(const std::string& str)
     if (id.size() > 0 && id[0] == '"') id = id.substr(1);
     if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
     phelper->attributeId = QString::fromStdString(id);
-    phelper->valid = QString();
+    phelper->valid.clear();;
 }
 
 

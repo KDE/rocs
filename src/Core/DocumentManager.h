@@ -118,7 +118,7 @@ public slots:
     /**
      * Save graph document \p document at url \p documentUrl. The internal file url for the
      * document is reset with \p documentUrl and the modification state is set to false.
-     * To save document without chaning its properties \see exportDocument(...).
+     * To save document without changing its properties \see exportDocument(...).
      * \param document is the graph document to be save
      * \param documentUrl is the target file for saving
      */

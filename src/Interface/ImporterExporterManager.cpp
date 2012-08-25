@@ -87,7 +87,7 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     filePlugin->setFile(file);
     filePlugin->writeFile(*doc);
     if (filePlugin->hasError()) {
-        kDebug() << "Error occured when writing file: " << filePlugin->errorString();
+        kDebug() << "Error occurred when writing file: " << filePlugin->errorString();
         return false;
     }
     return true;

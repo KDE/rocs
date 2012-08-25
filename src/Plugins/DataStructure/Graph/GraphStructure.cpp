@@ -215,7 +215,7 @@ QScriptValue Rocs::GraphStructure::distances(Data* fromRaw)
 
 QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr from)
 {
-    // use copys of these lists to be safe agains changes of
+    // use copies of these lists to be safe agains changes of
     // data/pointer lists while computing shortest paths
     DataList dataListAll = this->dataListAll();
     PointerList pointerListAll = this->pointerListAll();

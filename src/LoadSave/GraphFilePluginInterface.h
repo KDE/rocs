@@ -57,7 +57,7 @@ public:
     void setFile(const KUrl& file);
 
     /**
-     * Returns \p PluginType to indicate wether the plugin only provides import, only export
+     * Returns \p PluginType to indicate whether the plugin only provides import, only export
      * or both capabilities. This method should be used to determine in which file dialogs
      * the plugin shall be included.
      * \return is by default PluginType::ImportAndExport

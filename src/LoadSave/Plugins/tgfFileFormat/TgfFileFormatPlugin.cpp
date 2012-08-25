@@ -75,7 +75,7 @@ void TgfFileFormatPlugin::readFile()
     while (!fileHandle.atEnd()) {
         QString line = QString(fileHandle.readLine()).trimmed();
 
-        if (line.startsWith('#')) { // recognize seperator before edge list
+        if (line.startsWith('#')) { // recognize separator before edge list
             mode = Edges;
             continue;
         }
