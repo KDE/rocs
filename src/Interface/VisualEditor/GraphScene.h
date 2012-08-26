@@ -48,6 +48,7 @@ public:
     void updateDocument();
     void setActiveGraph(DataStructurePtr g);
     void clearGraph();
+    qreal zoomFactor();
 
     void setHideEdges(bool h);
     bool hideEdges();
@@ -97,6 +98,7 @@ private:
     void releaseDocument();
     qreal _minWidth;
     qreal _minHeight;
+    qreal _zoomFactor;
 };
 
 #endif

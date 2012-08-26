@@ -37,6 +37,8 @@
 #include <KDebug>
 #include <QGraphicsView>
 #include <QPainter>
+#include <QSlider>
+#include <QSpacerItem>
 #include <DocumentManager.h>
 
 GraphVisualEditor::GraphVisualEditor(MainWindow *parent) :
@@ -67,16 +69,27 @@ void GraphVisualEditor::resizeEvent(QResizeEvent *event)
 
 void GraphVisualEditor::setupWidgets()
 {
-    QVBoxLayout *vLayout = new QVBoxLayout();
+    QVBoxLayout *vLayout = new QVBoxLayout(this);
     vLayout->setContentsMargins(0, 0, 0, 0);
     _scene = new GraphScene(this);
-    _graphicsView = new QGraphicsView();
+    _graphicsView = new QGraphicsView(this);
     _graphicsView->setRenderHints(QPainter::Antialiasing);
     _graphicsView->setOptimizationFlags(QGraphicsView::DontAdjustForAntialiasing);
     _graphicsView->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
     _graphicsView->setScene(_scene);
-//     _graphicsView->setAlignment(Qt::AlignTop | Qt::AlignLeft);
-    vLayout -> addWidget(_graphicsView);
+
+    // add controls for graph scene
+    QSlider *zoomSlider = new QSlider(Qt::Horizontal, this);
+    zoomSlider->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    zoomSlider->setToolTip(i18nc("@info:tooltip current zoom factor for graph editor", "Zoom: %1\%").arg(_scene->zoomFactor()*100));
+    QWidget *sceneControls = new QWidget(this);
+    sceneControls->setLayout(new QHBoxLayout(this));
+    QSpacerItem *spacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    sceneControls->layout()->addItem(spacerItem);
+    sceneControls->layout()->addWidget(zoomSlider);
+
+    vLayout->addWidget(_graphicsView);
+    vLayout->addWidget(sceneControls);
     setLayout(vLayout);
 }
 

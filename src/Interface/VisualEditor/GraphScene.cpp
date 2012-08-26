@@ -58,6 +58,7 @@ GraphScene::GraphScene(QObject *parent) :
     _action = 0;
     _minHeight = 0;
     _minWidth = 0;
+    _zoomFactor = 1;
 
     // first scene resize will resize to actual whiteboard size
     setSceneRect(0, 0, 0, 0);
@@ -309,6 +310,11 @@ void GraphScene::resize()
 
     setSceneRect(newSize);
     emit resized();
+}
+
+qreal GraphScene::zoomFactor()
+{
+    return _zoomFactor;
 }
 
 QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPosition)
