@@ -45,6 +45,7 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 #include <QMenu>
+#include <QGraphicsView>
 #include <QPointer>
 
 #include <KDebug>
@@ -316,6 +317,46 @@ qreal GraphScene::zoomFactor()
 {
     return _zoomFactor;
 }
+
+void GraphScene::zoomBy(qreal scaleFactor)
+{
+    if (scaleFactor == 0 || _zoomFactor*scaleFactor < 0.001) {
+        return;
+    }
+    views().at(0)->scale(scaleFactor, scaleFactor);
+    _zoomFactor *= scaleFactor;
+    emit zoomFactorChanged(_zoomFactor);
+}
+
+void GraphScene::zoomTo(qreal scaleFactor)
+{
+    if (scaleFactor == 0) {
+        return;
+    }
+    views().at(0)->resetMatrix();
+    views().at(0)->scale(scaleFactor, scaleFactor);
+    _zoomFactor = scaleFactor;
+    emit zoomFactorChanged(_zoomFactor);
+}
+
+void GraphScene::zoomToRect(QRectF rect)
+{
+    views().at(0)->fitInView(rect, Qt::KeepAspectRatioByExpanding);
+    //FIXME add computation for new zoomfactor!
+    emit zoomFactorChanged(_zoomFactor);
+}
+
+
+void GraphScene::resetZoom()
+{
+    views().at(0)->resetMatrix();
+}
+
+void GraphScene::centerOn(QPointF pos)
+{
+    views().at(0)->centerOn(pos);
+}
+
 
 QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPosition)
 {

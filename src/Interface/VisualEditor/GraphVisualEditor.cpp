@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -79,14 +79,16 @@ void GraphVisualEditor::setupWidgets()
     _graphicsView->setScene(_scene);
 
     // add controls for graph scene
-    QSlider *zoomSlider = new QSlider(Qt::Horizontal, this);
-    zoomSlider->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-    zoomSlider->setToolTip(i18nc("@info:tooltip current zoom factor for graph editor", "Zoom: %1\%").arg(_scene->zoomFactor()*100));
+    _zoomSlider = new QSlider(Qt::Horizontal, this);
+    _zoomSlider->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    _zoomSlider->setMaximum(100);
+    _zoomSlider->setMinimum(-100);
+    updateZoomSlider(_scene->zoomFactor());
     QWidget *sceneControls = new QWidget(this);
     sceneControls->setLayout(new QHBoxLayout(this));
     QSpacerItem *spacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
     sceneControls->layout()->addItem(spacerItem);
-    sceneControls->layout()->addWidget(zoomSlider);
+    sceneControls->layout()->addWidget(_zoomSlider);
 
     vLayout->addWidget(_graphicsView);
     vLayout->addWidget(sceneControls);
@@ -106,8 +108,12 @@ void GraphVisualEditor::setActiveDocument()
     _document = DocumentManager::self()->activeDocument();
     _scene->setActiveDocument();
 
-    connect(_document , SIGNAL(activeDataStructureChanged(DataStructurePtr)),
-            this ,       SLOT(setActiveGraph(DataStructurePtr)));
+    connect(_document, SIGNAL(activeDataStructureChanged(DataStructurePtr)),
+            this, SLOT(setActiveGraph(DataStructurePtr)));
+    connect(_scene, SIGNAL(zoomFactorChanged(qreal)),
+            this, SLOT(updateZoomSlider(qreal)));
+    connect(_zoomSlider, SIGNAL(valueChanged(int)),
+            this, SLOT(zoomTo(int)));
 }
 
 void GraphVisualEditor::releaseDocument()
@@ -119,9 +125,8 @@ void GraphVisualEditor::releaseDocument()
     foreach(DataStructurePtr ds, _document->dataStructures()) {
         ds->disconnect(this);
     }
+    _document->disconnect(this);
 }
-
-//void GraphVisualEditor::drawGraphOnScene( DataStructure */*g*/) {}
 
 void GraphVisualEditor::setActiveGraph(DataStructurePtr g)
 {
@@ -144,4 +149,17 @@ QList<DataItem*> GraphVisualEditor::selectedNodes() const
         }
     }
     return tmpList;
+}
+
+void GraphVisualEditor::updateZoomSlider(qreal zoomFactor)
+{
+    int sliderValue = 100*(zoomFactor-1);
+    _zoomSlider->setToolTip(i18nc("@info:tooltip current zoom factor for graph editor", "Zoom: %1\%").arg(zoomFactor*100));
+    _zoomSlider->setValue(sliderValue);
+}
+
+void GraphVisualEditor::zoomTo(int sliderValue)
+{
+    qreal zoomFactor = sliderValue/100.0 + 1;
+    _scene->zoomTo(zoomFactor);
 }

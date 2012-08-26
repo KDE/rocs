@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -21,6 +21,7 @@
 #define SUI_GRAPHVISUALEDITOR_H
 
 #include <QWidget>
+#include <QSlider>
 #include <QString>
 #include "AlignAction.h"
 
@@ -62,6 +63,8 @@ public slots:
 
     void setActiveDocument();
     QList<DataItem*> selectedNodes() const;
+    void updateZoomSlider(qreal zoomFactor);
+    void zoomTo(int sliderValue);
 
 private:
     /*! Default Constructor
@@ -79,6 +82,7 @@ private:
     static GraphVisualEditor* _self;
 
     GraphScene *_scene;
+    QSlider *_zoomSlider;
     Document *_document;
     DataStructurePtr _dataStructure;
 

@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,6 +21,7 @@
 
 #include "ZoomAction.h"
 #include <GraphScene.h>
+#include <GraphVisualEditor.h>
 #include <DocumentManager.h>
 #include <Document.h>
 #include <QGraphicsRectItem>
@@ -29,11 +31,8 @@
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 
-qreal ZoomAction::_zoomFactor = 1;
-
 ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
     : AbstractAction(scene, parent)
-    , m_view(scene->views().at(0))
     , m_zoomRectItem(0)
 {
     setText(i18nc("@action:intoolbar", "Zoom"));
@@ -45,6 +44,7 @@ ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 bool ZoomAction::executePress(QPointF pos)
 {
     delete m_zoomRectItem;
+    QGraphicsView *view = GraphVisualEditor::self()->scene()->views().at(0);
 
     m_zoomRectItem = new QGraphicsRectItem(0, 0, 0, 0);
     QColor color(Qt::green);
@@ -52,7 +52,7 @@ bool ZoomAction::executePress(QPointF pos)
     m_zoomRectItem->setBrush(QBrush(color));
     m_zoomRectItem->setPen(QPen(QBrush(Qt::black), 0.1, Qt::SolidLine));
     m_zoomRectItem->setZValue(9);
-    m_beginZoom = m_view->mapFromScene(pos);
+    m_beginZoom = view->mapFromScene(pos);
 
     _graphScene->addItem(m_zoomRectItem);
     return true;
@@ -60,17 +60,19 @@ bool ZoomAction::executePress(QPointF pos)
 
 bool ZoomAction::executeMove(QPointF pos)
 {
-    if (!m_zoomRectItem)
+    QGraphicsView *view = GraphVisualEditor::self()->scene()->views().at(0);
+    if (!m_zoomRectItem) {
         return false;
+    }
 
-    QPoint movePos = m_view->mapFromScene(pos);
+    QPoint movePos = view->mapFromScene(pos);
     qreal left   = (m_beginZoom.x() < movePos.x()) ? m_beginZoom.x() : movePos.x();
     qreal top    = (m_beginZoom.y() < movePos.y()) ? m_beginZoom.y() : movePos.y();
     qreal bottom = (m_beginZoom.y() > movePos.y()) ? m_beginZoom.y() : movePos.y();
     qreal right  = (m_beginZoom.x() > movePos.x()) ? m_beginZoom.x() : movePos.x();
 
-    QPointF topLeft(m_view->mapToScene(left, top));
-    QPointF bottomRight(m_view->mapToScene(right, bottom));
+    QPointF topLeft(view->mapToScene(left, top));
+    QPointF bottomRight(view->mapToScene(right, bottom));
 
     m_zoomRectItem->setRect(QRectF(topLeft, bottomRight));
 
@@ -79,10 +81,11 @@ bool ZoomAction::executeMove(QPointF pos)
 
 bool ZoomAction::executeRelease(QPointF)
 {
-    if (!m_zoomRectItem)
+    if (!m_zoomRectItem) {
         return false;
-
-    m_view->fitInView(m_zoomRectItem->rect(), Qt::KeepAspectRatioByExpanding);
+    }
+    GraphScene *scene = GraphVisualEditor::self()->scene();
+    scene->zoomToRect(m_zoomRectItem->rect());
     delete m_zoomRectItem;
     m_zoomRectItem = 0;
     return true;
@@ -96,18 +99,20 @@ bool ZoomAction::executeDoubleClick(QPointF)
 
 bool ZoomAction::executeKeyRelease(QKeyEvent* keyEvent)
 {
+    GraphScene *scene = GraphVisualEditor::self()->scene();
     switch (keyEvent->key()) {
-    case Qt::Key_Plus  : {
-        m_view->scale(1.25, 1.25);
-        _zoomFactor *= 1.25;
+    case Qt::Key_Plus : {
+        scene->zoomBy(1.25);
         break;
     }
     case Qt::Key_Minus : {
-        m_view->scale(0.8, 0.8);
-        _zoomFactor *= 0.8;
+        scene->zoomBy(0.8);
         break;
     }
-    case Qt::Key_5     : m_view->resetMatrix();     break;
+    case Qt::Key_5 : {
+        scene->resetZoom();
+        break;
+    }
     }
     keyEvent->accept();
     return true;
@@ -120,43 +125,39 @@ bool ZoomAction::executeWheelEvent(QGraphicsSceneWheelEvent* wEvent)
     } else { // zoom in
         zoomIn(wEvent->scenePos());
     }
-//     qDebug() << "event position: "<< wEvent->scenePos();
     wEvent->accept();
     return true;
 }
 
 void ZoomAction::zoomInCenter()
 {
-    m_view->scale(1.25, 1.25);
-    _zoomFactor *= 1.25;
+    GraphScene *scene = GraphVisualEditor::self()->scene();
+    scene->zoomBy(1.25);
 }
-
 
 void ZoomAction::zoomIn(QPointF zoomCenter)
 {
     zoomInCenter();
-    m_view->centerOn(zoomCenter);
+    GraphScene *scene = GraphVisualEditor::self()->scene();
+    scene->centerOn(zoomCenter);
 }
 
 void ZoomAction::zoomOutCenter()
 {
-    if (
-        m_view->width() / _zoomFactor * 1.25 < 5 * DocumentManager::self()->activeDocument()->width()
-        || m_view->height() / _zoomFactor * 1.25 < 5 * DocumentManager::self()->activeDocument()->height()
-    ) {
-        m_view->scale(0.8, 0.8);
-        _zoomFactor *= 0.8;
-    }
-}
+    GraphScene *scene = GraphVisualEditor::self()->scene();
+    scene->zoomBy(0.8);
 
+}
 
 void ZoomAction::zoomOut(QPointF zoomCenter)
 {
     zoomOutCenter();
-    m_view->centerOn(zoomCenter);
+    GraphScene *scene = GraphVisualEditor::self()->scene();
+    scene->centerOn(zoomCenter);
 }
 
 void ZoomAction::zoomReset()
 {
-    m_view->resetMatrix();
+    GraphScene *scene = GraphVisualEditor::self()->scene();
+    scene->resetZoom();
 }

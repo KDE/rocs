@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -53,13 +54,10 @@ public slots:
 private:
     QRectF m_zoomArea;
     qreal m_currentZoomFactor;
-    QGraphicsView *m_view;
     QGraphicsRectItem *m_zoomRectItem;
     QPointF m_beginZoom;
     QPointF m_endZoom;
     int m_steps;
-
-    static qreal _zoomFactor;
 };
 
 #endif // ZOOM_H

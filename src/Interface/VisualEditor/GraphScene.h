@@ -49,6 +49,11 @@ public:
     void setActiveGraph(DataStructurePtr g);
     void clearGraph();
     qreal zoomFactor();
+    void zoomBy(qreal scaleFactor);
+    void zoomTo(qreal scaleFactor);
+    void zoomToRect(QRectF rect);
+    void resetZoom();
+    void centerOn(QPointF pos);
 
     void setHideEdges(bool h);
     bool hideEdges();
@@ -73,7 +78,7 @@ signals:
     void keyPressed(QKeyEvent* key);
     void addData(QPointF pos);
     void removeSelected();
-    void zoom(qreal amount);
+    void zoomFactorChanged(qreal zoomFactor);
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent* mouseEvent);
