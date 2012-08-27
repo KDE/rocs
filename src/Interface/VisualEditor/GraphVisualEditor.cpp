@@ -93,6 +93,12 @@ void GraphVisualEditor::setupWidgets()
     vLayout->addWidget(_graphicsView);
     vLayout->addWidget(sceneControls);
     setLayout(vLayout);
+
+    // add connections for zoom slider
+    connect(_zoomSlider, SIGNAL(valueChanged(int)),
+            this, SLOT(zoomTo(int)));
+    connect(_scene, SIGNAL(zoomFactorChanged(qreal)),
+            this, SLOT(updateZoomSlider(qreal)));
 }
 
 QGraphicsView* GraphVisualEditor::view() const
@@ -110,10 +116,6 @@ void GraphVisualEditor::setActiveDocument()
 
     connect(_document, SIGNAL(activeDataStructureChanged(DataStructurePtr)),
             this, SLOT(setActiveGraph(DataStructurePtr)));
-    connect(_scene, SIGNAL(zoomFactorChanged(qreal)),
-            this, SLOT(updateZoomSlider(qreal)));
-    connect(_zoomSlider, SIGNAL(valueChanged(int)),
-            this, SLOT(zoomTo(int)));
 }
 
 void GraphVisualEditor::releaseDocument()

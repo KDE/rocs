@@ -186,7 +186,7 @@ Document* DocumentManager::newDocument()
     if (_activeDocument==0) {
         _activeDocument = doc;
     }
-
+    emit activateDocument();
     return doc;
 }
 
@@ -204,6 +204,7 @@ Document* DocumentManager::openDocument(const KUrl& documentUrl)
     doc->setName(documentUrl.fileName());
     doc->setModified(false);
     addDocument(doc);
+    emit activateDocument();
     return doc;
 }
 
@@ -225,6 +226,5 @@ void DocumentManager::exportDocument(Document* document, const KUrl& documentUrl
         kDebug() << "Could not save file. Serializer returned error: " << serializer->errorString();
         return;
     }
-
     return;
 }
