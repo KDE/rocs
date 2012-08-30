@@ -452,10 +452,6 @@ bool Rocs::GraphStructure::multigraph() const
 PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 {
     if (_type == UNDIRECTED) {
-        // do not add self-loops if graph is undirected
-        if (from == to) {
-            return PointerPtr();
-        }
         // do not add back-edges if graph is undirected
         foreach(PointerPtr pointer, from->pointers(to)) {
             if (pointer->pointerType() == pointerType) {
@@ -464,7 +460,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
         }
     }
 
-    if (_type == DIRECTED) {     // do not add double edges
+    if (_type == DIRECTED || _type == UNDIRECTED) {     // do not add double edges
         PointerList list = from->out_pointers();
         foreach(PointerPtr tmp, list) {
             if (tmp->to() == to && tmp->pointerType() == pointerType) {
