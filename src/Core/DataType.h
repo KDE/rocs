@@ -37,7 +37,7 @@ class Document;
 /**
 * \class DataType
 *
-* This class descibes a pointer types.
+* This class describes data type elements.
 */
 
 
@@ -62,7 +62,7 @@ public:
 
 public slots:
     void setName(QString name);
-    
+
     /**
      * Set icon of data elements of this type.
      * "rocs_" prefix of icons must be removed before setting this.
@@ -78,7 +78,7 @@ signals:
 
 protected:
     /** Default constructor. To create DataType elements use \see DataType::create(...).
-     *\param parent is the parent DataStructure
+     *\param parent is the parent Document
      *\param identifier is the unique identifier for this type
      */
     DataType(Document* document, int identifier);

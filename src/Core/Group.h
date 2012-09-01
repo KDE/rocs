@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2009-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -19,19 +20,60 @@
 #ifndef GROUP_H
 #define GROUP_H
 
-#include <QObject>
+#include <DataStructure.h>
 
+#include <boost/shared_ptr.hpp>
+
+class GroupPrivate;
 
 class Group : QObject
 {
     Q_OBJECT
 public:
-    Group(QObject *parent = 0);
-    void setName(const QString& name);
+    static GroupPtr create(DataStructurePtr dataStructure, int uniqueIdentifier);
+
+    /**
+     * Add data element to group.
+     * \param data is data element that shall be added to this group
+     */
+    void addData(DataPtr data);
+
+    /**
+     * Add data element list to group;
+     * \param dataList is list of data elements that shall be added to this group
+     */
+    void addData(DataList dataList);
+
+    /**
+     * Remove data element from this group.
+     * \param data is data element that shall be removed
+     */
+    void removeData(DataPtr data);
+
+    /**
+     * Clear list of data elements belonging to this group.
+     */
+    void clear();
+
+    /**
+     * Name of this group.
+     */
     const QString& name() const;
 
+    void setName(QString name);
+
+signals:
+    void groupElementsChanged();
+
+protected:
+    /** Default constructor. To create Group elements use \see Group::create(...).
+     *\param parent is the parent DataStructure
+     *\param identifier is the unique identifier for this group
+     */
+    Group(DataStructurePtr dataStructure, int identifier);
+
 private:
-    QString _name;
+    boost::shared_ptr<GroupPrivate> const d;
 };
 
 #endif

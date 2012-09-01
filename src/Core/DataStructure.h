@@ -63,7 +63,7 @@ public:
 
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
-    QList<Group*> _groups;
+    QList<GroupPtr> _groups;
     qreal _top;
     qreal _bottom;
     qreal _left;
@@ -189,7 +189,7 @@ public:
      */
     PointerList pointerListAll() const;
 
-    const QList<Group*> groups() const;
+    const QList<GroupPtr> groups() const;
 
     /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others
     */
@@ -235,10 +235,10 @@ public slots:
      * To remove a pointer \see Pointer::remove().
      */
     virtual void remove(PointerPtr e);
-    virtual void remove(Group *g);
+    virtual void remove(GroupPtr group);
 
-    virtual Group *addGroup(const QString& name);
-    virtual QList< DataPtr > addDataList(QList< QPair<QString, QPointF> > dataList, int dataType = 0);
+    virtual GroupPtr addGroup(const QString& name);
+    virtual DataList addDataList(QList< QPair<QString, QPointF> > dataList, int dataType = 0);
     virtual DataPtr addData(QString name, QPointF point, int dataType = 0);
     virtual PointerPtr addPointer(const QString& name_from, const QString& name_to, int pointerType = 0);
 
@@ -463,7 +463,7 @@ inline Document *DataStructure::document() const
     return d->_document;
 }
 
-inline const QList<Group*>   DataStructure::groups() const
+inline const QList<GroupPtr> DataStructure::groups() const
 {
     return d->_groups;
 }

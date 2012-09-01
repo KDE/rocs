@@ -519,17 +519,16 @@ void DataStructure::remove(PointerPtr e)
     emit changed();
 }
 
-void DataStructure::remove(Group *g)
+void DataStructure::remove(GroupPtr group)
 {
-    d->_groups.removeOne(g);
-    //g->deleteLater();
+    d->_groups.removeOne(group);
 }
 
-Group* DataStructure::addGroup(const QString& name)
+GroupPtr DataStructure::addGroup(const QString& name)
 {
-    Group *gg = new Group();
-    gg->setName(name);
-    return gg;
+    GroupPtr group = Group::create(getDataStructure(), generateUniqueIdentifier());
+    group->setName(name);
+    return group;
 }
 
 void DataStructure::updateRelativeCenter()
@@ -738,13 +737,14 @@ void DataStructure::setEngine(QScriptEngine *engine)
         }
     }
 
-    foreach(Group * g, d->_groups) {
-        QScriptValue array = d->_engine->newArray();
-        //   foreach(Data * n, (*g) ) {
-        //       array.property("push").call(array, QScriptValueList() << n->scriptValue());
-        //   }
-        d->_engine->globalObject().setProperty(g->name(), array);
-    }
+    //FIXME groups are not available in engine
+//     foreach(Group * g, d->_groups) {
+//         QScriptValue array = d->_engine->newArray();
+//         //   foreach(Data * n, (*g) ) {
+//         //       array.property("push").call(array, QScriptValueList() << n->scriptValue());
+//         //   }
+//         d->_engine->globalObject().setProperty(g->name(), array);
+//     }
 }
 
 QMap<QString, QString> DataStructure::pluginProperties() const

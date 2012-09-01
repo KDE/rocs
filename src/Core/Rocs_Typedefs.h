@@ -27,6 +27,7 @@ class Pointer;
 class DataType;
 class PointerType;
 class DataStructure;
+class Group;
 
 typedef QList< boost::shared_ptr<Data> > DataList;
 typedef QList< boost::shared_ptr<Pointer> > PointerList;
@@ -35,5 +36,6 @@ typedef boost::shared_ptr<Pointer> PointerPtr;
 typedef boost::shared_ptr<DataType> DataTypePtr;
 typedef boost::shared_ptr<PointerType> PointerTypePtr;
 typedef boost::shared_ptr<DataStructure> DataStructurePtr;
+typedef boost::shared_ptr<Group> GroupPtr;
 
 #endif
