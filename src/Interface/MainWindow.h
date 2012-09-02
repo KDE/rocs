@@ -193,8 +193,8 @@ private slots:
     void newScript();
     void loadDocument(const QString& name = QString());
 
-    void importFile();
-    void exportFile();
+    void importGraphFile();
+    void exportGraphFile();
 
     /**
      * Import a new project from internal Rocs project file. This method guarantees that

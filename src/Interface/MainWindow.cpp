@@ -409,9 +409,9 @@ void MainWindow::setupActions()
     createAction("document-properties", i18nc("@action:inmenu", "Set Name"),           "set-project-name",  SLOT(setProjectName()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(newGraph()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(newScript()),    this);
-    createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraph()),   this);
+    createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphFile()),   this);
     createAction("document-save",       i18nc("@action:inmenu", "Save Graph"),         "save-graph",        SLOT(saveGraph()),   this);
-    createAction("document-export",     i18nc("@action:inmenu", "Export Graph"),       "export-graph",      SLOT(exportFile()), this);
+    createAction("document-export",     i18nc("@action:inmenu", "Export Graph"),       "export-graph",      SLOT(exportGraphFile()), this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Upload script"),      "upload",            SLOT(uploadScript()),  this);
 
@@ -663,25 +663,6 @@ void MainWindow::updateGraphDocumentList()
     foreach(Document * document, DocumentManager::self()->documentList()) {
         _documentSelectorCombo->addItem(document->name());
     }
-}
-
-
-void MainWindow::importGraph()
-{
-    KUrl startDirectory;
-    if (!_currentProject->isTemporary()) {
-        startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
-    }
-
-    QString fileUrl = KFileDialog::getOpenFileName( startDirectory,
-                                                     i18n("*.graph|Graph files\n*|All files"),
-                                                     this,
-                                                     i18nc("@title:window", "Add Existing Graph File to Project"));
-    if (fileUrl.isEmpty()) {
-        return;
-    }
-    _currentProject->addGraphFile(fileUrl);
-    loadDocument(fileUrl);
 }
 
 
@@ -978,7 +959,7 @@ int MainWindow::saveIfChanged()
 }
 
 
-void MainWindow::importFile()
+void MainWindow::importGraphFile()
 {
     ImporterExporterManager importer(this);
     Document * gd = importer.importFile();
@@ -993,14 +974,10 @@ void MainWindow::importFile()
     if (importer.hasDialog()) {
         importer.dialogExec();
     }
-
-    if (!importer.scriptToRun().isEmpty()) {
-        executeScriptFull(importer.scriptToRun());
-    }
 }
 
 
-void MainWindow::exportFile()
+void MainWindow::exportGraphFile()
 {
     ImporterExporterManager exp(this);
 
