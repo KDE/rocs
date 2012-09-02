@@ -66,6 +66,12 @@ void Group::addData(DataList dataList)
 }
 
 
+DataList Group::dataList() const
+{
+    return d->_dataList;
+}
+
+
 void Group::clear()
 {
     d->_dataList.clear();

@@ -51,6 +51,8 @@ public:
      */
     void addData(DataList dataList);
 
+    DataList dataList() const;
+
     /**
      * Remove data element from this group.
      * \param data is data element that shall be removed

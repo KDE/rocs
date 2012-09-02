@@ -24,6 +24,7 @@
 #include <KGenericFactory>
 #include <KUrl>
 #include <QFile>
+#include <QHash>
 
 #include <DataStructure.h>
 #include <Document.h>
@@ -33,6 +34,7 @@
 #include "DotGraphParsingHelper.h"
 #include "DotGrammar.h"
 #include "Rocs_Typedefs.h"
+#include <Group.h>
 
 static const KAboutData aboutdata("rocs_dotfileformat", 0, ki18nc("@title Displayed plugin name", "Read and write Graphviz graph documents.") , "0.1");
 
@@ -94,64 +96,60 @@ void DotFileFormatPlugin::writeFile(Document &document)
         return;
     }
 
+    // prepare file handle for output
     QFile fileHandle(file().toLocalFile());
     QVariantList subgraphs;
     if (!fileHandle.open(QFile::WriteOnly | QFile::Text)) {
         setError(FileIsReadOnly, i18n("Cannot open file %1 to write document. Error: %2", file().fileName(), fileHandle.errorString()));
         return;
-    } else {
-        QTextStream out(&fileHandle);
+    }
+    QTextStream out(&fileHandle);
 
-        foreach(int type, document.dataTypeList()) {
-        foreach(DataPtr n, graph->dataList(type)) {
-            // TODO refactor when proper subgraph model is present
-            if (n->dynamicPropertyNames().contains("SubGraph")) {
-                if (!subgraphs.contains(n->property("SubGraph"))) {
-                    subgraphs << n->property("SubGraph");
-                    out << QString("subgraph %1 {\n").arg(n->property("SubGraph").toString());
-                    foreach(int type, document.dataTypeList()) {
-                    foreach(DataPtr nTmp, graph->dataList(type)) {
-                        if (nTmp->property("SubGraph").isValid() && nTmp->property("SubGraph") == subgraphs.last()) {
-                            out << processNode(nTmp);
-                        }
-                    }
-                    }
-                    foreach(int type, document.pointerTypeList()) {
-                    foreach(PointerPtr edge, graph->pointers(type)) {
-                        if (edge->property("SubGraph").isValid() && edge->property("SubGraph") == subgraphs.last()) { //only edges from outer graph
-                            out << processEdge(edge);
-                        }
-                    }
-                    }
-                    out << "}\n";
-                }
-            } else {
-                out << processNode(n);
-            }
-        }
-        }
-        foreach(int type, document.pointerTypeList()) {
-        foreach(PointerPtr edge, graph->pointers(type)) {
-            if (!edge->dynamicPropertyNames().contains("SubGraph")) { //only edges from outer graph
-                out << processEdge(edge);
-            }
-        }
+    // create fast access list of already processed nodes: serialize each node only once
+    QHash<int, bool> processedData;
+
+    // process groups
+    foreach(GroupPtr group, graph->groups()) {
+        out << QString("subgraph %1 {\n").arg(group->name());
+        foreach(DataPtr data, group->dataList()) {
+            out << processNode(data);
+            processedData.insert(data->identifier(), true);
         }
         out << "}\n";
-        setError(None);
-        return;
     }
+
+    // process all data elements
+    foreach(int type, document.dataTypeList()) {
+        if (type == document.groupType()) { // do not process groups
+            continue;
+        }
+        foreach(DataPtr n, graph->dataList(type)) {
+            if (processedData.contains(n->identifier())) {
+                continue;
+            }
+            out << processNode(n);
+        }
+    }
+
+    // process all edges
+    foreach(int type, document.pointerTypeList()) {
+        foreach(PointerPtr edge, graph->pointers(type)) {
+            out << processEdge(edge);
+        }
+    }
+    out << "}\n";
+    setError(None);
+    return;
 }
 
 QString const DotFileFormatPlugin::processEdge(PointerPtr edge) const
 {
     QString edgeStr;
-    edgeStr.append(QString(" %1 -> %2 ").arg(edge->from()->property("NodeName").isValid() ?
-                                          edge->from()->property("NodeName").toString() :
-                                          edge->from()->name())
-                .arg(edge->to()->property("NodeName").isValid() ?
-                     edge->to()->property("NodeName").toString() :
-                     edge->to()->name()));
+    edgeStr.append(QString(" %1 -> %2 ")
+                .arg(edge->from()->identifier())
+                .arg(edge->to()->identifier()));
+
+    // process properties if present
     bool firstProperty = true;
     if (!edge->name().isEmpty()) {
         firstProperty = false;
@@ -159,17 +157,15 @@ QString const DotFileFormatPlugin::processEdge(PointerPtr edge) const
         edgeStr.append(QString(" label = \"%2\" ").arg(edge->name()));
     }
     foreach(const QByteArray& property, edge->dynamicPropertyNames()) {
-        if (property != "SubGraph") {
-            if (firstProperty == true) {
+        if (firstProperty == true) {
                 firstProperty = false;
                 edgeStr.append("[");
             } else {
                 edgeStr.append(", ");
-            }
-            edgeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(edge->property(property).toString()));
         }
+        edgeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(edge->property(property).toString()));
     }
-    if (!firstProperty) { //At least one property was inserted
+    if (!firstProperty) { // at least one property was inserted
         edgeStr.append("]");
     }
     return edgeStr.append(";\n");
@@ -178,27 +174,18 @@ QString const DotFileFormatPlugin::processEdge(PointerPtr edge) const
 QString const DotFileFormatPlugin::processNode(DataPtr node) const
 {
     QString nodeStr;
-    if (node->property("NodeName").isValid()) {
-        nodeStr = QString("%1").arg(node->property("NodeName").toString());
-    } else {
-        nodeStr = QString("%1").arg(node->name());
+
+    // use identifier for unique identification, store name as argument "label"
+    nodeStr = QString("%1").arg(node->identifier());
+    nodeStr.append(QString(" [label=%1 ").arg(node->name()));
+
+    foreach(const QByteArray& property, node->dynamicPropertyNames()) {
+        nodeStr.append(", ");
+        nodeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(node->property(property).toString()));
     }
 
-    bool firstProperty = true;
-    foreach(const QByteArray& property, node->dynamicPropertyNames()) {
-        if (property != "NodeName" && property != "SubGraph") {
-            if (firstProperty == true) {
-                firstProperty = false;
-                nodeStr.append("[");
-            } else {
-                nodeStr.append(", ");
-            }
-            nodeStr.append(QString(" %1 = \"%2\" ").arg(QString(property)).arg(node->property(property).toString()));
-        }
-    }
-    if (!firstProperty) { //At least one property was inserted
-        nodeStr.append("]");
-    }
+    // at least one property was inserted
+    nodeStr.append("]");
     return nodeStr.append(";\n");
 }
 
