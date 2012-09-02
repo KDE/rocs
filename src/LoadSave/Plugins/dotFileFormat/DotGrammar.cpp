@@ -189,7 +189,7 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, spirit::ascii::space_ty
                | (':' >> compass_pt);
 
         subgraph = -(distinct::keyword["subgraph"] >> -ID[&subDataStructureId])
-                   >> char_('{')[&createSubDataStructure][&enterSubDataStructure][&pushAttrListC]
+                   >> char_('{')[&createSubDataStructure][&pushAttrListC]
                    >> stmt_list
                    >> qi::char_('}')[&leaveSubDataStructure][&popAttrListC];
 
@@ -236,27 +236,12 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, spirit::ascii::space_ty
 };
 
 
-void enterSubDataStructure()
-{
-    kWarning() << "Sub data structure creation: not implemented";
-    if (phelper) {
-//     phelper->z++;
-//     if (phelper->z > phelper->maxZ)
-//     {
-//       phelper->maxZ = phelper->z;
-//     }
-    }
-}
-
-
 void leaveSubDataStructure()
 {
-    kWarning() << "Sub data structure creation: not implemented";
-//     if (phelper) {
-//     phelper->z--;
-//     kDebug() << QString::fromStdString(phelper->subdataTypeid);
-//         phelper->subdataTypeid.removeLast();
-//     }
+    if (!phelper) {
+        return;
+    }
+    phelper->leaveSubDataStructure();
 }
 
 
@@ -293,7 +278,6 @@ void dataStructureId(const std::string& str)
     QString name = QString::fromStdString(str);
     kDebug() << "Set data structure name: " << name;
     if (!phelper->dataStructure) {
-
         DataStructurePtr dataStructure = phelper->gd->addDataStructure(name);
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
     }
@@ -319,6 +303,7 @@ void subDataStructureId(const std::string& str)
     if (!phelper) {
         return;
     }
+    // remove quotation marks
     std::string id(str);
     if (id.size() > 0 && id[0] == '"') {
         id = id.substr(1);
@@ -326,8 +311,7 @@ void subDataStructureId(const std::string& str)
     if (id.size() > 0 && id[id.size() - 1] == '"') {
         id = id.substr(0, id.size() - 1);
     }
-//     phelper->subdataTypeid
-    phelper->subdataTypeid.append(QString::fromStdString(id));
+    phelper->setSubDataStructureId(QString::fromStdString(id));
 }
 
 void valid(const std::string& str)
@@ -406,7 +390,10 @@ void createData(const std::string& str)
 
 void createSubDataStructure()
 {
-    kWarning() << "Creation of sub data structures not implemented!";
+    if (!phelper) {
+        return;
+    }
+    phelper->createSubDataStructure();
 }
 
 void setDataStructureAttributes()
@@ -514,4 +501,3 @@ bool parse(const std::string& str, Document * graphDoc)
     }
     return false;
 }
-

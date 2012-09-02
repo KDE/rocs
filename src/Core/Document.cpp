@@ -66,6 +66,7 @@ public:
     // data and pointer types
     QMap<int, DataTypePtr> _dataTypes;           // list of data types
     QMap<int, PointerTypePtr> _pointerTypes;        // list of pointer types
+    DataTypePtr _groupType;
 
     QString _iconPackage;   // available icons for data types
 };
@@ -232,6 +233,16 @@ PointerTypePtr Document::pointerType(int pointerType) const
         return PointerTypePtr();
     }
     return d->_pointerTypes[pointerType];
+}
+
+int Document::groupType()
+{
+    if (!d->_groupType) {
+        int typeId = registerDataType("Subdatastructure");
+        d->_groupType = dataType(typeId);
+        return typeId;
+    }
+    return d->_groupType->identifier();
 }
 
 QList< DataStructurePtr >& Document::dataStructures() const

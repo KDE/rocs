@@ -27,11 +27,17 @@
 
 class GroupPrivate;
 
-class Group : Data
+class ROCSLIB_EXPORT Group : public Data
 {
     Q_OBJECT
 public:
     static GroupPtr create(DataStructurePtr dataStructure, int uniqueIdentifier, int groupType);
+
+    /** Default constructor. To create Group elements use \see Group::create(...).
+     *\param parent is the parent DataStructure
+     *\param identifier is the unique identifier for this group
+     */
+    Group(DataStructurePtr dataStructure, int identifier, int type);
 
     /**
      * Add data element to group.
@@ -65,13 +71,6 @@ public:
 
 signals:
     void groupElementsChanged();
-
-protected:
-    /** Default constructor. To create Group elements use \see Group::create(...).
-     *\param parent is the parent DataStructure
-     *\param identifier is the unique identifier for this group
-     */
-    Group(DataStructurePtr dataStructure, int identifier, int type);
 
 private:
     boost::shared_ptr<GroupPrivate> const d;

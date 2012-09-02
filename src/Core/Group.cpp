@@ -20,6 +20,7 @@
 #include "Group.h"
 
 #include <boost/weak_ptr.hpp>
+#include <KDebug>
 
 class GroupPrivate
 {
@@ -36,9 +37,8 @@ public:
 
 GroupPtr Group::create(DataStructurePtr dataStructure, int uniqueIdentifier, int groupType)
 {
-    GroupPtr pi(new Group(dataStructure, uniqueIdentifier, groupType));
-    pi->d->q = pi;
-    return pi;
+    DataPtr data = Data::create<Group>(dataStructure, uniqueIdentifier, groupType);
+    return boost::static_pointer_cast<Group>(data);
 }
 
 

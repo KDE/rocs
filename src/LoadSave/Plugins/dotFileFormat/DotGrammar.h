@@ -75,7 +75,6 @@ void setAttributedList();
 void checkedgeop(const std::string& str);
 void edgebound(const std::string& str);
 void createPointers();
-void enterSubDataStructure();
 void leaveSubDataStructure();
 
 #endif

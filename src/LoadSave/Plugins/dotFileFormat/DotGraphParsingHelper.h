@@ -41,9 +41,21 @@ struct DotGraphParsingHelper {
      * Creates new data element and registers the identifier in data map.
      */
     void createData(QString identifier);
+
+    /**
+     * Creates new sub data structure and enters it. All future created data elements are  add to
+     * this sub data structure, until \see leaveSubDataStructure() is called.
+     */
     void createSubDataStructure();
+
+    /**
+     * Leaves current group, i.e., leave current sub data structure and switches focus to ancestor
+     * group or directly to parent data structures if left from all groups.
+     */
+    void leaveSubDataStructure();
     void setDataStructureAttributes();
     void setSubDataStructureAttributes();
+    void setSubDataStructureId(QString identifier);
     void setDataAttributes();
     void setPointerAttributes();
     void setAttributedList();
@@ -57,8 +69,6 @@ struct DotGraphParsingHelper {
     QString attributeId;
     QString valid;
     std::string attributed; //FIXME change to enum
-    QStringList subdataTypeid;
-    unsigned int unique;
 
     AttributesMap attributes;
     AttributesMap dataStructureAttributes;
@@ -70,10 +80,9 @@ struct DotGraphParsingHelper {
 
     QStringList edgebounds;
 
-    unsigned int z;
-    unsigned int maxZ;
-
     boost::shared_ptr<Rocs::GraphStructure> dataStructure;
+
+    QList<GroupPtr> groupStack; // stack of groups, increased each time a new group is entered
 
     DataPtr currentDataPtr;
     PointerPtr currentPointerPtr;

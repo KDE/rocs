@@ -526,7 +526,7 @@ void DataStructure::remove(GroupPtr group)
 
 GroupPtr DataStructure::addGroup(const QString& name)
 {
-    GroupPtr group = Group::create(getDataStructure(), generateUniqueIdentifier(), d->_groupType);
+    GroupPtr group = Group::create(getDataStructure(), generateUniqueIdentifier(), document()->groupType());
     group->setName(name);
     return group;
 }

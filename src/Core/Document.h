@@ -147,6 +147,11 @@ public:
     DataTypePtr dataType(int dataType) const;
 
     /**
+     * Returns data type for element groups. If type is not registered yet, it will be created.
+     */
+    int groupType();
+
+    /**
      * Getter for all registered data types.
      * \return list of all data type ids
      */

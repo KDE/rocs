@@ -26,6 +26,7 @@
 
 #include <QFile>
 #include "DynamicPropertiesList.h"
+#include <Group.h>
 
 extern DotParser::DotGraphParsingHelper* phelper;
 
@@ -36,8 +37,6 @@ DotGraphParsingHelper::DotGraphParsingHelper():
     attributeId(),
     valid(),
     attributed(),
-    subdataTypeid(),
-    unique(0),
     attributes(),
     dataStructureAttributes(),
     dataAttributes(),
@@ -46,8 +45,6 @@ DotGraphParsingHelper::DotGraphParsingHelper():
     dataAttributesStack(),
     pointersAttributesStack(),
     edgebounds(),
-    z(0),
-    maxZ(0),
     currentDataPtr(),
     currentPointerPtr(),
     dataMap()
@@ -137,7 +134,7 @@ void DotGraphParsingHelper::createData(QString identifier)
     edgebounds.clear(); //TODO explain meaning of this
 
     if (dataMap.contains(identifier)) {
-        kDebug() << "Omitting data element, ID is already used: "<< identifier;
+        kWarning() << "Omitting data element, ID is already used: "<< identifier;
         return;
     }
 
@@ -145,19 +142,40 @@ void DotGraphParsingHelper::createData(QString identifier)
     currentDataPtr = dataStructure->addData(identifier);
     dataMap.insert(identifier, currentDataPtr);
 
-    if (!subdataTypeid.isEmpty()) { //TODO no proper subgraph implementation exists
-        currentDataPtr->addDynamicProperty("SubGraph", subdataTypeid.last());
+    if (!groupStack.isEmpty()) {
+        groupStack.last()->addData(currentDataPtr);
     }
 }
 
 void DotGraphParsingHelper::createSubDataStructure()
 {
-    kDebug() << "NOT IMPLEMENTED!";
+    GroupPtr newGroup = dataStructure->addGroup("Group");
+    groupStack.append(newGroup);
+    currentDataPtr = newGroup->getData();
+}
+
+void DotGraphParsingHelper::setSubDataStructureId(QString identifier)
+{
+    if(groupStack.isEmpty()) {
+        kError() << "Cannot set sub data structure id: no group on stack";
+        return;
+    }
+    // at this point the currentDataPtr is already the sub data structure
+    dataMap.insert(identifier, currentDataPtr);
+    groupStack.last()->setName(identifier);
+}
+
+void DotGraphParsingHelper::leaveSubDataStructure()
+{
+    if(groupStack.isEmpty()) {
+        kWarning() << "Cannot leave group: currently not inside any group.";
+        return;
+    }
+    groupStack.removeLast();
 }
 
 void DotGraphParsingHelper::createPointers()
 {
-    kDebug() << "createPointers() entered";
     QString fromId, toId;
 
     if (edgebounds.isEmpty()) {
@@ -173,9 +191,6 @@ void DotGraphParsingHelper::createPointers()
         if (!dataMap.contains(fromId)) {
             DataPtr from = dataStructure->addData(fromId);
             dataMap.insert(fromId, from);
-            if (!subdataTypeid.isEmpty()) { //TODO no proper subgraph implementation exists
-                from->addDynamicProperty("SubGraph", subdataTypeid.last());
-            }
         }
         DataPtr from = dataMap[fromId];
 
@@ -183,17 +198,11 @@ void DotGraphParsingHelper::createPointers()
         if (!dataMap.contains(toId)) {
             DataPtr to = dataStructure->addData(toId);
             dataMap.insert(toId, to);
-            if (!subdataTypeid.isEmpty()) { //TODO no proper subgraph implementation exists
-                to->addDynamicProperty("SubGraph", subdataTypeid.last());
-            }
         }
         DataPtr to = dataMap[toId];
 
         currentPointerPtr = dataStructure->addPointer(from, to);
         kDebug() << "Creating new pointer: " << from->name() << " -> " << to->name();
-        if (!subdataTypeid.isEmpty()) {
-            currentPointerPtr->addDynamicProperty("SubGraph", subdataTypeid.last());
-        }
         setPointerAttributes();
 
         fromId = toId;
