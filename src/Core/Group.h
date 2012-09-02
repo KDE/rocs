@@ -21,16 +21,17 @@
 #define GROUP_H
 
 #include <DataStructure.h>
+#include "Data.h"
 
 #include <boost/shared_ptr.hpp>
 
 class GroupPrivate;
 
-class Group : QObject
+class Group : Data
 {
     Q_OBJECT
 public:
-    static GroupPtr create(DataStructurePtr dataStructure, int uniqueIdentifier);
+    static GroupPtr create(DataStructurePtr dataStructure, int uniqueIdentifier, int groupType);
 
     /**
      * Add data element to group.
@@ -70,7 +71,7 @@ protected:
      *\param parent is the parent DataStructure
      *\param identifier is the unique identifier for this group
      */
-    Group(DataStructurePtr dataStructure, int identifier);
+    Group(DataStructurePtr dataStructure, int identifier, int type);
 
 private:
     boost::shared_ptr<GroupPrivate> const d;

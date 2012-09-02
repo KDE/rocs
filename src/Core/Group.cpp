@@ -34,15 +34,16 @@ public:
 };
 
 
-GroupPtr Group::create(DataStructurePtr dataStructure, int uniqueIdentifier)
+GroupPtr Group::create(DataStructurePtr dataStructure, int uniqueIdentifier, int groupType)
 {
-    GroupPtr pi(new Group(dataStructure, uniqueIdentifier));
+    GroupPtr pi(new Group(dataStructure, uniqueIdentifier, groupType));
     pi->d->q = pi;
     return pi;
 }
 
 
-Group::Group(DataStructurePtr dataStructure, int identifier):
+Group::Group(DataStructurePtr dataStructure, int identifier, int type):
+    Data(dataStructure, identifier, type),
     d(new GroupPrivate())
 {
     d->_dataStructure = dataStructure;

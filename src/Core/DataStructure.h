@@ -64,6 +64,8 @@ public:
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
     QList<GroupPtr> _groups;
+    int _groupType; // we only support one kind of groups, this must be registered here
+
     qreal _top;
     qreal _bottom;
     qreal _left;
