@@ -45,13 +45,11 @@ K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
 
 DotFileFormatPlugin::~DotFileFormatPlugin()
 {
-
 }
 
 DotFileFormatPlugin::DotFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
     GraphFilePluginInterface(FilePluginFactory::componentData(), parent)
 {
-
 }
 
 
@@ -75,7 +73,7 @@ void DotFileFormatPlugin::readFile()
         return;
     }
     QString content = fileHandle.readAll();
-    if (!parse(content.toStdString(), graphDoc)) { //TODO change interface and pass graph structure
+    if (!parse(content.toStdString(), graphDoc)) {
         setError(EncodingProblem, i18n("Could not parse file \"%1\".", file().toLocalFile()));
         delete graphDoc;
         return;

@@ -491,6 +491,10 @@ bool parse(const std::string& str, Document * graphDoc)
 
     //TODO reenable skip parser: (+spirit::ascii::space | spirit::repository::qi::confix("/*", "*/"))
     if (boost::spirit::qi::phrase_parse(iter, input.end(), r, spirit::ascii::space)) {
+        // TODO for now (without proper visualization of groups) set them invisible
+        if (phelper->gd->dataStructures().length() > 0) {
+            phelper->gd->dataStructures().at(0)->setDataVisibility(false, phelper->gd->groupType());
+        }
         kDebug() << "Complete dot file was parsed successfully.";
         return true;
     } else {

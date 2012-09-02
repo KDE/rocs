@@ -147,12 +147,6 @@ private slots:
      * Import dialog to add graph document to project.
      * Imported graph document is directly set as active document.
      */
-    void importGraph();
-
-    /**
-     * Import dialog to add graph document to project.
-     * Imported graph document is directly set as active document.
-     */
     void importScript();
 
     /**
@@ -193,6 +187,10 @@ private slots:
     void newScript();
     void loadDocument(const QString& name = QString());
 
+    /**
+     * Import dialog to add graph document to project.
+     * Imported graph document is directly set as active document.
+     */
     void importGraphFile();
     void exportGraphFile();
 
