@@ -156,7 +156,7 @@ QList<DataItem*> GraphVisualEditor::selectedNodes() const
 void GraphVisualEditor::updateZoomSlider(qreal zoomFactor)
 {
     int sliderValue = 100*(zoomFactor-1);
-    _zoomSlider->setToolTip(i18nc("@info:tooltip current zoom factor for graph editor", "Zoom: %1\%").arg(zoomFactor*100));
+    _zoomSlider->setToolTip(i18nc("@info:tooltip current zoom factor for graph editor", "Zoom: %1\%", zoomFactor*100));
     _zoomSlider->setValue(sliderValue);
 }
 
