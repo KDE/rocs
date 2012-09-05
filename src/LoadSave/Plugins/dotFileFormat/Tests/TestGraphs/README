@@ -1,0 +1,10 @@
+Copyright Notice for Test Graphs
+================================
+
+This folder contains original test data from the Graphviz project as published at
+http://www.graphviz.org along with version 2.28.0. The files are published under the EPL 1.0,
+see COPYING.TESTDATA for the full license.
+
+As the license is _incompatible_ with GPL 2+, the supported test graphs are only used as input data
+for the automatic unit tests; they are explicitly not linked or imported to the program binaries or
+libraries.

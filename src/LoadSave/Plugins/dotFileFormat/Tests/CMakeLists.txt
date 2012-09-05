@@ -18,6 +18,9 @@
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
+file(COPY TestGraphs/directed DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY TestGraphs/undirected DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 set(TestDotFileFormatPlugin_SRCS
     DotFileFormatTest.cpp
     ../DotGrammar.cpp
