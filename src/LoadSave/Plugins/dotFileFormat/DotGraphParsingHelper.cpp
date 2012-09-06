@@ -54,8 +54,8 @@ DotGraphParsingHelper::DotGraphParsingHelper():
 void DotGraphParsingHelper::setDataStructureElementAttributes(QObject* graphElement, const AttributesMap& attributes)
 {
     AttributesMap::const_iterator it, it_end;
-    it = attributes.begin();
-    it_end = attributes.end();
+    it = attributes.constBegin();
+    it_end = attributes.constEnd();
     for (; it != it_end; it++) {
         kDebug() << "    " << it.key() << "\t=\t'" << it.value() << "'";
         kDebug() << graphElement->metaObject()->className();
@@ -106,22 +106,22 @@ void DotGraphParsingHelper::setAttributedList()
             }
         }
         AttributesMap::const_iterator it, it_end;
-        it = attributes.begin();
-        it_end = attributes.end();
+        it = attributes.constBegin();
+        it_end = attributes.constEnd();
         for (; it != it_end; it++) {
             dataStructureAttributes[it.key()] = it.value();
         }
     } else if (attributed == "node") {
         AttributesMap::const_iterator it, it_end;
-        it = attributes.begin();
-        it_end = attributes.end();
+        it = attributes.constBegin();
+        it_end = attributes.constEnd();
         for (; it != it_end; it++) {
             dataAttributes[it.key()] = it.value();
         }
     } else if (attributed == "edge") {
         AttributesMap::const_iterator it, it_end;
-        it = attributes.begin();
-        it_end = attributes.end();
+        it = attributes.constBegin();
+        it_end = attributes.constEnd();
         for (; it != it_end; it++) {
             pointersAttributes[it.key()] = it.value();
         }
