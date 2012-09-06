@@ -22,6 +22,7 @@
 #include <string>
 #include <Document.h>
 #include "../DotGrammar.h"
+#include "../DotFileFormatPlugin.h"
 #include <DataStructure.h>
 #include <DataStructurePluginManager.h>
 #include <DynamicPropertiesList.h>
@@ -61,6 +62,56 @@ void DotFileFormatTest::parseSubgraphs()
 {
     Document doc("testSubgraphs");
     QVERIFY(parse(subgraph, &doc));
+}
+
+
+void DotFileFormatTest::parseFileER()
+{
+    // create importer plugin
+    DotFileFormatPlugin importer(this, QList<QVariant>());
+    importer.setFile(KUrl::fromLocalFile("undirected/ER.gv"));
+    importer.readFile();
+    QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+}
+
+
+void DotFileFormatTest::parseFileHeadwood()
+{
+    // create importer plugin
+    DotFileFormatPlugin importer(this, QList<QVariant>());
+    importer.setFile(KUrl::fromLocalFile("undirected/Headwood.gv"));
+    importer.readFile();
+    QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+}
+
+
+void DotFileFormatTest::parseFileNgk104()
+{
+    // create importer plugin
+    DotFileFormatPlugin importer(this, QList<QVariant>());
+    importer.setFile(KUrl::fromLocalFile("undirected/ngk10_4.gv"));
+    importer.readFile();
+    QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+}
+
+
+void DotFileFormatTest::parseFilePetersen()
+{
+    // create importer plugin
+    DotFileFormatPlugin importer(this, QList<QVariant>());
+    importer.setFile(KUrl::fromLocalFile("undirected/Petersen.gv"));
+    importer.readFile();
+    QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+}
+
+
+void DotFileFormatTest::parseFileProcess()
+{
+    // create importer plugin
+    DotFileFormatPlugin importer(this, QList<QVariant>());
+    importer.setFile(KUrl::fromLocalFile("undirected/process.gv"));
+    importer.readFile();
+    QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
 }
 
 QTEST_MAIN(DotFileFormatTest)

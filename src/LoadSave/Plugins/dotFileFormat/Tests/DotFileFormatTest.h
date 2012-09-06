@@ -31,6 +31,14 @@ private slots:
     void init();
     void simpleGraphParsing();
     void parseSubgraphs();
+
+    // parsing tests for undirected example graphs
+    void parseFileER();
+    void parseFileHeadwood();
+    void parseFileNgk104();
+    void parseFilePetersen();
+    void parseFileProcess();
+
 };
 
 #endif // DOTFILEFORMATTEST_H
