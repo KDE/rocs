@@ -58,7 +58,7 @@ DotFileFormatPlugin::DotFileFormatPlugin(QObject* parent, const QList< QVariant 
 const QStringList DotFileFormatPlugin::extensions() const
 {
     return QStringList()
-           << i18n("*.dot|Graphviz Format") + '\n';
+           << i18n("*.dot *.gv|Graphviz Format") + '\n';
 }
 
 
