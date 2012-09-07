@@ -56,11 +56,11 @@ namespace distinct
 {
     //[qi_distinct_encapsulation
     namespace spirit = boost::spirit;
-    namespace ascii = boost::spirit::ascii;
+    namespace standard = boost::spirit::standard;
     namespace repo = boost::spirit::repository;
 
     // Define metafunctions allowing to compute the type of the distinct()
-    // and ascii::char_() constructs
+    // and standard::char_() constructs
     namespace traits
     {
         // Metafunction allowing to get the type of any repository::distinct(...)
@@ -70,10 +70,10 @@ namespace distinct
           : spirit::result_of::terminal<repo::tag::distinct(Tail)>
         {};
 
-        // Metafunction allowing to get the type of any ascii::char_(...) construct
+        // Metafunction allowing to get the type of any standard::char_(...) construct
         template <typename String>
         struct char_spec
-          : spirit::result_of::terminal<spirit::tag::ascii::char_(String)>
+          : spirit::result_of::terminal<spirit::tag::standard::char_(String)>
         {};
     };
 
@@ -86,13 +86,13 @@ namespace distinct
         return repo::qi::distinct(tail);
     }
 
-    // Define a helper function allowing to create a ascii::char_() construct
+    // Define a helper function allowing to create a standard::char_() construct
     // from an arbitrary string representation
     template <typename String>
     inline typename traits::char_spec<String>::type
     char_spec(String const& str)
     {
-        return ascii::char_(str);
+        return standard::char_(str);
     }
 
     // the following constructs the type of a distinct_spec holding a
@@ -144,7 +144,7 @@ using boost::spirit::qi::_1;
 using boost::spirit::qi::_val;
 using boost::spirit::repository::confix;
 
-template <typename Iterator, typename Skipper = spirit::ascii::space_type>
+template <typename Iterator, typename Skipper = spirit::standard::space_type>
 struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
 //TODO list for grammar
@@ -204,11 +204,11 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
         tag = '<' >>  qi::lexeme[+(qi::char_ - '>')] >>  '>';
 
-        edgeop = spirit::ascii::string("->") | spirit::ascii::string("--");
+        edgeop = spirit::standard::string("->") | spirit::standard::string("--");
 
         ID = qi::lexeme[
-                 ((spirit::ascii::alpha|'_') >> *(spirit::ascii::alpha|spirit::ascii::digit|'_'))
-                 | (-qi::char_('-') >> ('.' >> +spirit::ascii::digit) | (+spirit::ascii::digit >> -('.' >> *spirit::ascii::digit)))
+                 ((spirit::standard::alpha|'_') >> *(spirit::standard::alpha|spirit::standard::digit|'_'))
+                 | (-qi::char_('-') >> ('.' >> +spirit::standard::digit) | (+spirit::standard::digit >> -('.' >> *spirit::standard::digit)))
                  | ('"' >>  *(qi::char_ - '"') >>  '"')
                  | ('<' >>  *(qi::char_ - '>')  >>  '>')            //TODO this is only an elementary tag parser
              ];
@@ -457,7 +457,7 @@ bool parseIntegers(const std::string& str, std::vector<int>& v)
     using boost::spirit::qi::int_;
     using boost::spirit::qi::phrase_parse;
     using boost::spirit::qi::_1;
-    using boost::spirit::ascii::space;
+    using boost::spirit::standard::space;
     using boost::phoenix::push_back;
     using boost::phoenix::ref;
 
@@ -479,7 +479,7 @@ bool parse(const std::string& str, Document * graphDoc)
     phelper->gd = graphDoc;
 
     using boost::spirit::qi::_1;
-    using boost::spirit::ascii::space;
+    using boost::spirit::standard::space;
     using boost::phoenix::ref;
 
     std::string input(str);
