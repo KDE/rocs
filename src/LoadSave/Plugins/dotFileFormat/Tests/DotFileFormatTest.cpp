@@ -79,7 +79,7 @@ void DotFileFormatTest::parseFileHeadwood()
 {
     // create importer plugin
     DotFileFormatPlugin importer(this, QList<QVariant>());
-    importer.setFile(KUrl::fromLocalFile("undirected/Headwood.gv"));
+    importer.setFile(KUrl::fromLocalFile("undirected/Heawood.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
 }
