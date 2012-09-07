@@ -207,19 +207,11 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
         edgeop = spirit::ascii::string("->") | spirit::ascii::string("--");
 
         ID = qi::lexeme[
-                 (+(spirit::ascii::alpha|spirit::ascii::digit|'_')) //TODO HEX values missing
-                 | qi::double_                                      //TODO differs from DOT definition
+                 ((spirit::ascii::alpha|'_') >> *(spirit::ascii::alpha|spirit::ascii::digit|'_'))
+                 | (-qi::char_('-') >> ('.' >> +spirit::ascii::digit) | (+spirit::ascii::digit >> -('.' >> *spirit::ascii::digit)))
                  | ('"' >>  *(qi::char_ - '"') >>  '"')
                  | ('<' >>  *(qi::char_ - '>')  >>  '>')            //TODO this is only an elementary tag parser
              ];
-
-//OLD:
-//         ID = (
-//                 (((qi::char_ - spirit::ascii::punct) | '_') >> *((qi::char_ - spirit::ascii::punct) | '_'))
-//                 | qi::double_
-//                 | ('"' >>  *((qi::char_('\\') >> '"') | (qi::char_ - '"')) >>  '"')
-//                 | ('<' >>  *((qi::char_  - '<' - '>') | tag) >>  '>')
-//             );
     }
 
     qi::rule<Iterator,                Skipper> graph;
