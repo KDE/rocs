@@ -131,7 +131,7 @@ namespace distinct
     //   compass_pt :  (n | ne | e | se | s | sw | w | nw | c | _)
     //
     // Further specifications for keywords and identifier available in DOT documentation.
-    // Usually availabel under: /usr/share/doc/graphviz/html/info/lang.html
+    // Usually available under: /usr/share/doc/graphviz/html/info/lang.html
 
     // An ID is one of the following:
     // Any string of alphabetic ([a-zA-Z'200-'377]) characters, underscores ('_') or digits ([0-9]), not beginning with a digit;
@@ -162,9 +162,9 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
         stmt_list = stmt >> -char_(';') >> -stmt_list;
 
         stmt = (    edge_stmt
+                    | (ID >> '=' >> ID) //TODO save value
                     | node_stmt
                     | attr_stmt
-                    | (ID >> '=' >> ID)
                     | subgraph
                 );
 
