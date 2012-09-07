@@ -28,7 +28,7 @@
 #include <DynamicPropertiesList.h>
 #include <KDebug>
 
-static const std::string simple = "digraph simple {a -> b; c; d -> e}";
+static const std::string simple = "digraph simple {a -> b; c; d -> e /* error -> comment*/}";
 
 static const std::string subgraph = "digraph trees {"
                                         "  subgraph t {"

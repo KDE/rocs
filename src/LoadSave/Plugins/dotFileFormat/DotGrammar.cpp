@@ -39,11 +39,15 @@
 using namespace std;
 using namespace boost;
 using namespace boost::spirit::qi;
+using boost::spirit::repository::confix;
 
 using namespace DotParser;
 
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 #define BOOST_SPIRIT_DEBUG 1
+
+#define SKIPPER qi::space | confix("//", eol)[*(char_ - eol)] | confix("/*", "*/")[*(char_ - "*/")]
+typedef BOOST_TYPEOF(SKIPPER) skipper_type;
 
 DotGraphParsingHelper* phelper = 0;
 
@@ -138,9 +142,10 @@ namespace distinct
 using boost::phoenix::ref;
 using boost::spirit::qi::_1;
 using boost::spirit::qi::_val;
+using boost::spirit::repository::confix;
 
-template <typename Iterator>
-struct DotGrammar : boost::spirit::qi::grammar<Iterator, spirit::ascii::space_type> {
+template <typename Iterator, typename Skipper = spirit::ascii::space_type>
+struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
 //TODO list for grammar
 // * check if keywords node, edge, digraph... are parsed case-independent
@@ -217,22 +222,22 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, spirit::ascii::space_ty
 //             );
     }
 
-    qi::rule<Iterator,                spirit::ascii::space_type> graph;
-    qi::rule<Iterator, std::string(), spirit::ascii::space_type> ID;
-    qi::rule<Iterator, std::string(), spirit::ascii::space_type> tag;
-    qi::rule<Iterator,                spirit::ascii::space_type> stmt_list;
-    qi::rule<Iterator,                spirit::ascii::space_type> stmt;
-    qi::rule<Iterator,                spirit::ascii::space_type> attr_stmt;
-    qi::rule<Iterator,                spirit::ascii::space_type> attr_list;
-    qi::rule<Iterator,                spirit::ascii::space_type> a_list;
-    qi::rule<Iterator,                spirit::ascii::space_type> edge_stmt;
-    qi::rule<Iterator, std::string(), spirit::ascii::space_type> edgeop;
-    qi::rule<Iterator,                spirit::ascii::space_type> edgeRHS;
-    qi::rule<Iterator,                spirit::ascii::space_type> node_stmt;
-    qi::rule<Iterator, std::string(), spirit::ascii::space_type> node_id;
-    qi::rule<Iterator, std::string(), spirit::ascii::space_type> port;
-    qi::rule<Iterator,                spirit::ascii::space_type> subgraph;
-    qi::rule<Iterator, std::string(), spirit::ascii::space_type> compass_pt;
+    qi::rule<Iterator,                Skipper> graph;
+    qi::rule<Iterator, std::string(), Skipper> ID;
+    qi::rule<Iterator, std::string(), Skipper> tag;
+    qi::rule<Iterator,                Skipper> stmt_list;
+    qi::rule<Iterator,                Skipper> stmt;
+    qi::rule<Iterator,                Skipper> attr_stmt;
+    qi::rule<Iterator,                Skipper> attr_list;
+    qi::rule<Iterator,                Skipper> a_list;
+    qi::rule<Iterator,                Skipper> edge_stmt;
+    qi::rule<Iterator, std::string(), Skipper> edgeop;
+    qi::rule<Iterator,                Skipper> edgeRHS;
+    qi::rule<Iterator,                Skipper> node_stmt;
+    qi::rule<Iterator, std::string(), Skipper> node_id;
+    qi::rule<Iterator, std::string(), Skipper> port;
+    qi::rule<Iterator,                Skipper> subgraph;
+    qi::rule<Iterator, std::string(), Skipper> compass_pt;
 };
 
 
@@ -487,10 +492,9 @@ bool parse(const std::string& str, Document * graphDoc)
 
     std::string input(str);
     std::string::iterator iter = input.begin();
-    DotGrammar<std::string::iterator> r;
+    DotGrammar<std::string::iterator, skipper_type> r;
 
-    //TODO reenable skip parser: (+spirit::ascii::space | spirit::repository::qi::confix("/*", "*/"))
-    if (boost::spirit::qi::phrase_parse(iter, input.end(), r, spirit::ascii::space)) {
+    if (boost::spirit::qi::phrase_parse(iter, input.end(), r, SKIPPER)) {
         // TODO for now (without proper visualization of groups) set them invisible
         if (phelper->gd->dataStructures().length() > 0) {
             phelper->gd->dataStructures().at(0)->setDataVisibility(false, phelper->gd->groupType());
