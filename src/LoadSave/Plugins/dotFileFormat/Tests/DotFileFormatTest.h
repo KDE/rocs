@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
     Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
@@ -34,11 +34,66 @@ private slots:
 
     // parsing tests for undirected example graphs
     void parseFileER();
-    void parseFileHeadwood();
+    void parseFileHeawood();
     void parseFileNgk104();
     void parseFilePetersen();
     void parseFileProcess();
 
+    // parsing tests for directed example graphs
+    void parseFileAbstract();
+    void parseFileAlf();
+    void parseFileArrows();
+    void parseFileAwilliams();
+    void parseFileClust();
+    void parseFileClust1();
+    void parseFileClust2();
+    void parseFileClust3();
+    void parseFileClust4();
+    void parseFileClust5();
+    void parseFileCrazy();
+    void parseFileCtext();
+    void parseFileDfa();
+    void parseFileFig6();
+    void parseFileFsm();
+    void parseFileKW91();
+    void parseFileLatin1();
+    void parseFileNaN();
+    void parseFileGrammar();
+    void parseFileHashtable();
+    void parseFileHondaTokoro();
+    void parseFileJapanese();
+    void parseFileJcctree();
+    void parseFileJsort();
+    void parseFileLdbxtried();
+    void parseFileLongflat();
+    void parseFileMike();
+    void parseFileNhg();
+    void parseFileOldarrows();
+    void parseFilePgram();
+    void parseFilePm2way();
+    void parseFilePmpipe();
+    void parseFilePolypoly();
+    void parseFileProc3d();
+    void parseFilePsfonttest();
+    void parseFileRecord2();
+    void parseFileRecords();
+    void parseFileRowe();
+    void parseFileRussian();
+    void parseFileSdh();
+    void parseFileShells();
+    void parseFileStates();
+    void parseFileStructs();
+    void parseFileSwitch();
+    void parseFileTable();
+    void parseFileTrain11();
+    void parseFileTrapeziumlr();
+    void parseFileTree();
+    void parseFileTriedds();
+    void parseFileTry();
+    void parseFileUnix();
+    void parseFileUnix2();
+    void parseFileViewfile();
+    void parseFileWorld();
 };
 
 #endif // DOTFILEFORMATTEST_H
