@@ -176,7 +176,7 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
         attr_list = '[' >> -a_list >>']';
 
         a_list = (ID[&attributeId] >> -('=' >> ID[&valid]))[&addattr]
-                 >> -(',' >> a_list);
+                 >> -qi::char_(',') >> -a_list;
 
         edge_stmt = (
                         (node_id[&edgebound] | subgraph) >> edgeRHS >> -(attr_list[phoenix::ref(phelper->attributed)="edge"])
