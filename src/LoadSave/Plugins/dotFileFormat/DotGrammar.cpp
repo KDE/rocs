@@ -36,20 +36,15 @@
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_stl.hpp>
 
-using namespace std;
-using namespace boost;
-using namespace boost::spirit::qi;
-using boost::spirit::repository::confix;
-
 using namespace DotParser;
 
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
+
+// get debug output for parser generator
 #define BOOST_SPIRIT_DEBUG 1
 
+// define skipper for spaces, c style comments, and c++ style comments
 #define SKIPPER qi::space | confix("//", eol)[*(char_ - eol)] | confix("/*", "*/")[*(char_ - "*/")]
-typedef BOOST_TYPEOF(SKIPPER) skipper_type;
-
-DotGraphParsingHelper* phelper = 0;
 
 // create distinct parser for dot keywords
 namespace distinct
@@ -107,44 +102,60 @@ namespace distinct
     //]
 }
 
+// The parser is implemented to fulfull exactly the DOT file specification. For details on the DOT
+// file format see /usr/share/doc/graphviz/html/info/lang.html or the graphviz website. The used
+// specification is as follows:
+//
+//   graph      :  [ strict ] (graph | digraph) [ ID ] '{' stmt_list '}'
+//   stmt_list  :  [ stmt [ ';' ] [ stmt_list ] ]
+//   stmt       :  node_stmt
+//              |  edge_stmt
+//              |  attr_stmt
+//              |  ID '=' ID
+//              |  subgraph
+//   attr_stmt  :  (graph | node | edge) attr_list
+//   attr_list  :  '[' [ a_list ] ']' [ attr_list ]
+//   a_list     :  ID [ '=' ID ] [ ',' ] [ a_list ]
+//   edge_stmt  :  (node_id | subgraph) edgeRHS [ attr_list ]
+//   edgeRHS    :  edgeop (node_id | subgraph) [ edgeRHS ]
+//   node_stmt  :  node_id [ attr_list ]
+//   node_id    :  ID [ port ]
+//   port       :  ':' ID [ ':' compass_pt ]
+//              |  ':' compass_pt
+//   subgraph   :  [ subgraph [ ID ] ] '{' stmt_list '}'
+//   compass_pt :  (n | ne | e | se | s | sw | w | nw | c | _)
+//
+// Definition for the ID non-terminal: any of
+// * any string of alphabetic ([a-zA-Z'200-'377]) characters, underscores ('_') or digits ([0-9]), not beginning with a digit;
+// * a numeral [-]?(.[0-9]+ | [0-9]+(.[0-9]*)? );
+// * any double-quoted string ("...") possibly containing escaped quotes ('")1;
+// * an <A NAME=html>HTML string</a> (<...>).
+//
+// Current problems of the parser:
+// * parsing of HTML/XML tags not completely implemented
+// * use of non ascii identifiers can cause parser errors
 
-
-    // grammar definition of the DOT language as specified by Graphviz DOT language specification,
-    // see below:
-    //   graph      :  [ strict ] (graph | digraph) [ ID ] '{' stmt_list '}'
-    //   stmt_list  :  [ stmt [ ';' ] [ stmt_list ] ]
-    //   stmt       :  node_stmt
-    //              |  edge_stmt
-    //              |  attr_stmt
-    //              |  ID '=' ID
-    //              |  subgraph
-    //   attr_stmt  :  (graph | node | edge) attr_list
-    //   attr_list  :  '[' [ a_list ] ']' [ attr_list ]
-    //   a_list     :  ID [ '=' ID ] [ ',' ] [ a_list ]
-    //   edge_stmt  :  (node_id | subgraph) edgeRHS [ attr_list ]
-    //   edgeRHS    :  edgeop (node_id | subgraph) [ edgeRHS ]
-    //   node_stmt  :  node_id [ attr_list ]
-    //   node_id    :  ID [ port ]
-    //   port       :  ':' ID [ ':' compass_pt ]
-    //              |  ':' compass_pt
-    //   subgraph   :  [ subgraph [ ID ] ] '{' stmt_list '}'
-    //   compass_pt :  (n | ne | e | se | s | sw | w | nw | c | _)
-    //
-    // Further specifications for keywords and identifier available in DOT documentation.
-    // Usually available under: /usr/share/doc/graphviz/html/info/lang.html
-
-    // An ID is one of the following:
-    // Any string of alphabetic ([a-zA-Z'200-'377]) characters, underscores ('_') or digits ([0-9]), not beginning with a digit;
-    // a numeral [-]?(.[0-9]+ | [0-9]+(.[0-9]*)? );
-    // any double-quoted string ("...") possibly containing escaped quotes ('")1;
-    // an <A NAME=html>HTML string</a> (<...>).
+namespace DotParser {
 
 using boost::phoenix::ref;
+using boost::phoenix::push_back;
+using boost::spirit::standard::alpha;
+using boost::spirit::standard::digit;
+using boost::spirit::standard::string;
+using boost::spirit::standard::space;
 using boost::spirit::qi::_1;
 using boost::spirit::qi::_val;
-using boost::spirit::repository::confix;
+using boost::spirit::qi::char_;
+using boost::spirit::qi::int_;
+using boost::spirit::qi::phrase_parse;
+using boost::spirit::qi::standard::space_type;
+using boost::spirit::repository::qi::confix;
 
-template <typename Iterator, typename Skipper = spirit::standard::space_type>
+typedef BOOST_TYPEOF(SKIPPER) skipper_type;
+
+DotGraphParsingHelper* phelper = 0;
+
+template <typename Iterator, typename Skipper = space_type>
 struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
     DotGrammar() : DotGrammar::base_type(graph) {
@@ -165,9 +176,9 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                     | subgraph
                 );
 
-        attr_stmt = ( (distinct::keyword["graph"][phoenix::ref(phelper->attributed)="graph"] >> attr_list[&setAttributedList])[&setDataStructureAttributes]
-                    | (distinct::keyword["node"][phoenix::ref(phelper->attributed)="node"] >> attr_list[&setAttributedList])
-                    | (distinct::keyword["edge"][phoenix::ref(phelper->attributed)="edge"] >> attr_list[&setAttributedList])
+        attr_stmt = ( (distinct::keyword["graph"][ref(phelper->attributed)="graph"] >> attr_list[&setAttributedList])[&setDataStructureAttributes]
+                    | (distinct::keyword["node"][ref(phelper->attributed)="node"] >> attr_list[&setAttributedList])
+                    | (distinct::keyword["edge"][ref(phelper->attributed)="edge"] >> attr_list[&setAttributedList])
                     );
 
         attr_list = '[' >> -a_list >>']';
@@ -176,14 +187,14 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                  >> -qi::char_(',') >> -a_list;
 
         edge_stmt = (
-                        (node_id[&edgebound] | subgraph) >> edgeRHS >> -(attr_list[phoenix::ref(phelper->attributed)="edge"])
+                        (node_id[&edgebound] | subgraph) >> edgeRHS >> -(attr_list[ref(phelper->attributed)="edge"])
                     )[&pushAttrList][&setAttributedList][&createPointers][&popAttrList];
 
         edgeRHS = edgeop[&checkedgeop] >> (node_id[&edgebound] | subgraph) >> -edgeRHS;
 
         node_stmt  = (
                          node_id[&createData] >> -attr_list
-                     )[phoenix::ref(phelper->attributed)="node"][&pushAttrList][&setAttributedList][&setDataAttributes][&popAttrList];
+                     )[ref(phelper->attributed)="node"][&pushAttrList][&setAttributedList][&setDataAttributes][&popAttrList];
 
         node_id = ID >> -port;
 
@@ -199,13 +210,13 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                     | distinct::keyword["se"] | distinct::keyword["s"] | distinct::keyword["sw"]
                     | distinct::keyword["w"] | distinct::keyword["nw"]);
 
-        edgeop = spirit::standard::string("->") | spirit::standard::string("--");
+        edgeop = string("->") | string("--");
 
         ID = qi::lexeme[
-                 ((spirit::standard::alpha|'_') >> *(spirit::standard::alpha|spirit::standard::digit|'_'))
-                 | (-qi::char_('-') >> ('.' >> +spirit::standard::digit) | (+spirit::standard::digit >> -('.' >> *spirit::standard::digit)))
-                 | ('"' >>  *(qi::char_ - '"') >>  '"')
-                 | ('<' >>  *(qi::char_ - '>')  >>  '>') //TODO xml parser does not parse interlaced tags
+                 ((alpha|'_') >> *(alpha|digit|'_'))
+                 | (-qi::char_('-') >> ('.' >> +digit) | (+digit >> -('.' >> *digit)))
+                 | ('"' >>  *(char_ - '"') >>  '"')
+                 | ('<' >>  *(char_ - '>')  >>  '>') //TODO xml parser does not parse interlaced tags
              ];
     }
 
@@ -238,7 +249,7 @@ void leaveSubDataStructure()
 
 void setStrict()
 {
-    kDebug() << "Graphviz \"strict\" keyword is not implemented.";
+    kWarning() << "Graphviz \"strict\" keyword is not implemented.";
 }
 
 
@@ -367,7 +378,6 @@ void createData(const std::string& str)
     if (!phelper || str.length()==0) {
         return;
     }
-    kDebug() << "create data: " << QString::fromStdString(str);
     if (id.size() > 0 && id[0] == '"') {
         id = id.substr(1);
     }
@@ -432,9 +442,12 @@ void edgebound(const std::string& str)
         return;
     }
     std::string id(str);
-    kDebug() << "edgebound: " << QString::fromStdString(id);
-    if (id.size() > 0 && id[0] == '"') id = id.substr(1);
-    if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
+    if (id.size() > 0 && id[0] == '"') {
+        id = id.substr(1);
+    }
+    if (id.size() > 0 && id[id.size() - 1] == '"') {
+        id = id.substr(0, id.size() - 1);
+    }
     phelper->addEdgeBound(QString::fromStdString(id));
 }
 
@@ -448,13 +461,6 @@ void createPointers()
 
 bool parseIntegers(const std::string& str, std::vector<int>& v)
 {
-    using boost::spirit::qi::int_;
-    using boost::spirit::qi::phrase_parse;
-    using boost::spirit::qi::_1;
-    using boost::spirit::standard::space;
-    using boost::phoenix::push_back;
-    using boost::phoenix::ref;
-
     return phrase_parse(str.begin(), str.end(),
         //  Begin grammar
         (
@@ -472,15 +478,11 @@ bool parse(const std::string& str, Document * graphDoc)
     phelper = new DotGraphParsingHelper;
     phelper->gd = graphDoc;
 
-    using boost::spirit::qi::_1;
-    using boost::spirit::standard::space;
-    using boost::phoenix::ref;
-
     std::string input(str);
     std::string::iterator iter = input.begin();
     DotGrammar<std::string::iterator, skipper_type> r;
 
-    if (boost::spirit::qi::phrase_parse(iter, input.end(), r, SKIPPER)) {
+    if (phrase_parse(iter, input.end(), r, SKIPPER)) {
         // TODO for now (without proper visualization of groups) set them invisible
         if (phelper->gd->dataStructures().length() > 0) {
             phelper->gd->dataStructures().at(0)->setDataVisibility(false, phelper->gd->groupType());
@@ -489,9 +491,11 @@ bool parse(const std::string& str, Document * graphDoc)
         return true;
     } else {
         kWarning() << "Dot file parsing failed. Unable to parse:";
-        kWarning() << "///// FILE CONTENT BEGIN /////";
-        kWarning() << QString::fromStdString(std::string(iter, input.end()));
-        kWarning() << "///// FILE CONTENT END /////";
+        kDebug() << "///// FILE CONTENT BEGIN /////";
+        kDebug() << QString::fromStdString(std::string(iter, input.end()));
+        kDebug() << "///// FILE CONTENT END /////";
     }
     return false;
+}
+
 }

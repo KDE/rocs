@@ -54,14 +54,14 @@ void DotFileFormatTest::init()
 void DotFileFormatTest::simpleGraphParsing()
 {
     Document doc("testSimple");
-    QVERIFY(parse(simple, &doc));
+    QVERIFY(DotParser::parse(simple, &doc));
 }
 
 
 void DotFileFormatTest::parseSubgraphs()
 {
     Document doc("testSubgraphs");
-    QVERIFY(parse(subgraph, &doc));
+    QVERIFY(DotParser::parse(subgraph, &doc));
 }
 
 

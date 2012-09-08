@@ -44,7 +44,7 @@
 class Document;
 
 using namespace boost::spirit;
-
+namespace DotParser {
 /**
  * Parse the given string \p str that represents the textual respresentation of a
  * graph in DOT/Graphviz format. The given document \p graphDoc must
@@ -77,6 +77,7 @@ void edgebound(const std::string& str);
 void createPointers();
 void leaveSubDataStructure();
 
+}
 #endif
 
 

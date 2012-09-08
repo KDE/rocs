@@ -75,7 +75,7 @@ void DotFileFormatPlugin::readFile()
         return;
     }
     QString content = fileHandle.readAll();
-    if (!parse(content.toStdString(), graphDoc)) {
+    if (!DotParser::parse(content.toStdString(), graphDoc)) {
         setError(EncodingProblem, i18n("Could not parse file \"%1\".", file().toLocalFile()));
         delete graphDoc;
         return;
