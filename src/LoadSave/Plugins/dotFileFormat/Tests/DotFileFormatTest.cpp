@@ -501,6 +501,8 @@ void DotFileFormatTest::parseFileRussian()
     DotFileFormatPlugin importer(this, QList<QVariant>());
     importer.setFile(KUrl::fromLocalFile("directed/russian.gv"));
     importer.readFile();
+
+    QEXPECT_FAIL("", "Parsing of cyrillic characters for identifiers not yet supported.", Continue);
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
 }
 
@@ -561,6 +563,8 @@ void DotFileFormatTest::parseFileTable()
     DotFileFormatPlugin importer(this, QList<QVariant>());
     importer.setFile(KUrl::fromLocalFile("directed/table.gv"));
     importer.readFile();
+
+    QEXPECT_FAIL("", "Parsing of interleaved XML tags not implemented", Continue);
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
 }
 

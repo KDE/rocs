@@ -137,7 +137,7 @@ namespace distinct
     // Any string of alphabetic ([a-zA-Z'200-'377]) characters, underscores ('_') or digits ([0-9]), not beginning with a digit;
     // a numeral [-]?(.[0-9]+ | [0-9]+(.[0-9]*)? );
     // any double-quoted string ("...") possibly containing escaped quotes ('")1;
-    // an HTML string (<...>).
+    // an <A NAME=html>HTML string</a> (<...>).
 
 using boost::phoenix::ref;
 using boost::spirit::qi::_1;
@@ -146,9 +146,6 @@ using boost::spirit::repository::confix;
 
 template <typename Iterator, typename Skipper = spirit::standard::space_type>
 struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
-
-//TODO list for grammar
-// * check if keywords node, edge, digraph... are parsed case-independent
 
     DotGrammar() : DotGrammar::base_type(graph) {
 
@@ -202,21 +199,18 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                     | distinct::keyword["se"] | distinct::keyword["s"] | distinct::keyword["sw"]
                     | distinct::keyword["w"] | distinct::keyword["nw"]);
 
-        tag = '<' >>  qi::lexeme[+(qi::char_ - '>')] >>  '>';
-
         edgeop = spirit::standard::string("->") | spirit::standard::string("--");
 
         ID = qi::lexeme[
                  ((spirit::standard::alpha|'_') >> *(spirit::standard::alpha|spirit::standard::digit|'_'))
                  | (-qi::char_('-') >> ('.' >> +spirit::standard::digit) | (+spirit::standard::digit >> -('.' >> *spirit::standard::digit)))
                  | ('"' >>  *(qi::char_ - '"') >>  '"')
-                 | ('<' >>  *(qi::char_ - '>')  >>  '>')            //TODO this is only an elementary tag parser
+                 | ('<' >>  *(qi::char_ - '>')  >>  '>') //TODO xml parser does not parse interlaced tags
              ];
     }
 
     qi::rule<Iterator,                Skipper> graph;
     qi::rule<Iterator, std::string(), Skipper> ID;
-    qi::rule<Iterator, std::string(), Skipper> tag;
     qi::rule<Iterator,                Skipper> stmt_list;
     qi::rule<Iterator,                Skipper> stmt;
     qi::rule<Iterator,                Skipper> attr_stmt;
