@@ -58,7 +58,12 @@ struct DotGraphParsingHelper {
     void setSubDataStructureId(QString identifier);
     void setDataAttributes();
     void setPointerAttributes();
-    void setAttributedList();
+
+    /**
+     * Applies all attributes from the current attributed list to the currently parsed element.
+     * Use this method before removing the attributed list.
+     */
+    void applyAttributedList();
 
     void createPointers();
     void addEdgeBound(QString bound) {

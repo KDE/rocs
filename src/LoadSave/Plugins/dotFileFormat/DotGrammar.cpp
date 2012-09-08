@@ -31,7 +31,6 @@
 #include <boost/spirit/include/qi_string.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include <boost/spirit/repository/include/qi_confix.hpp>
-#include <boost/throw_exception.hpp>
 #include <boost/spirit/include/phoenix_core.hpp>
 #include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/phoenix_stl.hpp>
@@ -44,7 +43,7 @@ using namespace DotParser;
 #define BOOST_SPIRIT_DEBUG 1
 
 // define skipper for spaces, c style comments, and c++ style comments
-#define SKIPPER qi::space | confix("//", eol)[*(char_ - eol)] | confix("/*", "*/")[*(char_ - "*/")]
+#define SKIPPER space | confix("//", eol)[*(char_ - eol)] | confix("/*", "*/")[*(char_ - "*/")]
 
 // create distinct parser for dot keywords
 namespace distinct
@@ -146,8 +145,11 @@ using boost::spirit::standard::space;
 using boost::spirit::qi::_1;
 using boost::spirit::qi::_val;
 using boost::spirit::qi::char_;
+using boost::spirit::qi::eol;
 using boost::spirit::qi::int_;
+using boost::spirit::qi::lexeme;
 using boost::spirit::qi::phrase_parse;
+using boost::spirit::qi::rule;
 using boost::spirit::qi::standard::space_type;
 using boost::spirit::repository::qi::confix;
 
@@ -176,25 +178,25 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                     | subgraph
                 );
 
-        attr_stmt = ( (distinct::keyword["graph"][ref(phelper->attributed)="graph"] >> attr_list[&setAttributedList])[&setDataStructureAttributes]
-                    | (distinct::keyword["node"][ref(phelper->attributed)="node"] >> attr_list[&setAttributedList])
-                    | (distinct::keyword["edge"][ref(phelper->attributed)="edge"] >> attr_list[&setAttributedList])
+        attr_stmt = ( (distinct::keyword["graph"][ref(phelper->attributed)="graph"] >> attr_list[&applyAttributeList])[&setDataStructureAttributes]
+                    | (distinct::keyword["node"][ref(phelper->attributed)="node"] >> attr_list[&applyAttributeList])
+                    | (distinct::keyword["edge"][ref(phelper->attributed)="edge"] >> attr_list[&applyAttributeList])
                     );
 
         attr_list = '[' >> -a_list >>']';
 
-        a_list = (ID[&attributeId] >> -('=' >> ID[&valid]))[&addattr]
-                 >> -qi::char_(',') >> -a_list;
+        a_list = (ID[&attributeId] >> -('=' >> ID[&valid]))[&insertAttributeIntoAttributeList]
+                 >> -char_(',') >> -a_list;
 
         edge_stmt = (
                         (node_id[&edgebound] | subgraph) >> edgeRHS >> -(attr_list[ref(phelper->attributed)="edge"])
-                    )[&pushAttrList][&setAttributedList][&createPointers][&popAttrList];
+                    )[&createAttributeList][&applyAttributeList][&createPointers][&removeAttributeList];
 
-        edgeRHS = edgeop[&checkedgeop] >> (node_id[&edgebound] | subgraph) >> -edgeRHS;
+        edgeRHS = edgeop[&checkEdgeOperator] >> (node_id[&edgebound] | subgraph) >> -edgeRHS;
 
         node_stmt  = (
                          node_id[&createData] >> -attr_list
-                     )[ref(phelper->attributed)="node"][&pushAttrList][&setAttributedList][&setDataAttributes][&popAttrList];
+                     )[ref(phelper->attributed)="node"][&createAttributeList][&applyAttributeList][&setDataAttributes][&removeAttributeList];
 
         node_id = ID >> -port;
 
@@ -202,9 +204,9 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                | (':' >> compass_pt);
 
         subgraph = -(distinct::keyword["subgraph"] >> -ID[&subDataStructureId])
-                   >> char_('{')[&createSubDataStructure][&pushAttrListC]
+                   >> char_('{')[&createSubDataStructure][&createAttributeList]
                    >> stmt_list
-                   >> qi::char_('}')[&leaveSubDataStructure][&popAttrListC];
+                   >> char_('}')[&leaveSubDataStructure][&removeAttributeList];
 
         compass_pt  = (distinct::keyword["n"] | distinct::keyword["ne"] | distinct::keyword["e"]
                     | distinct::keyword["se"] | distinct::keyword["s"] | distinct::keyword["sw"]
@@ -212,31 +214,30 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
         edgeop = string("->") | string("--");
 
-        ID = qi::lexeme[
+        ID = lexeme[
                  ((alpha|'_') >> *(alpha|digit|'_'))
-                 | (-qi::char_('-') >> ('.' >> +digit) | (+digit >> -('.' >> *digit)))
+                 | (-char_('-') >> ('.' >> +digit) | (+digit >> -('.' >> *digit)))
                  | ('"' >>  *(char_ - '"') >>  '"')
                  | ('<' >>  *(char_ - '>')  >>  '>') //TODO xml parser does not parse interlaced tags
              ];
     }
 
-    qi::rule<Iterator,                Skipper> graph;
-    qi::rule<Iterator, std::string(), Skipper> ID;
-    qi::rule<Iterator,                Skipper> stmt_list;
-    qi::rule<Iterator,                Skipper> stmt;
-    qi::rule<Iterator,                Skipper> attr_stmt;
-    qi::rule<Iterator,                Skipper> attr_list;
-    qi::rule<Iterator,                Skipper> a_list;
-    qi::rule<Iterator,                Skipper> edge_stmt;
-    qi::rule<Iterator, std::string(), Skipper> edgeop;
-    qi::rule<Iterator,                Skipper> edgeRHS;
-    qi::rule<Iterator,                Skipper> node_stmt;
-    qi::rule<Iterator, std::string(), Skipper> node_id;
-    qi::rule<Iterator, std::string(), Skipper> port;
-    qi::rule<Iterator,                Skipper> subgraph;
-    qi::rule<Iterator, std::string(), Skipper> compass_pt;
+    rule<Iterator,                Skipper> graph;
+    rule<Iterator, std::string(), Skipper> ID;
+    rule<Iterator,                Skipper> stmt_list;
+    rule<Iterator,                Skipper> stmt;
+    rule<Iterator,                Skipper> attr_stmt;
+    rule<Iterator,                Skipper> attr_list;
+    rule<Iterator,                Skipper> a_list;
+    rule<Iterator,                Skipper> edge_stmt;
+    rule<Iterator, std::string(), Skipper> edgeop;
+    rule<Iterator,                Skipper> edgeRHS;
+    rule<Iterator,                Skipper> node_stmt;
+    rule<Iterator, std::string(), Skipper> node_id;
+    rule<Iterator, std::string(), Skipper> port;
+    rule<Iterator,                Skipper> subgraph;
+    rule<Iterator, std::string(), Skipper> compass_pt;
 };
-
 
 void leaveSubDataStructure()
 {
@@ -246,12 +247,10 @@ void leaveSubDataStructure()
     phelper->leaveSubDataStructure();
 }
 
-
 void setStrict()
 {
     kWarning() << "Graphviz \"strict\" keyword is not implemented.";
 }
-
 
 void undirectedDataStructure()
 {
@@ -263,7 +262,6 @@ void undirectedDataStructure()
     phelper->dataStructure->setDirected(false);
 }
 
-
 void directedDataStructure()
 {
     kDebug() << "Create new data structure of type: Graph directed";
@@ -273,7 +271,6 @@ void directedDataStructure()
     }
     phelper->dataStructure->setDirected(true);
 }
-
 
 void dataStructureId(const std::string& str)
 {
@@ -286,19 +283,22 @@ void dataStructureId(const std::string& str)
     phelper->dataStructure->setName(name);
 }
 
-
 void attributeId(const std::string& str)
 {
     if (!phelper) {
         return;
     }
-    std::string id(str);
-    if (id.size() > 0 && id[0] == '"') id = id.substr(1);
-    if (id.size() > 0 && id[id.size() - 1] == '"') id = id.substr(0, id.size() - 1);
-    phelper->attributeId = QString::fromStdString(id);
-    phelper->valid.clear();;
+    // remove quotation marks
+    QString id = QString::fromStdString(str);
+    if (id.endsWith("\"")) {
+        id.remove(id.length()-1, 1);
+    }
+    if (id.startsWith("\"")) {
+        id.remove(0, 1);
+    }
+    phelper->attributeId = id;
+    phelper->valid.clear();
 }
-
 
 void subDataStructureId(const std::string& str)
 {
@@ -306,14 +306,14 @@ void subDataStructureId(const std::string& str)
         return;
     }
     // remove quotation marks
-    std::string id(str);
-    if (id.size() > 0 && id[0] == '"') {
-        id = id.substr(1);
+    QString id = QString::fromStdString(str);
+    if (id.endsWith("\"")) {
+        id.remove(id.length()-1, 1);
     }
-    if (id.size() > 0 && id[id.size() - 1] == '"') {
-        id = id.substr(0, id.size() - 1);
+    if (id.startsWith("\"")) {
+        id.remove(0, 1);
     }
-    phelper->setSubDataStructureId(QString::fromStdString(id));
+    phelper->setSubDataStructureId(id);
 }
 
 void valid(const std::string& str)
@@ -321,17 +321,18 @@ void valid(const std::string& str)
     if (!phelper) {
         return;
     }
-    std::string id(str);
-    if (id.size() > 0 && id[0] == '"') {
-        id = id.substr(1);
+    // remove quotation marks
+    QString id = QString::fromStdString(str);
+    if (id.endsWith("\"")) {
+        id.remove(id.length()-1, 1);
     }
-    if (id.size() > 0 && id[id.size() - 1] == '"') {
-        id = id.substr(0, id.size() - 1);
+    if (id.startsWith("\"")) {
+        id.remove(0, 1);
     }
-    phelper->valid = QString::fromStdString(id);
+    phelper->valid = id;
 }
 
-void addattr()
+void insertAttributeIntoAttributeList()
 {
     if (!phelper) {
         return;
@@ -339,12 +340,8 @@ void addattr()
     phelper->attributes.insert(phelper->attributeId, phelper->valid);
 }
 
-void pushAttrListC()
-{
-    pushAttrList();
-}
 
-void pushAttrList()
+void createAttributeList()
 {
     if (!phelper) {
         return;
@@ -354,12 +351,7 @@ void pushAttrList()
     phelper->pointersAttributesStack.push_back(phelper->pointersAttributes);
 }
 
-void popAttrListC()
-{
-    popAttrList();
-}
-
-void popAttrList()
+void removeAttributeList()
 {
     if (!phelper) {
         return;
@@ -374,18 +366,19 @@ void popAttrList()
 
 void createData(const std::string& str)
 {
-    std::string id(str);
-    if (!phelper || str.length()==0) {
+    QString id = QString::fromStdString(str);
+    if (!phelper || id.length()==0) {
         return;
     }
-    if (id.size() > 0 && id[0] == '"') {
-        id = id.substr(1);
+    // remove quotation marks
+    if (id.endsWith("\"")) {
+        id.remove(id.length()-1, 1);
     }
-    if (id.size() > 0 && id[id.size() - 1] == '"') {
-        id = id.substr(0, id.size() - 1);
+    if (id.startsWith("\"")) {
+        id.remove(0, 1);
     }
-    if (!phelper->dataMap.contains(QString::fromStdString(id))) {
-        phelper->createData(QString::fromStdString(id));
+    if (!phelper->dataMap.contains(id)) {
+        phelper->createData(id);
     }
 }
 
@@ -413,15 +406,15 @@ void setDataAttributes()
     phelper->setDataAttributes();
 }
 
-void setAttributedList()
+void applyAttributeList()
 {
     if (!phelper) {
         return;
     }
-    phelper->setAttributedList();
+    phelper->applyAttributedList();
 }
 
-void checkedgeop(const std::string& str)
+void checkEdgeOperator(const std::string& str)
 {
     if (!phelper) {
         return;
@@ -433,7 +426,8 @@ void checkedgeop(const std::string& str)
         return;
     }
 
-    kError() << "Error: incoherent relation : directed = '" << phelper->dataStructure->directed() << "' and edge operator = '" << QString::fromStdString(str) << "'" << endl;
+    kError() << "Error: incoherent relation : directed = '" << phelper->dataStructure->directed()
+             << "' and edge operator = '" << QString::fromStdString(str) << "'" << endl;
 }
 
 void edgebound(const std::string& str)
@@ -441,14 +435,15 @@ void edgebound(const std::string& str)
     if (!phelper) {
         return;
     }
-    std::string id(str);
-    if (id.size() > 0 && id[0] == '"') {
-        id = id.substr(1);
+    // remove quotation marks
+    QString id = QString::fromStdString(str);
+    if (id.endsWith("\"")) {
+        id.remove(id.length()-1, 1);
     }
-    if (id.size() > 0 && id[id.size() - 1] == '"') {
-        id = id.substr(0, id.size() - 1);
+    if (id.startsWith("\"")) {
+        id.remove(0, 1);
     }
-    phelper->addEdgeBound(QString::fromStdString(id));
+    phelper->addEdgeBound(id);
 }
 
 void createPointers()

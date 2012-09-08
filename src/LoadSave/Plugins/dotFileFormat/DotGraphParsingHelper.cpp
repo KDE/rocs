@@ -95,7 +95,7 @@ void DotGraphParsingHelper::setPointerAttributes()
     setDataStructureElementAttributes(currentPointerPtr.get(), pointersAttributes);
 }
 
-void DotGraphParsingHelper::setAttributedList()
+void DotGraphParsingHelper::applyAttributedList()
 {
     if (attributed == "graph") {
         if (attributes.find("bb") != attributes.end()) {
