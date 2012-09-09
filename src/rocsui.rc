@@ -71,6 +71,10 @@
                 <ActionList name="tools_plugins" />
             </Menu>
         </Menu>
+        <Menu name="help">
+            <text>Help</text>
+            <Action name="loaded-plugins" />
+        </Menu>
     </MenuBar>
 
     <ToolBar name="main" >

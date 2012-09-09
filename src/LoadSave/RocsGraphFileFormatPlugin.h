@@ -116,7 +116,7 @@ class RocsGraphFileFormatPlugin: public GraphFilePluginInterface
 {
     Q_OBJECT
 public:
-    explicit RocsGraphFileFormatPlugin(QObject* parent, const QList< QVariant >&);
+    explicit RocsGraphFileFormatPlugin(QObject* parent);
     ~RocsGraphFileFormatPlugin();
 
     /**

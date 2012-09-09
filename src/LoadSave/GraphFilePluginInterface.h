@@ -23,6 +23,7 @@
 #include <QObject>
 #include "rocslib_export.h"
 
+class KAboutData;
 class KUrl;
 class Document;
 class GraphFilePluginInterfacePrivate;
@@ -51,7 +52,7 @@ public:
         ImportAndExport
     };
 
-    GraphFilePluginInterface(const KComponentData &instance, QObject* parent);
+    GraphFilePluginInterface(const KAboutData* aboutData, QObject* parent);
     virtual ~GraphFilePluginInterface();
 
     void setFile(const KUrl& file);
@@ -78,6 +79,11 @@ public:
      * Return explenation of last error in human readable text.
      */
     QString errorString() const;
+
+    /**
+     * Returns about data of the plugin, \see KAboutData.
+     */
+    const KAboutData* aboutData() const;
 
     /**
      * File extensions that are common for this file type.

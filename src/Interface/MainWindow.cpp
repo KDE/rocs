@@ -104,10 +104,8 @@
 #include <DataStructurePluginInterface.h>
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
-
-
-
 #include "PossibleIncludes.h"
+#include "LoadedPluginsDialog.h"
 #include <PropertiesDialogAction.h>
 
 
@@ -419,6 +417,7 @@ void MainWindow::setupActions()
     createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importScript()),   this);
     createAction("document-save",    i18nc("@action:inmenu", "Save Script"),         "save-script",         SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-save-as", i18nc("@action:inmenu", "Save Script as"),      "save-script-as",      SLOT(saveActiveScriptAs()), _codeEditor);
+    createAction("",  i18nc("@action:inmenu", "Loaded Plugins"),      "loaded-plugins",      SLOT(showLoadedPlugins()), this);
 
     // EDIT actions
     actionCollection()->addAction("delete-selected", new DeleteAction(i18nc("@action:intoolbar", "Delete"), _graphVisualEditor->scene(), 0));
@@ -1052,6 +1051,13 @@ void MainWindow::exportProject()
 void MainWindow::showPossibleIncludes()
 {
     PossibleIncludes dialog(this);
+    dialog.exec();
+}
+
+
+void MainWindow::showLoadedPlugins()
+{
+    LoadedPluginsDialog dialog(this);
     dialog.exec();
 }
 

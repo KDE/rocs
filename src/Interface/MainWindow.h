@@ -106,6 +106,8 @@ private slots:
 
     void showPossibleIncludes();
 
+    void showLoadedPlugins();
+
     /**
      * execute the given script and print results
      * \param text string that will be printed at result shell

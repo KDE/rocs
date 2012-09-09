@@ -50,7 +50,7 @@ DotFileFormatPlugin::~DotFileFormatPlugin()
 }
 
 DotFileFormatPlugin::DotFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePluginFactory::componentData(), parent)
+    GraphFilePluginInterface(FilePluginFactory::componentData().aboutData(), parent)
 {
 }
 

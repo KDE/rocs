@@ -38,7 +38,7 @@ K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
 
 
 TgfFileFormatPlugin::TgfFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePluginFactory::componentData(), parent)
+    GraphFilePluginInterface(FilePluginFactory::componentData().aboutData(), parent)
 {
 
 }

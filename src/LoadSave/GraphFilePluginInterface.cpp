@@ -25,14 +25,18 @@
 #include <Document.h>
 #include <KUrl>
 #include <KDebug>
+#include <KAboutData>
 
 class GraphFilePluginInterfacePrivate
 {
 public:
-    GraphFilePluginInterfacePrivate() {
+    GraphFilePluginInterfacePrivate(const KAboutData* aboutData) :
+        aboutData(aboutData)
+    {
         lastError = GraphFilePluginInterface::None;
     }
 
+    const KAboutData* aboutData;
     GraphFilePluginInterface::Error lastError;
     QString lastErrorString;
     Document* graphDocument;
@@ -40,16 +44,15 @@ public:
 };
 
 
-GraphFilePluginInterface::GraphFilePluginInterface(const KComponentData& /*instance*/, QObject* parent):
+GraphFilePluginInterface::GraphFilePluginInterface(const KAboutData* aboutData, QObject* parent):
     QObject(parent),
-    d(new GraphFilePluginInterfacePrivate)
+    d(new GraphFilePluginInterfacePrivate(aboutData))
 {
 }
 
 
 GraphFilePluginInterface::~GraphFilePluginInterface()
 {
-
 }
 
 
@@ -81,6 +84,12 @@ void GraphFilePluginInterface::setError(GraphFilePluginInterface::Error error, Q
 {
     d->lastError = error;
     d->lastErrorString = message;
+}
+
+
+const KAboutData* GraphFilePluginInterface::aboutData() const
+{
+    return d->aboutData;
 }
 
 

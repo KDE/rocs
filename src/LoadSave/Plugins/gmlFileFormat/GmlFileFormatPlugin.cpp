@@ -46,8 +46,8 @@ GmlFileFormatPlugin::~GmlFileFormatPlugin()
 }
 
 
-GmlFileFormatPlugin::GmlFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
+GmlFileFormatPlugin::GmlFileFormatPlugin(QObject* parent, const QList<QVariant>&) :
+    GraphFilePluginInterface(FilePLuginFactory::componentData().aboutData(), parent)
 {
 }
 

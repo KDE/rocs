@@ -117,7 +117,7 @@ install( TARGETS rocslib  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES ${rocslib_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel )
 
 
-set ( rocs_actions_SRCS
+set( rocs_actions_SRCS
     Actions/AbstractAction.cpp
     Actions/AddConnectionHandAction.cpp
     Actions/AddDataAction.cpp
@@ -147,6 +147,7 @@ set( rocs_interface_SRCS
     Interface/DocumentPropertiesDialog.cpp
     Interface/DataStructurePage.cpp
     Interface/DataTypePage.cpp
+    Interface/LoadedPluginsDialog.cpp
     Interface/PointerTypePage.cpp
     Interface/PointerPropertiesWidget.cpp
     Interface/VisualEditor/GraphScene.cpp

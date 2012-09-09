@@ -126,12 +126,12 @@ void GraphFileBackendManager::loadBackends()
         if (plugin) {
             d->backends.append(plugin);
         } else {
-            kDebug() << "Could not load backend: " << service->name();
+            kWarning() << "Could not load backend: " << service->name();
         }
     }
 
     // load static plugins
-    GraphFilePluginInterface *plugin = new RocsGraphFileFormatPlugin(this, QList<QVariant>());
+    GraphFilePluginInterface *plugin = new RocsGraphFileFormatPlugin(this);
     d->backends.append(plugin);
     d->defaultGraphFilePlugin = plugin;
 

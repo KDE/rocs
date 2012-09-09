@@ -34,10 +34,7 @@
 #include <DataStructurePluginManager.h>
 #include <DataStructurePluginInterface.h>
 
-static const KAboutData aboutdata("rocs_rocsgraphfileformat", 0, ki18n("Open and Save Rocs Graph Files") , "0.1");
-
-K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<RocsGraphFileFormatPlugin>();)
-K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
+static const KAboutData pluginAboutData("rocs_rocsgraphfileformat", 0, ki18n("Open and Save Rocs Graph Files") , "0.2");
 
 
 class RocsGraphFileFormatPluginPrivate
@@ -51,8 +48,8 @@ public:
 };
 
 
-RocsGraphFileFormatPlugin::RocsGraphFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePluginFactory::componentData(), parent)
+RocsGraphFileFormatPlugin::RocsGraphFileFormatPlugin(QObject* parent) :
+    GraphFilePluginInterface(&pluginAboutData, parent)
 {
     d = new RocsGraphFileFormatPluginPrivate;
 }

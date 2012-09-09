@@ -42,7 +42,7 @@ K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
 
 KmlFileFormatPlugin::KmlFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePLuginFactory::componentData(), parent)
+    GraphFilePluginInterface(FilePLuginFactory::componentData().aboutData(), parent)
 {
 }
 

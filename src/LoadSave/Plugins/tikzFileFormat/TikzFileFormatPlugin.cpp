@@ -35,8 +35,8 @@ K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<TikzFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
 
 
-TikzFileFormatPlugin::TikzFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePluginFactory::componentData(), parent)
+TikzFileFormatPlugin::TikzFileFormatPlugin(QObject* parent, const QList<QVariant>&) :
+    GraphFilePluginInterface(FilePluginFactory::componentData().aboutData(), parent)
 {
 
 }
