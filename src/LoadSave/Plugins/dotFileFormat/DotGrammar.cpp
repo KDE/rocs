@@ -287,10 +287,10 @@ void attributeId(const std::string& str)
     }
     // remove quotation marks
     QString id = QString::fromStdString(str);
-    if (id.endsWith("\"")) {
+    if (id.endsWith('"')) {
         id.remove(id.length()-1, 1);
     }
-    if (id.startsWith("\"")) {
+    if (id.startsWith('"')) {
         id.remove(0, 1);
     }
     phelper->attributeId = id;
@@ -304,10 +304,10 @@ void subDataStructureId(const std::string& str)
     }
     // remove quotation marks
     QString id = QString::fromStdString(str);
-    if (id.endsWith("\"")) {
+    if (id.endsWith('"')) {
         id.remove(id.length()-1, 1);
     }
-    if (id.startsWith("\"")) {
+    if (id.startsWith('"')) {
         id.remove(0, 1);
     }
     phelper->setSubDataStructureId(id);
@@ -320,10 +320,10 @@ void valid(const std::string& str)
     }
     // remove quotation marks
     QString id = QString::fromStdString(str);
-    if (id.endsWith("\"")) {
+    if (id.endsWith('"')) {
         id.remove(id.length()-1, 1);
     }
-    if (id.startsWith("\"")) {
+    if (id.startsWith('"')) {
         id.remove(0, 1);
     }
     phelper->valid = id;
@@ -368,10 +368,10 @@ void createData(const std::string& str)
         return;
     }
     // remove quotation marks
-    if (id.endsWith("\"")) {
+    if (id.endsWith('"')) {
         id.remove(id.length()-1, 1);
     }
-    if (id.startsWith("\"")) {
+    if (id.startsWith('"')) {
         id.remove(0, 1);
     }
     if (!phelper->dataMap.contains(id)) {
@@ -434,10 +434,10 @@ void edgebound(const std::string& str)
     }
     // remove quotation marks
     QString id = QString::fromStdString(str);
-    if (id.endsWith("\"")) {
+    if (id.endsWith('"')) {
         id.remove(id.length()-1, 1);
     }
-    if (id.startsWith("\"")) {
+    if (id.startsWith('"')) {
         id.remove(0, 1);
     }
     phelper->addEdgeBound(id);
