@@ -30,8 +30,12 @@
 #include <Modifiers/Topology.h>
 #include <DataStructurePluginManager.h>
 
-
-static const KAboutData aboutdata("rocs_tgffileformat", 0, ki18n("Open and Save Graph Documents in Trivial Graph Format") , "0.1");
+static const KAboutData aboutdata("rocs_tgffileformat",
+                                  0,
+                                  ki18nc("@title Displayed plugin name", "TGF File Backend"),
+                                  "0.1",
+                                  ki18n("Read and write Trivial Graph Format (TGF) files."),
+                                  KAboutData::License_GPL_V2);
 
 K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<TgfFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))

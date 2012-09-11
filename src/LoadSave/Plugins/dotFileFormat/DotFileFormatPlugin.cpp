@@ -36,8 +36,12 @@
 #include "Rocs_Typedefs.h"
 #include <Group.h>
 
-static const KAboutData aboutdata("rocs_dotfileformat", 0, ki18nc("@title Displayed plugin name", "Read and write Graphviz graph documents.") , "0.1");
-
+static const KAboutData aboutdata("rocs_dotfileformat",
+                                  0,
+                                  ki18nc("@title Displayed plugin name", "Graphviz Graph File Backend"),
+                                  "0.1",
+                                  ki18n("Read and write Graphviz graph files."),
+                                  KAboutData::License_GPL_V2);
 
 extern DotParser::DotGraphParsingHelper* phelper;
 

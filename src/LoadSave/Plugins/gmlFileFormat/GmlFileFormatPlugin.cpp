@@ -32,8 +32,12 @@
 
 #include <QFile>
 
-static const KAboutData aboutdata("rocs_gmlfileformat", 0, ki18nc("@title Displayed plugin name", "Open and Save GML files") , "0.1");
-
+static const KAboutData aboutdata("rocs_gmlfileformat",
+                                  0,
+                                  ki18nc("@title Displayed plugin name", "GML File Backend"),
+                                  "0.1",
+                                  ki18n("Read and write Graph Markup Language (GML) files."),
+                                  KAboutData::License_GPL_V2);
 
 extern GmlParser::GmlGraphParsingHelper* phelper;
 

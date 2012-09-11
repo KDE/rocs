@@ -34,8 +34,12 @@
 #include <DataStructurePluginManager.h>
 #include <DataStructurePluginInterface.h>
 
-static const KAboutData pluginAboutData("rocs_rocsgraphfileformat", 0, ki18n("Open and Save Rocs Graph Files") , "0.2");
-
+static const KAboutData pluginAboutData("rocs_rocsgraphfileformat",
+                                        0,
+                                        ki18nc("@title Displayed plugin name", "Rocs Graph File Backend"),
+                                        "0.2",
+                                        ki18n("Read and write Rocs Graph Files"),
+                                        KAboutData::License_GPL_V2);
 
 class RocsGraphFileFormatPluginPrivate
 {

@@ -34,8 +34,12 @@
 #include <QXmlResultItems>
 #include <QXmlNodeModelIndex>
 
-
-static const KAboutData aboutdata("rocs_kmlfileformat", 0, ki18nc("@title Display plugin name", "Open and Save Keyhole Markup Language files") , "0.1");
+static const KAboutData aboutdata("rocs_kmlfileformat",
+                                  0,
+                                  ki18nc("@title Displayed plugin name", "KML File Backend"),
+                                  "0.1",
+                                  ki18n("Read and write Keyhole Markup Language (KML) files."),
+                                  KAboutData::License_GPL_V2);
 
 K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin<KmlFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
