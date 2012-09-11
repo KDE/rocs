@@ -28,13 +28,24 @@ class KUrl;
 class Document;
 class GraphFilePluginInterfacePrivate;
 
-#include <KComponentData>
-
+/**
+ * This class provides an interface for graph file format plugins.
+ * A graph file format plugin must provide implementations of
+ * - writeFile(...)
+ * - readFile()
+ * - extensions()
+ * and optionally, if it is not a read and write plugin, an implementation of
+ * - pluginCapability()
+ * to specify the plugin capabilities.
+ */
 class ROCSLIB_EXPORT GraphFilePluginInterface: public QObject
 {
     Q_OBJECT
 
 public:
+    /**
+     * Describes the last error of the plugin.
+     */
     enum Error {
         None,
         Unknown,
@@ -46,90 +57,125 @@ public:
         NotSupportedOperation
     };
 
+    /**
+     * Describes the capability of the plugin, i.e., if the plugin can be used
+     * to read and/or write files.
+     */
     enum PluginType {
         ImportOnly,
         ExportOnly,
         ImportAndExport
     };
 
+    /**
+     * Constructor.
+     *
+     * \param aboutData is description of the plugin
+     * \param parent is the object parent
+     */
     GraphFilePluginInterface(const KAboutData* aboutData, QObject* parent);
     virtual ~GraphFilePluginInterface();
-
-    void setFile(const KUrl& file);
 
     /**
      * Returns \p PluginType to indicate whether the plugin only provides import, only export
      * or both capabilities. This method should be used to determine in which file dialogs
      * the plugin shall be included.
+     *
      * \return is by default PluginType::ImportAndExport
      */
     virtual PluginType pluginCapability() const;
 
     /**
-     * Return true if last read or write operation caused an error.
+     * \return true if last read or write operation caused an error.
      */
     bool hasError() const;
 
     /**
-     * Returns last error
+     * Returns last error. If last operation was successful.
+     * Use \see hasError() to test if error exists.
+     *
+     * \return last Error of the plugin.
      */
     Error error() const;
 
     /**
-     * Return explenation of last error in human readable text.
+     * \return last error as human readable text
      */
     QString errorString() const;
 
     /**
-     * Returns about data of the plugin, \see KAboutData.
+     * \return plugin about data
      */
     const KAboutData* aboutData() const;
 
     /**
      * File extensions that are common for this file type.
+     *
+     * \return extension list
      */
     virtual const QStringList extensions() const = 0;
 
     /**
      * Writes given graph document to formerly specified file \see setFile().
-     * \param graph is graphDocument to be serialized
+     *
+     * \param graph is graph document to be serialized
      */
     virtual void writeFile(Document &graph) = 0;
 
     /**
      * Open given file and imports it into internal format.
-     * \param file is url of a local file
      */
     virtual void readFile() = 0;
 
     /**
-     * Return true if a valid graph document was read. Otherwise return false.
+     * Set file that shall be used for nexte read or write operation.
+     *
+     * \param file is KUrl pointing to local file
+     */
+    void setFile(const KUrl& file);
+
+    /**
+     * \return true if a valid graph document was read. Otherwise return false
      */
     virtual bool isGraphDocument() const;
 
+    /**
+     * If \see isGraphDocument() returns true, this method returns document created by last
+     * \see readFile() call.
+     *
+     * \return the graph document
+     */
     virtual Document* graphDocument() const;
 
 
 protected:
     /**
-     * Return file that is used for write/read.
+     * \internal
+     * Gives current file.
+     *
+     * \return file that is last used for write/read
      */
     const KUrl& file() const;
 
     /**
-     * Set graph document.
+     * \internal
+     * Use this function for read plugins to set read graph document
+     *
+     * \param document that contains the graph
      */
     void setGraphDocument(Document* document);
 
     /**
-     * Set last error.
+     * \internal
+     * Use this function to set or unset the current error of the plugin. To unset an error
+     * use Error::None.
+     *
      * \param error is type of error, \see GraphFilePluginInterface::Error
      * \param message is optional description for error
      */
     void setError(Error error, QString message=QString());
 
 private:
-
     GraphFilePluginInterfacePrivate *d;
 };
 

@@ -22,6 +22,7 @@
 #include <KLocale>
 #include <KAboutData>
 #include <KAboutApplicationDialog>
+#include <KComponentData>
 #include <KWidgetItemDelegate>
 #include <KPushButton>
 #include <KTitleWidget>

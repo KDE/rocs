@@ -33,12 +33,13 @@ class KPluginInfo;
  * on first access to \see GraphFileBackendMananger::self() and provides access to these backends
  * as \see GraphFilePluginInterface objects.
  */
-
 class ROCSLIB_EXPORT GraphFileBackendManager: public QObject
 {
     Q_OBJECT
-
 public:
+    /**
+     * Selector for graph file backend with specific capability.
+     */
     enum PluginType {
         Import,
         Export
@@ -47,12 +48,14 @@ public:
     /**
      * Returns self reference to backend manager. First call of this method initializes
      * file backend manager and loads plugins.
+     *
      * \return self reference
      */
     static GraphFileBackendManager * self();
 
     /**
      * Returns list of loaded backends. Backends are loaded with first call to \see self().
+     *
      * \return list of plugin interfaces of loaded backends
      */
     QList <GraphFilePluginInterface*> backends() const;
@@ -60,7 +63,8 @@ public:
     /**
      * Returns list of all loaded backends with specified capability (\see PluginType).
      * Backends are loaded with first call to \see self().
-     * \param capability of the plugin
+     *
+     * \param type specifies capability of the plugin
      * \return list of plugin interfaces of loaded backends
      */
     QList <GraphFilePluginInterface*> backends(PluginType type) const;
@@ -68,22 +72,36 @@ public:
     /**
      * Returns an arbitrary loaded plugin that can handle extension \p ext. If no backend specifies
      * this extension, return value is 0.
+     *
+     * \param ext specifies the extension string
      * \return backend to handle files with specified extension or 0 otherwise
-    */
+     */
     GraphFilePluginInterface* backendByExtension(QString ext);
 
     /**
      * Returns the default backend used for serialization/loading of graph files. Use this if
      * the graph document shall be serialized in the default format.
+     *
      * \return plugin interface for the graph file backend
      */
     GraphFilePluginInterface* defaultBackend();
 
 private:
+    /**
+     * \internal
+     * Clears list of backends and reloads them from dynamic service trader.
+     */
     void loadBackends();
 
+    /**
+     * \internal
+     * Private constructor, \see self().
+     */
     GraphFileBackendManager();
 
+    /**
+     * Desctructor.
+     */
     ~GraphFileBackendManager();
 
     static GraphFileBackendManager * instance;

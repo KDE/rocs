@@ -68,6 +68,7 @@ GraphFileBackendManager::~GraphFileBackendManager()
     delete d;
 }
 
+
 QList<GraphFilePluginInterface*> GraphFileBackendManager::backends() const
 {
     return d->backends;
@@ -134,8 +135,6 @@ void GraphFileBackendManager::loadBackends()
     GraphFilePluginInterface *plugin = new RocsGraphFileFormatPlugin(this);
     d->backends.append(plugin);
     d->defaultGraphFilePlugin = plugin;
-
-    kDebug() << d->backends.count() << " backends loaded";
 }
 
 
