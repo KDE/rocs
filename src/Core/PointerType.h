@@ -20,8 +20,6 @@
 #ifndef POINTERTYPE_H
 #define POINTERTYPE_H
 
-#include <QObject>
-#include <QtScript>
 #include <QString>
 #include <QColor>
 
@@ -36,34 +34,76 @@ class Document;
 /**
 * \class PointerType
 *
-* This class descibes a pointer types.
+* A pointer type groups a set of pointers and gives them a common appearance. Each pointer type is
+* associated to a document and must get an unique identifier on creation. To create a pointer type,
+* use the static \see create(document, identifier) method.
 */
-
-
 class ROCSLIB_EXPORT PointerType : public QObject
 {
     Q_OBJECT
-
 public:
+    /**
+     * Create pointer type objects.
+     *
+     * \param document is graph document for that the pointer type is created
+     * \param identifier is unique identifier of the pointer type within the document
+     * \return the created pointer type
+     */
     static PointerTypePtr create(Document* parent, int identifier);
+
+    /**
+     * Destructor.
+     */
     ~PointerType();
 
+    /**
+     * \return name of pointer type
+     */
     const QString& name() const;
+
+    /**
+     * \return unique identifier of pointer type
+     */
     int identifier() const;
-    QColor defaultColor() const;
+
+    /**
+     * \return default color for data elements of this pointer type
+     */
+    const QColor& defaultColor() const;
 
 public slots:
+    /**
+     * Set name of the pointer type.
+     *
+     * \param name of the pointer type
+     */
     void setName(QString name);
+
+    /**
+     * Set default color value for this pointer type.
+     *
+     * \param color is the default color to be set
+     */
     void setDefaultColor(QColor color);
 
 signals:
+    /**
+     * Emitted when name was changed.
+     */
     void nameChanged(const QString& name);
+
+    /**
+     * Emitted when default color was changed.
+     */
     void colorChanged(const QColor& color);
 
 protected:
-    /** Default constructor. To create PointerType elements use \see PointerType::create(...).
-     *\param parent is the parent DataStructure
-     *\param identifier is the unique identifier for this type
+    /**
+     * \internal
+     * Default constructor. To create PointerType elements use \see PointerType::create(...).
+     *
+     * \param document is graph document for that the pointer type is created
+     * \param identifier is unique identifier of the pointer type within the document
      */
     PointerType(Document* document, int identifier);
 

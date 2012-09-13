@@ -67,6 +67,7 @@ DataType::~DataType()
 {
 }
 
+
 int DataType::identifier() const
 {
     return d->_identifier;
@@ -78,6 +79,7 @@ void DataType::setName(QString name)
     d->_name = name;
     emit nameChanged(d->_name);
 }
+
 
 const QString& DataType::name() const
 {
@@ -124,7 +126,7 @@ KIcon DataType::icon() const
 }
 
 
-QString DataType::iconName() const
+const QString& DataType::iconName() const
 {
     return d->_icon;
 }
@@ -137,7 +139,7 @@ void DataType::setDefaultColor(QColor color)
 }
 
 
-QColor DataType::defaultColor() const
+const QColor& DataType::defaultColor() const
 {
     return d->_defaultColor;
 }

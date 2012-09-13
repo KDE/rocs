@@ -20,8 +20,6 @@
 #ifndef DATATYPE_H
 #define DATATYPE_H
 
-#include <QObject>
-#include <QtScript>
 #include <QString>
 #include <QColor>
 #include <KIcon>
@@ -37,49 +35,106 @@ class Document;
 /**
 * \class DataType
 *
-* This class describes data type elements.
+* A data type groups a set of data elements and gives them a common appearance. Each data type is
+* associated to a document and must get an unique identifier on creation. To create a data type,
+* use the static \see create(document, identifier) method.
 */
-
-
 class ROCSLIB_EXPORT DataType : public QObject
 {
     Q_OBJECT
-
 public:
+    /**
+     * Create data type objects.
+     *
+     * \param document is graph document for that the data type is created
+     * \param identifier is unique identifier of the data type within the document
+     * \return the created data type
+     */
     static DataTypePtr create(Document* document, int identifier);
+
+    /**
+     * Destructor.
+     */
     ~DataType();
 
+    /**
+     * \return name of data type
+     */
     const QString& name() const;
-    QString iconName() const;
+
+    /**
+     * \return data type icon identifier for iconPackage
+     */
+    const QString& iconName() const;
 
     /**
      * Generates KIcon for data type at run time. This icon is not cached.
+     *
      * \return icon according to current iconPackage and iconName
      */
     KIcon icon() const;
+
+    /**
+     * \return unique identifier of data type
+     */
     int identifier() const;
-    QColor defaultColor() const;
+
+    /**
+     * \return default color for data elements of this data type
+     */
+    const QColor& defaultColor() const;
 
 public slots:
+    /**
+     * Set name of the data type.
+     *
+     * \param name of the data type
+     */
     void setName(QString name);
 
     /**
      * Set icon of data elements of this type.
-     * "rocs_" prefix of icons must be removed before setting this.
+     * "rocs_" prefix of icon identifier must be removed before setting this.
+     *
+     * \param icon identifier in current icon package
      */
     void setIcon(QString icon);
+
+    /**
+     * Set default color value for this data type.
+     *
+     * \param color is the default color to be set
+     */
     void setDefaultColor(QColor color);
+
+    /**
+     * Unregister data type from graph document.
+     */
     void remove();
 
 signals:
+    /**
+     * Emitted when default color was changed.
+     */
     void defaultColorChanged(QColor color);
+
+    /**
+     * Emitted when icon was changed.
+     */
     void iconChanged(const QString& icon);
+
+    /**
+     * Emitted when name was changed.
+     */
     void nameChanged(const QString& name);
 
 protected:
-    /** Default constructor. To create DataType elements use \see DataType::create(...).
-     *\param parent is the parent Document
-     *\param identifier is the unique identifier for this type
+    /**
+     * \internal
+     * Default constructor. To create DataType elements use \see DataType::create(...).
+     *
+     * \param document is graph document for that the data type is created
+     * \param identifier is unique identifier of the data type within the document
      */
     DataType(Document* document, int identifier);
 

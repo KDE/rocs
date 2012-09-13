@@ -86,7 +86,7 @@ void PointerType::setDefaultColor(QColor color)
 }
 
 
-QColor PointerType::defaultColor() const
+const QColor& PointerType::defaultColor() const
 {
     return d->_defaultColor;
 }
