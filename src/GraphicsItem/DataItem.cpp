@@ -18,19 +18,17 @@
 */
 
 #include "DataItem.h"
-#include <kstandarddirs.h>
-#include <QDir>
-#include <KGlobal>
-#include <KDebug>
-#include <QGraphicsColorizeEffect>
-#include <QFont>
-#include <QGraphicsScene>
-#include <KLocale>
+
 #include "Data.h"
-#include "Interface/ConfigureDefaultProperties.h"
-#include <DocumentManager.h>
-#include <DataStructure.h>
+#include "DataStructure.h"
 #include "GraphicsLayout.h"
+#include "Interface/ConfigureDefaultProperties.h"
+
+#include <KDebug>
+#include <QFont>
+#include <QGraphicsColorizeEffect>
+#include <QGraphicsScene>
+#include <QSvgRenderer>
 
 QMap<QString, QSvgRenderer*> DataItem::_sharedRenderers;
 
@@ -139,7 +137,7 @@ void DataItem::updateSize()
 
 void DataItem::updateRenderer()
 {
-    QString iconPackage = _data->iconPackage();
+    QString iconPackage = _data->dataStructure()->document()->iconPackage();
     if (_sharedRenderers.count(iconPackage) == 0 || !_sharedRenderers.contains(iconPackage)) {
         QSvgRenderer *z = new QSvgRenderer(iconPackage);
         _sharedRenderers.insert(iconPackage, z);
@@ -162,8 +160,8 @@ void DataItem::updateVisibility(bool visible)
 {
     if (visible == true) {
         this->show();
-        _name->setVisible(_data->showName());
-        _value->setVisible(_data->showValue());
+        _name->setVisible(_data->isNameVisible());
+        _value->setVisible(_data->isValueVisible());
     } else {
         this->hide();
         _value->setVisible(false);
@@ -175,7 +173,7 @@ void DataItem::updateVisibility(bool visible)
 void DataItem::updateColor()
 {
     QColor c(_data->color().value<QColor>());
-    if (!_data->useColor()) {
+    if (!_data->isColored()) {
         delete _colorizer;
         setGraphicsEffect(0);
         _name->setBrush(QBrush(Qt::black));
@@ -218,7 +216,7 @@ void DataItem::updateName()
                             : (style == ConfigureDefaultProperties::BELOW) ? 25 + (dataWidth / 2)
                             : 0);
 
-    _name->setVisible(_data->showName());
+    _name->setVisible(_data->isNameVisible());
 
     if (_value && _value->isVisible()) {
         y += ((style == ConfigureDefaultProperties::ABOVE) ? -20 :  20);
@@ -267,5 +265,5 @@ void DataItem::updateValue()
     }
 
     _value->setPos(x, y);
-    _value->setVisible(_data->showValue());
+    _value->setVisible(_data->isValueVisible());
 }

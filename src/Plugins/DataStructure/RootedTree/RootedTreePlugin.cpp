@@ -109,10 +109,10 @@ bool RootedTreePlugin::canConvertFrom(Document* doc) const
             queue.enqueue(p);
             while (!queue.isEmpty()){
                 DataPtr c = queue.dequeue();
-                foreach ( DataPtr n, c->adjacent_data()){
+                foreach ( DataPtr n, c->adjacentDataList()){
                     if (visited.contains(n.get())){
                         if (!cycles.contains(n.get())){
-                            errors << i18n("There are cycles at node %1. Data will be lost by conversion.", n->showName());
+                            errors << i18n("There are cycles at node %1. Data will be lost by conversion.", n->isNameVisible());
                             cycles.insert(n.get());
                         }
                     }else{

@@ -318,12 +318,6 @@ void Rocs::GraphStructure::setGraphType(int type)
     switch (_type) {
     case UNDIRECTED:
         foreach(DataPtr data, dataList()) {
-            // Clear the 'self pointers', undirecetd graphs doesn't have self nodes.
-            foreach(PointerPtr p, data->self_pointers()) {
-                p->remove();
-            }
-            data->self_pointers().clear();
-
             // Clear the rest. there should be only one edge between two nodes.
             foreach(DataPtr data2, dataList()) {
                 if (data == data2) {
@@ -331,25 +325,25 @@ void Rocs::GraphStructure::setGraphType(int type)
                 }
 
                 bool foundOne = false;
-                foreach(PointerPtr tmp, data->out_pointers()) {
+                foreach(PointerPtr tmp, data->outPointerList()) {
                     if (tmp->to() == data2) {
                         if (!foundOne) {
                             foundOne = true;
                         } else {
-                            data->out_pointers().removeOne(tmp);
-                            data2->in_pointers().removeOne(tmp);
+                            data->outPointerList().removeOne(tmp);
+                            data2->inPointerList().removeOne(tmp);
                             tmp->remove();
                         }
                     }
                 }
 
-                foreach(PointerPtr tmp, data->in_pointers()) {
+                foreach(PointerPtr tmp, data->inPointerList()) {
                     if (tmp->from() == data2) {
                         if (!foundOne) {
                             foundOne = true;
                         } else {
-                            data->in_pointers().removeOne(tmp);
-                            data2->out_pointers().removeOne(tmp);
+                            data->inPointerList().removeOne(tmp);
+                            data2->outPointerList().removeOne(tmp);
                             tmp->remove();
                         }
                     }
@@ -358,17 +352,6 @@ void Rocs::GraphStructure::setGraphType(int type)
         } break;
     case DIRECTED:
         foreach(DataPtr data, dataList()) {
-            // Just One self pointer allowed.
-            bool foundSelfEdge = false;
-            foreach(PointerPtr p, data->self_pointers()) {
-                if (!foundSelfEdge) {
-                    foundSelfEdge = true;
-                } else {
-                    data->self_pointers().removeOne(p);
-                    p->remove();
-                }
-            }
-
             // Just one going in, and one going out.
             foreach(DataPtr data2, dataList()) {
                 if (data == data2) {
@@ -376,26 +359,26 @@ void Rocs::GraphStructure::setGraphType(int type)
                 }
 
                 bool foundOneOut = false;
-                foreach(PointerPtr tmp, data->out_pointers()) {
+                foreach(PointerPtr tmp, data->outPointerList()) {
                     if (tmp->to() == data2) {
                         if (!foundOneOut) {
                             foundOneOut = true;
                         } else {
-                            data->out_pointers().removeOne(tmp);
-                            data2->in_pointers().removeOne(tmp);
+                            data->outPointerList().removeOne(tmp);
+                            data2->inPointerList().removeOne(tmp);
                             tmp->remove();
                         }
                     }
                 }
 
                 bool foundOneIn = false;
-                foreach(PointerPtr tmp, data->in_pointers()) {
+                foreach(PointerPtr tmp, data->inPointerList()) {
                     if (tmp->from() == data2) {
                         if (!foundOneIn) {
                             foundOneIn = true;
                         } else {
-                            data->in_pointers().removeOne(tmp);
-                            data2->out_pointers().removeOne(tmp);
+                            data->inPointerList().removeOne(tmp);
+                            data2->outPointerList().removeOne(tmp);
                             tmp->remove();
                         }
                     }
@@ -453,7 +436,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
 {
     if (_type == UNDIRECTED) {
         // do not add back-edges if graph is undirected
-        foreach(PointerPtr pointer, from->pointers(to)) {
+        foreach(PointerPtr pointer, from->pointerList(to)) {
             if (pointer->pointerType() == pointerType) {
                 return PointerPtr();
             }
@@ -461,14 +444,11 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
     }
 
     if (_type == DIRECTED || _type == UNDIRECTED) {     // do not add double edges
-        PointerList list = from->out_pointers();
+        PointerList list = from->outPointerList();
         foreach(PointerPtr tmp, list) {
             if (tmp->to() == to && tmp->pointerType() == pointerType) {
                 return PointerPtr();
             }
-        }
-        if (from->self_pointers().size() >= 1) {
-            return PointerPtr();
         }
     }
 

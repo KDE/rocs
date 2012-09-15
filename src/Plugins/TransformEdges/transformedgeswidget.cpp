@@ -200,9 +200,9 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
 
             PointerList out;
             if (graphDS->directed())
-                out = vertices[i]->out_pointers();
+                out = vertices[i]->outPointerList();
             else
-                out = vertices[i]->adjacent_pointers();
+                out = vertices[i]->pointerList();
 
             for (int k = 0; k < out.size(); k++) {
                 if (out[k]->to() == vertices[j]) {

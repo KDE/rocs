@@ -32,7 +32,6 @@
 #include <QColor>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
 
 class DataItem;
 class Pointer;
@@ -51,76 +50,181 @@ class  ROCSLIB_EXPORT Data : public QObject
     Q_PROPERTY(int id READ identifier)
     Q_PROPERTY(QVariant color READ color WRITE setColor)
     Q_PROPERTY(QVariant value READ value WRITE setValue)
-    Q_PROPERTY(bool useColor READ useColor WRITE setUseColor)
 
 public:
-    virtual ~Data();
-    enum ListType {In, Out, Self};
+    /**
+     * Create data element objects.
+     *
+     * \param dataStructure is data structure to that the new data element belongs
+     * \param uniqueIdentifier is unique identifier of the data element, it must be unique within the document
+     * \param dataType is the type of the created data element, it must be existing and registered
+     * \return the created data element
+     */
+    static DataPtr create(DataStructurePtr dataStructure, int uniqueIdentifier, int dataType);
 
-    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
-
-    template<typename T>
-    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
-        DataPtr pi(new T(parent, uniqueIdentifier, dataType));
-        pi->setQpointer(pi);
-        return pi;
-    }
-
+    /**
+     * \return shared pointer to this data element
+     */
     virtual DataPtr getData() const;
 
-    void addInPointer(PointerPtr e);
-    void addOutPointer(PointerPtr e);
-    void addSelfPointer(PointerPtr e);
-    void removePointer(PointerPtr e, int pointerList = -1);
-    void removePointer(PointerPtr e, PointerList &list);
-    void remove();
+    /**
+     * Destructor.
+     */
+    virtual ~Data();
 
-    bool showName();
-    bool showValue();
+    /**
+     * Create new pointer to \p to. By using this method, the pointer gets registered at both of
+     * its end-points. This method should be used to create new pointers.
+     *
+     * \param to is the target of the new pointer
+     * \return the created pointer
+     */
+    PointerPtr addPointer(DataPtr to);
 
+    /**
+     * Add incoming pointer to in-pointer list.
+     *
+     * \param e is pointer to be added
+     */
+    void registerInPointer(PointerPtr e);
+
+    /**
+     * Add out pointer to out-pointer list.
+     *
+     * \param e is pointer to be added
+     */
+    void registerOutPointer(PointerPtr e);
+
+    /**
+     * Remove pointer from pointer list
+     *
+     * \param e is pointer to be removed
+     */
+    void removePointer(PointerPtr e);
+
+    /**
+     * \return data structure to that this data element belongs
+     */
     DataStructurePtr dataStructure() const;
 
+    /**
+     * \return script value representation of this data element
+     */
     QScriptValue scriptValue() const;
-    virtual void setEngine(QScriptEngine *_engine);
-    QScriptValue createScriptArray(PointerList list);
 
-    //getters
+    /**
+     * Set script engine. The engine must be set to access the script value.
+     */
+    virtual void setEngine(QScriptEngine *_engine);
+
+    /**
+     * \return x-position of data element
+     */
     qreal x() const;
+
+    /**
+     * \return y-position of data element
+     */
     qreal y() const;
+
+    /**
+     * \return size of data icon
+     */
     qreal width() const;
+
+    /**
+     * \return color of data element
+     */
     const QVariant color() const;
+
+    /**
+     * \return name of data element
+     */
     const QString& name() const;
+
+    /**
+     * \return value of data element
+     */
     const QVariant value() const;
+
+    /**
+     * \return icon of data element
+     */
     QString icon() const;
-    const QString& iconPackage() const;
-    bool showName() const;
-    bool showValue() const;
+
+    /**
+     * \return true if data name is visible, otherwise false
+     */
+    bool isNameVisible() const;
+
+    /**
+     * \return true if data value is visible, otherwise false
+     */
+    bool isValueVisible() const;
+
+    /**
+     * \return true if data element is visible, otherwise false
+     */
     bool isVisible() const;
-    bool useColor() const;
-    boost::shared_ptr<DataItem> item() const;   //TODO really needed?
+
+    /**
+     * \return true if colored, otherwise false
+     */
+    bool isColored() const;
+
+    /**
+     * \return unique identifier of this data element
+     */
     int identifier() const;
+
+    /**
+     * \return data type of this data element
+     */
     int dataType() const;
 
     /**
-     * Gives a list of adjacent data elements. Each adjacent
-     * data element is contained exactly once in this list.
-     * \return DataList with adjacent data
+     * \return list of adjacent data elements
      */
-    DataList adjacent_data() const;
-    PointerList adjacent_pointers() const;
-    PointerList& in_pointers() const;
-    PointerList& out_pointers() const;
-    PointerList& self_pointers() const;
-    PointerList pointers(DataPtr n) const;
+    DataList adjacentDataList() const;
 
-    PointerPtr addPointer(DataPtr to);
+    /**
+     * \return list of all pointers connected to this data element (in and out pointers)
+     */
+    PointerList pointerList() const;
 
+    /**
+     * \return all pointers that connect this data element with \p to
+     */
+    PointerList pointerList(DataPtr to) const;
+
+    /**
+     * \return list of in-pointers of this data element
+     */
+    PointerList& inPointerList() const;
+
+    /**
+     * \return list of out-pointers of this data element
+     */
+    PointerList& outPointerList() const;
+
+    /**
+     * Add new dynamic property with identifier \p property to this data element and
+     * sets it to \p value.
+     *
+     * \param property is the identifier for the new property
+     * \param value is the value of this new property
+     */
     void addDynamicProperty(QString property, QVariant value);
+
+    /**
+     * Remove dynamic property with identifier \p property from data element.
+     *
+     * \param property is identifier of the property
+     */
     void removeDynamicProperty(QString property);
 
-public  slots:
-    void self_remove();
-
+public slots:
+    void remove();
     void setX(int x);
     void setY(int y);
     void setWidth(double w);
@@ -130,10 +234,9 @@ public  slots:
     void setValue(const QVariant& v);
     void setShowName(bool b);
     void setShowValue(bool b);
-    void setUseColor(bool b = true);
+    void setColored(bool b = true);
     void setVisible(bool visible);
     void setValue(const QString& v);
-    void setDataItem(boost::shared_ptr<DataItem> item);
     void setDataType(int dataType);
 
     QScriptValue type();
@@ -141,20 +244,11 @@ public  slots:
     void add_property(QString name, QString value);
     QScriptValue adj_data();
     QScriptValue adj_pointers();
+    QScriptValue adj_pointers(int pointerType);
     QScriptValue input_pointers();
     QScriptValue output_pointers();
-    QScriptValue loop_pointers();
+    QScriptValue output_pointers(int pointerType);
     QScriptValue connected_pointers(DataPtr n);
-
-protected:
-    Data(DataStructurePtr parent, int uniqueIdentifer, int dataType);
-
-private:
-    boost::shared_ptr<DataPrivate> d;
-    void setQpointer(DataPtr q);
-    Data(Data const &, int uniqueIdentifer, int dataType);
-    Data & operator=(Data const &);
-
 
 signals:
     void removed();
@@ -168,6 +262,37 @@ signals:
     void visibilityChanged(bool visible);
     void useColorChanged(bool b);
     void dataTypeChanged(int dataType);
+
+protected:
+    /**
+     * Protected constructor.
+     */
+    Data(DataStructurePtr dataStructure, int uniqueIdentifer, int dataType);
+
+    /**
+     * Factory method to create a data element of type \p T.
+     */
+    template<typename T>
+    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
+        DataPtr pi(new T(parent, uniqueIdentifier, dataType));
+        pi->setQpointer(pi);
+        return pi;
+    }
+
+private:
+    /**
+     * \internal
+     * d-Pointer.
+     */
+    boost::shared_ptr<DataPrivate> d;
+
+    /**
+     * \internal
+     * Set q-pointer in private data object.
+     */
+    void setQpointer(DataPtr q);
+    Data(Data const &, int uniqueIdentifier, int dataType);
+    Data & operator=(Data const &);
 };
 
 #endif

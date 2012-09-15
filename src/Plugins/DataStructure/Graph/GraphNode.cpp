@@ -52,19 +52,15 @@ QScriptValue GraphNode::adj_edges()
 
 QScriptValue GraphNode::connected_edges(Data* n)
 {
-    if (n == 0)
+    if (n == 0) {
         return QScriptValue();
+    }
     return Data::connected_pointers(n->getData());
 }
 
 QScriptValue GraphNode::input_edges()
 {
     return Data::input_pointers();
-}
-
-QScriptValue GraphNode::loop_edges()
-{
-    return Data::loop_pointers();
 }
 
 QScriptValue GraphNode::output_edges()
@@ -74,24 +70,11 @@ QScriptValue GraphNode::output_edges()
 
 QScriptValue GraphNode::overlay_edges(int overlay)
 {
+    Data::output_pointers();
     boost::shared_ptr<Rocs::GraphStructure> ds = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure());
     if (ds->directed()) {
-        PointerList list;
-        foreach(PointerPtr n, out_pointers()) {
-            if (n->pointerType() != overlay) {
-                continue;
-            }
-            list.append(n);
-        }
-        return createScriptArray(list);
+        return Data::output_pointers(overlay);
     } else {
-        PointerList list;
-        foreach(PointerPtr n, adjacent_pointers()) {
-            if (n->pointerType() != overlay) {
-                continue;
-            }
-            list.append(n);
-        }
-        return createScriptArray(list);
+        return Data::adj_pointers(overlay);
     }
 }

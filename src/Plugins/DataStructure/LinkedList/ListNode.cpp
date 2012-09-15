@@ -54,8 +54,8 @@ void ListNode::pointTo(boost::shared_ptr< ListNode > to)
 
 boost::shared_ptr<ListNode> ListNode::next() const
 {
-    if (out_pointers().count() == 1) {
-        if (boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(out_pointers().at(0)->to())) {
+    if (outPointerList().count() == 1) {
+        if (boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(outPointerList().at(0)->to())) {
             return n;
         }
     }

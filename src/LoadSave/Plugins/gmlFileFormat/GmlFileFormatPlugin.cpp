@@ -159,7 +159,7 @@ QString const GmlFileFormatPlugin::processNode(DataPtr n) const
     node.append(QString(" width %1\n").arg(n->width()));
 //       node.append (QString(" color \"%1\"\n").arg(n->color())); //Problem with comments (both starts by '#')
     node.append(QString(" value \"%1\"\n").arg(n->value().toString()));
-    node.append(QString(" iconPackage \"%1\"\n").arg(n->iconPackage()));
+    node.append(QString(" iconPackage \"%1\"\n").arg(n->dataStructure()->document()->iconPackage()));
     node.append(QString(" icon \"%1\"\n").arg(n->icon()));
 
     foreach(const QByteArray& p, n->dynamicPropertyNames()) {

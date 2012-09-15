@@ -64,7 +64,7 @@ void RootedTreeNode::setNumberOfChilds(const qint32 number)
 DataList RootedTreeNode::children() const
 {
     DataList list;
-    foreach (PointerPtr ptr, out_pointers())
+    foreach (PointerPtr ptr, outPointerList())
         if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge") != -1) {
             list << ptr->to();
         }
@@ -97,7 +97,7 @@ DataPtr RootedTreeNode::leftChild() const
 
 PointerPtr RootedTreeNode::setNodeParent(DataPtr parent) const
 {
-    foreach (PointerPtr p, out_pointers()) {
+    foreach (PointerPtr p, outPointerList()) {
         if (p->property("TreeEdge").isValid() && p->property("TreeEdge").toInt() == -1){
             p->remove();
         }
@@ -113,7 +113,7 @@ PointerPtr RootedTreeNode::setNodeParent(DataPtr parent) const
 
 DataPtr RootedTreeNode::nodeParent() const
 {
-    foreach (PointerPtr ptr, out_pointers()) {
+    foreach (PointerPtr ptr, outPointerList()) {
         if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge").toInt() < 0) {
             return ptr->to();
         }
@@ -127,7 +127,7 @@ DataPtr RootedTreeNode::child(const quint32 i) const
     if (i >= numberOfChilds()) {
         return DataPtr();
     }
-    foreach (PointerPtr ptr, out_pointers()) {
+    foreach (PointerPtr ptr, outPointerList()) {
         if (ptr->property("TreeEdge").isValid() && ptr->property("TreeEdge").toUInt() == i) {
             return ptr->to();
         }
@@ -139,7 +139,7 @@ DataPtr RootedTreeNode::child(const quint32 i) const
 PointerPtr RootedTreeNode::setChild(DataPtr c, quint32 idx) const{
 
     if (idx < numberOfChilds()){
-        foreach (PointerPtr p, pointers(child(idx))) {
+        foreach (PointerPtr p, pointerList(child(idx))) {
             p->remove();
         }
 //      child(idx)->remove();
@@ -264,7 +264,7 @@ void RootedTreeNode::adjustPosition()
     const QRectF size = dataStructure()->document()->size();
     if (parent){
         qreal adjust = 0.0;
-        foreach (PointerPtr p, nodeParent()->pointers(this->getData())){
+        foreach (PointerPtr p, nodeParent()->pointerList(this->getData())){
             if (p->property("TreeEdge").toInt() >= 0){
                 adjust = p->property("TreeEdge").toReal()/(numberOfChilds() - 1);
                 break;

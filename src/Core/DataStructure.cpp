@@ -664,7 +664,7 @@ void DataStructure::setDataVisibility(bool visible, int dataType)
     // set visibility of data elements
     QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataVisibilitySetted(visible));
     foreach(DataPtr data, dataList(dataType)) {
-        foreach(PointerPtr pointer, data->adjacent_pointers()) {
+        foreach(PointerPtr pointer, data->pointerList()) {
             pointer->setVisible(visible);
         }
     }

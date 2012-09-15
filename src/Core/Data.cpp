@@ -31,31 +31,25 @@
 class DataPrivate
 {
 public:
-    DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataType);
+    DataPrivate(DataStructurePtr parent, int uniqueIdentifier, int dataType);
 
     /**
      * self pointer to Data object
      */
     boost::weak_ptr<Data> q;
 
-    PointerList _in_pointers;
-    PointerList _out_pointers;
-    PointerList _self_pointers;
+    PointerList _inPointers;
+    PointerList _outPointers;
 
     qreal _x;
     qreal _y;
     qreal _width;
-
-    bool _begin;
-    bool _end;
     bool _showName;
     bool _showValue;
     bool _visible;
-    bool _useColor;
+    bool _colored;
 
     DataStructurePtr _dataStructure;
-    boost::shared_ptr<DataItem> _item;
-
     int _uniqueIdentifier;
     int _dataType;
     QString _name;
@@ -66,7 +60,36 @@ public:
     QScriptEngine *_engine;
 
     void empty(PointerList &list);
+
+    void removePointer(PointerPtr e, PointerList &list);
+
+    /**
+     * Create a script value array out of a pointer list.
+     *
+     * \param list is a list of pointers
+     * \return array of script value representation of the pointers
+     */
+    QScriptValue createScriptArray(PointerList list);
 };
+
+DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifier, int dataType)
+    : _x(0)
+    , _y(0)
+    , _width(0.3)
+    , _showName(parent->isDataNameVisible(dataType))
+    , _showValue(parent->isDataValueVisible(dataType))
+    , _visible(parent->isDataVisible(dataType))
+    , _colored(false)
+    , _dataStructure(parent)
+    , _uniqueIdentifier(uniqueIdentifier)
+    , _dataType(dataType)
+    , _color(parent->document()->dataType(dataType)->defaultColor())
+    , _value(0)
+{
+    _inPointers = PointerList();
+    _outPointers = PointerList();
+}
+
 
 void DataPrivate::empty(PointerList &list)
 {
@@ -75,30 +98,27 @@ void DataPrivate::empty(PointerList &list)
     }
 }
 
-DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataType)
-    : _x(0)
-    , _y(0)
-    , _width(0.3)
-    , _begin(true)
-    , _end(true)
-    , _showName(parent->isDataNameVisible(dataType))
-    , _showValue(parent->isDataValueVisible(dataType))
-    , _visible(parent->isDataVisible(dataType))
-    , _useColor(false)
-    , _dataStructure(parent)
-    , _uniqueIdentifier(uniqueIdentifer)
-    , _dataType(dataType)
-    , _color(parent->document()->dataType(dataType)->defaultColor())
-    , _value(0)
+void DataPrivate::removePointer(PointerPtr e, PointerList &list)
 {
-    _in_pointers = PointerList();
-    _out_pointers = PointerList();
-    _self_pointers = PointerList();
+    if (list.contains(e)) {
+        list.removeOne(e);
+    }
 }
 
-DataPtr Data::create(DataStructurePtr parent, int uniqueIdentifier, int dataType)
+QScriptValue DataPrivate::createScriptArray(PointerList list)
 {
-    return create<Data>(parent, uniqueIdentifier, dataType);
+    QScriptValue array = _engine->newArray();
+    foreach(PointerPtr e, list) {
+        array.property("push").call(array, QScriptValueList() << e->scriptValue());
+    }
+    return array;
+}
+
+
+
+DataPtr Data::create(DataStructurePtr dataStructure, int uniqueIdentifier, int dataType)
+{
+    return create<Data>(dataStructure, uniqueIdentifier, dataType);
 }
 
 void Data::setQpointer(DataPtr q)
@@ -112,9 +132,9 @@ DataPtr Data::getData() const
     return px;
 }
 
-Data::Data(DataStructurePtr parent, int uniqueIdentifier, int dataType)
-    :  QObject(parent.get()),
-       d(new DataPrivate(parent, uniqueIdentifier, dataType))
+Data::Data(DataStructurePtr dataStructure, int uniqueIdentifier, int dataType)
+    :  QObject(dataStructure.get()),
+       d(new DataPrivate(dataStructure, uniqueIdentifier, dataType))
 {
 }
 
@@ -123,25 +143,14 @@ Data::~Data()
     emit removed();
 
     if (d) {
-        d->empty(d->_in_pointers);
-        d->empty(d->_out_pointers);
-        d->empty(d->_self_pointers);
+        d->empty(d->_inPointers);
+        d->empty(d->_outPointers);
     }
 }
 
 DataStructurePtr Data::dataStructure() const
 {
     return d->_dataStructure;
-}
-
-bool Data::showName()
-{
-    return d->_showName;
-}
-
-bool Data::showValue()
-{
-    return d->_showValue;
 }
 
 void Data::setShowName(bool b)
@@ -160,11 +169,10 @@ void Data::setShowValue(bool b)
     }
 }
 
-
-void Data::setUseColor(bool b)
+void Data::setColored(bool b)
 {
-    if (d->_useColor != b) {
-        d->_useColor = b;
+    if (d->_colored != b) {
+        d->_colored = b;
         emit useColorChanged(b);
     }
 }
@@ -174,19 +182,11 @@ bool Data::isVisible() const
     return d->_visible;
 }
 
-
 void Data::setVisible(bool visible)
 {
     d->_visible = visible;
     emit visibilityChanged(visible);
 }
-
-
-void Data::setDataItem(boost::shared_ptr<DataItem> item)
-{
-    d->_item = item;
-}
-
 
 void Data::setDataType(int dataType)
 {
@@ -196,52 +196,43 @@ void Data::setDataType(int dataType)
     emit dataTypeChanged(dataType);
 }
 
-
-DataList Data::adjacent_data() const
+DataList Data::adjacentDataList() const
 {
     // use QMap as the DataPtr elements are not hashable
     // and we can speed up process by using the uniqe IDs
     QMap<int, DataPtr> adjacent;
 
-    foreach(PointerPtr e, d->_out_pointers) {
+    foreach(PointerPtr e, d->_outPointers) {
         adjacent[e->to()->identifier()] = e->to();
     }
 
-    foreach(PointerPtr e, d->_self_pointers) {
-        adjacent[e->to()->identifier()] = e->to();
-    }
-
-    foreach(PointerPtr e, d->_in_pointers) {
+    foreach(PointerPtr e, d->_inPointers) {
         adjacent[e->from()->identifier()] = e->from();
     }
 
     return adjacent.values();
 }
 
-PointerList Data::adjacent_pointers() const
+PointerList Data::pointerList() const
 {
     PointerList adjacent;
 
-    adjacent << d->_out_pointers;
-    adjacent << d->_self_pointers;
-    adjacent << d->_in_pointers;
+    adjacent << d->_outPointers;
+    adjacent << d->_inPointers;
 
     return adjacent;
 }
 
-void Data::addInPointer(PointerPtr e)
+void Data::registerInPointer(PointerPtr e)
 {
-    d->_in_pointers.append(e);
+    Q_ASSERT(e->to()->identifier() == identifier() || e->from()->identifier() == identifier());
+    d->_inPointers.append(e);
 }
 
-void Data::addOutPointer(PointerPtr e)
+void Data::registerOutPointer(PointerPtr e)
 {
-    d->_out_pointers.append(e);
-}
-
-void Data::addSelfPointer(PointerPtr e)
-{
-    d->_self_pointers.append(e);
+    Q_ASSERT(e->to()->identifier() == identifier() || e->from()->identifier() == identifier());
+    d->_outPointers.append(e);
 }
 
 PointerPtr Data::addPointer(DataPtr to)
@@ -249,37 +240,23 @@ PointerPtr Data::addPointer(DataPtr to)
     return d->_dataStructure->addPointer(this->getData(), to);
 }
 
-void Data::removePointer(PointerPtr e, int pointerList)
+void Data::removePointer(PointerPtr e)
 {
-    switch (pointerList) {
-    case -1  : removePointer(e, d->_in_pointers);
-        removePointer(e, d->_out_pointers);
-        removePointer(e, d->_self_pointers);
-    case In  : removePointer(e, d->_in_pointers);    break;
-    case Out : removePointer(e, d->_out_pointers);   break;
-    case Self: removePointer(e, d->_self_pointers);  break;
-    }
+    // removes pointer from any list that could contain it
+    d->removePointer(e, d->_inPointers);
+    d->removePointer(e, d->_outPointers);
 }
 
-void Data::removePointer(PointerPtr e, PointerList &list)
-{
-    if (list.contains(e))
-        list.removeOne(e);
-}
-
-PointerList Data::pointers(DataPtr n) const
+PointerList Data::pointerList(DataPtr to) const
 {
     PointerList list;
-    if (n == getData()) {
-        return d->_self_pointers;
-    }
-    foreach(PointerPtr tmp, d->_out_pointers) {
-        if (tmp->to() == n) {
+    foreach(PointerPtr tmp, d->_outPointers) {
+        if (tmp->to() == to) {
             list.append(tmp);
         }
     }
-    foreach(PointerPtr tmp, d->_in_pointers) {
-        if (tmp->from() == n) {
+    foreach(PointerPtr tmp, d->_inPointers) {
+        if (tmp->from() == to) {
             list.append(tmp);
         }
     }
@@ -290,12 +267,11 @@ void Data::remove()
 {
     if (d->_dataStructure) {
         d->_dataStructure->remove(getData());
-        d->_dataStructure.reset();  // allow datastructure to be destroyed
+        d->_dataStructure.reset();  // allow data structure to be destroyed
     }
 
-    d->empty(d->_in_pointers);
-    d->empty(d->_out_pointers);
-    d->empty(d->_self_pointers);
+    d->empty(d->_inPointers);
+    d->empty(d->_outPointers);
 
     emit removed();
 }
@@ -310,19 +286,9 @@ const QString& Data::name()  const
     return d->_name;
 }
 
-const QVariant  Data::color() const
+const QVariant Data::color() const
 {
     return d->_color;
-}
-
-boost::shared_ptr<DataItem> Data::item() const
-{
-    return d->_item;
-}
-
-const QString& Data::iconPackage() const
-{
-    return d->_dataStructure->document()->iconPackage();
 }
 
 qreal Data::x() const
@@ -345,34 +311,29 @@ QString Data::icon() const
     return d->_dataStructure->document()->dataType(d->_dataType)->iconName();
 }
 
-PointerList& Data::in_pointers()   const
+PointerList& Data::inPointerList() const
 {
-    return d->_in_pointers;
+    return d->_inPointers;
 }
 
-PointerList& Data::out_pointers()  const
+PointerList& Data::outPointerList() const
 {
-    return d->_out_pointers;
+    return d->_outPointers;
 }
 
-PointerList& Data::self_pointers() const
-{
-    return d->_self_pointers;
-}
-
-bool Data::showName() const
+bool Data::isNameVisible() const
 {
     return d->_showName;
 }
 
-bool Data::showValue() const
+bool Data::isValueVisible() const
 {
     return d->_showValue;
 }
 
-bool Data::useColor() const
+bool Data::isColored() const
 {
-    return d->_useColor;
+    return d->_colored;
 }
 
 int Data::identifier() const
@@ -465,11 +426,6 @@ void Data::removeDynamicProperty(QString property)
     DynamicPropertiesList::New()->removeProperty(this, property);
 }
 
-void Data::self_remove()
-{
-    remove();
-}
-
 QScriptValue Data::scriptValue() const
 {
     return d->_scriptvalue;
@@ -484,7 +440,7 @@ void Data::setEngine(QScriptEngine *engine)
 QScriptValue Data::set_type(int dataType)
 {
     if (!d->_dataStructure->document()->dataTypeList().contains(dataType)) {
-        kDebug() << "data type does not exist."; //TODO give script error
+        kError() << "Specified data type '" << dataType << "' does not exist."; //TODO give script error
         return d->_dataStructure->engine()->newVariant(false);
     }
     setDataType(dataType);
@@ -503,7 +459,7 @@ void Data::add_property(QString name, QString value)
 
 QScriptValue Data::adj_data()
 {
-    QList< DataPtr > list = adjacent_data();
+    QList< DataPtr > list = adjacentDataList();
     QScriptValue array = d->_engine->newArray();
     foreach(DataPtr n, list) {
         array.property("push").call(array, QScriptValueList() << n->scriptValue());
@@ -513,39 +469,48 @@ QScriptValue Data::adj_data()
 
 QScriptValue Data::adj_pointers()
 {
-    PointerList list = adjacent_pointers();
-    return createScriptArray(list);
+    PointerList list = pointerList();
+    return d->createScriptArray(list);
+}
+
+QScriptValue Data::adj_pointers(int pointerType)
+{
+    PointerList list;
+    foreach(PointerPtr n, pointerList()) {
+        if (n->pointerType() != pointerType) {
+            continue;
+        }
+        list.append(n);
+    }
+    return d->createScriptArray(list);
 }
 
 QScriptValue Data::input_pointers()
 {
-    PointerList list = in_pointers();
-    return createScriptArray(list);
+    PointerList list = inPointerList();
+    return d->createScriptArray(list);
 }
 
 QScriptValue Data::output_pointers()
 {
-    PointerList list = out_pointers();
-    return createScriptArray(list);
+    PointerList list = outPointerList();
+    return d->createScriptArray(list);
 }
 
-QScriptValue Data::loop_pointers()
+QScriptValue Data::output_pointers(int pointerType)
 {
-    PointerList list = self_pointers();
-    return createScriptArray(list);
+    PointerList list;
+    foreach(PointerPtr n, outPointerList()) {
+        if (n->pointerType() != pointerType) {
+            continue;
+        }
+        list.append(n);
+    }
+    return d->createScriptArray(list);
 }
 
 QScriptValue Data::connected_pointers(DataPtr n)
 {
-    PointerList list = pointers(n);
-    return createScriptArray(list);
-}
-
-QScriptValue Data::createScriptArray(PointerList list)
-{
-    QScriptValue array = d->_engine->newArray();
-    foreach(PointerPtr e, list) {
-        array.property("push").call(array, QScriptValueList() << e->scriptValue());
-    }
-    return array;
+    PointerList list = pointerList(n);
+    return d->createScriptArray(list);
 }

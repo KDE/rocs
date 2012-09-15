@@ -31,12 +31,12 @@ public:
 
     virtual void setEngine(QScriptEngine* _engine);
     virtual ~GraphNode();
+
 public slots:
     QScriptValue adj_nodes();
     QScriptValue adj_edges();
     QScriptValue input_edges();
     QScriptValue output_edges();
-    QScriptValue loop_edges();
     QScriptValue connected_edges(Data* n);
 
     /**

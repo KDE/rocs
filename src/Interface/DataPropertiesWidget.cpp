@@ -106,7 +106,7 @@ void DataPropertiesWidget::setPosition(QPointF screenPosition)
 
 void DataPropertiesWidget::setUseColor(bool b)
 {
-    _data->setUseColor(b);
+    _data->setColored(b);
 }
 
 
@@ -127,9 +127,9 @@ void DataPropertiesWidget::reflectAttributes()
     ui->_color->setColor(_data->color().value<QColor>());
     ui->_name->setText(_data->name());
     ui->_value->setText(_data->value().toString());
-    ui->_showName->setChecked(_data->showName());
-    ui->_showValue->setChecked(_data->showValue());
-    ui->_enableColor->setChecked(_data->useColor());
+    ui->_showName->setChecked(_data->isNameVisible());
+    ui->_showValue->setChecked(_data->isValueVisible());
+    ui->_enableColor->setChecked(_data->isColored());
 
     DataTypePtr dataType = _data->dataStructure()->document()->dataType(_data->dataType());
     ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));

@@ -59,13 +59,9 @@ PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, in
     PointerPtr pi(new Pointer(parent, from, to, pointerType));
     pi->d->q = pi;
 
-    if (from == to) {
-        from->addSelfPointer(pi);
-    } else {
-        from->addOutPointer(pi);
-        to->addInPointer(pi);
-        connect(to.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
-    }
+    from->registerOutPointer(pi);
+    to->registerInPointer(pi);
+    connect(to.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
 
     return pi;
 }
@@ -88,7 +84,7 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->showValue     = d->dataStructure->isPointerValueVisible(pointerType);
     d->style         = "solid";
     d->width         = 1;
-    d->relativeIndex = d->to->pointers(d->from).size();
+    d->relativeIndex = d->to->pointerList(d->from).size();
     d->pointerType   = pointerType;
 
     connect(parent.get(), SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
@@ -100,16 +96,16 @@ Pointer::~Pointer()
     if (d->from == d->to) {
         if (d->from) {
             kDebug() << "Removing from a loop node";
-            d->from->removePointer(getPointer(), Data::Self);
+            d->from->removePointer(getPointer());
         }
     } else {
         kDebug() << "Removing from not a loop node.";
         if (d->from) {
-            d->from->removePointer(getPointer(), Data::Out);
+            d->from->removePointer(getPointer());
             kDebug() << "Removed from the from node";
         }
         if (d->to) {
-            d->to->removePointer(getPointer(), Data::In);
+            d->to->removePointer(getPointer());
             kDebug() << "Removed from the to node";
         }
     }

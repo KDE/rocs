@@ -70,10 +70,10 @@ void TestTgfFileFormatPlugin::serializeUnserializeTest()
     QVERIFY2(ds->dataList().size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2(ds->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
     foreach(DataPtr n, ds->dataList()) {
-        QVERIFY2(n->out_pointers().size() == 1, "ERROR: Number of out pointers is not 1");
-        QVERIFY2(n->in_pointers().size() == 1, "ERROR: Number of in pointers is not 1");
-        QVERIFY2(n->adjacent_data().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-        QVERIFY2(n->adjacent_pointers().size() == 2, "ERROR: Number of adjacent pointers is not 2");
+        QVERIFY2(n->outPointerList().size() == 1, "ERROR: Number of out pointers is not 1");
+        QVERIFY2(n->inPointerList().size() == 1, "ERROR: Number of in pointers is not 1");
+        QVERIFY2(n->adjacentDataList().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
+        QVERIFY2(n->pointerList().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
     QVERIFY(ds->dataList().at(0)->name() == "first node");
     QVERIFY(ds->pointers().at(0)->value() == "test value");

@@ -95,7 +95,7 @@ Rocs::ListStructure::~ListStructure()
 
 PointerPtr Rocs::ListStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 {
-    foreach(PointerPtr e, from->out_pointers() + from->self_pointers()) {
+    foreach(PointerPtr e, from->outPointerList()) {
         e->remove();
     }
 
@@ -136,8 +136,9 @@ void Rocs::ListStructure::remove(DataPtr n)
     if (m_begin == n) {
         m_begin = boost::static_pointer_cast<ListNode>(n)->next();
     }
-    foreach(PointerPtr p, n->in_pointers())
-    p->remove();
+    foreach(PointerPtr p, n->inPointerList()) {
+        p->remove();
+    }
     DataStructure::remove(n);
     arrangeNodes();
 }

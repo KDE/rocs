@@ -99,10 +99,10 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
             }
             int childCount = 0;
             RootedTreeNode* newdataRootedNode = qobject_cast< RootedTreeNode* >(fromOtherToNew.value(n.get()).get());
-            newdataRootedNode->setNumberOfChilds(n->adjacent_data().count());
+            newdataRootedNode->setNumberOfChilds(n->adjacentDataList().count());
 
             // iterate all neighbors and process them if not already elements in tree
-            foreach (DataPtr adjacentData, n->adjacent_data()) {
+            foreach (DataPtr adjacentData, n->adjacentDataList()) {
                 if (!visited.contains(adjacentData.get())){
                     visited.insert(adjacentData.get());
                     queue.enqueue(adjacentData);
@@ -160,7 +160,7 @@ PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataTyp
                                         size) / childCount;
                 treeEdge = static_cast<qint32> (pos.x()/division);
             }
-            foreach (const PointerPtr &p, from->out_pointers()) {
+            foreach (const PointerPtr &p, from->outPointerList()) {
                 if (p != ptr && p->property("TreeEdge").isValid() && p->property("TreeEdge").toInt() == treeEdge){
                     p->remove();
                 }

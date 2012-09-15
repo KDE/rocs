@@ -23,6 +23,7 @@
 #include <DataStructure.h>
 #include "Data.h"
 
+#include <QObject>
 #include <boost/shared_ptr.hpp>
 
 class GroupPrivate;

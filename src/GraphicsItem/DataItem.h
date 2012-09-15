@@ -21,21 +21,17 @@
 #define DATAITEM_H
 
 #include <QGraphicsSvgItem>
-#include <QStateMachine>
-#include <QState>
-#include <QPropertyAnimation>
-#include <QSvgRenderer>
-#include <QGraphicsTextItem>
-#include <QGraphicsColorizeEffect>
 #include <QMap>
 #include <QString>
 #include <QFont>
-#include <boost/shared_ptr.hpp>
 
 #include "rocslib_export.h"
 #include "Rocs_Typedefs.h"
 
 class Data;
+class QGraphicsColorizeEffect;
+class QSvgRenderer;
+class QGraphicsSimpleTextItem;
 
 class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem
 {

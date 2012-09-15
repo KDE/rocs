@@ -82,12 +82,11 @@ QLayout* Rocs::ListPlugin::nodeExtraProperties(DataPtr node, QWidget* parentWidg
     QLabel *_value = new QLabel(i18n("Front value"), parentWidget);
     KLineEdit *_valueLine = new KLineEdit(parentWidget);
     _valueLine->setReadOnly(true);
-    if (node->out_pointers().count() == 1) {
-        _valueLine->setText(node->out_pointers().at(0)->to()->value().toString());
+    if (node->outPointerList().count() == 1) {
+        _valueLine->setText(node->outPointerList().at(0)->to()->value().toString());
     }
     lay->addWidget(_value, 0, 0);
     lay->addWidget(_valueLine, 0, 1);
-
 
     return lay;
 }
@@ -97,7 +96,7 @@ bool ListPlugin::canConvertFrom(Document* doc) const
     QStringList errors;
     foreach(DataStructurePtr ds, doc->dataStructures()) {
         foreach(DataPtr data, ds->dataList()) {
-            if (data->out_pointers().count() > 1)
+            if (data->outPointerList().count() > 1)
                 errors.append(i18n("Data \'%1\' has more than one out pointer.", data->name()));
         }
     }
