@@ -28,6 +28,46 @@
 #include "DynamicPropertiesList.h"
 #include "DataType.h"
 
+class DataPrivate
+{
+public:
+    DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataType);
+
+    /**
+     * self pointer to Data object
+     */
+    boost::weak_ptr<Data> q;
+
+    PointerList _in_pointers;
+    PointerList _out_pointers;
+    PointerList _self_pointers;
+
+    qreal _x;
+    qreal _y;
+    qreal _width;
+
+    bool _begin;
+    bool _end;
+    bool _showName;
+    bool _showValue;
+    bool _visible;
+    bool _useColor;
+
+    DataStructurePtr _dataStructure;
+    boost::shared_ptr<DataItem> _item;
+
+    int _uniqueIdentifier;
+    int _dataType;
+    QString _name;
+    QColor _color;
+
+    QVariant _value;
+    QScriptValue _scriptvalue;
+    QScriptEngine *_engine;
+
+    void empty(PointerList &list);
+};
+
 void DataPrivate::empty(PointerList &list)
 {
     while (!list.isEmpty()) {
@@ -56,17 +96,14 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataT
     _self_pointers = PointerList();
 }
 
-
-DataStructurePtr Data::dataStructure() const
-{
-    return d->_dataStructure;
-}
-
 DataPtr Data::create(DataStructurePtr parent, int uniqueIdentifier, int dataType)
 {
-    DataPtr pi(new Data(parent, uniqueIdentifier, dataType));
-    pi->d->q = pi;
-    return pi;
+    return create<Data>(parent, uniqueIdentifier, dataType);
+}
+
+void Data::setQpointer(DataPtr q)
+{
+    d->q = q;
 }
 
 DataPtr Data::getData() const
@@ -90,6 +127,11 @@ Data::~Data()
         d->empty(d->_out_pointers);
         d->empty(d->_self_pointers);
     }
+}
+
+DataStructurePtr Data::dataStructure() const
+{
+    return d->_dataStructure;
 }
 
 bool Data::showName()
@@ -256,6 +298,91 @@ void Data::remove()
     d->empty(d->_self_pointers);
 
     emit removed();
+}
+
+const QVariant Data::value() const
+{
+    return d->_value;
+}
+
+const QString& Data::name()  const
+{
+    return d->_name;
+}
+
+const QVariant  Data::color() const
+{
+    return d->_color;
+}
+
+boost::shared_ptr<DataItem> Data::item() const
+{
+    return d->_item;
+}
+
+const QString& Data::iconPackage() const
+{
+    return d->_dataStructure->document()->iconPackage();
+}
+
+qreal Data::x() const
+{
+    return d->_x;
+}
+
+qreal Data::y() const
+{
+    return d->_y;
+}
+
+qreal Data::width() const
+{
+    return d->_width;
+}
+
+QString Data::icon() const
+{
+    return d->_dataStructure->document()->dataType(d->_dataType)->iconName();
+}
+
+PointerList& Data::in_pointers()   const
+{
+    return d->_in_pointers;
+}
+
+PointerList& Data::out_pointers()  const
+{
+    return d->_out_pointers;
+}
+
+PointerList& Data::self_pointers() const
+{
+    return d->_self_pointers;
+}
+
+bool Data::showName() const
+{
+    return d->_showName;
+}
+
+bool Data::showValue() const
+{
+    return d->_showValue;
+}
+
+bool Data::useColor() const
+{
+    return d->_useColor;
+}
+
+int Data::identifier() const
+{
+    return d->_uniqueIdentifier;
+}
+
+int Data::dataType() const
+{
+    return d->_dataType;
 }
 
 void Data::setX(int x)

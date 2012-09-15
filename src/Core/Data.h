@@ -38,46 +38,9 @@ class DataItem;
 class Pointer;
 class DataPrivate;
 
-class DataPrivate
-{
-public:
-    DataPrivate(DataStructurePtr parent, int uniqueIdentifer, int dataType);
-
-    /**
-     * self pointer to Data object
-     */
-    boost::weak_ptr<Data> q;
-
-    PointerList _in_pointers;
-    PointerList _out_pointers;
-    PointerList _self_pointers;
-
-    qreal _x;
-    qreal _y;
-    qreal _width;
-
-    bool _begin;
-    bool _end;
-    bool _showName;
-    bool _showValue;
-    bool _visible;
-    bool _useColor;
-
-    DataStructurePtr _dataStructure;
-    boost::shared_ptr<DataItem> _item;
-
-    int _uniqueIdentifier;
-    int _dataType;
-    QString _name;
-    QColor _color;
-
-    QVariant _value;
-    QScriptValue _scriptvalue;
-    QScriptEngine *_engine;
-
-    void empty(PointerList &list) ;
-};
-
+/**
+ * \class Data
+ */
 class  ROCSLIB_EXPORT Data : public QObject
 {
     Q_OBJECT
@@ -95,6 +58,14 @@ public:
     enum ListType {In, Out, Self};
 
     static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
+
+    template<typename T>
+    static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
+        DataPtr pi(new T(parent, uniqueIdentifier, dataType));
+        pi->setQpointer(pi);
+        return pi;
+    }
+
     virtual DataPtr getData() const;
 
     void addInPointer(PointerPtr e);
@@ -177,14 +148,10 @@ public  slots:
 
 protected:
     Data(DataStructurePtr parent, int uniqueIdentifer, int dataType);
-    template<typename T> static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
-        DataPtr pi(new T(parent, uniqueIdentifier, dataType));
-        pi->d->q = pi;
-        return pi;
-    }
 
 private:
     boost::shared_ptr<DataPrivate> d;
+    void setQpointer(DataPtr q);
     Data(Data const &, int uniqueIdentifer, int dataType);
     Data & operator=(Data const &);
 
@@ -202,82 +169,5 @@ signals:
     void useColorChanged(bool b);
     void dataTypeChanged(int dataType);
 };
-
-
-inline const QVariant Data::value() const
-{
-    return d->_value;
-}
-inline const QString& Data::name()  const
-{
-    return d->_name;
-}
-inline const QVariant  Data::color() const
-{
-    return d->_color;
-}
-
-inline boost::shared_ptr<DataItem> Data::item() const
-{
-    return d->_item;
-}
-
-inline const QString& Data::iconPackage() const
-{
-    return d->_dataStructure->document()->iconPackage();
-}
-
-inline qreal Data::x() const
-{
-    return d->_x;
-}
-inline qreal Data::y() const
-{
-    return d->_y;
-}
-
-inline qreal Data::width() const
-{
-    return d->_width;
-}
-
-inline QString Data::icon() const
-{
-    return d->_dataStructure->document()->dataType(d->_dataType)->iconName();
-}
-
-inline PointerList& Data::in_pointers()   const
-{
-    return d->_in_pointers;
-}
-inline PointerList& Data::out_pointers()  const
-{
-    return d->_out_pointers;
-}
-inline PointerList& Data::self_pointers() const
-{
-    return d->_self_pointers;
-}
-
-inline bool Data::showName() const
-{
-    return d->_showName;
-}
-inline bool Data::showValue() const
-{
-    return d->_showValue;
-}
-inline bool Data::useColor() const
-{
-    return d->_useColor;
-}
-inline int Data::identifier() const
-{
-    return d->_uniqueIdentifier;
-}
-inline int Data::dataType() const
-{
-    return d->_dataType;
-}
 
 #endif
