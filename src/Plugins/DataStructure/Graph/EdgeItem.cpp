@@ -86,7 +86,7 @@ QPainterPath EdgeItem::createLoop(QPointF pos) const
     if (!pointer()) return QPainterPath();
     QPainterPath p;
     DataStructure *g = qobject_cast<DataStructure*>(pointer()->parent());
-    qreal size = 30 + (20 * index());
+    qreal size = 30 + (20 * pointer()->relativeIndex());
     qreal angle = qAtan2((pos.x() - g->relativeCenter().x()), (pos.y() - g->relativeCenter().y()));
     qreal posx = (pos.x() - (((size / 2) * qSin(angle)) * -1) - (size / 2));
     qreal posy = (pos.y() + (((size / 2) * qCos(angle))) - (size / 2));
@@ -99,7 +99,7 @@ QPainterPath EdgeItem::createCurves()
     if (!pointer()) return QPainterPath();
 
     if (pointer()->from() == 0 || pointer()->to() == 0) {
-        pointer()->self_remove();
+        pointer()->remove();
         return QPainterPath();
     }
 
@@ -131,9 +131,9 @@ QPainterPath EdgeItem::createCurves()
     qreal theta = angle + PI_2;
     qreal finalX = qCos(theta);
     qreal finalY = qSin(theta);
-    int lastIndex = index();
+    int lastIndex = pointer()->relativeIndex();
 
-    if (lastIndex & 1) {   // If the number is Odd.
+    if (lastIndex & 1) {   // If the number is odd.
         ++lastIndex;
         finalX *= (-1);
         finalY *= (-1);

@@ -46,7 +46,7 @@ struct DataNameVisibilitySetted {
     DataNameVisibilitySetted(bool visibility) : m_visibility(visibility) {}
     typedef void result_type;
     void operator()(DataPtr d) {
-        d->setShowName(m_visibility);
+        d->setNameVisible(m_visibility);
     }
     bool m_visibility;
 };
@@ -55,7 +55,7 @@ struct PointerNameVisibilitySetted {
     PointerNameVisibilitySetted(bool visibility) : m_visibility(visibility) {}
     typedef void result_type;
     void operator()(PointerPtr d) {
-        d->hideName(m_visibility);
+        d->setNameVisible(m_visibility);
     }
     bool m_visibility;
 };
@@ -64,7 +64,7 @@ struct DataValueVisibilitySetted {
     DataValueVisibilitySetted(bool visibility) : m_visibility(visibility) {}
     typedef void result_type;
     void operator()(DataPtr d) {
-        d->setShowValue(m_visibility);
+        d->setValueVisible(m_visibility);
     }
     bool m_visibility;
 };
@@ -73,7 +73,7 @@ struct PointerValueVisibilitySetted {
     PointerValueVisibilitySetted(bool visibility) : m_visibility(visibility) {}
     typedef void result_type;
     void operator()(PointerPtr d) {
-        d->hideValue(m_visibility);
+        d->setValueVisible(m_visibility);
     }
     bool m_visibility;
 };

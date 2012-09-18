@@ -25,6 +25,7 @@
 #include "DynamicPropertiesList.h"
 #include <KDebug>
 #include <QColor>
+#include <boost/weak_ptr.hpp>
 
 class PointerPrivate
 {
@@ -39,14 +40,13 @@ public:
     QString value;
     QString name;
     QColor color;
+    QString style;
+    qreal width;
     int pointerType;
 
     bool showName;
     bool showValue;
     bool visible;
-
-    QString style;
-    qreal width;
 
     DataStructurePtr dataStructure;
 
@@ -61,7 +61,12 @@ PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, in
 
     from->registerOutPointer(pi);
     to->registerInPointer(pi);
+    pi->updateRelativeIndex();
+
     connect(to.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
+    connect(from.get(), SIGNAL(pointerListChanged()), pi.get(), SLOT(updateRelativeIndex()));
+    connect(parent.get(), SIGNAL(complexityChanged(bool)), pi.get(), SIGNAL(changed()));
+    connect(from.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
 
     return pi;
 }
@@ -84,11 +89,7 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->showValue     = d->dataStructure->isPointerValueVisible(pointerType);
     d->style         = "solid";
     d->width         = 1;
-    d->relativeIndex = d->to->pointerList(d->from).size();
     d->pointerType   = pointerType;
-
-    connect(parent.get(), SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
-    connect(from.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
 }
 
 Pointer::~Pointer()
@@ -116,6 +117,9 @@ int Pointer::relativeIndex() const
     return d->relativeIndex;
 }
 
+void Pointer::updateRelativeIndex() {
+    d->relativeIndex = d->to->pointerList(d->from).indexOf(getPointer());
+}
 
 DataStructurePtr Pointer::dataStructure() const
 {
@@ -162,25 +166,25 @@ void Pointer::remove()
 }
 
 
-bool Pointer::showName()
+bool Pointer::isNameVisible() const
 {
     return d->showName;
 }
 
-bool Pointer::showValue()
+bool Pointer::isValueVisible() const
 {
     return d->showValue;
 }
 
-void Pointer::hideName(bool b)
+void Pointer::setNameVisible(bool visible)
 {
-    d->showName = b;
+    d->showName = visible;
     emit changed();
 }
 
-void Pointer::hideValue(bool b)
+void Pointer::setValueVisible(bool visible)
 {
-    d->showValue = b;
+    d->showValue = visible;
     emit changed();
 }
 
@@ -233,9 +237,9 @@ qreal Pointer::width() const
     return d->width;
 }
 
-void Pointer::setWidth(qreal w)
+void Pointer::setWidth(qreal width)
 {
-    d->width = w;
+    d->width = width;
     emit changed();
 }
 
@@ -273,7 +277,7 @@ QScriptValue Pointer::set_type(int pointerType)
     return d->dataStructure->engine()->newVariant(true);
 }
 
-QScriptValue Pointer::type()
+QScriptValue Pointer::type() const
 {
     return d->dataStructure->engine()->newVariant(d->pointerType);
 }
@@ -283,19 +287,21 @@ void Pointer::add_property(QString name, QString value)
     addDynamicProperty(name, value);
 }
 
-QScriptValue Pointer::start()
+QScriptValue Pointer::start() const
 {
     // from==0 possible if this pointer is deleted
-    if (!d->from)
+    if (!d->from) {
         return QScriptValue();
+    }
     return d->from->scriptValue();
 }
 
-QScriptValue Pointer::end()
+QScriptValue Pointer::end() const
 {
     // to==0 possible if this pointer is deleted
-    if (!d->to)
+    if (!d->to) {
         return QScriptValue();
+    }
     return d->to->scriptValue();
 }
 
@@ -308,9 +314,4 @@ void Pointer::setEngine(QScriptEngine *engine)
 QScriptValue Pointer::scriptValue() const
 {
     return  d->scriptvalue;
-}
-
-void Pointer::self_remove()
-{
-    remove();
 }

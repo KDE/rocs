@@ -153,19 +153,19 @@ DataStructurePtr Data::dataStructure() const
     return d->_dataStructure;
 }
 
-void Data::setShowName(bool b)
+void Data::setNameVisible(bool visible)
 {
-    if (d->_showName != b) {
-        d->_showName = b;
-        emit nameVisibilityChanged(b);
+    if (d->_showName != visible) {
+        d->_showName = visible;
+        emit nameVisibilityChanged(visible);
     }
 }
 
-void Data::setShowValue(bool b)
+void Data::setValueVisible(bool visible)
 {
-    if (d->_showValue != b) {
-        d->_showValue = b;
-        emit valueVisibilityChanged(b);
+    if (d->_showValue != visible) {
+        d->_showValue = visible;
+        emit valueVisibilityChanged(visible);
     }
 }
 
@@ -227,12 +227,14 @@ void Data::registerInPointer(PointerPtr e)
 {
     Q_ASSERT(e->to()->identifier() == identifier() || e->from()->identifier() == identifier());
     d->_inPointers.append(e);
+    emit pointerListChanged();
 }
 
 void Data::registerOutPointer(PointerPtr e)
 {
     Q_ASSERT(e->to()->identifier() == identifier() || e->from()->identifier() == identifier());
     d->_outPointers.append(e);
+    emit pointerListChanged();
 }
 
 PointerPtr Data::addPointer(DataPtr to)
@@ -245,6 +247,7 @@ void Data::removePointer(PointerPtr e)
     // removes pointer from any list that could contain it
     d->removePointer(e, d->_inPointers);
     d->removePointer(e, d->_outPointers);
+    emit pointerListChanged();
 }
 
 PointerList Data::pointerList(DataPtr to) const

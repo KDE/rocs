@@ -41,18 +41,14 @@ class DataStructure;
 /**
 * \class Pointer
 *
-* This class is an pointer on the graph. it holds the orientation, the from and the to datums,auto
-* and has a name, value and color properties.
-* you can change all properties by 'pointer.propertyName = new property' and access it's value
-* by 'pointer.propertyName' .
-* new properties can be added on the fly via pointer.addProp(propertyname) , and accessed by pointer.propertyName.
+* Pointers are connections between two nodes in the data structure. They are usually unidirectional
+* and hold several properties.
+* Properties can accessed directly by the getter methods or (also from the script engine) be created
+* by 'add_property(name, value)' and access by 'pointer.propertyName'.
 */
-
 class ROCSLIB_EXPORT Pointer : public QObject
 {
     Q_OBJECT
-
-    /*! all properties are accessible from the scripting engine via .propertyName */
 
     Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(QString value READ value WRITE setValue)
@@ -61,26 +57,45 @@ class ROCSLIB_EXPORT Pointer : public QObject
     Q_PROPERTY(QString style READ style WRITE setStyle)
 
 public:
+    /**
+     * Create pointer objects.
+     *
+     * \param dataStructure is data structure to that the new data element belongs
+     * \param from is source of pointer
+     * \param to is target of pointer
+     * \param pointerType is the type of the created pointer, it must be existing and registered
+     * \return the created pointer element
+     */
     static PointerPtr create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType);
+
+    /**
+     * \return shared pointer to this pointer element
+     */
     PointerPtr getPointer() const;
 
-    /*! default destructor */
+    /**
+     * Destructor.
+     */
     virtual ~Pointer();
-
-    /*! relative index is the index that this pointer has relative to the datums that it's bound to.
-    eg. if the datums have 2 or more pointers connecteds between them, it will have a unique
-    identifier relative to that datums
-
-    \return the relativeIndex identifier.
-    */
-    int relativeIndex() const;
 
     /*! remove this pointer from the graph */
     void remove();
 
-    /*! returns the datastructure that owns this pointer. */
+    /**
+     * \return data structure to that this pointer belongs
+     */
     DataStructurePtr dataStructure() const;
 
+    /**
+     * The relative index is the index that this pointer has relative to the pair of data elements
+     * to which it is bound. I.e., if its end points have have two or more pointers
+     * connecteds between them, the relative index gives a unique identifier for the pointer.
+     * Note that the relative index can change whenever pointers between its endpoints are created
+     * or removed.
+     *
+     * \return the relative index identifier
+     */
+    int relativeIndex() const;
 
     /*! if the qtscript is enabled for this rocs,
       this method returns the self-referenced script value for this pointer.
@@ -93,36 +108,61 @@ public:
     \p engine the QScriptEngine that will work on the object */
     void setEngine(QScriptEngine *engine);
 
+signals:
+    /**
+     * Emitted when this pointer is removed
+     */
+    void removed();
 
-public  slots:
-    /*! return the first datum of this pointer
-      \return Data* pointer for the first datum of this pointer.
-    */
+    /**
+     * Emitted when a connected data element or the pointer is changed.
+     */
+    void changed();
+
+    /**
+     * Emitted when the position of a connected data element changes.
+     */
+    void posChanged();
+
+    /**
+     * Emitted when the pointer type of this pointer changes.
+     */
+    void pointerTypeChanged(int pointerType);
+
+public slots:
+    /**
+     * \return source data element of this pointer
+     */
     DataPtr from() const;
 
-    /*! return the second datum of this pointer
-      \return Data* pointer for the second datum of this pointer.
-    */
-    DataPtr to() const ;
+    /**
+     * \return target data element of this pointer
+     */
+    DataPtr to() const;
 
-    /*! return the value of this pointer
-    \return the value of the pointer.
-    */
+    /**
+     * \return value of this pointer.
+     */
     const QString& value() const;
 
-    /*! sets the value attribute of this pointer
-    \p s the new value of this pointer. */
-    void setValue(const QString& s);
+    /**
+     * Set value attribute of this pointer.
+     *
+     * \param value the new value of this pointer, given as a string
+     */
+    void setValue(const QString& value);
 
-    /*! returns the name attribute of the pointer.
-      \return the name of the pointer.
-    */
+    /**
+     * \return the name of this pointer
+     */
     const QString& name() const;
 
-    /*! sets the name attribute of the pointer
-      \p s the new name of this pointer
-    */
-    void setName(const QString& s) ;
+    /**
+     * Set name attribute of this pointer.
+     *
+     * \param name is the new name of this pointer, given as a string
+     */
+    void setName(const QString& name) ;
 
     /**
      * Change pointer type of the pointer. The specified pointer type must exist.
@@ -130,86 +170,123 @@ public  slots:
      */
     void setPointerType(int pointerType);
 
-    /*! gets the color attribute of the pointer
-      \return the string value of the pointer.
-    */
+    /**
+     * \return the color of this pointer
+     */
     const QColor& color() const;
 
-    /*! sets the color attribute of the pointer
-      \p s the new color of the pointer in the format "#000000" or by it's english name ("red" for example)
-    */
-    void setColor(const QColor& s);
+    /**
+     * Set color attribute of this pointer. The new color must be set either in format "#000000" or by
+     * it's english name ("red" for example).
+     *
+     * \param color is the new color of this pointer
+     */
+    void setColor(const QColor& color);
 
     /**
-     * gives type of this pointer
-     * \return pointer type
+     * \return pointer type identifier, \see class PointerType
      */
     int pointerType() const;
 
+    /**
+     * \return width of the pointer
+     */
     qreal width() const;
-    void setWidth(qreal w);
 
+    /**
+     * Set the width of this pointer.
+     *
+     * \param width of the pointer line
+     */
+    void setWidth(qreal width);
+
+    /**
+     * \return line style of the pointer line
+     */
     const QString& style() const;
+
+    /**
+     * Set line style for the pointer.
+     *
+     * \param s is the style identifier
+     */
     void setStyle(const QString& s);
 
-    /** Add a property to this pointer
-    * @param property Name of property
-    * @param value Value of the property. value should be different of QVariant::Invalid.
-    */
-    void addDynamicProperty(QString Property, QVariant value);
+    /**
+     * Add new dynamic property with identifier \p property to this data element and
+     * sets it to \p value.
+     *
+     * \param property is the identifier for the new property
+     * \param value is the value of this new property
+     */
+    void addDynamicProperty(QString property, QVariant value);
 
-    /** Remove property arg1 from this pointer. If property arg1 don't exist in this pointer, nothing is made.
-    * @param arg1 name os property to remove
-    */
+    /**
+     * Remove dynamic property with identifier \p property from data element.
+     *
+     * \param property is identifier of the property
+     */
     void removeDynamicProperty(QString property);
 
-    // TODO coding style for visibility functions
-    bool showName();
-    bool showValue();
-    void hideName(bool b);
-    void hideValue(bool b);
-    void setVisible(bool visible);
-    bool isVisible() const;
+    /**
+     * Update relative index. \see relativeIndex().
+     */
+    void updateRelativeIndex();
 
-    QScriptValue type();
+    bool isNameVisible() const;
+    void setNameVisible(bool visible);
+
+    bool isValueVisible() const;
+    void setValueVisible(bool visible);
+
+    bool isVisible() const;
+    void setVisible(bool visible);
+
+    /**
+     * \return pointer type identifier for script engine
+     */
+    QScriptValue type() const;
+
+    /**
+     * Set pointer type from script engine. If pointer type \p type does not exist, the method
+     * returns false. Otherwise it returns true.
+     *
+     * \param type is pointer type identifier.
+     * \return if change of type was successful
+     */
     QScriptValue set_type(int type);
+
+    /**
+     * Add new property to pointer.
+     *
+     * \param name is identifier for new property
+     * \param value is the initial value of the property
+     */
     void add_property(QString name, QString value);
 
-    /*! this method can be used inside of the script interface.
-    \return the first datum of this pointer.
-    */
-    QScriptValue start();
-
-    /*! this method can be used inside of the script interface,
-    \return the last datum of this pointer
-    */
-    QScriptValue end();
-
-    /*! this method can be used inside of the script interface,
-     it will remove this pointer from the graph.
+    /**
+     * \return the \see from() data element for script engine
      */
-    void self_remove();
+    QScriptValue start() const;
+
+    /**
+     * \return the \see to() data element for script engine
+     */
+    QScriptValue end() const;
 
 protected:
-    /*! default constructor, an pointer connects two datums.
-    \p parent a Graph
-    \p from the first data element
-    \p to the second data element
-    \p pointerType the type of this pointer (default is 0)
-    */
+    /**
+     * Protected constructor. Use static \see create() method.
+     *
+     * \param parent the data structure the pointer belongs to
+     * \param from the first data element
+     * \param to the second data element
+     * \param pointerType the type of this pointer (default is 0)
+     */
     Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType = 0);
 
 private:
     boost::shared_ptr<PointerPrivate> const d;
-
-signals:
-    /*! emmited when this pointer is removed. */
-    void removed();
-    /*! emmited when a datum connected to this pointer changes, or when this pointer changes. */
-    void changed();
-    /** emmited when the position of one of points changes */
-    void posChanged();
-    void pointerTypeChanged(int pointerType);
 };
 
 #endif

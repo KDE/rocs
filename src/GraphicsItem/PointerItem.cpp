@@ -46,7 +46,7 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
     _index = _pointer->relativeIndex();
     _name = new QGraphicsSimpleTextItem(this);
     _value = new QGraphicsSimpleTextItem(this);
-    setZValue(- _index);
+    setZValue(-_index);
     setFlag(ItemIsSelectable, true);
     connectSignals();
     updateAttributes();
@@ -133,10 +133,10 @@ void PointerItem::updateAttributes()
 
     // overall visibility for pointer
     if (_pointer->isVisible()) {
-        if (_pointer->showValue()) {
+        if (_pointer->isValueVisible()) {
             _value->show();
         }
-        if (_pointer->showName()) {
+        if (_pointer->isNameVisible()) {
             _name->show();
         }
         this->show();

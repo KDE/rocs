@@ -55,9 +55,7 @@ public:
     PointerPtr pointer() const {
         return _pointer;
     }
-    int index() const {
-        return _index;
-    }
+
 protected:
     /*! when there's a mouse click on the node, this method is invocked
       \param event the mouse object
@@ -79,13 +77,12 @@ public slots:
 
 private:
     PointerPtr _pointer;
-    int _index;
-
 
     QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const;
     QPainterPath createLoop(QPointF pos) const;
     void connectSignals();
 
+    int _index;
     QGraphicsSimpleTextItem *_name;
     QGraphicsSimpleTextItem *_value;
 };

@@ -232,8 +232,8 @@ public slots:
     void setColor(const QVariant& s);
     void setName(const QString& s);
     void setValue(const QVariant& v);
-    void setShowName(bool b);
-    void setShowValue(bool b);
+    void setNameVisible(bool visible);
+    void setValueVisible(bool visible);
     void setColored(bool b = true);
     void setVisible(bool visible);
     void setValue(const QString& v);
@@ -262,6 +262,7 @@ signals:
     void visibilityChanged(bool visible);
     void useColorChanged(bool b);
     void dataTypeChanged(int dataType);
+    void pointerListChanged();
 
 protected:
     /**
