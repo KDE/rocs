@@ -39,6 +39,46 @@
 #include <KDebug>
 #include <DataItem.h>
 
+class DataStructurePrivate
+{
+public:
+    DataStructurePrivate() {}
+
+    /**
+     * self pointer to DataStructure
+     */
+    boost::weak_ptr<DataStructure> q;
+
+    QMap<int, DataList> _dataTypeLists;         // list if data elements associated to specific type
+    QMap<int, bool> _dataTypeNameVisibility;
+    QMap<int, bool> _dataTypeValueVisibility;
+    QMap<int, bool> _dataTypeVisibility;
+    QMap<int, PointerList> _pointerTypeLists;   // list of pointers associated to specific type
+    QMap<int, bool> _pointerTypeNameVisibility;
+    QMap<int, bool> _pointerTypeValueVisibility;
+    QMap<int, bool> _pointerTypeVisibility;
+
+    int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
+
+    QList<GroupPtr> _groups;
+
+    QPointF _relativeCenter;
+    QString _name;
+    QColor _dataDefaultColor;
+    bool _automate;
+    Document *_document;
+    bool _readOnly;
+
+    bool _dataNamesVisible;
+    bool _dataValuesVisible;
+
+    QScriptValue _value;
+    QScriptEngine *_engine;
+    QMap<QString, QVariant> m_globalPropertiesData;
+    QMap<QString, QVariant> m_globalPropertiesPointer;
+};
+
+
 DataStructurePtr DataStructure::create(Document *parent)
 {
     return create<DataStructure>(parent);
@@ -47,6 +87,11 @@ DataStructurePtr DataStructure::create(Document *parent)
 DataStructurePtr DataStructure::create(DataStructurePtr other, Document *parent)
 {
     return create<DataStructure>(other, parent);
+}
+
+void DataStructure::setQpointer(DataStructurePtr q)
+{
+    d->q = q;
 }
 
 void DataStructure::initialize()
@@ -751,3 +796,44 @@ QMap<QString, QString> DataStructure::pluginProperties() const
 {
     return QMap<QString,QString>();
 }
+
+bool DataStructure::readOnly() const
+{
+    return d->_readOnly;
+}
+
+
+const QString& DataStructure::name() const
+{
+    return d->_name;
+}
+
+/**
+ * returns cached relative center of datastructure
+ * center needs to be updated at resizes by using \see updateRelativeCenter()
+ * \return QPointF center of datastructure
+ */
+QPointF DataStructure::relativeCenter() const
+{
+    return d->_relativeCenter;
+}
+
+QScriptValue DataStructure::scriptValue() const
+{
+    return d->_value;
+}
+QScriptEngine *DataStructure::engine() const
+{
+    return d->_engine;
+}
+
+Document *DataStructure::document() const
+{
+    return d->_document;
+}
+
+const QList<GroupPtr> DataStructure::groups() const
+{
+    return d->_groups;
+}
+

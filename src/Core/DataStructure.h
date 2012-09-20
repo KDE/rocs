@@ -42,45 +42,9 @@ class Data;
 class Pointer;
 class DataStructurePrivate;
 
-class DataStructurePrivate
-{
-public:
-    DataStructurePrivate() {}
-
-    /**
-     * self pointer to DataStructure
-     */
-    boost::weak_ptr<DataStructure> q;
-
-    QMap<int, DataList> _dataTypeLists;         // list if data elements associated to specific type
-    QMap<int, bool> _dataTypeNameVisibility;
-    QMap<int, bool> _dataTypeValueVisibility;
-    QMap<int, bool> _dataTypeVisibility;
-    QMap<int, PointerList> _pointerTypeLists;   // list of pointers associated to specific type
-    QMap<int, bool> _pointerTypeNameVisibility;
-    QMap<int, bool> _pointerTypeValueVisibility;
-    QMap<int, bool> _pointerTypeVisibility;
-
-    int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
-
-    QList<GroupPtr> _groups;
-
-    QPointF _relativeCenter;
-    QString _name;
-    QColor _dataDefaultColor;
-    bool _automate;
-    Document *_document;
-    bool _readOnly;
-
-    bool _dataNamesVisible;
-    bool _dataValuesVisible;
-
-    QScriptValue _value;
-    QScriptEngine *_engine;
-    QMap<QString, QVariant> m_globalPropertiesData;
-    QMap<QString, QVariant> m_globalPropertiesPointer;
-};
-
+/**
+ * \class DataStructure
+ */
 class ROCSLIB_EXPORT DataStructure : public QObject
 {
     Q_OBJECT
@@ -408,60 +372,30 @@ protected:
     void initialize();
     template<typename T> static DataStructurePtr create(Document *parent = 0) {
         DataStructurePtr pi(new T(parent));
-        pi->d->q = pi;
+        pi->setQpointer(pi);
         pi->initialize();
         return pi;
     }
     template<typename T> static DataStructurePtr create(DataStructurePtr other, Document *parent = 0) {
         DataStructurePtr pi(new T(parent));
-        pi->d->q = pi;
+        pi->setQpointer(pi);
         pi->initialize();
         pi->importStructure(other);
         return pi;
     }
 
 private:
+    /**
+     * \internal
+     * d-Pointer.
+     */
     boost::shared_ptr<DataStructurePrivate> d;
+
+    /**
+     * \internal
+     * Set q-pointer in private data object.
+     */
+    void setQpointer(DataStructurePtr q);
 };
-
-
-inline bool DataStructure::readOnly() const
-{
-    return d->_readOnly;
-}
-
-
-inline const QString& DataStructure::name() const
-{
-    return d->_name;
-}
-
-/**
- * returns cached relative center of datastructure
- * center needs to be updated at resizes by using \see updateRelativeCenter()
- * \return QPointF center of datastructure
- */
-inline QPointF DataStructure::relativeCenter() const
-{
-    return d->_relativeCenter;
-}
-
-inline QScriptValue DataStructure::scriptValue() const
-{
-    return d->_value;
-}
-inline QScriptEngine *DataStructure::engine() const
-{
-    return d->_engine;
-}
-inline Document *DataStructure::document() const
-{
-    return d->_document;
-}
-
-inline const QList<GroupPtr> DataStructure::groups() const
-{
-    return d->_groups;
-}
 
 #endif
