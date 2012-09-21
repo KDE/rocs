@@ -51,6 +51,7 @@ private slots:
     void removeType();
     void updateCurrentTypeName();
     void updateCurrentTypeDirection();
+    void updateCurrentTypeLineStyle();
 
 private:
     Document* _document;

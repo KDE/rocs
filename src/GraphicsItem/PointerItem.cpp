@@ -102,20 +102,9 @@ void PointerItem::updatePos()
 
 void PointerItem::updateAttributes()
 {
-    Qt::PenStyle s;
-    if (_pointer->style() == "dash") {
-        s = Qt::DashLine;
-    } else if (_pointer->style() == "dot") {
-        s = Qt::DotLine;
-    } else if (_pointer->style() == "dash dot") {
-        s = Qt::DashDotLine;
-    } else if (_pointer->style() == "solid") {
-        s = Qt::SolidLine;
-    } else                                 {
-        s = Qt::SolidLine;
-    }
+    Qt::PenStyle style = pointer()->style();
 
-    setPen(QPen(QBrush(QColor(_pointer->color())), _pointer->width(), s, Qt::RoundCap, Qt::RoundJoin));
+    setPen(QPen(QBrush(QColor(_pointer->color())), _pointer->width(), style, Qt::RoundCap, Qt::RoundJoin));
     _value->hide();
     _name->hide();
     this->hide();

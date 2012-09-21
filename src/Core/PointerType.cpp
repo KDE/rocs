@@ -32,6 +32,7 @@ public:
     QString _name;
     int _identifier;
     PointerType::Direction _pointerDirection;
+    Qt::PenStyle _lineStyle;
     QColor _defaultColor;
     bool _valueVisibility;
     bool _nameVisibility;
@@ -54,6 +55,7 @@ PointerType::PointerType(Document* document, int identifier):
 {
     d->_identifier = identifier;
     d->_pointerDirection = Unidirectional;
+    d->_lineStyle = Qt::SolidLine;
     d->_defaultColor = QColor("gray");
     d->_name = i18n("Connection");
     d->_document = document;
@@ -97,10 +99,23 @@ void PointerType::setDirection(PointerType::Direction direction)
 }
 
 
+Qt::PenStyle PointerType::lineStyle() const
+{
+    return d->_lineStyle;
+}
+
+
+void PointerType::setLineStyle(Qt::PenStyle lineStyle)
+{
+    d->_lineStyle = lineStyle;
+    emit(styleChanged());
+}
+
+
 void PointerType::setDefaultColor(QColor color)
 {
     d->_defaultColor = color;
-    emit(colorChanged(d->_defaultColor));
+    emit(styleChanged());
 }
 
 

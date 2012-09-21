@@ -56,7 +56,6 @@ class ROCSLIB_EXPORT Pointer : public QObject
     Q_PROPERTY(QString value READ value WRITE setValue)
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(qreal width READ width WRITE setWidth)
-    Q_PROPERTY(QString style READ style WRITE setStyle)
 
 public:
     /**
@@ -212,14 +211,7 @@ public slots:
     /**
      * \return line style of the pointer line
      */
-    const QString& style() const;
-
-    /**
-     * Set line style for the pointer.
-     *
-     * \param s is the style identifier
-     */
-    void setStyle(const QString& s);
+    Qt::PenStyle style() const;
 
     /**
      * Add new dynamic property with identifier \p property to this data element and

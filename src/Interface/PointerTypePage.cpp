@@ -39,6 +39,16 @@ PointerTypePage::PointerTypePage(QWidget* parent)
     ui = new Ui::PointerTypePage;
     ui->setupUi(this);
 
+    // create line style selector
+    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "solid line"), Qt::SolidLine);
+    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dash line"), Qt::DashLine);
+    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dot line "), Qt::DotLine);
+    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dash dot line"), Qt::DashDotLine);
+
+    // create pointer direction selector
+    ui->typePointerDirection->addItem(i18nc("@item:inlistbox", "Unidirectional"), PointerType::Unidirectional);
+    ui->typePointerDirection->addItem(i18nc("@item:inlistbox", "Bidirectional"), PointerType::Bidirectional);
+
     connect(ui->typeSelector, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setCurrentType(int)));
     connect(ui->exportNewType, SIGNAL(clicked(bool)),
@@ -49,6 +59,8 @@ PointerTypePage::PointerTypePage(QWidget* parent)
             this, SLOT(updateCurrentTypeName()));
     connect(ui->typePointerDirection, SIGNAL(activated(int)),
             this, SLOT(updateCurrentTypeDirection()));
+    connect(ui->typeLineStyle, SIGNAL(activated(int)),
+            this, SLOT(updateCurrentTypeLineStyle()));
     connect(ui->typeName, SIGNAL(textEdited(QString)),
             this, SLOT(setTypeName()));
     connect(ui->typeDefaultColor, SIGNAL(activated(QColor)),
@@ -92,8 +104,10 @@ void PointerTypePage::setCurrentType(int index)
     }
 
     ui->typeName->setText(_document->pointerType(type)->name());
-    //TODO insert style
-    ui->typePointerDirection->setCurrentIndex(_document->pointerType(type)->direction());
+    ui->typeLineStyle->setCurrentIndex(
+        ui->typeLineStyle->findData(_document->pointerType(type)->lineStyle()));
+    ui->typePointerDirection->setCurrentIndex(
+        ui->typePointerDirection->findData(_document->pointerType(type)->direction()));
     ui->typeDefaultColor->setColor(_document->pointerType(type)->defaultColor());
     ui->typeIdentifier->setText(QString::number(type));
 }
@@ -123,8 +137,16 @@ void PointerTypePage::updateCurrentTypeName()
 void PointerTypePage::updateCurrentTypeDirection()
 {
     int type = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
-    int direction = ui->typePointerDirection->currentIndex();
+    int direction = ui->typePointerDirection->itemData(ui->typePointerDirection->currentIndex()).toInt();
     _document->pointerType(type)->setDirection(PointerType::Direction(direction));
+}
+
+
+void PointerTypePage::updateCurrentTypeLineStyle()
+{
+    int type = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
+    int style = ui->typeLineStyle->itemData(ui->typeLineStyle->currentIndex()).toInt();
+    _document->pointerType(type)->setLineStyle(Qt::PenStyle(style));
 }
 
 

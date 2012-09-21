@@ -99,17 +99,6 @@ void PointerPropertiesWidget::on__color_activated(const QColor& c)
 }
 
 
-void PointerPropertiesWidget::on__style_activated(int index)
-{
-    switch (index) {
-    case 0 : _pointer->setStyle("solid");    break;
-    case 1 : _pointer->setStyle("dash");     break;
-    case 2 : _pointer->setStyle("dot");      break;
-    case 3 : _pointer->setStyle("dash dot"); break;
-    }
-}
-
-
 void PointerPropertiesWidget::on__addProperty_clicked()
 {
 

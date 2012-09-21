@@ -73,12 +73,17 @@ public:
     int identifier() const;
 
     /**
-     * \return direction of pointers of this type
+     * \return direction for pointers of this type
      */
     Direction direction() const;
 
     /**
-     * \return default color for data elements of this pointer type
+     * \return line style for pointers of this type
+     */
+    Qt::PenStyle lineStyle() const;
+
+    /**
+     * \return default color for pointers of this type
      */
     const QColor& defaultColor() const;
 
@@ -104,6 +109,13 @@ public slots:
      */
     void setDirection(PointerType::Direction direction);
 
+    /**
+     * Set line style for all pointers of this type.
+     *
+     * \param lineStyle is the new line style
+     */
+    void setLineStyle(Qt::PenStyle lineStyle);
+
 signals:
     /**
      * Emitted when name was changed.
@@ -111,9 +123,9 @@ signals:
     void nameChanged(const QString& name);
 
     /**
-     * Emitted when default color was changed.
+     * Emitted when settings for the visual representation changed.
      */
-    void colorChanged(const QColor& color);
+    void styleChanged();
 
     /**
      * Emitted when direction was changed.
@@ -135,3 +147,4 @@ private:
 };
 
 #endif // POINTERTYPE_H
+

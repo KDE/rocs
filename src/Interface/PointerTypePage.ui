@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>346</width>
-    <height>208</height>
+    <height>246</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -42,7 +42,7 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_3">
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="typeDefaultColorLabel">
        <property name="text">
         <string>Default Color:</string>
@@ -52,10 +52,10 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="KColorCombo" name="typeDefaultColor"/>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>Identifier:</string>
@@ -65,7 +65,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <widget class="QLabel" name="typeIdentifier">
        <property name="toolTip">
         <string>This is the unique identifier for the pointer type.</string>
@@ -116,17 +116,20 @@
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select if pointers of this type is unidirectional or bidirectional. Changing this value changes directions of all pointers of this type.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
-       <item>
-        <property name="text">
-         <string>Unidirectional</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Bidirectional</string>
-        </property>
-       </item>
       </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Style:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="KComboBox" name="typeLineStyle"/>
      </item>
     </layout>
    </item>

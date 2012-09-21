@@ -166,9 +166,15 @@ void RocsGraphFileFormatPlugin::readFile()
 
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith(QLatin1String("Name :")))      tmpPointerType->setName(dataLine.section(' ', 2));
-                else if (dataLine.startsWith(QLatin1String("Color :")))     tmpPointerType->setDefaultColor(QColor(dataLine.section(' ', 2)));
-                else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
+                /**/ if (dataLine.startsWith(QLatin1String("Name :"))) {
+                    tmpPointerType->setName(dataLine.section(' ', 2));
+                } else if (dataLine.startsWith(QLatin1String("Color :"))) {
+                    tmpPointerType->setDefaultColor(QColor(dataLine.section(' ', 2)));
+                } else if (dataLine.startsWith(QLatin1String("LineStyle :"))) {
+                    tmpPointerType->setLineStyle(Qt::PenStyle(dataLine.section(' ', 2).toInt()));
+                } else if (!dataLine.isEmpty()) {
+                    break;  // go to the last if and finish populating.
+                }
                 dataLine = in.readLine().simplified();
             }
         }
@@ -225,13 +231,11 @@ void RocsGraphFileFormatPlugin::readFile()
             QString value = "";
             int type = 0;
             QString color = "";
-            QString style = "";
             while (!in.atEnd() && !dataLine.isEmpty()) {
                 /**/ if (dataLine.startsWith(QLatin1String("width :")))     width = dataLine.section(' ', 2).toInt();
                 else if (dataLine.startsWith(QLatin1String("value :")))     value = dataLine.section(' ', 2);
                 else if (dataLine.startsWith(QLatin1String("type :")))      type = dataLine.section(' ', 2).toInt();
                 else if (dataLine.startsWith(QLatin1String("color :")))     color = dataLine.section(' ', 2);
-                else if (dataLine.startsWith(QLatin1String("style :")))     style = dataLine.section(' ', 2);
                 else if (!dataLine.isEmpty())                break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
@@ -245,7 +249,6 @@ void RocsGraphFileFormatPlugin::readFile()
                 tmpPointer->setWidth(width);
                 tmpPointer->setValue(value);
                 tmpPointer->setColor(color);
-                tmpPointer->setStyle(style);
                 tmpObject = tmpPointer.get();
             }
         }
@@ -314,6 +317,7 @@ QString RocsGraphFileFormatPlugin::serialize(const Document& document)
         d->_buffer += QString("[PointerType %1]").arg(QString::number(pointerTypeIdentifier)) % QChar('\n')
             % QString("Name : ") % document.pointerType(pointerTypeIdentifier)->name() % QChar('\n')
             % QString("Color : ") % document.pointerType(pointerTypeIdentifier)->defaultColor().name() % QChar('\n')
+            % QString("LineStyle : ") % QString::number(document.pointerType(pointerTypeIdentifier)->lineStyle()) % QChar('\n')
             % QChar('\n');
     }
 

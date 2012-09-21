@@ -40,7 +40,6 @@ public:
     QString value;
     QString name;
     QColor color;
-    QString style;
     qreal width;
     PointerTypePtr pointerType;
 
@@ -87,12 +86,13 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->color         = d->dataStructure->document()->pointerType(pointerType)->defaultColor();
     d->showName      = d->dataStructure->isPointerNameVisible(pointerType);
     d->showValue     = d->dataStructure->isPointerValueVisible(pointerType);
-    d->style         = "solid";
     d->width         = 1;
     d->pointerType   = d->dataStructure->document()->pointerType(pointerType);
 
     connect(d->pointerType.get(), SIGNAL(directionChanged(PointerType::Direction)),
             this, SIGNAL(directionChanged(PointerType::Direction)));
+    connect(d->pointerType.get(), SIGNAL(styleChanged()),
+            this, SIGNAL(changed()));
 }
 
 Pointer::~Pointer()
@@ -167,7 +167,7 @@ void Pointer::setPointerType(int typeIdentifier)
     d->dataStructure->updatePointer(getPointer());
 
     // connect to new pointer type and emit information about
-    connect(d->pointerType.get(), SIGNAL(directionChanged(Direction)),
+    connect(d->pointerType.get(), SIGNAL(directionChanged(PointerType::Direction)),
             this, SIGNAL(directionChanged(PointerType::Direction)));
     emit pointerTypeChanged(typeIdentifier);
 }
@@ -260,15 +260,9 @@ void Pointer::setWidth(qreal width)
     emit changed();
 }
 
-const QString& Pointer::style() const
+Qt::PenStyle Pointer::style() const
 {
-    return d->style;
-}
-
-void Pointer::setStyle(const QString& s)
-{
-    d->style = s;
-    emit changed();
+    return d->pointerType->lineStyle();
 }
 
 void Pointer::addDynamicProperty(QString property, QVariant value)
