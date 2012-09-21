@@ -41,9 +41,9 @@ ValueModifier::~ValueModifier()
 void ValueModifier::enumerate(QList<DataPtr> dataList, int start, bool overrideValues = true)
 {
     for (int i = 0; i < dataList.size(); i++) {
-        if (!overrideValues && !dataList[i]->value().isNull())
+        if (!overrideValues && !dataList[i]->property("value").isNull())
             return;
-        dataList[i]->setValue(QString::number(start++));
+        dataList[i]->setProperty("value", QString::number(start++));
     }
 }
 
@@ -70,9 +70,9 @@ void ValueModifier::assignRandomIntegers(QList<DataPtr> dataList, int lowerLimit
     boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
 
     for (int i = 0; i < dataList.size(); i++) {
-        if (!overrideValues && !dataList[i]->value().isNull())
+        if (!overrideValues && !dataList[i]->property("value").isNull())
             return;
-        dataList[i]->setValue(QString::number(die()));
+        dataList[i]->setProperty("value", QString::number(die()));
     }
 }
 
@@ -108,9 +108,9 @@ void ValueModifier::assignRandomReals(QList<DataPtr> dataList, qreal lowerLimit,
     boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
 
     for (int i = 0; i < dataList.size(); i++) {
-        if (!overrideValues && !dataList[i]->value().isNull())
+        if (!overrideValues && !dataList[i]->property("value").isNull())
             return;
-        dataList[i]->setValue(QString::number(die()));
+        dataList[i]->setProperty("value", QString::number(die()));
     }
 }
 

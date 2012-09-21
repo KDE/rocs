@@ -31,6 +31,7 @@
 class Data;
 class QGraphicsColorizeEffect;
 class QSvgRenderer;
+class QGraphicsItem;
 class QGraphicsSimpleTextItem;
 
 class ROCSLIB_EXPORT DataItem : public QGraphicsSvgItem
@@ -46,30 +47,35 @@ public:
     static QSvgRenderer* sharedRenderer(QString iconPackage);
     static QSvgRenderer* registerSharedRenderer(QString iconPackage);
     static void removeSharedRenderer(QString iconPackage);
-    QGraphicsSimpleTextItem *name() const;
-    QGraphicsSimpleTextItem *value() const;
+
+    /**
+     * \return the graphics item to be displayed at the scene
+     */
+    QGraphicsItem *propertyListItem() const;
     void remove();
 
 private slots:
     void setupNode();
     void updateRenderer();
     void updateIcon();
-    void updateName();
-    void updateValue();
+    void updateProperty(QString name);
+    void updatePropertyList();
     void updateColor();
     void updateVisibility(bool visible);
     void updatePos();
     void updateSize();
+    void registerProperty(QString name);
+    void removeProperty(QString name);
 
 private:
     static QMap<QString, QSvgRenderer*> _sharedRenderers;
     DataPtr _data;
-    QGraphicsSimpleTextItem *_name;
-    QGraphicsSimpleTextItem *_value;
+    QMap<QString, QGraphicsSimpleTextItem*> _propertyValues;
     QGraphicsColorizeEffect *_colorizer;
     QGraphicsRectItem *_boundingRect;
     QFont _font;
     int _oldStyle;
+    QGraphicsItemGroup* _item;
 
     qreal _originalWidth;
     qreal _width;

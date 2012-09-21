@@ -125,10 +125,10 @@ void DataPropertiesWidget::reflectAttributes()
     }
 
     ui->_color->setColor(_data->color().value<QColor>());
-    ui->_name->setText(_data->name());
-    ui->_value->setText(_data->value().toString());
-    ui->_showName->setChecked(_data->isNameVisible());
-    ui->_showValue->setChecked(_data->isValueVisible());
+//     ui->_name->setText(_data->name());
+//     ui->_value->setText(_data->value().toString());
+//     ui->_showName->setChecked(_data->isNameVisible());
+//     ui->_showValue->setChecked(_data->isValueVisible());
     ui->_enableColor->setChecked(_data->isColored());
 
     DataTypePtr dataType = _data->dataStructure()->document()->dataType(_data->dataType());

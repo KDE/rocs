@@ -50,9 +50,9 @@ void GraphicsLayout::setViewStyleDataNode(int style)
     _viewStyleDataNode = style;
     QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
     foreach(DataStructurePtr ds, dsList) {
-        foreach(int identifier, ds->document()->dataTypeList()) {
-            // update all data elements
-            ds->setDataNameVisibility(ds->isDataNameVisible(identifier), identifier);
+        foreach(int identifier, ds->document()->pointerTypeList()) {
+            // update all pointers
+            ds->setDataVisibility(ds->isDataVisible(identifier), identifier);
         }
     }
     emit changed();

@@ -227,26 +227,10 @@ public slots:
      */
     void setDataColor(QColor color, int dataType);
 
-    /**
-     * Set all names of all data elements of given \param dataType to the given value of \param visible.
-     * This is a fast implementation that starts several threads for updating all data elements in parallel.
-     *
-     * \param visible must be true if data names shall be shown, false if hidden
-     * \param dataType is the identifier of the data type for that this function has affect.
-     */
-    void setDataNameVisibility(bool visible, int dataType);
-
+    //FIXME remove
     void toggleDataNameVisibility(int dataType);
 
-    /**
-     * Set all values of all data of given \param dataType to the given value of \param visible.
-     * This is a fast implementation that starts several threads for updating all data types in parallel.
-     *
-     * \param visible must be true if data values shall be shown, false if hidden
-     * \param dataType is the identifier of the data type for that this function has affect.
-     */
-    void setDataValueVisibility(bool visible, int dataType);
-
+    //FIXME remove
     void toggleDataValueVisibility(int dataType);
 
     /**

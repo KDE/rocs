@@ -40,7 +40,6 @@ int GraphPropertiesModel::rowCount(const QModelIndex &parent) const
     if (_dataSource == 0) {
         return 0;
     }
-    kDebug() << _dataSource->dynamicPropertyNames().size();
     return _dataSource->dynamicPropertyNames().size();
 }
 
@@ -138,8 +137,8 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
 	const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
 	if (index.column() == 0 && value.toString() == QString(propertyName) ){
 	  return false;
-	}  
-	
+	}
+
         switch (index.column()) {
             /* Change name. DinamicPropertiesList take part"                    name                                        new name        object  */
         case 0: DynamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;

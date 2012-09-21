@@ -190,8 +190,7 @@ QGraphicsItem *GraphScene::createData(DataPtr n)
 {
     DataItem *nItem = (DataItem*)(DataStructurePluginManager::self()->dataItem(n));
     addItem(nItem);
-    addItem(nItem->name());
-    addItem(nItem->value());
+    addItem(nItem->propertyListItem());
     return nItem;
 }
 
@@ -279,8 +278,9 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event)
 
 void GraphScene::updateGraph(DataStructurePtr g)
 {
+    //FIXME this is a workaround to trigger updates
     foreach(DataPtr n, g->dataList()) {
-        n->setName(n->name());
+        n->setColor(n->color());
     }
 
     foreach(PointerPtr e, g->pointers()) {

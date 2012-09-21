@@ -139,9 +139,9 @@ void DataStructure::importStructure(DataStructurePtr other)
 
     QHash <Data*, DataPtr > dataTodata;
     foreach(DataPtr n, other->dataList()) {
-        DataPtr newdata = addData(n->name());
+        DataPtr newdata = addData(n->property("name").toString());
         newdata->setColor(n->color());
-        newdata->setValue(n->value());
+        //FIXME all dynamic properties must be set
         newdata->setX(n->x());
         newdata->setY(n->y());
         newdata->setWidth(n->width());
@@ -366,7 +366,11 @@ DataPtr DataStructure::addData(QString name, int dataType)
     }
 
     DataPtr n = Data::create(this->getDataStructure(), generateUniqueIdentifier(), dataType);
-    n->setName(name);
+
+    if (n->property("name") == QVariant::Invalid) {
+        document()->dataType(dataType)->addProperty("name");
+    }
+    n->setProperty("name", name);
     return addData(n, dataType);
 }
 
@@ -384,12 +388,9 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
     emit changed();
 
 //     connect(data.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
-    connect(data.get(), SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
-    connect(data.get(), SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(propertyChanged(QString)),     this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
-    connect(data.get(), SIGNAL(nameVisibilityChanged(bool)),  this, SIGNAL(changed()));
-    connect(data.get(), SIGNAL(valueVisibilityChanged(bool)), this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
     return data;
 }
@@ -402,12 +403,9 @@ DataList DataStructure::addDataList(DataList dataList, int dataType)
         d->_dataTypeLists[dataType].append(n);
         emit dataCreated(n);
 //         connect(n.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
-        connect(n.get(), SIGNAL(nameChanged(QString)),         this, SIGNAL(changed()));
-        connect(n.get(), SIGNAL(valueChanged(QVariant)),       this, SIGNAL(changed()));
+        connect(n.get(), SIGNAL(propertyChanged(QString)),     this, SIGNAL(changed()));
         connect(n.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
         connect(n.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
-        connect(n.get(), SIGNAL(nameVisibilityChanged(bool)),  this, SIGNAL(changed()));
-        connect(n.get(), SIGNAL(valueVisibilityChanged(bool)), this, SIGNAL(changed()));
         connect(n.get(), SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
     }
     emit changed();
@@ -641,29 +639,15 @@ void DataStructure::setPointerColor(QColor color, int pointerType)
 }
 
 
-void DataStructure::setDataNameVisibility(bool visible, int dataType)
-{
-    d->_dataTypeNameVisibility[dataType] = visible;
-    QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataNameVisibilitySetted(visible));
-}
-
-
 void DataStructure::toggleDataNameVisibility(int dataType)
 {
-    setDataNameVisibility(!isDataNameVisible(dataType), dataType);
-}
-
-
-void DataStructure::setDataValueVisibility(bool visible, int dataType)
-{
-    d->_dataTypeValueVisibility[dataType] = visible;
-    QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataValueVisibilitySetted(visible));
+    kFatal() << "must be ported";
 }
 
 
 void DataStructure::toggleDataValueVisibility(int dataType)
 {
-    setDataValueVisibility(!isDataValueVisible(dataType), dataType);
+    kFatal() << "must be ported";
 }
 
 

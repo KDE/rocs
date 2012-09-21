@@ -29,15 +29,20 @@
 class DataTypePrivate
 {
 public:
+    struct Property {
+        QString name;
+        QVariant defaultValue;
+        bool visible;
+    };
+
     DataTypePrivate() {}
     boost::weak_ptr<DataType> q; // self pointer
 
+    QList<Property> _properties;
     QString _name;
     QString _icon;
     QColor _defaultColor;
     int _identifier;
-    bool _valueVisibility;
-    bool _nameVisibility;
     bool _visibility;
     Document* _document;
 };
@@ -47,6 +52,7 @@ DataTypePtr DataType::create(Document* document, int identifier)
 {
     DataTypePtr pi(new DataType(document, identifier));
     pi->d->q = pi;
+    pi->addProperty("name", "");
 
     return pi;
 }
@@ -142,6 +148,66 @@ void DataType::setDefaultColor(QColor color)
 const QColor& DataType::defaultColor() const
 {
     return d->_defaultColor;
+}
+
+void DataType::addProperty(QString name, QString defaultValue)
+{
+    DataTypePrivate::Property newProperty;
+    newProperty.name = name;
+    newProperty.defaultValue = defaultValue;
+    newProperty.visible = true;
+    d->_properties.append(newProperty);
+    emit(propertyAdded(newProperty.name, newProperty.defaultValue));
+}
+
+QList<QString> DataType::properties() const
+{
+    QList<QString> properties;
+    QList<DataTypePrivate::Property>::const_iterator iter = d->_properties.constBegin();
+    while (iter != d->_properties.constEnd()) {
+        properties.append(iter->name);
+        ++iter;
+    }
+    return properties;
+}
+
+QVariant DataType::propertyDefaultValue(QString name) const
+{
+    //FIXME very inefficient with this implementation, but working
+    QList<QString> properties;
+    QList<DataTypePrivate::Property>::const_iterator iter = d->_properties.constBegin();
+    while (iter != d->_properties.constEnd()) {
+        if (name == iter->name) {
+            return iter->defaultValue;
+        }
+    }
+    return false;
+}
+
+bool DataType::isPropertyVisible(QString name) const
+{
+    //FIXME very inefficient with this implementation, but working
+    QList<QString> properties;
+    QList<DataTypePrivate::Property>::const_iterator iter = d->_properties.constBegin();
+    while (iter != d->_properties.constEnd()) {
+        if (name == iter->name) {
+            return iter->visible;
+        }
+    }
+    return false;
+}
+
+void DataType::setPropertyVisible(QString name, bool visible)
+{
+    //FIXME very inefficient with this implementation, but working
+    QList<QString> properties;
+    QList<DataTypePrivate::Property>::iterator iter = d->_properties.begin();
+    while (iter != d->_properties.end()) {
+        if (name == iter->name) {
+            iter->visible = visible;
+            return;
+        }
+    }
 }
 
 void DataType::remove()

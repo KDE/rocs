@@ -21,6 +21,7 @@
 #define DATATYPE_H
 
 #include <QString>
+#include <QVariant>
 #include <QColor>
 #include <KIcon>
 
@@ -84,6 +85,34 @@ public:
      */
     const QColor& defaultColor() const;
 
+    /**
+     * Add a new dynamic property to all data elements of this data type.
+     *
+     * \param name is the unique name of the property
+     * \param defaultValue is the default value that is set initially
+     */
+    void addProperty(QString name, QString defaultValue = "");
+
+    /**
+     * \return list of all properties, ordered in display order
+     */
+    QList<QString> properties() const;
+
+    /**
+     * \return default value for property \p name
+     */
+    QVariant propertyDefaultValue(QString name) const;
+
+    /**
+     * \return true if this property is visible, otherwise false.
+     */
+    bool isPropertyVisible(QString name) const;
+
+    /**
+     * Set visibility of property \p name to \p visible.
+     */
+    void setPropertyVisible(QString name, bool visible);
+
 public slots:
     /**
      * Set name of the data type.
@@ -127,6 +156,21 @@ signals:
      * Emitted when name was changed.
      */
     void nameChanged(const QString& name);
+
+    /**
+     * Emitted when new property was created.
+     */
+    void propertyAdded(const QString& name, const QVariant& defaultValue);
+
+    /**
+     * Emitted when property was removed.
+     */
+    void propertyRemoved(const QString& name);
+
+    /**
+     * Emitted when either the visibility or the order of propeties was changed.
+     */
+    void propertyListChanged();
 
 protected:
     /**

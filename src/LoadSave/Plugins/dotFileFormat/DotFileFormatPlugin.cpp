@@ -181,7 +181,7 @@ QString const DotFileFormatPlugin::processNode(DataPtr node) const
 
     // use identifier for unique identification, store name as argument "label"
     nodeStr = QString("%1").arg(node->identifier());
-    nodeStr.append(QString(" [label=%1 ").arg(node->name()));
+    nodeStr.append(QString(" [label=%1 ").arg(node->property("name").toString()));
 
     foreach(const QByteArray& property, node->dynamicPropertyNames()) {
         nodeStr.append(", ");

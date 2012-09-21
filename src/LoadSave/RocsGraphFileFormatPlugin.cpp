@@ -206,7 +206,6 @@ void RocsGraphFileFormatPlugin::readFile()
                 tmpData = tmpDataStructure->addData(name, 0);
             }
             if (tmpData) {
-                tmpData->setValue(value);
                 tmpData->setColor(color);
                 tmpData->setPos(posX, posY);
 

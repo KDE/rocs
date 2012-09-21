@@ -42,29 +42,11 @@ struct PointerColorSetted {
     const QColor& m_color;
 };
 
-struct DataNameVisibilitySetted {
-    DataNameVisibilitySetted(bool visibility) : m_visibility(visibility) {}
-    typedef void result_type;
-    void operator()(DataPtr d) {
-        d->setNameVisible(m_visibility);
-    }
-    bool m_visibility;
-};
-
 struct PointerNameVisibilitySetted {
     PointerNameVisibilitySetted(bool visibility) : m_visibility(visibility) {}
     typedef void result_type;
     void operator()(PointerPtr d) {
         d->setNameVisible(m_visibility);
-    }
-    bool m_visibility;
-};
-
-struct DataValueVisibilitySetted {
-    DataValueVisibilitySetted(bool visibility) : m_visibility(visibility) {}
-    typedef void result_type;
-    void operator()(DataPtr d) {
-        d->setValueVisible(m_visibility);
     }
     bool m_visibility;
 };

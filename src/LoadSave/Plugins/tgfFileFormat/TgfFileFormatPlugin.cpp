@@ -134,7 +134,7 @@ void TgfFileFormatPlugin::writeFile(Document &graph )
     foreach(DataPtr n, g->dataList()) {
         out << n->identifier();
         out << " ";
-        out << n->name();
+        out << n->property("name").toString(); //TODO change to selectable property
         out << '\n';
     }
     out << "#\n";

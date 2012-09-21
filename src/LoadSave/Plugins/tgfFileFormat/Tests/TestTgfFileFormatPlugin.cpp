@@ -75,7 +75,7 @@ void TestTgfFileFormatPlugin::serializeUnserializeTest()
         QVERIFY2(n->adjacentDataList().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
         QVERIFY2(n->pointerList().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
-    QVERIFY(ds->dataList().at(0)->name() == "first node");
+    QVERIFY(ds->dataList().at(0)->property("name").toString() == "first node");
     QVERIFY(ds->pointers().at(0)->value() == "test value");
 }
 

@@ -114,8 +114,8 @@ void TikzFileFormatPlugin::writeFile(Document &graph)
                 arg(n->identifier()).
                 arg(n->x()/resize).
                 arg(n->y()*(-1)/resize).
-                arg(n->name()).
-                arg(n->value().toString());
+                arg(n->property("name").toString()).
+                arg(n->property("value").toString());
             out << dataStr;
             out << '\n';
         }
