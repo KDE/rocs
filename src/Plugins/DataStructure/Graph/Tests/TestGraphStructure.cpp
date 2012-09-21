@@ -227,7 +227,7 @@ void TestGraphStructure::serializeUnserializePluginExtraProperties()
     // Creates a simple Graph with 5 data elements and connect them with pointers.
     DataStructurePtr ds = document->activeDataStructure();
     ds->setProperty("name", "Graph1");
-    boost::static_pointer_cast<Rocs::GraphStructure>(ds)->setGraphType(Rocs::GraphStructure::MULTIGRAPH_UNDIRECTED);
+    boost::static_pointer_cast<Rocs::GraphStructure>(ds)->setGraphType(Rocs::GraphStructure::Multigraph);
 
     // serialize into file "serializetest.graph"
     DocumentManager::self()->activeDocument()->saveAs("graphserializetest");
@@ -243,7 +243,7 @@ void TestGraphStructure::serializeUnserializePluginExtraProperties()
     QVERIFY2(DocumentManager::self()->activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
     ds = DocumentManager::self()->activeDocument()->dataStructures().at(0);
     Rocs::GraphStructure::GRAPH_TYPE graphType = boost::static_pointer_cast<Rocs::GraphStructure>(ds)->graphType();
-    QVERIFY2(graphType == Rocs::GraphStructure::MULTIGRAPH_UNDIRECTED, "ERROR: graph type not loaded correctly");
+    QVERIFY2(graphType == Rocs::GraphStructure::Multigraph, "ERROR: graph type not loaded correctly");
 
 }
 

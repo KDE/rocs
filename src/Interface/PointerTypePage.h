@@ -50,6 +50,7 @@ private slots:
     void createNewType();
     void removeType();
     void updateCurrentTypeName();
+    void updateCurrentTypeDirection();
 
 private:
     Document* _document;

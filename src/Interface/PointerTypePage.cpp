@@ -47,6 +47,8 @@ PointerTypePage::PointerTypePage(QWidget* parent)
             this, SLOT(removeType()));
     connect(ui->typeName, SIGNAL(textChanged(QString)),
             this, SLOT(updateCurrentTypeName()));
+    connect(ui->typePointerDirection, SIGNAL(activated(int)),
+            this, SLOT(updateCurrentTypeDirection()));
     connect(ui->typeName, SIGNAL(textEdited(QString)),
             this, SLOT(setTypeName()));
     connect(ui->typeDefaultColor, SIGNAL(activated(QColor)),
@@ -91,6 +93,7 @@ void PointerTypePage::setCurrentType(int index)
 
     ui->typeName->setText(_document->pointerType(type)->name());
     //TODO insert style
+    ui->typePointerDirection->setCurrentIndex(_document->pointerType(type)->direction());
     ui->typeDefaultColor->setColor(_document->pointerType(type)->defaultColor());
     ui->typeIdentifier->setText(QString::number(type));
 }
@@ -114,6 +117,14 @@ void PointerTypePage::updateCurrentTypeName()
 {
     int type = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
     ui->typeSelector->setItemText(ui->typeSelector->currentIndex(), _document->pointerType(type)->name());
+}
+
+
+void PointerTypePage::updateCurrentTypeDirection()
+{
+    int type = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
+    int direction = ui->typePointerDirection->currentIndex();
+    _document->pointerType(type)->setDirection(PointerType::Direction(direction));
 }
 
 

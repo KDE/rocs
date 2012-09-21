@@ -46,11 +46,11 @@ EdgeItem::EdgeItem(PointerPtr edge, QGraphicsItem *parent)
     setPath(createCurves());
 
     connect(edge.get(), SIGNAL(changed()), this, SLOT(updatePathLayout()));
+    connect(edge.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updatePathLayout()));
 }
 
 EdgeItem::~EdgeItem()
 {
-//  dynamic_cast<GraphScene*>(scene())->removeGItem(this);
 }
 
 void EdgeItem::updatePathLayout()
@@ -96,35 +96,40 @@ QPainterPath EdgeItem::createLoop(QPointF pos) const
 
 QPainterPath EdgeItem::createCurves()
 {
-    if (!pointer()) return QPainterPath();
+    Q_ASSERT(pointer());
+    if (!pointer()) {
+        return QPainterPath();
+    }
 
-    if (pointer()->from() == 0 || pointer()->to() == 0) {
+    if (!pointer()->from() || !pointer()->to()) {
         pointer()->remove();
         return QPainterPath();
     }
 
-    QPointF Pos1(pointer()->from()->x(), pointer()->from()->y());
+    QPointF startPos(pointer()->from()->x(), pointer()->from()->y());
 
-    if (_loop) return createLoop(Pos1);
-
-    QPointF Pos2(pointer()->to()->x(), pointer()->to()->y());
-
-    QPolygonF arrow = createArrow(Pos1,  Pos2);
-
-    if (Pos1.x() > Pos2.x()) {
-        qSwap(Pos1, Pos2);
+    // test for self loop
+    if (_loop) {
+        return createLoop(startPos);
     }
 
-    boost::shared_ptr<Rocs::GraphStructure> graph = boost::static_pointer_cast<Rocs::GraphStructure>(pointer()->dataStructure());
-    if (graph->directed() == false) {
+    QPointF endPos(pointer()->to()->x(), pointer()->to()->y());
+
+    QPolygonF arrow = createArrow(startPos, endPos);
+
+    if (startPos.x() > endPos.x()) {
+        qSwap(startPos, endPos);
+    }
+
+    if (pointer()->direction() == PointerType::Bidirectional) {
         QPainterPath p;
-        p.moveTo(Pos1);
-        p.lineTo(Pos2);
+        p.moveTo(startPos);
+        p.lineTo(endPos);
         return p;
     }
 
-    qreal x = Pos2.x() - Pos1.x();
-    qreal y = Pos2.y() - Pos1.y();
+    qreal x = endPos.x() - startPos.x();
+    qreal y = endPos.y() - startPos.y();
     qreal angle = atan2(y, x);
 
     /// Calculate the size of the inclination on the curve.
@@ -143,19 +148,19 @@ QPainterPath EdgeItem::createCurves()
 
     finalX *= size;
     finalY *= size;
-    finalX += Pos1.x() + x / 2;
-    finalY += Pos1.y() + y / 2;
+    finalX += startPos.x() + x / 2;
+    finalY += startPos.y() + y / 2;
 
     /// Draw the Arc.
     QPainterPath p;
-    p.moveTo(Pos1);
-    p.quadTo(finalX, finalY, Pos2.x(), Pos2.y());
+    p.moveTo(startPos);
+    p.quadTo(finalX, finalY, endPos.x(), endPos.y());
 
     /// puts the arrow on its correct position
     QPointF middle = p.pointAtPercent(0.5);
 
-    x = Pos1.x() + (Pos2.x() - Pos1.x()) / 2;
-    y = Pos1.y() + (Pos2.y() - Pos1.y()) / 2;
+    x = startPos.x() + (endPos.x() - startPos.x()) / 2;
+    y = startPos.y() + (endPos.y() - startPos.y()) / 2;
     QLineF line2(QPointF(x, y), middle);
 
     arrow.translate(+line2.dx(), +line2.dy());

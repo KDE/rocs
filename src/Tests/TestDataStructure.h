@@ -40,9 +40,12 @@ private slots:
     void createSimpleGraph();
     void dataTypesTest();
     void pointerTypesTest();
-//     void saveTestFile();
-//     void loadTestFile();
-//     void testQtScript();
+
+    /**
+     * Test if pointers are registered/unregistered correctly at data elements when
+     * direction of pointer changes.
+     */
+    void pointerDirectionChange();
 
 private:
     Document* _document;

@@ -52,13 +52,13 @@ DataStructurePtr Rocs::GraphStructure::create(DataStructurePtr other, Document *
 Rocs::GraphStructure::GraphStructure(Document* parent) :
     DataStructure(parent)
 {
-    _type = UNDIRECTED;
+    _type = Graph;
 }
 
 void Rocs::GraphStructure::importStructure(DataStructurePtr other)
 {
     //FIXME this import does not correctly import different types
-    setGraphType(UNDIRECTED);
+    setGraphType(Graph);
     QHash <Data*, DataPtr> dataTodata;
     foreach(DataPtr n, other->dataList()) {
         DataPtr newdata = addData(n->name());
@@ -253,7 +253,7 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
         }
         counter++;
         // if graph is directed, also add back-edges
-        if (!this->directed()) {
+        if (p->direction() == PointerType::Bidirectional) {
             edges[counter] = Edge(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()]);
             edge_mapping[std::make_pair< int, int >(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()])] = p;
             if (!p->value().isEmpty()) {
@@ -307,111 +307,26 @@ void Rocs::GraphStructure::setGraphType(int type)
     if (_type == type) {
         return;
     }
-    if (((_type == MULTIGRAPH_UNDIRECTED || _type == MULTIGRAPH_DIRECTED) && type != _type)
-            || (_type == DIRECTED && type == UNDIRECTED)) {
+
+    if (_type == Multigraph && type != _type) {
         if (KMessageBox::warningContinueCancel(0, i18n("This action will probably remove some edges. Do you want to continue?")) != KMessageBox::Continue) {
             return;
         }
+    } else { // for switch to multigraph nothing has to be done
+        _type = GRAPH_TYPE(type);
+        return;
     }
 
-    _type = static_cast<GRAPH_TYPE>(type);
-    switch (_type) {
-    case UNDIRECTED:
-        foreach(DataPtr data, dataList()) {
-            // Clear the rest. there should be only one edge between two nodes.
-            foreach(DataPtr data2, dataList()) {
-                if (data == data2) {
-                    continue;
-                }
-
-                bool foundOne = false;
-                foreach(PointerPtr tmp, data->outPointerList()) {
-                    if (tmp->to() == data2) {
-                        if (!foundOne) {
-                            foundOne = true;
-                        } else {
-                            data->outPointerList().removeOne(tmp);
-                            data2->inPointerList().removeOne(tmp);
-                            tmp->remove();
-                        }
-                    }
-                }
-
-                foreach(PointerPtr tmp, data->inPointerList()) {
-                    if (tmp->from() == data2) {
-                        if (!foundOne) {
-                            foundOne = true;
-                        } else {
-                            data->inPointerList().removeOne(tmp);
-                            data2->outPointerList().removeOne(tmp);
-                            tmp->remove();
-                        }
-                    }
-                }
+    // need to convert multigraph to graph
+    foreach(DataPtr data, dataList()) {
+        // Clear the rest. there should be only one edge between two nodes.
+        foreach(DataPtr neighbor, data->adjacentDataList()) {
+            if (data == neighbor) {
+                continue;
             }
-        } break;
-    case DIRECTED:
-        foreach(DataPtr data, dataList()) {
-            // Just one going in, and one going out.
-            foreach(DataPtr data2, dataList()) {
-                if (data == data2) {
-                    continue;
-                }
-
-                bool foundOneOut = false;
-                foreach(PointerPtr tmp, data->outPointerList()) {
-                    if (tmp->to() == data2) {
-                        if (!foundOneOut) {
-                            foundOneOut = true;
-                        } else {
-                            data->outPointerList().removeOne(tmp);
-                            data2->inPointerList().removeOne(tmp);
-                            tmp->remove();
-                        }
-                    }
-                }
-
-                bool foundOneIn = false;
-                foreach(PointerPtr tmp, data->inPointerList()) {
-                    if (tmp->from() == data2) {
-                        if (!foundOneIn) {
-                            foundOneIn = true;
-                        } else {
-                            data->inPointerList().removeOne(tmp);
-                            data2->outPointerList().removeOne(tmp);
-                            tmp->remove();
-                        }
-                    }
-                }
+            while (data->pointerList(neighbor).count() > 1) {
+                data->pointerList(neighbor).last()->remove();
             }
-        } break;
-    default: break;
-    }
-
-    foreach(PointerPtr pointer, pointers()) {
-        QMetaObject::invokeMethod(pointer.get(), "changed");
-    }
-}
-
-void Rocs::GraphStructure::setDirected(bool directed)
-{
-    if (directed) {
-        if (multigraph()) {
-            setGraphType(MULTIGRAPH_DIRECTED);
-            return;
-        }
-        if (!multigraph()) {
-            setGraphType(DIRECTED);
-            return;
-        }
-    } else {
-        if (multigraph()) {
-            setGraphType(MULTIGRAPH_UNDIRECTED);
-            return;
-        }
-        if (!multigraph()) {
-            setGraphType(UNDIRECTED);
-            return;
         }
     }
 }
@@ -421,20 +336,15 @@ Rocs::GraphStructure::GRAPH_TYPE Rocs::GraphStructure::graphType() const
     return _type;
 }
 
-bool Rocs::GraphStructure::directed() const
-{
-    return (_type == DIRECTED || _type == MULTIGRAPH_DIRECTED);
-}
-
 bool Rocs::GraphStructure::multigraph() const
 {
-    return (_type == MULTIGRAPH_DIRECTED || _type == MULTIGRAPH_UNDIRECTED);
+    return (_type == Multigraph);
 }
-
 
 PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 {
-    if (_type == UNDIRECTED) {
+    bool directed = document()->pointerType(pointerType)->direction() == PointerType::Unidirectional;
+    if (!directed && !multigraph()) {
         // do not add back-edges if graph is undirected
         foreach(PointerPtr pointer, from->pointerList(to)) {
             if (pointer->pointerType() == pointerType) {
@@ -443,7 +353,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
         }
     }
 
-    if (_type == DIRECTED || _type == UNDIRECTED) {     // do not add double edges
+    if (!multigraph()) {     // do not add double edges
         PointerList list = from->outPointerList();
         foreach(PointerPtr tmp, list) {
             if (tmp->to() == to && tmp->pointerType() == pointerType) {

@@ -102,26 +102,19 @@ QLayout* GraphPlugin::dataExtraProperties(DataPtr node, QWidget* parentWidget) c
     return lay;
 }
 
-QLayout*  GraphPlugin::pointerExtraProperties(PointerPtr arg1, QWidget* arg2) const
+QLayout* GraphPlugin::pointerExtraProperties(PointerPtr arg1, QWidget* arg2) const
 {
     return DataStructurePluginInterface::pointerExtraProperties(arg1, arg2);
 }
 
-QLayout*  GraphPlugin::dataStructureExtraProperties(DataStructurePtr graph, QWidget* parentWidget) const
+QLayout* GraphPlugin::dataStructureExtraProperties(DataStructurePtr graph, QWidget* parentWidget) const
 {
     QGridLayout *lay = new QGridLayout(parentWidget);
     QLabel * _graphTypeText = new QLabel(i18n("Graph Type:"));
     KComboBox * _graphTypeCombo = new KComboBox(parentWidget);
-    _graphTypeCombo->insertItem(GraphStructure::UNDIRECTED, i18nc("@label:inlistbox", "Undirected Graph"));
-    _graphTypeCombo->insertItem(GraphStructure::DIRECTED,   i18nc("@label:inlistbox", "Directed Graph"));
-    _graphTypeCombo->insertItem(
-            GraphStructure::MULTIGRAPH_UNDIRECTED,
-            i18nc("@label:inlistbox Undirected graph for which several edges between same nodes may exist", "Undirected Multigraph")
-                               );
-    _graphTypeCombo->insertItem(
-            GraphStructure::MULTIGRAPH_DIRECTED,
-            i18nc("@label:inlistbox Directed graph for which several same orientated edges between same nodes may exist", "Directed Multigraph")
-                               );
+    _graphTypeCombo->insertItem(GraphStructure::Graph, i18nc("@label:inlistbox", "Graph"));
+    _graphTypeCombo->insertItem(GraphStructure::Multigraph,
+        i18nc("@label:inlistbox graph for which several edges between same nodes may exist", "Multigraph"));
 
     lay->addWidget(_graphTypeText, 0, 0);
     lay->addWidget(_graphTypeCombo, 0, 1);

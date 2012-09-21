@@ -31,10 +31,8 @@ class ROCS_GRAPHSTRUCTURE_EXPORT GraphStructure : public DataStructure
     Q_OBJECT
 public:
     typedef enum {
-        UNDIRECTED,
-        DIRECTED,
-        MULTIGRAPH_UNDIRECTED,
-        MULTIGRAPH_DIRECTED
+        Graph,
+        Multigraph
     } GRAPH_TYPE;
 
     //to avoid hide some methods
@@ -67,12 +65,6 @@ public:
      * \return the created node as DataPtr
      */
     DataPtr addData(QString name, int dataType = 0);
-
-    /**
-     * Returns true if the graph is directed, false otherwise.
-     * \return directed
-     */
-    bool directed() const;
 
     /**
      * Returns type of the graph given by enum \see GRAPH_TYPE.
@@ -115,8 +107,6 @@ public slots:
      * \return void
      */
     void setGraphType(int type);
-
-    void setDirected(bool directed);
 
     /**
      * Returns a list of all nodes of the graph.

@@ -219,4 +219,42 @@ void TestDataStructure::pointerTypesTest()
     QVERIFY(dataList[6]->adjacentDataList().size() == 0);
 }
 
+void TestDataStructure::pointerDirectionChange()
+{
+    QMap<int, DataPtr> dataList;
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
+    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+
+    // add two nodes 0 and 1, set type of default pointer type to unidirectional
+    ds->document()->pointerType(0)->setDirection(PointerType::Unidirectional);
+    dataList.insert(0, ds->addData("0"));
+    dataList.insert(1, ds->addData("1"));
+
+    // add pointer from 0 to 1 and test pointer list properties
+    dataList[0]->addPointer(dataList[1]);
+    QVERIFY(dataList[0]->outPointerList().length() == 1);
+    QVERIFY(dataList[0]->inPointerList().length() == 0);
+    QVERIFY(dataList[0]->adjacentDataList().length() == 1);
+    QVERIFY(dataList[1]->outPointerList().length() == 0);
+    QVERIFY(dataList[1]->inPointerList().length() == 1);
+    QVERIFY(dataList[1]->adjacentDataList().length() == 1);
+
+    ds->document()->pointerType(0)->setDirection(PointerType::Bidirectional);
+    QVERIFY(dataList[0]->outPointerList().length() == 1);
+    QVERIFY(dataList[0]->inPointerList().length() == 1);
+    QVERIFY(dataList[0]->adjacentDataList().length() == 1);
+    QVERIFY(dataList[1]->outPointerList().length() == 1);
+    QVERIFY(dataList[1]->inPointerList().length() == 1);
+    QVERIFY(dataList[1]->adjacentDataList().length() == 1);
+
+    ds->document()->pointerType(0)->setDirection(PointerType::Unidirectional);
+    QVERIFY(dataList[0]->outPointerList().length() == 1);
+    QVERIFY(dataList[0]->inPointerList().length() == 0);
+    QVERIFY(dataList[0]->adjacentDataList().length() == 1);
+    QVERIFY(dataList[1]->outPointerList().length() == 0);
+    QVERIFY(dataList[1]->inPointerList().length() == 1);
+    QVERIFY(dataList[1]->adjacentDataList().length() == 1);
+}
+
+
 QTEST_KDEMAIN_CORE(TestDataStructure)

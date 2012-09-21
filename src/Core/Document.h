@@ -47,7 +47,6 @@ class ROCSLIB_EXPORT Document : public QObject
     Q_PROPERTY(qreal bottom READ bottom WRITE setBottom)
 
 public:
-    enum Type {Simple = 0, Oriented};
     enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
     explicit Document(const QString& name,

@@ -256,7 +256,7 @@ void undirectedDataStructure()
         DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
     }
-    phelper->dataStructure->setDirected(false);
+    phelper->gd->pointerType(0)->setDirection(PointerType::Unidirectional);
 }
 
 void directedDataStructure()
@@ -266,7 +266,7 @@ void directedDataStructure()
         DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
     }
-    phelper->dataStructure->setDirected(true);
+    phelper->gd->pointerType(0)->setDirection(PointerType::Bidirectional);
 }
 
 void dataStructureId(const std::string& str)
@@ -417,14 +417,13 @@ void checkEdgeOperator(const std::string& str)
         return;
     }
 
-    if (((phelper->dataStructure->directed()) && (str.compare("->") == 0)) ||
-            ((!phelper->dataStructure->directed()) && (str.compare("--") == 0)))
+    if (((phelper->gd->pointerType(0)->direction() == PointerType::Unidirectional) && (str.compare("->") == 0)) ||
+            ((phelper->gd->pointerType(0)->direction() == PointerType::Bidirectional) && (str.compare("--") == 0)))
     {
         return;
     }
 
-    kError() << "Error: incoherent relation : directed = '" << phelper->dataStructure->directed()
-             << "' and edge operator = '" << QString::fromStdString(str) << "'" << endl;
+    kError() << "Error: incoherent edge direction relation" << endl;
 }
 
 void edgebound(const std::string& str)

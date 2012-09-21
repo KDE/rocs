@@ -21,12 +21,14 @@
 #ifndef POINTER_H
 #define POINTER_H
 
+#include "QtScriptBackend.h"
+#include "PointerType.h"
 #include <QObject>
 #include <QtScript>
 #include <QString>
 #include <QColor>
 #include <QScriptValue>
-#include "QtScriptBackend.h"
+
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 
@@ -81,6 +83,8 @@ public:
     /*! remove this pointer from the graph */
     void remove();
 
+    PointerType::Direction direction() const;
+
     /**
      * \return data structure to that this pointer belongs
      */
@@ -128,6 +132,11 @@ signals:
      * Emitted when the pointer type of this pointer changes.
      */
     void pointerTypeChanged(int pointerType);
+
+    /**
+     * Emitted when direction was changed.
+     */
+    void directionChanged(PointerType::Direction direction);
 
 public slots:
     /**

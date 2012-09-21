@@ -19,6 +19,7 @@
 
 #include "PointerType.h"
 #include "DataStructure.h"
+#include "Pointer.h"
 #include <boost/weak_ptr.hpp>
 
 
@@ -30,6 +31,7 @@ public:
 
     QString _name;
     int _identifier;
+    PointerType::Direction _pointerDirection;
     QColor _defaultColor;
     bool _valueVisibility;
     bool _nameVisibility;
@@ -51,6 +53,7 @@ PointerType::PointerType(Document* document, int identifier):
     d(new PointerTypePrivate())
 {
     d->_identifier = identifier;
+    d->_pointerDirection = Unidirectional;
     d->_defaultColor = QColor("gray");
     d->_name = i18n("Connection");
     d->_document = document;
@@ -74,10 +77,25 @@ const QString& PointerType::name() const
     return d->_name;
 }
 
+
 int PointerType::identifier() const
 {
     return d->_identifier;
 }
+
+
+PointerType::Direction PointerType::direction() const
+{
+    return d->_pointerDirection;
+}
+
+
+void PointerType::setDirection(PointerType::Direction direction)
+{
+    d->_pointerDirection = direction;
+    emit(directionChanged(direction));
+}
+
 
 void PointerType::setDefaultColor(QColor color)
 {

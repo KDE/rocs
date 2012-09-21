@@ -42,7 +42,7 @@ public:
     QColor color;
     QString style;
     qreal width;
-    int pointerType;
+    PointerTypePtr pointerType;
 
     bool showName;
     bool showValue;
@@ -89,7 +89,10 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->showValue     = d->dataStructure->isPointerValueVisible(pointerType);
     d->style         = "solid";
     d->width         = 1;
-    d->pointerType   = pointerType;
+    d->pointerType   = d->dataStructure->document()->pointerType(pointerType);
+
+    connect(d->pointerType.get(), SIGNAL(directionChanged(PointerType::Direction)),
+            this, SIGNAL(directionChanged(PointerType::Direction)));
 }
 
 Pointer::~Pointer()
@@ -148,7 +151,25 @@ const QString& Pointer::name() const
 
 int Pointer::pointerType() const
 {
-    return d->pointerType;
+    return d->pointerType->identifier();
+}
+
+
+void Pointer::setPointerType(int typeIdentifier)
+{
+    Q_ASSERT(d->dataStructure->document()->pointerTypeList().contains(typeIdentifier));
+
+    // disconnect from old type
+    disconnect(d->pointerType.get());
+
+    // change type
+    d->pointerType = d->dataStructure->document()->pointerType(typeIdentifier);
+    d->dataStructure->updatePointer(getPointer());
+
+    // connect to new pointer type and emit information about
+    connect(d->pointerType.get(), SIGNAL(directionChanged(Direction)),
+            this, SIGNAL(directionChanged(PointerType::Direction)));
+    emit pointerTypeChanged(typeIdentifier);
 }
 
 void Pointer::remove()
@@ -165,6 +186,10 @@ void Pointer::remove()
     d->dataStructure->remove(getPointer());
 }
 
+PointerType::Direction Pointer::direction() const
+{
+    return d->pointerType->direction();
+}
 
 bool Pointer::isNameVisible() const
 {
@@ -209,14 +234,6 @@ void Pointer::setName(const QString& name)
 {
     d->name = name;
     emit changed();
-}
-
-void Pointer::setPointerType(int pointerType)
-{
-    Q_ASSERT(d->dataStructure->document()->pointerTypeList().contains(pointerType));
-    d->pointerType = pointerType;
-    d->dataStructure->updatePointer(getPointer());
-    emit pointerTypeChanged(pointerType);
 }
 
 void Pointer::setColor(const QColor& color)
@@ -279,7 +296,7 @@ QScriptValue Pointer::set_type(int pointerType)
 
 QScriptValue Pointer::type() const
 {
-    return d->dataStructure->engine()->newVariant(d->pointerType);
+    return d->dataStructure->engine()->newVariant(d->pointerType->identifier());
 }
 
 void Pointer::add_property(QString name, QString value)

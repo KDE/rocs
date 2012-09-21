@@ -239,6 +239,15 @@ public slots:
     void setValue(const QString& v);
     void setDataType(int dataType);
 
+    /**
+     * FIXME proof of concept implementation: since each Pointer emits a changed direction signal,
+     * there are unnecessary many updates.
+     *
+     * Update pointer \p e in inPointerList and outPointerList, depending on how the direction changed
+     * This method is a condidate for optimizations, but it happens only seldom.
+     */
+    void updatePointerList();
+
     QScriptValue type();
     QScriptValue set_type(int type);
     void add_property(QString name, QString value);

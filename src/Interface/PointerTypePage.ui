@@ -42,6 +42,39 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_3">
+     <item row="2" column="0">
+      <widget class="QLabel" name="typeDefaultColorLabel">
+       <property name="text">
+        <string>Default Color:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="KColorCombo" name="typeDefaultColor"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Identifier:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="typeIdentifier">
+       <property name="toolTip">
+        <string>This is the unique identifier for the pointer type.</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="nameLabel">
        <property name="layoutDirection">
@@ -66,9 +99,12 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="typeDefaultColorLabel">
+      <widget class="QLabel" name="label_3">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
        <property name="text">
-        <string>Default Color:</string>
+        <string>Direction:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -76,26 +112,20 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="KColorCombo" name="typeDefaultColor"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Identifier:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="typeIdentifier">
+      <widget class="KComboBox" name="typePointerDirection">
        <property name="toolTip">
-        <string>This is the unique identifier for the pointer type.</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select if pointers of this type is unidirectional or bidirectional. Changing this value changes directions of all pointers of this type.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
-       <property name="text">
-        <string/>
-       </property>
+       <item>
+        <property name="text">
+         <string>Unidirectional</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bidirectional</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>

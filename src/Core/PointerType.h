@@ -41,7 +41,13 @@ class Document;
 class ROCSLIB_EXPORT PointerType : public QObject
 {
     Q_OBJECT
+
 public:
+    enum Direction {
+        Unidirectional,
+        Bidirectional
+    };
+
     /**
      * Create pointer type objects.
      *
@@ -67,6 +73,11 @@ public:
     int identifier() const;
 
     /**
+     * \return direction of pointers of this type
+     */
+    Direction direction() const;
+
+    /**
      * \return default color for data elements of this pointer type
      */
     const QColor& defaultColor() const;
@@ -86,6 +97,13 @@ public slots:
      */
     void setDefaultColor(QColor color);
 
+    /**
+     * Set direction for all pointers of this type.
+     *
+     * \param direction is the new direction for the pointers
+     */
+    void setDirection(PointerType::Direction direction);
+
 signals:
     /**
      * Emitted when name was changed.
@@ -96,6 +114,11 @@ signals:
      * Emitted when default color was changed.
      */
     void colorChanged(const QColor& color);
+
+    /**
+     * Emitted when direction was changed.
+     */
+    void directionChanged(PointerType::Direction direction);
 
 protected:
     /**

@@ -201,15 +201,19 @@ DataList Data::adjacentDataList() const
     // use QMap as the DataPtr elements are not hashable
     // and we can speed up process by using the uniqe IDs
     QMap<int, DataPtr> adjacent;
-
     foreach(PointerPtr e, d->_outPointers) {
+        if (e->to() != e->from() && e->to() == getData()) {
+            continue;
+        }
         adjacent[e->to()->identifier()] = e->to();
     }
 
     foreach(PointerPtr e, d->_inPointers) {
+        if (e->to() != e->from() && e->from() == getData()) {
+            continue;
+        }
         adjacent[e->from()->identifier()] = e->from();
     }
-
     return adjacent.values();
 }
 
@@ -227,6 +231,7 @@ void Data::registerInPointer(PointerPtr e)
 {
     Q_ASSERT(e->to()->identifier() == identifier() || e->from()->identifier() == identifier());
     d->_inPointers.append(e);
+    connect(e.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updatePointerList()));
     emit pointerListChanged();
 }
 
@@ -234,6 +239,7 @@ void Data::registerOutPointer(PointerPtr e)
 {
     Q_ASSERT(e->to()->identifier() == identifier() || e->from()->identifier() == identifier());
     d->_outPointers.append(e);
+    connect(e.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updatePointerList()));
     emit pointerListChanged();
 }
 
@@ -247,7 +253,39 @@ void Data::removePointer(PointerPtr e)
     // removes pointer from any list that could contain it
     d->removePointer(e, d->_inPointers);
     d->removePointer(e, d->_outPointers);
+    disconnect(e.get());
     emit pointerListChanged();
+}
+
+void Data::updatePointerList()
+{
+    bool changed = false;
+    PointerList tmpList = pointerList();
+    foreach(PointerPtr e, tmpList) {
+        if (e->direction() == PointerType::Bidirectional) {
+            if (!d->_inPointers.contains(e)) {
+                d->_inPointers.append(e);
+                changed = true;
+            }
+            if (!d->_outPointers.contains(e)) {
+                d->_outPointers.append(e);
+                changed = true;
+            }
+        }
+        if (e->direction() == PointerType::Unidirectional) {
+            if (getData() == e->from() && d->_inPointers.contains(e)) {
+                d->_inPointers.removeOne(e);
+                changed = true;
+            }
+            if (getData() == e->to() && d->_outPointers.contains(e)) {
+                d->_outPointers.removeOne(e);
+                changed = true;
+            }
+        }
+    }
+    if (changed) {
+        emit pointerListChanged();
+    }
 }
 
 PointerList Data::pointerList(DataPtr to) const
@@ -255,11 +293,6 @@ PointerList Data::pointerList(DataPtr to) const
     PointerList list;
     foreach(PointerPtr tmp, d->_outPointers) {
         if (tmp->to() == to) {
-            list.append(tmp);
-        }
-    }
-    foreach(PointerPtr tmp, d->_inPointers) {
-        if (tmp->from() == to) {
             list.append(tmp);
         }
     }

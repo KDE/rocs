@@ -23,6 +23,7 @@
 #include "GraphScene.h"
 #include "Data.h"
 #include "Pointer.h"
+#include "PointerType.h"
 #include "DataStructure.h"
 #include "math_constants.h"
 #include "GraphicsLayout.h"
@@ -62,6 +63,7 @@ void PointerItem::connectSignals()
     connect(_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
     connect(_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
     connect(_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
+    connect(_pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updateAttributes()));
     connect(_pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
 
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));

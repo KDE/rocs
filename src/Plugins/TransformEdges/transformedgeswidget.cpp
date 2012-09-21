@@ -102,11 +102,7 @@ void TransformEdgesWidget::executeTransform()
 
 void TransformEdgesWidget::makeComplete(DataStructurePtr graph)
 {
-    boost::shared_ptr<GraphStructure> graphDS = boost::static_pointer_cast<GraphStructure>(graph);
-    if (!graphDS)
-        return;
-
-    bool directed = graphDS->directed();
+    bool directed = graph->document()->pointerType(0)->direction() == PointerType::Unidirectional;
 
     foreach(PointerPtr e, graph->pointers()) {
         e->remove();
@@ -115,9 +111,9 @@ void TransformEdgesWidget::makeComplete(DataStructurePtr graph)
     int size_i = graph->dataList().size() - 1;
     for (int i = 0; i < size_i; ++i) {
         for (int e = i + 1; e < graph->dataList().size(); ++e) {
-            graph->addPointer(graph->dataList().at(i), graph->dataList().at(e));
+            graph->addPointer(graph->dataList().at(i), graph->dataList().at(e), 0);
             if (directed) {
-                graph->addPointer(graph->dataList().at(e), graph->dataList().at(i));
+                graph->addPointer(graph->dataList().at(e), graph->dataList().at(i), 0);
             }
         }
     }
@@ -136,21 +132,19 @@ void TransformEdgesWidget::removeAllEdges(DataStructurePtr graph)
 
 void TransformEdgesWidget::reverseAllEdges(DataStructurePtr graph)
 {
-    boost::shared_ptr<GraphStructure>  graphDS = boost::static_pointer_cast<GraphStructure>(graph);
-    if (!graphDS)
-        return;
+    foreach(int typeId, graph->document()->pointerTypeList()) {
+        if (graph->document()->pointerType(typeId)->direction() == PointerType::Bidirectional) {
+            continue;
+        }
+        QList< QPair< DataPtr, DataPtr > > newPointers;
+        foreach(PointerPtr e, graph->pointers(typeId)) {
+            newPointers << QPair< DataPtr, DataPtr >(e->to(), e->from());
+            e->remove();
+        }
 
-    if (graphDS->directed() == false)
-        return;
-
-    QList< QPair< DataPtr, DataPtr > > newPointers;
-    foreach(PointerPtr e, graphDS->pointers()) {
-        newPointers << QPair< DataPtr, DataPtr >(e->to(), e->from());
-        e->remove();
-    }
-
-    for (int i = 0; i < newPointers.count(); i++) {
-        graph->addPointer(newPointers[i].first, newPointers[i].second);
+        for (int i = 0; i < newPointers.count(); i++) {
+            graph->addPointer(newPointers[i].first, newPointers[i].second, typeId);
+        }
     }
 }
 
@@ -199,10 +193,7 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
             if (i == j)   weight[QPair<int, int>(i, j)] = 0;
 
             PointerList out;
-            if (graphDS->directed())
-                out = vertices[i]->outPointerList();
-            else
-                out = vertices[i]->pointerList();
+            out = vertices[i]->pointerList();
 
             for (int k = 0; k < out.size(); k++) {
                 if (out[k]->to() == vertices[j]) {
