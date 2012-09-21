@@ -75,11 +75,16 @@ void gotValue(const std::string& Value)
     if (Value.empty()) {
         return; //end of the list.
     } else {
-        phelper->setAtribute(QString::fromStdString(lastKey), QString::fromStdString(Value));
+        phelper->setAttribute(QString::fromStdString(lastKey), QString::fromStdString(Value));
 //     if (lastInserted){
-//       if (lastKey == "id"){
-//         lastInserted->setProperty("name", Value.c_str());
-//       }
+    if (!lastInserted) {
+        kError() << "Cannot specify data node value: internal error";
+        return;
+    }
+    if (lastKey == "id" && lastInserted){
+        lastInserted->setProperty("name", Value.c_str());
+        phelper->dataMap.insert(QString::fromStdString(Value), phelper->actualNode);
+    }
 //       lastInserted->setProperty(lastKey.c_str(), Value.c_str());
 //     }else{
 //       kDebug() << "ignoring keyvalue: "<< lastKey.c_str() << Value.c_str();

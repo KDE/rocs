@@ -45,7 +45,7 @@ struct GmlGraphParsingHelper {
     void endList();
     void startList(const QString& key);
 
-    void setAtribute(const QString& key, const QString& value);
+    void setAttribute(const QString& key, const QString& value);
     const QString processKey(const QString& key);
     QString edgeSource;
     QString edgeTarget;
@@ -58,6 +58,7 @@ struct GmlGraphParsingHelper {
     Document* gd;
     QStringList _properties;
     QHash<QString, QString> _edgeProperties;
+    QMap<QString, DataPtr> dataMap; // for mapping data element ids
 };
 }
 

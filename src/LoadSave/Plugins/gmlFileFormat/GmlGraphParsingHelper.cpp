@@ -100,7 +100,7 @@ const QString GmlGraphParsingHelper::processKey(const QString& key)
 }
 
 
-void GmlGraphParsingHelper::setAtribute(const QString& key, const QString& value)
+void GmlGraphParsingHelper::setAttribute(const QString& key, const QString& value)
 {
     kDebug() << "Setting attibute " << key;
     switch (_actualState) {
@@ -182,7 +182,11 @@ void GmlGraphParsingHelper::createEdge()
     if (!edgeSource.isEmpty() && !edgeTarget.isEmpty()) {
         kDebug() << "Creating a edge";
         _actualState = edge;
-        actualEdge = actualGraph->addPointer(edgeSource, edgeTarget);
+        if (!dataMap.contains(edgeSource) || !dataMap.contains(edgeTarget)) {
+            kError() << "No edge created: end points were not created";
+            return;
+        }
+        actualEdge = actualGraph->addPointer(dataMap[edgeSource], dataMap[edgeTarget]);
         edgeSource.clear();;
         edgeTarget.clear();
         while (! _edgeProperties.isEmpty()) {

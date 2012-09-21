@@ -46,7 +46,6 @@ void gotValue(const std::string &Value);
 
 void beginList();
 
-
 void endList();
 
 void t();
@@ -79,84 +78,8 @@ struct roman : boost::spirit::qi::grammar<Iterator, unsigned()> {
 boost::spirit::qi::rule<Iterator, unsigned()> start;
 boost::spirit::qi::rule<Iterator> List, KeyValue ;
 boost::spirit::qi::rule<Iterator, std::string()> Key, Value, String, Sign;
-boost::spirit::qi::rule<Iterator> WhiteSpace/*, Comments*/;
+boost::spirit::qi::rule<Iterator> WhiteSpace;
 };
 }
-// // #include "dotrenderop.h"
-//
-// #include <boost/throw_exception.hpp>
-// #include <boost/spirit/include/classic_core.hpp>
-// #include <boost/spirit/include/classic_distinct.hpp>
-// #include <boost/spirit/include/classic_loops.hpp>
-//
-// #include <QPoint>
-// #include <QColor>
-// #include <QPair>
-// #include <QVector>
-//
-// #include <map>
-// #include <list>
-// #include <string>
-// #include <sstream>
-/*
-class GraphDocument;
-
-bool parse(const std::string& str, GraphDocument* gd);
-
-void gotid(char const* first, char const* last);
-void dump(char const* first, char const* last);
-void strict(char const* first, char const* last);
-void undigraph(char const* first, char const* last);
-void digraph(char const* first, char const* last);
-void graphid(char const* first, char const* last);
-void attrid(char const* first, char const* last);
-void subgraphid(char const* first, char const* last);
-void valid(char const* first, char const* last);
-void addattr(char const* first, char const* last);
-void pushAttrListC(char const c);
-void popAttrListC(char const c);
-void pushAttrList(char const* first, char const* last);
-void popAttrList(char const* first, char const* last);
-void createsubgraph(char const);
-void createnode(char const* first, char const* last);
-void setgraphattributes(char const* first, char const* last);
-void setsubgraphattributes(char const* first, char const* last);
-void setnodeattributes(char const* first, char const* last);
-void setattributedlist(char const* first, char const* last);
-void checkedgeop(char const* first, char const* last);
-void edgebound(char const* first, char const* last);
-void createedges(char const* first, char const* last);
-void incrz(char const);
-void decrz(char const);
-void finalactions(char const* first, char const* last);
-
-bool parse_point(char const* str, QPoint& p);
-bool parse_real(char const* str, double& d);
-bool parse_integers(char const* str, std::vector<int>& v);
-bool parse_spline(char const* str, QVector< QPair< float, float > >& points);
-void init_op();
-void valid_op(char const* first, char const* last);
-bool parse_renderop(const std::string& str, DotRenderOpVec& arenderopvec);
-bool parse_numeric_color(char const* str, QColor& c);
-
-struct DotGrammar : public boost::spirit::classic::grammar<DotGrammar>
-{
-  template <typename ScannerT>
-  struct definition
-  {
-    definition(DotGrammar const& self);
-
-    boost::spirit::classic::rule<ScannerT> graph, ID, tag, stmt_list, stmt, attr_stmt,
-    attr_list, a_list, edge_stmt, edgeop,
-    edgeRHS, node_stmt, node_id,
-    port, subgraph, compass_pt;
-
-    boost::spirit::classic::rule<ScannerT> const& start() const
-    {
-      return graph;
-    }
-  };
-
-};*/
 
 #endif

@@ -93,11 +93,11 @@ void TestPlugins::convertGraphToLinkedList()
 //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
     DataStructurePtr tree = doc.addDataStructure("Graph1");
-    tree->addData("node1");
-    tree->addData("node2");
-    tree->addData("node3");
-    tree->addPointer("node1", "node2");
-    tree->addPointer("node1", "node3");
+    DataPtr a = tree->addData("node1");
+    DataPtr b = tree->addData("node2");
+    DataPtr c = tree->addData("node3");
+    tree->addPointer(a, b);
+    tree->addPointer(a, c);
 
     //Change plugin.
     DataStructurePluginManager::self()->setDataStructurePlugin(plList->internalName());
@@ -124,11 +124,11 @@ void TestPlugins::convertGraphToRootedTree()
     //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
     DataStructurePtr tree = doc.addDataStructure("Graph1");
-    tree->addData("node1");
-    tree->addData("node2");
-    tree->addData("node3");
-    tree->addPointer("node1", "node2");
-    tree->addPointer("node1", "node3");
+    DataPtr a = tree->addData("node1");
+    DataPtr b = tree->addData("node2");
+    DataPtr c = tree->addData("node3");
+    tree->addPointer(a, b);
+    tree->addPointer(a, c);
 
     //Change plugin.
     DataStructurePluginManager::self()->setDataStructurePlugin(plTree->internalName());

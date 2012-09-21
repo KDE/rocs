@@ -35,9 +35,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include <QColor>
-
 #include <KDebug>
-#include <DataItem.h>
 
 class DataStructurePrivate
 {
@@ -64,8 +62,6 @@ public:
 
     QPointF _relativeCenter;
     QString _name;
-    QColor _dataDefaultColor;
-    bool _automate;
     Document *_document;
     bool _readOnly;
 
@@ -96,7 +92,6 @@ void DataStructure::setQpointer(DataStructurePtr q)
 
 void DataStructure::initialize()
 {
-    d->_automate = false;
     d->_readOnly = false;
     updateRelativeCenter();
     d->_identifierCount = 1;
@@ -137,7 +132,6 @@ void DataStructure::importStructure(DataStructurePtr other)
 
 //FIXME implement import for types
 //     d->_pointerDefaultColor     = other->pointerDefaultColor();
-//     d->_dataDefaultColor        = other->dataDefaultColor();
 //     d->_dataNamesVisible        = other->d->_dataNamesVisible;
 //     d->_dataValuesVisible       = other->d->_dataValuesVisible;
 //     d->_pointerNamesVisible     = other->d->_pointerNamesVisible;
@@ -476,36 +470,6 @@ PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
     }
     PointerPtr pointer = Pointer::create(getDataStructure(), from, to, pointerType);
     return addPointer(pointer, pointerType);
-}
-
-PointerPtr DataStructure::addPointer(const QString& name_from, const QString& name_to, int pointerType)
-{
-//FIXME reimplement by ids
-// using of strings allows uncontrollable behavior
-    if (d->_readOnly) {
-        return PointerPtr();
-    }
-    DataPtr from, to;
-
-    QString tmpName;
-
-    foreach(const DataList& dataType, d->_dataTypeLists) {
-        foreach(DataPtr n, dataType) {
-            tmpName = n->name();
-
-            if (tmpName == name_from) {
-                from = n;
-            }
-            if (tmpName == name_to) {
-                to = n;
-            }
-            if (to && from) {
-                break;
-            }
-        }
-    }
-
-    return addPointer(from, to, pointerType);
 }
 
 DataPtr DataStructure::getData(int uniqueIdentifier)

@@ -30,7 +30,6 @@
 #include <klocalizedstring.h>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
 
 #include "Rocs_Typedefs.h"
 #include "rocslib_export.h"
@@ -62,7 +61,7 @@ public:
     QPointF relativeCenter() const;
     Document *document() const;
 
-    void setReadOnly(bool r) ;
+    void setReadOnly(bool r);
     bool readOnly() const ;
 
     QScriptValue scriptValue() const;
@@ -116,8 +115,6 @@ public:
      * \param pointerType for that visibility information are returned
      */
     bool isPointerVisible(int pointerType) const;
-
-    const QString& iconPackage() const;
 
     const QString& name() const;
 
@@ -200,7 +197,6 @@ public slots:
     virtual GroupPtr addGroup(const QString& name);
     virtual DataList addDataList(QList< QPair<QString, QPointF> > dataList, int dataType = 0);
     virtual DataPtr addData(QString name, QPointF point, int dataType = 0);
-    virtual PointerPtr addPointer(const QString& name_from, const QString& name_to, int pointerType = 0);
 
     void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void removeDynamicProperty(const QString& property);
