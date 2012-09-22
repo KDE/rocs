@@ -25,6 +25,9 @@
 #include "Data.h"
 #include "DataStructure.h"
 
+const QString propertyRX("(^([a-z]|[A-Z])+([0-9]|[a-z]|[A-Z]|_)*$)");
+const QString negateRX("[^a-z|0-9|A-Z|_]");
+
 GraphPropertiesModel::GraphPropertiesModel(QObject *parent) : QAbstractTableModel(parent)
 {
     // start all pointers to zero, so we don't crash things.
@@ -40,7 +43,7 @@ int GraphPropertiesModel::rowCount(const QModelIndex &parent) const
     if (_dataSource == 0) {
         return 0;
     }
-    kDebug() << _dataSource->dynamicPropertyNames().size();
+    
     return _dataSource->dynamicPropertyNames().size();
 }
 
@@ -135,14 +138,25 @@ Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const
 bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,  int role)
 {
     if (index.isValid() && role == Qt::EditRole) {
-	const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
-	if (index.column() == 0 && value.toString() == QString(propertyName) ){
-	  return false;
-	}  
-	
+        const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
+        if (index.column() == 0 && value.toString() == QString(propertyName) ){
+          return false;
+        }
+    
+        QRegExp rx(propertyRX);
+
         switch (index.column()) {
             /* Change name. DinamicPropertiesList take part"                    name                                        new name        object  */
-        case 0: DynamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;
+        case 0: 
+                if (rx.indexIn(value.toString()) == -1){
+                    kWarning() << "Wrong property name" << value.toString();
+                    return false;
+                }
+                DynamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]),
+                                                                 value.toString(),
+                                                                 _dataSource);
+                break;
+                
         case 1:  _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()], value);     break; /* just change the values */
         default: kDebug() << "shoudn't enter here ¬¬";   return false;
         }
@@ -160,7 +174,16 @@ void GraphPropertiesModel::addDynamicProperty(QString name, QVariant value, QObj
     // Need check if the propertie already exists
     bool insertingRow = false;
     if (name.isEmpty()) {
-        kWarning() << "Cannot add am empty property";
+        kWarning() << "Cannot add an empty property";
+        return;
+    }
+    
+    //To avoid break the l18n
+    name = name.replace(QRegExp(negateRX), QString("_"));
+    //Check if there is any non-ascii character
+    QRegExp rx(propertyRX);
+    if (rx.indexIn(name) == -1){
+        kWarning() << "Wrong property name" << name;
         return;
     }
 
