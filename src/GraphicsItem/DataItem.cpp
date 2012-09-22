@@ -122,6 +122,7 @@ void DataItem::updatePos()
 {
     int fixPos = boundingRect().width() / 2;
     setPos(_data->x() - fixPos, _data->y() - fixPos);
+    updatePropertyList();
 }
 
 void DataItem::updateSize()
@@ -173,7 +174,6 @@ void DataItem::updateVisibility(bool visible)
         }
     }
 }
-
 
 void DataItem::updateColor()
 {
