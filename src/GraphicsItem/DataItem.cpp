@@ -66,6 +66,7 @@ DataItem::DataItem(DataPtr n)
     , _font(QFont("Helvetica [Cronyx]", 12))
     , _oldStyle(GraphicsLayout::self()->viewStyleDataNode())
     , _originalWidth(n->width())
+    , _width(-1)
     , _oldDataType(n->dataStructure()->document()->dataType(n->dataType()))
 {
 

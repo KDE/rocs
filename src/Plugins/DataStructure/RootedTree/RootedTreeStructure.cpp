@@ -61,7 +61,7 @@ RootedTreeStructure::RootedTreeStructure ( Document* parent ) :
     addDynamicProperty("NodeSize", 100);
     addDynamicProperty("ChildCount", 2);
     addDynamicProperty("PointersRegion", 0.3);
-    setShowAllPointers(false);
+    m_showPointers = false;
 }
 
 
