@@ -64,6 +64,7 @@ DataItem::DataItem(DataPtr n)
     , _oldStyle(GraphicsLayout::self()->viewStyleDataNode())
     , _item(new QGraphicsItemGroup())
     , _originalWidth(n->width())
+    , _width(-1)
     , _oldDataType(n->dataStructure()->document()->dataType(n->dataType()))
 {
 
