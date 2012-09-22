@@ -367,9 +367,6 @@ DataPtr DataStructure::addData(QString name, int dataType)
 
     DataPtr n = Data::create(this->getDataStructure(), generateUniqueIdentifier(), dataType);
 
-    if (n->property("name") == QVariant::Invalid) {
-        document()->dataType(dataType)->addProperty("name");
-    }
     n->setProperty("name", name);
     return addData(n, dataType);
 }
@@ -572,20 +569,6 @@ void DataStructure::removeDynamicProperty(const QString& property)
 }
 
 
-void DataStructure::addDataDynamicProperty(const QString& property, QVariant value)
-{
-    // do not change properties concurrently, not thread safe
-    foreach(const DataList& dataType, d->_dataTypeLists) {
-        DataList::const_iterator data = dataType.constBegin();
-        while (data != dataType.constEnd()) {
-            (*data)->addDynamicProperty(property, value);
-            ++data;
-        }
-    }
-    d->m_globalPropertiesData.insert(property, value);
-}
-
-
 void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value)
 {
     // do not change properties concurrently, not thread safe
@@ -597,20 +580,6 @@ void DataStructure::addPointersDynamicProperty(const QString& property, QVariant
         }
     }
     d->m_globalPropertiesData.insert(property, value);
-}
-
-
-void DataStructure::removeDataDynamicProperty(const QString& property)
-{
-    // do not change properties concurrently, not thread safe
-    foreach(const DataList& dataType, d->_dataTypeLists) {
-        DataList::const_iterator data = dataType.constBegin();
-        while (data != dataType.constEnd()) {
-            (*data)->removeDynamicProperty(property);
-            ++data;
-        }
-    }
-    d->m_globalPropertiesData.remove(property);
 }
 
 void DataStructure::removePointersDynamicProperty(const QString& property)

@@ -104,7 +104,7 @@ void PointerPropertiesWidget::on__addProperty_clicked()
 
     GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
     model->addDynamicProperty(ui->_propertyName->text(), QVariant(ui->_propertyValue->text()),
-                              _pointer.get(), (ui->_isPropertyGlobal->checkState() == Qt::Checked));
+                              _pointer.get());
 }
 
 

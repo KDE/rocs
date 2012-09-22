@@ -66,7 +66,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
 
     /**Add properti to data source and insert a new row,*/
-    void addDynamicProperty(QString name, QVariant value, QObject *obj, bool isGlobal);
+    void addDynamicProperty(QString name, QVariant value, QObject *obj);
 
 private:
     QObject *_dataSource;

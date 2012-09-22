@@ -163,5 +163,5 @@ void DataPropertiesWidget::updateDataTypes()
 void DataPropertiesWidget::addProperty()
 {
     GraphPropertiesModel *model = qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
-    model->addDynamicProperty(i18n("untitled %1", model->rowCount()), 0, _data.get(), false);
+    model->addDynamicProperty(i18n("untitled%1", model->rowCount()), 0, _data.get());
 }
