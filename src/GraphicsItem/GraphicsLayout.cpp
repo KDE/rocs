@@ -66,7 +66,7 @@ void GraphicsLayout::setViewStyleDataEdge(int style)
     foreach(DataStructurePtr ds, dsList) {
         foreach(int identifier, ds->document()->pointerTypeList()) {
             // update all pointers
-            ds->setPointerNameVisibility(ds->isPointerNameVisible(identifier), identifier);
+            ds->setPointerVisibility(ds->isPointerVisible(identifier), identifier);
         }
     }
     emit changed();

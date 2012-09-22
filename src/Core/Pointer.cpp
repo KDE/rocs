@@ -84,8 +84,8 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->visible       = true;
     d->dataStructure = parent;
     d->color         = d->dataStructure->document()->pointerType(pointerType)->defaultColor();
-    d->showName      = d->dataStructure->isPointerNameVisible(pointerType);
-    d->showValue     = d->dataStructure->isPointerValueVisible(pointerType);
+    d->showName      = true; //FIXME remove with next refactoring to properties
+    d->showValue     = true; //FIXME remove with next refactoring to properties
     d->width         = 1;
     d->pointerType   = d->dataStructure->document()->pointerType(pointerType);
 

@@ -48,12 +48,8 @@ public:
     boost::weak_ptr<DataStructure> q;
 
     QMap<int, DataList> _dataTypeLists;         // list if data elements associated to specific type
-    QMap<int, bool> _dataTypeNameVisibility;
-    QMap<int, bool> _dataTypeValueVisibility;
     QMap<int, bool> _dataTypeVisibility;
     QMap<int, PointerList> _pointerTypeLists;   // list of pointers associated to specific type
-    QMap<int, bool> _pointerTypeNameVisibility;
-    QMap<int, bool> _pointerTypeValueVisibility;
     QMap<int, bool> _pointerTypeVisibility;
 
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
@@ -64,9 +60,6 @@ public:
     QString _name;
     Document *_document;
     bool _readOnly;
-
-    bool _dataNamesVisible;
-    bool _dataValuesVisible;
 
     QScriptValue _value;
     QScriptEngine *_engine;
@@ -225,8 +218,6 @@ void DataStructure::registerDataType(int identifier)
     }
     d->_dataTypeLists.insert(identifier, DataList());
     d->_dataTypeVisibility.insert(identifier, true);
-    d->_dataTypeNameVisibility.insert(identifier, true);
-    d->_dataTypeValueVisibility.insert(identifier, true);
 }
 
 
@@ -238,8 +229,6 @@ void DataStructure::registerPointerType(int identifier)
     }
     d->_pointerTypeLists.insert(identifier, PointerList());
     d->_pointerTypeVisibility.insert(identifier, true);
-    d->_pointerTypeNameVisibility.insert(identifier, true);
-    d->_pointerTypeValueVisibility.insert(identifier, true);
 }
 
 
@@ -256,8 +245,6 @@ void DataStructure::removeDataType(int dataType)
     d->_dataTypeLists[dataType].clear();
     d->_dataTypeLists.remove(dataType);
     d->_dataTypeVisibility.remove(dataType);
-    d->_dataTypeNameVisibility.remove(dataType);
-    d->_dataTypeValueVisibility.remove(dataType);
 }
 
 
@@ -274,38 +261,12 @@ void DataStructure::removePointerType(int pointerType)
     d->_pointerTypeLists[pointerType].clear();
     d->_pointerTypeLists.remove(pointerType);
     d->_pointerTypeVisibility.remove(pointerType);
-    d->_pointerTypeNameVisibility.remove(pointerType);
-    d->_pointerTypeValueVisibility.remove(pointerType);
-}
-
-
-bool DataStructure::isDataNameVisible(int dataType) const
-{
-    return d->_dataTypeNameVisibility.value(dataType);
-}
-
-
-bool DataStructure::isDataValueVisible(int dataType) const
-{
-    return d->_dataTypeValueVisibility.value(dataType);
 }
 
 
 bool DataStructure::isDataVisible(int dataType) const
 {
     return d->_dataTypeVisibility.value(dataType);
-}
-
-
-bool DataStructure::isPointerNameVisible(int pointerType) const
-{
-    return d->_pointerTypeNameVisibility.value(pointerType);
-}
-
-
-bool DataStructure::isPointerValueVisible(int pointerType) const
-{
-    return d->_pointerTypeValueVisibility.value(pointerType);
 }
 
 
@@ -608,18 +569,6 @@ void DataStructure::setPointerColor(QColor color, int pointerType)
 }
 
 
-void DataStructure::toggleDataNameVisibility(int dataType)
-{
-    kFatal() << "must be ported";
-}
-
-
-void DataStructure::toggleDataValueVisibility(int dataType)
-{
-    kFatal() << "must be ported";
-}
-
-
 void DataStructure::setDataVisibility(bool visible, int dataType)
 {
     d->_dataTypeVisibility[dataType] = visible;
@@ -636,32 +585,6 @@ void DataStructure::setDataVisibility(bool visible, int dataType)
 void DataStructure::toggleDataVisibility(int dataType)
 {
     setDataVisibility(!isDataVisible(dataType), dataType);
-}
-
-
-void DataStructure::setPointerNameVisibility(bool visible, int pointerType)
-{
-    d->_pointerTypeNameVisibility[pointerType] = visible;
-    QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerNameVisibilitySetted(visible));
-}
-
-
-void DataStructure::togglePointerNameVisibility(int pointerType)
-{
-    setPointerNameVisibility(!isPointerNameVisible(pointerType), pointerType);
-}
-
-
-void DataStructure::setPointerValueVisibility(bool visible, int pointerType)
-{
-    d->_pointerTypeValueVisibility[pointerType] = visible;
-    QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerValueVisibilitySetted(visible));
-}
-
-
-void DataStructure::togglePointerValueVisibility(int pointerType)
-{
-    setPointerValueVisibility(!isPointerValueVisible(pointerType), pointerType);
 }
 
 

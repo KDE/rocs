@@ -170,20 +170,6 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataTypeButton->setIcon(dataType->icon());
     dataTypeButton->setText(dataType->name());
 
-    KPushButton* dataTypeShowName = new KPushButton(dataPropertyWidget);
-    dataTypeShowName->setIcon(KIcon("rocstexticon"));
-    dataTypeShowName->setCheckable(true);
-    dataTypeShowName->setChecked(true);
-    dataTypeShowName->setToolTip(i18nc("@info:tooltip", "Show names of data elements"));
-    dataTypeShowName->setFixedWidth(24);
-
-    KPushButton* dataTypeShowValue = new KPushButton(dataPropertyWidget);
-    dataTypeShowValue->setIcon(KIcon("rocsvalueicon"));
-    dataTypeShowValue->setCheckable(true);
-    dataTypeShowValue->setChecked(true);
-    dataTypeShowValue->setToolTip(i18nc("@info:tooltip", "Show values of data elements"));
-    dataTypeShowValue->setFixedWidth(24);
-
     KPushButton* dataTypeVisible = new KPushButton(this);
     dataTypeVisible->setIcon(KIcon("rocseyeblack"));
     dataTypeVisible->setCheckable(true);
@@ -192,22 +178,11 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
 
     dataPropertyWidget->setLayout(dataPropertyLayout);
     dataPropertyLayout->addWidget(dataTypeButton, 1, 1);
-    dataPropertyLayout->addWidget(dataTypeShowName, 1, 2);
-    dataPropertyLayout->addWidget(dataTypeShowValue, 1, 3);
-    dataPropertyLayout->addWidget(dataTypeVisible, 1, 4);
+    dataPropertyLayout->addWidget(dataTypeVisible, 1, 2);
 
     _dataTypes->addWidget(dataPropertyWidget);
 
     QSignalMapper* signalMapper = new QSignalMapper(this);
-    signalMapper->setMapping(dataTypeShowName, typeIdentifier);
-    connect(dataTypeShowName, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
-    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataNameVisibility(int)));
-
-    signalMapper = new QSignalMapper(this);
-    signalMapper->setMapping(dataTypeShowValue, typeIdentifier);
-    connect(dataTypeShowValue, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
-    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataValueVisibility(int)));
-
     signalMapper = new QSignalMapper(this);
     signalMapper->setMapping(dataTypeVisible, typeIdentifier);
     connect(dataTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
@@ -245,20 +220,6 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
             new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget)
         );
 
-    KPushButton* pointerTypeShowName = new KPushButton(pointerPropertyWidget);
-    pointerTypeShowName->setIcon(KIcon("rocstexticon"));
-    pointerTypeShowName->setCheckable(true);
-    pointerTypeShowName->setChecked(true);
-    pointerTypeShowName->setToolTip(i18nc("@info:tooltip", "Show names of pointers"));
-    pointerTypeShowName->setFixedWidth(24);
-
-    KPushButton* pointerTypeShowValue = new KPushButton(pointerPropertyWidget);
-    pointerTypeShowValue->setIcon(KIcon("rocsvalueicon"));
-    pointerTypeShowValue->setCheckable(true);
-    pointerTypeShowValue->setChecked(true);
-    pointerTypeShowValue->setToolTip(i18nc("@info:tooltip", "Show values of pointers"));
-    pointerTypeShowValue->setFixedWidth(24);
-
     KPushButton* pointerTypeVisible = new KPushButton(this);
     pointerTypeVisible->setIcon(KIcon("rocseyeblack"));
     pointerTypeVisible->setCheckable(true);
@@ -268,22 +229,11 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
 
     pointerPropertyWidget->setLayout(pointerPropertyLayout);
     pointerPropertyLayout->addWidget(pointerTypeButton, 1, 1);
-    pointerPropertyLayout->addWidget(pointerTypeShowName, 1, 2);
-    pointerPropertyLayout->addWidget(pointerTypeShowValue, 1, 3);
-    pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 4);
+    pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 2);
 
     _pointerTypes->addWidget(pointerPropertyWidget);
 
     QSignalMapper* signalMapper = new QSignalMapper(this);
-    signalMapper->setMapping(pointerTypeShowName, typeIdentifier);
-    connect(pointerTypeShowName, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
-    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(togglePointerNameVisibility(int)));
-
-    signalMapper = new QSignalMapper(this);
-    signalMapper->setMapping(pointerTypeShowValue, typeIdentifier);
-    connect(pointerTypeShowValue, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
-    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(togglePointerValueVisibility(int)));
-
     signalMapper = new QSignalMapper(this);
     signalMapper->setMapping(pointerTypeVisible, typeIdentifier);
     connect(pointerTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));

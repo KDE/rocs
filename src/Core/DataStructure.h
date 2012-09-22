@@ -81,34 +81,10 @@ public:
     void updatePointer(PointerPtr pointer);
 
     /**
-     * Returns true if data element names of specified data type are visible, otherwise false.
-     * \param dataType for that visibility information are returned
-     */
-    bool isDataNameVisible(int dataType) const;
-
-    /**
-     * Returns true if data element values of specified data type are visible, otherwise false.
-     * \param dataType for that visibility information are returned
-     */
-    bool isDataValueVisible(int dataType) const;
-
-    /**
      * Returns true if data elements of specified data type are visible, otherwise false.
      * \param dataType for that visibility information are returned
      */
     bool isDataVisible(int dataType) const;
-
-    /**
-     * Returns true if pointer names of specified pointer type are visible, otherwise false.
-     * \param pointerType for that visibility information are returned
-     */
-    bool isPointerNameVisible(int pointerType) const;
-
-    /**
-     * Returns true if pointer values of specified pointer type are visible, otherwise false.
-     * \param pointerType for that visibility information are returned
-     */
-    bool isPointerValueVisible(int pointerType) const;
 
     /**
      * Returns true if pointers of specified pointer type are visible, otherwise false.
@@ -225,12 +201,6 @@ public slots:
      */
     void setDataColor(QColor color, int dataType);
 
-    //FIXME remove
-    void toggleDataNameVisibility(int dataType);
-
-    //FIXME remove
-    void toggleDataValueVisibility(int dataType);
-
     /**
      * Set all data items for all data elements of given \param dataType to the given value of \param visible.
      * This is a fast implementation that starts several threads for updating all data elements in parallel.
@@ -250,28 +220,6 @@ public slots:
      * \param dataType is the identifier of the data type for that this function has affect.
      */
     void setPointerColor(QColor color, int dataType);
-
-    /**
-     * Set all names of all pointers of given \param pointerType to the given value of \param visible.
-     * This is a fast implementation that starts several threads for updating all pointers in parallel.
-     *
-     * \param visible must be true if pointer names shall be shown, false if hidden
-     * \param pointerType is the identifier of the pointer type for that this function has affect.
-     */
-    void setPointerNameVisibility(bool visible, int pointerType);
-
-    void togglePointerNameVisibility(int pointerType);
-
-    /**
-     * Set all values of all pointers of given \param pointerType to the given value of \param visible.
-     * This is a fast implementation that starts several threads for updating all pointers in parallel.
-     *
-     * \param visible must be true if pointer values shall be shown, false if hidden
-     * \param pointerType is the identifier of the pointer type for that this function has affect.
-     */
-    void setPointerValueVisibility(bool visible, int pointerType);
-
-    void togglePointerValueVisibility(int pointerType);
 
     /**
      * Set all pointer items for pointers of given \param pointerType to the given value of \param visible.
