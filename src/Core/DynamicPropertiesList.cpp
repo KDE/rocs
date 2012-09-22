@@ -22,8 +22,12 @@
 #include "Data.h"
 #include "Pointer.h"
 #include "DataStructure.h"
+#include <KDebug>
 
 DynamicPropertiesList * DynamicPropertiesList::self = 0;
+
+//The regular expression to validate the property name
+const QString propertyRX("(^([a-z]|[A-Z])+([0-9]|[a-z]|[A-Z]|_)*$)");
 
 DynamicPropertiesList::DynamicPropertiesList(QObject* parent): QObject(parent)
 {
@@ -42,6 +46,12 @@ DynamicPropertiesList* DynamicPropertiesList::New()
 
 void DynamicPropertiesList::addProperty(QObject* obj, const QString& name)
 {
+    QRegExp validator(propertyRX);
+    if (validator.indexIn(name) == -1){
+            kWarning() << i18n("The name (%1) passed to property is invalid.",name);
+            return;
+    }
+    
     if (Data * node = qobject_cast< Data* >(obj)) {
         QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
         if (multimap == _NodesProperties.end()) { //Not exist a dataStructure yet
@@ -198,6 +208,11 @@ void DynamicPropertiesList::clear(DataStructure* dataStructure)
 
 void DynamicPropertiesList::changePropertyName(QString name, QString newName, QObject* object)
 {
+    QRegExp validator(propertyRX);
+    if (validator.indexIn(newName) == -1){
+        kWarning() << i18n("The new name (%1) passed to property is invalid.",name);
+        return;
+    }
     Data * node = qobject_cast< Data* >(object);
     if (node) {
         QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
