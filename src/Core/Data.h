@@ -214,14 +214,14 @@ public:
      * \param property is the identifier for the new property
      * \param value is the value of this new property
      */
-    void addDynamicProperty(QString property, QVariant value);
+    void addDynamicProperty(const QString& property, const QVariant& value);
 
     /**
      * Remove dynamic property with identifier \p property from data element.
      *
      * \param property is identifier of the property
      */
-    void removeDynamicProperty(QString property);
+    void removeDynamicProperty(const QString& property);
 
 public slots:
     void remove();

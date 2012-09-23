@@ -449,17 +449,14 @@ void  Data::setValue(const QString& s)
     }
 }
 
-void Data::addDynamicProperty(QString property, QVariant value)
+void Data::addDynamicProperty(const QString& property, const QVariant &value)
 {
-    if (! setProperty(property.toUtf8(), value)  && value.isValid()) {
-        DynamicPropertiesList::New()->addProperty(this, property);
-    }
+    DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
 }
 
-void Data::removeDynamicProperty(QString property)
+void Data::removeDynamicProperty(const QString & property)
 {
-    addDynamicProperty(property.toUtf8(), QVariant::Invalid);
-    DynamicPropertiesList::New()->removeProperty(this, property);
+    DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
 }
 
 QScriptValue Data::scriptValue() const

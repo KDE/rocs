@@ -561,16 +561,13 @@ void DataStructure::setName(const QString& s)
 
 void DataStructure::addDynamicProperty(const QString& property, QVariant value)
 {
-    if (!setProperty(property.toUtf8(), value) && value.isValid()) {
-        DynamicPropertiesList::New()->addProperty(this, property);
-    }
+        DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
 }
 
 
 void DataStructure::removeDynamicProperty(const QString& property)
 {
-    this->addDynamicProperty(property, QVariant::Invalid);
-    DynamicPropertiesList::New()->removeProperty(this, property);
+    DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
 }
 
 

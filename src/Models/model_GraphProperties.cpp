@@ -135,14 +135,14 @@ Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const
 bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &value,  int role)
 {
     if (index.isValid() && role == Qt::EditRole) {
-	const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
-	if (index.column() == 0 && value.toString() == QString(propertyName) ){
-	  return false;
-	}  
-	
+        const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
+        if (index.column() == 0 && value.toString() == QString(propertyName) ){
+          return false;
+        }  
+
         switch (index.column()) {
             /* Change name. DinamicPropertiesList take part"                    name                                        new name        object  */
-        case 0: DynamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;
+        case 0: DynamicPropertiesList::New()->changePropertyName(QByteArray(_dataSource->dynamicPropertyNames()[index.row()]), value.toByteArray(), _dataSource);   break;
         case 1:  _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()], value);     break; /* just change the values */
         default: kDebug() << "shoudn't enter here ¬¬";   return false;
         }

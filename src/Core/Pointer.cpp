@@ -265,17 +265,14 @@ Qt::PenStyle Pointer::style() const
     return d->pointerType->lineStyle();
 }
 
-void Pointer::addDynamicProperty(QString property, QVariant value)
+void Pointer::addDynamicProperty(const QString & property, const QVariant& value)
 {
-    if (!setProperty(property.toUtf8(), value)  &&   value.isValid()) { //if is addeding and NOT is a Q_PROPERTY
-        DynamicPropertiesList::New()->addProperty(this, property);
-    }
+        DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
 }
 
 void Pointer::removeDynamicProperty(QString property)
 {
-    addDynamicProperty(property.toUtf8(), QVariant::Invalid);
-    DynamicPropertiesList::New()->removeProperty(this, property);
+    DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
 }
 
 QScriptValue Pointer::set_type(int pointerType)

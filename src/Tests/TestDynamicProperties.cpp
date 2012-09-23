@@ -42,6 +42,7 @@ void TestDynamicProperties::cleanup()
 {
     _document->deleteLater();
     DynamicPropertiesList::New()->clear();
+    DynamicPropertiesList::New()->deleteLater();
 }
 
 void TestDynamicProperties::addNodeDynamicProperty()
@@ -119,10 +120,10 @@ void TestDynamicProperties::removeNodeDynamicProperty()
 
     DataPtr n = g->addData("Node");
     QByteArray property = "newProperty";
-    n->addDynamicProperty(property, QVariant(0));
-    QVERIFY2(n->property(property) != QVariant::Invalid, "Property not added.");
+    n->addDynamicProperty(property, QVariant(1));
+    QVERIFY2(n->property(property).isValid(), "Property not added.");
     n->removeDynamicProperty(property);
-    QVERIFY2(n->property(property) == QVariant::Invalid, "Property not removed.");
+    QVERIFY2(!n->property(property).isValid(), "Property not removed.");
     QVERIFY2(DynamicPropertiesList::New()->type(n.get(), property) == None, "Property isn't None.");
     QVERIFY2(n->dynamicPropertyNames().size() == 0, "Still having property.");
 }
@@ -149,9 +150,9 @@ void TestDynamicProperties::removeGraphDynamicProperty()
 
     QByteArray property = "newProperty";
     g->addDynamicProperty(property, QVariant(0));
-    QVERIFY2(g->property(property) != QVariant::Invalid, "Property not added.");
+    QVERIFY2(g->property(property).isValid(), "Property not added.");
     g->removeDynamicProperty(property);
-    QVERIFY2(g->property(property) == QVariant::Invalid, "Property not removed.");
+    QVERIFY2(!g->property(property).isValid(), "Property not removed.");
     QVERIFY2(DynamicPropertiesList::New()->type(g.get(), property) == None, "Property isn't None.");
     QVERIFY2(g->dynamicPropertyNames().size() == 0, "Still having property.");
 }
@@ -229,7 +230,7 @@ void TestDynamicProperties::MultipleProperties()
     QVERIFY2(DynamicPropertiesList::New()->type(e1.get(), property) == None, "Property isn't Unique");
 }
 
-void TestDynamicProperties::changeNames()
+void TestDynamicProperties::renameProperties()
 {
     DataStructurePtr g = _document->addDataStructure("A graph");
 
@@ -237,19 +238,93 @@ void TestDynamicProperties::changeNames()
     DataPtr n2 = g->addData("Node 2");
     PointerPtr e  = g->addPointer(n1, n2);
 
-    QString property = "newProperty";
+    QByteArray property = "newProperty";
     g->addDataDynamicProperty(property, QVariant(0));
     g->addPointersDynamicProperty(property, QVariant(0));
     g->addDynamicProperty(property, QVariant(0));
 
-    DynamicPropertiesList::New()->changePropertyName(property, QString("newName_Node"), n1.get());
-    DynamicPropertiesList::New()->changePropertyName(property, QString("newName_Edge"), e.get());
-    DynamicPropertiesList::New()->changePropertyName(property, QString("newName_Graph"), g.get());
+    DynamicPropertiesList::New()->changePropertyName(property, QByteArray("newName_Node"), n1.get());
+    DynamicPropertiesList::New()->changePropertyName(property, QByteArray("newName_Edge"), e.get());
+    DynamicPropertiesList::New()->changePropertyName(property, QByteArray("newName_Graph"), g.get());
 
     QCOMPARE(n1->dynamicPropertyNames() [0], QByteArray("newName_Node"));
     QCOMPARE(n2->dynamicPropertyNames() [0], QByteArray("newName_Node"));
     QCOMPARE(e->dynamicPropertyNames() [0], QByteArray("newName_Edge"));
     QCOMPARE(g->dynamicPropertyNames() [0], QByteArray("newName_Graph"));
 }
+
+
+void TestDynamicProperties::insertInvalidNames()
+{
+    DataStructurePtr g = _document->addDataStructure("A graph");
+    
+    DataPtr n1 = g->addData("Node 1");
+    DataPtr n2 = g->addData("Node 2");
+    PointerPtr e  = g->addPointer(n1, n2);
+    
+    QByteArray property_space = "new Property";
+    QByteArray property_number = "0Property";
+    QByteArray property_nonAscii = "Olá";
+    g->addDataDynamicProperty(property_space, QVariant(0));
+    g->addPointersDynamicProperty(property_space, QVariant(0));
+    g->addDynamicProperty(property_space, QVariant(0));
+    
+    g->addDataDynamicProperty(property_number, QVariant(0));
+    g->addPointersDynamicProperty(property_number, QVariant(0));
+    g->addDynamicProperty(property_number, QVariant(0));
+    
+    g->addDataDynamicProperty(property_nonAscii, QVariant(0));
+    g->addPointersDynamicProperty(property_nonAscii, QVariant(0));
+    g->addDynamicProperty(property_nonAscii, QVariant(0));
+    
+    QVERIFY2(e->property(property_space) == QVariant::Invalid, "Invalid Property (with space) added to edge.");
+    QVERIFY2(e->property(property_number) == QVariant::Invalid, "Invalid Property (starts by number) added to edge.");
+    QVERIFY2(e->property(property_nonAscii) == QVariant::Invalid, "Invalid Property (non ASCII) added to edge.");
+    
+    QVERIFY2(n1->property(property_space) == QVariant::Invalid, "Invalid Property (with space) added to node 1.");
+    QVERIFY2(n1->property(property_number) == QVariant::Invalid, "Invalid Property (starts by number) added to node 1.");
+    QVERIFY2(n1->property(property_nonAscii) == QVariant::Invalid, "Invalid Property (non ASCII) added to node 1.");
+    
+    
+    QVERIFY2(g->property(property_space) == QVariant::Invalid, "Invalid Property (with space) added to graph.");
+    QVERIFY2(g->property(property_number) == QVariant::Invalid, "Invalid Property (starts by number) added to graph.");
+    QVERIFY2(g->property(property_nonAscii) == QVariant::Invalid, "Invalid Property (non ASCII) added to graph.");
+}
+
+
+void TestDynamicProperties::renameToinvalidNames()
+{
+    DataStructurePtr g = _document->addDataStructure("A graph");
+    
+    DataPtr n1 = g->addData("Node 1");
+    DataPtr n2 = g->addData("Node 2");
+    PointerPtr e  = g->addPointer(n1, n2);
+    
+    QByteArray property = "newProperty";
+    g->addDataDynamicProperty(property, QVariant(0));
+    g->addPointersDynamicProperty(property, QVariant(0));
+    g->addDynamicProperty(property, QVariant(0));
+    
+    QByteArray property_space = "new Property";
+    QByteArray property_number = "0Property";
+    QByteArray property_nonAscii = "Olá";
+    
+    DynamicPropertiesList::New()->changePropertyName(property, property_nonAscii, n1.get());
+    DynamicPropertiesList::New()->changePropertyName(property, property_number, e.get());
+    DynamicPropertiesList::New()->changePropertyName(property, property_space, g.get());
+    
+    
+    QVERIFY2(g->property(property_space) == QVariant::Invalid, "Invalid Property (with space) added to graph.");
+    QVERIFY2(g->property(property) != QVariant::Invalid, "Original property was changed.");
+    
+    
+    QVERIFY2(n1->property(property_nonAscii) == QVariant::Invalid, "Invalid Property (with space) added to node.");
+    QVERIFY2(n1->property(property) != QVariant::Invalid, "Original property was changed.");
+    
+    QVERIFY2(e->property(property_number) == QVariant::Invalid, "Invalid Property (with space) added to edge.");
+    QVERIFY2(e->property(property) != QVariant::Invalid, "Original property was changed.");
+    
+}
+
 
 QTEST_MAIN(TestDynamicProperties)

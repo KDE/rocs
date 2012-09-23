@@ -54,8 +54,8 @@ public:
     
     virtual ~DynamicPropertiesList();
     
-    void addProperty(QObject *obj, const QString& name);
-    void removeProperty(QObject *obj, const QString& name);
+    void addProperty(QObject* obj, const QByteArray& name, const QVariant& value);
+    void removeProperty(QObject* obj, const QByteArray& name);
 
     DynamicPropertyType type(QObject *obj, const QString& name);
     const QString typeInText(QObject* obj, const QString& name);
@@ -65,7 +65,7 @@ public:
     void clear(DataStructure * dataStructure = 0);
 
     /** Change property name in all objects from same graph of object.*/
-    void changePropertyName(QString name, QString newName, QObject* object);
+    void changePropertyName(const QByteArray& name, const QByteArray& newName, QObject* object);
 
 
 };

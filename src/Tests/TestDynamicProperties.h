@@ -49,7 +49,10 @@ private slots:
 
     void MultipleProperties();
 
-    void changeNames();
+    void renameProperties();
+    void renameToinvalidNames();
+    
+    void insertInvalidNames();
 
 private:
     Document *_document;
