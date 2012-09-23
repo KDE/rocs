@@ -34,6 +34,11 @@ DynamicPropertiesList::DynamicPropertiesList(QObject* parent): QObject(parent)
 
 }
 
+DynamicPropertiesList::~DynamicPropertiesList()
+{
+    DynamicPropertiesList::self = 0;
+}
+
 
 DynamicPropertiesList* DynamicPropertiesList::New()
 {
@@ -210,7 +215,7 @@ void DynamicPropertiesList::changePropertyName(QString name, QString newName, QO
 {
     QRegExp validator(propertyRX);
     if (validator.indexIn(newName) == -1){
-        kWarning() << i18n("The new name (%1) passed to property is invalid.",name);
+        kWarning() << i18n("The new name (%1) passed to property is invalid.",newName);
         return;
     }
     Data * node = qobject_cast< Data* >(object);

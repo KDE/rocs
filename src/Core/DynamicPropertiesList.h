@@ -51,7 +51,9 @@ class ROCSLIB_EXPORT DynamicPropertiesList : public QObject
 public:
 
     static DynamicPropertiesList * New();
-
+    
+    virtual ~DynamicPropertiesList();
+    
     void addProperty(QObject *obj, const QString& name);
     void removeProperty(QObject *obj, const QString& name);
 
