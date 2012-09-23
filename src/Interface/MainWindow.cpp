@@ -719,7 +719,8 @@ void MainWindow::loadDocument(const QString& name)
 
 void MainWindow::newProject()
 {
-    saveIfChanged();
+    if (saveIfChanged() == KMessageBox::Cancel)
+	return;
     _codeEditor->closeAllScripts();
     DocumentManager::self()->closeAllDocuments();
 
@@ -764,7 +765,9 @@ void MainWindow::saveProject()
 
 void MainWindow::openProject()
 {
-    saveIfChanged();
+    if (saveIfChanged() == KMessageBox::Cancel){
+        return;
+    }
 
     // show open dialog
     QString file = KFileDialog::getOpenFileName(QString(),
