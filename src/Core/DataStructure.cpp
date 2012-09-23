@@ -571,6 +571,18 @@ void DataStructure::removeDynamicProperty(const QString& property)
 }
 
 
+void DataStructure::add_property (const QString& name, QVariant value)
+{
+    addDynamicProperty(name, value);
+}
+
+void DataStructure::remove_property (const QString& name)
+{
+    removeDynamicProperty(name);
+}
+
+
+
 void DataStructure::addDataDynamicProperty(const QString& property, QVariant value)
 {
     // do not change properties concurrently, not thread safe

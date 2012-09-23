@@ -485,10 +485,16 @@ QScriptValue Data::type()
     return d->_dataStructure->engine()->newVariant(d->_dataType);
 }
 
-void Data::add_property(QString name, QString value)
+void Data::add_property(const QString & name, const QString & value)
 {
     addDynamicProperty(name, value);
 }
+
+void Data::remove_property (const QString& name)
+{
+    removeDynamicProperty(name);
+}
+
 
 QScriptValue Data::adj_data()
 {

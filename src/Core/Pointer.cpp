@@ -290,6 +290,12 @@ QScriptValue Pointer::type() const
     return d->dataStructure->engine()->newVariant(d->pointerType->identifier());
 }
 
+void Pointer::remove_property (const QString& name)
+{
+    removeDynamicProperty(name);
+}
+
+
 void Pointer::add_property(QString name, QString value)
 {
     addDynamicProperty(name, value);

@@ -265,6 +265,11 @@ public slots:
      */
     void add_property(QString name, QString value);
 
+    /** 
+     * Remove a property named \p name from this pointer.
+     * \param name identifier of the property to remove.
+     */ 
+    void remove_property(const QString & name);
     /**
      * \return the \see from() data element for script engine
      */

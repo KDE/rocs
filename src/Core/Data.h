@@ -250,7 +250,8 @@ public slots:
 
     QScriptValue type();
     QScriptValue set_type(int type);
-    void add_property(QString name, QString value);
+    void add_property(const QString & name, const QString & value);
+    void remove_property(const QString & name);
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue adj_pointers(int pointerType);
