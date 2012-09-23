@@ -80,7 +80,8 @@ DataItem::DataItem(DataPtr n)
     connect(n.get(), SIGNAL(useColorChanged(bool)), this, SLOT(updateColor()));
     connect(n.get(), SIGNAL(widthChanged(double)), this, SLOT(updateSize()));
     connect(n.get(), SIGNAL(dataTypeChanged(int)), this, SLOT(setupNode()));
-
+    connect(n.get(), SIGNAL(pointerListChanged()), this, SLOT(setupNode()));
+    
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateName()));
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateValue()));
     connect(n.get(), SIGNAL(valueVisibilityChanged(bool)), this, SLOT(updateName()));
