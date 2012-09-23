@@ -190,16 +190,19 @@ PointerList Data::adjacent_pointers() const
 void Data::addInPointer(PointerPtr e)
 {
     d->_in_pointers.append(e);
+    emit pointerListChanged();
 }
 
 void Data::addOutPointer(PointerPtr e)
 {
     d->_out_pointers.append(e);
+    emit pointerListChanged();
 }
 
 void Data::addSelfPointer(PointerPtr e)
 {
     d->_self_pointers.append(e);
+    emit pointerListChanged();
 }
 
 PointerPtr Data::addPointer(DataPtr to)
@@ -217,6 +220,7 @@ void Data::removePointer(PointerPtr e, int pointerList)
     case Out : removePointer(e, d->_out_pointers);   break;
     case Self: removePointer(e, d->_self_pointers);  break;
     }
+    emit pointerListChanged();
 }
 
 void Data::removePointer(PointerPtr e, PointerList &list)

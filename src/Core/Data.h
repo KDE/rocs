@@ -200,6 +200,8 @@ signals:
     void visibilityChanged(bool visible);
     void useColorChanged(bool b);
     void dataTypeChanged(int dataType);
+    
+    void pointerListChanged();
 };
 
 
