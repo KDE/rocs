@@ -30,6 +30,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include <QSvgRenderer>
+#include <boost/concept_check.hpp>
 
 QMap<QString, QSvgRenderer*> DataItem::_sharedRenderers;
 
@@ -197,8 +198,11 @@ void DataItem::updateProperty(QString name)
         registerProperty(name);
         return;
     }
+    DataTypePtr dataType = data()->dataStructure()->document()->dataType(data()->dataType());
     _propertyValues[name]->setText(data()->property(name.toStdString().c_str()).toString());
+    _propertyValues[name]->setVisible(dataType->isPropertyVisible(name));
     _propertyValues[name]->update();
+    updatePropertyList();
 }
 
 QGraphicsItem* DataItem::propertyListItem() const
@@ -214,10 +218,11 @@ void DataItem::updatePropertyList()
             kError() << "Cannot update unknown property : " << property;
             continue;
         }
+        if (_propertyValues[property]->isVisible() == false) {
+            continue;
+        }
         _propertyValues[property]->setPos(data()->x()+20, data()->y() + offset);
-        _propertyValues[property]->setVisible(true);
         _propertyValues[property]->update();
-
         offset += 20;
     }
 }
@@ -252,71 +257,3 @@ void DataItem::removeProperty(QString name)
 
     updatePropertyList();
 }
-
-// void DataItem::updateName()
-// {
-//     if (!_name) {
-//         _name = new QGraphicsSimpleTextItem(i18n("%1", _data->name()));
-//         _name->setFlags(ItemIgnoresTransformations);
-//         _name->setFont(_font);
-//         _name->setZValue(zValue() + 1);
-//     } else if (_name->text() != _data->name()) {
-//         _name->setText(i18n("%1", _data->name()));
-//     }
-//
-//     int style = GraphicsLayout::self()->viewStyleDataNode();
-//
-//     qreal dataWidth = boundingRect().width() * scale();
-//
-//     qreal x =  pos().x();
-//     if (style == ConfigureDefaultProperties::CENTER) {
-//         x  += ((dataWidth > _name->boundingRect().width() + 10)
-//                ? ((dataWidth - _name->boundingRect().width()) / 4)
-//                : dataWidth + 30);
-//     }
-//
-//     qreal y =  pos().y() + ((style == ConfigureDefaultProperties::ABOVE) ? + 15 - (dataWidth / 2)
-//                             : (style == ConfigureDefaultProperties::BELOW) ? 25 + (dataWidth / 2)
-//                             : 0);
-//
-//     _name->setVisible(_data->isNameVisible());
-//
-//     if (_value && _value->isVisible()) {
-//         y += ((style == ConfigureDefaultProperties::ABOVE) ? -20 :  20);
-//     }
-//     _name->setPos(x, y);
-// }
-/*
-void DataItem::updateValue()
-{
-    if (!_value) {
-        _value = new QGraphicsSimpleTextItem(i18n("v=%1", _data->value().toString()));
-        _value->setFlags(ItemIgnoresTransformations);
-        _value->setFont(_font);
-        _value->setZValue(zValue() + 2);
-    } else if (QVariant(_value->text()) != _data->value().toString()) {
-        _value ->setText(i18n("v=%1", _data->value().toString()));
-    }
-
-    int style = GraphicsLayout::self()->viewStyleDataNode();
-
-    qreal dataWidth = boundingRect().width() * scale();
-
-    qreal x =  pos().x();
-    if (style == ConfigureDefaultProperties::CENTER) {
-        x  += ((dataWidth > _value->boundingRect().width() + 10)
-               ? ((dataWidth - _value->boundingRect().width()) / 4)
-               : dataWidth + 30);
-    }
-
-    qreal y =  pos().y() + ((style == ConfigureDefaultProperties::ABOVE) ? + 15 - (dataWidth / 2)
-                            : (style == ConfigureDefaultProperties::BELOW) ? 65 + (dataWidth / 2)
-                            : 40);
-
-    if (!_name || !_name->isVisible()) {
-        y += ((style == ConfigureDefaultProperties::BELOW) ? -20 : -10);
-    }
-
-    _value->setPos(x, y);
-    _value->setVisible(_data->isValueVisible());
-}*/

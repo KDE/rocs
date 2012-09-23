@@ -128,6 +128,12 @@ void Data::initialize()
 
     connect(d->_dataType.get(), SIGNAL(propertyAdded(QString, QVariant)),
             this, SLOT(addDynamicProperty(QString,QVariant)));
+    connect(d->_dataType.get(), SIGNAL(propertyDefaultValueChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyVisibilityChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyRenamed(QString,QString)),
+            this, SLOT(renameDynamicProperty(QString,QString)));
 }
 
 DataPtr Data::getData() const
@@ -189,9 +195,29 @@ void Data::setVisible(bool visible)
 void Data::setDataType(int dataType)
 {
     Q_ASSERT(d->_dataStructure->document()->dataTypeList().contains(dataType));
+
+    // disconnect from old data type
+    disconnect(d->_dataType.get());
+
+    // make changes
     d->_dataType = d->_dataStructure->document()->dataType(dataType);
     d->_dataStructure->updateData(getData());
+    foreach(QString property, d->_dataType->properties()) {
+        if (this->property(property.toStdString().c_str()) == QVariant::Invalid) {
+            addDynamicProperty(property, d->_dataType->propertyDefaultValue(property));
+        }
+    }
     emit dataTypeChanged(dataType);
+
+    // connect to new type
+    connect(d->_dataType.get(), SIGNAL(propertyAdded(QString, QVariant)),
+            this, SLOT(addDynamicProperty(QString,QVariant)));
+    connect(d->_dataType.get(), SIGNAL(propertyDefaultValueChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyVisibilityChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyRenamed(QString,QString)),
+            this, SLOT(renameDynamicProperty(QString,QString)));
 }
 
 DataList Data::adjacentDataList() const
@@ -420,6 +446,21 @@ void Data::removeDynamicProperty(QString property)
     addDynamicProperty(property.toUtf8(), QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property);
     emit(propertyRemoved(property));
+}
+
+void Data::updateDynamicProperty(QString property)
+{
+    if (this->property(property.toStdString().c_str()) == QVariant::Invalid
+        || this->property(property.toStdString().c_str()).toString().isEmpty()
+    ) {
+        this->setProperty(property.toStdString().c_str(), d->_dataType->propertyDefaultValue(property));
+    }
+    emit propertyChanged(property);
+}
+
+void Data::renameDynamicProperty(QString oldName, QString newName)
+{
+    DynamicPropertiesList::New()->changePropertyName(oldName, newName, this);
 }
 
 QScriptValue Data::scriptValue() const

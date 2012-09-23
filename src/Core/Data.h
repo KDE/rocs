@@ -224,6 +224,10 @@ public slots:
      */
     void removeDynamicProperty(QString property);
 
+    void updateDynamicProperty(QString property);
+
+    void renameDynamicProperty(QString oldName, QString newName);
+
     /**
      * FIXME proof of concept implementation: since each Pointer emits a changed direction signal,
      * there are unnecessary many updates.
