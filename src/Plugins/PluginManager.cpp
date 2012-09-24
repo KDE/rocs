@@ -86,7 +86,6 @@ void PluginManager::loadPlugins()
 
 bool PluginManager::loadToolPlugin(QString name)
 {
-    kDebug() << "Loading Tools Plugins ++++";
     KPluginInfo kpi =  _d->PluginInfoFromName(name);
 
     if (kpi.isValid()) {
@@ -101,11 +100,11 @@ bool PluginManager::loadToolPlugin(QString name)
         }
 
         else {
-            kDebug() << "error loading plugin: " << name << error;
+            kWarning() << "error loading plugin: " << name << error;
         }
 
     } else {
-        kDebug() << "Error loading tool plugin " << name;
+        kWarning() << "Error loading tool plugin " << name;
     }
     return false;
 }
@@ -113,8 +112,6 @@ bool PluginManager::loadToolPlugin(QString name)
 
 void PluginManager::loadToolsPlugins()
 {
-    kDebug() << "Load Tools plugins";
-
     foreach(KPluginInfo info, _d->toolsPluginsInfo) {
         loadToolPlugin(info.name());
     }

@@ -43,6 +43,11 @@ private slots:
 
     void changeNames();
 
+    void renameProperties();
+    void renameToinvalidNames();
+    
+    void insertInvalidNames();
+
 private:
     Document *_document;
 };

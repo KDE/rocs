@@ -220,7 +220,7 @@ public slots:
      * \param property is the identifier for the new property
      * \param value is the value of this new property
      */
-    void addDynamicProperty(QString property, QVariant value);
+    void addDynamicProperty(const QString & property, const QVariant& value);
 
     /**
      * Remove dynamic property with identifier \p property from data element.
@@ -265,6 +265,11 @@ public slots:
      */
     void add_property(QString name, QString value);
 
+    /** 
+     * Remove a property named \p name from this pointer.
+     * \param name identifier of the property to remove.
+     */ 
+    void remove_property(const QString & name);
     /**
      * \return the \see from() data element for script engine
      */

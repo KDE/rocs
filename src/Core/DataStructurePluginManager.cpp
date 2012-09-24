@@ -57,10 +57,15 @@ public:
         return dataStructure;
     }
     void loadPlugins() {
-        loadDataStructurePlugins();
         if (m_plugins.isEmpty()) {
             return;
         }
+        foreach (DataStructurePluginInterface * i, pluginList()){
+            if (i->internalName() == QLatin1String("Graph")){
+                m_actualPlugin = i;
+                return;
+            }
+        } 
         m_actualPlugin = pluginList().last();
     }
 
@@ -114,14 +119,14 @@ public:
             }
 
         } else {
-            kDebug() << "Error loading tool plugin " << pluginInfo.name();
+            kDebug() << "Error loading Data structure plugin " << pluginInfo.name();
         }
         return false;
     }
 
     void loadDataStructurePlugins() {
         m_DataStructurePluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/DataStructurePlugin"));
-        kDebug() << "Load Tools plugins";
+        
 
         foreach(KPluginInfo info, m_DataStructurePluginsInfo) {
             loadDataStructurePlugin(info);
@@ -143,8 +148,8 @@ public:
 // ----------------------------------- Class  ---------------------------------
 
 DataStructurePluginManager::DataStructurePluginManager() : _d(new DataStructurePluginManagerPrivate(this))
-{
-    _d->loadPlugins();
+{   
+    _d->loadDataStructurePlugins();
 }
 
 DataStructurePluginManager::~DataStructurePluginManager()
@@ -156,6 +161,7 @@ DataStructurePluginManager* DataStructurePluginManager::self()
 {
     if (!_self) {
         _self = new DataStructurePluginManager();
+        _self->_d->loadPlugins();
     }
     return _self;
 }

@@ -33,8 +33,6 @@ class QGraphicsSimpleTextItem;
 */
 class RootedTreeEdgeItem : public PointerItem {
     Q_OBJECT
-    QPointF m_endPoint;
-    QPointF m_startPoint;
     QPointF startPoint();
     QPointF endPoint() const;
 
@@ -45,11 +43,7 @@ public:
     explicit RootedTreeEdgeItem(PointerPtr edge, QGraphicsItem *parent = 0);
     virtual ~RootedTreeEdgeItem();
 
-    QPainterPath createCurves(){return QPainterPath();}
-
-    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
-
-    virtual QRectF boundingRect() const;
+    QPainterPath createCurves();
 
 public slots:
     void updatePathLayout();

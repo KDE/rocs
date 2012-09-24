@@ -433,18 +433,16 @@ void Data::setColor(const QVariant& s)
     }
 }
 
-void Data::addDynamicProperty(QString property, QVariant value)
+void Data::addDynamicProperty(const QString& property, const QVariant& value)
 {
-    if (!setProperty(property.toUtf8(), value) && value.isValid()) {
-        DynamicPropertiesList::New()->addProperty(this, property);
-    }
+    DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
     emit(propertyAdded(property));
 }
 
-void Data::removeDynamicProperty(QString property)
+void Data::removeDynamicProperty(const QString& property)
 {
     addDynamicProperty(property.toUtf8(), QVariant::Invalid);
-    DynamicPropertiesList::New()->removeProperty(this, property);
+    DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
     emit(propertyRemoved(property));
 }
 
@@ -460,7 +458,9 @@ void Data::updateDynamicProperty(QString property)
 
 void Data::renameDynamicProperty(QString oldName, QString newName)
 {
-    DynamicPropertiesList::New()->changePropertyName(oldName, newName, this);
+    DynamicPropertiesList::New()->changePropertyName(oldName.toStdString().c_str(),
+                                                     newName.toStdString().c_str(),
+                                                     this);
 }
 
 QScriptValue Data::scriptValue() const
@@ -489,10 +489,16 @@ QScriptValue Data::type()
     return d->_dataStructure->engine()->newVariant(d->_dataType->identifier());
 }
 
-void Data::add_property(QString name, QString value)
+void Data::add_property(const QString & name, const QString & value)
 {
     addDynamicProperty(name, value);
 }
+
+void Data::remove_property (const QString& name)
+{
+    removeDynamicProperty(name);
+}
+
 
 QScriptValue Data::adj_data()
 {

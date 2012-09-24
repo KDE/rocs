@@ -34,6 +34,11 @@ DynamicPropertiesList::DynamicPropertiesList(QObject* parent): QObject(parent)
 
 }
 
+DynamicPropertiesList::~DynamicPropertiesList()
+{
+    DynamicPropertiesList::self = 0;
+}
+
 
 DynamicPropertiesList* DynamicPropertiesList::New()
 {
@@ -44,14 +49,16 @@ DynamicPropertiesList* DynamicPropertiesList::New()
 }
 
 
-void DynamicPropertiesList::addProperty(QObject* obj, const QString& name)
+void DynamicPropertiesList::addProperty(QObject* obj, const QByteArray& name, const QVariant & value)
 {
     QRegExp validator(propertyRX);
     if (validator.indexIn(name) == -1){
-            kWarning() << i18n("The name (%1) passed to property is invalid.",name);
+            kWarning() << i18n("The name (%1) passed to property is invalid.",QString(name));
             return;
     }
-    
+
+    obj->setProperty(name, value);
+
     if (Data * node = qobject_cast< Data* >(obj)) {
         QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
         if (multimap == _NodesProperties.end()) { //Not exist a dataStructure yet
@@ -83,7 +90,7 @@ void DynamicPropertiesList::addProperty(QObject* obj, const QString& name)
 }
 
 
-void DynamicPropertiesList::removeProperty(QObject* obj, const QString& name)
+void DynamicPropertiesList::removeProperty(QObject* obj, const QByteArray& name)
 {
     Data * node = qobject_cast< Data* >(obj);
     if (node) {
@@ -92,7 +99,7 @@ void DynamicPropertiesList::removeProperty(QObject* obj, const QString& name)
             return;
         }
         multimap.value().remove(name, node);
-//    _NodesProperties.remove(name, node);
+        node->setProperty(name, QVariant::Invalid);
         return;
     }
 
@@ -103,12 +110,14 @@ void DynamicPropertiesList::removeProperty(QObject* obj, const QString& name)
             return;
         }
         multimap.value().remove(name, edge);
+        edge->setProperty(name, QVariant::Invalid);
         return;
     }
 
     DataStructure * dataStructure = qobject_cast< DataStructure* >(obj);
     if (dataStructure) {
         _GraphProperties.remove(name, dataStructure);
+        dataStructure->setProperty(name, QVariant::Invalid);
         return;
     }
 }
@@ -206,13 +215,15 @@ void DynamicPropertiesList::clear(DataStructure* dataStructure)
 }
 
 
-void DynamicPropertiesList::changePropertyName(QString name, QString newName, QObject* object)
+void DynamicPropertiesList::changePropertyName(const QByteArray& name, const QByteArray & newName, QObject* object)
 {
     QRegExp validator(propertyRX);
     if (validator.indexIn(newName) == -1){
-        kWarning() << i18n("The new name (%1) passed to property is invalid.",name);
+        kWarning() << i18n("The new name (%1) passed to property is invalid.",QString(newName));
         return;
     }
+
+
     Data * node = qobject_cast< Data* >(object);
     if (node) {
         QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
@@ -220,7 +231,7 @@ void DynamicPropertiesList::changePropertyName(QString name, QString newName, QO
             return;
         }
         foreach(node, multimap.value().values(name)) {
-            node->addDynamicProperty(newName, node->property(name.toUtf8()));
+            node->addDynamicProperty(newName, node->property(name));
             node->removeDynamicProperty(name);
         }
     }
@@ -232,13 +243,13 @@ void DynamicPropertiesList::changePropertyName(QString name, QString newName, QO
         }
 
         foreach(edge, multimap.value().values(name)) {
-            edge->addDynamicProperty(newName, edge->property(name.toUtf8()));
+            edge->addDynamicProperty(newName, edge->property(name));
             edge->removeDynamicProperty(name);
         }
     }
     DataStructure * dataStructure = qobject_cast<DataStructure*>(object);
     if (dataStructure) {
-        dataStructure->addDynamicProperty(newName, dataStructure->property(name.toUtf8()));
+        dataStructure->addDynamicProperty(newName, dataStructure->property(name));
         dataStructure->removeDynamicProperty(name);
     }
 }

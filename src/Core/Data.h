@@ -215,14 +215,14 @@ public slots:
      * \param property is the identifier for the new property
      * \param value is the value of this new property
      */
-    void addDynamicProperty(QString property, QVariant value);
+    void addDynamicProperty(const QString& property, const QVariant& value);
 
     /**
      * Remove dynamic property with identifier \p property from data element.
      *
      * \param property is identifier of the property
      */
-    void removeDynamicProperty(QString property);
+    void removeDynamicProperty(const QString& property);
 
     void updateDynamicProperty(QString property);
 
@@ -239,7 +239,8 @@ public slots:
 
     QScriptValue type();
     QScriptValue set_type(int type);
-    void add_property(QString name, QString value);
+    void add_property(const QString & name, const QString & value);
+    void remove_property(const QString & name);
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue adj_pointers(int pointerType);

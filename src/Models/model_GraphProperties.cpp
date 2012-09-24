@@ -140,7 +140,7 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
         }
 
         switch (index.column()) {
-        case 0: DynamicPropertiesList::New()->changePropertyName(QString(_dataSource->dynamicPropertyNames()[index.row()]), value.toString(), _dataSource);   break;
+        case 0: DynamicPropertiesList::New()->changePropertyName(QByteArray(_dataSource->dynamicPropertyNames()[index.row()]), value.toByteArray(), _dataSource);   break;
         case 1:  _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()], value); break; /* just change the values */
         default: kDebug() << "shoudn't enter here";   return false;
         }
