@@ -251,9 +251,10 @@ void DataItem::removeProperty(QString name)
         kWarning() << "Property not removed: not registered at DataItem.";
         return;
     }
+    _propertyValues[name]->setVisible(false);
+    _item->removeFromGroup(_propertyValues[name]);
     delete _propertyValues[name];
     _propertyValues.remove(name);
-    _item->removeFromGroup(_propertyValues[name]);
 
     updatePropertyList();
 }
