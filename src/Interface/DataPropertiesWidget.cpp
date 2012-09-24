@@ -34,7 +34,6 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
 {
     ui = new Ui::DataPropertiesWidget;
     ui->setupUi(mainWidget());
-    ui->_addProperty->setIcon(KIcon("rocsnew"));
 
     // edit data types by separate dialog
     QPointer<PropertiesDialogAction> dataTypePropertiesAction = new PropertiesDialogAction(
@@ -45,7 +44,7 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     connect(data->dataStructure()->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(updateDataTypes()));
 
     setCaption(i18n("Data Element Properties"));
-    setButtons(Close); //TODO implement changes for (Ok | Cancel)
+    setButtons(Close);
     setAttribute(Qt::WA_DeleteOnClose);
     setData(data);
 }
@@ -58,7 +57,6 @@ void DataPropertiesWidget::setData(DataPtr data)
     }
     if (_data) {
         _data->disconnect(this);
-        ui->_enableColor->disconnect(_data.get());
         ui->_dataType->clear();
     }
 
@@ -70,31 +68,22 @@ void DataPropertiesWidget::setData(DataPtr data)
     ui->extraItems->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
 
-    connect(ui->_enableColor, SIGNAL(toggled(bool)),
-            this, SLOT(setUseColor(bool)));
     connect(ui->_dataType, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setDataType(int)));
     connect(ui->_color, SIGNAL(activated(QColor)),
             this, SLOT(colorChanged(QColor)));
-    connect(ui->_addProperty, SIGNAL(clicked(bool)),
-            this, SLOT(addProperty()));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data.get());
 
     ui->_propertiesTable->setModel(model);
+    ui->_propertiesTable->horizontalHeader()->setProperty("stretchLastSection", true);
 }
 
 
 void DataPropertiesWidget::setPosition(QPointF screenPosition)
 {
     move(screenPosition.x() + 10, screenPosition.y() + 10);
-}
-
-
-void DataPropertiesWidget::setUseColor(bool b)
-{
-    _data->setColored(b);
 }
 
 
@@ -113,7 +102,6 @@ void DataPropertiesWidget::reflectAttributes()
     }
 
     ui->_color->setColor(_data->color().value<QColor>());
-    ui->_enableColor->setChecked(_data->isColored());
 
     DataTypePtr dataType = _data->dataStructure()->document()->dataType(_data->dataType());
     ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));
@@ -142,10 +130,4 @@ void DataPropertiesWidget::updateDataTypes()
     if (_data) {
         ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));
     }
-}
-
-void DataPropertiesWidget::addProperty()
-{
-    GraphPropertiesModel *model = qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
-    model->addDynamicProperty(i18nc("Property keyword only caracters from a to z (no spaces)","untitled%1", model->rowCount()), 0, _data.get());
 }

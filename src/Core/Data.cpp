@@ -45,7 +45,6 @@ public:
     qreal _y;
     qreal _width;
     bool _visible;
-    bool _colored;
 
     DataStructurePtr _dataStructure;
     int _uniqueIdentifier;
@@ -73,7 +72,6 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifier, int data
     , _y(0)
     , _width(0.3)
     , _visible(parent->isDataVisible(dataType))
-    , _colored(false)
     , _dataStructure(parent)
     , _uniqueIdentifier(uniqueIdentifier)
     , _color(parent->document()->dataType(dataType)->defaultColor())
@@ -171,14 +169,6 @@ bool Data::eventFilter(QObject *obj, QEvent *event){
 DataStructurePtr Data::dataStructure() const
 {
     return d->_dataStructure;
-}
-
-void Data::setColored(bool b)
-{
-    if (d->_colored != b) {
-        d->_colored = b;
-        emit useColorChanged(b);
-    }
 }
 
 bool Data::isVisible() const
@@ -374,11 +364,6 @@ PointerList& Data::inPointerList() const
 PointerList& Data::outPointerList() const
 {
     return d->_outPointers;
-}
-
-bool Data::isColored() const
-{
-    return d->_colored;
 }
 
 int Data::identifier() const

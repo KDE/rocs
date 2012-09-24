@@ -43,8 +43,6 @@ public:
 private slots:
     void colorChanged(const QColor& c);;
     void reflectAttributes();
-    void setUseColor(bool b);
-    void addProperty();
     void setDataType(int dataTypeIndex);
     void updateDataTypes();
 

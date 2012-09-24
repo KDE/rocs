@@ -63,7 +63,7 @@ DataType::DataType(Document* document, int identifier):
     d(new DataTypePrivate())
 {
     d->_identifier = identifier;
-    d->_defaultColor = QColor("blue");
+    d->_defaultColor = QColor("black");
     d->_icon = "rocs_default";
     d->_name = i18n("Element");
     d->_document = document;

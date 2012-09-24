@@ -46,7 +46,7 @@ int GraphPropertiesModel::rowCount(const QModelIndex &parent) const
 int GraphPropertiesModel::columnCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
-    return 3; //Name - Value - Type
+    return 2;
 }
 
 QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const
@@ -58,6 +58,7 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const
     if (index.row() >= _dataSource->dynamicPropertyNames().size()) {
         return QVariant();
     }
+
     if (role != Qt::DisplayRole && role != Qt::EditRole) {
         return QVariant();
     }
@@ -66,7 +67,6 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const
 
     return   (index.column() == 0) ? propertyName
            : (index.column() == 1) ?  _dataSource->property(propertyName)
-           : (index.column() == 2) ? DynamicPropertiesList::New()->typeInText(_dataSource, propertyName)
            : QVariant();
 
 }
@@ -82,7 +82,6 @@ QVariant GraphPropertiesModel::headerData(int section, Qt::Orientation orientati
         switch (section) {
         case 0: return i18n("Property");
         case 1: return i18n("Value");
-        case 2: return i18n("Type");
         }
     }
     return QVariant();
@@ -93,7 +92,9 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource)
     // if there isn't any datasource being send, just remove everything from the model and exit.
     if (dataSource == 0) {
         int count = rowCount();
-        if (count == 0) return;
+        if (count == 0) {
+            return;
+        }
         beginRemoveRows(QModelIndex(), 0, count - 1);
         endRemoveRows();
         return;

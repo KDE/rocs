@@ -179,13 +179,6 @@ void DataItem::updateVisibility(bool visible)
 void DataItem::updateColor()
 {
     QColor c(_data->color().value<QColor>());
-    if (!_data->isColored()) {
-        delete _colorizer;
-        setGraphicsEffect(0);
-        _colorizer = 0;
-        return;
-    }
-
     delete _colorizer;
     _colorizer = new QGraphicsColorizeEffect();
     _colorizer->setColor(c);

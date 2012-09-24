@@ -158,11 +158,6 @@ public:
     bool isVisible() const;
 
     /**
-     * \return true if colored, otherwise false
-     */
-    bool isColored() const;
-
-    /**
      * \return unique identifier of this data element
      */
     int identifier() const;
@@ -204,7 +199,6 @@ public slots:
     void setWidth(double w);
     void setPos(qreal x, qreal y);
     void setColor(const QVariant& s);
-    void setColored(bool b = true);
     void setVisible(bool visible);
     void setDataType(int dataType);
 
