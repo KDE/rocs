@@ -273,7 +273,7 @@ QWidget* MainWindow::setupScriptPanel()
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     executeCommands->setOrientation(Qt::Vertical);
-    _runScript = new KAction(KIcon("system-run"), i18nc("@action:intoolbar Script Execution", "Run"), this);
+    _runScript = new KAction(KIcon("media-playback-start"), i18nc("@action:intoolbar Script Execution", "Run"), this);
     _stepRunScript = new KAction(KIcon("go-next"), i18nc("@action:intoolbar Script Execution", "One Step"), this);
     _stopScript = new KAction(KIcon("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
     _stopScript->setEnabled(false);
