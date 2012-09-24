@@ -64,9 +64,7 @@ void DotGraphParsingHelper::setDataStructureElementAttributes(QObject* graphElem
             label.replace("\\n", "\n");
             graphElement->setProperty("name", label);
         } else {
-            QString str = it.key();
-            str.replace(QRegExp("[^a-z|A-Z|0-9|_]"), QLatin1String("_"));
-            DynamicPropertiesList::New()->addProperty(graphElement, str.toAscii(), it.value());
+            DynamicPropertiesList::New()->addProperty(graphElement, it.key().toAscii(), it.value());
         }
     }
 }
