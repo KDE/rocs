@@ -86,7 +86,9 @@
 #include <DataStructurePluginInterface.h>
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
+#include <analitzabackend.h>
 #include <QCloseEvent>
+#include <analitza/builtinmethods.h>
 #include <KMessageBox>
 #include "zoom.h"
 #include "../GraphicsItem/GraphicsLayout.h"
@@ -567,7 +569,9 @@ void MainWindow::executeScript(const QString& text) {
     AbstractRunBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
     if ( !engine->isRunning() ){
         _bottomTabs->setStopString();
-        engine->setScript(script, DocumentManager::self()->activeDocument());
+        engine->addMetaClass(*(DocumentManager::self()->activeDocument()->activeDataStructure()->metaObject()));
+//        engine->addObject("graph", DocumentManager::self()->activeDocument()->activeDataStructure());
+	engine->setScript(script, DocumentManager::self()->activeDocument());
         engine->start();
     }else{
        _bottomTabs->setPlayString();

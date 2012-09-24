@@ -20,6 +20,7 @@
 
 #include "analitzabackend.h"
 #include <analitza/analyzer.h>
+#include <analitza/variables.h>
 #include <analitza/importqobjectmetatype.h>
 
 #include "Core/Data.h"
@@ -52,6 +53,7 @@ AnalitzaBackend::AnalitzaBackend(QObject* parent)
     importer.import(Data::staticMetaObject);
     importer.import(DataStructure::staticMetaObject);
     importer.import(Pointer::staticMetaObject);
+    importer.import(Document::staticMetaObject);
     importer.import(AbstractRunBackend::staticMetaObject);
     
     analyzer.builtinMethods()->insertFunction(
@@ -59,15 +61,18 @@ AnalitzaBackend::AnalitzaBackend(QObject* parent)
         ExpressionType(ExpressionType::Lambda).addParameter(ExpressionType("AbstractRunBackend*")),
         new Func(qVariantFromValue<AbstractRunBackend*>(this))
     );
+    addMetaClass(_document->staticMetaObject);
+    qDebug() << "lalalala" << analyzer.builtinMethods()->identifiers();
 }
 
-void AnalitzaBackend::addMetaClass(QMetaObject& o){
+void AnalitzaBackend::addMetaClass(const QMetaObject& o){
     importer.import(o);
 }
 
 void AnalitzaBackend::start()
 {
     QTextStream stream(&_script);
+    qDebug() << "sadasdasad" << analyzer.variables()->keys();
 
     analyzer.importScript(&stream);
     if(!analyzer.isCorrect())

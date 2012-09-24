@@ -31,7 +31,7 @@ class AnalitzaBackend  : public AbstractRunBackend
 public:
     explicit AnalitzaBackend(QObject* parent = 0);
     
-    void addMetaClass(QMetaObject& o);
+    void addMetaClass(const QMetaObject& o);
     void start();
     
     

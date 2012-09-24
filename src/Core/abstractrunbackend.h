@@ -40,6 +40,8 @@ public:
    void debug(const QString& s);
    void output(const QString& s);
    virtual bool isRunning(){ return false; }
+   
+   virtual void addMetaClass(const QMetaObject & o) = 0;
 signals:
     void sendOutput(const QString& s);
     void sendDebug(const QString& s);
