@@ -30,6 +30,7 @@ class Data;
 class Pointer;
 class MainWindow;
 class KColorCombo;
+class QToolButton;
 class KPushButton;
 
 /*! \brief Properties Area, not used yet. */

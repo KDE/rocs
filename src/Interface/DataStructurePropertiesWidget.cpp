@@ -160,15 +160,14 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     QWidget* dataPropertyWidget = new QWidget(this);
     QGridLayout* dataPropertyLayout = new QGridLayout(dataPropertyWidget);
     KPushButton* dataTypeButton = new KPushButton(this);
-    QMenu* dataTypeMenu = new QMenu(dataTypeButton);
     dataTypeButton->setFlat(true);
     dataTypeButton->setStyleSheet("text-align: left");
-    dataTypeButton->setMenu(dataTypeMenu);
-    dataTypeMenu->addAction(
-            new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataType, dataPropertyWidget)
-        );
+    KAction* dataAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataType, dataPropertyWidget);
+    dataTypeButton->addAction(dataAction);
     dataTypeButton->setIcon(dataType->icon());
     dataTypeButton->setText(dataType->name());
+    connect(dataTypeButton, SIGNAL(pressed()), dataAction, SLOT(trigger()));
+
 
     KPushButton* dataTypeVisible = new KPushButton(this);
     dataTypeVisible->setIcon(KIcon("rocseyeblack"));
@@ -211,14 +210,11 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     QGridLayout* pointerPropertyLayout = new QGridLayout(pointerPropertyWidget);
 
     KPushButton* pointerTypeButton = new KPushButton(this);
-    QMenu* pointerTypeMenu = new QMenu(pointerTypeButton);
     pointerTypeButton->setText(pointerType->name());
     pointerTypeButton->setFlat(true);
     pointerTypeButton->setStyleSheet("text-align: left");
-    pointerTypeButton->setMenu(pointerTypeMenu);
-    pointerTypeMenu->addAction(
-            new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget)
-        );
+    KAction* pointerAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget);
+    connect(pointerTypeButton, SIGNAL(pressed()), pointerAction, SLOT(trigger()));
 
     KPushButton* pointerTypeVisible = new KPushButton(this);
     pointerTypeVisible->setIcon(KIcon("rocseyeblack"));
