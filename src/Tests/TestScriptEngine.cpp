@@ -58,6 +58,7 @@ void TestScriptEngine::basicOperationsGraph()
     ds = graphDoc->addDataStructure("test");
     DataPtr a = ds->addData("a");
     DataPtr b = ds->addData("b");
+    DataPtr c = ds->addData("c");
     PointerPtr connection = ds->addPointer(a, b);
     int type1 = graphDoc->registerDataType("type1");
     graphDoc->setActiveDataStructure(ds);
@@ -75,20 +76,20 @@ void TestScriptEngine::basicOperationsGraph()
     // change type
     engine->setScript(QString("var a = test.list_nodes()[0]; a.set_type(%1); a.type();").arg(type1), graphDoc);
     result = engine->execute();
-    qDebug() << result;
     QVERIFY(result == QString::number(type1));
 
-    // remove pointer
-    engine->setScript(QString("var x = test.list_edges()[0]; x.remove(); test.list_edges().length;"), graphDoc);
+    // add and remove pointer
+    engine->setScript(QString("var x = test.add_edge(test.list_nodes()[1], test.list_nodes()[2]); test.list_edges().length;"), graphDoc);
     result = engine->execute();
-    qDebug() << result;
-    QVERIFY(result == QString::number(0));
+    QVERIFY(result == QString::number(2));
+    engine->setScript(QString("var x = test.list_edges()[1]; x.remove(); test.list_edges().length;"), graphDoc);
+    result = engine->execute();
+    QVERIFY(result == QString::number(1));
 
     // remove data elements
     engine->setScript(QString("test.list_nodes()[0].remove(); test.list_nodes().length;"), graphDoc);
     result = engine->execute();
-    qDebug() << result;
-    QVERIFY(result == QString::number(1));
+    QVERIFY(result == QString::number(2));
 }
 
 // tests if stop action stops execution
@@ -157,21 +158,20 @@ void TestScriptEngine::ignoreComments()
 
 void TestScriptEngine::useOfDynamicProperties()
 {
+    DocumentManager::self()->addDocument(new Document("test"));
     DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
     DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
-
-    
     Document* graphDoc = DocumentManager::self()->activeDocument();
-    
+
     DataStructurePtr d = graphDoc->activeDataStructure();
     d->setName("myGraph");
     DataPtr n1 =d->addData("Node1");
     DataPtr n2 = d->addData("Node2");
     PointerPtr e1 = d->addPointer(n1, n2);
-    
+
     QString test;
     QScriptValue result;
-    
+
     // start engine
     test = QString("nodes = myGraph.list_nodes()\n"
            "edges = myGraph.list_edges()\n"
@@ -185,17 +185,17 @@ void TestScriptEngine::useOfDynamicProperties()
            "nodes[1].MyProperty = nodes[0].MyProperty + 2\n"
            "edges[0].MyProperty = 2\n"
            "myGraph.add_property(\"MyProperty\", 2)\n");
-    
+
     QtScriptBackend *engine = graphDoc->engineBackend();
-    
+
     engine->setScript(test, graphDoc);
     engine->execute();
-    
+
     QVERIFY2 (n1->property("MyProperty").isValid(), "Node 1 property is invalid!");
     QVERIFY2 (n2->property("MyProperty").isValid(), "Node 2 property is invalid!");
     QVERIFY2 (e1->property("MyProperty").isValid(), "Edge 1 property is invalid!");
     QVERIFY2 (d->property("MyProperty").isValid(), "DS property is invalid!");
-    
+
     QCOMPARE (n1->property("MyProperty").toInt(), 2);
     QCOMPARE (n2->property("MyProperty").toInt(), 4);
     QCOMPARE (e1->property("MyProperty").toInt(), 2);
