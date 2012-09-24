@@ -143,6 +143,8 @@ DataTypePage::DataTypePage(QWidget* parent)
     // buttons
     ui->addPropertyButton->setIcon(KIcon("rocsnew"));
     ui->removePropertyButton->setIcon(KIcon("rocsdelete"));
+    ui->addType->setIcon(KIcon("rocsnew"));
+    ui->deleteType->setIcon(KIcon("rocsdelete"));
 
     // property table
     _model = new DataTypePropertyModel(this);
@@ -151,8 +153,8 @@ DataTypePage::DataTypePage(QWidget* parent)
 
     connect(ui->typeSelector, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setCurrentType(int)));
-    connect(ui->exportNewType, SIGNAL(clicked(bool)),
-            this, SLOT(createNewType()));
+    connect(ui->addType, SIGNAL(clicked(bool)),
+            this, SLOT(addType()));
     connect(ui->deleteType, SIGNAL(clicked(bool)),
             this, SLOT(removeType()));
     connect(ui->typeName, SIGNAL(textChanged(QString)),
@@ -311,11 +313,10 @@ void DataTypePage::updateCurrentTypeName()
 }
 
 
-void DataTypePage::createNewType()
+void DataTypePage::addType()
 {
-    int newTypeID = _document->registerDataType(ui->newTypeName->text());
+    int newTypeID = _document->registerDataType(i18nc("@item:inlistbox", "Data Type"));
     DataTypePtr newType = _document->dataType(newTypeID);
-    ui->newTypeName->clear();
     QString item = i18nc(
         "@item:inlistbox",
         "%1 (ID %2)",

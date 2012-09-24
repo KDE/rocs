@@ -39,6 +39,10 @@ PointerTypePage::PointerTypePage(QWidget* parent)
     ui = new Ui::PointerTypePage;
     ui->setupUi(this);
 
+    // buttons
+    ui->addType->setIcon(KIcon("rocsnew"));
+    ui->deleteType->setIcon(KIcon("rocsdelete"));
+
     // create line style selector
     ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "solid line"), Qt::SolidLine);
     ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dash line"), Qt::DashLine);
@@ -51,8 +55,8 @@ PointerTypePage::PointerTypePage(QWidget* parent)
 
     connect(ui->typeSelector, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setCurrentType(int)));
-    connect(ui->exportNewType, SIGNAL(clicked(bool)),
-            this, SLOT(createNewType()));
+    connect(ui->addType, SIGNAL(clicked(bool)),
+            this, SLOT(addType()));
     connect(ui->deleteType, SIGNAL(clicked(bool)),
             this, SLOT(removeType()));
     connect(ui->typeName, SIGNAL(textChanged(QString)),
@@ -77,8 +81,14 @@ void PointerTypePage::setDocument(Document* document)
     _document = document;
 
     // setup types
-    foreach (int pointerType, _document->pointerTypeList()) {
-        ui->typeSelector->addItem(_document->pointerType(pointerType)->name(), QVariant(pointerType));
+    foreach (int pointerTypeID, _document->pointerTypeList()) {
+        PointerTypePtr pointerType = _document->pointerType(pointerTypeID);
+        QString item = i18nc(
+            "@item:inlistbox",
+            "%1 (ID %2)",
+            pointerType->name(),
+            pointerType->identifier());
+        ui->typeSelector->addItem(item, QVariant(pointerTypeID));
     }
 
     ui->typeSelector->setCurrentIndex(0); // default type 0 always exists
@@ -109,7 +119,6 @@ void PointerTypePage::setCurrentType(int index)
     ui->typePointerDirection->setCurrentIndex(
         ui->typePointerDirection->findData(_document->pointerType(type)->direction()));
     ui->typeDefaultColor->setColor(_document->pointerType(type)->defaultColor());
-    ui->typeIdentifier->setText(QString::number(type));
 }
 
 
@@ -150,11 +159,16 @@ void PointerTypePage::updateCurrentTypeLineStyle()
 }
 
 
-void PointerTypePage::createNewType()
+void PointerTypePage::addType()
 {
-    int newType = _document->registerPointerType(ui->newTypeName->text());
-    ui->newTypeName->clear();
-    ui->typeSelector->addItem(_document->pointerType(newType)->name(), QVariant(newType));
+    int newTypeID = _document->registerPointerType(i18nc("@item:inlistbox", "Connection"));
+    PointerTypePtr newType = _document->pointerType(newTypeID);
+    QString item = i18nc(
+        "@item:inlistbox",
+        "%1 (ID %2)",
+        newType->name(),
+        newType->identifier());
+    ui->typeSelector->addItem(item, QVariant(newTypeID));
     ui->typeSelector->setCurrentIndex(ui->typeSelector->count()-1);
     setCurrentType(ui->typeSelector->count()-1);
 }

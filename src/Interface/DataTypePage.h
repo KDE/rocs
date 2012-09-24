@@ -50,7 +50,7 @@ private slots:
     void setIcon();
     void addProperty();
     void removeProperty();
-    void createNewType();
+    void addType();
     void removeType();
     void updateCurrentTypeName();
 

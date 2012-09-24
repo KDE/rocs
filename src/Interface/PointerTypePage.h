@@ -47,7 +47,7 @@ private slots:
     void setCurrentType(int index);
     void setTypeName();
     void setTypeDefaultColor();
-    void createNewType();
+    void addType();
     void removeType();
     void updateCurrentTypeName();
     void updateCurrentTypeDirection();
