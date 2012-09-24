@@ -32,11 +32,122 @@
 #include <KPushButton>
 #include <KComboBox>
 
+
+// DataType Property Model
+
+class DataTypePropertyModel : public QAbstractTableModel {
+    QList<QString> _propertyList;
+    DataTypePtr _dataType;
+
+public:
+    DataTypePropertyModel(QObject* parent = 0)
+        : QAbstractTableModel(parent)
+    {
+        emit layoutChanged();
+    }
+
+    QString propertyInRow(int row) {
+        return _propertyList.at(row);
+    }
+
+    void setDataType(DataTypePtr dataType) {
+        _dataType = dataType;
+        _propertyList = dataType->properties();
+        emit(layoutChanged());
+    }
+
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const
+    {
+        // if the role is not for displaying anything, return a default empty value.
+        if (role != Qt::DisplayRole) {
+            return QVariant();
+        }
+
+        if (orientation == Qt::Horizontal) {
+            switch (section) {
+            case 0: return i18n("Name");
+            case 1: return i18n("Default Value");
+            case 2: return i18n("Display");
+            }
+        }
+        return QVariant();
+    }
+
+    Qt::ItemFlags flags(const QModelIndex &index) const
+    {
+        if (index.isValid()) {
+            return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+        }
+        return Qt::ItemIsEnabled;
+    }
+
+    virtual int rowCount(const QModelIndex & parent = QModelIndex()) const {
+        if(!parent.isValid()) {
+            return _propertyList.count();
+        }
+        return 0;
+    }
+
+    virtual int columnCount(const QModelIndex & parent = QModelIndex()) const {
+        if(!parent.isValid()) {
+            return 3;
+        }
+        return 0;
+    }
+
+    virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const {
+        if (role == Qt::DisplayRole) {
+            switch(index.column()) {
+                case 0: return _propertyList.at(index.row()); break;
+                case 1: return _dataType->propertyDefaultValue(_propertyList.at(index.row())); break;
+                case 2: return _dataType->isPropertyVisible(_propertyList.at(index.row())); break;
+                default: return QVariant();
+            }
+        }
+        if (role == Qt::EditRole) {
+            switch(index.column()) {
+                case 0: return _propertyList.at(index.row()); break;
+                case 1: return _dataType->propertyDefaultValue(_propertyList.at(index.row())); break;
+                case 2: return _dataType->isPropertyVisible(_propertyList.at(index.row())); break;
+                default: return QVariant();
+            }
+        }
+        return QVariant();
+    }
+
+    bool setData(const QModelIndex &index, const QVariant &value, int role)
+    {
+        if (index.isValid() && role == Qt::EditRole) {
+            switch (index.column()) {
+                case 0: kDebug() << "SET NAME"; break;
+                case 1: _dataType->setPropertyDefaultValue(_propertyList.at(index.row()), value); break;
+                case 2: _dataType->setPropertyVisible(_propertyList.at(index.row()), value.toBool()); break;
+                default: return false;
+            }
+            return true;
+        }
+        return false;
+
+    }
+};
+
+
+// DataType Page
+
 DataTypePage::DataTypePage(QWidget* parent)
     : QWidget(parent)
 {
     ui = new Ui::DataTypePage;
     ui->setupUi(this);
+
+    // buttons
+    ui->addPropertyButton->setIcon(KIcon("rocsnew"));
+    ui->removePropertyButton->setIcon(KIcon("rocsdelete"));
+
+    // property table
+    _model = new DataTypePropertyModel(this);
+    ui->propertyList->setModel(_model);
+    ui->propertyList->horizontalHeader()->setProperty("stretchLastSection", true);
 
     connect(ui->typeSelector, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setCurrentType(int)));
@@ -52,6 +163,10 @@ DataTypePage::DataTypePage(QWidget* parent)
             this, SLOT(setTypeDefaultColor()));
     connect(ui->typeIcon, SIGNAL(activated(QString)),
             this, SLOT(setIcon()));
+    connect(ui->addPropertyButton, SIGNAL(clicked(bool)),
+            this, SLOT(addProperty()));
+    connect(ui->removePropertyButton, SIGNAL(clicked(bool)),
+            this, SLOT(removeProperty()));
 }
 
 
@@ -65,7 +180,12 @@ void DataTypePage::setDocument(Document* document)
 
     // setup types
     foreach (int dataType, _document->dataTypeList()) {
-        ui->typeSelector->addItem(_document->dataType(dataType)->name(), QVariant(dataType));
+        QString item = i18nc(
+            "@item:inlistbox",
+            "%1 (ID %2)",
+            _document->dataType(dataType)->name(),
+            _document->dataType(dataType)->identifier());
+        ui->typeSelector->addItem(item, QVariant(dataType));
     }
 
     ui->typeSelector->setCurrentIndex(0); // default type 0 always exists
@@ -78,6 +198,7 @@ void DataTypePage::setDataType(DataTypePtr dataType)
     //FIXME current workaround: select current active document as parent document
     setDocument(DocumentManager::self()->activeDocument());
     ui->typeSelector->setCurrentIndex(ui->typeSelector->findData(QVariant(dataType->identifier())));
+    _model->setDataType(dataType);
 }
 
 void DataTypePage::setTypeName()
@@ -103,6 +224,33 @@ void DataTypePage::setIcon()
 }
 
 
+void DataTypePage::addProperty()
+{
+    int typeID = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
+    DataTypePtr type = _document->dataType(typeID);
+    int counter = 1;
+    QString newProperty = i18nc("Property identifier, only a-Z and no spaces", "property%1", counter);
+    while (type->properties().contains(newProperty)) {
+        newProperty = i18nc("Property identifier, only a-Z and no spaces", "property%1", ++counter);
+    }
+    type->addProperty(newProperty, "");
+    _model->setDataType(type);
+}
+
+
+void DataTypePage::removeProperty()
+{
+    int typeID = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
+    DataTypePtr type = _document->dataType(typeID);
+    int row = ui->propertyList->currentIndex().row();
+    if (row < 0) {
+        return;
+    }
+    type->removeProperty(_model->propertyInRow(row));
+    _model->setDataType(type); // update table
+}
+
+
 void DataTypePage::setCurrentType(int index)
 {
     int type = ui->typeSelector->itemData(index).toInt();
@@ -114,7 +262,6 @@ void DataTypePage::setCurrentType(int index)
 
     ui->typeName->setText(_document->dataType(type)->name());
     ui->typeDefaultColor->setColor(_document->dataType(type)->defaultColor());
-    ui->typeIdentifier->setText(QString::number(type));
 
     // icon selector
     if (!_document->iconPackage().isEmpty()) {
@@ -131,9 +278,8 @@ void DataTypePage::setCurrentType(int index)
             QString attribute = reader.attributes().value("id").toString();
             if (attribute.startsWith(QLatin1String("rocs_"))) {
                 QImage iconImage = QImage(80, 80, QImage::Format_ARGB32);
-		
-		iconImage.fill(Qt::transparent);
-		
+                iconImage.fill(Qt::transparent);
+
                 QPainter painter;
                 painter.begin(&iconImage);
                 renderer->render(&painter, attribute);
@@ -154,16 +300,28 @@ void DataTypePage::setCurrentType(int index)
 
 void DataTypePage::updateCurrentTypeName()
 {
-    int type = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
-    ui->typeSelector->setItemText(ui->typeSelector->currentIndex(), _document->dataType(type)->name());
+    int typeID = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
+    DataTypePtr type = _document->dataType(typeID);
+    QString item = i18nc(
+        "@item:inlistbox",
+        "%1 (ID %2)",
+        type->name(),
+        type->identifier());
+    ui->typeSelector->setItemText(ui->typeSelector->currentIndex(), item);
 }
 
 
 void DataTypePage::createNewType()
 {
-    int newType = _document->registerDataType(ui->newTypeName->text());
+    int newTypeID = _document->registerDataType(ui->newTypeName->text());
+    DataTypePtr newType = _document->dataType(newTypeID);
     ui->newTypeName->clear();
-    ui->typeSelector->addItem(_document->dataType(newType)->name(), QVariant(newType));
+    QString item = i18nc(
+        "@item:inlistbox",
+        "%1 (ID %2)",
+        newType->name(),
+        newType->identifier());
+    ui->typeSelector->addItem(item, QVariant(newTypeID));
     ui->typeSelector->setCurrentIndex(ui->typeSelector->count()-1);
     setCurrentType(ui->typeSelector->count()-1);
 }

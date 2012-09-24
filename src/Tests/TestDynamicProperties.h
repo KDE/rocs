@@ -37,21 +37,15 @@ private slots:
     void addEdgeDynamicProperty();
     void addGraphDynamicProperty();
 
-    void addToAllNodes();
-    void addToAllEdges();
-
     void removeNodeDynamicProperty();
     void removeEdgeDynamicProperty();
     void removeGraphDynamicProperty();
 
-    void removeToAllNodes();
-    void removeToAllEdges();
+    void changeNames();
 
-    void MultipleProperties();
-
-    void renameProperties();
+//     void renameProperties(); //TODO
     void renameToinvalidNames();
-    
+
     void insertInvalidNames();
 
 private:

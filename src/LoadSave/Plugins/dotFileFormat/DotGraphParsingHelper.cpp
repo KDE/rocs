@@ -201,7 +201,7 @@ void DotGraphParsingHelper::createPointers()
         DataPtr to = dataMap[toId];
 
         currentPointerPtr = dataStructure->addPointer(from, to);
-        kDebug() << "Creating new pointer: " << from->name() << " -> " << to->name();
+        kDebug() << "Creating new pointer: " << from->identifier() << " -> " << to->identifier();
         setPointerAttributes();
 
         fromId = toId;

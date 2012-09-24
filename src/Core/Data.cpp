@@ -44,18 +44,14 @@ public:
     qreal _x;
     qreal _y;
     qreal _width;
-    bool _showName;
-    bool _showValue;
     bool _visible;
     bool _colored;
 
     DataStructurePtr _dataStructure;
     int _uniqueIdentifier;
-    int _dataType;
-    QString _name;
+    DataTypePtr _dataType;
     QColor _color;
 
-    QVariant _value;
     QScriptValue _scriptvalue;
     QScriptEngine *_engine;
 
@@ -76,16 +72,13 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifier, int data
     : _x(0)
     , _y(0)
     , _width(0.3)
-    , _showName(parent->isDataNameVisible(dataType))
-    , _showValue(parent->isDataValueVisible(dataType))
     , _visible(parent->isDataVisible(dataType))
     , _colored(false)
     , _dataStructure(parent)
     , _uniqueIdentifier(uniqueIdentifier)
-    , _dataType(dataType)
     , _color(parent->document()->dataType(dataType)->defaultColor())
-    , _value(0)
 {
+    _dataType = _dataStructure->document()->dataType(dataType);
     _inPointers = PointerList();
     _outPointers = PointerList();
 }
@@ -126,6 +119,23 @@ void Data::setQpointer(DataPtr q)
     d->q = q;
 }
 
+void Data::initialize()
+{
+    installEventFilter(this);
+    foreach(QString property, d->_dataType->properties()) {
+        addDynamicProperty(property, d->_dataType->propertyDefaultValue(property));
+    }
+
+    connect(d->_dataType.get(), SIGNAL(propertyAdded(QString, QVariant)),
+            this, SLOT(addDynamicProperty(QString,QVariant)));
+    connect(d->_dataType.get(), SIGNAL(propertyDefaultValueChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyVisibilityChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyRenamed(QString,QString)),
+            this, SLOT(renameDynamicProperty(QString,QString)));
+}
+
 DataPtr Data::getData() const
 {
     DataPtr px(d->q);
@@ -148,25 +158,19 @@ Data::~Data()
     }
 }
 
+bool Data::eventFilter(QObject *obj, QEvent *event){
+    if (event->type() == QEvent::DynamicPropertyChange) {
+        if (QDynamicPropertyChangeEvent* const dynEvent = dynamic_cast<QDynamicPropertyChangeEvent*>(event)) {
+            event->accept();
+            emit(propertyChanged(dynEvent->propertyName()));
+        }
+    }
+    return QObject::eventFilter(obj, event);
+}
+
 DataStructurePtr Data::dataStructure() const
 {
     return d->_dataStructure;
-}
-
-void Data::setNameVisible(bool visible)
-{
-    if (d->_showName != visible) {
-        d->_showName = visible;
-        emit nameVisibilityChanged(visible);
-    }
-}
-
-void Data::setValueVisible(bool visible)
-{
-    if (d->_showValue != visible) {
-        d->_showValue = visible;
-        emit valueVisibilityChanged(visible);
-    }
 }
 
 void Data::setColored(bool b)
@@ -191,9 +195,29 @@ void Data::setVisible(bool visible)
 void Data::setDataType(int dataType)
 {
     Q_ASSERT(d->_dataStructure->document()->dataTypeList().contains(dataType));
-    d->_dataType = dataType;
+
+    // disconnect from old data type
+    disconnect(d->_dataType.get());
+
+    // make changes
+    d->_dataType = d->_dataStructure->document()->dataType(dataType);
     d->_dataStructure->updateData(getData());
+    foreach(QString property, d->_dataType->properties()) {
+        if (this->property(property.toStdString().c_str()) == QVariant::Invalid) {
+            addDynamicProperty(property, d->_dataType->propertyDefaultValue(property));
+        }
+    }
     emit dataTypeChanged(dataType);
+
+    // connect to new type
+    connect(d->_dataType.get(), SIGNAL(propertyAdded(QString, QVariant)),
+            this, SLOT(addDynamicProperty(QString,QVariant)));
+    connect(d->_dataType.get(), SIGNAL(propertyDefaultValueChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyVisibilityChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyRenamed(QString,QString)),
+            this, SLOT(renameDynamicProperty(QString,QString)));
 }
 
 DataList Data::adjacentDataList() const
@@ -312,16 +336,6 @@ void Data::remove()
     emit removed();
 }
 
-const QVariant Data::value() const
-{
-    return d->_value;
-}
-
-const QString& Data::name()  const
-{
-    return d->_name;
-}
-
 const QVariant Data::color() const
 {
     return d->_color;
@@ -344,7 +358,12 @@ qreal Data::width() const
 
 QString Data::icon() const
 {
-    return d->_dataStructure->document()->dataType(d->_dataType)->iconName();
+    return d->_dataType->iconName();
+}
+
+QList< QString > Data::properties() const
+{
+    return d->_dataType->properties();
 }
 
 PointerList& Data::inPointerList() const
@@ -355,16 +374,6 @@ PointerList& Data::inPointerList() const
 PointerList& Data::outPointerList() const
 {
     return d->_outPointers;
-}
-
-bool Data::isNameVisible() const
-{
-    return d->_showName;
-}
-
-bool Data::isValueVisible() const
-{
-    return d->_showValue;
 }
 
 bool Data::isColored() const
@@ -379,7 +388,7 @@ int Data::identifier() const
 
 int Data::dataType() const
 {
-    return d->_dataType;
+    return d->_dataType->identifier();
 }
 
 void Data::setX(int x)
@@ -424,39 +433,34 @@ void Data::setColor(const QVariant& s)
     }
 }
 
-void Data::setName(const QString& s)
-{
-    if (d->_name != s) {
-        d->_name = s;
-        emit nameChanged(s);
-    }
-}
-
-void  Data::setValue(const QVariant& s)
-{
-    if (d->_value != s) {
-        d->_value = s;
-        emit valueChanged(s);
-    }
-}
-
-void  Data::setValue(const QString& s)
-{
-    QVariant v(s);
-    if (d->_value != v) {
-        d->_value = v;
-        emit valueChanged(v);
-    }
-}
-
-void Data::addDynamicProperty(const QString& property, const QVariant &value)
+void Data::addDynamicProperty(const QString& property, const QVariant& value)
 {
     DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
+    emit(propertyAdded(property));
 }
 
-void Data::removeDynamicProperty(const QString & property)
+void Data::removeDynamicProperty(const QString& property)
 {
+    addDynamicProperty(property.toUtf8(), QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
+    emit(propertyRemoved(property));
+}
+
+void Data::updateDynamicProperty(QString property)
+{
+    if (this->property(property.toStdString().c_str()) == QVariant::Invalid
+        || this->property(property.toStdString().c_str()).toString().isEmpty()
+    ) {
+        this->setProperty(property.toStdString().c_str(), d->_dataType->propertyDefaultValue(property));
+    }
+    emit propertyChanged(property);
+}
+
+void Data::renameDynamicProperty(QString oldName, QString newName)
+{
+    DynamicPropertiesList::New()->changePropertyName(oldName.toStdString().c_str(),
+                                                     newName.toStdString().c_str(),
+                                                     this);
 }
 
 QScriptValue Data::scriptValue() const
@@ -482,7 +486,7 @@ QScriptValue Data::set_type(int dataType)
 
 QScriptValue Data::type()
 {
-    return d->_dataStructure->engine()->newVariant(d->_dataType);
+    return d->_dataStructure->engine()->newVariant(d->_dataType->identifier());
 }
 
 void Data::add_property(const QString & name, const QString & value)

@@ -56,9 +56,9 @@ void DynamicPropertiesList::addProperty(QObject* obj, const QByteArray& name, co
             kWarning() << i18n("The name (%1) passed to property is invalid.",QString(name));
             return;
     }
-    
+
     obj->setProperty(name, value);
-    
+
     if (Data * node = qobject_cast< Data* >(obj)) {
         QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());
         if (multimap == _NodesProperties.end()) { //Not exist a dataStructure yet
@@ -222,8 +222,8 @@ void DynamicPropertiesList::changePropertyName(const QByteArray& name, const QBy
         kWarning() << i18n("The new name (%1) passed to property is invalid.",QString(newName));
         return;
     }
-    
-    
+
+
     Data * node = qobject_cast< Data* >(object);
     if (node) {
         QMap< DataStructure*,  QMultiMap <QString, Data* > >::iterator multimap = _NodesProperties.find(node->dataStructure().get());

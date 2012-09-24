@@ -58,11 +58,7 @@ void DataPropertiesWidget::setData(DataPtr data)
     }
     if (_data) {
         _data->disconnect(this);
-        ui->_showName->disconnect(_data.get());
-        ui->_showValue->disconnect(_data.get());
         ui->_enableColor->disconnect(_data.get());
-        ui->_name->disconnect(_data.get());
-        ui->_value->disconnect(_data.get());
         ui->_dataType->clear();
     }
 
@@ -74,16 +70,8 @@ void DataPropertiesWidget::setData(DataPtr data)
     ui->extraItems->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
 
-    connect(ui->_showName, SIGNAL(toggled(bool)),
-            _data.get(), SLOT(setShowName(bool)));
-    connect(ui->_showValue, SIGNAL(toggled(bool)),
-            _data.get(), SLOT(setShowValue(bool)));
     connect(ui->_enableColor, SIGNAL(toggled(bool)),
             this, SLOT(setUseColor(bool)));
-    connect(ui->_name, SIGNAL(textEdited(QString)),
-            _data.get(), SLOT(setName(QString)));
-    connect(ui->_value, SIGNAL(textEdited(QString)),
-            _data.get(), SLOT(setValue(QString)));
     connect(ui->_dataType, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setDataType(int)));
     connect(ui->_color, SIGNAL(activated(QColor)),
@@ -125,10 +113,6 @@ void DataPropertiesWidget::reflectAttributes()
     }
 
     ui->_color->setColor(_data->color().value<QColor>());
-    ui->_name->setText(_data->name());
-    ui->_value->setText(_data->value().toString());
-    ui->_showName->setChecked(_data->isNameVisible());
-    ui->_showValue->setChecked(_data->isValueVisible());
     ui->_enableColor->setChecked(_data->isColored());
 
     DataTypePtr dataType = _data->dataStructure()->document()->dataType(_data->dataType());
@@ -163,5 +147,5 @@ void DataPropertiesWidget::updateDataTypes()
 void DataPropertiesWidget::addProperty()
 {
     GraphPropertiesModel *model = qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
-    model->addDynamicProperty(i18nc("Property keyword only caracters from a to z (no spaces)","untitled%1", model->rowCount()), 0, _data.get(), false);
+    model->addDynamicProperty(i18nc("Property keyword only caracters from a to z (no spaces)","untitled%1", model->rowCount()), 0, _data.get());
 }

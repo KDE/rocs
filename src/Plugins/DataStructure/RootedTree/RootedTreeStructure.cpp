@@ -78,9 +78,9 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
         queue.enqueue(dataOther);
 
         // add data element to tree and register mapping
-        DataPtr dataTree = addData(dataOther->name(), 0);
+        DataPtr dataTree = addData(dataOther->property("name").toString(), 0);
         dataTree->setColor(dataOther->color());
-        dataTree->setValue(dataOther->value());
+        dataTree->setProperty("value", dataOther->property("value").toString());
         dataTree->setX(dataOther->x());
         dataTree->setY(dataOther->y());
         dataTree->setWidth(dataOther->width());
@@ -106,9 +106,9 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
                 if (!visited.contains(adjacentData.get())){
                     visited.insert(adjacentData.get());
                     queue.enqueue(adjacentData);
-                    DataPtr childdata = addData(adjacentData->name(), 0);
+                    DataPtr childdata = addData(adjacentData->property("name").toString(), 0);
                     childdata->setColor(adjacentData->color());
-                    childdata->setValue(adjacentData->value());
+                    childdata->setProperty("value", adjacentData->property("value").toString());
                     childdata->setX(adjacentData->x());
                     childdata->setY(adjacentData->y());
                     childdata->setWidth(adjacentData->width());
@@ -198,7 +198,7 @@ DataPtr RootedTreeStructure::addData(QString name, int dataType)
 {
     boost::shared_ptr<RootedTreeNode> n = boost::static_pointer_cast<RootedTreeNode>(
     RootedTreeNode::create(getDataStructure(), generateUniqueIdentifier(), dataType) );
-    n->setName(name);
+    n->setProperty("name", name);
     return addData(n);
 }
 

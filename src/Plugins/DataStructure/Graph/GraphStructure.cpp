@@ -61,9 +61,9 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
     setGraphType(Graph);
     QHash <Data*, DataPtr> dataTodata;
     foreach(DataPtr n, other->dataList()) {
-        DataPtr newdata = addData(n->name());
+        DataPtr newdata = addData(""); //n->name());
         newdata->setColor(n->color());
-        newdata->setValue(n->value());
+        newdata->setProperty("value", n->property("value").toString());
         newdata->setX(n->x());
         newdata->setY(n->y());
         newdata->setWidth(n->width());
@@ -373,7 +373,7 @@ DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
     boost::shared_ptr<GraphNode> n = boost::static_pointer_cast<GraphNode>(
                                          GraphNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
                                      );
-    n->setName(name);
+    n->setProperty("name", name);
     return addData(n, dataType);
 }
 

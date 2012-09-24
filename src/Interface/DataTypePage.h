@@ -26,6 +26,7 @@
 #include <QWidget>
 
 class Document;
+class DataTypePropertyModel;
 
 /*!
     \brief Properties page for DataType.
@@ -47,12 +48,15 @@ private slots:
     void setTypeName();
     void setTypeDefaultColor();
     void setIcon();
+    void addProperty();
+    void removeProperty();
     void createNewType();
     void removeType();
     void updateCurrentTypeName();
 
 private:
     Document* _document;
+    DataTypePropertyModel* _model;
     Ui::DataTypePage *ui;
 };
 

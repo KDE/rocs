@@ -46,10 +46,8 @@ class  ROCSLIB_EXPORT Data : public QObject
     Q_PROPERTY(qreal x READ x WRITE setX)
     Q_PROPERTY(qreal y READ y WRITE setY)
     Q_PROPERTY(qreal width READ width WRITE setWidth)
-    Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(int id READ identifier)
     Q_PROPERTY(QVariant color READ color WRITE setColor)
-    Q_PROPERTY(QVariant value READ value WRITE setValue)
 
 public:
     /**
@@ -152,15 +150,7 @@ public:
      */
     QString icon() const;
 
-    /**
-     * \return true if data name is visible, otherwise false
-     */
-    bool isNameVisible() const;
-
-    /**
-     * \return true if data value is visible, otherwise false
-     */
-    bool isValueVisible() const;
+    QList<QString> properties() const;
 
     /**
      * \return true if data element is visible, otherwise false
@@ -207,6 +197,17 @@ public:
      */
     PointerList& outPointerList() const;
 
+public slots:
+    void remove();
+    void setX(int x);
+    void setY(int y);
+    void setWidth(double w);
+    void setPos(qreal x, qreal y);
+    void setColor(const QVariant& s);
+    void setColored(bool b = true);
+    void setVisible(bool visible);
+    void setDataType(int dataType);
+
     /**
      * Add new dynamic property with identifier \p property to this data element and
      * sets it to \p value.
@@ -223,21 +224,9 @@ public:
      */
     void removeDynamicProperty(const QString& property);
 
-public slots:
-    void remove();
-    void setX(int x);
-    void setY(int y);
-    void setWidth(double w);
-    void setPos(qreal x, qreal y);
-    void setColor(const QVariant& s);
-    void setName(const QString& s);
-    void setValue(const QVariant& v);
-    void setNameVisible(bool visible);
-    void setValueVisible(bool visible);
-    void setColored(bool b = true);
-    void setVisible(bool visible);
-    void setValue(const QString& v);
-    void setDataType(int dataType);
+    void updateDynamicProperty(QString property);
+
+    void renameDynamicProperty(QString oldName, QString newName);
 
     /**
      * FIXME proof of concept implementation: since each Pointer emits a changed direction signal,
@@ -265,14 +254,13 @@ signals:
     void posChanged(const QPointF p);
     void widthChanged(double w);
     void colorChanged(const QColor& c);
-    void nameChanged(const QString& name);
-    void valueChanged(const QVariant& v);
-    void nameVisibilityChanged(bool b);
-    void valueVisibilityChanged(bool b);
     void visibilityChanged(bool visible);
     void useColorChanged(bool b);
     void dataTypeChanged(int dataType);
     void pointerListChanged();
+    void propertyAdded(QString name);
+    void propertyRemoved(QString name);
+    void propertyChanged(QString name);
 
 protected:
     /**
@@ -287,8 +275,11 @@ protected:
     static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType) {
         DataPtr pi(new T(parent, uniqueIdentifier, dataType));
         pi->setQpointer(pi);
+        pi->initialize();
         return pi;
     }
+
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     /**
@@ -302,6 +293,8 @@ private:
      * Set q-pointer in private data object.
      */
     void setQpointer(DataPtr q);
+
+    void initialize();
     Data(Data const &, int uniqueIdentifier, int dataType);
     Data & operator=(Data const &);
 };

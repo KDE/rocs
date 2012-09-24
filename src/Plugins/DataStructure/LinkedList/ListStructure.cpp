@@ -55,9 +55,9 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
     m_building = true;
     QHash < Data*, DataPtr > dataTodata;
     foreach(DataPtr n, other->dataList()) {
-        DataPtr newdata = addData(n->name());
+        DataPtr newdata = addData(""); //n->name());
         newdata->setColor(n->color());
-        newdata->setValue(n->value());
+        newdata->setProperty("value", n->property("value").toString());
         newdata->setX(n->x());
         newdata->setY(n->y());
         newdata->setWidth(n->width());
@@ -109,7 +109,7 @@ DataPtr Rocs::ListStructure::addData(QString name, int dataType)
     boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(
                                         ListNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
                                     );
-    n->setName(name);
+    n->setProperty("name", name);
 
     if (m_building) {
         return addData(n, dataType);;
@@ -167,7 +167,7 @@ QScriptValue Rocs::ListStructure::createNode(const QString & name)
     boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(
                                         DataStructure::addData(ListNode::create(getDataStructure(), generateUniqueIdentifier(), 0))
                                     );
-    n->setName(name);
+    n->setProperty("name", name);
     n->setEngine(engine());
     arrangeNodes();
     return n->scriptValue();

@@ -82,7 +82,7 @@ void KmlFileFormatPlugin::writeFile(Document& document)
         foreach(DataPtr n, graph->dataList()) {
             xmlWriter.writeStartElement("Placemark");
             xmlWriter.writeStartElement("name");
-            xmlWriter.writeCharacters(n->name());
+            xmlWriter.writeCharacters(n->property("name").toString());
             if (n->property("description").isValid()) {
                 xmlWriter.writeCharacters(n->property("description").toString());
             }
@@ -103,7 +103,7 @@ void KmlFileFormatPlugin::writeFile(Document& document)
         xmlWriter.writeStartElement("Placemark");
         xmlWriter.writeStartElement("name");
         {
-            QString s = graph->dataList().at(0)->name();
+            QString s = graph->dataList().at(0)->property("name").toString();
             s.chop(2);
             xmlWriter.writeCharacters(s);
         }
