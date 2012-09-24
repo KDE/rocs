@@ -37,7 +37,6 @@ public:
 //     QtScriptBackend();
     QtScriptBackend(QObject* parent = 0);
     void setScript(const QString& s, Document *document);
-    void setDocument(Document *document);
     void loadFile(const QString& file);
     void debug(const QString& s);
     void output(const QString& s);
@@ -68,10 +67,12 @@ signals:
 
 public slots:
     /**
-     * execute the preset script
-     * emits SIGNAL finished() when execution is finished.
+     * Execute the preset script. This method also sets and afterwards pops the execution context.
+     * Emits SIGNAL finished() when execution is finished.
+     *
+     * \return result from script engine
      */
-    void execute();
+    QString execute();
     void executeStep();
     void continueExecutionStep();
 

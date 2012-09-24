@@ -79,9 +79,6 @@ public:
      */
     virtual ~Pointer();
 
-    /*! remove this pointer from the graph */
-    void remove();
-
     PointerType::Direction direction() const;
 
     /**
@@ -147,6 +144,11 @@ public slots:
      * \return target data element of this pointer
      */
     DataPtr to() const;
+
+    /**
+     * Remove pointer.
+     */
+    void remove();
 
     /**
      * \return value of this pointer.
@@ -265,10 +267,10 @@ public slots:
      */
     void add_property(QString name, QString value);
 
-    /** 
+    /**
      * Remove a property named \p name from this pointer.
      * \param name identifier of the property to remove.
-     */ 
+     */
     void remove_property(const QString & name);
     /**
      * \return the \see from() data element for script engine

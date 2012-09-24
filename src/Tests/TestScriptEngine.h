@@ -29,6 +29,7 @@ public:
 
 private slots:
     void simpleStart();
+    void basicOperationsGraph();
     void startStop();
     void ignoreComments();
     void useOfDynamicProperties();

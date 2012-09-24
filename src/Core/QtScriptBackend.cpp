@@ -79,7 +79,7 @@ void QtScriptBackend::stop()
     emit finished();
 }
 
-void QtScriptBackend::execute()
+QString QtScriptBackend::execute()
 {
     if (!_engine) {
         _engine = new QScriptEngine(this);
@@ -103,16 +103,17 @@ void QtScriptBackend::execute()
     createGraphList();
     _engine->setProcessEventsInterval(100); //! TODO: Make that changeable.
 
-    QString error = _engine->evaluate(_script, i18n("Rocs Console script")).toString();
+    QString result = _engine->evaluate(_script, i18n("Rocs Console script")).toString();
     if (_engine && _engine->hasUncaughtException()) {
         emit scriptError();
-        emit sendDebug("<b style=\"color: red\">" + error + "</b>");
+        emit sendDebug("<b style=\"color: red\">" + result + "</b>");
         emit sendDebug("<b style=\"color: red\">" + _engine->uncaughtExceptionBacktrace().join("\n") + "</b>");
     }
     if (_engine) {
         _engine->popContext();
     }
     emit finished();
+    return result;
 }
 
 void QtScriptBackend::executeStep()

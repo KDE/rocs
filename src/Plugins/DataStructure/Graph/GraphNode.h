@@ -25,6 +25,8 @@ class GraphNode : public Data
 {
     Q_OBJECT
 
+    using Data::remove;
+
 public:
     static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
     GraphNode(DataStructurePtr parent, int uniqueIdentifier, int dataType);

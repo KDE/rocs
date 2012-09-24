@@ -585,7 +585,7 @@ Each data element object provides the following methods:
     array output_pointers();            // list of output pointers
     array loop_pointers();              // list of pointers forming a self-loop
     array connected_pointers(target);   // list of pointers pointing to 'target'
-    void self_remove();                 // remove this data element
+    void  remove();                     // remove this data element
 </programlisting>
 </sect2>
 
@@ -615,7 +615,7 @@ Each pointer object provides the following methods:
                       string value);
     node start();                       // start node of the pointer
     node end();                         // target node of the pointer
-    void self_remove();                 // remove this pointer
+    void remove();                      // remove this pointer
 </programlisting>
 </sect2>
 </sect1>

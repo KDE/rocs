@@ -46,6 +46,51 @@ void TestScriptEngine::simpleStart()
 //     QVERIFY2(results.toNumber() == 1, "Error: number of graphs is not 1.");
 }
 
+// test basic operations on pointers and data elements
+void TestScriptEngine::basicOperationsGraph()
+{
+    Document* graphDoc = DocumentManager::self()->activeDocument();
+    QtScriptBackend *engine = graphDoc->engineBackend();
+    DataStructurePtr ds;
+    QString result;
+
+    // create test data structure
+    ds = graphDoc->addDataStructure("test");
+    DataPtr a = ds->addData("a");
+    DataPtr b = ds->addData("b");
+    PointerPtr connection = ds->addPointer(a, b);
+    int type1 = graphDoc->registerDataType("type1");
+    graphDoc->setActiveDataStructure(ds);
+
+    // test name
+    engine->setScript(QString("test.name;"), graphDoc);
+    result = engine->execute();
+    QVERIFY(result == "test");
+
+    // test type
+    engine->setScript(QString("test.list_nodes()[0].type();"), graphDoc);
+    result = engine->execute();
+    QVERIFY(result == QString::number(0));
+
+    // change type
+    engine->setScript(QString("var a = test.list_nodes()[0]; a.set_type(%1); a.type();").arg(type1), graphDoc);
+    result = engine->execute();
+    qDebug() << result;
+    QVERIFY(result == QString::number(type1));
+
+    // remove pointer
+    engine->setScript(QString("var x = test.list_edges()[0]; x.remove(); test.list_edges().length;"), graphDoc);
+    result = engine->execute();
+    qDebug() << result;
+    QVERIFY(result == QString::number(0));
+
+    // remove data elements
+    engine->setScript(QString("test.list_nodes()[0].remove(); test.list_nodes().length;"), graphDoc);
+    result = engine->execute();
+    qDebug() << result;
+    QVERIFY(result == QString::number(1));
+}
+
 // tests if stop action stops execution
 void TestScriptEngine::startStop()
 {
@@ -77,14 +122,14 @@ void TestScriptEngine::ignoreComments()
 
     QString test;
     QScriptValue result;
-    
+
     // start engine
     test = QString("// broken");
     result = engine->engine()->evaluate(test);
     QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");
     result = engine->engine()->evaluate(engine->includeManager().include(test));
     QVERIFY2(!result.toString().contains("Error"), "Comment in file with processed includes was not ignored, script with syntax error was executed.");
-       
+
     test = QString("//broken");
     result = engine->engine()->evaluate(test);
     QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");
@@ -96,7 +141,7 @@ void TestScriptEngine::ignoreComments()
     QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");
     result = engine->engine()->evaluate(engine->includeManager().include(test));
     QVERIFY2(!result.toString().contains("Error"), "Comment in file with processed includes was not ignored, script with syntax error was executed.");
-    
+
     test = QString("/*\n broken\n */");
     result = engine->engine()->evaluate(test);
     QVERIFY2(!result.toString().contains("Error"), "Comment was not ignored, script with syntax error was executed.");

@@ -122,7 +122,7 @@ public:
      */
     int registerDataType(QString name, int identifier=0);
 
-    /** Register new type for pointers. If identifier is alreade in use or if no identifier is
+    /** Register new type for pointers. If identifier is already in use or if no identifier is
      * provided, a new identifier is created.
      * \param name of the pointerType
      * \return positive integer >0 if successfully registered, else <=0

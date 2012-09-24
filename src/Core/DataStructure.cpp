@@ -511,7 +511,7 @@ void DataStructure::updateRelativeCenter()
 void DataStructure::setName(const QString& s)
 {
     d->_name = s;
-    emit(nameChanged(d->_name));
+    emit nameChanged(d->_name);
 }
 
 
@@ -527,7 +527,7 @@ void DataStructure::removeDynamicProperty(const QString& property)
 }
 
 
-void DataStructure::add_property (const QString& name, QVariant value)
+void DataStructure::add_property(const QString& name, QVariant value)
 {
     addDynamicProperty(name, value);
 }

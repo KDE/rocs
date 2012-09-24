@@ -150,9 +150,11 @@ QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw)
 QScriptValue Rocs::GraphStructure::add_overlay_edge(Data* fromRaw, Data* toRaw, int overlay)
 {
     if (fromRaw == 0 || toRaw == 0) {
+        kError() << "No edge added: data does not exist";
         return QScriptValue();
     }
     if (!document()->pointerTypeList().contains(overlay)) {
+        kError() << "No edge added: pointer type does not exist";
         return QScriptValue();
     }
 
@@ -164,6 +166,7 @@ QScriptValue Rocs::GraphStructure::add_overlay_edge(Data* fromRaw, Data* toRaw, 
         edge->setEngine(engine());
         return edge->scriptValue();
     }
+    kError() << "Could not at this pointer to the data structure";
 
     return QScriptValue();
 }
