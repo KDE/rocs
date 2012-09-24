@@ -110,4 +110,52 @@ void TestScriptEngine::ignoreComments()
     QVERIFY2(!result.toString().contains("Error"), "Comment in file with processed includes was not ignored, script with syntax error was executed.");
 }
 
+void TestScriptEngine::useOfDynamicProperties()
+{
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
+    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+
+    
+    Document* graphDoc = DocumentManager::self()->activeDocument();
+    
+    DataStructurePtr d = graphDoc->activeDataStructure();
+    d->setName("myGraph");
+    DataPtr n1 =d->addData("Node1");
+    DataPtr n2 = d->addData("Node2");
+    PointerPtr e1 = d->addPointer(n1, n2);
+    
+    QString test;
+    QScriptValue result;
+    
+    // start engine
+    test = QString("nodes = myGraph.list_nodes()\n"
+           "edges = myGraph.list_edges()\n"
+           "for (var i = 0; i < nodes.length; ++i ){\n"
+           "    nodes[i].add_property(\"MyProperty\", 0)\n"
+           "}\n"
+           "for (var i = 0; i < edges.length; ++i ){\n"
+           "    edges[i].add_property(\"MyProperty\", 0)\n"
+           "}\n"
+           "nodes[0].MyProperty = 2\n"
+           "nodes[1].MyProperty = nodes[0].MyProperty + 2\n"
+           "edges[0].MyProperty = 2\n"
+           "myGraph.add_property(\"MyProperty\", 2)\n");
+    
+    QtScriptBackend *engine = graphDoc->engineBackend();
+    
+    engine->setScript(test, graphDoc);
+    engine->execute();
+    
+    QVERIFY2 (n1->property("MyProperty").isValid(), "Node 1 property is invalid!");
+    QVERIFY2 (n2->property("MyProperty").isValid(), "Node 2 property is invalid!");
+    QVERIFY2 (e1->property("MyProperty").isValid(), "Edge 1 property is invalid!");
+    QVERIFY2 (d->property("MyProperty").isValid(), "DS property is invalid!");
+    
+    QCOMPARE (n1->property("MyProperty").toInt(), 2);
+    QCOMPARE (n2->property("MyProperty").toInt(), 4);
+    QCOMPARE (e1->property("MyProperty").toInt(), 2);
+    QCOMPARE (d->property("MyProperty").toInt(), 2);
+}
+
+
 QTEST_KDEMAIN_CORE(TestScriptEngine)

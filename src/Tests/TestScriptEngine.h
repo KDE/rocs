@@ -31,6 +31,7 @@ private slots:
     void simpleStart();
     void startStop();
     void ignoreComments();
+    void useOfDynamicProperties();
 };
 
 #endif // TESTSCRIPTENGINE_H

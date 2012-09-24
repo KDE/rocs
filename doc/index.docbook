@@ -146,10 +146,28 @@ For such use cases you can define data types. Each data type has its own icon an
 <sect2>
 <title>Dynamic Properties</title>
 <para>
-Every data element and pointer has the two properties <literal>name</literal> and <literal>value</literal>.
-To extend the properties of data elements and pointers, you can add <emphasis>dynamic properties</emphasis> to them.
-Each dynamic property is identified by its name and can contain any string.
-To add dynamic properties, use the <guilabel>Data Properties</guilabel> and <guilabel>Pointer Properties</guilabel> dialogs from the context menus of the respective elements or the script functions as explained in <xref linkend="scripting-data-structure" />.
+Every data element and pointer can have many properties. Some of these properties are default from data structure plugin. See the documentation of data structures plugin for more details.
+To add further properties to the data elements and pointers, you can add <emphasis>dynamic properties</emphasis> to them.
+Each dynamic property is identified by its name and can contain any value associated with it. The name must start with a letter (a-z or A-Z) and can contain only letters, numbers and '_'. If you try to use any invalid character in the property name, the property will not be changed.
+</para>
+<para>
+To add dynamic properties, use the <guilabel>Data Properties</guilabel> and <guilabel>Pointer Properties</guilabel> dialogs from the context menus of the respective elements or the script functions as explained in <xref linkend="scripting-data-structure"
+/>.
+</para>
+<para>
+You can also use the scripts. You just need to use the <literal>add_property</literal> with the name and value of your property.
+After that, you can use node/pointer.propertyName to set/get the values.
+</para>
+<para>
+    Here is an example of how to use dynamic properties with graph plugin.
+    <programlisting>
+nodes = myGraph.list_nodes()
+for (var i = 0; i &lt; nodes.length; ++i ){
+    nodes[i].add_property("MyProperty", 0)
+}
+nodes[0].MyProperty = 2
+nodes[1].MyProperty = nodes[0].MyProperty + 2
+    </programlisting>
 </para>
 </sect2>
 </sect1>
