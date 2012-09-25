@@ -137,10 +137,6 @@ private slots:
      */
     void addEmptyGraphDocument();
 
-    /**
-     * Updates selector combobox for graph documents.
-     */
-    void updateGraphDocumentList();
     void newProject(); //TODO maybe not needed anymore, check after finish of new project assistant
     void newProjectAssistant();
     void saveProject(const bool& saveAs = false);
@@ -248,9 +244,6 @@ private: // Variables.
 
     // Left Area:
     GraphLayers* _GraphLayers; //! Area where the data and edges will be modified.
-    KComboBox* _documentSelectorCombo;
-    KPushButton *_btnAddGraph;
-    QToolButton* _documentPropertiesButton;
 
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
@@ -268,7 +261,7 @@ private: // Variables.
     KAction *_stopScript;
     KActionMenu *_debugMenu;
     QList<QAction*> _toolsPlugins;
-    
+
     ///Store the recent files.
     KRecentFilesAction *_recentProjects;
 

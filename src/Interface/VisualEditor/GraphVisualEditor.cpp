@@ -28,6 +28,7 @@
 #include "DataStructure.h"
 #include "Data.h"
 #include "Pointer.h"
+#include "PropertiesDialogAction.h"
 
 #include "AlignAction.h"
 #include "settings.h"
@@ -35,10 +36,13 @@
 #include <QVBoxLayout>
 #include <QGraphicsItem>
 #include <KDebug>
+#include <KComboBox>
 #include <QGraphicsView>
+#include <QLabel>
 #include <QPainter>
 #include <QSlider>
 #include <QSpacerItem>
+#include <QToolButton>
 #include <DocumentManager.h>
 
 GraphVisualEditor::GraphVisualEditor(MainWindow *parent) :
@@ -84,14 +88,34 @@ void GraphVisualEditor::setupWidgets()
     _zoomSlider->setMaximum(100);
     _zoomSlider->setMinimum(-100);
     updateZoomSlider(_scene->zoomFactor());
+
+    // at first setup document does not exists
+    // this is later set when MainWindow::setActiveDocument() is called
+    PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), DocumentManager::self()->activeDocument(), this);
+    _documentPropertiesButton = new QToolButton(this);
+    _documentPropertiesButton->setDefaultAction(propertiesAction);
+    _documentPropertiesButton->setIcon(KIcon("document-properties"));
+
     QWidget *sceneControls = new QWidget(this);
+    _documentSelectorCombo = new KComboBox(this);
     sceneControls->setLayout(new QHBoxLayout(this));
+    sceneControls->layout()->addWidget(new QLabel(i18nc("@label:listbox", "Graph Document:")));
+    sceneControls->layout()->addWidget(_documentSelectorCombo);
+    sceneControls->layout()->addWidget(_documentPropertiesButton);
+
+    connect(DocumentManager::self(), SIGNAL(documentListChanged()),
+            this, SLOT(updateGraphDocumentList()));
+    connect(_documentSelectorCombo, SIGNAL(activated(int)),
+            DocumentManager::self(), SLOT(changeDocument(int)));
+
+
     QSpacerItem *spacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
     sceneControls->layout()->addItem(spacerItem);
     sceneControls->layout()->addWidget(_zoomSlider);
 
-    vLayout->addWidget(_graphicsView);
     vLayout->addWidget(sceneControls);
+    vLayout->addWidget(_graphicsView);
+
     setLayout(vLayout);
 
     // add connections for zoom slider
@@ -106,6 +130,14 @@ QGraphicsView* GraphVisualEditor::view() const
     return _graphicsView;
 }
 
+void GraphVisualEditor::updateGraphDocumentList()
+{
+    _documentSelectorCombo->clear();
+    foreach(Document * document, DocumentManager::self()->documentList()) {
+        _documentSelectorCombo->addItem(document->name());
+    }
+}
+
 void GraphVisualEditor::setActiveDocument()
 {
     if (_document != DocumentManager::self()->activeDocument()) {
@@ -113,6 +145,15 @@ void GraphVisualEditor::setActiveDocument()
     }
     _document = DocumentManager::self()->activeDocument();
     _scene->setActiveDocument();
+
+    // set button for document properties
+    if (_documentPropertiesButton->defaultAction()) {
+        _documentPropertiesButton->defaultAction()->deleteLater();
+        PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), _document, this);
+        _documentPropertiesButton->setDefaultAction(propertiesAction);
+        _documentPropertiesButton->setIcon(KIcon("document-properties"));
+    }
+
 
     connect(_document, SIGNAL(activeDataStructureChanged(DataStructurePtr)),
             this, SLOT(setActiveGraph(DataStructurePtr)));

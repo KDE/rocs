@@ -33,6 +33,8 @@ class GraphScene;
 class QToolButton;
 class MainWindow;
 class QGraphicsView;
+class KComboBox;
+class KPushButton;
 
 class GraphVisualEditor : public QWidget
 {
@@ -66,6 +68,11 @@ public slots:
     void updateZoomSlider(qreal zoomFactor);
     void zoomTo(int sliderValue);
 
+    /**
+     * Updates selector combobox for graph documents.
+     */
+    void updateGraphDocumentList();
+
 private:
     /*! Default Constructor
     \param parent the owner of this widget. */
@@ -82,6 +89,11 @@ private:
     static GraphVisualEditor* _self;
 
     GraphScene *_scene;
+
+    KComboBox *_documentSelectorCombo;
+    KPushButton *_btnAddGraph;
+    QToolButton *_documentPropertiesButton;
+
     QSlider *_zoomSlider;
     Document *_document;
     DataStructurePtr _dataStructure;

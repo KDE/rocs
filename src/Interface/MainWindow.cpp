@@ -324,27 +324,12 @@ QWidget* MainWindow::setupWhiteboardPanel()
 {
     QWidget *panel = new QWidget(this);
 
-    _documentSelectorCombo = new KComboBox(this);
     _GraphLayers = new GraphLayers(this);
 
     // arrange widgets
     QWidget* selectorForm = new QWidget(panel);
     QGridLayout* documentLayout = new QGridLayout(selectorForm);
     selectorForm->setLayout(documentLayout);
-
-    // at first setup document does not exists
-    // this is later set when MainWindow::setActiveDocument() is called
-    PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), DocumentManager::self()->activeDocument(), this);
-    _documentPropertiesButton = new QToolButton(panel);
-    _documentPropertiesButton->setDefaultAction(propertiesAction);
-    _documentPropertiesButton->setIcon(KIcon("document-properties"));
-
-    documentLayout->addWidget(new QLabel(i18nc("@label:listbox", "Graph Document:")),1,1);
-    documentLayout->addWidget(_documentSelectorCombo,1,2);
-    documentLayout->addWidget(_documentPropertiesButton,1,3);
-
-    connect(_documentSelectorCombo, SIGNAL(activated(int)),
-            DocumentManager::self(), SLOT(changeDocument(int)));
 
     panel->setLayout(new QVBoxLayout);
     panel->layout()->addWidget(selectorForm);
@@ -574,14 +559,6 @@ void MainWindow::setActiveDocument()
     _graphVisualEditor->setActiveDocument();
     _GraphLayers->setActiveDocument();
 
-    // set button for document properties
-    if (_documentPropertiesButton->defaultAction()) {
-        _documentPropertiesButton->defaultAction()->deleteLater();
-        PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), activeDocument, this);
-        _documentPropertiesButton->setDefaultAction(propertiesAction);
-        _documentPropertiesButton->setIcon(KIcon("document-properties"));
-    }
-
     // Graphical Data Structure Editor toolbar
     updateToolbarTypeActions();
     connect(activeDocument, SIGNAL(dataTypeCreated(int)), this, SLOT(updateToolbarTypeActions()));
@@ -663,16 +640,6 @@ void MainWindow::addEmptyGraphDocument()
         DocumentManager::self()->newDocument()
     );
 }
-
-
-void MainWindow::updateGraphDocumentList()
-{
-    _documentSelectorCombo->clear();
-    foreach(Document * document, DocumentManager::self()->documentList()) {
-        _documentSelectorCombo->addItem(document->name());
-    }
-}
-
 
 void MainWindow::importScript()
 {
