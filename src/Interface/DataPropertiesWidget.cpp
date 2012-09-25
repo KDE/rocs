@@ -26,7 +26,6 @@
 #include "PropertiesDialogAction.h"
 #include "model_GraphProperties.h"
 #include <QPainter>
-
 #include <DataStructurePluginManager.h>
 
 DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
@@ -43,12 +42,11 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     connect(data->dataStructure()->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(updateDataTypes()));
     connect(data->dataStructure()->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(updateDataTypes()));
 
-    setCaption(i18n("Data Element Properties"));
+    setCaption(i18nc("@title:window", "Data Element Properties"));
     setButtons(Close);
     setAttribute(Qt::WA_DeleteOnClose);
     setData(data);
 }
-
 
 void DataPropertiesWidget::setData(DataPtr data)
 {
@@ -59,7 +57,6 @@ void DataPropertiesWidget::setData(DataPtr data)
         _data->disconnect(this);
         ui->_dataType->clear();
     }
-
     _data = data;
 
     updateDataTypes();
@@ -80,12 +77,10 @@ void DataPropertiesWidget::setData(DataPtr data)
     ui->_propertiesTable->horizontalHeader()->setProperty("stretchLastSection", true);
 }
 
-
 void DataPropertiesWidget::setPosition(QPointF screenPosition)
 {
     move(screenPosition.x() + 10, screenPosition.y() + 10);
 }
-
 
 void DataPropertiesWidget::reflectAttributes()
 {
@@ -107,12 +102,10 @@ void DataPropertiesWidget::reflectAttributes()
     ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));
 }
 
-
 void DataPropertiesWidget::colorChanged(const QColor& c)
 {
     _data->setColor(QColor(c));
 }
-
 
 void DataPropertiesWidget::setDataType(int dataTypeIndex)
 {

@@ -41,11 +41,11 @@ public:
     void setPosition(QPointF screenPosition);
 
 public slots:
-    void on__color_activated(const QColor& c);
     void reflectAttributes();
-    void on__addProperty_clicked();
-    void disconnectPointer();
+    void setPointerType(int pointerTypeIndex);
+    void updatePointerTypes();
     void setWidth(double v);
+    void setColor(const QColor& c);;
 
 private:
     PointerPtr _pointer;

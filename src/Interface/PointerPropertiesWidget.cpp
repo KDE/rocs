@@ -22,7 +22,8 @@
 #include "Pointer.h"
 #include "MainWindow.h"
 #include "model_GraphProperties.h"
-#include <DataStructure.h>
+#include "DataStructure.h"
+#include "PropertiesDialogAction.h"
 #include <DataStructurePluginManager.h>
 
 PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* parent)
@@ -30,21 +31,34 @@ PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* pa
 {
     ui = new Ui::PointerPropertiesWidget;
     ui->setupUi(mainWidget());
-    setCaption(i18n("Pointer Properties"));
-    setButtons(Close); //TODO implement changes for (Ok | Cancel)
-    setAttribute(Qt::WA_DeleteOnClose);
 
-    connect(this, SIGNAL(okClicked()), SLOT(close()));
+    // edit data types by separate dialog
+    QPointer<PropertiesDialogAction> dataTypePropertiesAction = new PropertiesDialogAction(
+            i18n("Edit Pointer Types"), pointer->dataStructure()->document()->pointerType(pointer->pointerType()), this);
+    ui->_editType->setDefaultAction(dataTypePropertiesAction);
+    ui->_editType->setIcon(KIcon("document-properties"));
+    connect(pointer->dataStructure()->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(updatePointerTypes()));
+    connect(pointer->dataStructure()->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(updatePointerTypes()));
+
+    setCaption(i18nc("@title:window", "Pointer Properties"));
+    setButtons(Close);
+    setAttribute(Qt::WA_DeleteOnClose);
     setPointer(pointer);
 }
 
 
-void PointerPropertiesWidget::setPointer(PointerPtr e)
+void PointerPropertiesWidget::setPointer(PointerPtr pointer)
 {
-    if (_pointer) {
-        disconnectPointer();
+    if (_pointer == pointer) {
+        return;
     }
-    _pointer = e;
+    if (_pointer) {
+        _pointer->disconnect(this);
+        ui->_pointerType->clear();
+    }
+    _pointer = pointer;
+
+    updatePointerTypes();
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_pointer.get());
@@ -53,21 +67,31 @@ void PointerPropertiesWidget::setPointer(PointerPtr e)
 
     connect(_pointer.get(),      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
 
-    connect(ui->_value,     SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setValue(QString)));
-    connect(ui->_name,      SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setName(QString)));
-    connect(ui->_width,     SIGNAL(valueChanged(double)),  this, SLOT(setWidth(double)));
-    connect(ui->_showName,  SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideName(bool)));
-    connect(ui->_showValue, SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideValue(bool)));
+    connect(ui->_pointerType, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(setPointerType(int)));
+    connect(ui->_width, SIGNAL(valueChanged(double)), this, SLOT(setWidth(double)));
+    connect(ui->_color, SIGNAL(activated(QColor)), this, SLOT(setColor(QColor)));
 
     reflectAttributes();
 }
 
-
 void PointerPropertiesWidget::setPosition(QPointF screenPosition)
 {
-    move(screenPosition.x() + 10,  screenPosition.y() + 10);
+    move(screenPosition.x() + 10, screenPosition.y() + 10);
 }
 
+void PointerPropertiesWidget::reflectAttributes()
+{
+    if (!ui->extraItems->layout()) {
+        ui->extraItems->setLayout(DataStructurePluginManager::self()->pointerExtraProperties(_pointer, this));
+    }
+
+    ui->_color->setColor(_pointer->color());
+    ui->_width->setValue(_pointer->width());
+
+    PointerTypePtr pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
+    ui->_pointerType->setCurrentIndex(ui->_pointerType->findData(QVariant(_pointer->pointerType())));
+}
 
 void PointerPropertiesWidget::setWidth(double v)
 {
@@ -75,44 +99,25 @@ void PointerPropertiesWidget::setWidth(double v)
 }
 
 
-void PointerPropertiesWidget::reflectAttributes()
-{
-    if (ui->_extraProperties->layout()) {
-        delete ui->_extraProperties->layout();
-    }
-    if (QLayout * lay = DataStructurePluginManager::self()->pointerExtraProperties(_pointer, this)) {
-        ui->_extraProperties->setLayout(lay);
-    }
-    ui->_color->setColor(_pointer->color());
-    ui->_width->setValue(_pointer->width());
-    ui->_propertyName->setText("");
-    ui->_propertyValue->setText("");
-    ui->_isPropertyGlobal->setCheckState(Qt::Unchecked);
-}
-
-
-void PointerPropertiesWidget::on__color_activated(const QColor& c)
+void PointerPropertiesWidget::setColor(const QColor& c)
 {
     _pointer->setColor(c.name());
 }
 
-
-void PointerPropertiesWidget::on__addProperty_clicked()
+void PointerPropertiesWidget::setPointerType(int pointerTypeIndex)
 {
-
-    GraphPropertiesModel *model =  qobject_cast< GraphPropertiesModel*>(ui->_propertiesTable->model());
-    model->addDynamicProperty(ui->_propertyName->text(), QVariant(ui->_propertyValue->text()),
-                              _pointer.get());
+    _pointer->setPointerType(ui->_pointerType->itemData(pointerTypeIndex).toInt());
 }
 
-
-void PointerPropertiesWidget::disconnectPointer()
+void PointerPropertiesWidget::updatePointerTypes()
 {
-    disconnect(_pointer.get(),      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
-
-    disconnect(ui->_value,     SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setValue(QString)));
-    disconnect(ui->_name,      SIGNAL(textChanged(QString)),   _pointer.get(), SLOT(setName(QString)));
-    disconnect(ui->_width,     SIGNAL(valueChanged(double)),    this, SLOT(setWidth(double)));
-    disconnect(ui->_showName,  SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideName(bool)));
-    disconnect(ui->_showValue, SIGNAL(toggled(bool)),          _pointer.get(), SLOT(hideValue(bool)));
+    ui->_pointerType->clear();
+    // setup data types combobox
+    foreach (int type, _pointer->dataStructure()->document()->pointerTypeList()) {
+        QString typeString = _pointer->dataStructure()->document()->pointerType(type)->name();
+        ui->_pointerType->addItem(typeString, QVariant(type));
+    }
+    if (_pointer) {
+        ui->_pointerType->setCurrentIndex(ui->_pointerType->findData(QVariant(_pointer->pointerType())));
+    }
 }
