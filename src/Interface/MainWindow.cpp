@@ -867,15 +867,13 @@ void MainWindow::saveScripts()
 
 void MainWindow::newScript()
 {
-    QString file = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script")); /*KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
-                   i18n("*.js|Rocs script documents\n*|All files"),
-                   this,
-                   i18nc("@title:window", "Enter Filename for the New Script File"));*/
+    QString file = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script"));
     if (file.isEmpty()) {
         kDebug() << "Filename is empty and no script file was created.";
         return;
     }
-    file.append(".js");
+    if (!file.endsWith(".js"))
+        file.append(".js");
     _codeEditor->newScript(KUrl::fromLocalFile(file));
 }
 
@@ -934,15 +932,14 @@ void MainWindow::saveGraphAs(Document* document)
 
 void MainWindow::newGraph()
 {
-    QString file = KInputDialog::getText(i18n("Graph name"), i18n("Enter the name of the Graph"));/*)::getSaveFileName(_currentProject->projectDirectory(),
-                   i18n("*.graph|Rocs graph documents\n*|All files"),
-                   this,
-                   i18nc("@title:window", "Enter Filename for the New Graph Document"));*/
+    QString file = KInputDialog::getText(i18n("Graph name"), i18n("Enter the name of the Graph"));
     if (file.isEmpty()) {
         kDebug() << "Filename is empty and no script file was created.";
         return;
     }
-    file.append(".graph");
+    if (!file.endsWith(".graph")){
+        file.append(".graph");
+    }
     DocumentManager::self()->openDocument(KUrl::fromLocalFile(file));
     _currentProject->addGraphFile(file);
 }
