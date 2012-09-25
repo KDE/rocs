@@ -19,6 +19,7 @@
 
 
 #include "analitzabackend.h"
+#include <QtCore/QObject>
 #include <analitza/analyzer.h>
 #include <analitza/variables.h>
 #include <analitza/importqobjectmetatype.h>
@@ -50,32 +51,45 @@ AnalitzaBackend::AnalitzaBackend(QObject* parent)
 , analyzer()
 , importer(&analyzer)
 {
-    importer.import(Data::staticMetaObject);
-    importer.import(DataStructure::staticMetaObject);
-    importer.import(Pointer::staticMetaObject);
-    importer.import(Document::staticMetaObject);
-    importer.import(AbstractRunBackend::staticMetaObject);
+    addMetaClass(Data::staticMetaObject);
+    addMetaClass(DataStructure::staticMetaObject);
+    addMetaClass(Pointer::staticMetaObject);
+    addMetaClass(Document::staticMetaObject);
+    addMetaClass(AbstractRunBackend::staticMetaObject);
     
-    analyzer.builtinMethods()->insertFunction(
-        "backend",
-        ExpressionType(ExpressionType::Lambda).addParameter(ExpressionType("AbstractRunBackend*")),
-        new Func(qVariantFromValue<AbstractRunBackend*>(this))
-    );
+    addObject("backend", this);
     addMetaClass(_document->staticMetaObject);
-    qDebug() << "lalalala" << analyzer.builtinMethods()->identifiers();
 }
 
 void AnalitzaBackend::addMetaClass(const QMetaObject& o){
-    importer.import(o);
+    if(!m_imported.contains(o.className())) {
+        importer.import(o);
+        m_imported.insert(o.className());
+    }
 }
 
 void AnalitzaBackend::start()
 {
     QTextStream stream(&_script);
-    qDebug() << "sadasdasad" << analyzer.variables()->keys();
 
     analyzer.importScript(&stream);
     if(!analyzer.isCorrect())
         emit sendDebug(analyzer.errors().join("\n"));
     emit finished();
+    
+    for(QMap<QString, ExpressionType>::const_iterator it=analyzer.builtinMethods()->varTypes().constBegin(); it!=analyzer.builtinMethods()->varTypes().constEnd(); ++it) {
+        qDebug() << "...." << it.key() << ": "  << it.value().toString();
+    }
+    qDebug() << "lalala" << analyzer.type().toString();
+}
+
+void AnalitzaBackend::addObject(const QString& name, QObject* o)
+{
+    addMetaClass(*o->metaObject());
+    analyzer.builtinMethods()->insertFunction(
+        name,
+        ExpressionType(ExpressionType::Lambda).addParameter(ExpressionType(o->metaObject()->className())),
+        new Func(qVariantFromValue<QObject*>(o))
+    );
+//     analyzer.insertVariable(name, Expression::constructCustomObject(qVariantFromValue<QObject*>(o), 0));
 }

@@ -569,9 +569,8 @@ void MainWindow::executeScript(const QString& text) {
     AbstractRunBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
     if ( !engine->isRunning() ){
         _bottomTabs->setStopString();
-        engine->addMetaClass(*(DocumentManager::self()->activeDocument()->activeDataStructure()->metaObject()));
-//        engine->addObject("graph", DocumentManager::self()->activeDocument()->activeDataStructure());
-	engine->setScript(script, DocumentManager::self()->activeDocument());
+        engine->addObject("graph", DocumentManager::self()->activeDocument()->activeDataStructure());
+        engine->setScript(script, DocumentManager::self()->activeDocument());
         engine->start();
     }else{
        _bottomTabs->setPlayString();

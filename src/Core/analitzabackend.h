@@ -25,12 +25,14 @@
 #include <QMetaObject>
 #include <analitza/analyzer.h>
 #include <analitza/importqobjectmetatype.h>
+#include <QtCore/qset.h>
 
 class AnalitzaBackend  : public AbstractRunBackend
 {
 public:
     explicit AnalitzaBackend(QObject* parent = 0);
     
+    void addObject(const QString& name, QObject* o);
     void addMetaClass(const QMetaObject& o);
     void start();
     
@@ -38,6 +40,7 @@ public:
 private:
     Analitza::Analyzer analyzer;
     ImportQMetaObject importer;
+    QSet<QByteArray> m_imported;
 };
 
 #endif // ANALITZABACKEND_H

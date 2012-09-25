@@ -24,8 +24,7 @@
 #include <QFile>
 
 AbstractRunBackend::AbstractRunBackend(QObject* parent): QObject(parent)
-{
-}
+{}
 
 void AbstractRunBackend::debug(const QString& s)
 {
