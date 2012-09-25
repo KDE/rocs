@@ -145,7 +145,6 @@ private slots:
     void newProjectAssistant();
     void saveProject();
     void openProject(const KUrl& fileName = KUrl());
-    void setProjectName();
 
     /**
      * Import dialog to add graph document to project.
@@ -202,7 +201,7 @@ private slots:
      * Import a new project from internal Rocs project file. This method guarantees that
      * when finishing a project, a graph document, and a script file exist.
      */
-    void importProject();
+//     void importProject();
 
     void exportProject();
     void setupToolsPluginsAction();

@@ -13,31 +13,28 @@
             <Action name="recent-project" />
             <Separator/>
             <Action name="save-project" />
-            <Action name="export-project" />
+            <Action name="save-project-as" />
 <!--             <Action name="change-project" /> -->
             
             <Separator/>
-            <Action name="save-script-as" />
-            <Action name="export-graph" />
-<!--             <Action name="import-project" /> -->
+            <Action name="export-graph-as" />
+            <Action name="export-script-as" />
             <Separator/>
         </Menu>
-        <Menu name="project" >
+        <!--<Menu name="project" >
             <text>Project</text>
             <Action name="set-project-name" />
             <Separator/>
-            <Action name="new-script" />
-            <Action name="add-script" />
             <Separator/>
-            <Action name="new-graph" />
-            <Action name="import-graph" />
-        </Menu>
+        </Menu>-->
         <Menu name="script">
             <text>Script Document</text>
-            <Menu name="script_file">
+            <Action name="new-script" />
+            <Action name="add-script" />
+<!--             <Action name="save-script" /> -->
+            <!--<Menu name="script_file">
                 <text>Script File</text>
-                <Action name="save-script" />
-            </Menu>
+            </Menu>-->
             <Separator/>
             <Action name="download" />
             <Action name="upload" />
@@ -45,10 +42,12 @@
         </Menu>
         <Menu name="graph">
             <text>Graph Document</text>
-            <Menu name="graph_file">
+            <Action name="new-graph" />
+            <Action name="import-graph" />
+<!--             <Action name="save-graph" /> -->
+            <!--<Menu name="graph_file">
                 <text>Graph File</text>
-                <Action name="save-graph" />
-            </Menu>
+            </Menu>-->
             <Separator/>
             <Menu name="conversions">
                 <text>Convert To</text>
