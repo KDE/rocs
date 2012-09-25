@@ -408,10 +408,9 @@ void MainWindow::setupActions()
     createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
     
-    _recentProjects = new KRecentFilesAction(KIcon ("document-open"), i18n("RecentFiles"), this);
+    _recentProjects = new KRecentFilesAction(KIcon ("document-open"), i18nc("@action:inmenu","Recent Files"), this);
     connect(_recentProjects, SIGNAL(urlSelected(KUrl)), this, SLOT(openProject(KUrl)));
     actionCollection()->addAction("recent-project", _recentProjects);
-    
     
     _recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
     
@@ -681,7 +680,7 @@ void MainWindow::updateGraphDocumentList()
 
 void MainWindow::importScript()
 {
-    KUrl startDirectory;
+    KUrl startDirectory = Settings::lastOpenedDirectory();
     if (!_currentProject->isTemporary()) {
         startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
     }
@@ -696,6 +695,7 @@ void MainWindow::importScript()
 
     _currentProject->addCodeFile(fileUrl);
     _codeEditor->openScript(fileUrl);
+    Settings::setLastOpenedDirectory(startDirectory.toLocalFile());
 }
 
 
@@ -1004,8 +1004,12 @@ void MainWindow::importProject()
     // save current project
     saveIfChanged();
 
+    KUrl startDirectory = Settings::lastOpenedDirectory();
+    if (!_currentProject->isTemporary()) {
+        startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
+    }
     // get import information
-    QString importFile = KFileDialog::getOpenFileName(_currentProject->projectDirectory(),
+    QString importFile = KFileDialog::getOpenFileName(startDirectory,
                    i18n("*.tar.gz|Import from tar.gz Archive"),
                    this,
                    i18nc("@title:window", "Project Archive to Import"));
@@ -1015,7 +1019,7 @@ void MainWindow::importProject()
         return;
     }
 
-    QString newLocation = KFileDialog::getExistingDirectory(_currentProject->projectDirectory(),
+    QString newLocation = KFileDialog::getExistingDirectory(startDirectory,
                    this,
                    i18nc("@title:window", "Select Project Directory for Import"));
 
@@ -1046,12 +1050,17 @@ void MainWindow::importProject()
         _currentProject->addCodeFileNew(_codeEditor->newScript());
     }
     updateCaption();
+    Settings::setLastOpenedDirectory(newLocation);
 }
 
 
 void MainWindow::exportProject()
 {
-    QString file = KFileDialog::getSaveFileName(_currentProject->projectDirectory(),
+    KUrl startDirectory = Settings::lastOpenedDirectory();
+    if (!_currentProject->isTemporary()) {
+        startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
+    }
+    QString file = KFileDialog::getSaveFileName(startDirectory,
                    i18n("*.tar.gz|Export as tar.gz Archive"),
                    this,
                    i18nc("@title:window", "Export Project"));
@@ -1060,6 +1069,8 @@ void MainWindow::exportProject()
         return;
     }
     _currentProject->exportProject(KUrl::fromLocalFile(file));
+    
+    Settings::setLastOpenedDirectory(_currentProject->projectDirectory());
 }
 
 

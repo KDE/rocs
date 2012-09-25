@@ -27,6 +27,7 @@
 #include <KMessageBox>
 #include <KGuiItem>
 #include "Document.h"
+#include <settings.h>
 
 #include <QFile>
 #include <QPointer>
@@ -44,6 +45,7 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     }
     ext.append(i18n("*|All files"));
 
+    KUrl startDirectory = Settings::lastOpenedDirectory();
 
     QPointer<KFileDialog> exportDialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
     exportDialog->okButton()->setText(i18nc("@action:button", "Export"));
@@ -90,6 +92,9 @@ bool ImporterExporterManager::exportFile(Document * doc) const
         kDebug() << "Error occurred when writing file: " << filePlugin->errorString();
         return false;
     }
+    
+    Settings::setLastOpenedDirectory(file.path());
+    
     return true;
 }
 
