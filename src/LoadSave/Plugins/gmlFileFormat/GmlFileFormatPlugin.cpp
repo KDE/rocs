@@ -136,13 +136,8 @@ QString const GmlFileFormatPlugin::processEdge(PointerPtr e) const
 {
     QString edge;
     edge.append(QString("source \"%1\"\n target \"%2\"\n").arg(e->from()->property("name").toString(), e->to()->property("name").toString()));
-    if (!e->name().isEmpty()) {
-        edge.append(QString(" id \"%1\"\n").arg(e->name()));
-    }
     edge.append(QString(" width \"%1\"\n").arg(e->width()));
 //     edge.append (QString(" color \"%1\"\n").arg(e->color())); //Problem with comments (both starts by '#')
-    edge.append(QString(" value \"%1\"\n").arg(e->value()));
-
 
     foreach(const QByteArray& p, e->dynamicPropertyNames()) {
         edge.append(QString("%1 %2\n").arg(QString(p)).arg(e->property(p).toString()));
@@ -158,7 +153,6 @@ QString const GmlFileFormatPlugin::processNode(DataPtr n) const
     node.append(QString("  x %1 \n  y %2 \n").arg(n->x()).arg(n->y()));
     node.append(QString(" width %1\n").arg(n->width()));
 //       node.append (QString(" color \"%1\"\n").arg(n->color())); //Problem with comments (both starts by '#')
-    node.append(QString(" value \"%1\"\n").arg(n->property("value").toString()));
     node.append(QString(" iconPackage \"%1\"\n").arg(n->dataStructure()->document()->iconPackage()));
     node.append(QString(" icon \"%1\"\n").arg(n->icon()));
 

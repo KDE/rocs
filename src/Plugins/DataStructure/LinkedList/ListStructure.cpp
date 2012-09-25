@@ -69,7 +69,7 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
 
         PointerPtr newPointer = addPointer(from, to);
         newPointer->setColor(e->color());
-        newPointer->setValue(e->value());
+        newPointer->setProperty("value", e->property("value").toString());
     }
     m_building = false;
     init();

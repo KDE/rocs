@@ -83,8 +83,6 @@ void PointerPropertiesWidget::reflectAttributes()
     if (QLayout * lay = DataStructurePluginManager::self()->pointerExtraProperties(_pointer, this)) {
         ui->_extraProperties->setLayout(lay);
     }
-    ui->_name->setText(_pointer->name());
-    ui->_value->setText(_pointer->value());
     ui->_color->setColor(_pointer->color());
     ui->_width->setValue(_pointer->width());
     ui->_propertyName->setText("");

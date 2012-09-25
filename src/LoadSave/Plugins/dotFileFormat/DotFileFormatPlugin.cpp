@@ -155,10 +155,10 @@ QString const DotFileFormatPlugin::processEdge(PointerPtr edge) const
 
     // process properties if present
     bool firstProperty = true;
-    if (!edge->name().isEmpty()) {
+    if (!edge->property("name").toString().isEmpty()) {
         firstProperty = false;
         edgeStr.append("[");
-        edgeStr.append(QString(" label = \"%2\" ").arg(edge->name()));
+        edgeStr.append(QString(" label = \"%2\" ").arg(edge->property("name").toString()));
     }
     foreach(const QByteArray& property, edge->dynamicPropertyNames()) {
         if (firstProperty == true) {

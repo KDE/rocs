@@ -53,8 +53,6 @@ class ROCSLIB_EXPORT Pointer : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QColor color READ color WRITE setColor)
-    Q_PROPERTY(QString value READ value WRITE setValue)
-    Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(qreal width READ width WRITE setWidth)
 
 public:
@@ -134,6 +132,10 @@ signals:
      */
     void directionChanged(PointerType::Direction direction);
 
+    void propertyAdded(QString name);
+    void propertyRemoved(QString name);
+    void propertyChanged(QString name);
+
 public slots:
     /**
      * \return source data element of this pointer
@@ -149,30 +151,6 @@ public slots:
      * Remove pointer.
      */
     void remove();
-
-    /**
-     * \return value of this pointer.
-     */
-    const QString& value() const;
-
-    /**
-     * Set value attribute of this pointer.
-     *
-     * \param value the new value of this pointer, given as a string
-     */
-    void setValue(const QString& value);
-
-    /**
-     * \return the name of this pointer
-     */
-    const QString& name() const;
-
-    /**
-     * Set name attribute of this pointer.
-     *
-     * \param name is the new name of this pointer, given as a string
-     */
-    void setName(const QString& name) ;
 
     /**
      * Change pointer type of the pointer. The specified pointer type must exist.
@@ -231,16 +209,16 @@ public slots:
      */
     void removeDynamicProperty(QString property);
 
+    void updateDynamicProperty(QString property);
+
+    void renameDynamicProperty(QString oldName, QString newName);
+
     /**
      * Update relative index. \see relativeIndex().
      */
     void updateRelativeIndex();
 
-    bool isNameVisible() const;
-    void setNameVisible(bool visible);
-
-    bool isValueVisible() const;
-    void setValueVisible(bool visible);
+    QList<QString> properties() const;
 
     bool isVisible() const;
     void setVisible(bool visible);

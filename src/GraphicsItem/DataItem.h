@@ -58,12 +58,12 @@ private slots:
     void setupNode();
     void updateRenderer();
     void updateIcon();
-    void updateProperty(QString name);
     void updatePropertyList();
     void updateColor();
     void updateVisibility(bool visible);
     void updatePos();
     void updateSize();
+    void updateProperty(QString name);
     void registerProperty(QString name);
     void removeProperty(QString name);
 

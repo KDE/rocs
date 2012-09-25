@@ -284,7 +284,7 @@ void GraphScene::updateGraph(DataStructurePtr g)
     }
 
     foreach(PointerPtr e, g->pointers()) {
-        e->setName(e->name());
+        e->setWidth(e->width());
     }
 }
 

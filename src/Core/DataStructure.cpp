@@ -146,7 +146,7 @@ void DataStructure::importStructure(DataStructurePtr other)
 
         PointerPtr newPointer = addPointer(from, to);
         newPointer->setColor(e->color());
-        newPointer->setValue(e->value());
+        //FIXME all dynamic properties must be set
     }
 
     connect(this, SIGNAL(changed()), d->_document, SLOT(resizeDocumentIncrease()));

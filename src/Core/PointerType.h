@@ -87,6 +87,57 @@ public:
      */
     const QColor& defaultColor() const;
 
+
+    /**
+     * Add a new dynamic property to all data elements of this pointer type.
+     *
+     * \param name is the unique name of the property
+     * \param defaultValue is the default value that is set initially
+     */
+    void addProperty(QString name, QString defaultValue = "");
+
+    /**
+     * Remove dynamic property from pointer type.
+     */
+    void removeProperty(QString name);
+
+    /**
+     * Rename property from \p oldName to \p newName. The old
+     * property name at all pointers is changed with this change.
+     * The property is not changed, if \p newName already exists at this
+     * data type.
+     *
+     * \param oldName is the current property name
+     * \param newName is the new property name
+     */
+    void renameProperty(QString oldName, QString newName);
+
+    /**
+     * \return list of all properties, ordered in display order
+     */
+    QList<QString> properties() const;
+
+    /**
+     * Set default value of property \p name to \p value.
+     */
+    void setPropertyDefaultValue(QString name, QVariant value);
+
+    /**
+     * \return default value for property \p name
+     */
+    QVariant propertyDefaultValue(QString name) const;
+
+    /**
+     * Set default value of property \p name to \p visible.
+     */
+    void setPropertyVisible(QString name, bool visible);
+
+    /**
+     * \return true if this property is visible, otherwise false.
+     */
+    bool isPropertyVisible(QString name) const;
+
+
 public slots:
     /**
      * Set name of the pointer type.
@@ -118,11 +169,6 @@ public slots:
 
 signals:
     /**
-     * Emitted when name was changed.
-     */
-    void nameChanged(const QString& name);
-
-    /**
      * Emitted when settings for the visual representation changed.
      */
     void styleChanged();
@@ -131,6 +177,36 @@ signals:
      * Emitted when direction was changed.
      */
     void directionChanged(PointerType::Direction direction);
+
+    /**
+     * Emitted when name was changed.
+     */
+    void nameChanged(const QString& name);
+
+    /**
+     * Emitted when new property was created.
+     */
+    void propertyAdded(const QString& name, const QVariant& defaultValue);
+
+    /**
+     * Emitted when property was removed.
+     */
+    void propertyRemoved(const QString& name);
+
+    /**
+     * Emitted when default value of property is changed.
+     */
+    void propertyDefaultValueChanged(const QString& name);
+
+    /**
+     * Emitted when the visibility was changed.
+     */
+    void propertyVisibilityChanged(const QString& name);
+
+    /**
+     * Emitted when a property was renamed.
+     */
+    void propertyRenamed(QString oldName, QString newName);
 
 protected:
     /**

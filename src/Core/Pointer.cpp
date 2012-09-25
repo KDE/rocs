@@ -37,14 +37,9 @@ public:
     DataPtr to;
     int relativeIndex;
 
-    QString value;
-    QString name;
     QColor color;
     qreal width;
     PointerTypePtr pointerType;
-
-    bool showName;
-    bool showValue;
     bool visible;
 
     DataStructurePtr dataStructure;
@@ -84,8 +79,6 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
     d->visible       = true;
     d->dataStructure = parent;
     d->color         = d->dataStructure->document()->pointerType(pointerType)->defaultColor();
-    d->showName      = true; //FIXME remove with next refactoring to properties
-    d->showValue     = true; //FIXME remove with next refactoring to properties
     d->width         = 1;
     d->pointerType   = d->dataStructure->document()->pointerType(pointerType);
 
@@ -139,16 +132,6 @@ DataPtr Pointer::to() const
     return d->to;
 }
 
-const QString& Pointer::value() const
-{
-    return d->value;
-}
-
-const QString& Pointer::name() const
-{
-    return d->name;
-}
-
 int Pointer::pointerType() const
 {
     return d->pointerType->identifier();
@@ -172,6 +155,11 @@ void Pointer::setPointerType(int typeIdentifier)
     emit pointerTypeChanged(typeIdentifier);
 }
 
+QList<QString> Pointer::properties() const
+{
+    return d->pointerType->properties();
+}
+
 void Pointer::remove()
 {
     emit removed();
@@ -191,28 +179,6 @@ PointerType::Direction Pointer::direction() const
     return d->pointerType->direction();
 }
 
-bool Pointer::isNameVisible() const
-{
-    return d->showName;
-}
-
-bool Pointer::isValueVisible() const
-{
-    return d->showValue;
-}
-
-void Pointer::setNameVisible(bool visible)
-{
-    d->showName = visible;
-    emit changed();
-}
-
-void Pointer::setValueVisible(bool visible)
-{
-    d->showValue = visible;
-    emit changed();
-}
-
 void Pointer::setVisible(bool visible)
 {
     d->visible = visible;
@@ -222,18 +188,6 @@ void Pointer::setVisible(bool visible)
 bool Pointer::isVisible() const
 {
     return d->visible;
-}
-
-void Pointer::setValue(const QString& value)
-{
-    d->value = value;
-    emit changed();
-}
-
-void Pointer::setName(const QString& name)
-{
-    d->name = name;
-    emit changed();
 }
 
 void Pointer::setColor(const QColor& color)
@@ -267,12 +221,31 @@ Qt::PenStyle Pointer::style() const
 
 void Pointer::addDynamicProperty(const QString & property, const QVariant& value)
 {
-        DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
+    DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
+    emit(propertyAdded(property));
 }
 
 void Pointer::removeDynamicProperty(QString property)
 {
     DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
+    emit(propertyRemoved(property));
+}
+
+void Pointer::updateDynamicProperty(QString property)
+{
+    if (this->property(property.toStdString().c_str()) == QVariant::Invalid
+        || this->property(property.toStdString().c_str()).toString().isEmpty()
+    ) {
+        this->setProperty(property.toStdString().c_str(), d->pointerType->propertyDefaultValue(property));
+    }
+    emit propertyChanged(property);
+}
+
+void Pointer::renameDynamicProperty(QString oldName, QString newName)
+{
+    DynamicPropertiesList::New()->changePropertyName(oldName.toStdString().c_str(),
+                                                     newName.toStdString().c_str(),
+                                                     this);
 }
 
 QScriptValue Pointer::set_type(int pointerType)
@@ -294,7 +267,6 @@ void Pointer::remove_property (const QString& name)
 {
     removeDynamicProperty(name);
 }
-
 
 void Pointer::add_property(QString name, QString value)
 {

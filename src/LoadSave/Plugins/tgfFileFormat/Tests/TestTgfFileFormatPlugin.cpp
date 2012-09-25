@@ -44,7 +44,7 @@ void TestTgfFileFormatPlugin::serializeUnserializeTest()
     dataList.insert("d", ds->addData("d"));
     dataList.insert("e", ds->addData("e"));
 
-    ds->addPointer(dataList["a"], dataList["b"])->setValue("test value");
+    ds->addPointer(dataList["a"], dataList["b"])->setProperty("value", "test value");
     ds->addPointer(dataList["b"], dataList["c"]);
     ds->addPointer(dataList["c"], dataList["d"]);
     ds->addPointer(dataList["d"], dataList["e"]);
@@ -76,7 +76,7 @@ void TestTgfFileFormatPlugin::serializeUnserializeTest()
         QVERIFY2(n->pointerList().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
     QVERIFY(ds->dataList().at(0)->property("name").toString() == "first node");
-    QVERIFY(ds->pointers().at(0)->value() == "test value");
+    QVERIFY(ds->pointers().at(0)->property("value").toString() == "test value");
 }
 
 QTEST_MAIN(TestTgfFileFormatPlugin);

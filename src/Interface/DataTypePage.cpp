@@ -119,7 +119,7 @@ public:
     {
         if (index.isValid() && role == Qt::EditRole) {
             switch (index.column()) {
-                case 0: kDebug() << "SET NAME"; break;
+                case 0: break;
                 case 1: _dataType->setPropertyDefaultValue(_propertyList.at(index.row()), value); break;
                 case 2: _dataType->setPropertyVisible(_propertyList.at(index.row()), value.toBool()); break;
                 default: return false;
@@ -127,7 +127,6 @@ public:
             return true;
         }
         return false;
-
     }
 };
 

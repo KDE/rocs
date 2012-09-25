@@ -105,7 +105,7 @@ void TgfFileFormatPlugin::readFile()
                 return;
             }
             PointerPtr pointer = graph->addPointer(nodeMap[from], nodeMap[to]);
-            pointer->setValue(value.simplified());
+            pointer->setProperty("value", value.simplified());
         }
     }
     Topology layouter;
@@ -140,7 +140,7 @@ void TgfFileFormatPlugin::writeFile(Document &graph )
     out << "#\n";
     // export pointers
     foreach(PointerPtr e, g->pointers()) {
-        out << e->from()->identifier() << " " << e->to()->identifier() << " " << e->value() <<'\n';
+        out << e->from()->identifier() << " " << e->to()->identifier() << " " << e->property("value").toString() <<'\n';
     }
     setError(None);
 }

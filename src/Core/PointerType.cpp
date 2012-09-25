@@ -26,9 +26,17 @@
 class PointerTypePrivate
 {
 public:
+    struct Property {
+        QString name;
+        QVariant defaultValue;
+        bool visible;
+    };
+
     PointerTypePrivate() {}
     boost::weak_ptr<PointerType> q; // self pointer
 
+    QMap<QString, Property> _propertyList;
+    QList<QString> _propertyDisplayList;
     QString _name;
     int _identifier;
     PointerType::Direction _pointerDirection;
@@ -122,4 +130,77 @@ void PointerType::setDefaultColor(QColor color)
 const QColor& PointerType::defaultColor() const
 {
     return d->_defaultColor;
+}
+
+
+void PointerType::addProperty(QString name, QString defaultValue)
+{
+    PointerTypePrivate::Property newProperty;
+    newProperty.name = name;
+    newProperty.defaultValue = defaultValue;
+    newProperty.visible = true;
+    d->_propertyList.insert(name, newProperty);
+    d->_propertyDisplayList.append(name);
+    emit(propertyAdded(newProperty.name, newProperty.defaultValue));
+}
+
+void PointerType::removeProperty(QString name)
+{
+    d->_propertyDisplayList.removeOne(name);
+    d->_propertyList.remove(name);
+    emit propertyRemoved(name);
+}
+
+void PointerType::renameProperty(QString oldName, QString newName)
+{
+    if (d->_propertyList.contains(newName)) {
+        return;
+    }
+    int index = d->_propertyDisplayList.indexOf(oldName);
+    if (index >= 0) {
+        d->_propertyDisplayList.removeAt(index);
+        d->_propertyDisplayList.insert(index, newName);
+    }
+    d->_propertyList.insert(newName, d->_propertyList[oldName]);
+    d->_propertyList.remove(oldName);
+    emit propertyRenamed(oldName, newName);
+}
+
+QList<QString> PointerType::properties() const
+{
+    return d->_propertyList.keys();
+}
+
+QVariant PointerType::propertyDefaultValue(QString name) const
+{
+    if (!d->_propertyList.contains(name)) {
+        return false;
+    }
+    return d->_propertyList[name].defaultValue;
+}
+
+void PointerType::setPropertyDefaultValue(QString name, QVariant value)
+{
+    if (!d->_propertyList.contains(name)) {
+        return;
+    }
+    d->_propertyList[name].defaultValue = value;
+    emit propertyDefaultValueChanged(name);
+}
+
+bool PointerType::isPropertyVisible(QString name) const
+{
+    if (!d->_propertyList.contains(name)) {
+        return false;
+    }
+    return d->_propertyList[name].visible;
+}
+
+void PointerType::setPropertyVisible(QString name, bool visible)
+{
+    if (!d->_propertyList.contains(name)) {
+        return;
+    }
+    d->_propertyList[name].visible = visible;
+    emit propertyVisibilityChanged(name);
 }

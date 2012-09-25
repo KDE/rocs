@@ -42,7 +42,7 @@ void KmlFileFormatTest::serializeTest()
     dataList.insert("d", ds->addData("d"));
     dataList.insert("e", ds->addData("e"));
 
-    ds->addPointer(dataList["a"], dataList["b"])->setValue("test value");
+    ds->addPointer(dataList["a"], dataList["b"])->setProperty("value", "test value");
     ds->addPointer(dataList["b"], dataList["c"]);
     ds->addPointer(dataList["c"], dataList["d"]);
     ds->addPointer(dataList["d"], dataList["e"]);

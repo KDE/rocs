@@ -76,7 +76,7 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
         PointerPtr newPointer = addPointer(from, to);
         if (newPointer.get()){
             newPointer->setColor(e->color());
-            newPointer->setValue(e->value());
+            newPointer->setProperty("value", e->property("value").toString());
         }
     }
 }
@@ -202,8 +202,8 @@ QScriptValue Rocs::GraphStructure::distances(Data* fromRaw)
     foreach (DataPtr target, dataListAll()) {
         qreal length = 0;
         foreach (PointerPtr edge, shortestPaths[target]) {
-            if (!edge->value().isEmpty()) {
-                length += edge->value().toDouble();
+            if (!edge->property("value").toString().isEmpty()) {
+                length += edge->property("value").toDouble();
             } else {
                 length += 1;
             }
@@ -249,8 +249,8 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
     foreach(PointerPtr p, pointerListAll) {
         edges[counter] = Edge(node_mapping[p->from()->identifier()], node_mapping[p->to()->identifier()]);
         edge_mapping[std::make_pair < int, int > (node_mapping[p->from()->identifier()], node_mapping[p->to()->identifier()])] = p;
-        if (!p->value().isEmpty()) {
-            weights[counter] = p->value().toDouble();
+        if (!p->property("value").toString().isEmpty()) {
+            weights[counter] = p->property("value").toDouble();
         } else {
             weights[counter] = 1;
         }
@@ -259,8 +259,8 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
         if (p->direction() == PointerType::Bidirectional) {
             edges[counter] = Edge(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()]);
             edge_mapping[std::make_pair< int, int >(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()])] = p;
-            if (!p->value().isEmpty()) {
-                weights[counter] = p->value().toDouble();
+            if (!p->property("value").toString().isEmpty()) {
+                weights[counter] = p->property("value").toDouble();
             } else {
                 weights[counter] = 1;
             }

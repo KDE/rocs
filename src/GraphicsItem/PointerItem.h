@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2008-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008      Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2012      Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -21,6 +22,7 @@
 #define ROCS_POINTERITEM_H
 
 #include <QGraphicsLineItem>
+#include <QFont>
 #include <boost/shared_ptr.hpp>
 #include "rocslib_export.h"
 #include "Rocs_Typedefs.h"
@@ -51,6 +53,11 @@ public:
         return Type;
     }
 
+    /**
+     * \return the graphics item to be displayed at the scene
+     */
+    QGraphicsItem *propertyListItem() const;
+
     /*! Gets the pointer of the node */
     PointerPtr pointer() const {
         return _pointer;
@@ -74,17 +81,24 @@ public slots:
     void remove();
     void updatePos();
     void updateAttributes();
+    void updateProperty(QString name);
+    void registerProperty(QString name);
+    void removeProperty(QString name);
 
 private:
+    /**
+     * Update positions, values and visibility of properties.
+     *
+     * \param x is the x position for starting the list
+     * \param y is the x position for starting the list
+     */
+    void updatePropertyList(qreal x, qreal y);
+
     PointerPtr _pointer;
-
-    QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const;
-    QPainterPath createLoop(QPointF pos) const;
-    void connectSignals();
-
     int _index;
-    QGraphicsSimpleTextItem *_name;
-    QGraphicsSimpleTextItem *_value;
+    QFont _font;
+    QGraphicsItemGroup* _item;
+    QMap<QString, QGraphicsSimpleTextItem*> _propertyValues;
 };
 
 #endif

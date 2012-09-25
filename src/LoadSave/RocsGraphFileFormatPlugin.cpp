@@ -246,7 +246,6 @@ void RocsGraphFileFormatPlugin::readFile()
             }
             if (tmpPointer) {
                 tmpPointer->setWidth(width);
-                tmpPointer->setValue(value);
                 tmpPointer->setColor(color);
                 tmpObject = tmpPointer.get();
             }

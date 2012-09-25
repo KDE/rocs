@@ -225,10 +225,6 @@ void DataItem::registerProperty(QString name)
     if (_propertyValues.contains(name)) {
         return;
     }
-    // do not show property if it is not a type property
-    if (!_data->properties().contains(name)) {
-        return;
-    }
     _propertyValues.insert(name, new QGraphicsSimpleTextItem(data()->property(name.toStdString().c_str()).toString()));
     _propertyValues[name]->setFlags(ItemIgnoresTransformations);
     _propertyValues[name]->setFont(_font);

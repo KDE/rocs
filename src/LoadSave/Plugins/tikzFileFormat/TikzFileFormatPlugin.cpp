@@ -127,7 +127,7 @@ void TikzFileFormatPlugin::writeFile(Document &graph)
             QString pointerStr = QString("\\path[edge%1] (%2) -- node[value] {%3} (%4);").
                 arg(e->pointerType()).
                 arg(e->from()->identifier()).
-                arg(e->value()).
+                arg(e->property("value").toString()).
                 arg(e->to()->identifier());
             out << pointerStr;
             out << '\n';

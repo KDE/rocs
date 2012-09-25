@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2008-2011 Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008      Ugo Sangiori <ugorox@gmail.com>
+    Copyright 2012      Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -42,31 +43,37 @@
 
 PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
     : QObject(0), QGraphicsPathItem(parent)
+    , _pointer(pointer)
+    , _index(pointer->relativeIndex())
+    , _font(QFont("Helvetica [Cronyx]", 12))
+    , _item(new QGraphicsItemGroup())
 {
-    _pointer = pointer;
-    _index = _pointer->relativeIndex();
-    _name = new QGraphicsSimpleTextItem(this);
-    _value = new QGraphicsSimpleTextItem(this);
+    connect(_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
+    connect(_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
+    connect(_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
+
+    connect(_pointer.get(), SIGNAL(propertyAdded(QString)), this, SLOT(registerProperty(QString)));
+    connect(_pointer.get(), SIGNAL(propertyRemoved(QString)), this, SLOT(removeProperty(QString)));
+    connect(_pointer.get(), SIGNAL(propertyChanged(QString)), this, SLOT(updateProperty(QString)));
+    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updatePropertyList()));
+
+    connect(_pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updateAttributes()));
+    connect(_pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
+
+    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
+
     setZValue(-_index);
     setFlag(ItemIsSelectable, true);
-    connectSignals();
     updateAttributes();
 }
 
 PointerItem::~PointerItem()
 {
-    //dynamic_cast<GraphScene*>(scene())->removeGItem(this);
-}
-
-void PointerItem::connectSignals()
-{
-    connect(_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
-    connect(_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
-    connect(_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
-    connect(_pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updateAttributes()));
-    connect(_pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
-
-    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
+    foreach (QString name, _propertyValues.keys()) {
+        delete _propertyValues[name];
+    }
+    _propertyValues.clear();
+    delete _item;
 }
 
 void PointerItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/)
@@ -105,36 +112,83 @@ void PointerItem::updateAttributes()
     Qt::PenStyle style = pointer()->style();
 
     setPen(QPen(QBrush(QColor(_pointer->color())), _pointer->width(), style, Qt::RoundCap, Qt::RoundJoin));
-    _value->hide();
-    _name->hide();
     this->hide();
     QPointF middle = path().pointAtPercent(0.5);
-    _name->setText(_pointer->name());
-    _value->setText(_pointer->value());
 
     if (_pointer->from() == _pointer->to()) {
         qreal x1 = boundingRect().x() + boundingRect().width() + 5;
         qreal y1 = boundingRect().y() + (boundingRect().height() / 2) - 10;
-        _name->setPos(x1, y1);
-        _value->setPos(x1, y1 + 14);
+        updatePropertyList(x1, y1);
     } else {
-        _name->setPos(middle.x() - _name->boundingRect().width() / 2, middle.y());
-        _value->setPos(middle.x() - _name->boundingRect().width() / 2, middle.y() - 14);
-    }
-
-    // overall visibility for pointer
-    if (_pointer->isVisible()) {
-        if (_pointer->isValueVisible()) {
-            _value->show();
-        }
-        if (_pointer->isNameVisible()) {
-            _name->show();
-        }
-        this->show();
+        updatePropertyList(middle.x() / 2, middle.y());
     }
 
     update();
 }
+
+void PointerItem::updatePropertyList(qreal x, qreal y) {
+    qreal offset = 0;
+    foreach (QString property, _pointer->properties()) {
+        if (!_propertyValues.contains(property)) {
+            kError() << "Cannot update unknown property : " << property;
+            continue;
+        }
+        if (_propertyValues[property]->isVisible() == false) {
+            continue;
+        }
+        _propertyValues[property]->setPos(x+20, y + offset);
+        _propertyValues[property]->update();
+        offset += 20;
+    }
+}
+
+
+void PointerItem::registerProperty(QString name)
+{
+    if (_propertyValues.contains(name)) {
+        return;
+    }
+    _propertyValues.insert(name, new QGraphicsSimpleTextItem(_pointer->property(name.toStdString().c_str()).toString()));
+    _propertyValues[name]->setFlags(ItemIgnoresTransformations);
+    _propertyValues[name]->setFont(_font);
+    _propertyValues[name]->setZValue(zValue() + 1);
+    _item->addToGroup(_propertyValues[name]);
+
+    updateAttributes();
+}
+
+void PointerItem::updateProperty(QString name)
+{
+    if (!_propertyValues.contains(name)) {
+        registerProperty(name);
+        return;
+    }
+    PointerTypePtr pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
+    _propertyValues[name]->setText(_pointer->property(name.toStdString().c_str()).toString());
+    _propertyValues[name]->setVisible(pointerType->isPropertyVisible(name));
+    _propertyValues[name]->update();
+    updateAttributes();
+}
+
+void PointerItem::removeProperty(QString name)
+{
+    if (_propertyValues.contains(name)) {
+        kWarning() << "Property not removed: not registered at DataItem.";
+        return;
+    }
+    _propertyValues[name]->setVisible(false);
+    _item->removeFromGroup(_propertyValues[name]);
+    delete _propertyValues[name];
+    _propertyValues.remove(name);
+
+    updateAttributes();
+}
+
+QGraphicsItem* PointerItem::propertyListItem() const
+{
+    return _item;
+}
+
 
 void PointerItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {

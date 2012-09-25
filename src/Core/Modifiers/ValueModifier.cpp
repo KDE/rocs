@@ -51,9 +51,9 @@ void ValueModifier::enumerate(QList<DataPtr> dataList, int start, bool overrideV
 void ValueModifier::enumerate(QList<PointerPtr> pointers, int start, bool overrideValues = true)
 {
     for (int i = 0; i < pointers.size(); i++) {
-        if (!overrideValues && !pointers[i]->value().trimmed().isEmpty())
+        if (!overrideValues && !pointers[i]->property("value").isNull())
             return;
-        pointers[i]->setValue(QString::number(start++));
+        pointers[i]->setProperty("value", QString::number(start++));
     }
 }
 
@@ -89,9 +89,9 @@ void ValueModifier::assignRandomIntegers(QList<PointerPtr> pointers, int lowerLi
     boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
 
     for (int i = 0; i < pointers.size(); i++) {
-        if (!overrideValues && !pointers[i]->value().trimmed().isEmpty())
+        if (!overrideValues && !pointers[i]->property("value").isNull())
             return;
-        pointers[i]->setValue(QString::number(die()));
+        pointers[i]->setProperty("value", QString::number(die()));
     }
 }
 
@@ -127,8 +127,8 @@ void ValueModifier::assignRandomReals(QList<PointerPtr> pointers, qreal lowerLim
     boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
 
     for (int i = 0; i < pointers.size(); i++) {
-        if (!overrideValues && !pointers[i]->value().trimmed().isEmpty())
+        if (!overrideValues && !pointers[i]->property("value").isNull())
             return;
-        pointers[i]->setValue(QString::number(die()));
+        pointers[i]->setProperty("value", QString::number(die()));
     }
 }

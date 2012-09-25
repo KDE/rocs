@@ -197,8 +197,8 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
 
             for (int k = 0; k < out.size(); k++) {
                 if (out[k]->to() == vertices[j]) {
-                    if (!out[k]->value().isEmpty())
-                        weight[QPair<int, int>(i, j)] = out[k]->value().toDouble();
+                    if (!out[k]->property("value").toString().isEmpty())
+                        weight[QPair<int, int>(i, j)] = out[k]->property("value").toDouble();
                     else
                         weight[QPair<int, int>(i, j)] = 1;
 
@@ -260,7 +260,7 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
         if (weight[QPair<int, int>(MST[i].first, MST[i].second)] != 1) {
             QString s;
             s.setNum(weight[QPair<int, int>(MST[i].first, MST[i].second)]);
-            ptr->setValue(s);
+            ptr->setProperty("value", s);
         }
     }
 

@@ -27,6 +27,7 @@
 #include <bitset>
 
 class Document;
+class PointerTypePropertyModel;
 
 /*!
     \brief Properties page for PointerType.
@@ -47,6 +48,8 @@ private slots:
     void setCurrentType(int index);
     void setTypeName();
     void setTypeDefaultColor();
+    void addProperty();
+    void removeProperty();
     void addType();
     void removeType();
     void updateCurrentTypeName();
@@ -55,6 +58,7 @@ private slots:
 
 private:
     Document* _document;
+    PointerTypePropertyModel* _model;
     Ui::PointerTypePage *ui;
 };
 
