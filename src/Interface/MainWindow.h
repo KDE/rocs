@@ -25,7 +25,9 @@
 #include <KXmlGuiWindow>
 #include <kmessagebox.h>
 #include <QMutex>
+#include <KUrl>
 
+class KRecentFilesAction;
 class QAction;
 class KPushButton;
 class KComboBox;
@@ -142,7 +144,7 @@ private slots:
     void newProject(); //TODO maybe not needed anymore, check after finish of new project assistant
     void newProjectAssistant();
     void saveProject();
-    void openProject();
+    void openProject(const KUrl& fileName = KUrl());
     void setProjectName();
 
     /**
@@ -271,6 +273,9 @@ private: // Variables.
     KAction *_stopScript;
     KActionMenu *_debugMenu;
     QList<QAction*> _toolsPlugins;
+    
+    ///Store the recent files.
+    KRecentFilesAction *_recentProjects;
 
     //! Needed to restore the size of the splitter after closing / opening the UI.
     QSplitter *_vSplitter;

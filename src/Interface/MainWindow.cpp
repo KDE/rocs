@@ -37,6 +37,7 @@
 
 // KDE Related Includes
 #include <KActionCollection>
+#include <KRecentFilesAction>
 #include <KActionMenu>
 #include <KApplication>
 #include <KDebug>
@@ -147,8 +148,12 @@ MainWindow::~MainWindow()
     Settings::setHSplitterSizeRight(_hSplitter->sizes() [1]);
     Settings::setHScriptSplitterSizeLeft(_hScriptSplitter->sizes() [0]);
     Settings::setHScriptSplitterSizeRight(_hScriptSplitter->sizes() [1]);
+    _recentProjects->saveEntries(Settings::self()->config()->group("RecentFiles"));
 
     Settings::self()->writeConfig();
+
+
+    
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -402,6 +407,15 @@ void MainWindow::setupActions()
     createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(newProject()), this);
     createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
+    
+    _recentProjects = new KRecentFilesAction(KIcon ("document-open"), i18n("RecentFiles"), this);
+    connect(_recentProjects, SIGNAL(urlSelected(KUrl)), this, SLOT(openProject(KUrl)));
+    actionCollection()->addAction("recent-project", _recentProjects);
+    
+    
+    _recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
+    
+    
     createAction("document-export",     i18nc("@action:inmenu", "Export Project"),     "export-project",    SLOT(exportProject()), this);
     createAction("document-import",     i18nc("@action:inmenu", "Import Project"),     "import-project",    SLOT(importProject()), this);
     createAction("document-properties", i18nc("@action:inmenu", "Set Name"),           "set-project-name",  SLOT(setProjectName()), this);
@@ -741,21 +755,21 @@ void MainWindow::saveProject()
 }
 
 
-void MainWindow::openProject()
+void MainWindow::openProject(const KUrl& fileName)
 {
     saveIfChanged();
-
+    KUrl file = fileName;
+    if (file.isEmpty()){
     // show open dialog
-    QString file = KFileDialog::getOpenFileName(QString(),
+         file = KFileDialog::getOpenUrl(KUrl(),
                    i18n("*.rocs|Rocs project files\n*|All files"),
                    this,
                    i18nc("@title:window", "Open Project Files"));
 
-    if (file.isEmpty()) {
-        kDebug() << "No project file specified to open: aborting.";
-        return;
+        if (file.isEmpty()) {
+            return;
+        }
     }
-
     // import project specified: close everything and delete old project
     _codeEditor->closeAllScripts();
     DocumentManager::self()->closeAllDocuments();
@@ -763,7 +777,7 @@ void MainWindow::openProject()
 
     // extract and open new project
     // at the end of this _currentProject must exist
-    _currentProject = new Project(KUrl::fromLocalFile(file));
+    _currentProject = new Project(file);
     foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
         DocumentManager::self()->openDocument(graphFile);
     }
@@ -779,6 +793,7 @@ void MainWindow::openProject()
     }
 
     updateCaption();
+    _recentProjects->addUrl(file);
 }
 
 

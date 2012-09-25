@@ -8,13 +8,18 @@
 
     <MenuBar>
         <Menu name="file" >
-            <Action name="open-project" />
-            <Action name="save-project" />
-            <Action name="change-project" />
             <Action name="new-project" />
+            <Action name="open-project" />
+            <Action name="recent-project" />
             <Separator/>
-            <Action name="import-project" />
+            <Action name="save-project" />
             <Action name="export-project" />
+<!--             <Action name="change-project" /> -->
+            
+            <Separator/>
+            <Action name="save-script-as" />
+            <Action name="export-graph" />
+<!--             <Action name="import-project" /> -->
             <Separator/>
         </Menu>
         <Menu name="project" >
@@ -32,7 +37,6 @@
             <Menu name="script_file">
                 <text>Script File</text>
                 <Action name="save-script" />
-                <Action name="save-script-as" />
             </Menu>
             <Separator/>
             <Action name="download" />
@@ -44,7 +48,6 @@
             <Menu name="graph_file">
                 <text>Graph File</text>
                 <Action name="save-graph" />
-                <Action name="export-graph" />
             </Menu>
             <Separator/>
             <Menu name="conversions">
