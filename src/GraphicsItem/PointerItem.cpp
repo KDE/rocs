@@ -55,7 +55,7 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
     connect(_pointer.get(), SIGNAL(propertyAdded(QString)), this, SLOT(registerProperty(QString)));
     connect(_pointer.get(), SIGNAL(propertyRemoved(QString)), this, SLOT(removeProperty(QString)));
     connect(_pointer.get(), SIGNAL(propertyChanged(QString)), this, SLOT(updateProperty(QString)));
-    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updatePropertyList()));
+    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
 
     connect(_pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updateAttributes()));
     connect(_pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
@@ -65,6 +65,7 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
     setZValue(-_index);
     setFlag(ItemIsSelectable, true);
     updateAttributes();
+    this->show();
 }
 
 PointerItem::~PointerItem()
@@ -122,7 +123,9 @@ void PointerItem::updateAttributes()
     } else {
         updatePropertyList(middle.x() / 2, middle.y());
     }
-
+    if (_pointer->isVisible() == true) {
+        this->show();
+    }
     update();
 }
 
