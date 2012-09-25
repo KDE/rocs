@@ -43,7 +43,10 @@
 #include <QSlider>
 #include <QSpacerItem>
 #include <QToolButton>
+#include <QFrame>
 #include <DocumentManager.h>
+#include <KPushButton>
+#include <QButtonGroup>
 
 GraphVisualEditor::GraphVisualEditor(MainWindow *parent) :
     QWidget(parent)
@@ -96,33 +99,74 @@ void GraphVisualEditor::setupWidgets()
     _documentPropertiesButton->setDefaultAction(propertiesAction);
     _documentPropertiesButton->setIcon(KIcon("document-properties"));
 
+    // scene controls for top line
+    vLayout->addWidget(sceneToolbar());
+    vLayout->addWidget(_graphicsView);
+    setLayout(vLayout);
+
+    // listen for document manager changes
+    connect(DocumentManager::self(), SIGNAL(documentListChanged()),
+            this, SLOT(updateGraphDocumentList()));
+}
+
+QWidget* GraphVisualEditor::sceneToolbar()
+{
     QWidget *sceneControls = new QWidget(this);
+
+    // document selection
     _documentSelectorCombo = new KComboBox(this);
+    _documentSelectorCombo->setMinimumWidth(100);
     sceneControls->setLayout(new QHBoxLayout(this));
     sceneControls->layout()->addWidget(new QLabel(i18nc("@label:listbox", "Graph Document:")));
     sceneControls->layout()->addWidget(_documentSelectorCombo);
     sceneControls->layout()->addWidget(_documentPropertiesButton);
 
-    connect(DocumentManager::self(), SIGNAL(documentListChanged()),
-            this, SLOT(updateGraphDocumentList()));
-    connect(_documentSelectorCombo, SIGNAL(activated(int)),
-            DocumentManager::self(), SLOT(changeDocument(int)));
+    // control separator
+    QFrame* separator = new QFrame(this);
+    separator->setFrameStyle(QFrame::VLine);
+    sceneControls->layout()->addWidget(separator);
 
+    // data structure selection
+    sceneControls->layout()->addWidget(new QLabel(i18n("Data Structure:"), this));
+    _dataStructureSelectorCombo = new KComboBox(this);
+    _dataStructureSelectorCombo->setMinimumWidth(100);
+    sceneControls->layout()->addWidget(_dataStructureSelectorCombo);
+    _dataStructurePropertiesButton = new QToolButton(this);
+    _dataStructurePropertiesButton->setMaximumWidth(24);
+    _dataStructurePropertiesButton->setIcon(KIcon("document-properties"));
+    sceneControls->layout()->addWidget(_dataStructurePropertiesButton);
+    // create add data structure button
+    KPushButton* addDataStructureButton = new KPushButton(this);
+    addDataStructureButton->setIcon(KIcon("rocsnew"));
+    addDataStructureButton->setToolTip(i18nc("@info:tooltip", "Add a new data structure."));
+    addDataStructureButton->setMaximumWidth(24);
+    sceneControls->layout()->addWidget(addDataStructureButton);
+    // create remove data structure button
+    KPushButton* removeDataStructureButton = new KPushButton(this);
+    removeDataStructureButton->setIcon(KIcon("rocsdelete"));
+    removeDataStructureButton->setToolTip(i18nc("@info:tooltip", "Remove selected data structure."));
+    removeDataStructureButton->setMaximumWidth(24);
+    sceneControls->layout()->addWidget(removeDataStructureButton);
 
     QSpacerItem *spacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
     sceneControls->layout()->addItem(spacerItem);
     sceneControls->layout()->addWidget(_zoomSlider);
 
-    vLayout->addWidget(sceneControls);
-    vLayout->addWidget(_graphicsView);
-
-    setLayout(vLayout);
+    // connections for buttons
+    connect(_documentSelectorCombo, SIGNAL(activated(int)),
+            DocumentManager::self(), SLOT(changeDocument(int)));
+    connect(addDataStructureButton, SIGNAL(clicked()),
+            this, SLOT(addDataStructure()));
+    connect(removeDataStructureButton, SIGNAL(clicked()),
+            this, SLOT(removeDataStructure()));
 
     // add connections for zoom slider
     connect(_zoomSlider, SIGNAL(valueChanged(int)),
             this, SLOT(zoomTo(int)));
     connect(_scene, SIGNAL(zoomFactorChanged(qreal)),
             this, SLOT(updateZoomSlider(qreal)));
+
+    return sceneControls;
 }
 
 QGraphicsView* GraphVisualEditor::view() const
@@ -141,6 +185,8 @@ void GraphVisualEditor::updateGraphDocumentList()
 void GraphVisualEditor::setActiveDocument()
 {
     if (_document != DocumentManager::self()->activeDocument()) {
+        disconnect(_document);
+        _document->disconnect(_dataStructureSelectorCombo);
         releaseDocument();
     }
     _document = DocumentManager::self()->activeDocument();
@@ -149,14 +195,22 @@ void GraphVisualEditor::setActiveDocument()
     // set button for document properties
     if (_documentPropertiesButton->defaultAction()) {
         _documentPropertiesButton->defaultAction()->deleteLater();
-        PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), _document, this);
+        PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"),
+                                                                              _document,
+                                                                              this);
         _documentPropertiesButton->setDefaultAction(propertiesAction);
         _documentPropertiesButton->setIcon(KIcon("document-properties"));
     }
+    updateDataStructureList();
 
-
+    connect(_dataStructureSelectorCombo, SIGNAL(activated(int)),
+            _document, SLOT(setActiveDataStructure(int)));
     connect(_document, SIGNAL(activeDataStructureChanged(DataStructurePtr)),
-            this, SLOT(setActiveGraph(DataStructurePtr)));
+            this, SLOT(updateActiveDataStructure(DataStructurePtr)));
+    connect(_document, SIGNAL(dataStructureCreated(DataStructurePtr)),
+            this, SLOT(updateDataStructureList()));
+    connect(_document, SIGNAL(dataStructureListChanged()),
+            this, SLOT(updateDataStructureList()));
 }
 
 void GraphVisualEditor::releaseDocument()
@@ -171,10 +225,43 @@ void GraphVisualEditor::releaseDocument()
     _document->disconnect(this);
 }
 
-void GraphVisualEditor::setActiveGraph(DataStructurePtr g)
+void GraphVisualEditor::updateActiveDataStructure(DataStructurePtr g)
 {
     _dataStructure = g;
     _scene->setActiveGraph(g);
+
+    // set property to edit current data structure
+    PropertiesDialogAction *dsProperty = new PropertiesDialogAction(i18nc("@action:button", "Properties"),
+                                                                    DocumentManager::self()->activeDocument()->activeDataStructure(),
+                                                                    this);
+    _dataStructurePropertiesButton->defaultAction()->deleteLater();
+    _dataStructurePropertiesButton->setDefaultAction(dsProperty);
+}
+
+void GraphVisualEditor::updateDataStructureList()
+{
+    _dataStructureSelectorCombo->clear();
+    foreach(DataStructurePtr ds, DocumentManager::self()->activeDocument()->dataStructures()) {
+        _dataStructureSelectorCombo->addItem(ds->name());
+    }
+    _dataStructureSelectorCombo->setCurrentIndex(_document->dataStructures().indexOf(_document->activeDataStructure()));
+
+    // set property to edit current data structure
+    PropertiesDialogAction *dsProperty = new PropertiesDialogAction(i18nc("@action:button", "Properties"),
+                                                                    DocumentManager::self()->activeDocument()->activeDataStructure(),
+                                                                    this);
+    _dataStructurePropertiesButton->defaultAction()->deleteLater();
+    _dataStructurePropertiesButton->setDefaultAction(dsProperty);
+}
+
+void GraphVisualEditor::addDataStructure()
+{
+    DocumentManager::self()->activeDocument()->addDataStructure();
+}
+
+void GraphVisualEditor::removeDataStructure()
+{
+    DocumentManager::self()->activeDocument()->activeDataStructure()->remove();
 }
 
 GraphScene* GraphVisualEditor::scene() const

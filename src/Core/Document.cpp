@@ -472,6 +472,14 @@ void Document::cleanUpBeforeConvert()
     ds->cleanUpBeforeConvert();
 }
 
+void Document::setActiveDataStructure(int index)
+{
+    if (index >= 0 && index < d->_dataStructures.length()) {
+        d->_activeDataStructure = d->_dataStructures.at(index);
+        emit activeDataStructureChanged(d->_activeDataStructure);
+        d->_modified = true;
+    }
+}
 
 void Document::setActiveDataStructure(DataStructurePtr g)
 {
@@ -506,6 +514,7 @@ DataStructurePtr Document::addDataStructure(QString name)
     d->_modified = true;
     connect(g.get(), SIGNAL(changed()), this, SLOT(setModified()));
     emit dataStructureCreated(g);
+    emit dataStructureListChanged();
     return g;
 }
 
@@ -533,7 +542,12 @@ void Document::setFileUrl(KUrl fileUrl)
 void Document::remove(DataStructurePtr dataStructure)
 {
     d->_dataStructures.removeOne(dataStructure);
+    if (d->_dataStructures.count() == 0) {
+        addDataStructure();
+    }
+    setActiveDataStructure(d->_dataStructures.count()-1);
     d->_modified = true;
+    emit dataStructureListChanged();
 }
 
 DataStructurePtr Document::activeDataStructure() const

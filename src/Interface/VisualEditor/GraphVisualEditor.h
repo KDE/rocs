@@ -58,12 +58,16 @@ public:
     void releaseDocument();
 
 public slots:
-    /*! set the current selected Graph.
-        \param graph the new active graph.
-        */
-    void setActiveGraph(DataStructurePtr g);
+    /**
+     * Reflect currently active data structure in graph scene and graph editor toolbar.
+     *
+     *\param g is the active data structure
+     */
+    void updateActiveDataStructure(DataStructurePtr g);
 
     void setActiveDocument();
+    void addDataStructure();
+    void removeDataStructure();
     QList<DataItem*> selectedNodes() const;
     void updateZoomSlider(qreal zoomFactor);
     void zoomTo(int sliderValue);
@@ -72,6 +76,7 @@ public slots:
      * Updates selector combobox for graph documents.
      */
     void updateGraphDocumentList();
+    void updateDataStructureList();
 
 private:
     /*! Default Constructor
@@ -80,19 +85,21 @@ private:
 
     void setupWidgets();
 
-    /*! as the name says, draw a graph on scene.
-    \param g the graph to be drawn. */
-    void drawGraphOnScene(DataStructurePtr g);
-
-    QToolButton *setupToolButton(const QString& actionName, const QString& tooltip, AlignAction::Orientation o, QWidget *parent);
+    /**
+     * Creates toolbar for the graph scene.
+     *
+     * \return created toolbar
+     */
+    QWidget* sceneToolbar();
 
     static GraphVisualEditor* _self;
 
     GraphScene *_scene;
 
     KComboBox *_documentSelectorCombo;
-    KPushButton *_btnAddGraph;
     QToolButton *_documentPropertiesButton;
+    KComboBox *_dataStructureSelectorCombo;
+    QToolButton *_dataStructurePropertiesButton;
 
     QSlider *_zoomSlider;
     Document *_document;

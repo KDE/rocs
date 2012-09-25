@@ -126,8 +126,6 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
             this, SLOT(releaseDocument(Document*)));
     connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
             this, SLOT(releaseDocument(Document*)));
-    connect(DocumentManager::self(), SIGNAL(documentListChanged()),
-            this, SLOT(updateGraphDocumentList()));
 
     // TODO: use welcome widget instead of creating default empty project
     _currentProject = createNewProject();
@@ -179,7 +177,6 @@ void MainWindow::setupWidgets()
     _hSplitter->setOrientation(Qt::Horizontal);
     _hSplitter->addWidget(_graphVisualEditor);
     _hSplitter->addWidget(propertyPanel);
-
 
     // setup lower half
     QWidget *scriptPanel = setupScriptPanel();
@@ -323,18 +320,9 @@ QWidget* MainWindow::setupScriptPanel()
 QWidget* MainWindow::setupWhiteboardPanel()
 {
     QWidget *panel = new QWidget(this);
-
     _GraphLayers = new GraphLayers(this);
-
-    // arrange widgets
-    QWidget* selectorForm = new QWidget(panel);
-    QGridLayout* documentLayout = new QGridLayout(selectorForm);
-    selectorForm->setLayout(documentLayout);
-
     panel->setLayout(new QVBoxLayout);
-    panel->layout()->addWidget(selectorForm);
     panel->layout()->addWidget(_GraphLayers);
-
     return panel;
 }
 
@@ -397,7 +385,6 @@ void MainWindow::setupActions()
     actionCollection()->addAction("recent-project", _recentProjects);
 
     _recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
-    
     createAction("document-save-as",     i18nc("@action:inmenu", "Save Project as"),   "save-project-as",    SLOT(saveProjectAs()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(newGraph()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(newScript()),    this);
@@ -706,7 +693,7 @@ void MainWindow::saveProject(const bool& saveAs)
                        i18n("*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"),
                        this,
                        i18nc("@title:window", "Save Project"));
-        
+
         if (file.isEmpty()) {
             kDebug() << "Filename is empty and no script file was created.";
             return;
@@ -722,7 +709,6 @@ void MainWindow::saveProject(const bool& saveAs)
             // save files and finally write project to file
             _currentProject->writeProjectFile(file);
         }
-        
     } else {
         saveAllGraphs();
         saveScripts();
@@ -989,7 +975,6 @@ void MainWindow::exportGraphFile()
 
     exp.exportFile(DocumentManager::self()->activeDocument());
 }
-
 
 void MainWindow::showPossibleIncludes()
 {

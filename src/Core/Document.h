@@ -175,6 +175,14 @@ public slots:
      */
     DataStructurePtr addDataStructure(QString name = QString());
     DataStructurePtr activeDataStructure() const ;
+
+    /**
+     * Sets the active data structure of graph document with index \p index in the
+     * data structure list. To get list of indices \see dataStructures();
+     *
+     * \param index is the index of the data structure in internal data structure list
+     */
+    void setActiveDataStructure(int index);
     void setActiveDataStructure(DataStructurePtr g);
 
     void setLeft(qreal leftValue);
@@ -205,7 +213,7 @@ public slots:
 
 signals:
     void dataStructureCreated(DataStructurePtr g);
-    void dataStructureRemoved(int i);
+    void dataStructureListChanged();
     void dataTypeCreated(int identifier);
     void pointerTypeCreated(int identifier);
     void dataTypeRemoved(int identifier);

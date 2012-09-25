@@ -43,13 +43,7 @@ GraphLayers::GraphLayers(MainWindow *parent) :
     QVBoxLayout *vBoxLayout = new QVBoxLayout();
 
     QWidget *contents = new QWidget();
-    KPushButton *btnADD = new KPushButton(KIcon("rocsnew"), i18nc("@action:button", "Add Data Structure"));
-    btnADD->setToolTip(i18nc("@info:tooltip", "Add a new data structure."));
-
     _buttonGroup = new QButtonGroup();
-    connect(btnADD, SIGNAL(clicked()), this, SLOT(btnADDClicked()));
-    hBoxLayout->addWidget(btnADD);
-    hBoxLayout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding));
 
     vBoxLayout->addLayout(hBoxLayout);
     vBoxLayout->addStretch();
@@ -98,11 +92,6 @@ void GraphLayers::setActiveDocument()
     }
 }
 
-void GraphLayers::btnADDClicked()
-{
-    emit createGraph(QString());
-}
-
 void GraphLayers::createLayer(DataStructurePtr dataStructure)
 {
     DataStructurePropertiesWidget *properties = new DataStructurePropertiesWidget(dataStructure, _mainWindow);
@@ -123,17 +112,12 @@ void GraphLayers::removeLayer(DataStructurePtr dataStructure)
 {
     DataStructurePropertiesWidget *properties = m_layers.value(dataStructure);
     bool selectOther    = properties->radio()->isChecked();
-    bool createAnother  = (DocumentManager::self()->activeDocument()->dataStructures().size() == 0);
 
     _buttonGroup->removeButton(properties->radio());
 
     widget()->layout()->removeWidget(properties);
     m_layers.remove(dataStructure);
     properties->deleteLater();
-
-    if (createAnother) {
-        btnADDClicked();
-    }
 
     if (selectOther) {
         selectFirstGraph();

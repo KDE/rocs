@@ -46,7 +46,6 @@ public:
     void setActiveDocument();
 
 public slots:
-    void btnADDClicked();
     void createLayer(DataStructurePtr g);
     void removeLayer(DataStructurePtr g);
     void selectFirstGraph();
