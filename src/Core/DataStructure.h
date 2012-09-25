@@ -45,7 +45,9 @@ class ROCSLIB_EXPORT DataStructure : public QObject {
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(QColor dataDefaultColor READ dataDefaultColor WRITE setDataDefaultColor)
     Q_PROPERTY(QColor pointerDefaultColor READ pointerDefaultColor WRITE setPointerDefaultColor)
-
+    Q_PROPERTY(QList<Data*> dataList READ dataList)
+    Q_PROPERTY(QList<Pointer*> pointerList READ pointers)
+    
 public:
     DataStructure(Document *parent = 0);
     DataStructure(DataStructure& other, Document* parent);
