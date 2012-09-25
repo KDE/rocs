@@ -153,7 +153,7 @@ MainWindow::~MainWindow()
     Settings::self()->writeConfig();
 
 
-    
+
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -175,13 +175,14 @@ void MainWindow::setupWidgets()
     _vSplitter->setOrientation(Qt::Vertical);
 
     // setup upper half
-    QWidget *leftPanel  = setupWhiteboardPanel();         // graph properties
+    QWidget *propertyPanel = setupWhiteboardPanel(); // graph properties
     _graphVisualEditor = GraphVisualEditor::self(); // graph editor whiteboard
 
     _hSplitter = new QSplitter(this);
     _hSplitter->setOrientation(Qt::Horizontal);
-    _hSplitter->addWidget(leftPanel);
     _hSplitter->addWidget(_graphVisualEditor);
+    _hSplitter->addWidget(propertyPanel);
+
 
     // setup lower half
     QWidget *scriptPanel = setupScriptPanel();
@@ -407,14 +408,14 @@ void MainWindow::setupActions()
     createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(newProject()), this);
     createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
-    
+
     _recentProjects = new KRecentFilesAction(KIcon ("document-open"), i18nc("@action:inmenu","Recent Files"), this);
     connect(_recentProjects, SIGNAL(urlSelected(KUrl)), this, SLOT(openProject(KUrl)));
     actionCollection()->addAction("recent-project", _recentProjects);
-    
+
     _recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
-    
-    
+
+
     createAction("document-export",     i18nc("@action:inmenu", "Export Project"),     "export-project",    SLOT(exportProject()), this);
     createAction("document-import",     i18nc("@action:inmenu", "Import Project"),     "import-project",    SLOT(importProject()), this);
     createAction("document-properties", i18nc("@action:inmenu", "Set Name"),           "set-project-name",  SLOT(setProjectName()), this);
@@ -1069,7 +1070,7 @@ void MainWindow::exportProject()
         return;
     }
     _currentProject->exportProject(KUrl::fromLocalFile(file));
-    
+
     Settings::setLastOpenedDirectory(_currentProject->projectDirectory());
 }
 
