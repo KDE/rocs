@@ -55,7 +55,7 @@
 #include <KComboBox>
 
 // UI RELATED INCLUDES
-#include "GraphLayers.h"
+#include "DocumentTypesWidget.h"
 #include "GraphVisualEditor.h"
 #include "GraphScene.h"
 #include "CodeEditor.h"
@@ -320,9 +320,12 @@ QWidget* MainWindow::setupScriptPanel()
 QWidget* MainWindow::setupWhiteboardPanel()
 {
     QWidget *panel = new QWidget(this);
-    _GraphLayers = new GraphLayers(this);
+    _documentTypesWidget = new DocumentTypesWidget(panel);
     panel->setLayout(new QVBoxLayout);
-    panel->layout()->addWidget(_GraphLayers);
+    panel->layout()->addWidget(_documentTypesWidget);
+
+    connect(DocumentManager::self(), SIGNAL(activateDocument()),
+            _documentTypesWidget, SLOT(updateTypes()));
     return panel;
 }
 
@@ -544,7 +547,6 @@ void MainWindow::setActiveDocument()
     QtScriptBackend *engine = activeDocument->engineBackend();
 
     _graphVisualEditor->setActiveDocument();
-    _GraphLayers->setActiveDocument();
 
     // Graphical Data Structure Editor toolbar
     updateToolbarTypeActions();
@@ -611,7 +613,6 @@ void MainWindow::releaseDocument(Document* d)
     disconnect(d);
 
     _graphVisualEditor->releaseDocument();
-    _GraphLayers->disconnect(d);
     d->engineBackend()->disconnect(this);
     d->engineBackend()->disconnect(_bottomTabs);
 }

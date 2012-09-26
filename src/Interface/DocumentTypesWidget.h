@@ -18,53 +18,56 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SUI_DATASTRUCTUREPROPERTIESWIDGET_H
-#define SUI_DATASTRUCTUREPROPERTIESWIDGET_H
+#ifndef DOCUMENTYPESWIDGET_H
+#define DOCUMENTYPESWIDGET_H
 
 #include <KButtonGroup>
 #include "Rocs_Typedefs.h"
-#include "ui_DataStructurePropertiesWidget.h"
+#include "ui_DocumentTypesWidget.h"
 
-class DataStructure;
+class Document;
 class Data;
 class Pointer;
-class MainWindow;
 class KColorCombo;
 class QToolButton;
 class KPushButton;
 
-/*! \brief Properties Area, not used yet. */
-
-class DataStructurePropertiesWidget
-    : public KButtonGroup, public Ui::DataStructurePropertiesWidget
+/**
+ * \class DocumentTypesWidget
+ * This widget allows direct access to the data and pointer types of the currently
+ * activated document.
+ */
+class DocumentTypesWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DataStructurePropertiesWidget(DataStructurePtr g, MainWindow* parent = 0);
-    ~DataStructurePropertiesWidget();
-    QRadioButton *radio() const;
+    DocumentTypesWidget(QWidget* parent);
+    ~DocumentTypesWidget();
+
+public slots:
+    void updateDocument();
 
 private slots:
-    /** Use this SLOT to register a new data element type to be displayed at the data structure
-     * widget.
+    /** Use this SLOT to register a new data element type.
+     *
      * \param identifier is the unique identifier for this data element type
      */
     void registerDataType(int identifier);
 
-    /** Use this SLOT to remove the widget for the date element type as as specified by \param identifier
-     * from the data structure widget.
+    /** Use this SLOT to remove the widget for the date element type as as specified by \param identifier.
      *
      * \param identifier is the unique identifier for this pointer type
      */
     void unregisterDataType(int identifier);
 
-    /** Use this SLOT to register a new pointer type to be displayed at the data structure widget.
+    /** Use this SLOT to register a new pointer type.
+     *
      * \param identifier is the unique identifier for this pointer type
      */
     void registerPointerType(int identifier);
 
-    /** Use this SLOT to remove the widget for the pointer type as as specified by \param identifier
-     * from the data structure widget.
+    /** Use this SLOT to remove the widget for the pointer type as as specified by \param identifier.
+     *
      * \param identifier is the unique identifier for this pointer type
      */
     void unregisterPointerType(int identifier);
@@ -72,24 +75,17 @@ private slots:
     void updateDataTypeButtons();
     void updatePointerTypeButtons();
 
-    void on__dataStructureDelete_clicked();
-    void on__activateGraph_toggled(bool b);
-
-signals:
-    void updateNeeded();
-    void addGraph(QString name);
-    void removeGraph(DataStructurePtr);
-
 private:
-    bool createDataTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure);
-    bool createPointerTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure);
+    bool createDataTypeInformationWidget(int typeIdentifier, Document* document);
+    bool createPointerTypeInformationWidget(int typeIdentifier, Document* document);
 
-    DataStructurePtr _dataStructure;
     KColorCombo* _pointerTypeColor;
-    MainWindow *_mainWindow;
     QMap<int, QWidget*> _dataTypeWidgets;
     QMap<int, KPushButton*> _dataTypeButtons;
     QMap<int, KPushButton*> _pointerTypeButtons;
     QMap<int, QWidget*> _pointerTypeWidgets;
+    Document* _document;
+
+    Ui::DocumentTypesWidget *ui;
 };
 #endif

@@ -27,6 +27,7 @@
 #include <QMutex>
 #include <KUrl>
 
+class DocumentTypesWidget;
 class KRecentFilesAction;
 class QAction;
 class KPushButton;
@@ -243,7 +244,7 @@ private: // Variables.
     Project* _currentProject;
 
     // Left Area:
-    GraphLayers* _GraphLayers; //! Area where the data and edges will be modified.
+    DocumentTypesWidget* _documentTypesWidget; //! Area where the data and edges will be modified.
 
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.

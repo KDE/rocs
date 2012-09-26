@@ -18,20 +18,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "DataStructurePropertiesWidget.h"
+#include "DocumentTypesWidget.h"
 
-#include "model_GraphProperties.h"
-#include "DataStructure.h"
 #include "Document.h"
 #include "Data.h"
 #include "DataType.h"
 #include "Pointer.h"
 #include "PointerType.h"
-#include "MainWindow.h"
 #include "DataItem.h"
 #include "PointerItem.h"
-#include "GraphScene.h"
-#include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
 #include <PropertiesDialogAction.h>
 
@@ -40,66 +35,66 @@
 #include <KAction>
 #include <KColorCombo>
 #include <KPushButton>
-
-#include <QString>
-#include <QGraphicsItem>
-#include <QRadioButton>
-#include <QMenu>
+#include <QWidget>
 
 
-DataStructurePropertiesWidget::DataStructurePropertiesWidget(DataStructurePtr dataStructure, MainWindow* parent)
-    : KButtonGroup(parent)
+DocumentTypesWidget::DocumentTypesWidget(QWidget* parent)
+    : QWidget(parent)
+    , _document(0)
 {
-    setupUi(this);
-    _mainWindow = parent;
+    ui = new Ui::DocumentTypesWidget;
+    ui->setupUi(this);
 
+    connect(DocumentManager::self(), SIGNAL(activateDocument()),
+            this, SLOT(updateDocument()));
+}
+
+
+DocumentTypesWidget::~DocumentTypesWidget()
+{
+}
+
+void DocumentTypesWidget::updateDocument()
+{
+    if (_document) {
+        _document->disconnect(this);
+
+        // cleanup before filling again
+        foreach (int identifier, _dataTypeWidgets.keys()) {
+            delete _dataTypeWidgets[identifier];
+            _dataTypeWidgets.remove(identifier);
+            _dataTypeButtons.remove(identifier);
+        }
+        foreach (int identifier, _pointerTypeWidgets.keys()) {
+            delete _pointerTypeWidgets[identifier];
+            _pointerTypeWidgets.remove(identifier);
+            _pointerTypeButtons.remove(identifier);
+        }
+    }
+    _document = DocumentManager::self()->activeDocument();
     // create default data element setups
-    foreach (int type, dataStructure->document()->dataTypeList()) {
-        createDataTypeInformationWidget(type, dataStructure);
+    Document* document = DocumentManager::self()->activeDocument();
+    foreach (int type, document->dataTypeList()) {
+        createDataTypeInformationWidget(type, _document);
     }
-    foreach (int type, dataStructure->document()->pointerTypeList()) {
-        createPointerTypeInformationWidget(type, dataStructure);
+    foreach (int type, document->pointerTypeList()) {
+        createPointerTypeInformationWidget(type, _document);
     }
-
-
-    _dataStructure = dataStructure;
-    _dataStructureName->setText(_dataStructure->name());
-//     _dataStructureVisible->setChecked( ! _dataStructure->readOnly());
-    _activateGraph->setChecked(true);
-
-    _displayOptions->setVisible(_activateGraph->isChecked());
-
-    if (!_extraProperties->layout()) {
-        QLayout * lay = DataStructurePluginManager::self()->dataStructureExtraProperties(dataStructure, _extraProperties);
-        _extraProperties->setLayout(lay);
-    }
-
-    connect(this, SIGNAL(addGraph(QString)), dataStructure->document(), SLOT(addDataStructure(QString)));
-    connect(this, SIGNAL(removeGraph(DataStructurePtr)), dataStructure.get(), SLOT(remove()));
 
     // react on new data types and pointer types
-    connect(dataStructure->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(registerDataType(int)));
-    connect(dataStructure->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(unregisterDataType(int)));
-    connect(dataStructure->document(), SIGNAL(pointerTypeCreated(int)), this, SLOT(registerPointerType(int)));
-    connect(dataStructure->document(), SIGNAL(pointerTypeRemoved(int)), this, SLOT(unregisterPointerType(int)));
-    connect(dataStructure->document(), SIGNAL(nameChanged(QString)), _dataStructureName, SLOT(setText(QString)));
-
-    connect(_dataStructureName, SIGNAL(textChanged(QString)), dataStructure.get(), SLOT(setName(QString)));
+    connect(_document, SIGNAL(dataTypeCreated(int)), this, SLOT(registerDataType(int)));
+    connect(_document, SIGNAL(dataTypeRemoved(int)), this, SLOT(unregisterDataType(int)));
+    connect(_document, SIGNAL(pointerTypeCreated(int)), this, SLOT(registerPointerType(int)));
+    connect(_document, SIGNAL(pointerTypeRemoved(int)), this, SLOT(unregisterPointerType(int)));
 }
 
-
-DataStructurePropertiesWidget::~DataStructurePropertiesWidget()
+void DocumentTypesWidget::registerDataType(int identifier)
 {
+    createDataTypeInformationWidget(identifier, _document);
 }
 
 
-void DataStructurePropertiesWidget::registerDataType(int identifier)
-{
-    createDataTypeInformationWidget(identifier, _dataStructure);
-}
-
-
-void DataStructurePropertiesWidget::unregisterDataType(int identifier)
+void DocumentTypesWidget::unregisterDataType(int identifier)
 {
     if (!_dataTypeWidgets.contains(identifier)) {
         return;
@@ -110,13 +105,14 @@ void DataStructurePropertiesWidget::unregisterDataType(int identifier)
 }
 
 
-void DataStructurePropertiesWidget::registerPointerType(int identifier)
+void DocumentTypesWidget::registerPointerType(int identifier)
 {
-    createPointerTypeInformationWidget(identifier, _dataStructure);
+    Document* document = DocumentManager::self()->activeDocument();
+    createPointerTypeInformationWidget(identifier, document);
 }
 
 
-void DataStructurePropertiesWidget::unregisterPointerType(int identifier)
+void DocumentTypesWidget::unregisterPointerType(int identifier)
 {
     if (!_pointerTypeWidgets.contains(identifier)) {
         return;
@@ -127,34 +123,13 @@ void DataStructurePropertiesWidget::unregisterPointerType(int identifier)
 }
 
 
-QRadioButton *DataStructurePropertiesWidget::radio()const
+bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Document* document)
 {
-    return _activateGraph;
-}
-
-
-void DataStructurePropertiesWidget::on__activateGraph_toggled(bool visible)
-{
-    _displayOptions->setVisible(visible);
-    if (visible) {
-        DocumentManager::self()->activeDocument()->setActiveDataStructure(_dataStructure);
-    }
-}
-
-
-void DataStructurePropertiesWidget::on__dataStructureDelete_clicked()
-{
-    emit removeGraph(_dataStructure);
-}
-
-
-bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
-{
-    if (!dataStructure->document()->dataTypeList().contains(typeIdentifier)) {
+    if (!document->dataTypeList().contains(typeIdentifier)) {
         return false;
     }
 
-    DataTypePtr dataType = dataStructure->document()->dataType(typeIdentifier);
+    DataTypePtr dataType = document->dataType(typeIdentifier);
 
     // create default data element setups
     QWidget* dataPropertyWidget = new QWidget(this);
@@ -179,12 +154,15 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
     dataPropertyLayout->addWidget(dataTypeButton, 1, 1);
     dataPropertyLayout->addWidget(dataTypeVisible, 1, 2);
 
-    _dataTypes->addWidget(dataPropertyWidget);
+    ui->_dataTypes->addWidget(dataPropertyWidget);
 
     QSignalMapper* signalMapper = new QSignalMapper(this);
     signalMapper = new QSignalMapper(this);
     signalMapper->setMapping(dataTypeVisible, typeIdentifier);
     connect(dataTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
+
+    //FIXME
+    DataStructurePtr dataStructure = document->activeDataStructure();
     connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataVisibility(int)));
 
     connect(dataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateDataTypeButtons()));
@@ -197,13 +175,13 @@ bool DataStructurePropertiesWidget::createDataTypeInformationWidget(int typeIden
 }
 
 
-bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeIdentifier, DataStructurePtr dataStructure)
+bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier, Document* document)
 {
-    if (!dataStructure->document()->pointerTypeList().contains(typeIdentifier)) {
+    if (!document->pointerTypeList().contains(typeIdentifier)) {
         return false;
     }
 
-    PointerTypePtr pointerType = dataStructure->document()->pointerType(typeIdentifier);
+    PointerTypePtr pointerType = document->pointerType(typeIdentifier);
 
     // create default data element setups
     QWidget* pointerPropertyWidget = new QWidget(this);
@@ -227,12 +205,15 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
     pointerPropertyLayout->addWidget(pointerTypeButton, 1, 1);
     pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 2);
 
-    _pointerTypes->addWidget(pointerPropertyWidget);
+    ui->_pointerTypes->addWidget(pointerPropertyWidget);
 
     QSignalMapper* signalMapper = new QSignalMapper(this);
     signalMapper = new QSignalMapper(this);
     signalMapper->setMapping(pointerTypeVisible, typeIdentifier);
     connect(pointerTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
+
+    //FIXME
+    DataStructurePtr dataStructure = document->activeDataStructure();
     connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(togglePointerVisibility(int)));
 
     connect(pointerType.get(), SIGNAL(nameChanged(QString)), this, SLOT(updatePointerTypeButtons()));
@@ -244,7 +225,7 @@ bool DataStructurePropertiesWidget::createPointerTypeInformationWidget(int typeI
 }
 
 
-void DataStructurePropertiesWidget::updateDataTypeButtons()
+void DocumentTypesWidget::updateDataTypeButtons()
 {
     QMap<int, KPushButton*>::const_iterator dataTypeWidget = _dataTypeButtons.constBegin();
     while (dataTypeWidget != _dataTypeButtons.constEnd()) {
@@ -257,7 +238,7 @@ void DataStructurePropertiesWidget::updateDataTypeButtons()
 }
 
 
-void DataStructurePropertiesWidget::updatePointerTypeButtons()
+void DocumentTypesWidget::updatePointerTypeButtons()
 {
     QMap<int, KPushButton*>::const_iterator pointerTypeWidget = _pointerTypeButtons.constBegin();
     while (pointerTypeWidget != _pointerTypeButtons.constEnd()) {

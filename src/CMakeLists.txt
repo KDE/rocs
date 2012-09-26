@@ -139,12 +139,11 @@ set( rocs_interface_SRCS
     Interface/MainWindow.cpp
     Interface/OpenedFilesWidget.cpp
     Interface/Separator.cpp
-    Interface/GraphLayers.cpp
     Interface/TabWidget.cpp
     Interface/CodeEditor.cpp
     Interface/ConfigureDefaultProperties.cpp
     Interface/DataPropertiesWidget.cpp
-    Interface/DataStructurePropertiesWidget.cpp
+    Interface/DocumentTypesWidget.cpp
     Interface/DataStructurePropertiesDialog.cpp
     Interface/DocumentPropertiesDialog.cpp
     Interface/DataStructurePage.cpp
@@ -177,7 +176,7 @@ set( rocs_SRCS
 kde4_add_ui_files(
     rocs_SRCS
     Interface/OpenedFilesWidget.ui
-    Interface/DataStructurePropertiesWidget.ui
+    Interface/DocumentTypesWidget.ui
     Interface/DataStructurePage.ui
     Interface/DataTypePage.ui
     Interface/PointerTypePage.ui
