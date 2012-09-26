@@ -398,8 +398,10 @@ bool Project::exportProject(KUrl exportUrl)
     tmpProjectConfig.setSuffix(".rocs");
     tmpProjectConfig.open();
     KConfig* exportConfig = d->_config->copyTo(tmpProjectConfig.fileName());
+    KConfigGroup projectGroup(exportConfig, "Project");
 
     // add all scripts to tarball
+    QStringList codeFileIDs;
     QMap<int, QString>::const_iterator iter = d->_codeFileGroup.constBegin();
     while (iter != d->_codeFileGroup.constEnd()) {
         KConfigGroup group(exportConfig, (*iter));
@@ -417,8 +419,12 @@ bool Project::exportProject(KUrl exportUrl)
         // update export project config in case of out-of-project-dir files
         group.writeEntry("file", KUrl::relativePath(projectDirectory(), file.fileName()));
         ++iter;
+        codeFileIDs.append(group.readEntry("identifier"));
     }
-
+    projectGroup.writeEntry("CodeFiles", codeFileIDs);
+         
+    
+    QStringList graphFileIDs;
     iter = d->_graphFileGroup.constBegin();
     while (iter != d->_graphFileGroup.constEnd()) {
         KConfigGroup group(exportConfig, (*iter));
@@ -436,13 +442,14 @@ bool Project::exportProject(KUrl exportUrl)
         // update export project config in case of out-of-project-dir files
         group.writeEntry("file", KUrl::relativePath(projectDirectory(), file.fileName()));
         ++iter;
+        graphFileIDs.append(group.readEntry("identifier"));
     }
+    projectGroup.writeEntry("GraphFiles", graphFileIDs);
     if (!d->_journalFile.isEmpty()) {
         tar.addLocalFile(d->_journalFile.toLocalFile(), d->_journalFile.fileName());
     }
 
     // write project to export
-    KConfigGroup projectGroup(exportConfig, "Project");
     projectGroup.writeEntry("Directory", "");
     exportConfig->sync();
     tar.addLocalFile(tmpProjectConfig.fileName(), "project.rocs");
