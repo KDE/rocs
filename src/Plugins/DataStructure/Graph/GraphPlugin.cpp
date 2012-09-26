@@ -120,6 +120,7 @@ QLayout* GraphPlugin::dataStructureExtraProperties(DataStructurePtr graph, QWidg
     lay->addWidget(_graphTypeCombo, 0, 1);
 
     GraphStructure * tmp = dynamic_cast<GraphStructure *>(boost::static_pointer_cast<GraphStructure>(graph).get());
+    _graphTypeCombo->setCurrentIndex(tmp->graphType());
 
     connect(_graphTypeCombo, SIGNAL(currentIndexChanged(int)), tmp, SLOT(setGraphType(int)));
 
