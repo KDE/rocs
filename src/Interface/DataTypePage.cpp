@@ -150,7 +150,7 @@ DataTypePage::DataTypePage(QWidget* parent)
     ui->propertyList->setModel(_model);
     ui->propertyList->horizontalHeader()->setProperty("stretchLastSection", true);
 
-    connect(ui->typeSelector, SIGNAL(currentIndexChanged(int)),
+    connect(ui->typeSelector, SIGNAL(activated(int)),
             this, SLOT(setCurrentType(int)));
     connect(ui->addType, SIGNAL(clicked(bool)),
             this, SLOT(addType()));
@@ -265,12 +265,14 @@ void DataTypePage::setCurrentType(int index)
     ui->typeDefaultColor->setColor(_document->dataType(type)->defaultColor());
 
     // icon selector
+    ui->typeIcon->clear();
     if (!_document->iconPackage().isEmpty()) {
         QFile svgFile(_document->iconPackage());
         svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
         QXmlStreamReader reader(&svgFile);
         QSvgRenderer *renderer = DataItem::sharedRenderer(svgFile.fileName());
+
         while (!reader.atEnd()) {
             reader.readNext();
             if (!reader.attributes().hasAttribute("id")) {
