@@ -194,6 +194,12 @@ public:
 
 public slots:
     void remove();
+
+    /**
+     * \deprecated
+     * Will be removed in Rocs 2.0
+     */
+    void self_remove();
     void setX(int x);
     void setY(int y);
     void setWidth(double w);

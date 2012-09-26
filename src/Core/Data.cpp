@@ -326,6 +326,13 @@ void Data::remove()
     emit removed();
 }
 
+
+void Data::self_remove()
+{
+    kWarning() << "self_remove() is a deprecated function, please use remove()";
+    remove();
+}
+
 const QVariant Data::color() const
 {
     return d->_color;

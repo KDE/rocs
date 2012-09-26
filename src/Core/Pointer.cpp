@@ -174,6 +174,13 @@ void Pointer::remove()
     d->dataStructure->remove(getPointer());
 }
 
+void Pointer::self_remove()
+{
+    kWarning() << "self_remove() is a deprecated function, please use remove()";
+    remove();
+}
+
+
 PointerType::Direction Pointer::direction() const
 {
     return d->pointerType->direction();
