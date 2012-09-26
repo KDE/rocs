@@ -157,17 +157,13 @@ private slots:
      */
     void updateCaption();
 
-    /**
-     * Save currently active graph document.
-     */
-    void saveGraph();
 
     /**
      * Save graph document \p document if document is specified.
      * Otherwise if \p document is 0 save current active document.
      * \param docoument is reference to the to be saved graph document or 0
      */
-    void saveGraph(Document* document);
+    void saveGraph(Document* document = 0);
 
     /**
      * Save all graphs currently registered by DocumentMananger

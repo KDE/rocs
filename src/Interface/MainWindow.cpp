@@ -708,7 +708,9 @@ void MainWindow::loadDocument(const QString& name)
 
 void MainWindow::newProject()
 {
-    saveIfChanged();
+    if (saveIfChanged() == KMessageBox::Cancel)
+        return;
+    
     _codeEditor->closeAllScripts();
     DocumentManager::self()->closeAllDocuments();
 
@@ -754,8 +756,6 @@ void MainWindow::saveProject(const bool& saveAs)
             _currentProject->writeProjectFile(file);
         }
         
-        updateCaption();
-        Settings::setLastOpenedDirectory(_currentProject->projectDirectory());
     } else {
         saveAllGraphs();
         saveScripts();
@@ -765,6 +765,8 @@ void MainWindow::saveProject(const bool& saveAs)
             _currentProject->writeProjectFile();
         }
     }
+    updateCaption();
+    Settings::setLastOpenedDirectory(_currentProject->projectFile().path());
 }
 
 
@@ -775,7 +777,9 @@ void MainWindow::saveProjectAs()
 
 void MainWindow::openProject(const KUrl& fileName)
 {
-    saveIfChanged();
+    if (saveIfChanged() == KMessageBox::Cancel)
+        return;
+    
     KUrl startDirectory = Settings::lastOpenedDirectory();
     KUrl file = fileName;
     if (file.isEmpty()){
@@ -879,11 +883,6 @@ void MainWindow::newScript()
 }
 
 
-void MainWindow::saveGraph()
-{
-    saveGraph(DocumentManager::self()->activeDocument());
-}
-
 
 void MainWindow::saveGraph(Document* document)
 {
@@ -950,14 +949,13 @@ void MainWindow::newGraph()
 
 int MainWindow::saveIfChanged()
 {
+    
     if (_currentProject->isModified()) {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
                                 "@info",
                                 "Changes on your project are unsaved. Do you want to save your changes?"));
         if (btnCode == KMessageBox::Yes) {
-            _currentProject->writeProjectFile();
-            saveAllGraphs();
-            _codeEditor->saveAllScripts();
+            saveProject();
         }
         return btnCode;
     }
@@ -974,7 +972,7 @@ int MainWindow::saveIfChanged()
                                 "@info",
                                 "Changes on your graph document are unsaved. Do you want to save your changes?"));
         if (btnCode == KMessageBox::Yes) {
-            saveAllGraphs();
+            saveProject();
         }
         return btnCode;
     }
@@ -983,7 +981,7 @@ int MainWindow::saveIfChanged()
                                 "@info",
                                 "Changes on your script files are unsaved. Do you want to save all unsaved scripts?"));
         if (btnCode == KMessageBox::Yes) {
-            _codeEditor->saveAllScripts();
+            saveProject();
         }
         return btnCode;
     }
@@ -992,8 +990,7 @@ int MainWindow::saveIfChanged()
                                 "@info",
                                 "Changes on your script files and on your graph document are unsaved. Do you want to save your graph document and all unsaved scripts?"));
         if (btnCode == KMessageBox::Yes) {
-            _codeEditor->saveAllScripts();
-            saveAllGraphs();
+            saveProject();
         }
         return btnCode;
     }
@@ -1025,61 +1022,6 @@ void MainWindow::exportGraphFile()
 
     exp.exportFile(DocumentManager::self()->activeDocument());
 }
-
-
-// void MainWindow::importProject()
-// {
-//     // save current project
-//     saveIfChanged();
-// 
-//     KUrl startDirectory = Settings::lastOpenedDirectory();
-//     if (!_currentProject->isTemporary()) {
-//         startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
-//     }
-//     // get import information
-//     QString importFile = KFileDialog::getOpenFileName(startDirectory,
-//                    i18n("*.tar.gz|Import from tar.gz Archive"),
-//                    this,
-//                    i18nc("@title:window", "Project Archive to Import"));
-// 
-//     if (importFile.isEmpty()) {
-//         kDebug() << "No file specified for import: aborting.";
-//         return;
-//     }
-// 
-//     QString newLocation = KFileDialog::getExistingDirectory(startDirectory,
-//                    this,
-//                    i18nc("@title:window", "Select Project Directory for Import"));
-// 
-//     if (newLocation.isEmpty()) {
-//         kDebug() << "No storage directory specified for import: aborting.";
-//         return;
-//     }
-// 
-//     // import project specified: close everything and delete old project
-//     _codeEditor->closeAllScripts();
-//     DocumentManager::self()->closeAllDocuments();
-//     delete _currentProject;
-// 
-//     // extract and open new project
-//     // at the end of this _currentProject must exist
-//     _currentProject = new Project(KUrl::fromLocalFile(importFile),KUrl::fromPath(newLocation.append('/')));
-//     foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
-//         DocumentManager::self()->openDocument(graphFile);
-//     }
-//     if (_currentProject->graphFiles().count() == 0) {
-//         _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
-//     }
-//     foreach(const KUrl& codeFile, _currentProject->codeFiles()) {
-//         _codeEditor->openScript(codeFile);
-//         //TODO set curser line
-//     }
-//     if (_currentProject->codeFiles().count() == 0) {
-//         _currentProject->addCodeFileNew(_codeEditor->newScript());
-//     }
-//     updateCaption();
-//     Settings::setLastOpenedDirectory(newLocation);
-// }
 
 
 void MainWindow::showPossibleIncludes()
