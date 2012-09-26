@@ -185,8 +185,8 @@ Document* DocumentManager::newDocument()
 
     if (_activeDocument==0) {
         _activeDocument = doc;
+        emit activateDocument();
     }
-    emit activateDocument();
     return doc;
 }
 
