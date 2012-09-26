@@ -777,11 +777,12 @@ void MainWindow::saveProjectAs()
 void MainWindow::openProject(const KUrl& fileName)
 {
     saveIfChanged();
+    KUrl startDirectory = Settings::lastOpenedDirectory();
     KUrl file = fileName;
     if (file.isEmpty()){
     // show open dialog
-         file = KFileDialog::getOpenUrl(KUrl(),
-                   i18n("*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"),
+         file = KFileDialog::getOpenUrl(startDirectory,
+                   i18n("*rocs,*.rocsz|All Rocs files\n*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"),
                    this,
                    i18nc("@title:window", "Open Project Files"));
 
@@ -796,16 +797,13 @@ void MainWindow::openProject(const KUrl& fileName)
 
     // extract and open new project
     // at the end of this _currentProject must exist
-    _currentProject = new Project(file);
         if (file.fileName().endsWith("rocsz",Qt::CaseInsensitive)){
-            _currentProject = new Project(file, file.path(KUrl::AddTrailingSlash));
+            _currentProject = new Project(file, file.directory(KUrl::AppendTrailingSlash));
             foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
                 DocumentManager::self()->openDocument(graphFile);
             }
-            if (_currentProject->graphFiles().count() == 0) {
-                _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
-            }
         }else{
+            _currentProject = new Project(file);
             foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
                 DocumentManager::self()->openDocument(graphFile);
             }
@@ -823,6 +821,7 @@ void MainWindow::openProject(const KUrl& fileName)
 
     updateCaption();
     _recentProjects->addUrl(file.path(KUrl::RemoveTrailingSlash));
+    Settings::setLastOpenedDirectory(file.path());
 }
 
 
