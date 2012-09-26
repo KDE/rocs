@@ -750,19 +750,18 @@ void MainWindow::saveProject(const bool& saveAs)
         }else {
 
             // we need to set project directory first to allow correcte relative paths
-
             // save files and finally write project to file
             _currentProject->writeProjectFile(file);
-            updateCaption();
         }
         
+        updateCaption();
         Settings::setLastOpenedDirectory(_currentProject->projectDirectory());
     } else {
+        saveAllGraphs();
+        saveScripts();
         if (_currentProject->projectFile().fileName().endsWith("rocsz")){
-            _currentProject->exportProject(_currentProject->projectFile().fileName());
+            _currentProject->exportProject(_currentProject->projectFile());
         }else{
-            saveAllGraphs();
-            saveScripts();
             _currentProject->writeProjectFile();
         }
     }

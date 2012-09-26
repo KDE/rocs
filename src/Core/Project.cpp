@@ -120,6 +120,7 @@ Project::Project(KUrl projectArchive, KUrl projectDirectory) :
     } else {
         d->_temporary = false;
     }
+    d->_projectFile = projectArchive;
     d->_modified = false;
 }
 
