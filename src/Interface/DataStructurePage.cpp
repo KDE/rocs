@@ -30,6 +30,7 @@
 #include <KColorCombo>
 #include <KPushButton>
 #include <KComboBox>
+#include "DataStructurePluginManager.h"
 #include <DataStructurePluginInterface.h>
 
 DataStructurePage::DataStructurePage(QWidget* parent)
@@ -51,13 +52,14 @@ void DataStructurePage::setDataStructure(DataStructurePtr dataStructure)
     ui->dataStructureName->setText(dataStructure->name());
     ui->dataStructurePlugin->addItem(dataStructure->document()->dataStructurePlugin()->name());
     ui->dataStructurePlugin->setDisabled(true);
-//     if (dataStructure->isDataVisible()) {
-//         ui->dataStructureVisible->setChecked(true);
-//     }
+
+    if (!ui->pluginExtraProperties->layout()) {
+        QLayout * layout = DataStructurePluginManager::self()->dataStructureExtraProperties(dataStructure, ui->pluginExtraProperties);
+        ui->pluginExtraProperties->setLayout(layout);
+    }
 
     connect(ui->dataStructureName, SIGNAL(textChanged(QString)),
             dataStructure.get(), SLOT(setName(QString)));
-    //TODO missing: connection to visibility
 }
 
 
