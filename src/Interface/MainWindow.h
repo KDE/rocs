@@ -143,7 +143,7 @@ private slots:
     void updateGraphDocumentList();
     void newProject(); //TODO maybe not needed anymore, check after finish of new project assistant
     void newProjectAssistant();
-    void saveProject();
+    void saveProject(const bool& saveAs = false);
     void openProject(const KUrl& fileName = KUrl());
 
     /**
@@ -203,7 +203,7 @@ private slots:
      */
 //     void importProject();
 
-    void exportProject();
+    void saveProjectAs();
     void setupToolsPluginsAction();
 
     /**

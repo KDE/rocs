@@ -43,7 +43,6 @@
 #include <KDebug>
 #include <KIcon>
 #include <KPushButton>
-#include <KStatusBar>
 #include <KTar>
 #include <KTextBrowser>
 #include <KMessageBox>
@@ -116,9 +115,7 @@ MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
 
     setupWidgets();
     setupActions();
-    setupGUI();
-
-    //statusBar()->hide();
+    setupGUI(ToolBar | Keys | Save | Create);
 
     setupToolsPluginsAction();
     setupDSPluginsAction();
@@ -409,13 +406,14 @@ void MainWindow::setupActions()
     createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
 
-    _recentProjects = new KRecentFilesAction(KIcon ("document-open"), i18nc("@action:inmenu","Recent Files"), this);
+    
+    _recentProjects = new KRecentFilesAction(KIcon ("document-open"), i18nc("@action:inmenu","Recent Projects"), this);
     connect(_recentProjects, SIGNAL(urlSelected(KUrl)), this, SLOT(openProject(KUrl)));
     actionCollection()->addAction("recent-project", _recentProjects);
 
     _recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
     
-    createAction("document-save-as",     i18nc("@action:inmenu", "Save Project as"),   "save-project-as",    SLOT(exportProject()), this);
+    createAction("document-save-as",     i18nc("@action:inmenu", "Save Project as"),   "save-project-as",    SLOT(saveProjectAs()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(newGraph()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(newScript()),    this);
     createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphFile()),   this);
@@ -728,12 +726,12 @@ void MainWindow::newProjectAssistant()
 }
 
 
-void MainWindow::saveProject()
+void MainWindow::saveProject(const bool& saveAs)
 {
     // save graphs and scripts
 
     KUrl startDirectory = Settings::lastOpenedDirectory();
-    if (_currentProject->isTemporary()) {
+    if (_currentProject->isTemporary() || saveAs) {
         startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
         QString file = KFileDialog::getSaveFileName(startDirectory,
                        i18n("*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"),
@@ -744,6 +742,7 @@ void MainWindow::saveProject()
             kDebug() << "Filename is empty and no script file was created.";
             return;
         }
+        _currentProject->setProjectFile(KUrl::fromLocalFile(file));
         saveAllGraphs();
         saveScripts();
         if (file.endsWith("rocsz")){
@@ -753,7 +752,6 @@ void MainWindow::saveProject()
             // we need to set project directory first to allow correcte relative paths
 
             // save files and finally write project to file
-            _currentProject->setProjectFile(KUrl::fromLocalFile(file));
             _currentProject->writeProjectFile(file);
             updateCaption();
         }
@@ -770,6 +768,11 @@ void MainWindow::saveProject()
     }
 }
 
+
+void MainWindow::saveProjectAs()
+{
+    saveProject(true);
+}
 
 void MainWindow::openProject(const KUrl& fileName)
 {
@@ -854,11 +857,11 @@ void MainWindow::updateCaption()
 
 void MainWindow::saveScripts()
 {
+    QString fileName = _currentProject->projectFile().fileName().remove(QRegExp(".rocsz*$"));
+    
     foreach(KTextEditor::Document * textDocument, _currentProject->codeFilesNew()) {
-        QString file = KFileDialog::getSaveFileName(QString(),
-                       i18n("*.js|Rocs script documents\n*|All files"),
-                       this,
-                       i18nc("@title:window", "Save Script Document"));
+        QString file = _currentProject->projectDirectory() + fileName + ".js";
+        textDocument->saveAs(KUrl::fromLocalFile(file));
         _currentProject->saveCodeFileNew(textDocument, file);
     }
     _codeEditor->saveAllScripts();
@@ -902,7 +905,9 @@ void MainWindow::saveAllGraphs()
 {
     foreach(Document * document, DocumentManager::self()->documentList()) {
         if (document->fileUrl().isEmpty()) {
-            saveGraphAs(document);
+            _currentProject->saveGraphFileAs(document, 
+                                             _currentProject->projectFile().toLocalFile().remove(QRegExp(".rocsz*$")) 
+                                                                                                              + ".graph");
         } else if (document->isModified()) {
             document->save();
         }
@@ -1077,26 +1082,6 @@ void MainWindow::exportGraphFile()
 //     updateCaption();
 //     Settings::setLastOpenedDirectory(newLocation);
 // }
-
-
-void MainWindow::exportProject()
-{
-    KUrl startDirectory = Settings::lastOpenedDirectory();
-    if (!_currentProject->isTemporary()) {
-        startDirectory = KUrl::fromPath(_currentProject->projectDirectory());
-    }
-    QString file = KFileDialog::getSaveFileName(startDirectory,
-                   i18n("*.tar.gz|Export as tar.gz Archive"),
-                   this,
-                   i18nc("@title:window", "Export Project"));
-    if (file.isEmpty()) {
-        kDebug() << "Filename is empty and no script file was created.";
-        return;
-    }
-    _currentProject->exportProject(KUrl::fromLocalFile(file));
-
-    Settings::setLastOpenedDirectory(_currentProject->projectDirectory());
-}
 
 
 void MainWindow::showPossibleIncludes()

@@ -30,7 +30,6 @@
 #include "GraphScene.h"
 #include "DynamicPropertiesList.h"
 #include "ConcurrentHelpClasses.h"
-#include "MainWindow.h"
 
 #include <boost/shared_ptr.hpp>
 
