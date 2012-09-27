@@ -50,10 +50,13 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
 
 void DataPropertiesWidget::setData(DataPtr data)
 {
+    DataTypePtr dataType;
     if (_data == data) {
         return;
     }
     if (_data) {
+         dataType = _data->dataStructure()->document()->dataType(_data->dataType());
+         dataType->disconnect(this);
         _data->disconnect(this);
         ui->_dataType->clear();
     }
@@ -65,10 +68,16 @@ void DataPropertiesWidget::setData(DataPtr data)
     ui->extraItems->setLayout(DataStructurePluginManager::self()->dataExtraProperties(_data, this));
     reflectAttributes();
 
+    // listen to ui
     connect(ui->_dataType, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setDataType(int)));
     connect(ui->_color, SIGNAL(activated(QColor)),
             this, SLOT(colorChanged(QColor)));
+
+    dataType = _data->dataStructure()->document()->dataType(_data->dataType());
+    connect(dataType.get(), SIGNAL(propertyAdded(QString,QVariant)), this, SLOT(updateProperties()));
+    connect(dataType.get(), SIGNAL(propertyRemoved(QString)), this, SLOT(updateProperties()));
+    connect(dataType.get(), SIGNAL(propertyRenamed(QString,QString)), this, SLOT(updateProperties()));
 
     GraphPropertiesModel *model = new GraphPropertiesModel();
     model->setDataSource(_data.get());
@@ -123,4 +132,13 @@ void DataPropertiesWidget::updateDataTypes()
     if (_data) {
         ui->_dataType->setCurrentIndex(ui->_dataType->findData(QVariant(_data->dataType())));
     }
+}
+
+void DataPropertiesWidget::updateProperties()
+{
+    // TODO the following can be solved much nicer by updating the model
+    GraphPropertiesModel *model = new GraphPropertiesModel();
+    model->setDataSource(_data.get());
+    ui->_propertiesTable->model()->deleteLater();
+    ui->_propertiesTable->setModel(model);
 }

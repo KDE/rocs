@@ -44,6 +44,7 @@ public slots:
     void reflectAttributes();
     void setPointerType(int pointerTypeIndex);
     void updatePointerTypes();
+    void updateProperties();
     void setWidth(double v);
     void setColor(const QColor& c);;
 

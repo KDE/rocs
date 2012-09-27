@@ -45,6 +45,7 @@ private slots:
     void reflectAttributes();
     void setDataType(int dataTypeIndex);
     void updateDataTypes();
+    void updateProperties();
 
 private:
     DataPtr _data;

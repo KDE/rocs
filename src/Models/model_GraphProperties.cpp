@@ -116,8 +116,6 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource)
         beginInsertRows(QModelIndex(), 0, dataSource->dynamicPropertyNames().size() - 1);
         endInsertRows();
     }
-
-
 }
 
 Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const

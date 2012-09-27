@@ -49,10 +49,13 @@ PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* pa
 
 void PointerPropertiesWidget::setPointer(PointerPtr pointer)
 {
+    PointerTypePtr pointerType;
     if (_pointer == pointer) {
         return;
     }
     if (_pointer) {
+        pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
+        pointerType->disconnect(this);
         _pointer->disconnect(this);
         ui->_pointerType->clear();
     }
@@ -60,19 +63,28 @@ void PointerPropertiesWidget::setPointer(PointerPtr pointer)
 
     updatePointerTypes();
 
-    GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_pointer.get());
-
-    ui->_propertiesTable->setModel(model);
-
+    // listen to pointer changes
     connect(_pointer.get(),      SIGNAL(changed()),         this, SLOT(reflectAttributes()));
 
+    // connect ui
     connect(ui->_pointerType, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setPointerType(int)));
     connect(ui->_width, SIGNAL(valueChanged(double)), this, SLOT(setWidth(double)));
     connect(ui->_color, SIGNAL(activated(QColor)), this, SLOT(setColor(QColor)));
 
+    // listen to pointer type changes
+    pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
+    connect(pointerType.get(), SIGNAL(propertyAdded(QString,QVariant)), this, SLOT(updateProperties()));
+    connect(pointerType.get(), SIGNAL(propertyRemoved(QString)), this, SLOT(updateProperties()));
+    connect(pointerType.get(), SIGNAL(propertyRenamed(QString,QString)), this, SLOT(updateProperties()));
+
     reflectAttributes();
+
+    GraphPropertiesModel *model = new GraphPropertiesModel();
+    model->setDataSource(_pointer.get());
+
+    ui->_propertiesTable->setModel(model);
+    ui->_propertiesTable->horizontalHeader()->setProperty("stretchLastSection", true);
 }
 
 void PointerPropertiesWidget::setPosition(QPointF screenPosition)
@@ -120,4 +132,13 @@ void PointerPropertiesWidget::updatePointerTypes()
     if (_pointer) {
         ui->_pointerType->setCurrentIndex(ui->_pointerType->findData(QVariant(_pointer->pointerType())));
     }
+}
+
+void PointerPropertiesWidget::updateProperties()
+{
+    // TODO the following can be solved much nicer by updating the model
+    GraphPropertiesModel *model = new GraphPropertiesModel();
+    model->setDataSource(_pointer.get());
+    ui->_propertiesTable->model()->deleteLater();
+    ui->_propertiesTable->setModel(model);
 }
