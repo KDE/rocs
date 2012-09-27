@@ -325,7 +325,7 @@ QWidget* MainWindow::setupWhiteboardPanel()
     panel->layout()->addWidget(_documentTypesWidget);
 
     connect(DocumentManager::self(), SIGNAL(activateDocument()),
-            _documentTypesWidget, SLOT(updateTypes()));
+            _documentTypesWidget, SLOT(updateDocument()));
     return panel;
 }
 
@@ -382,7 +382,7 @@ void MainWindow::setupActions()
     createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
 
-    
+
     _recentProjects = new KRecentFilesAction(KIcon ("document-open"), i18nc("@action:inmenu","Recent Projects"), this);
     connect(_recentProjects, SIGNAL(urlSelected(KUrl)), this, SLOT(openProject(KUrl)));
     actionCollection()->addAction("recent-project", _recentProjects);
@@ -665,7 +665,7 @@ void MainWindow::newProject()
 {
     if (saveIfChanged() == KMessageBox::Cancel)
         return;
-    
+
     _codeEditor->closeAllScripts();
     DocumentManager::self()->closeAllDocuments();
 
@@ -733,7 +733,7 @@ void MainWindow::openProject(const KUrl& fileName)
 {
     if (saveIfChanged() == KMessageBox::Cancel)
         return;
-    
+
     KUrl startDirectory = Settings::lastOpenedDirectory();
     KUrl file = fileName;
     if (file.isEmpty()){
@@ -814,7 +814,7 @@ void MainWindow::updateCaption()
 void MainWindow::saveScripts()
 {
     QString fileName = _currentProject->projectFile().fileName().remove(QRegExp(".rocsz*$"));
-    
+
     foreach(KTextEditor::Document * textDocument, _currentProject->codeFilesNew()) {
         QString file = _currentProject->projectDirectory() + fileName + ".js";
         textDocument->saveAs(KUrl::fromLocalFile(file));
@@ -856,8 +856,8 @@ void MainWindow::saveAllGraphs()
 {
     foreach(Document * document, DocumentManager::self()->documentList()) {
         if (document->fileUrl().isEmpty()) {
-            _currentProject->saveGraphFileAs(document, 
-                                             _currentProject->projectFile().toLocalFile().remove(QRegExp(".rocsz*$")) 
+            _currentProject->saveGraphFileAs(document,
+                                             _currentProject->projectFile().toLocalFile().remove(QRegExp(".rocsz*$"))
                                                                                                               + ".graph");
         } else if (document->isModified()) {
             document->save();
@@ -903,7 +903,7 @@ void MainWindow::newGraph()
 
 int MainWindow::saveIfChanged()
 {
-    
+
     if (_currentProject->isModified()) {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
                                 "@info",
