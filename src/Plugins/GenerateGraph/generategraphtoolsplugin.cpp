@@ -19,7 +19,6 @@
 #include "generategraphtoolsplugin.h"
 #include "generategraphwidget.h"
 #include "../ToolsPluginInterface.h"
-#include <model_GraphDocument.h>
 #include <Rocs_Typedefs.h>
 #include <Document.h>
 #include <DataStructure.h>

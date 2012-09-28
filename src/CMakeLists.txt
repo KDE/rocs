@@ -137,7 +137,6 @@ set( rocs_interface_SRCS
     Interface/ImporterExporterManager.cpp
     Interface/IncludeManagerSettings.cpp
     Interface/MainWindow.cpp
-    Interface/OpenedFilesWidget.cpp
     Interface/Separator.cpp
     Interface/TabWidget.cpp
     Interface/CodeEditor.cpp
@@ -156,8 +155,6 @@ set( rocs_interface_SRCS
 )
 
 set( rocs_models_SRCS
-    Models/model_GraphDocument.cpp
-    Models/model_GraphLayers.cpp
     Models/model_GraphProperties.cpp
 )
 
@@ -175,7 +172,6 @@ set( rocs_SRCS
 
 kde4_add_ui_files(
     rocs_SRCS
-    Interface/OpenedFilesWidget.ui
     Interface/DocumentTypesWidget.ui
     Interface/DataStructurePage.ui
     Interface/DataTypePage.ui

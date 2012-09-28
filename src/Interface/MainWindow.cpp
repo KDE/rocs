@@ -62,9 +62,6 @@
 #include "TabWidget.h"
 #include "GraphicsLayout.h"
 
-// MODEL Related Includes
-#include "model_GraphDocument.h"
-
 // Graph Related Includes
 #include "Document.h"
 #include "DataStructure.h"
