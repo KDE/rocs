@@ -126,12 +126,14 @@ void Data::initialize()
 
     connect(d->_dataType.get(), SIGNAL(propertyAdded(QString, QVariant)),
             this, SLOT(addDynamicProperty(QString,QVariant)));
+    connect(d->_dataType.get(), SIGNAL(propertyRemoved(QString)),
+            this, SLOT(removeDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(propertyRenamed(QString,QString)),
+            this, SLOT(renameDynamicProperty(QString,QString)));
     connect(d->_dataType.get(), SIGNAL(propertyDefaultValueChanged(QString)),
             this, SLOT(updateDynamicProperty(QString)));
     connect(d->_dataType.get(), SIGNAL(propertyVisibilityChanged(QString)),
             this, SLOT(updateDynamicProperty(QString)));
-    connect(d->_dataType.get(), SIGNAL(propertyRenamed(QString,QString)),
-            this, SLOT(renameDynamicProperty(QString,QString)));
 }
 
 DataPtr Data::getData() const
@@ -428,14 +430,15 @@ void Data::setColor(const QVariant& s)
 void Data::addDynamicProperty(const QString& property, const QVariant& value)
 {
     DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
-    emit(propertyAdded(property));
+    emit propertyAdded(property);
 }
 
 void Data::removeDynamicProperty(const QString& property)
 {
-    addDynamicProperty(property.toUtf8(), QVariant::Invalid);
+    // setting property to invalid is equals to deleting it
+    setProperty(property.toUtf8(), QVariant::Invalid);
     DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
-    emit(propertyRemoved(property));
+    emit propertyRemoved(property);
 }
 
 void Data::updateDynamicProperty(QString property)

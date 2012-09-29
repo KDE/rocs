@@ -53,7 +53,7 @@ public:
     void setDataType(DataTypePtr dataType) {
         _dataType = dataType;
         _propertyList = dataType->properties();
-        emit(layoutChanged());
+        emit layoutChanged();
     }
 
     QVariant headerData(int section, Qt::Orientation orientation, int role) const
@@ -119,7 +119,11 @@ public:
     {
         if (index.isValid() && role == Qt::EditRole) {
             switch (index.column()) {
-                case 0: break;
+                case 0: {
+                    _dataType->renameProperty(_propertyList.at(index.row()), value.toString());
+                    setDataType(_dataType); // trigger reload
+                    break;
+                    }
                 case 1: _dataType->setPropertyDefaultValue(_propertyList.at(index.row()), value); break;
                 case 2: _dataType->setPropertyVisible(_propertyList.at(index.row()), value.toBool()); break;
                 default: return false;
@@ -208,13 +212,11 @@ void DataTypePage::setTypeName()
     _document->dataType(type)->setName(ui->typeName->text());
 }
 
-
 void DataTypePage::setTypeDefaultColor()
 {
     int type = ui->typeSelector->itemData(ui->typeSelector->currentIndex()).toInt();
     _document->dataType(type)->setDefaultColor(ui->typeDefaultColor->color());
 }
-
 
 void DataTypePage::setIcon()
 {
@@ -223,7 +225,6 @@ void DataTypePage::setIcon()
             ui->typeIcon->itemData(ui->typeIcon->currentIndex()).toString()
             );
 }
-
 
 void DataTypePage::addProperty()
 {

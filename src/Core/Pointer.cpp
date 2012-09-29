@@ -48,21 +48,42 @@ public:
     QScriptEngine *engine;
 };
 
-PointerPtr Pointer::create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType)
+PointerPtr Pointer::create(DataStructurePtr dataStructure, DataPtr from, DataPtr to, int pointerType)
 {
-    PointerPtr pi(new Pointer(parent, from, to, pointerType));
-    pi->d->q = pi;
+    return create<Pointer>(dataStructure, from, to, pointerType);
+}
 
-    from->registerOutPointer(pi);
-    to->registerInPointer(pi);
-    pi->updateRelativeIndex();
+void Pointer::setQpointer(PointerPtr q)
+{
+    d->q = q;
+}
 
-    connect(to.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
-    connect(from.get(), SIGNAL(pointerListChanged()), pi.get(), SLOT(updateRelativeIndex()));
-    connect(parent.get(), SIGNAL(complexityChanged(bool)), pi.get(), SIGNAL(changed()));
-    connect(from.get(), SIGNAL(posChanged(QPointF)), pi.get(), SIGNAL(posChanged()));
+void Pointer::initialize()
+{
+    // register pointer at endpoints and connect to changes
+    d->from->registerOutPointer(getPointer());
+    d->to->registerInPointer(getPointer());
+    updateRelativeIndex();
+    connect(d->to.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
+    connect(d->from.get(), SIGNAL(pointerListChanged()), this, SLOT(updateRelativeIndex()));
+    connect(d->dataStructure.get(), SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
+    connect(d->from.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
 
-    return pi;
+    // register properties and connect to changes
+    installEventFilter(this);
+    foreach(QString property, d->pointerType->properties()) {
+        addDynamicProperty(property, d->pointerType->propertyDefaultValue(property));
+    }
+    connect(d->pointerType.get(), SIGNAL(propertyAdded(QString, QVariant)),
+            this, SLOT(addDynamicProperty(QString,QVariant)));
+    connect(d->pointerType.get(), SIGNAL(propertyRemoved(QString)),
+            this, SLOT(removeDynamicProperty(QString)));
+    connect(d->pointerType.get(), SIGNAL(propertyRenamed(QString,QString)),
+            this, SLOT(renameDynamicProperty(QString,QString)));
+    connect(d->pointerType.get(), SIGNAL(propertyDefaultValueChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
+    connect(d->pointerType.get(), SIGNAL(propertyVisibilityChanged(QString)),
+            this, SLOT(updateDynamicProperty(QString)));
 }
 
 PointerPtr Pointer::getPointer() const
@@ -106,6 +127,16 @@ Pointer::~Pointer()
             kDebug() << "Removed from the to node";
         }
     }
+}
+
+bool Pointer::eventFilter(QObject *obj, QEvent *event){
+    if (event->type() == QEvent::DynamicPropertyChange) {
+        if (QDynamicPropertyChangeEvent* const dynEvent = dynamic_cast<QDynamicPropertyChangeEvent*>(event)) {
+            event->accept();
+            emit(propertyChanged(dynEvent->propertyName()));
+        }
+    }
+    return QObject::eventFilter(obj, event);
 }
 
 int Pointer::relativeIndex() const

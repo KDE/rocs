@@ -57,13 +57,13 @@ public:
     \return a QVariant containing the string of the header. */
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
+    Qt::ItemFlags flags(const QModelIndex & index) const;
+
     /*! recreates the information on the model based on another datasource.
     \param dataSource the new dataSource of the model.*/
     void setDataSource(QObject *dataSource);
 
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
-
-    Qt::ItemFlags flags(const QModelIndex &index) const;
 
     /**Add properti to data source and insert a new row,*/
     void addDynamicProperty(QString name, QVariant value, QObject *obj);

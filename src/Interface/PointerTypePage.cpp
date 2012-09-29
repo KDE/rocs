@@ -119,7 +119,11 @@ public:
     {
         if (index.isValid() && role == Qt::EditRole) {
             switch (index.column()) {
-                case 0: break;
+                case 0: {
+                    _pointerType->renameProperty(_propertyList.at(index.row()), value.toString());
+                    setPointerType(_pointerType); // trigger reload
+                    break;
+                }
                 case 1: _pointerType->setPropertyDefaultValue(_propertyList.at(index.row()), value); break;
                 case 2: _pointerType->setPropertyVisible(_propertyList.at(index.row()), value.toBool()); break;
                 default: return false;

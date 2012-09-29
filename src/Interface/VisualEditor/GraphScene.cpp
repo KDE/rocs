@@ -196,9 +196,9 @@ QGraphicsItem *GraphScene::createData(DataPtr n)
 
 QGraphicsItem *GraphScene::createEdge(PointerPtr e)
 {
-    QGraphicsItem *pointerItem = 0;
-    pointerItem = DataStructurePluginManager::self()->pointerItem(e);
+    PointerItem *pointerItem = (PointerItem*)DataStructurePluginManager::self()->pointerItem(e);
     addItem(pointerItem);
+    addItem(pointerItem->propertyListItem());
     return pointerItem;
 }
 

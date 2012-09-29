@@ -21,10 +21,10 @@
 #include "DataStructure.h"
 #include <boost/weak_ptr.hpp>
 
+#include <KDebug>
 #include <QPainter>
 #include <QSvgRenderer>
 #include <DataItem.h>
-#include <boost/graph/graph_concepts.hpp>
 
 class DataTypePrivate
 {
@@ -170,6 +170,7 @@ void DataType::removeProperty(QString name)
 void DataType::renameProperty(QString oldName, QString newName)
 {
     if (d->_propertyList.contains(newName)) {
+        kWarning() << "Property name was not changed: new name already exists";
         return;
     }
     int index = d->_propertyDisplayList.indexOf(oldName);

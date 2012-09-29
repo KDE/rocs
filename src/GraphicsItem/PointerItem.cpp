@@ -60,8 +60,6 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
     connect(_pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updateAttributes()));
     connect(_pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
 
-    connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
-
     setZValue(-_index);
     setFlag(ItemIsSelectable, true);
     updateAttributes();
@@ -121,10 +119,21 @@ void PointerItem::updateAttributes()
         qreal y1 = boundingRect().y() + (boundingRect().height() / 2) - 10;
         updatePropertyList(x1, y1);
     } else {
-        updatePropertyList(middle.x() / 2, middle.y());
-    }
-    if (_pointer->isVisible() == true) {
+        updatePropertyList(middle.x(), middle.y());
+    } if (_pointer->isVisible() == true) {
         this->show();
+        QMap<QString, QGraphicsSimpleTextItem*>::const_iterator iter = _propertyValues.constBegin();
+        while (iter != _propertyValues.constEnd()) {
+            (*iter)->setVisible(true);
+            ++iter;
+        }
+    } else {
+        this->hide();
+        QMap<QString, QGraphicsSimpleTextItem*>::const_iterator iter = _propertyValues.constBegin();
+        while (iter != _propertyValues.constEnd()) {
+            (*iter)->setVisible(false);
+            ++iter;
+        }
     }
     update();
 }
@@ -144,7 +153,6 @@ void PointerItem::updatePropertyList(qreal x, qreal y) {
         offset += 20;
     }
 }
-
 
 void PointerItem::registerProperty(QString name)
 {
@@ -191,7 +199,6 @@ QGraphicsItem* PointerItem::propertyListItem() const
 {
     return _item;
 }
-
 
 void PointerItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {

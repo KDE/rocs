@@ -59,15 +59,21 @@ QVariant GraphPropertiesModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    if (role != Qt::DisplayRole && role != Qt::EditRole) {
-        return QVariant();
+    if (role == Qt::DisplayRole) {
+        const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
+        return   (index.column() == 0) ? propertyName
+           : (index.column() == 1) ? _dataSource->property(propertyName)
+           : QVariant();
     }
 
-    const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
-
-    return   (index.column() == 0) ? propertyName
-           : (index.column() == 1) ?  _dataSource->property(propertyName)
+    // only edit value
+    if (role == Qt::EditRole) {
+        const char* propertyName = _dataSource->dynamicPropertyNames()[index.row()];
+        return  (index.column() == 1) ? _dataSource->property(propertyName)
            : QVariant();
+    }
+
+    return QVariant();
 
 }
 
@@ -121,7 +127,7 @@ void GraphPropertiesModel::setDataSource(QObject *dataSource)
 Qt::ItemFlags GraphPropertiesModel::flags(const QModelIndex &index) const
 {
     if (index.isValid()) {
-        if (index.column() != 2) {//Can't change type for now
+        if (index.column() == 1) { // only the value can be edited
             return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
         } else {
             return QAbstractItemModel::flags(index);

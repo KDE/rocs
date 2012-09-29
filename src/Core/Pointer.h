@@ -277,8 +277,34 @@ protected:
      */
     Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType = 0);
 
+    /**
+     * Factory method to create a pointer element of type \p T.
+     */
+    template<typename T>
+    static PointerPtr create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) {
+        PointerPtr pi(new T(parent, from, to, pointerType));
+        pi->setQpointer(pi);
+        pi->initialize();
+        return pi;
+    }
+
+    bool eventFilter(QObject *obj, QEvent *event);
+
 private:
+    /**
+     * \internal
+     * d-Pointer.
+     */
     boost::shared_ptr<PointerPrivate> const d;
+
+    /**
+     * \internal
+     * Set q-pointer in private data object.
+     */
+    void setQpointer(PointerPtr q);
+
+    void initialize();
+
 };
 
 #endif

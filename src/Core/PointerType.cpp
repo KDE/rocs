@@ -20,6 +20,7 @@
 #include "PointerType.h"
 #include "DataStructure.h"
 #include "Pointer.h"
+#include <KDebug>
 #include <boost/weak_ptr.hpp>
 
 
@@ -154,6 +155,7 @@ void PointerType::removeProperty(QString name)
 void PointerType::renameProperty(QString oldName, QString newName)
 {
     if (d->_propertyList.contains(newName)) {
+        kWarning() << "Property name was not changed: new name already exists";
         return;
     }
     int index = d->_propertyDisplayList.indexOf(oldName);
