@@ -62,6 +62,6 @@ endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_subdirectory(RocsCore)
 add_subdirectory(VisualEditor)
-add_subdirectory(src)
+add_subdirectory(App)
 add_subdirectory(graphics)
 add_subdirectory(doc)
