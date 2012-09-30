@@ -37,6 +37,7 @@ class DataStructurePluginInterface;
 class DataStructure;
 class QtScriptBackend;
 class DocumentPrivate;
+class QSvgRenderer;
 
 class ROCSLIB_EXPORT Document : public QObject
 {
@@ -60,6 +61,10 @@ public:
     ~Document();
 
     bool isModified() const;
+
+    static QSvgRenderer* sharedRenderer(QString iconPackage);
+    static QSvgRenderer* registerSharedRenderer(QString iconPackage);
+    static void removeSharedRenderer(QString iconPackage);
 
     void setName(const QString& name);
     QString name() const;
@@ -85,8 +90,6 @@ public:
      * Set file path used for saving.
      */
     void setFileUrl(KUrl fileUrl);
-
-    void loadFromInternalFormat(const KUrl& fileUrl);
 
     QtScriptBackend * engineBackend() const;
     QList< DataStructurePtr >& dataStructures() const;
@@ -226,7 +229,7 @@ signals:
 
 private:
     boost::shared_ptr<DocumentPrivate> d;
-    bool saveAsInternalFormat(const QString& filename);
+    static QMap<QString, QSvgRenderer*> _sharedRenderers;
 };
 
 #endif

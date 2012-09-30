@@ -272,7 +272,7 @@ void DataTypePage::setCurrentType(int index)
         svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
         QXmlStreamReader reader(&svgFile);
-        QSvgRenderer *renderer = DataItem::sharedRenderer(svgFile.fileName());
+        QSvgRenderer *renderer = Document::sharedRenderer(svgFile.fileName());
 
         while (!reader.atEnd()) {
             reader.readNext();

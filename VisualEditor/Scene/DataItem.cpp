@@ -31,30 +31,6 @@
 #include <QSvgRenderer>
 #include <boost/concept_check.hpp>
 
-QMap<QString, QSvgRenderer*> DataItem::_sharedRenderers;
-
-QSvgRenderer* DataItem::sharedRenderer(QString iconPackage)
-{
-    return _sharedRenderers.value(iconPackage);
-}
-
-
-QSvgRenderer* DataItem::registerSharedRenderer(QString iconPackage)
-{
-    if (!_sharedRenderers.contains(iconPackage)) {
-        QSvgRenderer *z = new QSvgRenderer(iconPackage);
-        _sharedRenderers.insert(iconPackage, z);
-    }
-    return _sharedRenderers.value(iconPackage);
-}
-
-
-void DataItem::removeSharedRenderer(QString iconPackage)
-{
-    _sharedRenderers.value(iconPackage)->deleteLater();
-    _sharedRenderers.remove(iconPackage);
-}
-
 
 DataItem::DataItem(DataPtr n)
     : QGraphicsSvgItem(0)
@@ -138,13 +114,7 @@ void DataItem::updateSize()
 void DataItem::updateRenderer()
 {
     QString iconPackage = _data->dataStructure()->document()->iconPackage();
-    if (_sharedRenderers.count(iconPackage) == 0 || !_sharedRenderers.contains(iconPackage)) {
-        QSvgRenderer *z = new QSvgRenderer(iconPackage);
-        _sharedRenderers.insert(iconPackage, z);
-        setSharedRenderer(z);
-    } else {
-        setSharedRenderer(_sharedRenderers.value(iconPackage));
-    }
+    setSharedRenderer(Document::sharedRenderer(iconPackage));
 }
 
 void DataItem::updateIcon()

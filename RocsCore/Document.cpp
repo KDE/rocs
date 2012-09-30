@@ -39,6 +39,7 @@
 #include "DataStructurePluginManager.h"
 #include "DataStructurePluginInterface.h"
 #include <KStandardDirs>
+#include <QSvgRenderer>
 
 class DocumentPrivate
 {
@@ -68,6 +69,35 @@ public:
     QString _iconPackage;   // available icons for data types
 };
 
+
+QMap<QString, QSvgRenderer*> Document::_sharedRenderers;
+
+QSvgRenderer* Document::sharedRenderer(QString iconPackage)
+{
+    if (_sharedRenderers.count(iconPackage) == 0 || !_sharedRenderers.contains(iconPackage)) {
+        registerSharedRenderer(iconPackage);
+    }
+    return _sharedRenderers.value(iconPackage);
+}
+
+
+QSvgRenderer* Document::registerSharedRenderer(QString iconPackage)
+{
+    if (!_sharedRenderers.contains(iconPackage)) {
+        QSvgRenderer *z = new QSvgRenderer(iconPackage);
+        _sharedRenderers.insert(iconPackage, z);
+    }
+    return _sharedRenderers.value(iconPackage);
+}
+
+
+void Document::removeSharedRenderer(QString iconPackage)
+{
+    _sharedRenderers.value(iconPackage)->deleteLater();
+    _sharedRenderers.remove(iconPackage);
+}
+
+
 Document::Document(const QString& name, qreal left, qreal right, qreal top, qreal bottom, QObject *parent)
     : QObject(parent), d(new DocumentPrivate())
 {
@@ -83,11 +113,10 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_modified = false;
 
-// FIXME
-//     d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
-//     if (!DataItem::sharedRenderer(d->_iconPackage)) {
-//          DataItem::registerSharedRenderer(d->_iconPackage);
-//     }
+    d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
+    if (!Document::sharedRenderer(d->_iconPackage)) {
+         Document::registerSharedRenderer(d->_iconPackage);
+    }
 
     // default types
     d->_dataTypes.insert(0, DataType::create(this, 0));
@@ -116,11 +145,10 @@ Document::Document(const Document& gd)
     d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
     d->_engineBackend = new QtScriptBackend(this);
 
-//FIXME
-//     d->_iconPackage = gd.iconPackage();
-//     if (!DataItem::sharedRenderer(d->_iconPackage)) {
-//          DataItem::registerSharedRenderer(d->_iconPackage);
-//     }
+    d->_iconPackage = gd.iconPackage();
+    if (!Document::sharedRenderer(d->_iconPackage)) {
+         Document::registerSharedRenderer(d->_iconPackage);
+    }
 
     // default types
     //FIXME add types from former document

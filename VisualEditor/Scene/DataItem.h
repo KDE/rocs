@@ -44,9 +44,6 @@ public:
     DataPtr data() const {
         return _data;
     }
-    static QSvgRenderer* sharedRenderer(QString iconPackage);
-    static QSvgRenderer* registerSharedRenderer(QString iconPackage);
-    static void removeSharedRenderer(QString iconPackage);
 
     /**
      * \return the graphics item to be displayed at the scene
@@ -68,7 +65,6 @@ private slots:
     void removeProperty(QString name);
 
 private:
-    static QMap<QString, QSvgRenderer*> _sharedRenderers;
     DataPtr _data;
     QMap<QString, QGraphicsSimpleTextItem*> _propertyValues;
     QGraphicsColorizeEffect *_colorizer;
