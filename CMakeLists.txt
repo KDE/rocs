@@ -54,6 +54,18 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
 )
 
+
+
+# Allow disabling building of optional graph file backands
+option(ROCS_BUILD_LOADSAVE "ROCS_BUILD_LOADSAVE" ON)
+macro_log_feature(
+    ROCS_BUILD_LOADSAVE
+    "Graph File Plugins"
+    "Building of extra graph file plugins is disabled."
+    "edu.kde.org/rocs"
+    FALSE
+    )
+
 # feature log
 macro_log_feature(Boost_FOUND "Boost C++ Libraries" "Required to build Rocs" "http://www.boost.org" TRUE "1.43" "")
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")

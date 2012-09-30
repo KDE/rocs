@@ -18,7 +18,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-
 # Prepare library.
 set( rocs_core_SRCS
     DataType.cpp
@@ -87,17 +86,7 @@ install( FILES
 )
 
 add_subdirectory(DataStructures)
-
-#### Build Load/Save plugins.
-if (ROCS_BUILD_LOADSAVE)
-    add_subdirectory( LoadSave )
-else (ROCS_BUILD_LOADSAVE)
-    message("-----------------------------------------------------------------")
-    message("                          ATTENTION                              ")
-    message("     The build and install of Load/Save plugins are DISABLED     ")
-    message("    To reactivate it, set the option ROCS_BUILD_LOADSAVE to on   ")
-    message("-----------------------------------------------------------------")
-endif(ROCS_BUILD_LOADSAVE)
+add_subdirectory(LoadSave)
 
 install( FILES
     RocsDataStructurePlugin.desktop
@@ -109,5 +98,5 @@ install( FILES
 # Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
     enable_testing()
-    add_subdirectory( Tests )
+    add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)

@@ -26,9 +26,6 @@ set(ROCS_VERSION_PATCH 70)
 
 configure_file( "${rocs_SOURCE_DIR}/rocsversion.h.cmake" "${rocs_BINARY_DIR}/rocsversion.h" @ONLY )
 
-#Sice building some load/save plugins can take a long time, you can disable it.
-option(ROCS_BUILD_LOADSAVE "ROCS_BUILD_LOADSAVE" ON)
-
 include_directories(
     ${KDE4_INCLUDES}
     ${QT_INCLUDES}
