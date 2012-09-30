@@ -171,19 +171,6 @@ QtScriptBackend::QtScriptBackend(QObject* parent): QObject(parent)
     _runningTool = false;
 }
 
-
-void QtScriptBackend::runTool(ToolsPluginInterface * plugin, Document *graphs)
-{
-//FIXME
-//     _runningTool = true;
-//     _document = graphs;
-//     _script = plugin->run(graphs);
-//     if (!_script.isEmpty()) {
-//         execute();
-//     }
-//     _runningTool = false;
-}
-
 void QtScriptBackend::setScript(const QString& s, Document *graphs)
 {
     _script = s;

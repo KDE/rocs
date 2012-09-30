@@ -76,12 +76,8 @@ public slots:
     void executeStep();
     void continueExecutionStep();
 
-    /** run a tool plugin in graph and later run it resulting script.*/
-    void runTool(ToolsPluginInterface * plugin, Document *document);
-
 
     /** abort script evaluation. In case of a too is running, stop will not stop tool. But the script resulting from tool will not be runned.
-
     */
     void stop();
 
