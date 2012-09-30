@@ -65,8 +65,8 @@ set( rocscore_LIB_HDRS
     DataStructurePluginInterface.h
     DataStructurePluginManager.h
 
-    GraphFileBackendManager.h
-    GraphFilePluginInterface.h
+    LoadSave/GraphFileBackendManager.h
+    LoadSave/GraphFilePluginInterface.h
 
     Modifiers/Topology.h
 )
