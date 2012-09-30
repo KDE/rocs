@@ -104,13 +104,11 @@ install( FILES ${rocsvisualeditor_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/
 
 ################## INSTALLS ##########################
 
-# install( FILES
-#     RocsDataStructurePlugin.desktop
-#     LoadSave/RocsGraphFilePlugin.desktop
-#     DESTINATION
-#     ${SERVICETYPES_INSTALL_DIR}
-# )
-
+install( FILES
+    Tools/RocsToolsPlugin.desktop
+    DESTINATION
+    ${SERVICETYPES_INSTALL_DIR}
+)
 
 # Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)

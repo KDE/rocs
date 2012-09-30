@@ -99,6 +99,13 @@ else (ROCS_BUILD_LOADSAVE)
     message("-----------------------------------------------------------------")
 endif(ROCS_BUILD_LOADSAVE)
 
+install( FILES
+    RocsDataStructurePlugin.desktop
+    LoadSave/RocsGraphFilePlugin.desktop
+    DESTINATION
+    ${SERVICETYPES_INSTALL_DIR}
+)
+
 # Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
     enable_testing()

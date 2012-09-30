@@ -110,14 +110,6 @@ install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs  )
 install( FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 install( FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
 
-install( FILES
-    Core/RocsDataStructurePlugin.desktop
-    Plugins/RocsToolsPlugin.desktop
-    LoadSave/RocsGraphFilePlugin.desktop
-    DESTINATION
-    ${SERVICETYPES_INSTALL_DIR}
-)
-
 add_subdirectory( Scripts )
 
 # Build Tests if KDE_TEST is on
