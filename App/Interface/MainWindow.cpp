@@ -249,23 +249,26 @@ QWidget* MainWindow::setupScriptPanel()
     _txtDebug = new KTextBrowser(this);
     _txtOutput = new KTextBrowser(this);
 
-    QStackedWidget *stackedListing = new QStackedWidget;
-    stackedListing->addWidget(_txtOutput);
-    stackedListing->addWidget(_txtDebug);
+    _scriptOutputs = new QStackedWidget;
+    _scriptOutputs->addWidget(_txtOutput);
+    _scriptOutputs->addWidget(_txtDebug);
 
-    _selectListing = new QComboBox;
-    _selectListing->addItem(KIcon("accessories-text-editor"), i18nc("@item:inlistbox Select output", "Program Messages"));
-    _selectListing->addItem(KIcon("tools-report-bug"), i18nc("@item:inlistbox Select output", "Debug Messages"));
+    KPushButton* buttonEnableDebugOuput = new KPushButton(this);
+    buttonEnableDebugOuput->setIcon(KIcon("tools-report-bug"));
+    buttonEnableDebugOuput->setFlat(true);
+    buttonEnableDebugOuput->setCheckable(true);
+    buttonEnableDebugOuput->setFixedWidth(24);
+    buttonEnableDebugOuput->setToolTip(i18nc("@info:tooltip", "Display debug messages."));
 
     QWidget *header = new QWidget(this);
     header->setLayout(new QHBoxLayout);
-    header->layout()->addWidget(new QLabel(i18nc("@label:listbox", "Select output:")));
-    header->layout()->addWidget(_selectListing);
+    header->layout()->addWidget(new QLabel(i18n("Script Output:")));
+    header->layout()->addWidget(buttonEnableDebugOuput);
 
     QWidget *listingWidget = new QWidget(this);
     listingWidget->setLayout(new QVBoxLayout);
     listingWidget->layout()->addWidget(header);
-    listingWidget->layout()->addWidget(stackedListing);
+    listingWidget->layout()->addWidget(_scriptOutputs);
 
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -301,7 +304,7 @@ QWidget* MainWindow::setupScriptPanel()
     connect(_debugScript, SIGNAL(triggered()), this, SLOT(debugScript()));
     connect(_interruptScript, SIGNAL(triggered()), this, SLOT(debugScript()));
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
-    connect(_selectListing, SIGNAL(currentIndexChanged(int)), stackedListing, SLOT(setCurrentIndex(int)));
+    connect(buttonEnableDebugOuput, SIGNAL(toggled(bool)), this, SLOT(showDebugOutput(bool)));
 
     _hScriptSplitter->addWidget(_codeEditor);
     _hScriptSplitter->addWidget(listingWidget);
@@ -1025,6 +1028,7 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     }
 
     _txtDebug->clear();
+    _txtOutput->clear();
     if (_scriptDbg) {
         _scriptDbg->detach();
         _scriptDbg->deleteLater();
@@ -1118,9 +1122,13 @@ void MainWindow::disableStopAction()
     _stopScript->setEnabled(false);
 }
 
-void MainWindow::showDebugOutput()
+void MainWindow::showDebugOutput(bool show)
 {
-    _selectListing->setCurrentIndex(1);
+    if (show) {
+        _scriptOutputs->setCurrentIndex(1);
+    } else {
+        _scriptOutputs->setCurrentIndex(0);
+    }
 }
 
 void MainWindow::outputString(const QString& s)

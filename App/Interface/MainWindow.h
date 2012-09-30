@@ -51,6 +51,7 @@ class ToolsPluginInterface;
 class QCloseEvent;
 class QComboBox;
 class QToolButton;
+class QStackedWidget;
 class KActionMenu;
 
 #ifndef USING_QTSCRIPT
@@ -220,8 +221,9 @@ public slots:
     void setupDocumentsList();
     void disableStopAction();
     void enableStopAction();
+
     /** opens debug output listing **/
-    void showDebugOutput();
+    void showDebugOutput(bool show);
 
     /**
      * Show button to execute script in debug mode.
@@ -250,6 +252,7 @@ private: // Variables.
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
     TabWidget *_bottomTabs;
     CodeEditor *_codeEditor;
+    QStackedWidget * _scriptOutputs;
     KTextBrowser *_txtDebug; //! this is the debug view.
     KTextBrowser *_txtOutput;
 

@@ -111,6 +111,7 @@ QString QtScriptBackend::execute()
     if (_engine) {
         _engine->popContext();
     }
+    output(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
     emit finished();
     return result;
 }
@@ -150,6 +151,7 @@ void QtScriptBackend::executeStep()
     }
 
     if (!_engine || !_engine->isEvaluating()) {
+        output(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
         emit finished();
     }
 }
@@ -209,13 +211,13 @@ void QtScriptBackend::loadFile(const QString& file)
 
 void QtScriptBackend::debug(const QString& str)
 {
-    emit sendDebug(str);
+    emit sendDebug("<b>" + str + "</b>");
 }
 
 void QtScriptBackend::output(const QString& str)
 {
     emit sendOutput(str);
-    emit sendDebug("<b>" + str + "</b>");
+    emit sendDebug(str);
 }
 
 void QtScriptBackend::continueExecutionStep()
@@ -224,6 +226,7 @@ void QtScriptBackend::continueExecutionStep()
         _engineSteps->action(QScriptEngineDebugger::ContinueAction)->trigger();
     }
 }
+
 void QtScriptBackend::include(const QString & includedFile)
 {
     QString fileName = m_includeManager.seekFile(includedFile);
