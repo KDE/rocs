@@ -447,13 +447,15 @@ void DataStructure::remove(DataPtr n)
     bool bottom = false;
     bool right = false;
 
-//FIXME give signals instead of modifying
-//     if (doc != 0) {
-//         if (n->x() < doc->left() + 2 * GraphScene::kBORDER)      left = true;
-//         if (n->x() > doc->right() - 2 * GraphScene::kBORDER)     right = true;
-//         if (n->y() < doc->top() + 2 * GraphScene::kBORDER)       top = true;
-//         if (n->y() > doc->bottom() - 2 * GraphScene::kBORDER)    bottom = true;
-//     }
+    qreal xCenter = (doc->left() + doc->right() )/2;
+    qreal yCenter = (doc->top() + doc->bottom() )/2;
+
+    if (doc != 0) {
+        if (n->x() < xCenter)      left = true;
+        if (n->x() > xCenter)     right = true;
+        if (n->y() < yCenter)       top = true;
+        if (n->y() > yCenter)    bottom = true;
+    }
 
     // find data among all types and delete it
     //TODO improved performance: use type information to access list

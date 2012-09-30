@@ -46,6 +46,8 @@ class DocumentPrivate
 public:
     DocumentPrivate() {}
 
+    enum borderSize { SceneBorder = 50 };
+
     QString _lastSavedDocumentPath;
     QString _name;
     qreal _left;
@@ -359,7 +361,6 @@ QRectF Document::size()
 
 bool Document::isPointAtDocument(qreal x, qreal y)  const
 {
-
     if (x < d->_left)      return false;
     if (x > d->_right)     return false;
     if (y < d->_top)       return false;
@@ -392,97 +393,95 @@ void Document::changeMinimalSize(qreal width, qreal height)
 
 void Document::resizeDocumentIncrease()
 {
-//FIXME
-//     int elements = dataStructures().size();
-//     for (int i = 0; i < elements; i++) {
-//         bool resizeDocument = false;
-//         foreach(DataPtr n,  dataStructures().at(i)->dataList()) {
-//             if (n->x() < d->_left + GraphScene::kBORDER) {
-//                 setLeft(d->_left - GraphScene::kBORDER);
-//                 resizeDocument = true;
-//             }
-//             if (n->x() > d->_right - GraphScene::kBORDER) {
-//                 setRight(d->_right + GraphScene::kBORDER);
-//                 resizeDocument = true;
-//             }
-//             if (n->y() < d->_top + GraphScene::kBORDER) {
-//                 setTop(d->_top - GraphScene::kBORDER);
-//                 resizeDocument = true;
-//             }
-//             if (n->y() > d->_bottom - GraphScene::kBORDER) {
-//                 setBottom(d->_bottom + GraphScene::kBORDER);
-//                 resizeDocument = true;
-//             }
-//         }
-//         if (resizeDocument) {
-//             emit resized();
-//         }
-//     }
+    int elements = dataStructures().size();
+    for (int i = 0; i < elements; i++) {
+        bool resizeDocument = false;
+        foreach(DataPtr n,  dataStructures().at(i)->dataList()) {
+            if (n->x() < d->_left + DocumentPrivate::SceneBorder) {
+                setLeft(d->_left - DocumentPrivate::SceneBorder);
+                resizeDocument = true;
+            }
+            if (n->x() > d->_right - DocumentPrivate::SceneBorder) {
+                setRight(d->_right + DocumentPrivate::SceneBorder);
+                resizeDocument = true;
+            }
+            if (n->y() < d->_top + DocumentPrivate::SceneBorder) {
+                setTop(d->_top - DocumentPrivate::SceneBorder);
+                resizeDocument = true;
+            }
+            if (n->y() > d->_bottom - DocumentPrivate::SceneBorder) {
+                setBottom(d->_bottom + DocumentPrivate::SceneBorder);
+                resizeDocument = true;
+            }
+        }
+        if (resizeDocument) {
+            emit resized();
+        }
+    }
 }
 
 void Document::resizeDocumentBorder(Document::Border orientation)
 {
-//FIXME
-//     bool empty = true;
-//     int elements = dataStructures().size();
-//
-//     // scans doubled border of specified size: if empty or not
-//     for (int i = 0; i < elements; i++) {
-//         foreach(DataPtr n,  dataStructures().at(i)->dataList()) {
-//             switch (orientation) {
-//             case BorderLeft: {
-//                 if (n != 0 && n->x() < d->_left + GraphScene::kBORDER * 2) empty = false;
-//                 break;
-//             }
-//             case BorderRight: {
-//                 if (n != 0 && n->x() > d->_right - GraphScene::kBORDER * 2) empty = false;
-//                 break;
-//             }
-//             case BorderTop: {
-//                 if (n != 0 && n->y() < d->_top + GraphScene::kBORDER * 2) empty = false;
-//                 break;
-//             }
-//             case BorderBottom: {
-//                 if (n != 0 && n->y() > d->_bottom - GraphScene::kBORDER * 2) empty = false;
-//                 break;
-//             }
-//             }
-//         }
-//     }
-//
-//     //TODO connect to graphvisualeditor-size
-//     if (empty == true) {
-//         switch (orientation) {
-//         case BorderLeft: {
-//             if (d->_right - d->_left < GraphScene::kBORDER * 4)
-//                 return;
-//             setLeft(d->_left + GraphScene::kBORDER);
-//             emit resized();
-//             break;
-//         }
-//         case BorderRight: {
-//             if (d->_right - d->_left < GraphScene::kBORDER * 4)
-//                 return;
-//             setRight(d->_right - GraphScene::kBORDER);
-//             emit resized();
-//             break;
-//         }
-//         case BorderTop: {
-//             if (d->_bottom - d->_top < GraphScene::kBORDER * 4)
-//                 return;
-//             setTop(d->_top + GraphScene::kBORDER);
-//             emit resized();
-//             break;
-//         }
-//         case BorderBottom: {
-//             if (d->_bottom - d->_top < GraphScene::kBORDER * 4)
-//                 return;
-//             setBottom(d->_bottom - GraphScene::kBORDER);
-//             emit resized();
-//             break;
-//         }
-//         }
-//     }
+    bool empty = true;
+    int elements = dataStructures().size();
+
+    // scans doubled border of specified size: if empty or not
+    for (int i = 0; i < elements; i++) {
+        foreach(DataPtr n,  dataStructures().at(i)->dataList()) {
+            switch (orientation) {
+            case BorderLeft: {
+                if (n != 0 && n->x() < d->_left + DocumentPrivate::SceneBorder * 2) empty = false;
+                break;
+            }
+            case BorderRight: {
+                if (n != 0 && n->x() > d->_right - DocumentPrivate::SceneBorder * 2) empty = false;
+                break;
+            }
+            case BorderTop: {
+                if (n != 0 && n->y() < d->_top + DocumentPrivate::SceneBorder * 2) empty = false;
+                break;
+            }
+            case BorderBottom: {
+                if (n != 0 && n->y() > d->_bottom - DocumentPrivate::SceneBorder * 2) empty = false;
+                break;
+            }
+            }
+        }
+    }
+
+    //TODO connect to graphvisualeditor-size
+    if (empty == true) {
+        switch (orientation) {
+        case BorderLeft: {
+            if (d->_right - d->_left < DocumentPrivate::SceneBorder * 4)
+                return;
+            setLeft(d->_left + DocumentPrivate::SceneBorder);
+            emit resized();
+            break;
+        }
+        case BorderRight: {
+            if (d->_right - d->_left < DocumentPrivate::SceneBorder * 4)
+                return;
+            setRight(d->_right - DocumentPrivate::SceneBorder);
+            emit resized();
+            break;
+        }
+        case BorderTop: {
+            if (d->_bottom - d->_top < DocumentPrivate::SceneBorder * 4)
+                return;
+            setTop(d->_top + DocumentPrivate::SceneBorder);
+            emit resized();
+            break;
+        }
+        case BorderBottom: {
+            if (d->_bottom - d->_top < DocumentPrivate::SceneBorder * 4)
+                return;
+            setBottom(d->_bottom - DocumentPrivate::SceneBorder);
+            emit resized();
+            break;
+        }
+        }
+    }
 }
 
 bool Document::isPointAtDocument(QPointF point)  const
