@@ -53,7 +53,7 @@ target_link_libraries( rocscore
     ${QT_QTSCRIPTTOOLS_LIBRARY}
 )
 
-set( rocslib_LIB_HDRS
+set( rocscore_LIB_HDRS
     DynamicPropertiesList.h
     Data.h
     DataStructure.h

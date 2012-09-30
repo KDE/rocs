@@ -25,7 +25,7 @@ set(TestKmlFileFormatPlugin_SRCS
 )
 kde4_add_unit_test(TestKmlFileFormatPlugin ${TestKmlFileFormatPlugin_SRCS})
 target_link_libraries(TestKmlFileFormatPlugin
-    rocslib
+    rocscore
     rocs_GraphStructure
     ${QT_QTXML_LIBRARY}
     ${QT_QTTEST_LIBRARY}

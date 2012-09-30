@@ -26,7 +26,7 @@ set (TestLinkedListStructure_SRCS
 )
 kde4_add_executable(TestLinkedListStructure ${TestLinkedListStructure_SRCS} )
 target_link_libraries( TestLinkedListStructure
-    rocslib
+    rocscore
     rocs_ListStructure
     ${KDE4_KROSSUI_LIBS}
     ${QT_QTGUI_LIBRARY}

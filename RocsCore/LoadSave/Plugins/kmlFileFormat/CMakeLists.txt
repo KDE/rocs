@@ -32,7 +32,7 @@ set(kmlFileFormatPlugin_SRCS
 kde4_add_plugin(rocs_kmlfileformat ${kmlFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_kmlfileformat
-    rocslib
+    rocscore
     rocs_GraphStructure
     ${QT_QTXML_LIBRARY}
     ${KDE4_KDEUI_LIBS}

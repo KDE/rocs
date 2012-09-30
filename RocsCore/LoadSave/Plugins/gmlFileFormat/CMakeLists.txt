@@ -33,7 +33,7 @@ set(gmlFileFormatPlugin_SRCS
 kde4_add_plugin(rocs_gmlfileformat ${gmlFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_gmlfileformat
-    rocslib
+    rocscore
     rocs_GraphStructure
     ${KDE4_KDEUI_LIBS}
 )
