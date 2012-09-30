@@ -29,7 +29,7 @@
 
 #include "rocsversion.h"
 #include "Interface/MainWindow.h"
-#include "Core/DataStructurePluginManager.h"
+#include <DataStructurePluginManager.h>
 
 
 int main(int argc, char *argv[])

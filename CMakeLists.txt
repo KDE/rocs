@@ -34,6 +34,16 @@ include(KDE4Defaults)
 remove_definitions(-DQT_NO_STL)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
 
+# Rocs include dirs
+set (ROCSCORE_INCLUDES
+    "${CMAKE_CURRENT_SOURCE_DIR}/RocsCore/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/RocsCore/LoadSave/"
+)
+
+set (ROCSVISUALEDITOR_INCLUDES
+    "${CMAKE_CURRENT_SOURCE_DIR}/VisualEditor/"
+)
+
 if(${CMAKE_BUILD_TYPE} MATCHES coverage)
     set (CMAKE_CXX_COMPILER cov++)
 endif()
@@ -50,6 +60,8 @@ if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     macro_display_feature_log()
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
+add_subdirectory(RocsCore)
+add_subdirectory(VisualEditor)
 add_subdirectory(src)
 add_subdirectory(graphics)
 add_subdirectory(doc)

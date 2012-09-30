@@ -57,10 +57,10 @@
 // UI RELATED INCLUDES
 #include "DocumentTypesWidget.h"
 #include "GraphVisualEditor.h"
-#include "GraphScene.h"
+#include "Scene/GraphScene.h"
 #include "CodeEditor.h"
 #include "TabWidget.h"
-#include "GraphicsLayout.h"
+#include "Scene/GraphicsLayout.h"
 
 // Graph Related Includes
 #include "Document.h"
@@ -70,14 +70,15 @@
 #include "settings.h"
 
 // Action Related Includes
-#include "AbstractAction.h"
-#include "AddDataHandAction.h"
-#include "AddConnectionHandAction.h"
-#include "SelectMoveHandAction.h"
-#include "DeleteHandAction.h"
-#include "AlignAction.h"
-#include "ZoomAction.h"
-#include "DeleteAction.h"
+#include "Actions/AbstractAction.h"
+#include "Actions/AddDataHandAction.h"
+#include "Actions/AddConnectionHandAction.h"
+#include "Actions/SelectMoveHandAction.h"
+#include "Actions/DeleteHandAction.h"
+#include "Actions/AlignAction.h"
+#include "Actions/ZoomAction.h"
+#include "Actions/DeleteAction.h"
+#include "Actions/PropertiesDialogAction.h"
 
 #include <KNS3/DownloadDialog>
 #include <knewstuff3/uploaddialog.h>
@@ -90,7 +91,6 @@
 #include <ktexteditor/document.h>
 #include <QActionGroup>
 
-#include "../Plugins/PluginManager.h"
 #include <QMutexLocker>
 #include <QFormLayout>
 #include <QScriptEngineDebugger>
@@ -103,7 +103,7 @@
 #include "DocumentManager.h"
 #include "PossibleIncludes.h"
 #include "LoadedPluginsDialog.h"
-#include <PropertiesDialogAction.h>
+#include "Tools/ToolManager.h"
 
 
 MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
@@ -463,7 +463,7 @@ void MainWindow::setupToolsPluginsAction()
     }
 
     foreach(QAction* action, _toolsPlugins) {
-        ToolsPluginInterface *plugin = PluginManager::instance()->toolPlugins().at(action->data().toInt());
+        ToolsPluginInterface *plugin = ToolManager::instance()->toolPlugins().at(action->data().toInt());
         action->setEnabled(
                 DocumentManager::self()->activeDocument() &&
                 plugin->supportedDataStructures().contains(DocumentManager::self()->activeDocument()->dataStructureInternalName())
@@ -473,7 +473,7 @@ void MainWindow::setupToolsPluginsAction()
 
 void MainWindow::createToolsPluginsAction(){
     QAction* action = 0;
-    QList<ToolsPluginInterface*> avaliablePlugins =  PluginManager::instance()->toolPlugins();
+    QList<ToolsPluginInterface*> avaliablePlugins =  ToolManager::instance()->toolPlugins();
     int count = 0;
     foreach(ToolsPluginInterface * plugin, avaliablePlugins) {
         action = new KAction(plugin->displayName(), this);
@@ -996,7 +996,7 @@ void MainWindow::runToolPlugin()
     if (! action) {
         return;
     }
-    if (ToolsPluginInterface *plugin =  PluginManager::instance()->toolPlugins().value(action->data().toInt())) {
+    if (ToolsPluginInterface *plugin =  ToolManager::instance()->toolPlugins().value(action->data().toInt())) {
         emit runTool(plugin, DocumentManager::self()->activeDocument());
     }
 }

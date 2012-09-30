@@ -17,11 +17,11 @@
 */
 
 #include "ConfigureDefaultProperties.h"
-#include "ui_ConfigureDefaultProperties.h"
 #include <settings.h>
 #include "GraphVisualEditor.h"
-#include "GraphicsLayout.h"
+#include "Scene/GraphicsLayout.h"
 
+#include "ui_ConfigureDefaultProperties.h"
 
 ConfigureDefaultProperties::ConfigureDefaultProperties(QWidget* parent) :
     QWidget(parent),

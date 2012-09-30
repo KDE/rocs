@@ -33,7 +33,8 @@ include_directories(
     ${KDE4_INCLUDES}
     ${QT_INCLUDES}
     ${KROSS_INCLUDES}
-    Core/
+    ${ROCSCORE_INCLUDES}
+    ${ROCSVISUALEDITOR_INCLUDES}
     Actions/
     GraphicsItem/
     Interface/
@@ -44,92 +45,8 @@ include_directories(
     Scripts/
 )
 
-
-# Prepare library.
-set( rocs_core_SRCS
-    Core/DataType.cpp
-    Core/PointerType.cpp
-    Core/Data.cpp
-    Core/DataStructure.cpp
-    Core/Document.cpp
-    Core/Group.cpp
-    Core/Project.cpp
-    Core/DataStructurePluginInterface.cpp
-    Core/DataStructurePluginManager.cpp
-    Core/DocumentManager.cpp
-    Core/DynamicPropertiesList.cpp
-    Core/KrossBackend.cpp
-    Core/Pointer.cpp
-    Core/QtScriptBackend.cpp
-    Core/Modifiers/Topology.cpp
-    Core/Modifiers/ValueModifier.cpp
-
-    Plugins/PluginManager.cpp
-    Plugins/ToolsPluginInterface.cpp
-
-    LoadSave/GraphFileBackendManager.cpp
-    LoadSave/GraphFilePluginInterface.cpp
-    LoadSave/RocsGraphFileFormatPlugin.cpp
-
-    GraphicsItem/GraphicsLayout.cpp
-    GraphicsItem/DataItem.cpp
-    GraphicsItem/PointerItem.cpp
-
-    Scripts/IncludeManager.cpp
-)
-
-kde4_add_library( rocslib  SHARED ${rocs_core_SRCS} )
-
-target_link_libraries( rocslib
-    ${KDE4_KROSSCORE_LIBS}
-    ${KDE4_KIO_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${QT_QTSCRIPTTOOLS_LIBRARY}
-)
-
-set( rocslib_LIB_HDRS
-    Core/DynamicPropertiesList.h
-    Core/Data.h
-    Core/DataStructure.h
-    Core/Document.h
-    Core/KrossBackend.h
-    Core/Pointer.h
-    Core/QtScriptBackend.h
-    Core/rocslib_export.h
-    Core/Rocs_Typedefs.h
-    Core/DataStructurePluginInterface.h
-    Core/DataStructurePluginManager.h
-
-    Core/Modifiers/Topology.h
-
-    LoadSave/GraphFilePluginInterface.h
-    Plugins/PluginManager.h
-    Plugins/ToolsPluginInterface.h
-
-    GraphicsItem/DataItem.h
-    GraphicsItem/PointerItem.h
-    GraphicsItem/GraphicsLayout.h
-
-    Scripts/IncludeManager.h
-)
-
-set_target_properties( rocslib  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-
-install( TARGETS rocslib  ${INSTALL_TARGETS_DEFAULT_ARGS} )
-install( FILES ${rocslib_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel )
-
-
 set( rocs_actions_SRCS
-    Actions/AbstractAction.cpp
-    Actions/AddConnectionHandAction.cpp
-    Actions/AddDataAction.cpp
-    Actions/AlignAction.cpp
-    Actions/DeleteAction.cpp
-    Actions/ZoomAction.cpp
-    Actions/AddDataHandAction.cpp
-    Actions/DeleteHandAction.cpp
-    Actions/AssignValueAction.cpp
-    Actions/SelectMoveHandAction.cpp
+
     Actions/PropertiesDialogAction.cpp
 )
 
@@ -140,44 +57,21 @@ set( rocs_interface_SRCS
     Interface/Separator.cpp
     Interface/TabWidget.cpp
     Interface/CodeEditor.cpp
-    Interface/ConfigureDefaultProperties.cpp
-    Interface/DataPropertiesWidget.cpp
     Interface/DocumentTypesWidget.cpp
-    Interface/DataStructurePropertiesDialog.cpp
-    Interface/DocumentPropertiesDialog.cpp
-    Interface/DataStructurePage.cpp
-    Interface/DataTypePage.cpp
+    Interface/ConfigureDefaultProperties.cpp
     Interface/LoadedPluginsDialog.cpp
-    Interface/PointerTypePage.cpp
-    Interface/PointerPropertiesWidget.cpp
-    Interface/VisualEditor/GraphScene.cpp
-    Interface/VisualEditor/GraphVisualEditor.cpp
-)
-
-set( rocs_models_SRCS
-    Models/model_GraphProperties.cpp
-)
-
-set( rocs_script_SRC
     Interface/PossibleIncludes.cpp
 )
 
 set( rocs_SRCS
     Main.cpp
-    ${rocs_actions_SRCS}
     ${rocs_interface_SRCS}
-    ${rocs_models_SRCS}
     ${rocs_script_SRC}
 )
 
 kde4_add_ui_files(
     rocs_SRCS
     Interface/DocumentTypesWidget.ui
-    Interface/DataStructurePage.ui
-    Interface/DataTypePage.ui
-    Interface/PointerTypePage.ui
-    Interface/DataPropertiesWidget.ui
-    Interface/PointerPropertiesWidget.ui
     Interface/ConfigureDefaultProperties.ui
 )
 
@@ -195,7 +89,8 @@ kde4_add_executable( rocs
 )
 
 target_link_libraries(rocs
-    rocslib
+    rocscore
+    rocsvisualeditor
     ${KDE4_KDEUI_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KROSSUI_LIBS}
@@ -223,19 +118,6 @@ install( FILES
     ${SERVICETYPES_INSTALL_DIR}
 )
 
-add_subdirectory( Plugins )
-
-#### Build Load/Save plugins.
-if (ROCS_BUILD_LOADSAVE)
-    add_subdirectory( LoadSave )
-else (ROCS_BUILD_LOADSAVE)
-    message("-----------------------------------------------------------------")
-    message("                          ATTENTION                              ")
-    message("     The build and install of Load/Save plugins are DISABLED     ")
-    message("    To reactivate it, set the option ROCS_BUILD_LOADSAVE to on   ")
-    message("-----------------------------------------------------------------")
-endif(ROCS_BUILD_LOADSAVE)
-
 add_subdirectory( Scripts )
 
 # Build Tests if KDE_TEST is on
@@ -243,4 +125,5 @@ if(KDE4_BUILD_TESTS)
     enable_testing()
     add_subdirectory( Tests )
 endif(KDE4_BUILD_TESTS)
+
 

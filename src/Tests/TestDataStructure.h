@@ -20,7 +20,7 @@
 #ifndef TESTDATASTRUCTURE_H
 #define TESTDATASTRUCTURE_H
 
-#include "Rocs_Typedefs.h"
+#include "CoreTypes.h"
 
 #include <QObject>
 #include <QVariant>

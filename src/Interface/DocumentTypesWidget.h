@@ -22,7 +22,7 @@
 #define DOCUMENTYPESWIDGET_H
 
 #include <KButtonGroup>
-#include "Rocs_Typedefs.h"
+#include "CoreTypes.h"
 #include "ui_DocumentTypesWidget.h"
 
 class Document;

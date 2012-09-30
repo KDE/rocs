@@ -31,7 +31,7 @@ set (TestDataStructure_SRCS
 )
 kde4_add_executable(TestDataStructure ${TestDataStructure_SRCS} )
 target_link_libraries( TestDataStructure
-    rocslib
+    rocscore
     ${KDE4_KROSSUI_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTTEST_LIBRARY}
@@ -47,7 +47,7 @@ set( testDynamicProperties_SRCS
 )
 kde4_add_executable(TestDynamicProperties ${testDynamicProperties_SRCS})
 target_link_libraries( TestDynamicProperties
-    rocslib
+    rocscore
     ${KDE4_KROSSUI_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTTEST_LIBRARY}
@@ -63,7 +63,7 @@ set(rocs_KCFGS ../settings.kcfgc)
 kde4_add_kcfg_files(rocs_Settings_SRCS_TEST ${rocs_KCFGS} )
 kde4_add_executable( TestIncludeManager ${test_IncludeManager_SRC} ${rocs_Settings_SRCS_TEST})
 target_link_libraries( TestIncludeManager
-    rocslib
+    rocscore
     # ${KDE4_KROSSUI_LIBS}
     ${QT_QTTEST_LIBRARY}
     ${KDE4_KDECORE_LIBS}
@@ -79,7 +79,7 @@ set (TestLoadSave_SRCS
 )
 kde4_add_executable(TestLoadSave ${TestLoadSave_SRCS} )
 target_link_libraries( TestLoadSave
-    rocslib
+    rocscore
     ${KDE4_KROSSUI_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTTEST_LIBRARY}
@@ -93,11 +93,11 @@ add_test(TestLoadSave TestLoadSave)
 set( test_Plugins_SRC TestPlugins.cpp)
 kde4_add_executable( TestPlugins ${test_Plugins_SRC})
 target_link_libraries( TestPlugins
-        rocslib
-        ${QT_QTTEST_LIBRARY}
-        ${KDE4_KDECORE_LIBS}
-        ${QT_QTSCRIPT_LIBRARY}
-        ${KDE4_KIO_LIBS}
+    rocscore
+    ${QT_QTTEST_LIBRARY}
+    ${KDE4_KDECORE_LIBS}
+    ${QT_QTSCRIPT_LIBRARY}
+    ${KDE4_KIO_LIBS}
 )
 add_test(TestPlugins TestPlugins)
 
@@ -106,10 +106,10 @@ add_test(TestPlugins TestPlugins)
 set( test_ScriptEngine_SRC TestScriptEngine.cpp)
 kde4_add_executable( TestScriptEngine ${test_ScriptEngine_SRC})
 target_link_libraries( TestScriptEngine
-        rocslib
-        ${QT_QTTEST_LIBRARY}
-        ${KDE4_KDECORE_LIBS}
-        ${QT_QTSCRIPT_LIBRARY}
-        ${KDE4_KIO_LIBS}
+    rocscore
+    ${QT_QTTEST_LIBRARY}
+    ${KDE4_KDECORE_LIBS}
+    ${QT_QTSCRIPT_LIBRARY}
+    ${KDE4_KIO_LIBS}
 )
 add_test(TestScriptEngine TestScriptEngine)

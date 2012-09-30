@@ -19,7 +19,7 @@
 #ifndef TESTLOADSAVE_H
 #define TESTLOADSAVE_H
 
-#include "Rocs_Typedefs.h"
+#include "CoreTypes.h"
 
 #include <QObject>
 #include <QVariant>

@@ -24,7 +24,7 @@
 #include "Document.h"
 #include "DataStructure.h"
 #include "DataStructurePluginInterface.h"
-#include "Rocs_Typedefs.h"
+#include "CoreTypes.h"
 #include <QDebug>
 
 void TestPlugins::inittestcase()

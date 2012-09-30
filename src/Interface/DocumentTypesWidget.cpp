@@ -25,10 +25,10 @@
 #include "DataType.h"
 #include "Pointer.h"
 #include "PointerType.h"
-#include "DataItem.h"
-#include "PointerItem.h"
+#include "Scene/DataItem.h"
+#include "Scene/PointerItem.h"
 #include "DocumentManager.h"
-#include <PropertiesDialogAction.h>
+#include "Actions/PropertiesDialogAction.h"
 
 #include <KLocale>
 #include <KDebug>
