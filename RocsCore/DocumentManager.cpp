@@ -29,6 +29,9 @@
 #include "LoadSave/GraphFileBackendManager.h"
 #include "DataStructurePluginInterface.h"
 
+// load catalog for library
+static const KCatalogLoader loader("rocscore");
+
 DocumentManager *DocumentManager::_self = 0;
 
 DocumentManager* DocumentManager::self()

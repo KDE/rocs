@@ -47,6 +47,9 @@
 #include <KPushButton>
 #include <QButtonGroup>
 
+// load catalog for library
+static const KCatalogLoader loader("rocsvisualeditor");
+
 GraphVisualEditor::GraphVisualEditor(QWidget *parent) :
     QWidget(parent)
 {
