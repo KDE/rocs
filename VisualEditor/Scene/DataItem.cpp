@@ -194,9 +194,11 @@ void DataItem::registerProperty(QString name)
     if (_propertyValues.contains(name)) {
         return;
     }
+    DataTypePtr dataType = data()->dataStructure()->document()->dataType(data()->dataType());
     _propertyValues.insert(name, new QGraphicsSimpleTextItem(data()->property(name.toStdString().c_str()).toString()));
     _propertyValues[name]->setFlags(ItemIgnoresTransformations);
     _propertyValues[name]->setFont(_font);
+    _propertyValues[name]->setVisible(dataType->isPropertyVisible(name));
     _propertyValues[name]->setZValue(zValue() + 1);
     _item->addToGroup(_propertyValues[name]);
 

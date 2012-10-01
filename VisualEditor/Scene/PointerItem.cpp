@@ -159,8 +159,10 @@ void PointerItem::registerProperty(QString name)
     if (_propertyValues.contains(name)) {
         return;
     }
+    PointerTypePtr pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
     _propertyValues.insert(name, new QGraphicsSimpleTextItem(_pointer->property(name.toStdString().c_str()).toString()));
     _propertyValues[name]->setFlags(ItemIgnoresTransformations);
+    _propertyValues[name]->setVisible(pointerType->isPropertyVisible(name));
     _propertyValues[name]->setFont(_font);
     _propertyValues[name]->setZValue(zValue() + 1);
     _item->addToGroup(_propertyValues[name]);

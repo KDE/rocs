@@ -223,7 +223,7 @@ public slots:
     void enableStopAction();
 
     /** opens debug output listing **/
-    void showDebugOutput(bool show);
+    void showDebugOutput(bool show=true);
 
     /**
      * Show button to execute script in debug mode.
@@ -253,6 +253,7 @@ private: // Variables.
     TabWidget *_bottomTabs;
     CodeEditor *_codeEditor;
     QStackedWidget * _scriptOutputs;
+    KPushButton *_buttonEnableDebugOutput;
     KTextBrowser *_txtDebug; //! this is the debug view.
     KTextBrowser *_txtOutput;
 

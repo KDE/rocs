@@ -253,17 +253,17 @@ QWidget* MainWindow::setupScriptPanel()
     _scriptOutputs->addWidget(_txtOutput);
     _scriptOutputs->addWidget(_txtDebug);
 
-    KPushButton* buttonEnableDebugOuput = new KPushButton(this);
-    buttonEnableDebugOuput->setIcon(KIcon("tools-report-bug"));
-    buttonEnableDebugOuput->setFlat(true);
-    buttonEnableDebugOuput->setCheckable(true);
-    buttonEnableDebugOuput->setFixedWidth(24);
-    buttonEnableDebugOuput->setToolTip(i18nc("@info:tooltip", "Display debug messages."));
+    _buttonEnableDebugOutput = new KPushButton(this);
+    _buttonEnableDebugOutput->setIcon(KIcon("tools-report-bug"));
+    _buttonEnableDebugOutput->setFlat(true);
+    _buttonEnableDebugOutput->setCheckable(true);
+    _buttonEnableDebugOutput->setFixedWidth(24);
+    _buttonEnableDebugOutput->setToolTip(i18nc("@info:tooltip", "Display debug messages."));
 
     QWidget *header = new QWidget(this);
     header->setLayout(new QHBoxLayout);
     header->layout()->addWidget(new QLabel(i18n("Script Output:")));
-    header->layout()->addWidget(buttonEnableDebugOuput);
+    header->layout()->addWidget(_buttonEnableDebugOutput);
 
     QWidget *listingWidget = new QWidget(this);
     listingWidget->setLayout(new QVBoxLayout);
@@ -304,7 +304,7 @@ QWidget* MainWindow::setupScriptPanel()
     connect(_debugScript, SIGNAL(triggered()), this, SLOT(debugScript()));
     connect(_interruptScript, SIGNAL(triggered()), this, SLOT(debugScript()));
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
-    connect(buttonEnableDebugOuput, SIGNAL(toggled(bool)), this, SLOT(showDebugOutput(bool)));
+    connect(_buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
 
     _hScriptSplitter->addWidget(_codeEditor);
     _hScriptSplitter->addWidget(listingWidget);
@@ -1124,6 +1124,12 @@ void MainWindow::disableStopAction()
 
 void MainWindow::showDebugOutput(bool show)
 {
+    if (show && !_buttonEnableDebugOutput->isChecked()) {
+        _buttonEnableDebugOutput->toggle();
+    }
+    if (!show && _buttonEnableDebugOutput->isChecked()) {
+        _buttonEnableDebugOutput->toggle();
+    }
     if (show) {
         _scriptOutputs->setCurrentIndex(1);
     } else {
