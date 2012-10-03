@@ -75,6 +75,9 @@ public:
 
     Qt::ItemFlags flags(const QModelIndex &index) const
     {
+        if (index.isValid() && index.column() == 2) {
+            return QAbstractItemModel::flags(index) | Qt::ItemIsUserCheckable;
+        }
         if (index.isValid()) {
             return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
         }
@@ -100,7 +103,6 @@ public:
             switch(index.column()) {
                 case 0: return _propertyList.at(index.row()); break;
                 case 1: return _dataType->propertyDefaultValue(_propertyList.at(index.row())); break;
-                case 2: return _dataType->isPropertyVisible(_propertyList.at(index.row())); break;
                 default: return QVariant();
             }
         }
@@ -108,8 +110,14 @@ public:
             switch(index.column()) {
                 case 0: return _propertyList.at(index.row()); break;
                 case 1: return _dataType->propertyDefaultValue(_propertyList.at(index.row())); break;
-                case 2: return _dataType->isPropertyVisible(_propertyList.at(index.row())); break;
                 default: return QVariant();
+            }
+        }
+        if (role == Qt::CheckStateRole && index.column() == 2) {
+            if (_dataType->isPropertyVisible(_propertyList.at(index.row()))) {
+                return QVariant(Qt::Checked);
+            } else {
+                return QVariant(Qt::Unchecked);
             }
         }
         return QVariant();
@@ -117,6 +125,15 @@ public:
 
     bool setData(const QModelIndex &index, const QVariant &value, int role)
     {
+        // checkboxes
+        if (index.isValid() && role == Qt::CheckStateRole && index.column() == 2) {
+            bool visible = _dataType->isPropertyVisible(_propertyList.at(index.row()));
+            _dataType->setPropertyVisible(_propertyList.at(index.row()), !visible);
+            emit dataChanged(index,index);
+            return true;
+        }
+
+        // QVariant
         if (index.isValid() && role == Qt::EditRole) {
             switch (index.column()) {
                 case 0: {
@@ -125,7 +142,6 @@ public:
                     break;
                     }
                 case 1: _dataType->setPropertyDefaultValue(_propertyList.at(index.row()), value); break;
-                case 2: _dataType->setPropertyVisible(_propertyList.at(index.row()), value.toBool()); break;
                 default: return false;
             }
             return true;
