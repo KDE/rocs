@@ -58,6 +58,7 @@ set( rocs_interface_SRCS
     Interface/ConfigureDefaultProperties.cpp
     Interface/LoadedPluginsDialog.cpp
     Interface/PossibleIncludes.cpp
+    Interface/ScriptOutputWidget.cpp
 )
 
 set( rocs_SRCS
@@ -70,6 +71,7 @@ kde4_add_ui_files(
     rocs_SRCS
     Interface/DocumentTypesWidget.ui
     Interface/ConfigureDefaultProperties.ui
+    Interface/ScriptOutputWidget.ui
 )
 
 # we currently only support QtScript

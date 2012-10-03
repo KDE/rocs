@@ -60,6 +60,7 @@
 #include "Scene/GraphScene.h"
 #include "CodeEditor.h"
 #include "TabWidget.h"
+#include "Interface/ScriptOutputWidget.h"
 #include "Scene/GraphicsLayout.h"
 
 // Graph Related Includes
@@ -94,6 +95,7 @@
 #include <QMutexLocker>
 #include <QFormLayout>
 #include <QScriptEngineDebugger>
+#include <boost/concept_check.hpp>
 #include "IncludeManagerSettings.h"
 #include "ConfigureDefaultProperties.h"
 #include <IncludeManager.h>
@@ -246,29 +248,7 @@ QWidget* MainWindow::setupScriptPanel()
     _hScriptSplitter->setOrientation(Qt::Horizontal);
 
     _codeEditor = new CodeEditor(this);
-    _txtDebug = new KTextBrowser(this);
-    _txtOutput = new KTextBrowser(this);
-
-    _scriptOutputs = new QStackedWidget;
-    _scriptOutputs->addWidget(_txtOutput);
-    _scriptOutputs->addWidget(_txtDebug);
-
-    _buttonEnableDebugOutput = new KPushButton(this);
-    _buttonEnableDebugOutput->setIcon(KIcon("tools-report-bug"));
-    _buttonEnableDebugOutput->setFlat(true);
-    _buttonEnableDebugOutput->setCheckable(true);
-    _buttonEnableDebugOutput->setFixedWidth(24);
-    _buttonEnableDebugOutput->setToolTip(i18nc("@info:tooltip", "Display debug messages."));
-
-    QWidget *header = new QWidget(this);
-    header->setLayout(new QHBoxLayout);
-    header->layout()->addWidget(new QLabel(i18n("Script Output:")));
-    header->layout()->addWidget(_buttonEnableDebugOutput);
-
-    QWidget *listingWidget = new QWidget(this);
-    listingWidget->setLayout(new QVBoxLayout);
-    listingWidget->layout()->addWidget(header);
-    listingWidget->layout()->addWidget(_scriptOutputs);
+    _outputWidget = new ScriptOutputWidget(this);
 
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -304,10 +284,9 @@ QWidget* MainWindow::setupScriptPanel()
     connect(_debugScript, SIGNAL(triggered()), this, SLOT(debugScript()));
     connect(_interruptScript, SIGNAL(triggered()), this, SLOT(debugScript()));
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
-    connect(_buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
 
     _hScriptSplitter->addWidget(_codeEditor);
-    _hScriptSplitter->addWidget(listingWidget);
+    _hScriptSplitter->addWidget(_outputWidget);
 
     QWidget *scriptInterface = new QWidget(this);
     scriptInterface->setLayout(new QHBoxLayout);
@@ -547,6 +526,7 @@ void MainWindow::setActiveDocument()
     QtScriptBackend *engine = activeDocument->engineBackend();
 
     _graphVisualEditor->setActiveDocument();
+    _outputWidget->setEngine(engine);
 
     // Graphical Data Structure Editor toolbar
     updateToolbarTypeActions();
@@ -555,13 +535,7 @@ void MainWindow::setActiveDocument()
     connect(activeDocument, SIGNAL(dataTypeRemoved(int)), this, SLOT(updateToolbarTypeActions()));
     connect(activeDocument, SIGNAL(pointerTypeRemoved(int)), this, SLOT(updateToolbarTypeActions()));
 
-    // Engine toolbar
-    connect(this, SIGNAL(runTool(ToolsPluginInterface*, Document*)),
-            activeDocument->engineBackend(), SLOT(runTool(ToolsPluginInterface*, Document*)));
-//     connect(this, SIGNAL(startEvaluation()),   engine,  SLOT(start()));
-    connect(engine, SIGNAL(sendDebug(QString)), this,  SLOT(debugString(QString)));
-    connect(engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
-    connect(engine, SIGNAL(sendOutput(QString)), this, SLOT(outputString(QString)));
+    // Updte engine toolbar
     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
 
     activeDocument->setModified(false);
@@ -1015,10 +989,8 @@ void MainWindow::executeScriptFull(const QString& text)
 
 void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString& text)
 {
-    kDebug() << "Going to execute the script";
-    if (_txtDebug == 0)   return;
-    if (scene() == 0)    return;
-
+    Q_ASSERT(_outputWidget);
+    _outputWidget->clear();
 
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
@@ -1027,8 +999,6 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
         engine->stop();
     }
 
-    _txtDebug->clear();
-    _txtOutput->clear();
     if (_scriptDbg) {
         _scriptDbg->detach();
         _scriptDbg->deleteLater();
@@ -1055,14 +1025,8 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
 
 void MainWindow::executeScriptOneStep(const QString& text)
 {
-    if (_txtDebug == 0) {
-        return;
-    }
-    if (scene() == 0) {
-        return;
-    }
-
-    _txtDebug->clear();
+    Q_ASSERT(_outputWidget);
+    _outputWidget->clear();
 
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
 
@@ -1084,18 +1048,10 @@ void MainWindow::executeScriptOneStep(const QString& text)
     engine->continueExecutionStep();
 }
 
-
-
 void MainWindow::stopScript()
 {
-    kDebug() << "Going to stop the script";
-    if (_txtDebug == 0)   return;
-    if (scene() == 0)    return;
-
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
-
     disableStopAction();
-
     engine->stop();
 }
 
@@ -1120,30 +1076,6 @@ void MainWindow::enableStopAction()
 void MainWindow::disableStopAction()
 {
     _stopScript->setEnabled(false);
-}
-
-void MainWindow::showDebugOutput(bool show)
-{
-    if (show && !_buttonEnableDebugOutput->isChecked()) {
-        _buttonEnableDebugOutput->toggle();
-    }
-    if (!show && _buttonEnableDebugOutput->isChecked()) {
-        _buttonEnableDebugOutput->toggle();
-    }
-    if (show) {
-        _scriptOutputs->setCurrentIndex(1);
-    } else {
-        _scriptOutputs->setCurrentIndex(0);
-    }
-}
-
-void MainWindow::outputString(const QString& s)
-{
-    _txtOutput->append(s);
-}
-void MainWindow::debugString(const QString& s)
-{
-    _txtDebug->append(s);
 }
 
 void MainWindow::showExecutionButtonDebug(bool visible)

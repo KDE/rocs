@@ -51,8 +51,8 @@ class ToolsPluginInterface;
 class QCloseEvent;
 class QComboBox;
 class QToolButton;
-class QStackedWidget;
 class KActionMenu;
+class ScriptOutputWidget;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -214,16 +214,11 @@ public slots:
     void setActiveDocument();
     void releaseDocument(Document *d);
     void runToolPlugin();
-    void outputString(const QString& s);
-    void debugString(const QString& s);
 
     /** setup documents list.*/
     void setupDocumentsList();
     void disableStopAction();
     void enableStopAction();
-
-    /** opens debug output listing **/
-    void showDebugOutput(bool show=true);
 
     /**
      * Show button to execute script in debug mode.
@@ -252,10 +247,7 @@ private: // Variables.
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
     TabWidget *_bottomTabs;
     CodeEditor *_codeEditor;
-    QStackedWidget * _scriptOutputs;
-    KPushButton *_buttonEnableDebugOutput;
-    KTextBrowser *_txtDebug; //! this is the debug view.
-    KTextBrowser *_txtOutput;
+    ScriptOutputWidget* _outputWidget;
 
     // Other Bunch of stuff.
     KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
