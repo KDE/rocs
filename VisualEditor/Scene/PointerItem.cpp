@@ -122,17 +122,14 @@ void PointerItem::updateAttributes()
         updatePropertyList(middle.x(), middle.y());
     } if (_pointer->isVisible() == true) {
         this->show();
-        QMap<QString, QGraphicsSimpleTextItem*>::const_iterator iter = _propertyValues.constBegin();
-        while (iter != _propertyValues.constEnd()) {
-            (*iter)->setVisible(true);
-            ++iter;
+        PointerTypePtr pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
+        foreach (QString property, _pointer->properties()) {
+            _propertyValues[property]->setVisible(pointerType->isPropertyVisible(property));
         }
     } else {
         this->hide();
-        QMap<QString, QGraphicsSimpleTextItem*>::const_iterator iter = _propertyValues.constBegin();
-        while (iter != _propertyValues.constEnd()) {
-            (*iter)->setVisible(false);
-            ++iter;
+        foreach (QString property, _pointer->properties()) {
+            _propertyValues[property]->setVisible(false);
         }
     }
     update();
