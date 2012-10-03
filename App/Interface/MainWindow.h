@@ -43,7 +43,6 @@ class QSplitter;
 class GraphScene;
 class KAction;
 class SelectMoveHandAction;
-class TabWidget;
 class CodeEditor;
 class QScriptEngine;
 class QScriptEngineDebugger;
@@ -245,7 +244,6 @@ private: // Variables.
 
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
-    TabWidget *_bottomTabs;
     CodeEditor *_codeEditor;
     ScriptOutputWidget* _outputWidget;
 

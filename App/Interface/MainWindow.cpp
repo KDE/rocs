@@ -59,9 +59,10 @@
 #include "GraphVisualEditor.h"
 #include "Scene/GraphScene.h"
 #include "CodeEditor.h"
-#include "TabWidget.h"
 #include "Interface/ScriptOutputWidget.h"
 #include "Scene/GraphicsLayout.h"
+#include "PossibleIncludes.h"
+#include "LoadedPluginsDialog.h"
 
 // Graph Related Includes
 #include "Document.h"
@@ -91,7 +92,6 @@
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
 #include <QActionGroup>
-
 #include <QMutexLocker>
 #include <QFormLayout>
 #include <QScriptEngineDebugger>
@@ -103,8 +103,7 @@
 #include <DataStructurePluginInterface.h>
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
-#include "PossibleIncludes.h"
-#include "LoadedPluginsDialog.h"
+
 #include "Tools/ToolManager.h"
 
 
@@ -145,9 +144,6 @@ MainWindow::~MainWindow()
     _recentProjects->saveEntries(Settings::self()->config()->group("RecentFiles"));
 
     Settings::self()->writeConfig();
-
-
-
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -588,7 +584,6 @@ void MainWindow::releaseDocument(Document* d)
 
     _graphVisualEditor->releaseDocument();
     d->engineBackend()->disconnect(this);
-    d->engineBackend()->disconnect(_bottomTabs);
 }
 
 GraphScene* MainWindow::scene() const
@@ -782,8 +777,6 @@ void MainWindow::updateCaption()
     }
     setCaption(caption);
 }
-
-
 
 void MainWindow::saveScripts()
 {
@@ -1058,10 +1051,11 @@ void MainWindow::stopScript()
 void MainWindow::debugScript()
 {
     QAction *action = qobject_cast<QAction *> (sender());
-    if (action == _interruptScript)
+    if (action == _interruptScript) {
         executeScript(DebugMode);
-    else
+    } else {
         executeScript(DebugOnlyInCaseOfError);
+    }
 }
 
 
@@ -1087,4 +1081,3 @@ void MainWindow::showExecutionButtonOneStep(bool visible)
 {
     _stepRunScript->setVisible(visible);
 }
-
