@@ -1,0 +1,28 @@
+/*!
+ * @mainpage The Rocs API Reference
+ *
+ *
+ * <b>The KDE online class reference for the current development version of
+ * Rocs.</b>
+ *
+ * Rocs is divided into the following modules:
+ *
+ * - <a href="App/html/index.html"><b>Application</b></a>.
+ *   <i>The Rocs Graph IDE.</i>
+ *
+ * - <a href="RocsCore/html/index.html"><b>Rocs Core Library</b></a>.
+ *   <i>Core library for definition and simulation of data structures.</i>
+ *
+ * - <a href="VisualEditor/html/index.html"><b>Rocs Visual Editor</b></a>.
+ *   <i>Visual editor for modifying and display of data structures.</i>
+ *
+ * @b Read about the Rocs architecture in
+ * the \ref architecture.
+ *
+ * @b Follow the development of this application and its libraries. Please consider joining the
+ * <a href="https://mail.kde.org/mailman/listinfo/rocs-devel">Rocs Development Mailing List</a>.
+ */
+
+// DOXYGEN_NAME="Rocs"
+// DOXYGEN_ENABLE=YES
+// DOXYGEN_SET_WARN_LOGFILE=doxygen.log

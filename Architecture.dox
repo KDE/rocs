@@ -1,0 +1,61 @@
+/** \file  Architecture.dox
+  * \brief Rocs Architecture Document
+  */
+
+/** \page architecture Rocs Architecture
+
+\section concepts Concepts
+
+Rocs is a data structure IDE and hence heavily uses description language for its components from
+the field of algorithms research. In this section, we provide explanations for the key concepts:
+
+- Document<br />
+  A document can be considered as a set of data structures that are currently available at the user's
+  workspace (e.g., the visual editor if used, or the script engine). All data structures of a
+  document must be of same type (same data structure plugin) and share settings like registered
+  data types and pointer types.
+
+- Data Structures<br />
+  A data structure is a set of pointers and data elements.
+
+- Data element<br />
+  A data element (also called Datum, Node, Vertex) is a unit of information that belongs to exactly
+  one data structure.
+
+- Pointer<br />
+  A pointer connects two data elements or a data element with itself. It can hold information.
+
+- Data type/Pointer type<br />
+  Data an pointer types can be registered for a document and they provide a set of predefined
+  properties and a uniform visual representation of elements of the specific type.
+
+- Dynamic Properties<br />
+  Dynamic properties denote all properties that can be added to pointers, data elements, and
+  data structures at run time.
+
+\section core_lib_overview Rocs Core Library Overview
+
+The core library provides the backend model for representing data structures and to modify them
+by scripts.
+
+\subsection document_manager Document Manager
+The \ref DocumentManager is the core organizational unit for creation and removal of documents.
+
+\subsection datastructure_plugin_manager Data Structure Plugin Manager
+The \ref DataStructurePluginManager provides backends for different data structures. Each data
+structure plugin must implement the \ref DataStructurePluginInterface and provides its own
+set of functionality. Plugins that are shipped with RocsCore by default can be found in the folger
+"Plugin".
+
+\subsection engine Scripting Engine
+The scripting engine provides access to the data model by a QtScriptBackend. The engine searches for
+specific slots at the data structure, data, and pointer classes and registers those as methods to
+be access from scripts.
+
+
+\section visual_editor_overview Rocs Visual Editor Overview
+
+The visual editor provides a whiteboard that visualized documents and their data structures.
+
+
+*/
