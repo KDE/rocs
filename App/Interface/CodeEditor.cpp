@@ -42,7 +42,7 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
     connect(_tabDocs, SIGNAL(currentChanged(int)), this, SLOT(changeCurrentDocument(int)));
     connect(_tabDocs, SIGNAL(newTabRequest()), this, SLOT(newScript()));
 
-    _tabDocs->setTabsClosable(true);
+    _tabDocs->setTabsClosable(false);
 
     _editor->setSimpleMode(false);
 
