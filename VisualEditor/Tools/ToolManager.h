@@ -41,13 +41,11 @@ public:
     static ToolManager * instance();
     ~ToolManager();
 
+    bool loadPlugin(QString arg1);
+
     void loadPlugins();
 
-    bool loadToolPlugin(QString arg1);
-
-    void loadToolsPlugins();
-
-    QList <ToolsPluginInterface*> toolPlugins();
+    QList <ToolsPluginInterface*> plugins();
 
     KPluginInfo pluginInfo(ToolsPluginInterface * plugin);
 };

@@ -441,7 +441,7 @@ void MainWindow::setupToolsPluginsAction()
     }
 
     foreach(QAction* action, _toolsPlugins) {
-        ToolsPluginInterface *plugin = ToolManager::instance()->toolPlugins().at(action->data().toInt());
+        ToolsPluginInterface *plugin = ToolManager::instance()->plugins().at(action->data().toInt());
         action->setEnabled(
                 DocumentManager::self()->activeDocument() &&
                 plugin->supportedDataStructures().contains(DocumentManager::self()->activeDocument()->dataStructureInternalName())
@@ -451,7 +451,7 @@ void MainWindow::setupToolsPluginsAction()
 
 void MainWindow::createToolsPluginsAction(){
     QAction* action = 0;
-    QList<ToolsPluginInterface*> avaliablePlugins =  ToolManager::instance()->toolPlugins();
+    QList<ToolsPluginInterface*> avaliablePlugins =  ToolManager::instance()->plugins();
     int count = 0;
     foreach(ToolsPluginInterface * plugin, avaliablePlugins) {
         action = new KAction(plugin->displayName(), this);
@@ -960,14 +960,13 @@ void MainWindow::showLoadedPlugins()
 
 void MainWindow::runToolPlugin()
 {
-    kDebug() << "seeking for a plugin";
     QAction *action = qobject_cast<QAction *> (sender());
 
     if (! action) {
         return;
     }
-    if (ToolsPluginInterface *plugin =  ToolManager::instance()->toolPlugins().value(action->data().toInt())) {
-        emit runTool(plugin, DocumentManager::self()->activeDocument());
+    if (ToolsPluginInterface *plugin =  ToolManager::instance()->plugins().value(action->data().toInt())) {
+        plugin->run(DocumentManager::self()->activeDocument());
     }
 }
 

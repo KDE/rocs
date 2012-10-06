@@ -76,13 +76,7 @@ ToolManager::~ToolManager()
 }
 
 
-void ToolManager::loadPlugins()
-{
-    loadToolsPlugins();
-}
-
-
-bool ToolManager::loadToolPlugin(QString name)
+bool ToolManager::loadPlugin(QString name)
 {
     KPluginInfo kpi =  _d->PluginInfoFromName(name);
 
@@ -108,10 +102,10 @@ bool ToolManager::loadToolPlugin(QString name)
 }
 
 
-void ToolManager::loadToolsPlugins()
+void ToolManager::loadPlugins()
 {
     foreach(KPluginInfo info, _d->toolsPluginsInfo) {
-        loadToolPlugin(info.name());
+        loadPlugin(info.name());
     }
 }
 
@@ -122,9 +116,9 @@ KPluginInfo ToolManager::pluginInfo(ToolsPluginInterface* plugin)
 }
 
 
-QList< ToolsPluginInterface* > ToolManager::toolPlugins()
+QList< ToolsPluginInterface* > ToolManager::plugins()
 {
-    loadToolsPlugins();
+    loadPlugins();
     QList < ToolsPluginInterface * > value;
 
     QMap<KPluginInfo, ToolsPluginInterface*>::const_iterator iter;

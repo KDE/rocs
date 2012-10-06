@@ -234,7 +234,6 @@ public slots:
 signals:
     void startEvaluation();
     void stopEvaluation();
-    void runTool(ToolsPluginInterface * plugin, Document * graphs);
 
 private: // Variables.
     Project* _currentProject;
