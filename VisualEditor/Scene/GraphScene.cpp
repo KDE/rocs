@@ -266,6 +266,11 @@ void GraphScene::keyPressEvent(QKeyEvent *keyEvent)
     emit(keyPressed(keyEvent));
 }
 
+void GraphScene::keyReleaseEvent(QKeyEvent *keyEvent)
+{
+    keyEvent->accept();
+    emit(keyReleased(keyEvent));
+}
 
 void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event)
 {

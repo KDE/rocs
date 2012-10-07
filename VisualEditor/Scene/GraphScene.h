@@ -78,6 +78,7 @@ public slots:
 signals:
     void resized();
     void keyPressed(QKeyEvent* key);
+    void keyReleased(QKeyEvent* key);
     void addData(QPointF pos);
     void removeSelected();
     void zoomFactorChanged(qreal zoomFactor);
@@ -90,6 +91,7 @@ protected:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent* event);
     void wheelEvent(QGraphicsSceneWheelEvent* wheelEvent);
     void keyPressEvent(QKeyEvent* keyEvent);
+    void keyReleaseEvent(QKeyEvent* keyEvent);
 
 private:
     QMenu * createContextMenu(QPointF scenePosition, QPointF screenPosition);

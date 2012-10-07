@@ -21,9 +21,7 @@
 #ifndef SELECTMOVEHANDACTION_H
 #define SELECTMOVEHANDACTION_H
 
-#include "VisualEditorExport.h"
 #include "AbstractAction.h"
-#include <boost/shared_ptr.hpp>
 #include "CoreTypes.h"
 
 class QObject;
@@ -31,66 +29,78 @@ class QKeyEvent;
 class QGraphicsRectItem;
 class QGraphicsItem;
 class DataItem;
-class Data;
 
-/*!
-  \brief The 'Move Node' Action
-  This action holds the 'Move Node' icon and tooltips, and when it's executed,
-  it will move the selected node around the screen.
-*/
-
-class VISUALEDITOR_EXPORT SelectMoveHandAction : public AbstractAction
+/**
+ * \class SelectMoveHandAction
+ * This action holds the 'Move Node' icon and tooltips, and when it's executed,
+ * it will move the selected node around the screen.
+ */
+class SelectMoveHandAction : public AbstractAction
 {
     Q_OBJECT
-public:
-    /*!
-      Default constructor
-      \param parent the Parent QOBject that will hold this action. ( remove it in the future, maybe? )
-    */
 
+public:
+    /**
+     * Default constructor.
+     *
+     * \param scene is the graphics scene that contains the data elements
+     * \param parent the parent QObject that holds this action
+     */
     explicit SelectMoveHandAction(GraphScene *scene, QObject *parent = 0);
 
-    /*!
-      Default Destructor
-    */
+    /**
+     * Default Destructor.
+     */
     ~SelectMoveHandAction();
+
 public slots:
-    /*!
-      will be executed when the mouse press a button.
-      \param pos the position onscreen of the click.
-    */
+    /**
+     * Executed when the left mouse button is pressed at the scene.
+     *
+     * \param pos the onscreen position of the click
+     */
     bool executePress(QPointF pos);
-    /*! will be executed when the mouse moves.
-      \param pos the current position of the cursor.
-    */
+
+    /**
+     * Executed when the mouse is moved at the scene scene.
+     *
+     * \param pos the current onscreen position of the mouse
+     */
     bool executeMove(QPointF pos);
-    /*! will be executed when the mouse releases a click
-    \param pos the position of the cursor.
-    */
+
+    /**
+     * Executed when the left mouse button is released
+     *
+     * \param pos the onscreen position of the mouse
+     */
     bool executeRelease(QPointF pos);
-    /*! will be executed when the mouse moves.
-      \param pos the current position of the cursor.
-    */
-    bool executeArrowKeyMove(QKeyEvent* keyEvent);
 
+    /**
+     * Executed when a key is pressed.
+     *
+     * \param keyEvent the key press event
+     */
+    bool executeKeyPress(QKeyEvent* keyEvent);
 
-protected:
-    /*! the node that will be moved on screen */
-    DataItem *_movableNode;
-
-    /*! the model of the NodeItem,
-    needs it to modify it's internal value when the move is finished */
-    DataPtr _data;
-    QPointF _delta;
-    QMap<DataItem*, QPointF> _deltas;
-
-signals:
-    /*! signal sended when the selection changes. */
-    void ItemSelectedChanged(QGraphicsItem *o);
+    /**
+     * Executed when a key is released.
+     *
+     * \param keyEvent the key press event
+     */
+    bool executeKeyRelease(QKeyEvent* keyEvent);
 
 private:
-    /*! onscreen temporary rectangle for the selected items */
-    QGraphicsRectItem *_selectionRect;
+    /**
+     * Moves all currently selected items by \p movement.
+     *
+     * \param movement is the relative movement vector
+     */
+    void moveSelectedItems(QPointF movement);
+
+    DataItem *_currentItem; // currently active item
+    QMap<DataItem*, QPointF> _deltas; // original data item positions from begin of movement
+    QGraphicsRectItem *_selectionRect; // on-screen rectangle for selecting items
+    bool _selectionMode; // true while CTRL key is pressed
 };
 
 #endif
