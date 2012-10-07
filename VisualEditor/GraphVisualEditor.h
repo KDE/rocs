@@ -25,7 +25,10 @@
 #include <QWidget>
 #include <QSlider>
 #include <QString>
+#include <kaction.h>
 
+class EditorToolbar;
+class KActionCollection;
 class Document;
 class DataStructure;
 class DataItem;
@@ -49,15 +52,19 @@ public:
      */
     void resizeEvent(QResizeEvent  *event);
 
-    GraphScene *scene() const;
-    QGraphicsView *view() const;
-    MainWindow *mainWindow();
-
 //     void resizeVisualEditor(qreal yTop, qreal xLeft, qreal yBottom, qreal xRight);
 
     /*! as the name says, it removes the current DataStructureDocument
     from the screen and releases it from the evil hands of GraphEditWidget.*/
     void releaseDocument();
+
+    /**
+     * Setup actions of visual graph editor and adds them to contributed action collection
+     * \p collection.
+     *
+     * \param collection the action collection at which actions are registered
+     */
+    void setupActions(KActionCollection* collection);
 
 public slots:
     /**
@@ -97,6 +104,7 @@ private:
     static GraphVisualEditor* _self;
 
     GraphScene *_scene;
+    EditorToolbar *_editorToolbar;
 
     KComboBox *_documentSelectorCombo;
     QToolButton *_documentPropertiesButton;

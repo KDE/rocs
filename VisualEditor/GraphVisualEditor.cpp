@@ -29,6 +29,8 @@
 #include "Pointer.h"
 #include <CoreTypes.h>
 
+#include "Interface/EditorToolbar.h"
+
 #include "Actions/PropertiesDialogAction.h"
 #include "Actions/AlignAction.h"
 
@@ -46,12 +48,15 @@
 #include <DocumentManager.h>
 #include <KPushButton>
 #include <QButtonGroup>
+#include <QLayout>
+#include <KActionCollection>
 
 // load catalog for library
 static const KCatalogLoader loader("rocsvisualeditor");
 
 GraphVisualEditor::GraphVisualEditor(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent),
+    _editorToolbar(0)
 {
     _scene = 0;
     _document = 0;
@@ -170,11 +175,6 @@ QWidget* GraphVisualEditor::sceneToolbar()
     return sceneControls;
 }
 
-QGraphicsView* GraphVisualEditor::view() const
-{
-    return _graphicsView;
-}
-
 void GraphVisualEditor::updateGraphDocumentList()
 {
     _documentSelectorCombo->clear();
@@ -212,6 +212,9 @@ void GraphVisualEditor::setActiveDocument()
             this, SLOT(updateDataStructureList()));
     connect(_document, SIGNAL(dataStructureListChanged()),
             this, SLOT(updateDataStructureList()));
+
+    // Graphical Data Structure Editor toolbar
+    _editorToolbar->setActiveDocument(_document);
 }
 
 void GraphVisualEditor::releaseDocument()
@@ -224,6 +227,25 @@ void GraphVisualEditor::releaseDocument()
         ds->disconnect(this);
     }
     _document->disconnect(this);
+}
+
+void GraphVisualEditor::setupActions(KActionCollection* collection)
+{
+    // create editor toolbar
+    if (_editorToolbar == 0) {
+        _editorToolbar = new EditorToolbar(this);
+    }
+    _editorToolbar->setup(_scene, collection);
+
+    // create alignment menu
+    collection->addAction("align-hbottom", new AlignAction(i18nc("@action:intoolbar Alignment", "Base"),  AlignAction::Bottom, _scene));
+    collection->addAction("align-hcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::HCenter, _scene));
+    collection->addAction("align-htop", new AlignAction(i18nc("@action:intoolbar Alignment", "Top"),   AlignAction::Top, _scene));
+    collection->addAction("align-vleft", new AlignAction(i18nc("@action:intoolbar Alignment", "Left"),  AlignAction::Left, _scene));
+    collection->addAction("align-vcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::VCenter, _scene));
+    collection->addAction("align-vright", new AlignAction(i18nc("@action:intoolbar Alignment", "Right"), AlignAction::Right,  _scene));
+    collection->addAction("align-circle", new AlignAction(i18nc("@action:intoolbar Alignment", "Circle"),  AlignAction::Circle, _scene));
+    collection->addAction("align-tree", new AlignAction(i18nc("@action:intoolbar Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, _scene));
 }
 
 void GraphVisualEditor::updateActiveDataStructure(DataStructurePtr g)
@@ -263,11 +285,6 @@ void GraphVisualEditor::addDataStructure()
 void GraphVisualEditor::removeDataStructure()
 {
     DocumentManager::self()->activeDocument()->activeDataStructure()->remove();
-}
-
-GraphScene* GraphVisualEditor::scene() const
-{
-    return _scene;
 }
 
 QList<DataItem*> GraphVisualEditor::selectedNodes() const

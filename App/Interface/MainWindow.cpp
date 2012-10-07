@@ -57,7 +57,6 @@
 // UI RELATED INCLUDES
 #include "DocumentTypesWidget.h"
 #include "GraphVisualEditor.h"
-#include "Scene/GraphScene.h"
 #include "CodeEditor.h"
 #include "Interface/ScriptOutputWidget.h"
 #include "Scene/GraphicsLayout.h"
@@ -73,10 +72,6 @@
 
 // Action Related Includes
 #include "Actions/AbstractAction.h"
-#include "Actions/AddDataHandAction.h"
-#include "Actions/AddConnectionHandAction.h"
-#include "Actions/SelectMoveHandAction.h"
-#include "Actions/DeleteHandAction.h"
 #include "Actions/AlignAction.h"
 #include "Actions/ZoomAction.h"
 #include "Actions/DeleteAction.h"
@@ -103,7 +98,6 @@
 #include <DataStructurePluginInterface.h>
 #include <DataStructurePluginManager.h>
 #include "DocumentManager.h"
-
 #include "Tools/ToolManager.h"
 
 
@@ -310,53 +304,13 @@ void MainWindow::setupActions()
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
 
-    GraphScene *gc = _graphVisualEditor->scene();
-
-    _addDataActionMenu = new KActionMenu(KIcon("rocsadddata"), i18nc("@title:menu", "Add Data"), this);
-    _addDataActionMenu->setIconText(i18nc("@action:intoolbar", "Add Data"));
-    _addDataActionMenu->setToolTip(i18nc("@info:tooltip", "Add new data element"));
-    _addDataActionMenu->setDelayed(true);
-    _addDataActionMenu->setCheckable(true);
-
-    _addPointerActionMenu = new KActionMenu(KIcon("rocsaddedge"), i18nc("@title:menu", "Add Connection"), this);
-    _addPointerActionMenu->setIconText(i18nc("@action:intoolbar", "Add Connection"));
-    _addPointerActionMenu->setToolTip(i18nc("@info:tooltip", "Add a new connection between two data elements of selected type"));
-    _addPointerActionMenu->setDelayed(true);
-    _addPointerActionMenu->setCheckable(true);
-
-    _selectMoveAction = new SelectMoveHandAction(gc, this);
-    DeleteHandAction* deleteAction = new DeleteHandAction(gc, this);
-    ZoomAction* zoomAction = new ZoomAction(gc, this);
-
-    connect(_selectMoveAction, SIGNAL(triggered()), _selectMoveAction, SLOT(sendExecuteBit()));
-    connect(deleteAction, SIGNAL(triggered()), deleteAction, SLOT(sendExecuteBit()));
-    connect(zoomAction, SIGNAL(triggered()), zoomAction, SLOT(sendExecuteBit()));
-
-    _paletteActions = actionCollection();
-    QActionGroup *g = new QActionGroup(this);
-
-    g->addAction(_paletteActions->addAction("selectmove", _selectMoveAction));
-    g->addAction(_paletteActions->addAction("add_node", _addDataActionMenu));
-    g->addAction(_paletteActions->addAction("add_edge", _addPointerActionMenu));
-    g->addAction(_paletteActions->addAction("delete", deleteAction));
-    g->addAction(_paletteActions->addAction("zoom", zoomAction));
-    actionCollection()->action("selectmove")->toggle();
-    gc->setAction(_selectMoveAction);
-
-    _paletteActions->addAction("align-hbottom", new AlignAction(i18nc("@action:intoolbar Alignment", "Base"),  AlignAction::Bottom, gc));
-    _paletteActions->addAction("align-hcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::HCenter, gc));
-    _paletteActions->addAction("align-htop",   new AlignAction(i18nc("@action:intoolbar Alignment", "Top"),   AlignAction::Top,    gc));
-    _paletteActions->addAction("align-vleft",  new AlignAction(i18nc("@action:intoolbar Alignment", "Left"),  AlignAction::Left,   gc));
-    _paletteActions->addAction("align-vcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::VCenter, gc));
-    _paletteActions->addAction("align-vright", new AlignAction(i18nc("@action:intoolbar Alignment", "Right"), AlignAction::Right,  gc));
-    _paletteActions->addAction("align-circle", new AlignAction(i18nc("@action:intoolbar Alignment", "Circle"),  AlignAction::Circle, gc));
-    _paletteActions->addAction("align-tree", new AlignAction(i18nc("@action:intoolbar Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, gc));
+    // setup graph visual editor actions and add them to mainwindow action collection
+    _graphVisualEditor->setupActions(actionCollection());
 
     // Menu actions
     createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(newProject()), this);
     createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
-
 
     _recentProjects = new KRecentFilesAction(KIcon ("document-open"), i18nc("@action:inmenu","Recent Projects"), this);
     connect(_recentProjects, SIGNAL(urlSelected(KUrl)), this, SLOT(openProject(KUrl)));
@@ -377,9 +331,6 @@ void MainWindow::setupActions()
 //     createAction("document-save",    i18nc("@action:inmenu", "Save Script"),         "save-script",         SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-export", i18nc("@action:inmenu", "Export Script as"),      "export-script-as",      SLOT(saveActiveScriptAs()), _codeEditor);
     createAction("",  i18nc("@action:inmenu", "Loaded Plugins"),      "loaded-plugins",      SLOT(showLoadedPlugins()), this);
-
-    // EDIT actions
-    actionCollection()->addAction("delete-selected", new DeleteAction(i18nc("@action:intoolbar", "Delete"), _graphVisualEditor->scene(), 0));
 
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
@@ -524,53 +475,11 @@ void MainWindow::setActiveDocument()
     _graphVisualEditor->setActiveDocument();
     _outputWidget->setEngine(engine);
 
-    // Graphical Data Structure Editor toolbar
-    updateToolbarTypeActions();
-    connect(activeDocument, SIGNAL(dataTypeCreated(int)), this, SLOT(updateToolbarTypeActions()));
-    connect(activeDocument, SIGNAL(pointerTypeCreated(int)), this, SLOT(updateToolbarTypeActions()));
-    connect(activeDocument, SIGNAL(dataTypeRemoved(int)), this, SLOT(updateToolbarTypeActions()));
-    connect(activeDocument, SIGNAL(pointerTypeRemoved(int)), this, SLOT(updateToolbarTypeActions()));
-
-    // Updte engine toolbar
+    // Update engine toolbar
     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
 
     activeDocument->setModified(false);
     setupToolsPluginsAction();
-}
-
-
-void MainWindow::updateToolbarTypeActions()
-{
-    Document *activeDocument = DocumentManager::self()->activeDocument();
-
-    _addDataActionMenu->menu()->clear();
-    foreach (int identifier, activeDocument->dataTypeList()) {
-        DataTypePtr type = activeDocument->dataType(identifier);
-        AddDataHandAction* addDataAction = new AddDataHandAction(scene(), type, _addDataActionMenu->menu());
-        addDataAction->setCheckable(false);
-
-        if (identifier == 0) { // set default action to menu
-            connect(_addDataActionMenu, SIGNAL(triggered()), addDataAction, SLOT(sendExecuteBit()));
-        }
-
-        _addDataActionMenu->menu()->addAction(addDataAction);
-        connect(type.get(), SIGNAL(iconChanged(QString)), addDataAction, SLOT(updateIcon()));
-        connect(addDataAction, SIGNAL(triggered()), addDataAction, SLOT(sendExecuteBit()));
-    }
-
-    _addPointerActionMenu->menu()->clear();
-    foreach (int identifier, activeDocument->pointerTypeList()) {
-        PointerTypePtr type = activeDocument->pointerType(identifier);
-        AddConnectionHandAction* addPointerAction = new AddConnectionHandAction(scene(), type, _addPointerActionMenu->menu());
-        addPointerAction->setCheckable(false);
-
-        if (identifier == 0) { // set default action to menu
-            connect(_addPointerActionMenu, SIGNAL(triggered()), addPointerAction, SLOT(sendExecuteBit()));
-        }
-
-        _addPointerActionMenu->menu()->addAction(addPointerAction);
-        connect(addPointerAction, SIGNAL(triggered()), addPointerAction, SLOT(sendExecuteBit()));
-    }
 }
 
 
@@ -584,11 +493,6 @@ void MainWindow::releaseDocument(Document* d)
 
     _graphVisualEditor->releaseDocument();
     d->engineBackend()->disconnect(this);
-}
-
-GraphScene* MainWindow::scene() const
-{
-    return _graphVisualEditor->scene();
 }
 
 void MainWindow::addEmptyGraphDocument()
@@ -928,8 +832,6 @@ void MainWindow::importGraphFile()
     }
 
     DocumentManager::self()->addDocument(gd);
-
-    _graphVisualEditor->scene()->createItems();
 
     if (importer.hasDialog()) {
         importer.dialogExec();

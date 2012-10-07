@@ -53,6 +53,7 @@ public slots:
     void zoomReset();
 
 private:
+    GraphScene* _scene;
     QRectF m_zoomArea;
     qreal m_currentZoomFactor;
     QGraphicsRectItem *m_zoomRectItem;

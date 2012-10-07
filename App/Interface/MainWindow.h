@@ -40,7 +40,6 @@ class DataStructure;
 class Project;
 class KTextBrowser;
 class QSplitter;
-class GraphScene;
 class KAction;
 class SelectMoveHandAction;
 class CodeEditor;
@@ -66,8 +65,6 @@ public:
     /*! defalt constructor */
     MainWindow();
     ~MainWindow();
-
-    GraphScene *scene() const;
 
     enum ScriptMode {
         Execute,
@@ -199,11 +196,6 @@ private slots:
     void saveProjectAs();
     void setupToolsPluginsAction();
 
-    /**
-     * Update add data and add pointer actions at graphical editor toolbar
-     */
-    void updateToolbarTypeActions();
-
 public slots:
     /**
      * Sets the current active document given by \see DocumentManager::activeDocument() as
@@ -247,9 +239,6 @@ private: // Variables.
     ScriptOutputWidget* _outputWidget;
 
     // Other Bunch of stuff.
-    KActionCollection *_paletteActions; //! the pallete actions, move, add, etc.
-    KActionMenu *_addDataActionMenu;
-    KActionMenu *_addPointerActionMenu;
     KAction *_runScript;
     KAction *_stepRunScript;
     KAction *_stopScript;
@@ -265,9 +254,6 @@ private: // Variables.
     QSplitter *_hScriptSplitter;
 
     QComboBox *_selectListing;
-
-    //! all the actions that I need to reference later.
-    SelectMoveHandAction *_selectMoveAction;
 
     QScriptEngineDebugger *_scriptDbg;
     KAction* _debugScript;

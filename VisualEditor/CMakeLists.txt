@@ -53,6 +53,7 @@ set( rocsvisualeditor_interface_SRCS
     Interface/DataTypePage.cpp
     Interface/PointerTypePage.cpp
     Interface/PointerPropertiesWidget.cpp
+    Interface/EditorToolbar.cpp
 
     Interface/model_GraphProperties.cpp
 )
