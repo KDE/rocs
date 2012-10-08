@@ -42,12 +42,20 @@ public:
     typedef KPluginInfo::List KPluginList;
 
     KPluginList m_DataStructurePluginsInfo;
-    DataStructurePluginInterface * m_actualPlugin;
+    DataStructurePluginInterface* m_actualPlugin;
     QHash<QString, DataStructurePluginInterface*> m_plugins;
     QObject* m_parent;
 
     DataStructurePluginManagerPrivate(QObject * parent): m_parent(parent) {
         m_actualPlugin = 0;
+    }
+
+    ~DataStructurePluginManagerPrivate() {
+        delete m_actualPlugin;
+
+        // clear plugins
+        qDeleteAll<QHash<QString, DataStructurePluginInterface*>::iterator>(m_plugins.begin(), m_plugins.end());
+        m_plugins.clear();
     }
 
     DataStructurePtr changeToDataStructure(DataStructurePtr dataStructure, Document * parent) {
@@ -65,7 +73,7 @@ public:
                 m_actualPlugin = i;
                 return;
             }
-        } 
+        }
         m_actualPlugin = pluginList().last();
     }
 
@@ -106,7 +114,6 @@ public:
     }
 
     bool loadDataStructurePlugin(KPluginInfo & pluginInfo) {
-//         KPluginInfo kpi =  pluginInfoFromName ( name );
         if (pluginInfo.isValid()) {
             QString error;
             DataStructurePluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<DataStructurePluginInterface> (QString::fromLatin1("Rocs/DataStructurePlugin"), QString::fromLatin1("[Name]=='%1'").arg(pluginInfo.name()), m_parent, QVariantList(), &error);
@@ -126,7 +133,7 @@ public:
 
     void loadDataStructurePlugins() {
         m_DataStructurePluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/DataStructurePlugin"));
-        
+
 
         foreach(KPluginInfo info, m_DataStructurePluginsInfo) {
             loadDataStructurePlugin(info);
@@ -148,7 +155,7 @@ public:
 // ----------------------------------- Class  ---------------------------------
 
 DataStructurePluginManager::DataStructurePluginManager() : _d(new DataStructurePluginManagerPrivate(this))
-{   
+{
     _d->loadDataStructurePlugins();
 }
 
