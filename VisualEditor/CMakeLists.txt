@@ -93,7 +93,7 @@ target_link_libraries( rocsvisualeditor
 set( rocsvisualeditor_LIB_HDRS
     Scene/DataItem.h
     Scene/PointerItem.h
-    Scene/PointerItem.h
+    GraphVisualEditor.h
 )
 
 add_subdirectory(Tools)

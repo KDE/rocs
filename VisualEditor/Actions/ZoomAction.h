@@ -32,7 +32,7 @@ class QGraphicsView;
 class QKeyEvent;
 class QGraphicsSceneWheelEvent;
 
-class VISUALEDITOR_EXPORT ZoomAction : public AbstractAction
+class ZoomAction : public AbstractAction
 {
     Q_OBJECT
 

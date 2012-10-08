@@ -29,7 +29,7 @@
  *
  * Activation this action enables the Delete Mode for the GraphScene.
  */
-class VISUALEDITOR_EXPORT DeleteHandAction : public AbstractAction
+class DeleteHandAction : public AbstractAction
 {
 public:
     /*! default constructor

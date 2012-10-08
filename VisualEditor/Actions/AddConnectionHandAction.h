@@ -34,7 +34,7 @@ class DataStructure;
   \brief The 'Add Connection' Action
 */
 
-class VISUALEDITOR_EXPORT AddConnectionHandAction : public AbstractAction
+class AddConnectionHandAction : public AbstractAction
 {
     Q_OBJECT
 public:
