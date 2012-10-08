@@ -176,6 +176,7 @@ public slots:
 
     void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
     void removeDynamicProperty(const QString& property);
+    void renameDynamicProperty(QString oldName, QString newName);
 
     /** add the property named \p name to this Data structure.
      * \param name is an identifier to property.

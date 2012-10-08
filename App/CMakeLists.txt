@@ -114,7 +114,7 @@ add_subdirectory( Scripts )
 # Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
     enable_testing()
-    add_subdirectory( Tests )
+    add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)
 
 

@@ -20,7 +20,6 @@
 #include "model_GraphProperties.h"
 #include <KLocale>
 #include <KDebug>
-#include <DynamicPropertiesList.h>
 #include "Pointer.h"
 #include "Data.h"
 #include "DataStructure.h"
@@ -145,7 +144,17 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
         }
 
         switch (index.column()) {
-        case 0: DynamicPropertiesList::New()->changePropertyName(QByteArray(_dataSource->dynamicPropertyNames()[index.row()]), value.toByteArray(), _dataSource);   break;
+        case 0: {
+            if (!Document::isValidIdentifier(value.toString())) {
+                kWarning() << "Property identifier is not valid: aborting";
+                return false;
+            }
+            QByteArray oldName = QByteArray(_dataSource->dynamicPropertyNames()[index.row()]);
+            QByteArray newName = value.toByteArray();
+            _dataSource->setProperty(newName, property(oldName));
+            _dataSource->setProperty(oldName, QVariant::Invalid);
+            break;
+        }
         case 1:  _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()], value); break; /* just change the values */
         default: kDebug() << "shoudn't enter here";   return false;
         }

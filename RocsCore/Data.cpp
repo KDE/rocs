@@ -25,7 +25,6 @@
 #include <QColor>
 #include <QMap>
 
-#include "DynamicPropertiesList.h"
 #include "DataType.h"
 
 class DataPrivate
@@ -429,7 +428,11 @@ void Data::setColor(const QVariant& s)
 
 void Data::addDynamicProperty(const QString& property, const QVariant& value)
 {
-    DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
+    if (!Document::isValidIdentifier(property)) {
+        kWarning() << "Property identifier is not valid: aborting";
+        return;
+    }
+    setProperty(property.toAscii(), value);
     emit propertyAdded(property);
 }
 
@@ -437,7 +440,6 @@ void Data::removeDynamicProperty(const QString& property)
 {
     // setting property to invalid is equals to deleting it
     setProperty(property.toUtf8(), QVariant::Invalid);
-    DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
     emit propertyRemoved(property);
 }
 
@@ -453,9 +455,12 @@ void Data::updateDynamicProperty(QString property)
 
 void Data::renameDynamicProperty(QString oldName, QString newName)
 {
-    DynamicPropertiesList::New()->changePropertyName(oldName.toStdString().c_str(),
-                                                     newName.toStdString().c_str(),
-                                                     this);
+    if (!Document::isValidIdentifier(newName)) {
+        kWarning() << "Property identifier is not valid: aborting";
+        return;
+    }
+    setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));
+    setProperty(oldName.toStdString().c_str(), QVariant::Invalid);
 }
 
 QScriptValue Data::scriptValue() const

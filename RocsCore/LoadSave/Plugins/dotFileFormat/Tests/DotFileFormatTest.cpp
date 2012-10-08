@@ -25,7 +25,6 @@
 #include "../DotFileFormatPlugin.h"
 #include <DataStructure.h>
 #include <DataStructurePluginManager.h>
-#include <DynamicPropertiesList.h>
 #include <KDebug>
 
 static const std::string simple = "digraph simple {a -> b; c; d -> e /* error -> comment*/}";

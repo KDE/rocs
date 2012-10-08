@@ -91,6 +91,11 @@ public:
      */
     void setFileUrl(KUrl fileUrl);
 
+    /**
+     * Evaluates given string and returns true if identifier is valid, otherwise returns false.
+     */
+    static bool isValidIdentifier(QString identifier);
+
     QtScriptBackend * engineBackend() const;
     QList< DataStructurePtr >& dataStructures() const;
 

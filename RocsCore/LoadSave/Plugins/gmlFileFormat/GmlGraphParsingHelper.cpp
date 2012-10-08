@@ -20,7 +20,6 @@
 
 #include "GmlGraphParsingHelper.h"
 #include "GmlGrammar.h"
-#include "DynamicPropertiesList.h"
 #include "Document.h"
 #include "Pointer.h"
 

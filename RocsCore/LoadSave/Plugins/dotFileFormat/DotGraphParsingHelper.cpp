@@ -25,7 +25,6 @@
 #include <KDebug>
 
 #include <QFile>
-#include "DynamicPropertiesList.h"
 #include <Group.h>
 
 extern DotParser::DotGraphParsingHelper* phelper;
@@ -64,7 +63,7 @@ void DotGraphParsingHelper::setDataStructureElementAttributes(QObject* graphElem
             label.replace("\\n", "\n");
             graphElement->setProperty("name", label);
         } else {
-            DynamicPropertiesList::New()->addProperty(graphElement, it.key().toAscii(), it.value());
+            graphElement->setProperty(it.key().toAscii(), it.value());
         }
     }
 }

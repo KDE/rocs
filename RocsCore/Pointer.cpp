@@ -22,7 +22,6 @@
 #include "PointerType.h"
 #include "Data.h"
 #include "DataStructure.h"
-#include "DynamicPropertiesList.h"
 #include <KDebug>
 #include <QColor>
 #include <boost/weak_ptr.hpp>
@@ -259,13 +258,17 @@ Qt::PenStyle Pointer::style() const
 
 void Pointer::addDynamicProperty(const QString & property, const QVariant& value)
 {
-    DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
+    if (!Document::isValidIdentifier(property)) {
+        kWarning() << "Property identifier is not valid: aborting";
+        return;
+    }
+    setProperty(property.toAscii(), value);
     emit(propertyAdded(property));
 }
 
 void Pointer::removeDynamicProperty(QString property)
 {
-    DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
+    setProperty(property.toAscii(), QVariant::Invalid);
     emit(propertyRemoved(property));
 }
 
@@ -281,9 +284,12 @@ void Pointer::updateDynamicProperty(QString property)
 
 void Pointer::renameDynamicProperty(QString oldName, QString newName)
 {
-    DynamicPropertiesList::New()->changePropertyName(oldName.toStdString().c_str(),
-                                                     newName.toStdString().c_str(),
-                                                     this);
+    if (!Document::isValidIdentifier(newName)) {
+        kWarning() << "Property identifier is not valid: aborting";
+        return;
+    }
+    setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));
+    setProperty(oldName.toStdString().c_str(), QVariant::Invalid);
 }
 
 QScriptValue Pointer::set_type(int pointerType)

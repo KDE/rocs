@@ -279,6 +279,13 @@ QList< DataStructurePtr >& Document::dataStructures() const
     return d->_dataStructures;
 }
 
+bool Document::isValidIdentifier(QString identifier)
+{
+    QRegExp validator("(^([a-z]|[A-Z])+([0-9]|[a-z]|[A-Z]|_)*$)");
+    return (validator.indexIn(identifier) != -1);
+}
+
+
 QtScriptBackend * Document::engineBackend() const
 {
     return d->_engineBackend;

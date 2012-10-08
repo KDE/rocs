@@ -41,10 +41,8 @@ private slots:
     void removeEdgeDynamicProperty();
     void removeGraphDynamicProperty();
 
-    void changeNames();
-
-//     void renameProperties(); //TODO
-    void renameToinvalidNames();
+    void renameProperties();
+    void renamePropertiesToInvalidNames();
 
     void insertInvalidNames();
 

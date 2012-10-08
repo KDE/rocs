@@ -27,7 +27,6 @@
 #include "Group.h"
 #include "Document.h"
 #include "DocumentManager.h"
-#include "DynamicPropertiesList.h"
 #include "ConcurrentHelpClasses.h"
 
 #include <boost/shared_ptr.hpp>
@@ -515,18 +514,29 @@ void DataStructure::setName(const QString& s)
     emit nameChanged(d->_name);
 }
 
-
 void DataStructure::addDynamicProperty(const QString& property, QVariant value)
 {
-        DynamicPropertiesList::New()->addProperty(this, property.toAscii(), value);
+    if (!Document::isValidIdentifier(property)) {
+        kWarning() << "Property identifier is not valid: aborting";
+        return;
+    }
+    setProperty(property.toAscii(), value);
 }
-
 
 void DataStructure::removeDynamicProperty(const QString& property)
 {
-    DynamicPropertiesList::New()->removeProperty(this, property.toAscii());
+    setProperty(property.toAscii(), QVariant::Invalid);
 }
 
+void DataStructure::renameDynamicProperty(QString oldName, QString newName)
+{
+    if (!Document::isValidIdentifier(newName)) {
+        kWarning() << "Property identifier is not valid: aborting";
+        return;
+    }
+    setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));
+    setProperty(oldName.toStdString().c_str(), QVariant::Invalid);
+}
 
 void DataStructure::add_property(const QString& name, QVariant value)
 {
@@ -537,8 +547,6 @@ void DataStructure::remove_property (const QString& name)
 {
     removeDynamicProperty(name);
 }
-
-
 
 void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value)
 {

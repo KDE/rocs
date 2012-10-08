@@ -30,7 +30,6 @@ set( rocs_core_SRCS
     DataStructurePluginInterface.cpp
     DataStructurePluginManager.cpp
     DocumentManager.cpp
-    DynamicPropertiesList.cpp
     KrossBackend.cpp
     Pointer.cpp
     QtScriptBackend.cpp
@@ -54,11 +53,9 @@ target_link_libraries( rocscore
 )
 
 set( rocscore_LIB_HDRS
-    DynamicPropertiesList.h
     Data.h
     DataStructure.h
     Document.h
-    KrossBackend.h
     Pointer.h
     CoreTypes.h
     RocsCoreExport.h

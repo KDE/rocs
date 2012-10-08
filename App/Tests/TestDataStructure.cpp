@@ -196,7 +196,7 @@ void TestDataStructure::pointerTypesTest()
     int type1 = ds->document()->registerPointerType("type1");
     QVERIFY2(ds->document()->pointerTypeList().size() == 2, "ERROR: pointer types were not created");
 
-    // connect data elements to a lines
+    // connect data elements to a line
     for (int i = 0; i < 4; i++) {
         ds->addPointer(dataList[i], dataList[i + 1]);
     }
