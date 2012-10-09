@@ -286,7 +286,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    boost::shared_ptr<DataPrivate> d;
+    DataPrivate* d;
 
     /**
      * \internal
@@ -295,8 +295,8 @@ private:
     void setQpointer(DataPtr q);
 
     void initialize();
-    Data(Data const &, int uniqueIdentifier, int dataType);
-    Data & operator=(Data const &);
+    Data(const Data &);
+    Data & operator=(const Data &);
 };
 
 #endif

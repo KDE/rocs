@@ -295,7 +295,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    boost::shared_ptr<PointerPrivate> const d;
+    PointerPrivate* d;
 
     /**
      * \internal
@@ -304,7 +304,8 @@ private:
     void setQpointer(PointerPtr q);
 
     void initialize();
-
+    Pointer(const Pointer &);
+    Pointer & operator=(Pointer const &);
 };
 
 #endif

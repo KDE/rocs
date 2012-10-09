@@ -327,8 +327,11 @@ private:
      * \internal
      * d-Pointer.
      */
-    boost::shared_ptr<DataStructurePrivate> d;
+    DataStructurePrivate* d;
 
+    DataStructure(const DataStructure &);
+    DataStructure & operator=(const DataStructure &);
+    
     /**
      * \internal
      * Set q-pointer in private data object.

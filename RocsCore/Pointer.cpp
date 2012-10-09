@@ -92,7 +92,8 @@ PointerPtr Pointer::getPointer() const
 }
 
 Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) :
-    QObject(parent.get()), d(new PointerPrivate())
+    QObject(parent.get()),
+    d(new PointerPrivate())
 {
     d->from          = from;
     d->to            = to;
@@ -126,6 +127,7 @@ Pointer::~Pointer()
             kDebug() << "Removed from the to node";
         }
     }
+    delete d;
 }
 
 bool Pointer::eventFilter(QObject *obj, QEvent *event){

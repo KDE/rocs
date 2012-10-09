@@ -155,6 +155,7 @@ Data::~Data()
         d->empty(d->_inPointers);
         d->empty(d->_outPointers);
     }
+    delete d;
 }
 
 bool Data::eventFilter(QObject *obj, QEvent *event){
@@ -235,9 +236,12 @@ DataList Data::adjacentDataList() const
 PointerList Data::pointerList() const
 {
     PointerList adjacent;
-
-    adjacent << d->_outPointers;
-    adjacent << d->_inPointers;
+    foreach (const PointerPtr& p, d->_outPointers) {
+        adjacent.append(p);
+    }
+    foreach (const PointerPtr& p, d->_inPointers) {
+        adjacent.append(p);
+    }
 
     return adjacent;
 }
