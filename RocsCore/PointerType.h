@@ -219,7 +219,9 @@ protected:
     PointerType(Document* document, int identifier);
 
 private:
-    boost::shared_ptr<PointerTypePrivate> const d;
+    PointerTypePrivate* const d;
+    PointerType(const PointerType &);
+    PointerType & operator=(const PointerType &);
 };
 
 #endif // POINTERTYPE_H

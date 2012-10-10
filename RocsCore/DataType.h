@@ -214,7 +214,9 @@ protected:
     DataType(Document* document, int identifier);
 
 private:
-    boost::shared_ptr<DataTypePrivate> const d;
+    DataTypePrivate* d;
+    DataType(const DataType &);
+    DataType & operator=(const DataType &);
 };
 
 #endif // DATATYPE_H

@@ -71,6 +71,7 @@ DataType::DataType(Document* document, int identifier):
 
 DataType::~DataType()
 {
+    delete d;
 }
 
 

@@ -73,6 +73,7 @@ PointerType::PointerType(Document* document, int identifier):
 
 PointerType::~PointerType()
 {
+    delete d;
 }
 
 
