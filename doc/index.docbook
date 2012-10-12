@@ -6,9 +6,9 @@
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
 ]>
-<book lang="&language;">
+<book id="rocs" lang="&language;">
 
-<bookinfo>
+<book id="rocs"info>
 <title>The &rocs; Handbook</title>
 <authorgroup>
 <author>
