@@ -34,7 +34,17 @@ public:
         bool visible;
     };
 
-    DataTypePrivate() {}
+    DataTypePrivate() :
+        _propertyList(),
+        _propertyDisplayList(),
+        _name(i18n("Element")),
+        _icon("rocs_default"),
+        _defaultColor(QColor("black")),
+        _visibility(true),
+        _document(0)
+    {
+    }
+
     boost::weak_ptr<DataType> q; // self pointer
 
     QMap<QString, Property> _propertyList;
@@ -62,16 +72,12 @@ DataType::DataType(Document* document, int identifier):
     d(new DataTypePrivate())
 {
     d->_identifier = identifier;
-    d->_defaultColor = QColor("black");
-    d->_icon = "rocs_default";
-    d->_name = i18n("Element");
     d->_document = document;
 }
 
 
 DataType::~DataType()
 {
-    delete d;
 }
 
 
@@ -226,5 +232,6 @@ void DataType::setPropertyVisible(QString name, bool visible)
 
 void DataType::remove()
 {
-    d->_document->removeDataType(identifier());
+    emit removed();
+    disconnect();
 }

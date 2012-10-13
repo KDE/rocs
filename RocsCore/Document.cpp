@@ -22,24 +22,24 @@
 #include "Document.h"
 #include "DocumentManager.h"
 #include "DataStructure.h"
-#include <QString>
-#include <KSaveFile>
-#include <QByteArray>
-#include <KDebug>
 #include "Data.h"
 #include "Pointer.h"
-#include <QMap>
-
 #include "PointerType.h"
 #include "DataType.h"
+#include "DataStructurePluginManager.h"
+#include "DataStructurePluginInterface.h"
 
 #include <boost/shared_ptr.hpp>
 #include <boost/concept_check.hpp>
 
-#include "DataStructurePluginManager.h"
-#include "DataStructurePluginInterface.h"
 #include <KStandardDirs>
+#include <KSaveFile>
+#include <KDebug>
+
+#include <QString>
+#include <QByteArray>
 #include <QSvgRenderer>
+#include <QMap>
 
 class DocumentPrivate
 {
@@ -124,10 +124,7 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_dataTypes.insert(0, DataType::create(this, 0));
     d->_pointerTypes.insert(0, PointerType::create(this, 0));
 
-    qDebug() << "------=======------======";
-    qDebug() << " Document Constructor ";
-    qDebug() << d->_dataStructureType->name();
-    qDebug() << "------=======------======";
+    kDebug() << "Construct Graph Document of type : " << d->_dataStructureType->name();
 }
 
 void Document::setModified(const bool mod)
@@ -136,7 +133,8 @@ void Document::setModified(const bool mod)
 }
 
 Document::Document(const Document& gd)
-    : QObject(gd.parent()), d(new DocumentPrivate())
+    : QObject(0)
+    , d(new DocumentPrivate())
 {
 //     QObject::setParent(gd.parent());
     d->_name = gd.name();
@@ -167,12 +165,21 @@ Document::Document(const Document& gd)
     }
 }
 
-// Default Destructor
 Document::~Document()
 {
-    for (int i = 0; i < d->_dataStructures.size(); i ++) {
-        d->_dataStructures.clear();
+    // remove types
+    foreach (DataTypePtr type, d->_dataTypes) {
+        type->remove();
     }
+    foreach (PointerTypePtr type, d->_pointerTypes) {
+        type->remove();
+    }
+
+    // remove data structures
+    for (int i = 0; i < d->_dataStructures.size(); ++i) {
+        d->_dataStructures.at(i)->remove();
+    }
+    delete d->_engineBackend;
 }
 
 int Document::registerDataType(QString name, int identifier)
@@ -503,8 +510,9 @@ bool Document::isModified() const
 
 void Document::cleanUpBeforeConvert()
 {
-    foreach(DataStructurePtr ds, d->_dataStructures)
-    ds->cleanUpBeforeConvert();
+    foreach(DataStructurePtr ds, d->_dataStructures) {
+        ds->cleanUpBeforeConvert();
+    }
 }
 
 void Document::setActiveDataStructure(int index)

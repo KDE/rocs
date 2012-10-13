@@ -34,9 +34,18 @@ public:
     TestDataStructure();
 
 private slots:
+    /**
+     * Called before every test case.
+     */
+    void init();
+
+    /**
+     * Called after every test case.
+     */
+    void cleanup();
+
     void dataAddDeleteTest();
     void pointerAddDeleteTest();
-    void cleanupTestCase();
     void createSimpleGraph();
     void dataTypesTest();
     void pointerTypesTest();

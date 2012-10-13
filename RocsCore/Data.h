@@ -31,7 +31,7 @@
 #include <QtScript>
 #include <QColor>
 
-#include <boost/shared_ptr.hpp>
+#include <boost/scoped_ptr.hpp>
 
 class DataItem;
 class Pointer;
@@ -66,7 +66,8 @@ public:
     virtual DataPtr getData() const;
 
     /**
-     * Destructor.
+     * Default destructor.
+     * DO NOT CALL IT, let the shared pointer take care for deletion.
      */
     virtual ~Data();
 
@@ -98,7 +99,7 @@ public:
      *
      * \param e is pointer to be removed
      */
-    void removePointer(PointerPtr e);
+    void remove(PointerPtr e);
 
     /**
      * \return data structure to that this data element belongs
@@ -286,7 +287,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    DataPrivate* d;
+    boost::scoped_ptr<DataPrivate> d;
 
     /**
      * \internal

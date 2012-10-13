@@ -37,8 +37,14 @@ TestDataStructure::TestDataStructure()
     DocumentManager::self()->addDocument(new Document("test"));;
 }
 
-void TestDataStructure::cleanupTestCase()
+void TestDataStructure::init()
 {
+    DocumentManager::self()->newDocument();
+}
+
+void TestDataStructure::cleanup()
+{
+    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
 }
 
 void TestDataStructure::dataAddDeleteTest()
@@ -60,7 +66,7 @@ void TestDataStructure::dataAddDeleteTest()
 
     QVERIFY2(ds->dataList().size() == 0, "ERROR: Not all data elements were deleted");
 
-    ds->remove();
+    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
 }
 
 void TestDataStructure::pointerAddDeleteTest()
@@ -102,8 +108,6 @@ void TestDataStructure::pointerAddDeleteTest()
     // x o x o x-x-x-x-x-x
     dataList[3]->remove();
     QVERIFY2(ds->pointers().size() == 5, "ERROR: data deletion did not remove its both pointers");
-
-    ds->remove();
 }
 
 
@@ -137,14 +141,12 @@ void TestDataStructure::createSimpleGraph()
         QVERIFY2(n->pointerList().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
     dataList.clear();
-    ds->remove();
 }
 
 
 void TestDataStructure::dataTypesTest()
 {
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure();
 
     DataList dataListDefault, dataList1, dataList2;
     QVERIFY2(ds->document()->dataTypeList().size() == 1, "ERROR: no default data type created");
@@ -183,8 +185,6 @@ void TestDataStructure::dataTypesTest()
     ds->document()->removeDataType(type2);
     QVERIFY2(!ds->document()->dataTypeList().contains(type2),"ERROR: data type was not unregistered");
     QVERIFY2(ds->pointers(0).size() == 1, "ERROR: pointers were not correctly deleted");
-
-    ds->remove();
 }
 
 
@@ -226,8 +226,6 @@ void TestDataStructure::pointerTypesTest()
     ds->document()->removePointerType(type1);
     QVERIFY(dataList[2]->adjacentDataList().size() == 2);
     QVERIFY(dataList[6]->adjacentDataList().size() == 0);
-
-    ds->remove();
 }
 
 void TestDataStructure::pointerDirectionChange()
@@ -267,7 +265,6 @@ void TestDataStructure::pointerDirectionChange()
     QVERIFY(dataList[1]->adjacentDataList().length() == 1);
 
     dataList.clear();
-    ds->remove();
 }
 
 

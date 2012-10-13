@@ -23,6 +23,8 @@
 #include <QString>
 #include <QColor>
 
+#include <boost/scoped_ptr.hpp>
+
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
@@ -58,9 +60,10 @@ public:
     static PointerTypePtr create(Document* parent, int identifier);
 
     /**
-     * Destructor.
+     * Default destructor.
+     * DO NOT CALL IT, let the shared pointer take care for deletion.
      */
-    ~PointerType();
+    virtual ~PointerType();
 
     /**
      * \return name of pointer type
@@ -167,7 +170,17 @@ public slots:
      */
     void setLineStyle(Qt::PenStyle lineStyle);
 
+    /**
+     * Unregister pointer type from graph document.
+     */
+    void remove();
+
 signals:
+    /**
+     * Emitted when data type is removed.
+     */
+    void removed();
+
     /**
      * Emitted when settings for the visual representation changed.
      */
@@ -219,7 +232,7 @@ protected:
     PointerType(Document* document, int identifier);
 
 private:
-    PointerTypePrivate* const d;
+    boost::scoped_ptr<PointerTypePrivate> d;
     PointerType(const PointerType &);
     PointerType & operator=(const PointerType &);
 };

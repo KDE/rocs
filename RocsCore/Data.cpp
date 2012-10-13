@@ -25,6 +25,8 @@
 #include <QColor>
 #include <QMap>
 
+#include <boost/weak_ptr.hpp>
+
 #include "DataType.h"
 
 class DataPrivate
@@ -53,10 +55,6 @@ public:
     QScriptValue _scriptvalue;
     QScriptEngine *_engine;
 
-    void empty(PointerList &list);
-
-    void removePointer(PointerPtr e, PointerList &list);
-
     /**
      * Create a script value array out of a pointer list.
      *
@@ -73,26 +71,12 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifier, int data
     , _visible(parent->isDataVisible(dataType))
     , _dataStructure(parent)
     , _uniqueIdentifier(uniqueIdentifier)
+    , _dataType(_dataStructure->document()->dataType(dataType))
     , _color(parent->document()->dataType(dataType)->defaultColor())
 {
-    _dataType = _dataStructure->document()->dataType(dataType);
+
     _inPointers = PointerList();
     _outPointers = PointerList();
-}
-
-
-void DataPrivate::empty(PointerList &list)
-{
-    while (!list.isEmpty()) {
-        list.first()->remove();
-    }
-}
-
-void DataPrivate::removePointer(PointerPtr e, PointerList &list)
-{
-    if (list.contains(e)) {
-        list.removeOne(e);
-    }
 }
 
 QScriptValue DataPrivate::createScriptArray(PointerList list)
@@ -103,8 +87,6 @@ QScriptValue DataPrivate::createScriptArray(PointerList list)
     }
     return array;
 }
-
-
 
 DataPtr Data::create(DataStructurePtr dataStructure, int uniqueIdentifier, int dataType)
 {
@@ -119,7 +101,7 @@ void Data::setQpointer(DataPtr q)
 void Data::initialize()
 {
     installEventFilter(this);
-    foreach(QString property, d->_dataType->properties()) {
+    foreach(const QString& property, d->_dataType->properties()) {
         addDynamicProperty(property, d->_dataType->propertyDefaultValue(property));
     }
 
@@ -133,6 +115,7 @@ void Data::initialize()
             this, SLOT(updateDynamicProperty(QString)));
     connect(d->_dataType.get(), SIGNAL(propertyVisibilityChanged(QString)),
             this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(removed()), this, SLOT(remove()));
 }
 
 DataPtr Data::getData() const
@@ -141,21 +124,15 @@ DataPtr Data::getData() const
     return px;
 }
 
+// Do NOT set a parent, since shared pointer will take care for deletion!
 Data::Data(DataStructurePtr dataStructure, int uniqueIdentifier, int dataType)
-    :  QObject(dataStructure.get()),
+    :  QObject(0),
        d(new DataPrivate(dataStructure, uniqueIdentifier, dataType))
 {
 }
 
 Data::~Data()
 {
-    emit removed();
-
-    if (d) {
-        d->empty(d->_inPointers);
-        d->empty(d->_outPointers);
-    }
-    delete d;
 }
 
 bool Data::eventFilter(QObject *obj, QEvent *event){
@@ -189,7 +166,9 @@ void Data::setDataType(int dataType)
     Q_ASSERT(d->_dataStructure->document()->dataTypeList().contains(dataType));
 
     // disconnect from old data type
-    disconnect(d->_dataType.get());
+    if (d->_dataType) {
+        d->_dataType.get()->disconnect(this);
+    }
 
     // make changes
     d->_dataType = d->_dataStructure->document()->dataType(dataType);
@@ -210,6 +189,7 @@ void Data::setDataType(int dataType)
             this, SLOT(updateDynamicProperty(QString)));
     connect(d->_dataType.get(), SIGNAL(propertyRenamed(QString,QString)),
             this, SLOT(renameDynamicProperty(QString,QString)));
+    connect(d->_dataType.get(), SIGNAL(removed()), this, SLOT(remove()));
 }
 
 DataList Data::adjacentDataList() const
@@ -267,13 +247,19 @@ PointerPtr Data::addPointer(DataPtr to)
     return d->_dataStructure->addPointer(this->getData(), to);
 }
 
-void Data::removePointer(PointerPtr e)
+void Data::remove(PointerPtr e)
 {
     // removes pointer from any list that could contain it
-    d->removePointer(e, d->_inPointers);
-    d->removePointer(e, d->_outPointers);
-    disconnect(e.get());
-    emit pointerListChanged();
+    if (d->_inPointers.removeOne(e)) {
+        emit pointerListChanged();
+        d->_dataStructure->remove(e);
+        // not necessary to call e->remove() here, since data structure already calls that
+    }
+    if (d->_outPointers.removeOne(e)) {
+        emit pointerListChanged();
+        d->_dataStructure->remove(e);
+        // not necessary to call e->remove() here, since data structure already calls that
+    }
 }
 
 void Data::updatePointerList()
@@ -320,15 +306,18 @@ PointerList Data::pointerList(DataPtr to) const
 
 void Data::remove()
 {
-    if (d->_dataStructure) {
-        d->_dataStructure->remove(getData());
-        d->_dataStructure.reset();  // allow data structure to be destroyed
+    emit removed();
+    // disconnect from DataType signals
+    disconnect(d->_dataType.get(), 0, this, 0);
+
+    while (!d->_inPointers.isEmpty()) {
+        remove(d->_inPointers.first());
+    }
+    while (!d->_outPointers.isEmpty()) {
+        remove(d->_outPointers.first());
     }
 
-    d->empty(d->_inPointers);
-    d->empty(d->_outPointers);
-
-    emit removed();
+    d->_dataStructure->remove(getData());
 }
 
 

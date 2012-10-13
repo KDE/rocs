@@ -135,7 +135,7 @@ void DocumentManager::removeDocument(Document* document)
             }
         }
         emit documentRemoved(document);
-        document->deleteLater();
+        delete document;
     }
     emit documentListChanged();
 }

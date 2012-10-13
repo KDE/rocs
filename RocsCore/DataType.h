@@ -25,6 +25,8 @@
 #include <QColor>
 #include <KIcon>
 
+#include <boost/scoped_ptr.hpp>
+
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
@@ -54,7 +56,8 @@ public:
     static DataTypePtr create(Document* document, int identifier);
 
     /**
-     * Destructor.
+     * Default destructor.
+     * DO NOT CALL IT, let the shared pointer take care for deletion.
      */
     ~DataType();
 
@@ -164,6 +167,11 @@ public slots:
 
 signals:
     /**
+     * Emitted when data type is removed.
+     */
+    void removed();
+
+    /**
      * Emitted when default color was changed.
      */
     void defaultColorChanged(QColor color);
@@ -214,7 +222,7 @@ protected:
     DataType(Document* document, int identifier);
 
 private:
-    DataTypePrivate* d;
+    boost::scoped_ptr<DataTypePrivate> d;
     DataType(const DataType &);
     DataType & operator=(const DataType &);
 };

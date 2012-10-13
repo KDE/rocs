@@ -24,6 +24,16 @@ class TestPlugins : public QObject
 {
     Q_OBJECT
 private slots:
+    /**
+     * Called before every test case.
+     */
+    void init();
+
+    /**
+     * Called after every test case.
+     */
+    void cleanup();
+
     void inittestcase();
 
     void standardPluginsLoaded();
@@ -33,7 +43,7 @@ private slots:
     void createRootedTree();
 
     void convertGraphToLinkedList();
-    
+
     void convertGraphToRootedTree();
 };
 

@@ -92,7 +92,6 @@ PointerPtr Pointer::getPointer() const
 }
 
 Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType) :
-    QObject(parent.get()),
     d(new PointerPrivate())
 {
     d->from          = from;
@@ -107,27 +106,11 @@ Pointer::Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerT
             this, SIGNAL(directionChanged(PointerType::Direction)));
     connect(d->pointerType.get(), SIGNAL(styleChanged()),
             this, SIGNAL(changed()));
+    connect(d->pointerType.get(), SIGNAL(removed()), this, SLOT(remove()));
 }
 
 Pointer::~Pointer()
 {
-    if (d->from == d->to) {
-        if (d->from) {
-            kDebug() << "Removing from a loop node";
-            d->from->removePointer(getPointer());
-        }
-    } else {
-        kDebug() << "Removing from not a loop node.";
-        if (d->from) {
-            d->from->removePointer(getPointer());
-            kDebug() << "Removed from the from node";
-        }
-        if (d->to) {
-            d->to->removePointer(getPointer());
-            kDebug() << "Removed from the to node";
-        }
-    }
-    delete d;
 }
 
 bool Pointer::eventFilter(QObject *obj, QEvent *event){
@@ -175,7 +158,7 @@ void Pointer::setPointerType(int typeIdentifier)
     Q_ASSERT(d->dataStructure->document()->pointerTypeList().contains(typeIdentifier));
 
     // disconnect from old type
-    disconnect(d->pointerType.get());
+    d->pointerType.get()->disconnect(this);
 
     // change type
     d->pointerType = d->dataStructure->document()->pointerType(typeIdentifier);
@@ -184,6 +167,7 @@ void Pointer::setPointerType(int typeIdentifier)
     // connect to new pointer type and emit information about
     connect(d->pointerType.get(), SIGNAL(directionChanged(PointerType::Direction)),
             this, SIGNAL(directionChanged(PointerType::Direction)));
+    connect(d->pointerType.get(), SIGNAL(removed()), this, SLOT(remove()));
     emit pointerTypeChanged(typeIdentifier);
 }
 
@@ -195,13 +179,16 @@ QList<QString> Pointer::properties() const
 void Pointer::remove()
 {
     emit removed();
+
+    d->pointerType->disconnect(this);
+    d->from->disconnect(this);
+    d->to->disconnect(this);
+
     if (d->from) {
-        d->from->removePointer(getPointer());
-        d->from.reset();
+        d->from->remove(getPointer());
     }
     if (d->to) {
-        d->to->removePointer(getPointer());
-        d->to.reset();
+        d->to->remove(getPointer());
     }
     d->dataStructure->remove(getPointer());
 }

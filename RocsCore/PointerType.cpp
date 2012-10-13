@@ -33,7 +33,14 @@ public:
         bool visible;
     };
 
-    PointerTypePrivate() {}
+    PointerTypePrivate(Document* document, int identifier) :
+        _name(i18n("Connection"))
+        , _identifier(identifier)
+        , _pointerDirection(PointerType::Unidirectional)
+        , _lineStyle(Qt::SolidLine)
+        , _defaultColor(QColor("gray"))
+        , _document(document)
+    {}
     boost::weak_ptr<PointerType> q; // self pointer
 
     QMap<QString, Property> _propertyList;
@@ -59,21 +66,14 @@ PointerTypePtr PointerType::create(Document* document, int identifier)
 }
 
 
-PointerType::PointerType(Document* document, int identifier):
-    d(new PointerTypePrivate())
+PointerType::PointerType(Document* document, int identifier)
+    : d(new PointerTypePrivate(document, identifier))
 {
-    d->_identifier = identifier;
-    d->_pointerDirection = Unidirectional;
-    d->_lineStyle = Qt::SolidLine;
-    d->_defaultColor = QColor("gray");
-    d->_name = i18n("Connection");
-    d->_document = document;
 }
 
 
 PointerType::~PointerType()
 {
-    delete d;
 }
 
 
@@ -206,4 +206,10 @@ void PointerType::setPropertyVisible(QString name, bool visible)
     }
     d->_propertyList[name].visible = visible;
     emit propertyVisibilityChanged(name);
+}
+
+void PointerType::remove()
+{
+    emit removed();
+    disconnect();
 }

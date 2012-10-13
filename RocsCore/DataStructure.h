@@ -29,7 +29,7 @@
 
 #include <klocalizedstring.h>
 
-#include <boost/shared_ptr.hpp>
+#include <boost/scoped_ptr.hpp>
 
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
@@ -51,13 +51,25 @@ class ROCSLIB_EXPORT DataStructure : public QObject
     Q_PROPERTY(QString name READ name WRITE setName)
 
 public:
+    /**
+     * Default destructor.
+     * DO NOT CALL IT, let the shared pointer take care for deletion.
+     */
+    virtual ~DataStructure();
+
     static DataStructurePtr create(Document *parent = 0);
     static DataStructurePtr create(DataStructurePtr other, Document *parent = 0);
 
     virtual DataStructurePtr getDataStructure() const;
-    virtual ~DataStructure();
 
     void updateRelativeCenter();
+
+    /**
+    * Returns cached relative center of the data structure.
+    * The relative center gets updated when data elements are added/deleted.
+    *
+    * \return center of datastructure
+    */
     QPointF relativeCenter() const;
     Document *document() const;
 
@@ -161,13 +173,28 @@ public slots:
      */
     DataPtr getData(int uniqueIdentifier);
 
+    /**
+     * Remove \p n from data structure and (if necessary) destroys the data object.
+     * It is valid to call this method more than once for the same data object.
+     *
+     * \param n the data object to be removed
+     */
     virtual void remove(DataPtr n);
 
     /**
-     * Unregister pointer from data structure. Do not use this for actual removal of pointer.
-     * To remove a pointer \see Pointer::remove().
+     * Remove \p e from data structure and (if necessary) destroys the pointer object.
+     * It is valid to call this method more than once for the same pointer object.
+     *
+     * \param e the pointer to be removed
      */
     virtual void remove(PointerPtr e);
+
+    /**
+     * Remove \p group from data structure and (if necessary) destroys the group object.
+     * It is valid to call this method more than once for the same group object.
+     *
+     * \param e the pointer to be removed
+     */
     virtual void remove(GroupPtr group);
 
     virtual GroupPtr addGroup(const QString& name);
@@ -297,6 +324,9 @@ protected:
     int generateUniqueIdentifier();
 
 protected:
+    /**
+     * Default constructor.
+     */
     DataStructure(Document *parent = 0);
 
     /**
@@ -327,11 +357,11 @@ private:
      * \internal
      * d-Pointer.
      */
-    DataStructurePrivate* d;
+    boost::scoped_ptr<DataStructurePrivate> d;
 
     DataStructure(const DataStructure &);
     DataStructure & operator=(const DataStructure &);
-    
+
     /**
      * \internal
      * Set q-pointer in private data object.

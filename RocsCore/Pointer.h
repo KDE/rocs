@@ -29,8 +29,7 @@
 #include <QColor>
 #include <QScriptValue>
 
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <boost/scoped_ptr.hpp>
 
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
@@ -73,7 +72,8 @@ public:
     PointerPtr getPointer() const;
 
     /**
-     * Destructor.
+     * Default destructor.
+     * DO NOT CALL IT, let the shared pointer take care for deletion.
      */
     virtual ~Pointer();
 
@@ -295,7 +295,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    PointerPrivate* d;
+    boost::scoped_ptr<PointerPrivate> d;
 
     /**
      * \internal

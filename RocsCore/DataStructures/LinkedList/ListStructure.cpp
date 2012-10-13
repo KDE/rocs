@@ -73,7 +73,7 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
 
 void Rocs::ListStructure::init()
 {
-    m_animationGroup = new QParallelAnimationGroup(this);
+    m_animationGroup = new QParallelAnimationGroup(parent());
     if (!dataList().isEmpty()) {
         m_begin = boost::static_pointer_cast<ListNode>(dataList().first());
         arrangeNodes();
@@ -85,7 +85,9 @@ void Rocs::ListStructure::init()
 
 Rocs::ListStructure::~ListStructure()
 {
-    m_animationGroup->deleteLater();;
+// FIXME this is a memory leak, but fix this later
+// since delete later guides to crash on deletion
+//     m_animationGroup->deleteLater();
 }
 
 PointerPtr Rocs::ListStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
@@ -94,7 +96,7 @@ PointerPtr Rocs::ListStructure::addPointer(DataPtr from, DataPtr to, int pointer
         e->remove();
     }
 
-    PointerPtr e =  DataStructure::addPointer(from, to, pointerType);
+    PointerPtr e = DataStructure::addPointer(from, to, pointerType);
     arrangeNodes();
     return e;
 }

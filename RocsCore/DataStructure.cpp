@@ -29,7 +29,7 @@
 #include "DocumentManager.h"
 #include "ConcurrentHelpClasses.h"
 
-#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 
 #include <QColor>
 #include <KDebug>
@@ -120,15 +120,9 @@ void DataStructure::importStructure(DataStructurePtr other)
 {
     d->_readOnly = other->readOnly();
     updateRelativeCenter();
+    // FIXME set dynamic properties
 
-//FIXME implement import for types
-//     d->_pointerDefaultColor     = other->pointerDefaultColor();
-//     d->_dataNamesVisible        = other->d->_dataNamesVisible;
-//     d->_dataValuesVisible       = other->d->_dataValuesVisible;
-//     d->_pointerNamesVisible     = other->d->_pointerNamesVisible;
-//     d->_pointerValuesVisible    = other->d->_pointerValuesVisible;
-
-    QHash <Data*, DataPtr > dataTodata;
+    QHash <Data*, DataPtr> dataTodata;
     foreach(DataPtr n, other->dataList()) {
         DataPtr newdata = addData(n->property("name").toString());
         newdata->setColor(n->color());
@@ -155,17 +149,6 @@ void DataStructure::importStructure(DataStructurePtr other)
 
 DataStructure::~DataStructure()
 {
-    foreach(const PointerList& pointerType, d->_pointerTypeLists) {
-        foreach(PointerPtr pointer, pointerType) {
-            pointer->remove();
-        }
-    }
-    foreach(const DataList& dataType, d->_dataTypeLists) {
-        foreach(DataPtr data, dataType) {
-            data->remove();
-        }
-    }
-    delete d;
 }
 
 
@@ -174,7 +157,7 @@ const DataList DataStructure::dataList(int dataType) const
     if (d->_dataTypeLists.contains(dataType)) {
         return d->_dataTypeLists[dataType];
     }
-    kDebug() << "returning empty data list: data type not registered";
+    kWarning() << "returning empty data list: data type not registered";
     return DataList();
 }
 
@@ -194,7 +177,7 @@ const PointerList DataStructure::pointers(int pointerType) const
     if (d->_pointerTypeLists.contains(pointerType)) {
         return d->_pointerTypeLists[pointerType];
     }
-    kDebug() << "returning empty pointer list: pointer type not registered";
+    kWarning() << "returning empty pointer list: pointer type not registered";
     return PointerList();
 }
 
@@ -212,7 +195,7 @@ PointerList DataStructure::pointerListAll() const
 void DataStructure::registerDataType(int identifier)
 {
     if (!d->_document->dataType(identifier)) {
-        kDebug() << "DataType not registered at DataStructure: not valid";
+        kError() << "DataType not registered at DataStructure: not valid";
         return;
     }
     d->_dataTypeLists.insert(identifier, DataList());
@@ -223,7 +206,7 @@ void DataStructure::registerDataType(int identifier)
 void DataStructure::registerPointerType(int identifier)
 {
     if (!d->_document->pointerType(identifier)) {
-        kDebug() << "PointerType not registered at DataStructure: not valid";
+        kError() << "PointerType not registered at DataStructure: not valid";
         return;
     }
     d->_pointerTypeLists.insert(identifier, PointerList());
@@ -234,7 +217,7 @@ void DataStructure::registerPointerType(int identifier)
 void DataStructure::removeDataType(int dataType)
 {
     if (dataType == 0) {
-        kDebug() << "Could not remove non-existing DataType";
+        kWarning() << "Could not remove non-existing DataType";
         return;
     }
 
@@ -250,7 +233,7 @@ void DataStructure::removeDataType(int dataType)
 void DataStructure::removePointerType(int pointerType)
 {
     if (pointerType == 0 || !d->_pointerTypeLists.contains(pointerType)) {
-        kDebug() << "Could not remove non-existing PointerType";
+        kWarning() << "Could not remove non-existing PointerType";
         return;
     }
 
@@ -301,6 +284,7 @@ void DataStructure::setReadOnly(bool r)
 
 void DataStructure::remove()
 {
+    disconnect();
     foreach(const PointerList& pointerType, d->_pointerTypeLists) {
         foreach(PointerPtr pointer,  pointerType) {
             pointer->remove();
@@ -326,8 +310,8 @@ DataPtr DataStructure::addData(QString name, int dataType)
     }
 
     DataPtr n = Data::create(this->getDataStructure(), generateUniqueIdentifier(), dataType);
-
     n->setProperty("name", name);
+
     return addData(n, dataType);
 }
 
@@ -344,7 +328,6 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
     emit dataCreated(data);
     emit changed();
 
-//     connect(data.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
     connect(data.get(), SIGNAL(propertyChanged(QString)),     this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
@@ -359,7 +342,7 @@ DataList DataStructure::addDataList(DataList dataList, int dataType)
     foreach(DataPtr n, dataList) {
         d->_dataTypeLists[dataType].append(n);
         emit dataCreated(n);
-//         connect(n.get(), SIGNAL(removed()),                    this, SIGNAL(changed())); //FIXME removed for now
+
         connect(n.get(), SIGNAL(propertyChanged(QString)),     this, SIGNAL(changed()));
         connect(n.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
         connect(n.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
@@ -443,52 +426,45 @@ void DataStructure::remove(DataPtr n)
 {
     //Note: important for resize: remove node before emit resizeRequest
     Document *doc = DocumentManager::self()->activeDocument();
-    bool left = false;
-    bool top = false;
-    bool bottom = false;
-    bool right = false;
-
-    qreal xCenter = (doc->left() + doc->right() )/2;
-    qreal yCenter = (doc->top() + doc->bottom() )/2;
 
     if (doc != 0) {
-        if (n->x() < xCenter)      left = true;
-        if (n->x() > xCenter)     right = true;
-        if (n->y() < yCenter)       top = true;
-        if (n->y() > yCenter)    bottom = true;
+        qreal xCenter = (doc->left() + doc->right() )/2;
+        qreal yCenter = (doc->top() + doc->bottom() )/2;
+
+        if (n->x() < xCenter) emit resizeRequest(Document::BorderLeft);
+        if (n->x() > xCenter) emit resizeRequest(Document::BorderRight);
+        if (n->y() < yCenter) emit resizeRequest(Document::BorderTop);
+        if (n->y() > yCenter) emit resizeRequest(Document::BorderBottom);
     }
 
-    // find data among all types and delete it
-    //TODO improved performance: use type information to access list
-    QMap<int, DataList>::iterator i = d->_dataTypeLists.begin();
-    while (i != d->_dataTypeLists.end()) {
-        i->removeOne(n);
-        ++i;
+    // remove from internal list
+    foreach(int key, d->_pointerTypeLists.keys()) {
+        if (d->_dataTypeLists[key].removeOne(n)) {
+            // only remove data element if it is registered
+            n->remove();
+        }
     }
-
-    // emit changes
-    if (left)   emit resizeRequest(Document::BorderLeft);
-    if (right)  emit resizeRequest(Document::BorderRight);
-    if (top)    emit resizeRequest(Document::BorderTop);
-    if (bottom) emit resizeRequest(Document::BorderBottom);
-
     updateRelativeCenter();
+    emit changed();
 }
 
 void DataStructure::remove(PointerPtr e)
 {
-    //TODO improved performance: use type information to access list
-    QMap<int, PointerList>::iterator i = d->_pointerTypeLists.begin();
-    while (i != d->_pointerTypeLists.end()) {
-        i->removeOne(e);
-        ++i;
+    // remove from internal list
+    foreach(int key, d->_pointerTypeLists.keys()) {
+        if (d->_pointerTypeLists[key].removeOne(e)) {
+            // only remove pointer if it is registered
+            e->remove();
+        }
     }
     emit changed();
 }
 
 void DataStructure::remove(GroupPtr group)
 {
-    d->_groups.removeOne(group);
+    if (d->_groups.removeOne(group)) {
+        group->remove();
+    }
 }
 
 GroupPtr DataStructure::addGroup(const QString& name)
@@ -668,11 +644,6 @@ const QString& DataStructure::name() const
     return d->_name;
 }
 
-/**
- * returns cached relative center of datastructure
- * center needs to be updated at resizes by using \see updateRelativeCenter()
- * \return QPointF center of datastructure
- */
 QPointF DataStructure::relativeCenter() const
 {
     return d->_relativeCenter;

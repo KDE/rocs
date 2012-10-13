@@ -29,7 +29,7 @@
 #include "CoreTypes.h"
 #include <QSize>
 #include <QRectF>
-#include <boost/shared_ptr.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <KUrl>
 
 class KUrl;
@@ -233,7 +233,7 @@ signals:
     void resized();
 
 private:
-    boost::shared_ptr<DocumentPrivate> d;
+    boost::scoped_ptr<DocumentPrivate> d;
     static QMap<QString, QSvgRenderer*> _sharedRenderers;
 };
 

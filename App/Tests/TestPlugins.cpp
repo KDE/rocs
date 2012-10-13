@@ -22,6 +22,7 @@
 #include <qtest_kde.h>
 #include "DataStructurePluginManager.h"
 #include "Document.h"
+#include "DocumentManager.h"
 #include "DataStructure.h"
 #include "DataStructurePluginInterface.h"
 #include "CoreTypes.h"
@@ -32,6 +33,17 @@ void TestPlugins::inittestcase()
     if (DataStructurePluginManager::self()->pluginsList().count() == 0) {
         QFAIL("No plugin of DS, no way to continue!");
     }
+}
+
+
+void TestPlugins::init()
+{
+    DocumentManager::self()->newDocument();
+}
+
+void TestPlugins::cleanup()
+{
+    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
 }
 
 void TestPlugins::standardPluginsLoaded()
@@ -90,7 +102,7 @@ void TestPlugins::convertGraphToLinkedList()
 
     DataStructurePluginManager::self()->setDataStructurePlugin(plGraph->internalName());
     Document doc("TestDocument");
-//     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
+
     //Create a simple graph
     DataStructurePtr tree = doc.addDataStructure("Graph1");
     DataPtr a = tree->addData("node1");
@@ -137,7 +149,6 @@ void TestPlugins::convertGraphToRootedTree()
 
     QCOMPARE(list->dataList().count(), 3);
     QCOMPARE(list->pointers().count(), 4);
-
 }
 
 

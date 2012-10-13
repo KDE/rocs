@@ -42,14 +42,15 @@ void rootedTreeNodeFromScriptValue(const QScriptValue &object, RootedTreeNode* &
 
 namespace boost { void throw_exception( std::exception const & ) {} }
 
-DataStructurePtr RootedTreeStructure::create(Document *parent) {
+DataStructurePtr RootedTreeStructure::create(Document *parent)
+{
     return DataStructure::create<RootedTreeStructure>(parent);
 }
 
 
-DataStructurePtr RootedTreeStructure::create(DataStructurePtr other, Document *parent) {
-    boost::shared_ptr<RootedTreeStructure> ds = boost::static_pointer_cast<RootedTreeStructure>(RootedTreeStructure::create(parent));
-
+DataStructurePtr RootedTreeStructure::create(DataStructurePtr other, Document *parent)
+{
+    boost::shared_ptr<RootedTreeStructure> ds = boost::static_pointer_cast<RootedTreeStructure>(create(parent));
     ds->importStructure(other);
     return ds;
 }
@@ -99,7 +100,7 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
             }
             int childCount = 0;
             RootedTreeNode* newdataRootedNode = qobject_cast< RootedTreeNode* >(fromOtherToNew.value(n.get()).get());
-            newdataRootedNode->setNumberOfChilds(n->adjacentDataList().count());
+            newdataRootedNode->setNumberOfChilds(n->adjacentDataList().count()); //FIXME here it goes wrong!
 
             // iterate all neighbors and process them if not already elements in tree
             foreach (DataPtr adjacentData, n->adjacentDataList()) {
@@ -118,7 +119,7 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
                     newdataRootedNode->setChild(childdata, childCount++);
                     //Set the parent
                     RootedTreeNode* rooted = qobject_cast< RootedTreeNode* >(childdata.get());
-                    rooted->setNodeParent(DataPtr(newdataRootedNode));
+                    rooted->setNodeParent(newdataRootedNode->getData());
                 }
             }
             // set the correct number of childrem (2 if there is no child)
@@ -196,10 +197,12 @@ PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataTyp
 
 DataPtr RootedTreeStructure::addData(QString name, int dataType)
 {
+    Q_ASSERT(document()->dataTypeList().contains(dataType));
     boost::shared_ptr<RootedTreeNode> n = boost::static_pointer_cast<RootedTreeNode>(
-    RootedTreeNode::create(getDataStructure(), generateUniqueIdentifier(), dataType) );
+        RootedTreeNode::create(getDataStructure(), generateUniqueIdentifier(), dataType) );
     n->setProperty("name", name);
-    return addData(n);
+    addData(n, dataType);
+    return n;
 }
 
 

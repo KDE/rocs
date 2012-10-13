@@ -28,15 +28,15 @@ DataPtr RootedTreeNode::create(DataStructurePtr parent, int uniqueIdentifier, in
     return Data::create<RootedTreeNode>(parent, uniqueIdentifier, dataType);
 }
 
-RootedTreeNode::RootedTreeNode(DataStructurePtr parent, int uniqueIdentifier, int dataType):
-    Data(parent, uniqueIdentifier, dataType), m_nChilds(-1)
+RootedTreeNode::RootedTreeNode(DataStructurePtr parent, int uniqueIdentifier, int dataType)
+    : Data(parent, uniqueIdentifier, dataType)
+    , m_nChilds(-1)
 {
 }
 
 
 RootedTreeNode::~RootedTreeNode()
 {
-
 }
 
 quint32 RootedTreeNode::numberOfChilds() const
@@ -54,7 +54,7 @@ void RootedTreeNode::setNumberOfChilds(const qint32 number)
 {
     if (number != m_nChilds){
         for (qint32 i = number; i < m_nChilds; ++i) {
-            setChild(DataPtr(), i);
+            setChild(dataStructure()->addData(""), i);
         }
         m_nChilds = number;
     }
@@ -143,8 +143,8 @@ PointerPtr RootedTreeNode::setChild(DataPtr c, quint32 idx) const{
             p->remove();
         }
 //      child(idx)->remove();
-        if (c.get()){
-            PointerPtr ptr = dataStructure()->addPointer(this->getData(), c->getData());
+        if (c && c.get()){
+            PointerPtr ptr = getData()->addPointer(c);
             ptr->setProperty("TreeEdge", idx);
             return ptr;
         }
