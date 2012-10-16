@@ -82,8 +82,8 @@ void EditorToolbar::setActiveDocument(Document* activeDocument)
 {
     if (_document != 0) {
         disconnect(_document);
-        _document = activeDocument;
     }
+    _document = activeDocument;
     updateTypeActions();
 
     // connect to new document
