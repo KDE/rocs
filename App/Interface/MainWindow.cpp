@@ -96,7 +96,7 @@
 #include <IncludeManager.h>
 #include "ImporterExporterManager.h"
 #include <DataStructurePluginInterface.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 #include "DocumentManager.h"
 #include "Tools/ToolManager.h"
 
@@ -417,30 +417,30 @@ void MainWindow::createToolsPluginsAction(){
 void MainWindow::setupDSPluginsAction()
 {
     QList <QAction*> pluginList;
+    QActionGroup* group = new QActionGroup(this);
+    QStringList backends = DataStructureBackendManager::self()->backends();
+
+    // reset values
     QAction* action = 0;
     unplugActionList("DS_plugins");
-
-    QList < DataStructurePluginInterface*> avaliablePlugins = DataStructurePluginManager::self()->pluginsList();
-
-    QActionGroup * group = new QActionGroup(this);
-
-    int count = 0;
-    foreach(DataStructurePluginInterface * p, avaliablePlugins) {
-        action = new KAction(p->name(), this);
-        action->setData(count++);
+    // create actions and associate them to signal mapper
+    QSignalMapper* mapper = new QSignalMapper(this);
+    foreach(const QString& identifier, backends) {
+        DataStructurePluginInterface* plugin = DataStructureBackendManager::self()->backend(identifier);
+        action = new KAction(plugin->name(), this);
         action->setCheckable(true);
-
-        if (p->internalName() == DataStructurePluginManager::self()->actualPlugin()->internalName()) {
+        if (plugin->internalName() == DataStructureBackendManager::self()->activeBackend()->internalName()) {
             action->setChecked(true);
         }
-
         action->setActionGroup(group);
 
-        connect(action, SIGNAL(triggered(bool)),
-                DataStructurePluginManager::self(), SLOT(setDataStructurePlugin()));
-
+        connect(action, SIGNAL(triggered(bool)), mapper, SLOT(map()));
+        mapper->setMapping(action, identifier);
         pluginList.append(action);
     }
+    connect(mapper, SIGNAL(mapped(const QString &)),
+             DataStructureBackendManager::self(), SLOT(setBackend(QString)));
+
     plugActionList("DS_plugins", pluginList);
 }
 

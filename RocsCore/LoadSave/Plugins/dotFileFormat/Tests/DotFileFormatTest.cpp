@@ -24,7 +24,7 @@
 #include "../DotGrammar.h"
 #include "../DotFileFormatPlugin.h"
 #include <DataStructure.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 #include <KDebug>
 
 static const std::string simple = "digraph simple {a -> b; c; d -> e /* error -> comment*/}";
@@ -43,10 +43,10 @@ static const std::string subgraph = "digraph trees {"
 void DotFileFormatTest::init()
 {
     // test for graph data structure plugin
-    if (DataStructurePluginManager::self()->pluginsList().count() == 0) {
+    if (DataStructureBackendManager::self()->backends().count() == 0) {
         QFAIL("No plugin of DS, no way to continue!");
     }
-    DataStructurePluginInterface * pl = DataStructurePluginManager::self()->plugin("Graph");
+    DataStructurePluginInterface * pl = DataStructureBackendManager::self()->backend("Graph");
     QVERIFY2(pl,"Could create data structure of type Graph");
 }
 

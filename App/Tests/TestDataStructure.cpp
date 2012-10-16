@@ -29,7 +29,7 @@
 #include <kross/core/manager.h>
 #include <KDebug>
 #include <Document.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 #include <DocumentManager.h>
 
 TestDataStructure::TestDataStructure()

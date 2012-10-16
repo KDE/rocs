@@ -24,7 +24,6 @@
 #include <ktemporaryfile.h>
 
 #include <Document.h>
-#include <DataStructurePluginManager.h>
 #include <DocumentManager.h>
 #include <Project.h>
 

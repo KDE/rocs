@@ -23,7 +23,7 @@
 #include "Document.h"
 #include "Pointer.h"
 #include "DataStructure.h"
-#include "DataStructurePluginManager.h"
+#include "DataStructureBackendManager.h"
 #include "GmlGraphParsingHelper.h"
 #include "GmlGrammar.h"
 
@@ -66,7 +66,7 @@ const QStringList GmlFileFormatPlugin::extensions() const
 void GmlFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document(i18n("Import"));
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
 
     QList < QPair<QString, QString> > edges;
     QFile fileHandle(file().toLocalFile());

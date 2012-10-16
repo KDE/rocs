@@ -29,13 +29,13 @@
 #include <kross/core/action.h>
 #include <kross/core/manager.h>
 #include <Document.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 #include <DocumentManager.h>
 
 TestGraphStructure::TestGraphStructure()
 {
-    QVERIFY(DataStructurePluginManager::self()->pluginsList().count() > 0);
-    DocumentManager::self()->addDocument(new Document("test"));;
+    QVERIFY(DataStructureBackendManager::self()->backends().count() > 0);
+    DocumentManager::self()->addDocument(new Document("test"));
 }
 
 void TestGraphStructure::cleanupTestCase()
@@ -44,7 +44,7 @@ void TestGraphStructure::cleanupTestCase()
 
 void TestGraphStructure::dataAddDeleteTest()
 {
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
     DataList dataList;
 
@@ -65,7 +65,7 @@ void TestGraphStructure::dataAddDeleteTest()
 void TestGraphStructure::pointerAddDeleteTest()
 {
     // test for undirected pointers
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
     DataList dataList;
 
@@ -107,7 +107,7 @@ void TestGraphStructure::createSimpleGraph()
 {
     QMap<QString, DataPtr> dataList;
     /* Creates a simple Graph with 5 datums and connects them with pointers. */
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
 
     ds->setProperty("name", "Graph1");
@@ -136,7 +136,7 @@ void TestGraphStructure::createSimpleGraph()
 
 void TestGraphStructure::dataTypesTest()
 {
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
 
     DataList dataListDefault, dataList1, dataList2;
@@ -180,7 +180,7 @@ void TestGraphStructure::dataTypesTest()
 
 void TestGraphStructure::pointerTypesTest()
 {
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
 
     DataList dataList;

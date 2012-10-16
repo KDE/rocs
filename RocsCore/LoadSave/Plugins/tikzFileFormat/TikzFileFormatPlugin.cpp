@@ -26,7 +26,7 @@
 #include <Data.h>
 #include <Pointer.h>
 #include <Modifiers/Topology.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 
 static const KAboutData aboutdata("rocs_tikzfileformat",
                                   0,

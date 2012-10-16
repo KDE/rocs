@@ -23,7 +23,7 @@
 #include "model_GraphProperties.h"
 #include "DataStructure.h"
 #include "Actions/PropertiesDialogAction.h"
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 
 PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* parent)
     : KDialog(parent)
@@ -94,7 +94,7 @@ void PointerPropertiesWidget::setPosition(QPointF screenPosition)
 void PointerPropertiesWidget::reflectAttributes()
 {
     if (!ui->extraItems->layout()) {
-        ui->extraItems->setLayout(DataStructurePluginManager::self()->pointerExtraProperties(_pointer, this));
+        ui->extraItems->setLayout(DataStructureBackendManager::self()->pointerExtraProperties(_pointer, this));
     }
 
     ui->_color->setColor(_pointer->color());

@@ -22,7 +22,7 @@
 
 #include "Document.h"
 #include "DataStructure.h"
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 #include "Data.h"
 #include "KmlHandler.h"
 
@@ -140,7 +140,7 @@ void KmlFileFormatPlugin::writeFile(Document& document)
 void KmlFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document(i18n("Import"));
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
     DataStructurePtr graph = graphDoc->addDataStructure();
 
     KmlHandler handler(graph);

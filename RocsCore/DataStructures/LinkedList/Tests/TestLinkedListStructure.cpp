@@ -27,21 +27,21 @@
 #include <qtest_kde.h>
 
 #include <Document.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 #include <DocumentManager.h>
 
 using namespace Rocs;
 
 TestLinkedListStructure::TestLinkedListStructure()
 {
-    QVERIFY(DataStructurePluginManager::self()->pluginsList().count() > 0);
-    DocumentManager::self()->addDocument(new Document("test"));;
+    QVERIFY(DataStructureBackendManager::self()->backends().count() > 0);
+    DocumentManager::self()->addDocument(new Document("test"));
 }
 
 void TestLinkedListStructure::listModificationTest()
 {
     // test for the basic properties of the list structure
-    DataStructurePluginManager::self()->setDataStructurePlugin("LinkedList");
+    DataStructureBackendManager::self()->setBackend("LinkedList");
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
     QList< boost::shared_ptr<ListNode> > dataList;
 

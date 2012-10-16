@@ -28,7 +28,7 @@
 #include <Data.h>
 #include <Pointer.h>
 #include <Modifiers/Topology.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 
 static const KAboutData aboutdata("rocs_tgffileformat",
                                   0,
@@ -62,7 +62,7 @@ void TgfFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document("Untitled");
     //TODO select graph data structure
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
     DataStructurePtr graph = graphDoc->addDataStructure();
 
     // map node identifier from file to created data elements

@@ -26,7 +26,7 @@
 #include "Pointer.h"
 #include "PointerType.h"
 #include "DataType.h"
-#include "DataStructurePluginManager.h"
+#include "DataStructureBackendManager.h"
 #include "DataStructurePluginInterface.h"
 
 #include <boost/shared_ptr.hpp>
@@ -112,7 +112,7 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_minHeight = 0;
     d->_saved = false;
     d->_engineBackend = new QtScriptBackend(this);
-    d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
+    d->_dataStructureType = DataStructureBackendManager::self()->activeBackend();
     d->_modified = false;
 
     d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
@@ -136,13 +136,12 @@ Document::Document(const Document& gd)
     : QObject(0)
     , d(new DocumentPrivate())
 {
-//     QObject::setParent(gd.parent());
     d->_name = gd.name();
     d->_left = gd.left();
     d->_right = gd.right();
     d->_top = gd.top();
     d->_bottom = gd.bottom();
-    d->_dataStructureType = DataStructurePluginManager::self()->actualPlugin();
+    d->_dataStructureType = DataStructureBackendManager::self()->activeBackend();
     d->_engineBackend = new QtScriptBackend(this);
 
     d->_iconPackage = gd.iconPackage();
@@ -158,7 +157,7 @@ Document::Document(const Document& gd)
 
     for (int i = 0; i < gd.dataStructures().count(); ++i) {
         d->_dataStructures.append(
-            DataStructurePluginManager::self()->changeToDataStructure(
+            DataStructureBackendManager::self()->convertDataStructureToActiveBackend(
                 gd.d->_dataStructures.at(i), this
             )
         );
@@ -535,8 +534,8 @@ void Document::setActiveDataStructure(DataStructurePtr g)
 
 DataStructurePtr Document::addDataStructure(QString name)
 {
-    DataStructurePtr g = DataStructurePluginManager::self()->createNewDataStructure(this,
-                         d->_dataStructureType->name());
+    DataStructurePtr g = DataStructureBackendManager::self()->createDataStructure(this,
+                         d->_dataStructureType->internalName());
     if (name.isEmpty()) {
         // find unused name
         QList<QString> usedNames;
@@ -545,7 +544,7 @@ DataStructurePtr Document::addDataStructure(QString name)
         }
         // For at least one i in this range, the name is not used, yet.
         for (int i = 0; i < dataStructures().length() + 1; ++i) {
-            name = QString("%1%2").arg(d->_dataStructureType->name()).arg(i);
+            name = QString("%1%2").arg(d->_dataStructureType->internalName()).arg(i);
             if (!usedNames.contains(name)) {
                 break;
             }
@@ -615,7 +614,7 @@ DataStructurePluginInterface* Document::dataStructurePlugin() const
 
 void Document::setDataStructurePlugin(QString pluginIdentifier)
 {
-    DataStructurePluginInterface* plugin = DataStructurePluginManager::self()->plugin(pluginIdentifier);
+    DataStructurePluginInterface* plugin = DataStructureBackendManager::self()->backend(pluginIdentifier);
     if (plugin) {
         d->_dataStructureType = plugin;
     }

@@ -28,7 +28,7 @@ set( rocs_core_SRCS
     Group.cpp
     Project.cpp
     DataStructurePluginInterface.cpp
-    DataStructurePluginManager.cpp
+    DataStructureBackendManager.cpp
     DocumentManager.cpp
     KrossBackend.cpp
     Pointer.cpp
@@ -60,7 +60,7 @@ set( rocscore_LIB_HDRS
     CoreTypes.h
     RocsCoreExport.h
     DataStructurePluginInterface.h
-    DataStructurePluginManager.h
+    DataStructureBackendManager.h
 
     LoadSave/GraphFileBackendManager.h
     LoadSave/GraphFilePluginInterface.h

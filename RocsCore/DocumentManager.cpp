@@ -20,7 +20,7 @@
 
 #include "DocumentManager.h"
 #include "Document.h"
-#include "DataStructurePluginManager.h"
+#include "DataStructureBackendManager.h"
 #include <KDebug>
 #include <QWaitCondition>
 #include <QAction>
@@ -38,7 +38,7 @@ DocumentManager* DocumentManager::self()
 {
     if (!_self) {
         _self = new DocumentManager();
-        connect(DataStructurePluginManager::self(), SIGNAL(changingDataStructurePlugin(QString)),
+        connect(DataStructureBackendManager::self(), SIGNAL(backendChanged(QString)),
                 _self, SLOT(convertToDataStructure()));
     }
     return _self;
@@ -101,7 +101,7 @@ void DocumentManager::changeDocument(Document* document)
     if (_activeDocument != document) {
         if (_activeDocument) {
             emit deactivateDocument(_activeDocument);
-            DataStructurePluginManager::self()->disconnect(_activeDocument);
+            DataStructureBackendManager::self()->disconnect(_activeDocument);
             document->disconnect(SIGNAL(activeDataStructureChanged(DataStructurePtr)));
             document->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
             document->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
@@ -148,14 +148,14 @@ void DocumentManager::convertToDataStructure()
 
     Document * newDoc = 0;
     if (_activeDocument) {
-        //Check if need to convert (diferent DS) and if is possible to convert without data lost.
-        if (_activeDocument->dataStructureTypeName() != DataStructurePluginManager::self()->pluginName()
-                && DataStructurePluginManager::self()->actualPlugin()->canConvertFrom(_activeDocument)) {
+        //Check if need to convert (different DS) and if is possible to convert without data lost.
+        if (_activeDocument->dataStructureTypeName() != DataStructureBackendManager::self()->activeBackend()->internalName()
+                && DataStructureBackendManager::self()->activeBackend()->canConvertFrom(_activeDocument)) {
             _activeDocument->cleanUpBeforeConvert();
             newDoc = new Document(*_activeDocument);
             removeDocument(_activeDocument);
             addDocument(newDoc);
-            qDebug() << " Data Structure converted to " << DataStructurePluginManager::self()->pluginName();
+            kDebug() << "Data Structure converted to " << DataStructureBackendManager::self()->activeBackend()->name();
         }
     } else {
         newDocument();

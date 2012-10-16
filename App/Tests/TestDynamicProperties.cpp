@@ -25,7 +25,7 @@
 
 #include <QTest>
 #include <Document.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 
 TestDynamicProperties::TestDynamicProperties()
 {
@@ -33,7 +33,7 @@ TestDynamicProperties::TestDynamicProperties()
 
 void TestDynamicProperties::initTestCase()
 {
-    QVERIFY2(DataStructurePluginManager::self()->pluginsList().count() > 0, "DataStruture Plugins not loaded");
+    QVERIFY2(DataStructureBackendManager::self()->backends().count() > 0, "DataStruture Plugins not loaded");
     _document = new Document("untitled");
 }
 

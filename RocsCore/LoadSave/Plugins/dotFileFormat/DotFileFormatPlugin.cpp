@@ -28,7 +28,7 @@
 
 #include <DataStructure.h>
 #include <Document.h>
-#include <DataStructurePluginManager.h>
+#include <DataStructureBackendManager.h>
 #include <Modifiers/Topology.h>
 #include "DataStructures/Graph/GraphStructure.h"
 #include "DotGraphParsingHelper.h"
@@ -69,7 +69,7 @@ const QStringList DotFileFormatPlugin::extensions() const
 void DotFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document(i18n("Import"));
-    DataStructurePluginManager::self()->setDataStructurePlugin("Graph");
+    DataStructureBackendManager::self()->setBackend("Graph");
 
     QList < QPair<QString, QString> > edges;
     QFile fileHandle(file().toLocalFile());
