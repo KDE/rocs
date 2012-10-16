@@ -135,9 +135,10 @@ void DocumentManager::removeDocument(Document* document)
             }
         }
         emit documentRemoved(document);
+        emit documentListChanged();
+
         delete document;
     }
-    emit documentListChanged();
 }
 
 

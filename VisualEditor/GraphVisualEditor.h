@@ -54,10 +54,6 @@ public:
 
 //     void resizeVisualEditor(qreal yTop, qreal xLeft, qreal yBottom, qreal xRight);
 
-    /*! as the name says, it removes the current DataStructureDocument
-    from the screen and releases it from the evil hands of GraphEditWidget.*/
-    void releaseDocument();
-
     /**
      * Setup actions of visual graph editor and adds them to contributed action collection
      * \p collection.
@@ -73,6 +69,10 @@ public slots:
      *\param g is the active data structure
      */
     void updateActiveDataStructure(DataStructurePtr g);
+
+    /*! as the name says, it removes the current DataStructureDocument
+    from the screen and releases it from the evil hands of GraphEditWidget.*/
+    void releaseDocument();
 
     void setActiveDocument();
     void addDataStructure();

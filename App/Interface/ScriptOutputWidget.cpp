@@ -17,6 +17,7 @@
 */
 
 #include "ScriptOutputWidget.h"
+#include "DocumentManager.h"
 #include <QWidget>
 #include <QtScriptBackend.h>
 
@@ -31,7 +32,17 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     ui->buttonEnableDebugOutput->setIcon(KIcon("tools-report-bug"));
 
     connect(ui->buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
+    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)), this, SLOT(unsetEngine()));
 }
+
+void ScriptOutputWidget::unsetEngine()
+{
+    if (_engine) {
+        _engine->disconnect(this);
+    }
+    _engine = 0;
+}
+
 
 void ScriptOutputWidget::showDebugOutput(bool show)
 {
@@ -57,9 +68,7 @@ void ScriptOutputWidget::clear()
 
 void ScriptOutputWidget::setEngine(QtScriptBackend* engine)
 {
-    if (_engine) {
-        _engine->disconnect(this);
-    }
+    unsetEngine();
     _engine = engine;
 
     connect(engine, SIGNAL(sendDebug(QString)), this,  SLOT(appendDebugOutput(QString)));

@@ -152,7 +152,7 @@ Document::Document(const Document& gd)
 
     // default types
     //FIXME add types from former document
-    kDebug() << "Addeding just the default methods";
+    kDebug() << "Adding only the default methods";
     d->_dataTypes.insert(0, DataType::create(this, 0));
     d->_pointerTypes.insert(0, PointerType::create(this, 0));
 

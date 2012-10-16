@@ -111,6 +111,8 @@ void GraphVisualEditor::setupWidgets()
     setLayout(vLayout);
 
     // listen for document manager changes
+    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
+            this, SLOT(releaseDocument()));
     connect(DocumentManager::self(), SIGNAL(documentListChanged()),
             this, SLOT(updateGraphDocumentList()));
 }
@@ -185,7 +187,7 @@ void GraphVisualEditor::updateGraphDocumentList()
 
 void GraphVisualEditor::setActiveDocument()
 {
-    if (_document != DocumentManager::self()->activeDocument()) {
+    if (_document != 0 && _document != DocumentManager::self()->activeDocument()) {
         disconnect(_document);
         _document->disconnect(_dataStructureSelectorCombo);
         releaseDocument();
@@ -227,6 +229,7 @@ void GraphVisualEditor::releaseDocument()
         ds->disconnect(this);
     }
     _document->disconnect(this);
+    _document = 0;
 }
 
 void GraphVisualEditor::setupActions(KActionCollection* collection)

@@ -83,9 +83,11 @@ QPolygonF EdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const
 
 QPainterPath EdgeItem::createLoop(QPointF pos) const
 {
-    if (!pointer()) return QPainterPath();
+    if (!pointer()) {
+        return QPainterPath();
+    }
     QPainterPath p;
-    DataStructure *g = qobject_cast<DataStructure*>(pointer()->parent());
+    DataStructurePtr g = pointer()->dataStructure();
     qreal size = 30 + (20 * pointer()->relativeIndex());
     qreal angle = qAtan2((pos.x() - g->relativeCenter().x()), (pos.y() - g->relativeCenter().y()));
     qreal posx = (pos.x() - (((size / 2) * qSin(angle)) * -1) - (size / 2));

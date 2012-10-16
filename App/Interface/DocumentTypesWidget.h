@@ -46,6 +46,7 @@ public:
 
 public slots:
     void updateDocument();
+    void removeDocument();
 
 private slots:
     /** Use this SLOT to register a new data element type.

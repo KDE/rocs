@@ -37,7 +37,6 @@
 #include <KPushButton>
 #include <QWidget>
 
-
 DocumentTypesWidget::DocumentTypesWidget(QWidget* parent)
     : QWidget(parent)
     , _document(0)
@@ -45,10 +44,11 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget* parent)
     ui = new Ui::DocumentTypesWidget;
     ui->setupUi(this);
 
+    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
+            this, SLOT(removeDocument()));
     connect(DocumentManager::self(), SIGNAL(activateDocument()),
             this, SLOT(updateDocument()));
 }
-
 
 DocumentTypesWidget::~DocumentTypesWidget()
 {
@@ -56,21 +56,8 @@ DocumentTypesWidget::~DocumentTypesWidget()
 
 void DocumentTypesWidget::updateDocument()
 {
-    if (_document) {
-        _document->disconnect(this);
+    removeDocument();
 
-        // cleanup before filling again
-        foreach (int identifier, _dataTypeWidgets.keys()) {
-            delete _dataTypeWidgets[identifier];
-            _dataTypeWidgets.remove(identifier);
-            _dataTypeButtons.remove(identifier);
-        }
-        foreach (int identifier, _pointerTypeWidgets.keys()) {
-            delete _pointerTypeWidgets[identifier];
-            _pointerTypeWidgets.remove(identifier);
-            _pointerTypeButtons.remove(identifier);
-        }
-    }
     _document = DocumentManager::self()->activeDocument();
     // create default data element setups
     Document* document = DocumentManager::self()->activeDocument();
@@ -93,6 +80,27 @@ void DocumentTypesWidget::registerDataType(int identifier)
     createDataTypeInformationWidget(identifier, _document);
 }
 
+void DocumentTypesWidget::removeDocument()
+{
+    if (_document == 0) {
+        return;
+    }
+
+    _document->disconnect(this);
+
+    // cleanup before filling again
+    foreach (int identifier, _dataTypeWidgets.keys()) {
+        delete _dataTypeWidgets[identifier];
+        _dataTypeWidgets.remove(identifier);
+        _dataTypeButtons.remove(identifier);
+    }
+    foreach (int identifier, _pointerTypeWidgets.keys()) {
+        delete _pointerTypeWidgets[identifier];
+        _pointerTypeWidgets.remove(identifier);
+        _pointerTypeButtons.remove(identifier);
+    }
+    _document = 0;
+}
 
 void DocumentTypesWidget::unregisterDataType(int identifier)
 {
@@ -104,13 +112,11 @@ void DocumentTypesWidget::unregisterDataType(int identifier)
     _dataTypeButtons.remove(identifier);
 }
 
-
 void DocumentTypesWidget::registerPointerType(int identifier)
 {
     Document* document = DocumentManager::self()->activeDocument();
     createPointerTypeInformationWidget(identifier, document);
 }
-
 
 void DocumentTypesWidget::unregisterPointerType(int identifier)
 {
@@ -121,7 +127,6 @@ void DocumentTypesWidget::unregisterPointerType(int identifier)
     _pointerTypeWidgets.remove(identifier);
     _pointerTypeButtons.remove(identifier);
 }
-
 
 bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Document* document)
 {
@@ -174,7 +179,6 @@ bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Do
     return true;
 }
 
-
 bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier, Document* document)
 {
     if (!document->pointerTypeList().contains(typeIdentifier)) {
@@ -224,7 +228,6 @@ bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier,
     return true;
 }
 
-
 void DocumentTypesWidget::updateDataTypeButtons()
 {
     QMap<int, KPushButton*>::const_iterator dataTypeWidget = _dataTypeButtons.constBegin();
@@ -236,7 +239,6 @@ void DocumentTypesWidget::updateDataTypeButtons()
         ++dataTypeWidget;
     }
 }
-
 
 void DocumentTypesWidget::updatePointerTypeButtons()
 {

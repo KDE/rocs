@@ -41,6 +41,7 @@ public:
     void setEngine(QtScriptBackend* engine);
 
 public slots:
+    void unsetEngine();
     void showDebugOutput(bool show = true);
     void appendOutput(const QString& string);
     void appendDebugOutput(const QString& string);
