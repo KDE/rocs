@@ -53,7 +53,7 @@ public:
      *
      * \return self reference
      */
-    static DataStructureBackendManager * self();
+    static DataStructureBackendManager* self();
 
     /**
      * Returns list of loaded backends. Backends are loaded with first call to \see self().
@@ -168,9 +168,12 @@ private:
     DataStructureBackendManager();
 
     /**
-     * Desctructor.
+     * Destructor.
      */
     ~DataStructureBackendManager();
+
+    DataStructureBackendManager(const DataStructureBackendManager&);
+    void operator=(const DataStructureBackendManager&);
 
     /**
      * \internal
@@ -178,7 +181,7 @@ private:
      */
     void loadBackends();
 
-    static DataStructureBackendManager* instance;
+    static DataStructureBackendManager instance;
 
     boost::scoped_ptr<DataStructureBackendManagerPrivate> d;
 };

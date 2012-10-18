@@ -32,8 +32,7 @@
 #include "Pointer.h"
 #include <boost/scoped_ptr.hpp>
 
-DataStructureBackendManager* DataStructureBackendManager::instance = 0;
-
+DataStructureBackendManager DataStructureBackendManager::instance;
 
 class DataStructureBackendManagerPrivate
 {
@@ -48,6 +47,7 @@ public:
 
     DataStructureBackendManagerPrivate(QObject * parent)
         : _parent(parent),
+        _pluginInfo(KPluginList()),
         _currentPlugin(0)
     {
     }
@@ -61,7 +61,7 @@ public:
         _pluginList.clear();
     }
 
-    DataStructurePtr convertDataStructureToActiveBackend(DataStructurePtr dataStructure, Document * parent)
+    DataStructurePtr convertDataStructureToActiveBackend(DataStructurePtr dataStructure, Document* parent)
     {
         if (_currentPlugin) {
             return _currentPlugin->convertToDataStructure(dataStructure, parent);
@@ -85,7 +85,7 @@ public:
         return KPluginInfo();
     }
 
-    DataStructurePtr createDataStructure(Document* arg1 , const QString & pluginName)
+    DataStructurePtr createDataStructure(Document* arg1 , const QString& pluginName)
     {
         if (!pluginName.isEmpty()) {
             if (DataStructurePluginInterface * plugin = _pluginList.value(pluginName)) {
@@ -120,7 +120,13 @@ public:
         }
 
         QString error;
-        DataStructurePluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<DataStructurePluginInterface> (QString::fromLatin1("Rocs/DataStructurePlugin"), QString::fromLatin1("[Name]=='%1'").arg(pluginInfo.name()), _parent, QVariantList(), &error);
+        DataStructurePluginInterface* plugin =
+            KServiceTypeTrader::createInstanceFromQuery<DataStructurePluginInterface>(
+                                    QString::fromLatin1("Rocs/DataStructurePlugin"),
+                                    QString::fromLatin1("[Name]=='%1'").arg(pluginInfo.name()),
+                                    _parent,
+                                    QVariantList(),
+                                    &error);
 
         if (plugin) {
             QString identifier = pluginInfo.property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
@@ -138,7 +144,9 @@ public:
 
     void loadBackends()
     {
-        _pluginInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/DataStructurePlugin"));
+        KServiceTypeTrader* trader = KServiceTypeTrader::self();
+        KService::List services = trader->query("Rocs/DataStructurePlugin");
+        _pluginInfo = KPluginInfo::fromServices(services);
 
         foreach(KPluginInfo info, _pluginInfo) {
             loadBackend(info);
@@ -163,6 +171,7 @@ public:
 DataStructureBackendManager::DataStructureBackendManager()
     : d(new DataStructureBackendManagerPrivate(this))
 {
+    loadBackends();
 }
 
 DataStructureBackendManager::~DataStructureBackendManager()
@@ -176,11 +185,7 @@ void DataStructureBackendManager::loadBackends()
 
 DataStructureBackendManager* DataStructureBackendManager::self()
 {
-    if (DataStructureBackendManager::instance == 0) {
-        instance = new DataStructureBackendManager();
-        instance->loadBackends();
-    }
-    return instance;
+    return &DataStructureBackendManager::instance;
 }
 
 void DataStructureBackendManager::setBackend(const QString& pluginIdentifier)
