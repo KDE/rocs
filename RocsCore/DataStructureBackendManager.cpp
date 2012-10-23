@@ -34,6 +34,15 @@
 
 DataStructureBackendManager DataStructureBackendManager::instance;
 
+/**
+ * \class DataStructureBackendManagerPrivate
+ * \internal
+ *
+ * This is the private data class for \see DataStructureBackendManager.
+ * Note that -- even if the DataStructureBackendManager is contructed
+ * before its first call, the plugins are only loaded after a first call
+ * of lazyInit(), triggered by DataStructureBackendManager::self().
+ */
 class DataStructureBackendManagerPrivate
 {
 public:
@@ -41,14 +50,16 @@ public:
     typedef KPluginInfo::List KPluginList;
 
     QObject* _parent;
+    bool _initialized;
     KPluginList _pluginInfo;
     DataStructurePluginInterface* _currentPlugin;
     QHash<QString, DataStructurePluginInterface*> _pluginList;
 
     DataStructureBackendManagerPrivate(QObject * parent)
-        : _parent(parent),
-        _pluginInfo(KPluginList()),
-        _currentPlugin(0)
+        : _parent(parent)
+        , _initialized(false)
+        , _pluginInfo(KPluginList())
+        , _currentPlugin(0)
     {
     }
 
@@ -59,6 +70,14 @@ public:
         // clear plugins
         qDeleteAll<QHash<QString, DataStructurePluginInterface*>::iterator>(_pluginList.begin(), _pluginList.end());
         _pluginList.clear();
+    }
+
+    void lazyInit()
+    {
+        if(!_initialized) {
+            _initialized = true;
+            loadBackends();
+        }
     }
 
     DataStructurePtr convertDataStructureToActiveBackend(DataStructurePtr dataStructure, Document* parent)
@@ -171,7 +190,6 @@ public:
 DataStructureBackendManager::DataStructureBackendManager()
     : d(new DataStructureBackendManagerPrivate(this))
 {
-    loadBackends();
 }
 
 DataStructureBackendManager::~DataStructureBackendManager()
@@ -185,6 +203,8 @@ void DataStructureBackendManager::loadBackends()
 
 DataStructureBackendManager* DataStructureBackendManager::self()
 {
+    // initializes the plugin list only on demand
+    DataStructureBackendManager::instance.d->lazyInit();
     return &DataStructureBackendManager::instance;
 }
 

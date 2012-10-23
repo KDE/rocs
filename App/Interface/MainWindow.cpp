@@ -101,7 +101,9 @@
 #include "Tools/ToolManager.h"
 
 
-MainWindow::MainWindow() :  KXmlGuiWindow(), _scriptDbg(0)
+MainWindow::MainWindow()
+    : KXmlGuiWindow()
+    , _scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
 
