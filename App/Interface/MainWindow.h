@@ -108,6 +108,8 @@ private slots:
 
     void showLoadedPlugins();
 
+    void showCodeEditorConfig();
+
     /**
      * execute the given script and print results
      * \param text string that will be printed at result shell

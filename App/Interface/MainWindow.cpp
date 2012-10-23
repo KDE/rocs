@@ -333,6 +333,7 @@ void MainWindow::setupActions()
 //     createAction("document-save",    i18nc("@action:inmenu", "Save Script"),         "save-script",         SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-export", i18nc("@action:inmenu", "Export Script as"),      "export-script-as",      SLOT(saveActiveScriptAs()), _codeEditor);
     createAction("",  i18nc("@action:inmenu", "Loaded Plugins"),      "loaded-plugins",      SLOT(showLoadedPlugins()), this);
+    createAction("",  i18nc("@action:inmenu", "Configure Code Editor..."),      "config-code-editor",      SLOT(showCodeEditorConfig()), this);
 
     KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
@@ -859,6 +860,16 @@ void MainWindow::showLoadedPlugins()
 {
     LoadedPluginsDialog dialog(this);
     dialog.exec();
+}
+
+
+void MainWindow::showCodeEditorConfig()
+{
+    KTextEditor::Editor* editor = _codeEditor->editor();
+    if (editor->configDialogSupported()) {
+        editor->configDialog(this);
+        editor->writeConfig();
+    }
 }
 
 

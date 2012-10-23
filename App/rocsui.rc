@@ -15,7 +15,7 @@
             <Action name="save-project" />
             <Action name="save-project-as" />
 <!--             <Action name="change-project" /> -->
-            
+
             <Separator/>
 <!--             <Separator/> -->
         </Menu>
@@ -72,6 +72,10 @@
                 <text>Tools</text>
                 <ActionList name="tools_plugins" />
             </Menu>
+        </Menu>
+        <Menu name="settings">
+            <text>Settings</text>
+            <Action name="config-code-editor" />
         </Menu>
         <Menu name="help">
             <text>Help</text>
