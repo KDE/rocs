@@ -48,6 +48,7 @@ set( rocs_actions_SRCS
 )
 
 set( rocs_interface_SRCS
+    Interface/SideDockWidget.cpp
     Interface/ImporterExporterManager.cpp
     Interface/IncludeManagerSettings.cpp
     Interface/MainWindow.cpp

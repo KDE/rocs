@@ -76,7 +76,12 @@ private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.
 
-    QWidget* setupWhiteboardPanel(); // Setup the left actionbar panel & related widgets..
+    /**
+     * Setup the information panel at the right side.
+     *
+     * \return created widget
+     */
+    QWidget* setupSidePanel();
     QWidget* setupScriptPanel(); // setup the panel with the editors and stuff
     int saveIfChanged();
     void finishLoadingUi();
@@ -231,9 +236,6 @@ signals:
 
 private: // Variables.
     Project* _currentProject;
-
-    // Left Area:
-    DocumentTypesWidget* _documentTypesWidget; //! Area where the data and edges will be modified.
 
     // Right Area:
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.

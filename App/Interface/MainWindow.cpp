@@ -62,6 +62,7 @@
 #include "Scene/GraphicsLayout.h"
 #include "PossibleIncludes.h"
 #include "LoadedPluginsDialog.h"
+#include "Interface/SideDockWidget.h"
 
 // Graph Related Includes
 #include "Document.h"
@@ -156,30 +157,38 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::setupWidgets()
 {
+    // setup main widgets
+    QWidget *sidePanel = setupSidePanel();
+    _graphVisualEditor = GraphVisualEditor::self();
+    QWidget *scriptPanel = setupScriptPanel();
+
     // splits the main window horizontal
     _vSplitter = new QSplitter(this);
     _vSplitter->setOrientation(Qt::Vertical);
-
-    // setup upper half
-    QWidget *propertyPanel = setupWhiteboardPanel(); // graph properties
-    _graphVisualEditor = GraphVisualEditor::self(); // graph editor whiteboard
-
-    _hSplitter = new QSplitter(this);
-    _hSplitter->setOrientation(Qt::Horizontal);
-    _hSplitter->addWidget(_graphVisualEditor);
-    _hSplitter->addWidget(propertyPanel);
-
-    // setup lower half
-    QWidget *scriptPanel = setupScriptPanel();
-
-    _vSplitter->addWidget(_hSplitter);
+    _vSplitter->addWidget(_graphVisualEditor);
     _vSplitter->addWidget(scriptPanel);
 
-    _hScriptSplitter->setSizes(QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() << 80);
-    _vSplitter->setSizes(QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom());
-    _hSplitter->setSizes(QList<int>() << Settings::hSplitterSizeLeft() << Settings::hSplitterSizeRight());
+    // horizontal arrangement
+    _hSplitter = new QSplitter(this);
+    _hSplitter->setOrientation(Qt::Horizontal);
+    _hSplitter->addWidget(_vSplitter);
+    _hSplitter->addWidget(sidePanel);
 
-    setCentralWidget(_vSplitter);
+    // set sizes for script panel
+    _hScriptSplitter->setSizes(QList<int>() << Settings::hScriptSplitterSizeLeft() << Settings::hScriptSplitterSizeRight() << 80);
+
+    // set sizes for vertical splitter
+    _vSplitter->setSizes(QList<int>() << Settings::vSplitterSizeTop() << Settings::vSplitterSizeBottom());
+
+    // set sizes for side panel
+    // the following solves the setting of the panel width if it was closed at previous session
+    int panelWidth = Settings::hSplitterSizeRight();
+    if (panelWidth == 0) {
+        panelWidth = 300;
+    }
+    _hSplitter->setSizes(QList<int>() << Settings::hSplitterSizeLeft() << panelWidth);
+
+    setCentralWidget(_hSplitter);
 }
 
 Project* MainWindow::createNewProject()
@@ -288,15 +297,25 @@ QWidget* MainWindow::setupScriptPanel()
     return scriptInterface;
 }
 
-QWidget* MainWindow::setupWhiteboardPanel()
+QWidget* MainWindow::setupSidePanel()
 {
     QWidget *panel = new QWidget(this);
-    _documentTypesWidget = new DocumentTypesWidget(panel);
     panel->setLayout(new QVBoxLayout);
-    panel->layout()->addWidget(_documentTypesWidget);
+    panel->setVisible(false);
 
-    connect(DocumentManager::self(), SIGNAL(activateDocument()),
-            _documentTypesWidget, SLOT(updateDocument()));
+    // add sidebar
+    SideDockWidget* sideDock = new SideDockWidget(panel);
+    addToolBar(Qt::RightToolBarArea, sideDock->toolbar());
+    panel->layout()->addWidget(sideDock);
+
+    // add widgets to dock
+    sideDock->addDock(new QLabel("Handbook"), i18nc("@title", "Handbook"), KIcon());
+    sideDock->addDock(new QLabel("Journal"), i18nc("@title", "Journal"), KIcon());
+
+    DocumentTypesWidget* documentTypesWidget = new DocumentTypesWidget(this);
+    connect(DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument()));
+    sideDock->addDock(documentTypesWidget, i18n("Element Types"), KIcon("document-properties"));
+
     return panel;
 }
 
