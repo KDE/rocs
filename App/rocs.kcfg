@@ -11,6 +11,11 @@
 			<default>true</default>
 		</entry>
 	</group>
+    <group name="RocsConfigVersion">
+         <entry name="version" type="String" hidden="true">
+            <default>0.0.0</default>
+         </entry>
+    </group>
 	<group name="GraphicsView">
 		 <entry name="fastGraphics" type="Bool" hidden="true">
 			<default>false</default>

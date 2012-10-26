@@ -20,6 +20,7 @@
 */
 
 #include "MainWindow.h"
+#include "rocsversion.h"
 
 //Qt related includes
 #include <QtGui/QCloseEvent>
@@ -112,6 +113,7 @@ MainWindow::MainWindow()
     setupActions();
     setupGUI(ToolBar | Keys | Save | Create);
 
+    setupToolbars();
     setupToolsPluginsAction();
     setupDSPluginsAction();
 
@@ -128,6 +130,9 @@ MainWindow::MainWindow()
 
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
     GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
+
+    // update rocs config version
+    Settings::setVersion(ROCS_VERSION_STR);
 }
 
 MainWindow::~MainWindow()
@@ -189,6 +194,27 @@ void MainWindow::setupWidgets()
     _hSplitter->setSizes(QList<int>() << Settings::hSplitterSizeLeft() << panelWidth);
 
     setCentralWidget(_hSplitter);
+}
+
+void MainWindow::setupToolbars()
+{
+    // If current version in settings file is less than demanded version
+    // perform operations. The
+    QString configVersion = Settings::version();
+    if (configVersion.compare(QString("1.7.70")) < 0) {
+        kDebug() << "Apply new default settings for toolbars";
+        KToolBar* bar;
+
+        bar = toolBar("main");
+        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+        bar->setOrientation(Qt::Vertical);
+        addToolBar(Qt::LeftToolBarArea, bar);
+
+        bar = toolBar("align");
+        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+        bar->setOrientation(Qt::Vertical);
+        addToolBar(Qt::LeftToolBarArea, bar);
+    }
 }
 
 Project* MainWindow::createNewProject()

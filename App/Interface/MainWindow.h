@@ -75,6 +75,7 @@ public:
 private: // Methods
     void setupWidgets(); // Setup all the widgets.
     void setupActions(); // Setup all the actions.
+    void setupToolbars();
 
     /**
      * Setup the information panel at the right side.
