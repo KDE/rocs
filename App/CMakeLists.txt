@@ -43,7 +43,6 @@ include_directories(
 )
 
 set( rocs_actions_SRCS
-
     Actions/PropertiesDialogAction.cpp
 )
 
@@ -85,6 +84,11 @@ set( QT_USE_QTSCRIPT true )
 set( rocs_KCFGS settings.kcfgc )
 
 kde4_add_kcfg_files( rocs_Settings_SRCS ${rocs_KCFGS} )
+
+# needed to get icon on windows
+kde4_add_app_icon( rocs_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/../graphics/hi16-app-rocs.png
+)
 
 kde4_add_executable( rocs
     ${rocs_SRCS}
