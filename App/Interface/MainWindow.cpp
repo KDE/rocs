@@ -65,6 +65,7 @@
 #include "LoadedPluginsDialog.h"
 #include "SideDockWidget.h"
 #include "JournalEditorWidget.h"
+#include "DocumentationWidget.h"
 
 // Graph Related Includes
 #include "Document.h"
@@ -337,17 +338,18 @@ QWidget* MainWindow::setupSidePanel()
     panel->layout()->addWidget(sideDock);
 
     // add widgets to dock
-    // Rocs handbook
-    sideDock->addDock(new QLabel("Handbook"), i18nc("@title", "Handbook"), KIcon("help-contents"));
+    // document property widgets
+    DocumentTypesWidget* documentTypesWidget = new DocumentTypesWidget(this);
+    connect(DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument()));
+    sideDock->addDock(documentTypesWidget, i18n("Element Types"), KIcon("document-properties"));
 
     // Project Journal
     _journalWidget = new JournalEditorWidget(panel);
     sideDock->addDock(_journalWidget, i18nc("@title", "Journal"), KIcon("story-editor"));
 
-    // document property widgets
-    DocumentTypesWidget* documentTypesWidget = new DocumentTypesWidget(this);
-    connect(DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument()));
-    sideDock->addDock(documentTypesWidget, i18n("Element Types"), KIcon("document-properties"));
+    // Rocs handbook
+    DocumentationWidget* documentation = new DocumentationWidget(panel);
+    sideDock->addDock(documentation, i18nc("@title", "Handbook"), KIcon("help-contents"));
 
     return panel;
 }
