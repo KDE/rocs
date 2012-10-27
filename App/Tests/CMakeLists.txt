@@ -19,42 +19,8 @@
 ##
 
 include_directories(
-#     ${KDE4_INCLUDES} ${QT_INCLUDES}
-#     ${CMAKE_BINARY_DIR}/src
     ${CMAKE_CURRENT_BINARY_DIR}}
-#     ${CMAKE_CURRENT_BINARY_DIR}}/..
-    )
-
-# basic functionality tests of data structure
-set (TestDataStructure_SRCS
-    TestDataStructure.cpp
 )
-kde4_add_executable(TestDataStructure ${TestDataStructure_SRCS} )
-target_link_libraries( TestDataStructure
-    rocscore
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-)
-add_test(TestDataStructure TestDataStructure)
-
-
-# DynamicPropertiesList
-set( testDynamicProperties_SRCS
-    TestDynamicProperties.cpp
-)
-kde4_add_executable(TestDynamicProperties ${testDynamicProperties_SRCS})
-target_link_libraries( TestDynamicProperties
-    rocscore
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-)
-add_test(TestDynamicProperties TestDynamicProperties)
 
 
 # Include Manager
@@ -71,45 +37,3 @@ target_link_libraries( TestIncludeManager
     ${KDE4_KIO_LIBS}
 )
 add_test(TestIncludeManager TestIncludeManager)
-
-
-# loading and saving tests
-set (TestLoadSave_SRCS
-    TestLoadSave.cpp
-)
-kde4_add_executable(TestLoadSave ${TestLoadSave_SRCS} )
-target_link_libraries( TestLoadSave
-    rocscore
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-)
-add_test(TestLoadSave TestLoadSave)
-
-
-# test data structure plugin interface
-set( test_Plugins_SRC TestPlugins.cpp)
-kde4_add_executable( TestPlugins ${test_Plugins_SRC})
-target_link_libraries( TestPlugins
-    rocscore
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${KDE4_KIO_LIBS}
-)
-add_test(TestPlugins TestPlugins)
-
-
-# test script engine
-set( test_ScriptEngine_SRC TestScriptEngine.cpp)
-kde4_add_executable( TestScriptEngine ${test_ScriptEngine_SRC})
-target_link_libraries( TestScriptEngine
-    rocscore
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${KDE4_KIO_LIBS}
-)
-add_test(TestScriptEngine TestScriptEngine)
