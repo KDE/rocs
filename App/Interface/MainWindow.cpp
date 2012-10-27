@@ -672,7 +672,7 @@ void MainWindow::openProject(const KUrl& fileName)
     if (file.isEmpty()){
     // show open dialog
          file = KFileDialog::getOpenUrl(startDirectory,
-                   i18n("*rocs,*.rocsz|All Rocs files\n*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"),
+                   i18n("*rocs *.rocsz|All Rocs files\n*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"),
                    this,
                    i18nc("@title:window", "Open Project Files"));
 
