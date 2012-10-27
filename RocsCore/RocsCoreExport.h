@@ -17,8 +17,8 @@
 */
 
 
-#ifndef ROCSLIB_EXPORT_H
-#define ROCSLIB_EXPORT_H
+#ifndef ROCS_CORE_EXPORT_H
+#define ROCS_CORE_EXPORT_H
 
 // needed for KDE_EXPORT and KDE_IMPORT macros
 #include <kdemacros.h>

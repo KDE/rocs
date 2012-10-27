@@ -68,7 +68,7 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
 
 PointerItem::~PointerItem()
 {
-    foreach (QString name, _propertyValues.keys()) {
+    foreach (const QString& name, _propertyValues.keys()) {
         delete _propertyValues[name];
     }
     _propertyValues.clear();
@@ -123,12 +123,12 @@ void PointerItem::updateAttributes()
     } if (_pointer->isVisible() == true) {
         this->show();
         PointerTypePtr pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
-        foreach (QString property, _pointer->properties()) {
+        foreach (const QString& property, _pointer->properties()) {
             _propertyValues[property]->setVisible(pointerType->isPropertyVisible(property));
         }
     } else {
         this->hide();
-        foreach (QString property, _pointer->properties()) {
+        foreach (const QString& property, _pointer->properties()) {
             _propertyValues[property]->setVisible(false);
         }
     }
@@ -137,7 +137,7 @@ void PointerItem::updateAttributes()
 
 void PointerItem::updatePropertyList(qreal x, qreal y) {
     qreal offset = 0;
-    foreach (QString property, _pointer->properties()) {
+    foreach (const QString& property, _pointer->properties()) {
         if (!_propertyValues.contains(property)) {
             kError() << "Cannot update unknown property : " << property;
             continue;
@@ -151,7 +151,7 @@ void PointerItem::updatePropertyList(qreal x, qreal y) {
     }
 }
 
-void PointerItem::registerProperty(QString name)
+void PointerItem::registerProperty(const QString& name)
 {
     if (_propertyValues.contains(name)) {
         return;
@@ -167,7 +167,7 @@ void PointerItem::registerProperty(QString name)
     updateAttributes();
 }
 
-void PointerItem::updateProperty(QString name)
+void PointerItem::updateProperty(const QString& name)
 {
     if (!_propertyValues.contains(name)) {
         registerProperty(name);
@@ -180,7 +180,7 @@ void PointerItem::updateProperty(QString name)
     updateAttributes();
 }
 
-void PointerItem::removeProperty(QString name)
+void PointerItem::removeProperty(const QString& name)
 {
     if (_propertyValues.contains(name)) {
         kWarning() << "Property not removed: not registered at DataItem.";
@@ -199,7 +199,7 @@ QGraphicsItem* PointerItem::propertyListItem() const
     return _item;
 }
 
-void PointerItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+void PointerItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);

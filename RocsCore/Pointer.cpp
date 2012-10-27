@@ -70,10 +70,10 @@ void Pointer::initialize()
 
     // register properties and connect to changes
     installEventFilter(this);
-    foreach(QString property, d->pointerType->properties()) {
+    foreach(const QString& property, d->pointerType->properties()) {
         addDynamicProperty(property, d->pointerType->propertyDefaultValue(property));
     }
-    connect(d->pointerType.get(), SIGNAL(propertyAdded(QString, QVariant)),
+    connect(d->pointerType.get(), SIGNAL(propertyAdded(QString,QVariant)),
             this, SLOT(addDynamicProperty(QString,QVariant)));
     connect(d->pointerType.get(), SIGNAL(propertyRemoved(QString)),
             this, SLOT(removeDynamicProperty(QString)));

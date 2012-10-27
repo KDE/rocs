@@ -34,6 +34,7 @@
 #include <QLabel>
 #include <QListView>
 #include <QPainter>
+#include <QPointer>
 
 #define MARGIN 5
 
@@ -221,8 +222,8 @@ private Q_SLOTS:
         PluginsModel *model = static_cast<PluginsModel*>(itemView()->model());
         GraphFilePluginInterface* plugin = model->pluginData(focusedIndex());
         if (plugin) {
-            KAboutApplicationDialog aboutPlugin(plugin->aboutData(), itemView());
-            aboutPlugin.exec();
+            QPointer<KAboutApplicationDialog> aboutPlugin = new KAboutApplicationDialog(plugin->aboutData(), itemView());
+            aboutPlugin->exec();
             return;
         }
     }

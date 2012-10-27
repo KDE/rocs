@@ -105,7 +105,7 @@ void Data::initialize()
         addDynamicProperty(property, d->_dataType->propertyDefaultValue(property));
     }
 
-    connect(d->_dataType.get(), SIGNAL(propertyAdded(QString, QVariant)),
+    connect(d->_dataType.get(), SIGNAL(propertyAdded(QString,QVariant)),
             this, SLOT(addDynamicProperty(QString,QVariant)));
     connect(d->_dataType.get(), SIGNAL(propertyRemoved(QString)),
             this, SLOT(removeDynamicProperty(QString)));
@@ -173,7 +173,7 @@ void Data::setDataType(int dataType)
     // make changes
     d->_dataType = d->_dataStructure->document()->dataType(dataType);
     d->_dataStructure->updateData(getData());
-    foreach(QString property, d->_dataType->properties()) {
+    foreach(const QString& property, d->_dataType->properties()) {
         if (this->property(property.toStdString().c_str()) == QVariant::Invalid) {
             addDynamicProperty(property, d->_dataType->propertyDefaultValue(property));
         }
@@ -181,7 +181,7 @@ void Data::setDataType(int dataType)
     emit dataTypeChanged(dataType);
 
     // connect to new type
-    connect(d->_dataType.get(), SIGNAL(propertyAdded(QString, QVariant)),
+    connect(d->_dataType.get(), SIGNAL(propertyAdded(QString,QVariant)),
             this, SLOT(addDynamicProperty(QString,QVariant)));
     connect(d->_dataType.get(), SIGNAL(propertyDefaultValueChanged(QString)),
             this, SLOT(updateDynamicProperty(QString)));

@@ -81,9 +81,9 @@ public slots:
     void remove();
     void updatePos();
     void updateAttributes();
-    void updateProperty(QString name);
-    void registerProperty(QString name);
-    void removeProperty(QString name);
+    void updateProperty(const QString& name);
+    void registerProperty(const QString& name);
+    void removeProperty(const QString& name);
 
 private:
     /**

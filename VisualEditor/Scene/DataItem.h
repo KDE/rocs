@@ -60,9 +60,9 @@ private slots:
     void updateVisibility(bool visible);
     void updatePos();
     void updateSize();
-    void updateProperty(QString name);
-    void registerProperty(QString name);
-    void removeProperty(QString name);
+    void updateProperty(const QString& name);
+    void registerProperty(const QString& name);
+    void removeProperty(const QString& name);
 
 private:
     DataPtr _data;

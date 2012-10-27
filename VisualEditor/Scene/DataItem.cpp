@@ -67,7 +67,7 @@ DataItem::DataItem(DataPtr n)
 
 DataItem::~DataItem()
 {
-    foreach (QString name, _propertyValues.keys()) {
+    foreach (const QString& name, _propertyValues.keys()) {
         delete _propertyValues[name];
     }
     _propertyValues.clear();
@@ -82,7 +82,7 @@ void DataItem::setupNode()
         connect(_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
     }
 
-    foreach (QString name, _data->properties()) {
+    foreach (const QString& name, _data->properties()) {
         updateProperty(name);
     }
     updateRenderer();
@@ -154,7 +154,7 @@ void DataItem::updateColor()
     setGraphicsEffect(_colorizer);
 }
 
-void DataItem::updateProperty(QString name)
+void DataItem::updateProperty(const QString& name)
 {
     if (!_propertyValues.contains(name)) {
         registerProperty(name);
@@ -175,7 +175,7 @@ QGraphicsItem* DataItem::propertyListItem() const
 void DataItem::updatePropertyList()
 {
     qreal offset = 0;
-    foreach (QString property, data()->properties()) {
+    foreach (const QString& property, data()->properties()) {
         if (!_propertyValues.contains(property)) {
             kError() << "Cannot update unknown property : " << property;
             continue;
@@ -189,7 +189,7 @@ void DataItem::updatePropertyList()
     }
 }
 
-void DataItem::registerProperty(QString name)
+void DataItem::registerProperty(const QString& name)
 {
     if (_propertyValues.contains(name)) {
         return;
@@ -205,7 +205,7 @@ void DataItem::registerProperty(QString name)
     updatePropertyList();
 }
 
-void DataItem::removeProperty(QString name)
+void DataItem::removeProperty(const QString& name)
 {
     if (_propertyValues.contains(name)) {
         kWarning() << "Property not removed: not registered at DataItem.";

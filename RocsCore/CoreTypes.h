@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ROCS_TYPEDEFS_H
-#define ROCS_TYPEDEFS_H
+#ifndef CORETYPES_H
+#define CORETYPES_H
 
 #include <QList>
 #include <boost/shared_ptr.hpp>
