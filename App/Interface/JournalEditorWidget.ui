@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>JournalEditorWidget</class>
+ <widget class="QWidget" name="JournalEditorWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Project Journal</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="KRichTextWidget" name="editor">
+        <property name="richTextSupport">
+         <set>KRichTextWidget::SupportAlignment|KRichTextWidget::SupportBold|KRichTextWidget::SupportChangeListStyle|KRichTextWidget::SupportDedentLists|KRichTextWidget::SupportDirection|KRichTextWidget::SupportFontSize|KRichTextWidget::SupportHyperlinks|KRichTextWidget::SupportIndentLists|KRichTextWidget::SupportItalic|KRichTextWidget::SupportRuleLine|KRichTextWidget::SupportSuperScriptAndSubScript|KRichTextWidget::SupportToPlainText</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KRichTextEdit</class>
+   <extends>KTextEdit</extends>
+   <header>krichtextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KRichTextWidget</class>
+   <extends>KRichTextEdit</extends>
+   <header>krichtextwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -60,14 +60,14 @@ public:
      * in file \p projectFile.
      * \param projectFile is the absolute path to the project file
      */
-    Project(KUrl projectFile);
+    Project(const KUrl& projectFile);
 
     /**
      * Constructor for project that creates a project by configuration given
      * in file \p projectFile inside directory \p projectDirectory
      * \param projectFile is the absolute path to the project file
      */
-    Project(KUrl projectArchive, KUrl projectDirectory);
+    Project(const KUrl& projectArchive, const KUrl& projectDirectory);
 
     virtual ~Project();
 
@@ -78,19 +78,19 @@ public:
      */
     QString projectDirectory() const;
 
-    const KUrl& projectFile() const;
+    KUrl projectFile() const;
 
     /**
      * Set path of project to \p fileUrl and set project to being non-temporary.
      * \param fileUrl is the designated path to the project
      */
-    void setProjectFile(KUrl fileUrl);
+    void setProjectFile(const KUrl& fileUrl);
 
     /**
      * Set project name.
      * \param name is the new name of the project
      */
-    void setName(QString name);
+    void setName(const QString& name);
 
     /**
      * Returns name of the project. Name can be set with \see setName(...).
@@ -136,7 +136,7 @@ public:
      * Add code file to project. The file is specified by \p file.
      * \param file is the local file URL
      */
-    int addCodeFile(KUrl file);
+    int addCodeFile(const KUrl& file);
 
     /**
      * Save a temporary code document to a code file and update association to the project.
@@ -145,7 +145,7 @@ public:
      * \param document is the temporary code file
      * \param file is the local file URL to where the code file shall be saved
      */
-    void saveCodeFileNew(KTextEditor::Document* document, KUrl file);
+    void saveCodeFileNew(KTextEditor::Document* document, const KUrl& file);
 
     /**
      * Remove code file \p document from list of temporary code files of the project.
@@ -177,7 +177,7 @@ public:
      * Add graph file to project. The file is specified by \p file.
      * \param file is the local file URL
      */
-    int addGraphFile(KUrl file);
+    int addGraphFile(const KUrl& file);
 
     /**
      * Save a temporary graph document to a graph file and update association to the project.
@@ -186,12 +186,12 @@ public:
      * \param document is the temporary graph file
      * \param file is the file url to where the graph file shall be saved
      */
-    void saveGraphFileNew(Document* document, QString file);
+    void saveGraphFileNew(Document* document, const QString& file);
 
     /**
      * Save existing graph document file under new filename
      */
-    void saveGraphFileAs(Document* document, QString file);
+    void saveGraphFileAs(Document* document, const QString& file);
 
     /**
      * Remove graph file \p document from list of temporary graph files of the project.
@@ -209,13 +209,13 @@ public:
      * Set journal file of the project.
      * \param fileUrl is URL of local file.
      */
-    void setJournalFile(KUrl fileUrl);
+    void setJournalFile(const KUrl& file);
 
     /**
      * Returns URL to local file containing the project journal.
      * \return URL to local file
      */
-    const KUrl& journalFile() const;
+    KUrl journalFile() const;
 
     /**
      * Save the project to its current file if empty or no filename is given. Otherwise if filename is
@@ -224,14 +224,14 @@ public:
      * \param fileUrl is the target file, expected as absolute path
      * \return true if save was successful, otherwise false
      */
-    bool writeProjectFile(QString fileUrl = QString());
+    bool writeProjectFile(const QString& fileUrl = QString());
 
     /**
-     * Exports the project with all its components (scripts, graph, journal) to a archive file.
+     * Exports the project with all its components (scripts, graph, journal) to an archive file.
      * \param exportUrl is the path to the newly created archive
      * \return true if archive was created, else false
      */
-    bool exportProject(KUrl exportUrl);
+    bool exportProject(const KUrl& exportUrl);
 
 private:
     bool writeNewProjectFile();

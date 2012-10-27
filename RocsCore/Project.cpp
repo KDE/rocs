@@ -42,7 +42,6 @@ public:
     QMap<int, QString> _graphFileGroup;
     QList<Document*> _graphFileNew;
     QList<KTextEditor::Document*> _codeFileNew;
-    KUrl _journalFile;
     KConfig* _config;
     bool _temporary;
     bool _modified;
@@ -63,30 +62,32 @@ public:
             _graphFileGroup.insert(offset.toInt(), "GraphFile" + offset);
         }
 
+        // for now, journal files only have name "journal.html"
         KConfigGroup journalGroup(_config, "Journal");
-        _journalFile = KUrl::fromLocalFile(journalGroup.readEntry("JournalFile", QString()));
+        journalGroup.writeEntry("JournalHtml", "journal.html");
 
         return projectGroup;
     }
 };
 
 
-Project::Project() :
-    d(new ProjectPrivate)
+Project::Project()
+    : d(new ProjectPrivate)
 {
-    KTemporaryFile temp;
-    temp.setPrefix("rocsproject");
-    temp.setSuffix(".tmp");
-    temp.setAutoRemove(false);
-    temp.open();
-    d->_projectFile = KUrl::fromLocalFile(temp.fileName());
+    KTemporaryFile tmpProjectFile;
+    tmpProjectFile.setPrefix("rocsproject");
+    tmpProjectFile.setSuffix(".tmp");
+    tmpProjectFile.setAutoRemove(false);
+    tmpProjectFile.open();
+    d->_projectFile = KUrl::fromLocalFile(tmpProjectFile.fileName());
+
     d->initKConfigObject();
     d->_temporary = true;
     d->_modified = false;
 }
 
 
-Project::Project(KUrl projectFile) :
+Project::Project(const KUrl& projectFile) :
     d(new ProjectPrivate)
 {
     d->_projectFile = projectFile;
@@ -101,13 +102,13 @@ Project::Project(KUrl projectFile) :
 }
 
 
-Project::Project(KUrl projectArchive, KUrl projectDirectory) :
-    d(new ProjectPrivate)
+Project::Project(const KUrl& projectArchive, const KUrl& projectDirectory)
+    : d(new ProjectPrivate)
 {
     // extract archive into project directory
     KTar tar(projectArchive.toLocalFile());
     if (!tar.open(QIODevice::ReadOnly)) {
-        kDebug() << "Could not open export archive to read.";
+        kError() << "Could not open export archive to read.";
         return;
     }
     tar.directory()->copyTo(projectDirectory.path(), true);
@@ -127,10 +128,9 @@ Project::Project(KUrl projectArchive, KUrl projectDirectory) :
 
 Project::~Project()
 {
-
 }
 
-void Project::setName(QString name)
+void Project::setName(const QString& name)
 {
     KConfigGroup projectGroup(d->_config, "Project");
     projectGroup.writeEntry("Name", name);
@@ -154,20 +154,20 @@ QString Project::projectDirectory() const
 }
 
 
-const KUrl& Project::projectFile() const
+KUrl Project::projectFile() const
 {
     return d->_projectFile;
 }
 
 
-void Project::setProjectFile(KUrl fileUrl)
+void Project::setProjectFile(const KUrl& fileUrl)
 {
     d->_projectFile = fileUrl;
     d->_temporary = false;
 }
 
 
-int Project::addCodeFile(KUrl file)
+int Project::addCodeFile(const KUrl& file)
 {
     QList<int> keys = d->_codeFileGroup.uniqueKeys();
     int newKey = 1;
@@ -192,7 +192,7 @@ void Project::removeCodeFile(int fileID)
 }
 
 
-QList< KUrl > Project::codeFiles() const
+QList<KUrl> Project::codeFiles() const
 {
     QList<KUrl> files;
     foreach(const QString& fileGroup, d->_codeFileGroup) {
@@ -226,7 +226,7 @@ void Project::removeCodeFileNew(KTextEditor::Document* document)
 }
 
 
-void Project::saveCodeFileNew(KTextEditor::Document* document, KUrl file)
+void Project::saveCodeFileNew(KTextEditor::Document* document, const KUrl& file)
 {
     removeCodeFileNew(document);
     document->saveAs(file);
@@ -234,7 +234,7 @@ void Project::saveCodeFileNew(KTextEditor::Document* document, KUrl file)
 }
 
 
-int Project::addGraphFile(KUrl file)
+int Project::addGraphFile(const KUrl& file)
 {
     QList<int> keys = d->_graphFileGroup.uniqueKeys();
     int newKey = 1;
@@ -259,7 +259,7 @@ void Project::removeGraphFile(int fileID)
 }
 
 
-QList< KUrl > Project::graphFiles() const
+QList<KUrl> Project::graphFiles() const
 {
     QList< KUrl > files;
     foreach(const QString& fileGroup, d->_graphFileGroup) {
@@ -287,7 +287,7 @@ void Project::removeGraphFileNew(Document* document)
 }
 
 
-void Project::saveGraphFileNew(Document* document, QString file)
+void Project::saveGraphFileNew(Document* document, const QString& file)
 {
     removeGraphFileNew(document);
     document->saveAs(file);
@@ -295,7 +295,7 @@ void Project::saveGraphFileNew(Document* document, QString file)
 }
 
 
-void Project::saveGraphFileAs(Document* document, QString file)
+void Project::saveGraphFileAs(Document* document, const QString& file)
 {
     Q_ASSERT(document);
     if (d == 0) {
@@ -313,23 +313,20 @@ void Project::saveGraphFileAs(Document* document, QString file)
 }
 
 
-void Project::setJournalFile(KUrl file)
+KUrl Project::journalFile() const
 {
-    d->_journalFile = file;
-    d->_modified = true;
-}
-
-
-const KUrl& Project::journalFile() const
-{
-    return d->_journalFile;
+    if (projectDirectory().isEmpty()) {
+        return KUrl();
+    }
+    KConfigGroup group(d->_config, "Journal");
+    return KUrl::fromLocalFile(projectDirectory().append(group.readEntry("JournalHtml", QString())));
 }
 
 
 bool Project::writeNewProjectFile()
 {
     if (!d->_config->isConfigWritable(true)) {
-        kDebug() << "Cannot write to project config file.";
+        kError() << "Cannot write to project config file.";
         return false;
     }
     d->_config->sync();
@@ -339,10 +336,10 @@ bool Project::writeNewProjectFile()
 }
 
 
-bool Project::writeProjectFile(QString fileUrl)
+bool Project::writeProjectFile(const QString& fileUrl)
 {
     if (fileUrl.isEmpty() && isTemporary()) {
-        kDebug() << "Could not save temporary project file: no file URL specified.";
+        kError() << "Could not save temporary project file: no file URL specified.";
         return false;
     }
 
@@ -385,11 +382,11 @@ bool Project::writeProjectFile(QString fileUrl)
 }
 
 
-bool Project::exportProject(KUrl exportUrl)
+bool Project::exportProject(const KUrl& exportUrl)
 {
     KTar tar(exportUrl.toLocalFile());
     if (!tar.open(QIODevice::WriteOnly)) {
-        kDebug() << "Could not open export archive to write.";
+        kError() << "Could not open export archive to write.";
         return false;
     }
 
@@ -423,8 +420,8 @@ bool Project::exportProject(KUrl exportUrl)
         codeFileIDs.append(group.readEntry("identifier"));
     }
     projectGroup.writeEntry("CodeFiles", codeFileIDs);
-         
-    
+
+
     QStringList graphFileIDs;
     iter = d->_graphFileGroup.constBegin();
     while (iter != d->_graphFileGroup.constEnd()) {
@@ -446,8 +443,10 @@ bool Project::exportProject(KUrl exportUrl)
         graphFileIDs.append(group.readEntry("identifier"));
     }
     projectGroup.writeEntry("GraphFiles", graphFileIDs);
-    if (!d->_journalFile.isEmpty()) {
-        tar.addLocalFile(d->_journalFile.toLocalFile(), d->_journalFile.fileName());
+
+    KUrl journal(journalFile());
+    if (!journal.isEmpty()) {
+        tar.addLocalFile(journal.toLocalFile(), journal.fileName());
     }
 
     // write project to export

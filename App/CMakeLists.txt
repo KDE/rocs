@@ -48,6 +48,7 @@ set( rocs_actions_SRCS
 )
 
 set( rocs_interface_SRCS
+    Interface/JournalEditorWidget.cpp
     Interface/SideDockWidget.cpp
     Interface/ImporterExporterManager.cpp
     Interface/IncludeManagerSettings.cpp
@@ -70,6 +71,7 @@ set( rocs_SRCS
 
 kde4_add_ui_files(
     rocs_SRCS
+    Interface/JournalEditorWidget.ui
     Interface/DocumentTypesWidget.ui
     Interface/ConfigureDefaultProperties.ui
     Interface/ScriptOutputWidget.ui

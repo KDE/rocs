@@ -51,6 +51,7 @@ class QComboBox;
 class QToolButton;
 class KActionMenu;
 class ScriptOutputWidget;
+class JournalEditorWidget;
 
 #ifndef USING_QTSCRIPT
 #define USING_QTSCRIPT 1
@@ -145,7 +146,7 @@ private slots:
 
     void newProject(); //TODO maybe not needed anymore, check after finish of new project assistant
     void newProjectAssistant();
-    void saveProject(const bool& saveAs = false);
+    void saveProject(bool saveAs = false);
     void openProject(const KUrl& fileName = KUrl());
 
     /**
@@ -242,6 +243,7 @@ private: // Variables.
     GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
     CodeEditor *_codeEditor;
     ScriptOutputWidget* _outputWidget;
+    JournalEditorWidget* _journalWidget;
 
     // Other Bunch of stuff.
     KAction *_runScript;

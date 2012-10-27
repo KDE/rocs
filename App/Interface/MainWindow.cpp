@@ -63,7 +63,8 @@
 #include "Scene/GraphicsLayout.h"
 #include "PossibleIncludes.h"
 #include "LoadedPluginsDialog.h"
-#include "Interface/SideDockWidget.h"
+#include "SideDockWidget.h"
+#include "JournalEditorWidget.h"
 
 // Graph Related Includes
 #include "Document.h"
@@ -199,7 +200,7 @@ void MainWindow::setupWidgets()
 void MainWindow::setupToolbars()
 {
     // If current version in settings file is less than demanded version
-    // perform operations. The
+    // perform operations.
     QString configVersion = Settings::version();
     if (configVersion.compare(QString("1.7.70")) < 0) {
         kDebug() << "Apply new default settings for toolbars";
@@ -223,6 +224,7 @@ Project* MainWindow::createNewProject()
     // create new document and add this to project new
     newProject->addGraphFileNew(DocumentManager::self()->newDocument());
     newProject->addCodeFileNew(_codeEditor->newScript());
+    _journalWidget->openJournal(newProject);
 
     return newProject;
 }
@@ -335,9 +337,14 @@ QWidget* MainWindow::setupSidePanel()
     panel->layout()->addWidget(sideDock);
 
     // add widgets to dock
-    sideDock->addDock(new QLabel("Handbook"), i18nc("@title", "Handbook"), KIcon());
-    sideDock->addDock(new QLabel("Journal"), i18nc("@title", "Journal"), KIcon());
+    // Rocs handbook
+    sideDock->addDock(new QLabel("Handbook"), i18nc("@title", "Handbook"), KIcon("help-contents"));
 
+    // Project Journal
+    _journalWidget = new JournalEditorWidget(panel);
+    sideDock->addDock(_journalWidget, i18nc("@title", "Journal"), KIcon("story-editor"));
+
+    // document property widgets
     DocumentTypesWidget* documentTypesWidget = new DocumentTypesWidget(this);
     connect(DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument()));
     sideDock->addDock(documentTypesWidget, i18n("Element Types"), KIcon("document-properties"));
@@ -594,6 +601,7 @@ void MainWindow::newProject()
     _currentProject = new Project();
     _currentProject->addCodeFileNew(_codeEditor->newScript());
     _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
+    _journalWidget->openJournal(_currentProject);
     updateCaption();
 }
 
@@ -604,7 +612,7 @@ void MainWindow::newProjectAssistant()
 }
 
 
-void MainWindow::saveProject(const bool& saveAs)
+void MainWindow::saveProject(bool saveAs)
 {
     // save graphs and scripts
 
@@ -623,6 +631,7 @@ void MainWindow::saveProject(const bool& saveAs)
         _currentProject->setProjectFile(KUrl::fromLocalFile(file));
         saveAllGraphs();
         saveScripts();
+        _journalWidget->saveJournal();
         if (file.endsWith("rocsz")){
             _currentProject->exportProject(KUrl::fromLocalFile(file));
         }else {
@@ -634,6 +643,7 @@ void MainWindow::saveProject(const bool& saveAs)
     } else {
         saveAllGraphs();
         saveScripts();
+        _journalWidget->saveJournal();
         if (_currentProject->projectFile().fileName().endsWith("rocsz")){
             _currentProject->exportProject(_currentProject->projectFile());
         }else{
@@ -675,17 +685,17 @@ void MainWindow::openProject(const KUrl& fileName)
 
     // extract and open new project
     // at the end of this _currentProject must exist
-        if (file.fileName().endsWith("rocsz",Qt::CaseInsensitive)){
-            _currentProject = new Project(file, file.directory(KUrl::AppendTrailingSlash));
-            foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
-                DocumentManager::self()->openDocument(graphFile);
-            }
-        }else{
-            _currentProject = new Project(file);
-            foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
-                DocumentManager::self()->openDocument(graphFile);
-            }
+    if (file.fileName().endsWith("rocsz",Qt::CaseInsensitive)){
+        _currentProject = new Project(file, file.directory(KUrl::AppendTrailingSlash));
+        foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
+            DocumentManager::self()->openDocument(graphFile);
         }
+    } else {
+        _currentProject = new Project(file);
+        foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
+            DocumentManager::self()->openDocument(graphFile);
+        }
+    }
     if (_currentProject->graphFiles().count() == 0) {
         _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
     }
@@ -696,21 +706,13 @@ void MainWindow::openProject(const KUrl& fileName)
     if (_currentProject->codeFiles().count() == 0) {
         _currentProject->addCodeFileNew(_codeEditor->newScript());
     }
+    _journalWidget->openJournal(_currentProject);
 
     updateCaption();
     _recentProjects->addUrl(file.path(KUrl::RemoveTrailingSlash));
     Settings::setLastOpenedDirectory(file.path());
 }
 
-
-// void MainWindow::setProjectName()
-// {
-//     QString name = KInputDialog::getText(i18nc("@title:window", "Set Project Name"),
-//                                          i18nc("@label:textbox name of the project", "Name:"),
-//                                          _currentProject->name()
-//                                         );
-//     _currentProject->setName(name);
-// }
 
 void MainWindow::updateCaption()
 {
@@ -823,7 +825,7 @@ void MainWindow::newGraph()
 int MainWindow::saveIfChanged()
 {
 
-    if (_currentProject->isModified()) {
+    if (_currentProject->isModified() || _journalWidget->isModified()) {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
                                 "@info",
                                 "Changes on your project are unsaved. Do you want to save your changes?"));
