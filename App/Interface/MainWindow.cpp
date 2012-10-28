@@ -982,13 +982,13 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
 void MainWindow::executeScriptOneStep(const QString& text)
 {
     Q_ASSERT(_outputWidget);
-    _outputWidget->clear();
 
     QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
 
     //TODO disable start action
     enableStopAction();
     if (!engine->isRunning()) {
+        _outputWidget->clear();
         QString script = text.isEmpty() ? _codeEditor->text() : text;
         QString scriptPath = _codeEditor->document()->url().path();
         IncludeManager inc;
