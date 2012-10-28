@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "assignvalueswidget.h"
-#include "ui_assignvalueswidget.h"
+#include "AssignValuesWidget.h"
+#include "ui_AssignValuesWidget.h"
 
 
 #include "Document.h"
@@ -225,4 +225,4 @@ void AssignValuesWidget::assignValues()
     }
 }
 
-#include "assignvalueswidget.moc"
+#include "AssignValuesWidget.moc"

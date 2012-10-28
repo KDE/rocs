@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "generategraphwidget.h"
-#include "ui_generategraphwidget.h"
+#include "GenerateGraphWidget.h"
+#include "ui_GenerateGraphWidget.h"
 
 #include "Document.h"
 #include "DataStructure.h"
@@ -337,4 +337,4 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     }
 }
 
-#include "generategraphwidget.moc"
+#include "GenerateGraphWidget.moc"

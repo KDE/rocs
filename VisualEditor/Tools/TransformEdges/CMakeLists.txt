@@ -24,9 +24,9 @@ ADD_DEFINITIONS(-DQT_NO_DEBUG)
 ADD_DEFINITIONS(-DQT_SHARED)
 
 
-set(TransformEdgesToolsPlugin_SRC transformedgestoolsplugin.cpp transformedgeswidget.cpp)
+set(TransformEdgesToolsPlugin_SRC TransformEdgesToolsPlugin.cpp TransformEdgesWidget.cpp)
 
-kde4_add_ui_files( TransformEdgesToolsPlugin_SRC transformedgeswidget.ui )
+kde4_add_ui_files( TransformEdgesToolsPlugin_SRC TransformEdgesWidget.ui )
 
 kde4_add_plugin(rocs_transformedgesplugin ${TransformEdgesToolsPlugin_SRC} )
 target_link_libraries( rocs_transformedgesplugin

@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "transformedgestoolsplugin.h"
-#include "transformedgeswidget.h"
+#include "TransformEdgesToolsPlugin.h"
+#include "TransformEdgesWidget.h"
 #include "../ToolsPluginInterface.h"
 #include <CoreTypes.h>
 #include <Document.h>

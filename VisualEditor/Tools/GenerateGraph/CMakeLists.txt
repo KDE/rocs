@@ -24,9 +24,9 @@ ADD_DEFINITIONS(-DQT_NO_DEBUG)
 ADD_DEFINITIONS(-DQT_SHARED)
 
 
-set(GenerateGraphToolsPlugin_SRC generategraphtoolsplugin.cpp generategraphwidget.cpp)
+set(GenerateGraphToolsPlugin_SRC GenerateGraphToolsPlugin.cpp GenerateGraphWidget.cpp)
 
-kde4_add_ui_files( GenerateGraphToolsPlugin_SRC generategraphwidget.ui )
+kde4_add_ui_files( GenerateGraphToolsPlugin_SRC GenerateGraphWidget.ui )
 
 
 kde4_add_plugin(rocs_generategraphplugin ${GenerateGraphToolsPlugin_SRC} )

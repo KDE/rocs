@@ -23,9 +23,9 @@ ADD_DEFINITIONS(-DQT_PLUGIN)
 ADD_DEFINITIONS(-DQT_NO_DEBUG)
 ADD_DEFINITIONS(-DQT_SHARED)
 
-set(AssignValuesToolsPlugin_SRC assignvaluestoolsplugin.cpp assignvalueswidget.cpp)
+set(AssignValuesToolsPlugin_SRC AssignValuesToolsPlugin.cpp AssignValuesWidget.cpp)
 
-kde4_add_ui_files( AssignValuesToolsPlugin_SRC assignvalueswidget.ui )
+kde4_add_ui_files( AssignValuesToolsPlugin_SRC AssignValuesWidget.ui )
 
 
 kde4_add_plugin(rocs_assignvaluesplugin ${AssignValuesToolsPlugin_SRC} )

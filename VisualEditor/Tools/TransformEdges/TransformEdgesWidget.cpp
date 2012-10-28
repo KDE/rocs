@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "transformedgeswidget.h"
-#include "ui_transformedgeswidget.h"
+#include "TransformEdgesWidget.h"
+#include "ui_TransformEdgesWidget.h"
 
 #include <limits.h>
 #include <KLocale>
@@ -268,4 +268,4 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
 }
 
 
-#include "transformedgeswidget.moc"
+#include "TransformEdgesWidget.moc"
