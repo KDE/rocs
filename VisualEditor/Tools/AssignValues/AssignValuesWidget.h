@@ -19,7 +19,7 @@
 #ifndef ASSIGNVALUESWIDGET_H
 #define ASSIGNVALUESWIDGET_H
 
-#include "ui_assignvalueswidget.h"
+#include "ui_AssignValuesWidget.h"
 #include <KDialog>
 
 

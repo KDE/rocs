@@ -36,7 +36,7 @@
 #include <KLocalizedString>
 
 #include <map>
-#include "ui_transformedgeswidget.h"
+#include "ui_TransformEdgesWidget.h"
 
 static const KAboutData aboutdata("rocs_transformedgesplugin", 0, ki18nc("@title Displayed plugin name", "Transform Edges") , "0.1");
 

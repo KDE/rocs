@@ -36,7 +36,7 @@
 #include <KLocalizedString>
 
 #include <map>
-#include <ui_assignvalueswidget.h>
+#include <ui_AssignValuesWidget.h>
 
 static const KAboutData aboutdata("rocs_assignvaluesplugin", 0, ki18nc("@title Displayed plugin name", "Assign Values") , "0.1");
 
