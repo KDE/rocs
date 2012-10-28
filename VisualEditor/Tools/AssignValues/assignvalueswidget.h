@@ -19,22 +19,13 @@
 #ifndef ASSIGNVALUESWIDGET_H
 #define ASSIGNVALUESWIDGET_H
 
-#include <QWidget>
-
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/topology.hpp>
+#include "ui_assignvalueswidget.h"
 #include <KDialog>
-#include "CoreTypes.h"
 
 
 class QGridLayout;
 class Document;
 class DataStructure;
-
-namespace Ui
-{
-class AssignValuesWidget;
-}
 
 class AssignValuesWidget :
     public KDialog
@@ -52,17 +43,25 @@ public:
     ~AssignValuesWidget();
 
     /**
-        * Add data structures to QComboBox of UI starting at position 0. Take care that
-        * the data structure IDs must be given in increasing ID order without gaps.
-        * Only data structures of documents of data structure type "Graph" are used.
-        *
-        * \param   QStringList dsNames names of data structures
-        * \return  void
-        */
-    void addDataStructures(QStringList dsNames);
+     * Add data structures to QComboBox of UI starting at position 0. Take care that
+     * the data structure IDs must be given in increasing ID order without gaps.
+     * Only data structures of documents of data structure type "Graph" are used.
+     *
+     * \param   QStringList dsNames names of data structures
+     * \return  void
+     */
+    void addDataStructures(const QStringList& dsNames);
 
 public slots:
+    /**
+     * Assign values as specified at the UI.
+     */
     void assignValues();
+
+    /**
+     * Only enable Apply/Ok buttons if the specified property is valid.
+     */
+    void updateApplyButtonStates();
 
 private:
     Document* graphDoc_;

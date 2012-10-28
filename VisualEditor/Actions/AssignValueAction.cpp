@@ -75,7 +75,7 @@ void AssignValueAction::enumerateDataStructure()
 {
     if (_dataStructure) {
         ValueModifier modifier;
-        modifier.enumerate(_dataStructure->dataList(), 1, true);
+        modifier.enumerate(_dataStructure->dataList(), QString("value"), 1, true);
     }
 }
 
@@ -90,7 +90,7 @@ void AssignValueAction::enumerateSelected()
         }
     }
     ValueModifier modifier;
-    modifier.enumerate(dataList, 1, true);
+    modifier.enumerate(dataList, QString("value"), 1, true);
 }
 
 void AssignValueAction::assignRandomIntegersDataStructure()
@@ -98,7 +98,7 @@ void AssignValueAction::assignRandomIntegersDataStructure()
     if (_dataStructure) {
         ValueModifier modifier;
         //FIXME use really random seed
-        modifier.assignRandomIntegers(_dataStructure->dataList(), 1, 100, 1, true);
+        modifier.assignRandomIntegers(_dataStructure->dataList(), QString("value"), 1, 100, 1, true);
     }
 }
 
@@ -113,7 +113,7 @@ void AssignValueAction::assignRandomIntegersSelected()
         }
     }
     ValueModifier modifier;
-    modifier.assignRandomIntegers(dataList, 1, 100, 1, true);
+    modifier.assignRandomIntegers(dataList, QString("value"), 1, 100, 1, true);
 }
 
 
@@ -122,7 +122,7 @@ void AssignValueAction::assignRandomRealsDataStructure()
     if (_dataStructure) {
         ValueModifier modifier;
         //FIXME use really random seed
-        modifier.assignRandomReals(_dataStructure->dataList(), 1, 10, 1, true);
+        modifier.assignRandomReals(_dataStructure->dataList(), QString("value"), 1, 10, 1, true);
     }
 }
 
@@ -137,5 +137,5 @@ void AssignValueAction::assignRandomRealsSelected()
         }
     }
     ValueModifier modifier;
-    modifier.assignRandomReals(dataList, 1, 10, 1, true);
+    modifier.assignRandomReals(dataList, QString("value"), 1, 10, 1, true);
 }

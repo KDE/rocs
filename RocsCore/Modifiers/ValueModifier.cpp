@@ -33,32 +33,29 @@ ValueModifier::ValueModifier()
 }
 
 
-ValueModifier::~ValueModifier()
-{
-}
-
-
-void ValueModifier::enumerate(QList<DataPtr> dataList, int start, bool overrideValues = true)
+void ValueModifier::enumerate(QList<DataPtr> dataList, const QString& property, int start, bool overrideValues = true)
 {
     for (int i = 0; i < dataList.size(); i++) {
-        if (!overrideValues && !dataList[i]->property("value").isNull())
+        if (!overrideValues && !dataList[i]->property(property.toStdString().c_str()).isNull()) {
             return;
-        dataList[i]->setProperty("value", QString::number(start++));
+        }
+        dataList[i]->setProperty(property.toStdString().c_str(), QString::number(start++));
     }
 }
 
 
-void ValueModifier::enumerate(QList<PointerPtr> pointers, int start, bool overrideValues = true)
+void ValueModifier::enumerate(QList<PointerPtr> pointers, const QString& property, int start, bool overrideValues = true)
 {
     for (int i = 0; i < pointers.size(); i++) {
-        if (!overrideValues && !pointers[i]->property("value").isNull())
+        if (!overrideValues && !pointers[i]->property(property.toStdString().c_str()).isNull()) {
             return;
-        pointers[i]->setProperty("value", QString::number(start++));
+        }
+        pointers[i]->setProperty(property.toStdString().c_str(), QString::number(start++));
     }
 }
 
 
-void ValueModifier::assignRandomIntegers(QList<DataPtr> dataList, int lowerLimit, int upperLimit, int seed, bool overrideValues = true)
+void ValueModifier::assignRandomIntegers(QList<DataPtr> dataList, const QString& property, int lowerLimit, int upperLimit, int seed, bool overrideValues = true)
 {
     if (lowerLimit > upperLimit)
         return;
@@ -70,17 +67,19 @@ void ValueModifier::assignRandomIntegers(QList<DataPtr> dataList, int lowerLimit
     boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
 
     for (int i = 0; i < dataList.size(); i++) {
-        if (!overrideValues && !dataList[i]->property("value").isNull())
+        if (!overrideValues && !dataList[i]->property(property.toStdString().c_str()).isNull()) {
             return;
-        dataList[i]->setProperty("value", QString::number(die()));
+        }
+        dataList[i]->setProperty(property.toStdString().c_str(), QString::number(die()));
     }
 }
 
 
-void ValueModifier::assignRandomIntegers(QList<PointerPtr> pointers, int lowerLimit, int upperLimit, int seed, bool overrideValues = true)
+void ValueModifier::assignRandomIntegers(QList<PointerPtr> pointers, const QString& property, int lowerLimit, int upperLimit, int seed, bool overrideValues = true)
 {
-    if (lowerLimit > upperLimit)
+    if (lowerLimit > upperLimit) {
         return;
+    }
 
     boost::mt19937 gen;
     gen.seed(static_cast<unsigned int>(seed));
@@ -89,17 +88,19 @@ void ValueModifier::assignRandomIntegers(QList<PointerPtr> pointers, int lowerLi
     boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
 
     for (int i = 0; i < pointers.size(); i++) {
-        if (!overrideValues && !pointers[i]->property("value").isNull())
+        if (!overrideValues && !pointers[i]->property(property.toStdString().c_str()).isNull()) {
             return;
-        pointers[i]->setProperty("value", QString::number(die()));
+        }
+        pointers[i]->setProperty(property.toStdString().c_str(), QString::number(die()));
     }
 }
 
 
-void ValueModifier::assignRandomReals(QList<DataPtr> dataList, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues = true)
+void ValueModifier::assignRandomReals(QList<DataPtr> dataList, const QString& property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues = true)
 {
-    if (lowerLimit > upperLimit)
+    if (lowerLimit > upperLimit) {
         return;
+    }
 
     boost::mt19937 gen;
     gen.seed(static_cast<unsigned int>(seed));
@@ -108,17 +109,19 @@ void ValueModifier::assignRandomReals(QList<DataPtr> dataList, qreal lowerLimit,
     boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
 
     for (int i = 0; i < dataList.size(); i++) {
-        if (!overrideValues && !dataList[i]->property("value").isNull())
+        if (!overrideValues && !dataList[i]->property(property.toStdString().c_str()).isNull()) {
             return;
-        dataList[i]->setProperty("value", QString::number(die()));
+        }
+        dataList[i]->setProperty(property.toStdString().c_str(), QString::number(die()));
     }
 }
 
 
-void ValueModifier::assignRandomReals(QList<PointerPtr> pointers, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues = true)
+void ValueModifier::assignRandomReals(QList<PointerPtr> pointers, const QString& property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues = true)
 {
-    if (lowerLimit > upperLimit)
+    if (lowerLimit > upperLimit) {
         return;
+    }
 
     boost::mt19937 gen;
     gen.seed(static_cast<unsigned int>(seed));
@@ -127,8 +130,9 @@ void ValueModifier::assignRandomReals(QList<PointerPtr> pointers, qreal lowerLim
     boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
 
     for (int i = 0; i < pointers.size(); i++) {
-        if (!overrideValues && !pointers[i]->property("value").isNull())
+        if (!overrideValues && !pointers[i]->property(property.toStdString().c_str()).isNull()) {
             return;
-        pointers[i]->setProperty("value", QString::number(die()));
+        }
+        pointers[i]->setProperty(property.toStdString().c_str(), QString::number(die()));
     }
 }
