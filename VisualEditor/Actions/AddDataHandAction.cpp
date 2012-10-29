@@ -73,7 +73,7 @@ bool AddDataHandAction::executePress(QPointF pos)
     }
 
     if (DocumentManager::self()->activeDocument()->activeDataStructure()
-        ->addData(i18n("untitled"), QPointF(pos.x(), pos.y()), dataTypeIdentifier))
+        ->addData(QString(), QPointF(pos.x(), pos.y()), dataTypeIdentifier))
     {
         return true;
     }

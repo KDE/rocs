@@ -47,7 +47,7 @@ bool AddDataAction::executePress(QPointF pos)
         return false;
     }
     DataPtr tmp = DocumentManager::self()->activeDocument()->activeDataStructure()
-                  ->addData(i18n("untitled"), QPointF(pos.x(), pos.y()));
+                  ->addData(QString(), QPointF(pos.x(), pos.y()));
     kDebug()  << " the data's actual position: " << tmp.get()->x() << ", " << tmp.get()->y() ;
     return true;
 }
