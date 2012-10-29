@@ -19,5 +19,11 @@
 add_subdirectory(tgfFileFormat)
 add_subdirectory(dotFileFormat)
 add_subdirectory(tikzFileFormat)
-add_subdirectory(kmlFileFormat)
-add_subdirectory(gmlFileFormat)
+
+# these plugins are in an unstable state and are not suited for end users
+if (ROCS_BUILD_LOADSAVE)
+    add_subdirectory(kmlFileFormat)
+    add_subdirectory(gmlFileFormat)
+endif(ROCS_BUILD_LOADSAVE)
+
+

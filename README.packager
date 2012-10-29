@@ -3,6 +3,21 @@ OUTLINE
 This readme file currently covers the following topics (further topics will be included in the
 future):
 * Licensing
+* Building
+
+BUILDING
+========
+For building Rocs, please refer to the instructions on techbase.kde.org. Further, Rocs provides
+a set of special cmake options:
+
+CMake Options
+-------------
+* ROCS_BUILD_LOADSAVE
+  Build optional plugins for graph files. Those plugins are recommended, but Rocs will work
+  without (though with graph files limited to Rocs internal file types).
+* ROCS_EXPERIMENTAL_PLUGINS
+  Build of unstable/experimental plugins. This method is only recommended for developers. Explicitely,
+  those plugins are not yet suited for end users
 
 LICENSES
 ========

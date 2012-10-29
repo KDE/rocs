@@ -20,33 +20,36 @@
 
 project(Rocs)
 
-cmake_minimum_required(VERSION 2.6.0)
+cmake_minimum_required(VERSION 2.8.8)
+include(FeatureSummary)
+
 #### Boost ####
 # In CMake >= 2.8.6, FindBoost.cmake tries to find BoostConfig.cmake which is
 # not compatible with CMake's FindBoost. Disable this function.
-set (Boost_NO_BOOST_CMAKE TRUE)
+set(Boost_NO_BOOST_CMAKE TRUE)
 find_package(Boost "1.43" REQUIRED)
+set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org"
+                                  )
 
 set(KDE_MIN_VERSION "4.3")
 find_package(KDE4 REQUIRED)
-
 include(KDE4Defaults)
+
 remove_definitions(-DQT_NO_STL)
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
+if(${CMAKE_BUILD_TYPE} MATCHES coverage)
+    set(CMAKE_CXX_COMPILER cov++)
+endif()
 
 # Rocs include dirs
-set (ROCSCORE_INCLUDES
+set(ROCSCORE_INCLUDES
     "${CMAKE_CURRENT_SOURCE_DIR}/RocsCore/"
     "${CMAKE_CURRENT_SOURCE_DIR}/RocsCore/LoadSave/"
 )
 
-set (ROCSVISUALEDITOR_INCLUDES
+set(ROCSVISUALEDITOR_INCLUDES
     "${CMAKE_CURRENT_SOURCE_DIR}/VisualEditor/"
 )
-
-if(${CMAKE_BUILD_TYPE} MATCHES coverage)
-    set (CMAKE_CXX_COMPILER cov++)
-endif()
 
 include_directories(
     ${KDE4_INCLUDES}
@@ -54,20 +57,24 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
 )
 
-# Allow disabling building of optional graph file backands
+# allow disabling building of optional graph file backands
 option(ROCS_BUILD_LOADSAVE "ROCS_BUILD_LOADSAVE" ON)
-macro_log_feature(
+add_feature_info(OptionalGraphFiles
     ROCS_BUILD_LOADSAVE
-    "Graph File Plugins"
     "Building of extra graph file plugins"
-    "edu.kde.org/rocs"
-    FALSE
-    )
+)
+
+# enable or disable experimental plugins
+# experimental plugins are (by definition) not suited for release builds
+option(ROCS_EXPERIMENTAL_PLUGINS "ROCS_EXPERIMENTAL_PLUGINS" OFF)
+add_feature_info(ExperimentalPlugins
+    ROCS_EXPERIMENTAL_PLUGINS
+    "Building experimental/unstable plugins."
+)
 
 # feature log
-macro_log_feature(Boost_FOUND "Boost C++ Libraries" "Required to build Rocs" "http://www.boost.org" TRUE "1.43" "")
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
-    macro_display_feature_log()
+    feature_summary(WHAT ALL)
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_subdirectory(RocsCore)
