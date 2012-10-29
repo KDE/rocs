@@ -438,11 +438,13 @@ void DataStructure::remove(DataPtr n)
     }
 
     // remove from internal list
-    foreach(int key, d->_pointerTypeLists.keys()) {
-        if (d->_dataTypeLists[key].removeOne(n)) {
+    QMap<int,DataList>::iterator iter = d->_dataTypeLists.begin();
+    while (iter != d->_dataTypeLists.end()) {
+        if (iter->removeOne(n)) {
             // only remove data element if it is registered
             n->remove();
         }
+        ++iter;
     }
     updateRelativeCenter();
     emit changed();
@@ -451,11 +453,13 @@ void DataStructure::remove(DataPtr n)
 void DataStructure::remove(PointerPtr e)
 {
     // remove from internal list
-    foreach(int key, d->_pointerTypeLists.keys()) {
-        if (d->_pointerTypeLists[key].removeOne(e)) {
+    QMap<int,PointerList>::iterator iter = d->_pointerTypeLists.begin();
+    while (iter != d->_pointerTypeLists.end()) {
+        if (iter->removeOne(e)) {
             // only remove pointer if it is registered
             e->remove();
         }
+        ++iter;
     }
     emit changed();
 }

@@ -68,9 +68,7 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
 
 PointerItem::~PointerItem()
 {
-    foreach (const QString& name, _propertyValues.keys()) {
-        delete _propertyValues[name];
-    }
+    qDeleteAll(_propertyValues);
     _propertyValues.clear();
     delete _item;
 }

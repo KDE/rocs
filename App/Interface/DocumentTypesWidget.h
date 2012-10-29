@@ -18,8 +18,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOCUMENTYPESWIDGET_H
-#define DOCUMENTYPESWIDGET_H
+#ifndef DOCUMENTTYPESWIDGET_H
+#define DOCUMENTTYPESWIDGET_H
 
 #include <KButtonGroup>
 #include "CoreTypes.h"

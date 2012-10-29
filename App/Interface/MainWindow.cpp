@@ -495,7 +495,7 @@ void MainWindow::setupDSPluginsAction()
         mapper->setMapping(action, identifier);
         pluginList.append(action);
     }
-    connect(mapper, SIGNAL(mapped(const QString &)),
+    connect(mapper, SIGNAL(mapped(QString)),
              DataStructureBackendManager::self(), SLOT(setBackend(QString)));
 
     plugActionList("DS_plugins", pluginList);
@@ -634,7 +634,7 @@ void MainWindow::saveProject(bool saveAs)
         saveAllGraphs();
         saveScripts();
         _journalWidget->saveJournal();
-        if (file.endsWith("rocsz")){
+        if (file.endsWith(QLatin1String("rocsz"))){
             _currentProject->exportProject(KUrl::fromLocalFile(file));
         }else {
 
@@ -646,7 +646,7 @@ void MainWindow::saveProject(bool saveAs)
         saveAllGraphs();
         saveScripts();
         _journalWidget->saveJournal();
-        if (_currentProject->projectFile().fileName().endsWith("rocsz")){
+        if (_currentProject->projectFile().fileName().endsWith(QLatin1String("rocsz"))){
             _currentProject->exportProject(_currentProject->projectFile());
         }else{
             _currentProject->writeProjectFile();
@@ -687,7 +687,7 @@ void MainWindow::openProject(const KUrl& fileName)
 
     // extract and open new project
     // at the end of this _currentProject must exist
-    if (file.fileName().endsWith("rocsz",Qt::CaseInsensitive)){
+    if (file.fileName().endsWith(QLatin1String("rocsz"), Qt::CaseInsensitive)){
         _currentProject = new Project(file, file.directory(KUrl::AppendTrailingSlash));
         foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
             DocumentManager::self()->openDocument(graphFile);
@@ -754,7 +754,7 @@ void MainWindow::newScript()
         kDebug() << "Filename is empty and no script file was created.";
         return;
     }
-    if (!file.endsWith(".js"))
+    if (!file.endsWith(QLatin1String(".js")))
         file.append(".js");
     _codeEditor->newScript(KUrl::fromLocalFile(file));
 }
@@ -816,7 +816,7 @@ void MainWindow::newGraph()
         kDebug() << "Filename is empty and no script file was created.";
         return;
     }
-    if (!file.endsWith(".graph")){
+    if (!file.endsWith(QLatin1String(".graph"))){
         file.append(".graph");
     }
     DocumentManager::self()->openDocument(KUrl::fromLocalFile(file));

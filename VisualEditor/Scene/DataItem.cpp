@@ -67,9 +67,7 @@ DataItem::DataItem(DataPtr n)
 
 DataItem::~DataItem()
 {
-    foreach (const QString& name, _propertyValues.keys()) {
-        delete _propertyValues[name];
-    }
+    qDeleteAll(_propertyValues);
     _propertyValues.clear();
     delete _item;
 }

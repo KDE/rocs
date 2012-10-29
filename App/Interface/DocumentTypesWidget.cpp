@@ -89,12 +89,15 @@ void DocumentTypesWidget::removeDocument()
     _document->disconnect(this);
 
     // cleanup before filling again
-    foreach (int identifier, _dataTypeWidgets.keys()) {
+    QList<int> identifiers;
+    identifiers = _dataTypeWidgets.keys();
+    foreach (int identifier, identifiers) {
         delete _dataTypeWidgets[identifier];
         _dataTypeWidgets.remove(identifier);
         _dataTypeButtons.remove(identifier);
     }
-    foreach (int identifier, _pointerTypeWidgets.keys()) {
+    identifiers = _pointerTypeWidgets.keys();
+    foreach (int identifier, identifiers) {
         delete _pointerTypeWidgets[identifier];
         _pointerTypeWidgets.remove(identifier);
         _pointerTypeButtons.remove(identifier);
