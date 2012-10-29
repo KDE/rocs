@@ -327,7 +327,7 @@ void Data::self_remove()
     remove();
 }
 
-const QVariant Data::color() const
+QVariant Data::color() const
 {
     return d->_color;
 }
@@ -436,7 +436,7 @@ void Data::removeDynamicProperty(const QString& property)
     emit propertyRemoved(property);
 }
 
-void Data::updateDynamicProperty(QString property)
+void Data::updateDynamicProperty(const QString& property)
 {
     if (this->property(property.toStdString().c_str()) == QVariant::Invalid
         || this->property(property.toStdString().c_str()).toString().isEmpty()
@@ -446,7 +446,7 @@ void Data::updateDynamicProperty(QString property)
     emit propertyChanged(property);
 }
 
-void Data::renameDynamicProperty(QString oldName, QString newName)
+void Data::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
         kWarning() << "Property identifier is not valid: aborting";
@@ -482,7 +482,7 @@ QScriptValue Data::type()
     return d->_dataStructure->engine()->newVariant(d->_dataType->identifier());
 }
 
-void Data::add_property(const QString & name, const QString & value)
+void Data::add_property(const QString& name, const QString& value)
 {
     addDynamicProperty(name, value);
 }

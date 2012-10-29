@@ -41,12 +41,12 @@ public:
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
-    RootedTreeStructure ( Document* parent = 0 );
+    RootedTreeStructure(Document* parent = 0 );
     ~RootedTreeStructure();
     void importStructure(DataStructurePtr other);
 
     PointerPtr addPointer(DataPtr from, DataPtr to, int dataType=0);
-    DataPtr addData(QString name, int dataType=0);
+    DataPtr addData(const QString& name, int dataType=0);
 
     void setEngine(QScriptEngine* engine);
     DataPtr rootNode() const;

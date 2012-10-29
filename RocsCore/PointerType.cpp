@@ -77,14 +77,14 @@ PointerType::~PointerType()
 }
 
 
-void PointerType::setName(QString name)
+void PointerType::setName(const QString& name)
 {
     d->_name = name;
     emit(nameChanged(d->_name));
 }
 
 
-const QString& PointerType::name() const
+QString PointerType::name() const
 {
     return d->_name;
 }
@@ -122,20 +122,20 @@ void PointerType::setLineStyle(Qt::PenStyle lineStyle)
 }
 
 
-void PointerType::setDefaultColor(QColor color)
+void PointerType::setDefaultColor(const QColor& color)
 {
     d->_defaultColor = color;
     emit(styleChanged());
 }
 
 
-const QColor& PointerType::defaultColor() const
+QColor PointerType::defaultColor() const
 {
     return d->_defaultColor;
 }
 
 
-void PointerType::addProperty(QString name, QString defaultValue)
+void PointerType::addProperty(const QString& name, const QString& defaultValue)
 {
     PointerTypePrivate::Property newProperty;
     newProperty.name = name;
@@ -146,14 +146,14 @@ void PointerType::addProperty(QString name, QString defaultValue)
     emit(propertyAdded(newProperty.name, newProperty.defaultValue));
 }
 
-void PointerType::removeProperty(QString name)
+void PointerType::removeProperty(const QString& name)
 {
     d->_propertyDisplayList.removeOne(name);
     d->_propertyList.remove(name);
     emit propertyRemoved(name);
 }
 
-void PointerType::renameProperty(QString oldName, QString newName)
+void PointerType::renameProperty(const QString& oldName, const QString& newName)
 {
     if (d->_propertyList.contains(newName)) {
         kWarning() << "Property name was not changed: new name already exists";
@@ -174,7 +174,7 @@ QList<QString> PointerType::properties() const
     return d->_propertyList.keys();
 }
 
-QVariant PointerType::propertyDefaultValue(QString name) const
+QVariant PointerType::propertyDefaultValue(const QString& name) const
 {
     if (!d->_propertyList.contains(name)) {
         return false;
@@ -182,7 +182,7 @@ QVariant PointerType::propertyDefaultValue(QString name) const
     return d->_propertyList[name].defaultValue;
 }
 
-void PointerType::setPropertyDefaultValue(QString name, QVariant value)
+void PointerType::setPropertyDefaultValue(const QString& name, const QVariant& value)
 {
     if (!d->_propertyList.contains(name)) {
         return;
@@ -191,7 +191,7 @@ void PointerType::setPropertyDefaultValue(QString name, QVariant value)
     emit propertyDefaultValueChanged(name);
 }
 
-bool PointerType::isPropertyVisible(QString name) const
+bool PointerType::isPropertyVisible(const QString& name) const
 {
     if (!d->_propertyList.contains(name)) {
         return false;
@@ -199,7 +199,7 @@ bool PointerType::isPropertyVisible(QString name) const
     return d->_propertyList[name].visible;
 }
 
-void PointerType::setPropertyVisible(QString name, bool visible)
+void PointerType::setPropertyVisible(const QString& name, bool visible)
 {
     if (!d->_propertyList.contains(name)) {
         return;

@@ -68,9 +68,9 @@ public:
     /**
      * Name of this group.
      */
-    const QString& name() const;
+    QString name() const;
 
-    void setName(QString name);
+    void setName(const QString& name);
 
 signals:
     void groupElementsChanged();

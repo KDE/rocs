@@ -74,7 +74,7 @@ public:
 
 QMap<QString, QSvgRenderer*> Document::_sharedRenderers;
 
-QSvgRenderer* Document::sharedRenderer(QString iconPackage)
+QSvgRenderer* Document::sharedRenderer(const QString& iconPackage)
 {
     if (_sharedRenderers.count(iconPackage) == 0 || !_sharedRenderers.contains(iconPackage)) {
         registerSharedRenderer(iconPackage);
@@ -83,7 +83,7 @@ QSvgRenderer* Document::sharedRenderer(QString iconPackage)
 }
 
 
-QSvgRenderer* Document::registerSharedRenderer(QString iconPackage)
+QSvgRenderer* Document::registerSharedRenderer(const QString& iconPackage)
 {
     if (!_sharedRenderers.contains(iconPackage)) {
         QSvgRenderer *z = new QSvgRenderer(iconPackage);
@@ -93,7 +93,7 @@ QSvgRenderer* Document::registerSharedRenderer(QString iconPackage)
 }
 
 
-void Document::removeSharedRenderer(QString iconPackage)
+void Document::removeSharedRenderer(const QString& iconPackage)
 {
     _sharedRenderers.value(iconPackage)->deleteLater();
     _sharedRenderers.remove(iconPackage);
@@ -181,7 +181,7 @@ Document::~Document()
     delete d->_engineBackend;
 }
 
-int Document::registerDataType(QString name, int identifier)
+int Document::registerDataType(const QString& name, int identifier)
 {
     // create new identifier if identifier is already in use or 0
     if (identifier==0 || d->_dataTypes.contains(identifier)) {
@@ -199,7 +199,7 @@ int Document::registerDataType(QString name, int identifier)
     return identifier;
 }
 
-int Document::registerPointerType(QString name, int identifier)
+int Document::registerPointerType(const QString& name, int identifier)
 {
     // create new identifier if identifier is already in use or 0
     if (identifier==0 || d->_pointerTypes.contains(identifier)) {
@@ -217,12 +217,12 @@ int Document::registerPointerType(QString name, int identifier)
     return identifier;
 }
 
-QList< int > Document::dataTypeList() const
+QList<int> Document::dataTypeList() const
 {
     return d->_dataTypes.keys();
 }
 
-QList< int > Document::pointerTypeList() const
+QList<int> Document::pointerTypeList() const
 {
     return d->_pointerTypes.keys();
 }
@@ -285,7 +285,7 @@ QList< DataStructurePtr >& Document::dataStructures() const
     return d->_dataStructures;
 }
 
-bool Document::isValidIdentifier(QString identifier)
+bool Document::isValidIdentifier(const QString& identifier)
 {
     QRegExp validator("(^([a-z]|[A-Z])+([0-9]|[a-z]|[A-Z]|_)*$)");
     return (validator.indexIn(identifier) != -1);
@@ -497,7 +497,7 @@ void Document::resizeDocumentBorder(Document::Border orientation)
     }
 }
 
-bool Document::isPointAtDocument(QPointF point)  const
+bool Document::isPointAtDocument(const QPointF& point)  const
 {
     return isPointAtDocument(point.x(), point.y());
 }
@@ -532,11 +532,12 @@ void Document::setActiveDataStructure(DataStructurePtr g)
     }
 }
 
-DataStructurePtr Document::addDataStructure(QString name)
+DataStructurePtr Document::addDataStructure(const QString& name)
 {
+    QString uniqueName = name;
     DataStructurePtr g = DataStructureBackendManager::self()->createDataStructure(this,
                          d->_dataStructureType->internalName());
-    if (name.isEmpty()) {
+    if (uniqueName.isEmpty()) {
         // find unused name
         QList<QString> usedNames;
         foreach(DataStructurePtr dataStructure, d->_dataStructures) {
@@ -544,13 +545,13 @@ DataStructurePtr Document::addDataStructure(QString name)
         }
         // For at least one i in this range, the name is not used, yet.
         for (int i = 0; i < dataStructures().length() + 1; ++i) {
-            name = QString("%1%2").arg(d->_dataStructureType->internalName()).arg(i);
-            if (!usedNames.contains(name)) {
+            uniqueName = QString("%1%2").arg(d->_dataStructureType->internalName()).arg(i);
+            if (!usedNames.contains(uniqueName)) {
                 break;
             }
         }
     }
-    g->setName(name);
+    g->setName(uniqueName);
     d->_dataStructures.append(g);
     d->_activeDataStructure = g;
     d->_modified = true;
@@ -571,12 +572,12 @@ void Document::saveAs(const QString& fileUrl)
     DocumentManager::self()->saveDocumentAs(this, KUrl::fromLocalFile(fileUrl));
 }
 
-const QString& Document::fileUrl() const
+QString Document::fileUrl() const
 {
     return d->_lastSavedDocumentPath;
 }
 
-void Document::setFileUrl(KUrl fileUrl)
+void Document::setFileUrl(const KUrl& fileUrl)
 {
     d->_lastSavedDocumentPath = fileUrl.toLocalFile();
 }
@@ -612,7 +613,7 @@ DataStructurePluginInterface* Document::dataStructurePlugin() const
     return d->_dataStructureType;
 }
 
-void Document::setDataStructurePlugin(QString pluginIdentifier)
+void Document::setDataStructurePlugin(const QString& pluginIdentifier)
 {
     DataStructurePluginInterface* plugin = DataStructureBackendManager::self()->backend(pluginIdentifier);
     if (plugin) {

@@ -53,7 +53,7 @@ public:
 
     /** insert additional path to seek files.*/
     void addPath(const QString& str);
-    void addPath(const QStringList & str);
+    void addPath(const QStringList& str);
 
     void initialize(const QStringList& tempPath = QStringList());
 

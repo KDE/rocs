@@ -80,13 +80,13 @@ void Group::clear()
 }
 
 
-void Group::setName(QString name)
+void Group::setName(const QString& name)
 {
     d->_name = name;
 }
 
 
-const QString& Group::name() const
+QString Group::name() const
 {
     return d->_name;
 }

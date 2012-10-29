@@ -81,7 +81,7 @@ QPolygonF EdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const
     return arrow;
 }
 
-QPainterPath EdgeItem::createLoop(QPointF pos) const
+QPainterPath EdgeItem::createLoop(const QPointF& pos) const
 {
     if (!pointer()) {
         return QPainterPath();

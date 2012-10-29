@@ -195,7 +195,7 @@ PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataTyp
     return ptr;
 }
 
-DataPtr RootedTreeStructure::addData(QString name, int dataType)
+DataPtr RootedTreeStructure::addData(const QString& name, int dataType)
 {
     Q_ASSERT(document()->dataTypeList().contains(dataType));
     boost::shared_ptr<RootedTreeNode> n = boost::static_pointer_cast<RootedTreeNode>(

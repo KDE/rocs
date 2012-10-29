@@ -46,7 +46,7 @@ public:
 
 public slots:
 
-    virtual DataPtr addData(QString name, int dataType = 0);
+    virtual DataPtr addData(const QString& name, int dataType = 0);
 
     virtual void remove(DataPtr n);
 
@@ -58,7 +58,7 @@ public slots:
 
     QScriptValue begin();
     void setBegin(Data* node);
-    QScriptValue createNode(const QString &name);
+    QScriptValue createNode(const QString& name);
 
 
 private:

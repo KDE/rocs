@@ -167,7 +167,7 @@ public slots:
     /**
      * \return the color of this pointer
      */
-    const QColor& color() const;
+    QColor color() const;
 
     /**
      * Set color attribute of this pointer. The new color must be set either in format "#000000" or by
@@ -206,18 +206,18 @@ public slots:
      * \param property is the identifier for the new property
      * \param value is the value of this new property
      */
-    void addDynamicProperty(const QString & property, const QVariant& value);
+    void addDynamicProperty(const QString& property, const QVariant& value);
 
     /**
      * Remove dynamic property with identifier \p property from data element.
      *
      * \param property is identifier of the property
      */
-    void removeDynamicProperty(QString property);
+    void removeDynamicProperty(const QString& property);
 
-    void updateDynamicProperty(QString property);
+    void updateDynamicProperty(const QString& property);
 
-    void renameDynamicProperty(QString oldName, QString newName);
+    void renameDynamicProperty(const QString& oldName, const QString& newName);
 
     /**
      * Update relative index. \see relativeIndex().
@@ -249,13 +249,13 @@ public slots:
      * \param name is identifier for new property
      * \param value is the initial value of the property
      */
-    void add_property(QString name, QString value);
+    void add_property(const QString& name, const QString& value);
 
     /**
      * Remove a property named \p name from this pointer.
      * \param name identifier of the property to remove.
      */
-    void remove_property(const QString & name);
+    void remove_property(const QString& name);
     /**
      * \return the \see from() data element for script engine
      */
@@ -304,8 +304,8 @@ private:
     void setQpointer(PointerPtr q);
 
     void initialize();
-    Pointer(const Pointer &);
-    Pointer & operator=(Pointer const &);
+    Pointer(const Pointer&);
+    Pointer& operator=(const Pointer&);
 };
 
 #endif

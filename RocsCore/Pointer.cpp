@@ -226,7 +226,7 @@ void Pointer::setColor(const QColor& color)
     }
 }
 
-const QColor& Pointer::color() const
+QColor Pointer::color() const
 {
     return d->color;
 }
@@ -247,7 +247,7 @@ Qt::PenStyle Pointer::style() const
     return d->pointerType->lineStyle();
 }
 
-void Pointer::addDynamicProperty(const QString & property, const QVariant& value)
+void Pointer::addDynamicProperty(const QString& property, const QVariant& value)
 {
     if (!Document::isValidIdentifier(property)) {
         kWarning() << "Property identifier is not valid: aborting";
@@ -257,13 +257,13 @@ void Pointer::addDynamicProperty(const QString & property, const QVariant& value
     emit(propertyAdded(property));
 }
 
-void Pointer::removeDynamicProperty(QString property)
+void Pointer::removeDynamicProperty(const QString& property)
 {
     setProperty(property.toAscii(), QVariant::Invalid);
     emit(propertyRemoved(property));
 }
 
-void Pointer::updateDynamicProperty(QString property)
+void Pointer::updateDynamicProperty(const QString& property)
 {
     if (this->property(property.toStdString().c_str()) == QVariant::Invalid
         || this->property(property.toStdString().c_str()).toString().isEmpty()
@@ -273,7 +273,7 @@ void Pointer::updateDynamicProperty(QString property)
     emit propertyChanged(property);
 }
 
-void Pointer::renameDynamicProperty(QString oldName, QString newName)
+void Pointer::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
         kWarning() << "Property identifier is not valid: aborting";
@@ -298,12 +298,12 @@ QScriptValue Pointer::type() const
     return d->dataStructure->engine()->newVariant(d->pointerType->identifier());
 }
 
-void Pointer::remove_property (const QString& name)
+void Pointer::remove_property(const QString& name)
 {
     removeDynamicProperty(name);
 }
 
-void Pointer::add_property(QString name, QString value)
+void Pointer::add_property(const QString& name, const QString& value)
 {
     addDynamicProperty(name, value);
 }

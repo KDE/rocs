@@ -64,12 +64,12 @@ public:
     /**
      * \return name of data type
      */
-    const QString& name() const;
+    QString name() const;
 
     /**
      * \return data type icon identifier for iconPackage
      */
-    const QString& iconName() const;
+    QString iconName() const;
 
     /**
      * Generates KIcon for data type at run time. This icon is not cached.
@@ -86,7 +86,7 @@ public:
     /**
      * \return default color for data elements of this data type
      */
-    const QColor& defaultColor() const;
+    QColor defaultColor() const;
 
     /**
      * Add a new dynamic property to all data elements of this data type.
@@ -94,12 +94,12 @@ public:
      * \param name is the unique name of the property
      * \param defaultValue is the default value that is set initially
      */
-    void addProperty(QString name, QString defaultValue = "");
+    void addProperty(const QString& name, const QString& defaultValue = QString());
 
     /**
      * Remove dynamic property from data type.
      */
-    void removeProperty(QString name);
+    void removeProperty(const QString& name);
 
     /**
      * Rename property from \p oldName to \p newName. The old
@@ -110,7 +110,7 @@ public:
      * \param oldName is the current property name
      * \param newName is the new property name
      */
-    void renameProperty(QString oldName, QString newName);
+    void renameProperty(const QString& oldName, const QString& newName);
 
     /**
      * \return list of all properties, ordered in display order
@@ -120,22 +120,22 @@ public:
     /**
      * Set default value of property \p name to \p value.
      */
-    void setPropertyDefaultValue(QString name, QVariant value);
+    void setPropertyDefaultValue(const QString& name, const QVariant& value);
 
     /**
      * \return default value for property \p name
      */
-    QVariant propertyDefaultValue(QString name) const;
+    QVariant propertyDefaultValue(const QString& name) const;
 
     /**
      * Set default value of property \p name to \p visible.
      */
-    void setPropertyVisible(QString name, bool visible);
+    void setPropertyVisible(const QString& name, bool visible);
 
     /**
      * \return true if this property is visible, otherwise false.
      */
-    bool isPropertyVisible(QString name) const;
+    bool isPropertyVisible(const QString& name) const;
 
 public slots:
     /**
@@ -143,7 +143,7 @@ public slots:
      *
      * \param name of the data type
      */
-    void setName(QString name);
+    void setName(const QString& name);
 
     /**
      * Set icon of data elements of this type.
@@ -151,14 +151,14 @@ public slots:
      *
      * \param icon identifier in current icon package
      */
-    void setIcon(QString icon);
+    void setIcon(const QString& icon);
 
     /**
      * Set default color value for this data type.
      *
      * \param color is the default color to be set
      */
-    void setDefaultColor(QColor color);
+    void setDefaultColor(const QColor& color);
 
     /**
      * Unregister data type from graph document.
@@ -174,7 +174,7 @@ signals:
     /**
      * Emitted when default color was changed.
      */
-    void defaultColorChanged(QColor color);
+    void defaultColorChanged(const QColor& color);
 
     /**
      * Emitted when icon was changed.
@@ -209,7 +209,7 @@ signals:
     /**
      * Emitted when a property was renamed.
      */
-    void propertyRenamed(QString oldName, QString newName);
+    void propertyRenamed(const QString& oldName, const QString& newName);
 
 protected:
     /**
@@ -224,7 +224,7 @@ protected:
 private:
     boost::scoped_ptr<DataTypePrivate> d;
     DataType(const DataType &);
-    DataType & operator=(const DataType &);
+    DataType& operator=(const DataType&);
 };
 
 #endif // DATATYPE_H

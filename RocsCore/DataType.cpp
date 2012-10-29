@@ -87,20 +87,20 @@ int DataType::identifier() const
 }
 
 
-void DataType::setName(QString name)
+void DataType::setName(const QString& name)
 {
     d->_name = name;
     emit nameChanged(d->_name);
 }
 
 
-const QString& DataType::name() const
+QString DataType::name() const
 {
     return d->_name;
 }
 
 
-void DataType::setIcon(QString icon)
+void DataType::setIcon(const QString& icon)
 {
     d->_icon = "rocs_" + icon;
     emit iconChanged(d->_icon);
@@ -139,23 +139,23 @@ KIcon DataType::icon() const
 }
 
 
-const QString& DataType::iconName() const
+QString DataType::iconName() const
 {
     return d->_icon;
 }
 
-void DataType::setDefaultColor(QColor color)
+void DataType::setDefaultColor(const QColor& color)
 {
     d->_defaultColor = color;
     emit defaultColorChanged(color);
 }
 
-const QColor& DataType::defaultColor() const
+QColor DataType::defaultColor() const
 {
     return d->_defaultColor;
 }
 
-void DataType::addProperty(QString name, QString defaultValue)
+void DataType::addProperty(const QString& name, const QString& defaultValue)
 {
     DataTypePrivate::Property newProperty;
     newProperty.name = name;
@@ -166,14 +166,14 @@ void DataType::addProperty(QString name, QString defaultValue)
     emit(propertyAdded(newProperty.name, newProperty.defaultValue));
 }
 
-void DataType::removeProperty(QString name)
+void DataType::removeProperty(const QString& name)
 {
     d->_propertyDisplayList.removeOne(name);
     d->_propertyList.remove(name);
     emit propertyRemoved(name);
 }
 
-void DataType::renameProperty(QString oldName, QString newName)
+void DataType::renameProperty(const QString& oldName, const QString& newName)
 {
     if (d->_propertyList.contains(newName)) {
         kWarning() << "Property name was not changed: new name already exists";
@@ -194,7 +194,7 @@ QList<QString> DataType::properties() const
     return d->_propertyList.keys();
 }
 
-QVariant DataType::propertyDefaultValue(QString name) const
+QVariant DataType::propertyDefaultValue(const QString& name) const
 {
     if (!d->_propertyList.contains(name)) {
         return false;
@@ -203,7 +203,7 @@ QVariant DataType::propertyDefaultValue(QString name) const
 }
 
 
-void DataType::setPropertyDefaultValue(QString name, QVariant value)
+void DataType::setPropertyDefaultValue(const QString& name, const QVariant& value)
 {
     if (!d->_propertyList.contains(name)) {
         return;
@@ -213,7 +213,7 @@ void DataType::setPropertyDefaultValue(QString name, QVariant value)
 }
 
 
-bool DataType::isPropertyVisible(QString name) const
+bool DataType::isPropertyVisible(const QString& name) const
 {
     if (!d->_propertyList.contains(name)) {
         return false;
@@ -221,7 +221,7 @@ bool DataType::isPropertyVisible(QString name) const
     return d->_propertyList[name].visible;
 }
 
-void DataType::setPropertyVisible(QString name, bool visible)
+void DataType::setPropertyVisible(const QString& name, bool visible)
 {
     if (!d->_propertyList.contains(name)) {
         return;

@@ -368,7 +368,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
     return DataStructure::addPointer(from, to, pointerType);
 }
 
-DataPtr Rocs::GraphStructure::addData(QString name, int dataType)
+DataPtr Rocs::GraphStructure::addData(const QString& name, int dataType)
 {
     if (readOnly()) {
         return DataPtr();
@@ -387,7 +387,7 @@ QMap<QString, QString> Rocs::GraphStructure::pluginProperties() const
     return properties;
 }
 
-void Rocs::GraphStructure::setPluginProperty(QString identifier, QString property)
+void Rocs::GraphStructure::setPluginProperty(const QString& identifier, const QString& property)
 {
     if (identifier.startsWith(QLatin1String("type"))) {
         setGraphType(property.toInt());

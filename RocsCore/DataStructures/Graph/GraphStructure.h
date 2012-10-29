@@ -64,7 +64,7 @@ public:
      * \param dataType is the type of this node, defaults to 0
      * \return the created node as DataPtr
      */
-    DataPtr addData(QString name, int dataType = 0);
+    DataPtr addData(const QString& name, int dataType = 0);
 
     /**
      * Returns type of the graph given by enum \see GRAPH_TYPE.
@@ -86,7 +86,7 @@ public:
      * \param identifier is the unique identifier for this property
      * \param value is the to be set value for the property
      */
-    void setPluginProperty(QString identifier, QString property);
+    void setPluginProperty(const QString& identifier, const QString& property);
 
     /**
      * Computes the Dijkstra's shortest path algorithm to compute

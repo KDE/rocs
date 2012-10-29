@@ -303,7 +303,7 @@ int DataStructure::generateUniqueIdentifier()
     return d->_identifierCount++;
 }
 
-DataPtr DataStructure::addData(QString name, int dataType)
+DataPtr DataStructure::addData(const QString& name, int dataType)
 {
     if (d->_readOnly) {
         return DataPtr();
@@ -383,7 +383,7 @@ PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType)
     return pointer;
 }
 
-DataPtr DataStructure::addData(QString name, QPointF pos, int dataType)
+DataPtr DataStructure::addData(const QString& name, const QPointF& pos, int dataType)
 {
     if (DataPtr data = addData(name, dataType)) {
         data->setPos(pos.x(), pos.y());
@@ -496,7 +496,7 @@ void DataStructure::setName(const QString& s)
     emit nameChanged(d->_name);
 }
 
-void DataStructure::addDynamicProperty(const QString& property, QVariant value)
+void DataStructure::addDynamicProperty(const QString& property, const QVariant& value)
 {
     if (!Document::isValidIdentifier(property)) {
         kWarning() << "Property identifier is not valid: aborting";
@@ -510,7 +510,7 @@ void DataStructure::removeDynamicProperty(const QString& property)
     setProperty(property.toAscii(), QVariant::Invalid);
 }
 
-void DataStructure::renameDynamicProperty(QString oldName, QString newName)
+void DataStructure::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
         kWarning() << "Property identifier is not valid: aborting";
@@ -520,7 +520,7 @@ void DataStructure::renameDynamicProperty(QString oldName, QString newName)
     setProperty(oldName.toStdString().c_str(), QVariant::Invalid);
 }
 
-void DataStructure::add_property(const QString& name, QVariant value)
+void DataStructure::add_property(const QString& name, const QVariant& value)
 {
     addDynamicProperty(name, value);
 }
@@ -530,7 +530,7 @@ void DataStructure::remove_property (const QString& name)
     removeDynamicProperty(name);
 }
 
-void DataStructure::addPointersDynamicProperty(const QString& property, QVariant value)
+void DataStructure::addPointersDynamicProperty(const QString& property, const QVariant& value)
 {
     // do not change properties concurrently, not thread safe
     foreach(const PointerList& pointerType, d->_pointerTypeLists) {
@@ -557,13 +557,13 @@ void DataStructure::removePointersDynamicProperty(const QString& property)
 }
 
 
-void DataStructure::setDataColor(QColor color, int dataType)
+void DataStructure::setDataColor(const QColor& color, int dataType)
 {
     QtConcurrent::blockingMap(d->_dataTypeLists[dataType], DataColorSetted(color));
 }
 
 
-void DataStructure::setPointerColor(QColor color, int pointerType)
+void DataStructure::setPointerColor(const QColor& color, int pointerType)
 {
     QtConcurrent::blockingMap(d->_pointerTypeLists[pointerType], PointerColorSetted(color));
 }
@@ -643,7 +643,7 @@ bool DataStructure::readOnly() const
 }
 
 
-const QString& DataStructure::name() const
+QString DataStructure::name() const
 {
     return d->_name;
 }
@@ -671,4 +671,3 @@ const QList<GroupPtr> DataStructure::groups() const
 {
     return d->_groups;
 }
-

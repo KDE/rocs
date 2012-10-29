@@ -62,9 +62,9 @@ public:
 
     bool isModified() const;
 
-    static QSvgRenderer* sharedRenderer(QString iconPackage);
-    static QSvgRenderer* registerSharedRenderer(QString iconPackage);
-    static void removeSharedRenderer(QString iconPackage);
+    static QSvgRenderer* sharedRenderer(const QString& iconPackage);
+    static QSvgRenderer* registerSharedRenderer(const QString& iconPackage);
+    static void removeSharedRenderer(const QString& iconPackage);
 
     void setName(const QString& name);
     QString name() const;
@@ -84,17 +84,17 @@ public:
     /**
      * Return path used for saving.
      */
-    const QString& fileUrl() const;
+    QString fileUrl() const;
 
     /**
      * Set file path used for saving.
      */
-    void setFileUrl(KUrl fileUrl);
+    void setFileUrl(const KUrl& fileUrl);
 
     /**
      * Evaluates given string and returns true if identifier is valid, otherwise returns false.
      */
-    static bool isValidIdentifier(QString identifier);
+    static bool isValidIdentifier(const QString& identifier);
 
     QtScriptBackend * engineBackend() const;
     QList< DataStructurePtr >& dataStructures() const;
@@ -120,7 +120,7 @@ public:
      * Set data structure plugin for this document. This function is only safe if the document
      * is empty, otherwise behavior is undefined.
      */
-    void setDataStructurePlugin(QString pluginIdentifier);
+    void setDataStructurePlugin(const QString& pluginIdentifier);
 
     /** Register new type for data elements. If identifier is alreade in use or if no identifier is
      * provided, a new identifier is created.
@@ -128,14 +128,14 @@ public:
      * \param identifier is optional identifier for data type
      * \return positive integer > 0 if successfully registered, else <=0
      */
-    int registerDataType(QString name, int identifier=0);
+    int registerDataType(const QString& name, int identifier=0);
 
     /** Register new type for pointers. If identifier is already in use or if no identifier is
      * provided, a new identifier is created.
      * \param name of the pointerType
      * \return positive integer >0 if successfully registered, else <=0
      */
-    int registerPointerType(QString name, int identifier=0);
+    int registerPointerType(const QString& name, int identifier=0);
 
     /** removes this data type and all data elements of this type
      * \param dataType is positive id>0
@@ -181,7 +181,7 @@ public slots:
      * \param name is the optional name of the to be created data structure
      * \return shared pointer to the data structure
      */
-    DataStructurePtr addDataStructure(QString name = QString());
+    DataStructurePtr addDataStructure(const QString& name = QString());
     DataStructurePtr activeDataStructure() const ;
 
     /**
@@ -217,7 +217,7 @@ public slots:
      * tests if given point is containted at document layer
      */
     bool isPointAtDocument(qreal x, qreal y) const;
-    bool isPointAtDocument(QPointF point) const;
+    bool isPointAtDocument(const QPointF& point) const;
 
 signals:
     void dataStructureCreated(DataStructurePtr g);

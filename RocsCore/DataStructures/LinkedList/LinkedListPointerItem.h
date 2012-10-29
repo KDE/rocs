@@ -44,7 +44,7 @@ public:
 private:
     QPainterPath createCurves();
     QPolygonF createEndArrow() const;
-    QPolygonF createPath(const QPointF &pos1, const QPointF &pos2) const;
+    QPolygonF createPath(const QPointF& pos1, const QPointF& pos2) const;
 };
 
 #endif //POINTERITEM_H

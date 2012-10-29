@@ -74,7 +74,7 @@ public:
     Document *document() const;
 
     void setReadOnly(bool r);
-    bool readOnly() const ;
+    bool readOnly() const;
 
     QScriptValue scriptValue() const;
     virtual void setEngine(QScriptEngine *engine);
@@ -104,7 +104,7 @@ public:
      */
     bool isPointerVisible(int pointerType) const;
 
-    const QString& name() const;
+    QString name() const;
 
     /**
      * Gives list of data elements of specified type if type exists.
@@ -151,10 +151,10 @@ public:
      * \param identifier is the unique identifier for this property
      * \param value is the to be set value for the property
      */
-    virtual void setPluginProperty(QString /*identifier*/, QString /*property*/) { }
+    virtual void setPluginProperty(const QString& /*identifier*/, const QString& /*property*/) { }
 
 public slots:
-    virtual DataPtr addData(QString name, int dataType = 0);
+    virtual DataPtr addData(const QString& name, int dataType = 0);
     virtual DataList addDataList(DataList dataList, int dataType = 0);
 
     /**
@@ -199,27 +199,27 @@ public slots:
 
     virtual GroupPtr addGroup(const QString& name);
     virtual DataList addDataList(QList< QPair<QString, QPointF> > dataList, int dataType = 0);
-    virtual DataPtr addData(QString name, QPointF point, int dataType = 0);
+    virtual DataPtr addData(const QString& name, const QPointF& point, int dataType = 0);
 
-    void addDynamicProperty(const QString& property, QVariant value = QVariant(0));
+    void addDynamicProperty(const QString& property, const QVariant& value = QVariant(0));
     void removeDynamicProperty(const QString& property);
-    void renameDynamicProperty(QString oldName, QString newName);
+    void renameDynamicProperty(const QString& oldName, const QString& newName);
 
     /** add the property named \p name to this Data structure.
      * \param name is an identifier to property.
      * \param value is the initial value of property.
      */
-    void add_property(const QString & name, QVariant value);
+    void add_property(const QString& name, const QVariant& value);
 
     /** remove the string named \p name from this data structure.
      * \param name is the name of property to be removed.
      */
-    void remove_property(const QString & name);
+    void remove_property(const QString& name);
 
     /**
      * add dynamic property to all data elements of data structure
      */
-    void addPointersDynamicProperty(const QString& property, QVariant value = QVariant(0));
+    void addPointersDynamicProperty(const QString& property, const QVariant& value = QVariant(0));
 
     void removePointersDynamicProperty(const QString& property);
 
@@ -238,7 +238,7 @@ public slots:
      * \param color is the color to be set
      * \param dataType is the identifier of the data type for that this function has affect.
      */
-    void setDataColor(QColor color, int dataType);
+    void setDataColor(const QColor& color, int dataType);
 
     /**
      * Set all data items for all data elements of given \param dataType to the given value of \param visible.
@@ -258,7 +258,7 @@ public slots:
      * \param color is the color to be set
      * \param dataType is the identifier of the data type for that this function has affect.
      */
-    void setPointerColor(QColor color, int dataType);
+    void setPointerColor(const QColor& color, int dataType);
 
     /**
      * Set all pointer items for pointers of given \param pointerType to the given value of \param visible.
@@ -359,8 +359,8 @@ private:
      */
     boost::scoped_ptr<DataStructurePrivate> d;
 
-    DataStructure(const DataStructure &);
-    DataStructure & operator=(const DataStructure &);
+    DataStructure(const DataStructure&);
+    DataStructure& operator=(const DataStructure&);
 
     /**
      * \internal

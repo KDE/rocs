@@ -134,7 +134,7 @@ public:
     /**
      * \return color of data element
      */
-    const QVariant color() const;
+    QVariant color() const;
 
     /**
      * \return name of data element
@@ -225,9 +225,9 @@ public slots:
      */
     void removeDynamicProperty(const QString& property);
 
-    void updateDynamicProperty(QString property);
+    void updateDynamicProperty(const QString& property);
 
-    void renameDynamicProperty(QString oldName, QString newName);
+    void renameDynamicProperty(const QString& oldName, const QString& newName);
 
     /**
      * FIXME proof of concept implementation: since each Pointer emits a changed direction signal,
@@ -240,8 +240,8 @@ public slots:
 
     QScriptValue type();
     QScriptValue set_type(int type);
-    void add_property(const QString & name, const QString & value);
-    void remove_property(const QString & name);
+    void add_property(const QString& name, const QString& value);
+    void remove_property(const QString& name);
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue adj_pointers(int pointerType);
@@ -252,9 +252,9 @@ public slots:
 
 signals:
     void removed();
-    void posChanged(const QPointF p);
+    void posChanged(QPointF p);
     void widthChanged(double w);
-    void colorChanged(const QColor& c);
+    void colorChanged(QColor c);
     void visibilityChanged(bool visible);
     void useColorChanged(bool b);
     void dataTypeChanged(int dataType);
@@ -296,8 +296,8 @@ private:
     void setQpointer(DataPtr q);
 
     void initialize();
-    Data(const Data &);
-    Data & operator=(const Data &);
+    Data(const Data&);
+    Data& operator=(const Data&);
 };
 
 #endif

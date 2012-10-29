@@ -68,7 +68,7 @@ public:
     /**
      * \return name of pointer type
      */
-    const QString& name() const;
+    QString name() const;
 
     /**
      * \return unique identifier of pointer type
@@ -88,7 +88,7 @@ public:
     /**
      * \return default color for pointers of this type
      */
-    const QColor& defaultColor() const;
+    QColor defaultColor() const;
 
 
     /**
@@ -97,12 +97,12 @@ public:
      * \param name is the unique name of the property
      * \param defaultValue is the default value that is set initially
      */
-    void addProperty(QString name, QString defaultValue = "");
+    void addProperty(const QString& name, const QString& defaultValue = "");
 
     /**
      * Remove dynamic property from pointer type.
      */
-    void removeProperty(QString name);
+    void removeProperty(const QString& name);
 
     /**
      * Rename property from \p oldName to \p newName. The old
@@ -113,7 +113,7 @@ public:
      * \param oldName is the current property name
      * \param newName is the new property name
      */
-    void renameProperty(QString oldName, QString newName);
+    void renameProperty(const QString& oldName, const QString& newName);
 
     /**
      * \return list of all properties, ordered in display order
@@ -123,22 +123,22 @@ public:
     /**
      * Set default value of property \p name to \p value.
      */
-    void setPropertyDefaultValue(QString name, QVariant value);
+    void setPropertyDefaultValue(const QString& name, const QVariant& value);
 
     /**
      * \return default value for property \p name
      */
-    QVariant propertyDefaultValue(QString name) const;
+    QVariant propertyDefaultValue(const QString& name) const;
 
     /**
      * Set default value of property \p name to \p visible.
      */
-    void setPropertyVisible(QString name, bool visible);
+    void setPropertyVisible(const QString& name, bool visible);
 
     /**
      * \return true if this property is visible, otherwise false.
      */
-    bool isPropertyVisible(QString name) const;
+    bool isPropertyVisible(const QString& name) const;
 
 
 public slots:
@@ -147,14 +147,14 @@ public slots:
      *
      * \param name of the pointer type
      */
-    void setName(QString name);
+    void setName(const QString& name);
 
     /**
      * Set default color value for this pointer type.
      *
      * \param color is the default color to be set
      */
-    void setDefaultColor(QColor color);
+    void setDefaultColor(const QColor& color);
 
     /**
      * Set direction for all pointers of this type.
@@ -219,7 +219,7 @@ signals:
     /**
      * Emitted when a property was renamed.
      */
-    void propertyRenamed(QString oldName, QString newName);
+    void propertyRenamed(const QString& oldName, const QString& newName);
 
 protected:
     /**
