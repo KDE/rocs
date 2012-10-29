@@ -39,6 +39,7 @@ class ScriptOutputWidget : public QWidget
 public:
     explicit ScriptOutputWidget(QWidget *parent = 0);
     void setEngine(QtScriptBackend* engine);
+    bool isOutputClearEnabled() const;
 
 public slots:
     void unsetEngine();
@@ -46,6 +47,9 @@ public slots:
     void appendOutput(const QString& string);
     void appendDebugOutput(const QString& string);
     void clear();
+
+private slots:
+    void updateFixOutputButton();
 
 private:
     QtScriptBackend* _engine;

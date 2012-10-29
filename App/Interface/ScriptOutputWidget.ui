@@ -26,6 +26,25 @@
            </widget>
           </item>
           <item>
+           <widget class="KPushButton" name="buttonDisableClear">
+            <property name="maximumSize">
+             <size>
+              <width>24</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Clear program output with each execution.</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="KPushButton" name="buttonEnableDebugOutput">
             <property name="maximumSize">
              <size>
@@ -34,10 +53,36 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>Display debug messages.</string>
+             <string>Show debug output.</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KPushButton" name="buttonClear">
+            <property name="maximumSize">
+             <size>
+              <width>24</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Clear output.</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
             </property>
             <property name="flat">
              <bool>true</bool>

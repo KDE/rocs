@@ -946,7 +946,9 @@ void MainWindow::executeScriptFull(const QString& text)
 void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString& text)
 {
     Q_ASSERT(_outputWidget);
-    _outputWidget->clear();
+    if (_outputWidget->isOutputClearEnabled()) {
+        _outputWidget->clear();
+    }
 
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
@@ -988,7 +990,9 @@ void MainWindow::executeScriptOneStep(const QString& text)
     //TODO disable start action
     enableStopAction();
     if (!engine->isRunning()) {
-        _outputWidget->clear();
+        if (_outputWidget->isOutputClearEnabled()) {
+            _outputWidget->clear();
+        }
         QString script = text.isEmpty() ? _codeEditor->text() : text;
         QString scriptPath = _codeEditor->document()->url().path();
         IncludeManager inc;

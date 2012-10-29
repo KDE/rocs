@@ -30,8 +30,12 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
 
     // set icon
     ui->buttonEnableDebugOutput->setIcon(KIcon("tools-report-bug"));
+    ui->buttonDisableClear->setIcon(KIcon("document-decrypt"));
+    ui->buttonClear->setIcon(KIcon("edit-clear-list"));
 
     connect(ui->buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
+    connect(ui->buttonDisableClear, SIGNAL(clicked(bool)), this, SLOT(updateFixOutputButton()));
+    connect(ui->buttonClear, SIGNAL(clicked(bool)), this, SLOT(clear()));
     connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)), this, SLOT(unsetEngine()));
 }
 
@@ -42,7 +46,6 @@ void ScriptOutputWidget::unsetEngine()
     }
     _engine = 0;
 }
-
 
 void ScriptOutputWidget::showDebugOutput(bool show)
 {
@@ -59,6 +62,15 @@ void ScriptOutputWidget::showDebugOutput(bool show)
     }
 }
 
+void ScriptOutputWidget::updateFixOutputButton()
+{
+    if (ui->buttonDisableClear->isChecked() == true) {
+        ui->buttonDisableClear->setIcon(KIcon("document-encrypt"));
+    }
+    else {
+        ui->buttonDisableClear->setIcon(KIcon("document-decrypt"));
+    }
+}
 
 void ScriptOutputWidget::clear()
 {
@@ -74,6 +86,11 @@ void ScriptOutputWidget::setEngine(QtScriptBackend* engine)
     connect(engine, SIGNAL(sendDebug(QString)), this,  SLOT(appendDebugOutput(QString)));
     connect(engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
     connect(engine, SIGNAL(sendOutput(QString)), this, SLOT(appendOutput(QString)));
+}
+
+bool ScriptOutputWidget::isOutputClearEnabled() const
+{
+    return !ui->buttonDisableClear->isChecked();
 }
 
 void ScriptOutputWidget::appendOutput(const QString& string)
