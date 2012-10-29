@@ -178,19 +178,21 @@ QList<QString> Pointer::properties() const
 
 void Pointer::remove()
 {
-    emit removed();
-
     d->pointerType->disconnect(this);
     d->from->disconnect(this);
     d->to->disconnect(this);
 
+    // create self reference to ensure pointer to live up to the end of this method call
+    // creating the reference increases the shared pointer count by 1
+    PointerPtr pointer = getPointer();
     if (d->from) {
-        d->from->remove(getPointer());
+        d->from->remove(pointer);
     }
     if (d->to) {
-        d->to->remove(getPointer());
+        d->to->remove(pointer);
     }
-    d->dataStructure->remove(getPointer());
+    d->dataStructure->remove(pointer);
+    emit removed();
 }
 
 void Pointer::self_remove()
