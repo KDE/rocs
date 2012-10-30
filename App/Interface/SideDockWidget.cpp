@@ -91,7 +91,7 @@ void SideToolButton::paintEvent(QPaintEvent *event)
     initStyleOption(&option);
 
     // first draw normal frame and not text/icon
-    option.text = QString();
+    option.text.clear();
     option.icon = QIcon();
     painter.drawComplexControl(QStyle::CC_ToolButton, option);
 
