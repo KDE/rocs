@@ -72,30 +72,33 @@ public:
 };
 
 
-QMap<QString, QSvgRenderer*> Document::_sharedRenderers;
+//TODO currently there is no problem in generating a (never cleaned) list
+// of renderers, since it is equivalent to the number of data structure backends.
+// But to be on the secure side, there should be some threshould after that unused renderers
+// are removed.
+QMap< QString, QPointer<QSvgRenderer> > Document::_sharedRenderers;
 
 QSvgRenderer* Document::sharedRenderer(const QString& iconPackage)
 {
     if (_sharedRenderers.count(iconPackage) == 0 || !_sharedRenderers.contains(iconPackage)) {
         registerSharedRenderer(iconPackage);
     }
-    return _sharedRenderers.value(iconPackage);
+    return _sharedRenderers.value(iconPackage).data();
 }
 
 
 QSvgRenderer* Document::registerSharedRenderer(const QString& iconPackage)
 {
     if (!_sharedRenderers.contains(iconPackage)) {
-        QSvgRenderer *z = new QSvgRenderer(iconPackage);
+        QPointer<QSvgRenderer> z = new QSvgRenderer(iconPackage);
         _sharedRenderers.insert(iconPackage, z);
     }
-    return _sharedRenderers.value(iconPackage);
+    return _sharedRenderers.value(iconPackage).data();
 }
 
 
 void Document::removeSharedRenderer(const QString& iconPackage)
 {
-    _sharedRenderers.value(iconPackage)->deleteLater();
     _sharedRenderers.remove(iconPackage);
 }
 

@@ -31,6 +31,7 @@
 #include <QRectF>
 #include <boost/scoped_ptr.hpp>
 #include <KUrl>
+#include <QPointer>
 
 class KUrl;
 class DataStructurePluginInterface;
@@ -234,7 +235,7 @@ signals:
 
 private:
     boost::scoped_ptr<DocumentPrivate> d;
-    static QMap<QString, QSvgRenderer*> _sharedRenderers;
+    static QMap<QString, QPointer<QSvgRenderer> > _sharedRenderers;
 };
 
 #endif
