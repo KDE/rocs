@@ -64,11 +64,11 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
 
     // set types
     Document* document = DocumentManager::self()->activeDocument();
-    ui->dataType->addItem(i18n("All Data Types", -1));
+    ui->dataType->addItem(i18n("All Data Types"), -1);
     foreach (int typeId, document->dataTypeList()) {
         ui->dataType->addItem(document->dataType(typeId)->name(), typeId);
     }
-    ui->connectionType->addItem(i18n("All Connection Types", -1));
+    ui->connectionType->addItem(i18n("All Connection Types"), -1);
     foreach (int typeId, document->pointerTypeList()) {
         ui->connectionType->addItem(document->pointerType(typeId)->name(), typeId);
     }
