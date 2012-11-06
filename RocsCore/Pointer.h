@@ -21,7 +21,6 @@
 #ifndef POINTER_H
 #define POINTER_H
 
-#include "QtScriptBackend.h"
 #include "PointerType.h"
 #include <QObject>
 #include <QtScript>
@@ -37,6 +36,7 @@
 class Data;
 class PointerPrivate;
 class DataStructure;
+class QtScriptBackend;
 
 
 /**

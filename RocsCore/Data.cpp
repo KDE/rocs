@@ -20,6 +20,7 @@
 #include "Data.h"
 #include "Pointer.h"
 #include "DataStructure.h"
+#include "QtScriptBackend.h"
 #include <KDebug>
 #include <KGlobal>
 #include <QColor>

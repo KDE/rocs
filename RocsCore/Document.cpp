@@ -28,6 +28,7 @@
 #include "DataType.h"
 #include "DataStructureBackendManager.h"
 #include "DataStructurePluginInterface.h"
+#include "QtScriptBackend.h"
 
 #include <boost/shared_ptr.hpp>
 #include <boost/concept_check.hpp>

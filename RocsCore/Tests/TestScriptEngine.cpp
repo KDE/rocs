@@ -22,6 +22,7 @@
 #include "Pointer.h"
 #include "Document.h"
 #include "DocumentManager.h"
+#include "QtScriptBackend.h"
 
 #include <qtest_kde.h>
 
@@ -114,15 +115,15 @@ void TestScriptEngine::startStop()
 
 void TestScriptEngine::ignoreComments()
 {
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
-    DataList dataList;
-
     Document* graphDoc = DocumentManager::self()->activeDocument();
     QtScriptBackend *engine = graphDoc->engineBackend();
 
     QString test;
     QScriptValue result;
+
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
+    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataList dataList;
 
     // start engine
     test = QString("// broken");

@@ -28,6 +28,7 @@
 #include "DataStructure.h"
 #include <KMessageBox>
 #include "GraphNode.h"
+#include "QtScriptBackend.h"
 
 #include <boost/foreach.hpp>
 #include <boost/graph/graph_traits.hpp>

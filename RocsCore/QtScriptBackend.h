@@ -24,56 +24,83 @@
 #include <QScriptString>
 #include "RocsCoreExport.h"
 #include "IncludeManager.h"
+#include <boost/scoped_ptr.hpp>
 
+class QtScriptBackendPrivate;
 class QScriptEngineDebugger;
 class Document;
 class ToolsPluginInterface;
 class QSignalSpy;
 
-class  ROCSLIB_EXPORT QtScriptBackend : public QObject
+/**
+ * \class QtScriptBackend
+ *
+ * This class provides the script backend for script executions. Usually, one script backend
+ * is associated with one document.
+ */
+class ROCSLIB_EXPORT QtScriptBackend : public QObject
 {
     Q_OBJECT
 public:
-//     QtScriptBackend();
-    QtScriptBackend(QObject* parent = 0);
-    void setScript(const QString& s, Document *document);
+    /**
+     * Default constructor.
+     */
+    explicit QtScriptBackend(QObject* parent);
+
+    /**
+     * Default destructor.
+     */
+    ~QtScriptBackend();
+
+    /**
+     * Set the script \p script and the corresponding document \p document
+     * to be executed on next run.
+     */
+    void setScript(const QString& script, Document *document);
+
+    /**
+     * \see QtScriptEngine::loadFile().
+     */
     void loadFile(const QString& file);
 
     /**
-     * Output the given string \p s as debug output.
+     * Output the given string \p message as debug output.
      *
-     * \param s the string to be print
+     * \param message the string to be print
      */
-    void debug(const QString& s);
+    void debug(const QString& message);
 
     /**
-     * Output the given string \p s as program output.
+     * Output the given string \p message as program output.
      *
-     * \param s the string to be print
+     * \param message the string to be print
      */
-    void output(const QString& s);
+    void output(const QString& message);
 
     /**
      * Interrupt script execution. This method should be used from the scrpting interface.
      */
     void interrupt();
 
-    QScriptEngine *engine() {
-        return _engine;
-    }
+    /**
+     * \return script engine
+     */
+    QScriptEngine *engine() const;
 
     /**
      * Include script from other script file.
      */
-    void include(const QString&);
+    void include(const QString& filePath);
 
-    /** return true if is evaluating a script or running a tool script. */
-    bool isRunning();
+    /**
+     * Return true if engine is currently evaluating a script, otherwise false.
+     */
+    bool isRunning() const;
 
-    IncludeManager& includeManager() {
-        return m_includeManager;
-    }
-
+    /**
+     * \return reference to the include manager dialog
+     */
+    IncludeManager& includeManager() const;
 
 signals:
     void sendOutput(const QString& s);
@@ -84,32 +111,35 @@ signals:
 
 public slots:
     /**
-     * Execute the preset script. This method also sets and afterwards pops the execution context.
+     * Execute the currently set script. This method also sets and afterwards pops the execution context.
      * Emits SIGNAL finished() when execution is finished.
      *
      * \return result from script engine
      */
     QString execute();
+
+    /**
+     * Execute the preset script up to a call of \see interrupt(). This method also sets the execution context.
+     * Use \see continueExecutionStep() to continue after interrupting.
+     */
     void executeStep();
+
+    /**
+     * Continue execution of interrupted script.
+     */
     void continueExecutionStep();
 
-
-    /** abort script evaluation. In case of a too is running, stop will not stop tool. But the script resulting from tool will not be runned.
-    */
+    /**
+     * Abort script evaluation.
+     */
     void stop();
 
-
 private:
-    void createGraphList();
-
-    QString _script;
-    Document *_document;
-    QScriptEngine *_engine;
-    QScriptEngineDebugger *_engineSteps;    // used for stepped execution
-
-    IncludeManager m_includeManager;
-    bool _runningTool;
-
+    /**
+     * \internal
+     * d-pointer
+     */
+    boost::scoped_ptr<QtScriptBackendPrivate> d;
 };
 
 #endif

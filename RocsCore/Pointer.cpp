@@ -22,6 +22,8 @@
 #include "PointerType.h"
 #include "Data.h"
 #include "DataStructure.h"
+#include "QtScriptBackend.h"
+
 #include <KDebug>
 #include <QColor>
 #include <boost/weak_ptr.hpp>
