@@ -286,7 +286,8 @@ void Pointer::renameDynamicProperty(const QString& oldName, const QString& newNa
 QScriptValue Pointer::set_type(int pointerType)
 {
     if (!d->dataStructure->document()->pointerTypeList().contains(pointerType)) {
-        kDebug() << "pointer type does not exist."; //TODO give script error
+        dataStructure()->document()->engineBackend()->debug(
+            i18n("Could not set pointer type: pointer type does not exist."));
         return d->dataStructure->engine()->newVariant(false);
     }
     setPointerType(pointerType);

@@ -470,7 +470,8 @@ void Data::setEngine(QScriptEngine *engine)
 QScriptValue Data::set_type(int dataType)
 {
     if (!d->_dataStructure->document()->dataTypeList().contains(dataType)) {
-        kError() << "Specified data type '" << dataType << "' does not exist."; //TODO give script error
+        dataStructure()->document()->engineBackend()->debug(
+            i18n("Could not set data type for node %1: data type does not exist.", identifier()));
         return d->_dataStructure->engine()->newVariant(false);
     }
     setDataType(dataType);

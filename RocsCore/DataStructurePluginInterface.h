@@ -30,7 +30,6 @@ class QGraphicsItem;
 class DataStructure;
 class Data;
 class Pointer;
-
 class Document;
 
 // KClasses
@@ -46,7 +45,7 @@ class ROCSLIB_EXPORT DataStructurePluginInterface: public QObject
     Q_OBJECT
 
 public:
-    DataStructurePluginInterface(const KComponentData &instance, QObject* parent);
+    DataStructurePluginInterface(const KComponentData& instance, QObject* parent);
 
     virtual ~DataStructurePluginInterface();
     virtual DataStructurePtr createDataStructure(Document * parent) = 0;

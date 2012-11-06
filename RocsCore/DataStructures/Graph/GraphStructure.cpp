@@ -351,6 +351,8 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
         // do not add back-edges if graph is undirected
         foreach(PointerPtr pointer, from->pointerList(to)) {
             if (pointer->pointerType() == pointerType) {
+                document()->engineBackend()->debug(
+                    i18n("Could not add back-edge (%1->%2) to undirected graph.", from->identifier(), to->identifier()));
                 return PointerPtr();
             }
         }
@@ -360,6 +362,8 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
         PointerList list = from->outPointerList();
         foreach(PointerPtr tmp, list) {
             if (tmp->to() == to && tmp->pointerType() == pointerType) {
+                document()->engineBackend()->debug(
+                    i18n("Could not add existing edge (%1->%2): this graph is no multigraph.", from->identifier(), to->identifier()));
                 return PointerPtr();
             }
         }

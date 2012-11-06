@@ -38,9 +38,26 @@ public:
     QtScriptBackend(QObject* parent = 0);
     void setScript(const QString& s, Document *document);
     void loadFile(const QString& file);
+
+    /**
+     * Output the given string \p s as debug output.
+     *
+     * \param s the string to be print
+     */
     void debug(const QString& s);
+
+    /**
+     * Output the given string \p s as program output.
+     *
+     * \param s the string to be print
+     */
     void output(const QString& s);
-    void interrupt(); /** interrupts execution of the script **/
+
+    /**
+     * Interrupt script execution. This method should be used from the scrpting interface.
+     */
+    void interrupt();
+
     QScriptEngine *engine() {
         return _engine;
     }
