@@ -14,7 +14,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Default Information Display</string>
+      <string>Display of Element Properties</string>
      </property>
      <layout class="QFormLayout" name="formLayout_3">
       <property name="fieldGrowthPolicy">
@@ -23,7 +23,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="nodeInformationLabel">
         <property name="text">
-         <string>Node Information</string>
+         <string>Data Properties</string>
         </property>
        </widget>
       </item>
@@ -49,7 +49,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="edgeInformationLabel">
         <property name="text">
-         <string>Edge Information</string>
+         <string>Connection Properties</string>
         </property>
        </widget>
       </item>
@@ -78,7 +78,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>Execution Options</string>
+      <string>Execution Controls</string>
      </property>
      <layout class="QFormLayout" name="formLayout_4">
       <property name="fieldGrowthPolicy">
