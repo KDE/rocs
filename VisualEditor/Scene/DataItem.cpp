@@ -32,9 +32,11 @@
 #include <boost/concept_check.hpp>
 
 
-DataItem::DataItem(DataPtr n)
-    : QGraphicsSvgItem(0)
-    , _data(n)
+class DataItemPrivate
+{
+public:
+    explicit DataItemPrivate(DataPtr n)
+    : _data(n)
     , _colorizer(0)
     , _font(QFont("Helvetica [Cronyx]", 12))
     , _oldStyle(GraphicsLayout::self()->viewStyleDataNode())
@@ -42,10 +44,36 @@ DataItem::DataItem(DataPtr n)
     , _originalWidth(n->width())
     , _width(-1)
     , _oldDataType(n->dataStructure()->document()->dataType(n->dataType()))
+    {
+    }
+
+    ~DataItemPrivate()
+    {
+        qDeleteAll(_propertyValues);
+        _propertyValues.clear();
+        delete _item;
+    }
+
+    DataPtr _data;
+    QMap<QString, QGraphicsSimpleTextItem*> _propertyValues;
+    QGraphicsColorizeEffect *_colorizer;
+    QGraphicsRectItem *_boundingRect;
+    QFont _font;
+    int _oldStyle;
+    QGraphicsItemGroup* _item;
+
+    qreal _originalWidth;
+    qreal _width;
+    DataTypePtr _oldDataType;
+};
+
+DataItem::DataItem(DataPtr n)
+    : QGraphicsSvgItem(0)
+    , d(new DataItemPrivate(n))
 {
 
     connect(n.get(), SIGNAL(removed()), this, SLOT(deleteLater()));
-    connect(_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
+    connect(d->_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
 
     connect(n.get(), SIGNAL(propertyAdded(QString)), this, SLOT(registerProperty(QString)));
     connect(n.get(), SIGNAL(propertyRemoved(QString)), this, SLOT(removeProperty(QString)));
@@ -67,20 +95,23 @@ DataItem::DataItem(DataPtr n)
 
 DataItem::~DataItem()
 {
-    qDeleteAll(_propertyValues);
-    _propertyValues.clear();
-    delete _item;
+    delete d;
+}
+
+DataPtr DataItem::data() const
+{
+    return d->_data;
 }
 
 void DataItem::setupNode()
 {
-    if (_data.get()->dataStructure()->document()->dataType(_data.get()->dataType()) != _oldDataType) {
-        disconnect(_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
-        _oldDataType = _data.get()->dataStructure()->document()->dataType(_data.get()->dataType());
-        connect(_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
+    if (d->_data.get()->dataStructure()->document()->dataType(d->_data.get()->dataType()) != d->_oldDataType) {
+        disconnect(d->_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
+        d->_oldDataType = d->_data.get()->dataStructure()->document()->dataType(d->_data.get()->dataType());
+        connect(d->_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
     }
 
-    foreach (const QString& name, _data->properties()) {
+    foreach (const QString& name, d->_data->properties()) {
         updateProperty(name);
     }
     updateRenderer();
@@ -95,29 +126,29 @@ void DataItem::setupNode()
 void DataItem::updatePos()
 {
     int fixPos = boundingRect().width() / 2;
-    setPos(_data->x() - fixPos, _data->y() - fixPos);
+    setPos(d->_data->x() - fixPos, d->_data->y() - fixPos);
     updatePropertyList();
 }
 
 void DataItem::updateSize()
 {
-    if (_data->width() == _width) {
+    if (d->_data->width() == d->_width) {
         return;
     }
     resetTransform();
-    _width = _data->width();
-    setScale(_data->width());
+    d->_width = d->_data->width();
+    setScale(d->_data->width());
 }
 
 void DataItem::updateRenderer()
 {
-    QString iconPackage = _data->dataStructure()->document()->iconPackage();
+    QString iconPackage = d->_data->dataStructure()->document()->iconPackage();
     setSharedRenderer(Document::sharedRenderer(iconPackage));
 }
 
 void DataItem::updateIcon()
 {
-    QString icon = _data->dataStructure()->document()->dataType(_data->dataType())->iconName();
+    QString icon = d->_data->dataStructure()->document()->dataType(d->_data->dataType())->iconName();
     if (elementId().isEmpty() || elementId() != icon) {
         setElementId(icon);
         setTransformOriginPoint(boundingRect().width() / 2, boundingRect().width() / 2);
@@ -128,15 +159,15 @@ void DataItem::updateVisibility(bool visible)
 {
     if (visible == true) {
         this->show();
-        QMap<QString, QGraphicsSimpleTextItem*>::const_iterator iter = _propertyValues.constBegin();
-        while (iter != _propertyValues.constEnd()) {
+        QMap<QString, QGraphicsSimpleTextItem*>::const_iterator iter = d->_propertyValues.constBegin();
+        while (iter != d->_propertyValues.constEnd()) {
             (*iter)->setVisible(true);
             ++iter;
         }
     } else {
         this->hide();
-        QMap<QString, QGraphicsSimpleTextItem*>::const_iterator iter = _propertyValues.constBegin();
-        while (iter != _propertyValues.constEnd()) {
+        QMap<QString, QGraphicsSimpleTextItem*>::const_iterator iter = d->_propertyValues.constBegin();
+        while (iter != d->_propertyValues.constEnd()) {
             (*iter)->setVisible(false);
             ++iter;
         }
@@ -145,74 +176,74 @@ void DataItem::updateVisibility(bool visible)
 
 void DataItem::updateColor()
 {
-    QColor c(_data->color().value<QColor>());
-    delete _colorizer;
-    _colorizer = new QGraphicsColorizeEffect();
-    _colorizer->setColor(c);
-    setGraphicsEffect(_colorizer);
+    QColor c(d->_data->color().value<QColor>());
+    delete d->_colorizer;
+    d->_colorizer = new QGraphicsColorizeEffect();
+    d->_colorizer->setColor(c);
+    setGraphicsEffect(d->_colorizer);
 }
 
 void DataItem::updateProperty(const QString& name)
 {
-    if (!_propertyValues.contains(name)) {
+    if (!d->_propertyValues.contains(name)) {
         registerProperty(name);
         return;
     }
     DataTypePtr dataType = data()->dataStructure()->document()->dataType(data()->dataType());
-    _propertyValues[name]->setText(data()->property(name.toStdString().c_str()).toString());
-    _propertyValues[name]->setVisible(dataType->isPropertyVisible(name));
-    _propertyValues[name]->update();
+    d->_propertyValues[name]->setText(data()->property(name.toStdString().c_str()).toString());
+    d->_propertyValues[name]->setVisible(dataType->isPropertyVisible(name));
+    d->_propertyValues[name]->update();
     updatePropertyList();
 }
 
 QGraphicsItem* DataItem::propertyListItem() const
 {
-    return _item;
+    return d->_item;
 }
 
 void DataItem::updatePropertyList()
 {
     qreal offset = 0;
     foreach (const QString& property, data()->properties()) {
-        if (!_propertyValues.contains(property)) {
+        if (!d->_propertyValues.contains(property)) {
             kError() << "Cannot update unknown property : " << property;
             continue;
         }
-        if (_propertyValues[property]->isVisible() == false) {
+        if (d->_propertyValues[property]->isVisible() == false) {
             continue;
         }
-        _propertyValues[property]->setPos(data()->x()+20, data()->y() + offset);
-        _propertyValues[property]->update();
+        d->_propertyValues[property]->setPos(data()->x()+20, data()->y() + offset);
+        d->_propertyValues[property]->update();
         offset += 20;
     }
 }
 
 void DataItem::registerProperty(const QString& name)
 {
-    if (_propertyValues.contains(name)) {
+    if (d->_propertyValues.contains(name)) {
         return;
     }
     DataTypePtr dataType = data()->dataStructure()->document()->dataType(data()->dataType());
-    _propertyValues.insert(name, new QGraphicsSimpleTextItem(data()->property(name.toStdString().c_str()).toString()));
-    _propertyValues[name]->setFlags(ItemIgnoresTransformations);
-    _propertyValues[name]->setFont(_font);
-    _propertyValues[name]->setVisible(dataType->isPropertyVisible(name));
-    _propertyValues[name]->setZValue(zValue() + 1);
-    _item->addToGroup(_propertyValues[name]);
+    d->_propertyValues.insert(name, new QGraphicsSimpleTextItem(data()->property(name.toStdString().c_str()).toString()));
+    d->_propertyValues[name]->setFlags(ItemIgnoresTransformations);
+    d->_propertyValues[name]->setFont(d->_font);
+    d->_propertyValues[name]->setVisible(dataType->isPropertyVisible(name));
+    d->_propertyValues[name]->setZValue(zValue() + 1);
+    d->_item->addToGroup(d->_propertyValues[name]);
 
     updatePropertyList();
 }
 
 void DataItem::removeProperty(const QString& name)
 {
-    if (_propertyValues.contains(name)) {
+    if (d->_propertyValues.contains(name)) {
         kWarning() << "Property not removed: not registered at DataItem.";
         return;
     }
-    _propertyValues[name]->setVisible(false);
-    _item->removeFromGroup(_propertyValues[name]);
-    delete _propertyValues[name];
-    _propertyValues.remove(name);
+    d->_propertyValues[name]->setVisible(false);
+    d->_item->removeFromGroup(d->_propertyValues[name]);
+    delete d->_propertyValues[name];
+    d->_propertyValues.remove(name);
 
     updatePropertyList();
 }

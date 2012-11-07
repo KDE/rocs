@@ -28,6 +28,7 @@
 #include "VisualEditorExport.h"
 #include <CoreTypes.h>
 
+class DataItemPrivate;
 class Data;
 class QGraphicsColorizeEffect;
 class QSvgRenderer;
@@ -39,17 +40,14 @@ class VISUALEDITOR_EXPORT DataItem : public QGraphicsSvgItem
     Q_OBJECT
 
 public:
-    DataItem(DataPtr n);
+    explicit DataItem(DataPtr n);
     virtual ~DataItem();
-    DataPtr data() const {
-        return _data;
-    }
+    DataPtr data() const;
 
     /**
      * \return the graphics item to be displayed at the scene
      */
     QGraphicsItem *propertyListItem() const;
-    void remove();
 
 private slots:
     void setupNode();
@@ -65,17 +63,7 @@ private slots:
     void removeProperty(const QString& name);
 
 private:
-    DataPtr _data;
-    QMap<QString, QGraphicsSimpleTextItem*> _propertyValues;
-    QGraphicsColorizeEffect *_colorizer;
-    QGraphicsRectItem *_boundingRect;
-    QFont _font;
-    int _oldStyle;
-    QGraphicsItemGroup* _item;
-
-    qreal _originalWidth;
-    qreal _width;
-    DataTypePtr _oldDataType;
+    DataItemPrivate* d;
 };
 
 #endif
