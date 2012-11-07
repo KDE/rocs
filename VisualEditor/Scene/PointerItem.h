@@ -27,28 +27,44 @@
 #include "VisualEditorExport.h"
 #include "CoreTypes.h"
 
+class PointerItemPrivate;
 class QGraphicsSceneMouseEvent;
 class Pointer;
 class QGraphicsSimpleTextItem;
 
-/*! \brief the Edge drawing on screen.
-  long explanation here...
-*/
+/**
+ * \class PointerItem
+ * \brief Graphics item for data connections.
+ *
+ * This is the base class for graphics item represenations of connections. Data structure plugins
+ * may provide their own implementations to present the connections with a different look.
+ */
 class VISUALEDITOR_EXPORT PointerItem : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    /*! default constructor
-    \param node the libgraph::Node that this item will interact to.
-    \param parent the QGraphicsITem that this Item belongs to. */
+    /**
+     * Default constructor.
+     *
+     * \param pointer the pointer that this graphics item presents
+     * \param parent the parent for the graphics item, if 0 item must be added to scene manually
+    */
     explicit PointerItem(PointerPtr pointer, QGraphicsItem *parent = 0);
+
+    /**
+     * Default destrutor.
+     */
     virtual ~PointerItem();
-    /*! The type of the item */
+
+    /**
+     * \see QGraphicsItem::type
+     */
     enum { Type = UserType + 3 };
 
-    /*! gets the type of the item
-      \return the type of the item
-    */
+    /**
+     * \return the type of the item
+     * \see QGraphicsItem::type()
+     */
     int type() const {
         return Type;
     }
@@ -58,20 +74,22 @@ public:
      */
     QGraphicsItem *propertyListItem() const;
 
-    /*! Gets the pointer of the node */
-    PointerPtr pointer() const {
-        return _pointer;
-    }
+    /**
+     * \return the pointer that is represented by this graphics item
+     */
+    PointerPtr pointer() const;
 
 protected:
-    /*! when there's a mouse click on the node, this method is invocked
-      \param event the mouse object
-    */
+    /**
+     * when there's a mouse click on the element, this method is invoked
+     * \param event the mouse object
+     */
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
-    /*! when the mouse is released, this method is invocked
-      \param event the mouse object
-    */
+    /**
+     * when there's a mouse release on the element, this method is invoked
+     * \param event the mouse object
+     */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
@@ -86,19 +104,8 @@ public slots:
     void removeProperty(const QString& name);
 
 private:
-    /**
-     * Update positions, values and visibility of properties.
-     *
-     * \param x is the x position for starting the list
-     * \param y is the x position for starting the list
-     */
-    void updatePropertyList(qreal x, qreal y);
-
-    PointerPtr _pointer;
-    int _index;
-    QFont _font;
-    QGraphicsItemGroup* _item;
-    QMap<QString, QGraphicsSimpleTextItem*> _propertyValues;
+    // d-pointer
+    PointerItemPrivate* d;
 };
 
 #endif

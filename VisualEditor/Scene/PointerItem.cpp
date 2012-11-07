@@ -41,26 +41,78 @@
 #include <QtCore/qmath.h>
 #include <QGraphicsSimpleTextItem>
 
-PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
-    : QObject(0), QGraphicsPathItem(parent)
-    , _pointer(pointer)
+// class PointerItemPrivate
+
+class PointerItemPrivate
+{
+public:
+    PointerItemPrivate(PointerPtr pointer)
+    : _pointer(pointer)
     , _index(pointer->relativeIndex())
     , _font(QFont("Helvetica [Cronyx]", 12))
     , _item(new QGraphicsItemGroup())
-{
-    connect(_pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
-    connect(_pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
-    connect(_pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
+    {
+    }
 
-    connect(_pointer.get(), SIGNAL(propertyAdded(QString)), this, SLOT(registerProperty(QString)));
-    connect(_pointer.get(), SIGNAL(propertyRemoved(QString)), this, SLOT(removeProperty(QString)));
-    connect(_pointer.get(), SIGNAL(propertyChanged(QString)), this, SLOT(updateProperty(QString)));
+    ~PointerItemPrivate()
+    {
+        qDeleteAll(_propertyValues);
+        _propertyValues.clear();
+        delete _item;
+    }
+
+    /**
+     * Update positions, values and visibility of properties.
+     *
+     * \param x is the x position for starting the list
+     * \param y is the x position for starting the list
+     */
+    void updatePropertyList(qreal x, qreal y);
+
+    PointerPtr _pointer;
+    int _index;
+    QFont _font;
+    QGraphicsItemGroup* _item;
+    QMap<QString, QGraphicsSimpleTextItem*> _propertyValues;
+};
+
+void PointerItemPrivate::updatePropertyList(qreal x, qreal y) {
+    qreal offset = 0;
+    foreach (const QString& property, _pointer->properties()) {
+        if (!_propertyValues.contains(property)) {
+            kError() << "Cannot update unknown property : " << property;
+            continue;
+        }
+        if (_propertyValues[property]->isVisible() == false) {
+            continue;
+        }
+        _propertyValues[property]->setPos(x + 20, y + offset);
+        _propertyValues[property]->update();
+        offset += 20;
+    }
+}
+
+
+// class PointerItem
+
+PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
+    : QObject(0)
+    , QGraphicsPathItem(parent)
+    , d(new PointerItemPrivate(pointer))
+{
+    connect(pointer.get(), SIGNAL(posChanged()), this, SLOT(updatePos()));
+    connect(pointer.get(), SIGNAL(removed()), this, SLOT(remove()));
+    connect(pointer.get(), SIGNAL(changed()), this, SLOT(updateAttributes()));
+
+    connect(pointer.get(), SIGNAL(propertyAdded(QString)), this, SLOT(registerProperty(QString)));
+    connect(pointer.get(), SIGNAL(propertyRemoved(QString)), this, SLOT(removeProperty(QString)));
+    connect(pointer.get(), SIGNAL(propertyChanged(QString)), this, SLOT(updateProperty(QString)));
     connect(GraphicsLayout::self(), SIGNAL(changed()), this, SLOT(updateAttributes()));
 
-    connect(_pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updateAttributes()));
-    connect(_pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
+    connect(pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updateAttributes()));
+    connect(pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
 
-    setZValue(-_index);
+    setZValue(- d->_index);
     setFlag(ItemIsSelectable, true);
     updateAttributes();
     this->show();
@@ -68,9 +120,7 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
 
 PointerItem::~PointerItem()
 {
-    qDeleteAll(_propertyValues);
-    _propertyValues.clear();
-    delete _item;
+    delete d;
 }
 
 void PointerItem::mousePressEvent(QGraphicsSceneMouseEvent */*event*/)
@@ -91,12 +141,12 @@ void PointerItem::remove()
 
 void PointerItem::updatePos()
 {
-    if (!_pointer || !_pointer->from() || !_pointer->to()) {
+    if (!d->_pointer || !d->_pointer->from() || !d->_pointer->to()) {
         return;
     }
-    QLine q(_pointer->from()->x(), _pointer->from()->y(),    _pointer->to()->x(),  _pointer->to()->y());
+    QLine q(d->_pointer->from()->x(), d->_pointer->from()->y(), d->_pointer->to()->x(), d->_pointer->to()->y());
     qreal size = qSqrt(qPow(q.dx(), 2) + qPow(q.dy(), 2));
-    if (_pointer->from() != _pointer->to() && size < 20) {
+    if (d->_pointer->from() != d->_pointer->to() && size < 20) {
         setPath(QPainterPath());
     } else {
         setPath(createCurves());
@@ -108,93 +158,81 @@ void PointerItem::updateAttributes()
 {
     Qt::PenStyle style = pointer()->style();
 
-    setPen(QPen(QBrush(QColor(_pointer->color())), _pointer->width(), style, Qt::RoundCap, Qt::RoundJoin));
+    setPen(QPen(QBrush(QColor(d->_pointer->color())), d->_pointer->width(), style, Qt::RoundCap, Qt::RoundJoin));
     this->hide();
     QPointF middle = path().pointAtPercent(0.5);
 
-    if (_pointer->from() == _pointer->to()) {
+    if (d->_pointer->from() == d->_pointer->to()) {
         qreal x1 = boundingRect().x() + boundingRect().width() + 5;
         qreal y1 = boundingRect().y() + (boundingRect().height() / 2) - 10;
-        updatePropertyList(x1, y1);
+        d->updatePropertyList(x1, y1);
     } else {
-        updatePropertyList(middle.x(), middle.y());
-    } if (_pointer->isVisible() == true) {
+        d->updatePropertyList(middle.x(), middle.y());
+    } if (d->_pointer->isVisible() == true) {
         this->show();
-        PointerTypePtr pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
-        foreach (const QString& property, _pointer->properties()) {
-            _propertyValues[property]->setVisible(pointerType->isPropertyVisible(property));
+        PointerTypePtr pointerType = d->_pointer->dataStructure()->document()->pointerType(d->_pointer->pointerType());
+        foreach (const QString& property, d->_pointer->properties()) {
+            d->_propertyValues[property]->setVisible(pointerType->isPropertyVisible(property));
         }
     } else {
         this->hide();
-        foreach (const QString& property, _pointer->properties()) {
-            _propertyValues[property]->setVisible(false);
+        foreach (const QString& property, d->_pointer->properties()) {
+            d->_propertyValues[property]->setVisible(false);
         }
     }
     update();
 }
 
-void PointerItem::updatePropertyList(qreal x, qreal y) {
-    qreal offset = 0;
-    foreach (const QString& property, _pointer->properties()) {
-        if (!_propertyValues.contains(property)) {
-            kError() << "Cannot update unknown property : " << property;
-            continue;
-        }
-        if (_propertyValues[property]->isVisible() == false) {
-            continue;
-        }
-        _propertyValues[property]->setPos(x+20, y + offset);
-        _propertyValues[property]->update();
-        offset += 20;
-    }
-}
-
 void PointerItem::registerProperty(const QString& name)
 {
-    if (_propertyValues.contains(name)) {
+    if (d->_propertyValues.contains(name)) {
         return;
     }
-    PointerTypePtr pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
-    _propertyValues.insert(name, new QGraphicsSimpleTextItem(_pointer->property(name.toStdString().c_str()).toString()));
-    _propertyValues[name]->setFlags(ItemIgnoresTransformations);
-    _propertyValues[name]->setVisible(pointerType->isPropertyVisible(name));
-    _propertyValues[name]->setFont(_font);
-    _propertyValues[name]->setZValue(zValue() + 1);
-    _item->addToGroup(_propertyValues[name]);
+    PointerTypePtr pointerType = d->_pointer->dataStructure()->document()->pointerType(d->_pointer->pointerType());
+    d->_propertyValues.insert(name, new QGraphicsSimpleTextItem(d->_pointer->property(name.toStdString().c_str()).toString()));
+    d->_propertyValues[name]->setFlags(ItemIgnoresTransformations);
+    d->_propertyValues[name]->setVisible(pointerType->isPropertyVisible(name));
+    d->_propertyValues[name]->setFont(d->_font);
+    d->_propertyValues[name]->setZValue(zValue() + 1);
+    d->_item->addToGroup(d->_propertyValues[name]);
 
     updateAttributes();
 }
 
 void PointerItem::updateProperty(const QString& name)
 {
-    if (!_propertyValues.contains(name)) {
+    if (!d->_propertyValues.contains(name)) {
         registerProperty(name);
         return;
     }
-    PointerTypePtr pointerType = _pointer->dataStructure()->document()->pointerType(_pointer->pointerType());
-    _propertyValues[name]->setText(_pointer->property(name.toStdString().c_str()).toString());
-    _propertyValues[name]->setVisible(pointerType->isPropertyVisible(name));
-    _propertyValues[name]->update();
+    PointerTypePtr pointerType = d->_pointer->dataStructure()->document()->pointerType(d->_pointer->pointerType());
+    d->_propertyValues[name]->setText(d->_pointer->property(name.toStdString().c_str()).toString());
+    d->_propertyValues[name]->setVisible(pointerType->isPropertyVisible(name));
+    d->_propertyValues[name]->update();
     updateAttributes();
 }
 
 void PointerItem::removeProperty(const QString& name)
 {
-    if (_propertyValues.contains(name)) {
+    if (d->_propertyValues.contains(name)) {
         kWarning() << "Property not removed: not registered at DataItem.";
         return;
     }
-    _propertyValues[name]->setVisible(false);
-    _item->removeFromGroup(_propertyValues[name]);
-    delete _propertyValues[name];
-    _propertyValues.remove(name);
+    d->_propertyValues[name]->setVisible(false);
+    d->_item->removeFromGroup(d->_propertyValues[name]);
+    delete d->_propertyValues[name];
+    d->_propertyValues.remove(name);
 
     updateAttributes();
 }
 
 QGraphicsItem* PointerItem::propertyListItem() const
 {
-    return _item;
+    return d->_item;
+}
+
+PointerPtr PointerItem::pointer() const {
+    return d->_pointer;
 }
 
 void PointerItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -203,7 +241,7 @@ void PointerItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* optio
     Q_UNUSED(widget);
 
     if (isSelected()) {
-        painter->setPen(QPen(Qt::black, _pointer->width(),  Qt::DotLine));
+        painter->setPen(QPen(Qt::black, d->_pointer->width(),  Qt::DotLine));
     }
     QGraphicsPathItem::paint(painter, option, widget);
 }
