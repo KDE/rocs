@@ -26,7 +26,9 @@
 #include <QSlider>
 #include <QString>
 #include <kaction.h>
+#include <boost/scoped_ptr.hpp>
 
+class GraphVisualEditorPrivate;
 class EditorToolbar;
 class KActionCollection;
 class Document;
@@ -41,6 +43,10 @@ class QGraphicsView;
 class KComboBox;
 class KPushButton;
 
+/**
+ * \class GraphVisualEditor
+ * \brief Singelton class that provides a whiteboard for interactions with data structures.
+ */
 class VISUALEDITOR_EXPORT GraphVisualEditor : public QWidget
 {
     Q_OBJECT
@@ -50,9 +56,7 @@ public:
     /**
      * re-implementation of resize event to also setup the graph scene
      */
-    void resizeEvent(QResizeEvent  *event);
-
-//     void resizeVisualEditor(qreal yTop, qreal xLeft, qreal yBottom, qreal xRight);
+    void resizeEvent(QResizeEvent *event);
 
     /**
      * Setup actions of visual graph editor and adds them to contributed action collection
@@ -88,11 +92,17 @@ public slots:
     void updateDataStructureList();
 
 private:
-    /*! Default Constructor
-    \param parent the owner of this widget. */
+    /**
+     * Default constructor.
+     *
+     *\param parent the owner of this widget.
+     */
     GraphVisualEditor(QWidget* parent);
 
-    void setupWidgets();
+    /**
+     * Default destructor.
+     */
+    virtual ~GraphVisualEditor();
 
     /**
      * Creates toolbar for the graph scene.
@@ -101,21 +111,10 @@ private:
      */
     QWidget* sceneToolbar();
 
+    void setupWidgets();
+
     static GraphVisualEditor* _self;
-
-    GraphScene *_scene;
-    EditorToolbar *_editorToolbar;
-
-    KComboBox *_documentSelectorCombo;
-    QToolButton *_documentPropertiesButton;
-    KComboBox *_dataStructureSelectorCombo;
-    QToolButton *_dataStructurePropertiesButton;
-
-    QSlider *_zoomSlider;
-    Document *_document;
-    DataStructurePtr _dataStructure;
-
-    QGraphicsView *_graphicsView;
+    boost::scoped_ptr<GraphVisualEditorPrivate> d;
 };
 
 #endif

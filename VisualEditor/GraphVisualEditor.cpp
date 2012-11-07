@@ -54,14 +54,49 @@
 // load catalog for library
 static const KCatalogLoader loader("rocsvisualeditor");
 
-GraphVisualEditor::GraphVisualEditor(QWidget *parent) :
-    QWidget(parent),
-    _editorToolbar(0)
+
+// class GraphVisualEditorPrivate
+class GraphVisualEditorPrivate
 {
-    _scene = 0;
-    _document = 0;
+public:
+    GraphVisualEditorPrivate()
+        : _editorToolbar(0)
+    {
+        _scene = 0;
+        _document = 0;
+    }
+
+    ~GraphVisualEditorPrivate()
+    { }
+
+    GraphScene *_scene;
+    EditorToolbar *_editorToolbar;
+
+    KComboBox *_documentSelectorCombo;
+    QToolButton *_documentPropertiesButton;
+    KComboBox *_dataStructureSelectorCombo;
+    QToolButton *_dataStructurePropertiesButton;
+
+    QSlider *_zoomSlider;
+    Document *_document;
+    DataStructurePtr _dataStructure;
+
+    QGraphicsView *_graphicsView;
+};
+
+
+GraphVisualEditor::GraphVisualEditor(QWidget *parent)
+    : QWidget(parent)
+    , d(new GraphVisualEditorPrivate())
+{
     setupWidgets();
 }
+
+GraphVisualEditor::~GraphVisualEditor()
+{
+    // d-pointer is scoped pointer and need not to be deleted
+}
+
 
 GraphVisualEditor* GraphVisualEditor::_self = 0;
 
@@ -77,37 +112,37 @@ void GraphVisualEditor::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);
 
-    _scene->updateMinSize(size().width(), size().height());
+    d->_scene->updateMinSize(size().width(), size().height());
 }
 
 void GraphVisualEditor::setupWidgets()
 {
     QVBoxLayout *vLayout = new QVBoxLayout(this);
     vLayout->setContentsMargins(0, 0, 0, 0);
-    _scene = new GraphScene(this);
-    _graphicsView = new QGraphicsView(this);
-    _graphicsView->setRenderHints(QPainter::Antialiasing);
-    _graphicsView->setOptimizationFlags(QGraphicsView::DontAdjustForAntialiasing);
-    _graphicsView->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
-    _graphicsView->setScene(_scene);
+    d->_scene = new GraphScene(this);
+    d->_graphicsView = new QGraphicsView(this);
+    d->_graphicsView->setRenderHints(QPainter::Antialiasing);
+    d->_graphicsView->setOptimizationFlags(QGraphicsView::DontAdjustForAntialiasing);
+    d->_graphicsView->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
+    d->_graphicsView->setScene(d->_scene);
 
     // add controls for graph scene
-    _zoomSlider = new QSlider(Qt::Horizontal, this);
-    _zoomSlider->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-    _zoomSlider->setMaximum(100);
-    _zoomSlider->setMinimum(-100);
-    updateZoomSlider(_scene->zoomFactor());
+    d->_zoomSlider = new QSlider(Qt::Horizontal, this);
+    d->_zoomSlider->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    d->_zoomSlider->setMaximum(100);
+    d->_zoomSlider->setMinimum(-100);
+    updateZoomSlider(d->_scene->zoomFactor());
 
     // at first setup document does not exists
     // this is later set when MainWindow::setActiveDocument() is called
     PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), DocumentManager::self()->activeDocument(), this);
-    _documentPropertiesButton = new QToolButton(this);
-    _documentPropertiesButton->setDefaultAction(propertiesAction);
-    _documentPropertiesButton->setIcon(KIcon("document-properties"));
+    d->_documentPropertiesButton = new QToolButton(this);
+    d->_documentPropertiesButton->setDefaultAction(propertiesAction);
+    d->_documentPropertiesButton->setIcon(KIcon("document-properties"));
 
     // scene controls for top line
     vLayout->addWidget(sceneToolbar());
-    vLayout->addWidget(_graphicsView);
+    vLayout->addWidget(d->_graphicsView);
     setLayout(vLayout);
 
     // listen for document manager changes
@@ -122,12 +157,12 @@ QWidget* GraphVisualEditor::sceneToolbar()
     QWidget *sceneControls = new QWidget(this);
 
     // document selection
-    _documentSelectorCombo = new KComboBox(this);
-    _documentSelectorCombo->setMinimumWidth(100);
+    d->_documentSelectorCombo = new KComboBox(this);
+    d->_documentSelectorCombo->setMinimumWidth(100);
     sceneControls->setLayout(new QHBoxLayout(this));
     sceneControls->layout()->addWidget(new QLabel(i18nc("@label:listbox", "Graph Document:")));
-    sceneControls->layout()->addWidget(_documentSelectorCombo);
-    sceneControls->layout()->addWidget(_documentPropertiesButton);
+    sceneControls->layout()->addWidget(d->_documentSelectorCombo);
+    sceneControls->layout()->addWidget(d->_documentPropertiesButton);
 
     // control separator
     QFrame* separator = new QFrame(this);
@@ -136,13 +171,13 @@ QWidget* GraphVisualEditor::sceneToolbar()
 
     // data structure selection
     sceneControls->layout()->addWidget(new QLabel(i18n("Data Structure:"), this));
-    _dataStructureSelectorCombo = new KComboBox(this);
-    _dataStructureSelectorCombo->setMinimumWidth(100);
-    sceneControls->layout()->addWidget(_dataStructureSelectorCombo);
-    _dataStructurePropertiesButton = new QToolButton(this);
-    _dataStructurePropertiesButton->setMaximumWidth(24);
-    _dataStructurePropertiesButton->setIcon(KIcon("document-properties"));
-    sceneControls->layout()->addWidget(_dataStructurePropertiesButton);
+    d->_dataStructureSelectorCombo = new KComboBox(this);
+    d->_dataStructureSelectorCombo->setMinimumWidth(100);
+    sceneControls->layout()->addWidget(d->_dataStructureSelectorCombo);
+    d->_dataStructurePropertiesButton = new QToolButton(this);
+    d->_dataStructurePropertiesButton->setMaximumWidth(24);
+    d->_dataStructurePropertiesButton->setIcon(KIcon("document-properties"));
+    sceneControls->layout()->addWidget(d->_dataStructurePropertiesButton);
     // create add data structure button
     KPushButton* addDataStructureButton = new KPushButton(this);
     addDataStructureButton->setIcon(KIcon("rocsnew"));
@@ -158,10 +193,10 @@ QWidget* GraphVisualEditor::sceneToolbar()
 
     QSpacerItem *spacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
     sceneControls->layout()->addItem(spacerItem);
-    sceneControls->layout()->addWidget(_zoomSlider);
+    sceneControls->layout()->addWidget(d->_zoomSlider);
 
     // connections for buttons
-    connect(_documentSelectorCombo, SIGNAL(activated(int)),
+    connect(d->_documentSelectorCombo, SIGNAL(activated(int)),
             DocumentManager::self(), SLOT(changeDocument(int)));
     connect(addDataStructureButton, SIGNAL(clicked()),
             this, SLOT(addDataStructure()));
@@ -169,9 +204,9 @@ QWidget* GraphVisualEditor::sceneToolbar()
             this, SLOT(removeDataStructure()));
 
     // add connections for zoom slider
-    connect(_zoomSlider, SIGNAL(valueChanged(int)),
+    connect(d->_zoomSlider, SIGNAL(valueChanged(int)),
             this, SLOT(zoomTo(int)));
-    connect(_scene, SIGNAL(zoomFactorChanged(qreal)),
+    connect(d->_scene, SIGNAL(zoomFactorChanged(qreal)),
             this, SLOT(updateZoomSlider(qreal)));
 
     return sceneControls;
@@ -179,105 +214,105 @@ QWidget* GraphVisualEditor::sceneToolbar()
 
 void GraphVisualEditor::updateGraphDocumentList()
 {
-    _documentSelectorCombo->clear();
-    foreach(Document * document, DocumentManager::self()->documentList()) {
-        _documentSelectorCombo->addItem(document->name());
+    d->_documentSelectorCombo->clear();
+    foreach(Document* document, DocumentManager::self()->documentList()) {
+        d->_documentSelectorCombo->addItem(document->name());
     }
 }
 
 void GraphVisualEditor::setActiveDocument()
 {
-    if (_document != 0 && _document != DocumentManager::self()->activeDocument()) {
-        disconnect(_document);
-        _document->disconnect(_dataStructureSelectorCombo);
+    if (d->_document != 0 && d->_document != DocumentManager::self()->activeDocument()) {
+        disconnect(d->_document);
+        d->_document->disconnect(d->_dataStructureSelectorCombo);
         releaseDocument();
     }
-    _document = DocumentManager::self()->activeDocument();
-    _scene->setActiveDocument();
+    d->_document = DocumentManager::self()->activeDocument();
+    d->_scene->setActiveDocument();
 
     // set button for document properties
-    if (_documentPropertiesButton->defaultAction()) {
-        _documentPropertiesButton->defaultAction()->deleteLater();
+    if (d->_documentPropertiesButton->defaultAction()) {
+        d->_documentPropertiesButton->defaultAction()->deleteLater();
         PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"),
-                                                                              _document,
+                                                                              d->_document,
                                                                               this);
-        _documentPropertiesButton->setDefaultAction(propertiesAction);
-        _documentPropertiesButton->setIcon(KIcon("document-properties"));
+        d->_documentPropertiesButton->setDefaultAction(propertiesAction);
+        d->_documentPropertiesButton->setIcon(KIcon("document-properties"));
     }
     updateDataStructureList();
 
-    connect(_dataStructureSelectorCombo, SIGNAL(activated(int)),
-            _document, SLOT(setActiveDataStructure(int)));
-    connect(_document, SIGNAL(activeDataStructureChanged(DataStructurePtr)),
+    connect(d->_dataStructureSelectorCombo, SIGNAL(activated(int)),
+            d->_document, SLOT(setActiveDataStructure(int)));
+    connect(d->_document, SIGNAL(activeDataStructureChanged(DataStructurePtr)),
             this, SLOT(updateActiveDataStructure(DataStructurePtr)));
-    connect(_document, SIGNAL(dataStructureCreated(DataStructurePtr)),
+    connect(d->_document, SIGNAL(dataStructureCreated(DataStructurePtr)),
             this, SLOT(updateDataStructureList()));
-    connect(_document, SIGNAL(dataStructureListChanged()),
+    connect(d->_document, SIGNAL(dataStructureListChanged()),
             this, SLOT(updateDataStructureList()));
 
     // Graphical Data Structure Editor toolbar
-    _editorToolbar->setActiveDocument(_document);
+    d->_editorToolbar->setActiveDocument(d->_document);
 }
 
 void GraphVisualEditor::releaseDocument()
 {
-    if (!_document) {
+    if (!d->_document) {
         return;
     }
-    _scene->clear();
-    foreach(DataStructurePtr ds, _document->dataStructures()) {
+    d->_scene->clear();
+    foreach(DataStructurePtr ds, d->_document->dataStructures()) {
         ds->disconnect(this);
     }
-    _document->disconnect(this);
-    _document = 0;
+    d->_document->disconnect(this);
+    d->_document = 0;
 }
 
 void GraphVisualEditor::setupActions(KActionCollection* collection)
 {
     // create editor toolbar
-    if (_editorToolbar == 0) {
-        _editorToolbar = new EditorToolbar(this);
+    if (d->_editorToolbar == 0) {
+        d->_editorToolbar = new EditorToolbar(this);
     }
-    _editorToolbar->setup(_scene, collection);
+    d->_editorToolbar->setup(d->_scene, collection);
 
     // create alignment menu
-    collection->addAction("align-hbottom", new AlignAction(i18nc("@action:intoolbar Alignment", "Base"),  AlignAction::Bottom, _scene));
-    collection->addAction("align-hcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::HCenter, _scene));
-    collection->addAction("align-htop", new AlignAction(i18nc("@action:intoolbar Alignment", "Top"),   AlignAction::Top, _scene));
-    collection->addAction("align-vleft", new AlignAction(i18nc("@action:intoolbar Alignment", "Left"),  AlignAction::Left, _scene));
-    collection->addAction("align-vcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::VCenter, _scene));
-    collection->addAction("align-vright", new AlignAction(i18nc("@action:intoolbar Alignment", "Right"), AlignAction::Right,  _scene));
-    collection->addAction("align-circle", new AlignAction(i18nc("@action:intoolbar Alignment", "Circle"),  AlignAction::Circle, _scene));
-    collection->addAction("align-tree", new AlignAction(i18nc("@action:intoolbar Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, _scene));
+    collection->addAction("align-hbottom", new AlignAction(i18nc("@action:intoolbar Alignment", "Base"),  AlignAction::Bottom, d->_scene));
+    collection->addAction("align-hcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::HCenter, d->_scene));
+    collection->addAction("align-htop", new AlignAction(i18nc("@action:intoolbar Alignment", "Top"),   AlignAction::Top, d->_scene));
+    collection->addAction("align-vleft", new AlignAction(i18nc("@action:intoolbar Alignment", "Left"),  AlignAction::Left, d->_scene));
+    collection->addAction("align-vcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::VCenter, d->_scene));
+    collection->addAction("align-vright", new AlignAction(i18nc("@action:intoolbar Alignment", "Right"), AlignAction::Right, d->_scene));
+    collection->addAction("align-circle", new AlignAction(i18nc("@action:intoolbar Alignment", "Circle"),  AlignAction::Circle, d->_scene));
+    collection->addAction("align-tree", new AlignAction(i18nc("@action:intoolbar Alignment", "Minimize Crossing Edges"), AlignAction::MinCutTree, d->_scene));
 }
 
 void GraphVisualEditor::updateActiveDataStructure(DataStructurePtr g)
 {
-    _dataStructure = g;
-    _scene->setActiveGraph(g);
+    d->_dataStructure = g;
+    d->_scene->setActiveGraph(g);
 
     // set property to edit current data structure
     PropertiesDialogAction *dsProperty = new PropertiesDialogAction(i18nc("@action:button", "Properties"),
                                                                     DocumentManager::self()->activeDocument()->activeDataStructure(),
                                                                     this);
-    _dataStructurePropertiesButton->defaultAction()->deleteLater();
-    _dataStructurePropertiesButton->setDefaultAction(dsProperty);
+    d->_dataStructurePropertiesButton->defaultAction()->deleteLater();
+    d->_dataStructurePropertiesButton->setDefaultAction(dsProperty);
 }
 
 void GraphVisualEditor::updateDataStructureList()
 {
-    _dataStructureSelectorCombo->clear();
+    d->_dataStructureSelectorCombo->clear();
     foreach(DataStructurePtr ds, DocumentManager::self()->activeDocument()->dataStructures()) {
-        _dataStructureSelectorCombo->addItem(ds->name());
+        d->_dataStructureSelectorCombo->addItem(ds->name());
     }
-    _dataStructureSelectorCombo->setCurrentIndex(_document->dataStructures().indexOf(_document->activeDataStructure()));
+    d->_dataStructureSelectorCombo->setCurrentIndex(d->_document->dataStructures().indexOf(d->_document->activeDataStructure()));
 
     // set property to edit current data structure
     PropertiesDialogAction *dsProperty = new PropertiesDialogAction(i18nc("@action:button", "Properties"),
                                                                     DocumentManager::self()->activeDocument()->activeDataStructure(),
                                                                     this);
-    _dataStructurePropertiesButton->defaultAction()->deleteLater();
-    _dataStructurePropertiesButton->setDefaultAction(dsProperty);
+    d->_dataStructurePropertiesButton->defaultAction()->deleteLater();
+    d->_dataStructurePropertiesButton->setDefaultAction(dsProperty);
 }
 
 void GraphVisualEditor::addDataStructure()
@@ -293,7 +328,7 @@ void GraphVisualEditor::removeDataStructure()
 QList<DataItem*> GraphVisualEditor::selectedNodes() const
 {
     QList<DataItem*> tmpList;
-    QList<QGraphicsItem*> l = _scene->selectedItems();
+    QList<QGraphicsItem*> l = d->_scene->selectedItems();
     foreach(QGraphicsItem * i, l) {
         if (qgraphicsitem_cast<DataItem*>(i)) {
             tmpList.append(qgraphicsitem_cast<DataItem*>(i));
@@ -305,12 +340,12 @@ QList<DataItem*> GraphVisualEditor::selectedNodes() const
 void GraphVisualEditor::updateZoomSlider(qreal zoomFactor)
 {
     int sliderValue = 100*(zoomFactor-1);
-    _zoomSlider->setToolTip(i18nc("@info:tooltip current zoom factor for graph editor", "Zoom: %1\%", zoomFactor*100));
-    _zoomSlider->setValue(sliderValue);
+    d->_zoomSlider->setToolTip(i18nc("@info:tooltip current zoom factor for graph editor", "Zoom: %1\%", zoomFactor*100));
+    d->_zoomSlider->setValue(sliderValue);
 }
 
 void GraphVisualEditor::zoomTo(int sliderValue)
 {
     qreal zoomFactor = sliderValue/100.0 + 1;
-    _scene->zoomTo(zoomFactor);
+    d->_scene->zoomTo(zoomFactor);
 }
