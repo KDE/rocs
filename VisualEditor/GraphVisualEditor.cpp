@@ -117,7 +117,7 @@ void GraphVisualEditor::resizeEvent(QResizeEvent *event)
 
 void GraphVisualEditor::setupWidgets()
 {
-    QVBoxLayout *vLayout = new QVBoxLayout(this);
+    QVBoxLayout *vLayout = new QVBoxLayout();
     vLayout->setContentsMargins(0, 0, 0, 0);
     d->_scene = new GraphScene(this);
     d->_graphicsView = new QGraphicsView(this);
