@@ -49,22 +49,32 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
 {
     m_building = true;
     QHash < Data*, DataPtr > dataTodata;
-    foreach(DataPtr n, other->dataList()) {
-        DataPtr newdata = addData(""); //n->name());
-        newdata->setColor(n->color());
-        newdata->setProperty("value", n->property("value").toString());
-        newdata->setX(n->x());
-        newdata->setY(n->y());
-        newdata->setWidth(n->width());
-        dataTodata.insert(n.get(), newdata);
+    foreach (int type, other->document()->dataTypeList()) {
+        foreach (DataPtr n, other->dataList(type)) {
+            DataPtr newdata = addData("", type);
+            newdata->setColor(n->color());
+            newdata->setProperty("value", n->property("value").toString());
+            newdata->setX(n->x());
+            newdata->setY(n->y());
+            newdata->setWidth(n->width());
+            dataTodata.insert(n.get(), newdata);
+            foreach (QString property, other->document()->dataType(type)->properties()) {
+                newdata->setProperty(property.toStdString().c_str(), n->property(property.toStdString().c_str()));
+            }
+        }
     }
-    foreach(PointerPtr e, other->pointers()) {
-        DataPtr from =  dataTodata.value(e->from().get());
-        DataPtr to =  dataTodata.value(e->to().get());
+    foreach (int type, other->document()->pointerTypeList()) {
+        foreach (PointerPtr e, other->pointers(type)) {
+            DataPtr from =  dataTodata.value(e->from().get());
+            DataPtr to =  dataTodata.value(e->to().get());
 
-        PointerPtr newPointer = addPointer(from, to);
-        newPointer->setColor(e->color());
-        newPointer->setProperty("value", e->property("value").toString());
+            PointerPtr newPointer = addPointer(from, to, type);
+            newPointer->setColor(e->color());
+            newPointer->setProperty("value", e->property("value").toString());
+            foreach (QString property, other->document()->pointerType(type)->properties()) {
+                newPointer->setProperty(property.toStdString().c_str(), e->property(property.toStdString().c_str()));
+            }
+        }
     }
     m_building = false;
     init();

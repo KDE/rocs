@@ -92,14 +92,14 @@ public:
     DataStructurePtr createDataStructure(Document* parent, const QString& pluginName = QString());
 
     /**
+     * Create a new data structure from given \p dataStructure within document \p parent.
+     * The currently active data structure backend is used to create the data structure.
      * TODO change this method: same comment as on createDataStructure()
-     *
-     * Changes the given data structure to use the currently active data structure plugin.
      *
      * \param dataStructure the data structure to be converted
      * \param parent
      */
-    DataStructurePtr convertDataStructureToActiveBackend(DataStructurePtr dataStructure, Document* parent);
+    DataStructurePtr createDataStructure(const DataStructurePtr dataStructure, Document* parent);
 
     /**
      * Returns the currently active data structure backend. The return value is only '0' if

@@ -80,7 +80,7 @@ public:
         }
     }
 
-    DataStructurePtr convertDataStructureToActiveBackend(DataStructurePtr dataStructure, Document* parent)
+    DataStructurePtr convertDataStructureToActiveBackend(const DataStructurePtr dataStructure, Document* parent)
     {
         if (_currentPlugin) {
             return _currentPlugin->convertToDataStructure(dataStructure, parent);
@@ -223,7 +223,7 @@ void DataStructureBackendManager::setBackend(const QString& pluginIdentifier)
     emit backendChanged(pluginIdentifier);
 }
 
-DataStructurePtr DataStructureBackendManager::convertDataStructureToActiveBackend(DataStructurePtr dataStructure, Document * parent)
+DataStructurePtr DataStructureBackendManager::createDataStructure(const DataStructurePtr dataStructure, Document* parent)
 {
     return d->convertDataStructureToActiveBackend(dataStructure, parent);
 }

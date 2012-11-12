@@ -136,35 +136,19 @@ void Document::setModified(const bool mod)
     d->_modified = mod;
 }
 
-Document::Document(const Document& gd)
-    : QObject(0)
-    , d(new DocumentPrivate())
+void Document::changeBackend()
 {
-    d->_name = gd.name();
-    d->_left = gd.left();
-    d->_right = gd.right();
-    d->_top = gd.top();
-    d->_bottom = gd.bottom();
+    cleanUpBeforeConvert();
     d->_dataStructureType = DataStructureBackendManager::self()->activeBackend();
-    d->_engineBackend = new QtScriptBackend(this);
 
-    d->_iconPackage = gd.iconPackage();
-    if (!Document::sharedRenderer(d->_iconPackage)) {
-         Document::registerSharedRenderer(d->_iconPackage);
-    }
+    // create list of existing data structures, then convert them one by one
+    QList<DataStructurePtr> dataStructures = QList<DataStructurePtr>(d->_dataStructures);
+    d->_dataStructures.clear();
 
-    // default types
-    //FIXME add types from former document
-    kDebug() << "Adding only the default methods";
-    d->_dataTypes.insert(0, DataType::create(this, 0));
-    d->_pointerTypes.insert(0, PointerType::create(this, 0));
-
-    for (int i = 0; i < gd.dataStructures().count(); ++i) {
-        d->_dataStructures.append(
-            DataStructureBackendManager::self()->convertDataStructureToActiveBackend(
-                gd.d->_dataStructures.at(i), this
-            )
-        );
+    for (int i = 0; i < dataStructures.count(); ++i) {
+        DataStructurePtr newDataStructure = addDataStructure(DataStructureBackendManager::self()->createDataStructure(dataStructures.at(i), this));
+        // remove origin data structure
+        dataStructures[i]->remove();
     }
 }
 
@@ -536,16 +520,23 @@ void Document::setActiveDataStructure(DataStructurePtr g)
 
 DataStructurePtr Document::addDataStructure(const QString& name)
 {
-    QString uniqueName = name;
-    DataStructurePtr g = DataStructureBackendManager::self()->createDataStructure(this,
+    DataStructurePtr dataStructure = DataStructureBackendManager::self()->createDataStructure(this,
                          d->_dataStructureType->internalName());
-    if (uniqueName.isEmpty()) {
-        // find unused name
-        QList<QString> usedNames;
-        foreach(DataStructurePtr dataStructure, d->_dataStructures) {
-            usedNames.append(dataStructure->name());
-        }
-        // For at least one i in this range, the name is not used, yet.
+    dataStructure->setName(name);
+    return addDataStructure(dataStructure);
+}
+
+DataStructurePtr Document::addDataStructure(DataStructurePtr dataStructure)
+{
+    // find unused name
+    QList<QString> usedNames;
+    foreach(DataStructurePtr ds, d->_dataStructures) {
+        usedNames.append(ds->name());
+    }
+    // Change unique data structure name if the currently set one is not ok.
+    // For at least one i in the following range, the name is not used, yet.
+    QString uniqueName = dataStructure->name();
+    if (uniqueName.isEmpty() || usedNames.contains(uniqueName)) {
         for (int i = 0; i < dataStructures().length() + 1; ++i) {
             uniqueName = QString("%1%2").arg(d->_dataStructureType->internalName()).arg(i);
             if (!usedNames.contains(uniqueName)) {
@@ -553,14 +544,15 @@ DataStructurePtr Document::addDataStructure(const QString& name)
             }
         }
     }
-    g->setName(uniqueName);
-    d->_dataStructures.append(g);
-    d->_activeDataStructure = g;
+
+    dataStructure->setName(uniqueName);
+    d->_dataStructures.append(dataStructure);
+    d->_activeDataStructure = dataStructure;
     d->_modified = true;
-    connect(g.get(), SIGNAL(changed()), this, SLOT(setModified()));
-    emit dataStructureCreated(g);
+    connect(dataStructure.get(), SIGNAL(changed()), this, SLOT(setModified()));
+    emit dataStructureCreated(dataStructure);
     emit dataStructureListChanged();
-    return g;
+    return dataStructure;
 }
 
 void Document::save()

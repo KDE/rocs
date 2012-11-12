@@ -247,6 +247,8 @@ void GraphVisualEditor::setActiveDocument()
             this, SLOT(updateActiveDataStructure(DataStructurePtr)));
     connect(d->_document, SIGNAL(dataStructureCreated(DataStructurePtr)),
             this, SLOT(updateDataStructureList()));
+    connect(d->_document, SIGNAL(dataStructureCreated(DataStructurePtr)),
+            d->_scene, SLOT(createItems(DataStructurePtr)));
     connect(d->_document, SIGNAL(dataStructureListChanged()),
             this, SLOT(updateDataStructureList()));
 

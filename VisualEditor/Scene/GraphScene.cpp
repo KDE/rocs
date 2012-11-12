@@ -162,10 +162,17 @@ void GraphScene::setActiveDocument()
 void GraphScene::createItems()
 {
     foreach(DataStructurePtr g, _graphDocument->dataStructures()) {
-        foreach(int type, _graphDocument->dataTypeList())
-            foreach(DataPtr d, g->dataList(type)) createData(d);
-        foreach(int type, _graphDocument->pointerTypeList())
-            foreach(PointerPtr p, g->pointers(type)) createEdge(p);
+        createItems(g);
+    }
+}
+
+void GraphScene::createItems(DataStructurePtr dataStructure)
+{
+    foreach(int type, _graphDocument->dataTypeList()) {
+        foreach(DataPtr data, dataStructure->dataList(type)) createData(data);
+    }
+    foreach(int type, _graphDocument->pointerTypeList()) {
+        foreach(PointerPtr pointer, dataStructure->pointers(type)) createEdge(pointer);
     }
 }
 

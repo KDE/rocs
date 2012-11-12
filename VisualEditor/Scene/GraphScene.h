@@ -71,6 +71,15 @@ public slots:
     QGraphicsItem* createData(DataPtr n);
     QGraphicsItem* createEdge(PointerPtr e);
     void connectGraphSignals(DataStructurePtr g);
+
+    /**
+     * Create graphic items for all elements of \p dataStructure.
+     */
+    void createItems(DataStructurePtr dataStructure);
+
+    /**
+     * Create graphic items for all elements on this document
+     */
     void createItems();
     void setActiveDocument();
     void resize();

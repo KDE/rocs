@@ -144,24 +144,20 @@ void DocumentManager::removeDocument(Document* document)
 
 void DocumentManager::convertToDataStructure()
 {
-    kDebug() << "-----------------======== Converting Data Structure ========-----------";
-
-    Document * newDoc = 0;
-    if (_activeDocument) {
-        //Check if need to convert (different DS) and if is possible to convert without data lost.
-        if (_activeDocument->dataStructureTypeName() != DataStructureBackendManager::self()->activeBackend()->internalName()
-                && DataStructureBackendManager::self()->activeBackend()->canConvertFrom(_activeDocument)) {
-            _activeDocument->cleanUpBeforeConvert();
-            newDoc = new Document(*_activeDocument);
-            removeDocument(_activeDocument);
-            addDocument(newDoc);
-            kDebug() << "Data Structure converted to " << DataStructureBackendManager::self()->activeBackend()->name();
-        }
-    } else {
+    if (!_activeDocument) {
+        kWarning() << "No active document found, creating new document with active backend.";
         newDocument();
+        return;
     }
 
-    kDebug() << "----------=========== Conversion Finished ============-----------";
+    //Check if need to convert (different DS) and if is possible to convert without data lost.
+    if (_activeDocument->dataStructureTypeName() != DataStructureBackendManager::self()->activeBackend()->internalName()
+            && DataStructureBackendManager::self()->activeBackend()->canConvertFrom(_activeDocument))
+    {
+        _activeDocument->changeBackend();
+        kDebug() << "Data structure converted to " << DataStructureBackendManager::self()->activeBackend()->name();
+        emit activateDocument();
+    }
 }
 
 

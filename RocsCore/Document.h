@@ -58,7 +58,6 @@ public:
              qreal bottom = 200,
              QObject *parent = 0
             );
-    Document(const Document& gd);
     ~Document();
 
     bool isModified() const;
@@ -105,8 +104,16 @@ public:
      */
     QRectF size();
 
+    /**
+     * Change data structure backend of this document to currently active backend.
+     * \see DataStructureBackend::activeBackend(). Changing the backend of a data structure is
+     * a LOSSY operation (converting between backends and converting back will result in data loss!)
+     */
+    void changeBackend();
+
     /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others from all data structeres of this document.
-    */
+     * TODO this method should be protected
+     */
     virtual void cleanUpBeforeConvert();
 
     /** @brief return the translated name of data structure used to build this document. */
@@ -179,10 +186,23 @@ public Q_SLOTS:
     /**
      * Add data structure to graph document with name \p name.
      * If no name is given, the name of the used data structure is used.
+     *
      * \param name is the optional name of the to be created data structure
-     * \return shared pointer to the data structure
+     * \return the added data structure
      */
     DataStructurePtr addDataStructure(const QString& name = QString());
+
+    /**
+     * Add data structure \p dataStructure to the document.
+     *
+     * \param dataStructure the data structure to be added to the document
+     * \return the added data structure for argument chaining
+     */
+    DataStructurePtr addDataStructure(DataStructurePtr dataStructure);
+
+    /**
+     * \return the currently selected data structure, if none exists the shared pointer is invalid
+     */
     DataStructurePtr activeDataStructure() const ;
 
     /**
@@ -234,7 +254,11 @@ Q_SIGNALS:
     void resized();
 
 private:
+    // d-pointer
     const boost::scoped_ptr<DocumentPrivate> d;
+    Document(const Document&);
+    Document& operator=(const Document&);
+
     static QMap<QString, QPointer<QSvgRenderer> > _sharedRenderers;
 };
 
