@@ -277,7 +277,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    boost::scoped_ptr<DataPrivate> d;
+    const boost::scoped_ptr<DataPrivate> d;
 
     /**
      * \internal

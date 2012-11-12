@@ -92,7 +92,7 @@ protected:
      */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
     virtual QPainterPath createCurves() = 0;
 
 public slots:
@@ -105,7 +105,7 @@ public slots:
 
 private:
     // d-pointer
-    PointerItemPrivate* d;
+    PointerItemPrivate * const d;
 };
 
 #endif

@@ -183,7 +183,7 @@ private:
 
     static DataStructureBackendManager instance;
 
-    boost::scoped_ptr<DataStructureBackendManagerPrivate> d;
+    const boost::scoped_ptr<DataStructureBackendManagerPrivate> d;
 };
 
 #endif

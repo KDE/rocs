@@ -63,7 +63,7 @@ private slots:
     void removeProperty(const QString& name);
 
 private:
-    DataItemPrivate* d;
+    DataItemPrivate * const d;
 };
 
 #endif

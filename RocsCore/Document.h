@@ -234,7 +234,7 @@ signals:
     void resized();
 
 private:
-    boost::scoped_ptr<DocumentPrivate> d;
+    const boost::scoped_ptr<DocumentPrivate> d;
     static QMap<QString, QPointer<QSvgRenderer> > _sharedRenderers;
 };
 

@@ -357,7 +357,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    boost::scoped_ptr<DataStructurePrivate> d;
+    const boost::scoped_ptr<DataStructurePrivate> d;
 
     DataStructure(const DataStructure&);
     DataStructure& operator=(const DataStructure&);

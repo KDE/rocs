@@ -177,7 +177,7 @@ protected:
     void setError(Error error, QString message=QString());
 
 private:
-    GraphFilePluginInterfacePrivate *d;
+    GraphFilePluginInterfacePrivate * const d;
 };
 
 #endif // FILEPLUGININTERFACE_H

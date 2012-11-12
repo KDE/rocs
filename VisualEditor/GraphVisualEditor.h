@@ -114,7 +114,7 @@ private:
     void setupWidgets();
 
     static GraphVisualEditor* _self;
-    boost::scoped_ptr<GraphVisualEditorPrivate> d;
+    const boost::scoped_ptr<GraphVisualEditorPrivate> d;
 };
 
 #endif
