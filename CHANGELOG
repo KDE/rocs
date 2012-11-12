@@ -1,6 +1,28 @@
 The Rocs Changelog
 ==================
 
+This changelog contains only the important changes for each release.
+For a detailed feature list please refer to the GIT log.
+
+Rocs 1.8 (KDE SC 4.10)
+--------
+* Improved project support for all dialogs.
+* UI cleanup:
+  - New visual editor toolbar.
+  - New visual editor top control bar.
+  - New side panel.
+* Initial support of a side panel with
+  - journal files,
+  - documentation (currently, only handbook),
+  - and additional operations for the visual editor.
+* Parting of Rocs into RocsCore, VisualEditor and RocsApp.
+* Major work on API cleanup and API documentation.
+* Major refactoring of the properties model to simplify their use.
+* Improved support for third party graph document files
+  - DOT/GraphVis support is nearly complete
+  - Trivial Graph Format files support is complete
+  - initial TikZ/PGF export of graphs
+
 Rocs 1.7 (KDE SC 4.9)
 --------
 * New data and pointer types.
