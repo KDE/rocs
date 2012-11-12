@@ -138,7 +138,7 @@ public:
 
     /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others
     */
-    virtual void cleanUpBeforeConvert() { }
+    virtual void cleanUpBeforeConvert();
 
     /**
      * Gives a map with plugin specific properties of the data structure.
@@ -151,7 +151,7 @@ public:
      * \param identifier is the unique identifier for this property
      * \param value is the to be set value for the property
      */
-    virtual void setPluginProperty(const QString& /*identifier*/, const QString& /*property*/) { }
+    virtual void setPluginProperty(const QString& /*identifier*/, const QString& /*property*/);
 
 public slots:
     virtual DataPtr addData(const QString& name, int dataType = 0);

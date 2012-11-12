@@ -671,3 +671,13 @@ const QList<GroupPtr> DataStructure::groups() const
 {
     return d->_groups;
 }
+
+void DataStructure::cleanUpBeforeConvert()
+{
+
+}
+
+void DataStructure::setPluginProperty(const QString&, const QString&)
+{
+
+}

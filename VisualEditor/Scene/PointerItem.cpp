@@ -226,6 +226,11 @@ void PointerItem::removeProperty(const QString& name)
     updateAttributes();
 }
 
+int PointerItem::type() const
+{
+    return Type;
+}
+
 QGraphicsItem* PointerItem::propertyListItem() const
 {
     return d->_item;

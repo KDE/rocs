@@ -65,9 +65,7 @@ public:
      * \return the type of the item
      * \see QGraphicsItem::type()
      */
-    int type() const {
-        return Type;
-    }
+    int type() const;
 
     /**
      * \return the graphics item to be displayed at the scene
