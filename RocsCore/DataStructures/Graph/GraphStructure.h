@@ -43,7 +43,7 @@ public:
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
-    GraphStructure(Document* parent = 0);
+    explicit GraphStructure(Document* parent = 0);
     ~GraphStructure();
     void importStructure(DataStructurePtr other);
 

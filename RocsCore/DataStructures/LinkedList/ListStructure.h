@@ -38,7 +38,7 @@ public:
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
-    ListStructure(Document* parent = 0);
+    explicit ListStructure(Document* parent = 0);
 
     void importStructure(DataStructurePtr other);
 

@@ -32,7 +32,7 @@ public:
     /**
      * Default constructor.
      */
-    DocumentationWidget(QWidget* parent);
+    explicit DocumentationWidget(QWidget* parent);
 
 public slots:
     void goHome();

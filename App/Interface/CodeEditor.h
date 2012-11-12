@@ -42,7 +42,7 @@ public:
     /**
      * Creates new CodeEditor without any scripts. To add script \see addScript().
      */
-    CodeEditor(MainWindow *parent = 0);
+    explicit CodeEditor(MainWindow *parent = 0);
 
     QString text() const;
     KTextEditor::Editor *editor() const {

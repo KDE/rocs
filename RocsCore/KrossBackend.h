@@ -27,7 +27,7 @@
 class ROCSLIB_EXPORT KrossBackend
 {
 public:
-    KrossBackend(QVariantList  *dataStructures);
+    explicit KrossBackend(QVariantList  *dataStructures);
     void setScript(const QString& s);
     void setBackend(const QString& backend);
     Kross::Action* execute();

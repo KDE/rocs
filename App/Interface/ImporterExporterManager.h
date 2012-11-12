@@ -29,7 +29,7 @@ class ImporterExporterManager : public QObject
     Q_OBJECT
     QString _scriptToRun;
 public:
-    ImporterExporterManager(QObject* parent = 0);
+    explicit ImporterExporterManager(QObject *parent = 0);
     Document* importFile();
     bool exportFile(Document* doc) const;
     QString& scriptToRun() {

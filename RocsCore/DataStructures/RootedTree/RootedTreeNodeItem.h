@@ -29,7 +29,7 @@ class RootedTreeNodeItem : public DataItem
     Q_OBJECT
 
 public:
-    RootedTreeNodeItem(DataPtr n);
+    explicit RootedTreeNodeItem(DataPtr n);
     ~RootedTreeNodeItem();
 
     QRectF boundingRect() const;

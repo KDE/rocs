@@ -39,7 +39,7 @@ public:
     /**
      * Default constructor.
      */
-    JournalEditorWidget(QWidget* parent);
+    explicit JournalEditorWidget(QWidget* parent);
 
     /**
      * Loads journal from specified project \p project. File path and file name changes of the

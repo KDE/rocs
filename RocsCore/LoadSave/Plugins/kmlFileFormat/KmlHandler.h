@@ -29,7 +29,7 @@
 class KmlHandler: public QXmlDefaultHandler
 {
 public:
-    KmlHandler(DataStructurePtr doc);
+    explicit KmlHandler(DataStructurePtr doc);
     ~KmlHandler();
 
 

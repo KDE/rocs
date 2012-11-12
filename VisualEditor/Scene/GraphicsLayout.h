@@ -37,7 +37,7 @@ public:
     int viewStyleDataEdge() const;
 
 private:
-    GraphicsLayout(QObject* parent = 0);
+    explicit GraphicsLayout(QObject* parent = 0);
     int _viewStyleDataNode;
     int _viewStyleDataEdge;
 

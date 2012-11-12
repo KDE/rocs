@@ -43,7 +43,7 @@ class VISUALEDITOR_EXPORT GraphScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    GraphScene(QObject *parent = 0);
+    explicit GraphScene(QObject *parent = 0);
     void updateMinSize(qreal minWidth, qreal minHeight);
     void setAction(QAction *action);
     void updateGraph(DataStructurePtr g);

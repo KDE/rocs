@@ -43,7 +43,7 @@ public:
     /**
      * Default constructor.
      */
-    EditorToolbar(QWidget* parent);
+    explicit EditorToolbar(QWidget *parent);
 
     /**
      * Setup toolbar actions.

@@ -26,13 +26,12 @@ namespace Ui
 class ConfigureDefaultProperties;
 }
 
-class ConfigureDefaultProperties :
-    public QWidget
+class ConfigureDefaultProperties : public QWidget
 {
     Q_OBJECT
 
 public:
-    ConfigureDefaultProperties(QWidget* parent = 0);
+    explicit ConfigureDefaultProperties(QWidget* parent = 0);
     ~ConfigureDefaultProperties();
 
     enum {

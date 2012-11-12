@@ -53,21 +53,21 @@ public:
      * A temporary project file is used and \see temporary() will return true until
      * project is saved.
      */
-    Project();
+    explicit Project();
 
     /**
      * Constructor for project that creates a project by configuration given
      * in file \p projectFile.
      * \param projectFile is the absolute path to the project file
      */
-    Project(const KUrl& projectFile);
+    explicit Project(const KUrl& projectFile);
 
     /**
      * Constructor for project that creates a project by configuration given
      * in file \p projectFile inside directory \p projectDirectory
      * \param projectFile is the absolute path to the project file
      */
-    Project(const KUrl& projectArchive, const KUrl& projectDirectory);
+    explicit Project(const KUrl& projectArchive, const KUrl& projectDirectory);
 
     virtual ~Project();
 

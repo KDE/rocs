@@ -41,7 +41,7 @@ class DocumentTypesWidget : public QWidget
 {
     Q_OBJECT
 public:
-    DocumentTypesWidget(QWidget* parent);
+    explicit DocumentTypesWidget(QWidget* parent);
     ~DocumentTypesWidget();
 
 public slots:

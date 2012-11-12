@@ -38,7 +38,7 @@ class SideToolButton: public QToolButton
     Q_OBJECT
 
 public:
-    SideToolButton(QWidget* parent = 0);
+    explicit SideToolButton(QWidget* parent = 0);
     Qt::Orientation orientation() const;
     virtual QSize sizeHint() const;
 
@@ -56,8 +56,8 @@ class SideDockWidget: public QWidget
     Q_OBJECT
 
 public:
-    SideDockWidget(QWidget* parent);
-    QToolBar* toolbar() const;
+    explicit SideDockWidget(QWidget* parent);
+    QToolBar * toolbar() const;
     void addDock(QWidget* dock, const QString& title, const KIcon& icon);
     void showDock(bool show, QWidget* widget);
 
@@ -68,7 +68,7 @@ signals:
     void visibilityChanged(bool visible);
 
 private:
-    QToolBar* _toolBar;
+    QToolBar *_toolBar;
     QHash<SideToolButton*, QWidget*> _widgets;
     bool _showDock;
 };

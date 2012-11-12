@@ -27,7 +27,7 @@ class LoadedPluginsDialog :
     Q_OBJECT
 
 public:
-    LoadedPluginsDialog(QWidget* parent = 0);
+    explicit LoadedPluginsDialog(QWidget* parent = 0);
 };
 
 #endif

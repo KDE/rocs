@@ -41,7 +41,7 @@ public:
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
-    RootedTreeStructure(Document* parent = 0 );
+    explicit RootedTreeStructure(Document* parent = 0 );
     ~RootedTreeStructure();
     void importStructure(DataStructurePtr other);
 
