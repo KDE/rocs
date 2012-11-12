@@ -145,13 +145,7 @@ public:
      */
     QLayout* dataStructureExtraProperties(DataStructurePtr dataStructure, QWidget* parent) const;
 
-signals:
-    /**
-     * Emitted if the active backend is changed.
-     */
-    void backendChanged(const QString& pluginName);
-
-public slots:
+public Q_SLOTS:
     /**
      * Change the active backend. If backend is changed, the signal \see backendChanged() is emitted.
      * If \p pluginIdentifier does not denote a valid backend, the active backend is not changed.
@@ -159,6 +153,12 @@ public slots:
      * \param pluginIdentifier internal name of the data structure backend
      */
     void setBackend(const QString& pluginIdentifier);
+
+Q_SIGNALS:
+    /**
+     * Emitted if the active backend is changed.
+     */
+    void backendChanged(const QString& pluginName);
 
 private:
     /**

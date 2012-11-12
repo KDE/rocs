@@ -42,6 +42,7 @@ class QGraphicsSimpleTextItem;
 class VISUALEDITOR_EXPORT PointerItem : public QObject, public QGraphicsPathItem
 {
     Q_OBJECT
+
 public:
     /**
      * Default constructor.
@@ -93,7 +94,7 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
     virtual QPainterPath createCurves() = 0;
 
-public slots:
+public Q_SLOTS:
     void remove();
     void updatePos();
     void updateAttributes();

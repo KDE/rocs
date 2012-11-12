@@ -173,7 +173,7 @@ public:
 
     QString iconPackage() const;
 
-public slots:
+public Q_SLOTS:
     void setModified(const bool mod = true);
 
     /**
@@ -220,7 +220,7 @@ public slots:
     bool isPointAtDocument(qreal x, qreal y) const;
     bool isPointAtDocument(const QPointF& point) const;
 
-signals:
+Q_SIGNALS:
     void dataStructureCreated(DataStructurePtr g);
     void dataStructureListChanged();
     void dataTypeCreated(int identifier);

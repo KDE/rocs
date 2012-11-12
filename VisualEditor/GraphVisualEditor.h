@@ -50,6 +50,7 @@ class KPushButton;
 class VISUALEDITOR_EXPORT GraphVisualEditor : public QWidget
 {
     Q_OBJECT
+
 public:
     static GraphVisualEditor* self();
 
@@ -66,7 +67,7 @@ public:
      */
     void setupActions(KActionCollection* collection);
 
-public slots:
+public Q_SLOTS:
     /**
      * Reflect currently active data structure in graph scene and graph editor toolbar.
      *

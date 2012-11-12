@@ -106,7 +106,7 @@ public:
     \p engine the QScriptEngine that will work on the object */
     void setEngine(QScriptEngine *engine);
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when this pointer is removed
      */
@@ -136,7 +136,7 @@ signals:
     void propertyRemoved(QString name);
     void propertyChanged(QString name);
 
-public slots:
+public Q_SLOTS:
     /**
      * \return source data element of this pointer
      */

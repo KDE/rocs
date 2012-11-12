@@ -49,7 +49,7 @@ public:
      */
     QGraphicsItem *propertyListItem() const;
 
-private slots:
+private Q_SLOTS:
     void setupNode();
     void updateRenderer();
     void updateIcon();

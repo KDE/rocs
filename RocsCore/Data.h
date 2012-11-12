@@ -183,7 +183,7 @@ public:
      */
     PointerList& outPointerList() const;
 
-public slots:
+public Q_SLOTS:
     void remove();
 
     /**
@@ -240,7 +240,7 @@ public slots:
     QScriptValue output_pointers(int pointerType);
     QScriptValue connected_pointers(DataPtr n);
 
-signals:
+Q_SIGNALS:
     void removed();
     void posChanged(QPointF p);
     void widthChanged(double w);

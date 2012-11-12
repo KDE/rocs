@@ -153,7 +153,7 @@ public:
      */
     virtual void setPluginProperty(const QString& /*identifier*/, const QString& /*property*/);
 
-public slots:
+public Q_SLOTS:
     virtual DataPtr addData(const QString& name, int dataType = 0);
     virtual DataList addDataList(DataList dataList, int dataType = 0);
 
@@ -281,7 +281,7 @@ public slots:
 //     QScriptValue end_data();
 // #endif
 
-private slots:
+private Q_SLOTS:
     /**
      * Only for internal use of the data structure: Slot that is connected signal
      * Document::dataTypeCreated(...). this method registers data type for this data structure.
@@ -310,7 +310,7 @@ private slots:
      */
     void removePointerType(int identifier);
 
-signals:
+Q_SIGNALS:
     void dataCreated(DataPtr n);
     void pointerCreated(PointerPtr e);
     void complexityChanged(bool directed);
