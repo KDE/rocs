@@ -231,12 +231,10 @@ QList<int> Document::pointerTypeList() const
     return d->_pointerTypes.keys();
 }
 
-
-const QString& Document::iconPackage() const
+QString Document::iconPackage() const
 {
     return d->_iconPackage;
 }
-
 
 bool Document::removeDataType(int dataType)
 {

@@ -137,16 +137,6 @@ public:
     QVariant color() const;
 
     /**
-     * \return name of data element
-     */
-    const QString& name() const;
-
-    /**
-     * \return value of data element
-     */
-    const QVariant value() const;
-
-    /**
      * \return icon of data element
      */
     QString icon() const;

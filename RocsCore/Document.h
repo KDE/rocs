@@ -171,7 +171,7 @@ public:
      */
     QList<int> pointerTypeList() const;
 
-    const QString& iconPackage() const;
+    QString iconPackage() const;
 
 public slots:
     void setModified(const bool mod = true);
