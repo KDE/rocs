@@ -99,9 +99,33 @@ void TikzFileFormatPlugin::writeFile(Document &graph)
         out << dataTypeStyle << "\n";
     }
     foreach(int type, graph.pointerTypeList()) {
-        // TODO set type specific style information
-        QString pointerTypeStyle = QString("\\tikzstyle{edge%1} = [draw,thick,-]").
-            arg(type);
+        // set style attributes
+        QString styleAttributes = QString("draw,thick");
+
+        // direction
+        if (graph.pointerType(type)->direction() == PointerType::Unidirectional) {
+            styleAttributes.append(",->");
+        } else {
+            styleAttributes.append(",-");
+        }
+
+        // line style
+        switch(graph.pointerType(type)->lineStyle()) {
+        case Qt::SolidLine:
+            styleAttributes.append(",solid");
+            break;
+        case Qt::DashLine:
+            styleAttributes.append(",dashed");
+            break;
+        case Qt::DotLine:
+            styleAttributes.append(",dotted");
+            break;
+        default:
+            styleAttributes.append(",solid");
+        }
+
+        // set style
+        QString pointerTypeStyle = QString("\\tikzstyle{edge%1} = [%2]").arg(type).arg(styleAttributes);
         out << pointerTypeStyle << "\n";
     }
 
