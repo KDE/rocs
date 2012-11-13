@@ -48,7 +48,6 @@ public:
 
     /**
      * Open given file and imports it into internal format.
-     * \param file is url of a local file
      */
     virtual void readFile();
 };

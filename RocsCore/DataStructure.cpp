@@ -422,7 +422,7 @@ DataPtr DataStructure::getData(int uniqueIdentifier)
     return DataPtr();
 }
 
-void DataStructure::remove(DataPtr n)
+void DataStructure::remove(DataPtr data)
 {
     //Note: important for resize: remove node before emit resizeRequest
     Document *doc = DocumentManager::self()->activeDocument();
@@ -431,18 +431,18 @@ void DataStructure::remove(DataPtr n)
         qreal xCenter = (doc->left() + doc->right() )/2;
         qreal yCenter = (doc->top() + doc->bottom() )/2;
 
-        if (n->x() < xCenter) emit resizeRequest(Document::BorderLeft);
-        if (n->x() > xCenter) emit resizeRequest(Document::BorderRight);
-        if (n->y() < yCenter) emit resizeRequest(Document::BorderTop);
-        if (n->y() > yCenter) emit resizeRequest(Document::BorderBottom);
+        if (data->x() < xCenter) emit resizeRequest(Document::BorderLeft);
+        if (data->x() > xCenter) emit resizeRequest(Document::BorderRight);
+        if (data->y() < yCenter) emit resizeRequest(Document::BorderTop);
+        if (data->y() > yCenter) emit resizeRequest(Document::BorderBottom);
     }
 
     // remove from internal list
     QMap<int,DataList>::iterator iter = d->_dataTypeLists.begin();
     while (iter != d->_dataTypeLists.end()) {
-        if (iter->removeOne(n)) {
+        if (iter->removeOne(data)) {
             // only remove data element if it is registered
-            n->remove();
+            data->remove();
         }
         ++iter;
     }
@@ -450,14 +450,14 @@ void DataStructure::remove(DataPtr n)
     emit changed();
 }
 
-void DataStructure::remove(PointerPtr e)
+void DataStructure::remove(PointerPtr pointer)
 {
     // remove from internal list
     QMap<int,PointerList>::iterator iter = d->_pointerTypeLists.begin();
     while (iter != d->_pointerTypeLists.end()) {
-        if (iter->removeOne(e)) {
+        if (iter->removeOne(pointer)) {
             // only remove pointer if it is registered
-            e->remove();
+            pointer->remove();
         }
         ++iter;
     }

@@ -58,22 +58,22 @@ void EdgeItem::updatePathLayout()
     setPath(createCurves());
 }
 
-QPolygonF EdgeItem::createArrow(const QPointF& Pos1, const QPointF& Pos2) const
+QPolygonF EdgeItem::createArrow(const QPointF &pos1, const QPointF &pos2) const
 {
-    QLineF line(Pos1, Pos2);
+    QLineF line(pos1, pos2);
     qreal angle = ::qAcos(line.dx() / line.length());
     if (line.dy() >= 0) {
         angle = TwoPi - angle;
     }
     qreal arrowSize = 10;
 
-    QPointF destArrowP1 = Pos2 + QPointF(qSin(angle - PI_3) * arrowSize,         qCos(angle - PI_3) * arrowSize);
-    QPointF destArrowP2 = Pos2 + QPointF(qSin(angle - Pi + PI_3) * arrowSize,    qCos(angle - Pi + PI_3) * arrowSize);
-    QPolygonF arrow(QPolygonF() <<  destArrowP1 << Pos2 << destArrowP2);
+    QPointF destArrowP1 = pos2 + QPointF(qSin(angle - PI_3) * arrowSize,         qCos(angle - PI_3) * arrowSize);
+    QPointF destArrowP2 = pos2 + QPointF(qSin(angle - Pi + PI_3) * arrowSize,    qCos(angle - Pi + PI_3) * arrowSize);
+    QPolygonF arrow(QPolygonF() <<  destArrowP1 << pos2 << destArrowP2);
 
     /// Put the arrow on the center of the nodes.
-    qreal x = Pos2.x() - Pos1.x();
-    qreal y = Pos2.y() - Pos1.y();
+    qreal x = pos2.x() - pos1.x();
+    qreal y = pos2.y() - pos1.y();
 
     x -= x / 2;
     y -= y / 2;

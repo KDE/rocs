@@ -58,7 +58,7 @@ QPolygonF LinkedListPointerItem::createEndArrow() const
 
 }
 
-QPolygonF LinkedListPointerItem::createPath(const QPointF& pos1, const QPointF& pos2) const
+QPolygonF LinkedListPointerItem::createPath(const QPointF &pos1, const QPointF &pos2) const
 {
     QPolygonF path;
     path.append(pos1);

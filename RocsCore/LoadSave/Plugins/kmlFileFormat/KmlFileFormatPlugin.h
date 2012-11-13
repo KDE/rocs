@@ -31,7 +31,7 @@ class KmlFileFormatPlugin : public GraphFilePluginInterface
 {
     Q_OBJECT
 public:
-    explicit KmlFileFormatPlugin(QObject* parent, const QList< QVariant >&);
+    explicit KmlFileFormatPlugin(QObject *parent, const QList< QVariant >&);
     ~KmlFileFormatPlugin();
 
     /**
@@ -47,7 +47,6 @@ public:
 
     /**
      * Open given file and imports it into internal format.
-     * \param file is url of a local file
      */
     virtual void readFile();
 };

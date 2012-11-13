@@ -87,7 +87,7 @@ Project::Project()
 }
 
 
-Project::Project(const KUrl& projectFile) :
+Project::Project(const KUrl &projectFile) :
     d(new ProjectPrivate)
 {
     d->_projectFile = projectFile;
@@ -102,7 +102,7 @@ Project::Project(const KUrl& projectFile) :
 }
 
 
-Project::Project(const KUrl& projectArchive, const KUrl& projectDirectory)
+Project::Project(const KUrl &projectArchive, const KUrl &projectDirectory)
     : d(new ProjectPrivate)
 {
     // extract archive into project directory
@@ -130,7 +130,7 @@ Project::~Project()
 {
 }
 
-void Project::setName(const QString& name)
+void Project::setName(const QString &name)
 {
     KConfigGroup projectGroup(d->_config, "Project");
     projectGroup.writeEntry("Name", name);
@@ -160,14 +160,14 @@ KUrl Project::projectFile() const
 }
 
 
-void Project::setProjectFile(const KUrl& fileUrl)
+void Project::setProjectFile(const KUrl &fileUrl)
 {
     d->_projectFile = fileUrl;
     d->_temporary = false;
 }
 
 
-int Project::addCodeFile(const KUrl& file)
+int Project::addCodeFile(const KUrl &file)
 {
     QList<int> keys = d->_codeFileGroup.uniqueKeys();
     int newKey = 1;
@@ -214,19 +214,19 @@ QList< KTextEditor::Document* > Project::codeFilesNew() const
 }
 
 
-void Project::addCodeFileNew(KTextEditor::Document* document)
+void Project::addCodeFileNew(KTextEditor::Document *document)
 {
     d->_codeFileNew.append(document);
 }
 
 
-void Project::removeCodeFileNew(KTextEditor::Document* document)
+void Project::removeCodeFileNew(KTextEditor::Document *document)
 {
     d->_codeFileNew.removeAll(document);
 }
 
 
-void Project::saveCodeFileNew(KTextEditor::Document* document, const KUrl& file)
+void Project::saveCodeFileNew(KTextEditor::Document *document, const KUrl &file)
 {
     removeCodeFileNew(document);
     document->saveAs(file);
@@ -234,7 +234,7 @@ void Project::saveCodeFileNew(KTextEditor::Document* document, const KUrl& file)
 }
 
 
-int Project::addGraphFile(const KUrl& file)
+int Project::addGraphFile(const KUrl &file)
 {
     QList<int> keys = d->_graphFileGroup.uniqueKeys();
     int newKey = 1;
@@ -275,19 +275,19 @@ QList<KUrl> Project::graphFiles() const
 }
 
 
-void Project::addGraphFileNew(Document* document)
+void Project::addGraphFileNew(Document *document)
 {
     d->_graphFileNew.append(document);
 }
 
 
-void Project::removeGraphFileNew(Document* document)
+void Project::removeGraphFileNew(Document *document)
 {
     d->_graphFileNew.removeAll(document);
 }
 
 
-void Project::saveGraphFileNew(Document* document, const QString& file)
+void Project::saveGraphFileNew(Document *document, const QString &file)
 {
     removeGraphFileNew(document);
     document->saveAs(file);
@@ -295,7 +295,7 @@ void Project::saveGraphFileNew(Document* document, const QString& file)
 }
 
 
-void Project::saveGraphFileAs(Document* document, const QString& file)
+void Project::saveGraphFileAs(Document *document, const QString &file)
 {
     Q_ASSERT(document);
     if (d == 0) {
@@ -336,7 +336,7 @@ bool Project::writeNewProjectFile()
 }
 
 
-bool Project::writeProjectFile(const QString& fileUrl)
+bool Project::writeProjectFile(const QString &fileUrl)
 {
     if (fileUrl.isEmpty() && isTemporary()) {
         kError() << "Could not save temporary project file: no file URL specified.";
@@ -382,7 +382,7 @@ bool Project::writeProjectFile(const QString& fileUrl)
 }
 
 
-bool Project::exportProject(const KUrl& exportUrl)
+bool Project::exportProject(const KUrl &exportUrl)
 {
     KTar tar(exportUrl.toLocalFile());
     if (!tar.open(QIODevice::WriteOnly)) {
@@ -471,4 +471,3 @@ bool Project::isModified() const
 {
     return d->_modified;
 }
-

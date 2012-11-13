@@ -160,6 +160,7 @@ public Q_SLOTS:
     /**
      * Creates new pointer from data element "from" to data element "to" of
      * given type "pointerType". The pointer type must exist.
+     *
      * \param from data element where the pointer starts
      * \param to data element where the pointer ends
      * \param pointerType is the type of this pointer
@@ -167,33 +168,34 @@ public Q_SLOTS:
     virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType = 0);
 
     /**
-     * get data by unique identifier
-     * iterates over all data elements, running time O(n)
-     * \param identifier
+     * Access data element by its unique identifier.
+     * Operation has access time O(n).
+     *
+     * \param uniqueIdentifier the unique identifier of the data element
      */
     DataPtr getData(int uniqueIdentifier);
 
     /**
-     * Remove \p n from data structure and (if necessary) destroys the data object.
+     * Remove \p data from data structure and (if necessary) destroys the data object.
      * It is valid to call this method more than once for the same data object.
      *
-     * \param n the data object to be removed
+     * \param data the data element that shall be removed
      */
-    virtual void remove(DataPtr n);
+    virtual void remove(DataPtr data);
 
     /**
-     * Remove \p e from data structure and (if necessary) destroys the pointer object.
+     * Remove \p pointer from data structure and (if necessary) destroys the pointer object.
      * It is valid to call this method more than once for the same pointer object.
      *
-     * \param e the pointer to be removed
+     * \param pointer the pointer that shall be removed
      */
-    virtual void remove(PointerPtr e);
+    virtual void remove(PointerPtr pointer);
 
     /**
      * Remove \p group from data structure and (if necessary) destroys the group object.
      * It is valid to call this method more than once for the same group object.
      *
-     * \param e the pointer to be removed
+     * \param group the group that shall be removed
      */
     virtual void remove(GroupPtr group);
 
@@ -326,13 +328,16 @@ protected:
 protected:
     /**
      * Default constructor.
+     *
+     * \param parent the parent document of the data structure
      */
     DataStructure(Document *parent = 0);
 
     /**
      * overwrites the current DataStructure with all values (Data and Pointer)
      * from the given datastructure object.
-     * \param boost::shared_ptr<DataStructure> other
+     *
+     * \param other the data structure that shall be imported
      * \return void
      */
     virtual void importStructure(DataStructurePtr other);

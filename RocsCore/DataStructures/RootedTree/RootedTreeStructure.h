@@ -24,12 +24,13 @@
 
 class RootedTreeNode;
 
-class RootedTreeStructure : public DataStructure {
+class RootedTreeStructure : public DataStructure
+{
     Q_OBJECT
 
     Q_PROPERTY(bool ShowAllPointers READ isShowingAllPointers WRITE setShowAllPointers NOTIFY showPointersChanged)
 
-    RootedTreeNode* m_rootNode;
+    RootedTreeNode *m_rootNode;
 
     bool m_showPointers;
 
@@ -41,14 +42,14 @@ public:
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
 
-    explicit RootedTreeStructure(Document* parent = 0 );
+    explicit RootedTreeStructure(Document *parent = 0 );
     ~RootedTreeStructure();
     void importStructure(DataStructurePtr other);
 
     PointerPtr addPointer(DataPtr from, DataPtr to, int dataType=0);
     DataPtr addData(const QString& name, int dataType=0);
 
-    void setEngine(QScriptEngine* engine);
+    void setEngine(QScriptEngine *engine);
     DataPtr rootNode() const;
 
     /** return true if all the pointers need to be draw. */
@@ -58,9 +59,9 @@ public slots:
     /** @brief Create a new data (tree node)
         Note that it only create but not insert it into the tree.
         */
-    QScriptValue add_data(const QString& name);
+    QScriptValue add_data(const QString &name);
 
-    void set_root_node(RootedTreeNode* node);
+    void set_root_node(RootedTreeNode *node);
     QScriptValue root_node() const;
 
     /** set if all the pointers should be draw or not. All pointers is a complete draw

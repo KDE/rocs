@@ -32,7 +32,7 @@ class GmlFileFormatPlugin: public GraphFilePluginInterface
 {
     Q_OBJECT
 public:
-    explicit GmlFileFormatPlugin(QObject* parent, const QList< QVariant >&);
+    explicit GmlFileFormatPlugin(QObject *parent, const QList< QVariant >&);
     ~GmlFileFormatPlugin();
 
     /**
@@ -48,7 +48,6 @@ public:
 
     /**
      * Open given file and imports it into internal format.
-     * \param file is url of a local file
      */
     virtual void readFile();
 

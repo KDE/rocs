@@ -32,9 +32,9 @@
 // load catalog for library
 static const KCatalogLoader loader("rocscore");
 
-DocumentManager *DocumentManager::_self = 0;
+DocumentManager * DocumentManager::_self = 0;
 
-DocumentManager* DocumentManager::self()
+DocumentManager * DocumentManager::self()
 {
     if (!_self) {
         _self = new DocumentManager();
@@ -44,19 +44,20 @@ DocumentManager* DocumentManager::self()
     return _self;
 }
 
-DocumentManager::DocumentManager(QObject* parent): QObject(parent)
+DocumentManager::DocumentManager(QObject *parent)
+    : QObject(parent)
 {
     _activeDocument = 0;
 }
 
 DocumentManager::~DocumentManager()
 {
-    foreach(Document * g, _documents) {
+    foreach(Document *g, _documents) {
         removeDocument(g);
     }
 }
 
-void DocumentManager::addDocument(Document* document)
+void DocumentManager::addDocument(Document *document)
 {
     if (!_documents.contains(document)) {
         if (document->dataStructures().count() == 0) {
@@ -93,7 +94,7 @@ void DocumentManager::changeDocument()
 }
 
 
-void DocumentManager::changeDocument(Document* document)
+void DocumentManager::changeDocument(Document *document)
 {
     if (!_documents.contains(document)) {
         _documents.append(document);
@@ -117,13 +118,13 @@ void DocumentManager::changeDocument(Document* document)
 
 void DocumentManager::closeAllDocuments()
 {
-    foreach(Document * document, documentList()) {
+    foreach(Document *document, documentList()) {
         removeDocument(document);
     }
 }
 
 
-void DocumentManager::removeDocument(Document* document)
+void DocumentManager::removeDocument(Document *document)
 {
     if (_documents.removeOne(document)) {
         if (_activeDocument == document) {
@@ -161,9 +162,9 @@ void DocumentManager::convertToDataStructure()
 }
 
 
-Document* DocumentManager::newDocument()
+Document * DocumentManager::newDocument()
 {
-    Document* doc;
+    Document *doc;
     QString name;
 
     // find unused name
@@ -191,7 +192,7 @@ Document* DocumentManager::newDocument()
 }
 
 
-Document* DocumentManager::openDocument(const KUrl& documentUrl)
+Document * DocumentManager::openDocument(const KUrl &documentUrl)
 {
     GraphFilePluginInterface* loader = GraphFileBackendManager::self()->defaultBackend();
     loader->setFile(documentUrl);
@@ -209,7 +210,7 @@ Document* DocumentManager::openDocument(const KUrl& documentUrl)
 }
 
 
-void DocumentManager::saveDocumentAs(Document* document, const KUrl& documentUrl)
+void DocumentManager::saveDocumentAs(Document *document, const KUrl &documentUrl)
 {
     exportDocument(document, documentUrl);
     document->setFileUrl(documentUrl);
@@ -217,7 +218,7 @@ void DocumentManager::saveDocumentAs(Document* document, const KUrl& documentUrl
     return;
 }
 
-void DocumentManager::exportDocument(Document* document, const KUrl& documentUrl)
+void DocumentManager::exportDocument(Document *document, const KUrl &documentUrl)
 {
     GraphFilePluginInterface* serializer = GraphFileBackendManager::self()->defaultBackend();
     serializer->setFile(documentUrl);

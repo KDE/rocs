@@ -64,7 +64,7 @@ public:
      * \param pointerType is the type of the created pointer, it must be existing and registered
      * \return the created pointer element
      */
-    static PointerPtr create(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType);
+    static PointerPtr create(DataStructurePtr dataStructure, DataPtr from, DataPtr to, int pointerType);
 
     /**
      * \return shared pointer to this pointer element

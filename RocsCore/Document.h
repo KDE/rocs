@@ -77,22 +77,27 @@ public:
 
     /**
      * Save graph document under the given \p fileUrl. Old file is not changed.
-     * \param file is expected to be local file
+     *
+     * \param fileUrl path to local file to that document shall be saved
      */
     void saveAs(const QString& fileUrl);
 
     /**
-     * Return path used for saving.
+     * \return path used for saving
      */
     QString fileUrl() const;
 
     /**
      * Set file path used for saving.
+     *
+     * \param fileUrl path to local file for saving the document
      */
     void setFileUrl(const KUrl& fileUrl);
 
     /**
      * Evaluates given string and returns true if identifier is valid, otherwise returns false.
+     *
+     * \param identifier the string to be tested if it is valid property identifier
      */
     static bool isValidIdentifier(const QString& identifier);
 
@@ -100,7 +105,9 @@ public:
     QList< DataStructurePtr >& dataStructures() const;
 
     void remove(DataStructurePtr dataStructure);
-    /** return the size of document' (visual) area
+
+    /**
+     * \return the size of document' (visual) area
      */
     QRectF size();
 
@@ -132,20 +139,23 @@ public:
 
     /** Register new type for data elements. If identifier is alreade in use or if no identifier is
      * provided, a new identifier is created.
+     *
      * \param name of the dataType
      * \param identifier is optional identifier for data type
-     * \return positive integer > 0 if successfully registered, else <=0
+     * \return positive integer >0 if successfully registered, else <=0
      */
     int registerDataType(const QString& name, int identifier=0);
 
     /** Register new type for pointers. If identifier is already in use or if no identifier is
      * provided, a new identifier is created.
+     *
      * \param name of the pointerType
      * \return positive integer >0 if successfully registered, else <=0
      */
     int registerPointerType(const QString& name, int identifier=0);
 
     /** removes this data type and all data elements of this type
+     *
      * \param dataType is positive id>0
      * \return true if a dataType was removed
      */
@@ -153,6 +163,7 @@ public:
 
     /** Removes this pointer type and all data elements of this type.
      * Aborts and returns "false" if pointer type is "0" or if the pointertype does not exists.
+     *
      * \param pointerType is positive id>0
      * \return true if a dataType was removed
      */

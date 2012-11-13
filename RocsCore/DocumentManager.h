@@ -43,13 +43,13 @@ public:
      * \param index of document in document list
      * \return the document
      */
-    Document* document(const int i) const;
+    Document * document(int index) const;
 
     /**
      * Returns the currently active document, or 0 if there document list is empty.
      * \return currently active document
      */
-    Document* activeDocument() const;
+    Document * activeDocument() const;
 
     /**
      * Returns the document list of the document manager.
@@ -68,9 +68,10 @@ public slots:
 
     /**
      * Change active document to be \p document.
+     *
      * \param document is the document to be set active.
      */
-    void changeDocument(Document* document);
+    void changeDocument(Document *document);
 
     /**
      * Change to document with given \p index.
@@ -88,32 +89,35 @@ public slots:
 
     /**
      * Add document to document list and set this document as active document.
+     *
      * \param document that shall be added to document list
      */
-    void addDocument(Document* document);
+    void addDocument(Document *document);
 
     /**
      * Remove document from document list. If the document is currently active,
      * then the last document from document list becomes active. If document
      * list contains only this document, a new (empty) document is created.
      * This method does not write data to document files.
+     *
      * \param document that shall be removed
      */
-    void removeDocument(Document* document);
+    void removeDocument(Document *document);
 
     /**
      * Creates and loads a new graph document.
      * \return created document
      */
-    Document* newDocument();
+    Document * newDocument();
 
     /**
      * Loads graph document specified by \p documentUrl and adds document to document list.
      * Sets loaded document as active document.
+     *
      * \param documentUrl is Url specifying the to be opened document
      * \return loaded document
      */
-    Document* openDocument(const KUrl& documentUrl);
+    Document * openDocument(const KUrl &documentUrl);
 
     /**
      * Save graph document \p document at url \p documentUrl. The internal file url for the
@@ -122,7 +126,7 @@ public slots:
      * \param document is the graph document to be save
      * \param documentUrl is the target file for saving
      */
-    void saveDocumentAs(Document* document, const KUrl& documentUrl);
+    void saveDocumentAs(Document *document, const KUrl &documentUrl);
 
     /**
      * Save graph document \p document at url \p documentUrl. The document is not changed by this
@@ -130,7 +134,7 @@ public slots:
      * \param document is the graph document to be save
      * \param documentUrl is the target file for saving
      */
-    void exportDocument(Document* document, const KUrl& documentUrl);
+    void exportDocument(Document *document, const KUrl &documentUrl);
 
 signals:
     /**
@@ -142,14 +146,14 @@ signals:
      * Signal is emitted if the currently active document is deactivated.
      * (This can be caused by a removal or a change.)
      */
-    void deactivateDocument(Document* document);
+    void deactivateDocument(Document *document);
 
     /**
      * Signal is emitted if \p document was removed from list.
      * If \p document is the active document, both, deactivateDocument() and activeDocument()
      * were called before this signal.
      */
-    void documentRemoved(Document* document);
+    void documentRemoved(Document *document);
 
     /**
      * Signal is emitted if the document list changes and older document index values get invalid.
@@ -157,18 +161,18 @@ signals:
     void documentListChanged();
 
 private:
-    DocumentManager(QObject* parent = 0);
+    DocumentManager(QObject *parent = 0);
     static DocumentManager *_self;
     QList<Document*> _documents;
     Document *_activeDocument;
 };
 
-inline Document* DocumentManager::document(const int i) const
+inline Document * DocumentManager::document(const int index) const
 {
-    return (i < _documents.count() && i >= 0) ? _documents.at(i) : 0;
+    return (index < _documents.count() && index >= 0) ? _documents.at(index) : 0;
 }
 
-inline Document* DocumentManager::activeDocument() const
+inline Document * DocumentManager::activeDocument() const
 {
     return _activeDocument;
 }

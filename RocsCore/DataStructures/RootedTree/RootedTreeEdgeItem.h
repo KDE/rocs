@@ -31,15 +31,19 @@ class QGraphicsSimpleTextItem;
 /*! \brief the Edge drawing on screen.
   long explanation here...
 */
-class RootedTreeEdgeItem : public PointerItem {
+class RootedTreeEdgeItem : public PointerItem
+{
     Q_OBJECT
     QPointF startPoint();
     QPointF endPoint() const;
 
 public:
-    /*! default constructor
-    \param node the libgraph::Node that this item will interact to.
-    \param parent the QGraphicsItem that this Item belongs to. */
+    /**
+     * Default constructor.
+     *
+     * \param edge the tree edge represented by this graphics item
+     * \param parent the graphics scene to that the edge belongs
+     */
     explicit RootedTreeEdgeItem(PointerPtr edge, QGraphicsItem *parent = 0);
     virtual ~RootedTreeEdgeItem();
 

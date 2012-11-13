@@ -57,7 +57,7 @@ public:
      * \param identifier is unique identifier of the pointer type within the document
      * \return the created pointer type
      */
-    static PointerTypePtr create(Document* parent, int identifier);
+    static PointerTypePtr create(Document* document, int identifier);
 
     /**
      * Default destructor.

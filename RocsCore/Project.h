@@ -58,22 +58,26 @@ public:
     /**
      * Constructor for project that creates a project by configuration given
      * in file \p projectFile.
+     *
      * \param projectFile is the absolute path to the project file
      */
-    explicit Project(const KUrl& projectFile);
+    explicit Project(const KUrl &projectFile);
 
     /**
      * Constructor for project that creates a project by configuration given
      * in file \p projectFile inside directory \p projectDirectory
-     * \param projectFile is the absolute path to the project file
+     *
+     * \param projectArchive the local file path to the project file
+     * \param projectDirectory the local file path to the project directory
      */
-    explicit Project(const KUrl& projectArchive, const KUrl& projectDirectory);
+    explicit Project(const KUrl &projectArchive, const KUrl &projectDirectory);
 
     virtual ~Project();
 
     /**
      * Gives the working directory of the project. If no directory was set or the loaded
      * project files does not specify a directory, QString() is returned.
+     *
      * \return project directory
      */
     QString projectDirectory() const;
@@ -82,18 +86,21 @@ public:
 
     /**
      * Set path of project to \p fileUrl and set project to being non-temporary.
+     *
      * \param fileUrl is the designated path to the project
      */
-    void setProjectFile(const KUrl& fileUrl);
+    void setProjectFile(const KUrl &fileUrl);
 
     /**
      * Set project name.
+     *
      * \param name is the new name of the project
      */
-    void setName(const QString& name);
+    void setName(const QString &name);
 
     /**
      * Returns name of the project. Name can be set with \see setName(...).
+     *
      * \return name of the project
      */
     QString name() const;
@@ -101,18 +108,21 @@ public:
     /**
      * Specifies if the project file is only temporary or not.
      * The status changes to non-temporary if a temporary file is saved.
+     *
      * \return true if this is a project not associated to a file, otherwise false
      */
     bool isTemporary();
 
     /**
      * Returns true if the poject is modified.
+     *
      * \return modification status
      */
     bool isModified() const;
 
     /**
      * Get list of all code files of the project that have a path.
+     *
      * \return list of URLs
      */
     QList<KUrl> codeFiles() const;
@@ -120,6 +130,7 @@ public:
     /**
      * Get list of all temporary code files of the project, i.e., code files
      * that do not have a path.
+     *
      * \return list of URLs
      */
     QList<KTextEditor::Document*> codeFilesNew() const;
@@ -128,39 +139,45 @@ public:
      * Add a new temporary code file to the project. This file has not a file name and must
      * be saved before it can be added to the project. Use \see saveCodeFileNew(...) to
      * save temporary file to actually file and update project configuration.
+     *
      * \param document is the temporary code file
      */
-    void addCodeFileNew(KTextEditor::Document* document);
+    void addCodeFileNew(KTextEditor::Document *document);
 
     /**
      * Add code file to project. The file is specified by \p file.
+     *
      * \param file is the local file URL
      */
-    int addCodeFile(const KUrl& file);
+    int addCodeFile(const KUrl &file);
 
     /**
      * Save a temporary code document to a code file and update association to the project.
      * This method calls save method of \p document, saves it to \p file, removes file from
      * set of temporary code files and puts it into the list of code files of the project.
+     *
      * \param document is the temporary code file
      * \param file is the local file URL to where the code file shall be saved
      */
-    void saveCodeFileNew(KTextEditor::Document* document, const KUrl& file);
+    void saveCodeFileNew(KTextEditor::Document *document, const KUrl &file);
 
     /**
      * Remove code file \p document from list of temporary code files of the project.
+     *
      * \param document is the temporary document to be removed
      */
-    void removeCodeFileNew(KTextEditor::Document* document);
+    void removeCodeFileNew(KTextEditor::Document *document);
 
     /**
      * Remove code file from the project. File is specified by its identifier in internal list.
+     *
      * \param fileID is key for QMap that organizes the files
      */
     void removeCodeFile(int fileID);
 
     /**
      * Get list of all graph files of the project that have a path.
+     *
      * \return list of local file URLs
      */
     QList<KUrl> graphFiles() const;
@@ -169,50 +186,57 @@ public:
      * Add a new temporary graph document to the project. This file has not a file name and must
      * be saved before it can be added to the project. Use \see saveGraphFileNew(...) to
      * save temporary file to actually file and update project configuration.
+     *
      * \param document is the temporary code file
      */
-    void addGraphFileNew(Document* document);
+    void addGraphFileNew(Document *document);
 
     /**
      * Add graph file to project. The file is specified by \p file.
+     *
      * \param file is the local file URL
      */
-    int addGraphFile(const KUrl& file);
+    int addGraphFile(const KUrl &file);
 
     /**
      * Save a temporary graph document to a graph file and update association to the project.
      * This method calls save method of \p document, saves it to \p file, removes file from
      * set of temporary graph files and puts it into the list of graph files of the project.
+     *
      * \param document is the temporary graph file
      * \param file is the file url to where the graph file shall be saved
      */
-    void saveGraphFileNew(Document* document, const QString& file);
+    void saveGraphFileNew(Document *document, const QString &file);
 
     /**
      * Save existing graph document file under new filename
      */
-    void saveGraphFileAs(Document* document, const QString& file);
+    void saveGraphFileAs(Document *document, const QString &file);
 
     /**
      * Remove graph file \p document from list of temporary graph files of the project.
+     *
      * \param document is the temporary document to be removed
      */
-    void removeGraphFileNew(Document* document);
+    void removeGraphFileNew(Document *document);
 
     /**
      * Remove graph file from the project. File is specified by its identifier in internal list.
+     *
      * \param fileID is key for QMap that organizes the files
      */
     void removeGraphFile(int fileID);
 
     /**
      * Set journal file of the project.
-     * \param fileUrl is URL of local file.
+     *
+     * \param file is a local file url pointing to the journal file
      */
-    void setJournalFile(const KUrl& file);
+    void setJournalFile(const KUrl &file);
 
     /**
      * Returns URL to local file containing the project journal.
+     *
      * \return URL to local file
      */
     KUrl journalFile() const;
@@ -221,6 +245,7 @@ public:
      * Save the project to its current file if empty or no filename is given. Otherwise if filename is
      * given, save the project in file \p fileUrl. If the project is temporary, i.e., isTemporary() returns
      * true, a file URL is mandatory.
+     *
      * \param fileUrl is the target file, expected as absolute path
      * \return true if save was successful, otherwise false
      */
@@ -228,10 +253,11 @@ public:
 
     /**
      * Exports the project with all its components (scripts, graph, journal) to an archive file.
-     * \param exportUrl is the path to the newly created archive
+     *
+     * \param exportUrl the path to the newly created archive
      * \return true if archive was created, else false
      */
-    bool exportProject(const KUrl& exportUrl);
+    bool exportProject(const KUrl &exportUrl);
 
 private:
     bool writeNewProjectFile();

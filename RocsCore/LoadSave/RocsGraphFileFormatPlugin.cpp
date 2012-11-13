@@ -52,8 +52,8 @@ public:
 };
 
 
-RocsGraphFileFormatPlugin::RocsGraphFileFormatPlugin(QObject* parent) :
-    GraphFilePluginInterface(&pluginAboutData, parent)
+RocsGraphFileFormatPlugin::RocsGraphFileFormatPlugin(QObject *parent)
+    : GraphFilePluginInterface(&pluginAboutData, parent)
 {
     d = new RocsGraphFileFormatPluginPrivate;
 }
@@ -267,7 +267,7 @@ void RocsGraphFileFormatPlugin::readFile()
     setError(None);
 }
 
-void RocsGraphFileFormatPlugin::writeFile(Document& graph)
+void RocsGraphFileFormatPlugin::writeFile(Document &graph)
 {
     KSaveFile saveFile(!file().toLocalFile().endsWith(".graph") ? QString("%1.graph").arg(file().toLocalFile()) : file().toLocalFile());
 
@@ -291,7 +291,7 @@ void RocsGraphFileFormatPlugin::writeFile(Document& graph)
 }
 
 
-QString RocsGraphFileFormatPlugin::serialize(const Document& document)
+QString RocsGraphFileFormatPlugin::serialize(const Document &document)
 {
     d->_buffer.clear();
 

@@ -116,7 +116,7 @@ class RocsGraphFileFormatPlugin: public GraphFilePluginInterface
 {
     Q_OBJECT
 public:
-    explicit RocsGraphFileFormatPlugin(QObject* parent);
+    explicit RocsGraphFileFormatPlugin(QObject *parent);
     ~RocsGraphFileFormatPlugin();
 
     /**
@@ -132,12 +132,11 @@ public:
 
     /**
      * Open given file and imports it into internal format.
-     * \param file is url of a local file
      */
     virtual void readFile();
 
 private:
-    QString serialize(const Document& document);
+    QString serialize(const Document &document);
     void serializeProperties(QObject *o);
 
     RocsGraphFileFormatPluginPrivate* d;

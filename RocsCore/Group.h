@@ -35,19 +35,23 @@ public:
     static GroupPtr create(DataStructurePtr dataStructure, int uniqueIdentifier, int groupType);
 
     /** Default constructor. To create Group elements use \see Group::create(...).
-     *\param parent is the parent DataStructure
-     *\param identifier is the unique identifier for this group
+     *
+     * \param dataStructure the parent DataStructure
+     * \param identifier the unique identifier for this group
+     * \param type the group type
      */
     Group(DataStructurePtr dataStructure, int identifier, int type);
 
     /**
      * Add data element to group.
+     *
      * \param data is data element that shall be added to this group
      */
     void addData(DataPtr data);
 
     /**
      * Add data element list to group;
+     *
      * \param dataList is list of data elements that shall be added to this group
      */
     void addData(DataList dataList);
@@ -56,6 +60,7 @@ public:
 
     /**
      * Remove data element from this group.
+     *
      * \param data is data element that shall be removed
      */
     void removeData(DataPtr data);
@@ -70,7 +75,7 @@ public:
      */
     QString name() const;
 
-    void setName(const QString& name);
+    void setName(const QString &name);
 
 signals:
     void groupElementsChanged();

@@ -35,16 +35,19 @@ class LinkedListPointerItem : public PointerItem
 {
     Q_OBJECT
 public:
-    /*! default constructor
-    \param node the libgraph::Node that this item will interact to.
-    \param parent the QGraphicsITem that this Item belongs to. */
+    /**
+     * Default constructor.
+     *
+     * \param edge the list pointer represented by this graphics item
+     * \param parent the graphics scene to that the edge belongs
+     */
     explicit LinkedListPointerItem(PointerPtr edge, QGraphicsItem *parent = 0);
     virtual ~LinkedListPointerItem();
 
 private:
     QPainterPath createCurves();
     QPolygonF createEndArrow() const;
-    QPolygonF createPath(const QPointF& pos1, const QPointF& pos2) const;
+    QPolygonF createPath(const QPointF &pos1, const QPointF &pos2) const;
 };
 
 #endif //POINTERITEM_H

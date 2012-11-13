@@ -36,17 +36,20 @@ class EdgeItem : public PointerItem
 {
     Q_OBJECT
 public:
-    /*! default constructor
-       \param node the libgraph::Node that this item will interact to.
-       \param parent the QGraphicsITem that this Item belongs to. */
+    /**
+     * Default constructor.
+     *
+     * \param edge the graph edge represented by this graphics item
+     * \param parent the graphics scene to that the edge belongs
+     */
     explicit EdgeItem(PointerPtr edge, QGraphicsItem *parent = 0);
     virtual ~EdgeItem();
 
 private:
     bool _loop;
     QPainterPath createCurves();
-    QPainterPath createLoop(const QPointF& pos) const;
-    QPolygonF createArrow(const QPointF& Pos1, const QPointF& Pos2) const;
+    QPainterPath createLoop(const QPointF &pos) const;
+    QPolygonF createArrow(const QPointF &pos1, const QPointF& pos2) const;
 
 public slots:
     void updatePathLayout();

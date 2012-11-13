@@ -29,7 +29,7 @@ class DotFileFormatPlugin: public GraphFilePluginInterface
 {
     Q_OBJECT
 public:
-    explicit DotFileFormatPlugin(QObject* parent, const QList< QVariant >&);
+    explicit DotFileFormatPlugin(QObject *parent, const QList< QVariant >&);
     ~DotFileFormatPlugin();
 
     /**
@@ -45,7 +45,6 @@ public:
 
     /**
      * Open given file and imports it into internal format.
-     * \param file is url of a local file
      */
     virtual void readFile();
 
