@@ -46,7 +46,7 @@ void DotFileFormatTest::init()
     if (DataStructureBackendManager::self()->backends().count() == 0) {
         QFAIL("No plugin of DS, no way to continue!");
     }
-    DataStructurePluginInterface * pl = DataStructureBackendManager::self()->backend("Graph");
+    DataStructurePluginInterface *pl = DataStructureBackendManager::self()->backend("Graph");
     QVERIFY2(pl,"Could create data structure of type Graph");
 }
 
@@ -54,6 +54,15 @@ void DotFileFormatTest::simpleGraphParsing()
 {
     Document doc("testSimple");
     QVERIFY(DotParser::parse(simple, &doc));
+
+    QVERIFY(doc.dataStructures().count() == 1);
+    if (doc.dataStructures().count() == 0) {
+        return;
+    }
+
+    DataStructurePtr graph = doc.dataStructures().at(0);
+    QVERIFY(graph->dataList().count() == 5);
+    QVERIFY(graph->pointers().count() == 2);
 }
 
 

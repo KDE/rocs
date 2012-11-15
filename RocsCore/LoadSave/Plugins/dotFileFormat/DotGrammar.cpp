@@ -258,7 +258,7 @@ void undirectedDataStructure()
         DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
     }
-    phelper->gd->pointerType(0)->setDirection(PointerType::Unidirectional);
+    phelper->gd->pointerType(0)->setDirection(PointerType::Bidirectional);
 }
 
 void directedDataStructure()
@@ -268,7 +268,7 @@ void directedDataStructure()
         DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
     }
-    phelper->gd->pointerType(0)->setDirection(PointerType::Bidirectional);
+    phelper->gd->pointerType(0)->setDirection(PointerType::Unidirectional);
 }
 
 void dataStructureId(const std::string& str)

@@ -56,8 +56,8 @@ void DotGraphParsingHelper::setDataStructureElementAttributes(QObject* graphElem
     it = attributes.constBegin();
     it_end = attributes.constEnd();
     for (; it != it_end; it++) {
-        kDebug() << "    " << it.key() << "\t=\t'" << it.value() << "'";
-        kDebug() << graphElement->metaObject()->className();
+//         kDebug() << "    " << it.key() << "\t=\t'" << it.value() << "'";
+//         kDebug() << graphElement->metaObject()->className();
         if (it.key() == "label" && strcmp(graphElement->metaObject()->className(), "Edge") == 0) {
             QString label = it.value();
             label.replace("\\n", "\n");
@@ -99,9 +99,9 @@ void DotGraphParsingHelper::applyAttributedList()
         if (attributes.find("bb") != attributes.end()) {
             std::vector< int > v;
             parseIntegers(attributes["bb"].toStdString().c_str(), v);
-            if (v.size() >= 4) {
-                kDebug() << "setting width and height to " << v[2] << v[3];
-            }
+//             if (v.size() >= 4) {
+//                 kDebug() << "setting width and height to " << v[2] << v[3];
+//             }
         }
         AttributesMap::const_iterator it, it_end;
         it = attributes.constBegin();
@@ -136,7 +136,7 @@ void DotGraphParsingHelper::createData(QString identifier)
         return;
     }
 
-    kDebug() << "Creating new data element: " << identifier;
+//     kDebug() << "Creating new data element: " << identifier;
     currentDataPtr = dataStructure->addData(identifier);
     dataMap.insert(identifier, currentDataPtr);
 
@@ -200,7 +200,7 @@ void DotGraphParsingHelper::createPointers()
         DataPtr to = dataMap[toId];
 
         currentPointerPtr = dataStructure->addPointer(from, to);
-        kDebug() << "Creating new pointer: " << from->identifier() << " -> " << to->identifier();
+//         kDebug() << "Creating new pointer: " << from->identifier() << " -> " << to->identifier();
         setPointerAttributes();
 
         fromId = toId;
