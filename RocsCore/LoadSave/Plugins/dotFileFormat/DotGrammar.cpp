@@ -133,6 +133,8 @@ namespace distinct
 
 namespace DotParser {
 
+namespace phx = boost::phoenix;
+
 using boost::phoenix::ref;
 using boost::phoenix::push_back;
 using boost::spirit::standard::alpha;
@@ -455,8 +457,8 @@ bool parseIntegers(const std::string& str, std::vector<int>& v)
     return phrase_parse(str.begin(), str.end(),
         //  Begin grammar
         (
-            int_[push_back(ref(v), _1)]
-                >> *(',' >> int_[push_back(ref(v), _1)])
+            int_[phx::push_back(phx::ref(v), _1)]
+                >> *(',' >> int_[phx::push_back(phx::ref(v), _1)])
         )
         ,
         //  End grammar
