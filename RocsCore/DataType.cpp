@@ -189,7 +189,7 @@ void DataType::renameProperty(const QString& oldName, const QString& newName)
     emit propertyRenamed(oldName, newName);
 }
 
-QList<QString> DataType::properties() const
+QStringList DataType::properties() const
 {
     return d->_propertyList.keys();
 }

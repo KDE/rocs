@@ -169,7 +169,7 @@ void PointerType::renameProperty(const QString& oldName, const QString& newName)
     emit propertyRenamed(oldName, newName);
 }
 
-QList<QString> PointerType::properties() const
+QStringList PointerType::properties() const
 {
     return d->_propertyList.keys();
 }

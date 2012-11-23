@@ -36,8 +36,12 @@ TestLoadSave::TestLoadSave()
 void TestLoadSave::serializeUnserializeTest()
 {
     DocumentManager::self()->addDocument(new Document("testSerialization"));
-    Document* document = DocumentManager::self()->activeDocument();
+    Document *document = DocumentManager::self()->activeDocument();
     QMap<QString, DataPtr> dataList;
+
+    // register additional properties
+    document->dataType(0)->addProperty("testproperty", "default");
+    document->pointerType(0)->addProperty("testproperty", "default");
 
     // Creates a simple Graph with 5 data elements and connect them with pointers.
     DataStructurePtr ds = document->activeDataStructure();
@@ -67,7 +71,11 @@ void TestLoadSave::serializeUnserializeTest()
     // default data structure also present
     QVERIFY2(DocumentManager::self()->activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
 
-    ds = DocumentManager::self()->activeDocument()->dataStructures().at(0);
+    document = DocumentManager::self()->activeDocument();
+    QVERIFY(document->dataType(0)->propertyDefaultValue("testproperty").toString() == "default");
+    QVERIFY(document->pointerType(0)->propertyDefaultValue("testproperty").toString() == "default");
+
+    ds = document->dataStructures().at(0);
     QVERIFY2(ds->dataList().size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2(ds->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
 
@@ -86,7 +94,7 @@ void TestLoadSave::serializeUnserializeTypesTest()
 
     // start with new document!
     DocumentManager::self()->addDocument(new Document("testTypes"));
-    Document* document = DocumentManager::self()->activeDocument();
+    Document *document = DocumentManager::self()->activeDocument();
     DataStructurePtr ds = DocumentManager::self()->activeDocument()->activeDataStructure();
 
     // register 2nd data and pointer type

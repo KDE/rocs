@@ -118,7 +118,7 @@ public:
     /**
      * \return list of all properties, ordered in display order
      */
-    QList<QString> properties() const;
+    QStringList properties() const;
 
     /**
      * Set default value of property \p name to \p value.

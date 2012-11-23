@@ -147,8 +147,12 @@ void RocsGraphFileFormatPlugin::readFile()
                     QString iconString = dataLine.section(' ', 2);
                     // remove rocs_ prefix
                     tmpDataType->setIcon(iconString.remove("rocs_"));
-                }
-                else if (dataLine.startsWith(QLatin1String("Color :")))     tmpDataType->setDefaultColor(QColor(dataLine.section(' ', 2)));
+                } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
+                    QStringList properties = dataLine.section(' ', 2).split(",");
+                    foreach(const QString& property, properties) {
+                        tmpDataType->addProperty(property.section('=',0,0),property.section('=',1));
+                    }
+                } else if (dataLine.startsWith(QLatin1String("Color :")))     tmpDataType->setDefaultColor(QColor(dataLine.section(' ', 2)));
                 else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
                 dataLine = in.readLine().simplified();
             }
@@ -172,6 +176,11 @@ void RocsGraphFileFormatPlugin::readFile()
                     tmpPointerType->setDefaultColor(QColor(dataLine.section(' ', 2)));
                 } else if (dataLine.startsWith(QLatin1String("LineStyle :"))) {
                     tmpPointerType->setLineStyle(Qt::PenStyle(dataLine.section(' ', 2).toInt()));
+                } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
+                    QStringList properties = dataLine.section(' ', 2).split(",");
+                    foreach(const QString& property, properties) {
+                        tmpPointerType->addProperty(property.section('=',0,0),property.section('=',1));
+                    }
                 } else if (!dataLine.isEmpty()) {
                     break;  // go to the last if and finish populating.
                 }
@@ -304,19 +313,33 @@ QString RocsGraphFileFormatPlugin::serialize(const Document &document)
               % QChar('\n');
 
     foreach(int dataTypeIdentifier, document.dataTypeList()) {
+        QStringList properties;
+        foreach (const QString& property, document.dataType(dataTypeIdentifier)->properties()) {
+            properties.append(property + QString('=') + document.dataType(dataTypeIdentifier)->propertyDefaultValue(property).toString());
+        }
+
         d->_buffer += QString("[DataType %1]").arg(QString::number(dataTypeIdentifier)) % QChar('\n')
             % QString("Name : ") % document.dataType(dataTypeIdentifier)->name() % QChar('\n')
             % QString("IconName : ") % document.dataType(dataTypeIdentifier)->iconName() % QChar('\n')
             % QString("Color : ") % document.dataType(dataTypeIdentifier)->defaultColor().name() % QChar('\n')
+            % QString("Properties : ") % properties.join(QChar(','))
             % QChar('\n');
+        d->_buffer += QChar('\n');
     }
 
     foreach(int pointerTypeIdentifier, document.pointerTypeList()) {
+        QStringList properties;
+        foreach (const QString& property, document.pointerType(pointerTypeIdentifier)->properties()) {
+            properties.append(property + QString('=') + document.pointerType(pointerTypeIdentifier)->propertyDefaultValue(property).toString());
+        }
+
         d->_buffer += QString("[PointerType %1]").arg(QString::number(pointerTypeIdentifier)) % QChar('\n')
             % QString("Name : ") % document.pointerType(pointerTypeIdentifier)->name() % QChar('\n')
             % QString("Color : ") % document.pointerType(pointerTypeIdentifier)->defaultColor().name() % QChar('\n')
             % QString("LineStyle : ") % QString::number(document.pointerType(pointerTypeIdentifier)->lineStyle()) % QChar('\n')
+            % QString("Properties : ") % properties.join(QChar(','))
             % QChar('\n');
+        d->_buffer += QChar('\n');
     }
 
     // iterate over all data structures
@@ -376,7 +399,7 @@ void RocsGraphFileFormatPlugin::serializeProperties(QObject *o)
             QString namevalue = QString("%1 : %2 \n").arg(name).arg(value.toString());
         }
 
-        d->_buffer +=  QString("%1 : %2 \n").arg(name, value.toString());
+        d->_buffer += QString("%1 : %2 \n").arg(name, value.toString());
     }
 
     QList<QByteArray> propertyNames = o->dynamicPropertyNames();
