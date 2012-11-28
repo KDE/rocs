@@ -58,28 +58,29 @@
 <chapter id="introduction">
 <title>Introduction</title>
 <para>
-In this chapter we provide an overview of &rocs;.
-For the reader who wants to directly start using &rocs;, we suggest to read at least <xref linkend="introduction-nutshell"/> and using <xref linkend="scripting" /> as a reference for writing scripts.
+In this chapter we provide an overview of the core features and the workflow of &rocs;.
+For the eager reader, who wants to start using &rocs; immediately, we suggest to read at least <xref linkend="introduction-nutshell"/> and using <xref linkend="scripting" /> as a reference when writing algorithms.
 </para>
 
 <sect1 id="introduction-goals">
 <title>Goals, Target Audience and Workflow</title>
 <para>&rocs; is a Graph Theory IDE for everybody interested in designing and analyzing graph algorithms. This explicitly includes</para>
 <itemizedlist>
-    <listitem><para>lecturers who want to demonstrate algorithms to their students,</para></listitem>
-    <listitem><para>students who want to understand and see how their algorithm works,</para></listitem>
-    <listitem><para>and everybody who is interested in data structures and algorithms.</para></listitem>
+    <listitem><para>lecturers, who want to demonstrate algorithms to their students,</para></listitem>
+    <listitem><para>students, who want to understand and see how their algorithm perform,</para></listitem>
+    <listitem><para>and everybody, who is interested in data structures and algorithms.</para></listitem>
 </itemizedlist>
 
-<para>For all these users, &rocs; provides an easy to use data structure editor to set up graphs, lists or trees, a powerful QtScript scripting engine to execute algorithms, and several helper tools to set up your data structures for your simulations and experiments.
+<para>For all these users, &rocs; provides an easy to use data structure editor for creating the data structures, a powerful scripting engine to execute algorithms, and several helper tools for your simulations and experiments.
 </para>
 
 <para>
 The typical workflow when using &rocs; is to start by creating a graph with the visual graph editor.
-You can do this either by hand, this is adding data elements and connect them, or by using one of the helper algorithms (if available for the current data structure plugin) that can be found at <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Tools</guimenuitem> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
+You can do this either by hand, this is adding data elements and connect them, or by using one of the data structure generators (if available for the currently selected data structure backend).
+Data structure generators can be found at <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Tools</guimenuitem> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
 Further, you can assign values to the data structure elements, either by hand or using <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Tools</guimenuitem> <guimenuitem>Assign Values</guimenuitem></menuchoice>.
-Finally, you can write your algorithm in JavaScript and execute it at the just created data structure.
-The changes made by your algorithm are directly visible at the visual graph editor whiteboard.
+Finally, you can write your algorithm in JavaScript and execute it with the just created data structure.
+All changes that your algorithm perform at the data structure will be directly visible at the visual graph editor.
 </para>
 
 <screenshot>
@@ -99,7 +100,8 @@ The changes made by your algorithm are directly visible at the visual graph edit
 <title>&rocs; in a Nutshell</title>
 <para>
 In this section we provide a compact overview of the core elements of &rocs;.
-We explain the important notions of data structures, data structure plugins, and element types. Knowledge of these elements is useful to understand how data structures can be created and modified in &rocs;.
+We explain the important notions of data structures, data structure backends, and element types.
+Understanding of these concepts is useful to understand how data structures can be created and modified in &rocs;.
 </para>
 <para>
 In general &rocs; works with projects: when opening &rocs; an empty project is created and you can replace it by loading or importing another project.
@@ -107,11 +109,11 @@ Hereby, a project itself consists of <emphasis>graph documents</emphasis> and <e
 </para>
 
 <sect2>
-<title>Graph Documents and Data Structure Plugins</title>
+<title>Graph Documents and Data Structure Backends</title>
 <para>
 A graph document represents the content of a whiteboard in the visual graph editor.
-Hereby, a graph document can contain several data structures at once, but only one data structure plugin.
-Data structure plugins are present for several graph types (general graphs, linked lists, rooted trees) and provide for their specific graph types additional functionality. That can be automatic positioning of the elements, special icon sets, or an extended set of script functions for use in your algorithms. (for details look at the corresponding handbook section). It is possible to change the data structure plugin of a graph document, though information can be lost (e.g., edges of a circle in a general graph won't be added to a tree, if you switch to the rooted tree plugin).
+Hereby, a graph document can contain several data structures at once, but only one data structure backends.
+Data structure backends are present for several graph types (general graphs, linked lists, rooted trees) and provide for their specific graph types additional functionality. That can be automatic positioning of the elements, special icon sets, or an extended set of script functions for use in your algorithms. (for details look at the corresponding handbook section). It is possible to change the data structure backend of a graph document, though information can be lost (e.g., edges of a circle in a general graph won't be added to a tree, if you switch to the rooted tree backend).
 </para>
 <para>
 Graph documents form also the base for defining pointer types and data types.
@@ -121,7 +123,7 @@ Graph documents form also the base for defining pointer types and data types.
 <sect2>
 <title>Data Structures</title>
 <para>
-Data structures are the base of all work in &rocs;. You can add one or several of them to a graph document, add data elements (nodes, datums) and pointers to them, and modify them by scripts. For this, each data structure has its unique name by which it can be accessed from your scripts. Due to your choice of the current data structure plugin it can happen that you cannot modify the data structures arbitrarily (e.g., a tree should never contain a cycle). The data structure plugin is determined by the data structure plugin associated with the corresponding graph document that contains the data structure.
+Data structures are the base of all work in &rocs;. You can add one or several of them to a graph document, add data elements (nodes, datums) and pointers to them, and modify them by scripts. For this, each data structure has its unique name by which it can be accessed from your scripts. Due to your choice of the current data structure backend it can happen that you cannot modify the data structures arbitrarily (e.g., a tree should never contain a cycle). The data structure backend is determined by the data structure backend associated with the corresponding graph document that contains the data structure.
 </para>
 </sect2>
 
@@ -146,7 +148,7 @@ For such use cases you can define data types. Each data type has its own icon an
 <sect2>
 <title>Dynamic Properties</title>
 <para>
-Every data element and pointer can have many properties. Some of these properties are default from data structure plugin. See the documentation of data structures plugin for more details.
+Every data element and pointer can have many properties. Some of these properties are default from data structure backend. See the documentation of the data structure backend for more details.
 To add further properties to the data elements and pointers, you can add <emphasis>dynamic properties</emphasis> to them.
 Each dynamic property is identified by its name and can contain any value associated with it. The name must start with a letter (a-z or A-Z) and can contain only letters, numbers and '_'. If you try to use any invalid character in the property name, the property will not be changed.
 </para>
@@ -159,7 +161,7 @@ You can also use the scripts. You just need to use the <literal>add_property</li
 After that, you can use node/pointer.propertyName to set/get the values.
 </para>
 <para>
-    Here is an example of how to use dynamic properties with graph plugin.
+    Here is an example of how to use dynamic properties with data structure backend "Graph".
     <programlisting>
 nodes = myGraph.list_nodes()
 for (var i = 0; i &lt; nodes.length; ++i ){
@@ -188,7 +190,7 @@ For this, we want to specify two pointer types, one to display matching edges an
 <sect2>
 <title>Generate a Graph</title>
 <para>
-For the graph plugin, &rocs; ships a helper tool that can generate graphs. We go to <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
+For the data structure backend "Graph", &rocs; ships a helper tool that can generate graphs. We go to <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
 There we generate a "Random Graph" with 30 nodes, 90 edges, and with seed 1 (the seed is the starting seed for the random graph generator; using the same seed multiple times results in same and reproducible graphs).
 Finally, we modify the graph name at the data structure panel and call the graph <literal>testgraph</literal>.
 </para>
@@ -474,14 +476,14 @@ positions.</para></listitem>
 </sect2>
 
 <sect2 id="user-interface-graph-properties-datastructure-individual">
-<title>Configure Plugin Options of Data Structure</title>
+<title>Configure the Data Structure Backend</title>
 <para>
-    Each data structure plugin can add options to the data structure configuration dialog.
-    The standard data structure plugins provide the following options:
+    Each data structure backend can add options to the data structure configuration dialog.
+    The standard data structure backend provide the following options:
 </para>
 
 <sect3>
-<title>Graph Plugin</title>
+<title>Graph Backend</title>
 <para>
     Use <guilabel>Graph Type</guilabel> to select the type of the graph. The meaning of these types is as follows:
 </para>
@@ -502,7 +504,7 @@ positions.</para></listitem>
 </sect3>
 
 <sect3>
-<title>Rooted Tree Plugin</title>
+<title>Rooted Tree Backend</title>
 <para>
     By checking the <guilabel>Show all pointers</guilabel> property, all pointers between the tree nodes are shown.
     If unchecked, multiple pointers between same nodes are collapsed to one.
@@ -520,8 +522,8 @@ positions.</para></listitem>
 &rocs; internally uses the QtScript scripting engine, which is a specific JavaScript engine.
 This means, all algorithms that you implement must use JavaScript.
 How JavaScript works and how to write JavaScript code is not covered in this handbook, though we explain how to access data structures, data elements and pointers of your data structures from the scripting engine.
-Since you never use the basic data structure object but one that is provided by the currently used data structure plugin, the functionality of the data structure is extended by the corresponding plugin and you should have a look at the specialized functionality.
-Especially, data structure plugins use the common terms from their domain (nodes and edges in graphs, leafs and roots in trees, etc.)
+Since you never use the basic data structure object but one that is provided by the currently used data structure backend, the functionality of the data structure is extended by the corresponding backend and you should have a look at the specialized functionality.
+Especially, data structure backends use the common terms from their domain (nodes and edges in graphs, leafs and roots in trees, etc.)
 </para>
 <para>
 It is important to know that changes done by the scripting engine are directly reflected at the properties at the visual graph editor whiteboard.
@@ -531,9 +533,9 @@ Hence, the scripts actually modify the data structures.
 <sect1 id="scripting-data-structure">
 <title>The Base Data Structure Elements</title>
 <para>
-Every plugin provides a special set of functions and properties for its data structures and their elements.
-But also every plugin provides the properties and functions that are defined for the base data structure.
-Hence, everything explained in this sections is available for every data structure plugin.
+Every backend provides a special set of functions and properties for its data structures and their elements.
+But also every backend provides the properties and functions that are defined for the base data structure.
+Hence, everything explained in this sections is available for every data structure backend.
 </para>
 <sect2><title>Base Data Structures Properties</title>
 <para>
@@ -620,8 +622,8 @@ Each pointer object provides the following methods:
 </sect2>
 </sect1>
 
-<sect1 id="scripting-plugin-graph">
-<title>The Graph Plugin</title>
+<sect1 id="scripting-backend-graph">
+<title>The Graph Backend</title>
 <sect2>
 <title>Graph Properties and Functions</title>
 
@@ -670,7 +672,7 @@ Given edges of a data structure of type "Graph", only the properties of the base
 <sect2>
 <title>Graph Structure Algorithms</title>
 <para>
-The graph plugin provides some special functions that can be used from the scripting engine.</para>
+The graph backend provides some special functions that can be used from the scripting engine.</para>
 <variablelist>
 <varlistentry>
 <term>Shortest Path Computation</term>
@@ -701,8 +703,8 @@ The graph plugin provides some special functions that can be used from the scrip
 </sect2>
 </sect1>
 
-<sect1 id="scripting-plugin-linkedlist">
-<title>The Linked List Plugin</title>
+<sect1 id="scripting-backend-linkedlist">
+<title>The Linked List Backend</title>
 <sect2>
 <title>Linked List Properties and Functions</title>
 
@@ -737,8 +739,8 @@ Given edges of a data structure of type "Linked List", only the properties of th
 </sect2>
 </sect1>
 
-<sect1 id="scripting-plugin-rootedtree">
-<title>The Rooted Tree Plugin</title>
+<sect1 id="scripting-backend-rootedtree">
+<title>The Rooted Tree Backend</title>
 <sect2>
 <title>Rooted Tree Properties and Functions</title>
 
