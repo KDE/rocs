@@ -890,7 +890,7 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
     </itemizedlist>
 
 <sect2 id="format-specification-tgf">
-<title>Trivial Graph Format</title>
+<title>Trivial Graph File Format</title>
 <para>
     The <emphasis>Trivial Graph Format</emphasis> (TGF) is a simple text-based file format for describing graphs.
     A TGF file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges.
@@ -920,6 +920,37 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 </programlisting>
 </sect3>
 </sect2>
+
+<sect2 id="format-specification-dot">
+<title>DOT Language / Graphviz Graph File Format</title>
+<para>
+    The DOT language is a plain text graph description language that allows both,a good human readable representation of graphs as well as an efficient processing by graph layout programs.
+    DOT is the default file format for the Graphviz graph visualization suite, but is also widely used by other graph tools.
+    The usual file endings for DOT are <emphasis>.gv</emphasis> and <emphasis>.dot</emphasis>.
+</para>
+
+<sect3>
+<title>Unsupported Features</title>
+<para>
+    &rocs; can parse every graph file that contains a graph specified according to the DOT language specification<footnote><para>http://www.graphviz.org/content/dot-language</para></footnote>.
+    The support of language features is complete, despite of the following exceptions:
+</para>
+    <itemizedlist>
+        <listitem><para>subgraph: Due to the lack of a subgraph concept in &rocs;, subgraphs are only imported as a set of date elements and connections. Especially, connections to or from subgraphs are not imported.</para></listitem>
+        <listitem><para>&HTML; and &XML; attributes: Attributes (like labels) that contain &HTML; or &XML; syntax are read unchanged. Especially, not adjustment of fonts and styles are read from those attributes.</para></listitem>
+    </itemizedlist>
+</sect3>
+<sect3>
+<title>Example</title>
+<programlisting>
+digraph myGraph {
+    a -> b -> c;
+    b -> d;
+}
+</programlisting>
+</sect3>
+</sect2>
+
 </sect1>
 </chapter>
 
