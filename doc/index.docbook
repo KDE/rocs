@@ -365,7 +365,7 @@ By keeping the mouse pointer pressed at the button, a context menu shows up at w
 <guilabel>Add Connection</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a context menu shows up at which the pointer type of the new created pointers can be selected (only if different pointer types exist).</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsdelete.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-action-rocsdeletedata.png" format="PNG"/></imageobject>
 </inlinemediaobject>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
 <listitem><para>
@@ -426,92 +426,72 @@ positions.</para></listitem>
 </sect2>
 </sect1>
 
-<sect1 id="user-interface-graph-properties">
-<title>The Graph Properties Panel</title>
+<sect1 id="user-interface-documents">
+<title>Working with Graph Documents</title>
 <para>
-    At top of the panel the current graph document can be selected.
-    Below of this, new data structures can be created or existing data structures can be configured.
+    A &rocs; project contains one or multiple graph documents that can be edited with the visual graph editor.
+    Further, each document can contain an arbitrary number of data structures.
+    Here, data structures of a document all use the same data structure backend.
+    This section will explain how to switch between documents and how to create new ones.
 </para>
 
-<sect2 id="user-interface-graph-properties-document">
-<title>Document Selection and Properties</title>
+<sect2 id="user-interface-documents-selector">
+<title>The Document Selector Bar</title>
 <para>
-    At top of the panel, you can select the current graph document.
-    The graph document represents the whiteboard that is shown in the visual graph editor.
+    The document selector bar is used to select the current graph document and further the current data structure.
+    Using the visual graph editor tools to create data structures elements will automatically add those newly created elements to the current data structure.
+    Also, this bar gives direct access to delete existing or create new data structures within the current document.
+</para>
+
+<itemizedlist>
+<listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsnew.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>New</guilabel>: This action creates a new data structure using an automatic naming pattern given by the data structure backend.
+The created data structure is added to the currently selected graph document.
+</para></listitem>
+<listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsdelete.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Delete</guilabel>: This action deletes the data structure that is currently selected in the data structure selector for the current document.
+</para></listitem>
+<listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Data Structure Properties</guilabel>: Open a dialog that gives access to the data structure properties.
+</para></listitem>
+<listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/></imageobject>
+</inlinemediaobject>
+<guilabel>Document Properties</guilabel>: Open a dialog that gives access to the document properties as well as the data and pointer types of the document.
+</para></listitem>
+</itemizedlist>
+
+<screenshot>
+<screeninfo>The Main Toolbar.</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="document-selector.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Document Selector Bar.</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+</sect2>
+
+<sect2 id="user-interface-documents-menu">
+<title>Create and Import Graph Documents</title>
+<para>
     To create a new graph document or to add an existing one to the project, use <menuchoice><guimenu>Project</guimenu> <guimenuitem>New Graph Document</guimenuitem></menuchoice> or <menuchoice><guimenu>Project</guimenu> <guimenuitem>Import &rocs; Graph</guimenuitem></menuchoice>.
     You can also import graph documents from third party applications (for this, see <xref linkend="import-export" />).
-    By pressing <guibutton>Properties</guibutton>, the properties of the graph document can be accessed.
 </para>
 </sect2>
 
-<sect2 id="user-interface-graph-properties-datastructure-create">
-<title>Create New Data Structure</title>
-<para>
-    You can create a new data structure by inserting an identifier (without spaces or special characters) and then press <guibutton>Add</guibutton>.
-    The identifier is used to access the data structure from algorithms.
-</para>
-</sect2>
-
-<sect2 id="user-interface-graph-properties-datastructure-config">
-<title>Configure Data Structure</title>
-<para>
-    All available data structures from the current graph document are shown in a selection list.
-    When selecting one, configurations for the corresponding data structure are shown:
-</para>
-
-<itemizedlist>
-    <listitem><para>
-    <guibutton>Delete</guibutton>: Delete this data structure.
-    </para></listitem>
-    <listitem><para>
-    <guilabel>Name:</guilabel> This is the identifier of the data structure. This identifier is used to access the data structure from algorithms.
-    </para></listitem>
-    <listitem><para>
-    <guilabel>Display Options</guilabel>
-        Below, all data and pointer types of the data structure are shown.
-        By pressing the name, the configuration dialogs for the corresponding types can be opened.
-        Further, visibility of data elements and pointers, names, and values of elements of given type can be controlled by pressing the corresponding buttons.
-    </para></listitem>
-</itemizedlist>
-</sect2>
-
-<sect2 id="user-interface-graph-properties-datastructure-individual">
-<title>Configure the Data Structure Backend</title>
-<para>
-    Each data structure backend can add options to the data structure configuration dialog.
-    The standard data structure backend provide the following options:
-</para>
-
-<sect3>
-<title>Graph Backend</title>
-<para>
-    Use <guilabel>Graph Type</guilabel> to select the type of the graph. The meaning of these types is as follows:
-</para>
-<itemizedlist>
-    <listitem><para>
-    <guilabel>Directed Graph</guilabel>: Graph with directed edges at which several same orientated edges between same nodes are not allowed.
-    </para></listitem>
-    <listitem><para>
-    <guilabel>Undirected Graph</guilabel>: Graph with undirected edges at which several edges between same nodes are not allowed.
-    </para></listitem>
-    <listitem><para>
-    <guilabel>Directed Multigraph</guilabel>: Graph with directed edges at which several same orientated edges between same nodes are allowed.
-    </para></listitem>
-    <listitem><para>
-    <guilabel>Undirected Multigraph</guilabel>: Graph with undirected edges at which several edges between same nodes are allowed.
-    </para></listitem>
-</itemizedlist>
-</sect3>
-
-<sect3>
-<title>Rooted Tree Backend</title>
-<para>
-    By checking the <guilabel>Show all pointers</guilabel> property, all pointers between the tree nodes are shown.
-    If unchecked, multiple pointers between same nodes are collapsed to one.
-</para>
-</sect3>
-
-</sect2>
 </sect1>
 </chapter>
 
@@ -626,6 +606,24 @@ Each pointer object provides the following methods:
 <title>The Graph Backend</title>
 <sect2>
 <title>Graph Properties and Functions</title>
+
+
+
+<sect3>
+<title>Graph Backend Specific Properties</title>
+<para>
+    The data structure properties dialog allows access to configure settings specific to the Graph backend.
+    There, with <guilabel>Graph Type</guilabel> you can select the type of the graph. The meaning of these types is as follows:
+</para>
+<itemizedlist>
+    <listitem><para>
+    <guilabel>Graph</guilabel>: Graph at which same edges (with respect to start and end points) may not exist multiple times.
+    </para></listitem>
+    <listitem><para>
+    <guilabel>Multigraph</guilabel>: Graph at which same edges (with respect to start and end points) may exist multiple times.
+    </para></listitem>
+</itemizedlist>
+</sect3>
 
 <sect3>
 <title>The Graph Structure</title>
@@ -743,6 +741,15 @@ Given edges of a data structure of type "Linked List", only the properties of th
 <title>The Rooted Tree Backend</title>
 <sect2>
 <title>Rooted Tree Properties and Functions</title>
+
+<sect3>
+<title>Rooted Tree Backend</title>
+<para>
+    The data structure properties dialog allows access to configure settings specific to the Graph backend.
+    There, by checking the <guilabel>Show all pointers</guilabel> property, all pointers between the tree nodes are shown.
+    If unchecked, multiple pointers between same nodes are collapsed to one.
+</para>
+</sect3>
 
 <sect3>
 <title>The Rooted Tree Structure</title>
