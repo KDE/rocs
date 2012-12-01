@@ -348,29 +348,33 @@ The user interface is divided into several logical parts as presented at the scr
 <para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the visual graph editor whiteboard:</para>
 <itemizedlist>
 <listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsselectmove.png" format="PNG"/></imageobject>
+</inlinemediaobject>
 <guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or pointers to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
 <listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsadddata.png" format="PNG"/></imageobject>
+</inlinemediaobject>
 <guilabel>Add Data</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
 By keeping the mouse pointer pressed at the button, a context menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
 <listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsaddedge.png" format="PNG"/></imageobject>
+</inlinemediaobject>
 <guilabel>Add Connection</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a context menu shows up at which the pointer type of the new created pointers can be selected (only if different pointer types exist).</para></listitem>
 <listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocsdelete.png" format="PNG"/></imageobject>
+</inlinemediaobject>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
 <listitem><para>
+<inlinemediaobject><imageobject>
+<imagedata fileref="hi22-action-rocszoom.png" format="PNG"/></imageobject>
+</inlinemediaobject>
 <guilabel>Zoom</guilabel>: Click at the whiteboard, keep the &LMB; pressed, and by this draw a rectangle. The whiteboard will be zoomed to the selected area. Using the mousewheel to zoom in or out as well.
 A double click with the &LMB; restores the original zoom.</para></listitem>
 </itemizedlist>
-<screenshot>
-<screeninfo>The Main Toolbar.</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="rocs-toolbar-main.png" format="PNG" />
-</imageobject>
-<textobject>
-<phrase>The Main Toolbar.</phrase>
-</textobject>
-</mediaobject>
-</screenshot>
 </sect2>
 
 <sect2 id="user-interface-toolbars-alignment">
@@ -419,17 +423,6 @@ positions.</para></listitem>
 </inlinemediaobject>
 <guilabel>Minimize Crossing Edges</guilabel>: Rearrange the selected data elements to minimize the number of crossing connections (application of the Fruchterman-Reingold algorithm).</para></listitem>
 </itemizedlist>
-<screenshot>
-<screeninfo>The Alignment Toolbar.</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="rocs-toolbar-alignment.png" format="PNG" />
-</imageobject>
-<textobject>
-<phrase>The Alignment Toolbar.</phrase>
-</textobject>
-</mediaobject>
-</screenshot>
 </sect2>
 </sect1>
 
