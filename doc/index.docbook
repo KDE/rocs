@@ -278,26 +278,34 @@ The user interface is divided into several logical parts as presented at the scr
 </screenshot>
 <variablelist>
 <varlistentry>
+    <term>Document Selector</term>
+    <listitem><para>At this top menu bar you must select the current document and data structure.
+        Creating and deleting of data structures as well as access to data structure properties is also possible there.
+    </para></listitem>
+</varlistentry>
+<varlistentry>
     <term>Visual Graph Editor</term>
-    <listitem><para>This is the whiteboard where to create and modify your data structures. Right click at the whiteboard, at data elements, or at pointers to open context menus. You can use the tools from the <emphasis>Visual Graph Editor Toolbar</emphasis> to modify the elements at the visual graph editor whiteboard.</para></listitem>
+    <listitem><para>This is the whiteboard at which data structures can be created and modified. Right click at the whiteboard, at data elements, or at pointers to open context menus. You can use the tools from the <emphasis>Visual Graph Editor Toolbar</emphasis> to modify the elements at the visual graph editor whiteboard.</para></listitem>
 </varlistentry>
 <varlistentry>
     <term>Visual Graph Editor Toolbar</term>
     <listitem><para>
-        These are the tools to be used to modify the data structures at the visual graph editor whiteboard.
-        Using the <guibutton>Add Data</guibutton> or <guibutton>Add Connection</guibutton> to create new data elements, adds new data elements or new pointers, respectively, to the currently selected data structure in the <emphasis>Graph Properties Widget</emphasis>.
-        Note that <guibutton>Add Data</guibutton> and <guibutton>Add Connection</guibutton> both have context menus to select the data or pointer type of that the new elements shall be created.
+        This toolbar provides all tools for the visual graph editor.
+        Use the <guibutton>Add Data</guibutton> or <guibutton>Add Connection</guibutton> tool to create new elements or to connect elements, respectively.
+        New data elements are added to the data structure that is currently selected at the <emphasis>Document Selector</emphasis>.
+        Note that <guibutton>Add Data</guibutton> and <guibutton>Add Connection</guibutton> both have context menus to select the type of which the created elements shall be.
         For details see <xref linkend="user-interface-toolbars" />.
     </para></listitem>
 </varlistentry>
 <varlistentry>
-    <term>Graph Properties</term>
+    <term>Side Bar</term>
     <listitem><para>
-        At top you can select the current graph document, open its configuration dialog, and add new data structures to the current graph document (&ie; to the current whiteboard).
-        Below you can select the current data structure.
-        There you can modify which data element and pointer properties (names, values, objects) are visible by pressing the respective buttons.
-        By click at the data and pointer type names you can access their configuration dialogs.
-        For details see <xref linkend="user-interface-graph-properties" />.
+        At the right, you can find the side bar that provides several tools for your workflow:
+        <itemizedlist>
+        <listitem><para>Element Types: This widget gives you direct access to the available pointer and data types.</para></listitem>
+        <listitem><para>Journal: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para></listitem>
+        <listitem><para>Documentation: To get direct access to the handbook and by this to the script documentation, you can open this widget.</para></listitem>
+        </itemizedlist>
     </para></listitem>
 </varlistentry>
 <varlistentry>
@@ -309,17 +317,16 @@ The user interface is divided into several logical parts as presented at the scr
     </para></listitem>
 </varlistentry>
 <varlistentry>
-    <term>Debug &amp; Script Output</term>
+    <term>Script Output</term>
     <listitem><para>
-        This text area either shows debug information or the script output of your algorithm, depending on selection of the output setting.
-        If the script throws an error, automatically the debug output is selected.
-        Besides the debug messages, the debug output also contains all messages.
+        This text area either shows debug information or the script output of your algorithm, depending on the toggled setting at the top of this widget.
+        If the script throws an error, automatically the debug output is presented.
     </para></listitem>
 </varlistentry>
 <varlistentry>
     <term>Controls</term>
     <listitem><para>
-        In this area you can find the controls for script executions.
+        Here you can find the controls for executing scripts.
         You can execute the script that is currently open at the script editor by pressing <guiicon>Run</guiicon>.
         While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.
         Note that the <guibutton>One Step</guibutton> execution only stops at specific keywords (see <xref linkend="scripting" />).
