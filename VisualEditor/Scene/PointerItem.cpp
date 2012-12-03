@@ -112,7 +112,7 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
     connect(pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updateAttributes()));
     connect(pointer.get(), SIGNAL(pointerTypeChanged(int)), this, SLOT(updateAttributes()));
 
-    setZValue(- d->_index);
+    setZValue(-1 - d->_index);
     setFlag(ItemIsSelectable, true);
     updateAttributes();
     this->show();
