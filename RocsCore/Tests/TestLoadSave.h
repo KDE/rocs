@@ -36,6 +36,8 @@ private slots:
     void serializeUnserializeTest();
     void serializeUnserializeTypesTest();
     void projectLoadSaveTest();
+
+    void loadMultipleLayerGraphTest();
 };
 
 #endif

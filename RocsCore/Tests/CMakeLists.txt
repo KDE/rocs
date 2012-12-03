@@ -59,6 +59,7 @@ add_test(TestDynamicProperties TestDynamicProperties)
 set (TestLoadSave_SRCS
     ../../RocsCore/Tests/TestLoadSave.cpp
 )
+file(COPY TestGraphFiles DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 kde4_add_executable(TestLoadSave ${TestLoadSave_SRCS} )
 target_link_libraries( TestLoadSave
     rocscore

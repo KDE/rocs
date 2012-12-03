@@ -159,5 +159,16 @@ void TestLoadSave::projectLoadSaveTest()
     delete testProject2;
 }
 
+void TestLoadSave::loadMultipleLayerGraphTest()
+{
+    DocumentManager::self()->openDocument(KUrl::fromLocalFile("TestGraphFiles/multipleLayerGraph.graph"));
+    Document *document = DocumentManager::self()->activeDocument();
+
+    QVERIFY2(document->pointerTypeList().length() == 2, "two pointer types expected");
+    QVERIFY2(!document->activeDataStructure()->dataList().first()->property("name").toString().isEmpty(), "property must be present");
+    QVERIFY2(!document->activeDataStructure()->dataList().first()->property("target").toString().isEmpty(), "property must be present");
+}
+
+
 
 QTEST_KDEMAIN_CORE(TestLoadSave)
