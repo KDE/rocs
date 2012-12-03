@@ -53,8 +53,9 @@ Topology::~Topology()
 void Topology::applyMinCutTreeAlignment(DataList dataList)
 {
     // dataList must be at least of length 2, and two nodes cannot have crossing edges
-    if (dataList.count() < 3)
+    if (dataList.count() < 3) {
         return;
+    }
 
     PositionVec position_vec(dataList.count());
 
@@ -67,6 +68,14 @@ void Topology::applyMinCutTreeAlignment(DataList dataList)
     }
     qSort(xList.begin(), xList.end());
     qSort(yList.begin(), yList.end());
+
+    // do not perform algorithm if graph is very dense:
+    // this prevents very long algorithm computations and possible threading issues
+    if (xList.last() - xList.first() < 10 && yList.last() - yList.first() < 10 ) {
+        qDebug() << "Aborting min cut alignment: nodes are already close to each other.";
+        return;
+    }
+
     topology_type topology(xList.first(), yList.first(), xList.last(), yList.last());
 
     // create IDs for all nodes
