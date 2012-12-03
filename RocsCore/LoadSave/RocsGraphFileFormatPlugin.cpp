@@ -135,8 +135,11 @@ void RocsGraphFileFormatPlugin::readFile()
             identifier.remove(']');
             int tmpDataTypeId = identifier.toInt();
             if (tmpDataTypeId != 0) { // if == 0, this is default and default is automatically created
-                kDebug() << "Could not register data type with identifier " << tmpDataTypeId << ", it is already in use.";
                 tmpDataTypeId = document->registerDataType(QString(), identifier.toInt());
+                if (tmpDataTypeId != identifier.toInt()) {
+                    kWarning() << "Could not register already used data type << " << identifier.toInt()
+                             << ": use identifier " << tmpDataTypeId << " instead.";
+                }
             }
             DataTypePtr tmpDataType = document->dataType(tmpDataTypeId);
 
@@ -165,8 +168,11 @@ void RocsGraphFileFormatPlugin::readFile()
             identifier.remove(']');
             int tmpPointerTypeId = identifier.toInt();
             if (tmpPointerTypeId != 0) { // if == 0, this is default and default is automatically created
-                kDebug() << "Could not register pointer type with identifier " << tmpPointerTypeId << ", it is already in use.";
                 tmpPointerTypeId = document->registerPointerType(QString(), identifier.toInt());
+                if (tmpPointerTypeId != identifier.toInt()) {
+                    kWarning() << "Could not register already used pointer type << " << identifier.toInt()
+                             << ": use identifier " << tmpPointerTypeId << " instead.";
+                }
             }
             PointerTypePtr tmpPointerType = document->pointerType(tmpPointerTypeId);
 
