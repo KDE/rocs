@@ -150,7 +150,9 @@ void RocsGraphFileFormatPlugin::readFile()
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
                     QStringList properties = dataLine.section(' ', 2).split(",");
                     foreach(const QString& property, properties) {
-                        tmpDataType->addProperty(property.section('=',0,0),property.section('=',1));
+                        if (!property.isEmpty()) {
+                            tmpDataType->addProperty(property.section('=',0,0),property.section('=',1));
+                        }
                     }
                 } else if (dataLine.startsWith(QLatin1String("Color :")))     tmpDataType->setDefaultColor(QColor(dataLine.section(' ', 2)));
                 else if (!dataLine.isEmpty())               break;  // go to the last if and finish populating.
@@ -179,7 +181,9 @@ void RocsGraphFileFormatPlugin::readFile()
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
                     QStringList properties = dataLine.section(' ', 2).split(",");
                     foreach(const QString& property, properties) {
-                        tmpPointerType->addProperty(property.section('=',0,0),property.section('=',1));
+                        if (!property.isEmpty()) {
+                            tmpPointerType->addProperty(property.section('=',0,0),property.section('=',1));
+                        }
                     }
                 } else if (!dataLine.isEmpty()) {
                     break;  // go to the last if and finish populating.
@@ -269,7 +273,9 @@ void RocsGraphFileFormatPlugin::readFile()
         else if (str.contains(':')) {
             QString propertyName = str.section(':', 0, 0).trimmed();
             QString propertyValue = str.section(':', 1, 1).trimmed();
-            tmpObject->setProperty(propertyName.toUtf8() , propertyValue);
+            if (!propertyName.isEmpty()) {
+                tmpObject->setProperty(propertyName.toUtf8() , propertyValue);
+            }
         }
     }
     setGraphDocument(document);
