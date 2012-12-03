@@ -172,11 +172,19 @@ void PointerItem::updateAttributes()
         this->show();
         PointerTypePtr pointerType = d->_pointer->dataStructure()->document()->pointerType(d->_pointer->pointerType());
         foreach (const QString& property, d->_pointer->properties()) {
+            if (!d->_propertyValues.contains(property)) {
+                kWarning() << "No graphics item registered for property : " << property;
+                continue;
+            }
             d->_propertyValues[property]->setVisible(pointerType->isPropertyVisible(property));
         }
     } else {
         this->hide();
         foreach (const QString& property, d->_pointer->properties()) {
+            if (!d->_propertyValues.contains(property)) {
+                kWarning() << "No graphics item registered for property : " << property;
+                continue;
+            }
             d->_propertyValues[property]->setVisible(false);
         }
     }
