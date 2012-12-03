@@ -252,7 +252,7 @@ Qt::PenStyle Pointer::style() const
 void Pointer::addDynamicProperty(const QString& property, const QVariant& value)
 {
     if (!Document::isValidIdentifier(property)) {
-        kWarning() << "Property identifier is not valid: aborting";
+        kWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
     setProperty(property.toAscii(), value);
@@ -278,7 +278,7 @@ void Pointer::updateDynamicProperty(const QString& property)
 void Pointer::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
-        kWarning() << "Property identifier is not valid: aborting";
+        kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
     setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));

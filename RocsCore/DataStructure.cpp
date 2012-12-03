@@ -499,7 +499,7 @@ void DataStructure::setName(const QString& s)
 void DataStructure::addDynamicProperty(const QString& property, const QVariant& value)
 {
     if (!Document::isValidIdentifier(property)) {
-        kWarning() << "Property identifier is not valid: aborting";
+        kWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
     setProperty(property.toAscii(), value);
@@ -513,7 +513,7 @@ void DataStructure::removeDynamicProperty(const QString& property)
 void DataStructure::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
-        kWarning() << "Property identifier is not valid: aborting";
+        kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
     setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));

@@ -25,6 +25,7 @@
 #include <KGlobal>
 #include <QColor>
 #include <QMap>
+#include <KDebug>
 
 #include <boost/weak_ptr.hpp>
 
@@ -423,7 +424,7 @@ void Data::setColor(const QVariant& s)
 void Data::addDynamicProperty(const QString& property, const QVariant& value)
 {
     if (!Document::isValidIdentifier(property)) {
-        kWarning() << "Property identifier is not valid: aborting";
+        kWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
     setProperty(property.toAscii(), value);
@@ -450,7 +451,7 @@ void Data::updateDynamicProperty(const QString& property)
 void Data::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
-        kWarning() << "Property identifier is not valid: aborting";
+        kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
     setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));
