@@ -221,7 +221,8 @@ void MainWindow::setupToolbars()
 
 Project* MainWindow::createNewProject()
 {
-    Project* newProject = new Project();
+    //TODO duplicated functionality with newProject(): merge them for 4.11
+    Project *newProject = new Project();
     // create new document and add this to project new
     newProject->addGraphFileNew(DocumentManager::self()->newDocument());
     newProject->addCodeFileNew(_codeEditor->newScript());
@@ -593,8 +594,9 @@ void MainWindow::loadDocument(const QString& name)
 
 void MainWindow::newProject()
 {
-    if (saveIfChanged() == KMessageBox::Cancel)
+    if (saveIfChanged() == KMessageBox::Cancel) {
         return;
+    }
 
     _codeEditor->closeAllScripts();
     DocumentManager::self()->closeAllDocuments();

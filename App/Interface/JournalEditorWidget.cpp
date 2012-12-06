@@ -39,18 +39,19 @@ JournalEditorWidget::JournalEditorWidget(QWidget* parent)
     connect(ui->editor, SIGNAL(textChanged()), this, SLOT(setModified()));
 }
 
-void JournalEditorWidget::openJournal(Project* project)
+void JournalEditorWidget::openJournal(Project *project)
 {
     _modified = false;
+    _currentProject = project;
     if (!project) {
         kError() << "No project specified! Cannot set journal widget.";
         return;
     }
     if (project->journalFile().isEmpty()) {
         kDebug() << "Skipping loading of journal file, project does not contain any, yet.";
+        ui->editor->setHtml(QString());
         return;
     }
-    _currentProject = project;
     QFile fileHandle(project->journalFile().toLocalFile());
     if (!fileHandle.open(QIODevice::ReadOnly | QIODevice::Text)) {
         kError() << "Could not open file"
@@ -66,9 +67,13 @@ void JournalEditorWidget::openJournal(Project* project)
 
 void JournalEditorWidget::saveJournal()
 {
+    Q_ASSERT(_currentProject);
     if (!_currentProject) {
+        kError() << "Associated project is not set: cannot save journal file and hence aborting saving.";
+        kDebug() << "Journal must be created with JournalEditorWidget::openJournal(...).";
         return;
     }
+
     KSaveFile saveFile(_currentProject->journalFile().toLocalFile());
     saveFile.open();
 
