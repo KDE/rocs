@@ -189,10 +189,10 @@ void AssignValuesWidget::assignValues()
         int start = ui->spinBoxIDStartValue->value();
 
         if (ui->applyToDataElements->isChecked()) {
-            modifier.enumerate(dataList, property, start, overrideValues);
+	    modifier.enumerate(dataList, property, start, "", overrideValues);
         }
         if (ui->applyToConnections->isChecked()) {
-            modifier.enumerate(pointerList, property, start, overrideValues);
+	    modifier.enumerate(pointerList, property, start, "", overrideValues);
         }
         break;
     }
