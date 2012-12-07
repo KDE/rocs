@@ -182,6 +182,15 @@ void RocsGraphFileFormatPlugin::readFile()
                     tmpPointerType->setName(dataLine.section(' ', 2));
                 } else if (dataLine.startsWith(QLatin1String("Color :"))) {
                     tmpPointerType->setDefaultColor(QColor(dataLine.section(' ', 2)));
+                } else if (dataLine.startsWith(QLatin1String("Direction :"))) {
+                    if (dataLine.section(' ', 2) == "bidirectional") {
+                        tmpPointerType->setDirection(PointerType::Bidirectional);
+                    } else if (dataLine.section(' ', 2) == "unidirectional") {
+                        tmpPointerType->setDirection(PointerType::Unidirectional);
+                    }
+                    else {
+                        kWarning() << "Direction unset, use default direction of this data type backend.";
+                    }
                 } else if (dataLine.startsWith(QLatin1String("LineStyle :"))) {
                     tmpPointerType->setLineStyle(Qt::PenStyle(dataLine.section(' ', 2).toInt()));
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
@@ -345,10 +354,16 @@ QString RocsGraphFileFormatPlugin::serialize(const Document &document)
             properties.append(property + QString('=') + document.pointerType(pointerTypeIdentifier)->propertyDefaultValue(property).toString());
         }
 
+        // set direction identifier
+        QString direction = (document.pointerType(pointerTypeIdentifier)->direction() == PointerType::Bidirectional)
+            ? "bidirectional"
+            : "unidirectional";
+
         d->_buffer += QString("[PointerType %1]").arg(QString::number(pointerTypeIdentifier)) % QChar('\n')
             % QString("Name : ") % document.pointerType(pointerTypeIdentifier)->name() % QChar('\n')
             % QString("Color : ") % document.pointerType(pointerTypeIdentifier)->defaultColor().name() % QChar('\n')
             % QString("LineStyle : ") % QString::number(document.pointerType(pointerTypeIdentifier)->lineStyle()) % QChar('\n')
+            % QString("Direction : ") % direction % QChar('\n')
             % QString("Properties : ") % properties.join(QChar(','))
             % QChar('\n');
         d->_buffer += QChar('\n');
