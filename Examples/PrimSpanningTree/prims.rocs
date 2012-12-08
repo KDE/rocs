@@ -1,0 +1,14 @@
+[CodeFile1]
+file=./prims.js
+identifier=1
+
+[GraphFile1]
+file=./prims.graph
+identifier=1
+
+[Journal]
+JournalHtml=journal.html
+
+[Project]
+CodeFiles=1
+GraphFiles=1

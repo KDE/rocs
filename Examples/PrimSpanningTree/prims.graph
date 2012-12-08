@@ -1,0 +1,173 @@
+[Document Properties] 
+top : -207
+bottom : 278.5
+left : -621
+right : 310.5
+DataStructurePlugin : Graph
+
+[DataType 0]
+Name : Client
+IconName : rocs_computer
+Color : #000000
+Properties : name=,visited=false
+
+[DataType 1]
+Name : Server
+IconName : rocs_server2
+Color : #000000
+Properties : name=
+
+[PointerType 0]
+Name : Connection
+Color : #808080
+LineStyle : 3
+Direction : bidirectional
+Properties : weight=0
+
+[PointerType 1]
+Name : Used
+Color : #808080
+LineStyle : 1
+Direction : bidirectional
+Properties : weight=0
+
+[DataStructure 0] 
+X-plugin-type : 0
+name : network 
+
+[Data 1]
+type : 0
+x : 14 
+y : 78 
+width : 0.3 
+id : 1 
+color : #00aa00 
+name : E 
+visited : true 
+
+[Data 2]
+type : 0
+x : -90 
+y : 158 
+width : 0.3 
+id : 2 
+color : #00aa00 
+name : F 
+visited : true 
+
+[Data 3]
+type : 0
+x : 87 
+y : 169 
+width : 0.3 
+id : 3 
+color : #00aa00 
+name : G 
+visited : true 
+
+[Data 4]
+type : 0
+x : -222 
+y : -50 
+width : 0.3 
+id : 4 
+color : #00aa00 
+name : A 
+visited : true 
+
+[Data 5]
+type : 0
+x : -89 
+y : -2 
+width : 0.3 
+id : 5 
+color : #00aa00 
+name : B 
+visited : true 
+
+[Data 6]
+type : 0
+x : 32 
+y : -50 
+width : 0.3 
+id : 6 
+color : #00aa00 
+name : C 
+visited : true 
+
+[Data 7]
+type : 1
+x : -192 
+y : 76 
+width : 0.3 
+id : 7 
+color : #0000ff 
+name : D 
+visited : true 
+
+[Pointer 1->5]
+type : 0
+color : #808080 
+width : 1 
+weight : 0 
+
+[Pointer 1->2]
+type : 0
+color : #808080 
+width : 1 
+weight : 0 
+
+[Pointer 7->2]
+type : 0
+color : #808080 
+width : 1 
+weight : 0 
+
+[Pointer 5->6]
+type : 0
+color : #808080 
+width : 1 
+weight : 0 
+
+[Pointer 7->4]
+type : 0
+color : #808080 
+width : 1 
+weight : 0 
+
+[Pointer 7->1]
+type : 1
+color : #808080 
+width : 2 
+weight : 0 
+
+[Pointer 6->1]
+type : 1
+color : #808080 
+width : 2 
+weight : 0 
+
+[Pointer 5->7]
+type : 1
+color : #808080 
+width : 2 
+weight : 0 
+
+[Pointer 4->5]
+type : 1
+color : #808080 
+width : 2 
+weight : 0 
+
+[Pointer 3->1]
+type : 1
+color : #808080 
+width : 2 
+weight : 0 
+
+[Pointer 2->3]
+type : 1
+color : #808080 
+width : 2 
+weight : 0 
+

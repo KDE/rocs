@@ -1,0 +1,14 @@
+[CodeFile1]
+file=./bfs.js
+identifier=1
+
+[GraphFile1]
+file=./bfs.graph
+identifier=1
+
+[Journal]
+JournalHtml=journal.html
+
+[Project]
+CodeFiles=1
+GraphFiles=1

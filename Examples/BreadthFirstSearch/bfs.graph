@@ -1,0 +1,119 @@
+[Document Properties] 
+top : -227.062
+bottom : 256.844
+left : -495
+right : 572.5
+DataStructurePlugin : Graph
+
+[DataType 0]
+Name : Innocent Fish
+IconName : rocs_wanda
+Color : #000000
+Properties : name=
+
+[DataType 1]
+Name : Mine
+IconName : rocs_mines
+Color : #000000
+Properties : name=
+
+[PointerType 0]
+Name : Connection
+Color : #808080
+LineStyle : 1
+Direction : bidirectional
+Properties : 
+
+[DataStructure 0] 
+X-plugin-type : 0
+name : lake 
+
+[Data 1]
+type : 0
+x : 58 
+y : 27 
+width : 0.3 
+id : 1 
+color : #00aa00 
+name : B 
+
+[Data 2]
+type : 0
+x : 59 
+y : 134 
+width : 0.3 
+id : 2 
+color : #00aa00 
+name : E 
+
+[Data 4]
+type : 0
+x : 163 
+y : 136 
+width : 0.3 
+id : 4 
+color : #00aa00 
+name : F 
+
+[Data 5]
+type : 0
+x : -31 
+y : -28 
+width : 0.3 
+id : 5 
+color : #00aa00 
+name : A 
+
+[Data 6]
+type : 0
+x : 162 
+y : 29 
+width : 0.3 
+id : 6 
+color : #00aa00 
+name : C 
+
+[Data 3]
+type : 1
+x : 253 
+y : 75 
+width : 0.3 
+id : 3 
+color : #cc0000 
+name : D 
+
+[Pointer 5->1]
+type : 0
+color : #808080 
+width : 1 
+
+[Pointer 1->6]
+type : 0
+color : #808080 
+width : 1 
+
+[Pointer 6->4]
+type : 0
+color : #808080 
+width : 1 
+
+[Pointer 4->2]
+type : 0
+color : #808080 
+width : 1 
+
+[Pointer 2->1]
+type : 0
+color : #808080 
+width : 1 
+
+[Pointer 3->6]
+type : 0
+color : #808080 
+width : 1 
+
+[Pointer 3->4]
+type : 0
+color : #808080 
+width : 1 
+
