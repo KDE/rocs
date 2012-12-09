@@ -132,25 +132,23 @@ IncludeManager& QtScriptBackend::includeManager() const
 
 void QtScriptBackend::stop()
 {
-    if (!d->_engine) {
-        return;
-    }
-
-    // abort possibly running execution
-    if (d->_engine->isEvaluating()) {
-        d->_engine->abortEvaluation();
-    }
     // check for stepped execution
     if (d->_engineSteps) {
-        disconnect(this, SIGNAL(interrupted()), 0, 0);
         d->_engineSteps->action(QScriptEngineDebugger::ContinueAction)->trigger();
         d->_engineSteps->detach();
         d->_engineSteps->deleteLater();
         d->_engineSteps = 0;
     }
 
-    d->_engine->deleteLater();
-    d->_engine = 0;
+    // abort possibly running execution
+    if (d->_engine && d->_engine->isEvaluating()) {
+        d->_engine->abortEvaluation();
+    }
+
+    if (d->_engine) {
+        d->_engine->deleteLater();
+        d->_engine = 0;
+    }
     emit finished();
 }
 

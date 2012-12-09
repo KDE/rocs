@@ -549,8 +549,9 @@ void MainWindow::releaseDocument(Document* d)
     d->disconnect(this);
     disconnect(d);
 
-    _graphVisualEditor->releaseDocument();
+    d->engineBackend()->stop();
     d->engineBackend()->disconnect(this);
+    _graphVisualEditor->releaseDocument();
 }
 
 void MainWindow::addEmptyGraphDocument()
@@ -666,8 +667,9 @@ void MainWindow::saveProjectAs()
 
 void MainWindow::openProject(const KUrl& fileName)
 {
-    if (saveIfChanged() == KMessageBox::Cancel)
+    if (saveIfChanged() == KMessageBox::Cancel) {
         return;
+    }
 
     KUrl startDirectory = Settings::lastOpenedDirectory();
     KUrl file = fileName;
@@ -683,8 +685,9 @@ void MainWindow::openProject(const KUrl& fileName)
         }
     }
     // import project specified: close everything and delete old project
-    _codeEditor->closeAllScripts();
+    DocumentManager::self()->activeDocument()->engineBackend()->stop();
     DocumentManager::self()->closeAllDocuments();
+    _codeEditor->closeAllScripts();
     delete _currentProject;
 
     // extract and open new project

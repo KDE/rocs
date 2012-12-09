@@ -127,6 +127,9 @@ void DocumentManager::closeAllDocuments()
 void DocumentManager::removeDocument(Document *document)
 {
     if (_documents.removeOne(document)) {
+        document->engineBackend()->stop();
+        document->disconnect();
+
         if (_activeDocument == document) {
             if (_documents.count() > 0) {
                 changeDocument(_documents.last()); //
@@ -138,7 +141,7 @@ void DocumentManager::removeDocument(Document *document)
         emit documentRemoved(document);
         emit documentListChanged();
 
-        delete document;
+        document->deleteLater();
     }
 }
 
