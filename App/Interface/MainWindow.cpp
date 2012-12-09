@@ -233,8 +233,8 @@ Project* MainWindow::createNewProject()
 
 void MainWindow::downloadNewExamples()
 {
-    KNS3::DownloadDialog dialog("rocs.knsrc", this);
-    dialog.exec();
+    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog("rocs.knsrc", this);
+    dialog->exec();
 }
 
 void MainWindow::uploadScript()
@@ -415,13 +415,13 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
 
 void MainWindow::showSettings()
 {
-    KConfigDialog dialog(this,  "settings", Settings::self());
+    QPointer<KConfigDialog> dialog = new KConfigDialog(this,  "settings", Settings::self());
 
     IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties(&dialog);
 
-    dialog.addPage(set, i18nc("@title:tab", "Include Manager"), QString(), i18nc("@title:tab", "Include Manager"), true);
-    dialog.addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
+    dialog->addPage(set, i18nc("@title:tab", "Include Manager"), QString(), i18nc("@title:tab", "Include Manager"), true);
+    dialog->addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
 
 
     connect(set,               SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
@@ -440,7 +440,7 @@ void MainWindow::showSettings()
     connect(defaultProperties, SIGNAL(showExecuteModeOneStepChanged(bool)),
             this, SLOT(showExecutionButtonOneStep(bool)));
 
-    dialog.exec();
+    dialog->exec();
 }
 
 void MainWindow::setupToolsPluginsAction()
@@ -902,21 +902,21 @@ void MainWindow::exportGraphFile()
 
 void MainWindow::showPossibleIncludes()
 {
-    PossibleIncludes dialog(this);
-    dialog.exec();
+    QPointer<PossibleIncludes> dialog = new PossibleIncludes(this);
+    dialog->exec();
 }
 
 
 void MainWindow::showLoadedPlugins()
 {
-    LoadedPluginsDialog dialog(this);
-    dialog.exec();
+    QPointer<LoadedPluginsDialog> dialog = new LoadedPluginsDialog(this);
+    dialog->exec();
 }
 
 
 void MainWindow::showCodeEditorConfig()
 {
-    KTextEditor::Editor* editor = _codeEditor->editor();
+    KTextEditor::Editor *editor = _codeEditor->editor();
     if (editor->configDialogSupported()) {
         editor->configDialog(this);
         editor->writeConfig();
