@@ -58,7 +58,7 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
             newdata->setY(n->y());
             newdata->setWidth(n->width());
             dataTodata.insert(n.get(), newdata);
-            foreach (QString property, other->document()->dataType(type)->properties()) {
+            foreach (const QString &property, other->document()->dataType(type)->properties()) {
                 newdata->setProperty(property.toStdString().c_str(), n->property(property.toStdString().c_str()));
             }
         }
@@ -71,7 +71,7 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
             PointerPtr newPointer = addPointer(from, to, type);
             newPointer->setColor(e->color());
             newPointer->setProperty("value", e->property("value").toString());
-            foreach (QString property, other->document()->pointerType(type)->properties()) {
+            foreach (const QString &property, other->document()->pointerType(type)->properties()) {
                 newPointer->setProperty(property.toStdString().c_str(), e->property(property.toStdString().c_str()));
             }
         }
