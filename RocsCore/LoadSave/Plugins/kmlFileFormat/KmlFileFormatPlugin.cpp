@@ -29,6 +29,7 @@
 #include <KDebug>
 #include <KAboutData>
 #include <KGenericFactory>
+#include <KUrl>
 
 #include <QFile>
 #include <QXmlResultItems>

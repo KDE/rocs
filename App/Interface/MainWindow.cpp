@@ -417,23 +417,23 @@ void MainWindow::showSettings()
 {
     QPointer<KConfigDialog> dialog = new KConfigDialog(this,  "settings", Settings::self());
 
-    IncludeManagerSettings * set = new IncludeManagerSettings(&dialog);
-    ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties(&dialog);
+    IncludeManagerSettings * set = new IncludeManagerSettings(dialog);
+    ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties(dialog);
 
     dialog->addPage(set, i18nc("@title:tab", "Include Manager"), QString(), i18nc("@title:tab", "Include Manager"), true);
     dialog->addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
 
 
-    connect(set,               SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
-    connect(defaultProperties, SIGNAL(changed(bool)), &dialog, SLOT(enableButtonApply(bool)));
+    connect(set,               SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
+    connect(defaultProperties, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
 
-    connect(&dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
-    connect(&dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
-    connect(&dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
+    connect(dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
+    connect(dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
+    connect(dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
 
-    connect(&dialog, SIGNAL(applyClicked()),   defaultProperties, SLOT(saveConfig()));
-    connect(&dialog, SIGNAL(okClicked()),      defaultProperties, SLOT(saveConfig()));
-    connect(&dialog, SIGNAL(defaultClicked()), defaultProperties, SLOT(readConfig()));
+    connect(dialog, SIGNAL(applyClicked()),   defaultProperties, SLOT(saveConfig()));
+    connect(dialog, SIGNAL(okClicked()),      defaultProperties, SLOT(saveConfig()));
+    connect(dialog, SIGNAL(defaultClicked()), defaultProperties, SLOT(readConfig()));
 
     connect(defaultProperties, SIGNAL(showExecuteModeDebugChanged(bool)),
             this, SLOT(showExecutionButtonDebug(bool)));

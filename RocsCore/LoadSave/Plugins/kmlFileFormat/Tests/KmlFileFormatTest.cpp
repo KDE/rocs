@@ -23,6 +23,7 @@
 #include "Data.h"
 #include "Pointer.h"
 #include <QtTest/QTest>
+#include <KUrl>
 
 void KmlFileFormatTest::init()
 {}

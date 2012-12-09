@@ -26,6 +26,7 @@
 #include "DataStructure.h"
 #include "DocumentManager.h"
 #include <KDebug>
+#include <KUrl>
 
 void GmlFileFormatTest::parseTest()
 {

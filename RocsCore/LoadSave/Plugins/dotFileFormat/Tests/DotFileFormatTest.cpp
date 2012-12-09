@@ -26,6 +26,7 @@
 #include <DataStructure.h>
 #include <DataStructureBackendManager.h>
 #include <KDebug>
+#include <KUrl>
 
 static const std::string simple = "digraph simple {a -> b; c; d -> e /* error -> comment*/}";
 

@@ -53,7 +53,7 @@ public:
     explicit PointerItem(PointerPtr pointer, QGraphicsItem *parent = 0);
 
     /**
-     * Default destrutor.
+     * Default destructor.
      */
     virtual ~PointerItem();
 

@@ -29,6 +29,7 @@
 #include <QSize>
 #include <QRectF>
 #include <QPointer>
+#include <QMap>
 #include <boost/scoped_ptr.hpp>
 
 class DocumentPrivate;
@@ -50,7 +51,7 @@ class ROCSLIB_EXPORT Document : public QObject
 public:
     enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
-    explicit Document(const QString& name,
+    explicit Document(const QString &name,
              qreal left = -200,
              qreal right = 200,
              qreal top = -200,
@@ -61,11 +62,11 @@ public:
 
     bool isModified() const;
 
-    static QSvgRenderer* sharedRenderer(const QString& iconPackage);
-    static QSvgRenderer* registerSharedRenderer(const QString& iconPackage);
-    static void removeSharedRenderer(const QString& iconPackage);
+    static QSvgRenderer * sharedRenderer(const QString &iconPackage);
+    static QSvgRenderer * registerSharedRenderer(const QString &iconPackage);
+    static void removeSharedRenderer(const QString &iconPackage);
 
-    void setName(const QString& name);
+    void setName(const QString &name);
     QString name() const;
 
     /**
@@ -91,17 +92,17 @@ public:
      *
      * \param fileUrl path to local file for saving the document
      */
-    void setFileUrl(const KUrl& fileUrl);
+    void setFileUrl(const KUrl &fileUrl);
 
     /**
      * Evaluates given string and returns true if identifier is valid, otherwise returns false.
      *
      * \param identifier the string to be tested if it is valid property identifier
      */
-    static bool isValidIdentifier(const QString& identifier);
+    static bool isValidIdentifier(const QString &identifier);
 
     QtScriptBackend * engineBackend() const;
-    QList< DataStructurePtr >& dataStructures() const;
+    QList<DataStructurePtr>& dataStructures() const;
 
     void remove(DataStructurePtr dataStructure);
 
@@ -126,7 +127,7 @@ public:
     QString dataStructureTypeName()const;
 
     /** @brief return the internal name (not translated) of data structure used to build this document.*/
-    QString dataStructureInternalName()const;
+    QString dataStructureInternalName() const;
 
     DataStructurePluginInterface * dataStructurePlugin() const;
 
@@ -134,7 +135,7 @@ public:
      * Set data structure plugin for this document. This function is only safe if the document
      * is empty, otherwise behavior is undefined.
      */
-    void setDataStructurePlugin(const QString& pluginIdentifier);
+    void setDataStructurePlugin(const QString &pluginIdentifier);
 
     /** Register new type for data elements. If identifier is alreade in use or if no identifier is
      * provided, a new identifier is created.
@@ -143,7 +144,7 @@ public:
      * \param identifier is optional identifier for data type
      * \return positive integer >0 if successfully registered, else <=0
      */
-    int registerDataType(const QString& name, int identifier=0);
+    int registerDataType(const QString &name, int identifier = 0);
 
     /** Register new type for pointers. If identifier is already in use or if no identifier is
      * provided, a new identifier is created.
@@ -151,7 +152,7 @@ public:
      * \param name of the pointerType
      * \return positive integer >0 if successfully registered, else <=0
      */
-    int registerPointerType(const QString& name, int identifier=0);
+    int registerPointerType(const QString &name, int identifier = 0);
 
     /** removes this data type and all data elements of this type
      *
@@ -200,7 +201,7 @@ public Q_SLOTS:
      * \param name is the optional name of the to be created data structure
      * \return the added data structure
      */
-    DataStructurePtr addDataStructure(const QString& name = QString());
+    DataStructurePtr addDataStructure(const QString &name = QString());
 
     /**
      * Add data structure \p dataStructure to the document.
@@ -213,7 +214,7 @@ public Q_SLOTS:
     /**
      * \return the currently selected data structure, if none exists the shared pointer is invalid
      */
-    DataStructurePtr activeDataStructure() const ;
+    DataStructurePtr activeDataStructure() const;
 
     /**
      * Sets the active data structure of graph document with index \p index in the
@@ -248,7 +249,7 @@ public Q_SLOTS:
      * tests if given point is containted at document layer
      */
     bool isPointAtDocument(qreal x, qreal y) const;
-    bool isPointAtDocument(const QPointF& point) const;
+    bool isPointAtDocument(const QPointF &point) const;
 
 Q_SIGNALS:
     void dataStructureCreated(DataStructurePtr g);

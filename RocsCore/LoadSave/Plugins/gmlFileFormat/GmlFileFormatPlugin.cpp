@@ -29,6 +29,7 @@
 
 #include <KAboutData>
 #include <KGenericFactory>
+#include <KUrl>
 
 #include <QFile>
 
