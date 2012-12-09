@@ -22,23 +22,22 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
-#include <QList>
-#include <QPointF>
-#include <QObject>
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
+#include <QList>
+#include <QObject>
 #include <QSize>
 #include <QRectF>
-#include <boost/scoped_ptr.hpp>
-#include <KUrl>
 #include <QPointer>
+#include <boost/scoped_ptr.hpp>
 
+class DocumentPrivate;
 class KUrl;
 class DataStructurePluginInterface;
 class DataStructure;
 class QtScriptBackend;
-class DocumentPrivate;
 class QSvgRenderer;
+class QPointF;
 
 class ROCSLIB_EXPORT Document : public QObject
 {
