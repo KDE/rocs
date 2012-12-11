@@ -151,7 +151,7 @@ void RocsGraphFileFormatPlugin::readFile()
                     // remove rocs_ prefix
                     tmpDataType->setIcon(iconString.remove("rocs_"));
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
-                    QStringList properties = dataLine.section(' ', 2).split(",");
+                    QStringList properties = dataLine.section(' ', 2).split(',');
                     foreach(const QString& property, properties) {
                         if (!property.isEmpty()) {
                             tmpDataType->addProperty(property.section('=',0,0),property.section('=',1));
@@ -194,7 +194,7 @@ void RocsGraphFileFormatPlugin::readFile()
                 } else if (dataLine.startsWith(QLatin1String("LineStyle :"))) {
                     tmpPointerType->setLineStyle(Qt::PenStyle(dataLine.section(' ', 2).toInt()));
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
-                    QStringList properties = dataLine.section(' ', 2).split(",");
+                    QStringList properties = dataLine.section(' ', 2).split(',');
                     foreach(const QString& property, properties) {
                         if (!property.isEmpty()) {
                             tmpPointerType->addProperty(property.section('=',0,0),property.section('=',1));
