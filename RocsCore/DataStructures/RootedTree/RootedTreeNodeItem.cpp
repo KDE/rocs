@@ -62,7 +62,7 @@ void RootedTreeNodeItem::paint(QPainter* painter, const QStyleOptionGraphicsItem
     const qreal size  = node->dataStructure()->property("NodeSize").toReal();
     qDebug() << "multipointer? " << data()->dataStructure()->property("ShowAllPointers").toBool();
     if (data()->dataStructure()->property("ShowAllPointers").toBool()){
-      
+
         const qreal pointersSize = node->dataStructure()->property("PointersRegion").toReal();
         qint16 childCount = node->numberOfChilds();
 

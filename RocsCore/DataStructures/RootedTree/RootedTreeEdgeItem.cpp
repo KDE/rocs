@@ -104,7 +104,7 @@ QPointF RootedTreeEdgeItem::startPoint()
 QPointF RootedTreeEdgeItem::endPoint() const
 {
     if (pointer()->dataStructure()->property("ShowAllPointers").isValid() && pointer()->dataStructure()->property("ShowAllPointers").toBool()){
-        
+
         const qreal size = pointer()->dataStructure()->property("NodeSize").toReal();
         if (scene()){
             RootedTreeNodeItem * item = 0;
@@ -138,7 +138,7 @@ QPainterPath RootedTreeEdgeItem::createCurves()
         QPointF m_endPoint = endPoint();
         QLineF line(m_startPoint, m_endPoint);
         if (!m_startPoint.isNull()) {
-            
+
             if (!pointer()->dataStructure()->property("ShowAllPointers").toBool()) {
                 if (pointer()->property("TreeEdge").toInt() == -1) {
                     return QPainterPath();
@@ -146,7 +146,7 @@ QPainterPath RootedTreeEdgeItem::createCurves()
             }
             painter.moveTo(line.p1());
             painter.lineTo(line.p2());
-            
+
             qreal angle = acos(line.dx() / line.length());
             if (line.dy() >= 0){
                 angle = TwoPi - angle;
@@ -155,8 +155,8 @@ QPainterPath RootedTreeEdgeItem::createCurves()
                                                    cos(angle - PI_3) * ArrowSize);
             QPointF arrowP2 = m_endPoint + QPointF(sin(angle - Pi + PI_3) * ArrowSize,
                                                    cos(angle - Pi + PI_3) * ArrowSize);
-            
-           
+
+
             painter.addEllipse(m_startPoint, 3, 3);
 
             painter.addPolygon(QPolygonF() << m_endPoint << arrowP1 << arrowP2 << m_endPoint);
