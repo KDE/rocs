@@ -23,7 +23,6 @@
 #include "Data.h"
 #include "Pointer.h"
 #include "DataStructure.h"
-#include "Scene/math_constants.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -33,7 +32,7 @@
 #include <QtAlgorithms>
 #include <KDebug>
 #include <math.h>
-
+#include <boost/math/constants/constants.hpp>
 
 LinkedListPointerItem::LinkedListPointerItem(PointerPtr edge, QGraphicsItem *parent)
     : PointerItem(edge, parent)
@@ -46,16 +45,17 @@ LinkedListPointerItem::~LinkedListPointerItem() {}
 
 QPolygonF LinkedListPointerItem::createEndArrow() const
 {
+    const qreal pi = boost::math::constants::pi<double>();
+
     DataPtr to = pointer()->to();
     QPointF pos1(to->x() - to->width() * 40 - 20, to->y());
     QPointF pos2(to->x() - to->width() * 40, to->y());
     QLineF line(pos1, pos2);
     qreal arrowSize = 10.0;
-    QPointF destArrowP1 = pos2 + QPointF(sin(- PI_3) * arrowSize,         cos(- PI_3) * arrowSize);
-    QPointF destArrowP2 = pos2 + QPointF(sin(- Pi + PI_3) * arrowSize,    cos(- Pi + PI_3) * arrowSize);
+    QPointF destArrowP1 = pos2 + QPointF(sin(-pi/3.0) * arrowSize,         cos(-pi/3.0) * arrowSize);
+    QPointF destArrowP2 = pos2 + QPointF(sin(-pi + pi/3.0) * arrowSize,    cos(-pi + pi/3.0) * arrowSize);
 
     return QPolygonF() << pos1 <<  pos2 << destArrowP2 << destArrowP1 << pos2;
-
 }
 
 QPolygonF LinkedListPointerItem::createPath(const QPointF &pos1, const QPointF &pos2) const

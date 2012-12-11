@@ -35,17 +35,9 @@
 #include <KDebug>
 #include <QGraphicsSimpleTextItem>
 #include "RootedTreeNode.h"
+#include <boost/math/constants/constants.hpp>
 
 
-static const qreal Pi = 3.14159265358979323846264338327950288419717;
-
-/// The value of Pi * 2
-static const qreal TwoPi = 2.0 * Pi;
-
-/// The Value of PI / 3
-static const qreal PI_3 = Pi / 3.0;
-
-/// Arrow size
 static const qreal ArrowSize = 10.0;
 
 RootedTreeEdgeItem::RootedTreeEdgeItem(PointerPtr edge, QGraphicsItem *parent)
@@ -132,6 +124,8 @@ QPointF RootedTreeEdgeItem::endPoint() const
 
 QPainterPath RootedTreeEdgeItem::createCurves()
 {
+    const qreal pi = boost::math::constants::pi<double>();
+
     QPainterPath painter;
     if (pointer()->to() && pointer()->from()) {
         QPointF m_startPoint = startPoint();
@@ -149,12 +143,12 @@ QPainterPath RootedTreeEdgeItem::createCurves()
 
             qreal angle = acos(line.dx() / line.length());
             if (line.dy() >= 0){
-                angle = TwoPi - angle;
+                angle =  pi*2.0 - angle;
             }
-            QPointF arrowP1 = m_endPoint + QPointF(sin(angle - PI_3) * ArrowSize,
-                                                   cos(angle - PI_3) * ArrowSize);
-            QPointF arrowP2 = m_endPoint + QPointF(sin(angle - Pi + PI_3) * ArrowSize,
-                                                   cos(angle - Pi + PI_3) * ArrowSize);
+            QPointF arrowP1 = m_endPoint + QPointF(sin(angle - pi/3.0) * ArrowSize,
+                                                   cos(angle - pi/3.0) * ArrowSize);
+            QPointF arrowP2 = m_endPoint + QPointF(sin(angle - pi + pi/3.0) * ArrowSize,
+                                                   cos(angle - pi + pi/3.0) * ArrowSize);
 
 
             painter.addEllipse(m_startPoint, 3, 3);

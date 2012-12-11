@@ -25,7 +25,6 @@
 #include "Data.h"
 #include "Pointer.h"
 #include "DataStructure.h"
-#include "Scene/math_constants.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -38,6 +37,7 @@
 #include <KDebug>
 #include <QGraphicsSimpleTextItem>
 #include <QtCore/qmath.h>
+#include <boost/math/constants/constants.hpp>
 
 EdgeItem::EdgeItem(PointerPtr edge, QGraphicsItem *parent)
     : PointerItem(edge, parent)
@@ -60,15 +60,16 @@ void EdgeItem::updatePathLayout()
 
 QPolygonF EdgeItem::createArrow(const QPointF &pos1, const QPointF &pos2) const
 {
+    const qreal pi = boost::math::constants::pi<double>();
     QLineF line(pos1, pos2);
     qreal angle = ::qAcos(line.dx() / line.length());
     if (line.dy() >= 0) {
-        angle = TwoPi - angle;
+        angle = pi*2.0 - angle;
     }
     qreal arrowSize = 10;
 
-    QPointF destArrowP1 = pos2 + QPointF(qSin(angle - PI_3) * arrowSize,         qCos(angle - PI_3) * arrowSize);
-    QPointF destArrowP2 = pos2 + QPointF(qSin(angle - Pi + PI_3) * arrowSize,    qCos(angle - Pi + PI_3) * arrowSize);
+    QPointF destArrowP1 = pos2 + QPointF(qSin(angle - pi/3.0) * arrowSize,         qCos(angle - pi/3.0) * arrowSize);
+    QPointF destArrowP2 = pos2 + QPointF(qSin(angle - pi + pi/3.0) * arrowSize,    qCos(angle - pi + pi/3.0) * arrowSize);
     QPolygonF arrow(QPolygonF() <<  destArrowP1 << pos2 << destArrowP2);
 
     /// Put the arrow on the center of the nodes.
@@ -98,6 +99,8 @@ QPainterPath EdgeItem::createLoop(const QPointF& pos) const
 
 QPainterPath EdgeItem::createCurves()
 {
+    const qreal pi = boost::math::constants::pi<double>();
+
     Q_ASSERT(pointer());
     if (!pointer()) {
         return QPainterPath();
@@ -135,7 +138,7 @@ QPainterPath EdgeItem::createCurves()
     qreal angle = atan2(y, x);
 
     /// Calculate the size of the inclination on the curve.
-    qreal theta = angle + PI_2;
+    qreal theta = angle + pi/2.0;
     qreal finalX = qCos(theta);
     qreal finalY = qSin(theta);
     int lastIndex = pointer()->relativeIndex();

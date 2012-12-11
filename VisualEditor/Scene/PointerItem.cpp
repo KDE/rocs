@@ -26,7 +26,6 @@
 #include "Pointer.h"
 #include "PointerType.h"
 #include "DataStructure.h"
-#include "math_constants.h"
 #include "GraphicsLayout.h"
 
 #include <QGraphicsScene>
