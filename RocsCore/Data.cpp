@@ -18,6 +18,7 @@
 */
 
 #include "Data.h"
+#include "DataType.h"
 #include "Pointer.h"
 #include "DataStructure.h"
 #include "QtScriptBackend.h"
@@ -25,11 +26,8 @@
 #include <KGlobal>
 #include <QColor>
 #include <QMap>
-#include <KDebug>
-
 #include <boost/weak_ptr.hpp>
 
-#include "DataType.h"
 
 class DataPrivate
 {
