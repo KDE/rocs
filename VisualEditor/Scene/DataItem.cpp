@@ -111,15 +111,16 @@ void DataItem::setupNode()
         connect(d->_oldDataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateIcon()));
     }
 
-    foreach (const QString& name, d->_data->properties()) {
-        updateProperty(name);
+    // register properties
+    foreach (const QString &property, d->_data->properties()) {
+        registerProperty(property);
     }
+
     updateRenderer();
     updateIcon();
     updateColor();
     updateSize();
     updatePos();
-    updatePropertyList();
     update();
 }
 

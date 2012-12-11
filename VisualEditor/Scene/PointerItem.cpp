@@ -113,6 +113,12 @@ PointerItem::PointerItem(PointerPtr pointer, QGraphicsItem *parent)
 
     setZValue(-1 - d->_index);
     setFlag(ItemIsSelectable, true);
+
+    // register properties
+    foreach (const QString &property, d->_pointer->properties()) {
+        registerProperty(property);
+    }
+
     updateAttributes();
     this->show();
 }
