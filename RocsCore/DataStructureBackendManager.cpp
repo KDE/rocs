@@ -175,12 +175,16 @@ public:
             kError() << "No backend found, cannot set active data structure backend.";
             return;
         }
-        foreach (DataStructurePluginInterface * i, _pluginList.values()) {
-            if (i->internalName() == QLatin1String("Graph")){
-                _currentPlugin = i;
+
+        QHash <QString, DataStructurePluginInterface* >::const_iterator iter = _pluginList.constBegin();
+        while (iter != _pluginList.constEnd()) {
+            if (iter.value()->internalName() == QLatin1String("Graph")){
+                _currentPlugin = iter.value();
                 return;
             }
+            ++iter;
         }
+
         // set last plugin, if "Graph" was not found
         _currentPlugin = _pluginList.values().last();
     }
