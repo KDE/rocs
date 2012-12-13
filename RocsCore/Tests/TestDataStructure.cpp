@@ -79,7 +79,7 @@ void TestDataStructure::pointerAddDeleteTest()
     // create 10 data elements
     // x x x x x x x x x x
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i)));
+        dataList.append(ds->addData(QString::number(i)));
     }
     QVERIFY2(ds->dataList().size() == 10, "ERROR: Number of data elements is not 10");
 
@@ -158,9 +158,9 @@ void TestDataStructure::dataTypesTest()
 
     // create data elements
     for (int i = 0; i < 3; i++) {
-        dataListDefault.append(ds->addData(QString(i)));
-        dataList1.append(ds->addData(QString(i), type1));
-        dataList2.append(ds->addData(QString(i), type2));
+        dataListDefault.append(ds->addData(QString::number(i)));
+        dataList1.append(ds->addData(QString::number(i), type1));
+        dataList2.append(ds->addData(QString::number(i), type2));
     }
     QVERIFY2(ds->dataList().size() == 3,
              "list contains " + ds->dataList().size()
@@ -198,7 +198,7 @@ void TestDataStructure::pointerTypesTest()
 
     // create data elements
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i)));
+        dataList.append(ds->addData(QString::number(i)));
     }
 
     // register two further data types
