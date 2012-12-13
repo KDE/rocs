@@ -195,8 +195,12 @@ PointerList DataStructure::pointerListAll() const
 
 void DataStructure::registerDataType(int identifier)
 {
+    if (d->_dataTypeLists.contains(identifier)) {
+        kWarning() << "DataType already registered: aborting";
+        return;
+    }
     if (!d->_document->dataType(identifier)) {
-        kError() << "DataType not registered at DataStructure: not valid";
+        kError() << "DataType not registered at document: aborting";
         return;
     }
     d->_dataTypeLists.insert(identifier, DataList());
@@ -206,8 +210,12 @@ void DataStructure::registerDataType(int identifier)
 
 void DataStructure::registerPointerType(int identifier)
 {
+    if (d->_pointerTypeLists.contains(identifier)) {
+        kWarning() << "PointerType already registered: aborting";
+        return;
+    }
     if (!d->_document->pointerType(identifier)) {
-        kError() << "PointerType not registered at DataStructure: not valid";
+        kError() << "PointerType not registered at document: aborting";
         return;
     }
     d->_pointerTypeLists.insert(identifier, PointerList());
