@@ -107,6 +107,11 @@ public:
     void remove(DataStructurePtr dataStructure);
 
     /**
+     * Remove everything contained at this document.
+     */
+    void clear();
+
+    /**
      * \return the size of document' (visual) area
      */
     QRectF size();

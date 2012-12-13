@@ -20,6 +20,7 @@
 
 #include "DocumentManager.h"
 #include "Document.h"
+#include "DataStructure.h"
 #include "DataStructureBackendManager.h"
 #include <KDebug>
 #include <QWaitCondition>
@@ -141,6 +142,7 @@ void DocumentManager::removeDocument(Document *document)
         emit documentRemoved(document);
         emit documentListChanged();
 
+        document->clear();
         document->deleteLater();
     }
 }

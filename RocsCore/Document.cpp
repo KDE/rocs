@@ -154,18 +154,7 @@ void Document::changeBackend()
 
 Document::~Document()
 {
-    // remove types
-    foreach (DataTypePtr type, d->_dataTypes) {
-        type->remove();
-    }
-    foreach (PointerTypePtr type, d->_pointerTypes) {
-        type->remove();
-    }
-
-    // remove data structures
-    for (int i = 0; i < d->_dataStructures.size(); ++i) {
-        d->_dataStructures.at(i)->remove();
-    }
+    clear();
     delete d->_engineBackend;
 }
 
@@ -585,6 +574,22 @@ void Document::remove(DataStructurePtr dataStructure)
     setActiveDataStructure(d->_dataStructures.count()-1);
     d->_modified = true;
     emit dataStructureListChanged();
+}
+
+void Document::clear()
+{
+    // remove types
+    foreach (DataTypePtr type, d->_dataTypes) {
+        type->remove();
+    }
+    foreach (PointerTypePtr type, d->_pointerTypes) {
+        type->remove();
+    }
+
+    // remove data structures
+    for (int i = 0; i < d->_dataStructures.size(); ++i) {
+        d->_dataStructures.at(i)->remove();
+    }
 }
 
 DataStructurePtr Document::activeDataStructure() const
