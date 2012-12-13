@@ -59,7 +59,7 @@ public:
      * Default destructor.
      * DO NOT CALL IT, let the shared pointer take care for deletion.
      */
-    ~DataType();
+    virtual ~DataType();
 
     /**
      * \return name of data type

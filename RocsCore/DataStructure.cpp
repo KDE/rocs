@@ -39,6 +39,7 @@ class DataStructurePrivate
 public:
     DataStructurePrivate() {}
 
+
     /**
      * self pointer to DataStructure
      */
@@ -214,19 +215,19 @@ void DataStructure::registerPointerType(int identifier)
 }
 
 
-void DataStructure::removeDataType(int dataType)
+void DataStructure::removeDataType(int identifier)
 {
-    if (dataType == 0) {
+    if (identifier == 0) {
         kWarning() << "Could not remove non-existing DataType";
         return;
     }
 
-    foreach(DataPtr data, d->_dataTypeLists[dataType]) {
+    foreach(DataPtr data, d->_dataTypeLists[identifier]) {
         data->remove();
     }
-    d->_dataTypeLists[dataType].clear();
-    d->_dataTypeLists.remove(dataType);
-    d->_dataTypeVisibility.remove(dataType);
+    d->_dataTypeLists[identifier].clear();
+    d->_dataTypeLists.remove(identifier);
+    d->_dataTypeVisibility.remove(identifier);
 }
 
 
@@ -285,13 +286,15 @@ void DataStructure::setReadOnly(bool r)
 void DataStructure::remove()
 {
     disconnect();
-    foreach(const PointerList& pointerType, d->_pointerTypeLists) {
-        foreach(PointerPtr pointer,  pointerType) {
+    //remove pointers
+    foreach(const PointerList &pointerType, d->_pointerTypeLists) {
+        foreach(const PointerPtr &pointer,  pointerType) {
             pointer->remove();
         }
     }
-    foreach(const DataList& dataType, d->_dataTypeLists) {
-        foreach(DataPtr data, dataType) {
+    //remove data elements
+    foreach(const DataList &dataType, d->_dataTypeLists) {
+        foreach(const DataPtr &data, dataType) {
             data->remove();
         }
     }

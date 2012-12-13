@@ -209,40 +209,46 @@ QString Document::iconPackage() const
     return d->_iconPackage;
 }
 
-bool Document::removeDataType(int dataType)
+bool Document::removeDataType(int identifier)
 {
-    if (dataType == 0) {
-        return false;
+    Q_ASSERT(d->_dataTypes.contains(identifier));
+
+    emit(dataTypeRemoved(identifier));
+    if (d->_dataTypes.contains(identifier)) {
+        d->_dataTypes[identifier]->remove();
     }
-    emit(dataTypeRemoved(dataType));
-    return d->_dataTypes.remove(dataType) > 0;
+    return d->_dataTypes.remove(identifier) > 0;
 }
 
-bool Document::removePointerType(int pointerType)
+bool Document::removePointerType(int identifier)
 {
-    if (pointerType == 0 || !d->_pointerTypes.contains(pointerType)) {
-        return false;
+    Q_ASSERT(d->_pointerTypes.contains(identifier));
+
+    emit(pointerTypeRemoved(identifier));
+    if (d->_pointerTypes.contains(identifier)) {
+        d->_pointerTypes[identifier]->remove();
     }
-    emit(pointerTypeRemoved(pointerType));
-    return d->_pointerTypes.remove(pointerType) > 0;
+    return d->_pointerTypes.remove(identifier) > 0;
 }
 
-DataTypePtr Document::dataType(int dataType) const
+DataTypePtr Document::dataType(int identifier) const
 {
-    Q_ASSERT(d->_dataTypes.contains(dataType));
-    if (!d->_dataTypes.contains(dataType)) {
+    Q_ASSERT(d->_dataTypes.contains(identifier));
+
+    if (!d->_dataTypes.contains(identifier)) {
         return DataTypePtr();
     }
-    return d->_dataTypes[dataType];
+    return d->_dataTypes[identifier];
 }
 
-PointerTypePtr Document::pointerType(int pointerType) const
+PointerTypePtr Document::pointerType(int identifier) const
 {
-    Q_ASSERT(d->_pointerTypes.contains(pointerType));
-    if (!d->_pointerTypes.contains(pointerType)) {
+    Q_ASSERT(d->_pointerTypes.contains(identifier));
+
+    if (!d->_pointerTypes.contains(identifier)) {
         return PointerTypePtr();
     }
-    return d->_pointerTypes[pointerType];
+    return d->_pointerTypes[identifier];
 }
 
 int Document::groupType()
@@ -579,11 +585,11 @@ void Document::remove(DataStructurePtr dataStructure)
 void Document::clear()
 {
     // remove types
-    foreach (DataTypePtr type, d->_dataTypes) {
-        type->remove();
+    for (QMap<int,DataTypePtr>::const_iterator iter= d->_dataTypes.begin(); iter != d->_dataTypes.end(); ++iter) {
+        removeDataType(iter.key());
     }
-    foreach (PointerTypePtr type, d->_pointerTypes) {
-        type->remove();
+    for (QMap<int,PointerTypePtr>::const_iterator iter= d->_pointerTypes.begin(); iter != d->_pointerTypes.end(); ++iter) {
+        removePointerType(iter.key());
     }
 
     // remove data structures

@@ -63,7 +63,6 @@ DataTypePtr DataType::create(Document* document, int identifier)
     DataTypePtr pi(new DataType(document, identifier));
     pi->d->q = pi;
     pi->addProperty("name", "");
-
     return pi;
 }
 
