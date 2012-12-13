@@ -300,12 +300,17 @@ void DataStructure::remove()
             pointer->remove();
         }
     }
+    d->_pointerTypeLists.clear();
+
+
     //remove data elements
     foreach(const DataList &dataType, d->_dataTypeLists) {
         foreach(const DataPtr &data, dataType) {
             data->remove();
         }
     }
+    d->_dataTypeLists.clear();
+
     d->_document->remove(getDataStructure());
 }
 
