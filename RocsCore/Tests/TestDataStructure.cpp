@@ -74,7 +74,7 @@ void TestDataStructure::pointerAddDeleteTest()
     // test for undirected pointers
     DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
     DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
-    DataList dataList;
+    DataList dataList = DataList();
 
     // create 10 data elements
     // x x x x x x x x x x
