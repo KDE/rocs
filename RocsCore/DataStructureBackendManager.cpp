@@ -131,44 +131,40 @@ public:
         }
     }
 
-    bool loadBackend(KPluginInfo& pluginInfo)
-    {
-        if (!pluginInfo.isValid()) {
-            kError() << "Error loading data structure backend: " << pluginInfo.name();
-            return false;
-        }
-
-        QString error;
-        DataStructurePluginInterface* plugin =
-            KServiceTypeTrader::createInstanceFromQuery<DataStructurePluginInterface>(
-                                    QString::fromLatin1("Rocs/DataStructurePlugin"),
-                                    QString::fromLatin1("[Name]=='%1'").arg(pluginInfo.name()),
-                                    _parent,
-                                    QVariantList(),
-                                    &error);
-
-        if (plugin) {
-            QString identifier = pluginInfo.property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
-            if (identifier.isEmpty()) {
-                identifier = pluginInfo.name();
-                kWarning() << "No data structure backend identifier exists for plugin " << identifier << ", using its name.";
-            }
-            _pluginList.insert(identifier, plugin);
-            pluginInfo.setPluginEnabled(true);
-            return true;
-        }
-        kError() << "Error while loading data structure backend \"" << pluginInfo.name() << "\": " << error;
-        return false;
-    }
-
     void loadBackends()
     {
-        KServiceTypeTrader* trader = KServiceTypeTrader::self();
-        KService::List services = trader->query("Rocs/DataStructurePlugin");
+        KServiceTypeTrader *trader = KServiceTypeTrader::self();
+        QString serviceType = QString::fromLatin1("Rocs/DataStructurePlugin");
+        KService::List services = trader->query(serviceType);
         _pluginInfo = KPluginInfo::fromServices(services);
 
-        foreach(KPluginInfo info, _pluginInfo) {
-            loadBackend(info);
+        // load backends
+        for (KPluginList::iterator iter = _pluginInfo.begin(); iter != _pluginInfo.end(); ++iter) {
+            if (!iter->isValid()) {
+                kError() << "Error loading data structure backend: " << iter->name();
+                continue;
+            }
+
+            QString error;
+            DataStructurePluginInterface* plugin =
+                KServiceTypeTrader::createInstanceFromQuery<DataStructurePluginInterface>(
+                                        QString::fromLatin1("Rocs/DataStructurePlugin"),
+                                        QString::fromLatin1("[Name]=='%1'").arg(iter->name()),
+                                        _parent,
+                                        QVariantList(),
+                                        &error);
+
+            if (plugin) {
+                QString identifier = iter->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
+                if (identifier.isEmpty()) {
+                    identifier = iter->name();
+                    kWarning() << "No data structure backend identifier exists for plugin " << identifier << ", using its name.";
+                }
+                _pluginList.insert(identifier, plugin);
+                iter->setPluginEnabled(true);
+                continue;
+            }
+            kError() << "Error while loading data structure backend \"" << iter->name() << "\": " << error;
         }
 
         if (_pluginList.isEmpty()) {
