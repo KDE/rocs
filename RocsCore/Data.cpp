@@ -137,10 +137,8 @@ Data::~Data()
 
 bool Data::eventFilter(QObject *obj, QEvent *event){
     if (event->type() == QEvent::DynamicPropertyChange) {
-        if (QDynamicPropertyChangeEvent* const dynEvent = dynamic_cast<QDynamicPropertyChangeEvent*>(event)) {
-            event->accept();
-            emit(propertyChanged(dynEvent->propertyName()));
-        }
+        QString property = QString::fromLatin1(static_cast<QDynamicPropertyChangeEvent*>(event)->propertyName());
+        emit(propertyChanged(property));
     }
     return QObject::eventFilter(obj, event);
 }
