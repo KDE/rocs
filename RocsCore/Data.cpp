@@ -101,7 +101,8 @@ void Data::setQpointer(DataPtr q)
 void Data::initialize()
 {
     installEventFilter(this);
-    foreach(const QString& property, d->_dataType->properties()) {
+    QStringList properties = d->_dataType->properties();
+    foreach(const QString &property, properties) {
         addDynamicProperty(property, d->_dataType->propertyDefaultValue(property));
     }
 
