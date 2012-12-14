@@ -115,7 +115,7 @@ KIcon DataType::icon() const
         svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
         QXmlStreamReader reader(&svgFile);
-        QSvgRenderer *renderer = DocumentManager::self()->sharedRenderer(svgFile.fileName());
+        QSvgRenderer *renderer = DocumentManager::self().sharedRenderer(svgFile.fileName());
         while (!reader.atEnd()) {
             reader.readNext();
             if (!reader.attributes().hasAttribute("id")) {

@@ -145,7 +145,7 @@ void DataItem::updateSize()
 void DataItem::updateRenderer()
 {
     QString iconPackage = d->_data->dataStructure()->document()->iconPackage();
-    setSharedRenderer(DocumentManager::self()->sharedRenderer(iconPackage));
+    setSharedRenderer(DocumentManager::self().sharedRenderer(iconPackage));
 }
 
 void DataItem::updateIcon()
