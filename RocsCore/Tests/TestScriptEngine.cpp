@@ -28,17 +28,17 @@
 
 TestScriptEngine::TestScriptEngine()
 {
-    DocumentManager::self()->addDocument(new Document("test"));;
+    DocumentManager::self().addDocument(new Document("test"));;
 }
 
 // simple test if script starts and ends
 void TestScriptEngine::simpleStart()
 {
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+    DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
     DataList dataList;
 
-    Document* graphDoc = DocumentManager::self()->activeDocument();
+    Document* graphDoc = DocumentManager::self().activeDocument();
     QtScriptBackend *engine = graphDoc->engineBackend();
 
     engine->setScript(QString("for (var i=0; i<10; i++) ;"), graphDoc);
@@ -50,7 +50,7 @@ void TestScriptEngine::simpleStart()
 // test basic operations on pointers and data elements
 void TestScriptEngine::basicOperationsGraph()
 {
-    Document* graphDoc = DocumentManager::self()->activeDocument();
+    Document* graphDoc = DocumentManager::self().activeDocument();
     QtScriptBackend *engine = graphDoc->engineBackend();
     DataStructurePtr ds;
     QString result;
@@ -97,11 +97,11 @@ void TestScriptEngine::basicOperationsGraph()
 void TestScriptEngine::startStop()
 {
     //FIXME; for 4.10 add threading support for this test
-//     DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-//     DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+//     DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+//     DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
 //     DataList dataList;
 //
-//     Document* graphDoc = DocumentManager::self()->activeDocument();
+//     Document* graphDoc = DocumentManager::self().activeDocument();
 //     QtScriptBackend *engine = graphDoc->engineBackend();
 //
 //     // start infinite loop
@@ -115,14 +115,14 @@ void TestScriptEngine::startStop()
 
 void TestScriptEngine::ignoreComments()
 {
-    Document* graphDoc = DocumentManager::self()->activeDocument();
+    Document* graphDoc = DocumentManager::self().activeDocument();
     QtScriptBackend *engine = graphDoc->engineBackend();
 
     QString test;
     QScriptValue result;
 
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+    DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
     DataList dataList;
 
     // start engine
@@ -159,10 +159,10 @@ void TestScriptEngine::ignoreComments()
 
 void TestScriptEngine::useOfDynamicProperties()
 {
-    DocumentManager::self()->addDocument(new Document("test"));
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
-    Document* graphDoc = DocumentManager::self()->activeDocument();
+    DocumentManager::self().addDocument(new Document("test"));
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+    DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
+    Document* graphDoc = DocumentManager::self().activeDocument();
 
     DataStructurePtr d = graphDoc->activeDataStructure();
     d->setName("myGraph");

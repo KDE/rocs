@@ -22,49 +22,94 @@
 #include "Document.h"
 #include "DataStructure.h"
 #include "DataStructureBackendManager.h"
-#include <KDebug>
-#include <QWaitCondition>
-#include <QAction>
 #include "QtScriptBackend.h"
-#include <KLocale>
 #include "LoadSave/GraphFileBackendManager.h"
 #include "DataStructurePluginInterface.h"
+
+
+#include <KDebug>
+#include <KLocale>
+#include <QWaitCondition>
+#include <QAction>
+#include <QSvgRenderer>
+
 
 // load catalog for library
 static const KCatalogLoader loader("rocscore");
 
-DocumentManager * DocumentManager::_self = 0;
-
-DocumentManager * DocumentManager::self()
+class DocumentManagerPrivate
 {
-    if (!_self) {
-        _self = new DocumentManager();
-        connect(DataStructureBackendManager::self(), SIGNAL(backendChanged(QString)),
-                _self, SLOT(convertToDataStructure()));
+public:
+    bool _initialized;
+    QList<Document*> _documents;
+    Document *_activeDocument;
+
+    // The list of shared renders provide resource efficient use of icon renders for same icon
+    // packages. A possible future problem is that this list is never cleaned.
+    QMap<QString, QSvgRenderer *> _sharedRenderers;
+
+    DocumentManagerPrivate()
+        : _initialized(false)
+    {
     }
-    return _self;
+};
+
+DocumentManager & DocumentManager::self()
+{
+    static DocumentManager instance;
+    if(!instance.d->_initialized) {
+        instance.d->_initialized = true;
+        connect(DataStructureBackendManager::self(), SIGNAL(backendChanged(QString)),
+                &instance, SLOT(convertToDataStructure()));
+    }
+
+    return instance;
 }
 
 DocumentManager::DocumentManager(QObject *parent)
     : QObject(parent)
+    , d(new DocumentManagerPrivate())
 {
-    _activeDocument = 0;
+    d->_activeDocument = 0;
 }
 
 DocumentManager::~DocumentManager()
 {
-    foreach(Document *g, _documents) {
+    foreach(Document *g, d->_documents) {
         removeDocument(g);
     }
+
+    // remove shared renderers
+    QMap <QString, QSvgRenderer* >::iterator iter = d->_sharedRenderers.begin();
+    while (iter != d->_sharedRenderers.end()) {
+        iter.value()->deleteLater();
+        ++iter;
+    }
+    d->_sharedRenderers.clear();
+}
+
+Document * DocumentManager::document(const int index) const
+{
+    return (index < d->_documents.count() && index >= 0) ? d->_documents.at(index) : 0;
+}
+
+Document * DocumentManager::activeDocument() const
+{
+    return d->_activeDocument;
+}
+
+QList< Document* > DocumentManager::documentList() const
+{
+    return d->_documents;
 }
 
 void DocumentManager::addDocument(Document *document)
 {
-    if (!_documents.contains(document)) {
+    if (!d->_documents.contains(document)) {
         if (document->dataStructures().count() == 0) {
             document->addDataStructure();
         }
-        _documents.append(document);
+        d->_documents.append(document);
         changeDocument(document);
     }
     emit documentListChanged();
@@ -89,7 +134,7 @@ void DocumentManager::changeDocument()
     if (! action) {
         return;
     }
-    if (Document *doc = _documents.value(action->data().toInt())) {
+    if (Document *doc = d->_documents.value(action->data().toInt())) {
         changeDocument(doc);
     }
 }
@@ -97,20 +142,20 @@ void DocumentManager::changeDocument()
 
 void DocumentManager::changeDocument(Document *document)
 {
-    if (!_documents.contains(document)) {
-        _documents.append(document);
+    if (!d->_documents.contains(document)) {
+        d->_documents.append(document);
     }
-    if (_activeDocument != document) {
-        if (_activeDocument) {
-            emit deactivateDocument(_activeDocument);
-            DataStructureBackendManager::self()->disconnect(_activeDocument);
+    if (d->_activeDocument != document) {
+        if (d->_activeDocument) {
+            emit deactivateDocument(d->_activeDocument);
+            DataStructureBackendManager::self()->disconnect(d->_activeDocument);
             document->disconnect(SIGNAL(activeDataStructureChanged(DataStructurePtr)));
             document->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
             document->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
             document->engineBackend()->disconnect(SIGNAL(finished()));
         }
-        _activeDocument = document;
-        if (_activeDocument) {
+        d->_activeDocument = document;
+        if (d->_activeDocument) {
             emit activateDocument();
         }
     }
@@ -127,16 +172,16 @@ void DocumentManager::closeAllDocuments()
 
 void DocumentManager::removeDocument(Document *document)
 {
-    if (_documents.removeOne(document)) {
+    if (d->_documents.removeOne(document)) {
         document->engineBackend()->stop();
         document->disconnect();
 
-        if (_activeDocument == document) {
-            if (_documents.count() > 0) {
-                changeDocument(_documents.last()); //
+        if (d->_activeDocument == document) {
+            if (d->_documents.count() > 0) {
+                changeDocument(d->_documents.last()); //
             } else {
-                emit deactivateDocument(_activeDocument);
-                _activeDocument = 0;
+                emit deactivateDocument(d->_activeDocument);
+                d->_activeDocument = 0;
             }
         }
         emit documentRemoved(document);
@@ -150,17 +195,17 @@ void DocumentManager::removeDocument(Document *document)
 
 void DocumentManager::convertToDataStructure()
 {
-    if (!_activeDocument) {
+    if (!d->_activeDocument) {
         kWarning() << "No active document found, creating new document with active backend.";
         newDocument();
         return;
     }
 
     //Check if need to convert (different DS) and if is possible to convert without data lost.
-    if (_activeDocument->dataStructureTypeName() != DataStructureBackendManager::self()->activeBackend()->internalName()
-            && DataStructureBackendManager::self()->activeBackend()->canConvertFrom(_activeDocument))
+    if (d->_activeDocument->dataStructureTypeName() != DataStructureBackendManager::self()->activeBackend()->internalName()
+            && DataStructureBackendManager::self()->activeBackend()->canConvertFrom(d->_activeDocument))
     {
-        _activeDocument->changeBackend();
+        d->_activeDocument->changeBackend();
         kDebug() << "Data structure converted to " << DataStructureBackendManager::self()->activeBackend()->name();
         emit activateDocument();
     }
@@ -174,11 +219,11 @@ Document * DocumentManager::newDocument()
 
     // find unused name
     QList<QString> usedNames;
-    foreach(Document * document, _documents) {
+    foreach(Document * document, d->_documents) {
         usedNames.append(document->name());
     }
     // For at least one i in this range, the name is not used, yet.
-    for (int i = 0; i < _documents.length() + 1; ++i) {
+    for (int i = 0; i < d->_documents.length() + 1; ++i) {
         name = QString("%1 %2").arg(i18nc("document that contains graphs or data structures as a visual representation", "Document")).arg(i);
         if (!usedNames.contains(name)) {
             break;
@@ -189,8 +234,8 @@ Document * DocumentManager::newDocument()
     doc->setModified(false);
     addDocument(doc);
 
-    if (_activeDocument==0) {
-        _activeDocument = doc;
+    if (d->_activeDocument==0) {
+        d->_activeDocument = doc;
         emit activateDocument();
     }
     return doc;
@@ -234,3 +279,30 @@ void DocumentManager::exportDocument(Document *document, const KUrl &documentUrl
     }
     return;
 }
+
+
+QSvgRenderer * DocumentManager::sharedRenderer(const QString &iconPackage)
+{
+    if (d->_sharedRenderers.count(iconPackage) == 0 || !d->_sharedRenderers.contains(iconPackage)) {
+        registerSharedRenderer(iconPackage);
+    }
+    return d->_sharedRenderers.value(iconPackage);
+}
+
+
+QSvgRenderer * DocumentManager::registerSharedRenderer(const QString &iconPackage)
+{
+    if (!d->_sharedRenderers.contains(iconPackage)) {
+        QSvgRenderer *z = new QSvgRenderer(iconPackage);
+        d->_sharedRenderers.insert(iconPackage, z);
+    }
+    return d->_sharedRenderers.value(iconPackage);
+}
+
+
+void DocumentManager::removeSharedRenderer(const QString &iconPackage)
+{
+    d->_sharedRenderers[iconPackage]->deleteLater();
+    d->_sharedRenderers.remove(iconPackage);
+}
+

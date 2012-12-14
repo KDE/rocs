@@ -122,8 +122,8 @@ GenerateGraphWidget::~GenerateGraphWidget()
 
 void GenerateGraphWidget::generateMesh(int rows, int columns)
 {
-    DocumentManager::self()->activeDocument()->activeDataStructure()->updateRelativeCenter();
-    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+    DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
     if (! graphDoc_) {
         return;
@@ -132,9 +132,9 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     if (columns < 1)  columns = 1;
 
     // use active data structure iff empty
-    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("Mesh Graph"));
+        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Mesh Graph"));
 
     // create mesh of NxN points
     QMap<QPair<int, int>, DataPtr > meshNodes;
@@ -159,8 +159,8 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
 
 void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 {
-    DocumentManager::self()->activeDocument()->activeDataStructure()->updateRelativeCenter();
-    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+    DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
@@ -171,9 +171,9 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
     }
 
     // use active data structure iff empty
-    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("Star Graph"));
+        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Star Graph"));
 
     QList< QPair<QString, QPointF> > starNodes;
     for (int i = 1; i <= numberSatelliteNodes; i++) {
@@ -195,8 +195,8 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 
 void GenerateGraphWidget::generateCircle(int numberNodes)
 {
-    DocumentManager::self()->activeDocument()->activeDataStructure()->updateRelativeCenter();
-    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+    DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
@@ -207,9 +207,9 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
     }
 
     // use active data structure iff empty
-    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("Circle Graph"));
+        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Circle Graph"));
 
     QList< QPair<QString, QPointF> > circleNodes;
 
@@ -231,7 +231,7 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
 
 void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges)
 {
-    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
     Graph randomGraph;
     boost::mt19937 gen;
@@ -263,9 +263,9 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
 
     // put generated random graph at whiteboard
     // use active data structure iff empty
-    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("RandomGraph"));
+        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("RandomGraph"));
 
     // put nodes at whiteboard as generated
     QMap<int, DataPtr > mapNodes;
@@ -289,7 +289,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
 
 void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges)
 {
-    QPointF center = DocumentManager::self()->activeDocument()->activeDataStructure()->relativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
     boost::mt19937 gen;
     gen.seed(static_cast<unsigned int>(seed));
@@ -306,9 +306,9 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 
     // put generated random graph at whiteboard
     // use active data structure iff empty
-    DataStructurePtr graph = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
     if (graph->dataList().size() > 0)
-        graph = DocumentManager::self()->activeDocument()->addDataStructure(i18n("RandomGraph"));
+        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("RandomGraph"));
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
     boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >

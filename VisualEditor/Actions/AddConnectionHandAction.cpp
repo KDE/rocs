@@ -71,8 +71,8 @@ bool AddConnectionHandAction::executePress(QPointF pos)
     if (_working) {
         return false;
     }
-    if (!  DocumentManager::self()->activeDocument()->activeDataStructure()
-            || DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()) {
+    if (!  DocumentManager::self().activeDocument()->activeDataStructure()
+            || DocumentManager::self().activeDocument()->activeDataStructure()->readOnly()) {
         return false;
     }
 
@@ -89,7 +89,7 @@ bool AddConnectionHandAction::executePress(QPointF pos)
 
 bool AddConnectionHandAction::executeMove(QPointF pos)
 {
-    if (!DocumentManager::self()->activeDocument()->activeDataStructure()
+    if (!DocumentManager::self().activeDocument()->activeDataStructure()
             || !_from) {
         return false;
     }
@@ -105,7 +105,7 @@ bool AddConnectionHandAction::executeMove(QPointF pos)
 
 bool AddConnectionHandAction::executeRelease(QPointF pos)
 {
-    DataStructurePtr activeDataStructure = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DataStructurePtr activeDataStructure = DocumentManager::self().activeDocument()->activeDataStructure();
 
     if (!_working || !activeDataStructure) {
         return false;

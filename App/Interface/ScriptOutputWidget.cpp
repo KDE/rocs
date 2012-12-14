@@ -36,7 +36,7 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     connect(ui->buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
     connect(ui->buttonDisableClear, SIGNAL(clicked(bool)), this, SLOT(updateFixOutputButton()));
     connect(ui->buttonClear, SIGNAL(clicked(bool)), this, SLOT(clear()));
-    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)), this, SLOT(unsetEngine()));
+    connect(&DocumentManager::self(), SIGNAL(documentRemoved(Document*)), this, SLOT(unsetEngine()));
 }
 
 void ScriptOutputWidget::unsetEngine()

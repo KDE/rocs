@@ -230,7 +230,7 @@ void PointerTypePage::setDocument(Document* document)
 void PointerTypePage::setPointerType(PointerTypePtr pointerType)
 {
     //FIXME current workaround: select current active document as parent document
-    setDocument(DocumentManager::self()->activeDocument());
+    setDocument(DocumentManager::self().activeDocument());
     ui->typeSelector->setCurrentIndex(ui->typeSelector->findData(QVariant(pointerType->identifier())));
     _model->setPointerType(pointerType);
 }

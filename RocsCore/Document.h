@@ -62,10 +62,6 @@ public:
 
     bool isModified() const;
 
-    static QSvgRenderer * sharedRenderer(const QString &iconPackage);
-    static QSvgRenderer * registerSharedRenderer(const QString &iconPackage);
-    static void removeSharedRenderer(const QString &iconPackage);
-
     void setName(const QString &name);
     QString name() const;
 

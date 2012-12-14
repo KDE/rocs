@@ -53,7 +53,7 @@ SelectMoveHandAction::~SelectMoveHandAction()
 
 bool SelectMoveHandAction::executePress(QPointF pos)
 {
-    if (!DocumentManager::self()->activeDocument()->activeDataStructure()) {
+    if (!DocumentManager::self().activeDocument()->activeDataStructure()) {
         return false;
     }
 
@@ -96,8 +96,8 @@ bool SelectMoveHandAction::executeMove(QPointF pos)
         return false;
     }
 
-    if (!DocumentManager::self()->activeDocument()->isPointAtDocument(pos)) {
-        Document *d = DocumentManager::self()->activeDocument();
+    if (!DocumentManager::self().activeDocument()->isPointAtDocument(pos)) {
+        Document *d = DocumentManager::self().activeDocument();
         if (pos.x() < d->left()) {
             pos.setX(d->left());
         }

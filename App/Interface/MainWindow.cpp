@@ -119,11 +119,11 @@ MainWindow::MainWindow()
     setupToolsPluginsAction();
     setupDSPluginsAction();
 
-    connect(DocumentManager::self(), SIGNAL(activateDocument()),
+    connect(&DocumentManager::self(), SIGNAL(activateDocument()),
             this, SLOT(setActiveDocument()));
-    connect(DocumentManager::self(), SIGNAL(deactivateDocument(Document*)),
+    connect(&DocumentManager::self(), SIGNAL(deactivateDocument(Document*)),
             this, SLOT(releaseDocument(Document*)));
-    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
+    connect(&DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
             this, SLOT(releaseDocument(Document*)));
 
     // TODO: use welcome widget instead of creating default empty project
@@ -224,7 +224,7 @@ Project* MainWindow::createNewProject()
     //TODO duplicated functionality with newProject(): merge them for 4.11
     Project *newProject = new Project();
     // create new document and add this to project new
-    newProject->addGraphFileNew(DocumentManager::self()->newDocument());
+    newProject->addGraphFileNew(DocumentManager::self().newDocument());
     newProject->addCodeFileNew(_codeEditor->newScript());
     _journalWidget->openJournal(newProject);
 
@@ -341,7 +341,7 @@ QWidget* MainWindow::setupSidePanel()
     // add widgets to dock
     // document property widgets
     DocumentTypesWidget* documentTypesWidget = new DocumentTypesWidget(this);
-    connect(DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument()));
+    connect(&DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument()));
     sideDock->addDock(documentTypesWidget, i18n("Element Types"), KIcon("document-properties"));
 
     // Project Journal
@@ -452,8 +452,8 @@ void MainWindow::setupToolsPluginsAction()
     foreach(QAction* action, _toolsPlugins) {
         ToolsPluginInterface *plugin = ToolManager::instance()->plugins().at(action->data().toInt());
         action->setEnabled(
-                DocumentManager::self()->activeDocument() &&
-                plugin->supportedDataStructures().contains(DocumentManager::self()->activeDocument()->dataStructureInternalName())
+                DocumentManager::self().activeDocument() &&
+                plugin->supportedDataStructures().contains(DocumentManager::self().activeDocument()->dataStructureInternalName())
                           );
     }
 }
@@ -509,15 +509,15 @@ void MainWindow::setupDocumentsList()
     unplugActionList("Doc_List");
     QActionGroup * group = new QActionGroup(this);
     int count = 0;
-    foreach(Document * doc, DocumentManager::self()->documentList()) {
+    foreach(Document * doc, DocumentManager::self().documentList()) {
         action = new KAction(doc->name(), this);
         action->setData(count++);
         action->setCheckable(true);
-        if (doc == DocumentManager::self()->activeDocument()) {
+        if (doc == DocumentManager::self().activeDocument()) {
             action->setChecked(true);
         }
         action->setActionGroup(group);
-        connect(action, SIGNAL(triggered(bool)), DocumentManager::self(), SLOT(changeDocument()));
+        connect(action, SIGNAL(triggered(bool)), &DocumentManager::self(), SLOT(changeDocument()));
         pluginList.append(action);
     }
 
@@ -527,7 +527,7 @@ void MainWindow::setupDocumentsList()
 void MainWindow::setActiveDocument()
 {
     kDebug() << "Setting the document in the main window";
-    Document *activeDocument = DocumentManager::self()->activeDocument();
+    Document *activeDocument = DocumentManager::self().activeDocument();
     QtScriptBackend *engine = activeDocument->engineBackend();
 
     _graphVisualEditor->setActiveDocument();
@@ -557,7 +557,7 @@ void MainWindow::releaseDocument(Document* d)
 void MainWindow::addEmptyGraphDocument()
 {
     _currentProject->addGraphFileNew(
-        DocumentManager::self()->newDocument()
+        DocumentManager::self().newDocument()
     );
 }
 
@@ -589,7 +589,7 @@ void MainWindow::loadDocument(const QString& name)
         return;
     }
 
-    DocumentManager::self()->openDocument(KUrl::fromLocalFile(name));
+    DocumentManager::self().openDocument(KUrl::fromLocalFile(name));
 }
 
 
@@ -600,12 +600,12 @@ void MainWindow::newProject()
     }
 
     _codeEditor->closeAllScripts();
-    DocumentManager::self()->closeAllDocuments();
+    DocumentManager::self().closeAllDocuments();
 
     delete _currentProject;
     _currentProject = new Project();
     _currentProject->addCodeFileNew(_codeEditor->newScript());
-    _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
+    _currentProject->addGraphFileNew(DocumentManager::self().newDocument());
     _journalWidget->openJournal(_currentProject);
     updateCaption();
 }
@@ -685,8 +685,8 @@ void MainWindow::openProject(const KUrl& fileName)
         }
     }
     // import project specified: close everything and delete old project
-    DocumentManager::self()->activeDocument()->engineBackend()->stop();
-    DocumentManager::self()->closeAllDocuments();
+    DocumentManager::self().activeDocument()->engineBackend()->stop();
+    DocumentManager::self().closeAllDocuments();
     _codeEditor->closeAllScripts();
     delete _currentProject;
 
@@ -695,16 +695,16 @@ void MainWindow::openProject(const KUrl& fileName)
     if (file.fileName().endsWith(QLatin1String("rocsz"), Qt::CaseInsensitive)){
         _currentProject = new Project(file, file.directory(KUrl::AppendTrailingSlash));
         foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
-            DocumentManager::self()->openDocument(graphFile);
+            DocumentManager::self().openDocument(graphFile);
         }
     } else {
         _currentProject = new Project(file);
         foreach(const KUrl& graphFile, _currentProject->graphFiles()) {
-            DocumentManager::self()->openDocument(graphFile);
+            DocumentManager::self().openDocument(graphFile);
         }
     }
     if (_currentProject->graphFiles().count() == 0) {
-        _currentProject->addGraphFileNew(DocumentManager::self()->newDocument());
+        _currentProject->addGraphFileNew(DocumentManager::self().newDocument());
     }
     foreach(const KUrl& codeFile, _currentProject->codeFiles()) {
         _codeEditor->openScript(codeFile);
@@ -769,7 +769,7 @@ void MainWindow::newScript()
 void MainWindow::saveGraph(Document* document)
 {
     if (document == 0) {
-        document = DocumentManager::self()->activeDocument();
+        document = DocumentManager::self().activeDocument();
     }
     Q_ASSERT(document);
     if (document->fileUrl().isEmpty()) {
@@ -782,7 +782,7 @@ void MainWindow::saveGraph(Document* document)
 
 void MainWindow::saveAllGraphs()
 {
-    foreach(Document * document, DocumentManager::self()->documentList()) {
+    foreach(Document * document, DocumentManager::self().documentList()) {
         if (document->fileUrl().isEmpty()) {
             _currentProject->saveGraphFileAs(document,
                                              _currentProject->projectFile().toLocalFile().remove(QRegExp(".rocsz*$"))
@@ -796,14 +796,14 @@ void MainWindow::saveAllGraphs()
 
 void MainWindow::saveGraphAs()
 {
-    saveGraphAs(DocumentManager::self()->activeDocument());
+    saveGraphAs(DocumentManager::self().activeDocument());
 }
 
 
 void MainWindow::saveGraphAs(Document* document)
 {
     if (document == 0) {
-        document = DocumentManager::self()->activeDocument();
+        document = DocumentManager::self().activeDocument();
     }
     Q_ASSERT(document);
     QString file = KFileDialog::getSaveFileName(QString(),
@@ -824,7 +824,7 @@ void MainWindow::newGraph()
     if (!file.endsWith(QLatin1String(".graph"))){
         file.append(".graph");
     }
-    DocumentManager::self()->openDocument(KUrl::fromLocalFile(file));
+    DocumentManager::self().openDocument(KUrl::fromLocalFile(file));
     _currentProject->addGraphFile(file);
 }
 
@@ -843,7 +843,7 @@ int MainWindow::saveIfChanged()
     }
 
     bool anyGraphDocumentModified = false;
-    foreach(Document * document, DocumentManager::self()->documentList()) {
+    foreach(Document * document, DocumentManager::self().documentList()) {
         if (document->isModified()) {
             anyGraphDocumentModified = true;
             break;
@@ -858,7 +858,7 @@ int MainWindow::saveIfChanged()
         }
         return btnCode;
     }
-    if (!DocumentManager::self()->activeDocument()->isModified() && _codeEditor->isModified()) {
+    if (!DocumentManager::self().activeDocument()->isModified() && _codeEditor->isModified()) {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
                                 "@info",
                                 "Changes on your script files are unsaved. Do you want to save all unsaved scripts?"));
@@ -888,7 +888,7 @@ void MainWindow::importGraphFile()
         return;
     }
 
-    DocumentManager::self()->addDocument(gd);
+    DocumentManager::self().addDocument(gd);
 
     if (importer.hasDialog()) {
         importer.dialogExec();
@@ -900,7 +900,7 @@ void MainWindow::exportGraphFile()
 {
     ImporterExporterManager exp(this);
 
-    exp.exportFile(DocumentManager::self()->activeDocument());
+    exp.exportFile(DocumentManager::self().activeDocument());
 }
 
 void MainWindow::showPossibleIncludes()
@@ -935,7 +935,7 @@ void MainWindow::runToolPlugin()
         return;
     }
     if (ToolsPluginInterface *plugin =  ToolManager::instance()->plugins().value(action->data().toInt())) {
-        plugin->run(DocumentManager::self()->activeDocument());
+        plugin->run(DocumentManager::self().activeDocument());
     }
 }
 
@@ -957,7 +957,7 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
 
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
-    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
     if (engine->isRunning()) {
         engine->stop();
     }
@@ -981,7 +981,7 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
 
     enableStopAction();
 
-    engine->setScript(script, DocumentManager::self()->activeDocument());
+    engine->setScript(script, DocumentManager::self().activeDocument());
     engine->execute();
 }
 
@@ -990,7 +990,7 @@ void MainWindow::executeScriptOneStep(const QString& text)
 {
     Q_ASSERT(_outputWidget);
 
-    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
 
     //TODO disable start action
     enableStopAction();
@@ -1006,7 +1006,7 @@ void MainWindow::executeScriptOneStep(const QString& text)
                              scriptPath.isEmpty() ? scriptPath : scriptPath.section('/', 0, -2),
                              _codeEditor->document()->documentName());
 
-        engine->setScript(script, DocumentManager::self()->activeDocument());
+        engine->setScript(script, DocumentManager::self().activeDocument());
         engine->executeStep();
         return;
     }
@@ -1015,7 +1015,7 @@ void MainWindow::executeScriptOneStep(const QString& text)
 
 void MainWindow::stopScript()
 {
-    QtScriptBackend *engine = DocumentManager::self()->activeDocument()->engineBackend();
+    QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
     disableStopAction();
     engine->stop();
 }

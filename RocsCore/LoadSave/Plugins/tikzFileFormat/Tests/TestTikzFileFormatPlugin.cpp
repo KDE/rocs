@@ -31,8 +31,8 @@ TestTikzFileFormatPlugin::TestTikzFileFormatPlugin()
 
 void TestTikzFileFormatPlugin::serializeTest()
 {
-    DocumentManager::self()->addDocument(new Document("testSerialization"));
-    Document* document = DocumentManager::self()->activeDocument();
+    DocumentManager::self().addDocument(new Document("testSerialization"));
+    Document* document = DocumentManager::self().activeDocument();
     QMap<QString, DataPtr> dataList;
 
     // Creates a simple Graph with 5 data elements and connect them with pointers.

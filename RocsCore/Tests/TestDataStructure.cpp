@@ -34,23 +34,23 @@
 
 TestDataStructure::TestDataStructure()
 {
-    DocumentManager::self()->addDocument(new Document("test"));;
+    DocumentManager::self().addDocument(new Document("test"));;
 }
 
 void TestDataStructure::init()
 {
-    DocumentManager::self()->newDocument();
+    DocumentManager::self().newDocument();
 }
 
 void TestDataStructure::cleanup()
 {
-    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
 }
 
 void TestDataStructure::dataAddDeleteTest()
 {
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+    DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
     DataList dataList;
 
     // create 10 data elements
@@ -66,14 +66,14 @@ void TestDataStructure::dataAddDeleteTest()
 
     QVERIFY2(ds->dataList().size() == 0, "ERROR: Not all data elements were deleted");
 
-    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
 }
 
 void TestDataStructure::pointerAddDeleteTest()
 {
     // test for undirected pointers
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+    DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
     DataList dataList = DataList();
 
     // create 10 data elements
@@ -115,8 +115,8 @@ void TestDataStructure::createSimpleGraph()
 {
     QMap<QString, DataPtr> dataList;
     /* Creates a simple Graph with 5 datums and connects them with pointers. */
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+    DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
 
     ds->setProperty("name", "Graph1");
     dataList.insert("a", ds->addData("a"));
@@ -146,7 +146,7 @@ void TestDataStructure::createSimpleGraph()
 
 void TestDataStructure::dataTypesTest()
 {
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure();
+    DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure();
 
     DataList dataListDefault, dataList1, dataList2;
     QVERIFY2(ds->document()->dataTypeList().size() == 1, "ERROR: no default data type created");
@@ -190,8 +190,8 @@ void TestDataStructure::dataTypesTest()
 
 void TestDataStructure::pointerTypesTest()
 {
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+    DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
 
     DataList dataList;
     QVERIFY2(ds->document()->pointerTypeList().size() == 1, "ERROR: no default pointer type created");
@@ -231,8 +231,8 @@ void TestDataStructure::pointerTypesTest()
 void TestDataStructure::pointerDirectionChange()
 {
     QMap<int, DataPtr> dataList;
-    DataStructurePtr ds = DataStructure::create(DocumentManager::self()->activeDocument());
-    DocumentManager::self()->activeDocument()->setActiveDataStructure(ds);
+    DataStructurePtr ds = DataStructure::create(DocumentManager::self().activeDocument());
+    DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
 
     // add two nodes 0 and 1, set type of default pointer type to unidirectional
     ds->document()->pointerType(0)->setDirection(PointerType::Unidirectional);

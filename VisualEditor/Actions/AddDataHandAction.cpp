@@ -60,8 +60,8 @@ void AddDataHandAction::setDataType(DataTypePtr dataType)
 
 bool AddDataHandAction::executePress(QPointF pos)
 {
-    if (!DocumentManager::self()->activeDocument()->activeDataStructure()
-            ||  DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()
+    if (!DocumentManager::self().activeDocument()->activeDataStructure()
+            ||  DocumentManager::self().activeDocument()->activeDataStructure()->readOnly()
        ) {
         return false;
     }
@@ -72,7 +72,7 @@ bool AddDataHandAction::executePress(QPointF pos)
         dataTypeIdentifier = _dataType->identifier();
     }
 
-    if (DocumentManager::self()->activeDocument()->activeDataStructure()
+    if (DocumentManager::self().activeDocument()->activeDataStructure()
         ->addData(QString(), QPointF(pos.x(), pos.y()), dataTypeIdentifier))
     {
         return true;

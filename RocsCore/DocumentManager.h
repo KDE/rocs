@@ -22,18 +22,22 @@
 #define DOCUMENTMANAGER_H
 
 #include <QObject>
+#include <QMap>
+#include <QPointer>
+#include "RocsCoreExport.h"
 
+class DocumentManagerPrivate;
 class KUrl;
 class Data;
 class Document;
-#include "RocsCoreExport.h"
+class QSvgRenderer;
 
 class ROCSLIB_EXPORT DocumentManager : public QObject
 {
     Q_OBJECT
 
 public:
-    static DocumentManager* self();
+    static DocumentManager & self();
 
     virtual ~DocumentManager();
 
@@ -58,6 +62,10 @@ public:
      * \return list with documents
      */
     QList< Document* > documentList() const ;
+
+    QSvgRenderer * sharedRenderer(const QString &iconPackage);
+    QSvgRenderer * registerSharedRenderer(const QString &iconPackage);
+    void removeSharedRenderer(const QString &iconPackage);
 
     int viewStyleDataNode();
     int viewStyleDataEdge();
@@ -162,23 +170,7 @@ signals:
 
 private:
     DocumentManager(QObject *parent = 0);
-    static DocumentManager *_self;
-    QList<Document*> _documents;
-    Document *_activeDocument;
+    const QScopedPointer<DocumentManagerPrivate> d;
 };
 
-inline Document * DocumentManager::document(const int index) const
-{
-    return (index < _documents.count() && index >= 0) ? _documents.at(index) : 0;
-}
-
-inline Document * DocumentManager::activeDocument() const
-{
-    return _activeDocument;
-}
-
-inline QList< Document* > DocumentManager::documentList() const
-{
-    return _documents;
-}
 #endif // DOCUMENTMANAGER_H

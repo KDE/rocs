@@ -63,7 +63,7 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
     KDialog::centerOnScreen(widget, -3);
 
     // set types
-    Document* document = DocumentManager::self()->activeDocument();
+    Document* document = DocumentManager::self().activeDocument();
     ui->dataType->addItem(i18n("All Data Types"), -1);
     foreach (int typeId, document->dataTypeList()) {
         ui->dataType->addItem(document->dataType(typeId)->name(), typeId);
@@ -127,7 +127,7 @@ void AssignValuesWidget::updateApplyButtonStates()
 void AssignValuesWidget::assignValues()
 {
     DataStructurePtr ds;
-    QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
+    QList< DataStructurePtr > dsList = DocumentManager::self().activeDocument()->dataStructures();
 
     // no data structures present at active document
     if (ui->dataStructuresCombo->count() == 0) {

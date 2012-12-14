@@ -68,26 +68,26 @@ public:
 
 static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/)
 {
-    DocumentManager::self()->activeDocument()->engineBackend()->debug(QString("%1").arg(context->argument(0).toString()));
+    DocumentManager::self().activeDocument()->engineBackend()->debug(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
 static QScriptValue output_script(QScriptContext *context, QScriptEngine* /*engine*/)
 {
-    DocumentManager::self()->activeDocument()->engineBackend()->output(QString("%1").arg(context->argument(0).toString()));
+    DocumentManager::self().activeDocument()->engineBackend()->output(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 
 static QScriptValue interrupt_script(QScriptContext *context, QScriptEngine* /*engine*/)
 {
     Q_UNUSED(context);
-    DocumentManager::self()->activeDocument()->engineBackend()->interrupt();
+    DocumentManager::self().activeDocument()->engineBackend()->interrupt();
     return QScriptValue();
 }
 
 static QScriptValue include_script(QScriptContext *context, QScriptEngine* /*engine*/)
 {
-    DocumentManager::self()->activeDocument()->engineBackend()->include(QString("%1").arg(context->argument(0).toString()));
+    DocumentManager::self().activeDocument()->engineBackend()->include(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
 

@@ -41,12 +41,12 @@ AddDataAction::~AddDataAction()
 
 bool AddDataAction::executePress(QPointF pos)
 {
-    if (!DocumentManager::self()->activeDocument()->activeDataStructure()
-            ||  DocumentManager::self()->activeDocument()->activeDataStructure()->readOnly()
+    if (!DocumentManager::self().activeDocument()->activeDataStructure()
+            ||  DocumentManager::self().activeDocument()->activeDataStructure()->readOnly()
        ) {
         return false;
     }
-    DataPtr tmp = DocumentManager::self()->activeDocument()->activeDataStructure()
+    DataPtr tmp = DocumentManager::self().activeDocument()->activeDataStructure()
                   ->addData(QString(), QPointF(pos.x(), pos.y()));
     kDebug()  << " the data's actual position: " << tmp.get()->x() << ", " << tmp.get()->y() ;
     return true;

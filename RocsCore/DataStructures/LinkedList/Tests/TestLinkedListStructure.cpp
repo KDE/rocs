@@ -35,14 +35,14 @@ using namespace Rocs;
 TestLinkedListStructure::TestLinkedListStructure()
 {
     QVERIFY(DataStructureBackendManager::self()->backends().count() > 0);
-    DocumentManager::self()->addDocument(new Document("test"));
+    DocumentManager::self().addDocument(new Document("test"));
 }
 
 void TestLinkedListStructure::listModificationTest()
 {
     // test for the basic properties of the list structure
     DataStructureBackendManager::self()->setBackend("LinkedList");
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
+    DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
     QList< boost::shared_ptr<ListNode> > dataList;
 
     // add one node

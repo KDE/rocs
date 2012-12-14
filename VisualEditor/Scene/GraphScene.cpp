@@ -70,7 +70,7 @@ void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
     _minHeight = minHeight;
     setSceneRect(-minWidth / 2, -minHeight / 2, minWidth / 2, minHeight / 2);
 
-    Document *gd = DocumentManager::self()->activeDocument();
+    Document *gd = DocumentManager::self().activeDocument();
     if (gd->width() < _minWidth) {
         gd->setLeft(gd->left() - (_minWidth - gd->width()) / 2);
         gd->setRight(gd->right() + (_minWidth - gd->width()) / 2);
@@ -124,7 +124,7 @@ void GraphScene::setAction(QAction *action)
 void GraphScene::setActiveDocument()
 {
     kDebug() << "Setting the document in the scene";
-    Document *gd = DocumentManager::self()->activeDocument();
+    Document *gd = DocumentManager::self().activeDocument();
     if (_graphDocument == gd) {
         return;
     } else if (gd == 0) {

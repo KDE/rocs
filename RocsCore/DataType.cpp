@@ -19,6 +19,7 @@
 
 #include "DataType.h"
 #include "DataStructure.h"
+#include "DocumentManager.h"
 #include <boost/weak_ptr.hpp>
 
 #include <KDebug>
@@ -114,7 +115,7 @@ KIcon DataType::icon() const
         svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
         QXmlStreamReader reader(&svgFile);
-        QSvgRenderer *renderer = Document::sharedRenderer(svgFile.fileName());
+        QSvgRenderer *renderer = DocumentManager::self()->sharedRenderer(svgFile.fileName());
         while (!reader.atEnd()) {
             reader.readNext();
             if (!reader.attributes().hasAttribute("id")) {

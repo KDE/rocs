@@ -217,7 +217,7 @@ void DataTypePage::setDocument(Document* document)
 void DataTypePage::setDataType(DataTypePtr dataType)
 {
     //FIXME current workaround: select current active document as parent document
-    setDocument(DocumentManager::self()->activeDocument());
+    setDocument(DocumentManager::self().activeDocument());
     ui->typeSelector->setCurrentIndex(ui->typeSelector->findData(QVariant(dataType->identifier())));
     _model->setDataType(dataType);
 }
@@ -288,7 +288,7 @@ void DataTypePage::setCurrentType(int index)
         svgFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
         QXmlStreamReader reader(&svgFile);
-        QSvgRenderer *renderer = Document::sharedRenderer(svgFile.fileName());
+        QSvgRenderer *renderer = DocumentManager::self().sharedRenderer(svgFile.fileName());
 
         while (!reader.atEnd()) {
             reader.readNext();

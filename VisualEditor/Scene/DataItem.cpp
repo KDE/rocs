@@ -22,6 +22,7 @@
 #include "Data.h"
 #include "DataStructure.h"
 #include "GraphicsLayout.h"
+#include "DocumentManager.h"
 
 #include <KDebug>
 #include <QFont>
@@ -144,7 +145,7 @@ void DataItem::updateSize()
 void DataItem::updateRenderer()
 {
     QString iconPackage = d->_data->dataStructure()->document()->iconPackage();
-    setSharedRenderer(Document::sharedRenderer(iconPackage));
+    setSharedRenderer(DocumentManager::self()->sharedRenderer(iconPackage));
 }
 
 void DataItem::updateIcon()

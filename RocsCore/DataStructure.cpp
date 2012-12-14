@@ -440,7 +440,7 @@ DataPtr DataStructure::getData(int uniqueIdentifier)
 void DataStructure::remove(DataPtr data)
 {
     //Note: important for resize: remove node before emit resizeRequest
-    Document *doc = DocumentManager::self()->activeDocument();
+    Document *doc = DocumentManager::self().activeDocument();
 
     if (doc != 0) {
         qreal xCenter = (doc->left() + doc->right() )/2;

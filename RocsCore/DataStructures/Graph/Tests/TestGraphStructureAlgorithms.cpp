@@ -39,19 +39,19 @@ TestGraphStructureAlgorithms::TestGraphStructureAlgorithms()
 void TestGraphStructureAlgorithms::init()
 {
     DataStructureBackendManager::self()->setBackend("Graph");
-    DocumentManager::self()->newDocument();
+    DocumentManager::self().newDocument();
 }
 
 
 void TestGraphStructureAlgorithms::cleanupTestCase()
 {
     qDebug() << "Remove previous test case.";
-    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
 }
 
 void TestGraphStructureAlgorithms::testDijkstraBidirectional()
 {
-    Document *document = DocumentManager::self()->activeDocument();
+    Document *document = DocumentManager::self().activeDocument();
     DataList dataList;
 
     document->pointerType(0)->setDirection(PointerType::Bidirectional);
@@ -84,7 +84,7 @@ void TestGraphStructureAlgorithms::testDijkstraBidirectional()
 
 void TestGraphStructureAlgorithms::testDijkstraUnidirectional()
 {
-    Document *document = DocumentManager::self()->activeDocument();
+    Document *document = DocumentManager::self().activeDocument();
     DataList dataList;
 
     document->pointerType(0)->setDirection(PointerType::Unidirectional);

@@ -35,7 +35,7 @@
 TestGraphStructure::TestGraphStructure()
 {
     QVERIFY(DataStructureBackendManager::self()->backends().count() > 0);
-    DocumentManager::self()->addDocument(new Document("test"));
+    DocumentManager::self().addDocument(new Document("test"));
 }
 
 void TestGraphStructure::cleanupTestCase()
@@ -45,7 +45,7 @@ void TestGraphStructure::cleanupTestCase()
 void TestGraphStructure::dataAddDeleteTest()
 {
     DataStructureBackendManager::self()->setBackend("Graph");
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
+    DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
     DataList dataList;
 
     // create 10 data elements
@@ -66,7 +66,7 @@ void TestGraphStructure::pointerAddDeleteTest()
 {
     // test for undirected pointers
     DataStructureBackendManager::self()->setBackend("Graph");
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
+    DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
     DataList dataList;
 
     // create 10 data elements
@@ -108,7 +108,7 @@ void TestGraphStructure::createSimpleGraph()
     QMap<QString, DataPtr> dataList;
     /* Creates a simple Graph with 5 datums and connects them with pointers. */
     DataStructureBackendManager::self()->setBackend("Graph");
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
+    DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
 
     ds->setProperty("name", "Graph1");
     dataList.insert("a", ds->addData("a"));
@@ -137,7 +137,7 @@ void TestGraphStructure::createSimpleGraph()
 void TestGraphStructure::dataTypesTest()
 {
     DataStructureBackendManager::self()->setBackend("Graph");
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
+    DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
 
     DataList dataListDefault, dataList1, dataList2;
     QVERIFY2(ds->document()->dataTypeList().size() == 1, "ERROR: no default data type created");
@@ -181,7 +181,7 @@ void TestGraphStructure::dataTypesTest()
 void TestGraphStructure::pointerTypesTest()
 {
     DataStructureBackendManager::self()->setBackend("Graph");
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->addDataStructure("AddDeleteTest");
+    DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
 
     DataList dataList;
     QVERIFY2(ds->document()->pointerTypeList().size() == 1, "ERROR: no default pointer type created");
@@ -220,8 +220,8 @@ void TestGraphStructure::pointerTypesTest()
 
 void TestGraphStructure::serializeUnserializePluginExtraProperties()
 {
-    DocumentManager::self()->addDocument(new Document("testSerialization"));
-    Document* document = DocumentManager::self()->activeDocument();
+    DocumentManager::self().addDocument(new Document("testSerialization"));
+    Document* document = DocumentManager::self().activeDocument();
     QMap<QString, DataPtr> dataList;
 
     // Creates a simple Graph with 5 data elements and connect them with pointers.
@@ -230,18 +230,18 @@ void TestGraphStructure::serializeUnserializePluginExtraProperties()
     boost::static_pointer_cast<Rocs::GraphStructure>(ds)->setGraphType(Rocs::GraphStructure::Multigraph);
 
     // serialize into file "serializetest.graph"
-    DocumentManager::self()->activeDocument()->saveAs("graphserializetest");
-    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    DocumentManager::self().activeDocument()->saveAs("graphserializetest");
+    DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
     Document* testDoc = new Document("testDoc");
 
     //unserialize and test properties
-    DocumentManager::self()->addDocument(testDoc);
-    DocumentManager::self()->changeDocument(testDoc);
-    DocumentManager::self()->openDocument(KUrl::fromLocalFile("graphserializetest.graph"));
+    DocumentManager::self().addDocument(testDoc);
+    DocumentManager::self().changeDocument(testDoc);
+    DocumentManager::self().openDocument(KUrl::fromLocalFile("graphserializetest.graph"));
 
     // compare graph type
-    QVERIFY2(DocumentManager::self()->activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
-    ds = DocumentManager::self()->activeDocument()->dataStructures().at(0);
+    QVERIFY2(DocumentManager::self().activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
+    ds = DocumentManager::self().activeDocument()->dataStructures().at(0);
     Rocs::GraphStructure::GRAPH_TYPE graphType = boost::static_pointer_cast<Rocs::GraphStructure>(ds)->graphType();
     QVERIFY2(graphType == Rocs::GraphStructure::Multigraph, "ERROR: graph type not loaded correctly");
 

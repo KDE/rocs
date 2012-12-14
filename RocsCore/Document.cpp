@@ -73,36 +73,6 @@ public:
 };
 
 
-//TODO currently there is no problem in generating a (never cleaned) list
-// of renderers, since it is equivalent to the number of data structure backends.
-// But to be on the secure side, there should be some threshould after that unused renderers
-// are removed.
-QMap< QString, QPointer<QSvgRenderer> > Document::_sharedRenderers;
-
-QSvgRenderer* Document::sharedRenderer(const QString& iconPackage)
-{
-    if (_sharedRenderers.count(iconPackage) == 0 || !_sharedRenderers.contains(iconPackage)) {
-        registerSharedRenderer(iconPackage);
-    }
-    return _sharedRenderers.value(iconPackage).data();
-}
-
-
-QSvgRenderer* Document::registerSharedRenderer(const QString& iconPackage)
-{
-    if (!_sharedRenderers.contains(iconPackage)) {
-        QPointer<QSvgRenderer> z = new QSvgRenderer(iconPackage);
-        _sharedRenderers.insert(iconPackage, z);
-    }
-    return _sharedRenderers.value(iconPackage).data();
-}
-
-
-void Document::removeSharedRenderer(const QString& iconPackage)
-{
-    _sharedRenderers.remove(iconPackage);
-}
-
 
 Document::Document(const QString& name, qreal left, qreal right, qreal top, qreal bottom, QObject *parent)
     : QObject(parent), d(new DocumentPrivate())
@@ -120,8 +90,8 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_modified = false;
 
     d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
-    if (!Document::sharedRenderer(d->_iconPackage)) {
-         Document::registerSharedRenderer(d->_iconPackage);
+    if (!DocumentManager::self().sharedRenderer(d->_iconPackage)) {
+         DocumentManager::self().registerSharedRenderer(d->_iconPackage);
     }
 
     // default types
@@ -553,12 +523,12 @@ DataStructurePtr Document::addDataStructure(DataStructurePtr dataStructure)
 void Document::save()
 {
     Q_ASSERT(!fileUrl().isEmpty());
-    DocumentManager::self()->saveDocumentAs(this, KUrl::fromLocalFile(fileUrl()));
+    DocumentManager::self().saveDocumentAs(this, KUrl::fromLocalFile(fileUrl()));
 }
 
 void Document::saveAs(const QString& fileUrl)
 {
-    DocumentManager::self()->saveDocumentAs(this, KUrl::fromLocalFile(fileUrl));
+    DocumentManager::self().saveDocumentAs(this, KUrl::fromLocalFile(fileUrl));
 }
 
 QString Document::fileUrl() const

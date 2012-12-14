@@ -79,7 +79,7 @@ void TransformEdgesWidget::addDataStructures(QStringList dsNames)
 void TransformEdgesWidget::executeTransform()
 {
     DataStructurePtr graph;
-    QList< DataStructurePtr > dsList = DocumentManager::self()->activeDocument()->dataStructures();
+    QList< DataStructurePtr > dsList = DocumentManager::self().activeDocument()->dataStructures();
 
     // no graph datastructures given at document
     if (ui->dataStructuresCombo->count() == 0)

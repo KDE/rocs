@@ -38,12 +38,12 @@ void TestPlugins::inittestcase()
 
 void TestPlugins::init()
 {
-    DocumentManager::self()->newDocument();
+    DocumentManager::self().newDocument();
 }
 
 void TestPlugins::cleanup()
 {
-    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
 }
 
 void TestPlugins::standardPluginsLoaded()

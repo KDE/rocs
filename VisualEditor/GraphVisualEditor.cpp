@@ -135,7 +135,7 @@ void GraphVisualEditor::setupWidgets()
 
     // at first setup document does not exists
     // this is later set when MainWindow::setActiveDocument() is called
-    PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), DocumentManager::self()->activeDocument(), this);
+    PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), DocumentManager::self().activeDocument(), this);
     d->_documentPropertiesButton = new QToolButton(this);
     d->_documentPropertiesButton->setDefaultAction(propertiesAction);
     d->_documentPropertiesButton->setIcon(KIcon("document-properties"));
@@ -146,9 +146,9 @@ void GraphVisualEditor::setupWidgets()
     setLayout(vLayout);
 
     // listen for document manager changes
-    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
+    connect(&DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
             this, SLOT(releaseDocument()));
-    connect(DocumentManager::self(), SIGNAL(documentListChanged()),
+    connect(&DocumentManager::self(), SIGNAL(documentListChanged()),
             this, SLOT(updateGraphDocumentList()));
 }
 
@@ -197,7 +197,7 @@ QWidget* GraphVisualEditor::sceneToolbar()
 
     // connections for buttons
     connect(d->_documentSelectorCombo, SIGNAL(activated(int)),
-            DocumentManager::self(), SLOT(changeDocument(int)));
+            &DocumentManager::self(), SLOT(changeDocument(int)));
     connect(addDataStructureButton, SIGNAL(clicked()),
             this, SLOT(addDataStructure()));
     connect(removeDataStructureButton, SIGNAL(clicked()),
@@ -215,19 +215,19 @@ QWidget* GraphVisualEditor::sceneToolbar()
 void GraphVisualEditor::updateGraphDocumentList()
 {
     d->_documentSelectorCombo->clear();
-    foreach(Document* document, DocumentManager::self()->documentList()) {
+    foreach(Document* document, DocumentManager::self().documentList()) {
         d->_documentSelectorCombo->addItem(document->name());
     }
 }
 
 void GraphVisualEditor::setActiveDocument()
 {
-    if (d->_document != 0 && d->_document != DocumentManager::self()->activeDocument()) {
+    if (d->_document != 0 && d->_document != DocumentManager::self().activeDocument()) {
         disconnect(d->_document);
         d->_document->disconnect(d->_dataStructureSelectorCombo);
         releaseDocument();
     }
-    d->_document = DocumentManager::self()->activeDocument();
+    d->_document = DocumentManager::self().activeDocument();
     d->_scene->setActiveDocument();
 
     // set button for document properties
@@ -295,7 +295,7 @@ void GraphVisualEditor::updateActiveDataStructure(DataStructurePtr g)
 
     // set property to edit current data structure
     PropertiesDialogAction *dsProperty = new PropertiesDialogAction(i18nc("@action:button", "Properties"),
-                                                                    DocumentManager::self()->activeDocument()->activeDataStructure(),
+                                                                    DocumentManager::self().activeDocument()->activeDataStructure(),
                                                                     this);
     d->_dataStructurePropertiesButton->defaultAction()->deleteLater();
     d->_dataStructurePropertiesButton->setDefaultAction(dsProperty);
@@ -304,14 +304,14 @@ void GraphVisualEditor::updateActiveDataStructure(DataStructurePtr g)
 void GraphVisualEditor::updateDataStructureList()
 {
     d->_dataStructureSelectorCombo->clear();
-    foreach(DataStructurePtr ds, DocumentManager::self()->activeDocument()->dataStructures()) {
+    foreach(DataStructurePtr ds, DocumentManager::self().activeDocument()->dataStructures()) {
         d->_dataStructureSelectorCombo->addItem(ds->name());
     }
     d->_dataStructureSelectorCombo->setCurrentIndex(d->_document->dataStructures().indexOf(d->_document->activeDataStructure()));
 
     // set property to edit current data structure
     PropertiesDialogAction *dsProperty = new PropertiesDialogAction(i18nc("@action:button", "Properties"),
-                                                                    DocumentManager::self()->activeDocument()->activeDataStructure(),
+                                                                    DocumentManager::self().activeDocument()->activeDataStructure(),
                                                                     this);
     d->_dataStructurePropertiesButton->defaultAction()->deleteLater();
     d->_dataStructurePropertiesButton->setDefaultAction(dsProperty);
@@ -319,12 +319,12 @@ void GraphVisualEditor::updateDataStructureList()
 
 void GraphVisualEditor::addDataStructure()
 {
-    DocumentManager::self()->activeDocument()->addDataStructure();
+    DocumentManager::self().activeDocument()->addDataStructure();
 }
 
 void GraphVisualEditor::removeDataStructure()
 {
-    DocumentManager::self()->activeDocument()->activeDataStructure()->remove();
+    DocumentManager::self().activeDocument()->activeDataStructure()->remove();
 }
 
 QList<DataItem*> GraphVisualEditor::selectedNodes() const

@@ -29,14 +29,14 @@
 
 TestLoadSave::TestLoadSave()
 {
-    DocumentManager::self()->addDocument(new Document("test"));;
+    DocumentManager::self().addDocument(new Document("test"));;
 }
 
 
 void TestLoadSave::serializeUnserializeTest()
 {
-    DocumentManager::self()->addDocument(new Document("testSerialization"));
-    Document *document = DocumentManager::self()->activeDocument();
+    DocumentManager::self().addDocument(new Document("testSerialization"));
+    Document *document = DocumentManager::self().activeDocument();
     QMap<QString, DataPtr> dataList;
 
     // register additional properties
@@ -59,19 +59,19 @@ void TestLoadSave::serializeUnserializeTest()
     ds->addPointer(dataList["e"], dataList["a"]);
 
     // serialize into file "serializetest.graph"
-    DocumentManager::self()->activeDocument()->saveAs("serializetest");
-    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    DocumentManager::self().activeDocument()->saveAs("serializetest");
+    DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
     Document* testDoc = new Document("testDoc");
 
     // unserialize and test properties
-    DocumentManager::self()->addDocument(testDoc);
-    DocumentManager::self()->changeDocument(testDoc);
-    DocumentManager::self()->openDocument(KUrl::fromLocalFile("serializetest.graph"));
+    DocumentManager::self().addDocument(testDoc);
+    DocumentManager::self().changeDocument(testDoc);
+    DocumentManager::self().openDocument(KUrl::fromLocalFile("serializetest.graph"));
 
     // default data structure also present
-    QVERIFY2(DocumentManager::self()->activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
+    QVERIFY2(DocumentManager::self().activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
 
-    document = DocumentManager::self()->activeDocument();
+    document = DocumentManager::self().activeDocument();
     QVERIFY(document->dataType(0)->propertyDefaultValue("testproperty").toString() == "default");
     QVERIFY(document->pointerType(0)->propertyDefaultValue("testproperty").toString() == "default");
 
@@ -93,9 +93,9 @@ void TestLoadSave::serializeUnserializeTypesTest()
     QMap<QString, DataPtr> dataList;
 
     // start with new document!
-    DocumentManager::self()->addDocument(new Document("testTypes"));
-    Document *document = DocumentManager::self()->activeDocument();
-    DataStructurePtr ds = DocumentManager::self()->activeDocument()->activeDataStructure();
+    DocumentManager::self().addDocument(new Document("testTypes"));
+    Document *document = DocumentManager::self().activeDocument();
+    DataStructurePtr ds = DocumentManager::self().activeDocument()->activeDataStructure();
 
     // register 2nd data and pointer type
     int dataTypeID = document->registerDataType("testDatatype");
@@ -108,15 +108,15 @@ void TestLoadSave::serializeUnserializeTypesTest()
     ds->addPointer(dataList["a"], dataList["b"], pointerTypeID);
 
     // serialize into file "serializetest.graph"
-    DocumentManager::self()->activeDocument()->saveAs("serializetest");
-    DocumentManager::self()->removeDocument(DocumentManager::self()->activeDocument());
+    DocumentManager::self().activeDocument()->saveAs("serializetest");
+    DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
     Document* testDoc = new Document("testDoc");
 
     // unserialize and test properties
-    DocumentManager::self()->addDocument(testDoc);
-    DocumentManager::self()->changeDocument(testDoc);
-    DocumentManager::self()->openDocument(KUrl::fromLocalFile("serializetest.graph"));
-    document = DocumentManager::self()->activeDocument();
+    DocumentManager::self().addDocument(testDoc);
+    DocumentManager::self().changeDocument(testDoc);
+    DocumentManager::self().openDocument(KUrl::fromLocalFile("serializetest.graph"));
+    document = DocumentManager::self().activeDocument();
     ds = document->dataStructures().at(0);
 
     // default data structure also present
@@ -161,8 +161,8 @@ void TestLoadSave::projectLoadSaveTest()
 
 void TestLoadSave::loadMultipleLayerGraphTest()
 {
-    DocumentManager::self()->openDocument(KUrl::fromLocalFile("TestGraphFiles/multipleLayerGraph.graph"));
-    Document *document = DocumentManager::self()->activeDocument();
+    DocumentManager::self().openDocument(KUrl::fromLocalFile("TestGraphFiles/multipleLayerGraph.graph"));
+    Document *document = DocumentManager::self().activeDocument();
 
     QVERIFY2(document->pointerTypeList().length() == 2, "two pointer types expected");
     QVERIFY2(!document->activeDataStructure()->dataList().first()->property("name").toString().isEmpty(), "property must be present");

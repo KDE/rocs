@@ -44,9 +44,9 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget* parent)
     ui = new Ui::DocumentTypesWidget;
     ui->setupUi(this);
 
-    connect(DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
+    connect(&DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
             this, SLOT(removeDocument()));
-    connect(DocumentManager::self(), SIGNAL(activateDocument()),
+    connect(&DocumentManager::self(), SIGNAL(activateDocument()),
             this, SLOT(updateDocument()));
 }
 
@@ -58,9 +58,9 @@ void DocumentTypesWidget::updateDocument()
 {
     removeDocument();
 
-    _document = DocumentManager::self()->activeDocument();
+    _document = DocumentManager::self().activeDocument();
     // create default data element setups
-    Document* document = DocumentManager::self()->activeDocument();
+    Document* document = DocumentManager::self().activeDocument();
     foreach (int type, document->dataTypeList()) {
         createDataTypeInformationWidget(type, _document);
     }
@@ -117,7 +117,7 @@ void DocumentTypesWidget::unregisterDataType(int identifier)
 
 void DocumentTypesWidget::registerPointerType(int identifier)
 {
-    Document* document = DocumentManager::self()->activeDocument();
+    Document* document = DocumentManager::self().activeDocument();
     createPointerTypeInformationWidget(identifier, document);
 }
 
@@ -235,7 +235,7 @@ void DocumentTypesWidget::updateDataTypeButtons()
 {
     QMap<int, KPushButton*>::const_iterator dataTypeWidget = _dataTypeButtons.constBegin();
     while (dataTypeWidget != _dataTypeButtons.constEnd()) {
-        Document* activeDocument = DocumentManager::self()->activeDocument();
+        Document* activeDocument = DocumentManager::self().activeDocument();
         DataTypePtr dataType = activeDocument->dataType(dataTypeWidget.key());
         dataTypeWidget.value()->setIcon(dataType->icon());
         dataTypeWidget.value()->setText(dataType->name());
@@ -247,7 +247,7 @@ void DocumentTypesWidget::updatePointerTypeButtons()
 {
     QMap<int, KPushButton*>::const_iterator pointerTypeWidget = _pointerTypeButtons.constBegin();
     while (pointerTypeWidget != _pointerTypeButtons.constEnd()) {
-        Document* activeDocument = DocumentManager::self()->activeDocument();
+        Document* activeDocument = DocumentManager::self().activeDocument();
         PointerTypePtr pointerType = activeDocument->pointerType(pointerTypeWidget.key());
         pointerTypeWidget.value()->setText(pointerType->name());
         ++pointerTypeWidget;
