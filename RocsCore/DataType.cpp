@@ -190,7 +190,7 @@ void DataType::renameProperty(const QString& oldName, const QString& newName)
 
 QStringList DataType::properties() const
 {
-    return d->_propertyList.keys();
+    return QStringList(d->_propertyList.keys());
 }
 
 QVariant DataType::propertyDefaultValue(const QString& name) const
