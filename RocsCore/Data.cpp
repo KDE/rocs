@@ -424,14 +424,14 @@ void Data::addDynamicProperty(const QString& property, const QVariant& value)
         kWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
-    setProperty(property.toAscii(), value);
+    setProperty(property.toStdString().c_str(), value);
     emit propertyAdded(property);
 }
 
 void Data::removeDynamicProperty(const QString& property)
 {
     // setting property to invalid is equals to deleting it
-    setProperty(property.toUtf8(), QVariant::Invalid);
+    setProperty(property.toStdString().c_str(), QVariant::Invalid);
     emit propertyRemoved(property);
 }
 
