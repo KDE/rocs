@@ -598,9 +598,11 @@ void Document::clear()
     d->_pointerTypes.clear();
 
     // remove data structures
-    for (int i = 0; i < d->_dataStructures.size(); ++i) {
-        d->_dataStructures.at(i)->remove();
+    foreach (const DataStructurePtr &dataStructure, d->_dataStructures) {
+        dataStructure->remove();
     }
+    d->_activeDataStructure.reset();
+    d->_dataStructures.clear();
 }
 
 DataStructurePtr Document::activeDataStructure() const

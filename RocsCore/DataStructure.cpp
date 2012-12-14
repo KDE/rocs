@@ -39,7 +39,6 @@ class DataStructurePrivate
 public:
     DataStructurePrivate() {}
 
-
     /**
      * self pointer to DataStructure
      */
