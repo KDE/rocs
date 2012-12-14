@@ -206,18 +206,18 @@ public Q_SLOTS:
      * \param property is the identifier for the new property
      * \param value is the value of this new property
      */
-    void addDynamicProperty(const QString& property, const QVariant& value);
+    void addDynamicProperty(const QString &property, const QVariant& value);
 
     /**
      * Remove dynamic property with identifier \p property from data element.
      *
      * \param property is identifier of the property
      */
-    void removeDynamicProperty(const QString& property);
+    void removeDynamicProperty(const QString &property);
 
-    void updateDynamicProperty(const QString& property);
+    void updateDynamicProperty(const QString &property);
 
-    void renameDynamicProperty(const QString& oldName, const QString& newName);
+    void renameDynamicProperty(const QString &oldName, const QString &newName);
 
     /**
      * FIXME proof of concept implementation: since each Pointer emits a changed direction signal,
@@ -230,8 +230,8 @@ public Q_SLOTS:
 
     QScriptValue type();
     QScriptValue set_type(int type);
-    void add_property(const QString& name, const QString& value);
-    void remove_property(const QString& name);
+    void add_property(const QString &name, const QString& value);
+    void remove_property(const QString &name);
     QScriptValue adj_data();
     QScriptValue adj_pointers();
     QScriptValue adj_pointers(int pointerType);
@@ -249,9 +249,9 @@ Q_SIGNALS:
     void useColorChanged(bool b);
     void dataTypeChanged(int dataType);
     void pointerListChanged();
-    void propertyAdded(QString name);
-    void propertyRemoved(QString name);
-    void propertyChanged(QString name);
+    void propertyAdded(const QString &name);
+    void propertyRemoved(const QString &name);
+    void propertyChanged(const QString &name);
 
 protected:
     /**
