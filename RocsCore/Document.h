@@ -270,8 +270,6 @@ private:
     const boost::scoped_ptr<DocumentPrivate> d;
     Document(const Document&);
     Document& operator=(const Document&);
-
-    static QMap<QString, QPointer<QSvgRenderer> > _sharedRenderers;
 };
 
 #endif
