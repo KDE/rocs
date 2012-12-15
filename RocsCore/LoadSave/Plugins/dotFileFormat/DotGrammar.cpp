@@ -172,8 +172,8 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
         stmt = (    edge_stmt
                     | (ID >> '=' >> ID) //TODO save value
-                    | node_stmt
                     | attr_stmt
+                    | node_stmt
                     | subgraph
                 );
 

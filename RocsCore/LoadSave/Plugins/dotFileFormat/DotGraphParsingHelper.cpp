@@ -50,20 +50,17 @@ DotGraphParsingHelper::DotGraphParsingHelper():
 {
 }
 
-void DotGraphParsingHelper::setDataStructureElementAttributes(QObject* graphElement, const AttributesMap& attributes)
+void DotGraphParsingHelper::setDataStructureElementAttributes(QObject *graphElement, const AttributesMap &attributes)
 {
-    AttributesMap::const_iterator it, it_end;
-    it = attributes.constBegin();
-    it_end = attributes.constEnd();
-    for (; it != it_end; it++) {
-//         kDebug() << "    " << it.key() << "\t=\t'" << it.value() << "'";
-//         kDebug() << graphElement->metaObject()->className();
-        if (it.key() == "label" && strcmp(graphElement->metaObject()->className(), "Edge") == 0) {
-            QString label = it.value();
+    AttributesMap::const_iterator iter;
+    iter = attributes.constBegin();
+    for (; iter != attributes.constEnd(); ++iter) {
+        if (iter.key() == "label" && strcmp(graphElement->metaObject()->className(), "Edge") == 0) {
+            QString label = iter.value();
             label.replace("\\n", "\n");
             graphElement->setProperty("name", label);
         } else {
-            graphElement->setProperty(it.key().toAscii(), it.value());
+            graphElement->setProperty(iter.key().toAscii(), iter.value());
         }
     }
 }

@@ -46,7 +46,8 @@ static const std::string subgraph = "digraph trees {"
 void DotFileFormatTest::checkNodes(DataStructurePtr dataStructure, QList<QString> nodeNames)
 {
     QList<DataPtr> dataList = dataStructure->dataList();
-    foreach(const DataPtr& node, dataList) {
+
+    foreach(const DataPtr &node, dataList) {
         QString name = node->property("name").toString();
         int index = nodeNames.indexOf(name);
         QVERIFY(index != -1);
@@ -95,20 +96,22 @@ void DotFileFormatTest::parseFileER()
     importer.setFile(KUrl::fromLocalFile("undirected/ER.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
-    Document* doc = importer.graphDocument();
+    Document *doc = importer.graphDocument();
     DataStructurePtr dataStructure = doc->activeDataStructure();
+
     // Check that all of the node names were imported, and that there are no extras.
     QList<QString> nodeNames;
     nodeNames << "course" << "institute" << "student" << "name0" << "name1" << "name2" << "code" << "grade" << "number" << "C-I" << "S-C" << "S-I";
-    QEXPECT_FAIL("", "Error in parser creates extra \"node\" node", Continue);
     checkNodes(dataStructure, nodeNames);
+
     // Check the numbers of pointers
     QVERIFY(dataStructure->pointers().count() == 12);
+
     // Check that a pointer has the correct label & that the node labels work.
     QList<DataPtr> dataList = dataStructure->dataList();
     DataPtr start;
     DataPtr end;
-    foreach(const DataPtr& node, dataList) {
+    foreach(const DataPtr &node, dataList) {
         QString name = node->property("name").toString();
         if (name == "student") {
             start = node;
@@ -117,7 +120,6 @@ void DotFileFormatTest::parseFileER()
             end = node;
         }
         if (name == "name0" || name == "name1" || name == "name2") {
-            QEXPECT_FAIL("", "Parser does not support label yet", Continue);
             QVERIFY(node->property("label").toString() == "name");
         }
     }
