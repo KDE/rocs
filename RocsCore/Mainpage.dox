@@ -1,12 +1,53 @@
 /*!
- * \mainpage RocsCore - Rocs core library.
+ * \mainpage RocsCore - Rocs Core Library
  *
- * RocsCore provides a model to describe data structures and a script engine with access to the
- * data structures.
+ * RocsCore provides several concepts to describe data structures and work with them. Further, it
+ * provides a scripting interface for run-time access.
  *
- * \section desc Description
+ * \section concepts Data Structure Concepts
+ * The coarse architecture is that a Document represents the notion of a visual whiteboard where
+ * the data structure is placed or the file it is saved in. A document may contain several
+ * data structures, which are represented by \ref DataStructure. Finally, a data structure is given
+ * by its data elements that are of type Data and its connections that are of type Pointer.
  *
- * \todo: add description and examples
+ * - \ref Document
+ *   Representation of a whiteboard (as used in the \ref VisualGraphEditor) as well as a graph file as
+ *   accessed by \ref GraphFileBackendManager. A document can contain an arbitrary number of data
+ *   structures. If a document contains at least one data structure, it indicates the currently
+ *   used data structure. A document is always associated to exactly one \ref DataStructureBackend
+ *   that controls how data elements and pointers can be created and changed withing its data
+ *   structures.
+ *
+ * - \ref DataStructure
+ *   Notion of a set of data elements and pointers that form an entity (e.g., a graph, a rooted tree,
+ *   a linked list). Connecting data elements is only possible for elements of the same data
+ *   structure.
+ *
+ * - \ref Data
+ *   Represents an element of a data structure (e.g., node in a graph, leaf in a tree, element of a
+ *   linked list). A data element can have an arbitrary set of properties and arbitrary connections
+ *   to other data elements of the same data structure. A data element is always of one specific
+ *   \ref DataType.
+ *
+ * - \ref Pointer
+ *   Represents the connection of two data elements. A connection can either be unidirectional or
+ *   bidirectional and may have arbitrary properties. A connection is always of one specific
+ *   \ref PointerType.
+ *
+ * - \ref DataType
+ *   Represents a prototype for all data elements of this type. A data type can have predefined
+ *   properties and allows a direct access to elements of this type as well a uniform visual
+ *   representation.
+ *
+ * - \ref PointerType
+ *   Represents a prototype for all pointers of this type. A pointer type defines if the pointers
+ *   of this type are either bidirectional or unidirectional. Further it allows a direct access to
+ *   pointers of this type as well a uniform visual representation.
+ *
+ * - \ref Group
+ *   Represents the notion of a subgraph, which is an entity formed by a fixed set of data elements.
+ *   It is possible to connect data elements with groups.
+ *   (Note: this concept is not yet fully implemented.)
  *
  * \licenses
  * \gpl
