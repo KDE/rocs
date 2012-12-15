@@ -4,6 +4,7 @@
  * RocsCore provides several concepts to describe data structures and work with them. Further, it
  * provides a scripting interface for run-time access.
  *
+ *
  * \section concepts Data Structure Concepts
  * The coarse architecture is that a Document represents the notion of a visual whiteboard where
  * the data structure is placed or the file it is saved in. A document may contain several
@@ -48,6 +49,14 @@
  *   Represents the notion of a subgraph, which is an entity formed by a fixed set of data elements.
  *   It is possible to connect data elements with groups.
  *   (Note: this concept is not yet fully implemented.)
+ *
+ *
+ * \section properties Dynamic Properties of Data Elements and Pointers
+ * Each data element and pointer can have arbitrary properties. Those can either be created directly
+ * the the corresponding methods in \ref Data and \ref Pointer, or by registering a property
+ * globally for all data elements or pointers of a specific type in the corresponding \ref DataType
+ * or \ref PointerType object, respectively.
+ *
  *
  * \section backends Data Structure Backends
  * Backends are controlled by the \ref DataStructureBackendManager. The backend manager
