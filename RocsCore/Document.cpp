@@ -60,7 +60,7 @@ public:
     bool _modified;
     bool _saved;
     DataStructurePtr _activeDataStructure;
-    QPointer<DataStructurePluginInterface> _dataStructureType;
+    QPointer<DataStructurePluginInterface> _backend;
     QtScriptBackend* _engineBackend;
     QList< DataStructurePtr > _dataStructures;
 
@@ -86,7 +86,7 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_minHeight = 0;
     d->_saved = false;
     d->_engineBackend = new QtScriptBackend(this);
-    d->_dataStructureType = DataStructureBackendManager::self()->activeBackend();
+    d->_backend = DataStructureBackendManager::self()->activeBackend();
     d->_modified = false;
 
     d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
@@ -98,7 +98,7 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_dataTypes.insert(0, DataType::create(this, 0));
     d->_pointerTypes.insert(0, PointerType::create(this, 0));
 
-    kDebug() << "Construct Graph Document of type : " << d->_dataStructureType->name();
+    kDebug() << "Construct Graph Document of type : " << d->_backend->name();
 }
 
 void Document::setModified(const bool mod)
@@ -109,7 +109,7 @@ void Document::setModified(const bool mod)
 void Document::changeBackend()
 {
     cleanUpBeforeConvert();
-    d->_dataStructureType = DataStructureBackendManager::self()->activeBackend();
+    d->_backend = DataStructureBackendManager::self()->activeBackend();
 
     // create list of existing data structures, then convert them one by one
     QList<DataStructurePtr> dataStructures = QList<DataStructurePtr>(d->_dataStructures);
@@ -486,7 +486,7 @@ void Document::setActiveDataStructure(DataStructurePtr g)
 DataStructurePtr Document::addDataStructure(const QString& name)
 {
     DataStructurePtr dataStructure = DataStructureBackendManager::self()->createDataStructure(this,
-                         d->_dataStructureType->internalName());
+                         d->_backend->internalName());
     dataStructure->setName(name);
     return addDataStructure(dataStructure);
 }
@@ -503,7 +503,7 @@ DataStructurePtr Document::addDataStructure(DataStructurePtr dataStructure)
     QString uniqueName = dataStructure->name();
     if (uniqueName.isEmpty() || usedNames.contains(uniqueName)) {
         for (int i = 0; i < dataStructures().length() + 1; ++i) {
-            uniqueName = QString("%1%2").arg(d->_dataStructureType->internalName()).arg(i);
+            uniqueName = QString("%1%2").arg(d->_backend->internalName()).arg(i);
             if (!usedNames.contains(uniqueName)) {
                 break;
             }
@@ -580,25 +580,15 @@ DataStructurePtr Document::activeDataStructure() const
     return d->_activeDataStructure;
 }
 
-QString Document::dataStructureTypeName() const
+DataStructurePluginInterface * Document::backend() const
 {
-    return d->_dataStructureType->name();
+    return d->_backend;
 }
 
-QString Document::dataStructureInternalName() const
+void Document::setBackend(const QString &pluginIdentifier)
 {
-    return d->_dataStructureType->internalName();
-}
-
-DataStructurePluginInterface* Document::dataStructurePlugin() const
-{
-    return d->_dataStructureType;
-}
-
-void Document::setDataStructurePlugin(const QString& pluginIdentifier)
-{
-    DataStructurePluginInterface* plugin = DataStructureBackendManager::self()->backend(pluginIdentifier);
+    DataStructurePluginInterface * plugin = DataStructureBackendManager::self()->backend(pluginIdentifier);
     if (plugin) {
-        d->_dataStructureType = plugin;
+        d->_backend = plugin;
     }
 }

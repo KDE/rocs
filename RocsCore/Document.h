@@ -112,31 +112,28 @@ public:
      */
     QRectF size();
 
+    /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others from all data structeres of this document.
+     * TODO this method should be protected
+     */
+    virtual void cleanUpBeforeConvert();
+
+    /**
+     * \return backend of this document
+     */
+    DataStructurePluginInterface * backend() const;
+
+    /**
+     * Set data structure plugin for this document. This function is only safe if the document
+     * is empty, otherwise behavior is undefined.
+     */
+    void setBackend(const QString &pluginIdentifier);
+
     /**
      * Change data structure backend of this document to currently active backend.
      * \see DataStructureBackend::activeBackend(). Changing the backend of a data structure is
      * a LOSSY operation (converting between backends and converting back will result in data loss!)
      */
     void changeBackend();
-
-    /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others from all data structeres of this document.
-     * TODO this method should be protected
-     */
-    virtual void cleanUpBeforeConvert();
-
-    /** @brief return the translated name of data structure used to build this document. */
-    QString dataStructureTypeName()const;
-
-    /** @brief return the internal name (not translated) of data structure used to build this document.*/
-    QString dataStructureInternalName() const;
-
-    DataStructurePluginInterface * dataStructurePlugin() const;
-
-    /**
-     * Set data structure plugin for this document. This function is only safe if the document
-     * is empty, otherwise behavior is undefined.
-     */
-    void setDataStructurePlugin(const QString &pluginIdentifier);
 
     /** Register new type for data elements. If identifier is alreade in use or if no identifier is
      * provided, a new identifier is created.

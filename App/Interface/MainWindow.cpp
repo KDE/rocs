@@ -453,7 +453,7 @@ void MainWindow::setupToolsPluginsAction()
         ToolsPluginInterface *plugin = ToolManager::instance()->plugins().at(action->data().toInt());
         action->setEnabled(
                 DocumentManager::self().activeDocument() &&
-                plugin->supportedDataStructures().contains(DocumentManager::self().activeDocument()->dataStructureInternalName())
+                plugin->supportedDataStructures().contains(DocumentManager::self().activeDocument()->backend()->internalName())
                           );
     }
 }

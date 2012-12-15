@@ -255,7 +255,7 @@ DataStructurePluginInterface* DataStructureBackendManager::backend(const QString
 
 QGraphicsItem* DataStructureBackendManager::dataItem(DataPtr data) const
 {
-    if (DataStructurePluginInterface * plg = data->dataStructure()->document()->dataStructurePlugin()) {
+    if (DataStructurePluginInterface * plg = data->dataStructure()->document()->backend()) {
         return plg->dataItem(data);
     }
     return d->_currentPlugin->dataItem(data);
@@ -263,7 +263,7 @@ QGraphicsItem* DataStructureBackendManager::dataItem(DataPtr data) const
 
 QGraphicsItem* DataStructureBackendManager::pointerItem(PointerPtr pointer) const
 {
-    if (DataStructurePluginInterface * plg = pointer->dataStructure()->document()->dataStructurePlugin()) {
+    if (DataStructurePluginInterface * plg = pointer->dataStructure()->document()->backend()) {
         return plg->pointerItem(pointer);
     }
     return d->_currentPlugin->pointerItem(pointer);;
@@ -271,7 +271,7 @@ QGraphicsItem* DataStructureBackendManager::pointerItem(PointerPtr pointer) cons
 
 QLayout* DataStructureBackendManager::pointerExtraProperties(PointerPtr pointer, QWidget* parent) const
 {
-    if (DataStructurePluginInterface * plg = pointer->dataStructure()->document()->dataStructurePlugin()) {
+    if (DataStructurePluginInterface * plg = pointer->dataStructure()->document()->backend()) {
         return plg->pointerExtraProperties(pointer, parent);
     }
     return d->_currentPlugin->pointerExtraProperties(pointer, parent);
@@ -279,7 +279,7 @@ QLayout* DataStructureBackendManager::pointerExtraProperties(PointerPtr pointer,
 
 QLayout* DataStructureBackendManager::dataStructureExtraProperties(DataStructurePtr dataStructure, QWidget* parent) const
 {
-    if (DataStructurePluginInterface * plg = dataStructure->document()->dataStructurePlugin()) {
+    if (DataStructurePluginInterface * plg = dataStructure->document()->backend()) {
         return plg->dataStructureExtraProperties(dataStructure, parent);
     }
     return d->_currentPlugin->dataStructureExtraProperties(dataStructure, parent);
@@ -287,7 +287,7 @@ QLayout* DataStructureBackendManager::dataStructureExtraProperties(DataStructure
 
 QLayout* DataStructureBackendManager::dataExtraProperties(DataPtr data, QWidget* parent) const
 {
-    if (DataStructurePluginInterface * plg = data->dataStructure()->document()->dataStructurePlugin()) {
+    if (DataStructurePluginInterface * plg = data->dataStructure()->document()->backend()) {
         return plg->dataExtraProperties(data, parent);
     }
     return d->_currentPlugin->dataExtraProperties(data, parent);

@@ -22,6 +22,7 @@
 #include <CoreTypes.h>
 #include <Document.h>
 #include <DataStructure.h>
+#include <DataStructurePluginInterface.h>
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -64,7 +65,7 @@ QString TransformEdgesToolPlugin::run(QObject* doc) const
     QStringList dsNames;
 
     // be sure that only graph-datastructures are accessed by this plugin
-    if (graphDoc->dataStructureInternalName() == "Graph") {
+    if (graphDoc->backend()->internalName() == "Graph") {
         foreach(DataStructurePtr ds, dsList) {
             dsNames << ds->name();
         }

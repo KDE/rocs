@@ -109,7 +109,7 @@ void RocsGraphFileFormatPlugin::readFile()
                 else if (dataLine.startsWith(QLatin1String("DataStructurePlugin :"))) {
                     // set plugin by unique plugin identifier
                     QString pluginIdentifier = dataLine.section(' ', 2);
-                    document->setDataStructurePlugin(pluginIdentifier);
+                    document->setBackend(pluginIdentifier);
                 } else if (!dataLine.isEmpty()) {
                     break; // go to the last if and finish populating.
                 }

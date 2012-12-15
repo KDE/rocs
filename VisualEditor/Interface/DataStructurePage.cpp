@@ -50,7 +50,7 @@ void DataStructurePage::setDataStructure(DataStructurePtr dataStructure)
     }
 
     ui->dataStructureName->setText(dataStructure->name());
-    ui->dataStructurePlugin->addItem(dataStructure->document()->dataStructurePlugin()->name());
+    ui->dataStructurePlugin->addItem(dataStructure->document()->backend()->name());
     ui->dataStructurePlugin->setDisabled(true);
 
     if (!ui->pluginExtraProperties->layout()) {

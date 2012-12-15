@@ -202,7 +202,7 @@ void DocumentManager::convertToDataStructure()
     }
 
     //Check if need to convert (different DS) and if is possible to convert without data lost.
-    if (d->_activeDocument->dataStructureTypeName() != DataStructureBackendManager::self()->activeBackend()->internalName()
+    if (d->_activeDocument->backend()->internalName() != DataStructureBackendManager::self()->activeBackend()->internalName()
             && DataStructureBackendManager::self()->activeBackend()->canConvertFrom(d->_activeDocument))
     {
         d->_activeDocument->changeBackend();
