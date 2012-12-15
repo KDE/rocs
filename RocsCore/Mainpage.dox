@@ -49,6 +49,25 @@
  *   It is possible to connect data elements with groups.
  *   (Note: this concept is not yet fully implemented.)
  *
+ * \section backends Data Structure Backends
+ * Backends are controlled by the \ref DataStructureBackendManager. The backend manager
+ * searches the $KDEDIRS for all KService plugins that are of type `Rocs/DataStructurePlugin` and
+ * loads them on demand. It is important that at least one backend must be found since otherwise no
+ * \ref Document can be created.
+ *
+ * Backends are of type \ref DataStructurePluginInterface and they must provide a unique internal name by
+ * the KService property `X-Rocs-DataStructureIdentifier`. RocsCore currently ships the following
+ * backends:
+ * - \ref Rocs::GraphPlugin
+ *   This is the default backend that should always be used if no specific graph restrictions shall be
+ *   enforced.
+ *
+ * - \ref Rocs::ListPlugin
+ *   Represents linked lists, provides convenience methods for lists, and automatic arrangement algorithms.
+ *
+ * - \ref Rocs::RootedTreePlugin
+ *   Represents rooted trees, provides convenience methods for trees, and automatic arrangement algorithms.
+ *
  * \licenses
  * \gpl
  *
