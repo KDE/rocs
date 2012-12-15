@@ -16,9 +16,6 @@
  * - <a href="/4.x-api/kdeedu-apidocs/rocs/VisualEditor/html/index.html"><b>Rocs Visual Editor</b></a>.
  *   <i>Visual editor for modifying and display of data structures.</i>
  *
- * @b Read about the Rocs architecture in
- * the \ref architecture.
- *
  * @b Follow the development of this application and its libraries. Please consider joining the
  * <a href="https://mail.kde.org/mailman/listinfo/rocs-devel">Rocs Development Mailing List</a>.
  */
