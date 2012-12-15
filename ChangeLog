@@ -17,7 +17,7 @@ Rocs 1.8 (KDE SC 4.10)
   - and additional operations for the visual editor.
 * Parting of Rocs into RocsCore, VisualEditor and RocsApp.
 * Major work on API cleanup and API documentation.
-* Major refactoring of the properties model to simplify their use.
+* Major refactoring of the properties model to simplify use.
 * Improved support for third party graph document files
   - DOT/GraphVis support is nearly complete
   - Trivial Graph Format files support is complete
