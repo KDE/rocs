@@ -21,11 +21,20 @@
 #define DOTFILEFORMATTEST_H
 
 #include <QtCore/QObject>
+#include <CoreTypes.h>
 
 
 class DotFileFormatTest : public QObject
 {
     Q_OBJECT
+
+ private:
+    /**
+     * Check the nodes of the imported graph
+     * \param dataStructure the imported DataStructure
+     * \param nodeNames the original names of the nodes
+     */
+    void checkNodes(DataStructurePtr dataStructure, QList<QString> nodeNames);
 
 private slots:
     void init();

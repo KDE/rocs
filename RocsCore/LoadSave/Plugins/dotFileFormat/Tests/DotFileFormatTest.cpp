@@ -23,6 +23,8 @@
 #include <Document.h>
 #include "../DotGrammar.h"
 #include "../DotFileFormatPlugin.h"
+#include "Data.h"
+#include "Pointer.h"
 #include <DataStructure.h>
 #include <DataStructureBackendManager.h>
 #include <KDebug>
@@ -40,6 +42,18 @@ static const std::string subgraph = "digraph trees {"
                                         "    Animal -> Dot [label = \"canine\"];"
                                         "  }"
                                         "}";
+
+void DotFileFormatTest::checkNodes(DataStructurePtr dataStructure, QList<QString> nodeNames)
+{
+    QList<DataPtr> dataList = dataStructure->dataList();
+    foreach(const DataPtr& node, dataList) {
+        QString name = node->property("name").toString();
+        int index = nodeNames.indexOf(name);
+        QVERIFY(index != -1);
+        nodeNames.removeAt(index);
+    }
+    QVERIFY(nodeNames.isEmpty());
+}
 
 void DotFileFormatTest::init()
 {
@@ -81,6 +95,34 @@ void DotFileFormatTest::parseFileER()
     importer.setFile(KUrl::fromLocalFile("undirected/ER.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+    Document* doc = importer.graphDocument();
+    DataStructurePtr dataStructure = doc->activeDataStructure();
+    // Check that all of the node names were imported, and that there are no extras.
+    QList<QString> nodeNames;
+    nodeNames << "course" << "institute" << "student" << "name0" << "name1" << "name2" << "code" << "grade" << "number" << "C-I" << "S-C" << "S-I";
+    QEXPECT_FAIL("", "Error in parser creates extra \"node\" node", Continue);
+    checkNodes(dataStructure, nodeNames);
+    // Check the numbers of pointers
+    QVERIFY(dataStructure->pointers().count() == 12);
+    // Check that a pointer has the correct label & that the node labels work.
+    QList<DataPtr> dataList = dataStructure->dataList();
+    DataPtr start;
+    DataPtr end;
+    foreach(const DataPtr& node, dataList) {
+        QString name = node->property("name").toString();
+        if (name == "student") {
+            start = node;
+        }
+        if (name == "S-C") {
+            end = node;
+        }
+        if (name == "name0" || name == "name1" || name == "name2") {
+            QEXPECT_FAIL("", "Parser does not support label yet", Continue);
+            QVERIFY(node->property("label").toString() == "name");
+        }
+    }
+    PointerPtr betweenPtr = start->pointerList(end).at(0);
+    QVERIFY(betweenPtr->property("label") == "m");
 }
 
 
@@ -121,6 +163,14 @@ void DotFileFormatTest::parseFileProcess()
     importer.setFile(KUrl::fromLocalFile("undirected/process.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+    Document* doc = importer.graphDocument();
+    DataStructurePtr dataStructure = doc->activeDataStructure();
+    // Check that all of the node names were imported, and that there are no extras.
+    QList<QString> nodeNames;
+    nodeNames << "run" << "intr" << "runbl" << "kernel" << "zombie" << "sleep" << "swap" << "runmem" << "runswap" << "new";
+    checkNodes(dataStructure, nodeNames);
+    // Check the numbers of pointers
+    QVERIFY(dataStructure->pointers().count() == 13);
 }
 
 
@@ -271,6 +321,35 @@ void DotFileFormatTest::parseFileFsm()
     importer.setFile(KUrl::fromLocalFile("directed/fsm.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+        Document* doc = importer.graphDocument();
+    DataStructurePtr dataStructure = doc->activeDataStructure();
+    // Check that all of the node names were imported, and that there are no extras.
+    QList<QString> nodeNames;
+    nodeNames << "LR_0" << "LR_1" << "LR_2" << "LR_3" << "LR_4" << "LR_5" << "LR_6" << "LR_7" << "LR_8";
+    QEXPECT_FAIL("", "Error in parser creates extra \"node\" node", Abort);
+    checkNodes(dataStructure, nodeNames);
+    // Check the numbers of pointers
+    QEXPECT_FAIL("", "The parser creates 2 extra pointers", Continue);
+    QVERIFY(dataStructure->pointers().count() == 14);
+    // Check that a pointer has the correct label & that the shapes are correct.
+    QEXPECT_FAIL("", "The parser creates a lot of extra LR nodes", Abort);
+    QList<DataPtr> dataList = dataStructure->dataList();
+    QVERIFY(dataList.length() == 9); // Make the test quit because the parser has too many LR nodes.
+    DataPtr start;
+    DataPtr end;
+    foreach(const DataPtr& node, dataList) {
+        QString name = node->property("name").toString();
+        if (name == "LR_0") {
+            start = node;
+            QVERIFY(node->property("shape").toString() == "doublecircle");
+        }
+        if (name == "LR_2") {
+            end = node;
+            QVERIFY(node->property("shape").toString() == "circle");
+        }
+    }
+//    PointerPtr betweenPtr = start->pointerList(end).at(0);
+//    QVERIFY(betweenPtr->property("label") == "SS(B)");
 }
 
 
@@ -635,6 +714,17 @@ void DotFileFormatTest::parseFileUnix()
     importer.setFile(KUrl::fromLocalFile("directed/unix.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+    Document* doc = importer.graphDocument();
+    DataStructurePtr dataStructure = doc->activeDataStructure();
+    // Check that all of the node names were imported, and that there are no extras.
+    QList<QString> nodeNames;
+    nodeNames << "5th Edition" << "6th Edition" << "PWB 1.0" << "LSX" << "1 BSD" << "Mini Unix" << "Wollongong" << "Interdata" << "Unix/TS 3.0" << "PWB 2.0" << "7th Edition" << "8th Edition" << "32V" << "V7M" << "Ultrix-11" << "Xenix" << "UniPlus+" << "9th Edition" << "2 BSD" << "2.8 BSD" << "2.9 BSD" << "3 BSD" << "4 BSD" << "4.1 BSD" << "4.2 BSD" << "4.3 BSD" << "Ultrix-32" << "PWB 1.2" << "USG 1.0" << "CB Unix 1" << "USG 2.0" << "CB Unix 2" << "CB Unix 3" << "Unix/TS++" << "PDP-11 Sys V" << "USG 3.0" << "Unix/TS 1.0" << "TS 4.0" << "System V.0" << "System V.2" << "System V.3";
+    // The parser misunderstands the size= attribute of the graph and creates a size node.
+    QEXPECT_FAIL("", "The parser creates an extra size node", Continue);
+    checkNodes(dataStructure, nodeNames);
+    // Check the numbers of pointers
+    QEXPECT_FAIL("", "The parser creates an extra size node", Continue);
+    QVERIFY(dataStructure->pointers().count() == 49);
 }
 
 
