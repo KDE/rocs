@@ -60,8 +60,8 @@ struct DotGraphParsingHelper {
     void setPointerAttributes();
 
     /**
-     * Applies all attributes from the current attributed list to the currently parsed element.
-     * Use this method before removing the attributed list.
+     * Generates a new attribute list from all unprocessed attributes and set the corresponding
+     * attribute list for data-structure, data, or pointer.
      */
     void applyAttributedList();
 
@@ -69,19 +69,19 @@ struct DotGraphParsingHelper {
     void addEdgeBound(QString bound) {
         edgebounds.append(bound);
     }
-    void setDataStructureElementAttributes(QObject* graphElement, const DotParser::DotGraphParsingHelper::AttributesMap& attributes);
+    void setObjectAttributes(QObject *graphElement, const DotParser::DotGraphParsingHelper::AttributesMap &attributes);
 
     QString attributeId;
     QString valid;
     std::string attributed; //FIXME change to enum
 
-    AttributesMap attributes;
+    AttributesMap unprocessedAttributes;
     AttributesMap dataStructureAttributes;
     AttributesMap dataAttributes;
-    AttributesMap pointersAttributes;
-    QList< AttributesMap > dataStructureAttributesStack;
-    QList< AttributesMap > dataAttributesStack;
-    QList< AttributesMap > pointersAttributesStack;
+    AttributesMap pointerAttributes;
+    QList< AttributesMap > dataStructureAttributeStack;
+    QList< AttributesMap > dataAttributeStack;
+    QList< AttributesMap > pointerAttributeStack;
 
     QStringList edgebounds;
 

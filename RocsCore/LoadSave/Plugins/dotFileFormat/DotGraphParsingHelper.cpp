@@ -36,13 +36,13 @@ DotGraphParsingHelper::DotGraphParsingHelper():
     attributeId(),
     valid(),
     attributed(),
-    attributes(),
+    unprocessedAttributes(),
     dataStructureAttributes(),
     dataAttributes(),
-    pointersAttributes(),
-    dataStructureAttributesStack(),
-    dataAttributesStack(),
-    pointersAttributesStack(),
+    pointerAttributes(),
+    dataStructureAttributeStack(),
+    dataAttributeStack(),
+    pointerAttributeStack(),
     edgebounds(),
     currentDataPtr(),
     currentPointerPtr(),
@@ -50,7 +50,7 @@ DotGraphParsingHelper::DotGraphParsingHelper():
 {
 }
 
-void DotGraphParsingHelper::setDataStructureElementAttributes(QObject *graphElement, const AttributesMap &attributes)
+void DotGraphParsingHelper::setObjectAttributes(QObject *graphElement, const AttributesMap &attributes)
 {
     AttributesMap::const_iterator iter;
     iter = attributes.constBegin();
@@ -67,7 +67,7 @@ void DotGraphParsingHelper::setDataStructureElementAttributes(QObject *graphElem
 
 void DotGraphParsingHelper::setDataStructureAttributes()
 {
-    setDataStructureElementAttributes(dataStructure.get(), dataStructureAttributes);
+    setObjectAttributes(dataStructure.get(), dataStructureAttributes);
 }
 
 void DotGraphParsingHelper::setSubDataStructureAttributes()
@@ -79,7 +79,7 @@ void DotGraphParsingHelper::setDataAttributes()
     if (!currentDataPtr) {
         return;
     }
-    setDataStructureElementAttributes(currentDataPtr.get(), dataAttributes);
+    setObjectAttributes(currentDataPtr.get(), dataAttributes);
 }
 
 void DotGraphParsingHelper::setPointerAttributes()
@@ -87,41 +87,41 @@ void DotGraphParsingHelper::setPointerAttributes()
     if (!currentPointerPtr) {
         return;
     }
-    setDataStructureElementAttributes(currentPointerPtr.get(), pointersAttributes);
+    setObjectAttributes(currentPointerPtr.get(), pointerAttributes);
 }
 
 void DotGraphParsingHelper::applyAttributedList()
 {
     if (attributed == "graph") {
-        if (attributes.find("bb") != attributes.end()) {
+        if (unprocessedAttributes.find("bb") != unprocessedAttributes.end()) {
             std::vector< int > v;
-            parseIntegers(attributes["bb"].toStdString().c_str(), v);
+            parseIntegers(unprocessedAttributes["bb"].toStdString().c_str(), v);
 //             if (v.size() >= 4) {
 //                 kDebug() << "setting width and height to " << v[2] << v[3];
 //             }
         }
         AttributesMap::const_iterator it, it_end;
-        it = attributes.constBegin();
-        it_end = attributes.constEnd();
+        it = unprocessedAttributes.constBegin();
+        it_end = unprocessedAttributes.constEnd();
         for (; it != it_end; it++) {
             dataStructureAttributes[it.key()] = it.value();
         }
     } else if (attributed == "node") {
         AttributesMap::const_iterator it, it_end;
-        it = attributes.constBegin();
-        it_end = attributes.constEnd();
+        it = unprocessedAttributes.constBegin();
+        it_end = unprocessedAttributes.constEnd();
         for (; it != it_end; it++) {
             dataAttributes[it.key()] = it.value();
         }
     } else if (attributed == "edge") {
         AttributesMap::const_iterator it, it_end;
-        it = attributes.constBegin();
-        it_end = attributes.constEnd();
+        it = unprocessedAttributes.constBegin();
+        it_end = unprocessedAttributes.constEnd();
         for (; it != it_end; it++) {
-            pointersAttributes[it.key()] = it.value();
+            pointerAttributes[it.key()] = it.value();
         }
     }
-    attributes.clear();
+    unprocessedAttributes.clear();
 }
 
 void DotGraphParsingHelper::createData(QString identifier)
@@ -186,6 +186,8 @@ void DotGraphParsingHelper::createPointers()
         if (!dataMap.contains(fromId)) {
             DataPtr from = dataStructure->addData(fromId);
             dataMap.insert(fromId, from);
+            currentDataPtr = from;
+            setDataAttributes();
         }
         DataPtr from = dataMap[fromId];
 
@@ -193,6 +195,8 @@ void DotGraphParsingHelper::createPointers()
         if (!dataMap.contains(toId)) {
             DataPtr to = dataStructure->addData(toId);
             dataMap.insert(toId, to);
+            currentDataPtr = to;
+            setDataAttributes();
         }
         DataPtr to = dataMap[toId];
 

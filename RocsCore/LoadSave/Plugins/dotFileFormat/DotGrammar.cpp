@@ -170,7 +170,7 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
         stmt_list = stmt >> -char_(';') >> -stmt_list;
 
-        stmt = (    (ID[&attributeId] >> '=' >> ID[&valid])[&applyAttributeList] //TODO save value
+        stmt = (    (ID[&attributeId] >> '=' >> ID[&valid])[&applyAttributeList]
                     | attr_stmt
                     | edge_stmt
                     | node_stmt
@@ -342,7 +342,7 @@ void insertAttributeIntoAttributeList()
     if (!phelper) {
         return;
     }
-    phelper->attributes.insert(phelper->attributeId, phelper->valid);
+    phelper->unprocessedAttributes.insert(phelper->attributeId, phelper->valid);
 }
 
 
@@ -351,9 +351,9 @@ void createAttributeList()
     if (!phelper) {
         return;
     }
-    phelper->dataStructureAttributesStack.push_back(phelper->dataStructureAttributes);
-    phelper->dataAttributesStack.push_back(phelper->dataAttributes);
-    phelper->pointersAttributesStack.push_back(phelper->pointersAttributes);
+    phelper->dataStructureAttributeStack.push_back(phelper->dataStructureAttributes);
+    phelper->dataAttributeStack.push_back(phelper->dataAttributes);
+    phelper->pointerAttributeStack.push_back(phelper->pointerAttributes);
 }
 
 void removeAttributeList()
@@ -361,12 +361,12 @@ void removeAttributeList()
     if (!phelper) {
         return;
     }
-    phelper->dataStructureAttributes = phelper->dataStructureAttributesStack.back();
-    phelper->dataStructureAttributesStack.pop_back();
-    phelper->dataAttributes = phelper->dataAttributesStack.back();
-    phelper->dataAttributesStack.pop_back();
-    phelper->pointersAttributes = phelper->pointersAttributesStack.back();
-    phelper->pointersAttributesStack.pop_back();
+    phelper->dataStructureAttributes = phelper->dataStructureAttributeStack.back();
+    phelper->dataStructureAttributeStack.pop_back();
+    phelper->dataAttributes = phelper->dataAttributeStack.back();
+    phelper->dataAttributeStack.pop_back();
+    phelper->pointerAttributes = phelper->pointerAttributeStack.back();
+    phelper->pointerAttributeStack.pop_back();
 }
 
 void createData(const std::string& str)
