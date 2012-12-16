@@ -30,7 +30,7 @@
 #include <KDebug>
 #include <KUrl>
 
-static const std::string simple = "digraph simple {a -> b; c; d -> e /* error -> comment*/}";
+static const std::string simple = "digraph simple {a_2 -> b; c; d -> e /* error -> comment*/}";
 
 static const std::string subgraph = "digraph trees {"
                                         "  subgraph t {"
@@ -46,6 +46,10 @@ static const std::string subgraph = "digraph trees {"
 void DotFileFormatTest::checkNodes(DataStructurePtr dataStructure, QList<QString> nodeNames)
 {
     QList<DataPtr> dataList = dataStructure->dataList();
+
+//     foreach(const DataPtr &node, dataList) {
+//         kDebug() << node->property("name").toString();
+//     }
 
     foreach(const DataPtr &node, dataList) {
         QString name = node->property("name").toString();
@@ -323,23 +327,23 @@ void DotFileFormatTest::parseFileFsm()
     importer.setFile(KUrl::fromLocalFile("directed/fsm.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
-        Document* doc = importer.graphDocument();
+    Document *doc = importer.graphDocument();
     DataStructurePtr dataStructure = doc->activeDataStructure();
+
     // Check that all of the node names were imported, and that there are no extras.
     QList<QString> nodeNames;
     nodeNames << "LR_0" << "LR_1" << "LR_2" << "LR_3" << "LR_4" << "LR_5" << "LR_6" << "LR_7" << "LR_8";
-    QEXPECT_FAIL("", "Error in parser creates extra \"node\" node", Abort);
     checkNodes(dataStructure, nodeNames);
+
     // Check the numbers of pointers
-    QEXPECT_FAIL("", "The parser creates 2 extra pointers", Continue);
     QVERIFY(dataStructure->pointers().count() == 14);
-    // Check that a pointer has the correct label & that the shapes are correct.
-    QEXPECT_FAIL("", "The parser creates a lot of extra LR nodes", Abort);
+
+    // Check that a pointer has the correct label and that the shapes are correct.
     QList<DataPtr> dataList = dataStructure->dataList();
     QVERIFY(dataList.length() == 9); // Make the test quit because the parser has too many LR nodes.
     DataPtr start;
     DataPtr end;
-    foreach(const DataPtr& node, dataList) {
+    foreach(const DataPtr &node, dataList) {
         QString name = node->property("name").toString();
         if (name == "LR_0") {
             start = node;
@@ -350,8 +354,8 @@ void DotFileFormatTest::parseFileFsm()
             QVERIFY(node->property("shape").toString() == "circle");
         }
     }
-//    PointerPtr betweenPtr = start->pointerList(end).at(0);
-//    QVERIFY(betweenPtr->property("label") == "SS(B)");
+    PointerPtr betweenPtr = start->pointerList(end).at(0);
+    QVERIFY(betweenPtr->property("label") == "SS(B)");
 }
 
 
