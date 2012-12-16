@@ -170,9 +170,9 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
         stmt_list = stmt >> -char_(';') >> -stmt_list;
 
-        stmt = (    edge_stmt
-                    | (ID >> '=' >> ID) //TODO save value
+        stmt = (    (ID[&attributeId] >> '=' >> ID[&valid])[&applyAttributeList] //TODO save value
                     | attr_stmt
+                    | edge_stmt
                     | node_stmt
                     | subgraph
                 );
