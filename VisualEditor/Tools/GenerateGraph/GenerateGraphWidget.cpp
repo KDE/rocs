@@ -65,6 +65,12 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
 
     connect(this, SIGNAL(okClicked()), this, SLOT(generateGraph()));
     connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setGraphType(int)));
+
+    qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
+    uint badRandomSeed = qHash(currentTime) % 99999;
+    badRandomSeed = (badRandomSeed == 0) ? 1 : badRandomSeed;
+    ui->randomGeneratorSeed->setValue(badRandomSeed);
+    ui->GNPGeneratorSeed->setValue(badRandomSeed);
 }
 
 

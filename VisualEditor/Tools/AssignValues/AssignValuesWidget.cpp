@@ -96,6 +96,12 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
 
     graphDoc_ = graphDoc;
     updateApplyButtonStates();
+
+    qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
+    uint badRandomSeed = qHash(currentTime) % 99999;
+    badRandomSeed = (badRandomSeed == 0) ? 1 : badRandomSeed;
+    ui->spinBoxIntegerGeneratorSeed->setValue(badRandomSeed);
+    ui->spinBoxFloatGeneratorSeed->setValue(badRandomSeed);
 }
 
 
