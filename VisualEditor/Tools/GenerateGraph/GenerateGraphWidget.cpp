@@ -71,6 +71,11 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     badRandomSeed = (badRandomSeed == 0) ? 1 : badRandomSeed;
     ui->randomGeneratorSeed->setValue(badRandomSeed);
     ui->GNPGeneratorSeed->setValue(badRandomSeed);
+
+    ui->label_randomGeneratorSeed->setVisible(false);
+    ui->randomGeneratorSeed->setVisible(false);
+    ui->label_GNPGeneratorSeed->setVisible(false);
+    ui->GNPGeneratorSeed->setVisible(false);
 }
 
 

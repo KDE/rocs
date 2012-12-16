@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>350</width>
-    <height>360</height>
+    <height>403</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -33,6 +33,26 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="1">
+    <layout class="QHBoxLayout" name="advancedLayout">
+     <item alignment="Qt::AlignRight">
+      <widget class="QPushButton" name="advancedButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Show advanced</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="1">
     <widget class="QGroupBox" name="groupTarget">
      <property name="baseSize">
       <size>
@@ -161,7 +181,7 @@ p, li { white-space: pre-wrap; }
      </layout>
     </widget>
    </item>
-   <item row="6" column="1">
+   <item row="7" column="1">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
       <string>Select Assignment Method</string>
@@ -432,6 +452,102 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>308</x>
      <y>165</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>advancedButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>checkBoxOverwriteValues</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>advancedButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>96</x>
+     <y>374</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>advancedButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>spinBoxIntegerGeneratorSeed</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>124</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>advancedButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_6</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>323</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>advancedButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>spinBoxFloatGeneratorSeed</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>advancedButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_8</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>260</y>
     </hint>
    </hints>
   </connection>

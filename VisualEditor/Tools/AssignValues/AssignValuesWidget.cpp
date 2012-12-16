@@ -102,6 +102,13 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
     badRandomSeed = (badRandomSeed == 0) ? 1 : badRandomSeed;
     ui->spinBoxIntegerGeneratorSeed->setValue(badRandomSeed);
     ui->spinBoxFloatGeneratorSeed->setValue(badRandomSeed);
+
+    ui->checkBoxOverwriteValues->setVisible(false);
+    ui->label->setVisible(false);
+    ui->spinBoxIntegerGeneratorSeed->setVisible(false);
+    ui->label_6->setVisible(false);
+    ui->spinBoxFloatGeneratorSeed->setVisible(false);
+    ui->label_8->setVisible(false);
 }
 
 
