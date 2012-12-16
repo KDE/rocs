@@ -214,7 +214,7 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
         edgeop = string("->") | string("--");
 
         ID = lexeme[
-                 ((alpha|'_') >> *(alpha|digit|'_'))
+                 (char_("a-zA-Z0-9") >> *char_("a-zA-Z0-9_"))
                  | (-char_('-') >> ('.' >> +digit) | (+digit >> -('.' >> *digit)))
                  | ('"' >>  *(char_ - '"') >>  '"')
                  | ('<' >>  *(char_ - '>')  >>  '>') //TODO xml parser does not parse interlaced tags
