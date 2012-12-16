@@ -214,10 +214,16 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
         edgeop = string("->") | string("--");
 
         ID = lexeme[
-                 (char_("a-zA-Z0-9") >> *char_("a-zA-Z0-9_"))
-                 | (-char_('-') >> ('.' >> +digit) | (+digit >> -('.' >> *digit)))
-                 | ('"' >>  *(char_ - '"') >>  '"')
-                 | ('<' >>  *(char_ - '>')  >>  '>') //TODO xml parser does not parse interlaced tags
+                // parse alpha-numberic sequence that is not a keyword
+                ( !(distinct::keyword["graph"] | distinct::keyword["edge"] | distinct::keyword["node"])
+                    >> char_("a-zA-Z0-9") >> *char_("a-zA-Z0-9_")
+                )
+                // parse number
+                | (-char_('-') >> ('.' >> +digit) | (+digit >> -('.' >> *digit)))
+                // parse anything that is in quotation marks
+                | ('"' >>  *(char_ - '"') >>  '"')
+                // parse XML attribute sequence
+                | ('<' >>  *(char_ - '>')  >>  '>') //TODO xml parser does not parse interlaced tags
              ];
     }
 
