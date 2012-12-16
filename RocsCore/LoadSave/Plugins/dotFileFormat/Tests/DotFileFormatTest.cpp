@@ -54,6 +54,9 @@ void DotFileFormatTest::checkNodes(DataStructurePtr dataStructure, QList<QString
     foreach(const DataPtr &node, dataList) {
         QString name = node->property("name").toString();
         int index = nodeNames.indexOf(name);
+        if (index == -1) {
+            kDebug() << "Node "<< name << " was created unnecessarily.";
+        }
         QVERIFY(index != -1);
         nodeNames.removeAt(index);
     }
