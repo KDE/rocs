@@ -40,6 +40,19 @@
 
 #include "CoreTypes.h"
 
+typedef boost::adjacency_list < boost::listS, boost::vecS, boost::undirectedS,
+        boost::property<boost::vertex_name_t, std::string> >
+        Graph;
+typedef boost::rectangle_topology<> topology_type;
+typedef topology_type::point_type point_type;
+typedef QVector<point_type> PositionVec;
+typedef boost::iterator_property_map < PositionVec::iterator,
+        boost::property_map<Graph, boost::vertex_index_t>::type >
+        PositionMap;
+typedef boost::graph_traits<Graph>::vertex_descriptor Vertex;
+typedef QPair<int, int> Edge;
+
+
 Topology::Topology()
 {
 
