@@ -24,13 +24,6 @@
 #include <QtCore/QVector>
 #include <QtCore/QPair>
 
-#include <boost/graph/fruchterman_reingold.hpp>
-#include <boost/graph/random_layout.hpp>
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/topology.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/random/linear_congruential.hpp>
-
 #include "rocslib_export.h"
 #include "Rocs_Typedefs.h"
 
@@ -42,18 +35,6 @@
  */
 class ROCSLIB_EXPORT Topology
 {
-    typedef boost::adjacency_list < boost::listS, boost::vecS, boost::undirectedS,
-            boost::property<boost::vertex_name_t, std::string> >
-            Graph;
-    typedef boost::rectangle_topology<> topology_type;
-    typedef topology_type::point_type point_type;
-    typedef QVector<point_type> PositionVec;
-    typedef boost::iterator_property_map < PositionVec::iterator,
-            boost::property_map<Graph, boost::vertex_index_t>::type >
-            PositionMap;
-    typedef boost::graph_traits<Graph>::vertex_descriptor Vertex;
-    typedef QPair<int, int> Edge;
-
 public:
     Topology();
     virtual ~Topology();
