@@ -106,9 +106,11 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
     ui->checkBoxOverwriteValues->setVisible(false);
     ui->label->setVisible(false);
     ui->spinBoxIntegerGeneratorSeed->setVisible(false);
-    ui->label_6->setVisible(false);
+    ui->label_7->setVisible(false);
     ui->spinBoxFloatGeneratorSeed->setVisible(false);
-    ui->label_8->setVisible(false);
+    ui->label_9->setVisible(false);
+    ui->LabelInitialString->setVisible(false);
+    ui->LineEditInitialString->setVisible(false);
 }
 
 
@@ -206,6 +208,29 @@ void AssignValuesWidget::assignValues()
         }
         if (ui->applyToConnections->isChecked()) {
 	    modifier.enumerate(pointerList, property, start, "", overrideValues);
+        }
+        break;
+    }
+    case ALPHA: {
+        QString start = ui->LineEditInitialString->text();
+
+        if (ui->applyToDataElements->isChecked()) {
+            modifier.enumerateAlpha(dataList, property, start, overrideValues);
+        }
+        if (ui->applyToConnections->isChecked()) {
+            modifier.enumerateAlpha(pointerList, property, start, overrideValues);
+        }
+        break;
+    }
+    case ID_ALPHA: {
+        int start = ui->SpinBoxAlphaNumericIDStart->value();
+        QString prefix = ui->LineEditAlphaNumericPrefix->text();
+
+        if (ui->applyToDataElements->isChecked()) {
+            modifier.enumerate(dataList, property, start, prefix, overrideValues);
+        }
+        if (ui->applyToConnections->isChecked()) {
+            modifier.enumerate(pointerList, property, start, prefix, overrideValues);
         }
         break;
     }
