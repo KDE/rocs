@@ -22,6 +22,8 @@
 #include "Document.h"
 #include "DataStructure.h"
 #include "DocumentManager.h"
+#include "PointerType.h"
+#include "Modifiers/Topology.h"
 
 #include <cmath>
 #include <KLocale>
@@ -71,11 +73,14 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     badRandomSeed = (badRandomSeed == 0) ? 1 : badRandomSeed;
     ui->randomGeneratorSeed->setValue(badRandomSeed);
     ui->GNPGeneratorSeed->setValue(badRandomSeed);
+    ui->randomTreeGeneratorSeed->setValue(badRandomSeed);
 
     ui->label_randomGeneratorSeed->setVisible(false);
     ui->randomGeneratorSeed->setVisible(false);
     ui->label_GNPGeneratorSeed->setVisible(false);
     ui->GNPGeneratorSeed->setVisible(false);
+    ui->label_randomTreeGeneratorSeed->setVisible(false);
+    ui->randomTreeGeneratorSeed->setVisible(false);
 }
 
 
@@ -117,6 +122,12 @@ void GenerateGraphWidget::generateGraph()
             ui->GNPAllowSelfedges->isTristate()
         );
         break;
+    }
+    case RANDOM_TREE: {
+        generateRandomTreeGraph(
+            ui->randomTreeNodes->value(),
+            ui->randomTreeGeneratorSeed->value()
+        );
     }
     default:     break;
     }
@@ -348,4 +359,33 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     }
 }
 
+
+void GenerateGraphWidget::generateRandomTreeGraph(int nodes, int seed)
+{
+
+    Document* activeDocument = DocumentManager::self()->activeDocument();
+    QPointF center = activeDocument->activeDataStructure()->relativeCenter();
+
+    DataStructurePtr graph = activeDocument->activeDataStructure();
+    boost::mt19937 gen;
+    gen.seed(static_cast<unsigned int>(seed));
+
+    DataList addedNodes;
+    addedNodes << graph->addData(QString::number(1));
+    PointerTypePtr ptrType = activeDocument->pointerType(0);
+    for (int i = 1; i < nodes; i++) {
+        DataPtr thisNode = graph->addData(QString::number(i + 1), center);
+        center += QPointF(30,30);
+        boost::random::uniform_int_distribution<> randomEarlierNodeGen(0, i-1);
+        int randomEarlierNode = randomEarlierNodeGen(gen);
+        graph->addPointer(thisNode, addedNodes.at(randomEarlierNode));
+        if (ptrType->direction() == PointerType::Unidirectional) {
+            graph->addPointer(addedNodes.at(randomEarlierNode), thisNode);
+        }
+        addedNodes.append(thisNode);
+    }
+
+    Topology topology = Topology();
+    topology.applyMinCutTreeAlignment(addedNodes);
+}
 #include "GenerateGraphWidget.moc"

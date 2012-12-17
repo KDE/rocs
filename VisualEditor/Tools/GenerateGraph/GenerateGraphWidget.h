@@ -59,7 +59,8 @@ class GenerateGraphWidget :
         STAR,
         CIRCLE,
         RANDOM,
-        ER_RANDOM
+        ER_RANDOM,
+        RANDOM_TREE
     };
 
 public:
@@ -98,6 +99,12 @@ private:
      */
     void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges);
 
+    /**
+     * generates a random tree graph given the following parameters
+     * \param   int nodes   number of nodes
+     * \param   int seed    random seed for random number generator
+     */
+    void generateRandomTreeGraph(int nodes, int seed);
     Document* graphDoc_;
     int selectedGraphType_;
     QGridLayout *gridLayout_;
