@@ -17,8 +17,17 @@
 ##
 
 add_subdirectory(tgfFileFormat)
-add_subdirectory(dotFileFormat)
 add_subdirectory(tikzFileFormat)
+
+# require Boost >= 1.49 for DOT file format
+if(${Boost_VERSION} VERSION_LESS 104900)
+    add_feature_info(DotFileFormat
+        OFF
+        "Building of DOT file format support needs Boost >= 1.49."
+    )
+else(${Boost_VERSION} VERSION_LESS 104900)
+    add_subdirectory(dotFileFormat)
+endif(${Boost_VERSION} VERSION_LESS 104900)
 
 # these plugins are in an unstable state and are not suited for end users
 if (ROCS_BUILD_LOADSAVE)

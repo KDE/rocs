@@ -2,13 +2,26 @@ OUTLINE
 =======
 This readme file currently covers the following topics (further topics will be included in the
 future):
-* Licensing
 * Building
+* Licensing
 
 BUILDING
 ========
 For building Rocs, please refer to the instructions on techbase.kde.org. Further, Rocs provides
 a set of special cmake options:
+
+Required Packages
+-----------------
+* CMake
+  - we use features of CMake 2.8.8
+* Boost
+  - >=1.49 is required for DOT file format support, if only older Boost is found, compilation of this
+    plugin is disabled
+  - >=1.43 is required for all other parts of Rocs
+* KDE4Libs
+  - minimum KDE4Libs version is 4.3
+  - if compiled with version less than 4.10, the build system will warn that KDE4Internal is not found
+    (this is a false positive!)
 
 CMake Options
 -------------
