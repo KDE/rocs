@@ -555,13 +555,13 @@ void Document::remove(DataStructurePtr dataStructure)
 void Document::clear()
 {
     // remove types
-    for (QMap<int,DataTypePtr>::const_iterator iter= d->_dataTypes.begin(); iter != d->_dataTypes.end(); ++iter) {
+    for (QMap<int,DataTypePtr>::const_iterator iter= d->_dataTypes.constBegin(); iter != d->_dataTypes.constEnd(); ++iter) {
         emit(dataTypeRemoved(iter.key()));
         d->_dataTypes[iter.key()]->remove();
     }
     d->_dataTypes.clear();
 
-    for (QMap<int,PointerTypePtr>::const_iterator iter= d->_pointerTypes.begin(); iter != d->_pointerTypes.end(); ++iter) {
+    for (QMap<int,PointerTypePtr>::const_iterator iter= d->_pointerTypes.constBegin(); iter != d->_pointerTypes.constEnd(); ++iter) {
         emit(pointerTypeRemoved(iter.key()));
         d->_pointerTypes[iter.key()]->remove();
     }
