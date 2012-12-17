@@ -24,7 +24,6 @@
 #include <QPainter>
 #include <QSvgRenderer>
 #include <DataItem.h>
-#include <boost/graph/graph_concepts.hpp>
 
 class DataTypePrivate
 {
