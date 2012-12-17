@@ -72,13 +72,15 @@ add_feature_info(ExperimentalPlugins
     "Building experimental/unstable plugins."
 )
 
+# main includes
+add_subdirectory(RocsCore)
+add_subdirectory(VisualEditor)
+add_subdirectory(App)
+
 # feature log
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     feature_summary(WHAT ALL)
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
-add_subdirectory(RocsCore)
-add_subdirectory(VisualEditor)
-add_subdirectory(App)
 add_subdirectory(graphics)
 add_subdirectory(doc)
