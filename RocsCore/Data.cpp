@@ -545,8 +545,11 @@ QScriptValue Data::output_pointers(int pointerType)
     return d->createScriptArray(list);
 }
 
-QScriptValue Data::connected_pointers(DataPtr n)
+QScriptValue Data::connected_pointers(Data *n)
 {
-    PointerList list = pointerList(n);
+    if (n == 0) {
+        return QScriptValue();
+    }
+    PointerList list = pointerList(n->getData());
     return d->createScriptArray(list);
 }
