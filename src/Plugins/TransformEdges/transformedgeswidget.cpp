@@ -33,6 +33,9 @@
 #include <QtCore/QMap>
 #include <QtCore/QPair>
 
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/topology.hpp>
+
 #include <Document.h>
 #include <DataStructure.h>
 #include <DocumentManager.h>

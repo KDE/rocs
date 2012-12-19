@@ -22,19 +22,14 @@
 #include <QObject>
 
 #include "FilePluginInterface.h"
-
-#include <boost/graph/adjacency_list.hpp>
-
 #include "Rocs_Typedefs.h"
+
 class Document;
 
 class DotFilePlugin: public FilePluginInterface
 {
     Q_OBJECT
 public:
-    struct vertex_shape_t {
-        typedef boost::vertex_property_tag kind;
-    };
 
     explicit DotFilePlugin(QObject* parent, const QList< QVariant >&);
     ~DotFilePlugin();

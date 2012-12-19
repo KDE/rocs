@@ -26,6 +26,7 @@
 
 #include <boost/graph/graphviz.hpp>
 #include <boost/graph/topology.hpp>
+
 #include <boost/graph/random_layout.hpp>
 #include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/random/mersenne_twister.hpp>
@@ -43,6 +44,9 @@ static const KAboutData aboutdata("rocs_dotFilePlugin", 0, ki18n("Open and Save 
 K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin<DotFilePlugin>();)
 K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
+struct vertex_shape_t {
+    typedef boost::vertex_property_tag kind;
+};
 
 DotFilePlugin::~DotFilePlugin()
 {

@@ -21,8 +21,6 @@
 
 #include <QWidget>
 
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/topology.hpp>
 #include <KDialog>
 #include "Rocs_Typedefs.h"
 
