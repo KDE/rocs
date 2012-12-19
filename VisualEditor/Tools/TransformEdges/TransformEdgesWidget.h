@@ -22,9 +22,6 @@
 #include <QWidget>
 #include <KDialog>
 
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/topology.hpp>
-
 #include "CoreTypes.h"
 
 

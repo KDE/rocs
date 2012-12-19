@@ -47,6 +47,21 @@
 #include <boost/graph/erdos_renyi_generator.hpp>
 
 
+typedef boost::adjacency_list < boost::listS, boost::vecS, boost::undirectedS,
+        boost::property<boost::vertex_name_t, std::string> >
+        Graph;
+
+typedef boost::rectangle_topology<> topology_type;
+
+typedef topology_type::point_type point_type;
+
+typedef std::vector<point_type> PositionVec;
+
+typedef boost::iterator_property_map < PositionVec::iterator,
+        boost::property_map<Graph, boost::vertex_index_t>::type >
+        PositionMap;
+
+
 GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     :   KDialog(parent)
 {
