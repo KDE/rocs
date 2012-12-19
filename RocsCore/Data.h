@@ -238,7 +238,7 @@ public Q_SLOTS:
     QScriptValue input_pointers();
     QScriptValue output_pointers();
     QScriptValue output_pointers(int pointerType);
-    QScriptValue connected_pointers(DataPtr n);
+    QScriptValue connected_pointers(Data *n);
 
 Q_SIGNALS:
     void removed();

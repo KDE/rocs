@@ -55,7 +55,7 @@ QScriptValue GraphNode::connected_edges(Data* n)
     if (n == 0) {
         return QScriptValue();
     }
-    return Data::connected_pointers(n->getData());
+    return Data::connected_pointers(n);
 }
 
 QScriptValue GraphNode::input_edges()
