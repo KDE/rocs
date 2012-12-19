@@ -29,7 +29,6 @@
 
 #include <KIcon>
 
-
 AssignValueAction::AssignValueAction(const QString& name, GraphScene *scene, AssignMethod method, QWidget *parent)
     : KAction(KIcon(), name, parent)
 {
@@ -75,7 +74,7 @@ void AssignValueAction::enumerateDataStructure()
 {
     if (_dataStructure) {
         ValueModifier modifier;
-        modifier.enumerate(_dataStructure->dataList(), QString("value"), 1, true);
+        modifier.enumerate<DataPtr>(_dataStructure->dataList(), QString("value"), 1, "", true);
     }
 }
 
@@ -90,7 +89,7 @@ void AssignValueAction::enumerateSelected()
         }
     }
     ValueModifier modifier;
-    modifier.enumerate(dataList, QString("value"), 1, true);
+    modifier.enumerate<DataPtr>(dataList, QString("value"), 1, "", true);
 }
 
 void AssignValueAction::assignRandomIntegersDataStructure()

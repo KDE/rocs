@@ -96,6 +96,21 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
 
     graphDoc_ = graphDoc;
     updateApplyButtonStates();
+
+    qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
+    uint badRandomSeed = qHash(currentTime) % 99999;
+    badRandomSeed = (badRandomSeed == 0) ? 1 : badRandomSeed;
+    ui->spinBoxIntegerGeneratorSeed->setValue(badRandomSeed);
+    ui->spinBoxFloatGeneratorSeed->setValue(badRandomSeed);
+
+    ui->checkBoxOverwriteValues->setVisible(false);
+    ui->label->setVisible(false);
+    ui->spinBoxIntegerGeneratorSeed->setVisible(false);
+    ui->label_7->setVisible(false);
+    ui->spinBoxFloatGeneratorSeed->setVisible(false);
+    ui->label_9->setVisible(false);
+    ui->LabelInitialString->setVisible(false);
+    ui->LineEditInitialString->setVisible(false);
 }
 
 
@@ -189,10 +204,33 @@ void AssignValuesWidget::assignValues()
         int start = ui->spinBoxIDStartValue->value();
 
         if (ui->applyToDataElements->isChecked()) {
-            modifier.enumerate(dataList, property, start, overrideValues);
+	    modifier.enumerate(dataList, property, start, "", overrideValues);
         }
         if (ui->applyToConnections->isChecked()) {
-            modifier.enumerate(pointerList, property, start, overrideValues);
+	    modifier.enumerate(pointerList, property, start, "", overrideValues);
+        }
+        break;
+    }
+    case ALPHA: {
+        QString start = ui->LineEditInitialString->text();
+
+        if (ui->applyToDataElements->isChecked()) {
+            modifier.enumerateAlpha(dataList, property, start, overrideValues);
+        }
+        if (ui->applyToConnections->isChecked()) {
+            modifier.enumerateAlpha(pointerList, property, start, overrideValues);
+        }
+        break;
+    }
+    case ID_ALPHA: {
+        int start = ui->SpinBoxAlphaNumericIDStart->value();
+        QString prefix = ui->LineEditAlphaNumericPrefix->text();
+
+        if (ui->applyToDataElements->isChecked()) {
+            modifier.enumerate(dataList, property, start, prefix, overrideValues);
+        }
+        if (ui->applyToConnections->isChecked()) {
+            modifier.enumerate(pointerList, property, start, prefix, overrideValues);
         }
         break;
     }

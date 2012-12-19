@@ -34,6 +34,8 @@ class AssignValuesWidget :
 
     enum AssignMethod {
         ID,
+        ALPHA,
+        ID_ALPHA,
         UNIFORM_INTEGER,
         UNIFORM_FLOAT
     };
