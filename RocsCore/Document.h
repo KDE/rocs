@@ -187,6 +187,27 @@ public:
 
     QString iconPackage() const;
 
+    qreal left() const;
+    qreal top() const;
+    qreal right() const;
+    qreal bottom() const;
+
+    qreal height() const;
+    qreal width() const;
+
+    /**
+     * estimates by looking at all node positions if a resize of the document is necessary.
+     */
+    void resizeDocumentIncrease();
+    void resizeDocumentBorder(Document::Border orientation);
+    void changeMinimalSize(qreal width, qreal height);
+
+    /**
+     * tests if given point is containted at document layer
+     */
+    bool isPointAtDocument(qreal x, qreal y) const;
+    bool isPointAtDocument(const QPointF &point) const;
+
 public Q_SLOTS:
     void setModified(const bool mod = true);
 
@@ -225,27 +246,6 @@ public Q_SLOTS:
     void setRight(qreal rightValue);
     void setTop(qreal topValue);
     void setBottom(qreal buttomValue);
-
-    qreal left() const;
-    qreal top() const;
-    qreal right() const;
-    qreal bottom() const;
-
-    qreal height() const;
-    qreal width() const;
-
-    /**
-     * estimates by looking at all node positions if a resize of the document is necessary.
-     */
-    void resizeDocumentIncrease();
-    void resizeDocumentBorder(Document::Border orientation);
-    void changeMinimalSize(qreal width, qreal height);
-
-    /**
-     * tests if given point is containted at document layer
-     */
-    bool isPointAtDocument(qreal x, qreal y) const;
-    bool isPointAtDocument(const QPointF &point) const;
 
 Q_SIGNALS:
     void dataStructureCreated(DataStructurePtr g);
