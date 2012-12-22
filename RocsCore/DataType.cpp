@@ -145,6 +145,20 @@ QString DataType::iconName() const
     return d->_icon;
 }
 
+
+void DataType::setVisible(bool visible)
+{
+    d->_visibility = visible;
+    emit(visibilityChanged(visible));
+}
+
+
+bool DataType::isVisible() const
+{
+    return d->_visibility;
+}
+
+
 void DataType::setDefaultColor(const QColor& color)
 {
     d->_defaultColor = color;

@@ -138,6 +138,10 @@ public:
      */
     bool isPropertyVisible(const QString& name) const;
 
+    /**
+     * \return true if pointer type is visible, otherwise false.
+     */
+    bool isVisible() const;
 
 public slots:
     /**
@@ -160,6 +164,13 @@ public slots:
      * \param direction is the new direction for the pointers
      */
     void setDirection(PointerType::Direction direction);
+
+    /**
+     * Set visibility for all pointers of this type.
+     *
+     * \param visibile is the new visibility value
+     */
+    void setVisible(bool visible);
 
     /**
      * Set line style for all pointers of this type.
@@ -213,6 +224,11 @@ signals:
      * Emitted when the visibility was changed.
      */
     void propertyVisibilityChanged(const QString& name);
+
+    /**
+     * Emitted when the visibility was changed.
+     */
+    void visibilityChanged(bool visible);
 
     /**
      * Emitted when a property was renamed.

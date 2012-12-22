@@ -84,6 +84,8 @@ void Pointer::initialize()
             this, SLOT(renameDynamicProperty(QString,QString)));
     connect(d->pointerType.get(), SIGNAL(propertyDefaultValueChanged(QString)),
             this, SLOT(updateDynamicProperty(QString)));
+    connect(d->pointerType.get(), SIGNAL(visibilityChanged(bool)),
+            this, SLOT(setVisible(bool)));
     connect(d->pointerType.get(), SIGNAL(propertyVisibilityChanged(QString)),
             this, SLOT(updateDynamicProperty(QString)));
 }

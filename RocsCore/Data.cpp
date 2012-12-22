@@ -70,13 +70,12 @@ DataPrivate::DataPrivate(DataStructurePtr parent, int uniqueIdentifier, int data
     : _x(0)
     , _y(0)
     , _width(0.3)
-    , _visible(parent->isDataVisible(dataType))
+    , _visible(parent->document()->dataType(dataType)->isVisible())
     , _dataStructure(parent)
     , _uniqueIdentifier(uniqueIdentifier)
     , _dataType(_dataStructure->document()->dataType(dataType))
     , _color(parent->document()->dataType(dataType)->defaultColor())
 {
-
     _inPointers = PointerList();
     _outPointers = PointerList();
 }
@@ -118,6 +117,8 @@ void Data::initialize()
             this, SLOT(updateDynamicProperty(QString)));
     connect(d->_dataType.get(), SIGNAL(propertyVisibilityChanged(QString)),
             this, SLOT(updateDynamicProperty(QString)));
+    connect(d->_dataType.get(), SIGNAL(visibilityChanged(bool)),
+            this, SLOT(setVisible(bool)));
     connect(d->_dataType.get(), SIGNAL(removed()), this, SLOT(remove()));
 }
 

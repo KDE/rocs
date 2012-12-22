@@ -135,6 +135,12 @@ public:
      */
     bool isPropertyVisible(const QString& name) const;
 
+    /**
+     * \return true if data type is visible, otherwise false.
+     */
+    bool isVisible() const;
+
+
 public slots:
     /**
      * Set name of the data type.
@@ -150,6 +156,13 @@ public slots:
      * \param icon identifier in current icon package
      */
     void setIcon(const QString& icon);
+
+    /**
+     * Set visibility for all data elements of this type.
+     *
+     * \param visible is the visibility value to be set
+     */
+    void setVisible(bool visible);
 
     /**
      * Set default color value for this data type.
@@ -203,6 +216,11 @@ signals:
      * Emitted when the visibility was changed.
      */
     void propertyVisibilityChanged(const QString& name);
+
+    /**
+     * Emitted when the visibility was changed.
+     */
+    void visibilityChanged(bool visible);
 
     /**
      * Emitted when a property was renamed.

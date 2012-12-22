@@ -55,7 +55,7 @@ public:
     bool _valueVisibility;
     bool _nameVisibility;
     bool _visibility;
-    Document* _document;
+    Document *_document;
 };
 
 
@@ -208,6 +208,17 @@ void PointerType::setPropertyVisible(const QString& name, bool visible)
     }
     d->_propertyList[name].visible = visible;
     emit propertyVisibilityChanged(name);
+}
+
+bool PointerType::isVisible() const
+{
+    return d->_visibility;
+}
+
+void PointerType::setVisible(bool visible)
+{
+    d->_visibility = visible;
+    emit(visibilityChanged(visible));
 }
 
 void PointerType::remove()

@@ -45,9 +45,7 @@ public:
     boost::weak_ptr<DataStructure> q;
 
     QMap<int, DataList> _dataTypeLists;         // list if data elements associated to specific type
-    QMap<int, bool> _dataTypeVisibility;
     QMap<int, PointerList> _pointerTypeLists;   // list of pointers associated to specific type
-    QMap<int, bool> _pointerTypeVisibility;
 
     int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
 
@@ -201,7 +199,6 @@ void DataStructure::registerDataType(int identifier)
         return;
     }
     d->_dataTypeLists.insert(identifier, DataList());
-    d->_dataTypeVisibility.insert(identifier, true);
 }
 
 
@@ -216,7 +213,6 @@ void DataStructure::registerPointerType(int identifier)
         return;
     }
     d->_pointerTypeLists.insert(identifier, PointerList());
-    d->_pointerTypeVisibility.insert(identifier, true);
 }
 
 
@@ -232,7 +228,6 @@ void DataStructure::removeDataType(int identifier)
     }
     d->_dataTypeLists[identifier].clear();
     d->_dataTypeLists.remove(identifier);
-    d->_dataTypeVisibility.remove(identifier);
 }
 
 
@@ -248,19 +243,6 @@ void DataStructure::removePointerType(int pointerType)
     }
     d->_pointerTypeLists[pointerType].clear();
     d->_pointerTypeLists.remove(pointerType);
-    d->_pointerTypeVisibility.remove(pointerType);
-}
-
-
-bool DataStructure::isDataVisible(int dataType) const
-{
-    return d->_dataTypeVisibility.value(dataType);
-}
-
-
-bool DataStructure::isPointerVisible(int pointerType) const
-{
-    return d->_pointerTypeVisibility.value(pointerType);
 }
 
 

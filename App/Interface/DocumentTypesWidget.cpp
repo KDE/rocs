@@ -161,18 +161,9 @@ bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Do
     dataPropertyWidget->setLayout(dataPropertyLayout);
     dataPropertyLayout->addWidget(dataTypeButton, 1, 1);
     dataPropertyLayout->addWidget(dataTypeVisible, 1, 2);
-
     ui->_dataTypes->addWidget(dataPropertyWidget);
 
-    QSignalMapper* signalMapper = new QSignalMapper(this);
-    signalMapper = new QSignalMapper(this);
-    signalMapper->setMapping(dataTypeVisible, typeIdentifier);
-    connect(dataTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
-
-    //FIXME
-    DataStructurePtr dataStructure = document->activeDataStructure();
-    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(toggleDataVisibility(int)));
-
+    connect(dataTypeVisible, SIGNAL(toggled(bool)), dataType.get(), SLOT(setVisible(bool)));
     connect(dataType.get(), SIGNAL(iconChanged(QString)), this, SLOT(updateDataTypeButtons()));
     connect(dataType.get(), SIGNAL(nameChanged(QString)), this, SLOT(updateDataTypeButtons()));
 
@@ -211,18 +202,9 @@ bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier,
     pointerPropertyWidget->setLayout(pointerPropertyLayout);
     pointerPropertyLayout->addWidget(pointerTypeButton, 1, 1);
     pointerPropertyLayout->addWidget(pointerTypeVisible, 1, 2);
-
     ui->_pointerTypes->addWidget(pointerPropertyWidget);
 
-    QSignalMapper* signalMapper = new QSignalMapper(this);
-    signalMapper = new QSignalMapper(this);
-    signalMapper->setMapping(pointerTypeVisible, typeIdentifier);
-    connect(pointerTypeVisible, SIGNAL(toggled(bool)), signalMapper, SLOT(map()));
-
-    //FIXME
-    DataStructurePtr dataStructure = document->activeDataStructure();
-    connect(signalMapper, SIGNAL(mapped(int)), dataStructure.get(), SLOT(togglePointerVisibility(int)));
-
+    connect(pointerTypeVisible, SIGNAL(toggled(bool)), pointerType.get(), SLOT(setVisible(bool)));
     connect(pointerType.get(), SIGNAL(nameChanged(QString)), this, SLOT(updatePointerTypeButtons()));
 
     _pointerTypeWidgets.insert(typeIdentifier, pointerPropertyWidget);
