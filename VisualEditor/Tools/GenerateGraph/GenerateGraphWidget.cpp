@@ -78,11 +78,13 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     // other KDialog options
     setCaption(i18nc("@title:window", "Generate Graph"));
     setButtons(KDialog::Cancel | KDialog::Ok);
+    ui->buttonShowAdvanced->setIcon(KIcon("rocsadvancedsetup"));
     KDialog::centerOnScreen(widget, -3);
 
     connect(this, SIGNAL(okClicked()), this, SLOT(generateGraph()));
     connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setGraphType(int)));
 
+    // set random seeds
     qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
     uint badRandomSeed = qHash(currentTime) % 99999;
     badRandomSeed = (badRandomSeed == 0) ? 1 : badRandomSeed;
@@ -90,6 +92,8 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     ui->GNPGeneratorSeed->setValue(badRandomSeed);
     ui->randomTreeGeneratorSeed->setValue(badRandomSeed);
 
+    // set visibility for advanced options
+    // TODO move to containers for easier handling
     ui->label_randomGeneratorSeed->setVisible(false);
     ui->randomGeneratorSeed->setVisible(false);
     ui->label_GNPGeneratorSeed->setVisible(false);
@@ -245,8 +249,9 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
 
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList().size() > 0)
+    if (graph->dataList().size() > 0) {
         graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Circle Graph"));
+    }
 
     QList< QPair<QString, QPointF> > circleNodes;
 
@@ -378,10 +383,14 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 void GenerateGraphWidget::generateRandomTreeGraph(int nodes, int seed)
 {
 
-    Document* activeDocument = DocumentManager::self().activeDocument();
+    Document *activeDocument = DocumentManager::self().activeDocument();
     QPointF center = activeDocument->activeDataStructure()->relativeCenter();
 
-    DataStructurePtr graph = activeDocument->activeDataStructure();
+    DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
+    if (graph->dataList().size() > 0) {
+        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Circle Graph"));
+    }
+
     boost::mt19937 gen;
     gen.seed(static_cast<unsigned int>(seed));
 
@@ -401,6 +410,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int nodes, int seed)
     }
 
     Topology topology = Topology();
-    topology.applyMinCutTreeAlignment(addedNodes);
+    topology.directedGraphDefaultTopology(graph);
 }
+
 #include "GenerateGraphWidget.moc"

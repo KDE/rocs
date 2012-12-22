@@ -16,16 +16,59 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="1">
     <layout class="QHBoxLayout" name="advancedLayout">
+     <item>
+      <widget class="KComboBox" name="comboBox">
+       <item>
+        <property name="text">
+         <string>Mesh Graph</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Star Graph</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Circle Graph</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Random Graph</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Erdös-Renyi Graph</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Random Tree Graph</string>
+        </property>
+       </item>
+      </widget>
+     </item>
      <item alignment="Qt::AlignRight">
-      <widget class="QPushButton" name="advancedButton">
+      <widget class="QPushButton" name="buttonShowAdvanced">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Show advanced settings.</string>
+       </property>
        <property name="text">
-        <string>Show advanced</string>
+        <string/>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -33,47 +76,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Graph Type:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="KComboBox" name="comboBox">
-     <item>
-      <property name="text">
-       <string>Mesh Graph</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Star Graph</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Circle Graph</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Random Graph</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Erdös-Renyi Graph</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Random Tree Graph</string>
-      </property>
-     </item>
-    </widget>
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="Line" name="line">
@@ -390,6 +392,13 @@
      </widget>
     </widget>
    </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Graph Generator</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -418,7 +427,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>label_randomGeneratorSeed</receiver>
    <slot>setVisible(bool)</slot>
@@ -434,7 +443,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>randomGeneratorSeed</receiver>
    <slot>setVisible(bool)</slot>
@@ -450,7 +459,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>label_GNPGeneratorSeed</receiver>
    <slot>setVisible(bool)</slot>
@@ -466,7 +475,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>GNPGeneratorSeed</receiver>
    <slot>setVisible(bool)</slot>
@@ -482,7 +491,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>label_randomTreeGeneratorSeed</receiver>
    <slot>setVisible(bool)</slot>
@@ -498,7 +507,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>randomTreeGeneratorSeed</receiver>
    <slot>setVisible(bool)</slot>
