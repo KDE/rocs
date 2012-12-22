@@ -82,6 +82,17 @@ public:
      */
     template<typename T>
     void assignRandomReals(const QList<T> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+
+    /**
+     * Assign a constant string value to nodes/pointers
+     *
+     * \param list QList of PointerPtr or DataPtr
+     * \param property the property the shall be set to specified value
+     * \param constant a string to assign
+     * \param overrideValues if true, current property values are overwritten; otherwise not
+     */
+    template<typename T>
+    void assignConstantValue(const QList<T> &list, const QString &property, const QString &constant, bool overrideValues);
 };
 
 #endif // VALUEMODIFIER_H

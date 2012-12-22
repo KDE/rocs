@@ -264,6 +264,16 @@ void AssignValuesWidget::assignValues()
         }
         break;
     }
+    case CONSTANT: {
+        QString constant = ui->lineEditConstantValue->text();
+
+        if (ui->applyToDataElements->isChecked()) {
+            modifier.assignConstantValue(dataList, property, constant, overrideValues);
+        }
+        if (ui->applyToConnections->isChecked()) {
+            modifier.assignConstantValue(pointerList, property, constant, overrideValues);
+        }
+    }
     }
 }
 

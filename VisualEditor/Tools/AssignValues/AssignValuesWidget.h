@@ -37,7 +37,8 @@ class AssignValuesWidget :
         ALPHA,
         ID_ALPHA,
         UNIFORM_INTEGER,
-        UNIFORM_FLOAT
+        UNIFORM_FLOAT,
+        CONSTANT
     };
 
 public:

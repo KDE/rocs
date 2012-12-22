@@ -131,3 +131,16 @@ void ValueModifier::assignRandomReals(const QList<T> &list, const QString &prope
 }
 template void ValueModifier::assignRandomReals<DataPtr>(const QList<DataPtr> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
 template void ValueModifier::assignRandomReals<PointerPtr>(const QList<PointerPtr> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+
+template<typename T>
+void ValueModifier::assignConstantValue(const QList<T> &list, const QString &property, const QString &constant, bool overrideValues = true)
+{
+    for (int i = 0; i < list.size(); i++) {
+        if (!overrideValues && !list[i]->property(property.toStdString().c_str()).isNull()) {
+            return;
+        }
+        list[i]->setProperty(property.toStdString().c_str(), constant);
+    }
+}
+template void ValueModifier::assignConstantValue<DataPtr>(const QList<DataPtr> &list, const QString &property, const QString &constant, bool overrideValues = true);
+template void ValueModifier::assignConstantValue<PointerPtr>(const QList<PointerPtr> &list, const QString &property, const QString &constant, bool overrideValues = true);
