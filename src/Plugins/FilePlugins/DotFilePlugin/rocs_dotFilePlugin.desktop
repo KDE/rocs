@@ -13,6 +13,7 @@ X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=Dot File Plugin
+Name[bs]=Priključak s datotekom tačaka
 Name[ca]=Endollable de fitxer del Dot
 Name[ca@valencia]=Endollable de fitxer del Dot
 Name[da]=Dot-fil-plugin
