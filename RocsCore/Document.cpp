@@ -29,6 +29,7 @@
 #include "DataStructureBackendManager.h"
 #include "DataStructurePluginInterface.h"
 #include "QtScriptBackend.h"
+#include "ConcurrentHelpClasses.h"
 
 #include <boost/shared_ptr.hpp>
 #include <boost/concept_check.hpp>
@@ -317,6 +318,20 @@ void Document::setBottom(qreal bottomValue)
 {
     d->_bottom = bottomValue;
     //d->_modified = true;
+}
+
+void Document::updateGraphics(DataTypePtr dataType)
+{
+    foreach(const DataStructurePtr &structure, d->_dataStructures) {
+        QtConcurrent::blockingMap(structure->dataList(dataType->identifier()), DataGraphicsUpdated());
+    }
+}
+
+void Document::updateGraphics(PointerTypePtr pointerType)
+{
+    foreach(const DataStructurePtr &structure, d->_dataStructures) {
+        QtConcurrent::blockingMap(structure->pointers(pointerType->identifier()), PointerGraphicsUpdated());
+    }
 }
 
 QRectF Document::size()

@@ -60,4 +60,20 @@ struct PointerVisibilitySetted {
     bool m_visibility;
 };
 
+struct PointerGraphicsUpdated {
+    PointerGraphicsUpdated() {}
+    typedef void result_type;
+    void operator()(PointerPtr d) {
+        d->setVisible(d->isVisible());
+    }
+};
+
+struct DataGraphicsUpdated {
+    DataGraphicsUpdated() {}
+    typedef void result_type;
+    void operator()(DataPtr d) {
+        d->setVisible(d->isVisible());
+    }
+};
+
 #endif

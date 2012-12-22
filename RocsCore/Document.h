@@ -247,6 +247,9 @@ public Q_SLOTS:
     void setTop(qreal topValue);
     void setBottom(qreal buttomValue);
 
+    void updateGraphics(DataTypePtr dataType);
+    void updateGraphics(PointerTypePtr pointerType);
+
 Q_SIGNALS:
     void dataStructureCreated(DataStructurePtr g);
     void dataStructureListChanged();

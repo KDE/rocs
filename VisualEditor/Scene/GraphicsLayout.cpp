@@ -48,13 +48,9 @@ GraphicsLayout* GraphicsLayout::self()
 void GraphicsLayout::setViewStyleDataNode(int style)
 {
     _viewStyleDataNode = style;
-    QList< DataStructurePtr > dsList = DocumentManager::self().activeDocument()->dataStructures();
-    foreach(DataStructurePtr ds, dsList) {
-        foreach(int identifier, ds->document()->pointerTypeList()) {
-            // update all pointers
-//FIXME implement update
-//             ds->setDataVisibility(ds->isDataVisible(identifier), identifier);
-        }
+    Document *document = DocumentManager::self().activeDocument();
+    foreach(int identifier, document->dataTypeList()) {
+        document->updateGraphics(document->dataType(identifier));
     }
     emit changed();
 }
@@ -63,13 +59,9 @@ void GraphicsLayout::setViewStyleDataNode(int style)
 void GraphicsLayout::setViewStyleDataEdge(int style)
 {
     _viewStyleDataEdge = style;
-    QList< DataStructurePtr > dsList = DocumentManager::self().activeDocument()->dataStructures();
-    foreach(DataStructurePtr ds, dsList) {
-        foreach(int identifier, ds->document()->pointerTypeList()) {
-            // update all pointers
-//FIXME implement update
-//             ds->setPointerVisibility(ds->isPointerVisible(identifier), identifier);
-        }
+    Document *document = DocumentManager::self().activeDocument();
+    foreach(int identifier, document->pointerTypeList()) {
+        document->updateGraphics(document->pointerType(identifier));
     }
     emit changed();
 }
