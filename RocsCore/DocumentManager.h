@@ -67,9 +67,6 @@ public:
     QSvgRenderer * registerSharedRenderer(const QString &iconPackage);
     void removeSharedRenderer(const QString &iconPackage);
 
-    int viewStyleDataNode();
-    int viewStyleDataEdge();
-
 public slots:
     /** Convert document to new data structure. */
     void convertToDataStructure();
