@@ -27,8 +27,6 @@
 #include <QtScript>
 #include <QColor>
 
-#include <klocalizedstring.h>
-
 #include <boost/scoped_ptr.hpp>
 
 #include "RocsCoreExport.h"
@@ -51,12 +49,6 @@ class ROCSLIB_EXPORT DataStructure : public QObject
     Q_PROPERTY(QString name READ name WRITE setName)
 
 public:
-    /**
-     * Default destructor.
-     * DO NOT CALL IT, let the shared pointer take care for deletion.
-     */
-    virtual ~DataStructure();
-
     static DataStructurePtr create(Document *parent = 0);
     static DataStructurePtr create(DataStructurePtr other, Document *parent = 0);
 
@@ -325,13 +317,17 @@ protected:
     PointerPtr addPointer(PointerPtr pointer, int pointerType = 0);
     int generateUniqueIdentifier();
 
-protected:
     /**
      * Default constructor.
      *
      * \param parent the parent document of the data structure
      */
     DataStructure(Document *parent = 0);
+
+    /**
+     * Default destructor.
+     */
+    virtual ~DataStructure();
 
     /**
      * overwrites the current DataStructure with all values (Data and Pointer)
@@ -344,13 +340,13 @@ protected:
 
     void initialize();
     template<typename T> static DataStructurePtr create(Document *parent = 0) {
-        DataStructurePtr pi(new T(parent));
+        DataStructurePtr pi(new T(parent), deleter());
         pi->setQpointer(pi);
         pi->initialize();
         return pi;
     }
     template<typename T> static DataStructurePtr create(DataStructurePtr other, Document *parent = 0) {
-        DataStructurePtr pi(new T(parent));
+        DataStructurePtr pi(new T(parent), deleter());
         pi->setQpointer(pi);
         pi->initialize();
         pi->importStructure(other);
@@ -372,6 +368,14 @@ private:
      * Set q-pointer in private data object.
      */
     void setQpointer(DataStructurePtr q);
+
+    class deleter;
+    friend class deleter;
+    class deleter
+    {
+        public:
+        void operator()(DataStructure * p) { delete p; }
+    };
 };
 
 #endif
