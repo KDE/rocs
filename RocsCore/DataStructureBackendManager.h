@@ -52,7 +52,7 @@ public:
      *
      * \return self reference
      */
-    static DataStructureBackendManager* self();
+    static DataStructureBackendManager * self();
 
     /**
      * Returns list of loaded backends. Backends are loaded with first call to \see self().
@@ -67,7 +67,7 @@ public:
      * \param plugin the data structure plugin object
      * \return plugin information
      */
-    KPluginInfo backendInfo(DataStructurePluginInterface* plugin) const;
+    KPluginInfo backendInfo(DataStructurePluginInterface *plugin) const;
 
     /**
      * Returns data structure backend identified by its identifier \p internalName.
@@ -75,20 +75,20 @@ public:
      * \param internalName the unique identifier for backend
      * \return the requested backend or '0' if backend is not found
      */
-    DataStructurePluginInterface* backend(const QString& internalName) const;
+    DataStructurePluginInterface * backend(const QString &internalName) const;
 
     /**
      * TODO change this method: it is not clear how the parent document is registered; the creation
      *      functionality should only be located at the Document class.
      *
      * Create data structure with backend \p pluginName. If not backend is specified, the currently
-     * active data structure backend is used, \see activeBackend().
+     * active data structure backend is used, \ref activeBackend().
      *
      * \param parent the Document that will hold the created data structure
      * \param pluginName the optional name of the data structure backend
      * \return the created data structure
      */
-    DataStructurePtr createDataStructure(Document* parent, const QString& pluginName = QString());
+    DataStructurePtr createDataStructure(Document *parent, const QString &pluginName=QString());
 
     /**
      * Create a new data structure from given \p dataStructure within document \p parent.
@@ -98,7 +98,7 @@ public:
      * \param dataStructure the data structure to be converted
      * \param parent
      */
-    DataStructurePtr createDataStructure(const DataStructurePtr dataStructure, Document* parent);
+    DataStructurePtr createDataStructure(const DataStructurePtr dataStructure, Document *parent);
 
     /**
      * Returns the currently active data structure backend. The return value is only '0' if
@@ -106,7 +106,7 @@ public:
      *
      * \return data structure backend or '0' if no backend exists
      */
-    DataStructurePluginInterface* activeBackend() const;
+    DataStructurePluginInterface * activeBackend() const;
 
     /**
      * Generates graphics item for represenation of \p data at graph scene based on data structure
@@ -115,7 +115,7 @@ public:
      * \param data the data object
      * \return item associated with the data object
      */
-    QGraphicsItem* dataItem(DataPtr data) const;
+    QGraphicsItem * dataItem(DataPtr data) const;
 
     /**
      * Generates graphics item for represenation of \p pointer at graph scene based on data structure
@@ -124,29 +124,29 @@ public:
      * \param pointer the pointer object
      * \return item associated with the pointer object
      */
-    QGraphicsItem* pointerItem(PointerPtr pointer) const;
+    QGraphicsItem * pointerItem(PointerPtr pointer) const;
 
     /**
      * Create widgets for backend specific data properties.
      * If no extra properties exist, return value is 0.
      */
-    QLayout* dataExtraProperties(DataPtr data, QWidget* parent) const;
+    QLayout * dataExtraProperties(DataPtr data, QWidget *parent) const;
 
     /**
      * Create widgets for backend specific pointer properties.
      * If no extra properties exist, return value is 0.
      */
-    QLayout* pointerExtraProperties(PointerPtr pointer, QWidget* parent) const;
+    QLayout * pointerExtraProperties(PointerPtr pointer, QWidget *parent) const;
 
     /**
      * Create widgets for backend specific data structure properties.
      * If no extra properties exist, return value is 0.
      */
-    QLayout* dataStructureExtraProperties(DataStructurePtr dataStructure, QWidget* parent) const;
+    QLayout * dataStructureExtraProperties(DataStructurePtr dataStructure, QWidget *parent) const;
 
 public Q_SLOTS:
     /**
-     * Change the active backend. If backend is changed, the signal \see backendChanged() is emitted.
+     * Change the active backend. If backend is changed, the signal \ref backendChanged() is emitted.
      * If \p pluginIdentifier does not denote a valid backend, the active backend is not changed.
      *
      * \param pluginIdentifier internal name of the data structure backend
@@ -162,23 +162,17 @@ Q_SIGNALS:
 private:
     /**
      * \internal
-     * Private constructor, \see self().
+     * Private constructor, \ref self().
      */
     DataStructureBackendManager();
 
     /**
-     * Destructor.
+     * Private destructor.
      */
     ~DataStructureBackendManager();
 
     DataStructureBackendManager(const DataStructureBackendManager&);
     void operator=(const DataStructureBackendManager&);
-
-    /**
-     * \internal
-     * Private loader for data structure backends, only to be called from static \see self() method.
-     */
-    void loadBackends();
 
     static DataStructureBackendManager instance;
 
