@@ -35,7 +35,9 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <boost/graph/graph_concepts.hpp>
-#include <qstring.h>
+
+#include <KLocale>
+#include <QString>
 
 DataStructurePtr Rocs::GraphStructure::create(Document *parent)
 {

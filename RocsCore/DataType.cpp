@@ -23,6 +23,7 @@
 #include <boost/weak_ptr.hpp>
 
 #include <KDebug>
+#include <KLocale>
 #include <QPainter>
 #include <QSvgRenderer>
 

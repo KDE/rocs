@@ -28,12 +28,12 @@
 #include "Data.h"
 #include "Pointer.h"
 #include <CoreTypes.h>
-
 #include "Interface/EditorToolbar.h"
 
 #include "Actions/PropertiesDialogAction.h"
 #include "Actions/AlignAction.h"
 
+#include <KLocale>
 #include <QVBoxLayout>
 #include <QGraphicsItem>
 #include <KDebug>

@@ -25,6 +25,7 @@
 #include "QtScriptBackend.h"
 
 #include <KDebug>
+#include <KLocale>
 #include <QColor>
 #include <boost/weak_ptr.hpp>
 

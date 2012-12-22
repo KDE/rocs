@@ -22,7 +22,9 @@
 #include "Pointer.h"
 #include "DataStructure.h"
 #include "QtScriptBackend.h"
+
 #include <KDebug>
+#include <KLocale>
 #include <KGlobal>
 #include <QColor>
 #include <QMap>

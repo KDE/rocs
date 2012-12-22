@@ -21,6 +21,7 @@
 
 #include "Data.h"
 #include <boost/weak_ptr.hpp>
+#include <KLocale>
 #include <KDebug>
 
 class GroupPrivate
