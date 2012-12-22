@@ -33,12 +33,12 @@
 
 TestGraphStructureAlgorithms::TestGraphStructureAlgorithms()
 {
-    QVERIFY(DataStructureBackendManager::self()->backends().count() > 0);
+    QVERIFY(DataStructureBackendManager::self().backends().count() > 0);
 }
 
 void TestGraphStructureAlgorithms::init()
 {
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
     DocumentManager::self().newDocument();
 }
 

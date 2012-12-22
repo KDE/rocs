@@ -34,7 +34,7 @@
 
 TestGraphStructure::TestGraphStructure()
 {
-    QVERIFY(DataStructureBackendManager::self()->backends().count() > 0);
+    QVERIFY(DataStructureBackendManager::self().backends().count() > 0);
     DocumentManager::self().addDocument(new Document("test"));
 }
 
@@ -44,7 +44,7 @@ void TestGraphStructure::cleanupTestCase()
 
 void TestGraphStructure::dataAddDeleteTest()
 {
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
     DataList dataList;
 
@@ -65,7 +65,7 @@ void TestGraphStructure::dataAddDeleteTest()
 void TestGraphStructure::pointerAddDeleteTest()
 {
     // test for undirected pointers
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
     DataList dataList;
 
@@ -107,7 +107,7 @@ void TestGraphStructure::createSimpleGraph()
 {
     QMap<QString, DataPtr> dataList;
     /* Creates a simple Graph with 5 datums and connects them with pointers. */
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
 
     ds->setProperty("name", "Graph1");
@@ -136,7 +136,7 @@ void TestGraphStructure::createSimpleGraph()
 
 void TestGraphStructure::dataTypesTest()
 {
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
 
     DataList dataListDefault, dataList1, dataList2;
@@ -180,7 +180,7 @@ void TestGraphStructure::dataTypesTest()
 
 void TestGraphStructure::pointerTypesTest()
 {
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
     DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
 
     DataList dataList;

@@ -54,7 +54,7 @@ void DataStructurePage::setDataStructure(DataStructurePtr dataStructure)
     ui->dataStructurePlugin->setDisabled(true);
 
     if (!ui->pluginExtraProperties->layout()) {
-        QLayout * layout = DataStructureBackendManager::self()->dataStructureExtraProperties(dataStructure, ui->pluginExtraProperties);
+        QLayout *layout = DataStructureBackendManager::self().dataStructureExtraProperties(dataStructure, ui->pluginExtraProperties);
         ui->pluginExtraProperties->setLayout(layout);
     }
 

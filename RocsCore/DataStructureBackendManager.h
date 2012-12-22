@@ -52,10 +52,10 @@ public:
      *
      * \return self reference
      */
-    static DataStructureBackendManager * self();
+    static DataStructureBackendManager & self();
 
     /**
-     * Returns list of loaded backends. Backends are loaded with first call to \see self().
+     * Returns list of loaded backends. Backends are loaded with first call to \ref self().
      *
      * \return list of plugin interfaces of loaded backends
      */
@@ -173,8 +173,6 @@ private:
 
     DataStructureBackendManager(const DataStructureBackendManager&);
     void operator=(const DataStructureBackendManager&);
-
-    static DataStructureBackendManager instance;
 
     const QScopedPointer<DataStructureBackendManagerPrivate> d;
 };

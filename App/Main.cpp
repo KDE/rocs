@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     KCmdLineArgs::init(argc, argv, &aboutData);
     KApplication app;
 
-    if (DataStructureBackendManager::self()->backends().count() == 0) {
+    if (DataStructureBackendManager::self().backends().count() == 0) {
         KMessageBox::detailedError(0,
                                    i18n("No Data Structure plugins found on your system. Exiting."),
                                    i18n("Rocs needs at least one data structure plugin to continue.\n"

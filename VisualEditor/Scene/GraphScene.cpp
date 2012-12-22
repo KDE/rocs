@@ -194,7 +194,7 @@ void GraphScene::releaseDocument()
 
 QGraphicsItem *GraphScene::createData(DataPtr n)
 {
-    DataItem *nItem = (DataItem*)(DataStructureBackendManager::self()->dataItem(n));
+    DataItem *nItem = (DataItem*)(DataStructureBackendManager::self().dataItem(n));
     addItem(nItem);
     addItem(nItem->propertyListItem());
     return nItem;
@@ -202,7 +202,7 @@ QGraphicsItem *GraphScene::createData(DataPtr n)
 
 QGraphicsItem *GraphScene::createEdge(PointerPtr e)
 {
-    PointerItem *pointerItem = (PointerItem*)DataStructureBackendManager::self()->pointerItem(e);
+    PointerItem *pointerItem = (PointerItem*)DataStructureBackendManager::self().pointerItem(e);
     addItem(pointerItem);
     addItem(pointerItem->propertyListItem());
     return pointerItem;

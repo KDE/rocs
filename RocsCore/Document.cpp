@@ -86,7 +86,7 @@ Document::Document(const QString& name, qreal left, qreal right, qreal top, qrea
     d->_minHeight = 0;
     d->_saved = false;
     d->_engineBackend = new QtScriptBackend(this);
-    d->_backend = DataStructureBackendManager::self()->activeBackend();
+    d->_backend = DataStructureBackendManager::self().activeBackend();
     d->_modified = false;
 
     d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
@@ -109,14 +109,15 @@ void Document::setModified(const bool mod)
 void Document::changeBackend()
 {
     cleanUpBeforeConvert();
-    d->_backend = DataStructureBackendManager::self()->activeBackend();
+    d->_backend = DataStructureBackendManager::self().activeBackend();
 
     // create list of existing data structures, then convert them one by one
     QList<DataStructurePtr> dataStructures = QList<DataStructurePtr>(d->_dataStructures);
     d->_dataStructures.clear();
 
     for (int i = 0; i < dataStructures.count(); ++i) {
-        DataStructurePtr newDataStructure = addDataStructure(DataStructureBackendManager::self()->createDataStructure(dataStructures.at(i), this));
+        DataStructurePtr newDataStructure = addDataStructure(
+                DataStructureBackendManager::self().createDataStructure(dataStructures.at(i), this));
         // remove origin data structure
         dataStructures[i]->remove();
     }
@@ -485,8 +486,8 @@ void Document::setActiveDataStructure(DataStructurePtr g)
 
 DataStructurePtr Document::addDataStructure(const QString& name)
 {
-    DataStructurePtr dataStructure = DataStructureBackendManager::self()->createDataStructure(this,
-                         d->_backend->internalName());
+    DataStructurePtr dataStructure = DataStructureBackendManager::self().createDataStructure(
+            this, d->_backend->internalName());
     dataStructure->setName(name);
     return addDataStructure(dataStructure);
 }
@@ -587,7 +588,7 @@ DataStructurePluginInterface * Document::backend() const
 
 void Document::setBackend(const QString &pluginIdentifier)
 {
-    DataStructurePluginInterface * plugin = DataStructureBackendManager::self()->backend(pluginIdentifier);
+    DataStructurePluginInterface * plugin = DataStructureBackendManager::self().backend(pluginIdentifier);
     if (plugin) {
         d->_backend = plugin;
     }

@@ -59,7 +59,7 @@ DocumentManager & DocumentManager::self()
     static DocumentManager instance;
     if(!instance.d->_initialized) {
         instance.d->_initialized = true;
-        connect(DataStructureBackendManager::self(), SIGNAL(backendChanged(QString)),
+        connect(&DataStructureBackendManager::self(), SIGNAL(backendChanged(QString)),
                 &instance, SLOT(convertToDataStructure()));
     }
 
@@ -148,7 +148,7 @@ void DocumentManager::changeDocument(Document *document)
     if (d->_activeDocument != document) {
         if (d->_activeDocument) {
             emit deactivateDocument(d->_activeDocument);
-            DataStructureBackendManager::self()->disconnect(d->_activeDocument);
+            DataStructureBackendManager::self().disconnect(d->_activeDocument);
             document->disconnect(SIGNAL(activeDataStructureChanged(DataStructurePtr)));
             document->engineBackend()->disconnect(SIGNAL(sendDebug(QString)));
             document->engineBackend()->disconnect(SIGNAL(sendOutput(QString)));
@@ -202,11 +202,11 @@ void DocumentManager::convertToDataStructure()
     }
 
     //Check if need to convert (different DS) and if is possible to convert without data lost.
-    if (d->_activeDocument->backend()->internalName() != DataStructureBackendManager::self()->activeBackend()->internalName()
-            && DataStructureBackendManager::self()->activeBackend()->canConvertFrom(d->_activeDocument))
+    if (d->_activeDocument->backend()->internalName() != DataStructureBackendManager::self().activeBackend()->internalName()
+            && DataStructureBackendManager::self().activeBackend()->canConvertFrom(d->_activeDocument))
     {
         d->_activeDocument->changeBackend();
-        kDebug() << "Data structure converted to " << DataStructureBackendManager::self()->activeBackend()->name();
+        kDebug() << "Data structure converted to " << DataStructureBackendManager::self().activeBackend()->name();
         emit activateDocument();
     }
 }

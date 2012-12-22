@@ -69,7 +69,7 @@ const QStringList DotFileFormatPlugin::extensions() const
 void DotFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document(i18n("Import"));
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
 
     QList < QPair<QString, QString> > edges;
     QFile fileHandle(file().toLocalFile());

@@ -476,7 +476,7 @@ void MainWindow::setupDSPluginsAction()
 {
     QList <QAction*> pluginList;
     QActionGroup* group = new QActionGroup(this);
-    QStringList backends = DataStructureBackendManager::self()->backends();
+    QStringList backends = DataStructureBackendManager::self().backends();
 
     // reset values
     QAction* action = 0;
@@ -484,10 +484,10 @@ void MainWindow::setupDSPluginsAction()
     // create actions and associate them to signal mapper
     QSignalMapper* mapper = new QSignalMapper(this);
     foreach(const QString& identifier, backends) {
-        DataStructurePluginInterface* plugin = DataStructureBackendManager::self()->backend(identifier);
+        DataStructurePluginInterface *plugin = DataStructureBackendManager::self().backend(identifier);
         action = new KAction(plugin->name(), this);
         action->setCheckable(true);
-        if (plugin->internalName() == DataStructureBackendManager::self()->activeBackend()->internalName()) {
+        if (plugin->internalName() == DataStructureBackendManager::self().activeBackend()->internalName()) {
             action->setChecked(true);
         }
         action->setActionGroup(group);
@@ -497,7 +497,7 @@ void MainWindow::setupDSPluginsAction()
         pluginList.append(action);
     }
     connect(mapper, SIGNAL(mapped(QString)),
-             DataStructureBackendManager::self(), SLOT(setBackend(QString)));
+            &DataStructureBackendManager::self(), SLOT(setBackend(QString)));
 
     plugActionList("DS_plugins", pluginList);
 }

@@ -65,7 +65,7 @@ void DataPropertiesWidget::setData(DataPtr data)
     updateDataTypes();
 
     delete ui->extraItems->layout();
-    ui->extraItems->setLayout(DataStructureBackendManager::self()->dataExtraProperties(_data, this));
+    ui->extraItems->setLayout(DataStructureBackendManager::self().dataExtraProperties(_data, this));
     reflectAttributes();
 
     // listen to ui
@@ -94,15 +94,15 @@ void DataPropertiesWidget::setPosition(QPointF screenPosition)
 void DataPropertiesWidget::reflectAttributes()
 {
     if (!ui->extraItems->layout()) {
-        _oldDataStructurePlugin = DataStructureBackendManager::self()->activeBackend()->internalName();
+        _oldDataStructurePlugin = DataStructureBackendManager::self().activeBackend()->internalName();
     }
 
-    if (_oldDataStructurePlugin != DataStructureBackendManager::self()->activeBackend()->internalName()) {
+    if (_oldDataStructurePlugin != DataStructureBackendManager::self().activeBackend()->internalName()) {
         ui->extraItems->layout()->deleteLater();
     }
 
     if (!ui->extraItems->layout()) {
-        ui->extraItems->setLayout(DataStructureBackendManager::self()->dataExtraProperties(_data, this));
+        ui->extraItems->setLayout(DataStructureBackendManager::self().dataExtraProperties(_data, this));
     }
 
     ui->_color->setColor(_data->color().value<QColor>());

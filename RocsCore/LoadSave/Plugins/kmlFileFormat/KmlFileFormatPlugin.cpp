@@ -141,7 +141,7 @@ void KmlFileFormatPlugin::writeFile(Document& document)
 void KmlFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document(i18n("Import"));
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
     DataStructurePtr graph = graphDoc->addDataStructure();
 
     KmlHandler handler(graph);

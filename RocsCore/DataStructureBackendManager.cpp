@@ -29,8 +29,6 @@
 #include "Data.h"
 #include "Pointer.h"
 
-DataStructureBackendManager DataStructureBackendManager::instance;
-
 /**
  * \class DataStructureBackendManagerPrivate
  * \internal
@@ -193,11 +191,11 @@ DataStructureBackendManager::~DataStructureBackendManager()
 {
 }
 
-DataStructureBackendManager * DataStructureBackendManager::self()
+DataStructureBackendManager & DataStructureBackendManager::self()
 {
-    // initializes the plugin list only on demand
-    DataStructureBackendManager::instance.d->lazyInit();
-    return &DataStructureBackendManager::instance;
+    static DataStructureBackendManager instance;
+    instance.d->lazyInit();
+    return instance;
 }
 
 void DataStructureBackendManager::setBackend(const QString &pluginIdentifier)

@@ -94,7 +94,7 @@ void PointerPropertiesWidget::setPosition(QPointF screenPosition)
 void PointerPropertiesWidget::reflectAttributes()
 {
     if (!ui->extraItems->layout()) {
-        ui->extraItems->setLayout(DataStructureBackendManager::self()->pointerExtraProperties(_pointer, this));
+        ui->extraItems->setLayout(DataStructureBackendManager::self().pointerExtraProperties(_pointer, this));
     }
 
     ui->_color->setColor(_pointer->color());

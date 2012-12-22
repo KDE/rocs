@@ -53,8 +53,8 @@ QLayout* DataStructurePluginInterface::dataExtraProperties(DataPtr arg1, QWidget
 
 QString DataStructurePluginInterface::name()
 {
-    if (DataStructureBackendManager::self()->backendInfo(this).isValid()) {
-        return DataStructureBackendManager::self()->backendInfo(this).name();
+    if (DataStructureBackendManager::self().backendInfo(this).isValid()) {
+        return DataStructureBackendManager::self().backendInfo(this).name();
     }
     return QString();
 }
@@ -62,7 +62,7 @@ QString DataStructurePluginInterface::name()
 
 QString DataStructurePluginInterface::internalName()
 {
-    KPluginInfo pluginInfo = DataStructureBackendManager::self()->backendInfo(this);
+    KPluginInfo pluginInfo = DataStructureBackendManager::self().backendInfo(this);
     if (pluginInfo.isValid()) {
         return pluginInfo.property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
     }

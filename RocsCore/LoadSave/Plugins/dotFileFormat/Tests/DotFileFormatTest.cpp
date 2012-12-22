@@ -66,10 +66,10 @@ void DotFileFormatTest::checkNodes(DataStructurePtr dataStructure, QList<QString
 void DotFileFormatTest::init()
 {
     // test for graph data structure plugin
-    if (DataStructureBackendManager::self()->backends().count() == 0) {
+    if (DataStructureBackendManager::self().backends().count() == 0) {
         QFAIL("No plugin of DS, no way to continue!");
     }
-    DataStructurePluginInterface *pl = DataStructureBackendManager::self()->backend("Graph");
+    DataStructurePluginInterface *pl = DataStructureBackendManager::self().backend("Graph");
     QVERIFY2(pl,"Could create data structure of type Graph");
 }
 

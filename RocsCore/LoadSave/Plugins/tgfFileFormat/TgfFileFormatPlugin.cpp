@@ -62,7 +62,7 @@ void TgfFileFormatPlugin::readFile()
 {
     Document * graphDoc = new Document("Untitled");
     //TODO select graph data structure
-    DataStructureBackendManager::self()->setBackend("Graph");
+    DataStructureBackendManager::self().setBackend("Graph");
     DataStructurePtr graph = graphDoc->addDataStructure();
 
     // map node identifier from file to created data elements

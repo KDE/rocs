@@ -33,7 +33,7 @@ TestDynamicProperties::TestDynamicProperties()
 
 void TestDynamicProperties::initTestCase()
 {
-    QVERIFY2(DataStructureBackendManager::self()->backends().count() > 0, "DataStruture Plugins not loaded");
+    QVERIFY2(DataStructureBackendManager::self().backends().count() > 0, "DataStruture Plugins not loaded");
     _document = new Document("untitled");
 }
 

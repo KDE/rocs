@@ -76,7 +76,7 @@ void RocsGraphFileFormatPlugin::readFile()
     // This is a kind of a hack and should be solved better:
     // Document has no setter for the current plugin but on creation it gets created
     // with the plugin that is currently set as DataStructureBackendManager::actualPlugin.
-    DataStructureBackendManager::self()->activeBackend();
+    DataStructureBackendManager::self().activeBackend();
     Document* document = new Document("Untitled");
 
     QFile fileHandle(file().toLocalFile());
@@ -330,7 +330,7 @@ QString RocsGraphFileFormatPlugin::serialize(const Document &document)
               % QString("bottom : ") % QString::number(document.bottom()) % QChar('\n')
               % QString("left : ") % QString::number(document.left()) % QChar('\n')
               % QString("right : ") % QString::number(document.right()) % QChar('\n')
-              % QString("DataStructurePlugin : ") % DataStructureBackendManager::self()->activeBackend()->internalName() % QChar('\n')
+              % QString("DataStructurePlugin : ") % DataStructureBackendManager::self().activeBackend()->internalName() % QChar('\n')
               % QChar('\n');
 
     foreach(int dataTypeIdentifier, document.dataTypeList()) {
