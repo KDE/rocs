@@ -196,13 +196,6 @@ public:
     qreal width() const;
 
     /**
-     * estimates by looking at all node positions if a resize of the document is necessary.
-     */
-    void resizeDocumentIncrease();
-    void resizeDocumentBorder(Document::Border orientation);
-    void changeMinimalSize(qreal width, qreal height);
-
-    /**
      * tests if given point is containted at document layer
      */
     bool isPointAtDocument(qreal x, qreal y) const;
@@ -210,6 +203,13 @@ public:
 
 public Q_SLOTS:
     void setModified(const bool mod = true);
+
+    /**
+     * estimates by looking at all node positions if a resize of the document is necessary.
+     */
+    void resizeDocumentIncrease();
+    void resizeDocumentBorder(Document::Border orientation);
+    void changeMinimalSize(qreal width, qreal height);
 
     /**
      * Add data structure to graph document with name \p name.
