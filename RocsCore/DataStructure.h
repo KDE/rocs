@@ -43,8 +43,11 @@ class DataStructurePrivate;
 class ROCSLIB_EXPORT DataStructure : public QObject
 {
     Q_OBJECT
-
     Q_PROPERTY(QString name READ name WRITE setName)
+
+    // interal deleter class
+    class deleter;
+    friend class deleter;
 
 public:
     static DataStructurePtr create(Document *parent = 0);
@@ -310,8 +313,10 @@ private:
      */
     void setQpointer(DataStructurePtr q);
 
-    class deleter;
-    friend class deleter;
+    /**
+     * \internal
+     * Private deleter class.
+     */
     class deleter
     {
         public:

@@ -60,8 +60,6 @@ public:
 
     QScriptValue _value;
     QScriptEngine *_engine;
-    QMap<QString, QVariant> m_globalPropertiesData;
-    QMap<QString, QVariant> m_globalPropertiesPointer;
 };
 
 
@@ -334,12 +332,17 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
 {
     Q_ASSERT(dataType >= 0 && dataType <= d->_dataTypeLists.size());
 
+    // set data type properties
     d->_dataTypeLists[dataType].append(data);
-    QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesData.constBegin();
-    while (i != d->m_globalPropertiesData.constEnd()) {
-        data->addDynamicProperty(i.key(), i.value());
-        ++i;
+    DataTypePtr type = document()->dataType(dataType);
+    foreach(const QString &property, type->properties()) {
+        if (!data->property(property.toStdString().c_str()).isValid()
+            || data->property(property.toStdString().c_str()).isNull())
+        {
+            data->addDynamicProperty(property, type->propertyDefaultValue(property));
+        }
     }
+
     emit dataCreated(data);
     emit changed();
 
@@ -386,12 +389,17 @@ PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType)
 {
     Q_ASSERT(d->_pointerTypeLists.contains(pointerType));
 
+    // set pointer type properties
     d->_pointerTypeLists[pointerType].append(pointer);
-    QMap<QString, QVariant>::const_iterator i = d->m_globalPropertiesPointer.constBegin();
-    while (i != d->m_globalPropertiesPointer.constEnd()) {
-        pointer->addDynamicProperty(i.key(), i.value());
-        ++i;
+    PointerTypePtr type = document()->pointerType(pointerType);
+    foreach(const QString &property, type->properties()) {
+        if (!pointer->property(property.toStdString().c_str()).isValid()
+            || pointer->property(property.toStdString().c_str()).isNull())
+        {
+            pointer->addDynamicProperty(property, type->propertyDefaultValue(property));
+        }
     }
+
     emit pointerCreated(pointer);
     emit changed();
     connect(pointer.get(), SIGNAL(changed()), this, SIGNAL(changed()));
