@@ -230,7 +230,7 @@ protected:
     PointerType(Document* document, int identifier);
 
 private:
-    QScopedPointer<PointerTypePrivate> d;
+    const QScopedPointer<PointerTypePrivate> d;
     PointerType(const PointerType &);
     PointerType & operator=(const PointerType &);
 };

@@ -220,7 +220,7 @@ protected:
     DataType(Document *document, int identifier);
 
 private:
-    QScopedPointer<DataTypePrivate> d;
+    const QScopedPointer<DataTypePrivate> d;
     DataType(const DataType &);
     DataType& operator=(const DataType&);
 };
