@@ -60,6 +60,7 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
 
     setCaption(i18n("Assign Values"));
     setButtons(KDialog::Apply | KDialog::Cancel | KDialog::Ok);
+    ui->buttonShowAdvanced->setIcon(KIcon("rocsadvancedsetup"));
     KDialog::centerOnScreen(widget, -3);
 
     // set types
@@ -97,12 +98,15 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
     graphDoc_ = graphDoc;
     updateApplyButtonStates();
 
+    // set random seeds
     qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
     uint badRandomSeed = qHash(currentTime) % 99999;
     badRandomSeed = (badRandomSeed == 0) ? 1 : badRandomSeed;
     ui->spinBoxIntegerGeneratorSeed->setValue(badRandomSeed);
     ui->spinBoxFloatGeneratorSeed->setValue(badRandomSeed);
 
+    // set visibility for advanced options
+    // TODO move to containers for easier handling
     ui->checkBoxOverwriteValues->setVisible(false);
     ui->label->setVisible(false);
     ui->spinBoxIntegerGeneratorSeed->setVisible(false);

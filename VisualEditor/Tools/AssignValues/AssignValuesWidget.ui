@@ -34,16 +34,32 @@
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="1">
     <layout class="QHBoxLayout" name="advancedLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Choose Properties</string>
+       </property>
+      </widget>
+     </item>
      <item alignment="Qt::AlignRight">
-      <widget class="QPushButton" name="advancedButton">
+      <widget class="QPushButton" name="buttonShowAdvanced">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Show advanced options.</string>
+       </property>
        <property name="text">
-        <string>Show advanced</string>
+        <string/>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -55,7 +71,7 @@
    <item row="7" column="1">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Select Assignment Method</string>
+      <string>Assignment Method</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_5">
       <item row="1" column="0">
@@ -368,15 +384,12 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QGroupBox" name="groupTarget">
+    <widget class="QWidget" name="groupTarget" native="true">
      <property name="baseSize">
       <size>
        <width>0</width>
        <height>0</height>
       </size>
-     </property>
-     <property name="title">
-      <string>Select Target Elements</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_7">
       <item row="2" column="0">
@@ -529,7 +542,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>checkBoxOverwriteValues</receiver>
    <slot>setVisible(bool)</slot>
@@ -545,7 +558,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>label</receiver>
    <slot>setVisible(bool)</slot>
@@ -561,7 +574,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>spinBoxIntegerGeneratorSeed</receiver>
    <slot>setVisible(bool)</slot>
@@ -577,7 +590,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>label_7</receiver>
    <slot>setVisible(bool)</slot>
@@ -593,7 +606,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>spinBoxFloatGeneratorSeed</receiver>
    <slot>setVisible(bool)</slot>
@@ -609,7 +622,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>label_9</receiver>
    <slot>setVisible(bool)</slot>
@@ -625,7 +638,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>LabelInitialString</receiver>
    <slot>setVisible(bool)</slot>
@@ -641,7 +654,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>advancedButton</sender>
+   <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>LineEditInitialString</receiver>
    <slot>setVisible(bool)</slot>
