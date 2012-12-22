@@ -25,8 +25,6 @@
 #include <QColor>
 #include <KIcon>
 
-#include <boost/scoped_ptr.hpp>
-
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
@@ -219,10 +217,10 @@ protected:
      * \param document is graph document for that the data type is created
      * \param identifier is unique identifier of the data type within the document
      */
-    DataType(Document* document, int identifier);
+    DataType(Document *document, int identifier);
 
 private:
-    boost::scoped_ptr<DataTypePrivate> d;
+    QScopedPointer<DataTypePrivate> d;
     DataType(const DataType &);
     DataType& operator=(const DataType&);
 };

@@ -24,7 +24,6 @@
 #include <QScriptString>
 #include "RocsCoreExport.h"
 #include "IncludeManager.h"
-#include <boost/scoped_ptr.hpp>
 
 class QtScriptBackendPrivate;
 class QScriptEngineDebugger;
@@ -139,7 +138,7 @@ private:
      * \internal
      * d-pointer
      */
-    boost::scoped_ptr<QtScriptBackendPrivate> d;
+    const QScopedPointer<QtScriptBackendPrivate> d;
 };
 
 #endif

@@ -28,9 +28,7 @@
 #include <QObject>
 #include <QSize>
 #include <QRectF>
-#include <QPointer>
 #include <QMap>
-#include <boost/scoped_ptr.hpp>
 
 class DocumentPrivate;
 class KUrl;
@@ -264,7 +262,7 @@ Q_SIGNALS:
 
 private:
     // d-pointer
-    const boost::scoped_ptr<DocumentPrivate> d;
+    const QScopedPointer<DocumentPrivate> d;
     Document(const Document&);
     Document& operator=(const Document&);
 };

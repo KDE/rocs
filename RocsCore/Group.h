@@ -22,9 +22,7 @@
 
 #include <DataStructure.h>
 #include "Data.h"
-
-#include <QObject>
-#include <boost/shared_ptr.hpp>
+#include <QScopedPointer>
 
 class GroupPrivate;
 
@@ -41,6 +39,8 @@ public:
      * \param type the group type
      */
     Group(DataStructurePtr dataStructure, int identifier, int type);
+
+    virtual ~Group();
 
     /**
      * Add data element to group.
@@ -81,7 +81,7 @@ signals:
     void groupElementsChanged();
 
 private:
-    boost::shared_ptr<GroupPrivate> const d;
+    const QScopedPointer<GroupPrivate> d;
 };
 
 #endif

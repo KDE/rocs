@@ -21,7 +21,6 @@
 #define DATASTRUCTUREBACKENDMANAGER_H
 
 #include <QObject>
-#include <boost/scoped_ptr.hpp>
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
@@ -183,7 +182,7 @@ private:
 
     static DataStructureBackendManager instance;
 
-    const boost::scoped_ptr<DataStructureBackendManagerPrivate> d;
+    const QScopedPointer<DataStructureBackendManagerPrivate> d;
 };
 
 #endif

@@ -28,8 +28,6 @@
 #include <QColor>
 #include <QScriptValue>
 
-#include <boost/scoped_ptr.hpp>
-
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
@@ -295,7 +293,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    const boost::scoped_ptr<PointerPrivate> d;
+    const QScopedPointer<PointerPrivate> d;
 
     /**
      * \internal

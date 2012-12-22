@@ -27,8 +27,6 @@
 #include <QtScript>
 #include <QColor>
 
-#include <boost/scoped_ptr.hpp>
-
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 #include "Document.h"
@@ -358,7 +356,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    const boost::scoped_ptr<DataStructurePrivate> d;
+    const QScopedPointer<DataStructurePrivate> d;
 
     DataStructure(const DataStructure&);
     DataStructure& operator=(const DataStructure&);

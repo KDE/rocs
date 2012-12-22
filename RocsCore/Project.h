@@ -23,9 +23,9 @@
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
-#include <boost/scoped_ptr.hpp>
 #include <QList>
 #include <QString>
+#include <QScopedPointer>
 
 class KUrl;
 class ProjectPrivate;
@@ -261,7 +261,7 @@ public:
 
 private:
     bool writeNewProjectFile();
-    boost::scoped_ptr<ProjectPrivate> d;
+    const QScopedPointer<ProjectPrivate> d;
 };
 
 #endif // PROJECT_H

@@ -31,8 +31,6 @@
 #include <QtScript>
 #include <QColor>
 
-#include <boost/scoped_ptr.hpp>
-
 class DataItem;
 class Pointer;
 class DataPrivate;
@@ -277,7 +275,7 @@ private:
      * \internal
      * d-Pointer.
      */
-    const boost::scoped_ptr<DataPrivate> d;
+    const QScopedPointer<DataPrivate> d;
 
     /**
      * \internal

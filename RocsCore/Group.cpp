@@ -54,6 +54,12 @@ Group::Group(DataStructurePtr dataStructure, int identifier, int type):
 }
 
 
+Group::~Group()
+{
+
+}
+
+
 void Group::addData(DataPtr data)
 {
     d->_dataList.append(data);

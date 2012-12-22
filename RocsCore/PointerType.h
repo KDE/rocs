@@ -23,8 +23,6 @@
 #include <QString>
 #include <QColor>
 
-#include <boost/scoped_ptr.hpp>
-
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
@@ -232,7 +230,7 @@ protected:
     PointerType(Document* document, int identifier);
 
 private:
-    boost::scoped_ptr<PointerTypePrivate> d;
+    QScopedPointer<PointerTypePrivate> d;
     PointerType(const PointerType &);
     PointerType & operator=(const PointerType &);
 };
