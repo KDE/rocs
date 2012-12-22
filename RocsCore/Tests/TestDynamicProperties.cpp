@@ -130,15 +130,15 @@ void TestDynamicProperties::insertInvalidNames()
     QByteArray property_number = "0Property";
     QByteArray property_nonAscii = "Olá";
     n1->addDynamicProperty(property_space, QVariant(0));
-    g->addPointersDynamicProperty(property_space, QVariant(0));
+    e->addDynamicProperty(property_space, QVariant(0));
     g->addDynamicProperty(property_space, QVariant(0));
 
     n1->addDynamicProperty(property_number, QVariant(0));
-    g->addPointersDynamicProperty(property_number, QVariant(0));
+    e->addDynamicProperty(property_number, QVariant(0));
     g->addDynamicProperty(property_number, QVariant(0));
 
     n1->addDynamicProperty(property_nonAscii, QVariant(0));
-    g->addPointersDynamicProperty(property_nonAscii, QVariant(0));
+    e->addDynamicProperty(property_nonAscii, QVariant(0));
     g->addDynamicProperty(property_nonAscii, QVariant(0));
 
     QVERIFY2(e->property(property_space) == QVariant::Invalid, "Invalid Property (with space) added to edge.");
@@ -165,7 +165,7 @@ void TestDynamicProperties::renameProperties()
    QByteArray property = "newProperty";
     n1->addDynamicProperty(property, QVariant(0));
     n2->addDynamicProperty(property, QVariant(0));
-    g->addPointersDynamicProperty(property, QVariant(0));
+    e->addDynamicProperty(property, QVariant(0));
     g->addDynamicProperty(property, QVariant(0));
 
     n1->renameDynamicProperty(property, QByteArray("newName_Node"));
@@ -188,7 +188,7 @@ void TestDynamicProperties::renamePropertiesToInvalidNames()
     QByteArray property = "newProperty";
     n1->addDynamicProperty(property, QVariant(0));
     n2->addDynamicProperty(property, QVariant(0));
-    g->addPointersDynamicProperty(property, QVariant(0));
+    e->addDynamicProperty(property, QVariant(0));
     g->addDynamicProperty(property, QVariant(0));
 
     QByteArray property_space = "new Property";

@@ -482,10 +482,6 @@ bool parse(const std::string& str, Document * graphDoc)
     DotGrammar<std::string::iterator, skipper_type> r;
 
     if (phrase_parse(iter, input.end(), r, SKIPPER)) {
-        // TODO for now (without proper visualization of groups) set them invisible
-        if (phelper->gd->dataStructures().length() > 0) {
-            phelper->gd->dataStructures().at(0)->setDataVisibility(false, phelper->gd->groupType());
-        }
         kDebug() << "Complete dot file was parsed successfully.";
         return true;
     } else {

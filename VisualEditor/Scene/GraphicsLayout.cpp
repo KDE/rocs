@@ -52,7 +52,8 @@ void GraphicsLayout::setViewStyleDataNode(int style)
     foreach(DataStructurePtr ds, dsList) {
         foreach(int identifier, ds->document()->pointerTypeList()) {
             // update all pointers
-            ds->setDataVisibility(ds->isDataVisible(identifier), identifier);
+//FIXME implement update
+//             ds->setDataVisibility(ds->isDataVisible(identifier), identifier);
         }
     }
     emit changed();
@@ -66,7 +67,8 @@ void GraphicsLayout::setViewStyleDataEdge(int style)
     foreach(DataStructurePtr ds, dsList) {
         foreach(int identifier, ds->document()->pointerTypeList()) {
             // update all pointers
-            ds->setPointerVisibility(ds->isPointerVisible(identifier), identifier);
+//FIXME implement update
+//             ds->setPointerVisibility(ds->isPointerVisible(identifier), identifier);
         }
     }
     emit changed();

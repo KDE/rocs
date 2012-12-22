@@ -209,69 +209,12 @@ public Q_SLOTS:
     void remove_property(const QString& name);
 
     /**
-     * add dynamic property to all data elements of data structure
-     */
-    void addPointersDynamicProperty(const QString& property, const QVariant& value = QVariant(0));
-
-    void removePointersDynamicProperty(const QString& property);
-
-    /**
      * if this datastructure shall be deleted, call ONLY this function
      */
     void remove();
 
     // setters
     void setName(const QString& s);
-
-    /**
-     * Set all colors of all data elements of given \param dataType to the given value of \param color.
-     * This is a fast implementation that starts several threads for updating all data elements in parallel.
-     *
-     * \param color is the color to be set
-     * \param dataType is the identifier of the data type for that this function has affect.
-     */
-    void setDataColor(const QColor& color, int dataType);
-
-    /**
-     * Set all data items for all data elements of given \param dataType to the given value of \param visible.
-     * This is a fast implementation that starts several threads for updating all data elements in parallel.
-     *
-     * \param visible must be true if data item shall be shown, false if hidden
-     * \param dataType is the identifier of the data type for that this function has affect.
-     */
-    void setDataVisibility(bool visible, int dataType);
-
-    void toggleDataVisibility(int dataType);
-
-    /**
-     * Set all colors of all data of given \param dataType to the given value of \param color.
-     * This is a fast implementation that starts several threads for updating all data types in parallel.
-     *
-     * \param color is the color to be set
-     * \param dataType is the identifier of the data type for that this function has affect.
-     */
-    void setPointerColor(const QColor& color, int dataType);
-
-    /**
-     * Set all pointer items for pointers of given \param pointerType to the given value of \param visible.
-     * This is a fast implementation that starts several threads for updating all pointers in parallel.
-     *
-     * \param visible must be true if pointer shall be shown, false if hidden
-     * \param pointerType is the identifier of the pointer type for that this function has affect.
-     */
-    void setPointerVisibility(bool visible, int pointerType);
-
-    void togglePointerVisibility(int pointerType);
-
-// #ifdef USING_QTSCRIPT
-//     QScriptValue list_data();
-//     QScriptValue list_pointers();
-//     QScriptValue add_data(const QString& name);
-//     QScriptValue add_pointer(Data* from, Data* to);
-//     QScriptValue data_byname(const QString& name);
-//     QScriptValue begin_data();
-//     QScriptValue end_data();
-// #endif
 
 private Q_SLOTS:
     /**
