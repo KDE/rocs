@@ -55,7 +55,7 @@ public:
      * \param pointerType is the type of this edge, defaults to 0
      * \return the created edge as PointerPtr
      */
-    PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType = 0);
+    PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType);
 
     /**
      * Internal method to create new graph node.
@@ -64,7 +64,7 @@ public:
      * \param dataType is the type of this node, defaults to 0
      * \return the created node as DataPtr
      */
-    DataPtr addData(const QString& name, int dataType = 0);
+    DataPtr addData(const QString& name, int dataType);
 
     /**
      * Returns type of the graph given by enum \see GRAPH_TYPE.

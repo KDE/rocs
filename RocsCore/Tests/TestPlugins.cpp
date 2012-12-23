@@ -102,19 +102,19 @@ void TestPlugins::convertGraphToLinkedList()
 
     //Create a simple graph
     DataStructurePtr tree = doc.addDataStructure("Graph1");
-    DataPtr a = tree->addData("node1");
-    DataPtr b = tree->addData("node2");
-    DataPtr c = tree->addData("node3");
-    tree->addPointer(a, b);
-    tree->addPointer(a, c);
+    DataPtr a = tree->addData("node1", 0);
+    DataPtr b = tree->addData("node2", 0);
+    DataPtr c = tree->addData("node3", 0);
+    tree->addPointer(a, b, 0);
+    tree->addPointer(a, c, 0);
 
     //Change plugin.
     DataStructureBackendManager::self().setBackend(plList->internalName());
 
     DataStructurePtr list = plList->convertToDataStructure(tree, &doc);
 
-    QCOMPARE(list->dataList().count(), 3);
-    QCOMPARE(list->pointers().count(), 1);
+    QCOMPARE(list->dataList(0).count(), 3);
+    QCOMPARE(list->pointers(0).count(), 1);
 }
 
 void TestPlugins::convertGraphToRootedTree()
@@ -133,19 +133,19 @@ void TestPlugins::convertGraphToRootedTree()
     //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
     DataStructurePtr tree = doc.addDataStructure("Graph1");
-    DataPtr a = tree->addData("node1");
-    DataPtr b = tree->addData("node2");
-    DataPtr c = tree->addData("node3");
-    tree->addPointer(a, b);
-    tree->addPointer(a, c);
+    DataPtr a = tree->addData("node1", 0);
+    DataPtr b = tree->addData("node2", 0);
+    DataPtr c = tree->addData("node3", 0);
+    tree->addPointer(a, b, 0);
+    tree->addPointer(a, c, 0);
 
     //Change plugin.
     DataStructureBackendManager::self().setBackend(plTree->internalName());
 
     DataStructurePtr list = plTree->convertToDataStructure(tree, &doc);
 
-    QCOMPARE(list->dataList().count(), 3);
-    QCOMPARE(list->pointers().count(), 4);
+    QCOMPARE(list->dataList(0).count(), 3);
+    QCOMPARE(list->pointers(0).count(), 4);
 }
 
 

@@ -107,16 +107,17 @@ void TransformEdgesWidget::makeComplete(DataStructurePtr graph)
 {
     bool directed = graph->document()->pointerType(0)->direction() == PointerType::Unidirectional;
 
-    foreach(PointerPtr e, graph->pointers()) {
+    //FIXME only default pointer type considered
+    foreach(PointerPtr e, graph->pointers(0)) {
         e->remove();
     }
 
-    int size_i = graph->dataList().size() - 1;
+    int size_i = graph->dataList(0).size() - 1;
     for (int i = 0; i < size_i; ++i) {
-        for (int e = i + 1; e < graph->dataList().size(); ++e) {
-            graph->addPointer(graph->dataList().at(i), graph->dataList().at(e), 0);
+        for (int e = i + 1; e < graph->dataList(0).size(); ++e) {
+            graph->addPointer(graph->dataList(0).at(i), graph->dataList(0).at(e), 0);
             if (directed) {
-                graph->addPointer(graph->dataList().at(e), graph->dataList().at(i), 0);
+                graph->addPointer(graph->dataList(0).at(e), graph->dataList(0).at(i), 0);
             }
         }
     }
@@ -126,7 +127,8 @@ void TransformEdgesWidget::makeComplete(DataStructurePtr graph)
 void TransformEdgesWidget::removeAllEdges(DataStructurePtr graph)
 {
     if (graph) {
-        foreach(PointerPtr e, graph->pointers()) {
+        //FIXME only default pointer type considered
+        foreach(PointerPtr e, graph->pointers(0)) {
             e->remove();
         }
     }
@@ -158,7 +160,7 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
     if (!graphDS)
         return 0;
 
-    QList< DataPtr > vertices = graphDS->dataList();
+    QList< DataPtr > vertices = graphDS->dataList(0);
     int n = vertices.size();
 
     /*
@@ -258,7 +260,7 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
 
     // refill with MST edges
     for (int i = 0; i < MST.size(); i++) {
-        PointerPtr ptr = graph->addPointer(vertices[MST[i].first], vertices[MST[i].second]);
+        PointerPtr ptr = graph->addPointer(vertices[MST[i].first], vertices[MST[i].second], 0);
 
         if (weight[QPair<int, int>(MST[i].first, MST[i].second)] != 1) {
             QString s;

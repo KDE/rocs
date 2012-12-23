@@ -38,17 +38,17 @@ void TestTgfFileFormatPlugin::serializeUnserializeTest()
     // Creates a simple Graph with 5 data elements and connect them with pointers.
     DataStructurePtr ds = document->activeDataStructure();
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("first node"));
-    dataList.insert("b", ds->addData("b"));
-    dataList.insert("c", ds->addData("c"));
-    dataList.insert("d", ds->addData("d"));
-    dataList.insert("e", ds->addData("e"));
+    dataList.insert("a", ds->addData("first node", 0));
+    dataList.insert("b", ds->addData("b", 0));
+    dataList.insert("c", ds->addData("c", 0));
+    dataList.insert("d", ds->addData("d", 0));
+    dataList.insert("e", ds->addData("e", 0));
 
-    ds->addPointer(dataList["a"], dataList["b"])->setProperty("value", "test value");
-    ds->addPointer(dataList["b"], dataList["c"]);
-    ds->addPointer(dataList["c"], dataList["d"]);
-    ds->addPointer(dataList["d"], dataList["e"]);
-    ds->addPointer(dataList["e"], dataList["a"]);
+    ds->addPointer(dataList["a"], dataList["b"], 0)->setProperty("value", "test value");
+    ds->addPointer(dataList["b"], dataList["c"], 0);
+    ds->addPointer(dataList["c"], dataList["d"], 0);
+    ds->addPointer(dataList["d"], dataList["e"], 0);
+    ds->addPointer(dataList["e"], dataList["a"], 0);
 
     // create exporter plugin
     TgfFileFormatPlugin serializer(this, QList<QVariant>());
@@ -67,16 +67,16 @@ void TestTgfFileFormatPlugin::serializeUnserializeTest()
 
     // test imported values
     QVERIFY(ds);
-    QVERIFY2(ds->dataList().size() == 5, "ERROR: Number of data is not 5 ");
-    QVERIFY2(ds->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
-    foreach(DataPtr n, ds->dataList()) {
+    QVERIFY2(ds->dataList(0).size() == 5, "ERROR: Number of data is not 5 ");
+    QVERIFY2(ds->pointers(0).size() == 5, "ERROR: Number of pointers is not 5 ");
+    foreach(DataPtr n, ds->dataList(0)) {
         QVERIFY2(n->outPointerList().size() == 1, "ERROR: Number of out pointers is not 1");
         QVERIFY2(n->inPointerList().size() == 1, "ERROR: Number of in pointers is not 1");
         QVERIFY2(n->adjacentDataList().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
         QVERIFY2(n->pointerList().size() == 2, "ERROR: Number of adjacent pointers is not 2");
     }
-    QVERIFY(ds->dataList().at(0)->property("name").toString() == "first node");
-    QVERIFY(ds->pointers().at(0)->property("value").toString() == "test value");
+    QVERIFY(ds->dataList(0).at(0)->property("name").toString() == "first node");
+    QVERIFY(ds->pointers(0).at(0)->property("value").toString() == "test value");
 }
 
 QTEST_MAIN(TestTgfFileFormatPlugin);

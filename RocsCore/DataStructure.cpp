@@ -120,8 +120,9 @@ void DataStructure::importStructure(DataStructurePtr other)
     // FIXME set dynamic properties
 
     QHash <Data*, DataPtr> dataTodata;
-    foreach(DataPtr n, other->dataList()) {
-        DataPtr newdata = addData(n->property("name").toString());
+    //FIXME only reading default of elements
+    foreach(DataPtr n, other->dataList(0)) {
+        DataPtr newdata = addData(n->property("name").toString(), 0);
         newdata->setColor(n->color());
         //FIXME all dynamic properties must be set
         newdata->setX(n->x());
@@ -129,11 +130,12 @@ void DataStructure::importStructure(DataStructurePtr other)
         newdata->setWidth(n->width());
         dataTodata.insert(n.get(), newdata);
     }
-    foreach(PointerPtr e, other->pointers()) {
+    //FIXME only import of default elements
+    foreach(PointerPtr e, other->pointers(0)) {
         DataPtr from =  dataTodata.value(e->from().get());
         DataPtr to =  dataTodata.value(e->to().get());
 
-        PointerPtr newPointer = addPointer(from, to);
+        PointerPtr newPointer = addPointer(from, to, 0);
         newPointer->setColor(e->color());
         //FIXME all dynamic properties must be set
     }

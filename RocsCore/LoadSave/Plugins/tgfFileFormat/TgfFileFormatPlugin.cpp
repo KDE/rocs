@@ -87,7 +87,7 @@ void TgfFileFormatPlugin::readFile()
         if (mode == Nodes) { // read node
             int identifier = line.section(' ', 0, 0).toInt();
             QString label = line.section(' ', 1);    // get label, everything after first space
-            DataPtr data = graph->addData(label.simplified());
+            DataPtr data = graph->addData(label.simplified(), 0);
             if (nodeMap.contains(identifier)) {
                 setError(EncodingProblem, i18n("Could not parse file. Identifier \"%1\" is used more than once.", identifier));
                 return;
@@ -104,7 +104,7 @@ void TgfFileFormatPlugin::readFile()
                 setError(EncodingProblem, i18n("Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes.", from, to));
                 return;
             }
-            PointerPtr pointer = graph->addPointer(nodeMap[from], nodeMap[to]);
+            PointerPtr pointer = graph->addPointer(nodeMap[from], nodeMap[to], 0);
             pointer->setProperty("value", value.simplified());
         }
     }
@@ -131,7 +131,8 @@ void TgfFileFormatPlugin::writeFile(Document &graph )
     }
 
     // export data elements
-    foreach(DataPtr n, g->dataList()) {
+    //FIXME only default data type considered
+    foreach(DataPtr n, g->dataList(0)) {
         out << n->identifier();
         out << " ";
         out << n->property("name").toString(); //TODO change to selectable property
@@ -139,7 +140,8 @@ void TgfFileFormatPlugin::writeFile(Document &graph )
     }
     out << "#\n";
     // export pointers
-    foreach(PointerPtr e, g->pointers()) {
+    //FIXME only default pointer type considered
+    foreach(PointerPtr e, g->pointers(0)) {
         out << e->from()->identifier() << " " << e->to()->identifier() << " " << e->property("value").toString() <<'\n';
     }
     setError(None);

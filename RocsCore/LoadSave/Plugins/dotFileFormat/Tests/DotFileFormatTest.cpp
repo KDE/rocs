@@ -45,7 +45,7 @@ static const std::string subgraph = "digraph trees {"
 
 void DotFileFormatTest::checkNodes(DataStructurePtr dataStructure, QList<QString> nodeNames)
 {
-    QList<DataPtr> dataList = dataStructure->dataList();
+    QList<DataPtr> dataList = dataStructure->dataList(0);
 
 //     foreach(const DataPtr &node, dataList) {
 //         kDebug() << node->property("name").toString();
@@ -84,8 +84,8 @@ void DotFileFormatTest::simpleGraphParsing()
     }
 
     DataStructurePtr graph = doc.dataStructures().at(0);
-    QVERIFY(graph->dataList().count() == 5);
-    QVERIFY(graph->pointers().count() == 2);
+    QVERIFY(graph->dataList(0).count() == 5);
+    QVERIFY(graph->pointers(0).count() == 2);
 }
 
 
@@ -112,10 +112,10 @@ void DotFileFormatTest::parseFileER()
     checkNodes(dataStructure, nodeNames);
 
     // Check the numbers of pointers
-    QVERIFY(dataStructure->pointers().count() == 12);
+    QVERIFY(dataStructure->pointers(0).count() == 12);
 
     // Check that a pointer has the correct label & that the node labels work.
-    QList<DataPtr> dataList = dataStructure->dataList();
+    QList<DataPtr> dataList = dataStructure->dataList(0);
     DataPtr start;
     DataPtr end;
     foreach(const DataPtr &node, dataList) {
@@ -179,7 +179,7 @@ void DotFileFormatTest::parseFileProcess()
     nodeNames << "run" << "intr" << "runbl" << "kernel" << "zombie" << "sleep" << "swap" << "runmem" << "runswap" << "new";
     checkNodes(dataStructure, nodeNames);
     // Check the numbers of pointers
-    QVERIFY(dataStructure->pointers().count() == 13);
+    QVERIFY(dataStructure->pointers(0).count() == 13);
 }
 
 
@@ -340,10 +340,10 @@ void DotFileFormatTest::parseFileFsm()
     checkNodes(dataStructure, nodeNames);
 
     // Check the numbers of pointers
-    QVERIFY(dataStructure->pointers().count() == 14);
+    QVERIFY(dataStructure->pointers(0).count() == 14);
 
     // Check that a pointer has the correct label and that the shapes are correct.
-    QList<DataPtr> dataList = dataStructure->dataList();
+    QList<DataPtr> dataList = dataStructure->dataList(0);
     QVERIFY(dataList.length() == 9); // Make the test quit because the parser has too many LR nodes.
     DataPtr start;
     DataPtr end;
@@ -740,7 +740,7 @@ void DotFileFormatTest::parseFileUnix()
     checkNodes(dataStructure, nodeNames);
 
     // check number of pointers
-    QVERIFY(dataStructure->pointers().count() == 49);
+    QVERIFY(dataStructure->pointers(0).count() == 49);
 }
 
 

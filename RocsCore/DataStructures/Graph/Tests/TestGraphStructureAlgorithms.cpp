@@ -64,7 +64,7 @@ void TestGraphStructureAlgorithms::testDijkstraBidirectional()
     dataList.clear();
 
     for (int i = 0; i < nodes; ++i) {
-        dataList.append(graph->addData(QString(i)));
+        dataList.append(graph->addData(QString(i), 0));
     }
     for (int i = 0; i < nodes-1; ++i) {
         dataList[i]->addPointer(dataList[i+1]);
@@ -97,7 +97,7 @@ void TestGraphStructureAlgorithms::testDijkstraUnidirectional()
     dataList.clear();
 
     for (int i = 0; i < nodes; ++i) {
-        dataList.append(graph->addData(QString(i)));
+        dataList.append(graph->addData(QString(i), 0));
     }
     for (int i = 0; i < nodes-1; ++i) {
         dataList[i]->addPointer(dataList[i+1]);

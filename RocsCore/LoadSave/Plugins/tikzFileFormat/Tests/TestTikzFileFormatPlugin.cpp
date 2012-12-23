@@ -38,17 +38,17 @@ void TestTikzFileFormatPlugin::serializeTest()
     // Creates a simple Graph with 5 data elements and connect them with pointers.
     DataStructurePtr ds = document->activeDataStructure();
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("first node"));
-    dataList.insert("b", ds->addData("b"));
-    dataList.insert("c", ds->addData("c"));
-    dataList.insert("d", ds->addData("d"));
-    dataList.insert("e", ds->addData("e"));
+    dataList.insert("a", ds->addData("first node", 0));
+    dataList.insert("b", ds->addData("b", 0));
+    dataList.insert("c", ds->addData("c", 0));
+    dataList.insert("d", ds->addData("d", 0));
+    dataList.insert("e", ds->addData("e", 0));
 
-    ds->addPointer(dataList["a"], dataList["b"])->setProperty("value", "test value");
-    ds->addPointer(dataList["b"], dataList["c"]);
-    ds->addPointer(dataList["c"], dataList["d"]);
-    ds->addPointer(dataList["d"], dataList["e"]);
-    ds->addPointer(dataList["e"], dataList["a"]);
+    ds->addPointer(dataList["a"], dataList["b"], 0)->setProperty("value", "test value");
+    ds->addPointer(dataList["b"], dataList["c"], 0);
+    ds->addPointer(dataList["c"], dataList["d"], 0);
+    ds->addPointer(dataList["d"], dataList["e"], 0);
+    ds->addPointer(dataList["e"], dataList["a"], 0);
 
     // create exporter plugin
     TikzFileFormatPlugin serializer(this, QList<QVariant>());

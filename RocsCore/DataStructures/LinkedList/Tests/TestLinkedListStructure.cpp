@@ -46,11 +46,11 @@ void TestLinkedListStructure::listModificationTest()
     QList< boost::shared_ptr<ListNode> > dataList;
 
     // add one node
-    dataList.append(boost::static_pointer_cast<ListNode>(ds->addData(QString(1))));
+    dataList.append(boost::static_pointer_cast<ListNode>(ds->addData(QString(1),0)));
     QVERIFY2(!dataList.at(0)->next(), "ERROR: no next node expected");
 
     // add node, by this automatically add next pointer of last node in list
-    dataList.append(boost::static_pointer_cast<ListNode>(ds->addData(QString(2))));
+    dataList.append(boost::static_pointer_cast<ListNode>(ds->addData(QString(2),0)));
     QVERIFY2(dataList.at(0)->next()->identifier()==dataList.at(1)->identifier(), "ERROR: wrong next node");
 
     // remove all data elements
@@ -59,7 +59,7 @@ void TestLinkedListStructure::listModificationTest()
     }
     boost::shared_ptr<Rocs::ListStructure> listStructure = boost::dynamic_pointer_cast<Rocs::ListStructure>(ds);
 
-    QVERIFY2(ds->dataList().size() == 0, "ERROR: Not all data elements were deleted");
+    QVERIFY2(ds->dataList(0).size() == 0, "ERROR: Not all data elements were deleted");
 }
 
 

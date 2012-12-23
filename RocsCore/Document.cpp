@@ -376,7 +376,8 @@ void Document::resizeDocumentIncrease()
     int elements = dataStructures().size();
     for (int i = 0; i < elements; i++) {
         bool resizeDocument = false;
-        foreach(DataPtr n,  dataStructures().at(i)->dataList()) {
+        //FIXME only default data type considered
+        foreach(DataPtr n,  dataStructures().at(i)->dataList(0)) {
             if (n->x() < d->_left + DocumentPrivate::SceneBorder) {
                 setLeft(d->_left - DocumentPrivate::SceneBorder);
                 resizeDocument = true;
@@ -407,7 +408,8 @@ void Document::resizeDocumentBorder(Document::Border orientation)
 
     // scans doubled border of specified size: if empty or not
     for (int i = 0; i < elements; i++) {
-        foreach(DataPtr n,  dataStructures().at(i)->dataList()) {
+
+        foreach(DataPtr n,  dataStructures().at(i)->dataList(0)) {
             switch (orientation) {
             case BorderLeft: {
                 if (n != 0 && n->x() < d->_left + DocumentPrivate::SceneBorder * 2) empty = false;

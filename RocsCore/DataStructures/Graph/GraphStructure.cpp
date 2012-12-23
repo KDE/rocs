@@ -63,8 +63,9 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
     //FIXME this import does not correctly import different types
     setGraphType(Graph);
     QHash <Data*, DataPtr> dataTodata;
-    foreach(DataPtr n, other->dataList()) {
-        DataPtr newdata = addData(""); //n->name());
+    //FIXME only default data type considered
+    foreach(DataPtr n, other->dataList(0)) {
+        DataPtr newdata = addData("", 0); //n->name());
         newdata->setColor(n->color());
         newdata->setProperty("value", n->property("value").toString());
         newdata->setX(n->x());
@@ -72,11 +73,12 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
         newdata->setWidth(n->width());
         dataTodata.insert(n.get(), newdata);
     }
-    foreach(PointerPtr e, other->pointers()) {
+    //FIXME only default pointer type considered
+    foreach(PointerPtr e, other->pointers(0)) {
         DataPtr from =  dataTodata.value(e->from().get());
         DataPtr to =  dataTodata.value(e->to().get());
 
-        PointerPtr newPointer = addPointer(from, to);
+        PointerPtr newPointer = addPointer(from, to, 0);
         if (newPointer.get()){
             newPointer->setColor(e->color());
             newPointer->setProperty("value", e->property("value").toString());
@@ -140,7 +142,7 @@ QScriptValue Rocs::GraphStructure::list_edges(int type)
 
 QScriptValue Rocs::GraphStructure::add_node(const QString& name)
 {
-    DataPtr n = addData(name);
+    DataPtr n = addData(name, 0);
     n->setEngine(engine());
     return n->scriptValue();
 }
@@ -324,7 +326,8 @@ void Rocs::GraphStructure::setGraphType(int type)
     }
 
     // need to convert multigraph to graph
-    foreach(DataPtr data, dataList()) {
+    //FIXME only default data type considered
+    foreach(DataPtr data, dataList(0)) {
         // Clear the rest. there should be only one edge between two nodes.
         foreach(DataPtr neighbor, data->adjacentDataList()) {
             if (data == neighbor) {

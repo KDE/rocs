@@ -46,17 +46,17 @@ void TestLoadSave::serializeUnserializeTest()
     // Creates a simple Graph with 5 data elements and connect them with pointers.
     DataStructurePtr ds = document->activeDataStructure();
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("a"));
-    dataList.insert("b", ds->addData("b"));
-    dataList.insert("c", ds->addData("c"));
-    dataList.insert("d", ds->addData("d"));
-    dataList.insert("e", ds->addData("e"));
+    dataList.insert("a", ds->addData("a", 0));
+    dataList.insert("b", ds->addData("b", 0));
+    dataList.insert("c", ds->addData("c", 0));
+    dataList.insert("d", ds->addData("d", 0));
+    dataList.insert("e", ds->addData("e", 0));
 
-    ds->addPointer(dataList["a"], dataList["b"]);
-    ds->addPointer(dataList["b"], dataList["c"]);
-    ds->addPointer(dataList["c"], dataList["d"]);
-    ds->addPointer(dataList["d"], dataList["e"]);
-    ds->addPointer(dataList["e"], dataList["a"]);
+    ds->addPointer(dataList["a"], dataList["b"], 0);
+    ds->addPointer(dataList["b"], dataList["c"], 0);
+    ds->addPointer(dataList["c"], dataList["d"], 0);
+    ds->addPointer(dataList["d"], dataList["e"], 0);
+    ds->addPointer(dataList["e"], dataList["a"], 0);
 
     // serialize into file "serializetest.graph"
     DocumentManager::self().activeDocument()->saveAs("serializetest");
@@ -76,10 +76,10 @@ void TestLoadSave::serializeUnserializeTest()
     QVERIFY(document->pointerType(0)->propertyDefaultValue("testproperty").toString() == "default");
 
     ds = document->dataStructures().at(0);
-    QVERIFY2(ds->dataList().size() == 5, "ERROR: Number of data is not 5 ");
-    QVERIFY2(ds->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
+    QVERIFY2(ds->dataList(0).size() == 5, "ERROR: Number of data is not 5 ");
+    QVERIFY2(ds->pointers(0).size() == 5, "ERROR: Number of pointers is not 5 ");
 
-    foreach(DataPtr n, ds->dataList()) {
+    foreach(DataPtr n, ds->dataList(0)) {
         QVERIFY2(n->outPointerList().size() == 1, "ERROR: Number of out pointers is not 1");
         QVERIFY2(n->inPointerList().size() == 1, "ERROR: Number of in pointers is not 1");
         QVERIFY2(n->adjacentDataList().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
@@ -165,8 +165,8 @@ void TestLoadSave::loadMultipleLayerGraphTest()
     Document *document = DocumentManager::self().activeDocument();
 
     QVERIFY2(document->pointerTypeList().length() == 2, "two pointer types expected");
-    QVERIFY2(!document->activeDataStructure()->dataList().first()->property("name").toString().isEmpty(), "property must be present");
-    QVERIFY2(!document->activeDataStructure()->dataList().first()->property("target").toString().isEmpty(), "property must be present");
+    QVERIFY2(!document->activeDataStructure()->dataList(0).first()->property("name").toString().isEmpty(), "property must be present");
+    QVERIFY2(!document->activeDataStructure()->dataList(0).first()->property("target").toString().isEmpty(), "property must be present");
 }
 
 

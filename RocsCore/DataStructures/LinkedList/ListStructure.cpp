@@ -84,8 +84,9 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
 void Rocs::ListStructure::init()
 {
     m_animationGroup = new QParallelAnimationGroup(parent());
-    if (!dataList().isEmpty()) {
-        m_begin = boost::static_pointer_cast<ListNode>(dataList().first());
+    //FIXME only default data type considered
+    if (!dataList(0).isEmpty()) {
+        m_begin = boost::static_pointer_cast<ListNode>(dataList(0).first());
         arrangeNodes();
     } else {
         m_begin = boost::shared_ptr<ListNode>();
@@ -191,8 +192,9 @@ void Rocs::ListStructure::arrangeNodes()
     if (m_animationGroup->state() != QAnimationGroup::Stopped) {
         m_animationGroup->stop();
     }
-    QScopedArrayPointer<bool>visited(new bool[dataList().count()]);
-    for (int i = 0; i < dataList().count(); ++i) {
+    //FIXME only default data type considered
+    QScopedArrayPointer<bool>visited(new bool[dataList(0).count()]);
+    for (int i = 0; i < dataList(0).count(); ++i) {
         visited[i] = false;
     }
 
@@ -201,10 +203,10 @@ void Rocs::ListStructure::arrangeNodes()
     if (n) {
         x = size.left() + 50;
         do {
-            if (visited[dataList().indexOf(n)]) {
+            if (visited[dataList(0).indexOf(n)]) {
                 break;
             }
-            visited[dataList().indexOf(n)] = true;
+            visited[dataList(0).indexOf(n)] = true;
             if (x > size.right() - 140 + n->width() * 40) {
                 x = size.left() + 50 + n->width() * 40;
                 y += 85;
@@ -225,8 +227,9 @@ void Rocs::ListStructure::arrangeNodes()
     }
     x = 50 + size.left();
     y += 100;
-    foreach(DataPtr n, dataList()) {
-        if (!visited[dataList().indexOf(n)]) {
+    //FIXME only default data type considered
+    foreach(DataPtr n, dataList(0)) {
+        if (!visited[dataList(0).indexOf(n)]) {
             anim = new QPropertyAnimation(n.get(), "x");;
             anim->setDuration(500);
             anim->setStartValue(n->x());

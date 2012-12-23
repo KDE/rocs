@@ -74,7 +74,8 @@ void AssignValueAction::enumerateDataStructure()
 {
     if (_dataStructure) {
         ValueModifier modifier;
-        modifier.enumerate<DataPtr>(_dataStructure->dataList(), QString("value"), 1, "", true);
+        //FIXME only default data type considered
+        modifier.enumerate<DataPtr>(_dataStructure->dataList(0), QString("value"), 1, "", true);
     }
 }
 
@@ -97,7 +98,8 @@ void AssignValueAction::assignRandomIntegersDataStructure()
     if (_dataStructure) {
         ValueModifier modifier;
         //FIXME use really random seed
-        modifier.assignRandomIntegers(_dataStructure->dataList(), QString("value"), 1, 100, 1, true);
+        //FIXME only default data type considered
+        modifier.assignRandomIntegers(_dataStructure->dataList(0), QString("value"), 1, 100, 1, true);
     }
 }
 
@@ -121,7 +123,8 @@ void AssignValueAction::assignRandomRealsDataStructure()
     if (_dataStructure) {
         ValueModifier modifier;
         //FIXME use really random seed
-        modifier.assignRandomReals(_dataStructure->dataList(), QString("value"), 1, 10, 1, true);
+        //FIXME only default data type considered
+        modifier.assignRandomReals(_dataStructure->dataList(0), QString("value"), 1, 10, 1, true);
     }
 }
 

@@ -95,7 +95,8 @@ bool ListPlugin::canConvertFrom(Document* doc) const
 {
     QStringList errors;
     foreach(DataStructurePtr ds, doc->dataStructures()) {
-        foreach(DataPtr data, ds->dataList()) {
+        //FIXME only default data type considered
+        foreach(DataPtr data, ds->dataList(0)) {
             if (data->outPointerList().count() > 1)
                 errors.append(i18n("Data \'%1\' has more than one out pointer.", data->identifier()));
         }

@@ -174,7 +174,7 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
 
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList().size() > 0)
+    if (graph->dataList(0).size() > 0)
         graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Mesh Graph"));
 
     // create mesh of NxN points
@@ -192,8 +192,8 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     // connect mesh nodes
     for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
-            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)]); // left
-            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)]); // bottom.
+            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)], 0); // left
+            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)], 0); // bottom.
         }
     }
 }
@@ -213,7 +213,7 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList().size() > 0)
+    if (graph->dataList(0).size() > 0)
         graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Star Graph"));
 
     QList< QPair<QString, QPointF> > starNodes;
@@ -230,7 +230,7 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 
     // connect circle nodes
     for (int i = 1; i <= numberSatelliteNodes; i++) {
-        graph->addPointer(nodeList.at(0), nodeList.at(i));
+        graph->addPointer(nodeList.at(0), nodeList.at(i), 0);
     }
 }
 
@@ -249,7 +249,7 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
 
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList().size() > 0) {
+    if (graph->dataList(0).size() > 0) {
         graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Circle Graph"));
     }
 
@@ -266,9 +266,9 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
 
     // connect circle nodes
     for (int i = 0; i < numberNodes - 1; i++) {
-        graph->addPointer(nodeList.at(i), nodeList.at(i + 1));
+        graph->addPointer(nodeList.at(i), nodeList.at(i + 1), 0);
     }
-    graph->addPointer(nodeList.at(numberNodes - 1), nodeList.at(0));
+    graph->addPointer(nodeList.at(numberNodes - 1), nodeList.at(0), 0);
 }
 
 void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges)
@@ -306,7 +306,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
     // put generated random graph at whiteboard
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList().size() > 0)
+    if (graph->dataList(0).size() > 0)
         graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("RandomGraph"));
 
     // put nodes at whiteboard as generated
@@ -324,7 +324,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
         graph->addPointer(mapNodes[boost::source(*ei, randomGraph)],
-                          mapNodes[boost::target(*ei, randomGraph)]);
+                          mapNodes[boost::target(*ei, randomGraph)], 0);
 
     }
 }
@@ -350,7 +350,7 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     // put generated random graph at whiteboard
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList().size() > 0)
+    if (graph->dataList(0).size() > 0)
         graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("RandomGraph"));
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
@@ -376,7 +376,7 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
         graph->addPointer(mapNodes[boost::source(*ei, randomGraph)],
-                          mapNodes[boost::target(*ei, randomGraph)]);
+                          mapNodes[boost::target(*ei, randomGraph)], 0);
 
     }
 }
@@ -389,7 +389,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int nodes, int seed)
     QPointF center = activeDocument->activeDataStructure()->relativeCenter();
 
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList().size() > 0) {
+    if (graph->dataList(0).size() > 0) {
         graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Circle Graph"));
     }
 
@@ -397,16 +397,16 @@ void GenerateGraphWidget::generateRandomTreeGraph(int nodes, int seed)
     gen.seed(static_cast<unsigned int>(seed));
 
     DataList addedNodes;
-    addedNodes << graph->addData(QString::number(1));
+    addedNodes << graph->addData(QString::number(1), 0);
     PointerTypePtr ptrType = activeDocument->pointerType(0);
     for (int i = 1; i < nodes; i++) {
         DataPtr thisNode = graph->addData(QString::number(i + 1), center, 0); //TODO allow specification of types
         center += QPointF(30,30);
         boost::random::uniform_int_distribution<> randomEarlierNodeGen(0, i-1);
         int randomEarlierNode = randomEarlierNodeGen(gen);
-        graph->addPointer(thisNode, addedNodes.at(randomEarlierNode));
+        graph->addPointer(thisNode, addedNodes.at(randomEarlierNode), 0);
         if (ptrType->direction() == PointerType::Unidirectional) {
-            graph->addPointer(addedNodes.at(randomEarlierNode), thisNode);
+            graph->addPointer(addedNodes.at(randomEarlierNode), thisNode, 0);
         }
         addedNodes.append(thisNode);
     }

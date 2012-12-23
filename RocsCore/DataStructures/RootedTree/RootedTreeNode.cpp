@@ -54,7 +54,7 @@ void RootedTreeNode::setNumberOfChilds(const qint32 number)
 {
     if (number != m_nChilds){
         for (qint32 i = number; i < m_nChilds; ++i) {
-            setChild(dataStructure()->addData(""), i);
+            setChild(dataStructure()->addData("", 0), i);
         }
         m_nChilds = number;
     }
@@ -103,7 +103,7 @@ PointerPtr RootedTreeNode::setNodeParent(DataPtr parent) const
         }
     }
     if (parent.get()){
-        PointerPtr ptr = dataStructure()->addPointer(this->getData(), parent);
+        PointerPtr ptr = dataStructure()->addPointer(this->getData(), parent, 0);
         ptr->setProperty("TreeEdge", -1);
         return ptr;
     }

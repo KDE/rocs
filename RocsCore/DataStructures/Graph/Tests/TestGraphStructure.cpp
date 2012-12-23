@@ -50,16 +50,16 @@ void TestGraphStructure::dataAddDeleteTest()
 
     // create 10 data elements
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i)));
+        dataList.append(ds->addData(QString(i), 0));
     }
-    QVERIFY2(ds->dataList().size() == 10, "ERROR: Number of data elements is not 10");
+    QVERIFY2(ds->dataList(0).size() == 10, "ERROR: Number of data elements is not 10");
 
     // remove all data elements
     foreach(DataPtr data, dataList) {
         data->remove();
     }
 
-    QVERIFY2(ds->dataList().size() == 0, "ERROR: Not all data elements were deleted");
+    QVERIFY2(ds->dataList(0).size() == 0, "ERROR: Not all data elements were deleted");
 }
 
 void TestGraphStructure::pointerAddDeleteTest()
@@ -72,35 +72,35 @@ void TestGraphStructure::pointerAddDeleteTest()
     // create 10 data elements
     // x x x x x x x x x x
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i)));
+        dataList.append(ds->addData(QString(i), 0));
     }
-    QVERIFY2(ds->dataList().size() == 10, "ERROR: Number of data elements is not 10");
+    QVERIFY2(ds->dataList(0).size() == 10, "ERROR: Number of data elements is not 10");
 
     // connect data elements to a line
     // x-x-x-x-x-x-x-x-x-x
     for (int i = 0; i < dataList.size() - 1; i++) {
-        ds->addPointer(dataList[i], dataList[i + 1]);
+        ds->addPointer(dataList[i], dataList[i + 1], 0);
     }
-    QVERIFY2(ds->pointers().size() == 9, "ERROR: Number of data elements is not 9");
+    QVERIFY2(ds->pointers(0).size() == 9, "ERROR: Number of data elements is not 9");
     QVERIFY2(dataList[0]->pointerList().size() == 1, "ERROR: data gives wrong number of pointers");
     QVERIFY2(dataList[1]->pointerList().size() == 2, "ERROR: data gives wrong number of pointers");
 
     // remove first pointer from list
     // x x-x-x-x-x-x-x-x-x
-    ds->pointers().first()->remove();
-    QVERIFY2(ds->pointers().size() == 8, "ERROR: pointer was not removed");
+    ds->pointers(0).first()->remove();
+    QVERIFY2(ds->pointers(0).size() == 8, "ERROR: pointer was not removed");
     QVERIFY2(dataList[0]->pointerList().size() == 0, "ERROR: data gives wrong number of pointers");
     QVERIFY2(dataList[1]->pointerList().size() == 1, "ERROR: data gives wrong number of pointers");
 
     // remove second node, should trigger deletion of second pointer
     // x o x-x-x-x-x-x-x-x
     dataList[1]->remove();
-    QVERIFY2(ds->pointers().size() == 7, "ERROR: data deletion did not remove its pointers");
+    QVERIFY2(ds->pointers(0).size() == 7, "ERROR: data deletion did not remove its pointers");
 
     // remove fourth node, should trigger deletion of its two adjacend pointers
     // x o x o x-x-x-x-x-x
     dataList[3]->remove();
-    QVERIFY2(ds->pointers().size() == 5, "ERROR: data deletion did not remove its both pointers");
+    QVERIFY2(ds->pointers(0).size() == 5, "ERROR: data deletion did not remove its both pointers");
 }
 
 void TestGraphStructure::createSimpleGraph()
@@ -111,22 +111,22 @@ void TestGraphStructure::createSimpleGraph()
     DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
 
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("a"));
-    dataList.insert("b", ds->addData("b"));
-    dataList.insert("c", ds->addData("c"));
-    dataList.insert("d", ds->addData("d"));
-    dataList.insert("e", ds->addData("e"));
+    dataList.insert("a", ds->addData("a", 0));
+    dataList.insert("b", ds->addData("b", 0));
+    dataList.insert("c", ds->addData("c", 0));
+    dataList.insert("d", ds->addData("d", 0));
+    dataList.insert("e", ds->addData("e", 0));
 
-    ds->addPointer(dataList["a"], dataList["b"]);
-    ds->addPointer(dataList["b"], dataList["c"]);
-    ds->addPointer(dataList["c"], dataList["d"]);
-    ds->addPointer(dataList["d"], dataList["e"]);
-    ds->addPointer(dataList["e"], dataList["a"]);
+    ds->addPointer(dataList["a"], dataList["b"], 0);
+    ds->addPointer(dataList["b"], dataList["c"], 0);
+    ds->addPointer(dataList["c"], dataList["d"], 0);
+    ds->addPointer(dataList["d"], dataList["e"], 0);
+    ds->addPointer(dataList["e"], dataList["a"], 0);
 
-    QVERIFY2(ds->dataList().size() == 5, "ERROR: Number of data is not 5 ");
-    QVERIFY2(ds->pointers().size() == 5, "ERROR: Number of pointers is not 5 ");
+    QVERIFY2(ds->dataList(0).size() == 5, "ERROR: Number of data is not 5 ");
+    QVERIFY2(ds->pointers(0).size() == 5, "ERROR: Number of pointers is not 5 ");
 
-    foreach(DataPtr n, ds->dataList()) {
+    foreach(DataPtr n, ds->dataList(0)) {
         QVERIFY2(n->outPointerList().size() == 1, "ERROR: Number of out pointers is not 1");
         QVERIFY2(n->inPointerList().size() == 1, "ERROR: Number of in pointers is not 1");
         QVERIFY2(n->adjacentDataList().size() == 2, "ERROR: Number of Adjacent Nodes is not 2");
@@ -149,27 +149,27 @@ void TestGraphStructure::dataTypesTest()
 
     // create data elements
     for (int i = 0; i < 3; i++) {
-        dataListDefault.append(ds->addData(QString(i)));
+        dataListDefault.append(ds->addData(QString(i), 0));
         dataList1.append(ds->addData(QString(i), type1));
         dataList2.append(ds->addData(QString(i), type2));
     }
-    QVERIFY2(ds->dataList().size() == 3,
-             "list contains " + ds->dataList().size()
+    QVERIFY2(ds->dataList(0).size() == 3,
+             "list contains " + ds->dataList(0).size()
             );
     QVERIFY2(ds->dataList(type1).size() == 3,
-             "list contains " + ds->dataList().size()
+             "list contains " + ds->dataList(0).size()
             );
     QVERIFY2(ds->dataList(type2).size() == 3,
-             "list contains " + ds->dataList().size()
+             "list contains " + ds->dataList(0).size()
             );
     QVERIFY2(dataListDefault.at(0)->dataType() == 0, "ERROR: not correct autoset of type");
     QVERIFY2(dataList1.at(0)->dataType() == type1, "ERROR: not correct autoset of type");
     QVERIFY2(dataList2.at(0)->dataType() == type2, "ERROR: not correct autoset of type");
 
     // add pointers
-    ds->addPointer(dataListDefault[0], dataList1[0]);
-    ds->addPointer(dataList1[0], dataList2[0]);
-    ds->addPointer(dataList2[0], dataListDefault[0]);
+    ds->addPointer(dataListDefault[0], dataList1[0], 0);
+    ds->addPointer(dataList1[0], dataList2[0], 0);
+    ds->addPointer(dataList2[0], dataListDefault[0], 0);
     QVERIFY2(ds->pointers(0).size() == 3, "ERROR: pointers were not correctly created");
 
     // remove data type
@@ -188,7 +188,7 @@ void TestGraphStructure::pointerTypesTest()
 
     // create data elements
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i)));
+        dataList.append(ds->addData(QString(i), 0));
     }
 
     // register two further data types
@@ -197,12 +197,12 @@ void TestGraphStructure::pointerTypesTest()
 
     // connect data elements to a lines
     for (int i = 0; i < 4; i++) {
-        ds->addPointer(dataList[i], dataList[i + 1]);
+        ds->addPointer(dataList[i], dataList[i + 1], 0);
     }
     for (int i = 0; i < 9; i++) {
         ds->addPointer(dataList[i], dataList[i + 1], type1);
     }
-    QVERIFY2(ds->pointers().size() == 4, "ERROR: wrong number of pointers");
+    QVERIFY2(ds->pointers(0).size() == 4, "ERROR: wrong number of pointers");
     QVERIFY2(ds->pointers(type1).size() == 9, "ERROR: wrong number of pointers");
     QVERIFY(dataList[0]->adjacentDataList().size() == 1);
     QVERIFY(dataList[1]->adjacentDataList().size() == 2);
@@ -210,7 +210,7 @@ void TestGraphStructure::pointerTypesTest()
 
     // remove first node
     dataList[0]->remove();
-    QVERIFY2(ds->pointers().size() == 3, "ERROR: wrong number of pointers");
+    QVERIFY2(ds->pointers(0).size() == 3, "ERROR: wrong number of pointers");
     QVERIFY2(ds->pointers(type1).size() == 8, "ERROR: wrong number of pointers");
 
     ds->document()->removePointerType(type1);

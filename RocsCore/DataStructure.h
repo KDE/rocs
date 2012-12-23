@@ -105,7 +105,7 @@ public:
      * \param dataType is type of data elements to be returned
      * \return DataList of data elements of specified type
      */
-    const DataList dataList(int dataType = 0) const;
+    const DataList dataList(int dataType) const;
 
     /**
      * Gives list of all data elements of all existing types.
@@ -119,7 +119,7 @@ public:
      * \param pointerType is type of pointers to be returned
      * \return PointerList of pointers of specified type
      */
-    const PointerList pointers(int pointerType = 0) const;
+    const PointerList pointers(int pointerType) const;
 
     /**
      * Gives list all pointers of all existing types.
@@ -147,13 +147,13 @@ public:
     virtual void setPluginProperty(const QString& /*identifier*/, const QString& /*property*/);
 
 public Q_SLOTS:
-    virtual DataPtr addData(const QString& name, int dataType = 0);
+    virtual DataPtr addData(const QString& name, int dataType);
 
     /**
      * \deprecated
      * This method only calls \ref addData for each element
      */
-    virtual DataList addDataList(DataList dataList, int dataType = 0);
+    virtual DataList addDataList(DataList dataList, int dataType);
 
     /**
      * Creates new pointer from data element "from" to data element "to" of
@@ -163,7 +163,7 @@ public Q_SLOTS:
      * \param to data element where the pointer ends
      * \param pointerType is the type of this pointer
      */
-    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType = 0);
+    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType);
 
     /**
      * Access data element by its unique identifier.

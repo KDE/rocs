@@ -101,7 +101,8 @@ bool RootedTreePlugin::canConvertFrom(Document* doc) const
     QSet<Data*> cycles;
     QQueue<DataPtr> queue;
     foreach (DataStructurePtr ds, doc->dataStructures()){
-        foreach(DataPtr p, ds->dataList()){
+        //FIXME only default data type considered
+        foreach(DataPtr p, ds->dataList(0)){
             if (visited.contains(p.get())) {
                 continue;
             }

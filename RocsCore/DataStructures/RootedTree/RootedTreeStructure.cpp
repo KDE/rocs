@@ -72,7 +72,8 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
     QQueue<DataPtr> queue; // list of unprocessed data elements
     QHash <Data*, DataPtr> fromOtherToNew; // mapping from old to new data elements
 
-    foreach(DataPtr dataOther, other->dataList()){
+    //FIXME only default data type considered
+    foreach(DataPtr dataOther, other->dataList(0)){
         if (visited.contains(dataOther.get())) {
             continue;
         }

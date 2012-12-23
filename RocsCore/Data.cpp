@@ -246,7 +246,7 @@ void Data::registerOutPointer(PointerPtr e)
 
 PointerPtr Data::addPointer(DataPtr to)
 {
-    return d->_dataStructure->addPointer(this->getData(), to);
+    return d->_dataStructure->addPointer(this->getData(), to, 0);
 }
 
 void Data::remove(PointerPtr e)

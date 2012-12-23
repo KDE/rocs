@@ -290,11 +290,13 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event)
 void GraphScene::updateGraph(DataStructurePtr g)
 {
     //FIXME this is a workaround to trigger updates
-    foreach(DataPtr n, g->dataList()) {
+    //FIXME only default data type considered
+    foreach(DataPtr n, g->dataList(0)) {
         n->setColor(n->color());
     }
 
-    foreach(PointerPtr e, g->pointers()) {
+    //FIXME only default pointer type considered
+    foreach(PointerPtr e, g->pointers(0)) {
         e->setWidth(e->width());
     }
 }
@@ -418,13 +420,14 @@ QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPositi
     AlignAction *alignDataStructureTree   = new AlignAction(i18nc("@action:inmenu align elements such that crossing edges are minimized", "Minimize Crossing Edges"), AlignAction::MinCutTree, this);
 
     if (contextDataStructure) {
-        alignDataStructureBottom->registerData(contextDataStructure->dataList());
-        alignDataStructureCenter->registerData(contextDataStructure->dataList());
-        alignDataStructureTop->registerData(contextDataStructure->dataList());
-        alignDataStructureLeft->registerData(contextDataStructure->dataList());
-        alignDataStructureRight->registerData(contextDataStructure->dataList());
-        alignDataStructureCircle->registerData(contextDataStructure->dataList());
-        alignDataStructureTree->registerData(contextDataStructure->dataList());
+        //FIXME only default data type considered
+        alignDataStructureBottom->registerData(contextDataStructure->dataList(0));
+        alignDataStructureCenter->registerData(contextDataStructure->dataList(0));
+        alignDataStructureTop->registerData(contextDataStructure->dataList(0));
+        alignDataStructureLeft->registerData(contextDataStructure->dataList(0));
+        alignDataStructureRight->registerData(contextDataStructure->dataList(0));
+        alignDataStructureCircle->registerData(contextDataStructure->dataList(0));
+        alignDataStructureTree->registerData(contextDataStructure->dataList(0));
     }
     if (contextAtItem) {
         PropertiesDialogAction *dataStructurePropertiesAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), contextDataStructure, this);

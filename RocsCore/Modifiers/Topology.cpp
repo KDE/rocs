@@ -100,10 +100,12 @@ void Topology::applyMinCutTreeAlignment(DataList dataList)
     }
 
     DataStructurePtr ds = dataList.first()->dataStructure();
-    QVector<Edge> edges(ds->pointers().count());
+    //FIXME only default data type considered
+    QVector<Edge> edges(ds->pointers(0).count());
 
     counter = 0;
-    foreach(PointerPtr p, ds->pointers()) {
+    //FIXME only default pointer type considered
+    foreach(PointerPtr p, ds->pointers(0)) {
         edges[counter++] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
     }
 
@@ -169,10 +171,12 @@ void Topology::applyCircleAlignment(DataList dataList, qreal radius)
     }
 
     DataStructurePtr ds = dataList.first()->dataStructure();
-    QVector<Edge> edges(ds->pointers().count());
+    //FIXME only default pointer type considered
+    QVector<Edge> edges(ds->pointers(0).count());
 
     counter = 0;
-    foreach(PointerPtr p, ds->pointers()) {
+    //FIXME only default pointer type considered
+    foreach(PointerPtr p, ds->pointers(0)) {
         edges[counter++] = Edge(node_mapping[p->from().get()], node_mapping[p->to().get()]);
     }
 

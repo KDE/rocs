@@ -79,8 +79,9 @@ void KmlFileFormatPlugin::writeFile(Document& document)
     xmlWriter.writeStartElement("kml");
     xmlWriter.writeNamespace("http://www.opengis.net/kml/2.2");
     xmlWriter.writeStartElement("Document");
-    if (graph->pointers().isEmpty()) {
-        foreach(DataPtr n, graph->dataList()) {
+    //FIXME only default data type considered
+    if (graph->pointers(0).isEmpty()) {
+        foreach(DataPtr n, graph->dataList(0)) {
             xmlWriter.writeStartElement("Placemark");
             xmlWriter.writeStartElement("name");
             xmlWriter.writeCharacters(n->property("name").toString());
@@ -104,22 +105,22 @@ void KmlFileFormatPlugin::writeFile(Document& document)
         xmlWriter.writeStartElement("Placemark");
         xmlWriter.writeStartElement("name");
         {
-            QString s = graph->dataList().at(0)->property("name").toString();
+            QString s = graph->dataList(0).at(0)->property("name").toString();
             s.chop(2);
             xmlWriter.writeCharacters(s);
         }
         xmlWriter.writeEndElement();
         xmlWriter.writeStartElement("description");
 
-        if (graph->dataList().at(0)->property("description").isValid()) {
-            xmlWriter.writeCharacters(graph->dataList().at(0)->property("description").toString());
+        if (graph->dataList(0).at(0)->property("description").isValid()) {
+            xmlWriter.writeCharacters(graph->dataList(0).at(0)->property("description").toString());
         }
         xmlWriter.writeEndElement();
 
         xmlWriter.writeStartElement("LineString");
         xmlWriter.writeStartElement("coordinates");
 
-        foreach(DataPtr n, graph->dataList()) {
+        foreach(DataPtr n, graph->dataList(0)) {
             if (n->property("Longitude").isValid()) {
                 xmlWriter.writeCharacters(QString("%1,%2,%3\n").arg(n->property("Longitude").toString(),
                                           n->property("Latitude").toString(),
