@@ -5,7 +5,6 @@ X-KDE-Derived=KPluginInfo
 [PropertyDef::X-Rocs-SupportedDataStructures]
 Type=QStringList
 Comment=Rocs Tool Plugin
-Comment[bs]=Dodatak Rocs Alata
 Comment[ca]=Endollable d'eina del Rocs
 Comment[ca@valencia]=Endollable d'eina del Rocs
 Comment[cs]=Zásuvný modul nástrojů Rocs
