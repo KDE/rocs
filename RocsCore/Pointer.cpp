@@ -68,7 +68,7 @@ void Pointer::initialize()
     updateRelativeIndex();
     connect(d->to.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
     connect(d->from.get(), SIGNAL(pointerListChanged()), this, SLOT(updateRelativeIndex()));
-    connect(d->dataStructure.get(), SIGNAL(complexityChanged(bool)), this, SIGNAL(changed()));
+    connect(d->pointerType.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SIGNAL(changed()));
     connect(d->from.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
 
     // register properties and connect to changes
