@@ -273,7 +273,7 @@ protected:
      * \param to the second data element
      * \param pointerType the type of this pointer (default is 0)
      */
-    Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType = 0);
+    Pointer(DataStructurePtr parent, DataPtr from, DataPtr to, int pointerType);
 
     /**
      * Factory method to create a pointer element of type \p T.

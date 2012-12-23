@@ -172,7 +172,7 @@ void Rocs::ListStructure::remove(PointerPtr ptr)
 QScriptValue Rocs::ListStructure::createNode(const QString& name)
 {
     boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(
-                                        DataStructure::addData(ListNode::create(getDataStructure(), generateUniqueIdentifier(), 0))
+                                        DataStructure::addData(ListNode::create(getDataStructure(), generateUniqueIdentifier(), 0), 0)
                                     );
     n->setProperty("name", name);
     n->setEngine(engine());

@@ -198,8 +198,8 @@ public Q_SLOTS:
     virtual void remove(GroupPtr group);
 
     virtual GroupPtr addGroup(const QString& name);
-    virtual DataList addDataList(QList< QPair<QString, QPointF> > dataList, int dataType = 0);
-    virtual DataPtr addData(const QString& name, const QPointF& point, int dataType = 0);
+    virtual DataList addDataList(QList< QPair<QString, QPointF> > dataList, int dataType);
+    virtual DataPtr addData(const QString& name, const QPointF& point, int dataType);
 
     void addDynamicProperty(const QString& property, const QVariant& value = QVariant(0));
     void removeDynamicProperty(const QString& property);
@@ -261,8 +261,8 @@ Q_SIGNALS:
     void resizeRequest(Document::Border border);
 
 protected:
-    DataPtr addData(DataPtr data, int dataType = 0);
-    PointerPtr addPointer(PointerPtr pointer, int pointerType = 0);
+    DataPtr addData(DataPtr data, int dataType);
+    PointerPtr addPointer(PointerPtr pointer, int pointerType);
     int generateUniqueIdentifier();
 
     /**

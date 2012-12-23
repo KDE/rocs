@@ -184,8 +184,8 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
             meshNodes[qMakePair(i, j)] = graph->addData(QString("%1-%2").arg(i).arg(j),
-                                         QPointF(i * 50, j * 50) - QPoint((int)25 * columns, (int)25 * rows) + center
-                                                       );
+                                         QPointF(i * 50, j * 50) - QPoint((int)25 * columns, (int)25 * rows) + center,
+                                         0);  // TODO allow specification of types
         }
     }
 
@@ -223,10 +223,10 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
                       QPointF(sin(i * 2 * PI_ / numberSatelliteNodes)*radius, cos(i * 2 * PI_ / numberSatelliteNodes)*radius) + center
                   );
     }
-    QList< DataPtr > nodeList = graph->addDataList(starNodes);
+    QList< DataPtr > nodeList = graph->addDataList(starNodes, 0); // TODO allow specification of types
 
     // middle
-    nodeList.prepend(graph->addData(QString("center"), center));
+    nodeList.prepend(graph->addData(QString("center"), center, 0)); // TODO allow specification of types
 
     // connect circle nodes
     for (int i = 1; i <= numberSatelliteNodes; i++) {
@@ -262,7 +262,7 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
                         QPointF(sin(i * 2 * PI_ / numberNodes)*radius, cos(i * 2 * PI_ / numberNodes)*radius) + center
                     );
     }
-    QList< DataPtr > nodeList = graph->addDataList(circleNodes);
+    QList< DataPtr > nodeList = graph->addDataList(circleNodes, 0); // TODO allow specification of types
 
     // connect circle nodes
     for (int i = 0; i < numberNodes - 1; i++) {
@@ -316,7 +316,8 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
     for (boost::tie(vi, vi_end) = boost::vertices(randomGraph); vi != vi_end; ++vi) {
         mapNodes[*vi] = graph->addData(
                             QString("%1").arg(index++),
-                            QPointF(positionMap[*vi][0], positionMap[*vi][1])
+                            QPointF(positionMap[*vi][0], positionMap[*vi][1]),
+                            0 // TODO allow specification of types
                         );
     }
 
@@ -367,7 +368,8 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     for (boost::tie(vi, vi_end) = boost::vertices(randomGraph); vi != vi_end; ++vi) {
         mapNodes[*vi] = graph->addData(
                             QString("%1").arg(index++),
-                            QPointF(positionMap[*vi][0], positionMap[*vi][1])
+                            QPointF(positionMap[*vi][0], positionMap[*vi][1]),
+                            0 // TODO allow setting of types
                         );
     }
 
@@ -398,7 +400,7 @@ void GenerateGraphWidget::generateRandomTreeGraph(int nodes, int seed)
     addedNodes << graph->addData(QString::number(1));
     PointerTypePtr ptrType = activeDocument->pointerType(0);
     for (int i = 1; i < nodes; i++) {
-        DataPtr thisNode = graph->addData(QString::number(i + 1), center);
+        DataPtr thisNode = graph->addData(QString::number(i + 1), center, 0); //TODO allow specification of types
         center += QPointF(30,30);
         boost::random::uniform_int_distribution<> randomEarlierNodeGen(0, i-1);
         int randomEarlierNode = randomEarlierNodeGen(gen);
