@@ -44,10 +44,11 @@ public:
      */
     boost::weak_ptr<DataStructure> q;
 
+    int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
+
     QMap<int, DataList> _dataTypeLists;         // list if data elements associated to specific type
     QMap<int, PointerList> _pointerTypeLists;   // list of pointers associated to specific type
-
-    int _identifierCount;   // represents the next identifier that will be assigend to data/pointer
+    QHash<int, DataPtr> _dataIdentifierMap;
 
     QList<GroupPtr> _groups;
 
@@ -289,6 +290,7 @@ void DataStructure::remove()
         }
     }
     d->_dataTypeLists.clear();
+    d->_dataIdentifierMap.clear();
 
     d->_document->remove(getDataStructure());
 }
@@ -325,6 +327,9 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
         }
     }
 
+    // register data at fast access identifier hash
+    d->_dataIdentifierMap.insert(data->identifier(), data);
+
     emit dataCreated(data);
     emit changed();
 
@@ -335,22 +340,26 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
     return data;
 }
 
+DataPtr DataStructure::addData(const QString& name, const QPointF& pos, int dataType)
+{
+    if (DataPtr data = addData(name, dataType)) {
+        data->setPos(pos.x(), pos.y());
+        return data;
+    }
+    return DataPtr();
+}
+
 DataList DataStructure::addDataList(DataList dataList, int dataType)
 {
     Q_ASSERT(dataType >= 0 && dataType < d->_dataTypeLists.size());
 
     foreach(DataPtr n, dataList) {
-        d->_dataTypeLists[dataType].append(n);
-        emit dataCreated(n);
-
-        connect(n.get(), SIGNAL(propertyChanged(QString)),     this, SIGNAL(changed()));
-        connect(n.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
-        connect(n.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
-        connect(n.get(), SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
+        addData(n, dataType);
     }
-    emit changed();
+
     return dataList;
 }
+
 
 DataList DataStructure::addDataList(QList< QPair<QString, QPointF> > dataList, int dataType)
 {
@@ -365,7 +374,6 @@ DataList DataStructure::addDataList(QList< QPair<QString, QPointF> > dataList, i
     }
     return dataCreateList;
 }
-
 
 PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType)
 {
@@ -388,15 +396,6 @@ PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType)
     return pointer;
 }
 
-DataPtr DataStructure::addData(const QString& name, const QPointF& pos, int dataType)
-{
-    if (DataPtr data = addData(name, dataType)) {
-        data->setPos(pos.x(), pos.y());
-        return data;
-    }
-    return DataPtr();
-}
-
 PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 {
     Q_ASSERT(d->_document->pointerTypeList().contains(pointerType));
@@ -417,9 +416,14 @@ PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
 
 DataPtr DataStructure::getData(int uniqueIdentifier)
 {
-    foreach(const DataList& dataType, d->_dataTypeLists) {
+    if (d->_dataIdentifierMap.contains(uniqueIdentifier)) {
+        return d->_dataIdentifierMap[uniqueIdentifier];
+    }
+
+    foreach(const DataList &dataType, d->_dataTypeLists) {
         foreach(DataPtr data, dataType) {
             if (data->identifier() == uniqueIdentifier) {
+                kWarning() << "Access do data element that is not registered at data-identifier mapper.";
                 return data;
             }
         }
@@ -429,6 +433,11 @@ DataPtr DataStructure::getData(int uniqueIdentifier)
 
 void DataStructure::remove(DataPtr data)
 {
+    if (!d->_dataTypeLists[data->identifier()].contains(data)) {
+        kWarning() << "Data element not registered, aborting removal.";
+        return;
+    }
+
     //Note: important for resize: remove node before emit resizeRequest
     Document *doc = DocumentManager::self().activeDocument();
 
@@ -442,15 +451,15 @@ void DataStructure::remove(DataPtr data)
         if (data->y() > yCenter) emit resizeRequest(Document::BorderBottom);
     }
 
-    // remove from internal list
-    QMap<int,DataList>::iterator iter = d->_dataTypeLists.begin();
-    while (iter != d->_dataTypeLists.end()) {
-        if (iter->removeOne(data)) {
-            // only remove data element if it is registered
-            data->remove();
-        }
-        ++iter;
+    // remove from internal lists
+    if (d->_dataIdentifierMap.remove(data->identifier()) != 1) {
+        kWarning() << "Data identifier hash is dirty.";
     }
+    if (d->_dataTypeLists[data->dataType()].removeOne(data)) {
+        // only remove data element if it is registered
+         data->remove();
+    }
+
     updateRelativeCenter();
     emit changed();
 }

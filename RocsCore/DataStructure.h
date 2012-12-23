@@ -148,6 +148,11 @@ public:
 
 public Q_SLOTS:
     virtual DataPtr addData(const QString& name, int dataType = 0);
+
+    /**
+     * \deprecated
+     * This method only calls \ref addData for each element
+     */
     virtual DataList addDataList(DataList dataList, int dataType = 0);
 
     /**
@@ -162,7 +167,7 @@ public Q_SLOTS:
 
     /**
      * Access data element by its unique identifier.
-     * Operation has access time O(n).
+     * Operation has amortized access time of O(1) (worst case O(n)).
      *
      * \param uniqueIdentifier the unique identifier of the data element
      */
