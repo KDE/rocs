@@ -256,7 +256,6 @@ private Q_SLOTS:
 Q_SIGNALS:
     void dataCreated(DataPtr n);
     void pointerCreated(PointerPtr e);
-    void complexityChanged(bool directed);
     void nameChanged(const QString& name);
     void changed();
     void resizeRequest(Document::Border border);
