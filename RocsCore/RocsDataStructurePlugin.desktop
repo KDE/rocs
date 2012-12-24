@@ -5,6 +5,7 @@ X-KDE-Derived=KPluginInfo
 [PropertyDef::X-Rocs-DataStructureIdentifier]
 Type=QString
 Comment=Rocs Data Structure Plugin
+Comment[bs]=Rocs Dodatak za strukture podataka
 Comment[ca]=Endollable d'estructures de dades de Rocs
 Comment[ca@valencia]=Endollable d'estructures de dades de Rocs
 Comment[cs]=Modul Rocs pro analýzu struktury dat
