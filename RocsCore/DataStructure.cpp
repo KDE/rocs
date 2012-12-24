@@ -468,14 +468,14 @@ void DataStructure::remove(DataPtr data)
 
 void DataStructure::remove(PointerPtr pointer)
 {
+    if (!d->_pointerTypeLists[pointer->pointerType()].contains(pointer)) {
+        kWarning() << "Pointer not registered, aborting removal.";
+        return;
+    }
     // remove from internal list
-    QMap<int,PointerList>::iterator iter = d->_pointerTypeLists.begin();
-    while (iter != d->_pointerTypeLists.end()) {
-        if (iter->removeOne(pointer)) {
-            // only remove pointer if it is registered
-            pointer->remove();
-        }
-        ++iter;
+    if (d->_pointerTypeLists[pointer->pointerType()].removeOne(pointer)) {
+        // only remove pointer if it is registered
+        pointer->remove();
     }
     emit changed();
 }
