@@ -435,7 +435,7 @@ DataPtr DataStructure::getData(int uniqueIdentifier)
 
 void DataStructure::remove(DataPtr data)
 {
-    if (!d->_dataTypeLists[data->identifier()].contains(data)) {
+    if (!d->_dataTypeLists[data->dataType()].contains(data)) {
         kWarning() << "Data element not registered, aborting removal.";
         return;
     }

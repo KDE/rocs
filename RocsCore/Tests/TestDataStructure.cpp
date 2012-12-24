@@ -55,7 +55,7 @@ void TestDataStructure::dataAddDeleteTest()
 
     // create 10 data elements
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i),0));
+        dataList.append(ds->addData(QString(i), 0));
     }
     QVERIFY2(ds->dataList(0).size() == 10, "ERROR: Number of data elements is not 10");
 
