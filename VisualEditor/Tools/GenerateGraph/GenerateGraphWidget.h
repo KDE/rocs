@@ -55,8 +55,8 @@ public slots:
     void generateGraph();
 
 private:
-    void generateCircle(int numberSatelliteNodes);
-    void generateMesh(int rows, int columns);
+    void generateCircle(int numberSatelliteNodes, int pointerType, int dataType, const QString &identifier);
+    void generateMesh(int rows, int columns, int pointerType, int dataType, const QString &identifier);
 
     /**
      * generates a random graph given by following parameters
@@ -65,13 +65,13 @@ private:
      * \param   int seed    random seed for random number generator
      * \param   bool selfEdges if true self edges are generated, otherwise not
      */
-    void generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges);
+    void generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier);
 
     /**
      * generates graph with one center an the specified number of satellite nodes
      * \param   int numberNodes   number of satellite nodes
      */
-    void generateStar(int numberNodes);
+    void generateStar(int numberNodes, int pointerType, int dataType, const QString &identifier);
 
     /**
      * generates a Erdös-Renyi random graph given by following parameters
@@ -80,20 +80,22 @@ private:
      * \param   int seed    random seed for random number generator
      * \param   bool selfEdges if true self edges are generated, otherwise not
      */
-    void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges);
+    void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier);
 
     /**
      * generates a random tree graph given the following parameters
      * \param   int nodes   number of nodes
      * \param   int seed    random seed for random number generator
      */
-    void generateRandomTreeGraph(int nodes, int seed);
+    void generateRandomTreeGraph(int nodes, int seed, int pointerType, int dataType, const QString &identifier);
     Document* graphDoc_;
     int selectedGraphType_;
     QGridLayout *gridLayout_;
     QWidget* graphOptionsWidget_;
 
     Ui::GenerateGraphWidget *ui;
+
+    QList<QString> defaultIdentifiers;
 };
 
 #endif // GENERATEGRAPHWIDGET_H

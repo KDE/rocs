@@ -7,17 +7,44 @@
     <x>0</x>
     <y>0</y>
     <width>293</width>
-    <height>238</height>
+    <height>274</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Generate Graph</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Graph Generator</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="toolTip">
+      <string>The node type to create the nodes of the graph with</string>
+     </property>
+     <property name="text">
+      <string>Data type</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="3">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
     <layout class="QHBoxLayout" name="advancedLayout">
      <item>
-      <widget class="KComboBox" name="comboBox">
+      <widget class="KComboBox" name="comboGraphGenerator">
+       <property name="toolTip">
+        <string>Select the graph generator.</string>
+       </property>
        <item>
         <property name="text">
          <string>Mesh Graph</string>
@@ -77,14 +104,17 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="toolTip">
+      <string>The identifier of the created graph (used for scripting)</string>
+     </property>
+     <property name="text">
+      <string>Identifier</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
+   <item row="6" column="0" colspan="3">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
       <number>0</number>
@@ -392,10 +422,37 @@
      </widget>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="toolTip">
+      <string>The pointer type to create the pointers of the graph with</string>
+     </property>
      <property name="text">
-      <string>Graph Generator</string>
+      <string>Pointer type</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="KComboBox" name="dataTypeSelector">
+     <property name="toolTip">
+      <string>Select the data type for data elements of the generated graph.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="KComboBox" name="pointerTypeSelector">
+     <property name="toolTip">
+      <string>Select the pointer type for connections of the generated graph.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLineEdit" name="identifier">
+     <property name="toolTip">
+      <string>Set the unique identifier of the generated graph.</string>
+     </property>
+     <property name="text">
+      <string>Mesh Graph</string>
      </property>
     </widget>
    </item>
@@ -411,22 +468,6 @@
  <resources/>
  <connections>
   <connection>
-   <sender>comboBox</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>stackedWidget</receiver>
-   <slot>setCurrentIndex(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>232</x>
-     <y>22</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>258</x>
-     <y>68</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>buttonShowAdvanced</sender>
    <signal>toggled(bool)</signal>
    <receiver>label_randomGeneratorSeed</receiver>
@@ -437,8 +478,8 @@
      <y>21</y>
     </hint>
     <hint type="destinationlabel">
-     <x>51</x>
-     <y>157</y>
+     <x>46</x>
+     <y>158</y>
     </hint>
    </hints>
   </connection>
@@ -453,8 +494,8 @@
      <y>21</y>
     </hint>
     <hint type="destinationlabel">
-     <x>183</x>
-     <y>161</y>
+     <x>98</x>
+     <y>158</y>
     </hint>
    </hints>
   </connection>
@@ -469,8 +510,8 @@
      <y>21</y>
     </hint>
     <hint type="destinationlabel">
-     <x>58</x>
-     <y>94</y>
+     <x>18</x>
+     <y>158</y>
     </hint>
    </hints>
   </connection>
@@ -485,8 +526,8 @@
      <y>21</y>
     </hint>
     <hint type="destinationlabel">
-     <x>58</x>
-     <y>94</y>
+     <x>83</x>
+     <y>158</y>
     </hint>
    </hints>
   </connection>
@@ -501,8 +542,8 @@
      <y>21</y>
     </hint>
     <hint type="destinationlabel">
-     <x>51</x>
-     <y>127</y>
+     <x>46</x>
+     <y>159</y>
     </hint>
    </hints>
   </connection>
@@ -517,8 +558,24 @@
      <y>21</y>
     </hint>
     <hint type="destinationlabel">
-     <x>182</x>
-     <y>131</y>
+     <x>98</x>
+     <y>159</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboGraphGenerator</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>146</x>
+     <y>194</y>
     </hint>
    </hints>
   </connection>

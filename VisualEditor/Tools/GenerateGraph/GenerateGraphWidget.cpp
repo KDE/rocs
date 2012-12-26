@@ -24,11 +24,15 @@
 #include "DocumentManager.h"
 #include "PointerType.h"
 #include "Modifiers/Topology.h"
+#include "Data.h"
+#include "Pointer.h"
 
 #include <cmath>
 #include <KLocale>
 #include <KDialog>
 #include <KComboBox>
+
+#include <QList>
 
 #include <QtGui/QDesktopWidget>
 #include <QtGui/QGridLayout>
@@ -65,8 +69,12 @@ typedef boost::iterator_property_map < PositionVec::iterator,
 
 
 GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
-    :   KDialog(parent)
+:   KDialog(parent)
 {
+    defaultIdentifiers << QString(i18n("Mesh Graph")) << QString(tr("Star Graph"));
+    defaultIdentifiers << QString(i18n("Circle Graph")) << QString(i18n("RandomGraph"));
+    defaultIdentifiers << QString(i18n("RandomGraph")) << QString(i18n("RandomTreeGraph"));
+
     selectedGraphType_ = MESH;
     graphDoc_ = graphDoc;
 
@@ -82,7 +90,7 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     KDialog::centerOnScreen(widget, -3);
 
     connect(this, SIGNAL(okClicked()), this, SLOT(generateGraph()));
-    connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setGraphType(int)));
+    connect(ui->comboGraphGenerator, SIGNAL(currentIndexChanged(int)), this, SLOT(setGraphType(int)));
 
     // set random seeds
     qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
@@ -100,28 +108,60 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     ui->GNPGeneratorSeed->setVisible(false);
     ui->label_randomTreeGeneratorSeed->setVisible(false);
     ui->randomTreeGeneratorSeed->setVisible(false);
+
+    Document* document = DocumentManager::self().activeDocument();
+
+    foreach (int pointerTypeID, document->pointerTypeList()) {
+        PointerTypePtr pointerType = document->pointerType(pointerTypeID);
+        QString item = i18nc(
+            "@item:inlistbox",
+            "%1 (ID %2)",
+            pointerType->name(),
+            pointerType->identifier());
+        ui->pointerTypeSelector->addItem(item, QVariant(pointerTypeID));
+    }
+    ui->pointerTypeSelector->setCurrentIndex(0);
+
+    foreach (int dataTypeID, document->dataTypeList()) {
+        DataTypePtr dataType = document->dataType(dataTypeID);
+        QString item = i18nc(
+            "@item:inlistbox",
+            "%1 (ID %2)",
+            dataType->name(),
+            dataType->identifier());
+        ui->dataTypeSelector->addItem(item, QVariant(dataTypeID));
+    }
+    ui->dataTypeSelector->setCurrentIndex(0);
 }
 
 
 void GenerateGraphWidget::setGraphType(int type)
 {
+    int previousGraphType_ = selectedGraphType_;
+    QString text = ui->identifier->text();
     selectedGraphType_ = type;
+    if (text == defaultIdentifiers.at(previousGraphType_)) {
+        ui->identifier->setText(defaultIdentifiers.at(selectedGraphType_));
+    }
 }
 
 
 void GenerateGraphWidget::generateGraph()
 {
+    int pointerType = ui->pointerTypeSelector->currentIndex();
+    int dataType = ui->dataTypeSelector->currentIndex();
+    QString identifier = ui->identifier->text();
     switch (selectedGraphType_) {
     case MESH: {
-        generateMesh(ui->meshRows->value(), ui->meshColumns->value());
+        generateMesh(ui->meshRows->value(), ui->meshColumns->value(), pointerType, dataType, identifier);
         break;
     }
     case CIRCLE: {
-        generateCircle(ui->circleNodes->value());
+        generateCircle(ui->circleNodes->value(), pointerType, dataType, identifier);
         break;
     }
     case STAR: {
-        generateStar(ui->starSatelliteNodes->value());
+        generateStar(ui->starSatelliteNodes->value(), pointerType, dataType, identifier);
         break;
     }
     case RANDOM: {
@@ -129,7 +169,10 @@ void GenerateGraphWidget::generateGraph()
             ui->randomNodes->value(),
             ui->randomEdges->value(),
             ui->randomGeneratorSeed->value(),
-            ui->randomAllowSelfedges->isTristate()
+            ui->randomAllowSelfedges->isTristate(),
+            pointerType,
+            dataType,
+            identifier
         );
         break;
     }
@@ -138,14 +181,20 @@ void GenerateGraphWidget::generateGraph()
             ui->GNPNodes->value(),
             ui->GNPEdgeProbability->value(),
             ui->randomGeneratorSeed->value(),
-            ui->GNPAllowSelfedges->isTristate()
+            ui->GNPAllowSelfedges->isTristate(),
+            pointerType,
+            dataType,
+            identifier
         );
         break;
     }
     case RANDOM_TREE: {
         generateRandomTreeGraph(
             ui->randomTreeNodes->value(),
-            ui->randomTreeGeneratorSeed->value()
+            ui->randomTreeGeneratorSeed->value(),
+            pointerType,
+            dataType,
+            identifier
         );
     }
     default:     break;
@@ -161,7 +210,7 @@ GenerateGraphWidget::~GenerateGraphWidget()
 }
 
 
-void GenerateGraphWidget::generateMesh(int rows, int columns)
+void GenerateGraphWidget::generateMesh(int rows, int columns, int pointerType, int dataType, const QString &identifier)
 {
     DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
     QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
@@ -174,8 +223,9 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
 
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList(0).size() > 0)
-        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Mesh Graph"));
+    if (graph->dataListAll().size() > 0) {
+        graph = DocumentManager::self().activeDocument()->addDataStructure(identifier);
+    }
 
     // create mesh of NxN points
     QMap<QPair<int, int>, DataPtr > meshNodes;
@@ -184,21 +234,22 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
             meshNodes[qMakePair(i, j)] = graph->addData(QString("%1-%2").arg(i).arg(j),
-                                         QPointF(i * 50, j * 50) - QPoint((int)25 * columns, (int)25 * rows) + center,
-                                         0);  // TODO allow specification of types
+                                                        QPointF(i * 50, j * 50) - QPoint((int)25 * columns, (int)25 * rows) + center,
+                                                        dataType
+                                                       );
         }
     }
 
     // connect mesh nodes
     for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
-            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)], 0); // left
-            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)], 0); // bottom.
+            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)], pointerType); // left
+            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)], pointerType); // bottom.
         }
     }
 }
 
-void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
+void GenerateGraphWidget::generateStar(int numberSatelliteNodes, int pointerType, int dataType, const QString &identifier)
 {
     DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
     QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
@@ -213,8 +264,9 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
 
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList(0).size() > 0)
-        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Star Graph"));
+    if (graph->dataListAll().size() > 0) {
+        graph = DocumentManager::self().activeDocument()->addDataStructure(identifier);
+    }
 
     QList< QPair<QString, QPointF> > starNodes;
     for (int i = 1; i <= numberSatelliteNodes; i++) {
@@ -223,18 +275,18 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes)
                       QPointF(sin(i * 2 * PI_ / numberSatelliteNodes)*radius, cos(i * 2 * PI_ / numberSatelliteNodes)*radius) + center
                   );
     }
-    QList< DataPtr > nodeList = graph->addDataList(starNodes, 0); // TODO allow specification of types
+    QList< DataPtr > nodeList = graph->addDataList(starNodes, dataType);
 
     // middle
-    nodeList.prepend(graph->addData(QString("center"), center, 0)); // TODO allow specification of types
+    nodeList.prepend(graph->addData(QString("center"), center, dataType));
 
     // connect circle nodes
     for (int i = 1; i <= numberSatelliteNodes; i++) {
-        graph->addPointer(nodeList.at(0), nodeList.at(i), 0);
+        graph->addPointer(nodeList.at(0), nodeList.at(i), pointerType);
     }
 }
 
-void GenerateGraphWidget::generateCircle(int numberNodes)
+void GenerateGraphWidget::generateCircle(int numberNodes, int pointerType, int dataType, const QString &identifier)
 {
     DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
     QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
@@ -249,8 +301,8 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
 
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList(0).size() > 0) {
-        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Circle Graph"));
+    if (graph->dataListAll().size() > 0) {
+        graph = DocumentManager::self().activeDocument()->addDataStructure(identifier);
     }
 
     QList< QPair<QString, QPointF> > circleNodes;
@@ -262,16 +314,16 @@ void GenerateGraphWidget::generateCircle(int numberNodes)
                         QPointF(sin(i * 2 * PI_ / numberNodes)*radius, cos(i * 2 * PI_ / numberNodes)*radius) + center
                     );
     }
-    QList< DataPtr > nodeList = graph->addDataList(circleNodes, 0); // TODO allow specification of types
+    QList< DataPtr > nodeList = graph->addDataList(circleNodes, dataType);
 
     // connect circle nodes
     for (int i = 0; i < numberNodes - 1; i++) {
-        graph->addPointer(nodeList.at(i), nodeList.at(i + 1), 0);
+        graph->addPointer(nodeList.at(i), nodeList.at(i + 1), pointerType);
     }
-    graph->addPointer(nodeList.at(numberNodes - 1), nodeList.at(0), 0);
+    graph->addPointer(nodeList.at(numberNodes - 1), nodeList.at(0), pointerType);
 }
 
-void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges)
+void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier)
 {
     QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
@@ -306,8 +358,9 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
     // put generated random graph at whiteboard
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList(0).size() > 0)
-        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("RandomGraph"));
+    if (graph->dataListAll().size() > 0) {
+        graph = DocumentManager::self().activeDocument()->addDataStructure(identifier);
+    }
 
     // put nodes at whiteboard as generated
     QMap<int, DataPtr > mapNodes;
@@ -317,20 +370,20 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
         mapNodes[*vi] = graph->addData(
                             QString("%1").arg(index++),
                             QPointF(positionMap[*vi][0], positionMap[*vi][1]),
-                            0 // TODO allow specification of types
+                            dataType
                         );
     }
 
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
         graph->addPointer(mapNodes[boost::source(*ei, randomGraph)],
-                          mapNodes[boost::target(*ei, randomGraph)], 0);
-
+                          mapNodes[boost::target(*ei, randomGraph)],
+                          pointerType);
     }
 }
 
 
-void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges)
+void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier)
 {
     QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
@@ -350,8 +403,9 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     // put generated random graph at whiteboard
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList(0).size() > 0)
-        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("RandomGraph"));
+    if (graph->dataListAll().size() > 0) {
+        graph = DocumentManager::self().activeDocument()->addDataStructure(identifier);
+    }
 
     // minimize cuts by Fruchtman-Reingold layout algorithm
     boost::fruchterman_reingold_force_directed_layout< boost::rectangle_topology< boost::mt19937 >, Graph, PositionMap >
@@ -369,44 +423,44 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
         mapNodes[*vi] = graph->addData(
                             QString("%1").arg(index++),
                             QPointF(positionMap[*vi][0], positionMap[*vi][1]),
-                            0 // TODO allow setting of types
+                            dataType
                         );
     }
 
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
         graph->addPointer(mapNodes[boost::source(*ei, randomGraph)],
-                          mapNodes[boost::target(*ei, randomGraph)], 0);
-
+                          mapNodes[boost::target(*ei, randomGraph)],
+                          pointerType);
     }
 }
 
 
-void GenerateGraphWidget::generateRandomTreeGraph(int nodes, int seed)
+void GenerateGraphWidget::generateRandomTreeGraph(int nodes, int seed, int pointerType, int dataType, const QString &identifier)
 {
 
     Document *activeDocument = DocumentManager::self().activeDocument();
     QPointF center = activeDocument->activeDataStructure()->relativeCenter();
 
-    DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
-    if (graph->dataList(0).size() > 0) {
-        graph = DocumentManager::self().activeDocument()->addDataStructure(i18n("Circle Graph"));
+    DataStructurePtr graph = activeDocument->activeDataStructure();
+    if (graph->dataListAll().size() > 0) {
+        graph = DocumentManager::self().activeDocument()->addDataStructure(identifier);
     }
 
     boost::mt19937 gen;
     gen.seed(static_cast<unsigned int>(seed));
 
     DataList addedNodes;
-    addedNodes << graph->addData(QString::number(1), 0);
+    addedNodes << graph->addData(QString::number(1), dataType);
     PointerTypePtr ptrType = activeDocument->pointerType(0);
     for (int i = 1; i < nodes; i++) {
-        DataPtr thisNode = graph->addData(QString::number(i + 1), center, 0); //TODO allow specification of types
+        DataPtr thisNode = graph->addData(QString::number(i + 1), center, dataType);
         center += QPointF(30,30);
         boost::random::uniform_int_distribution<> randomEarlierNodeGen(0, i-1);
         int randomEarlierNode = randomEarlierNodeGen(gen);
-        graph->addPointer(thisNode, addedNodes.at(randomEarlierNode), 0);
+        graph->addPointer(thisNode, addedNodes.at(randomEarlierNode), pointerType);
         if (ptrType->direction() == PointerType::Unidirectional) {
-            graph->addPointer(addedNodes.at(randomEarlierNode), thisNode, 0);
+            graph->addPointer(addedNodes.at(randomEarlierNode), thisNode, pointerType);
         }
         addedNodes.append(thisNode);
     }
