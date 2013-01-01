@@ -33,7 +33,6 @@
 #include <KComboBox>
 
 #include <QList>
-
 #include <QtGui/QDesktopWidget>
 #include <QtGui/QGridLayout>
 #include <QtGui/QLabel>
@@ -52,7 +51,7 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/graph/erdos_renyi_generator.hpp>
 
-
+// typedefs used for the boost graph library
 typedef boost::adjacency_list < boost::listS, boost::vecS, boost::undirectedS,
         boost::property<boost::vertex_name_t, std::string> >
         Graph;
@@ -68,12 +67,12 @@ typedef boost::iterator_property_map < PositionVec::iterator,
         PositionMap;
 
 
-GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
+GenerateGraphWidget::GenerateGraphWidget(Document *graphDoc, QWidget *parent)
 :   KDialog(parent)
 {
-    defaultIdentifiers << QString(i18n("Mesh Graph")) << QString(tr("Star Graph"));
-    defaultIdentifiers << QString(i18n("Circle Graph")) << QString(i18n("RandomGraph"));
-    defaultIdentifiers << QString(i18n("RandomGraph")) << QString(i18n("RandomTreeGraph"));
+    defaultIdentifiers << QString("MeshGraph") << QString("StarGraph");
+    defaultIdentifiers << QString("CircleGraph") << QString("RandomGraph");
+    defaultIdentifiers << QString("RandomGraph") << QString("RandomTreeGraph");
 
     selectedGraphType_ = MESH;
     graphDoc_ = graphDoc;
@@ -109,7 +108,7 @@ GenerateGraphWidget::GenerateGraphWidget(Document* graphDoc, QWidget* parent)
     ui->label_randomTreeGeneratorSeed->setVisible(false);
     ui->randomTreeGeneratorSeed->setVisible(false);
 
-    Document* document = DocumentManager::self().activeDocument();
+    Document *document = DocumentManager::self().activeDocument();
 
     foreach (int pointerTypeID, document->pointerTypeList()) {
         PointerTypePtr pointerType = document->pointerType(pointerTypeID);
@@ -209,7 +208,6 @@ GenerateGraphWidget::~GenerateGraphWidget()
     delete ui;
 }
 
-
 void GenerateGraphWidget::generateMesh(int rows, int columns, int pointerType, int dataType, const QString &identifier)
 {
     DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
@@ -218,8 +216,12 @@ void GenerateGraphWidget::generateMesh(int rows, int columns, int pointerType, i
     if (! graphDoc_) {
         return;
     }
-    if (rows < 1)     rows = 1;
-    if (columns < 1)  columns = 1;
+    if (rows < 1) {
+        rows = 1;
+    }
+    if (columns < 1) {
+        columns = 1;
+    }
 
     // use active data structure iff empty
     DataStructurePtr graph = DocumentManager::self().activeDocument()->activeDataStructure();
