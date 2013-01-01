@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright (C) 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright (C) 2011-2013  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -47,7 +47,7 @@ class GenerateGraphWidget :
     };
 
 public:
-    explicit GenerateGraphWidget(Document* graphDoc, QWidget *parent = 0);
+    explicit GenerateGraphWidget(Document *graphDoc, QWidget *parent = 0);
     ~GenerateGraphWidget();
 
 public slots:
@@ -55,43 +55,80 @@ public slots:
     void generateGraph();
 
 private:
-    void generateCircle(int numberSatelliteNodes, int pointerType, int dataType, const QString &identifier);
+    /**
+     * Generate circle graph with specified number of nodes.
+     *
+     * \param nodes is the number of nodes of the generated graph
+     * \param pointerType is the type of the pointers of the generated graph
+     * \param dataType is the type of the data elements of the generated graph
+     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
+     */
+    void generateCircle(int nodes, int pointerType, int dataType, const QString &identifier);
+
+    /**
+     * Generate mesh graph with specified number of \p rows and \p columns.
+     *
+     * \param rows is the number of rows of the generated graph
+     * \param columns is the number of columns of the generated graph
+     * \param pointerType is the type of the pointers of the generated graph
+     * \param dataType is the type of the data elements of the generated graph
+     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
+     */
     void generateMesh(int rows, int columns, int pointerType, int dataType, const QString &identifier);
 
     /**
-     * generates a random graph given by following parameters
-     * \param   int nodes   number of nodes
-     * \param   int edges   number of randomly assigned edges
-     * \param   int seed    random seed for random number generator
-     * \param   bool selfEdges if true self edges are generated, otherwise not
+     * Generate a random graph by assigning uniformly at random \p edges many pointers to the set of nodes.
+     *
+     * \param nodes is the number of nodes of the generated graph
+     * \param edges is the number of edges of the generated graph
+     * \param seed is the seed for random number generator
+     * \param selfEdges if true self edges are generated, otherwise not
+     * \param pointerType is the type of the pointers of the generated graph
+     * \param dataType is the type of the data elements of the generated graph
+     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
-    void generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier);
+    void generateRandomGraph(int nodes, int edges, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier);
 
     /**
-     * generates graph with one center an the specified number of satellite nodes
-     * \param   int numberNodes   number of satellite nodes
+     * Generate a star graph with specified number of nodes.
+     *
+     * \param satelliteNodes is the number of satellite nodes of the generated graph
+     * \param pointerType is the type of the pointers of the generated graph
+     * \param dataType is the type of the data elements of the generated graph
+     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
-    void generateStar(int numberNodes, int pointerType, int dataType, const QString &identifier);
+    void generateStar(int satelliteNodes, int pointerType, int dataType, const QString &identifier);
 
     /**
-     * generates a Erdös-Renyi random graph given by following parameters
-     * \param   int nodes   number of nodes
-     * \param   int edgeProbability   between each two nodes add edge with this probability
-     * \param   int seed    random seed for random number generator
-     * \param   bool selfEdges if true self edges are generated, otherwise not
+     * Generate an Erdös-Renyi random graph. This graph is created by first creating a set of \p nodes
+     * many data elemnts and then creating any possibly edge with probability \p edgeProbability.
+     *
+     * \param nodes is the number of nodes of the generated graph
+     * \param edgeProbability is the probability for creating an arbitrary edge
+     * \param seed is the seed for random number generator
+     * \param selfEdges if true self edges are generated, otherwise not
+     * \param pointerType is the type of the pointers of the generated graph
+     * \param dataType is the type of the data elements of the generated graph
+     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
     void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier);
 
     /**
-     * generates a random tree graph given the following parameters
-     * \param   int nodes   number of nodes
-     * \param   int seed    random seed for random number generator
+     * Generate a random tree by iterating the following process: First create a root node and than
+     * for (\p nodes - 1) rounds create for a node (selected uniformly at random) a child.
+     *
+     * \param nodes is number of nodes
+     * \param seed is the seed for random number generator
+     * \param pointerType is the type of the pointers of the generated graph
+     * \param dataType is the type of the data elements of the generated graph
+     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
     void generateRandomTreeGraph(int nodes, int seed, int pointerType, int dataType, const QString &identifier);
-    Document* graphDoc_;
+
+    Document *graphDoc_;
     int selectedGraphType_;
     QGridLayout *gridLayout_;
-    QWidget* graphOptionsWidget_;
+    QWidget *graphOptionsWidget_;
 
     Ui::GenerateGraphWidget *ui;
 

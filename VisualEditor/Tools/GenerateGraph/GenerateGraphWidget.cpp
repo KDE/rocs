@@ -251,14 +251,14 @@ void GenerateGraphWidget::generateMesh(int rows, int columns, int pointerType, i
     }
 }
 
-void GenerateGraphWidget::generateStar(int numberSatelliteNodes, int pointerType, int dataType, const QString &identifier)
+void GenerateGraphWidget::generateStar(int satelliteNodes, int pointerType, int dataType, const QString& identifier)
 {
     DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
     QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
-    int radius = 50 * numberSatelliteNodes / (2 * PI_);
+    int radius = 50 * satelliteNodes / (2 * PI_);
 
     if (!graphDoc_) {
         return;
@@ -271,10 +271,10 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes, int pointerType
     }
 
     QList< QPair<QString, QPointF> > starNodes;
-    for (int i = 1; i <= numberSatelliteNodes; i++) {
+    for (int i = 1; i <= satelliteNodes; i++) {
         starNodes << qMakePair(
                       QString("%1").arg(i),
-                      QPointF(sin(i * 2 * PI_ / numberSatelliteNodes)*radius, cos(i * 2 * PI_ / numberSatelliteNodes)*radius) + center
+                      QPointF(sin(i * 2 * PI_ / satelliteNodes)*radius, cos(i * 2 * PI_ / satelliteNodes)*radius) + center
                   );
     }
     QList< DataPtr > nodeList = graph->addDataList(starNodes, dataType);
@@ -283,19 +283,19 @@ void GenerateGraphWidget::generateStar(int numberSatelliteNodes, int pointerType
     nodeList.prepend(graph->addData(QString("center"), center, dataType));
 
     // connect circle nodes
-    for (int i = 1; i <= numberSatelliteNodes; i++) {
+    for (int i = 1; i <= satelliteNodes; i++) {
         graph->addPointer(nodeList.at(0), nodeList.at(i), pointerType);
     }
 }
 
-void GenerateGraphWidget::generateCircle(int numberNodes, int pointerType, int dataType, const QString &identifier)
+void GenerateGraphWidget::generateCircle(int nodes, int pointerType, int dataType, const QString& identifier)
 {
     DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
     QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
-    int radius = 50 * numberNodes / (2 * PI_);
+    int radius = 50 * nodes / (2 * PI_);
 
     if (! graphDoc_) {
         return;
@@ -310,22 +310,22 @@ void GenerateGraphWidget::generateCircle(int numberNodes, int pointerType, int d
     QList< QPair<QString, QPointF> > circleNodes;
 
     // create mesh nodes, store them in map
-    for (int i = 1; i <= numberNodes; i++) {
+    for (int i = 1; i <= nodes; i++) {
         circleNodes << qMakePair(
                         QString("%1").arg(i),
-                        QPointF(sin(i * 2 * PI_ / numberNodes)*radius, cos(i * 2 * PI_ / numberNodes)*radius) + center
+                        QPointF(sin(i * 2 * PI_ / nodes)*radius, cos(i * 2 * PI_ / nodes)*radius) + center
                     );
     }
     QList< DataPtr > nodeList = graph->addDataList(circleNodes, dataType);
 
     // connect circle nodes
-    for (int i = 0; i < numberNodes - 1; i++) {
+    for (int i = 0; i < nodes - 1; i++) {
         graph->addPointer(nodeList.at(i), nodeList.at(i + 1), pointerType);
     }
-    graph->addPointer(nodeList.at(numberNodes - 1), nodeList.at(0), pointerType);
+    graph->addPointer(nodeList.at(nodes - 1), nodeList.at(0), pointerType);
 }
 
-void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier)
+void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, int seed, bool selfEdges, int pointerType, int dataType, const QString& identifier)
 {
     QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
 
@@ -337,7 +337,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int randomEdges, int se
     boost::generate_random_graph<Graph, boost::mt19937>(
         randomGraph,
         nodes,
-        randomEdges,
+        edges,
         gen,
         selfEdges
     );
