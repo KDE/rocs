@@ -22,8 +22,6 @@
 #include <QWidget>
 #include <KDialog>
 
-#define PI_ 3.14159265358979323846
-
 class QGridLayout;
 class Document;
 

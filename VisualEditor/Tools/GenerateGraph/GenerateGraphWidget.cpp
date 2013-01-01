@@ -50,6 +50,7 @@
 #include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/graph/erdos_renyi_generator.hpp>
+#include <boost/math/constants/constants.hpp>
 
 // typedefs used for the boost graph library
 typedef boost::adjacency_list < boost::listS, boost::vecS, boost::undirectedS,
@@ -258,7 +259,7 @@ void GenerateGraphWidget::generateStar(int satelliteNodes, int pointerType, int 
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
-    int radius = 50 * satelliteNodes / (2 * PI_);
+    int radius = 50 * satelliteNodes / (2 * boost::math::constants::pi<double>());
 
     if (!graphDoc_) {
         return;
@@ -272,14 +273,17 @@ void GenerateGraphWidget::generateStar(int satelliteNodes, int pointerType, int 
 
     QList< QPair<QString, QPointF> > starNodes;
     for (int i = 1; i <= satelliteNodes; i++) {
+        QPointer position = QPointF(sin(i * 2 * boost::math::constants::pi<double>() / satelliteNodes)*radius,
+                                    cos(i * 2 * boost::math::constants::pi<double>() / satelliteNodes)*radius)
+                            + center;
         starNodes << qMakePair(
                       QString("%1").arg(i),
-                      QPointF(sin(i * 2 * PI_ / satelliteNodes)*radius, cos(i * 2 * PI_ / satelliteNodes)*radius) + center
+                      position
                   );
     }
     QList< DataPtr > nodeList = graph->addDataList(starNodes, dataType);
 
-    // middle
+    // center
     nodeList.prepend(graph->addData(QString("center"), center, dataType));
 
     // connect circle nodes
@@ -295,7 +299,7 @@ void GenerateGraphWidget::generateCircle(int nodes, int pointerType, int dataTyp
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
-    int radius = 50 * nodes / (2 * PI_);
+    int radius = 50 * nodes / (2 * boost::math::constants::pi<double>());
 
     if (! graphDoc_) {
         return;
@@ -311,9 +315,12 @@ void GenerateGraphWidget::generateCircle(int nodes, int pointerType, int dataTyp
 
     // create mesh nodes, store them in map
     for (int i = 1; i <= nodes; i++) {
+        QPointF position = QPointF( sin(i * 2 * boost::math::constants::pi<double>() / nodes)*radius,
+                                    cos(i * 2 * boost::math::constants::pi<double>() / nodes)*radius)
+                           + center;
         circleNodes << qMakePair(
                         QString("%1").arg(i),
-                        QPointF(sin(i * 2 * PI_ / nodes)*radius, cos(i * 2 * PI_ / nodes)*radius) + center
+                        position
                     );
     }
     QList< DataPtr > nodeList = graph->addDataList(circleNodes, dataType);
