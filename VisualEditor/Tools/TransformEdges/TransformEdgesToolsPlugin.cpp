@@ -21,6 +21,7 @@
 #include "../ToolsPluginInterface.h"
 #include <CoreTypes.h>
 #include <Document.h>
+#include <DocumentManager.h>
 #include <DataStructure.h>
 #include <DataStructurePluginInterface.h>
 
@@ -55,17 +56,19 @@ TransformEdgesToolPlugin::~TransformEdgesToolPlugin()
 
 }
 
-QString TransformEdgesToolPlugin::run(QObject* doc) const
+void TransformEdgesToolPlugin::run(Document *document) const
 {
-    Document* graphDoc = qobject_cast<Document*> (doc);
+    if (document == 0) {
+        document = DocumentManager::self().activeDocument();
+    }
 
-    QPointer<TransformEdgesWidget> dialog = new TransformEdgesWidget(graphDoc, 0);
+    QPointer<TransformEdgesWidget> dialog = new TransformEdgesWidget(document, 0);
 
-    QList< DataStructurePtr > dsList = graphDoc->dataStructures();
+    QList< DataStructurePtr > dsList = document->dataStructures();
     QStringList dsNames;
 
     // be sure that only graph-datastructures are accessed by this plugin
-    if (graphDoc->backend()->internalName() == "Graph") {
+    if (document->backend()->internalName() == "Graph") {
         foreach(DataStructurePtr ds, dsList) {
             dsNames << ds->name();
         }
@@ -73,6 +76,6 @@ QString TransformEdgesToolPlugin::run(QObject* doc) const
 
     dialog->addDataStructures(dsNames);
     dialog->exec();
-    return "";
+    return;
 }
 

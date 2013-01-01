@@ -26,12 +26,11 @@ class QObject;
 class TransformEdgesToolPlugin : public ToolsPluginInterface
 {
     Q_OBJECT
-//   Q_INTERFACES(ToolsPluginInterface)
 
 public:
     TransformEdgesToolPlugin(QObject* parent, const QList< QVariant >&);
     ~TransformEdgesToolPlugin();
-    QString run(QObject* parent = 0) const;
+    void run(Document *document = 0) const;
 };
 
 #endif // TRANSFORMEDGESTOOLSPLUGIN_H

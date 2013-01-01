@@ -30,7 +30,7 @@ class AssignValuesToolPlugin : public ToolsPluginInterface
 public:
     AssignValuesToolPlugin(QObject* parent, const QList< QVariant >&);
     ~AssignValuesToolPlugin();
-    QString run(QObject* parent = 0) const;
+    void run(Document *document = 0) const;
 };
 
 #endif // ASSIGNVALUESTOOLSPLUGIN_H

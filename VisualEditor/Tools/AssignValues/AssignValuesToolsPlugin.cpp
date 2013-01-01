@@ -22,6 +22,7 @@
 #include <CoreTypes.h>
 #include <Document.h>
 #include <DataStructure.h>
+#include <DocumentManager.h>
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -54,13 +55,15 @@ AssignValuesToolPlugin::~AssignValuesToolPlugin()
 
 }
 
-QString AssignValuesToolPlugin::run(QObject* doc) const
+void AssignValuesToolPlugin::run(Document *document) const
 {
-    Document* graphDoc = qobject_cast<Document*> (doc);
-    QPointer<AssignValuesWidget> dialog = new AssignValuesWidget(graphDoc);
+    if (document == 0) {
+        document = DocumentManager::self().activeDocument();
+    }
+    QPointer<AssignValuesWidget> dialog = new AssignValuesWidget(document);
 
     // data structures to selector box
-    QList< DataStructurePtr > dsList = graphDoc->dataStructures();
+    QList< DataStructurePtr > dsList = document->dataStructures();
     QStringList dsNames;
     foreach(DataStructurePtr ds, dsList) {
         dsNames << ds->name();
@@ -68,5 +71,5 @@ QString AssignValuesToolPlugin::run(QObject* doc) const
     dialog->addDataStructures(dsNames);
 
     dialog->exec();
-    return "";
+    return;
 }

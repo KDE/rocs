@@ -450,7 +450,7 @@ void MainWindow::setupToolsPluginsAction()
     }
 
     foreach(QAction* action, _toolsPlugins) {
-        ToolsPluginInterface *plugin = ToolManager::instance()->plugins().at(action->data().toInt());
+        ToolsPluginInterface *plugin = ToolManager::self().plugins().at(action->data().toInt());
         action->setEnabled(
                 DocumentManager::self().activeDocument() &&
                 plugin->supportedDataStructures().contains(DocumentManager::self().activeDocument()->backend()->internalName())
@@ -459,10 +459,10 @@ void MainWindow::setupToolsPluginsAction()
 }
 
 void MainWindow::createToolsPluginsAction(){
-    QAction* action = 0;
-    QList<ToolsPluginInterface*> avaliablePlugins =  ToolManager::instance()->plugins();
+    QAction *action = 0;
+    QList<ToolsPluginInterface*> availablePlugins =  ToolManager::self().plugins();
     int count = 0;
-    foreach(ToolsPluginInterface * plugin, avaliablePlugins) {
+    foreach(ToolsPluginInterface * plugin, availablePlugins) {
         action = new KAction(plugin->displayName(), this);
         action->setData(count++);
         connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
@@ -934,7 +934,7 @@ void MainWindow::runToolPlugin()
     if (! action) {
         return;
     }
-    if (ToolsPluginInterface *plugin =  ToolManager::instance()->plugins().value(action->data().toInt())) {
+    if (ToolsPluginInterface *plugin =  ToolManager::self().plugins().value(action->data().toInt())) {
         plugin->run(DocumentManager::self().activeDocument());
     }
 }

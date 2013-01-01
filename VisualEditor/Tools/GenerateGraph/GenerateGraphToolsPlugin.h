@@ -30,7 +30,7 @@ class GenerateGraphToolPlugin : public ToolsPluginInterface
 public:
     GenerateGraphToolPlugin(QObject* parent, const QList< QVariant >&);
     ~GenerateGraphToolPlugin();
-    QString run(QObject* parent = 0) const;
+    void run(Document *document = 0) const;
 };
 
 #endif // GENERATEGRAPHTOOLSPLUGIN_H

@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2013  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -20,34 +20,55 @@
 
 #ifndef TOOLMANAGER_H
 #define TOOLMANAGER_H
-#include <QList>
 
 #include "ToolsPluginInterface.h"
+#include <QList>
 
 class KPluginInfo;
+class ToolManagerPrivate;
 
-class VISUALEDITOR_EXPORT ToolManager: public QObject
+/**
+ * \class ToolManager
+ *
+ * This singelton class provides access to all available visual graph editor tools.
+ */
+class VISUALEDITOR_EXPORT ToolManager
+    : public QObject
 {
     Q_OBJECT
-private:
-    ToolManager();
 
-    static ToolManager * self;
-
-    /**The D Pointer*/
-    class ToolManagerPrivate * _d;
 public:
+    /**
+     * Returns self reference to tool manager. First call of this method loads all available tools.
+     *
+     * \return self reference
+     */
+    static ToolManager & self();
 
-    static ToolManager * instance();
+    /**
+     * Return list of available tool plugins.
+     */
+    QList<ToolsPluginInterface*> plugins() const;
+
+    /**
+     * \return plugin info for specified tool plugin.
+     */
+    KPluginInfo pluginInfo(ToolsPluginInterface* plugin);
+
+private:
+    /**
+     * \internal
+     * Private constructor.
+     */
+    ToolManager();
     ~ToolManager();
 
-    bool loadPlugin(QString arg1);
+    // make non-copyable
+    ToolManager(const ToolManager&);
+    void operator=(const ToolManager&);
 
-    void loadPlugins();
-
-    QList <ToolsPluginInterface*> plugins();
-
-    KPluginInfo pluginInfo(ToolsPluginInterface * plugin);
+    // d pointer
+    const QScopedPointer<ToolManagerPrivate> d;
 };
 
 #endif

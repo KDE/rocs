@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2013  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -25,113 +25,121 @@
 #include <KServiceTypeTrader>
 #include <KPluginInfo>
 #include <KDebug>
-#include <KMessageBox>
 
 class ToolManagerPrivate
 {
 public:
-    ToolManagerPrivate() {
-        toolsPluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/ToolPlugin"));
+    typedef KPluginInfo::List KPluginList;
+
+    QObject *_parent;
+    bool _initialized;
+    KPluginList _toolsPluginsInfo;
+    QMap<KPluginInfo, ToolsPluginInterface*> _toolsPluginsMap;
+
+    ToolManagerPrivate(QObject *parent)
+        : _parent(parent)
+        , _initialized(false)
+    {
+        _toolsPluginsInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/ToolPlugin"));
     }
 
-    ~ToolManagerPrivate() {
-
+    ~ToolManagerPrivate()
+    {
     }
-    KPluginInfo PluginInfoFromName(const QString &arg1) {
-        foreach(KPluginInfo info, toolsPluginsInfo) {
-            if (info.name() == arg1) {
+
+    void lazyInit()
+    {
+        if (!_initialized) {
+            _initialized = true;
+            loadPlugins();
+        }
+    }
+
+    bool loadPlugin(QString name)
+    {
+        KPluginInfo kpi = PluginInfoFromName(name);
+
+        if (kpi.isValid()) {
+            QString error;
+            ToolsPluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<ToolsPluginInterface>(
+                                                    QString::fromLatin1("Rocs/ToolPlugin"),
+                                                    QString::fromLatin1("[Name]=='%1'").arg(name),
+                                                    _parent,
+                                                    QVariantList(),
+                                                    &error);
+
+            if (plugin) {
+                _toolsPluginsMap.insert(kpi, plugin);
+                kpi.setPluginEnabled(true);
+                return true;
+            }
+
+            else {
+                kWarning() << "Error while loading plugin: " << name << error;
+            }
+
+        } else {
+            kWarning() << "Error while loading tool plugin " << name;
+        }
+        return false;
+    }
+
+    void loadPlugins()
+    {
+        foreach(const KPluginInfo &info, _toolsPluginsInfo) {
+            loadPlugin(info.name());
+        }
+    }
+
+    KPluginInfo PluginInfoFromName(const QString &name)
+    {
+        foreach(const KPluginInfo &info, _toolsPluginsInfo) {
+            if (info.name() == name) {
                 return info;
             }
         }
         return KPluginInfo();
     }
-    typedef KPluginInfo::List KPluginList;
-    KPluginList toolsPluginsInfo;
-
-    QMap<KPluginInfo,  ToolsPluginInterface*> toolsPluginsMap;
 };
 
-
-ToolManager * ToolManager::self = 0;
-
-
-ToolManager * ToolManager::instance()
+ToolManager & ToolManager::self()
 {
-    if (ToolManager::self == 0) {
-        ToolManager::self = new ToolManager;
-    }
-    return ToolManager::self;
+    static ToolManager instance;
+    instance.d->lazyInit();
+    return instance;
 }
 
 
 ToolManager::ToolManager()
+    : d(new ToolManagerPrivate(this))
 {
-    _d = new ToolManagerPrivate();
 }
 
 
 ToolManager::~ToolManager()
 {
-    delete _d;
 }
 
 
-bool ToolManager::loadPlugin(QString name)
+KPluginInfo ToolManager::pluginInfo(ToolsPluginInterface *plugin)
 {
-    KPluginInfo kpi =  _d->PluginInfoFromName(name);
-
-    if (kpi.isValid()) {
-        QString error;
-
-        ToolsPluginInterface * plugin = KServiceTypeTrader::createInstanceFromQuery<ToolsPluginInterface>(QString::fromLatin1("Rocs/ToolPlugin"), QString::fromLatin1("[Name]=='%1'").arg(name), this, QVariantList(), &error);
-
-        if (plugin) {
-            _d->toolsPluginsMap.insert(kpi, plugin);
-            kpi.setPluginEnabled(true);
-            return true;
-        }
-
-        else {
-            kWarning() << "error loading plugin: " << name << error;
-        }
-
-    } else {
-        kWarning() << "Error loading tool plugin " << name;
+    if (d->_toolsPluginsMap.keys(plugin).length() == 0) {
+        d->loadPlugin(plugin->displayName());
     }
-    return false;
+
+    return d->_toolsPluginsMap.key(plugin);
 }
 
 
-void ToolManager::loadPlugins()
+QList<ToolsPluginInterface *> ToolManager::plugins() const
 {
-    foreach(KPluginInfo info, _d->toolsPluginsInfo) {
-        loadPlugin(info.name());
-    }
-}
+    QList<ToolsPluginInterface *> plugins;
 
-
-KPluginInfo ToolManager::pluginInfo(ToolsPluginInterface* plugin)
-{
-    return _d->toolsPluginsMap.key(plugin);
-}
-
-
-QList< ToolsPluginInterface* > ToolManager::plugins()
-{
-    loadPlugins();
-    QList < ToolsPluginInterface * > value;
-
-    QMap<KPluginInfo, ToolsPluginInterface*>::const_iterator iter;
-    for (iter = _d->toolsPluginsMap.constBegin(); iter != _d->toolsPluginsMap.constEnd(); ++iter) {
+    QMap<KPluginInfo, ToolsPluginInterface *>::const_iterator iter;
+    for (iter = d->_toolsPluginsMap.constBegin(); iter != d->_toolsPluginsMap.constEnd(); ++iter) {
         if (iter.key().isPluginEnabled()){
-            value.append(_d->toolsPluginsMap[iter.key()]);
+            plugins.append(d->_toolsPluginsMap[iter.key()]);
         }
     }
-    return value;
-}
-
-
-KPluginInfo pluginInfo(const ToolsPluginInterface * /*plugin*/)
-{
-    return KPluginInfo();
+    return plugins;
 }

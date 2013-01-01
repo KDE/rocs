@@ -42,8 +42,8 @@ static const KAboutData aboutdata("rocs_generategraphplugin", 0, ki18nc("@Title 
 K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<GenerateGraphToolPlugin>();)
 K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))
 
-GenerateGraphToolPlugin::GenerateGraphToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
-    ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
+GenerateGraphToolPlugin::GenerateGraphToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/)
+:   ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
 {
 
 }
@@ -53,12 +53,12 @@ GenerateGraphToolPlugin::~GenerateGraphToolPlugin()
 
 }
 
-QString GenerateGraphToolPlugin::run(QObject* doc) const
+void GenerateGraphToolPlugin::run(Document *document) const
 {
     QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget();
     dialog->exec();
 
-    return "";
+    return;
 }
 
 #include "GenerateGraphToolsPlugin.moc"

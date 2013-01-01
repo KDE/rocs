@@ -4,6 +4,7 @@
     Copyright 2002-2004  Olivier Goffart        <ogoffart@kde.org>
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2013       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,25 +21,23 @@
 */
 
 #include "ToolsPluginInterface.h"
-
-
-#include <kplugininfo.h>
 #include "ToolManager.h"
+#include <KPluginInfo>
+#include <KDebug>
 
-
-class  ToolsPluginInterface::Private
+class ToolsPluginInterfacePrivate
 {
 public:
-    KPluginInfo *_pluginInfo;
-    QStringList addressBookFields;
-    QString indexField;
+    // currently not needed
 };
 
-ToolsPluginInterface::ToolsPluginInterface(const KComponentData& instance, QObject* parent)
-    : QObject(parent), KXMLGUIClient(), d(new Private)
+
+ToolsPluginInterface::ToolsPluginInterface(const KComponentData &instance, QObject *parent)
+    : QObject(parent)
+    , KXMLGUIClient()
+    , d(new ToolsPluginInterfacePrivate)
 {
     setComponentData(instance);
-
 }
 
 ToolsPluginInterface::~ToolsPluginInterface()
@@ -46,7 +45,7 @@ ToolsPluginInterface::~ToolsPluginInterface()
     delete d;
 }
 
-QString ToolsPluginInterface::pluginId()
+QString ToolsPluginInterface::pluginId() const
 {
     return QString::fromLatin1(metaObject()->className());
 }
@@ -57,20 +56,12 @@ QString ToolsPluginInterface::displayName()
     return pluginInfo().isValid() ? pluginInfo().name() : QString();
 }
 
-QString ToolsPluginInterface::pluginIcon()
-{
-    return pluginInfo().isValid() ? pluginInfo().icon() : QString();
-}
-
-
 QStringList ToolsPluginInterface::supportedDataStructures()
 {
-    KPluginInfo info = pluginInfo();
-    return info.property(QLatin1String("X-Rocs-SupportedDataStructures")).toStringList();
+    return pluginInfo().property(QLatin1String("X-Rocs-SupportedDataStructures")).toStringList();
 }
-
 
 KPluginInfo ToolsPluginInterface::pluginInfo()
 {
-    return ToolManager::instance()->pluginInfo(this);
+    return ToolManager::self().pluginInfo(this);
 }
