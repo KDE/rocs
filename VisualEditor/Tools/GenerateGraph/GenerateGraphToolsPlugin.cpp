@@ -21,18 +21,10 @@
 #include "../ToolsPluginInterface.h"
 #include <CoreTypes.h>
 #include <Document.h>
-#include <DataStructure.h>
-
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtGui/QGridLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QFont>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QApplication>
+#include <DocumentManager.h>
 
 #include <KAboutData>
-#include <kgenericfactory.h>
+#include <KGenericFactory>
 #include <KLocalizedString>
 
 #include <map>
@@ -55,7 +47,10 @@ GenerateGraphToolPlugin::~GenerateGraphToolPlugin()
 
 void GenerateGraphToolPlugin::run(Document *document) const
 {
-    QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget();
+    if (document == 0) {
+        document = DocumentManager::self().activeDocument();
+    }
+    QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget(document);
     dialog->exec();
 
     return;

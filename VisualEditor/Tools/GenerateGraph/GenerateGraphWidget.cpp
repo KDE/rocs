@@ -63,8 +63,8 @@ typedef boost::iterator_property_map < PositionVec::iterator,
         PositionMap;
 
 
-GenerateGraphWidget::GenerateGraphWidget(QWidget *parent)
-:   KDialog(parent)
+GenerateGraphWidget::GenerateGraphWidget(Document *document)
+:   KDialog()
 {
     defaultIdentifiers << QString("MeshGraph") << QString("StarGraph");
     defaultIdentifiers << QString("CircleGraph") << QString("RandomGraph");
@@ -104,8 +104,6 @@ GenerateGraphWidget::GenerateGraphWidget(QWidget *parent)
     ui->GNPGeneratorSeed->setVisible(false);
     ui->label_randomTreeGeneratorSeed->setVisible(false);
     ui->randomTreeGeneratorSeed->setVisible(false);
-
-    Document *document = DocumentManager::self().activeDocument();
 
     foreach (int pointerTypeID, document->pointerTypeList()) {
         PointerTypePtr pointerType = document->pointerType(pointerTypeID);
