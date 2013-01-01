@@ -16,34 +16,34 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "DataStructurePluginInterface.h"
+#include "DataStructureBackendInterface.h"
 #include "DataStructureBackendManager.h"
 
-DataStructurePluginInterface::DataStructurePluginInterface(const KComponentData& /*instance*/, QObject* parent)
+DataStructureBackendInterface::DataStructureBackendInterface(const KComponentData& /*instance*/, QObject* parent)
     : QObject(parent)
 {
 }
 
-DataStructurePluginInterface::~DataStructurePluginInterface()
+DataStructureBackendInterface::~DataStructureBackendInterface()
 {
 }
 
 
-QLayout* DataStructurePluginInterface::pointerExtraProperties(PointerPtr arg1, QWidget* arg2) const
-{
-    Q_UNUSED(arg1);
-    Q_UNUSED(arg2);
-    return 0;
-}
-
-QLayout* DataStructurePluginInterface::dataStructureExtraProperties(DataStructurePtr arg1, QWidget* arg2) const
+QLayout * DataStructureBackendInterface::pointerExtraProperties(PointerPtr arg1, QWidget* arg2) const
 {
     Q_UNUSED(arg1);
     Q_UNUSED(arg2);
     return 0;
 }
 
-QLayout* DataStructurePluginInterface::dataExtraProperties(DataPtr arg1, QWidget* arg2) const
+QLayout * DataStructureBackendInterface::dataStructureExtraProperties(DataStructurePtr arg1, QWidget* arg2) const
+{
+    Q_UNUSED(arg1);
+    Q_UNUSED(arg2);
+    return 0;
+}
+
+QLayout * DataStructureBackendInterface::dataExtraProperties(DataPtr arg1, QWidget* arg2) const
 {
     Q_UNUSED(arg1);
     Q_UNUSED(arg2);
@@ -51,7 +51,7 @@ QLayout* DataStructurePluginInterface::dataExtraProperties(DataPtr arg1, QWidget
 }
 
 
-QString DataStructurePluginInterface::name()
+QString DataStructureBackendInterface::name()
 {
     if (DataStructureBackendManager::self().backendInfo(this).isValid()) {
         return DataStructureBackendManager::self().backendInfo(this).name();
@@ -60,7 +60,7 @@ QString DataStructurePluginInterface::name()
 }
 
 
-QString DataStructurePluginInterface::internalName()
+QString DataStructureBackendInterface::internalName()
 {
     KPluginInfo pluginInfo = DataStructureBackendManager::self().backendInfo(this);
     if (pluginInfo.isValid()) {

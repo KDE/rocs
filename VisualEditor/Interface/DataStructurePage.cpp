@@ -31,7 +31,7 @@
 #include <KPushButton>
 #include <KComboBox>
 #include "DataStructureBackendManager.h"
-#include <DataStructurePluginInterface.h>
+#include <DataStructureBackendInterface.h>
 
 DataStructurePage::DataStructurePage(QWidget* parent)
     : QWidget(parent)

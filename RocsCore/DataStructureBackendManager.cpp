@@ -18,7 +18,7 @@
 */
 
 #include "DataStructureBackendManager.h"
-#include "DataStructurePluginInterface.h"
+#include "DataStructureBackendInterface.h"
 
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
@@ -47,8 +47,8 @@ public:
     QObject *_parent;
     bool _initialized;
     KPluginList _pluginInfo;
-    DataStructurePluginInterface *_currentPlugin;
-    QHash<QString, DataStructurePluginInterface*> _pluginList;
+    DataStructureBackendInterface *_currentPlugin;
+    QHash<QString, DataStructureBackendInterface*> _pluginList;
 
     DataStructureBackendManagerPrivate(QObject *parent)
         : _parent(parent)
@@ -63,7 +63,7 @@ public:
         _currentPlugin = 0;
 
         // clear plugins
-        qDeleteAll<QHash<QString, DataStructurePluginInterface*>::iterator>(_pluginList.begin(), _pluginList.end());
+        qDeleteAll<QHash<QString, DataStructureBackendInterface*>::iterator>(_pluginList.begin(), _pluginList.end());
         _pluginList.clear();
     }
 
@@ -83,7 +83,7 @@ public:
         return dataStructure;
     }
 
-    KPluginInfo pluginInfo(DataStructurePluginInterface *plugin)
+    KPluginInfo pluginInfo(DataStructureBackendInterface *plugin)
     {
         QString name = _pluginList.key(plugin);
         foreach(const KPluginInfo& info, _pluginInfo) {
@@ -102,7 +102,7 @@ public:
     DataStructurePtr createDataStructure(Document *arg1 , const QString &pluginName)
     {
         if (!pluginName.isEmpty()) {
-            if (DataStructurePluginInterface *plugin = _pluginList.value(pluginName)) {
+            if (DataStructureBackendInterface *plugin = _pluginList.value(pluginName)) {
                 return plugin->createDataStructure(arg1);
             }
         } else if (_currentPlugin) {
@@ -111,7 +111,7 @@ public:
         return DataStructurePtr();
     }
 
-    DataStructurePluginInterface *backend(const QString &pluginIdentifier)
+    DataStructureBackendInterface * backend(const QString &pluginIdentifier)
     {
         if (_pluginList.contains(pluginIdentifier)) {
             return _pluginList[pluginIdentifier];
@@ -121,7 +121,7 @@ public:
 
     void setActivePlugin(const QString &pluginIdentifier)
     {
-        if (DataStructurePluginInterface *plg = backend(pluginIdentifier)) {
+        if (DataStructureBackendInterface *plg = backend(pluginIdentifier)) {
             _currentPlugin = plg;
         }
     }
@@ -141,8 +141,8 @@ public:
             }
 
             QString error;
-            DataStructurePluginInterface *plugin =
-                KServiceTypeTrader::createInstanceFromQuery<DataStructurePluginInterface>(
+            DataStructureBackendInterface *plugin =
+                KServiceTypeTrader::createInstanceFromQuery<DataStructureBackendInterface>(
                                         QString::fromLatin1("Rocs/DataStructurePlugin"),
                                         QString::fromLatin1("[Name]=='%1'").arg(iter->name()),
                                         _parent,
@@ -167,7 +167,7 @@ public:
             return;
         }
 
-        QHash<QString, DataStructurePluginInterface*>::const_iterator iter = _pluginList.constBegin();
+        QHash<QString, DataStructureBackendInterface*>::const_iterator iter = _pluginList.constBegin();
         while (iter != _pluginList.constEnd()) {
             if (iter.value()->internalName() == QLatin1String("Graph")){
                 _currentPlugin = iter.value();
@@ -200,7 +200,7 @@ DataStructureBackendManager & DataStructureBackendManager::self()
 
 void DataStructureBackendManager::setBackend(const QString &pluginIdentifier)
 {
-    DataStructurePluginInterface* plugin = d->backend(pluginIdentifier);
+    DataStructureBackendInterface* plugin = d->backend(pluginIdentifier);
     if (!plugin) {
         kError() << "Could not set \"" << pluginIdentifier << "\" as current backend, aborting.";
         return;
@@ -223,7 +223,7 @@ DataStructurePtr DataStructureBackendManager::createDataStructure(Document *pare
     return d->createDataStructure(parent, pluginName);
 }
 
-KPluginInfo DataStructureBackendManager::backendInfo(DataStructurePluginInterface *plugin) const
+KPluginInfo DataStructureBackendManager::backendInfo(DataStructureBackendInterface *plugin) const
 {
     return d->pluginInfo(plugin);
 }
@@ -233,19 +233,19 @@ const QStringList DataStructureBackendManager::backends() const
     return d->_pluginList.keys();
 }
 
-DataStructurePluginInterface * DataStructureBackendManager::activeBackend() const
+DataStructureBackendInterface * DataStructureBackendManager::activeBackend() const
 {
     return d->_currentPlugin;
 }
 
-DataStructurePluginInterface * DataStructureBackendManager::backend(const QString &internalName) const
+DataStructureBackendInterface * DataStructureBackendManager::backend(const QString &internalName) const
 {
     return d->backend(internalName);
 }
 
 QGraphicsItem * DataStructureBackendManager::dataItem(DataPtr data) const
 {
-    if (DataStructurePluginInterface *plg = data->dataStructure()->document()->backend()) {
+    if (DataStructureBackendInterface *plg = data->dataStructure()->document()->backend()) {
         return plg->dataItem(data);
     }
     return d->_currentPlugin->dataItem(data);
@@ -253,7 +253,7 @@ QGraphicsItem * DataStructureBackendManager::dataItem(DataPtr data) const
 
 QGraphicsItem * DataStructureBackendManager::pointerItem(PointerPtr pointer) const
 {
-    if (DataStructurePluginInterface *plg = pointer->dataStructure()->document()->backend()) {
+    if (DataStructureBackendInterface *plg = pointer->dataStructure()->document()->backend()) {
         return plg->pointerItem(pointer);
     }
     return d->_currentPlugin->pointerItem(pointer);;
@@ -261,7 +261,7 @@ QGraphicsItem * DataStructureBackendManager::pointerItem(PointerPtr pointer) con
 
 QLayout * DataStructureBackendManager::pointerExtraProperties(PointerPtr pointer, QWidget *parent) const
 {
-    if (DataStructurePluginInterface *plg = pointer->dataStructure()->document()->backend()) {
+    if (DataStructureBackendInterface *plg = pointer->dataStructure()->document()->backend()) {
         return plg->pointerExtraProperties(pointer, parent);
     }
     return d->_currentPlugin->pointerExtraProperties(pointer, parent);
@@ -269,7 +269,7 @@ QLayout * DataStructureBackendManager::pointerExtraProperties(PointerPtr pointer
 
 QLayout * DataStructureBackendManager::dataStructureExtraProperties(DataStructurePtr dataStructure, QWidget *parent) const
 {
-    if (DataStructurePluginInterface *plg = dataStructure->document()->backend()) {
+    if (DataStructureBackendInterface *plg = dataStructure->document()->backend()) {
         return plg->dataStructureExtraProperties(dataStructure, parent);
     }
     return d->_currentPlugin->dataStructureExtraProperties(dataStructure, parent);
@@ -277,7 +277,7 @@ QLayout * DataStructureBackendManager::dataStructureExtraProperties(DataStructur
 
 QLayout * DataStructureBackendManager::dataExtraProperties(DataPtr data, QWidget *parent) const
 {
-    if (DataStructurePluginInterface *plg = data->dataStructure()->document()->backend()) {
+    if (DataStructureBackendInterface *plg = data->dataStructure()->document()->backend()) {
         return plg->dataExtraProperties(data, parent);
     }
     return d->_currentPlugin->dataExtraProperties(data, parent);

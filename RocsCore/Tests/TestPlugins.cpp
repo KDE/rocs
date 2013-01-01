@@ -24,7 +24,7 @@
 #include "Document.h"
 #include "DocumentManager.h"
 #include "DataStructure.h"
-#include "DataStructurePluginInterface.h"
+#include "DataStructureBackendInterface.h"
 #include "CoreTypes.h"
 #include <QDebug>
 
@@ -56,7 +56,7 @@ void TestPlugins::standardPluginsLoaded()
 
 void TestPlugins::createGraph()
 {
-    DataStructurePluginInterface * pl = DataStructureBackendManager::self().backend("Graph");
+    DataStructureBackendInterface * pl = DataStructureBackendManager::self().backend("Graph");
     QVERIFY2(pl,"Could create data structure of type Graph");
 
     DataStructureBackendManager::self().setBackend(pl->internalName());
@@ -67,7 +67,7 @@ void TestPlugins::createGraph()
 
 void TestPlugins::createList()
 {
-    DataStructurePluginInterface * pl = DataStructureBackendManager::self().backend("LinkedList");
+    DataStructureBackendInterface * pl = DataStructureBackendManager::self().backend("LinkedList");
     QVERIFY2(pl,"Could create data structure of type LinkedList");
 
     DataStructureBackendManager::self().setBackend(pl->internalName());
@@ -78,7 +78,7 @@ void TestPlugins::createList()
 
 void TestPlugins::createRootedTree()
 {
-    DataStructurePluginInterface * pl = DataStructureBackendManager::self().backend("RootedTree");
+    DataStructureBackendInterface * pl = DataStructureBackendManager::self().backend("RootedTree");
     QVERIFY2(pl,"Could create data structure of type RootedTree");
 
     DataStructureBackendManager::self().setBackend(pl->internalName());
@@ -89,12 +89,10 @@ void TestPlugins::createRootedTree()
 
 void TestPlugins::convertGraphToLinkedList()
 {
-    DataStructurePluginInterface * plGraph = DataStructureBackendManager::self().backend("Graph");
-
+    DataStructureBackendInterface * plGraph = DataStructureBackendManager::self().backend("Graph");
     QVERIFY2(plGraph,"Graph plugin not found");
 
-    DataStructurePluginInterface * plList = DataStructureBackendManager::self().backend("LinkedList");
-
+    DataStructureBackendInterface * plList = DataStructureBackendManager::self().backend("LinkedList");
     QVERIFY2(plList,"LinkedList plugin not found");
 
     DataStructureBackendManager::self().setBackend(plGraph->internalName());
@@ -120,12 +118,10 @@ void TestPlugins::convertGraphToLinkedList()
 void TestPlugins::convertGraphToRootedTree()
 {
 
-    DataStructurePluginInterface * plGraph = DataStructureBackendManager::self().backend("Graph");
-
+    DataStructureBackendInterface *plGraph = DataStructureBackendManager::self().backend("Graph");
     QVERIFY2(plGraph,"Graph plugin not found");
 
-    DataStructurePluginInterface * plTree = DataStructureBackendManager::self().backend("RootedTree");
-
+    DataStructureBackendInterface *plTree = DataStructureBackendManager::self().backend("RootedTree");
     QVERIFY2(plTree,"Rooted plugin not found");
 
     DataStructureBackendManager::self().setBackend(plGraph->internalName());

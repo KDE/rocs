@@ -27,7 +27,7 @@
 #include "PointerType.h"
 #include "DataType.h"
 #include "DataStructureBackendManager.h"
-#include "DataStructurePluginInterface.h"
+#include "DataStructureBackendInterface.h"
 #include "QtScriptBackend.h"
 #include "ConcurrentHelpClasses.h"
 
@@ -61,7 +61,7 @@ public:
     bool _modified;
     bool _saved;
     DataStructurePtr _activeDataStructure;
-    QPointer<DataStructurePluginInterface> _backend;
+    QPointer<DataStructureBackendInterface> _backend;
     QtScriptBackend* _engineBackend;
     QList< DataStructurePtr > _dataStructures;
 
@@ -598,14 +598,14 @@ DataStructurePtr Document::activeDataStructure() const
     return d->_activeDataStructure;
 }
 
-DataStructurePluginInterface * Document::backend() const
+DataStructureBackendInterface * Document::backend() const
 {
     return d->_backend;
 }
 
 void Document::setBackend(const QString &pluginIdentifier)
 {
-    DataStructurePluginInterface * plugin = DataStructureBackendManager::self().backend(pluginIdentifier);
+    DataStructureBackendInterface * plugin = DataStructureBackendManager::self().backend(pluginIdentifier);
     if (plugin) {
         d->_backend = plugin;
     }

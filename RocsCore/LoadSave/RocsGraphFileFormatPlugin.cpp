@@ -32,7 +32,7 @@
 #include <PointerType.h>
 #include <Modifiers/Topology.h>
 #include <DataStructureBackendManager.h>
-#include <DataStructurePluginInterface.h>
+#include <DataStructureBackendInterface.h>
 
 static const KAboutData pluginAboutData("rocs_rocsgraphfileformat",
                                         0,

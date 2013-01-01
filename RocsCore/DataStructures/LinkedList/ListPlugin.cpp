@@ -46,7 +46,7 @@ K_EXPORT_PLUGIN(DSPluginFactory(aboutdata))
 
 
 ListPlugin::ListPlugin(QObject* parent, const QList< QVariant >& /*args*/)
-    : DataStructurePluginInterface(DSPluginFactory::componentData(), parent)
+    : DataStructureBackendInterface(DSPluginFactory::componentData(), parent)
 {
 
 }

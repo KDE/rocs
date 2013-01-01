@@ -40,7 +40,7 @@ K_PLUGIN_FACTORY(DSPluginFactory, registerPlugin<GraphPlugin>();)
 K_EXPORT_PLUGIN(DSPluginFactory(aboutdata))
 
 GraphPlugin::GraphPlugin(QObject* parent, const QList<QVariant>& /*args*/)
-    : DataStructurePluginInterface(DSPluginFactory::componentData(), parent)
+    : DataStructureBackendInterface(DSPluginFactory::componentData(), parent)
 {
 }
 
@@ -104,7 +104,7 @@ QLayout* GraphPlugin::dataExtraProperties(DataPtr node, QWidget* parentWidget) c
 
 QLayout* GraphPlugin::pointerExtraProperties(PointerPtr arg1, QWidget* arg2) const
 {
-    return DataStructurePluginInterface::pointerExtraProperties(arg1, arg2);
+    return DataStructureBackendInterface::pointerExtraProperties(arg1, arg2);
 }
 
 QLayout* GraphPlugin::dataStructureExtraProperties(DataStructurePtr graph, QWidget* parentWidget) const

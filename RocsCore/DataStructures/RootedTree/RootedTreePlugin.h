@@ -19,12 +19,12 @@
 #ifndef ROOTEDTREEPLUGIN_H
 #define ROOTEDTREEPLUGIN_H
 
-#include "DataStructurePluginInterface.h"
+#include "DataStructureBackendInterface.h"
 #include "Document.h"
 
 namespace Rocs{
 
-class /*ROCSLIB_EXPORT*/ RootedTreePlugin : public DataStructurePluginInterface {
+class /*ROCSLIB_EXPORT*/ RootedTreePlugin : public DataStructureBackendInterface {
 
 public:
     RootedTreePlugin ( QObject* parent,  const QList<QVariant> & /* args*/ );

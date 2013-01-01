@@ -32,7 +32,7 @@ class Document;
 class Data;
 class Pointer;
 class DataStructureBackendManagerPrivate;
-class DataStructurePluginInterface;
+class DataStructureBackendInterface;
 
 
 /**
@@ -67,7 +67,7 @@ public:
      * \param plugin the data structure plugin object
      * \return plugin information
      */
-    KPluginInfo backendInfo(DataStructurePluginInterface *plugin) const;
+    KPluginInfo backendInfo(DataStructureBackendInterface *plugin) const;
 
     /**
      * Returns data structure backend identified by its identifier \p internalName.
@@ -75,7 +75,7 @@ public:
      * \param internalName the unique identifier for backend
      * \return the requested backend or '0' if backend is not found
      */
-    DataStructurePluginInterface * backend(const QString &internalName) const;
+    DataStructureBackendInterface * backend(const QString &internalName) const;
 
     /**
      * TODO change this method: it is not clear how the parent document is registered; the creation
@@ -106,7 +106,7 @@ public:
      *
      * \return data structure backend or '0' if no backend exists
      */
-    DataStructurePluginInterface * activeBackend() const;
+    DataStructureBackendInterface * activeBackend() const;
 
     /**
      * Generates graphics item for represenation of \p data at graph scene based on data structure

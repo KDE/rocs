@@ -26,7 +26,7 @@
 #include "model_GraphProperties.h"
 #include <QPainter>
 #include <DataStructureBackendManager.h>
-#include <DataStructurePluginInterface.h>
+#include <DataStructureBackendInterface.h>
 
 DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     : KDialog(parent)

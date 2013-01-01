@@ -41,7 +41,7 @@ K_EXPORT_PLUGIN( DSPluginFactory(aboutdata) )
 
 
 RootedTreePlugin::RootedTreePlugin(QObject* parent, const QList< QVariant >& /*args*/ )
-    : DataStructurePluginInterface(DSPluginFactory::componentData(), parent)
+    : DataStructureBackendInterface(DSPluginFactory::componentData(), parent)
 {
 }
 
@@ -75,7 +75,7 @@ QLayout* RootedTreePlugin::dataExtraProperties(DataPtr /*node*/, QWidget* /*pare
 
 QLayout*  RootedTreePlugin::pointerExtraProperties(PointerPtr arg1, QWidget* arg2) const
 {
-    return  DataStructurePluginInterface::pointerExtraProperties(arg1, arg2);
+    return  DataStructureBackendInterface::pointerExtraProperties(arg1, arg2);
 }
 
 QLayout*  RootedTreePlugin::dataStructureExtraProperties(DataStructurePtr graph, QWidget* parentWidget) const

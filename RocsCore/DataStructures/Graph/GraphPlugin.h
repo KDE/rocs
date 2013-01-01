@@ -20,12 +20,12 @@
 #ifndef GRAPHPLUGIN_H
 #define GRAPHPLUGIN_H
 #include "VisualEditorExport.h"
-#include "DataStructurePluginInterface.h"
+#include "DataStructureBackendInterface.h"
 #include "Document.h"
 
 namespace Rocs
 {
-class /*ROCSLIB_EXPORT*/ GraphPlugin : public DataStructurePluginInterface
+class /*ROCSLIB_EXPORT*/ GraphPlugin : public DataStructureBackendInterface
 {
 public:
     GraphPlugin(QObject* parent,  const QList<QVariant> & /* args*/);

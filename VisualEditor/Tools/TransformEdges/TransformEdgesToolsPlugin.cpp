@@ -23,7 +23,7 @@
 #include <Document.h>
 #include <DocumentManager.h>
 #include <DataStructure.h>
-#include <DataStructurePluginInterface.h>
+#include <DataStructureBackendInterface.h>
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>

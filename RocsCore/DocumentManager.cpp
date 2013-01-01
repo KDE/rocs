@@ -24,7 +24,7 @@
 #include "DataStructureBackendManager.h"
 #include "QtScriptBackend.h"
 #include "LoadSave/GraphFileBackendManager.h"
-#include "DataStructurePluginInterface.h"
+#include "DataStructureBackendInterface.h"
 
 
 #include <KDebug>

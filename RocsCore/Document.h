@@ -32,7 +32,7 @@
 
 class DocumentPrivate;
 class KUrl;
-class DataStructurePluginInterface;
+class DataStructureBackendInterface;
 class DataStructure;
 class QtScriptBackend;
 class QSvgRenderer;
@@ -118,7 +118,7 @@ public:
     /**
      * \return backend of this document
      */
-    DataStructurePluginInterface * backend() const;
+    DataStructureBackendInterface * backend() const;
 
     /**
      * Set data structure plugin for this document. This function is only safe if the document

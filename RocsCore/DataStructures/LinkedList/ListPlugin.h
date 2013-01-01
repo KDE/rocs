@@ -18,14 +18,14 @@
 
 #ifndef LISTPLUGIN_H
 #define LISTPLUGIN_H
-#include "DataStructurePluginInterface.h"
+#include "DataStructureBackendInterface.h"
 
 class Document;
 
 namespace Rocs
 {
 
-class ListPlugin : public DataStructurePluginInterface
+class ListPlugin : public DataStructureBackendInterface
 {
 public:
     ListPlugin(QObject* parent,  const QList<QVariant> & /* args*/);

@@ -99,7 +99,7 @@
 #include "ConfigureDefaultProperties.h"
 #include <IncludeManager.h>
 #include "ImporterExporterManager.h"
-#include <DataStructurePluginInterface.h>
+#include <DataStructureBackendInterface.h>
 #include <DataStructureBackendManager.h>
 #include "DocumentManager.h"
 #include "Tools/ToolManager.h"
@@ -484,7 +484,7 @@ void MainWindow::setupDSPluginsAction()
     // create actions and associate them to signal mapper
     QSignalMapper* mapper = new QSignalMapper(this);
     foreach(const QString& identifier, backends) {
-        DataStructurePluginInterface *plugin = DataStructureBackendManager::self().backend(identifier);
+        DataStructureBackendInterface *plugin = DataStructureBackendManager::self().backend(identifier);
         action = new KAction(plugin->name(), this);
         action->setCheckable(true);
         if (plugin->internalName() == DataStructureBackendManager::self().activeBackend()->internalName()) {
@@ -504,7 +504,7 @@ void MainWindow::setupDSPluginsAction()
 
 void MainWindow::setupDocumentsList()
 {
-    QList <QAction*> pluginList;
+    QList<QAction*> pluginList;
     QAction* action = 0;
     unplugActionList("Doc_List");
     QActionGroup * group = new QActionGroup(this);

@@ -17,8 +17,8 @@
 */
 
 
-#ifndef DATASTRUCTUREPLUGININTERFACE_H
-#define DATASTRUCTUREPLUGININTERFACE_H
+#ifndef DATASTRUCTUREBACKENDINTERFACE_H
+#define DATASTRUCTUREBACKENDINTERFACE_H
 
 #include <kplugininfo.h>
 
@@ -35,19 +35,18 @@ class Document;
 // KClasses
 class KComponentData;
 
-#include <boost/shared_ptr.hpp>
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
 
-class ROCSLIB_EXPORT DataStructurePluginInterface: public QObject
+class ROCSLIB_EXPORT DataStructureBackendInterface : public QObject
 {
     Q_OBJECT
 
 public:
-    DataStructurePluginInterface(const KComponentData& instance, QObject* parent);
+    DataStructureBackendInterface(const KComponentData& instance, QObject* parent);
 
-    virtual ~DataStructurePluginInterface();
+    virtual ~DataStructureBackendInterface();
     virtual DataStructurePtr createDataStructure(Document * parent) = 0;
     virtual DataStructurePtr convertToDataStructure(DataStructurePtr, Document* parent) = 0;
 
