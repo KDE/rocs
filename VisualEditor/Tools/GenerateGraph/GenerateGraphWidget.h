@@ -19,15 +19,11 @@
 #ifndef GENERATEGRAPHWIDGET_H
 #define GENERATEGRAPHWIDGET_H
 
+#include "ui_GenerateGraphWidget.h"
 #include <QWidget>
 #include <KDialog>
 
 class Document;
-
-namespace Ui
-{
-class GenerateGraphWidget;
-}
 
 class GenerateGraphWidget
 :   public KDialog
@@ -35,12 +31,12 @@ class GenerateGraphWidget
     Q_OBJECT
 
     enum GraphGenerator {
-        MESH,
-        STAR,
-        CIRCLE,
-        RANDOM,
-        ER_RANDOM,
-        RANDOM_TREE
+        MeshGraph,
+        StarGraph,
+        CircleGraph,
+        RandomEdgeGraph,
+        ErdosRenyiRandomGraph,
+        RandomTree
     };
 
 public:
@@ -148,10 +144,10 @@ private:
     int pointerType_;
     QString identifier_;
     GraphGenerator graphGenerator_;
-    Ui::GenerateGraphWidget *ui;
 
     QList<QString> defaultIdentifiers;
+
+    Ui::GenerateGraphWidget *ui;
 };
 
-#endif // GENERATEGRAPHWIDGET_H
-
+#endif

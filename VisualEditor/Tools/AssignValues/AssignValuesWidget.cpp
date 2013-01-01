@@ -276,5 +276,3 @@ void AssignValuesWidget::assignValues()
     }
     }
 }
-
-#include "AssignValuesWidget.moc"

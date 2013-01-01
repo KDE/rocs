@@ -70,7 +70,7 @@ GenerateGraphWidget::GenerateGraphWidget(Document *document)
     defaultIdentifiers << QString("CircleGraph") << QString("RandomGraph");
     defaultIdentifiers << QString("RandomGraph") << QString("RandomTreeGraph");
 
-    graphGenerator_ = MESH;
+    graphGenerator_ = MeshGraph;
 
     QWidget *widget = new QWidget(this);
     ui = new Ui::GenerateGraphWidget;
@@ -172,19 +172,16 @@ void GenerateGraphWidget::generateGraph()
     setGraphIdentifier(ui->identifier->text());
 
     switch (graphGenerator_) {
-    case MESH: {
+    case MeshGraph:
         generateMesh(ui->meshRows->value(), ui->meshColumns->value());
         break;
-    }
-    case CIRCLE: {
+    case CircleGraph:
         generateCircle(ui->circleNodes->value());
         break;
-    }
-    case STAR: {
+    case StarGraph:
         generateStar(ui->starSatelliteNodes->value());
         break;
-    }
-    case RANDOM: {
+    case RandomEdgeGraph:
         setSeed(ui->randomGeneratorSeed->value());
         generateRandomGraph(
             ui->randomNodes->value(),
@@ -192,8 +189,7 @@ void GenerateGraphWidget::generateGraph()
             ui->randomAllowSelfedges->isTristate()
         );
         break;
-    }
-    case ER_RANDOM: {
+    case ErdosRenyiRandomGraph:
         setSeed(ui->randomGeneratorSeed->value());
         generateErdosRenyiRandomGraph(
             ui->GNPNodes->value(),
@@ -201,14 +197,13 @@ void GenerateGraphWidget::generateGraph()
             ui->GNPAllowSelfedges->isTristate()
         );
         break;
-    }
-    case RANDOM_TREE: {
+    case RandomTree:
         setSeed(ui->randomTreeGeneratorSeed->value());
         generateRandomTreeGraph(
             ui->randomTreeNodes->value()
         );
-    }
-    default:     break;
+    default:
+        break;
     }
 
     close();
@@ -477,5 +472,3 @@ void GenerateGraphWidget::generateRandomTreeGraph(int nodes)
     Topology topology = Topology();
     topology.directedGraphDefaultTopology(graph);
 }
-
-#include "GenerateGraphWidget.moc"

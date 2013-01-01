@@ -19,6 +19,7 @@
 #ifndef TRANSFORMEDGESWIDGET_H
 #define TRANSFORMEDGESWIDGET_H
 
+#include "ui_TransformEdgesWidget.h"
 #include <QWidget>
 #include <KDialog>
 
@@ -29,13 +30,8 @@ class QGridLayout;
 class Document;
 class DataStructure;
 
-namespace Ui
-{
-class TransformEdgesWidget;
-}
-
-class TransformEdgesWidget :
-    public KDialog
+class TransformEdgesWidget
+    : public KDialog
 {
     Q_OBJECT
 
@@ -97,4 +93,4 @@ private:
     Ui::TransformEdgesWidget *ui;
 };
 
-#endif // TRANSFORMEDGESWIDGET_H
+#endif

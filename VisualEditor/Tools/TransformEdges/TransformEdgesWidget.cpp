@@ -271,6 +271,3 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
 
     return total;
 }
-
-
-#include "TransformEdgesWidget.moc"
