@@ -55,15 +55,10 @@ GenerateGraphToolPlugin::~GenerateGraphToolPlugin()
 
 QString GenerateGraphToolPlugin::run(QObject* doc) const
 {
-    Document* graphDoc = qobject_cast<Document*> (doc);
-
-    QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget(graphDoc);
+    QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget();
     dialog->exec();
 
     return "";
-
 }
 
-
-// Q_EXPORT_PLUGIN2(makeCompleteToolsPlugin, MakeCompleteToolsPlugin)
 #include "GenerateGraphToolsPlugin.moc"

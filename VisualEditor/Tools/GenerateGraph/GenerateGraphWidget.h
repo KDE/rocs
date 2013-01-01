@@ -22,7 +22,6 @@
 #include <QWidget>
 #include <KDialog>
 
-class QGridLayout;
 class Document;
 
 namespace Ui
@@ -30,12 +29,12 @@ namespace Ui
 class GenerateGraphWidget;
 }
 
-class GenerateGraphWidget :
-    public KDialog
+class GenerateGraphWidget
+:   public KDialog
 {
     Q_OBJECT
 
-    enum GraphType {
+    enum GraphGenerator {
         MESH,
         STAR,
         CIRCLE,
@@ -45,11 +44,49 @@ class GenerateGraphWidget :
     };
 
 public:
-    explicit GenerateGraphWidget(Document *graphDoc, QWidget *parent = 0);
+    explicit GenerateGraphWidget(QWidget *parent = 0);
     ~GenerateGraphWidget();
 
 public slots:
-    void setGraphType(int type);
+    /**
+     * Select graph generator by its index.
+     *
+     * \param index the index of the graph generator
+     */
+    void setGraphGenerator(int index);
+
+    /**
+     * Set seed for the internal random number generator.
+     *
+     * \param seed is the random number generator seed.
+     */
+    void setSeed(int seed);
+
+    /**
+     * Set the type of data elements for the generator.
+     *
+     * \param type is the DataType ID
+     */
+    void setDataType(int type);
+
+    /**
+     * Set the type of pointers for the generator.
+     *
+     * \param type is the DataType ID
+     */
+    void setPointerType(int type);
+
+    /**
+     * Set the unique graph identifier for the next generated graph.
+     * If \p identifier is already in use, the lexicographically next identifier will be used.
+     *
+     * \param identifier for the next generated graph
+     */
+    void setGraphIdentifier(const QString &identifier);
+
+    /**
+     * Generate the graph with the previously set configuration.
+     */
     void generateGraph();
 
 private:
@@ -57,22 +94,16 @@ private:
      * Generate circle graph with specified number of nodes.
      *
      * \param nodes is the number of nodes of the generated graph
-     * \param pointerType is the type of the pointers of the generated graph
-     * \param dataType is the type of the data elements of the generated graph
-     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
-    void generateCircle(int nodes, int pointerType, int dataType, const QString &identifier);
+    void generateCircle(int nodes);
 
     /**
      * Generate mesh graph with specified number of \p rows and \p columns.
      *
      * \param rows is the number of rows of the generated graph
      * \param columns is the number of columns of the generated graph
-     * \param pointerType is the type of the pointers of the generated graph
-     * \param dataType is the type of the data elements of the generated graph
-     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
-    void generateMesh(int rows, int columns, int pointerType, int dataType, const QString &identifier);
+    void generateMesh(int rows, int columns);
 
     /**
      * Generate a random graph by assigning uniformly at random \p edges many pointers to the set of nodes.
@@ -81,21 +112,15 @@ private:
      * \param edges is the number of edges of the generated graph
      * \param seed is the seed for random number generator
      * \param selfEdges if true self edges are generated, otherwise not
-     * \param pointerType is the type of the pointers of the generated graph
-     * \param dataType is the type of the data elements of the generated graph
-     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
-    void generateRandomGraph(int nodes, int edges, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier);
+    void generateRandomGraph(int nodes, int edges, bool selfEdges);
 
     /**
      * Generate a star graph with specified number of nodes.
      *
      * \param satelliteNodes is the number of satellite nodes of the generated graph
-     * \param pointerType is the type of the pointers of the generated graph
-     * \param dataType is the type of the data elements of the generated graph
-     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
-    void generateStar(int satelliteNodes, int pointerType, int dataType, const QString &identifier);
+    void generateStar(int satelliteNodes);
 
     /**
      * Generate an Erdös-Renyi random graph. This graph is created by first creating a set of \p nodes
@@ -105,11 +130,8 @@ private:
      * \param edgeProbability is the probability for creating an arbitrary edge
      * \param seed is the seed for random number generator
      * \param selfEdges if true self edges are generated, otherwise not
-     * \param pointerType is the type of the pointers of the generated graph
-     * \param dataType is the type of the data elements of the generated graph
-     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
-    void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, int seed, bool selfEdges, int pointerType, int dataType, const QString &identifier);
+    void generateErdosRenyiRandomGraph(int nodes, double edgeProbability, bool selfEdges);
 
     /**
      * Generate a random tree by iterating the following process: First create a root node and than
@@ -117,17 +139,15 @@ private:
      *
      * \param nodes is number of nodes
      * \param seed is the seed for random number generator
-     * \param pointerType is the type of the pointers of the generated graph
-     * \param dataType is the type of the data elements of the generated graph
-     * \param identifier is the identifier of the generated graph; it is expected to be unique within the current document
      */
-    void generateRandomTreeGraph(int nodes, int seed, int pointerType, int dataType, const QString &identifier);
+    void generateRandomTreeGraph(int nodes);
 
-    Document *graphDoc_;
-    int selectedGraphType_;
-    QGridLayout *gridLayout_;
-    QWidget *graphOptionsWidget_;
 
+    int seed_;
+    int dataType_;
+    int pointerType_;
+    QString identifier_;
+    GraphGenerator graphGenerator_;
     Ui::GenerateGraphWidget *ui;
 
     QList<QString> defaultIdentifiers;
