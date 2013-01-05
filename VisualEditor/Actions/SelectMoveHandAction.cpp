@@ -97,18 +97,20 @@ bool SelectMoveHandAction::executeMove(QPointF pos)
     }
 
     if (!DocumentManager::self().activeDocument()->isPointAtDocument(pos)) {
-        Document *d = DocumentManager::self().activeDocument();
-        if (pos.x() < d->left()) {
-            pos.setX(d->left());
+        Document *doc = DocumentManager::self().activeDocument();
+        QRectF sceneRect = doc->sceneRect();
+
+        if (pos.x() < sceneRect.left()) {
+            pos.setX(sceneRect.left());
         }
-        if (pos.x() > d->right()) {
-            pos.setX(d->right());
+        if (pos.x() > sceneRect.right()) {
+            pos.setX(sceneRect.right());
         }
-        if (pos.y() < d->top()) {
-            pos.setY(d->top());
+        if (pos.y() < sceneRect.top()) {
+            pos.setY(sceneRect.top());
         }
-        if (pos.y() > d->bottom()) {
-            pos.setY(d->bottom());
+        if (pos.y() > sceneRect.bottom()) {
+            pos.setY(sceneRect.bottom());
         }
     }
 

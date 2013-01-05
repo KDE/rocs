@@ -186,7 +186,7 @@ void Rocs::ListStructure::arrangeNodes()
     if (m_building)
         return;
 
-    QRectF size = document()->size();
+    QRectF size = document()->sceneRect();
     qreal x;
     qreal y = size.top() + 100;;
     if (m_animationGroup->state() != QAnimationGroup::Stopped) {

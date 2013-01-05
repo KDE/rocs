@@ -55,15 +55,6 @@ public:
 
     virtual DataStructurePtr getDataStructure() const;
 
-    void updateRelativeCenter();
-
-    /**
-    * Returns cached relative center of the data structure.
-    * The relative center gets updated when data elements are added/deleted.
-    *
-    * \return center of datastructure
-    */
-    QPointF relativeCenter() const;
     Document *document() const;
 
     void setReadOnly(bool r);

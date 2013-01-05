@@ -41,21 +41,11 @@ class QPointF;
 class ROCSLIB_EXPORT Document : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(qreal left READ left WRITE setLeft)
-    Q_PROPERTY(qreal right READ right WRITE setRight)
-    Q_PROPERTY(qreal top READ top WRITE setTop)
-    Q_PROPERTY(qreal bottom READ bottom WRITE setBottom)
 
 public:
     enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
 
-    explicit Document(const QString &name,
-             qreal left = -200,
-             qreal right = 200,
-             qreal top = -200,
-             qreal bottom = 200,
-             QObject *parent = 0
-            );
+    explicit Document(const QString &name, QObject *parent = 0);
     ~Document();
 
     bool isModified() const;
@@ -108,7 +98,7 @@ public:
     /**
      * \return the size of document' (visual) area
      */
-    QRectF size();
+    QRectF sceneRect();
 
     /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others from all data structeres of this document.
      * TODO this method should be protected
@@ -187,14 +177,6 @@ public:
 
     QString iconPackage() const;
 
-    qreal left() const;
-    qreal top() const;
-    qreal right() const;
-    qreal bottom() const;
-
-    qreal height() const;
-    qreal width() const;
-
     /**
      * tests if given point is containted at document layer
      */
@@ -209,7 +191,6 @@ public Q_SLOTS:
      */
     void resizeDocumentIncrease();
     void resizeDocumentBorder(Document::Border orientation);
-    void changeMinimalSize(qreal width, qreal height);
 
     /**
      * Add data structure to graph document with name \p name.
@@ -241,11 +222,6 @@ public Q_SLOTS:
      */
     void setActiveDataStructure(int index);
     void setActiveDataStructure(DataStructurePtr g);
-
-    void setLeft(qreal leftValue);
-    void setRight(qreal rightValue);
-    void setTop(qreal topValue);
-    void setBottom(qreal buttomValue);
 
     void updateGraphics(DataTypePtr dataType);
     void updateGraphics(PointerTypePtr pointerType);

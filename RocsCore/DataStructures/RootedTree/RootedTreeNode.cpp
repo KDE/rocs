@@ -261,7 +261,7 @@ QScriptValue RootedTreeNode::children_list() const
 void RootedTreeNode::adjustPosition()
 {
     DataPtr parent = nodeParent();
-    const QRectF size = dataStructure()->document()->size();
+    const QRectF size = dataStructure()->document()->sceneRect();
     if (parent){
         qreal adjust = 0.0;
         foreach (PointerPtr p, nodeParent()->pointerList(this->getData())){

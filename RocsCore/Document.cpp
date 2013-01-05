@@ -46,7 +46,12 @@
 class DocumentPrivate
 {
 public:
-    DocumentPrivate() {}
+    DocumentPrivate()
+        : _left(0)
+        , _right(0)
+        , _top(0)
+        , _bottom(0)
+    { }
 
     enum borderSize { SceneBorder = 50 };
 
@@ -56,8 +61,6 @@ public:
     qreal _right;
     qreal _top;
     qreal _bottom;
-    qreal _minWidth;
-    qreal _minHeight;
     bool _modified;
     bool _saved;
     DataStructurePtr _activeDataStructure;
@@ -75,16 +78,11 @@ public:
 
 
 
-Document::Document(const QString& name, qreal left, qreal right, qreal top, qreal bottom, QObject *parent)
-    : QObject(parent), d(new DocumentPrivate())
+Document::Document(const QString& name, QObject *parent)
+    : QObject(parent)
+    , d(new DocumentPrivate())
 {
     d->_name = name;
-    d->_left = left;
-    d->_right = right;
-    d->_top = top;
-    d->_bottom = bottom;
-    d->_minWidth = 0;
-    d->_minHeight = 0;
     d->_saved = false;
     d->_engineBackend = new QtScriptBackend(this);
     d->_backend = DataStructureBackendManager::self().activeBackend();
@@ -264,62 +262,6 @@ QString Document::name() const
     return d->_name;
 }
 
-// gets the wheight of the drawable area
-qreal Document::height() const
-{
-    return d->_bottom - d->_top;
-}
-
-// sets the width of the drawable area
-qreal Document::width() const
-{
-    return d->_right - d->_left;
-}
-
-qreal Document::left() const
-{
-    return d->_left;
-}
-
-qreal Document::right() const
-{
-    return d->_right;
-}
-
-qreal Document::top() const
-{
-    return d->_top;
-}
-
-qreal Document::bottom() const
-{
-    return d->_bottom;
-}
-
-void Document::setLeft(qreal leftValue)
-{
-    d->_left = leftValue;
-    //d->_modified = true;
-}
-
-void Document::setRight(qreal rightValue)
-{
-    d->_right = rightValue;
-    //d->_modified = true;
-}
-
-void Document::setTop(qreal topValue)
-{
-    d->_top = topValue;
-    //d->_modified = true;
-}
-
-void Document::setBottom(qreal bottomValue)
-{
-    d->_bottom = bottomValue;
-    //d->_modified = true;
-}
-
 void Document::updateGraphics(DataTypePtr dataType)
 {
     foreach(const DataStructurePtr &structure, d->_dataStructures) {
@@ -334,7 +276,7 @@ void Document::updateGraphics(PointerTypePtr pointerType)
     }
 }
 
-QRectF Document::size()
+QRectF Document::sceneRect()
 {
     return QRectF(d->_left, d->_top, d->_right - d->_left, d->_bottom - d->_top);
 }
@@ -349,28 +291,6 @@ bool Document::isPointAtDocument(qreal x, qreal y)  const
     return true;
 }
 
-void Document::changeMinimalSize(qreal width, qreal height)
-{
-    if (width >= 0) d->_minWidth = width;
-    if (height >= 0) d->_minHeight = height;
-
-    if (width > d->_right - d->_left) {
-        d->_left -= (d->_right - d->_left - width) / 2;
-        d->_right += (d->_right - d->_left - width) / 2;
-        emit resized();
-    } else {
-        resizeDocumentBorder(BorderLeft);
-    }
-
-    if (height > d->_bottom - d->_top) {
-        d->_top -= (d->_bottom - d->_top - height) / 2;
-        d->_bottom += (d->_bottom - d->_top - height) / 2;
-        emit resized();
-    } else {
-        resizeDocumentBorder(BorderTop);
-    }
-}
-
 void Document::resizeDocumentIncrease()
 {
     int elements = dataStructures().size();
@@ -379,19 +299,19 @@ void Document::resizeDocumentIncrease()
         //FIXME only default data type considered
         foreach(DataPtr n,  dataStructures().at(i)->dataList(0)) {
             if (n->x() < d->_left + DocumentPrivate::SceneBorder) {
-                setLeft(d->_left - DocumentPrivate::SceneBorder);
+                d->_left = (d->_left - DocumentPrivate::SceneBorder);
                 resizeDocument = true;
             }
             if (n->x() > d->_right - DocumentPrivate::SceneBorder) {
-                setRight(d->_right + DocumentPrivate::SceneBorder);
+                d->_right = (d->_right + DocumentPrivate::SceneBorder);
                 resizeDocument = true;
             }
             if (n->y() < d->_top + DocumentPrivate::SceneBorder) {
-                setTop(d->_top - DocumentPrivate::SceneBorder);
+                d->_top = (d->_top - DocumentPrivate::SceneBorder);
                 resizeDocument = true;
             }
             if (n->y() > d->_bottom - DocumentPrivate::SceneBorder) {
-                setBottom(d->_bottom + DocumentPrivate::SceneBorder);
+                d->_bottom = (d->_bottom + DocumentPrivate::SceneBorder);
                 resizeDocument = true;
             }
         }
@@ -434,34 +354,34 @@ void Document::resizeDocumentBorder(Document::Border orientation)
     //TODO connect to graphvisualeditor-size
     if (empty == true) {
         switch (orientation) {
-        case BorderLeft: {
-            if (d->_right - d->_left < DocumentPrivate::SceneBorder * 4)
+        case BorderLeft:
+            if (d->_right - d->_left < DocumentPrivate::SceneBorder * 4) {
                 return;
-            setLeft(d->_left + DocumentPrivate::SceneBorder);
+            }
+            d->_left = (d->_left + DocumentPrivate::SceneBorder);
             emit resized();
             break;
-        }
-        case BorderRight: {
-            if (d->_right - d->_left < DocumentPrivate::SceneBorder * 4)
+        case BorderRight:
+            if (d->_right - d->_left < DocumentPrivate::SceneBorder * 4) {
                 return;
-            setRight(d->_right - DocumentPrivate::SceneBorder);
+            }
+            d->_right = (d->_right - DocumentPrivate::SceneBorder);
             emit resized();
             break;
-        }
-        case BorderTop: {
-            if (d->_bottom - d->_top < DocumentPrivate::SceneBorder * 4)
+        case BorderTop:
+            if (d->_bottom - d->_top < DocumentPrivate::SceneBorder * 4) {
                 return;
-            setTop(d->_top + DocumentPrivate::SceneBorder);
+            }
+            d->_top = (d->_top + DocumentPrivate::SceneBorder);
             emit resized();
             break;
-        }
-        case BorderBottom: {
-            if (d->_bottom - d->_top < DocumentPrivate::SceneBorder * 4)
+        case BorderBottom:
+            if (d->_bottom - d->_top < DocumentPrivate::SceneBorder * 4) {
                 return;
-            setBottom(d->_bottom - DocumentPrivate::SceneBorder);
+            }
+            d->_bottom = (d->_bottom - DocumentPrivate::SceneBorder);
             emit resized();
             break;
-        }
         }
     }
 }

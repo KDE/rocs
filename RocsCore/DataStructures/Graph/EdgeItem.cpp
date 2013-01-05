@@ -88,9 +88,11 @@ QPainterPath EdgeItem::createLoop(const QPointF& pos) const
         return QPainterPath();
     }
     QPainterPath p;
+
     DataStructurePtr g = pointer()->dataStructure();
+    QPointF documentCenter = g->document()->sceneRect().center(); // TODO this computation is really strange
     qreal size = 30 + (20 * pointer()->relativeIndex());
-    qreal angle = qAtan2((pos.x() - g->relativeCenter().x()), (pos.y() - g->relativeCenter().y()));
+    qreal angle = qAtan2((pos.x() - documentCenter.x()), (pos.y() - documentCenter.y()));
     qreal posx = (pos.x() - (((size / 2) * qSin(angle)) * -1) - (size / 2));
     qreal posy = (pos.y() + (((size / 2) * qCos(angle))) - (size / 2));
     p.addEllipse(posx, posy, size, size);

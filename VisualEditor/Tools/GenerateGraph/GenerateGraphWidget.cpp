@@ -217,8 +217,7 @@ GenerateGraphWidget::~GenerateGraphWidget()
 
 void GenerateGraphWidget::generateMesh(int rows, int columns)
 {
-    DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
-    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->sceneRect().center();
 
     if (rows < 1) {
         rows = 1;
@@ -257,8 +256,7 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
 
 void GenerateGraphWidget::generateStar(int satelliteNodes)
 {
-    DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
-    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->sceneRect().center();
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
@@ -293,8 +291,7 @@ void GenerateGraphWidget::generateStar(int satelliteNodes)
 
 void GenerateGraphWidget::generateCircle(int nodes)
 {
-    DocumentManager::self().activeDocument()->activeDataStructure()->updateRelativeCenter();
-    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->sceneRect().center();
 
     // compute radius such that nodes have space ~50 between each other
     // circle that border-length of 2*PI*radius
@@ -329,7 +326,7 @@ void GenerateGraphWidget::generateCircle(int nodes)
 
 void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdges)
 {
-    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->sceneRect().center();
 
     Graph randomGraph;
     boost::mt19937 gen;
@@ -389,7 +386,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
 
 void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgeProbability, bool selfEdges)
 {
-    QPointF center = DocumentManager::self().activeDocument()->activeDataStructure()->relativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->sceneRect().center();
 
     boost::mt19937 gen;
     gen.seed(static_cast<unsigned int>(seed_));
@@ -442,9 +439,8 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 
 void GenerateGraphWidget::generateRandomTreeGraph(int nodes)
 {
-
     Document *activeDocument = DocumentManager::self().activeDocument();
-    QPointF center = activeDocument->activeDataStructure()->relativeCenter();
+    QPointF center = DocumentManager::self().activeDocument()->sceneRect().center();
 
     DataStructurePtr graph = activeDocument->activeDataStructure();
     if (graph->dataListAll().size() > 0) {

@@ -71,15 +71,17 @@ void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
     setSceneRect(-minWidth / 2, -minHeight / 2, minWidth / 2, minHeight / 2);
 
     Document *gd = DocumentManager::self().activeDocument();
-    if (gd->width() < _minWidth) {
-        gd->setLeft(gd->left() - (_minWidth - gd->width()) / 2);
-        gd->setRight(gd->right() + (_minWidth - gd->width()) / 2);
-    }
-    if (gd->height() < _minHeight) {
-        gd->setTop(gd->top() - (_minHeight - gd->height()) / 2);
-        gd->setBottom(gd->bottom() + (_minHeight - gd->height()) / 2);
-    }
-    gd->changeMinimalSize(minWidth, minHeight);
+    //FIXME scene should NEVER set document size!
+//     QRectF docRect = gd->sceneRect();
+//     if (docRect.width() < _minWidth) {
+//         gd->setLeft(gd->left() - (_minWidth - gd->width()) / 2);
+//         gd->setRight(gd->right() + (_minWidth - gd->width()) / 2);
+//     }
+//     if (gd->height() < _minHeight) {
+//         gd->setTop(gd->top() - (_minHeight - gd->height()) / 2);
+//         gd->setBottom(gd->bottom() + (_minHeight - gd->height()) / 2);
+//     }
+//     gd->changeMinimalSize(minWidth, minHeight);
     resize();
 }
 
@@ -133,15 +135,16 @@ void GraphScene::setActiveDocument()
     }
 
     // adapt document to scene if too small
-    _graphDocument = gd;
-    if (gd->width() < _minWidth) {
-        gd->setLeft(gd->left() - (_minWidth - gd->width()) / 2);
-        gd->setRight(gd->right() + (_minWidth - gd->width()) / 2);
-    }
-    if (gd->height() < _minHeight) {
-        gd->setTop(gd->top() - (_minHeight - gd->height()) / 2);
-        gd->setBottom(gd->bottom() + (_minHeight - gd->height()) / 2);
-    }
+//FIXME NEVER set document size from scene!
+//     _graphDocument = gd;
+//     if (gd->width() < _minWidth) {
+//         gd->setLeft(gd->left() - (_minWidth - gd->width()) / 2);
+//         gd->setRight(gd->right() + (_minWidth - gd->width()) / 2);
+//     }
+//     if (gd->height() < _minHeight) {
+//         gd->setTop(gd->top() - (_minHeight - gd->height()) / 2);
+//         gd->setBottom(gd->bottom() + (_minHeight - gd->height()) / 2);
+//     }
 
     resize();
 
@@ -317,12 +320,8 @@ void GraphScene::updateDocument()
 
 void GraphScene::resize()
 {
-    QRectF newSize(_graphDocument->left(), // x
-                   _graphDocument->top(),  // y
-                   _graphDocument->right() - _graphDocument->left(), // width
-                   _graphDocument->bottom() - _graphDocument->top()); // height
-
-    setSceneRect(newSize);
+//FIXME maybe not working as expected
+    setSceneRect(_graphDocument->sceneRect());
     emit resized();
 }
 

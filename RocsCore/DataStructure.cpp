@@ -80,7 +80,6 @@ void DataStructure::setQpointer(DataStructurePtr q)
 void DataStructure::initialize()
 {
     d->_readOnly = false;
-    updateRelativeCenter();
     d->_identifierCount = 1;
 
     // create type lists
@@ -116,7 +115,6 @@ DataStructure::DataStructure(Document *parent) :
 void DataStructure::importStructure(DataStructurePtr other)
 {
     d->_readOnly = other->readOnly();
-    updateRelativeCenter();
     // FIXME set dynamic properties
 
     QHash <Data*, DataPtr> dataTodata;
@@ -443,16 +441,6 @@ void DataStructure::remove(DataPtr data)
     //Note: important for resize: remove node before emit resizeRequest
     Document *doc = DocumentManager::self().activeDocument();
 
-    if (doc != 0) {
-        qreal xCenter = (doc->left() + doc->right() )/2;
-        qreal yCenter = (doc->top() + doc->bottom() )/2;
-
-        if (data->x() < xCenter) emit resizeRequest(Document::BorderLeft);
-        if (data->x() > xCenter) emit resizeRequest(Document::BorderRight);
-        if (data->y() < yCenter) emit resizeRequest(Document::BorderTop);
-        if (data->y() > yCenter) emit resizeRequest(Document::BorderBottom);
-    }
-
     // remove from internal lists
     if (d->_dataIdentifierMap.remove(data->identifier()) != 1) {
         kWarning() << "Data identifier hash is dirty.";
@@ -461,8 +449,6 @@ void DataStructure::remove(DataPtr data)
         // only remove data element if it is registered
          data->remove();
     }
-
-    updateRelativeCenter();
     emit changed();
 }
 
@@ -492,18 +478,6 @@ GroupPtr DataStructure::addGroup(const QString& name)
     GroupPtr group = Group::create(getDataStructure(), generateUniqueIdentifier(), document()->groupType());
     group->setName(name);
     return group;
-}
-
-void DataStructure::updateRelativeCenter()
-{
-    if (parent() != 0) {
-        Document *gd = qobject_cast<Document*>(parent());
-        d->_relativeCenter.setY((gd->bottom() + gd->top()) / 2);
-        d->_relativeCenter.setX((gd->right() + gd->left()) / 2);
-    } else {
-        d->_relativeCenter.setY(0);
-        d->_relativeCenter.setX(0);
-    }
 }
 
 void DataStructure::setName(const QString& s)
@@ -587,15 +561,9 @@ bool DataStructure::readOnly() const
     return d->_readOnly;
 }
 
-
 QString DataStructure::name() const
 {
     return d->_name;
-}
-
-QPointF DataStructure::relativeCenter() const
-{
-    return d->_relativeCenter;
 }
 
 QScriptValue DataStructure::scriptValue() const

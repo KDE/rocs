@@ -102,10 +102,10 @@ void RocsGraphFileFormatPlugin::readFile()
 
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith(QLatin1String("top :")))      document->setTop(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith(QLatin1String("bottom :")))   document->setBottom(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith(QLatin1String("left :")))     document->setLeft(dataLine.section(' ', 2).toInt());
-                else if (dataLine.startsWith(QLatin1String("right :")))    document->setRight(dataLine.section(' ', 2).toInt());
+                /**/ if (dataLine.startsWith(QLatin1String("top :")))      continue; // deprecated
+                else if (dataLine.startsWith(QLatin1String("bottom :")))   continue; // deprecated
+                else if (dataLine.startsWith(QLatin1String("left :")))     continue; // deprecated
+                else if (dataLine.startsWith(QLatin1String("right :")))    continue; // deprecated
                 else if (dataLine.startsWith(QLatin1String("DataStructurePlugin :"))) {
                     // set plugin by unique plugin identifier
                     QString pluginIdentifier = dataLine.section(' ', 2);
@@ -326,10 +326,6 @@ QString RocsGraphFileFormatPlugin::serialize(const Document &document)
     d->_buffer.clear();
 
     d->_buffer = QString("[Document Properties] \n")
-              % QString("top : ") % QString::number(document.top()) % QChar('\n')
-              % QString("bottom : ") % QString::number(document.bottom()) % QChar('\n')
-              % QString("left : ") % QString::number(document.left()) % QChar('\n')
-              % QString("right : ") % QString::number(document.right()) % QChar('\n')
               % QString("DataStructurePlugin : ") % DataStructureBackendManager::self().activeBackend()->internalName() % QChar('\n')
               % QChar('\n');
 
