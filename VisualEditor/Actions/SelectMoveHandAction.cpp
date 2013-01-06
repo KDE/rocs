@@ -96,25 +96,7 @@ bool SelectMoveHandAction::executeMove(QPointF pos)
         return false;
     }
 
-    if (!DocumentManager::self().activeDocument()->sceneRect().contains(pos)) {
-        Document *doc = DocumentManager::self().activeDocument();
-        QRectF sceneRect = doc->sceneRect();
-
-        if (pos.x() < sceneRect.left()) {
-            pos.setX(sceneRect.left());
-        }
-        if (pos.x() > sceneRect.right()) {
-            pos.setX(sceneRect.right());
-        }
-        if (pos.y() < sceneRect.top()) {
-            pos.setY(sceneRect.top());
-        }
-        if (pos.y() > sceneRect.bottom()) {
-            pos.setY(sceneRect.bottom());
-        }
-    }
-
-    foreach(QGraphicsItem * item, _graphScene->selectedItems()) {
+    foreach(QGraphicsItem *item, _graphScene->selectedItems()) {
         if (DataItem *dItem = qgraphicsitem_cast<DataItem*>(item)) {
             dItem->data() -> setPos(pos.x() - _deltas.value(dItem).x(),
                                     pos.y() - _deltas.value(dItem).y());
