@@ -102,11 +102,7 @@ void RocsGraphFileFormatPlugin::readFile()
 
             QString dataLine = in.readLine().simplified();
             while (!in.atEnd() && !dataLine.isEmpty()) {
-                /**/ if (dataLine.startsWith(QLatin1String("top :")))      continue; // deprecated
-                else if (dataLine.startsWith(QLatin1String("bottom :")))   continue; // deprecated
-                else if (dataLine.startsWith(QLatin1String("left :")))     continue; // deprecated
-                else if (dataLine.startsWith(QLatin1String("right :")))    continue; // deprecated
-                else if (dataLine.startsWith(QLatin1String("DataStructurePlugin :"))) {
+                if (dataLine.startsWith(QLatin1String("DataStructurePlugin :"))) {
                     // set plugin by unique plugin identifier
                     QString pluginIdentifier = dataLine.section(' ', 2);
                     document->setBackend(pluginIdentifier);
