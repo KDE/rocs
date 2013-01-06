@@ -150,7 +150,6 @@ void GraphVisualEditor::setupWidgets()
             this, SLOT(releaseDocument()));
     connect(&DocumentManager::self(), SIGNAL(documentListChanged()),
             this, SLOT(updateGraphDocumentList()));
-    connect(this, SIGNAL(geometryChanged()), d->_scene, SLOT(resize()));
 }
 
 QWidget * GraphVisualEditor::sceneToolbar()
