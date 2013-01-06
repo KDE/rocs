@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2013  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -30,9 +30,6 @@
 #include "DataStructureBackendInterface.h"
 #include "QtScriptBackend.h"
 #include "ConcurrentHelpClasses.h"
-
-#include <boost/shared_ptr.hpp>
-#include <boost/concept_check.hpp>
 
 #include <KStandardDirs>
 #include <KSaveFile>
@@ -62,7 +59,6 @@ public:
     qreal _top;
     qreal _bottom;
     bool _modified;
-    bool _saved;
     DataStructurePtr _activeDataStructure;
     QPointer<DataStructureBackendInterface> _backend;
     QtScriptBackend* _engineBackend;
@@ -83,7 +79,6 @@ Document::Document(const QString& name, QObject *parent)
     , d(new DocumentPrivate())
 {
     d->_name = name;
-    d->_saved = false;
     d->_engineBackend = new QtScriptBackend(this);
     d->_backend = DataStructureBackendManager::self().activeBackend();
     d->_modified = false;
@@ -276,119 +271,34 @@ void Document::updateGraphics(PointerTypePtr pointerType)
     }
 }
 
-QRectF Document::sceneRect()
+QRectF Document::sceneRect() const
 {
     return QRectF(d->_left, d->_top, d->_right - d->_left, d->_bottom - d->_top);
 }
 
-bool Document::isPointAtDocument(qreal x, qreal y)  const
+void Document::updateSceneRect(DataPtr newData)
 {
-    if (x < d->_left)      return false;
-    if (x > d->_right)     return false;
-    if (y < d->_top)       return false;
-    if (y > d->_bottom)    return false;
-
-    return true;
-}
-
-void Document::resizeDocumentIncrease()
-{
-    int elements = dataStructures().size();
-    for (int i = 0; i < elements; i++) {
-        bool resizeDocument = false;
-        //FIXME only default data type considered
-        foreach(DataPtr n,  dataStructures().at(i)->dataList(0)) {
-            if (n->x() < d->_left + DocumentPrivate::SceneBorder) {
-                d->_left = (d->_left - DocumentPrivate::SceneBorder);
-                resizeDocument = true;
-            }
-            if (n->x() > d->_right - DocumentPrivate::SceneBorder) {
-                d->_right = (d->_right + DocumentPrivate::SceneBorder);
-                resizeDocument = true;
-            }
-            if (n->y() < d->_top + DocumentPrivate::SceneBorder) {
-                d->_top = (d->_top - DocumentPrivate::SceneBorder);
-                resizeDocument = true;
-            }
-            if (n->y() > d->_bottom - DocumentPrivate::SceneBorder) {
-                d->_bottom = (d->_bottom + DocumentPrivate::SceneBorder);
-                resizeDocument = true;
-            }
-        }
-        if (resizeDocument) {
-            emit resized();
-        }
-    }
-}
-
-void Document::resizeDocumentBorder(Document::Border orientation)
-{
-    bool empty = true;
-    int elements = dataStructures().size();
-
-    // scans doubled border of specified size: if empty or not
-    for (int i = 0; i < elements; i++) {
-
-        foreach(DataPtr n,  dataStructures().at(i)->dataList(0)) {
-            switch (orientation) {
-            case BorderLeft: {
-                if (n != 0 && n->x() < d->_left + DocumentPrivate::SceneBorder * 2) empty = false;
-                break;
-            }
-            case BorderRight: {
-                if (n != 0 && n->x() > d->_right - DocumentPrivate::SceneBorder * 2) empty = false;
-                break;
-            }
-            case BorderTop: {
-                if (n != 0 && n->y() < d->_top + DocumentPrivate::SceneBorder * 2) empty = false;
-                break;
-            }
-            case BorderBottom: {
-                if (n != 0 && n->y() > d->_bottom - DocumentPrivate::SceneBorder * 2) empty = false;
-                break;
-            }
-            }
-        }
+    if (sceneRect().contains(newData->x(), newData->y()) == true) {
+        //TODO implement decreasing of scene rect
+        return;
     }
 
-    //TODO connect to graphvisualeditor-size
-    if (empty == true) {
-        switch (orientation) {
-        case BorderLeft:
-            if (d->_right - d->_left < DocumentPrivate::SceneBorder * 4) {
-                return;
-            }
-            d->_left = (d->_left + DocumentPrivate::SceneBorder);
-            emit resized();
-            break;
-        case BorderRight:
-            if (d->_right - d->_left < DocumentPrivate::SceneBorder * 4) {
-                return;
-            }
-            d->_right = (d->_right - DocumentPrivate::SceneBorder);
-            emit resized();
-            break;
-        case BorderTop:
-            if (d->_bottom - d->_top < DocumentPrivate::SceneBorder * 4) {
-                return;
-            }
-            d->_top = (d->_top + DocumentPrivate::SceneBorder);
-            emit resized();
-            break;
-        case BorderBottom:
-            if (d->_bottom - d->_top < DocumentPrivate::SceneBorder * 4) {
-                return;
-            }
-            d->_bottom = (d->_bottom - DocumentPrivate::SceneBorder);
-            emit resized();
-            break;
-        }
-    }
-}
+    QPointF coordinate = QPointF(newData->x(), newData->y());
 
-bool Document::isPointAtDocument(const QPointF& point)  const
-{
-    return isPointAtDocument(point.x(), point.y());
+    if (coordinate.x() < d->_left) {
+        d->_left = coordinate.x();
+    }
+    if (coordinate.x() > d->_right) {
+        d->_right = coordinate.x();
+    }
+    if (coordinate.y() < d->_top) {
+        d->_top = coordinate.y();
+    }
+    if (coordinate.y() > d->_bottom) {
+        d->_bottom = coordinate.y();
+    }
+
+    emit sceneRectChanged(sceneRect());
 }
 
 bool Document::isModified() const
@@ -452,9 +362,13 @@ DataStructurePtr Document::addDataStructure(DataStructurePtr dataStructure)
     d->_dataStructures.append(dataStructure);
     d->_activeDataStructure = dataStructure;
     d->_modified = true;
+
     connect(dataStructure.get(), SIGNAL(changed()), this, SLOT(setModified()));
+    connect(dataStructure.get(), SIGNAL(dataPositionChanged(DataPtr)), this, SLOT(updateSceneRect(DataPtr)));
+
     emit dataStructureCreated(dataStructure);
     emit dataStructureListChanged();
+
     return dataStructure;
 }
 

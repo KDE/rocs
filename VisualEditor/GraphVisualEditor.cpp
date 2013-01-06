@@ -98,9 +98,9 @@ GraphVisualEditor::~GraphVisualEditor()
 }
 
 
-GraphVisualEditor* GraphVisualEditor::_self = 0;
+GraphVisualEditor * GraphVisualEditor::_self = 0;
 
-GraphVisualEditor* GraphVisualEditor::self()
+GraphVisualEditor * GraphVisualEditor::self()
 {
     if (!_self) {
         _self = new GraphVisualEditor(0);
@@ -111,8 +111,8 @@ GraphVisualEditor* GraphVisualEditor::self()
 void GraphVisualEditor::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);
-
-    d->_scene->updateMinSize(size().width(), size().height());
+    // resize whiteboard to editor size
+    d->_scene->resize();
 }
 
 void GraphVisualEditor::setupWidgets()
@@ -150,9 +150,10 @@ void GraphVisualEditor::setupWidgets()
             this, SLOT(releaseDocument()));
     connect(&DocumentManager::self(), SIGNAL(documentListChanged()),
             this, SLOT(updateGraphDocumentList()));
+    connect(this, SIGNAL(geometryChanged()), d->_scene, SLOT(resize()));
 }
 
-QWidget* GraphVisualEditor::sceneToolbar()
+QWidget * GraphVisualEditor::sceneToolbar()
 {
     QWidget *sceneControls = new QWidget(this);
 

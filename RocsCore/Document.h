@@ -43,8 +43,6 @@ class ROCSLIB_EXPORT Document : public QObject
     Q_OBJECT
 
 public:
-    enum Border {BorderLeft, BorderBottom, BorderRight, BorderTop};
-
     explicit Document(const QString &name, QObject *parent = 0);
     ~Document();
 
@@ -64,7 +62,7 @@ public:
      *
      * \param fileUrl path to local file to that document shall be saved
      */
-    void saveAs(const QString& fileUrl);
+    void saveAs(const QString &fileUrl);
 
     /**
      * \return path used for saving
@@ -98,7 +96,7 @@ public:
     /**
      * \return the size of document' (visual) area
      */
-    QRectF sceneRect();
+    QRectF sceneRect() const;
 
     /** @brief clear data that only is useful for a type of data structure and that cannot be converted to others from all data structeres of this document.
      * TODO this method should be protected
@@ -177,20 +175,15 @@ public:
 
     QString iconPackage() const;
 
-    /**
-     * tests if given point is containted at document layer
-     */
-    bool isPointAtDocument(qreal x, qreal y) const;
-    bool isPointAtDocument(const QPointF &point) const;
-
 public Q_SLOTS:
     void setModified(const bool mod = true);
 
     /**
-     * estimates by looking at all node positions if a resize of the document is necessary.
+     * Updates scene rect according to created data element.
+     *
+     * \param newData is the newly created data
      */
-    void resizeDocumentIncrease();
-    void resizeDocumentBorder(Document::Border orientation);
+    void updateSceneRect(DataPtr newData);
 
     /**
      * Add data structure to graph document with name \p name.
@@ -234,10 +227,8 @@ Q_SIGNALS:
     void dataTypeRemoved(int identifier);
     void pointerTypeRemoved(int identifier);
     void nameChanged(QString name);
-    void heightChanged(qreal height);
-    void widthChanged(qreal width);
     void activeDataStructureChanged(DataStructurePtr g);
-    void resized();
+    void sceneRectChanged(const QRectF &);
 
 private:
     // d-pointer

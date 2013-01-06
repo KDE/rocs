@@ -246,10 +246,10 @@ private Q_SLOTS:
 
 Q_SIGNALS:
     void dataCreated(DataPtr n);
+    void dataPositionChanged(DataPtr n);
     void pointerCreated(PointerPtr e);
     void nameChanged(const QString& name);
     void changed();
-    void resizeRequest(Document::Border border);
 
 protected:
     DataPtr addData(DataPtr data, int dataType);

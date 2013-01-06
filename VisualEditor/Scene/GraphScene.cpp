@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs,
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2013  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -38,6 +38,7 @@
 #include "Actions/DeleteAction.h"
 #include "Actions/PropertiesDialogAction.h"
 #include "Actions/ZoomAction.h"
+#include <GraphVisualEditor.h>
 
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
@@ -56,33 +57,7 @@ GraphScene::GraphScene(QObject *parent) :
     _graphDocument = 0;
     _hideEdges = false;
     _action = 0;
-    _minHeight = 0;
-    _minWidth = 0;
     _zoomFactor = 1;
-
-    // first scene resize will resize to actual whiteboard size
-    setSceneRect(0, 0, 0, 0);
-}
-
-void GraphScene::updateMinSize(qreal minWidth, qreal minHeight)
-{
-    _minWidth = minWidth;
-    _minHeight = minHeight;
-    setSceneRect(-minWidth / 2, -minHeight / 2, minWidth / 2, minHeight / 2);
-
-    Document *gd = DocumentManager::self().activeDocument();
-    //FIXME scene should NEVER set document size!
-//     QRectF docRect = gd->sceneRect();
-//     if (docRect.width() < _minWidth) {
-//         gd->setLeft(gd->left() - (_minWidth - gd->width()) / 2);
-//         gd->setRight(gd->right() + (_minWidth - gd->width()) / 2);
-//     }
-//     if (gd->height() < _minHeight) {
-//         gd->setTop(gd->top() - (_minHeight - gd->height()) / 2);
-//         gd->setBottom(gd->bottom() + (_minHeight - gd->height()) / 2);
-//     }
-//     gd->changeMinimalSize(minWidth, minHeight);
-    resize();
 }
 
 bool GraphScene::hideEdges()
@@ -134,18 +109,8 @@ void GraphScene::setActiveDocument()
         return;
     }
 
-    // adapt document to scene if too small
-//FIXME NEVER set document size from scene!
-//     _graphDocument = gd;
-//     if (gd->width() < _minWidth) {
-//         gd->setLeft(gd->left() - (_minWidth - gd->width()) / 2);
-//         gd->setRight(gd->right() + (_minWidth - gd->width()) / 2);
-//     }
-//     if (gd->height() < _minHeight) {
-//         gd->setTop(gd->top() - (_minHeight - gd->height()) / 2);
-//         gd->setBottom(gd->bottom() + (_minHeight - gd->height()) / 2);
-//     }
-
+    // set document
+    _graphDocument = gd;
     resize();
 
     int size = gd->dataStructures().size();
@@ -156,8 +121,8 @@ void GraphScene::setActiveDocument()
 
     connect(gd, SIGNAL(dataStructureCreated(DataStructurePtr)),
             this, SLOT(connectGraphSignals(DataStructurePtr)));
-
-    connect(gd, SIGNAL(resized()), this, SLOT(resize()));
+    connect(gd, SIGNAL(sceneRectChanged(QRectF)),
+            this, SLOT(resize()));
 
     createItems();
 }
@@ -320,8 +285,30 @@ void GraphScene::updateDocument()
 
 void GraphScene::resize()
 {
-//FIXME maybe not working as expected
-    setSceneRect(_graphDocument->sceneRect());
+    if (!_graphDocument) {
+        return;
+    }
+
+    // set scene rect according to visual editor rect
+    QRectF graphRect = _graphDocument->sceneRect();
+    QRectF editorRect = GraphVisualEditor::self()->rect();
+
+    QRectF sceneRect = graphRect;
+    sceneRect.adjust(-200, -200, 200, 200); // increase whiteboard in each direction around data elements
+    if (editorRect.left() < sceneRect.left()) {
+        sceneRect.setLeft(editorRect.left());
+    }
+    if (editorRect.right() > sceneRect.right()) {
+        sceneRect.setRight(editorRect.right());
+    }
+    if (editorRect.top() < sceneRect.top()) {
+        sceneRect.setTop(editorRect.top());
+    }
+    if (editorRect.bottom() > sceneRect.bottom()) {
+        sceneRect.setBottom(editorRect.bottom());
+    }
+
+    setSceneRect(sceneRect);
     emit resized();
 }
 

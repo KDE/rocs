@@ -103,12 +103,10 @@ DataStructurePtr DataStructure::getDataStructure() const
     return px;
 }
 
-DataStructure::DataStructure(Document *parent) :
-    d(new DataStructurePrivate)
+DataStructure::DataStructure(Document *parent)
+    : d(new DataStructurePrivate)
 {
     d->_document = parent;
-    connect(this, SIGNAL(changed()), parent, SLOT(resizeDocumentIncrease()));
-    connect(this, SIGNAL(resizeRequest(Document::Border)), parent, SLOT(resizeDocumentBorder(Document::Border)));
     // further initialization is done by separate call to initialize()
 }
 
@@ -137,10 +135,6 @@ void DataStructure::importStructure(DataStructurePtr other)
         newPointer->setColor(e->color());
         //FIXME all dynamic properties must be set
     }
-
-    connect(this, SIGNAL(changed()), d->_document, SLOT(resizeDocumentIncrease()));
-    connect(this, SIGNAL(resizeRequest(Document::Border)), d->_document, SLOT(resizeDocumentBorder(Document::Border)));
-    emit changed();
 }
 
 
@@ -344,6 +338,7 @@ DataPtr DataStructure::addData(const QString& name, const QPointF& pos, int data
 {
     if (DataPtr data = addData(name, dataType)) {
         data->setPos(pos.x(), pos.y());
+        emit dataPositionChanged(data);
         return data;
     }
     return DataPtr();
@@ -437,8 +432,6 @@ void DataStructure::remove(DataPtr data)
         kWarning() << "Data element not registered, aborting removal.";
         return;
     }
-
-    //Note: important for resize: remove node before emit resizeRequest
     Document *doc = DocumentManager::self().activeDocument();
 
     // remove from internal lists
@@ -447,7 +440,8 @@ void DataStructure::remove(DataPtr data)
     }
     if (d->_dataTypeLists[data->dataType()].removeOne(data)) {
         // only remove data element if it is registered
-         data->remove();
+        emit dataPositionChanged(data);
+        data->remove();
     }
     emit changed();
 }

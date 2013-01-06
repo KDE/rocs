@@ -96,7 +96,7 @@ bool SelectMoveHandAction::executeMove(QPointF pos)
         return false;
     }
 
-    if (!DocumentManager::self().activeDocument()->isPointAtDocument(pos)) {
+    if (!DocumentManager::self().activeDocument()->sceneRect().contains(pos)) {
         Document *doc = DocumentManager::self().activeDocument();
         QRectF sceneRect = doc->sceneRect();
 

@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs,
     Copyright 2004-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2013       Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -43,8 +44,7 @@ class VISUALEDITOR_EXPORT GraphScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit GraphScene(QObject *parent = 0);
-    void updateMinSize(qreal minWidth, qreal minHeight);
+    explicit GraphScene(QObject *parent);
     void setAction(QAction *action);
     void updateGraph(DataStructurePtr g);
     void updateDocument();
@@ -114,8 +114,6 @@ private:
     bool _hideEdges;
     bool _fade;
     void releaseDocument();
-    qreal _minWidth;
-    qreal _minHeight;
     qreal _zoomFactor;
 };
 
