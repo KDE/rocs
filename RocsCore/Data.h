@@ -240,9 +240,9 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void removed();
-    void posChanged(QPointF p);
+    void posChanged(const QPointF &p);
     void widthChanged(double w);
-    void colorChanged(QColor c);
+    void colorChanged(const QColor &c);
     void visibilityChanged(bool visible);
     void useColorChanged(bool b);
     void dataTypeChanged(int dataType);

@@ -276,26 +276,24 @@ QRectF Document::sceneRect() const
     return QRectF(d->_left, d->_top, d->_right - d->_left, d->_bottom - d->_top);
 }
 
-void Document::updateSceneRect(DataPtr newData)
+void Document::updateSceneRect(const QPointF &position)
 {
-    if (sceneRect().contains(newData->x(), newData->y()) == true) {
+    if (sceneRect().contains(position) == true) {
         //TODO implement decreasing of scene rect
         return;
     }
 
-    QPointF coordinate = QPointF(newData->x(), newData->y());
-
-    if (coordinate.x() < d->_left) {
-        d->_left = coordinate.x();
+    if (position.x() < d->_left) {
+        d->_left = position.x();
     }
-    if (coordinate.x() > d->_right) {
-        d->_right = coordinate.x();
+    if (position.x() > d->_right) {
+        d->_right = position.x();
     }
-    if (coordinate.y() < d->_top) {
-        d->_top = coordinate.y();
+    if (position.y() < d->_top) {
+        d->_top = position.y();
     }
-    if (coordinate.y() > d->_bottom) {
-        d->_bottom = coordinate.y();
+    if (position.y() > d->_bottom) {
+        d->_bottom = position.y();
     }
 
     emit sceneRectChanged(sceneRect());
@@ -364,7 +362,7 @@ DataStructurePtr Document::addDataStructure(DataStructurePtr dataStructure)
     d->_modified = true;
 
     connect(dataStructure.get(), SIGNAL(changed()), this, SLOT(setModified()));
-    connect(dataStructure.get(), SIGNAL(dataPositionChanged(DataPtr)), this, SLOT(updateSceneRect(DataPtr)));
+    connect(dataStructure.get(), SIGNAL(dataPositionChanged(QPointF)), this, SLOT(updateSceneRect(QPointF)));
 
     emit dataStructureCreated(dataStructure);
     emit dataStructureListChanged();

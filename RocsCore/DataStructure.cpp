@@ -329,7 +329,7 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
 
     connect(data.get(), SIGNAL(propertyChanged(QString)),     this, SIGNAL(changed()));
     connect(data.get(), SIGNAL(colorChanged(QColor)),         this, SIGNAL(changed()));
-    connect(data.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(changed()));
+    connect(data.get(), SIGNAL(posChanged(QPointF)),          this, SIGNAL(dataPositionChanged(QPointF)));
     connect(data.get(), SIGNAL(useColorChanged(bool)),        this, SIGNAL(changed()));
     return data;
 }
@@ -338,7 +338,7 @@ DataPtr DataStructure::addData(const QString& name, const QPointF& pos, int data
 {
     if (DataPtr data = addData(name, dataType)) {
         data->setPos(pos.x(), pos.y());
-        emit dataPositionChanged(data);
+        emit dataPositionChanged(pos);
         return data;
     }
     return DataPtr();
@@ -432,7 +432,6 @@ void DataStructure::remove(DataPtr data)
         kWarning() << "Data element not registered, aborting removal.";
         return;
     }
-    Document *doc = DocumentManager::self().activeDocument();
 
     // remove from internal lists
     if (d->_dataIdentifierMap.remove(data->identifier()) != 1) {
@@ -440,7 +439,7 @@ void DataStructure::remove(DataPtr data)
     }
     if (d->_dataTypeLists[data->dataType()].removeOne(data)) {
         // only remove data element if it is registered
-        emit dataPositionChanged(data);
+        emit dataPositionChanged(QPointF(data->x(), data->y()));
         data->remove();
     }
     emit changed();

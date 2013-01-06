@@ -179,11 +179,12 @@ public Q_SLOTS:
     void setModified(const bool mod = true);
 
     /**
-     * Updates scene rect according to created data element.
+     * Updates scene rect according to given position. If \p position lies outside of rect, the rect
+     * is increased. Otherwise, (currently) nothing is done.
      *
-     * \param newData is the newly created data
+     * \param position is the new position of the changed data element
      */
-    void updateSceneRect(DataPtr newData);
+    void updateSceneRect(const QPointF &position);
 
     /**
      * Add data structure to graph document with name \p name.
