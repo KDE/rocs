@@ -50,8 +50,6 @@ public:
         , _bottom(0)
     { }
 
-    enum borderSize { SceneBorder = 50 };
-
     QString _lastSavedDocumentPath;
     QString _name;
     qreal _left;
