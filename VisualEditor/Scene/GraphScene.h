@@ -26,20 +26,15 @@
 #include "CoreTypes.h"
 
 class AbstractAction;
-class QAction;
-class Data;
-class Pointer;
-class QGraphicsItem;
 class Document;
-class DataStructure;
+class QAction;
+class QGraphicsItem;
 class QGraphicsSceneMouseEvent;
 class QGraphicsSceneWheelEvent;
 class QGraphicsSceneContextMenuEvent;
 class QKeyEvent;
 class QMenu;
 
-// TODO this interface should not be public
-// need to refactor VisualGraphEditor to allow that
 class VISUALEDITOR_EXPORT GraphScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -50,26 +45,16 @@ public:
     void updateDocument();
     void setActiveGraph(DataStructurePtr g);
     void clearGraph();
-    qreal zoomFactor();
+    qreal zoomFactor() const;
     void zoomBy(qreal scaleFactor);
     void zoomTo(qreal scaleFactor);
-    void zoomToRect(QRectF rect);
+    void zoomToRect(const QRectF &rect);
     void resetZoom();
-    void centerOn(QPointF pos);
-
-    void setHideEdges(bool h);
-    bool hideEdges();
-    void updateAfter(QGraphicsItem *item);
-    bool fade() const {
-        return _fade;
-    }
-    void fade(bool b) {
-        _fade = b;
-    }
+    void centerOn(const QPointF &pos);
 
 public slots:
-    QGraphicsItem* createData(DataPtr n);
-    QGraphicsItem* createEdge(PointerPtr e);
+    QGraphicsItem * createData(DataPtr n);
+    QGraphicsItem * createEdge(PointerPtr e);
     void connectGraphSignals(DataStructurePtr g);
 
     /**
@@ -86,9 +71,9 @@ public slots:
 
 signals:
     void resized();
-    void keyPressed(QKeyEvent* key);
-    void keyReleased(QKeyEvent* key);
-    void addData(QPointF pos);
+    void keyPressed(QKeyEvent *key);
+    void keyReleased(QKeyEvent *key);
+    void addData(const QPointF &pos);
     void removeSelected();
     void zoomFactorChanged(qreal zoomFactor);
 
@@ -99,20 +84,17 @@ protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* mouseEvent);
     void contextMenuEvent(QGraphicsSceneContextMenuEvent* event);
     void wheelEvent(QGraphicsSceneWheelEvent* wheelEvent);
-    void keyPressEvent(QKeyEvent* keyEvent);
-    void keyReleaseEvent(QKeyEvent* keyEvent);
+    void keyPressEvent(QKeyEvent *keyEvent);
+    void keyReleaseEvent(QKeyEvent *keyEvent);
 
 private:
-    QMenu * createContextMenu(QPointF scenePosition, QPointF screenPosition);
+    QMenu * createContextMenu(const QPointF &scenePosition, const QPointF &screenPosition);
     QMenu *_contextMenu;
     Document *_graphDocument;
     DataStructurePtr _graph;
     AbstractAction *_action;
     QMultiHash<DataStructure*, QGraphicsItem* > _hashGraphs;
-    QList<QGraphicsItem*> _hidedEdges;
     QGraphicsRectItem *_whiteboard;
-    bool _hideEdges;
-    bool _fade;
     void releaseDocument();
     qreal _zoomFactor;
 };

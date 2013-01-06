@@ -51,28 +51,12 @@
 #include <KDebug>
 
 
-GraphScene::GraphScene(QObject *parent) :
-    QGraphicsScene(parent)
+GraphScene::GraphScene(QObject *parent)
+    : QGraphicsScene(parent)
+    , _graphDocument(0)
+    , _action(0)
+    , _zoomFactor(1)
 {
-    _graphDocument = 0;
-    _hideEdges = false;
-    _action = 0;
-    _zoomFactor = 1;
-}
-
-bool GraphScene::hideEdges()
-{
-    return _hideEdges;
-}
-
-void GraphScene::setHideEdges(bool h)
-{
-    _hideEdges = h;
-    if (! _hideEdges) {
-        foreach(QGraphicsItem * i, _hidedEdges) {
-            i->update();
-        }
-    }
 }
 
 void GraphScene::setActiveGraph(DataStructurePtr g)
@@ -80,12 +64,6 @@ void GraphScene::setActiveGraph(DataStructurePtr g)
     kDebug() << "Active Graph Set";
     _graph = g;
     connect( _graph.get(), SIGNAL(changed()), this, SLOT(update()), Qt::UniqueConnection);
-}
-
-void GraphScene::updateAfter(QGraphicsItem *item)
-{
-    if (_hidedEdges.contains(item)) return;
-    _hidedEdges << item;
 }
 
 void GraphScene::setAction(QAction *action)
@@ -101,27 +79,27 @@ void GraphScene::setAction(QAction *action)
 void GraphScene::setActiveDocument()
 {
     kDebug() << "Setting the document in the scene";
-    Document *gd = DocumentManager::self().activeDocument();
-    if (_graphDocument == gd) {
+    Document *document = DocumentManager::self().activeDocument();
+    if (_graphDocument == document) {
         return;
-    } else if (gd == 0) {
+    } else if (document == 0) {
         releaseDocument();
         return;
     }
 
     // set document
-    _graphDocument = gd;
+    _graphDocument = document;
     resize();
 
-    int size = gd->dataStructures().size();
+    int size = document->dataStructures().size();
     for (int i = 0; i < size; i++) {
-        updateGraph(gd->dataStructures().at(i));
-        connectGraphSignals(gd->dataStructures().at(i));
+        updateGraph(document->dataStructures().at(i));
+        connectGraphSignals(document->dataStructures().at(i));
     }
 
-    connect(gd, SIGNAL(dataStructureCreated(DataStructurePtr)),
+    connect(document, SIGNAL(dataStructureCreated(DataStructurePtr)),
             this, SLOT(connectGraphSignals(DataStructurePtr)));
-    connect(gd, SIGNAL(sceneRectChanged(QRectF)),
+    connect(document, SIGNAL(sceneRectChanged(QRectF)),
             this, SLOT(resize()));
 
     createItems();
@@ -160,7 +138,7 @@ void GraphScene::releaseDocument()
     }
 }
 
-QGraphicsItem *GraphScene::createData(DataPtr n)
+QGraphicsItem * GraphScene::createData(DataPtr n)
 {
     DataItem *nItem = (DataItem*)(DataStructureBackendManager::self().dataItem(n));
     addItem(nItem);
@@ -168,7 +146,7 @@ QGraphicsItem *GraphScene::createData(DataPtr n)
     return nItem;
 }
 
-QGraphicsItem *GraphScene::createEdge(PointerPtr e)
+QGraphicsItem * GraphScene::createEdge(PointerPtr e)
 {
     PointerItem *pointerItem = (PointerItem*)DataStructureBackendManager::self().pointerItem(e);
     addItem(pointerItem);
@@ -213,7 +191,7 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     QGraphicsScene::mousePressEvent(mouseEvent);
 }
 
-void  GraphScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent)
+void GraphScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (mouseEvent->button() == Qt::LeftButton) {
         QGraphicsItem *i = itemAt(mouseEvent->scenePos());
@@ -238,16 +216,16 @@ void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 void GraphScene::keyPressEvent(QKeyEvent *keyEvent)
 {
     keyEvent->accept();
-    emit(keyPressed(keyEvent));
+    emit keyPressed(keyEvent);
 }
 
 void GraphScene::keyReleaseEvent(QKeyEvent *keyEvent)
 {
     keyEvent->accept();
-    emit(keyReleased(keyEvent));
+    emit keyReleased(keyEvent);
 }
 
-void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event)
+void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     event->accept();
     _contextMenu = createContextMenu(event->scenePos(), event->screenPos());
@@ -257,14 +235,13 @@ void GraphScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* event)
 
 void GraphScene::updateGraph(DataStructurePtr g)
 {
-    //FIXME this is a workaround to trigger updates
-    //FIXME only default data type considered
-    foreach(DataPtr n, g->dataList(0)) {
+    //TODO this is a workaround to trigger updates
+    DataList dataList = g->dataListAll();
+    foreach(DataPtr n, dataList) {
         n->setColor(n->color());
     }
-
-    //FIXME only default pointer type considered
-    foreach(PointerPtr e, g->pointers(0)) {
+    PointerList pointerList = g->pointerListAll();
+    foreach(PointerPtr e, pointerList) {
         e->setWidth(e->width());
     }
 }
@@ -312,7 +289,7 @@ void GraphScene::resize()
     emit resized();
 }
 
-qreal GraphScene::zoomFactor()
+qreal GraphScene::zoomFactor() const
 {
     return _zoomFactor;
 }
@@ -338,7 +315,7 @@ void GraphScene::zoomTo(qreal scaleFactor)
     emit zoomFactorChanged(_zoomFactor);
 }
 
-void GraphScene::zoomToRect(QRectF rect)
+void GraphScene::zoomToRect(const QRectF &rect)
 {
     views().at(0)->fitInView(rect, Qt::KeepAspectRatioByExpanding);
     //FIXME add computation for new zoomfactor!
@@ -351,13 +328,13 @@ void GraphScene::resetZoom()
     views().at(0)->resetMatrix();
 }
 
-void GraphScene::centerOn(QPointF pos)
+void GraphScene::centerOn(const QPointF &pos)
 {
     views().at(0)->centerOn(pos);
 }
 
 
-QMenu* GraphScene::createContextMenu(QPointF scenePosition, QPointF screenPosition)
+QMenu * GraphScene::createContextMenu(const QPointF &scenePosition, const QPointF &screenPosition)
 {
     QMenu *menu = new QMenu; // the context menu
     QMenu *menuDataStructure = menu->addMenu(i18nc("@title:menu", "Data Structure"));

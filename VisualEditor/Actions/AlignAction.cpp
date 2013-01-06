@@ -104,8 +104,9 @@ void AlignAction::align()
         dataList = _registeredData;
     }
 
-    if (dataList.size() < 1) return;
-    _graphScene->setHideEdges(true);
+    if (dataList.size() < 1) {
+        return;
+    }
     switch (_orientation) {
     case Left :
     case VCenter :
@@ -133,7 +134,6 @@ void AlignAction::align()
         break;
     }
 
-    _graphScene->setHideEdges(false);
     unsetData();
 }
 
