@@ -44,6 +44,9 @@ EdgeItem::EdgeItem(PointerPtr edge, QGraphicsItem *parent)
 {
     _loop = (pointer()->from() == pointer()->to());
     setPath(createCurves());
+    updatePos(); //TODO this is a workaround: updatePos should be automatically called when
+                 //     curves are drawn at Pointer.h; proper fix requires interface changes
+                 //     delayed for 4.11
 
     connect(edge.get(), SIGNAL(changed()), this, SLOT(updatePathLayout()));
     connect(edge.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updatePathLayout()));
