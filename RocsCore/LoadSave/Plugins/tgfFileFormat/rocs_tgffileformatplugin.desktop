@@ -10,6 +10,7 @@ X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 Name=Rocs TGF Graph File Plugin
+Name[bs]=Rocs TGF Datoteka grafičkih dodatka
 Name[ca]=Endollable de fitxer gràfic TGF del Rocs
 Name[cs]=Zásuvný modul souborů Rocs TGF
 Name[da]=TGF graffil-plugin til Rocs
