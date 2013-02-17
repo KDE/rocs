@@ -38,10 +38,10 @@ template<typename T>
 void ValueModifier::enumerate(const QList<T> &list, const QString &property, int start, const QString &baseString, bool overrideValues = true)
 {
     for (int i = 0; i < list.size(); i++) {
-        if (!overrideValues && !list[i]->property(property.toStdString().c_str()).isNull()) {
+        if (!overrideValues && !list[i]->property(property.toLatin1()).isNull()) {
             return;
         }
-        list[i]->setProperty(property.toStdString().c_str(), baseString + QString::number(start++));
+        list[i]->setProperty(property.toLatin1(), baseString + QString::number(start++));
     }
 }
 template void ValueModifier::enumerate<DataPtr>(const QList<DataPtr> &list, const QString &property, int start, const QString &baseString, bool overrideValues);
@@ -60,10 +60,10 @@ void ValueModifier::enumerateAlpha(const QList< T >& list, const QString &proper
     }
 
     for (int i = 0; i < list.size(); i++) {
-        if (!overrideValues && !list[i]->property(property.toStdString().c_str()).isNull()) {
+        if (!overrideValues && !list[i]->property(property.toLatin1()).isNull()) {
             return;
         }
-        list[i]->setProperty(property.toStdString().c_str(), identifier);
+        list[i]->setProperty(property.toLatin1(), identifier);
         qDebug() << "XXX " << identifier;
 
         // compute new identifier by lexicographical increasing
@@ -99,10 +99,10 @@ void ValueModifier::assignRandomIntegers(const QList<T> &list, const QString &pr
     boost::variate_generator<boost::mt19937&, boost::uniform_int<> > die(gen, distribution);
 
     for (int i = 0; i < list.size(); i++) {
-        if (!overrideValues && !list[i]->property(property.toStdString().c_str()).isNull()) {
+        if (!overrideValues && !list[i]->property(property.toLatin1()).isNull()) {
             return;
         }
-        list[i]->setProperty(property.toStdString().c_str(), QString::number(die()));
+        list[i]->setProperty(property.toLatin1(), QString::number(die()));
     }
 }
 template void ValueModifier::assignRandomIntegers<DataPtr>(const QList<DataPtr> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues);
@@ -123,10 +123,10 @@ void ValueModifier::assignRandomReals(const QList<T> &list, const QString &prope
     boost::variate_generator<boost::mt19937&, boost::uniform_real<> > die(gen, distribution);
 
     for (int i = 0; i < list.size(); i++) {
-        if (!overrideValues && !list[i]->property(property.toStdString().c_str()).isNull()) {
+        if (!overrideValues && !list[i]->property(property.toLatin1()).isNull()) {
             return;
         }
-        list[i]->setProperty(property.toStdString().c_str(), QString::number(die()));
+        list[i]->setProperty(property.toLatin1(), QString::number(die()));
     }
 }
 template void ValueModifier::assignRandomReals<DataPtr>(const QList<DataPtr> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
@@ -136,10 +136,10 @@ template<typename T>
 void ValueModifier::assignConstantValue(const QList<T> &list, const QString &property, const QString &constant, bool overrideValues = true)
 {
     for (int i = 0; i < list.size(); i++) {
-        if (!overrideValues && !list[i]->property(property.toStdString().c_str()).isNull()) {
+        if (!overrideValues && !list[i]->property(property.toLatin1()).isNull()) {
             return;
         }
-        list[i]->setProperty(property.toStdString().c_str(), constant);
+        list[i]->setProperty(property.toLatin1(), constant);
     }
 }
 template void ValueModifier::assignConstantValue<DataPtr>(const QList<DataPtr> &list, const QString &property, const QString &constant, bool overrideValues = true);

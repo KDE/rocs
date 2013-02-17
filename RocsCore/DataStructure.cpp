@@ -314,8 +314,8 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
     d->_dataTypeLists[dataType].append(data);
     DataTypePtr type = document()->dataType(dataType);
     foreach(const QString &property, type->properties()) {
-        if (!data->property(property.toStdString().c_str()).isValid()
-            || data->property(property.toStdString().c_str()).isNull())
+        if (!data->property(property.toLatin1()).isValid()
+            || data->property(property.toLatin1()).isNull())
         {
             data->addDynamicProperty(property, type->propertyDefaultValue(property));
         }
@@ -378,8 +378,8 @@ PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType)
     d->_pointerTypeLists[pointerType].append(pointer);
     PointerTypePtr type = document()->pointerType(pointerType);
     foreach(const QString &property, type->properties()) {
-        if (!pointer->property(property.toStdString().c_str()).isValid()
-            || pointer->property(property.toStdString().c_str()).isNull())
+        if (!pointer->property(property.toLatin1()).isValid()
+            || pointer->property(property.toLatin1()).isNull())
         {
             pointer->addDynamicProperty(property, type->propertyDefaultValue(property));
         }
@@ -499,8 +499,8 @@ void DataStructure::renameDynamicProperty(const QString& oldName, const QString&
         kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
-    setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));
-    setProperty(oldName.toStdString().c_str(), QVariant::Invalid);
+    setProperty(newName.toLatin1(), property(oldName.toLatin1()));
+    setProperty(oldName.toLatin1(), QVariant::Invalid);
 }
 
 void DataStructure::add_property(const QString& name, const QVariant& value)

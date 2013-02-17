@@ -176,7 +176,7 @@ void Data::setDataType(int dataType)
     d->_dataType = d->_dataStructure->document()->dataType(dataType);
     d->_dataStructure->updateData(getData());
     foreach(const QString& property, d->_dataType->properties()) {
-        if (this->property(property.toStdString().c_str()) == QVariant::Invalid) {
+        if (this->property(property.toLatin1()) == QVariant::Invalid) {
             addDynamicProperty(property, d->_dataType->propertyDefaultValue(property));
         }
     }
@@ -427,23 +427,23 @@ void Data::addDynamicProperty(const QString& property, const QVariant& value)
         kWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
-    setProperty(property.toStdString().c_str(), value);
+    setProperty(property.toLatin1(), value);
     emit propertyAdded(property);
 }
 
 void Data::removeDynamicProperty(const QString& property)
 {
     // setting property to invalid is equals to deleting it
-    setProperty(property.toStdString().c_str(), QVariant::Invalid);
+    setProperty(property.toLatin1(), QVariant::Invalid);
     emit propertyRemoved(property);
 }
 
 void Data::updateDynamicProperty(const QString& property)
 {
-    if (this->property(property.toStdString().c_str()) == QVariant::Invalid
-        || this->property(property.toStdString().c_str()).toString().isEmpty()
+    if (this->property(property.toLatin1()) == QVariant::Invalid
+        || this->property(property.toLatin1()).toString().isEmpty()
     ) {
-        this->setProperty(property.toStdString().c_str(), d->_dataType->propertyDefaultValue(property));
+        this->setProperty(property.toLatin1(), d->_dataType->propertyDefaultValue(property));
     }
     emit propertyChanged(property);
 }
@@ -454,8 +454,8 @@ void Data::renameDynamicProperty(const QString& oldName, const QString& newName)
         kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
-    setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));
-    setProperty(oldName.toStdString().c_str(), QVariant::Invalid);
+    setProperty(newName.toLatin1(), property(oldName.toLatin1()));
+    setProperty(oldName.toLatin1(), QVariant::Invalid);
 }
 
 QScriptValue Data::scriptValue() const

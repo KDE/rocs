@@ -23,6 +23,7 @@ include_directories(
     ${KDE4_INCLUDES}
     ${QT_INCLUDES}
 )
+add_definitions(-DQT_STL)
 
 set(gmlFileFormatPlugin_SRCS
     GmlFileFormatPlugin.cpp

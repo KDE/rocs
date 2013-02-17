@@ -202,7 +202,7 @@ void PointerItem::registerProperty(const QString& name)
         return;
     }
     PointerTypePtr pointerType = d->_pointer->dataStructure()->document()->pointerType(d->_pointer->pointerType());
-    d->_propertyValues.insert(name, new QGraphicsSimpleTextItem(d->_pointer->property(name.toStdString().c_str()).toString()));
+    d->_propertyValues.insert(name, new QGraphicsSimpleTextItem(d->_pointer->property(name.toLatin1()).toString()));
     d->_propertyValues[name]->setFlags(ItemIgnoresTransformations);
     d->_propertyValues[name]->setVisible(pointerType->isPropertyVisible(name));
     d->_propertyValues[name]->setFont(d->_font);
@@ -219,7 +219,7 @@ void PointerItem::updateProperty(const QString& name)
         return;
     }
     PointerTypePtr pointerType = d->_pointer->dataStructure()->document()->pointerType(d->_pointer->pointerType());
-    d->_propertyValues[name]->setText(d->_pointer->property(name.toStdString().c_str()).toString());
+    d->_propertyValues[name]->setText(d->_pointer->property(name.toLatin1()).toString());
     d->_propertyValues[name]->setVisible(pointerType->isPropertyVisible(name));
     d->_propertyValues[name]->update();
     updateAttributes();

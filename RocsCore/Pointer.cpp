@@ -270,10 +270,10 @@ void Pointer::removeDynamicProperty(const QString& property)
 
 void Pointer::updateDynamicProperty(const QString& property)
 {
-    if (this->property(property.toStdString().c_str()) == QVariant::Invalid
-        || this->property(property.toStdString().c_str()).toString().isEmpty()
+    if (this->property(property.toLatin1()) == QVariant::Invalid
+        || this->property(property.toLatin1()).toString().isEmpty()
     ) {
-        this->setProperty(property.toStdString().c_str(), d->pointerType->propertyDefaultValue(property));
+        this->setProperty(property.toLatin1(), d->pointerType->propertyDefaultValue(property));
     }
     emit propertyChanged(property);
 }
@@ -284,8 +284,8 @@ void Pointer::renameDynamicProperty(const QString& oldName, const QString& newNa
         kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
-    setProperty(newName.toStdString().c_str(), property(oldName.toStdString().c_str()));
-    setProperty(oldName.toStdString().c_str(), QVariant::Invalid);
+    setProperty(newName.toLatin1(), property(oldName.toLatin1()));
+    setProperty(oldName.toLatin1(), QVariant::Invalid);
 }
 
 QScriptValue Pointer::set_type(int pointerType)

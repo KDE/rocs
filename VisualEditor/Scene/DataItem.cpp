@@ -192,7 +192,7 @@ void DataItem::updateProperty(const QString& name)
         return;
     }
     DataTypePtr dataType = data()->dataStructure()->document()->dataType(data()->dataType());
-    d->_propertyValues[name]->setText(data()->property(name.toStdString().c_str()).toString());
+    d->_propertyValues[name]->setText(data()->property(name.toLatin1()).toString());
     d->_propertyValues[name]->setVisible(dataType->isPropertyVisible(name));
     d->_propertyValues[name]->update();
     updatePropertyList();
@@ -226,7 +226,7 @@ void DataItem::registerProperty(const QString& name)
         return;
     }
     DataTypePtr dataType = data()->dataStructure()->document()->dataType(data()->dataType());
-    d->_propertyValues.insert(name, new QGraphicsSimpleTextItem(data()->property(name.toStdString().c_str()).toString()));
+    d->_propertyValues.insert(name, new QGraphicsSimpleTextItem(data()->property(name.toLatin1()).toString()));
     d->_propertyValues[name]->setFlags(ItemIgnoresTransformations);
     d->_propertyValues[name]->setFont(d->_font);
     d->_propertyValues[name]->setVisible(dataType->isPropertyVisible(name));
