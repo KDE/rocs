@@ -655,7 +655,7 @@ Given a data structure object of type "Graph", you can call the following member
     array input_edges();                  // list of input edges
     array output_edges();                 // list of all output edges
     array loop_edges();                   // list of all edges looping to the node
-    array connected_edges(node target);   // all edges that connect this to to node 'target'
+    array connected_edges(node target);   // all edges that connect this node with node 'target'
 </programlisting>
 </sect3>
 
