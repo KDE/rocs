@@ -58,14 +58,14 @@
 // UI RELATED INCLUDES
 #include "DocumentTypesWidget.h"
 #include "GraphVisualEditor.h"
-#include "CodeEditor.h"
-#include "Interface/ScriptOutputWidget.h"
+#include "Ui/CodeEditor.h"
+#include "Ui/ScriptOutputWidget.h"
+#include "Ui/PossibleIncludes.h"
+#include "Ui/LoadedPluginsDialog.h"
+#include "Ui/SideDockWidget.h"
+#include "Ui/JournalEditorWidget.h"
+#include "Ui/DocumentationWidget.h"
 #include "Scene/GraphicsLayout.h"
-#include "PossibleIncludes.h"
-#include "LoadedPluginsDialog.h"
-#include "SideDockWidget.h"
-#include "JournalEditorWidget.h"
-#include "DocumentationWidget.h"
 
 // Graph Related Includes
 #include "Document.h"

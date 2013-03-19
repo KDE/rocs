@@ -28,7 +28,7 @@
 #include <QByteArray>
 
 #include "rocsversion.h"
-#include "Interface/MainWindow.h"
+#include "Ui/MainWindow.h"
 #include <DataStructureBackendManager.h>
 
 

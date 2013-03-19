@@ -34,8 +34,7 @@ include_directories(
     ${ROCSVISUALEDITOR_INCLUDES}
     Actions/
     GraphicsItem/
-    Interface/
-    Interface/VisualEditor
+    Ui/
     LoadSave/
     Models/
     Plugins/
@@ -47,20 +46,20 @@ set( rocs_actions_SRCS
 )
 
 set( rocs_interface_SRCS
-    Interface/DocumentationWidget.cpp
-    Interface/JournalEditorWidget.cpp
-    Interface/SideDockWidget.cpp
-    Interface/ImporterExporterManager.cpp
-    Interface/IncludeManagerSettings.cpp
-    Interface/MainWindow.cpp
-    Interface/Separator.cpp
-    Interface/TabWidget.cpp
-    Interface/CodeEditor.cpp
-    Interface/DocumentTypesWidget.cpp
-    Interface/ConfigureDefaultProperties.cpp
-    Interface/LoadedPluginsDialog.cpp
-    Interface/PossibleIncludes.cpp
-    Interface/ScriptOutputWidget.cpp
+    Ui/DocumentationWidget.cpp
+    Ui/JournalEditorWidget.cpp
+    Ui/SideDockWidget.cpp
+    Ui/ImporterExporterManager.cpp
+    Ui/IncludeManagerSettings.cpp
+    Ui/MainWindow.cpp
+    Ui/Separator.cpp
+    Ui/TabWidget.cpp
+    Ui/CodeEditor.cpp
+    Ui/DocumentTypesWidget.cpp
+    Ui/ConfigureDefaultProperties.cpp
+    Ui/LoadedPluginsDialog.cpp
+    Ui/PossibleIncludes.cpp
+    Ui/ScriptOutputWidget.cpp
 )
 
 set( rocs_SRCS
@@ -71,11 +70,11 @@ set( rocs_SRCS
 
 kde4_add_ui_files(
     rocs_SRCS
-    Interface/DocumentationWidget.ui
-    Interface/JournalEditorWidget.ui
-    Interface/DocumentTypesWidget.ui
-    Interface/ConfigureDefaultProperties.ui
-    Interface/ScriptOutputWidget.ui
+    Ui/DocumentationWidget.ui
+    Ui/JournalEditorWidget.ui
+    Ui/DocumentTypesWidget.ui
+    Ui/ConfigureDefaultProperties.ui
+    Ui/ScriptOutputWidget.ui
 )
 
 # we currently only support QtScript
