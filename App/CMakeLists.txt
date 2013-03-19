@@ -35,6 +35,7 @@ include_directories(
     Actions/
     GraphicsItem/
     Ui/
+    Interfaces/
     LoadSave/
     Models/
     Plugins/
@@ -60,6 +61,7 @@ set( rocs_interface_SRCS
     Ui/LoadedPluginsDialog.cpp
     Ui/PossibleIncludes.cpp
     Ui/ScriptOutputWidget.cpp
+    Interfaces/ConsoleInterface.cpp
 )
 
 set( rocs_SRCS
@@ -127,3 +129,5 @@ if(KDE4_BUILD_TESTS)
 endif(KDE4_BUILD_TESTS)
 
 
+
+add_subdirectory(Interfaces)
