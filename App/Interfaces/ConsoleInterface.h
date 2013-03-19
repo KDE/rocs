@@ -44,6 +44,18 @@ public:
     };
 
     /**
+     * Clear the backlog.
+     */
+    void clear();
+
+    /**
+     * Get all backlog since last clear.
+     * \return the backlog
+     */
+    QList< QPair<MessageType, QString> > backlog() const;
+
+public slots:
+    /**
      * Print a log message \p message.
      */
     Q_INVOKABLE void log(const QString &message);
@@ -58,19 +70,8 @@ public:
      */
     Q_INVOKABLE void error(const QString &message);
 
-    /**
-     * Clear the backlog.
-     */
-    void clear();
-
-    /**
-     * Get all backlog since last clear.
-     * \return the backlog
-     */
-    QList< QPair<MessageType, QString> > backlog() const;
-
 signals:
-    void backlogChanged(MessageType,QString);
+    void backlogChanged(ConsoleInterface::MessageType,QString);
 
 private:
     Q_DISABLE_COPY(ConsoleInterface)

@@ -66,6 +66,7 @@ public:
      * Output the given string \p message as debug output.
      *
      * \param message the string to be print
+     * \deprecated
      */
     void debug(const QString& message);
 
@@ -73,6 +74,7 @@ public:
      * Output the given string \p message as program output.
      *
      * \param message the string to be print
+     * \deprecated
      */
     void output(const QString& message);
 
@@ -104,7 +106,7 @@ public:
 signals:
     void sendOutput(const QString& s);
     void sendDebug(const QString& s);
-    void scriptError();
+    void scriptError(const QString& message);
     void engineCreated(QScriptEngine* e);
     void finished();
 

@@ -19,40 +19,37 @@
 #ifndef SCRIPTOUTPUTWIDGET_H
 #define SCRIPTOUTPUTWIDGET_H
 
+#include "Interfaces/ConsoleInterface.h"
 #include <QtGui/QWidget>
 #include "ui_ScriptOutputWidget.h"
-
-class QtScriptBackend;
 
 /**
  * \class ScriptOutputWidget
  *
- * This widget displays output and debug messages from a QtScriptBackend.
- * Add this widget to your UI and set the corresponding QtScriptBackend with \see setEngine(...).
- * The widget listens for the QtScriptBackend::sendDebug(const QString& s) and
- * QtScriptBackend::sendOutput(const QString& s) signals. If a debug message is emitted by
- * the engine, the debug output is shown automatically.
+ * This widget displays output and debug messages from a ConsoleInterface object.
+ * Add this widget to your UI, add a ConsoleInterface object and registert that object at your
+ * script engine.
  */
 class ScriptOutputWidget : public QWidget
 {
     Q_OBJECT
 public:
     explicit ScriptOutputWidget(QWidget *parent = 0);
-    void setEngine(QtScriptBackend* engine);
+    void setConsoleInterface(ConsoleInterface* console);
+    ConsoleInterface * consoleInterface() const;
     bool isOutputClearEnabled() const;
 
 public slots:
-    void unsetEngine();
+    void unsetConsoleInterface();
+    void appendOutput(ConsoleInterface::MessageType type, const QString& message);
     void showDebugOutput(bool show = true);
-    void appendOutput(const QString& string);
-    void appendDebugOutput(const QString& string);
     void clear();
 
 private slots:
     void updateFixOutputButton();
 
 private:
-    QtScriptBackend* _engine;
+    ConsoleInterface* _console;
     Ui::ScriptOutputWidget* ui;
 };
 

@@ -18,12 +18,14 @@
 
 #include "ScriptOutputWidget.h"
 #include "DocumentManager.h"
+#include "Interfaces/ConsoleInterface.h"
 #include <QWidget>
 #include <QtScriptBackend.h>
+#include <KDebug>
 
 ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     : QWidget(parent),
-    _engine(0)
+    _console(0)
 {
     ui = new Ui::ScriptOutputWidget;
     ui->setupUi(this);
@@ -36,31 +38,30 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     connect(ui->buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
     connect(ui->buttonDisableClear, SIGNAL(clicked(bool)), this, SLOT(updateFixOutputButton()));
     connect(ui->buttonClear, SIGNAL(clicked(bool)), this, SLOT(clear()));
-    connect(&DocumentManager::self(), SIGNAL(documentRemoved(Document*)), this, SLOT(unsetEngine()));
 }
 
-void ScriptOutputWidget::unsetEngine()
+void ScriptOutputWidget::unsetConsoleInterface()
 {
-    if (_engine) {
-        _engine->disconnect(this);
+    if (_console) {
+        _console->disconnect(this);
     }
-    _engine = 0;
+    _console = 0;
 }
 
-void ScriptOutputWidget::showDebugOutput(bool show)
+void ScriptOutputWidget::setConsoleInterface(ConsoleInterface* console)
 {
-    if (show && !ui->buttonEnableDebugOutput->isChecked()) {
-        ui->buttonEnableDebugOutput->toggle();
-    }
-    if (!show && ui->buttonEnableDebugOutput->isChecked()) {
-        ui->buttonEnableDebugOutput->toggle();
-    }
-    if (show) {
-        ui->output->setCurrentIndex(1);
-    } else {
-        ui->output->setCurrentIndex(0);
-    }
+    unsetConsoleInterface();
+    _console = console;
+
+    connect(console, SIGNAL(backlogChanged(ConsoleInterface::MessageType,QString)),
+            this, SLOT(appendOutput(ConsoleInterface::MessageType,QString)));
 }
+
+ConsoleInterface * ScriptOutputWidget::consoleInterface() const
+{
+    return _console;
+}
+
 
 void ScriptOutputWidget::updateFixOutputButton()
 {
@@ -78,27 +79,40 @@ void ScriptOutputWidget::clear()
     ui->txtOutput->clear();
 }
 
-void ScriptOutputWidget::setEngine(QtScriptBackend* engine)
-{
-    unsetEngine();
-    _engine = engine;
-
-    connect(engine, SIGNAL(sendDebug(QString)), this,  SLOT(appendDebugOutput(QString)));
-    connect(engine, SIGNAL(scriptError()), this, SLOT(showDebugOutput()));
-    connect(engine, SIGNAL(sendOutput(QString)), this, SLOT(appendOutput(QString)));
-}
-
 bool ScriptOutputWidget::isOutputClearEnabled() const
 {
     return !ui->buttonDisableClear->isChecked();
 }
 
-void ScriptOutputWidget::appendOutput(const QString& string)
+void ScriptOutputWidget::appendOutput(ConsoleInterface::MessageType type, const QString& message)
 {
-    ui->txtOutput->append(string);
+    switch(type)
+    {
+    case ConsoleInterface::Log:
+        ui->txtOutput->append(message);
+        break;
+    case ConsoleInterface::Debug:
+        ui->dbgOutput->append(message);
+        break;
+    case ConsoleInterface::Error:
+        ui->txtOutput->append("<b style=\"color: red\">" + message + "</b>");
+        break;
+    default:
+        kWarning() << "Unknown message type, aborting printing.";
+    }
 }
 
-void ScriptOutputWidget::appendDebugOutput(const QString& string)
+void ScriptOutputWidget::showDebugOutput(bool show)
 {
-    ui->dbgOutput->append(string);
+    if (show && !ui->buttonEnableDebugOutput->isChecked()) {
+        ui->buttonEnableDebugOutput->toggle();
+    }
+    if (!show && ui->buttonEnableDebugOutput->isChecked()) {
+        ui->buttonEnableDebugOutput->toggle();
+    }
+    if (show) {
+        ui->output->setCurrentIndex(1);
+    } else {
+        ui->output->setCurrentIndex(0);
+    }
 }

@@ -66,7 +66,6 @@ public:
 };
 
 
-
 static QScriptValue debug_script(QScriptContext* context, QScriptEngine* /*engine*/)
 {
     DocumentManager::self().activeDocument()->engineBackend()->debug(QString("%1").arg(context->argument(0).toString()));
@@ -91,8 +90,6 @@ static QScriptValue include_script(QScriptContext *context, QScriptEngine* /*eng
     DocumentManager::self().activeDocument()->engineBackend()->include(QString("%1").arg(context->argument(0).toString()));
     return QScriptValue();
 }
-
-
 
 QtScriptBackend::QtScriptBackend(QObject* parent)
     : QObject(parent)
@@ -179,9 +176,8 @@ QString QtScriptBackend::execute()
 
     QString result = d->_engine->evaluate(d->_currentScript, i18n("Rocs Console script")).toString();
     if (d->_engine && d->_engine->hasUncaughtException()) {
-        emit scriptError();
-        emit sendDebug("<b style=\"color: red\">" + result + "</b>");
-        emit sendDebug("<b style=\"color: red\">" + d->_engine->uncaughtExceptionBacktrace().join("\n") + "</b>");
+        emit scriptError(i18n("Script Error: %1", result));
+        emit scriptError(d->_engine->uncaughtExceptionBacktrace().join("\n"));
     }
     if (d->_engine) {
         d->_engine->popContext();
@@ -220,8 +216,7 @@ void QtScriptBackend::executeStep()
 
         QString error = d->_engine->evaluate(d->_currentScript).toString();
         if (d->_engine && d->_engine->hasUncaughtException()) {
-            emit scriptError();
-            emit sendDebug("<b style=\"color: red\">" + error + "</b>");
+            emit scriptError(i18n("Script Error: %1", error));
         }
     }
 
@@ -243,16 +238,17 @@ void QtScriptBackend::setScript(const QString& s, Document *graphs)
 {
     d->_currentScript = s;
     d->_document = graphs;
-    kDebug() << "script Set" << d->_currentScript;
 }
 
 void QtScriptBackend::debug(const QString& message)
 {
-    emit sendDebug("<b>" + message + "</b>");
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%1\" instead.", QString("debug(message)"), QString("Console.debug(message)")));
+    emit sendDebug(message);
 }
 
 void QtScriptBackend::output(const QString& message)
 {
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%1\" instead.", QString("output(message)"), QString("Console.log(message)")));
     emit sendOutput(message);
     emit sendDebug(message);
 }
@@ -279,10 +275,8 @@ void QtScriptBackend::include(const QString& filePath)
         d->_engine->currentContext()->setActivationObject(d->_engine->currentContext()->parentContext()->activationObject());
         QString error = d->_engine->evaluate(script, filePath).toString();
         if (d->_engine && d->_engine->hasUncaughtException()) {
-            emit scriptError();
-            emit sendDebug(i18n("<b style=\"color: red\"> Error in include file %1</b>", filePath));
-            emit sendDebug("<b style=\"color: red\">" + error + "</b>");
-            emit sendDebug("<b style=\"color: red\">" + d->_engine->uncaughtExceptionBacktrace().join("\n") + "</b>");
+            emit scriptError(i18n("Script error in included file %1", filePath));
+            emit scriptError(d->_engine->uncaughtExceptionBacktrace().join("\n"));
         }
     }
 }

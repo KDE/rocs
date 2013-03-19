@@ -280,6 +280,7 @@ QWidget* MainWindow::setupScriptPanel()
 
     _codeEditor = new CodeEditor(this);
     _outputWidget = new ScriptOutputWidget(this);
+    _outputWidget->setConsoleInterface(new ConsoleInterface(_outputWidget));
 
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -528,10 +529,21 @@ void MainWindow::setActiveDocument()
 {
     kDebug() << "Setting the document in the main window";
     Document *activeDocument = DocumentManager::self().activeDocument();
-    QtScriptBackend *engine = activeDocument->engineBackend();
 
+    // create engine and interface objects to UI plugins
+    QtScriptBackend *engine = activeDocument->engineBackend();
+    engine->engine();
+
+    // TODO this is not an elegant solution: actually we want plugins for all interfaces
+    //      that automatically include into the engine and the interface
+    QScriptValue console = engine->engine()->newQObject(_outputWidget->consoleInterface());
+    engine->engine()->globalObject().setProperty("Console", console);
+    connect(engine, SIGNAL(scriptError(QString)), _outputWidget->consoleInterface(), SLOT(error(QString)));
+    connect(engine, SIGNAL(sendDebug(QString)), _outputWidget->consoleInterface(), SLOT(debug(QString)));
+    connect(engine, SIGNAL(sendOutput(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
+
+    // finally set active
     _graphVisualEditor->setActiveDocument();
-    _outputWidget->setEngine(engine);
 
     // Update engine toolbar
     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
@@ -539,7 +551,6 @@ void MainWindow::setActiveDocument()
     activeDocument->setModified(false);
     setupToolsPluginsAction();
 }
-
 
 void MainWindow::releaseDocument(Document* d)
 {
