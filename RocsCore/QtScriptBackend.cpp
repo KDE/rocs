@@ -182,7 +182,7 @@ QString QtScriptBackend::execute()
     if (d->_engine) {
         d->_engine->popContext();
     }
-    output(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
+    scriptInfo(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
     emit finished();
     return result;
 }
@@ -221,7 +221,7 @@ void QtScriptBackend::executeStep()
     }
 
     if (!d->_engine || !d->_engine->isEvaluating()) {
-        output(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
+        scriptInfo(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
         emit finished();
     }
 }
@@ -242,13 +242,13 @@ void QtScriptBackend::setScript(const QString& s, Document *graphs)
 
 void QtScriptBackend::debug(const QString& message)
 {
-    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%1\" instead.", QString("debug(message)"), QString("Console.debug(message)")));
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.", QString("debug(message)"), QString("Console.debug(message)")));
     emit sendDebug(message);
 }
 
 void QtScriptBackend::output(const QString& message)
 {
-    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%1\" instead.", QString("output(message)"), QString("Console.log(message)")));
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.", QString("output(message)"), QString("Console.log(message)")));
     emit sendOutput(message);
     emit sendDebug(message);
 }

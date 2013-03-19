@@ -104,9 +104,10 @@ public:
     IncludeManager& includeManager() const;
 
 signals:
-    void sendOutput(const QString& s);
-    void sendDebug(const QString& s);
-    void scriptError(const QString& message);
+    void sendOutput(const QString &message);
+    void sendDebug(const QString &message);
+    void scriptError(const QString &message);
+    void scriptInfo(const QString &message);
     void engineCreated(QScriptEngine* e);
     void finished();
 

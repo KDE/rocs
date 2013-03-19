@@ -539,6 +539,7 @@ void MainWindow::setActiveDocument()
     QScriptValue console = engine->engine()->newQObject(_outputWidget->consoleInterface());
     engine->engine()->globalObject().setProperty("Console", console);
     connect(engine, SIGNAL(scriptError(QString)), _outputWidget->consoleInterface(), SLOT(error(QString)));
+    connect(engine, SIGNAL(scriptInfo(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
     connect(engine, SIGNAL(sendDebug(QString)), _outputWidget->consoleInterface(), SLOT(debug(QString)));
     connect(engine, SIGNAL(sendOutput(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
 
