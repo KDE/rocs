@@ -5,6 +5,7 @@
   <!ENTITY package "kdeedu">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
+  <!ENTITY scriptingapi SYSTEM "scripting-api.docbook">
 ]>
 <book id="rocs" lang="&language;">
 
@@ -960,6 +961,8 @@ digraph myGraph {
 
 </sect1>
 </chapter>
+
+&scriptingapi;   <!--Scripting Interface API Documentation-->
 
 <chapter id="credits">
 <title>Credits and License</title>

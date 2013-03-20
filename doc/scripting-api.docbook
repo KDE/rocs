@@ -1,0 +1,62 @@
+<chapter id="scripting-api">
+<title>The Scripting API</title>
+
+<sect1 id="include-scripting-interface">
+<title>Scripting Interfaces</title>
+<sect2>
+<title>Console Object</title>
+<para>
+    The Console object allows you to print messages of different importance to a log.
+</para>
+<para>
+    Console is not a constructor. All properties and methods of Console can be called by using Console as an object, without creating it.
+</para>
+</sect2>
+<sect2>
+<title>Syntax</title>
+<programlisting>
+Console.log("This is a program message."); // print a program message
+Console.debug("A debug message."); // print a debug message
+</programlisting>
+</sect2>
+<sect2>
+<title>Console Object Methods</title>
+<sect3>
+<title>log()</title>
+<para>
+    Print the given message of normal severity.
+</para>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>log</function></funcdef>
+    <paramdef>string <parameter>message</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title>debug()</title>
+<para>
+    Print the given debug message.
+</para>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>debug</function></funcdef>
+    <paramdef>string <parameter>message</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+</sect3>
+<sect3>
+<title>error()</title>
+<para>
+    Print the given error message of high severity.
+</para>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>error</function></funcdef>
+    <paramdef>string <parameter>message</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+</sect3>
+</sect2>
+</sect1>
+</chapter>
