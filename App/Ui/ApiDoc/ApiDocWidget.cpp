@@ -18,11 +18,16 @@
 
 
 #include "ApiDocWidget.h"
+#include "ApiDocManager.h"
+
 #include <QWebHistory>
 
 ApiDocWidget::ApiDocWidget(QWidget* parent)
     : QWidget(parent)
+    , _manager(new ApiDocManager(this))
 {
     ui = new Ui::ApiDocWidget;
     ui->setupUi(this);
+
+    _manager->loadLocalData();
 }

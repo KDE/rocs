@@ -29,7 +29,6 @@
       <xs:element name="name" type="xs:string" />
       <xs:element name="description" type="description" />
       <xs:element name="type" type="xs:string" />
-      <xs:element name="description" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
 

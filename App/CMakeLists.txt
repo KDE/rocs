@@ -63,6 +63,7 @@ set( rocs_interface_SRCS
     Ui/ScriptOutputWidget.cpp
     Ui/ApiDoc/ApiDocWidget.cpp
     Ui/ApiDoc/ObjectDocumentation.cpp
+    Ui/ApiDoc/ApiDocManager.cpp
     Interfaces/ConsoleInterface.cpp
 )
 
@@ -111,6 +112,7 @@ target_link_libraries(rocs
     ${QT_QTSCRIPT_LIBRARY}
     ${QT_QTSCRIPTTOOLS_LIBRARY}
     ${QT_QTWEBKIT_LIBRARY}
+    ${QT_QTXMLPATTERNS_LIBRARY}
     ${KDE4_KNEWSTUFF3_LIBS}
 )
 
@@ -119,11 +121,12 @@ target_link_libraries(rocs
 install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( PROGRAMS rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs  )
+install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs )
 install( FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 install( FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
 
 add_subdirectory( Scripts )
+add_subdirectory( Ui/ApiDoc )
 
 # Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)

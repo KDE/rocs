@@ -22,6 +22,8 @@
 #include "ui_ApiDocWidget.h"
 #include <QWidget>
 
+class ApiDocManager;
+
 /**
  * \class ApiDocWidget
  * This Widget loads API information about all script interfaces and displays them.
@@ -37,6 +39,7 @@ public:
     explicit ApiDocWidget(QWidget* parent);
 
 private:
+    ApiDocManager *_manager;
     Ui::ApiDocWidget *ui;
 };
 
