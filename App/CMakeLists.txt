@@ -62,6 +62,7 @@ set( rocs_interface_SRCS
     Ui/PossibleIncludes.cpp
     Ui/ScriptOutputWidget.cpp
     Ui/ApiDoc/ApiDocWidget.cpp
+    Ui/ApiDoc/ObjectDocumentation.cpp
     Interfaces/ConsoleInterface.cpp
 )
 
