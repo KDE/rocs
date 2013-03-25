@@ -65,6 +65,7 @@
 #include "Ui/SideDockWidget.h"
 #include "Ui/JournalEditorWidget.h"
 #include "Ui/DocumentationWidget.h"
+#include "Ui/ApiDoc/ApiDocWidget.h"
 #include "Scene/GraphicsLayout.h"
 
 // Graph Related Includes
@@ -352,6 +353,10 @@ QWidget* MainWindow::setupSidePanel()
     // Rocs handbook
     DocumentationWidget* documentation = new DocumentationWidget(panel);
     sideDock->addDock(documentation, i18nc("@title", "Handbook"), KIcon("help-contents"));
+
+    // Rocs scripting API documentation
+    ApiDocWidget* apiDoc = new ApiDocWidget(panel);
+    sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), KIcon("help-contents"));
 
     return panel;
 }

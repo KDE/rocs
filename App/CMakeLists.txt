@@ -61,6 +61,7 @@ set( rocs_interface_SRCS
     Ui/LoadedPluginsDialog.cpp
     Ui/PossibleIncludes.cpp
     Ui/ScriptOutputWidget.cpp
+    Ui/ApiDoc/ApiDocWidget.cpp
     Interfaces/ConsoleInterface.cpp
 )
 
@@ -77,6 +78,7 @@ kde4_add_ui_files(
     Ui/DocumentTypesWidget.ui
     Ui/ConfigureDefaultProperties.ui
     Ui/ScriptOutputWidget.ui
+    Ui/ApiDoc/ApiDocWidget.ui
 )
 
 # we currently only support QtScript
@@ -127,7 +129,3 @@ if(KDE4_BUILD_TESTS)
     enable_testing()
     add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)
-
-
-
-add_subdirectory(Interfaces)
