@@ -46,6 +46,11 @@ void ApiDocManager::loadLocalData()
     }
 }
 
+QList< ObjectDocumentation* > ApiDocManager::objectApiList() const
+{
+    return _objectApiList;
+}
+
 ObjectDocumentation * ApiDocManager::objectApi(int index) const
 {
     Q_ASSERT (index >= 0 && index < _objectApiList.count());
@@ -75,7 +80,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     _objectApiList.append(objectApi);
     emit objectApiAboutToBeAdded(objectApi, _objectApiList.count() - 1);
 
-    objectApi->setTitle(root.firstChildElement("title").text());
+    objectApi->setTitle(root.firstChildElement("name").text());
     objectApi->setDescription(root.firstChildElement("description").text());
     objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
 
@@ -101,7 +106,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     }
 
     // set method documentation
-    for (QDomElement methodNode = root.firstChildElement("properties").firstChildElement();
+    for (QDomElement methodNode = root.firstChildElement("methods").firstChildElement();
         !methodNode.isNull();
         methodNode = methodNode.nextSiblingElement())
     {
