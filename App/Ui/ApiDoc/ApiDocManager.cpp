@@ -75,6 +75,8 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
 
     //TODO complete this: currently parsing only the object title
     objectApi->setTitle(root.firstChildElement("title").text());
+    objectApi->setDescription(root.firstChildElement("description").text());
+    objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
 
     emit objectApiAdded();
     return true;

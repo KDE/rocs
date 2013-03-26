@@ -34,10 +34,16 @@ public:
 
     QString title() const;
     void setTitle(const QString &title);
+    QString description() const;
+    void setDescription(const QString &description);
+    QString syntaxExample() const;
+    void setSyntaxExample(const QString &syntaxExample);
 
 private:
     Q_DISABLE_COPY(ObjectDocumentation)
     QString _title;
+    QString _description;
+    QString _syntaxExample;
 };
 
 #endif // OBJECT_DOCUMENTATION_H

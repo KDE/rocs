@@ -36,3 +36,23 @@ QString ObjectDocumentation::title() const
 {
     return _title;
 }
+
+void ObjectDocumentation::setDescription(const QString &description)
+{
+    _description = description;
+}
+
+QString ObjectDocumentation::description() const
+{
+    return _description;
+}
+
+void ObjectDocumentation::setSyntaxExample(const QString &syntaxExample)
+{
+    _syntaxExample = syntaxExample;
+}
+
+QString ObjectDocumentation::syntaxExample() const
+{
+    return _syntaxExample;
+}
