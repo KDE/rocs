@@ -19,8 +19,7 @@
 
 #include "ApiDocWidget.h"
 #include "ApiDocManager.h"
-
-#include <QWebHistory>
+#include "ApiDocModel.h"
 
 ApiDocWidget::ApiDocWidget(QWidget* parent)
     : QWidget(parent)
@@ -30,4 +29,7 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
     ui->setupUi(this);
 
     _manager->loadLocalData();
+    ApiDocModel *model = new ApiDocModel(_manager->objectApiList(), this);
+
+    ui->docTree->setModel(model);
 }
