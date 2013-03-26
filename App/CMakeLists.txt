@@ -64,6 +64,7 @@ set( rocs_interface_SRCS
     Ui/ApiDoc/ApiDocWidget.cpp
     Ui/ApiDoc/ObjectDocumentation.cpp
     Ui/ApiDoc/PropertyDocumentation.cpp
+    Ui/ApiDoc/MethodDocumentation.cpp
     Ui/ApiDoc/ApiDocManager.cpp
     Interfaces/ConsoleInterface.cpp
 )

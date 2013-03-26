@@ -19,6 +19,7 @@
 #include "ApiDocManager.h"
 #include "ObjectDocumentation.h"
 #include "PropertyDocumentation.h"
+#include "MethodDocumentation.h"
 
 #include <QIODevice>
 #include <QFile>
@@ -97,6 +98,37 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         property->setDescription(paragraphs);
 
         objectApi->addProperty(property);
+    }
+
+    // set method documentation
+    for (QDomElement methodNode = root.firstChildElement("properties").firstChildElement();
+        !methodNode.isNull();
+        methodNode = methodNode.nextSiblingElement())
+    {
+        MethodDocumentation *method = new MethodDocumentation(objectApi);
+        method->setName(methodNode.firstChildElement("name").text());
+        method->setReturnType(methodNode.firstChildElement("returnType").text());
+
+        QStringList paragraphs;
+        for (QDomElement descriptionNode = methodNode.firstChildElement("description").firstChildElement();
+            !descriptionNode.isNull();
+            descriptionNode = descriptionNode.nextSiblingElement())
+        {
+            paragraphs.append(descriptionNode.firstChildElement("para").text());
+        }
+        method->setDescription(paragraphs);
+
+        for (QDomElement parameterNode = methodNode.firstChildElement("parameters").firstChildElement();
+            !parameterNode.isNull();
+            parameterNode = parameterNode.nextSiblingElement())
+        {
+            method->addParameter(
+                parameterNode.firstChildElement("name").text(),
+                parameterNode.firstChildElement("type").text(),
+                parameterNode.firstChildElement("info").text());
+        }
+
+        objectApi->addMethod(method);
     }
 
     emit objectApiAdded();

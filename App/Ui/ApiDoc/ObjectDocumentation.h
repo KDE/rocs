@@ -24,6 +24,7 @@
 #include <KUrl>
 
 class PropertyDocumentation;
+class MethodDocumentation;
 
 class ObjectDocumentation : public QObject
 {
@@ -41,6 +42,8 @@ public:
     void setSyntaxExample(const QString &syntaxExample);
     QList<PropertyDocumentation *> properties() const;
     void addProperty(PropertyDocumentation *property);
+    QList<MethodDocumentation *> methods() const;
+    void addMethod(MethodDocumentation *method);
 
 private:
     Q_DISABLE_COPY(ObjectDocumentation)
@@ -48,6 +51,7 @@ private:
     QString _description;
     QString _syntaxExample;
     QList< PropertyDocumentation *> _properties;
+    QList< MethodDocumentation *> _methods;
 };
 
 #endif // OBJECT_DOCUMENTATION_H

@@ -66,3 +66,14 @@ QList< PropertyDocumentation* > ObjectDocumentation::properties() const
 {
     return _properties;
 }
+
+void ObjectDocumentation::addMethod(MethodDocumentation* method)
+{
+    _methods.append(method);
+}
+
+QList< MethodDocumentation* > ObjectDocumentation::methods() const
+{
+    return _methods;
+}
+
