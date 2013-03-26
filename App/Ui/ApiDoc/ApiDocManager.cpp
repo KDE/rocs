@@ -18,6 +18,7 @@
 
 #include "ApiDocManager.h"
 #include "ObjectDocumentation.h"
+#include "PropertyDocumentation.h"
 
 #include <QIODevice>
 #include <QFile>
@@ -73,10 +74,30 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     _objectApiList.append(objectApi);
     emit objectApiAboutToBeAdded(objectApi, _objectApiList.count() - 1);
 
-    //TODO complete this: currently parsing only the object title
     objectApi->setTitle(root.firstChildElement("title").text());
     objectApi->setDescription(root.firstChildElement("description").text());
     objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
+
+    // set property documentation
+    for (QDomElement propertyNode = root.firstChildElement("properties").firstChildElement();
+        !propertyNode.isNull();
+        propertyNode = propertyNode.nextSiblingElement())
+    {
+        PropertyDocumentation *property = new PropertyDocumentation(objectApi);
+        property->setName(propertyNode.firstChildElement("name").text());
+        property->setType(propertyNode.firstChildElement("type").text());
+
+        QStringList paragraphs;
+        for (QDomElement descriptionNode = propertyNode.firstChildElement("description").firstChildElement();
+            !descriptionNode.isNull();
+            descriptionNode = descriptionNode.nextSiblingElement())
+        {
+            paragraphs.append(descriptionNode.firstChildElement("para").text());
+        }
+        property->setDescription(paragraphs);
+
+        objectApi->addProperty(property);
+    }
 
     emit objectApiAdded();
     return true;

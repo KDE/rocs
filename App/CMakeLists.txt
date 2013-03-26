@@ -63,6 +63,7 @@ set( rocs_interface_SRCS
     Ui/ScriptOutputWidget.cpp
     Ui/ApiDoc/ApiDocWidget.cpp
     Ui/ApiDoc/ObjectDocumentation.cpp
+    Ui/ApiDoc/PropertyDocumentation.cpp
     Ui/ApiDoc/ApiDocManager.cpp
     Interfaces/ConsoleInterface.cpp
 )

@@ -16,53 +16,41 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ObjectDocumentation.h"
+#include "PropertyDocumentation.h"
 
-ObjectDocumentation::ObjectDocumentation(QObject* parent)
+PropertyDocumentation::PropertyDocumentation(QObject* parent)
     : QObject(parent)
 {
+
 }
 
-ObjectDocumentation::~ObjectDocumentation()
+void PropertyDocumentation::setName(const QString &name)
 {
+    _name = name;
 }
 
-void ObjectDocumentation::setTitle(const QString& title)
+QString PropertyDocumentation::name() const
 {
-    _title = title;
+    return _name;
 }
 
-QString ObjectDocumentation::title() const
-{
-    return _title;
-}
-
-void ObjectDocumentation::setDescription(const QString &description)
+void PropertyDocumentation::setDescription(const QStringList &description)
 {
     _description = description;
 }
 
-QString ObjectDocumentation::description() const
+QStringList PropertyDocumentation::description() const
 {
     return _description;
 }
 
-void ObjectDocumentation::setSyntaxExample(const QString &syntaxExample)
+void PropertyDocumentation::setType(const QString &type)
 {
-    _syntaxExample = syntaxExample;
+    _type = type;
 }
 
-QString ObjectDocumentation::syntaxExample() const
+QString PropertyDocumentation::type() const
 {
-    return _syntaxExample;
+    return _type;
 }
 
-void ObjectDocumentation::addProperty(PropertyDocumentation* property)
-{
-    _properties.append(property);
-}
-
-QList< PropertyDocumentation* > ObjectDocumentation::properties() const
-{
-    return _properties;
-}

@@ -16,38 +16,37 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OBJECT_DOCUMENTATION_H
-#define OBJECT_DOCUMENTATION_H
+#ifndef PROPERTY_DOCUMENTATION_H
+#define PROPERTY_DOCUMENTATION_H
 
 #include <QObject>
 #include <QList>
+#include <QStringList>
 #include <KUrl>
 
-class PropertyDocumentation;
 
-class ObjectDocumentation : public QObject
+class PropertyDocumentation : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ObjectDocumentation(QObject *parent = 0);
-    ~ObjectDocumentation();
+    explicit PropertyDocumentation(QObject *parent = 0);
 
-    QString title() const;
-    void setTitle(const QString &title);
-    QString description() const;
-    void setDescription(const QString &description);
-    QString syntaxExample() const;
-    void setSyntaxExample(const QString &syntaxExample);
-    QList<PropertyDocumentation *> properties() const;
-    void addProperty(PropertyDocumentation *property);
+    QString name() const;
+    void setName(const QString &name);
+    /**
+     * \return list of paragraphs
+     */
+    QStringList description() const;
+    void setDescription(const QStringList &description);
+    QString type() const;
+    void setType(const QString &type);
 
 private:
-    Q_DISABLE_COPY(ObjectDocumentation)
-    QString _title;
-    QString _description;
-    QString _syntaxExample;
-    QList< PropertyDocumentation *> _properties;
+    Q_DISABLE_COPY(PropertyDocumentation)
+    QString _name;
+    QStringList _description;
+    QString _type;
 };
 
-#endif // OBJECT_DOCUMENTATION_H
+#endif // PROPERTY_DOCUMENTATION_H
