@@ -77,3 +77,7 @@ QList< MethodDocumentation* > ObjectDocumentation::methods() const
     return _methods;
 }
 
+QString ObjectDocumentation::apiDocumentIdentifier()
+{
+    return _title;
+}

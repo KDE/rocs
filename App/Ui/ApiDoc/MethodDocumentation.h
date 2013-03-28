@@ -46,6 +46,7 @@ public:
     void setReturnType(const QString &type);
     QList<Parameter> parameters() const;
     void addParameter(const QString &name, const QString &type, const QString &info);
+    QString apiDocumentAnchor();
 
 private:
     Q_DISABLE_COPY(MethodDocumentation)

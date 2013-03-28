@@ -44,6 +44,8 @@ public:
     void addProperty(PropertyDocumentation *property);
     QList<MethodDocumentation *> methods() const;
     void addMethod(MethodDocumentation *method);
+    QString apiDocumentIdentifier();
+    QString apiDocumentAnchor();
 
 private:
     Q_DISABLE_COPY(ObjectDocumentation)

@@ -36,12 +36,17 @@ public:
     int childCount() const;
     int columnCount() const;
     QVariant data(int column) const;
+    void setDocumentAnchor(const QString &document, const QString &anchor);
+    QString anchor();
+    QString document();
     int row() const;
     Item *parent();
 
 private:
     QList<Item*> _childItems;
     QList<QVariant> _itemData;
+    QString _anchor;
+    QString _document;
     Item *_parentItem;
 };
 
@@ -87,6 +92,22 @@ int Item::columnCount() const
 QVariant Item::data(int column) const
 {
     return _itemData.value(column);
+}
+
+void Item::setDocumentAnchor(const QString& document, const QString& anchor)
+{
+    _anchor = anchor;
+    _document = document;
+}
+
+QString Item::anchor()
+{
+    return _anchor;
+}
+
+QString Item::document()
+{
+    return _document;
 }
 
 Item * Item::parent()
@@ -181,10 +202,17 @@ QVariant ApiDocModel::data(const QModelIndex &index, int role) const
     if (!index.isValid()) {
         return QVariant();
     }
+
+    Item *item = static_cast<Item*>(index.internalPointer());
+    if (role == DocumentRole) {
+        return QVariant::fromValue<QString>(item->document());
+    }
+    if (role == AnchorRole) {
+        return QVariant::fromValue<QString>(item->anchor());
+    }
     if (role != Qt::DisplayRole) {
         return QVariant();
     }
-    Item *item = static_cast<Item*>(index.internalPointer());
     return item->data(index.column());
 }
 
@@ -211,26 +239,35 @@ void ApiDocModel::setupModelData(QList<ObjectDocumentation* > dataList, Item *pa
         QList<QVariant> columnData;
         columnData << object->title();
         Item *objectItem = new Item(columnData, parent);
+        objectItem->setDocumentAnchor(object->apiDocumentIdentifier(), QString());
         parent->appendChild(objectItem);
 
         QList<QVariant> propertyColumnData;
         propertyColumnData << i18n("Properties");
         Item *propertyContainer = new Item(propertyColumnData, objectItem);
+        propertyContainer->setDocumentAnchor(object->apiDocumentIdentifier(), "properties");
         objectItem->appendChild(propertyContainer);
         foreach (PropertyDocumentation *property, object->properties()) {
             QList<QVariant> columnData;
             columnData << property->name();
-            propertyContainer->appendChild(new Item(columnData, propertyContainer));
+            Item *propertyItem = new Item(columnData, propertyContainer);
+            propertyItem->setDocumentAnchor(object->apiDocumentIdentifier(),
+                property->apiDocumentAnchor());
+            propertyContainer->appendChild(propertyItem);
         }
 
         QList<QVariant> methodColumnData;
         methodColumnData << i18n("Methods");
         Item *methodContainer = new Item(methodColumnData, objectItem);
+        methodContainer->setDocumentAnchor(object->apiDocumentIdentifier(), "methods");
         objectItem->appendChild(methodContainer);
         foreach (MethodDocumentation *method, object->methods()) {
             QList<QVariant> columnData;
             columnData << method->name();
-            methodContainer->appendChild(new Item(columnData, methodContainer));
+            Item *methodProperty = new Item(columnData, methodContainer);
+            methodProperty->setDocumentAnchor(object->apiDocumentIdentifier(),
+                method->apiDocumentAnchor());
+            methodContainer->appendChild(methodProperty);
         }
     }
 }

@@ -67,3 +67,8 @@ QList< MethodDocumentation::Parameter > MethodDocumentation::parameters() const
 {
     return _parameters;
 }
+
+QString MethodDocumentation::apiDocumentAnchor()
+{
+    return QString("method").append(_name);
+}

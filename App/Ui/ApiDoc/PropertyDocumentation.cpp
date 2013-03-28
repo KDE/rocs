@@ -54,3 +54,7 @@ QString PropertyDocumentation::type() const
     return _type;
 }
 
+QString PropertyDocumentation::apiDocumentAnchor()
+{
+    return QString("property").append(_name);
+}

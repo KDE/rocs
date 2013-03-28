@@ -21,6 +21,8 @@
 #include "ApiDocManager.h"
 #include "ApiDocModel.h"
 
+#include <KDebug>
+
 ApiDocWidget::ApiDocWidget(QWidget* parent)
     : QWidget(parent)
     , _manager(new ApiDocManager(this))
@@ -32,15 +34,23 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
     ui->buttonBack->setIcon(KIcon("go-previous"));
     ui->buttonForward->setIcon(KIcon("go-next"));
 
-    connect(ui->buttonHome, SIGNAL(clicked(bool)), this, SLOT(goHome()));
-
     _manager->loadLocalData();
-    ApiDocModel *model = new ApiDocModel(_manager->objectApiList(), this);
+    _model = new ApiDocModel(_manager->objectApiList(), this);
 
-    ui->docTree->setModel(model);
+    connect(ui->buttonHome, SIGNAL(clicked(bool)), this, SLOT(goHome()));
+    connect(ui->docTree, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
+
+    ui->docTree->setModel(_model);
 }
 
 void ApiDocWidget::goHome()
 {
     ui->pageStack->setCurrentIndex(0);
 }
+
+void ApiDocWidget::showDetails(const QModelIndex &index)
+{
+    kDebug() << _model->data(index, ApiDocModel::DocumentRole);
+    kDebug() << _model->data(index, ApiDocModel::AnchorRole);
+}
+

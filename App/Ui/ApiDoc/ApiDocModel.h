@@ -25,7 +25,13 @@ class ApiDocModel : public QAbstractItemModel
 {
     Q_OBJECT
 
- public:
+public:
+    enum Roles {
+        TitleRole = Qt::UserRole + 1,
+        DocumentRole,
+        AnchorRole
+    };
+
     ApiDocModel(QList<ObjectDocumentation* > dataList, QObject *parent = 0);
     ~ApiDocModel();
 

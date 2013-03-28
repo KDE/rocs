@@ -41,6 +41,7 @@ public:
     void setDescription(const QStringList &description);
     QString type() const;
     void setType(const QString &type);
+    QString apiDocumentAnchor();
 
 private:
     Q_DISABLE_COPY(PropertyDocumentation)

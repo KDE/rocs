@@ -23,6 +23,7 @@
 #include <QWidget>
 
 class ApiDocManager;
+class ApiDocModel;
 
 /**
  * \class ApiDocWidget
@@ -40,9 +41,11 @@ public:
 
 public slots:
     void goHome();
+    void showDetails(const QModelIndex &index);
 
 private:
     ApiDocManager *_manager;
+    ApiDocModel *_model;
     Ui::ApiDocWidget *ui;
 };
 
