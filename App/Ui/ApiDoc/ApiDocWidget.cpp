@@ -28,8 +28,19 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
     ui = new Ui::ApiDocWidget;
     ui->setupUi(this);
 
+    ui->buttonHome->setIcon(KIcon("go-home"));
+    ui->buttonBack->setIcon(KIcon("go-previous"));
+    ui->buttonForward->setIcon(KIcon("go-next"));
+
+    connect(ui->buttonHome, SIGNAL(clicked(bool)), this, SLOT(goHome()));
+
     _manager->loadLocalData();
     ApiDocModel *model = new ApiDocModel(_manager->objectApiList(), this);
 
     ui->docTree->setModel(model);
+}
+
+void ApiDocWidget::goHome()
+{
+    ui->pageStack->setCurrentIndex(0);
 }

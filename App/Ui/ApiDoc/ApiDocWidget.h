@@ -38,6 +38,9 @@ public:
      */
     explicit ApiDocWidget(QWidget* parent);
 
+public slots:
+    void goHome();
+
 private:
     ApiDocManager *_manager;
     Ui::ApiDocWidget *ui;
