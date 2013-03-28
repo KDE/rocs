@@ -50,7 +50,11 @@ void ApiDocWidget::goHome()
 
 void ApiDocWidget::showDetails(const QModelIndex &index)
 {
-    kDebug() << _model->data(index, ApiDocModel::DocumentRole);
-    kDebug() << _model->data(index, ApiDocModel::AnchorRole);
+    QString htmlDocument = _manager->objectApiDocument(_model->data(index, ApiDocModel::DocumentRole).toString());
+    ui->docDetails->setHtml(htmlDocument);
+    ui->pageStack->setCurrentIndex(1);
+
+    // TODO jump to anchor
+    // _model->data(index, ApiDocModel::AnchorRole).toString();
 }
 

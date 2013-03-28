@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QList>
+#include <QStringList>
 #include <KUrl>
 
 class PropertyDocumentation;
@@ -36,8 +37,8 @@ public:
 
     QString title() const;
     void setTitle(const QString &title);
-    QString description() const;
-    void setDescription(const QString &description);
+    QStringList description() const;
+    void setDescription(const QStringList &description);
     QString syntaxExample() const;
     void setSyntaxExample(const QString &syntaxExample);
     QList<PropertyDocumentation *> properties() const;
@@ -50,7 +51,7 @@ public:
 private:
     Q_DISABLE_COPY(ObjectDocumentation)
     QString _title;
-    QString _description;
+    QStringList _description;
     QString _syntaxExample;
     QList< PropertyDocumentation *> _properties;
     QList< MethodDocumentation *> _methods;

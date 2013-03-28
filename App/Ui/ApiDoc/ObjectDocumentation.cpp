@@ -17,6 +17,7 @@
 */
 
 #include "ObjectDocumentation.h"
+#include <QStringList>
 
 ObjectDocumentation::ObjectDocumentation(QObject* parent)
     : QObject(parent)
@@ -27,7 +28,7 @@ ObjectDocumentation::~ObjectDocumentation()
 {
 }
 
-void ObjectDocumentation::setTitle(const QString& title)
+void ObjectDocumentation::setTitle(const QString &title)
 {
     _title = title;
 }
@@ -37,12 +38,12 @@ QString ObjectDocumentation::title() const
     return _title;
 }
 
-void ObjectDocumentation::setDescription(const QString &description)
+void ObjectDocumentation::setDescription(const QStringList &description)
 {
     _description = description;
 }
 
-QString ObjectDocumentation::description() const
+QStringList ObjectDocumentation::description() const
 {
     return _description;
 }

@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QMap>
+#include <QHash>
 
 class ObjectDocumentation;
 class KUrl;
@@ -51,6 +52,8 @@ public:
     QList<ObjectDocumentation *> objectApiList() const;
 
     ObjectDocumentation * objectApi(int index) const;
+
+    QString objectApiDocument(const QString &identifier) const;
 
     /**
      * Load documenation object specification from locally stored XML file.
@@ -86,6 +89,7 @@ private:
     QDomDocument loadDomDocument(const KUrl &path, const QXmlSchema &schema) const;
 
     QList<ObjectDocumentation *> _objectApiList;
+    QHash<QString, QString> _objectApiDocuments;
 };
 
 #endif // APIDOCMANAGER_H

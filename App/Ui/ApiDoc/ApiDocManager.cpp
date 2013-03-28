@@ -32,6 +32,7 @@
 #include <KStandardDirs>
 #include <KDebug>
 #include <KUrl>
+#include <KLocale>
 
 ApiDocManager::ApiDocManager(QObject *parent)
     : QObject(parent)
@@ -55,6 +56,11 @@ ObjectDocumentation * ApiDocManager::objectApi(int index) const
 {
     Q_ASSERT (index >= 0 && index < _objectApiList.count());
     return _objectApiList.at(index);
+}
+
+QString ApiDocManager::objectApiDocument(const QString &identifier) const
+{
+    return _objectApiDocuments.value(identifier);
 }
 
 bool ApiDocManager::loadObjectApi(const KUrl &path)
@@ -81,8 +87,15 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     emit objectApiAboutToBeAdded(objectApi, _objectApiList.count() - 1);
 
     objectApi->setTitle(root.firstChildElement("name").text());
-    objectApi->setDescription(root.firstChildElement("description").text());
     objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
+    QStringList paragraphs;
+    for (QDomElement descriptionNode = root.firstChildElement("description").firstChildElement("para");
+        !descriptionNode.isNull();
+        descriptionNode = descriptionNode.nextSiblingElement())
+    {
+        paragraphs.append(descriptionNode.text());
+    }
+    objectApi->setDescription(paragraphs);
 
     // set property documentation
     for (QDomElement propertyNode = root.firstChildElement("properties").firstChildElement();
@@ -94,11 +107,11 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         property->setType(propertyNode.firstChildElement("type").text());
 
         QStringList paragraphs;
-        for (QDomElement descriptionNode = propertyNode.firstChildElement("description").firstChildElement();
+        for (QDomElement descriptionNode = propertyNode.firstChildElement("description").firstChildElement("para");
             !descriptionNode.isNull();
             descriptionNode = descriptionNode.nextSiblingElement())
         {
-            paragraphs.append(descriptionNode.firstChildElement("para").text());
+            paragraphs.append(descriptionNode.text());
         }
         property->setDescription(paragraphs);
 
@@ -115,11 +128,11 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         method->setReturnType(methodNode.firstChildElement("returnType").text());
 
         QStringList paragraphs;
-        for (QDomElement descriptionNode = methodNode.firstChildElement("description").firstChildElement();
+        for (QDomElement descriptionNode = methodNode.firstChildElement("description").firstChildElement("para");
             !descriptionNode.isNull();
             descriptionNode = descriptionNode.nextSiblingElement())
         {
-            paragraphs.append(descriptionNode.firstChildElement("para").text());
+            paragraphs.append(descriptionNode.text());
         }
         method->setDescription(paragraphs);
 
@@ -135,6 +148,44 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
 
         objectApi->addMethod(method);
     }
+
+    // create API document
+    // TODO port this documentation to a template base solution
+    QString apiDocument;
+    apiDocument.append(QString("<h1>%1</h1>").arg(objectApi->title()));
+    foreach (QString description, objectApi->description()) {
+        apiDocument.append(QString("<p>%1</p>").arg(description));
+    }
+    if (!objectApi->syntaxExample().isEmpty()) {
+        apiDocument.append(i18n("<h2>Syntax</h2>"));
+        apiDocument.append(QString("<verbatim>%1</verbatim>").arg(objectApi->syntaxExample()));
+    }
+    apiDocument.append(i18n("<h2>Properties</h2>"));
+    foreach (PropertyDocumentation *property, objectApi->properties()) {
+        apiDocument.append(QString("<h3>%1</h3>").arg(property->name()));
+        foreach (QString description, property->description()) {
+            apiDocument.append(QString("<p>%1</p>").arg(description));
+        }
+        apiDocument.append("<dl><dt>").append(i18n("Type")).
+            append(QString("</dt><dd>%1</dd></dl>").arg(property->type()));
+    }
+    apiDocument.append(i18n("<h2>Methods</h2>"));
+    foreach (MethodDocumentation *method, objectApi->methods()) {
+        apiDocument.append(QString("<h3>%1</h3>").arg(method->name()));
+        foreach (QString description, method->description()) {
+            apiDocument.append(QString("<p>%1</p>").arg(description));
+        }
+        apiDocument.append("<dl>");
+        foreach (MethodDocumentation::Parameter parameter, method->parameters()) {
+        apiDocument.append(i18n("<b>Parameters</b>"));
+        apiDocument.append(QString("<dt>(%1) %2</dt><dd>%3</dd>").
+            arg(parameter.type).arg(parameter.name).arg(parameter.info));
+        }
+        apiDocument.append("<dt>").append(i18n("Return Value")).
+            append(QString("</dt><dd>%1</dd>").arg(method->returnType()));
+        apiDocument.append("</dl>");
+    }
+    _objectApiDocuments.insert(objectApi->title(), apiDocument);
 
     emit objectApiAdded();
     return true;
