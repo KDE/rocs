@@ -30,7 +30,7 @@ set(Boost_NO_BOOST_CMAKE TRUE)
 find_package(Boost "1.43" REQUIRED)
 set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
 
-set(KDE_MIN_VERSION "4.3")
+set(KDE_MIN_VERSION "4.8")
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
