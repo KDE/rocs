@@ -28,12 +28,14 @@ include(FeatureSummary)
 # not compatible with CMake's FindBoost. Disable this function.
 set(Boost_NO_BOOST_CMAKE TRUE)
 find_package(Boost "1.43" REQUIRED)
-set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org"
-                                  )
+set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
 
 set(KDE_MIN_VERSION "4.3")
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
+
+find_package(Qt4 REQUIRED)
+find_package(Grantlee REQUIRED)
 
 remove_definitions(-DQT_NO_STL)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
@@ -55,6 +57,7 @@ include_directories(
     ${KDE4_INCLUDES}
     ${QT_INCLUDES}
     ${Boost_INCLUDE_DIRS}
+    ${Grantlee_INCLUDE_DIRS}
 )
 
 # allow disabling building of optional graph file backands

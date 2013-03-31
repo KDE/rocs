@@ -117,6 +117,7 @@ target_link_libraries(rocs
     ${QT_QTWEBKIT_LIBRARY}
     ${QT_QTXMLPATTERNS_LIBRARY}
     ${KDE4_KNEWSTUFF3_LIBS}
+    ${Grantlee_CORE_LIBRARIES}
 )
 
 ################## INSTALLS ##########################
