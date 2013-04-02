@@ -1,0 +1,44 @@
+<h1>{{ object.title }}</h1>
+
+{% for para in object.description %}
+<p>{{ para }}</p>
+{% endfor %}
+
+{% if object.syntaxExample %}
+<h2>{{ i18nSyntax }}</h2>
+<verbatim>{{ object.syntaxExample }}</verbatim>
+{% endif %}
+
+{% if properties %}
+<h2 id="properties">{{ i18nProperties }}</h2>
+{% for property in properties %}
+    <h3 id="{{ property.documentAnchor }}">{{ property.name }}</h3>
+    {% for paragraph in property.description %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
+    <p><b>{{ i18nType }}:</b> {{ property.type }}<p>
+{% endfor %}
+{% endif %}
+
+{% if methods %}
+<h2 id="methods">{{ i18nMethods }}</h2>
+{% for method in methods %}
+    <h3 id="{{ method.documentAnchor }}">{{ method.name }}</h3>
+    {% for paragraph in method.description %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
+    <h4>{{ i18nParameters }}</h4>
+    {% for parameter in method.parameters %}
+    <ol>
+        <li>({{ parameter.type }}) <b>{{ parameter.name }}</b>
+        {% if parameter.info %}
+            <i>{{ parameter.info }}</i>
+        {% endif %}
+        </li>
+    </ol>
+    {% endfor %}
+    <p>
+        <b>{{ i18nReturnType }}</b> {{ method.returnType }}
+    </p>
+{% endfor %}
+{% endif %}

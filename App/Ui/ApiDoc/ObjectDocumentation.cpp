@@ -43,9 +43,13 @@ void ObjectDocumentation::setDescription(const QStringList &description)
     _description = description;
 }
 
-QStringList ObjectDocumentation::description() const
+QVariantList ObjectDocumentation::description() const
 {
-    return _description;
+    QVariantList list;
+    foreach (QString paragraph, _description) {
+        list << paragraph;
+    }
+    return list;
 }
 
 void ObjectDocumentation::setSyntaxExample(const QString &syntaxExample)

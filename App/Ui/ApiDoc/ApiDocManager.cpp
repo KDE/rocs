@@ -20,6 +20,9 @@
 #include "ObjectDocumentation.h"
 #include "PropertyDocumentation.h"
 #include "MethodDocumentation.h"
+#include "ParameterDocumentation.h"
+
+#include <grantlee_core.h>
 
 #include <QIODevice>
 #include <QFile>
@@ -149,44 +152,47 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         objectApi->addMethod(method);
     }
 
-    // create API document
-    // TODO port this documentation to a template base solution
-    QString apiDocument;
-    apiDocument.append(QString("<h1>%1</h1>").arg(objectApi->title()));
-    foreach (QString description, objectApi->description()) {
-        apiDocument.append(QString("<p>%1</p>").arg(description));
-    }
-    if (!objectApi->syntaxExample().isEmpty()) {
-        apiDocument.append(i18n("<h2>Syntax</h2>"));
-        apiDocument.append(QString("<verbatim>%1</verbatim>").arg(objectApi->syntaxExample()));
-    }
-    apiDocument.append(i18n("<h2>Properties</h2>"));
-    foreach (PropertyDocumentation *property, objectApi->properties()) {
-        apiDocument.append(QString("<h3>%1</h3>").arg(property->name()));
-        foreach (QString description, property->description()) {
-            apiDocument.append(QString("<p>%1</p>").arg(description));
-        }
-        apiDocument.append("<dl><dt>").append(i18n("Type")).
-            append(QString("</dt><dd>%1</dd></dl>").arg(property->type()));
-    }
-    apiDocument.append(i18n("<h2>Methods</h2>"));
-    foreach (MethodDocumentation *method, objectApi->methods()) {
-        apiDocument.append(QString("<h3>%1</h3>").arg(method->name()));
-        foreach (QString description, method->description()) {
-            apiDocument.append(QString("<p>%1</p>").arg(description));
-        }
-        apiDocument.append("<dl>");
-        foreach (MethodDocumentation::Parameter parameter, method->parameters()) {
-        apiDocument.append(i18n("<b>Parameters</b>"));
-        apiDocument.append(QString("<dt>(%1) %2</dt><dd>%3</dd>").
-            arg(parameter.type).arg(parameter.name).arg(parameter.info));
-        }
-        apiDocument.append("<dt>").append(i18n("Return Value")).
-            append(QString("</dt><dd>%1</dd>").arg(method->returnType()));
-        apiDocument.append("</dl>");
-    }
-    _objectApiDocuments.insert(objectApi->title(), apiDocument);
+    // initialize Grantlee engine
+    Grantlee::Engine *engine = new Grantlee::Engine( this );
+    Grantlee::FileSystemTemplateLoader::Ptr loader = Grantlee::FileSystemTemplateLoader::Ptr(
+        new Grantlee::FileSystemTemplateLoader() );
+    loader->setTemplateDirs(KGlobal::dirs()->resourceDirs("appdata"));
+    engine->addTemplateLoader(loader);
+    Grantlee::Template t = engine->loadByName("scriptapi/detailsViewTheme.html");
+    Grantlee::registerMetaType<ParameterDocumentation*>();
 
+    // create mapping
+    QVariantHash mapping;
+
+    // object
+    QVariant objectVar = QVariant::fromValue<QObject*>(objectApi);
+    mapping.insert("object", objectVar);
+
+    // properties
+    QVariantList propertyList;
+    foreach (PropertyDocumentation *property, objectApi->properties()) {
+        propertyList.append(QVariant::fromValue<QObject*>(property));
+    }
+    mapping.insert("properties", propertyList);
+
+    // properties
+    QVariantList methodList;
+    foreach (MethodDocumentation *method, objectApi->methods()) {
+        methodList.append(QVariant::fromValue<QObject*>(method));
+    }
+    mapping.insert("methods", methodList);
+
+    mapping.insert("i18nSyntax", i18nc("@title", "Syntax"));
+    mapping.insert("i18nProperties", i18nc("@title", "Properties"));
+    mapping.insert("i18nParameters", i18nc("@title", "Parameters"));
+    mapping.insert("i18nMethods", i18nc("@title", "Methods"));
+    mapping.insert("i18nType", i18nc("@title", "Type"));
+    mapping.insert("i18nReturnType", i18nc("@title", "Return Type"));
+
+    Grantlee::Context c(mapping);
+
+    // create HTML file
+    _objectApiDocuments.insert(objectApi->title(), t->render(&c));
     emit objectApiAdded();
     return true;
 }

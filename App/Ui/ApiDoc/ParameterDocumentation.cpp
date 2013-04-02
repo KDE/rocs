@@ -16,49 +16,40 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "PropertyDocumentation.h"
+#include "ParameterDocumentation.h"
 
-PropertyDocumentation::PropertyDocumentation(QObject* parent)
+ParameterDocumentation::ParameterDocumentation(QObject* parent)
     : QObject(parent)
 {
 
 }
 
-void PropertyDocumentation::setName(const QString &name)
-{
-    _name = name;
-}
-
-QString PropertyDocumentation::name() const
+QString ParameterDocumentation::name() const
 {
     return _name;
 }
 
-void PropertyDocumentation::setDescription(const QStringList &description)
+void ParameterDocumentation::setName(const QString &name)
 {
-    _description = description;
+    _name = name;
 }
 
-QVariantList PropertyDocumentation::description() const
+QString ParameterDocumentation::info() const
 {
-    QVariantList list;
-    foreach (QString paragraph, _description) {
-        list << paragraph;
-    }
-    return list;
+    return _info;
 }
 
-void PropertyDocumentation::setType(const QString &type)
+void ParameterDocumentation::setInfo(const QString &info)
 {
-    _type = type;
+    _info = info;
 }
 
-QString PropertyDocumentation::type() const
+QString ParameterDocumentation::type() const
 {
     return _type;
 }
 
-QString PropertyDocumentation::apiDocumentAnchor()
+void ParameterDocumentation::setType(const QString &type)
 {
-    return QString("property").append(_name);
+    _type = type;
 }

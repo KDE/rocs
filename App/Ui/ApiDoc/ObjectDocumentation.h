@@ -30,6 +30,9 @@ class MethodDocumentation;
 class ObjectDocumentation : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString title READ title)
+    Q_PROPERTY(QString syntaxExample READ syntaxExample)
+    Q_PROPERTY(QVariantList description READ description)
 
 public:
     explicit ObjectDocumentation(QObject *parent = 0);
@@ -37,7 +40,7 @@ public:
 
     QString title() const;
     void setTitle(const QString &title);
-    QStringList description() const;
+    QVariantList description() const;
     void setDescription(const QStringList &description);
     QString syntaxExample() const;
     void setSyntaxExample(const QString &syntaxExample);

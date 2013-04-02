@@ -17,6 +17,7 @@
 */
 
 #include "MethodDocumentation.h"
+#include "ParameterDocumentation.h"
 
 MethodDocumentation::MethodDocumentation(QObject* parent)
     : QObject(parent)
@@ -39,9 +40,13 @@ void MethodDocumentation::setDescription(const QStringList &description)
     _description = description;
 }
 
-QStringList MethodDocumentation::description() const
+QVariantList MethodDocumentation::description() const
 {
-    return _description;
+    QVariantList list;
+    foreach (QString paragraph, _description) {
+        list << paragraph;
+    }
+    return list;
 }
 
 void MethodDocumentation::setReturnType(const QString& type)
@@ -56,14 +61,19 @@ QString MethodDocumentation::returnType() const
 
 void MethodDocumentation::addParameter(const QString& name, const QString& type, const QString& info)
 {
-    Parameter parameter;
-    parameter.name = name;
-    parameter.type = type;
-    parameter.info = info;
+    ParameterDocumentation *parameter = new ParameterDocumentation(this);
+    parameter->setName(name);
+    parameter->setType(type);
+    parameter->setInfo(info);
     _parameters.append(parameter);
 }
 
-QList< MethodDocumentation::Parameter > MethodDocumentation::parameters() const
+QVariant MethodDocumentation::parametersVar() const
+{
+    return QVariant::fromValue(_parameters);
+}
+
+QList< ParameterDocumentation* > MethodDocumentation::parameters() const
 {
     return _parameters;
 }

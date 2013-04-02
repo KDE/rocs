@@ -22,29 +22,30 @@
 #include <QObject>
 #include <QList>
 #include <QStringList>
-#include <KUrl>
+#include <QVariantList>
 
+class ParameterDocumentation;
 
 class MethodDocumentation : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString name READ name)
+    Q_PROPERTY(QVariantList description READ description)
+    Q_PROPERTY(QVariant parameters READ parametersVar)
+    Q_PROPERTY(QString returnType READ returnType)
+    Q_PROPERTY(QString documentAnchor READ apiDocumentAnchor)
 
 public:
-    typedef struct {
-        QString name;
-        QString type;
-        QString info;
-    } Parameter;
-
     explicit MethodDocumentation(QObject *parent = 0);
 
     QString name() const;
     void setName(const QString &name);
-    QStringList description() const;
+    QVariantList description() const;
     void setDescription(const QStringList &description);
     QString returnType() const;
     void setReturnType(const QString &type);
-    QList<Parameter> parameters() const;
+    QVariant parametersVar() const;
+    QList<ParameterDocumentation*> parameters() const;
     void addParameter(const QString &name, const QString &type, const QString &info);
     QString apiDocumentAnchor();
 
@@ -53,7 +54,10 @@ private:
     QString _name;
     QStringList _description;
     QString _returnType;
-    QList<Parameter> _parameters;
+    QList<ParameterDocumentation*> _parameters;
 };
 
-#endif // PROPERTY_DOCUMENTATION_H
+Q_DECLARE_METATYPE(QList<ParameterDocumentation*>);
+Q_DECLARE_METATYPE(ParameterDocumentation*);
+
+#endif // METHOD_DOCUMENTATION_H
