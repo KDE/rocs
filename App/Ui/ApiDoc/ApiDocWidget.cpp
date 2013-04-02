@@ -29,10 +29,7 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
 {
     ui = new Ui::ApiDocWidget;
     ui->setupUi(this);
-
     ui->buttonHome->setIcon(KIcon("go-home"));
-    ui->buttonBack->setIcon(KIcon("go-previous"));
-    ui->buttonForward->setIcon(KIcon("go-next"));
 
     _manager->loadLocalData();
     _model = new ApiDocModel(_manager->objectApiList(), this);

@@ -44,26 +44,6 @@
       </item>
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1">
-         <widget class="KPushButton" name="buttonBack">
-          <property name="maximumSize">
-           <size>
-            <width>24</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="KPushButton" name="buttonForward">
-          <property name="maximumSize">
-           <size>
-            <width>24</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="KPushButton" name="buttonHome">
           <property name="maximumSize">
@@ -80,7 +60,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="4">
+        <item row="0" column="2">
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -93,7 +73,7 @@
           </property>
          </spacer>
         </item>
-        <item row="0" column="3">
+        <item row="0" column="1">
          <widget class="Line" name="line">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
