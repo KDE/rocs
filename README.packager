@@ -22,6 +22,8 @@ Required Packages
   - minimum KDE4Libs version is 4.3
   - if compiled with version less than 4.10, the build system will warn that KDE4Internal is not found
     (this is a false positive!)
+* Grantlee
+  - minimum version is 0.3.0
 
 CMake Options
 -------------

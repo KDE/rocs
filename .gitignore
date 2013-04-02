@@ -4,6 +4,6 @@ build*
 .*
 build*
 *~
-*.html
+doc/*.html
 *.orig
 *.directory
