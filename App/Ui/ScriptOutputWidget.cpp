@@ -18,7 +18,7 @@
 
 #include "ScriptOutputWidget.h"
 #include "DocumentManager.h"
-#include "Interfaces/ConsoleInterface.h"
+#include "EngineModules/Console/ConsoleModule.h"
 #include <QWidget>
 #include <QtScriptBackend.h>
 #include <KDebug>
@@ -48,16 +48,16 @@ void ScriptOutputWidget::unsetConsoleInterface()
     _console = 0;
 }
 
-void ScriptOutputWidget::setConsoleInterface(ConsoleInterface* console)
+void ScriptOutputWidget::setConsoleInterface(ConsoleModule* console)
 {
     unsetConsoleInterface();
     _console = console;
 
-    connect(console, SIGNAL(backlogChanged(ConsoleInterface::MessageType,QString)),
-            this, SLOT(appendOutput(ConsoleInterface::MessageType,QString)));
+    connect(console, SIGNAL(backlogChanged(ConsoleModule::MessageType,QString)),
+            this, SLOT(appendOutput(ConsoleModule::MessageType,QString)));
 }
 
-ConsoleInterface * ScriptOutputWidget::consoleInterface() const
+ConsoleModule * ScriptOutputWidget::consoleInterface() const
 {
     return _console;
 }
@@ -84,17 +84,17 @@ bool ScriptOutputWidget::isOutputClearEnabled() const
     return !ui->buttonDisableClear->isChecked();
 }
 
-void ScriptOutputWidget::appendOutput(ConsoleInterface::MessageType type, const QString& message)
+void ScriptOutputWidget::appendOutput(ConsoleModule::MessageType type, const QString& message)
 {
     switch(type)
     {
-    case ConsoleInterface::Log:
+    case ConsoleModule::Log:
         ui->txtOutput->append(message);
         break;
-    case ConsoleInterface::Debug:
+    case ConsoleModule::Debug:
         ui->dbgOutput->append(message);
         break;
-    case ConsoleInterface::Error:
+    case ConsoleModule::Error:
         ui->txtOutput->append("<b style=\"color: red\">" + message + "</b>");
         break;
     default:

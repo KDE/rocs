@@ -44,7 +44,7 @@ ApiDocManager::ApiDocManager(QObject *parent)
 
 void ApiDocManager::loadLocalData()
 {
-    QStringList apiDocFiles = KGlobal::dirs()->findAllResources("appdata", QString("scriptapi/*.xml"));
+    QStringList apiDocFiles = KGlobal::dirs()->findAllResources("appdata", QString("engineapi/*.xml"));
     foreach (const QString &file, apiDocFiles) {
         loadObjectApi(KUrl::fromLocalFile(file));
     }
@@ -158,7 +158,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         new Grantlee::FileSystemTemplateLoader() );
     loader->setTemplateDirs(KGlobal::dirs()->resourceDirs("appdata"));
     engine->addTemplateLoader(loader);
-    Grantlee::Template t = engine->loadByName("scriptapi/detailsViewTheme.html");
+    Grantlee::Template t = engine->loadByName("plugin/apidoc/detailsViewTheme.html");
     Grantlee::registerMetaType<ParameterDocumentation*>();
 
     // create mapping

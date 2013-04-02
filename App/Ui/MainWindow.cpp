@@ -65,7 +65,7 @@
 #include "Ui/SideDockWidget.h"
 #include "Ui/JournalEditorWidget.h"
 #include "Ui/DocumentationWidget.h"
-#include "Ui/ApiDoc/ApiDocWidget.h"
+#include "InterfacePlugins/ApiDoc/ApiDocWidget.h"
 #include "Scene/GraphicsLayout.h"
 
 // Graph Related Includes
@@ -281,7 +281,7 @@ QWidget* MainWindow::setupScriptPanel()
 
     _codeEditor = new CodeEditor(this);
     _outputWidget = new ScriptOutputWidget(this);
-    _outputWidget->setConsoleInterface(new ConsoleInterface(_outputWidget));
+    _outputWidget->setConsoleInterface(new ConsoleModule(_outputWidget));
 
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);

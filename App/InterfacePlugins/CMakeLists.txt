@@ -16,11 +16,5 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-
-FILE(GLOB schemes *.xsd)
-install( FILES ${schemes} DESTINATION ${DATA_INSTALL_DIR}/rocs/schemes)
-
-# FIXME move install to Console, once move to RocsCore
-FILE(GLOB apiSpecs *.xml)
-install( FILES ${apiSpecs} DESTINATION ${DATA_INSTALL_DIR}/rocs/scriptapi)
-install( FILES detailsViewTheme.html DESTINATION ${DATA_INSTALL_DIR}/rocs/scriptapi)
+# TODO this directory will become dynamic
+add_subdirectory(ApiDoc)

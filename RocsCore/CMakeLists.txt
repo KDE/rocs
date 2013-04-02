@@ -41,6 +41,8 @@ set( rocs_core_SRCS
     LoadSave/GraphFileBackendManager.cpp
     LoadSave/GraphFilePluginInterface.cpp
     LoadSave/RocsGraphFileFormatPlugin.cpp
+
+    EngineModules/Console/ConsoleModule.cpp
 )
 
 kde4_add_library( rocscore  SHARED ${rocs_core_SRCS} )
@@ -66,6 +68,8 @@ set( rocscore_LIB_HDRS
     LoadSave/GraphFilePluginInterface.h
 
     Modifiers/Topology.h
+
+    EngineModules/Console/ConsoleModule.h
 )
 
 set_target_properties( rocscore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
@@ -84,6 +88,7 @@ install( FILES
 
 add_subdirectory(DataStructures)
 add_subdirectory(LoadSave)
+add_subdirectory(EngineModules)
 
 install( FILES
     RocsDataStructurePlugin.desktop

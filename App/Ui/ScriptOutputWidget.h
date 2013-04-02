@@ -19,7 +19,7 @@
 #ifndef SCRIPTOUTPUTWIDGET_H
 #define SCRIPTOUTPUTWIDGET_H
 
-#include "Interfaces/ConsoleInterface.h"
+#include <EngineModules/Console/ConsoleModule.h>
 #include <QtGui/QWidget>
 #include "ui_ScriptOutputWidget.h"
 
@@ -35,13 +35,13 @@ class ScriptOutputWidget : public QWidget
     Q_OBJECT
 public:
     explicit ScriptOutputWidget(QWidget *parent = 0);
-    void setConsoleInterface(ConsoleInterface* console);
-    ConsoleInterface * consoleInterface() const;
+    void setConsoleInterface(ConsoleModule* console);
+    ConsoleModule * consoleInterface() const;
     bool isOutputClearEnabled() const;
 
 public slots:
     void unsetConsoleInterface();
-    void appendOutput(ConsoleInterface::MessageType type, const QString& message);
+    void appendOutput(ConsoleModule::MessageType type, const QString& message);
     void showDebugOutput(bool show = true);
     void clear();
 
@@ -49,7 +49,7 @@ private slots:
     void updateFixOutputButton();
 
 private:
-    ConsoleInterface* _console;
+    ConsoleModule* _console;
     Ui::ScriptOutputWidget* ui;
 };
 

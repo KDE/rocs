@@ -16,40 +16,41 @@
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ConsoleInterface.h"
+#include "ConsoleModule.h"
 
-ConsoleInterface::ConsoleInterface(QObject* parent): QObject(parent)
+ConsoleModule::ConsoleModule(QObject *parent)
+    : QObject(parent)
 {
 }
 
-ConsoleInterface::~ConsoleInterface()
+ConsoleModule::~ConsoleModule()
 {
 }
 
-QList< QPair< ConsoleInterface::MessageType, QString > > ConsoleInterface::backlog() const
+QList< QPair< ConsoleModule::MessageType, QString > > ConsoleModule::backlog() const
 {
     return _backlog;
 }
 
-void ConsoleInterface::clear()
+void ConsoleModule::clear()
 {
     _backlog.clear();
 }
 
-void ConsoleInterface::log(const QString& message)
+void ConsoleModule::log(const QString& message)
 {
-    _backlog.append(qMakePair<MessageType, QString>(ConsoleInterface::Log, message));
-    emit(backlogChanged(ConsoleInterface::Log, message));
+    _backlog.append(qMakePair<MessageType, QString>(ConsoleModule::Log, message));
+    emit(backlogChanged(ConsoleModule::Log, message));
 }
 
-void ConsoleInterface::debug(const QString& message)
+void ConsoleModule::debug(const QString& message)
 {
-    _backlog.append(qMakePair<MessageType, QString>(ConsoleInterface::Debug, message));
-    emit(backlogChanged(ConsoleInterface::Debug, message));
+    _backlog.append(qMakePair<MessageType, QString>(ConsoleModule::Debug, message));
+    emit(backlogChanged(ConsoleModule::Debug, message));
 }
 
-void ConsoleInterface::error(const QString& message)
+void ConsoleModule::error(const QString& message)
 {
     _backlog.append(qMakePair<MessageType, QString>(Error, message));
-    emit(backlogChanged(ConsoleInterface::Error, message));
+    emit(backlogChanged(ConsoleModule::Error, message));
 }

@@ -26,6 +26,8 @@ set(ROCS_VERSION_PATCH 0)
 
 configure_file( "${rocs_SOURCE_DIR}/rocsversion.h.cmake" "${rocs_BINARY_DIR}/rocsversion.h" @ONLY )
 
+add_subdirectory(InterfacePlugins)
+
 include_directories(
     ${KDE4_INCLUDES}
     ${QT_INCLUDES}
@@ -35,9 +37,7 @@ include_directories(
     Actions/
     GraphicsItem/
     Ui/
-    Interfaces/
     LoadSave/
-    Models/
     Plugins/
     Scripts/
 )
@@ -61,14 +61,13 @@ set( rocs_interface_SRCS
     Ui/LoadedPluginsDialog.cpp
     Ui/PossibleIncludes.cpp
     Ui/ScriptOutputWidget.cpp
-    Ui/ApiDoc/ApiDocWidget.cpp
-    Ui/ApiDoc/ObjectDocumentation.cpp
-    Ui/ApiDoc/PropertyDocumentation.cpp
-    Ui/ApiDoc/MethodDocumentation.cpp
-    Ui/ApiDoc/ParameterDocumentation.cpp
-    Ui/ApiDoc/ApiDocManager.cpp
-    Ui/ApiDoc/ApiDocModel.cpp
-    Interfaces/ConsoleInterface.cpp
+    InterfacePlugins/ApiDoc/ApiDocWidget.cpp
+    InterfacePlugins/ApiDoc/ObjectDocumentation.cpp
+    InterfacePlugins/ApiDoc/PropertyDocumentation.cpp
+    InterfacePlugins/ApiDoc/MethodDocumentation.cpp
+    InterfacePlugins/ApiDoc/ParameterDocumentation.cpp
+    InterfacePlugins/ApiDoc/ApiDocManager.cpp
+    InterfacePlugins/ApiDoc/ApiDocModel.cpp
 )
 
 set( rocs_SRCS
@@ -84,7 +83,7 @@ kde4_add_ui_files(
     Ui/DocumentTypesWidget.ui
     Ui/ConfigureDefaultProperties.ui
     Ui/ScriptOutputWidget.ui
-    Ui/ApiDoc/ApiDocWidget.ui
+    InterfacePlugins/ApiDoc/ApiDocWidget.ui
 )
 
 # we currently only support QtScript
@@ -131,7 +130,6 @@ install( FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 install( FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
 
 add_subdirectory( Scripts )
-add_subdirectory( Ui/ApiDoc )
 
 # Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
