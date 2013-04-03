@@ -34,11 +34,38 @@ public:
     virtual void setEngine(QScriptEngine* _engine);
     virtual ~GraphNode();
 
+    Q_INVOKABLE QScriptValue neighbors();
+    Q_INVOKABLE QScriptValue edges();
+    Q_INVOKABLE QScriptValue outEdges();
+    Q_INVOKABLE QScriptValue inEdges();
+    Q_INVOKABLE QScriptValue edges(int type);
+    Q_INVOKABLE QScriptValue outEdges(int type);
+    Q_INVOKABLE QScriptValue inEdges(int type);
+    Q_INVOKABLE QScriptValue edgesTo(Data *node);
+
+signals:
+    void scriptError(const QString &message);
+
 public slots:
+    /**
+     * \deprecated
+     */
     QScriptValue adj_nodes();
+    /**
+     * \deprecated
+     */
     QScriptValue adj_edges();
+    /**
+     * \deprecated
+     */
     QScriptValue input_edges();
+    /**
+     * \deprecated
+     */
     QScriptValue output_edges();
+    /**
+     * \deprecated
+     */
     QScriptValue connected_edges(Data* n);
 
     /**
@@ -47,6 +74,7 @@ public slots:
      * Function respects type of graph, i.e., returns either output edges or
      * output plus input edges if graph is directed or undirected, respectively.
      * \param overlay is identifier for overlay.
+     * \deprecated
      */
     QScriptValue overlay_edges(int overlay);
 };

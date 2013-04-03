@@ -1,0 +1,131 @@
+<object>
+<name>Graph Node</name>
+<description>
+<para>
+A node is the data element of a graph.
+</para>
+</description>
+<syntax>
+</syntax>
+<properties>
+<property>
+    <name>id</name>
+    <description><para>The unique identifier of this node.</para></description>
+    <type>int</type>
+</property>
+<property>
+    <name>x</name>
+    <description><para>The x-coordinate of this node.</para></description>
+    <type>real</type>
+</property>
+<property>
+    <name>y</name>
+    <description><para>The y-coordinate of this node.</para></description>
+    <type>real</type>
+</property>
+<property>
+    <name>width</name>
+    <description><para>The size of this node.</para></description>
+    <type>real</type>
+</property>
+<property>
+    <name>color</name>
+    <description><para>The color of this node stated as hexadecimal value.</para></description>
+    <type>string</type>
+</property>
+</properties>
+<methods>
+<method>
+    <name>neighbors()</name>
+    <description>
+        <para>Return list all nodes connected to this node. This method respects if edges are directed.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>edges()</name>
+    <description>
+        <para>Return a list of all edges (incoming and outgoing) of this node.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>edges(type)</name>
+    <description>
+        <para>Return a list of all edges (incoming and outgoing) of this node of a specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>inEdges()</name>
+    <description>
+        <para>Return a list of incoming edges of this node.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>inEdges(type)</name>
+    <description>
+        <para>Return a list of all incoming of this node of a specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>outEdges()</name>
+    <description>
+        <para>Return a list of all outgoing edges of this node.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>outEdges(type)</name>
+    <description>
+        <para>Return a list of all outgoing edges of this node of a specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>edgesTo()</name>
+    <description>
+        <para>Return a list of all edges of this node to the specified node.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>target</name>
+            <type>node</type>
+            <info>Target node.</info>
+        </parameter>
+    </parameters>
+</method>
+</methods>
+</object>

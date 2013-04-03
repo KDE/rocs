@@ -115,6 +115,11 @@ public:
     virtual void setEngine(QScriptEngine *_engine);
 
     /**
+     * \return script engine
+     */
+    QScriptEngine * engine() const;
+
+    /**
      * \return x-position of data element
      */
     qreal x() const;
@@ -234,6 +239,7 @@ public Q_SLOTS:
     QScriptValue adj_pointers();
     QScriptValue adj_pointers(int pointerType);
     QScriptValue input_pointers();
+    QScriptValue input_pointers(int pointerType);
     QScriptValue output_pointers();
     QScriptValue output_pointers(int pointerType);
     QScriptValue connected_pointers(Data *n);

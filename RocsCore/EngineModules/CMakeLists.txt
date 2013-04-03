@@ -18,7 +18,7 @@
 
 
 FILE(GLOB schemes *.xsd)
-install( FILES ${schemes} DESTINATION ${DATA_INSTALL_DIR}/rocs/schemes)
+install(FILES ${schemes} DESTINATION ${DATA_INSTALL_DIR}/rocs/schemes)
 
 # change this to automatical install of XML files
-install( FILES Console/Console.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
+install(FILES Console/Console.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)

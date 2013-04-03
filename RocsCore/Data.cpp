@@ -469,6 +469,11 @@ void Data::setEngine(QScriptEngine *engine)
     d->_scriptvalue = engine->newQObject(getData().get());
 }
 
+QScriptEngine * Data::engine() const
+{
+    return d->_engine;
+}
+
 QScriptValue Data::set_type(int dataType)
 {
     if (!d->_dataStructure->document()->dataTypeList().contains(dataType)) {
@@ -494,7 +499,6 @@ void Data::remove_property (const QString& name)
 {
     removeDynamicProperty(name);
 }
-
 
 QScriptValue Data::adj_data()
 {
@@ -527,6 +531,18 @@ QScriptValue Data::adj_pointers(int pointerType)
 QScriptValue Data::input_pointers()
 {
     PointerList list = inPointerList();
+    return d->createScriptArray(list);
+}
+
+QScriptValue Data::input_pointers(int pointerType)
+{
+    PointerList list;
+    foreach(PointerPtr n, inPointerList()) {
+        if (n->pointerType() != pointerType) {
+            continue;
+        }
+        list.append(n);
+    }
     return d->createScriptArray(list);
 }
 
