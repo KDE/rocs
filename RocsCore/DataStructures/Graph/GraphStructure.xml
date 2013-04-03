@@ -1,0 +1,121 @@
+<object>
+<name>Graph Data Structure</name>
+<description>
+<para>
+A graph objects holds the information of a data structure of type "Graph".
+</para>
+</description>
+<syntax>
+</syntax>
+<properties>
+<property>
+    <name>name</name>
+    <description><para>The unique name of this data structure.</para></description>
+    <type>string</type>
+</property>
+</properties>
+<methods>
+<method>
+    <name>nodes()</name>
+    <description>
+        <para>Return list all nodes in the graph.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>nodes(type)</name>
+    <description>
+        <para>Return list all nodes in the graph of specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>edges()</name>
+    <description>
+        <para>Return list all edges in the graph.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>edges(type)</name>
+    <description>
+        <para>Return list all edges in the graph of specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>createNode(type)</name>
+    <description>
+        <para>Create a new node of the specified type and return the created node. If the type is not registered, no node is created.</para>
+    </description>
+    <returnType>node</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of a data type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>createNode()</name>
+    <description>
+        <para>Create a new node of default type and return the created node.</para>
+    </description>
+    <returnType>node</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>createEdge(from, to, type)</name>
+    <description>
+        <para>Create an edge from node "from" to node "to" of the specified type and return the created edge. If the type is not registered, no edge is created.</para>
+    </description>
+    <returnType>edge</returnType>
+    <parameters>
+        <parameter>
+            <name>from</name>
+            <type>node</type>
+            <info>Source node for the edge.</info>
+        </parameter>
+        <parameter>
+            <name>to</name>
+            <type>node</type>
+            <info>Target node for the edge.</info>
+        </parameter>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of a edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>createEdge(from, to)</name>
+    <description>
+        <para>Create an edge from node "from" to node "to" of default type and return the created edge.</para>
+    </description>
+    <returnType>edge</returnType>
+    <parameters>
+        <parameter>
+            <name>from</name>
+            <type>node</type>
+            <info>Source node for the edge.</info>
+        </parameter>
+        <parameter>
+            <name>to</name>
+            <type>node</type>
+            <info>Target node for the edge.</info>
+        </parameter>
+    </parameters>
+</method>
+</methods>
+</object>

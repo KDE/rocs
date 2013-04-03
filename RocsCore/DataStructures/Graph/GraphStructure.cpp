@@ -90,17 +90,7 @@ Rocs::GraphStructure::~GraphStructure()
 {
 }
 
-QScriptValue Rocs::GraphStructure::overlay_edges(int overlay)
-{
-    //FIXME deprecate this method
-    QScriptValue array = engine()->newArray();
-    foreach(PointerPtr n, pointers(overlay)) {
-        array.property("push").call(array, QScriptValueList() << n->scriptValue());
-    }
-    return array;
-}
-
-QScriptValue Rocs::GraphStructure::list_nodes()
+QScriptValue Rocs::GraphStructure::nodes()
 {
     QScriptValue array = engine()->newArray();
     foreach(int type, document()->dataTypeList()) {
@@ -111,7 +101,7 @@ QScriptValue Rocs::GraphStructure::list_nodes()
     return array;
 }
 
-QScriptValue Rocs::GraphStructure::list_nodes(int type)
+QScriptValue Rocs::GraphStructure::nodes(int type)
 {
     QScriptValue array = engine()->newArray();
     foreach(DataPtr n, dataList(type)) {
@@ -120,7 +110,7 @@ QScriptValue Rocs::GraphStructure::list_nodes(int type)
     return array;
 }
 
-QScriptValue Rocs::GraphStructure::list_edges()
+QScriptValue Rocs::GraphStructure::edges()
 {
     QScriptValue array = engine()->newArray();
     foreach(int type, document()->pointerTypeList()) {
@@ -131,7 +121,7 @@ QScriptValue Rocs::GraphStructure::list_edges()
     return array;
 }
 
-QScriptValue Rocs::GraphStructure::list_edges(int type)
+QScriptValue Rocs::GraphStructure::edges(int type)
 {
     QScriptValue array = engine()->newArray();
     foreach(PointerPtr n, pointers(type)) {
@@ -140,8 +130,93 @@ QScriptValue Rocs::GraphStructure::list_edges(int type)
     return array;
 }
 
+QScriptValue Rocs::GraphStructure::createNode()
+{
+    return createNode(0);
+}
+
+QScriptValue Rocs::GraphStructure::createNode(int type)
+{
+    DataPtr n = addData("", type);
+    n->setEngine(engine());
+    return n->scriptValue();
+}
+
+QScriptValue Rocs::GraphStructure::createEdge(Data* fromRaw, Data* toRaw)
+{
+    return createEdge(fromRaw, toRaw, 0);
+}
+
+QScriptValue Rocs::GraphStructure::createEdge(Data* fromRaw, Data* toRaw, int type)
+{
+    if (fromRaw == 0 || toRaw == 0) {
+        kError() << "No edge added: data does not exist";
+        emit scriptError(i18n("Cannot create edge: nodes are not defined."));
+        return QScriptValue();
+    }
+    if (!document()->pointerTypeList().contains(type)) {
+        emit scriptError(i18n("Cannot create edge: pointer type %1 not defined", type));
+        return QScriptValue();
+    }
+
+    DataPtr from = fromRaw->getData();
+    DataPtr to = toRaw->getData();
+
+    PointerPtr edge = addPointer(from, to, type);
+    if (edge) {
+        edge->setEngine(engine());
+        return edge->scriptValue();
+    }
+    kError() << "Could not add pointer to data structure";
+
+    return QScriptValue();
+}
+
+QScriptValue Rocs::GraphStructure::overlay_edges(int overlay)
+{
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("overlay_edges(int type)"),
+        QString("edges(int type)")));
+    return edges(overlay);
+}
+
+QScriptValue Rocs::GraphStructure::list_nodes()
+{
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("list_nodes()"),
+        QString("nodes()")));
+    return nodes();
+}
+
+QScriptValue Rocs::GraphStructure::list_nodes(int type)
+{
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("list_nodes(int type)"),
+        QString("nodes(int type)")));
+    return nodes(type);
+}
+
+QScriptValue Rocs::GraphStructure::list_edges()
+{
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("list_edges()"),
+        QString("edges()")));
+    return edges();
+}
+
+QScriptValue Rocs::GraphStructure::list_edges(int type)
+{
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("list_edges(int type)"),
+        QString("edges(int type)")));
+    return edges(type);
+}
+
 QScriptValue Rocs::GraphStructure::add_node(const QString& name)
 {
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("add_node(string name)"),
+        QString("createNode()")));
     DataPtr n = addData(name, 0);
     n->setEngine(engine());
     return n->scriptValue();
@@ -149,31 +224,18 @@ QScriptValue Rocs::GraphStructure::add_node(const QString& name)
 
 QScriptValue Rocs::GraphStructure::add_edge(Data* fromRaw, Data* toRaw)
 {
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("add_edge(from, to)"),
+        QString("createEdge(node from, node to)")));
     return add_overlay_edge(fromRaw, toRaw, 0);
 }
 
 QScriptValue Rocs::GraphStructure::add_overlay_edge(Data* fromRaw, Data* toRaw, int overlay)
 {
-    if (fromRaw == 0 || toRaw == 0) {
-        kError() << "No edge added: data does not exist";
-        return QScriptValue();
-    }
-    if (!document()->pointerTypeList().contains(overlay)) {
-        kError() << "No edge added: pointer type does not exist";
-        return QScriptValue();
-    }
-
-    DataPtr from = fromRaw->getData();
-    DataPtr to = toRaw->getData();
-
-    PointerPtr edge = addPointer(from, to, overlay);
-    if (edge) {
-        edge->setEngine(engine());
-        return edge->scriptValue();
-    }
-    kError() << "Could not at this pointer to the data structure";
-
-    return QScriptValue();
+    emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("add_overlay_edge(from, to, overlay)"),
+        QString("createEdge(node from, node to, int type)")));
+    return createEdge(fromRaw, toRaw, overlay);
 }
 
 QScriptValue Rocs::GraphStructure::dijkstra_shortest_path(Data* fromRaw, Data* toRaw)

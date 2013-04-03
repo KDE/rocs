@@ -29,6 +29,8 @@ namespace Rocs
 class ROCS_GRAPHSTRUCTURE_EXPORT GraphStructure : public DataStructure
 {
     Q_OBJECT
+    Q_PROPERTY(QString name READ name WRITE setName)
+
 public:
     typedef enum {
         Graph,
@@ -100,6 +102,68 @@ public:
      */
     QMap<DataPtr,PointerList> dijkstraShortestPaths(DataPtr from);
 
+    /**
+     * Returns a list of all nodes of the graph.
+     * \return array containing the nodes
+     */
+    Q_INVOKABLE QScriptValue nodes();
+
+    /**
+     * Returns a list of all nodes of given \p type in the graph.
+     * \param type is the overlay for the to created pointer
+     * \return array containing the nodes
+     */
+    Q_INVOKABLE QScriptValue nodes(int type);
+
+    /**
+     * Returns a list of all edges of the graph.
+     * \return array containing the edges
+     */
+    Q_INVOKABLE QScriptValue edges();
+
+    /**
+     * Returns a list of all edges of given \p type in the graph.
+     * \param type is the overlay for the to created pointer
+     * \return array containing the edges
+     */
+    Q_INVOKABLE QScriptValue edges(int type);
+
+    /**
+     * Creates a new data element and return it. If the specified data type is not registered,
+     * no data element is created.
+     * \param type is the data type of the created node
+     * \return script value for the new node
+     */
+    Q_INVOKABLE QScriptValue createNode(int type);
+
+    /**
+     * Creates a new data element and return it.
+     * \return script value for the new node
+     */
+    Q_INVOKABLE QScriptValue createNode();
+
+    /**
+     * Creates a new edge edge from \param fromRaw to \param toRaw
+     * of pointer type \param type. If the specified pointer type does not exist, no pointer
+     * is created.
+     * \param fromRaw is origin of pointer
+     * \param toRaw is target of pointer
+     * \param overlay is the overlay for the to created pointer
+     * \return script value for the new pointer
+     */
+    Q_INVOKABLE QScriptValue createEdge(Data* fromRaw, Data* toRaw, int type);
+
+    /**
+     * Creates a new edge from \param fromRaw to \param toRaw.
+     * \param fromRaw is origin of pointer
+     * \param toRaw is target of pointer
+     * \return script value for the new pointer
+     */
+    Q_INVOKABLE QScriptValue createEdge(Data* fromRaw, Data* toRaw);
+
+signals:
+    void scriptError(const QString &message);
+
 public slots:
     /**
      * Setter for graph type. No conversations are performed.
@@ -111,6 +175,7 @@ public slots:
     /**
      * Returns a list of all nodes of the graph.
      * \return array containing the nodes
+     * \deprecated
      */
     QScriptValue list_nodes();
 
@@ -118,12 +183,14 @@ public slots:
      * Returns a list of all nodes of given \p type in the graph.
      * \param type is the overlay for the to created pointer
      * \return array containing the nodes
+     * \deprecated
      */
     QScriptValue list_nodes(int type);
 
     /**
      * Returns a list of all edges of the graph.
      * \return array containing the edges
+     * \deprecated
      */
     QScriptValue list_edges();
 
@@ -131,6 +198,7 @@ public slots:
      * Returns a list of all edges of given \p type in the graph.
      * \param type is the overlay for the to created pointer
      * \return array containing the edges
+     * \deprecated
      */
     QScriptValue list_edges(int type);
 
@@ -139,6 +207,7 @@ public slots:
      * does not exist an empty array is returned.
      * \param overlay integer that identifies the overlay
      * \return QScriptValue array
+     * \deprecated
      */
     QScriptValue overlay_edges(int overlay);
 
@@ -146,6 +215,7 @@ public slots:
      * Creates a new node with specified \param name.
      * \param name of the new node
      * \return script value for the new node
+     * \deprecated
      */
     QScriptValue add_node(const QString& name);
 
@@ -157,6 +227,7 @@ public slots:
      * \param toRaw is target of pointer
      * \param overlay is the overlay for the to created pointer
      * \return script value for the new pointer
+     * \deprecated
      */
     QScriptValue add_overlay_edge(Data* fromRaw, Data* toRaw, int overlay);
 
@@ -165,6 +236,7 @@ public slots:
      * \param fromRaw is origin of pointer
      * \param toRaw is target of pointer
      * \return script value for the new pointer
+     * \deprecated
      */
     QScriptValue add_edge(Data* fromRaw, Data* toRaw);
 
