@@ -1,0 +1,13 @@
+#rocs-content-text h1, #rocs-content-text h2
+{
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #dadada;
+}
+
+.rocs-parameter-thead
+{
+    background-color:#dddddd
+}

@@ -185,9 +185,12 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     mapping.insert("i18nSyntax", i18nc("@title", "Syntax"));
     mapping.insert("i18nProperties", i18nc("@title", "Properties"));
     mapping.insert("i18nParameters", i18nc("@title", "Parameters"));
+    mapping.insert("i18nParameter", i18nc("@title", "Parameter"));
     mapping.insert("i18nMethods", i18nc("@title", "Methods"));
     mapping.insert("i18nType", i18nc("@title", "Type"));
     mapping.insert("i18nReturnType", i18nc("@title", "Return Type"));
+    mapping.insert("i18nDetailedDescription", i18nc("@title", "Detailed Description"));
+    mapping.insert("i18nDescription", i18nc("@title", "Description"));
 
     Grantlee::Context c(mapping);
 

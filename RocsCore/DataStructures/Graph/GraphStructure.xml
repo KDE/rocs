@@ -49,6 +49,11 @@ A graph objects holds the information of a data structure of type "Graph".
     </description>
     <returnType>array</returnType>
     <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of a edge type.</info>
+        </parameter>
     </parameters>
 </method>
 <method>

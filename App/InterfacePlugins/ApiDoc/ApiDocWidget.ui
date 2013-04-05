@@ -32,9 +32,11 @@
         <widget class="QWidget" name="detailsView">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="KRichTextWidget" name="docDetails">
-            <property name="readOnly">
-             <bool>true</bool>
+           <widget class="QWebView" name="docDetails">
+            <property name="url">
+             <url>
+              <string>about:blank</string>
+             </url>
             </property>
            </widget>
           </item>
@@ -89,24 +91,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KRichTextEdit</class>
-   <extends>KTextEdit</extends>
-   <header>krichtextedit.h</header>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKit/QWebView</header>
   </customwidget>
   <customwidget>
    <class>KPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KTextEdit</class>
-   <extends>QTextEdit</extends>
-   <header>ktextedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KRichTextWidget</class>
-   <extends>KRichTextEdit</extends>
-   <header>krichtextwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

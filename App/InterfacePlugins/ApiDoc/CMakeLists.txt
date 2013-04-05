@@ -17,3 +17,5 @@
 ##
 
 install( FILES detailsViewTheme.html DESTINATION ${DATA_INSTALL_DIR}/rocs/plugin/apidoc/)
+install( FILES bootstrap.css DESTINATION ${DATA_INSTALL_DIR}/rocs/plugin/apidoc/)
+install( FILES bootstrap-apiview.css DESTINATION ${DATA_INSTALL_DIR}/rocs/plugin/apidoc/)

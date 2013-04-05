@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Script API Documentation Plugin</title>
+<link rel="stylesheet" href="bootstrap.css" />
+<link rel="stylesheet" href="bootstrap-apiview.css" />
+</head>
+<body>
+
+<div style="margin: 10pt" id="rocs-content-text">
 <h1>{{ object.title }}</h1>
 
 {% for para in object.description %}
@@ -6,39 +16,58 @@
 
 {% if object.syntaxExample %}
 <h2>{{ i18nSyntax }}</h2>
-<verbatim>{{ object.syntaxExample }}</verbatim>
+<pre>{{ object.syntaxExample }}</pre>
+
 {% endif %}
 
 {% if properties %}
-<h2 id="properties">{{ i18nProperties }}</h2>
+<h2 id="properties" style="line-height: 1em;">{{ i18nProperties }}</h2>
+<ul>
 {% for property in properties %}
-    <h3 id="{{ property.documentAnchor }}">{{ property.name }}</h3>
-    {% for paragraph in property.description %}
-    <p>{{ paragraph }}</p>
-    {% endfor %}
-    <p><b>{{ i18nType }}:</b> {{ property.type }}<p>
+    <li id="{{ property.documentAnchor }}">
+        <strong>{{ property.name }}</strong> : {{ property.type }}
+        {% for paragraph in property.description %}
+        <p style="font-style: italic">{{ paragraph }}</p>
+        {% endfor %}
+    </li>
 {% endfor %}
+</ul>
 {% endif %}
 
 {% if methods %}
 <h2 id="methods">{{ i18nMethods }}</h2>
+<ul>
 {% for method in methods %}
-    <h3 id="{{ method.documentAnchor }}">{{ method.name }}</h3>
+<li><a href="#{{ method.documentAnchor }}">{{ method.name }}</a></li>
+{% endfor %}
+</ul>
+
+<h3>{{ i18nDetailedDescription }}</h3>
+{% for method in methods %}
+    <h4 id="{{ method.documentAnchor }}">{{ method.name }}</h4>
     {% for paragraph in method.description %}
-    <p>{{ paragraph }}</p>
+        <p>{{ paragraph }}</p>
     {% endfor %}
-    <h4>{{ i18nParameters }}</h4>
+    {% if method.parameters.count %}
+    <table class="table-striped" style="width: 100%">
+    <thead class="rocs-parameter-thead">
+    <tr><th style="width: 30%">{{ i18nParameter }}</th><th>{{ i18nDescription }}</th></tr>
+    </thead>
+    <tbody>
     {% for parameter in method.parameters %}
-    <ol>
-        <li>({{ parameter.type }}) <b>{{ parameter.name }}</b>
-        {% if parameter.info %}
-            <i>{{ parameter.info }}</i>
-        {% endif %}
-        </li>
-    </ol>
+        <tr>
+            <td><strong>{{ parameter.name }}</strong> : {{ parameter.type }}</td>
+            <td>{{ parameter.info }}</td>
+        </tr>
     {% endfor %}
+    </tbody>
+    </table>
+    {% endif %}
     <p>
-        <b>{{ i18nReturnType }}</b> {{ method.returnType }}
+        <b>{{ i18nReturnType }}</b> : {{ method.returnType }}
     </p>
 {% endfor %}
 {% endif %}
+</div>
+</body>
+</html>

@@ -22,6 +22,7 @@
 #include "ApiDocModel.h"
 
 #include <KDebug>
+#include <KStandardDirs>
 
 ApiDocWidget::ApiDocWidget(QWidget* parent)
     : QWidget(parent)
@@ -48,7 +49,9 @@ void ApiDocWidget::goHome()
 void ApiDocWidget::showDetails(const QModelIndex &index)
 {
     QString htmlDocument = _manager->objectApiDocument(_model->data(index, ApiDocModel::DocumentRole).toString());
-    ui->docDetails->setHtml(htmlDocument);
+    KUrl baseUrl = KUrl::fromPath(KGlobal::dirs()->findResourceDir("appdata", QString("plugin/apidoc/detailsViewTheme.html")));
+    baseUrl.addPath("plugin/apidoc/");
+    ui->docDetails->setHtml(htmlDocument, baseUrl);
     ui->pageStack->setCurrentIndex(1);
 
     // TODO jump to anchor
