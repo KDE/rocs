@@ -158,7 +158,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         new Grantlee::FileSystemTemplateLoader() );
     loader->setTemplateDirs(KGlobal::dirs()->resourceDirs("appdata"));
     engine->addTemplateLoader(loader);
-    Grantlee::Template t = engine->loadByName("plugin/apidoc/detailsViewTheme.html");
+    Grantlee::Template t = engine->loadByName("plugin/apidoc/objectApi.html");
     Grantlee::registerMetaType<ParameterDocumentation*>();
 
     // create mapping

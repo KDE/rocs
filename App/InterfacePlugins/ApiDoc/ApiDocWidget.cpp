@@ -49,7 +49,7 @@ void ApiDocWidget::goHome()
 void ApiDocWidget::showDetails(const QModelIndex &index)
 {
     QString htmlDocument = _manager->objectApiDocument(_model->data(index, ApiDocModel::DocumentRole).toString());
-    KUrl baseUrl = KUrl::fromPath(KGlobal::dirs()->findResourceDir("appdata", QString("plugin/apidoc/detailsViewTheme.html")));
+    KUrl baseUrl = KUrl::fromPath(KGlobal::dirs()->findResourceDir("appdata", QString("plugin/apidoc/objectApi.html")));
     baseUrl.addPath("plugin/apidoc/");
     ui->docDetails->setHtml(htmlDocument, baseUrl);
     ui->pageStack->setCurrentIndex(1);

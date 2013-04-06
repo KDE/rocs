@@ -16,4 +16,6 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-add_subdirectory(HtmlView)
+install( FILES objectApi.html DESTINATION ${DATA_INSTALL_DIR}/rocs/plugin/apidoc/)
+install( FILES bootstrap.css DESTINATION ${DATA_INSTALL_DIR}/rocs/plugin/apidoc/)
+install( FILES bootstrap-apiview.css DESTINATION ${DATA_INSTALL_DIR}/rocs/plugin/apidoc/)
