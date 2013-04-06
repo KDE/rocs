@@ -29,6 +29,7 @@ class ParameterDocumentation : public QObject
     Q_PROPERTY(QString name READ name)
     Q_PROPERTY(QString type READ type)
     Q_PROPERTY(QString info READ info)
+    Q_PROPERTY(QString typeLink READ typeLink)
 
 public:
     explicit ParameterDocumentation(QObject *parent = 0);
@@ -39,13 +40,15 @@ public:
     void setType(const QString &type);
     QString info() const;
     void setInfo(const QString &info);
-
+    QString typeLink() const;
+    void setTypeLink(const QString &link);
 
 private:
     Q_DISABLE_COPY(ParameterDocumentation)
     QString _name;
     QString _type;
     QString _info;
+    QString _typeLink;
 };
 
 #endif // PARAMETER_DOCUMENTATION_H

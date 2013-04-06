@@ -53,3 +53,13 @@ void ParameterDocumentation::setType(const QString &type)
 {
     _type = type;
 }
+
+void ParameterDocumentation::setTypeLink(const QString& link)
+{
+    _typeLink = link;
+}
+
+QString ParameterDocumentation::typeLink() const
+{
+    return _typeLink;
+}

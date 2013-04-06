@@ -58,6 +58,16 @@ QString PropertyDocumentation::type() const
     return _type;
 }
 
+void PropertyDocumentation::setTypeLink(const QString& link)
+{
+    _typeLink = link;
+}
+
+QString PropertyDocumentation::typeLink() const
+{
+    return _typeLink;
+}
+
 QString PropertyDocumentation::apiDocumentAnchor()
 {
     return QString("property").append(_name);

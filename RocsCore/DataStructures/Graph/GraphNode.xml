@@ -123,7 +123,7 @@ A node is the data element of a graph.
     <parameters>
         <parameter>
             <name>target</name>
-            <type>node</type>
+            <type>GraphNode</type>
             <info>Target node.</info>
         </parameter>
     </parameters>

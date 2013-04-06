@@ -33,6 +33,7 @@ class MethodDocumentation : public QObject
     Q_PROPERTY(QVariantList description READ description)
     Q_PROPERTY(QVariant parameters READ parametersVar)
     Q_PROPERTY(QString returnType READ returnType)
+    Q_PROPERTY(QString returnTypeLink READ returnTypeLink)
     Q_PROPERTY(QString documentAnchor READ apiDocumentAnchor)
 
 public:
@@ -46,14 +47,17 @@ public:
     void setReturnType(const QString &type);
     QVariant parametersVar() const;
     QList<ParameterDocumentation*> parameters() const;
-    void addParameter(const QString &name, const QString &type, const QString &info);
+    void addParameter(const QString &name, const QString &type, const QString &info, const QString &typeLink);
     QString apiDocumentAnchor();
+    QString returnTypeLink() const;
+    void setReturnTypeLink(const QString &link);
 
 private:
     Q_DISABLE_COPY(MethodDocumentation)
     QString _name;
     QStringList _description;
     QString _returnType;
+    QString _returnTypeLink;
     QList<ParameterDocumentation*> _parameters;
 };
 

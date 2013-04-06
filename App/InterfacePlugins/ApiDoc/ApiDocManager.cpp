@@ -44,6 +44,7 @@ ApiDocManager::ApiDocManager(QObject *parent)
 
 void ApiDocManager::loadLocalData()
 {
+    createObjectCache();
     QStringList apiDocFiles = KGlobal::dirs()->findAllResources("appdata", QString("engineapi/*.xml"));
     foreach (const QString &file, apiDocFiles) {
         loadObjectApi(KUrl::fromLocalFile(file));
@@ -64,6 +65,32 @@ ObjectDocumentation * ApiDocManager::objectApi(int index) const
 QString ApiDocManager::objectApiDocument(const QString &identifier) const
 {
     return _objectApiDocuments.value(identifier);
+}
+
+void ApiDocManager::createObjectCache()
+{
+    _objectApiCache.clear();
+    QStringList apiDocFiles = KGlobal::dirs()->findAllResources("appdata", QString("engineapi/*.xml"));
+    foreach (const QString &file, apiDocFiles) {
+        KUrl path = KUrl::fromLocalFile(file);
+
+        if (!path.isLocalFile()) {
+            kWarning() << "Cannot open API file at " << path.toLocalFile() << ", aborting.";
+        }
+
+        QXmlSchema schema = loadXmlSchema("engineApi");
+        if (!schema.isValid()) {
+            return;
+        }
+
+        QDomDocument document = loadDomDocument(path, schema);
+        if (document.isNull()) {
+            kWarning() << "Could not parse document " << path.toLocalFile() << ", aborting.";
+        }
+
+        QDomElement root(document.documentElement());
+        _objectApiCache.append(root.firstChildElement("id").text());
+    }
 }
 
 bool ApiDocManager::loadObjectApi(const KUrl &path)
@@ -118,6 +145,9 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
             paragraphs.append(descriptionNode.text());
         }
         property->setDescription(paragraphs);
+        if (_objectApiCache.contains(property->type())) {
+            property->setTypeLink(property->type());
+        }
 
         objectApi->addProperty(property);
     }
@@ -130,6 +160,9 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         MethodDocumentation *method = new MethodDocumentation(objectApi);
         method->setName(methodNode.firstChildElement("name").text());
         method->setReturnType(methodNode.firstChildElement("returnType").text());
+        if (_objectApiCache.contains(method->returnType())) {
+            method->setReturnTypeLink(method->returnType());
+        }
 
         QStringList paragraphs;
         for (QDomElement descriptionNode = methodNode.firstChildElement("description").firstChildElement("para");
@@ -144,10 +177,15 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
             !parameterNode.isNull();
             parameterNode = parameterNode.nextSiblingElement())
         {
+            QString typeLink;
+            if (_objectApiCache.contains(parameterNode.firstChildElement("type").text())) {
+                typeLink = parameterNode.firstChildElement("type").text();
+            }
             method->addParameter(
                 parameterNode.firstChildElement("name").text(),
                 parameterNode.firstChildElement("type").text(),
-                parameterNode.firstChildElement("info").text());
+                parameterNode.firstChildElement("info").text(),
+                typeLink);
         }
 
         objectApi->addMethod(method);
@@ -230,7 +268,6 @@ QString ApiDocManager::apiOverviewDocument() const
     // create HTML file
     return t->render(&c);
 }
-
 
 QXmlSchema ApiDocManager::loadXmlSchema(const QString &schemeName) const
 {

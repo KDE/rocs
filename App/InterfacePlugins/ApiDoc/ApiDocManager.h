@@ -69,6 +69,11 @@ public:
     QString apiOverviewDocument() const;
 
     /**
+     * Read all available API description and create list of these objects.
+     */
+    void createObjectCache();
+
+    /**
      * Load documenation object specification from locally stored XML file.
      *
      * \param path is the local XML file containing the object API specification
@@ -103,6 +108,7 @@ private:
 
     QList<ObjectDocumentation *> _objectApiList;
     QHash<QString, QString> _objectApiDocuments;
+    QList<QString> _objectApiCache; // list of all objects available
 };
 
 #endif // APIDOCMANAGER_H

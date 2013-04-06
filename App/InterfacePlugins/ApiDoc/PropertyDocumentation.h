@@ -31,6 +31,7 @@ class PropertyDocumentation : public QObject
     Q_PROPERTY(QString name READ name)
     Q_PROPERTY(QVariantList description READ description)
     Q_PROPERTY(QString type READ type)
+    Q_PROPERTY(QString typeLink READ typeLink)
     Q_PROPERTY(QString documentAnchor READ apiDocumentAnchor)
 
 public:
@@ -45,6 +46,8 @@ public:
     void setDescription(const QStringList &description);
     QString type() const;
     void setType(const QString &type);
+    QString typeLink() const;
+    void setTypeLink(const QString &link);
     QString apiDocumentAnchor();
 
 private:
@@ -52,6 +55,7 @@ private:
     QString _name;
     QStringList _description;
     QString _type;
+    QString _typeLink;
 };
 
 #endif // PROPERTY_DOCUMENTATION_H

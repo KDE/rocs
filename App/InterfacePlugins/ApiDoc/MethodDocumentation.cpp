@@ -59,12 +59,13 @@ QString MethodDocumentation::returnType() const
     return _returnType;
 }
 
-void MethodDocumentation::addParameter(const QString& name, const QString& type, const QString& info)
+void MethodDocumentation::addParameter(const QString& name, const QString& type, const QString& info, const QString& typeLink=QString())
 {
     ParameterDocumentation *parameter = new ParameterDocumentation(this);
     parameter->setName(name);
     parameter->setType(type);
     parameter->setInfo(info);
+    parameter->setTypeLink(typeLink);
     _parameters.append(parameter);
 }
 
@@ -82,3 +83,14 @@ QString MethodDocumentation::apiDocumentAnchor()
 {
     return QString("method").append(_name);
 }
+
+void MethodDocumentation::setReturnTypeLink(const QString& link)
+{
+    _returnTypeLink = link;
+}
+
+QString MethodDocumentation::returnTypeLink() const
+{
+    return _returnTypeLink;
+}
+

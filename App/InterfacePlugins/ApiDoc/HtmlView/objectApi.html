@@ -31,7 +31,12 @@
 <ul>
 {% for property in properties %}
     <li id="{{ property.documentAnchor }}">
-        <strong>{{ property.name }}</strong> : {{ property.type }}
+        <strong>{{ property.name }}</strong> :
+        {% if property.typeLink %}
+        <a href="http://virtual/{{ property.typeLink }}">{{ property.type }}</a>
+        {% else %}
+        {{ property.type }}
+        {% endif %}
         {% for paragraph in property.description %}
         <p style="font-style: italic">{{ paragraph }}</p>
         {% endfor %}
@@ -62,15 +67,25 @@
     <tbody>
     {% for parameter in method.parameters %}
         <tr>
-            <td><strong>{{ parameter.name }}</strong> : {{ parameter.type }}</td>
+            <td><strong>{{ parameter.name }}</strong> :
+            {% if parameter.typeLink %}
+            <a href="http://virtual/{{ parameter.typeLink }}">{{ parameter.type }}</a>
+            {% else %}
+            {{ parameter.type }}
+            {% endif %}
+            </td>
             <td>{{ parameter.info }}</td>
         </tr>
     {% endfor %}
     </tbody>
     </table>
     {% endif %}
-    <p>
-        <b>{{ i18nReturnType }}</b> : {{ method.returnType }}
+    <p><b>{{ i18nReturnType }}</b> :
+        {% if method.returnTypeLink %}
+        <a href="http://virtual/{{ method.returnTypeLink }}">{{ method.returnType }}</a>
+        {% else %}
+        {{ method.returnType }}
+        {% endif %}
     </p>
 {% endfor %}
 {% endif %}
