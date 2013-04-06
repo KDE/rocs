@@ -18,6 +18,7 @@
 
 #include "ObjectDocumentation.h"
 #include <QStringList>
+#include <KDebug>
 
 ObjectDocumentation::ObjectDocumentation(QObject* parent)
     : QObject(parent)
@@ -26,6 +27,11 @@ ObjectDocumentation::ObjectDocumentation(QObject* parent)
 
 ObjectDocumentation::~ObjectDocumentation()
 {
+}
+
+QString ObjectDocumentation::id() const
+{
+    return _title; //TODO workaround: use unique script identifier
 }
 
 void ObjectDocumentation::setTitle(const QString &title)

@@ -53,7 +53,20 @@ public:
 
     ObjectDocumentation * objectApi(int index) const;
 
+    /**
+     * Generates HTML document with the API documentation for the specified object.
+     *
+     * \param identifier is the identifier of an ObjectDocumentation object
+     * \return HTML content
+     */
     QString objectApiDocument(const QString &identifier) const;
+
+    /**
+     * Generates HTML document with the an overview over all available API objects.
+     *
+     * \return HTML content
+     */
+    QString apiOverviewDocument() const;
 
     /**
      * Load documenation object specification from locally stored XML file.

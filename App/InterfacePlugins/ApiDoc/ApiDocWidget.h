@@ -40,12 +40,16 @@ public:
     explicit ApiDocWidget(QWidget* parent);
 
 public slots:
-    void goHome();
+    void showTreeOutline();
+    void showHtmlOutline();
     void showDetails(const QModelIndex &index);
+    void showObjectApi(const QString &id);
+    void showObjectApi(const QUrl &aliasPage);
 
 private:
     ApiDocManager *_manager;
     ApiDocModel *_model;
+    KUrl _baseUrl;
     Ui::ApiDocWidget *ui;
 };
 

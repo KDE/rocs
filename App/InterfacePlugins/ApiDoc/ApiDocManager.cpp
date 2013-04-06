@@ -200,6 +200,37 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     return true;
 }
 
+QString ApiDocManager::apiOverviewDocument() const
+{
+    // initialize Grantlee engine
+    Grantlee::Engine engine;
+    Grantlee::FileSystemTemplateLoader::Ptr loader = Grantlee::FileSystemTemplateLoader::Ptr(
+        new Grantlee::FileSystemTemplateLoader() );
+    loader->setTemplateDirs(KGlobal::dirs()->resourceDirs("appdata"));
+    engine.addTemplateLoader(loader);
+    Grantlee::Template t = engine.loadByName("plugin/apidoc/overview.html");
+    Grantlee::registerMetaType<ParameterDocumentation*>();
+
+    // create mapping
+    QVariantHash mapping;
+
+    // objects
+    QVariantList objectList;
+    foreach (ObjectDocumentation *object, _objectApiList) {
+        objectList.append(QVariant::fromValue<QObject*>(object));
+    }
+    mapping.insert("objects", objectList);
+
+    // localized strings
+    mapping.insert("i18nScriptEngineApi", i18nc("@title", "Script Engine API"));
+    mapping.insert("i18nObjects", i18nc("@title", "Objects"));
+    Grantlee::Context c(mapping);
+
+    // create HTML file
+    return t->render(&c);
+}
+
+
 QXmlSchema ApiDocManager::loadXmlSchema(const QString &schemeName) const
 {
     QString relPath = QString("schemes/%1.xsd").arg(schemeName);

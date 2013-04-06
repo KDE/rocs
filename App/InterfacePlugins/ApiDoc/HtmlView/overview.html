@@ -1,0 +1,29 @@
+<!--
+ *  Copyright 2013  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+ *
+ *  Licensed under the Creative Commons Attribution-Share Alike 3.0 Unported licence
+ *  available at http://creativecommons.org/licenses/by-sa/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Script API Documentation Plugin: Overview</title>
+<link rel="stylesheet" href="bootstrap.css" />
+<link rel="stylesheet" href="bootstrap-apiview.css" />
+</head>
+<body>
+
+<div style="margin: 10pt" id="rocs-content-text">
+<h1>{{ i18nScriptEngineApi }}</h1>
+
+<ul>
+{% for object in objects %}
+    <li>
+        <a href="http://virtual/{{ object.id }}">{{ object.title }}</a>
+    </li>
+{% endfor %}
+</ul>
+
+</div>
+</body>
+</html>
