@@ -83,8 +83,16 @@ void ApiDocWidget::showHtmlOutline(bool logHistory)
         return;
     }
 
-    _history.append("_outline"); // use this identifier for the script api html outline
+    // clear forward history
+    if (_historyPointer < _history.count() - 1) {
+        while (_historyPointer < _history.count() - 1) {
+            _history.removeAt(_history.count() - 1);
+        }
+        ui->buttonNext->setEnabled(false);
+    }
+
     ++_historyPointer;
+    _history.append("_outline"); // use this identifier for the script api html outline
     if (_historyPointer > 0) {
         ui->buttonPrev->setEnabled(true);
     }
@@ -92,8 +100,7 @@ void ApiDocWidget::showHtmlOutline(bool logHistory)
 
 void ApiDocWidget::showDetails(const QModelIndex &index)
 {
-    QString htmlDocument = _manager->objectApiDocument(_model->data(index, ApiDocModel::DocumentRole).toString());
-    ui->docDetails->setHtml(htmlDocument, _baseUrl);
+    showObjectApi(_model->data(index, ApiDocModel::DocumentRole).toString(), true);
     ui->pageStack->setCurrentIndex(1);
 
     // TODO jump to anchor
@@ -116,25 +123,36 @@ void ApiDocWidget::showObjectApi(const QString &id, bool logHistory=true)
         }
         _history.append(id);
         ++_historyPointer;
-        ui->buttonPrev->setEnabled(true);
+        if (_historyPointer > 0) {
+            ui->buttonPrev->setEnabled(true);
+        }
     }
 }
 
 void ApiDocWidget::showObjectApi(const QUrl &aliasPage)
 {
+    if (aliasPage.toString().isEmpty()) {
+        kError() << "No path given, aborting.";
+        return;
+    }
+
     QString path = aliasPage.toString();
     int len = path.length() - 1;
     while (path.at(len) != '/' && len >= 0) {
         --len;
     }
 
-    QString id = path.mid(len + 1);
-    showObjectApi(id);
+    if (len <= 0) {
+        showObjectApi(path);
+    } else {
+        QString id = path.mid(len + 1);
+        showObjectApi(id);
+    }
 }
 
 void ApiDocWidget::historyGoBack()
 {
-    if (_historyPointer < 0) {
+    if (_historyPointer <= 0) {
         kError() << "Cannot go back in history, none exist";
         return;
     }
@@ -154,7 +172,7 @@ void ApiDocWidget::historyGoBack()
 
 void ApiDocWidget::historyGoForward()
 {
-    if (_historyPointer > _history.length() - 1) {
+    if (_historyPointer >= _history.length() - 1) {
         kError() << "Cannot go forward in history, none exist";
         return;
     }
