@@ -28,6 +28,7 @@
 ApiDocWidget::ApiDocWidget(QWidget* parent)
     : QWidget(parent)
     , _manager(new ApiDocManager(this))
+    , _historyPointer(-1)
 {
     _baseUrl = KUrl::fromPath(KGlobal::dirs()->findResourceDir("appdata", QString("plugin/apidoc/objectApi.html")));
     _baseUrl.addPath("plugin/apidoc/");
@@ -39,12 +40,17 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
     ui->buttonPrev->setIcon(KIcon("go-previous-view"));
     ui->buttonNext->setIcon(KIcon("go-next-view"));
 
+    ui->buttonPrev->setEnabled(false);
+    ui->buttonNext->setEnabled(false);
+
     _manager->loadLocalData();
     _model = new ApiDocModel(_manager->objectApiList(), this);
 
     connect(ui->buttonTree, SIGNAL(clicked(bool)), this, SLOT(showTreeOutline()));
     connect(ui->buttonHome, SIGNAL(clicked(bool)), this, SLOT(showHtmlOutline()));
     connect(ui->docTree, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
+    connect(ui->buttonNext, SIGNAL(clicked(bool)), this, SLOT(historyGoForward()));
+    connect(ui->buttonPrev, SIGNAL(clicked(bool)), this, SLOT(historyGoBack()));
 
     // listen to all links for ids
     connect(ui->docDetails, SIGNAL(linkClicked(QUrl)), this, SLOT(showObjectApi(QUrl)));
@@ -65,8 +71,23 @@ void ApiDocWidget::showTreeOutline()
 
 void ApiDocWidget::showHtmlOutline()
 {
+    showHtmlOutline(true);
+}
+
+void ApiDocWidget::showHtmlOutline(bool logHistory)
+{
     ui->docDetails->setHtml(_manager->apiOverviewDocument(), _baseUrl);
     ui->pageStack->setCurrentIndex(1);
+
+    if (!logHistory) {
+        return;
+    }
+
+    _history.append("_outline"); // use this identifier for the script api html outline
+    ++_historyPointer;
+    if (_historyPointer > 0) {
+        ui->buttonPrev->setEnabled(true);
+    }
 }
 
 void ApiDocWidget::showDetails(const QModelIndex &index)
@@ -79,11 +100,24 @@ void ApiDocWidget::showDetails(const QModelIndex &index)
     // _model->data(index, ApiDocModel::AnchorRole).toString();
 }
 
-void ApiDocWidget::showObjectApi(const QString &id)
+void ApiDocWidget::showObjectApi(const QString &id, bool logHistory=true)
 {
     QString htmlDocument = _manager->objectApiDocument(id);
     ui->docDetails->setHtml(htmlDocument, _baseUrl);
     ui->pageStack->setCurrentIndex(1);
+
+    if (logHistory) {
+        // update history
+        if (_historyPointer < _history.count() - 1) {
+            while (_historyPointer < _history.count() -1) {
+                _history.removeAt(_history.count() - 1);
+            }
+            ui->buttonNext->setEnabled(false);
+        }
+        _history.append(id);
+        ++_historyPointer;
+        ui->buttonPrev->setEnabled(true);
+    }
 }
 
 void ApiDocWidget::showObjectApi(const QUrl &aliasPage)
@@ -96,4 +130,43 @@ void ApiDocWidget::showObjectApi(const QUrl &aliasPage)
 
     QString id = path.mid(len + 1);
     showObjectApi(id);
+}
+
+void ApiDocWidget::historyGoBack()
+{
+    if (_historyPointer < 0) {
+        kError() << "Cannot go back in history, none exist";
+        return;
+    }
+    --_historyPointer;
+    if (_history.at(_historyPointer) == "_outline") {
+        showHtmlOutline(false);
+    } else {
+        showObjectApi(_history.at(_historyPointer), false);
+    }
+
+    // set buttons
+    ui->buttonNext->setEnabled(true);
+    if (_historyPointer <= 0) {
+        ui->buttonPrev->setEnabled(false);
+    }
+}
+
+void ApiDocWidget::historyGoForward()
+{
+    if (_historyPointer > _history.length() - 1) {
+        kError() << "Cannot go forward in history, none exist";
+        return;
+    }
+    ++_historyPointer;
+    if (_history.at(_historyPointer) == "_outline") {
+        showHtmlOutline(false);
+    } else {
+        showObjectApi(_history.at(_historyPointer), false);
+    }
+    // set buttons
+    ui->buttonPrev->setEnabled(true);
+    if (_historyPointer >= _history.count() - 1) {
+        ui->buttonNext->setEnabled(false);
+    }
 }

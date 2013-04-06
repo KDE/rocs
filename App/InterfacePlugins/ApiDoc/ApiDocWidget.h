@@ -38,18 +38,23 @@ public:
      * Default constructor.
      */
     explicit ApiDocWidget(QWidget* parent);
+    void showHtmlOutline(bool logHistory);
 
 public slots:
     void showTreeOutline();
     void showHtmlOutline();
     void showDetails(const QModelIndex &index);
-    void showObjectApi(const QString &id);
+    void showObjectApi(const QString &id, bool logHistory);
     void showObjectApi(const QUrl &aliasPage);
+    void historyGoBack();
+    void historyGoForward();
 
 private:
     ApiDocManager *_manager;
     ApiDocModel *_model;
     KUrl _baseUrl;
+    QList<QString> _history;
+    int _historyPointer;
     Ui::ApiDocWidget *ui;
 };
 
