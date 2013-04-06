@@ -29,9 +29,14 @@ ObjectDocumentation::~ObjectDocumentation()
 {
 }
 
+void ObjectDocumentation::setId(const QString &id)
+{
+    _id = id;
+}
+
 QString ObjectDocumentation::id() const
 {
-    return _title; //TODO workaround: use unique script identifier
+    return _id;
 }
 
 void ObjectDocumentation::setTitle(const QString &title)
@@ -90,5 +95,5 @@ QList< MethodDocumentation* > ObjectDocumentation::methods() const
 
 QString ObjectDocumentation::apiDocumentIdentifier()
 {
-    return _title;
+    return _id;
 }

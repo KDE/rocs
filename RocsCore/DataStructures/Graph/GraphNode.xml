@@ -1,5 +1,6 @@
 <object>
 <name>Graph Node</name>
+<id>GraphNode</id>
 <description>
 <para>
 A node is the data element of a graph.

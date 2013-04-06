@@ -40,6 +40,7 @@ public:
     ~ObjectDocumentation();
 
     QString id() const;
+    void setId(const QString& id);
     QString title() const;
     void setTitle(const QString &title);
     QVariantList description() const;
@@ -56,6 +57,7 @@ public:
 private:
     Q_DISABLE_COPY(ObjectDocumentation)
     QString _title;
+    QString _id;
     QStringList _description;
     QString _syntaxExample;
     QList< PropertyDocumentation *> _properties;

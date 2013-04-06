@@ -237,7 +237,7 @@ void ApiDocModel::setupModelData(QList<ObjectDocumentation* > dataList, Item *pa
 {
     foreach (ObjectDocumentation *object, dataList) {
         QList<QVariant> columnData;
-        columnData << object->title();
+        columnData << object->id();
         Item *objectItem = new Item(columnData, parent);
         objectItem->setDocumentAnchor(object->apiDocumentIdentifier(), QString());
         parent->appendChild(objectItem);

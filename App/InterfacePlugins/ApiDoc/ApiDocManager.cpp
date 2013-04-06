@@ -73,7 +73,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         return false;
     }
 
-    QXmlSchema schema = loadXmlSchema("objectScheme");
+    QXmlSchema schema = loadXmlSchema("engineApi");
     if (!schema.isValid()) {
         return false;
     }
@@ -90,6 +90,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     emit objectApiAboutToBeAdded(objectApi, _objectApiList.count() - 1);
 
     objectApi->setTitle(root.firstChildElement("name").text());
+    objectApi->setId(root.firstChildElement("id").text());
     objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
     QStringList paragraphs;
     for (QDomElement descriptionNode = root.firstChildElement("description").firstChildElement("para");
@@ -195,7 +196,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     Grantlee::Context c(mapping);
 
     // create HTML file
-    _objectApiDocuments.insert(objectApi->title(), t->render(&c));
+    _objectApiDocuments.insert(objectApi->id(), t->render(&c));
     emit objectApiAdded();
     return true;
 }

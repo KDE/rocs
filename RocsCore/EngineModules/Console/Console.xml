@@ -1,5 +1,6 @@
 <object>
     <name>Console</name>
+    <id>Console</id>
     <description>
         <para>
             The Console object allows you to print messages of different importance to a log.

@@ -1,5 +1,6 @@
 <object>
 <name>Graph Data Structure</name>
+<id>GraphStructure</id>
 <description>
 <para>
 A graph objects holds the information of a data structure of type "Graph".
