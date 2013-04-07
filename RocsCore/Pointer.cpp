@@ -212,6 +212,11 @@ PointerType::Direction Pointer::direction() const
     return d->pointerType->direction();
 }
 
+bool Pointer::isDirected() const
+{
+    return (d->pointerType->direction() == PointerType::Unidirectional);
+}
+
 void Pointer::setVisible(bool visible)
 {
     d->visible = visible;

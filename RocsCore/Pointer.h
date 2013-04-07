@@ -49,8 +49,12 @@ class ROCSLIB_EXPORT Pointer : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(QScriptValue from READ start)
+    Q_PROPERTY(QScriptValue to READ end)
+    Q_PROPERTY(bool directed READ isDirected)
     Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(qreal width READ width WRITE setWidth)
+    Q_PROPERTY(int type READ pointerType)
 
 public:
     /**
@@ -75,7 +79,15 @@ public:
      */
     virtual ~Pointer();
 
+    /**
+     * \return the direction of the pointer.
+     */
     PointerType::Direction direction() const;
+
+    /**
+     * \return true if the pointer is directed, otherwise false
+     */
+    bool isDirected() const;
 
     /**
      * \return data structure to that this pointer belongs
@@ -104,6 +116,80 @@ public:
     \p engine the QScriptEngine that will work on the object */
     void setEngine(QScriptEngine *engine);
 
+    /**
+     * \return source data element of this pointer
+     */
+    DataPtr from() const;
+
+    /**
+     * \return target data element of this pointer
+     */
+    DataPtr to() const;
+
+    /**
+     * \return the \see from() data element for script engine
+     */
+    Q_INVOKABLE QScriptValue start() const;
+
+    /**
+     * \return the \see to() data element for script engine
+     */
+    Q_INVOKABLE QScriptValue end() const;
+
+    /**
+     * \return true if the edge is visible, otherwise false.
+     */
+    bool isVisible() const;
+
+    /**
+     * \return the color of this pointer
+     */
+    QColor color() const;
+
+    /**
+     * \return width of the pointer
+     */
+    qreal width() const;
+
+    /**
+     * \return pointer type identifier, \see class PointerType
+     */
+    int pointerType() const;
+
+    /**
+     * Remove pointer.
+     */
+    Q_INVOKABLE void remove();
+
+    /**
+     * \deprecated
+     * Will be removed in Rocs 2.0
+     */
+    Q_INVOKABLE void self_remove();
+
+    /**
+     * Set pointer type from script engine. If pointer type \p type does not exist, the method
+     * returns false. Otherwise it returns true.
+     *
+     * \param type is pointer type identifier.
+     * \return if change of type was successful
+     */
+    Q_INVOKABLE QScriptValue set_type(int type);
+
+    /**
+     * Add new property to pointer.
+     *
+     * \param name is identifier for new property
+     * \param value is the initial value of the property
+     */
+    Q_INVOKABLE void add_property(const QString& name, const QString& value);
+
+    /**
+     * Remove a property named \p name from this pointer.
+     * \param name identifier of the property to remove.
+     */
+    Q_INVOKABLE void remove_property(const QString& name);
+
 Q_SIGNALS:
     /**
      * Emitted when this pointer is removed
@@ -130,32 +216,11 @@ Q_SIGNALS:
      */
     void directionChanged(PointerType::Direction direction);
 
-    void propertyAdded(QString name);
-    void propertyRemoved(QString name);
-    void propertyChanged(QString name);
+    void propertyAdded(const QString &name);
+    void propertyRemoved(const QString &name);
+    void propertyChanged(const QString &name);
 
 public Q_SLOTS:
-    /**
-     * \return source data element of this pointer
-     */
-    DataPtr from() const;
-
-    /**
-     * \return target data element of this pointer
-     */
-    DataPtr to() const;
-
-    /**
-     * Remove pointer.
-     */
-    void remove();
-
-    /**
-     * \deprecated
-     * Will be removed in Rocs 2.0
-     */
-    void self_remove();
-
     /**
      * Change pointer type of the pointer. The specified pointer type must exist.
      * \param pointerType is the new pointer type
@@ -163,27 +228,12 @@ public Q_SLOTS:
     void setPointerType(int pointerType);
 
     /**
-     * \return the color of this pointer
-     */
-    QColor color() const;
-
-    /**
      * Set color attribute of this pointer. The new color must be set either in format "#000000" or by
      * it's english name ("red" for example).
      *
      * \param color is the new color of this pointer
      */
-    void setColor(const QColor& color);
-
-    /**
-     * \return pointer type identifier, \see class PointerType
-     */
-    int pointerType() const;
-
-    /**
-     * \return width of the pointer
-     */
-    qreal width() const;
+    void setColor(const QColor &color);
 
     /**
      * Set the width of this pointer.
@@ -224,45 +274,12 @@ public Q_SLOTS:
 
     QList<QString> properties() const;
 
-    bool isVisible() const;
     void setVisible(bool visible);
 
     /**
      * \return pointer type identifier for script engine
      */
     QScriptValue type() const;
-
-    /**
-     * Set pointer type from script engine. If pointer type \p type does not exist, the method
-     * returns false. Otherwise it returns true.
-     *
-     * \param type is pointer type identifier.
-     * \return if change of type was successful
-     */
-    QScriptValue set_type(int type);
-
-    /**
-     * Add new property to pointer.
-     *
-     * \param name is identifier for new property
-     * \param value is the initial value of the property
-     */
-    void add_property(const QString& name, const QString& value);
-
-    /**
-     * Remove a property named \p name from this pointer.
-     * \param name identifier of the property to remove.
-     */
-    void remove_property(const QString& name);
-    /**
-     * \return the \see from() data element for script engine
-     */
-    QScriptValue start() const;
-
-    /**
-     * \return the \see to() data element for script engine
-     */
-    QScriptValue end() const;
 
 protected:
     /**
