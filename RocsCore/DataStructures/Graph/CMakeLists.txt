@@ -53,6 +53,7 @@ install(TARGETS rocs_GraphStructure  DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES rocs_GraphStructure.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install(FILES GraphStructure.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 install(FILES GraphNode.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
+install(FILES GraphEdge.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 
 if(KDE4_BUILD_TESTS)
     enable_testing()
