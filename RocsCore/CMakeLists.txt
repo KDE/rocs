@@ -86,6 +86,10 @@ install( FILES
     ${SERVICETYPES_INSTALL_DIR}
 )
 
+install(FILES Data.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
+install(FILES Pointer.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
+install(FILES DataStructure.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
+
 add_subdirectory(DataStructures)
 add_subdirectory(LoadSave)
 add_subdirectory(EngineModules)

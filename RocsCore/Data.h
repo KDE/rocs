@@ -20,7 +20,6 @@
 #ifndef DATA_H
 #define DATA_H
 
-
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 #include "DataStructure.h"
