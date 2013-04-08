@@ -1,4 +1,4 @@
-<object>
+<object inherit="DataStructure">
 <name>Graph Data Structure</name>
 <id>GraphStructure</id>
 <description>

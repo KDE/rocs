@@ -1,4 +1,4 @@
-<object>
+<object inherit="Pointer">
 <name>Graph Edge</name>
 <id>GraphEdge</id>
 <description>

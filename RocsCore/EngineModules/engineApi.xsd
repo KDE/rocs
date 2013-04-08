@@ -10,6 +10,7 @@
         <xs:element name="properties" type="propertyList" />
         <xs:element name="methods" type="methodList" />
       </xs:sequence>
+      <xs:attribute name="inherit" type="xs:string" />
     </xs:complexType>
   </xs:element>
 
