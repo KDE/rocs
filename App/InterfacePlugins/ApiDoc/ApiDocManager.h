@@ -55,11 +55,13 @@ public:
 
     /**
      * Generates HTML document with the API documentation for the specified object.
+     * The generated object is cached such that only the first call to this method
+     * is expensive, later calls only return the cached page;
      *
      * \param identifier is the identifier of an ObjectDocumentation object
      * \return HTML content
      */
-    QString objectApiDocument(const QString &identifier) const;
+    QString objectApiDocument(const QString &identifier);
 
     /**
      * Generates HTML document with the an overview over all available API objects.
@@ -67,11 +69,6 @@ public:
      * \return HTML content
      */
     QString apiOverviewDocument() const;
-
-    /**
-     * Read all available API description and create list of these objects.
-     */
-    void createObjectCache();
 
     /**
      * Load documenation object specification from locally stored XML file.

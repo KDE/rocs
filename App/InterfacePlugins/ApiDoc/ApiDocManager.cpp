@@ -44,7 +44,6 @@ ApiDocManager::ApiDocManager(QObject *parent)
 
 void ApiDocManager::loadLocalData()
 {
-    createObjectCache();
     QStringList apiDocFiles = KGlobal::dirs()->findAllResources("appdata", QString("engineapi/*.xml"));
     foreach (const QString &file, apiDocFiles) {
         loadObjectApi(KUrl::fromLocalFile(file));
@@ -62,35 +61,71 @@ ObjectDocumentation * ApiDocManager::objectApi(int index) const
     return _objectApiList.at(index);
 }
 
-QString ApiDocManager::objectApiDocument(const QString &identifier) const
+QString ApiDocManager::objectApiDocument(const QString &identifier)
 {
-    return _objectApiDocuments.value(identifier);
-}
-
-void ApiDocManager::createObjectCache()
-{
-    _objectApiCache.clear();
-    QStringList apiDocFiles = KGlobal::dirs()->findAllResources("appdata", QString("engineapi/*.xml"));
-    foreach (const QString &file, apiDocFiles) {
-        KUrl path = KUrl::fromLocalFile(file);
-
-        if (!path.isLocalFile()) {
-            kWarning() << "Cannot open API file at " << path.toLocalFile() << ", aborting.";
-        }
-
-        QXmlSchema schema = loadXmlSchema("engineApi");
-        if (!schema.isValid()) {
-            return;
-        }
-
-        QDomDocument document = loadDomDocument(path, schema);
-        if (document.isNull()) {
-            kWarning() << "Could not parse document " << path.toLocalFile() << ", aborting.";
-        }
-
-        QDomElement root(document.documentElement());
-        _objectApiCache.append(root.firstChildElement("id").text());
+    if (_objectApiDocuments.contains(identifier)) {
+        return _objectApiDocuments.value(identifier);
     }
+
+    // get object API object
+    ObjectDocumentation *objectApi = 0;
+    foreach (ObjectDocumentation *obj, _objectApiList) {
+        if (obj->id() == identifier) {
+            objectApi = obj;
+            break;
+        }
+    }
+    if (!objectApi) {
+        kError() << "Could not find Object API with ID " << identifier;
+        return QString();
+    }
+
+    // initialize Grantlee engine
+    Grantlee::Engine *engine = new Grantlee::Engine( this );
+    Grantlee::FileSystemTemplateLoader::Ptr loader = Grantlee::FileSystemTemplateLoader::Ptr(
+        new Grantlee::FileSystemTemplateLoader() );
+    loader->setTemplateDirs(KGlobal::dirs()->resourceDirs("appdata"));
+    engine->addTemplateLoader(loader);
+    Grantlee::Template t = engine->loadByName("plugin/apidoc/objectApi.html");
+    Grantlee::registerMetaType<ParameterDocumentation*>();
+
+    // create mapping
+    QVariantHash mapping;
+
+    // object
+    QVariant objectVar = QVariant::fromValue<QObject*>(objectApi);
+    mapping.insert("object", objectVar);
+
+    // properties
+    QVariantList propertyList;
+    foreach (PropertyDocumentation *property, objectApi->properties()) {
+        propertyList.append(QVariant::fromValue<QObject*>(property));
+    }
+    mapping.insert("properties", propertyList);
+
+    // properties
+    QVariantList methodList;
+    foreach (MethodDocumentation *method, objectApi->methods()) {
+        methodList.append(QVariant::fromValue<QObject*>(method));
+    }
+    mapping.insert("methods", methodList);
+
+    mapping.insert("i18nSyntax", i18nc("@title", "Syntax"));
+    mapping.insert("i18nProperties", i18nc("@title", "Properties"));
+    mapping.insert("i18nParameters", i18nc("@title", "Parameters"));
+    mapping.insert("i18nParameter", i18nc("@title", "Parameter"));
+    mapping.insert("i18nMethods", i18nc("@title", "Methods"));
+    mapping.insert("i18nType", i18nc("@title", "Type"));
+    mapping.insert("i18nReturnType", i18nc("@title", "Return Type"));
+    mapping.insert("i18nDetailedDescription", i18nc("@title", "Detailed Description"));
+    mapping.insert("i18nDescription", i18nc("@title", "Description"));
+
+    Grantlee::Context c(mapping);
+
+    // create and cache HTML file
+    _objectApiDocuments.insert(objectApi->id(), t->render(&c));
+
+    return _objectApiDocuments.value(identifier);
 }
 
 bool ApiDocManager::loadObjectApi(const KUrl &path)
@@ -112,6 +147,12 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     }
 
     QDomElement root(document.documentElement());
+
+    // this addition must be performed for every object before any HTML documentation page
+    // is created
+    _objectApiCache.append(root.firstChildElement("id").text());
+
+    // create object documentation
     ObjectDocumentation *objectApi = new ObjectDocumentation(this);
     _objectApiList.append(objectApi);
     emit objectApiAboutToBeAdded(objectApi, _objectApiList.count() - 1);
@@ -191,50 +232,6 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         objectApi->addMethod(method);
     }
 
-    // initialize Grantlee engine
-    Grantlee::Engine *engine = new Grantlee::Engine( this );
-    Grantlee::FileSystemTemplateLoader::Ptr loader = Grantlee::FileSystemTemplateLoader::Ptr(
-        new Grantlee::FileSystemTemplateLoader() );
-    loader->setTemplateDirs(KGlobal::dirs()->resourceDirs("appdata"));
-    engine->addTemplateLoader(loader);
-    Grantlee::Template t = engine->loadByName("plugin/apidoc/objectApi.html");
-    Grantlee::registerMetaType<ParameterDocumentation*>();
-
-    // create mapping
-    QVariantHash mapping;
-
-    // object
-    QVariant objectVar = QVariant::fromValue<QObject*>(objectApi);
-    mapping.insert("object", objectVar);
-
-    // properties
-    QVariantList propertyList;
-    foreach (PropertyDocumentation *property, objectApi->properties()) {
-        propertyList.append(QVariant::fromValue<QObject*>(property));
-    }
-    mapping.insert("properties", propertyList);
-
-    // properties
-    QVariantList methodList;
-    foreach (MethodDocumentation *method, objectApi->methods()) {
-        methodList.append(QVariant::fromValue<QObject*>(method));
-    }
-    mapping.insert("methods", methodList);
-
-    mapping.insert("i18nSyntax", i18nc("@title", "Syntax"));
-    mapping.insert("i18nProperties", i18nc("@title", "Properties"));
-    mapping.insert("i18nParameters", i18nc("@title", "Parameters"));
-    mapping.insert("i18nParameter", i18nc("@title", "Parameter"));
-    mapping.insert("i18nMethods", i18nc("@title", "Methods"));
-    mapping.insert("i18nType", i18nc("@title", "Type"));
-    mapping.insert("i18nReturnType", i18nc("@title", "Return Type"));
-    mapping.insert("i18nDetailedDescription", i18nc("@title", "Detailed Description"));
-    mapping.insert("i18nDescription", i18nc("@title", "Description"));
-
-    Grantlee::Context c(mapping);
-
-    // create HTML file
-    _objectApiDocuments.insert(objectApi->id(), t->render(&c));
     emit objectApiAdded();
     return true;
 }
