@@ -9,74 +9,7 @@ An Edge is the connection of two GraphNodes. Edges can be directed or undirected
 <syntax>
 </syntax>
 <properties>
-<property>
-    <name>from</name>
-    <description><para>Start node of the edge.</para></description>
-    <type>GraphNode</type>
-</property>
-<property>
-    <name>to</name>
-    <description><para>End node of the edge</para></description>
-    <type>GraphNode</type>
-</property>
-<property>
-    <name>directed</name>
-    <description><para>If true, the edge is directed. Otherwise is edge is undirected.</para></description>
-    <type>bool</type>
-</property>
-<property>
-    <name>color</name>
-    <description><para>ID of the connection type.</para></description>
-    <type>int</type>
-</property>
-<property>
-    <name>width</name>
-    <description><para>The width of the edge.</para></description>
-    <type>real</type>
-</property>
 </properties>
 <methods>
-<method>
-    <name>remove()</name>
-    <description>
-        <para>Remove this edge.</para>
-    </description>
-    <returnType>void</returnType>
-    <parameters>
-    </parameters>
-</method>
-<method>
-    <name>add_property(name, value)</name>
-    <description>
-        <para>Add a new property to the edge.</para>
-    </description>
-    <returnType>void</returnType>
-    <parameters>
-        <parameter>
-            <name>name</name>
-            <type>string</type>
-            <info>The name/identifier for the new edge property.</info>
-        </parameter>
-        <parameter>
-            <name>value</name>
-            <type>string</type>
-            <info>The initial value of the property.</info>
-        </parameter>
-    </parameters>
-</method>
-<method>
-    <name>remove_property(name)</name>
-    <description>
-        <para>Remove an existing property from the edge.</para>
-    </description>
-    <returnType>void</returnType>
-    <parameters>
-        <parameter>
-            <name>name</name>
-            <type>string</type>
-            <info>The name/identifier of the edge property that shall be removed.</info>
-        </parameter>
-    </parameters>
-</method>
 </methods>
 </object>

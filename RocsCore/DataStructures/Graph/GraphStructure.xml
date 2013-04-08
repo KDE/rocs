@@ -9,11 +9,6 @@ A graph objects holds the information of a data structure of type "Graph".
 <syntax>
 </syntax>
 <properties>
-<property>
-    <name>name</name>
-    <description><para>The unique name of this data structure.</para></description>
-    <type>string</type>
-</property>
 </properties>
 <methods>
 <method>

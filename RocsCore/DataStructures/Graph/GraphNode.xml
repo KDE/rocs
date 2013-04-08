@@ -9,31 +9,6 @@ A node is the data element of a graph.
 <syntax>
 </syntax>
 <properties>
-<property>
-    <name>id</name>
-    <description><para>The unique identifier of this node.</para></description>
-    <type>int</type>
-</property>
-<property>
-    <name>x</name>
-    <description><para>The x-coordinate of this node.</para></description>
-    <type>real</type>
-</property>
-<property>
-    <name>y</name>
-    <description><para>The y-coordinate of this node.</para></description>
-    <type>real</type>
-</property>
-<property>
-    <name>width</name>
-    <description><para>The size of this node.</para></description>
-    <type>real</type>
-</property>
-<property>
-    <name>color</name>
-    <description><para>The color of this node stated as hexadecimal value.</para></description>
-    <type>string</type>
-</property>
 </properties>
 <methods>
 <method>
