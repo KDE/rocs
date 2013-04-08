@@ -93,6 +93,16 @@ QList< MethodDocumentation* > ObjectDocumentation::methods() const
     return _methods;
 }
 
+void ObjectDocumentation::setObjectParent(const QString& id)
+{
+    _objectParent = id;
+}
+
+QString ObjectDocumentation::objectParent() const
+{
+    return _objectParent;
+}
+
 QString ObjectDocumentation::apiDocumentIdentifier()
 {
     return _id;

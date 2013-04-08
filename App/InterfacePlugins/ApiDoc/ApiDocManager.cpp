@@ -92,12 +92,28 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
     // create mapping
     QVariantHash mapping;
 
+    // if parent object exists, find it
+    ObjectDocumentation *parentObjectApi = 0;
+    if (!objectApi->objectParent().isEmpty()) {
+        foreach (ObjectDocumentation *obj, _objectApiList) {
+            if (obj->id() == objectApi->objectParent()) {
+                parentObjectApi = obj;
+                break;
+            }
+        }
+    }
+
     // object
     QVariant objectVar = QVariant::fromValue<QObject*>(objectApi);
     mapping.insert("object", objectVar);
 
     // properties
     QVariantList propertyList;
+    if (parentObjectApi) { // add properties from parent
+        foreach (PropertyDocumentation *property, parentObjectApi->properties()) {
+            propertyList.append(QVariant::fromValue<QObject*>(property));
+        }
+    }
     foreach (PropertyDocumentation *property, objectApi->properties()) {
         propertyList.append(QVariant::fromValue<QObject*>(property));
     }
@@ -105,6 +121,11 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
 
     // properties
     QVariantList methodList;
+    if (parentObjectApi) {
+        foreach (MethodDocumentation *method, parentObjectApi->methods()) {
+            methodList.append(QVariant::fromValue<QObject*>(method));
+        }
+    }
     foreach (MethodDocumentation *method, objectApi->methods()) {
         methodList.append(QVariant::fromValue<QObject*>(method));
     }
@@ -160,6 +181,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
     objectApi->setTitle(root.firstChildElement("name").text());
     objectApi->setId(root.firstChildElement("id").text());
     objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
+    objectApi->setObjectParent(root.attribute("inherit"));
     QStringList paragraphs;
     for (QDomElement descriptionNode = root.firstChildElement("description").firstChildElement("para");
         !descriptionNode.isNull();

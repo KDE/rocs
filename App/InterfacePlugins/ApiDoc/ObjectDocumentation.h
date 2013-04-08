@@ -51,6 +51,8 @@ public:
     void addProperty(PropertyDocumentation *property);
     QList<MethodDocumentation *> methods() const;
     void addMethod(MethodDocumentation *method);
+    QString objectParent() const;
+    void setObjectParent(const QString &id);
     QString apiDocumentIdentifier();
     QString apiDocumentAnchor();
 
@@ -58,6 +60,7 @@ private:
     Q_DISABLE_COPY(ObjectDocumentation)
     QString _title;
     QString _id;
+    QString _objectParent;
     QStringList _description;
     QString _syntaxExample;
     QList< PropertyDocumentation *> _properties;
