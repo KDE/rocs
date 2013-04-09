@@ -180,9 +180,9 @@ QString QtScriptBackend::execute()
         emit scriptError(d->_engine->uncaughtExceptionBacktrace().join("\n"));
     }
     if (d->_engine) {
+        emit scriptInfo(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
         d->_engine->popContext();
     }
-    scriptInfo(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
     emit finished();
     return result;
 }

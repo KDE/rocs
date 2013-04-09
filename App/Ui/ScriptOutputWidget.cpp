@@ -62,7 +62,6 @@ ConsoleModule * ScriptOutputWidget::consoleInterface() const
     return _console;
 }
 
-
 void ScriptOutputWidget::updateFixOutputButton()
 {
     if (ui->buttonDisableClear->isChecked() == true) {

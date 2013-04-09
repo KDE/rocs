@@ -539,15 +539,6 @@ void MainWindow::setActiveDocument()
     QtScriptBackend *engine = activeDocument->engineBackend();
     engine->engine();
 
-    // TODO this is not an elegant solution: actually we want plugins for all interfaces
-    //      that automatically include into the engine and the interface
-    QScriptValue console = engine->engine()->newQObject(_outputWidget->consoleInterface());
-    engine->engine()->globalObject().setProperty("Console", console);
-    connect(engine, SIGNAL(scriptError(QString)), _outputWidget->consoleInterface(), SLOT(error(QString)));
-    connect(engine, SIGNAL(scriptInfo(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
-    connect(engine, SIGNAL(sendDebug(QString)), _outputWidget->consoleInterface(), SLOT(debug(QString)));
-    connect(engine, SIGNAL(sendOutput(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
-
     // finally set active
     _graphVisualEditor->setActiveDocument();
 
@@ -974,13 +965,25 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     if (_outputWidget->isOutputClearEnabled()) {
         _outputWidget->clear();
     }
-
+   
+    // set script
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
+
+    // prepare engine
     QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
     if (engine->isRunning()) {
         engine->stop();
     }
+    
+    // set console
+    // TODO this should part of a plugin interface to for setting up all engine modules
+    QScriptValue console = engine->engine()->newQObject(_outputWidget->consoleInterface());
+    engine->engine()->globalObject().setProperty("Console", console);
+    connect(engine, SIGNAL(scriptError(QString)), _outputWidget->consoleInterface(), SLOT(error(QString)));
+    connect(engine, SIGNAL(scriptInfo(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
+    connect(engine, SIGNAL(sendDebug(QString)), _outputWidget->consoleInterface(), SLOT(debug(QString)));
+    connect(engine, SIGNAL(sendOutput(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
 
     if (_scriptDbg) {
         _scriptDbg->detach();
@@ -1003,6 +1006,9 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
 
     engine->setScript(script, DocumentManager::self().activeDocument());
     engine->execute();
+
+    // disconnect console listener
+    engine->disconnect(_outputWidget->consoleInterface());
 }
 
 
