@@ -66,9 +66,13 @@ typedef boost::iterator_property_map < PositionVec::iterator,
 GenerateGraphWidget::GenerateGraphWidget(Document *document)
 :   KDialog()
 {
-    defaultIdentifiers << QString("MeshGraph") << QString("StarGraph");
-    defaultIdentifiers << QString("CircleGraph") << QString("RandomGraph");
-    defaultIdentifiers << QString("RandomGraph") << QString("RandomTreeGraph");
+    // setup default identifiers for the created graphs
+    defaultIdentifiers.insert(MeshGraph, "MeshGraph");
+    defaultIdentifiers.insert(StarGraph, "StarGraph");
+    defaultIdentifiers.insert(CircleGraph, "CircleGraph");
+    defaultIdentifiers.insert(ErdosRenyiRandomGraph, "RandomGraph");
+    defaultIdentifiers.insert(RandomTree, "RandomTree");
+    defaultIdentifiers.insert(MeshGraph, "MeshGraph");
 
     graphGenerator_ = MeshGraph;
 
@@ -131,11 +135,11 @@ GenerateGraphWidget::GenerateGraphWidget(Document *document)
 
 void GenerateGraphWidget::setGraphGenerator(int index)
 {
-    int previousGraphType_ = graphGenerator_;
-    QString text = ui->identifier->text();
     graphGenerator_ = GraphGenerator(index);
-    if (text == defaultIdentifiers.at(previousGraphType_)) {
-        ui->identifier->setText(defaultIdentifiers.at(graphGenerator_));
+    if (defaultIdentifiers.contains(graphGenerator_)) {
+        ui->identifier->setText(defaultIdentifiers[graphGenerator_]);
+    } else {
+        ui->identifier->setText("Graph");
     }
 }
 

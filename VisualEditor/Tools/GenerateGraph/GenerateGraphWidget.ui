@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>293</width>
+    <width>311</width>
     <height>274</height>
    </rect>
   </property>
@@ -15,14 +15,14 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="labelGenerator">
      <property name="text">
       <string>Graph Generator</string>
      </property>
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="labelDataType">
      <property name="toolTip">
       <string>The node type to create the nodes of the graph with</string>
      </property>
@@ -105,7 +105,7 @@
     </layout>
    </item>
    <item row="1" column="0">
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="labelIdentifier">
      <property name="toolTip">
       <string>The identifier of the created graph (used for scripting)</string>
      </property>
@@ -423,7 +423,7 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="labelPointerType">
      <property name="toolTip">
       <string>The pointer type to create the pointers of the graph with</string>
      </property>
@@ -452,7 +452,7 @@
       <string>Set the unique identifier of the generated graph.</string>
      </property>
      <property name="text">
-      <string>Mesh Graph</string>
+      <string>Graph</string>
      </property>
     </widget>
    </item>

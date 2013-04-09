@@ -145,7 +145,7 @@ private:
     QString identifier_;
     GraphGenerator graphGenerator_;
 
-    QList<QString> defaultIdentifiers;
+    QHash<GraphGenerator, QString> defaultIdentifiers;
 
     Ui::GenerateGraphWidget *ui;
 };
