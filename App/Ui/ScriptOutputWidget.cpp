@@ -90,12 +90,14 @@ void ScriptOutputWidget::appendOutput(ConsoleModule::MessageType type, const QSt
     {
     case ConsoleModule::Log:
         ui->txtOutput->append(message);
+        ui->dbgOutput->append("<i>" + message + "</i>");
         break;
     case ConsoleModule::Debug:
-        ui->dbgOutput->append(message);
+        ui->dbgOutput->append("<span style=\"color: green\">" + message + "</span>");
         break;
     case ConsoleModule::Error:
         ui->txtOutput->append("<b style=\"color: red\">" + message + "</b>");
+        ui->dbgOutput->append("<b style=\"color: red\">" + message + "</b>");
         break;
     default:
         kWarning() << "Unknown message type, aborting printing.";
