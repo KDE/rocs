@@ -680,6 +680,9 @@ void MainWindow::saveProject(bool saveAs)
 void MainWindow::saveProjectAs()
 {
     saveProject(true);
+
+    // add project to recently opened projects
+    _recentProjects->addUrl(_currentProject->projectFile().path(KUrl::RemoveTrailingSlash));
 }
 
 void MainWindow::openProject(const KUrl& fileName)
