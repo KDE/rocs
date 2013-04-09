@@ -161,8 +161,6 @@ public:
      */
     Q_INVOKABLE QScriptValue createEdge(Data* fromRaw, Data* toRaw);
 
-signals:
-    void scriptError(const QString &message);
 
 public slots:
     /**

@@ -248,8 +248,9 @@ Q_SIGNALS:
     void dataCreated(DataPtr n);
     void dataPositionChanged(const QPointF);
     void pointerCreated(PointerPtr e);
-    void nameChanged(const QString& name);
+    void nameChanged(const QString &name);
     void changed();
+    void scriptError(const QString &message);
 
 protected:
     DataPtr addData(DataPtr data, int dataType);

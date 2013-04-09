@@ -170,6 +170,7 @@ QString QtScriptBackend::execute()
     int size = d->_document->dataStructures().size();
     for (int i = 0; i < size; i++) {
         d->_document->dataStructures().at(i)->setEngine(d->_engine);
+        connect(d->_document->dataStructures().at(i).get(), SIGNAL(scriptError(QString)), this, SIGNAL(scriptError(QString)));
     }
     d->createGraphList();
     d->_engine->setProcessEventsInterval(100); //! TODO: Make that changeable.
@@ -182,6 +183,9 @@ QString QtScriptBackend::execute()
     if (d->_engine) {
         emit scriptInfo(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
         d->_engine->popContext();
+        for (int i = 0; i < size; i++) {
+            d->_document->dataStructures().at(i).get()->disconnect(this);
+        }
     }
     emit finished();
     return result;
@@ -210,6 +214,7 @@ void QtScriptBackend::executeStep()
         int size = d->_document->dataStructures().size();
         for (int i = 0; i < size; i++) {
             d->_document->dataStructures().at(i)->setEngine(d->_engine);
+            connect(d->_document->dataStructures().at(i).get(), SIGNAL(scriptError(QString)), this, SIGNAL(scriptError(QString)));
         }
         d->createGraphList();
         d->_engine->setProcessEventsInterval(100);
@@ -222,6 +227,10 @@ void QtScriptBackend::executeStep()
 
     if (!d->_engine || !d->_engine->isEvaluating()) {
         scriptInfo(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"));
+        int size = d->_document->dataStructures().size();
+        for (int i = 0; i < size; i++) {
+            d->_document->dataStructures().at(i).get()->disconnect(this);
+        }
         emit finished();
     }
 }
