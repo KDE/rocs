@@ -91,7 +91,7 @@ A node is the data element of a graph.
     </parameters>
 </method>
 <method>
-    <name>edgesTo()</name>
+    <name>edgesTo(target)</name>
     <description>
         <para>Return a list of all edges of this node to the specified node.</para>
     </description>
