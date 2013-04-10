@@ -39,6 +39,35 @@ QString ObjectDocumentation::id() const
     return _id;
 }
 
+void ObjectDocumentation::setComponentType(const QString& compenentTypeName)
+{
+    if (compenentTypeName == "DataStructure") {
+        _componentType = DataStructure;
+        return;
+    }
+    if (compenentTypeName == "Data") {
+        _componentType = Data;
+        return;
+    }
+    if (compenentTypeName == "Pointer") {
+        _componentType = Pointer;
+        return;
+    }
+    if (compenentTypeName == "EngineComponent") {
+        _componentType = EngineComponent;
+        return;
+    }
+
+    // else
+    kError() << "Unable to understand componentType " << compenentTypeName;
+    _componentType = EngineComponent;
+}
+
+ObjectDocumentation::ComponentType ObjectDocumentation::componentType() const
+{
+    return _componentType;
+}
+
 void ObjectDocumentation::setTitle(const QString &title)
 {
     _title = title;

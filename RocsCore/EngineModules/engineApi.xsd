@@ -5,6 +5,7 @@
       <xs:sequence>
         <xs:element name="name" type="xs:string" />
         <xs:element name="id" type="xs:string" />
+        <xs:element name="componentType" type="xs:string" />
         <xs:element name="description" type="description" />
         <xs:element name="syntax" type="xs:string" />
         <xs:element name="properties" type="propertyList" />

@@ -1,6 +1,7 @@
 <object>
     <name>Console</name>
     <id>Console</id>
+    <componentType>EngineComponent</componentType>
     <description>
         <para>
             The Console object allows you to print messages of different importance to a log.

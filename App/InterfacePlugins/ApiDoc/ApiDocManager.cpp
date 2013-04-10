@@ -183,6 +183,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
 
     objectApi->setTitle(root.firstChildElement("name").text());
     objectApi->setId(root.firstChildElement("id").text());
+    objectApi->setComponentType(root.firstChildElement("componentType").text());
     objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
     objectApi->setObjectParent(root.attribute("inherit"));
     QStringList paragraphs;

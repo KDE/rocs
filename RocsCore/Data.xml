@@ -1,6 +1,7 @@
 <object>
 <name>Abstract Data</name>
 <id>Data</id>
+<componentType>Data</componentType>
 <description>
 <para>
 An abstract data element is a unit of information that is belongs an abstract data structure and

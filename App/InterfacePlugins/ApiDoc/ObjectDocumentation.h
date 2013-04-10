@@ -36,11 +36,20 @@ class ObjectDocumentation : public QObject
     Q_PROPERTY(QVariantList description READ description)
 
 public:
+    enum ComponentType {
+        DataStructure,
+        Pointer,
+        Data,
+        EngineComponent
+    };
+
     explicit ObjectDocumentation(QObject *parent = 0);
     ~ObjectDocumentation();
 
     QString id() const;
     void setId(const QString& id);
+    ComponentType componentType() const;
+    void setComponentType(const QString &compenentTypeName);
     QString title() const;
     void setTitle(const QString &title);
     QVariantList description() const;
@@ -60,6 +69,7 @@ private:
     Q_DISABLE_COPY(ObjectDocumentation)
     QString _title;
     QString _id;
+    ComponentType _componentType;
     QString _objectParent;
     QStringList _description;
     QString _syntaxExample;

@@ -1,6 +1,7 @@
 <object>
 <name>Abstract Pointer</name>
 <id>Pointer</id>
+<componentType>Pointer</componentType>
 <description>
 <para>
 A pointer connects two data elements and can itself hold information by its properties.

@@ -1,6 +1,7 @@
 <object>
 <name>Abstract Data Structure</name>
 <id>DataStructure</id>
+<componentType>DataStructure</componentType>
 <description>
 <para>
 An abstract data structure defines a set of data elements and possible connections between them.

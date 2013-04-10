@@ -1,6 +1,7 @@
 <object inherit="Data">
 <name>Graph Node</name>
 <id>GraphNode</id>
+<componentType>Data</componentType>
 <description>
 <para>
 A node is the data element of a graph.

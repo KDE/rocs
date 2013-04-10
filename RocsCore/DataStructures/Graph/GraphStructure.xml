@@ -1,6 +1,7 @@
 <object inherit="DataStructure">
 <name>Graph Data Structure</name>
 <id>GraphStructure</id>
+<componentType>DataStructure</componentType>
 <description>
 <para>
 A graph objects holds the information of a data structure of type "Graph".
