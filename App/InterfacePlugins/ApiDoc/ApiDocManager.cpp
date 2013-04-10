@@ -108,16 +108,18 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
     mapping.insert("object", objectVar);
 
     // properties
-    QVariantList propertyList;
+    // we use QHash to override parent properties
+    QHash<QString, QVariant> propertyList;
     if (parentObjectApi) { // add properties from parent
         foreach (PropertyDocumentation *property, parentObjectApi->properties()) {
-            propertyList.append(QVariant::fromValue<QObject*>(property));
+            propertyList.insert(property->name(), QVariant::fromValue<QObject*>(property));
         }
     }
     foreach (PropertyDocumentation *property, objectApi->properties()) {
-        propertyList.append(QVariant::fromValue<QObject*>(property));
+        // override parent properties, if necessary
+        propertyList.insert(property->name(), QVariant::fromValue<QObject*>(property));
     }
-    mapping.insert("properties", propertyList);
+    mapping.insert("properties", propertyList.values());
 
     // properties
     QVariantList methodList;
@@ -127,6 +129,7 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
         }
     }
     foreach (MethodDocumentation *method, objectApi->methods()) {
+        // TODO override parent methods
         methodList.append(QVariant::fromValue<QObject*>(method));
     }
     mapping.insert("methods", methodList);
