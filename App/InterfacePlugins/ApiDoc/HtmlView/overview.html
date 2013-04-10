@@ -16,10 +16,20 @@
 <div style="margin: 10pt" id="rocs-content-text">
 <h1>{{ i18nScriptEngineApi }}</h1>
 
+<h2>{{ i18nEngineComponents }}</h2>
 <ul>
-{% for object in objects %}
+{% for component in engineComponents %}
     <li>
-        <a href="http://virtual/{{ object.id }}">{{ object.title }}</a>
+        <a href="http://virtual/{{ component.id }}">{{ component.title }}</a>
+    </li>
+{% endfor %}
+</ul>
+
+<h2>{{ i18nDataStructures }}</h2>
+<ul>
+{% for component in dataStructureComponents %}
+    <li>
+        <a href="http://virtual/{{ component.id }}">{{ component.title }}</a>
     </li>
 {% endfor %}
 </ul>

@@ -277,15 +277,33 @@ QString ApiDocManager::apiOverviewDocument() const
     QVariantHash mapping;
 
     // objects
-    QVariantList objectList;
+    QVariantList engineComponentList;
+    QVariantList dataStructureComopnentList;
     foreach (ObjectDocumentation *object, _objectApiList) {
-        objectList.append(QVariant::fromValue<QObject*>(object));
+        switch (object->componentType()) {
+        case ObjectDocumentation::EngineComponent:
+            engineComponentList.append(QVariant::fromValue<QObject*>(object));
+            break;
+        case ObjectDocumentation::DataStructure:
+            dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
+            break;
+        case ObjectDocumentation::Pointer:
+            dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
+            break;
+        case ObjectDocumentation::Data:
+            dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
+            break;
+        }
     }
-    mapping.insert("objects", objectList);
+    mapping.insert("engineComponents", engineComponentList);
+    mapping.insert("dataStructureComponents", dataStructureComopnentList);
 
     // localized strings
     mapping.insert("i18nScriptEngineApi", i18nc("@title", "Script Engine API"));
     mapping.insert("i18nObjects", i18nc("@title", "Objects"));
+    mapping.insert("i18nDataStructures", i18nc("@title", "Data Structures"));
+    mapping.insert("i18nEngineComponents", i18nc("@title", "Script Engine Components"));
+
     Grantlee::Context c(mapping);
 
     // create HTML file
