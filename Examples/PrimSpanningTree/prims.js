@@ -18,12 +18,12 @@ function reset_graph(g) {
     reset(edge)
     edge.width = 1
   }
-  g.list_nodes().forEach(reset_node)
-  g.list_edges().forEach(reset_edge)
+  g.nodes().forEach(reset_node)
+  g.edges().forEach(reset_edge)
 }
 
 function add_weights(g) {
-  g.list_edges().forEach(function(edge) {
+  g.edges().forEach(function(edge) {
     edge.weight = randint(1, 10)
   })
 }
@@ -39,11 +39,11 @@ function reset_visited(nodes) {
 }
 
 function get_unvisited(edge) {
-  var s = edge.start().visited, e = edge.end().visited
+  var s = edge.from.visited, e = edge.to.visited
   if (s && !e) {
-    return edge.end()
+    return edge.to
   } else if (!s && e) {
-    return edge.start()
+    return edge.from
   } else {
     return null
   }
@@ -51,12 +51,12 @@ function get_unvisited(edge) {
 
 function prim(g, start, mark_node, mark_edge) {
   // Mark the starting point
-  reset_visited(g.list_nodes())
+  reset_visited(g.nodes())
   start.visited = true
   var tree = [start]
   mark_node(start); interrupt()
   // Loop until all nodes are included in the tree
-  while (tree.length < g.list_nodes().length) {
+  while (tree.length < g.nodes().length) {
     // Go through all the edges connected to the tree ...
     var best_weight = Infinity, best_target = null, best_edge = null
     tree.forEach(function(node) {
@@ -79,16 +79,16 @@ function prim(g, start, mark_node, mark_edge) {
 
 reset_graph(network)
 add_weights(network)
-var server = network.list_nodes()[0]
+var server = network.nodes()[0]
 server.set_type(1)
 prim(network, server,
      function(node) {
        if (node.type() == 1) {
-	 output('Starting server ' + node.name)
+	 Console.log('Starting server ' + node.name)
 	 node.color = '#00f'
 	 node.width = 0.6
        } else {
-         output('Connecting ' + node.name)
+         Console.log('Connecting ' + node.name)
          node.color = '#0a0'
        }
      },
@@ -96,7 +96,7 @@ prim(network, server,
        edge.set_type(1)
        edge.color = '#0a0'
        edge.width = 2
-       output(' -- latency: ' + edge.weight)
+       Console.log(' -- latency: ' + edge.weight)
      })
 
-output('== All clients connected ==')
+Console.log('== All clients connected ==')
