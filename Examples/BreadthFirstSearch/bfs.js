@@ -10,12 +10,12 @@ function reset_graph(g) {
     thing.set_type(0)
     thing.color = '#999'
   }
-  g.list_nodes().forEach(reset)
-  g.list_edges().forEach(reset)
+  g.nodes().forEach(reset)
+  g.edges().forEach(reset)
 }
 
 function add_mine(g) {
-  var mine = g.list_nodes()[2]  // Completely arbitrary
+  var mine = g.nodes()[2]  // Completely arbitrary
   mine.set_type(1)
 }
 
@@ -29,7 +29,7 @@ function bfs(start, mark, is_match) {
       interrupt()
       return true
     }
-    cursor.adj_nodes().forEach(function(node) {
+    cursor.neighbors().forEach(function(node) {
       if (!node.seen) {
 	node.seen = true; mark(node)
 	queue.push(node)
@@ -46,19 +46,19 @@ function set_type_to(value) {
 reset_graph(lake)
 add_mine(lake)
 
-bfs(lake.list_nodes()[0],
+bfs(lake.nodes()[0],
     function(node) {
-      output('Found ' + node.name)
+      Console.log('Found ' + node.name)
       node.color = '#f90'
     },
     function(node) {
       var match = false
       if (node.type() == 1) {
-        output('-- Deactivated mine at ' + node.name)
+        Console.log('-- Deactivated mine at ' + node.name)
 	node.color = '#c00'
 	return true
       } else {
-	output('-- Cleared ' + node.name)
+	Console.log('-- Cleared ' + node.name)
         node.color = '#0a0'
 	return false
       }
