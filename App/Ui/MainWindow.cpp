@@ -192,7 +192,9 @@ void MainWindow::setupWidgets()
     // the following solves the setting of the panel width if it was closed at previous session
     int panelWidth = Settings::hSplitterSizeRight();
     if (panelWidth == 0) {
-        panelWidth = 300;
+        //FIXME this is only a workaround
+        // that fixes the wrong saving of hSplitterSizeRight
+        panelWidth = 400;
     }
     _hSplitter->setSizes(QList<int>() << Settings::hSplitterSizeLeft() << panelWidth);
 
@@ -356,7 +358,7 @@ QWidget* MainWindow::setupSidePanel()
 
     // Rocs scripting API documentation
     ApiDocWidget* apiDoc = new ApiDocWidget(panel);
-    sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), KIcon("help-contents"));
+    sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), KIcon("documentation"));
 
     return panel;
 }
@@ -965,7 +967,7 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     if (_outputWidget->isOutputClearEnabled()) {
         _outputWidget->clear();
     }
-   
+
     // set script
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
@@ -975,7 +977,7 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     if (engine->isRunning()) {
         engine->stop();
     }
-    
+
     // set console
     // TODO this should part of a plugin interface to for setting up all engine modules
     QScriptValue console = engine->engine()->newQObject(_outputWidget->consoleInterface());
