@@ -37,6 +37,7 @@ Name[uk]=Додаток роботи з файлами графів TGF Rocs
 Name[x-test]=xxRocs TGF Graph File Pluginxx
 Name[zh_TW]=Rocs TGF 檔案外掛程式
 Comment=Read and write graph documents in Trivial Graph Format (TGF)
+Comment[bs]=Čitanje i pisanje graf dokumenata u Trivialnom Graf Formatu (TGF)
 Comment[ca]=Llegeix i escriu fitxers escrits en Format Gràfic Trivial (TGF)
 Comment[ca@valencia]=Llig i escriu fitxers escrits en Format Gràfic Trivial (TGF)
 Comment[da]=Læs og skriv grafdokumenter i Trivial Graph-format (TGF)
