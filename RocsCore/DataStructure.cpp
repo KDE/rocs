@@ -338,7 +338,6 @@ DataPtr DataStructure::addData(const QString& name, const QPointF& pos, int data
 {
     if (DataPtr data = addData(name, dataType)) {
         data->setPos(pos.x(), pos.y());
-        emit dataPositionChanged(pos);
         return data;
     }
     return DataPtr();
