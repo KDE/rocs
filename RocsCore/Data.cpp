@@ -244,9 +244,9 @@ void Data::registerOutPointer(PointerPtr e)
     emit pointerListChanged();
 }
 
-PointerPtr Data::addPointer(DataPtr to)
+PointerPtr Data::createPointer(DataPtr to)
 {
-    return d->_dataStructure->addPointer(this->getData(), to, 0);
+    return d->_dataStructure->createPointer(this->getData(), to, 0);
 }
 
 void Data::remove(PointerPtr e)

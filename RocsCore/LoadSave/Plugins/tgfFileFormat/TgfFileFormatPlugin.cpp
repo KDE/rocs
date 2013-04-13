@@ -104,7 +104,7 @@ void TgfFileFormatPlugin::readFile()
                 setError(EncodingProblem, i18n("Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes.", from, to));
                 return;
             }
-            PointerPtr pointer = graph->addPointer(nodeMap[from], nodeMap[to], 0);
+            PointerPtr pointer = graph->createPointer(nodeMap[from], nodeMap[to], 0);
             pointer->setProperty("value", value.simplified());
         }
     }

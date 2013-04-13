@@ -60,7 +60,7 @@ void TestScriptEngine::basicOperationsGraph()
     DataPtr a = ds->addData("a", 0);
     DataPtr b = ds->addData("b", 0);
     DataPtr c = ds->addData("c", 0);
-    PointerPtr connection = ds->addPointer(a, b, 0);
+    PointerPtr connection = ds->createPointer(a, b, 0);
     int type1 = graphDoc->registerDataType("type1");
     graphDoc->setActiveDataStructure(ds);
 
@@ -168,7 +168,7 @@ void TestScriptEngine::useOfDynamicProperties()
     d->setName("myGraph");
     DataPtr n1 =d->addData("Node1", 0);
     DataPtr n2 = d->addData("Node2", 0);
-    PointerPtr e1 = d->addPointer(n1, n2, 0);
+    PointerPtr e1 = d->createPointer(n1, n2, 0);
 
     QString test;
     QScriptValue result;

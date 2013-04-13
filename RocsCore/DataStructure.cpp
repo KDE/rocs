@@ -131,7 +131,7 @@ void DataStructure::importStructure(DataStructurePtr other)
         DataPtr from =  dataTodata.value(e->from().get());
         DataPtr to =  dataTodata.value(e->to().get());
 
-        PointerPtr newPointer = addPointer(from, to, 0);
+        PointerPtr newPointer = createPointer(from, to, 0);
         newPointer->setColor(e->color());
         //FIXME all dynamic properties must be set
     }
@@ -390,7 +390,7 @@ PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType)
     return pointer;
 }
 
-PointerPtr DataStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
+PointerPtr DataStructure::createPointer(DataPtr from, DataPtr to, int pointerType)
 {
     Q_ASSERT(d->_document->pointerTypeList().contains(pointerType));
 

@@ -67,7 +67,7 @@ void TestGraphStructureAlgorithms::testDijkstraBidirectional()
         dataList.append(graph->addData(QString(i), 0));
     }
     for (int i = 0; i < nodes-1; ++i) {
-        dataList[i]->addPointer(dataList[i+1]);
+        dataList[i]->createPointer(dataList[i+1]);
     }
 
     // test distances from 0 to all others
@@ -100,9 +100,9 @@ void TestGraphStructureAlgorithms::testDijkstraUnidirectional()
         dataList.append(graph->addData(QString(i), 0));
     }
     for (int i = 0; i < nodes-1; ++i) {
-        dataList[i]->addPointer(dataList[i+1]);
+        dataList[i]->createPointer(dataList[i+1]);
     }
-    dataList[nodes-1]->addPointer(dataList[0]);
+    dataList[nodes-1]->createPointer(dataList[0]);
 
     // test distances from 0 to all others
     QMap<DataPtr, PointerList> paths = graph->dijkstraShortestPaths(dataList.at(0));

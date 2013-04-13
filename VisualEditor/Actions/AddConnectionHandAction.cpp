@@ -123,7 +123,7 @@ bool AddConnectionHandAction::executeRelease(QPointF pos)
     if ((_to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)))) {
         //FIXME workaround for rooted tree creation
         _to->data()->setProperty("ClickPosition", _to->mapFromScene(pos));
-        activeDataStructure->addPointer(_from->data(),  _to->data(), pointerTypeIdentifier);
+        activeDataStructure->createPointer(_from->data(),  _to->data(), pointerTypeIdentifier);
         _to->data()->setProperty("ClickPosition", QVariant());
     }
     _to = 0;

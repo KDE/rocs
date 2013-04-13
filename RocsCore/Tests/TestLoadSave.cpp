@@ -52,11 +52,11 @@ void TestLoadSave::serializeUnserializeTest()
     dataList.insert("d", ds->addData("d", 0));
     dataList.insert("e", ds->addData("e", 0));
 
-    ds->addPointer(dataList["a"], dataList["b"], 0);
-    ds->addPointer(dataList["b"], dataList["c"], 0);
-    ds->addPointer(dataList["c"], dataList["d"], 0);
-    ds->addPointer(dataList["d"], dataList["e"], 0);
-    ds->addPointer(dataList["e"], dataList["a"], 0);
+    ds->createPointer(dataList["a"], dataList["b"], 0);
+    ds->createPointer(dataList["b"], dataList["c"], 0);
+    ds->createPointer(dataList["c"], dataList["d"], 0);
+    ds->createPointer(dataList["d"], dataList["e"], 0);
+    ds->createPointer(dataList["e"], dataList["a"], 0);
 
     // serialize into file "serializetest.graph"
     DocumentManager::self().activeDocument()->saveAs("serializetest");
@@ -105,7 +105,7 @@ void TestLoadSave::serializeUnserializeTypesTest()
     ds->setProperty("name", "Graph1");
     dataList.insert("a", ds->addData("a", dataTypeID));
     dataList.insert("b", ds->addData("b", dataTypeID));
-    ds->addPointer(dataList["a"], dataList["b"], pointerTypeID);
+    ds->createPointer(dataList["a"], dataList["b"], pointerTypeID);
 
     // serialize into file "serializetest.graph"
     DocumentManager::self().activeDocument()->saveAs("serializetest");

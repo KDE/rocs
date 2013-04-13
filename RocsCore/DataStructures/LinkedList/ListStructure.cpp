@@ -107,7 +107,7 @@ PointerPtr Rocs::ListStructure::addPointer(DataPtr from, DataPtr to, int pointer
         e->remove();
     }
 
-    PointerPtr e = DataStructure::addPointer(from, to, pointerType);
+    PointerPtr e = DataStructure::createPointer(from, to, pointerType);
     arrangeNodes();
     return e;
 }

@@ -98,7 +98,7 @@ bool KmlHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
                 n->addDynamicProperty("Description", m_description);
             }
             if (n_old) {
-                m_graph->addPointer(n_old, n, 0);
+                m_graph->createPointer(n_old, n, 0);
             }
             n_old = n;
         }

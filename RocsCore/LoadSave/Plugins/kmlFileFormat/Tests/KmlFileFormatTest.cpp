@@ -43,11 +43,11 @@ void KmlFileFormatTest::serializeTest()
     dataList.insert("d", ds->addData("d", 0));
     dataList.insert("e", ds->addData("e", 0));
 
-    ds->addPointer(dataList["a"], dataList["b"], 0)->setProperty("value", "test value");
-    ds->addPointer(dataList["b"], dataList["c"], 0);
-    ds->addPointer(dataList["c"], dataList["d"], 0);
-    ds->addPointer(dataList["d"], dataList["e"], 0);
-    ds->addPointer(dataList["e"], dataList["a"], 0);
+    ds->createPointer(dataList["a"], dataList["b"], 0)->setProperty("value", "test value");
+    ds->createPointer(dataList["b"], dataList["c"], 0);
+    ds->createPointer(dataList["c"], dataList["d"], 0);
+    ds->createPointer(dataList["d"], dataList["e"], 0);
+    ds->createPointer(dataList["e"], dataList["a"], 0);
 
     // create exporter plugin
     KmlFileFormatPlugin serializer(this, QList<QVariant>());

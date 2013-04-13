@@ -103,7 +103,7 @@ PointerPtr RootedTreeNode::setNodeParent(DataPtr parent) const
         }
     }
     if (parent.get()){
-        PointerPtr ptr = dataStructure()->addPointer(this->getData(), parent, 0);
+        PointerPtr ptr = dataStructure()->createPointer(this->getData(), parent, 0);
         ptr->setProperty("TreeEdge", -1);
         return ptr;
     }
@@ -144,7 +144,7 @@ PointerPtr RootedTreeNode::setChild(DataPtr c, quint32 idx) const{
         }
 //      child(idx)->remove();
         if (c && c.get()){
-            PointerPtr ptr = getData()->addPointer(c);
+            PointerPtr ptr = getData()->createPointer(c);
             ptr->setProperty("TreeEdge", idx);
             return ptr;
         }

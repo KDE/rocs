@@ -185,7 +185,7 @@ void GmlGraphParsingHelper::createEdge()
             kError() << "No edge created: end points were not created";
             return;
         }
-        actualEdge = actualGraph->addPointer(dataMap[edgeSource], dataMap[edgeTarget], 0);
+        actualEdge = actualGraph->createPointer(dataMap[edgeSource], dataMap[edgeTarget], 0);
         edgeSource.clear();;
         edgeTarget.clear();
         while (! _edgeProperties.isEmpty()) {

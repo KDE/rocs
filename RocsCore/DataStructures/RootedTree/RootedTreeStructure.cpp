@@ -146,7 +146,7 @@ QScriptValue RootedTreeStructure::add_data(const QString& name)
 ///FIXME addeding multiple pointers.
 PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataType)
 {
-    PointerPtr ptr = DataStructure::addPointer(from, to, dataType);
+    PointerPtr ptr = DataStructure::createPointer(from, to, dataType);
     if (ptr && from->property("ClickPosition").isValid()){
         QPointF pos = from->property("ClickPosition").toPointF();
         const qreal pointersSize = property("PointersRegion").toReal();

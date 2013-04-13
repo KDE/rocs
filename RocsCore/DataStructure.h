@@ -154,7 +154,7 @@ public Q_SLOTS:
      * \param to data element where the pointer ends
      * \param pointerType is the type of this pointer
      */
-    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType);
+    virtual PointerPtr createPointer(DataPtr from, DataPtr to, int pointerType);
 
     /**
      * Access data element by its unique identifier.

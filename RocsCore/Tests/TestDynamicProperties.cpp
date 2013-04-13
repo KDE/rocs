@@ -57,7 +57,7 @@ void TestDynamicProperties::addEdgeDynamicProperty()
 
     DataPtr n1 = g->addData("Node1", 0);
     DataPtr n2 = g->addData("Node2", 0);
-    PointerPtr e = g->addPointer(n1, n2, 0);
+    PointerPtr e = g->createPointer(n1, n2, 0);
     QVERIFY2(e->getPointer().get() != 0, "Pointer not created!");
     QByteArray property = "newProperty";
     e->addDynamicProperty(property, QVariant(0));
@@ -97,7 +97,7 @@ void TestDynamicProperties::removeEdgeDynamicProperty()
 
     DataPtr n1 = g->addData("Node", 0);
     DataPtr n2 = g->addData("Node", 0);
-    PointerPtr e = g->addPointer(n1, n2, 0);
+    PointerPtr e = g->createPointer(n1, n2, 0);
     QByteArray property = "newProperty";
     e->addDynamicProperty(property, QVariant(0));
     QVERIFY2(e->property(property) != QVariant::Invalid, "Property not added.");
@@ -124,7 +124,7 @@ void TestDynamicProperties::insertInvalidNames()
 
     DataPtr n1 = g->addData("Node 1", 0);
     DataPtr n2 = g->addData("Node 2", 0);
-    PointerPtr e  = g->addPointer(n1, n2, 0);
+    PointerPtr e  = g->createPointer(n1, n2, 0);
 
     QByteArray property_space = "new Property";
     QByteArray property_number = "0Property";
@@ -160,7 +160,7 @@ void TestDynamicProperties::renameProperties()
 
     DataPtr n1 = g->addData("Node 1", 0);
     DataPtr n2 = g->addData("Node 2", 0);
-    PointerPtr e  = g->addPointer(n1, n2, 0);
+    PointerPtr e  = g->createPointer(n1, n2, 0);
 
    QByteArray property = "newProperty";
     n1->addDynamicProperty(property, QVariant(0));
@@ -183,7 +183,7 @@ void TestDynamicProperties::renamePropertiesToInvalidNames()
 
     DataPtr n1 = g->addData("Node 1", 0);
     DataPtr n2 = g->addData("Node 2", 0);
-    PointerPtr e  = g->addPointer(n1, n2, 0);
+    PointerPtr e  = g->createPointer(n1, n2, 0);
 
     QByteArray property = "newProperty";
     n1->addDynamicProperty(property, QVariant(0));

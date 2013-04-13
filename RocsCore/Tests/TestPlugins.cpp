@@ -103,8 +103,8 @@ void TestPlugins::convertGraphToLinkedList()
     DataPtr a = tree->addData("node1", 0);
     DataPtr b = tree->addData("node2", 0);
     DataPtr c = tree->addData("node3", 0);
-    tree->addPointer(a, b, 0);
-    tree->addPointer(a, c, 0);
+    tree->createPointer(a, b, 0);
+    tree->createPointer(a, c, 0);
 
     //Change plugin.
     DataStructureBackendManager::self().setBackend(plList->internalName());
@@ -132,8 +132,8 @@ void TestPlugins::convertGraphToRootedTree()
     DataPtr a = tree->addData("node1", 0);
     DataPtr b = tree->addData("node2", 0);
     DataPtr c = tree->addData("node3", 0);
-    tree->addPointer(a, b, 0);
-    tree->addPointer(a, c, 0);
+    tree->createPointer(a, b, 0);
+    tree->createPointer(a, c, 0);
 
     //Change plugin.
     DataStructureBackendManager::self().setBackend(plTree->internalName());

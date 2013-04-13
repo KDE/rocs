@@ -115,9 +115,9 @@ void TransformEdgesWidget::makeComplete(DataStructurePtr graph)
     int size_i = graph->dataList(0).size() - 1;
     for (int i = 0; i < size_i; ++i) {
         for (int e = i + 1; e < graph->dataList(0).size(); ++e) {
-            graph->addPointer(graph->dataList(0).at(i), graph->dataList(0).at(e), 0);
+            graph->createPointer(graph->dataList(0).at(i), graph->dataList(0).at(e), 0);
             if (directed) {
-                graph->addPointer(graph->dataList(0).at(e), graph->dataList(0).at(i), 0);
+                graph->createPointer(graph->dataList(0).at(e), graph->dataList(0).at(i), 0);
             }
         }
     }
@@ -148,7 +148,7 @@ void TransformEdgesWidget::reverseAllEdges(DataStructurePtr graph)
         }
 
         for (int i = 0; i < newPointers.count(); i++) {
-            graph->addPointer(newPointers[i].first, newPointers[i].second, typeId);
+            graph->createPointer(newPointers[i].first, newPointers[i].second, typeId);
         }
     }
 }
@@ -260,7 +260,7 @@ qreal TransformEdgesWidget::makeSpanningTree(DataStructurePtr graph)
 
     // refill with MST edges
     for (int i = 0; i < MST.size(); i++) {
-        PointerPtr ptr = graph->addPointer(vertices[MST[i].first], vertices[MST[i].second], 0);
+        PointerPtr ptr = graph->createPointer(vertices[MST[i].first], vertices[MST[i].second], 0);
 
         if (weight[QPair<int, int>(MST[i].first, MST[i].second)] != 1) {
             QString s;

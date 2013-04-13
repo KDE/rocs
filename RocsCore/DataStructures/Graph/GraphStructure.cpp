@@ -436,7 +436,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
         }
     }
 
-    return DataStructure::addPointer(from, to, pointerType);
+    return DataStructure::createPointer(from, to, pointerType);
 }
 
 DataPtr Rocs::GraphStructure::addData(const QString& name, int dataType)

@@ -252,8 +252,8 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     // connect mesh nodes
     for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
-            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)], pointerType_); // left
-            graph->addPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)], pointerType_); // bottom.
+            graph->createPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)], pointerType_); // left
+            graph->createPointer(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)], pointerType_); // bottom.
         }
     }
 }
@@ -289,7 +289,7 @@ void GenerateGraphWidget::generateStar(int satelliteNodes)
 
     // connect circle nodes
     for (int i = 1; i <= satelliteNodes; i++) {
-        graph->addPointer(nodeList.at(0), nodeList.at(i), pointerType_);
+        graph->createPointer(nodeList.at(0), nodeList.at(i), pointerType_);
     }
 }
 
@@ -323,9 +323,9 @@ void GenerateGraphWidget::generateCircle(int nodes)
 
     // connect circle nodes
     for (int i = 0; i < nodes - 1; i++) {
-        graph->addPointer(nodeList.at(i), nodeList.at(i + 1), pointerType_);
+        graph->createPointer(nodeList.at(i), nodeList.at(i + 1), pointerType_);
     }
-    graph->addPointer(nodeList.at(nodes - 1), nodeList.at(0), pointerType_);
+    graph->createPointer(nodeList.at(nodes - 1), nodeList.at(0), pointerType_);
 }
 
 void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdges)
@@ -381,7 +381,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
 
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
-        graph->addPointer(mapNodes[boost::source(*ei, randomGraph)],
+        graph->createPointer(mapNodes[boost::source(*ei, randomGraph)],
                           mapNodes[boost::target(*ei, randomGraph)],
                           pointerType_);
     }
@@ -434,7 +434,7 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
 
     boost::graph_traits<Graph>::edge_iterator ei, ei_end;
     for (boost::tie(ei, ei_end) = boost::edges(randomGraph); ei != ei_end; ++ei) {
-        graph->addPointer(mapNodes[boost::source(*ei, randomGraph)],
+        graph->createPointer(mapNodes[boost::source(*ei, randomGraph)],
                           mapNodes[boost::target(*ei, randomGraph)],
                           pointerType_);
     }
@@ -462,9 +462,9 @@ void GenerateGraphWidget::generateRandomTreeGraph(int nodes)
         center += QPointF(30,30);
         boost::random::uniform_int_distribution<> randomEarlierNodeGen(0, i-1);
         int randomEarlierNode = randomEarlierNodeGen(gen);
-        graph->addPointer(thisNode, addedNodes.at(randomEarlierNode), pointerType_);
+        graph->createPointer(thisNode, addedNodes.at(randomEarlierNode), pointerType_);
         if (ptrType->direction() == PointerType::Unidirectional) {
-            graph->addPointer(addedNodes.at(randomEarlierNode), thisNode, pointerType_);
+            graph->createPointer(addedNodes.at(randomEarlierNode), thisNode, pointerType_);
         }
         addedNodes.append(thisNode);
     }

@@ -70,12 +70,12 @@ public:
 
     /**
      * Create new pointer to \p to. By using this method, the pointer gets registered at both of
-     * its end-points. This method should be used to create new pointers.
+     * its end-points. Use this method to create new pointers.
      *
      * \param to is the target of the new pointer
      * \return the created pointer
      */
-    PointerPtr addPointer(DataPtr to);
+    PointerPtr createPointer(DataPtr to);
 
     /**
      * Add incoming pointer to in-pointer list.

@@ -263,10 +263,10 @@ void RocsGraphFileFormatPlugin::readFile()
                 dataLine = in.readLine().simplified();
             }
             if (document->pointerTypeList().contains(type)) {
-                tmpPointer = tmpDataStructure->addPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], type);
+                tmpPointer = tmpDataStructure->createPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], type);
             } else {
                 kDebug() << "Create pointer of type 0, since type " << type << " was not registered.";
-                tmpPointer = tmpDataStructure->addPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], 0);
+                tmpPointer = tmpDataStructure->createPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], 0);
             }
             if (tmpPointer) {
                 tmpPointer->setWidth(width);
