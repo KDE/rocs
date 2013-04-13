@@ -228,20 +228,30 @@ PointerList Data::pointerList() const
     return adjacent;
 }
 
-void Data::registerInPointer(PointerPtr e)
+void Data::addPointer(PointerPtr pointer)
 {
-    Q_ASSERT(e->to()->identifier() == identifier() || e->from()->identifier() == identifier());
-    d->_inPointers.append(e);
-    connect(e.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updatePointerList()));
-    emit pointerListChanged();
-}
-
-void Data::registerOutPointer(PointerPtr e)
-{
-    Q_ASSERT(e->to()->identifier() == identifier() || e->from()->identifier() == identifier());
-    d->_outPointers.append(e);
-    connect(e.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updatePointerList()));
-    emit pointerListChanged();
+    // state variable
+    bool changed = false;
+    // in-pointer
+    if (pointer->to()->identifier() == identifier() || pointer->direction() == PointerType::Bidirectional) {
+        if (!d->_inPointers.contains(pointer)) {
+            d->_inPointers.append(pointer);
+            changed = true;
+        }
+    }
+    // out-pointer
+    if (pointer->from()->identifier() == identifier() || pointer->direction() == PointerType::Bidirectional) {
+        if (!d->_outPointers.contains(pointer)) {
+            d->_outPointers.append(pointer);
+            changed = true;
+        }
+    }
+    // both must be check to guarantee that pointer is register only once: otherwise after a change of direction
+    // a single check could not suffice
+    if (changed) {
+        connect(pointer.get(), SIGNAL(directionChanged(PointerType::Direction)), this, SLOT(updatePointerList()), Qt::UniqueConnection);
+        emit pointerListChanged();
+    }
 }
 
 PointerPtr Data::createPointer(DataPtr to)
@@ -268,24 +278,24 @@ void Data::updatePointerList()
 {
     bool changed = false;
     PointerList tmpList = pointerList();
-    foreach(PointerPtr e, tmpList) {
-        if (e->direction() == PointerType::Bidirectional) {
-            if (!d->_inPointers.contains(e)) {
-                d->_inPointers.append(e);
+    foreach(PointerPtr pointer, tmpList) {
+        if (pointer->direction() == PointerType::Bidirectional) {
+            if (!d->_inPointers.contains(pointer)) {
+                d->_inPointers.append(pointer);
                 changed = true;
             }
-            if (!d->_outPointers.contains(e)) {
-                d->_outPointers.append(e);
+            if (!d->_outPointers.contains(pointer)) {
+                d->_outPointers.append(pointer);
                 changed = true;
             }
         }
-        if (e->direction() == PointerType::Unidirectional) {
-            if (getData() == e->from() && d->_inPointers.contains(e)) {
-                d->_inPointers.removeOne(e);
+        if (pointer->direction() == PointerType::Unidirectional) {
+            if (getData() == pointer->from() && d->_inPointers.contains(pointer)) {
+                d->_inPointers.removeOne(pointer);
                 changed = true;
             }
-            if (getData() == e->to() && d->_outPointers.contains(e)) {
-                d->_outPointers.removeOne(e);
+            if (getData() == pointer->to() && d->_outPointers.contains(pointer)) {
+                d->_outPointers.removeOne(pointer);
                 changed = true;
             }
         }

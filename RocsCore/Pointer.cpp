@@ -63,8 +63,8 @@ void Pointer::setQpointer(PointerPtr q)
 void Pointer::initialize()
 {
     // register pointer at endpoints and connect to changes
-    d->from->registerOutPointer(getPointer());
-    d->to->registerInPointer(getPointer());
+    d->from->addPointer(getPointer());
+    d->to->addPointer(getPointer());
     updateRelativeIndex();
     connect(d->to.get(), SIGNAL(posChanged(QPointF)), this, SIGNAL(posChanged()));
     connect(d->from.get(), SIGNAL(pointerListChanged()), this, SLOT(updateRelativeIndex()));

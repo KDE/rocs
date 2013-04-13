@@ -78,18 +78,13 @@ public:
     PointerPtr createPointer(DataPtr to);
 
     /**
-     * Add incoming pointer to in-pointer list.
+     * Register an created pointer to this data element. By the pointer direction it is decided
+     * whether it is an out-/in-pointer. Calling this method more than once with the same
+     * pointer is safe (the pointer is added still only once.)
      *
-     * \param e is pointer to be added
+     * \param pointer is pointer to be added
      */
-    void registerInPointer(PointerPtr e);
-
-    /**
-     * Add out pointer to out-pointer list.
-     *
-     * \param e is pointer to be added
-     */
-    void registerOutPointer(PointerPtr e);
+    void addPointer(PointerPtr pointer);
 
     /**
      * Remove pointer from pointer list
