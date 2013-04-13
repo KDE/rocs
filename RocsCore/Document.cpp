@@ -277,10 +277,13 @@ QRectF Document::sceneRect() const
 void Document::updateSceneRect(const QPointF &position)
 {
     if (sceneRect().contains(position) == true) {
-        //TODO implement decreasing of scene rect
+        //TODO If this happens, we must shrink the rectangular area where the nodes
+        // are positioned. Though it looks that one of the only efficient ways to do this
+        // is to implement a QuadTree for the scene rect an track the positions of nodes.
+        // Especially for corner cases (moving a node at the border of the rect with epsilon small
+        // wobbling) we must take a carefull look to guarantee fast processing.
         return;
     }
-
     if (position.x() < d->_left) {
         d->_left = position.x();
     }
