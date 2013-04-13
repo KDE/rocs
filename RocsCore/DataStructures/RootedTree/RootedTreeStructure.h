@@ -36,8 +36,8 @@ class RootedTreeStructure : public DataStructure
 
 public:
     //to avoid hide some methods
-    using DataStructure::addData;
-    using DataStructure::addPointer;
+    using DataStructure::createData;
+    using DataStructure::createPointer;
 
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
@@ -46,8 +46,8 @@ public:
     ~RootedTreeStructure();
     void importStructure(DataStructurePtr other);
 
-    PointerPtr addPointer(DataPtr from, DataPtr to, int dataType=0);
-    DataPtr addData(const QString& name, int dataType=0);
+    PointerPtr createPointer(DataPtr from, DataPtr to, int dataType=0);
+    DataPtr createData(const QString& name, int dataType=0);
 
     void setEngine(QScriptEngine *engine);
     DataPtr rootNode() const;

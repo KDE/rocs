@@ -224,10 +224,10 @@ void RocsGraphFileFormatPlugin::readFile()
                 dataLine = in.readLine().simplified();
             }
             if (document->dataTypeList().contains(type)) {
-                tmpData = tmpDataStructure->addData(name, type);
+                tmpData = tmpDataStructure->createData(name, type);
             } else {
                 kDebug() << "Create data element of type 0, since type " << type << " was not registered.";
-                tmpData = tmpDataStructure->addData(name, 0);
+                tmpData = tmpDataStructure->createData(name, 0);
             }
             if (tmpData) {
                 tmpData->setColor(color);

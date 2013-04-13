@@ -118,7 +118,7 @@ void DataStructure::importStructure(DataStructurePtr other)
     QHash <Data*, DataPtr> dataTodata;
     //FIXME only reading default of elements
     foreach(DataPtr n, other->dataList(0)) {
-        DataPtr newdata = addData(n->property("name").toString(), 0);
+        DataPtr newdata = createData(n->property("name").toString(), 0);
         newdata->setColor(n->color());
         //FIXME all dynamic properties must be set
         newdata->setX(n->x());
@@ -294,7 +294,7 @@ int DataStructure::generateUniqueIdentifier()
     return d->_identifierCount++;
 }
 
-DataPtr DataStructure::addData(const QString& name, int dataType)
+DataPtr DataStructure::createData(const QString& name, int dataType)
 {
     if (d->_readOnly) {
         return DataPtr();
@@ -334,9 +334,9 @@ DataPtr DataStructure::addData(DataPtr data, int dataType)
     return data;
 }
 
-DataPtr DataStructure::addData(const QString& name, const QPointF& pos, int dataType)
+DataPtr DataStructure::createData(const QString& name, const QPointF& pos, int dataType)
 {
-    if (DataPtr data = addData(name, dataType)) {
+    if (DataPtr data = createData(name, dataType)) {
         data->setPos(pos.x(), pos.y());
         return data;
     }
@@ -360,7 +360,7 @@ DataList DataStructure::addDataList(QList< QPair<QString, QPointF> > dataList, i
     QList< DataPtr > dataCreateList;
     QList< QPair<QString, QPointF> >::const_iterator dataDefinition = dataList.constBegin();
     while (dataDefinition != dataList.constEnd()) {
-        if (DataPtr data = addData(dataDefinition->first, dataType)) {
+        if (DataPtr data = createData(dataDefinition->first, dataType)) {
             data->setPos(dataDefinition->second.x(), dataDefinition->second.y());
             dataCreateList << data;
         }

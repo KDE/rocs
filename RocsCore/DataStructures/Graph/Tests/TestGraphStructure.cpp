@@ -50,7 +50,7 @@ void TestGraphStructure::dataAddDeleteTest()
 
     // create 10 data elements
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i), 0));
+        dataList.append(ds->createData(QString(i), 0));
     }
     QVERIFY2(ds->dataList(0).size() == 10, "ERROR: Number of data elements is not 10");
 
@@ -72,7 +72,7 @@ void TestGraphStructure::pointerAddDeleteTest()
     // create 10 data elements
     // x x x x x x x x x x
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i), 0));
+        dataList.append(ds->createData(QString(i), 0));
     }
     QVERIFY2(ds->dataList(0).size() == 10, "ERROR: Number of data elements is not 10");
 
@@ -111,11 +111,11 @@ void TestGraphStructure::createSimpleGraph()
     DataStructurePtr ds = DocumentManager::self().activeDocument()->addDataStructure("AddDeleteTest");
 
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("a", 0));
-    dataList.insert("b", ds->addData("b", 0));
-    dataList.insert("c", ds->addData("c", 0));
-    dataList.insert("d", ds->addData("d", 0));
-    dataList.insert("e", ds->addData("e", 0));
+    dataList.insert("a", ds->createData("a", 0));
+    dataList.insert("b", ds->createData("b", 0));
+    dataList.insert("c", ds->createData("c", 0));
+    dataList.insert("d", ds->createData("d", 0));
+    dataList.insert("e", ds->createData("e", 0));
 
     ds->createPointer(dataList["a"], dataList["b"], 0);
     ds->createPointer(dataList["b"], dataList["c"], 0);
@@ -149,9 +149,9 @@ void TestGraphStructure::dataTypesTest()
 
     // create data elements
     for (int i = 0; i < 3; i++) {
-        dataListDefault.append(ds->addData(QString(i), 0));
-        dataList1.append(ds->addData(QString(i), type1));
-        dataList2.append(ds->addData(QString(i), type2));
+        dataListDefault.append(ds->createData(QString(i), 0));
+        dataList1.append(ds->createData(QString(i), type1));
+        dataList2.append(ds->createData(QString(i), type2));
     }
     QVERIFY2(ds->dataList(0).size() == 3,
              "list contains " + ds->dataList(0).size()
@@ -188,7 +188,7 @@ void TestGraphStructure::pointerTypesTest()
 
     // create data elements
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i), 0));
+        dataList.append(ds->createData(QString(i), 0));
     }
 
     // register two further data types

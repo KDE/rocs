@@ -48,8 +48,8 @@ bool AddDataAction::executePress(QPointF pos)
     }
     //FIXME this only creates data elements of default type
     DataPtr tmp = DocumentManager::self().activeDocument()->activeDataStructure()
-                  ->addData(QString(), QPointF(pos.x(), pos.y()), 0);
-    kDebug()  << " the data's actual position: " << tmp.get()->x() << ", " << tmp.get()->y() ;
+                  ->createData(QString(), QPointF(pos.x(), pos.y()), 0);
+    kDebug() << " the data's actual position: " << tmp.get()->x() << ", " << tmp.get()->y() ;
     return true;
 }
 

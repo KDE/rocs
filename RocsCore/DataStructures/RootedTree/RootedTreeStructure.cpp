@@ -80,7 +80,7 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
         queue.enqueue(dataOther);
 
         // add data element to tree and register mapping
-        DataPtr dataTree = addData(dataOther->property("name").toString(), 0);
+        DataPtr dataTree = createData(dataOther->property("name").toString(), 0);
         dataTree->setColor(dataOther->color());
         dataTree->setProperty("value", dataOther->property("value").toString());
         dataTree->setX(dataOther->x());
@@ -108,7 +108,7 @@ void RootedTreeStructure::importStructure(DataStructurePtr other)
                 if (!visited.contains(adjacentData.get())){
                     visited.insert(adjacentData.get());
                     queue.enqueue(adjacentData);
-                    DataPtr childdata = addData(adjacentData->property("name").toString(), 0);
+                    DataPtr childdata = createData(adjacentData->property("name").toString(), 0);
                     childdata->setColor(adjacentData->color());
                     childdata->setProperty("value", adjacentData->property("value").toString());
                     childdata->setX(adjacentData->x());
@@ -137,14 +137,14 @@ RootedTreeStructure::~RootedTreeStructure()
 
 QScriptValue RootedTreeStructure::add_data(const QString& name)
 {
-    DataPtr n = addData(name, 0);
+    DataPtr n = createData(name, 0);
     n->setEngine(engine());
     return n->scriptValue();
 }
 
 
 ///FIXME addeding multiple pointers.
-PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataType)
+PointerPtr RootedTreeStructure::createPointer(DataPtr from, DataPtr to, int dataType)
 {
     PointerPtr ptr = DataStructure::createPointer(from, to, dataType);
     if (ptr && from->property("ClickPosition").isValid()){
@@ -196,7 +196,7 @@ PointerPtr RootedTreeStructure::addPointer(DataPtr from, DataPtr to, int dataTyp
     return ptr;
 }
 
-DataPtr RootedTreeStructure::addData(const QString& name, int dataType)
+DataPtr RootedTreeStructure::createData(const QString& name, int dataType)
 {
     Q_ASSERT(document()->dataTypeList().contains(dataType));
     boost::shared_ptr<RootedTreeNode> n = boost::static_pointer_cast<RootedTreeNode>(

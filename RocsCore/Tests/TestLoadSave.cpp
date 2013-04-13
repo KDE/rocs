@@ -46,11 +46,11 @@ void TestLoadSave::serializeUnserializeTest()
     // Creates a simple Graph with 5 data elements and connect them with pointers.
     DataStructurePtr ds = document->activeDataStructure();
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("a", 0));
-    dataList.insert("b", ds->addData("b", 0));
-    dataList.insert("c", ds->addData("c", 0));
-    dataList.insert("d", ds->addData("d", 0));
-    dataList.insert("e", ds->addData("e", 0));
+    dataList.insert("a", ds->createData("a", 0));
+    dataList.insert("b", ds->createData("b", 0));
+    dataList.insert("c", ds->createData("c", 0));
+    dataList.insert("d", ds->createData("d", 0));
+    dataList.insert("e", ds->createData("e", 0));
 
     ds->createPointer(dataList["a"], dataList["b"], 0);
     ds->createPointer(dataList["b"], dataList["c"], 0);
@@ -103,8 +103,8 @@ void TestLoadSave::serializeUnserializeTypesTest()
 
     // add test data
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("a", dataTypeID));
-    dataList.insert("b", ds->addData("b", dataTypeID));
+    dataList.insert("a", ds->createData("a", dataTypeID));
+    dataList.insert("b", ds->createData("b", dataTypeID));
     ds->createPointer(dataList["a"], dataList["b"], pointerTypeID);
 
     // serialize into file "serializetest.graph"
@@ -125,7 +125,6 @@ void TestLoadSave::serializeUnserializeTypesTest()
     QVERIFY2(ds->dataList(dataTypeID).size() > 0, "ERROR: type of data element changed");
     QVERIFY2(ds->pointers(pointerTypeID).size() > 0, "ERROR: type of pointer changed");
 }
-
 
 void TestLoadSave::projectLoadSaveTest()
 {
@@ -168,7 +167,5 @@ void TestLoadSave::loadMultipleLayerGraphTest()
     QVERIFY2(!document->activeDataStructure()->dataList(0).first()->property("name").toString().isEmpty(), "property must be present");
     QVERIFY2(!document->activeDataStructure()->dataList(0).first()->property("target").toString().isEmpty(), "property must be present");
 }
-
-
 
 QTEST_KDEMAIN_CORE(TestLoadSave)

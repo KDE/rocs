@@ -32,8 +32,8 @@ class ROCS_LISTSTRUCTURE_EXPORT ListStructure : public DataStructure
     Q_OBJECT
 public:
     using DataStructure::remove;
-    using DataStructure::addPointer;
-    using DataStructure::addData;
+    using DataStructure::createPointer;
+    using DataStructure::createData;
 
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
@@ -44,22 +44,18 @@ public:
 
     virtual ~ListStructure();
 
+    DataPtr createData(const QString& name, int dataType=0);
+
+    PointerPtr createPointer(DataPtr from, DataPtr to, int pointerType=0);
+
+    void remove(DataPtr n);
+    void remove(PointerPtr e);
+
 public slots:
-
-    virtual DataPtr addData(const QString& name, int dataType = 0);
-
-    virtual void remove(DataPtr n);
-
-    virtual PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType = 0);
-
     void arrangeNodes();
-
-    virtual void remove(PointerPtr e);
-
     QScriptValue begin();
     void setBegin(Data* node);
     QScriptValue createNode(const QString& name);
-
 
 private:
     void init();

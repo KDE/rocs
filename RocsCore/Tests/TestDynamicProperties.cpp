@@ -45,7 +45,7 @@ void TestDynamicProperties::addNodeDynamicProperty()
 {
     DataStructurePtr g = _document->addDataStructure("A graph");
 
-    DataPtr n = g->addData("Node", 0);
+    DataPtr n = g->createData("Node", 0);
     QByteArray property = "newProperty";
     n->addDynamicProperty(property, QVariant(0));
     QVERIFY2(n->property(property) != QVariant::Invalid, "Property not added.");
@@ -55,8 +55,8 @@ void TestDynamicProperties::addEdgeDynamicProperty()
 {
     DataStructurePtr g = _document->addDataStructure("A graph");
 
-    DataPtr n1 = g->addData("Node1", 0);
-    DataPtr n2 = g->addData("Node2", 0);
+    DataPtr n1 = g->createData("Node1", 0);
+    DataPtr n2 = g->createData("Node2", 0);
     PointerPtr e = g->createPointer(n1, n2, 0);
     QVERIFY2(e->getPointer().get() != 0, "Pointer not created!");
     QByteArray property = "newProperty";
@@ -77,7 +77,7 @@ void TestDynamicProperties::removeNodeDynamicProperty()
 {
     DataStructurePtr g = _document->addDataStructure("A graph");
 
-    DataPtr n = g->addData("Node", 0);
+    DataPtr n = g->createData("Node", 0);
     QByteArray property = "newProperty";
     int propertyNumber = n->dynamicPropertyNames().size();
 
@@ -95,8 +95,8 @@ void TestDynamicProperties::removeEdgeDynamicProperty()
 {
     DataStructurePtr g = _document->addDataStructure("A graph");
 
-    DataPtr n1 = g->addData("Node", 0);
-    DataPtr n2 = g->addData("Node", 0);
+    DataPtr n1 = g->createData("Node", 0);
+    DataPtr n2 = g->createData("Node", 0);
     PointerPtr e = g->createPointer(n1, n2, 0);
     QByteArray property = "newProperty";
     e->addDynamicProperty(property, QVariant(0));
@@ -122,8 +122,8 @@ void TestDynamicProperties::insertInvalidNames()
 {
     DataStructurePtr g = _document->addDataStructure("A graph");
 
-    DataPtr n1 = g->addData("Node 1", 0);
-    DataPtr n2 = g->addData("Node 2", 0);
+    DataPtr n1 = g->createData("Node 1", 0);
+    DataPtr n2 = g->createData("Node 2", 0);
     PointerPtr e  = g->createPointer(n1, n2, 0);
 
     QByteArray property_space = "new Property";
@@ -158,8 +158,8 @@ void TestDynamicProperties::renameProperties()
 {
     DataStructurePtr g = _document->addDataStructure("A graph");
 
-    DataPtr n1 = g->addData("Node 1", 0);
-    DataPtr n2 = g->addData("Node 2", 0);
+    DataPtr n1 = g->createData("Node 1", 0);
+    DataPtr n2 = g->createData("Node 2", 0);
     PointerPtr e  = g->createPointer(n1, n2, 0);
 
    QByteArray property = "newProperty";
@@ -181,8 +181,8 @@ void TestDynamicProperties::renamePropertiesToInvalidNames()
 {
     DataStructurePtr g = _document->addDataStructure("graph");
 
-    DataPtr n1 = g->addData("Node 1", 0);
-    DataPtr n2 = g->addData("Node 2", 0);
+    DataPtr n1 = g->createData("Node 1", 0);
+    DataPtr n2 = g->createData("Node 2", 0);
     PointerPtr e  = g->createPointer(n1, n2, 0);
 
     QByteArray property = "newProperty";

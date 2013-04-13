@@ -57,9 +57,9 @@ void TestScriptEngine::basicOperationsGraph()
 
     // create test data structure
     ds = graphDoc->addDataStructure("test");
-    DataPtr a = ds->addData("a", 0);
-    DataPtr b = ds->addData("b", 0);
-    DataPtr c = ds->addData("c", 0);
+    DataPtr a = ds->createData("a", 0);
+    DataPtr b = ds->createData("b", 0);
+    DataPtr c = ds->createData("c", 0);
     PointerPtr connection = ds->createPointer(a, b, 0);
     int type1 = graphDoc->registerDataType("type1");
     graphDoc->setActiveDataStructure(ds);
@@ -166,8 +166,8 @@ void TestScriptEngine::useOfDynamicProperties()
 
     DataStructurePtr d = graphDoc->activeDataStructure();
     d->setName("myGraph");
-    DataPtr n1 =d->addData("Node1", 0);
-    DataPtr n2 = d->addData("Node2", 0);
+    DataPtr n1 =d->createData("Node1", 0);
+    DataPtr n2 = d->createData("Node2", 0);
     PointerPtr e1 = d->createPointer(n1, n2, 0);
 
     QString test;

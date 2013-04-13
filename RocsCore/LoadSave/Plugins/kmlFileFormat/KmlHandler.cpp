@@ -56,7 +56,7 @@ bool KmlHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
         if (m_name.isEmpty()) {
             m_name = QString::number(qrand());
         }
-        n = m_graph->addData(m_name, 0);
+        n = m_graph->createData(m_name, 0);
         QStringList values = m_coordinates.split(',');
         if (values.count() >= 2) {
 
@@ -84,7 +84,7 @@ bool KmlHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
 
             QStringList values = point.split(',');
             if (values.count() >= 2) {
-                n = m_graph->addData(m_name + '_' + QString::number(count + 1), 0);
+                n = m_graph->createData(m_name + '_' + QString::number(count + 1), 0);
 
                 n->setX(values.at(0).toDouble());
                 n->addDynamicProperty("Longitude", values.at(0).toDouble());

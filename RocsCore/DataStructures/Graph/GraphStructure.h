@@ -39,8 +39,8 @@ public:
 
     //to avoid hide some methods
     using DataStructure::remove;
-    using DataStructure::addPointer;
-    using DataStructure::addData;
+    using DataStructure::createPointer;
+    using DataStructure::createData;
 
     static DataStructurePtr create(Document *parent);
     static DataStructurePtr create(DataStructurePtr other, Document *parent);
@@ -57,7 +57,7 @@ public:
      * \param pointerType is the type of this edge, defaults to 0
      * \return the created edge as PointerPtr
      */
-    PointerPtr addPointer(DataPtr from, DataPtr to, int pointerType);
+    PointerPtr createPointer(DataPtr from, DataPtr to, int pointerType);
 
     /**
      * Internal method to create new graph node.
@@ -66,7 +66,7 @@ public:
      * \param dataType is the type of this node, defaults to 0
      * \return the created node as DataPtr
      */
-    DataPtr addData(const QString& name, int dataType);
+    DataPtr createData(const QString& name, int dataType);
 
     /**
      * Returns type of the graph given by enum \see GRAPH_TYPE.

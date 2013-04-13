@@ -171,7 +171,7 @@ void GmlGraphParsingHelper::createNode()
     if (_actualState == graph) {
         kDebug() << "Creating a node";
         _actualState = node;
-        actualNode = actualGraph->addData("NewNode", 0);
+        actualNode = actualGraph->createData("NewNode", 0);
     }
 }
 

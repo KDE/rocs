@@ -100,9 +100,9 @@ void TestPlugins::convertGraphToLinkedList()
 
     //Create a simple graph
     DataStructurePtr tree = doc.addDataStructure("Graph1");
-    DataPtr a = tree->addData("node1", 0);
-    DataPtr b = tree->addData("node2", 0);
-    DataPtr c = tree->addData("node3", 0);
+    DataPtr a = tree->createData("node1", 0);
+    DataPtr b = tree->createData("node2", 0);
+    DataPtr c = tree->createData("node3", 0);
     tree->createPointer(a, b, 0);
     tree->createPointer(a, c, 0);
 
@@ -129,9 +129,9 @@ void TestPlugins::convertGraphToRootedTree()
     //     connect(DSPluginManager::instance(), SIGNAL(changingDS(QString)), &doc, SLOT(convertToDS(QString)));
     //Create a simple graph
     DataStructurePtr tree = doc.addDataStructure("Graph1");
-    DataPtr a = tree->addData("node1", 0);
-    DataPtr b = tree->addData("node2", 0);
-    DataPtr c = tree->addData("node3", 0);
+    DataPtr a = tree->createData("node1", 0);
+    DataPtr b = tree->createData("node2", 0);
+    DataPtr c = tree->createData("node3", 0);
     tree->createPointer(a, b, 0);
     tree->createPointer(a, c, 0);
 

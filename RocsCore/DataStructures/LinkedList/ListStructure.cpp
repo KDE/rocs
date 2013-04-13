@@ -51,7 +51,7 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
     QHash < Data*, DataPtr > dataTodata;
     foreach (int type, other->document()->dataTypeList()) {
         foreach (DataPtr n, other->dataList(type)) {
-            DataPtr newdata = addData("", type);
+            DataPtr newdata = createData("", type);
             newdata->setColor(n->color());
             newdata->setProperty("value", n->property("value").toString());
             newdata->setX(n->x());
@@ -68,7 +68,7 @@ void Rocs::ListStructure::importStructure(DataStructurePtr other)
             DataPtr from =  dataTodata.value(e->from().get());
             DataPtr to =  dataTodata.value(e->to().get());
 
-            PointerPtr newPointer = addPointer(from, to, type);
+            PointerPtr newPointer = createPointer(from, to, type);
             newPointer->setColor(e->color());
             newPointer->setProperty("value", e->property("value").toString());
             foreach (const QString &property, other->document()->pointerType(type)->properties()) {
@@ -101,7 +101,7 @@ Rocs::ListStructure::~ListStructure()
 //     m_animationGroup->deleteLater();
 }
 
-PointerPtr Rocs::ListStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
+PointerPtr Rocs::ListStructure::createPointer(DataPtr from, DataPtr to, int pointerType)
 {
     foreach(PointerPtr e, from->outPointerList()) {
         e->remove();
@@ -112,7 +112,7 @@ PointerPtr Rocs::ListStructure::addPointer(DataPtr from, DataPtr to, int pointer
     return e;
 }
 
-DataPtr Rocs::ListStructure::addData(const QString& name, int dataType)
+DataPtr Rocs::ListStructure::createData(const QString& name, int dataType)
 {
     boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(
                                         ListNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)

@@ -37,11 +37,11 @@ void KmlFileFormatTest::serializeTest()
     // Creates a simple Graph with 5 data elements and connect them with pointers.
     DataStructurePtr ds = document->activeDataStructure();
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("first node", 0));
-    dataList.insert("b", ds->addData("b", 0));
-    dataList.insert("c", ds->addData("c", 0));
-    dataList.insert("d", ds->addData("d", 0));
-    dataList.insert("e", ds->addData("e", 0));
+    dataList.insert("a", ds->createData("first node", 0));
+    dataList.insert("b", ds->createData("b", 0));
+    dataList.insert("c", ds->createData("c", 0));
+    dataList.insert("d", ds->createData("d", 0));
+    dataList.insert("e", ds->createData("e", 0));
 
     ds->createPointer(dataList["a"], dataList["b"], 0)->setProperty("value", "test value");
     ds->createPointer(dataList["b"], dataList["c"], 0);

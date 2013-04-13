@@ -138,7 +138,8 @@ public:
     virtual void setPluginProperty(const QString& /*identifier*/, const QString& /*property*/);
 
 public Q_SLOTS:
-    virtual DataPtr addData(const QString& name, int dataType);
+    virtual DataPtr createData(const QString& name, int dataType);
+    virtual DataPtr createData(const QString& name, const QPointF& point, int dataType);
 
     /**
      * \deprecated
@@ -190,7 +191,6 @@ public Q_SLOTS:
 
     virtual GroupPtr addGroup(const QString& name);
     virtual DataList addDataList(QList< QPair<QString, QPointF> > dataList, int dataType);
-    virtual DataPtr addData(const QString& name, const QPointF& point, int dataType);
 
     void addDynamicProperty(const QString& property, const QVariant& value = QVariant(0));
     void removeDynamicProperty(const QString& property);

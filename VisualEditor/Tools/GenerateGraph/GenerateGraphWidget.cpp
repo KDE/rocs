@@ -242,7 +242,7 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     // create mesh nodes, store them in map
     for (int i = 0; i < columns; i++) {
         for (int j = 0; j < rows; j++) {
-            meshNodes[qMakePair(i, j)] = graph->addData(QString("%1-%2").arg(i).arg(j),
+            meshNodes[qMakePair(i, j)] = graph->createData(QString("%1-%2").arg(i).arg(j),
                                                         QPointF(i * 50, j * 50) - QPoint((int)25 * columns, (int)25 * rows) + center,
                                                         dataType_
                                                        );
@@ -285,7 +285,7 @@ void GenerateGraphWidget::generateStar(int satelliteNodes)
     QList< DataPtr > nodeList = graph->addDataList(starNodes, dataType_);
 
     // center
-    nodeList.prepend(graph->addData(QString("center"), center, dataType_));
+    nodeList.prepend(graph->createData(QString("center"), center, dataType_));
 
     // connect circle nodes
     for (int i = 1; i <= satelliteNodes; i++) {
@@ -372,7 +372,7 @@ void GenerateGraphWidget::generateRandomGraph(int nodes, int edges, bool selfEdg
     int index = 0;
     boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
     for (boost::tie(vi, vi_end) = boost::vertices(randomGraph); vi != vi_end; ++vi) {
-        mapNodes[*vi] = graph->addData(
+        mapNodes[*vi] = graph->createData(
                             QString("%1").arg(index++),
                             QPointF(positionMap[*vi][0], positionMap[*vi][1]),
                             dataType_
@@ -425,7 +425,7 @@ void GenerateGraphWidget::generateErdosRenyiRandomGraph(int nodes, double edgePr
     int index = 0;
     boost::graph_traits<Graph>::vertex_iterator vi, vi_end;
     for (boost::tie(vi, vi_end) = boost::vertices(randomGraph); vi != vi_end; ++vi) {
-        mapNodes[*vi] = graph->addData(
+        mapNodes[*vi] = graph->createData(
                             QString("%1").arg(index++),
                             QPointF(positionMap[*vi][0], positionMap[*vi][1]),
                             dataType_
@@ -455,10 +455,10 @@ void GenerateGraphWidget::generateRandomTreeGraph(int nodes)
     gen.seed(static_cast<unsigned int>(seed_));
 
     DataList addedNodes;
-    addedNodes << graph->addData(QString::number(1), dataType_);
+    addedNodes << graph->createData(QString::number(1), dataType_);
     PointerTypePtr ptrType = activeDocument->pointerType(0);
     for (int i = 1; i < nodes; i++) {
-        DataPtr thisNode = graph->addData(QString::number(i + 1), center, dataType_);
+        DataPtr thisNode = graph->createData(QString::number(i + 1), center, dataType_);
         center += QPointF(30,30);
         boost::random::uniform_int_distribution<> randomEarlierNodeGen(0, i-1);
         int randomEarlierNode = randomEarlierNodeGen(gen);

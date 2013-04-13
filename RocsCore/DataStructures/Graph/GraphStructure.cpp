@@ -65,7 +65,7 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
     QHash <Data*, DataPtr> dataTodata;
     //FIXME only default data type considered
     foreach(DataPtr n, other->dataList(0)) {
-        DataPtr newdata = addData("", 0); //n->name());
+        DataPtr newdata = createData("", 0); //n->name());
         newdata->setColor(n->color());
         newdata->setProperty("value", n->property("value").toString());
         newdata->setX(n->x());
@@ -78,7 +78,7 @@ void Rocs::GraphStructure::importStructure(DataStructurePtr other)
         DataPtr from =  dataTodata.value(e->from().get());
         DataPtr to =  dataTodata.value(e->to().get());
 
-        PointerPtr newPointer = addPointer(from, to, 0);
+        PointerPtr newPointer = createPointer(from, to, 0);
         if (newPointer.get()){
             newPointer->setColor(e->color());
             newPointer->setProperty("value", e->property("value").toString());
@@ -137,7 +137,7 @@ QScriptValue Rocs::GraphStructure::createNode()
 
 QScriptValue Rocs::GraphStructure::createNode(int type)
 {
-    DataPtr n = addData("", type);
+    DataPtr n = createData("", type);
     n->setEngine(engine());
     return n->scriptValue();
 }
@@ -162,7 +162,7 @@ QScriptValue Rocs::GraphStructure::createEdge(Data* fromRaw, Data* toRaw, int ty
     DataPtr from = fromRaw->getData();
     DataPtr to = toRaw->getData();
 
-    PointerPtr edge = addPointer(from, to, type);
+    PointerPtr edge = createPointer(from, to, type);
     if (edge) {
         edge->setEngine(engine());
         return edge->scriptValue();
@@ -217,7 +217,7 @@ QScriptValue Rocs::GraphStructure::add_node(const QString& name)
     emit scriptError(i18n("The global method \"%1\" is deprecated, please use \"%2\" instead.",
         QString("add_node(string name)"),
         QString("createNode()")));
-    DataPtr n = addData(name, 0);
+    DataPtr n = createData(name, 0);
     n->setEngine(engine());
     return n->scriptValue();
 }
@@ -412,7 +412,7 @@ bool Rocs::GraphStructure::multigraph() const
     return (_type == Multigraph);
 }
 
-PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointerType)
+PointerPtr Rocs::GraphStructure::createPointer(DataPtr from, DataPtr to, int pointerType)
 {
     bool directed = document()->pointerType(pointerType)->direction() == PointerType::Unidirectional;
     if (!directed && !multigraph()) {
@@ -439,7 +439,7 @@ PointerPtr Rocs::GraphStructure::addPointer(DataPtr from, DataPtr to, int pointe
     return DataStructure::createPointer(from, to, pointerType);
 }
 
-DataPtr Rocs::GraphStructure::addData(const QString& name, int dataType)
+DataPtr Rocs::GraphStructure::createData(const QString& name, int dataType)
 {
     if (readOnly()) {
         return DataPtr();

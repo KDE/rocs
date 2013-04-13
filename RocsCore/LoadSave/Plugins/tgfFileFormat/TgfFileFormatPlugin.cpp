@@ -87,7 +87,7 @@ void TgfFileFormatPlugin::readFile()
         if (mode == Nodes) { // read node
             int identifier = line.section(' ', 0, 0).toInt();
             QString label = line.section(' ', 1);    // get label, everything after first space
-            DataPtr data = graph->addData(label.simplified(), 0);
+            DataPtr data = graph->createData(label.simplified(), 0);
             if (nodeMap.contains(identifier)) {
                 setError(EncodingProblem, i18n("Could not parse file. Identifier \"%1\" is used more than once.", identifier));
                 return;

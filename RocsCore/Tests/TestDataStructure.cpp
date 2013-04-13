@@ -55,7 +55,7 @@ void TestDataStructure::dataAddDeleteTest()
 
     // create 10 data elements
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString(i), 0));
+        dataList.append(ds->createData(QString(i), 0));
     }
     QVERIFY2(ds->dataList(0).size() == 10, "ERROR: Number of data elements is not 10");
 
@@ -79,7 +79,7 @@ void TestDataStructure::pointerAddDeleteTest()
     // create 10 data elements
     // x x x x x x x x x x
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString::number(i), 0));
+        dataList.append(ds->createData(QString::number(i), 0));
     }
     QVERIFY2(ds->dataList(0).size() == 10, "ERROR: Number of data elements is not 10");
 
@@ -119,11 +119,11 @@ void TestDataStructure::createSimpleGraph()
     DocumentManager::self().activeDocument()->setActiveDataStructure(ds);
 
     ds->setProperty("name", "Graph1");
-    dataList.insert("a", ds->addData("a", 0));
-    dataList.insert("b", ds->addData("b", 0));
-    dataList.insert("c", ds->addData("c", 0));
-    dataList.insert("d", ds->addData("d", 0));
-    dataList.insert("e", ds->addData("e", 0));
+    dataList.insert("a", ds->createData("a", 0));
+    dataList.insert("b", ds->createData("b", 0));
+    dataList.insert("c", ds->createData("c", 0));
+    dataList.insert("d", ds->createData("d", 0));
+    dataList.insert("e", ds->createData("e", 0));
 
     ds->createPointer(dataList["a"], dataList["b"], 0);
     ds->createPointer(dataList["b"], dataList["c"], 0);
@@ -158,9 +158,9 @@ void TestDataStructure::dataTypesTest()
 
     // create data elements
     for (int i = 0; i < 3; i++) {
-        dataListDefault.append(ds->addData(QString::number(i), 0));
-        dataList1.append(ds->addData(QString::number(i), type1));
-        dataList2.append(ds->addData(QString::number(i), type2));
+        dataListDefault.append(ds->createData(QString::number(i), 0));
+        dataList1.append(ds->createData(QString::number(i), type1));
+        dataList2.append(ds->createData(QString::number(i), type2));
     }
     QVERIFY2(ds->dataList(0).size() == 3,
              "list contains " + ds->dataList(0).size()
@@ -198,7 +198,7 @@ void TestDataStructure::pointerTypesTest()
 
     // create data elements
     for (int i = 0; i < 10; i++) {
-        dataList.append(ds->addData(QString::number(i), 0));
+        dataList.append(ds->createData(QString::number(i), 0));
     }
 
     // register two further data types
@@ -236,8 +236,8 @@ void TestDataStructure::pointerDirectionChange()
 
     // add two nodes 0 and 1, set type of default pointer type to unidirectional
     ds->document()->pointerType(0)->setDirection(PointerType::Unidirectional);
-    dataList.insert(0, ds->addData("0", 0));
-    dataList.insert(1, ds->addData("1", 0));
+    dataList.insert(0, ds->createData("0", 0));
+    dataList.insert(1, ds->createData("1", 0));
 
     // add pointer from 0 to 1 and test pointer list properties
     dataList[0]->createPointer(dataList[1]);

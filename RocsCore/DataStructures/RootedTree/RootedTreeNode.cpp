@@ -54,7 +54,7 @@ void RootedTreeNode::setNumberOfChilds(const qint32 number)
 {
     if (number != m_nChilds){
         for (qint32 i = number; i < m_nChilds; ++i) {
-            setChild(dataStructure()->addData("", 0), i);
+            setChild(dataStructure()->createData("", 0), i);
         }
         m_nChilds = number;
     }

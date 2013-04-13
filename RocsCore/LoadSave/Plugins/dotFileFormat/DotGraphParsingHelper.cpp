@@ -134,7 +134,7 @@ void DotGraphParsingHelper::createData(QString identifier)
     }
 
 //     kDebug() << "Creating new data element: " << identifier;
-    currentDataPtr = dataStructure->addData(identifier, 0);
+    currentDataPtr = dataStructure->createData(identifier, 0);
     dataMap.insert(identifier, currentDataPtr);
 
     if (!groupStack.isEmpty()) {
@@ -184,7 +184,7 @@ void DotGraphParsingHelper::createPointers()
 
         // if necessary create from id
         if (!dataMap.contains(fromId)) {
-            DataPtr from = dataStructure->addData(fromId, 0);
+            DataPtr from = dataStructure->createData(fromId, 0);
             dataMap.insert(fromId, from);
             currentDataPtr = from;
             setDataAttributes();
@@ -193,14 +193,14 @@ void DotGraphParsingHelper::createPointers()
 
         // if necessary create to node
         if (!dataMap.contains(toId)) {
-            DataPtr to = dataStructure->addData(toId, 0);
+            DataPtr to = dataStructure->createData(toId, 0);
             dataMap.insert(toId, to);
             currentDataPtr = to;
             setDataAttributes();
         }
         DataPtr to = dataMap[toId];
 
-        currentPointerPtr = dataStructure->addPointer(from, to, 0);
+        currentPointerPtr = dataStructure->createPointer(from, to, 0);
 //         kDebug() << "Creating new pointer: " << from->identifier() << " -> " << to->identifier();
         setPointerAttributes();
 
