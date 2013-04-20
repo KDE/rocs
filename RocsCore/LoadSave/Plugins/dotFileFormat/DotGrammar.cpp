@@ -177,9 +177,9 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                     | subgraph
                 );
 
-        attr_stmt = ( (distinct::keyword["graph"][ref(phelper->attributed)="graph"] >> attr_list[&applyAttributeList])[&setDataStructureAttributes]
-                    | (distinct::keyword["node"][ref(phelper->attributed)="node"] >> attr_list[&applyAttributeList])
-                    | (distinct::keyword["edge"][ref(phelper->attributed)="edge"] >> attr_list[&applyAttributeList])
+        attr_stmt = ( (distinct::keyword["graph"][phx::ref(phelper->attributed)="graph"] >> attr_list[&applyAttributeList])[&setDataStructureAttributes]
+                    | (distinct::keyword["node"][phx::ref(phelper->attributed)="node"] >> attr_list[&applyAttributeList])
+                    | (distinct::keyword["edge"][phx::ref(phelper->attributed)="edge"] >> attr_list[&applyAttributeList])
                     );
 
         attr_list = '[' >> -a_list >>']';
@@ -188,14 +188,14 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                  >> -char_(',') >> -a_list;
 
         edge_stmt = (
-                        (node_id[&edgebound] | subgraph) >> edgeRHS >> -(attr_list[ref(phelper->attributed)="edge"])
+                        (node_id[&edgebound] | subgraph) >> edgeRHS >> -(attr_list[phx::ref(phelper->attributed)="edge"])
                     )[&createAttributeList][&applyAttributeList][&createPointers][&removeAttributeList];
 
         edgeRHS = edgeop[&checkEdgeOperator] >> (node_id[&edgebound] | subgraph) >> -edgeRHS;
 
         node_stmt  = (
                          node_id[&createData] >> -attr_list
-                     )[ref(phelper->attributed)="node"][&createAttributeList][&applyAttributeList][&setDataAttributes][&removeAttributeList];
+                     )[phx::ref(phelper->attributed)="node"][&createAttributeList][&applyAttributeList][&setDataAttributes][&removeAttributeList];
 
         node_id = ID >> -port;
 
