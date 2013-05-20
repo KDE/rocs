@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
     aboutData.addAuthor(ki18nc("@info:credit Developer name", "Andreas Cord-Landwehr"),
                         ki18nc("@info:credit Role", "Developer"),
-                        "cola@uni-paderborn.de",
+                        "cordlandwehr@kde.org",
                         "http://cordlandwehr.wordpress.com");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
