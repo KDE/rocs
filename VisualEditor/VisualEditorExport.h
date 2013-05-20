@@ -23,7 +23,7 @@
 #include <kdemacros.h>
 
 #ifndef VISUALEDITOR_EXPORT
-# if defined(MAKE_VISUALEDITOR_LIB)
+# if defined(MAKE_ROCSVISUALEDITOR_LIB)
 // We are building this library
 #  define VISUALEDITOR_EXPORT KDE_EXPORT
 # else

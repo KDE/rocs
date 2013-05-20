@@ -52,17 +52,21 @@
     <group name="DefaultElementDisplay">
         <entry name="dataNodeDisplay" type="Enum">
             <label>Position where name and value of a node shall be shown.</label>
+            <default> 0 </default>
         </entry>
         <entry name="dataEdgeDisplay" type="Enum">
             <label>Position where name and value of an edge shall be shown.</label>
+            <default> 0 </default>
         </entry>
     </group>
     <group name="DefaultExecutionModeDisplay">
-        <entry name="excutionModeDebugVisible" type="Bool">
+        <entry name="executionModeDebugVisible" type="Bool">
             <label>Specifies whether execution button for debug execution shall be shown.</label>
+            <default> true </default>
         </entry>
-        <entry name="excutionModeOneStepVisible" type="Bool">
+        <entry name="executionModeOneStepVisible" type="Bool">
             <label>Specifies whether execution button for stepped execution shall be shown.</label>
+            <default> true </default>
         </entry>
     </group>
 </kcfg>

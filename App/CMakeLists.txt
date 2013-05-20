@@ -95,7 +95,7 @@ kde4_add_kcfg_files( rocs_Settings_SRCS ${rocs_KCFGS} )
 
 # needed to get icon on windows
 kde4_add_app_icon( rocs_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/../graphics/global/hi16-app-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../graphics/global/hi*-app-rocs.png
 )
 
 kde4_add_executable( rocs
