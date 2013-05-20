@@ -104,9 +104,11 @@ public:
      */
     Q_INVOKABLE void setBegin(Data* node);
 
+private slots:
+    void arrangeNodes();
+
 private:
     void init();
-    void arrangeNodes();
 
     boost::shared_ptr<ListNode> m_begin;
     QParallelAnimationGroup* m_animationGroup;
