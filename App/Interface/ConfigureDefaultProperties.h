@@ -53,8 +53,8 @@ private:
     Ui::ConfigureDefaultProperties *ui;
     int _displayPositionNode;
     int _displayPositionEdge;
-    bool _excutionModeDebugVisible;
-    bool _excutionModeOneStepVisible;
+    bool _executionModeDebugVisible;
+    bool _executionModeOneStepVisible;
 
 signals:
     /**

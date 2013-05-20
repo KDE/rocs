@@ -307,8 +307,8 @@ QWidget* MainWindow::setupScriptPanel()
     actionCollection()->addAction("_interruptScript", _interruptScript);
 
     // set toolbar visibility defaults
-    showExecutionButtonDebug(Settings::excutionModeDebugVisible());
-    showExecutionButtonOneStep(Settings::excutionModeOneStepVisible());
+    showExecutionButtonDebug(Settings::executionModeDebugVisible());
+    showExecutionButtonOneStep(Settings::executionModeOneStepVisible());
 
     connect(_runScript, SIGNAL(triggered()), this, SLOT(executeScriptFull()));
     connect(_stepRunScript, SIGNAL(triggered()), this, SLOT(executeScriptOneStep()));
@@ -412,10 +412,9 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
 
-
 void MainWindow::showSettings()
 {
-    QPointer<KConfigDialog> dialog = new KConfigDialog(this,  "settings", Settings::self());
+    QPointer<KConfigDialog> dialog = new KConfigDialog(this, "settings", Settings::self());
 
     IncludeManagerSettings * set = new IncludeManagerSettings(dialog);
     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties(dialog);
@@ -423,17 +422,11 @@ void MainWindow::showSettings()
     dialog->addPage(set, i18nc("@title:tab", "Include Manager"), QString(), i18nc("@title:tab", "Include Manager"), true);
     dialog->addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
 
-
+    // TODO port include manager to kcfg_ elements and remove signals
+    // since then everything is handled by KConfigDialog
     connect(set,               SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
-    connect(defaultProperties, SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
-
     connect(dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
     connect(dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
-    connect(dialog, SIGNAL(defaultClicked()), set, SLOT(readConfig()));
-
-    connect(dialog, SIGNAL(applyClicked()),   defaultProperties, SLOT(saveConfig()));
-    connect(dialog, SIGNAL(okClicked()),      defaultProperties, SLOT(saveConfig()));
-    connect(dialog, SIGNAL(defaultClicked()), defaultProperties, SLOT(readConfig()));
 
     connect(defaultProperties, SIGNAL(showExecuteModeDebugChanged(bool)),
             this, SLOT(showExecutionButtonDebug(bool)));
