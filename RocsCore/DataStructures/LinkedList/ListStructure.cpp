@@ -17,10 +17,10 @@
 */
 
 #include "ListStructure.h"
-#include "KDebug"
 #include "ListNode.h"
 #include "Pointer.h"
-#include <QDebug>
+#include <KLocale>
+#include <KDebug>
 #include <boost/shared_ptr.hpp>
 
 
@@ -152,17 +152,36 @@ void Rocs::ListStructure::remove(DataPtr n)
 }
 
 
-QScriptValue Rocs::ListStructure::begin()
+QScriptValue Rocs::ListStructure::head()
 {
     return m_begin->scriptValue();
 }
 
-void Rocs::ListStructure::setBegin(Data* node)
+void Rocs::ListStructure::setHead(Data *headNode)
 {
-    m_begin = boost::static_pointer_cast<ListNode>(node->getData());
+    Q_ASSERT(headNode);
+    if (!headNode) {
+        return;
+    }
+    m_begin = boost::static_pointer_cast<ListNode>(headNode->getData());
     arrangeNodes();
 }
 
+QScriptValue Rocs::ListStructure::begin()
+{
+    emit scriptError(i18n("The method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("begin()"),
+        QString("head()")));
+    return head();
+}
+
+void Rocs::ListStructure::setBegin(Data* node)
+{
+    emit scriptError(i18n("The method \"%1\" is deprecated, please use \"%2\" instead.",
+        QString("setBegin(node)"),
+        QString("setHead(node)")));
+    setHead(node);
+}
 
 void Rocs::ListStructure::remove(PointerPtr ptr)
 {
@@ -170,12 +189,16 @@ void Rocs::ListStructure::remove(PointerPtr ptr)
     arrangeNodes();
 }
 
-QScriptValue Rocs::ListStructure::createNode(const QString& name)
+QScriptValue Rocs::ListStructure::createNode()
+{
+    return createNode(0);
+}
+
+QScriptValue Rocs::ListStructure::createNode(int type)
 {
     boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(
-                                        DataStructure::addData(ListNode::create(getDataStructure(), generateUniqueIdentifier(), 0), 0)
+                                        DataStructure::addData(ListNode::create(getDataStructure(), generateUniqueIdentifier(), type), type)
                                     );
-    n->setProperty("name", name);
     n->setEngine(engine());
     arrangeNodes();
     return n->scriptValue();
@@ -183,8 +206,9 @@ QScriptValue Rocs::ListStructure::createNode(const QString& name)
 
 void Rocs::ListStructure::arrangeNodes()
 {
-    if (m_building)
+    if (m_building) {
         return;
+    }
 
     QRectF size = document()->sceneRect();
     qreal x;

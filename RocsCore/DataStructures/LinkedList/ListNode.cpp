@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2013  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -20,36 +21,24 @@
 #include <Pointer.h>
 #include "KDebug"
 
+ListNode::ListNode(DataStructurePtr parent, int uniqueIdentifier, int dataType):
+    Data(parent, uniqueIdentifier, dataType)
+{
+}
+
 DataPtr ListNode::create(DataStructurePtr parent, int uniqueIdentifier, int dataType)
 {
     return Data::create<ListNode>(parent, uniqueIdentifier, dataType);
 }
 
-
-ListNode::ListNode(DataStructurePtr parent, int uniqueIdentifier, int dataType):
-    Data(parent, uniqueIdentifier, dataType)
-{
-
-}
-
-
 ListNode::~ListNode()
 {
-
 }
 
-QScriptValue ListNode::front()
+void ListNode::pointTo(boost::shared_ptr< ListNode > target)
 {
-    if (boost::shared_ptr<ListNode> n = next()) {
-        return n->scriptValue();
-    }
-    return 0;
-}
-
-void ListNode::pointTo(boost::shared_ptr< ListNode > to)
-{
-    Q_ASSERT(to);
-    createPointer(boost::static_pointer_cast<Data>(to));
+    Q_ASSERT(target);
+    createPointer(boost::static_pointer_cast<Data>(target));
 }
 
 boost::shared_ptr<ListNode> ListNode::next() const
@@ -60,4 +49,12 @@ boost::shared_ptr<ListNode> ListNode::next() const
         }
     }
     return boost::shared_ptr<ListNode>();
+}
+
+QScriptValue ListNode::nextNodeScriptValue()
+{
+    if (boost::shared_ptr<ListNode> n = next()) {
+        return n->scriptValue();
+    }
+    return 0;
 }

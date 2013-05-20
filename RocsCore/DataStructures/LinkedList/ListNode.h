@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2013  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -28,6 +29,8 @@
 class ROCS_LISTSTRUCTURE_EXPORT ListNode : public Data
 {
     Q_OBJECT
+    Q_PROPERTY(QScriptValue next READ nextNodeScriptValue)
+
 public:
     static DataPtr create(DataStructurePtr parent, int uniqueIdentifier, int dataType);
     ListNode(DataStructurePtr parent, int uniqueIdentifier, int dataType);
@@ -38,10 +41,12 @@ public:
      * \return next node
      */
     boost::shared_ptr<ListNode> next() const;
+    QScriptValue nextNodeScriptValue();
 
-public slots:
-    QScriptValue front();
-    void pointTo(boost::shared_ptr<ListNode> to);
+    /**
+     * Set outgoing pointer to \p target.
+     */
+    Q_INVOKABLE void pointTo(boost::shared_ptr<ListNode> target);
 };
 
 #endif // LISTNODE_H
