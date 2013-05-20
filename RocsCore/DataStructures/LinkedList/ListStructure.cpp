@@ -86,14 +86,10 @@ void Rocs::ListStructure::init()
     connect(this, SIGNAL(changed()), this, SLOT(arrangeNodes()));
 
     m_animationGroup = new QParallelAnimationGroup(parent());
-    //FIXME only default data type considered
     if (!dataList(0).isEmpty()) {
         m_begin = boost::static_pointer_cast<ListNode>(dataList(0).first());
-    } else {
-        m_begin = boost::shared_ptr<ListNode>();
     }
 }
-
 
 Rocs::ListStructure::~ListStructure()
 {
@@ -118,23 +114,11 @@ DataPtr Rocs::ListStructure::createData(const QString& name, int dataType)
                                         ListNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
                                     );
     n->setProperty("name", name);
-
-    if (m_building) {
-        return addData(n, dataType);;
-    }
-
     addData(n, dataType);
-    if (m_begin) {
-        boost::shared_ptr<ListNode> tmp = m_begin;
-        while (tmp->next()) {
-            tmp = tmp->next();
-        }
-        if (tmp) {
-            tmp->pointTo(n);
-        }
-    } else {
-        m_begin = n;
-    }
+
+    // insert node as new head
+    n->pointTo(m_begin);
+    m_begin = n;
     return n;
 }
 
@@ -142,9 +126,6 @@ void Rocs::ListStructure::remove(DataPtr n)
 {
     if (m_begin == n) {
         m_begin = boost::static_pointer_cast<ListNode>(n)->next();
-    }
-    foreach(PointerPtr p, n->inPointerList()) {
-        p->remove();
     }
     DataStructure::remove(n);
 }
