@@ -53,6 +53,8 @@ target_link_libraries(rocs_ListStructure
 install(TARGETS rocs_ListStructure  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install(FILES  rocs_ListStructure.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES ListStructure.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
+install(FILES ListNode.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 
 if(KDE4_BUILD_TESTS)
     enable_testing()

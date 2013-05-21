@@ -1,0 +1,62 @@
+<object inherit="DataStructure">
+<name>Linked List Data Structure</name>
+<id>ListStructure</id>
+<componentType>DataStructure</componentType>
+<description>
+<para>
+A list objects holds the information of a data structure of type "Linked List".
+</para>
+</description>
+<syntax>
+</syntax>
+<properties>
+</properties>
+<methods>
+<method>
+    <name>head()</name>
+    <description>
+        <para>Return head node of the list.</para>
+    </description>
+    <returnType>ListNode</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>setHead(node)</name>
+    <description>
+        <para>Set the head of the list.</para>
+    </description>
+    <returnType>void</returnType>
+    <parameters>
+        <parameter>
+            <name>node</name>
+            <type>ListNode</type>
+            <info>Node that shall become head of the list.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>createNode(type)</name>
+    <description>
+        <para>Create a new node of the specified type and return the created node. If the type is not registered, no node is created.</para>
+    </description>
+    <returnType>ListNode</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of a data type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>createNode()</name>
+    <description>
+        <para>Create a new node of default type and return the created node.</para>
+    </description>
+    <returnType>ListNode</returnType>
+    <parameters>
+    </parameters>
+</method>
+</methods>
+</object>
