@@ -116,7 +116,7 @@ DataPtr Rocs::ListStructure::createData(const QString& name, int dataType)
                                         ListNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
                                     );
     n->setProperty("name", name);
-    addData(n, dataType);
+    addData(n);
 
     // insert node as new head
     n->pointTo(m_begin);
@@ -176,7 +176,7 @@ QScriptValue Rocs::ListStructure::createNode()
 QScriptValue Rocs::ListStructure::createNode(int type)
 {
     boost::shared_ptr<ListNode> n = boost::static_pointer_cast<ListNode>(
-                                        DataStructure::addData(ListNode::create(getDataStructure(), generateUniqueIdentifier(), type), type)
+                                        DataStructure::addData(ListNode::create(getDataStructure(), generateUniqueIdentifier(), type))
                                     );
     n->setEngine(engine());
     return n->scriptValue();

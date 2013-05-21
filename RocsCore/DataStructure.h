@@ -145,7 +145,7 @@ public Q_SLOTS:
      * \deprecated
      * This method only calls \ref addData for each element
      */
-    virtual DataList addDataList(DataList dataList, int dataType);
+    virtual DataList addDataList(DataList dataList);
 
     /**
      * Creates new pointer from data element "from" to data element "to" of
@@ -253,7 +253,7 @@ Q_SIGNALS:
     void scriptError(const QString &message);
 
 protected:
-    DataPtr addData(DataPtr data, int dataType);
+    DataPtr addData(DataPtr data);
     PointerPtr addPointer(PointerPtr pointer, int pointerType);
     int generateUniqueIdentifier();
 

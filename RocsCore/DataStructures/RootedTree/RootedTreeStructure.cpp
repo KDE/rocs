@@ -202,7 +202,7 @@ DataPtr RootedTreeStructure::createData(const QString& name, int dataType)
     boost::shared_ptr<RootedTreeNode> n = boost::static_pointer_cast<RootedTreeNode>(
         RootedTreeNode::create(getDataStructure(), generateUniqueIdentifier(), dataType) );
     n->setProperty("name", name);
-    addData(n, dataType);
+    addData(n);
     return n;
 }
 

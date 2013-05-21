@@ -448,7 +448,7 @@ DataPtr Rocs::GraphStructure::createData(const QString& name, int dataType)
                                          GraphNode::create(getDataStructure(), generateUniqueIdentifier(), dataType)
                                      );
     n->setProperty("name", name);
-    return addData(n, dataType);
+    return addData(n);
 }
 
 QMap<QString, QString> Rocs::GraphStructure::pluginProperties() const

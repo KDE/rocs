@@ -299,20 +299,19 @@ DataPtr DataStructure::createData(const QString& name, int dataType)
     if (d->_readOnly) {
         return DataPtr();
     }
-
     DataPtr n = Data::create(this->getDataStructure(), generateUniqueIdentifier(), dataType);
     n->setProperty("name", name);
 
-    return addData(n, dataType);
+    return addData(n);
 }
 
-DataPtr DataStructure::addData(DataPtr data, int dataType)
+DataPtr DataStructure::addData(DataPtr data)
 {
-    Q_ASSERT(dataType >= 0 && dataType <= d->_dataTypeLists.size());
+    Q_ASSERT(data->dataType() >= 0 && data->dataType() <= d->_dataTypeLists.size());
 
     // set data type properties
-    d->_dataTypeLists[dataType].append(data);
-    DataTypePtr type = document()->dataType(dataType);
+    d->_dataTypeLists[data->dataType()].append(data);
+    DataTypePtr type = document()->dataType(data->dataType());
     foreach(const QString &property, type->properties()) {
         if (!data->property(property.toLatin1()).isValid()
             || data->property(property.toLatin1()).isNull())
@@ -343,12 +342,10 @@ DataPtr DataStructure::createData(const QString& name, const QPointF& pos, int d
     return DataPtr();
 }
 
-DataList DataStructure::addDataList(DataList dataList, int dataType)
+DataList DataStructure::addDataList(DataList dataList)
 {
-    Q_ASSERT(dataType >= 0 && dataType < d->_dataTypeLists.size());
-
     foreach(DataPtr n, dataList) {
-        addData(n, dataType);
+        addData(n);
     }
 
     return dataList;
