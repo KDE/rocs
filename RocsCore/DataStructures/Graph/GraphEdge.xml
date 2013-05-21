@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <object inherit="Pointer">
 <name>Graph Edge</name>
 <id>GraphEdge</id>

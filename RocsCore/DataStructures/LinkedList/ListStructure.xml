@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <object inherit="DataStructure">
 <name>Linked List Data Structure</name>
 <id>ListStructure</id>

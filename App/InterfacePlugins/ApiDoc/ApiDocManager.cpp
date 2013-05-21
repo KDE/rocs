@@ -191,7 +191,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         !descriptionNode.isNull();
         descriptionNode = descriptionNode.nextSiblingElement())
     {
-        paragraphs.append(descriptionNode.text());
+        paragraphs.append(i18n(descriptionNode.text().toUtf8()));
     }
     objectApi->setDescription(paragraphs);
 
