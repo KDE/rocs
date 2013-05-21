@@ -332,6 +332,7 @@ void Document::setActiveDataStructure(DataStructurePtr g)
 
 DataStructurePtr Document::addDataStructure(const QString& name)
 {
+kDebug() << "add structure";
     DataStructurePtr dataStructure = DataStructureBackendManager::self().createDataStructure(
             this, d->_backend->internalName());
     dataStructure->setName(name);
@@ -395,16 +396,24 @@ void Document::setFileUrl(const KUrl& fileUrl)
 void Document::remove(DataStructurePtr dataStructure)
 {
     d->_dataStructures.removeOne(dataStructure);
-    if (d->_dataStructures.count() == 0) {
-        addDataStructure();
+    if (d->_dataStructures.count() != 0) {
+        setActiveDataStructure(d->_dataStructures.count() - 1);
+    } else {
+        d->_activeDataStructure.reset();
     }
-    setActiveDataStructure(d->_dataStructures.count()-1);
     d->_modified = true;
     emit dataStructureListChanged();
 }
 
 void Document::clear()
 {
+    // remove data structures
+    d->_activeDataStructure.reset();
+    foreach (const DataStructurePtr &dataStructure, d->_dataStructures) {
+        dataStructure->remove();
+    }
+    d->_dataStructures.clear();
+
     // remove types
     for (QMap<int,DataTypePtr>::const_iterator iter= d->_dataTypes.constBegin(); iter != d->_dataTypes.constEnd(); ++iter) {
         emit(dataTypeRemoved(iter.key()));
@@ -417,13 +426,6 @@ void Document::clear()
         d->_pointerTypes[iter.key()]->remove();
     }
     d->_pointerTypes.clear();
-
-    // remove data structures
-    foreach (const DataStructurePtr &dataStructure, d->_dataStructures) {
-        dataStructure->remove();
-    }
-    d->_activeDataStructure.reset();
-    d->_dataStructures.clear();
 }
 
 DataStructurePtr Document::activeDataStructure() const

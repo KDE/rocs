@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2011  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2013  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -35,7 +36,6 @@ DataStructurePtr Rocs::ListStructure::create(DataStructurePtr other, Document *p
     ds->importStructure(other);
     return ds;
 }
-
 
 Rocs::ListStructure::ListStructure(Document* parent)
     : DataStructure(parent)
@@ -93,6 +93,8 @@ void Rocs::ListStructure::init()
 
 Rocs::ListStructure::~ListStructure()
 {
+    m_building = true;
+    m_animationGroup->stop();
 // FIXME this is a memory leak, but fix this later
 // since delete later guides to crash on deletion
 //     m_animationGroup->deleteLater();
@@ -141,6 +143,7 @@ void Rocs::ListStructure::setHead(Data *headNode)
     if (!headNode) {
         return;
     }
+    //FIXME: we need resorting!
     m_begin = boost::static_pointer_cast<ListNode>(headNode->getData());
 }
 
