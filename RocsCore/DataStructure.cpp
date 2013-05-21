@@ -366,13 +366,13 @@ DataList DataStructure::addDataList(QList< QPair<QString, QPointF> > dataList, i
     return dataCreateList;
 }
 
-PointerPtr DataStructure::addPointer(PointerPtr pointer, int pointerType)
+PointerPtr DataStructure::addPointer(PointerPtr pointer)
 {
-    Q_ASSERT(d->_pointerTypeLists.contains(pointerType));
+    Q_ASSERT(d->_pointerTypeLists.contains(pointer->pointerType()));
 
     // set pointer type properties
-    d->_pointerTypeLists[pointerType].append(pointer);
-    PointerTypePtr type = document()->pointerType(pointerType);
+    d->_pointerTypeLists[pointer->pointerType()].append(pointer);
+    PointerTypePtr type = document()->pointerType(pointer->pointerType());
     foreach(const QString &property, type->properties()) {
         if (!pointer->property(property.toLatin1()).isValid()
             || pointer->property(property.toLatin1()).isNull())
@@ -402,7 +402,7 @@ PointerPtr DataStructure::createPointer(DataPtr from, DataPtr to, int pointerTyp
         return PointerPtr();
     }
     PointerPtr pointer = Pointer::create(getDataStructure(), from, to, pointerType);
-    return addPointer(pointer, pointerType);
+    return addPointer(pointer);
 }
 
 DataPtr DataStructure::getData(int uniqueIdentifier)

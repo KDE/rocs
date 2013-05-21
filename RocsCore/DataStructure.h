@@ -254,7 +254,7 @@ Q_SIGNALS:
 
 protected:
     DataPtr addData(DataPtr data);
-    PointerPtr addPointer(PointerPtr pointer, int pointerType);
+    PointerPtr addPointer(PointerPtr pointer);
     int generateUniqueIdentifier();
 
     /**
