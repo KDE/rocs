@@ -740,7 +740,6 @@ void MainWindow::saveScripts()
     _codeEditor->saveAllScripts();
 }
 
-
 void MainWindow::newScript()
 {
     QString file = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script"));
@@ -752,8 +751,6 @@ void MainWindow::newScript()
         file.append(".js");
     _codeEditor->newScript(KUrl::fromLocalFile(file));
 }
-
-
 
 void MainWindow::saveGraph(Document* document)
 {
@@ -768,7 +765,6 @@ void MainWindow::saveGraph(Document* document)
     }
 }
 
-
 void MainWindow::saveAllGraphs()
 {
     foreach(Document * document, DocumentManager::self().documentList()) {
@@ -781,7 +777,6 @@ void MainWindow::saveAllGraphs()
         }
     }
 }
-
 
 void MainWindow::saveGraphAs()
 {
@@ -802,7 +797,6 @@ void MainWindow::saveGraphAs(Document* document)
     _currentProject->saveGraphFileAs(document, file);
 }
 
-
 void MainWindow::newGraph()
 {
     QString file = KInputDialog::getText(i18n("Graph name"), i18n("Enter the name of the Graph"));
@@ -816,7 +810,6 @@ void MainWindow::newGraph()
     DocumentManager::self().openDocument(KUrl::fromLocalFile(file));
     _currentProject->addGraphFile(file);
 }
-
 
 int MainWindow::saveIfChanged()
 {
@@ -868,7 +861,6 @@ int MainWindow::saveIfChanged()
     return KMessageBox::No;
 }
 
-
 void MainWindow::importGraphFile()
 {
     ImporterExporterManager importer(this);
@@ -884,7 +876,6 @@ void MainWindow::importGraphFile()
     }
 }
 
-
 void MainWindow::exportGraphFile()
 {
     ImporterExporterManager exp(this);
@@ -898,13 +889,11 @@ void MainWindow::showPossibleIncludes()
     dialog->exec();
 }
 
-
 void MainWindow::showLoadedPlugins()
 {
     QPointer<LoadedPluginsDialog> dialog = new LoadedPluginsDialog(this);
     dialog->exec();
 }
-
 
 void MainWindow::showCodeEditorConfig()
 {
@@ -914,7 +903,6 @@ void MainWindow::showCodeEditorConfig()
         editor->writeConfig();
     }
 }
-
 
 void MainWindow::runToolPlugin()
 {
@@ -928,14 +916,10 @@ void MainWindow::runToolPlugin()
     }
 }
 
-
-#ifdef USING_QTSCRIPT
-
 void MainWindow::executeScriptFull(const QString& text)
 {
     executeScript(MainWindow::Execute, text);
 }
-
 
 void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString& text)
 {
@@ -989,7 +973,6 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     engine->disconnect(_outputWidget->consoleInterface());
 }
 
-
 void MainWindow::executeScriptOneStep(const QString& text)
 {
     Q_ASSERT(_outputWidget);
@@ -1033,10 +1016,6 @@ void MainWindow::debugScript()
         executeScript(DebugOnlyInCaseOfError);
     }
 }
-
-
-#endif
-
 
 void MainWindow::enableStopAction()
 {
