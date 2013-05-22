@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2009-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2013  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -93,11 +93,10 @@ private: // Methods
                       const char* slot, QObject *parent);
 
     /**
-     * Create an empty project configuration with one graph document and one code file.
-     * All files are temporary until saved.
-     * \return project pointer
+     * Create an empty project configuration with one graph document and one code file and set as
+     * current project. All files are temporary until saved.
      */
-    Project* createNewProject();
+    void createNewProject();
 
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
@@ -144,7 +143,6 @@ private slots:
      */
     void addEmptyGraphDocument();
 
-    void newProject(); //TODO maybe not needed anymore, check after finish of new project assistant
     void newProjectAssistant();
     void saveProject(bool saveAs = false);
     void openProject(const KUrl& fileName = KUrl());

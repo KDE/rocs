@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2011-2013  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -128,7 +128,7 @@ MainWindow::MainWindow()
             this, SLOT(releaseDocument(Document*)));
 
     // TODO: use welcome widget instead of creating default empty project
-    _currentProject = createNewProject();
+    createNewProject();
     updateCaption();
 
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
@@ -220,18 +220,6 @@ void MainWindow::setupToolbars()
         bar->setOrientation(Qt::Vertical);
         addToolBar(Qt::LeftToolBarArea, bar);
     }
-}
-
-Project* MainWindow::createNewProject()
-{
-    //TODO duplicated functionality with newProject(): merge them for 4.11
-    Project *newProject = new Project();
-    // create new document and add this to project new
-    newProject->addGraphFileNew(DocumentManager::self().newDocument());
-    newProject->addCodeFileNew(_codeEditor->newScript());
-    _journalWidget->openJournal(newProject);
-
-    return newProject;
 }
 
 void MainWindow::downloadNewExamples()
@@ -584,7 +572,6 @@ void MainWindow::importScript()
     Settings::setLastOpenedDirectory(startDirectory.toLocalFile());
 }
 
-
 void MainWindow::loadDocument(const QString& name)
 {
     if (!name.isEmpty() && !name.endsWith(QLatin1String(".graph"))) {
@@ -595,8 +582,7 @@ void MainWindow::loadDocument(const QString& name)
     DocumentManager::self().openDocument(KUrl::fromLocalFile(name));
 }
 
-
-void MainWindow::newProject()
+void MainWindow::createNewProject()
 {
     if (saveIfChanged() == KMessageBox::Cancel) {
         return;
@@ -613,12 +599,10 @@ void MainWindow::newProject()
     updateCaption();
 }
 
-
 void MainWindow::newProjectAssistant()
 {
     //TODO needs to be implemented
 }
-
 
 void MainWindow::saveProject(bool saveAs)
 {
@@ -661,7 +645,6 @@ void MainWindow::saveProject(bool saveAs)
     updateCaption();
     Settings::setLastOpenedDirectory(_currentProject->projectFile().path());
 }
-
 
 void MainWindow::saveProjectAs()
 {
