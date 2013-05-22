@@ -29,6 +29,7 @@
 #include <Document.h>
 #include <DataStructureBackendManager.h>
 #include <DocumentManager.h>
+#include <KDebug>
 
 using namespace Rocs;
 
@@ -51,7 +52,7 @@ void TestLinkedListStructure::listModificationTest()
 
     // add node, by this automatically add next pointer of last node in list
     dataList.append(boost::static_pointer_cast<ListNode>(ds->createData(QString(2),0)));
-    QVERIFY2(dataList.at(0)->next()->identifier()==dataList.at(1)->identifier(), "ERROR: wrong next node");
+    QVERIFY2(dataList.at(1)->next()->identifier() == dataList.at(0)->identifier(), "ERROR: wrong next node");
 
     // remove all data elements
     foreach(DataPtr data, dataList) {
