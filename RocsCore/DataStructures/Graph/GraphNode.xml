@@ -57,7 +57,7 @@ A node is the data element of a graph.
 <method>
     <name>inEdges(type)</name>
     <description>
-        <para>Return a list of all incoming of this node of a specified type.</para>
+        <para>Return a list of all incoming edges of this node of a specified type.</para>
     </description>
     <returnType>array</returnType>
     <parameters>
