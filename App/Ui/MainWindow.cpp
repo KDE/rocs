@@ -108,6 +108,7 @@
 
 MainWindow::MainWindow()
     : KXmlGuiWindow()
+    , _currentProject(0)
     , _scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
@@ -813,6 +814,9 @@ void MainWindow::newGraph()
 
 int MainWindow::saveIfChanged()
 {
+    if (!_currentProject) {
+        return KMessageBox::No;
+    }
 
     if (_currentProject->isModified() || _journalWidget->isModified()) {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
