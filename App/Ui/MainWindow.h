@@ -92,12 +92,6 @@ private: // Methods
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                       const char* slot, QObject *parent);
 
-    /**
-     * Create an empty project configuration with one graph document and one code file and set as
-     * current project. All files are temporary until saved.
-     */
-    void createNewProject();
-
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
 
@@ -115,6 +109,12 @@ private slots:
     void showLoadedPlugins();
 
     void showCodeEditorConfig();
+
+    /**
+     * Create an empty project configuration with one graph document and one code file and set as
+     * current project. All files are temporary until saved.
+     */
+    void createNewProject();
 
     /**
      * execute the given script and print results
