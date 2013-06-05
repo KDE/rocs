@@ -37,7 +37,10 @@
 class DataStructurePrivate
 {
 public:
-    DataStructurePrivate() {}
+    DataStructurePrivate()
+        : _engine(0)
+    {
+    }
 
     /**
      * self pointer to DataStructure
