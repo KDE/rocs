@@ -1,6 +1,8 @@
 Copyright Notice for Test Graphs
 ================================
 
+Copyright (c) 2011 AT&T Intellectual Property
+
 This folder contains original test data from the Graphviz project as published at
 http://www.graphviz.org along with version 2.28.0. The files are published under the EPL 1.0,
 see COPYING.TESTDATA for the full license.
