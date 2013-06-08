@@ -5,8 +5,7 @@
 <componentType>Data</componentType>
 <description>
 <para>
-An abstract data element is a unit of information that is belongs an abstract data structure and
-possibly is connected to other data elements by pointers.
+An abstract data element is a unit of information that belongs to an abstract data structure and possibly is connected to other data elements by pointers.
 </para>
 </description>
 <syntax>
