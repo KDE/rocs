@@ -5,7 +5,7 @@
 <componentType>Pointer</componentType>
 <description>
 <para>
-An Edge is the connection of two GraphNodes. Edges can be directed or undirected, depending on there type.
+An Edge is the connection of two GraphNodes. Edges can be directed or undirected, depending on their type.
 </para>
 </description>
 <syntax>
