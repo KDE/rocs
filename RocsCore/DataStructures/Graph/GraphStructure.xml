@@ -120,5 +120,19 @@ A graph objects holds the information of a data structure of type "Graph".
         </parameter>
     </parameters>
 </method>
+<method>
+    <name>distances(from)</name>
+    <description>
+        <para>Returns an array of shortest path lengths from this node to every other node in the graph.</para>
+    </description>
+    <returnType>Array</returnType>
+    <parameters>
+        <parameter>
+            <name>from</name>
+            <type>GraphNode</type>
+            <info>Source node for distance computations.</info>
+        </parameter>
+    </parameters>
+</method>
 </methods>
 </object>

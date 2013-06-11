@@ -31,6 +31,8 @@
 #include <DataStructureBackendManager.h>
 #include <DocumentManager.h>
 
+#include <cmath>
+
 TestGraphStructureAlgorithms::TestGraphStructureAlgorithms()
 {
     QVERIFY(DataStructureBackendManager::self().backends().count() > 0);
@@ -47,6 +49,35 @@ void TestGraphStructureAlgorithms::cleanupTestCase()
 {
     qDebug() << "Remove previous test case.";
     DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
+}
+
+void TestGraphStructureAlgorithms::testDistances()
+{
+    Document *document = DocumentManager::self().activeDocument();
+    DataList dataList;
+
+    document->pointerType(0)->setDirection(PointerType::Bidirectional);
+
+    DataStructurePtr ds = document->addDataStructure("Dijkstra");
+    boost::shared_ptr<Rocs::GraphStructure> graph = boost::static_pointer_cast<Rocs::GraphStructure>(ds);
+
+    // need to set engine because GraphStructure::distances calls QScriptEngine::newArray
+    ds->setEngine(new QScriptEngine(this));
+
+    // create 3 nodes connected as follows:
+    // x-x x
+    int nodes = 3;
+    dataList.clear();
+    for (int i = 0; i < nodes; ++i) {
+        dataList.append(graph->createData(QString(i), 0));
+    }
+    dataList[0]->createPointer(dataList[1]);
+
+    // test distances from 0 to all others
+    QScriptValue distances = graph->distances(dataList[0].get());
+    QVERIFY2(distances.property(0).equals(QScriptValue(0)), "ERROR: distance is wrong");
+    QVERIFY2(distances.property(1).equals(QScriptValue(1)), "ERROR: distance is wrong");
+    QVERIFY2(distances.property(2).equals(QScriptValue(INFINITY)), "ERROR: distance is wrong");
 }
 
 void TestGraphStructureAlgorithms::testDijkstraBidirectional()

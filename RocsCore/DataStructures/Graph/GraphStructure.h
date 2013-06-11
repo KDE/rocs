@@ -254,8 +254,10 @@ public slots:
     /**
      * Computes the Dijkstra's shortest path algorithm to compute
      * all shortest path distances from \p from. If edge has value 0, the edge value
-     * is set to 1. Note: this shortest path algorithm works only for graphs with all
-     * edges values non-negative. For undirected graphs reverse edges are add automatically.
+     * is set to 1. Infinity is returned when there is no path
+     * between \p from and another node in the graph. Note: this shortest path
+     * algorithm works only for graphs with all edges values non-negative. For
+     * undirected graphs reverse edges are added automatically.
      * The algorithm has time complexity O(V log V + E).
      *
      * \param from the node from which the computation starts

@@ -35,6 +35,7 @@ public:
 private slots:
     void init();
     void cleanupTestCase();
+    void testDistances();
     void testDijkstraBidirectional();
     void testDijkstraUnidirectional();
 

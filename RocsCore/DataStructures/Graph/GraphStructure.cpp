@@ -39,6 +39,8 @@
 #include <KLocale>
 #include <QString>
 
+#include <cmath>
+
 DataStructurePtr Rocs::GraphStructure::create(Document *parent)
 {
     return DataStructure::create<GraphStructure>(parent);
@@ -268,13 +270,19 @@ QScriptValue Rocs::GraphStructure::distances(Data* fromRaw)
     QScriptValue distances = engine()->newArray();
     foreach (DataPtr target, dataListAll()) {
         qreal length = 0;
-        foreach (PointerPtr edge, shortestPaths[target]) {
-            if (!edge->property("value").toString().isEmpty()) {
-                length += edge->property("value").toDouble();
-            } else {
-                length += 1;
+
+        if (shortestPaths[target].isEmpty() && from != target) {
+            length = INFINITY;
+        } else {
+            foreach (PointerPtr edge, shortestPaths[target]) {
+                if (!edge->property("value").toString().isEmpty()) {
+                    length += edge->property("value").toDouble();
+                } else {
+                    length += 1;
+                }
             }
         }
+
         distances.property("push").call(
             distances,
             QScriptValueList() << length
