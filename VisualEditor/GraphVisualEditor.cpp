@@ -76,6 +76,7 @@ public:
     QToolButton *_documentPropertiesButton;
     KComboBox *_dataStructureSelectorCombo;
     QToolButton *_dataStructurePropertiesButton;
+    KPushButton *_removeDataStructureButton;
 
     QSlider *_zoomSlider;
     Document *_document;
@@ -96,7 +97,6 @@ GraphVisualEditor::~GraphVisualEditor()
 {
     // d-pointer is scoped pointer and need not to be deleted
 }
-
 
 GraphVisualEditor * GraphVisualEditor::_self = 0;
 
@@ -185,11 +185,11 @@ QWidget * GraphVisualEditor::sceneToolbar()
     addDataStructureButton->setMaximumWidth(24);
     sceneControls->layout()->addWidget(addDataStructureButton);
     // create remove data structure button
-    KPushButton* removeDataStructureButton = new KPushButton(this);
-    removeDataStructureButton->setIcon(KIcon("rocsdelete"));
-    removeDataStructureButton->setToolTip(i18nc("@info:tooltip", "Remove selected data structure."));
-    removeDataStructureButton->setMaximumWidth(24);
-    sceneControls->layout()->addWidget(removeDataStructureButton);
+    d->_removeDataStructureButton = new KPushButton(this);
+    d->_removeDataStructureButton->setIcon(KIcon("rocsdelete"));
+    d->_removeDataStructureButton->setToolTip(i18nc("@info:tooltip", "Remove selected data structure."));
+    d->_removeDataStructureButton->setMaximumWidth(24);
+    sceneControls->layout()->addWidget(d->_removeDataStructureButton);
 
     QSpacerItem *spacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
     sceneControls->layout()->addItem(spacerItem);
@@ -200,7 +200,7 @@ QWidget * GraphVisualEditor::sceneToolbar()
             &DocumentManager::self(), SLOT(changeDocument(int)));
     connect(addDataStructureButton, SIGNAL(clicked()),
             this, SLOT(addDataStructure()));
-    connect(removeDataStructureButton, SIGNAL(clicked()),
+    connect(d->_removeDataStructureButton, SIGNAL(clicked()),
             this, SLOT(removeDataStructure()));
 
     // add connections for zoom slider
@@ -320,11 +320,15 @@ void GraphVisualEditor::updateDataStructureList()
 void GraphVisualEditor::addDataStructure()
 {
     DocumentManager::self().activeDocument()->addDataStructure();
+    d->_removeDataStructureButton->setEnabled(true);
 }
 
 void GraphVisualEditor::removeDataStructure()
 {
     DocumentManager::self().activeDocument()->activeDataStructure()->remove();
+    if (DocumentManager::self().activeDocument()->dataStructures().isEmpty()) {
+        d->_removeDataStructureButton->setDisabled(true);
+    }
 }
 
 QList<DataItem*> GraphVisualEditor::selectedNodes() const
