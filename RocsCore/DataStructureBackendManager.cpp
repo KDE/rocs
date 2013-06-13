@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
-    Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012-2013  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -23,6 +23,7 @@
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
 #include <KDebug>
+#include <KStandardDirs>
 
 #include <QHash>
 #include "DataStructure.h"
@@ -130,38 +131,78 @@ public:
     {
         KServiceTypeTrader *trader = KServiceTypeTrader::self();
         QString serviceType = QString::fromLatin1("Rocs/DataStructurePlugin");
-        KService::List services = trader->query(serviceType);
-        _pluginInfo = KPluginInfo::fromServices(services);
 
-        // load backends
-        for (KPluginList::iterator iter = _pluginInfo.begin(); iter != _pluginInfo.end(); ++iter) {
-            if (!iter->isValid()) {
-                kError() << "Error loading data structure backend: " << iter->name();
+        // standard read of backend services
+        KService::List offers = trader->query(serviceType);
+        KPluginInfo::List offerInfos = KPluginInfo::fromServices(offers);
+
+        // fallback to load default data structures "by hand"
+        // this is the case when no kbuildsycoa4 run is performed and hence no trader cache was generated
+        QStringList defaultBackends;
+        defaultBackends << "rocs_GraphStructure.desktop"
+            << "rocs_ListStructure.desktop"
+            << "rocs_RootedTreeStructure.desktop";
+        foreach (QString pluginDesktopFile, defaultBackends) {
+            QString path = KGlobal::dirs()->findResource("services", pluginDesktopFile);
+            if (path.isEmpty()) {
+                kWarning() << "Could not find default plugin desktop file: " << pluginDesktopFile;
                 continue;
             }
 
+            // check if service is loaded from trader
+            KService::Ptr service = KSharedPtr<KService>(new KService(path));
+            KPluginInfo *info = new KPluginInfo(service);
+            bool found = false;
+            foreach (KPluginInfo offerInfo, offerInfos) {
+                if (info->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString()
+                    == offerInfo.property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString())
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                kWarning() << "Backend manager falls back to manually load structure"
+                           << info->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString()
+                           << "The structure was not found in the service cache.";
+                offers.append(service);
+            }
+            delete info;
+        }
+
+        // set up found backends
+        _pluginInfo = KPluginInfo::fromServices(offers);
+        for(KService::List::const_iterator iter = offers.begin(); iter < offers.end(); ++iter) {
+            kDebug() << "set up backend " << (*iter)->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
             QString error;
-            DataStructureBackendInterface *plugin =
-                KServiceTypeTrader::createInstanceFromQuery<DataStructureBackendInterface>(
-                                        QString::fromLatin1("Rocs/DataStructurePlugin"),
-                                        QString::fromLatin1("[Name]=='%1'").arg(iter->name()),
-                                        _parent,
-                                        QVariantList(),
-                                        &error);
+            KService::Ptr service = *iter;
+
+            KPluginFactory *factory = KPluginLoader(service->library()).factory();
+
+            if (!factory) {
+                kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
+                continue;
+            }
+
+            KPluginInfo *info = new KPluginInfo(service);
+            DataStructureBackendInterface *plugin = factory->create<DataStructureBackendInterface>(_parent);
 
             if (plugin) {
-                QString identifier = iter->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
+                KPluginInfo *info = new KPluginInfo(service);
+                QString identifier = info->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
                 if (identifier.isEmpty()) {
-                    identifier = iter->name();
+                    identifier = info->name();
                     kWarning() << "No data structure backend identifier exists for plugin " << identifier << ", using its name.";
                 }
                 _pluginList.insert(identifier, plugin);
-                iter->setPluginEnabled(true);
+                info->setPluginEnabled(true);
                 continue;
+            } else {
+                kError() << "Error while loading data structure backend \"" << info->name();
             }
-            kError() << "Error while loading data structure backend \"" << iter->name() << "\": " << error;
         }
 
+        // at least one data structure plugin is required
         if (_pluginList.isEmpty()) {
             kError() << "No backend found, cannot set active data structure backend.";
             return;
