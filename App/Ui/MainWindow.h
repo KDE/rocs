@@ -63,7 +63,7 @@ class MainWindow : public KXmlGuiWindow
 
 
 public:
-    /*! defalt constructor */
+    /*! default constructor */
     MainWindow();
     ~MainWindow();
 
@@ -94,6 +94,15 @@ private: // Methods
 
     /** setup menu with data structures plugins. */
     void setupDSPluginsAction();
+
+    /**
+     * Returns an absolute and unique filename: /path-to-current-project/basePrefix.suffix
+     * A number will follow basePrefix in the filename if there were other files
+     * with that same name in the current project's directory.
+     *
+     * \return unique file path
+     */
+    QString uniqueFilename(const QString &basePrefix, const QString &suffix);
 
 protected:
     void closeEvent(QCloseEvent *event);

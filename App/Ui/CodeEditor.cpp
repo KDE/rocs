@@ -57,38 +57,36 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
 
 void CodeEditor::closeAllScripts()
 {
-    // index list updates automatically (is QList)
-    for (int i = _scriptDocs.size(); i >= 0; i--) {
+    while (_scriptDocs.size() != 0) {
         closeDocument(0);
     }
+
 }
 
 
 void CodeEditor::closeDocument(int index)
 {
+    // change tab to next document, if present
     if (index == 0) {
-        kDebug() << "Deleting the first";
         if (_scriptDocs.size() >= 2) {
             _activeDocument = _scriptDocs.at(1);
             _activeView = _docViews.at(1);
             _docArea->setCurrentIndex(1);
         }
-        _scriptDocs.removeAt(0);
-        _docArea->removeWidget(_docArea->widget(0));
-        _docViews.removeAt(0);
-        _tabDocs->removeTab(0);
     } else {
-        kDebug() << "Deleting in the middle / end ";
         _activeDocument = _scriptDocs.at(index - 1);
         _activeView = _docViews.at(index - 1);
         _docArea->setCurrentIndex(index - 1);
         _tabDocs->setCurrentIndex(index - 1);
-
-        _scriptDocs.removeAt(index);
-        _docArea->removeWidget(_docArea->widget(index));
-        _docViews.removeAt(index);
-        _tabDocs->removeTab(index);
     }
+
+    // remove document
+    _scriptDocs.at(index)->deleteLater();
+    _scriptDocs.removeAt(index);
+
+    _docArea->removeWidget(_docArea->widget(index));
+    _docViews.removeAt(index);
+    _tabDocs->removeTab(index);
 }
 
 

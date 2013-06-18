@@ -35,6 +35,7 @@
 #include <QToolButton>
 #include <QPointer>
 #include <QGridLayout>
+#include <QFile>
 
 // KDE Related Includes
 #include <KActionCollection>
@@ -395,7 +396,7 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
 {
     KAction* action = new KAction(KIcon(iconName), actionTitle, parent);
     action->setShortcut(shortcut);
-    action->setShortcutContext(Qt::WidgetShortcut);
+    action->setShortcutContext(Qt::ApplicationShortcut);
     actionCollection()->addAction(actionName, action);
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
@@ -404,7 +405,6 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
                               const char* slot, QObject *parent)
 {
     KAction* action = new KAction(KIcon(iconName), actionTitle, parent);
-    action->setShortcutContext(Qt::WidgetShortcut);
     actionCollection()->addAction(actionName, action);
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
@@ -729,28 +729,58 @@ void MainWindow::updateCaption()
     setCaption(caption);
 }
 
+QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suffix) {
+    QFile targetFile;
+    QString basePath = _currentProject->projectDirectory();
+    QString fullSuffix = "." + suffix;
+    QString fullPrefix = basePrefix;
+
+    if (fullPrefix.isNull()) {
+        fullPrefix = _currentProject->projectFile().fileName().remove(QRegExp(".rocsz*$"));
+    } else if (fullPrefix.endsWith(fullSuffix)) {
+        fullPrefix.remove(QRegExp(fullSuffix + "$"));
+    }
+
+    targetFile.setFileName(basePath + fullPrefix + fullSuffix);
+    for(int i = 1; targetFile.exists(); i++) {
+        targetFile.setFileName(basePath + fullPrefix + QString::number(i) + fullSuffix);
+    }
+
+    return targetFile.fileName();
+}
+
 void MainWindow::saveScripts()
 {
-    QString fileName = _currentProject->projectFile().fileName().remove(QRegExp(".rocsz*$"));
+    foreach (KTextEditor::Document * textDocument, _currentProject->codeFilesNew()) {
+        QString basePrefix = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script"));
+        QString fileName = uniqueFilename(basePrefix, "js");
 
-    foreach(KTextEditor::Document * textDocument, _currentProject->codeFilesNew()) {
-        QString file = _currentProject->projectDirectory() + fileName + ".js";
-        textDocument->saveAs(KUrl::fromLocalFile(file));
-        _currentProject->saveCodeFileNew(textDocument, file);
+        textDocument->saveAs(KUrl::fromLocalFile(fileName));
+        _currentProject->saveCodeFileNew(textDocument, fileName);
     }
+
     _codeEditor->saveAllScripts();
 }
 
 void MainWindow::newScript()
 {
-    QString file = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script"));
-    if (file.isEmpty()) {
-        kDebug() << "Filename is empty and no script file was created.";
-        return;
+    if (!_currentProject->isTemporary()) {
+        QString basePrefix = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script"));
+        if (basePrefix.isNull()) {
+            kDebug() << "Filename is empty and no script file was created.";
+        } else {
+            QString fileName = uniqueFilename(basePrefix, "js");
+
+            KTextEditor::Document *document = _codeEditor->newScript(KUrl::fromLocalFile(fileName));
+            _currentProject->addCodeFileNew(document);
+            _currentProject->saveCodeFileNew(document, KUrl::fromLocalFile(fileName));
+        }
+    } else {
+        saveProject(true);
+        if (!_currentProject->isTemporary()) {
+            newScript();
+        }
     }
-    if (!file.endsWith(QLatin1String(".js")))
-        file.append(".js");
-    _codeEditor->newScript(KUrl::fromLocalFile(file));
 }
 
 void MainWindow::saveGraph(Document* document)
