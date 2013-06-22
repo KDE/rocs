@@ -85,7 +85,7 @@ private: // Methods
      */
     QWidget* setupSidePanel();
     QWidget* setupScriptPanel(); // setup the panel with the editors and stuff
-    int saveIfChanged();
+
     void finishLoadingUi();
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                       const QKeySequence & shortcut , const char* slot, QObject *parent);
@@ -105,6 +105,10 @@ private: // Methods
     QString uniqueFilename(const QString &basePrefix, const QString &suffix);
 
 protected:
+    /**
+     * Reimplemented method KMainWindow::queryClose().
+     */
+    virtual bool queryClose();
     void closeEvent(QCloseEvent *event);
 
 private slots:
@@ -211,6 +215,7 @@ private slots:
 
     void saveProjectAs();
     void setupToolsPluginsAction();
+    void quit();
 
 public slots:
     /**

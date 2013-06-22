@@ -155,12 +155,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    switch (saveIfChanged()) {
-    case KMessageBox::Cancel :
-        event->ignore();
-        return;
-    default:
+    if (queryClose() == true) {
         event->accept();
+        return;
+    } else {
+        event->ignore();
         return;
     }
 }
@@ -356,7 +355,7 @@ QWidget* MainWindow::setupSidePanel()
 void MainWindow::setupActions()
 {
     kDebug() << "create and connect actions";
-    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
 
     // setup graph visual editor actions and add them to mainwindow action collection
@@ -387,8 +386,6 @@ void MainWindow::setupActions()
     createAction("document-export", i18nc("@action:inmenu", "Export Script as"),      "export-script-as",      SLOT(saveActiveScriptAs()), _codeEditor);
     createAction("",  i18nc("@action:inmenu", "Loaded Plugins"),      "loaded-plugins",      SLOT(showLoadedPlugins()), this);
     createAction("",  i18nc("@action:inmenu", "Configure Code Editor..."),      "config-code-editor",      SLOT(showCodeEditorConfig()), this);
-
-    KStandardAction::quit(kapp, SLOT(quit()),  actionCollection());
 }
 
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
@@ -585,7 +582,7 @@ void MainWindow::loadDocument(const QString& name)
 
 void MainWindow::createNewProject()
 {
-    if (saveIfChanged() == KMessageBox::Cancel) {
+    if (!queryClose()) {
         return;
     }
 
@@ -659,7 +656,7 @@ void MainWindow::saveProjectAs()
 
 void MainWindow::openProject(const KUrl& fileName)
 {
-    if (saveIfChanged() == KMessageBox::Cancel) {
+    if (!queryClose()) {
         return;
     }
 
@@ -844,22 +841,13 @@ void MainWindow::newGraph()
     _currentProject->addGraphFile(file);
 }
 
-int MainWindow::saveIfChanged()
+bool MainWindow::queryClose()
 {
     if (!_currentProject) {
-        return KMessageBox::No;
+        return true;
     }
 
-    if (_currentProject->isModified() || _journalWidget->isModified()) {
-        const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
-                                "@info",
-                                "Changes on your project are unsaved. Do you want to save your changes?"));
-        if (btnCode == KMessageBox::Yes) {
-            saveProject();
-        }
-        return btnCode;
-    }
-
+    //TODO move modification information to project
     bool anyGraphDocumentModified = false;
     foreach(Document * document, DocumentManager::self().documentList()) {
         if (document->isModified()) {
@@ -867,34 +855,34 @@ int MainWindow::saveIfChanged()
             break;
         }
     }
-    if (anyGraphDocumentModified && !_codeEditor->isModified()) {
+
+    if (_currentProject->isModified()
+        || _journalWidget->isModified()
+        || anyGraphDocumentModified
+        || _codeEditor->isModified())
+    {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
                                 "@info",
-                                "Changes on your graph document are unsaved. Do you want to save your changes?"));
+                                "Changes on your project are unsaved. Do you want to save your changes?"));
         if (btnCode == KMessageBox::Yes) {
             saveProject();
+            return true;
         }
-        return btnCode;
-    }
-    if (!DocumentManager::self().activeDocument()->isModified() && _codeEditor->isModified()) {
-        const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
-                                "@info",
-                                "Changes on your script files are unsaved. Do you want to save all unsaved scripts?"));
-        if (btnCode == KMessageBox::Yes) {
-            saveProject();
+        if (btnCode == KMessageBox::No) {
+            return true;
         }
-        return btnCode;
+        // do not close
+        return false;
     }
-    if (anyGraphDocumentModified && _codeEditor->isModified()) {
-        const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
-                                "@info",
-                                "Changes on your script files and on your graph document are unsaved. Do you want to save your graph document and all unsaved scripts?"));
-        if (btnCode == KMessageBox::Yes) {
-            saveProject();
-        }
-        return btnCode;
+    // save to close project: no changes
+    return true;
+}
+
+void MainWindow::quit()
+{
+    if (queryClose()) {
+        kapp->quit();
     }
-    return KMessageBox::No;
 }
 
 void MainWindow::importGraphFile()
