@@ -597,6 +597,8 @@ void MainWindow::createNewProject()
     _currentProject->addCodeFileNew(_codeEditor->newScript());
     _currentProject->addGraphFileNew(DocumentManager::self().newDocument());
     _journalWidget->openJournal(_currentProject);
+    _currentProject->setModified(false);
+
     updateCaption();
 }
 

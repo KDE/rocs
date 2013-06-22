@@ -41,7 +41,6 @@ JournalEditorWidget::JournalEditorWidget(QWidget* parent)
 
 void JournalEditorWidget::openJournal(Project *project)
 {
-    _modified = false;
     _currentProject = project;
     if (!project) {
         kError() << "No project specified! Cannot set journal widget.";
@@ -50,19 +49,22 @@ void JournalEditorWidget::openJournal(Project *project)
     if (project->journalFile().isEmpty()) {
         kDebug() << "Skipping loading of journal file, project does not contain any, yet.";
         ui->editor->setHtml(QString());
-        return;
+    } else {
+        QFile fileHandle(project->journalFile().toLocalFile());
+        if (!fileHandle.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            kError() << "Could not open file"
+                << project->journalFile().toLocalFile()
+                << " in read mode: "
+                << fileHandle.errorString();
+                return;
+        }
+        QTextStream stream(&fileHandle);
+        stream.setCodec("UTF-8");
+        ui->editor->setHtml(stream.readAll());
     }
-    QFile fileHandle(project->journalFile().toLocalFile());
-    if (!fileHandle.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        kError() << "Could not open file"
-            << project->journalFile().toLocalFile()
-            << " in read mode: "
-            << fileHandle.errorString();
-            return;
-    }
-    QTextStream stream(&fileHandle);
-    stream.setCodec("UTF-8");
-    ui->editor->setHtml(stream.readAll());
+    // explicitly set journal to be unmodified, since setting of text to editor caused modifed
+    // value to be true
+    _modified = false;
 }
 
 void JournalEditorWidget::saveJournal()

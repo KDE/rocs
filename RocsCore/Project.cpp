@@ -70,7 +70,6 @@ public:
     }
 };
 
-
 Project::Project()
     : d(new ProjectPrivate)
 {
@@ -86,7 +85,6 @@ Project::Project()
     d->_modified = false;
 }
 
-
 Project::Project(const KUrl &projectFile) :
     d(new ProjectPrivate)
 {
@@ -100,7 +98,6 @@ Project::Project(const KUrl &projectFile) :
     }
     d->_modified = false;
 }
-
 
 Project::Project(const KUrl &projectArchive, const KUrl &projectDirectory)
     : d(new ProjectPrivate)
@@ -125,7 +122,6 @@ Project::Project(const KUrl &projectArchive, const KUrl &projectDirectory)
     d->_modified = false;
 }
 
-
 Project::~Project()
 {
 }
@@ -137,13 +133,11 @@ void Project::setName(const QString &name)
     d->_modified = true;
 }
 
-
 QString Project::name() const
 {
     KConfigGroup projectGroup(d->_config, "Project");
     return projectGroup.readEntry("Name", QString());
 }
-
 
 QString Project::projectDirectory() const
 {
@@ -153,19 +147,16 @@ QString Project::projectDirectory() const
     return d->_projectFile.directory(KUrl::AppendTrailingSlash);
 }
 
-
 KUrl Project::projectFile() const
 {
     return d->_projectFile;
 }
-
 
 void Project::setProjectFile(const KUrl &fileUrl)
 {
     d->_projectFile = fileUrl;
     d->_temporary = false;
 }
-
 
 int Project::addCodeFile(const KUrl &file)
 {
@@ -184,13 +175,11 @@ int Project::addCodeFile(const KUrl &file)
     return newKey;
 }
 
-
 void Project::removeCodeFile(int fileID)
 {
     d->_config->deleteGroup("CodeFile" + fileID);
     d->_codeFileGroup.remove(fileID);
 }
-
 
 QList<KUrl> Project::codeFiles() const
 {
@@ -207,24 +196,20 @@ QList<KUrl> Project::codeFiles() const
     return files;
 }
 
-
 QList< KTextEditor::Document* > Project::codeFilesNew() const
 {
     return d->_codeFileNew;
 }
-
 
 void Project::addCodeFileNew(KTextEditor::Document *document)
 {
     d->_codeFileNew.append(document);
 }
 
-
 void Project::removeCodeFileNew(KTextEditor::Document *document)
 {
     d->_codeFileNew.removeAll(document);
 }
-
 
 void Project::saveCodeFileNew(KTextEditor::Document *document, const KUrl &file)
 {
@@ -232,7 +217,6 @@ void Project::saveCodeFileNew(KTextEditor::Document *document, const KUrl &file)
     document->saveAs(file);
     addCodeFile(file);
 }
-
 
 int Project::addGraphFile(const KUrl &file)
 {
@@ -251,13 +235,11 @@ int Project::addGraphFile(const KUrl &file)
     return newKey;
 }
 
-
 void Project::removeGraphFile(int fileID)
 {
     d->_config->deleteGroup("GraphFile" + fileID);
     d->_graphFileGroup.remove(fileID);
 }
-
 
 QList<KUrl> Project::graphFiles() const
 {
@@ -274,7 +256,6 @@ QList<KUrl> Project::graphFiles() const
     return files;
 }
 
-
 void Project::addGraphFileNew(Document *document)
 {
     d->_graphFileNew.append(document);
@@ -286,14 +267,12 @@ void Project::removeGraphFileNew(Document *document)
     d->_graphFileNew.removeAll(document);
 }
 
-
 void Project::saveGraphFileNew(Document *document, const QString &file)
 {
     removeGraphFileNew(document);
     document->saveAs(file);
     addGraphFile(KUrl::fromLocalFile(document->fileUrl()));
 }
-
 
 void Project::saveGraphFileAs(Document *document, const QString &file)
 {
@@ -312,7 +291,6 @@ void Project::saveGraphFileAs(Document *document, const QString &file)
     document->saveAs(file);
 }
 
-
 KUrl Project::journalFile() const
 {
     if (projectDirectory().isEmpty()) {
@@ -321,7 +299,6 @@ KUrl Project::journalFile() const
     KConfigGroup group(d->_config, "Journal");
     return KUrl::fromLocalFile(projectDirectory().append(group.readEntry("JournalHtml", QString())));
 }
-
 
 bool Project::writeNewProjectFile()
 {
@@ -334,7 +311,6 @@ bool Project::writeNewProjectFile()
 
     return true;
 }
-
 
 bool Project::writeProjectFile(const QString &fileUrl)
 {
@@ -381,7 +357,6 @@ bool Project::writeProjectFile(const QString &fileUrl)
     return true;
 }
 
-
 bool Project::exportProject(const KUrl &exportUrl)
 {
     KTar tar(exportUrl.toLocalFile());
@@ -421,7 +396,6 @@ bool Project::exportProject(const KUrl &exportUrl)
     }
     projectGroup.writeEntry("CodeFiles", codeFileIDs);
 
-
     QStringList graphFileIDs;
     iter = d->_graphFileGroup.constBegin();
     while (iter != d->_graphFileGroup.constEnd()) {
@@ -460,14 +434,17 @@ bool Project::exportProject(const KUrl &exportUrl)
     return true;
 }
 
-
 bool Project::isTemporary()
 {
     return d->_temporary;
 }
 
-
 bool Project::isModified() const
 {
     return d->_modified;
+}
+
+void Project::setModified(bool modified)
+{
+    d->_modified = modified;
 }

@@ -114,6 +114,11 @@ public:
     bool isTemporary();
 
     /**
+     * Set modified value of project to \p modified.
+     */
+    void setModified(bool modified=true);
+
+    /**
      * Returns true if the poject is modified.
      *
      * \return modification status
