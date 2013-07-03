@@ -5,7 +5,14 @@
   <!ENTITY package "kdeedu">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
-  <!ENTITY scriptingapi SYSTEM "scripting-api.docbook">
+
+  <!ENTITY apiConsole SYSTEM "apiConsole.docbook">
+  <!ENTITY apiDatastructure SYSTEM "apiDatastructure.docbook">
+  <!ENTITY apiGraphstructure SYSTEM "apiGraphstructure.docbook">
+  <!ENTITY apiLinkedListstructure SYSTEM "apiLinkedListstructure.docbook">
+  <!ENTITY apiRootedTreestructure SYSTEM "apiRootedTreestructure.docbook">
+
+  <!ENTITY chapterImportExport SYSTEM "chapterImportExport.docbook">
 ]>
 <book id="rocs" lang="&language;">
 
@@ -245,7 +252,7 @@ while (E.length > 0) {
         }
     }
 }
-output("Vertex Cover contains " + C.length + " nodes.");
+Console.log("Vertex Cover contains " + C.length + " nodes.");
 </programlisting>
 </sect2>
 
@@ -496,6 +503,7 @@ The created data structure is added to the currently selected graph document.
 </sect1>
 </chapter>
 
+
 <chapter id="scripting">
 <title>Writing and Executing Algorithms in &rocs;</title>
 
@@ -511,299 +519,6 @@ It is important to know that changes done by the scripting engine are directly r
 Hence, the scripts actually modify the data structures.
 </para>
 
-<sect1 id="scripting-data-structure">
-<title>The Base Data Structure Elements</title>
-<para>
-Every backend provides a special set of functions and properties for its data structures and their elements.
-But also every backend provides the properties and functions that are defined for the base data structure.
-Hence, everything explained in this sections is available for every data structure backend.
-</para>
-<sect2><title>Base Data Structures Properties</title>
-<para>
-Data structures are identified by their names.
-Assuming you created a data structure with name <literal>testgraph</literal>, then you can access the data structure simply by writing this identifier.
-For example, to get an array with all data elements in the given data structure, you can write <literal>testgraph.list_nodes();</literal> in the script.
-</para>
-
-<sect3>
-<title>Base Data Structure Properties and Functions</title>
-<para>
-Each data structure <literal>testgraph</literal> has the following properties that can be read or written by <literal>testgraph.property</literal>:
-</para>
-<programlisting>
-     string name  // identification of the data structure
-</programlisting>
-</sect3>
-</sect2>
-
-<sect2>
-<title>Base Data Element Properties and Functions</title>
-<para>
-Each data element has the following properties that can be read or written:
-</para>
-<programlisting>
-    double x      // x coordinate of current position
-    double y      // y coordinate of current position
-    double width  // size
-    string value  // value
-    int id        // unique identifier for data element
-    string name   // name
-    string color  // color in HEXA
-</programlisting>
-<para>
-Further, every dynamic property of a data element can be accessed by its name.
-</para>
-
-<para>
-Each data element object provides the following methods:
-</para>
-<programlisting>
-    int type();                         // data type of data element
-    int set_type(int);                  // set data type of the data element
-    void add_property(string name,      // add dynamic property to data element with specified name and value
-                      string value);
-    array adj_data();                   // list of adjacent data
-    array adj_pointers();               // list of adjacent pointers
-    array input_pointers();             // list of input pointers
-    array output_pointers();            // list of output pointers
-    array loop_pointers();              // list of pointers forming a self-loop
-    array connected_pointers(target);   // list of pointers pointing to 'target'
-    void  remove();                     // remove this data element
-</programlisting>
-</sect2>
-
-<sect2>
-<title>Base Pointer Properties and Functions</title>
-<para>
-Each pointer has the following properties that can be read or written:
-</para>
-<programlisting>
-    string color  // color in HEXA
-    string value  // value
-    string name   // name
-    double width  // width
-    string style  // value out of: dot, dash, dash dot, solid
-</programlisting>
-<para>
-Further, every dynamic property of a pointer can be accessed by its name.
-</para>
-
-<para>
-Each pointer object provides the following methods:
-</para>
-<programlisting>
-    int type();                         // pointer type of pointer
-    int set_type(int);                  // set pointer type of the pointer
-    void add_property(string name,      // add dynamic property to data element with specified name and value
-                      string value);
-    node start();                       // start node of the pointer
-    node end();                         // target node of the pointer
-    void remove();                      // remove this pointer
-</programlisting>
-</sect2>
-</sect1>
-
-<sect1 id="scripting-backend-graph">
-<title>The Graph Backend</title>
-<sect2>
-<title>Graph Properties and Functions</title>
-
-
-
-<sect3>
-<title>Graph Backend Specific Properties</title>
-<para>
-    The data structure properties dialog allows access to configure settings specific to the Graph backend.
-    There, with <guilabel>Graph Type</guilabel> you can select the type of the graph. The meaning of these types is as follows:
-</para>
-<itemizedlist>
-    <listitem><para>
-    <guilabel>Graph</guilabel>: Graph at which same edges (with respect to start and end points) may not exist multiple times.
-    </para></listitem>
-    <listitem><para>
-    <guilabel>Multigraph</guilabel>: Graph at which same edges (with respect to start and end points) may exist multiple times.
-    </para></listitem>
-</itemizedlist>
-</sect3>
-
-<sect3>
-<title>The Graph Structure</title>
-<para>
-Given a data structure object of type "Graph", you can call the following member functions:
-</para>
-<programlisting>
-    array list_nodes();                   // list of all nodes of the graph
-    array list_nodes(int type);           // list of all nodes of given type
-    array list_edges();                   // list of all edges of the graph
-    array list_edges(int type);           // list of all edges of given type
-    node add_node(name);                  // add new node and returns it
-    edge add_edge(node from, node to);    // add new edge from 'from' to 'to' and returns it
-    array overlay_edges(int overlayID);   // list of all edges in given overlay
-    edge add_overlay_edge(node from,
-                          node to,
-                          int overlayID); // add edge of given pointer type/in specified overlay
-</programlisting>
-</sect3>
-
-<sect3>
-<title>Graph Nodes</title>
-<para>
-Given a data structure object of type "Graph", you can call the following member functions on the graph nodes additionally to the properties provided by the Data elements:
-</para>
-<programlisting>
-    array adj_nodes();                    // list of all adjacent nodes
-    array adj_edges();                    // list of connected edges
-    array input_edges();                  // list of input edges
-    array output_edges();                 // list of all output edges
-    array loop_edges();                   // list of all edges looping to the node
-    array connected_edges(node target);   // all edges that connect this node with node 'target'
-</programlisting>
-</sect3>
-
-<sect3>
-<title>Graph Edges</title>
-<para>
-Given edges of a data structure of type "Graph", only the properties of the base data structure are available.
-</para>
-</sect3>
-</sect2>
-
-<sect2>
-<title>Graph Structure Algorithms</title>
-<para>
-The graph backend provides some special functions that can be used from the scripting engine.</para>
-<variablelist>
-<varlistentry>
-<term>Shortest Path Computation</term>
-<listitem>
-    <para>Compute the shortest path between the nodes <emphasis>start</emphasis> and <emphasis>end</emphasis>. Both nodes must be of the same graph. This computation respects if the graph is directed or undirected.</para>
-    <funcsynopsis>
-    <funcprototype>
-    <funcdef>array <function>dijkstra_shortest_path</function></funcdef>
-    <paramdef>node <parameter><replaceable>start</replaceable></parameter></paramdef>
-    <paramdef>node <parameter><replaceable>end</replaceable></parameter></paramdef>
-    </funcprototype>
-    </funcsynopsis>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term>Shortest Path Distances</term>
-<listitem>
-    <para>Compute the shortest path distances from node <emphasis>start</emphasis> to all other nodes of the graph. This computation respects if the graph is directed or undirected.</para>
-    <funcsynopsis>
-    <funcprototype>
-    <funcdef>array <function>distances</function></funcdef>
-    <paramdef>node <parameter><replaceable>start</replaceable></parameter></paramdef>
-    </funcprototype>
-    </funcsynopsis>
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-</sect1>
-
-<sect1 id="scripting-backend-linkedlist">
-<title>The Linked List Backend</title>
-<sect2>
-<title>Linked List Properties and Functions</title>
-
-<sect3>
-<title>The Linked List Structure</title>
-<para>
-Given a data structure object of type "Linked List", you can call the following member functions:
-</para>
-<programlisting>
-    node begin();                           // gives the head node of the linked list
-    setBegin(node begin):                   // set node begin as begin of list and rearrange list
-    createNode();                           // create a new list node
-</programlisting>
-</sect3>
-
-<sect3>
-<title>Linked List Nodes</title>
-<para>
-Given a data structure object of type "Linked List", you can call the following member functions on the graph nodes additionally to the properties provided by the Data elements:
-</para>
-<programlisting>
-    node front();                           // returns the node's predecessor
-</programlisting>
-</sect3>
-
-<sect3>
-<title>Linked List Edges</title>
-<para>
-Given edges of a data structure of type "Linked List", only the properties of the base data structure are available.
-</para>
-</sect3>
-</sect2>
-</sect1>
-
-<sect1 id="scripting-backend-rootedtree">
-<title>The Rooted Tree Backend</title>
-<sect2>
-<title>Rooted Tree Properties and Functions</title>
-
-<sect3>
-<title>Rooted Tree Backend</title>
-<para>
-    The data structure properties dialog allows access to configure settings specific to the Graph backend.
-    There, by checking the <guilabel>Show all pointers</guilabel> property, all pointers between the tree nodes are shown.
-    If unchecked, multiple pointers between same nodes are collapsed to one.
-</para>
-</sect3>
-
-<sect3>
-<title>The Rooted Tree Structure</title>
-<para>
-Given a data structure object of type "Rooted Tree", the following properties can be read or written:
-</para>
-<programlisting>
-    ShowAllPointers     // set to true if show all edges, set to false if multiple edges shall be compressed
-</programlisting>
-<para>
-Given a data structure object of type "Rooted Tree", you can call the following member functions:
-</para>
-<programlisting>
-    node add_data(string name);         // add a node to tree with given name
-    void set_root_node(node root);      // set root as root node of the tree
-    node root_node();                   // return root node of the tree
-</programlisting>
-</sect3>
-
-<sect3>
-<title>Rooted Tree Nodes</title>
-<para>
-Given a node object of type "Rooted Tree", the following properties can be read or written:
-</para>
-<programlisting>
-    int numberOfChilds                  // set the number of (allowed) children for this node
-    node left_child                     // read only: node that is the left child
-    node right_child                    // read only: node that is the right child
-    node node_parent                    // read only: node that is the parent
-</programlisting>
-<para>
-Given a node object of type "Rooted Tree", you can call the following member functions:
-</para>
-<programlisting>
-    node add_left_child(node child);    // add left child
-    node add_right_child(node child);   // add right child
-    node add_child(node child, int i);  // add a child as the i-th child of the node
-    node add_node_parent(node child);   // add parent (only successful if no parent set, yet)
-    node left_child();                  // return right child
-    node right_child();                 // return left child
-    node child_at(int i);               // return the i-th child of the node
-    node node_parent();                 // return the node's parent
-</programlisting>
-</sect3>
-
-<sect3>
-<title>Rooted Tree Edges</title>
-<para>
-Given edges of a data structure of type "Rooted Tree", only the properties of the base data structure are available.
-</para>
-</sect3>
-</sect2>
-</sect1>
 
 <sect1 id="scripting-controls">
 <title>Controlling the Script Execution</title>
@@ -834,8 +549,8 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
     You can control the text that is displayed at the script output by the following functions:
 </para>
 <programlisting>
-    output(string message);            // displays the message as script output
-    debug(string message);             // displays the message as debug output
+    Console.log(string message);            // displays the message as script output
+    Console.debug(string message);          // displays the message as debug output
 </programlisting>
 </sect2>
 
@@ -877,92 +592,30 @@ Given edges of a data structure of type "Rooted Tree", only the properties of th
 </sect1>
 </chapter>
 
-<chapter id="import-export">
-<title>Import and Export</title>
-<sect1 id="import-export-projects">
-    <title>Exchange &rocs; Projects</title>
-    <para>
-        &rocs; projects can be imported and exported as archived <literal>.tar.gz</literal> files.
-        These archives can be used to exchange projects.
-        Import and Export can be done with <menuchoice><guimenu>File</guimenu> <guimenuitem>Import Project</guimenuitem></menuchoice> and <menuchoice><guimenu>File</guimenu> <guimenuitem>Export Project</guimenuitem></menuchoice>, respectively.
-    </para>
-</sect1>
 
-<sect1 id="import-export-graphs">
-    <title>Import and Export of Graph Documents</title>
-    <para>&rocs; currently supports import and export of the following file formats:</para>
-    <itemizedlist>
-        <listitem><para>DOT files, also known as Graphviz files</para></listitem>
-        <listitem><para>GML files</para></listitem>
-        <listitem><para>Trivial Graph Format files</para></listitem>
-    </itemizedlist>
-
-<sect2 id="format-specification-tgf">
-<title>Trivial Graph File Format</title>
+<chapter id="scripting-API">
+<title>Scripting Engine API</title>
 <para>
-    The <emphasis>Trivial Graph Format</emphasis> (TGF) is a simple text-based file format for describing graphs.
-    A TGF file consists of a list of node definitions, that map the node IDs to labels, followed by a list of the edges.
-    In this format it is only possible to have one label per node and one value per edge.
-    &rocs; interprets imported graphs as undirected graphs.
-    Exported graphs will contain two edges per connection if connections are bidirectional.
+Every backend provides a special set of functions and properties for its data structures and their elements.
+But also every backend provides the properties and functions that are defined for the base data structure.
 </para>
 
-<sect3>
-<title>Format Specification</title>
-    <itemizedlist>
-        <listitem><para>The file starts with a list of nodes (one node per line), followed by a line with the only character "#", followed by a list of edges (one edge per line).</para></listitem>
-        <listitem><para>A node consists of an integer (identifier), followed by a space, followed by an arbitrary string.</para></listitem>
-        <listitem><para>An edge consists of two integers (identifiers) separated by a space, followed by a space, followed by an arbitrary string. It is assumed that the directed edge points from the first identifier to the second identifier.</para></listitem>
-    </itemizedlist>
-</sect3>
-<sect3>
-<title>Example</title>
-<programlisting>
-1 starting node
-2 transmitter
-3 sink
-#
-1 2 blue
-2 1 red
-2 3 green
-</programlisting>
-</sect3>
-</sect2>
+&apiDatastructure;
 
-<sect2 id="format-specification-dot">
-<title>DOT Language / Graphviz Graph File Format</title>
-<para>
-    The DOT language is a plain text graph description language that allows both,a good human readable representation of graphs as well as an efficient processing by graph layout programs.
-    DOT is the default file format for the Graphviz graph visualization suite, but is also widely used by other graph tools.
-    The usual file endings for DOT are <emphasis>.gv</emphasis> and <emphasis>.dot</emphasis>.
-</para>
+&apiGraphstructure;
 
-<sect3>
-<title>Unsupported Features</title>
-<para>
-    &rocs; can parse every graph file that contains a graph specified according to the DOT language specification<footnote><para>http://www.graphviz.org/content/dot-language</para></footnote>.
-    The support of language features is complete, despite of the following exceptions:
-</para>
-    <itemizedlist>
-        <listitem><para>subgraph: Due to the lack of a subgraph concept in &rocs;, subgraphs are only imported as a set of date elements and connections. Especially, connections to or from subgraphs are not imported.</para></listitem>
-        <listitem><para>&HTML; and &XML; attributes: Attributes (like labels) that contain &HTML; or &XML; syntax are read unchanged. Especially, not adjustment of fonts and styles are read from those attributes.</para></listitem>
-    </itemizedlist>
-</sect3>
-<sect3>
-<title>Example</title>
-<programlisting>
-digraph myGraph {
-    a -> b -> c;
-    b -> d;
-}
-</programlisting>
-</sect3>
-</sect2>
+&apiLinkedListstructure;
 
-</sect1>
+&apiRootedTreestructure;
+
+&apiConsole;
 </chapter>
 
-&scriptingapi;   <!--Scripting Interface API Documentation-->
+
+<chapter id="import-export">
+&chapterImportExport;
+</chapter>
+
 
 <chapter id="credits">
 <title>Credits and License</title>
@@ -975,14 +628,14 @@ digraph myGraph {
 	<listitem><para>Copyright 2008       Ugo Sangiori (ugorox AT gmail.com)</para></listitem>
 	<listitem><para>Copyright 2008-2012  Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
 	<listitem><para>Copyright 2008-2012  Wagner Reck (wagner.reck AT gmail.com)</para></listitem>
-	<listitem><para>Copyright 2011-2012 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para></listitem>
+	<listitem><para>Copyright 2011-2013  Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para></listitem>
 </itemizedlist>
 
 <para>Documentation Copyright:</para>
 <itemizedlist>
 	<listitem><para>Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para></listitem>
 	<listitem><para>Documentation copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
-	<listitem><para>Documentation copyright 2011-2012 Andreas Cord-Landwehr (cordlandwehr AT googlemail.com)</para></listitem>
+	<listitem><para>Documentation copyright 2011-2013 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para></listitem>
 </itemizedlist>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
