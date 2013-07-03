@@ -24,17 +24,17 @@
 <firstname>Andreas</firstname>
 <surname>Cord-Landwehr</surname>
 </personname>
-<email>cordlandwehr@googlemail.com</email>
+<email>cordlandwehr@kde.org</email>
 </author>
 
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
 <copyright><year>2009</year><holder>Tomaz Canabrava</holder></copyright>
-<copyright><year>2011-2012</year><holder>Andreas Cord-Landwehr</holder></copyright>
+<copyright><year>2011-2013</year><holder>Andreas Cord-Landwehr</holder></copyright>
 
-<date>2012-12-02</date>
-<releaseinfo>1.8.0 &kde; 4.10</releaseinfo>
+<date>2013-07-03</date>
+<releaseinfo>1.9.0 &kde; 4.11</releaseinfo>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
