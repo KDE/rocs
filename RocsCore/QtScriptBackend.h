@@ -63,6 +63,11 @@ public:
     void loadFile(const QString& file);
 
     /**
+     * Register \p qobject as global object under name \p name at engine for next simulation run.
+     */
+    QScriptValue registerGlobalObject(QObject *qobject, const QString &name);
+    
+    /**
      * Output the given string \p message as debug output.
      *
      * \param message the string to be print

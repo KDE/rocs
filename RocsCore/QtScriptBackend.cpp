@@ -122,6 +122,17 @@ void QtScriptBackend::loadFile(const QString& file)
     d->_currentScript += '\n';
 }
 
+QScriptValue QtScriptBackend::registerGlobalObject(QObject *qobject, const QString &name)
+{
+    if (!d->_engine) {
+        d->_engine = new QScriptEngine(this);
+        emit engineCreated(d->_engine);
+    }
+    QScriptValue globalObject = d->_engine->newQObject(qobject);
+    d->_engine->globalObject().setProperty(name, globalObject);
+
+    return globalObject;
+}
 
 IncludeManager& QtScriptBackend::includeManager() const
 {

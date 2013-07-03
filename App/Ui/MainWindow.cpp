@@ -964,8 +964,8 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
 
     // set console
     // TODO this should part of a plugin interface to for setting up all engine modules
-    QScriptValue console = engine->engine()->newQObject(_outputWidget->consoleInterface());
-    engine->engine()->globalObject().setProperty("Console", console);
+    engine->registerGlobalObject(_outputWidget->consoleInterface(), "Console");
+    
     connect(engine, SIGNAL(scriptError(QString)), _outputWidget->consoleInterface(), SLOT(error(QString)));
     connect(engine, SIGNAL(scriptInfo(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
     connect(engine, SIGNAL(sendDebug(QString)), _outputWidget->consoleInterface(), SLOT(debug(QString)));
