@@ -29,6 +29,7 @@ A list objects holds the information of a data structure of type "Linked List".
         <para>Return head node of the list.</para>
     <funcsynopsis><funcprototype>
     <funcdef>ListNode <function>head()</function></funcdef>
+    <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
     </listitem>
@@ -64,6 +65,7 @@ A list objects holds the information of a data structure of type "Linked List".
         <para>Create a new node of default type and return the created node.</para>
     <funcsynopsis><funcprototype>
     <funcdef>ListNode <function>createNode()</function></funcdef>
+    <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
     </listitem>

@@ -126,6 +126,7 @@ A pointer connects two data elements and can itself hold information by its prop
         <para>Remove this connection.</para>
     <funcsynopsis><funcprototype>
     <funcdef>void <function>remove()</function></funcdef>
+    <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
     </listitem>
