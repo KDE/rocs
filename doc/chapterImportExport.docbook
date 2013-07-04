@@ -1,3 +1,4 @@
+<chapter id="import-export">
 <title>Import and Export</title>
 <sect1 id="import-export-projects">
     <title>Exchange &rocs; Projects</title>
@@ -80,3 +81,4 @@ digraph myGraph {
 </sect2>
 
 </sect1>
+</chapter>
