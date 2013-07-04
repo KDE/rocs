@@ -43,7 +43,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Return list all nodes in the graph.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>nodes()</function></funcdef>
+    <funcdef>array <function>nodes</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -55,7 +55,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Return list all nodes in the graph of specified type.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>nodes(type)</function></funcdef>
+    <funcdef>array <function>nodes</function></funcdef>
     <paramdef>int <parameter><replaceable>type</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -67,7 +67,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Return list all edges in the graph.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>edges()</function></funcdef>
+    <funcdef>array <function>edges</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -79,7 +79,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Return list all edges in the graph of specified type.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>edges(type)</function></funcdef>
+    <funcdef>array <function>edges</function></funcdef>
         <paramdef>int <parameter><replaceable>type</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -91,7 +91,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Create a new node of the specified type and return the created node. If the type is not registered, no node is created.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>GraphNode <function>createNode(type)</function></funcdef>
+    <funcdef>GraphNode <function>createNode</function></funcdef>
         <paramdef>int <parameter><replaceable>type</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -103,7 +103,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Create a new node of default type and return the created node.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>GraphNode <function>createNode()</function></funcdef>
+    <funcdef>GraphNode <function>createNode</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -115,7 +115,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Create an edge from node "from" to node "to" of the specified type and return the created edge. If the type is not registered, no edge is created.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>GraphEdge <function>createEdge(from, to, type)</function></funcdef>
+    <funcdef>GraphEdge <function>createEdge</function></funcdef>
         <paramdef>GraphNode <parameter><replaceable>from</replaceable></parameter></paramdef>
         <paramdef>GraphNode <parameter><replaceable>to</replaceable></parameter></paramdef>
         <paramdef>int <parameter><replaceable>type</replaceable></parameter></paramdef>
@@ -129,7 +129,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Create an edge from node "from" to node "to" of default type and return the created edge.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>GraphEdge <function>createEdge(from, to)</function></funcdef>
+    <funcdef>GraphEdge <function>createEdge</function></funcdef>
         <paramdef>GraphNode <parameter><replaceable>from</replaceable></parameter></paramdef>
         <paramdef>GraphNode <parameter><replaceable>to</replaceable></parameter></paramdef>
     </funcprototype>
@@ -142,7 +142,7 @@ A graph objects holds the information of a data structure of type "Graph".
     <listitem>
         <para>Returns an array of shortest path lengths from this node to every other node in the graph.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>Array <function>distances(from)</function></funcdef>
+    <funcdef>Array <function>distances</function></funcdef>
         <paramdef>GraphNode <parameter><replaceable>from</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -209,7 +209,7 @@ A node is the data element of a graph.
     <listitem>
         <para>Return list all nodes connected to this node. This method respects if edges are directed.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>neighbors()</function></funcdef>
+    <funcdef>array <function>neighbors</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -221,7 +221,7 @@ A node is the data element of a graph.
     <listitem>
         <para>Return a list of all edges (incoming and outgoing) of this node.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>edges()</function></funcdef>
+    <funcdef>array <function>edges</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -233,7 +233,7 @@ A node is the data element of a graph.
     <listitem>
         <para>Return a list of all edges (incoming and outgoing) of this node of a specified type.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>edges(type)</function></funcdef>
+    <funcdef>array <function>edges</function></funcdef>
         <paramdef>int <parameter><replaceable>type</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -245,7 +245,7 @@ A node is the data element of a graph.
     <listitem>
         <para>Return a list of incoming edges of this node.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>inEdges()</function></funcdef>
+    <funcdef>array <function>inEdges</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -257,7 +257,7 @@ A node is the data element of a graph.
     <listitem>
         <para>Return a list of all incoming edges of this node of a specified type.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>inEdges(type)</function></funcdef>
+    <funcdef>array <function>inEdges</function></funcdef>
         <paramdef>int <parameter><replaceable>type</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -269,7 +269,7 @@ A node is the data element of a graph.
     <listitem>
         <para>Return a list of all outgoing edges of this node.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>outEdges()</function></funcdef>
+    <funcdef>array <function>outEdges</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -281,7 +281,7 @@ A node is the data element of a graph.
     <listitem>
         <para>Return a list of all outgoing edges of this node of a specified type.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>outEdges(type)</function></funcdef>
+    <funcdef>array <function>outEdges</function></funcdef>
         <paramdef>int <parameter><replaceable>type</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -293,7 +293,7 @@ A node is the data element of a graph.
     <listitem>
         <para>Return a list of all edges of this node to the specified node.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>array <function>edgesTo(target)</function></funcdef>
+    <funcdef>array <function>edgesTo</function></funcdef>
         <paramdef>GraphNode <parameter><replaceable>target</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -360,7 +360,7 @@ An Edge is the connection of two GraphNodes. Edges can be directed or undirected
     <listitem>
         <para>Remove this connection.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>void <function>remove()</function></funcdef>
+    <funcdef>void <function>remove</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -372,7 +372,7 @@ An Edge is the connection of two GraphNodes. Edges can be directed or undirected
     <listitem>
         <para>Add a new property to the connection.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>void <function>add_property(name, value)</function></funcdef>
+    <funcdef>void <function>add_property</function></funcdef>
         <paramdef>string <parameter><replaceable>name</replaceable></parameter></paramdef>
         <paramdef>string <parameter><replaceable>value</replaceable></parameter></paramdef>
     </funcprototype>
@@ -385,7 +385,7 @@ An Edge is the connection of two GraphNodes. Edges can be directed or undirected
     <listitem>
         <para>Remove an existing property from the connection.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>void <function>remove_property(name)</function></funcdef>
+    <funcdef>void <function>remove_property</function></funcdef>
         <paramdef>string <parameter><replaceable>name</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>

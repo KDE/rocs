@@ -125,7 +125,7 @@ A pointer connects two data elements and can itself hold information by its prop
     <listitem>
         <para>Remove this connection.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>void <function>remove()</function></funcdef>
+    <funcdef>void <function>remove</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -137,7 +137,7 @@ A pointer connects two data elements and can itself hold information by its prop
     <listitem>
         <para>Add a new property to the connection.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>void <function>add_property(name, value)</function></funcdef>
+    <funcdef>void <function>add_property</function></funcdef>
         <paramdef>string <parameter><replaceable>name</replaceable></parameter></paramdef>
         <paramdef>string <parameter><replaceable>value</replaceable></parameter></paramdef>
     </funcprototype>
@@ -150,7 +150,7 @@ A pointer connects two data elements and can itself hold information by its prop
     <listitem>
         <para>Remove an existing property from the connection.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>void <function>remove_property(name)</function></funcdef>
+    <funcdef>void <function>remove_property</function></funcdef>
         <paramdef>string <parameter><replaceable>name</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>

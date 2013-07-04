@@ -28,7 +28,7 @@ A list objects holds the information of a data structure of type "Linked List".
     <listitem>
         <para>Return head node of the list.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>ListNode <function>head()</function></funcdef>
+    <funcdef>ListNode <function>head</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -40,7 +40,7 @@ A list objects holds the information of a data structure of type "Linked List".
     <listitem>
         <para>Set the head of the list.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>void <function>setHead(node)</function></funcdef>
+    <funcdef>void <function>setHead</function></funcdef>
         <paramdef>ListNode <parameter><replaceable>node</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -52,7 +52,7 @@ A list objects holds the information of a data structure of type "Linked List".
     <listitem>
         <para>Create a new node of the specified type and return the created node. If the type is not registered, no node is created.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>ListNode <function>createNode(type)</function></funcdef>
+    <funcdef>ListNode <function>createNode</function></funcdef>
         <paramdef>int <parameter><replaceable>type</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -64,7 +64,7 @@ A list objects holds the information of a data structure of type "Linked List".
     <listitem>
         <para>Create a new node of default type and return the created node.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>ListNode <function>createNode()</function></funcdef>
+    <funcdef>ListNode <function>createNode</function></funcdef>
     <paramdef></paramdef>
     </funcprototype>
     </funcsynopsis>
@@ -131,7 +131,7 @@ A node is the data element of a linked list.
     <listitem>
         <para>Set pointer of this list node to the target node.</para>
     <funcsynopsis><funcprototype>
-    <funcdef>void <function>pointTo(target)</function></funcdef>
+    <funcdef>void <function>pointTo</function></funcdef>
         <paramdef>ListNode <parameter><replaceable>target</replaceable></parameter></paramdef>
     </funcprototype>
     </funcsynopsis>
