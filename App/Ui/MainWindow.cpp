@@ -138,6 +138,16 @@ MainWindow::MainWindow()
 
     // update rocs config version
     Settings::setVersion(ROCS_VERSION_STR);
+
+    // disable save action from kpart, since we take care for the editor by global save action
+    // here "file_save" is the action identifier from katepartui.rc
+    // note that we may not use that name for our own actions
+    foreach(KActionCollection* ac, KActionCollection::allCollections()) {
+        if (ac->action("file_save")) {
+            ac->removeAction(ac->action("file_save"));
+            break; // we only expect that action once
+        }
+    }
 }
 
 MainWindow::~MainWindow()
@@ -965,7 +975,7 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
     // set console
     // TODO this should part of a plugin interface to for setting up all engine modules
     engine->registerGlobalObject(_outputWidget->consoleInterface(), "Console");
-    
+
     connect(engine, SIGNAL(scriptError(QString)), _outputWidget->consoleInterface(), SLOT(error(QString)));
     connect(engine, SIGNAL(scriptInfo(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
     connect(engine, SIGNAL(sendDebug(QString)), _outputWidget->consoleInterface(), SLOT(debug(QString)));
