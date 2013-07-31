@@ -17,7 +17,7 @@
 <sect2>
 <title>Graph Data Structure</title>
 <para>
-A graph objects holds the information of a data structure of type "Graph".
+A graph objects holds the information of a data structure of type <quote>Graph</quote>.
 </para>
 
 <sect3>

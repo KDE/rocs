@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
 
   <!ENTITY kappname "&rocs;">
-  <!ENTITY package "kdeedu">
+  <!ENTITY package "rocs">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
 
@@ -161,7 +161,7 @@ To add further properties to the data elements and pointers, you can add <emphas
 Each dynamic property is identified by its name and can contain any value associated with it. The name must start with a letter (a-z or A-Z) and can contain only letters, numbers and '_'. If you try to use any invalid character in the property name, the property will not be changed.
 </para>
 <para>
-To add dynamic properties, use the <guilabel>Data Properties</guilabel> and <guilabel>Pointer Properties</guilabel> dialogs from the context menus of the respective elements or the script functions as explained in <xref linkend="scripting-data-structure"
+To add dynamic properties, use the <guilabel>Data Element Properties</guilabel> and <guilabel>Pointer Properties</guilabel> dialogs from the context menus of the respective elements or the script functions as explained in <xref linkend="scripting-data-structure"
 />.
 </para>
 <para>
@@ -198,8 +198,8 @@ For this, we want to specify two pointer types, one to display matching edges an
 <sect2>
 <title>Generate a Graph</title>
 <para>
-For the data structure backend "Graph", &rocs; ships a helper tool that can generate graphs. We go to <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
-There we generate a "Random Graph" with 30 nodes, 90 edges, and with seed 1 (the seed is the starting seed for the random graph generator; using the same seed multiple times results in same and reproducible graphs).
+For the data structure backend <quote>Graph</quote>, &rocs; ships a helper tool that can generate graphs. We go to <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
+There we generate a <guilabel>Random Graph</guilabel> with 30 nodes, 90 edges, and with seed 1 (the seed is the starting seed for the random graph generator; using the same seed multiple times results in same and reproducible graphs).
 Finally, we modify the graph name at the data structure panel and call the graph <literal>testgraph</literal>.
 </para>
 </sect2>
@@ -207,7 +207,7 @@ Finally, we modify the graph name at the data structure panel and call the graph
 <sect2>
 <title>Create Types</title>
 <para>
-We use the <guibutton>Document Properties Button</guibutton> at the data structure panel to open the properties dialog for data and pointer types of the current graph document.
+We use the <guibutton>Properties</guibutton> buttons at the Document Selector bar to open the properties dialog for data and pointer types of the current graph document.
 For the data types we add a new type called "C", which automatically gets ID <literal>1</literal>.
 For this type we select the server picture as icon.
 Furthermore, we switch to the pointer type page and add a new pointer type called "matching".
@@ -259,7 +259,7 @@ Console.log("Vertex Cover contains " + C.length + " nodes.");
 <sect2>
 <title>Execute the Algorithm</title>
 <para>
-Finally we want to execute the algorithm. For this we can start the execution by the <guibutton>Run Button</guibutton> at the script control panel.
+Finally we want to execute the algorithm. For this we can start the execution by the <guibutton>Run</guibutton> button at the script control panel.
 </para>
 </sect2>
 </sect1>
@@ -287,7 +287,7 @@ The user interface is divided into several logical parts as presented at the scr
 <variablelist>
 <varlistentry>
     <term>Document Selector</term>
-    <listitem><para>At this top menu bar you must select the current document and data structure.
+    <listitem><para>At this top menubar you must select the current document and data structure.
         Creating and deleting of data structures as well as access to data structure properties is also possible there.
     </para></listitem>
 </varlistentry>
@@ -299,9 +299,12 @@ The user interface is divided into several logical parts as presented at the scr
     <term>Visual Graph Editor Toolbar</term>
     <listitem><para>
         This toolbar provides all tools for the visual graph editor.
-        Use the <guibutton>Add Data</guibutton> or <guibutton>Add Connection</guibutton> tool to create new elements or to connect elements, respectively.
-        New data elements are added to the data structure that is currently selected at the <emphasis>Document Selector</emphasis>.
-        Note that <guibutton>Add Data</guibutton> and <guibutton>Add Connection</guibutton> both have context menus to select the type of which the created elements shall be.
+        Use the <inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsadddata.png" format="PNG"/></imageobject>
+        </inlinemediaobject><guibutton>Add Element</guibutton> or <inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsaddedge.png"
+        format="PNG"/></imageobject></inlinemediaobject><guibutton>Add Connection</guibutton> buttons to create new elements 
+	or to connect elements, respectively.
+        New data elements are added to the data structure that is currently selected at the <emphasis>Document Selector</emphasis> bar.
+	  Note that <guibutton>Add Element</guibutton> and <guibutton>Add Connection</guibutton> buttons both have menus to select the type of which the created elements shall be. 
         For details see <xref linkend="user-interface-toolbars" />.
     </para></listitem>
 </varlistentry>
@@ -312,7 +315,8 @@ The user interface is divided into several logical parts as presented at the scr
         <itemizedlist>
         <listitem><para>Element Types: This widget gives you direct access to the available pointer and data types.</para></listitem>
         <listitem><para>Journal: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para></listitem>
-        <listitem><para>Documentation: To get direct access to the handbook and by this to the script documentation, you can open this widget.</para></listitem>
+        <listitem><para>Handbook: To get direct access to the handbook and by this to the script documentation, you can open this widget.</para></listitem>
+        <listitem><para>Scripting API: To get direct access to the script documentation, you can open this widget.</para></listitem>
         </itemizedlist>
     </para></listitem>
 </varlistentry>
@@ -338,6 +342,7 @@ The user interface is divided into several logical parts as presented at the scr
         You can execute the script that is currently open at the script editor by pressing <guiicon>Run</guiicon>.
         While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.
         Note that the <guibutton>One Step</guibutton> execution only stops at specific keywords (see <xref linkend="scripting" />).
+	  <!--FIXME DEBUG button missing-->
     </para></listitem>
 </varlistentry>
 </variablelist>
@@ -364,13 +369,14 @@ The user interface is divided into several logical parts as presented at the scr
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsadddata.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Add Data</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
-By keeping the mouse pointer pressed at the button, a context menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
+<guilabel>Add Element</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
+By keeping the mouse pointer pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsaddedge.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Add Connection</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a context menu shows up at which the pointer type of the new created pointers can be selected (only if different pointer types exist).</para></listitem>
+<guilabel>Add Connection</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a menu shows up at which the pointer type of the new created pointers can be selected (only if different pointer types exist).</para></listitem>
+<!--FIXME no different pointer names here -->
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsdeletedata.png" format="PNG"/></imageobject>
@@ -469,15 +475,15 @@ The created data structure is added to the currently selected graph document.
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Data Structure Properties</guilabel>: Open a dialog that gives access to the data structure properties.
+<guilabel>Properties</guilabel> for <guilabel>Graph Document</guilabel>: Open a dialog that gives access to the document properties as well as the data and pointer types of the document.
 </para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Document Properties</guilabel>: Open a dialog that gives access to the document properties as well as the data and pointer types of the document.
+<guilabel>Properties</guilabel> for <guilabel>Data Structure</guilabel>: Open a dialog that gives access to the data structure properties.
 </para></listitem>
-</itemizedlist>
+  </itemizedlist>
 
 <screenshot>
 <screeninfo>The Main Toolbar.</screeninfo>
@@ -495,7 +501,7 @@ The created data structure is added to the currently selected graph document.
 <sect2 id="user-interface-documents-menu">
 <title>Create and Import Graph Documents</title>
 <para>
-    To create a new graph document or to add an existing one to the project, use <menuchoice><guimenu>Project</guimenu> <guimenuitem>New Graph Document</guimenuitem></menuchoice> or <menuchoice><guimenu>Project</guimenu> <guimenuitem>Import &rocs; Graph</guimenuitem></menuchoice>.
+    To create a new graph document or to add an existing one to the project, use <menuchoice><guimenu>File</guimenu> <guimenuitem>New Project</guimenuitem></menuchoice> or <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Import Graph</guimenuitem></menuchoice>.
     You can also import graph documents from third party applications (for this, see <xref linkend="import-export" />).
 </para>
 </sect2>
@@ -567,12 +573,7 @@ Hence, the scripts actually modify the data structures.
         <inlinemediaobject><imageobject>
         <imagedata fileref="rocs-control-engine-run.png" format="PNG"/></imageobject>
         </inlinemediaobject>
-        <guilabel>Start</guilabel>: Execute the script until it finishes.</para></listitem>
-    <listitem><para>
-        <inlinemediaobject><imageobject>
-        <imagedata fileref="rocs-control-engine-stop.png" format="PNG"/></imageobject>
-        </inlinemediaobject>
-        <guilabel>Stop</guilabel>: Stop script execution (only available if a script is executing).</para></listitem>
+        <guilabel>Run</guilabel>: Execute the script until it finishes.</para></listitem>
     <listitem><para>
         <inlinemediaobject><imageobject>
         <imagedata fileref="rocs-control-engine-step.png" format="PNG"/></imageobject>
@@ -587,6 +588,11 @@ Hence, the scripts actually modify the data structures.
         <imagedata fileref="rocs-control-engine-debug.png" format="PNG"/></imageobject>
         </inlinemediaobject>
         <guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>
+    <listitem><para>
+        <inlinemediaobject><imageobject>
+        <imagedata fileref="rocs-control-engine-stop.png" format="PNG"/></imageobject>
+        </inlinemediaobject>
+        <guilabel>Stop</guilabel>: Stop script execution (only available if a script is executing).</para></listitem>
 </itemizedlist>
 </sect2>
 </sect1>

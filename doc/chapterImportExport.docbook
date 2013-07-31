@@ -5,7 +5,7 @@
     <para>
         &rocs; projects can be imported and exported as archived <literal>.tar.gz</literal> files.
         These archives can be used to exchange projects.
-        Import and Export can be done with <menuchoice><guimenu>File</guimenu> <guimenuitem>Import Project</guimenuitem></menuchoice> and <menuchoice><guimenu>File</guimenu> <guimenuitem>Export Project</guimenuitem></menuchoice>, respectively.
+        Import and Export can be done with <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Import Graph</guimenuitem></menuchoice> and <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Export Graph as</guimenuitem></menuchoice>, respectively.
     </para>
 </sect1>
 
@@ -16,6 +16,7 @@
         <listitem><para>DOT files, also known as Graphviz files</para></listitem>
         <listitem><para>GML files</para></listitem>
         <listitem><para>Trivial Graph Format files</para></listitem>
+        <listitem><para>Keyhole Markup Language Format</para></listitem>
     </itemizedlist>
 
 <sect2 id="format-specification-tgf">
