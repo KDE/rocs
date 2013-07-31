@@ -4,9 +4,7 @@
 <id>Pointer</id>
 <componentType>Pointer</componentType>
 <description>
-<para>
-A pointer connects two data elements and can itself hold information by its properties.
-</para>
+<para>A pointer connects two data elements and can itself hold information by its properties.</para>
 </description>
 <syntax>
 </syntax>
