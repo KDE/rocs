@@ -3,7 +3,7 @@
 <sect2>
 <title>Linked List Data Structure</title>
 <para>
-A list objects holds the information of a data structure of type "Linked List".
+A list objects holds the information of a data structure of type <quote>Linked List</quote>.
 </para>
 
 <sect3>
