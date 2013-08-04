@@ -191,7 +191,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
         !descriptionNode.isNull();
         descriptionNode = descriptionNode.nextSiblingElement())
     {
-        paragraphs.append(i18n(descriptionNode.text().toUtf8()));
+        paragraphs.append(i18nc("Scripting API Description", descriptionNode.text().toUtf8()));
     }
     objectApi->setDescription(paragraphs);
 
@@ -209,7 +209,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
             !descriptionNode.isNull();
             descriptionNode = descriptionNode.nextSiblingElement())
         {
-            paragraphs.append(descriptionNode.text());
+            paragraphs.append(i18nc("Scripting API Description", descriptionNode.text().toUtf8()));
         }
         property->setDescription(paragraphs);
         if (_objectApiCache.contains(property->type())) {
@@ -236,7 +236,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
             !descriptionNode.isNull();
             descriptionNode = descriptionNode.nextSiblingElement())
         {
-            paragraphs.append(descriptionNode.text());
+            paragraphs.append(i18nc("Scripting API Description", descriptionNode.text().toUtf8()));
         }
         method->setDescription(paragraphs);
 
