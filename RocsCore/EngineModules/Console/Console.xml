@@ -7,10 +7,8 @@
         <para>The Console object allows you to print messages of different importance to a log.</para>
         <para>Console is not a constructor. All properties and methods of Console can be called by using Console as an object, without creating it.</para>
     </description>
-    <syntax>
-Console.log("This is a program message."); // print a program message
-Console.debug("A debug message."); // print a debug message
-    </syntax>
+    <syntax>Console.log("This is a program message."); // print a program message
+Console.debug("A debug message."); // print a debug message</syntax>
     <properties>
     </properties>
     <methods>
