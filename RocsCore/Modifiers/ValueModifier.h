@@ -42,7 +42,7 @@ public:
      * \param overrideValues if true, current property values are overwritten; otherwise not
      */
     template<typename T>
-    void enumerate(const QList<T>& list, const QString &property, int start, const QString &baseString, bool overrideValues);
+    void enumerate(const QList<T>& list, const QString &property, int start, const QString &baseString, bool overrideValues = true);
 
     /**
      * Assign strings in increasing order starting at 'start' to all nodes.
@@ -53,7 +53,7 @@ public:
      * \param overrideValues if true, current property values are overwritten; otherwise not
      */
     template<typename T>
-    void enumerateAlpha(const QList<T> &list, const QString &property, const QString &start, bool overrideValues);
+    void enumerateAlpha(const QList<T> &list, const QString &property, const QString &start, bool overrideValues = true);
 
     /**
      * Assign integers uniformly at random from range [lowerLimit,upperLimit] to data elements. Using Mersenne-Twister
@@ -67,7 +67,7 @@ public:
      * \param overrideValues if true, current property values are overwritten; otherwise not
      */
     template<typename T>
-    void assignRandomIntegers(const QList<T> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues);
+    void assignRandomIntegers(const QList<T> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues = true);
 
     /**
      * Assign float values uniformly at random from range [lowerLimit,upperLimit] to nodes. Using Mersenne-Twister
@@ -81,7 +81,7 @@ public:
      * \param overrideValues if true, current property values are overwritten; otherwise not
      */
     template<typename T>
-    void assignRandomReals(const QList<T> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+    void assignRandomReals(const QList<T> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues = true);
 
     /**
      * Assign a constant string value to nodes/pointers
@@ -92,7 +92,7 @@ public:
      * \param overrideValues if true, current property values are overwritten; otherwise not
      */
     template<typename T>
-    void assignConstantValue(const QList<T> &list, const QString &property, const QString &constant, bool overrideValues);
+    void assignConstantValue(const QList<T> &list, const QString &property, const QString &constant, bool overrideValues = true);
 };
 
 #endif // VALUEMODIFIER_H
