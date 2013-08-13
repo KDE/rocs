@@ -35,7 +35,7 @@ ValueModifier::ValueModifier()
 
 
 template<typename T>
-void ValueModifier::enumerate(const QList<T> &list, const QString &property, int start, const QString &baseString, bool overrideValues = true)
+void ValueModifier::enumerate(const QList<T> &list, const QString &property, int start, const QString &baseString, bool overrideValues)
 {
     for (int i = 0; i < list.size(); i++) {
         if (!overrideValues && !list[i]->property(property.toLatin1()).isNull()) {
@@ -49,7 +49,7 @@ template void ValueModifier::enumerate<PointerPtr>(const QList<PointerPtr> &list
 
 
 template<typename T>
-void ValueModifier::enumerateAlpha(const QList< T >& list, const QString &property, const QString &start, bool overrideValues = true)
+void ValueModifier::enumerateAlpha(const QList< T >& list, const QString &property, const QString &start, bool overrideValues)
 {
     QString identifier = start;
     for (int i = start.length()-1; i >= 0; --i) {
@@ -86,7 +86,7 @@ template void ValueModifier::enumerateAlpha<PointerPtr>(const QList<PointerPtr> 
 
 
 template<typename T>
-void ValueModifier::assignRandomIntegers(const QList<T> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues = true)
+void ValueModifier::assignRandomIntegers(const QList<T> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit) {
         return;
@@ -110,7 +110,7 @@ template void ValueModifier::assignRandomIntegers<PointerPtr>(const QList<Pointe
 
 
 template<typename T>
-void ValueModifier::assignRandomReals(const QList<T> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues = true)
+void ValueModifier::assignRandomReals(const QList<T> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit) {
         return;
@@ -133,7 +133,7 @@ template void ValueModifier::assignRandomReals<DataPtr>(const QList<DataPtr> &li
 template void ValueModifier::assignRandomReals<PointerPtr>(const QList<PointerPtr> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
 
 template<typename T>
-void ValueModifier::assignConstantValue(const QList<T> &list, const QString &property, const QString &constant, bool overrideValues = true)
+void ValueModifier::assignConstantValue(const QList<T> &list, const QString &property, const QString &constant, bool overrideValues)
 {
     for (int i = 0; i < list.size(); i++) {
         if (!overrideValues && !list[i]->property(property.toLatin1()).isNull()) {
