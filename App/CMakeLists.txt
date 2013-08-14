@@ -22,7 +22,7 @@ project(rocs)
 
 set(ROCS_VERSION_MAJOR 1)
 set(ROCS_VERSION_MINOR 9)
-set(ROCS_VERSION_PATCH 0)
+set(ROCS_VERSION_PATCH 60)
 
 configure_file( "${rocs_SOURCE_DIR}/rocsversion.h.cmake" "${rocs_BINARY_DIR}/rocsversion.h" @ONLY )
 
@@ -136,3 +136,4 @@ if(KDE4_BUILD_TESTS)
     enable_testing()
     add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)
+
