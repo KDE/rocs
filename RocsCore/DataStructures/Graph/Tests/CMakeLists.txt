@@ -17,7 +17,7 @@
 ##
 
 include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}}
+    ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 # basic functionality tests of data structure
