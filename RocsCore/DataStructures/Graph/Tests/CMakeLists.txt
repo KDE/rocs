@@ -23,11 +23,13 @@ include_directories(
 # basic functionality tests of data structure
 set (TestGraphStructure_SRCS
     TestGraphStructure.cpp
+    ../GraphStructure.cpp
+    ../GraphNode.cpp
 )
 kde4_add_executable(TestGraphStructure ${TestGraphStructure_SRCS} )
 target_link_libraries( TestGraphStructure
     rocscore
-    rocs_GraphStructure
+    ${KDE4_KDEUI_LIBS}
     ${KDE4_KROSSUI_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTTEST_LIBRARY}
@@ -40,11 +42,13 @@ add_test(TestGraphStructure TestGraphStructure)
 # graph algorithms
 set (TestGraphStructureAlgorithms_SRCS
     TestGraphStructureAlgorithms.cpp
+    ../GraphStructure.cpp
+    ../GraphNode.cpp
 )
 kde4_add_executable(TestGraphStructureAlgorithms ${TestGraphStructureAlgorithms_SRCS} )
 target_link_libraries( TestGraphStructureAlgorithms
     rocscore
-    rocs_GraphStructure
+    ${KDE4_KDEUI_LIBS}
     ${KDE4_KROSSUI_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTTEST_LIBRARY}
