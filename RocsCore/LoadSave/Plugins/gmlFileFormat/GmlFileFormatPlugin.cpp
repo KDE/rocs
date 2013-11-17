@@ -45,24 +45,20 @@ extern GmlParser::GmlGraphParsingHelper* phelper;
 K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin<GmlFileFormatPlugin>();)
 K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
+GmlFileFormatPlugin::GmlFileFormatPlugin(QObject *parent, const QList<QVariant>&) :
+    GraphFilePluginInterface(FilePLuginFactory(aboutdata, 0).componentData().aboutData(), parent)
+{
+}
 
 GmlFileFormatPlugin::~GmlFileFormatPlugin()
 {
 }
-
-
-GmlFileFormatPlugin::GmlFileFormatPlugin(QObject *parent, const QList<QVariant>&) :
-    GraphFilePluginInterface(FilePLuginFactory::componentData().aboutData(), parent)
-{
-}
-
 
 const QStringList GmlFileFormatPlugin::extensions() const
 {
     return QStringList()
            << i18n("*.gml|Graph Markup Language Format") + '\n';
 }
-
 
 void GmlFileFormatPlugin::readFile()
 {

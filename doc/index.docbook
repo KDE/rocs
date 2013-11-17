@@ -41,7 +41,7 @@
 <copyright><year>2011-2013</year><holder>Andreas Cord-Landwehr</holder></copyright>
 
 <date>2013-07-03</date>
-<releaseinfo>1.9.0 &kde; 4.11</releaseinfo>
+<releaseinfo>1.10.0 &kde; 4.12</releaseinfo>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
@@ -301,10 +301,10 @@ The user interface is divided into several logical parts as presented at the scr
         This toolbar provides all tools for the visual graph editor.
         Use the <inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsadddata.png" format="PNG"/></imageobject>
         </inlinemediaobject><guibutton>Add Element</guibutton> or <inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsaddedge.png"
-        format="PNG"/></imageobject></inlinemediaobject><guibutton>Add Connection</guibutton> buttons to create new elements 
+        format="PNG"/></imageobject></inlinemediaobject><guibutton>Add Connection</guibutton> buttons to create new elements
 	or to connect elements, respectively.
         New data elements are added to the data structure that is currently selected at the <emphasis>Document Selector</emphasis> bar.
-	  Note that <guibutton>Add Element</guibutton> and <guibutton>Add Connection</guibutton> buttons both have menus to select the type of which the created elements shall be. 
+	  Note that <guibutton>Add Element</guibutton> and <guibutton>Add Connection</guibutton> buttons both have menus to select the type of which the created elements shall be.
         For details see <xref linkend="user-interface-toolbars" />.
     </para></listitem>
 </varlistentry>
