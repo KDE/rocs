@@ -30,7 +30,6 @@ set(TestDotFileFormatPlugin_SRCS
 kde4_add_unit_test(TestDotFileFormatPlugin ${TestDotFileFormatPlugin_SRCS})
 target_link_libraries(TestDotFileFormatPlugin
     rocscore
-    rocs_GraphStructure
     ${QT_QTTEST_LIBRARY}
     ${KDE4_KDECORE_LIBS}
 )

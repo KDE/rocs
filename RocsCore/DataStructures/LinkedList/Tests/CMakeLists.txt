@@ -23,11 +23,12 @@ include_directories(
 # basic functionality tests of data structure
 set (TestLinkedListStructure_SRCS
     TestLinkedListStructure.cpp
+    ../ListNode.cpp
+    ../ListStructure.cpp
 )
 kde4_add_executable(TestLinkedListStructure ${TestLinkedListStructure_SRCS} )
 target_link_libraries( TestLinkedListStructure
     rocscore
-    rocs_ListStructure
     ${KDE4_KROSSUI_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTTEST_LIBRARY}
