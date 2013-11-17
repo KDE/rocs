@@ -40,7 +40,7 @@ K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
 
 
 TikzFileFormatPlugin::TikzFileFormatPlugin(QObject* parent, const QList<QVariant>&) :
-    GraphFilePluginInterface(FilePluginFactory::componentData().aboutData(), parent)
+    GraphFilePluginInterface(FilePluginFactory(aboutdata,0).componentData().aboutData(), parent)
 {
 }
 
@@ -53,7 +53,6 @@ const QStringList TikzFileFormatPlugin::extensions() const
     return QStringList()
            << i18n("*.pgf|TikZ (PGF) Format") + '\n';
 }
-
 
 GraphFilePluginInterface::PluginType TikzFileFormatPlugin::pluginCapability() const
 {
