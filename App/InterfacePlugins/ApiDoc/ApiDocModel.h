@@ -32,7 +32,7 @@ public:
         AnchorRole
     };
 
-    ApiDocModel(QList<ObjectDocumentation* > dataList, QObject *parent = 0);
+    explicit ApiDocModel(QList<ObjectDocumentation* > dataList, QObject *parent = 0);
     ~ApiDocModel();
 
     QVariant data(const QModelIndex &index, int role) const;

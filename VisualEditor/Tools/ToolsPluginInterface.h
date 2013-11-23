@@ -99,7 +99,7 @@ public:
     QString pluginId() const;
 
     /**
-     * Gives list of supported data structures of the tool. Use this method to check wether the
+     * Gives list of supported data structures of the tool. Use this method to check whether the
      * tool plugin is compatible with the given data structure backend. The list of supported
      * backends consists of data structure backend identifiers as given by
      * \ref DataStructureBackendInterface::internalName().
