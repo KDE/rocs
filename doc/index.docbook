@@ -47,7 +47,7 @@
 
 <abstract>
 <para>
-&rocs; is a graph theory tool for KDE.
+&rocs; is a graph theory tool for &kde;.
 </para>
 </abstract>
 
@@ -274,13 +274,13 @@ Finally we want to execute the algorithm. For this we can start the execution by
 The user interface is divided into several logical parts as presented at the screenshot below.
 </para>
 <screenshot>
-    <screeninfo>GUI elements of the &rocs; interface.</screeninfo>
+    <screeninfo>&GUI; elements of the &rocs; interface.</screeninfo>
     <mediaobject>
     <imageobject>
     <imagedata fileref="rocs-interfaces.png" format="PNG" />
     </imageobject>
     <textobject>
-    <phrase>GUI elements of the &rocs; interface.</phrase>
+    <phrase>&GUI; elements of the &rocs; interface.</phrase>
     </textobject>
     </mediaobject>
 </screenshot>
