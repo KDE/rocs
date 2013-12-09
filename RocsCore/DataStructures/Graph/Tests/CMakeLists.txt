@@ -27,6 +27,7 @@ set (TestGraphStructure_SRCS
     ../GraphNode.cpp
 )
 kde4_add_executable(TestGraphStructure ${TestGraphStructure_SRCS} )
+set_target_properties(TestGraphStructure PROPERTIES COMPILE_FLAGS -DROCS_GRAPHSTRUCTURE_EXPORT=)
 target_link_libraries( TestGraphStructure
     rocscore
     ${KDE4_KDEUI_LIBS}
@@ -46,6 +47,7 @@ set (TestGraphStructureAlgorithms_SRCS
     ../GraphNode.cpp
 )
 kde4_add_executable(TestGraphStructureAlgorithms ${TestGraphStructureAlgorithms_SRCS} )
+set_target_properties(TestGraphStructureAlgorithms PROPERTIES COMPILE_FLAGS -DROCS_GRAPHSTRUCTURE_EXPORT=)
 target_link_libraries( TestGraphStructureAlgorithms
     rocscore
     ${KDE4_KDEUI_LIBS}

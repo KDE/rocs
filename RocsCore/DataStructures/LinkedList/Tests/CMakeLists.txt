@@ -27,6 +27,7 @@ set (TestLinkedListStructure_SRCS
     ../ListStructure.cpp
 )
 kde4_add_executable(TestLinkedListStructure ${TestLinkedListStructure_SRCS} )
+set_target_properties(TestLinkedListStructure PROPERTIES COMPILE_FLAGS -DROCS_LISTSTRUCTURE_EXPORT=)
 target_link_libraries( TestLinkedListStructure
     rocscore
     ${KDE4_KROSSUI_LIBS}

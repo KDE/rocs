@@ -40,7 +40,6 @@ set(ListStructure_SRC
 )
 
 kde4_add_plugin(rocs_ListStructure ${ListStructure_SRC} )
-kde4_add_library(rocs_ListStructure SHARED ${ListStructure_SRC} )
 
 target_link_libraries(rocs_ListStructure
                 ${KDE4_KDEUI_LIBS}

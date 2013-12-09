@@ -40,8 +40,7 @@ set(GraphStructure_SRC
     NodeItem.cpp
     EdgeItem.cpp)
 
-kde4_add_plugin(rocs_GraphStructure ${GraphStructure_SRC})
-kde4_add_library(rocs_GraphStructure SHARED ${GraphStructure_SRC})
+kde4_add_plugin(rocs_GraphStructure SHARED ${GraphStructure_SRC})
 
 target_link_libraries(rocs_GraphStructure
                 ${KDE4_KDEUI_LIBS}
