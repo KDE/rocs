@@ -22,6 +22,7 @@
 #include <QWidget>
 #include <QtScriptBackend.h>
 #include <KDebug>
+#include <KIcon>
 
 ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     : QWidget(parent),

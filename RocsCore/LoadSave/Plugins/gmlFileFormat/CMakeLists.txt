@@ -31,7 +31,7 @@ set(gmlFileFormatPlugin_SRCS
     GmlGraphParsingHelper.cpp
 )
 
-kde4_add_plugin(rocs_gmlfileformat ${gmlFileFormatPlugin_SRCS})
+add_library(rocs_gmlfileformat MODULE ${gmlFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_gmlfileformat
     rocscore

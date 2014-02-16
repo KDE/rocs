@@ -19,19 +19,22 @@
 
 #include "CodeEditor.h"
 
-#include <ktexteditor/view.h>
-#include <ktexteditor/editorchooser.h>
+#include <KTextEditor/View>
+#include <KTextEditor/Editor>
+#include <KTextEditor/Document>
 #include <KMessageBox>
 #include <KLocale>
 #include <QVBoxLayout>
 #include "MainWindow.h"
 #include <KFileDialog>
+#include <KIcon>
+#include <KDebug>
 #include <QStackedWidget>
 
 CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
 {
     _layout = new QVBoxLayout();
-    _editor = KTextEditor::EditorChooser::editor();
+    _editor = KTextEditor::Editor::instance();
     if (!_editor) {
         KMessageBox::error(this, i18n("A KDE Text Editor could not be found, \n please, check your installation"));
         exit(1);
@@ -44,13 +47,13 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
 
     _tabDocs->setTabsClosable(false);
 
-    _editor->setSimpleMode(false);
+//     _editor->setSimpleMode(false); //FIXME
 
     _layout->addWidget(_tabDocs);
     _layout->addWidget(_docArea);
 
     _layout->setSpacing(0);
-    _layout->setMargin(0);
+//     _layout->setMargin(0); //FIXME
 
     setLayout(_layout);
 }

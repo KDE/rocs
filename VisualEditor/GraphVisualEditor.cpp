@@ -52,7 +52,7 @@
 #include <KActionCollection>
 
 // load catalog for library
-static const KCatalogLoader loader("rocsvisualeditor");
+// static const KCatalogLoader loader("rocsvisualeditor"); //FIXME add translation
 
 
 // class GraphVisualEditorPrivate

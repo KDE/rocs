@@ -20,7 +20,7 @@
 
 #include "PropertiesDialogAction.h"
 
-#include <QPointer>
+
 #include "Interface/DataStructurePropertiesDialog.h"
 #include "Interface/DocumentPropertiesDialog.h"
 #include "Interface/DataPropertiesWidget.h"
@@ -30,7 +30,9 @@
 #include <DocumentManager.h>
 #include <Document.h>
 
+#include <QPointer>
 #include <QDebug>
+#include <KIcon>
 #include <KTabWidget>
 
 

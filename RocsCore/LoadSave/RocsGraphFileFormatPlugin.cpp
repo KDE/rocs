@@ -20,10 +20,12 @@
 
 #include "RocsGraphFileFormatPlugin.h"
 #include "Document.h"
+
 #include <KAboutData>
 #include <KGenericFactory>
 #include <KUrl>
 #include <KSaveFile>
+#include <KLocalizedString>
 #include <QFile>
 #include <DataStructure.h>
 #include <Data.h>
@@ -34,11 +36,12 @@
 #include <DataStructureBackendManager.h>
 #include <DataStructureBackendInterface.h>
 
+//TODO add translations
 static const KAboutData pluginAboutData("rocs_rocsgraphfileformat",
                                         0,
-                                        ki18nc("@title Displayed plugin name", "Rocs Graph File Backend"),
+                                        "Rocs Graph File Backend",
                                         "0.2",
-                                        ki18n("Read and write Rocs Graph Files"),
+                                        "Read and write Rocs Graph Files",
                                         KAboutData::License_GPL_V2);
 
 class RocsGraphFileFormatPluginPrivate
@@ -56,6 +59,7 @@ RocsGraphFileFormatPlugin::RocsGraphFileFormatPlugin(QObject *parent)
     : GraphFilePluginInterface(&pluginAboutData, parent)
 {
     d = new RocsGraphFileFormatPluginPrivate;
+    ki18n("fofo");
 }
 
 

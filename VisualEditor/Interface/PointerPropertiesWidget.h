@@ -21,11 +21,13 @@
 #ifndef POINTERPROPERTIESWIDGET_H
 #define POINTERPROPERTIESWIDGET_H
 
-#include <QtGui/QWidget>
 #include "ui_PointerPropertiesWidget.h"
+#include <QWidget>
 #include <QString>
 #include <QColor>
 #include <QPointer>
+#include <KIcon>
+#include <KDE4Support/kdialog.h> //FIXME remove
 #include "CoreTypes.h"
 
 class Pointer;

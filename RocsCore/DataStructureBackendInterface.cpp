@@ -18,6 +18,7 @@
 
 #include "DataStructureBackendInterface.h"
 #include "DataStructureBackendManager.h"
+#include <KPluginInfo>
 
 DataStructureBackendInterface::DataStructureBackendInterface(const KComponentData& /*instance*/, QObject* parent)
     : QObject(parent)

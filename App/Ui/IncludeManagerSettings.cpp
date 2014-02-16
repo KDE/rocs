@@ -22,7 +22,8 @@
 #include <QListView>
 #include <KIconButton>
 #include <kurlrequester.h>
-
+#include <KPushButton>
+#include <KIcon>
 
 IncludeManagerSettings::IncludeManagerSettings(QWidget* parent, Qt::WindowFlags f) : QWidget(parent, f)
 {

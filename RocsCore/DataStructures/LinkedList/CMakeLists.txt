@@ -39,7 +39,7 @@ set(ListStructure_SRC
     LinkedListPointerItem.cpp
 )
 
-kde4_add_plugin(rocs_ListStructure ${ListStructure_SRC} )
+add_library(rocs_ListStructure MODULE ${ListStructure_SRC})
 
 target_link_libraries(rocs_ListStructure
                 ${KDE4_KDEUI_LIBS}

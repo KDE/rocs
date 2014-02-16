@@ -24,14 +24,14 @@
 
 //Qt related includes
 #include <QtGui/QCloseEvent>
-#include <QtGui/QComboBox>
-#include <QtGui/QGraphicsView>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QSplitter>
-#include <QtGui/QStackedWidget>
-#include <QtGui/QToolBar>
-#include <QtGui/QVBoxLayout>
+#include <QComboBox>
+#include <QGraphicsView>
+#include <QLabel>
+#include <QLayout>
+#include <QSplitter>
+#include <QStackedWidget>
+#include <QToolBar>
+#include <QVBoxLayout>
 #include <QToolButton>
 #include <QPointer>
 #include <QGridLayout>
@@ -62,7 +62,7 @@
 #include "Ui/CodeEditor.h"
 #include "Ui/ScriptOutputWidget.h"
 #include "Ui/PossibleIncludes.h"
-#include "Ui/LoadedPluginsDialog.h"
+// #include "Ui/LoadedPluginsDialog.h" //FIXME
 #include "Ui/SideDockWidget.h"
 #include "Ui/JournalEditorWidget.h"
 #include "Ui/DocumentationWidget.h"
@@ -356,8 +356,9 @@ QWidget* MainWindow::setupSidePanel()
     sideDock->addDock(documentation, i18nc("@title", "Handbook"), KIcon("help-contents"));
 
     // Rocs scripting API documentation
-    ApiDocWidget* apiDoc = new ApiDocWidget(panel);
-    sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), KIcon("documentation"));
+//FIXME commented out until Grantlee is ported
+//     ApiDocWidget* apiDoc = new ApiDocWidget(panel);
+//     sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), KIcon("documentation"));
 
     return panel;
 }
@@ -925,17 +926,16 @@ void MainWindow::showPossibleIncludes()
 
 void MainWindow::showLoadedPlugins()
 {
-    QPointer<LoadedPluginsDialog> dialog = new LoadedPluginsDialog(this);
-    dialog->exec();
+    //FIXME commented out for porting
+//     QPointer<LoadedPluginsDialog> dialog = new LoadedPluginsDialog(this);
+//     dialog->exec();
 }
 
 void MainWindow::showCodeEditorConfig()
 {
     KTextEditor::Editor *editor = _codeEditor->editor();
-    if (editor->configDialogSupported()) {
-        editor->configDialog(this);
-        editor->writeConfig();
-    }
+    editor->configDialog(this);
+    editor->writeConfig();
 }
 
 void MainWindow::runToolPlugin()

@@ -35,7 +35,7 @@ set(rocs_RootedTree_SRCS
     RootedTreeEdgeItem.cpp
 )
 
-kde4_add_plugin(rocs_RootedTreeStructure ${rocs_RootedTree_SRCS})
+add_library(rocs_RootedTreeStructure MODULE ${rocs_RootedTree_SRCS})
 
 target_link_libraries(rocs_RootedTreeStructure
                 ${KDE4_KDEUI_LIBS}

@@ -30,6 +30,7 @@
 #include <QtCore/QObject>
 
 class Document;
+class KComponentData;
 class ToolsPluginInterfacePrivate;
 
 /** \class ToolsPluginInterface

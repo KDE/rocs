@@ -19,6 +19,7 @@
 
 #include "Group.h"
 
+#include <qcompilerdetection.h>
 #include "Data.h"
 #include <boost/weak_ptr.hpp>
 #include <KLocale>

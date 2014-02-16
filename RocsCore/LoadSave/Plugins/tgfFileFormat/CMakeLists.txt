@@ -28,7 +28,7 @@ set(tgfFileFormatPlugin_SRCS
     TgfFileFormatPlugin.cpp
 )
 
-kde4_add_plugin(rocs_tgffileformat ${tgfFileFormatPlugin_SRCS} )
+add_library(rocs_tgffileformat MODULE ${tgfFileFormatPlugin_SRCS} )
 
 target_link_libraries(rocs_tgffileformat
     ${KDE4_KDEUI_LIBS}

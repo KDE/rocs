@@ -19,6 +19,7 @@
 
 #include "DocumentationWidget.h"
 #include <QWebHistory>
+#include <KIcon>
 
 DocumentationWidget::DocumentationWidget(QWidget* parent)
     : QWidget(parent)

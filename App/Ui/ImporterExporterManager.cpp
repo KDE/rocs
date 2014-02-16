@@ -28,6 +28,8 @@
 #include <KGuiItem>
 #include "Document.h"
 #include <settings.h>
+#include <KUrl>
+#include <KDialog>
 
 #include <QFile>
 #include <QPointer>
@@ -108,7 +110,7 @@ Document* ImporterExporterManager::importFile()
     ext.append(i18n("*|All files"));
 
     QPointer<KFileDialog> dialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
-    dialog->setCaption(i18nc("@title:window", "Import Graph File into Project"));
+//     dialog->setCaption(i18nc("@title:window", "Import Graph File into Project")); //FIXME commented out for porting
     if (!dialog->exec()) {
         return 0;
     }

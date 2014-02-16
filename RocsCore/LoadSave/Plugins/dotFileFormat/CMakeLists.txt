@@ -30,7 +30,7 @@ set(dotFileFormatPlugin_SRCS
     DotGraphParsingHelper.cpp
 )
 
-kde4_add_plugin(rocs_dotfileformat ${dotFileFormatPlugin_SRCS})
+add_library(rocs_dotfileformat MODULE ${dotFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_dotfileformat
     rocscore

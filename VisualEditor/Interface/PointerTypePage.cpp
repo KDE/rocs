@@ -171,10 +171,10 @@ PointerTypePage::PointerTypePage(QWidget* parent)
     ui->propertyList->horizontalHeader()->setProperty("stretchLastSection", true);
 
     // create line style selector
-    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "solid line"), Qt::SolidLine);
-    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dash line"), Qt::DashLine);
-    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dot line "), Qt::DotLine);
-    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dash dot line"), Qt::DashDotLine);
+    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "solid line"), static_cast<int>(Qt::SolidLine));
+    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dash line"), static_cast<int>(Qt::DashLine));
+    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dot line "), static_cast<int>(Qt::DotLine));
+    ui->typeLineStyle->addItem(i18nc("@item:inlistbox", "dash dot line"), static_cast<int>(Qt::DashDotLine));
 
     // create pointer direction selector
     ui->typePointerDirection->addItem(i18nc("@item:inlistbox", "Unidirectional"), PointerType::Unidirectional);
@@ -247,7 +247,7 @@ void PointerTypePage::setCurrentType(int index)
 
     ui->typeName->setText(_document->pointerType(type)->name());
     ui->typeLineStyle->setCurrentIndex(
-        ui->typeLineStyle->findData(_document->pointerType(type)->lineStyle()));
+        ui->typeLineStyle->findData(static_cast<int>(_document->pointerType(type)->lineStyle())));
     ui->typePointerDirection->setCurrentIndex(
         ui->typePointerDirection->findData(_document->pointerType(type)->direction()));
     ui->typeDefaultColor->setColor(_document->pointerType(type)->defaultColor());

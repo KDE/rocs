@@ -28,7 +28,7 @@ set(tikzFileFormatPlugin_SRCS
     TikzFileFormatPlugin.cpp
 )
 
-kde4_add_plugin(rocs_tikzfileformat ${tikzFileFormatPlugin_SRCS} )
+add_library(rocs_tikzfileformat MODULE ${tikzFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_tikzfileformat
     ${KDE4_KDEUI_LIBS}

@@ -2,7 +2,7 @@
 #   This file is part of Rocs.
 #   Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 #   Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-#   Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2011-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -18,10 +18,41 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-project(Rocs)
+project(rocs)
+cmake_minimum_required(VERSION 2.8.11)
 
-cmake_minimum_required(VERSION 2.8.8)
+find_package(ECM 0.0.9 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+
+include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
 include(FeatureSummary)
+
+find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS
+  Concurrent
+  Core
+  Gui
+  Script
+  WebKit
+  WebKitWidgets
+  Widgets
+  ScriptTools
+  Svg
+  XmlPatterns
+)
+find_package(KF5 CONFIG REQUIRED COMPONENTS
+  Config
+  CoreAddons
+  DocTools
+  I18n
+  KDE4Support
+  TextEditor
+  XmlGui
+  NewStuff
+  ItemViews
+)
 
 #### Boost ####
 # In CMake >= 2.8.6, FindBoost.cmake tries to find BoostConfig.cmake which is
@@ -29,19 +60,26 @@ include(FeatureSummary)
 set(Boost_NO_BOOST_CMAKE TRUE)
 find_package(Boost "1.43" REQUIRED)
 set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
+# find_package(Grantlee REQUIRED) #FIXME deactivate for now
 
-set(KDE_MIN_VERSION "4.8")
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
+# message(${Qt5Script_INCLUDES})
 
-find_package(Qt4 REQUIRED)
-find_package(Grantlee REQUIRED)
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_BINARY_DIR}
+    ${CMAKE_INSTALL_PREFIX}/include/KDE #FIXME
+    ${Boost_INCLUDE_DIRS}
+#     ${Grantlee_INCLUDE_DIRS}
+)
 
-remove_definitions(-DQT_NO_STL)
+
+remove_definitions(-DQT_NO_CAST_TO_ASCII)
+remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
+remove_definitions(-DQT_NO_KEYWORDS)
+# revisit if still needed to build boost
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
-if(${CMAKE_BUILD_TYPE} MATCHES coverage)
-    set(CMAKE_CXX_COMPILER cov++)
-endif()
 
 # Rocs include dirs
 set(ROCSCORE_INCLUDES
@@ -53,14 +91,7 @@ set(ROCSVISUALEDITOR_INCLUDES
     "${CMAKE_CURRENT_SOURCE_DIR}/VisualEditor/"
 )
 
-include_directories(
-    ${KDE4_INCLUDES}
-    ${QT_INCLUDES}
-    ${Boost_INCLUDE_DIRS}
-    ${Grantlee_INCLUDE_DIRS}
-)
-
-# allow disabling building of optional graph file backands
+# allow disabling building of optional graph file backends
 option(ROCS_BUILD_LOADSAVE "ROCS_BUILD_LOADSAVE" ON)
 add_feature_info(OptionalGraphFiles
     ROCS_BUILD_LOADSAVE
@@ -86,4 +117,4 @@ if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_subdirectory(graphics)
-add_subdirectory(doc)
+# add_subdirectory(doc) //FIXME port documentation

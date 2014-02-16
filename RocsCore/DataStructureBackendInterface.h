@@ -20,8 +20,6 @@
 #ifndef DATASTRUCTUREBACKENDINTERFACE_H
 #define DATASTRUCTUREBACKENDINTERFACE_H
 
-#include <kplugininfo.h>
-
 //Qt classes
 class QLayout;
 class QGraphicsItem;
@@ -35,6 +33,7 @@ class Document;
 // KClasses
 class KComponentData;
 
+#include <QObject>
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 

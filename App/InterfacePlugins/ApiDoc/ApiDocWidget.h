@@ -21,6 +21,7 @@
 
 #include "ui_ApiDocWidget.h"
 #include <QWidget>
+#include <KUrl>
 
 class ApiDocManager;
 class ApiDocModel;

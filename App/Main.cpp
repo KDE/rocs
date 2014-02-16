@@ -23,7 +23,6 @@
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KDebug>
-#include <KLocale>
 #include <KLocalizedString>
 #include <QByteArray>
 
@@ -36,32 +35,33 @@ int main(int argc, char *argv[])
 {
     KAboutData aboutData("rocs",
                          "rocs",
-                         ki18nc("@title Displayed program name", "Rocs"),
+                         ki18nc("@title Displayed program name", "Rocs").toString(),
                          ROCS_VERSION_STR,
-                         ki18nc("@title KAboutData: short program description", "Graph Theory Tool"),
+                         ki18nc("@title KAboutData: short program description", "Graph Theory Tool").toString(),
                          KAboutData::License_GPL,
-                         ki18nc("@info:credit", "(c) 2009-2013 Rocs Developers"),
-                         ki18nc("@title Short program description", "Rocs - Data Structure Analysis")
+                         ki18nc("@info:credit", "(c) 2009-2013 Rocs Developers").toString(),
+                         ki18nc("@title Short program description", "Rocs - Data Structure Analysis").toString()
                         );
 
-    aboutData.addAuthor(ki18nc("@info:credit Developer name",
-                        "Tomaz Canabrava"),
-                        ki18nc("@info:credit Role", "Developer"),
+    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Tomaz Canabrava").toString(),
+                        ki18nc("@info:credit Role", "Developer").toString(),
                         "tcanabrava@kde.org",
                         "http://liveblue.wordpress.com");
 
-    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Wagner Reck"),
-                        ki18nc("@info:credit Role", "Developer"),
+    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Wagner Reck").toString(),
+                        ki18nc("@info:credit Role", "Developer").toString(),
                         "wagner.reck@gmail.com",
                         "http://wiglot.wordpress.com");
 
-    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Andreas Cord-Landwehr"),
-                        ki18nc("@info:credit Role", "Developer"),
+    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Andreas Cord-Landwehr").toString(),
+                        ki18nc("@info:credit Role", "Developer").toString(),
                         "cordlandwehr@kde.org",
                         "http://cordlandwehr.wordpress.com");
-
-    KCmdLineArgs::init(argc, argv, &aboutData);
-    KApplication app;
+    /**
+     * first init the app
+     */
+    QApplication app(argc, argv);
+    KAboutData::setApplicationData(aboutData);
 
     if (DataStructureBackendManager::self().backends().count() == 0) {
         KMessageBox::detailedError(0,

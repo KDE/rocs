@@ -26,6 +26,8 @@
 #include <KWidgetItemDelegate>
 #include <KPushButton>
 #include <KTitleWidget>
+#include <KIcon>
+#include <KIconLoader>
 
 #include <QApplication>
 #include <QAbstractListModel>
@@ -37,10 +39,10 @@
 #include <QPointer>
 
 #define MARGIN 5
-
+//FIXME revisit plugin list
 bool sortPlugins(GraphFilePluginInterface* pluginL, GraphFilePluginInterface* pluginR)
 {
-    return pluginL->aboutData()->programName() < pluginR->aboutData()->programName();
+    return pluginL->aboutData()->internalProgramName() < pluginR->aboutData()->internalProgramName();
 }
 
 class PluginsModel : public QAbstractListModel
@@ -82,7 +84,7 @@ public:
         switch (role) {
             case Qt::DisplayRole:
             {
-                QString name(plugin->aboutData()->programName());
+                QString name(plugin->aboutData()->productName());
                 return name;
             }
             case CommentRole:

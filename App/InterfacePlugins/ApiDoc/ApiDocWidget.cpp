@@ -24,6 +24,8 @@
 #include <QWebView>
 #include <KDebug>
 #include <KStandardDirs>
+#include <KGlobal> //FIXME remove
+#include <KIcon>
 
 ApiDocWidget::ApiDocWidget(QWidget* parent)
     : QWidget(parent)

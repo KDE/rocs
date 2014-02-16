@@ -82,12 +82,8 @@ kde4_add_ui_files( rocsvisualeditor_SRCS
 
 kde4_add_library( rocsvisualeditor SHARED ${rocsvisualeditor_SRCS} )
 
-target_link_libraries( rocsvisualeditor
+target_link_libraries(rocsvisualeditor
     rocscore
-    ${KDE4_KROSSCORE_LIBS}
-    ${KDE4_KIO_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${QT_QTSCRIPTTOOLS_LIBRARY}
 )
 
 set( rocsvisualeditor_LIB_HDRS
@@ -96,7 +92,7 @@ set( rocsvisualeditor_LIB_HDRS
     GraphVisualEditor.h
 )
 
-add_subdirectory(Tools)
+# add_subdirectory(Tools) #FIXME remove for porting
 
 set_target_properties( rocsvisualeditor PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 

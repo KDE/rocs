@@ -2,7 +2,7 @@
 #   This file is part of Rocs.
 #   Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 #   Copyright 2010-2012  Wagner Reck <wagner.reck@gmail.com>
-#   Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2011-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -29,9 +29,6 @@ configure_file( "${rocs_SOURCE_DIR}/rocsversion.h.cmake" "${rocs_BINARY_DIR}/roc
 add_subdirectory(InterfacePlugins)
 
 include_directories(
-    ${KDE4_INCLUDES}
-    ${QT_INCLUDES}
-    ${KROSS_INCLUDES}
     ${ROCSCORE_INCLUDES}
     ${ROCSVISUALEDITOR_INCLUDES}
     Actions/
@@ -42,7 +39,7 @@ include_directories(
     Scripts/
 )
 
-set( rocs_actions_SRCS
+set(rocs_actions_SRCS
     Actions/PropertiesDialogAction.cpp
 )
 
@@ -58,25 +55,27 @@ set( rocs_interface_SRCS
     Ui/CodeEditor.cpp
     Ui/DocumentTypesWidget.cpp
     Ui/ConfigureDefaultProperties.cpp
-    Ui/LoadedPluginsDialog.cpp
+#     Ui/LoadedPluginsDialog.cpp //FIXME
     Ui/PossibleIncludes.cpp
     Ui/ScriptOutputWidget.cpp
-    InterfacePlugins/ApiDoc/ApiDocWidget.cpp
-    InterfacePlugins/ApiDoc/ObjectDocumentation.cpp
-    InterfacePlugins/ApiDoc/PropertyDocumentation.cpp
-    InterfacePlugins/ApiDoc/MethodDocumentation.cpp
-    InterfacePlugins/ApiDoc/ParameterDocumentation.cpp
-    InterfacePlugins/ApiDoc/ApiDocManager.cpp
-    InterfacePlugins/ApiDoc/ApiDocModel.cpp
+#FIXME commented out, waiting for Grantlee Qt5 port
+#     InterfacePlugins/ApiDoc/ApiDocWidget.cpp
+#     InterfacePlugins/ApiDoc/ObjectDocumentation.cpp
+#     InterfacePlugins/ApiDoc/PropertyDocumentation.cpp
+#     InterfacePlugins/ApiDoc/MethodDocumentation.cpp
+#     InterfacePlugins/ApiDoc/ParameterDocumentation.cpp
+#     InterfacePlugins/ApiDoc/ApiDocManager.cpp
+#     InterfacePlugins/ApiDoc/ApiDocModel.cpp
 )
 
-set( rocs_SRCS
+set(
+    rocs_SRCS
     Main.cpp
     ${rocs_interface_SRCS}
     ${rocs_script_SRC}
 )
 
-kde4_add_ui_files(
+qt5_wrap_ui(
     rocs_SRCS
     Ui/DocumentationWidget.ui
     Ui/JournalEditorWidget.ui
@@ -87,37 +86,37 @@ kde4_add_ui_files(
 )
 
 # we currently only support QtScript
-set( QT_USE_QTSCRIPT true )
+set(QT_USE_QTSCRIPT true)
 
-set( rocs_KCFGS settings.kcfgc )
-
-kde4_add_kcfg_files( rocs_Settings_SRCS ${rocs_KCFGS} )
+kconfig_add_kcfg_files(rocs_Settings_SRCS settings.kcfgc)
 
 # needed to get icon on windows
+#TODO port to kf5
 kde4_add_app_icon( rocs_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/../graphics/global/hi*-apps-rocs.png
 )
 
-kde4_add_executable( rocs
+add_executable( rocs
     ${rocs_SRCS}
     ${rocs_Settings_SRCS}
     ${rocs_RCC_SRCS}
 )
 
 target_link_libraries(rocs
-    rocscore
-    rocsvisualeditor
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_PLASMA_LIBS}
-    ${KDE4_KROSSUI_LIBS}
-    ${KDE4_KIO_LIBS}
-    ${KDE4_KTEXTEDITOR_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${QT_QTSCRIPTTOOLS_LIBRARY}
-    ${QT_QTWEBKIT_LIBRARY}
-    ${QT_QTXMLPATTERNS_LIBRARY}
-    ${KDE4_KNEWSTUFF3_LIBS}
-    ${Grantlee_CORE_LIBRARIES}
+    PUBLIC
+        rocscore
+        rocsvisualeditor
+        ${Qt5WebKit_LIBRARIES}
+        ${Qt5WebKitWidgets_LIBRARIES}
+        ${Qt5XmlPatterns_LIBRARIES}
+        KF5::TextEditor
+        KF5::Archive
+        KF5::CoreAddons
+        KF5::KDE4Support
+        KF5::Service
+        KF5::I18n
+        KF5::NewStuff
+        KF5::ItemViews
 )
 
 ################## INSTALLS ##########################
@@ -136,4 +135,3 @@ if(KDE4_BUILD_TESTS)
     enable_testing()
     add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)
-

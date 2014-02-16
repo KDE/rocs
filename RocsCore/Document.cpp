@@ -31,10 +31,12 @@
 #include "QtScriptBackend.h"
 #include "ConcurrentHelpClasses.h"
 
-#include <KStandardDirs>
 #include <KSaveFile>
 #include <KDebug>
+#include <KUrl>
 
+#include <QtConcurrent/QtConcurrent>
+#include <QStandardPaths>
 #include <QString>
 #include <QByteArray>
 #include <QSvgRenderer>
@@ -81,7 +83,7 @@ Document::Document(const QString& name, QObject *parent)
     d->_backend = DataStructureBackendManager::self().activeBackend();
     d->_modified = false;
 
-    d->_iconPackage = KGlobal::dirs()->locate("appdata", "iconpacks/default.svg");
+    d->_iconPackage = QStandardPaths::locate(QStandardPaths::DataLocation, "iconpacks/default.svg");
     if (!DocumentManager::self().sharedRenderer(d->_iconPackage)) {
          DocumentManager::self().registerSharedRenderer(d->_iconPackage);
     }
@@ -388,7 +390,7 @@ QString Document::fileUrl() const
     return d->_lastSavedDocumentPath;
 }
 
-void Document::setFileUrl(const KUrl& fileUrl)
+void Document::setFileUrl(const KUrl &fileUrl)
 {
     d->_lastSavedDocumentPath = fileUrl.toLocalFile();
 }

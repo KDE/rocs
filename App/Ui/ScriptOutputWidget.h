@@ -20,7 +20,7 @@
 #define SCRIPTOUTPUTWIDGET_H
 
 #include <EngineModules/Console/ConsoleModule.h>
-#include <QtGui/QWidget>
+#include <QWidget>
 #include "ui_ScriptOutputWidget.h"
 
 /**

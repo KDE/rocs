@@ -20,7 +20,7 @@
 #ifndef GROUP_H
 #define GROUP_H
 
-#include <DataStructure.h>
+#include "DataStructure.h"
 #include "Data.h"
 #include <QScopedPointer>
 

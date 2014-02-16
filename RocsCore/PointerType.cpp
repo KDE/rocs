@@ -21,7 +21,7 @@
 #include "DataStructure.h"
 #include "Pointer.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KDebug>
 #include <boost/weak_ptr.hpp>
 

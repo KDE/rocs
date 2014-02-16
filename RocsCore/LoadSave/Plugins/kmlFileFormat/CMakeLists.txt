@@ -29,7 +29,7 @@ set(kmlFileFormatPlugin_SRCS
     KmlHandler.cpp
 )
 
-kde4_add_plugin(rocs_kmlfileformat ${kmlFileFormatPlugin_SRCS})
+add_library(rocs_kmlfileformat MODULE ${kmlFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_kmlfileformat
     rocscore

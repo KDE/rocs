@@ -37,7 +37,7 @@ ToolsPluginInterface::ToolsPluginInterface(const KComponentData &instance, QObje
     , KXMLGUIClient()
     , d(new ToolsPluginInterfacePrivate)
 {
-    setComponentData(instance);
+//     setComponentData(instance); //FIXME commented out for porting
 }
 
 ToolsPluginInterface::~ToolsPluginInterface()

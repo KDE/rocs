@@ -25,6 +25,7 @@
 #include <KServiceTypeTrader>
 #include <KPluginInfo>
 #include <KDebug>
+#include <KAboutData>
 
 class ToolManagerPrivate
 {

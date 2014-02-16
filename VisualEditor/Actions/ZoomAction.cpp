@@ -28,6 +28,7 @@
 #include <QGraphicsView>
 #include <QDebug>
 #include <KLocale>
+#include <KIcon>
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 

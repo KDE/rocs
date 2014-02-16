@@ -24,6 +24,7 @@
 #include <KServiceTypeTrader>
 #include <KDebug>
 #include <KStandardDirs>
+#include <KDE4Support/kglobal.h> //FIXME remove
 
 #include <QHash>
 #include "DataStructure.h"
@@ -150,7 +151,7 @@ public:
             }
 
             // check if service is loaded from trader
-            KService::Ptr service = KSharedPtr<KService>(new KService(path));
+            KService::Ptr service = QExplicitlySharedDataPointer<KService>(new KService(path));
             KPluginInfo *info = new KPluginInfo(service);
             bool found = false;
             foreach (KPluginInfo offerInfo, offerInfos) {

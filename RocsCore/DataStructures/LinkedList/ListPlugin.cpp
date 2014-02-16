@@ -26,23 +26,25 @@
 #include "LinkedListPointerItem.h"
 #include "NodeListItem.h"
 
+#include <KLocalizedString>
 #include <KAboutData>
 #include <KComboBox>
 #include <KLineEdit>
 #include <KPluginFactory>
 
-#include <QtGui/QCheckBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QLabel>
+#include <QCheckBox>
+#include <QGridLayout>
+#include <QLabel>
 
 #include <KDebug>
 #include <KMessageBox>
 
-static const KAboutData aboutdata("rocs_ListStructure", 0, ki18nc("@title Displayed plugin name", "Linked List Structure") , "0.1");
+//TODO add translations
+static const KAboutData aboutdata("rocs_ListStructure", 0,"Linked List Structure", "0.1");
 using namespace Rocs;
 
 K_PLUGIN_FACTORY(DSPluginFactory, registerPlugin< ListPlugin>();)
-K_EXPORT_PLUGIN(DSPluginFactory(aboutdata))
+// K_EXPORT_PLUGIN(DSPluginFactory(aboutdata)) //TODO porting comment
 
 
 ListPlugin::ListPlugin(QObject* parent, const QList< QVariant >& /*args*/)

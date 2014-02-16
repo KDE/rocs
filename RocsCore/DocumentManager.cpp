@@ -26,7 +26,7 @@
 #include "LoadSave/GraphFileBackendManager.h"
 #include "DataStructureBackendInterface.h"
 
-
+#include <KUrl>
 #include <KDebug>
 #include <KLocale>
 #include <QWaitCondition>
@@ -35,7 +35,7 @@
 
 
 // load catalog for library
-static const KCatalogLoader loader("rocscore");
+// static const KCatalogLoader loader("rocscore"); //FIXME deactivate translation while porting
 
 class DocumentManagerPrivate
 {
