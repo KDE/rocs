@@ -23,19 +23,16 @@
 #include <Document.h>
 #include <DocumentManager.h>
 
+#include <KPluginFactory>
+#include <KPluginLoader>
 #include <KAboutData>
-#include <KGenericFactory>
-#include <KLocalizedString>
 
 #include <map>
 
-static const KAboutData aboutdata("rocs_generategraphplugin", 0, ki18nc("@Title Displayed plugin name", "Generate Graph") , "0.1");
-
 K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<GenerateGraphToolPlugin>();)
-K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))
 
 GenerateGraphToolPlugin::GenerateGraphToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/)
-:   ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
+    : ToolsPluginInterface("rocs_generategraphplugin", parent)
 {
 
 }

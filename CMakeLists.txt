@@ -52,6 +52,7 @@ find_package(KF5 CONFIG REQUIRED COMPONENTS
   XmlGui
   NewStuff
   ItemViews
+  Service
 )
 
 #### Boost ####

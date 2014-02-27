@@ -24,28 +24,25 @@
 #include <DataStructure.h>
 #include <DocumentManager.h>
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtGui/QGridLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QFont>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QApplication>
+#include <QString>
+#include <QStringList>
+#include <QGridLayout>
+#include <QLabel>
+#include <QFont>
+#include <QDesktopWidget>
+#include <QApplication>
 
 #include <KAboutData>
 #include <kgenericfactory.h>
 #include <KLocalizedString>
 
 #include <map>
-#include <ui_AssignValuesWidget.h>
-
-static const KAboutData aboutdata("rocs_assignvaluesplugin", 0, ki18nc("@title Displayed plugin name", "Assign Values") , "0.1");
+#include "ui_AssignValuesWidget.h"
 
 K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<AssignValuesToolPlugin>();)
-K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))
 
-AssignValuesToolPlugin::AssignValuesToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
-    ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
+AssignValuesToolPlugin::AssignValuesToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/)
+    : ToolsPluginInterface("rocs_assignvaluesplugin", parent)
 {
 
 }
@@ -73,3 +70,5 @@ void AssignValuesToolPlugin::run(Document *document) const
     dialog->exec();
     return;
 }
+
+#include "AssignValuesToolsPlugin.moc"

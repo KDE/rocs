@@ -24,6 +24,7 @@
 #include "ToolManager.h"
 #include <KPluginInfo>
 #include <KDebug>
+#include <KXMLGUIClient>
 
 class ToolsPluginInterfacePrivate
 {
@@ -32,12 +33,12 @@ public:
 };
 
 
-ToolsPluginInterface::ToolsPluginInterface(const KComponentData &instance, QObject *parent)
+ToolsPluginInterface::ToolsPluginInterface(const QString &componentName, QObject *parent)
     : QObject(parent)
     , KXMLGUIClient()
     , d(new ToolsPluginInterfacePrivate)
 {
-//     setComponentData(instance); //FIXME commented out for porting
+    setComponentName(componentName, componentName);
 }
 
 ToolsPluginInterface::~ToolsPluginInterface()

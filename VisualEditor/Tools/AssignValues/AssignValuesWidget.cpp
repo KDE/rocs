@@ -33,14 +33,14 @@
 #include <KComboBox>
 #include <KPushButton>
 
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QGridLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpinBox>
-#include <QtCore/QMap>
-#include <QtCore/QPair>
+#include <QDesktopWidget>
+#include <QGridLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QMap>
+#include <QPair>
 
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int.hpp>

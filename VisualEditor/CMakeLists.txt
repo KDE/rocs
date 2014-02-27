@@ -84,6 +84,7 @@ kde4_add_library( rocsvisualeditor SHARED ${rocsvisualeditor_SRCS} )
 
 target_link_libraries(rocsvisualeditor
     rocscore
+    KF5::Service
 )
 
 set( rocsvisualeditor_LIB_HDRS
@@ -92,7 +93,7 @@ set( rocsvisualeditor_LIB_HDRS
     GraphVisualEditor.h
 )
 
-# add_subdirectory(Tools) #FIXME remove for porting
+add_subdirectory(Tools)
 
 set_target_properties( rocsvisualeditor PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 

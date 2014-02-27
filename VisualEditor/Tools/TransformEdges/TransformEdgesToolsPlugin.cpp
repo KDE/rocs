@@ -19,34 +19,33 @@
 #include "TransformEdgesToolsPlugin.h"
 #include "TransformEdgesWidget.h"
 #include "../ToolsPluginInterface.h"
+
 #include <CoreTypes.h>
 #include <Document.h>
 #include <DocumentManager.h>
 #include <DataStructure.h>
 #include <DataStructureBackendInterface.h>
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtGui/QGridLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QFont>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QApplication>
+#include <QString>
+#include <QStringList>
+#include <QGridLayout>
+#include <QLabel>
+#include <QFont>
+#include <QDesktopWidget>
+#include <QApplication>
 
 #include <KAboutData>
-#include <kgenericfactory.h>
+#include <KPluginFactory>
+#include <KPluginLoader>
 #include <KLocalizedString>
 
 #include <map>
 #include "ui_TransformEdgesWidget.h"
 
-static const KAboutData aboutdata("rocs_transformedgesplugin", 0, ki18nc("@title Displayed plugin name", "Transform Edges") , "0.1");
-
 K_PLUGIN_FACTORY(ToolsPluginFactory, registerPlugin<TransformEdgesToolPlugin>();)
-K_EXPORT_PLUGIN(ToolsPluginFactory(aboutdata))
 
-TransformEdgesToolPlugin::TransformEdgesToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/):
-    ToolsPluginInterface(ToolsPluginFactory::componentData(), parent)
+TransformEdgesToolPlugin::TransformEdgesToolPlugin(QObject* parent,  const QList<QVariant> & /* args*/)
+    : ToolsPluginInterface("rocs_transformedgesplugin", parent)
 {
 
 }
@@ -79,3 +78,4 @@ void TransformEdgesToolPlugin::run(Document *document) const
     return;
 }
 
+#include "TransformEdgesToolsPlugin.moc"

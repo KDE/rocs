@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010-2012  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2013       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2013-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -77,7 +77,7 @@ class VISUALEDITOR_EXPORT ToolsPluginInterface
     Q_OBJECT
 
 public:
-    ToolsPluginInterface(const KComponentData &instance, QObject *parent);
+    ToolsPluginInterface(const QString &componentName, QObject *parent);
     virtual ~ToolsPluginInterface();
 
     /**

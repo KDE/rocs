@@ -24,14 +24,14 @@
 #include <KDialog>
 #include <KComboBox>
 
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QGridLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpinBox>
-#include <QtCore/QMap>
-#include <QtCore/QPair>
+#include <QDesktopWidget>
+#include <QGridLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QMap>
+#include <QPair>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
@@ -43,13 +43,12 @@
 #include <Pointer.h>
 #include <Data.h>
 
-
 using namespace Rocs;
 
 class QPushButton;
 
 TransformEdgesWidget::TransformEdgesWidget(Document* graphDoc, QWidget* parent)
-    :   KDialog(parent)
+    : KDialog(parent)
 {
     graphDoc_ = graphDoc;
 
