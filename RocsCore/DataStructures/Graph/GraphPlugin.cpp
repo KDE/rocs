@@ -23,24 +23,22 @@
 #include "EdgeItem.h"
 #include "Data.h"
 
-#include <KAboutData>
 #include <KPluginFactory>
 #include <knuminput.h>
 #include <KMessageBox>
 #include <KComboBox>
+#include <KLocalizedString>
 
-#include <QtGui/QGridLayout>
-#include <QtGui/QSpinBox>
-#include <QtGui/QLabel>
+#include <QGridLayout>
+#include <QSpinBox>
+#include <QLabel>
 
-static const KAboutData aboutdata("rocs_GraphStructure", 0, ki18nc("@title Displayed plugin name", "Graph Structure"), "0.1");
 using namespace Rocs;
 
 K_PLUGIN_FACTORY(DSPluginFactory, registerPlugin<GraphPlugin>();)
-K_EXPORT_PLUGIN(DSPluginFactory(aboutdata))
 
 GraphPlugin::GraphPlugin(QObject* parent, const QList<QVariant>& /*args*/)
-    : DataStructureBackendInterface(DSPluginFactory::componentData(), parent)
+    : DataStructureBackendInterface("rocs_GraphStructure", parent)
 {
 }
 
@@ -131,3 +129,5 @@ bool GraphPlugin::canConvertFrom(Document*) const
 {
     return true;
 }
+
+#include "GraphPlugin.moc"

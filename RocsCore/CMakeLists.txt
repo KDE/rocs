@@ -104,7 +104,7 @@ install(FILES Data.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 install(FILES Pointer.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 install(FILES DataStructure.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 
-# add_subdirectory(DataStructures) //FIXME
+add_subdirectory(DataStructures)
 # add_subdirectory(LoadSave) //FIXME
 add_subdirectory(EngineModules)
 

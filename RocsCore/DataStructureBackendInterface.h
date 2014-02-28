@@ -34,16 +34,17 @@ class Document;
 class KComponentData;
 
 #include <QObject>
+#include <KXMLGUIClient>
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
 
 
-class ROCSLIB_EXPORT DataStructureBackendInterface : public QObject
+class ROCSLIB_EXPORT DataStructureBackendInterface : public QObject, public KXMLGUIClient
 {
     Q_OBJECT
 
 public:
-    DataStructureBackendInterface(const KComponentData& instance, QObject* parent);
+    DataStructureBackendInterface(const QString& componentName, QObject* parent);
 
     virtual ~DataStructureBackendInterface();
     virtual DataStructurePtr createDataStructure(Document * parent) = 0;

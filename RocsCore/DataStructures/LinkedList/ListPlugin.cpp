@@ -31,6 +31,7 @@
 #include <KComboBox>
 #include <KLineEdit>
 #include <KPluginFactory>
+#include <KGenericFactory>
 
 #include <QCheckBox>
 #include <QGridLayout>
@@ -39,16 +40,12 @@
 #include <KDebug>
 #include <KMessageBox>
 
-//TODO add translations
-static const KAboutData aboutdata("rocs_ListStructure", 0,"Linked List Structure", "0.1");
 using namespace Rocs;
 
-K_PLUGIN_FACTORY(DSPluginFactory, registerPlugin< ListPlugin>();)
-// K_EXPORT_PLUGIN(DSPluginFactory(aboutdata)) //TODO porting comment
-
+K_PLUGIN_FACTORY(DSPluginFactory, registerPlugin<ListPlugin>();)
 
 ListPlugin::ListPlugin(QObject* parent, const QList< QVariant >& /*args*/)
-    : DataStructureBackendInterface(DSPluginFactory::componentData(), parent)
+    : DataStructureBackendInterface("rocs_ListStructure", parent)
 {
 
 }
@@ -115,3 +112,5 @@ bool ListPlugin::canConvertFrom(Document* doc) const
     }
     return false;
 }
+
+#include "ListPlugin.moc"

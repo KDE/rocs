@@ -19,10 +19,13 @@
 #include "DataStructureBackendInterface.h"
 #include "DataStructureBackendManager.h"
 #include <KPluginInfo>
+#include <KXMLGUIClient>
+#include <QString>
 
-DataStructureBackendInterface::DataStructureBackendInterface(const KComponentData& /*instance*/, QObject* parent)
+DataStructureBackendInterface::DataStructureBackendInterface(const QString &componentName, QObject* parent)
     : QObject(parent)
 {
+    setComponentName(componentName, componentName);
 }
 
 DataStructureBackendInterface::~DataStructureBackendInterface()

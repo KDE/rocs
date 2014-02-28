@@ -21,11 +21,7 @@ project(RootedTreeStructure)
 include_directories(
     ${ROCSCORE_INCLUDES}
     ${ROCSVISUALEDITOR_INCLUDES}
-    ${KDE4_INCLUDES}
-    ${QT_INCLUDES}
 )
-
-add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
 set(rocs_RootedTree_SRCS
     RootedTreeNode.cpp
@@ -37,12 +33,12 @@ set(rocs_RootedTree_SRCS
 
 add_library(rocs_RootedTreeStructure MODULE ${rocs_RootedTree_SRCS})
 
-target_link_libraries(rocs_RootedTreeStructure
-                ${KDE4_KDEUI_LIBS}
-                ${QT_QTSCRIPT_LIBRARY}
-                ${QT_QTSCRIPTTOOLS_LIBRARY}
-                rocscore
-                rocsvisualeditor)
+target_link_libraries(
+    rocs_RootedTreeStructure
+    ${QT_QTSCRIPT_LIBRARY}
+    rocscore
+    rocsvisualeditor
+)
 
 install(TARGETS rocs_RootedTreeStructure DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES RootedTreeui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs_rootedtree)

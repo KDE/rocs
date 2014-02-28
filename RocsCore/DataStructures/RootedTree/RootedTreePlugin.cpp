@@ -29,19 +29,17 @@
 #include <knuminput.h>
 #include <KMessageBox>
 #include <KComboBox>
+#include <KLocalizedString>
 #include <QVBoxLayout>
 #include <QCheckBox>
 
-
-static const KAboutData aboutdata("rocs_RootedTreeStructure", 0, ki18nc("@title Displayed plugin name", "RootedTree Structure") , "0.1" );
 using namespace Rocs;
 
 K_PLUGIN_FACTORY( DSPluginFactory, registerPlugin< RootedTreePlugin>(); )
-K_EXPORT_PLUGIN( DSPluginFactory(aboutdata) )
 
 
 RootedTreePlugin::RootedTreePlugin(QObject* parent, const QList< QVariant >& /*args*/ )
-    : DataStructureBackendInterface(DSPluginFactory::componentData(), parent)
+    : DataStructureBackendInterface("rocs_RootedTreeStructure", parent)
 {
 }
 
@@ -134,3 +132,5 @@ bool RootedTreePlugin::canConvertFrom(Document* doc) const
     }
     return true;
 }
+
+#include "RootedTreePlugin.moc"

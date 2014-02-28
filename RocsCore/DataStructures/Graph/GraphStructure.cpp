@@ -40,6 +40,7 @@
 #include <QString>
 
 #include <cmath>
+#include <utility>
 
 DataStructurePtr Rocs::GraphStructure::create(Document *parent)
 {
@@ -323,7 +324,7 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
     counter = 0;
     foreach(PointerPtr p, pointerListAll) {
         edges[counter] = Edge(node_mapping[p->from()->identifier()], node_mapping[p->to()->identifier()]);
-        edge_mapping[std::make_pair < int, int > (node_mapping[p->from()->identifier()], node_mapping[p->to()->identifier()])] = p;
+        edge_mapping[std::make_pair<int&,int&>(node_mapping[p->from()->identifier()], node_mapping[p->to()->identifier()])] = p;
         if (!p->property("value").toString().isEmpty()) {
             weights[counter] = p->property("value").toDouble();
         } else {
@@ -333,7 +334,7 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
         // if graph is directed, also add back-edges
         if (p->direction() == PointerType::Bidirectional) {
             edges[counter] = Edge(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()]);
-            edge_mapping[std::make_pair< int, int >(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()])] = p;
+            edge_mapping[std::make_pair<int&,int&>(node_mapping[p->to()->identifier()], node_mapping[p->from()->identifier()])] = p;
             if (!p->property("value").toString().isEmpty()) {
                 weights[counter] = p->property("value").toDouble();
             } else {
@@ -368,8 +369,8 @@ QMap<DataPtr,PointerList> Rocs::GraphStructure::dijkstraShortestPaths(DataPtr fr
         vertex_descriptor target = boost::vertex(node_mapping[(*toIter)->identifier()], g);
         vertex_descriptor predecessor = target;
         do {
-            if (edge_mapping.contains(std::make_pair<int, int>(p[predecessor], predecessor))) {
-                path.append(edge_mapping[std::make_pair < int, int > (p[predecessor], predecessor)]);
+            if (edge_mapping.contains(std::make_pair<int,int>(p[predecessor], predecessor))) {
+                path.append(edge_mapping[std::make_pair<int,int>(p[predecessor], predecessor)]);
             }
             predecessor = p[predecessor];
         } while (p[predecessor] != predecessor);
