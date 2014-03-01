@@ -46,7 +46,7 @@
 #include <QToolButton>
 #include <QFrame>
 #include <DocumentManager.h>
-#include <KPushButton>
+#include <QPushButton>
 #include <QButtonGroup>
 #include <QLayout>
 #include <KActionCollection>
@@ -76,7 +76,7 @@ public:
     QToolButton *_documentPropertiesButton;
     KComboBox *_dataStructureSelectorCombo;
     QToolButton *_dataStructurePropertiesButton;
-    KPushButton *_removeDataStructureButton;
+    QPushButton *_removeDataStructureButton;
 
     QSlider *_zoomSlider;
     Document *_document;
@@ -179,13 +179,13 @@ QWidget * GraphVisualEditor::sceneToolbar()
     d->_dataStructurePropertiesButton->setIcon(QIcon("document-properties"));
     sceneControls->layout()->addWidget(d->_dataStructurePropertiesButton);
     // create add data structure button
-    KPushButton* addDataStructureButton = new KPushButton(this);
+    QPushButton* addDataStructureButton = new QPushButton(this);
     addDataStructureButton->setIcon(QIcon("rocsnew"));
     addDataStructureButton->setToolTip(i18nc("@info:tooltip", "Add a new data structure."));
     addDataStructureButton->setMaximumWidth(24);
     sceneControls->layout()->addWidget(addDataStructureButton);
     // create remove data structure button
-    d->_removeDataStructureButton = new KPushButton(this);
+    d->_removeDataStructureButton = new QPushButton(this);
     d->_removeDataStructureButton->setIcon(QIcon("rocsdelete"));
     d->_removeDataStructureButton->setToolTip(i18nc("@info:tooltip", "Remove selected data structure."));
     d->_removeDataStructureButton->setMaximumWidth(24);

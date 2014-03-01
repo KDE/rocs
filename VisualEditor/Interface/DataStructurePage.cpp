@@ -28,7 +28,7 @@
 #include <QDebug>
 #include <KLineEdit>
 #include <KColorCombo>
-#include <KPushButton>
+#include <QPushButton>
 #include <KComboBox>
 #include "DataStructureBackendManager.h"
 #include <DataStructureBackendInterface.h>

@@ -41,7 +41,7 @@ class QToolButton;
 class MainWindow;
 class QGraphicsView;
 class KComboBox;
-class KPushButton;
+class QPushButton;
 
 /**
  * \class GraphVisualEditor

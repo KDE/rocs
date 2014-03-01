@@ -32,7 +32,7 @@
 #include <QDebug>
 #include <KLineEdit>
 #include <KColorCombo>
-#include <KPushButton>
+#include <QPushButton>
 #include <KComboBox>
 #include <KDialog>
 #include <KTabWidget>

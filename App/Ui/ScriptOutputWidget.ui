@@ -26,7 +26,7 @@
            </widget>
           </item>
           <item>
-           <widget class="KPushButton" name="buttonDisableClear">
+           <widget class="QPushButton" name="buttonDisableClear">
             <property name="maximumSize">
              <size>
               <width>24</width>
@@ -45,7 +45,7 @@
            </widget>
           </item>
           <item>
-           <widget class="KPushButton" name="buttonEnableDebugOutput">
+           <widget class="QPushButton" name="buttonEnableDebugOutput">
             <property name="maximumSize">
              <size>
               <width>24</width>
@@ -71,7 +71,7 @@
            </widget>
           </item>
           <item>
-           <widget class="KPushButton" name="buttonClear">
+           <widget class="QPushButton" name="buttonClear">
             <property name="maximumSize">
              <size>
               <width>24</width>
@@ -166,7 +166,7 @@
    <header>ktextbrowser.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

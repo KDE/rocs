@@ -23,7 +23,7 @@
 #include "LoadSave/GraphFilePluginInterface.h"
 #include <QDebug>
 #include <GraphFileBackendManager.h>
-#include <KPushButton>
+#include <QPushButton>
 #include <KMessageBox>
 #include <KGuiItem>
 #include "Document.h"

@@ -44,7 +44,7 @@
 #include <KApplication>
 #include <QDebug>
 #include <QIcon>
-#include <KPushButton>
+#include <QPushButton>
 #include <KTar>
 #include <KTextBrowser>
 #include <KMessageBox>

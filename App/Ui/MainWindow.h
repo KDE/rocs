@@ -30,7 +30,7 @@
 class DocumentTypesWidget;
 class KRecentFilesAction;
 class QAction;
-class KPushButton;
+class QPushButton;
 class KComboBox;
 class GraphLayers;
 class GraphVisualEditor;

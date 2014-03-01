@@ -30,7 +30,7 @@ class Data;
 class Pointer;
 class KColorCombo;
 class QToolButton;
-class KPushButton;
+class QPushButton;
 
 /**
  * \class DocumentTypesWidget
@@ -82,8 +82,8 @@ private:
 
     KColorCombo* _pointerTypeColor;
     QMap<int, QWidget*> _dataTypeWidgets;
-    QMap<int, KPushButton*> _dataTypeButtons;
-    QMap<int, KPushButton*> _pointerTypeButtons;
+    QMap<int, QPushButton*> _dataTypeButtons;
+    QMap<int, QPushButton*> _pointerTypeButtons;
     QMap<int, QWidget*> _pointerTypeWidgets;
     Document* _document;
 

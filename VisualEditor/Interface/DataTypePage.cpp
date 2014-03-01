@@ -29,7 +29,7 @@
 #include <QDebug>
 #include <KLineEdit>
 #include <KColorCombo>
-#include <KPushButton>
+#include <QPushButton>
 #include <KComboBox>
 
 

@@ -34,7 +34,7 @@
 #include <QDebug>
 #include <KAction>
 #include <KColorCombo>
-#include <KPushButton>
+#include <QPushButton>
 #include <QWidget>
 
 DocumentTypesWidget::DocumentTypesWidget(QWidget* parent)
@@ -142,7 +142,7 @@ bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Do
     // create default data element setups
     QWidget* dataPropertyWidget = new QWidget(this);
     QGridLayout* dataPropertyLayout = new QGridLayout(dataPropertyWidget);
-    KPushButton* dataTypeButton = new KPushButton(this);
+    QPushButton* dataTypeButton = new QPushButton(this);
     dataTypeButton->setFlat(true);
     dataTypeButton->setStyleSheet("text-align: left");
     KAction* dataAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataType, dataPropertyWidget);
@@ -152,7 +152,7 @@ bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Do
     connect(dataTypeButton, SIGNAL(pressed()), dataAction, SLOT(trigger()));
 
 
-    KPushButton* dataTypeVisible = new KPushButton(this);
+    QPushButton* dataTypeVisible = new QPushButton(this);
     dataTypeVisible->setIcon(QIcon("rocseyeblack"));
     dataTypeVisible->setCheckable(true);
     dataTypeVisible->setChecked(true);
@@ -185,14 +185,14 @@ bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier,
     QWidget* pointerPropertyWidget = new QWidget(this);
     QGridLayout* pointerPropertyLayout = new QGridLayout(pointerPropertyWidget);
 
-    KPushButton* pointerTypeButton = new KPushButton(this);
+    QPushButton* pointerTypeButton = new QPushButton(this);
     pointerTypeButton->setText(pointerType->name());
     pointerTypeButton->setFlat(true);
     pointerTypeButton->setStyleSheet("text-align: left");
     KAction* pointerAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget);
     connect(pointerTypeButton, SIGNAL(pressed()), pointerAction, SLOT(trigger()));
 
-    KPushButton* pointerTypeVisible = new KPushButton(this);
+    QPushButton* pointerTypeVisible = new QPushButton(this);
     pointerTypeVisible->setIcon(QIcon("rocseyeblack"));
     pointerTypeVisible->setCheckable(true);
     pointerTypeVisible->setChecked(true);
@@ -215,7 +215,7 @@ bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier,
 
 void DocumentTypesWidget::updateDataTypeButtons()
 {
-    QMap<int, KPushButton*>::const_iterator dataTypeWidget = _dataTypeButtons.constBegin();
+    QMap<int, QPushButton*>::const_iterator dataTypeWidget = _dataTypeButtons.constBegin();
     while (dataTypeWidget != _dataTypeButtons.constEnd()) {
         Document* activeDocument = DocumentManager::self().activeDocument();
         DataTypePtr dataType = activeDocument->dataType(dataTypeWidget.key());
@@ -227,7 +227,7 @@ void DocumentTypesWidget::updateDataTypeButtons()
 
 void DocumentTypesWidget::updatePointerTypeButtons()
 {
-    QMap<int, KPushButton*>::const_iterator pointerTypeWidget = _pointerTypeButtons.constBegin();
+    QMap<int, QPushButton*>::const_iterator pointerTypeWidget = _pointerTypeButtons.constBegin();
     while (pointerTypeWidget != _pointerTypeButtons.constEnd()) {
         Document* activeDocument = DocumentManager::self().activeDocument();
         PointerTypePtr pointerType = activeDocument->pointerType(pointerTypeWidget.key());

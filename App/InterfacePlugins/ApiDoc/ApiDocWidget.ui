@@ -47,7 +47,7 @@
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="3">
-         <widget class="KPushButton" name="buttonHome">
+         <widget class="QPushButton" name="buttonHome">
           <property name="maximumSize">
            <size>
             <width>24</width>
@@ -63,7 +63,7 @@
          </widget>
         </item>
         <item row="0" column="4">
-         <widget class="KPushButton" name="buttonPrev">
+         <widget class="QPushButton" name="buttonPrev">
           <property name="maximumSize">
            <size>
             <width>24</width>
@@ -86,7 +86,7 @@
          </spacer>
         </item>
         <item row="0" column="0">
-         <widget class="KPushButton" name="buttonTree">
+         <widget class="QPushButton" name="buttonTree">
           <property name="maximumSize">
            <size>
             <width>24</width>
@@ -103,7 +103,7 @@
          </widget>
         </item>
         <item row="0" column="5">
-         <widget class="KPushButton" name="buttonNext">
+         <widget class="QPushButton" name="buttonNext">
           <property name="maximumSize">
            <size>
             <width>24</width>
@@ -126,7 +126,7 @@
    <header>QtWebKit/QWebView</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>

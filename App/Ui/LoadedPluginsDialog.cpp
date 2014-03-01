@@ -24,7 +24,7 @@
 #include <KAboutApplicationDialog>
 #include <KComponentData>
 #include <KWidgetItemDelegate>
-#include <KPushButton>
+#include <QPushButton>
 #include <KTitleWidget>
 #include <QIcon>
 #include <QIconLoader>
@@ -115,7 +115,7 @@ public:
 
     LoadedPluginsDelegate(QAbstractItemView *itemView, QObject *parent = 0)
         : KWidgetItemDelegate(itemView, parent)
-        , pushButton(new KPushButton)
+        , pushButton(new QPushButton)
     {
         pushButton->setIcon(QIcon("dialog-information")); // only for getting size matters
     }
@@ -182,7 +182,7 @@ public:
 
     QList<QWidget*> createItemWidgets() const
     {
-        KPushButton *button = new KPushButton();
+        QPushButton *button = new QPushButton();
         button->setIcon(QIcon("dialog-information"));
         setBlockedEventTypes(button, QList<QEvent::Type>() << QEvent::MouseButtonPress
                              << QEvent::MouseButtonRelease << QEvent::MouseButtonDblClick);
@@ -197,7 +197,7 @@ public:
                            const QPersistentModelIndex &index) const
     {
         Q_UNUSED(index);
-        KPushButton *aboutPushButton = static_cast<KPushButton*>(widgets[0]);
+        QPushButton *aboutPushButton = static_cast<QPushButton*>(widgets[0]);
         QSize aboutPushButtonSizeHint = aboutPushButton->sizeHint();
         aboutPushButton->resize(aboutPushButtonSizeHint);
         aboutPushButton->move(dependantLayoutValue(option.rect.width() - MARGIN - aboutPushButtonSizeHint.width(), aboutPushButtonSizeHint.width(), option.rect.width()), option.rect.height() / 2 - aboutPushButtonSizeHint.height() / 2);
@@ -248,7 +248,7 @@ public:
     virtual ~PluginsView()
     {
         // explicitly delete the delegate here since otherwise
-        // we get spammed by warnings that the KPushButton we return
+        // we get spammed by warnings that the QPushButton we return
         // in createItemWidgets is deleted before the delegate
         delete itemDelegate();
     }

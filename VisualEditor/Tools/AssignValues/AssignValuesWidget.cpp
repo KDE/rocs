@@ -31,7 +31,7 @@
 #include <KLocale>
 #include <KDialog>
 #include <KComboBox>
-#include <KPushButton>
+#include <QPushButton>
 
 #include <QDesktopWidget>
 #include <QGridLayout>

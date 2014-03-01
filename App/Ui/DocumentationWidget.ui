@@ -20,7 +20,7 @@
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="1">
-         <widget class="KPushButton" name="buttonBack">
+         <widget class="QPushButton" name="buttonBack">
           <property name="maximumSize">
            <size>
             <width>24</width>
@@ -30,7 +30,7 @@
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="KPushButton" name="buttonForward">
+         <widget class="QPushButton" name="buttonForward">
           <property name="maximumSize">
            <size>
             <width>24</width>
@@ -40,7 +40,7 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="KPushButton" name="buttonHome">
+         <widget class="QPushButton" name="buttonHome">
           <property name="maximumSize">
            <size>
             <width>24</width>
@@ -98,7 +98,7 @@
    <header>QtWebKit/QWebView</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
+   <class>QPushButton</class>
    <extends>QPushButton</extends>
    <header>kpushbutton.h</header>
   </customwidget>
