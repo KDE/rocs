@@ -108,7 +108,7 @@ void DataType::setIcon(const QString& icon)
 }
 
 
-KIcon DataType::icon() const
+QIcon DataType::icon() const
 {
     // create icon for data type
     if (!d->_document->iconPackage().isEmpty()) {
@@ -132,11 +132,11 @@ KIcon DataType::icon() const
                 painter.end();
 
                 attribute.remove("rocs_");
-                return KIcon(QPixmap::fromImage(iconImage));
+                return QIcon(QPixmap::fromImage(iconImage));
             }
         }
     }
-    return KIcon();
+    return QIcon();
 }
 
 

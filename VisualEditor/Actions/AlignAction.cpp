@@ -19,7 +19,7 @@
 */
 
 #include "AlignAction.h"
-#include <KIcon>
+#include <QIcon>
 #include "GraphVisualEditor.h"
 #include "Scene/GraphScene.h"
 #include "DataStructure.h"
@@ -40,7 +40,7 @@
 
 
 AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, GraphScene* gc)
-    : KAction(KIcon(), tooltip, gc)
+    : KAction(QIcon(), tooltip, gc)
 {
     _graphScene = gc;
     setupOrientation(o);
@@ -63,28 +63,28 @@ void AlignAction::setupOrientation(AlignAction::Orientation o)
     _orientation = o;
     switch (o) {
     case Left :
-        setIcon(KIcon("rocsalignleft"));
+        setIcon(QIcon("rocsalignleft"));
         break;
     case Right :
-        setIcon(KIcon("rocsalignright"));
+        setIcon(QIcon("rocsalignright"));
         break;
     case Top :
-        setIcon(KIcon("rocsaligntop"));
+        setIcon(QIcon("rocsaligntop"));
         break;
     case Bottom :
-        setIcon(KIcon("rocsalignbottom"));
+        setIcon(QIcon("rocsalignbottom"));
         break;
     case HCenter :
-        setIcon(KIcon("rocsalignhmiddle"));
+        setIcon(QIcon("rocsalignhmiddle"));
         break;
     case VCenter :
-        setIcon(KIcon("rocsalignvmiddle"));
+        setIcon(QIcon("rocsalignvmiddle"));
         break;
     case Circle :
-        setIcon(KIcon("rocsaligncircle"));
+        setIcon(QIcon("rocsaligncircle"));
         break;
     case MinCutTree :
-        setIcon(KIcon("rocsaligntree"));
+        setIcon(QIcon("rocsaligntree"));
         break;
     }
 }

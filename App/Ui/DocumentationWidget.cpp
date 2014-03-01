@@ -19,7 +19,7 @@
 
 #include "DocumentationWidget.h"
 #include <QWebHistory>
-#include <KIcon>
+#include <QIcon>
 
 DocumentationWidget::DocumentationWidget(QWidget* parent)
     : QWidget(parent)
@@ -27,9 +27,9 @@ DocumentationWidget::DocumentationWidget(QWidget* parent)
     ui = new Ui::DocumentationWidget;
     ui->setupUi(this);
 
-    ui->buttonHome->setIcon(KIcon("go-home"));
-    ui->buttonBack->setIcon(KIcon("go-previous"));
-    ui->buttonForward->setIcon(KIcon("go-next"));
+    ui->buttonHome->setIcon(QIcon("go-home"));
+    ui->buttonBack->setIcon(QIcon("go-previous"));
+    ui->buttonForward->setIcon(QIcon("go-next"));
 
     _handbook = QUrl(QString::fromLatin1("http://docs.kde.org/stable/en/kdeedu/rocs/index.html"));
 

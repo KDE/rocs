@@ -31,7 +31,7 @@
 #include "PointerType.h"
 #include "CoreTypes.h"
 
-#include <KIcon>
+#include <QIcon>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>
@@ -55,13 +55,13 @@ void EditorToolbar::setup(GraphScene* scene, KActionCollection* collection)
     connect(deleteAction, SIGNAL(triggered()), deleteAction, SLOT(sendExecuteBit()));
     connect(zoomAction, SIGNAL(triggered()), zoomAction, SLOT(sendExecuteBit()));
 
-    _addDataActionMenu = new KActionMenu(KIcon("rocsadddata"), i18nc("@title:menu", "Add Data"), this);
+    _addDataActionMenu = new KActionMenu(QIcon("rocsadddata"), i18nc("@title:menu", "Add Data"), this);
     _addDataActionMenu->setIconText(i18nc("@action:intoolbar", "Add Data"));
     _addDataActionMenu->setToolTip(i18nc("@info:tooltip", "Add new data element"));
     _addDataActionMenu->setDelayed(true);
     _addDataActionMenu->setCheckable(true);
 
-    _addPointerActionMenu = new KActionMenu(KIcon("rocsaddedge"), i18nc("@title:menu", "Add Connection"), this);
+    _addPointerActionMenu = new KActionMenu(QIcon("rocsaddedge"), i18nc("@title:menu", "Add Connection"), this);
     _addPointerActionMenu->setIconText(i18nc("@action:intoolbar", "Add Connection"));
     _addPointerActionMenu->setToolTip(i18nc("@info:tooltip", "Add a new connection between two data elements of selected type"));
     _addPointerActionMenu->setDelayed(true);

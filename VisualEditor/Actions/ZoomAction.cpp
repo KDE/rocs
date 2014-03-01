@@ -28,7 +28,7 @@
 #include <QGraphicsView>
 #include <QDebug>
 #include <KLocale>
-#include <KIcon>
+#include <QIcon>
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>
 
@@ -39,7 +39,7 @@ ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 {
     setText(i18nc("@action:intoolbar", "Zoom"));
     setToolTip(i18nc("@info:tooltip", "Zoom the canvas by the wheel, or by dragging."));
-    setIcon(KIcon("page-zoom"));
+    setIcon(QIcon("page-zoom"));
     _name = "zoom";
 }
 

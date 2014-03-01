@@ -22,7 +22,7 @@
 #include <QStackedWidget>
 
 #include <kmultitabbar.h>
-#include <KIcon>
+#include <QIcon>
 #include <QDebug>
 #include <KAction>
 #include <KLocale>
@@ -83,7 +83,7 @@ void TabWidget::releaseButton(int index)
     m_activeTab = index;
 }
 
-void TabWidget::addWidget(QWidget *w, const QString& text, const KIcon& icon)
+void TabWidget::addWidget(QWidget *w, const QString& text, const QIcon& icon)
 {
     m_widgets -> addWidget(w);
     m_tabs -> appendTab(icon.pixmap(16), m_numOfTabs, text);

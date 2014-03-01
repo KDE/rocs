@@ -23,7 +23,7 @@
 #include <QString>
 #include <QVariant>
 #include <QColor>
-#include <KIcon>
+#include <QIcon>
 
 #include "RocsCoreExport.h"
 #include "CoreTypes.h"
@@ -70,11 +70,11 @@ public:
     QString iconName() const;
 
     /**
-     * Generates KIcon for data type at run time. This icon is not cached.
+     * Generates QIcon for data type at run time. This icon is not cached.
      *
      * \return icon according to current iconPackage and iconName
      */
-    KIcon icon() const;
+    QIcon icon() const;
 
     /**
      * \return unique identifier of data type

@@ -26,7 +26,7 @@
 #include <QString>
 #include <QColor>
 #include <QPointer>
-#include <KIcon>
+#include <QIcon>
 #include <KDE4Support/kdialog.h> //FIXME remove
 #include "CoreTypes.h"
 

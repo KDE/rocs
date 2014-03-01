@@ -26,8 +26,8 @@
 #include <KWidgetItemDelegate>
 #include <KPushButton>
 #include <KTitleWidget>
-#include <KIcon>
-#include <KIconLoader>
+#include <QIcon>
+#include <QIconLoader>
 
 #include <QApplication>
 #include <QAbstractListModel>
@@ -117,7 +117,7 @@ public:
         : KWidgetItemDelegate(itemView, parent)
         , pushButton(new KPushButton)
     {
-        pushButton->setIcon(KIcon("dialog-information")); // only for getting size matters
+        pushButton->setIcon(QIcon("dialog-information")); // only for getting size matters
     }
 
     ~LoadedPluginsDelegate()
@@ -135,8 +135,8 @@ public:
 
         return QSize(qMax(fmTitle.width(index.model()->data(index, Qt::DisplayRole).toString()),
                         option.fontMetrics.width(index.model()->data(index, PluginsModel::CommentRole).toString())) +
-                        KIconLoader::SizeMedium + MARGIN * i + pushButton->sizeHint().width() * j,
-                    qMax(KIconLoader::SizeMedium + MARGIN * 2, fmTitle.height() + option.fontMetrics.height() + MARGIN * 2));
+                        QIconLoader::SizeMedium + MARGIN * i + pushButton->sizeHint().width() * j,
+                    qMax(QIconLoader::SizeMedium + MARGIN * 2, fmTitle.height() + option.fontMetrics.height() + MARGIN * 2));
 
     }
 
@@ -183,7 +183,7 @@ public:
     QList<QWidget*> createItemWidgets() const
     {
         KPushButton *button = new KPushButton();
-        button->setIcon(KIcon("dialog-information"));
+        button->setIcon(QIcon("dialog-information"));
         setBlockedEventTypes(button, QList<QEvent::Type>() << QEvent::MouseButtonPress
                              << QEvent::MouseButtonRelease << QEvent::MouseButtonDblClick);
 

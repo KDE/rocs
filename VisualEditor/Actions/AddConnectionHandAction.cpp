@@ -38,7 +38,7 @@ AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, QObject *par
 {
     setText(i18nc("@action:intoolbar", "Add Edge"));
     setToolTip(i18nc("@info:tooltip", "Creates a new edge between 2 nodes"));
-    setIcon(KIcon("rocsaddedge"));
+    setIcon(QIcon("rocsaddedge"));
 
     _from = 0;
     _to   = 0;
@@ -53,7 +53,7 @@ AddConnectionHandAction::AddConnectionHandAction(GraphScene *scene, PointerTypeP
 {
     setText(i18nc("@action:intoolbar", "Add %1", pointerType->name()));
     setToolTip(i18nc("@info:tooltip", "Creates a new edge between 2 nodes"));
-    setIcon(KIcon("rocsaddedge"));
+    setIcon(QIcon("rocsaddedge"));
 
     _from = 0;
     _to   = 0;

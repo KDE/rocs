@@ -22,7 +22,7 @@
 #include <QWidget>
 #include <QtScriptBackend.h>
 #include <QDebug>
-#include <KIcon>
+#include <QIcon>
 
 ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     : QWidget(parent),
@@ -32,9 +32,9 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     ui->setupUi(this);
 
     // set icon
-    ui->buttonEnableDebugOutput->setIcon(KIcon("tools-report-bug"));
-    ui->buttonDisableClear->setIcon(KIcon("document-decrypt"));
-    ui->buttonClear->setIcon(KIcon("edit-clear-list"));
+    ui->buttonEnableDebugOutput->setIcon(QIcon("tools-report-bug"));
+    ui->buttonDisableClear->setIcon(QIcon("document-decrypt"));
+    ui->buttonClear->setIcon(QIcon("edit-clear-list"));
 
     connect(ui->buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
     connect(ui->buttonDisableClear, SIGNAL(clicked(bool)), this, SLOT(updateFixOutputButton()));
@@ -66,10 +66,10 @@ ConsoleModule * ScriptOutputWidget::consoleInterface() const
 void ScriptOutputWidget::updateFixOutputButton()
 {
     if (ui->buttonDisableClear->isChecked() == true) {
-        ui->buttonDisableClear->setIcon(KIcon("document-encrypt"));
+        ui->buttonDisableClear->setIcon(QIcon("document-encrypt"));
     }
     else {
-        ui->buttonDisableClear->setIcon(KIcon("document-decrypt"));
+        ui->buttonDisableClear->setIcon(QIcon("document-decrypt"));
     }
 }
 

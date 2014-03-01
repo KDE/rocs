@@ -25,7 +25,7 @@
 #include <QDebug>
 #include <KStandardDirs>
 #include <KGlobal> //FIXME remove
-#include <KIcon>
+#include <QIcon>
 
 ApiDocWidget::ApiDocWidget(QWidget* parent)
     : QWidget(parent)
@@ -37,10 +37,10 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
 
     ui = new Ui::ApiDocWidget;
     ui->setupUi(this);
-    ui->buttonTree->setIcon(KIcon("view-sidetree"));
-    ui->buttonHome->setIcon(KIcon("go-home"));
-    ui->buttonPrev->setIcon(KIcon("go-previous-view"));
-    ui->buttonNext->setIcon(KIcon("go-next-view"));
+    ui->buttonTree->setIcon(QIcon("view-sidetree"));
+    ui->buttonHome->setIcon(QIcon("go-home"));
+    ui->buttonPrev->setIcon(QIcon("go-previous-view"));
+    ui->buttonNext->setIcon(QIcon("go-next-view"));
 
     ui->buttonPrev->setEnabled(false);
     ui->buttonNext->setEnabled(false);

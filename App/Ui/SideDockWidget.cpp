@@ -30,7 +30,7 @@
 #include <QLayout>
 #include <QObject>
 #include <QWidget>
-#include <KIcon>
+#include <QIcon>
 #include <KAction>
 #include <KLocale>
 #include <QDebug>
@@ -131,7 +131,7 @@ SideDockWidget::SideDockWidget(QWidget* parent)
     setLayout(new QVBoxLayout);
 }
 
-void SideDockWidget::addDock(QWidget* widget, const QString& title, const KIcon& icon)
+void SideDockWidget::addDock(QWidget* widget, const QString& title, const QIcon& icon)
 {
     widget->setVisible(false);
     layout()->addWidget(widget);

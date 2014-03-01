@@ -153,7 +153,7 @@ bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Do
 
 
     KPushButton* dataTypeVisible = new KPushButton(this);
-    dataTypeVisible->setIcon(KIcon("rocseyeblack"));
+    dataTypeVisible->setIcon(QIcon("rocseyeblack"));
     dataTypeVisible->setCheckable(true);
     dataTypeVisible->setChecked(true);
     dataTypeVisible->setFixedWidth(24);
@@ -193,7 +193,7 @@ bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier,
     connect(pointerTypeButton, SIGNAL(pressed()), pointerAction, SLOT(trigger()));
 
     KPushButton* pointerTypeVisible = new KPushButton(this);
-    pointerTypeVisible->setIcon(KIcon("rocseyeblack"));
+    pointerTypeVisible->setIcon(QIcon("rocseyeblack"));
     pointerTypeVisible->setCheckable(true);
     pointerTypeVisible->setChecked(true);
     pointerTypeVisible->setToolTip(i18nc("@info:tooltip", "Set visibility of pointers"));

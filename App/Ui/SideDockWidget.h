@@ -24,7 +24,7 @@
 #include <QToolButton>
 #include <QHash>
 
-class KIcon;
+class QIcon;
 class QToolBar;
 class KAction;
 
@@ -58,7 +58,7 @@ class SideDockWidget: public QWidget
 public:
     explicit SideDockWidget(QWidget* parent);
     QToolBar * toolbar() const;
-    void addDock(QWidget* dock, const QString& title, const KIcon& icon);
+    void addDock(QWidget* dock, const QString& title, const QIcon& icon);
     void showDock(bool show, QWidget* widget);
 
 public slots:

@@ -40,7 +40,7 @@ SelectMoveHandAction::SelectMoveHandAction(GraphScene *scene, QObject *parent)
 {
     setText(i18nc("@action:intoolbar", "Move"));
     setToolTip(i18nc("@info:tooltip", "Select and move items."));
-    setIcon(KIcon("rocsselectmove"));
+    setIcon(QIcon("rocsselectmove"));
     _name = "rocs-hand-select-move";
 
     connect(_graphScene, SIGNAL(keyPressed(QKeyEvent*)), this, SLOT(executeKeyPress(QKeyEvent*)));

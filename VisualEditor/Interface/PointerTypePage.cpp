@@ -160,10 +160,10 @@ PointerTypePage::PointerTypePage(QWidget* parent)
     ui->setupUi(this);
 
     // buttons
-    ui->addPropertyButton->setIcon(KIcon("rocsnew"));
-    ui->removePropertyButton->setIcon(KIcon("rocsdelete"));
-    ui->addType->setIcon(KIcon("rocsnew"));
-    ui->deleteType->setIcon(KIcon("rocsdelete"));
+    ui->addPropertyButton->setIcon(QIcon("rocsnew"));
+    ui->removePropertyButton->setIcon(QIcon("rocsdelete"));
+    ui->addType->setIcon(QIcon("rocsnew"));
+    ui->deleteType->setIcon(QIcon("rocsdelete"));
 
     // property table
     _model = new PointerTypePropertyModel(this);

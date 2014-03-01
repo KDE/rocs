@@ -27,7 +27,7 @@
 #include <QVBoxLayout>
 #include "MainWindow.h"
 #include <KFileDialog>
-#include <KIcon>
+#include <QIcon>
 #include <QDebug>
 #include <QStackedWidget>
 
@@ -144,16 +144,16 @@ void CodeEditor::updateTabText(KTextEditor::Document* text)
 
     // tell user if current modifications are unsaved
     if (text->isModified()) {
-        _tabDocs->setTabIcon(index, KIcon("document-save"));
+        _tabDocs->setTabIcon(index, QIcon("document-save"));
         return;
     }
 
     if (text->documentName().endsWith(QLatin1String(".js"), Qt::CaseInsensitive)) {
-        _tabDocs->setTabIcon(index, KIcon("application-javascript"));
+        _tabDocs->setTabIcon(index, QIcon("application-javascript"));
     } else if (text->documentName().endsWith(QLatin1String(".py"), Qt::CaseInsensitive)) {
-        _tabDocs->setTabIcon(index, KIcon("text-x-python"));
+        _tabDocs->setTabIcon(index, QIcon("text-x-python"));
     } else {
-        _tabDocs->setTabIcon(index, KIcon("text-x-generic"));
+        _tabDocs->setTabIcon(index, QIcon("text-x-generic"));
     }
 }
 

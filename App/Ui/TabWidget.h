@@ -22,7 +22,7 @@
 
 #include <QWidget>
 #include <QString>
-#include <KIcon>
+#include <QIcon>
 
 class KMultiTabBar;
 class QStackedWidget;
@@ -36,7 +36,7 @@ class TabWidget : public QWidget
 public:
     enum Orientation {TabOnLeft, TabOnRight, TabOnTop, TabOnBottom};
     explicit TabWidget(TabWidget::Orientation o, QWidget *parent = 0);
-    void addWidget(QWidget *w, const QString& text, const KIcon& icon);
+    void addWidget(QWidget *w, const QString& text, const QIcon& icon);
     void addAction(KAction *a);
 
 private:

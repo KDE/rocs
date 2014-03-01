@@ -160,10 +160,10 @@ DataTypePage::DataTypePage(QWidget* parent)
     ui->setupUi(this);
 
     // buttons
-    ui->addPropertyButton->setIcon(KIcon("rocsnew"));
-    ui->removePropertyButton->setIcon(KIcon("rocsdelete"));
-    ui->addType->setIcon(KIcon("rocsnew"));
-    ui->deleteType->setIcon(KIcon("rocsdelete"));
+    ui->addPropertyButton->setIcon(QIcon("rocsnew"));
+    ui->removePropertyButton->setIcon(QIcon("rocsdelete"));
+    ui->addType->setIcon(QIcon("rocsnew"));
+    ui->deleteType->setIcon(QIcon("rocsdelete"));
 
     // property table
     _model = new DataTypePropertyModel(this);
@@ -306,7 +306,7 @@ void DataTypePage::setCurrentType(int index)
                 painter.end();
 
                 attribute.remove("rocs_");
-                ui->typeIcon->addItem(KIcon(QPixmap::fromImage(iconImage)), "", QVariant(attribute));
+                ui->typeIcon->addItem(QIcon(QPixmap::fromImage(iconImage)), "", QVariant(attribute));
             }
         }
         if (!_document->dataType(type)->iconName().isEmpty()) {
