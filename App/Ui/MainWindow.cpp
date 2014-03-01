@@ -42,7 +42,7 @@
 #include <KRecentFilesAction>
 #include <KActionMenu>
 #include <KApplication>
-#include <KDebug>
+#include <QDebug>
 #include <KIcon>
 #include <KPushButton>
 #include <KTar>
@@ -218,7 +218,7 @@ void MainWindow::setupToolbars()
     // perform operations.
     QString configVersion = Settings::version();
     if (configVersion.compare(QString("1.7.70")) < 0) {
-        kDebug() << "Apply new default settings for toolbars";
+        qDebug() << "Apply new default settings for toolbars";
         KToolBar* bar;
 
         bar = toolBar("main");
@@ -365,7 +365,7 @@ QWidget* MainWindow::setupSidePanel()
 
 void MainWindow::setupActions()
 {
-    kDebug() << "create and connect actions";
+    qDebug() << "create and connect actions";
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
 
@@ -524,7 +524,7 @@ void MainWindow::setupDocumentsList()
 
 void MainWindow::setActiveDocument()
 {
-    kDebug() << "Setting the document in the main window";
+    qDebug() << "Setting the document in the main window";
     Document *activeDocument = DocumentManager::self().activeDocument();
 
     // create engine and interface objects to UI plugins
@@ -628,7 +628,7 @@ void MainWindow::saveProject(bool saveAs)
                        i18nc("@title:window", "Save Project"));
 
         if (file.isEmpty()) {
-            kDebug() << "Filename is empty and no script file was created.";
+            qDebug() << "Filename is empty and no script file was created.";
             return;
         }
         _currentProject->setProjectFile(KUrl::fromLocalFile(file));
@@ -777,7 +777,7 @@ void MainWindow::newScript()
     if (!_currentProject->isTemporary()) {
         QString basePrefix = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script"));
         if (basePrefix.isNull()) {
-            kDebug() << "Filename is empty and no script file was created.";
+            qDebug() << "Filename is empty and no script file was created.";
         } else {
             QString fileName = uniqueFilename(basePrefix, "js");
 
@@ -842,7 +842,7 @@ void MainWindow::newGraph()
 {
     QString file = KInputDialog::getText(i18n("Graph name"), i18n("Enter the name of the Graph"));
     if (file.isEmpty()) {
-        kDebug() << "Filename is empty and no script file was created.";
+        qDebug() << "Filename is empty and no script file was created.";
         return;
     }
     if (!file.endsWith(QLatin1String(".graph"))){

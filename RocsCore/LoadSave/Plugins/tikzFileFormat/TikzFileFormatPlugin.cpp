@@ -61,7 +61,7 @@ GraphFilePluginInterface::PluginType TikzFileFormatPlugin::pluginCapability() co
 
 void TikzFileFormatPlugin::readFile()
 {
-    kWarning() << "This plugin cannot import documents.";
+    qWarning() << "This plugin cannot import documents.";
     setError(NotSupportedOperation);
 }
 

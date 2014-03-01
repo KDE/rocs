@@ -26,7 +26,7 @@
 #include <QWidget>
 #include <QString>
 
-#include <KDebug>
+#include <QDebug>
 #include <KLineEdit>
 #include <KColorCombo>
 #include <KPushButton>

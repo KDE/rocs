@@ -37,7 +37,7 @@
 #include <QGridLayout>
 #include <QLabel>
 
-#include <KDebug>
+#include <QDebug>
 #include <KMessageBox>
 
 using namespace Rocs;

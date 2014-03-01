@@ -32,7 +32,7 @@
 #include <QLine>
 #include <QPolygonF>
 #include <QtAlgorithms>
-#include <KDebug>
+#include <QDebug>
 #include <QGraphicsSimpleTextItem>
 #include "RootedTreeNode.h"
 #include <boost/math/constants/constants.hpp>

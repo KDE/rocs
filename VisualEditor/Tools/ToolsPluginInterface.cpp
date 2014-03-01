@@ -23,7 +23,7 @@
 #include "ToolsPluginInterface.h"
 #include "ToolManager.h"
 #include <KPluginInfo>
-#include <KDebug>
+#include <QDebug>
 #include <KXMLGUIClient>
 
 class ToolsPluginInterfacePrivate

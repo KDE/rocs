@@ -21,7 +21,7 @@
 #include "MethodDocumentation.h"
 #include "PropertyDocumentation.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KLocale>
 
 class Item

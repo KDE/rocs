@@ -23,7 +23,7 @@
 #include <KGlobal>
 #include <settings.h>
 #include <kstandarddirs.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <KDialog>
 #include <QDir>
 #include <KLocale>

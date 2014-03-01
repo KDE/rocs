@@ -31,7 +31,7 @@
 #include <QKeyEvent>
 
 #include <KLocale>
-#include <KDebug>
+#include <QDebug>
 
 SelectMoveHandAction::SelectMoveHandAction(GraphScene *scene, QObject *parent)
     : AbstractAction(scene, parent),

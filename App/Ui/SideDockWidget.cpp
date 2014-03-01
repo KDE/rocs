@@ -33,7 +33,7 @@
 #include <KIcon>
 #include <KAction>
 #include <KLocale>
-#include <KDebug>
+#include <QDebug>
 
 
 SideToolButton::SideToolButton(QWidget *parent)
@@ -158,7 +158,7 @@ void SideDockWidget::buttonToggled(bool state)
 
     SideToolButton* button = qobject_cast<SideToolButton*>(sender());
     if (!button) {
-        kWarning() << "Wrong sender for side bar toggle action, aborting";
+        qWarning() << "Wrong sender for side bar toggle action, aborting";
         return;
     }
 

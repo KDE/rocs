@@ -18,7 +18,7 @@
 
 #include "ObjectDocumentation.h"
 #include <QStringList>
-#include <KDebug>
+#include <QDebug>
 
 ObjectDocumentation::ObjectDocumentation(QObject* parent)
     : QObject(parent)
@@ -59,7 +59,7 @@ void ObjectDocumentation::setComponentType(const QString& compenentTypeName)
     }
 
     // else
-    kError() << "Unable to understand componentType " << compenentTypeName;
+    qCritical() << "Unable to understand componentType " << compenentTypeName;
     _componentType = EngineComponent;
 }
 

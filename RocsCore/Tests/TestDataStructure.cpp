@@ -27,7 +27,7 @@
 
 #include <kross/core/action.h>
 #include <kross/core/manager.h>
-#include <KDebug>
+#include <QDebug>
 #include <Document.h>
 #include <DataStructureBackendManager.h>
 #include <DocumentManager.h>

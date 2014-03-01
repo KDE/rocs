@@ -19,7 +19,7 @@
 
 #include "DataPropertiesWidget.h"
 #include "Data.h"
-#include <KDebug>
+#include <QDebug>
 #include "Scene/DataItem.h"
 #include "DataStructure.h"
 #include "Actions/PropertiesDialogAction.h"

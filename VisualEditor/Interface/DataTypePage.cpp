@@ -26,7 +26,7 @@
 #include <QSvgRenderer>
 #include <QPainter>
 
-#include <KDebug>
+#include <QDebug>
 #include <KLineEdit>
 #include <KColorCombo>
 #include <KPushButton>

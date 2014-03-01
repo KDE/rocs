@@ -36,7 +36,7 @@
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KMenu>
-#include <KDebug>
+#include <QDebug>
 
 EditorToolbar::EditorToolbar(QWidget* parent)
     : QWidget(parent)

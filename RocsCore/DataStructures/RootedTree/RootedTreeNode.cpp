@@ -20,7 +20,7 @@
 #include "DataStructure.h"
 #include "Pointer.h"
 
-#include <KDebug>
+#include <QDebug>
 #include "RootedTreeStructure.h"
 
 DataPtr RootedTreeNode::create(DataStructurePtr parent, int uniqueIdentifier, int dataType)

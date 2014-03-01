@@ -22,7 +22,7 @@
 #include "Pointer.h"
 
 #include <KLocalizedString>
-#include <KDebug>
+#include <QDebug>
 #include <boost/weak_ptr.hpp>
 
 
@@ -158,7 +158,7 @@ void PointerType::removeProperty(const QString& name)
 void PointerType::renameProperty(const QString& oldName, const QString& newName)
 {
     if (d->_propertyList.contains(newName)) {
-        kWarning() << "Property name was not changed: new name already exists";
+        qWarning() << "Property name was not changed: new name already exists";
         return;
     }
     int index = d->_propertyDisplayList.indexOf(oldName);

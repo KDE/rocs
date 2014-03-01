@@ -36,7 +36,7 @@
 #include <QLine>
 #include <QPolygonF>
 #include <QtAlgorithms>
-#include <KDebug>
+#include <QDebug>
 #include <QtCore/qmath.h>
 #include <QGraphicsSimpleTextItem>
 
@@ -79,7 +79,7 @@ void PointerItemPrivate::updatePropertyList(qreal x, qreal y) {
     qreal offset = 0;
     foreach (const QString& property, _pointer->properties()) {
         if (!_propertyValues.contains(property)) {
-            kError() << "Cannot update unknown property : " << property;
+            qCritical() << "Cannot update unknown property : " << property;
             continue;
         }
         if (_propertyValues[property]->isVisible() == false) {
@@ -178,7 +178,7 @@ void PointerItem::updateAttributes()
         PointerTypePtr pointerType = d->_pointer->dataStructure()->document()->pointerType(d->_pointer->pointerType());
         foreach (const QString& property, d->_pointer->properties()) {
             if (!d->_propertyValues.contains(property)) {
-                kWarning() << "No graphics item registered for property : " << property;
+                qWarning() << "No graphics item registered for property : " << property;
                 continue;
             }
             d->_propertyValues[property]->setVisible(pointerType->isPropertyVisible(property));
@@ -187,7 +187,7 @@ void PointerItem::updateAttributes()
         this->hide();
         foreach (const QString& property, d->_pointer->properties()) {
             if (!d->_propertyValues.contains(property)) {
-                kWarning() << "No graphics item registered for property : " << property;
+                qWarning() << "No graphics item registered for property : " << property;
                 continue;
             }
             d->_propertyValues[property]->setVisible(false);
@@ -228,7 +228,7 @@ void PointerItem::updateProperty(const QString& name)
 void PointerItem::removeProperty(const QString& name)
 {
     if (d->_propertyValues.contains(name)) {
-        kWarning() << "Property not removed: not registered at DataItem.";
+        qWarning() << "Property not removed: not registered at DataItem.";
         return;
     }
     d->_propertyValues[name]->setVisible(false);

@@ -21,7 +21,7 @@
 #include <QFile>
 #include <KLocalizedString>
 #include <QDir>
-#include <KDebug>
+#include <QDebug>
 #include <KGlobal>
 #include <kstandarddirs.h>
 
@@ -35,7 +35,7 @@ IncludeManager::IncludeManager()
 //       addPath(list.last());
 //       list.removeLast();
 //     }
-//     kDebug() << _tempPath;
+//     qDebug() << _tempPath;
 
 }
 void IncludeManager::initialize(const QStringList& tempPath)

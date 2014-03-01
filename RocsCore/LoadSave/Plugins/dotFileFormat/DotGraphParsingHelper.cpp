@@ -22,7 +22,7 @@
 #include "DotGraphParsingHelper.h"
 #include "DotGrammar.h"
 
-#include <KDebug>
+#include <QDebug>
 
 #include <QFile>
 #include <Group.h>
@@ -97,7 +97,7 @@ void DotGraphParsingHelper::applyAttributedList()
             std::vector< int > v;
             parseIntegers(unprocessedAttributes["bb"].toStdString().c_str(), v);
 //             if (v.size() >= 4) {
-//                 kDebug() << "setting width and height to " << v[2] << v[3];
+//                 qDebug() << "setting width and height to " << v[2] << v[3];
 //             }
         }
         AttributesMap::const_iterator it, it_end;
@@ -129,11 +129,11 @@ void DotGraphParsingHelper::createData(QString identifier)
     edgebounds.clear(); //TODO explain meaning of this
 
     if (dataMap.contains(identifier)) {
-        kWarning() << "Omitting data element, ID is already used: "<< identifier;
+        qWarning() << "Omitting data element, ID is already used: "<< identifier;
         return;
     }
 
-//     kDebug() << "Creating new data element: " << identifier;
+//     qDebug() << "Creating new data element: " << identifier;
     currentDataPtr = dataStructure->createData(identifier, 0);
     dataMap.insert(identifier, currentDataPtr);
 
@@ -152,7 +152,7 @@ void DotGraphParsingHelper::createSubDataStructure()
 void DotGraphParsingHelper::setSubDataStructureId(QString identifier)
 {
     if(groupStack.isEmpty()) {
-        kError() << "Cannot set sub data structure id: no group on stack";
+        qCritical() << "Cannot set sub data structure id: no group on stack";
         return;
     }
     // at this point the currentDataPtr is already the sub data structure
@@ -163,7 +163,7 @@ void DotGraphParsingHelper::setSubDataStructureId(QString identifier)
 void DotGraphParsingHelper::leaveSubDataStructure()
 {
     if(groupStack.isEmpty()) {
-        kWarning() << "Cannot leave group: currently not inside any group.";
+        qWarning() << "Cannot leave group: currently not inside any group.";
         return;
     }
     groupStack.removeLast();
@@ -201,7 +201,7 @@ void DotGraphParsingHelper::createPointers()
         DataPtr to = dataMap[toId];
 
         currentPointerPtr = dataStructure->createPointer(from, to, 0);
-//         kDebug() << "Creating new pointer: " << from->identifier() << " -> " << to->identifier();
+//         qDebug() << "Creating new pointer: " << from->identifier() << " -> " << to->identifier();
         setPointerAttributes();
 
         fromId = toId;

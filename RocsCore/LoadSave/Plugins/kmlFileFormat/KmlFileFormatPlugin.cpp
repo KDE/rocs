@@ -26,7 +26,7 @@
 #include "Data.h"
 #include "KmlHandler.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KAboutData>
 #include <KGenericFactory>
 #include <KUrl>

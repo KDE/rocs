@@ -25,7 +25,7 @@
 #include "Pointer.h"
 #include "DataStructure.h"
 #include "DocumentManager.h"
-#include <KDebug>
+#include <QDebug>
 #include <KUrl>
 
 void GmlFileFormatTest::parseTest()

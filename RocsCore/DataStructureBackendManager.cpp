@@ -22,7 +22,7 @@
 
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
-#include <KDebug>
+#include <QDebug>
 #include <KStandardDirs>
 #include <KDE4Support/kglobal.h> //FIXME remove
 
@@ -146,7 +146,7 @@ public:
         foreach (QString pluginDesktopFile, defaultBackends) {
             QString path = KGlobal::dirs()->findResource("services", pluginDesktopFile);
             if (path.isEmpty()) {
-                kWarning() << "Could not find default plugin desktop file: " << pluginDesktopFile;
+                qWarning() << "Could not find default plugin desktop file: " << pluginDesktopFile;
                 continue;
             }
 
@@ -163,7 +163,7 @@ public:
                 }
             }
             if (!found) {
-                kWarning() << "Backend manager falls back to manually load structure"
+                qWarning() << "Backend manager falls back to manually load structure"
                            << info->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString()
                            << "The structure was not found in the service cache.";
                 offers.append(service);
@@ -174,12 +174,12 @@ public:
         // set up found backends
         _pluginInfo = KPluginInfo::fromServices(offers);
         foreach (KService::Ptr service, offers) {
-            kDebug() << "set up backend " << service->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
+            qDebug() << "set up backend " << service->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
             QString error;
             KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
             if (!factory) {
-                kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
+                qCritical() << "KPluginFactory could not load the plugin:" << service->library();
                 continue;
             }
 
@@ -191,19 +191,19 @@ public:
                 QString identifier = info->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
                 if (identifier.isEmpty()) {
                     identifier = info->name();
-                    kWarning() << "No data structure backend identifier exists for plugin " << identifier << ", using its name.";
+                    qWarning() << "No data structure backend identifier exists for plugin " << identifier << ", using its name.";
                 }
                 _pluginList.insert(identifier, plugin);
                 info->setPluginEnabled(true);
                 continue;
             } else {
-                kError() << "Error while loading data structure backend \"" << info->name();
+                qCritical() << "Error while loading data structure backend \"" << info->name();
             }
         }
 
         // at least one data structure plugin is required
         if (_pluginList.isEmpty()) {
-            kError() << "No backend found, cannot set active data structure backend.";
+            qCritical() << "No backend found, cannot set active data structure backend.";
             return;
         }
 
@@ -242,7 +242,7 @@ void DataStructureBackendManager::setBackend(const QString &pluginIdentifier)
 {
     DataStructureBackendInterface* plugin = d->backend(pluginIdentifier);
     if (!plugin) {
-        kError() << "Could not set \"" << pluginIdentifier << "\" as current backend, aborting.";
+        qCritical() << "Could not set \"" << pluginIdentifier << "\" as current backend, aborting.";
         return;
     }
     if (d->_currentPlugin && pluginIdentifier == d->_currentPlugin->internalName()) {

@@ -22,7 +22,7 @@
 #include "ApiDocModel.h"
 
 #include <QWebView>
-#include <KDebug>
+#include <QDebug>
 #include <KStandardDirs>
 #include <KGlobal> //FIXME remove
 #include <KIcon>
@@ -134,7 +134,7 @@ void ApiDocWidget::showObjectApi(const QString &id, bool logHistory=true)
 void ApiDocWidget::showObjectApi(const QUrl &aliasPage)
 {
     if (aliasPage.toString().isEmpty()) {
-        kError() << "No path given, aborting.";
+        qCritical() << "No path given, aborting.";
         return;
     }
 
@@ -155,7 +155,7 @@ void ApiDocWidget::showObjectApi(const QUrl &aliasPage)
 void ApiDocWidget::historyGoBack()
 {
     if (_historyPointer <= 0) {
-        kError() << "Cannot go back in history, none exist";
+        qCritical() << "Cannot go back in history, none exist";
         return;
     }
     --_historyPointer;
@@ -175,7 +175,7 @@ void ApiDocWidget::historyGoBack()
 void ApiDocWidget::historyGoForward()
 {
     if (_historyPointer >= _history.length() - 1) {
-        kError() << "Cannot go forward in history, none exist";
+        qCritical() << "Cannot go forward in history, none exist";
         return;
     }
     ++_historyPointer;

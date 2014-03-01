@@ -136,7 +136,7 @@ void RocsGraphFileFormatPlugin::readFile()
             if (tmpDataTypeId != 0) { // if == 0, this is default and default is automatically created
                 tmpDataTypeId = document->registerDataType(QString(), identifier.toInt());
                 if (tmpDataTypeId != identifier.toInt()) {
-                    kWarning() << "Could not register already used data type << " << identifier.toInt()
+                    qWarning() << "Could not register already used data type << " << identifier.toInt()
                              << ": use identifier " << tmpDataTypeId << " instead.";
                 }
             }
@@ -169,7 +169,7 @@ void RocsGraphFileFormatPlugin::readFile()
             if (tmpPointerTypeId != 0) { // if == 0, this is default and default is automatically created
                 tmpPointerTypeId = document->registerPointerType(QString(), identifier.toInt());
                 if (tmpPointerTypeId != identifier.toInt()) {
-                    kWarning() << "Could not register already used pointer type << " << identifier.toInt()
+                    qWarning() << "Could not register already used pointer type << " << identifier.toInt()
                              << ": use identifier " << tmpPointerTypeId << " instead.";
                 }
             }
@@ -188,7 +188,7 @@ void RocsGraphFileFormatPlugin::readFile()
                         tmpPointerType->setDirection(PointerType::Unidirectional);
                     }
                     else {
-                        kWarning() << "Direction unset, use default direction of this data type backend.";
+                        qWarning() << "Direction unset, use default direction of this data type backend.";
                     }
                 } else if (dataLine.startsWith(QLatin1String("LineStyle :"))) {
                     tmpPointerType->setLineStyle(Qt::PenStyle(dataLine.section(' ', 2).toInt()));
@@ -229,7 +229,7 @@ void RocsGraphFileFormatPlugin::readFile()
             if (document->dataTypeList().contains(type)) {
                 tmpData = tmpDataStructure->createData(name, type);
             } else {
-                kDebug() << "Create data element of type 0, since type " << type << " was not registered.";
+                qDebug() << "Create data element of type 0, since type " << type << " was not registered.";
                 tmpData = tmpDataStructure->createData(name, 0);
             }
             if (tmpData) {
@@ -268,7 +268,7 @@ void RocsGraphFileFormatPlugin::readFile()
             if (document->pointerTypeList().contains(type)) {
                 tmpPointer = tmpDataStructure->createPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], type);
             } else {
-                kDebug() << "Create pointer of type 0, since type " << type << " was not registered.";
+                qDebug() << "Create pointer of type 0, since type " << type << " was not registered.";
                 tmpPointer = tmpDataStructure->createPointer(dataMap[nameFrom.toInt()],dataMap[nameTo.toInt()], 0);
             }
             if (tmpPointer) {
@@ -397,9 +397,9 @@ QString RocsGraphFileFormatPlugin::serialize(const Document &document)
         }
         ++dataStructure;
     }
-    kDebug() << "------- /// BEGIN internal file format /// -------";
-    kDebug() << d->_buffer;
-    kDebug() << "------- /// internal file format END /// -------";
+    qDebug() << "------- /// BEGIN internal file format /// -------";
+    qDebug() << d->_buffer;
+    qDebug() << "------- /// internal file format END /// -------";
 
     return d->_buffer;
 }

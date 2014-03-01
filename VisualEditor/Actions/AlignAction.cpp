@@ -27,7 +27,7 @@
 #include "Scene/DataItem.h"
 #include "Modifiers/Topology.h"
 
-#include <KDebug>
+#include <QDebug>
 
 #include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/graph/random_layout.hpp>

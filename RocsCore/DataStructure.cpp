@@ -32,7 +32,7 @@
 #include <boost/weak_ptr.hpp>
 
 #include <QColor>
-#include <KDebug>
+#include <QDebug>
 
 class DataStructurePrivate
 {
@@ -151,7 +151,7 @@ const DataList DataStructure::dataList(int dataType) const
     if (d->_dataTypeLists.contains(dataType)) {
         return d->_dataTypeLists[dataType];
     }
-    kWarning() << "returning empty data list: data type not registered";
+    qWarning() << "returning empty data list: data type not registered";
     return DataList();
 }
 
@@ -171,7 +171,7 @@ const PointerList DataStructure::pointers(int pointerType) const
     if (d->_pointerTypeLists.contains(pointerType)) {
         return d->_pointerTypeLists[pointerType];
     }
-    kWarning() << "returning empty pointer list: pointer type not registered";
+    qWarning() << "returning empty pointer list: pointer type not registered";
     return PointerList();
 }
 
@@ -189,11 +189,11 @@ PointerList DataStructure::pointerListAll() const
 void DataStructure::registerDataType(int identifier)
 {
     if (d->_dataTypeLists.contains(identifier)) {
-        kWarning() << "DataType already registered: aborting";
+        qWarning() << "DataType already registered: aborting";
         return;
     }
     if (!d->_document->dataType(identifier)) {
-        kError() << "DataType not registered at document: aborting";
+        qCritical() << "DataType not registered at document: aborting";
         return;
     }
     d->_dataTypeLists.insert(identifier, DataList());
@@ -203,11 +203,11 @@ void DataStructure::registerDataType(int identifier)
 void DataStructure::registerPointerType(int identifier)
 {
     if (d->_pointerTypeLists.contains(identifier)) {
-        kWarning() << "PointerType already registered: aborting";
+        qWarning() << "PointerType already registered: aborting";
         return;
     }
     if (!d->_document->pointerType(identifier)) {
-        kError() << "PointerType not registered at document: aborting";
+        qCritical() << "PointerType not registered at document: aborting";
         return;
     }
     d->_pointerTypeLists.insert(identifier, PointerList());
@@ -217,7 +217,7 @@ void DataStructure::registerPointerType(int identifier)
 void DataStructure::removeDataType(int identifier)
 {
     if (identifier == 0) {
-        kWarning() << "Could not remove non-existing DataType";
+        qWarning() << "Could not remove non-existing DataType";
         return;
     }
 
@@ -232,7 +232,7 @@ void DataStructure::removeDataType(int identifier)
 void DataStructure::removePointerType(int pointerType)
 {
     if (pointerType == 0 || !d->_pointerTypeLists.contains(pointerType)) {
-        kWarning() << "Could not remove non-existing PointerType";
+        qWarning() << "Could not remove non-existing PointerType";
         return;
     }
 
@@ -417,7 +417,7 @@ DataPtr DataStructure::getData(int uniqueIdentifier)
     foreach(const DataList &dataType, d->_dataTypeLists) {
         foreach(DataPtr data, dataType) {
             if (data->identifier() == uniqueIdentifier) {
-                kWarning() << "Access do data element that is not registered at data-identifier mapper.";
+                qWarning() << "Access do data element that is not registered at data-identifier mapper.";
                 return data;
             }
         }
@@ -428,13 +428,13 @@ DataPtr DataStructure::getData(int uniqueIdentifier)
 void DataStructure::remove(DataPtr data)
 {
     if (!d->_dataTypeLists[data->dataType()].contains(data)) {
-        kWarning() << "Data element not registered, aborting removal.";
+        qWarning() << "Data element not registered, aborting removal.";
         return;
     }
 
     // remove from internal lists
     if (d->_dataIdentifierMap.remove(data->identifier()) != 1) {
-        kWarning() << "Data identifier hash is dirty.";
+        qWarning() << "Data identifier hash is dirty.";
     }
     if (d->_dataTypeLists[data->dataType()].removeOne(data)) {
         // only remove data element if it is registered
@@ -447,7 +447,7 @@ void DataStructure::remove(DataPtr data)
 void DataStructure::remove(PointerPtr pointer)
 {
     if (!d->_pointerTypeLists[pointer->pointerType()].contains(pointer)) {
-        kWarning() << "Pointer not registered, aborting removal.";
+        qWarning() << "Pointer not registered, aborting removal.";
         return;
     }
     // remove from internal list
@@ -481,7 +481,7 @@ void DataStructure::setName(const QString& s)
 void DataStructure::addDynamicProperty(const QString& property, const QVariant& value)
 {
     if (!Document::isValidIdentifier(property)) {
-        kWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
+        qWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
     setProperty(property.toAscii(), value);
@@ -495,7 +495,7 @@ void DataStructure::removeDynamicProperty(const QString& property)
 void DataStructure::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
-        kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
+        qWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
     setProperty(newName.toLatin1(), property(oldName.toLatin1()));

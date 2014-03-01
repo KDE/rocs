@@ -28,7 +28,7 @@
 #include <QPair>
 #include <QVector>
 
-#include <KDebug>
+#include <QDebug>
 
 #include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/graph/circle_layout.hpp>
@@ -214,7 +214,7 @@ void Topology::applyCircleAlignment(DataList dataList, qreal radius)
 void Topology::directedGraphDefaultTopology(DataStructurePtr dataStructure)
 {
     //TODO: port to graphviz layout functions
-    kDebug() << "Temporary implementation, should be replaced soon.";
+    qDebug() << "Temporary implementation, should be replaced soon.";
 
     QList<DataPtr> allDataList;
     foreach(int type, dataStructure->document()->dataTypeList()) {
@@ -228,7 +228,7 @@ void Topology::directedGraphDefaultTopology(DataStructurePtr dataStructure)
 void Topology::undirectedGraphDefaultTopology(DataStructurePtr dataStructure)
 {
     //TODO: port to graphviz layout functions
-    kDebug() << "Temporary implementation, should be replaced soon.";
+    qDebug() << "Temporary implementation, should be replaced soon.";
 
     QList<DataPtr> allDataList;
     foreach(int type, dataStructure->document()->dataTypeList()) {

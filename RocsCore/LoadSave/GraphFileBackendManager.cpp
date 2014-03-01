@@ -25,7 +25,7 @@
 
 #include <KServiceTypeTrader>
 #include <KPluginInfo>
-#include <KDebug>
+#include <QDebug>
 
 class GraphFileBackendManagerPrivate
 {
@@ -117,7 +117,7 @@ void GraphFileBackendManager::loadBackends()
         KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
         if (!factory) {
-            kError(5001) << "KPluginFactory could not load the plugin: " << service->library();
+            qCritical() << "KPluginFactory could not load the plugin: " << service->library();
             continue;
         }
 
@@ -126,7 +126,7 @@ void GraphFileBackendManager::loadBackends()
         if (plugin) {
             d->backends.append(plugin);
         } else {
-            kWarning() << "Could not load backend: " << service->name();
+            qWarning() << "Could not load backend: " << service->name();
         }
     }
 

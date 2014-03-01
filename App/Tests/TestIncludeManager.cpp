@@ -23,7 +23,7 @@
 #include <QtCore/QFile>
 #include "IncludeManager.h"
 #include <KLocalizedString>
-#include <KDebug>
+#include <QDebug>
 
 void TestIncludeManager::inittestcase()
 {

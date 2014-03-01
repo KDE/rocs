@@ -25,7 +25,7 @@
 #include "Data.h"
 #include <KLocale>
 #include "Document.h"
-#include <KDebug>
+#include <QDebug>
 #include <DocumentManager.h>
 
 AddDataHandAction::AddDataHandAction(GraphScene *scene, QObject *parent)

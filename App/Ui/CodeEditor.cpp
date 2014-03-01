@@ -28,7 +28,7 @@
 #include "MainWindow.h"
 #include <KFileDialog>
 #include <KIcon>
-#include <KDebug>
+#include <QDebug>
 #include <QStackedWidget>
 
 CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
@@ -96,7 +96,7 @@ void CodeEditor::closeDocument(int index)
 void CodeEditor::changeCurrentDocument(int index)
 {
     if (_scriptDocs.size() < index || index < 0) {
-        kDebug() << "Do not change to non-existing code document.";
+        qDebug() << "Do not change to non-existing code document.";
         return;
     }
     _activeDocument = _scriptDocs.at(index);
@@ -123,7 +123,7 @@ KTextEditor::Document* CodeEditor::newScript()
     connect(_activeDocument, SIGNAL(modifiedChanged(KTextEditor::Document*)), this, SLOT(updateTabText(KTextEditor::Document*)));
 
     updateTabText(_scriptDocs.last());
-    kDebug() << "New script created.";
+    qDebug() << "New script created.";
 
     return _scriptDocs.last();
 }
@@ -180,7 +180,7 @@ void CodeEditor::openScript(const KUrl& fileUrl)
     updateTabText(d);
     changeCurrentDocument(_docViews.count() - 1);
 
-    kDebug() << "Being Called";
+    qDebug() << "Being Called";
 }
 
 

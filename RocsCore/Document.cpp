@@ -32,7 +32,7 @@
 #include "ConcurrentHelpClasses.h"
 
 #include <KSaveFile>
-#include <KDebug>
+#include <QDebug>
 #include <KUrl>
 
 #include <QtConcurrent/QtConcurrent>
@@ -92,7 +92,7 @@ Document::Document(const QString& name, QObject *parent)
     d->_dataTypes.insert(0, DataType::create(this, 0));
     d->_pointerTypes.insert(0, PointerType::create(this, 0));
 
-    kDebug() << "Construct Graph Document of type : " << d->_backend->name();
+    qDebug() << "Construct Graph Document of type : " << d->_backend->name();
 }
 
 void Document::setModified(const bool mod)
@@ -334,7 +334,7 @@ void Document::setActiveDataStructure(DataStructurePtr g)
 
 DataStructurePtr Document::addDataStructure(const QString& name)
 {
-kDebug() << "add structure";
+qDebug() << "add structure";
     DataStructurePtr dataStructure = DataStructureBackendManager::self().createDataStructure(
             this, d->_backend->internalName());
     dataStructure->setName(name);

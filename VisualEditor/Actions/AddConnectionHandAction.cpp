@@ -28,7 +28,7 @@
 #include <PointerType.h>
 
 #include <KLocale>
-#include <KDebug>
+#include <QDebug>
 #include <DocumentManager.h>
 #include <Document.h>
 

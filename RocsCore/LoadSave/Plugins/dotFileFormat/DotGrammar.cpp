@@ -20,7 +20,7 @@
 #include "DotGraphParsingHelper.h"
 #include <Document.h>
 
-#include <KDebug>
+#include <QDebug>
 
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_int.hpp>
@@ -254,12 +254,12 @@ void leaveSubDataStructure()
 
 void setStrict()
 {
-    kWarning() << "Graphviz \"strict\" keyword is not implemented.";
+    qWarning() << "Graphviz \"strict\" keyword is not implemented.";
 }
 
 void undirectedDataStructure()
 {
-    kDebug() << "Create new data structure of type: Graph undirected";
+    qDebug() << "Create new data structure of type: Graph undirected";
     if(!phelper->dataStructure) {
         DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
@@ -269,7 +269,7 @@ void undirectedDataStructure()
 
 void directedDataStructure()
 {
-    kDebug() << "Create new data structure of type: Graph directed";
+    qDebug() << "Create new data structure of type: Graph directed";
     if (!phelper->dataStructure) {
         DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
@@ -280,7 +280,7 @@ void directedDataStructure()
 void dataStructureId(const std::string& str)
 {
     QString name = QString::fromStdString(str);
-    kDebug() << "Set data structure name: " << name;
+    qDebug() << "Set data structure name: " << name;
     if (!phelper->dataStructure) {
         DataStructurePtr dataStructure = phelper->gd->addDataStructure(name);
         phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
@@ -431,7 +431,7 @@ void checkEdgeOperator(const std::string& str)
         return;
     }
 
-    kError() << "Error: incoherent edge direction relation" << endl;
+    qCritical() << "Error: incoherent edge direction relation" << endl;
 }
 
 void edgebound(const std::string& str)
@@ -482,13 +482,13 @@ bool parse(const std::string& str, Document * graphDoc)
     DotGrammar<std::string::iterator, skipper_type> r;
 
     if (phrase_parse(iter, input.end(), r, SKIPPER)) {
-        kDebug() << "Complete dot file was parsed successfully.";
+        qDebug() << "Complete dot file was parsed successfully.";
         return true;
     } else {
-        kWarning() << "Dot file parsing failed. Unable to parse:";
-        kDebug() << "///// FILE CONTENT BEGIN /////";
-        kDebug() << QString::fromStdString(std::string(iter, input.end()));
-        kDebug() << "///// FILE CONTENT END /////";
+        qWarning() << "Dot file parsing failed. Unable to parse:";
+        qDebug() << "///// FILE CONTENT BEGIN /////";
+        qDebug() << QString::fromStdString(std::string(iter, input.end()));
+        qDebug() << "///// FILE CONTENT END /////";
     }
     return false;
 }

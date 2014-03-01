@@ -19,7 +19,7 @@
 
 #include "model_GraphProperties.h"
 #include <KLocale>
-#include <KDebug>
+#include <QDebug>
 #include "Pointer.h"
 #include "Data.h"
 #include "DataStructure.h"
@@ -146,7 +146,7 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
         switch (index.column()) {
         case 0: {
             if (!Document::isValidIdentifier(value.toString())) {
-                kWarning() << "Property identifier is not valid: aborting";
+                qWarning() << "Property identifier is not valid: aborting";
                 return false;
             }
             QByteArray oldName = QByteArray(_dataSource->dynamicPropertyNames()[index.row()]);
@@ -156,7 +156,7 @@ bool GraphPropertiesModel::setData(const QModelIndex &index, const QVariant &val
             break;
         }
         case 1:  _dataSource->setProperty(_dataSource->dynamicPropertyNames()[index.row()], value); break; /* just change the values */
-        default: kDebug() << "shoudn't enter here";   return false;
+        default: qDebug() << "shoudn't enter here";   return false;
         }
 
         emit dataChanged(index, index);
@@ -172,7 +172,7 @@ void GraphPropertiesModel::addDynamicProperty(QString name, QVariant value, QObj
     // Need check if the property already exists
     bool insertingRow = false;
     if (name.isEmpty()) {
-        kWarning() << "Cannot add an empty property";
+        qWarning() << "Cannot add an empty property";
         return;
     }
 

@@ -21,7 +21,7 @@
 #include <KFileDialog>
 #include <KLocalizedString>
 #include "LoadSave/GraphFilePluginInterface.h"
-#include <KDebug>
+#include <QDebug>
 #include <GraphFileBackendManager.h>
 #include <KPushButton>
 #include <KMessageBox>
@@ -84,14 +84,14 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     // select plugin by extension
     GraphFilePluginInterface * filePlugin = GraphFileBackendManager::self()->backendByExtension(ext);
     if (!filePlugin) {
-        kDebug() << "Cannot export file: " << file.toLocalFile();
+        qDebug() << "Cannot export file: " << file.toLocalFile();
         return false;
     }
 
     filePlugin->setFile(file);
     filePlugin->writeFile(*doc);
     if (filePlugin->hasError()) {
-        kDebug() << "Error occurred when writing file: " << filePlugin->errorString();
+        qDebug() << "Error occurred when writing file: " << filePlugin->errorString();
         return false;
     }
     
@@ -115,7 +115,7 @@ Document* ImporterExporterManager::importFile()
         return 0;
     }
 
-    kDebug() << "Extensions:" << ext;
+    qDebug() << "Extensions:" << ext;
     QString fileName = dialog->selectedFile();
     if (fileName.isEmpty()) {
         return 0;
@@ -124,22 +124,22 @@ Document* ImporterExporterManager::importFile()
     int index = fileName.lastIndexOf('.');
     GraphFilePluginInterface * filePlugin = 0;
     if (index == -1) {
-        kDebug() << "Cannot open file without extension.";
+        qDebug() << "Cannot open file without extension.";
         return 0;
     }
 
-    kDebug() << fileName.right(fileName.count() - index);
+    qDebug() << fileName.right(fileName.count() - index);
     filePlugin = GraphFileBackendManager::self()->backendByExtension(fileName.right(fileName.count() - index));
 
     if (!filePlugin) {
-        kDebug() <<  "Cannot handle extension " <<  fileName.right(3);
+        qDebug() <<  "Cannot handle extension " <<  fileName.right(3);
         return 0;
     }
 
     filePlugin->setFile(fileName);
     filePlugin->readFile();
     if (filePlugin->hasError()) {
-        kDebug() << "Error loading file" << fileName << filePlugin->errorString();
+        qDebug() << "Error loading file" << fileName << filePlugin->errorString();
         return 0;
     }
     else {

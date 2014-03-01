@@ -23,7 +23,7 @@
 
 #include <KUrl>
 #include <KSaveFile>
-#include <KDebug>
+#include <QDebug>
 
 #include <QTextStream>
 #include <QFile>
@@ -43,16 +43,16 @@ void JournalEditorWidget::openJournal(Project *project)
 {
     _currentProject = project;
     if (!project) {
-        kError() << "No project specified! Cannot set journal widget.";
+        qCritical() << "No project specified! Cannot set journal widget.";
         return;
     }
     if (project->journalFile().isEmpty()) {
-        kDebug() << "Skipping loading of journal file, project does not contain any, yet.";
+        qDebug() << "Skipping loading of journal file, project does not contain any, yet.";
         ui->editor->setHtml(QString());
     } else {
         QFile fileHandle(project->journalFile().toLocalFile());
         if (!fileHandle.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            kError() << "Could not open file"
+            qCritical() << "Could not open file"
                 << project->journalFile().toLocalFile()
                 << " in read mode: "
                 << fileHandle.errorString();
@@ -71,8 +71,8 @@ void JournalEditorWidget::saveJournal()
 {
     Q_ASSERT(_currentProject);
     if (!_currentProject) {
-        kError() << "Associated project is not set: cannot save journal file and hence aborting saving.";
-        kDebug() << "Journal must be created with JournalEditorWidget::openJournal(...).";
+        qCritical() << "Associated project is not set: cannot save journal file and hence aborting saving.";
+        qDebug() << "Journal must be created with JournalEditorWidget::openJournal(...).";
         return;
     }
 
@@ -84,7 +84,7 @@ void JournalEditorWidget::saveJournal()
     stream << ui->editor->toHtml();
     stream.flush();
     if (!saveFile.finalize()) {
-        kError() << "Error while writing journal file, aborting write. Journal file was not changed.";
+        qCritical() << "Error while writing journal file, aborting write. Journal file was not changed.";
     }
     _modified = false;
 }

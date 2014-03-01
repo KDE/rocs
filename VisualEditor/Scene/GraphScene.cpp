@@ -48,7 +48,7 @@
 #include <QGraphicsView>
 #include <QPointer>
 
-#include <KDebug>
+#include <QDebug>
 
 
 GraphScene::GraphScene(QObject *parent)
@@ -61,7 +61,7 @@ GraphScene::GraphScene(QObject *parent)
 
 void GraphScene::setActiveGraph(DataStructurePtr g)
 {
-    kDebug() << "Active Graph Set";
+    qDebug() << "Active Graph Set";
     _graph = g;
     connect( _graph.get(), SIGNAL(changed()), this, SLOT(update()), Qt::UniqueConnection);
 }
@@ -78,7 +78,7 @@ void GraphScene::setAction(QAction *action)
 
 void GraphScene::setActiveDocument()
 {
-    kDebug() << "Setting the document in the scene";
+    qDebug() << "Setting the document in the scene";
     Document *document = DocumentManager::self().activeDocument();
     if (_graphDocument == document) {
         return;

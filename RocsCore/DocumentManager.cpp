@@ -27,7 +27,7 @@
 #include "DataStructureBackendInterface.h"
 
 #include <KUrl>
-#include <KDebug>
+#include <QDebug>
 #include <KLocale>
 #include <QWaitCondition>
 #include <QAction>
@@ -196,7 +196,7 @@ void DocumentManager::removeDocument(Document *document)
 void DocumentManager::convertToDataStructure()
 {
     if (!d->_activeDocument) {
-        kWarning() << "No active document found, creating new document with active backend.";
+        qWarning() << "No active document found, creating new document with active backend.";
         newDocument();
         return;
     }
@@ -206,7 +206,7 @@ void DocumentManager::convertToDataStructure()
             && DataStructureBackendManager::self().activeBackend()->canConvertFrom(d->_activeDocument))
     {
         d->_activeDocument->changeBackend();
-        kDebug() << "Data structure converted to " << DataStructureBackendManager::self().activeBackend()->name();
+        qDebug() << "Data structure converted to " << DataStructureBackendManager::self().activeBackend()->name();
         emit activateDocument();
     }
 }
@@ -248,7 +248,7 @@ Document * DocumentManager::openDocument(const KUrl &documentUrl)
     loader->setFile(documentUrl);
     loader->readFile();
     if (loader->error() != GraphFilePluginInterface::None) {
-        kDebug() << "Could not load file. Graph loader returned error: " << loader->errorString();
+        qDebug() << "Could not load file. Graph loader returned error: " << loader->errorString();
         return new Document(documentUrl.fileName());;
     }
     Document* doc = loader->graphDocument();
@@ -274,7 +274,7 @@ void DocumentManager::exportDocument(Document *document, const KUrl &documentUrl
     serializer->setFile(documentUrl);
     serializer->writeFile(*document);
     if (serializer->error() != GraphFilePluginInterface::None) {
-        kDebug() << "Could not save file. Serializer returned error: " << serializer->errorString();
+        qDebug() << "Could not save file. Serializer returned error: " << serializer->errorString();
         return;
     }
     return;

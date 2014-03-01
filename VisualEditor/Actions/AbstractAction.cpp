@@ -25,7 +25,7 @@
 #include <QGraphicsSceneEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
-#include <KDebug>
+#include <QDebug>
 
 AbstractAction::AbstractAction(GraphScene *scene, QObject *parent)
     : KToggleAction(parent)

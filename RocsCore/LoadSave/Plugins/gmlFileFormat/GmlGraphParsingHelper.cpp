@@ -29,7 +29,7 @@
 #include <boost/spirit/include/classic_loops.hpp>
 #include <boost/spirit/include/classic_confix.hpp>
 
-#include <KDebug>
+#include <QDebug>
 #include <QFile>
 
 extern GmlParser::GmlGraphParsingHelper* phelper;
@@ -49,7 +49,7 @@ GmlGraphParsingHelper::GmlGraphParsingHelper():
 
 void GmlGraphParsingHelper::startList(const QString& key)
 {
-    kDebug() << "starting a list with key:" << key;
+    qDebug() << "starting a list with key:" << key;
     if (_actualState == begin && key.compare("graph", Qt::CaseInsensitive) == 0) {
         createGraph();
         return;
@@ -73,7 +73,7 @@ void GmlGraphParsingHelper::endList()
         return;
     }
     switch (_actualState) {
-    case begin: kDebug() << "Ending a list without begin a item??"; break;
+    case begin: qDebug() << "Ending a list without begin a item??"; break;
     case node: actualNode.reset();
         _actualState = graph;
         break;
@@ -101,7 +101,7 @@ const QString GmlGraphParsingHelper::processKey(const QString& key)
 
 void GmlGraphParsingHelper::setAttribute(const QString& key, const QString& value)
 {
-    kDebug() << "Setting attibute " << key;
+    qDebug() << "Setting attibute " << key;
     switch (_actualState) {
     case begin: break;
     case graph:
@@ -110,7 +110,7 @@ void GmlGraphParsingHelper::setAttribute(const QString& key, const QString& valu
             joined.append('.').append(key);
             actualGraph->setProperty(joined.toAscii(), value);
         } else {
-            kDebug() << "seting property to graph" << key << value;
+            qDebug() << "seting property to graph" << key << value;
 //           if (!actualGraph->setProperty(processKey(key).toAscii(),value)){
             actualGraph->addDynamicProperty(processKey(key), value); //is a dinamic property
 //           }
@@ -133,11 +133,11 @@ void GmlGraphParsingHelper::setAttribute(const QString& key, const QString& valu
             createEdge();
         } else if (actualEdge) {      //if edge was created.
 //               if(!actualEdge->setProperty(processKey(key).toAscii(),value)){
-            kDebug() << "inserting edge key: " << key;
+            qDebug() << "inserting edge key: " << key;
             actualEdge->addDynamicProperty(processKey(key), value);
 // //               }
         } else {
-            kDebug() << "Saving edge key: " << key;
+            qDebug() << "Saving edge key: " << key;
             _edgeProperties.insert(processKey(key), value); //store to be inserted later
         }
         break;
@@ -147,7 +147,7 @@ void GmlGraphParsingHelper::setAttribute(const QString& key, const QString& valu
             joined.append('.').append(key);
             actualNode->setProperty(joined.toAscii(), value);
         } else {
-            kDebug() << "seting property to node" << key << value;
+            qDebug() << "seting property to node" << key << value;
 //           if(!actualNode->setProperty(processKey(key).toAscii(),value)){
             actualNode->addDynamicProperty(processKey(key), value);
 //           }
@@ -169,7 +169,7 @@ void GmlGraphParsingHelper::createGraph()
 void GmlGraphParsingHelper::createNode()
 {
     if (_actualState == graph) {
-        kDebug() << "Creating a node";
+        qDebug() << "Creating a node";
         _actualState = node;
         actualNode = actualGraph->createData("NewNode", 0);
     }
@@ -179,10 +179,10 @@ void GmlGraphParsingHelper::createNode()
 void GmlGraphParsingHelper::createEdge()
 {
     if (!edgeSource.isEmpty() && !edgeTarget.isEmpty()) {
-        kDebug() << "Creating a edge";
+        qDebug() << "Creating a edge";
         _actualState = edge;
         if (!dataMap.contains(edgeSource) || !dataMap.contains(edgeTarget)) {
-            kError() << "No edge created: end points were not created";
+            qCritical() << "No edge created: end points were not created";
             return;
         }
         actualEdge = actualGraph->createPointer(dataMap[edgeSource], dataMap[edgeTarget], 0);
@@ -194,7 +194,7 @@ void GmlGraphParsingHelper::createEdge()
             _edgeProperties.remove(property);
         }
     } else if (_actualState == graph) {
-        kDebug() << "changing state Edge";
+        qDebug() << "changing state Edge";
         _actualState = edge;
         actualEdge.reset();
     }

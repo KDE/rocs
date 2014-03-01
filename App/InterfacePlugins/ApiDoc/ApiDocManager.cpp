@@ -33,7 +33,7 @@
 
 #include <KGlobal>
 #include <KStandardDirs>
-#include <KDebug>
+#include <QDebug>
 #include <KUrl>
 #include <KLocale>
 
@@ -76,7 +76,7 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
         }
     }
     if (!objectApi) {
-        kError() << "Could not find Object API with ID " << identifier;
+        qCritical() << "Could not find Object API with ID " << identifier;
         return QString();
     }
 
@@ -155,7 +155,7 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
 bool ApiDocManager::loadObjectApi(const KUrl &path)
 {
     if (!path.isLocalFile()) {
-        kWarning() << "Cannot open API file at " << path.toLocalFile() << ", aborting.";
+        qWarning() << "Cannot open API file at " << path.toLocalFile() << ", aborting.";
         return false;
     }
 
@@ -166,7 +166,7 @@ bool ApiDocManager::loadObjectApi(const KUrl &path)
 
     QDomDocument document = loadDomDocument(path, schema);
     if (document.isNull()) {
-        kWarning() << "Could not parse document " << path.toLocalFile() << ", aborting.";
+        qWarning() << "Could not parse document " << path.toLocalFile() << ", aborting.";
         return false;
     }
 
@@ -317,7 +317,7 @@ QXmlSchema ApiDocManager::loadXmlSchema(const QString &schemeName) const
 
     QXmlSchema schema;
     if (schema.load(file) == false) {
-        kWarning() << "Schema at file " << file.toLocalFile() << " is invalid.";
+        qWarning() << "Schema at file " << file.toLocalFile() << " is invalid.";
     }
     return schema;
 }
@@ -327,7 +327,7 @@ QDomDocument ApiDocManager::loadDomDocument(const KUrl &path, const QXmlSchema &
     QDomDocument document;
     QXmlSchemaValidator validator(schema);
     if (!validator.validate(path)) {
-        kWarning() << "Schema is not valid, aborting loading of XML document:" << path.toLocalFile();
+        qWarning() << "Schema is not valid, aborting loading of XML document:" << path.toLocalFile();
         return document;
     }
 
@@ -335,10 +335,10 @@ QDomDocument ApiDocManager::loadDomDocument(const KUrl &path, const QXmlSchema &
     QFile file(path.toLocalFile());
     if (file.open(QIODevice::ReadOnly)) {
         if (!document.setContent(&file, &errorMsg)) {
-            kWarning() << errorMsg;
+            qWarning() << errorMsg;
         }
     } else {
-        kWarning() << "Could not open XML document " << path.toLocalFile() << " for reading, aborting.";
+        qWarning() << "Could not open XML document " << path.toLocalFile() << " for reading, aborting.";
     }
     return document;
 }

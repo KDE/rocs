@@ -30,7 +30,7 @@
 #include <QLine>
 #include <QPolygonF>
 #include <QtAlgorithms>
-#include <KDebug>
+#include <QDebug>
 #include <math.h>
 #include <boost/math/constants/constants.hpp>
 

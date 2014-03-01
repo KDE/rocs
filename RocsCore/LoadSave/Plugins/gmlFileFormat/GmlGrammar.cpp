@@ -22,7 +22,7 @@
 #include "GmlGraphParsingHelper.h"
 #include "Document.h"
 
-#include <KDebug>
+#include <QDebug>
 
 
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
@@ -54,17 +54,17 @@ void gotKey(const std::string& key)
     lastKey = key.c_str();
 //   QString k = key.c_str();
 //   if (k.compare("dataType", Qt::CaseInsensitive) == 0){
-//     kDebug() << "create a graph";
+//     qDebug() << "create a graph";
 //     actualGraph =  document->addGraph("new");
 //     lastInserted = actualGraph;
 //   }else if (k.compare("node", Qt::CaseInsensitive) == 0){
-//     kDebug() << "create a node";
+//     qDebug() << "create a node";
 //     actualNode = actualGraph->addNode("new");
 //     lastInserted = actualNode;
 //   }else if (k.compare("edge", Qt::CaseInsensitive) == 0){
-//     kDebug() << "create a edge";
+//     qDebug() << "create a edge";
 //   }else {
-//     kDebug() << "Process atribute " << k;
+//     qDebug() << "Process atribute " << k;
 //     lastKey = key;
 //   }
 
@@ -78,7 +78,7 @@ void gotValue(const std::string& Value)
         phelper->setAttribute(QString::fromStdString(lastKey), QString::fromStdString(Value));
 //     if (lastInserted){
     if (!lastInserted) {
-        kError() << "Cannot specify data node value: internal error";
+        qCritical() << "Cannot specify data node value: internal error";
         return;
     }
     if (lastKey == "id" && lastInserted){
@@ -87,7 +87,7 @@ void gotValue(const std::string& Value)
     }
 //       lastInserted->setProperty(lastKey.c_str(), Value.c_str());
 //     }else{
-//       kDebug() << "ignoring keyvalue: "<< lastKey.c_str() << Value.c_str();
+//       qDebug() << "ignoring keyvalue: "<< lastKey.c_str() << Value.c_str();
 //     }
     }
 }

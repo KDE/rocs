@@ -36,7 +36,7 @@
 #include <KLocale>
 #include <QVBoxLayout>
 #include <QGraphicsItem>
-#include <KDebug>
+#include <QDebug>
 #include <KComboBox>
 #include <QGraphicsView>
 #include <QLabel>

@@ -24,7 +24,7 @@
 #include "DataStructure.h"
 #include "QtScriptBackend.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KLocale>
 #include <QColor>
 #include <boost/weak_ptr.hpp>
@@ -202,7 +202,7 @@ void Pointer::remove()
 
 void Pointer::self_remove()
 {
-    kWarning() << "self_remove() is a deprecated function, please use remove()";
+    qWarning() << "self_remove() is a deprecated function, please use remove()";
     remove();
 }
 
@@ -260,7 +260,7 @@ Qt::PenStyle Pointer::style() const
 void Pointer::addDynamicProperty(const QString& property, const QVariant& value)
 {
     if (!Document::isValidIdentifier(property)) {
-        kWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
+        qWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
     setProperty(property.toAscii(), value);
@@ -286,7 +286,7 @@ void Pointer::updateDynamicProperty(const QString& property)
 void Pointer::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
-        kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
+        qWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
     setProperty(newName.toLatin1(), property(oldName.toLatin1()));

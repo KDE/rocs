@@ -29,7 +29,7 @@
 #include <Document.h>
 #include <DataStructureBackendManager.h>
 #include <DocumentManager.h>
-#include <KDebug>
+#include <QDebug>
 
 using namespace Rocs;
 

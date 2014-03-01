@@ -21,7 +21,7 @@
 #include "EngineModules/Console/ConsoleModule.h"
 #include <QWidget>
 #include <QtScriptBackend.h>
-#include <KDebug>
+#include <QDebug>
 #include <KIcon>
 
 ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
@@ -100,7 +100,7 @@ void ScriptOutputWidget::appendOutput(ConsoleModule::MessageType type, const QSt
         ui->dbgOutput->append("<b style=\"color: red\">" + message + "</b>");
         break;
     default:
-        kWarning() << "Unknown message type, aborting printing.";
+        qWarning() << "Unknown message type, aborting printing.";
     }
 }
 

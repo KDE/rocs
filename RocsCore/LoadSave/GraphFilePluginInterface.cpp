@@ -24,7 +24,7 @@
 #include <QObject>
 #include <Document.h>
 #include <KUrl>
-#include <KDebug>
+#include <QDebug>
 #include <KAboutData>
 
 class GraphFilePluginInterfacePrivate

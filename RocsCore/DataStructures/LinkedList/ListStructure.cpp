@@ -21,7 +21,7 @@
 #include "ListNode.h"
 #include "Pointer.h"
 #include <KLocale>
-#include <KDebug>
+#include <QDebug>
 #include <boost/shared_ptr.hpp>
 
 

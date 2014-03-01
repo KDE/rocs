@@ -28,7 +28,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KTemporaryFile>
-#include <KDebug>
+#include <QDebug>
 #include <KTextEditor/Document>
 #include <KTar>
 
@@ -48,7 +48,7 @@ public:
 
     KConfigGroup initKConfigObject() {
         // helper method for Project::open()
-        kDebug() << "Creating KConfig object temporary project file: " << _projectFile.toLocalFile();
+        qDebug() << "Creating KConfig object temporary project file: " << _projectFile.toLocalFile();
         _config = new KConfig(_projectFile.toLocalFile());
 
         KConfigGroup projectGroup(_config, "Project");
@@ -105,7 +105,7 @@ Project::Project(const KUrl &projectArchive, const KUrl &projectDirectory)
     // extract archive into project directory
     KTar tar(projectArchive.toLocalFile());
     if (!tar.open(QIODevice::ReadOnly)) {
-        kError() << "Could not open export archive to read.";
+        qCritical() << "Could not open export archive to read.";
         return;
     }
     tar.directory()->copyTo(projectDirectory.path(), true);
@@ -303,7 +303,7 @@ KUrl Project::journalFile() const
 bool Project::writeNewProjectFile()
 {
     if (!d->_config->isConfigWritable(true)) {
-        kError() << "Cannot write to project config file.";
+        qCritical() << "Cannot write to project config file.";
         return false;
     }
     d->_config->sync();
@@ -315,7 +315,7 @@ bool Project::writeNewProjectFile()
 bool Project::writeProjectFile(const QString &fileUrl)
 {
     if (fileUrl.isEmpty() && isTemporary()) {
-        kError() << "Could not save temporary project file: no file URL specified.";
+        qCritical() << "Could not save temporary project file: no file URL specified.";
         return false;
     }
 
@@ -361,7 +361,7 @@ bool Project::exportProject(const KUrl &exportUrl)
 {
     KTar tar(exportUrl.toLocalFile());
     if (!tar.open(QIODevice::WriteOnly)) {
-        kError() << "Could not open export archive to write.";
+        qCritical() << "Could not open export archive to write.";
         return false;
     }
 

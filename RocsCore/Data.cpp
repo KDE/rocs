@@ -23,7 +23,7 @@
 #include "DataStructure.h"
 #include "QtScriptBackend.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <KLocalizedString>
 #include <QColor>
 #include <QMap>
@@ -334,7 +334,7 @@ void Data::remove()
 
 void Data::self_remove()
 {
-    kWarning() << "self_remove() is a deprecated function, please use remove()";
+    qWarning() << "self_remove() is a deprecated function, please use remove()";
     remove();
 }
 
@@ -433,7 +433,7 @@ void Data::setColor(const QVariant& s)
 void Data::addDynamicProperty(const QString& property, const QVariant& value)
 {
     if (!Document::isValidIdentifier(property)) {
-        kWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
+        qWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
     setProperty(property.toLatin1(), value);
@@ -460,7 +460,7 @@ void Data::updateDynamicProperty(const QString& property)
 void Data::renameDynamicProperty(const QString& oldName, const QString& newName)
 {
     if (!Document::isValidIdentifier(newName)) {
-        kWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
+        qWarning() << "Property identifier \"" << newName << "\" is not valid: aborting";
         return;
     }
     setProperty(newName.toLatin1(), property(oldName.toLatin1()));

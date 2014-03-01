@@ -21,7 +21,7 @@
 #include "KmlHandler.h"
 #include "DataStructure.h"
 #include "Data.h"
-#include <KDebug>
+#include <QDebug>
 
 
 KmlHandler::KmlHandler(DataStructurePtr doc): QXmlDefaultHandler(), m_graph(doc)
@@ -106,7 +106,7 @@ bool KmlHandler::endElement(const QString& /*namespaceURI*/, const QString& /*lo
         m_description.clear();
         m_name.clear();
     }
-    kDebug() << qName;
+    qDebug() << qName;
     return true;
 }
 

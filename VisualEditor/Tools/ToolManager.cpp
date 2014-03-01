@@ -24,7 +24,7 @@
 
 #include <KServiceTypeTrader>
 #include <KPluginInfo>
-#include <KDebug>
+#include <QDebug>
 #include <KAboutData>
 
 class ToolManagerPrivate
@@ -76,11 +76,11 @@ public:
             }
 
             else {
-                kWarning() << "Error while loading plugin: " << name << error;
+                qWarning() << "Error while loading plugin: " << name << error;
             }
 
         } else {
-            kWarning() << "Error while loading tool plugin " << name;
+            qWarning() << "Error while loading tool plugin " << name;
         }
         return false;
     }

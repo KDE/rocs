@@ -31,7 +31,7 @@
 #include "Actions/PropertiesDialogAction.h"
 
 #include <KLocale>
-#include <KDebug>
+#include <QDebug>
 #include <KAction>
 #include <KColorCombo>
 #include <KPushButton>

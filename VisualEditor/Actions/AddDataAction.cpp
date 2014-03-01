@@ -24,7 +24,7 @@
 #include "Data.h"
 #include <KLocale>
 #include "Document.h"
-#include <KDebug>
+#include <QDebug>
 #include <DocumentManager.h>
 
 AddDataAction::AddDataAction(GraphScene *scene, QObject *parent)
@@ -49,7 +49,7 @@ bool AddDataAction::executePress(QPointF pos)
     //FIXME this only creates data elements of default type
     DataPtr tmp = DocumentManager::self().activeDocument()->activeDataStructure()
                   ->createData(QString(), QPointF(pos.x(), pos.y()), 0);
-    kDebug() << " the data's actual position: " << tmp.get()->x() << ", " << tmp.get()->y() ;
+    qDebug() << " the data's actual position: " << tmp.get()->x() << ", " << tmp.get()->y() ;
     return true;
 }
 

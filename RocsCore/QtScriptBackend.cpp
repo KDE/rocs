@@ -24,7 +24,7 @@
 #include "DocumentManager.h"
 
 #include <KLocale>
-#include <KDebug>
+#include <QDebug>
 #include <QAction>
 #include <QScriptEngineDebugger>
 
@@ -111,7 +111,7 @@ void QtScriptBackend::loadFile(const QString& file)
     d->_currentScript.clear();
     QFile f(file);
     if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        kDebug() << "File not found";
+        qDebug() << "File not found";
         return;
     }
 

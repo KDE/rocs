@@ -31,7 +31,7 @@
 #include <KLocale>
 #include <KDialog>
 #include <KComboBox>
-#include <KDebug>
+#include <QDebug>
 
 #include <QtCore/QList>
 #include <QtCore/QMap>
@@ -151,7 +151,7 @@ void GenerateGraphWidget::setGraphIdentifier(const QString &identifier)
 void GenerateGraphWidget::setDataType(int type)
 {
     if (!DocumentManager::self().activeDocument()->dataTypeList().contains(type)) {
-        kWarning() << "Data type " << type << " does not exist: aborting";
+        qWarning() << "Data type " << type << " does not exist: aborting";
         return;
     }
     dataType_ = type;
@@ -160,7 +160,7 @@ void GenerateGraphWidget::setDataType(int type)
 void GenerateGraphWidget::setPointerType(int type)
 {
     if (!DocumentManager::self().activeDocument()->pointerTypeList().contains(type)) {
-        kWarning() << "Pointer type " << type << " does not exist: aborting";
+        qWarning() << "Pointer type " << type << " does not exist: aborting";
         return;
     }
     pointerType_ = type;

@@ -22,7 +22,7 @@
 #include "DocumentManager.h"
 #include <boost/weak_ptr.hpp>
 
-#include <KDebug>
+#include <QDebug>
 #include <KLocalizedString>
 #include <QPainter>
 #include <QSvgRenderer>
@@ -191,7 +191,7 @@ void DataType::removeProperty(const QString& name)
 void DataType::renameProperty(const QString& oldName, const QString& newName)
 {
     if (d->_propertyList.contains(newName)) {
-        kWarning() << "Property name was not changed: new name already exists";
+        qWarning() << "Property name was not changed: new name already exists";
         return;
     }
     int index = d->_propertyDisplayList.indexOf(oldName);

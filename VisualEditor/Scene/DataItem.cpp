@@ -24,7 +24,7 @@
 #include "GraphicsLayout.h"
 #include "DocumentManager.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <QFont>
 #include <QGraphicsColorizeEffect>
 #include <QGraphicsScene>
@@ -208,7 +208,7 @@ void DataItem::updatePropertyList()
     qreal offset = 0;
     foreach (const QString& property, data()->properties()) {
         if (!d->_propertyValues.contains(property)) {
-            kError() << "Cannot update unknown property : " << property;
+            qCritical() << "Cannot update unknown property : " << property;
             continue;
         }
         if (d->_propertyValues[property]->isVisible() == false) {
@@ -239,7 +239,7 @@ void DataItem::registerProperty(const QString& name)
 void DataItem::removeProperty(const QString& name)
 {
     if (d->_propertyValues.contains(name)) {
-        kWarning() << "Property not removed: not registered at DataItem.";
+        qWarning() << "Property not removed: not registered at DataItem.";
         return;
     }
     d->_propertyValues[name]->setVisible(false);

@@ -23,7 +23,7 @@
 
 #include <kmultitabbar.h>
 #include <KIcon>
-#include <KDebug>
+#include <QDebug>
 #include <KAction>
 #include <KLocale>
 
@@ -70,7 +70,7 @@ void TabWidget::controlPanel(int index)
         releaseButton(index);
         emit widgetActivated(index);
     }
-    kDebug() << "Widget Size: " << size();
+    qDebug() << "Widget Size: " << size();
 }
 
 void TabWidget::releaseButton(int index)

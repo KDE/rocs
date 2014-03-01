@@ -27,7 +27,7 @@
 #include "Pointer.h"
 #include <DataStructure.h>
 #include <DataStructureBackendManager.h>
-#include <KDebug>
+#include <QDebug>
 #include <KUrl>
 
 static const std::string simple = "digraph simple {a_2 -> b; c; d -> e /* error -> comment*/}";
@@ -48,14 +48,14 @@ void DotFileFormatTest::checkNodes(DataStructurePtr dataStructure, QList<QString
     QList<DataPtr> dataList = dataStructure->dataList(0);
 
 //     foreach(const DataPtr &node, dataList) {
-//         kDebug() << node->property("name").toString();
+//         qDebug() << node->property("name").toString();
 //     }
 
     foreach(const DataPtr &node, dataList) {
         QString name = node->property("name").toString();
         int index = nodeNames.indexOf(name);
         if (index == -1) {
-            kDebug() << "Node "<< name << " was created unnecessarily.";
+            qDebug() << "Node "<< name << " was created unnecessarily.";
         }
         QVERIFY(index != -1);
         nodeNames.removeAt(index);

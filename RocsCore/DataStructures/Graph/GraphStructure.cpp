@@ -153,7 +153,7 @@ QScriptValue Rocs::GraphStructure::createEdge(Data* fromRaw, Data* toRaw)
 QScriptValue Rocs::GraphStructure::createEdge(Data* fromRaw, Data* toRaw, int type)
 {
     if (fromRaw == 0 || toRaw == 0) {
-        kError() << "No edge added: data does not exist";
+        qCritical() << "No edge added: data does not exist";
         emit scriptError(i18n("Cannot create edge: nodes are not defined."));
         return QScriptValue();
     }
@@ -170,7 +170,7 @@ QScriptValue Rocs::GraphStructure::createEdge(Data* fromRaw, Data* toRaw, int ty
         edge->setEngine(engine());
         return edge->scriptValue();
     }
-    kError() << "Could not add pointer to data structure";
+    qCritical() << "Could not add pointer to data structure";
 
     return QScriptValue();
 }
@@ -473,6 +473,6 @@ void Rocs::GraphStructure::setPluginProperty(const QString& identifier, const QS
         setGraphType(property.toInt());
     }
     else {
-        kDebug() << "Skipping unknown graph structure property: " << identifier << " / " << property;
+        qDebug() << "Skipping unknown graph structure property: " << identifier << " / " << property;
     }
 }
