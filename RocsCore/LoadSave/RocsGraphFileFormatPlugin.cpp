@@ -36,13 +36,13 @@
 #include <DataStructureBackendManager.h>
 #include <DataStructureBackendInterface.h>
 
-//TODO add translations
-static const KAboutData pluginAboutData("rocs_rocsgraphfileformat",
-                                        0,
-                                        "Rocs Graph File Backend",
-                                        "0.2",
-                                        "Read and write Rocs Graph Files",
-                                        KAboutData::License_GPL_V2);
+//FIXME
+// static const KAboutData pluginAboutData("rocs_rocsgraphfileformat",
+//                                         0,
+//                                         "Rocs Graph File Backend",
+//                                         "0.2",
+//                                         "Read and write Rocs Graph Files",
+//                                         KAboutData::License_GPL_V2);
 
 class RocsGraphFileFormatPluginPrivate
 {
@@ -56,10 +56,9 @@ public:
 
 
 RocsGraphFileFormatPlugin::RocsGraphFileFormatPlugin(QObject *parent)
-    : GraphFilePluginInterface(&pluginAboutData, parent)
+    : GraphFilePluginInterface("rocs_rocsgraphfileformat", parent)
 {
     d = new RocsGraphFileFormatPluginPrivate;
-    ki18n("fofo");
 }
 
 

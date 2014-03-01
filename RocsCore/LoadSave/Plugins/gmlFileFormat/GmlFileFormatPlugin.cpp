@@ -33,20 +33,21 @@
 
 #include <QFile>
 
-static const KAboutData aboutdata("rocs_gmlfileformat",
-                                  0,
-                                  ki18nc("@title Displayed plugin name", "GML File Backend"),
-                                  "0.1",
-                                  ki18n("Read and write Graph Markup Language (GML) files."),
-                                  KAboutData::License_GPL_V2);
+
+//FIXME
+// static const KAboutData aboutdata("rocs_gmlfileformat",
+//                                   0,
+//                                   ki18nc("@title Displayed plugin name", "GML File Backend"),
+//                                   "0.1",
+//                                   ki18n("Read and write Graph Markup Language (GML) files."),
+//                                   KAboutData::License_GPL_V2);
 
 extern GmlParser::GmlGraphParsingHelper* phelper;
 
 K_PLUGIN_FACTORY(FilePLuginFactory, registerPlugin<GmlFileFormatPlugin>();)
-K_EXPORT_PLUGIN(FilePLuginFactory(aboutdata))
 
 GmlFileFormatPlugin::GmlFileFormatPlugin(QObject *parent, const QList<QVariant>&) :
-    GraphFilePluginInterface(FilePLuginFactory(aboutdata, 0).componentData().aboutData(), parent)
+    GraphFilePluginInterface("rocs_gmlfileformat", parent)
 {
 }
 

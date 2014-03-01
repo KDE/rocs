@@ -36,12 +36,13 @@
 #include "CoreTypes.h"
 #include <Group.h>
 
-static const KAboutData aboutdata("rocs_dotfileformat",
-                                  0,
-                                  ki18nc("@title Displayed plugin name", "Graphviz Graph File Backend"),
-                                  "0.1",
-                                  ki18n("Read and write Graphviz graph files."),
-                                  KAboutData::License_GPL_V2);
+//FIXME
+// static const KAboutData aboutdata("rocs_dotfileformat",
+//                                   0,
+//                                   ki18nc("@title Displayed plugin name", "Graphviz Graph File Backend"),
+//                                   "0.1",
+//                                   ki18n("Read and write Graphviz graph files."),
+//                                   KAboutData::License_GPL_V2);
 
 extern DotParser::DotGraphParsingHelper* phelper;
 
@@ -54,7 +55,7 @@ DotFileFormatPlugin::~DotFileFormatPlugin()
 }
 
 DotFileFormatPlugin::DotFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface(FilePluginFactory(aboutdata,0).componentData().aboutData(), parent)
+    GraphFilePluginInterface("rocs_dotfileformat", parent)
 {
 }
 

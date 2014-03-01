@@ -30,13 +30,15 @@
 class GraphFilePluginInterfacePrivate
 {
 public:
-    GraphFilePluginInterfacePrivate(const KAboutData* aboutData) :
-        aboutData(aboutData)
+    GraphFilePluginInterfacePrivate(const QString &componentName)
+        : componentName(componentName)
+        , aboutData(0) //FIXME
     {
         lastError = GraphFilePluginInterface::None;
     }
 
-    const KAboutData* aboutData;
+    const QString componentName;
+    const KAboutData* aboutData; //FIXME value never set
     GraphFilePluginInterface::Error lastError;
     QString lastErrorString;
     Document* graphDocument;
@@ -44,9 +46,9 @@ public:
 };
 
 
-GraphFilePluginInterface::GraphFilePluginInterface(const KAboutData* aboutData, QObject* parent):
+GraphFilePluginInterface::GraphFilePluginInterface(const QString &componentName, QObject* parent):
     QObject(parent),
-    d(new GraphFilePluginInterfacePrivate(aboutData))
+    d(new GraphFilePluginInterfacePrivate(componentName))
 {
 }
 

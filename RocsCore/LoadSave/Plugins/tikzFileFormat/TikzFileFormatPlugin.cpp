@@ -28,19 +28,18 @@
 #include <Modifiers/Topology.h>
 #include <DataStructureBackendManager.h>
 
-static const KAboutData aboutdata("rocs_tikzfileformat",
-                                  0,
-                                  ki18nc("@title Displayed plugin name", "PGF/TikZ Export File Backend"),
-                                  "0.1",
-                                  ki18n("Export graph documents in PGF/TikZ format."),
-                                  KAboutData::License_GPL_V2);
+//FIXME
+// static const KAboutData aboutdata("rocs_tikzfileformat",
+//                                   0,
+//                                   ki18nc("@title Displayed plugin name", "PGF/TikZ Export File Backend"),
+//                                   "0.1",
+//                                   ki18n("Export graph documents in PGF/TikZ format."),
+//                                   KAboutData::License_GPL_V2);
 
 K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<TikzFileFormatPlugin>();)
-K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
-
 
 TikzFileFormatPlugin::TikzFileFormatPlugin(QObject* parent, const QList<QVariant>&) :
-    GraphFilePluginInterface(FilePluginFactory(aboutdata,0).componentData().aboutData(), parent)
+    GraphFilePluginInterface("rocs_tikzfileformat", parent)
 {
 }
 
@@ -161,3 +160,5 @@ void TikzFileFormatPlugin::writeFile(Document &graph)
 
     setError(None);
 }
+
+#include "TikzFileFormatPlugin.moc"
