@@ -27,7 +27,7 @@
 #include <QString>
 #include <QScopedPointer>
 
-class KUrl;
+class QUrl;
 class ProjectPrivate;
 class Document;
 
@@ -61,7 +61,7 @@ public:
      *
      * \param projectFile is the absolute path to the project file
      */
-    explicit Project(const KUrl &projectFile);
+    explicit Project(const QUrl &projectFile);
 
     /**
      * Constructor for project that creates a project by configuration given
@@ -70,7 +70,7 @@ public:
      * \param projectArchive the local file path to the project file
      * \param projectDirectory the local file path to the project directory
      */
-    explicit Project(const KUrl &projectArchive, const KUrl &projectDirectory);
+    explicit Project(const QUrl &projectArchive, const QUrl &projectDirectory);
 
     virtual ~Project();
 
@@ -82,14 +82,14 @@ public:
      */
     QString projectDirectory() const;
 
-    KUrl projectFile() const;
+    QUrl projectFile() const;
 
     /**
      * Set path of project to \p fileUrl and set project to being non-temporary.
      *
      * \param fileUrl is the designated path to the project
      */
-    void setProjectFile(const KUrl &fileUrl);
+    void setProjectFile(const QUrl &fileUrl);
 
     /**
      * Set project name.
@@ -130,7 +130,7 @@ public:
      *
      * \return list of URLs
      */
-    QList<KUrl> codeFiles() const;
+    QList<QUrl> codeFiles() const;
 
     /**
      * Get list of all temporary code files of the project, i.e., code files
@@ -154,7 +154,7 @@ public:
      *
      * \param file is the local file URL
      */
-    int addCodeFile(const KUrl &file);
+    int addCodeFile(const QUrl &file);
 
     /**
      * Save a temporary code document to a code file and update association to the project.
@@ -164,7 +164,7 @@ public:
      * \param document is the temporary code file
      * \param file is the local file URL to where the code file shall be saved
      */
-    void saveCodeFileNew(KTextEditor::Document *document, const KUrl &file);
+    void saveCodeFileNew(KTextEditor::Document *document, const QUrl &file);
 
     /**
      * Remove code file \p document from list of temporary code files of the project.
@@ -185,7 +185,7 @@ public:
      *
      * \return list of local file URLs
      */
-    QList<KUrl> graphFiles() const;
+    QList<QUrl> graphFiles() const;
 
     /**
      * Add a new temporary graph document to the project. This file has not a file name and must
@@ -201,7 +201,7 @@ public:
      *
      * \param file is the local file URL
      */
-    int addGraphFile(const KUrl &file);
+    int addGraphFile(const QUrl &file);
 
     /**
      * Save a temporary graph document to a graph file and update association to the project.
@@ -237,14 +237,14 @@ public:
      *
      * \param file is a local file url pointing to the journal file
      */
-    void setJournalFile(const KUrl &file);
+    void setJournalFile(const QUrl &file);
 
     /**
      * Returns URL to local file containing the project journal.
      *
      * \return URL to local file
      */
-    KUrl journalFile() const;
+    QUrl journalFile() const;
 
     /**
      * Save the project to its current file if empty or no filename is given. Otherwise if filename is
@@ -262,7 +262,9 @@ public:
      * \param exportUrl the path to the newly created archive
      * \return true if archive was created, else false
      */
-    bool exportProject(const KUrl &exportUrl);
+    bool exportProject(const QUrl &exportUrl);
+
+    static QString relativePath(const QString &base_dir, const QString &path);
 
 private:
     bool writeNewProjectFile();

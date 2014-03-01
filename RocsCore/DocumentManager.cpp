@@ -242,7 +242,7 @@ Document * DocumentManager::newDocument()
 }
 
 
-Document * DocumentManager::openDocument(const KUrl &documentUrl)
+Document * DocumentManager::openDocument(const QUrl &documentUrl)
 {
     GraphFilePluginInterface* loader = GraphFileBackendManager::self()->defaultBackend();
     loader->setFile(documentUrl);
@@ -260,7 +260,7 @@ Document * DocumentManager::openDocument(const KUrl &documentUrl)
 }
 
 
-void DocumentManager::saveDocumentAs(Document *document, const KUrl &documentUrl)
+void DocumentManager::saveDocumentAs(Document *document, const QUrl &documentUrl)
 {
     exportDocument(document, documentUrl);
     document->setFileUrl(documentUrl);
@@ -268,7 +268,7 @@ void DocumentManager::saveDocumentAs(Document *document, const KUrl &documentUrl
     return;
 }
 
-void DocumentManager::exportDocument(Document *document, const KUrl &documentUrl)
+void DocumentManager::exportDocument(Document *document, const QUrl &documentUrl)
 {
     GraphFilePluginInterface* serializer = GraphFileBackendManager::self()->defaultBackend();
     serializer->setFile(documentUrl);

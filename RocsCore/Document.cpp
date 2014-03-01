@@ -33,8 +33,7 @@
 
 #include <KSaveFile>
 #include <QDebug>
-#include <KUrl>
-
+#include <QUrl>
 #include <QtConcurrent/QtConcurrent>
 #include <QStandardPaths>
 #include <QString>
@@ -377,12 +376,12 @@ DataStructurePtr Document::addDataStructure(DataStructurePtr dataStructure)
 void Document::save()
 {
     Q_ASSERT(!fileUrl().isEmpty());
-    DocumentManager::self().saveDocumentAs(this, KUrl::fromLocalFile(fileUrl()));
+    DocumentManager::self().saveDocumentAs(this, QUrl::fromLocalFile(fileUrl()));
 }
 
 void Document::saveAs(const QString& fileUrl)
 {
-    DocumentManager::self().saveDocumentAs(this, KUrl::fromLocalFile(fileUrl));
+    DocumentManager::self().saveDocumentAs(this, QUrl::fromLocalFile(fileUrl));
 }
 
 QString Document::fileUrl() const
@@ -390,7 +389,7 @@ QString Document::fileUrl() const
     return d->_lastSavedDocumentPath;
 }
 
-void Document::setFileUrl(const KUrl &fileUrl)
+void Document::setFileUrl(const QUrl &fileUrl)
 {
     d->_lastSavedDocumentPath = fileUrl.toLocalFile();
 }

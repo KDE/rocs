@@ -129,7 +129,7 @@ KTextEditor::Document* CodeEditor::newScript()
 }
 
 
-KTextEditor::Document* CodeEditor::newScript(const KUrl& file)
+KTextEditor::Document* CodeEditor::newScript(const QUrl& file)
 {
     KTextEditor::Document* script = newScript();
     script->saveAs(file);
@@ -158,7 +158,7 @@ void CodeEditor::updateTabText(KTextEditor::Document* text)
 }
 
 
-void CodeEditor::openScript(const KUrl& fileUrl)
+void CodeEditor::openScript(const QUrl& fileUrl)
 {
     if (!fileUrl.isValid()) {
         return;

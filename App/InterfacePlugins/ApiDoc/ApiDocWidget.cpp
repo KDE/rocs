@@ -32,7 +32,7 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
     , _manager(new ApiDocManager(this))
     , _historyPointer(-1)
 {
-    _baseUrl = KUrl::fromPath(KGlobal::dirs()->findResourceDir("appdata", QString("plugin/apidoc/objectApi.html")));
+    _baseUrl = QUrl::fromLocalFile(KGlobal::dirs()->findResourceDir("appdata", QString("plugin/apidoc/objectApi.html")));
     _baseUrl.addPath("plugin/apidoc/");
 
     ui = new Ui::ApiDocWidget;

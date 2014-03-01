@@ -25,7 +25,7 @@
 #include <KXmlGuiWindow>
 #include <kmessagebox.h>
 #include <QMutex>
-#include <KUrl>
+#include <QUrl>
 
 class DocumentTypesWidget;
 class KRecentFilesAction;
@@ -158,7 +158,7 @@ private slots:
 
     void newProjectAssistant();
     void saveProject(bool saveAs = false);
-    void openProject(const KUrl& fileName = KUrl());
+    void openProject(const QUrl& fileName = QUrl());
 
     /**
      * Import dialog to add graph document to project.

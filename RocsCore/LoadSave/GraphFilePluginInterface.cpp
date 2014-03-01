@@ -23,7 +23,7 @@
 #include <QStringList>
 #include <QObject>
 #include <Document.h>
-#include <KUrl>
+#include <QUrl>
 #include <QDebug>
 #include <KAboutData>
 
@@ -42,7 +42,7 @@ public:
     GraphFilePluginInterface::Error lastError;
     QString lastErrorString;
     Document* graphDocument;
-    KUrl file;
+    QUrl file;
 };
 
 
@@ -113,13 +113,13 @@ void GraphFilePluginInterface::setGraphDocument(Document* document)
 }
 
 
-void GraphFilePluginInterface::setFile(const KUrl& file)
+void GraphFilePluginInterface::setFile(const QUrl& file)
 {
     d->file = file;
 }
 
 
-const KUrl& GraphFilePluginInterface::file() const
+const QUrl& GraphFilePluginInterface::file() const
 {
     return d->file;
 }

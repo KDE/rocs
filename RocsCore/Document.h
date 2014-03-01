@@ -31,7 +31,7 @@
 #include <QMap>
 
 class DocumentPrivate;
-class KUrl;
+class QUrl;
 class DataStructureBackendInterface;
 class DataStructure;
 class QtScriptBackend;
@@ -74,7 +74,7 @@ public:
      *
      * \param fileUrl path to local file for saving the document
      */
-    void setFileUrl(const KUrl &fileUrl);
+    void setFileUrl(const QUrl &fileUrl);
 
     /**
      * Evaluates given string and returns true if identifier is valid, otherwise returns false.

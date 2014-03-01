@@ -27,7 +27,7 @@
 #include "RocsCoreExport.h"
 
 class DocumentManagerPrivate;
-class KUrl;
+class QUrl;
 class Data;
 class Document;
 class QSvgRenderer;
@@ -122,7 +122,7 @@ public slots:
      * \param documentUrl is Url specifying the to be opened document
      * \return loaded document
      */
-    Document * openDocument(const KUrl &documentUrl);
+    Document * openDocument(const QUrl &documentUrl);
 
     /**
      * Save graph document \p document at url \p documentUrl. The internal file url for the
@@ -131,7 +131,7 @@ public slots:
      * \param document is the graph document to be save
      * \param documentUrl is the target file for saving
      */
-    void saveDocumentAs(Document *document, const KUrl &documentUrl);
+    void saveDocumentAs(Document *document, const QUrl &documentUrl);
 
     /**
      * Save graph document \p document at url \p documentUrl. The document is not changed by this
@@ -139,7 +139,7 @@ public slots:
      * \param document is the graph document to be save
      * \param documentUrl is the target file for saving
      */
-    void exportDocument(Document *document, const KUrl &documentUrl);
+    void exportDocument(Document *document, const QUrl &documentUrl);
 
 signals:
     /**

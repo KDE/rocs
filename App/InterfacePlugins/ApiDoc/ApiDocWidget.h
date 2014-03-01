@@ -21,8 +21,8 @@
 
 #include "ui_ApiDocWidget.h"
 #include <QWidget>
-#include <KUrl>
 
+class QUrl;
 class ApiDocManager;
 class ApiDocModel;
 
@@ -53,7 +53,7 @@ public slots:
 private:
     ApiDocManager *_manager;
     ApiDocModel *_model;
-    KUrl _baseUrl;
+    QUrl _baseUrl;
     QList<QString> _history;
     int _historyPointer;
     Ui::ApiDocWidget *ui;

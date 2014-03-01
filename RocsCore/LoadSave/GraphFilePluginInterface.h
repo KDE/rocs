@@ -25,7 +25,7 @@
 #include <RocsCoreExport.h>
 
 class KAboutData;
-class KUrl;
+class QUrl;
 class Document;
 class GraphFilePluginInterfacePrivate;
 
@@ -131,9 +131,9 @@ public:
     /**
      * Set file that shall be used for nexte read or write operation.
      *
-     * \param file is KUrl pointing to local file
+     * \param file is QUrl pointing to local file
      */
-    void setFile(const KUrl& file);
+    void setFile(const QUrl& file);
 
     /**
      * \return true if a valid graph document was read. Otherwise return false
@@ -156,7 +156,7 @@ protected:
      *
      * \return file that is last used for write/read
      */
-    const KUrl& file() const;
+    const QUrl& file() const;
 
     /**
      * \internal
