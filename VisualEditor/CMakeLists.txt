@@ -80,7 +80,7 @@ kde4_add_ui_files( rocsvisualeditor_SRCS
     Interface/PointerPropertiesWidget.ui
 )
 
-kde4_add_library( rocsvisualeditor SHARED ${rocsvisualeditor_SRCS} )
+add_library(rocsvisualeditor SHARED ${rocsvisualeditor_SRCS})
 
 target_link_libraries(rocsvisualeditor
     rocscore
