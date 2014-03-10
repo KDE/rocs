@@ -28,7 +28,7 @@
 #include <QDir>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KTemporaryFile>
+#include <QTemporaryFile>
 #include <QDebug>
 #include <KTextEditor/Document>
 #include <KTar>
@@ -74,9 +74,7 @@ public:
 Project::Project()
     : d(new ProjectPrivate)
 {
-    KTemporaryFile tmpProjectFile;
-    tmpProjectFile.setPrefix("rocsproject");
-    tmpProjectFile.setSuffix(".tmp");
+    QTemporaryFile tmpProjectFile;
     tmpProjectFile.setAutoRemove(false);
     tmpProjectFile.open();
     d->_projectFile = QUrl::fromLocalFile(tmpProjectFile.fileName());
@@ -382,9 +380,7 @@ bool Project::exportProject(const QUrl &exportUrl)
     }
 
     // create project configuration for export
-    KTemporaryFile tmpProjectConfig;
-    tmpProjectConfig.setPrefix("export");
-    tmpProjectConfig.setSuffix(".rocs");
+    QTemporaryFile tmpProjectConfig;
     tmpProjectConfig.open();
     KConfig* exportConfig = d->_config->copyTo(tmpProjectConfig.fileName());
     KConfigGroup projectGroup(exportConfig, "Project");
@@ -505,4 +501,3 @@ QString Project::relativePath(const QString &base_dir, const QString &path)
 
     return result;
 }
-

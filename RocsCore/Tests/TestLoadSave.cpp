@@ -21,7 +21,7 @@
 #include "Data.h"
 #include "Pointer.h"
 #include <qtest_kde.h>
-#include <ktemporaryfile.h>
+#include <QTemporaryFile>
 
 #include <Document.h>
 #include <DocumentManager.h>
@@ -128,9 +128,7 @@ void TestLoadSave::serializeUnserializeTypesTest()
 
 void TestLoadSave::projectLoadSaveTest()
 {
-    KTemporaryFile temp;
-    temp.setPrefix("rocsproject");
-    temp.setSuffix(".tmp");
+    QTemporaryFile temp;
     temp.setAutoRemove(false);
     temp.open();
 
