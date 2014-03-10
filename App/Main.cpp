@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     KAboutData aboutData("rocs",
                          "rocs",
                          ki18nc("@title Displayed program name", "Rocs").toString(),
-                         ROCS_VERSION_STR,
+                         ROCS_VERSION_STRING,
                          ki18nc("@title KAboutData: short program description", "Graph Theory Tool").toString(),
                          KAboutData::License_GPL,
                          ki18nc("@info:credit", "(c) 2009-2013 Rocs Developers").toString(),

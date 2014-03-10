@@ -20,11 +20,11 @@
 
 project(rocs)
 
-set(ROCS_VERSION_MAJOR 1)
-set(ROCS_VERSION_MINOR 9)
-set(ROCS_VERSION_PATCH 80)
-
-configure_file( "${rocs_SOURCE_DIR}/rocsversion.h.cmake" "${rocs_BINARY_DIR}/rocsversion.h" @ONLY )
+ecm_setup_version(1.9.900
+    VARIABLE_PREFIX ROCS
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/rocsversion.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/RocsConfigVersion.cmake"
+)
 
 ecm_optional_add_subdirectory(InterfacePlugins)
 

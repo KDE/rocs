@@ -25,6 +25,7 @@ find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 include(ECMInstallIcons)
 include(ECMOptionalAddSubdirectory)
+include(ECMSetupVersion)
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)

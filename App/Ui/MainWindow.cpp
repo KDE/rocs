@@ -137,7 +137,7 @@ MainWindow::MainWindow()
     GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
 
     // update rocs config version
-    Settings::setVersion(ROCS_VERSION_STR);
+    Settings::setVersion(ROCS_VERSION_STRING);
 
     // disable save action from kpart, since we take care for the editor by global save action
     // here "file_save" is the action identifier from katepartui.rc
