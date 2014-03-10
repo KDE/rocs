@@ -23,7 +23,7 @@ cmake_minimum_required(VERSION 2.8.11)
 
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+include(ECMInstallIcons)
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)
