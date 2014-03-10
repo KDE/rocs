@@ -22,7 +22,7 @@
 #include "ui_JournalEditorWidget.h"
 
 #include <KUrl>
-#include <KSaveFile>
+#include <QSaveFile>
 #include <QDebug>
 
 #include <QTextStream>
@@ -76,14 +76,14 @@ void JournalEditorWidget::saveJournal()
         return;
     }
 
-    KSaveFile saveFile(_currentProject->journalFile().toLocalFile());
-    saveFile.open();
+    QSaveFile saveFile(_currentProject->journalFile().toLocalFile());
+    saveFile.open(QIODevice::WriteOnly);
 
     QTextStream stream(&saveFile);
     stream.setCodec("UTF-8");
     stream << ui->editor->toHtml();
     stream.flush();
-    if (!saveFile.finalize()) {
+    if (!saveFile.commit()) {
         qCritical() << "Error while writing journal file, aborting write. Journal file was not changed.";
     }
     _modified = false;

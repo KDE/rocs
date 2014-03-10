@@ -31,7 +31,6 @@
 #include "QtScriptBackend.h"
 #include "ConcurrentHelpClasses.h"
 
-#include <KSaveFile>
 #include <QDebug>
 #include <QUrl>
 #include <QtConcurrent/QtConcurrent>

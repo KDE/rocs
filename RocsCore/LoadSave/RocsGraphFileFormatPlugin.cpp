@@ -24,7 +24,7 @@
 #include <KAboutData>
 #include <KGenericFactory>
 #include <KUrl>
-#include <KSaveFile>
+#include <QSaveFile>
 #include <KLocalizedString>
 #include <QFile>
 #include <DataStructure.h>
@@ -298,9 +298,9 @@ void RocsGraphFileFormatPlugin::readFile()
 
 void RocsGraphFileFormatPlugin::writeFile(Document &graph)
 {
-    KSaveFile saveFile(!file().toLocalFile().endsWith(".graph") ? QString("%1.graph").arg(file().toLocalFile()) : file().toLocalFile());
+    QSaveFile saveFile(!file().toLocalFile().endsWith(".graph") ? QString("%1.graph").arg(file().toLocalFile()) : file().toLocalFile());
 
-    if (!saveFile.open()) {
+    if (!saveFile.open(QIODevice::WriteOnly)) {
         setError(FileIsReadOnly, i18n("Could not open file \"%1\" in write mode: %2", file().fileName(), saveFile.errorString()));
         return;
     }
@@ -311,7 +311,7 @@ void RocsGraphFileFormatPlugin::writeFile(Document &graph)
     serialize(graph);
     stream << d->_buffer;
 
-    if (!saveFile.finalize()) {
+    if (!saveFile.commit()) {
         setError(FileIsReadOnly, i18n("Could not write data, aborting. Error: %1.", saveFile.errorString()));
         return;
     }
