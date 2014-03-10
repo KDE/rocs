@@ -26,7 +26,7 @@ set(ROCS_VERSION_PATCH 80)
 
 configure_file( "${rocs_SOURCE_DIR}/rocsversion.h.cmake" "${rocs_BINARY_DIR}/rocsversion.h" @ONLY )
 
-add_subdirectory(InterfacePlugins)
+ecm_optional_add_subdirectory(InterfacePlugins)
 
 include_directories(
     ${ROCSCORE_INCLUDES}
@@ -128,10 +128,10 @@ install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs )
 install( FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 install( FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
 
-add_subdirectory( Scripts )
+ecm_optional_add_subdirectory(Scripts)
 
 # Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
     enable_testing()
-    add_subdirectory(Tests)
+    ecm_optional_add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)

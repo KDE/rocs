@@ -17,4 +17,4 @@
 ##
 
 # TODO this directory will become dynamic
-add_subdirectory(ApiDoc)
+ecm_optional_add_subdirectory(ApiDoc)

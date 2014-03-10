@@ -24,6 +24,7 @@ cmake_minimum_required(VERSION 2.8.11)
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 include(ECMInstallIcons)
+include(ECMOptionalAddSubdirectory)
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)
@@ -74,7 +75,6 @@ include_directories(
 #     ${Grantlee_INCLUDE_DIRS}
 )
 
-
 remove_definitions(-DQT_NO_CAST_TO_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
@@ -108,14 +108,14 @@ add_feature_info(ExperimentalPlugins
 )
 
 # main includes
-add_subdirectory(RocsCore)
-add_subdirectory(VisualEditor)
-add_subdirectory(App)
+ecm_optional_add_subdirectory(RocsCore)
+ecm_optional_add_subdirectory(VisualEditor)
+ecm_optional_add_subdirectory(App)
 
 # feature log
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     feature_summary(WHAT ALL)
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
-add_subdirectory(graphics)
-# add_subdirectory(doc) //FIXME port documentation
+ecm_optional_add_subdirectory(graphics)
+# ecm_optional_add_subdirectory(doc) //FIXME port documentation

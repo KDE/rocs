@@ -16,8 +16,8 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-add_subdirectory(tgfFileFormat)
-add_subdirectory(tikzFileFormat)
+ecm_optional_add_subdirectory(tgfFileFormat)
+ecm_optional_add_subdirectory(tikzFileFormat)
 
 # require Boost >= 1.49 for DOT file format
 if(${Boost_VERSION} VERSION_LESS 104900)
@@ -26,13 +26,11 @@ if(${Boost_VERSION} VERSION_LESS 104900)
         "Building of DOT file format support needs Boost >= 1.49."
     )
 else(${Boost_VERSION} VERSION_LESS 104900)
-    add_subdirectory(dotFileFormat)
+    ecm_optional_add_subdirectory(dotFileFormat)
 endif(${Boost_VERSION} VERSION_LESS 104900)
 
 # these plugins are in an unstable state and are not suited for end users
 if (ROCS_BUILD_LOADSAVE)
-    add_subdirectory(kmlFileFormat)
-    add_subdirectory(gmlFileFormat)
+    ecm_optional_add_subdirectory(kmlFileFormat)
+    ecm_optional_add_subdirectory(gmlFileFormat)
 endif(ROCS_BUILD_LOADSAVE)
-
-

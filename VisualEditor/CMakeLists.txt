@@ -93,7 +93,7 @@ set( rocsvisualeditor_LIB_HDRS
     GraphVisualEditor.h
 )
 
-add_subdirectory(Tools)
+ecm_optional_add_subdirectory(Tools)
 
 set_target_properties( rocsvisualeditor PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
@@ -111,5 +111,5 @@ install( FILES
 # Build Tests if KDE_TEST is on
 if(KDE4_BUILD_TESTS)
     enable_testing()
-    add_subdirectory( Tests )
+    ecm_optional_add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)

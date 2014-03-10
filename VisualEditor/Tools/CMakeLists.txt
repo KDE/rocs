@@ -1,3 +1,3 @@
-add_subdirectory(GenerateGraph)
-add_subdirectory(TransformEdges)
-add_subdirectory(AssignValues)
+ecm_optional_add_subdirectory(GenerateGraph)
+ecm_optional_add_subdirectory(TransformEdges)
+ecm_optional_add_subdirectory(AssignValues)

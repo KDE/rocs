@@ -42,5 +42,5 @@ install(FILES rocs_kmlfileformatplugin.desktop DESTINATION ${SERVICES_INSTALL_DI
 
 if(KDE4_BUILD_TESTS)
     enable_testing()
-    add_subdirectory(Tests)
+    ecm_optional_add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)

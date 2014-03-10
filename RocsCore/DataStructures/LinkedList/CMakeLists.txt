@@ -46,5 +46,5 @@ install(FILES ListNode.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 
 if(KDE4_BUILD_TESTS)
     enable_testing()
-    add_subdirectory( Tests )
+    ecm_optional_add_subdirectory(Tests)
 endif(KDE4_BUILD_TESTS)

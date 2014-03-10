@@ -17,6 +17,6 @@
 ##
 #### Build Load/Save plugins.
 if (ROCS_BUILD_LOADSAVE)
-    add_subdirectory(Plugins)
+    ecm_optional_add_subdirectory(Plugins)
 endif(ROCS_BUILD_LOADSAVE)
 
