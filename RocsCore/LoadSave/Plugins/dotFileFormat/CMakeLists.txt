@@ -34,8 +34,6 @@ add_library(rocs_dotfileformat MODULE ${dotFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_dotfileformat
     rocscore
-    rocs_GraphStructure
-    ${KDE4_KDEUI_LIBS}
 )
 
 install(TARGETS rocs_dotfileformat DESTINATION ${PLUGIN_INSTALL_DIR})

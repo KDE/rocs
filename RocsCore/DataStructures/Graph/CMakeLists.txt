@@ -32,7 +32,7 @@ set(GraphStructure_SRC
     NodeItem.cpp
     EdgeItem.cpp)
 
-add_library(rocs_GraphStructure SHARED ${GraphStructure_SRC})
+add_library(rocs_GraphStructure MODULE ${GraphStructure_SRC})
 
 target_link_libraries(rocs_GraphStructure
     ${QT_QTSCRIPT_LIBRARY}
