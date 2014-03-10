@@ -135,22 +135,22 @@ void TestLoadSave::projectLoadSaveTest()
     temp.open();
 
     // prepare project and save
-    Project* testProject = new Project(KUrl::fromLocalFile(temp.fileName()));
+    Project* testProject = new Project(QUrl::fromLocalFile(temp.fileName()));
     testProject->setName("new test name");
-    testProject->addCodeFile(KUrl::fromLocalFile("/path/to/code.js"));
-    testProject->addGraphFile(KUrl::fromLocalFile("/path/to/graph.graph"));
+    testProject->addCodeFile(QUrl::fromLocalFile("/path/to/code.js"));
+    testProject->addGraphFile(QUrl::fromLocalFile("/path/to/graph.graph"));
     testProject->writeProjectFile();
 
     // load project
-    Project* testProject2 = new Project(KUrl::fromLocalFile(temp.fileName()));
+    Project* testProject2 = new Project(QUrl::fromLocalFile(temp.fileName()));
     QVERIFY2(testProject2->name().compare("new test name") == 0, "ERROR: project name changed");
     QVERIFY(testProject2->codeFiles().count() == 1);
     QVERIFY2(
-        testProject2->codeFiles().at(0).equals(KUrl::fromLocalFile("/path/to/code.js")),
+        testProject2->codeFiles().at(0).toLocalFile() == "/path/to/code.js",
         "ERROR: path of code file changed"
     );
     QVERIFY2(
-        testProject2->graphFiles().at(0).equals(KUrl::fromLocalFile("/path/to/graph.graph")),
+        testProject2->graphFiles().at(0).toLocalFile() == "/path/to/graph.graph",
         "ERROR: path of graph file changed"
     );
 
@@ -160,7 +160,7 @@ void TestLoadSave::projectLoadSaveTest()
 
 void TestLoadSave::loadMultipleLayerGraphTest()
 {
-    DocumentManager::self().openDocument(KUrl::fromLocalFile("TestGraphFiles/multipleLayerGraph.graph"));
+    DocumentManager::self().openDocument(QUrl::fromLocalFile("TestGraphFiles/multipleLayerGraph.graph"));
     Document *document = DocumentManager::self().activeDocument();
 
     QVERIFY2(document->pointerTypeList().length() == 2, "two pointer types expected");

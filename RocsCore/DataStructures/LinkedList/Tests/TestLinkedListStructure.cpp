@@ -22,7 +22,6 @@
 #include "../ListNode.h"
 #include "Data.h"
 #include "Pointer.h"
-#include "KrossBackend.h"
 #include "QtScriptBackend.h"
 #include <qtest_kde.h>
 

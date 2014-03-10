@@ -46,7 +46,4 @@ install(FILES GraphStructure.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 install(FILES GraphNode.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 install(FILES GraphEdge.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 
-if(KDE4_BUILD_TESTS)
-    enable_testing()
-    ecm_optional_add_subdirectory(Tests)
-endif(KDE4_BUILD_TESTS)
+ecm_optional_add_subdirectory(Tests)

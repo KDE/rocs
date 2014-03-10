@@ -41,7 +41,4 @@ target_link_libraries(rocs_gmlfileformat
 install(TARGETS rocs_gmlfileformat DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES rocs_gmlfileformatplugin.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
-if(KDE4_BUILD_TESTS)
-    enable_testing()
-    ecm_optional_add_subdirectory(Tests)
-endif(KDE4_BUILD_TESTS)
+ecm_optional_add_subdirectory(Tests)

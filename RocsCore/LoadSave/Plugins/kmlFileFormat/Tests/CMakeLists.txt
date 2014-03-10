@@ -1,6 +1,6 @@
 ##
 #   This file is part of Rocs.
-#   Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -23,11 +23,10 @@ set(TestKmlFileFormatPlugin_SRCS
     ../KmlHandler.cpp
     ../KmlFileFormatPlugin.cpp
 )
-kde4_add_unit_test(TestKmlFileFormatPlugin ${TestKmlFileFormatPlugin_SRCS})
+add_executable(TestKmlFileFormatPlugin ${TestKmlFileFormatPlugin_SRCS})
+add_test(TestKmlFileFormatPlugin TestKmlFileFormatPlugin)
+ecm_mark_as_test(TestKmlFileFormatPlugin)
 target_link_libraries(TestKmlFileFormatPlugin
     rocscore
-    ${QT_QTXML_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
+    Qt5::Test
 )
-add_test(TestKmlFileFormatPlugin TestKmlFileFormatPlugin)

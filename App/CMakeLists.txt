@@ -129,9 +129,4 @@ install( FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 install( FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
 
 ecm_optional_add_subdirectory(Scripts)
-
-# Build Tests if KDE_TEST is on
-if(KDE4_BUILD_TESTS)
-    enable_testing()
-    ecm_optional_add_subdirectory(Tests)
-endif(KDE4_BUILD_TESTS)
+ecm_optional_add_subdirectory(Tests)

@@ -1,6 +1,6 @@
 ##
 #   This file is part of Rocs.
-#   Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -27,10 +27,10 @@ set(TestDotFileFormatPlugin_SRCS
     ../DotGraphParsingHelper.cpp
     ../DotFileFormatPlugin.cpp
 )
-kde4_add_unit_test(TestDotFileFormatPlugin ${TestDotFileFormatPlugin_SRCS})
+add_executable(TestDotFileFormatPlugin ${TestDotFileFormatPlugin_SRCS})
+add_test(TestDotFileFormatPlugin TestDotFileFormatPlugin)
+ecm_mark_as_test(TestDotFileFormatPlugin)
 target_link_libraries(TestDotFileFormatPlugin
     rocscore
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
+    Qt5::Test
 )
-add_test(TestDotFileFormatPlugin TestDotFileFormatPlugin)

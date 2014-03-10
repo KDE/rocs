@@ -1,6 +1,6 @@
 ##
 #   This file is part of Rocs.
-#   Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -26,19 +26,14 @@ set (TestGraphStructure_SRCS
     ../GraphStructure.cpp
     ../GraphNode.cpp
 )
-kde4_add_executable(TestGraphStructure ${TestGraphStructure_SRCS} )
+add_executable(TestGraphStructure ${TestGraphStructure_SRCS})
+add_test(TestGraphStructure TestGraphStructure)
+ecm_mark_as_test(TestGraphStructure)
 set_target_properties(TestGraphStructure PROPERTIES COMPILE_FLAGS -DROCS_GRAPHSTRUCTURE_EXPORT=)
 target_link_libraries( TestGraphStructure
     rocscore
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
+    Qt5::Test
 )
-add_test(TestGraphStructure TestGraphStructure)
-
 
 # graph algorithms
 set (TestGraphStructureAlgorithms_SRCS
@@ -46,15 +41,11 @@ set (TestGraphStructureAlgorithms_SRCS
     ../GraphStructure.cpp
     ../GraphNode.cpp
 )
-kde4_add_executable(TestGraphStructureAlgorithms ${TestGraphStructureAlgorithms_SRCS} )
-set_target_properties(TestGraphStructureAlgorithms PROPERTIES COMPILE_FLAGS -DROCS_GRAPHSTRUCTURE_EXPORT=)
-target_link_libraries( TestGraphStructureAlgorithms
-    rocscore
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-)
+add_executable(TestGraphStructureAlgorithms ${TestGraphStructureAlgorithms_SRCS})
 add_test(TestGraphStructureAlgorithms TestGraphStructureAlgorithms)
+ecm_mark_as_test(TestGraphStructureAlgorithms)
+set_target_properties(TestGraphStructureAlgorithms PROPERTIES COMPILE_FLAGS -DROCS_GRAPHSTRUCTURE_EXPORT=)
+target_link_libraries(TestGraphStructureAlgorithms
+    rocscore
+    Qt5::Test
+)

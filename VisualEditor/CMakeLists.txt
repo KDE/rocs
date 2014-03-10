@@ -94,6 +94,7 @@ set( rocsvisualeditor_LIB_HDRS
 )
 
 ecm_optional_add_subdirectory(Tools)
+ecm_optional_add_subdirectory(Tests)
 
 set_target_properties( rocsvisualeditor PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
@@ -107,9 +108,3 @@ install( FILES
     DESTINATION
     ${SERVICETYPES_INSTALL_DIR}
 )
-
-# Build Tests if KDE_TEST is on
-if(KDE4_BUILD_TESTS)
-    enable_testing()
-    ecm_optional_add_subdirectory(Tests)
-endif(KDE4_BUILD_TESTS)

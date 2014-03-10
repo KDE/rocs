@@ -1,7 +1,7 @@
 ##
 #   This file is part of Rocs.
 #   Copyright 2011       Tomaz Canabrava <tomaz.canabrava@gmail.com>
-#   Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -44,7 +44,4 @@ install(FILES  rocs_ListStructure.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install(FILES ListStructure.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 install(FILES ListNode.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 
-if(KDE4_BUILD_TESTS)
-    enable_testing()
-    ecm_optional_add_subdirectory(Tests)
-endif(KDE4_BUILD_TESTS)
+ecm_optional_add_subdirectory(Tests)

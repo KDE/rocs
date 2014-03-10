@@ -107,6 +107,7 @@ install(FILES DataStructure.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 ecm_optional_add_subdirectory(DataStructures)
 ecm_optional_add_subdirectory(LoadSave)
 ecm_optional_add_subdirectory(EngineModules)
+ecm_optional_add_subdirectory(Tests)
 
 install( FILES
     RocsDataStructurePlugin.desktop
@@ -114,9 +115,3 @@ install( FILES
     DESTINATION
     ${SERVICETYPES_INSTALL_DIR}
 )
-
-# Build Tests if KDE_TEST is on
-if(KDE4_BUILD_TESTS)
-    enable_testing()
-    ecm_optional_add_subdirectory(Tests)
-endif(KDE4_BUILD_TESTS)

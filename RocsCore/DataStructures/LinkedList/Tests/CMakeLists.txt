@@ -1,6 +1,6 @@
 ##
 #   This file is part of Rocs.
-#   Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -26,14 +26,11 @@ set (TestLinkedListStructure_SRCS
     ../ListNode.cpp
     ../ListStructure.cpp
 )
-kde4_add_executable(TestLinkedListStructure ${TestLinkedListStructure_SRCS} )
+add_executable(TestLinkedListStructure ${TestLinkedListStructure_SRCS})
+add_test(TestLinkedListStructure TestLinkedListStructure)
+ecm_mark_as_test(TestLinkedListStructure)
 set_target_properties(TestLinkedListStructure PROPERTIES COMPILE_FLAGS -DROCS_LISTSTRUCTURE_EXPORT=)
 target_link_libraries( TestLinkedListStructure
     rocscore
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
+    Qt5::Test
 )
-add_test(TestLinkedListStructure TestLinkedListStructure)

@@ -21,12 +21,12 @@
 #include "DataStructure.h"
 #include "Data.h"
 #include "Pointer.h"
-#include "KrossBackend.h"
+// #include "KrossBackend.h"
 #include "QtScriptBackend.h"
 #include <qtest_kde.h>
 
-#include <kross/core/action.h>
-#include <kross/core/manager.h>
+// #include <kross/core/action.h>
+// #include <kross/core/manager.h>
 #include <QDebug>
 #include <Document.h>
 #include <DataStructureBackendManager.h>

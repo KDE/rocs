@@ -2,7 +2,7 @@
 #   This file is part of Rocs.
 #   Copyright 2009       Tomaz Canabrava <tomaz.canabrava@gmail.com>
 #   Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-#   Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -27,72 +27,59 @@ include_directories(
 set (TestDataStructure_SRCS
     ../../RocsCore/Tests/TestDataStructure.cpp
 )
-kde4_add_executable(TestDataStructure ${TestDataStructure_SRCS} )
-target_link_libraries( TestDataStructure
-    rocscore
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-)
+add_executable(TestDataStructure ${TestDataStructure_SRCS})
 add_test(TestDataStructure TestDataStructure)
-
+ecm_mark_as_test(TestDataStructure)
+target_link_libraries(TestDataStructure
+    rocscore
+    Qt5::Test
+)
 
 # DynamicPropertiesList
-set( testDynamicProperties_SRCS
+set(TestDynamicProperties_SRCS
     ../../RocsCore/Tests/TestDynamicProperties.cpp
 )
-kde4_add_executable(TestDynamicProperties ${testDynamicProperties_SRCS})
-target_link_libraries( TestDynamicProperties
-    rocscore
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-)
+add_executable(TestDynamicProperties ${TestDynamicProperties_SRCS})
 add_test(TestDynamicProperties TestDynamicProperties)
-
+ecm_mark_as_test(TestDynamicProperties)
+target_link_libraries(TestDynamicProperties
+    rocscore
+    Qt5::Test
+)
 
 # loading and saving tests
 set (TestLoadSave_SRCS
     ../../RocsCore/Tests/TestLoadSave.cpp
 )
 file(COPY TestGraphFiles DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-kde4_add_executable(TestLoadSave ${TestLoadSave_SRCS} )
-target_link_libraries( TestLoadSave
-    rocscore
-    ${KDE4_KROSSUI_LIBS}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-)
+add_executable(TestLoadSave ${TestLoadSave_SRCS})
 add_test(TestLoadSave TestLoadSave)
-
+ecm_mark_as_test(TestLoadSave)
+target_link_libraries(TestLoadSave
+    rocscore
+    Qt5::Test
+)
 
 # test data structure plugin interface
-set( test_Plugins_SRC ../../RocsCore/Tests/TestPlugins.cpp)
-kde4_add_executable( TestPlugins ${test_Plugins_SRC})
-target_link_libraries( TestPlugins
-    rocscore
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${KDE4_KIO_LIBS}
+set(TestPlugins_SRC
+    ../../RocsCore/Tests/TestPlugins.cpp
 )
+add_executable(TestPlugins ${TestPlugins_SRC})
 add_test(TestPlugins TestPlugins)
-
+ecm_mark_as_test(TestPlugins)
+target_link_libraries(TestPlugins
+    rocscore
+    Qt5::Test
+)
 
 # test script engine
-set( test_ScriptEngine_SRC ../../RocsCore/Tests/TestScriptEngine.cpp)
-kde4_add_executable( TestScriptEngine ${test_ScriptEngine_SRC})
-target_link_libraries( TestScriptEngine
-    rocscore
-    ${QT_QTTEST_LIBRARY}
-    ${KDE4_KDECORE_LIBS}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${KDE4_KIO_LIBS}
+set(TestScriptEngine_SRCS
+    ../../RocsCore/Tests/TestScriptEngine.cpp
 )
+add_executable(TestScriptEngine ${TestScriptEngine_SRCS})
 add_test(TestScriptEngine TestScriptEngine)
+ecm_mark_as_test(TestScriptEngine)
+target_link_libraries(TestScriptEngine
+    rocscore
+    Qt5::Test
+)

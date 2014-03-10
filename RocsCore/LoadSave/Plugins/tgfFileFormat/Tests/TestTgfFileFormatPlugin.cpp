@@ -66,7 +66,6 @@ void TestTgfFileFormatPlugin::serializeUnserializeTest()
     ds = testDoc->dataStructures().at(0);
 
     // test imported values
-    QVERIFY(ds);
     QVERIFY2(ds->dataList(0).size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2(ds->pointers(0).size() == 5, "ERROR: Number of pointers is not 5 ");
     foreach(DataPtr n, ds->dataList(0)) {

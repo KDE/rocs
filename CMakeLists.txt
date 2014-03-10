@@ -23,6 +23,7 @@ cmake_minimum_required(VERSION 2.8.11)
 
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+include(ECMAddTests)
 include(ECMInstallIcons)
 include(ECMOptionalAddSubdirectory)
 include(ECMSetupVersion)
@@ -42,6 +43,7 @@ find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS
   Widgets
   ScriptTools
   Svg
+  Test
   XmlPatterns
 )
 find_package(KF5 CONFIG REQUIRED COMPONENTS
