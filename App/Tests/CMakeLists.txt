@@ -24,9 +24,7 @@ include_directories(
 
 # Include Manager
 set(TestIncludeManager_SRCS TestIncludeManager.cpp)
-set(rocs_KCFGS ../settings.kcfgc)
-kde4_add_kcfg_files(rocs_Settings_SRCS_TEST ${rocs_KCFGS} )
-add_executable(TestIncludeManager ${TestIncludeManager_SRCS} ${rocs_Settings_SRCS_TEST})
+add_executable(TestIncludeManager ${TestIncludeManager_SRCS})
 add_test(TestIncludeManager TestIncludeManager)
 ecm_mark_as_test(TestIncludeManager)
 target_link_libraries(TestIncludeManager
