@@ -72,7 +72,7 @@ set( rocsvisualeditor_SRCS
     ${rocsvisualeditor_tools_SRCS}
 )
 
-kde4_add_ui_files( rocsvisualeditor_SRCS
+qt5_wrap_ui(rocsvisualeditor_SRCS
     Interface/DataStructurePage.ui
     Interface/DataTypePage.ui
     Interface/PointerTypePage.ui

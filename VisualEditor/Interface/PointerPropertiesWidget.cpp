@@ -24,6 +24,7 @@
 #include "DataStructure.h"
 #include "Actions/PropertiesDialogAction.h"
 #include <DataStructureBackendManager.h>
+#include <KLocalizedString>
 
 PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* parent)
     : KDialog(parent)

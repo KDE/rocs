@@ -25,6 +25,7 @@
 
 #include <QWidget>
 #include <KTabWidget>
+#include <KLocalizedString>
 
 DocumentPropertiesDialog::DocumentPropertiesDialog(QWidget* parent)
     : KDialog(parent)

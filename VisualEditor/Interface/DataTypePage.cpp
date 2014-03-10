@@ -31,7 +31,7 @@
 #include <KColorCombo>
 #include <QPushButton>
 #include <KComboBox>
-
+#include <KLocalizedString>
 
 // DataType Property Model
 

@@ -36,6 +36,7 @@
 #include <KComboBox>
 #include <KDialog>
 #include <KTabWidget>
+#include <KLocalizedString>
 #include <QLayout>
 #include <QLabel>
 

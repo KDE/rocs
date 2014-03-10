@@ -27,6 +27,7 @@
 #include <QPainter>
 #include <DataStructureBackendManager.h>
 #include <DataStructureBackendInterface.h>
+#include <KLocalizedString>
 
 DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     : KDialog(parent)

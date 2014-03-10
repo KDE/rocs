@@ -39,6 +39,7 @@
 #include "Actions/PropertiesDialogAction.h"
 #include "Actions/ZoomAction.h"
 #include <GraphVisualEditor.h>
+#include <KLocalizedString>
 
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
