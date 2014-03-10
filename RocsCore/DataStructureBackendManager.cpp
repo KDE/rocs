@@ -174,12 +174,16 @@ public:
         // set up found backends
         _pluginInfo = KPluginInfo::fromServices(offers);
         foreach (KService::Ptr service, offers) {
-            qDebug() << "set up backend " << service->property(QLatin1String("X-Rocs-DataStructureIdentifier")).toString();
+            qDebug() << "set up backend " << service->library();
             QString error;
-            KPluginFactory *factory = KPluginLoader(service->library()).factory();
+            KPluginLoader loader(service->library());
+            KPluginFactory *factory = loader.factory();
 
             if (!factory) {
-                qCritical() << "KPluginFactory could not load the plugin:" << service->library();
+                qCritical() << "KPluginFactory could not load plugin"
+                    << service->library()
+                    << ", gave up with error message: "
+                    << loader.errorString();
                 continue;
             }
 
