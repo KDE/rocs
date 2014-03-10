@@ -23,11 +23,11 @@
 #include <QDir>
 #include <QDebug>
 #include <KGlobal>
-#include <kstandarddirs.h>
+#include <QStandardPaths>
 
 IncludeManager::IncludeManager()
 {
-    addPath(KGlobal::dirs()->findDirs("appdata", "examples"));
+    addPath(QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "examples", QStandardPaths::LocateDirectory));
 
 //     QStringList list = Settings::includePath();
 //
@@ -43,7 +43,7 @@ void IncludeManager::initialize(const QStringList& tempPath)
     _tempPath.clear();
     _wasIncluded.clear();
 
-    addPath(KGlobal::dirs()->findDirs("appdata", "examples"));
+    addPath(QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "examples", QStandardPaths::LocateDirectory));
     addPath(tempPath);
 }
 

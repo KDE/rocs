@@ -144,7 +144,7 @@ public:
             << "rocs_ListStructure.desktop"
             << "rocs_RootedTreeStructure.desktop";
         foreach (QString pluginDesktopFile, defaultBackends) {
-            QString path = KGlobal::dirs()->findResource("services", pluginDesktopFile);
+            QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "rocs/services");
             if (path.isEmpty()) {
                 qWarning() << "Could not find default plugin desktop file: " << pluginDesktopFile;
                 continue;

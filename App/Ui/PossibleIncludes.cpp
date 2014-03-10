@@ -22,7 +22,7 @@
 #include <QListWidget>
 #include <KGlobal>
 #include <settings.h>
-#include <kstandarddirs.h>
+#include <QStandardPaths>
 #include <QDebug>
 #include <KDialog>
 #include <QDir>
@@ -42,9 +42,8 @@ PossibleIncludes::PossibleIncludes(QWidget* parent, Qt::WindowFlags f):
 
 void PossibleIncludes::updateIncludeList()
 {
-    KGlobal::dirs()->findDirs("appdata", "examples");
-
-    QStringList list = KGlobal::dirs()->findDirs("appdata", "examples") + Settings::includePath();
+    QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "examples", QStandardPaths::LocateDirectory);
+    QStringList list = dirs + Settings::includePath();
 
     list.removeDuplicates();
     foreach(const QString & str, list) {
