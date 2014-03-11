@@ -38,7 +38,6 @@ class KActionCollection;
 class Document;
 class DataStructure;
 class Project;
-class KTextBrowser;
 class QSplitter;
 class KAction;
 class SelectMoveHandAction;

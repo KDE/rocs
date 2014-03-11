@@ -126,7 +126,7 @@
              <number>0</number>
             </property>
             <item row="0" column="0">
-             <widget class="KTextBrowser" name="txtOutput">
+             <widget class="QTextBrowser" name="txtOutput">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
@@ -146,7 +146,7 @@
              <number>0</number>
             </property>
             <item row="0" column="0">
-             <widget class="KTextBrowser" name="dbgOutput"/>
+             <widget class="QTextBrowser" name="dbgOutput"/>
             </item>
            </layout>
           </widget>
@@ -159,18 +159,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KTextBrowser</class>
-   <extends>QTextBrowser</extends>
-   <header>ktextbrowser.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

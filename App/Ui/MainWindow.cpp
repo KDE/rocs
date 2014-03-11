@@ -46,7 +46,6 @@
 #include <QIcon>
 #include <QPushButton>
 #include <KTar>
-#include <KTextBrowser>
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <KConfigDialog>
