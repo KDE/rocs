@@ -22,7 +22,7 @@ project(rocs)
 
 set(ROCS_VERSION_MAJOR 1)
 set(ROCS_VERSION_MINOR 10)
-set(ROCS_VERSION_PATCH 0)
+set(ROCS_VERSION_PATCH 90)
 
 configure_file( "${rocs_SOURCE_DIR}/rocsversion.h.cmake" "${rocs_BINARY_DIR}/rocsversion.h" @ONLY )
 
