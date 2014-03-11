@@ -24,7 +24,7 @@
 #include "Data.h"
 
 #include <KPluginFactory>
-#include <knuminput.h>
+#include <QDoubleSpinBox>
 #include <KMessageBox>
 #include <KComboBox>
 #include <KLocalizedString>
@@ -70,7 +70,7 @@ QLayout* GraphPlugin::dataExtraProperties(DataPtr node, QWidget* parentWidget) c
     QGridLayout * lay = new QGridLayout(parentWidget);
     QSpinBox * y = new QSpinBox(parentWidget);
     QSpinBox * x = new QSpinBox(parentWidget);
-    KDoubleNumInput * size = new KDoubleNumInput(parentWidget);
+    QDoubleSpinBox *size = new QDoubleSpinBox(parentWidget);
     y->setMinimum(-9999);
     y->setMaximum(9999);
     x->setMinimum(-9999);
