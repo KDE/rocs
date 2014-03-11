@@ -27,14 +27,14 @@
 #include <QColor>
 #include <QPointer>
 #include <QIcon>
-#include <KDE4Support/kdialog.h> //FIXME remove
+#include <QDialog>
 #include "CoreTypes.h"
 
 class Pointer;
 class MainWindow;
-#include <QPointF>
+class QPointF;
 
-class PointerPropertiesWidget : public KDialog
+class PointerPropertiesWidget : public QDialog
 {
     Q_OBJECT
 public:

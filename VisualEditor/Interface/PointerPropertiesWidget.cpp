@@ -23,14 +23,37 @@
 #include "model_GraphProperties.h"
 #include "DataStructure.h"
 #include "Actions/PropertiesDialogAction.h"
-#include <DataStructureBackendManager.h>
-#include <KLocalizedString>
+#include "DataStructureBackendManager.h"
 
-PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* parent)
-    : KDialog(parent)
+#include <KLocalizedString>
+#include <KGuiItem>
+#include <KStandardGuiItem>
+#include <QDialogButtonBox>
+#include <QPainter>
+#include <QPushButton>
+#include <QDebug>
+
+PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* parent) : QDialog(parent)
 {
+    setWindowTitle(i18nc("@title:window", "Pointer Properties"));
+
+    QWidget *widget = new QWidget(this);
     ui = new Ui::PointerPropertiesWidget;
-    ui->setupUi(mainWidget());
+    ui->setupUi(widget);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    setLayout(mainLayout);
+    mainLayout->addWidget(widget);
+
+    QDialogButtonBox *buttons = new QDialogButtonBox(this);
+    QPushButton *closeButton = new QPushButton;
+    KGuiItem::assign(closeButton, KStandardGuiItem::close());
+    closeButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    buttons->addButton(closeButton, QDialogButtonBox::RejectRole);
+    mainLayout->addWidget(buttons);
+    connect(closeButton, SIGNAL(clicked()), this, SLOT(reject()));
+
+    setAttribute(Qt::WA_DeleteOnClose);
 
     // edit data types by separate dialog
     QPointer<PropertiesDialogAction> dataTypePropertiesAction = new PropertiesDialogAction(
@@ -40,8 +63,6 @@ PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* pa
     connect(pointer->dataStructure()->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(updatePointerTypes()));
     connect(pointer->dataStructure()->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(updatePointerTypes()));
 
-    setCaption(i18nc("@title:window", "Pointer Properties"));
-    setButtons(Close);
     setAttribute(Qt::WA_DeleteOnClose);
     setPointer(pointer);
 }
