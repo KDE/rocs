@@ -21,7 +21,7 @@
 
 #include "CoreTypes.h"
 
-#include <KDialog>
+#include <QDialog>
 
 class Document;
 class DataTypePage;
@@ -30,8 +30,7 @@ class PointerTypePage;
 /*!
     \brief Properties widget for Documents.
 */
-class DocumentPropertiesDialog :
-    public KDialog
+class DocumentPropertiesDialog : public QDialog
 {
     Q_OBJECT
 

@@ -24,23 +24,36 @@
 #include "Scene/DataItem.h"
 
 #include <QWidget>
-#include <KTabWidget>
+#include <QDialogButtonBox>
+#include <QTabWidget>
 #include <KLocalizedString>
+#include <KGuiItem>
+#include <KStandardGuiItem>
 
 DocumentPropertiesDialog::DocumentPropertiesDialog(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    KTabWidget *tabWidget = new KTabWidget(this);
+    setWindowTitle(i18nc("@title:window", "Document Properties"));
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    setLayout(mainLayout);
+
+    QTabWidget *tabWidget = new QTabWidget(this);
     _dataTypePage = new DataTypePage(this);
     _pointerTypePage = new PointerTypePage(this);
-
     tabWidget->addTab(_dataTypePage, i18nc("@title:tab", "Data Types"));
     tabWidget->addTab(_pointerTypePage, i18nc("@title:tab", "Pointer Types"));
+    mainLayout->addWidget(tabWidget);
 
-    setMainWidget(tabWidget);
+    QDialogButtonBox *buttons = new QDialogButtonBox(this);
+    QPushButton *closeButton = new QPushButton;
+    KGuiItem::assign(closeButton, KStandardGuiItem::close());
+    closeButton->setShortcut(Qt::CTRL | Qt::Key_Return);
 
-    setCaption(i18nc("@title:window", "Document Properties"));
-    setButtons(Close);
+    buttons->addButton(closeButton, QDialogButtonBox::RejectRole);
+    mainLayout->addWidget(buttons);
+    connect(closeButton, SIGNAL(clicked()), this, SLOT(reject()));
+
     setAttribute(Qt::WA_DeleteOnClose);
 }
 
