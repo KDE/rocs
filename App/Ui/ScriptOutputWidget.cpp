@@ -32,9 +32,9 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     ui->setupUi(this);
 
     // set icon
-    ui->buttonEnableDebugOutput->setIcon(QIcon("tools-report-bug"));
-    ui->buttonDisableClear->setIcon(QIcon("document-decrypt"));
-    ui->buttonClear->setIcon(QIcon("edit-clear-list"));
+    ui->buttonEnableDebugOutput->setIcon(QIcon::fromTheme("tools-report-bug"));
+    ui->buttonDisableClear->setIcon(QIcon::fromTheme("document-decrypt"));
+    ui->buttonClear->setIcon(QIcon::fromTheme("edit-clear-list"));
 
     connect(ui->buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
     connect(ui->buttonDisableClear, SIGNAL(clicked(bool)), this, SLOT(updateFixOutputButton()));
@@ -66,10 +66,10 @@ ConsoleModule * ScriptOutputWidget::consoleInterface() const
 void ScriptOutputWidget::updateFixOutputButton()
 {
     if (ui->buttonDisableClear->isChecked() == true) {
-        ui->buttonDisableClear->setIcon(QIcon("document-encrypt"));
+        ui->buttonDisableClear->setIcon(QIcon::fromTheme("document-encrypt"));
     }
     else {
-        ui->buttonDisableClear->setIcon(QIcon("document-decrypt"));
+        ui->buttonDisableClear->setIcon(QIcon::fromTheme("document-decrypt"));
     }
 }
 

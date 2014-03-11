@@ -160,10 +160,10 @@ DataTypePage::DataTypePage(QWidget* parent)
     ui->setupUi(this);
 
     // buttons
-    ui->addPropertyButton->setIcon(QIcon("rocsnew"));
-    ui->removePropertyButton->setIcon(QIcon("rocsdelete"));
-    ui->addType->setIcon(QIcon("rocsnew"));
-    ui->deleteType->setIcon(QIcon("rocsdelete"));
+    ui->addPropertyButton->setIcon(QIcon::fromTheme("rocsnew"));
+    ui->removePropertyButton->setIcon(QIcon::fromTheme("rocsdelete"));
+    ui->addType->setIcon(QIcon::fromTheme("rocsnew"));
+    ui->deleteType->setIcon(QIcon::fromTheme("rocsdelete"));
 
     // property table
     _model = new DataTypePropertyModel(this);

@@ -138,7 +138,7 @@ void GraphVisualEditor::setupWidgets()
     PropertiesDialogAction *propertiesAction = new PropertiesDialogAction(i18nc("@action:button", "Properties"), DocumentManager::self().activeDocument(), this);
     d->_documentPropertiesButton = new QToolButton(this);
     d->_documentPropertiesButton->setDefaultAction(propertiesAction);
-    d->_documentPropertiesButton->setIcon(QIcon("document-properties"));
+    d->_documentPropertiesButton->setIcon(QIcon::fromTheme("document-properties"));
 
     // scene controls for top line
     vLayout->addWidget(sceneToolbar());
@@ -176,17 +176,17 @@ QWidget * GraphVisualEditor::sceneToolbar()
     sceneControls->layout()->addWidget(d->_dataStructureSelectorCombo);
     d->_dataStructurePropertiesButton = new QToolButton(this);
     d->_dataStructurePropertiesButton->setMaximumWidth(24);
-    d->_dataStructurePropertiesButton->setIcon(QIcon("document-properties"));
+    d->_dataStructurePropertiesButton->setIcon(QIcon::fromTheme("document-properties"));
     sceneControls->layout()->addWidget(d->_dataStructurePropertiesButton);
     // create add data structure button
     QPushButton* addDataStructureButton = new QPushButton(this);
-    addDataStructureButton->setIcon(QIcon("rocsnew"));
+    addDataStructureButton->setIcon(QIcon::fromTheme("rocsnew"));
     addDataStructureButton->setToolTip(i18nc("@info:tooltip", "Add a new data structure."));
     addDataStructureButton->setMaximumWidth(24);
     sceneControls->layout()->addWidget(addDataStructureButton);
     // create remove data structure button
     d->_removeDataStructureButton = new QPushButton(this);
-    d->_removeDataStructureButton->setIcon(QIcon("rocsdelete"));
+    d->_removeDataStructureButton->setIcon(QIcon::fromTheme("rocsdelete"));
     d->_removeDataStructureButton->setToolTip(i18nc("@info:tooltip", "Remove selected data structure."));
     d->_removeDataStructureButton->setMaximumWidth(24);
     sceneControls->layout()->addWidget(d->_removeDataStructureButton);
@@ -237,7 +237,7 @@ void GraphVisualEditor::setActiveDocument()
                                                                               d->_document,
                                                                               this);
         d->_documentPropertiesButton->setDefaultAction(propertiesAction);
-        d->_documentPropertiesButton->setIcon(QIcon("document-properties"));
+        d->_documentPropertiesButton->setIcon(QIcon::fromTheme("document-properties"));
     }
     updateDataStructureList();
 

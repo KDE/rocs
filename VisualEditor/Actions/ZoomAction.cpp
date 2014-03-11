@@ -39,7 +39,7 @@ ZoomAction::ZoomAction(GraphScene* scene, QObject* parent)
 {
     setText(i18nc("@action:intoolbar", "Zoom"));
     setToolTip(i18nc("@info:tooltip", "Zoom the canvas by the wheel, or by dragging."));
-    setIcon(QIcon("page-zoom"));
+    setIcon(QIcon::fromTheme("page-zoom"));
     _name = "zoom";
 }
 

@@ -37,10 +37,10 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
 
     ui = new Ui::ApiDocWidget;
     ui->setupUi(this);
-    ui->buttonTree->setIcon(QIcon("view-sidetree"));
-    ui->buttonHome->setIcon(QIcon("go-home"));
-    ui->buttonPrev->setIcon(QIcon("go-previous-view"));
-    ui->buttonNext->setIcon(QIcon("go-next-view"));
+    ui->buttonTree->setIcon(QIcon::fromTheme("view-sidetree"));
+    ui->buttonHome->setIcon(QIcon::fromTheme("go-home"));
+    ui->buttonPrev->setIcon(QIcon::fromTheme("go-previous-view"));
+    ui->buttonNext->setIcon(QIcon::fromTheme("go-next-view"));
 
     ui->buttonPrev->setEnabled(false);
     ui->buttonNext->setEnabled(false);

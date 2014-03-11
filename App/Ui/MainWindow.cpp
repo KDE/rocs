@@ -287,9 +287,9 @@ QWidget* MainWindow::setupScriptPanel()
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     executeCommands->setOrientation(Qt::Vertical);
-    _runScript = new KAction(QIcon("media-playback-start"), i18nc("@action:intoolbar Script Execution", "Run"), this);
-    _stepRunScript = new KAction(QIcon("go-next"), i18nc("@action:intoolbar Script Execution", "One Step"), this);
-    _stopScript = new KAction(QIcon("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
+    _runScript = new KAction(QIcon::fromTheme("media-playback-start"), i18nc("@action:intoolbar Script Execution", "Run"), this);
+    _stepRunScript = new KAction(QIcon::fromTheme("go-next"), i18nc("@action:intoolbar Script Execution", "One Step"), this);
+    _stopScript = new KAction(QIcon::fromTheme("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
     _stopScript->setEnabled(false);
     executeCommands->addAction(_runScript);
     executeCommands->addAction(_stepRunScript);
@@ -299,9 +299,9 @@ QWidget* MainWindow::setupScriptPanel()
     actionCollection()->addAction("_stopScript", _stopScript);
 
     // debug controls submenu
-    _debugMenu = new KActionMenu(QIcon("debug-run"), i18nc("@title:menu Debug execution", "Debug"), this);
-    _debugScript = new KAction(QIcon("debug-run"), i18nc("@action:inmenu Debug execution", "Debug run"), _debugMenu);
-    _interruptScript = new KAction(QIcon("debug-run-cursor"), i18nc("@action:inmenu Debug execution", "Interrupt at first line"), _debugMenu);
+    _debugMenu = new KActionMenu(QIcon::fromTheme("debug-run"), i18nc("@title:menu Debug execution", "Debug"), this);
+    _debugScript = new KAction(QIcon::fromTheme("debug-run"), i18nc("@action:inmenu Debug execution", "Debug run"), _debugMenu);
+    _interruptScript = new KAction(QIcon::fromTheme("debug-run-cursor"), i18nc("@action:inmenu Debug execution", "Interrupt at first line"), _debugMenu);
     _debugMenu->addAction(_debugScript);
     _debugMenu->addAction(_interruptScript);
     executeCommands->addWidget(_debugMenu->createWidget(executeCommands));
@@ -345,20 +345,20 @@ QWidget* MainWindow::setupSidePanel()
     // document property widgets
     DocumentTypesWidget* documentTypesWidget = new DocumentTypesWidget(this);
     connect(&DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument()));
-    sideDock->addDock(documentTypesWidget, i18n("Element Types"), QIcon("document-properties"));
+    sideDock->addDock(documentTypesWidget, i18n("Element Types"), QIcon::fromTheme("document-properties"));
 
     // Project Journal
     _journalWidget = new JournalEditorWidget(panel);
-    sideDock->addDock(_journalWidget, i18nc("@title", "Journal"), QIcon("story-editor"));
+    sideDock->addDock(_journalWidget, i18nc("@title", "Journal"), QIcon::fromTheme("story-editor"));
 
     // Rocs handbook
     DocumentationWidget* documentation = new DocumentationWidget(panel);
-    sideDock->addDock(documentation, i18nc("@title", "Handbook"), QIcon("help-contents"));
+    sideDock->addDock(documentation, i18nc("@title", "Handbook"), QIcon::fromTheme("help-contents"));
 
     // Rocs scripting API documentation
 //FIXME commented out until Grantlee is ported
 //     ApiDocWidget* apiDoc = new ApiDocWidget(panel);
-//     sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), QIcon("documentation"));
+//     sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), QIcon::fromTheme("documentation"));
 
     return panel;
 }
@@ -402,7 +402,7 @@ void MainWindow::setupActions()
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                               const QKeySequence& shortcut, const char* slot, QObject *parent)
 {
-    KAction* action = new KAction(QIcon(iconName), actionTitle, parent);
+    KAction* action = new KAction(QIcon::fromTheme(iconName), actionTitle, parent);
     action->setShortcut(shortcut);
     action->setShortcutContext(Qt::ApplicationShortcut);
     actionCollection()->addAction(actionName, action);
@@ -412,7 +412,7 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                               const char* slot, QObject *parent)
 {
-    KAction* action = new KAction(QIcon(iconName), actionTitle, parent);
+    KAction* action = new KAction(QIcon::fromTheme(iconName), actionTitle, parent);
     actionCollection()->addAction(actionName, action);
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }

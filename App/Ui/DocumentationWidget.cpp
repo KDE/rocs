@@ -27,9 +27,9 @@ DocumentationWidget::DocumentationWidget(QWidget* parent)
     ui = new Ui::DocumentationWidget;
     ui->setupUi(this);
 
-    ui->buttonHome->setIcon(QIcon("go-home"));
-    ui->buttonBack->setIcon(QIcon("go-previous"));
-    ui->buttonForward->setIcon(QIcon("go-next"));
+    ui->buttonHome->setIcon(QIcon::fromTheme("go-home"));
+    ui->buttonBack->setIcon(QIcon::fromTheme("go-previous"));
+    ui->buttonForward->setIcon(QIcon::fromTheme("go-next"));
 
     _handbook = QUrl(QString::fromLatin1("http://docs.kde.org/stable/en/kdeedu/rocs/index.html"));
 

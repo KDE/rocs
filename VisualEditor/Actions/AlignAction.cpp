@@ -63,28 +63,28 @@ void AlignAction::setupOrientation(AlignAction::Orientation o)
     _orientation = o;
     switch (o) {
     case Left :
-        setIcon(QIcon("rocsalignleft"));
+        setIcon(QIcon::fromTheme("rocsalignleft"));
         break;
     case Right :
-        setIcon(QIcon("rocsalignright"));
+        setIcon(QIcon::fromTheme("rocsalignright"));
         break;
     case Top :
-        setIcon(QIcon("rocsaligntop"));
+        setIcon(QIcon::fromTheme("rocsaligntop"));
         break;
     case Bottom :
-        setIcon(QIcon("rocsalignbottom"));
+        setIcon(QIcon::fromTheme("rocsalignbottom"));
         break;
     case HCenter :
-        setIcon(QIcon("rocsalignhmiddle"));
+        setIcon(QIcon::fromTheme("rocsalignhmiddle"));
         break;
     case VCenter :
-        setIcon(QIcon("rocsalignvmiddle"));
+        setIcon(QIcon::fromTheme("rocsalignvmiddle"));
         break;
     case Circle :
-        setIcon(QIcon("rocsaligncircle"));
+        setIcon(QIcon::fromTheme("rocsaligncircle"));
         break;
     case MinCutTree :
-        setIcon(QIcon("rocsaligntree"));
+        setIcon(QIcon::fromTheme("rocsaligntree"));
         break;
     }
 }

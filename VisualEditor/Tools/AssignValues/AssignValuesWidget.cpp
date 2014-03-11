@@ -60,7 +60,7 @@ AssignValuesWidget::AssignValuesWidget(Document* graphDoc, QWidget* parent)
 
     setCaption(i18n("Assign Values"));
     setButtons(KDialog::Apply | KDialog::Cancel | KDialog::Ok);
-    ui->buttonShowAdvanced->setIcon(QIcon("rocsadvancedsetup"));
+    ui->buttonShowAdvanced->setIcon(QIcon::fromTheme("rocsadvancedsetup"));
     KDialog::centerOnScreen(widget, -3);
 
     // set types

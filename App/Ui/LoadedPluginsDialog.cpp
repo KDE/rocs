@@ -117,7 +117,7 @@ public:
         : KWidgetItemDelegate(itemView, parent)
         , pushButton(new QPushButton)
     {
-        pushButton->setIcon(QIcon("dialog-information")); // only for getting size matters
+        pushButton->setIcon(QIcon::fromTheme("dialog-information")); // only for getting size matters
     }
 
     ~LoadedPluginsDelegate()
@@ -183,7 +183,7 @@ public:
     QList<QWidget*> createItemWidgets() const
     {
         QPushButton *button = new QPushButton();
-        button->setIcon(QIcon("dialog-information"));
+        button->setIcon(QIcon::fromTheme("dialog-information"));
         setBlockedEventTypes(button, QList<QEvent::Type>() << QEvent::MouseButtonPress
                              << QEvent::MouseButtonRelease << QEvent::MouseButtonDblClick);
 

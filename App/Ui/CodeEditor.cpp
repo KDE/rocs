@@ -144,16 +144,16 @@ void CodeEditor::updateTabText(KTextEditor::Document* text)
 
     // tell user if current modifications are unsaved
     if (text->isModified()) {
-        _tabDocs->setTabIcon(index, QIcon("document-save"));
+        _tabDocs->setTabIcon(index, QIcon::fromTheme("document-save"));
         return;
     }
 
     if (text->documentName().endsWith(QLatin1String(".js"), Qt::CaseInsensitive)) {
-        _tabDocs->setTabIcon(index, QIcon("application-javascript"));
+        _tabDocs->setTabIcon(index, QIcon::fromTheme("application-javascript"));
     } else if (text->documentName().endsWith(QLatin1String(".py"), Qt::CaseInsensitive)) {
-        _tabDocs->setTabIcon(index, QIcon("text-x-python"));
+        _tabDocs->setTabIcon(index, QIcon::fromTheme("text-x-python"));
     } else {
-        _tabDocs->setTabIcon(index, QIcon("text-x-generic"));
+        _tabDocs->setTabIcon(index, QIcon::fromTheme("text-x-generic"));
     }
 }
 

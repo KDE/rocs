@@ -36,7 +36,7 @@ PointerPropertiesWidget::PointerPropertiesWidget(PointerPtr pointer, QWidget* pa
     QPointer<PropertiesDialogAction> dataTypePropertiesAction = new PropertiesDialogAction(
             i18n("Edit Pointer Types"), pointer->dataStructure()->document()->pointerType(pointer->pointerType()), this);
     ui->_editType->setDefaultAction(dataTypePropertiesAction);
-    ui->_editType->setIcon(QIcon("document-properties"));
+    ui->_editType->setIcon(QIcon::fromTheme("document-properties"));
     connect(pointer->dataStructure()->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(updatePointerTypes()));
     connect(pointer->dataStructure()->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(updatePointerTypes()));
 

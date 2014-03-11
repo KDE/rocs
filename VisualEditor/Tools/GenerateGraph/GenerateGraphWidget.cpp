@@ -84,7 +84,7 @@ GenerateGraphWidget::GenerateGraphWidget(Document *document)
     // other KDialog options
     setCaption(i18nc("@title:window", "Generate Graph"));
     setButtons(KDialog::Cancel | KDialog::Ok);
-    ui->buttonShowAdvanced->setIcon(QIcon("rocsadvancedsetup"));
+    ui->buttonShowAdvanced->setIcon(QIcon::fromTheme("rocsadvancedsetup"));
     KDialog::centerOnScreen(widget, -3);
 
     connect(this, SIGNAL(okClicked()), this, SLOT(generateGraph()));

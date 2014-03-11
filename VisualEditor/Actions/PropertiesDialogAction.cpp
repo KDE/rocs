@@ -42,7 +42,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, Document* document,
 {
     _document = document;
     _dialogType = DOCUMENT;
-    this->setIcon(QIcon("document-properties"));
+    this->setIcon(QIcon::fromTheme("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -52,7 +52,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataStructurePtr da
 {
     _dataStructure = dataStructure;
     _dialogType = DATASTRUCTURE;
-    this->setIcon(QIcon("document-properties"));
+    this->setIcon(QIcon::fromTheme("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -62,7 +62,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataPtr data, QObje
 {
     _data = data;
     _dialogType = DATA;
-    this->setIcon(QIcon("document-properties"));
+    this->setIcon(QIcon::fromTheme("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -72,7 +72,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, PointerPtr pointer,
 {
     _pointer = pointer;
     _dialogType = POINTER;
-    this->setIcon(QIcon("document-properties"));
+    this->setIcon(QIcon::fromTheme("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -82,7 +82,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataTypePtr dataTyp
 {
     _dataType = dataType;
     _dialogType = DATATYPE;
-    this->setIcon(QIcon("document-properties"));
+    this->setIcon(QIcon::fromTheme("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 
@@ -92,7 +92,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, PointerTypePtr poin
 {
     _pointerType = pointerType;
     _dialogType = POINTERTYPE;
-    this->setIcon(QIcon("document-properties"));
+    this->setIcon(QIcon::fromTheme("document-properties"));
     connect(this, SIGNAL(triggered()), this, SLOT(showDialog()));
 }
 

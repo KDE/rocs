@@ -39,7 +39,7 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     QPointer<PropertiesDialogAction> dataTypePropertiesAction = new PropertiesDialogAction(
             i18n("Edit Data Types"), data->dataStructure()->document()->dataType(data->dataType()), this);
     ui->_editType->setDefaultAction(dataTypePropertiesAction);
-    ui->_editType->setIcon(QIcon("document-properties"));
+    ui->_editType->setIcon(QIcon::fromTheme("document-properties"));
     connect(data->dataStructure()->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(updateDataTypes()));
     connect(data->dataStructure()->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(updateDataTypes()));
 
