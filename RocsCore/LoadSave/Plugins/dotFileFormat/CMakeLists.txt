@@ -34,7 +34,6 @@ kde4_add_plugin(rocs_dotfileformat ${dotFileFormatPlugin_SRCS})
 
 target_link_libraries(rocs_dotfileformat
     rocscore
-    rocs_GraphStructure
     ${KDE4_KDEUI_LIBS}
 )
 
