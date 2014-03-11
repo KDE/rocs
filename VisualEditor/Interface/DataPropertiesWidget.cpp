@@ -18,22 +18,45 @@
 */
 
 #include "DataPropertiesWidget.h"
+
 #include "Data.h"
-#include <QDebug>
 #include "Scene/DataItem.h"
 #include "DataStructure.h"
 #include "Actions/PropertiesDialogAction.h"
 #include "model_GraphProperties.h"
-#include <QPainter>
-#include <DataStructureBackendManager.h>
-#include <DataStructureBackendInterface.h>
+#include "DataStructureBackendManager.h"
+#include "DataStructureBackendInterface.h"
+
 #include <KLocalizedString>
+#include <KGuiItem>
+#include <KStandardGuiItem>
+#include <QDialogButtonBox>
+#include <QPainter>
+#include <QPushButton>
+#include <QDebug>
 
 DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
+    setWindowTitle(i18nc("@title:window", "Data Element Properties"));
+
+    QWidget *widget = new QWidget(this);
     ui = new Ui::DataPropertiesWidget;
-    ui->setupUi(mainWidget());
+    ui->setupUi(widget);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    setLayout(mainLayout);
+    mainLayout->addWidget(widget);
+
+    QDialogButtonBox *buttons = new QDialogButtonBox(this);
+    QPushButton *closeButton = new QPushButton;
+    KGuiItem::assign(closeButton, KStandardGuiItem::close());
+    closeButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    buttons->addButton(closeButton, QDialogButtonBox::RejectRole);
+    mainLayout->addWidget(buttons);
+    connect(closeButton, SIGNAL(clicked()), this, SLOT(reject()));
+
+    setAttribute(Qt::WA_DeleteOnClose);
 
     // edit data types by separate dialog
     QPointer<PropertiesDialogAction> dataTypePropertiesAction = new PropertiesDialogAction(
@@ -42,10 +65,6 @@ DataPropertiesWidget::DataPropertiesWidget(DataPtr data, QWidget* parent)
     ui->_editType->setIcon(QIcon::fromTheme("document-properties"));
     connect(data->dataStructure()->document(), SIGNAL(dataTypeCreated(int)), this, SLOT(updateDataTypes()));
     connect(data->dataStructure()->document(), SIGNAL(dataTypeRemoved(int)), this, SLOT(updateDataTypes()));
-
-    setCaption(i18nc("@title:window", "Data Element Properties"));
-    setButtons(Close);
-    setAttribute(Qt::WA_DeleteOnClose);
     setData(data);
 }
 

@@ -21,17 +21,17 @@
 #ifndef SUI_DATAPROPERTIESWIDGET_H
 #define SUI_DATAPROPERTIESWIDGET_H
 
-#include <KDialog>
+#include <QDialog>
 #include "CoreTypes.h"
 #include "ui_DataPropertiesWidget.h"
 
 class Data;
 class MainWindow;
 class DataItem;
-#include <QPointF>
-#include <QPointer>
+class QPointF;
+
 /*! \brief Properties Area. */
-class DataPropertiesWidget: public KDialog
+class DataPropertiesWidget: public QDialog
 {
     Q_OBJECT
 
