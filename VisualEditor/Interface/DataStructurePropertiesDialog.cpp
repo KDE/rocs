@@ -24,38 +24,44 @@
 #include <Data.h>
 #include <Scene/DataItem.h>
 
-#include <QWidget>
-#include <QString>
-#include <QSvgRenderer>
-#include <QPainter>
-
 #include <QDebug>
-#include <KLineEdit>
-#include <KColorCombo>
-#include <QPushButton>
-#include <KComboBox>
-#include <KDialog>
-#include <KTabWidget>
 #include <KLocalizedString>
+#include <KComboBox>
+#include <KGuiItem>
+#include <KStandardGuiItem>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QDialog>
+#include <QTabWidget>
 #include <QLayout>
 #include <QLabel>
 
 DataStructurePropertiesDialog::DataStructurePropertiesDialog(QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
-    KTabWidget *tabWidget = new KTabWidget(this);
+    setWindowTitle(i18nc("@title:window", "Data Structure Properties"));
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    setLayout(mainLayout);
+
+    QTabWidget *tabWidget = new QTabWidget(this);
     _dataStructurePage = new DataStructurePage(this);
     _dataTypePage = new DataTypePage(this);
     _pointerTypePage = new PointerTypePage(this);
+    mainLayout->addWidget(tabWidget);
 
     tabWidget->addTab(_dataStructurePage, i18nc("@title:tab", "Data Structure"));
     tabWidget->addTab(_dataTypePage, i18nc("@title:tab", "Data Types"));
     tabWidget->addTab(_pointerTypePage, i18nc("@title:tab", "Pointer Types"));
 
-    setMainWidget(tabWidget);
+    QDialogButtonBox *buttons = new QDialogButtonBox(this);
+    QPushButton *closeButton = new QPushButton;
+    KGuiItem::assign(closeButton, KStandardGuiItem::close());
+    closeButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    buttons->addButton(closeButton, QDialogButtonBox::RejectRole);
+    mainLayout->addWidget(buttons);
+    connect(closeButton, SIGNAL(clicked()), this, SLOT(reject()));
 
-    setCaption(i18nc("@title:window", "Data Structure Properties"));
-    setButtons(Close);
     setAttribute(Qt::WA_DeleteOnClose);
 }
 

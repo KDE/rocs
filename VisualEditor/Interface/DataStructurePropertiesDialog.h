@@ -21,7 +21,7 @@
 
 #include "CoreTypes.h"
 
-#include <KDialog>
+#include <QDialog>
 
 class DataStructurePage;
 class DataTypePage;
@@ -31,7 +31,7 @@ class PointerTypePage;
     \brief Properties widget for DataStructure.
 */
 class DataStructurePropertiesDialog :
-    public KDialog
+    public QDialog
 {
     Q_OBJECT
 

@@ -35,7 +35,7 @@
 #include <QIcon>
 #include <KTabWidget>
 #include <KLocalizedString>
-
+#include <KDialog>
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, Document* document, QObject* parent)
     : QAction(text, parent)
