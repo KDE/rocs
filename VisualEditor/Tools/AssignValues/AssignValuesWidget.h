@@ -20,15 +20,13 @@
 #define ASSIGNVALUESWIDGET_H
 
 #include "ui_AssignValuesWidget.h"
-#include <KDialog>
-
+#include <QDialog>
 
 class QGridLayout;
 class Document;
 class DataStructure;
 
-class AssignValuesWidget :
-    public KDialog
+class AssignValuesWidget : public QDialog
 {
     Q_OBJECT
 
@@ -69,6 +67,8 @@ public slots:
 private:
     Document* graphDoc_;
     Ui::AssignValuesWidget *ui;
+    QPushButton *m_okButton;
+    QPushButton *m_applyButton;
 };
 
 #endif // ASSIGNVALUESWIDGET_H
