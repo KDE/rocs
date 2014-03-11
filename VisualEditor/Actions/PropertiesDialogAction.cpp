@@ -38,7 +38,7 @@
 
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, Document* document, QObject* parent)
-    : KAction(text, parent)
+    : QAction(text, parent)
 {
     _document = document;
     _dialogType = DOCUMENT;
@@ -48,7 +48,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, Document* document,
 
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, DataStructurePtr dataStructure, QObject* parent)
-    : KAction(text, parent)
+    : QAction(text, parent)
 {
     _dataStructure = dataStructure;
     _dialogType = DATASTRUCTURE;
@@ -58,7 +58,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataStructurePtr da
 
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, DataPtr data, QObject* parent)
-    : KAction(text, parent)
+    : QAction(text, parent)
 {
     _data = data;
     _dialogType = DATA;
@@ -68,7 +68,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataPtr data, QObje
 
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, PointerPtr pointer, QObject* parent)
-    : KAction(text, parent)
+    : QAction(text, parent)
 {
     _pointer = pointer;
     _dialogType = POINTER;
@@ -78,7 +78,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, PointerPtr pointer,
 
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, DataTypePtr dataType, QObject* parent)
-    : KAction(text, parent)
+    : QAction(text, parent)
 {
     _dataType = dataType;
     _dialogType = DATATYPE;
@@ -88,7 +88,7 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, DataTypePtr dataTyp
 
 
 PropertiesDialogAction::PropertiesDialogAction(QString text, PointerTypePtr pointerType, QObject* parent)
-    : KAction(text, parent)
+    : QAction(text, parent)
 {
     _pointerType = pointerType;
     _dialogType = POINTERTYPE;

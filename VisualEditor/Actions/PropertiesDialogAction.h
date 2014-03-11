@@ -22,13 +22,13 @@
 #define PROPERTIESDIALOGACTION_H
 
 #include "VisualEditorExport.h"
-#include <KAction>
+#include <QAction>
 #include "CoreTypes.h"
 
 class QPointF;
 class Document;
 
-class VISUALEDITOR_EXPORT PropertiesDialogAction : public KAction
+class VISUALEDITOR_EXPORT PropertiesDialogAction : public QAction
 {
     Q_OBJECT
 

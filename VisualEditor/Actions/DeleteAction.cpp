@@ -31,14 +31,14 @@
 
 
 DeleteAction::DeleteAction(const QString& name, GraphScene *scene, QWidget *parent)
-    : KAction(QIcon(), name, parent)
+    : QAction(QIcon(), name, parent)
 {
     _graphScene = scene;
     connect(this, SIGNAL(triggered()), this, SLOT(executeDelete()));
 }
 
 DeleteAction::DeleteAction(const QString& name, GraphScene *scene, DataPtr data, QWidget *parent)
-    : KAction(QIcon(), name, parent)
+    : QAction(QIcon(), name, parent)
 {
     _graphScene = scene;
     _data = data;
@@ -46,7 +46,7 @@ DeleteAction::DeleteAction(const QString& name, GraphScene *scene, DataPtr data,
 }
 
 DeleteAction::DeleteAction(const QString& name, GraphScene *scene, DataStructurePtr dataStructure, QWidget *parent)
-    : KAction(QIcon(), name, parent)
+    : QAction(QIcon(), name, parent)
 {
     _graphScene = scene;
     _dataStructure = dataStructure;

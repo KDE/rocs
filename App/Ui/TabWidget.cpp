@@ -24,7 +24,7 @@
 #include <kmultitabbar.h>
 #include <QIcon>
 #include <QDebug>
-#include <KAction>
+#include <QAction>
 #include <KLocale>
 
 TabWidget::TabWidget(TabWidget::Orientation o, QWidget *parent) : QWidget(parent)
@@ -96,7 +96,7 @@ void TabWidget::addWidget(QWidget *w, const QString& text, const QIcon& icon)
     m_numOfTabs++;
 }
 
-void TabWidget::addAction(KAction *a)
+void TabWidget::addAction(QAction *a)
 {
     int pos = m_numOfTabs + m_numOfActions;
     m_tabs -> appendTab(a->icon().pixmap(16), pos, a->text());

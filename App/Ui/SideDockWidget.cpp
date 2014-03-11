@@ -31,7 +31,7 @@
 #include <QObject>
 #include <QWidget>
 #include <QIcon>
-#include <KAction>
+#include <QAction>
 #include <KLocale>
 #include <QDebug>
 

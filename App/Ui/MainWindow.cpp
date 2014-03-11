@@ -272,9 +272,9 @@ QWidget* MainWindow::setupScriptPanel()
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     executeCommands->setOrientation(Qt::Vertical);
-    _runScript = new KAction(QIcon::fromTheme("media-playback-start"), i18nc("@action:intoolbar Script Execution", "Run"), this);
-    _stepRunScript = new KAction(QIcon::fromTheme("go-next"), i18nc("@action:intoolbar Script Execution", "One Step"), this);
-    _stopScript = new KAction(QIcon::fromTheme("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
+    _runScript = new QAction(QIcon::fromTheme("media-playback-start"), i18nc("@action:intoolbar Script Execution", "Run"), this);
+    _stepRunScript = new QAction(QIcon::fromTheme("go-next"), i18nc("@action:intoolbar Script Execution", "One Step"), this);
+    _stopScript = new QAction(QIcon::fromTheme("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
     _stopScript->setEnabled(false);
     executeCommands->addAction(_runScript);
     executeCommands->addAction(_stepRunScript);
@@ -285,8 +285,8 @@ QWidget* MainWindow::setupScriptPanel()
 
     // debug controls submenu
     _debugMenu = new KActionMenu(QIcon::fromTheme("debug-run"), i18nc("@title:menu Debug execution", "Debug"), this);
-    _debugScript = new KAction(QIcon::fromTheme("debug-run"), i18nc("@action:inmenu Debug execution", "Debug run"), _debugMenu);
-    _interruptScript = new KAction(QIcon::fromTheme("debug-run-cursor"), i18nc("@action:inmenu Debug execution", "Interrupt at first line"), _debugMenu);
+    _debugScript = new QAction(QIcon::fromTheme("debug-run"), i18nc("@action:inmenu Debug execution", "Debug run"), _debugMenu);
+    _interruptScript = new QAction(QIcon::fromTheme("debug-run-cursor"), i18nc("@action:inmenu Debug execution", "Interrupt at first line"), _debugMenu);
     _debugMenu->addAction(_debugScript);
     _debugMenu->addAction(_interruptScript);
     executeCommands->addWidget(_debugMenu->createWidget(executeCommands));
@@ -387,7 +387,7 @@ void MainWindow::setupActions()
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                               const QKeySequence& shortcut, const char* slot, QObject *parent)
 {
-    KAction* action = new KAction(QIcon::fromTheme(iconName), actionTitle, parent);
+    QAction* action = new QAction(QIcon::fromTheme(iconName), actionTitle, parent);
     action->setShortcut(shortcut);
     action->setShortcutContext(Qt::ApplicationShortcut);
     actionCollection()->addAction(actionName, action);
@@ -397,7 +397,7 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                               const char* slot, QObject *parent)
 {
-    KAction* action = new KAction(QIcon::fromTheme(iconName), actionTitle, parent);
+    QAction* action = new QAction(QIcon::fromTheme(iconName), actionTitle, parent);
     actionCollection()->addAction(actionName, action);
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
@@ -446,7 +446,7 @@ void MainWindow::createToolsPluginsAction(){
     QList<ToolsPluginInterface*> availablePlugins =  ToolManager::self().plugins();
     int count = 0;
     foreach(ToolsPluginInterface * plugin, availablePlugins) {
-        action = new KAction(plugin->displayName(), this);
+        action = new QAction(plugin->displayName(), this);
         action->setData(count++);
         connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
         _toolsPlugins << action;
@@ -468,7 +468,7 @@ void MainWindow::setupDSPluginsAction()
     QSignalMapper* mapper = new QSignalMapper(this);
     foreach(const QString& identifier, backends) {
         DataStructureBackendInterface *plugin = DataStructureBackendManager::self().backend(identifier);
-        action = new KAction(plugin->name(), this);
+        action = new QAction(plugin->name(), this);
         action->setCheckable(true);
         if (plugin->internalName() == DataStructureBackendManager::self().activeBackend()->internalName()) {
             action->setChecked(true);
@@ -493,7 +493,7 @@ void MainWindow::setupDocumentsList()
     QActionGroup * group = new QActionGroup(this);
     int count = 0;
     foreach(Document * doc, DocumentManager::self().documentList()) {
-        action = new KAction(doc->name(), this);
+        action = new QAction(doc->name(), this);
         action->setData(count++);
         action->setCheckable(true);
         if (doc == DocumentManager::self().activeDocument()) {

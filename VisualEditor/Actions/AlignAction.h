@@ -22,11 +22,11 @@
 #define ALIGNACTION_H
 
 #include "VisualEditorExport.h"
-#include <KAction>
+#include <QAction>
 #include "Data.h"
 #include "Scene/GraphScene.h"
 
-class VISUALEDITOR_EXPORT AlignAction : public KAction
+class VISUALEDITOR_EXPORT AlignAction : public QAction
 {
     Q_OBJECT
 public:

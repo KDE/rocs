@@ -26,7 +26,7 @@
 
 class QIcon;
 class QToolBar;
-class KAction;
+class QAction;
 
 /**
  * \class SideToolButton

@@ -32,7 +32,7 @@
 
 #include <KLocale>
 #include <QDebug>
-#include <KAction>
+#include <QAction>
 #include <KColorCombo>
 #include <QPushButton>
 #include <QWidget>
@@ -145,7 +145,7 @@ bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Do
     QPushButton* dataTypeButton = new QPushButton(this);
     dataTypeButton->setFlat(true);
     dataTypeButton->setStyleSheet("text-align: left");
-    KAction* dataAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataType, dataPropertyWidget);
+    QAction* dataAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataType, dataPropertyWidget);
     dataTypeButton->addAction(dataAction);
     dataTypeButton->setIcon(dataType->icon());
     dataTypeButton->setText(dataType->name());
@@ -189,7 +189,7 @@ bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier,
     pointerTypeButton->setText(pointerType->name());
     pointerTypeButton->setFlat(true);
     pointerTypeButton->setStyleSheet("text-align: left");
-    KAction* pointerAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget);
+    QAction* pointerAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget);
     connect(pointerTypeButton, SIGNAL(pressed()), pointerAction, SLOT(trigger()));
 
     QPushButton* pointerTypeVisible = new QPushButton(this);

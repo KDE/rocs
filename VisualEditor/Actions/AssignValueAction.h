@@ -21,12 +21,12 @@
 #ifndef ASSIGNVALUEACTION_H
 #define ASSIGNVALUEACTION_H
 
-#include <KAction>
+#include <QAction>
 #include "CoreTypes.h"
 
 class GraphScene;
 
-class AssignValueAction : public KAction
+class AssignValueAction : public QAction
 {
     Q_OBJECT
 public:

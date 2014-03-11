@@ -22,13 +22,13 @@
 #define DELETEACTION_H
 
 #include "VisualEditorExport.h"
-#include <KAction>
+#include <QAction>
 #include "CoreTypes.h"
 
 class GraphScene;
 
 /*! this class defines the delete button on the pallete. */
-class VISUALEDITOR_EXPORT DeleteAction : public KAction
+class VISUALEDITOR_EXPORT DeleteAction : public QAction
 {
     Q_OBJECT
 public:

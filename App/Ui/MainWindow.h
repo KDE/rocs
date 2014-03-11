@@ -34,12 +34,11 @@ class QPushButton;
 class KComboBox;
 class GraphLayers;
 class GraphVisualEditor;
-class KActionCollection;
 class Document;
 class DataStructure;
 class Project;
 class QSplitter;
-class KAction;
+class QAction;
 class SelectMoveHandAction;
 class CodeEditor;
 class QScriptEngine;
@@ -257,9 +256,9 @@ private: // Variables.
     JournalEditorWidget* _journalWidget;
 
     // Other Bunch of stuff.
-    KAction *_runScript;
-    KAction *_stepRunScript;
-    KAction *_stopScript;
+    QAction *_runScript;
+    QAction *_stepRunScript;
+    QAction *_stopScript;
     KActionMenu *_debugMenu;
     QList<QAction*> _toolsPlugins;
 
@@ -274,8 +273,8 @@ private: // Variables.
     QComboBox *_selectListing;
 
     QScriptEngineDebugger *_scriptDbg;
-    KAction* _debugScript;
-    KAction* _interruptScript;
+    QAction* _debugScript;
+    QAction* _interruptScript;
 
     void createToolsPluginsAction();
 };

@@ -27,17 +27,17 @@
 class KMultiTabBar;
 class QStackedWidget;
 class QBoxLayout;
-class KAction;
+class QAction;
 
 class TabWidget : public QWidget
 {
     Q_OBJECT
-    KAction* _runAction;
+    QAction* _runAction;
 public:
     enum Orientation {TabOnLeft, TabOnRight, TabOnTop, TabOnBottom};
     explicit TabWidget(TabWidget::Orientation o, QWidget *parent = 0);
     void addWidget(QWidget *w, const QString& text, const QIcon& icon);
-    void addAction(KAction *a);
+    void addAction(QAction *a);
 
 private:
     void createLayout();

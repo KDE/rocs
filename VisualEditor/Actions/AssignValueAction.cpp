@@ -30,7 +30,7 @@
 #include <QIcon>
 
 AssignValueAction::AssignValueAction(const QString& name, GraphScene *scene, AssignMethod method, QWidget *parent)
-    : KAction(QIcon(), name, parent)
+    : QAction(QIcon(), name, parent)
 {
     _graphScene = scene;
     switch (method) {
@@ -50,7 +50,7 @@ AssignValueAction::AssignValueAction(const QString& name, GraphScene *scene, Ass
 
 
 AssignValueAction::AssignValueAction(const QString& name, GraphScene *scene, AssignMethod method, DataStructurePtr ds, QWidget *parent)
-    : KAction(QIcon(), name, parent)
+    : QAction(QIcon(), name, parent)
 {
     _graphScene = scene;
     _dataStructure = ds;

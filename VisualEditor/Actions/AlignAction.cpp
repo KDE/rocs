@@ -40,7 +40,7 @@
 
 
 AlignAction::AlignAction(const QString& tooltip, AlignAction::Orientation o, GraphScene* gc)
-    : KAction(QIcon(), tooltip, gc)
+    : QAction(QIcon(), tooltip, gc)
 {
     _graphScene = gc;
     setupOrientation(o);
