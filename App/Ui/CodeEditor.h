@@ -21,7 +21,6 @@
 #define CODEEDITOR_H
 
 #include <QWidget>
-#include <KTabBar>
 #include <QList>
 #include "MainWindow.h"
 
@@ -33,7 +32,7 @@ class Editor;
 }
 class QVBoxLayout;
 class QStackedWidget;
-class KUrl;
+class QTabBar;
 
 class CodeEditor : public QWidget
 {
@@ -95,7 +94,7 @@ private:
     void saveScriptAs(KTextEditor::Document *doc);
     /** Call \see saveScript for all documents in the code editor */
     QStackedWidget *_docArea;
-    KTabBar *_tabDocs; //! the tabs of the opened documents.
+    QTabBar *_tabDocs; //! the tabs of the opened documents.
     QList<KTextEditor::View*> _docViews; //! this is the view where you edit your scripts
     QList<KTextEditor::Document*> _scriptDocs; //! the document that you are editing
     KTextEditor::Editor *_editor;

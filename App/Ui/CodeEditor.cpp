@@ -29,6 +29,7 @@
 #include <KFileDialog>
 #include <QIcon>
 #include <QDebug>
+#include <QTabBar>
 #include <QStackedWidget>
 
 CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
@@ -39,7 +40,7 @@ CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
         KMessageBox::error(this, i18n("A KDE Text Editor could not be found, \n please, check your installation"));
         exit(1);
     }
-    _tabDocs = new KTabBar(this);
+    _tabDocs = new QTabBar(this);
     _docArea = new QStackedWidget(this);
     connect(_tabDocs, SIGNAL(tabCloseRequested(int)), this, SLOT(closeDocument(int)));
     connect(_tabDocs, SIGNAL(currentChanged(int)), this, SLOT(changeCurrentDocument(int)));
