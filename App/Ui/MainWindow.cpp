@@ -50,7 +50,7 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <KFileDialog>
-#include <KInputDialog>
+#include <QInputDialog>
 #include <KMenu>
 #include <KToolBar>
 #include <KComboBox>
@@ -761,7 +761,9 @@ QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suf
 void MainWindow::saveScripts()
 {
     foreach (KTextEditor::Document * textDocument, _currentProject->codeFilesNew()) {
-        QString basePrefix = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script"));
+        QString basePrefix = QInputDialog::getText(this,
+                                i18n("ScriptName"),
+                                i18n("Enter the name of your new script"));
         QString fileName = uniqueFilename(basePrefix, "js");
 
         textDocument->saveAs(QUrl::fromLocalFile(fileName));
@@ -774,7 +776,9 @@ void MainWindow::saveScripts()
 void MainWindow::newScript()
 {
     if (!_currentProject->isTemporary()) {
-        QString basePrefix = KInputDialog::getText(i18n("ScriptName"), i18n("Enter the name of your new script"));
+        QString basePrefix = QInputDialog::getText(this,
+                                i18n("ScriptName"),
+                                i18n("Enter the name of your new script"));
         if (basePrefix.isNull()) {
             qDebug() << "Filename is empty and no script file was created.";
         } else {
@@ -839,7 +843,9 @@ void MainWindow::saveGraphAs(Document* document)
 
 void MainWindow::newGraph()
 {
-    QString file = KInputDialog::getText(i18n("Graph name"), i18n("Enter the name of the Graph"));
+    QString file = QInputDialog::getText(this,
+                        i18n("Graph name"),
+                        i18n("Enter the name of the Graph"));
     if (file.isEmpty()) {
         qDebug() << "Filename is empty and no script file was created.";
         return;
