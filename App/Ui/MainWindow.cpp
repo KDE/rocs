@@ -21,9 +21,9 @@
 
 #include "MainWindow.h"
 #include "rocsversion.h"
+#include "settings.h"
 
-//Qt related includes
-#include <QtGui/QCloseEvent>
+#include <QCloseEvent>
 #include <QComboBox>
 #include <QGraphicsView>
 #include <QLabel>
@@ -36,26 +36,32 @@
 #include <QPointer>
 #include <QGridLayout>
 #include <QFile>
+#include <QDebug>
+#include <QIcon>
+#include <QPushButton>
+#include <QInputDialog>
+#include <QActionGroup>
+#include <QMutexLocker>
+#include <QFormLayout>
+#include <QScriptEngineDebugger>
 
-// KDE Related Includes
 #include <KActionCollection>
 #include <KRecentFilesAction>
 #include <KActionMenu>
 #include <KApplication>
-#include <QDebug>
-#include <QIcon>
-#include <QPushButton>
 #include <KTar>
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <KFileDialog>
-#include <QInputDialog>
 #include <KMenu>
 #include <KToolBar>
-#include <KComboBox>
+#include <KNS3/DownloadDialog>
+#include <KNS3/UploadDialog>
+#include <ktexteditor/view.h>
+#include <ktexteditor/editor.h>
+#include <ktexteditor/document.h>
 
-// UI RELATED INCLUDES
 #include "DocumentTypesWidget.h"
 #include "GraphVisualEditor.h"
 #include "Ui/CodeEditor.h"
@@ -67,41 +73,21 @@
 #include "Ui/DocumentationWidget.h"
 #include "InterfacePlugins/ApiDoc/ApiDocWidget.h"
 #include "Scene/GraphicsLayout.h"
-
-// Graph Related Includes
 #include "Document.h"
 #include "DataStructure.h"
 #include "Project.h"
-
-#include "settings.h"
-
-// Action Related Includes
+#include "QtScriptBackend.h"
 #include "Actions/AbstractAction.h"
 #include "Actions/AlignAction.h"
 #include "Actions/ZoomAction.h"
 #include "Actions/DeleteAction.h"
 #include "Actions/PropertiesDialogAction.h"
-
-#include <KNS3/DownloadDialog>
-#include <knewstuff3/uploaddialog.h>
-
-// backends
-#include "QtScriptBackend.h"
-#include <kstandarddirs.h>
-#include <ktexteditor/view.h>
-#include <ktexteditor/editor.h>
-#include <ktexteditor/document.h>
-#include <QActionGroup>
-#include <QMutexLocker>
-#include <QFormLayout>
-#include <QScriptEngineDebugger>
-#include <boost/concept_check.hpp>
 #include "IncludeManagerSettings.h"
 #include "ConfigureDefaultProperties.h"
-#include <IncludeManager.h>
+#include "IncludeManager.h"
 #include "ImporterExporterManager.h"
-#include <DataStructureBackendInterface.h>
-#include <DataStructureBackendManager.h>
+#include "DataStructureBackendInterface.h"
+#include "DataStructureBackendManager.h"
 #include "DocumentManager.h"
 #include "Tools/ToolManager.h"
 
