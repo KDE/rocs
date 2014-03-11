@@ -23,6 +23,7 @@
 #include "rocsversion.h"
 #include "settings.h"
 
+#include <QApplication>
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QGraphicsView>
@@ -48,7 +49,6 @@
 #include <KActionCollection>
 #include <KRecentFilesAction>
 #include <KActionMenu>
-#include <KApplication>
 #include <KTar>
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -883,7 +883,7 @@ bool MainWindow::queryClose()
 void MainWindow::quit()
 {
     if (queryClose()) {
-        kapp->quit();
+        QApplication::quit();
     }
 }
 
