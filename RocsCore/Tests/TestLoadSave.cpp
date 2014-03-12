@@ -66,7 +66,7 @@ void TestLoadSave::serializeUnserializeTest()
     // unserialize and test properties
     DocumentManager::self().addDocument(testDoc);
     DocumentManager::self().changeDocument(testDoc);
-    DocumentManager::self().openDocument(KUrl::fromLocalFile("serializetest.graph"));
+    DocumentManager::self().openDocument(QUrl::fromLocalFile("serializetest.graph"));
 
     // default data structure also present
     QVERIFY2(DocumentManager::self().activeDocument()->dataStructures().count() == 1, "ERROR: DataStructure not loaded");
@@ -115,7 +115,7 @@ void TestLoadSave::serializeUnserializeTypesTest()
     // unserialize and test properties
     DocumentManager::self().addDocument(testDoc);
     DocumentManager::self().changeDocument(testDoc);
-    DocumentManager::self().openDocument(KUrl::fromLocalFile("serializetest.graph"));
+    DocumentManager::self().openDocument(QUrl::fromLocalFile("serializetest.graph"));
     document = DocumentManager::self().activeDocument();
     ds = document->dataStructures().at(0);
 

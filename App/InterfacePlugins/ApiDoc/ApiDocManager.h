@@ -24,7 +24,7 @@
 #include <QHash>
 
 class ObjectDocumentation;
-class KUrl;
+class QUrl;
 class QDomDocument;
 class QFile;
 class QXmlSchema;
@@ -76,7 +76,7 @@ public:
      * \param path is the local XML file containing the object API specification
      * \return true if loaded successfully, otherwise false
      */
-    bool loadObjectApi(const KUrl &path);
+    bool loadObjectApi(const QUrl &path);
 
 signals:
     void objectApiAdded();
@@ -101,7 +101,7 @@ private:
      * \param scheme is the XML schema describing the DOM
      * \return the loaded DOM document
      */
-    QDomDocument loadDomDocument(const KUrl &path, const QXmlSchema &schema) const;
+    QDomDocument loadDomDocument(const QUrl &path, const QXmlSchema &schema) const;
 
     QList<ObjectDocumentation *> _objectApiList;
     QHash<QString, QString> _objectApiDocuments;

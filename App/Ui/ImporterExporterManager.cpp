@@ -26,9 +26,10 @@
 #include <QPushButton>
 #include <KMessageBox>
 #include <KGuiItem>
+#include </opt/qt5/qtbase/include/QtCore/qurl.h>
 #include "Document.h"
 #include <settings.h>
-#include <KUrl>
+#include <QUrl>
 #include <QDialog>
 
 #include <QFile>
@@ -47,7 +48,7 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     }
     ext.append(i18n("*|All files"));
 
-    KUrl startDirectory = Settings::lastOpenedDirectory();
+    QUrl startDirectory = QUrl::fromLocalFile(Settings::lastOpenedDirectory());
 
     QPointer<KFileDialog> exportDialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
     exportDialog->okButton()->setText(i18nc("@action:button", "Export"));
@@ -61,12 +62,12 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     }
 
     // set file ending
-    KUrl file;
+    QUrl file;
     ext = exportDialog->currentFilter().remove('*');
     if (exportDialog->selectedFile().endsWith(ext)) {
-        file = KUrl::fromLocalFile(exportDialog->selectedFile());
+        file = QUrl::fromLocalFile(exportDialog->selectedFile());
     } else {
-        file = KUrl::fromLocalFile(exportDialog->selectedFile().append(ext));
+        file = QUrl::fromLocalFile(exportDialog->selectedFile().append(ext));
     }
 
     // test if any file is overwritten
@@ -74,7 +75,7 @@ bool ImporterExporterManager::exportFile(Document * doc) const
         if (KMessageBox::warningContinueCancel(qobject_cast< QWidget* >(parent()), i18n(
                 "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you "
                 "do not want to overwrite it, change the file name to "
-                "something else.</p>", file.prettyUrl()),
+                "something else.</p>", file.toDisplayString()),
             i18n("File Exists"), KGuiItem(i18n("Overwrite") ))
             == KMessageBox::Cancel ) {
             return false;

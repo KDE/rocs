@@ -52,7 +52,7 @@ void TestTikzFileFormatPlugin::serializeTest()
 
     // create exporter plugin
     TikzFileFormatPlugin serializer(this, QList<QVariant>());
-    serializer.setFile(KUrl::fromLocalFile("test.tgf"));
+    serializer.setFile(QUrl::fromLocalFile("test.tgf"));
     serializer.writeFile(*document);
     QVERIFY(serializer.hasError() == false);
 }

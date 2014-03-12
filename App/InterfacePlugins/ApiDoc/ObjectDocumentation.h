@@ -22,7 +22,6 @@
 #include <QObject>
 #include <QList>
 #include <QStringList>
-#include <KUrl>
 
 class PropertyDocumentation;
 class MethodDocumentation;

@@ -22,7 +22,6 @@
 #include "Document.h"
 #include <KAboutData>
 #include <KGenericFactory>
-#include <KUrl>
 #include <QFile>
 #include <DataStructure.h>
 #include <Data.h>

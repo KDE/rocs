@@ -26,13 +26,13 @@
 #include "DataStructure.h"
 #include "DocumentManager.h"
 #include <QDebug>
-#include <KUrl>
+#include <QUrl>
 
 void GmlFileFormatTest::parseTest()
 {
     // create importer plugin
     GmlFileFormatPlugin importer(this, QList<QVariant>());
-    importer.setFile(KUrl::fromLocalFile("example.gml"));
+    importer.setFile(QUrl::fromLocalFile("example.gml"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
 }
@@ -60,7 +60,7 @@ void GmlFileFormatTest::serializeTest()
 
     // create exporter plugin
     GmlFileFormatPlugin serializer(this, QList<QVariant>());
-    serializer.setFile(KUrl::fromLocalFile("test.gml"));
+    serializer.setFile(QUrl::fromLocalFile("test.gml"));
     serializer.writeFile(*document);
     QVERIFY(serializer.hasError() == false);
 }

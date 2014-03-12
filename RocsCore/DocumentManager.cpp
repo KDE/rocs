@@ -26,7 +26,6 @@
 #include "LoadSave/GraphFileBackendManager.h"
 #include "DataStructureBackendInterface.h"
 
-#include <KUrl>
 #include <QDebug>
 #include <KLocale>
 #include <QWaitCondition>

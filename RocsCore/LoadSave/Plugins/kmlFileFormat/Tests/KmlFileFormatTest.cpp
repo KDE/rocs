@@ -23,7 +23,7 @@
 #include "Data.h"
 #include "Pointer.h"
 #include <QtTest/QTest>
-#include <KUrl>
+#include <QUrl>
 
 void KmlFileFormatTest::init()
 {}
@@ -51,7 +51,7 @@ void KmlFileFormatTest::serializeTest()
 
     // create exporter plugin
     KmlFileFormatPlugin serializer(this, QList<QVariant>());
-    serializer.setFile(KUrl::fromLocalFile("test.kml"));
+    serializer.setFile(QUrl::fromLocalFile("test.kml"));
     serializer.writeFile(*document);
     QVERIFY(serializer.hasError() == false);
 }

@@ -52,13 +52,13 @@ void TestTgfFileFormatPlugin::serializeUnserializeTest()
 
     // create exporter plugin
     TgfFileFormatPlugin serializer(this, QList<QVariant>());
-    serializer.setFile(KUrl::fromLocalFile("test.tgf"));
+    serializer.setFile(QUrl::fromLocalFile("test.tgf"));
     serializer.writeFile(*document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
     TgfFileFormatPlugin importer(this, QList<QVariant>());
-    importer.setFile(KUrl::fromLocalFile("test.tgf"));
+    importer.setFile(QUrl::fromLocalFile("test.tgf"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
     QVERIFY(importer.isGraphDocument());

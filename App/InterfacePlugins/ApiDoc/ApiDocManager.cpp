@@ -34,7 +34,7 @@
 #include <KGlobal>
 #include <KStandardDirs>
 #include <QDebug>
-#include <KUrl>
+#include <QUrl>
 #include <KLocale>
 
 ApiDocManager::ApiDocManager(QObject *parent)
@@ -46,7 +46,7 @@ void ApiDocManager::loadLocalData()
 {
     QStringList apiDocFiles = KGlobal::dirs()->findAllResources("appdata", QString("engineapi/*.xml"));
     foreach (const QString &file, apiDocFiles) {
-        loadObjectApi(KUrl::fromLocalFile(file));
+        loadObjectApi(QUrl::fromLocalFile(file));
     }
 }
 
@@ -152,7 +152,7 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
     return _objectApiDocuments.value(identifier);
 }
 
-bool ApiDocManager::loadObjectApi(const KUrl &path)
+bool ApiDocManager::loadObjectApi(const QUrl &path)
 {
     if (!path.isLocalFile()) {
         qWarning() << "Cannot open API file at " << path.toLocalFile() << ", aborting.";
@@ -313,7 +313,7 @@ QString ApiDocManager::apiOverviewDocument() const
 QXmlSchema ApiDocManager::loadXmlSchema(const QString &schemeName) const
 {
     QString relPath = QString("schemes/%1.xsd").arg(schemeName);
-    KUrl file = KUrl::fromLocalFile(KGlobal::dirs()->findResource("appdata", relPath));
+    QUrl file = QUrl::fromLocalFile(KGlobal::dirs()->findResource("appdata", relPath));
 
     QXmlSchema schema;
     if (schema.load(file) == false) {
@@ -322,7 +322,7 @@ QXmlSchema ApiDocManager::loadXmlSchema(const QString &schemeName) const
     return schema;
 }
 
-QDomDocument ApiDocManager::loadDomDocument(const KUrl &path, const QXmlSchema &schema) const
+QDomDocument ApiDocManager::loadDomDocument(const QUrl &path, const QXmlSchema &schema) const
 {
     QDomDocument document;
     QXmlSchemaValidator validator(schema);

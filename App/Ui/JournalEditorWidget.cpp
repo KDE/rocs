@@ -21,12 +21,12 @@
 #include <Project.h>
 #include "ui_JournalEditorWidget.h"
 
-#include <KUrl>
 #include <QSaveFile>
 #include <QDebug>
 
 #include <QTextStream>
 #include <QFile>
+#include <QUrl>
 
 
 JournalEditorWidget::JournalEditorWidget(QWidget* parent)

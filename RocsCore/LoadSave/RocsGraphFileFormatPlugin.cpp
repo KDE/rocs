@@ -23,7 +23,6 @@
 
 #include <KAboutData>
 #include <KGenericFactory>
-#include <KUrl>
 #include <QSaveFile>
 #include <KLocalizedString>
 #include <QFile>
