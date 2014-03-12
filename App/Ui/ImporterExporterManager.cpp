@@ -18,7 +18,7 @@
 */
 
 #include "ImporterExporterManager.h"
-#include <KFileDialog>
+#include <QFileDialog>
 #include <KLocalizedString>
 #include "LoadSave/GraphFilePluginInterface.h"
 #include <QDebug>
@@ -26,7 +26,6 @@
 #include <QPushButton>
 #include <KMessageBox>
 #include <KGuiItem>
-#include </opt/qt5/qtbase/include/QtCore/qurl.h>
 #include "Document.h"
 #include <settings.h>
 #include <QUrl>
@@ -41,6 +40,7 @@ ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(paren
 
 bool ImporterExporterManager::exportFile(Document * doc) const
 {
+    //TODO rewrite this whole class, it is a wonder that the code works :)
     QString ext;
     QList<GraphFilePluginInterface*> exportBackends = GraphFileBackendManager::self()->backends(GraphFileBackendManager::Export);
     foreach(GraphFilePluginInterface * f, exportBackends) {
@@ -50,28 +50,27 @@ bool ImporterExporterManager::exportFile(Document * doc) const
 
     QUrl startDirectory = QUrl::fromLocalFile(Settings::lastOpenedDirectory());
 
-    QPointer<KFileDialog> exportDialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
-    exportDialog->okButton()->setText(i18nc("@action:button", "Export"));
-    exportDialog->okButton()->setToolTip(i18nc("@info:tooltip", "Export graphs to file"));
+    QPointer<QFileDialog> exportDialog = new QFileDialog(qobject_cast< QWidget* >(parent()), QString(), QString(), ext);
+    exportDialog->setLabelText(QFileDialog::Accept, i18nc("@action:button", "Export"));
     if (exportDialog->exec() != QDialog::Accepted) {
         return false;
     }
 
-    if (exportDialog->selectedFile().isEmpty()) {
+    if (exportDialog->selectedFiles().isEmpty()) {
         return false;
     }
 
     // set file ending
     QUrl file;
-    ext = exportDialog->currentFilter().remove('*');
-    if (exportDialog->selectedFile().endsWith(ext)) {
-        file = QUrl::fromLocalFile(exportDialog->selectedFile());
+    ext = exportDialog->selectedNameFilter().remove('*');
+    if (exportDialog->selectedFiles().first().endsWith(ext)) {
+        file = QUrl::fromLocalFile(exportDialog->selectedFiles().first());
     } else {
-        file = QUrl::fromLocalFile(exportDialog->selectedFile().append(ext));
+        file = QUrl::fromLocalFile(exportDialog->selectedFiles().first().append(ext));
     }
 
     // test if any file is overwritten
-    if (QFile::exists(exportDialog->selectedFile())) {
+    if (QFile::exists(exportDialog->selectedFiles().first())) {
         if (KMessageBox::warningContinueCancel(qobject_cast< QWidget* >(parent()), i18n(
                 "<p>The file <br /><strong>'%1'</strong><br /> already exists; if you "
                 "do not want to overwrite it, change the file name to "
@@ -110,14 +109,14 @@ Document* ImporterExporterManager::importFile()
     }
     ext.append(i18n("*|All files"));
 
-    QPointer<KFileDialog> dialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
+    QPointer<QFileDialog> dialog = new QFileDialog(qobject_cast< QWidget* >(parent()));
 //     dialog->setCaption(i18nc("@title:window", "Import Graph File into Project")); //FIXME commented out for porting
     if (!dialog->exec()) {
         return 0;
     }
 
     qDebug() << "Extensions:" << ext;
-    QString fileName = dialog->selectedFile();
+    QString fileName = dialog->selectedFiles().first();
     if (fileName.isEmpty()) {
         return 0;
     }
