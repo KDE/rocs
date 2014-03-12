@@ -20,7 +20,7 @@
 
 #include "DeleteAction.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QKeyEvent>

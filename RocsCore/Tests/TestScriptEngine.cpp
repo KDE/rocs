@@ -24,7 +24,7 @@
 #include "DocumentManager.h"
 #include "QtScriptBackend.h"
 
-#include <qtest_kde.h>
+#include <QtTest/QtTest>
 
 TestScriptEngine::TestScriptEngine()
 {
@@ -204,4 +204,4 @@ void TestScriptEngine::useOfDynamicProperties()
 }
 
 
-QTEST_KDEMAIN_CORE(TestScriptEngine)
+QTEST_MAIN(TestScriptEngine)

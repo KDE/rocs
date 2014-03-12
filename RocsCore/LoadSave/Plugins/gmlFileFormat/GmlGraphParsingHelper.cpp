@@ -108,7 +108,7 @@ void GmlGraphParsingHelper::setAttribute(const QString& key, const QString& valu
         if (!_properties.isEmpty()) {
             QString joined = _properties.join(".");
             joined.append('.').append(key);
-            actualGraph->setProperty(joined.toAscii(), value);
+            actualGraph->setProperty(joined.toUtf8(), value);
         } else {
             qDebug() << "seting property to graph" << key << value;
 //           if (!actualGraph->setProperty(processKey(key).toAscii(),value)){
@@ -121,7 +121,7 @@ void GmlGraphParsingHelper::setAttribute(const QString& key, const QString& valu
             QString joined = _properties.join(".");
             joined.append('.').append(key);
             if (actualEdge) {
-                actualEdge->setProperty(joined.toAscii(), value);
+                actualEdge->setProperty(joined.toUtf8(), value);
             } else {
                 _edgeProperties.insert(joined, value);
             }
@@ -145,7 +145,7 @@ void GmlGraphParsingHelper::setAttribute(const QString& key, const QString& valu
         if (!_properties.isEmpty()) {
             QString joined = _properties.join(".");
             joined.append('.').append(key);
-            actualNode->setProperty(joined.toAscii(), value);
+            actualNode->setProperty(joined.toUtf8(), value);
         } else {
             qDebug() << "seting property to node" << key << value;
 //           if(!actualNode->setProperty(processKey(key).toAscii(),value)){

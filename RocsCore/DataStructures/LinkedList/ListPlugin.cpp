@@ -31,7 +31,6 @@
 #include <KComboBox>
 #include <KLineEdit>
 #include <KPluginFactory>
-#include <KGenericFactory>
 
 #include <QCheckBox>
 #include <QGridLayout>

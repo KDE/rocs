@@ -18,7 +18,7 @@
 */
 
 #include "model_GraphProperties.h"
-#include <KLocale>
+#include <KLocalizedString>
 #include <QDebug>
 #include "Pointer.h"
 #include "Data.h"

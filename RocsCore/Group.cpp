@@ -22,7 +22,7 @@
 #include <qcompilerdetection.h>
 #include "Data.h"
 #include <boost/weak_ptr.hpp>
-#include <KLocale>
+#include <KLocalizedString>
 #include <QDebug>
 
 class GroupPrivate

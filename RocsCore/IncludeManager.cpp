@@ -22,7 +22,6 @@
 #include <KLocalizedString>
 #include <QDir>
 #include <QDebug>
-#include <KGlobal>
 #include <QStandardPaths>
 
 IncludeManager::IncludeManager()

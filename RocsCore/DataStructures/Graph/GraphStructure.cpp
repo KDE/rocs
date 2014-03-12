@@ -21,7 +21,6 @@
 #undef QT_STRICT_ITERATORS // boost property map can't work with iterators being classes
 
 #include "GraphStructure.h"
-#include "KDebug"
 #include "Data.h"
 #include "Pointer.h"
 #include "Document.h"
@@ -36,11 +35,16 @@
 #include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <boost/graph/graph_concepts.hpp>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QString>
 
 #include <cmath>
 #include <utility>
+
+// workaround for linking boost
+void boost::throw_exception(std::exception const & e)
+{
+}
 
 DataStructurePtr Rocs::GraphStructure::create(Document *parent)
 {

@@ -30,7 +30,7 @@
 #include <QGraphicsView>
 #include <QKeyEvent>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QDebug>
 
 SelectMoveHandAction::SelectMoveHandAction(GraphScene *scene, QObject *parent)
@@ -59,7 +59,7 @@ bool SelectMoveHandAction::executePress(QPointF pos)
 
     // check if there is item at click-position,
     // if no item is selected, then enable rectangle selection mode and return
-    if (!(_currentItem = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)))) {
+    if (!(_currentItem = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos, QTransform())))) {
         _graphScene->views().at(0)->setInteractive(true);
         _graphScene->views().at(0)->setDragMode(QGraphicsView::RubberBandDrag);
         return true;

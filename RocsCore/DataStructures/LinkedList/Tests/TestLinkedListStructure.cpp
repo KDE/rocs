@@ -23,7 +23,7 @@
 #include "Data.h"
 #include "Pointer.h"
 #include "QtScriptBackend.h"
-#include <qtest_kde.h>
+#include <QtTest/QtTest>
 
 #include <Document.h>
 #include <DataStructureBackendManager.h>
@@ -63,4 +63,4 @@ void TestLinkedListStructure::listModificationTest()
 }
 
 
-QTEST_KDEMAIN_CORE(TestLinkedListStructure)
+QTEST_MAIN(TestLinkedListStructure)

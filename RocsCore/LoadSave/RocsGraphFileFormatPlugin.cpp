@@ -22,7 +22,6 @@
 #include "Document.h"
 
 #include <KAboutData>
-#include <KGenericFactory>
 #include <QSaveFile>
 #include <KLocalizedString>
 #include <QFile>
@@ -117,7 +116,7 @@ void RocsGraphFileFormatPlugin::readFile()
         } else if (str.startsWith(QLatin1String("[DataStructure"))) {
             QString gName = str.section(' ', 1, 1);
             gName.remove(']');
-            tmpDataStructure = document->addDataStructure(gName.toAscii());
+            tmpDataStructure = document->addDataStructure(gName.toUtf8());
             tmpObject = tmpDataStructure.get();
         }
 

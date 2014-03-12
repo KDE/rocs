@@ -24,7 +24,7 @@
 #include "Pointer.h"
 // #include "KrossBackend.h"
 #include "QtScriptBackend.h"
-#include <qtest_kde.h>
+#include <QtTest/QtTest>
 
 // #include <kross/core/action.h>
 // #include <kross/core/manager.h>
@@ -247,4 +247,4 @@ void TestGraphStructure::serializeUnserializePluginExtraProperties()
 
 }
 
-QTEST_KDEMAIN_CORE(TestGraphStructure)
+QTEST_MAIN(TestGraphStructure)

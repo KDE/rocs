@@ -28,6 +28,11 @@
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 #define BOOST_SPIRIT_DEBUG 1
 
+// workaround for linking boost
+void boost::throw_exception(std::exception const & e)
+{
+}
+
 namespace GmlParser
 {
 

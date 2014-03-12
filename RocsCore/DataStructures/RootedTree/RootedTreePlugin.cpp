@@ -26,7 +26,6 @@
 
 #include <KAboutData>
 #include <KPluginFactory>
-#include <knuminput.h>
 #include <KMessageBox>
 #include <KComboBox>
 #include <KLocalizedString>

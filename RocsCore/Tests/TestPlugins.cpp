@@ -19,7 +19,7 @@
 #include "TestPlugins.h"
 
 #include <QtTest/QSignalSpy>
-#include <qtest_kde.h>
+#include <QtTest/QtTest>
 #include "DataStructureBackendManager.h"
 #include "Document.h"
 #include "DocumentManager.h"
@@ -147,4 +147,4 @@ void TestPlugins::convertGraphToRootedTree()
 }
 
 
-QTEST_KDEMAIN_CORE(TestPlugins)
+QTEST_MAIN(TestPlugins)

@@ -45,6 +45,7 @@
 #include <QMutexLocker>
 #include <QFormLayout>
 #include <QScriptEngineDebugger>
+#include <QFileDialog>
 
 #include <KActionCollection>
 #include <KRecentFilesAction>
@@ -53,8 +54,6 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <KConfigDialog>
-#include <KFileDialog>
-#include <KMenu>
 #include <KToolBar>
 #include <KNS3/DownloadDialog>
 #include <KNS3/UploadDialog>
@@ -233,8 +232,7 @@ void MainWindow::uploadScript()
     QUrl str = _codeEditor->document()->url();
     if (str.isEmpty()) {
         //... then try to open
-        str = KFileDialog::getOpenFileName(QString(), i18n("*.js|Script files"),
-                                           this, i18n("Rocs Script Files"));
+        str = QFileDialog::getOpenFileName(this, i18n("Rocs Script Files", QString(), i18n("*.js|Script files")));
         if (str.isEmpty())
             return;
     }
@@ -553,10 +551,9 @@ void MainWindow::importScript()
         startDirectory = QUrl::fromLocalFile(_currentProject->projectDirectory());
     }
 
-    QString fileUrl = KFileDialog::getOpenFileName(  startDirectory,
-                                                     QString(),
-                                                     this,
-                                                     i18nc("@title:window", "Add Existing Script File to Project"));
+    QString fileUrl = QFileDialog::getOpenFileName(this,
+                        i18nc("@title:window", "Add Existing Script File to Project"),
+                        startDirectory.toLocalFile());
     if (fileUrl.isEmpty()) {
         return;
     }
@@ -607,10 +604,10 @@ void MainWindow::saveProject(bool saveAs)
     QUrl startDirectory = Settings::lastOpenedDirectory();
     if (_currentProject->isTemporary() || saveAs) {
         startDirectory = QUrl::fromLocalFile(_currentProject->projectDirectory());
-        QString file = KFileDialog::getSaveFileName(startDirectory,
-                       i18n("*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"),
-                       this,
-                       i18nc("@title:window", "Save Project"));
+        QString file = QFileDialog::getSaveFileName(this,
+                            i18nc("@title:window", "Save Project"),
+                            startDirectory.toLocalFile(),
+                            i18n("*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"));
 
         if (file.isEmpty()) {
             qDebug() << "Filename is empty and no script file was created.";
@@ -660,10 +657,10 @@ void MainWindow::openProject(const QUrl& fileName)
     QUrl file = fileName;
     if (file.isEmpty()){
     // show open dialog
-         file = KFileDialog::getOpenUrl(startDirectory,
-                   i18n("*rocs *.rocsz|All Rocs files\n*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"),
-                   this,
-                   i18nc("@title:window", "Open Project Files"));
+         file = QFileDialog::getOpenFileName(this,
+                    i18nc("@title:window", "Open Project Files"),
+                    startDirectory.toLocalFile(),
+                    i18n("*rocs *.rocsz|All Rocs files\n*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"));
 
         if (file.isEmpty()) {
             return;
@@ -820,10 +817,10 @@ void MainWindow::saveGraphAs(Document* document)
         document = DocumentManager::self().activeDocument();
     }
     Q_ASSERT(document);
-    QString file = KFileDialog::getSaveFileName(QString(),
-                   i18n("*.graph|Rocs graph documents\n*|All files"),
-                   this,
-                   i18nc("@title:window", "Save Graph Document"));
+    QString file = QFileDialog::getSaveFileName(this,
+                        i18nc("@title:window", "Save Graph Document"),
+                        QString(),
+                        i18n("*.graph|Rocs graph documents\n*|All files"));
     _currentProject->saveGraphFileAs(document, file);
 }
 

@@ -27,7 +27,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QDebug>
-#include <KLocale>
+#include <KLocalizedString>
 #include <QIcon>
 #include <QGraphicsSceneWheelEvent>
 #include <QKeyEvent>

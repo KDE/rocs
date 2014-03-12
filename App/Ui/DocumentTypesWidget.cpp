@@ -30,7 +30,7 @@
 #include "DocumentManager.h"
 #include "Actions/PropertiesDialogAction.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QDebug>
 #include <QAction>
 #include <KColorCombo>

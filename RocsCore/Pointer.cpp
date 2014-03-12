@@ -25,7 +25,7 @@
 #include "QtScriptBackend.h"
 
 #include <QDebug>
-#include <KLocale>
+#include <KLocalizedString>
 #include <QColor>
 #include <boost/weak_ptr.hpp>
 
@@ -263,13 +263,13 @@ void Pointer::addDynamicProperty(const QString& property, const QVariant& value)
         qWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
-    setProperty(property.toAscii(), value);
+    setProperty(property.toUtf8(), value);
     emit(propertyAdded(property));
 }
 
 void Pointer::removeDynamicProperty(const QString& property)
 {
-    setProperty(property.toAscii(), QVariant::Invalid);
+    setProperty(property.toUtf8(), QVariant::Invalid);
     emit(propertyRemoved(property));
 }
 

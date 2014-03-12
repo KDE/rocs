@@ -23,7 +23,7 @@
 #include "Pointer.h"
 // #include "KrossBackend.h"
 #include "QtScriptBackend.h"
-#include <qtest_kde.h>
+#include <QtTest/QtTest>
 
 // #include <kross/core/action.h>
 // #include <kross/core/manager.h>
@@ -268,4 +268,4 @@ void TestDataStructure::pointerDirectionChange()
 }
 
 
-QTEST_KDEMAIN_CORE(TestDataStructure)
+QTEST_MAIN(TestDataStructure)

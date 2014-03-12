@@ -20,10 +20,14 @@
 #include "ListStructure.h"
 #include "ListNode.h"
 #include "Pointer.h"
-#include <KLocale>
+#include <KLocalizedString>
 #include <QDebug>
 #include <boost/shared_ptr.hpp>
 
+// workaround for linking boost
+void boost::throw_exception(std::exception const & e)
+{
+}
 
 DataStructurePtr Rocs::ListStructure::create(Document *parent)
 {

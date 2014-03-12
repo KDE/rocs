@@ -91,10 +91,10 @@ set(QT_USE_QTSCRIPT true)
 kconfig_add_kcfg_files(rocs_Settings_SRCS settings.kcfgc)
 
 # needed to get icon on windows
-#TODO port to kf5
-kde4_add_app_icon( rocs_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/../graphics/global/hi*-apps-rocs.png
-)
+# FIXME port to kf5
+# kde4_add_app_icon( rocs_SRCS
+#     ${CMAKE_CURRENT_SOURCE_DIR}/../graphics/global/hi*-apps-rocs.png
+# )
 
 add_executable( rocs
     ${rocs_SRCS}
@@ -112,7 +112,6 @@ target_link_libraries(rocs
         KF5::TextEditor
         KF5::Archive
         KF5::CoreAddons
-        KF5::KDE4Support
         KF5::Service
         KF5::I18n
         KF5::NewStuff

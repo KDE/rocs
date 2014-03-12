@@ -19,7 +19,8 @@
 #include "TikzFileFormatPlugin.h"
 #include "Document.h"
 #include <KAboutData>
-#include <KGenericFactory>
+#include <KPluginFactory>
+#include <KLocalizedString>
 #include <QFile>
 #include <DataStructure.h>
 #include <Data.h>

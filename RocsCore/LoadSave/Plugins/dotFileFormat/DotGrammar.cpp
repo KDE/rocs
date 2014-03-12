@@ -42,6 +42,11 @@ using namespace DotParser;
 // define skipper for spaces, c style comments, and c++ style comments
 #define SKIPPER space | confix("//", eol)[*(char_ - eol)] | confix("/*", "*/")[*(char_ - "*/")]
 
+// workaround for linking boost
+void boost::throw_exception(std::exception const & e)
+{
+}
+
 // create distinct parser for dot keywords
 namespace distinct
 {

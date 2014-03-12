@@ -20,7 +20,7 @@
 
 #include "DeleteHandAction.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QKeyEvent>
@@ -43,7 +43,7 @@ DeleteHandAction::DeleteHandAction(GraphScene* scene, QObject* parent): Abstract
 
 bool DeleteHandAction::executePress(QPointF pos)
 {
-    QGraphicsItem * item = _graphScene->itemAt(pos);
+    QGraphicsItem * item = _graphScene->itemAt(pos, QTransform());
     if (DataItem *n  = qgraphicsitem_cast<DataItem*>(item)) {
         if (n->isSelected()) {
             foreach(QGraphicsItem * selectedItem, _graphScene->selectedItems())

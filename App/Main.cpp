@@ -19,12 +19,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <KApplication>
+#include <QApplication>
 #include <KAboutData>
-#include <KCmdLineArgs>
-#include <QDebug>
 #include <KLocalizedString>
-#include <QByteArray>
 
 #include "rocsversion.h"
 #include "Ui/MainWindow.h"

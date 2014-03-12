@@ -28,7 +28,7 @@
 #include "Pointer.h"
 
 #include <cmath>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KComboBox>
 
 #include <QList>
@@ -61,6 +61,11 @@ typedef std::vector<point_type> PositionVec;
 typedef boost::iterator_property_map < PositionVec::iterator,
         boost::property_map<Graph, boost::vertex_index_t>::type >
         PositionMap;
+
+// workaround for linking boost
+void boost::throw_exception(std::exception const & e)
+{
+}
 
 
 GenerateGraphWidget::GenerateGraphWidget(Document *document)

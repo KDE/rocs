@@ -27,6 +27,11 @@
 #include <QPainter>
 #include <QSvgRenderer>
 
+//TODO Workaround for boost linking
+void boost::throw_exception(std::exception const & e)
+{
+}
+
 class DataTypePrivate
 {
 public:

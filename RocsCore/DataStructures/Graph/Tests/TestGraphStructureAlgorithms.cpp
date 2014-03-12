@@ -23,7 +23,7 @@
 #include "Pointer.h"
 // #include "KrossBackend.h"
 #include "QtScriptBackend.h"
-#include <qtest_kde.h>
+#include <QtTest/QtTest>
 
 // #include <kross/core/action.h>
 // #include <kross/core/manager.h>
@@ -142,4 +142,4 @@ void TestGraphStructureAlgorithms::testDijkstraUnidirectional()
     }
 }
 
-QTEST_KDEMAIN_CORE(TestGraphStructureAlgorithms)
+QTEST_MAIN(TestGraphStructureAlgorithms)

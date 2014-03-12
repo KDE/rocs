@@ -21,7 +21,6 @@
 #ifndef DOCUMENTTYPESWIDGET_H
 #define DOCUMENTTYPESWIDGET_H
 
-#include <KButtonGroup>
 #include "CoreTypes.h"
 #include "ui_DocumentTypesWidget.h"
 

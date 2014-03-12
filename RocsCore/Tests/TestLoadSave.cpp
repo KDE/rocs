@@ -20,7 +20,7 @@
 #include "DataStructure.h"
 #include "Data.h"
 #include "Pointer.h"
-#include <qtest_kde.h>
+#include <QtTest/QtTest>
 #include <QTemporaryFile>
 
 #include <Document.h>
@@ -166,4 +166,4 @@ void TestLoadSave::loadMultipleLayerGraphTest()
     QVERIFY2(!document->activeDataStructure()->dataList(0).first()->property("target").toString().isEmpty(), "property must be present");
 }
 
-QTEST_KDEMAIN_CORE(TestLoadSave)
+QTEST_MAIN(TestLoadSave)

@@ -25,7 +25,7 @@
 #include <QIcon>
 #include <QDebug>
 #include <QAction>
-#include <KLocale>
+#include <KLocalizedString>
 
 TabWidget::TabWidget(TabWidget::Orientation o, QWidget *parent) : QWidget(parent)
 {

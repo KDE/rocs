@@ -33,7 +33,6 @@
 #include <QApplication>
 
 #include <KAboutData>
-#include <kgenericfactory.h>
 #include <KLocalizedString>
 
 #include <map>

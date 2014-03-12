@@ -16,22 +16,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-
 #include "RootedTreeStructure.h"
 #include "Data.h"
 #include "Pointer.h"
 #include "Document.h"
 #include "RootedTreeNode.h"
-
-
 #include <boost/shared_ptr.hpp>
-
 #include <QScriptEngine>
-
 #include <KMessageBox>
-#include "KDebug"
-
 
 QScriptValue rootedTreeNodeToScriptValue(QScriptEngine */*engine*/, RootedTreeNode* const &in)
 { return in->scriptValue(); }

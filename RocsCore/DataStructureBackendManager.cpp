@@ -23,8 +23,6 @@
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
 #include <QDebug>
-#include <KStandardDirs>
-#include <KDE4Support/kglobal.h> //FIXME remove
 
 #include <QHash>
 #include "DataStructure.h"

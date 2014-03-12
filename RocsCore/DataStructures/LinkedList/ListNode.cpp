@@ -19,7 +19,6 @@
 
 #include "ListNode.h"
 #include <Pointer.h>
-#include "KDebug"
 
 ListNode::ListNode(DataStructurePtr parent, int uniqueIdentifier, int dataType):
     Data(parent, uniqueIdentifier, dataType)

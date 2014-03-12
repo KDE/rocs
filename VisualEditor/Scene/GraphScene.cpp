@@ -157,7 +157,7 @@ QGraphicsItem * GraphScene::createEdge(PointerPtr e)
 
 void GraphScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)
 {
-    DataItem *nitem = qgraphicsitem_cast<DataItem*>(itemAt(wheelEvent->scenePos()));
+    DataItem *nitem = qgraphicsitem_cast<DataItem*>(itemAt(wheelEvent->scenePos(), QTransform()));
     if (!nitem) {
         wheelEvent->ignore();
         return;
@@ -185,7 +185,7 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (mouseEvent->button() == Qt::MidButton) {
-        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(itemAt(mouseEvent->scenePos()))) {
+        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(itemAt(mouseEvent->scenePos(), QTransform()))) {
             nItem->data()->setWidth(1);
         }
     }
@@ -195,7 +195,7 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 void GraphScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (mouseEvent->button() == Qt::LeftButton) {
-        QGraphicsItem *i = itemAt(mouseEvent->scenePos());
+        QGraphicsItem *i = itemAt(mouseEvent->scenePos(), QTransform());
         if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)) {
             QPointer<DataPropertiesWidget> dialog = new DataPropertiesWidget(nItem->data());
             dialog->setPosition(mouseEvent->screenPos());
@@ -346,7 +346,7 @@ QMenu * GraphScene::createContextMenu(const QPointF &scenePosition, const QPoint
     DataStructurePtr contextDataStructure;
     DataPtr contextData;
     PointerPtr contextPointer;
-    QGraphicsItem *item = itemAt(scenePosition);
+    QGraphicsItem *item = itemAt(scenePosition, QTransform());
     DataItem *dataItem;
     PointerItem *pointerItem;
     if ((dataItem = (qgraphicsitem_cast<DataItem*>(item)))) {

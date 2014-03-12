@@ -21,7 +21,7 @@
 #include "GraphStructure.h"
 #include "Pointer.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 DataPtr GraphNode::create(DataStructurePtr parent, int uniqueIdentifier, int dataType)
 {

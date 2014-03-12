@@ -60,7 +60,7 @@ void DotGraphParsingHelper::setObjectAttributes(QObject *graphElement, const Att
             label.replace("\\n", "\n");
             graphElement->setProperty("name", label);
         } else {
-            graphElement->setProperty(iter.key().toAscii(), iter.value());
+            graphElement->setProperty(iter.key().toUtf8(), iter.value());
         }
     }
 }

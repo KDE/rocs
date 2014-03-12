@@ -23,10 +23,9 @@
 #include <KTextEditor/Editor>
 #include <KTextEditor/Document>
 #include <KMessageBox>
-#include <KLocale>
+#include <KLocalizedString>
 #include <QVBoxLayout>
 #include "MainWindow.h"
-#include <KFileDialog>
 #include <QIcon>
 #include <QDebug>
 #include <QTabBar>
@@ -252,7 +251,7 @@ void CodeEditor::saveActiveScriptAs()
 
 QString CodeEditor::text() const
 {
-    return _activeDocument->text().toAscii();
+    return _activeDocument->text().toUtf8();
 }
 
 

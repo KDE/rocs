@@ -35,8 +35,8 @@
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KMenu>
 #include <QDebug>
+#include <QMenu>
 
 EditorToolbar::EditorToolbar(QWidget* parent)
     : QWidget(parent)

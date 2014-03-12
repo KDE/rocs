@@ -51,7 +51,6 @@ target_link_libraries(rocscore
     KF5::TextEditor
     KF5::Archive
     KF5::CoreAddons
-    KF5::KDE4Support
     KF5::Service
     KF5::I18n
     ${Qt5Gui_LIBRARIES}

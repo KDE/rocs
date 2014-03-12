@@ -20,7 +20,6 @@
 #include <QGridLayout>
 #include <settings.h>
 #include <QListView>
-#include <KIconButton>
 #include <kurlrequester.h>
 #include <QPushButton>
 #include <QIcon>

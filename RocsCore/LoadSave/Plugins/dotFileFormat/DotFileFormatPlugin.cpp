@@ -21,7 +21,7 @@
 #include "DotFileFormatPlugin.h"
 
 #include <KAboutData>
-#include <KGenericFactory>
+#include <KPluginFactory>
 #include <QFile>
 #include <QHash>
 
@@ -33,7 +33,8 @@
 #include "DotGraphParsingHelper.h"
 #include "DotGrammar.h"
 #include "CoreTypes.h"
-#include <Group.h>
+#include "Group.h"
+#include <KLocalizedString>
 
 //FIXME
 // static const KAboutData aboutdata("rocs_dotfileformat",
@@ -46,8 +47,6 @@
 extern DotParser::DotGraphParsingHelper* phelper;
 
 K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<DotFileFormatPlugin>();)
-K_EXPORT_PLUGIN(FilePluginFactory(aboutdata))
-
 
 DotFileFormatPlugin::~DotFileFormatPlugin()
 {

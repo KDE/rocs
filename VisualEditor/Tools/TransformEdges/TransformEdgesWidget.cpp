@@ -20,8 +20,7 @@
 #include "ui_TransformEdgesWidget.h"
 
 #include <limits.h>
-#include <KLocale>
-#include <KDialog>
+#include <KLocalizedString>
 #include <KComboBox>
 
 #include <QDesktopWidget>

@@ -23,7 +23,7 @@
 #include "Document.h"
 #include "DocumentManager.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QDebug>
 #include <QAction>
 #include <QScriptEngineDebugger>

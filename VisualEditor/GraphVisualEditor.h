@@ -25,7 +25,6 @@
 #include <QWidget>
 #include <QSlider>
 #include <QString>
-#include <kaction.h>
 #include <boost/scoped_ptr.hpp>
 
 class GraphVisualEditorPrivate;

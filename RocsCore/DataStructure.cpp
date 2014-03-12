@@ -484,12 +484,12 @@ void DataStructure::addDynamicProperty(const QString& property, const QVariant& 
         qWarning() << "Property identifier \"" << property << "\" is not valid: aborting";
         return;
     }
-    setProperty(property.toAscii(), value);
+    setProperty(property.toUtf8(), value);
 }
 
 void DataStructure::removeDynamicProperty(const QString& property)
 {
-    setProperty(property.toAscii(), QVariant::Invalid);
+    setProperty(property.toUtf8(), QVariant::Invalid);
 }
 
 void DataStructure::renameDynamicProperty(const QString& oldName, const QString& newName)

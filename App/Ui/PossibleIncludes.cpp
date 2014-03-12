@@ -21,7 +21,7 @@
 #include <settings.h>
 
 #include <QListWidget>
-#include <KLocale>
+#include <KLocalizedString>
 #include <QStandardPaths>
 #include <QDebug>
 #include <QDir>

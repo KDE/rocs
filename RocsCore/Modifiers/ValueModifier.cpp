@@ -70,7 +70,7 @@ void ValueModifier::enumerateAlpha(const QList< T >& list, const QString &proper
         for (int i = identifier.length()-1; i >= 0; --i) {
             // ensure that we only have letters
             if (identifier.at(i) != 'Z') {
-                identifier.replace(i, 1, QChar(identifier.at(i).toAscii() + 1));
+                identifier.replace(i, 1, QChar(identifier.at(i).toLatin1() + 1));
                 break; // we are done, do not loop further
             } else {
                 identifier.replace(i, 1, 'a');

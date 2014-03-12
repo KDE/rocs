@@ -21,13 +21,14 @@
 #include "TgfFileFormatPlugin.h"
 #include "Document.h"
 #include <KAboutData>
-#include <KGenericFactory>
 #include <QFile>
 #include <DataStructure.h>
 #include <Data.h>
 #include <Pointer.h>
 #include <Modifiers/Topology.h>
 #include <DataStructureBackendManager.h>
+#include <KLocalizedString>
+#include <KPluginFactory>
 
 //FIXME
 // static const KAboutData aboutdata("rocs_tgffileformat",

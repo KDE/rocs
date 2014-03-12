@@ -21,7 +21,7 @@
 #include "Data.h"
 #include "Pointer.h"
 #include "DocumentManager.h"
-#include <qtest_kde.h>
+#include <QtTest/QtTest>
 #include "../TgfFileFormatPlugin.h"
 
 

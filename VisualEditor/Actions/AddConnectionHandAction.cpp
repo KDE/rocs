@@ -27,7 +27,7 @@
 #include "Pointer.h"
 #include <PointerType.h>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QDebug>
 #include <DocumentManager.h>
 #include <Document.h>
@@ -76,7 +76,7 @@ bool AddConnectionHandAction::executePress(QPointF pos)
         return false;
     }
 
-    if ((_from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)))) {
+    if ((_from = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos, QTransform())))) {
         _working = true;
         _startPos = QPointF(_from->data()->x(), _from->data()->y());
         //FIXME workaround for rooted tree creation
@@ -120,7 +120,7 @@ bool AddConnectionHandAction::executeRelease(QPointF pos)
         pointerTypeIdentifier = _pointerType->identifier();
     }
 
-    if ((_to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos)))) {
+    if ((_to = qgraphicsitem_cast<DataItem*>(_graphScene->itemAt(pos, QTransform())))) {
         //FIXME workaround for rooted tree creation
         _to->data()->setProperty("ClickPosition", _to->mapFromScene(pos));
         activeDataStructure->createPointer(_from->data(),  _to->data(), pointerTypeIdentifier);

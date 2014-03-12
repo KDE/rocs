@@ -23,7 +23,7 @@
 #include "Scene/DataItem.h"
 #include "DataStructure.h"
 #include "Data.h"
-#include <KLocale>
+#include <KLocalizedString>
 #include "Document.h"
 #include <QDebug>
 #include <DocumentManager.h>

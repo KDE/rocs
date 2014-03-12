@@ -27,7 +27,7 @@
 #include "DataStructureBackendInterface.h"
 
 #include <QDebug>
-#include <KLocale>
+#include <KLocalizedString>
 #include <QWaitCondition>
 #include <QAction>
 #include <QSvgRenderer>

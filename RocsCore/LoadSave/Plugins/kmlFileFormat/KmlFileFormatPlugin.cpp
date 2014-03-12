@@ -28,7 +28,8 @@
 
 #include <QDebug>
 #include <KAboutData>
-#include <KGenericFactory>
+#include <KPluginFactory>
+#include <KLocalizedString>
 
 #include <QFile>
 

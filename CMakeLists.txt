@@ -51,7 +51,6 @@ find_package(KF5 CONFIG REQUIRED COMPONENTS
   CoreAddons
   DocTools
   I18n
-  KDE4Support
   TextEditor
   XmlGui
   NewStuff
