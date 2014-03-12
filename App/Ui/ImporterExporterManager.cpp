@@ -29,7 +29,7 @@
 #include "Document.h"
 #include <settings.h>
 #include <KUrl>
-#include <KDialog>
+#include <QDialog>
 
 #include <QFile>
 #include <QPointer>
@@ -52,7 +52,7 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     QPointer<KFileDialog> exportDialog = new KFileDialog(QString(), ext, qobject_cast< QWidget* >(parent()));
     exportDialog->okButton()->setText(i18nc("@action:button", "Export"));
     exportDialog->okButton()->setToolTip(i18nc("@info:tooltip", "Export graphs to file"));
-    if (exportDialog->exec() != KDialog::Accepted) {
+    if (exportDialog->exec() != QDialog::Accepted) {
         return false;
     }
 
