@@ -21,12 +21,11 @@
 
 #include "ui_GenerateGraphWidget.h"
 #include <QWidget>
-#include <KDialog>
+#include <QDialog>
 
 class Document;
 
-class GenerateGraphWidget
-:   public KDialog
+class GenerateGraphWidget : public QDialog
 {
     Q_OBJECT
 

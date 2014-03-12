@@ -29,13 +29,13 @@
 
 #include <cmath>
 #include <KLocale>
-#include <KDialog>
 #include <KComboBox>
-#include <QDebug>
 
-#include <QtCore/QList>
-#include <QtCore/QMap>
-#include <QtCore/QPair>
+#include <QList>
+#include <QMap>
+#include <QPair>
+#include <QDebug>
+#include <QButtonGroup>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/iteration_macros.hpp>
@@ -64,7 +64,7 @@ typedef boost::iterator_property_map < PositionVec::iterator,
 
 
 GenerateGraphWidget::GenerateGraphWidget(Document *document)
-:   KDialog()
+    : QDialog()
 {
     // setup default identifiers for the created graphs
     defaultIdentifiers.insert(MeshGraph, "MeshGraph");
@@ -73,21 +73,20 @@ GenerateGraphWidget::GenerateGraphWidget(Document *document)
     defaultIdentifiers.insert(ErdosRenyiRandomGraph, "RandomGraph");
     defaultIdentifiers.insert(RandomTree, "RandomTree");
     defaultIdentifiers.insert(MeshGraph, "MeshGraph");
-
     graphGenerator_ = MeshGraph;
+
+    setWindowTitle(i18nc("@title:window", "Generate Graph"));
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    setLayout(mainLayout);
 
     QWidget *widget = new QWidget(this);
     ui = new Ui::GenerateGraphWidget;
     ui->setupUi(widget);
-    setMainWidget(widget);
+    mainLayout->addWidget(widget);
 
-    // other KDialog options
-    setCaption(i18nc("@title:window", "Generate Graph"));
-    setButtons(KDialog::Cancel | KDialog::Ok);
     ui->buttonShowAdvanced->setIcon(QIcon::fromTheme("rocsadvancedsetup"));
-    KDialog::centerOnScreen(widget, -3);
 
-    connect(this, SIGNAL(okClicked()), this, SLOT(generateGraph()));
+    connect(this, SIGNAL(accepted()), this, SLOT(generateGraph()));
     connect(ui->comboGraphGenerator, SIGNAL(currentIndexChanged(int)), this, SLOT(setGraphGenerator(int)));
     connect(ui->dataTypeSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(setDataType(int)));
     connect(ui->pointerTypeSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(setPointerType(int)));
