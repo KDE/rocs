@@ -18,25 +18,37 @@
 
 
 #include "PossibleIncludes.h"
-#include <QGridLayout>
-#include <QListWidget>
-#include <KGlobal>
 #include <settings.h>
+
+#include <QListWidget>
+#include <KLocale>
 #include <QStandardPaths>
 #include <QDebug>
-#include <KDialog>
 #include <QDir>
-#include <KLocale>
+#include <KGuiItem>
+#include <KStandardGuiItem>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QPushButton>
 
 PossibleIncludes::PossibleIncludes(QWidget* parent, Qt::WindowFlags f):
-    KDialog(parent, f)
+    QDialog(parent, f)
 {
+    setWindowTitle(i18nc("@title:window", "Possible Includes for Script Engine"));
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    setLayout(mainLayout);
+
     m_list = new QListWidget(this);
     updateIncludeList();
-    setMainWidget(m_list);
-    resize(450, 200);
-    setCaption(i18n("Possible Includes for Script Engine"));
-    setButtons(Close);
+    mainLayout->addWidget(m_list);
+
+    QDialogButtonBox *buttons = new QDialogButtonBox(this);
+    QPushButton *closeButton = new QPushButton;
+    KGuiItem::assign(closeButton, KStandardGuiItem::close());
+    closeButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    buttons->addButton(closeButton, QDialogButtonBox::RejectRole);
+    mainLayout->addWidget(buttons);
+    connect(closeButton, SIGNAL(clicked()), this, SLOT(reject()));
 }
 
 
@@ -48,7 +60,7 @@ void PossibleIncludes::updateIncludeList()
     list.removeDuplicates();
     foreach(const QString & str, list) {
         QDir dir(str);
-        foreach(const QString & file, dir.entryList(QStringList() << "*.js")) {
+        foreach(const QString &file, dir.entryList(QStringList() << "*.js")) {
             m_list->addItem(dir.absoluteFilePath(file));
         }
     }
