@@ -21,20 +21,17 @@
 
 #include "ui_TransformEdgesWidget.h"
 #include <QWidget>
-#include <KDialog>
+#include <QDialog>
 
 #include "CoreTypes.h"
-
 
 class QGridLayout;
 class Document;
 class DataStructure;
 
-class TransformEdgesWidget
-    : public KDialog
+class TransformEdgesWidget : public QDialog
 {
     Q_OBJECT
-
 
 public:
     explicit TransformEdgesWidget(Document* graphDoc, QWidget *parent = 0);

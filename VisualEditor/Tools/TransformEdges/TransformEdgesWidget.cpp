@@ -45,24 +45,22 @@
 
 using namespace Rocs;
 
-class QPushButton;
 
 TransformEdgesWidget::TransformEdgesWidget(Document* graphDoc, QWidget* parent)
-    : KDialog(parent)
+    : QDialog(parent)
 {
     graphDoc_ = graphDoc;
+
+    setWindowTitle(i18nc("@title:window", "Transform Edges"));
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    setLayout(mainLayout);
 
     QWidget *widget = new QWidget(this);
     ui = new Ui::TransformEdgesWidget;
     ui->setupUi(widget);
-    setMainWidget(widget);
+    mainLayout->addWidget(widget);
 
-    // other KDialog options
-    setCaption(i18nc("@title:window", "Transform Edges"));
-    setButtons(KDialog::Cancel | KDialog::Ok);
-    KDialog::centerOnScreen(widget, -3);
-
-    connect(this, SIGNAL(okClicked()), this, SLOT(executeTransform()));
+    connect(this, SIGNAL(apply()), this, SLOT(executeTransform()));
 }
 
 
