@@ -923,7 +923,6 @@ void MainWindow::showCodeEditorConfig()
 {
     KTextEditor::Editor *editor = _codeEditor->editor();
     editor->configDialog(this);
-    editor->writeConfig();
 }
 
 void MainWindow::runToolPlugin()
