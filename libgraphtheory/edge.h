@@ -34,7 +34,7 @@ class EdgePrivate;
 typedef QSharedPointer<Edge> EdgePtr;
 
 /**
- * \class Data
+ * \class Edge
  */
 class GRAPHTHEORY_EXPORT Edge : public QObject
 {
