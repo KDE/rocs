@@ -34,7 +34,7 @@ class NodePrivate;
 typedef QSharedPointer<Node> NodePtr;
 
 /**
- * \class Data
+ * \class Node
  */
 class GRAPHTHEORY_EXPORT Node : public QObject
 {
