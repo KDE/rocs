@@ -23,6 +23,7 @@
 
 set(graphtheory_SRCS
     edge.cpp
+    graphdocument.cpp
     node.cpp
 )
 
@@ -34,6 +35,7 @@ target_link_libraries(rocsgraphtheory
 
 set(rocscore_LIB_HDRS
     edge.h
+    graphdocument.h
     node.h
 )
 
