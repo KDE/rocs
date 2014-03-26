@@ -22,6 +22,7 @@
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 set(graphtheory_SRCS
+    edge.cpp
     node.cpp
 )
 
@@ -32,6 +33,7 @@ target_link_libraries(rocsgraphtheory
 )
 
 set(rocscore_LIB_HDRS
+    edge.h
     node.h
 )
 
