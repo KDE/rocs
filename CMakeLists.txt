@@ -113,6 +113,7 @@ add_feature_info(ExperimentalPlugins
 ecm_optional_add_subdirectory(RocsCore)
 ecm_optional_add_subdirectory(VisualEditor)
 ecm_optional_add_subdirectory(App)
+ecm_optional_add_subdirectory(libgraphtheory)
 
 # feature log
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
