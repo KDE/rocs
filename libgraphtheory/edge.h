@@ -22,6 +22,7 @@
 #define EDGE_H
 
 #include "libgraphtheoryexport.h"
+#include "node.h"
 
 #include <QObject>
 #include <QSharedPointer>
@@ -42,14 +43,27 @@ class GRAPHTHEORY_EXPORT Edge : public QObject
 
 public:
     /**
-     * Creates a new Edge.
+     * Creates a new Edge from @p from to @p to. The order of @p from and @p to will be preserved
+     * even when the edge is bidirectional, to allow unique access to the corresponding nodes.
      *
+     * @param from  the Node this edge points from
+     * @param to    the Node this edge points to
      * @return a Edge object
      */
-    static EdgePtr create();
+    static EdgePtr create(NodePtr from, NodePtr to);
 
     /** Destroys the edge */
     virtual ~Edge();
+
+    /**
+     * @return the Node the edge points from
+     */
+    NodePtr from() const;
+
+    /**
+     * @return the Node the edge points to
+     */
+    NodePtr to() const;
 
 protected:
     Edge();

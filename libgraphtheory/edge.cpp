@@ -33,6 +33,8 @@ public:
     }
 
     EdgePtr q;
+    NodePtr m_from;
+    NodePtr m_to;
 };
 
 Edge::Edge()
@@ -45,11 +47,26 @@ Edge::~Edge()
 {
 }
 
-EdgePtr Edge::create()
+EdgePtr Edge::create(NodePtr from, NodePtr to)
 {
+    Q_ASSERT(from);
+    Q_ASSERT(to);
+    Q_ASSERT(from->document() == to->document());
     EdgePtr pi(new Edge);
     pi->setQpointer(pi);
+    pi->d->m_from = from;
+    pi->d->m_to = to;
     return pi;
+}
+
+NodePtr Edge::from() const
+{
+    return d->m_from;
+}
+
+NodePtr Edge::to() const
+{
+    return d->m_to;
 }
 
 void Edge::setQpointer(EdgePtr q)
