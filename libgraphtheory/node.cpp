@@ -46,8 +46,14 @@ Node::~Node()
 {
 }
 
+NodePtr Node::create()
+{
+    NodePtr pi(new Node);
+    pi->setQpointer(pi);
+    return pi;
+}
+
 void Node::setQpointer(NodePtr q)
 {
     d->q = q;
 }
-

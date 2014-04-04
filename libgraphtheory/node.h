@@ -41,17 +41,18 @@ class GRAPHTHEORY_EXPORT Node : public QObject
     Q_OBJECT
 
 public:
+    /**
+     * Creates a new Node.
+     *
+     * @return a Node object
+     */
+    static NodePtr create();
+
+    /** Destroys the node */
+    virtual ~Node();
 
 protected:
     Node();
-    ~Node();
-
-    template<typename T>
-    static NodePtr create() {
-        NodePtr pi(new T());
-        pi->setQpointer(pi);
-        return pi;
-    }
 
 private:
     Q_DISABLE_COPY(Node)
