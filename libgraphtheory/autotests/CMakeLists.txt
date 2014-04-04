@@ -42,5 +42,5 @@ macro(GRAPHTHEORY_UNIT_TESTS)
 endmacro()
 
 graphtheory_unit_tests(
-#    graphtheorybasic
+   basic
 )
