@@ -22,13 +22,13 @@
 #define NODE_H
 
 #include "libgraphtheoryexport.h"
+#include "graphdocument.h"
 
 #include <QObject>
 #include <QSharedPointer>
 
 namespace GraphTheory
 {
-
 class Node;
 class NodePrivate;
 typedef QSharedPointer<Node> NodePtr;
@@ -44,12 +44,18 @@ public:
     /**
      * Creates a new Node.
      *
+     * @param document  the GraphDocument containing this node
      * @return a Node object
      */
-    static NodePtr create();
+    static NodePtr create(GraphDocumentPtr document);
 
     /** Destroys the node */
     virtual ~Node();
+
+    /**
+     * @return the GraphDocument that contains this node
+     */
+    GraphDocumentPtr document() const;
 
 protected:
     Node();

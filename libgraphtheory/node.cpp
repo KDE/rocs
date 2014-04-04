@@ -19,6 +19,7 @@
  */
 
 #include "node.h"
+#include "graphdocument.h"
 
 using namespace GraphTheory;
 
@@ -33,6 +34,7 @@ public:
     }
 
     NodePtr q;
+    GraphDocumentPtr m_document;
 };
 
 Node::Node()
@@ -45,11 +47,17 @@ Node::~Node()
 {
 }
 
-NodePtr Node::create()
+NodePtr Node::create(GraphDocumentPtr document)
 {
     NodePtr pi(new Node);
     pi->setQpointer(pi);
+    pi->d->m_document = document;
     return pi;
+}
+
+GraphDocumentPtr Node::document() const
+{
+    return d->m_document;
 }
 
 void Node::setQpointer(NodePtr q)
