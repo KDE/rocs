@@ -35,7 +35,6 @@ public:
     EdgePtr q;
 };
 
-
 Edge::Edge()
     : QObject()
     , d(new EdgePrivate)
@@ -52,7 +51,6 @@ EdgePtr Edge::create()
     pi->setQpointer(pi);
     return pi;
 }
-
 
 void Edge::setQpointer(EdgePtr q)
 {

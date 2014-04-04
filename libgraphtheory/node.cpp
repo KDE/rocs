@@ -35,7 +35,6 @@ public:
     NodePtr q;
 };
 
-
 Node::Node()
     : QObject()
     , d(new NodePrivate)

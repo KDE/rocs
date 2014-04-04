@@ -35,7 +35,6 @@ public:
     GraphDocumentPtr q;
 };
 
-
 GraphDocument::GraphDocument()
     : QObject()
     , d(new GraphDocumentPrivate)
