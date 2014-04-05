@@ -60,6 +60,15 @@ public:
     NodeList nodes(NodeTypePtr type = NodeTypePtr()) const;
 
     /**
+     * Add @p node to this document. The node must be correctly setup before, i.e.,
+     * its type and document values have to be set. When inserting a node already in the list,
+     * insert does nothing.
+     *
+     * @param node  the node to be added to the document
+     */
+    void insert(NodePtr node);
+
+    /**
      * List of registered edge types. The list is never empty and the first element is the
      * default EdgeType.
      *

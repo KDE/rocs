@@ -75,6 +75,18 @@ QList< NodePtr > GraphDocument::nodes(NodeTypePtr type) const
     return nodes;
 }
 
+void GraphDocument::insert(NodePtr node)
+{
+    Q_ASSERT(node);
+    Q_ASSERT(node->document() == d->q);
+
+    if (!node || d->m_nodes.contains(node)) {
+        return;
+    }
+
+    d->m_nodes.append(node);
+}
+
 QList< EdgeTypePtr > GraphDocument::edgeTypes() const
 {
     Q_ASSERT(d->m_edgeTypes.length() > 0);

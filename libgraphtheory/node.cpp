@@ -55,6 +55,10 @@ NodePtr Node::create(GraphDocumentPtr document)
     pi->setQpointer(pi);
     pi->d->m_document = document;
     pi->d->m_type = document->nodeTypes().first();
+
+    // insert completely initialized node into document
+    document->insert(pi->d->q);
+
     return pi;
 }
 
