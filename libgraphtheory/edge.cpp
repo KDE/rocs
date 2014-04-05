@@ -35,6 +35,7 @@ public:
     EdgePtr q;
     NodePtr m_from;
     NodePtr m_to;
+    EdgeTypePtr m_type;
 };
 
 Edge::Edge()
@@ -56,6 +57,7 @@ EdgePtr Edge::create(NodePtr from, NodePtr to)
     pi->setQpointer(pi);
     pi->d->m_from = from;
     pi->d->m_to = to;
+    pi->d->m_type = from->document()->edgeTypes().first();
     return pi;
 }
 
@@ -68,6 +70,23 @@ NodePtr Edge::to() const
 {
     return d->m_to;
 }
+
+EdgeTypePtr Edge::type() const
+{
+    Q_ASSERT(d->m_type);
+    return d->m_type;
+}
+
+void Edge::setType(EdgeTypePtr type)
+{
+    Q_ASSERT(d->m_from->document()->edgeTypes().contains(type));
+    if (d->m_type == type) {
+        return;
+    }
+    d->m_type = type;
+    emit typeChanged(type);
+}
+
 
 void Edge::setQpointer(EdgePtr q)
 {

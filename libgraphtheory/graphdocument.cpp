@@ -19,6 +19,7 @@
  */
 
 #include "graphdocument.h"
+#include "edgetype.h"
 
 using namespace GraphTheory;
 
@@ -26,6 +27,8 @@ class GraphTheory::GraphDocumentPrivate {
 public:
     GraphDocumentPrivate()
     {
+        // create default edge type
+        m_edgeTypes.append(EdgeType::create());
     }
 
     ~GraphDocumentPrivate()
@@ -33,6 +36,7 @@ public:
     }
 
     GraphDocumentPtr q;
+    QList<EdgeTypePtr> m_edgeTypes;
 };
 
 GraphDocument::GraphDocument()
@@ -50,6 +54,12 @@ GraphDocumentPtr GraphDocument::create()
     GraphDocumentPtr pi(new GraphDocument);
     pi->setQpointer(pi);
     return pi;
+}
+
+QList< EdgeTypePtr > GraphDocument::edgeTypes() const
+{
+    Q_ASSERT(d->m_edgeTypes.length() > 0);
+    return d->m_edgeTypes;
 }
 
 void GraphDocument::setQpointer(GraphDocumentPtr q)

@@ -22,6 +22,7 @@
 #define GRAPHDOCUMENT_H
 
 #include "libgraphtheoryexport.h"
+#include "edgetype.h"
 
 #include <QObject>
 #include <QSharedPointer>
@@ -50,6 +51,14 @@ public:
 
     /** Destroys the document */
     virtual ~GraphDocument();
+
+    /**
+     * List of registered edge types. The list is never empty and the first element is the
+     * default EdgeType.
+     *
+     * @return the list of edge types
+     */
+    QList<EdgeTypePtr> edgeTypes() const;
 
 protected:
     GraphDocument();

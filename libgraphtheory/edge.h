@@ -22,6 +22,7 @@
 #define EDGE_H
 
 #include "libgraphtheoryexport.h"
+#include "edgetype.h"
 #include "node.h"
 
 #include <QObject>
@@ -64,6 +65,25 @@ public:
      * @return the Node the edge points to
      */
     NodePtr to() const;
+
+    /**
+     * Return the EdgeType of the edge. This value is always valid.
+     *
+     * @return the EdgeType of the edge
+     */
+    EdgeTypePtr type() const;
+
+    /**
+     * Set EdgeType for the edge. Setting this emits signal
+     * typeChanged(@p type). The @p type must be registered at the GraphDocument that contains the
+     * edge.
+     *
+     * @param type the type of the edge
+     */
+    void setType(EdgeTypePtr type);
+
+Q_SIGNALS:
+    void typeChanged(EdgeTypePtr type);
 
 protected:
     Edge();
