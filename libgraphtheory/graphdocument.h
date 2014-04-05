@@ -22,18 +22,19 @@
 #define GRAPHDOCUMENT_H
 
 #include "libgraphtheoryexport.h"
+#include "typenames.h"
+#include "node.h"
 #include "edgetype.h"
 #include "nodetype.h"
 
 #include <QObject>
 #include <QSharedPointer>
+#include <QList>
 
 namespace GraphTheory
 {
 
-class GraphDocument;
 class GraphDocumentPrivate;
-typedef QSharedPointer<GraphDocument> GraphDocumentPtr;
 
 /**
  * \class GraphDocument

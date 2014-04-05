@@ -22,6 +22,7 @@
 #define NODETYPE_H
 
 #include "libgraphtheoryexport.h"
+#include "typenames.h"
 
 #include <QObject>
 #include <QSharedPointer>
@@ -29,9 +30,7 @@
 namespace GraphTheory
 {
 
-class NodeType;
 class NodeTypePrivate;
-typedef QSharedPointer<NodeType> NodeTypePtr;
 
 /**
  * \class Node

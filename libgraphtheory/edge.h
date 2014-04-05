@@ -22,6 +22,7 @@
 #define EDGE_H
 
 #include "libgraphtheoryexport.h"
+#include "typenames.h"
 #include "edgetype.h"
 #include "node.h"
 
@@ -31,9 +32,7 @@
 namespace GraphTheory
 {
 
-class Edge;
 class EdgePrivate;
-typedef QSharedPointer<Edge> EdgePtr;
 
 /**
  * \class Edge
