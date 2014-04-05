@@ -58,6 +58,10 @@ EdgePtr Edge::create(NodePtr from, NodePtr to)
     pi->d->m_from = from;
     pi->d->m_to = to;
     pi->d->m_type = from->document()->edgeTypes().first();
+
+    // insert completely initialized edge into nodes' connections
+    to->insert(pi->d->q);
+    from->insert(pi->d->q);
     return pi;
 }
 

@@ -21,6 +21,7 @@
 #include "node.h"
 #include "graphdocument.h"
 #include "nodetype.h"
+#include "edge.h"
 
 using namespace GraphTheory;
 
@@ -37,6 +38,7 @@ public:
     NodePtr q;
     GraphDocumentPtr m_document;
     NodeTypePtr m_type;
+    EdgeList m_edges;
 };
 
 Node::Node()
@@ -81,6 +83,23 @@ void Node::setType(NodeTypePtr type)
     }
     d->m_type = type;
     emit typeChanged(type);
+}
+
+void Node::insert(EdgePtr edge)
+{
+    if (edge->from() != d->q && edge->to() != d->q) {
+        return;
+    }
+    if (d->m_edges.contains(edge)) {
+        return;
+    }
+    d->m_edges.append(edge);
+    emit edgeAdded(edge);
+}
+
+EdgeList Node::edges() const
+{
+    return d->m_edges;
 }
 
 void Node::setQpointer(NodePtr q)

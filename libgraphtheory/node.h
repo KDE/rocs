@@ -71,8 +71,22 @@ public:
      */
     void setType(NodeTypePtr type);
 
+    /**
+     * Add @p edge to this node. The edge must connect this node to another node (can be smame).
+     * When inserting the edge, the end points and the type of the edge must be set.
+     *
+     * @param edge  the edge to be added to the node
+     */
+    void insert(EdgePtr edge);
+
+    /**
+     * @return edges adjacent to this node
+     */
+    EdgeList edges() const;
+
 Q_SIGNALS:
     void typeChanged(NodeTypePtr type);
+    void edgeAdded(EdgePtr edge);
 
 protected:
     Node();

@@ -60,6 +60,11 @@ public:
     NodeList nodes(NodeTypePtr type = NodeTypePtr()) const;
 
     /**
+     * @return list of edge contained at the document
+     */
+    EdgeList edges(EdgeTypePtr type = EdgeTypePtr()) const;
+
+    /**
      * Add @p node to this document. The node must be correctly setup before, i.e.,
      * its type and document values have to be set. When inserting a node already in the list,
      * insert does nothing.

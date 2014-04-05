@@ -21,6 +21,7 @@
 #include "graphdocument.h"
 #include "edgetype.h"
 #include "nodetype.h"
+#include "edge.h"
 
 using namespace GraphTheory;
 
@@ -60,7 +61,7 @@ GraphDocumentPtr GraphDocument::create()
     return pi;
 }
 
-QList< NodePtr > GraphDocument::nodes(NodeTypePtr type) const
+NodeList GraphDocument::nodes(NodeTypePtr type) const
 {
     if (!type) {
         return d->m_nodes;
@@ -73,6 +74,25 @@ QList< NodePtr > GraphDocument::nodes(NodeTypePtr type) const
         }
     }
     return nodes;
+}
+
+EdgeList GraphDocument::edges(EdgeTypePtr type) const
+{
+    EdgeList edges;
+    foreach (NodePtr node, d->m_nodes) {
+        foreach (EdgePtr edge, node->edges()) {
+            if (edge->from() != node) { // count edges only once
+                continue;
+            }
+            if (!type) { // if no type is set, return all types
+                edges.append(edge);
+            }
+            else if (edge->type() == type) {
+                edges.append(edge);
+            }
+        }
+    }
+    return edges;
 }
 
 void GraphDocument::insert(NodePtr node)

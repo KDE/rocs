@@ -67,6 +67,34 @@ void BasicTest::testNodeTypeCreateDelete()
     QCOMPARE(node->type(), typeB);
     QVERIFY(document->nodes(typeA).length() == 0);
     QVERIFY(document->nodes(typeB).length() == 1);
+
+    //TODO test delete
+}
+
+void BasicTest::testEdgeTypeCreateDelete()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr from = Node::create(document);
+    NodePtr to = Node::create(document);
+    EdgePtr edge = Edge::create(from, to);
+
+    EdgeTypePtr typeA = document->edgeTypes().first();
+    EdgeTypePtr typeB = EdgeType::create();
+    document->insert(typeB);
+
+    // check that 2 created types + default type exist
+    QCOMPARE(document->edgeTypes().length(), 2);
+
+    // check changing of node type of a node
+    QCOMPARE(edge->type(), typeA);
+    QCOMPARE(document->edges(typeA).length(), 1);
+    QCOMPARE(document->edges(typeB).length(), 0);
+    edge->setType(typeB);
+    QCOMPARE(edge->type(), typeB);
+    QCOMPARE(document->edges(typeA).length(), 0);
+    QCOMPARE(document->edges(typeB).length(),  1);
+
+    //TODO test delete
 }
 
 QTEST_MAIN(BasicTest)

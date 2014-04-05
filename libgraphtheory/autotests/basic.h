@@ -41,6 +41,7 @@ private Q_SLOTS:
     void cleanupTestCase();
     void testDocumentCreation();
     void testNodeTypeCreateDelete();
+    void testEdgeTypeCreateDelete();
 };
 
 #endif
