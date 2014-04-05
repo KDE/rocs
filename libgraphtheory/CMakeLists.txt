@@ -26,6 +26,7 @@ set(graphtheory_SRCS
     edgetype.cpp
     graphdocument.cpp
     node.cpp
+    nodetype.cpp
 )
 
 add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )
