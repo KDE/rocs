@@ -23,6 +23,7 @@
 
 #include "libgraphtheoryexport.h"
 #include "edgetype.h"
+#include "nodetype.h"
 
 #include <QObject>
 #include <QSharedPointer>
@@ -59,6 +60,14 @@ public:
      * @return the list of edge types
      */
     QList<EdgeTypePtr> edgeTypes() const;
+
+    /**
+     * List of registered node types. The list is never empty and the first element is the
+     * default NodeType.
+     *
+     * @return the list of edge types
+     */
+    QList<NodeTypePtr> nodeTypes() const;
 
 protected:
     GraphDocument();

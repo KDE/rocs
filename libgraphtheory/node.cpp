@@ -20,6 +20,7 @@
 
 #include "node.h"
 #include "graphdocument.h"
+#include "nodetype.h"
 
 using namespace GraphTheory;
 
@@ -35,6 +36,7 @@ public:
 
     NodePtr q;
     GraphDocumentPtr m_document;
+    NodeTypePtr m_type;
 };
 
 Node::Node()
@@ -52,6 +54,7 @@ NodePtr Node::create(GraphDocumentPtr document)
     NodePtr pi(new Node);
     pi->setQpointer(pi);
     pi->d->m_document = document;
+    pi->d->m_type = document->nodeTypes().first();
     return pi;
 }
 
