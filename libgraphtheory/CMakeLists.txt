@@ -23,6 +23,7 @@
 
 set(graphtheory_SRCS
     edge.cpp
+    edgetype.cpp
     graphdocument.cpp
     node.cpp
 )
