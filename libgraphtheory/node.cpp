@@ -63,6 +63,12 @@ GraphDocumentPtr Node::document() const
     return d->m_document;
 }
 
+NodeTypePtr Node::type() const
+{
+    Q_ASSERT(d->m_type);
+    return d->m_type;
+}
+
 void Node::setQpointer(NodePtr q)
 {
     d->q = q;

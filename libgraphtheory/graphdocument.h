@@ -55,6 +55,11 @@ public:
     virtual ~GraphDocument();
 
     /**
+     * @return list of nodes contained at the document
+     */
+    NodeList nodes(NodeTypePtr type = NodeTypePtr()) const;
+
+    /**
      * List of registered edge types. The list is never empty and the first element is the
      * default EdgeType.
      *

@@ -55,6 +55,13 @@ public:
      */
     GraphDocumentPtr document() const;
 
+    /**
+     * Return the NodeType of the node. This value is always valid.
+     *
+     * @return the NodeType of the node
+     */
+    NodeTypePtr type() const;
+
 protected:
     Node();
 

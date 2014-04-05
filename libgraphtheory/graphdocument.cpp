@@ -40,6 +40,7 @@ public:
     GraphDocumentPtr q;
     QList<EdgeTypePtr> m_edgeTypes;
     QList<NodeTypePtr> m_nodeTypes;
+    NodeList m_nodes;
 };
 
 GraphDocument::GraphDocument()
@@ -57,6 +58,21 @@ GraphDocumentPtr GraphDocument::create()
     GraphDocumentPtr pi(new GraphDocument);
     pi->setQpointer(pi);
     return pi;
+}
+
+QList< NodePtr > GraphDocument::nodes(NodeTypePtr type) const
+{
+    if (!type) {
+        return d->m_nodes;
+    }
+
+    NodeList nodes;
+    foreach (NodePtr node, d->m_nodes) {
+        if (node->type() == type) {
+            nodes.append(node);
+        }
+    }
+    return nodes;
 }
 
 QList< EdgeTypePtr > GraphDocument::edgeTypes() const
