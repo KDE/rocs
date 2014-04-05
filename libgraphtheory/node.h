@@ -62,6 +62,18 @@ public:
      */
     NodeTypePtr type() const;
 
+    /**
+     * Set NodeType for the node. Setting this emits signal
+     * typeChanged(@p type). The @p type must be registered at the GraphDocument that contains the
+     * node.
+     *
+     * @param type the type of the node
+     */
+    void setType(NodeTypePtr type);
+
+Q_SIGNALS:
+    void typeChanged(NodeTypePtr type);
+
 protected:
     Node();
 

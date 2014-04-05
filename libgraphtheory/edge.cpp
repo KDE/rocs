@@ -87,7 +87,6 @@ void Edge::setType(EdgeTypePtr type)
     emit typeChanged(type);
 }
 
-
 void Edge::setQpointer(EdgePtr q)
 {
     d->q = q;

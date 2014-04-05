@@ -73,6 +73,16 @@ NodeTypePtr Node::type() const
     return d->m_type;
 }
 
+void Node::setType(NodeTypePtr type)
+{
+    Q_ASSERT(d->m_document->nodeTypes().contains(type));
+    if (d->m_type == type) {
+        return;
+    }
+    d->m_type = type;
+    emit typeChanged(type);
+}
+
 void Node::setQpointer(NodePtr q)
 {
     d->q = q;

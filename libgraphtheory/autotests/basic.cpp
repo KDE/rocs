@@ -20,6 +20,8 @@
 
 #include "basic.h"
 #include "libgraphtheory/graphdocument.h"
+#include "libgraphtheory/nodetype.h"
+#include "libgraphtheory/edgetype.h"
 #include "libgraphtheory/node.h"
 #include "libgraphtheory/edge.h"
 
@@ -41,6 +43,30 @@ void BasicTest::testDocumentCreation()
     NodePtr nodeA = Node::create(document);
     NodePtr nodeB = Node::create(document);
     EdgePtr edge = Edge::create(nodeA, nodeB);
+
+    QCOMPARE(document->nodes().length(), 2);
+}
+
+void BasicTest::testNodeTypeCreateDelete()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr node = Node::create(document);
+
+    NodeTypePtr typeA = document->nodeTypes().first();
+    NodeTypePtr typeB = NodeType::create();
+    document->insert(typeB);
+
+    // check that 2 created types + default type exist
+    QCOMPARE(document->nodeTypes().length(), 2);
+
+    // check changing of node type of a node
+    QCOMPARE(node->type(), typeA);
+    QVERIFY(document->nodes(typeA).length() == 1);
+    QVERIFY(document->nodes(typeB).length() == 0);
+    node->setType(typeB);
+    QCOMPARE(node->type(), typeB);
+    QVERIFY(document->nodes(typeA).length() == 0);
+    QVERIFY(document->nodes(typeB).length() == 1);
 }
 
 QTEST_MAIN(BasicTest)

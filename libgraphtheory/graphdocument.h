@@ -69,6 +69,20 @@ public:
     void insert(NodePtr node);
 
     /**
+     * Add the NodeType @p type to this document.
+     *
+     * @param type  the NodeType to be added to the document
+     */
+    void insert(NodeTypePtr type);
+
+    /**
+     * Add the EdgeType @p type to this document.
+     *
+     * @param type  the EdgeType to be added to the document
+     */
+    void insert(EdgeTypePtr type);
+
+    /**
      * List of registered edge types. The list is never empty and the first element is the
      * default EdgeType.
      *
