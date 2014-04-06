@@ -84,6 +84,7 @@ void BasicTest::testNodeCreateDelete()
     edge = Edge::create(nodeA, nodeB);
 
     nodeA->destroy();
+    QCOMPARE(document->nodes().length(), 1); // node should be unregistered before deleted
     nodeA.reset();
     edge.reset();
     QVERIFY(Node::objects() == 1);
@@ -109,6 +110,7 @@ void BasicTest::testEdgeCreateDelete()
     edge = Edge::create(nodeA, nodeB);
 
     edge->destroy();
+    QCOMPARE(document->edges().length(), 0); // edge should be unregistered before deleted
     edge.reset();
     QVERIFY(Edge::objects() == 0);
 
@@ -135,8 +137,11 @@ void BasicTest::testNodeTypeCreateDelete()
     QVERIFY(document->nodes(typeA).length() == 0);
     QVERIFY(document->nodes(typeB).length() == 1);
 
+    typeB->destroy();
+    QCOMPARE(document->nodeTypes().length(), 1);
+    typeB.reset();
+    QCOMPARE(document->nodes().length(), 0);
     document->destroy();
-    //TODO test type deletes
 }
 
 void BasicTest::testEdgeTypeCreateDelete()
@@ -161,9 +166,11 @@ void BasicTest::testEdgeTypeCreateDelete()
     QCOMPARE(document->edges(typeA).length(), 0);
     QCOMPARE(document->edges(typeB).length(),  1);
 
+    typeB->destroy();
+    QCOMPARE(document->edgeTypes().length(), 1);
+    typeB.reset();
+    QCOMPARE(document->edges().length(), 0);
     document->destroy();
-
-    //TODO test type deletes
 }
 
 QTEST_MAIN(BasicTest)

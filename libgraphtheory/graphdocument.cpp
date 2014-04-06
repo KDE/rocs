@@ -35,9 +35,6 @@ public:
     GraphDocumentPrivate()
         : m_valid(false)
     {
-        // create default type
-        EdgeType::create(q);
-        NodeType::create(q);
     }
 
     ~GraphDocumentPrivate()
@@ -58,6 +55,14 @@ void GraphDocument::destroy()
         node->destroy();
     }
     d->m_nodes.clear();
+    foreach (NodeTypePtr type, d->m_nodeTypes) {
+        type->destroy();
+    }
+    d->m_nodeTypes.clear();
+    foreach (EdgeTypePtr type, d->m_edgeTypes) {
+        type->destroy();
+    }
+    d->m_edgeTypes.clear();
 
     // reset last reference to this object
     d->q.reset();
@@ -80,6 +85,10 @@ GraphDocumentPtr GraphDocument::create()
 {
     GraphDocumentPtr pi(new GraphDocument);
     pi->setQpointer(pi);
+
+    // create default type
+    EdgeType::create(pi);
+    NodeType::create(pi);
     pi->d->m_valid = true;
     return pi;
 }
