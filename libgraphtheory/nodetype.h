@@ -41,14 +41,38 @@ class GRAPHTHEORY_EXPORT NodeType : public QObject
 
 public:
     /**
-     * Creates a new NodeType.
+     * Creates a new node type and registers it at @p document.
      *
+     * @param document  the GraphDocument containing this node type
      * @return a NodeType object
      */
-    static NodeTypePtr create();
+    static NodeTypePtr create(GraphDocumentPtr document);
 
     /** Destroys the edge type */
     virtual ~NodeType();
+
+    /**
+     * Destroys the node type object and removes it from the document.
+     */
+    void destroy();
+
+    /**
+     * The valid state returns @c true if the object is created and can be used, @c false if it is
+     * not yet created or about to be removed
+     *
+     * @return the validity state of the object
+     */
+    bool isValid() const;
+
+    /**
+     * Debug method that tracks how many node objects exist.
+     *
+     * @return number of node type objects
+     */
+    static uint objects()
+    {
+        return objectCounter;
+    }
 
 protected:
     NodeType();
@@ -56,6 +80,8 @@ protected:
 private:
     Q_DISABLE_COPY(NodeType)
     const QScopedPointer<NodeTypePrivate> d;
+    void setQpointer(NodeTypePtr q);
+    static uint objectCounter;
 };
 }
 

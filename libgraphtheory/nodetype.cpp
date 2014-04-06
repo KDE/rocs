@@ -19,32 +19,68 @@
  */
 
 #include "nodetype.h"
+#include "graphdocument.h"
 
 using namespace GraphTheory;
+
+// initialize number of node type objects
+uint NodeType::objectCounter = 0;
 
 class GraphTheory::NodeTypePrivate {
 public:
     NodeTypePrivate()
+        : m_valid(false)
     {
     }
 
     ~NodeTypePrivate()
     {
     }
+
+    NodeTypePtr q;
+    GraphDocumentPtr m_document;
+    bool m_valid;
 };
 
 NodeType::NodeType()
     : QObject()
     , d(new NodeTypePrivate)
 {
+    ++NodeType::objectCounter;
 }
 
 NodeType::~NodeType()
 {
+    --NodeType::objectCounter;
 }
 
-NodeTypePtr NodeType::create()
+NodeTypePtr NodeType::create(GraphDocumentPtr document)
 {
     NodeTypePtr pi(new NodeType);
+    pi->setQpointer(pi);
+    pi->d->m_document = document;
+    pi->d->m_valid = true;
+
+    // insert completely initialized node type into document
+    document->insert(pi->d->q);
     return pi;
+}
+
+void NodeType::destroy()
+{
+    d->m_valid = false;
+    d->m_document->remove(d->q);
+
+    // reset last reference to this object
+    d->q.reset();
+}
+
+bool NodeType::isValid() const
+{
+    return d->m_valid;
+}
+
+void NodeType::setQpointer(NodeTypePtr q)
+{
+    d->q = q;
 }

@@ -46,14 +46,28 @@ public:
     };
 
     /**
-     * Creates a new EdgeType.
+     * Creates a new edge type and registers it at @p document.
      *
+     * @param document  the GraphDocument containing this edge type
      * @return a EdgeType object
      */
-    static EdgeTypePtr create();
+    static EdgeTypePtr create(GraphDocumentPtr document);
 
     /** Destroys the edge type */
     virtual ~EdgeType();
+
+    /**
+     * Destroys the edge type object and removes it from the document.
+     */
+    void destroy();
+
+    /**
+     * The valid state returns @c true if the object is created and can be used, @c false if it is
+     * not yet created or about to be removed
+     *
+     * @return the validity state of the object
+     */
+    bool isValid() const;
 
     /**
      * @return direction of edges of this type
@@ -68,6 +82,16 @@ public:
      */
     void setDirection(EdgeType::Direction direction);
 
+    /**
+     * Debug method that tracks how many node objects exist.
+     *
+     * @return number of edge type objects
+     */
+    static uint objects()
+    {
+        return objectCounter;
+    }
+
 Q_SIGNALS:
     void directionChanged(EdgeType::Direction direction);
 
@@ -77,6 +101,8 @@ protected:
 private:
     Q_DISABLE_COPY(EdgeType)
     const QScopedPointer<EdgeTypePrivate> d;
+    void setQpointer(EdgeTypePtr q);
+    static uint objectCounter;
 };
 }
 

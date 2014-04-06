@@ -101,6 +101,22 @@ public:
     void remove(NodePtr node);
 
     /**
+     * Remove @p type and all associated nodes from this document. If the type is valid,
+     * NodeType::destroy() will be called.
+     *
+     * @param type  the node type to be removed from the document
+     */
+    void remove(NodeTypePtr type);
+
+    /**
+     * Remove @p type and all associated edge from this document. If the type is valid,
+     * EdgeType::destroy() will be called.
+     *
+     * @param type  the edge type to be removed from the document
+     */
+    void remove(EdgeTypePtr type);
+
+    /**
      * List of registered edge types. The list is never empty and the first element is the
      * default EdgeType.
      *

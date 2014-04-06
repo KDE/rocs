@@ -36,8 +36,8 @@ public:
         : m_valid(false)
     {
         // create default type
-        m_edgeTypes.append(EdgeType::create());
-        m_nodeTypes.append(NodeType::create());
+        EdgeType::create(q);
+        NodeType::create(q);
     }
 
     ~GraphDocumentPrivate()
@@ -154,6 +154,30 @@ void GraphDocument::remove(NodePtr node)
         node->destroy();
     }
     d->m_nodes.removeOne(node);
+}
+
+void GraphDocument::remove(NodeTypePtr type)
+{
+    foreach (NodePtr node, d->m_nodes) {
+        if (node->type() == type) {
+            node->destroy();
+        }
+    }
+    if (type->isValid()) {
+        type->destroy();
+    }
+    d->m_nodeTypes.removeOne(type);
+}
+
+void GraphDocument::remove(EdgeTypePtr type)
+{
+    foreach (EdgePtr edge, edges(type)) {
+        edge->destroy();
+    }
+    if (type->isValid()) {
+        type->destroy();
+    }
+    d->m_edgeTypes.removeOne(type);
 }
 
 QList< EdgeTypePtr > GraphDocument::edgeTypes() const

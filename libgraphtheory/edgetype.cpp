@@ -19,13 +19,18 @@
  */
 
 #include "edgetype.h"
+#include "graphdocument.h"
 
 using namespace GraphTheory;
+
+// initialize number of edge type objects
+uint EdgeType::objectCounter = 0;
 
 class GraphTheory::EdgeTypePrivate {
 public:
     EdgeTypePrivate()
         : m_direction(EdgeType::Unidirectional)
+        , m_valid(false)
     {
     }
 
@@ -33,23 +38,48 @@ public:
     {
     }
 
+    EdgeTypePtr q;
+    GraphDocumentPtr m_document;
     EdgeType::Direction m_direction;
+    bool m_valid;
 };
 
 EdgeType::EdgeType()
     : QObject()
     , d(new EdgeTypePrivate)
 {
+    ++EdgeType::objectCounter;
 }
 
 EdgeType::~EdgeType()
 {
+    --EdgeType::objectCounter;
 }
 
-EdgeTypePtr EdgeType::create()
+EdgeTypePtr EdgeType::create(GraphDocumentPtr document)
 {
     EdgeTypePtr pi(new EdgeType);
+    pi->setQpointer(pi);
+    pi->d->m_document = document;
+    pi->d->m_valid = true;
+
+    // insert completely initialized node type into document
+    document->insert(pi->d->q);
     return pi;
+}
+
+void EdgeType::destroy()
+{
+    d->m_valid = false;
+    d->m_document->remove(d->q);
+
+    // reset last reference to this object
+    d->q.reset();
+}
+
+bool EdgeType::isValid() const
+{
+    return d->m_valid;
 }
 
 EdgeType::Direction EdgeType::direction() const
@@ -64,4 +94,9 @@ void EdgeType::setDirection(EdgeType::Direction direction)
     }
     d->m_direction = direction;
     emit directionChanged(direction);
+}
+
+void EdgeType::setQpointer(EdgeTypePtr q)
+{
+    d->q = q;
 }

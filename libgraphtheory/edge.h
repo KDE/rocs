@@ -97,7 +97,7 @@ public:
     /**
      * Debug method that tracks how many node objects exist.
      *
-     * @return number of node objects
+     * @return number of edge objects
      */
     static uint objects()
     {

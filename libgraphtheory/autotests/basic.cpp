@@ -121,8 +121,7 @@ void BasicTest::testNodeTypeCreateDelete()
     NodePtr node = Node::create(document);
 
     NodeTypePtr typeA = document->nodeTypes().first();
-    NodeTypePtr typeB = NodeType::create();
-    document->insert(typeB);
+    NodeTypePtr typeB = NodeType::create(document);
 
     // check that 2 created types + default type exist
     QCOMPARE(document->nodeTypes().length(), 2);
@@ -148,8 +147,7 @@ void BasicTest::testEdgeTypeCreateDelete()
     EdgePtr edge = Edge::create(from, to);
 
     EdgeTypePtr typeA = document->edgeTypes().first();
-    EdgeTypePtr typeB = EdgeType::create();
-    document->insert(typeB);
+    EdgeTypePtr typeB = EdgeType::create(document);
 
     // check that 2 created types + default type exist
     QCOMPARE(document->edgeTypes().length(), 2);
