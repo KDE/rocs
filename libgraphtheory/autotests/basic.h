@@ -39,8 +39,9 @@ class BasicTest : public QObject
 private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
-    void testDocumentCreation();
-    void testNodeDelete();
+    void testDocumentCreateDelete();
+    void testNodeCreateDelete();
+    void testEdgeCreateDelete();
     void testNodeTypeCreateDelete();
     void testEdgeTypeCreateDelete();
 };

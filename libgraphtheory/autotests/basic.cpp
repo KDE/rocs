@@ -29,35 +29,90 @@
 
 void BasicTest::initTestCase()
 {
+    QVERIFY(GraphDocument::objects() == 0);
     QVERIFY(Node::objects() == 0);
     QVERIFY(Edge::objects() == 0);
 }
 
 void BasicTest::cleanupTestCase()
 {
+    QVERIFY(GraphDocument::objects() == 0);
     QVERIFY(Node::objects() == 0);
     QVERIFY(Edge::objects() == 0);
 }
 
-void BasicTest::testDocumentCreation()
+void BasicTest::testDocumentCreateDelete()
 {
-    GraphDocumentPtr document = GraphDocument::create();
-    NodePtr nodeA = Node::create(document);
-    NodePtr nodeB = Node::create(document);
-    EdgePtr edge = Edge::create(nodeA, nodeB);
+    GraphDocumentPtr document;
+    NodePtr nodeA, nodeB;
+    EdgePtr edge;
 
-    QCOMPARE(document->nodes().length(), 2);
+    QVERIFY(GraphDocument::objects() == 0);
+    QVERIFY(Node::objects() == 0);
+    QVERIFY(Edge::objects() == 0);
 
-    edge->destroy();
-    nodeA->destroy();
-    nodeB->destroy();
+    // test destroy graph document
+    document = GraphDocument::create();
+    nodeA = Node::create(document);
+    nodeB = Node::create(document);
+    edge = Edge::create(nodeA, nodeB);
+
+    document->destroy();
+    document.reset();
+    nodeA.reset();
+    nodeB.reset();
+    edge.reset();
+    QVERIFY(GraphDocument::objects() == 0);
+    QVERIFY(Node::objects() == 0);
+    QVERIFY(Edge::objects() == 0);
 }
 
-void BasicTest::testNodeDelete()
+void BasicTest::testNodeCreateDelete()
 {
-    GraphDocumentPtr document = GraphDocument::create();
-    NodePtr nodeA = Node::create(document);
+    GraphDocumentPtr document;
+    NodePtr nodeA, nodeB;
+    EdgePtr edge;
+
+    QVERIFY(GraphDocument::objects() == 0);
+    QVERIFY(Node::objects() == 0);
+    QVERIFY(Edge::objects() == 0);
+
+    // test destroy graph document
+    document = GraphDocument::create();
+    nodeA = Node::create(document);
+    nodeB = Node::create(document);
+    edge = Edge::create(nodeA, nodeB);
+
     nodeA->destroy();
+    nodeA.reset();
+    edge.reset();
+    QVERIFY(Node::objects() == 1);
+    QVERIFY(Edge::objects() == 0);
+
+    document->destroy();
+}
+
+void BasicTest::testEdgeCreateDelete()
+{
+    GraphDocumentPtr document;
+    NodePtr nodeA, nodeB;
+    EdgePtr edge;
+
+    QVERIFY(GraphDocument::objects() == 0);
+    QVERIFY(Node::objects() == 0);
+    QVERIFY(Edge::objects() == 0);
+
+    // test destroy graph document
+    document = GraphDocument::create();
+    nodeA = Node::create(document);
+    nodeB = Node::create(document);
+    edge = Edge::create(nodeA, nodeB);
+
+    edge->destroy();
+    edge.reset();
+    QVERIFY(Edge::objects() == 0);
+
+    document->destroy();
 }
 
 void BasicTest::testNodeTypeCreateDelete()
@@ -81,7 +136,7 @@ void BasicTest::testNodeTypeCreateDelete()
     QVERIFY(document->nodes(typeA).length() == 0);
     QVERIFY(document->nodes(typeB).length() == 1);
 
-    node->destroy();
+    document->destroy();
     //TODO test type deletes
 }
 
@@ -108,9 +163,7 @@ void BasicTest::testEdgeTypeCreateDelete()
     QCOMPARE(document->edges(typeA).length(), 0);
     QCOMPARE(document->edges(typeB).length(),  1);
 
-    edge->destroy();
-    from->destroy();
-    to->destroy();
+    document->destroy();
 
     //TODO test type deletes
 }

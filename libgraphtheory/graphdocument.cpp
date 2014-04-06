@@ -23,6 +23,8 @@
 #include "nodetype.h"
 #include "edge.h"
 
+#include <QDebug>
+
 using namespace GraphTheory;
 
 // initialize number of edge objects
@@ -70,6 +72,7 @@ GraphDocument::GraphDocument()
 
 GraphDocument::~GraphDocument()
 {
+
     --GraphDocument::objectCounter;
 }
 

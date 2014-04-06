@@ -23,7 +23,7 @@
 #include "nodetype.h"
 #include "edge.h"
 
-#include "QDebug"
+#include <QDebug>
 
 using namespace GraphTheory;
 
