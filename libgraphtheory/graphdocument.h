@@ -88,6 +88,14 @@ public:
     void insert(EdgeTypePtr type);
 
     /**
+     * Remove @p node from this document. If the node is valid, Node::destroy() will be called,
+     * otherwise it will only be removed.
+     *
+     * @param node  the node to be removed from the document
+     */
+    void remove(NodePtr node);
+
+    /**
      * List of registered edge types. The list is never empty and the first element is the
      * default EdgeType.
      *

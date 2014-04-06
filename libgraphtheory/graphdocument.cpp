@@ -125,6 +125,14 @@ void GraphDocument::insert(EdgeTypePtr type)
     d->m_edgeTypes.append(type);
 }
 
+void GraphDocument::remove(NodePtr node)
+{
+    if (node->isValid()) {
+        node->destroy();
+    }
+    d->m_nodes.removeOne(node);
+}
+
 QList< EdgeTypePtr > GraphDocument::edgeTypes() const
 {
     Q_ASSERT(d->m_edgeTypes.length() > 0);

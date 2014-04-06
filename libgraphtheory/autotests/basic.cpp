@@ -47,6 +47,13 @@ void BasicTest::testDocumentCreation()
     QCOMPARE(document->nodes().length(), 2);
 }
 
+void BasicTest::testNodeDelete()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr nodeA = Node::create(document);
+    nodeA->destroy();
+}
+
 void BasicTest::testNodeTypeCreateDelete()
 {
     GraphDocumentPtr document = GraphDocument::create();

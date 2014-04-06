@@ -25,6 +25,7 @@ using namespace GraphTheory;
 class GraphTheory::EdgePrivate {
 public:
     EdgePrivate()
+        : m_valid(false)
     {
     }
 
@@ -36,6 +37,7 @@ public:
     NodePtr m_from;
     NodePtr m_to;
     EdgeTypePtr m_type;
+    bool m_valid;
 };
 
 Edge::Edge()
@@ -63,6 +65,21 @@ EdgePtr Edge::create(NodePtr from, NodePtr to)
     to->insert(pi->d->q);
     from->insert(pi->d->q);
     return pi;
+}
+
+void Edge::destroy()
+{
+    d->m_valid = false;
+    d->m_from->remove(d->q);
+    d->m_to->remove(d->q);
+
+    // reset last reference to this object
+    d->q.reset();
+}
+
+bool Edge::isValid() const
+{
+    return d->m_valid;
 }
 
 NodePtr Edge::from() const

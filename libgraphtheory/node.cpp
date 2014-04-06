@@ -23,11 +23,14 @@
 #include "nodetype.h"
 #include "edge.h"
 
+#include "QDebug"
+
 using namespace GraphTheory;
 
 class GraphTheory::NodePrivate {
 public:
     NodePrivate()
+        : m_valid(false)
     {
     }
 
@@ -39,6 +42,7 @@ public:
     GraphDocumentPtr m_document;
     NodeTypePtr m_type;
     EdgeList m_edges;
+    bool m_valid;
 };
 
 Node::Node()
@@ -57,11 +61,29 @@ NodePtr Node::create(GraphDocumentPtr document)
     pi->setQpointer(pi);
     pi->d->m_document = document;
     pi->d->m_type = document->nodeTypes().first();
+    pi->d->m_valid = true;
 
     // insert completely initialized node into document
     document->insert(pi->d->q);
 
     return pi;
+}
+
+void Node::destroy()
+{
+    d->m_valid = false;
+    foreach (EdgePtr edge, d->m_edges) {
+        edge->destroy();
+    }
+    d->m_document->remove(d->q);
+
+    // reset last reference to this object
+    d->q.reset();
+}
+
+bool Node::isValid() const
+{
+    return d->m_valid;
 }
 
 GraphDocumentPtr Node::document() const
@@ -95,6 +117,14 @@ void Node::insert(EdgePtr edge)
     }
     d->m_edges.append(edge);
     emit edgeAdded(edge);
+}
+
+void Node::remove(EdgePtr edge)
+{
+    if (edge->isValid()) {
+        edge->destroy();
+    }
+    d->m_edges.removeOne(edge);
 }
 
 EdgeList Node::edges() const

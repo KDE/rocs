@@ -56,6 +56,19 @@ public:
     virtual ~Edge();
 
     /**
+     * Destroys the edge object and removes it from the connected nodes.
+     */
+    void destroy();
+
+    /**
+     * The valid state returns @c true if the object is created and can be used, @c false if it is
+     * not yet created or about to be removed
+     *
+     * @return the validity state of the object
+     */
+    bool isValid() const;
+
+    /**
      * @return the Node the edge points from
      */
     NodePtr from() const;

@@ -51,6 +51,19 @@ public:
     virtual ~Node();
 
     /**
+     * Destroys the node object, invoke destroy calls for edges, and removes it from the document.
+     */
+    void destroy();
+
+    /**
+     * The valid state returns @c true if the object is created and can be used, @c false if it is
+     * not yet created or about to be removed
+     *
+     * @return the validity state of the object
+     */
+    bool isValid() const;
+
+    /**
      * @return the GraphDocument that contains this node
      */
     GraphDocumentPtr document() const;
@@ -78,6 +91,14 @@ public:
      * @param edge  the edge to be added to the node
      */
     void insert(EdgePtr edge);
+
+    /**
+     * Remove @p edge from this node. If the edge is valid, Edge::destroy() will be called,
+     * otherwise it will only be removed.
+     *
+     * @param edge  the edge to be removed from the node
+     */
+    void remove(EdgePtr edge);
 
     /**
      * @return edges adjacent to this node
