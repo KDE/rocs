@@ -55,6 +55,11 @@ public:
     virtual ~GraphDocument();
 
     /**
+     * Destroys the document object and all of its contents.
+     */
+    void destroy();
+
+    /**
      * @return list of nodes contained at the document
      */
     NodeList nodes(NodeTypePtr type = NodeTypePtr()) const;
@@ -111,6 +116,16 @@ public:
      */
     QList<NodeTypePtr> nodeTypes() const;
 
+    /**
+     * Debug method that tracks how many node objects exist.
+     *
+     * @return number of node objects
+     */
+    static uint objects()
+    {
+        return objectCounter;
+    }
+
 protected:
     GraphDocument();
 
@@ -118,6 +133,7 @@ private:
     Q_DISABLE_COPY(GraphDocument)
     const QScopedPointer<GraphDocumentPrivate> d;
     void setQpointer(GraphDocumentPtr q);
+    static uint objectCounter;
 };
 }
 

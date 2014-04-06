@@ -25,9 +25,13 @@
 
 using namespace GraphTheory;
 
+// initialize number of edge objects
+uint GraphDocument::objectCounter = 0;
+
 class GraphTheory::GraphDocumentPrivate {
 public:
     GraphDocumentPrivate()
+        : m_valid(false)
     {
         // create default type
         m_edgeTypes.append(EdgeType::create());
@@ -42,22 +46,38 @@ public:
     QList<EdgeTypePtr> m_edgeTypes;
     QList<NodeTypePtr> m_nodeTypes;
     NodeList m_nodes;
+    bool m_valid;
 };
+
+void GraphDocument::destroy()
+{
+    d->m_valid = false;
+    foreach (NodePtr node, d->m_nodes) {
+        node->destroy();
+    }
+    d->m_nodes.clear();
+
+    // reset last reference to this object
+    d->q.reset();
+}
 
 GraphDocument::GraphDocument()
     : QObject()
     , d(new GraphDocumentPrivate)
 {
+    ++GraphDocument::objectCounter;
 }
 
 GraphDocument::~GraphDocument()
 {
+    --GraphDocument::objectCounter;
 }
 
 GraphDocumentPtr GraphDocument::create()
 {
     GraphDocumentPtr pi(new GraphDocument);
     pi->setQpointer(pi);
+    pi->d->m_valid = true;
     return pi;
 }
 
