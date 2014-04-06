@@ -94,6 +94,16 @@ public:
      */
     void setType(EdgeTypePtr type);
 
+    /**
+     * Debug method that tracks how many node objects exist.
+     *
+     * @return number of node objects
+     */
+    static uint objects()
+    {
+        return objectCounter;
+    }
+
 Q_SIGNALS:
     void typeChanged(EdgeTypePtr type);
 
@@ -104,6 +114,7 @@ private:
     Q_DISABLE_COPY(Edge)
     const QScopedPointer<EdgePrivate> d;
     void setQpointer(EdgePtr q);
+    static uint objectCounter;
 };
 }
 

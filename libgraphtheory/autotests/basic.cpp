@@ -29,12 +29,14 @@
 
 void BasicTest::initTestCase()
 {
-
+    QVERIFY(Node::objects() == 0);
+    QVERIFY(Edge::objects() == 0);
 }
 
 void BasicTest::cleanupTestCase()
 {
-
+    QVERIFY(Node::objects() == 0);
+    QVERIFY(Edge::objects() == 0);
 }
 
 void BasicTest::testDocumentCreation()
@@ -45,6 +47,10 @@ void BasicTest::testDocumentCreation()
     EdgePtr edge = Edge::create(nodeA, nodeB);
 
     QCOMPARE(document->nodes().length(), 2);
+
+    edge->destroy();
+    nodeA->destroy();
+    nodeB->destroy();
 }
 
 void BasicTest::testNodeDelete()
@@ -75,7 +81,8 @@ void BasicTest::testNodeTypeCreateDelete()
     QVERIFY(document->nodes(typeA).length() == 0);
     QVERIFY(document->nodes(typeB).length() == 1);
 
-    //TODO test delete
+    node->destroy();
+    //TODO test type deletes
 }
 
 void BasicTest::testEdgeTypeCreateDelete()
@@ -101,7 +108,11 @@ void BasicTest::testEdgeTypeCreateDelete()
     QCOMPARE(document->edges(typeA).length(), 0);
     QCOMPARE(document->edges(typeB).length(),  1);
 
-    //TODO test delete
+    edge->destroy();
+    from->destroy();
+    to->destroy();
+
+    //TODO test type deletes
 }
 
 QTEST_MAIN(BasicTest)

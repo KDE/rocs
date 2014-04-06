@@ -27,6 +27,9 @@
 
 using namespace GraphTheory;
 
+// initialize number of edge objects
+uint Node::objectCounter = 0;
+
 class GraphTheory::NodePrivate {
 public:
     NodePrivate()
@@ -49,10 +52,12 @@ Node::Node()
     : QObject()
     , d(new NodePrivate)
 {
+    ++Node::objectCounter;
 }
 
 Node::~Node()
 {
+    --Node::objectCounter;
 }
 
 NodePtr Node::create(GraphDocumentPtr document)

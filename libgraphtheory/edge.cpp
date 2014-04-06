@@ -22,6 +22,9 @@
 
 using namespace GraphTheory;
 
+// initialize number of edge objects
+uint Edge::objectCounter = 0;
+
 class GraphTheory::EdgePrivate {
 public:
     EdgePrivate()
@@ -44,10 +47,12 @@ Edge::Edge()
     : QObject()
     , d(new EdgePrivate)
 {
+    ++Edge::objectCounter;
 }
 
 Edge::~Edge()
 {
+    --Edge::objectCounter;
 }
 
 EdgePtr Edge::create(NodePtr from, NodePtr to)

@@ -105,6 +105,16 @@ public:
      */
     EdgeList edges() const;
 
+    /**
+     * Debug method that tracks how many node objects exist.
+     *
+     * @return number of node objects
+     */
+    static uint objects()
+    {
+        return objectCounter;
+    }
+
 Q_SIGNALS:
     void typeChanged(NodeTypePtr type);
     void edgeAdded(EdgePtr edge);
@@ -116,6 +126,7 @@ private:
     Q_DISABLE_COPY(Node)
     const QScopedPointer<NodePrivate> d;
     void setQpointer(NodePtr q);
+    static uint objectCounter;
 };
 }
 
