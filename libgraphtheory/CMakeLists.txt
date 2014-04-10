@@ -21,18 +21,25 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+include_directories(
+    ./
+)
+
 set(graphtheory_SRCS
     edge.cpp
     edgetype.cpp
     graphdocument.cpp
     node.cpp
     nodetype.cpp
+    models/nodemodel.cpp
 )
 
 add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )
 
 target_link_libraries(rocsgraphtheory
-    ${Qt5Core_LIBRARIES}
+    PUBLIC
+        Qt5::Core
+        KF5::I18n
 )
 
 set(rocscore_LIB_HDRS

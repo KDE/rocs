@@ -136,7 +136,9 @@ void GraphDocument::insert(NodePtr node)
         return;
     }
 
+    emit nodeAboutToBeAdded(node, d->m_nodes.length());
     d->m_nodes.append(node);
+    emit nodeAdded();
 }
 
 void GraphDocument::insert(NodeTypePtr type)
@@ -162,7 +164,10 @@ void GraphDocument::remove(NodePtr node)
     if (node->isValid()) {
         node->destroy();
     }
-    d->m_nodes.removeOne(node);
+    int index = d->m_nodes.indexOf(node);
+    emit nodesAboutToBeRemoved(index,index);
+    d->m_nodes.removeAt(index);
+    emit nodesRemoved();
 }
 
 void GraphDocument::remove(NodeTypePtr type)

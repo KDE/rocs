@@ -142,6 +142,12 @@ public:
         return objectCounter;
     }
 
+Q_SIGNALS:
+    void nodeAboutToBeAdded(NodePtr,int);
+    void nodeAdded();
+    void nodesAboutToBeRemoved(int,int);
+    void nodesRemoved();
+
 protected:
     GraphDocument();
 
