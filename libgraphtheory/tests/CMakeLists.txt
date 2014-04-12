@@ -21,44 +21,20 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-include_directories(
-    ./
+set(scenetest_SRCS
+    scenetest.cpp
 )
 
-set(graphtheory_SRCS
-    edge.cpp
-    edgetype.cpp
-    graphdocument.cpp
-    node.cpp
-    nodetype.cpp
-    models/nodemodel.cpp
-    qtquickitems/nodeitem.cpp
+add_executable(
+    scenetest
+    ${scenetest_SRCS}
 )
 
-add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )
-
-target_link_libraries(rocsgraphtheory
+target_link_libraries(scenetest
     PUBLIC
+        rocsgraphtheory
         Qt5::Core
         Qt5::Quick
+        Qt5::Widgets
         KF5::I18n
 )
-
-set(rocscore_LIB_HDRS
-    edge.h
-    graphdocument.h
-    node.h
-)
-
-set_target_properties(
-    rocsgraphtheory
-    PROPERTIES
-        VERSION ${GENERIC_LIB_VERSION}
-        SOVERSION ${GENERIC_LIB_SOVERSION}
-)
-
-install(TARGETS rocsgraphtheory  ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel)
-
-ecm_optional_add_subdirectory(autotests)
-ecm_optional_add_subdirectory(tests)
