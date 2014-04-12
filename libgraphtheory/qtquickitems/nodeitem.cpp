@@ -22,23 +22,42 @@
 
 using namespace GraphTheory;
 
-NodeItem::NodeItem(QQuickItem *parent) :
-    QQuickItem(parent),
-    m_color(Qt::black)
+class GraphTheory::NodeItemPrivate {
+public:
+    NodeItemPrivate()
+        : m_color(Qt::black)
+    {
+    }
+
+    ~NodeItemPrivate()
+    {
+    }
+
+    QColor m_color;
+};
+
+NodeItem::NodeItem(QQuickItem *parent)
+    : QQuickItem(parent)
+    , d(new NodeItemPrivate)
 {
     setFlag(QQuickItem::ItemHasContents, true);
 }
 
+NodeItem::~NodeItem()
+{
+
+}
+
 QColor NodeItem::color() const
 {
-    return m_color;
+    return d->m_color;
 }
 
 void NodeItem::setColor(const QColor &color)
 {
-    if (color == m_color) {
+    if (color == d->m_color) {
         return;
     }
-    m_color = color;
+    d->m_color = color;
     emit colorChanged();
 }
