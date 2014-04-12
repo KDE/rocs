@@ -32,6 +32,7 @@ set(graphtheory_SRCS
     node.cpp
     nodetype.cpp
     models/nodemodel.cpp
+    qtquickitems/nodeitem.cpp
 )
 
 add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )
@@ -39,6 +40,7 @@ add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )
 target_link_libraries(rocsgraphtheory
     PUBLIC
         Qt5::Core
+        Qt5::Quick
         KF5::I18n
 )
 
