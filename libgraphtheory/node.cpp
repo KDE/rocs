@@ -22,6 +22,7 @@
 #include "graphdocument.h"
 #include "nodetype.h"
 #include "edge.h"
+#include "qtquickitems/nodeitem.h"
 
 #include <QDebug>
 
@@ -34,6 +35,7 @@ class GraphTheory::NodePrivate {
 public:
     NodePrivate()
         : m_valid(false)
+        , m_item(new NodeItem)
     {
     }
 
@@ -46,6 +48,7 @@ public:
     NodeTypePtr m_type;
     EdgeList m_edges;
     bool m_valid;
+    NodeItem *m_item;
 };
 
 Node::Node()
@@ -57,6 +60,7 @@ Node::Node()
 
 Node::~Node()
 {
+    d->m_item->deleteLater();
     --Node::objectCounter;
 }
 
