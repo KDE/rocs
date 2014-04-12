@@ -60,5 +60,6 @@ set_target_properties(
 install(TARGETS rocsgraphtheory  ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel)
 
+ecm_optional_add_subdirectory(qml)
 ecm_optional_add_subdirectory(autotests)
 ecm_optional_add_subdirectory(tests)

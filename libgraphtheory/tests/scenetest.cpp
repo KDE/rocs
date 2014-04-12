@@ -26,6 +26,7 @@
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QDebug>
+#include <QStandardPaths>
 
 using namespace GraphTheory;
 
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.test", 1, 0, "NodeItem");
+    qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
 
     int rc = 0;
 
@@ -42,7 +43,8 @@ int main(int argc, char *argv[])
 
     QObject::connect(&engine, SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
 
-    component->loadUrl(QUrl("main.qml"));
+    QUrl path = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "rocsgraphtheory/qml/Scene.qml"));
+    component->loadUrl(path);
 
     if (!component->isReady() ) {
         qWarning() << ("%s", qPrintable(component->errorString()));
