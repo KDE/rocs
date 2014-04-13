@@ -41,7 +41,6 @@ class GRAPHTHEORY_EXPORT NodeModel : public QAbstractListModel
 public:
     enum NodeRoles {
         IdRole = Qt::UserRole + 1,      //!< unique identifier of node
-        ItemRole,                       //!< access to NodeItem object
         DataRole                        //!< access to Node object
     };
 

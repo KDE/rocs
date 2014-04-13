@@ -50,7 +50,6 @@ public:
     QSignalMapper *m_signalMapper;
 };
 
-
 NodeModel::NodeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NodeModelPrivate)
@@ -67,7 +66,6 @@ QHash< int, QByteArray > NodeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
-    roles[ItemRole] = "item";
     roles[DataRole] = "dataRole";
 
     return roles;
