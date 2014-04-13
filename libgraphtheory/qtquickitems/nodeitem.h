@@ -22,7 +22,10 @@
 #define NODEITEM_H
 
 #include "libgraphtheoryexport.h"
+#include "node.h"
 #include <QQuickItem>
+
+class QSGNode;
 
 namespace GraphTheory
 {
@@ -31,16 +34,22 @@ class NodeItemPrivate;
 class GRAPHTHEORY_EXPORT NodeItem : public QQuickItem
 {
     Q_OBJECT
+    Q_PROPERTY(GraphTheory::Node * node READ node WRITE setNode NOTIFY nodeChanged)
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 
 public:
     explicit NodeItem(QQuickItem *parent = 0);
-    ~NodeItem();
+    virtual ~NodeItem();
+    Node * node() const;
+    void setNode(Node *node);
+    virtual QSGNode * updatePaintNode(QSGNode *node, UpdatePaintNodeData *);
     QColor color() const;
     void setColor(const QColor &color);
 
 Q_SIGNALS:
+    void nodeChanged();
     void colorChanged();
+
 private:
     Q_DISABLE_COPY(NodeItem)
     const QScopedPointer<NodeItemPrivate> d;

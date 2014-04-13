@@ -20,12 +20,15 @@
 
 #include "nodeitem.h"
 
+#include <QSGSimpleRectNode>
+
 using namespace GraphTheory;
 
 class GraphTheory::NodeItemPrivate {
 public:
     NodeItemPrivate()
-        : m_color(Qt::black)
+        : m_node(0)
+        , m_color(Qt::black)
     {
     }
 
@@ -33,6 +36,7 @@ public:
     {
     }
 
+    Node *m_node;
     QColor m_color;
 };
 
@@ -41,11 +45,31 @@ NodeItem::NodeItem(QQuickItem *parent)
     , d(new NodeItemPrivate)
 {
     setFlag(QQuickItem::ItemHasContents, true);
+
+    setWidth(64);
+    setHeight(64);
 }
 
 NodeItem::~NodeItem()
 {
 
+}
+
+Node * NodeItem::node() const
+{
+    return d->m_node;
+}
+
+void NodeItem::setNode(Node* node)
+{
+    if (node == d->m_node) {
+        return;
+    }
+    d->m_node = node;
+    setX(node->x());
+    setY(node->y());
+    setColor(node->color());
+    emit nodeChanged();
 }
 
 QColor NodeItem::color() const
@@ -60,4 +84,15 @@ void NodeItem::setColor(const QColor &color)
     }
     d->m_color = color;
     emit colorChanged();
+}
+
+QSGNode * NodeItem::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
+{
+    QSGSimpleRectNode *n = static_cast<QSGSimpleRectNode *>(node);
+    if (!n) {
+        n = new QSGSimpleRectNode();
+        n->setColor(color());
+    }
+    n->setRect(boundingRect());
+    return n;
 }

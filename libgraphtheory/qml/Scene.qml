@@ -40,17 +40,8 @@ ApplicationWindow {
 
     Repeater {
         model: nodeModel
-        Rectangle {
-            width: 70; height: 70
-            color: model.dataRole.color
-            x: model.dataRole.x
-            y: model.dataRole.y
-
-            Text {
-                text: model.dataRole.id
-                font.pointSize: 30
-                anchors.centerIn: parent
-            }
+        NodeItem {
+            node: model.dataRole
         }
     }
 
