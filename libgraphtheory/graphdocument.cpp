@@ -177,9 +177,11 @@ void GraphDocument::remove(NodePtr node)
         node->destroy();
     }
     int index = d->m_nodes.indexOf(node);
-    emit nodesAboutToBeRemoved(index,index);
-    d->m_nodes.removeAt(index);
-    emit nodesRemoved();
+    if (index >= 0) {
+        emit nodesAboutToBeRemoved(index,index);
+        d->m_nodes.removeAt(index);
+        emit nodesRemoved();
+    }
 }
 
 void GraphDocument::remove(EdgePtr edge)
@@ -188,9 +190,11 @@ void GraphDocument::remove(EdgePtr edge)
         edge->destroy();
     }
     int index = d->m_edges.indexOf(edge);
-    emit edgesAboutToBeRemoved(index,index);
-    d->m_nodes.removeAt(index);
-    emit edgesRemoved();
+    if (index >= 0) {
+        emit edgesAboutToBeRemoved(index,index);
+        d->m_nodes.removeAt(index);
+        emit edgesRemoved();
+    }
 }
 
 void GraphDocument::remove(NodeTypePtr type)
