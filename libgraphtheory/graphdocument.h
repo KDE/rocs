@@ -79,6 +79,15 @@ public:
     void insert(NodePtr node);
 
     /**
+     * Add @p edge to this document. The edge must be correctly setup before, i.e.,
+     * its type and end points have to be set. When inserting an edge already in the list,
+     * insert does not perform any operation.
+     *
+     * @param edge  the edge to be added to the document
+     */
+    void insert(EdgePtr edge);
+
+    /**
      * Add the NodeType @p type to this document.
      *
      * @param type  the NodeType to be added to the document
@@ -99,6 +108,14 @@ public:
      * @param node  the node to be removed from the document
      */
     void remove(NodePtr node);
+
+    /**
+     * Remove @p edge from this document. If the edge is valid, Edge::destroy() will be called,
+     * otherwise it will only be removed.
+     *
+     * @param edge  the edge to be removed from the document
+     */
+    void remove(EdgePtr edge);
 
     /**
      * Remove @p type and all associated nodes from this document. If the type is valid,
@@ -147,6 +164,10 @@ Q_SIGNALS:
     void nodeAdded();
     void nodesAboutToBeRemoved(int,int);
     void nodesRemoved();
+    void edgeAboutToBeAdded(EdgePtr,int);
+    void edgeAdded();
+    void edgesAboutToBeRemoved(int,int);
+    void edgesRemoved();
 
 protected:
     GraphDocument();

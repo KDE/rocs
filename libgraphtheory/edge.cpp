@@ -69,6 +69,8 @@ EdgePtr Edge::create(NodePtr from, NodePtr to)
     // insert completely initialized edge into nodes' connections
     to->insert(pi->d->q);
     from->insert(pi->d->q);
+    to->document()->insert(pi->d->q);
+
     return pi;
 }
 
@@ -77,6 +79,7 @@ void Edge::destroy()
     d->m_valid = false;
     d->m_from->remove(d->q);
     d->m_to->remove(d->q);
+    d->m_to->document()->remove(d->q);
 
     // reset last reference to this object
     d->q.reset();

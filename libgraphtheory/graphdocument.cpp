@@ -45,6 +45,7 @@ public:
     QList<EdgeTypePtr> m_edgeTypes;
     QList<NodeTypePtr> m_nodeTypes;
     NodeList m_nodes;
+    EdgeList m_edges;
     bool m_valid;
 };
 
@@ -110,18 +111,14 @@ NodeList GraphDocument::nodes(NodeTypePtr type) const
 
 EdgeList GraphDocument::edges(EdgeTypePtr type) const
 {
+    if (!type) {
+        return d->m_edges;
+    }
+
     EdgeList edges;
-    foreach (NodePtr node, d->m_nodes) {
-        foreach (EdgePtr edge, node->edges()) {
-            if (edge->from() != node) { // count edges only once
-                continue;
-            }
-            if (!type) { // if no type is set, return all types
-                edges.append(edge);
-            }
-            else if (edge->type() == type) {
-                edges.append(edge);
-            }
+    foreach (EdgePtr edge, d->m_edges) {
+        if (edge->type() == type) {
+            edges.append(edge);
         }
     }
     return edges;
@@ -139,6 +136,21 @@ void GraphDocument::insert(NodePtr node)
     emit nodeAboutToBeAdded(node, d->m_nodes.length());
     d->m_nodes.append(node);
     emit nodeAdded();
+}
+
+void GraphDocument::insert(EdgePtr edge)
+{
+    Q_ASSERT(edge);
+    Q_ASSERT(edge->from()->document() == d->q);
+    Q_ASSERT(edge->to()->document() == d->q);
+
+    if (!edge || d->m_edges.contains(edge)) {
+        return;
+    }
+
+    emit edgeAboutToBeAdded(edge, d->m_edges.length());
+    d->m_edges.append(edge);
+    emit edgeAdded();
 }
 
 void GraphDocument::insert(NodeTypePtr type)
@@ -168,6 +180,17 @@ void GraphDocument::remove(NodePtr node)
     emit nodesAboutToBeRemoved(index,index);
     d->m_nodes.removeAt(index);
     emit nodesRemoved();
+}
+
+void GraphDocument::remove(EdgePtr edge)
+{
+    if (edge->isValid()) {
+        edge->destroy();
+    }
+    int index = d->m_edges.indexOf(edge);
+    emit edgesAboutToBeRemoved(index,index);
+    d->m_nodes.removeAt(index);
+    emit edgesRemoved();
 }
 
 void GraphDocument::remove(NodeTypePtr type)
