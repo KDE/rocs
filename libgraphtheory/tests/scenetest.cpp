@@ -62,6 +62,9 @@ int main(int argc, char *argv[])
     GraphDocumentPtr document = GraphDocument::create();
     NodePtr from = Node::create(document);
     NodePtr to = Node::create(document);
+    to->setX(100);
+    to->setY(100);
+    to->setColor(Qt::green);
     EdgePtr edge = Edge::create(from, to);
     NodeModel *nodeModel = new NodeModel();
     nodeModel->setDocument(document);

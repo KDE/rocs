@@ -42,10 +42,12 @@ ApplicationWindow {
         model: nodeModel
         Rectangle {
             width: 70; height: 70
-            color: "lightgreen"
+            color: model.dataRole.color
+            x: model.dataRole.x
+            y: model.dataRole.y
 
             Text {
-                text: index
+                text: model.dataRole.id
                 font.pointSize: 30
                 anchors.centerIn: parent
             }
