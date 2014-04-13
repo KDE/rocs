@@ -23,7 +23,7 @@
 
 #include "libgraphtheoryexport.h"
 #include "edge.h"
-#include <QQuickItem>
+#include <QQuickPaintedItem>
 
 class QSGNode;
 
@@ -31,17 +31,18 @@ namespace GraphTheory
 {
 class EdgeItemPrivate;
 
-class GRAPHTHEORY_EXPORT EdgeItem : public QQuickItem
+class GRAPHTHEORY_EXPORT EdgeItem : public QQuickPaintedItem
 {
     Q_OBJECT
     Q_PROPERTY(GraphTheory::Edge * edge READ edge WRITE setEdge NOTIFY edgeChanged)
 
 public:
-    explicit EdgeItem(QQuickItem *parent = 0);
+    explicit EdgeItem(QQuickPaintedItem *parent = 0);
     virtual ~EdgeItem();
     Edge * edge() const;
     void setEdge(Edge *edge);
-//     virtual QSGNode * updatePaintNode(QSGNode *node, UpdatePaintNodeData *);
+    /** reimplemented from QQuickPaintedItem **/
+    void paint(QPainter* painter);
 
 Q_SIGNALS:
     void edgeChanged();

@@ -21,6 +21,8 @@
 #include "edgeitem.h"
 
 #include <QSGSimpleRectNode>
+#include <QPainter>
+#include <QPointF>
 
 using namespace GraphTheory;
 
@@ -38,8 +40,8 @@ public:
     Edge *m_edge;
 };
 
-EdgeItem::EdgeItem(QQuickItem *parent)
-    : QQuickItem(parent)
+EdgeItem::EdgeItem(QQuickPaintedItem *parent)
+    : QQuickPaintedItem(parent)
     , d(new EdgeItemPrivate)
 {
     setFlag(QQuickItem::ItemHasContents, true);
@@ -62,5 +64,17 @@ void EdgeItem::setEdge(Edge *edge)
     }
     d->m_edge = edge;
 
+    //TODO update when nodes are moved
+    setX(qMin(edge->from()->x(), edge->to()->x()) + 32.0);
+    setY(qMin(edge->from()->y(), edge->to()->y()) + 32.0);
+    setWidth(qAbs(edge->to()->x() - edge->from()->x()) + 32.0);
+    setHeight(qAbs(edge->to()->y() - edge->from()->y()) + 32.0);
+
     emit edgeChanged();
+}
+
+void EdgeItem::paint(QPainter *painter)
+{
+    painter->setPen(QPen(QBrush(Qt::black), 4, Qt::SolidLine));
+    painter->drawLine(QPointF(0, 0), QPointF(width(), height()));
 }

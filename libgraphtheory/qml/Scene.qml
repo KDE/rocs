@@ -37,6 +37,12 @@ ApplicationWindow {
         }
     }
 
+    Repeater {
+        model: edgeModel
+        EdgeItem {
+            edge: model.dataRole
+        }
+    }
 
     Repeater {
         model: nodeModel

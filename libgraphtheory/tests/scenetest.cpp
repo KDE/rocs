@@ -18,12 +18,14 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "qtquickitems/nodeitem.h"
 #include "typenames.h"
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
 #include "models/nodemodel.h"
+#include "models/edgemodel.h"
+#include "qtquickitems/nodeitem.h"
+#include "qtquickitems/edgeitem.h"
 
 #include <QApplication>
 #include <QObject>
@@ -41,8 +43,11 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
+    qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
     qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
+    qmlRegisterType<GraphTheory::EdgeItem>("org.kde.rocs.graphtheory", 1, 0, "EdgeItem");
     qmlRegisterType<GraphTheory::NodeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeModel");
+    qmlRegisterType<GraphTheory::EdgeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeModel");
 
     int rc = 0;
 
@@ -67,9 +72,13 @@ int main(int argc, char *argv[])
     to->setY(100);
     to->setColor(Qt::green);
     EdgePtr edge = Edge::create(from, to);
+
     NodeModel *nodeModel = new NodeModel();
     nodeModel->setDocument(document);
     engine.rootContext()->setContextProperty("nodeModel", nodeModel);
+    EdgeModel *edgeModel = new EdgeModel();
+    edgeModel->setDocument(document);
+    engine.rootContext()->setContextProperty("edgeModel", edgeModel);
 
     QObject *topLevel = component->create();
     QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
@@ -82,6 +91,7 @@ int main(int argc, char *argv[])
 
     delete component;
     nodeModel->deleteLater();
+    edgeModel->deleteLater();
     document->destroy();
     return rc;
 }
