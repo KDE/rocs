@@ -23,25 +23,24 @@
 
 #include "libgraphtheoryexport.h"
 #include "node.h"
-#include <QQuickItem>
-
-class QSGNode;
+#include <QQuickPaintedItem>
 
 namespace GraphTheory
 {
 class NodeItemPrivate;
 
-class GRAPHTHEORY_EXPORT NodeItem : public QQuickItem
+class GRAPHTHEORY_EXPORT NodeItem : public QQuickPaintedItem
 {
     Q_OBJECT
     Q_PROPERTY(GraphTheory::Node * node READ node WRITE setNode NOTIFY nodeChanged)
 
 public:
-    explicit NodeItem(QQuickItem *parent = 0);
+    explicit NodeItem(QQuickPaintedItem *parent = 0);
     virtual ~NodeItem();
     Node * node() const;
     void setNode(Node *node);
-    virtual QSGNode * updatePaintNode(QSGNode *node, UpdatePaintNodeData *);
+    /** reimplemented from QQuickPaintedItem **/
+    void paint(QPainter *painter);
 
 Q_SIGNALS:
     void nodeChanged();

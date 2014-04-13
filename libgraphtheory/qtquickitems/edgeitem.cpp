@@ -67,8 +67,8 @@ void EdgeItem::setEdge(Edge *edge)
     //TODO update when nodes are moved
     setX(qMin(edge->from()->x(), edge->to()->x()) + 32.0);
     setY(qMin(edge->from()->y(), edge->to()->y()) + 32.0);
-    setWidth(qAbs(edge->to()->x() - edge->from()->x()) + 32.0);
-    setHeight(qAbs(edge->to()->y() - edge->from()->y()) + 32.0);
+    setWidth(qAbs(edge->to()->x() - edge->from()->x()) - 16.0);
+    setHeight(qAbs(edge->to()->y() - edge->from()->y()) - 16.0);
 
     emit edgeChanged();
 }

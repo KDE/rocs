@@ -42,7 +42,7 @@ public:
     Edge * edge() const;
     void setEdge(Edge *edge);
     /** reimplemented from QQuickPaintedItem **/
-    void paint(QPainter* painter);
+    void paint(QPainter *painter);
 
 Q_SIGNALS:
     void edgeChanged();

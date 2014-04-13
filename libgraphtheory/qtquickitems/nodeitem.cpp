@@ -20,7 +20,7 @@
 
 #include "nodeitem.h"
 
-#include <QSGSimpleRectNode>
+#include <QPainter>
 
 using namespace GraphTheory;
 
@@ -38,8 +38,8 @@ public:
     Node *m_node;
 };
 
-NodeItem::NodeItem(QQuickItem *parent)
-    : QQuickItem(parent)
+NodeItem::NodeItem(QQuickPaintedItem *parent)
+    : QQuickPaintedItem(parent)
     , d(new NodeItemPrivate)
 {
     setFlag(QQuickItem::ItemHasContents, true);
@@ -58,7 +58,7 @@ Node * NodeItem::node() const
     return d->m_node;
 }
 
-void NodeItem::setNode(Node* node)
+void NodeItem::setNode(Node *node)
 {
     if (node == d->m_node) {
         return;
@@ -69,13 +69,10 @@ void NodeItem::setNode(Node* node)
     emit nodeChanged();
 }
 
-QSGNode * NodeItem::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
+void NodeItem::paint(QPainter *painter)
 {
-    QSGSimpleRectNode *n = static_cast<QSGSimpleRectNode *>(node);
-    if (!n) {
-        n = new QSGSimpleRectNode();
-        n->setColor(d->m_node->color());
-    }
-    n->setRect(boundingRect());
-    return n;
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setPen(QPen(QBrush(Qt::black), 2, Qt::SolidLine));
+    painter->setBrush(QBrush(d->m_node->color()));
+    painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));
 }
