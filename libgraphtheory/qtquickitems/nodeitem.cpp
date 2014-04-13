@@ -28,7 +28,6 @@ class GraphTheory::NodeItemPrivate {
 public:
     NodeItemPrivate()
         : m_node(0)
-        , m_color(Qt::black)
     {
     }
 
@@ -37,7 +36,6 @@ public:
     }
 
     Node *m_node;
-    QColor m_color;
 };
 
 NodeItem::NodeItem(QQuickItem *parent)
@@ -68,22 +66,7 @@ void NodeItem::setNode(Node* node)
     d->m_node = node;
     setX(node->x());
     setY(node->y());
-    setColor(node->color());
     emit nodeChanged();
-}
-
-QColor NodeItem::color() const
-{
-    return d->m_color;
-}
-
-void NodeItem::setColor(const QColor &color)
-{
-    if (color == d->m_color) {
-        return;
-    }
-    d->m_color = color;
-    emit colorChanged();
 }
 
 QSGNode * NodeItem::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
@@ -91,7 +74,7 @@ QSGNode * NodeItem::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
     QSGSimpleRectNode *n = static_cast<QSGSimpleRectNode *>(node);
     if (!n) {
         n = new QSGSimpleRectNode();
-        n->setColor(color());
+        n->setColor(d->m_node->color());
     }
     n->setRect(boundingRect());
     return n;
