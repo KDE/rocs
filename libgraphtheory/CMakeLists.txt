@@ -33,6 +33,7 @@ set(graphtheory_SRCS
     nodetype.cpp
     models/nodemodel.cpp
     qtquickitems/nodeitem.cpp
+    qtquickitems/edgeitem.cpp
 )
 
 add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )
