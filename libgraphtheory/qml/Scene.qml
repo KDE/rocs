@@ -37,6 +37,21 @@ ApplicationWindow {
         }
     }
 
+
+    Repeater {
+        model: nodeModel
+        Rectangle {
+            width: 70; height: 70
+            color: "lightgreen"
+
+            Text {
+                text: index
+                font.pointSize: 30
+                anchors.centerIn: parent
+            }
+        }
+    }
+
     width: 800
     height: 600
 }

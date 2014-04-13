@@ -19,10 +19,16 @@
  */
 
 #include "qtquickitems/nodeitem.h"
+#include "typenames.h"
+#include "graphdocument.h"
+#include "node.h"
+#include "edge.h"
+#include "models/nodemodel.h"
 
 #include <QApplication>
 #include <QObject>
 #include <QQmlComponent>
+#include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QDebug>
@@ -35,6 +41,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
+    qmlRegisterType<GraphTheory::NodeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeModel");
 
     int rc = 0;
 
@@ -51,6 +58,15 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    // test data
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr from = Node::create(document);
+    NodePtr to = Node::create(document);
+    EdgePtr edge = Edge::create(from, to);
+    NodeModel *nodeModel = new NodeModel();
+    nodeModel->setDocument(document);
+    engine.rootContext()->setContextProperty("nodeModel", nodeModel);
+
     QObject *topLevel = component->create();
     QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
 
@@ -61,5 +77,7 @@ int main(int argc, char *argv[])
     rc = app.exec();
 
     delete component;
+    nodeModel->deleteLater();
+    document->destroy();
     return rc;
 }
