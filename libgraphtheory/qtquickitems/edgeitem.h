@@ -41,7 +41,7 @@ public:
     virtual ~EdgeItem();
     Edge * edge() const;
     void setEdge(Edge *edge);
-    virtual QSGNode * updatePaintNode(QSGNode *node, UpdatePaintNodeData *);
+//     virtual QSGNode * updatePaintNode(QSGNode *node, UpdatePaintNodeData *);
 
 Q_SIGNALS:
     void edgeChanged();
