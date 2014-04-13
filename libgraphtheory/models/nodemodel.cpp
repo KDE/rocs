@@ -22,16 +22,45 @@
 #include "graphdocument.h"
 
 #include <KLocalizedString>
-
 #include <QSignalMapper>
 
 using namespace GraphTheory;
 
+class GraphTheory::NodeModelPrivate {
+public:
+    NodeModelPrivate()
+        : m_signalMapper(new QSignalMapper)
+    {
+    }
+
+    ~NodeModelPrivate()
+    {
+        m_signalMapper->deleteLater();
+    }
+
+    void updateMappings()
+    {
+        int nodes = m_document->nodes().count();
+        for (int i = 0; i < nodes; i++) {
+            m_signalMapper->setMapping(m_document->nodes().at(i).data(), i);
+        }
+    }
+
+    GraphDocumentPtr m_document;
+    QSignalMapper *m_signalMapper;
+};
+
+
 NodeModel::NodeModel(QObject *parent)
     : QAbstractListModel(parent)
-    , m_signalMapper(new QSignalMapper(this))
+    , d(new NodeModelPrivate)
 {
-    connect(m_signalMapper, SIGNAL(mapped(int)), SLOT(emitNodeChanged(int)));
+    connect(d->m_signalMapper, SIGNAL(mapped(int)), SLOT(emitNodeChanged(int)));
+}
+
+NodeModel::~NodeModel()
+{
+
 }
 
 QHash< int, QByteArray > NodeModel::roleNames() const
@@ -46,37 +75,37 @@ QHash< int, QByteArray > NodeModel::roleNames() const
 
 void NodeModel::setDocument(GraphDocumentPtr document)
 {
-    if (m_document == document) {
+    if (d->m_document == document) {
         return;
     }
 
     beginResetModel();
-    if (m_document) {
-        m_document.data()->disconnect(this);
+    if (d->m_document) {
+        d->m_document.data()->disconnect(this);
     }
-    m_document = document;
-    if (m_document) {
-        connect(m_document.data(), SIGNAL(nodeAboutToBeAdded(NodePtr,int)), SLOT(onNodeAboutToBeAdded(NodePtr,int)));
-        connect(m_document.data(), SIGNAL(nodeAdded()), SLOT(onNodeAdded()));
-        connect(m_document.data(), SIGNAL(nodesAboutToBeRemoved(int,int)), SLOT(onNodesAboutToBeRemoved(int,int)));
-        connect(m_document.data(), SIGNAL(nodesRemoved()), SLOT(onNodesRemoved()));
+    d->m_document = document;
+    if (d->m_document) {
+        connect(d->m_document.data(), SIGNAL(nodeAboutToBeAdded(NodePtr,int)), SLOT(onNodeAboutToBeAdded(NodePtr,int)));
+        connect(d->m_document.data(), SIGNAL(nodeAdded()), SLOT(onNodeAdded()));
+        connect(d->m_document.data(), SIGNAL(nodesAboutToBeRemoved(int,int)), SLOT(onNodesAboutToBeRemoved(int,int)));
+        connect(d->m_document.data(), SIGNAL(nodesRemoved()), SLOT(onNodesRemoved()));
     }
     endResetModel();
 }
 
 QVariant NodeModel::data(const QModelIndex &index, int role) const
 {
-    Q_ASSERT(m_document);
+    Q_ASSERT(d->m_document);
 
     if (!index.isValid()) {
         return QVariant();
     }
 
-    if (index.row() >= m_document->nodes().count()) {
+    if (index.row() >= d->m_document->nodes().count()) {
         return QVariant();
     }
 
-    NodePtr const node = m_document->nodes().at(index.row());
+    NodePtr const node = d->m_document->nodes().at(index.row());
 
     switch(role)
     {
@@ -91,7 +120,7 @@ QVariant NodeModel::data(const QModelIndex &index, int role) const
 
 int NodeModel::rowCount(const QModelIndex &parent) const
 {
-    if (!m_document) {
+    if (!d->m_document) {
         return 0;
     }
 
@@ -99,7 +128,7 @@ int NodeModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    return m_document->nodes().count();
+    return d->m_document->nodes().count();
 }
 
 void NodeModel::onNodeAboutToBeAdded(NodePtr node, int index)
@@ -110,7 +139,7 @@ void NodeModel::onNodeAboutToBeAdded(NodePtr node, int index)
 
 void NodeModel::onNodeAdded()
 {
-    updateMappings();
+    d->updateMappings();
     endInsertRows();
 }
 
@@ -139,12 +168,4 @@ QVariant NodeModel::headerData(int section, Qt::Orientation orientation, int rol
         return QVariant(section + 1);
     }
     return QVariant(i18nc("@title:column", "Node"));
-}
-
-void NodeModel::updateMappings()
-{
-    int nodes = m_document->nodes().count();
-    for (int i = 0; i < nodes; i++) {
-        m_signalMapper->setMapping(m_document->nodes().at(i).data(), i);
-    }
 }

@@ -21,6 +21,7 @@
 #ifndef NODEEMODEL_H
 #define NODEMODEL_H
 
+#include "libgraphtheoryexport.h"
 #include "typenames.h"
 
 #include <QAbstractListModel>
@@ -31,8 +32,9 @@ class QSignalMapper;
 namespace GraphTheory
 {
 class GraphDocument;
+class NodeModelPrivate;
 
-class NodeModel : public QAbstractListModel
+class GRAPHTHEORY_EXPORT NodeModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -44,6 +46,7 @@ public:
     };
 
     explicit NodeModel(QObject *parent = 0);
+    ~NodeModel();
     /**
      * Reimplemented from QAbstractListModel::roleNames()
      */
@@ -64,9 +67,8 @@ private Q_SLOTS:
     void emitNodeChanged(int row);
 
 private:
-    void updateMappings();
-    GraphDocumentPtr m_document;
-    QSignalMapper *m_signalMapper;
+    Q_DISABLE_COPY(NodeModel)
+    const QScopedPointer<NodeModelPrivate> d;
 };
 }
 
