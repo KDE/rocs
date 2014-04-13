@@ -26,6 +26,9 @@
 #include "graphdocument.h"
 
 #include <QObject>
+#include <QColor>
+
+class QPointF;
 
 namespace GraphTheory
 {
@@ -37,6 +40,10 @@ class NodePrivate;
 class GRAPHTHEORY_EXPORT Node : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
+    Q_PROPERTY(qreal x READ x WRITE setX NOTIFY positionChanged)
+    Q_PROPERTY(qreal y READ y WRITE setY NOTIFY positionChanged)
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 
 public:
     /**
@@ -106,6 +113,48 @@ public:
     EdgeList edges() const;
 
     /**
+     * If the id value is invalid, -1 is returned.
+     *
+     * @return node identifier
+     */
+    int id() const;
+
+    /**
+     * set id of node to @c id
+     */
+    void setId(int id);
+
+    /**
+     * @return x-position of node
+     */
+    qreal x() const;
+
+    /**
+     * set x-position of node to @c x
+     */
+    void setX(qreal x);
+
+    /**
+     * @return y-position of node
+     */
+    qreal y() const;
+
+    /**
+     * set y-position of node to @c y
+     */
+    void setY(qreal y);
+
+    /**
+     * @return color of node
+     */
+    QColor color() const;
+
+    /**
+     * set color of node to @c color
+     */
+    void setColor(const QColor &color);
+
+    /**
      * Debug method that tracks how many node objects exist.
      *
      * @return number of node objects
@@ -118,6 +167,9 @@ public:
 Q_SIGNALS:
     void typeChanged(NodeTypePtr type);
     void edgeAdded(EdgePtr edge);
+    void positionChanged(const QPointF &position);
+    void idChanged(int id);
+    void colorChanged(const QColor &color);
 
 protected:
     Node();

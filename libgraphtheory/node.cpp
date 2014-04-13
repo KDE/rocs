@@ -23,6 +23,8 @@
 #include "nodetype.h"
 #include "edge.h"
 
+#include <QPointF>
+#include <QColor>
 #include <QDebug>
 
 using namespace GraphTheory;
@@ -34,6 +36,10 @@ class GraphTheory::NodePrivate {
 public:
     NodePrivate()
         : m_valid(false)
+        , m_x(0)
+        , m_y(0)
+        , m_color(Qt::black)
+        , m_id(-1)
     {
     }
 
@@ -46,6 +52,10 @@ public:
     NodeTypePtr m_type;
     EdgeList m_edges;
     bool m_valid;
+    qreal m_x;
+    qreal m_y;
+    QColor m_color;
+    int m_id;
 };
 
 Node::Node()
@@ -135,6 +145,62 @@ void Node::remove(EdgePtr edge)
 EdgeList Node::edges() const
 {
     return d->m_edges;
+}
+
+int Node::id() const
+{
+    return d->m_id;
+}
+
+void Node::setId(int id)
+{
+    if (id == d->m_id) {
+        return;
+    }
+    d->m_id = id;
+    emit idChanged(id);
+}
+
+qreal Node::x() const
+{
+    return d->m_x;
+}
+
+void Node::setX(qreal x)
+{
+    if (x == d->m_x) {
+        return;
+    }
+    d->m_x = x;
+    emit positionChanged(QPointF(x, d->m_y));
+}
+
+qreal Node::y() const
+{
+    return d->m_y;
+}
+
+void Node::setY(qreal y)
+{
+    if (y == d->m_y) {
+        return;
+    }
+    d->m_y = y;
+    emit positionChanged(QPointF(d->m_x, y));
+}
+
+QColor Node::color() const
+{
+    return d->m_color;
+}
+
+void Node::setColor(const QColor &color)
+{
+    if (color == d->m_color) {
+        return;
+    }
+    d->m_color = color;
+    emit colorChanged(color);
 }
 
 void Node::setQpointer(NodePtr q)
