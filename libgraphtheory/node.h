@@ -155,6 +155,21 @@ public:
     void setColor(const QColor &color);
 
     /**
+     * @return dynamic property
+     */
+    QVariant dynamicProperty(const QString &property) const;
+
+    /**
+     * Set dynamic property with identifier @c property. If @c value is
+     * QVariant::Invalid, the dynamic property is unset. Internally, this
+     * method use the QObject::setProperty mechanism but prefixes properties to avoid name clashes.
+     *
+     * @param property is the identifier for the new property
+     * @param value is the value of this property
+     */
+    void setDynamicProperty(const QString &property, const QVariant &value);
+
+    /**
      * Debug method that tracks how many node objects exist.
      *
      * @return number of node objects
@@ -170,6 +185,9 @@ Q_SIGNALS:
     void positionChanged(const QPointF &position);
     void idChanged(int id);
     void colorChanged(const QColor &color);
+
+private Q_SLOTS:
+    void updateDynamicProperty(const QString &property);
 
 protected:
     Node();

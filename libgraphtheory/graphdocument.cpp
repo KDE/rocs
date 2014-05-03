@@ -191,7 +191,6 @@ void GraphDocument::remove(NodePtr node)
 void GraphDocument::remove(EdgePtr edge)
 {
     if (edge->isValid()) {
-        qDebug() << "CALLING: edge destroy";
         edge->destroy();
     }
     int index = d->m_edges.indexOf(edge);

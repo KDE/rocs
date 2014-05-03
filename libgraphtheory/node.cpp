@@ -75,7 +75,7 @@ NodePtr Node::create(GraphDocumentPtr document)
     NodePtr pi(new Node);
     pi->setQpointer(pi);
     pi->d->m_document = document;
-    pi->d->m_type = document->nodeTypes().first();
+    pi->setType(document->nodeTypes().first());
     pi->d->m_valid = true;
 
     // insert completely initialized node into document
@@ -118,7 +118,11 @@ void Node::setType(NodeTypePtr type)
     if (d->m_type == type) {
         return;
     }
+    if (d->m_type) {
+        d->m_type->disconnect(this);
+    }
     d->m_type = type;
+    connect (type.data(), SIGNAL(dynamicPropertyRemoved(QString)), this, SLOT(updateDynamicProperty(QString)));
     emit typeChanged(type);
 }
 
@@ -201,6 +205,31 @@ void Node::setColor(const QColor &color)
     }
     d->m_color = color;
     emit colorChanged(color);
+}
+
+QVariant Node::dynamicProperty(const QString &property) const
+{
+    return Node::property(("_graph_" + property).toLatin1());
+}
+
+void Node::setDynamicProperty(const QString &property, const QVariant &value)
+{
+    if (!d->m_type) {
+        qWarning() << "No type registered, aborting to set property.";
+    }
+    if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
+        qWarning() << "Dynamic property not registered at type, aborting to set property.";
+    }
+    setProperty(("_graph_" + property).toLatin1(), value);
+}
+
+void Node::updateDynamicProperty(const QString &property)
+{
+    // remove property if not registered at type
+    if (!d->m_type->dynamicProperties().contains(property)) {
+        setDynamicProperty(property, QVariant::Invalid);
+        return;
+    }
 }
 
 void Node::setQpointer(NodePtr q)

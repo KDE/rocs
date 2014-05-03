@@ -173,4 +173,25 @@ void BasicTest::testEdgeTypeCreateDelete()
     document->destroy();
 }
 
+void BasicTest::testNodeDynamicProperties()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr node = Node::create(document);
+
+    // test setting/unsetting of property
+    node->type()->addDynamicProperty("property");
+    node->setDynamicProperty("property", "value");
+    QCOMPARE(node->dynamicProperty("property").toString(), QString("value"));
+    node->setDynamicProperty("property", QVariant::Invalid);
+    QCOMPARE(node->dynamicProperty("property").isValid(), false);
+
+    // test removal of property by node type
+    node->setDynamicProperty("property", "value");
+    QCOMPARE(node->dynamicProperty("property").toString(), QString("value"));
+    node->type()->removeDynamicProperty("property");
+    QCOMPARE(node->dynamicProperty("property").isValid(), false);
+
+    document->destroy();
+}
+
 QTEST_MAIN(BasicTest)

@@ -39,6 +39,7 @@ public:
 
     NodeTypePtr q;
     GraphDocumentPtr m_document;
+    QStringList m_dynamicProperties;
     bool m_valid;
 };
 
@@ -78,6 +79,29 @@ void NodeType::destroy()
 bool NodeType::isValid() const
 {
     return d->m_valid;
+}
+
+QStringList NodeType::dynamicProperties() const
+{
+    return d->m_dynamicProperties;
+}
+
+void NodeType::addDynamicProperty(const QString& property)
+{
+    if (d->m_dynamicProperties.contains(property)) {
+        return;
+    }
+    d->m_dynamicProperties.append(property);
+    emit dynamicPropertyAdded(property);
+}
+
+void NodeType::removeDynamicProperty(const QString& property)
+{
+    if (!d->m_dynamicProperties.contains(property)) {
+        return;
+    }
+    d->m_dynamicProperties.removeOne(property);
+    emit dynamicPropertyRemoved(property);
 }
 
 void NodeType::setQpointer(NodeTypePtr q)

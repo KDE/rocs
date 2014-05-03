@@ -27,6 +27,7 @@
 #include <QObject>
 #include <QSharedPointer>
 
+class QStringList;
 namespace GraphTheory
 {
 
@@ -65,6 +66,23 @@ public:
     bool isValid() const;
 
     /**
+     * @return dynamic properties registered for this node type
+     */
+    QStringList dynamicProperties() const;
+
+    /**
+     * Add dynamic property @c property to list of dynamic properties.
+     * Signal dynamicPropertyAdded(@c property) is emitted afterwards
+     */
+    void addDynamicProperty(const QString &property);
+
+    /**
+     * Remove dynamic property @c property from list of dynamic properties.
+     * Signal dynamicPropertyRemoved(@c property) is emitted afterwards
+     */
+    void removeDynamicProperty(const QString &property);
+
+    /**
      * Debug method that tracks how many node objects exist.
      *
      * @return number of node type objects
@@ -73,6 +91,10 @@ public:
     {
         return objectCounter;
     }
+
+Q_SIGNALS:
+    void dynamicPropertyAdded(const QString &property);
+    void dynamicPropertyRemoved(const QString &property);
 
 protected:
     NodeType();
