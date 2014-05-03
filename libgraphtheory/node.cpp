@@ -88,7 +88,7 @@ void Node::destroy()
 {
     d->m_valid = false;
     foreach (EdgePtr edge, d->m_edges) {
-        edge->destroy();
+        d->m_document->remove(edge);
     }
     d->m_document->remove(d->q);
 
@@ -136,7 +136,7 @@ void Node::insert(EdgePtr edge)
 
 void Node::remove(EdgePtr edge)
 {
-    if (edge->isValid()) {
+    if (edge && edge->isValid()) {
         edge->destroy();
     }
     d->m_edges.removeOne(edge);

@@ -52,6 +52,10 @@ public:
 void GraphDocument::destroy()
 {
     d->m_valid = false;
+    foreach (EdgePtr edge, d->m_edges) {
+        edge->destroy();
+    }
+    d->m_edges.clear();
     foreach (NodePtr node, d->m_nodes) {
         node->destroy();
     }
@@ -187,12 +191,13 @@ void GraphDocument::remove(NodePtr node)
 void GraphDocument::remove(EdgePtr edge)
 {
     if (edge->isValid()) {
+        qDebug() << "CALLING: edge destroy";
         edge->destroy();
     }
     int index = d->m_edges.indexOf(edge);
     if (index >= 0) {
         emit edgesAboutToBeRemoved(index,index);
-        d->m_nodes.removeAt(index);
+        d->m_edges.removeAt(index);
         emit edgesRemoved();
     }
 }

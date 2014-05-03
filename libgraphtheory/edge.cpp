@@ -70,6 +70,7 @@ EdgePtr Edge::create(NodePtr from, NodePtr to)
     to->insert(pi->d->q);
     from->insert(pi->d->q);
     to->document()->insert(pi->d->q);
+    pi->d->m_valid = true;
 
     return pi;
 }

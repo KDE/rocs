@@ -62,9 +62,9 @@ void BasicTest::testDocumentCreateDelete()
     nodeA.reset();
     nodeB.reset();
     edge.reset();
-    QVERIFY(GraphDocument::objects() == 0);
-    QVERIFY(Node::objects() == 0);
-    QVERIFY(Edge::objects() == 0);
+    QCOMPARE(Edge::objects(), uint(0));
+    QCOMPARE(Node::objects(), uint(0));
+    QCOMPARE(GraphDocument::objects(), uint(0));
 }
 
 void BasicTest::testNodeCreateDelete()
@@ -87,8 +87,8 @@ void BasicTest::testNodeCreateDelete()
     QCOMPARE(document->nodes().length(), 1); // node should be unregistered before deleted
     nodeA.reset();
     edge.reset();
-    QVERIFY(Node::objects() == 1);
-    QVERIFY(Edge::objects() == 0);
+    QCOMPARE(Node::objects(), uint(1));
+    QCOMPARE(Edge::objects(), uint(0)); // one end point remove, edge must have been removed, too
 
     document->destroy();
 }
