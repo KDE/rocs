@@ -19,6 +19,8 @@
  */
 
 #include "edge.h"
+#include <QVariant>
+#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -64,7 +66,7 @@ EdgePtr Edge::create(NodePtr from, NodePtr to)
     pi->setQpointer(pi);
     pi->d->m_from = from;
     pi->d->m_to = to;
-    pi->d->m_type = from->document()->edgeTypes().first();
+    pi->setType(from->document()->edgeTypes().first());
 
     // insert completely initialized edge into nodes' connections
     to->insert(pi->d->q);
@@ -113,8 +115,37 @@ void Edge::setType(EdgeTypePtr type)
     if (d->m_type == type) {
         return;
     }
+    if (d->m_type) {
+        d->m_type->disconnect(this);
+    }
     d->m_type = type;
+    connect (type.data(), SIGNAL(dynamicPropertyRemoved(QString)), this, SLOT(updateDynamicProperty(QString)));
     emit typeChanged(type);
+}
+
+QVariant Edge::dynamicProperty(const QString &property) const
+{
+    return Edge::property(("_graph_" + property).toLatin1());
+}
+
+void Edge::setDynamicProperty(const QString &property, const QVariant &value)
+{
+    if (!d->m_type) {
+        qWarning() << "No type registered, aborting to set property.";
+    }
+    if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
+        qWarning() << "Dynamic property not registered at type, aborting to set property.";
+    }
+    setProperty(("_graph_" + property).toLatin1(), value);
+}
+
+void Edge::updateDynamicProperty(const QString &property)
+{
+    // remove property if not registered at type
+    if (!d->m_type->dynamicProperties().contains(property)) {
+        setDynamicProperty(property, QVariant::Invalid);
+        return;
+    }
 }
 
 void Edge::setQpointer(EdgePtr q)

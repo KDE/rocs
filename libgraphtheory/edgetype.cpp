@@ -40,6 +40,7 @@ public:
 
     EdgeTypePtr q;
     GraphDocumentPtr m_document;
+    QStringList m_dynamicProperties;
     EdgeType::Direction m_direction;
     bool m_valid;
 };
@@ -80,6 +81,30 @@ void EdgeType::destroy()
 bool EdgeType::isValid() const
 {
     return d->m_valid;
+}
+
+
+QStringList EdgeType::dynamicProperties() const
+{
+    return d->m_dynamicProperties;
+}
+
+void EdgeType::addDynamicProperty(const QString& property)
+{
+    if (d->m_dynamicProperties.contains(property)) {
+        return;
+    }
+    d->m_dynamicProperties.append(property);
+    emit dynamicPropertyAdded(property);
+}
+
+void EdgeType::removeDynamicProperty(const QString& property)
+{
+    if (!d->m_dynamicProperties.contains(property)) {
+        return;
+    }
+    d->m_dynamicProperties.removeOne(property);
+    emit dynamicPropertyRemoved(property);
 }
 
 EdgeType::Direction EdgeType::direction() const

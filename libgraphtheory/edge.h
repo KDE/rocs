@@ -95,6 +95,21 @@ public:
     void setType(EdgeTypePtr type);
 
     /**
+     * @return return value of dynamic property, value is QVariant::Invalid if it is not set
+     */
+    QVariant dynamicProperty(const QString &property) const;
+
+    /**
+     * Set dynamic property with identifier @c property. If @c value is
+     * QVariant::Invalid, the dynamic property is unset. Internally, this
+     * method use the QObject::setProperty mechanism but prefixes properties to avoid name clashes.
+     *
+     * @param property is the identifier for the new property
+     * @param value is the value of this property
+     */
+    void setDynamicProperty(const QString &property, const QVariant &value);
+
+    /**
      * Debug method that tracks how many node objects exist.
      *
      * @return number of edge objects
@@ -106,6 +121,9 @@ public:
 
 Q_SIGNALS:
     void typeChanged(EdgeTypePtr type);
+
+private Q_SLOTS:
+    void updateDynamicProperty(const QString &property);
 
 protected:
     Edge();

@@ -155,7 +155,7 @@ public:
     void setColor(const QColor &color);
 
     /**
-     * @return dynamic property
+     * @return return value of dynamic property, value is QVariant::Invalid if it is not set
      */
     QVariant dynamicProperty(const QString &property) const;
 

@@ -75,6 +75,23 @@ public:
     EdgeType::Direction direction() const;
 
     /**
+     * @return dynamic properties registered for this edge type
+     */
+    QStringList dynamicProperties() const;
+
+    /**
+     * Add dynamic property @c property to list of dynamic properties.
+     * Signal dynamicPropertyAdded(@c property) is emitted afterwards
+     */
+    void addDynamicProperty(const QString &property);
+
+    /**
+     * Remove dynamic property @c property from list of dynamic properties.
+     * Signal dynamicPropertyRemoved(@c property) is emitted afterwards
+     */
+    void removeDynamicProperty(const QString &property);
+
+    /**
      * Set direction for edges of this type. Setting this, emits signal
      * directionChanged(@p direction).
      *
@@ -83,7 +100,7 @@ public:
     void setDirection(EdgeType::Direction direction);
 
     /**
-     * Debug method that tracks how many node objects exist.
+     * Debug method that tracks how many edge objects exist.
      *
      * @return number of edge type objects
      */
@@ -94,6 +111,8 @@ public:
 
 Q_SIGNALS:
     void directionChanged(EdgeType::Direction direction);
+    void dynamicPropertyAdded(const QString &property);
+    void dynamicPropertyRemoved(const QString &property);
 
 protected:
     EdgeType();
