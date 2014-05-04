@@ -30,14 +30,15 @@ class GraphTheory::EdgeItemPrivate {
 public:
     EdgeItemPrivate()
         : m_edge(0)
+        , m_nodeWidth(64)
     {
     }
 
     ~EdgeItemPrivate()
     {
     }
-
     Edge *m_edge;
+    const int m_nodeWidth;
 };
 
 EdgeItem::EdgeItem(QQuickPaintedItem *parent)
@@ -77,14 +78,26 @@ void EdgeItem::setEdge(Edge *edge)
 
 void EdgeItem::paint(QPainter *painter)
 {
-    painter->setPen(QPen(QBrush(Qt::black), 4, Qt::SolidLine));
-    painter->drawLine(QPointF(0, 0), QPointF(width(), height()));
+    const QPoint offset = QPoint(d->m_nodeWidth/2,d->m_nodeWidth/2);
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setPen(QPen(QBrush(Qt::black), 2, Qt::SolidLine));
+    painter->drawLine(
+        offset + QPointF(d->m_edge->from()->x() - x(), d->m_edge->from()->y() - y()),
+        offset + QPointF(d->m_edge->to()->x() - x(), d->m_edge->to()->y() - y()));
 }
 
 void EdgeItem::updatePosition()
 {
-    setX(qMin(d->m_edge->from()->x(), d->m_edge->to()->x()) + 32.0);
-    setY(qMin(d->m_edge->from()->y(), d->m_edge->to()->y()) + 32.0);
-    setWidth(qAbs(d->m_edge->to()->x() - d->m_edge->from()->x()) - 16.0);
-    setHeight(qAbs(d->m_edge->to()->y() - d->m_edge->from()->y()) - 16.0);
+    // compute bounding box
+    // the box possibly has to be enlarged to contain at least the whole width of the line
+    qreal boxX = qMin(d->m_edge->from()->x(), d->m_edge->to()->x());
+    qreal boxY = qMin(d->m_edge->from()->y(), d->m_edge->to()->y());
+    qreal boxWidth = qAbs(d->m_edge->to()->x() - d->m_edge->from()->x()) + d->m_nodeWidth;
+    qreal boxHeight = qAbs(d->m_edge->to()->y() - d->m_edge->from()->y()) + d->m_nodeWidth;
+
+    // set coordinates
+    setX(boxX);
+    setY(boxY);
+    setWidth(boxWidth);
+    setHeight(boxHeight);
 }
