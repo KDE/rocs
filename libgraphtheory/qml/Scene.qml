@@ -82,7 +82,9 @@ ApplicationWindow {
             id: sceneAction
             anchors.fill: parent
             onClicked: {
-                createNode(mouseX, mouseY);
+                if (buttonAddNode.checked) {
+                    createNode(mouseX, mouseY);
+                }
             }
         }
 
