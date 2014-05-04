@@ -34,34 +34,77 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
-    Repeater {
-        model: edgeModel
-        EdgeItem {
-            edge: model.dataRole
+    ExclusiveGroup {
+        id: editToolButton
+    }
 
-            EdgePropertyItem {
-                anchors.centerIn: parent
-                edge: model.dataRole
-            }
+    ColumnLayout {
+        id: toolbar
+        ToolButton {
+            id: buttonSelectMove
+            iconName: "rocsselectmove"
+            checkable: true
+            checked: true
+            exclusiveGroup: editToolButton
+        }
+        ToolButton {
+            id: buttonAddNode
+            iconName: "rocsaddnode"
+            checkable: true
+            exclusiveGroup: editToolButton
+        }
+        ToolButton {
+            id: buttonAddEdge
+            iconName: "rocsaddedge"
+            checkable: true
+            exclusiveGroup: editToolButton
+        }
+        ToolButton {
+            id: buttonDelete
+            iconName: "rocsdelete"
+            checkable: true
+            exclusiveGroup: editToolButton
         }
     }
 
-    Repeater {
-        model: nodeModel
-        NodeItem {
-            node: model.dataRole
+    Item {
+        width: root.width - toolbar.width - 20
+        height: root.height
+        anchors {
+            left: toolbar.right
+            leftMargin: 10
+        }
 
-            NodePropertyItem {
-                anchors.centerIn: parent
-                node: model.dataRole
-            }
+        Repeater {
+            model: edgeModel
+            EdgeItem {
+                edge: model.dataRole
 
-            Drag.active: dragArea.drag.active
-            MouseArea {
-                id: dragArea
-                anchors.fill: parent
-                drag.target: parent
+                EdgePropertyItem {
+                    anchors.centerIn: parent
+                    edge: model.dataRole
+                }
             }
         }
+
+        Repeater {
+            model: nodeModel
+            NodeItem {
+                node: model.dataRole
+
+                NodePropertyItem {
+                    anchors.centerIn: parent
+                    node: model.dataRole
+                }
+
+                Drag.active: dragArea.drag.active
+                MouseArea {
+                    id: dragArea
+                    anchors.fill: parent
+                    drag.target: parent
+                }
+            }
+        }
+
     }
 }
