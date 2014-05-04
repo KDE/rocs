@@ -22,10 +22,7 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
-#include "models/nodemodel.h"
-#include "models/edgemodel.h"
-#include "qtquickitems/nodeitem.h"
-#include "qtquickitems/edgeitem.h"
+#include "editor.h"
 
 #include <QApplication>
 #include <QObject>
@@ -41,28 +38,8 @@ using namespace GraphTheory;
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
-    qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
-    qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
-    qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
-    qmlRegisterType<GraphTheory::EdgeItem>("org.kde.rocs.graphtheory", 1, 0, "EdgeItem");
-    qmlRegisterType<GraphTheory::NodeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeModel");
-    qmlRegisterType<GraphTheory::EdgeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeModel");
-
+    QQmlEngine *engine = new QQmlEngine;
     int rc = 0;
-
-    QQmlEngine engine;
-    QQmlComponent *component = new QQmlComponent(&engine);
-
-    QObject::connect(&engine, SIGNAL(quit()), QCoreApplication::instance(), SLOT(quit()));
-
-    QUrl path = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "rocsgraphtheory/qml/Scene.qml"));
-    component->loadUrl(path);
-
-    if (!component->isReady() ) {
-        qWarning() << ("%s", qPrintable(component->errorString()));
-        return -1;
-    }
 
     // test data
     GraphDocumentPtr document = GraphDocument::create();
@@ -77,25 +54,15 @@ int main(int argc, char *argv[])
     EdgePtr edge = Edge::create(from, to);
     edge->setDynamicProperty("weight", "3");
 
-    NodeModel *nodeModel = new NodeModel();
-    nodeModel->setDocument(document);
-    engine.rootContext()->setContextProperty("nodeModel", nodeModel);
-    EdgeModel *edgeModel = new EdgeModel();
-    edgeModel->setDocument(document);
-    engine.rootContext()->setContextProperty("edgeModel", edgeModel);
-
-    QObject *topLevel = component->create();
-    QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
-
+    Editor editor(engine);
+    editor.setGraphDocument(document);
+    QQuickWindow *window = editor.component();
     QSurfaceFormat surfaceFormat = window->requestedFormat();
     window->setFormat(surfaceFormat);
     window->show();
 
     rc = app.exec();
-
-    delete component;
-    nodeModel->deleteLater();
-    edgeModel->deleteLater();
+    engine->deleteLater();
     document->destroy();
     return rc;
 }

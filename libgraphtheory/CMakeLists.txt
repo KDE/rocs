@@ -31,6 +31,7 @@ set(graphtheory_SRCS
     graphdocument.cpp
     node.cpp
     nodetype.cpp
+    editor.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
     qtquickitems/nodeitem.cpp
