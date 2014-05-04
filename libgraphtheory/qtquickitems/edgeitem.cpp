@@ -62,14 +62,16 @@ void EdgeItem::setEdge(Edge *edge)
     if (edge == d->m_edge) {
         return;
     }
+    if (edge) {
+        edge->from().data()->disconnect(this);
+        edge->to().data()->disconnect(this);
+        edge->disconnect(this);
+    }
     d->m_edge = edge;
+    connect (edge->from().data(), SIGNAL(positionChanged(QPointF)), this, SLOT(updatePosition()));
+    connect (edge->to().data(), SIGNAL(positionChanged(QPointF)), this, SLOT(updatePosition()));
 
-    //TODO update when nodes are moved
-    setX(qMin(edge->from()->x(), edge->to()->x()) + 32.0);
-    setY(qMin(edge->from()->y(), edge->to()->y()) + 32.0);
-    setWidth(qAbs(edge->to()->x() - edge->from()->x()) - 16.0);
-    setHeight(qAbs(edge->to()->y() - edge->from()->y()) - 16.0);
-
+    updatePosition();
     emit edgeChanged();
 }
 
@@ -77,4 +79,12 @@ void EdgeItem::paint(QPainter *painter)
 {
     painter->setPen(QPen(QBrush(Qt::black), 4, Qt::SolidLine));
     painter->drawLine(QPointF(0, 0), QPointF(width(), height()));
+}
+
+void EdgeItem::updatePosition()
+{
+    setX(qMin(d->m_edge->from()->x(), d->m_edge->to()->x()) + 32.0);
+    setY(qMin(d->m_edge->from()->y(), d->m_edge->to()->y()) + 32.0);
+    setWidth(qAbs(d->m_edge->to()->x() - d->m_edge->from()->x()) - 16.0);
+    setHeight(qAbs(d->m_edge->to()->y() - d->m_edge->from()->y()) - 16.0);
 }

@@ -47,6 +47,9 @@ public:
 Q_SIGNALS:
     void edgeChanged();
 
+private Q_SLOTS:
+    void updatePosition();
+
 private:
     Q_DISABLE_COPY(EdgeItem)
     const QScopedPointer<EdgeItemPrivate> d;

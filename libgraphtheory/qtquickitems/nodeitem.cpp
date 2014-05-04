@@ -63,9 +63,14 @@ void NodeItem::setNode(Node *node)
     if (node == d->m_node) {
         return;
     }
+    if (node) {
+        node->disconnect(this);
+    }
     d->m_node = node;
     setX(node->x());
     setY(node->y());
+    connect(this, SIGNAL(xChanged()), this, SLOT(updateX()));
+    connect(this, SIGNAL(yChanged()), this, SLOT(updateY()));
     emit nodeChanged();
 }
 
@@ -75,4 +80,14 @@ void NodeItem::paint(QPainter *painter)
     painter->setPen(QPen(QBrush(Qt::black), 2, Qt::SolidLine));
     painter->setBrush(QBrush(d->m_node->color()));
     painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));
+}
+
+void NodeItem::updateX()
+{
+    d->m_node->setX(x());
+}
+
+void NodeItem::updateY()
+{
+    d->m_node->setY(y());
 }

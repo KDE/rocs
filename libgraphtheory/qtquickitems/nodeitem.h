@@ -45,6 +45,10 @@ public:
 Q_SIGNALS:
     void nodeChanged();
 
+private Q_SLOTS:
+    void updateX();
+    void updateY();
+
 private:
     Q_DISABLE_COPY(NodeItem)
     const QScopedPointer<NodeItemPrivate> d;

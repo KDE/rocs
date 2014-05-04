@@ -55,6 +55,13 @@ ApplicationWindow {
                 anchors.centerIn: parent
                 node: model.dataRole
             }
+
+            Drag.active: dragArea.drag.active
+            MouseArea {
+                id: dragArea
+                anchors.fill: parent
+                drag.target: parent
+            }
         }
     }
 }
