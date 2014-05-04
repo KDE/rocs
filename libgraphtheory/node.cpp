@@ -212,6 +212,15 @@ QVariant Node::dynamicProperty(const QString &property) const
     return Node::property(("_graph_" + property).toLatin1());
 }
 
+QStringList Node::dynamicProperties() const
+{
+    QStringList propertyValues;
+    foreach (QString property, d->m_type->dynamicProperties()) {
+        propertyValues.append(dynamicProperty(property).toString());
+    }
+    return propertyValues;
+}
+
 void Node::setDynamicProperty(const QString &property, const QVariant &value)
 {
     if (!d->m_type) {
@@ -228,8 +237,9 @@ void Node::updateDynamicProperty(const QString &property)
     // remove property if not registered at type
     if (!d->m_type->dynamicProperties().contains(property)) {
         setDynamicProperty(property, QVariant::Invalid);
-        return;
     }
+
+    emit dynamicPropertiesChanged();
 }
 
 void Node::setQpointer(NodePtr q)

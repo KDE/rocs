@@ -25,6 +25,8 @@
 
 set(graphtheory_qml_files
     Scene.qml
+    NodePropertyItem.qml
+    EdgePropertyItem.qml
 )
 
 install(FILES ${graphtheory_qml_files} DESTINATION ${DATA_INSTALL_DIR}/rocsgraphtheory/qml)

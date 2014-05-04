@@ -128,6 +128,15 @@ QVariant Edge::dynamicProperty(const QString &property) const
     return Edge::property(("_graph_" + property).toLatin1());
 }
 
+QStringList Edge::dynamicProperties() const
+{
+    QStringList propertyValues;
+    foreach (QString property, d->m_type->dynamicProperties()) {
+        propertyValues.append(dynamicProperty(property).toString());
+    }
+    return propertyValues;
+}
+
 void Edge::setDynamicProperty(const QString &property, const QVariant &value)
 {
     if (!d->m_type) {
@@ -144,8 +153,9 @@ void Edge::updateDynamicProperty(const QString &property)
     // remove property if not registered at type
     if (!d->m_type->dynamicProperties().contains(property)) {
         setDynamicProperty(property, QVariant::Invalid);
-        return;
     }
+
+    emit dynamicPropertiesChanged();
 }
 
 void Edge::setQpointer(EdgePtr q)

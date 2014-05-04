@@ -24,43 +24,15 @@ import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
 import org.kde.rocs.graphtheory 1.0
 
-ApplicationWindow {
+Item {
     id: root
 
-    title: "Graph Theory Scene Test"
+    property Node node: undefined
+    width: property.width
+    height: property.heigth
 
-    statusBar: StatusBar {
-    RowLayout {
-        Label {
-            id: status
-            }
-        }
-    }
-
-    Repeater {
-        model: edgeModel
-        EdgeItem {
-            edge: model.dataRole
-
-            EdgePropertyItem {
-                anchors.centerIn: parent
-                edge: model.dataRole
-            }
-        }
-    }
-
-    Repeater {
-        model: nodeModel
-        NodeItem {
-            node: model.dataRole
-
-            NodePropertyItem {
-                anchors.centerIn: parent
-                node: model.dataRole
-            }
-        }
-    }
-
-    width: 800
-    height: 600
+    Text {
+         id: property
+         text: node != undefined ? node.dynamicProperties : ""
+     }
 }

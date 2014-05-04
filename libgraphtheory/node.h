@@ -44,6 +44,7 @@ class GRAPHTHEORY_EXPORT Node : public QObject
     Q_PROPERTY(qreal x READ x WRITE setX NOTIFY positionChanged)
     Q_PROPERTY(qreal y READ y WRITE setY NOTIFY positionChanged)
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(QStringList dynamicProperties READ dynamicProperties NOTIFY dynamicPropertiesChanged)
 
 public:
     /**
@@ -160,6 +161,11 @@ public:
     QVariant dynamicProperty(const QString &property) const;
 
     /**
+     * @return list of those dynamic property values registered at node type in that order
+     */
+    QStringList dynamicProperties() const;
+
+    /**
      * Set dynamic property with identifier @c property. If @c value is
      * QVariant::Invalid, the dynamic property is unset. Internally, this
      * method use the QObject::setProperty mechanism but prefixes properties to avoid name clashes.
@@ -185,6 +191,7 @@ Q_SIGNALS:
     void positionChanged(const QPointF &position);
     void idChanged(int id);
     void colorChanged(const QColor &color);
+    void dynamicPropertiesChanged();
 
 private Q_SLOTS:
     void updateDynamicProperty(const QString &property);

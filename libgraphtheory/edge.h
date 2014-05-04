@@ -40,6 +40,7 @@ class EdgePrivate;
 class GRAPHTHEORY_EXPORT Edge : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QStringList dynamicProperties READ dynamicProperties NOTIFY dynamicPropertiesChanged)
 
 public:
     /**
@@ -100,6 +101,11 @@ public:
     QVariant dynamicProperty(const QString &property) const;
 
     /**
+     * @return list of those dynamic property values registered at edge type in that order
+     */
+    QStringList dynamicProperties() const;
+
+    /**
      * Set dynamic property with identifier @c property. If @c value is
      * QVariant::Invalid, the dynamic property is unset. Internally, this
      * method use the QObject::setProperty mechanism but prefixes properties to avoid name clashes.
@@ -121,6 +127,7 @@ public:
 
 Q_SIGNALS:
     void typeChanged(EdgeTypePtr type);
+    void dynamicPropertiesChanged();
 
 private Q_SLOTS:
     void updateDynamicProperty(const QString &property);
