@@ -43,6 +43,9 @@ public:
     void setGraphDocument(GraphDocumentPtr document);
     QQuickWindow * component();
 
+private Q_SLOTS:
+    void createNode(qreal x, qreal y);
+
 private:
     Q_DISABLE_COPY(Editor)
     const QScopedPointer<EditorPrivate> d;

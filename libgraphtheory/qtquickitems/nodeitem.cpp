@@ -69,8 +69,9 @@ void NodeItem::setNode(Node *node)
     d->m_node = node;
     setX(node->x());
     setY(node->y());
-    connect(this, SIGNAL(xChanged()), this, SLOT(updateX()));
-    connect(this, SIGNAL(yChanged()), this, SLOT(updateY()));
+    connect(node, SIGNAL(positionChanged(QPointF)), this, SLOT(setPosition(QPointF)));
+    connect(this, SIGNAL(xChanged()), this, SLOT(updateXfromScene()));
+    connect(this, SIGNAL(yChanged()), this, SLOT(updateYfromScene()));
     emit nodeChanged();
 }
 
@@ -82,12 +83,27 @@ void NodeItem::paint(QPainter *painter)
     painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));
 }
 
-void NodeItem::updateX()
+void NodeItem::updateXfromScene()
 {
+    if (d->m_node->x() == x()) {
+        return;
+    }
     d->m_node->setX(x());
 }
 
-void NodeItem::updateY()
+void NodeItem::updateYfromScene()
 {
+    if (d->m_node->y() == y()) {
+        return;
+    }
     d->m_node->setY(y());
+}
+
+void NodeItem::setPosition(const QPointF &position)
+{
+    // while updating position explicitly do not listen to node position changes
+    d->m_node->disconnect(this, SIGNAL(setPosition(QPointF)));
+    setX(position.x() - 16);
+    setY(position.y() - 32);
+    connect(d->m_node, SIGNAL(positionChanged(QPointF)), this, SLOT(setPosition(QPointF)));
 }

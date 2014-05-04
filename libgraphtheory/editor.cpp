@@ -105,5 +105,17 @@ QQuickWindow * Editor::component() {
     d->m_engine->rootContext()->setContextProperty("edgeModel", d->m_edgeModel);
 
     QObject *topLevel = component->create();
-    return qobject_cast<QQuickWindow *>(topLevel);
+    QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
+
+    // connections to QML signals
+    connect(topLevel, SIGNAL(createNode(qreal,qreal)),
+            this, SLOT(createNode(qreal,qreal)));
+
+    return window;
+}
+
+void Editor::createNode(qreal x, qreal y) {
+    NodePtr node = Node::create(d->m_document);
+    node->setX(x);
+    node->setY(y);
 }

@@ -29,6 +29,8 @@ ApplicationWindow {
     width: 800
     height: 600
 
+    signal createNode(real x, real y)
+
     Rectangle { // white background
         color: "white"
         anchors.fill: parent
@@ -68,11 +70,20 @@ ApplicationWindow {
     }
 
     Item {
+        id: scene
         width: root.width - toolbar.width - 20
         height: root.height
         anchors {
             left: toolbar.right
             leftMargin: 10
+        }
+
+        MouseArea {
+            id: sceneAction
+            anchors.fill: parent
+            onClicked: {
+                createNode(mouseX, mouseY);
+            }
         }
 
         Repeater {

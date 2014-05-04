@@ -46,8 +46,9 @@ Q_SIGNALS:
     void nodeChanged();
 
 private Q_SLOTS:
-    void updateX();
-    void updateY();
+    void updateXfromScene();
+    void updateYfromScene();
+    void setPosition(const QPointF& position);
 
 private:
     Q_DISABLE_COPY(NodeItem)
