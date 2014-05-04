@@ -85,7 +85,7 @@ void EdgeModel::setDocument(GraphDocumentPtr document)
     d->m_document = document;
     if (d->m_document) {
         connect(d->m_document.data(), SIGNAL(edgeAboutToBeAdded(EdgePtr,int)), SLOT(onEdgeAboutToBeAdded(EdgePtr,int)));
-        connect(d->m_document.data(), SIGNAL(edgeeAdded()), SLOT(onEdgeAdded()));
+        connect(d->m_document.data(), SIGNAL(edgeAdded()), SLOT(onEdgeAdded()));
         connect(d->m_document.data(), SIGNAL(edgesAboutToBeRemoved(int,int)), SLOT(onEdgesAboutToBeRemoved(int,int)));
         connect(d->m_document.data(), SIGNAL(edgesRemoved()), SLOT(onEdgesRemoved()));
     }
