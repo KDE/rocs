@@ -66,12 +66,16 @@ int main(int argc, char *argv[])
 
     // test data
     GraphDocumentPtr document = GraphDocument::create();
+    document->edgeTypes().first()->addDynamicProperty("weight");
+    document->nodeTypes().first()->addDynamicProperty("value");
     NodePtr from = Node::create(document);
     NodePtr to = Node::create(document);
     to->setX(100);
     to->setY(100);
+    to->setDynamicProperty("value", "5");
     to->setColor(Qt::green);
     EdgePtr edge = Edge::create(from, to);
+    edge->setDynamicProperty("weight", "3");
 
     NodeModel *nodeModel = new NodeModel();
     nodeModel->setDocument(document);
