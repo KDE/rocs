@@ -26,15 +26,12 @@ import org.kde.rocs.graphtheory 1.0
 
 ApplicationWindow {
     id: root
+    width: 800
+    height: 600
 
-    title: "Graph Theory Scene Test"
-
-    statusBar: StatusBar {
-    RowLayout {
-        Label {
-            id: status
-            }
-        }
+    Rectangle { // white background
+        color: "white"
+        anchors.fill: parent
     }
 
     Repeater {
@@ -60,7 +57,4 @@ ApplicationWindow {
             }
         }
     }
-
-    width: 800
-    height: 600
 }
