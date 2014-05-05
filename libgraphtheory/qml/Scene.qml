@@ -114,7 +114,9 @@ ApplicationWindow {
                 MouseArea {
                     id: dragArea
                     anchors.fill: parent
-                    drag.target: parent
+                    drag.target: { // only enable drag when move/select checked
+                        buttonSelectMove.checked ? parent : undefined
+                    }
                 }
             }
         }
