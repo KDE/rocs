@@ -28,6 +28,7 @@ class GraphTheory::NodeItemPrivate {
 public:
     NodeItemPrivate()
         : m_node(0)
+        , m_updating(false)
     {
     }
 
@@ -36,6 +37,7 @@ public:
     }
 
     Node *m_node;
+    bool m_updating; //!< while true do not react to any change requested
 };
 
 NodeItem::NodeItem(QQuickPaintedItem *parent)
@@ -70,8 +72,8 @@ void NodeItem::setNode(Node *node)
     setX(node->x());
     setY(node->y());
     connect(node, SIGNAL(positionChanged(QPointF)), this, SLOT(setPosition(QPointF)));
-    connect(this, SIGNAL(xChanged()), this, SLOT(updateXfromScene()));
-    connect(this, SIGNAL(yChanged()), this, SLOT(updateYfromScene()));
+    connect(this, SIGNAL(xChanged()), this, SLOT(updatePositionfromScene()));
+    connect(this, SIGNAL(yChanged()), this, SLOT(updatePositionfromScene()));
     emit nodeChanged();
 }
 
@@ -83,27 +85,22 @@ void NodeItem::paint(QPainter *painter)
     painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));
 }
 
-void NodeItem::updateXfromScene()
+void NodeItem::updatePositionfromScene()
 {
-    if (d->m_node->x() == x()) {
+    if (d->m_node->x() == x() && d->m_node->y() == y()) {
         return;
     }
+    d->m_updating = true;
     d->m_node->setX(x());
-}
-
-void NodeItem::updateYfromScene()
-{
-    if (d->m_node->y() == y()) {
-        return;
-    }
     d->m_node->setY(y());
+    d->m_updating = false;
 }
 
 void NodeItem::setPosition(const QPointF &position)
 {
-    // while updating position explicitly do not listen to node position changes
-    d->m_node->disconnect(this, SIGNAL(setPosition(QPointF)));
+    if (d->m_updating) {
+        return;
+    }
     setX(position.x() - 16);
     setY(position.y() - 32);
-    connect(d->m_node, SIGNAL(positionChanged(QPointF)), this, SLOT(setPosition(QPointF)));
 }

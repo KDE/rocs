@@ -46,8 +46,7 @@ Q_SIGNALS:
     void nodeChanged();
 
 private Q_SLOTS:
-    void updateXfromScene();
-    void updateYfromScene();
+    void updatePositionfromScene();
     void setPosition(const QPointF& position);
 
 private:
