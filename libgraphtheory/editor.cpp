@@ -111,8 +111,8 @@ QQuickWindow * Editor::component()
     // connections to QML signals
     connect(topLevel, SIGNAL(createNode(qreal,qreal)),
             this, SLOT(createNode(qreal,qreal)));
-    connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node*)),
-            this, SLOT(deleteNode(GraphTheory::Node*)));
+    connect(topLevel, SIGNAL(createEdge(GraphTheory::Node*, GraphTheory::Node*)),
+            this, SLOT(createEdge(GraphTheory::Node*, GraphTheory::Node*)));
     connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge*)),
             this, SLOT(deleteEdge(GraphTheory::Edge*)));
 
@@ -124,6 +124,17 @@ void Editor::createNode(qreal x, qreal y)
     NodePtr node = Node::create(d->m_document);
     node->setX(x);
     node->setY(y);
+}
+
+void Editor::createEdge(Node *from, Node *to)
+{
+    if (!from || !to) {
+        return;
+    }
+    if (!from->isValid() || !to->isValid()) {
+        return;
+    }
+    Edge::create(from->self(), to->self());
 }
 
 void Editor::deleteNode(GraphTheory::Node *node)

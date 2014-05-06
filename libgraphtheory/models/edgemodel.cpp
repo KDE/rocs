@@ -24,6 +24,7 @@
 
 #include <KLocalizedString>
 #include <QSignalMapper>
+#include <QDebug>
 
 using namespace GraphTheory;
 

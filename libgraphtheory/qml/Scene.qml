@@ -30,8 +30,11 @@ ApplicationWindow {
     height: 600
 
     signal createNode(real x, real y);
+    signal createEdge(Node from, Node to);
     signal deleteNode(Node node);
     signal deleteEdge(Edge edge);
+
+    property Node __createEdgeFromBuffer
 
     Rectangle { // white background
         color: "white"
@@ -128,7 +131,15 @@ ApplicationWindow {
                     drag.target: { // only enable drag when move/select checked
                         buttonSelectMove.checked ? parent : undefined
                     }
+                    onPressed: {
+                        if (buttonAddEdge.checked) {
+                            __createEdgeFromBuffer = node
+                        }
+                    }
                     onReleased: {
+                        if (buttonAddEdge.checked) {
+                            createEdge(__createEdgeFromBuffer,node)
+                        }
                         if (buttonDelete.checked) {
                             deleteNode(node)
                         }

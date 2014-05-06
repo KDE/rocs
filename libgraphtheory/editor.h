@@ -45,6 +45,7 @@ public:
 
 private Q_SLOTS:
     void createNode(qreal x, qreal y);
+    void createEdge(GraphTheory::Node *from, GraphTheory::Node *to);
     void deleteNode(GraphTheory::Node *node);
     void deleteEdge(GraphTheory::Edge *edge);
 
