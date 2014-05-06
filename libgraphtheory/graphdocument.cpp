@@ -49,6 +49,11 @@ public:
     bool m_valid;
 };
 
+GraphDocumentPtr GraphDocument::self() const
+{
+    return d->q;
+}
+
 void GraphDocument::destroy()
 {
     d->m_valid = false;

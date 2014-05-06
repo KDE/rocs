@@ -84,6 +84,11 @@ NodePtr Node::create(GraphDocumentPtr document)
     return pi;
 }
 
+NodePtr Node::self() const
+{
+    return d->q;
+}
+
 void Node::destroy()
 {
     d->m_valid = false;

@@ -77,6 +77,11 @@ EdgePtr Edge::create(NodePtr from, NodePtr to)
     return pi;
 }
 
+EdgePtr Edge::self() const
+{
+    return d->q;
+}
+
 void Edge::destroy()
 {
     d->m_valid = false;

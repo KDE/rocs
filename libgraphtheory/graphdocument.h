@@ -55,6 +55,11 @@ public:
     virtual ~GraphDocument();
 
     /**
+     * @return shared pointer to object
+     */
+    GraphDocumentPtr self() const;
+
+    /**
      * Destroys the document object and all of its contents.
      */
     void destroy();

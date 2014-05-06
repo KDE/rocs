@@ -57,6 +57,11 @@ public:
     virtual ~Edge();
 
     /**
+     * @return shared pointer to object
+     */
+    EdgePtr self() const;
+
+    /**
      * Destroys the edge object and removes it from the connected nodes.
      */
     void destroy();

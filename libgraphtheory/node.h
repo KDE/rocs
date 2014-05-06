@@ -59,6 +59,11 @@ public:
     virtual ~Node();
 
     /**
+     * @return shared pointer to object
+     */
+    NodePtr self() const;
+
+    /**
      * Destroys the node object, invoke destroy calls for edges, and removes it from the document.
      */
     void destroy();
