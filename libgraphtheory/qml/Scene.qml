@@ -31,6 +31,7 @@ ApplicationWindow {
 
     signal createNode(real x, real y);
     signal deleteNode(Node node);
+    signal deleteEdge(Edge edge);
 
     Rectangle { // white background
         color: "white"
@@ -97,6 +98,15 @@ ApplicationWindow {
                 EdgePropertyItem {
                     anchors.centerIn: parent
                     edge: model.dataRole
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onReleased: {
+                        if (buttonDelete.checked) {
+                            deleteEdge(edge)
+                        }
+                    }
                 }
             }
         }

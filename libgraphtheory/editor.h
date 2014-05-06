@@ -45,7 +45,8 @@ public:
 
 private Q_SLOTS:
     void createNode(qreal x, qreal y);
-    void deleteNode(GraphTheory::Node* node);
+    void deleteNode(GraphTheory::Node *node);
+    void deleteEdge(GraphTheory::Edge *edge);
 
 private:
     Q_DISABLE_COPY(Editor)

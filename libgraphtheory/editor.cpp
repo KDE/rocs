@@ -113,6 +113,8 @@ QQuickWindow * Editor::component()
             this, SLOT(createNode(qreal,qreal)));
     connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node*)),
             this, SLOT(deleteNode(GraphTheory::Node*)));
+    connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge*)),
+            this, SLOT(deleteEdge(GraphTheory::Edge*)));
 
     return window;
 }
@@ -130,4 +132,12 @@ void Editor::deleteNode(GraphTheory::Node *node)
         return;
     }
     node->destroy();
+}
+
+void Editor::deleteEdge(GraphTheory::Edge *edge)
+{
+    if (!edge || !edge->isValid()) {
+        return;
+    }
+    edge->destroy();
 }
