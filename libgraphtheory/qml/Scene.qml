@@ -29,7 +29,8 @@ ApplicationWindow {
     width: 800
     height: 600
 
-    signal createNode(real x, real y)
+    signal createNode(real x, real y);
+    signal deleteNode(Node node);
 
     Rectangle { // white background
         color: "white"
@@ -117,9 +118,13 @@ ApplicationWindow {
                     drag.target: { // only enable drag when move/select checked
                         buttonSelectMove.checked ? parent : undefined
                     }
+                    onReleased: {
+                        if (buttonDelete.checked) {
+                            deleteNode(node)
+                        }
+                    }
                 }
             }
         }
-
     }
 }

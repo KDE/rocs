@@ -82,7 +82,8 @@ void Editor::setGraphDocument(GraphDocumentPtr document)
     d->m_edgeModel->setDocument(d->m_document);
 }
 
-QQuickWindow * Editor::component() {
+QQuickWindow * Editor::component()
+{
     qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
     qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
     qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
@@ -110,12 +111,23 @@ QQuickWindow * Editor::component() {
     // connections to QML signals
     connect(topLevel, SIGNAL(createNode(qreal,qreal)),
             this, SLOT(createNode(qreal,qreal)));
+    connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node*)),
+            this, SLOT(deleteNode(GraphTheory::Node*)));
 
     return window;
 }
 
-void Editor::createNode(qreal x, qreal y) {
+void Editor::createNode(qreal x, qreal y)
+{
     NodePtr node = Node::create(d->m_document);
     node->setX(x);
     node->setY(y);
+}
+
+void Editor::deleteNode(GraphTheory::Node *node)
+{
+    if (!node || !node->isValid()) {
+        return;
+    }
+    node->destroy();
 }
