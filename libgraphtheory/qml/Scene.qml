@@ -86,12 +86,51 @@ ApplicationWindow {
         MouseArea {
             id: sceneAction
             anchors.fill: parent
+            property int startX
+            property int startY
+            property int endX
+            property int endY
+            property bool activePress
             onClicked: {
                 console.log("scene: CLICKED")
                 if (buttonAddNode.checked) {
+                    mouse.accepted = true
                     createNode(mouse.x, mouse.y);
+                    return
                 }
             }
+            onPressed: {
+                activePress = true
+                startX = mouse.x
+                startY = mouse.y
+                endX = mouse.x
+                endY = mouse.y
+            }
+            onPositionChanged: {
+                endX = mouse.x
+                endY = mouse.y
+                console.log("scene: RELEASED" + mouse.x)
+            }
+            onReleased: {
+                activePress = false
+            }
+        }
+
+        // highlighter for selection and edges
+        Component {
+            id: rectComponent
+            Rectangle {
+                x: Math.min(sceneAction.startX, sceneAction.endX)
+                y: Math.min(sceneAction.startY, sceneAction.endY)
+                width: Math.abs(sceneAction.startX - sceneAction.endX)
+                height: Math.abs(sceneAction.startY - sceneAction.endY)
+                color: "#afc3deff"
+                border.color: "steelblue"
+                border.width: 2
+            }
+        }
+        Loader {
+            sourceComponent: buttonSelectMove.checked && sceneAction.activePress ? rectComponent : undefined
         }
 
         Repeater {
