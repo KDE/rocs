@@ -87,8 +87,9 @@ ApplicationWindow {
             id: sceneAction
             anchors.fill: parent
             onClicked: {
+                console.log("scene: CLICKED")
                 if (buttonAddNode.checked) {
-                    createNode(mouseX, mouseY);
+                    createNode(mouse.x, mouse.y);
                 }
             }
         }
@@ -105,10 +106,13 @@ ApplicationWindow {
 
                 MouseArea {
                     anchors.fill: parent
+                    propagateComposedEvents: true
                     onReleased: {
                         if (buttonDelete.checked) {
+                            mouse.accepted = true
                             deleteEdge(edge)
                         }
+                        mouse.accepted = false
                     }
                 }
             }
@@ -128,21 +132,17 @@ ApplicationWindow {
                 MouseArea {
                     id: dragArea
                     anchors.fill: parent
+                    propagateComposedEvents: true
                     drag.target: { // only enable drag when move/select checked
                         buttonSelectMove.checked ? parent : undefined
                     }
-                    onPressed: {
-                        if (buttonAddEdge.checked) {
-                            __createEdgeFromBuffer = node
-                        }
-                    }
-                    onReleased: {
-                        if (buttonAddEdge.checked) {
-                            createEdge(__createEdgeFromBuffer,node)
-                        }
+                    onClicked: {
                         if (buttonDelete.checked) {
+                            mouse.accepted = true
                             deleteNode(node)
+                            return
                         }
+                        mouse.accepted = false
                     }
                 }
             }
