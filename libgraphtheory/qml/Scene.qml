@@ -129,8 +129,25 @@ ApplicationWindow {
                 border.width: 2
             }
         }
+        Component {
+            id: lineComponent
+            Line {
+                fromX: sceneAction.startX
+                fromY: sceneAction.startY
+                toX: sceneAction.endX
+                toY: sceneAction.endY
+            }
+        }
         Loader {
-            sourceComponent: buttonSelectMove.checked && sceneAction.activePress ? rectComponent : undefined
+            sourceComponent: {
+                if (buttonSelectMove.checked && sceneAction.activePress) {
+                    return rectComponent
+                }
+                if (buttonAddEdge.checked && sceneAction.activePress) {
+                    return lineComponent
+                }
+                return undefined
+            }
         }
 
         Repeater {

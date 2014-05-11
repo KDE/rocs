@@ -25,6 +25,7 @@
 
 set(graphtheory_qml_files
     Scene.qml
+    Line.qml
     NodePropertyItem.qml
     EdgePropertyItem.qml
 )
