@@ -170,6 +170,9 @@ ApplicationWindow {
                         }
                         mouse.accepted = false
                     }
+                    onPressed: {
+                        mouse.accepted = false
+                    }
                 }
             }
         }
@@ -199,6 +202,11 @@ ApplicationWindow {
                             return
                         }
                         mouse.accepted = false
+                    }
+                    onPressed: {
+                        if (!buttonDelete.checked && !buttonSelectMove.checked) {
+                            mouse.accepted = false
+                        }
                     }
                 }
             }
