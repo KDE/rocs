@@ -25,6 +25,7 @@
 
 set(graphtheory_qml_files
     Scene.qml
+    AddEdgeAction.qml
     Line.qml
     NodePropertyItem.qml
     EdgePropertyItem.qml

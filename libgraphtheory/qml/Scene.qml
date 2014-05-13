@@ -59,10 +59,11 @@ ApplicationWindow {
             exclusiveGroup: editToolButton
         }
         ToolButton {
-            id: buttonAddEdge
-            iconName: "rocsaddedge"
-            checkable: true
-            exclusiveGroup: editToolButton
+            action: AddEdgeAction {
+                id: addEdgeAction
+                exclusiveGroup: editToolButton
+                onCreateEdge: root.createEdge(from, to)
+            }
         }
         ToolButton {
             id: buttonDelete
@@ -93,7 +94,6 @@ ApplicationWindow {
             property int mouseY
 
             onClicked: {
-                console.log("scene: CLICKED")
                 if (buttonAddNode.checked) {
                     mouse.accepted = true
                     createNode(mouse.x, mouse.y);
@@ -112,10 +112,12 @@ ApplicationWindow {
                 mouseY = mouse.y
                 endX = mouse.x
                 endY = mouse.y
-                console.log("scene: RELEASED" + mouse.x)
             }
             onReleased: {
                 activePress = false
+                if (addEdgeAction.checked) {
+                    addEdgeAction.apply();
+                }
             }
         }
 
@@ -146,7 +148,7 @@ ApplicationWindow {
                 if (buttonSelectMove.checked && sceneAction.activePress) {
                     return rectComponent
                 }
-                if (buttonAddEdge.checked && sceneAction.activePress) {
+                if (addEdgeAction.checked && sceneAction.activePress) {
                     return lineComponent
                 }
                 return undefined
@@ -185,20 +187,25 @@ ApplicationWindow {
             NodeItem {
                 id: nodeItem
                 node: model.dataRole
+                highlighted: addEdgeAction.from == node || addEdgeAction.to == node
                 Connections {
                     target: sceneAction
                     onMouseXChanged: {
                         if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
-                            nodeItem.highlighted = true
-                        } else {
-                            nodeItem.highlighted = false
+                            if (addEdgeAction.from == null) {
+                                addEdgeAction.from = node;
+                            } else {
+                                addEdgeAction.to = node
+                            }
                         }
                     }
                     onMouseYChanged: {
                         if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
-                            nodeItem.highlighted = true
-                        } else {
-                            nodeItem.highlighted = false
+                            if (addEdgeAction.from == null) {
+                                addEdgeAction.from = node;
+                            } else {
+                                addEdgeAction.to = node
+                            }
                         }
                     }
                 }
