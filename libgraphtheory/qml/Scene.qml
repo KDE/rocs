@@ -66,10 +66,10 @@ ApplicationWindow {
             }
         }
         ToolButton {
-            id: buttonDelete
-            iconName: "rocsdelete"
-            checkable: true
-            exclusiveGroup: editToolButton
+            action: DeleteAction {
+                id: deleteAction
+                exclusiveGroup: editToolButton
+            }
         }
     }
 
@@ -169,14 +169,19 @@ ApplicationWindow {
                     anchors.fill: parent
                     propagateComposedEvents: true
                     onReleased: {
-                        if (buttonDelete.checked) {
+                        if (deleteAction.checked) {
                             mouse.accepted = true
                             deleteEdge(edge)
+                        } else {
+                            mouse.accepted = false
                         }
-                        mouse.accepted = false
                     }
                     onPressed: {
-                        mouse.accepted = false
+                        if (deleteAction.checked) {
+                            mouse.accepted = true
+                        } else {
+                            mouse.accepted = false
+                        }
                     }
                 }
             }
@@ -223,15 +228,14 @@ ApplicationWindow {
                         buttonSelectMove.checked ? parent : undefined
                     }
                     onClicked: {
-                        if (buttonDelete.checked) {
-                            mouse.accepted = true
-                            deleteNode(node)
-                            return
+                        if (deleteAction.checked) {
+                            deleteNode(nodeItem.node)
+                        } else {
+                            mouse.accepted = false
                         }
-                        mouse.accepted = false
                     }
                     onPressed: {
-                        if (!buttonDelete.checked && !buttonSelectMove.checked) {
+                        if (!(deleteAction.checked || buttonSelectMove.checked)) {
                             mouse.accepted = false
                         }
                     }

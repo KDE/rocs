@@ -113,6 +113,8 @@ QQuickWindow * Editor::component()
             this, SLOT(createNode(qreal,qreal)));
     connect(topLevel, SIGNAL(createEdge(GraphTheory::Node*, GraphTheory::Node*)),
             this, SLOT(createEdge(GraphTheory::Node*, GraphTheory::Node*)));
+    connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node*)),
+            this, SLOT(deleteNode(GraphTheory::Node*)));
     connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge*)),
             this, SLOT(deleteEdge(GraphTheory::Edge*)));
 
