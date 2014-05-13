@@ -49,6 +49,7 @@ find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS
 find_package(KF5 CONFIG REQUIRED COMPONENTS
   Config
   CoreAddons
+  Declarative
   DocTools
   I18n
   TextEditor

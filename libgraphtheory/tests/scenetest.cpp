@@ -24,6 +24,7 @@
 #include "edge.h"
 #include "editor.h"
 
+#include <KDeclarative/KDeclarative>
 #include <QApplication>
 #include <QObject>
 #include <QQmlComponent>
@@ -39,6 +40,9 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     QQmlEngine *engine = new QQmlEngine;
+    KDeclarative::KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(engine);
+    kdeclarative.setupBindings();
     int rc = 0;
 
     // test data
