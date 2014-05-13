@@ -21,6 +21,7 @@
 #include "nodeitem.h"
 
 #include <QPainter>
+#include <qmath.h>
 
 using namespace GraphTheory;
 
@@ -28,6 +29,7 @@ class GraphTheory::NodeItemPrivate {
 public:
     NodeItemPrivate()
         : m_node(0)
+        , m_highlighted(false)
         , m_updating(false)
     {
     }
@@ -37,6 +39,7 @@ public:
     }
 
     Node *m_node;
+    bool m_highlighted;
     bool m_updating; //!< while true do not react to any change requested
 };
 
@@ -77,12 +80,42 @@ void NodeItem::setNode(Node *node)
     emit nodeChanged();
 }
 
+bool NodeItem::isHighlighted() const
+{
+    return d->m_highlighted;
+}
+
+void NodeItem::setHighlighted(bool highlight)
+{
+    if (d->m_highlighted == highlight) {
+        return;
+    }
+    d->m_highlighted = highlight;
+    emit highlightedChanged();
+    update();
+}
+
 void NodeItem::paint(QPainter *painter)
 {
     painter->setRenderHint(QPainter::Antialiasing);
-    painter->setPen(QPen(QBrush(Qt::black), 2, Qt::SolidLine));
+    if (d->m_highlighted) {
+        painter->setPen(QPen(QBrush(Qt::red), 2, Qt::SolidLine));
+    } else {
+        painter->setPen(QPen(QBrush(Qt::black), 2, Qt::SolidLine));
+    }
     painter->setBrush(QBrush(d->m_node->color()));
     painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));
+}
+
+bool NodeItem::contains(const QPointF &point) const
+{
+    // test for round objects
+    QPointF center(x() + width()/2, y() + height()/2);
+    QPointF distance = point - center;
+    if (qSqrt(distance.x()*distance.x() + distance.y() * distance.y()) < 32) {
+        return true;
+    }
+    return false;
 }
 
 void NodeItem::updatePositionfromScene()

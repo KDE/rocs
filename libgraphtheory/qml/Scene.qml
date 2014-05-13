@@ -34,8 +34,6 @@ ApplicationWindow {
     signal deleteNode(Node node);
     signal deleteEdge(Edge edge);
 
-    property Node __createEdgeFromBuffer
-
     Rectangle { // white background
         color: "white"
         anchors.fill: parent
@@ -91,6 +89,9 @@ ApplicationWindow {
             property int endX
             property int endY
             property bool activePress
+            property int mouseX
+            property int mouseY
+
             onClicked: {
                 console.log("scene: CLICKED")
                 if (buttonAddNode.checked) {
@@ -107,6 +108,8 @@ ApplicationWindow {
                 endY = mouse.y
             }
             onPositionChanged: {
+                mouseX = mouse.x
+                mouseY = mouse.y
                 endX = mouse.x
                 endY = mouse.y
                 console.log("scene: RELEASED" + mouse.x)
@@ -180,8 +183,25 @@ ApplicationWindow {
         Repeater {
             model: nodeModel
             NodeItem {
+                id: nodeItem
                 node: model.dataRole
-
+                Connections {
+                    target: sceneAction
+                    onMouseXChanged: {
+                        if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
+                            nodeItem.highlighted = true
+                        } else {
+                            nodeItem.highlighted = false
+                        }
+                    }
+                    onMouseYChanged: {
+                        if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
+                            nodeItem.highlighted = true
+                        } else {
+                            nodeItem.highlighted = false
+                        }
+                    }
+                }
                 NodePropertyItem {
                     anchors.centerIn: parent
                     node: model.dataRole
