@@ -92,6 +92,10 @@ ApplicationWindow {
             property int mouseX
             property int mouseY
 
+            signal deleteHighlighted();
+
+            focus: true
+
             onClicked: {
                 if (addNodeAction.checked) {
                     mouse.accepted = true
@@ -116,6 +120,13 @@ ApplicationWindow {
                 activePress = false
                 if (addEdgeAction.checked) {
                     addEdgeAction.apply();
+                }
+            }
+
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Delete) {
+                    deleteHighlighted();
+                    event.accepted = true;
                 }
             }
         }
@@ -209,6 +220,11 @@ ApplicationWindow {
                             } else {
                                 addEdgeAction.to = node
                             }
+                        }
+                    }
+                    onDeleteHighlighted: {
+                        if (highlighted) {
+                            deleteNode(node)
                         }
                     }
                 }
