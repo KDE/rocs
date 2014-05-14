@@ -168,9 +168,8 @@ ApplicationWindow {
                 MouseArea {
                     anchors.fill: parent
                     propagateComposedEvents: true
-                    onReleased: {
+                    onClicked: {
                         if (deleteAction.checked) {
-                            mouse.accepted = true
                             deleteEdge(edge)
                         } else {
                             mouse.accepted = false
