@@ -25,6 +25,7 @@
 
 set(graphtheory_qml_files
     Scene.qml
+    AddNodeAction.qml
     AddEdgeAction.qml
     DeleteAction.qml
     Line.qml

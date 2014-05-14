@@ -53,10 +53,10 @@ ApplicationWindow {
             exclusiveGroup: editToolButton
         }
         ToolButton {
-            id: buttonAddNode
-            iconName: "rocsaddnode"
-            checkable: true
-            exclusiveGroup: editToolButton
+            action: AddNodeAction {
+                id: addNodeAction
+                exclusiveGroup: editToolButton
+            }
         }
         ToolButton {
             action: AddEdgeAction {
@@ -94,7 +94,7 @@ ApplicationWindow {
             property int mouseY
 
             onClicked: {
-                if (buttonAddNode.checked) {
+                if (addNodeAction.checked) {
                     mouse.accepted = true
                     createNode(mouse.x, mouse.y);
                     return
