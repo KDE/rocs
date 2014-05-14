@@ -46,11 +46,10 @@ ApplicationWindow {
     ColumnLayout {
         id: toolbar
         ToolButton {
-            id: buttonSelectMove
-            iconName: "rocsselectmove"
-            checkable: true
-            checked: true
-            exclusiveGroup: editToolButton
+            action: SelectMoveAction {
+                id: selectMoveAction
+                exclusiveGroup: editToolButton
+            }
         }
         ToolButton {
             action: AddNodeAction {
@@ -145,7 +144,7 @@ ApplicationWindow {
         }
         Loader {
             sourceComponent: {
-                if (buttonSelectMove.checked && sceneAction.activePress) {
+                if (selectMoveAction.checked && sceneAction.activePress) {
                     return rectComponent
                 }
                 if (addEdgeAction.checked && sceneAction.activePress) {
@@ -224,7 +223,7 @@ ApplicationWindow {
                     anchors.fill: parent
                     propagateComposedEvents: true
                     drag.target: { // only enable drag when move/select checked
-                        buttonSelectMove.checked ? parent : undefined
+                        selectMoveAction.checked ? parent : undefined
                     }
                     onClicked: {
                         if (deleteAction.checked) {
@@ -234,7 +233,7 @@ ApplicationWindow {
                         }
                     }
                     onPressed: {
-                        if (!(deleteAction.checked || buttonSelectMove.checked)) {
+                        if (!(deleteAction.checked || selectMoveAction.checked)) {
                             mouse.accepted = false
                         }
                     }

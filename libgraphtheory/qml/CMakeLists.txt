@@ -28,6 +28,7 @@ set(graphtheory_qml_files
     AddNodeAction.qml
     AddEdgeAction.qml
     DeleteAction.qml
+    SelectMoveAction.qml
     Line.qml
     NodePropertyItem.qml
     EdgePropertyItem.qml
