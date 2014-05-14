@@ -49,6 +49,7 @@ ApplicationWindow {
             action: SelectMoveAction {
                 id: selectMoveAction
                 exclusiveGroup: editToolButton
+                checked: true
             }
         }
         ToolButton {
