@@ -136,6 +136,7 @@ ApplicationWindow {
         Component {
             id: rectComponent
             Rectangle {
+                id: rectangle
                 x: Math.min(sceneAction.startX, sceneAction.endX)
                 y: Math.min(sceneAction.startY, sceneAction.endY)
                 width: Math.abs(sceneAction.startX - sceneAction.endX)
@@ -143,6 +144,10 @@ ApplicationWindow {
                 color: "#afc3deff"
                 border.color: "steelblue"
                 border.width: 2
+                onXChanged: selectMoveAction.selectX = x
+                onYChanged: selectMoveAction.selectY = y
+                onWidthChanged: selectMoveAction.selectWidth = width
+                onHeightChanged: selectMoveAction.selectHeight = height
             }
         }
         Component {
@@ -203,9 +208,22 @@ ApplicationWindow {
                 id: nodeItem
                 node: model.dataRole
                 highlighted: addEdgeAction.from == node || addEdgeAction.to == node
+                function isSelected()
+                {
+                    if (x + width/2 < selectMoveAction.selectX) return false;
+                    if (y + height/2 < selectMoveAction.selectY) return false;
+                    if (x - width/2 > selectMoveAction.selectX + selectMoveAction.selectWidth) return false;
+                    if (y - height/2 > selectMoveAction.selectY + selectMoveAction.selectHeight) return false;
+                    return true;
+                }
                 Connections {
                     target: sceneAction
                     onMouseXChanged: {
+                        if (selectMoveAction.checked && isSelected()) {
+                            highlighted = true
+                        } else {
+                            highlighted = false
+                        }
                         if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
                             if (addEdgeAction.from == null) {
                                 addEdgeAction.from = node;
@@ -215,6 +233,11 @@ ApplicationWindow {
                         }
                     }
                     onMouseYChanged: {
+                        if (selectMoveAction.checked && isSelected()) {
+                            highlighted = true
+                        } else {
+                            highlighted = false
+                        }
                         if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
                             if (addEdgeAction.from == null) {
                                 addEdgeAction.from = node;

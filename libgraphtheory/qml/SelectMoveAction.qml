@@ -24,6 +24,12 @@ import org.kde.rocs.graphtheory 1.0
 
 Action {
     id: root
+
+    property int selectX
+    property int selectY
+    property int selectWidth
+    property int selectHeight
+
     text: i18n("Select & Move")
     iconName: "rocsselectmove"
     checkable: true
