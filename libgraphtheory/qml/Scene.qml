@@ -72,209 +72,212 @@ ApplicationWindow {
             }
         }
     }
-
-    Item {
-        id: scene
+    ScrollView {
         width: root.width - toolbar.width - 20
         height: root.height
         anchors {
             left: toolbar.right
             leftMargin: 10
         }
+        Item {
+            id: scene
+            width: root.width - toolbar.width - 20
+            height: root.height
 
-        MouseArea {
-            id: sceneAction
-            anchors.fill: parent
-            property int startX
-            property int startY
-            property int endX
-            property int endY
-            property bool activePress
-            property int mouseX
-            property int mouseY
+            MouseArea {
+                id: sceneAction
+                anchors.fill: parent
+                property int startX
+                property int startY
+                property int endX
+                property int endY
+                property bool activePress
+                property int mouseX
+                property int mouseY
 
-            signal deleteHighlighted();
+                signal deleteHighlighted();
 
-            focus: true
+                focus: true
 
-            onClicked: {
-                if (addNodeAction.checked) {
-                    mouse.accepted = true
-                    createNode(mouse.x, mouse.y);
-                    return
+                onClicked: {
+                    if (addNodeAction.checked) {
+                        mouse.accepted = true
+                        createNode(mouse.x, mouse.y);
+                        return
+                    }
+                }
+                onPressed: {
+                    activePress = true
+                    startX = mouse.x
+                    startY = mouse.y
+                    endX = mouse.x
+                    endY = mouse.y
+                }
+                onPositionChanged: {
+                    mouseX = mouse.x
+                    mouseY = mouse.y
+                    endX = mouse.x
+                    endY = mouse.y
+                }
+                onReleased: {
+                    activePress = false
+                    if (addEdgeAction.checked) {
+                        addEdgeAction.apply();
+                    }
+                }
+
+                Keys.onPressed: {
+                    if (event.key == Qt.Key_Delete) {
+                        deleteHighlighted();
+                        event.accepted = true;
+                    }
                 }
             }
-            onPressed: {
-                activePress = true
-                startX = mouse.x
-                startY = mouse.y
-                endX = mouse.x
-                endY = mouse.y
+
+            // highlighter for selection and edges
+            Component {
+                id: rectComponent
+                Rectangle {
+                    id: rectangle
+                    x: Math.min(sceneAction.startX, sceneAction.endX)
+                    y: Math.min(sceneAction.startY, sceneAction.endY)
+                    width: Math.abs(sceneAction.startX - sceneAction.endX)
+                    height: Math.abs(sceneAction.startY - sceneAction.endY)
+                    color: "#afc3deff"
+                    border.color: "steelblue"
+                    border.width: 2
+                    onXChanged: selectMoveAction.selectX = x
+                    onYChanged: selectMoveAction.selectY = y
+                    onWidthChanged: selectMoveAction.selectWidth = width
+                    onHeightChanged: selectMoveAction.selectHeight = height
+                }
             }
-            onPositionChanged: {
-                mouseX = mouse.x
-                mouseY = mouse.y
-                endX = mouse.x
-                endY = mouse.y
+            Component {
+                id: lineComponent
+                Line {
+                    fromX: sceneAction.startX
+                    fromY: sceneAction.startY
+                    toX: sceneAction.endX
+                    toY: sceneAction.endY
+                }
             }
-            onReleased: {
-                activePress = false
-                if (addEdgeAction.checked) {
-                    addEdgeAction.apply();
+            Loader {
+                sourceComponent: {
+                    if (selectMoveAction.checked && sceneAction.activePress) {
+                        return rectComponent
+                    }
+                    if (addEdgeAction.checked && sceneAction.activePress) {
+                        return lineComponent
+                    }
+                    return undefined
                 }
             }
 
-            Keys.onPressed: {
-                if (event.key == Qt.Key_Delete) {
-                    deleteHighlighted();
-                    event.accepted = true;
-                }
-            }
-        }
-
-        // highlighter for selection and edges
-        Component {
-            id: rectComponent
-            Rectangle {
-                id: rectangle
-                x: Math.min(sceneAction.startX, sceneAction.endX)
-                y: Math.min(sceneAction.startY, sceneAction.endY)
-                width: Math.abs(sceneAction.startX - sceneAction.endX)
-                height: Math.abs(sceneAction.startY - sceneAction.endY)
-                color: "#afc3deff"
-                border.color: "steelblue"
-                border.width: 2
-                onXChanged: selectMoveAction.selectX = x
-                onYChanged: selectMoveAction.selectY = y
-                onWidthChanged: selectMoveAction.selectWidth = width
-                onHeightChanged: selectMoveAction.selectHeight = height
-            }
-        }
-        Component {
-            id: lineComponent
-            Line {
-                fromX: sceneAction.startX
-                fromY: sceneAction.startY
-                toX: sceneAction.endX
-                toY: sceneAction.endY
-            }
-        }
-        Loader {
-            sourceComponent: {
-                if (selectMoveAction.checked && sceneAction.activePress) {
-                    return rectComponent
-                }
-                if (addEdgeAction.checked && sceneAction.activePress) {
-                    return lineComponent
-                }
-                return undefined
-            }
-        }
-
-        Repeater {
-            model: edgeModel
-            EdgeItem {
-                edge: model.dataRole
-
-                EdgePropertyItem {
-                    anchors.centerIn: parent
+            Repeater {
+                model: edgeModel
+                EdgeItem {
                     edge: model.dataRole
-                }
 
-                MouseArea {
-                    anchors.fill: parent
-                    propagateComposedEvents: true
-                    onClicked: {
-                        if (deleteAction.checked) {
-                            deleteEdge(edge)
-                        } else {
-                            mouse.accepted = false
-                        }
+                    EdgePropertyItem {
+                        anchors.centerIn: parent
+                        edge: model.dataRole
                     }
-                    onPressed: {
-                        if (deleteAction.checked) {
-                            mouse.accepted = true
-                        } else {
-                            mouse.accepted = false
+
+                    MouseArea {
+                        anchors.fill: parent
+                        propagateComposedEvents: true
+                        onClicked: {
+                            if (deleteAction.checked) {
+                                deleteEdge(edge)
+                            } else {
+                                mouse.accepted = false
+                            }
+                        }
+                        onPressed: {
+                            if (deleteAction.checked) {
+                                mouse.accepted = true
+                            } else {
+                                mouse.accepted = false
+                            }
                         }
                     }
                 }
             }
-        }
 
-        Repeater {
-            model: nodeModel
-            NodeItem {
-                id: nodeItem
-                node: model.dataRole
-                highlighted: addEdgeAction.from == node || addEdgeAction.to == node
-                function isSelected()
-                {
-                    if (x + width/2 < selectMoveAction.selectX) return false;
-                    if (y + height/2 < selectMoveAction.selectY) return false;
-                    if (x - width/2 > selectMoveAction.selectX + selectMoveAction.selectWidth) return false;
-                    if (y - height/2 > selectMoveAction.selectY + selectMoveAction.selectHeight) return false;
-                    return true;
-                }
-                Connections {
-                    target: sceneAction
-                    onMouseXChanged: {
-                        if (selectMoveAction.checked && isSelected()) {
-                            highlighted = true
-                        } else {
-                            highlighted = false
-                        }
-                        if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
-                            if (addEdgeAction.from == null) {
-                                addEdgeAction.from = node;
-                            } else {
-                                addEdgeAction.to = node
-                            }
-                        }
-                    }
-                    onMouseYChanged: {
-                        if (selectMoveAction.checked && isSelected()) {
-                            highlighted = true
-                        } else {
-                            highlighted = false
-                        }
-                        if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
-                            if (addEdgeAction.from == null) {
-                                addEdgeAction.from = node;
-                            } else {
-                                addEdgeAction.to = node
-                            }
-                        }
-                    }
-                    onDeleteHighlighted: {
-                        if (highlighted) {
-                            deleteNode(node)
-                        }
-                    }
-                }
-                NodePropertyItem {
-                    anchors.centerIn: parent
+            Repeater {
+                model: nodeModel
+                NodeItem {
+                    id: nodeItem
                     node: model.dataRole
-                }
-
-                Drag.active: dragArea.drag.active
-                MouseArea {
-                    id: dragArea
-                    anchors.fill: parent
-                    propagateComposedEvents: true
-                    drag.target: { // only enable drag when move/select checked
-                        selectMoveAction.checked ? parent : undefined
+                    highlighted: addEdgeAction.from == node || addEdgeAction.to == node
+                    function isSelected()
+                    {
+                        if (x + width/2 < selectMoveAction.selectX) return false;
+                        if (y + height/2 < selectMoveAction.selectY) return false;
+                        if (x - width/2 > selectMoveAction.selectX + selectMoveAction.selectWidth) return false;
+                        if (y - height/2 > selectMoveAction.selectY + selectMoveAction.selectHeight) return false;
+                        return true;
                     }
-                    onClicked: {
-                        if (deleteAction.checked) {
-                            deleteNode(nodeItem.node)
-                        } else {
-                            mouse.accepted = false
+                    Connections {
+                        target: sceneAction
+                        onMouseXChanged: {
+                            if (selectMoveAction.checked && isSelected()) {
+                                highlighted = true
+                            } else {
+                                highlighted = false
+                            }
+                            if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
+                                if (addEdgeAction.from == null) {
+                                    addEdgeAction.from = node;
+                                } else {
+                                    addEdgeAction.to = node
+                                }
+                            }
+                        }
+                        onMouseYChanged: {
+                            if (selectMoveAction.checked && isSelected()) {
+                                highlighted = true
+                            } else {
+                                highlighted = false
+                            }
+                            if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
+                                if (addEdgeAction.from == null) {
+                                    addEdgeAction.from = node;
+                                } else {
+                                    addEdgeAction.to = node
+                                }
+                            }
+                        }
+                        onDeleteHighlighted: {
+                            if (highlighted) {
+                                deleteNode(node)
+                            }
                         }
                     }
-                    onPressed: {
-                        if (!(deleteAction.checked || selectMoveAction.checked)) {
-                            mouse.accepted = false
+                    NodePropertyItem {
+                        anchors.centerIn: parent
+                        node: model.dataRole
+                    }
+
+                    Drag.active: dragArea.drag.active
+                    MouseArea {
+                        id: dragArea
+                        anchors.fill: parent
+                        propagateComposedEvents: true
+                        drag.target: { // only enable drag when move/select checked
+                            selectMoveAction.checked ? parent : undefined
+                        }
+                        onClicked: {
+                            if (deleteAction.checked) {
+                                deleteNode(nodeItem.node)
+                            } else {
+                                mouse.accepted = false
+                            }
+                        }
+                        onPressed: {
+                            if (!(deleteAction.checked || selectMoveAction.checked)) {
+                                mouse.accepted = false
+                            }
                         }
                     }
                 }
