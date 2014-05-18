@@ -35,12 +35,17 @@ class GRAPHTHEORY_EXPORT EdgeItem : public QQuickPaintedItem
 {
     Q_OBJECT
     Q_PROPERTY(GraphTheory::Edge * edge READ edge WRITE setEdge NOTIFY edgeChanged)
+    Q_PROPERTY(QPointF origin READ origin WRITE setOrigin)
 
 public:
     explicit EdgeItem(QQuickPaintedItem *parent = 0);
     virtual ~EdgeItem();
     Edge * edge() const;
     void setEdge(Edge *edge);
+    /** translation of global origin (0,0) into scene coordinates **/
+    QPointF origin() const;
+    /** set translation of global origin (0,0) into scene coordinates **/
+    void setOrigin(const QPointF &origin);
     /** reimplemented from QQuickPaintedItem **/
     void paint(QPainter *painter);
 

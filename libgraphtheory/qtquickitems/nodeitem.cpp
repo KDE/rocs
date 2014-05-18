@@ -29,6 +29,7 @@ class GraphTheory::NodeItemPrivate {
 public:
     NodeItemPrivate()
         : m_node(0)
+        , m_origin(0,0)
         , m_highlighted(false)
         , m_updating(false)
     {
@@ -39,6 +40,7 @@ public:
     }
 
     Node *m_node;
+    QPointF m_origin;
     bool m_highlighted;
     bool m_updating; //!< while true do not react to any change requested
 };
@@ -72,12 +74,28 @@ void NodeItem::setNode(Node *node)
         node->disconnect(this);
     }
     d->m_node = node;
-    setX(node->x());
-    setY(node->y());
-    connect(node, SIGNAL(positionChanged(QPointF)), this, SLOT(setPosition(QPointF)));
+    setGlobalPosition(QPointF(node->x(), node->y()));
+    connect(node, SIGNAL(positionChanged(QPointF)), this, SLOT(setGlobalPosition(QPointF)));
     connect(this, SIGNAL(xChanged()), this, SLOT(updatePositionfromScene()));
     connect(this, SIGNAL(yChanged()), this, SLOT(updatePositionfromScene()));
     emit nodeChanged();
+    update();
+}
+
+QPointF NodeItem::origin() const
+{
+    return d->m_origin;
+}
+
+void NodeItem::setOrigin(const QPointF &origin)
+{
+    if (d->m_origin == origin) {
+        return;
+    }
+    // update position with new origin
+    d->m_origin = origin;
+    setGlobalPosition(QPointF(d->m_node->x(), d->m_node->y()));
+    update();
 }
 
 bool NodeItem::isHighlighted() const
@@ -112,7 +130,7 @@ bool NodeItem::contains(const QPointF &point) const
     // test for round objects
     QPointF center(x() + width()/2, y() + height()/2);
     QPointF distance = point - center;
-    if (qSqrt(distance.x()*distance.x() + distance.y() * distance.y()) < 32) {
+    if (qSqrt(distance.x()*distance.x() + distance.y() * distance.y()) < width()/2) {
         return true;
     }
     return false;
@@ -120,20 +138,22 @@ bool NodeItem::contains(const QPointF &point) const
 
 void NodeItem::updatePositionfromScene()
 {
-    if (d->m_node->x() == x() && d->m_node->y() == y()) {
+    if (d->m_node->x() == x() + d->m_origin.x()
+        && d->m_node->y() == y() + d->m_origin.y()
+    ) {
         return;
     }
     d->m_updating = true;
-    d->m_node->setX(x());
-    d->m_node->setY(y());
+    d->m_node->setX(x() + d->m_origin.x() + width()/2);
+    d->m_node->setY(y() + d->m_origin.y() + height()/2);
     d->m_updating = false;
 }
 
-void NodeItem::setPosition(const QPointF &position)
+void NodeItem::setGlobalPosition(const QPointF &position)
 {
     if (d->m_updating) {
         return;
     }
-    setX(position.x() - 16);
-    setY(position.y() - 32);
+    setX(position.x() - d->m_origin.x() - width()/2);
+    setY(position.y() - d->m_origin.y() - height()/2);
 }

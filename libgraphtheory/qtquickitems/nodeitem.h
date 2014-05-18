@@ -33,6 +33,7 @@ class GRAPHTHEORY_EXPORT NodeItem : public QQuickPaintedItem
 {
     Q_OBJECT
     Q_PROPERTY(GraphTheory::Node * node READ node WRITE setNode NOTIFY nodeChanged)
+    Q_PROPERTY(QPointF origin READ origin WRITE setOrigin)
     Q_PROPERTY(bool highlighted READ isHighlighted WRITE setHighlighted NOTIFY highlightedChanged)
 
 public:
@@ -40,6 +41,10 @@ public:
     virtual ~NodeItem();
     Node * node() const;
     void setNode(Node *node);
+    /** translation of global origin (0,0) into scene coordinates **/
+    QPointF origin() const;
+    /** set translation of global origin (0,0) into scene coordinates **/
+    void setOrigin(const QPointF &origin);
     bool isHighlighted() const;
     void setHighlighted(bool highlight);
     /** reimplemented from QQuickPaintedItem **/
@@ -53,7 +58,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void updatePositionfromScene();
-    void setPosition(const QPointF& position);
+    void setGlobalPosition(const QPointF &globalPosition);
 
 private:
     Q_DISABLE_COPY(NodeItem)

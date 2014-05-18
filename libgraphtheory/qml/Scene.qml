@@ -83,6 +83,7 @@ ApplicationWindow {
             id: scene
             width: root.width - toolbar.width - 20
             height: root.height
+            property variant origin: Qt.point(0, 0) // coordinate of global origin (0,0) in scene
 
             MouseArea {
                 id: sceneAction
@@ -177,6 +178,7 @@ ApplicationWindow {
                 model: edgeModel
                 EdgeItem {
                     edge: model.dataRole
+                    origin: scene.origin
 
                     EdgePropertyItem {
                         anchors.centerIn: parent
@@ -209,6 +211,7 @@ ApplicationWindow {
                 NodeItem {
                     id: nodeItem
                     node: model.dataRole
+                    origin: scene.origin
                     highlighted: addEdgeAction.from == node || addEdgeAction.to == node
                     function isSelected()
                     {
