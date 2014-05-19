@@ -32,5 +32,6 @@ ecm_mark_as_test(TestLinkedListStructure)
 set_target_properties(TestLinkedListStructure PROPERTIES COMPILE_FLAGS -DROCS_LISTSTRUCTURE_EXPORT=)
 target_link_libraries( TestLinkedListStructure
     rocscore
+    KF5::CoreAddons
     Qt5::Test
 )

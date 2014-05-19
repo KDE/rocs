@@ -31,11 +31,10 @@
 int main(int argc, char *argv[])
 {
     KAboutData aboutData("rocs",
-                         "rocs",
                          ki18nc("@title Displayed program name", "Rocs").toString(),
                          ROCS_VERSION_STRING,
                          ki18nc("@title KAboutData: short program description", "Graph Theory Tool").toString(),
-                         KAboutData::License_GPL,
+                         KAboutLicense::GPL_V2,
                          ki18nc("@info:credit", "(c) 2009-2013 Rocs Developers").toString(),
                          ki18nc("@title Short program description", "Rocs - Data Structure Analysis").toString()
                         );
