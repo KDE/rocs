@@ -73,6 +73,7 @@ ApplicationWindow {
         }
     }
     ScrollView {
+        id: sceneScrollView
         width: root.width - toolbar.width - 20
         height: root.height
         anchors {
@@ -81,8 +82,8 @@ ApplicationWindow {
         }
         Item {
             id: scene
-            width: root.width - toolbar.width - 20
-            height: root.height
+            width: sceneScrollView.width - 30
+            height: sceneScrollView.height - 20
             property variant origin: Qt.point(0, 0) // coordinate of global origin (0,0) in scene
 
             MouseArea {
@@ -103,7 +104,7 @@ ApplicationWindow {
                 onClicked: {
                     if (addNodeAction.checked) {
                         mouse.accepted = true
-                        createNode(mouse.x, mouse.y);
+                        createNode(mouse.x + scene.origin.x, mouse.y + scene.origin.y);
                         return
                     }
                 }
@@ -255,6 +256,38 @@ ApplicationWindow {
                             if (highlighted) {
                                 deleteNode(node)
                             }
+                        }
+                    }
+                    onXChanged: {
+                        if (scene.origin != nodeItem.origin) { // do nothing if item not initialized
+                            return;
+                        }
+                        if (x < 10) {
+                            var delta = (10 - x)
+                            scene.origin = Qt.point(scene.origin.x - delta, scene.origin.y);
+                            scene.width += delta;
+                            return;
+                        }
+                        if (x + width + 10 > scene.width) {
+                            var delta = Math.max(scene.width - (x + width) + 10, 10);
+                            scene.width += delta;
+                            return;
+                        }
+                    }
+                    onYChanged: {
+                        if (scene.origin != nodeItem.origin) { // do nothing if item not initialized
+                            return;
+                        }
+                        if (y < 10) {
+                            var delta = (10 - y)
+                            scene.origin = Qt.point(scene.origin.x, scene.origin.y - delta);
+                            scene.height += delta;
+                            return;
+                        }
+                        if (y + height + 10 > scene.height) {
+                            var delta = Math.max(scene.height - (y + height) + 10, 10);
+                            scene.height += delta;
+                            return;
                         }
                     }
                     NodePropertyItem {

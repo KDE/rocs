@@ -156,4 +156,5 @@ void NodeItem::setGlobalPosition(const QPointF &position)
     }
     setX(position.x() - d->m_origin.x() - width()/2);
     setY(position.y() - d->m_origin.y() - height()/2);
+    update();
 }
