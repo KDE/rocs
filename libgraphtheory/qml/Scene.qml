@@ -34,11 +34,6 @@ ApplicationWindow {
     signal deleteNode(Node node);
     signal deleteEdge(Edge edge);
 
-    Rectangle { // white background
-        color: "white"
-        anchors.fill: parent
-    }
-
     ExclusiveGroup {
         id: editToolButton
     }
@@ -80,6 +75,14 @@ ApplicationWindow {
             left: toolbar.right
             leftMargin: 10
         }
+
+
+        Rectangle { // white background
+            color: "white"
+            width: parent.width
+            height: parent.height
+        }
+
         Item {
             id: scene
             width: sceneScrollView.width - 30
@@ -214,6 +217,7 @@ ApplicationWindow {
                     node: model.dataRole
                     origin: scene.origin
                     highlighted: addEdgeAction.from == node || addEdgeAction.to == node
+                    property bool __modifyingPosition : false
                     function isSelected()
                     {
                         if (x + width/2 < selectMoveAction.selectX) return false;
@@ -259,34 +263,46 @@ ApplicationWindow {
                         }
                     }
                     onXChanged: {
-                        if (scene.origin != nodeItem.origin) { // do nothing if item not initialized
+                        if (scene.origin != nodeItem.origin
+                            || nodeItem.__modifyingPosition
+                        ) { // do nothing if item not initialized
                             return;
                         }
                         if (x < 10) {
-                            var delta = (10 - x)
+                            nodeItem.__modifyingPosition = true;
+                            var delta = Math.max((10 - x), 10)
                             scene.origin = Qt.point(scene.origin.x - delta, scene.origin.y);
                             scene.width += delta;
+                            nodeItem.__modifyingPosition = false;
                             return;
                         }
                         if (x + width + 10 > scene.width) {
+                            nodeItem.__modifyingPosition = true;
                             var delta = Math.max(scene.width - (x + width) + 10, 10);
                             scene.width += delta;
+                            nodeItem.__modifyingPosition = false;
                             return;
                         }
                     }
                     onYChanged: {
-                        if (scene.origin != nodeItem.origin) { // do nothing if item not initialized
+                        if (scene.origin != nodeItem.origin
+                            || nodeItem.__modifyingPosition
+                        ) { // do nothing if item not initialized
                             return;
                         }
                         if (y < 10) {
+                            nodeItem.__modifyingPosition = true;
                             var delta = (10 - y)
                             scene.origin = Qt.point(scene.origin.x, scene.origin.y - delta);
                             scene.height += delta;
+                            nodeItem.__modifyingPosition = false;
                             return;
                         }
                         if (y + height + 10 > scene.height) {
+                            nodeItem.__modifyingPosition = true;
                             var delta = Math.max(scene.height - (y + height) + 10, 10);
                             scene.height += delta;
+                            nodeItem.__modifyingPosition = false;
                             return;
                         }
                     }
