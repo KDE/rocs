@@ -122,6 +122,11 @@ MainWindow::MainWindow(QQmlEngine *m_qmlEngine)
     createNewProject();
     updateCaption();
 
+    //FIXME by hand creation of an empty graph document
+    // this must become part of the project after adapating to graphtheory
+    GraphTheory::GraphDocumentPtr document = GraphTheory::GraphDocument::create();
+    m_graphEditor->setGraphDocument(document);
+
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
     GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
 
