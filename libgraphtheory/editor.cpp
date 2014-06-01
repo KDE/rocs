@@ -32,7 +32,7 @@
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QQuickWindow>
+#include <QQuickWidget>
 #include <QDebug>
 #include <QStandardPaths>
 
@@ -41,6 +41,8 @@ using namespace GraphTheory;
 class GraphTheory::EditorPrivate {
 public:
     EditorPrivate()
+        : m_engine(0)
+        , m_widget(0)
     {
     }
 
@@ -51,6 +53,7 @@ public:
     }
 
     QQmlEngine *m_engine;
+    QQuickWidget *m_widget;
     GraphDocumentPtr m_document;
     EdgeModel *m_edgeModel;
     NodeModel *m_nodeModel;
@@ -67,7 +70,8 @@ Editor::Editor(QQmlEngine *engine)
 
 Editor::~Editor()
 {
-
+    d->m_widget->deleteLater();
+    d->m_engine->deleteLater();
 }
 
 GraphDocumentPtr Editor::graphDocument() const
@@ -82,8 +86,12 @@ void Editor::setGraphDocument(GraphDocumentPtr document)
     d->m_edgeModel->setDocument(d->m_document);
 }
 
-QQuickWindow * Editor::component()
+QQuickWidget * Editor::widget()
 {
+    if (d->m_widget) {
+        return d->m_widget;
+    }
+
     qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
     qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
     qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
@@ -91,22 +99,21 @@ QQuickWindow * Editor::component()
     qmlRegisterType<GraphTheory::NodeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeModel");
     qmlRegisterType<GraphTheory::EdgeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeModel");
 
-    QQmlComponent *component = new QQmlComponent(d->m_engine);
-
     QUrl path = QUrl::fromLocalFile(
         QStandardPaths::locate(QStandardPaths::GenericDataLocation, "rocsgraphtheory/qml/Scene.qml"));
+    QQmlComponent *component = new QQmlComponent(d->m_engine);
     component->loadUrl(path);
-
     if (!component->isReady() ) {
         qWarning() << ("%s", qPrintable(component->errorString()));
         return 0;
     }
 
+    // register editor elements at context
     d->m_engine->rootContext()->setContextProperty("nodeModel", d->m_nodeModel);
     d->m_engine->rootContext()->setContextProperty("edgeModel", d->m_edgeModel);
 
+    // create rootObject after context is set up
     QObject *topLevel = component->create();
-    QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
 
     // connections to QML signals
     connect(topLevel, SIGNAL(createNode(qreal,qreal)),
@@ -118,7 +125,10 @@ QQuickWindow * Editor::component()
     connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge*)),
             this, SLOT(deleteEdge(GraphTheory::Edge*)));
 
-    return window;
+    // create widget
+    d->m_widget = new QQuickWidget(d->m_engine, 0);
+    d->m_widget->setContent(path, component, topLevel);
+    return d->m_widget;
 }
 
 void Editor::createNode(qreal x, qreal y)

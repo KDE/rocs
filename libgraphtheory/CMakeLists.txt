@@ -44,6 +44,7 @@ target_link_libraries(rocsgraphtheory
     PUBLIC
         Qt5::Core
         Qt5::Quick
+        Qt5::QuickWidgets
         KF5::I18n
 )
 

@@ -24,7 +24,7 @@ import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
 import org.kde.rocs.graphtheory 1.0
 
-ApplicationWindow {
+Item {
     id: root
     width: 800
     height: 600

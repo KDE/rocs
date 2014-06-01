@@ -30,7 +30,7 @@
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QQuickWindow>
+#include <QQuickWidget>
 #include <QDebug>
 #include <QStandardPaths>
 
@@ -60,10 +60,8 @@ int main(int argc, char *argv[])
 
     Editor editor(engine);
     editor.setGraphDocument(document);
-    QQuickWindow *window = editor.component();
-    QSurfaceFormat surfaceFormat = window->requestedFormat();
-    window->setFormat(surfaceFormat);
-    window->show();
+    QQuickWidget *widget = editor.widget();
+    widget->show();
 
     rc = app.exec();
     engine->deleteLater();

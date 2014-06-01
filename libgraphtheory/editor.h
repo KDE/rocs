@@ -25,7 +25,7 @@
 #include "graphdocument.h"
 #include <QObject>
 
-class QQuickWindow;
+class QQuickWidget;
 class QQmlEngine;
 
 namespace GraphTheory
@@ -41,7 +41,7 @@ public:
     virtual ~Editor();
     GraphDocumentPtr graphDocument() const;
     void setGraphDocument(GraphDocumentPtr document);
-    QQuickWindow * component();
+    QQuickWidget * widget();
 
 private Q_SLOTS:
     void createNode(qreal x, qreal y);

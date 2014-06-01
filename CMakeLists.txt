@@ -37,6 +37,7 @@ find_package(Qt5 5.3 REQUIRED NO_MODULE COMPONENTS
   Concurrent
   Core
   Gui
+  QuickWidgets
   Script
   WebKit
   WebKitWidgets
