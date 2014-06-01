@@ -107,29 +107,28 @@ target_link_libraries(rocs
         rocscore
         rocsvisualeditor
         rocsgraphtheory
-        ${Qt5WebKit_LIBRARIES}
-        ${Qt5WebKitWidgets_LIBRARIES}
-        ${Qt5XmlPatterns_LIBRARIES}
-        Qt5::Quick
-        Qt5::QuickWidgets
-        KF5::TextEditor
         KF5::Archive
         KF5::CoreAddons
-        KF5::Service
-        KF5::I18n
-        KF5::NewStuff
-        KF5::ItemViews
         KF5::Declarative
+        KF5::I18n
+        KF5::ItemViews
+        KF5::NewStuff
+        KF5::Service
+        KF5::TextEditor
+        Qt5::Quick
+        Qt5::QuickWidgets
+        Qt5::WebKit
+        Qt5::WebKitWidgets
+        Qt5::XmlPatterns
 )
 
 ################## INSTALLS ##########################
 
-install( TARGETS rocs  ${INSTALL_TARGETS_DEFAULT_ARGS} )
-
-install( PROGRAMS rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs )
-install( FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
-install( FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
+install(TARGETS rocs ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(PROGRAMS rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs)
+install(FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+install(FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
 ecm_optional_add_subdirectory(Scripts)
 ecm_optional_add_subdirectory(Tests)
