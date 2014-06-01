@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2009-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011-2013  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+    Copyright 2011-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -22,6 +22,7 @@
 #ifndef SUI_MAINWINDOW_H
 #define SUI_MAINWINDOW_H
 
+#include "libgraphtheory/editor.h"
 #include <KXmlGuiWindow>
 #include <kmessagebox.h>
 #include <QMutex>
@@ -62,7 +63,7 @@ class MainWindow : public KXmlGuiWindow
 
 public:
     /*! default constructor */
-    MainWindow();
+    MainWindow(QQmlEngine *qmlEngine);
     ~MainWindow();
 
     enum ScriptMode {
@@ -246,11 +247,13 @@ signals:
     void startEvaluation();
     void stopEvaluation();
 
-private: // Variables.
+private:
+    QQmlEngine *m_qmlEngine;
+
     Project* _currentProject;
 
     // Right Area:
-    GraphVisualEditor* _graphVisualEditor; //! Area where the graph will be editted.
+    GraphTheory::Editor *m_graphEditor;
     CodeEditor *_codeEditor;
     ScriptOutputWidget* _outputWidget;
     JournalEditorWidget* _journalWidget;

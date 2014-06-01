@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2010-2011  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2011-2013  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+    Copyright 2011-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -22,6 +22,8 @@
 #include "MainWindow.h"
 #include "rocsversion.h"
 #include "settings.h"
+
+#include "libgraphtheory/editor.h"
 
 #include <QApplication>
 #include <QCloseEvent>
@@ -46,6 +48,7 @@
 #include <QFormLayout>
 #include <QScriptEngineDebugger>
 #include <QFileDialog>
+#include <QQuickWidget>
 
 #include <KActionCollection>
 #include <KRecentFilesAction>
@@ -91,12 +94,14 @@
 #include "Tools/ToolManager.h"
 
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(QQmlEngine *m_qmlEngine)
     : KXmlGuiWindow()
+    , m_qmlEngine(m_qmlEngine)
     , _currentProject(0)
     , _scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
+    m_graphEditor = new GraphTheory::Editor(m_qmlEngine);
 
     setupWidgets();
     setupActions();
@@ -145,6 +150,8 @@ MainWindow::~MainWindow()
     _recentProjects->saveEntries(Settings::self()->config()->group("RecentFiles"));
 
     Settings::self()->writeConfig();
+
+    m_graphEditor->deleteLater();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -162,13 +169,12 @@ void MainWindow::setupWidgets()
 {
     // setup main widgets
     QWidget *sidePanel = setupSidePanel();
-    _graphVisualEditor = GraphVisualEditor::self();
     QWidget *scriptPanel = setupScriptPanel();
 
     // splits the main window horizontal
     _vSplitter = new QSplitter(this);
     _vSplitter->setOrientation(Qt::Vertical);
-    _vSplitter->addWidget(_graphVisualEditor);
+    _vSplitter->addWidget(m_graphEditor->widget());
     _vSplitter->addWidget(scriptPanel);
 
     // horizontal arrangement
@@ -353,7 +359,7 @@ void MainWindow::setupActions()
     KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
 
     // setup graph visual editor actions and add them to mainwindow action collection
-    _graphVisualEditor->setupActions(actionCollection());
+//     m_graphEditor->setupActions(actionCollection()); //FIXME add editor actions to main action collection
 
     // Menu actions
     createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(createNewProject()), this);
@@ -515,7 +521,7 @@ void MainWindow::setActiveDocument()
     engine->engine();
 
     // finally set active
-    _graphVisualEditor->setActiveDocument();
+//     m_graphEditor->setActiveDocument(activeDocument); //FIXME implement method
 
     // Update engine toolbar
     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
@@ -534,7 +540,7 @@ void MainWindow::releaseDocument(Document* d)
 
     d->engineBackend()->stop();
     d->engineBackend()->disconnect(this);
-    _graphVisualEditor->releaseDocument();
+//     m_graphEditor->releaseDocument(); // FIXME implement method to release the current document
 }
 
 void MainWindow::addEmptyGraphDocument()

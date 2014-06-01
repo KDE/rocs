@@ -106,9 +106,12 @@ target_link_libraries(rocs
     PUBLIC
         rocscore
         rocsvisualeditor
+        rocsgraphtheory
         ${Qt5WebKit_LIBRARIES}
         ${Qt5WebKitWidgets_LIBRARIES}
         ${Qt5XmlPatterns_LIBRARIES}
+        Qt5::Quick
+        Qt5::QuickWidgets
         KF5::TextEditor
         KF5::Archive
         KF5::CoreAddons
@@ -116,6 +119,7 @@ target_link_libraries(rocs
         KF5::I18n
         KF5::NewStuff
         KF5::ItemViews
+        KF5::Declarative
 )
 
 ################## INSTALLS ##########################
