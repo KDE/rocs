@@ -63,7 +63,7 @@ class MainWindow : public KXmlGuiWindow
 
 public:
     /*! default constructor */
-    MainWindow(QQmlEngine *qmlEngine);
+    MainWindow();
     ~MainWindow();
 
     enum ScriptMode {
@@ -248,8 +248,6 @@ signals:
     void stopEvaluation();
 
 private:
-    QQmlEngine *m_qmlEngine;
-
     Project* _currentProject;
 
     // Right Area:

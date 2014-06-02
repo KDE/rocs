@@ -35,6 +35,7 @@ namespace GraphTheory
 {
 
 class GraphDocumentPrivate;
+class View;
 
 /**
  * \class GraphDocument
@@ -63,6 +64,8 @@ public:
      * Destroys the document object and all of its contents.
      */
     void destroy();
+
+    View * createView(QWidget *parent);
 
     /**
      * @return list of nodes contained at the document

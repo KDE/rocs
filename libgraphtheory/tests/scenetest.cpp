@@ -23,6 +23,7 @@
 #include "node.h"
 #include "edge.h"
 #include "editor.h"
+#include "view.h"
 
 #include <KDeclarative/KDeclarative>
 #include <QApplication>
@@ -39,10 +40,6 @@ using namespace GraphTheory;
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QQmlEngine *engine = new QQmlEngine;
-    KDeclarative::KDeclarative kdeclarative;
-    kdeclarative.setDeclarativeEngine(engine);
-    kdeclarative.setupBindings();
     int rc = 0;
 
     // test data
@@ -58,13 +55,12 @@ int main(int argc, char *argv[])
     EdgePtr edge = Edge::create(from, to);
     edge->setDynamicProperty("weight", "3");
 
-    Editor editor(engine);
+    Editor editor;
     editor.setGraphDocument(document);
-    QQuickWidget *widget = editor.widget();
+    QQuickWidget *widget = document->createView(0);
     widget->show();
 
     rc = app.exec();
-    engine->deleteLater();
     document->destroy();
     return rc;
 }

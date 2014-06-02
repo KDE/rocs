@@ -22,10 +22,6 @@
 #include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>
-#include <KDeclarative/KDeclarative>
-#include <QQmlComponent>
-#include <QQmlContext>
-#include <QQmlEngine>
 
 #include "rocsversion.h"
 #include "Ui/MainWindow.h"
@@ -62,12 +58,6 @@ int main(int argc, char *argv[])
      */
     QApplication app(argc, argv);
 
-    // prepare QML engine to be globally used
-    QQmlEngine engine;
-    KDeclarative::KDeclarative kdeclarative;
-    kdeclarative.setDeclarativeEngine(&engine);
-    kdeclarative.setupBindings();
-
     KAboutData::setApplicationData(aboutData);
 
     if (DataStructureBackendManager::self().backends().count() == 0) {
@@ -77,7 +67,7 @@ int main(int argc, char *argv[])
                                         "Try running kbuildsycoca4 from a console and after execute Rocs again."));
 
     } else {
-        MainWindow *window = new MainWindow(&engine);
+        MainWindow *window = new MainWindow();
         window->show();
         return app.exec();
     }

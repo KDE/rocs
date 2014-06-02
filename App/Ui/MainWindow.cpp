@@ -24,6 +24,7 @@
 #include "settings.h"
 
 #include "libgraphtheory/editor.h"
+#include "libgraphtheory/view.h"
 
 #include <QApplication>
 #include <QCloseEvent>
@@ -93,15 +94,20 @@
 #include "DocumentManager.h"
 #include "Tools/ToolManager.h"
 
+using namespace GraphTheory;
 
-MainWindow::MainWindow(QQmlEngine *m_qmlEngine)
+MainWindow::MainWindow()
     : KXmlGuiWindow()
-    , m_qmlEngine(m_qmlEngine)
     , _currentProject(0)
     , _scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
-    m_graphEditor = new GraphTheory::Editor(m_qmlEngine);
+    m_graphEditor = new GraphTheory::Editor();
+
+    //FIXME by hand creation of an empty graph document
+    // this must become part of the project after adapating to graphtheory
+    GraphTheory::GraphDocumentPtr document = GraphTheory::GraphDocument::create();
+    m_graphEditor->setGraphDocument(document);
 
     setupWidgets();
     setupActions();
@@ -121,11 +127,6 @@ MainWindow::MainWindow(QQmlEngine *m_qmlEngine)
     // TODO: use welcome widget instead of creating default empty project
     createNewProject();
     updateCaption();
-
-    //FIXME by hand creation of an empty graph document
-    // this must become part of the project after adapating to graphtheory
-    GraphTheory::GraphDocumentPtr document = GraphTheory::GraphDocument::create();
-    m_graphEditor->setGraphDocument(document);
 
     GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
     GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
@@ -179,7 +180,7 @@ void MainWindow::setupWidgets()
     // splits the main window horizontal
     _vSplitter = new QSplitter(this);
     _vSplitter->setOrientation(Qt::Vertical);
-    _vSplitter->addWidget(m_graphEditor->widget());
+    _vSplitter->addWidget(m_graphEditor->graphDocument()->createView(this));
     _vSplitter->addWidget(scriptPanel);
 
     // horizontal arrangement

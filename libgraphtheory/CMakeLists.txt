@@ -32,6 +32,7 @@ set(graphtheory_SRCS
     node.cpp
     nodetype.cpp
     editor.cpp
+    view.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
     qtquickitems/nodeitem.cpp
@@ -46,6 +47,7 @@ target_link_libraries(rocsgraphtheory
         Qt5::Quick
         Qt5::QuickWidgets
         KF5::I18n
+        KF5::Declarative
 )
 
 set(rocscore_LIB_HDRS

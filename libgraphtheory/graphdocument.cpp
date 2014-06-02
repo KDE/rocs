@@ -19,6 +19,7 @@
  */
 
 #include "graphdocument.h"
+#include "view.h"
 #include "edgetype.h"
 #include "nodetype.h"
 #include "edge.h"
@@ -34,6 +35,7 @@ class GraphTheory::GraphDocumentPrivate {
 public:
     GraphDocumentPrivate()
         : m_valid(false)
+        , m_view(0)
     {
     }
 
@@ -42,11 +44,12 @@ public:
     }
 
     GraphDocumentPtr q;
+    bool m_valid;
+    View *m_view;
     QList<EdgeTypePtr> m_edgeTypes;
     QList<NodeTypePtr> m_nodeTypes;
     NodeList m_nodes;
     EdgeList m_edges;
-    bool m_valid;
 };
 
 GraphDocumentPtr GraphDocument::self() const
@@ -89,6 +92,16 @@ GraphDocument::~GraphDocument()
 {
 
     --GraphDocument::objectCounter;
+}
+
+View * GraphDocument::createView(QWidget *parent)
+{
+    if (d->m_view) {
+        return d->m_view;
+    }
+    d->m_view = new View(parent);
+    d->m_view->setGraphDocument(d->q);
+    return d->m_view;
 }
 
 GraphDocumentPtr GraphDocument::create()

@@ -18,34 +18,50 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EDITOR_H
-#define EDITOR_H
+#ifndef VIEW_H
+#define VIEW_H
 
 #include "libgraphtheoryexport.h"
+#include "typenames.h"
+#include "editor.h"
 #include "graphdocument.h"
-#include <QObject>
+#include "node.h"
+#include "edgetype.h"
+#include "nodetype.h"
 
-class QQuickWidget;
-class QQmlEngine;
+#include <QObject>
+#include <QQuickWidget>
+#include <QSharedPointer>
+#include <QList>
 
 namespace GraphTheory
 {
-class EditorPrivate;
 
-class GRAPHTHEORY_EXPORT Editor : public QObject
+class ViewPrivate;
+
+/**
+ * \class View
+ */
+class GRAPHTHEORY_EXPORT View : public QQuickWidget
 {
     Q_OBJECT
 
 public:
-    explicit Editor();
-    virtual ~Editor();
-    GraphDocumentPtr graphDocument() const;
+    View(QWidget *parent);
+    virtual ~View();
     void setGraphDocument(GraphDocumentPtr document);
-    QQuickWidget * widget();
+    GraphDocumentPtr graphDocument() const;
+
+private Q_SLOTS:
+    void createNode(qreal x, qreal y);
+    void createEdge(GraphTheory::Node *from, GraphTheory::Node *to);
+    void deleteNode(GraphTheory::Node *node);
+    void deleteEdge(GraphTheory::Edge *edge);
+
+Q_SIGNALS:
 
 private:
-    Q_DISABLE_COPY(Editor)
-    const QScopedPointer<EditorPrivate> d;
+    const QScopedPointer<ViewPrivate> d;
 };
 }
 
