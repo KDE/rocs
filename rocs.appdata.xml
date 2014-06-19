@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<component type="desktop">
+  <id>rocs.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Rocs</name>
+  <summary>Rocs Graph Theory</summary>
+  <description>
+    <p>Rocs is a Graph Theory IDE for designing and analyzing graph algorithms. It provides an easy to use visual editor for creating graphs, a scripting engine to execute algorithms, and several helper tools for simulations and experiments. Algorithms are specified in JavaScript.</p>
+  <url type="homepage">http://edu.kde.org/images/screenshots/rocs.png</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=rocs</url>
+  <url type="help">http://docs.kde.org/stable/en/kdeedu/rocs/index.html</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://kde.org/images/screenshots/rocs.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>rocs</binary>
+  </provides>
+</component>
