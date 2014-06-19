@@ -105,9 +105,8 @@ MainWindow::MainWindow()
     m_graphEditor = new GraphTheory::Editor();
 
     //FIXME by hand creation of an empty graph document
-    // this must become part of the project after adapating to graphtheory
-    GraphTheory::GraphDocumentPtr document = GraphTheory::GraphDocument::create();
-    m_graphEditor->setGraphDocument(document);
+    // this must become part of the project after adapting to graphtheory
+    GraphTheory::GraphDocumentPtr document = m_graphEditor->createDocument();
 
     setupWidgets();
     setupActions();
@@ -180,7 +179,7 @@ void MainWindow::setupWidgets()
     // splits the main window horizontal
     _vSplitter = new QSplitter(this);
     _vSplitter->setOrientation(Qt::Vertical);
-    _vSplitter->addWidget(m_graphEditor->graphDocument()->createView(this));
+    _vSplitter->addWidget(m_graphEditor->documents().first()->createView(this));
     _vSplitter->addWidget(scriptPanel);
 
     // horizontal arrangement

@@ -41,9 +41,10 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     int rc = 0;
+    Editor editor;
 
     // test data
-    GraphDocumentPtr document = GraphDocument::create();
+    GraphDocumentPtr document = editor.createDocument();
     document->edgeTypes().first()->addDynamicProperty("weight");
     document->nodeTypes().first()->addDynamicProperty("value");
     NodePtr from = Node::create(document);
@@ -55,8 +56,6 @@ int main(int argc, char *argv[])
     EdgePtr edge = Edge::create(from, to);
     edge->setDynamicProperty("weight", "3");
 
-    Editor editor;
-    editor.setGraphDocument(document);
     QQuickWidget *widget = document->createView(0);
     widget->show();
 

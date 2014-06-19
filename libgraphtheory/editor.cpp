@@ -39,7 +39,7 @@ public:
 
     }
 
-    GraphDocumentPtr m_document;
+    QList<GraphDocumentPtr> m_documents;
 
 };
 
@@ -55,12 +55,14 @@ Editor::~Editor()
 
 }
 
-GraphDocumentPtr Editor::graphDocument() const
+QList<GraphDocumentPtr> Editor::documents() const
 {
-    return d->m_document;
+    return d->m_documents;
 }
 
-void Editor::setGraphDocument(GraphDocumentPtr document)
+GraphDocumentPtr Editor::createDocument()
 {
-    d->m_document = document;
+    GraphDocumentPtr document = GraphDocument::create();
+    d->m_documents.append(document);
+    return document;
 }

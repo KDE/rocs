@@ -39,9 +39,11 @@ class GRAPHTHEORY_EXPORT Editor : public QObject
 public:
     explicit Editor();
     virtual ~Editor();
-    GraphDocumentPtr graphDocument() const;
-    void setGraphDocument(GraphDocumentPtr document);
-    QQuickWidget * widget();
+    QList<GraphDocumentPtr> documents() const;
+    GraphDocumentPtr createDocument();
+
+Q_SIGNALS:
+    void documentCreated(GraphDocumentPtr document);
 
 private:
     Q_DISABLE_COPY(Editor)
