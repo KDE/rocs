@@ -177,6 +177,47 @@ Q_SIGNALS:
     void edgesAboutToBeRemoved(int,int);
     void edgesRemoved();
 
+  /*
+   * General file related actions.
+   * None of these actions cause user interaction.
+   */
+public:
+    /**
+     * Reload the current document.
+     * @return @e true on success, i.e. the the document was reloaded, otherwise
+     *         @e false
+     */
+    bool documentReload();
+
+    /**
+     * Save document to path as given by GraphDocument::documentUrl()
+     * @return @e true on success, i.e. the save has been done, otherwise
+     *         @e false
+     */
+    bool documentSave();
+
+    /**
+     * Save document to path @p url, this does not change the documentUrl value.
+     * To also change the document value, use setDocumentUrl(...).
+     * @return @e true on success, i.e. the save has been done, otherwise
+     *         @e false
+     */
+    bool documentSaveAs(const QUrl &documentUrl);
+
+    /**
+     * @return path used for saving
+     */
+    QUrl documentUrl() const;
+
+    /**
+     * Set file path used for saving.
+     * \param documentUrl path to local file for saving the document
+     */
+    void setDocumentUrl(const QUrl &documentUrl);
+
+Q_SIGNALS:
+    void documentUrlChanged();
+
 protected:
     GraphDocument();
 

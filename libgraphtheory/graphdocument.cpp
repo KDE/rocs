@@ -36,6 +36,7 @@ public:
     GraphDocumentPrivate()
         : m_valid(false)
         , m_view(0)
+        , m_documentUrl(QUrl())
     {
     }
 
@@ -50,6 +51,8 @@ public:
     QList<NodeTypePtr> m_nodeTypes;
     NodeList m_nodes;
     EdgeList m_edges;
+
+    QUrl m_documentUrl;
 };
 
 GraphDocumentPtr GraphDocument::self() const
@@ -259,3 +262,39 @@ void GraphDocument::setQpointer(GraphDocumentPtr q)
 {
     d->q = q;
 }
+
+//BEGIN file stuff
+bool GraphDocument::documentReload()
+{
+    //FIXME reload document
+    return true;
+}
+
+bool GraphDocument::documentSave()
+{
+    return documentSaveAs(d->m_documentUrl);
+}
+
+bool GraphDocument::documentSaveAs(const QUrl &documentUrl)
+{
+    if (!documentUrl.isValid()) {
+        qCritical() << "No valid document url specified, abort saving.";
+        return false;
+    }
+
+    //FIXME load document
+
+    return true;
+}
+
+QUrl GraphDocument::documentUrl() const
+{
+    return d->m_documentUrl;
+}
+
+void GraphDocument::setDocumentUrl(const QUrl &documentUrl)
+{
+    d->m_documentUrl = documentUrl;
+    emit documentUrlChanged();
+}
+//END
