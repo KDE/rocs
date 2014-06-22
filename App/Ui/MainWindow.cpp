@@ -127,9 +127,6 @@ MainWindow::MainWindow()
     createNewProject();
     updateCaption();
 
-    GraphicsLayout::self()->setViewStyleDataNode(Settings::dataNodeDisplay());
-    GraphicsLayout::self()->setViewStyleDataEdge(Settings::dataEdgeDisplay());
-
     // update rocs config version
     Settings::setVersion(ROCS_VERSION_STRING);
 
