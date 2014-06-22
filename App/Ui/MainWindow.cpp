@@ -28,26 +28,17 @@
 
 #include <QApplication>
 #include <QCloseEvent>
-#include <QComboBox>
 #include <QGraphicsView>
 #include <QLabel>
 #include <QLayout>
 #include <QSplitter>
-#include <QStackedWidget>
-#include <QToolBar>
-#include <QVBoxLayout>
 #include <QToolButton>
-#include <QPointer>
 #include <QGridLayout>
-#include <QFile>
 #include <QDebug>
 #include <QIcon>
 #include <QPushButton>
 #include <QInputDialog>
 #include <QActionGroup>
-#include <QMutexLocker>
-#include <QFormLayout>
-#include <QScriptEngineDebugger>
 #include <QFileDialog>
 #include <QQuickWidget>
 
@@ -66,21 +57,15 @@
 #include <ktexteditor/document.h>
 
 #include "DocumentTypesWidget.h"
-#include "GraphVisualEditor.h"
 #include "Ui/CodeEditor.h"
 #include "Ui/ScriptOutputWidget.h"
 #include "Ui/PossibleIncludes.h"
-// #include "Ui/LoadedPluginsDialog.h" //FIXME
 #include "Ui/SideDockWidget.h"
 #include "Ui/JournalEditorWidget.h"
 #include "Ui/DocumentationWidget.h"
 #include "InterfacePlugins/ApiDoc/ApiDocWidget.h"
-#include "Scene/GraphicsLayout.h"
-#include "Document.h"
-#include "DataStructure.h"
 #include "Project.h"
 #include "QtScriptBackend.h"
-#include "Actions/AbstractAction.h"
 #include "Actions/AlignAction.h"
 #include "Actions/ZoomAction.h"
 #include "Actions/DeleteAction.h"
