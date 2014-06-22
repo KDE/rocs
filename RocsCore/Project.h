@@ -194,7 +194,7 @@ public:
      */
     QList<GraphTheory::GraphDocumentPtr> graphDocuments() const;
 
-    GraphTheory::GraphDocumentPtr activeGraph() const;
+    GraphTheory::GraphDocumentPtr activeGraphDocument() const;
 
     /**
      * Add new graph document to the project.

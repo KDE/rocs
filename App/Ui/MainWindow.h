@@ -188,7 +188,6 @@ private slots:
     void newGraph();
     void saveScripts();
     void newScript();
-    void loadDocument(const QString& name = QString());
 
     /**
      * Import dialog to add graph document to project.
@@ -207,18 +206,13 @@ private slots:
     void setupToolsPluginsAction();
     void quit();
 
-public slots:
+public Q_SLOTS:
     /**
-     * Sets the current active document given by \see DocumentManager::activeDocument() as
-     * active document. Use with case, since this method creates connections to the current Document.
-     * If already one document is active, \see releaseDocument(d) must be called before this.
+     * Update UI for changed active graph document
      */
-    void setActiveDocument();
-    void releaseDocument(Document *d);
+    void setActiveGraphDocument();
     void runToolPlugin();
 
-    /** setup documents list.*/
-    void setupDocumentsList();
     void disableStopAction();
     void enableStopAction();
 
@@ -234,7 +228,7 @@ public slots:
      */
     void showExecutionButtonOneStep(bool visible);
 
-signals:
+Q_SIGNALS:
     void startEvaluation();
     void stopEvaluation();
 
@@ -261,6 +255,7 @@ private:
     QSplitter *_vSplitter;
     QSplitter *_hSplitter;
     QSplitter *_hScriptSplitter;
+    QWidget *m_visualEditor; // contains graph editor scene
 
     QComboBox *_selectListing;
 

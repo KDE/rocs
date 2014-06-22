@@ -274,7 +274,7 @@ QList<GraphDocumentPtr> Project::graphDocuments() const
     return d->m_graphDocuments;
 }
 
-GraphDocumentPtr Project::activeGraph() const
+GraphDocumentPtr Project::activeGraphDocument() const
 {
     return d->m_activeGraphDocument;
 }

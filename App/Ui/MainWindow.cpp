@@ -91,7 +91,6 @@
 #include "ImporterExporterManager.h"
 #include "DataStructureBackendInterface.h"
 #include "DataStructureBackendManager.h"
-#include "DocumentManager.h"
 #include "Tools/ToolManager.h"
 
 using namespace GraphTheory;
@@ -100,6 +99,7 @@ MainWindow::MainWindow()
     : KXmlGuiWindow()
     , m_currentProject(0)
     , _scriptDbg(0)
+    , m_visualEditor(new QWidget)
 {
     setObjectName("RocsMainWindow");
     m_graphEditor = new GraphTheory::Editor();
@@ -115,13 +115,6 @@ MainWindow::MainWindow()
     setupToolbars();
     setupToolsPluginsAction();
     setupDSPluginsAction();
-
-    connect(&DocumentManager::self(), SIGNAL(activateDocument()),
-            this, SLOT(setActiveDocument()));
-    connect(&DocumentManager::self(), SIGNAL(deactivateDocument(Document*)),
-            this, SLOT(releaseDocument(Document*)));
-    connect(&DocumentManager::self(), SIGNAL(documentRemoved(Document*)),
-            this, SLOT(releaseDocument(Document*)));
 
     // TODO: use welcome widget instead of creating default empty project
     createNewProject();
@@ -172,11 +165,12 @@ void MainWindow::setupWidgets()
     // setup main widgets
     QWidget *sidePanel = setupSidePanel();
     QWidget *scriptPanel = setupScriptPanel();
+    m_visualEditor->setLayout(new QGridLayout);
 
     // splits the main window horizontal
     _vSplitter = new QSplitter(this);
     _vSplitter->setOrientation(Qt::Vertical);
-    _vSplitter->addWidget(m_graphEditor->documents().first()->createView(this));
+    _vSplitter->addWidget(m_visualEditor);
     _vSplitter->addWidget(scriptPanel);
 
     // horizontal arrangement
@@ -335,7 +329,7 @@ QWidget* MainWindow::setupSidePanel()
     // add widgets to dock
     // document property widgets
     DocumentTypesWidget* documentTypesWidget = new DocumentTypesWidget(this);
-    connect(&DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument()));
+//     connect(&DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument())); // TODO adapt to activeDocumentChanged
     sideDock->addDock(documentTypesWidget, i18n("Element Types"), QIcon::fromTheme("document-properties"));
 
     // Project Journal
@@ -438,13 +432,14 @@ void MainWindow::setupToolsPluginsAction()
         createToolsPluginsAction();
     }
 
-    foreach(QAction* action, _toolsPlugins) {
-        ToolsPluginInterface *plugin = ToolManager::self().plugins().at(action->data().toInt());
-        action->setEnabled(
-                DocumentManager::self().activeDocument() &&
-                plugin->supportedDataStructures().contains(DocumentManager::self().activeDocument()->backend()->internalName())
-                          );
-    }
+    //TODO has to be rewritten: concepts changed, and this does not apply anymore
+//     foreach(QAction* action, _toolsPlugins) {
+//         ToolsPluginInterface *plugin = ToolManager::self().plugins().at(action->data().toInt());
+//         action->setEnabled(
+//                 DocumentManager::self().activeDocument() &&
+//                 plugin->supportedDataStructures().contains(DocumentManager::self().activeDocument()->backend()->internalName())
+//                           );
+//     }
 }
 
 void MainWindow::createToolsPluginsAction(){
@@ -491,58 +486,20 @@ void MainWindow::setupDSPluginsAction()
     plugActionList("DS_plugins", pluginList);
 }
 
-void MainWindow::setupDocumentsList()
+void MainWindow::setActiveGraphDocument()
 {
-    QList<QAction*> pluginList;
-    QAction* action = 0;
-    unplugActionList("Doc_List");
-    QActionGroup * group = new QActionGroup(this);
-    int count = 0;
-    foreach(Document * doc, DocumentManager::self().documentList()) {
-        action = new QAction(doc->name(), this);
-        action->setData(count++);
-        action->setCheckable(true);
-        if (doc == DocumentManager::self().activeDocument()) {
-            action->setChecked(true);
-        }
-        action->setActionGroup(group);
-        connect(action, SIGNAL(triggered(bool)), &DocumentManager::self(), SLOT(changeDocument()));
-        pluginList.append(action);
-    }
-
-    plugActionList("Doc_List", pluginList);
-}
-
-void MainWindow::setActiveDocument()
-{
-    qDebug() << "Setting the document in the main window";
-    Document *activeDocument = DocumentManager::self().activeDocument();
-
-    // create engine and interface objects to UI plugins
-    QtScriptBackend *engine = activeDocument->engineBackend();
-    engine->engine();
-
-    // finally set active
-//     m_graphEditor->setActiveDocument(activeDocument); //FIXME implement method
-
-    // Update engine toolbar
-    connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
-
-    activeDocument->setModified(false);
-    setupToolsPluginsAction();
-}
-
-void MainWindow::releaseDocument(Document* d)
-{
-    if (d == 0) {
+    Q_ASSERT(m_currentProject);
+    if (!m_currentProject) {
         return;
     }
-    d->disconnect(this);
-    disconnect(d);
+    GraphDocumentPtr activeDocument = m_currentProject->activeGraphDocument();
+    m_visualEditor->layout()->addWidget(m_graphEditor->documents().first()->createView(this));
 
-    d->engineBackend()->stop();
-    d->engineBackend()->disconnect(this);
-//     m_graphEditor->releaseDocument(); // FIXME implement method to release the current document
+    //TODO reenable after porting script engine
+    // Update engine toolbar
+//     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
+
+    setupToolsPluginsAction();
 }
 
 void MainWindow::importScript()
@@ -564,16 +521,6 @@ void MainWindow::importScript()
     Settings::setLastOpenedDirectory(startDirectory.toLocalFile());
 }
 
-void MainWindow::loadDocument(const QString& name)
-{
-    if (!name.isEmpty() && !name.endsWith(QLatin1String(".graph"))) {
-        KMessageBox::sorry(this, i18nc("@info", "This does not seem to be a graph file."), i18nc("@title:window", "Invalid File"));
-        return;
-    }
-
-    DocumentManager::self().openDocument(QUrl::fromLocalFile(name));
-}
-
 void MainWindow::createNewProject()
 {
     if (!queryClose()) {
@@ -581,15 +528,17 @@ void MainWindow::createNewProject()
     }
 
     _codeEditor->closeAllScripts();
-    DocumentManager::self().closeAllDocuments();
-
+    m_currentProject->disconnect(this);
     delete m_currentProject;
+
     m_currentProject = new Project();
     m_currentProject->setGraphEditor(m_graphEditor);
     m_currentProject->addCodeFileNew(_codeEditor->newScript());
     m_currentProject->createGraphDocument();
     _journalWidget->openJournal(m_currentProject);
     m_currentProject->setModified(false);
+    setActiveGraphDocument();
+    connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
 
     updateCaption();
 }
@@ -669,9 +618,8 @@ void MainWindow::openProject(const QUrl &fileName)
         }
     }
     // import project specified: close everything and delete old project
-    DocumentManager::self().activeDocument()->engineBackend()->stop();
-    DocumentManager::self().closeAllDocuments();
     _codeEditor->closeAllScripts();
+    m_currentProject->disconnect(this);
     delete m_currentProject;
 
     // extract and open new project
@@ -693,8 +641,11 @@ void MainWindow::openProject(const QUrl &fileName)
     _journalWidget->openJournal(m_currentProject);
 
     updateCaption();
+    setActiveGraphDocument();
     _recentProjects->addUrl(file.path(QUrl::FullyDecoded));
     Settings::setLastOpenedDirectory(file.path());
+
+    connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
 }
 
 
@@ -798,7 +749,7 @@ void MainWindow::saveAllGraphs()
 
 void MainWindow::saveGraphAs()
 {
-    saveGraphAs(m_currentProject->activeGraph());
+    saveGraphAs(m_currentProject->activeGraphDocument());
 }
 
 
@@ -837,7 +788,7 @@ bool MainWindow::queryClose()
 
     //TODO move modification information to project
     bool anyGraphDocumentModified = false;
-    foreach(Document * document, DocumentManager::self().documentList()) { //FIXME check project
+    foreach(GraphDocumentPtr document, m_currentProject->graphDocuments()) {
         if (document->isModified()) {
             anyGraphDocumentModified = true;
             break;
@@ -875,6 +826,8 @@ void MainWindow::quit()
 
 void MainWindow::importGraphFile()
 {
+    //FIXME port to GraphTheory
+#if 0
     //TODO port to GraphTheory library
     ImporterExporterManager importer(this);
     Document * gd = importer.importFile();
@@ -887,13 +840,14 @@ void MainWindow::importGraphFile()
     if (importer.hasDialog()) {
         importer.dialogExec();
     }
+#endif
 }
 
 void MainWindow::exportGraphFile()
 {
     ImporterExporterManager exp(this);
-
-    exp.exportFile(DocumentManager::self().activeDocument());
+//FIXME adapt exported for GraphTheory
+//     exp.exportFile(m_currentProject->activeGraphDocument());
 }
 
 void MainWindow::showPossibleIncludes()
@@ -923,7 +877,8 @@ void MainWindow::runToolPlugin()
         return;
     }
     if (ToolsPluginInterface *plugin =  ToolManager::self().plugins().value(action->data().toInt())) {
-        plugin->run(DocumentManager::self().activeDocument());
+        //FIXME port ToolPlugin to GraphTheory
+//         plugin->run(DocumentManager::self().activeDocument());
     }
 }
 
@@ -934,6 +889,9 @@ void MainWindow::executeScriptFull(const QString& text)
 
 void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString& text)
 {
+    //FIXME implement scripting interfaces for GraphTheory
+    qCritical() << "Scripting engine currently disalbed";
+#if 0
     Q_ASSERT(_outputWidget);
     if (_outputWidget->isOutputClearEnabled()) {
         _outputWidget->clear();
@@ -982,13 +940,19 @@ void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString&
 
     // disconnect console listener
     engine->disconnect(_outputWidget->consoleInterface());
+#endif
 }
 
 void MainWindow::executeScriptOneStep(const QString& text)
 {
+    //FIXME implement scripting interfaces for GraphTheory
+    qCritical() << "Scripting engine currently disalbed";
+#if 0
     Q_ASSERT(_outputWidget);
 
-    QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
+    //FIXME implement scripting interfaces for GraphTheory
+    qCritical() << "Scripting engine currently disalbed";
+//     QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
 
     //TODO disable start action
     enableStopAction();
@@ -1004,18 +968,23 @@ void MainWindow::executeScriptOneStep(const QString& text)
                              scriptPath.isEmpty() ? scriptPath : scriptPath.section('/', 0, -2),
                              _codeEditor->document()->documentName());
 
-        engine->setScript(script, DocumentManager::self().activeDocument());
+        //FIXME implement scripting interfaces for GraphTheory
+        qCritical() << "Scripting engine currently disalbed";
+//         engine->setScript(script, DocumentManager::self().activeDocument());
         engine->executeStep();
         return;
     }
     engine->continueExecutionStep();
+#endif
 }
 
 void MainWindow::stopScript()
 {
-    QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
-    disableStopAction();
-    engine->stop();
+    //FIXME implement scripting interfaces for GraphTheory
+    qCritical() << "Scripting engine currently disalbed";
+//     QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
+//     disableStopAction();
+//     engine->stop();
 }
 
 void MainWindow::debugScript()
