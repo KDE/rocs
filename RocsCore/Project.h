@@ -21,7 +21,7 @@
 #define PROJECT_H
 
 #include "RocsCoreExport.h"
-#include "CoreTypes.h"
+#include "libgraphtheory/typenames.h"
 
 #include <QList>
 #include <QString>
@@ -187,6 +187,8 @@ public:
      */
     QList<QUrl> graphFiles() const;
 
+    GraphTheory::GraphDocumentPtr activeGraph() const;
+
     /**
      * Add a new temporary graph document to the project. This file has not a file name and must
      * be saved before it can be added to the project. Use \see saveGraphFileNew(...) to
@@ -194,7 +196,7 @@ public:
      *
      * \param document is the temporary code file
      */
-    void addGraphFileNew(Document *document);
+    void addGraphFileNew(GraphTheory::GraphDocumentPtr document);
 
     /**
      * Add graph file to project. The file is specified by \p file.
@@ -211,19 +213,19 @@ public:
      * \param document is the temporary graph file
      * \param file is the file url to where the graph file shall be saved
      */
-    void saveGraphFileNew(Document *document, const QString &file);
+    void saveGraphFileNew(GraphTheory::GraphDocumentPtr document, const QUrl &fileUrl);
 
     /**
      * Save existing graph document file under new filename
      */
-    void saveGraphFileAs(Document *document, const QString &file);
+    void saveGraphFileAs(GraphTheory::GraphDocumentPtr document, const QUrl &fileUrl);
 
     /**
      * Remove graph file \p document from list of temporary graph files of the project.
      *
      * \param document is the temporary document to be removed
      */
-    void removeGraphFileNew(Document *document);
+    void removeGraphFileNew(GraphTheory::GraphDocumentPtr document);
 
     /**
      * Remove graph file from the project. File is specified by its identifier in internal list.

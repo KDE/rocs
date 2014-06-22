@@ -173,10 +173,8 @@ private slots:
 
     /**
      * Save graph document \p document if document is specified.
-     * Otherwise if \p document is 0 save current active document.
-     * \param docoument is reference to the to be saved graph document or 0
      */
-    void saveGraph(Document* document = 0);
+    void saveGraph(GraphTheory::GraphDocumentPtr document);
 
     /**
      * Save all graphs currently registered by DocumentMananger
@@ -193,7 +191,7 @@ private slots:
      * Otherwise if \p document is 0 save current active document under new file name.
      * \param docoument is reference to the to be saved graph document or 0
      */
-    void saveGraphAs(Document* document);
+    void saveGraphAs(GraphTheory::GraphDocumentPtr document);
     void newGraph();
     void saveScripts();
     void newScript();
@@ -248,7 +246,7 @@ signals:
     void stopEvaluation();
 
 private:
-    Project* _currentProject;
+    Project *m_currentProject;
 
     // Right Area:
     GraphTheory::Editor *m_graphEditor;

@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,7 +18,8 @@
 
 
 #include "Project.h"
-#include "Document.h"
+#include "libgraphtheory/typenames.h"
+#include "libgraphtheory/graphdocument.h"
 
 #include <QString>
 #include <QMap>
@@ -33,6 +34,8 @@
 #include <KTextEditor/Document>
 #include <KTar>
 
+using namespace GraphTheory;
+
 class ProjectPrivate
 {
 public:
@@ -40,12 +43,13 @@ public:
 
     QUrl _projectFile;
     QMap<int, QString> _codeFileGroup;
-    QMap<int, QString> _graphFileGroup;
-    QList<Document*> _graphFileNew;
+    QMap<int, QUrl> _graphFileGroup;
+    QList<GraphDocumentPtr> _graphFileNew;
     QList<KTextEditor::Document*> _codeFileNew;
     KConfig* _config;
     bool _temporary;
     bool _modified;
+    GraphDocumentPtr m_activeGraph;
 
     KConfigGroup initKConfigObject() {
         // helper method for Project::open()
@@ -258,8 +262,8 @@ void Project::removeGraphFile(int fileID)
 QList<QUrl> Project::graphFiles() const
 {
     QList<QUrl> files;
-    foreach(const QString& fileGroup, d->_graphFileGroup) {
-        KConfigGroup group(d->_config, fileGroup);
+    foreach(const QUrl &fileGroup, d->_graphFileGroup) {
+        KConfigGroup group(d->_config, fileGroup.toLocalFile());
         QString file = group.readEntry("file");
         if (QUrl::fromLocalFile(file).isRelative()) {
             files.append(QUrl::fromLocalFile(projectDirectory() + group.readEntry("file")));
@@ -270,25 +274,30 @@ QList<QUrl> Project::graphFiles() const
     return files;
 }
 
-void Project::addGraphFileNew(Document *document)
+GraphDocumentPtr Project::activeGraph() const
+{
+    return d->m_activeGraph; //FIXME active graph nowhere set
+}
+
+void Project::addGraphFileNew(GraphDocumentPtr document)
 {
     d->_graphFileNew.append(document);
 }
 
 
-void Project::removeGraphFileNew(Document *document)
+void Project::removeGraphFileNew(GraphDocumentPtr document)
 {
     d->_graphFileNew.removeAll(document);
 }
 
-void Project::saveGraphFileNew(Document *document, const QString &file)
+void Project::saveGraphFileNew(GraphDocumentPtr document, const QUrl &fileUrl)
 {
     removeGraphFileNew(document);
-    document->saveAs(file);
-    addGraphFile(QUrl::fromLocalFile(document->fileUrl()));
+    document->documentSaveAs(fileUrl);
+    addGraphFile(document->documentUrl());
 }
 
-void Project::saveGraphFileAs(Document *document, const QString &file)
+void Project::saveGraphFileAs(GraphDocumentPtr document, const QUrl &fileUrl)
 {
     Q_ASSERT(document);
     if (d == 0) {
@@ -296,13 +305,13 @@ void Project::saveGraphFileAs(Document *document, const QString &file)
     }
 
     if (d->_graphFileNew.contains(document)) {
-        saveGraphFileNew(document, file);
+        saveGraphFileNew(document, fileUrl);
         return;
     }
     // TODO the following is probably error prone
-    int filekey = d->_graphFileGroup.key(document->fileUrl());
-    d->_graphFileGroup[filekey] = file;
-    document->saveAs(file);
+    int filekey = d->_graphFileGroup.key(document->documentUrl());
+    d->_graphFileGroup[filekey] = fileUrl;
+    document->documentSaveAs(fileUrl);
 }
 
 QUrl Project::journalFile() const
@@ -356,8 +365,8 @@ bool Project::writeProjectFile(const QString &fileUrl)
     projectGroup.writeEntry("CodeFiles", codeFileIDs);
 
     QStringList graphFileIDs;
-    foreach(const QString& fileGroup, d->_graphFileGroup) {
-        KConfigGroup group(d->_config, fileGroup);
+    foreach(const QUrl &fileGroup, d->_graphFileGroup) {
+        KConfigGroup group(d->_config, fileGroup.toLocalFile());
         // TODO change to order given by editor
         graphFileIDs.append(group.readEntry("identifier"));
     }
@@ -409,9 +418,9 @@ bool Project::exportProject(const QUrl &exportUrl)
     projectGroup.writeEntry("CodeFiles", codeFileIDs);
 
     QStringList graphFileIDs;
-    iter = d->_graphFileGroup.constBegin();
-    while (iter != d->_graphFileGroup.constEnd()) {
-        KConfigGroup group(exportConfig, (*iter));
+    QMap<int, QUrl>::const_iterator graphIter = d->_graphFileGroup.constBegin();
+    while (graphIter != d->_graphFileGroup.constEnd()) {
+        KConfigGroup group(exportConfig, (*graphIter).toLocalFile());
 
         // get file url and add to Tar
         QString configFileString = group.readEntry("file");
@@ -425,7 +434,7 @@ bool Project::exportProject(const QUrl &exportUrl)
 
         // update export project config in case of out-of-project-dir files
         group.writeEntry("file", relativePath(projectDirectory(), file.fileName()));
-        ++iter;
+        ++graphIter;
         graphFileIDs.append(group.readEntry("identifier"));
     }
     projectGroup.writeEntry("GraphFiles", graphFileIDs);

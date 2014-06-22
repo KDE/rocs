@@ -37,6 +37,7 @@ public:
         : m_valid(false)
         , m_view(0)
         , m_documentUrl(QUrl())
+        , m_modified(false)
     {
     }
 
@@ -53,6 +54,7 @@ public:
     EdgeList m_edges;
 
     QUrl m_documentUrl;
+    bool m_modified; //FIXME modified value is not updated when graph changes
 };
 
 GraphDocumentPtr GraphDocument::self() const
@@ -283,6 +285,7 @@ bool GraphDocument::documentSaveAs(const QUrl &documentUrl)
     }
 
     //FIXME load document
+    d->m_modified = false;
 
     return true;
 }
@@ -297,4 +300,10 @@ void GraphDocument::setDocumentUrl(const QUrl &documentUrl)
     d->m_documentUrl = documentUrl;
     emit documentUrlChanged();
 }
+
+bool GraphDocument::isModified()
+{
+    return d->m_modified;
+}
+
 //END

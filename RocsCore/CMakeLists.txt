@@ -48,6 +48,7 @@ set( rocs_core_SRCS
 add_library( rocscore SHARED ${rocs_core_SRCS} )
 
 target_link_libraries(rocscore
+    rocsgraphtheory
     KF5::TextEditor
     KF5::Archive
     KF5::CoreAddons

@@ -215,6 +215,8 @@ public:
      */
     void setDocumentUrl(const QUrl &documentUrl);
 
+    bool isModified();
+
 Q_SIGNALS:
     void documentUrlChanged();
 
