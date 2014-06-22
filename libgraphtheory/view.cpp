@@ -61,6 +61,7 @@ View::View(QWidget *parent)
     : QQuickWidget(parent)
     , d(new ViewPrivate)
 {
+    setResizeMode(QQuickWidget::SizeRootObjectToView);
 
     // prepare QML engine to be globally used
     KDeclarative::KDeclarative kdeclarative;
