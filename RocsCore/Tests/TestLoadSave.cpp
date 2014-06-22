@@ -20,6 +20,9 @@
 #include "DataStructure.h"
 #include "Data.h"
 #include "Pointer.h"
+#include "libgraphtheory/typenames.h"
+#include "libgraphtheory/graphdocument.h"
+
 #include <QtTest/QtTest>
 #include <QTemporaryFile>
 
@@ -136,7 +139,8 @@ void TestLoadSave::projectLoadSaveTest()
     Project* testProject = new Project(QUrl::fromLocalFile(temp.fileName()));
     testProject->setName("new test name");
     testProject->addCodeFile(QUrl::fromLocalFile("/path/to/code.js"));
-    testProject->addGraphFile(QUrl::fromLocalFile("/path/to/graph.graph"));
+    GraphTheory::GraphDocumentPtr graph = testProject->createGraphDocument();
+    graph->setDocumentUrl(QUrl::fromLocalFile("/path/to/graph.graph"));
     testProject->writeProjectFile();
 
     // load project
@@ -148,7 +152,8 @@ void TestLoadSave::projectLoadSaveTest()
         "ERROR: path of code file changed"
     );
     QVERIFY2(
-        testProject2->graphFiles().at(0).toLocalFile() == "/path/to/graph.graph",
+        false,
+//         testProject2->graphFiles().at(0).toLocalFile() == "/path/to/graph.graph",
         "ERROR: path of graph file changed"
     );
 

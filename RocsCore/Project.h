@@ -21,6 +21,7 @@
 #define PROJECT_H
 
 #include "RocsCoreExport.h"
+#include "libgraphtheory/editor.h"
 #include "libgraphtheory/typenames.h"
 
 #include <QList>
@@ -44,8 +45,9 @@ class Document;
  * by the project file are a (not necessarily strict) superset of file currently displayed at
  * the main window widget.
  */
-class ROCSLIB_EXPORT Project
+class ROCSLIB_EXPORT Project : public QObject
 {
+    Q_OBJECT
 
 public:
     /**
@@ -90,6 +92,12 @@ public:
      * \param fileUrl is the designated path to the project
      */
     void setProjectFile(const QUrl &fileUrl);
+
+    /**
+     * Set graph editor responsible for all graph documents. Set this to ensure
+     * layout settings from graph editor to be applied to documents.
+     */
+    void setGraphEditor(GraphTheory::Editor *graphEditor);
 
     /**
      * Set project name.
@@ -181,29 +189,18 @@ public:
     void removeCodeFile(int fileID);
 
     /**
-     * Get list of all graph files of the project that have a path.
-     *
+     * List of all graph documents of the project.
      * \return list of local file URLs
      */
-    QList<QUrl> graphFiles() const;
+    QList<GraphTheory::GraphDocumentPtr> graphDocuments() const;
 
     GraphTheory::GraphDocumentPtr activeGraph() const;
 
     /**
-     * Add a new temporary graph document to the project. This file has not a file name and must
-     * be saved before it can be added to the project. Use \see saveGraphFileNew(...) to
-     * save temporary file to actually file and update project configuration.
-     *
-     * \param document is the temporary code file
+     * Add new graph document to the project.
+     * \return the created graph document
      */
-    void addGraphFileNew(GraphTheory::GraphDocumentPtr document);
-
-    /**
-     * Add graph file to project. The file is specified by \p file.
-     *
-     * \param file is the local file URL
-     */
-    int addGraphFile(const QUrl &file);
+    GraphTheory::GraphDocumentPtr createGraphDocument();
 
     /**
      * Save a temporary graph document to a graph file and update association to the project.
@@ -221,18 +218,11 @@ public:
     void saveGraphFileAs(GraphTheory::GraphDocumentPtr document, const QUrl &fileUrl);
 
     /**
-     * Remove graph file \p document from list of temporary graph files of the project.
+     * Remove graph file \p document from the project.
      *
      * \param document is the temporary document to be removed
      */
-    void removeGraphFileNew(GraphTheory::GraphDocumentPtr document);
-
-    /**
-     * Remove graph file from the project. File is specified by its identifier in internal list.
-     *
-     * \param fileID is key for QMap that organizes the files
-     */
-    void removeGraphFile(int fileID);
+    void removeGraphDocument(GraphTheory::GraphDocumentPtr document);
 
     /**
      * Set journal file of the project.
@@ -267,6 +257,9 @@ public:
     bool exportProject(const QUrl &exportUrl);
 
     static QString relativePath(const QString &base_dir, const QString &path);
+
+Q_SIGNALS:
+    void activeGraphDocumentChanged();
 
 private:
     bool writeNewProjectFile();

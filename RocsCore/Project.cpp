@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "Project.h"
 #include "libgraphtheory/typenames.h"
+// #include "libgraphtheory/grapheditor.h"
 #include "libgraphtheory/graphdocument.h"
 
 #include <QString>
@@ -39,17 +39,22 @@ using namespace GraphTheory;
 class ProjectPrivate
 {
 public:
-    ProjectPrivate() {}
+    ProjectPrivate()
+        : m_graphEditor(0)
+    {
+
+    }
 
     QUrl _projectFile;
+    GraphTheory::Editor *m_graphEditor;
     QMap<int, QString> _codeFileGroup;
-    QMap<int, QUrl> _graphFileGroup;
     QList<GraphDocumentPtr> _graphFileNew;
     QList<KTextEditor::Document*> _codeFileNew;
     KConfig* _config;
     bool _temporary;
     bool _modified;
-    GraphDocumentPtr m_activeGraph;
+    QList<GraphDocumentPtr> m_graphDocuments;
+    GraphDocumentPtr m_activeGraphDocument;
 
     KConfigGroup initKConfigObject() {
         // helper method for Project::open()
@@ -64,7 +69,25 @@ public:
 
         QStringList graphFileIDs = projectGroup.readEntry("GraphFiles", QStringList());
         foreach(const QString& offset, graphFileIDs) {
-            _graphFileGroup.insert(offset.toInt(), "GraphFile" + offset);
+            KConfigGroup group(_config, "GraphFile" + offset);
+            QString file = group.readEntry("file");
+            QUrl path;
+            if (QUrl::fromLocalFile(file).isRelative()) {
+                path = QUrl::fromLocalFile(projectDirectory() + group.readEntry("file"));
+            } else {
+                path = QUrl::fromLocalFile(group.readEntry("file"));
+            }
+            GraphDocumentPtr document;
+            if (m_graphEditor) {
+                document = m_graphEditor->createDocument();
+            } else {
+                document = GraphDocument::create();
+            }
+            document->setDocumentUrl(path);
+            m_graphDocuments.append(document);
+        }
+        if (m_graphDocuments.count() > 0) {
+            m_activeGraphDocument = m_graphDocuments.first();
         }
 
         // for now, journal files only have name "journal.html"
@@ -72,6 +95,29 @@ public:
         journalGroup.writeEntry("JournalHtml", "journal.html");
 
         return projectGroup;
+    }
+
+    QString projectDirectory() const
+    {
+        if (_temporary == true) {
+            return "";
+        }
+        QString directory = _projectFile.path();
+        int i = directory.lastIndexOf(QLatin1Char('/'));
+        if (i == -1) {
+            return QString();
+        }
+        if (i == 0) {
+            return QString(QLatin1Char('/'));
+        }
+    #ifdef Q_OS_WIN
+        if (i == 2 && result[1] == QLatin1Char(':')) {
+            return result.left(3);
+        }
+    #endif
+        // append trailing slash
+        directory = directory.left(i + 1);
+        return directory;
     }
 };
 
@@ -144,25 +190,7 @@ QString Project::name() const
 
 QString Project::projectDirectory() const
 {
-    if (d->_temporary == true) {
-        return "";
-    }
-    QString directory = d->_projectFile.path();
-    int i = directory.lastIndexOf(QLatin1Char('/'));
-    if (i == -1) {
-        return QString();
-    }
-    if (i == 0) {
-        return QString(QLatin1Char('/'));
-    }
-#ifdef Q_OS_WIN
-    if (i == 2 && result[1] == QLatin1Char(':')) {
-        return result.left(3);
-    }
-#endif
-    // append trailing slash
-    directory = directory.left(i + 1);
-    return directory;
+    return d->projectDirectory();
 }
 
 QUrl Project::projectFile() const
@@ -174,6 +202,11 @@ void Project::setProjectFile(const QUrl &fileUrl)
 {
     d->_projectFile = fileUrl;
     d->_temporary = false;
+}
+
+void Project::setGraphEditor(Editor *graphEditor)
+{
+    d->m_graphEditor = graphEditor;
 }
 
 int Project::addCodeFile(const QUrl &file)
@@ -236,82 +269,49 @@ void Project::saveCodeFileNew(KTextEditor::Document *document, const QUrl &file)
     addCodeFile(file);
 }
 
-int Project::addGraphFile(const QUrl &file)
+QList<GraphDocumentPtr> Project::graphDocuments() const
 {
-    QList<int> keys = d->_graphFileGroup.uniqueKeys();
-    int newKey = 1;
-    if (keys.count() > 0) {
-        newKey = keys.last() + 1;
-    }
-
-    KConfigGroup newGroup(d->_config, "GraphFile" + QString("%1").arg(newKey));
-    newGroup.writeEntry("file", relativePath(projectDirectory(), file.toLocalFile()));
-    newGroup.writeEntry("identifier", newKey);
-    d->_graphFileGroup.insert(newKey, "GraphFile" + QString("%1").arg(newKey));
-    d->_modified = true;
-
-    return newKey;
-}
-
-void Project::removeGraphFile(int fileID)
-{
-    d->_config->deleteGroup("GraphFile" + fileID);
-    d->_graphFileGroup.remove(fileID);
-}
-
-QList<QUrl> Project::graphFiles() const
-{
-    QList<QUrl> files;
-    foreach(const QUrl &fileGroup, d->_graphFileGroup) {
-        KConfigGroup group(d->_config, fileGroup.toLocalFile());
-        QString file = group.readEntry("file");
-        if (QUrl::fromLocalFile(file).isRelative()) {
-            files.append(QUrl::fromLocalFile(projectDirectory() + group.readEntry("file")));
-        } else {
-            files.append(QUrl::fromLocalFile(group.readEntry("file")));
-        }
-    }
-    return files;
+    return d->m_graphDocuments;
 }
 
 GraphDocumentPtr Project::activeGraph() const
 {
-    return d->m_activeGraph; //FIXME active graph nowhere set
+    return d->m_activeGraphDocument;
 }
 
-void Project::addGraphFileNew(GraphDocumentPtr document)
+GraphDocumentPtr Project::createGraphDocument()
 {
-    d->_graphFileNew.append(document);
+    GraphDocumentPtr document;
+    if (d->m_graphEditor) {
+        document = d->m_graphEditor->createDocument();
+    } else {
+        document = GraphDocument::create();
+    }
+    d->m_graphDocuments.append(document);
+    if (d->m_activeGraphDocument.isNull()) {
+        d->m_activeGraphDocument = document;
+        emit activeGraphDocumentChanged();
+    }
+    return document;
 }
 
-
-void Project::removeGraphFileNew(GraphDocumentPtr document)
+void Project::removeGraphDocument(GraphDocumentPtr document)
 {
-    d->_graphFileNew.removeAll(document);
+    // remove document from list, next save will then exclude document from be written to container
+    d->m_graphDocuments.removeOne(document);
 }
 
 void Project::saveGraphFileNew(GraphDocumentPtr document, const QUrl &fileUrl)
 {
-    removeGraphFileNew(document);
     document->documentSaveAs(fileUrl);
-    addGraphFile(document->documentUrl());
+    document->setDocumentUrl(fileUrl);
 }
 
 void Project::saveGraphFileAs(GraphDocumentPtr document, const QUrl &fileUrl)
 {
     Q_ASSERT(document);
-    if (d == 0) {
-        return;
-    }
-
-    if (d->_graphFileNew.contains(document)) {
-        saveGraphFileNew(document, fileUrl);
-        return;
-    }
-    // TODO the following is probably error prone
-    int filekey = d->_graphFileGroup.key(document->documentUrl());
-    d->_graphFileGroup[filekey] = fileUrl;
-    document->documentSaveAs(fileUrl);
+    document->setDocumentUrl(fileUrl);
+    document->documentSave();
 }
 
 QUrl Project::journalFile() const
@@ -364,11 +364,15 @@ bool Project::writeProjectFile(const QString &fileUrl)
     }
     projectGroup.writeEntry("CodeFiles", codeFileIDs);
 
+    // add all graph files
     QStringList graphFileIDs;
-    foreach(const QUrl &fileGroup, d->_graphFileGroup) {
-        KConfigGroup group(d->_config, fileGroup.toLocalFile());
-        // TODO change to order given by editor
-        graphFileIDs.append(group.readEntry("identifier"));
+    int newKey = 0;
+    foreach(GraphDocumentPtr graph, d->m_graphDocuments) {
+        KConfigGroup newGroup(d->_config, "GraphFile" + QString("%1").arg(newKey));
+        newGroup.writeEntry("file", relativePath(projectDirectory(), graph->documentUrl().toLocalFile()));
+        newGroup.writeEntry("identifier", newKey);
+        graphFileIDs.append(QString(newKey));
+
     }
     projectGroup.writeEntry("GraphFiles", graphFileIDs);
 
@@ -417,25 +421,15 @@ bool Project::exportProject(const QUrl &exportUrl)
     }
     projectGroup.writeEntry("CodeFiles", codeFileIDs);
 
+    // add all graph files
     QStringList graphFileIDs;
-    QMap<int, QUrl>::const_iterator graphIter = d->_graphFileGroup.constBegin();
-    while (graphIter != d->_graphFileGroup.constEnd()) {
-        KConfigGroup group(exportConfig, (*graphIter).toLocalFile());
+    int newKey = 0;
+    foreach(GraphDocumentPtr graph, d->m_graphDocuments) {
+        KConfigGroup newGroup(exportConfig, "GraphFile" + QString("%1").arg(newKey));
+        newGroup.writeEntry("file", relativePath(projectDirectory(), graph->documentUrl().toLocalFile()));
+        newGroup.writeEntry("identifier", newKey);
+        graphFileIDs.append(QString(newKey));
 
-        // get file url and add to Tar
-        QString configFileString = group.readEntry("file");
-        QUrl file;
-        if (QUrl::fromLocalFile(configFileString).isRelative()) {
-            file = QUrl::fromLocalFile(projectDirectory() + configFileString);
-        } else {
-            file = QUrl::fromLocalFile(configFileString);
-        }
-        tar.addLocalFile(file.toLocalFile(), file.fileName());
-
-        // update export project config in case of out-of-project-dir files
-        group.writeEntry("file", relativePath(projectDirectory(), file.fileName()));
-        ++graphIter;
-        graphFileIDs.append(group.readEntry("identifier"));
     }
     projectGroup.writeEntry("GraphFiles", graphFileIDs);
 

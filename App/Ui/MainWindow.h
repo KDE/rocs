@@ -148,13 +148,6 @@ private slots:
      */
     void stopScript();
 
-    /**
-     * Create new empty graph document for this project.
-     * This can be a new document or an existing one.
-     * Graph document is added to project.
-     */
-    void addEmptyGraphDocument();
-
     void newProjectAssistant();
     void saveProject(bool saveAs = false);
     void openProject(const QUrl& fileName = QUrl());

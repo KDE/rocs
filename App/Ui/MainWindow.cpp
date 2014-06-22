@@ -548,11 +548,6 @@ void MainWindow::releaseDocument(Document* d)
 //     m_graphEditor->releaseDocument(); // FIXME implement method to release the current document
 }
 
-void MainWindow::addEmptyGraphDocument()
-{
-    m_currentProject->addGraphFileNew(m_graphEditor->createDocument());
-}
-
 void MainWindow::importScript()
 {
     QUrl startDirectory = Settings::lastOpenedDirectory();
@@ -593,8 +588,9 @@ void MainWindow::createNewProject()
 
     delete m_currentProject;
     m_currentProject = new Project();
+    m_currentProject->setGraphEditor(m_graphEditor);
     m_currentProject->addCodeFileNew(_codeEditor->newScript());
-    m_currentProject->addGraphFileNew(m_graphEditor->createDocument());
+    m_currentProject->createGraphDocument();
     _journalWidget->openJournal(m_currentProject);
     m_currentProject->setModified(false);
 
@@ -683,23 +679,12 @@ void MainWindow::openProject(const QUrl &fileName)
 
     // extract and open new project
     // at the end of this _currentProject must exist
-    if (file.fileName().endsWith(QLatin1String("rocsz"), Qt::CaseInsensitive)){
-        m_currentProject = new Project(file); //FIXME correctly load unpacked project
-        foreach(const QUrl &graphFile, m_currentProject->graphFiles()) {
-            GraphDocumentPtr document = m_graphEditor->createDocument();
-            document->setDocumentUrl(graphFile);
-            document->documentReload();
-        }
-    } else {
+    if (file.fileName().endsWith(QLatin1String("rocsz"), Qt::CaseInsensitive)) {
         m_currentProject = new Project(file);
-        foreach(const QUrl& graphFile, m_currentProject->graphFiles()) {
-            GraphDocumentPtr document = m_graphEditor->createDocument();
-            document->setDocumentUrl(graphFile);
-            document->documentReload();
-        }
+        m_currentProject->setGraphEditor(m_graphEditor);
     }
-    if (m_currentProject->graphFiles().count() == 0) {
-        m_currentProject->addGraphFileNew(m_graphEditor->createDocument());
+    if (m_currentProject->graphDocuments().count() == 0) {
+        m_currentProject->createGraphDocument();
     }
     foreach(const QUrl& codeFile, m_currentProject->codeFiles()) {
         _codeEditor->openScript(codeFile);
@@ -842,10 +827,9 @@ void MainWindow::newGraph()
     if (!file.endsWith(QLatin1String(".graph"))){
         file.append(".graph");
     }
-    //TODO the adding to project seems not working
-    GraphDocumentPtr document = m_graphEditor->createDocument();
+
+    GraphDocumentPtr document = m_currentProject->createGraphDocument();
     document->setDocumentUrl(QUrl::fromLocalFile(file));
-    m_currentProject->addGraphFile(file);
 }
 
 bool MainWindow::queryClose()
