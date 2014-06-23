@@ -23,7 +23,7 @@
 #include "DataStructure.h"
 #include "DataStructureBackendManager.h"
 #include "QtScriptBackend.h"
-#include "LoadSave/GraphFileBackendManager.h"
+// #include "LoadSave/GraphFileBackendManager.h"
 #include "DataStructureBackendInterface.h"
 
 #include <QDebug>
@@ -240,6 +240,7 @@ Document * DocumentManager::newDocument()
     return doc;
 }
 
+#if 0
 
 Document * DocumentManager::openDocument(const QUrl &documentUrl)
 {
@@ -279,6 +280,7 @@ void DocumentManager::exportDocument(Document *document, const QUrl &documentUrl
     return;
 }
 
+#endif
 
 QSvgRenderer * DocumentManager::sharedRenderer(const QString &iconPackage)
 {

@@ -38,10 +38,6 @@ set( rocs_core_SRCS
 
     IncludeManager.cpp
 
-    LoadSave/GraphFileBackendManager.cpp
-    LoadSave/GraphFilePluginInterface.cpp
-    LoadSave/RocsGraphFileFormatPlugin.cpp
-
     EngineModules/Console/ConsoleModule.cpp
 )
 
@@ -105,7 +101,6 @@ install(FILES Pointer.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 install(FILES DataStructure.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
 
 ecm_optional_add_subdirectory(DataStructures)
-ecm_optional_add_subdirectory(LoadSave)
 ecm_optional_add_subdirectory(EngineModules)
 ecm_optional_add_subdirectory(Tests)
 

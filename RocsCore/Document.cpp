@@ -375,12 +375,12 @@ DataStructurePtr Document::addDataStructure(DataStructurePtr dataStructure)
 void Document::save()
 {
     Q_ASSERT(!fileUrl().isEmpty());
-    DocumentManager::self().saveDocumentAs(this, QUrl::fromLocalFile(fileUrl()));
+//     DocumentManager::self().saveDocumentAs(this, QUrl::fromLocalFile(fileUrl()));
 }
 
 void Document::saveAs(const QString& fileUrl)
 {
-    DocumentManager::self().saveDocumentAs(this, QUrl::fromLocalFile(fileUrl));
+//     DocumentManager::self().saveDocumentAs(this, QUrl::fromLocalFile(fileUrl));
 }
 
 QString Document::fileUrl() const

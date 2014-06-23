@@ -114,7 +114,7 @@ public slots:
      * \return created document
      */
     Document * newDocument();
-
+#if 0
     /**
      * Loads graph document specified by \p documentUrl and adds document to document list.
      * Sets loaded document as active document.
@@ -140,6 +140,7 @@ public slots:
      * \param documentUrl is the target file for saving
      */
     void exportDocument(Document *document, const QUrl &documentUrl);
+#endif
 
 signals:
     /**
