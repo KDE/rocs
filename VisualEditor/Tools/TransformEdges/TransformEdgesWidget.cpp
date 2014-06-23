@@ -38,7 +38,7 @@
 #include <Document.h>
 #include <DataStructure.h>
 #include <DocumentManager.h>
-#include "../DataStructures/Graph/GraphStructure.h"
+#include "DataStructures/Graph/GraphStructure.h"
 #include <Pointer.h>
 #include <Data.h>
 

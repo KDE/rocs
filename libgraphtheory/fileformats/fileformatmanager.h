@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -22,19 +22,23 @@
 #define GRAPHFILEBACKENDMANAGER_H
 #include <QList>
 
-#include "GraphFilePluginInterface.h"
-#include "RocsCoreExport.h"
-#include "CoreTypes.h"
+#include "fileformatinterface.h"
+#include "typenames.h"
+#include "libgraphtheoryexport.h"
+#include <QObject>
 
 class KPluginInfo;
 
-/** \class GraphFileBackendManager
- * The GraphFileBackendMananger is a singleton class that provides backends for
- * graph file writing and reading. The backend manager loads dynamic and static backend plugins
- * on first access to \see GraphFileBackendMananger::self() and provides access to these backends
- * as \see GraphFilePluginInterface objects.
+namespace GraphTheory
+{
+
+class FileFormatManagerPrivate;
+
+/** \class FileFormatManager
+ * The FileFormatManager provides access to all graph file format plugins. The backend manager loads
+ * plugins on creation.
  */
-class ROCSLIB_EXPORT GraphFileBackendManager: public QObject
+class GRAPHTHEORY_EXPORT FileFormatManager: public QObject
 {
     Q_OBJECT
 public:
@@ -52,14 +56,14 @@ public:
      *
      * \return self reference
      */
-    static GraphFileBackendManager * self();
+    static FileFormatManager * self();
 
     /**
      * Returns list of loaded backends. Backends are loaded with first call to \see self().
      *
      * \return list of plugin interfaces of loaded backends
      */
-    QList <GraphFilePluginInterface*> backends() const;
+    QList <FileFormatInterface*> backends() const;
 
     /**
      * Returns list of all loaded backends with specified capability (\see PluginType).
@@ -68,7 +72,7 @@ public:
      * \param type specifies capability of the plugin
      * \return list of plugin interfaces of loaded backends
      */
-    QList <GraphFilePluginInterface*> backends(PluginType type) const;
+    QList <FileFormatInterface*> backends(PluginType type) const;
 
     /**
      * Returns an arbitrary loaded plugin that can handle extension \p ext. If no backend specifies
@@ -77,7 +81,7 @@ public:
      * \param ext specifies the extension string
      * \return backend to handle files with specified extension or 0 otherwise
      */
-    GraphFilePluginInterface* backendByExtension(QString ext);
+    FileFormatInterface * backendByExtension(const QString &ext);
 
     /**
      * Returns the default backend used for serialization/loading of graph files. Use this if
@@ -85,7 +89,7 @@ public:
      *
      * \return plugin interface for the graph file backend
      */
-    GraphFilePluginInterface* defaultBackend();
+    FileFormatInterface * defaultBackend();
 
 private:
     /**
@@ -98,16 +102,17 @@ private:
      * \internal
      * Private constructor, \see self().
      */
-    GraphFileBackendManager();
+    FileFormatManager();
 
     /**
      * Desctructor.
      */
-    ~GraphFileBackendManager();
+    ~FileFormatManager();
 
-    static GraphFileBackendManager * instance;
+    static FileFormatManager * instance;
 
-    class GraphFileBackendManagerPrivate * d;
+    const QScopedPointer<FileFormatManagerPrivate> d;
 };
+}
 
-#endif // GRAPHFILEBACKENDMANAGER_H
+#endif

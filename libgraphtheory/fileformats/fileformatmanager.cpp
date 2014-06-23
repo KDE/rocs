@@ -2,7 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,77 +18,61 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "GraphFileBackendManager.h"
+#include "fileformatmanager.h"
+#include "fileformatinterface.h"
 
-#include "GraphFilePluginInterface.h"
-#include "RocsGraphFileFormatPlugin.h"
-
-#include <KServiceTypeTrader>
 #include <KPluginInfo>
+#include <KServiceTypeTrader>
 #include <QDebug>
 
-class GraphFileBackendManagerPrivate
+using namespace GraphTheory;
+
+class GraphTheory::FileFormatManagerPrivate
 {
 public:
-    GraphFileBackendManagerPrivate() {
+    FileFormatManagerPrivate() {
         backendInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/GraphFilePlugin"));
     }
 
-    ~GraphFileBackendManagerPrivate()
+    ~FileFormatManagerPrivate()
     { }
 
     KPluginInfo::List backendInfo;
-    QList<GraphFilePluginInterface*> backends;
-    GraphFilePluginInterface* defaultGraphFilePlugin;
+    QList<FileFormatInterface*> backends;
+    FileFormatInterface *defaultGraphFilePlugin;
 };
 
-
-GraphFileBackendManager * GraphFileBackendManager::instance = 0;
-
-
-GraphFileBackendManager * GraphFileBackendManager::self()
+FileFormatManager::FileFormatManager()
+    : d(new FileFormatManagerPrivate)
 {
-    if (GraphFileBackendManager::instance == 0) {
-        GraphFileBackendManager::instance = new GraphFileBackendManager;
-    }
-    return GraphFileBackendManager::instance;
-}
-
-
-GraphFileBackendManager::GraphFileBackendManager()
-{
-    d = new GraphFileBackendManagerPrivate();
     loadBackends();
 }
 
-
-GraphFileBackendManager::~GraphFileBackendManager()
+FileFormatManager::~FileFormatManager()
 {
-    delete d;
+
 }
 
-
-QList<GraphFilePluginInterface*> GraphFileBackendManager::backends() const
+QList<FileFormatInterface*> FileFormatManager::backends() const
 {
     return d->backends;
 }
 
-
-QList<GraphFilePluginInterface*> GraphFileBackendManager::backends(PluginType type) const
+QList<FileFormatInterface*> FileFormatManager::backends(PluginType type) const
 {
-    QList<GraphFilePluginInterface*> backends;
-    foreach(GraphFilePluginInterface* backend, d->backends) {
+    QList<FileFormatInterface*> backends;
+    foreach(FileFormatInterface *backend, d->backends) {
         switch(type) {
             case Import:
-                if (backend->pluginCapability() == GraphFilePluginInterface::ImportOnly
-                    || backend->pluginCapability() == GraphFilePluginInterface::ImportAndExport)
+                if (backend->pluginCapability() == FileFormatInterface::ImportOnly
+                    || backend->pluginCapability() == FileFormatInterface::ImportAndExport)
                 {
                     backends.append(backend);
                 }
                 break;
             case Export:
-                if (backend->pluginCapability() == GraphFilePluginInterface::ExportOnly
-                    || backend->pluginCapability() == GraphFilePluginInterface::ImportAndExport)
+                if (backend->pluginCapability() == FileFormatInterface::ExportOnly
+                    || backend->pluginCapability() == FileFormatInterface::ImportAndExport)
                 {
                     backends.append(backend);
                 }
@@ -100,11 +84,10 @@ QList<GraphFilePluginInterface*> GraphFileBackendManager::backends(PluginType ty
     return backends;
 }
 
-
-void GraphFileBackendManager::loadBackends()
+void FileFormatManager::loadBackends()
 {
     // remove all present backends
-    foreach(GraphFilePluginInterface * f, d->backends) {
+    foreach(FileFormatInterface *f, d->backends) {
         delete f;
     }
     d->backends.clear();
@@ -121,7 +104,7 @@ void GraphFileBackendManager::loadBackends()
             continue;
         }
 
-        GraphFilePluginInterface *plugin = factory->create<GraphFilePluginInterface>(this);
+        FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
 
         if (plugin) {
             d->backends.append(plugin);
@@ -131,15 +114,14 @@ void GraphFileBackendManager::loadBackends()
     }
 
     // load static plugins
-    GraphFilePluginInterface *plugin = new RocsGraphFileFormatPlugin(this);
-    d->backends.append(plugin);
-    d->defaultGraphFilePlugin = plugin;
+//     FileFormatInterface *plugin = new RocsGraphFileFormatPlugin(this); //TODO port to new plugin
+//     d->backends.append(plugin);
+//     d->defaultGraphFilePlugin = plugin;
 }
 
-
-GraphFilePluginInterface* GraphFileBackendManager::backendByExtension(QString ext)
+FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
 {
-    foreach(GraphFilePluginInterface * p,  d->backends) {
+    foreach(FileFormatInterface * p,  d->backends) {
         if (p->extensions().join(";").contains(ext, Qt::CaseInsensitive)) {
             return p;
         }
@@ -147,8 +129,7 @@ GraphFilePluginInterface* GraphFileBackendManager::backendByExtension(QString ex
     return 0;
 }
 
-
-GraphFilePluginInterface* GraphFileBackendManager::defaultBackend()
+FileFormatInterface * FileFormatManager::defaultBackend()
 {
     return d->defaultGraphFilePlugin;
 }
