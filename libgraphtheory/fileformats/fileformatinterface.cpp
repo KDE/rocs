@@ -18,109 +18,90 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "GraphFilePluginInterface.h"
+#include "fileformats/fileformatinterface.h"
 
+#include "typenames.h"
 #include <QStringList>
 #include <QObject>
-#include <Document.h>
 #include <QUrl>
 #include <QDebug>
-#include <KAboutData>
 
-class GraphFilePluginInterfacePrivate
+using namespace GraphTheory;
+
+class GraphTheory::FileFormatInterfacePrivate
 {
 public:
-    GraphFilePluginInterfacePrivate(const QString &componentName)
+    FileFormatInterfacePrivate(const QString &componentName)
         : componentName(componentName)
-        , aboutData(0) //FIXME
     {
-        lastError = GraphFilePluginInterface::None;
+        lastError = FileFormatInterface::None;
     }
 
     const QString componentName;
-    const KAboutData* aboutData; //FIXME value never set
-    GraphFilePluginInterface::Error lastError;
+    FileFormatInterface::Error lastError;
     QString lastErrorString;
-    Document* graphDocument;
+    GraphDocumentPtr graphDocument;
     QUrl file;
 };
 
 
-GraphFilePluginInterface::GraphFilePluginInterface(const QString &componentName, QObject* parent):
+FileFormatInterface::FileFormatInterface(const QString &componentName, QObject *parent):
     QObject(parent),
-    d(new GraphFilePluginInterfacePrivate(componentName))
+    d(new FileFormatInterfacePrivate(componentName))
 {
 }
 
-
-GraphFilePluginInterface::~GraphFilePluginInterface()
+FileFormatInterface::~FileFormatInterface()
 {
 }
 
-
-GraphFilePluginInterface::PluginType GraphFilePluginInterface::pluginCapability() const
+FileFormatInterface::PluginType FileFormatInterface::pluginCapability() const
 {
     return ImportAndExport;
 }
 
-
-bool GraphFilePluginInterface::hasError() const
+bool FileFormatInterface::hasError() const
 {
-    return d->lastError != GraphFilePluginInterface::None;
+    return d->lastError != FileFormatInterface::None;
 }
 
-
-GraphFilePluginInterface::Error GraphFilePluginInterface::error() const
+FileFormatInterface::Error FileFormatInterface::error() const
 {
     return d->lastError;
 }
 
-
-QString GraphFilePluginInterface::errorString() const
+QString FileFormatInterface::errorString() const
 {
     return d->lastErrorString;
 }
 
-
-void GraphFilePluginInterface::setError(GraphFilePluginInterface::Error error, QString message)
+void FileFormatInterface::setError(FileFormatInterface::Error error, const QString &message)
 {
     d->lastError = error;
     d->lastErrorString = message;
 }
 
-
-const KAboutData* GraphFilePluginInterface::aboutData() const
+bool FileFormatInterface::isGraphDocument() const
 {
-    return d->aboutData;
+    return !d->graphDocument.isNull();
 }
 
-
-bool GraphFilePluginInterface::isGraphDocument() const
-{
-    return (d->graphDocument && d->graphDocument->dataStructures().count() > 0);
-}
-
-
-Document* GraphFilePluginInterface::graphDocument() const
+GraphDocumentPtr FileFormatInterface::graphDocument() const
 {
     return d->graphDocument;
 }
 
-
-void GraphFilePluginInterface::setGraphDocument(Document* document)
+void FileFormatInterface::setGraphDocument(GraphDocumentPtr document)
 {
     d->graphDocument = document;
 }
 
-
-void GraphFilePluginInterface::setFile(const QUrl& file)
+void FileFormatInterface::setFile(const QUrl &file)
 {
     d->file = file;
 }
 
-
-const QUrl& GraphFilePluginInterface::file() const
+const QUrl& FileFormatInterface::file() const
 {
     return d->file;
 }
-

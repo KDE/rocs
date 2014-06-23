@@ -35,6 +35,7 @@ set(graphtheory_SRCS
     view.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
+    fileformats/fileformatinterface.cpp
     qtquickitems/nodeitem.cpp
     qtquickitems/edgeitem.cpp
 )

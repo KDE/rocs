@@ -18,18 +18,22 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GRAPHFILEPLUGININTERFACE_H
-#define GRAPHFILEPLUGININTERFACE_H
+#ifndef FILEFORMATINTERFACE_H
+#define FILEFORMATINTERFACE_H
 
 #include <QObject>
-#include <RocsCoreExport.h>
+#include "typenames.h"
+#include "libgraphtheoryexport.h"
 
-class KAboutData;
 class QUrl;
-class Document;
-class GraphFilePluginInterfacePrivate;
+
+namespace GraphTheory
+{
+
+class FileFormatInterfacePrivate;
 
 /**
+ * \class FileFormatInterface
  * This class provides an interface for graph file format plugins.
  * A graph file format plugin must provide implementations of
  * - writeFile(...)
@@ -39,7 +43,7 @@ class GraphFilePluginInterfacePrivate;
  * - pluginCapability()
  * to specify the plugin capabilities.
  */
-class ROCSLIB_EXPORT GraphFilePluginInterface: public QObject
+class GRAPHTHEORY_EXPORT FileFormatInterface : public QObject
 {
     Q_OBJECT
 
@@ -74,8 +78,8 @@ public:
      * \param aboutData is description of the plugin
      * \param parent is the object parent
      */
-    GraphFilePluginInterface(const QString &componentName, QObject* parent);
-    virtual ~GraphFilePluginInterface();
+    FileFormatInterface(const QString &componentName, QObject* parent);
+    virtual ~FileFormatInterface();
 
     /**
      * Returns \p PluginType to indicate whether the plugin only provides import, only export
@@ -105,11 +109,6 @@ public:
     QString errorString() const;
 
     /**
-     * \return plugin about data
-     */
-    const KAboutData* aboutData() const;
-
-    /**
      * File extensions that are common for this file type.
      *
      * \return extension list
@@ -119,9 +118,9 @@ public:
     /**
      * Writes given graph document to formerly specified file \see setFile().
      *
-     * \param graph is graph document to be serialized
+     * \param document is graph document to be serialized
      */
-    virtual void writeFile(Document &graph) = 0;
+    virtual void writeFile(GraphDocumentPtr document) = 0;
 
     /**
      * Open given file and imports it into internal format.
@@ -133,7 +132,7 @@ public:
      *
      * \param file is QUrl pointing to local file
      */
-    void setFile(const QUrl& file);
+    void setFile(const QUrl &file);
 
     /**
      * \return true if a valid graph document was read. Otherwise return false
@@ -146,7 +145,7 @@ public:
      *
      * \return the graph document
      */
-    virtual Document* graphDocument() const;
+    virtual GraphDocumentPtr graphDocument() const;
 
 
 protected:
@@ -156,7 +155,7 @@ protected:
      *
      * \return file that is last used for write/read
      */
-    const QUrl& file() const;
+    const QUrl & file() const;
 
     /**
      * \internal
@@ -164,20 +163,21 @@ protected:
      *
      * \param document that contains the graph
      */
-    void setGraphDocument(Document* document);
+    void setGraphDocument(GraphDocumentPtr document);
 
     /**
      * \internal
      * Use this function to set or unset the current error of the plugin. To unset an error
      * use Error::None.
      *
-     * \param error is type of error, \see GraphFilePluginInterface::Error
+     * \param error is type of error, \see FileFormatInterface::Error
      * \param message is optional description for error
      */
-    void setError(Error error, QString message=QString());
+    void setError(Error error, const QString &message = QString());
 
 private:
-    GraphFilePluginInterfacePrivate * const d;
+    FileFormatInterfacePrivate * const d;
 };
+}
 
-#endif // FILEPLUGININTERFACE_H
+#endif
