@@ -75,6 +75,7 @@ NodePtr Node::create(GraphDocumentPtr document)
     NodePtr pi(new Node);
     pi->setQpointer(pi);
     pi->d->m_document = document;
+    pi->d->m_id = document->generateId();
     pi->setType(document->nodeTypes().first());
     pi->d->m_valid = true;
 

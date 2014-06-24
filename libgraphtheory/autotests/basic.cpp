@@ -217,4 +217,15 @@ void BasicTest::testEdgeDynamicProperties()
     document->destroy();
 }
 
+void BasicTest::testNodeIdentifiers()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+
+    QVERIFY(nodeA->id() != nodeB->id());
+
+    document->destroy();
+}
+
 QTEST_MAIN(BasicTest)

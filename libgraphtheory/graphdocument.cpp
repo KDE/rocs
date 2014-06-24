@@ -37,6 +37,7 @@ public:
         : m_valid(false)
         , m_view(0)
         , m_documentUrl(QUrl())
+        , m_lastGeneratedId(0)
         , m_modified(false)
     {
     }
@@ -54,6 +55,7 @@ public:
     EdgeList m_edges;
 
     QUrl m_documentUrl;
+    uint m_lastGeneratedId;
     bool m_modified; //FIXME modified value is not updated when graph changes
 };
 
@@ -258,6 +260,11 @@ QList< NodeTypePtr > GraphDocument::nodeTypes() const
 {
     Q_ASSERT(d->m_nodeTypes.length() > 0);
     return d->m_nodeTypes;
+}
+
+uint GraphDocument::generateId()
+{
+    return ++d->m_lastGeneratedId;
 }
 
 void GraphDocument::setQpointer(GraphDocumentPtr q)

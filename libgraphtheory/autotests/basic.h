@@ -46,6 +46,7 @@ private Q_SLOTS:
     void testEdgeTypeCreateDelete();
     void testNodeDynamicProperties();
     void testEdgeDynamicProperties();
+    void testNodeIdentifiers();
 };
 
 #endif

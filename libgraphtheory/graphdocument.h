@@ -158,6 +158,13 @@ public:
     QList<NodeTypePtr> nodeTypes() const;
 
     /**
+     * Generate a unique unique identifier. This identifier is uniquely generated within this
+     * document. But it is not checked, if it is already used for any node.
+     * @return generated identifier
+     */
+    uint generateId();
+
+    /**
      * Debug method that tracks how many node objects exist.
      *
      * @return number of node objects
