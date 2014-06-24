@@ -68,10 +68,6 @@ set(rocscore_LIB_HDRS
     RocsCoreExport.h
     DataStructureBackendInterface.h
     DataStructureBackendManager.h
-
-    LoadSave/GraphFileBackendManager.h
-    LoadSave/GraphFilePluginInterface.h
-
     Modifiers/Topology.h
 
     EngineModules/Console/ConsoleModule.h
@@ -91,7 +87,6 @@ install( FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  CO
 
 install( FILES
     RocsDataStructurePlugin.desktop
-    LoadSave/RocsGraphFilePlugin.desktop
     DESTINATION
     ${SERVICETYPES_INSTALL_DIR}
 )
@@ -106,7 +101,6 @@ ecm_optional_add_subdirectory(Tests)
 
 install( FILES
     RocsDataStructurePlugin.desktop
-    LoadSave/RocsGraphFilePlugin.desktop
     DESTINATION
     ${SERVICETYPES_INSTALL_DIR}
 )
