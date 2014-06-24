@@ -63,6 +63,7 @@ void TgfFileFormat::readFile()
 {
     GraphDocumentPtr document = GraphDocument::create();
     document->nodeTypes().first()->addDynamicProperty("label");
+    document->edgeTypes().first()->addDynamicProperty("label");
 
     // map node identifier from file to created data elements
     QMap<int, NodePtr> nodeMap;
@@ -136,7 +137,7 @@ void TgfFileFormat::writeFile(GraphDocumentPtr document)
     out << "#\n";
     // export pointers
     foreach(EdgePtr edge, document->edges()) {
-        out << edge->from()->id() << " " << edge->to()->id() << " " << edge->property("label").toString() <<'\n';
+        out << edge->from()->id() << " " << edge->to()->id() << " " << edge->dynamicProperty("label").toString() <<'\n';
     }
     setError(None);
 }

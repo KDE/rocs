@@ -78,8 +78,8 @@ void TestTgfFileFormat::serializeUnserializeTest()
         QVERIFY2(node->edges().count() == 2, "ERROR: Number of Adjacent Nodes is not 2");
 //         QVERIFY2(n->pointerList().size() == 2, "ERROR: Number of adjacent pointers is not 2"); //FIXME no API implemented yet
     }
-    QVERIFY(document->nodes().first()->dynamicProperty("label").toString() == "first node");
-    QVERIFY(document->edges().first()->dynamicProperty("label").toString() == "test value");
+    QCOMPARE(document->nodes().first()->dynamicProperty("label").toString(), QString("first node"));
+    QCOMPARE(document->edges().first()->dynamicProperty("label").toString(), QString("test value"));
 }
 
 QTEST_MAIN(TestTgfFileFormat);
