@@ -22,7 +22,7 @@
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ecm_optional_add_subdirectory(tgf)
-ecm_optional_add_subdirectory(tikz)
+# ecm_optional_add_subdirectory(tikz)
 
 # require Boost >= 1.49 for DOT file format
 if(${Boost_VERSION} VERSION_LESS 104900)
@@ -31,11 +31,10 @@ if(${Boost_VERSION} VERSION_LESS 104900)
         "Building of DOT file format support needs Boost >= 1.49."
     )
 else(${Boost_VERSION} VERSION_LESS 104900)
-    ecm_optional_add_subdirectory(dot)
+#     ecm_optional_add_subdirectory(dot)
 endif(${Boost_VERSION} VERSION_LESS 104900)
 
 # these plugins are in an unstable state and are not suited for end users
 if (ROCS_BUILD_LOADSAVE)
-    ecm_optional_add_subdirectory(kml)
-    ecm_optional_add_subdirectory(gml)
+#     ecm_optional_add_subdirectory(gml)
 endif(ROCS_BUILD_LOADSAVE)

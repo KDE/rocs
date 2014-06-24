@@ -18,17 +18,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "TgfFileFormatPlugin.h"
-#include "Document.h"
+#include "tgffileformat.h"
+#include "fileformats/fileformatinterface.h"
+#include "graphdocument.h"
+#include "node.h"
+#include "edge.h"
 #include <KAboutData>
-#include <QFile>
-#include <DataStructure.h>
-#include <Data.h>
-#include <Pointer.h>
-#include <Modifiers/Topology.h>
-#include <DataStructureBackendManager.h>
 #include <KLocalizedString>
 #include <KPluginFactory>
+#include <QFile>
+#include <QTextStream>
+#include <QUrl>
+
+using namespace GraphTheory;
 
 //FIXME
 // static const KAboutData aboutdata("rocs_tgffileformat",
@@ -38,39 +40,36 @@
 //                                   ki18n("Read and write Trivial Graph Format (TGF) files."),
 //                                   KAboutData::License_GPL_V2);
 
-K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<TgfFileFormatPlugin>();)
+K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<TgfFileFormat>();)
 
 
-TgfFileFormatPlugin::TgfFileFormatPlugin(QObject* parent, const QList< QVariant >&) :
-    GraphFilePluginInterface("rocs_tgffileformat", parent)
+TgfFileFormat::TgfFileFormat(QObject* parent, const QList< QVariant >&)
+    : FileFormatInterface("rocs_tgffileformat", parent)
 {
 }
 
-TgfFileFormatPlugin::~TgfFileFormatPlugin()
+TgfFileFormat::~TgfFileFormat()
 {
 }
 
-const QStringList TgfFileFormatPlugin::extensions() const
+const QStringList TgfFileFormat::extensions() const
 {
     return QStringList()
            << i18n("*.tgf|Trivial Graph Format") + '\n';
 }
 
 
-void TgfFileFormatPlugin::readFile()
+void TgfFileFormat::readFile()
 {
-    Document * graphDoc = new Document("Untitled");
-    //TODO select graph data structure
-    DataStructureBackendManager::self().setBackend("Graph");
-    DataStructurePtr graph = graphDoc->addDataStructure();
+    GraphDocumentPtr document = GraphDocument::create();
+    document->nodeTypes().first()->addDynamicProperty("label");
 
     // map node identifier from file to created data elements
-    QMap<int,DataPtr> nodeMap;
+    QMap<int, NodePtr> nodeMap;
 
     QFile fileHandle(file().toLocalFile());
     if (!fileHandle.open(QFile::ReadOnly)) {
         setError(CouldNotOpenFile, i18n("Could not open file \"%1\" in read mode: %2", file().toLocalFile(), fileHandle.errorString()));
-        delete graphDoc;
         return;
     }
 
@@ -85,13 +84,16 @@ void TgfFileFormatPlugin::readFile()
 
         if (mode == Nodes) { // read node
             int identifier = line.section(' ', 0, 0).toInt();
-            QString label = line.section(' ', 1);    // get label, everything after first space
-            DataPtr data = graph->createData(label.simplified(), 0);
+            QString label = line.section(' ', 1);  // get label, this is everything after first space
+            NodePtr node = Node::create(document);
+            node->setDynamicProperty("label", label.simplified());
+            node->setId(identifier);
+
             if (nodeMap.contains(identifier)) {
                 setError(EncodingProblem, i18n("Could not parse file. Identifier \"%1\" is used more than once.", identifier));
                 return;
             }
-            nodeMap[identifier] = data;
+            nodeMap[identifier] = node;
             continue;
         }
 
@@ -103,19 +105,19 @@ void TgfFileFormatPlugin::readFile()
                 setError(EncodingProblem, i18n("Could not parse file. Edge from \"%1\" to \"%2\" uses undefined nodes.", from, to));
                 return;
             }
-            PointerPtr pointer = graph->createPointer(nodeMap[from], nodeMap[to], 0);
-            pointer->setProperty("value", value.simplified());
+            EdgePtr edge = Edge::create(nodeMap[from], nodeMap[to]);
+            edge->setDynamicProperty("label", value.simplified());
         }
     }
-    Topology layouter;
-    layouter.directedGraphDefaultTopology(graph);
-    setGraphDocument(graphDoc);
+    //FIXME re-implement layouter
+//     Topology layouter;
+//     layouter.directedGraphDefaultTopology(graph);
+    setGraphDocument(document);
     setError(None);
 }
 
-void TgfFileFormatPlugin::writeFile(Document &graph )
+void TgfFileFormat::writeFile(GraphDocumentPtr document)
 {
-    // TODO allow selection which data structure shall be exported
     QFile fileHandle(file().toLocalFile());
     if (!fileHandle.open(QFile::WriteOnly | QFile::Text)) {
         setError(FileIsReadOnly, i18n("Could not open file \"%1\" in write mode: %2", file().fileName(), fileHandle.errorString()));
@@ -123,27 +125,20 @@ void TgfFileFormatPlugin::writeFile(Document &graph )
     }
 
     QTextStream out(&fileHandle);
-    DataStructurePtr g = graph.activeDataStructure();
-    if (!g) {
-        setError(NoGraphFound, i18n("No data structure specified for output in this document."));
-        return;
-    }
-
     // export data elements
     //FIXME only default data type considered
-    foreach(DataPtr n, g->dataList(0)) {
-        out << n->identifier();
+    foreach(NodePtr node, document->nodes()) {
+        out << node->id();
         out << " ";
-        out << n->property("name").toString(); //TODO change to selectable property
+        out << node->dynamicProperty("label").toString(); //TODO change to selectable property
         out << '\n';
     }
     out << "#\n";
     // export pointers
-    //FIXME only default pointer type considered
-    foreach(PointerPtr e, g->pointers(0)) {
-        out << e->from()->identifier() << " " << e->to()->identifier() << " " << e->property("value").toString() <<'\n';
+    foreach(EdgePtr edge, document->edges()) {
+        out << edge->from()->id() << " " << edge->to()->id() << " " << edge->property("label").toString() <<'\n';
     }
     setError(None);
 }
 
-#include "TgfFileFormatPlugin.moc"
+#include "tgffileformat.moc"

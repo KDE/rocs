@@ -16,26 +16,17 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # ##
 
-project(RocsTgfFileFormatPlugin)
-
-include_directories(
-    ${ROCSCORE_INCLUDES}
-    ${KDE4_INCLUDES}
-    ${QT_INCLUDES}
+set(tgfformat_SRCS
+    tgffileformat.cpp
 )
 
-set(tgfFileFormatPlugin_SRCS
-    TgfFileFormatPlugin.cpp
+add_library(rocstgffileformat MODULE ${tgfformat_SRCS})
+
+target_link_libraries(rocstgffileformat
+    rocsgraphtheory
 )
 
-add_library(rocs_tgffileformat MODULE ${tgfFileFormatPlugin_SRCS} )
-
-target_link_libraries(rocs_tgffileformat
-    ${KDE4_KDEUI_LIBS}
-    rocscore
-)
-
-install(TARGETS rocs_tgffileformat DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS rocstgffileformat DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES rocs_tgffileformatplugin.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
-ecm_optional_add_subdirectory(Tests)
+ecm_optional_add_subdirectory(autotests)
