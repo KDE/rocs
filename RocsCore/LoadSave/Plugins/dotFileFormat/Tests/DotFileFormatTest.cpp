@@ -25,6 +25,7 @@
 #include "../DotFileFormatPlugin.h"
 #include "Data.h"
 #include "Pointer.h"
+#include <DocumentManager.h>
 #include <DataStructure.h>
 #include <DataStructureBackendManager.h>
 #include <KDebug>
@@ -771,6 +772,39 @@ void DotFileFormatTest::parseFileWorld()
     importer.setFile(KUrl::fromLocalFile("directed/world.gv"));
     importer.readFile();
     QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+}
+
+
+void DotFileFormatTest::writeAndParseTest()
+{
+    DocumentManager::self().addDocument(new Document("testSerialization"));
+    Document *document = DocumentManager::self().activeDocument();
+    QMap<QString, DataPtr> dataList;
+
+    // create simple graph with two nodes and one edge
+    document->dataType(0)->addProperty("testproperty", "default");
+    document->pointerType(0)->addProperty("testproperty", "default");
+    DataStructurePtr ds = document->activeDataStructure();
+    ds->setProperty("name", "Graph1");
+    dataList.insert("a", ds->createData("a", 0));
+    dataList.insert("b", ds->createData("b", 0));
+    ds->createPointer(dataList["a"], dataList["b"], 0);
+
+    // create testfile
+    DotFileFormatPlugin dotFormat(this, QList<QVariant>());
+    QTemporaryFile testFile;
+    testFile.open();
+    dotFormat.setFile(KUrl::fromLocalFile(testFile.fileName()));
+    dotFormat.writeFile(*document);
+    DocumentManager::self().removeDocument(DocumentManager::self().activeDocument());
+
+    // load document and test
+    dotFormat.readFile();
+    QVERIFY(!dotFormat.hasError());
+    document = dotFormat.graphDocument();
+    ds = document->activeDataStructure();
+    QCOMPARE(ds->dataList(0).count(), 2);
+    QCOMPARE(ds->pointers(0).count(), 1);
 }
 
 
