@@ -109,6 +109,8 @@ void DotFileFormatPlugin::writeFile(Document &document)
     }
     QTextStream out(&fileHandle);
 
+    out << "digraph {\n";
+
     // create fast access list of already processed nodes: serialize each node only once
     QHash<int, bool> processedData;
 
