@@ -103,6 +103,9 @@ private slots:
     void parseFileUnix2();
     void parseFileViewfile();
     void parseFileWorld();
+
+    // parsing of exported files
+    void writeAndParseTest();
 };
 
 #endif // DOTFILEFORMATTEST_H
