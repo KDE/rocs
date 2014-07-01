@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2009-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2014       Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -20,6 +21,7 @@
 #ifndef IMPORTEREXPORTERMANAGER_H
 #define IMPORTEREXPORTERMANAGER_H
 
+#include "libgraphtheory/typenames.h"
 #include <QObject>
 
 class Document;
@@ -27,19 +29,12 @@ class Document;
 class ImporterExporterManager : public QObject
 {
     Q_OBJECT
-    QString _scriptToRun;
+
 public:
     explicit ImporterExporterManager(QObject *parent = 0);
-    Document* importFile();
-    bool exportFile(Document* doc) const;
-    QString& scriptToRun() {
-        return _scriptToRun;
-    }
-
+    GraphTheory::GraphDocumentPtr importFile();
+    bool exportFile(GraphTheory::GraphDocumentPtr document) const;
     void dialogExec();
-    bool hasDialog();
-
-//     GraphDocument * openDocument();
 };
 
-#endif // IMPORTEREXPORTERMANAGER_H
+#endif

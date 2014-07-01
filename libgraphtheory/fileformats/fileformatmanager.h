@@ -50,13 +50,9 @@ public:
         Export
     };
 
-    /**
-     * Returns self reference to backend manager. First call of this method initializes
-     * file backend manager and loads plugins.
-     *
-     * \return self reference
-     */
-    static FileFormatManager * self();
+    FileFormatManager();
+
+    ~FileFormatManager();
 
     /**
      * Returns list of loaded backends. Backends are loaded with first call to \see self().
@@ -97,17 +93,6 @@ private:
      * Clears list of backends and reloads them from dynamic service trader.
      */
     void loadBackends();
-
-    /**
-     * \internal
-     * Private constructor, \see self().
-     */
-    FileFormatManager();
-
-    /**
-     * Desctructor.
-     */
-    ~FileFormatManager();
 
     static FileFormatManager * instance;
 

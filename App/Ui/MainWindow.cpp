@@ -830,9 +830,8 @@ void MainWindow::importGraphFile()
 
 void MainWindow::exportGraphFile()
 {
-//     ImporterExporterManager exp(this);
-//FIXME adapt exported for GraphTheory
-//     exp.exportFile(m_currentProject->activeGraphDocument());
+    ImporterExporterManager exporter(this);
+    exporter.exportFile(m_currentProject->activeGraphDocument());
 }
 
 void MainWindow::showPossibleIncludes()

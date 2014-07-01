@@ -47,7 +47,7 @@ set( rocs_interface_SRCS
     Ui/DocumentationWidget.cpp
     Ui/JournalEditorWidget.cpp
     Ui/SideDockWidget.cpp
-#     Ui/ImporterExporterManager.cpp
+    Ui/ImporterExporterManager.cpp
     Ui/IncludeManagerSettings.cpp
     Ui/MainWindow.cpp
     Ui/Separator.cpp

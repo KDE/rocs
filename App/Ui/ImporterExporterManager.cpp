@@ -2,6 +2,7 @@
     This file is part of Rocs.
     Copyright 2010-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2014       Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,33 +19,35 @@
 */
 
 #include "ImporterExporterManager.h"
-#include <QFileDialog>
+#include "libgraphtheory/fileformats/fileformatmanager.h"
+#include "fileformats/fileformatinterface.h"
+#include "graphdocument.h"
+#include <settings.h>
 #include <KLocalizedString>
-#include "LoadSave/GraphFilePluginInterface.h"
+#include <QFileDialog>
 #include <QDebug>
-#include <GraphFileBackendManager.h>
 #include <QPushButton>
 #include <KMessageBox>
-#include <KGuiItem>
-#include "Document.h"
-#include <settings.h>
 #include <QUrl>
-#include <QDialog>
-
 #include <QFile>
 #include <QPointer>
 
-ImporterExporterManager::ImporterExporterManager(QObject* parent): QObject(parent), _scriptToRun(QString())
+using namespace GraphTheory;
+
+ImporterExporterManager::ImporterExporterManager(QObject* parent)
+    : QObject(parent)
 {
 }
 
-bool ImporterExporterManager::exportFile(Document * doc) const
+bool ImporterExporterManager::exportFile(GraphDocumentPtr document) const
 {
+    FileFormatManager manager;
+
     //TODO rewrite this whole class, it is a wonder that the code works :)
     QString ext;
-    QList<GraphFilePluginInterface*> exportBackends = GraphFileBackendManager::self()->backends(GraphFileBackendManager::Export);
-    foreach(GraphFilePluginInterface * f, exportBackends) {
-        ext.append(f->extensions().join(""));
+    QList<FileFormatInterface*> exportBackends = manager.backends(FileFormatManager::Export);
+    foreach(FileFormatInterface * f, exportBackends) { //TODO fragile code
+        ext.append(f->extensions().join(";;"));
     }
     ext.append(i18n("*|All files"));
 
@@ -82,29 +85,30 @@ bool ImporterExporterManager::exportFile(Document * doc) const
     }
 
     // select plugin by extension
-    GraphFilePluginInterface * filePlugin = GraphFileBackendManager::self()->backendByExtension(ext);
+    FileFormatInterface * filePlugin = manager.backendByExtension(ext);
     if (!filePlugin) {
         qDebug() << "Cannot export file: " << file.toLocalFile();
         return false;
     }
 
     filePlugin->setFile(file);
-    filePlugin->writeFile(*doc);
+    filePlugin->writeFile(document);
     if (filePlugin->hasError()) {
         qDebug() << "Error occurred when writing file: " << filePlugin->errorString();
         return false;
     }
-    
+
     Settings::setLastOpenedDirectory(file.path());
-    
     return true;
 }
 
-Document* ImporterExporterManager::importFile()
+GraphDocumentPtr ImporterExporterManager::importFile()
 {
+    FileFormatManager manager;
+
     QString ext;
-    QList<GraphFilePluginInterface*> importBackends = GraphFileBackendManager::self()->backends(GraphFileBackendManager::Import);
-    foreach(GraphFilePluginInterface * f, importBackends) {
+    QList<FileFormatInterface*> importBackends = manager.backends(FileFormatManager::Import);
+    foreach(FileFormatInterface * f, importBackends) {
         ext.append(f->extensions().join(""));
     }
     ext.append(i18n("*|All files"));
@@ -112,47 +116,37 @@ Document* ImporterExporterManager::importFile()
     QPointer<QFileDialog> dialog = new QFileDialog(qobject_cast< QWidget* >(parent()));
 //     dialog->setCaption(i18nc("@title:window", "Import Graph File into Project")); //FIXME commented out for porting
     if (!dialog->exec()) {
-        return 0;
+        return GraphDocumentPtr();
     }
 
     qDebug() << "Extensions:" << ext;
     QString fileName = dialog->selectedFiles().first();
     if (fileName.isEmpty()) {
-        return 0;
+        return GraphDocumentPtr();
     }
 
     int index = fileName.lastIndexOf('.');
-    GraphFilePluginInterface * filePlugin = 0;
+    FileFormatInterface * filePlugin = 0;
     if (index == -1) {
         qDebug() << "Cannot open file without extension.";
-        return 0;
+        return GraphDocumentPtr();
     }
 
     qDebug() << fileName.right(fileName.count() - index);
-    filePlugin = GraphFileBackendManager::self()->backendByExtension(fileName.right(fileName.count() - index));
+    filePlugin =manager.backendByExtension(fileName.right(fileName.count() - index));
 
     if (!filePlugin) {
         qDebug() <<  "Cannot handle extension " <<  fileName.right(3);
-        return 0;
+        return GraphDocumentPtr();
     }
 
     filePlugin->setFile(fileName);
     filePlugin->readFile();
     if (filePlugin->hasError()) {
         qDebug() << "Error loading file" << fileName << filePlugin->errorString();
-        return 0;
+        return GraphDocumentPtr();
     }
     else {
         return filePlugin->graphDocument();
     }
-}
-
-void ImporterExporterManager::dialogExec()
-{
-
-}
-
-bool ImporterExporterManager::hasDialog()
-{
-    return false;
 }
