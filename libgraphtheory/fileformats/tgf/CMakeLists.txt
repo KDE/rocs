@@ -20,13 +20,13 @@ set(tgfformat_SRCS
     tgffileformat.cpp
 )
 
-add_library(rocstgffileformat MODULE ${tgfformat_SRCS})
+add_library(tgffileformat MODULE ${tgfformat_SRCS})
 
-target_link_libraries(rocstgffileformat
+target_link_libraries(tgffileformat
     rocsgraphtheory
 )
 
-install(TARGETS rocstgffileformat DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES rocs_tgffileformatplugin.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+kservice_desktop_to_json(tgffileformat tgffileformat.desktop)
+install(TARGETS tgffileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=Service
 ServiceTypes=Rocs/GraphFilePlugin
-X-KDE-Library=rocs_tgffileformat
+X-KDE-Library=tgffileformat
 X-KDE-PluginInfo-Author=Wagner Reck, Andreas Cord-Landwehr
 X-KDE-PluginInfo-Name=rocs_tgffileformat
 X-KDE-PluginInfo-Version=0.1

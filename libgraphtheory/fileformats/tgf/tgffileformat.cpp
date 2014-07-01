@@ -32,16 +32,9 @@
 
 using namespace GraphTheory;
 
-//FIXME
-// static const KAboutData aboutdata("rocs_tgffileformat",
-//                                   0,
-//                                   ki18nc("@title Displayed plugin name", "TGF File Backend"),
-//                                   "0.1",
-//                                   ki18n("Read and write Trivial Graph Format (TGF) files."),
-//                                   KAboutData::License_GPL_V2);
-
-K_PLUGIN_FACTORY(FilePluginFactory, registerPlugin<TgfFileFormat>();)
-
+K_PLUGIN_FACTORY_WITH_JSON( FilePluginFactory,
+                            "tgffileformat.json",
+                            registerPlugin<TgfFileFormat>();)
 
 TgfFileFormat::TgfFileFormat(QObject* parent, const QList< QVariant >&)
     : FileFormatInterface("rocs_tgffileformat", parent)
