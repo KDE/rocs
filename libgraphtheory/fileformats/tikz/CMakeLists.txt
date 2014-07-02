@@ -14,28 +14,19 @@
 #
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-##
+# ##
 
-project(RocsTikzFileFormatPlugin)
-
-include_directories(
-    ${ROCSCORE_INCLUDES}
-    ${KDE4_INCLUDES}
-    ${QT_INCLUDES}
+set(tikzformat_SRCS
+    tikzfileformat.cpp
 )
 
-set(tikzFileFormatPlugin_SRCS
-    TikzFileFormatPlugin.cpp
+add_library(tikzfileformat MODULE ${tikzformat_SRCS})
+
+target_link_libraries(tikzfileformat
+    rocsgraphtheory
 )
 
-add_library(rocs_tikzfileformat MODULE ${tikzFileFormatPlugin_SRCS})
+kservice_desktop_to_json(tikzfileformat tikzfileformat.desktop)
+install(TARGETS tikzfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
-target_link_libraries(rocs_tikzfileformat
-    ${KDE4_KDEUI_LIBS}
-    rocscore
-)
-
-install(TARGETS rocs_tikzfileformat DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES rocs_tikzfileformatplugin.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-
-ecm_optional_add_subdirectory(Tests)
+# ecm_optional_add_subdirectory(autotests)

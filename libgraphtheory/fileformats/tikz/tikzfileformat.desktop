@@ -1,15 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Service
-ServiceTypes=Rocs/GraphFilePlugin
-X-KDE-Library=rocs_tikzfileformat
-X-KDE-PluginInfo-Author=Andreas Cord-Landwehr
+X-KDE-ServiceTypes=rocs/graphtheory/fileformat
+X-KDE-Library=tikzfileformat
 X-KDE-PluginInfo-Name=rocs_tikzfileformat
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=true
-Name=Rocs PGF/TikZ Graph File Export Plugin
+Name=PGF/TikZ Graph File Export Plugin
 Name[bs]=Rocs PGF/TikZ Dodatak ua izvoz graf datoteka
 Name[ca]=Endollable d'exportació de fitxer gràfic PGF/TikZ del Rocs
 Name[ca@valencia]=Endollable d'exportació de fitxer gràfic PGF/TikZ del Rocs

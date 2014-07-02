@@ -22,7 +22,7 @@
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ecm_optional_add_subdirectory(tgf)
-# ecm_optional_add_subdirectory(tikz)
+ecm_optional_add_subdirectory(tikz)
 
 # require Boost >= 1.49 for DOT file format
 if(${Boost_VERSION} VERSION_LESS 104900)
