@@ -1,15 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Service
-ServiceTypes=Rocs/GraphFilePlugin
+X-KDE-ServiceTypes=rocs/graphtheory/fileformat
 X-KDE-Library=tgffileformat
-X-KDE-PluginInfo-Author=Wagner Reck, Andreas Cord-Landwehr
 X-KDE-PluginInfo-Name=rocs_tgffileformat
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=true
-Name=Rocs TGF Graph File Plugin
+Name=TGF Graph File Format
 Name[bs]=Rocs TGF Datoteka grafičkih dodatka
 Name[ca]=Endollable de fitxer gràfic TGF del Rocs
 Name[ca@valencia]=Endollable de fitxer gràfic TGF del Rocs

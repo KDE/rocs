@@ -23,6 +23,10 @@
 
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
+#include <QDir>
+#include <QDirIterator>
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QDebug>
 
 using namespace GraphTheory;
@@ -30,17 +34,32 @@ using namespace GraphTheory;
 class GraphTheory::FileFormatManagerPrivate
 {
 public:
-    FileFormatManagerPrivate() {
-        backendInfo = KPluginInfo::fromServices(KServiceTypeTrader::self()->query("Rocs/GraphFilePlugin"));
+    FileFormatManagerPrivate()
+    {
+
     }
 
     ~FileFormatManagerPrivate()
     { }
 
-    KPluginInfo::List backendInfo;
     QList<FileFormatInterface*> backends;
     FileFormatInterface *defaultGraphFilePlugin;
 };
+
+static QStringList readStringList(const QJsonObject &obj, const QString &key)
+{
+    const auto value = obj[key];
+    if (value.isString()) {
+        return QStringList(value.toString());
+    }
+    QStringList ret;
+    if (value.isArray()) {
+        foreach (const QJsonValue& i, value.toArray()) {
+            ret << i.toString();
+        }
+    }
+    return ret;
+}
 
 FileFormatManager::FileFormatManager()
     : d(new FileFormatManagerPrivate)
@@ -92,24 +111,32 @@ void FileFormatManager::loadBackends()
     }
     d->backends.clear();
 
-    // load dynamic backends
-    KService::List offers = KServiceTypeTrader::self()->query("Rocs/GraphFilePlugin");
-    KService::List::const_iterator iter;
-    for (iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
-        KService::Ptr service = *iter;
-        KPluginFactory *factory = KPluginLoader(service->library()).factory();
+    // dirs to check for plugins
+    QStringList dirsToCheck;
+    foreach (const QString &directory, QCoreApplication::libraryPaths()) {
+        dirsToCheck << directory + QDir::separator() + "rocs/fileformats";
+    }
 
-        if (!factory) {
-            qCritical() << "KPluginFactory could not load the plugin: " << service->library();
-            continue;
-        }
+    // load plugins
+    QPluginLoader loader;
+    foreach (const QString &dir, dirsToCheck) {
+        QDirIterator it(dir, QDir::Files);
+        qDebug() << "iterating over directory " << dir;
+        while (it.hasNext()) {
+            it.next();
+            loader.setFileName(it.fileInfo().absoluteFilePath());
+            QJsonObject m_metaData = loader.metaData()["MetaData"].toObject();
+            if (!readStringList(m_metaData, "X-KDE-ServiceTypes").contains("rocs/graphtheory/fileformat")) {
+                continue;
+            }
+            qDebug() << "Load Plugin: " << m_metaData["Name"].toString();
+            if (!loader.load()) {
+                qCritical() << "Error while loading plugin: " << m_metaData["Name"].toString();
+            }
 
-        FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
-
-        if (plugin) {
+            KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
+            FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
             d->backends.append(plugin);
-        } else {
-            qWarning() << "Could not load backend: " << service->name();
         }
     }
 
