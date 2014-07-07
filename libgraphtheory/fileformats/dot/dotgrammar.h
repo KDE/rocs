@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -19,6 +19,7 @@
 #ifndef DOT_GRAMMAR_H
 #define DOT_GRAMMAR_H
 
+#include "typenames.h"
 #include <string>
 #include <vector>
 
@@ -30,32 +31,29 @@ namespace DotParser {
     * graph in DOT/Graphviz format. The given document \p graphDoc must
     * be of plugin type "Graph.
     */
-    bool parse(const std::string& str, Document* graphDoc);
+    bool parse(const std::string& str, GraphTheory::GraphDocumentPtr document);
 
     bool parseIntegers(const std::string& str, std::vector<int>& v);
 
     void setStrict();
-    void undirectedDataStructure();
-    void directedDataStructure();
-    void dataStructureId(const std::string& str);
-    void attributeId(const std::string& str);
-    void subDataStructureId(const std::string& str);
-    void valid(const std::string& str);
+    void setUndirected();
+    void setDirected();
+    void setGraphId(const std::string &str);
+    void attributeId(const std::string &str);
+    void subGraphId(const std::string &str);
+    void valid(const std::string &str);
     void insertAttributeIntoAttributeList();
     void createAttributeList();
     void removeAttributeList();
-    void createSubDataStructure();
-    void createData(const std::string& str);
-    void setDataStructureAttributes();
-    void setSubDataStructureAttributes(char const* first, char const* last);
-    void setDataAttributes();
+    void createSubGraph();
+    void leaveSubGraph();
+    void createNode(const std::string &str);
+    void setGraphAttributes();
+    void setSubGraphAttributes(char const* first, char const* last);
+    void setNodeAttributes();
     void applyAttributeList();
-    void checkEdgeOperator(const std::string& str);
-    void edgebound(const std::string& str);
-    void createPointers();
-    void leaveSubDataStructure();
+    void checkEdgeOperator(const std::string &str);
+    void edgebound(const std::string &str);
+    void createEdge();
 }
 #endif
-
-
-

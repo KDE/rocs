@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -16,9 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "DotGrammar.h"
-#include "DotGraphParsingHelper.h"
-#include <Document.h>
+#include "dotgrammar.h"
+#include "dotgrammarhelper.h"
+#include "typenames.h"
+#include "graphdocument.h"
+#include "node.h"
 
 #include <QDebug>
 
@@ -33,6 +35,7 @@
 #include <boost/spirit/include/phoenix_stl.hpp>
 
 using namespace DotParser;
+using namespace GraphTheory;
 
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 
@@ -167,8 +170,8 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
     DotGrammar() : DotGrammar::base_type(graph) {
 
         graph = -distinct::keyword["strict"][&setStrict]
-                >> (distinct::keyword["graph"][&undirectedDataStructure] | distinct::keyword["digraph"][&directedDataStructure])
-                >> -ID[&dataStructureId]
+                >> (distinct::keyword["graph"][&setUndirected] | distinct::keyword["digraph"][&setDirected])
+                >> -ID[&setGraphId]
                 >> '{'
                 >> stmt_list
                 >> '}';
@@ -182,7 +185,7 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
                     | subgraph
                 );
 
-        attr_stmt = ( (distinct::keyword["graph"][phx::ref(phelper->attributed)="graph"] >> attr_list[&applyAttributeList])[&setDataStructureAttributes]
+        attr_stmt = ( (distinct::keyword["graph"][phx::ref(phelper->attributed)="graph"] >> attr_list[&applyAttributeList])[&setGraphAttributes]
                     | (distinct::keyword["node"][phx::ref(phelper->attributed)="node"] >> attr_list[&applyAttributeList])
                     | (distinct::keyword["edge"][phx::ref(phelper->attributed)="edge"] >> attr_list[&applyAttributeList])
                     );
@@ -194,23 +197,23 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
 
         edge_stmt = (
                         (node_id[&edgebound] | subgraph) >> edgeRHS >> -(attr_list[phx::ref(phelper->attributed)="edge"])
-                    )[&createAttributeList][&applyAttributeList][&createPointers][&removeAttributeList];
+                    )[&createAttributeList][&applyAttributeList][&createEdge][&removeAttributeList];
 
         edgeRHS = edgeop[&checkEdgeOperator] >> (node_id[&edgebound] | subgraph) >> -edgeRHS;
 
         node_stmt  = (
-                         node_id[&createData] >> -attr_list
-                     )[phx::ref(phelper->attributed)="node"][&createAttributeList][&applyAttributeList][&setDataAttributes][&removeAttributeList];
+                         node_id[&createNode] >> -attr_list
+                     )[phx::ref(phelper->attributed)="node"][&createAttributeList][&applyAttributeList][&setNodeAttributes][&removeAttributeList];
 
         node_id = ID >> -port;
 
         port = (':' >> ID >> -(':' >> compass_pt))
                | (':' >> compass_pt);
 
-        subgraph = -(distinct::keyword["subgraph"] >> -ID[&subDataStructureId])
-                   >> char_('{')[&createSubDataStructure][&createAttributeList]
+        subgraph = -(distinct::keyword["subgraph"] >> -ID[&subGraphId])
+                   >> char_('{')[&createSubGraph][&createAttributeList]
                    >> stmt_list
-                   >> char_('}')[&leaveSubDataStructure][&removeAttributeList];
+                   >> char_('}')[&leaveSubGraph][&removeAttributeList];
 
         compass_pt  = (distinct::keyword["n"] | distinct::keyword["ne"] | distinct::keyword["e"]
                     | distinct::keyword["se"] | distinct::keyword["s"] | distinct::keyword["sw"]
@@ -249,48 +252,34 @@ struct DotGrammar : boost::spirit::qi::grammar<Iterator, Skipper> {
     rule<Iterator, std::string(), Skipper> compass_pt;
 };
 
-void leaveSubDataStructure()
+void leaveSubGraph()
 {
     if (!phelper) {
         return;
     }
-    phelper->leaveSubDataStructure();
+    phelper->leaveSubGraph();
 }
 
 void setStrict()
 {
-    qWarning() << "Graphviz \"strict\" keyword is not implemented.";
+    qCritical() << "Graphviz \"strict\" keyword is not implemented.";
 }
 
-void undirectedDataStructure()
+void setUndirected()
 {
-    qDebug() << "Create new data structure of type: Graph undirected";
-    if(!phelper->dataStructure) {
-        DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
-        phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
-    }
-    phelper->gd->pointerType(0)->setDirection(PointerType::Bidirectional);
+    phelper->document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
 }
 
-void directedDataStructure()
+void setDirected()
 {
-    qDebug() << "Create new data structure of type: Graph directed";
-    if (!phelper->dataStructure) {
-        DataStructurePtr dataStructure = phelper->gd->addDataStructure("");
-        phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
-    }
-    phelper->gd->pointerType(0)->setDirection(PointerType::Unidirectional);
+    phelper->document->edgeTypes().first()->setDirection(EdgeType::Unidirectional);
 }
 
-void dataStructureId(const std::string& str)
+void setGraphId(const std::string& str)
 {
     QString name = QString::fromStdString(str);
-    qDebug() << "Set data structure name: " << name;
-    if (!phelper->dataStructure) {
-        DataStructurePtr dataStructure = phelper->gd->addDataStructure(name);
-        phelper->dataStructure = boost::static_pointer_cast<Rocs::GraphStructure>(dataStructure);
-    }
-    phelper->dataStructure->setName(name);
+    qCritical() << "Graph ID not supported, _not_ setting: " << name;
+    //TODO not implemented
 }
 
 void attributeId(const std::string& str)
@@ -310,7 +299,7 @@ void attributeId(const std::string& str)
     phelper->valid.clear();
 }
 
-void subDataStructureId(const std::string& str)
+void subGraphId(const std::string& str)
 {
     if (!phelper) {
         return;
@@ -323,7 +312,7 @@ void subDataStructureId(const std::string& str)
     if (id.startsWith('"')) {
         id.remove(0, 1);
     }
-    phelper->setSubDataStructureId(id);
+    phelper->setSubGraphId(id);
 }
 
 void valid(const std::string& str)
@@ -350,15 +339,14 @@ void insertAttributeIntoAttributeList()
     phelper->unprocessedAttributes.insert(phelper->attributeId, phelper->valid);
 }
 
-
 void createAttributeList()
 {
     if (!phelper) {
         return;
     }
-    phelper->dataStructureAttributeStack.push_back(phelper->dataStructureAttributes);
-    phelper->dataAttributeStack.push_back(phelper->dataAttributes);
-    phelper->pointerAttributeStack.push_back(phelper->pointerAttributes);
+    phelper->graphAttributeStack.push_back(phelper->graphAttributes);
+    phelper->nodeAttributeStack.push_back(phelper->nodeAttributes);
+    phelper->edgeAttributeStack.push_back(phelper->edgeAttributes);
 }
 
 void removeAttributeList()
@@ -366,54 +354,54 @@ void removeAttributeList()
     if (!phelper) {
         return;
     }
-    phelper->dataStructureAttributes = phelper->dataStructureAttributeStack.back();
-    phelper->dataStructureAttributeStack.pop_back();
-    phelper->dataAttributes = phelper->dataAttributeStack.back();
-    phelper->dataAttributeStack.pop_back();
-    phelper->pointerAttributes = phelper->pointerAttributeStack.back();
-    phelper->pointerAttributeStack.pop_back();
+    phelper->graphAttributes = phelper->graphAttributeStack.back();
+    phelper->graphAttributeStack.pop_back();
+    phelper->nodeAttributes = phelper->nodeAttributeStack.back();
+    phelper->nodeAttributeStack.pop_back();
+    phelper->edgeAttributes = phelper->edgeAttributeStack.back();
+    phelper->edgeAttributeStack.pop_back();
 }
 
-void createData(const std::string& str)
+void createNode(const std::string& str)
 {
-    QString id = QString::fromStdString(str);
-    if (!phelper || id.length()==0) {
+    QString label = QString::fromStdString(str);
+    if (!phelper || label.length() == 0) {
         return;
     }
     // remove quotation marks
-    if (id.endsWith('"')) {
-        id.remove(id.length()-1, 1);
+    if (label.endsWith('"')) {
+        label.remove(label.length()-1, 1);
     }
-    if (id.startsWith('"')) {
-        id.remove(0, 1);
+    if (label.startsWith('"')) {
+        label.remove(0, 1);
     }
-    if (!phelper->dataMap.contains(id)) {
-        phelper->createData(id);
+    if (!phelper->nodeMap.contains(label)) {
+        phelper->createNode(label);
     }
 }
 
-void createSubDataStructure()
+void createSubGraph()
 {
     if (!phelper) {
         return;
     }
-    phelper->createSubDataStructure();
+    phelper->createSubGraph();
 }
 
-void setDataStructureAttributes()
+void setGraphAttributes()
 {
     if (!phelper) {
         return;
     }
-    phelper->setDataStructureAttributes();
+    phelper->setDocumentAttributes();
 }
 
-void setDataAttributes()
+void setNodeAttributes()
 {
     if (!phelper) {
         return;
     }
-    phelper->setDataAttributes();
+    phelper->setNodeAttributes();
 }
 
 void applyAttributeList()
@@ -430,8 +418,8 @@ void checkEdgeOperator(const std::string& str)
         return;
     }
 
-    if (((phelper->gd->pointerType(0)->direction() == PointerType::Unidirectional) && (str.compare("->") == 0)) ||
-            ((phelper->gd->pointerType(0)->direction() == PointerType::Bidirectional) && (str.compare("--") == 0)))
+    if (((phelper->document->edgeTypes().first()->direction() == EdgeType::Unidirectional) && (str.compare("->") == 0)) ||
+            ((phelper->document->edgeTypes().first()->direction() == EdgeType::Bidirectional) && (str.compare("--") == 0)))
     {
         return;
     }
@@ -455,12 +443,12 @@ void edgebound(const std::string& str)
     phelper->addEdgeBound(id);
 }
 
-void createPointers()
+void createEdge()
 {
     if (!phelper) {
         return;
     }
-    phelper->createPointers();
+    phelper->createEdge();
 }
 
 bool parseIntegers(const std::string& str, std::vector<int>& v)
@@ -476,11 +464,11 @@ bool parseIntegers(const std::string& str, std::vector<int>& v)
         space);
 }
 
-bool parse(const std::string& str, Document * graphDoc)
+bool parse(const std::string& str, GraphDocumentPtr document)
 {
     delete phelper;
     phelper = new DotGraphParsingHelper;
-    phelper->gd = graphDoc;
+    phelper->document = document;
 
     std::string input(str);
     std::string::iterator iter = input.begin();
@@ -499,4 +487,3 @@ bool parse(const std::string& str, Document * graphDoc)
 }
 
 }
-

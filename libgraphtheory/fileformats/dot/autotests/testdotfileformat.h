@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -20,8 +20,8 @@
 #ifndef DOTFILEFORMATTEST_H
 #define DOTFILEFORMATTEST_H
 
-#include <QtCore/QObject>
-#include <CoreTypes.h>
+#include <QObject>
+#include "typenames.h"
 
 
 class DotFileFormatTest : public QObject
@@ -34,7 +34,7 @@ class DotFileFormatTest : public QObject
      * \param dataStructure the imported DataStructure
      * \param nodeNames the original names of the nodes
      */
-    void checkNodes(DataStructurePtr dataStructure, QList<QString> nodeNames);
+    void checkNodes(GraphTheory::GraphDocumentPtr document, QList<QString> nodeNames);
 
 private slots:
     void init();
@@ -108,4 +108,4 @@ private slots:
     void writeAndParseTest();
 };
 
-#endif // DOTFILEFORMATTEST_H
+#endif

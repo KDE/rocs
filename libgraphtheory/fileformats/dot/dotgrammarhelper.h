@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2006-2007  Gael de Chalendar <kleag@free.fr>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     KGraphViewer is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public
@@ -21,43 +21,40 @@
 #ifndef DOT_GRAPHPARSINGHELPER_H
 #define DOT_GRAPHPARSINGHELPER_H
 
+#include "typenames.h"
 #include <QStringList>
-#include <DataStructure.h>
-#include "DataStructures/Graph/GraphStructure.h"
-#include <Data.h>
-#include <Document.h>
-#include <Pointer.h>
-
 #include <QObject>
+#include <QMap>
+
 namespace DotParser
 {
 
 struct DotGraphParsingHelper {
-    typedef QMap<QString,QString> AttributesMap;
+    typedef QMap<QString, QString> AttributesMap;
 
     DotGraphParsingHelper();
 
     /**
      * Creates new data element and registers the identifier in data map.
      */
-    void createData(QString identifier);
+    void createNode(const QString &name);
 
     /**
      * Creates new sub data structure and enters it. All future created data elements are  add to
      * this sub data structure, until \see leaveSubDataStructure() is called.
      */
-    void createSubDataStructure();
+    void createSubGraph();
 
     /**
      * Leaves current group, i.e., leave current sub data structure and switches focus to ancestor
      * group or directly to parent data structures if left from all groups.
      */
-    void leaveSubDataStructure();
-    void setDataStructureAttributes();
-    void setSubDataStructureAttributes();
-    void setSubDataStructureId(QString identifier);
-    void setDataAttributes();
-    void setPointerAttributes();
+    void leaveSubGraph();
+    void setDocumentAttributes();
+    void setSubGraphAttributes();
+    void setSubGraphId(const QString &identifier);
+    void setNodeAttributes();
+    void setEdgeAttributes();
 
     /**
      * Generates a new attribute list from all unprocessed attributes and set the corresponding
@@ -65,7 +62,7 @@ struct DotGraphParsingHelper {
      */
     void applyAttributedList();
 
-    void createPointers();
+    void createEdge();
     void addEdgeBound(QString bound) {
         edgebounds.append(bound);
     }
@@ -76,28 +73,20 @@ struct DotGraphParsingHelper {
     std::string attributed; //FIXME change to enum
 
     AttributesMap unprocessedAttributes;
-    AttributesMap dataStructureAttributes;
-    AttributesMap dataAttributes;
-    AttributesMap pointerAttributes;
-    QList< AttributesMap > dataStructureAttributeStack;
-    QList< AttributesMap > dataAttributeStack;
-    QList< AttributesMap > pointerAttributeStack;
+    AttributesMap graphAttributes;
+    AttributesMap nodeAttributes;
+    AttributesMap edgeAttributes;
+    QList< AttributesMap > graphAttributeStack;
+    QList< AttributesMap > nodeAttributeStack;
+    QList< AttributesMap > edgeAttributeStack;
 
     QStringList edgebounds;
 
-    boost::shared_ptr<Rocs::GraphStructure> dataStructure;
-
-    QList<GroupPtr> groupStack; // stack of groups, increased each time a new group is entered
-
-    DataPtr currentDataPtr;
-    PointerPtr currentPointerPtr;
-    Document* gd;                   // graph document of type "Graph", ensured when document is created
-    QMap<QString, DataPtr> dataMap; // for mapping data element ids
+    GraphTheory::GraphDocumentPtr document;
+    GraphTheory::NodePtr currentNode;
+    GraphTheory::EdgePtr currentEdge;
+    QMap<QString, GraphTheory::NodePtr> nodeMap; // for mapping node element ids
 };
-
 }
 
 #endif
-
-
-

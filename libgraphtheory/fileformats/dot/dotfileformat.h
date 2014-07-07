@@ -1,8 +1,8 @@
 /*
     This file is part of Rocs.
-    Copyright 2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2010       Tomaz Canabrava <tomaz.canabrava@gmail.com>
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,19 +18,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOTFILEFORMATPLUGIN_H
-#define DOTFILEFORMATPLUGIN_H
+#ifndef DOTFILEFORMAT_H
+#define DOTFILEFORMAT_H
 
+#include "fileformats/fileformatinterface.h"
 #include <QObject>
-#include <GraphFilePluginInterface.h>
-#include "CoreTypes.h"
 
-class DotFileFormatPlugin: public GraphFilePluginInterface
+namespace GraphTheory
+{
+
+class DotFileFormat : public FileFormatInterface
 {
     Q_OBJECT
 public:
-    explicit DotFileFormatPlugin(QObject *parent, const QList< QVariant >&);
-    ~DotFileFormatPlugin();
+    explicit DotFileFormat(QObject *parent, const QList< QVariant >&);
+    ~DotFileFormat();
 
     /**
      * File extensions that are common for this file type.
@@ -41,17 +43,19 @@ public:
      * Writes given graph document to formerly specified file \see setFile().
      * \param graph is graphDocument to be serialized
      */
-    virtual void writeFile(Document &graph);
+    virtual void writeFile(GraphDocumentPtr graph);
 
     /**
      * Open given file and imports it into internal format.
+     * \param file is url of a local file
      */
     virtual void readFile();
 
 private:
-    QString const processNode(DataPtr node) const;
-    QString const processEdge(PointerPtr edge) const;
+    QString processNode(NodePtr node) const;
+    QString processEdge(EdgePtr edge) const;
 
 };
+}
 
-#endif // DOTFILEFORMATPLUGIN_H
+#endif

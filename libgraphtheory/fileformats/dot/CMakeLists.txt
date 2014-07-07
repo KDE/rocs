@@ -1,6 +1,6 @@
 ##
 #   This file is part of Rocs.
-#   Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -16,27 +16,19 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-project(RocsDotFileFormatPlugin)
-
-include_directories(
-    ${ROCSCORE_INCLUDES}
-    ${KDE4_INCLUDES}
-    ${QT_INCLUDES}
+set(dotformat_SRCS
+    dotfileformat.cpp
+    dotgrammar.cpp
+    dotgrammarhelper.cpp
 )
 
-set(dotFileFormatPlugin_SRCS
-    DotFileFormatPlugin.cpp
-    DotGrammar.cpp
-    DotGraphParsingHelper.cpp
-)
+add_library(dotfileformat MODULE ${dotformat_SRCS})
 
-add_library(rocs_dotfileformat MODULE ${dotFileFormatPlugin_SRCS})
-
-target_link_libraries(rocs_dotfileformat
+target_link_libraries(dotfileformat
     rocscore
 )
 
-install(TARGETS rocs_dotfileformat DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES rocs_dotfileformatplugin.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+kservice_desktop_to_json(dotfileformat dotfileformat.desktop)
+install(TARGETS dotfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
-ecm_optional_add_subdirectory(Tests)
+ecm_optional_add_subdirectory(autotests)
