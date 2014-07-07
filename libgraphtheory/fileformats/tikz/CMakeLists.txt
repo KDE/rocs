@@ -29,4 +29,4 @@ target_link_libraries(tikzfileformat
 kservice_desktop_to_json(tikzfileformat tikzfileformat.desktop)
 install(TARGETS tikzfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
-# ecm_optional_add_subdirectory(autotests)
+ecm_optional_add_subdirectory(autotests)
