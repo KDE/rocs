@@ -24,8 +24,4 @@
 ecm_optional_add_subdirectory(tgf)
 ecm_optional_add_subdirectory(tikz)
 ecm_optional_add_subdirectory(dot)
-
-# these plugins are in an unstable state and are not suited for end users
-if (ROCS_BUILD_LOADSAVE)
-#     ecm_optional_add_subdirectory(gml)
-endif(ROCS_BUILD_LOADSAVE)
+ecm_optional_add_subdirectory(gml)

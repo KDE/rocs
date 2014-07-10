@@ -1,6 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -16,13 +17,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GMLFILEFORMATTEST_H
-#define GMLFILEFORMATTEST_H
+#ifndef TESTGMLFILEFORMAT_H
+#define TESTGMLFILEFORMAT_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
-
-class GmlFileFormatTest : public QObject
+class TestGmlFileFormat : public QObject
 {
     Q_OBJECT
 private slots:
@@ -30,4 +30,4 @@ private slots:
     void serializeTest();
 };
 
-#endif // GMLFILEFORMATTEST_H
+#endif

@@ -24,6 +24,7 @@
 #ifndef GML_GRAMMAR_H
 #define GML_GRAMMAR_H
 
+#include "typenames.h"
 #include <boost/config/warning_disable.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/phoenix_operator.hpp>
@@ -51,7 +52,7 @@ void endList();
 void t();
 void t1();
 
-bool parse(const QString& content, Document* doc);
+bool parse(const QString &content, GraphTheory::GraphDocumentPtr document);
 
 template <typename Iterator>
 struct roman : boost::spirit::qi::grammar<Iterator, unsigned()> {

@@ -16,20 +16,23 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
+# get generated *.json plugin file
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 file(COPY example.gml DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-set(TestGmlFileFormatPlugin_SRCS
-    GmlFileFormatTest.cpp
-    ../GmlGrammar.cpp
-    ../GmlGraphParsingHelper.cpp
-    ../GmlFileFormatPlugin.cpp
+set(testgmlfileformat_SRCS
+    testgmlfileformat.cpp
+    ../gmlgrammar.cpp
+    ../gmlgrammarhelper.cpp
+    ../gmlfileformat.cpp
 )
-add_executable(TestGmlFileFormatPlugin ${TestGmlFileFormatPlugin_SRCS})
-add_test(TestGmlFileFormatPlugin TestGmlFileFormatPlugin)
-ecm_mark_as_test(TestGmlFileFormatPlugin)
-target_link_libraries(TestGmlFileFormatPlugin
+add_executable(TestGmlFileFormat ${testgmlfileformat_SRCS})
+add_test(TestGmlFileFormat TestGmlFileFormat)
+ecm_mark_as_test(TestGmlFileForma)
+target_link_libraries(TestGmlFileFormat
     rocscore
     Qt5::Test
 )

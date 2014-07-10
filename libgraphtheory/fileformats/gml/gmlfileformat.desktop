@@ -1,15 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Service
-ServiceTypes=Rocs/GraphFilePlugin
-X-KDE-Library=rocs_gmlfileformat
-X-KDE-PluginInfo-Author=Wagner Reck, Andreas Cord-Landwehr
+X-KDE-ServiceTypes=rocs/graphtheory/fileformat
+X-KDE-Library=gmlfileformat
 X-KDE-PluginInfo-Name=rocs_gmlfileformat
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=true
-Name=Rocs GML Graph File Plugin
+Name=GML File Format
 Name[bs]=Rocs GML grafička datoteka dodatka
 Name[ca]=Endollable de fitxer gràfic GML del Rocs
 Name[ca@valencia]=Endollable de fitxer gràfic GML del Rocs

@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
-    Copyright 2010  Wagner Reck <wagner.reck@gmail.com>
-    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -17,16 +17,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "GmlGrammar.h"
+#include "gmlgrammar.h"
 
-#include "GmlGraphParsingHelper.h"
+#include "gmlgrammarhelper.h"
 #include "Document.h"
 
 #include <QDebug>
 
-
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 #define BOOST_SPIRIT_DEBUG 1
+
+using namespace GraphTheory;
 
 // workaround for linking boost
 void boost::throw_exception(std::exception const & e)
@@ -36,7 +37,7 @@ void boost::throw_exception(std::exception const & e)
 namespace GmlParser
 {
 
-GmlGraphParsingHelper* phelper = 0;
+GmlGrammarHelper *phelper = 0;
 std::string lastKey = "";
 QObject * lastInserted = 0;
 DataStructurePtr actualdataType;
@@ -88,7 +89,7 @@ void gotValue(const std::string& Value)
     }
     if (lastKey == "id" && lastInserted){
         lastInserted->setProperty("name", Value.c_str());
-        phelper->dataMap.insert(QString::fromStdString(Value), phelper->actualNode);
+        phelper->nodeMap.insert(QString::fromStdString(Value), phelper->currentNode);
     }
 //       lastInserted->setProperty(lastKey.c_str(), Value.c_str());
 //     }else{
@@ -107,12 +108,12 @@ void t1(const std::string &key)
     std::cout << "Found " << key << ".\n";
 }
 
-bool parse(const QString& content, Document * doc)
+bool parse(const QString& content, GraphDocumentPtr document)
 {
     QString tmpContent = content;
     unsigned result;
-    phelper = new GmlGraphParsingHelper;
-    phelper->gd = doc;
+    phelper = new GmlGrammarHelper;
+    phelper->document = document;
     typedef std::string::const_iterator iterator_type;
     typedef GmlParser::roman<iterator_type> roman;
 

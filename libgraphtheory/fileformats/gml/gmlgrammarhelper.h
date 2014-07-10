@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2006-2007  Gael de Chalendar <kleag@free.fr>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     Rocs is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public
@@ -19,25 +19,23 @@
 */
 
 
-#ifndef GML_GRAPHPARSINGHELPER_H
-#define GML_GRAPHPARSINGHELPER_H
+#ifndef GMLGRAMMARHELPER_H
+#define GMLGRAMMARHELPER_H
 
+#include "typenames.h"
+#include "node.h"
 #include <map>
 #include <list>
 #include <string>
 #include <QStringList>
-#include "DataStructure.h"
-#include "Data.h"
-#include "CoreTypes.h"
-
-#include <QObject>
+#include <QMap>
 
 namespace GmlParser
 {
-struct GmlGraphParsingHelper {
+struct GmlGrammarHelper {
     enum State {begin, graph, node, edge};
 
-    GmlGraphParsingHelper();
+    GmlGrammarHelper();
 
     void createNode();
     void createEdge();
@@ -50,19 +48,15 @@ struct GmlGraphParsingHelper {
     QString edgeSource;
     QString edgeTarget;
 
-    State _actualState;
+    State currentState;
 
-    DataStructurePtr actualGraph;
-    DataPtr actualNode;
-    PointerPtr actualEdge;
-    Document* gd;
-    QStringList _properties;
-    QHash<QString, QString> _edgeProperties;
-    QMap<QString, DataPtr> dataMap; // for mapping data element ids
+    GraphTheory::GraphDocumentPtr document;
+    GraphTheory::NodePtr currentNode;
+    GraphTheory::EdgePtr currentEdge;
+    QStringList attributeStack;
+    QHash<QString, QString> edgeAttributes;
+    QMap<QString, GraphTheory::NodePtr> nodeMap; // for mapping data element ids
 };
 }
 
 #endif
-
-
-
