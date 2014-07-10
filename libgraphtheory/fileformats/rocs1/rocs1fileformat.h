@@ -16,12 +16,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ROCSGRAPHFILEFORMATPLUGIN_H
-#define ROCSGRAPHFILEFORMATPLUGIN_H
+#ifndef ROCS1FILEFORMAT_H
+#define ROCS1FILEFORMAT_H
 
-#include "GraphFilePluginInterface.h"
+#include "fileformats/fileformatinterface.h"
 
-class RocsGraphFileFormatPluginPrivate;
+namespace GraphTheory
+{
+
+class Rocs1FileFormatPrivate;
 
 /** \brief class RocsGraphFileFormatPlugin: Import and Export Plugin for internal graph format.
  *
@@ -112,12 +115,13 @@ class RocsGraphFileFormatPluginPrivate;
 
 
 
-class RocsGraphFileFormatPlugin: public GraphFilePluginInterface
+class Rocs1FileFormat : public FileFormatInterface
 {
     Q_OBJECT
+
 public:
-    explicit RocsGraphFileFormatPlugin(QObject *parent);
-    ~RocsGraphFileFormatPlugin();
+    explicit Rocs1FileFormat(QObject *parent, const QList< QVariant >&);
+    ~Rocs1FileFormat();
 
     /**
      * File extensions that are common for this file type.
@@ -128,18 +132,20 @@ public:
      * Writes given graph document to formerly specified file \see setFile().
      * \param graph is graphDocument to be serialized
      */
-    virtual void writeFile(Document &graph);
+    virtual void writeFile(GraphDocumentPtr graph);
 
     /**
      * Open given file and imports it into internal format.
+     * \param file is url of a local file
      */
     virtual void readFile();
 
 private:
-    QString serialize(const Document &document);
+    QString serialize(GraphDocumentPtr document);
     void serializeProperties(QObject *o);
 
-    RocsGraphFileFormatPluginPrivate* d;
+    Rocs1FileFormatPrivate *d;
 };
+}
 
-#endif // ROCSGRAPHFILEFORMATPLUGIN_H
+#endif
