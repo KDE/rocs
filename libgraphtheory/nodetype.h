@@ -66,6 +66,16 @@ public:
     bool isValid() const;
 
     /**
+     * Set user visible name of node type to @p name.
+     */
+    void setName(const QString &name);
+
+    /**
+     * @return user visible name of node type
+     */
+    QString name() const;
+
+    /**
      * @return dynamic properties registered for this node type
      */
     QStringList dynamicProperties() const;
@@ -93,6 +103,7 @@ public:
     }
 
 Q_SIGNALS:
+    void nameChanged(const QString &name);
     void dynamicPropertyAdded(const QString &property);
     void dynamicPropertyRemoved(const QString &property);
 
