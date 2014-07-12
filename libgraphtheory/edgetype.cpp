@@ -30,6 +30,7 @@ class GraphTheory::EdgeTypePrivate {
 public:
     EdgeTypePrivate()
         : m_direction(EdgeType::Unidirectional)
+        , m_name(QString())
         , m_valid(false)
     {
     }
@@ -42,6 +43,7 @@ public:
     GraphDocumentPtr m_document;
     QStringList m_dynamicProperties;
     EdgeType::Direction m_direction;
+    QString m_name;
     bool m_valid;
 };
 
@@ -78,11 +80,24 @@ void EdgeType::destroy()
     d->q.reset();
 }
 
+void EdgeType::setName(const QString& name)
+{
+    if (d->m_name == name) {
+        return;
+    }
+    d->m_name = name;
+    emit nameChanged(name);
+}
+
+QString EdgeType::name() const
+{
+    return d->m_name;
+}
+
 bool EdgeType::isValid() const
 {
     return d->m_valid;
 }
-
 
 QStringList EdgeType::dynamicProperties() const
 {

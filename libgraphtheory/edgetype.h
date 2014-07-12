@@ -100,6 +100,16 @@ public:
     void setDirection(EdgeType::Direction direction);
 
     /**
+     * Set user visible name of node type to @p name.
+     */
+    void setName(const QString &name);
+
+    /**
+     * @return user visible name of node type
+     */
+    QString name() const;
+
+    /**
      * Debug method that tracks how many edge objects exist.
      *
      * @return number of edge type objects
@@ -113,6 +123,7 @@ Q_SIGNALS:
     void directionChanged(EdgeType::Direction direction);
     void dynamicPropertyAdded(const QString &property);
     void dynamicPropertyRemoved(const QString &property);
+    void nameChanged(const QString &name);
 
 protected:
     EdgeType();
