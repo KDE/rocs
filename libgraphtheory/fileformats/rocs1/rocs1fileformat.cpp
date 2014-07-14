@@ -78,8 +78,8 @@ void Rocs1FileFormat::readFile()
     QMap<int, NodePtr> nodeMap;
     QMap<int, NodeTypePtr> nodeTypeMap;
     QMap<int, EdgeTypePtr> edgeTypeMap;
-    nodeTypeMap.insert(0, NodeType::create(document));
-    edgeTypeMap.insert(0, EdgeType::create(document));
+    nodeTypeMap.insert(0, document->nodeTypes().first());
+    edgeTypeMap.insert(0, document->edgeTypes().first());
 
     QTextStream in(&fileHandle);
     in.setCodec("UTF-8");
@@ -228,6 +228,14 @@ void Rocs1FileFormat::readFile()
                 dataLine = in.readLine().simplified();
             }
             if (edgeTypeMap.contains(type)) {
+                if (!nodeMap.contains(nameFrom.toInt())) {
+                    qCritical() << "Node creating edge, node ID" << nameFrom.toInt() << "not registered";
+                    break;
+                }
+                if (!nodeMap.contains(nameTo.toInt())) {
+                    qCritical() << "Node creating edge, node ID" << nameTo.toInt() << "not registered";
+                    break;
+                }
                 tmpEdge = Edge::create(nodeMap[nameFrom.toInt()], nodeMap[nameTo.toInt()]);
                 tmpEdge->setType(edgeTypeMap[type]);
             } else {
@@ -288,8 +296,7 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
         d->_buffer += QString("[DataType %1]").arg(QString::number(typeID)) + QChar('\n')
             + QString("Name : ") + document->nodeTypes().at(typeID)->name() + QChar('\n')
             + QString("Properties : ") + properties.join(QChar(','))
-            + QChar('\n');
-        d->_buffer += QChar('\n');
+            + QChar('\n') + QChar('\n');
     }
 
     for(int typeID = 0; typeID < document->edgeTypes().length(); ++typeID) {
@@ -307,8 +314,7 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
             + QString("Name : ") + document->edgeTypes().at(typeID)->name() + QChar('\n')
             + QString("Direction : ") + direction + QChar('\n')
             + QString("Properties : ") + properties.join(QChar(','))
-            + QChar('\n');
-        d->_buffer += QChar('\n');
+            + QChar('\n') + QChar('\n');
     }
 
     d->_buffer += QString("[DataStructure 0] \n"); // all in one datastructure now
@@ -318,6 +324,7 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
         foreach(const QString &property, n->dynamicProperties()) {
             d->_buffer += QString("%1 : %2 \n").arg(property).arg(n->dynamicProperty(property).toString());
         }
+        d->_buffer += QChar('\n');
     }
     foreach(EdgePtr e, document->edges()) {
         d->_buffer += QString("[Pointer %1->%2]\n").
@@ -327,6 +334,7 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
         foreach(const QString &property, e->dynamicProperties()) {
             d->_buffer += QString("%1 : %2 \n").arg(property).arg(e->dynamicProperty(property).toString());
         }
+        d->_buffer += QChar('\n');
     }
 
     qDebug() << "------- /// BEGIN internal file format /// -------";

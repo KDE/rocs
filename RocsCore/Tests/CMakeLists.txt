@@ -47,19 +47,6 @@ target_link_libraries(TestDynamicProperties
     Qt5::Test
 )
 
-# loading and saving tests
-set (TestLoadSave_SRCS
-    ../../RocsCore/Tests/TestLoadSave.cpp
-)
-file(COPY TestGraphFiles DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-add_executable(TestLoadSave ${TestLoadSave_SRCS})
-add_test(TestLoadSave TestLoadSave)
-ecm_mark_as_test(TestLoadSave)
-target_link_libraries(TestLoadSave
-    rocscore
-    Qt5::Test
-)
-
 # test data structure plugin interface
 set(TestPlugins_SRC
     ../../RocsCore/Tests/TestPlugins.cpp

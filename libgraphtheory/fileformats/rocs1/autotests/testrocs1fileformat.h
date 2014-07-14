@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -16,28 +16,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TESTLOADSAVE_H
-#define TESTLOADSAVE_H
-
-#include "CoreTypes.h"
+#ifndef TESTROCS1FILEFORMAT_H
+#define TESTROCS1FILEFORMAT_H
 
 #include <QObject>
-#include <QVariant>
 
-class Document;
-
-class TestLoadSave : public QObject
+class TestRocs1FileFormat : public QObject
 {
     Q_OBJECT
 public:
-    TestLoadSave();
+    TestRocs1FileFormat();
 
-private slots:
+private Q_SLOTS:
     void serializeUnserializeTest();
     void serializeUnserializeTypesTest();
-    void projectLoadSaveTest();
-
-    void loadMultipleLayerGraphTest();
+//     void projectLoadSaveTest();
 };
 
 #endif
