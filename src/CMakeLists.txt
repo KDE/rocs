@@ -26,17 +26,11 @@ ecm_setup_version(1.9.900
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/RocsConfigVersion.cmake"
 )
 
-ecm_optional_add_subdirectory(InterfacePlugins)
+ecm_optional_add_subdirectory(plugins)
 
 include_directories(
     ${ROCSCORE_INCLUDES}
     ${ROCSVISUALEDITOR_INCLUDES}
-    Actions/
-    GraphicsItem/
-    Ui/
-    LoadSave/
-    Plugins/
-    Scripts/
 )
 
 set(rocs_actions_SRCS
@@ -44,45 +38,45 @@ set(rocs_actions_SRCS
 )
 
 set( rocs_interface_SRCS
-    Ui/DocumentationWidget.cpp
-    Ui/JournalEditorWidget.cpp
-    Ui/SideDockWidget.cpp
-    Ui/ImporterExporterManager.cpp
-    Ui/IncludeManagerSettings.cpp
-    Ui/MainWindow.cpp
-    Ui/Separator.cpp
-    Ui/TabWidget.cpp
-    Ui/CodeEditor.cpp
-    Ui/DocumentTypesWidget.cpp
-    Ui/ConfigureDefaultProperties.cpp
-#     Ui/LoadedPluginsDialog.cpp //FIXME
-    Ui/PossibleIncludes.cpp
-    Ui/ScriptOutputWidget.cpp
+    ui/DocumentationWidget.cpp
+    ui/JournalEditorWidget.cpp
+    ui/SideDockWidget.cpp
+    ui/ImporterExporterManager.cpp
+    ui/IncludeManagerSettings.cpp
+    ui/mainwindow.cpp
+    ui/Separator.cpp
+    ui/TabWidget.cpp
+    ui/CodeEditor.cpp
+    ui/DocumentTypesWidget.cpp
+    ui/ConfigureDefaultProperties.cpp
+#     ui/LoadedPluginsDialog.cpp //FIXME
+    ui/PossibleIncludes.cpp
+    ui/ScriptOutputWidget.cpp
 #FIXME commented out, waiting for Grantlee Qt5 port
-#     InterfacePlugins/ApiDoc/ApiDocWidget.cpp
-#     InterfacePlugins/ApiDoc/ObjectDocumentation.cpp
-#     InterfacePlugins/ApiDoc/PropertyDocumentation.cpp
-#     InterfacePlugins/ApiDoc/MethodDocumentation.cpp
-#     InterfacePlugins/ApiDoc/ParameterDocumentation.cpp
-#     InterfacePlugins/ApiDoc/ApiDocManager.cpp
-#     InterfacePlugins/ApiDoc/ApiDocModel.cpp
+#     plugins/ApiDoc/ApiDocWidget.cpp
+#     plugins/ApiDoc/ObjectDocumentation.cpp
+#     plugins/ApiDoc/PropertyDocumentation.cpp
+#     plugins/ApiDoc/MethodDocumentation.cpp
+#     plugins/ApiDoc/ParameterDocumentation.cpp
+#     plugins/ApiDoc/ApiDocManager.cpp
+#     plugins/ApiDoc/ApiDocModel.cpp
 )
 
 set(
     rocs_SRCS
-    Main.cpp
+    main.cpp
     ${rocs_interface_SRCS}
     ${rocs_script_SRC}
 )
 
 qt5_wrap_ui(
     rocs_SRCS
-    Ui/DocumentationWidget.ui
-    Ui/JournalEditorWidget.ui
-    Ui/DocumentTypesWidget.ui
-    Ui/ConfigureDefaultProperties.ui
-    Ui/ScriptOutputWidget.ui
-    InterfacePlugins/ApiDoc/ApiDocWidget.ui
+    ui/DocumentationWidget.ui
+    ui/JournalEditorWidget.ui
+    ui/DocumentTypesWidget.ui
+    ui/ConfigureDefaultProperties.ui
+    ui/ScriptOutputWidget.ui
+    plugins/ApiDoc/ApiDocWidget.ui
 )
 
 # we currently only support QtScript
@@ -130,5 +124,4 @@ install(FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs)
 install(FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 install(FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
-ecm_optional_add_subdirectory(Scripts)
-ecm_optional_add_subdirectory(Tests)
+ecm_optional_add_subdirectory(autotests)

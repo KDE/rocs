@@ -25,13 +25,13 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <QVBoxLayout>
-#include "MainWindow.h"
 #include <QIcon>
 #include <QDebug>
 #include <QTabBar>
 #include <QStackedWidget>
 
-CodeEditor::CodeEditor(MainWindow *parent) : QWidget(parent)
+CodeEditor::CodeEditor(QWidget *parent)
+    : QWidget(parent)
 {
     _layout = new QVBoxLayout();
     _editor = KTextEditor::Editor::instance();

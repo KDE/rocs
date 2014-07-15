@@ -24,7 +24,7 @@
 #include <KLocalizedString>
 
 #include "rocsversion.h"
-#include "Ui/MainWindow.h"
+#include "ui/mainwindow.h"
 #include <DataStructureBackendManager.h>
 
 

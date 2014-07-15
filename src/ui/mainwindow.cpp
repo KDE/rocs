@@ -19,7 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MainWindow.h"
+#include "mainwindow.h"
 #include "rocsversion.h"
 #include "settings.h"
 
@@ -57,13 +57,13 @@
 #include <ktexteditor/document.h>
 
 #include "DocumentTypesWidget.h"
-#include "Ui/CodeEditor.h"
-#include "Ui/ScriptOutputWidget.h"
-#include "Ui/PossibleIncludes.h"
-#include "Ui/SideDockWidget.h"
-#include "Ui/JournalEditorWidget.h"
-#include "Ui/DocumentationWidget.h"
-#include "InterfacePlugins/ApiDoc/ApiDocWidget.h"
+#include "ui/CodeEditor.h"
+#include "ui/ScriptOutputWidget.h"
+#include "ui/PossibleIncludes.h"
+#include "ui/SideDockWidget.h"
+#include "ui/JournalEditorWidget.h"
+#include "ui/DocumentationWidget.h"
+#include "plugins/ApiDoc/ApiDocWidget.h"
 #include "Project.h"
 #include "QtScriptBackend.h"
 #include "Actions/AlignAction.h"
