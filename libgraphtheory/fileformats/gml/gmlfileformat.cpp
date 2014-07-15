@@ -22,10 +22,10 @@
 #include "gmlgrammarhelper.h"
 #include "gmlgrammar.h"
 #include "fileformats/fileformatinterface.h"
+#include "modifiers/topology.h"
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
-// #include <Modifiers/Topology.h> //TODO needs to be ported
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <QFile>
@@ -73,6 +73,9 @@ void GmlFileFormat::readFile()
         document->destroy();
         return;
     }
+    Topology layouter;
+    layouter.directedGraphDefaultTopology(document);
+    setGraphDocument(document);
     setError(None);
 }
 

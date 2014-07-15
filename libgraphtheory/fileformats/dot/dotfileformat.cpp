@@ -20,6 +20,7 @@
 
 #include "dotfileformat.h"
 #include "fileformats/fileformatinterface.h"
+#include "modifiers/topology.h"
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
@@ -29,7 +30,6 @@
 #include <QTextStream>
 #include <QUrl>
 #include <QHash>
-// #include <Modifiers/Topology.h> //TODO needs to be ported
 #include "dotgrammarhelper.h"
 #include "dotgrammar.h"
 
@@ -72,9 +72,8 @@ void DotFileFormat::readFile()
         setError(EncodingProblem, i18n("Could not parse file \"%1\".", file().toLocalFile()));
         return;
     }
-    //TODO port layouter
-//     Topology layouter;
-//     layouter.directedGraphDefaultTopology(graphDoc->activeDataStructure());
+    Topology layouter;
+    layouter.directedGraphDefaultTopology(document);
      setError(None);
 }
 

@@ -20,6 +20,7 @@
 
 #include "tgffileformat.h"
 #include "fileformats/fileformatinterface.h"
+#include "modifiers/topology.h"
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
@@ -103,9 +104,9 @@ void TgfFileFormat::readFile()
             edge->setDynamicProperty("label", value.simplified());
         }
     }
-    //FIXME re-implement layouter
-//     Topology layouter;
-//     layouter.directedGraphDefaultTopology(graph);
+
+    Topology layouter;
+    layouter.directedGraphDefaultTopology(document);
     setGraphDocument(document);
     setError(None);
 }
