@@ -1,4 +1,4 @@
-# Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+# Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -21,23 +21,18 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# get generated *.json plugin file
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
-file(COPY example.gml DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
-set(testgmlfileformat_SRCS
-    testgmlfileformat.cpp
-    ../gmlgrammar.cpp
-    ../gmlgrammarhelper.cpp
-    ../gmlfileformat.cpp
+set(testproject_SRCS
+    test_project.cpp
+    ../project/project.cpp
 )
-add_executable(TestGmlFileFormat ${testgmlfileformat_SRCS})
-add_test(TestGmlFileFormat TestGmlFileFormat)
-ecm_mark_as_test(TestGmlFileFormat)
-target_link_libraries(TestGmlFileFormat
-    rocscore
+add_executable(TestProject ${testproject_SRCS})
+add_test(TestGmlFileFormat TestProject)
+ecm_mark_as_test(TestProject)
+target_link_libraries(TestProject
+    rocsgraphtheory
+    KF5::TextEditor
+    KF5::Archive
     Qt5::Test
 )

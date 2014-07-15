@@ -29,6 +29,7 @@ ecm_setup_version(1.9.900
 ecm_optional_add_subdirectory(plugins)
 
 include_directories(
+    ./
     ${ROCSCORE_INCLUDES}
 )
 
