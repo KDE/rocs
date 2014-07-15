@@ -1,3 +1,3 @@
-ecm_optional_add_subdirectory(LinkedList)
-ecm_optional_add_subdirectory(Graph)
-ecm_optional_add_subdirectory(RootedTree)
+# ecm_optional_add_subdirectory(LinkedList)
+# ecm_optional_add_subdirectory(Graph)
+# ecm_optional_add_subdirectory(RootedTree)
