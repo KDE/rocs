@@ -3,7 +3,7 @@
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
     Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-
+    Copyright 2014       Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -25,8 +25,6 @@
 
 #include "rocsversion.h"
 #include "ui/mainwindow.h"
-#include <DataStructureBackendManager.h>
-
 
 int main(int argc, char *argv[])
 {
@@ -59,17 +57,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     KAboutData::setApplicationData(aboutData);
+    MainWindow *window = new MainWindow();
+    window->show();
 
-    if (DataStructureBackendManager::self().backends().count() == 0) {
-        KMessageBox::detailedError(0,
-                                   i18n("No Data Structure plugins found on your system. Exiting."),
-                                   i18n("Rocs needs at least one data structure plugin to continue.\n"
-                                        "Try running kbuildsycoca4 from a console and after execute Rocs again."));
-
-    } else {
-        MainWindow *window = new MainWindow();
-        window->show();
-        return app.exec();
-    }
-    return 0;
+    return app.exec();
 }
