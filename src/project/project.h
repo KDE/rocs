@@ -20,7 +20,6 @@
 #ifndef PROJECT_H
 #define PROJECT_H
 
-#include "RocsCoreExport.h"
 #include "libgraphtheory/editor.h"
 #include "libgraphtheory/typenames.h"
 
@@ -30,7 +29,6 @@
 
 class QUrl;
 class ProjectPrivate;
-class Document;
 
 namespace KTextEditor
 {
@@ -45,7 +43,7 @@ class Document;
  * by the project file are a (not necessarily strict) superset of file currently displayed at
  * the main window widget.
  */
-class ROCSLIB_EXPORT Project : public QObject
+class Project : public QObject
 {
     Q_OBJECT
 
@@ -266,4 +264,4 @@ private:
     const QScopedPointer<ProjectPrivate> d;
 };
 
-#endif // PROJECT_H
+#endif

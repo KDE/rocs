@@ -16,9 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "JournalEditorWidget.h"
-#include <Project.h>
+#include "project/project.h"
 #include "ui_JournalEditorWidget.h"
 
 #include <QSaveFile>

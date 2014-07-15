@@ -64,7 +64,7 @@
 #include "ui/JournalEditorWidget.h"
 #include "ui/DocumentationWidget.h"
 #include "plugins/ApiDoc/ApiDocWidget.h"
-#include "Project.h"
+#include "project/project.h"
 #include "QtScriptBackend.h"
 #include "Actions/AlignAction.h"
 #include "Actions/ZoomAction.h"

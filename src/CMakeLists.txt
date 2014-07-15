@@ -30,7 +30,6 @@ ecm_optional_add_subdirectory(plugins)
 
 include_directories(
     ${ROCSCORE_INCLUDES}
-    ${ROCSVISUALEDITOR_INCLUDES}
 )
 
 set(rocs_actions_SRCS
@@ -52,6 +51,7 @@ set( rocs_interface_SRCS
 #     ui/LoadedPluginsDialog.cpp //FIXME
     ui/PossibleIncludes.cpp
     ui/ScriptOutputWidget.cpp
+    project/project.cpp
 #FIXME commented out, waiting for Grantlee Qt5 port
 #     plugins/ApiDoc/ApiDocWidget.cpp
 #     plugins/ApiDoc/ObjectDocumentation.cpp

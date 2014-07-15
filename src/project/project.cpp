@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Project.h"
+#include "project.h"
 #include "libgraphtheory/typenames.h"
 // #include "libgraphtheory/grapheditor.h"
 #include "libgraphtheory/graphdocument.h"

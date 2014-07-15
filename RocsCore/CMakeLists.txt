@@ -26,7 +26,6 @@ set( rocs_core_SRCS
     DataStructure.cpp
     Document.cpp
     Group.cpp
-    Project.cpp
     DataStructureBackendInterface.cpp
     DataStructureBackendManager.cpp
     DocumentManager.cpp
