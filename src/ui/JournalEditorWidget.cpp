@@ -26,6 +26,7 @@
 #include <QTextStream>
 #include <QFile>
 #include <QUrl>
+#include <KTextEditor/Document>
 
 
 JournalEditorWidget::JournalEditorWidget(QWidget* parent)
@@ -45,46 +46,14 @@ void JournalEditorWidget::openJournal(Project *project)
         qCritical() << "No project specified! Cannot set journal widget.";
         return;
     }
-    if (project->journalFile().isEmpty()) {
+    if (!project->journalDocument()) {
         qDebug() << "Skipping loading of journal file, project does not contain any, yet.";
         ui->editor->setHtml(QString());
     } else {
-        QFile fileHandle(project->journalFile().toLocalFile());
-        if (!fileHandle.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            qCritical() << "Could not open file"
-                << project->journalFile().toLocalFile()
-                << " in read mode: "
-                << fileHandle.errorString();
-                return;
-        }
-        QTextStream stream(&fileHandle);
-        stream.setCodec("UTF-8");
-        ui->editor->setHtml(stream.readAll());
+        ui->editor->setHtml(project->journalDocument()->text());
     }
     // explicitly set journal to be unmodified, since setting of text to editor caused modifed
     // value to be true
-    _modified = false;
-}
-
-void JournalEditorWidget::saveJournal()
-{
-    Q_ASSERT(_currentProject);
-    if (!_currentProject) {
-        qCritical() << "Associated project is not set: cannot save journal file and hence aborting saving.";
-        qDebug() << "Journal must be created with JournalEditorWidget::openJournal(...).";
-        return;
-    }
-
-    QSaveFile saveFile(_currentProject->journalFile().toLocalFile());
-    saveFile.open(QIODevice::WriteOnly);
-
-    QTextStream stream(&saveFile);
-    stream.setCodec("UTF-8");
-    stream << ui->editor->toHtml();
-    stream.flush();
-    if (!saveFile.commit()) {
-        qCritical() << "Error while writing journal file, aborting write. Journal file was not changed.";
-    }
     _modified = false;
 }
 

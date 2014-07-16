@@ -151,6 +151,7 @@ private slots:
     void newProjectAssistant();
     void saveProject(bool saveAs = false);
     void openProject(const QUrl& fileName = QUrl());
+//     void saveProjectAs(); //TODO update
 
     /**
      * Import dialog to add graph document to project.
@@ -163,30 +164,7 @@ private slots:
      */
     void updateCaption();
 
-
-    /**
-     * Save graph document \p document if document is specified.
-     */
-    void saveGraph(GraphTheory::GraphDocumentPtr document);
-
-    /**
-     * Save all graphs currently registered by DocumentMananger
-     */
-    void saveAllGraphs();
-
-    /**
-     * Save graph currently active document under new file name.
-     */
-    void saveGraphAs();
-
-    /**
-     * Save graph document \p document under new file name if document is specified.
-     * Otherwise if \p document is 0 save current active document under new file name.
-     * \param docoument is reference to the to be saved graph document or 0
-     */
-    void saveGraphAs(GraphTheory::GraphDocumentPtr document);
     void newGraph();
-    void saveScripts();
     void newScript();
 
     /**
@@ -202,7 +180,6 @@ private slots:
      */
 //     void importProject();
 
-    void saveProjectAs();
     void setupToolsPluginsAction();
     void quit();
 

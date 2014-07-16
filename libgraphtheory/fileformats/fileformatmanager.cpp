@@ -23,6 +23,7 @@
 
 #include <KPluginInfo>
 #include <KServiceTypeTrader>
+#include <QString>
 #include <QDir>
 #include <QDirIterator>
 #include <QJsonArray>
@@ -147,8 +148,9 @@ void FileFormatManager::loadBackends()
 
 FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
 {
+    QString suffix = ext.section('.', -1); // get suffix
     foreach(FileFormatInterface * p,  d->backends) {
-        if (p->extensions().join(";").contains(ext, Qt::CaseInsensitive)) {
+        if (p->extensions().join(";").contains(suffix, Qt::CaseInsensitive)) {
             return p;
         }
     }

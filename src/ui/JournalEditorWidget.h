@@ -50,11 +50,6 @@ public:
     void openJournal(Project* project);
 
     /**
-     * Writes current journal content to file as specified by its project.
-     */
-    void saveJournal();
-
-    /**
      * \return true if journal is modified since loading, otherwise false
      */
     bool isModified() const;

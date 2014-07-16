@@ -73,7 +73,8 @@ public:
 
     /**
      * Returns an arbitrary loaded plugin that can handle extension \p ext. If no backend specifies
-     * this extension, return value is 0.
+     * this extension, return value is 0. Instead of the extact ending, also a complete filename
+     * can be given.
      *
      * \param ext specifies the extension string
      * \return backend to handle files with specified extension or 0 otherwise

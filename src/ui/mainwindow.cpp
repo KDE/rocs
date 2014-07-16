@@ -490,18 +490,16 @@ void MainWindow::setActiveGraphDocument()
 void MainWindow::importScript()
 {
     QUrl startDirectory = Settings::lastOpenedDirectory();
-    if (!m_currentProject->isTemporary()) {
-        startDirectory = QUrl::fromLocalFile(m_currentProject->projectDirectory());
-    }
 
     QString fileUrl = QFileDialog::getOpenFileName(this,
                         i18nc("@title:window", "Add Existing Script File to Project"),
                         startDirectory.toLocalFile());
+
     if (fileUrl.isEmpty()) {
         return;
     }
 
-    m_currentProject->addCodeFile(fileUrl);
+    m_currentProject->importCodeDocument(fileUrl);
     _codeEditor->openScript(fileUrl);
     Settings::setLastOpenedDirectory(startDirectory.toLocalFile());
 }
@@ -516,12 +514,10 @@ void MainWindow::createNewProject()
     m_currentProject->disconnect(this);
     delete m_currentProject;
 
-    m_currentProject = new Project();
-    m_currentProject->setGraphEditor(m_graphEditor);
-    m_currentProject->addCodeFileNew(_codeEditor->newScript());
-    m_currentProject->createGraphDocument();
+    m_currentProject = new Project(m_graphEditor);
+    m_currentProject->addCodeDocument(_codeEditor->newScript());
+    m_currentProject->addGraphDocument(m_graphEditor->createDocument());
     _journalWidget->openJournal(m_currentProject);
-    m_currentProject->setModified(false);
     setActiveGraphDocument();
     connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
 
@@ -538,50 +534,31 @@ void MainWindow::saveProject(bool saveAs)
     // save graphs and scripts
 
     QUrl startDirectory = Settings::lastOpenedDirectory();
-    if (m_currentProject->isTemporary() || saveAs) {
-        startDirectory = QUrl::fromLocalFile(m_currentProject->projectDirectory());
+    if (m_currentProject->projectUrl().isEmpty() || saveAs) {
+        QUrl startDirectory = Settings::lastOpenedDirectory();
         QString file = QFileDialog::getSaveFileName(this,
                             i18nc("@title:window", "Save Project"),
                             startDirectory.toLocalFile(),
-                            i18n("*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"));
+                            i18n("Rocs Projects (*.rocsz)"));
 
         if (file.isEmpty()) {
-            qDebug() << "Filename is empty and no script file was created.";
+            qCritical() << "Filename is empty and no script file was created.";
             return;
         }
-        m_currentProject->setProjectFile(QUrl::fromLocalFile(file));
-        saveAllGraphs();
-        saveScripts();
-        _journalWidget->saveJournal();
-        if (file.endsWith(QLatin1String("rocsz"))){
-            m_currentProject->exportProject(QUrl::fromLocalFile(file));
-        }else {
-
-            // we need to set project directory first to allow correcte relative paths
-            // save files and finally write project to file
-            m_currentProject->writeProjectFile(file);
-        }
-    } else {
-        saveAllGraphs();
-        saveScripts();
-        _journalWidget->saveJournal();
-        if (m_currentProject->projectFile().fileName().endsWith(QLatin1String("rocsz"))){
-            m_currentProject->exportProject(m_currentProject->projectFile());
-        }else{
-            m_currentProject->writeProjectFile();
-        }
+        Settings::setLastOpenedDirectory(m_currentProject->projectUrl().path());
+        m_currentProject->setProjectUrl(QUrl::fromLocalFile(file));
     }
+    m_currentProject->projectSave();
     updateCaption();
-    Settings::setLastOpenedDirectory(m_currentProject->projectFile().path());
 }
 
-void MainWindow::saveProjectAs()
-{
-    saveProject(true);
-
-    // add project to recently opened projects
-    _recentProjects->addUrl(m_currentProject->projectFile().toLocalFile());
-}
+// void MainWindow::saveProjectAs()
+// {
+//     saveProject(true);
+//
+//     // add project to recently opened projects
+//     _recentProjects->addUrl(m_currentProject->projectFile().toLocalFile());
+// }
 
 void MainWindow::openProject(const QUrl &fileName)
 {
@@ -610,18 +587,14 @@ void MainWindow::openProject(const QUrl &fileName)
     // extract and open new project
     // at the end of this _currentProject must exist
     if (file.fileName().endsWith(QLatin1String("rocsz"), Qt::CaseInsensitive)) {
-        m_currentProject = new Project(file);
-        m_currentProject->setGraphEditor(m_graphEditor);
+        m_currentProject = new Project(file, m_graphEditor);
     }
     if (m_currentProject->graphDocuments().count() == 0) {
-        m_currentProject->createGraphDocument();
+        m_currentProject->addGraphDocument(m_graphEditor->createDocument());
     }
-    foreach(const QUrl& codeFile, m_currentProject->codeFiles()) {
-        _codeEditor->openScript(codeFile);
+    foreach(KTextEditor::Document *document, m_currentProject->codeDocuments()) {
+        _codeEditor->openScript(document->url());
         //TODO set curser line
-    }
-    if (m_currentProject->codeFiles().count() == 0) {
-        m_currentProject->addCodeFileNew(_codeEditor->newScript());
     }
     _journalWidget->openJournal(m_currentProject);
 
@@ -644,22 +617,22 @@ void MainWindow::updateCaption()
     if (!m_currentProject->name().isEmpty()) {
         caption.append(m_currentProject->name());
     }
-    else if (m_currentProject->isTemporary()) {
+    else if (m_currentProject->projectUrl().isEmpty()) {
         caption.append(i18nc("caption text for temporary project", "[ untitled ]"));
     } else {
-        caption.append(m_currentProject->projectFile().toLocalFile());
+        caption.append(m_currentProject->projectUrl().toLocalFile());
     }
     setCaption(caption);
 }
 
 QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suffix) {
     QFile targetFile;
-    QString basePath = m_currentProject->projectDirectory();
+    QString basePath = m_currentProject->projectUrl().path();
     QString fullSuffix = "." + suffix;
     QString fullPrefix = basePrefix;
 
     if (fullPrefix.isNull()) {
-        fullPrefix = m_currentProject->projectFile().fileName().remove(QRegExp(".rocsz*$"));
+        fullPrefix = m_currentProject->projectUrl().fileName().remove(QRegExp(".rocsz*$"));
     } else if (fullPrefix.endsWith(fullSuffix)) {
         fullPrefix.remove(QRegExp(fullSuffix + "$"));
     }
@@ -672,80 +645,19 @@ QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suf
     return targetFile.fileName();
 }
 
-void MainWindow::saveScripts()
-{
-    foreach (KTextEditor::Document * textDocument, m_currentProject->codeFilesNew()) {
-        QString basePrefix = QInputDialog::getText(this,
-                                i18n("ScriptName"),
-                                i18n("Enter the name of your new script"));
-        QString fileName = uniqueFilename(basePrefix, "js");
-
-        textDocument->saveAs(QUrl::fromLocalFile(fileName));
-        m_currentProject->saveCodeFileNew(textDocument, fileName);
-    }
-
-    _codeEditor->saveAllScripts();
-}
-
 void MainWindow::newScript()
 {
-    if (!m_currentProject->isTemporary()) {
-        QString basePrefix = QInputDialog::getText(this,
-                                i18n("ScriptName"),
-                                i18n("Enter the name of your new script"));
-        if (basePrefix.isNull()) {
-            qDebug() << "Filename is empty and no script file was created.";
-        } else {
-            QString fileName = uniqueFilename(basePrefix, "js");
-
-            KTextEditor::Document *document = _codeEditor->newScript(QUrl::fromLocalFile(fileName));
-            m_currentProject->addCodeFileNew(document);
-            m_currentProject->saveCodeFileNew(document, QUrl::fromLocalFile(fileName));
-        }
+    QString basePrefix = QInputDialog::getText(this,
+                            i18n("ScriptName"),
+                            i18n("Enter the name of your new script"));
+    if (basePrefix.isNull()) {
+        qDebug() << "Filename is empty and no script file was created.";
     } else {
-        saveProject(true);
-        if (!m_currentProject->isTemporary()) {
-            newScript();
-        }
+        QString fileName = uniqueFilename(basePrefix, "js");
+
+        KTextEditor::Document *document = _codeEditor->newScript(QUrl::fromLocalFile(fileName));
+        m_currentProject->addCodeDocument(document);
     }
-}
-
-void MainWindow::saveGraph(GraphDocumentPtr document)
-{
-    Q_ASSERT(document);
-    if (document->documentUrl().isEmpty()) {
-        saveGraphAs(document);
-    } else {
-        document->documentSave();
-    }
-}
-
-void MainWindow::saveAllGraphs()
-{
-    foreach(GraphDocumentPtr document, m_graphEditor->documents()) {
-        if (document->documentUrl().isEmpty()) {
-            m_currentProject->saveGraphFileAs(document,
-                 QUrl::fromLocalFile(m_currentProject->projectFile().toLocalFile().remove(QRegExp(".rocsz*$")) + ".graph"));
-        } else if (document->isModified()) {
-            document->documentSave();
-        }
-    }
-}
-
-void MainWindow::saveGraphAs()
-{
-    saveGraphAs(m_currentProject->activeGraphDocument());
-}
-
-
-void MainWindow::saveGraphAs(GraphDocumentPtr document)
-{
-    Q_ASSERT(document);
-    QString file = QFileDialog::getSaveFileName(this,
-                        i18nc("@title:window", "Save Graph Document"),
-                        QString(),
-                        i18n("*.graph|Rocs graph documents\n*|All files"));
-    m_currentProject->saveGraphFileAs(document, file);
 }
 
 void MainWindow::newGraph()
@@ -761,8 +673,9 @@ void MainWindow::newGraph()
         file.append(".graph");
     }
 
-    GraphDocumentPtr document = m_currentProject->createGraphDocument();
-    document->setDocumentUrl(QUrl::fromLocalFile(file));
+    GraphDocumentPtr document = m_graphEditor->createDocument();
+    m_currentProject->addGraphDocument(document);
+    document->setDocumentName(file);
 }
 
 bool MainWindow::queryClose()

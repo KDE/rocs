@@ -28,7 +28,8 @@ class TestProject : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void createProject();
+    void projectOperations();
+    void loadSave();
 };
 
 #endif

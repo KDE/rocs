@@ -28,7 +28,7 @@ set(testproject_SRCS
     ../project/project.cpp
 )
 add_executable(TestProject ${testproject_SRCS})
-add_test(TestGmlFileFormat TestProject)
+add_test(TestProject TestProject)
 ecm_mark_as_test(TestProject)
 target_link_libraries(TestProject
     rocsgraphtheory
@@ -36,3 +36,4 @@ target_link_libraries(TestProject
     KF5::Archive
     Qt5::Test
 )
+
