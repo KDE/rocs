@@ -185,10 +185,28 @@ Q_SIGNALS:
     void edgesRemoved();
 
   /*
+   * General document related properties
+   */
+public:
+    /**
+     * Get this document's name.
+     * Returns a meaningful name like some unique "Untitled XYZ" for the document - \e without
+     * documentUrl or basename for documents with url.
+     * @return readable document name
+     */
+    QString documentName() const;
+
+    void setDocumentName(const QString &name);
+
+Q_SIGNALS:
+    void documentNameChanged(const QString&);
+
+  /*
    * General file related actions.
    * None of these actions cause user interaction.
    */
 public:
+
     /**
      * Reload the current document.
      * @return @e true on success, i.e. the the document was reloaded, otherwise

@@ -23,7 +23,8 @@
 #include "edgetype.h"
 #include "nodetype.h"
 #include "edge.h"
-
+#include <KLocalizedString>
+#include <QString>
 #include <QDebug>
 
 using namespace GraphTheory;
@@ -37,6 +38,7 @@ public:
         : m_valid(false)
         , m_view(0)
         , m_documentUrl(QUrl())
+        , m_name(QString())
         , m_lastGeneratedId(0)
         , m_modified(false)
     {
@@ -55,6 +57,7 @@ public:
     EdgeList m_edges;
 
     QUrl m_documentUrl;
+    QString m_name;
     uint m_lastGeneratedId;
     bool m_modified; //FIXME modified value is not updated when graph changes
 };
@@ -271,6 +274,26 @@ void GraphDocument::setQpointer(GraphDocumentPtr q)
 {
     d->q = q;
 }
+
+//BEGIN file stuff
+QString GraphDocument::documentName() const
+{
+    if (d->m_name.isEmpty()) {
+        return i18nc("graph document without title", "untitled");
+    }
+    return d->m_name;
+}
+
+void GraphDocument::setDocumentName(const QString& name)
+{
+    if (name == d->m_name) {
+        return;
+    }
+    d->m_name = name;
+    emit documentNameChanged(name);
+}
+//END file stuff
+
 
 //BEGIN file stuff
 bool GraphDocument::documentReload()
