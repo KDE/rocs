@@ -20,8 +20,8 @@
 #ifndef ROCS_CORE_EXPORT_H
 #define ROCS_CORE_EXPORT_H
 
-// needed for KDE_EXPORT and KDE_IMPORT macros
-#include <kdemacros.h>
+#define KDE_EXPORT __attribute__ ((visibility("default")))
+#define KDE_IMPORT __attribute__ ((visibility("default")))
 
 #ifndef ROCSLIB_EXPORT
 # if defined(MAKE_ROCSCORE_LIB)

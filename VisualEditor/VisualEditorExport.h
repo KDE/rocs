@@ -20,7 +20,8 @@
 #ifndef VISUALEDITOR_EXPORT_H
 #define VISUALEDITOR_EXPORT_H
 
-#include <kdemacros.h>
+#define KDE_EXPORT __attribute__ ((visibility("default")))
+#define KDE_IMPORT __attribute__ ((visibility("default")))
 
 #ifndef VISUALEDITOR_EXPORT
 # if defined(MAKE_ROCSVISUALEDITOR_LIB)
