@@ -298,12 +298,14 @@ void GraphDocument::setDocumentName(const QString& name)
 //BEGIN file stuff
 bool GraphDocument::documentReload()
 {
+    qCritical() << "graph reloading not implemented!";
     //FIXME reload document
     return true;
 }
 
 bool GraphDocument::documentSave()
 {
+    qCritical() << "graph file serialization not implemented!";
     return documentSaveAs(d->m_documentUrl);
 }
 
@@ -314,7 +316,11 @@ bool GraphDocument::documentSaveAs(const QUrl &documentUrl)
         return false;
     }
 
-    //FIXME load document
+    //FIXME serialize document
+    qCritical() << "graph file serialization not implemented!";
+
+    d->m_documentUrl = documentUrl;
+    emit documentUrlChanged();
     d->m_modified = false;
 
     return true;
