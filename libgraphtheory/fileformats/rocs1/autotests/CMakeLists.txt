@@ -31,7 +31,7 @@ set(testrocs1fileformat_SRCS
 )
 add_executable(TestRocs1FileFormat ${testrocs1fileformat_SRCS})
 add_test(TestRocs1FileFormat TestRocs1FileFormat)
-ecm_mark_as_test(TestRocsFileFormatPlugin)
+ecm_mark_as_test(TestRocs1FileFormat)
 target_link_libraries(TestRocs1FileFormat
     rocsgraphtheory
     Qt5::Test

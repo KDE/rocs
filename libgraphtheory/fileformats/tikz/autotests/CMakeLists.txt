@@ -31,7 +31,7 @@ set(testtikzfileformat_SRCS
 )
 add_executable(TestTikzFileFormat ${testtikzfileformat_SRCS})
 add_test(TestTikzFileFormat TestTikzFileFormat)
-ecm_mark_as_test(TestTikzFileFormatPlugin)
+ecm_mark_as_test(TestTikzFileFormat)
 target_link_libraries(TestTikzFileFormat
     rocsgraphtheory
     Qt5::Test

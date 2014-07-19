@@ -30,7 +30,7 @@ set(testtgffileformat_SRCS
 )
 add_executable(TestTgfFileFormat ${testtgffileformat_SRCS})
 add_test(TestTgfFileFormat TestTgfFileFormat)
-ecm_mark_as_test(TestTgfFileFormatPlugin)
+ecm_mark_as_test(TestTgfFileFormat)
 target_link_libraries(TestTgfFileFormat
     rocsgraphtheory
     Qt5::Test
