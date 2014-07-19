@@ -141,9 +141,8 @@ void FileFormatManager::loadBackends()
     }
 
     // load static plugins
-//     FileFormatInterface *plugin = new RocsGraphFileFormatPlugin(this); //TODO port to new plugin
-//     d->backends.append(plugin);
-//     d->defaultGraphFilePlugin = plugin;
+    //TODO to be ported, once we have a new rocs internal file format
+    d->defaultGraphFilePlugin = backendByExtension("graph");
 }
 
 FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)

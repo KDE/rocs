@@ -23,6 +23,7 @@
 #include "edgetype.h"
 #include "nodetype.h"
 #include "edge.h"
+#include "fileformats/fileformatmanager.h"
 #include <KLocalizedString>
 #include <QString>
 #include <QDebug>
@@ -305,7 +306,6 @@ bool GraphDocument::documentReload()
 
 bool GraphDocument::documentSave()
 {
-    qCritical() << "graph file serialization not implemented!";
     return documentSaveAs(d->m_documentUrl);
 }
 
@@ -316,11 +316,20 @@ bool GraphDocument::documentSaveAs(const QUrl &documentUrl)
         return false;
     }
 
-    //FIXME serialize document
-    qCritical() << "graph file serialization not implemented!";
+    FileFormatManager fileFormatManager;
+    FileFormatInterface *serializer = fileFormatManager.defaultBackend();
+    serializer->setFile(documentUrl);
+    serializer->writeFile(d->q);
+    if (serializer->hasError()) {
+        qCritical() << "Graph file serializer reported error:" << serializer->errorString();
+        return false;
+    }
 
-    d->m_documentUrl = documentUrl;
-    emit documentUrlChanged();
+    // update document path if necessary
+    if (d->m_documentUrl != documentUrl) {
+        d->m_documentUrl = documentUrl;
+        emit documentUrlChanged();
+    }
     d->m_modified = false;
 
     return true;
