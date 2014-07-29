@@ -35,9 +35,11 @@ set(graphtheory_SRCS
     view.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
+    modifiers/valueassign.cpp
     modifiers/topology.cpp
     fileformats/fileformatinterface.cpp
     fileformats/fileformatmanager.cpp
+    editorplugins/editorplugininterface.cpp
     qtquickitems/nodeitem.cpp
     qtquickitems/edgeitem.cpp
 )
@@ -51,6 +53,7 @@ target_link_libraries(rocsgraphtheory
         Qt5::QuickWidgets
         KF5::I18n
         KF5::Declarative
+        KF5::XmlGui
         KF5::Service
 )
 
@@ -71,6 +74,7 @@ install(TARGETS rocsgraphtheory  ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel)
 
 ecm_optional_add_subdirectory(fileformats)
+ecm_optional_add_subdirectory(editorplugins)
 ecm_optional_add_subdirectory(modifiers)
 ecm_optional_add_subdirectory(qml)
 ecm_optional_add_subdirectory(autotests)
