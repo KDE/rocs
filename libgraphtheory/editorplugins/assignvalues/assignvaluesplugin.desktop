@@ -1,19 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Service
-#Icon=icon
-ServiceTypes=Rocs/ToolPlugin
-X-KDE-Library=rocs_assignvaluesplugin
-X-KDE-PluginInfo-Author=Andreas Cord-Landwehr
-X-KDE-PluginInfo-Email=cola@uni-paderborn.de
-X-KDE-PluginInfo-Name=Assign Values Rocs Tool Plugin
-X-KDE-PluginInfo-Version=0.0.1
-X-KDE-PluginInfo-Website=http://edu.kde.org/rocs/
+X-KDE-ServiceTypes=rocs/plugin
+X-KDE-Library=assignvalues
+X-KDE-PluginInfo-Name=rocs_assignvaluesplugin
+X-KDE-PluginInfo-Version=0.2
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=false
-X-Rocs-SupportedDataStructures=Graph,RootedTree,LinkedList
-Name=Assign Values
+Name=Assign Values Plugin
 Name[bs]=Dodijeli vrijednosti
 Name[ca]=Assigna valors
 Name[ca@valencia]=Assigna valors
