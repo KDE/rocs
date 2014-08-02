@@ -40,6 +40,7 @@ set(graphtheory_SRCS
     fileformats/fileformatinterface.cpp
     fileformats/fileformatmanager.cpp
     editorplugins/editorplugininterface.cpp
+    editorplugins/editorpluginmanager.cpp
     qtquickitems/nodeitem.cpp
     qtquickitems/edgeitem.cpp
 )
