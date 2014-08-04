@@ -49,10 +49,6 @@
                 <text>Graph File</text>
             </Menu>-->
             <Separator/>
-            <Menu name="conversions">
-                <text>Convert To</text>
-                <ActionList name="DS_plugins" />
-            </Menu>
             <Menu name="graph_selected">
                 <text>Edit Selected Data</text>
                 <Menu>

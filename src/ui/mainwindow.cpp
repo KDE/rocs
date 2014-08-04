@@ -74,8 +74,6 @@
 #include "ConfigureDefaultProperties.h"
 #include "IncludeManager.h"
 #include "ImporterExporterManager.h"
-#include "DataStructureBackendInterface.h"
-#include "DataStructureBackendManager.h"
 #include "libgraphtheory/editorplugins/editorpluginmanager.h"
 
 using namespace GraphTheory;
@@ -99,7 +97,6 @@ MainWindow::MainWindow()
 
     setupToolbars();
     setupToolsPluginsAction();
-    setupDSPluginsAction();
 
     // TODO: use welcome widget instead of creating default empty project
     createNewProject();
@@ -426,40 +423,6 @@ void MainWindow::setupToolsPluginsAction()
     }
     unplugActionList("tools_plugins");
     plugActionList("tools_plugins", actions);
-}
-
-void MainWindow::createToolsPluginsAction(){
-
-}
-
-void MainWindow::setupDSPluginsAction()
-{
-    QList <QAction*> pluginList;
-    QActionGroup* group = new QActionGroup(this);
-    QStringList backends = DataStructureBackendManager::self().backends();
-
-    // reset values
-    QAction* action = 0;
-    unplugActionList("DS_plugins");
-    // create actions and associate them to signal mapper
-    QSignalMapper* mapper = new QSignalMapper(this);
-    foreach(const QString& identifier, backends) {
-        DataStructureBackendInterface *plugin = DataStructureBackendManager::self().backend(identifier);
-        action = new QAction(plugin->name(), this);
-        action->setCheckable(true);
-        if (plugin->internalName() == DataStructureBackendManager::self().activeBackend()->internalName()) {
-            action->setChecked(true);
-        }
-        action->setActionGroup(group);
-
-        connect(action, SIGNAL(triggered(bool)), mapper, SLOT(map()));
-        mapper->setMapping(action, identifier);
-        pluginList.append(action);
-    }
-    connect(mapper, SIGNAL(mapped(QString)),
-            &DataStructureBackendManager::self(), SLOT(setBackend(QString)));
-
-    plugActionList("DS_plugins", pluginList);
 }
 
 void MainWindow::setActiveGraphDocument()

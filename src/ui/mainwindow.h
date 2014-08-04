@@ -92,9 +92,6 @@ private: // Methods
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                       const char* slot, QObject *parent);
 
-    /** setup menu with data structures plugins. */
-    void setupDSPluginsAction();
-
     /**
      * Returns an absolute and unique filename: /path-to-current-project/basePrefix.suffix
      * A number will follow basePrefix in the filename if there were other files
