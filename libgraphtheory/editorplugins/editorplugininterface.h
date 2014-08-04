@@ -52,7 +52,15 @@ public:
 
     virtual void showDialog(GraphDocumentPtr document) = 0;
 
+    /**
+     * @return display name of plugin, if nothing is set returns componentName
+     */
     virtual QString displayName();
+
+    /**
+     * set display name of plugin
+     */
+    virtual void setDisplayName(const QString &name);
 
 private:
     EditorPluginInterfacePrivate * const d;

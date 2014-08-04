@@ -30,13 +30,14 @@ class GraphTheory::EditorPluginInterfacePrivate
 {
 public:
     EditorPluginInterfacePrivate(const QString &componentName)
-        : componentName(componentName)
+        : m_componentName(componentName)
     {
 
     }
 
-    const QString componentName;
-    QString lastErrorString;
+    const QString m_componentName;
+    QString m_displayName;
+    QString m_lastErrorString;
 };
 
 EditorPluginInterface::EditorPluginInterface(const QString &componentName, QObject *parent)
@@ -53,6 +54,13 @@ EditorPluginInterface::~EditorPluginInterface()
 
 QString EditorPluginInterface::displayName()
 {
-    return d->componentName;
+    if (d->m_displayName.isEmpty()) {
+        return d->m_componentName;
+    }
+    return d->m_displayName;
 }
 
+void EditorPluginInterface::setDisplayName(const QString &name)
+{
+    d->m_displayName = name;
+}

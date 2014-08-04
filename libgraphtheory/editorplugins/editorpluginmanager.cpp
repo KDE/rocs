@@ -110,6 +110,7 @@ void EditorPluginManager::loadPlugins()
 
             KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
             EditorPluginInterface *plugin = factory->create<EditorPluginInterface>(this);
+            plugin->setDisplayName(m_metaData["Name"].toString());
             d->m_plugins.append(plugin);
         }
     }
