@@ -21,5 +21,23 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-ecm_optional_add_subdirectory(assignvalues)
-ecm_optional_add_subdirectory(generategraph)
+set(generategraph_SRCS
+    generategraphplugin.cpp
+    generategraphwidget.cpp
+)
+qt5_wrap_ui(generategraph_SRCS generategraphwidget.ui)
+add_library(generategraphplugin
+    MODULE
+    ${generategraph_SRCS}
+)
+
+target_link_libraries(generategraphplugin
+    PUBLIC
+    rocsgraphtheory
+    KF5::Completion
+)
+
+kservice_desktop_to_json(generategraphplugin generategraphplugin.desktop)
+install(TARGETS generategraphplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
+
+ecm_optional_add_subdirectory(autotests)

@@ -19,11 +19,12 @@
 #ifndef GENERATEGRAPHWIDGET_H
 #define GENERATEGRAPHWIDGET_H
 
-#include "ui_GenerateGraphWidget.h"
+#include "ui_generategraphwidget.h"
+#include "typenames.h"
 #include <QWidget>
 #include <QDialog>
 
-class Document;
+namespace GraphTheory {
 
 class GenerateGraphWidget : public QDialog
 {
@@ -39,7 +40,7 @@ class GenerateGraphWidget : public QDialog
     };
 
 public:
-    explicit GenerateGraphWidget(Document *document = 0);
+    explicit GenerateGraphWidget(GraphDocumentPtr document, QWidget *parent = 0);
     ~GenerateGraphWidget();
 
 public slots:
@@ -58,18 +59,18 @@ public slots:
     void setSeed(int seed);
 
     /**
-     * Set the type of data elements for the generator.
+     * Set the type of node elements for the generator.
      *
-     * \param type is the DataType ID
+     * \param type is the NodeType ID
      */
-    void setDataType(int type);
+    void setNodeType(int type);
 
     /**
-     * Set the type of pointers for the generator.
+     * Set the type of edges for the generator.
      *
-     * \param type is the DataType ID
+     * \param type is the NodeType ID
      */
-    void setPointerType(int type);
+    void setEdgeType(int type);
 
     /**
      * Set the unique graph identifier for the next generated graph.
@@ -85,6 +86,8 @@ public slots:
     void generateGraph();
 
 private:
+    QPointF documentCenter() const;
+
     /**
      * Generate circle graph with specified number of nodes.
      *
@@ -101,7 +104,7 @@ private:
     void generateMesh(int rows, int columns);
 
     /**
-     * Generate a random graph by assigning uniformly at random \p edges many pointers to the set of nodes.
+     * Generate a random graph by assigning uniformly at random \p edges many edges to the set of nodes.
      *
      * \param nodes is the number of nodes of the generated graph
      * \param edges is the number of edges of the generated graph
@@ -119,7 +122,7 @@ private:
 
     /**
      * Generate an Erdös-Renyi random graph. This graph is created by first creating a set of \p nodes
-     * many data elemnts and then creating any possibly edge with probability \p edgeProbability.
+     * many node elemnts and then creating any possibly edge with probability \p edgeProbability.
      *
      * \param nodes is the number of nodes of the generated graph
      * \param edgeProbability is the probability for creating an arbitrary edge
@@ -137,16 +140,17 @@ private:
      */
     void generateRandomTreeGraph(int nodes);
 
+    GraphDocumentPtr m_document;
+    int m_seed;
+    NodeTypePtr m_nodeType;
+    EdgeTypePtr m_edgeType;
+    QString m_identifier;
+    GraphGenerator m_graphGenerator;
 
-    int seed_;
-    int dataType_;
-    int pointerType_;
-    QString identifier_;
-    GraphGenerator graphGenerator_;
-
-    QHash<GraphGenerator, QString> defaultIdentifiers;
+    QHash<GraphGenerator, QString> m_defaultIdentifiers;
 
     Ui::GenerateGraphWidget *ui;
 };
+}
 
 #endif

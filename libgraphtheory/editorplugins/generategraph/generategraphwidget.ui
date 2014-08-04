@@ -22,12 +22,12 @@
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QLabel" name="labelDataType">
+    <widget class="QLabel" name="labelNodeType">
      <property name="toolTip">
       <string>The node type to create the nodes of the graph with</string>
      </property>
      <property name="text">
-      <string>Data type</string>
+      <string>Node type</string>
      </property>
     </widget>
    </item>
@@ -423,26 +423,26 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="labelPointerType">
+    <widget class="QLabel" name="labelEdgeType">
      <property name="toolTip">
-      <string>The pointer type to create the pointers of the graph with</string>
+      <string>The edge type to create the edges of the graph with</string>
      </property>
      <property name="text">
-      <string>Pointer type</string>
+      <string>Edge type</string>
      </property>
     </widget>
    </item>
    <item row="3" column="2">
-    <widget class="KComboBox" name="dataTypeSelector">
+    <widget class="KComboBox" name="nodeTypeSelector">
      <property name="toolTip">
-      <string>Select the data type for data elements of the generated graph.</string>
+      <string>Select the node type for node elements of the generated graph.</string>
      </property>
     </widget>
    </item>
    <item row="2" column="2">
-    <widget class="KComboBox" name="pointerTypeSelector">
+    <widget class="KComboBox" name="edgeTypeSelector">
      <property name="toolTip">
-      <string>Select the pointer type for connections of the generated graph.</string>
+      <string>Select the edge type for connections of the generated graph.</string>
      </property>
     </widget>
    </item>

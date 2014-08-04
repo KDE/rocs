@@ -19,7 +19,6 @@
  */
 
 #include "assignvalueswidget.h"
-
 #include "typenames.h"
 #include "graphdocument.h"
 #include "modifiers/valueassign.h"
