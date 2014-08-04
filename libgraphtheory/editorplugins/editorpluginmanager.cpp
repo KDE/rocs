@@ -88,7 +88,7 @@ void EditorPluginManager::loadPlugins()
     // dirs to check for plugins
     QStringList dirsToCheck;
     foreach (const QString &directory, QCoreApplication::libraryPaths()) {
-        dirsToCheck << directory + QDir::separator() + "rocs/plugins";
+        dirsToCheck << directory + QDir::separator() + "rocs/editorplugins";
     }
 
     // load plugins
@@ -100,7 +100,7 @@ void EditorPluginManager::loadPlugins()
             it.next();
             loader.setFileName(it.fileInfo().absoluteFilePath());
             QJsonObject m_metaData = loader.metaData()["MetaData"].toObject();
-            if (!readStringList(m_metaData, "X-KDE-ServiceTypes").contains("rocs/plugins")) {
+            if (!readStringList(m_metaData, "X-KDE-ServiceTypes").contains("rocs/editorplugins")) {
                 continue;
             }
             qDebug() << "Load Plugin: " << m_metaData["Name"].toString();

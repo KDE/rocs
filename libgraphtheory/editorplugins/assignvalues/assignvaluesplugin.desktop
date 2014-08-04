@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Service
-X-KDE-ServiceTypes=rocs/plugin
+X-KDE-ServiceTypes=rocs/editorplugins
 X-KDE-Library=assignvalues
 X-KDE-PluginInfo-Name=rocs_assignvaluesplugin
 X-KDE-PluginInfo-Version=0.2

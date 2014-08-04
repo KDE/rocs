@@ -38,7 +38,7 @@ target_link_libraries(assignvaluesplugin
 )
 
 kservice_desktop_to_json(assignvaluesplugin assignvaluesplugin.desktop)
-install(TARGETS assignvaluesplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/plugins)
+install(TARGETS assignvaluesplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
 
 ecm_optional_add_subdirectory(autotests)
 
