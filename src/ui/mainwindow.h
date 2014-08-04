@@ -23,6 +23,7 @@
 #define SUI_MAINWINDOW_H
 
 #include "libgraphtheory/editor.h"
+#include "libgraphtheory/editorplugins/editorpluginmanager.h"
 #include <KXmlGuiWindow>
 #include <kmessagebox.h>
 #include <QMutex>
@@ -214,6 +215,7 @@ private:
 
     // Right Area:
     GraphTheory::Editor *m_graphEditor;
+    GraphTheory::EditorPluginManager m_graphEditorPluginManager;
     CodeEditor *_codeEditor;
     ScriptOutputWidget* _outputWidget;
     JournalEditorWidget* _journalWidget;
@@ -223,7 +225,6 @@ private:
     QAction *_stepRunScript;
     QAction *_stopScript;
     KActionMenu *_debugMenu;
-    QList<QAction*> _toolsPlugins;
 
     ///Store the recent files.
     KRecentFilesAction *_recentProjects;

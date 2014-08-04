@@ -52,6 +52,8 @@ public:
 
     virtual void showDialog(GraphDocumentPtr document) = 0;
 
+    virtual QString displayName();
+
 private:
     EditorPluginInterfacePrivate * const d;
 };

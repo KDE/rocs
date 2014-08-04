@@ -50,3 +50,9 @@ EditorPluginInterface::~EditorPluginInterface()
 {
     delete d;
 }
+
+QString EditorPluginInterface::displayName()
+{
+    return d->componentName;
+}
+

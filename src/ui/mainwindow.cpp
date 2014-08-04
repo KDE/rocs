@@ -76,7 +76,7 @@
 #include "ImporterExporterManager.h"
 #include "DataStructureBackendInterface.h"
 #include "DataStructureBackendManager.h"
-#include "Tools/ToolManager.h"
+#include "libgraphtheory/editorplugins/editorpluginmanager.h"
 
 using namespace GraphTheory;
 
@@ -413,32 +413,23 @@ void MainWindow::showSettings()
 
 void MainWindow::setupToolsPluginsAction()
 {
-    if (_toolsPlugins.isEmpty()) {
-        createToolsPluginsAction();
-    }
-
-    //TODO has to be rewritten: concepts changed, and this does not apply anymore
-//     foreach(QAction* action, _toolsPlugins) {
-//         ToolsPluginInterface *plugin = ToolManager::self().plugins().at(action->data().toInt());
-//         action->setEnabled(
-//                 DocumentManager::self().activeDocument() &&
-//                 plugin->supportedDataStructures().contains(DocumentManager::self().activeDocument()->backend()->internalName())
-//                           );
-//     }
-}
-
-void MainWindow::createToolsPluginsAction(){
     QAction *action = 0;
-    QList<ToolsPluginInterface*> availablePlugins =  ToolManager::self().plugins();
+    QList<EditorPluginInterface*> availablePlugins =  m_graphEditorPluginManager.plugins();
+    QList<QAction*> actions;
     int count = 0;
-    foreach(ToolsPluginInterface * plugin, availablePlugins) {
+    foreach(EditorPluginInterface * plugin, availablePlugins) {
         action = new QAction(plugin->displayName(), this);
         action->setData(count++);
         connect(action, SIGNAL(triggered(bool)), this, SLOT(runToolPlugin()));
-        _toolsPlugins << action;
+
+        actions << action;
     }
     unplugActionList("tools_plugins");
-    plugActionList("tools_plugins", _toolsPlugins);
+    plugActionList("tools_plugins", actions);
+}
+
+void MainWindow::createToolsPluginsAction(){
+
 }
 
 void MainWindow::setupDSPluginsAction()
@@ -483,8 +474,6 @@ void MainWindow::setActiveGraphDocument()
     //TODO reenable after porting script engine
     // Update engine toolbar
 //     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
-
-    setupToolsPluginsAction();
 }
 
 void MainWindow::importScript()
@@ -773,9 +762,8 @@ void MainWindow::runToolPlugin()
     if (! action) {
         return;
     }
-    if (ToolsPluginInterface *plugin =  ToolManager::self().plugins().value(action->data().toInt())) {
-        //FIXME port ToolPlugin to GraphTheory
-//         plugin->run(DocumentManager::self().activeDocument());
+    if (EditorPluginInterface *plugin =  m_graphEditorPluginManager.plugins().value(action->data().toInt())) {
+        plugin->showDialog(m_currentProject->activeGraphDocument());
     }
 }
 
