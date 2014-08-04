@@ -58,18 +58,12 @@ set( rocsvisualeditor_interface_SRCS
     Interface/model_GraphProperties.cpp
 )
 
-set( rocsvisualeditor_tools_SRCS
-    Tools/ToolManager.cpp
-    Tools/ToolsPluginInterface.cpp
-)
-
 set( rocsvisualeditor_SRCS
     GraphVisualEditor.cpp
 
     ${rocsvisualeditor_actions_SRCS}
     ${rocsvisualeditor_scene_SRCS}
     ${rocsvisualeditor_interface_SRCS}
-    ${rocsvisualeditor_tools_SRCS}
 )
 
 qt5_wrap_ui(rocsvisualeditor_SRCS

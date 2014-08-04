@@ -21,6 +21,23 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-ecm_optional_add_subdirectory(assignvalues)
-ecm_optional_add_subdirectory(generategraph)
-ecm_optional_add_subdirectory(transformedges)
+set(transformedges_SRCS
+    transformedgesplugin.cpp
+    transformedgeswidget.cpp
+)
+qt5_wrap_ui(transformedges_SRCS transformedgeswidget.ui)
+add_library(transformedgesplugin
+    MODULE
+    ${transformedges_SRCS}
+)
+
+target_link_libraries(transformedgesplugin
+    PUBLIC
+    rocsgraphtheory
+    KF5::Completion
+)
+
+kservice_desktop_to_json(transformedgesplugin transformedgesplugin.desktop)
+install(TARGETS transformedgesplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
+
+ecm_optional_add_subdirectory(autotests)

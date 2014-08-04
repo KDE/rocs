@@ -1,18 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Service
-#Icon=icon
-ServiceTypes=Rocs/ToolPlugin
-X-KDE-Library=rocs_transformedgesplugin
-X-KDE-PluginInfo-Author=Andreas Cord-Landwehr
-X-KDE-PluginInfo-Email=cola@uni-paderborn.de
-X-KDE-PluginInfo-Name=Transform Edges Rocs Tool Plugin
-X-KDE-PluginInfo-Version=0.0.1
-X-KDE-PluginInfo-Website=http://edu.kde.org/rocs/
+X-KDE-ServiceTypes=rocs/editorplugins
+X-KDE-Library=transformedges
+X-KDE-PluginInfo-Name=rocs_transformedges
+X-KDE-PluginInfo-Version=0.2
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=false
-X-Rocs-SupportedDataStructures=Graph
 Name=Transform Edges
 Name[bs]=Trasformiši ivice
 Name[ca]=Transforma les arestes
