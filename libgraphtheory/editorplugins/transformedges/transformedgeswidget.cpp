@@ -36,6 +36,7 @@
 #include <QSpinBox>
 #include <QMap>
 #include <QPair>
+#include <QDebug>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topology.hpp>
@@ -56,7 +57,9 @@ TransformEdgesWidget::TransformEdgesWidget(GraphDocumentPtr document, QWidget *p
     ui->setupUi(widget);
     mainLayout->addWidget(widget);
 
-    connect(this, SIGNAL(apply()), this, SLOT(executeTransform()));
+    connect(ui->buttons, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(ui->buttons, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(this, SIGNAL(accepted()), this, SLOT(transform()));
 }
 
 TransformEdgesWidget::~TransformEdgesWidget()
@@ -87,12 +90,11 @@ void TransformEdgesWidget::makeComplete()
         e->destroy();
     }
 
-    int size_i = m_document->nodes().size() - 1;
-    for (int i = 0; i < size_i; ++i) {
-        for (int e = i + 1; e < m_document->nodes().size(); ++e) {
-            Edge::create(m_document->nodes().at(i), m_document->nodes().at(e));
-            if (m_document->edgeTypes().first()->direction() == EdgeType::Bidirectional) {
-                Edge::create(m_document->nodes().at(e), m_document->nodes().at(i));
+    for (int i = 0; i < m_document->nodes().size() - 1; ++i) {
+        for (int j = i + 1; j < m_document->nodes().size(); ++j) {
+            Edge::create(m_document->nodes().at(i), m_document->nodes().at(j));
+            if (m_document->edgeTypes().first()->direction() == EdgeType::Unidirectional) {
+                Edge::create(m_document->nodes().at(j), m_document->nodes().at(i));
             }
         }
     }
