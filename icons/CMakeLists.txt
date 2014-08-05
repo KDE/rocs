@@ -25,10 +25,23 @@ include(ECMInstallIcons)
 
 ecm_install_icons( ICONS
   sc-apps-rocs.svgz
+
   sc-actions-rocsdelete.svgz
   sc-actions-rocsedge.svgz
   sc-actions-rocsnode.svgz
   sc-actions-rocsselect.svgz
+
+  sc-actions-rocsadvancedsetup.svgz
+  sc-actions-rocsvisible.svgz
+
+  sc-actions-rocsaligntree.svgz
+  sc-actions-rocsaligncircle.svgz
+  sc-actions-rocsalignbottom.svgz
+  sc-actions-rocsalignmiddle.svgz
+  sc-actions-rocsalignleft.svgz
+  sc-actions-rocsalignright.svgz
+  sc-actions-rocsaligntop.svgz
+  sc-actions-rocsalignvmiddle.svgz
 
   DESTINATION ${ICON_INSTALL_DIR}
   THEME hicolor
