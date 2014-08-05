@@ -33,7 +33,7 @@ public:
         , m_origin(0, 0)
         , m_pointFrom(0, 0)
         , m_pointTo(0, 0)
-        , m_nodeWidth(64)
+        , m_nodeWidth(32)
     {
     }
 

@@ -51,8 +51,8 @@ NodeItem::NodeItem(QQuickPaintedItem *parent)
 {
     setFlag(QQuickItem::ItemHasContents, true);
 
-    setWidth(64);
-    setHeight(64);
+    setWidth(32);
+    setHeight(32);
 }
 
 NodeItem::~NodeItem()
