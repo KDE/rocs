@@ -47,15 +47,11 @@ set( rocsvisualeditor_actions_SRCS
 
 set( rocsvisualeditor_interface_SRCS
     Interface/DataPropertiesWidget.cpp
-    Interface/DataStructurePropertiesDialog.cpp
     Interface/DocumentPropertiesDialog.cpp
-    Interface/DataStructurePage.cpp
     Interface/DataTypePage.cpp
     Interface/PointerTypePage.cpp
     Interface/PointerPropertiesWidget.cpp
     Interface/EditorToolbar.cpp
-
-    Interface/model_GraphProperties.cpp
 )
 
 set( rocsvisualeditor_SRCS
@@ -67,7 +63,6 @@ set( rocsvisualeditor_SRCS
 )
 
 qt5_wrap_ui(rocsvisualeditor_SRCS
-    Interface/DataStructurePage.ui
     Interface/DataTypePage.ui
     Interface/PointerTypePage.ui
     Interface/DataPropertiesWidget.ui
