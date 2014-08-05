@@ -25,8 +25,6 @@
 #include "node.h"
 #include "edge.h"
 #include <KPluginFactory>
-#include <QString>
-#include <QStringList>
 #include <QDialog>
 #include <QDebug>
 

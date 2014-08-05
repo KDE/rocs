@@ -23,7 +23,6 @@
 
 #include "ui_transformedgeswidget.h"
 #include "typenames.h"
-#include <QWidget>
 #include <QDialog>
 
 namespace GraphTheory {
@@ -41,26 +40,17 @@ public Q_SLOTS:
 
 private:
     /**
-     * Transform a given graph data structure to a complete graph.
-     *
-     * \param   DataStructure*  graph   the to be transformed graph
+     * Create edges between all nodes.
      */
     void makeComplete();
 
     /**
-     * Remove all edges from a given graph data structure.
-     *
-     * \param   DataStructure*  graph   the to be transformed graph
-     * \return  void
+     * Remove all edges.
      */
     void removeAllEdges();
 
     /**
-     * Remove all edges of a given directed graph data structure. If an undirected
-     * data structure is given no transformations are proceed.
-     *
-     * \param   DataStructure*  graph   the to be transformed graph
-     * \return  void
+     * Reverse all existing edges.
      */
     void reverseAllEdges();
 
@@ -69,8 +59,7 @@ private:
      * algorithm. All edges are assumed to have weight 1 if no weights are given. Otherwise,
      * with given weights the specified values are used.
      *
-     * \param   DataStructure*  graph   the to be transformed graph
-     * \return  qreal   total weight of MST
+     * \return  total weight of MST
      */
     qreal makeSpanningTree();
 

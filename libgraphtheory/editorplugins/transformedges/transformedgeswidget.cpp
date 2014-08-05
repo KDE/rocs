@@ -24,25 +24,12 @@
 #include "edge.h"
 #include "modifiers/topology.h"
 
-#include <limits.h>
 #include <KLocalizedString>
-#include <KComboBox>
-#include <QVBoxLayout>
-#include <QDesktopWidget>
-#include <QGridLayout>
-#include <QLabel>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QSpinBox>
 #include <QMap>
 #include <QPair>
 #include <QDebug>
 
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/topology.hpp>
-
 using namespace GraphTheory;
-
 
 TransformEdgesWidget::TransformEdgesWidget(GraphDocumentPtr document, QWidget *parent)
     : QDialog(parent)
