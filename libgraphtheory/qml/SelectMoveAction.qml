@@ -31,7 +31,7 @@ Action {
     property int selectHeight
 
     text: i18n("Select & Move")
-    iconName: "rocsselectmove"
+    iconName: "rocsselect"
     checkable: true
     tooltip: i18n("Select and move elements on the scene")
 }

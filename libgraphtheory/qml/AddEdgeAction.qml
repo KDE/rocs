@@ -40,7 +40,7 @@ Action {
     }
 
     text: i18n("Create Edge")
-    iconName: "rocsaddedge"
+    iconName: "rocsedge"
     checkable: true
     tooltip: i18n("Create an edge between two nodes")
 }

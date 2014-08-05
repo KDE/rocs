@@ -25,7 +25,7 @@ import org.kde.rocs.graphtheory 1.0
 Action {
     id: root
     text: i18n("Create Node")
-    iconName: "rocsaddnode"
+    iconName: "rocsnode"
     checkable: true
     tooltip: i18n("Add a node to the scene")
 }
