@@ -38,7 +38,7 @@ public:
         : m_valid(false)
         , m_x(0)
         , m_y(0)
-        , m_color(Qt::blue)
+        , m_color(Qt::white)
         , m_id(-1)
     {
     }

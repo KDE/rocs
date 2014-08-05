@@ -117,9 +117,9 @@ void NodeItem::paint(QPainter *painter)
 {
     painter->setRenderHint(QPainter::Antialiasing);
     if (d->m_highlighted) {
-        painter->setPen(QPen(QBrush(Qt::red), 2, Qt::SolidLine));
+        painter->setPen(QPen(QColor(246, 116, 0, 255), 2, Qt::SolidLine)); // beware orange
     } else {
-        painter->setPen(QPen(QBrush(Qt::black), 2, Qt::SolidLine));
+        painter->setPen(QPen(QColor(77, 77, 77, 255), 2, Qt::SolidLine)); // dark gray
     }
     painter->setBrush(QBrush(d->m_node->color()));
     painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));

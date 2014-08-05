@@ -97,7 +97,7 @@ void EdgeItem::setOrigin(const QPointF &origin)
 void EdgeItem::paint(QPainter *painter)
 {
     painter->setRenderHint(QPainter::Antialiasing);
-    painter->setPen(QPen(QBrush(Qt::black), 2, Qt::SolidLine));
+    painter->setPen(QPen(QColor(77, 77, 77, 255), 2, Qt::SolidLine));
     painter->drawLine(d->m_pointFrom, d->m_pointTo);
 }
 
