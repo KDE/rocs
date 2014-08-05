@@ -81,8 +81,8 @@ using namespace GraphTheory;
 MainWindow::MainWindow()
     : KXmlGuiWindow()
     , m_currentProject(0)
+    , m_graphEditorWidget(new QWidget)
     , _scriptDbg(0)
-    , m_visualEditor(new QWidget)
 {
     setObjectName("RocsMainWindow");
     m_graphEditor = new GraphTheory::Editor();
@@ -143,12 +143,12 @@ void MainWindow::setupWidgets()
     // setup main widgets
     QWidget *sidePanel = setupSidePanel();
     QWidget *scriptPanel = setupScriptPanel();
-    m_visualEditor->setLayout(new QGridLayout);
+    m_graphEditorWidget->setLayout(new QGridLayout);
 
     // splits the main window horizontal
     _vSplitter = new QSplitter(this);
     _vSplitter->setOrientation(Qt::Vertical);
-    _vSplitter->addWidget(m_visualEditor);
+    _vSplitter->addWidget(m_graphEditorWidget);
     _vSplitter->addWidget(scriptPanel);
 
     // horizontal arrangement
@@ -428,7 +428,7 @@ void MainWindow::setActiveGraphDocument()
         return;
     }
     GraphDocumentPtr activeDocument = m_currentProject->activeGraphDocument();
-    m_visualEditor->layout()->addWidget(activeDocument->createView(this));
+    m_graphEditorWidget->layout()->addWidget(activeDocument->createView(this));
 
     //TODO reenable after porting script engine
     // Update engine toolbar

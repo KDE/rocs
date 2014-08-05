@@ -230,9 +230,7 @@ private:
     QSplitter *_vSplitter;
     QSplitter *_hSplitter;
     QSplitter *_hScriptSplitter;
-    QWidget *m_visualEditor; // contains graph editor scene
-
-    QComboBox *_selectListing;
+    QWidget *m_graphEditorWidget; // contains graph editor scene
 
     QScriptEngineDebugger *_scriptDbg;
     QAction* _debugScript;
