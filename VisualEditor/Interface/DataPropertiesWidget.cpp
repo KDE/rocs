@@ -23,7 +23,6 @@
 #include "Scene/DataItem.h"
 #include "DataStructure.h"
 #include "Actions/PropertiesDialogAction.h"
-#include "model_GraphProperties.h"
 #include "DataStructureBackendManager.h"
 #include "DataStructureBackendInterface.h"
 
@@ -99,10 +98,7 @@ void DataPropertiesWidget::setData(DataPtr data)
     connect(dataType.get(), SIGNAL(propertyRemoved(QString)), this, SLOT(updateProperties()));
     connect(dataType.get(), SIGNAL(propertyRenamed(QString,QString)), this, SLOT(updateProperties()));
 
-    GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_data.get());
-
-    ui->_propertiesTable->setModel(model);
+//     ui->_propertiesTable->setModel(model); //FIXME rewrite model
     ui->_propertiesTable->horizontalHeader()->setProperty("stretchLastSection", true);
 }
 
@@ -157,8 +153,9 @@ void DataPropertiesWidget::updateDataTypes()
 void DataPropertiesWidget::updateProperties()
 {
     // TODO the following can be solved much nicer by updating the model
-    GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_data.get());
-    ui->_propertiesTable->model()->deleteLater();
-    ui->_propertiesTable->setModel(model);
+    //FIXME commented out for now, model has to be rewritten
+//     GraphPropertiesModel *model = new GraphPropertiesModel();
+//     model->setDataSource(_data.get());
+//     ui->_propertiesTable->model()->deleteLater();
+//     ui->_propertiesTable->setModel(model);
 }

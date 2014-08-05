@@ -47,7 +47,6 @@ set( rocsvisualeditor_actions_SRCS
 
 set( rocsvisualeditor_interface_SRCS
     Interface/DataPropertiesWidget.cpp
-    Interface/DocumentPropertiesDialog.cpp
     Interface/DataTypePage.cpp
     Interface/PointerTypePage.cpp
     Interface/PointerPropertiesWidget.cpp

@@ -20,7 +20,6 @@
 
 #include "PointerPropertiesWidget.h"
 #include "Pointer.h"
-#include "model_GraphProperties.h"
 #include "DataStructure.h"
 #include "Actions/PropertiesDialogAction.h"
 #include "DataStructureBackendManager.h"
@@ -101,10 +100,11 @@ void PointerPropertiesWidget::setPointer(PointerPtr pointer)
 
     reflectAttributes();
 
-    GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_pointer.get());
+    // rewrite model
+//     GraphPropertiesModel *model = new GraphPropertiesModel();
+//     model->setDataSource(_pointer.get());
 
-    ui->_propertiesTable->setModel(model);
+//     ui->_propertiesTable->setModel(model);
     ui->_propertiesTable->horizontalHeader()->setProperty("stretchLastSection", true);
 }
 
@@ -157,9 +157,10 @@ void PointerPropertiesWidget::updatePointerTypes()
 
 void PointerPropertiesWidget::updateProperties()
 {
-    // TODO the following can be solved much nicer by updating the model
-    GraphPropertiesModel *model = new GraphPropertiesModel();
-    model->setDataSource(_pointer.get());
-    ui->_propertiesTable->model()->deleteLater();
-    ui->_propertiesTable->setModel(model);
+    //FIXME rewrite model
+//     // TODO the following can be solved much nicer by updating the model
+//     GraphPropertiesModel *model = new GraphPropertiesModel();
+//     model->setDataSource(_pointer.get());
+//     ui->_propertiesTable->model()->deleteLater();
+//     ui->_propertiesTable->setModel(model);
 }
