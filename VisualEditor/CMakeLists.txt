@@ -34,14 +34,10 @@ set( rocsvisualeditor_scene_SRCS
 set( rocsvisualeditor_actions_SRCS
     Actions/AlignAction.cpp
     Actions/AbstractAction.cpp
-    Actions/AddConnectionHandAction.cpp
     Actions/AddDataAction.cpp
     Actions/DeleteAction.cpp
     Actions/ZoomAction.cpp
-    Actions/AddDataHandAction.cpp
-    Actions/DeleteHandAction.cpp
     Actions/AssignValueAction.cpp
-    Actions/SelectMoveHandAction.cpp
     Actions/PropertiesDialogAction.cpp
 )
 
@@ -50,7 +46,6 @@ set( rocsvisualeditor_interface_SRCS
     Interface/DataTypePage.cpp
     Interface/PointerTypePage.cpp
     Interface/PointerPropertiesWidget.cpp
-    Interface/EditorToolbar.cpp
 )
 
 set( rocsvisualeditor_SRCS

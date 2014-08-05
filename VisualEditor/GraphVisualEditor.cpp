@@ -28,7 +28,6 @@
 #include "Data.h"
 #include "Pointer.h"
 #include "CoreTypes.h"
-#include "Interface/EditorToolbar.h"
 
 #include "Actions/PropertiesDialogAction.h"
 #include "Actions/AlignAction.h"
@@ -60,7 +59,6 @@ class GraphVisualEditorPrivate
 {
 public:
     GraphVisualEditorPrivate()
-        : _editorToolbar(0)
     {
         _scene = 0;
         _document = 0;
@@ -70,7 +68,6 @@ public:
     { }
 
     GraphScene *_scene;
-    EditorToolbar *_editorToolbar;
 
     KComboBox *_documentSelectorCombo;
     QToolButton *_documentPropertiesButton;
@@ -141,7 +138,6 @@ void GraphVisualEditor::setupWidgets()
     d->_documentPropertiesButton->setIcon(QIcon::fromTheme("document-properties"));
 
     // scene controls for top line
-    vLayout->addWidget(sceneToolbar());
     vLayout->addWidget(d->_graphicsView);
     setLayout(vLayout);
 
@@ -150,66 +146,6 @@ void GraphVisualEditor::setupWidgets()
             this, SLOT(releaseDocument()));
     connect(&DocumentManager::self(), SIGNAL(documentListChanged()),
             this, SLOT(updateGraphDocumentList()));
-}
-
-QWidget * GraphVisualEditor::sceneToolbar()
-{
-    QWidget *sceneControls = new QWidget(this);
-
-    // document selection
-    d->_documentSelectorCombo = new KComboBox(this);
-    d->_documentSelectorCombo->setMinimumWidth(100);
-    sceneControls->setLayout(new QHBoxLayout(this));
-    sceneControls->layout()->addWidget(new QLabel(i18nc("@label:listbox", "Graph Document:")));
-    sceneControls->layout()->addWidget(d->_documentSelectorCombo);
-    sceneControls->layout()->addWidget(d->_documentPropertiesButton);
-
-    // control separator
-    QFrame* separator = new QFrame(this);
-    separator->setFrameStyle(QFrame::VLine);
-    sceneControls->layout()->addWidget(separator);
-
-    // data structure selection
-    sceneControls->layout()->addWidget(new QLabel(i18n("Data Structure:"), this));
-    d->_dataStructureSelectorCombo = new KComboBox(this);
-    d->_dataStructureSelectorCombo->setMinimumWidth(100);
-    sceneControls->layout()->addWidget(d->_dataStructureSelectorCombo);
-    d->_dataStructurePropertiesButton = new QToolButton(this);
-    d->_dataStructurePropertiesButton->setMaximumWidth(24);
-    d->_dataStructurePropertiesButton->setIcon(QIcon::fromTheme("document-properties"));
-    sceneControls->layout()->addWidget(d->_dataStructurePropertiesButton);
-    // create add data structure button
-    QPushButton* addDataStructureButton = new QPushButton(this);
-    addDataStructureButton->setIcon(QIcon::fromTheme("rocsnew"));
-    addDataStructureButton->setToolTip(i18nc("@info:tooltip", "Add a new data structure."));
-    addDataStructureButton->setMaximumWidth(24);
-    sceneControls->layout()->addWidget(addDataStructureButton);
-    // create remove data structure button
-    d->_removeDataStructureButton = new QPushButton(this);
-    d->_removeDataStructureButton->setIcon(QIcon::fromTheme("rocsdelete"));
-    d->_removeDataStructureButton->setToolTip(i18nc("@info:tooltip", "Remove selected data structure."));
-    d->_removeDataStructureButton->setMaximumWidth(24);
-    sceneControls->layout()->addWidget(d->_removeDataStructureButton);
-
-    QSpacerItem *spacerItem = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
-    sceneControls->layout()->addItem(spacerItem);
-    sceneControls->layout()->addWidget(d->_zoomSlider);
-
-    // connections for buttons
-    connect(d->_documentSelectorCombo, SIGNAL(activated(int)),
-            &DocumentManager::self(), SLOT(changeDocument(int)));
-    connect(addDataStructureButton, SIGNAL(clicked()),
-            this, SLOT(addDataStructure()));
-    connect(d->_removeDataStructureButton, SIGNAL(clicked()),
-            this, SLOT(removeDataStructure()));
-
-    // add connections for zoom slider
-    connect(d->_zoomSlider, SIGNAL(valueChanged(int)),
-            this, SLOT(zoomTo(int)));
-    connect(d->_scene, SIGNAL(zoomFactorChanged(qreal)),
-            this, SLOT(updateZoomSlider(qreal)));
-
-    return sceneControls;
 }
 
 void GraphVisualEditor::updateGraphDocumentList()
@@ -251,9 +187,6 @@ void GraphVisualEditor::setActiveDocument()
             d->_scene, SLOT(createItems(DataStructurePtr)));
     connect(d->_document, SIGNAL(dataStructureListChanged()),
             this, SLOT(updateDataStructureList()));
-
-    // Graphical Data Structure Editor toolbar
-    d->_editorToolbar->setActiveDocument(d->_document);
 }
 
 void GraphVisualEditor::releaseDocument()
@@ -271,12 +204,6 @@ void GraphVisualEditor::releaseDocument()
 
 void GraphVisualEditor::setupActions(KActionCollection* collection)
 {
-    // create editor toolbar
-    if (d->_editorToolbar == 0) {
-        d->_editorToolbar = new EditorToolbar(this);
-    }
-    d->_editorToolbar->setup(d->_scene, collection);
-
     // create alignment menu
     collection->addAction("align-hbottom", new AlignAction(i18nc("@action:intoolbar Alignment", "Base"),  AlignAction::Bottom, d->_scene));
     collection->addAction("align-hcenter", new AlignAction(i18nc("@action:intoolbar Alignment", "Center"), AlignAction::HCenter, d->_scene));
