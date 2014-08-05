@@ -87,10 +87,6 @@ MainWindow::MainWindow()
     setObjectName("RocsMainWindow");
     m_graphEditor = new GraphTheory::Editor();
 
-    //FIXME by hand creation of an empty graph document
-    // this must become part of the project after adapting to graphtheory
-    GraphTheory::GraphDocumentPtr document = m_graphEditor->createDocument();
-
     setupWidgets();
     setupActions();
     setupGUI(ToolBar | Keys | Save | Create);
@@ -432,7 +428,7 @@ void MainWindow::setActiveGraphDocument()
         return;
     }
     GraphDocumentPtr activeDocument = m_currentProject->activeGraphDocument();
-    m_visualEditor->layout()->addWidget(m_graphEditor->documents().first()->createView(this));
+    m_visualEditor->layout()->addWidget(activeDocument->createView(this));
 
     //TODO reenable after porting script engine
     // Update engine toolbar
@@ -463,8 +459,10 @@ void MainWindow::createNewProject()
     }
 
     _codeEditor->closeAllScripts();
-    m_currentProject->disconnect(this);
-    delete m_currentProject;
+    if (m_currentProject) {
+        m_currentProject->disconnect(this);
+        m_currentProject->deleteLater();
+    }
 
     m_currentProject = new Project(m_graphEditor);
     m_currentProject->addCodeDocument(_codeEditor->newScript());
@@ -722,7 +720,7 @@ void MainWindow::runToolPlugin()
 {
     QAction *action = qobject_cast<QAction *> (sender());
 
-    if (! action) {
+    if (!action) {
         return;
     }
     if (EditorPluginInterface *plugin =  m_graphEditorPluginManager.plugins().value(action->data().toInt())) {
