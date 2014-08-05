@@ -94,11 +94,3 @@ set_target_properties( rocsvisualeditor PROPERTIES VERSION ${GENERIC_LIB_VERSION
 
 install( TARGETS rocsvisualeditor  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES ${rocsvisualeditor_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel )
-
-################## INSTALLS ##########################
-
-install( FILES
-    Tools/RocsToolsPlugin.desktop
-    DESTINATION
-    ${SERVICETYPES_INSTALL_DIR}
-)
