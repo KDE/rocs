@@ -89,13 +89,33 @@ void NodeProperties::setData(NodePtr node)
     }
     ui->type->setCurrentIndex(ui->type->findData(QVariant(selectedType)));
 
-//     ui->_propertiesTable->setModel(model); //FIXME rewrite model
-//     ui->_propertiesTable->horizontalHeader()->setProperty("stretchLastSection", true);
+    // dynamic properties
+    ui->dynamicProperties->setColumnCount(2);
+    ui->dynamicProperties->setRowCount(node->dynamicProperties().count());
+    QTableWidgetItem *nameHeaderItem = new QTableWidgetItem(i18n("Name"));
+    QTableWidgetItem *valueHeaderItem = new QTableWidgetItem(i18n("Value"));
+    ui->dynamicProperties->setHorizontalHeaderItem(0, nameHeaderItem);
+    ui->dynamicProperties->setHorizontalHeaderItem(1, valueHeaderItem);
+    for (int i = 0; i < node->dynamicProperties().count(); ++i) {
+        QString propertyName = node->dynamicProperties().at(i);
+        QTableWidgetItem *nameItem = new QTableWidgetItem(propertyName);
+        nameItem->setFlags(Qt::NoItemFlags);
+        QTableWidgetItem *valueItem = new QTableWidgetItem(node->dynamicProperty(propertyName).toString());
+        ui->dynamicProperties->setItem(i, 0, nameItem);
+        ui->dynamicProperties->setItem(i, 1, valueItem);
+    }
+
+    ui->dynamicProperties->horizontalHeader()->setProperty("stretchLastSection", true);
 }
 
 void NodeProperties::apply()
 {
     m_node->setColor(ui->color->color());
     m_node->setType(m_node->document()->nodeTypes().at(ui->type->currentIndex()));
-    //TODO dynamic properties
+
+    for (int i = 0; i < ui->dynamicProperties->rowCount(); ++i) {
+        QString name = ui->dynamicProperties->item(i, 0)->data(Qt::DisplayRole).toString();
+        QVariant value =ui->dynamicProperties->item(i, 1)->data(Qt::DisplayRole);
+        m_node->setDynamicProperty(name, value);
+    }
 }
