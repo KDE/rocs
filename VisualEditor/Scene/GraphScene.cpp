@@ -28,7 +28,6 @@
 
 #include "DataItem.h"
 #include "PointerItem.h"
-#include "Interface/DataPropertiesWidget.h"
 #include "Interface/PointerPropertiesWidget.h"
 
 #include "Actions/AbstractAction.h"
@@ -196,11 +195,7 @@ void GraphScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if (mouseEvent->button() == Qt::LeftButton) {
         QGraphicsItem *i = itemAt(mouseEvent->scenePos(), QTransform());
-        if (DataItem *nItem = qgraphicsitem_cast<DataItem*>(i)) {
-            QPointer<DataPropertiesWidget> dialog = new DataPropertiesWidget(nItem->data());
-            dialog->setPosition(mouseEvent->screenPos());
-            dialog->exec();
-        } else if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)) {
+        if (PointerItem *eItem = qgraphicsitem_cast<PointerItem*>(i)) {
             QPointer<PointerPropertiesWidget> dialog = new PointerPropertiesWidget(eItem->pointer());
             dialog->setPosition(mouseEvent->screenPos());
             dialog->exec();

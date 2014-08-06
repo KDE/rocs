@@ -125,4 +125,3 @@ endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 ecm_optional_add_subdirectory(icons)
 # ecm_optional_add_subdirectory(doc) //FIXME port documentation
 install(FILES rocs.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
-

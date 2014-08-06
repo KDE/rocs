@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DataPropertiesWidget</class>
- <widget class="QWidget" name="DataPropertiesWidget">
+ <class>NodeProperties</class>
+ <widget class="QWidget" name="NodeProperties">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Data Properties</string>
+   <string>Node Properties</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="spacing">
@@ -33,22 +33,19 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QGroupBox" name="Appearance">
-     <property name="title">
-      <string>Static Properties</string>
-     </property>
+    <widget class="QWidget" name="Appearance" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="1" column="1">
-         <widget class="KColorCombo" name="_color">
+         <widget class="KColorCombo" name="color">
           <property name="toolTip">
            <string>Node color</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="labelColor">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
             <horstretch>0</horstretch>
@@ -64,13 +61,10 @@
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
-          <property name="buddy">
-           <cstring>_color</cstring>
-          </property>
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="labelType">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -85,9 +79,6 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-          <property name="buddy">
-           <cstring>_dataType</cstring>
           </property>
          </widget>
         </item>
@@ -110,7 +101,7 @@
             <number>0</number>
            </property>
            <item row="0" column="1">
-            <widget class="KComboBox" name="_dataType">
+            <widget class="QComboBox" name="type">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -119,27 +110,10 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
-            <widget class="QToolButton" name="_editType">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QFrame" name="extraItems">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>
@@ -153,7 +127,7 @@
       <item row="1" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QTableView" name="_propertiesTable"/>
+         <widget class="QTableView" name="propertiesTable"/>
         </item>
        </layout>
       </item>
@@ -167,11 +141,6 @@
    <class>KColorCombo</class>
    <extends>QComboBox</extends>
    <header>kcolorcombo.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

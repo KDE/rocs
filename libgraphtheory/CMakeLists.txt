@@ -33,6 +33,7 @@ set(graphtheory_SRCS
     nodetype.cpp
     editor.cpp
     view.cpp
+    dialogs/nodeproperties.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
     modifiers/valueassign.cpp
@@ -43,6 +44,10 @@ set(graphtheory_SRCS
     editorplugins/editorpluginmanager.cpp
     qtquickitems/nodeitem.cpp
     qtquickitems/edgeitem.cpp
+)
+
+qt5_wrap_ui(graphtheory_SRCS
+    dialogs/nodeproperties.ui
 )
 
 add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )

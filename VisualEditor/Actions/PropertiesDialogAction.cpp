@@ -20,7 +20,6 @@
 
 #include "PropertiesDialogAction.h"
 
-#include "Interface/DataPropertiesWidget.h"
 #include "Interface/DataTypePage.h"
 #include "Interface/PointerPropertiesWidget.h"
 #include "Interface/PointerTypePage.h"
@@ -98,17 +97,6 @@ PropertiesDialogAction::PropertiesDialogAction(QString text, PointerTypePtr poin
 void PropertiesDialogAction::showDialog()
 {
     switch (_dialogType) {
-    case DATA: {
-        if (!_data) {
-            return;
-        }
-        QPointer<DataPropertiesWidget> dialog = new DataPropertiesWidget(_data);
-        if (!_screenPosition.isNull()) {
-            dialog->setPosition(_screenPosition);
-        }
-        dialog->exec();
-        break;
-    }
     case POINTER: {
         if (!_pointer) {
             return;
