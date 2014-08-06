@@ -33,6 +33,8 @@ Item {
     signal createEdge(Node from, Node to);
     signal deleteNode(Node node);
     signal deleteEdge(Edge edge);
+    signal showNodePropertiesDialog(Node node);
+    signal showEdgePropertiesDialog(Edge edge);
 
     ExclusiveGroup {
         id: editToolButton
@@ -181,6 +183,7 @@ Item {
             Repeater {
                 model: edgeModel
                 EdgeItem {
+                    id: edgeItem
                     edge: model.dataRole
                     origin: scene.origin
 
@@ -199,12 +202,9 @@ Item {
                                 mouse.accepted = false
                             }
                         }
-                        onPressed: {
-                            if (deleteAction.checked) {
-                                mouse.accepted = true
-                            } else {
-                                mouse.accepted = false
-                            }
+                        onDoubleClicked: {
+                            console.log("FOO");
+                            showEdgePropertiesDialog(edgeItem.edge);
                         }
                     }
                 }
@@ -319,12 +319,18 @@ Item {
                         drag.target: { // only enable drag when move/select checked
                             selectMoveAction.checked ? parent : undefined
                         }
+                        Loader {
+                            id: nodeDialogLoader
+                        }
                         onClicked: {
                             if (deleteAction.checked) {
                                 deleteNode(nodeItem.node)
                             } else {
                                 mouse.accepted = false
                             }
+                        }
+                        onDoubleClicked: {
+                            showNodePropertiesDialog(nodeItem.node);
                         }
                         onPressed: {
                             if (!(deleteAction.checked || selectMoveAction.checked)) {

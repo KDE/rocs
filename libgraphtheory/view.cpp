@@ -26,6 +26,7 @@
 #include "models/edgemodel.h"
 #include "qtquickitems/nodeitem.h"
 #include "qtquickitems/edgeitem.h"
+#include "dialogs/nodeproperties.h"
 
 #include <KDeclarative/KDeclarative>
 
@@ -34,6 +35,7 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickWidget>
+#include <QPointer>
 #include <QStandardPaths>
 #include <QDebug>
 
@@ -103,6 +105,10 @@ View::View(QWidget *parent)
             this, SLOT(deleteNode(GraphTheory::Node*)));
     connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge*)),
             this, SLOT(deleteEdge(GraphTheory::Edge*)));
+    connect(topLevel, SIGNAL(showNodePropertiesDialog(GraphTheory::Node*)),
+            this, SLOT(showNodePropertiesDialog(GraphTheory::Node*)));
+    connect(topLevel, SIGNAL(showEdgePropertiesDialog(GraphTheory::Edge*)),
+            this, SLOT(showEdgePropertiesDialog(GraphTheory::Edge*)));
 
     // create widget
     setContent(path, component, topLevel);
@@ -157,4 +163,16 @@ void View::deleteEdge(GraphTheory::Edge *edge)
         return;
     }
     edge->destroy();
+}
+
+void View::showNodePropertiesDialog(Node *node)
+{
+    QPointer<NodeProperties> dialog = new NodeProperties();
+    dialog->setData(node->self());
+    dialog->exec();
+}
+
+void View::showEdgePropertiesDialog(Edge *edge)
+{
+    qDebug() << "SHOW EDGE DIALOG";
 }

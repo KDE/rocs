@@ -25,6 +25,7 @@
 #include "typenames.h"
 #include "editor.h"
 #include "graphdocument.h"
+#include "edge.h"
 #include "node.h"
 #include "edgetype.h"
 #include "nodetype.h"
@@ -57,6 +58,8 @@ private Q_SLOTS:
     void createEdge(GraphTheory::Node *from, GraphTheory::Node *to);
     void deleteNode(GraphTheory::Node *node);
     void deleteEdge(GraphTheory::Edge *edge);
+    void showNodePropertiesDialog(GraphTheory::Node *node);
+    void showEdgePropertiesDialog(GraphTheory::Edge *edge);
 
 Q_SIGNALS:
 
