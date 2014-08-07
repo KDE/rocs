@@ -203,7 +203,6 @@ Item {
                             }
                         }
                         onDoubleClicked: {
-                            console.log("FOO");
                             showEdgePropertiesDialog(edgeItem.edge);
                         }
                     }

@@ -27,6 +27,7 @@
 #include "qtquickitems/nodeitem.h"
 #include "qtquickitems/edgeitem.h"
 #include "dialogs/nodeproperties.h"
+#include "dialogs/edgeproperties.h"
 
 #include <KDeclarative/KDeclarative>
 
@@ -174,5 +175,7 @@ void View::showNodePropertiesDialog(Node *node)
 
 void View::showEdgePropertiesDialog(Edge *edge)
 {
-    qDebug() << "SHOW EDGE DIALOG";
+    QPointer<EdgeProperties> dialog = new EdgeProperties();
+    dialog->setData(edge->self());
+    dialog->exec();
 }
