@@ -18,8 +18,6 @@
 
 #include "ConfigureDefaultProperties.h"
 #include <settings.h>
-#include "GraphVisualEditor.h"
-#include "Scene/GraphicsLayout.h"
 
 #include "ui_ConfigureDefaultProperties.h"
 
@@ -58,9 +56,6 @@ void ConfigureDefaultProperties::saveConfig()
     Settings::setDataEdgeDisplay(_displayPositionEdge);
     Settings::setExecutionModeDebugVisible(_executionModeDebugVisible);
     Settings::setExecutionModeOneStepVisible(_executionModeOneStepVisible);
-
-    GraphicsLayout::self()->setViewStyleDataNode(_displayPositionNode);
-    GraphicsLayout::self()->setViewStyleDataEdge(_displayPositionEdge);
 
     emit showExecuteModeDebugChanged(_executionModeDebugVisible);
     emit showExecuteModeOneStepChanged(_executionModeOneStepVisible);

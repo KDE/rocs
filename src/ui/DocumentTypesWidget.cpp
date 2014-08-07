@@ -25,10 +25,7 @@
 #include "DataType.h"
 #include "Pointer.h"
 #include "PointerType.h"
-#include "Scene/DataItem.h"
-#include "Scene/PointerItem.h"
 #include "DocumentManager.h"
-#include "Actions/PropertiesDialogAction.h"
 
 #include <KLocalizedString>
 #include <QDebug>
@@ -145,11 +142,12 @@ bool DocumentTypesWidget::createDataTypeInformationWidget(int typeIdentifier, Do
     QPushButton* dataTypeButton = new QPushButton(this);
     dataTypeButton->setFlat(true);
     dataTypeButton->setStyleSheet("text-align: left");
-    QAction* dataAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataType, dataPropertyWidget);
-    dataTypeButton->addAction(dataAction);
+    //FIXME add new functionality
+//     QAction* dataAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), dataType, dataPropertyWidget);
+//     dataTypeButton->addAction(dataAction);
     dataTypeButton->setIcon(dataType->icon());
     dataTypeButton->setText(dataType->name());
-    connect(dataTypeButton, SIGNAL(pressed()), dataAction, SLOT(trigger()));
+//     connect(dataTypeButton, SIGNAL(pressed()), dataAction, SLOT(trigger()));
 
 
     QPushButton* dataTypeVisible = new QPushButton(this);
@@ -189,8 +187,9 @@ bool DocumentTypesWidget::createPointerTypeInformationWidget(int typeIdentifier,
     pointerTypeButton->setText(pointerType->name());
     pointerTypeButton->setFlat(true);
     pointerTypeButton->setStyleSheet("text-align: left");
-    QAction* pointerAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget);
-    connect(pointerTypeButton, SIGNAL(pressed()), pointerAction, SLOT(trigger()));
+    //FIXME add functionality
+//     QAction* pointerAction = new PropertiesDialogAction(i18nc("@action:inmenu", "Properties"), pointerType, pointerPropertyWidget);
+//     connect(pointerTypeButton, SIGNAL(pressed()), pointerAction, SLOT(trigger()));
 
     QPushButton* pointerTypeVisible = new QPushButton(this);
     pointerTypeVisible->setIcon(QIcon::fromTheme("rocseyeblack"));

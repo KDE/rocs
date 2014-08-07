@@ -113,7 +113,6 @@ add_feature_info(ExperimentalPlugins
 
 # main includes
 ecm_optional_add_subdirectory(RocsCore)
-ecm_optional_add_subdirectory(VisualEditor)
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)
 
