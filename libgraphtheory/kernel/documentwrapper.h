@@ -18,8 +18,8 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KERNEL_H
-#define KERNEL_H
+#ifndef DOCUMENTWRAPPER_H
+#define DOCUMENTWRAPPER_H
 
 #include "libgraphtheoryexport.h"
 #include "typenames.h"
@@ -32,36 +32,27 @@
 
 namespace GraphTheory
 {
-class KernelPrivate;
+class DocumentWrapperPrivate;
 
 /**
- * \class Kernel
+ * \class DocumentWrapper
+ * Wraps DocumentPtr to be accessible via QtScript.
  */
-class GRAPHTHEORY_EXPORT Kernel : public QObject
+class DocumentWrapper : public QObject
 {
     Q_OBJECT
 
 public:
-    enum MessageType {
-        InfoMessage,
-        WarningMessage,
-        ErrorMessage
-    };
-
-    Kernel();
-
-    virtual ~Kernel();
-
-public Q_SLOTS:
-    void processMessage(const QString &message, MessageType type);
-    void execute(GraphTheory::GraphDocumentPtr document, const QString &script);
+    DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
+    virtual ~DocumentWrapper();
+    QScriptValue nodes() const;
 
 Q_SIGNALS:
-    void message(const QString &message);
-    void executionFinished();
 
 private:
-    const QScopedPointer<KernelPrivate> d;
+    Q_DISABLE_COPY(DocumentWrapper)
+    const GraphDocumentPtr m_document;
+    QScriptEngine *m_engine;
 };
 }
 

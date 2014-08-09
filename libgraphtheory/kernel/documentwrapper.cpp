@@ -18,51 +18,33 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KERNEL_H
-#define KERNEL_H
-
-#include "libgraphtheoryexport.h"
-#include "typenames.h"
-#include "node.h"
+#include "documentwrapper.h"
 #include "graphdocument.h"
+#include "nodetype.h"
+#include "edge.h"
 
-#include <QtScript>
-#include <QObject>
-#include <QColor>
+#include <QDebug>
 
-namespace GraphTheory
+using namespace GraphTheory;
+
+DocumentWrapper::DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine)
+    : m_document(document)
+    , m_engine(engine)
 {
-class KernelPrivate;
 
-/**
- * \class Kernel
- */
-class GRAPHTHEORY_EXPORT Kernel : public QObject
-{
-    Q_OBJECT
-
-public:
-    enum MessageType {
-        InfoMessage,
-        WarningMessage,
-        ErrorMessage
-    };
-
-    Kernel();
-
-    virtual ~Kernel();
-
-public Q_SLOTS:
-    void processMessage(const QString &message, MessageType type);
-    void execute(GraphTheory::GraphDocumentPtr document, const QString &script);
-
-Q_SIGNALS:
-    void message(const QString &message);
-    void executionFinished();
-
-private:
-    const QScopedPointer<KernelPrivate> d;
-};
 }
 
-#endif
+DocumentWrapper::~DocumentWrapper()
+{
+
+}
+
+QScriptValue DocumentWrapper::nodes() const
+{
+    QScriptValue array = m_engine->newArray();
+    foreach(NodePtr node, m_document->nodes()) {
+        array.property("push").call(array, QScriptValueList() << m_engine->newQObject(node.data()));
+    }
+    return array;
+}
+

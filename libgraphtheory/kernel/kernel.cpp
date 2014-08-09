@@ -20,8 +20,7 @@
 
 #include "kernel.h"
 #include "graphdocument.h"
-#include "nodetype.h"
-#include "edge.h"
+#include "documentwrapper.h"
 
 #include <KLocalizedString>
 #include <QPointF>
@@ -33,6 +32,7 @@ using namespace GraphTheory;
 class GraphTheory::KernelPrivate {
 public:
     KernelPrivate()
+        : m_engine(0)
     {
     }
 
@@ -42,7 +42,6 @@ public:
 
     QScriptValue registerGlobalObject(QObject *qobject, const QString &name);
 
-    QString m_script;
     QScriptEngine *m_engine;
 };
 
@@ -75,7 +74,7 @@ void Kernel::processMessage(const QString &message, MessageType type)
     //TODO do something with the messages
 }
 
-void Kernel::execute()
+void Kernel::execute(GraphDocumentPtr document, const QString &script)
 {
     if (!d->m_engine) {
         d->m_engine = new QScriptEngine(this);
@@ -87,14 +86,15 @@ void Kernel::execute()
     d->m_engine->collectGarbage();
     d->m_engine->pushContext();
 
-    // add elements
-
+    // add document
+    DocumentWrapper *documentWrapper = new DocumentWrapper(document, d->m_engine);
+    d->m_engine->globalObject().setProperty("Document", d->m_engine->newQObject(documentWrapper));
 
     //TODO setup plugins
 
     d->m_engine->setProcessEventsInterval(100); //! TODO: Make that changeable.
 
-    QString result = d->m_engine->evaluate(d->m_script).toString();
+    QString result = d->m_engine->evaluate(script).toString();
     if (d->m_engine && d->m_engine->hasUncaughtException()) {
         processMessage(result, WarningMessage);
         processMessage(d->m_engine->uncaughtExceptionBacktrace().join("\n"), InfoMessage);
@@ -105,6 +105,8 @@ void Kernel::execute()
         d->m_engine->popContext();
     }
     emit executionFinished();
+
+    documentWrapper->deleteLater();
 }
 
 //END: Kernel
