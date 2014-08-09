@@ -68,8 +68,6 @@ find_package(Boost "1.43" REQUIRED)
 set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
 # find_package(Grantlee REQUIRED) #FIXME deactivate for now
 
-# message(${Qt5Script_INCLUDES})
-
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}
@@ -85,31 +83,6 @@ remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_KEYWORDS)
 # revisit if still needed to build boost
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
-
-# Rocs include dirs
-set(ROCSCORE_INCLUDES
-    "${CMAKE_CURRENT_SOURCE_DIR}/RocsCore/"
-    "${CMAKE_CURRENT_SOURCE_DIR}/RocsCore/LoadSave/"
-)
-
-set(ROCSVISUALEDITOR_INCLUDES
-    "${CMAKE_CURRENT_SOURCE_DIR}/VisualEditor/"
-)
-
-# allow disabling building of optional graph file backends
-option(ROCS_BUILD_LOADSAVE "ROCS_BUILD_LOADSAVE" ON)
-add_feature_info(OptionalGraphFiles
-    ROCS_BUILD_LOADSAVE
-    "Building of extra graph file plugins"
-)
-
-# enable or disable experimental plugins
-# experimental plugins are (by definition) not suited for release builds
-option(ROCS_EXPERIMENTAL_PLUGINS "ROCS_EXPERIMENTAL_PLUGINS" OFF)
-add_feature_info(ExperimentalPlugins
-    ROCS_EXPERIMENTAL_PLUGINS
-    "Building experimental/unstable plugins."
-)
 
 # main includes
 ecm_optional_add_subdirectory(RocsCore)
