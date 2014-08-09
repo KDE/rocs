@@ -87,6 +87,9 @@ void Kernel::execute()
     d->m_engine->collectGarbage();
     d->m_engine->pushContext();
 
+    // add elements
+
+
     //TODO setup plugins
 
     d->m_engine->setProcessEventsInterval(100); //! TODO: Make that changeable.

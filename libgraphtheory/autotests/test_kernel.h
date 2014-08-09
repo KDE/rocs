@@ -18,51 +18,28 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KERNEL_H
-#define KERNEL_H
+#ifndef TEST_KERNEL_H
+#define TEST_KERNEL_H
 
-#include "libgraphtheoryexport.h"
-#include "typenames.h"
-#include "node.h"
-#include "graphdocument.h"
-
-#include <QtScript>
 #include <QObject>
-#include <QColor>
 
 namespace GraphTheory
 {
-class KernelPrivate;
+class GraphDocument;
+class Node;
+class Edge;
+}
 
-/**
- * \class Kernel
- */
-class GRAPHTHEORY_EXPORT Kernel : public QObject
+using namespace GraphTheory;
+
+class TestKernel : public QObject
 {
     Q_OBJECT
 
-public:
-    enum MessageType {
-        InfoMessage,
-        WarningMessage,
-        ErrorMessage
-    };
-
-    Kernel();
-
-    virtual ~Kernel();
-
-public Q_SLOTS:
-    void processMessage(const QString &message, MessageType type);
-    void execute();
-
-Q_SIGNALS:
-    void message(const QString &message);
-    void executionFinished();
-
-private:
-    const QScopedPointer<KernelPrivate> d;
+private Q_SLOTS:
+    void initTestCase();
+    void cleanupTestCase();
+    void engineSetup();
 };
-}
 
 #endif

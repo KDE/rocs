@@ -43,4 +43,5 @@ endmacro()
 
 graphtheory_unit_tests(
    basic
+   test_kernel
 )
