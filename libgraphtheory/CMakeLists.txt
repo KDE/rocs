@@ -35,6 +35,7 @@ set(graphtheory_SRCS
     view.cpp
     dialogs/nodeproperties.cpp
     dialogs/edgeproperties.cpp
+    kernel/nodewrapper.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
     modifiers/valueassign.cpp
@@ -59,6 +60,7 @@ target_link_libraries(rocsgraphtheory
         Qt5::Core
         Qt5::Quick
         Qt5::QuickWidgets
+        Qt5::Script
         KF5::I18n
         KF5::Declarative
         KF5::XmlGui
@@ -83,6 +85,7 @@ install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COM
 
 ecm_optional_add_subdirectory(fileformats)
 ecm_optional_add_subdirectory(editorplugins)
+ecm_optional_add_subdirectory(kernel)
 ecm_optional_add_subdirectory(modifiers)
 ecm_optional_add_subdirectory(qml)
 ecm_optional_add_subdirectory(autotests)
