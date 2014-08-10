@@ -33,6 +33,7 @@
 namespace GraphTheory
 {
 class DocumentWrapperPrivate;
+class NodeWrapper;
 
 /**
  * \class DocumentWrapper
@@ -45,7 +46,7 @@ class DocumentWrapper : public QObject
 public:
     DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
     virtual ~DocumentWrapper();
-    QScriptValue nodes() const;
+    QScriptValue nodes();
 
 Q_SIGNALS:
 
@@ -53,6 +54,7 @@ private:
     Q_DISABLE_COPY(DocumentWrapper)
     const GraphDocumentPtr m_document;
     QScriptEngine *m_engine;
+    QMap<NodePtr, NodeWrapper*> m_nodeMap;
 };
 }
 

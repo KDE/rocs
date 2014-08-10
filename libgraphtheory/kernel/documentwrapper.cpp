@@ -19,6 +19,7 @@
  */
 
 #include "documentwrapper.h"
+#include "nodewrapper.h"
 #include "graphdocument.h"
 #include "nodetype.h"
 #include "edge.h"
@@ -39,12 +40,17 @@ DocumentWrapper::~DocumentWrapper()
 
 }
 
-QScriptValue DocumentWrapper::nodes() const
+QScriptValue DocumentWrapper::nodes()
 {
     QScriptValue array = m_engine->newArray();
     foreach(NodePtr node, m_document->nodes()) {
-        array.property("push").call(array, QScriptValueList() << m_engine->newQObject(node.data()));
+        if (m_nodeMap.contains(node)) {
+            array.property("push").call(array, m_engine->newQObject(m_nodeMap.value(node)));
+        } else {
+            NodeWrapper *wrapper = new NodeWrapper(node);
+            m_nodeMap.insert(node, wrapper);
+            array.property("push").call(array, m_engine->newQObject(wrapper));
+        }
     }
     return array;
 }
-
