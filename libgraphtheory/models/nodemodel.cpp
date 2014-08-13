@@ -107,8 +107,8 @@ QVariant NodeModel::data(const QModelIndex &index, int role) const
 
     switch(role)
     {
-//     case IdRole: //TODO ids are not implemented yet
-//         return node->id();
+    case IdRole:
+        return node->id();
     case DataRole:
         return QVariant::fromValue<QObject*>(node.data());
     default:
