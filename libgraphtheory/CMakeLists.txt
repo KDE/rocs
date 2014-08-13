@@ -42,6 +42,7 @@ set(graphtheory_SRCS
     kernel/modules/console/consolemodule.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
+    models/nodetypemodel.cpp
     modifiers/valueassign.cpp
     modifiers/topology.cpp
     fileformats/fileformatinterface.cpp

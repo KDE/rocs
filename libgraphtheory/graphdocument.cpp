@@ -192,7 +192,9 @@ void GraphDocument::insert(NodeTypePtr type)
     if (d->m_nodeTypes.contains(type)) {
         return;
     }
+    emit nodeTypeAboutToBeAdded(type, d->m_nodes.length());
     d->m_nodeTypes.append(type);
+    emit nodeTypeAdded();
 }
 
 void GraphDocument::insert(EdgeTypePtr type)
@@ -240,7 +242,10 @@ void GraphDocument::remove(NodeTypePtr type)
     if (type->isValid()) {
         type->destroy();
     }
+    int index = d->m_nodeTypes.indexOf(type);
+    emit nodeTypesAboutToBeRemoved(index, index);
     d->m_nodeTypes.removeOne(type);
+    emit nodeTypesRemoved();
 }
 
 void GraphDocument::remove(EdgeTypePtr type)
