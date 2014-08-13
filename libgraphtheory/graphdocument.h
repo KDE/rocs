@@ -187,6 +187,10 @@ Q_SIGNALS:
     void nodeTypeAdded();
     void nodeTypesAboutToBeRemoved(int,int);
     void nodeTypesRemoved();
+    void edgeTypeAboutToBeAdded(EdgeTypePtr,int);
+    void edgeTypeAdded();
+    void edgeTypesAboutToBeRemoved(int,int);
+    void edgeTypesRemoved();
 
   /*
    * General document related properties

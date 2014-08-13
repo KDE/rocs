@@ -192,7 +192,7 @@ void GraphDocument::insert(NodeTypePtr type)
     if (d->m_nodeTypes.contains(type)) {
         return;
     }
-    emit nodeTypeAboutToBeAdded(type, d->m_nodes.length());
+    emit nodeTypeAboutToBeAdded(type, d->m_nodeTypes.length());
     d->m_nodeTypes.append(type);
     emit nodeTypeAdded();
 }
@@ -203,7 +203,9 @@ void GraphDocument::insert(EdgeTypePtr type)
     if (d->m_edgeTypes.contains(type)) {
         return;
     }
+    emit edgeTypeAboutToBeAdded(type, d->m_edgeTypes.length());
     d->m_edgeTypes.append(type);
+    emit edgeTypeAdded();
 }
 
 void GraphDocument::remove(NodePtr node)
@@ -256,7 +258,10 @@ void GraphDocument::remove(EdgeTypePtr type)
     if (type->isValid()) {
         type->destroy();
     }
+    int index = d->m_edgeTypes.indexOf(type);
+    emit edgeTypesAboutToBeRemoved(index, index);
     d->m_edgeTypes.removeOne(type);
+    emit edgeTypesRemoved();
 }
 
 QList< EdgeTypePtr > GraphDocument::edgeTypes() const
