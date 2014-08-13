@@ -25,6 +25,7 @@
 #include "typenames.h"
 #include "node.h"
 #include "graphdocument.h"
+#include "documentwrapper.h"
 
 #include <QtScript>
 #include <QObject>
@@ -48,7 +49,7 @@ class NodeWrapper : public QObject
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 
 public:
-    NodeWrapper(NodePtr node);
+    NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper);
 
     virtual ~NodeWrapper();
 
@@ -102,6 +103,7 @@ Q_SIGNALS:
 private:
     Q_DISABLE_COPY(NodeWrapper)
     const NodePtr m_node;
+    const DocumentWrapper *m_documentWrapper;
 };
 }
 

@@ -29,8 +29,9 @@
 
 using namespace GraphTheory;
 
-NodeWrapper::NodeWrapper(NodePtr node)
+NodeWrapper::NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper)
     : m_node(node)
+    , m_documentWrapper(documentWrapper)
 {
     connect(m_node.data(), SIGNAL(colorChanged(QColor)), this, SIGNAL(colorChanged(QColor)));
     connect(m_node.data(), SIGNAL(positionChanged(QPointF)), this, SIGNAL(positionChanged(QPointF)));

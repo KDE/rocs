@@ -47,7 +47,7 @@ QScriptValue DocumentWrapper::nodes()
         if (m_nodeMap.contains(node)) {
             array.property("push").call(array, m_engine->newQObject(m_nodeMap.value(node)));
         } else {
-            NodeWrapper *wrapper = new NodeWrapper(node);
+            NodeWrapper *wrapper = new NodeWrapper(node, this);
             m_nodeMap.insert(node, wrapper);
             array.property("push").call(array, m_engine->newQObject(wrapper));
         }
