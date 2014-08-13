@@ -22,6 +22,7 @@ project(rocs)
 cmake_minimum_required(VERSION 2.8.11)
 
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
+find_package(KF5DocTools)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 include(ECMAddTests)
 include(ECMInstallIcons)
@@ -88,12 +89,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 ecm_optional_add_subdirectory(RocsCore)
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)
+ecm_optional_add_subdirectory(icons)
+ecm_optional_add_subdirectory(doc)
 
 # feature log
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     feature_summary(WHAT ALL)
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
-ecm_optional_add_subdirectory(icons)
-# ecm_optional_add_subdirectory(doc) //FIXME port documentation
 install(FILES rocs.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
