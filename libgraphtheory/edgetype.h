@@ -38,6 +38,7 @@ class EdgeTypePrivate;
 class GRAPHTHEORY_EXPORT EdgeType : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
 
 public:
     enum Direction {
@@ -110,6 +111,17 @@ public:
     QString name() const;
 
     /**
+     * If the id value is invalid, -1 is returned.
+     *
+     * @return edge type identifier
+     */
+    int id() const;
+
+    /**
+     * set id of edge type to @c id
+     */
+    void setId(int id);
+    /**
      * Debug method that tracks how many edge objects exist.
      *
      * @return number of edge type objects
@@ -121,6 +133,7 @@ public:
 
 Q_SIGNALS:
     void directionChanged(EdgeType::Direction direction);
+    void idChanged(int id);
     void dynamicPropertyAdded(const QString &property);
     void dynamicPropertyRemoved(const QString &property);
     void nameChanged(const QString &name);

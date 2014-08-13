@@ -29,7 +29,8 @@ uint EdgeType::objectCounter = 0;
 class GraphTheory::EdgeTypePrivate {
 public:
     EdgeTypePrivate()
-        : m_direction(EdgeType::Unidirectional)
+        : m_id(-1)
+        , m_direction(EdgeType::Unidirectional)
         , m_name(QString())
         , m_valid(false)
     {
@@ -41,6 +42,7 @@ public:
 
     EdgeTypePtr q;
     GraphDocumentPtr m_document;
+    int m_id;
     QStringList m_dynamicProperties;
     EdgeType::Direction m_direction;
     QString m_name;
@@ -92,6 +94,20 @@ void EdgeType::setName(const QString& name)
 QString EdgeType::name() const
 {
     return d->m_name;
+}
+
+int EdgeType::id() const
+{
+    return d->m_id;
+}
+
+void EdgeType::setId(int id)
+{
+    if (id == d->m_id) {
+        return;
+    }
+    d->m_id = id;
+    emit idChanged(id);
 }
 
 bool EdgeType::isValid() const

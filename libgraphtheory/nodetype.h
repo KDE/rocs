@@ -39,6 +39,7 @@ class NodeTypePrivate;
 class GRAPHTHEORY_EXPORT NodeType : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
 
 public:
     /**
@@ -76,6 +77,18 @@ public:
     QString name() const;
 
     /**
+     * If the id value is invalid, -1 is returned.
+     *
+     * @return node type identifier
+     */
+    int id() const;
+
+    /**
+     * set id of node type to @c id
+     */
+    void setId(int id);
+
+    /**
      * @return dynamic properties registered for this node type
      */
     QStringList dynamicProperties() const;
@@ -104,6 +117,7 @@ public:
 
 Q_SIGNALS:
     void nameChanged(const QString &name);
+    void idChanged(int id);
     void dynamicPropertyAdded(const QString &property);
     void dynamicPropertyRemoved(const QString &property);
 

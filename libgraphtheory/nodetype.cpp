@@ -29,7 +29,8 @@ uint NodeType::objectCounter = 0;
 class GraphTheory::NodeTypePrivate {
 public:
     NodeTypePrivate()
-        : m_name(QString())
+        : m_id(-1)
+        , m_name(QString())
         , m_valid(false)
     {
     }
@@ -39,6 +40,7 @@ public:
     }
 
     NodeTypePtr q;
+    int m_id;
     GraphDocumentPtr m_document;
     QStringList m_dynamicProperties;
     QString m_name;
@@ -95,6 +97,20 @@ void NodeType::setName(const QString& name)
 QString NodeType::name() const
 {
     return d->m_name;
+}
+
+int NodeType::id() const
+{
+    return d->m_id;
+}
+
+void NodeType::setId(int id)
+{
+    if (id == d->m_id) {
+        return;
+    }
+    d->m_id = id;
+    emit idChanged(id);
 }
 
 QStringList NodeType::dynamicProperties() const
