@@ -18,13 +18,12 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DOCUMENTWRAPPER_H
-#define DOCUMENTWRAPPER_H
+#ifndef EDGEWRAPPER_H
+#define EDGEWRAPPER_H
 
 #include "libgraphtheoryexport.h"
 #include "typenames.h"
 #include "node.h"
-#include "edge.h"
 #include "graphdocument.h"
 
 #include <QtScript>
@@ -33,32 +32,43 @@
 
 namespace GraphTheory
 {
-class DocumentWrapperPrivate;
-class NodeWrapper;
-class EdgeWrapper;
+class EdgeWrapperPrivate;
+class DocumentWrapper;
 
 /**
- * \class DocumentWrapper
- * Wraps DocumentPtr to be accessible via QtScript.
+ * \class EdgeWrapper
+ * Wraps EdgePtr to be accessible via QtScript. All properties of the node object are available
+ * as commong QObject properties.
  */
-class DocumentWrapper : public QObject
+class EdgeWrapper : public QObject
 {
     Q_OBJECT
 
 public:
-    DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
-    virtual ~DocumentWrapper();
-    QScriptValue nodes();
-    QScriptValue edges();
+    EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper);
+
+    virtual ~EdgeWrapper();
+
+    /**
+     * If the id value is invalid, -1 is returned.
+     *
+     * @return node identifier
+     */
+    int id() const;
+
+    /** reimplemented from QObject **/
+    virtual bool event(QEvent* e);
+
+public Q_SLOTS:
+    void updateDynamicProperties();
 
 Q_SIGNALS:
+    void colorChanged(const QColor &color);
 
 private:
-    Q_DISABLE_COPY(DocumentWrapper)
-    const GraphDocumentPtr m_document;
-    QScriptEngine *m_engine;
-    QMap<NodePtr, NodeWrapper*> m_nodeMap;
-    QMap<EdgePtr, EdgeWrapper*> m_edgeMap;
+    Q_DISABLE_COPY(EdgeWrapper)
+    const EdgePtr m_edge;
+    const DocumentWrapper *m_documentWrapper;
 };
 }
 
