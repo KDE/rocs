@@ -37,7 +37,7 @@ set( rocs_core_SRCS
 
     IncludeManager.cpp
 
-    EngineModules/Console/ConsoleModule.cpp
+#     EngineModules/Console/ConsoleModule.cpp
 )
 
 add_library( rocscore SHARED ${rocs_core_SRCS} )
@@ -68,8 +68,6 @@ set(rocscore_LIB_HDRS
     DataStructureBackendInterface.h
     DataStructureBackendManager.h
     Modifiers/Topology.h
-
-    EngineModules/Console/ConsoleModule.h
 )
 
 set_target_properties(

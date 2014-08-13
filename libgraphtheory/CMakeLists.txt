@@ -39,6 +39,7 @@ set(graphtheory_SRCS
     kernel/nodewrapper.cpp
     kernel/edgewrapper.cpp
     kernel/kernel.cpp
+    kernel/modules/console/consolemodule.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
     modifiers/valueassign.cpp

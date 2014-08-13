@@ -1,6 +1,6 @@
 /*
     This file is part of Rocs.
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cola@uni-paderborn.de>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -18,15 +18,16 @@
 
 #include "ScriptOutputWidget.h"
 #include "DocumentManager.h"
-#include "EngineModules/Console/ConsoleModule.h"
 #include <QWidget>
 #include <QtScriptBackend.h>
 #include <QDebug>
 #include <QIcon>
 
+using namespace GraphTheory;
+
 ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     : QWidget(parent),
-    _console(0)
+    m_console(0)
 {
     ui = new Ui::ScriptOutputWidget;
     ui->setupUi(this);
@@ -43,16 +44,16 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
 
 void ScriptOutputWidget::unsetConsoleInterface()
 {
-    if (_console) {
-        _console->disconnect(this);
+    if (m_console) {
+        m_console->disconnect(this);
     }
-    _console = 0;
+    m_console = 0;
 }
 
 void ScriptOutputWidget::setConsoleInterface(ConsoleModule* console)
 {
     unsetConsoleInterface();
-    _console = console;
+    m_console = console;
 
     connect(console, SIGNAL(backlogChanged(ConsoleModule::MessageType,QString)),
             this, SLOT(appendOutput(ConsoleModule::MessageType,QString)));
@@ -60,7 +61,7 @@ void ScriptOutputWidget::setConsoleInterface(ConsoleModule* console)
 
 ConsoleModule * ScriptOutputWidget::consoleInterface() const
 {
-    return _console;
+    return m_console;
 }
 
 void ScriptOutputWidget::updateFixOutputButton()
