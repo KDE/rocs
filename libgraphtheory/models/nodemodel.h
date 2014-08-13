@@ -18,7 +18,7 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NODEEMODEL_H
+#ifndef NODEMODEL_H
 #define NODEMODEL_H
 
 #include "libgraphtheoryexport.h"
