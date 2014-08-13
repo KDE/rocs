@@ -23,12 +23,14 @@ cmake_minimum_required(VERSION 2.8.11)
 
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 find_package(KF5DocTools)
+find_package(Boost "1.43" REQUIRED)
+# find_package(Grantlee REQUIRED) #FIXME deactivate for now
+
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 include(ECMAddTests)
 include(ECMInstallIcons)
 include(ECMOptionalAddSubdirectory)
 include(ECMSetupVersion)
-
 include(KDEInstallDirs)
 include(KDECompilerSettings)
 include(KDECMakeSettings)
@@ -61,19 +63,10 @@ find_package(KF5 CONFIG REQUIRED COMPONENTS
   Service
 )
 
-#### Boost ####
-# In CMake >= 2.8.6, FindBoost.cmake tries to find BoostConfig.cmake which is
-# not compatible with CMake's FindBoost. Disable this function.
-set(Boost_NO_BOOST_CMAKE TRUE)
-find_package(Boost "1.43" REQUIRED)
-set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
-# find_package(Grantlee REQUIRED) #FIXME deactivate for now
-
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}
-    ${CMAKE_INSTALL_PREFIX}/include/KDE #FIXME
     ${Boost_INCLUDE_DIRS}
 #     ${Grantlee_INCLUDE_DIRS}
 )
@@ -82,19 +75,13 @@ remove_definitions(-DQT_NO_CAST_TO_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_KEYWORDS)
-# revisit if still needed to build boost
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 
-# main includes
-ecm_optional_add_subdirectory(RocsCore)
 ecm_optional_add_subdirectory(libgraphtheory)
 ecm_optional_add_subdirectory(src)
 ecm_optional_add_subdirectory(icons)
 ecm_optional_add_subdirectory(doc)
 
-# feature log
-if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
-    feature_summary(WHAT ALL)
-endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
+set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
+feature_summary(WHAT ALL)
 
 install(FILES rocs.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
