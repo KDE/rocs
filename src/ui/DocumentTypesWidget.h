@@ -2,7 +2,7 @@
     This file is part of Rocs,
     Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
     Copyright 2008       Ugo Sangiori <ugorox@gmail.com>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -21,12 +21,9 @@
 #ifndef DOCUMENTTYPESWIDGET_H
 #define DOCUMENTTYPESWIDGET_H
 
-#include "CoreTypes.h"
+#include "typenames.h"
 #include "ui_DocumentTypesWidget.h"
 
-class Document;
-class Data;
-class Pointer;
 class KColorCombo;
 class QToolButton;
 class QPushButton;
@@ -76,15 +73,15 @@ private slots:
     void updatePointerTypeButtons();
 
 private:
-    bool createDataTypeInformationWidget(int typeIdentifier, Document* document);
-    bool createPointerTypeInformationWidget(int typeIdentifier, Document* document);
+    bool createDataTypeInformationWidget(int typeIdentifier, GraphTheory::GraphDocumentPtr document);
+    bool createPointerTypeInformationWidget(int typeIdentifier, GraphTheory::GraphDocumentPtr document);
 
     KColorCombo* _pointerTypeColor;
     QMap<int, QWidget*> _dataTypeWidgets;
     QMap<int, QPushButton*> _dataTypeButtons;
     QMap<int, QPushButton*> _pointerTypeButtons;
     QMap<int, QWidget*> _pointerTypeWidgets;
-    Document* _document;
+    GraphTheory::GraphDocumentPtr m_document;
 
     Ui::DocumentTypesWidget *ui;
 };

@@ -30,7 +30,12 @@ set(dotformat_SRCS
 add_library(dotfileformat MODULE ${dotformat_SRCS})
 
 target_link_libraries(dotfileformat
-    rocscore
+    PUBLIC
+        Qt5::Core
+        Qt5::Gui
+        KF5::I18n
+        KF5::Service
+        rocsgraphtheory
 )
 
 kservice_desktop_to_json(dotfileformat dotfileformat.desktop)

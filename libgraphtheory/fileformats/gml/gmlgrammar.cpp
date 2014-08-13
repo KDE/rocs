@@ -20,7 +20,6 @@
 #include "gmlgrammar.h"
 
 #include "gmlgrammarhelper.h"
-#include "Document.h"
 
 #include <QDebug>
 
@@ -40,10 +39,6 @@ namespace GmlParser
 GmlGrammarHelper *phelper = 0;
 std::string lastKey = "";
 QObject * lastInserted = 0;
-DataStructurePtr actualdataType;
-DataPtr actualNode;
-PointerPtr actualEdge;
-Document *document = 0;
 
 void beginList()
 {

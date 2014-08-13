@@ -28,7 +28,12 @@ set(rocs1format_SRCS
 add_library(rocs1fileformat MODULE ${rocs1format_SRCS})
 
 target_link_libraries(rocs1fileformat
-    rocsgraphtheory
+    PUBLIC
+        Qt5::Core
+        Qt5::Gui
+        KF5::I18n
+        KF5::Service
+        rocsgraphtheory
 )
 
 kservice_desktop_to_json(rocs1fileformat rocs1fileformat.desktop)

@@ -41,6 +41,7 @@
 #include <QActionGroup>
 #include <QFileDialog>
 #include <QQuickWidget>
+#include <QPointer>
 
 #include <KActionCollection>
 #include <KRecentFilesAction>
@@ -65,10 +66,8 @@
 #include "ui/DocumentationWidget.h"
 #include "plugins/ApiDoc/ApiDocWidget.h"
 #include "project/project.h"
-#include "QtScriptBackend.h"
 #include "IncludeManagerSettings.h"
 #include "ConfigureDefaultProperties.h"
-#include "IncludeManager.h"
 #include "ImporterExporterManager.h"
 #include "libgraphtheory/editorplugins/editorpluginmanager.h"
 

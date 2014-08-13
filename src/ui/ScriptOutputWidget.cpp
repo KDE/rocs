@@ -17,9 +17,7 @@
 */
 
 #include "ScriptOutputWidget.h"
-#include "DocumentManager.h"
 #include <QWidget>
-#include <QtScriptBackend.h>
 #include <QDebug>
 #include <QIcon>
 

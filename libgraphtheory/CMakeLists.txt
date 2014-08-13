@@ -64,6 +64,7 @@ target_link_libraries(rocsgraphtheory
         Qt5::Core
         Qt5::Quick
         Qt5::QuickWidgets
+        Qt5::Gui
         Qt5::Script
         KF5::I18n
         KF5::Declarative

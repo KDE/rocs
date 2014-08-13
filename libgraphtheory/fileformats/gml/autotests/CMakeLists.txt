@@ -38,6 +38,6 @@ add_executable(TestGmlFileFormat ${testgmlfileformat_SRCS})
 add_test(TestGmlFileFormat TestGmlFileFormat)
 ecm_mark_as_test(TestGmlFileFormat)
 target_link_libraries(TestGmlFileFormat
-    rocscore
+    rocsgraphtheory
     Qt5::Test
 )

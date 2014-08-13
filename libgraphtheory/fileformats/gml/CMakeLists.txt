@@ -30,7 +30,12 @@ set(gmlformat_SRCS
 add_library(gmlfileformat MODULE ${gmlformat_SRCS})
 
 target_link_libraries(gmlfileformat
-    rocscore
+    PUBLIC
+        Qt5::Core
+        Qt5::Gui
+        KF5::I18n
+        KF5::Service
+        rocsgraphtheory
 )
 
 kservice_desktop_to_json(gmlfileformat gmlfileformat.desktop)

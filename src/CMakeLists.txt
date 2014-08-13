@@ -90,7 +90,6 @@ add_executable( rocs
 
 target_link_libraries(rocs
     PUBLIC
-        rocscore
         rocsgraphtheory
         KF5::Archive
         KF5::CoreAddons
