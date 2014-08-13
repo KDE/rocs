@@ -30,11 +30,6 @@ ecm_optional_add_subdirectory(plugins)
 
 include_directories(
     ./
-    ${ROCSCORE_INCLUDES}
-)
-
-set(rocs_actions_SRCS
-    Actions/PropertiesDialogAction.cpp
 )
 
 set( rocs_interface_SRCS
@@ -80,9 +75,6 @@ qt5_wrap_ui(
     plugins/ApiDoc/ApiDocWidget.ui
 )
 
-# we currently only support QtScript
-set(QT_USE_QTSCRIPT true)
-
 kconfig_add_kcfg_files(rocs_Settings_SRCS settings.kcfgc)
 
 # needed to get icon on windows
@@ -94,7 +86,6 @@ kconfig_add_kcfg_files(rocs_Settings_SRCS settings.kcfgc)
 add_executable( rocs
     ${rocs_SRCS}
     ${rocs_Settings_SRCS}
-    ${rocs_RCC_SRCS}
 )
 
 target_link_libraries(rocs
