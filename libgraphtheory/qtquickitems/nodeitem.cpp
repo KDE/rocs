@@ -76,6 +76,7 @@ void NodeItem::setNode(Node *node)
     d->m_node = node;
     setGlobalPosition(QPointF(node->x(), node->y()));
     connect(node, SIGNAL(positionChanged(QPointF)), this, SLOT(setGlobalPosition(QPointF)));
+    connect(node, SIGNAL(typeColorChanged(QColor)), this, SLOT(update()));
     connect(this, SIGNAL(xChanged()), this, SLOT(updatePositionfromScene()));
     connect(this, SIGNAL(yChanged()), this, SLOT(updatePositionfromScene()));
     emit nodeChanged();
@@ -116,11 +117,13 @@ void NodeItem::setHighlighted(bool highlight)
 void NodeItem::paint(QPainter *painter)
 {
     painter->setRenderHint(QPainter::Antialiasing);
+
     if (d->m_highlighted) {
-        painter->setPen(QPen(QColor(246, 116, 0, 255), 2, Qt::SolidLine)); // beware orange
-    } else {
-        painter->setPen(QPen(QColor(77, 77, 77, 255), 2, Qt::SolidLine)); // dark gray
+        painter->setPen(Qt::NoPen);
+        painter->setBrush(QColor(246, 116, 0, 125)); // beware orange, half transparent
+        painter->drawEllipse(QRectF(0, 0, width(), height()));
     }
+    painter->setPen(QPen(QColor(d->m_node->type()->color()), 2, Qt::SolidLine));
     painter->setBrush(QBrush(d->m_node->color()));
     painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));
 }

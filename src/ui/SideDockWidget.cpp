@@ -193,7 +193,7 @@ void SideDockWidget::showDock(bool show, QWidget* widget)
 
     if (show == true) {
         widget->setVisible(true);
-        parentWidget()->setVisible(true);;
+        parentWidget()->setVisible(true);
     }
     emit visibilityChanged(show);
 }

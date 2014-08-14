@@ -57,7 +57,7 @@
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
 
-#include "DocumentTypesWidget.h"
+#include "documenttypeswidget.h"
 #include "ui/CodeEditor.h"
 #include "ui/ScriptOutputWidget.h"
 #include "ui/PossibleIncludes.h"
@@ -301,9 +301,12 @@ QWidget* MainWindow::setupSidePanel()
 
     // add widgets to dock
     // document property widgets
-    DocumentTypesWidget* documentTypesWidget = new DocumentTypesWidget(this);
-//     connect(&DocumentManager::self(), SIGNAL(activateDocument()), documentTypesWidget, SLOT(updateDocument())); // TODO adapt to activeDocumentChanged
+    DocumentTypesWidget *documentTypesWidget = new DocumentTypesWidget(panel);
+    connect(this, SIGNAL(graphDocumentChanged(GraphTheory::GraphDocumentPtr)), documentTypesWidget, SLOT(setDocument(GraphTheory::GraphDocumentPtr)));
     sideDock->addDock(documentTypesWidget, i18n("Element Types"), QIcon::fromTheme("document-properties"));
+    if (m_currentProject && m_currentProject->activeGraphDocument()) {
+        documentTypesWidget->setDocument(m_currentProject->activeGraphDocument());
+    }
 
     // Project Journal
     _journalWidget = new JournalEditorWidget(panel);
@@ -424,6 +427,7 @@ void MainWindow::setActiveGraphDocument()
     }
     GraphDocumentPtr activeDocument = m_currentProject->activeGraphDocument();
     m_graphEditorWidget->layout()->addWidget(activeDocument->createView(this));
+    emit graphDocumentChanged(activeDocument);
 
     //TODO reenable after porting script engine
     // Update engine toolbar

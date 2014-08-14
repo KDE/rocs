@@ -204,6 +204,8 @@ public Q_SLOTS:
     void showExecutionButtonOneStep(bool visible);
 
 Q_SIGNALS:
+    /** emitted when the currently active document (of the active project) changes */
+    void graphDocumentChanged(GraphTheory::GraphDocumentPtr document);
     void startEvaluation();
     void stopEvaluation();
 

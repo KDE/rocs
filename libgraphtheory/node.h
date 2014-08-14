@@ -196,6 +196,7 @@ Q_SIGNALS:
     void positionChanged(const QPointF &position);
     void idChanged(int id);
     void colorChanged(const QColor &color);
+    void typeColorChanged(const QColor &color);
     void dynamicPropertiesChanged();
 
 private Q_SLOTS:

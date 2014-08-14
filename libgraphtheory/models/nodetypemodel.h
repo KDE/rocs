@@ -39,7 +39,9 @@ class GRAPHTHEORY_EXPORT NodeTypeModel : public QAbstractListModel
 
 public:
     enum NodeRoles {
-        IdRole = Qt::UserRole + 1,      //!< unique identifier of node
+        IdRole = Qt::UserRole + 1,      //!< unique identifier of node type
+        TitleRole,                      //!< title of node type
+        ColorRole,                      //!< color of node type
         DataRole                        //!< access to NodeType object
     };
 
@@ -50,7 +52,8 @@ public:
      */
     virtual QHash<int,QByteArray> roleNames() const;
     void setDocument(GraphDocumentPtr document);
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 

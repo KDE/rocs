@@ -23,6 +23,7 @@
 
 #include <KLocalizedString>
 #include <QSignalMapper>
+#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -83,7 +84,7 @@ void NodeTypeModel::setDocument(GraphDocumentPtr document)
     }
     d->m_document = document;
     if (d->m_document) {
-        connect(d->m_document.data(), SIGNAL(nodeTypeAboutToBeAdded(NodePtr,int)), SLOT(onNodeTypeAboutToBeAdded(NodePtr,int)));
+        connect(d->m_document.data(), SIGNAL(nodeTypeAboutToBeAdded(NodeTypePtr,int)), SLOT(onNodeTypeAboutToBeAdded(NodeTypePtr,int)));
         connect(d->m_document.data(), SIGNAL(nodeTypeAdded()), SLOT(onNodeTypeAdded()));
         connect(d->m_document.data(), SIGNAL(nodeTypesAboutToBeRemoved(int,int)), SLOT(onNodeTypesAboutToBeRemoved(int,int)));
         connect(d->m_document.data(), SIGNAL(nodeTypesRemoved()), SLOT(onNodeTypesRemoved()));
@@ -93,11 +94,10 @@ void NodeTypeModel::setDocument(GraphDocumentPtr document)
 
 QVariant NodeTypeModel::data(const QModelIndex &index, int role) const
 {
-    Q_ASSERT(d->m_document);
-
     if (!index.isValid()) {
         return QVariant();
     }
+    Q_ASSERT(d->m_document);
 
     if (index.row() >= d->m_document->nodeTypes().count()) {
         return QVariant();
@@ -109,10 +109,43 @@ QVariant NodeTypeModel::data(const QModelIndex &index, int role) const
     {
     case IdRole:
         return type->id();
+    case TitleRole:
+        return type->name();
+    case ColorRole:
+        return type->color();
     case DataRole:
         return QVariant::fromValue<QObject*>(type.data());
     default:
         return QVariant();
+    }
+}
+
+bool NodeTypeModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (!index.isValid()) {
+        qWarning() << "Index not valid, aborting";
+        return false;
+    }
+    Q_ASSERT(d->m_document);
+
+    if (index.row() >= d->m_document->nodeTypes().count()) {
+        return false;
+    }
+
+    NodeTypePtr const type = d->m_document->nodeTypes().at(index.row());
+    switch(role)
+    {
+    case IdRole:
+        type->setId(value.toInt());
+        return true;
+    case TitleRole:
+        type->setName(value.toString());
+        return true;
+    case ColorRole:
+        type->setColor(value.value<QColor>());
+        return true;
+    default:
+        return false;
     }
 }
 
@@ -131,8 +164,10 @@ int NodeTypeModel::rowCount(const QModelIndex &parent) const
 
 void NodeTypeModel::onNodeTypeAboutToBeAdded(NodeTypePtr type, int index)
 {
-    //TODO add missing signals
     beginInsertRows(QModelIndex(), index, index);
+    connect(type.data(), SIGNAL(idChanged(int)), d->m_signalMapper, SLOT(map()));
+    connect(type.data(), SIGNAL(nameChanged(QString)), d->m_signalMapper, SLOT(map()));
+    connect(type.data(), SIGNAL(colorChanged(QColor)), d->m_signalMapper, SLOT(map()));
 }
 
 void NodeTypeModel::onNodeTypeAdded()

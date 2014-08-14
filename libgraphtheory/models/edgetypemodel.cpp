@@ -83,7 +83,7 @@ void EdgeTypeModel::setDocument(GraphDocumentPtr document)
     }
     d->m_document = document;
     if (d->m_document) {
-        connect(d->m_document.data(), SIGNAL(edgeTypeAboutToBeAdded(EdgePtr,int)), SLOT(onEdgeTypeAboutToBeAdded(EdgePtr,int)));
+        connect(d->m_document.data(), SIGNAL(edgeTypeAboutToBeAdded(EdgeTypePtr,int)), SLOT(onEdgeTypeAboutToBeAdded(EdgeTypePtr,int)));
         connect(d->m_document.data(), SIGNAL(edgeTypeAdded()), SLOT(onEdgeTypeAdded()));
         connect(d->m_document.data(), SIGNAL(edgeTypesAboutToBeRemoved(int,int)), SLOT(onEdgeTypesAboutToBeRemoved(int,int)));
         connect(d->m_document.data(), SIGNAL(edgeTypesRemoved()), SLOT(onEdgeTypesRemoved()));

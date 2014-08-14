@@ -42,7 +42,8 @@ set( rocs_interface_SRCS
     ui/Separator.cpp
     ui/TabWidget.cpp
     ui/CodeEditor.cpp
-    ui/DocumentTypesWidget.cpp
+    ui/documenttypeswidget.cpp
+    ui/documenttypesdelegate.cpp
     ui/ConfigureDefaultProperties.cpp
 #     ui/LoadedPluginsDialog.cpp //FIXME
     ui/PossibleIncludes.cpp
@@ -69,7 +70,6 @@ qt5_wrap_ui(
     rocs_SRCS
     ui/DocumentationWidget.ui
     ui/JournalEditorWidget.ui
-    ui/DocumentTypesWidget.ui
     ui/ConfigureDefaultProperties.ui
     ui/ScriptOutputWidget.ui
     plugins/ApiDoc/ApiDocWidget.ui

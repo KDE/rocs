@@ -31,6 +31,7 @@ public:
     NodeTypePrivate()
         : m_id(-1)
         , m_name(QString())
+        , m_color(77, 77, 77) // dark gray
         , m_valid(false)
     {
     }
@@ -44,6 +45,7 @@ public:
     GraphDocumentPtr m_document;
     QStringList m_dynamicProperties;
     QString m_name;
+    QColor m_color;
     bool m_valid;
 };
 
@@ -111,6 +113,20 @@ void NodeType::setId(int id)
     }
     d->m_id = id;
     emit idChanged(id);
+}
+
+QColor NodeType::color() const
+{
+    return d->m_color;
+}
+
+void NodeType::setColor(const QColor &color)
+{
+    if (color == d->m_color) {
+        return;
+    }
+    d->m_color = color;
+    emit colorChanged(color);
 }
 
 QStringList NodeType::dynamicProperties() const

@@ -56,6 +56,7 @@ find_package(KF5 CONFIG REQUIRED COMPONENTS
   Declarative
   DocTools
   I18n
+  ItemViews
   TextEditor
   XmlGui
   NewStuff

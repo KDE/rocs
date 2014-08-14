@@ -128,7 +128,8 @@ void Node::setType(NodeTypePtr type)
         d->m_type->disconnect(this);
     }
     d->m_type = type;
-    connect (type.data(), SIGNAL(dynamicPropertyRemoved(QString)), this, SLOT(updateDynamicProperty(QString)));
+    connect(type.data(), SIGNAL(dynamicPropertyRemoved(QString)), this, SLOT(updateDynamicProperty(QString)));
+    connect(type.data(), SIGNAL(colorChanged(QColor)), this, SIGNAL(typeColorChanged(QColor)));
     emit typeChanged(type);
 }
 

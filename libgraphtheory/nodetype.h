@@ -89,6 +89,16 @@ public:
     void setId(int id);
 
     /**
+     * @return color of node type
+     */
+    QColor color() const;
+
+    /**
+     * set color of node type to @c color
+     */
+    void setColor(const QColor &color);
+
+    /**
      * @return dynamic properties registered for this node type
      */
     QStringList dynamicProperties() const;
@@ -118,6 +128,7 @@ public:
 Q_SIGNALS:
     void nameChanged(const QString &name);
     void idChanged(int id);
+    void colorChanged(const QColor &color);
     void dynamicPropertyAdded(const QString &property);
     void dynamicPropertyRemoved(const QString &property);
 
