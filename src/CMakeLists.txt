@@ -37,7 +37,6 @@ set( rocs_interface_SRCS
     ui/JournalEditorWidget.cpp
     ui/SideDockWidget.cpp
     ui/ImporterExporterManager.cpp
-    ui/IncludeManagerSettings.cpp
     ui/mainwindow.cpp
     ui/Separator.cpp
     ui/TabWidget.cpp
@@ -46,8 +45,6 @@ set( rocs_interface_SRCS
     ui/nodetypesdelegate.cpp
     ui/edgetypesdelegate.cpp
     ui/ConfigureDefaultProperties.cpp
-#     ui/LoadedPluginsDialog.cpp //FIXME
-    ui/PossibleIncludes.cpp
     ui/ScriptOutputWidget.cpp
     project/project.cpp
 #FIXME commented out, waiting for Grantlee Qt5 port

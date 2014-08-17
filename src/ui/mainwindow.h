@@ -114,10 +114,6 @@ private slots:
     void downloadNewExamples();
     void uploadScript();
 
-    void showPossibleIncludes();
-
-    void showLoadedPlugins();
-
     void showCodeEditorConfig();
 
     /**

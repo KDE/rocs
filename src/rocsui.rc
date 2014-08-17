@@ -37,7 +37,6 @@
             <Separator/>
             <Action name="download" />
             <Action name="upload" />
-            <Action name="possible_includes" />
         </Menu>
         <Menu name="graph">
             <text>Graph Document</text>
@@ -72,10 +71,6 @@
         <Menu name="settings">
             <text>Settings</text>
             <Action name="config-code-editor" />
-        </Menu>
-        <Menu name="help">
-            <text>Help</text>
-            <Action name="loaded-plugins" />
         </Menu>
     </MenuBar>
 

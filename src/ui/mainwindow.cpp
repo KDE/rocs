@@ -60,13 +60,11 @@
 #include "documenttypeswidget.h"
 #include "ui/CodeEditor.h"
 #include "ui/ScriptOutputWidget.h"
-#include "ui/PossibleIncludes.h"
 #include "ui/SideDockWidget.h"
 #include "ui/JournalEditorWidget.h"
 #include "ui/DocumentationWidget.h"
 #include "plugins/ApiDoc/ApiDocWidget.h"
 #include "project/project.h"
-#include "IncludeManagerSettings.h"
 #include "ConfigureDefaultProperties.h"
 #include "ImporterExporterManager.h"
 #include "libgraphtheory/editorplugins/editorpluginmanager.h"
@@ -352,11 +350,9 @@ void MainWindow::setupActions()
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Upload project"),     "upload",            SLOT(uploadScript()),  this);
 
-    createAction("help-hint", i18nc("@action:inmenu", "Possible Includes"),          "possible_includes",   SLOT(showPossibleIncludes()), this);
     createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importScript()),   this);
 //     createAction("document-save",    i18nc("@action:inmenu", "Save Script"),         "save-script",         SLOT(saveActiveScript()),   _codeEditor);
     createAction("document-export", i18nc("@action:inmenu", "Export Script as"),      "export-script-as",      SLOT(saveActiveScriptAs()), _codeEditor);
-    createAction("",  i18nc("@action:inmenu", "Loaded Plugins"),      "loaded-plugins",      SLOT(showLoadedPlugins()), this);
     createAction("",  i18nc("@action:inmenu", "Configure Code Editor..."),      "config-code-editor",      SLOT(showCodeEditorConfig()), this);
 }
 
@@ -381,24 +377,14 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
 void MainWindow::showSettings()
 {
     QPointer<KConfigDialog> dialog = new KConfigDialog(this, "settings", Settings::self());
-
-    IncludeManagerSettings * set = new IncludeManagerSettings(dialog);
     ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties(dialog);
 
-    dialog->addPage(set, i18nc("@title:tab", "Include Manager"), QString(), i18nc("@title:tab", "Include Manager"), true);
     dialog->addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
-
-    // TODO port include manager to kcfg_ elements and remove signals
-    // since then everything is handled by KConfigDialog
-    connect(set,               SIGNAL(changed(bool)), dialog, SLOT(enableButtonApply(bool)));
-    connect(dialog, SIGNAL(applyClicked()),   set, SLOT(saveSettings()));
-    connect(dialog, SIGNAL(okClicked()),      set, SLOT(saveSettings()));
 
     connect(defaultProperties, SIGNAL(showExecuteModeDebugChanged(bool)),
             this, SLOT(showExecutionButtonDebug(bool)));
     connect(defaultProperties, SIGNAL(showExecuteModeOneStepChanged(bool)),
             this, SLOT(showExecutionButtonOneStep(bool)));
-
     dialog->exec();
 }
 
@@ -694,19 +680,6 @@ void MainWindow::exportGraphFile()
 {
     ImporterExporterManager exporter(this);
     exporter.exportFile(m_currentProject->activeGraphDocument());
-}
-
-void MainWindow::showPossibleIncludes()
-{
-    QPointer<PossibleIncludes> dialog = new PossibleIncludes(this);
-    dialog->exec();
-}
-
-void MainWindow::showLoadedPlugins()
-{
-    //FIXME commented out for porting
-//     QPointer<LoadedPluginsDialog> dialog = new LoadedPluginsDialog(this);
-//     dialog->exec();
 }
 
 void MainWindow::showCodeEditorConfig()
