@@ -18,7 +18,7 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "documenttypesdelegate.h"
+#include "nodetypesdelegate.h"
 #include "libgraphtheory/models/nodetypemodel.h"
 #include "libgraphtheory/nodetype.h"
 #include <QPushButton>
@@ -29,19 +29,19 @@
 #include <QApplication>
 #include <QDebug>
 
-DocumentTypesDelegate::DocumentTypesDelegate(QAbstractItemView* parent)
+NodeTypesDelegate::NodeTypesDelegate(QAbstractItemView* parent)
     : KWidgetItemDelegate(parent)
     , m_removeButton(new QPushButton(0))
 {
 
 }
 
-DocumentTypesDelegate::~DocumentTypesDelegate()
+NodeTypesDelegate::~NodeTypesDelegate()
 {
     m_removeButton->deleteLater();
 }
 
-void DocumentTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void NodeTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (!index.isValid()) {
         return;
@@ -49,7 +49,7 @@ void DocumentTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem 
     QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, 0);
 }
 
-QSize DocumentTypesDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
+QSize NodeTypesDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     Q_UNUSED(index);
     int iconHeight = option.decorationSize.height() + (m_vPadding * 2); //icon height + padding either side
@@ -57,7 +57,7 @@ QSize DocumentTypesDelegate::sizeHint(const QStyleOptionViewItem& option, const 
     return QSize(-1,qMax(iconHeight, textHeight)); // any width, he view should give us the whole thing
 }
 
-QList< QWidget* > DocumentTypesDelegate::createItemWidgets(const QModelIndex &index) const
+QList< QWidget* > NodeTypesDelegate::createItemWidgets(const QModelIndex &index) const
 {
     // items created by this method and added to the return-list will be
     // deleted by KWidgetItemDelegate
@@ -75,7 +75,7 @@ QList< QWidget* > DocumentTypesDelegate::createItemWidgets(const QModelIndex &in
                              << title;
 }
 
-void DocumentTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
+void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
 {
     // widgets:
     // ColorButton | Title
@@ -107,19 +107,19 @@ void DocumentTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, c
     title->move(titleLeftMargin, titleTopMargin);
 }
 
-void DocumentTypesDelegate::onColorChanged(const QColor &color)
+void NodeTypesDelegate::onColorChanged(const QColor &color)
 {
     // use temporary stored index, since focusedIndex() does not return current index
     // reason: the color dialog signal does not allow for correct index estimation
     emit colorChanged(m_workaroundColorButtonIndex, color);
 }
 
-void DocumentTypesDelegate::onColorDialogOpened()
+void NodeTypesDelegate::onColorDialogOpened()
 {
     m_workaroundColorButtonIndex = focusedIndex();
 }
 
-void DocumentTypesDelegate::onNameChanged(const QString &name)
+void NodeTypesDelegate::onNameChanged(const QString &name)
 {
     QModelIndex index = focusedIndex();
     emit nameChanged(index, name);

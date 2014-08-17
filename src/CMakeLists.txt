@@ -43,7 +43,8 @@ set( rocs_interface_SRCS
     ui/TabWidget.cpp
     ui/CodeEditor.cpp
     ui/documenttypeswidget.cpp
-    ui/documenttypesdelegate.cpp
+    ui/nodetypesdelegate.cpp
+    ui/edgetypesdelegate.cpp
     ui/ConfigureDefaultProperties.cpp
 #     ui/LoadedPluginsDialog.cpp //FIXME
     ui/PossibleIncludes.cpp

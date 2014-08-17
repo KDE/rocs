@@ -23,6 +23,7 @@
 
 #include <KLocalizedString>
 #include <QSignalMapper>
+#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -109,10 +110,43 @@ QVariant EdgeTypeModel::data(const QModelIndex &index, int role) const
     {
     case IdRole:
         return type->id();
+    case TitleRole:
+        return type->name();
+    case ColorRole:
+        return type->color();
     case DataRole:
         return QVariant::fromValue<QObject*>(type.data());
     default:
         return QVariant();
+    }
+}
+
+bool EdgeTypeModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (!index.isValid()) {
+        qWarning() << "Index not valid, aborting";
+        return false;
+    }
+    Q_ASSERT(d->m_document);
+
+    if (index.row() >= d->m_document->edgeTypes().count()) {
+        return false;
+    }
+
+    EdgeTypePtr const type = d->m_document->edgeTypes().at(index.row());
+    switch(role)
+    {
+    case IdRole:
+        type->setId(value.toInt());
+        return true;
+    case TitleRole:
+        type->setName(value.toString());
+        return true;
+    case ColorRole:
+        type->setColor(value.value<QColor>());
+        return true;
+    default:
+        return false;
     }
 }
 
@@ -131,8 +165,10 @@ int EdgeTypeModel::rowCount(const QModelIndex &parent) const
 
 void EdgeTypeModel::onEdgeTypeAboutToBeAdded(EdgeTypePtr type, int index)
 {
-    //TODO add missing signals
     beginInsertRows(QModelIndex(), index, index);
+    connect(type.data(), SIGNAL(idChanged(int)), d->m_signalMapper, SLOT(map()));
+    connect(type.data(), SIGNAL(nameChanged(QString)), d->m_signalMapper, SLOT(map()));
+    connect(type.data(), SIGNAL(colorChanged(QColor)), d->m_signalMapper, SLOT(map()));
 }
 
 void EdgeTypeModel::onEdgeTypeAdded()

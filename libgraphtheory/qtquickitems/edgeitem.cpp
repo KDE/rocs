@@ -74,8 +74,9 @@ void EdgeItem::setEdge(Edge *edge)
         edge->disconnect(this);
     }
     d->m_edge = edge;
-    connect (edge->from().data(), SIGNAL(positionChanged(QPointF)), this, SLOT(updatePosition()));
-    connect (edge->to().data(), SIGNAL(positionChanged(QPointF)), this, SLOT(updatePosition()));
+    connect(edge->from().data(), SIGNAL(positionChanged(QPointF)), this, SLOT(updatePosition()));
+    connect(edge->to().data(), SIGNAL(positionChanged(QPointF)), this, SLOT(updatePosition()));
+    connect(edge, SIGNAL(typeColorChanged(QColor)), this, SLOT(update()));
     updatePosition();
     emit edgeChanged();
 }
@@ -97,7 +98,7 @@ void EdgeItem::setOrigin(const QPointF &origin)
 void EdgeItem::paint(QPainter *painter)
 {
     painter->setRenderHint(QPainter::Antialiasing);
-    painter->setPen(QPen(QColor(77, 77, 77, 255), 2, Qt::SolidLine));
+    painter->setPen(QPen(d->m_edge->type()->color(), 2, Qt::SolidLine));
     painter->drawLine(d->m_pointFrom, d->m_pointTo);
 }
 

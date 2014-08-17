@@ -121,6 +121,17 @@ public:
      * set id of edge type to @c id
      */
     void setId(int id);
+
+    /**
+     * @return color of edge type
+     */
+    QColor color() const;
+
+    /**
+     * set color of edge type to @c color
+     */
+    void setColor(const QColor &color);
+
     /**
      * Debug method that tracks how many edge objects exist.
      *
@@ -134,6 +145,7 @@ public:
 Q_SIGNALS:
     void directionChanged(EdgeType::Direction direction);
     void idChanged(int id);
+    void colorChanged(const QColor &color);
     void dynamicPropertyAdded(const QString &property);
     void dynamicPropertyRemoved(const QString &property);
     void nameChanged(const QString &name);

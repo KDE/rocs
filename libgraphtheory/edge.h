@@ -132,6 +132,7 @@ public:
 
 Q_SIGNALS:
     void typeChanged(EdgeTypePtr type);
+    void typeColorChanged(const QColor &color);
     void dynamicPropertiesChanged();
 
 private Q_SLOTS:

@@ -18,20 +18,20 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DOCUMENTTYPESDELEGATE_H
-#define DOCUMENTTYPESDELEGATE_H
+#ifndef NODETYPESDELEGATE_H
+#define NODETYPESDELEGATE_H
 
 #include <KWidgetItemDelegate>
 #include "libgraphtheory/typenames.h"
 
 class QPushButton;
 
-class DocumentTypesDelegate : public KWidgetItemDelegate
+class  NodeTypesDelegate : public KWidgetItemDelegate
 {
     Q_OBJECT
 public:
-    explicit DocumentTypesDelegate(QAbstractItemView *parent);
-    virtual ~DocumentTypesDelegate();
+    explicit NodeTypesDelegate(QAbstractItemView *parent);
+    virtual ~NodeTypesDelegate();
     /** reimplemented from QAbstractItemDelegate **/
     virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
     /** reimplemented fromKWidgetItemDelegate **/

@@ -39,6 +39,9 @@ public Q_SLOTS:
 private Q_SLOTS:
     void onNodeTypeColorChanged(const QModelIndex &index, const QColor &color);
     void onNodeTypeNameChanged(const QModelIndex &index, const QString &name);
+    void onCreateNodeType();
+    void onEdgeTypeColorChanged(const QModelIndex &index, const QColor &color);
+    void onEdgeTypeNameChanged(const QModelIndex &index, const QString &name);
     void onCreateEdgeType();
 
 private:

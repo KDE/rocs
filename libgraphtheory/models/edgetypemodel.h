@@ -40,6 +40,8 @@ class GRAPHTHEORY_EXPORT EdgeTypeModel : public QAbstractListModel
 public:
     enum EdgeRoles {
         IdRole = Qt::UserRole + 1,      //!< unique identifier of edge
+        TitleRole,                      //!< title of edge type
+        ColorRole,                      //!< color of edge type
         DataRole                        //!< access to EdgeType object
     };
 
@@ -51,6 +53,7 @@ public:
     virtual QHash<int,QByteArray> roleNames() const;
     void setDocument(GraphDocumentPtr document);
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
