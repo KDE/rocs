@@ -383,5 +383,19 @@ void Project::setModified(bool modified)
 
 bool Project::isModified() const
 {
+    foreach (GraphDocumentPtr document, d->m_graphDocuments) {
+        if (document->isModified()) {
+            return true;
+        }
+    }
+    foreach (KTextEditor::Document *document, d->m_codeDocuments) {
+        if (document->isModified()) {
+            return true;
+        }
+    }
+    if (d->m_journal->isModified()) {
+        return true;
+    }
+
     return d->m_modified;
 }

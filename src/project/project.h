@@ -173,7 +173,8 @@ public:
 
     /**
      * @internal
-     * set modified state of project to @c modified
+     * set modified state of project container to @c modified
+     * @note this does not change the modified state of any associated document
      */
     void setModified(bool modified = true);
 
