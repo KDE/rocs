@@ -121,8 +121,8 @@ GraphDocumentPtr GraphDocument::create()
     pi->setQpointer(pi);
 
     // create default type
-    EdgeType::create(pi);
-    NodeType::create(pi);
+    EdgeType::create(pi)->setName(i18n("default"));
+    NodeType::create(pi)->setName(i18n("default"));
     pi->d->m_valid = true;
     return pi;
 }
