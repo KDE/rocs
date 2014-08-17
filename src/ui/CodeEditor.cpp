@@ -43,7 +43,6 @@ CodeEditor::CodeEditor(QWidget *parent)
     _docArea = new QStackedWidget(this);
     connect(_tabDocs, SIGNAL(tabCloseRequested(int)), this, SLOT(closeDocument(int)));
     connect(_tabDocs, SIGNAL(currentChanged(int)), this, SLOT(changeCurrentDocument(int)));
-    connect(_tabDocs, SIGNAL(newTabRequest()), this, SLOT(newScript()));
 
     _tabDocs->setTabsClosable(false);
 
