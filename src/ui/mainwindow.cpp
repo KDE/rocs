@@ -88,7 +88,7 @@ MainWindow::MainWindow()
     setupToolsPluginsAction();
 
     // TODO: use welcome widget instead of creating default empty project
-    createNewProject();
+    createProject();
     updateCaption();
 
     // update rocs config version
@@ -332,7 +332,7 @@ void MainWindow::setupActions()
 //     m_graphEditor->setupActions(actionCollection()); //FIXME add editor actions to main action collection
 
     // Menu actions
-    createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(createNewProject()), this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(createProject()), this);
     createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
 
@@ -437,7 +437,7 @@ void MainWindow::importScript()
     Settings::setLastOpenedDirectory(startDirectory.toLocalFile());
 }
 
-void MainWindow::createNewProject()
+void MainWindow::createProject()
 {
     if (!queryClose()) {
         return;

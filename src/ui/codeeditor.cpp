@@ -108,10 +108,7 @@ void CodeEditor::changeCurrentDocument(int index)
 KTextEditor::Document* CodeEditor::newScript()
 {
     _scriptDocs  << _editor->createDocument(0);
-
-#ifdef USING_QTSCRIPT
     _scriptDocs.last()->setMode("JavaScript");
-#endif
 
     _docViews << qobject_cast<KTextEditor::View*>(_scriptDocs.last()->createView(this));
 
@@ -165,10 +162,8 @@ void CodeEditor::openScript(const QUrl& fileUrl)
 
     KTextEditor::Document *d = _editor->createDocument(0);
     d->openUrl(fileUrl);
-
-#ifdef USING_QTSCRIPT
     d->setMode("JavaScript");
-#endif
+
     _scriptDocs << d;
     _docViews << qobject_cast<KTextEditor::View*>(_scriptDocs.last()->createView(this));
     _tabDocs->addTab(_scriptDocs.last()->documentName());

@@ -25,42 +25,23 @@
 #include "libgraphtheory/editor.h"
 #include "libgraphtheory/editorplugins/editorpluginmanager.h"
 #include <KXmlGuiWindow>
-#include <kmessagebox.h>
-#include <QMutex>
 #include <QUrl>
 
-class DocumentTypesWidget;
 class KRecentFilesAction;
 class QAction;
-class QPushButton;
-class KComboBox;
-class GraphLayers;
-class GraphVisualEditor;
-class Document;
-class DataStructure;
 class Project;
 class QSplitter;
 class QAction;
-class SelectMoveHandAction;
 class CodeEditor;
-class QScriptEngine;
 class QScriptEngineDebugger;
-class ToolsPluginInterface;
 class QCloseEvent;
-class QComboBox;
-class QToolButton;
 class KActionMenu;
 class ScriptOutputWidget;
 class JournalEditorWidget;
 
-#ifndef USING_QTSCRIPT
-#define USING_QTSCRIPT 1
-#endif
-
 class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
-
 
 public:
     /*! default constructor */
@@ -108,7 +89,7 @@ protected:
     virtual bool queryClose();
     void closeEvent(QCloseEvent *event);
 
-private slots:
+private Q_SLOTS:
     void showSettings();
     //Testing to connect to KGHNS3
     void downloadNewExamples();
@@ -120,7 +101,7 @@ private slots:
      * Create an empty project configuration with one graph document and one code file and set as
      * current project. All files are temporary until saved.
      */
-    void createNewProject();
+    void createProject();
 
     /**
      * execute the given script and print results
