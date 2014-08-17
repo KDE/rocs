@@ -456,6 +456,8 @@ void MainWindow::createProject()
     setActiveGraphDocument();
     connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
 
+    m_currentProject->setModified(false);
+
     updateCaption();
 }
 

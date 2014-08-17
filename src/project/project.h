@@ -172,6 +172,12 @@ public:
     QString workingDir() const;
 
     /**
+     * @internal
+     * set modified state of project to @c modified
+     */
+    void setModified(bool modified = true);
+
+    /**
      * @return @e true if file was modified after last saving/loading, otherwise
      *         @e false
      */

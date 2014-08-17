@@ -376,6 +376,11 @@ bool Project::projectSaveAs(const QUrl &url)
     return projectSave();
 }
 
+void Project::setModified(bool modified)
+{
+    d->m_modified = modified;
+}
+
 bool Project::isModified() const
 {
     return d->m_modified;
