@@ -57,16 +57,16 @@
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
 
-#include "documenttypeswidget.h"
-#include "ui/CodeEditor.h"
-#include "ui/ScriptOutputWidget.h"
-#include "ui/SideDockWidget.h"
-#include "ui/JournalEditorWidget.h"
-#include "ui/DocumentationWidget.h"
+#include "ui/documenttypeswidget.h"
+#include "ui/configuredefaultproperties.h"
+#include "ui/codeeditor.h"
+#include "ui/scriptoutputwidget.h"
+#include "ui/sidedockwidget.h"
+#include "ui/documentationwidget.h"
+#include "ui/fileformatdialog.h"
+#include "ui/journalwidget.h"
 #include "plugins/ApiDoc/ApiDocWidget.h"
 #include "project/project.h"
-#include "ConfigureDefaultProperties.h"
-#include "ImporterExporterManager.h"
 #include "libgraphtheory/editorplugins/editorpluginmanager.h"
 
 using namespace GraphTheory;
@@ -293,7 +293,7 @@ QWidget* MainWindow::setupSidePanel()
     panel->setVisible(false);
 
     // add sidebar
-    SideDockWidget* sideDock = new SideDockWidget(panel);
+    SidedockWidget* sideDock = new SidedockWidget(panel);
     addToolBar(Qt::RightToolBarArea, sideDock->toolbar());
     panel->layout()->addWidget(sideDock);
 
@@ -678,7 +678,7 @@ void MainWindow::importGraphFile()
 
 void MainWindow::exportGraphFile()
 {
-    ImporterExporterManager exporter(this);
+    FileFormatDialog exporter(this);
     exporter.exportFile(m_currentProject->activeGraphDocument());
 }
 

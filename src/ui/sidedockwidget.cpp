@@ -1,23 +1,24 @@
 /*
-    This file is part of Rocs.
-    Copyright 2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+ *  Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *
+ *  This program is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as
+ *  published by the Free Software Foundation; either version 2 of
+ *  the License or (at your option) version 3 or any later version
+ *  accepted by the membership of KDE e.V. (or its successor approved
+ *  by the membership of KDE e.V.), which shall act as a proxy
+ *  defined in Section 14 of version 3 of the license.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of
-    the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-
-#include "SideDockWidget.h"
+#include "sidedockwidget.h"
 
 #include <KAcceleratorManager>
 #include <QStyle>
@@ -116,7 +117,7 @@ void SideToolButton::paintEvent(QPaintEvent *event)
 }
 
 
-SideDockWidget::SideDockWidget(QWidget* parent)
+SidedockWidget::SidedockWidget(QWidget* parent)
     : QWidget(parent)
     , _showDock(false)
 {
@@ -131,7 +132,7 @@ SideDockWidget::SideDockWidget(QWidget* parent)
     setLayout(new QVBoxLayout);
 }
 
-void SideDockWidget::addDock(QWidget* widget, const QString& title, const QIcon& icon)
+void SidedockWidget::addDock(QWidget* widget, const QString& title, const QIcon& icon)
 {
     widget->setVisible(false);
     layout()->addWidget(widget);
@@ -152,7 +153,7 @@ void SideDockWidget::addDock(QWidget* widget, const QString& title, const QIcon&
     _widgets.insert(button, widget);
 }
 
-void SideDockWidget::buttonToggled(bool state)
+void SidedockWidget::buttonToggled(bool state)
 {
     Q_UNUSED(state);
 
@@ -183,7 +184,7 @@ void SideDockWidget::buttonToggled(bool state)
     }
 }
 
-void SideDockWidget::showDock(bool show, QWidget* widget)
+void SidedockWidget::showDock(bool show, QWidget* widget)
 {
     _showDock = show;
     if (show == false) {
@@ -198,7 +199,7 @@ void SideDockWidget::showDock(bool show, QWidget* widget)
     emit visibilityChanged(show);
 }
 
-QToolBar* SideDockWidget::toolbar() const
+QToolBar* SidedockWidget::toolbar() const
 {
     return _toolBar;
 }

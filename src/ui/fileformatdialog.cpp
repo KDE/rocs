@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ImporterExporterManager.h"
+#include "fileformatdialog.h"
 #include "libgraphtheory/fileformats/fileformatmanager.h"
 #include "fileformats/fileformatinterface.h"
 #include "graphdocument.h"
@@ -34,12 +34,12 @@
 
 using namespace GraphTheory;
 
-ImporterExporterManager::ImporterExporterManager(QObject* parent)
+FileFormatDialog::FileFormatDialog(QObject* parent)
     : QObject(parent)
 {
 }
 
-bool ImporterExporterManager::exportFile(GraphDocumentPtr document) const
+bool FileFormatDialog::exportFile(GraphDocumentPtr document) const
 {
     FileFormatManager manager;
 
@@ -102,7 +102,7 @@ bool ImporterExporterManager::exportFile(GraphDocumentPtr document) const
     return true;
 }
 
-GraphDocumentPtr ImporterExporterManager::importFile()
+GraphDocumentPtr FileFormatDialog::importFile()
 {
     FileFormatManager manager;
 

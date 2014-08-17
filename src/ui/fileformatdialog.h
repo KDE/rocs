@@ -18,20 +18,20 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef IMPORTEREXPORTERMANAGER_H
-#define IMPORTEREXPORTERMANAGER_H
+#ifndef FILEFORMATDIALOG_H
+#define FILEFORMATDIALOG_H
 
 #include "libgraphtheory/typenames.h"
 #include <QObject>
 
 class Document;
 
-class ImporterExporterManager : public QObject
+class FileFormatDialog : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ImporterExporterManager(QObject *parent = 0);
+    explicit FileFormatDialog(QObject *parent = 0);
     GraphTheory::GraphDocumentPtr importFile();
     bool exportFile(GraphTheory::GraphDocumentPtr document) const;
     void dialogExec();

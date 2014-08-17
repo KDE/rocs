@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "CodeEditor.h"
+#include "codeeditor.h"
 
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>

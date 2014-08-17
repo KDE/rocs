@@ -33,19 +33,17 @@ include_directories(
 )
 
 set( rocs_interface_SRCS
-    ui/DocumentationWidget.cpp
-    ui/JournalEditorWidget.cpp
-    ui/SideDockWidget.cpp
-    ui/ImporterExporterManager.cpp
+    ui/documentationwidget.cpp
+    ui/journalwidget.cpp
+    ui/sidedockwidget.cpp
+    ui/fileformatdialog.cpp
     ui/mainwindow.cpp
-    ui/Separator.cpp
-    ui/TabWidget.cpp
-    ui/CodeEditor.cpp
+    ui/codeeditor.cpp
     ui/documenttypeswidget.cpp
     ui/nodetypesdelegate.cpp
     ui/edgetypesdelegate.cpp
-    ui/ConfigureDefaultProperties.cpp
-    ui/ScriptOutputWidget.cpp
+    ui/configuredefaultproperties.cpp
+    ui/scriptoutputwidget.cpp
     project/project.cpp
 #FIXME commented out, waiting for Grantlee Qt5 port
 #     plugins/ApiDoc/ApiDocWidget.cpp
@@ -66,10 +64,10 @@ set(
 
 qt5_wrap_ui(
     rocs_SRCS
-    ui/DocumentationWidget.ui
-    ui/JournalEditorWidget.ui
-    ui/ConfigureDefaultProperties.ui
-    ui/ScriptOutputWidget.ui
+    ui/documentationwidget.ui
+    ui/journalwidget.ui
+    ui/configuredefaultproperties.ui
+    ui/scriptoutputwidget.ui
     plugins/ApiDoc/ApiDocWidget.ui
 )
 
