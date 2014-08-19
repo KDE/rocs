@@ -146,7 +146,9 @@ Q_SIGNALS:
     void directionChanged(EdgeType::Direction direction);
     void idChanged(int id);
     void colorChanged(const QColor &color);
-    void dynamicPropertyAdded(const QString &property);
+    void dynamicPropertyAboutToBeAdded(const QString &property, int);
+    void dynamicPropertyAdded();
+    void dynamicPropertiesAboutToBeRemoved(int, int);
     void dynamicPropertyRemoved(const QString &property);
     void nameChanged(const QString &name);
 

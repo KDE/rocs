@@ -197,6 +197,12 @@ Q_SIGNALS:
     void idChanged(int id);
     void colorChanged(const QColor &color);
     void typeColorChanged(const QColor &color);
+    void dynamicPropertyAboutToBeAdded(const QString&, int);
+    void dynamicPropertyAdded();
+    void dynamicPropertiesAboutToBeRemoved(int, int);
+    void dynamicPropertyRemoved();
+    void dynamicPropertyChanged(const QString &);
+    /** list of dynamic properties changed **/
     void dynamicPropertiesChanged();
 
 private Q_SLOTS:

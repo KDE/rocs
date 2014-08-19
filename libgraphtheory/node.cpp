@@ -62,6 +62,9 @@ Node::Node()
     : QObject()
     , d(new NodePrivate)
 {
+    connect(this, SIGNAL(dynamicPropertyAdded()), SIGNAL(dynamicPropertiesChanged()));
+    connect(this, SIGNAL(dynamicPropertyRemoved()), SIGNAL(dynamicPropertiesChanged()));
+
     ++Node::objectCounter;
 }
 
@@ -128,6 +131,10 @@ void Node::setType(NodeTypePtr type)
         d->m_type->disconnect(this);
     }
     d->m_type = type;
+    connect(type.data(), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)));
+    connect(type.data(), SIGNAL(dynamicPropertyAdded()), SIGNAL(dynamicPropertyAdded()));
+    connect(type.data(), SIGNAL(dynamicPropertiesAboutToBeRemoved(int,int)), SIGNAL(dynamicPropertiesAboutToBeRemoved(int,int)));
+    connect(type.data(), SIGNAL(dynamicPropertyRemoved(QString)), SIGNAL(dynamicPropertyRemoved()));
     connect(type.data(), SIGNAL(dynamicPropertyRemoved(QString)), this, SLOT(updateDynamicProperty(QString)));
     connect(type.data(), SIGNAL(colorChanged(QColor)), this, SIGNAL(typeColorChanged(QColor)));
     emit typeChanged(type);
@@ -236,6 +243,7 @@ void Node::setDynamicProperty(const QString &property, const QVariant &value)
     if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
         qWarning() << "Dynamic property not registered at type, aborting to set property.";
     }
+    emit dynamicPropertyChanged(property);
     setProperty(("_graph_" + property).toLatin1(), value);
 }
 
@@ -245,8 +253,7 @@ void Node::updateDynamicProperty(const QString &property)
     if (!d->m_type->dynamicProperties().contains(property)) {
         setDynamicProperty(property, QVariant::Invalid);
     }
-
-    emit dynamicPropertiesChanged();
+    emit dynamicPropertyChanged(property);
 }
 
 void Node::setQpointer(NodePtr q)

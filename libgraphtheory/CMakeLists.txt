@@ -42,6 +42,8 @@ set(graphtheory_SRCS
     kernel/modules/console/consolemodule.cpp
     models/nodemodel.cpp
     models/edgemodel.cpp
+    models/nodepropertymodel.cpp
+    models/edgepropertymodel.cpp
     models/nodetypemodel.cpp
     models/edgetypemodel.cpp
     modifiers/valueassign.cpp

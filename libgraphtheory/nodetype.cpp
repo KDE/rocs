@@ -139,8 +139,9 @@ void NodeType::addDynamicProperty(const QString& property)
     if (d->m_dynamicProperties.contains(property)) {
         return;
     }
+    emit dynamicPropertyAboutToBeAdded(property, d->m_dynamicProperties.count());
     d->m_dynamicProperties.append(property);
-    emit dynamicPropertyAdded(property);
+    emit dynamicPropertyAdded();
 }
 
 void NodeType::removeDynamicProperty(const QString& property)
@@ -148,7 +149,9 @@ void NodeType::removeDynamicProperty(const QString& property)
     if (!d->m_dynamicProperties.contains(property)) {
         return;
     }
-    d->m_dynamicProperties.removeOne(property);
+    int index = d->m_dynamicProperties.indexOf(property);
+    emit dynamicPropertiesAboutToBeRemoved(index, index);
+    d->m_dynamicProperties.removeAt(index);
     emit dynamicPropertyRemoved(property);
 }
 

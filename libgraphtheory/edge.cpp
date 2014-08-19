@@ -124,8 +124,12 @@ void Edge::setType(EdgeTypePtr type)
         d->m_type->disconnect(this);
     }
     d->m_type = type;
-    connect(type.data(), SIGNAL(colorChanged(QColor)), this, SIGNAL(typeColorChanged(QColor)));
+    connect(type.data(), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)));
+    connect(type.data(), SIGNAL(dynamicPropertyAdded()), SIGNAL(dynamicPropertyAdded()));
+    connect(type.data(), SIGNAL(dynamicPropertiesAboutToBeRemoved(int,int)), SIGNAL(dynamicPropertiesAboutToBeRemoved(int,int)));
+    connect(type.data(), SIGNAL(dynamicPropertyRemoved(QString)), SIGNAL(dynamicPropertyRemoved()));
     connect(type.data(), SIGNAL(dynamicPropertyRemoved(QString)), this, SLOT(updateDynamicProperty(QString)));
+    connect(type.data(), SIGNAL(colorChanged(QColor)), this, SIGNAL(typeColorChanged(QColor)));
     emit typeChanged(type);
 }
 

@@ -133,6 +133,12 @@ public:
 Q_SIGNALS:
     void typeChanged(EdgeTypePtr type);
     void typeColorChanged(const QColor &color);
+    void dynamicPropertyAboutToBeAdded(const QString&, int);
+    void dynamicPropertyAdded();
+    void dynamicPropertiesAboutToBeRemoved(int, int);
+    void dynamicPropertyRemoved();
+    void dynamicPropertyChanged(const QString &);
+    /** list of dynamic properties changed **/
     void dynamicPropertiesChanged();
 
 private Q_SLOTS:
