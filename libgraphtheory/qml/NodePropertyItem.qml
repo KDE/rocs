@@ -28,11 +28,13 @@ Item {
     id: root
 
     property Node node: undefined
-    width: property.width
-    height: property.heigth
 
-    Text {
-         id: property
-         text: node != undefined ? node.dynamicProperties : ""
-     }
+    Column {
+        Repeater {
+            model: NodePropertyModel { node: root.node }
+            Text {
+                text: model.name + " / " + model.value
+            }
+        }
+    }
 }

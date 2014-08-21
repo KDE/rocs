@@ -28,11 +28,14 @@ Item {
     id: root
 
     property Edge edge: undefined
-    width: property.width
-    height: property.heigth
 
-    Text {
-         id: property
-         text: edge != undefined ? edge.dynamicProperties : ""
-     }
+    Column {
+        Repeater {
+            model: EdgePropertyModel { edge: root.edge }
+            Text {
+                id: propertyText
+                text: model.name + ": " + model.value
+            }
+        }
+    }
 }

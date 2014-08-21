@@ -60,9 +60,9 @@ QHash< int, QByteArray > EdgePropertyModel::roleNames() const
     return roles;
 }
 
-void EdgePropertyModel::setEdge(EdgePtr edge)
+void EdgePropertyModel::setEdge(Edge *edge)
 {
-    if (d->m_edge == edge) {
+    if (d->m_edge == edge->self()) {
         return;
     }
 
@@ -70,7 +70,7 @@ void EdgePropertyModel::setEdge(EdgePtr edge)
     if (d->m_edge) {
         d->m_edge.data()->disconnect(this);
     }
-    d->m_edge = edge;
+    d->m_edge = edge->self();
     if (d->m_edge) {
         connect(d->m_edge.data(), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)), SLOT(onDynamicPropertyAboutToBeAdded(QString,int)));
         connect(d->m_edge.data(), SIGNAL(dynamicPropertyAdded()), SLOT(onDynamicPropertyAdded()));
@@ -78,6 +78,12 @@ void EdgePropertyModel::setEdge(EdgePtr edge)
         connect(d->m_edge.data(), SIGNAL(dynamicPropertyRemoved()), SLOT(onDynamicPropertyRemoved()));
     }
     endResetModel();
+    emit edgeChanged();
+}
+
+Edge * EdgePropertyModel::edge() const
+{
+    return d->m_edge.data();
 }
 
 QVariant EdgePropertyModel::data(const QModelIndex &index, int role) const

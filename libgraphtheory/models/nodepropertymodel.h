@@ -35,6 +35,7 @@ class NodePropertyModelPrivate;
 class GRAPHTHEORY_EXPORT NodePropertyModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(GraphTheory::Node *node READ node WRITE setNode NOTIFY nodeChanged)
 
 public:
     enum NodePropertyRoles {
@@ -48,12 +49,14 @@ public:
      * Reimplemented from QAbstractListModel::roleNames()
      */
     virtual QHash<int,QByteArray> roleNames() const;
-    void setNode(NodePtr node);
+    void setNode(Node *node);
+    Node * node() const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 Q_SIGNALS:
+    void nodeChanged();
     void propertyChanged(int index);
 
 private Q_SLOTS:

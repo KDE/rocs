@@ -35,6 +35,7 @@ class EdgePropertyModelPrivate;
 class GRAPHTHEORY_EXPORT EdgePropertyModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(GraphTheory::Edge *edge READ edge WRITE setEdge NOTIFY edgeChanged)
 
 public:
     enum EdgePropertyRoles {
@@ -48,12 +49,14 @@ public:
      * Reimplemented from QAbstractListModel::roleNames()
      */
     virtual QHash<int,QByteArray> roleNames() const;
-    void setEdge(EdgePtr edge);
+    void setEdge(Edge *edge);
+    Edge * edge() const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 Q_SIGNALS:
+    void edgeChanged();
     void propertyChanged(int index);
 
 private Q_SLOTS:

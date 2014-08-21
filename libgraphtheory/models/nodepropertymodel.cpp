@@ -21,6 +21,7 @@
 #include "nodepropertymodel.h"
 #include "node.h"
 #include <KLocalizedString>
+#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -59,9 +60,9 @@ QHash< int, QByteArray > NodePropertyModel::roleNames() const
     return roles;
 }
 
-void NodePropertyModel::setNode(NodePtr node)
+void NodePropertyModel::setNode(Node* node)
 {
-    if (d->m_node == node) {
+    if (d->m_node == node->self()) {
         return;
     }
 
@@ -69,7 +70,7 @@ void NodePropertyModel::setNode(NodePtr node)
     if (d->m_node) {
         d->m_node.data()->disconnect(this);
     }
-    d->m_node = node;
+    d->m_node = node->self();
     if (d->m_node) {
         connect(d->m_node.data(), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)), SLOT(onDynamicPropertyAboutToBeAdded(QString,int)));
         connect(d->m_node.data(), SIGNAL(dynamicPropertyAdded()), SLOT(onDynamicPropertyAdded()));
@@ -77,6 +78,12 @@ void NodePropertyModel::setNode(NodePtr node)
         connect(d->m_node.data(), SIGNAL(dynamicPropertyRemoved()), SLOT(onDynamicPropertyRemoved()));
     }
     endResetModel();
+    emit nodeChanged();
+}
+
+Node * NodePropertyModel::node() const
+{
+    return d->m_node.data();
 }
 
 QVariant NodePropertyModel::data(const QModelIndex &index, int role) const

@@ -24,6 +24,8 @@
 #include "edge.h"
 #include "models/nodemodel.h"
 #include "models/edgemodel.h"
+#include "models/nodepropertymodel.h"
+#include "models/edgepropertymodel.h"
 #include "qtquickitems/nodeitem.h"
 #include "qtquickitems/edgeitem.h"
 #include "dialogs/nodeproperties.h"
@@ -80,6 +82,8 @@ View::View(QWidget *parent)
     qmlRegisterType<GraphTheory::EdgeItem>("org.kde.rocs.graphtheory", 1, 0, "EdgeItem");
     qmlRegisterType<GraphTheory::NodeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeModel");
     qmlRegisterType<GraphTheory::EdgeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeModel");
+    qmlRegisterType<GraphTheory::NodePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "NodePropertyModel");
+    qmlRegisterType<GraphTheory::EdgePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "EdgePropertyModel");
 
     QUrl path = QUrl::fromLocalFile(
         QStandardPaths::locate(QStandardPaths::GenericDataLocation, "rocsgraphtheory/qml/Scene.qml"));
