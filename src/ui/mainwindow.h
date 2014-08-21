@@ -52,15 +52,9 @@ public:
     MainWindow();
     ~MainWindow();
 
-    enum ScriptMode {
-        Execute,
-        DebugMode,
-        DebugOnlyInCaseOfError
-    };
-
-private: // Methods
-    void setupWidgets(); // Setup all the widgets.
-    void setupActions(); // Setup all the actions.
+private:
+    void setupWidgets();
+    void setupActions();
     void setupToolbars();
 
     /**
@@ -71,7 +65,6 @@ private: // Methods
     QWidget* setupSidePanel();
     QWidget* setupScriptPanel(); // setup the panel with the editors and stuff
 
-    void finishLoadingUi();
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                       const QKeySequence & shortcut , const char* slot, QObject *parent);
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
@@ -98,7 +91,6 @@ private Q_SLOTS:
     //Testing to connect to KGHNS3
     void downloadNewExamples();
     void uploadScript();
-
     void showCodeEditorConfig();
 
     /**
@@ -106,28 +98,6 @@ private Q_SLOTS:
      * current project. All files are temporary until saved.
      */
     void createProject();
-
-    /**
-     * execute the given script and print results
-     * \param text string that will be printed at result shell
-     */
-    void executeScriptFull(const QString &text = QString());
-    void executeScript(const ScriptMode mode, const QString &text = QString());
-
-    void debugScript();
-
-    /**
-     * execute script until next "step" command is found in script
-     * \param text string that will be printed at result shell
-     */
-    void executeScriptOneStep(const QString &text = QString());
-
-    /**
-     * stop script execution
-     */
-    void stopScript();
-
-    void newProjectAssistant();
     void saveProject(bool saveAs = false);
     void openProject(const QUrl& fileName = QUrl());
 //     void saveProjectAs(); //TODO update
@@ -153,22 +123,29 @@ private Q_SLOTS:
     void importGraphFile();
     void exportGraphFile();
 
-    /**
-     * Import a new project from internal Rocs project file. This method guarantees that
-     * when finishing a project, a graph document, and a script file exist.
-     */
-//     void importProject();
-
     void setupToolsPluginsAction();
     void quit();
+
+private Q_SLOTS: // script execution
+    /**
+     * starts simulation kernel with currently active script and graph document.
+     */
+    void executeScript();
+    /**
+     * execute script until next "step" command is found in script
+     */
+    void executeScriptOneStep();
+    /**
+     * stop script execution
+     */
+    void stopScript();
 
 public Q_SLOTS:
     /**
      * Update UI for changed active graph document
      */
     void setActiveGraphDocument();
-    void runToolPlugin();
-
+    void showEditorPluginDialog();
     void disableStopAction();
     void enableStopAction();
 
@@ -187,8 +164,6 @@ public Q_SLOTS:
 Q_SIGNALS:
     /** emitted when the currently active document (of the active project) changes */
     void graphDocumentChanged(GraphTheory::GraphDocumentPtr document);
-    void startEvaluation();
-    void stopEvaluation();
 
 private:
     Project *m_currentProject;
@@ -197,28 +172,28 @@ private:
     GraphTheory::Editor *m_graphEditor;
     GraphTheory::Kernel *m_kernel; //!< simulation kernel
     GraphTheory::EditorPluginManager m_graphEditorPluginManager;
-    CodeEditor *_codeEditor;
+    CodeEditor *m_codeEditor;
     ScriptOutputWidget *m_outputWidget;
-    JournalEditorWidget *_journalWidget;
+    JournalEditorWidget *m_journalWidget;
 
     // Other Bunch of stuff.
-    QAction *_runScript;
-    QAction *_stepRunScript;
-    QAction *_stopScript;
-    KActionMenu *_debugMenu;
+    QAction *m_runScript;
+    QAction *m_stepRunScript;
+    QAction *m_stopScript;
+    KActionMenu *m_debugMenu;
 
     ///Store the recent files.
-    KRecentFilesAction *_recentProjects;
+    KRecentFilesAction *m_recentProjects;
 
     //! Needed to restore the size of the splitter after closing / opening the UI.
-    QSplitter *_vSplitter;
-    QSplitter *_hSplitter;
-    QSplitter *_hScriptSplitter;
+    QSplitter *m_vSplitter;
+    QSplitter *m_hSplitter;
+    QSplitter *m_hScriptSplitter;
     QWidget *m_graphEditorWidget; // contains graph editor scene
 
-    QScriptEngineDebugger *_scriptDbg;
-    QAction* _debugScript;
-    QAction* _interruptScript;
+    QScriptEngineDebugger *m_scriptDbg;
+    QAction* m_debugScript;
+    QAction* m_interruptScript;
 
     void createToolsPluginsAction();
 };
