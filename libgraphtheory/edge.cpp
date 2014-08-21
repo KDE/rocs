@@ -152,6 +152,7 @@ void Edge::setDynamicProperty(const QString &property, const QVariant &value)
         qWarning() << "Dynamic property not registered at type, aborting to set property.";
     }
     setProperty(("_graph_" + property).toLatin1(), value);
+    emit dynamicPropertyChanged(property);
 }
 
 void Edge::updateDynamicProperty(const QString &property)

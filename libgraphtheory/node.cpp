@@ -242,8 +242,8 @@ void Node::setDynamicProperty(const QString &property, const QVariant &value)
     if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
         qWarning() << "Dynamic property not registered at type, aborting to set property.";
     }
-    emit dynamicPropertyChanged(property);
     setProperty(("_graph_" + property).toLatin1(), value);
+    emit dynamicPropertyChanged(property);
 }
 
 void Node::updateDynamicProperty(const QString &property)
