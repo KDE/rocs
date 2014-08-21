@@ -27,6 +27,10 @@
 #include <KXmlGuiWindow>
 #include <QUrl>
 
+namespace GraphTheory {
+    class Kernel;
+}
+
 class KRecentFilesAction;
 class QAction;
 class Project;
@@ -191,10 +195,11 @@ private:
 
     // Right Area:
     GraphTheory::Editor *m_graphEditor;
+    GraphTheory::Kernel *m_kernel; //!< simulation kernel
     GraphTheory::EditorPluginManager m_graphEditorPluginManager;
     CodeEditor *_codeEditor;
-    ScriptOutputWidget* _outputWidget;
-    JournalEditorWidget* _journalWidget;
+    ScriptOutputWidget *m_outputWidget;
+    JournalEditorWidget *_journalWidget;
 
     // Other Bunch of stuff.
     QAction *_runScript;

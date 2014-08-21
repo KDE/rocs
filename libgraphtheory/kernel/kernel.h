@@ -52,12 +52,11 @@ public:
 
     virtual ~Kernel();
 
-public Q_SLOTS:
-    void processMessage(const QString &message, MessageType type);
     void execute(GraphTheory::GraphDocumentPtr document, const QString &script);
+    void stop();
 
 Q_SIGNALS:
-    void message(const QString &message);
+    void message(const QString &message, GraphTheory::Kernel::MessageType type);
     void executionFinished();
 
 private:

@@ -25,7 +25,7 @@
 
 using namespace GraphTheory;
 
-ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
+ScriptOutputWidget::ScriptOutputWidget(QWidget *parent)
     : QWidget(parent),
     m_console(0)
 {
@@ -42,27 +42,6 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget* parent)
     connect(ui->buttonClear, SIGNAL(clicked(bool)), this, SLOT(clear()));
 }
 
-void ScriptOutputWidget::unsetConsoleInterface()
-{
-    if (m_console) {
-        m_console->disconnect(this);
-    }
-    m_console = 0;
-}
-
-void ScriptOutputWidget::setConsoleInterface(ConsoleModule* console)
-{
-    unsetConsoleInterface();
-    m_console = console;
-
-    connect(console, SIGNAL(backlogChanged(ConsoleModule::MessageType,QString)),
-            this, SLOT(appendOutput(ConsoleModule::MessageType,QString)));
-}
-
-ConsoleModule * ScriptOutputWidget::consoleInterface() const
-{
-    return m_console;
-}
 
 void ScriptOutputWidget::updateFixOutputButton()
 {
@@ -85,24 +64,25 @@ bool ScriptOutputWidget::isOutputClearEnabled() const
     return !ui->buttonDisableClear->isChecked();
 }
 
-void ScriptOutputWidget::appendOutput(ConsoleModule::MessageType type, const QString& message)
+void ScriptOutputWidget::processMessage(const QString& message, Kernel::MessageType type)
 {
     switch(type)
     {
-    case ConsoleModule::Log:
+    case Kernel::MessageType::InfoMessage:
         ui->txtOutput->append(message);
         ui->dbgOutput->append("<i>" + message + "</i>");
         break;
-    case ConsoleModule::Debug:
+    case Kernel::MessageType::WarningMessage:
         ui->dbgOutput->append("<span style=\"color: green\">" + message + "</span>");
         break;
-    case ConsoleModule::Error:
+    case Kernel::MessageType::ErrorMessage:
         ui->txtOutput->append("<b style=\"color: red\">" + message + "</b>");
         ui->dbgOutput->append("<b style=\"color: red\">" + message + "</b>");
         break;
     default:
         qWarning() << "Unknown message type, aborting printing.";
     }
+
 }
 
 void ScriptOutputWidget::showDebugOutput(bool show)

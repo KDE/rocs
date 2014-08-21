@@ -21,9 +21,10 @@
 #ifndef SCRIPTOUTPUTWIDGET_H
 #define SCRIPTOUTPUTWIDGET_H
 
+#include "ui_scriptoutputwidget.h"
 #include "libgraphtheory/kernel/modules/console/consolemodule.h"
+#include "libgraphtheory/kernel/kernel.h"
 #include <QWidget>
-#include "ui_ScriptOutputWidget.h"
 
 /**
  * \class ScriptOutputWidget
@@ -37,17 +38,14 @@ class ScriptOutputWidget : public QWidget
     Q_OBJECT
 public:
     explicit ScriptOutputWidget(QWidget *parent = 0);
-    void setConsoleInterface(GraphTheory::ConsoleModule* console);
-    GraphTheory::ConsoleModule * consoleInterface() const;
     bool isOutputClearEnabled() const;
 
-public slots:
-    void unsetConsoleInterface();
-    void appendOutput(GraphTheory::ConsoleModule::MessageType type, const QString& message);
+public Q_SLOTS:
+    void processMessage(const QString &message, GraphTheory::Kernel::MessageType type);
     void showDebugOutput(bool show = true);
     void clear();
 
-private slots:
+private Q_SLOTS:
     void updateFixOutputButton();
 
 private:

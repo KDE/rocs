@@ -23,8 +23,7 @@
 #include "documentwrapper.h"
 
 #include <KLocalizedString>
-#include <QPointF>
-#include <QColor>
+#include <QScriptEngine>
 #include <QDebug>
 
 using namespace GraphTheory;
@@ -69,11 +68,6 @@ Kernel::~Kernel()
 
 }
 
-void Kernel::processMessage(const QString &message, MessageType type)
-{
-    //TODO do something with the messages
-}
-
 void Kernel::execute(GraphDocumentPtr document, const QString &script)
 {
     if (!d->m_engine) {
@@ -96,17 +90,22 @@ void Kernel::execute(GraphDocumentPtr document, const QString &script)
 
     QString result = d->m_engine->evaluate(script).toString();
     if (d->m_engine && d->m_engine->hasUncaughtException()) {
-        processMessage(result, WarningMessage);
-        processMessage(d->m_engine->uncaughtExceptionBacktrace().join("\n"), InfoMessage);
+        emit message(result, WarningMessage);
+        emit message(d->m_engine->uncaughtExceptionBacktrace().join("\n"), InfoMessage);
     }
     if (d->m_engine) {
-        processMessage(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"), InfoMessage);
-        processMessage(result, InfoMessage);
+        emit message(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"), InfoMessage);
+        emit message(result, InfoMessage);
         d->m_engine->popContext();
     }
     emit executionFinished();
 
     documentWrapper->deleteLater();
+}
+
+void Kernel::stop()
+{
+    d->m_engine->abortEvaluation();
 }
 
 //END: Kernel

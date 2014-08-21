@@ -24,6 +24,8 @@
 #include "settings.h"
 
 #include "libgraphtheory/editor.h"
+#include "libgraphtheory/editorplugins/editorpluginmanager.h"
+#include "libgraphtheory/kernel/kernel.h"
 #include "libgraphtheory/view.h"
 
 #include <QApplication>
@@ -67,7 +69,6 @@
 #include "ui/journalwidget.h"
 #include "plugins/ApiDoc/ApiDocWidget.h"
 #include "project/project.h"
-#include "libgraphtheory/editorplugins/editorpluginmanager.h"
 
 using namespace GraphTheory;
 
@@ -75,6 +76,7 @@ MainWindow::MainWindow()
     : KXmlGuiWindow()
     , m_currentProject(0)
     , m_graphEditorWidget(new QWidget)
+    , m_kernel(new Kernel)
     , _scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
@@ -86,6 +88,10 @@ MainWindow::MainWindow()
 
     setupToolbars();
     setupToolsPluginsAction();
+
+    // setup kernel
+    connect(m_kernel, SIGNAL(message(QString, GraphTheory::Kernel::MessageType)), m_outputWidget,
+        SLOT(processMessage(QString,GraphTheory::Kernel::MessageType)));
 
     // TODO: use welcome widget instead of creating default empty project
     createProject();
@@ -118,6 +124,7 @@ MainWindow::~MainWindow()
     Settings::self()->writeConfig();
 
     m_graphEditor->deleteLater();
+    m_kernel->deleteLater();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -237,8 +244,7 @@ QWidget* MainWindow::setupScriptPanel()
     _hScriptSplitter->setOrientation(Qt::Horizontal);
 
     _codeEditor = new CodeEditor(this);
-    _outputWidget = new ScriptOutputWidget(this);
-    _outputWidget->setConsoleInterface(new ConsoleModule(_outputWidget));
+    m_outputWidget = new ScriptOutputWidget(this);
 
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -276,7 +282,7 @@ QWidget* MainWindow::setupScriptPanel()
     connect(_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
 
     _hScriptSplitter->addWidget(_codeEditor);
-    _hScriptSplitter->addWidget(_outputWidget);
+    _hScriptSplitter->addWidget(m_outputWidget);
 
     QWidget *scriptInterface = new QWidget(this);
     scriptInterface->setLayout(new QHBoxLayout);
@@ -709,58 +715,15 @@ void MainWindow::executeScriptFull(const QString& text)
 
 void MainWindow::executeScript(const MainWindow::ScriptMode mode, const QString& text)
 {
-    //FIXME implement scripting interfaces for GraphTheory
-    qCritical() << "Scripting engine currently disalbed";
-#if 0
-    Q_ASSERT(_outputWidget);
-    if (_outputWidget->isOutputClearEnabled()) {
-        _outputWidget->clear();
+    if (m_outputWidget->isOutputClearEnabled()) {
+        m_outputWidget->clear();
     }
 
-    // set script
     QString script = text.isEmpty() ? _codeEditor->text() : text;
     QString scriptPath = _codeEditor->document()->url().path();
 
-    // prepare engine
-    QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
-    if (engine->isRunning()) {
-        engine->stop();
-    }
-
-    // set console
-    // TODO this should part of a plugin interface to for setting up all engine modules
-    engine->registerGlobalObject(_outputWidget->consoleInterface(), "Console");
-
-    connect(engine, SIGNAL(scriptError(QString)), _outputWidget->consoleInterface(), SLOT(error(QString)));
-    connect(engine, SIGNAL(scriptInfo(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
-    connect(engine, SIGNAL(sendDebug(QString)), _outputWidget->consoleInterface(), SLOT(debug(QString)));
-    connect(engine, SIGNAL(sendOutput(QString)), _outputWidget->consoleInterface(), SLOT(log(QString)));
-
-    if (_scriptDbg) {
-        _scriptDbg->detach();
-        _scriptDbg->deleteLater();
-        _scriptDbg = 0;
-    }
-    if (mode != Execute) {
-        _scriptDbg = new QScriptEngineDebugger(this);
-        _scriptDbg->setAutoShowStandardWindow(true);
-        _scriptDbg->attachTo(engine->engine());
-        if (mode == MainWindow::DebugMode)
-            _scriptDbg->action(QScriptEngineDebugger::InterruptAction)->trigger();
-    }
-    engine->includeManager().initialize(Settings::includePath());
-    script = engine->includeManager().include(script,
-             scriptPath.isEmpty() ? scriptPath : scriptPath.section('/', 0, -2),
-             _codeEditor->document()->documentName());
-
     enableStopAction();
-
-    engine->setScript(script, DocumentManager::self().activeDocument());
-    engine->execute();
-
-    // disconnect console listener
-    engine->disconnect(_outputWidget->consoleInterface());
-#endif
+    m_kernel->execute(m_currentProject->activeGraphDocument(), text);
 }
 
 void MainWindow::executeScriptOneStep(const QString& text)
@@ -800,11 +763,8 @@ void MainWindow::executeScriptOneStep(const QString& text)
 
 void MainWindow::stopScript()
 {
-    //FIXME implement scripting interfaces for GraphTheory
-    qCritical() << "Scripting engine currently disalbed";
-//     QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
-//     disableStopAction();
-//     engine->stop();
+    m_kernel->stop();
+    disableStopAction();
 }
 
 void MainWindow::debugScript()
