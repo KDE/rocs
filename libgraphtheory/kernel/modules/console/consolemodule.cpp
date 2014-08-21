@@ -31,30 +31,30 @@ ConsoleModule::~ConsoleModule()
 {
 }
 
-QList< QPair< ConsoleModule::MessageType, QString > > ConsoleModule::backlog() const
+QList< QPair< GraphTheory::Kernel::MessageType, QString > > ConsoleModule::backlog() const
 {
-    return _backlog;
+    return m_backlog;
 }
 
 void ConsoleModule::clear()
 {
-    _backlog.clear();
+    m_backlog.clear();
 }
 
-void ConsoleModule::log(const QString& message)
+void ConsoleModule::log(const QString& messageString)
 {
-    _backlog.append(qMakePair<MessageType, QString>(ConsoleModule::Log, message));
-    emit(backlogChanged(ConsoleModule::Log, message));
+    m_backlog.append(qMakePair<Kernel::MessageType, QString>(Kernel::InfoMessage, messageString));
+    emit(message(messageString, Kernel::InfoMessage));
 }
 
-void ConsoleModule::debug(const QString& message)
+void ConsoleModule::debug(const QString& messageString)
 {
-    _backlog.append(qMakePair<MessageType, QString>(ConsoleModule::Debug, message));
-    emit(backlogChanged(ConsoleModule::Debug, message));
+    m_backlog.append(qMakePair<Kernel::MessageType, QString>(Kernel::WarningMessage, messageString));
+    emit(message(messageString, Kernel::WarningMessage));
 }
 
-void ConsoleModule::error(const QString& message)
+void ConsoleModule::error(const QString& messageString)
 {
-    _backlog.append(qMakePair<MessageType, QString>(Error, message));
-    emit(backlogChanged(ConsoleModule::Error, message));
+    m_backlog.append(qMakePair<Kernel::MessageType, QString>(Kernel::ErrorMessage, messageString));
+    emit(message(messageString, Kernel::ErrorMessage));
 }

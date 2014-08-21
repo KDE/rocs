@@ -22,7 +22,7 @@
 #define CONSOLEMODULE_H
 
 #include "libgraphtheoryexport.h"
-
+#include "kernel/kernel.h"
 #include <QObject>
 #include <QList>
 #include <QPair>
@@ -43,12 +43,6 @@ public:
     explicit ConsoleModule(QObject *parent = 0);
     ~ConsoleModule();
 
-    enum MessageType {
-        Log,
-        Debug,
-        Error
-    };
-
     /**
      * Clear the backlog.
      */
@@ -58,7 +52,7 @@ public:
      * Get all backlog since last clear.
      * \return the backlog
      */
-    QList< QPair<MessageType, QString> > backlog() const;
+    QList< QPair<GraphTheory::Kernel::MessageType, QString> > backlog() const;
 
 public Q_SLOTS:
     /**
@@ -77,11 +71,11 @@ public Q_SLOTS:
     Q_INVOKABLE void error(const QString &message);
 
 Q_SIGNALS:
-    void backlogChanged(ConsoleModule::MessageType,QString);
+    void message(const QString &message, GraphTheory::Kernel::MessageType type);
 
 private:
     Q_DISABLE_COPY(ConsoleModule)
-    QList< QPair<MessageType, QString> > _backlog;
+    QList< QPair<GraphTheory::Kernel::MessageType, QString> > m_backlog;
 };
 }
 

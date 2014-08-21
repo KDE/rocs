@@ -28,7 +28,6 @@
 
 #include <QtScript>
 #include <QObject>
-#include <QColor>
 
 namespace GraphTheory
 {
@@ -54,6 +53,11 @@ public:
 
     void execute(GraphTheory::GraphDocumentPtr document, const QString &script);
     void stop();
+
+
+private Q_SLOTS:
+    /** process all incoming messages and resend them afterwards**/
+    void processMessage(const QString &message, GraphTheory::Kernel::MessageType type);
 
 Q_SIGNALS:
     void message(const QString &message, GraphTheory::Kernel::MessageType type);

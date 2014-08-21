@@ -22,7 +22,6 @@
 #define SCRIPTOUTPUTWIDGET_H
 
 #include "ui_scriptoutputwidget.h"
-#include "libgraphtheory/kernel/modules/console/consolemodule.h"
 #include "libgraphtheory/kernel/kernel.h"
 #include <QWidget>
 
@@ -49,7 +48,6 @@ private Q_SLOTS:
     void updateFixOutputButton();
 
 private:
-    GraphTheory::ConsoleModule* m_console;
     Ui::ScriptOutputWidget* ui;
 };
 

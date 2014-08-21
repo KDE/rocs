@@ -21,6 +21,7 @@
 #include "kernel.h"
 #include "graphdocument.h"
 #include "documentwrapper.h"
+#include "kernel/modules/console/consolemodule.h"
 
 #include <KLocalizedString>
 #include <QScriptEngine>
@@ -42,6 +43,7 @@ public:
     QScriptValue registerGlobalObject(QObject *qobject, const QString &name);
 
     QScriptEngine *m_engine;
+    ConsoleModule m_consoleModule;
 };
 
 QScriptValue KernelPrivate::registerGlobalObject(QObject *qobject, const QString &name)
@@ -60,6 +62,8 @@ QScriptValue KernelPrivate::registerGlobalObject(QObject *qobject, const QString
 Kernel::Kernel()
     : d(new KernelPrivate)
 {
+    connect(&d->m_consoleModule, SIGNAL(message(QString, GraphTheory::Kernel::MessageType)),
+        this, SLOT(processMessage(QString, GraphTheory::Kernel::MessageType)));
 
 }
 
@@ -84,8 +88,10 @@ void Kernel::execute(GraphDocumentPtr document, const QString &script)
     DocumentWrapper *documentWrapper = new DocumentWrapper(document, d->m_engine);
     d->m_engine->globalObject().setProperty("Document", d->m_engine->newQObject(documentWrapper));
 
-    //TODO setup plugins
+    // set modules
+    d->m_engine->globalObject().setProperty("Console", d->m_engine->newQObject(&d->m_consoleModule));
 
+    // set evaluation
     d->m_engine->setProcessEventsInterval(100); //! TODO: Make that changeable.
 
     QString result = d->m_engine->evaluate(script).toString();
@@ -106,6 +112,11 @@ void Kernel::execute(GraphDocumentPtr document, const QString &script)
 void Kernel::stop()
 {
     d->m_engine->abortEvaluation();
+}
+
+void Kernel::processMessage(const QString& messageString, Kernel::MessageType type)
+{
+    emit message(messageString, type);
 }
 
 //END: Kernel

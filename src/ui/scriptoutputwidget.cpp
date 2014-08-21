@@ -26,8 +26,7 @@
 using namespace GraphTheory;
 
 ScriptOutputWidget::ScriptOutputWidget(QWidget *parent)
-    : QWidget(parent),
-    m_console(0)
+    : QWidget(parent)
 {
     ui = new Ui::ScriptOutputWidget;
     ui->setupUi(this);
@@ -82,7 +81,6 @@ void ScriptOutputWidget::processMessage(const QString& message, Kernel::MessageT
     default:
         qWarning() << "Unknown message type, aborting printing.";
     }
-
 }
 
 void ScriptOutputWidget::showDebugOutput(bool show)
