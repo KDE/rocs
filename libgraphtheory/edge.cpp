@@ -140,11 +140,7 @@ QVariant Edge::dynamicProperty(const QString &property) const
 
 QStringList Edge::dynamicProperties() const
 {
-    QStringList propertyValues;
-    foreach (QString property, d->m_type->dynamicProperties()) {
-        propertyValues.append(dynamicProperty(property).toString());
-    }
-    return propertyValues;
+    return d->m_type->dynamicProperties();
 }
 
 void Edge::setDynamicProperty(const QString &property, const QVariant &value)

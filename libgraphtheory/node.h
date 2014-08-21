@@ -166,7 +166,7 @@ public:
     QVariant dynamicProperty(const QString &property) const;
 
     /**
-     * @return list of those dynamic property values registered at node type in that order
+     * @return list of dynamic properties registered at node type
      */
     QStringList dynamicProperties() const;
 

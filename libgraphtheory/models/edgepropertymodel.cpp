@@ -21,6 +21,7 @@
 #include "edgepropertymodel.h"
 #include "edge.h"
 #include <KLocalizedString>
+#include <QDebug>
 
 using namespace GraphTheory;
 

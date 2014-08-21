@@ -228,11 +228,10 @@ QVariant Node::dynamicProperty(const QString &property) const
 
 QStringList Node::dynamicProperties() const
 {
-    QStringList propertyValues;
-    foreach (QString property, d->m_type->dynamicProperties()) {
-        propertyValues.append(dynamicProperty(property).toString());
+    if (!d->m_type) {
+        return QStringList();
     }
-    return propertyValues;
+    return d->m_type->dynamicProperties();
 }
 
 void Node::setDynamicProperty(const QString &property, const QVariant &value)

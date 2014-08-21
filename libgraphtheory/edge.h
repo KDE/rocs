@@ -106,7 +106,7 @@ public:
     QVariant dynamicProperty(const QString &property) const;
 
     /**
-     * @return list of those dynamic property values registered at edge type in that order
+     * @return list of dynamic properties registered at edge type
      */
     QStringList dynamicProperties() const;
 
