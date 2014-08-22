@@ -475,7 +475,7 @@ void MainWindow::saveProject(bool saveAs)
         QString file = QFileDialog::getSaveFileName(this,
                             i18nc("@title:window", "Save Project"),
                             startDirectory.toLocalFile(),
-                            i18n("Rocs Projects (*.rocsz)"));
+                            i18n("Rocs Projects (*.rocs)"));
 
         if (file.isEmpty()) {
             qCritical() << "Filename is empty and no script file was created.";
@@ -509,7 +509,7 @@ void MainWindow::openProject(const QUrl &fileName)
          file = QFileDialog::getOpenFileName(this,
                     i18nc("@title:window", "Open Project Files"),
                     startDirectory.toLocalFile(),
-                    i18n("*rocs *.rocsz|All Rocs files\n*.rocs|Rocs project files\n*.rocsz|Compressed Rocs project files\n*|All files"));
+                    i18n("Rocs projects (*.rocs)"));
 
         if (file.isEmpty()) {
             return;
@@ -522,9 +522,7 @@ void MainWindow::openProject(const QUrl &fileName)
 
     // extract and open new project
     // at the end of this m_currentProject must exist
-    if (file.fileName().endsWith(QLatin1String("rocsz"), Qt::CaseInsensitive)) {
-        m_currentProject = new Project(file, m_graphEditor);
-    }
+    m_currentProject = new Project(file, m_graphEditor);
     if (m_currentProject->graphDocuments().count() == 0) {
         m_currentProject->addGraphDocument(m_graphEditor->createDocument());
     }
@@ -541,7 +539,6 @@ void MainWindow::openProject(const QUrl &fileName)
 
     connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
 }
-
 
 void MainWindow::updateCaption()
 {
@@ -568,7 +565,7 @@ QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suf
     QString fullPrefix = basePrefix;
 
     if (fullPrefix.isNull()) {
-        fullPrefix = m_currentProject->projectUrl().fileName().remove(QRegExp(".rocsz*$"));
+        fullPrefix = m_currentProject->projectUrl().fileName().remove(QRegExp(".rocs*$"));
     } else if (fullPrefix.endsWith(fullSuffix)) {
         fullPrefix.remove(QRegExp(fullSuffix + "$"));
     }
