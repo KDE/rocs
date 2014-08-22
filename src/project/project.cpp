@@ -356,15 +356,19 @@ bool Project::projectSave()
     tar.open(QIODevice::WriteOnly);
 
     foreach (KTextEditor::Document *document, d->m_codeDocuments) {
+        document->save();
         tar.addLocalFile(document->url().toLocalFile(), document->url().fileName());
     }
     foreach (GraphTheory::GraphDocumentPtr document, d->m_graphDocuments) {
+        document->documentSave();
         tar.addLocalFile(document->documentUrl().toLocalFile(), document->documentUrl().fileName());
     }
     tar.addLocalFile(d->m_journal->url().toLocalFile(), "journal.txt");
     d->writeProjectMetaInfo();
     tar.addLocalFile(d->m_workingDirectory.path() + QChar('/') + "project.json", "project.json");
     tar.close();
+
+    // update modified state
     d->m_modified = false;
 
     return true;
