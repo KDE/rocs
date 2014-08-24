@@ -121,7 +121,7 @@ MainWindow::~MainWindow()
     Settings::setHScriptSplitterSizeRight(m_hScriptSplitter->sizes() [1]);
     m_recentProjects->saveEntries(Settings::self()->config()->group("RecentFiles"));
 
-    Settings::self()->writeConfig();
+    Settings::self()->save();
 
     m_graphEditor->deleteLater();
     m_kernel->deleteLater();
