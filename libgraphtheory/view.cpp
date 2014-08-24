@@ -174,12 +174,12 @@ void View::showNodePropertiesDialog(Node *node)
 {
     QPointer<NodeProperties> dialog = new NodeProperties();
     dialog->setData(node->self());
-    dialog->exec();
+    dialog->show(); // workaround: scene-drag not working with modal dialogs
 }
 
 void View::showEdgePropertiesDialog(Edge *edge)
 {
     QPointer<EdgeProperties> dialog = new EdgeProperties();
     dialog->setData(edge->self());
-    dialog->exec();
+    dialog->show(); // workaround: scene-drag not working with modal dialogs
 }
