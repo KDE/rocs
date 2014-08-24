@@ -75,8 +75,8 @@ using namespace GraphTheory;
 MainWindow::MainWindow()
     : KXmlGuiWindow()
     , m_currentProject(0)
-    , m_graphEditorWidget(new QWidget)
     , m_kernel(new Kernel)
+    , m_graphEditorWidget(new QWidget)
     , m_scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
