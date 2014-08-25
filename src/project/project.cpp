@@ -232,7 +232,9 @@ bool Project::addCodeDocument(KTextEditor::Document *document)
         return false;
     }
 
+    emit codeDocumentAboutToBeAdded(document, d->m_codeDocuments.count());
     d->m_codeDocuments.append(document);
+    emit codeDocumentAdded();
     d->m_modified = true;
     return true;
 }
@@ -249,7 +251,10 @@ void Project::removeCodeDocument(KTextEditor::Document *document)
 {
     QString path = document->url().toString();
     document->closeUrl();
-    d->m_codeDocuments.removeAll(document);
+    int index = d->m_codeDocuments.indexOf(document);
+    emit codeDocumentAboutToBeRemoved(index, index);
+    d->m_codeDocuments.removeAt(index);
+    emit codeDocumentRemoved();
     if (!path.startsWith(d->m_workingDirectory.path())) {
         qCritical() << "Aborting removal of document: not in temporary working directory";
         return;

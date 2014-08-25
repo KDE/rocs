@@ -136,6 +136,11 @@ public:
 Q_SIGNALS:
     void nameChanged(const QString &name);
 
+    void codeDocumentAboutToBeAdded(KTextEditor::Document*,int);
+    void codeDocumentAdded();
+    void codeDocumentAboutToBeRemoved(int,int);
+    void codeDocumentRemoved();
+
   /*
    * General file related actions.
    * None of these actions cause user interaction.

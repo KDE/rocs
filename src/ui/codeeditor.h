@@ -1,27 +1,28 @@
 /*
-    This file is part of Rocs.
-    Copyright 2009-2010  Tomaz Canabrava <tomaz.canabrava@gmail.com>
-    Copyright 2011       Andreas Cord-Landwehr <cola@uni-paderborn.de>
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public License as
-    published by the Free Software Foundation; either version 2 of
-    the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ *  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *
+ *  This program is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as
+ *  published by the Free Software Foundation; either version 2 of
+ *  the License or (at your option) version 3 or any later version
+ *  accepted by the membership of KDE e.V. (or its successor approved
+ *  by the membership of KDE e.V.), which shall act as a proxy
+ *  defined in Section 14 of version 3 of the license.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef CODEEDITOR_H
 #define CODEEDITOR_H
 
 #include <QWidget>
-#include <QList>
+#include "project/project.h"
 
 namespace KTextEditor
 {
@@ -29,78 +30,27 @@ class Document;
 class View;
 class Editor;
 }
-class QVBoxLayout;
-class QStackedWidget;
-class QTabBar;
+class QTabWidget;
 
 class CodeEditor : public QWidget
 {
     Q_OBJECT
 public:
-    /**
-     * Creates new CodeEditor without any scripts. To add script \see addScript().
-     */
     explicit CodeEditor(QWidget *parent = 0);
+    void setProject(Project *project);
+    KTextEditor::Document *activeDocument() const;
 
-    QString text() const;
-    KTextEditor::Editor *editor() const {
-        return _editor;
-    }
-    KTextEditor::Document *document() const {
-        return _activeDocument;
-    }
-    KTextEditor::View *view() const {
-        return _activeView;
-    }
+Q_SIGNALS:
+    void activeDocumentChanged(int index);
 
-    /** This method gives modification state of code-editor texts.
-     * \return true if any document in the code-editor is modified, otherwise false
-     */
-    bool isModified() const;
-
-public slots:
-    /**
-     * Creates new script
-     */
-    KTextEditor::Document* newScript();
-    /**
-     * Creates new script at given file.
-     * \param file is absolute filename
-     */
-    KTextEditor::Document* newScript(const QUrl& file);
-    void saveActiveScript();
-    void saveActiveScriptAs();
-    void saveAllScripts();
-    void openScript(const QUrl& fileUrl);
-    void closeAllScripts();
-
-    /** Save the given script or if no text document is given, the currently active script is
-     *  saved. Opens Save-as dialog if text document has no path (is new).
-     * \param doc optional document to be saved
-     */
-    void saveScript(KTextEditor::Document *doc);
-
-private slots:
-    void closeDocument(int index);
-    void changeCurrentDocument(int index);
-    void updateTabText(KTextEditor::Document* text);
+private Q_SLOTS:
+    void onCodeDocumentAboutToBeAdded(KTextEditor::Document *document, int index);
+    void onCodeDocumentAboutToBeRemoved(int start, int end);
 
 private:
-    /** Save given script as new file or if no text document given, the currently active script
-     *  is saved as a new file.
-     * \param doc optional document to be saved
-     */
-    void saveScriptAs(KTextEditor::Document *doc);
-    /** Call \see saveScript for all documents in the code editor */
-    QStackedWidget *_docArea;
-    QTabBar *_tabDocs; //! the tabs of the opened documents.
-    QList<KTextEditor::View*> _docViews; //! this is the view where you edit your scripts
-    QList<KTextEditor::Document*> _scriptDocs; //! the document that you are editing
-    KTextEditor::Editor *_editor;
-    QVBoxLayout* _layout;
-
-    KTextEditor::Document *_activeDocument;
-    KTextEditor::View     *_activeView;
+    QTabWidget *m_viewWidgets;
+    KTextEditor::Editor *m_editor;
+    Project *m_project; //!< current project
 };
 
 #endif

@@ -209,7 +209,7 @@ void MainWindow::uploadScript()
     QPointer<KNS3::UploadDialog> dialog = new KNS3::UploadDialog(this);
 
 //First select the opened doc.
-    QUrl str = m_codeEditor->document()->url();
+    QUrl str = m_codeEditor->activeDocument()->url();
     if (str.isEmpty()) {
         //... then try to open
         str = QFileDialog::getOpenFileName(this, i18n("Rocs Script Files", QString(), i18n("*.js|Script files")));
@@ -228,7 +228,7 @@ void MainWindow::uploadScript()
     tar.close();
     dialog->setUploadFile(local);
 
-    dialog->setUploadName(m_codeEditor->document()->documentName());
+    dialog->setUploadName(m_codeEditor->activeDocument()->documentName());
     dialog->setDescription(i18n("Add your description here."));
 
     dialog->exec();
@@ -437,7 +437,6 @@ void MainWindow::importScript()
     }
 
     m_currentProject->importCodeDocument(fileUrl);
-    m_codeEditor->openScript(fileUrl);
     Settings::setLastOpenedDirectory(startDirectory.toLocalFile());
 }
 
@@ -447,15 +446,15 @@ void MainWindow::createProject()
         return;
     }
 
-    m_codeEditor->closeAllScripts();
     if (m_currentProject) {
         m_currentProject->disconnect(this);
         m_currentProject->deleteLater();
     }
 
     m_currentProject = new Project(m_graphEditor);
-    m_currentProject->addCodeDocument(m_codeEditor->newScript());
+    m_currentProject->addCodeDocument(KTextEditor::Editor::instance()->createDocument(0));
     m_currentProject->addGraphDocument(m_graphEditor->createDocument());
+    m_codeEditor->setProject(m_currentProject);
     m_journalWidget->openJournal(m_currentProject);
     setActiveGraphDocument();
     connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
@@ -516,7 +515,6 @@ void MainWindow::openProject(const QUrl &fileName)
         }
     }
     // import project specified: close everything and delete old project
-    m_codeEditor->closeAllScripts();
     m_currentProject->disconnect(this);
     delete m_currentProject;
 
@@ -526,10 +524,7 @@ void MainWindow::openProject(const QUrl &fileName)
     if (m_currentProject->graphDocuments().count() == 0) {
         m_currentProject->addGraphDocument(m_graphEditor->createDocument());
     }
-    foreach(KTextEditor::Document *document, m_currentProject->codeDocuments()) {
-        m_codeEditor->openScript(document->url());
-        //TODO set curser line
-    }
+    m_codeEditor->setProject(m_currentProject);
     m_journalWidget->openJournal(m_currentProject);
 
     updateCaption();
@@ -586,9 +581,8 @@ void MainWindow::newScript()
     if (basePrefix.isNull()) {
         qDebug() << "Filename is empty and no script file was created.";
     } else {
-        QString fileName = uniqueFilename(basePrefix, "js");
-
-        KTextEditor::Document *document = m_codeEditor->newScript(QUrl::fromLocalFile(fileName));
+        QString fileName = uniqueFilename(basePrefix, "js"); //TODO this does nothing
+        KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(0);
         m_currentProject->addCodeDocument(document);
     }
 }
@@ -666,7 +660,7 @@ void MainWindow::exportGraphFile()
 
 void MainWindow::showCodeEditorConfig()
 {
-    KTextEditor::Editor *editor = m_codeEditor->editor();
+    KTextEditor::Editor *editor = KTextEditor::Editor::instance();
     editor->configDialog(this);
 }
 
@@ -687,7 +681,7 @@ void MainWindow::executeScript()
     if (m_outputWidget->isOutputClearEnabled()) {
         m_outputWidget->clear();
     }
-    QString script = m_codeEditor->text();
+    QString script = m_codeEditor->activeDocument()->text();
     enableStopAction();
     m_kernel->execute(m_currentProject->activeGraphDocument(), script);
 }
