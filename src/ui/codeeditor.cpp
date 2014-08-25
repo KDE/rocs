@@ -46,8 +46,6 @@ CodeEditor::CodeEditor(QWidget *parent)
 
     _tabDocs->setTabsClosable(false);
 
-//     _editor->setSimpleMode(false); //FIXME
-
     _layout->addWidget(_tabDocs);
     _layout->addWidget(_docArea);
 
