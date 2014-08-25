@@ -179,7 +179,7 @@ public:
     void setModified(bool modified = true);
 
     /**
-     * @return @e true if file was modified after last saving/loading, otherwise
+     * @return @e true if project (including any file of this project) was modified after last saving/loading, otherwise
      *         @e false
      */
     bool isModified() const;

@@ -616,21 +616,7 @@ bool MainWindow::queryClose()
     if (!m_currentProject) {
         return true;
     }
-
-    //TODO move modification information to project
-    bool anyGraphDocumentModified = false;
-    foreach(GraphDocumentPtr document, m_currentProject->graphDocuments()) {
-        if (document->isModified()) {
-            anyGraphDocumentModified = true;
-            break;
-        }
-    }
-
-    if (m_currentProject->isModified()
-        || m_journalWidget->isModified()
-        || anyGraphDocumentModified
-        || m_codeEditor->isModified())
-    {
+    if (m_currentProject->isModified()) {
         const int btnCode = KMessageBox::warningYesNoCancel(this, i18nc(
                                 "@info",
                                 "Changes on your project are unsaved. Do you want to save your changes?"));
@@ -641,11 +627,9 @@ bool MainWindow::queryClose()
         if (btnCode == KMessageBox::No) {
             return true;
         }
-        // do not close
-        return false;
+        return false; // do not close
     }
-    // save to close project: no changes
-    return true;
+    return true; // save to close project: no changes
 }
 
 void MainWindow::quit()
