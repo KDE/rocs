@@ -102,11 +102,9 @@ private Q_SLOTS:
     void openProject(const QUrl& fileName = QUrl());
 //     void saveProjectAs(); //TODO update
 
-    /**
-     * Import dialog to add graph document to project.
-     * Imported graph document is directly set as active document.
-     */
-    void importScript();
+    // script import/export
+    void importCodeDocument();
+    void exportCodeDocument();
 
     /**
      * Update window caption according to current project.

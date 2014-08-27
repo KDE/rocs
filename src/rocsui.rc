@@ -29,11 +29,7 @@
             <text>Script Document</text>
             <Action name="new-script" />
             <Action name="add-script" />
-            <Action name="export-script-as" />
-<!--             <Action name="save-script" /> -->
-            <!--<Menu name="script_file">
-                <text>Script File</text>
-            </Menu>-->
+            <Action name="export-script" />
             <Separator/>
             <Action name="download" />
             <Action name="upload" />

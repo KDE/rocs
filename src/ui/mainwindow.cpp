@@ -354,9 +354,8 @@ void MainWindow::setupActions()
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Upload project"),     "upload",            SLOT(uploadScript()),  this);
 
-    createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importScript()),   this);
-//     createAction("document-save",    i18nc("@action:inmenu", "Save Script"),         "save-script",         SLOT(saveActiveScript()),   m_codeEditor);
-    createAction("document-export", i18nc("@action:inmenu", "Export Script as"),      "export-script-as",      SLOT(saveActiveScriptAs()), m_codeEditor);
+    createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importCodeDocument()),   this);
+    createAction("document-export", i18nc("@action:inmenu", "Export Script"),      "export-script",      SLOT(exportCodeDocument()), this);
     createAction("",  i18nc("@action:inmenu", "Configure Code Editor..."),      "config-code-editor",      SLOT(showCodeEditorConfig()), this);
 }
 
@@ -424,12 +423,12 @@ void MainWindow::setActiveGraphDocument()
 //     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
 }
 
-void MainWindow::importScript()
+void MainWindow::importCodeDocument()
 {
     QUrl startDirectory = Settings::lastOpenedDirectory();
 
     QString fileUrl = QFileDialog::getOpenFileName(this,
-                        i18nc("@title:window", "Add Existing Script File to Project"),
+                        i18nc("@title:window", "Import Script into Project"),
                         startDirectory.toLocalFile());
 
     if (fileUrl.isEmpty()) {
@@ -438,6 +437,17 @@ void MainWindow::importScript()
 
     m_currentProject->importCodeDocument(fileUrl);
     Settings::setLastOpenedDirectory(startDirectory.toLocalFile());
+}
+
+void MainWindow::exportCodeDocument()
+{
+    QUrl startDirectory = Settings::lastOpenedDirectory();
+
+    QString fileUrl = QFileDialog::getSaveFileName(this,
+                        i18nc("@title:window", "Export Script"),
+                        startDirectory.toLocalFile(),
+                       i18n("JavaScript (*.js)"));
+    m_codeEditor->activeDocument()->saveAs(QUrl::fromLocalFile(fileUrl));
 }
 
 void MainWindow::createProject()
