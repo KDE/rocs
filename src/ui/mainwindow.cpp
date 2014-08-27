@@ -649,21 +649,13 @@ void MainWindow::quit()
 
 void MainWindow::importGraphDocument()
 {
-    //FIXME port to GraphTheory
-#if 0
-    //TODO port to GraphTheory library
-    ImporterExporterManager importer(this);
-    Document * gd = importer.importFile();
-    if (gd == 0) {
+    FileFormatDialog importer(this);
+    GraphDocumentPtr document = importer.importFile();
+    if (!document) {
+        qWarning() << "No graph document was imported.";
         return;
     }
-
-    DocumentManager::self().addDocument(gd);
-
-    if (importer.hasDialog()) {
-        importer.dialogExec();
-    }
-#endif
+    m_currentProject->addGraphDocument(document);
 }
 
 void MainWindow::exportGraphDocument()
