@@ -98,9 +98,9 @@ private Q_SLOTS:
      * current project. All files are temporary until saved.
      */
     void createProject();
-    void saveProject(bool saveAs = false);
+    void saveProject();
+    void saveProjectAs();
     void openProject(const QUrl& fileName = QUrl());
-//     void saveProjectAs(); //TODO update
 
     // script import/export
     void importCodeDocument();

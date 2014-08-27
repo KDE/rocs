@@ -349,7 +349,6 @@ void MainWindow::setupActions()
     createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(newGraph()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(newScript()),    this);
     createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphFile()),   this);
-//     createAction("document-save",       i18nc("@action:inmenu", "Save Graph"),         "save-graph",        SLOT(saveGraph()),   this);
     createAction("document-export",     i18nc("@action:inmenu", "Export Graph as"),    "export-graph-as",      SLOT(exportGraphFile()), this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Upload project"),     "upload",            SLOT(uploadScript()),  this);
@@ -474,12 +473,9 @@ void MainWindow::createProject()
     updateCaption();
 }
 
-void MainWindow::saveProject(bool saveAs)
+void MainWindow::saveProject()
 {
-    // save graphs and scripts
-
-    QUrl startDirectory = Settings::lastOpenedDirectory();
-    if (m_currentProject->projectUrl().isEmpty() || saveAs) {
+    if (m_currentProject->projectUrl().isEmpty()) {
         QUrl startDirectory = Settings::lastOpenedDirectory();
         QString file = QFileDialog::getSaveFileName(this,
                             i18nc("@title:window", "Save Project"),
@@ -497,13 +493,21 @@ void MainWindow::saveProject(bool saveAs)
     updateCaption();
 }
 
-// void MainWindow::saveProjectAs()
-// {
-//     saveProject(true);
-//
-//     // add project to recently opened projects
-//     m_recentProjects->addUrl(m_currentProject->projectFile().toLocalFile());
-// }
+void MainWindow::saveProjectAs()
+{
+    QUrl startDirectory = Settings::lastOpenedDirectory();
+    QString file = QFileDialog::getSaveFileName(this,
+                        i18nc("@title:window", "Save Project As"),
+                        startDirectory.toLocalFile(),
+                        i18n("Rocs Projects (*.rocs)"));
+
+    if (file.isEmpty()) {
+        qCritical() << "Filename is empty and no script file was created.";
+        return;
+    }
+    Settings::setLastOpenedDirectory(m_currentProject->projectUrl().path());
+    m_currentProject->projectSaveAs(QUrl::fromLocalFile(file));
+}
 
 void MainWindow::openProject(const QUrl &fileName)
 {
