@@ -346,10 +346,10 @@ void MainWindow::setupActions()
 
     m_recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
     createAction("document-save-as",     i18nc("@action:inmenu", "Save Project as"),   "save-project-as",    SLOT(saveProjectAs()), this);
-    createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(newGraph()), this);
-    createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(newScript()),    this);
-    createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphFile()),   this);
-    createAction("document-export",     i18nc("@action:inmenu", "Export Graph as"),    "export-graph-as",      SLOT(exportGraphFile()), this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(createGraphDocument()), this);
+    createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(createCodeDocument()),    this);
+    createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphDocument()),   this);
+    createAction("document-export",     i18nc("@action:inmenu", "Export Graph as"),    "export-graph-as",      SLOT(exportGraphDocument()), this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
     createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Upload project"),     "upload",            SLOT(uploadScript()),  this);
 
@@ -587,7 +587,7 @@ QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suf
     return targetFile.fileName();
 }
 
-void MainWindow::newScript()
+void MainWindow::createCodeDocument()
 {
     QString basePrefix = QInputDialog::getText(this,
                             i18n("ScriptName"),
@@ -601,7 +601,7 @@ void MainWindow::newScript()
     }
 }
 
-void MainWindow::newGraph()
+void MainWindow::createGraphDocument()
 {
     QString file = QInputDialog::getText(this,
                         i18n("Graph name"),
@@ -647,7 +647,7 @@ void MainWindow::quit()
     }
 }
 
-void MainWindow::importGraphFile()
+void MainWindow::importGraphDocument()
 {
     //FIXME port to GraphTheory
 #if 0
@@ -666,7 +666,7 @@ void MainWindow::importGraphFile()
 #endif
 }
 
-void MainWindow::exportGraphFile()
+void MainWindow::exportGraphDocument()
 {
     FileFormatDialog exporter(this);
     exporter.exportFile(m_currentProject->activeGraphDocument());
