@@ -21,7 +21,7 @@
 #ifndef DOCUMENTATIONWIDGET_H
 #define DOCUMENTATIONWIDGET_H
 
-#include "ui_DocumentationWidget.h"
+#include "ui_documentationwidget.h"
 #include <QWidget>
 
 

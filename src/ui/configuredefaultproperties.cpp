@@ -21,7 +21,7 @@
 #include "configuredefaultproperties.h"
 #include <settings.h>
 
-#include "ui_ConfigureDefaultProperties.h"
+#include "ui_configuredefaultproperties.h"
 
 ConfigureDefaultProperties::ConfigureDefaultProperties(QWidget* parent) :
     QWidget(parent),
