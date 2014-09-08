@@ -29,10 +29,13 @@ Item {
     width: 800
     height: 600
 
+    // element create/remove actions
     signal createNode(real x, real y);
     signal createEdge(Node from, Node to);
     signal deleteNode(Node node);
     signal deleteEdge(Edge edge);
+
+    // exec dialog signals
     signal showNodePropertiesDialog(Node node);
     signal showEdgePropertiesDialog(Edge edge);
 
@@ -103,6 +106,7 @@ Item {
                 property int mouseY
 
                 signal deleteHighlighted();
+                signal clearSelection();
 
                 focus: true
 
@@ -114,6 +118,7 @@ Item {
                     }
                 }
                 onPressed: {
+                    clearSelection();
                     activePress = true
                     startX = mouse.x
                     startY = mouse.y
@@ -260,6 +265,9 @@ Item {
                                 deleteNode(node)
                             }
                         }
+                        onClearSelection: {
+                            highlighted = false
+                        }
                     }
                     onXChanged: {
                         if (scene.origin != nodeItem.origin
@@ -324,14 +332,20 @@ Item {
                         onClicked: {
                             if (deleteAction.checked) {
                                 deleteNode(nodeItem.node)
-                            } else {
-                                mouse.accepted = false
+                                mouse.accepted = true
+                                return
                             }
+                            mouse.accepted = false
                         }
                         onDoubleClicked: {
                             showNodePropertiesDialog(nodeItem.node);
                         }
                         onPressed: {
+                            if (selectMoveAction.checked && !nodeItem.highlighted) {
+                                sceneAction.clearSelection()
+                                nodeItem.highlighted = true
+                                mouse.accepted = true
+                            }
                             if (!(deleteAction.checked || selectMoveAction.checked)) {
                                 mouse.accepted = false
                             }
