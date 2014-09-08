@@ -105,7 +105,7 @@ Item {
                 property int mouseX
                 property int mouseY
 
-                signal deleteHighlighted();
+                signal deleteSelected();
                 signal clearSelection();
 
                 focus: true
@@ -140,7 +140,7 @@ Item {
 
                 Keys.onPressed: {
                     if (event.key == Qt.Key_Delete) {
-                        deleteHighlighted();
+                        deleteSelected()
                         event.accepted = true;
                     }
                 }
@@ -260,7 +260,7 @@ Item {
                                 }
                             }
                         }
-                        onDeleteHighlighted: {
+                        onDeleteSelected: {
                             if (highlighted) {
                                 deleteNode(node)
                             }
