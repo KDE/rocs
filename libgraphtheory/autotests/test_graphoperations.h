@@ -18,8 +18,8 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BASICTEST_H
-#define BASICTEST_H
+#ifndef TEST_GRAPHOPERATIONS_H
+#define TEST_GRAPHOPERATIONS_H
 
 #include <QObject>
 
@@ -32,7 +32,7 @@ class Edge;
 
 using namespace GraphTheory;
 
-class BasicTest : public QObject
+class TestGraphOperations : public QObject
 {
     Q_OBJECT
 

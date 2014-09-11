@@ -18,7 +18,7 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "basic.h"
+#include "test_graphoperations.h"
 #include "libgraphtheory/graphdocument.h"
 #include "libgraphtheory/nodetype.h"
 #include "libgraphtheory/edgetype.h"
@@ -27,21 +27,21 @@
 
 #include <QTest>
 
-void BasicTest::initTestCase()
+void TestGraphOperations::initTestCase()
 {
     QVERIFY(GraphDocument::objects() == 0);
     QVERIFY(Node::objects() == 0);
     QVERIFY(Edge::objects() == 0);
 }
 
-void BasicTest::cleanupTestCase()
+void TestGraphOperations::cleanupTestCase()
 {
     QVERIFY(GraphDocument::objects() == 0);
     QVERIFY(Node::objects() == 0);
     QVERIFY(Edge::objects() == 0);
 }
 
-void BasicTest::testDocumentCreateDelete()
+void TestGraphOperations::testDocumentCreateDelete()
 {
     GraphDocumentPtr document;
     NodePtr nodeA, nodeB;
@@ -67,7 +67,7 @@ void BasicTest::testDocumentCreateDelete()
     QCOMPARE(GraphDocument::objects(), uint(0));
 }
 
-void BasicTest::testNodeCreateDelete()
+void TestGraphOperations::testNodeCreateDelete()
 {
     GraphDocumentPtr document;
     NodePtr nodeA, nodeB;
@@ -93,7 +93,7 @@ void BasicTest::testNodeCreateDelete()
     document->destroy();
 }
 
-void BasicTest::testEdgeCreateDelete()
+void TestGraphOperations::testEdgeCreateDelete()
 {
     GraphDocumentPtr document;
     NodePtr nodeA, nodeB;
@@ -117,7 +117,7 @@ void BasicTest::testEdgeCreateDelete()
     document->destroy();
 }
 
-void BasicTest::testNodeTypeCreateDelete()
+void TestGraphOperations::testNodeTypeCreateDelete()
 {
     GraphDocumentPtr document = GraphDocument::create();
     NodePtr node = Node::create(document);
@@ -144,7 +144,7 @@ void BasicTest::testNodeTypeCreateDelete()
     document->destroy();
 }
 
-void BasicTest::testEdgeTypeCreateDelete()
+void TestGraphOperations::testEdgeTypeCreateDelete()
 {
     GraphDocumentPtr document = GraphDocument::create();
     NodePtr from = Node::create(document);
@@ -173,7 +173,7 @@ void BasicTest::testEdgeTypeCreateDelete()
     document->destroy();
 }
 
-void BasicTest::testNodeDynamicProperties()
+void TestGraphOperations::testNodeDynamicProperties()
 {
     GraphDocumentPtr document = GraphDocument::create();
     NodePtr node = Node::create(document);
@@ -194,7 +194,7 @@ void BasicTest::testNodeDynamicProperties()
     document->destroy();
 }
 
-void BasicTest::testEdgeDynamicProperties()
+void TestGraphOperations::testEdgeDynamicProperties()
 {
     GraphDocumentPtr document = GraphDocument::create();
     NodePtr from = Node::create(document);
@@ -217,7 +217,7 @@ void BasicTest::testEdgeDynamicProperties()
     document->destroy();
 }
 
-void BasicTest::testNodeIdentifiers()
+void TestGraphOperations::testNodeIdentifiers()
 {
     GraphDocumentPtr document = GraphDocument::create();
     NodePtr nodeA = Node::create(document);
@@ -228,4 +228,4 @@ void BasicTest::testNodeIdentifiers()
     document->destroy();
 }
 
-QTEST_MAIN(BasicTest)
+QTEST_MAIN(TestGraphOperations)
