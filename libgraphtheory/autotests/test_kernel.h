@@ -39,6 +39,7 @@ class TestKernel : public QObject
 private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
+    /** set up an engine and start execution **/
     void engineSetup();
 };
 

@@ -59,8 +59,9 @@ void TestKernel::engineSetup()
     edge = Edge::create(nodeA, nodeB);
 
     // create kernel
+    QString script = "return true;";
     Kernel kernel;
-    // TODO test real functionality
+    kernel.execute(document, script);
 
     document->destroy();
     document.reset();
@@ -71,5 +72,6 @@ void TestKernel::engineSetup()
     QCOMPARE(Node::objects(), uint(0));
     QCOMPARE(GraphDocument::objects(), uint(0));
 }
+
 
 QTEST_MAIN(TestKernel)

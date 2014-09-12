@@ -64,7 +64,6 @@ Kernel::Kernel()
 {
     connect(&d->m_consoleModule, SIGNAL(message(QString, GraphTheory::Kernel::MessageType)),
         this, SLOT(processMessage(QString, GraphTheory::Kernel::MessageType)));
-
 }
 
 Kernel::~Kernel()
@@ -85,8 +84,8 @@ void Kernel::execute(GraphDocumentPtr document, const QString &script)
     d->m_engine->pushContext();
 
     // add document
-    DocumentWrapper *documentWrapper = new DocumentWrapper(document, d->m_engine);
-    d->m_engine->globalObject().setProperty("Document", d->m_engine->newQObject(documentWrapper));
+    DocumentWrapper documentWrapper(document, d->m_engine);
+    d->m_engine->globalObject().setProperty("Document", d->m_engine->newQObject(&documentWrapper));
 
     // set modules
     d->m_engine->globalObject().setProperty("Console", d->m_engine->newQObject(&d->m_consoleModule));
@@ -105,8 +104,6 @@ void Kernel::execute(GraphDocumentPtr document, const QString &script)
         d->m_engine->popContext();
     }
     emit executionFinished();
-
-    documentWrapper->deleteLater();
 }
 
 void Kernel::stop()
