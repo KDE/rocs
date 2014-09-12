@@ -48,8 +48,8 @@ class DocumentWrapper : public QObject
 public:
     DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
     virtual ~DocumentWrapper();
-    QScriptValue nodes();
-    QScriptValue edges();
+    Q_INVOKABLE QScriptValue nodes();
+    Q_INVOKABLE QScriptValue edges();
 
 Q_SIGNALS:
 

@@ -21,6 +21,8 @@
 #include "kernel.h"
 #include "graphdocument.h"
 #include "documentwrapper.h"
+#include "nodewrapper.h"
+#include "edgewrapper.h"
 #include "kernel/modules/console/consolemodule.h"
 
 #include <KLocalizedString>
@@ -71,11 +73,15 @@ Kernel::~Kernel()
 
 }
 
-void Kernel::execute(GraphDocumentPtr document, const QString &script)
+QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
 {
     if (!d->m_engine) {
         d->m_engine = new QScriptEngine(this);
     }
+
+    // register meta types
+    qScriptRegisterSequenceMetaType<QList<GraphTheory::NodeWrapper*> >(d->m_engine);
+    qScriptRegisterSequenceMetaType<QList<GraphTheory::EdgeWrapper*> >(d->m_engine);
 
     if (d->m_engine->isEvaluating()) {
         d->m_engine->abortEvaluation();
@@ -93,17 +99,19 @@ void Kernel::execute(GraphDocumentPtr document, const QString &script)
     // set evaluation
     d->m_engine->setProcessEventsInterval(100); //! TODO: Make that changeable.
 
-    QString result = d->m_engine->evaluate(script).toString();
+    QScriptValue result = d->m_engine->evaluate(script).toString();
     if (d->m_engine && d->m_engine->hasUncaughtException()) {
-        emit message(result, WarningMessage);
+        emit message(result.toString(), WarningMessage);
         emit message(d->m_engine->uncaughtExceptionBacktrace().join("\n"), InfoMessage);
     }
     if (d->m_engine) {
         emit message(i18nc("@info status message after successful script execution", "<i>Execution Finished</i>"), InfoMessage);
-        emit message(result, InfoMessage);
+        emit message(result.toString(), InfoMessage);
         d->m_engine->popContext();
     }
     emit executionFinished();
+
+    return result;
 }
 
 void Kernel::stop()
@@ -117,3 +125,4 @@ void Kernel::processMessage(const QString& messageString, Kernel::MessageType ty
 }
 
 //END: Kernel
+

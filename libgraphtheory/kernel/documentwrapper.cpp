@@ -44,29 +44,31 @@ DocumentWrapper::~DocumentWrapper()
 QScriptValue DocumentWrapper::nodes()
 {
     QScriptValue array = m_engine->newArray();
+    QList<NodeWrapper*> nodeWrappers;
     foreach(NodePtr node, m_document->nodes()) {
         if (m_nodeMap.contains(node)) {
-            array.property("push").call(array, m_engine->newQObject(m_nodeMap.value(node)));
+            nodeWrappers.append(m_nodeMap.value(node));
         } else {
             NodeWrapper *wrapper = new NodeWrapper(node, this);
             m_nodeMap.insert(node, wrapper);
-            array.property("push").call(array, m_engine->newQObject(wrapper));
+            nodeWrappers.append(wrapper);
         }
     }
-    return array;
+    return m_engine->toScriptValue(nodeWrappers);
 }
 
 QScriptValue DocumentWrapper::edges()
 {
     QScriptValue array = m_engine->newArray();
+    QList<EdgeWrapper*> edgeWrappers;
     foreach(EdgePtr edge, m_document->edges()) {
         if (m_edgeMap.contains(edge)) {
-            array.property("push").call(array, m_engine->newQObject(m_edgeMap.value(edge)));
+            edgeWrappers.append(m_edgeMap.value(edge));
         } else {
             EdgeWrapper *wrapper = new EdgeWrapper(edge, this);
             m_edgeMap.insert(edge, wrapper);
-            array.property("push").call(array, m_engine->newQObject(wrapper));
+            edgeWrappers.append(wrapper);
         }
     }
-    return array;
+    return m_engine->toScriptValue(edgeWrappers);
 }

@@ -41,6 +41,8 @@ private Q_SLOTS:
     void cleanupTestCase();
     /** set up an engine and start execution **/
     void engineSetup();
+    /** test script accessibility of graph document objects **/
+    void graphObjectAccess();
 };
 
 #endif

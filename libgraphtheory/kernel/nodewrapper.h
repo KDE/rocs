@@ -107,4 +107,6 @@ private:
 };
 }
 
+Q_DECLARE_METATYPE(QList<GraphTheory::NodeWrapper*>)
+
 #endif
