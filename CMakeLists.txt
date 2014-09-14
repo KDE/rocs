@@ -50,7 +50,7 @@ find_package(Qt5 5.3 REQUIRED NO_MODULE COMPONENTS
   Test
   XmlPatterns
 )
-find_package(KF5 CONFIG REQUIRED COMPONENTS
+find_package(KF5 REQUIRED COMPONENTS
   Config
   CoreAddons
   Declarative
