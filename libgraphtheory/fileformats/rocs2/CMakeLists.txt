@@ -1,4 +1,4 @@
-# Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+# Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -21,9 +21,22 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-ecm_optional_add_subdirectory(tgf)
-ecm_optional_add_subdirectory(tikz)
-ecm_optional_add_subdirectory(dot)
-ecm_optional_add_subdirectory(gml)
-ecm_optional_add_subdirectory(rocs1)
-ecm_optional_add_subdirectory(rocs2)
+set(rocs2format_SRCS
+    rocs2fileformat.cpp
+)
+
+add_library(rocs2fileformat MODULE ${rocs2format_SRCS})
+
+target_link_libraries(rocs2fileformat
+    PUBLIC
+        Qt5::Core
+        Qt5::Gui
+        KF5::I18n
+        KF5::Service
+        rocsgraphtheory
+)
+
+kservice_desktop_to_json(rocs2fileformat rocs2fileformat.desktop)
+install(TARGETS rocs2fileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
+
+ecm_optional_add_subdirectory(autotests)
