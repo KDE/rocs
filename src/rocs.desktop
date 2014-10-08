@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=rocs %i -caption %c
+Exec=rocs -caption %c
 Icon=rocs
 X-DocPath=rocs/index.html
 MimeType=application/x-rocs;
