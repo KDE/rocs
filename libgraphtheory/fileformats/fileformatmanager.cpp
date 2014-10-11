@@ -142,8 +142,7 @@ void FileFormatManager::loadBackends()
     }
 
     // load static plugins
-    //TODO to be ported, once we have a new rocs internal file format
-    d->defaultGraphFilePlugin = backendByExtension("graph");
+    d->defaultGraphFilePlugin = backendByExtension("graph2");
 }
 
 FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
