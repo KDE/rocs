@@ -19,6 +19,7 @@
  */
 
 #include "nodewrapper.h"
+#include "edgewrapper.h"
 #include "graphdocument.h"
 #include "nodetype.h"
 #include "edge.h"
@@ -90,6 +91,33 @@ void NodeWrapper::setColor(const QColor &color)
     }
     m_node->setColor(color);
     // signal emitted by connection to m_node signal
+}
+
+QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges() const
+{
+    QList<EdgeWrapper*> edges;
+    foreach (EdgePtr edge, m_node->edges()) {
+        edges.append(m_documentWrapper->edgeWrapper(edge));
+    }
+    return edges;
+}
+
+QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges() const
+{
+    QList<EdgeWrapper*> edges;
+    foreach (EdgePtr edge, m_node->inEdges()) {
+        edges.append(m_documentWrapper->edgeWrapper(edge));
+    }
+    return edges;
+}
+
+QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges() const
+{
+    QList<EdgeWrapper*> edges;
+    foreach (EdgePtr edge, m_node->outEdges()) {
+        edges.append(m_documentWrapper->edgeWrapper(edge));
+    }
+    return edges;
 }
 
 bool NodeWrapper::event(QEvent* e)

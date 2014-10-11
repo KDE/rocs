@@ -90,6 +90,10 @@ public:
      */
     void setColor(const QColor &color);
 
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> edges() const;
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> inEdges() const;
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges() const;
+
     /** reimplemented from QObject **/
     virtual bool event(QEvent* e);
 

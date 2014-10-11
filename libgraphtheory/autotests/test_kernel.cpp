@@ -98,4 +98,33 @@ void TestKernel::graphObjectAccess()
     document->destroy();
 }
 
+void TestKernel::edgeAccessMethods()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    document->edgeTypes().first()->setDirection(EdgeType::Unidirectional);
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    EdgePtr edge = Edge::create(nodeA, nodeB);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    script = "Document.nodes()[0].edges().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[0].inEdges().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(0));
+
+    script = "Document.nodes()[0].outEdges().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    // cleanup
+    document->destroy();
+}
+
 QTEST_MAIN(TestKernel)

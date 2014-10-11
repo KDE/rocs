@@ -43,6 +43,8 @@ private Q_SLOTS:
     void engineSetup();
     /** test script accessibility of graph document objects **/
     void graphObjectAccess();
+    /** test edge, inEdges, outEdges methods **/
+    void edgeAccessMethods();
 };
 
 #endif
