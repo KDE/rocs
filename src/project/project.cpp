@@ -47,15 +47,13 @@ class ProjectPrivate
 {
 public:
     ProjectPrivate()
-        : m_name(QString())
-        , m_journal(0)
+        : m_journal(0)
         , m_graphEditor(0)
         , m_modified(false)
     {
 
     }
 
-    QString m_name; //!< the project's name
     QUrl m_projectUrl; //!< the project's archive file
     QTemporaryDir m_workingDirectory; //!< temporary directory where all project files are organized
     QList<KTextEditor::Document*> m_codeDocuments;
@@ -96,7 +94,6 @@ bool ProjectPrivate::loadProject(const QUrl &url)
 
     // set project
     QJsonObject metaInfo = metaInfoDoc.object();
-    m_name = metaInfo["name"].toString();
 
     QJsonArray codeDocs = metaInfo["scripts"].toArray();
     for (int index = 0; index < codeDocs.count(); ++index) {
@@ -131,7 +128,6 @@ bool ProjectPrivate::loadProject(const QUrl &url)
 bool ProjectPrivate::writeProjectMetaInfo()
 {
     QJsonObject metaInfo;
-    metaInfo.insert("name", m_name);
 
     QJsonArray codeDocs, graphDocs;
     foreach (KTextEditor::Document *document,  m_codeDocuments) {
@@ -177,21 +173,6 @@ Project::Project(const QUrl &projectFile, GraphTheory::Editor *graphEditor)
 
 Project::~Project()
 {
-}
-
-void Project::setName(const QString &name)
-{
-    if (d->m_name == name) {
-        return;
-    }
-    d->m_name = name;
-    emit nameChanged(name);
-    d->m_modified = true;
-}
-
-QString Project::name() const
-{
-    return d->m_name;
 }
 
 QUrl Project::projectUrl() const

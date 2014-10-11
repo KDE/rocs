@@ -74,16 +74,6 @@ public:
     virtual ~Project();
 
     /**
-     * Set the project name to @p name.
-     */
-    void setName(const QString &name);
-
-    /**
-     * @return name of the project
-     */
-    QString name() const;
-
-    /**
      * @return list of all scripts contained in this project
      */
     QList<KTextEditor::Document*> codeDocuments() const;
@@ -134,8 +124,6 @@ public:
     KTextEditor::Document * journalDocument() const;
 
 Q_SIGNALS:
-    void nameChanged(const QString &name);
-
     void codeDocumentAboutToBeAdded(KTextEditor::Document*,int);
     void codeDocumentAdded();
     void codeDocumentAboutToBeRemoved(int,int);

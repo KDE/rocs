@@ -469,7 +469,6 @@ void MainWindow::createProject()
     connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
 
     m_currentProject->setModified(false);
-
     updateCaption();
 }
 
@@ -507,6 +506,7 @@ void MainWindow::saveProjectAs()
     }
     Settings::setLastOpenedDirectory(m_currentProject->projectUrl().path());
     m_currentProject->projectSaveAs(QUrl::fromLocalFile(file));
+    updateCaption();
 }
 
 void MainWindow::openProject(const QUrl &fileName)
@@ -555,16 +555,11 @@ void MainWindow::updateCaption()
         return;
     }
 
-    QString caption = "";
-    if (!m_currentProject->name().isEmpty()) {
-        caption.append(m_currentProject->name());
-    }
-    else if (m_currentProject->projectUrl().isEmpty()) {
-        caption.append(i18nc("caption text for temporary project", "[ untitled ]"));
+    if (m_currentProject->projectUrl().isEmpty()) {
+        setCaption(i18nc("caption text for temporary project", "[ untitled ]"));
     } else {
-        caption.append(m_currentProject->projectUrl().toLocalFile());
+        setCaption(QString("[ %1 ]").arg(m_currentProject->projectUrl().toLocalFile()));
     }
-    setCaption(caption);
 }
 
 QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suffix) {

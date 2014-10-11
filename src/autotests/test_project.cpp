@@ -77,7 +77,6 @@ void TestProject::loadSave()
     QTemporaryFile projectFile;
     projectFile.open();
     project.setProjectUrl(QUrl::fromLocalFile(projectFile.fileName()));
-    project.setName("testname");
 
     // add files
     QTemporaryFile codeFile;
@@ -88,7 +87,6 @@ void TestProject::loadSave()
     QVERIFY(project.projectSave());
 
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
-    QCOMPARE(loadedProject.name(), QString("testname"));
     QCOMPARE(loadedProject.codeDocuments().count(), project.codeDocuments().count());
     QCOMPARE(loadedProject.graphDocuments().count(), project.graphDocuments().count());
 
