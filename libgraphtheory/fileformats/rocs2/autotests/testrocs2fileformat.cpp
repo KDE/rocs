@@ -78,4 +78,56 @@ void TestRocs2FileFormat::documentTypesTest()
     QCOMPARE(importDocument->edgeTypes().first()->direction(), EdgeType::Bidirectional);
 }
 
+// test if nodes, edges, and the graph structure itself is re-imported correctly
+void TestRocs2FileFormat::nodeAndEdgeTest()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    document->nodeTypes().first()->addDynamicProperty("label");
+    document->nodeTypes().first()->setId(1);
+    document->edgeTypes().first()->addDynamicProperty("label");
+    document->edgeTypes().first()->setId(1);
+
+    QMap<QString, NodePtr> dataList;
+    dataList.insert("a", Node::create(document));
+    dataList["a"]->setDynamicProperty("label", "first node");
+    dataList["a"]->setId(1);
+    dataList["a"]->setX(20);
+    dataList["a"]->setY(20);
+
+    dataList.insert("b", Node::create(document));
+    dataList["b"]->setDynamicProperty("label", "b");
+    dataList["b"]->setId(2);
+
+    Edge::create(dataList["a"], dataList["b"])->setDynamicProperty("label", "test value");
+
+    // create exporter plugin
+    Rocs2FileFormat serializer(this, QList<QVariant>());
+    serializer.setFile(QUrl::fromLocalFile("test.rocs2"));
+    serializer.writeFile(document);
+    QVERIFY(serializer.hasError() == false);
+
+    // create importer
+    Rocs2FileFormat importer(this, QList<QVariant>());
+    importer.setFile(QUrl::fromLocalFile("test.rocs2"));
+    importer.readFile();
+    QVERIFY(importer.hasError() == false);
+    QVERIFY(importer.isGraphDocument());
+    GraphDocumentPtr importDocument = importer.graphDocument();
+
+    // test imported values
+    QCOMPARE(importDocument->nodes().size(), 2);
+
+    // find node with ID 1 and then test it
+    NodePtr testNode;
+    foreach (NodePtr node, importDocument->nodes()) {
+        if (node->id() == 1) {
+            testNode = node;
+        }
+    }
+    QVERIFY2(testNode, "No node with ID 1 found");
+    QCOMPARE(testNode->x(), qreal(20));
+    QCOMPARE(testNode->y(), qreal(20));
+    QCOMPARE(testNode->dynamicProperty("label").toString(), QString("first node"));
+}
+
 QTEST_MAIN(TestRocs2FileFormat);

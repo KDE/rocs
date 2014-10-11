@@ -31,6 +31,7 @@ public:
 
 private slots:
     void documentTypesTest();
+    void nodeAndEdgeTest();
 };
 
 #endif

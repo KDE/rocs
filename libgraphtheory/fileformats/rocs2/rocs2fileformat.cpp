@@ -108,6 +108,40 @@ void Rocs2FileFormat::readFile()
         }
     }
 
+    // import nodes
+    QJsonArray nodesJson = jsonObj["Nodes"].toArray();
+    for (int index = 0; index < nodesJson.count(); ++index) {
+        QJsonObject nodeJson = nodesJson.at(index).toObject();
+        NodePtr node = Node::create(document);
+
+        // set type
+        NodeTypePtr typeToSet;
+        //TODO this is not very efficient for big files: use table instead to cache IDs
+        foreach (NodeTypePtr type, document->nodeTypes()) {
+            if (type->id() == nodeJson["Type"].toInt()) {
+                typeToSet = type;
+                break;
+            }
+        }
+        if (!typeToSet) {
+            qCritical() << "No type found with this ID, defaulting to first found type";
+            typeToSet = document->nodeTypes().first();
+        }
+        node->setType(typeToSet);
+
+        // further properties
+        node->setId(nodeJson["Id"].toInt());
+        node->setX(nodeJson["X"].toDouble());
+        node->setY(nodeJson["Y"].toDouble());
+        node->setColor(QColor(nodeJson["Color"].toString()));
+
+        QJsonArray propertiesJson = nodeJson["Properties"].toArray();
+        for (int pIndex = 0; pIndex < propertiesJson.count(); ++pIndex) {
+            QJsonObject propertyJson = propertiesJson.at(index).toObject();
+            node->setDynamicProperty(propertyJson["Name"].toString(), propertyJson["Value"].toString());
+        }
+    }
+
     setGraphDocument(document);
     setError(None);
 }
@@ -166,7 +200,22 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
     QJsonArray nodes;
     foreach (NodePtr node, document->nodes()) {
         QJsonObject nodeJson;
+        nodeJson.insert("Id", node->id());
+        nodeJson.insert("Type", node->type()->id());
+        nodeJson.insert("X", node->x());
+        nodeJson.insert("Y", node->y());
+        nodeJson.insert("Color", node->color().name());
+        QJsonArray propertiesJson;
+        foreach (QString property, node->dynamicProperties()) {
+            QJsonObject propertyJson;
+            propertyJson.insert("Name", property);
+            propertyJson.insert("Value", node->dynamicProperty(property).toString());
+            propertiesJson.append(propertyJson);
+        }
+        nodeJson.insert("Properties", propertiesJson);
+        nodes.append(nodeJson);
     }
+    output.insert("Nodes", nodes);
 
     // serialize to file
     QJsonDocument outputDocument(output);
