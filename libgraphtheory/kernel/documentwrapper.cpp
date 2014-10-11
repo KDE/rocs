@@ -33,34 +33,53 @@ DocumentWrapper::DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engin
     : m_document(document)
     , m_engine(engine)
 {
+    foreach (NodePtr node, document->nodes()) {
+        registerWrapper(node);
+    }
+    foreach (EdgePtr edge, document->edges()) {
+        registerWrapper(edge);
+    }
 
+    connect(document.data(), SIGNAL(nodeAboutToBeAdded(NodePtr,int)), this, SLOT(registerWrapper(NodePtr)));
+    connect(document.data(), SIGNAL(edgeAboutToBeAdded(EdgePtr,int)), this, SLOT(registerWrapper(EdgePtr)));
 }
 
 DocumentWrapper::~DocumentWrapper()
 {
-
+    qDeleteAll(m_edgeMap);
+    qDeleteAll(m_nodeMap);
 }
 
-NodeWrapper * DocumentWrapper::nodeWrapper(NodePtr node)
+void DocumentWrapper::registerWrapper(NodePtr node)
 {
     if (m_nodeMap.contains(node)) {
-        return m_nodeMap.value(node);
-    } else {
-        NodeWrapper *wrapper = new NodeWrapper(node, this);
-        m_nodeMap.insert(node, wrapper);
-        return wrapper;
+        return;
     }
+    NodeWrapper *wrapper = new NodeWrapper(node, this);
+    m_nodeMap.insert(node, wrapper);
+    return;
 }
 
-EdgeWrapper * DocumentWrapper::edgeWrapper(EdgePtr edge)
+void DocumentWrapper::registerWrapper(EdgePtr edge)
 {
     if (m_edgeMap.contains(edge)) {
-        return m_edgeMap.value(edge);
-    } else {
-        EdgeWrapper *wrapper = new EdgeWrapper(edge, this);
-        m_edgeMap.insert(edge, wrapper);
-        return wrapper;
+        return;
     }
+    EdgeWrapper *wrapper = new EdgeWrapper(edge, this);
+    m_edgeMap.insert(edge, wrapper);
+    return;
+}
+
+NodeWrapper * DocumentWrapper::nodeWrapper(NodePtr node) const
+{
+    Q_ASSERT(m_nodeMap.contains(node));
+    return m_nodeMap.value(node);
+}
+
+EdgeWrapper * DocumentWrapper::edgeWrapper(EdgePtr edge) const
+{
+    Q_ASSERT(m_edgeMap.contains(edge));
+    return m_edgeMap.value(edge);
 }
 
 QScriptValue DocumentWrapper::nodes()

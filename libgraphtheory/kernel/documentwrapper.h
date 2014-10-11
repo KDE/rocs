@@ -52,17 +52,21 @@ public:
     /**
      * \return wrapper for \p node
      */
-    NodeWrapper * nodeWrapper(NodePtr node);
+    NodeWrapper * nodeWrapper(NodePtr node) const;
 
     /**
      * \return wrapper for \p edge
      */
-    EdgeWrapper * edgeWrapper(EdgePtr edge);
+    EdgeWrapper * edgeWrapper(EdgePtr edge) const;
 
     Q_INVOKABLE QScriptValue nodes();
     Q_INVOKABLE QScriptValue edges();
 
 Q_SIGNALS:
+
+private Q_SLOTS:
+    void registerWrapper(NodePtr node);
+    void registerWrapper(EdgePtr edge);
 
 private:
     Q_DISABLE_COPY(DocumentWrapper)
