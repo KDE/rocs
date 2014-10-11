@@ -128,6 +128,12 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
     QCOMPARE(testNode->x(), qreal(20));
     QCOMPARE(testNode->y(), qreal(20));
     QCOMPARE(testNode->dynamicProperty("label").toString(), QString("first node"));
+
+    // test edge
+    QCOMPARE(importDocument->edges().count(), 1);
+    EdgePtr testEdge = importDocument->edges().first();
+    QCOMPARE(testEdge->dynamicProperty("label").toString(), QString("test value"));
+    QVERIFY(testEdge->from() == testNode);
 }
 
 QTEST_MAIN(TestRocs2FileFormat);

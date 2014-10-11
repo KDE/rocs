@@ -137,8 +137,54 @@ void Rocs2FileFormat::readFile()
 
         QJsonArray propertiesJson = nodeJson["Properties"].toArray();
         for (int pIndex = 0; pIndex < propertiesJson.count(); ++pIndex) {
-            QJsonObject propertyJson = propertiesJson.at(index).toObject();
+            QJsonObject propertyJson = propertiesJson.at(pIndex).toObject();
             node->setDynamicProperty(propertyJson["Name"].toString(), propertyJson["Value"].toString());
+        }
+    }
+
+    // import edges
+    QJsonArray edgesJson = jsonObj["Edges"].toArray();
+    for (int index = 0; index < edgesJson.count(); ++index) {
+        QJsonObject edgeJson = edgesJson.at(index).toObject();
+
+        // find nodes to connect to
+        NodePtr fromNode, toNode;
+        //TODO this is not very efficient for big files: use table instead to cache IDs
+        foreach (NodePtr node, document->nodes()) {
+            if (node->id() == edgeJson["From"].toInt()) {
+                fromNode = node;
+            }
+            if (node->id() == edgeJson["To"].toInt()) {
+                toNode = node;
+            }
+        }
+        if (!fromNode || !toNode) {
+            qCritical() << "No type found with this ID, aborting edge from"
+                << edgeJson["From"].toInt() << "to" << edgeJson["To"].toInt();
+            continue;
+        }
+        EdgePtr edge = Edge::create(fromNode, toNode);
+
+        // set type
+        EdgeTypePtr typeToSet;
+        //TODO this is not very efficient for big files: use table instead to cache IDs
+        foreach (EdgeTypePtr type, document->edgeTypes()) {
+            if (type->id() == edgeJson["Type"].toInt()) {
+                typeToSet = type;
+                break;
+            }
+        }
+        if (!typeToSet) {
+            qCritical() << "No type found with this ID, defaulting to first found type";
+            typeToSet = document->edgeTypes().first();
+        }
+        edge->setType(typeToSet);
+
+        // set dynamic properties
+        QJsonArray propertiesJson = edgeJson["Properties"].toArray();
+        for (int pIndex = 0; pIndex < propertiesJson.count(); ++pIndex) {
+            QJsonObject propertyJson = propertiesJson.at(pIndex).toObject();
+            edge->setDynamicProperty(propertyJson["Name"].toString(), propertyJson["Value"].toString());
         }
     }
 
@@ -217,6 +263,25 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
     }
     output.insert("Nodes", nodes);
 
+    // serialize edges
+    QJsonArray edges;
+    foreach (EdgePtr edge, document->edges()) {
+        QJsonObject edgeJson;
+        edgeJson.insert("Type", edge->type()->id());
+        edgeJson.insert("From", edge->from()->id());
+        edgeJson.insert("To", edge->to()->id());
+        QJsonArray propertiesJson;
+        foreach (QString property, edge->dynamicProperties()) {
+            QJsonObject propertyJson;
+            propertyJson.insert("Name", property);
+            propertyJson.insert("Value", edge->dynamicProperty(property).toString());
+            propertiesJson.append(propertyJson);
+        }
+        edgeJson.insert("Properties", propertiesJson);
+        edges.append(edgeJson);
+    }
+    output.insert("Edges", edges);
+
     // serialize to file
     QJsonDocument outputDocument(output);
     if (fileHandle.write(outputDocument.toJson()) == -1) {
@@ -224,8 +289,8 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         return;
     }
 
-    //ONLY TESTING
-    qDebug() << outputDocument.toJson();
+    // debug serialization
+    // qDebug() << outputDocument.toJson();
 
     setError(None);
 }
