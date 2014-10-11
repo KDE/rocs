@@ -276,4 +276,41 @@ void TestGraphOperations::testBidirectionalEdges()
     document->destroy();
 }
 
+void TestGraphOperations::testEdgesOfDifferentType()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+
+    EdgeTypePtr typeA = document->edgeTypes().first();
+    typeA->setDirection(EdgeType::Unidirectional);
+    EdgeTypePtr typeB = EdgeType::create(document);
+    typeB->setDirection(EdgeType::Unidirectional);
+
+    NodePtr from = Node::create(document);
+    NodePtr to = Node::create(document);
+
+    EdgePtr edgeA = Edge::create(from, to);
+    edgeA->setType(typeA);
+
+    EdgePtr edgeB = Edge::create(from, to);
+    edgeB->setType(typeB);
+
+    // all edge types
+    QCOMPARE(from->edges().count(), 2);
+    QCOMPARE(from->inEdges().count(), 0);
+    QCOMPARE(from->outEdges().count(), 2);
+    QCOMPARE(to->edges().count(), 2);
+    QCOMPARE(to->inEdges().count(), 2);
+    QCOMPARE(to->outEdges().count(), 0);
+
+    // only one edge type
+    QCOMPARE(from->edges(typeA).count(), 1);
+    QCOMPARE(from->inEdges(typeA).count(), 0);
+    QCOMPARE(from->outEdges(typeA).count(), 1);
+    QCOMPARE(to->edges(typeA).count(), 1);
+    QCOMPARE(to->inEdges(typeA).count(), 1);
+    QCOMPARE(to->outEdges(typeA).count(), 0);
+
+    document->destroy();
+}
+
 QTEST_MAIN(TestGraphOperations)

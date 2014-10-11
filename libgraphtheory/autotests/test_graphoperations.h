@@ -49,6 +49,7 @@ private Q_SLOTS:
     void testNodeIdentifiers();
     void testUnidirectionalEdges();
     void testBidirectionalEdges();
+    void testEdgesOfDifferentType();
 };
 
 #endif

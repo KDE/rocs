@@ -114,19 +114,19 @@ public:
     void remove(EdgePtr edge);
 
     /**
-     * @return edges adjacent to this node
+     * @return edges adjacent to this node, if optional @p type is set, only edges of this type are returned
      */
-    EdgeList edges() const;
+    EdgeList edges(EdgeTypePtr type = EdgeTypePtr()) const;
 
     /**
-     * @return incoming edges incoming
+     * @return incoming edges incoming, if optional @p type is set, only edges of this type are returned
      */
-    EdgeList inEdges() const;
+    EdgeList inEdges(EdgeTypePtr type = EdgeTypePtr()) const;
 
     /**
-     * @return outgoing edges
+     * @return outgoing edges, if optional @p type is set, only edges of this type are returned
      */
-    EdgeList outEdges() const;
+    EdgeList outEdges(EdgeTypePtr type = EdgeTypePtr()) const;
 
     /**
      * If the id value is invalid, -1 is returned.

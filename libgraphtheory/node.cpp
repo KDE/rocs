@@ -160,15 +160,27 @@ void Node::remove(EdgePtr edge)
     d->m_edges.removeOne(edge);
 }
 
-EdgeList Node::edges() const
+EdgeList Node::edges(EdgeTypePtr type) const
 {
-    return d->m_edges;
+    if (!type) {
+        return d->m_edges;
+    }
+    EdgeList edges;
+    foreach (EdgePtr edge, d->m_edges) {
+        if (edge->type() == type) {
+            edges.append(edge);
+        }
+    }
+    return edges;
 }
 
-EdgeList Node::inEdges() const
+EdgeList Node::inEdges(EdgeTypePtr type) const
 {
     EdgeList inEdges;
     foreach (EdgePtr edge, d->m_edges) {
+        if (type && edge->type() != type) {
+            continue;
+        }
         if (edge->type()->direction() == EdgeType::Bidirectional) {
             inEdges.append(edge);
             continue;
@@ -182,10 +194,13 @@ EdgeList Node::inEdges() const
     return inEdges;
 }
 
-EdgeList Node::outEdges() const
+EdgeList Node::outEdges(EdgeTypePtr type) const
 {
     EdgeList outEdges;
     foreach (EdgePtr edge, d->m_edges) {
+        if (type && edge->type() != type) {
+            continue;
+        }
         if (edge->type()->direction() == EdgeType::Bidirectional) {
             outEdges.append(edge);
             continue;
