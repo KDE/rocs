@@ -49,13 +49,6 @@ public:
 
     virtual ~EdgeWrapper();
 
-    /**
-     * If the id value is invalid, -1 is returned.
-     *
-     * @return node identifier
-     */
-    int id() const;
-
     /** reimplemented from QObject **/
     virtual bool event(QEvent* e);
 
