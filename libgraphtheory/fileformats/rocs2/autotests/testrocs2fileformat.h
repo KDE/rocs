@@ -32,6 +32,7 @@ public:
 private slots:
     void documentTypesTest();
     void nodeAndEdgeTest();
+    void parseVersion1Format();
 };
 
 #endif

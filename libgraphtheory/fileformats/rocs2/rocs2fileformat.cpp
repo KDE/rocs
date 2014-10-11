@@ -73,7 +73,7 @@ void Rocs2FileFormat::readFile()
 
     // check format
     int formatVersion = jsonObj["FormatVersion"].toInt();
-    if (formatVersion != 1) {
+    if (formatVersion > 1) {
         qCritical() << "File format has version" << formatVersion << "which is higher than the latest supported version.";
     }
 

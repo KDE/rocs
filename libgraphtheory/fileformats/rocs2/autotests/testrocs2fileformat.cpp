@@ -136,4 +136,13 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
     QVERIFY(testEdge->from() == testNode);
 }
 
+// regression test: test parsing of format version 1
+void TestRocs2FileFormat::parseVersion1Format()
+{
+    Rocs2FileFormat importer(this, QList<QVariant>());
+    importer.setFile(QUrl::fromLocalFile("importtest_v1.graph2"));
+    importer.readFile();
+    QVERIFY2(importer.hasError() == false, importer.errorString().toStdString().c_str());
+}
+
 QTEST_MAIN(TestRocs2FileFormat);
