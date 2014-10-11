@@ -32,8 +32,8 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
     : m_edge(edge)
     , m_documentWrapper(documentWrapper)
 {
-    connect(m_edge.data(), SIGNAL(colorChanged(QColor)), this, SIGNAL(colorChanged(QColor)));
-    connect(m_edge.data(), SIGNAL(dynamicPropertiesChanged()), this, SLOT(updateDynamicProperties()));
+    connect(m_edge.data(), &Edge::typeColorChanged, this, &EdgeWrapper::colorChanged);
+    connect(m_edge.data(), &Edge::dynamicPropertiesChanged, this, &EdgeWrapper::updateDynamicProperties);
 
     updateDynamicProperties();
 }

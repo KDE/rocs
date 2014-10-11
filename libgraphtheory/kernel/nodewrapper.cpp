@@ -34,9 +34,9 @@ NodeWrapper::NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper)
     : m_node(node)
     , m_documentWrapper(documentWrapper)
 {
-    connect(m_node.data(), SIGNAL(colorChanged(QColor)), this, SIGNAL(colorChanged(QColor)));
-    connect(m_node.data(), SIGNAL(positionChanged(QPointF)), this, SIGNAL(positionChanged(QPointF)));
-    connect(m_node.data(), SIGNAL(dynamicPropertiesChanged()), this, SLOT(updateDynamicProperties()));
+    connect(m_node.data(), &Node::colorChanged, this, &NodeWrapper::colorChanged);
+    connect(m_node.data(), &Node::positionChanged, this, &NodeWrapper::positionChanged);
+    connect(m_node.data(), &Node::dynamicPropertiesChanged, this, &NodeWrapper::updateDynamicProperties);
 
     updateDynamicProperties();
 }
