@@ -75,10 +75,9 @@ void TestTgfFileFormat::serializeUnserializeTest()
     QVERIFY2(document->nodes().size() == 5, "ERROR: Number of data is not 5 ");
     QVERIFY2(document->edges().size() == 5, "ERROR: Number of pointers is not 5 ");
     foreach(NodePtr node, document->nodes()) {
-//         QVERIFY2(n->outPointerList().size() == 1, "ERROR: Number of out pointers is not 1"); //FIXME no API implemented yet
-//         QVERIFY2(n->inPointerList().size() == 1, "ERROR: Number of in pointers is not 1"); //FIXME no API implemented yet
-        QVERIFY2(node->edges().count() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-//         QVERIFY2(n->pointerList().size() == 2, "ERROR: Number of adjacent pointers is not 2"); //FIXME no API implemented yet
+        QCOMPARE(node->outEdges().size(), 1);
+        QCOMPARE(node->inEdges().size(), 1);
+        QCOMPARE(node->edges().count(), 2);
     }
     QCOMPARE(document->nodes().first()->dynamicProperty("label").toString(), QString("first node"));
     QCOMPARE(document->edges().first()->dynamicProperty("label").toString(), QString("test value"));
