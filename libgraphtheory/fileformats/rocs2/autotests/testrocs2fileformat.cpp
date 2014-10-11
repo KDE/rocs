@@ -52,13 +52,13 @@ void TestRocs2FileFormat::documentTypesTest()
 
     // create exporter plugin
     Rocs2FileFormat serializer(this, QList<QVariant>());
-    serializer.setFile(QUrl::fromLocalFile("test.rocs2"));
+    serializer.setFile(QUrl::fromLocalFile("test.graph2"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
     Rocs2FileFormat importer(this, QList<QVariant>());
-    importer.setFile(QUrl::fromLocalFile("test.rocs2"));
+    importer.setFile(QUrl::fromLocalFile("test.graph2"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
     QVERIFY(importer.isGraphDocument());
@@ -102,13 +102,13 @@ void TestRocs2FileFormat::nodeAndEdgeTest()
 
     // create exporter plugin
     Rocs2FileFormat serializer(this, QList<QVariant>());
-    serializer.setFile(QUrl::fromLocalFile("test.rocs2"));
+    serializer.setFile(QUrl::fromLocalFile("test.graph2"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
     Rocs2FileFormat importer(this, QList<QVariant>());
-    importer.setFile(QUrl::fromLocalFile("test.rocs2"));
+    importer.setFile(QUrl::fromLocalFile("test.graph2"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
     QVERIFY(importer.isGraphDocument());
