@@ -41,18 +41,34 @@ DocumentWrapper::~DocumentWrapper()
 
 }
 
+NodeWrapper * DocumentWrapper::nodeWrapper(NodePtr node)
+{
+    if (m_nodeMap.contains(node)) {
+        return m_nodeMap.value(node);
+    } else {
+        NodeWrapper *wrapper = new NodeWrapper(node, this);
+        m_nodeMap.insert(node, wrapper);
+        return wrapper;
+    }
+}
+
+EdgeWrapper * DocumentWrapper::edgeWrapper(EdgePtr edge)
+{
+    if (m_edgeMap.contains(edge)) {
+        return m_edgeMap.value(edge);
+    } else {
+        EdgeWrapper *wrapper = new EdgeWrapper(edge, this);
+        m_edgeMap.insert(edge, wrapper);
+        return wrapper;
+    }
+}
+
 QScriptValue DocumentWrapper::nodes()
 {
     QScriptValue array = m_engine->newArray();
     QList<NodeWrapper*> nodeWrappers;
     foreach(NodePtr node, m_document->nodes()) {
-        if (m_nodeMap.contains(node)) {
-            nodeWrappers.append(m_nodeMap.value(node));
-        } else {
-            NodeWrapper *wrapper = new NodeWrapper(node, this);
-            m_nodeMap.insert(node, wrapper);
-            nodeWrappers.append(wrapper);
-        }
+        nodeWrappers.append(nodeWrapper(node));
     }
     return m_engine->toScriptValue(nodeWrappers);
 }
@@ -62,13 +78,7 @@ QScriptValue DocumentWrapper::edges()
     QScriptValue array = m_engine->newArray();
     QList<EdgeWrapper*> edgeWrappers;
     foreach(EdgePtr edge, m_document->edges()) {
-        if (m_edgeMap.contains(edge)) {
-            edgeWrappers.append(m_edgeMap.value(edge));
-        } else {
-            EdgeWrapper *wrapper = new EdgeWrapper(edge, this);
-            m_edgeMap.insert(edge, wrapper);
-            edgeWrappers.append(wrapper);
-        }
+        edgeWrappers.append(edgeWrapper(edge));
     }
     return m_engine->toScriptValue(edgeWrappers);
 }

@@ -48,6 +48,17 @@ class DocumentWrapper : public QObject
 public:
     DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
     virtual ~DocumentWrapper();
+
+    /**
+     * \return wrapper for \p node
+     */
+    NodeWrapper * nodeWrapper(NodePtr node);
+
+    /**
+     * \return wrapper for \p edge
+     */
+    EdgeWrapper * edgeWrapper(EdgePtr edge);
+
     Q_INVOKABLE QScriptValue nodes();
     Q_INVOKABLE QScriptValue edges();
 
