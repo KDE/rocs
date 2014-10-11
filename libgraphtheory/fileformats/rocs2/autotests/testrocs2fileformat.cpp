@@ -32,56 +32,50 @@ TestRocs2FileFormat::TestRocs2FileFormat()
 {
 }
 
-void TestRocs2FileFormat::serializeUnserializeTest()
+// test serialization and import of edge and node types
+void TestRocs2FileFormat::documentTypesTest()
 {
     GraphDocumentPtr document = GraphDocument::create();
+
+    // setup node type
+    document->nodeTypes().first()->setId(1);
+    document->nodeTypes().first()->setName("testName");
+    document->nodeTypes().first()->setColor(QColor("#ff0000"));
     document->nodeTypes().first()->addDynamicProperty("label");
+
+    // setup edge type
+    document->edgeTypes().first()->setId(1);
+    document->edgeTypes().first()->setName("testName");
+    document->edgeTypes().first()->setColor(QColor("#ff0000"));
     document->edgeTypes().first()->addDynamicProperty("label");
-    QMap<QString, NodePtr> dataList;
-
-    // Creates a simple Graph with 5 data elements and connect them with pointers.
-    dataList.insert("a", Node::create(document));
-    dataList["a"]->setDynamicProperty("label", "first node");
-    dataList.insert("b", Node::create(document));
-    dataList["b"]->setDynamicProperty("label", "b");
-    dataList.insert("c", Node::create(document));
-    dataList["c"]->setDynamicProperty("label", "c");
-    dataList.insert("d", Node::create(document));
-    dataList["d"]->setDynamicProperty("label", "d");
-    dataList.insert("e", Node::create(document));
-    dataList["e"]->setDynamicProperty("label", "e");
-
-    Edge::create(dataList["a"], dataList["b"])->setDynamicProperty("label", "test value");
-    Edge::create(dataList["b"], dataList["c"]);
-    Edge::create(dataList["c"], dataList["d"]);
-    Edge::create(dataList["d"], dataList["e"]);
-    Edge::create(dataList["e"], dataList["a"]);
+    document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
 
     // create exporter plugin
     Rocs2FileFormat serializer(this, QList<QVariant>());
-    serializer.setFile(QUrl::fromLocalFile("test.tgf"));
+    serializer.setFile(QUrl::fromLocalFile("test.rocs2"));
     serializer.writeFile(document);
     QVERIFY(serializer.hasError() == false);
 
     // create importer
     Rocs2FileFormat importer(this, QList<QVariant>());
-    importer.setFile(QUrl::fromLocalFile("test.tgf"));
+    importer.setFile(QUrl::fromLocalFile("test.rocs2"));
     importer.readFile();
     QVERIFY(importer.hasError() == false);
     QVERIFY(importer.isGraphDocument());
-    document = importer.graphDocument();
+    GraphDocumentPtr importDocument = importer.graphDocument();
 
-    // test imported values
-    QVERIFY2(document->nodes().size() == 5, "ERROR: Number of data is not 5 ");
-    QVERIFY2(document->edges().size() == 5, "ERROR: Number of pointers is not 5 ");
-    foreach(NodePtr node, document->nodes()) {
-//         QVERIFY2(n->outPointerList().size() == 1, "ERROR: Number of out pointers is not 1"); //FIXME no API implemented yet
-//         QVERIFY2(n->inPointerList().size() == 1, "ERROR: Number of in pointers is not 1"); //FIXME no API implemented yet
-        QVERIFY2(node->edges().count() == 2, "ERROR: Number of Adjacent Nodes is not 2");
-//         QVERIFY2(n->pointerList().size() == 2, "ERROR: Number of adjacent pointers is not 2"); //FIXME no API implemented yet
-    }
-    QCOMPARE(document->nodes().first()->dynamicProperty("label").toString(), QString("first node"));
-    QCOMPARE(document->edges().first()->dynamicProperty("label").toString(), QString("test value"));
+    // test node type
+    QCOMPARE(importDocument->nodeTypes().count(), 1);
+    QCOMPARE(importDocument->nodeTypes().first()->id(), 1);
+    QCOMPARE(importDocument->nodeTypes().first()->name(), QString("testName"));
+    QCOMPARE(importDocument->nodeTypes().first()->color().name(), QString("#ff0000"));
+
+    // test edge type
+    QCOMPARE(importDocument->edgeTypes().count(), 1);
+    QCOMPARE(importDocument->edgeTypes().first()->id(), 1);
+    QCOMPARE(importDocument->edgeTypes().first()->name(), QString("testName"));
+    QCOMPARE(importDocument->edgeTypes().first()->color().name(), QString("#ff0000"));
+    QCOMPARE(importDocument->edgeTypes().first()->direction(), EdgeType::Bidirectional);
 }
 
 QTEST_MAIN(TestRocs2FileFormat);

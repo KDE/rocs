@@ -22,6 +22,7 @@
 #define ROCS2FILEFORMAT_H
 
 #include "fileformats/fileformatinterface.h"
+#include <edgetype.h>
 
 namespace GraphTheory
 {
@@ -52,6 +53,10 @@ public:
      * \param file is url of a local file
      */
     virtual void readFile();
+
+private:
+    QString direction(EdgeType::Direction direction) const;
+    EdgeType::Direction direction(QString direction) const;
 };
 }
 

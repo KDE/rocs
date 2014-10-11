@@ -30,7 +30,7 @@ public:
     TestRocs2FileFormat();
 
 private slots:
-    void serializeUnserializeTest();
+    void documentTypesTest();
 };
 
 #endif
