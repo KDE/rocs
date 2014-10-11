@@ -43,7 +43,7 @@ class NodeWrapperPrivate;
 class NodeWrapper : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int id READ id)
+    Q_PROPERTY(int id READ id NOTIFY idChanged)
     Q_PROPERTY(qreal x READ x WRITE setX NOTIFY positionChanged)
     Q_PROPERTY(qreal y READ y WRITE setY NOTIFY positionChanged)
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
@@ -101,6 +101,7 @@ public Q_SLOTS:
     void updateDynamicProperties();
 
 Q_SIGNALS:
+    void idChanged(int id);
     void positionChanged(const QPointF &position);
     void colorChanged(const QColor &color);
 
@@ -112,5 +113,6 @@ private:
 }
 
 Q_DECLARE_METATYPE(QList<GraphTheory::NodeWrapper*>)
+Q_DECLARE_METATYPE(GraphTheory::NodeWrapper*)
 
 #endif

@@ -127,4 +127,39 @@ void TestKernel::edgeAccessMethods()
     document->destroy();
 }
 
+void TestKernel::nodeProperties()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    document->edgeTypes().first()->setDirection(EdgeType::Unidirectional);
+    NodePtr node = Node::create(document);
+    node->setId(1);
+    node->setX(20);
+    node->setY(30);
+    node->setColor("#ff0000");
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    script = "Document.nodes()[0].id;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), node->id());
+
+    script = "Document.nodes()[0].x;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toDouble(), qreal(node->x()));
+
+    script = "Document.nodes()[0].y;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toDouble(), qreal(node->y()));
+
+    script = "Document.nodes()[0].color;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString(), QString("#ff0000"));
+
+    // cleanup
+    document->destroy();
+}
+
 QTEST_MAIN(TestKernel)

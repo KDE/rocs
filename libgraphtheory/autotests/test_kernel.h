@@ -45,6 +45,8 @@ private Q_SLOTS:
     void graphObjectAccess();
     /** test edge, inEdges, outEdges methods **/
     void edgeAccessMethods();
+    /** test node properties (id, color, x, y) **/
+    void nodeProperties();
 };
 
 #endif

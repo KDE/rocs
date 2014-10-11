@@ -34,6 +34,7 @@ NodeWrapper::NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper)
     : m_node(node)
     , m_documentWrapper(documentWrapper)
 {
+    connect(m_node.data(), &Node::idChanged, this, &NodeWrapper::idChanged);
     connect(m_node.data(), &Node::colorChanged, this, &NodeWrapper::colorChanged);
     connect(m_node.data(), &Node::positionChanged, this, &NodeWrapper::positionChanged);
     connect(m_node.data(), &Node::dynamicPropertiesChanged, this, &NodeWrapper::updateDynamicProperties);
