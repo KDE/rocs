@@ -66,6 +66,7 @@ NodeTypePtr NodeType::create(GraphDocumentPtr document)
     NodeTypePtr pi(new NodeType);
     pi->setQpointer(pi);
     pi->d->m_document = document;
+    pi->d->m_id = document->generateId();
     pi->d->m_valid = true;
 
     // insert completely initialized node type into document

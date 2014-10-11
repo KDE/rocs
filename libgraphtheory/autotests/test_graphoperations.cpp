@@ -125,6 +125,10 @@ void TestGraphOperations::testNodeTypeCreateDelete()
     NodeTypePtr typeA = document->nodeTypes().first();
     NodeTypePtr typeB = NodeType::create(document);
 
+    // test for automatic assignment of proper IDs
+    QVERIFY(typeA->id() != -1);
+    QVERIFY(typeB->id() != -1);
+
     // check that 2 created types + default type exist
     QCOMPARE(document->nodeTypes().length(), 2);
 
@@ -153,6 +157,10 @@ void TestGraphOperations::testEdgeTypeCreateDelete()
 
     EdgeTypePtr typeA = document->edgeTypes().first();
     EdgeTypePtr typeB = EdgeType::create(document);
+
+    // test for automatic assignment of proper IDs
+    QVERIFY(typeA->id() != -1);
+    QVERIFY(typeB->id() != -1);
 
     // check that 2 created types + default type exist
     QCOMPARE(document->edgeTypes().length(), 2);
