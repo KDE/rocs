@@ -34,6 +34,7 @@ namespace GraphTheory
 {
 class EdgeWrapperPrivate;
 class DocumentWrapper;
+class NodeWrapper;
 
 /**
  * \class EdgeWrapper
@@ -48,6 +49,10 @@ public:
     EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper);
 
     virtual ~EdgeWrapper();
+
+    Q_INVOKABLE GraphTheory::NodeWrapper * from() const;
+    Q_INVOKABLE GraphTheory::NodeWrapper * to() const;
+    Q_INVOKABLE bool directed() const;
 
     /** reimplemented from QObject **/
     virtual bool event(QEvent* e);

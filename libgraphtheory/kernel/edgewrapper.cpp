@@ -19,6 +19,7 @@
  */
 
 #include "edgewrapper.h"
+#include "documentwrapper.h"
 #include "graphdocument.h"
 #include "edgetype.h"
 #include "edge.h"
@@ -41,6 +42,24 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
 EdgeWrapper::~EdgeWrapper()
 {
 
+}
+
+GraphTheory::NodeWrapper * EdgeWrapper::from() const
+{
+    return m_documentWrapper->nodeWrapper(m_edge->from());
+}
+
+GraphTheory::NodeWrapper * EdgeWrapper::to() const
+{
+    return m_documentWrapper->nodeWrapper(m_edge->to());
+}
+
+bool EdgeWrapper::directed() const
+{
+    if (m_edge->type()->direction() == EdgeType::Unidirectional) {
+        return true;
+    }
+    return false;
 }
 
 bool EdgeWrapper::event(QEvent* e)

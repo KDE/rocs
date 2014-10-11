@@ -47,6 +47,8 @@ private Q_SLOTS:
     void edgeAccessMethods();
     /** test node properties (id, color, x, y) **/
     void nodeProperties();
+    /** test edge properties (from, to, directed) **/
+    void edgeProperties();
 };
 
 #endif

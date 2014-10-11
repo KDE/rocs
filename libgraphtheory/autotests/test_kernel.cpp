@@ -162,4 +162,33 @@ void TestKernel::nodeProperties()
     document->destroy();
 }
 
+void TestKernel::edgeProperties()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    document->edgeTypes().first()->setDirection(EdgeType::Unidirectional);
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    EdgePtr edge = Edge::create(nodeA, nodeB);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    script = "Document.nodes()[0].edges()[0].from().id;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), nodeA->id());
+
+    script = "Document.nodes()[0].edges()[0].to().id;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), nodeB->id());
+
+    script = "Document.nodes()[0].edges()[0].directed();";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toBool(), true);
+
+    // cleanup
+    document->destroy();
+}
+
 QTEST_MAIN(TestKernel)
