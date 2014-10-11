@@ -82,7 +82,7 @@ EdgeWrapper * DocumentWrapper::edgeWrapper(EdgePtr edge) const
     return m_edgeMap.value(edge);
 }
 
-QScriptValue DocumentWrapper::nodes()
+QScriptValue DocumentWrapper::nodes() const
 {
     QScriptValue array = m_engine->newArray();
     QList<NodeWrapper*> nodeWrappers;
@@ -92,7 +92,7 @@ QScriptValue DocumentWrapper::nodes()
     return m_engine->toScriptValue(nodeWrappers);
 }
 
-QScriptValue DocumentWrapper::edges()
+QScriptValue DocumentWrapper::edges() const
 {
     QScriptValue array = m_engine->newArray();
     QList<EdgeWrapper*> edgeWrappers;
