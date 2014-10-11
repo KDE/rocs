@@ -228,4 +228,52 @@ void TestGraphOperations::testNodeIdentifiers()
     document->destroy();
 }
 
+// test if edges between nodes are returned correctly
+void TestGraphOperations::testUnidirectionalEdges()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    document->edgeTypes().first()->setDirection(EdgeType::Unidirectional);
+    NodePtr from = Node::create(document);
+    NodePtr to = Node::create(document);
+    EdgePtr edge = Edge::create(from, to);
+
+    // adjacent edges
+    QCOMPARE(from->edges().count(), 1);
+    QCOMPARE(to->edges().count(), 1);
+
+    // incoming edges
+    QCOMPARE(from->inEdges().count(), 0);
+    QCOMPARE(to->inEdges().count(), 1);
+
+    // outgoing edges
+    QCOMPARE(from->outEdges().count(), 1);
+    QCOMPARE(to->outEdges().count(), 0);
+
+    document->destroy();
+}
+
+// test if edges between nodes are returned correctly
+void TestGraphOperations::testBidirectionalEdges()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
+    NodePtr from = Node::create(document);
+    NodePtr to = Node::create(document);
+    EdgePtr edge = Edge::create(from, to);
+
+    // adjacent edges
+    QCOMPARE(from->edges().count(), 1);
+    QCOMPARE(to->edges().count(), 1);
+
+    // incoming edges
+    QCOMPARE(from->inEdges().count(), 1);
+    QCOMPARE(to->inEdges().count(), 1);
+
+    // outgoing edges
+    QCOMPARE(from->outEdges().count(), 1);
+    QCOMPARE(to->outEdges().count(), 1);
+
+    document->destroy();
+}
+
 QTEST_MAIN(TestGraphOperations)

@@ -47,6 +47,8 @@ private Q_SLOTS:
     void testNodeDynamicProperties();
     void testEdgeDynamicProperties();
     void testNodeIdentifiers();
+    void testUnidirectionalEdges();
+    void testBidirectionalEdges();
 };
 
 #endif

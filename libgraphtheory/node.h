@@ -119,6 +119,16 @@ public:
     EdgeList edges() const;
 
     /**
+     * @return incoming edges incoming
+     */
+    EdgeList inEdges() const;
+
+    /**
+     * @return outgoing edges
+     */
+    EdgeList outEdges() const;
+
+    /**
      * If the id value is invalid, -1 is returned.
      *
      * @return node identifier

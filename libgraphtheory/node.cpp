@@ -165,6 +165,40 @@ EdgeList Node::edges() const
     return d->m_edges;
 }
 
+EdgeList Node::inEdges() const
+{
+    EdgeList inEdges;
+    foreach (EdgePtr edge, d->m_edges) {
+        if (edge->type()->direction() == EdgeType::Bidirectional) {
+            inEdges.append(edge);
+            continue;
+        }
+        if (edge->type()->direction() == EdgeType::Unidirectional
+            && edge->to() == self()
+        ) {
+            inEdges.append(edge);
+        }
+    }
+    return inEdges;
+}
+
+EdgeList Node::outEdges() const
+{
+    EdgeList outEdges;
+    foreach (EdgePtr edge, d->m_edges) {
+        if (edge->type()->direction() == EdgeType::Bidirectional) {
+            outEdges.append(edge);
+            continue;
+        }
+        if (edge->type()->direction() == EdgeType::Unidirectional
+            && edge->from() == self()
+        ) {
+            outEdges.append(edge);
+        }
+    }
+    return outEdges;
+}
+
 int Node::id() const
 {
     return d->m_id;
