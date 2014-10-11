@@ -414,7 +414,9 @@ void MainWindow::setActiveGraphDocument()
         return;
     }
     GraphDocumentPtr activeDocument = m_currentProject->activeGraphDocument();
-    m_graphEditorWidget->layout()->addWidget(activeDocument->createView(this));
+    if (activeDocument) {
+        m_graphEditorWidget->layout()->addWidget(activeDocument->createView(this)); //FIXME!
+    }
     emit graphDocumentChanged(activeDocument);
 
     //TODO reenable after porting script engine

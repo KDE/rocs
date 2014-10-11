@@ -46,9 +46,6 @@ CodeEditor::CodeEditor(QWidget *parent)
 
 void CodeEditor::setProject(Project *project)
 {
-    if (m_project == project) {
-        return;
-    }
     if (m_project) {
         m_project->disconnect(this);
     }
