@@ -21,10 +21,11 @@
 #ifndef DOCUMENTTYPESWIDGET_H
 #define DOCUMENTTYPESWIDGET_H
 
-// #include "libgraphtheory/typenames.h"
 #include "libgraphtheory/models/nodetypemodel.h"
 #include "libgraphtheory/models/edgetypemodel.h"
 #include <QWidget>
+
+class QPushButton;
 
 class DocumentTypesWidget : public QWidget
 {
@@ -48,6 +49,8 @@ private:
     GraphTheory::GraphDocumentPtr m_document;
     GraphTheory::NodeTypeModel m_nodeTypeModel;
     GraphTheory::EdgeTypeModel m_edgeTypeModel;
+    QPushButton *m_createNodeTypeButton;
+    QPushButton *m_createEdgeTypeButton;
 };
 
 #endif

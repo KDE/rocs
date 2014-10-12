@@ -37,32 +37,32 @@ using namespace GraphTheory;
 
 DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
     : QWidget(parent)
+    , m_createNodeTypeButton(new QPushButton(this))
+    , m_createEdgeTypeButton(new QPushButton(this))
 {
     QGridLayout *layout = new QGridLayout(this);
 
     // node types
     layout->addWidget(new QLabel(i18nc("@title", "Node Types")));
 
-    QPushButton *createNodeTypeButton = new QPushButton(this);
-    createNodeTypeButton->setText(i18n("Create Type"));
-    layout->addWidget(createNodeTypeButton);
+    m_createNodeTypeButton->setText(i18n("Create Type"));
+    layout->addWidget(m_createNodeTypeButton);
 
-    QListView *nodeType1View = new QListView(this);
-    NodeTypesDelegate *nodeDelegate = new NodeTypesDelegate(nodeType1View);
-    nodeType1View->setItemDelegate(nodeDelegate);
-    nodeType1View->setModel(&m_nodeTypeModel);
-    layout->addWidget(nodeType1View);
+    QListView *nodeTypeView = new QListView(this);
+    NodeTypesDelegate *nodeDelegate = new NodeTypesDelegate(nodeTypeView);
+    nodeTypeView->setItemDelegate(nodeDelegate);
+    nodeTypeView->setModel(&m_nodeTypeModel);
+    layout->addWidget(nodeTypeView);
 
     connect(nodeDelegate, SIGNAL(colorChanged(QModelIndex,QColor)), this, SLOT(onNodeTypeColorChanged(QModelIndex,QColor)));
     connect(nodeDelegate, SIGNAL(nameChanged(QModelIndex,QString)), this, SLOT(onNodeTypeNameChanged(QModelIndex,QString)));
-    connect(createNodeTypeButton, SIGNAL(clicked(bool)), this, SLOT(onCreateNodeType()));
+    connect(m_createNodeTypeButton, SIGNAL(clicked(bool)), this, SLOT(onCreateNodeType()));
 
     // edge types
     layout->addWidget(new QLabel(i18nc("@title", "Edge Types")));
 
-    QPushButton *createEdgeTypeButton = new QPushButton(this);
-    createEdgeTypeButton->setText(i18n("Create Type"));
-    layout->addWidget(createEdgeTypeButton);
+    m_createEdgeTypeButton->setText(i18n("Create Type"));
+    layout->addWidget(m_createEdgeTypeButton);
 
     QListView *edgeTypeView = new QListView(this);
     EdgeTypesDelegate *edgeDelegate = new EdgeTypesDelegate(edgeTypeView);
@@ -72,7 +72,7 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
 
     connect(edgeDelegate, SIGNAL(colorChanged(QModelIndex,QColor)), this, SLOT(onEdgeTypeColorChanged(QModelIndex,QColor)));
     connect(edgeDelegate, SIGNAL(nameChanged(QModelIndex,QString)), this, SLOT(onEdgeTypeNameChanged(QModelIndex,QString)));
-    connect(createEdgeTypeButton, SIGNAL(clicked(bool)), this, SLOT(onCreateEdgeType()));
+    connect(m_createEdgeTypeButton, SIGNAL(clicked(bool)), this, SLOT(onCreateEdgeType()));
 
     setLayout(layout);
     show();
@@ -85,6 +85,14 @@ DocumentTypesWidget::~DocumentTypesWidget()
 
 void DocumentTypesWidget::setDocument(GraphDocumentPtr document)
 {
+    if (!document) { // deactivate controls if no document exists
+        m_createNodeTypeButton->setEnabled(false);
+        m_createEdgeTypeButton->setEnabled(false);
+    } else {
+        m_createNodeTypeButton->setEnabled(true);
+        m_createEdgeTypeButton->setEnabled(true);
+    }
+
     m_document = document;
     m_nodeTypeModel.setDocument(document);
     m_edgeTypeModel.setDocument(document);
