@@ -148,6 +148,55 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges() const
     return edges;
 }
 
+QList<NodeWrapper*> NodeWrapper::neighbors() const
+{
+    QSet<NodeWrapper*> neighbors;
+    foreach (EdgePtr edge, m_node->edges()) {
+        if (m_node == edge->from()) {
+            neighbors.insert(m_documentWrapper->nodeWrapper(edge->to()));
+        } else {
+            neighbors.insert(m_documentWrapper->nodeWrapper(edge->from()));
+        }
+    }
+    return neighbors.values();
+}
+
+QList<NodeWrapper*> NodeWrapper::predecessors() const
+{
+    QSet<NodeWrapper*> precessors;
+    foreach (EdgePtr edge, m_node->inEdges()) {
+        if (edge->type()->direction() == EdgeType::Unidirectional) {
+            precessors.insert(m_documentWrapper->nodeWrapper(edge->from()));
+            continue;
+        } else {
+            if (m_node == edge->from()) {
+                precessors.insert(m_documentWrapper->nodeWrapper(edge->to()));
+            } else {
+                precessors.insert(m_documentWrapper->nodeWrapper(edge->from()));
+            }
+        }
+    }
+    return precessors.values();
+}
+
+QList<NodeWrapper*> NodeWrapper::successors() const
+{
+    QSet<NodeWrapper*> successors;
+    foreach (EdgePtr edge, m_node->outEdges()) {
+        if (edge->type()->direction() == EdgeType::Unidirectional) {
+            successors.insert(m_documentWrapper->nodeWrapper(edge->to()));
+            continue;
+        } else {
+            if (m_node == edge->from()) {
+                successors.insert(m_documentWrapper->nodeWrapper(edge->to()));
+            } else {
+                successors.insert(m_documentWrapper->nodeWrapper(edge->from()));
+            }
+        }
+    }
+    return successors.values();
+}
+
 bool NodeWrapper::event(QEvent* e)
 {
     if (e->type() == QEvent::DynamicPropertyChange) {

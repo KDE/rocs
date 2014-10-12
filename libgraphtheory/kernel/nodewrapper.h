@@ -109,13 +109,28 @@ public:
 
     /**
      * @return list of all edges that are either bidirectional or unidirectional and point to this node
-     *//
+     */
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> inEdges() const;
 
     /**
      * @return list of all edges that are either bidirectional or unidirectional and point from this node
-     *//
+     */
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges() const;
+
+    /**
+     * @return list of all neighbors connected to this node
+     */
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> neighbors() const;
+
+    /**
+     * @return list of all neighbors connected by an incoming edge
+     */
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> predecessors() const;
+
+    /**
+     * @return list of all neighbors connected by an outgoing edge
+     */
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> successors() const;
 
     /** reimplemented from QObject **/
     virtual bool event(QEvent* e);

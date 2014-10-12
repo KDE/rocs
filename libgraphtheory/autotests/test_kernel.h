@@ -53,6 +53,8 @@ private Q_SLOTS:
     void nodeTypes();
     /** test node type access **/
     void edgeTypes();
+    /** test neighborship accessors: neighbors(), successors(), precedessors() **/
+    void neighborships();
 };
 
 #endif

@@ -251,4 +251,72 @@ void TestKernel::edgeTypes()
     document->destroy();
 }
 
+void TestKernel::neighborships()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    document->edgeTypes().first()->setDirection(EdgeType::Unidirectional);
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    EdgePtr edge = Edge::create(nodeA, nodeB);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    // test with unidirectional edge
+    script = "Document.nodes()[0].neighbors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].neighbors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[0].successors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].successors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(0));
+
+    script = "Document.nodes()[0].predecessors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(0));
+
+    script = "Document.nodes()[1].predecessors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    // test with bidirectional edge
+    document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
+    script = "Document.nodes()[0].neighbors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].neighbors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[0].successors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].successors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[0].predecessors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].predecessors().length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    // cleanup
+    document->destroy();
+}
+
 QTEST_MAIN(TestKernel)
