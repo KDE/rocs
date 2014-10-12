@@ -59,6 +59,11 @@ private:
     void setupToolbars();
 
     /**
+     * Set @p project as active project. This method updates all responsible widgets.
+     */
+    void setProject(Project *project);
+
+    /**
      * Setup the information panel at the right side.
      *
      * \return created widget

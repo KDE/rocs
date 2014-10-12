@@ -158,6 +158,7 @@ Q_SIGNALS:
     void graphDocumentAboutToBeRemoved(int,int);
     void graphDocumentRemoved();
     void activeGraphDocumentChanged(int index);
+    void activeGraphDocumentChanged(GraphTheory::GraphDocumentPtr document);
 
   /*
    * General file related actions.

@@ -303,7 +303,8 @@ QWidget* MainWindow::setupSidePanel()
     // add widgets to dock
     // document property widgets
     DocumentTypesWidget *documentTypesWidget = new DocumentTypesWidget(panel);
-    connect(this, SIGNAL(graphDocumentChanged(GraphTheory::GraphDocumentPtr)), documentTypesWidget, SLOT(setDocument(GraphTheory::GraphDocumentPtr)));
+    connect(this, &MainWindow::graphDocumentChanged,
+        documentTypesWidget, &DocumentTypesWidget::setDocument);
     sideDock->addDock(documentTypesWidget, i18n("Element Types"), QIcon::fromTheme("document-properties"));
     if (m_currentProject && m_currentProject->activeGraphDocument()) {
         documentTypesWidget->setDocument(m_currentProject->activeGraphDocument());
@@ -323,6 +324,24 @@ QWidget* MainWindow::setupSidePanel()
 //     sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), QIcon::fromTheme("documentation"));
 
     return panel;
+}
+
+void MainWindow::setProject(Project *project)
+{
+    m_codeEditorWidget->setProject(project);
+    m_graphEditorWidget->setProject(project);
+    m_journalWidget->openJournal(project);
+    updateCaption();
+
+    if (m_currentProject) {
+        m_currentProject->disconnect(this);
+        m_currentProject->deleteLater();
+    }
+
+    connect(project, static_cast<void (Project::*)(GraphTheory::GraphDocumentPtr)>(&Project::activeGraphDocumentChanged),
+        this, &MainWindow::graphDocumentChanged);
+    m_currentProject = project;
+    emit graphDocumentChanged(m_currentProject->activeGraphDocument());
 }
 
 void MainWindow::setupActions()
@@ -439,21 +458,12 @@ void MainWindow::createProject()
         return;
     }
 
-    if (m_currentProject) {
-        m_currentProject->disconnect(this);
-        m_currentProject->deleteLater();
-    }
+    Project *project = new Project(m_graphEditor);
+    project->addCodeDocument(KTextEditor::Editor::instance()->createDocument(0));
+    project->addGraphDocument(m_graphEditor->createDocument());
+    project->setModified(false);
 
-    m_currentProject = new Project(m_graphEditor);
-    m_currentProject->addCodeDocument(KTextEditor::Editor::instance()->createDocument(0));
-    m_currentProject->addGraphDocument(m_graphEditor->createDocument());
-
-    m_codeEditorWidget->setProject(m_currentProject);
-    m_graphEditorWidget->setProject(m_currentProject);
-    m_journalWidget->openJournal(m_currentProject);
-
-    m_currentProject->setModified(false);
-    updateCaption();
+    setProject(project);
 }
 
 void MainWindow::saveProject()
@@ -512,21 +522,10 @@ void MainWindow::openProject(const QUrl &fileName)
             return;
         }
     }
-    // import project specified: close everything and delete old project
-    m_currentProject->disconnect(this);
-    delete m_currentProject;
 
-    // extract and open new project
-    // at the end of this m_currentProject must exist
-    m_currentProject = new Project(file, m_graphEditor);
-    if (m_currentProject->graphDocuments().count() == 0) {
-        m_currentProject->addGraphDocument(m_graphEditor->createDocument());
-    }
-    m_codeEditorWidget->setProject(m_currentProject);
-    m_graphEditorWidget->setProject(m_currentProject);
-    m_journalWidget->openJournal(m_currentProject);
+    Project *project = new Project(file, m_graphEditor);
+    setProject(project);
 
-    updateCaption();
     m_recentProjects->addUrl(file.path(QUrl::FullyDecoded));
     Settings::setLastOpenedDirectory(file.path());
 }
