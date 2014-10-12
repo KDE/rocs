@@ -23,7 +23,7 @@ cmake_minimum_required(VERSION 3.0.0)
 
 find_package(ECM 1.0.0 REQUIRED NO_MODULE)
 find_package(KF5DocTools)
-find_package(Boost "1.43" REQUIRED)
+find_package(Boost "1.49" REQUIRED)
 # find_package(Grantlee REQUIRED) #FIXME deactivate for now
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
