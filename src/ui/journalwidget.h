@@ -62,8 +62,8 @@ private slots:
     void setModified();
 
 private:
-    Project* _currentProject;
-    bool _modified;
+    Project *m_currentProject;
+    bool m_modified;
     Ui::JournalEditorWidget *ui;
 };
 

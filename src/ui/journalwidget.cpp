@@ -30,7 +30,7 @@
 
 JournalEditorWidget::JournalEditorWidget(QWidget* parent)
     : QWidget(parent)
-    , _currentProject(0)
+    , m_currentProject(0)
 {
     ui = new Ui::JournalEditorWidget;
     ui->setupUi(this);
@@ -41,7 +41,7 @@ JournalEditorWidget::JournalEditorWidget(QWidget* parent)
 
 void JournalEditorWidget::openJournal(Project *project)
 {
-    _currentProject = project;
+    m_currentProject = project;
     if (!project) {
         qCritical() << "No project specified! Cannot set journal widget.";
         return;
@@ -54,15 +54,15 @@ void JournalEditorWidget::openJournal(Project *project)
     }
     // explicitly set journal to be unmodified, since setting of text to editor caused modifed
     // value to be true
-    _modified = false;
+    m_modified = false;
 }
 
 void JournalEditorWidget::setModified()
 {
-    _modified = true;
+    m_modified = true;
 }
 
 bool JournalEditorWidget::isModified() const
 {
-    return _modified;
+    return m_modified;
 }
