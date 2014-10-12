@@ -31,6 +31,7 @@ using namespace GraphTheory;
 // workaround for linking boost
 void boost::throw_exception(std::exception const & e)
 {
+    qCritical() << "Exception:" << e.what();
 }
 
 namespace GmlParser
