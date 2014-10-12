@@ -37,6 +37,7 @@ class Project;
 class QSplitter;
 class QAction;
 class CodeEditor;
+class GraphEditorWidget;
 class QScriptEngineDebugger;
 class QCloseEvent;
 class KActionMenu;
@@ -138,10 +139,6 @@ private Q_SLOTS: // script execution
     void stopScript();
 
 public Q_SLOTS:
-    /**
-     * Update UI for changed active graph document
-     */
-    void setActiveGraphDocument();
     void showEditorPluginDialog();
     void disableStopAction();
     void enableStopAction();
@@ -169,7 +166,8 @@ private:
     GraphTheory::Editor *m_graphEditor;
     GraphTheory::Kernel *m_kernel; //!< simulation kernel
     GraphTheory::EditorPluginManager m_graphEditorPluginManager;
-    CodeEditor *m_codeEditor;
+    CodeEditor *m_codeEditorWidget;
+    GraphEditorWidget *m_graphEditorWidget;
     ScriptOutputWidget *m_outputWidget;
     JournalEditorWidget *m_journalWidget;
 
@@ -186,7 +184,6 @@ private:
     QSplitter *m_vSplitter;
     QSplitter *m_hSplitter;
     QSplitter *m_hScriptSplitter;
-    QWidget *m_graphEditorWidget; // contains graph editor scene
 
     QScriptEngineDebugger *m_scriptDbg;
     QAction* m_debugScript;

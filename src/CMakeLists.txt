@@ -40,6 +40,7 @@ set( rocs_interface_SRCS
     ui/mainwindow.cpp
     ui/codeeditor.cpp
     ui/documenttypeswidget.cpp
+    ui/grapheditorwidget.cpp
     ui/nodetypesdelegate.cpp
     ui/edgetypesdelegate.cpp
     ui/configuredefaultproperties.cpp

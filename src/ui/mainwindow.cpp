@@ -67,6 +67,7 @@
 #include "ui/documentationwidget.h"
 #include "ui/fileformatdialog.h"
 #include "ui/journalwidget.h"
+#include "grapheditorwidget.h"
 #include "plugins/ApiDoc/ApiDocWidget.h"
 #include "project/project.h"
 
@@ -76,7 +77,7 @@ MainWindow::MainWindow()
     : KXmlGuiWindow()
     , m_currentProject(0)
     , m_kernel(new Kernel)
-    , m_graphEditorWidget(new QWidget)
+    , m_graphEditorWidget(new GraphEditorWidget(this))
     , m_scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
@@ -143,7 +144,6 @@ void MainWindow::setupWidgets()
     // setup main widgets
     QWidget *sidePanel = setupSidePanel();
     QWidget *scriptPanel = setupScriptPanel();
-    m_graphEditorWidget->setLayout(new QGridLayout);
 
     // splits the main window horizontal
     m_vSplitter = new QSplitter(this);
@@ -209,7 +209,7 @@ void MainWindow::uploadScript()
     QPointer<KNS3::UploadDialog> dialog = new KNS3::UploadDialog(this);
 
 //First select the opened doc.
-    QUrl str = m_codeEditor->activeDocument()->url();
+    QUrl str = m_codeEditorWidget->activeDocument()->url();
     if (str.isEmpty()) {
         //... then try to open
         str = QFileDialog::getOpenFileName(this, i18n("Rocs Script Files", QString(), i18n("*.js|Script files")));
@@ -228,7 +228,7 @@ void MainWindow::uploadScript()
     tar.close();
     dialog->setUploadFile(local);
 
-    dialog->setUploadName(m_codeEditor->activeDocument()->documentName());
+    dialog->setUploadName(m_codeEditorWidget->activeDocument()->documentName());
     dialog->setDescription(i18n("Add your description here."));
 
     dialog->exec();
@@ -243,7 +243,7 @@ QWidget* MainWindow::setupScriptPanel()
     m_hScriptSplitter = new QSplitter(this);
     m_hScriptSplitter->setOrientation(Qt::Horizontal);
 
-    m_codeEditor = new CodeEditor(this);
+    m_codeEditorWidget = new CodeEditor(this);
     m_outputWidget = new ScriptOutputWidget(this);
 
     KToolBar *executeCommands = new KToolBar(this);
@@ -279,7 +279,7 @@ QWidget* MainWindow::setupScriptPanel()
     connect(m_stepRunScript, SIGNAL(triggered()), this, SLOT(executeScriptOneStep()));
     connect(m_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
 
-    m_hScriptSplitter->addWidget(m_codeEditor);
+    m_hScriptSplitter->addWidget(m_codeEditorWidget);
     m_hScriptSplitter->addWidget(m_outputWidget);
 
     QWidget *scriptInterface = new QWidget(this);
@@ -407,23 +407,6 @@ void MainWindow::setupToolsPluginsAction()
     plugActionList("tools_plugins", actions);
 }
 
-void MainWindow::setActiveGraphDocument()
-{
-    Q_ASSERT(m_currentProject);
-    if (!m_currentProject) {
-        return;
-    }
-    GraphDocumentPtr activeDocument = m_currentProject->activeGraphDocument();
-    if (activeDocument) {
-        m_graphEditorWidget->layout()->addWidget(activeDocument->createView(this)); //FIXME!
-    }
-    emit graphDocumentChanged(activeDocument);
-
-    //TODO reenable after porting script engine
-    // Update engine toolbar
-//     connect(engine, SIGNAL(finished()), this, SLOT(disableStopAction()));
-}
-
 void MainWindow::importCodeDocument()
 {
     QUrl startDirectory = Settings::lastOpenedDirectory();
@@ -448,7 +431,7 @@ void MainWindow::exportCodeDocument()
                         i18nc("@title:window", "Export Script"),
                         startDirectory.toLocalFile(),
                        i18n("JavaScript (*.js)"));
-    m_codeEditor->activeDocument()->saveAs(QUrl::fromLocalFile(fileUrl));
+    m_codeEditorWidget->activeDocument()->saveAs(QUrl::fromLocalFile(fileUrl));
 }
 
 void MainWindow::createProject()
@@ -465,10 +448,10 @@ void MainWindow::createProject()
     m_currentProject = new Project(m_graphEditor);
     m_currentProject->addCodeDocument(KTextEditor::Editor::instance()->createDocument(0));
     m_currentProject->addGraphDocument(m_graphEditor->createDocument());
-    m_codeEditor->setProject(m_currentProject);
+
+    m_codeEditorWidget->setProject(m_currentProject);
+    m_graphEditorWidget->setProject(m_currentProject);
     m_journalWidget->openJournal(m_currentProject);
-    setActiveGraphDocument();
-    connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
 
     m_currentProject->setModified(false);
     updateCaption();
@@ -540,15 +523,13 @@ void MainWindow::openProject(const QUrl &fileName)
     if (m_currentProject->graphDocuments().count() == 0) {
         m_currentProject->addGraphDocument(m_graphEditor->createDocument());
     }
-    m_codeEditor->setProject(m_currentProject);
+    m_codeEditorWidget->setProject(m_currentProject);
+    m_graphEditorWidget->setProject(m_currentProject);
     m_journalWidget->openJournal(m_currentProject);
 
     updateCaption();
-    setActiveGraphDocument();
     m_recentProjects->addUrl(file.path(QUrl::FullyDecoded));
     Settings::setLastOpenedDirectory(file.path());
-
-    connect(m_currentProject, SIGNAL(activeGraphDocumentChanged()), this, SLOT(setActiveGraphDocument()));
 }
 
 void MainWindow::updateCaption()
@@ -684,7 +665,7 @@ void MainWindow::executeScript()
     if (m_outputWidget->isOutputClearEnabled()) {
         m_outputWidget->clear();
     }
-    QString script = m_codeEditor->activeDocument()->text();
+    QString script = m_codeEditorWidget->activeDocument()->text();
     enableStopAction();
     m_kernel->execute(m_currentProject->activeGraphDocument(), script);
 }
@@ -706,13 +687,13 @@ void MainWindow::executeScriptOneStep()
         if (m_outputWidget->isOutputClearEnabled()) {
             m_outputWidget->clear();
         }
-        QString script = text.isEmpty() ? m_codeEditor->text() : text;
-        QString scriptPath = m_codeEditor->document()->url().path();
+        QString script = text.isEmpty() ? m_codeEditorWidget->text() : text;
+        QString scriptPath = m_codeEditorWidget->document()->url().path();
         IncludeManager inc;
 
         script = inc.include(script,
                              scriptPath.isEmpty() ? scriptPath : scriptPath.section('/', 0, -2),
-                             m_codeEditor->document()->documentName());
+                             m_codeEditorWidget->document()->documentName());
 
         //FIXME implement scripting interfaces for GraphTheory
         qCritical() << "Scripting engine currently disalbed";
