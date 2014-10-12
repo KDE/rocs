@@ -54,9 +54,12 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
     nodeTypeView->setModel(&m_nodeTypeModel);
     layout->addWidget(nodeTypeView);
 
-    connect(nodeDelegate, SIGNAL(colorChanged(QModelIndex,QColor)), this, SLOT(onNodeTypeColorChanged(QModelIndex,QColor)));
-    connect(nodeDelegate, SIGNAL(nameChanged(QModelIndex,QString)), this, SLOT(onNodeTypeNameChanged(QModelIndex,QString)));
-    connect(m_createNodeTypeButton, SIGNAL(clicked(bool)), this, SLOT(onCreateNodeType()));
+    connect(nodeDelegate, &NodeTypesDelegate::colorChanged,
+        this, &DocumentTypesWidget::onNodeTypeColorChanged);
+    connect(nodeDelegate, &NodeTypesDelegate::nameChanged,
+        this, &DocumentTypesWidget::onNodeTypeNameChanged);
+    connect(m_createNodeTypeButton, &QPushButton::clicked,
+        this, &DocumentTypesWidget::onCreateNodeType);
 
     // edge types
     layout->addWidget(new QLabel(i18nc("@title", "Edge Types")));
@@ -70,9 +73,12 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
     edgeTypeView->setModel(&m_edgeTypeModel);
     layout->addWidget(edgeTypeView);
 
-    connect(edgeDelegate, SIGNAL(colorChanged(QModelIndex,QColor)), this, SLOT(onEdgeTypeColorChanged(QModelIndex,QColor)));
-    connect(edgeDelegate, SIGNAL(nameChanged(QModelIndex,QString)), this, SLOT(onEdgeTypeNameChanged(QModelIndex,QString)));
-    connect(m_createEdgeTypeButton, SIGNAL(clicked(bool)), this, SLOT(onCreateEdgeType()));
+    connect(edgeDelegate, &EdgeTypesDelegate::colorChanged,
+        this, &DocumentTypesWidget::onEdgeTypeColorChanged);
+    connect(edgeDelegate, &EdgeTypesDelegate::nameChanged,
+        this, &DocumentTypesWidget::onEdgeTypeNameChanged);
+    connect(m_createEdgeTypeButton, &QPushButton::clicked,
+        this, &DocumentTypesWidget::onCreateEdgeType);
 
     setLayout(layout);
     show();
