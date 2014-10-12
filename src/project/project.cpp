@@ -286,7 +286,7 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
     emit graphDocumentAdded();
     d->m_modified = true;
 
-    if (d->m_activeCodeDocumentIndex < 0) {
+    if (d->m_activeGraphDocumentIndex < 0) {
         setActiveGraphDocument(index);
     }
     return true;
@@ -326,11 +326,15 @@ void Project::setActiveGraphDocument(int index)
     }
     d->m_activeGraphDocumentIndex = index;
     emit activeGraphDocumentChanged(index);
+    emit activeGraphDocumentChanged(d->m_graphDocuments.at(index));
 }
 
 GraphDocumentPtr Project::activeGraphDocument() const
 {
-    return d->m_graphDocuments.at(d->m_activeCodeDocumentIndex);
+    if (d->m_activeGraphDocumentIndex < 0 || d->m_graphDocuments.count() <= d->m_activeGraphDocumentIndex) {
+        return GraphDocumentPtr();
+    }
+    return d->m_graphDocuments.at(d->m_activeGraphDocumentIndex);
 }
 
 KTextEditor::Document * Project::journalDocument() const
