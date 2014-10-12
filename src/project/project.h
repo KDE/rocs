@@ -135,10 +135,10 @@ public:
     bool addGraphDocument(GraphTheory::GraphDocumentPtr document);
 
     /**
-     * Import the graph document given in file @p url to the project. This creates a copy
+     * Import the graph document given in file @p documentUrl to the project. This creates a copy
      * of the original graph document.
      */
-    GraphTheory::GraphDocumentPtr importGraphDocument(const QUrl &url);
+    GraphTheory::GraphDocumentPtr importGraphDocument(const QUrl &documentUrl);
 
     /**
      * Remove the graph file @p document from the project

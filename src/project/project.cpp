@@ -21,8 +21,7 @@
 #include "project.h"
 #include "libgraphtheory/typenames.h"
 #include "libgraphtheory/graphdocument.h"
-#include "libgraphtheory/fileformats/fileformatmanager.h"
-
+#include "libgraphtheory/editor.h"
 #include <KConfig>
 #include <KConfigGroup>
 #include <KTextEditor/Document>
@@ -62,7 +61,6 @@ public:
     QList<GraphDocumentPtr> m_graphDocuments;
     KTextEditor::Document* m_journal;
     GraphTheory::Editor *m_graphEditor;
-    GraphTheory::FileFormatManager m_graphFileFormatManager;
     bool m_modified;
 
     int m_activeGraphDocumentIndex;
@@ -110,23 +108,7 @@ bool ProjectPrivate::loadProject(const QUrl &url)
     for (int index = 0; index < graphDocs.count(); ++index) {
         QString fileName = graphDocs.at(index).toString();
         QUrl fileUrl = QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + fileName);
-        QFileInfo fi(url.toLocalFile());
-        QString ext = fi.completeSuffix();
-        //         document->documentOpen(); //TODO <- implement this API to easier load documents
-
-        GraphTheory::FileFormatInterface *importer = m_graphFileFormatManager.backendByExtension(ext);
-        if (!importer) {
-            qCritical() << "Now graph file backend found for extesion" << ext << ", aborting.";
-            continue;
-        }
-        importer->setFile(fileUrl);
-        importer->readFile();
-        if (importer->hasError()) {
-            qCritical() << "Graph file importer reported the following error, aborting.";
-            importer->errorString();
-            return GraphDocumentPtr();
-        }
-        GraphTheory::GraphDocumentPtr document = importer->graphDocument();
+        GraphDocumentPtr document = m_graphEditor->openDocument(fileUrl);
         m_graphDocuments.append(document);
     }
     m_journal = KTextEditor::Editor::instance()->createDocument(0);
@@ -290,7 +272,7 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
     for (int i = 0; i <= d->m_graphDocuments.count(); ++i) {
         path = d->m_workingDirectory.path()
             + QChar('/')
-            + "graphfile" + QString::number(i) + QString(".graph");
+            + "graphfile" + QString::number(i) + QString(".graph2");
         if (!usedPaths.contains(path)) {
             break;
         }
@@ -310,22 +292,10 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
     return true;
 }
 
-GraphTheory::GraphDocumentPtr Project::importGraphDocument(const QUrl &url)
+GraphTheory::GraphDocumentPtr Project::importGraphDocument(const QUrl &documentUrl)
 {
     Q_ASSERT(d->m_graphEditor);
-    GraphTheory::FileFormatInterface *importer = d->m_graphFileFormatManager.backendByExtension(url.fileName());
-    if (!importer) {
-        qCritical() << "No file format backend found to import file" << url.fileName();
-        return GraphDocumentPtr();
-    }
-    importer->setFile(url);
-    importer->readFile();
-    if (importer->hasError()) {
-        qCritical() << "Graph file importer reported the following error, aborting.";
-        importer->errorString();
-        return GraphDocumentPtr();
-    }
-    GraphTheory::GraphDocumentPtr document = importer->graphDocument();
+    GraphTheory::GraphDocumentPtr document = d->m_graphEditor->openDocument(documentUrl);
     addGraphDocument(document);
     return document;
 }

@@ -23,7 +23,9 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
-
+#include "fileformats/fileformatmanager.h"
+#include <QUrl>
+#include <QFileInfo>
 #include <QDebug>
 
 using namespace GraphTheory;
@@ -40,7 +42,7 @@ public:
     }
 
     QList<GraphDocumentPtr> m_documents;
-
+    FileFormatManager m_fileFormatManager;
 };
 
 Editor::Editor()
@@ -65,4 +67,25 @@ GraphDocumentPtr Editor::createDocument()
     GraphDocumentPtr document = GraphDocument::create();
     d->m_documents.append(document);
     return document;
+}
+
+GraphDocumentPtr Editor::openDocument(const QUrl &documentUrl)
+{
+    // get file extension/format
+    QFileInfo fi(documentUrl.toLocalFile());
+    QString ext = fi.completeSuffix();
+
+    GraphTheory::FileFormatInterface *importer = d->m_fileFormatManager.backendByExtension(ext);
+    if (!importer) {
+        qCritical() << "No graph file backend found for extension" << ext << ", aborting.";
+        return GraphDocumentPtr();
+    }
+    importer->setFile(documentUrl);
+    importer->readFile();
+    if (importer->hasError()) {
+        qCritical() << "Graph file importer reported the following error, aborting.";
+        importer->errorString();
+        return GraphDocumentPtr();
+    }
+    return importer->graphDocument();
 }

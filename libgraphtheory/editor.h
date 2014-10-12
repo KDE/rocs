@@ -42,6 +42,12 @@ public:
     QList<GraphDocumentPtr> documents() const;
     GraphDocumentPtr createDocument();
 
+    /**
+     * Load document from @p documentUrl..
+     * @return the loaded document
+     */
+    GraphDocumentPtr openDocument(const QUrl &documentUrl);
+
 Q_SIGNALS:
     void documentCreated(GraphDocumentPtr document);
 
