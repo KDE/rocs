@@ -23,6 +23,7 @@
 #include "graphdocument.h"
 #include "nodetype.h"
 #include "edge.h"
+#include "typenames.h"
 
 #include <QPointF>
 #include <QColor>
@@ -38,6 +39,7 @@ NodeWrapper::NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper)
     connect(m_node.data(), &Node::colorChanged, this, &NodeWrapper::colorChanged);
     connect(m_node.data(), &Node::positionChanged, this, &NodeWrapper::positionChanged);
     connect(m_node.data(), &Node::dynamicPropertiesChanged, this, &NodeWrapper::updateDynamicProperties);
+    connect(m_node.data(), &Node::typeChanged, this, &NodeWrapper::typeChanged);
 
     updateDynamicProperties();
 }
@@ -63,7 +65,7 @@ void NodeWrapper::setX(qreal x)
         return;
     }
     m_node->setX(x);
-    // signal emitted by connection to m_node signal
+    // change signal will be emitted by connection to m_node signal
 }
 
 qreal NodeWrapper::y() const
@@ -77,7 +79,7 @@ void NodeWrapper::setY(qreal y)
         return;
     }
     m_node->setY(y);
-    // signal emitted by connection to m_node signal
+    // change signal will be emitted by connection to m_node signal
 }
 
 QColor NodeWrapper::color() const
@@ -91,7 +93,32 @@ void NodeWrapper::setColor(const QColor &color)
         return;
     }
     m_node->setColor(color);
-    // signal emitted by connection to m_node signal
+    // change signal will be emitted by connection to m_node signal
+}
+
+int NodeWrapper::type() const
+{
+    return m_node->type()->id();
+}
+
+void NodeWrapper::setType(int typeId)
+{
+    NodeTypePtr newType = m_node->type();
+    if (newType->id() == typeId) {
+        return;
+    }
+    foreach (NodeTypePtr type, m_node->document()->nodeTypes()) {
+        if (type->id() == typeId) {
+            newType = type;
+            break;
+        }
+    }
+    if (newType == m_node->type()) {
+        qWarning() << "No type with ID" << typeId << "found, aborting type change.";
+        return;
+    }
+    m_node->setType(newType);
+    // change signal will be emitted by connection to m_node signal
 }
 
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges() const

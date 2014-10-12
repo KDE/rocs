@@ -47,6 +47,7 @@ class NodeWrapper : public QObject
     Q_PROPERTY(qreal x READ x WRITE setX NOTIFY positionChanged)
     Q_PROPERTY(qreal y READ y WRITE setY NOTIFY positionChanged)
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
 
 public:
     NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper);
@@ -90,6 +91,17 @@ public:
      */
     void setColor(const QColor &color);
 
+    /**
+     * @return NodeType::id of corresponding node
+     */
+    int type() const;
+
+    /**
+     * Set NodeType of corresponding node by specifying its ID by @p typeId.
+     * If @p typeId does not name the ID of any NodeType, the type is not changed.
+     */
+    void setType(int typeId);
+
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> edges() const;
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> inEdges() const;
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges() const;
@@ -104,6 +116,7 @@ Q_SIGNALS:
     void idChanged(int id);
     void positionChanged(const QPointF &position);
     void colorChanged(const QColor &color);
+    void typeChanged();
 
 private:
     Q_DISABLE_COPY(NodeWrapper)

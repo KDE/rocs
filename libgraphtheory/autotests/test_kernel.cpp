@@ -191,4 +191,33 @@ void TestKernel::edgeProperties()
     document->destroy();
 }
 
+void TestKernel::nodeTypes()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    document->nodeTypes().first()->setId(1);
+    NodeTypePtr typeB = NodeType::create(document);
+    typeB->setId(2);
+    NodePtr node = Node::create(document);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    script = "Document.nodes()[0].type;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), 1);
+
+    script = "Document.nodes()[0].type = 2;";
+    result = kernel.execute(document, script);
+    QCOMPARE(node->type()->id(), 2);
+
+    script = "Document.nodes()[0].type;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), 2);
+
+    // cleanup
+    document->destroy();
+}
+
 QTEST_MAIN(TestKernel)
