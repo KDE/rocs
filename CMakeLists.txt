@@ -72,7 +72,7 @@ include_directories(
 #     ${Grantlee_INCLUDE_DIRS}
 )
 
-remove_definitions(-DQT_NO_CAST_TO_ASCII)
+add_definitions(-DQT_NO_CAST_TO_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_KEYWORDS)
