@@ -102,8 +102,19 @@ public:
      */
     void setType(int typeId);
 
+    /**
+     * @return list of all edges adjacent to this node
+     */
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> edges() const;
+
+    /**
+     * @return list of all edges that are either bidirectional or unidirectional and point to this node
+     *//
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> inEdges() const;
+
+    /**
+     * @return list of all edges that are either bidirectional or unidirectional and point from this node
+     *//
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges() const;
 
     /** reimplemented from QObject **/
