@@ -108,11 +108,18 @@ bool ProjectPrivate::loadProject(const QUrl &url)
 
     QJsonArray graphDocs = metaInfo["graphs"].toArray();
     for (int index = 0; index < graphDocs.count(); ++index) {
-        QString filename = graphDocs.at(index).toString();
-//         document->documentOpen(); //TODO <- implement this API to easier load documents
+        QString fileName = graphDocs.at(index).toString();
+        QUrl fileUrl = QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + fileName);
+        QFileInfo fi(url.toLocalFile());
+        QString ext = fi.completeSuffix();
+        //         document->documentOpen(); //TODO <- implement this API to easier load documents
 
-        GraphTheory::FileFormatInterface *importer = m_graphFileFormatManager.backendByExtension("graph");
-        importer->setFile(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + filename));
+        GraphTheory::FileFormatInterface *importer = m_graphFileFormatManager.backendByExtension(ext);
+        if (!importer) {
+            qCritical() << "Now graph file backend found for extesion" << ext << ", aborting.";
+            continue;
+        }
+        importer->setFile(fileUrl);
         importer->readFile();
         if (importer->hasError()) {
             qCritical() << "Graph file importer reported the following error, aborting.";
