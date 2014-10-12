@@ -159,7 +159,7 @@ protected:
 
     /**
      * \internal
-     * Use this function for read plugins to set read graph document
+     * Use this function for import-plugins to set the opened graph document and setting the modified state to false.
      *
      * \param document that contains the graph
      */

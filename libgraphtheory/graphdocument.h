@@ -248,7 +248,16 @@ public:
      */
     void setDocumentUrl(const QUrl &documentUrl);
 
-    bool isModified();
+    /**
+     * @return @e true if document has is modified, otherwise
+     *         @e false
+     */
+    bool isModified() const;
+
+    /**
+     * Set modified state of the document to @p modified.
+     */
+    void setModified(bool modified);
 
 Q_SIGNALS:
     void documentUrlChanged();

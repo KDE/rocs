@@ -60,7 +60,7 @@ public:
     QUrl m_documentUrl;
     QString m_name;
     uint m_lastGeneratedId;
-    bool m_modified; //FIXME modified value is not updated when graph changes
+    bool m_modified;
 };
 
 GraphDocumentPtr GraphDocument::self() const
@@ -367,9 +367,14 @@ void GraphDocument::setDocumentUrl(const QUrl &documentUrl)
     emit documentUrlChanged();
 }
 
-bool GraphDocument::isModified()
+bool GraphDocument::isModified() const
 {
     return d->m_modified;
+}
+
+void GraphDocument::setModified(bool modified)
+{
+    d->m_modified = modified;
 }
 
 //END

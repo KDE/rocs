@@ -21,6 +21,7 @@
 #include "fileformats/fileformatinterface.h"
 
 #include "typenames.h"
+#include "graphdocument.h"
 #include <QStringList>
 #include <QObject>
 #include <QUrl>
@@ -93,6 +94,7 @@ GraphDocumentPtr FileFormatInterface::graphDocument() const
 
 void FileFormatInterface::setGraphDocument(GraphDocumentPtr document)
 {
+    document->setModified(false);
     d->graphDocument = document;
 }
 
