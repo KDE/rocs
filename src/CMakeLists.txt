@@ -93,7 +93,6 @@ target_link_libraries(rocs
         KF5::Declarative
         KF5::I18n
         KF5::ItemViews
-        KF5::NewStuff
         KF5::Parts
         KF5::Service
         KF5::TextEditor
@@ -111,6 +110,5 @@ install(TARGETS rocs ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES rocsui.rc DESTINATION ${DATA_INSTALL_DIR}/rocs)
 install(FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR})
-install(FILES rocs.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
 
 ecm_optional_add_subdirectory(autotests)

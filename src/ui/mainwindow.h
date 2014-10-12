@@ -94,9 +94,6 @@ protected:
 
 private Q_SLOTS:
     void showSettings();
-    //Testing to connect to KGHNS3
-    void downloadNewExamples();
-    void uploadScript();
     void showCodeEditorConfig();
 
     /**

@@ -30,9 +30,6 @@
             <Action name="new-script" />
             <Action name="add-script" />
             <Action name="export-script" />
-            <Separator/>
-            <Action name="download" />
-            <Action name="upload" />
         </Menu>
         <Menu name="graph">
             <text>Graph Document</text>

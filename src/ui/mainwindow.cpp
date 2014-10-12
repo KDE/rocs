@@ -53,8 +53,6 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <KToolBar>
-#include <KNS3/DownloadDialog>
-#include <KNS3/UploadDialog>
 #include <ktexteditor/view.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
@@ -199,47 +197,6 @@ void MainWindow::setupToolbars()
     }
 }
 
-void MainWindow::downloadNewExamples()
-{
-    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog("rocs.knsrc", this);
-    dialog->exec();
-}
-
-void MainWindow::uploadScript()
-{
-
-    QPointer<KNS3::UploadDialog> dialog = new KNS3::UploadDialog(this);
-
-//First select the opened doc.
-    QUrl str = m_codeEditorWidget->activeDocument()->url();
-    if (str.isEmpty()) {
-        //... then try to open
-        str = QFileDialog::getOpenFileName(this, i18n("Rocs Script Files", QString(), i18n("*.js|Script files")));
-        if (str.isEmpty())
-            return;
-    }
-//Compress the file to a temp file (How it can be made in KDE way ? )
-    QString local = QDir::temp().absoluteFilePath(str.fileName());
-    local.chop(3);
-    local.append(".tar.gz");
-
-//create compressed file and set to dialog.
-    KTar tar = KTar(local);
-    tar.open(QIODevice::WriteOnly);
-    tar.addLocalFile(str.toLocalFile(), str.fileName());
-    tar.close();
-    dialog->setUploadFile(local);
-
-    dialog->setUploadName(m_codeEditorWidget->activeDocument()->documentName());
-    dialog->setDescription(i18n("Add your description here."));
-
-    dialog->exec();
-
-//Remove compressed file..
-    QDir::temp().remove(local);
-}
-
-
 QWidget* MainWindow::setupScriptPanel()
 {
     m_hScriptSplitter = new QSplitter(this);
@@ -368,8 +325,6 @@ void MainWindow::setupActions()
     createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(createCodeDocument()),    this);
     createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphDocument()),   this);
     createAction("document-export",     i18nc("@action:inmenu", "Export Graph as"),    "export-graph-as",      SLOT(exportGraphDocument()), this);
-    createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Download Examples"),  "download",          SLOT(downloadNewExamples()),  this);
-    createAction("get-hot-new-stuff",   i18nc("@action:inmenu", "Upload project"),     "upload",            SLOT(uploadScript()),  this);
 
     createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importCodeDocument()),   this);
     createAction("document-export", i18nc("@action:inmenu", "Export Script"),      "export-script",      SLOT(exportCodeDocument()), this);
