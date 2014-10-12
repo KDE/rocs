@@ -51,6 +51,8 @@ private Q_SLOTS:
     void edgeProperties();
     /** test node type access **/
     void nodeTypes();
+    /** test node type access **/
+    void edgeTypes();
 };
 
 #endif

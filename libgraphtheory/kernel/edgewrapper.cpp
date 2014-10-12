@@ -35,6 +35,7 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
 {
     connect(m_edge.data(), &Edge::typeColorChanged, this, &EdgeWrapper::colorChanged);
     connect(m_edge.data(), &Edge::dynamicPropertiesChanged, this, &EdgeWrapper::updateDynamicProperties);
+    connect(m_edge.data(), &Edge::typeChanged, this, &EdgeWrapper::typeChanged);
 
     updateDynamicProperties();
 }
@@ -42,6 +43,31 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
 EdgeWrapper::~EdgeWrapper()
 {
 
+}
+
+int EdgeWrapper::type() const
+{
+    return m_edge->type()->id();
+}
+
+void EdgeWrapper::setType(int typeId)
+{
+    EdgeTypePtr newType = m_edge->type();
+    if (newType->id() == typeId) {
+        return;
+    }
+    foreach (EdgeTypePtr type, m_edge->from()->document()->edgeTypes()) {
+        if (type->id() == typeId) {
+            newType = type;
+            break;
+        }
+    }
+    if (newType == m_edge->type()) {
+        qWarning() << "No type with ID" << typeId << "found, aborting type change.";
+        return;
+    }
+    m_edge->setType(newType);
+    // change signal will be emitted by connection to m_node signal
 }
 
 GraphTheory::NodeWrapper * EdgeWrapper::from() const

@@ -44,11 +44,23 @@ class NodeWrapper;
 class EdgeWrapper : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
 
 public:
     EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper);
 
     virtual ~EdgeWrapper();
+
+    /**
+     * @return EdgeType::id of corresponding node
+     */
+    int type() const;
+
+    /**
+     * Set EdgeType of corresponding node by specifying its ID by @p typeId.
+     * If @p typeId does not name the ID of any NodeType, the type is not changed.
+     */
+    void setType(int typeId);
 
     Q_INVOKABLE GraphTheory::NodeWrapper * from() const;
     Q_INVOKABLE GraphTheory::NodeWrapper * to() const;
@@ -62,6 +74,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void colorChanged(const QColor &color);
+    void typeChanged();
 
 private:
     Q_DISABLE_COPY(EdgeWrapper)
