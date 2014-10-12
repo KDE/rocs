@@ -35,7 +35,8 @@ JournalEditorWidget::JournalEditorWidget(QWidget* parent)
     ui = new Ui::JournalEditorWidget;
     ui->setupUi(this);
 
-    connect(ui->editor, SIGNAL(textChanged()), this, SLOT(setModified()));
+    connect(ui->editor, &KRichTextWidget::textChanged,
+        this, &JournalEditorWidget::setModified);
 }
 
 void JournalEditorWidget::openJournal(Project *project)
