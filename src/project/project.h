@@ -181,7 +181,6 @@ Q_SIGNALS:
     void activeGraphDocumentChanged();
 
 private:
-    bool writeNewProjectFile();
     const QScopedPointer<ProjectPrivate> d;
 };
 
