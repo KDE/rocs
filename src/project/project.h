@@ -74,6 +74,16 @@ public:
     virtual ~Project();
 
     /**
+     * @return the project's journal document
+     * Note that the pointer may be 0.
+     */
+    KTextEditor::Document * journalDocument() const;
+
+  /*
+   * Handling of script documents.
+   */
+public:
+    /**
      * @return list of all scripts contained in this project
      */
     QList<KTextEditor::Document*> codeDocuments() const;
@@ -94,6 +104,24 @@ public:
      */
     void removeCodeDocument(KTextEditor::Document *document);
 
+public Q_SLOTS:
+    /**
+     * Set the currently active graph document index to @p index.
+     * If the index does not exist, it will not be changed.
+     */
+    void setActiveCodeDocument(int index);
+
+Q_SIGNALS:
+    void codeDocumentAboutToBeAdded(KTextEditor::Document*,int);
+    void codeDocumentAdded();
+    void codeDocumentAboutToBeRemoved(int,int);
+    void codeDocumentRemoved();
+    void activeCodeDocumentChanged(int index);
+
+  /*
+   * Handling of graph documents.
+   */
+public:
     /**
      * @return list of all graph documents contained in this project
      */
@@ -117,17 +145,19 @@ public:
      */
     void removeGraphDocument(GraphTheory::GraphDocumentPtr document);
 
+public Q_SLOTS:
     /**
-     * @return the project's journal document
-     * Note that the pointer may be 0.
+     * Set the currently active graph document index to @p index.
+     * If the index does not exist, it will not be changed.
      */
-    KTextEditor::Document * journalDocument() const;
+    void setActiveGraphDocument(int index);
 
 Q_SIGNALS:
-    void codeDocumentAboutToBeAdded(KTextEditor::Document*,int);
-    void codeDocumentAdded();
-    void codeDocumentAboutToBeRemoved(int,int);
-    void codeDocumentRemoved();
+    void graphDocumentAboutToBeAdded(GraphTheory::GraphDocumentPtr, int);
+    void graphDocumentAdded();
+    void graphDocumentAboutToBeRemoved(int,int);
+    void graphDocumentRemoved();
+    void activeGraphDocumentChanged(int index);
 
   /*
    * General file related actions.
@@ -176,9 +206,6 @@ public:
      *         @e false
      */
     bool isModified() const;
-
-Q_SIGNALS:
-    void activeGraphDocumentChanged();
 
 private:
     const QScopedPointer<ProjectPrivate> d;

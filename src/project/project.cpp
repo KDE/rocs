@@ -50,6 +50,8 @@ public:
         : m_journal(0)
         , m_graphEditor(0)
         , m_modified(false)
+        , m_activeGraphDocumentIndex(-1)
+        , m_activeCodeDocumentIndex(-1)
     {
 
     }
@@ -63,7 +65,8 @@ public:
     GraphTheory::FileFormatManager m_graphFileFormatManager;
     bool m_modified;
 
-    GraphDocumentPtr m_activeGraphDocument;     // TODO needed?
+    int m_activeGraphDocumentIndex;
+    int m_activeCodeDocumentIndex;
 
     /**
      * Set project from project archive file.
@@ -121,6 +124,8 @@ bool ProjectPrivate::loadProject(const QUrl &url)
     }
     m_journal = KTextEditor::Editor::instance()->createDocument(0);
     m_journal->openUrl(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + metaInfo["journal.txt"].toString()));
+
+    //TODO save & load open document index
 
     return true;
 }
@@ -251,14 +256,20 @@ QList<KTextEditor::Document*> Project::codeDocuments() const
     return d->m_codeDocuments;
 }
 
+
+void Project::setActiveCodeDocument(int index)
+{
+    if (index < 0 || index >= d->m_codeDocuments.count()) {
+        qCritical() << "Code document index invalid, aborting change of current document.";
+        return;
+    }
+    d->m_activeCodeDocumentIndex = index;
+    emit activeCodeDocumentChanged(index);
+}
+
 QList<GraphDocumentPtr> Project::graphDocuments() const
 {
     return d->m_graphDocuments;
-}
-
-GraphDocumentPtr Project::activeGraphDocument() const
-{
-    return d->m_activeGraphDocument;
 }
 
 bool Project::addGraphDocument(GraphDocumentPtr document)
@@ -280,14 +291,15 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
 
     // put document into working directory
     document->documentSaveAs(QUrl::fromLocalFile(path));
+    int index = d->m_graphDocuments.length();
+    emit graphDocumentAboutToBeAdded(document, index);
     d->m_graphDocuments.append(document);
+    emit graphDocumentAdded();
     d->m_modified = true;
 
-    if (d->m_activeGraphDocument.isNull()) {
-        d->m_activeGraphDocument = document;
-        emit activeGraphDocumentChanged();
+    if (d->m_activeCodeDocumentIndex < 0) {
+        setActiveGraphDocument(index);
     }
-
     return true;
 }
 
@@ -322,9 +334,26 @@ void Project::removeGraphDocument(GraphDocumentPtr document)
     if (!QFile::remove(path)) {
         qCritical() << "Could not remove graph file" << path;
     }
-
-    d->m_graphDocuments.removeAll(document);
+    int index = d->m_graphDocuments.indexOf(document);
+    emit graphDocumentAboutToBeRemoved(index, index);
+    d->m_graphDocuments.removeAt(index);
+    emit graphDocumentRemoved();
     d->m_modified = true;
+}
+
+void Project::setActiveGraphDocument(int index)
+{
+    if (index < 0 || index >= d->m_graphDocuments.count()) {
+        qCritical() << "Graph document index invalid, aborting change of current document.";
+        return;
+    }
+    d->m_activeGraphDocumentIndex = index;
+    emit activeGraphDocumentChanged(index);
+}
+
+GraphDocumentPtr Project::activeGraphDocument() const
+{
+    return d->m_graphDocuments.at(d->m_activeCodeDocumentIndex);
 }
 
 KTextEditor::Document * Project::journalDocument() const
