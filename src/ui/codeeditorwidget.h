@@ -18,8 +18,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CODEEDITOR_H
-#define CODEEDITOR_H
+#ifndef CODEEDITORWIDGET_H
+#define CODEEDITORWIDGET_H
 
 #include <QWidget>
 #include "project/project.h"
@@ -32,11 +32,11 @@ class Editor;
 }
 class QTabWidget;
 
-class CodeEditor : public QWidget
+class CodeEditorWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CodeEditor(QWidget *parent = 0);
+    explicit CodeEditorWidget(QWidget *parent = 0);
     void setProject(Project *project);
     KTextEditor::Document *activeDocument() const;
 

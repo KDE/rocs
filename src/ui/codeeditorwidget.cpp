@@ -18,7 +18,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "codeeditor.h"
+#include "codeeditorwidget.h"
 #include "project/project.h"
 #include <KTextEditor/View>
 #include <KTextEditor/Editor>
@@ -28,7 +28,7 @@
 #include <QVBoxLayout>
 #include <QDebug>
 
-CodeEditor::CodeEditor(QWidget *parent)
+CodeEditorWidget::CodeEditorWidget(QWidget *parent)
     : QWidget(parent)
     , m_project(0)
 {
@@ -44,7 +44,7 @@ CodeEditor::CodeEditor(QWidget *parent)
     setLayout(layout);
 }
 
-void CodeEditor::setProject(Project *project)
+void CodeEditorWidget::setProject(Project *project)
 {
     if (m_project) {
         m_project->disconnect(this);
@@ -64,17 +64,17 @@ void CodeEditor::setProject(Project *project)
     }
 }
 
-KTextEditor::Document* CodeEditor::activeDocument() const
+KTextEditor::Document* CodeEditorWidget::activeDocument() const
 {
     return m_project->codeDocuments().at(m_viewWidgets->currentIndex());
 }
 
-void CodeEditor::onCodeDocumentAboutToBeAdded(KTextEditor::Document* document, int index)
+void CodeEditorWidget::onCodeDocumentAboutToBeAdded(KTextEditor::Document* document, int index)
 {
     m_viewWidgets->insertTab(index, document->createView(this), document->documentName());
 }
 
-void CodeEditor::onCodeDocumentAboutToBeRemoved(int start, int end)
+void CodeEditorWidget::onCodeDocumentAboutToBeRemoved(int start, int end)
 {
     for (int i = end; i >= start; --i) {
         m_viewWidgets->removeTab(i);

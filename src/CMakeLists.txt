@@ -38,7 +38,7 @@ set( rocs_interface_SRCS
     ui/sidedockwidget.cpp
     ui/fileformatdialog.cpp
     ui/mainwindow.cpp
-    ui/codeeditor.cpp
+    ui/codeeditorwidget.cpp
     ui/documenttypeswidget.cpp
     ui/grapheditorwidget.cpp
     ui/nodetypesdelegate.cpp

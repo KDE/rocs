@@ -36,7 +36,7 @@ class QAction;
 class Project;
 class QSplitter;
 class QAction;
-class CodeEditor;
+class CodeEditorWidget;
 class GraphEditorWidget;
 class QScriptEngineDebugger;
 class QCloseEvent;
@@ -166,7 +166,7 @@ private:
     GraphTheory::Editor *m_graphEditor;
     GraphTheory::Kernel *m_kernel; //!< simulation kernel
     GraphTheory::EditorPluginManager m_graphEditorPluginManager;
-    CodeEditor *m_codeEditorWidget;
+    CodeEditorWidget *m_codeEditorWidget;
     GraphEditorWidget *m_graphEditorWidget;
     ScriptOutputWidget *m_outputWidget;
     JournalEditorWidget *m_journalWidget;

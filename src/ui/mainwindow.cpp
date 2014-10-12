@@ -61,7 +61,7 @@
 
 #include "ui/documenttypeswidget.h"
 #include "ui/configuredefaultproperties.h"
-#include "ui/codeeditor.h"
+#include "ui/codeeditorwidget.h"
 #include "ui/scriptoutputwidget.h"
 #include "ui/sidedockwidget.h"
 #include "ui/documentationwidget.h"
@@ -77,7 +77,9 @@ MainWindow::MainWindow()
     : KXmlGuiWindow()
     , m_currentProject(0)
     , m_kernel(new Kernel)
+    , m_codeEditorWidget(new CodeEditorWidget(this))
     , m_graphEditorWidget(new GraphEditorWidget(this))
+    , m_outputWidget(new ScriptOutputWidget(this))
     , m_scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
@@ -242,9 +244,6 @@ QWidget* MainWindow::setupScriptPanel()
 {
     m_hScriptSplitter = new QSplitter(this);
     m_hScriptSplitter->setOrientation(Qt::Horizontal);
-
-    m_codeEditorWidget = new CodeEditor(this);
-    m_outputWidget = new ScriptOutputWidget(this);
 
     KToolBar *executeCommands = new KToolBar(this);
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
