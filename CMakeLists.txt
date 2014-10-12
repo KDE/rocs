@@ -21,7 +21,7 @@
 project(rocs)
 cmake_minimum_required(VERSION 3.0.0)
 
-find_package(ECM 0.0.9 REQUIRED NO_MODULE)
+find_package(ECM 1.0.0 REQUIRED NO_MODULE)
 find_package(KF5DocTools)
 find_package(Boost "1.43" REQUIRED)
 # find_package(Grantlee REQUIRED) #FIXME deactivate for now
