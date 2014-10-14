@@ -457,6 +457,17 @@ void MainWindow::saveProjectAs()
         qCritical() << "Filename is empty and no script file was created.";
         return;
     }
+    QFileInfo fi(file);
+    if (fi.exists()) {
+        const int btnCode = KMessageBox::warningContinueCancel(
+            this,
+            i18nc("@info", "A file named \"%1\" already exists. Are you sure you want to overwrite it?", fi.fileName()),
+            i18nc("@title:window", "Overwrite File?"),
+            KStandardGuiItem::overwrite());
+        if (btnCode == KMessageBox::Cancel) {
+            return; // cancel saving
+        }
+    }
     Settings::setLastOpenedDirectory(m_currentProject->projectUrl().path());
     m_currentProject->projectSaveAs(QUrl::fromLocalFile(file));
     updateCaption();
