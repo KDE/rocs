@@ -91,8 +91,8 @@ MainWindow::MainWindow()
     setupToolsPluginsAction();
 
     // setup kernel
-    connect(m_kernel, SIGNAL(message(QString, GraphTheory::Kernel::MessageType)), m_outputWidget,
-        SLOT(processMessage(QString,GraphTheory::Kernel::MessageType)));
+    connect(m_kernel, &Kernel::message,
+        m_outputWidget, &ScriptOutputWidget::processMessage);
 
     // TODO: use welcome widget instead of creating default empty project
     createProject();
@@ -231,9 +231,12 @@ QWidget* MainWindow::setupScriptPanel()
     showExecutionButtonDebug(Settings::executionModeDebugVisible());
     showExecutionButtonOneStep(Settings::executionModeOneStepVisible());
 
-    connect(m_runScript, SIGNAL(triggered()), this, SLOT(executeScript()));
-    connect(m_stepRunScript, SIGNAL(triggered()), this, SLOT(executeScriptOneStep()));
-    connect(m_stopScript, SIGNAL(triggered()), this, SLOT(stopScript()));
+    connect(m_runScript, &QAction::triggered,
+        this, &MainWindow::executeScript);
+    connect(m_stepRunScript, &QAction::triggered,
+        this, &MainWindow::executeScriptOneStep);
+    connect(m_stopScript, &QAction::triggered,
+        this, &MainWindow::stopScript);
 
     m_hScriptSplitter->addWidget(m_codeEditorWidget);
     m_hScriptSplitter->addWidget(m_outputWidget);
@@ -316,7 +319,8 @@ void MainWindow::setupActions()
     createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
 
     m_recentProjects = new KRecentFilesAction(QIcon ("document-open"), i18nc("@action:inmenu","Recent Projects"), this);
-    connect(m_recentProjects, SIGNAL(urlSelected(QUrl)), this, SLOT(openProject(QUrl)));
+    connect(m_recentProjects, &KRecentFilesAction::urlSelected,
+        this, &MainWindow::openProject);
     actionCollection()->addAction("recent-project", m_recentProjects);
 
     m_recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
@@ -356,10 +360,10 @@ void MainWindow::showSettings()
 
     dialog->addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
 
-    connect(defaultProperties, SIGNAL(showExecuteModeDebugChanged(bool)),
-            this, SLOT(showExecutionButtonDebug(bool)));
-    connect(defaultProperties, SIGNAL(showExecuteModeOneStepChanged(bool)),
-            this, SLOT(showExecutionButtonOneStep(bool)));
+    connect(defaultProperties, &ConfigureDefaultProperties::showExecuteModeDebugChanged,
+        this, &MainWindow::showExecutionButtonDebug);
+    connect(defaultProperties, &ConfigureDefaultProperties::showExecuteModeOneStepChanged,
+        this, &MainWindow::showExecutionButtonOneStep);
     dialog->exec();
 }
 
@@ -372,8 +376,8 @@ void MainWindow::setupToolsPluginsAction()
     foreach(EditorPluginInterface * plugin, availablePlugins) {
         action = new QAction(plugin->displayName(), this);
         action->setData(count++);
-        connect(action, SIGNAL(triggered(bool)), this, SLOT(showEditorPluginDialog()));
-
+        connect(action, &QAction::triggered,
+            this, &MainWindow::showEditorPluginDialog);
         actions << action;
     }
     unplugActionList("tools_plugins");
