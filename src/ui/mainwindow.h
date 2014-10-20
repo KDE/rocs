@@ -103,7 +103,6 @@ private Q_SLOTS:
     void createProject();
     void saveProject();
     void saveProjectAs();
-    void openProject(const QUrl& fileName = QUrl());
 
     // script file handling
     void createCodeDocument();
@@ -125,6 +124,9 @@ private Q_SLOTS:
     void updateCaption();
     void setupToolsPluginsAction();
     void quit();
+
+public Q_SLOTS:
+    void openProject(const QUrl& fileName = QUrl());
 
 private Q_SLOTS: // script execution
     /**

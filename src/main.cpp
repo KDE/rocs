@@ -22,6 +22,8 @@
 #include <QApplication>
 #include <KAboutData>
 #include <KLocalizedString>
+#include <QCommandLineParser>
+#include <QDir>
 
 #include "rocsversion.h"
 #include "ui/mainwindow.h"
@@ -56,9 +58,37 @@ int main(int argc, char *argv[])
      */
     QApplication app(argc, argv);
 
+    /**
+     * Create command line parser and feed it with known options
+     */
+    QCommandLineParser parser;
+    aboutData.setupCommandLine(&parser);
+    parser.setApplicationDescription(aboutData.shortDescription());
+    parser.addHelpOption();
+    parser.addVersionOption();
+
+    parser.addPositionalArgument(QStringLiteral("project"), i18n("Project to open."), QStringLiteral("[url...]"));
+
+    /**
+     * do the command line parsing
+     */
+    parser.process(app);
+
+    /**
+     * handle standard options
+     */
+    aboutData.processCommandLine(&parser);
+    const QStringList projectUrls = parser.positionalArguments();
+
     KAboutData::setApplicationData(aboutData);
     MainWindow *window = new MainWindow();
     window->show();
+
+    // we can only process the first project
+    if (projectUrls.count() > 0) {
+        QString path = QDir::current().absoluteFilePath(projectUrls.first());
+        window->openProject(QUrl::fromLocalFile(path));
+    }
 
     return app.exec();
 }
