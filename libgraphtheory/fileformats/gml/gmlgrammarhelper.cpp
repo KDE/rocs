@@ -1,7 +1,7 @@
 /*
     This file is part of Rocs.
     Copyright 2006-2007  Gael de Chalendar <kleag@free.fr>
-    Copyright 2012       Andreas Cord-Landwehr <cola@uni-paderborn.de>
+    Copyright 2012       Andreas Cord-Landwehr <cordlandwehr@kde.org>
 
     Rocs is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public
