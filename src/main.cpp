@@ -32,31 +32,31 @@ int main(int argc, char *argv[])
 {
     KAboutData aboutData("rocs",
                          ki18nc("@title Displayed program name", "Rocs").toString(),
-                         ROCS_VERSION_STRING,
-                         ki18nc("@title KAboutData: short program description", "Graph Theory Tool").toString(),
-                         KAboutLicense::GPL_V2,
-                         ki18nc("@info:credit", "(c) 2009-2013 Rocs Developers").toString(),
-                         ki18nc("@title Short program description", "Rocs - Data Structure Analysis").toString()
-                        );
+                         ROCS_VERSION_STRING);
 
+    aboutData.addLicense(KAboutLicense::GPL_V2);
+    aboutData.setShortDescription(ki18nc("@title Short program description", "Graph Theory Simulator").toString());
+
+    // credits and authors (in alphabetical list)
+    aboutData.addCredit(ki18nc("@info:credit", "(c) 2009-2014 Rocs Developers").toString());
+    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Andreas Cord-Landwehr").toString(),
+                        ki18nc("@info:credit Role", "Developer").toString(),
+                        "cordlandwehr@kde.org",
+                        "http://cordlandwehr.wordpress.com");
     aboutData.addAuthor(ki18nc("@info:credit Developer name", "Tomaz Canabrava").toString(),
                         ki18nc("@info:credit Role", "Developer").toString(),
                         "tcanabrava@kde.org",
                         "http://liveblue.wordpress.com");
-
     aboutData.addAuthor(ki18nc("@info:credit Developer name", "Wagner Reck").toString(),
                         ki18nc("@info:credit Role", "Developer").toString(),
                         "wagner.reck@gmail.com",
                         "http://wiglot.wordpress.com");
 
-    aboutData.addAuthor(ki18nc("@info:credit Developer name", "Andreas Cord-Landwehr").toString(),
-                        ki18nc("@info:credit Role", "Developer").toString(),
-                        "cordlandwehr@kde.org",
-                        "http://cordlandwehr.wordpress.com");
     /**
      * first init the app
      */
     QApplication app(argc, argv);
+    app.setApplicationVersion(aboutData.version());
 
     /**
      * Create command line parser and feed it with known options
