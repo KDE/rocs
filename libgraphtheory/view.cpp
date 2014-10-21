@@ -47,6 +47,8 @@ using namespace GraphTheory;
 class GraphTheory::ViewPrivate {
 public:
     ViewPrivate()
+        : m_edgeModel(0)
+        , m_nodeModel(0)
     {
     }
 

@@ -38,6 +38,7 @@ class GraphTheory::TransformEdgesPluginPrivate
 {
 public:
     TransformEdgesPluginPrivate()
+        : m_dialog(0)
     {
     }
 
@@ -45,7 +46,7 @@ public:
     {
         m_dialog->deleteLater();
     }
-    QDialog * m_dialog;
+    QDialog *m_dialog;
 };
 
 

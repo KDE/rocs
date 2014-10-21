@@ -36,6 +36,7 @@ class GraphTheory::FileFormatManagerPrivate
 {
 public:
     FileFormatManagerPrivate()
+        : defaultGraphFilePlugin(0)
     {
 
     }

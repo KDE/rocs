@@ -37,6 +37,7 @@ class GraphTheory::GenerateGraphPluginPrivate
 {
 public:
     GenerateGraphPluginPrivate()
+        : m_dialog(0)
     {
     }
 
@@ -44,7 +45,7 @@ public:
     {
         m_dialog->deleteLater();
     }
-    QDialog * m_dialog;
+    QDialog *m_dialog;
 };
 
 GenerateGraphPlugin::GenerateGraphPlugin(QObject* parent,  const QList<QVariant> & /* args*/)

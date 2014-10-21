@@ -73,6 +73,7 @@ void boost::throw_exception(std::exception const & e)
 GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *parent)
     : QDialog(parent)
     , m_document(document)
+    , m_seed(1)
 {
     // setup default identifiers for the created graphs
     m_defaultIdentifiers.insert(MeshGraph, "MeshGraph");

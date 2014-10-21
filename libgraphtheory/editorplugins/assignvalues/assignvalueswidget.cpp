@@ -42,6 +42,7 @@ using namespace GraphTheory;
 AssignValuesWidget::AssignValuesWidget(GraphDocumentPtr document, QWidget *parent)
     : QDialog(parent)
     , m_document(document)
+    , m_applyButton(0)
 {
     setWindowTitle(i18nc("@title:window", "Assign Values"));
 

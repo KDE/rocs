@@ -31,9 +31,10 @@
 
 GraphEditorWidget::GraphEditorWidget(QWidget *parent)
     : QWidget(parent)
+    , m_viewWidgets(new QTabWidget(this))
+    , m_editor(0)
 {
     QLayout *layout = new QVBoxLayout();
-    m_viewWidgets = new QTabWidget(this);
     m_viewWidgets->setTabsClosable(false);
     layout->addWidget(m_viewWidgets);
     layout->setSpacing(0);
