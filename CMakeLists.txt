@@ -72,6 +72,7 @@ include_directories(
 )
 
 add_definitions(-DQT_NO_CAST_TO_ASCII)
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_KEYWORDS)

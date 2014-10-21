@@ -386,29 +386,27 @@ void MainWindow::setupToolsPluginsAction()
 
 void MainWindow::importCodeDocument()
 {
-    QUrl startDirectory = Settings::lastOpenedDirectory();
-
-    QString fileUrl = QFileDialog::getOpenFileName(this,
-                        i18nc("@title:window", "Import Script into Project"),
-                        startDirectory.toLocalFile());
+    QString startDirectory = Settings::lastOpenedDirectory();
+    QUrl fileUrl = QUrl::fromLocalFile(QFileDialog::getOpenFileName(this,
+        i18nc("@title:window", "Import Script into Project"),
+        startDirectory));
 
     if (fileUrl.isEmpty()) {
         return;
     }
 
     m_currentProject->importCodeDocument(fileUrl);
-    Settings::setLastOpenedDirectory(startDirectory.toLocalFile());
+    Settings::setLastOpenedDirectory(startDirectory);
 }
 
 void MainWindow::exportCodeDocument()
 {
-    QUrl startDirectory = Settings::lastOpenedDirectory();
-
-    QString fileUrl = QFileDialog::getSaveFileName(this,
-                        i18nc("@title:window", "Export Script"),
-                        startDirectory.toLocalFile(),
-                       i18n("JavaScript (*.js)"));
-    m_codeEditorWidget->activeDocument()->saveAs(QUrl::fromLocalFile(fileUrl));
+    QString startDirectory = Settings::lastOpenedDirectory();
+    QUrl fileUrl = QUrl::fromLocalFile(QFileDialog::getSaveFileName(this,
+        i18nc("@title:window", "Export Script"),
+        startDirectory,
+        i18n("JavaScript (*.js)")));
+    m_codeEditorWidget->activeDocument()->saveAs(fileUrl);
 }
 
 void MainWindow::createProject()
@@ -428,10 +426,10 @@ void MainWindow::createProject()
 void MainWindow::saveProject()
 {
     if (m_currentProject->projectUrl().isEmpty()) {
-        QUrl startDirectory = Settings::lastOpenedDirectory();
+        QString startDirectory = Settings::lastOpenedDirectory();
         QString file = QFileDialog::getSaveFileName(this,
                             i18nc("@title:window", "Save Project"),
-                            startDirectory.toLocalFile(),
+                            startDirectory,
                             i18n("Rocs Projects (*.rocs)"));
 
         if (file.isEmpty()) {
@@ -447,10 +445,10 @@ void MainWindow::saveProject()
 
 void MainWindow::saveProjectAs()
 {
-    QUrl startDirectory = Settings::lastOpenedDirectory();
+    QString startDirectory = Settings::lastOpenedDirectory();
     QString file = QFileDialog::getSaveFileName(this,
                         i18nc("@title:window", "Save Project As"),
-                        startDirectory.toLocalFile(),
+                        startDirectory,
                         i18n("Rocs Projects (*.rocs)"));
 
     if (file.isEmpty()) {
@@ -479,14 +477,14 @@ void MainWindow::openProject(const QUrl &fileName)
         return;
     }
 
-    QUrl startDirectory = Settings::lastOpenedDirectory();
+    QString startDirectory = Settings::lastOpenedDirectory();
     QUrl file = fileName;
     if (file.isEmpty()){
     // show open dialog
-         file = QFileDialog::getOpenFileName(this,
+         file = QUrl::fromLocalFile(QFileDialog::getOpenFileName(this,
                     i18nc("@title:window", "Open Project Files"),
-                    startDirectory.toLocalFile(),
-                    i18n("Rocs projects (*.rocs)"));
+                    startDirectory,
+                    i18n("Rocs projects (*.rocs)")));
 
         if (file.isEmpty()) {
             return;
@@ -496,7 +494,7 @@ void MainWindow::openProject(const QUrl &fileName)
     Project *project = new Project(file, m_graphEditor);
     setProject(project);
 
-    m_recentProjects->addUrl(file.path(QUrl::FullyDecoded));
+    m_recentProjects->addUrl(file);
     Settings::setLastOpenedDirectory(file.path());
 }
 

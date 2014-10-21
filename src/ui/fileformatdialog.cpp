@@ -140,7 +140,7 @@ GraphDocumentPtr FileFormatDialog::importFile()
         return GraphDocumentPtr();
     }
 
-    filePlugin->setFile(fileName);
+    filePlugin->setFile(QUrl::fromLocalFile(fileName));
     filePlugin->readFile();
     if (filePlugin->hasError()) {
         qDebug() << "Error loading file" << fileName << filePlugin->errorString();
