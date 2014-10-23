@@ -92,11 +92,55 @@ QScriptValue DocumentWrapper::nodes() const
     return m_engine->toScriptValue(nodeWrappers);
 }
 
+QScriptValue DocumentWrapper::nodes(int type) const
+{
+    NodeTypePtr typePtr;
+    foreach (NodeTypePtr typeTest, m_document->nodeTypes()) {
+        if (typeTest->id() == type) {
+            typePtr = typeTest;
+            break;
+        }
+    }
+    if (!typePtr) {
+        qCritical() << "Node type with ID" << type << "is not registered at document.";
+        // TODO present error message in UI
+        return m_engine->newArray();
+    }
+    QScriptValue array = m_engine->newArray();
+    QList<NodeWrapper*> nodeWrappers;
+    foreach(NodePtr node, m_document->nodes(typePtr)) {
+        nodeWrappers.append(nodeWrapper(node));
+    }
+    return m_engine->toScriptValue(nodeWrappers);
+}
+
 QScriptValue DocumentWrapper::edges() const
 {
     QScriptValue array = m_engine->newArray();
     QList<EdgeWrapper*> edgeWrappers;
     foreach(EdgePtr edge, m_document->edges()) {
+        edgeWrappers.append(edgeWrapper(edge));
+    }
+    return m_engine->toScriptValue(edgeWrappers);
+}
+
+QScriptValue DocumentWrapper::edges(int type) const
+{
+    EdgeTypePtr typePtr;
+    foreach (EdgeTypePtr typeTest, m_document->edgeTypes()) {
+        if (typeTest->id() == type) {
+            typePtr = typeTest;
+            break;
+        }
+    }
+    if (!typePtr) {
+        qCritical() << "Edge type with ID" << type << "is not registered at document.";
+        // TODO present error message in UI
+        return m_engine->newArray();
+    }
+    QScriptValue array = m_engine->newArray();
+    QList<EdgeWrapper*> edgeWrappers;
+    foreach(EdgePtr edge, m_document->edges(typePtr)) {
         edgeWrappers.append(edgeWrapper(edge));
     }
     return m_engine->toScriptValue(edgeWrappers);

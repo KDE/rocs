@@ -98,6 +98,38 @@ void TestKernel::graphObjectAccess()
     document->destroy();
 }
 
+void TestKernel::graphObjectAccessWithTypes()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodeTypePtr nodeTypeB = NodeType::create(document);
+    EdgeTypePtr edgeTypeB = EdgeType::create(document);
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    NodePtr nodeC = Node::create(document);
+    EdgePtr edgeAB = Edge::create(nodeA, nodeB);
+    EdgePtr edgeBC = Edge::create(nodeB, nodeC);
+
+    // setup types
+    nodeA->setType(nodeTypeB);
+    edgeAB->setType(edgeTypeB);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    script = QString("Document.nodes(%1).length;").arg(nodeTypeB->id());
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = QString("Document.edges(%1).length;").arg(edgeTypeB->id());
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    // cleanup
+    document->destroy();
+}
+
 void TestKernel::edgeAccessMethods()
 {
     GraphDocumentPtr document = GraphDocument::create();

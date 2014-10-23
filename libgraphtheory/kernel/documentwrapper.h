@@ -60,7 +60,9 @@ public:
     EdgeWrapper * edgeWrapper(EdgePtr edge) const;
 
     Q_INVOKABLE QScriptValue nodes() const;
+    Q_INVOKABLE QScriptValue nodes(int type) const;
     Q_INVOKABLE QScriptValue edges() const;
+    Q_INVOKABLE QScriptValue edges(int type) const;
 
 Q_SIGNALS:
 
