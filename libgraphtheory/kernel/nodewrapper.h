@@ -108,14 +108,38 @@ public:
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> edges() const;
 
     /**
+     * Method returns empty list if invalid or non-existing ID \p type is used.
+     * @param type is the ID of an existing EdgeType
+     * @return list of all edges adjacent to this node of type with ID \p type
+     */
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> edges(int type) const;
+
+    /**
      * @return list of all edges that are either bidirectional or unidirectional and point to this node
      */
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> inEdges() const;
 
     /**
+     * Method returns empty list if invalid or non-existing ID \p type is used.
+     * @param type is the ID of an existing EdgeType
+     * @return list of all edges that are either bidirectional or unidirectional and point to this node
+     *         with ID \p type
+     */
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> inEdges(int type) const;
+
+    /**
      * @return list of all edges that are either bidirectional or unidirectional and point from this node
      */
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges() const;
+
+    /**
+     * Method returns empty list if invalid or non-existing ID \p type is used.
+     * @param type is the ID of an existing EdgeType
+     * @return list of all edges that are either bidirectional or unidirectional and point from this node
+     *          with ID \p type
+     */
+    Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges(int type) const;
+
 
     /**
      * @return list of all neighbors connected to this node

@@ -130,6 +130,27 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges() const
     return edges;
 }
 
+QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges(int type) const
+{
+    EdgeTypePtr typePtr;
+    foreach (EdgeTypePtr typeTest, m_node->document()->edgeTypes()) {
+        if (typeTest->id() == type) {
+            typePtr = typeTest;
+            break;
+        }
+    }
+    if (!typePtr) {
+        qCritical() << "Edge type with ID" << type << "is not registered at document.";
+        // TODO present error message in UI
+        return QList<EdgeWrapper*>();
+    }
+    QList<EdgeWrapper*> edges;
+    foreach (EdgePtr edge, m_node->edges(typePtr)) {
+        edges.append(m_documentWrapper->edgeWrapper(edge));
+    }
+    return edges;
+}
+
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges() const
 {
     QList<EdgeWrapper*> edges;
@@ -139,10 +160,52 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges() const
     return edges;
 }
 
+QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges(int type) const
+{
+    EdgeTypePtr typePtr;
+    foreach (EdgeTypePtr typeTest, m_node->document()->edgeTypes()) {
+        if (typeTest->id() == type) {
+            typePtr = typeTest;
+            break;
+        }
+    }
+    if (!typePtr) {
+        qCritical() << "Edge type with ID" << type << "is not registered at document.";
+        // TODO present error message in UI
+        return QList<EdgeWrapper*>();
+    }
+    QList<EdgeWrapper*> edges;
+    foreach (EdgePtr edge, m_node->inEdges(typePtr)) {
+        edges.append(m_documentWrapper->edgeWrapper(edge));
+    }
+    return edges;
+}
+
 QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges() const
 {
     QList<EdgeWrapper*> edges;
     foreach (EdgePtr edge, m_node->outEdges()) {
+        edges.append(m_documentWrapper->edgeWrapper(edge));
+    }
+    return edges;
+}
+
+QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges(int type) const
+{
+    EdgeTypePtr typePtr;
+    foreach (EdgeTypePtr typeTest, m_node->document()->edgeTypes()) {
+        if (typeTest->id() == type) {
+            typePtr = typeTest;
+            break;
+        }
+    }
+    if (!typePtr) {
+        qCritical() << "Edge type with ID" << type << "is not registered at document.";
+        // TODO present error message in UI
+        return QList<EdgeWrapper*>();
+    }
+    QList<EdgeWrapper*> edges;
+    foreach (EdgePtr edge, m_node->outEdges(typePtr)) {
         edges.append(m_documentWrapper->edgeWrapper(edge));
     }
     return edges;
