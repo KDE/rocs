@@ -19,7 +19,7 @@
  */
 
 #include "edgeitem.h"
-
+#include "qsglinenode.h"
 #include <QSGSimpleRectNode>
 #include <QPainter>
 #include <QPointF>
@@ -46,8 +46,8 @@ public:
     const int m_nodeWidth;
 };
 
-EdgeItem::EdgeItem(QQuickPaintedItem *parent)
-    : QQuickPaintedItem(parent)
+EdgeItem::EdgeItem(QQuickItem *parent)
+    : QQuickItem(parent)
     , d(new EdgeItemPrivate)
 {
     setFlag(QQuickItem::ItemHasContents, true);
@@ -74,9 +74,9 @@ void EdgeItem::setEdge(Edge *edge)
         edge->disconnect(this);
     }
     d->m_edge = edge;
-    connect(edge->from().data(), SIGNAL(positionChanged(QPointF)), this, SLOT(updatePosition()));
-    connect(edge->to().data(), SIGNAL(positionChanged(QPointF)), this, SLOT(updatePosition()));
-    connect(edge, SIGNAL(typeColorChanged(QColor)), this, SLOT(update()));
+    connect(edge->from().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
+    connect(edge->to().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
+    connect(edge, &Edge::typeColorChanged, this, &EdgeItem::update);
     updatePosition();
     emit edgeChanged();
 }
@@ -95,11 +95,15 @@ void EdgeItem::setOrigin(const QPointF &origin)
     updatePosition();
 }
 
-void EdgeItem::paint(QPainter *painter)
+QSGNode * EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data)
 {
-    painter->setRenderHint(QPainter::Antialiasing);
-    painter->setPen(QPen(d->m_edge->type()->color(), 2, Qt::SolidLine));
-    painter->drawLine(d->m_pointFrom, d->m_pointTo);
+    QSGLineNode *n = static_cast<QSGLineNode *>(node);
+    if (!n) {
+        n = new QSGLineNode();
+        n->setColor(d->m_edge->type()->color());
+    }
+    n->setLine(d->m_pointFrom, d->m_pointTo);
+    return n;
 }
 
 void EdgeItem::updatePosition()

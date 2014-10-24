@@ -54,6 +54,7 @@ set(graphtheory_SRCS
     editorplugins/editorpluginmanager.cpp
     qtquickitems/nodeitem.cpp
     qtquickitems/edgeitem.cpp
+    qtquickitems/qsglinenode.cpp
 )
 
 qt5_wrap_ui(graphtheory_SRCS

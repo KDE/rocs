@@ -25,6 +25,7 @@
 #include "edge.h"
 #include "fileformats/fileformatmanager.h"
 #include <KLocalizedString>
+#include <QSurfaceFormat>
 #include <QString>
 #include <QDebug>
 
@@ -112,6 +113,12 @@ View * GraphDocument::createView(QWidget *parent)
     }
     d->m_view = new View(parent);
     d->m_view->setGraphDocument(d->q);
+
+    // apply antialiasing on the view
+    QSurfaceFormat format = d->m_view->format();
+    format.setSamples(16);
+    d->m_view->setFormat(format);
+
     return d->m_view;
 }
 

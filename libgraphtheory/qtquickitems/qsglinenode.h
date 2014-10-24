@@ -18,47 +18,29 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EDGEITEM_H
-#define EDGEITEM_H
+#ifndef QSGLINENODE_H
+#define QSGLINENODE_H
 
 #include "libgraphtheoryexport.h"
-#include "edge.h"
-#include <QQuickItem>
+#include <QSGGeometryNode>
+#include <QSGFlatColorMaterial>
 
-class QSGNode;
+class QColor;
 
 namespace GraphTheory
 {
-class EdgeItemPrivate;
-
-class GRAPHTHEORY_EXPORT EdgeItem : public QQuickItem
+class GRAPHTHEORY_EXPORT QSGLineNode : public QSGGeometryNode
 {
-    Q_OBJECT
-    Q_PROPERTY(GraphTheory::Edge * edge READ edge WRITE setEdge NOTIFY edgeChanged)
-    Q_PROPERTY(QPointF origin READ origin WRITE setOrigin)
 
 public:
-    explicit EdgeItem(QQuickItem *parent = 0);
-    virtual ~EdgeItem();
-    Edge * edge() const;
-    void setEdge(Edge *edge);
-    /** translation of global origin (0,0) into scene coordinates **/
-    QPointF origin() const;
-    /** set translation of global origin (0,0) into scene coordinates **/
-    void setOrigin(const QPointF &origin);
-
-protected:
-    virtual QSGNode * updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data) Q_DECL_OVERRIDE;
-
-Q_SIGNALS:
-    void edgeChanged();
-
-private Q_SLOTS:
-    void updatePosition();
+    explicit QSGLineNode();
+    virtual ~QSGLineNode();
+    void setLine(const QPointF &from, const QPointF &to);
+    void setColor(const QColor &color);
 
 private:
-    Q_DISABLE_COPY(EdgeItem)
-    const QScopedPointer<EdgeItemPrivate> d;
+    QSGGeometry m_geometry;
+    QSGFlatColorMaterial m_material;
 };
 }
 
