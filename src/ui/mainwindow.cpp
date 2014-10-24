@@ -339,9 +339,9 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
                               const QKeySequence& shortcut, const char* slot, QObject *parent)
 {
     QAction* action = new QAction(QIcon::fromTheme(iconName), actionTitle, parent);
-    action->setShortcut(shortcut);
     action->setShortcutContext(Qt::ApplicationShortcut);
     actionCollection()->addAction(actionName, action);
+    actionCollection()->setDefaultShortcut(action, shortcut);
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
 
