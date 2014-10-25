@@ -22,6 +22,7 @@
 #define QSGLINENODE_H
 
 #include "libgraphtheoryexport.h"
+#include "edgetype.h"
 #include <QSGGeometryNode>
 #include <QSGFlatColorMaterial>
 
@@ -39,10 +40,13 @@ public:
     virtual ~QSGLineNode();
     void setLine(const QPointF &from, const QPointF &to);
     void setColor(const QColor &color);
+    void setDirection(EdgeType::Direction direction);
 
 private:
     QSGGeometry m_geometry;
     QSGFlatColorMaterial m_material;
+    QPointF m_from;
+    QPointF m_to;
     GraphTheory::QSGArrowHeadNode *m_arrowHead;
 };
 }

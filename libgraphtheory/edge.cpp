@@ -124,12 +124,13 @@ void Edge::setType(EdgeTypePtr type)
         d->m_type->disconnect(this);
     }
     d->m_type = type;
-    connect(type.data(), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)));
-    connect(type.data(), SIGNAL(dynamicPropertyAdded()), SIGNAL(dynamicPropertyAdded()));
-    connect(type.data(), SIGNAL(dynamicPropertiesAboutToBeRemoved(int,int)), SIGNAL(dynamicPropertiesAboutToBeRemoved(int,int)));
-    connect(type.data(), SIGNAL(dynamicPropertyRemoved(QString)), SIGNAL(dynamicPropertyRemoved()));
-    connect(type.data(), SIGNAL(dynamicPropertyRemoved(QString)), this, SLOT(updateDynamicProperty(QString)));
-    connect(type.data(), SIGNAL(colorChanged(QColor)), this, SIGNAL(typeColorChanged(QColor)));
+    connect(type.data(), &EdgeType::dynamicPropertyAboutToBeAdded, this, &Edge::dynamicPropertyAboutToBeAdded);
+    connect(type.data(), &EdgeType::dynamicPropertyAdded, this, &Edge::dynamicPropertyAdded);
+    connect(type.data(), &EdgeType::dynamicPropertiesAboutToBeRemoved, this, &Edge::dynamicPropertiesAboutToBeRemoved);
+    connect(type.data(), &EdgeType::dynamicPropertyRemoved, this, &Edge::dynamicPropertyRemoved);
+    connect(type.data(), &EdgeType::dynamicPropertyRemoved, this, &Edge::updateDynamicProperty);
+    connect(type.data(), &EdgeType::directionChanged, this, &Edge::directionChanged);
+    connect(type.data(), &EdgeType::colorChanged, this, &Edge::typeColorChanged);
     emit typeChanged(type);
 }
 

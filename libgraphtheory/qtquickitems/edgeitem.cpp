@@ -34,6 +34,8 @@ public:
         , m_pointFrom(0, 0)
         , m_pointTo(0, 0)
         , m_nodeWidth(32)
+        , m_colorDirty(false)
+        , m_directionDirty(false)
     {
     }
 
@@ -44,6 +46,8 @@ public:
     QPointF m_origin;
     QPointF m_pointFrom, m_pointTo;
     const int m_nodeWidth;
+    bool m_colorDirty;
+    bool m_directionDirty;
 };
 
 EdgeItem::EdgeItem(QQuickItem *parent)
@@ -77,6 +81,7 @@ void EdgeItem::setEdge(Edge *edge)
     connect(edge->from().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
     connect(edge->to().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
     connect(edge, &Edge::typeColorChanged, this, &EdgeItem::update);
+
     updatePosition();
     emit edgeChanged();
 }
@@ -95,13 +100,23 @@ void EdgeItem::setOrigin(const QPointF &origin)
     updatePosition();
 }
 
-QSGNode * EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data)
+QSGNode * EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *)
 {
     QSGLineNode *n = static_cast<QSGLineNode *>(node);
     if (!n) {
         n = new QSGLineNode();
         n->setColor(d->m_edge->type()->color());
+        n->setDirection(d->m_edge->type()->direction());
     }
+    if (d->m_colorDirty) {
+        n->setColor(d->m_edge->type()->color());
+        d->m_colorDirty = false;
+    }
+    if (d->m_directionDirty) {
+        n->setDirection(d->m_edge->type()->direction());
+        d->m_directionDirty = false;
+    }
+
     n->setLine(d->m_pointFrom, d->m_pointTo);
     return n;
 }
@@ -128,5 +143,17 @@ void EdgeItem::updatePosition()
     d->m_pointTo = QPointF(d->m_edge->to()->x(), d->m_edge->to()->y())
                         - d->m_origin
                         - QPointF(x(), y());
+    update();
+}
+
+void EdgeItem::updateColor()
+{
+    d->m_colorDirty = true;
+    update();
+}
+
+void EdgeItem::updateDirection()
+{
+    d->m_directionDirty = true;
     update();
 }
