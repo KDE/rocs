@@ -31,6 +31,7 @@ private Q_SLOTS:
     void projectOperations();
     void loadSave();
     void loadSaveMultipleGraphDocuments();
+    void loadSaveMultipleScriptDocuments();
 };
 
 #endif

@@ -124,4 +124,37 @@ void TestProject::loadSaveMultipleGraphDocuments()
     graphEditor->deleteLater();
 }
 
+void TestProject::loadSaveMultipleScriptDocuments()
+{
+    GraphTheory::Editor *graphEditor = new GraphTheory::Editor;
+    Project project(graphEditor);
+    GraphDocumentPtr graphDoc = graphEditor->createDocument();
+    project.addGraphDocument(graphDoc);
+
+    // add files
+    QTemporaryFile codeFileA, codeFileB;
+    codeFileA.setFileTemplate("XXXXXXX.js");
+    codeFileA.open();
+    KTextEditor::Document* docA = project.importCodeDocument(QUrl::fromLocalFile(codeFileA.fileName()));
+    docA->setText("1");
+
+    codeFileB.setFileTemplate("XXXXXXX.js");
+    codeFileB.open();
+    KTextEditor::Document* docB = project.importCodeDocument(QUrl::fromLocalFile(codeFileB.fileName()));
+    docB->setText("2");
+
+    // save & load this project
+    QTemporaryFile projectFile;
+    projectFile.open();
+    project.setProjectUrl(QUrl::fromLocalFile(projectFile.fileName()));
+    QVERIFY(project.projectSave());
+
+    Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
+    QCOMPARE(loadedProject.codeDocuments().count(), 2);
+    QCOMPARE(loadedProject.codeDocuments().at(0)->text(), QString("1"));
+    QCOMPARE(loadedProject.codeDocuments().at(1)->text(), QString("2"));
+
+    graphEditor->deleteLater();
+}
+
 QTEST_MAIN(TestProject)
