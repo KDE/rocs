@@ -18,8 +18,8 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef QSGLINENODE_H
-#define QSGLINENODE_H
+#ifndef QSGARROWHEADNODE_H
+#define QSGARROWHEADNODE_H
 
 #include "libgraphtheoryexport.h"
 #include <QSGGeometryNode>
@@ -29,21 +29,18 @@ class QColor;
 
 namespace GraphTheory
 {
-class QSGArrowHeadNode;
-
-class GRAPHTHEORY_EXPORT QSGLineNode : public QSGGeometryNode
+class GRAPHTHEORY_EXPORT QSGArrowHeadNode : public QSGGeometryNode
 {
 
 public:
-    explicit QSGLineNode();
-    virtual ~QSGLineNode();
-    void setLine(const QPointF &from, const QPointF &to);
+    explicit QSGArrowHeadNode();
+    virtual ~QSGArrowHeadNode();
+    void setArrow(const QPointF &from, const QPointF &to);
     void setColor(const QColor &color);
 
 private:
     QSGGeometry m_geometry;
     QSGFlatColorMaterial m_material;
-    GraphTheory::QSGArrowHeadNode *m_arrowHead;
 };
 }
 

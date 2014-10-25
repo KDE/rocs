@@ -18,7 +18,6 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "qsglinenode.h"
 #include "qsgarrowheadnode.h"
 #include <QSGGeometry>
 #include <QSGFlatColorMaterial>
@@ -26,41 +25,50 @@
 
 using namespace GraphTheory;
 
-QSGLineNode::QSGLineNode()
-    : m_geometry(QSGGeometry::defaultAttributes_Point2D(), 2)
-    , m_arrowHead(new QSGArrowHeadNode)
+QSGArrowHeadNode::QSGArrowHeadNode()
+    : m_geometry(QSGGeometry::defaultAttributes_Point2D(), 3)
 {
     m_material.setColor(QColor(0, 0, 0));
     setMaterial(&m_material);
 
     setGeometry(&m_geometry);
-    m_geometry.setDrawingMode(GL_LINES);
-    m_geometry.setLineWidth(3);
-
-    // initialization of end points
-    m_geometry.vertexDataAsPoint2D()[0].set(0, 0);
-    m_geometry.vertexDataAsPoint2D()[1].set(0, 0);
-
-    appendChildNode(m_arrowHead);
+    m_geometry.setDrawingMode(GL_TRIANGLES);
 }
 
-QSGLineNode::~QSGLineNode()
+QSGArrowHeadNode::~QSGArrowHeadNode()
 {
-    delete m_arrowHead;
+
 }
 
-void QSGLineNode::setLine(const QPointF &from, const QPointF &to)
+void QSGArrowHeadNode::setArrow(const QPointF &from, const QPointF &to)
 {
-    m_geometry.vertexDataAsPoint2D()[0].set(from.x(), from.y());
-    m_geometry.vertexDataAsPoint2D()[1].set(to.x(), to.y());
-    m_arrowHead->setArrow(from, to);
+    const qreal baseSize = 6;
+    const qreal padding = 8; // distance from head to node center
+
+    // compute main axis of head
+    QVector2D normale(to - from);
+    normale.normalize();
+    normale = normale * baseSize;
+
+    // compute orthogonal line: switch x and y coefficients and change the sign of one
+    QVector2D halfBaseLine(normale.y(), -normale.x());
+
+    // make computations obvious
+    const QVector2D paddingVec(normale * padding / normale.length());
+    const QPointF A(to - paddingVec.toPointF());
+    const QPointF B(to - paddingVec.toPointF() - 3 * normale.toPointF() + halfBaseLine.toPointF());
+    const QPointF C(to - paddingVec.toPointF() - 3 * normale.toPointF() - halfBaseLine.toPointF());
+
+    m_geometry.vertexDataAsPoint2D()[0].set(A.x(), A.y()); // pointy end
+    m_geometry.vertexDataAsPoint2D()[1].set(B.x(), B.y()); // left bottom
+    m_geometry.vertexDataAsPoint2D()[2].set(C.x(), C.y()); // right bottom
+
     markDirty(QSGNode::DirtyGeometry);
 }
 
-void QSGLineNode::setColor(const QColor& color)
+void QSGArrowHeadNode::setColor(const QColor& color)
 {
     QSGFlatColorMaterial *m = static_cast<QSGFlatColorMaterial*>(material());
     m->setColor(color);
-    m_arrowHead->setColor(color);
     markDirty(QSGNode::DirtyMaterial);
 }
