@@ -264,19 +264,20 @@ QList<GraphDocumentPtr> Project::graphDocuments() const
 bool Project::addGraphDocument(GraphDocumentPtr document)
 {
     // compute first unused document path
-    QStringList usedPaths;
+    QStringList usedFileNames;
     foreach (GraphTheory::GraphDocumentPtr document, d->m_graphDocuments) {
-        usedPaths.append(document->documentUrl().fileName());
+        usedFileNames.append(document->documentUrl().fileName());
     }
-    QString path;
+    QString fileName;
     for (int i = 0; i <= d->m_graphDocuments.count(); ++i) {
-        path = d->m_workingDirectory.path()
-            + QChar('/')
-            + "graphfile" + QString::number(i) + QString(".graph2");
-        if (!usedPaths.contains(path)) {
+        fileName = "graphfile" + QString::number(i) + QString(".graph2");
+        if (!usedFileNames.contains(fileName)) {
             break;
         }
     }
+    QString path = d->m_workingDirectory.path()
+            + QChar('/')
+            + fileName;
 
     // put document into working directory
     document->documentSaveAs(QUrl::fromLocalFile(path));

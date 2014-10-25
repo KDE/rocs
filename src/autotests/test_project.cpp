@@ -33,6 +33,7 @@
 #include <KTextEditor/Document>
 #include <KTextEditor/Editor>
 
+using namespace GraphTheory;
 
 void TestProject::projectOperations()
 {
@@ -89,6 +90,36 @@ void TestProject::loadSave()
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
     QCOMPARE(loadedProject.codeDocuments().count(), project.codeDocuments().count());
     QCOMPARE(loadedProject.graphDocuments().count(), project.graphDocuments().count());
+
+    graphEditor->deleteLater();
+}
+
+void TestProject::loadSaveMultipleGraphDocuments()
+{
+    GraphTheory::Editor *graphEditor = new GraphTheory::Editor;
+    Project project(graphEditor);
+    GraphDocumentPtr docA = graphEditor->createDocument();
+    GraphDocumentPtr docB = graphEditor->createDocument();
+    project.addGraphDocument(docA);
+    project.addGraphDocument(docB);
+
+    // add nodes to identify documents later
+    NodePtr nodeA = Node::create(docA);
+    NodePtr nodeB1 = Node::create(docB);
+    NodePtr nodeB2 = Node::create(docB);
+    QCOMPARE(docA->nodes().count(), 1);
+    QCOMPARE(docB->nodes().count(), 2);
+
+    // save & load this project
+    QTemporaryFile projectFile;
+    projectFile.open();
+    project.setProjectUrl(QUrl::fromLocalFile(projectFile.fileName()));
+    QVERIFY(project.projectSave());
+
+    Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
+    QCOMPARE(loadedProject.graphDocuments().count(), 2);
+    QCOMPARE(loadedProject.graphDocuments().at(0)->nodes().count(), 1);
+    QCOMPARE(loadedProject.graphDocuments().at(1)->nodes().count(), 2);
 
     graphEditor->deleteLater();
 }

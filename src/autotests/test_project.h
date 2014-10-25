@@ -30,6 +30,7 @@ class TestProject : public QObject
 private Q_SLOTS:
     void projectOperations();
     void loadSave();
+    void loadSaveMultipleGraphDocuments();
 };
 
 #endif
