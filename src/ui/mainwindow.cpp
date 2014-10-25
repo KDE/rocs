@@ -314,16 +314,31 @@ void MainWindow::setupActions()
 //     m_graphEditor->setupActions(actionCollection()); //FIXME add editor actions to main action collection
 
     // Menu actions
-    createAction("document-new",        i18nc("@action:inmenu", "New Project"),        "new-project", QKeySequence::New, SLOT(createProject()), this);
-    createAction("document-save",       i18nc("@action:inmenu", "Save Project"),       "save-project", QKeySequence::Save, SLOT(saveProject()), this);
-    createAction("document-open",       i18nc("@action:inmenu", "Open Project"),       "open-project", QKeySequence::Open, SLOT(openProject()), this);
+    QAction *newProjectAction = new QAction(QIcon::fromTheme("document-new"), i18nc("@action:inmenu", "New Project"), this);
+    newProjectAction->setShortcutContext(Qt::ApplicationShortcut);
+    actionCollection()->addAction("new-project", newProjectAction);
+    actionCollection()->setDefaultShortcut(newProjectAction, QKeySequence::New);
+    connect(newProjectAction, &QAction::triggered, this, &MainWindow::createProject);
+
+    QAction *projectSaveAction = new QAction(QIcon::fromTheme("document-save"), i18nc("@action:inmenu", "Save Project"), this);
+    projectSaveAction->setShortcutContext(Qt::ApplicationShortcut);
+    actionCollection()->addAction("save-project", projectSaveAction);
+    actionCollection()->setDefaultShortcut(projectSaveAction, QKeySequence::Save);
+    connect(projectSaveAction, &QAction::triggered, this, &MainWindow::saveProject);
+
+    QAction *projectOpenAction = new QAction(QIcon::fromTheme("document-open"), i18nc("@action:inmenu", "Open Project"), this);
+    projectOpenAction->setShortcutContext(Qt::ApplicationShortcut);
+    actionCollection()->addAction("open-project", projectOpenAction);
+    actionCollection()->setDefaultShortcut(projectOpenAction, QKeySequence::Open);
+    connect(projectOpenAction, SIGNAL(triggered(bool)), this, SLOT(openProject()));
 
     m_recentProjects = new KRecentFilesAction(QIcon ("document-open"), i18nc("@action:inmenu","Recent Projects"), this);
     connect(m_recentProjects, &KRecentFilesAction::urlSelected,
         this, &MainWindow::openProject);
     actionCollection()->addAction("recent-project", m_recentProjects);
-
     m_recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
+
+
     createAction("document-save-as",     i18nc("@action:inmenu", "Save Project as"),   "save-project-as",    SLOT(saveProjectAs()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(createGraphDocument()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(createCodeDocument()),    this);
@@ -333,16 +348,6 @@ void MainWindow::setupActions()
     createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importCodeDocument()),   this);
     createAction("document-export", i18nc("@action:inmenu", "Export Script"),      "export-script",      SLOT(exportCodeDocument()), this);
     createAction("",  i18nc("@action:inmenu", "Configure Code Editor..."),      "config-code-editor",      SLOT(showCodeEditorConfig()), this);
-}
-
-void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
-                              const QKeySequence& shortcut, const char* slot, QObject *parent)
-{
-    QAction* action = new QAction(QIcon::fromTheme(iconName), actionTitle, parent);
-    action->setShortcutContext(Qt::ApplicationShortcut);
-    actionCollection()->addAction(actionName, action);
-    actionCollection()->setDefaultShortcut(action, shortcut);
-    connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
 
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,

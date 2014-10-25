@@ -72,8 +72,6 @@ private:
     QWidget* setupScriptPanel(); // setup the panel with the editors and stuff
 
     void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
-                      const QKeySequence & shortcut , const char* slot, QObject *parent);
-    void createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
                       const char* slot, QObject *parent);
 
     /**
