@@ -547,20 +547,8 @@ void MainWindow::createCodeDocument()
 
 void MainWindow::createGraphDocument()
 {
-    QString file = QInputDialog::getText(this,
-                        i18n("Graph name"),
-                        i18n("Enter the name of the Graph"));
-    if (file.isEmpty()) {
-        qDebug() << "Filename is empty and no script file was created.";
-        return;
-    }
-    if (!file.endsWith(QLatin1String(".graph"))){
-        file.append(".graph");
-    }
-
     GraphDocumentPtr document = m_graphEditor->createDocument();
     m_currentProject->addGraphDocument(document);
-    document->setDocumentName(file);
 }
 
 bool MainWindow::queryClose()

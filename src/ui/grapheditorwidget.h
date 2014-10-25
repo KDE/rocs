@@ -47,8 +47,14 @@ private Q_SLOTS:
     void onGraphDocumentAboutToBeAdded(GraphTheory::GraphDocumentPtr document, int index);
     void onGraphDocumentAboutToBeRemoved(int start, int end);
 
+    /**
+     * Show dialog to set name for document with index \p index
+     */
+    void showDocumentNameDialog(int index);
+
 private:
     QTabWidget *m_viewWidgets;
+    Project *m_project;
     GraphTheory::Editor *m_editor;
 };
 

@@ -306,7 +306,7 @@ void GraphDocument::setQpointer(GraphDocumentPtr q)
 QString GraphDocument::documentName() const
 {
     if (d->m_name.isEmpty()) {
-        return i18nc("graph document without title", "untitled");
+        return i18nc("@title:tab initial title for graph document", "New Graph");
     }
     return d->m_name;
 }
