@@ -426,18 +426,8 @@ void MainWindow::createProject()
 void MainWindow::saveProject()
 {
     if (m_currentProject->projectUrl().isEmpty()) {
-        QString startDirectory = Settings::lastOpenedDirectory();
-        QString file = QFileDialog::getSaveFileName(this,
-                            i18nc("@title:window", "Save Project"),
-                            startDirectory,
-                            i18n("Rocs Projects (*.rocs)"));
-
-        if (file.isEmpty()) {
-            qCritical() << "Filename is empty and no script file was created.";
-            return;
-        }
-        Settings::setLastOpenedDirectory(m_currentProject->projectUrl().path());
-        m_currentProject->setProjectUrl(QUrl::fromLocalFile(file));
+        saveProjectAs();
+        return;
     }
     m_currentProject->projectSave();
     updateCaption();
