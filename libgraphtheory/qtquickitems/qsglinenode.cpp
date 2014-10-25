@@ -35,7 +35,7 @@ QSGLineNode::QSGLineNode()
 
     setGeometry(&m_geometry);
     m_geometry.setDrawingMode(GL_LINES);
-    m_geometry.setLineWidth(3);
+    m_geometry.setLineWidth(2);
 }
 
 QSGLineNode::~QSGLineNode()
