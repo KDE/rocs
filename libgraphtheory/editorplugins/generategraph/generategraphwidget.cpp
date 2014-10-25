@@ -272,12 +272,16 @@ void GenerateGraphWidget::generateMesh(int rows, int columns)
     }
 
     // connect mesh nodes
-    for (int i = 0; i < columns - 1; ++i) {
-        for (int j = 0; j < rows - 1; ++j) {
-            EdgePtr edgeLeft = Edge::create(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)]);
-            edgeLeft->setType(m_edgeType);
-            EdgePtr edgeBottom = Edge::create(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)]);
-            edgeBottom->setType(m_edgeType);
+    for (int i = 0; i < columns; ++i) {
+        for (int j = 0; j < rows; ++j) {
+            if (j < columns - 1) { // horizontal edges
+                EdgePtr edge = Edge::create(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i, j + 1)]);
+                edge->setType(m_edgeType);
+            }
+            if (i < rows - 1) { // vertical edges
+                EdgePtr edge = Edge::create(meshNodes[qMakePair(i, j)], meshNodes[qMakePair(i + 1, j)]);
+                edge->setType(m_edgeType);
+            }
         }
     }
 }
