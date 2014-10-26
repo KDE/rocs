@@ -80,7 +80,8 @@ void EdgeItem::setEdge(Edge *edge)
     d->m_edge = edge;
     connect(edge->from().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
     connect(edge->to().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
-    connect(edge, &Edge::typeColorChanged, this, &EdgeItem::update);
+    connect(edge, &Edge::typeColorChanged, this, &EdgeItem::updateColor);
+    connect(edge, &Edge::directionChanged, this, &EdgeItem::updateDirection);
 
     updatePosition();
     emit edgeChanged();
