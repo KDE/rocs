@@ -19,10 +19,11 @@
  */
 
 #include "edgetypesdelegate.h"
-#include "libgraphtheory/models/nodetypemodel.h"
-#include "libgraphtheory/nodetype.h"
-#include <QPushButton>
+#include "libgraphtheory/models/edgetypemodel.h"
+#include "libgraphtheory/edgetype.h"
 #include <KColorButton>
+#include <KLocalizedString>
+#include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPainter>
@@ -62,38 +63,44 @@ QList< QWidget* > EdgeTypesDelegate::createItemWidgets(const QModelIndex &index)
     // items created by this method and added to the return-list will be
     // deleted by KWidgetItemDelegate
 
-    KColorButton *colorButton = new KColorButton(index.data(GraphTheory::NodeTypeModel::ColorRole).value<QColor>());
+    KColorButton *colorButton = new KColorButton(index.data(GraphTheory::EdgeTypeModel::ColorRole).value<QColor>());
     colorButton->setFlat(true);
-    QLineEdit *title = new QLineEdit(index.data(GraphTheory::NodeTypeModel::TitleRole).toString());
+    QLineEdit *title = new QLineEdit(index.data(GraphTheory::EdgeTypeModel::TitleRole).toString());
     title->setMinimumWidth(100);
+    QLabel *idLabel = new QLabel(index.data(GraphTheory::EdgeTypeModel::IdRole).toString());
+    idLabel->setToolTip(i18n("Unique ID of the edge type."));
 
     connect(colorButton, SIGNAL(changed(QColor)), SLOT(onColorChanged(QColor)));
     connect(colorButton, SIGNAL(pressed()), SLOT(onColorDialogOpened()));
     connect(title, SIGNAL(textEdited(const QString&)), SLOT(onNameChanged(const QString&)));
 
     return QList<QWidget*>() << colorButton
-                             << title;
+                             << title
+                             << idLabel;
 }
 
 void EdgeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
 {
     // widgets:
-    // ColorButton | Title
+    // ColorButton | Title | ID
 
     if (!index.isValid()) {
         return;
     }
 
-    Q_ASSERT(widgets.size() == 2);
+    Q_ASSERT(widgets.size() == 3);
 
     KColorButton *colorButton = qobject_cast<KColorButton*>(widgets.at(0));
     QLineEdit *title = qobject_cast<QLineEdit*>(widgets.at(1));
+    QLabel *id = qobject_cast<QLabel*>(widgets.at(2));
 
     Q_ASSERT(title);
     Q_ASSERT(colorButton);
+    Q_ASSERT(id);
 
-    colorButton->setColor(index.data(GraphTheory::NodeTypeModel::ColorRole).value<QColor>());
-    title->setText(index.data(GraphTheory::NodeTypeModel::TitleRole).toString());
+    colorButton->setColor(index.data(GraphTheory::EdgeTypeModel::ColorRole).value<QColor>());
+    title->setText(index.data(GraphTheory::EdgeTypeModel::TitleRole).toString());
+    id->setText(index.data(GraphTheory::EdgeTypeModel::IdRole).toString());
 
     QRect outerRect(0, 0, option.rect.width(), option.rect.height());
     QRect contentRect = outerRect.adjusted(m_hPadding, m_vPadding, -m_hPadding, -m_vPadding);
@@ -105,6 +112,10 @@ void EdgeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
     int titleLeftMargin = colorButtonLeftMargin + colorButton->width() + 10;
     int titleTopMargin = (outerRect.height() - title->height()) / 2;
     title->move(titleLeftMargin, titleTopMargin);
+
+    int idLeftMargin = titleLeftMargin + title->width() + 10;
+    int idTopMargin = (outerRect.height() - id->height()) / 2;
+    id->move(idLeftMargin, idTopMargin);
 }
 
 void EdgeTypesDelegate::onColorChanged(const QColor &color)

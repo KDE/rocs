@@ -21,8 +21,9 @@
 #include "nodetypesdelegate.h"
 #include "libgraphtheory/models/nodetypemodel.h"
 #include "libgraphtheory/nodetype.h"
-#include <QPushButton>
 #include <KColorButton>
+#include <KLocalizedString>
+#include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPainter>
@@ -66,31 +67,36 @@ QList< QWidget* > NodeTypesDelegate::createItemWidgets(const QModelIndex &index)
     colorButton->setFlat(true);
     QLineEdit *title = new QLineEdit(index.data(GraphTheory::NodeTypeModel::TitleRole).toString());
     title->setMinimumWidth(100);
+    QLabel *idLabel = new QLabel(index.data(GraphTheory::NodeTypeModel::IdRole).toString());
+    idLabel->setToolTip(i18n("Unique ID of the node type."));
 
     connect(colorButton, SIGNAL(changed(QColor)), SLOT(onColorChanged(QColor)));
     connect(colorButton, SIGNAL(pressed()), SLOT(onColorDialogOpened()));
     connect(title, SIGNAL(textEdited(const QString&)), SLOT(onNameChanged(const QString&)));
 
     return QList<QWidget*>() << colorButton
-                             << title;
+                             << title
+                             << idLabel;
 }
 
 void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
 {
     // widgets:
-    // ColorButton | Title
+    // ColorButton | Title | ID
 
     if (!index.isValid()) {
         return;
     }
 
-    Q_ASSERT(widgets.size() == 2);
+    Q_ASSERT(widgets.size() == 3);
 
     KColorButton *colorButton = qobject_cast<KColorButton*>(widgets.at(0));
     QLineEdit *title = qobject_cast<QLineEdit*>(widgets.at(1));
+    QLabel *id = qobject_cast<QLabel*>(widgets.at(2));
 
     Q_ASSERT(title);
     Q_ASSERT(colorButton);
+    Q_ASSERT(id);
 
     colorButton->setColor(index.data(GraphTheory::NodeTypeModel::ColorRole).value<QColor>());
     title->setText(index.data(GraphTheory::NodeTypeModel::TitleRole).toString());
@@ -105,6 +111,10 @@ void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
     int titleLeftMargin = colorButtonLeftMargin + colorButton->width() + 10;
     int titleTopMargin = (outerRect.height() - title->height()) / 2;
     title->move(titleLeftMargin, titleTopMargin);
+
+    int idLeftMargin = titleLeftMargin + title->width() + 10;
+    int idTopMargin = (outerRect.height() - id->height()) / 2;
+    id->move(idLeftMargin, idTopMargin);
 }
 
 void NodeTypesDelegate::onColorChanged(const QColor &color)
