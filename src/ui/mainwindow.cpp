@@ -59,7 +59,6 @@
 #include <ktexteditor/document.h>
 
 #include "ui/documenttypeswidget.h"
-#include "ui/configuredefaultproperties.h"
 #include "ui/codeeditorwidget.h"
 #include "ui/scriptoutputwidget.h"
 #include "ui/sidedockwidget.h"
@@ -228,10 +227,6 @@ QWidget* MainWindow::setupScriptPanel()
     actionCollection()->addAction("_debugScript", m_debugScript);
     actionCollection()->addAction("_interruptScript", m_interruptScript);
 
-    // set toolbar visibility defaults
-    showExecutionButtonDebug(Settings::executionModeDebugVisible());
-    showExecutionButtonOneStep(Settings::executionModeOneStepVisible());
-
     connect(m_runScript, &QAction::triggered,
         this, &MainWindow::executeScript);
     connect(m_stepRunScript, &QAction::triggered,
@@ -359,23 +354,14 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
 void MainWindow::showConfigurationDialog()
 {
     QPointer<KConfigDialog> dialog = new KConfigDialog(this, "settings", Settings::self());
-    ConfigureDefaultProperties *defaultProperties = new ConfigureDefaultProperties(dialog);
-
-    dialog->addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
-
     KTextEditor::Editor *editor = KTextEditor::Editor::instance();
     for (int index = 0; index < editor->configPages(); ++index) {
-        KTextEditor::ConfigPage *page = editor->configPage(index, defaultProperties);
+        KTextEditor::ConfigPage *page = editor->configPage(index, dialog);
         dialog->addPage(page,
             page->name(),
             page->icon().name(),
             page->fullName());
     }
-
-    connect(defaultProperties, &ConfigureDefaultProperties::showExecuteModeDebugChanged,
-        this, &MainWindow::showExecutionButtonDebug);
-    connect(defaultProperties, &ConfigureDefaultProperties::showExecuteModeOneStepChanged,
-        this, &MainWindow::showExecutionButtonOneStep);
     dialog->exec();
 }
 
@@ -669,14 +655,4 @@ void MainWindow::enableStopAction()
 void MainWindow::disableStopAction()
 {
     m_stopScript->setEnabled(false);
-}
-
-void MainWindow::showExecutionButtonDebug(bool visible)
-{
-    m_debugMenu->setVisible(visible);
-}
-
-void MainWindow::showExecutionButtonOneStep(bool visible)
-{
-    m_stepRunScript->setVisible(visible);
 }

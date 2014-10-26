@@ -144,18 +144,6 @@ public Q_SLOTS:
     void disableStopAction();
     void enableStopAction();
 
-    /**
-     * Show button to execute script in debug mode.
-     * \param visible specifies whether button shall be shown or not
-     */
-    void showExecutionButtonDebug(bool visible);
-
-    /**
-     * Show button to exectue script for one command.
-     * \param visible specifies whether button shall be shown or not
-     */
-    void showExecutionButtonOneStep(bool visible);
-
 Q_SIGNALS:
     /** emitted when the currently active document (of the active project) changes */
     void graphDocumentChanged(GraphTheory::GraphDocumentPtr document);

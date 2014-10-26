@@ -43,7 +43,6 @@ set( rocs_interface_SRCS
     ui/grapheditorwidget.cpp
     ui/nodetypesdelegate.cpp
     ui/edgetypesdelegate.cpp
-    ui/configuredefaultproperties.cpp
     ui/scriptoutputwidget.cpp
     project/project.cpp
 #FIXME commented out, waiting for Grantlee Qt5 port
@@ -67,7 +66,6 @@ qt5_wrap_ui(
     rocs_SRCS
     ui/documentationwidget.ui
     ui/journalwidget.ui
-    ui/configuredefaultproperties.ui
     ui/scriptoutputwidget.ui
     plugins/ApiDoc/ApiDocWidget.ui
 )
