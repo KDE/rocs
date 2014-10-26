@@ -53,6 +53,7 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <KToolBar>
+#include <ktexteditor/configpage.h>
 #include <ktexteditor/view.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/document.h>
@@ -308,7 +309,7 @@ void MainWindow::setupActions()
 {
     qDebug() << "create and connect actions";
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
-    KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
+    KStandardAction::preferences(this, SLOT(showConfigurationDialog()), actionCollection());
 
     // setup graph visual editor actions and add them to mainwindow action collection
 //     m_graphEditor->setupActions(actionCollection()); //FIXME add editor actions to main action collection
@@ -338,16 +339,13 @@ void MainWindow::setupActions()
     actionCollection()->addAction("recent-project", m_recentProjects);
     m_recentProjects->loadEntries(Settings::self()->config()->group("RecentFiles"));
 
-
     createAction("document-save-as",     i18nc("@action:inmenu", "Save Project as"),   "save-project-as",    SLOT(saveProjectAs()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Graph Document"), "new-graph",         SLOT(createGraphDocument()), this);
     createAction("document-new",        i18nc("@action:inmenu", "New Script File"),    "new-script",        SLOT(createCodeDocument()),    this);
     createAction("document-import",     i18nc("@action:inmenu", "Import Graph"),       "import-graph",      SLOT(importGraphDocument()),   this);
     createAction("document-export",     i18nc("@action:inmenu", "Export Graph as"),    "export-graph-as",      SLOT(exportGraphDocument()), this);
-
     createAction("document-import",  i18nc("@action:inmenu", "Import Script"),       "add-script",          SLOT(importCodeDocument()),   this);
     createAction("document-export", i18nc("@action:inmenu", "Export Script"),      "export-script",      SLOT(exportCodeDocument()), this);
-    createAction("",  i18nc("@action:inmenu", "Configure Code Editor..."),      "config-code-editor",      SLOT(showCodeEditorConfig()), this);
 }
 
 void MainWindow::createAction(const QByteArray& iconName, const QString& actionTitle, const QString& actionName,
@@ -358,12 +356,21 @@ void MainWindow::createAction(const QByteArray& iconName, const QString& actionT
     connect(action, SIGNAL(triggered(bool)), parent, slot);
 }
 
-void MainWindow::showSettings()
+void MainWindow::showConfigurationDialog()
 {
     QPointer<KConfigDialog> dialog = new KConfigDialog(this, "settings", Settings::self());
-    ConfigureDefaultProperties * defaultProperties = new ConfigureDefaultProperties(dialog);
+    ConfigureDefaultProperties *defaultProperties = new ConfigureDefaultProperties(dialog);
 
     dialog->addPage(defaultProperties, i18nc("@title:tab", "Default Settings"), QString(), i18nc("@title:tab", "Default Settings"), true);
+
+    KTextEditor::Editor *editor = KTextEditor::Editor::instance();
+    for (int index = 0; index < editor->configPages(); ++index) {
+        KTextEditor::ConfigPage *page = editor->configPage(index, defaultProperties);
+        dialog->addPage(page,
+            page->name(),
+            page->icon().name(),
+            page->fullName());
+    }
 
     connect(defaultProperties, &ConfigureDefaultProperties::showExecuteModeDebugChanged,
         this, &MainWindow::showExecutionButtonDebug);
@@ -589,12 +596,6 @@ void MainWindow::exportGraphDocument()
 {
     FileFormatDialog exporter(this);
     exporter.exportFile(m_currentProject->activeGraphDocument());
-}
-
-void MainWindow::showCodeEditorConfig()
-{
-    KTextEditor::Editor *editor = KTextEditor::Editor::instance();
-    editor->configDialog(this);
 }
 
 void MainWindow::showEditorPluginDialog()

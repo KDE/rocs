@@ -91,8 +91,7 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private Q_SLOTS:
-    void showSettings();
-    void showCodeEditorConfig();
+    void showConfigurationDialog();
 
     /**
      * Create an empty project configuration with one graph document and one code file and set as

@@ -61,10 +61,6 @@
                 <ActionList name="tools_plugins" />
             </Menu>
         </Menu>
-        <Menu name="settings">
-            <text>Settings</text>
-            <Action name="config-code-editor" />
-        </Menu>
     </MenuBar>
 
     <ToolBar name="main" >
