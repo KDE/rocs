@@ -19,16 +19,21 @@
  */
 
 #include "nodetypesdelegate.h"
-#include "libgraphtheory/models/nodetypemodel.h"
 #include "libgraphtheory/nodetype.h"
+#include "libgraphtheory/dialogs/nodetypeproperties.h"
+#include "libgraphtheory/models/nodetypemodel.h"
 #include <KColorButton>
 #include <KLocalizedString>
-#include <QPushButton>
+#include <QApplication>
+#include <QDebug>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPainter>
-#include <QApplication>
-#include <QDebug>
+#include <QPointer>
+#include <QPushButton>
+#include <QToolButton>
+
+using namespace GraphTheory;
 
 NodeTypesDelegate::NodeTypesDelegate(QAbstractItemView* parent)
     : KWidgetItemDelegate(parent)
@@ -62,20 +67,24 @@ QList< QWidget* > NodeTypesDelegate::createItemWidgets(const QModelIndex &index)
     // items created by this method and added to the return-list will be
     // deleted by KWidgetItemDelegate
 
-    KColorButton *colorButton = new KColorButton(index.data(GraphTheory::NodeTypeModel::ColorRole).value<QColor>());
+    KColorButton *colorButton = new KColorButton(index.data(NodeTypeModel::ColorRole).value<QColor>());
     colorButton->setFlat(true);
-    QLineEdit *title = new QLineEdit(index.data(GraphTheory::NodeTypeModel::TitleRole).toString());
+    QLineEdit *title = new QLineEdit(index.data(NodeTypeModel::TitleRole).toString());
     title->setMinimumWidth(100);
-    QLabel *idLabel = new QLabel(index.data(GraphTheory::NodeTypeModel::IdRole).toString());
+    QLabel *idLabel = new QLabel(index.data(NodeTypeModel::IdRole).toString());
     idLabel->setToolTip(i18n("Unique ID of the node type."));
+    QToolButton *propertiesButton = new QToolButton();
+    propertiesButton->setIcon(QIcon::fromTheme("document-properties"));
 
     connect(colorButton, SIGNAL(changed(QColor)), SLOT(onColorChanged(QColor)));
     connect(colorButton, SIGNAL(pressed()), SLOT(onColorDialogOpened()));
-    connect(title, SIGNAL(textEdited(const QString&)), SLOT(onNameChanged(const QString&)));
+    connect(title, &QLineEdit::textEdited, this, &NodeTypesDelegate::onNameChanged);
+    connect(propertiesButton, &QToolButton::clicked, this, &NodeTypesDelegate::showPropertiesDialog);
 
     return QList<QWidget*>() << colorButton
                              << title
-                             << idLabel;
+                             << idLabel
+                             << propertiesButton;
 }
 
 void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
@@ -87,18 +96,20 @@ void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
         return;
     }
 
-    Q_ASSERT(widgets.size() == 3);
+    Q_ASSERT(widgets.size() == 4);
 
     KColorButton *colorButton = qobject_cast<KColorButton*>(widgets.at(0));
     QLineEdit *title = qobject_cast<QLineEdit*>(widgets.at(1));
     QLabel *id = qobject_cast<QLabel*>(widgets.at(2));
+    QToolButton *propertiesButton = qobject_cast<QToolButton*>(widgets.at(3));
 
     Q_ASSERT(title);
     Q_ASSERT(colorButton);
     Q_ASSERT(id);
+    Q_ASSERT(propertiesButton);
 
-    colorButton->setColor(index.data(GraphTheory::NodeTypeModel::ColorRole).value<QColor>());
-    title->setText(index.data(GraphTheory::NodeTypeModel::TitleRole).toString());
+    colorButton->setColor(index.data(NodeTypeModel::ColorRole).value<QColor>());
+    title->setText(index.data(NodeTypeModel::TitleRole).toString());
 
     QRect outerRect(0, 0, option.rect.width(), option.rect.height());
     QRect contentRect = outerRect.adjusted(m_hPadding, m_vPadding, -m_hPadding, -m_vPadding);
@@ -114,6 +125,10 @@ void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
     int idLeftMargin = titleLeftMargin + title->width() + 10;
     int idTopMargin = (outerRect.height() - id->height()) / 2;
     id->move(idLeftMargin, idTopMargin);
+
+    int propertiesLeftMargin = idLeftMargin + id->width() + 10;
+    int propertiesTopMargin = (outerRect.height() - propertiesButton->height()) / 2;
+    propertiesButton->move(propertiesLeftMargin, propertiesTopMargin);
 }
 
 void NodeTypesDelegate::onColorChanged(const QColor &color)
@@ -132,4 +147,13 @@ void NodeTypesDelegate::onNameChanged(const QString &name)
 {
     QModelIndex index = focusedIndex();
     emit nameChanged(index, name);
+}
+
+void NodeTypesDelegate::showPropertiesDialog()
+{
+    QModelIndex index = focusedIndex();
+    NodeType *type = qobject_cast<NodeType*>(index.data(NodeTypeModel::DataRole).value<QObject*>());
+    QPointer<NodeTypeProperties> dialog = new NodeTypeProperties(0);
+    dialog->setType(type->self());
+    dialog->exec();
 }

@@ -45,6 +45,7 @@ private Q_SLOTS:
     void onColorDialogOpened();
     void onColorChanged(const QColor &color);
     void onNameChanged(const QString &name);
+    void showPropertiesDialog();
 
 Q_SIGNALS:
     void colorChanged(const QModelIndex &index, const QColor &color);

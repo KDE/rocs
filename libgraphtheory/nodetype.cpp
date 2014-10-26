@@ -61,6 +61,11 @@ NodeType::~NodeType()
     --NodeType::objectCounter;
 }
 
+NodeTypePtr NodeType::self() const
+{
+    return d->q;
+}
+
 NodeTypePtr NodeType::create(GraphDocumentPtr document)
 {
     NodeTypePtr pi(new NodeType);

@@ -54,6 +54,11 @@ public:
     virtual ~NodeType();
 
     /**
+     * @return shared pointer to object
+     */
+    NodeTypePtr self() const;
+
+    /**
      * Destroys the node type object and removes it from the document.
      */
     void destroy();
