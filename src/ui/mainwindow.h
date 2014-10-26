@@ -37,9 +37,7 @@ class Project;
 class QSplitter;
 class CodeEditorWidget;
 class GraphEditorWidget;
-class QScriptEngineDebugger;
 class QCloseEvent;
-class KActionMenu;
 class ScriptOutputWidget;
 class JournalEditorWidget;
 
@@ -130,10 +128,6 @@ private Q_SLOTS: // script execution
      */
     void executeScript();
     /**
-     * execute script until next "step" command is found in script
-     */
-    void executeScriptOneStep();
-    /**
      * stop script execution
      */
     void stopScript();
@@ -161,9 +155,7 @@ private:
 
     // Other Bunch of stuff.
     QAction *m_runScript;
-    QAction *m_stepRunScript;
     QAction *m_stopScript;
-    KActionMenu *m_debugMenu;
 
     ///Store the recent files.
     KRecentFilesAction *m_recentProjects;
@@ -172,10 +164,6 @@ private:
     QSplitter *m_vSplitter;
     QSplitter *m_hSplitter;
     QSplitter *m_hScriptSplitter;
-
-    QScriptEngineDebugger *m_scriptDbg;
-    QAction* m_debugScript;
-    QAction* m_interruptScript;
 
     void createToolsPluginsAction();
 };

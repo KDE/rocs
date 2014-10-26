@@ -78,7 +78,6 @@ MainWindow::MainWindow()
     , m_codeEditorWidget(new CodeEditorWidget(this))
     , m_graphEditorWidget(new GraphEditorWidget(this))
     , m_outputWidget(new ScriptOutputWidget(this))
-    , m_scriptDbg(0)
 {
     setObjectName("RocsMainWindow");
     m_graphEditor = new GraphTheory::Editor();
@@ -206,31 +205,16 @@ QWidget* MainWindow::setupScriptPanel()
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     executeCommands->setOrientation(Qt::Vertical);
     m_runScript = new QAction(QIcon::fromTheme("media-playback-start"), i18nc("@action:intoolbar Script Execution", "Run"), this);
-    m_stepRunScript = new QAction(QIcon::fromTheme("go-next"), i18nc("@action:intoolbar Script Execution", "One Step"), this);
     m_stopScript = new QAction(QIcon::fromTheme("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
     m_stopScript->setEnabled(false);
     executeCommands->addAction(m_runScript);
-    executeCommands->addAction(m_stepRunScript);
+    executeCommands->addAction(m_stopScript);
     // add actions to action collection to be able to set shortcuts on them in the ui
     actionCollection()->addAction("_runScript", m_runScript);
-    actionCollection()->addAction("_stepRunScript", m_stepRunScript);
     actionCollection()->addAction("_stopScript", m_stopScript);
-
-    // debug controls submenu
-    m_debugMenu = new KActionMenu(QIcon::fromTheme("debug-run"), i18nc("@title:menu Debug execution", "Debug"), this);
-    m_debugScript = new QAction(QIcon::fromTheme("debug-run"), i18nc("@action:inmenu Debug execution", "Debug run"), m_debugMenu);
-    m_interruptScript = new QAction(QIcon::fromTheme("debug-run-cursor"), i18nc("@action:inmenu Debug execution", "Interrupt at first line"), m_debugMenu);
-    m_debugMenu->addAction(m_debugScript);
-    m_debugMenu->addAction(m_interruptScript);
-    executeCommands->addWidget(m_debugMenu->createWidget(executeCommands));
-    executeCommands->addAction(m_stopScript);
-    actionCollection()->addAction("_debugScript", m_debugScript);
-    actionCollection()->addAction("_interruptScript", m_interruptScript);
 
     connect(m_runScript, &QAction::triggered,
         this, &MainWindow::executeScript);
-    connect(m_stepRunScript, &QAction::triggered,
-        this, &MainWindow::executeScriptOneStep);
     connect(m_stopScript, &QAction::triggered,
         this, &MainWindow::stopScript);
 
@@ -604,41 +588,6 @@ void MainWindow::executeScript()
     QString script = m_codeEditorWidget->activeDocument()->text();
     enableStopAction();
     m_kernel->execute(m_currentProject->activeGraphDocument(), script);
-}
-
-void MainWindow::executeScriptOneStep()
-{
-    //FIXME implement scripting interfaces for GraphTheory
-    qCritical() << "Scripting engine currently disalbed";
-#if 0
-    Q_ASSERT(m_outputWidget);
-
-    //FIXME implement scripting interfaces for GraphTheory
-    qCritical() << "Scripting engine currently disalbed";
-//     QtScriptBackend *engine = DocumentManager::self().activeDocument()->engineBackend();
-
-    //TODO disable start action
-    enableStopAction();
-    if (!engine->isRunning()) {
-        if (m_outputWidget->isOutputClearEnabled()) {
-            m_outputWidget->clear();
-        }
-        QString script = text.isEmpty() ? m_codeEditorWidget->text() : text;
-        QString scriptPath = m_codeEditorWidget->document()->url().path();
-        IncludeManager inc;
-
-        script = inc.include(script,
-                             scriptPath.isEmpty() ? scriptPath : scriptPath.section('/', 0, -2),
-                             m_codeEditorWidget->document()->documentName());
-
-        //FIXME implement scripting interfaces for GraphTheory
-        qCritical() << "Scripting engine currently disalbed";
-//         engine->setScript(script, DocumentManager::self().activeDocument());
-        engine->executeStep();
-        return;
-    }
-    engine->continueExecutionStep();
-#endif
 }
 
 void MainWindow::stopScript()
