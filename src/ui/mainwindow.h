@@ -35,7 +35,6 @@ class KRecentFilesAction;
 class QAction;
 class Project;
 class QSplitter;
-class QAction;
 class CodeEditorWidget;
 class GraphEditorWidget;
 class QScriptEngineDebugger;
