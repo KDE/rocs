@@ -21,6 +21,7 @@
 #ifndef DOCUMENTTYPESWIDGET_H
 #define DOCUMENTTYPESWIDGET_H
 
+#include "libgraphtheory/edgetype.h"
 #include "libgraphtheory/models/nodetypemodel.h"
 #include "libgraphtheory/models/edgetypemodel.h"
 #include <QWidget>
@@ -43,6 +44,7 @@ private Q_SLOTS:
     void onCreateNodeType();
     void onEdgeTypeColorChanged(const QModelIndex &index, const QColor &color);
     void onEdgeTypeNameChanged(const QModelIndex &index, const QString &name);
+    void onEdgeTypeDirectionChanged(const QModelIndex &index, const GraphTheory::EdgeType::Direction &direction);
     void onCreateEdgeType();
 
 private:

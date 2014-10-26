@@ -31,6 +31,9 @@ ecm_install_icons( ICONS
   sc-actions-rocsnode.svgz
   sc-actions-rocsselect.svgz
 
+  sc-actions-rocsbidirectional.svgz
+  sc-actions-rocsunidirectional.svgz
+
   sc-actions-rocsadvancedsetup.svgz
   sc-actions-rocsvisible.svgz
 

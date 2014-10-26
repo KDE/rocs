@@ -42,6 +42,7 @@ public:
         IdRole = Qt::UserRole + 1,      //!< unique identifier of edge
         TitleRole,                      //!< title of edge type
         ColorRole,                      //!< color of edge type
+        DirectionRole,                  //!< direction of edge type
         DataRole                        //!< access to EdgeType object
     };
 

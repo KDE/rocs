@@ -76,7 +76,9 @@ DocumentTypesWidget::DocumentTypesWidget(QWidget *parent)
     connect(edgeDelegate, &EdgeTypesDelegate::colorChanged,
         this, &DocumentTypesWidget::onEdgeTypeColorChanged);
     connect(edgeDelegate, &EdgeTypesDelegate::nameChanged,
-        this, &DocumentTypesWidget::onEdgeTypeNameChanged);
+        this, &DocumentTypesWidget::onEdgeTypeNameChanged);;
+    connect(edgeDelegate, &EdgeTypesDelegate::directionChanged,
+        this, &DocumentTypesWidget::onEdgeTypeDirectionChanged);
     connect(m_createEdgeTypeButton, &QPushButton::clicked,
         this, &DocumentTypesWidget::onCreateEdgeType);
 
@@ -128,6 +130,11 @@ void DocumentTypesWidget::onEdgeTypeColorChanged(const QModelIndex &index, const
 void DocumentTypesWidget::onEdgeTypeNameChanged(const QModelIndex& index, const QString& name)
 {
     m_edgeTypeModel.setData(index, QVariant(name), EdgeTypeModel::TitleRole);
+}
+
+void DocumentTypesWidget::onEdgeTypeDirectionChanged(const QModelIndex& index, const EdgeType::Direction& direction)
+{
+    m_edgeTypeModel.setData(index, direction, EdgeTypeModel::DirectionRole);
 }
 
 void DocumentTypesWidget::onCreateEdgeType()

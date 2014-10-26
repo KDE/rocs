@@ -23,6 +23,7 @@
 
 #include <KWidgetItemDelegate>
 #include "libgraphtheory/typenames.h"
+#include "libgraphtheory/edgetype.h"
 
 class QPushButton;
 
@@ -45,10 +46,12 @@ private Q_SLOTS:
     void onColorDialogOpened();
     void onColorChanged(const QColor &color);
     void onNameChanged(const QString &name);
+    void onDirectionSwitched();
 
 Q_SIGNALS:
     void colorChanged(const QModelIndex &index, const QColor &color);
     void nameChanged(const QModelIndex &index, const QString &name);
+    void directionChanged(const QModelIndex &index, GraphTheory::EdgeType::Direction direction);
 
 private:
     QPushButton *m_removeButton;

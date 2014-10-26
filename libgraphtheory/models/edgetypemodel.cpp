@@ -114,6 +114,8 @@ QVariant EdgeTypeModel::data(const QModelIndex &index, int role) const
         return type->name();
     case ColorRole:
         return type->color();
+    case DirectionRole:
+        return type->direction();
     case DataRole:
         return QVariant::fromValue<QObject*>(type.data());
     default:
@@ -138,16 +140,21 @@ bool EdgeTypeModel::setData(const QModelIndex &index, const QVariant &value, int
     {
     case IdRole:
         type->setId(value.toInt());
-        return true;
+        break;
     case TitleRole:
         type->setName(value.toString());
-        return true;
+        break;
     case ColorRole:
         type->setColor(value.value<QColor>());
-        return true;
+        break;
+    case DirectionRole:
+        type->setDirection(static_cast<EdgeType::Direction>(value.toInt()));
+        break;
     default:
         return false;
     }
+    dataChanged(index, index);
+    return true;
 }
 
 int EdgeTypeModel::rowCount(const QModelIndex &parent) const
