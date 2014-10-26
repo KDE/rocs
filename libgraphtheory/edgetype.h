@@ -58,6 +58,11 @@ public:
     virtual ~EdgeType();
 
     /**
+     * @return shared pointer to object
+     */
+    EdgeTypePtr self() const;
+
+    /**
      * Destroys the edge type object and removes it from the document.
      */
     void destroy();

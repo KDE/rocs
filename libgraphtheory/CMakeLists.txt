@@ -35,6 +35,7 @@ set(graphtheory_SRCS
     view.cpp
     dialogs/nodeproperties.cpp
     dialogs/edgeproperties.cpp
+    dialogs/edgetypeproperties.cpp
     kernel/documentwrapper.cpp
     kernel/nodewrapper.cpp
     kernel/edgewrapper.cpp

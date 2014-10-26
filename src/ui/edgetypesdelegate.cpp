@@ -19,16 +19,20 @@
  */
 
 #include "edgetypesdelegate.h"
-#include "libgraphtheory/models/edgetypemodel.h"
 #include "libgraphtheory/edgetype.h"
+#include "libgraphtheory/dialogs/edgetypeproperties.h"
+#include "libgraphtheory/models/edgetypemodel.h"
 #include <KColorButton>
 #include <KLocalizedString>
 #include <QToolButton>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPainter>
+#include <QPointer>
 #include <QApplication>
 #include <QDebug>
+
+using namespace GraphTheory;
 
 EdgeTypesDelegate::EdgeTypesDelegate(QAbstractItemView* parent)
     : KWidgetItemDelegate(parent)
@@ -62,25 +66,29 @@ QList< QWidget* > EdgeTypesDelegate::createItemWidgets(const QModelIndex &index)
     // items created by this method and added to the return-list will be
     // deleted by KWidgetItemDelegate
 
-    KColorButton *colorButton = new KColorButton(index.data(GraphTheory::EdgeTypeModel::ColorRole).value<QColor>());
+    KColorButton *colorButton = new KColorButton(index.data(EdgeTypeModel::ColorRole).value<QColor>());
     colorButton->setFlat(true);
     QToolButton *direction = new QToolButton();
     direction->setCheckable(true);
     direction->setToolTip(i18n("Direction of edges of edge type."));
-    QLineEdit *title = new QLineEdit(index.data(GraphTheory::EdgeTypeModel::TitleRole).toString());
+    QLineEdit *title = new QLineEdit(index.data(EdgeTypeModel::TitleRole).toString());
     title->setMinimumWidth(100);
-    QLabel *idLabel = new QLabel(index.data(GraphTheory::EdgeTypeModel::IdRole).toString());
+    QLabel *idLabel = new QLabel(index.data(EdgeTypeModel::IdRole).toString());
     idLabel->setToolTip(i18n("Unique ID of edge type."));
+    QToolButton *propertiesButton = new QToolButton();
+    propertiesButton->setIcon(QIcon::fromTheme("document-properties"));
 
     connect(colorButton, &KColorButton::changed, this, &EdgeTypesDelegate::onColorChanged);
     connect(colorButton, &KColorButton::pressed, this, &EdgeTypesDelegate::onColorDialogOpened);
     connect(direction, &QToolButton::toggled, this, &EdgeTypesDelegate::onDirectionSwitched);
-    connect(title, SIGNAL(textEdited(const QString&)), SLOT(onNameChanged(const QString&)));
+    connect(title, &QLineEdit::textEdited, this, &EdgeTypesDelegate::onNameChanged);
+    connect(propertiesButton, &QToolButton::clicked, this, &EdgeTypesDelegate::showPropertiesDialog);
 
     return QList<QWidget*>() << colorButton
                              << direction
                              << title
-                             << idLabel;
+                             << idLabel
+                             << propertiesButton;
 }
 
 void EdgeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const
@@ -92,26 +100,28 @@ void EdgeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
         return;
     }
 
-    Q_ASSERT(widgets.size() == 4);
+    Q_ASSERT(widgets.size() == 5);
 
     KColorButton *colorButton = qobject_cast<KColorButton*>(widgets.at(0));
     QToolButton *directionSwitch = qobject_cast<QToolButton*>(widgets.at(1));
     QLineEdit *title = qobject_cast<QLineEdit*>(widgets.at(2));
     QLabel *id = qobject_cast<QLabel*>(widgets.at(3));
+    QToolButton *propertiesButton = qobject_cast<QToolButton*>(widgets.at(4));
 
     Q_ASSERT(colorButton);
     Q_ASSERT(directionSwitch);
     Q_ASSERT(title);
     Q_ASSERT(id);
+    Q_ASSERT(propertiesButton);
 
-    colorButton->setColor(index.data(GraphTheory::EdgeTypeModel::ColorRole).value<QColor>());
-    if (index.data(GraphTheory::EdgeTypeModel::DirectionRole).toInt() == GraphTheory::EdgeType::Unidirectional) {
+    colorButton->setColor(index.data(EdgeTypeModel::ColorRole).value<QColor>());
+    if (index.data(EdgeTypeModel::DirectionRole).toInt() == EdgeType::Unidirectional) {
         directionSwitch->setIcon(QIcon::fromTheme("rocsunidirectional"));
     } else {
         directionSwitch->setIcon(QIcon::fromTheme("rocsbidirectional"));
     }
-    title->setText(index.data(GraphTheory::EdgeTypeModel::TitleRole).toString());
-    id->setText(index.data(GraphTheory::EdgeTypeModel::IdRole).toString());
+    title->setText(index.data(EdgeTypeModel::TitleRole).toString());
+    id->setText(index.data(EdgeTypeModel::IdRole).toString());
 
     QRect outerRect(0, 0, option.rect.width(), option.rect.height());
     QRect contentRect = outerRect.adjusted(m_hPadding, m_vPadding, -m_hPadding, -m_vPadding);
@@ -131,6 +141,10 @@ void EdgeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
     int idLeftMargin = titleLeftMargin + title->width() + 10;
     int idTopMargin = (outerRect.height() - id->height()) / 2;
     id->move(idLeftMargin, idTopMargin);
+
+    int propertiesLeftMargin = idLeftMargin + id->width() + 10;
+    int propertiesTopMargin = (outerRect.height() - propertiesButton->height()) / 2;
+    propertiesButton->move(propertiesLeftMargin, propertiesTopMargin);
 }
 
 void EdgeTypesDelegate::onColorChanged(const QColor &color)
@@ -154,11 +168,20 @@ void EdgeTypesDelegate::onNameChanged(const QString &name)
 void EdgeTypesDelegate::onDirectionSwitched()
 {
     QModelIndex index = focusedIndex();
-    GraphTheory::EdgeType::Direction direction = static_cast<GraphTheory::EdgeType::Direction>(
-        index.data(GraphTheory::EdgeTypeModel::DirectionRole).toInt());
-    if (direction == GraphTheory::EdgeType::Bidirectional) {
-        emit directionChanged(index, GraphTheory::EdgeType::Unidirectional);
+    EdgeType::Direction direction = static_cast<EdgeType::Direction>(
+        index.data(EdgeTypeModel::DirectionRole).toInt());
+    if (direction == EdgeType::Bidirectional) {
+        emit directionChanged(index, EdgeType::Unidirectional);
     } else {
-        emit directionChanged(index, GraphTheory::EdgeType::Bidirectional);
+        emit directionChanged(index, EdgeType::Bidirectional);
     }
+}
+
+void EdgeTypesDelegate::showPropertiesDialog()
+{
+    QModelIndex index = focusedIndex();
+    EdgeType *type = qobject_cast<EdgeType*>(index.data(EdgeTypeModel::DataRole).value<QObject*>());
+    QPointer<EdgeTypeProperties> dialog = new EdgeTypeProperties(0);
+    dialog->setType(type->self());
+    dialog->exec();
 }

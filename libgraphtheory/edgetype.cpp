@@ -63,6 +63,11 @@ EdgeType::~EdgeType()
     --EdgeType::objectCounter;
 }
 
+EdgeTypePtr EdgeType::self() const
+{
+    return d->q;
+}
+
 EdgeTypePtr EdgeType::create(GraphDocumentPtr document)
 {
     EdgeTypePtr pi(new EdgeType);
