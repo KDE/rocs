@@ -87,7 +87,7 @@ protected:
     /**
      * Reimplemented method KMainWindow::queryClose().
      */
-    virtual bool queryClose();
+    virtual bool queryClose() Q_DECL_OVERRIDE;
     void closeEvent(QCloseEvent *event);
 
 private Q_SLOTS:
