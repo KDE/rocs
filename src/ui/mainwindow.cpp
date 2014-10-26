@@ -205,7 +205,9 @@ QWidget* MainWindow::setupScriptPanel()
     executeCommands->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     executeCommands->setOrientation(Qt::Vertical);
     m_runScript = new QAction(QIcon::fromTheme("media-playback-start"), i18nc("@action:intoolbar Script Execution", "Run"), this);
+    m_runScript->setToolTip(i18nc("@info:tooltip", "Execute currently active script on active graph document."));
     m_stopScript = new QAction(QIcon::fromTheme("process-stop"), i18nc("@action:intoolbar Script Execution", "Stop"), this);
+    m_stopScript->setToolTip(i18nc("@info:tooltip", "Stop script execution."));
     m_stopScript->setEnabled(false);
     executeCommands->addAction(m_runScript);
     executeCommands->addAction(m_stopScript);
