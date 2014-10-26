@@ -54,7 +54,6 @@ Q_SIGNALS:
     void directionChanged(const QModelIndex &index, GraphTheory::EdgeType::Direction direction);
 
 private:
-    QPushButton *m_removeButton;
     QModelIndex m_workaroundColorButtonIndex; // temporary store index for time when dialog is closed
     static const int m_vPadding = 2;
     static const int m_hPadding = 7;

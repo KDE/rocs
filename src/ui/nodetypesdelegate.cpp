@@ -32,14 +32,13 @@
 
 NodeTypesDelegate::NodeTypesDelegate(QAbstractItemView* parent)
     : KWidgetItemDelegate(parent)
-    , m_removeButton(new QPushButton(0))
 {
 
 }
 
 NodeTypesDelegate::~NodeTypesDelegate()
 {
-    m_removeButton->deleteLater();
+
 }
 
 void NodeTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const

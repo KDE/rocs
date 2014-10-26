@@ -32,14 +32,13 @@
 
 EdgeTypesDelegate::EdgeTypesDelegate(QAbstractItemView* parent)
     : KWidgetItemDelegate(parent)
-    , m_removeButton(new QPushButton(0))
 {
 
 }
 
 EdgeTypesDelegate::~EdgeTypesDelegate()
 {
-    m_removeButton->deleteLater();
+
 }
 
 void EdgeTypesDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
