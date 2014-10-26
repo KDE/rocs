@@ -28,9 +28,11 @@
 #include <QDirIterator>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QDebug>
+#include <QLoggingCategory>
 
 using namespace GraphTheory;
+
+Q_LOGGING_CATEGORY(FILEFORMAT, "rocs.graphtheory.fileformat")
 
 class GraphTheory::FileFormatManagerPrivate
 {
@@ -38,7 +40,7 @@ public:
     FileFormatManagerPrivate()
         : defaultGraphFilePlugin(0)
     {
-
+        QLoggingCategory::setFilterRules(QStringLiteral("rocs.graphtheory.fileformat.debug=false"));
     }
 
     ~FileFormatManagerPrivate()
@@ -123,7 +125,7 @@ void FileFormatManager::loadBackends()
     QPluginLoader loader;
     foreach (const QString &dir, dirsToCheck) {
         QDirIterator it(dir, QDir::Files);
-        qDebug() << "iterating over directory " << dir;
+        qCDebug(FILEFORMAT) << "iterating over directory " << dir;
         while (it.hasNext()) {
             it.next();
             loader.setFileName(it.fileInfo().absoluteFilePath());
@@ -131,9 +133,9 @@ void FileFormatManager::loadBackends()
             if (!readStringList(m_metaData, "X-KDE-ServiceTypes").contains("rocs/graphtheory/fileformat")) {
                 continue;
             }
-            qDebug() << "Load Plugin: " << m_metaData["Name"].toString();
+            qCDebug(FILEFORMAT) << "Load Plugin: " << m_metaData["Name"].toString();
             if (!loader.load()) {
-                qCritical() << "Error while loading plugin: " << m_metaData["Name"].toString();
+                qCCritical(FILEFORMAT) << "Error while loading plugin: " << m_metaData["Name"].toString();
             }
 
             KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
