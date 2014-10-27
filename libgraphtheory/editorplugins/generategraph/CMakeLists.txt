@@ -21,6 +21,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# Boost requires exceptions for this plugin
+kde_enable_exceptions()
+
 set(generategraph_SRCS
     generategraphplugin.cpp
     generategraphwidget.cpp
