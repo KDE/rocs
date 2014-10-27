@@ -49,9 +49,10 @@ typedef boost::iterator_property_map < PositionVec::iterator,
 typedef boost::graph_traits<Graph>::vertex_descriptor Vertex;
 typedef QPair<int, int> BoostEdge;
 
-// workaround for linking boost
+// handle boost exceptions
 namespace boost {
-    void throw_exception(std::exception const & e) {
+    void throw_exception(std::exception const &e) {
+        qCritical() << "Exception:" << e.what();;
     }
 }
 
