@@ -50,8 +50,9 @@ typedef boost::graph_traits<Graph>::vertex_descriptor Vertex;
 typedef QPair<int, int> BoostEdge;
 
 // workaround for linking boost
-void boost::throw_exception(std::exception const & e)
-{
+namespace boost {
+    void throw_exception(std::exception const & e) {
+    }
 }
 
 Topology::Topology()
