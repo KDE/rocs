@@ -24,7 +24,7 @@ cmake_minimum_required(VERSION 3.0.0)
 find_package(ECM 1.0.0 REQUIRED NO_MODULE)
 find_package(KF5DocTools)
 find_package(Boost "1.49" REQUIRED)
-# find_package(Grantlee REQUIRED) #FIXME deactivate for now
+find_package(Grantlee5 "5.0.0" REQUIRED)
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 include(ECMAddTests)
@@ -67,7 +67,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}
     ${Boost_INCLUDE_DIRS}
-#     ${Grantlee_INCLUDE_DIRS}
 )
 
 add_definitions(-DQT_NO_CAST_TO_ASCII)
