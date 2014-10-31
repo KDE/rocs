@@ -261,9 +261,8 @@ QWidget* MainWindow::setupSidePanel()
     sideDock->addDock(documentation, i18nc("@title", "Handbook"), QIcon::fromTheme("help-contents"));
 
     // Rocs scripting API documentation
-//FIXME commented out until Grantlee is ported
-//     ApiDocWidget* apiDoc = new ApiDocWidget(panel);
-//     sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), QIcon::fromTheme("documentation"));
+    ApiDocWidget* apiDoc = new ApiDocWidget(panel);
+    sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), QIcon::fromTheme("documentation"));
 
     return panel;
 }

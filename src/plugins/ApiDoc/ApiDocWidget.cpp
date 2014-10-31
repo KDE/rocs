@@ -23,8 +23,7 @@
 
 #include <QWebView>
 #include <QDebug>
-#include <KStandardDirs>
-#include <KGlobal> //FIXME remove
+#include <QStandardPaths>
 #include <QIcon>
 
 ApiDocWidget::ApiDocWidget(QWidget* parent)
@@ -32,8 +31,8 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
     , _manager(new ApiDocManager(this))
     , _historyPointer(-1)
 {
-    _baseUrl = QUrl::fromLocalFile(KGlobal::dirs()->findResourceDir("appdata", QString("plugin/apidoc/objectApi.html")));
-    _baseUrl.addPath("plugin/apidoc/");
+    _baseUrl = QUrl::fromLocalFile(
+        QStandardPaths::locate(QStandardPaths::DataLocation, "plugin/apidoc/objectApi.html", QStandardPaths::LocateDirectory));
 
     ui = new Ui::ApiDocWidget;
     ui->setupUi(this);

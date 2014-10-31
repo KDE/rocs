@@ -17,6 +17,7 @@
 */
 
 #include "PropertyDocumentation.h"
+#include <QVariant>
 
 PropertyDocumentation::PropertyDocumentation(QObject* parent)
     : QObject(parent)
@@ -43,7 +44,7 @@ QVariantList PropertyDocumentation::description() const
 {
     QVariantList list;
     foreach (QString paragraph, _description) {
-        list << paragraph;
+        list.append(paragraph);
     }
     return list;
 }

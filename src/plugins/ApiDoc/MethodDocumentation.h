@@ -61,7 +61,7 @@ private:
     QList<ParameterDocumentation*> _parameters;
 };
 
-Q_DECLARE_METATYPE(QList<ParameterDocumentation*>);
-Q_DECLARE_METATYPE(ParameterDocumentation*);
+// Q_DECLARE_METATYPE(QList<ParameterDocumentation*>);
+// Q_DECLARE_METATYPE(ParameterDocumentation*);
 
 #endif // METHOD_DOCUMENTATION_H

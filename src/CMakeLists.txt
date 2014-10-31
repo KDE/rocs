@@ -47,14 +47,13 @@ set( rocs_interface_SRCS
     ui/edgetypesdelegate.cpp
     ui/scriptoutputwidget.cpp
     project/project.cpp
-#FIXME commented out, waiting for Grantlee Qt5 port
-#     plugins/ApiDoc/ApiDocWidget.cpp
-#     plugins/ApiDoc/ObjectDocumentation.cpp
-#     plugins/ApiDoc/PropertyDocumentation.cpp
-#     plugins/ApiDoc/MethodDocumentation.cpp
-#     plugins/ApiDoc/ParameterDocumentation.cpp
-#     plugins/ApiDoc/ApiDocManager.cpp
-#     plugins/ApiDoc/ApiDocModel.cpp
+    plugins/ApiDoc/ApiDocWidget.cpp
+    plugins/ApiDoc/ObjectDocumentation.cpp
+    plugins/ApiDoc/PropertyDocumentation.cpp
+    plugins/ApiDoc/MethodDocumentation.cpp
+    plugins/ApiDoc/ParameterDocumentation.cpp
+    plugins/ApiDoc/ApiDocManager.cpp
+    plugins/ApiDoc/ApiDocModel.cpp
 )
 
 set(
@@ -88,6 +87,7 @@ add_executable( rocs
 target_link_libraries(rocs
     PUBLIC
         rocsgraphtheory
+        Grantlee5::Templates
         KF5::Archive
         KF5::CoreAddons
         KF5::Declarative

@@ -22,7 +22,7 @@
 #include "PropertyDocumentation.h"
 
 #include <QDebug>
-#include <KLocale>
+#include <KLocalizedString>
 
 class Item
 {

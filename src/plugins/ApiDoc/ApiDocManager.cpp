@@ -22,7 +22,9 @@
 #include "MethodDocumentation.h"
 #include "ParameterDocumentation.h"
 
-#include <grantlee_core.h>
+#include <grantlee/engine.h>
+#include <grantlee/metatype.h>
+#include <grantlee/templateloader.h>
 
 #include <QIODevice>
 #include <QFile>
@@ -30,12 +32,10 @@
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
 #include <QDomDocument>
-
-#include <KGlobal>
-#include <KStandardDirs>
+#include <QStandardPaths>
 #include <QDebug>
 #include <QUrl>
-#include <KLocale>
+#include <KLocalizedString>
 
 ApiDocManager::ApiDocManager(QObject *parent)
     : QObject(parent)
@@ -44,7 +44,7 @@ ApiDocManager::ApiDocManager(QObject *parent)
 
 void ApiDocManager::loadLocalData()
 {
-    QStringList apiDocFiles = KGlobal::dirs()->findAllResources("appdata", QString("engineapi/*.xml"));
+    QStringList apiDocFiles = QStandardPaths::locateAll(QStandardPaths::DataLocation, QString("engineapi/*.xml"));
     foreach (const QString &file, apiDocFiles) {
         loadObjectApi(QUrl::fromLocalFile(file));
     }
@@ -81,13 +81,13 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
     }
 
     // initialize Grantlee engine
-    Grantlee::Engine *engine = new Grantlee::Engine( this );
-    Grantlee::FileSystemTemplateLoader::Ptr loader = Grantlee::FileSystemTemplateLoader::Ptr(
-        new Grantlee::FileSystemTemplateLoader() );
-    loader->setTemplateDirs(KGlobal::dirs()->resourceDirs("appdata"));
+    Grantlee::Engine *engine = new Grantlee::Engine(this);
+    QSharedPointer<Grantlee::FileSystemTemplateLoader> loader =
+        QSharedPointer<Grantlee::FileSystemTemplateLoader>(new Grantlee::FileSystemTemplateLoader);
+    loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::DataLocation));
     engine->addTemplateLoader(loader);
     Grantlee::Template t = engine->loadByName("plugin/apidoc/objectApi.html");
-    Grantlee::registerMetaType<ParameterDocumentation*>();
+//     Grantlee::registerMetaType<ParameterDocumentation*>(); //FIXME commented out while porting
 
     // create mapping
     QVariantHash mapping;
@@ -266,12 +266,12 @@ QString ApiDocManager::apiOverviewDocument() const
 {
     // initialize Grantlee engine
     Grantlee::Engine engine;
-    Grantlee::FileSystemTemplateLoader::Ptr loader = Grantlee::FileSystemTemplateLoader::Ptr(
-        new Grantlee::FileSystemTemplateLoader() );
-    loader->setTemplateDirs(KGlobal::dirs()->resourceDirs("appdata"));
+    QSharedPointer<Grantlee::FileSystemTemplateLoader> loader =
+        QSharedPointer<Grantlee::FileSystemTemplateLoader>(new Grantlee::FileSystemTemplateLoader);
+    loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::DataLocation));
     engine.addTemplateLoader(loader);
     Grantlee::Template t = engine.loadByName("plugin/apidoc/overview.html");
-    Grantlee::registerMetaType<ParameterDocumentation*>();
+//     Grantlee::registerMetaType<ParameterDocumentation*>(); //FIXME commented out while porting
 
     // create mapping
     QVariantHash mapping;
@@ -313,8 +313,7 @@ QString ApiDocManager::apiOverviewDocument() const
 QXmlSchema ApiDocManager::loadXmlSchema(const QString &schemeName) const
 {
     QString relPath = QString("schemes/%1.xsd").arg(schemeName);
-    QUrl file = QUrl::fromLocalFile(KGlobal::dirs()->findResource("appdata", relPath));
-
+    QUrl file = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::DataLocation, relPath));
     QXmlSchema schema;
     if (schema.load(file) == false) {
         qWarning() << "Schema at file " << file.toLocalFile() << " is invalid.";
