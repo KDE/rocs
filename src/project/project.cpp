@@ -309,7 +309,9 @@ void Project::removeGraphDocument(GraphDocumentPtr document)
     QString path = document->documentUrl().toLocalFile();
     d->m_graphDocuments.removeAll(document);
     if (!path.startsWith(d->m_workingDirectory.path())) {
-        qCritical() << "Aborting removal of document: not in temporary working directory";
+        qCritical() << "Aborting removal of graph document with path "
+            << path
+            << ", not in temporary working directory" << d->m_workingDirectory.path();
         return;
     }
     if (!QFile::remove(path)) {
