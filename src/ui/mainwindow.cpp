@@ -442,6 +442,7 @@ void MainWindow::saveProjectAs()
     }
     Settings::setLastOpenedDirectory(m_currentProject->projectUrl().path());
     m_currentProject->projectSaveAs(QUrl::fromLocalFile(file));
+    m_recentProjects->addUrl(QUrl::fromLocalFile(file));
     updateCaption();
 }
 
