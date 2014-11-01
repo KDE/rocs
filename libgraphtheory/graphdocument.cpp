@@ -282,13 +282,11 @@ void GraphDocument::remove(EdgeTypePtr type)
 
 QList< EdgeTypePtr > GraphDocument::edgeTypes() const
 {
-    Q_ASSERT(d->m_edgeTypes.length() > 0);
     return d->m_edgeTypes;
 }
 
 QList< NodeTypePtr > GraphDocument::nodeTypes() const
 {
-    Q_ASSERT(d->m_nodeTypes.length() > 0);
     return d->m_nodeTypes;
 }
 
