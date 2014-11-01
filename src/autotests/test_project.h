@@ -32,6 +32,8 @@ private Q_SLOTS:
     void loadSave();
     void loadSaveMultipleGraphDocuments();
     void loadSaveMultipleScriptDocuments();
+    /** no graph document exists in project **/
+    void loadBrokenFilesWithoutCrashing01();
 };
 
 #endif

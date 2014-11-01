@@ -23,6 +23,8 @@
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
+file(COPY testfiles DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 set(testproject_SRCS
     test_project.cpp
     ../project/project.cpp
@@ -36,4 +38,3 @@ target_link_libraries(TestProject
     KF5::Archive
     Qt5::Test
 )
-

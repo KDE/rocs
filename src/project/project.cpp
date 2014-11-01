@@ -109,7 +109,10 @@ bool ProjectPrivate::loadProject(const QUrl &url)
         QString fileName = graphDocs.at(index).toString();
         QUrl fileUrl = QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + fileName);
         GraphDocumentPtr document = m_graphEditor->openDocument(fileUrl);
-        m_graphDocuments.append(document);
+        // add only to project, if document was loaded correctly
+        if (document) {
+            m_graphDocuments.append(document);
+        }
     }
     m_journal = KTextEditor::Editor::instance()->createDocument(0);
     m_journal->openUrl(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + metaInfo["journal.txt"].toString()));

@@ -157,4 +157,11 @@ void TestProject::loadSaveMultipleScriptDocuments()
     graphEditor->deleteLater();
 }
 
+void TestProject::loadBrokenFilesWithoutCrashing01()
+{
+    GraphTheory::Editor *graphEditor = new GraphTheory::Editor;
+    Project project(QUrl::fromLocalFile("testfiles/broken_01.rocs"), graphEditor);
+    QCOMPARE(project.graphDocuments().count(), 0);
+}
+
 QTEST_MAIN(TestProject)
