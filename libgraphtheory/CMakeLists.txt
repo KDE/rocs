@@ -54,6 +54,7 @@ set(graphtheory_SRCS
     models/nodetypemodel.cpp
     models/nodetypepropertymodel.cpp
     models/edgetypemodel.cpp
+    models/edgetypepropertymodel.cpp
     modifiers/valueassign.cpp
     modifiers/topology.cpp
     fileformats/fileformatinterface.cpp

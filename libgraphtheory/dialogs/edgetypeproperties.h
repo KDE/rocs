@@ -32,6 +32,8 @@ class KColorButton;
 
 namespace GraphTheory {
 
+class PropertiesWidget;
+
 class GRAPHTHEORY_EXPORT EdgeTypeProperties : public QDialog
 {
     Q_OBJECT
@@ -48,6 +50,7 @@ private:
     QSpinBox *m_id;
     KColorButton *m_color;
     QComboBox *m_direction;
+    PropertiesWidget *m_properties;
     EdgeTypePtr m_type;
 };
 }

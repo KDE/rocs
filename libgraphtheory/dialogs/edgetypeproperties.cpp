@@ -20,6 +20,7 @@
 
 #include "edgetypeproperties.h"
 #include "edge.h"
+#include "propertieswidget.h"
 #include "graphdocument.h"
 
 #include <KColorButton>
@@ -44,6 +45,7 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     , m_id(new QSpinBox(this))
     , m_color(new KColorButton(this))
     , m_direction(new QComboBox(this))
+    , m_properties(new PropertiesWidget(this))
     , m_type(EdgeTypePtr())
 {
     setWindowTitle(i18nc("@title:window", "Edge Type Properties"));
@@ -62,6 +64,7 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     setLayout(mainLayout);
     mainLayout->addWidget(widget);
+    mainLayout->addWidget(m_properties);
 
     // dialog buttons
     QDialogButtonBox *buttons = new QDialogButtonBox(this);
@@ -95,6 +98,7 @@ void EdgeTypeProperties::setType(EdgeTypePtr type)
     m_id->setValue(type->id());
     m_color->setColor(type->color());
     m_direction->setCurrentIndex(m_direction->findData(type->direction()));
+    m_properties->setType(type);
 }
 
 void EdgeTypeProperties::apply()

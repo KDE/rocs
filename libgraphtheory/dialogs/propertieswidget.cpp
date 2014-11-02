@@ -22,6 +22,7 @@
 #include "propertydelegate.h"
 #include "edgetype.h"
 #include "nodetype.h"
+#include "models/edgetypepropertymodel.h"
 #include "models/nodetypepropertymodel.h"
 #include "typenames.h"
 #include <KLocalizedString>
@@ -36,8 +37,10 @@ using namespace GraphTheory;
 
 PropertiesWidget::PropertiesWidget(QWidget *parent)
     : QWidget(parent)
-    , m_type(NodeTypePtr())
-    , m_model(new NodeTypePropertyModel(this))
+    , m_nodeType(NodeTypePtr())
+    , m_nodeModel(new NodeTypePropertyModel(this))
+    , m_edgeType(EdgeTypePtr())
+    , m_edgeModel(new EdgeTypePropertyModel(this))
     , m_view(new QListView(this))
 {
     setLayout(new QGridLayout(this));
@@ -49,7 +52,6 @@ PropertiesWidget::PropertiesWidget(QWidget *parent)
 
     PropertyDelegate *delegate = new PropertyDelegate(m_view);
     m_view->setItemDelegate(delegate);
-    m_view->setModel(m_model);
 
     connect(delegate, &PropertyDelegate::deleteProperty,
         this, &PropertiesWidget::deleteProperty);
@@ -57,18 +59,33 @@ PropertiesWidget::PropertiesWidget(QWidget *parent)
         this, &PropertiesWidget::renameProperty);
 }
 
-void PropertiesWidget::setNodeType(NodeTypePtr type)
+void PropertiesWidget::setType(NodeTypePtr type)
 {
-    m_model->setNodeType(type.data());
-    m_type = type;
+    m_nodeModel->setNodeType(type.data());
+    m_nodeType = type;
+    m_view->setModel(m_nodeModel);
+    m_edgeType.reset();
+}
+
+void PropertiesWidget::setType(EdgeTypePtr type)
+{
+    m_edgeModel->setEdgeType(type.data());
+    m_edgeType = type;
+    m_view->setModel(m_edgeModel);
+    m_nodeType.reset();
 }
 
 void PropertiesWidget::addProperty()
 {
-    if (!m_type) {
+    if (!m_nodeType && !m_edgeType) {
         return;
     }
-    QStringList propertyNames = m_type->dynamicProperties();
+    QStringList propertyNames;
+    if (m_nodeType) {
+        propertyNames = m_nodeType->dynamicProperties();
+    } else {
+        propertyNames = m_edgeType->dynamicProperties();
+    }
     QString name = "property";
     if (propertyNames.contains(name)) {
         int suffix = 1;
@@ -77,15 +94,27 @@ void PropertiesWidget::addProperty()
         }
         name += QString::number(suffix);
     }
-    m_type->addDynamicProperty(name);
+    if (m_nodeType) {
+        m_nodeType->addDynamicProperty(name);
+    } else {
+        m_edgeType->addDynamicProperty(name);
+    }
 }
 
 void PropertiesWidget::deleteProperty(const QModelIndex &index)
 {
-    m_type->removeDynamicProperty(m_model->data(index, NodeTypePropertyModel::NameRole).toString());
+    if (m_nodeType) {
+        m_nodeType->removeDynamicProperty(m_nodeModel->data(index, NodeTypePropertyModel::NameRole).toString());
+    } else {
+        m_edgeType->removeDynamicProperty(m_edgeModel->data(index, NodeTypePropertyModel::NameRole).toString());
+    }
 }
 
 void PropertiesWidget::renameProperty(const QModelIndex& index, const QString& name)
 {
-    m_type->renameDynamicProperty(m_model->data(index, NodeTypePropertyModel::NameRole).toString(), name);
+    if (m_nodeType) {
+        m_nodeType->renameDynamicProperty(m_nodeModel->data(index, NodeTypePropertyModel::NameRole).toString(), name);
+    } else {
+        m_edgeType->renameDynamicProperty(m_edgeModel->data(index, NodeTypePropertyModel::NameRole).toString(), name);
+    }
 }

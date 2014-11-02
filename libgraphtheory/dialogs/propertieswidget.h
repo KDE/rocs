@@ -30,13 +30,15 @@ class QModelIndex;
 namespace GraphTheory {
 
 class NodeTypePropertyModel;
+class EdgeTypePropertyModel;
 
 class PropertiesWidget : public QWidget
 {
     Q_OBJECT
 public:
     explicit PropertiesWidget(QWidget *parent = 0);
-    void setNodeType(GraphTheory::NodeTypePtr type);
+    void setType(GraphTheory::NodeTypePtr type);
+    void setType(GraphTheory::EdgeTypePtr type);
 
 public Q_SLOTS:
     void addProperty();
@@ -44,8 +46,10 @@ public Q_SLOTS:
     void renameProperty(const QModelIndex &index, const QString &name);
 
 private:
-    NodeTypePtr m_type;
-    NodeTypePropertyModel *m_model;
+    NodeTypePtr m_nodeType;
+    NodeTypePropertyModel *m_nodeModel;
+    EdgeTypePtr m_edgeType;
+    EdgeTypePropertyModel *m_edgeModel;
     QListView *m_view;
 };
 }

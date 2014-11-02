@@ -20,7 +20,7 @@
 
 #include "edgeproperties.h"
 #include "edge.h"
-#include <graphdocument.h>
+#include "graphdocument.h"
 
 #include <KLocalizedString>
 #include <KGuiItem>

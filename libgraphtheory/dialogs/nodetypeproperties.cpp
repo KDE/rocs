@@ -93,7 +93,7 @@ void NodeTypeProperties::setType(NodeTypePtr type)
     m_name->setText(type->name());
     m_id->setValue(type->id());
     m_color->setColor(type->color());
-    m_properties->setNodeType(type);
+    m_properties->setType(type);
 }
 
 void NodeTypeProperties::apply()
