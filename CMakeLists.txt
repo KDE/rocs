@@ -59,7 +59,6 @@ find_package(KF5 REQUIRED COMPONENTS
   ItemViews
   TextEditor
   XmlGui
-  ItemViews
   Service
 )
 
