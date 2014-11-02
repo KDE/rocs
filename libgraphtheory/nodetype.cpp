@@ -161,6 +161,20 @@ void NodeType::removeDynamicProperty(const QString& property)
     emit dynamicPropertyRemoved(property);
 }
 
+void NodeType::renameDynamicProperty(const QString& oldProperty, const QString& newProperty)
+{
+    Q_ASSERT(d->m_dynamicProperties.contains(oldProperty));
+    Q_ASSERT(!d->m_dynamicProperties.contains(newProperty));
+
+    if (!d->m_dynamicProperties.contains(oldProperty) || d->m_dynamicProperties.contains(newProperty)) {
+        return;
+    }
+    int index = d->m_dynamicProperties.indexOf(oldProperty);
+    d->m_dynamicProperties[index] = newProperty;
+    emit dynamicPropertyRenamed(oldProperty, newProperty);
+    emit dynamicPropertyChanged(index);
+}
+
 void NodeType::setQpointer(NodeTypePtr q)
 {
     d->q = q;

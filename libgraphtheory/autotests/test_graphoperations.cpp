@@ -321,4 +321,27 @@ void TestGraphOperations::testEdgesOfDifferentType()
     document->destroy();
 }
 
+void TestGraphOperations::testDynamicPropertyRename()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+
+    NodeTypePtr nodeType = document->nodeTypes().first();
+    nodeA->setType(nodeType);
+
+    nodeType->addDynamicProperty("a");
+    nodeA->setDynamicProperty("a", "value");
+    QVERIFY(nodeType->dynamicProperties().contains("a"));
+    QVERIFY(nodeA->dynamicProperties().contains("a"));
+    QCOMPARE(nodeA->dynamicProperty("a").toString(), QString("value"));
+
+    nodeType->renameDynamicProperty("a", "b");
+    QVERIFY(nodeType->dynamicProperties().contains("b"));
+    QVERIFY(nodeA->dynamicProperties().contains("b"));
+    QCOMPARE(nodeA->dynamicProperty("b").toString(), QString("value"));
+
+    document->destroy();
+}
+
 QTEST_MAIN(TestGraphOperations)

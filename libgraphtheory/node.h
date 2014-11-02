@@ -191,6 +191,14 @@ public:
     void setDynamicProperty(const QString &property, const QVariant &value);
 
     /**
+     * Rename dynamic property from identifier @c oldProperty to @c newProperty.
+     *
+     * @param oldProperty the former value of the property
+     * @param newProperty the new value of the property
+     */
+    void renameDynamicProperty(const QString &oldProperty, const QString &newProperty);
+
+    /**
      * Debug method that tracks how many node objects exist.
      *
      * @return number of node objects
@@ -211,7 +219,7 @@ Q_SIGNALS:
     void dynamicPropertyAdded();
     void dynamicPropertiesAboutToBeRemoved(int, int);
     void dynamicPropertyRemoved();
-    void dynamicPropertyChanged(const QString &);
+    void dynamicPropertyChanged(int index);
     /** list of dynamic properties changed **/
     void dynamicPropertiesChanged();
 

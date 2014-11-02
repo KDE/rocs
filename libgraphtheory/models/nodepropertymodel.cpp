@@ -72,11 +72,16 @@ void NodePropertyModel::setNode(Node* node)
     }
     d->m_node = node->self();
     if (d->m_node) {
-        connect(d->m_node.data(), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)), SLOT(onDynamicPropertyAboutToBeAdded(QString,int)));
-        connect(d->m_node.data(), SIGNAL(dynamicPropertyAdded()), SLOT(onDynamicPropertyAdded()));
-        connect(d->m_node.data(), SIGNAL(dynamicPropertiesAboutToBeRemoved(int,int)), SLOT(onDynamicPropertiesAboutToBeRemoved(int,int)));
-        connect(d->m_node.data(), SIGNAL(dynamicPropertyRemoved()), SLOT(onDynamicPropertyRemoved()));
-        connect(d->m_node.data(), SIGNAL(dynamicPropertyChanged(QString)), SLOT(onDynamicPropertyChanged(QString)));
+        connect(d->m_node.data(), &Node::dynamicPropertyAboutToBeAdded,
+            this, &NodePropertyModel::onDynamicPropertyAboutToBeAdded);
+        connect(d->m_node.data(), &Node::dynamicPropertyAdded,
+            this, &NodePropertyModel::onDynamicPropertyAdded);
+        connect(d->m_node.data(), &Node::dynamicPropertiesAboutToBeRemoved,
+            this, &NodePropertyModel::onDynamicPropertiesAboutToBeRemoved);
+        connect(d->m_node.data(), &Node::dynamicPropertyRemoved,
+            this, &NodePropertyModel::onDynamicPropertyRemoved);
+        connect(d->m_node.data(), &Node::dynamicPropertyChanged,
+            this, &NodePropertyModel::onDynamicPropertyChanged);
     }
     endResetModel();
     emit nodeChanged();
@@ -146,9 +151,8 @@ void NodePropertyModel::onDynamicPropertyRemoved()
     endRemoveRows();
 }
 
-void NodePropertyModel::onDynamicPropertyChanged(const QString &property)
+void NodePropertyModel::onDynamicPropertyChanged(int row)
 {
-    int row = d->m_node->dynamicProperties().indexOf(property);
     emit dataChanged(index(row, 0), index(row, 0));
 }
 

@@ -64,7 +64,7 @@ private Q_SLOTS:
     void onDynamicPropertyAdded();
     void onDynamicPropertiesAboutToBeRemoved(int first, int last);
     void onDynamicPropertyRemoved();
-    void onDynamicPropertyChanged(const QString &property);
+    void onDynamicPropertyChanged(int row);
 
 private:
     Q_DISABLE_COPY(NodePropertyModel)
