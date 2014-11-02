@@ -326,10 +326,12 @@ void TestGraphOperations::testDynamicPropertyRename()
     GraphDocumentPtr document = GraphDocument::create();
     NodePtr nodeA = Node::create(document);
     NodePtr nodeB = Node::create(document);
+    EdgePtr edge = Edge::create(nodeA, nodeB);
 
     NodeTypePtr nodeType = document->nodeTypes().first();
     nodeA->setType(nodeType);
 
+    // test node
     nodeType->addDynamicProperty("a");
     nodeA->setDynamicProperty("a", "value");
     QVERIFY(nodeType->dynamicProperties().contains("a"));
@@ -340,6 +342,20 @@ void TestGraphOperations::testDynamicPropertyRename()
     QVERIFY(nodeType->dynamicProperties().contains("b"));
     QVERIFY(nodeA->dynamicProperties().contains("b"));
     QCOMPARE(nodeA->dynamicProperty("b").toString(), QString("value"));
+
+    // test edge
+    EdgeTypePtr edgeType = document->edgeTypes().first();
+    edgeType->addDynamicProperty("a");
+    edge->setType(edgeType);
+    edge->setDynamicProperty("a", "value");
+    QVERIFY(edgeType->dynamicProperties().contains("a"));
+    QVERIFY(edge->dynamicProperties().contains("a"));
+    QCOMPARE(edge->dynamicProperty("a").toString(), QString("value"));
+
+    edgeType->renameDynamicProperty("a", "b");
+    QVERIFY(edgeType->dynamicProperties().contains("b"));
+    QVERIFY(edge->dynamicProperties().contains("b"));
+    QCOMPARE(edge->dynamicProperty("b").toString(), QString("value"));
 
     document->destroy();
 }

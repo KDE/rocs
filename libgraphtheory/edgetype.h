@@ -98,6 +98,13 @@ public:
     void removeDynamicProperty(const QString &property);
 
     /**
+     * Rename dynamic property @c oldProperty to @c newProperty.
+     * Signals dynamicPropertyChanged(index) and dynamicPropertyRenamed(@c oldProperty, @c oldProperty)
+     * are emitted afterwards
+     */
+    void renameDynamicProperty(const QString &oldProperty, const QString &newProperty);
+
+    /**
      * Set direction for edges of this type. Setting this, emits signal
      * directionChanged(@p direction).
      *
@@ -155,6 +162,8 @@ Q_SIGNALS:
     void dynamicPropertyAdded();
     void dynamicPropertiesAboutToBeRemoved(int, int);
     void dynamicPropertyRemoved(const QString &property);
+    void dynamicPropertyRenamed(const QString &oldProperty, const QString &newProperty);
+    void dynamicPropertyChanged(int index);
     void nameChanged(const QString &name);
 
 protected:

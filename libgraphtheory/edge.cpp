@@ -124,13 +124,23 @@ void Edge::setType(EdgeTypePtr type)
         d->m_type->disconnect(this);
     }
     d->m_type = type;
-    connect(type.data(), &EdgeType::dynamicPropertyAboutToBeAdded, this, &Edge::dynamicPropertyAboutToBeAdded);
-    connect(type.data(), &EdgeType::dynamicPropertyAdded, this, &Edge::dynamicPropertyAdded);
-    connect(type.data(), &EdgeType::dynamicPropertiesAboutToBeRemoved, this, &Edge::dynamicPropertiesAboutToBeRemoved);
-    connect(type.data(), &EdgeType::dynamicPropertyRemoved, this, &Edge::dynamicPropertyRemoved);
-    connect(type.data(), &EdgeType::dynamicPropertyRemoved, this, &Edge::updateDynamicProperty);
-    connect(type.data(), &EdgeType::directionChanged, this, &Edge::directionChanged);
-    connect(type.data(), &EdgeType::colorChanged, this, &Edge::typeColorChanged);
+    connect(type.data(), &EdgeType::dynamicPropertyAboutToBeAdded,
+        this, &Edge::dynamicPropertyAboutToBeAdded);
+    connect(type.data(), &EdgeType::dynamicPropertyAdded,
+        this, &Edge::dynamicPropertyAdded);
+    connect(type.data(), &EdgeType::dynamicPropertiesAboutToBeRemoved,
+        this, &Edge::dynamicPropertiesAboutToBeRemoved);
+    connect(type.data(), &EdgeType::dynamicPropertyRemoved,
+        this, &Edge::dynamicPropertyRemoved);
+    connect(type.data(), &EdgeType::dynamicPropertyRemoved,
+        this, &Edge::updateDynamicProperty);
+    connect(type.data(), &EdgeType::directionChanged,
+        this, &Edge::directionChanged);
+    connect(type.data(), &EdgeType::colorChanged,
+        this, &Edge::typeColorChanged);
+    connect(type.data(), &EdgeType::dynamicPropertyRenamed,
+        this, &Edge::renameDynamicProperty);
+
     emit typeChanged(type);
 }
 
@@ -153,7 +163,7 @@ void Edge::setDynamicProperty(const QString &property, const QVariant &value)
         qWarning() << "Dynamic property not registered at type, aborting to set property.";
     }
     setProperty(("_graph_" + property).toLatin1(), value);
-    emit dynamicPropertyChanged(property);
+    emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));
 }
 
 void Edge::updateDynamicProperty(const QString &property)
@@ -164,6 +174,13 @@ void Edge::updateDynamicProperty(const QString &property)
     }
 
     emit dynamicPropertiesChanged();
+}
+
+void Edge::renameDynamicProperty(const QString &oldProperty, const QString &newProperty)
+{
+    setDynamicProperty(newProperty, dynamicProperty(oldProperty));
+    setDynamicProperty(oldProperty, QVariant::Invalid);
+    emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(newProperty));
 }
 
 void Edge::setQpointer(EdgePtr q)

@@ -73,11 +73,16 @@ void EdgePropertyModel::setEdge(Edge *edge)
     }
     d->m_edge = edge->self();
     if (d->m_edge) {
-        connect(d->m_edge.data(), SIGNAL(dynamicPropertyAboutToBeAdded(QString,int)), SLOT(onDynamicPropertyAboutToBeAdded(QString,int)));
-        connect(d->m_edge.data(), SIGNAL(dynamicPropertyAdded()), SLOT(onDynamicPropertyAdded()));
-        connect(d->m_edge.data(), SIGNAL(dynamicPropertiesAboutToBeRemoved(int,int)), SLOT(onDynamicPropertiesAboutToBeRemoved(int,int)));
-        connect(d->m_edge.data(), SIGNAL(dynamicPropertyRemoved()), SLOT(onDynamicPropertyRemoved()));
-        connect(d->m_edge.data(), SIGNAL(dynamicPropertyChanged(QString)), SLOT(onDynamicPropertyChanged(QString)));
+        connect(d->m_edge.data(), &Edge::dynamicPropertyAboutToBeAdded,
+            this, &EdgePropertyModel::onDynamicPropertyAboutToBeAdded);
+        connect(d->m_edge.data(), &Edge::dynamicPropertyAdded,
+            this, &EdgePropertyModel::onDynamicPropertyAdded);
+        connect(d->m_edge.data(), &Edge::dynamicPropertiesAboutToBeRemoved,
+            this, &EdgePropertyModel::onDynamicPropertiesAboutToBeRemoved);
+        connect(d->m_edge.data(), &Edge::dynamicPropertyRemoved,
+            this, &EdgePropertyModel::onDynamicPropertyRemoved);
+        connect(d->m_edge.data(), &Edge::dynamicPropertyChanged,
+            this, &EdgePropertyModel::onDynamicPropertyChanged);
     }
     endResetModel();
     emit edgeChanged();
@@ -147,9 +152,8 @@ void EdgePropertyModel::onDynamicPropertyRemoved()
     endRemoveRows();
 }
 
-void EdgePropertyModel::onDynamicPropertyChanged(const QString &property)
+void EdgePropertyModel::onDynamicPropertyChanged(int row)
 {
-    int row = d->m_edge->dynamicProperties().indexOf(property);
     emit dataChanged(index(row, 0), index(row, 0));
 }
 

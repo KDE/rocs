@@ -163,6 +163,20 @@ void EdgeType::removeDynamicProperty(const QString& property)
     emit dynamicPropertyRemoved(property);
 }
 
+void EdgeType::renameDynamicProperty(const QString& oldProperty, const QString& newProperty)
+{
+    Q_ASSERT(d->m_dynamicProperties.contains(oldProperty));
+    Q_ASSERT(!d->m_dynamicProperties.contains(newProperty));
+
+    if (!d->m_dynamicProperties.contains(oldProperty) || d->m_dynamicProperties.contains(newProperty)) {
+        return;
+    }
+    int index = d->m_dynamicProperties.indexOf(oldProperty);
+    d->m_dynamicProperties[index] = newProperty;
+    emit dynamicPropertyRenamed(oldProperty, newProperty);
+    emit dynamicPropertyChanged(index);
+}
+
 EdgeType::Direction EdgeType::direction() const
 {
     return d->m_direction;
