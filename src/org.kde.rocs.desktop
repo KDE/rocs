@@ -120,3 +120,4 @@ Comment[x-test]=xxGraph Theory Tool for Professors and Students.xx
 Comment[zh_CN]=面向授课场合的图论工具。
 Comment[zh_TW]=給教授與學生使用的圖形理論工具。
 Categories=Qt;KDE;Education;Science;Math;
+X-DBUS-ServiceName=org.kde.rocs
