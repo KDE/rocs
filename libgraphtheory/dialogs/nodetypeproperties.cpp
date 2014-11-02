@@ -19,6 +19,7 @@
  */
 
 #include "nodetypeproperties.h"
+#include "propertieswidget.h"
 #include "node.h"
 #include "graphdocument.h"
 
@@ -44,6 +45,7 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     , m_id(new QSpinBox(this))
     , m_color(new KColorButton(this))
     , m_type(NodeTypePtr())
+    , m_properties(new PropertiesWidget(this))
 {
     setWindowTitle(i18nc("@title:window", "Edge Type Properties"));
 
@@ -58,6 +60,7 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     setLayout(mainLayout);
     mainLayout->addWidget(widget);
+    mainLayout->addWidget(m_properties);
 
     // dialog buttons
     QDialogButtonBox *buttons = new QDialogButtonBox(this);
@@ -90,6 +93,7 @@ void NodeTypeProperties::setType(NodeTypePtr type)
     m_name->setText(type->name());
     m_id->setValue(type->id());
     m_color->setColor(type->color());
+    m_properties->setNodeType(type);
 }
 
 void NodeTypeProperties::apply()

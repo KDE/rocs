@@ -40,6 +40,8 @@ set(graphtheory_SRCS
     dialogs/edgeproperties.cpp
     dialogs/nodetypeproperties.cpp
     dialogs/edgetypeproperties.cpp
+    dialogs/propertieswidget.cpp
+    dialogs/propertydelegate.cpp
     kernel/documentwrapper.cpp
     kernel/nodewrapper.cpp
     kernel/edgewrapper.cpp
@@ -50,6 +52,7 @@ set(graphtheory_SRCS
     models/nodepropertymodel.cpp
     models/edgepropertymodel.cpp
     models/nodetypemodel.cpp
+    models/nodetypepropertymodel.cpp
     models/edgetypemodel.cpp
     modifiers/valueassign.cpp
     modifiers/topology.cpp
@@ -78,6 +81,7 @@ target_link_libraries(rocsgraphtheory
         Qt5::Gui
         Qt5::Script
         KF5::I18n
+        KF5::ItemViews
         KF5::Declarative
         KF5::XmlGui
         KF5::Service

@@ -32,6 +32,8 @@ class KColorButton;
 
 namespace GraphTheory {
 
+class PropertiesWidget;
+
 class GRAPHTHEORY_EXPORT NodeTypeProperties : public QDialog
 {
     Q_OBJECT
@@ -47,6 +49,7 @@ private:
     QLineEdit *m_name;
     QSpinBox *m_id;
     KColorButton *m_color;
+    PropertiesWidget *m_properties;
     NodeTypePtr m_type;
 };
 }
