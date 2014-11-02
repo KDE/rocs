@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+X-KDE-ServiceTypes=rocs/graphtheory/fileformat
+X-KDE-Library=rocs2fileformat
+X-KDE-PluginInfo-Name=rocs_rocs2fileformat
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Category=Plugins
+X-KDE-PluginInfo-License=GPL
+Name=Rocs File Format
+Comment=Rocs Graph File Format
+

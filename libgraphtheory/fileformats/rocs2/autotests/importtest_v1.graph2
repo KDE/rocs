@@ -1,0 +1,65 @@
+{
+    "FormatVersion": 1,
+    "NodeTypes": [
+        {
+            "Id": 1,
+            "Name": "the name",
+            "Color": "#ff0000",
+            "Properties": [
+                "property a",
+                "property b"
+            ]
+        }
+    ],
+    "EdgeTypes": [
+        {
+            "Id": 1,
+            "Name": "the name",
+            "Color": "#ff0000",
+            "Direction": "Unidirectional"
+            "Properties": [
+                "property a",
+                "property b"
+            ]
+        }
+    ],
+    "Nodes": [
+        {
+            "Id": 2,
+            "Type": 1,
+            "X": 100,
+            "Y": 200,
+            "Color": "#ff0000",
+            "Properties": [
+                {
+                    "Name": "property a",
+                    "Value": "foo"
+                }
+            ]
+        },
+        {
+            "Id": 2,
+            "Type": 1,
+            "X": 0,
+            "Y": 0,
+            "Color": "#ff0000",
+            "Properties": [
+                {
+                    "Name": "property a",
+                    "Value": "foo"
+                }
+            ]
+        }
+    ],
+    "Edges": [
+        "Type": 1,
+        "From": 1,
+        "To": 2,
+        "Properties": [
+            {
+                "Name": "property a",
+                "Value": "foo"
+            }
+        ]
+    ]
+}

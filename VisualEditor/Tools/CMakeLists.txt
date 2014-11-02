@@ -1,3 +1,0 @@
-add_subdirectory(GenerateGraph)
-add_subdirectory(TransformEdges)
-add_subdirectory(AssignValues)

@@ -2,7 +2,7 @@
 #   This file is part of Rocs.
 #   Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
 #   Copyright 2010       Wagner Reck <wagner.reck@gmail.com>
-#   Copyright 2011-2012  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+#   Copyright 2011-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #   This program is free software; you can redistribute it and/or
 #   modify it under the terms of the GNU General Public License as
@@ -18,75 +18,70 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-project(Rocs)
+project(rocs)
+cmake_minimum_required(VERSION 3.0.0)
 
-cmake_minimum_required(VERSION 2.8.8)
+find_package(ECM 1.0.0 REQUIRED NO_MODULE)
+find_package(KF5DocTools)
+find_package(Boost "1.49" REQUIRED)
+# find_package(Grantlee REQUIRED) #FIXME deactivate for now
+
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+include(ECMAddTests)
+include(ECMInstallIcons)
+include(ECMOptionalAddSubdirectory)
+include(ECMSetupVersion)
+include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
 include(FeatureSummary)
 
-#### Boost ####
-# In CMake >= 2.8.6, FindBoost.cmake tries to find BoostConfig.cmake which is
-# not compatible with CMake's FindBoost. Disable this function.
-set(Boost_NO_BOOST_CMAKE TRUE)
-find_package(Boost "1.43" REQUIRED)
-set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
-
-set(KDE_MIN_VERSION "4.8")
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
-
-find_package(Qt4 REQUIRED)
-find_package(Grantlee REQUIRED)
-
-remove_definitions(-DQT_NO_STL)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
-if(${CMAKE_BUILD_TYPE} MATCHES coverage)
-    set(CMAKE_CXX_COMPILER cov++)
-endif()
-
-# Rocs include dirs
-set(ROCSCORE_INCLUDES
-    "${CMAKE_CURRENT_SOURCE_DIR}/RocsCore/"
-    "${CMAKE_CURRENT_SOURCE_DIR}/RocsCore/LoadSave/"
+find_package(Qt5 5.3 REQUIRED NO_MODULE COMPONENTS
+  Concurrent
+  Core
+  Gui
+  QuickWidgets
+  Script
+  WebKit
+  WebKitWidgets
+  Widgets
+  ScriptTools
+  Svg
+  Test
+  XmlPatterns
 )
-
-set(ROCSVISUALEDITOR_INCLUDES
-    "${CMAKE_CURRENT_SOURCE_DIR}/VisualEditor/"
+find_package(KF5 REQUIRED COMPONENTS
+  Config
+  CoreAddons
+  Declarative
+  DocTools
+  I18n
+  ItemViews
+  TextEditor
+  XmlGui
+  Service
 )
 
 include_directories(
-    ${KDE4_INCLUDES}
-    ${QT_INCLUDES}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_BINARY_DIR}
     ${Boost_INCLUDE_DIRS}
-    ${Grantlee_INCLUDE_DIRS}
+#     ${Grantlee_INCLUDE_DIRS}
 )
 
-# allow disabling building of optional graph file backands
-option(ROCS_BUILD_LOADSAVE "ROCS_BUILD_LOADSAVE" ON)
-add_feature_info(OptionalGraphFiles
-    ROCS_BUILD_LOADSAVE
-    "Building of extra graph file plugins"
-)
+add_definitions(-DQT_NO_CAST_TO_ASCII)
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
+remove_definitions(-DQT_NO_KEYWORDS)
 
-# enable or disable experimental plugins
-# experimental plugins are (by definition) not suited for release builds
-option(ROCS_EXPERIMENTAL_PLUGINS "ROCS_EXPERIMENTAL_PLUGINS" OFF)
-add_feature_info(ExperimentalPlugins
-    ROCS_EXPERIMENTAL_PLUGINS
-    "Building experimental/unstable plugins."
-)
+ecm_optional_add_subdirectory(libgraphtheory)
+ecm_optional_add_subdirectory(src)
+ecm_optional_add_subdirectory(icons)
+ecm_optional_add_subdirectory(doc)
 
-# main includes
-add_subdirectory(RocsCore)
-add_subdirectory(VisualEditor)
-add_subdirectory(App)
-
-# feature log
-if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
-    feature_summary(WHAT ALL)
-endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
-
-add_subdirectory(graphics)
-add_subdirectory(doc)
+set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
+feature_summary(WHAT ALL)
 
 install(FILES rocs.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
-

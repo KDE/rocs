@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+	http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+	<kcfgfile name="rocsrc"/>
+	<group name="ItemPalette">
+		<entry name="showButtonText" type="Bool">
+			<label>Show text beside icon</label>
+			<whatsthis>Show text beside icon</whatsthis>
+			<default>true</default>
+		</entry>
+	</group>
+    <group name="RocsConfigVersion">
+         <entry name="version" type="String" hidden="true">
+            <default>0.0.0</default>
+         </entry>
+    </group>
+	<group name="GraphicsView">
+		 <entry name="fastGraphics" type="Bool" hidden="true">
+			<default>false</default>
+		 </entry>
+	</group>
+	<group name="MainWindow">
+		<entry name="vSplitterSizeTop" type="Int" hidden="true">
+			<default>200</default>
+		</entry>
+		<entry name="vSplitterSizeBottom" type="Int" hidden="true">
+			<default>200</default>
+		</entry>
+		<entry name="hSplitterSizeLeft" type="Int" hidden="true">
+			<default> 500 </default>
+		</entry>
+		<entry name="hSplitterSizeRight" type="Int" hidden="true">
+			<default> 500 </default>
+		</entry>
+        <entry name="hScriptSplitterSizeLeft" type="Int" hidden="true">
+            <default> 500 </default>
+        </entry>
+        <entry name="hScriptSplitterSizeRight" type="Int" hidden="true">
+            <default> 500 </default>
+        </entry>
+        <entry name="lastOpenedDirectory" type="String" hidden="true">
+            <default> </default>
+        </entry>
+	</group>
+	<group name="IncludeManager">
+        <entry name="includePath" type="StringList">
+            <label>Path where include manager seek for includes.</label>
+        </entry>
+    </group>
+</kcfg>

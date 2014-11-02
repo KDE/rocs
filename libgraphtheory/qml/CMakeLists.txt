@@ -1,4 +1,5 @@
-#  Copyright 2013-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+###
+#  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 #  Redistribution and use in source and binary forms, with or without
 #  modification, are permitted provided that the following conditions
@@ -20,5 +21,17 @@
 #  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 #  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 #  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+###
 
-kdoctools_create_handbook(index.docbook INSTALL_DESTINATION ${HTML_INSTALL_DIR}/en SUBDIR rocs)
+set(graphtheory_qml_files
+    Scene.qml
+    AddNodeAction.qml
+    AddEdgeAction.qml
+    DeleteAction.qml
+    SelectMoveAction.qml
+    Line.qml
+    NodePropertyItem.qml
+    EdgePropertyItem.qml
+)
+
+install(FILES ${graphtheory_qml_files} DESTINATION ${DATA_INSTALL_DIR}/rocsgraphtheory/qml)
