@@ -20,6 +20,8 @@
 
 project(rocs)
 
+add_definitions(-DTRANSLATION_DOMAIN=\"rocs\")
+
 ecm_setup_version(1.9.900
     VARIABLE_PREFIX ROCS
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/rocsversion.h"

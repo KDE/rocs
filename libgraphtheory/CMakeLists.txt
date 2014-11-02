@@ -25,6 +25,9 @@ include_directories(
     ./
 )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"libgraphtheory\")
+
+
 set(graphtheory_SRCS
     edge.cpp
     edgetype.cpp
