@@ -25,7 +25,7 @@ set(transformedges_SRCS
     transformedgesplugin.cpp
     transformedgeswidget.cpp
 )
-qt5_wrap_ui(transformedges_SRCS transformedgeswidget.ui)
+ki18n_wrap_ui(transformedges_SRCS transformedgeswidget.ui)
 add_library(transformedgesplugin
     MODULE
     ${transformedges_SRCS}

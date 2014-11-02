@@ -60,7 +60,7 @@ set(graphtheory_SRCS
     qtquickitems/qsglinenode.cpp
 )
 
-qt5_wrap_ui(graphtheory_SRCS
+ki18n_wrap_ui(graphtheory_SRCS
     dialogs/nodeproperties.ui
     dialogs/edgeproperties.ui
 )

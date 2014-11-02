@@ -62,7 +62,7 @@ set(
     ${rocs_script_SRC}
 )
 
-qt5_wrap_ui(
+ki18n_wrap_ui(
     rocs_SRCS
     ui/documentationwidget.ui
     ui/journalwidget.ui
