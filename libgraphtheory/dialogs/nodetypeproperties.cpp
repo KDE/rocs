@@ -44,8 +44,8 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     , m_name(new QLineEdit(this))
     , m_id(new QSpinBox(this))
     , m_color(new KColorButton(this))
-    , m_type(NodeTypePtr())
     , m_properties(new PropertiesWidget(this))
+    , m_type(NodeTypePtr())
 {
     setWindowTitle(i18nc("@title:window", "Edge Type Properties"));
 
