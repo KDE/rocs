@@ -47,7 +47,7 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     , m_properties(new PropertiesWidget(this))
     , m_type(NodeTypePtr())
 {
-    setWindowTitle(i18nc("@title:window", "Edge Type Properties"));
+    setWindowTitle(i18nc("@title:window", "Node Type Properties"));
 
     // form layout with static edge type properties
     QWidget *widget = new QWidget(this);
