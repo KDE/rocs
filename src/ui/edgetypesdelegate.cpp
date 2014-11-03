@@ -138,13 +138,18 @@ void EdgeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
     int titleTopMargin = (outerRect.height() - title->height()) / 2;
     title->move(titleLeftMargin, titleTopMargin);
 
-    int idLeftMargin = titleLeftMargin + title->width() + 10;
+    // construct remaining from right to left
+    int propertiesLeftMargin = contentRect.right() - propertiesButton->width() - m_hPadding;
+    int propertiesTopMargin = (outerRect.height() - propertiesButton->height()) / 2;
+    propertiesButton->move(propertiesLeftMargin, propertiesTopMargin);
+
+    int idLeftMargin = propertiesLeftMargin - id->width() - 10;
     int idTopMargin = (outerRect.height() - id->height()) / 2;
     id->move(idLeftMargin, idTopMargin);
 
-    int propertiesLeftMargin = idLeftMargin + id->width() + 10;
-    int propertiesTopMargin = (outerRect.height() - propertiesButton->height()) / 2;
-    propertiesButton->move(propertiesLeftMargin, propertiesTopMargin);
+
+    // title gets remaining space
+    title->setFixedWidth(qMax(0, idLeftMargin - titleLeftMargin - 10));
 }
 
 void EdgeTypesDelegate::onColorChanged(const QColor &color)

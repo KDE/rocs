@@ -76,10 +76,14 @@ QList< QWidget* > NodeTypesDelegate::createItemWidgets(const QModelIndex &index)
     QToolButton *propertiesButton = new QToolButton();
     propertiesButton->setIcon(QIcon::fromTheme("document-properties"));
 
-    connect(colorButton, SIGNAL(changed(QColor)), SLOT(onColorChanged(QColor)));
-    connect(colorButton, SIGNAL(pressed()), SLOT(onColorDialogOpened()));
-    connect(title, &QLineEdit::textEdited, this, &NodeTypesDelegate::onNameChanged);
-    connect(propertiesButton, &QToolButton::clicked, this, &NodeTypesDelegate::showPropertiesDialog);
+    connect(colorButton, &KColorButton::changed,
+        this, &NodeTypesDelegate::onColorChanged);
+    connect(colorButton, &KColorButton::pressed,
+        this, &NodeTypesDelegate::onColorDialogOpened);
+    connect(title, &QLineEdit::textEdited,
+        this, &NodeTypesDelegate::onNameChanged);
+    connect(propertiesButton, &QToolButton::clicked,
+        this, &NodeTypesDelegate::showPropertiesDialog);
 
     return QList<QWidget*>() << colorButton
                              << title
@@ -122,13 +126,17 @@ void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
     int titleTopMargin = (outerRect.height() - title->height()) / 2;
     title->move(titleLeftMargin, titleTopMargin);
 
-    int idLeftMargin = titleLeftMargin + title->width() + 10;
+    // construct remaining from right to left
+    int propertiesLeftMargin = contentRect.right() - propertiesButton->width() - m_hPadding;
+    int propertiesTopMargin = (outerRect.height() - propertiesButton->height()) / 2;
+    propertiesButton->move(propertiesLeftMargin, propertiesTopMargin);
+
+    int idLeftMargin = propertiesLeftMargin - id->width() - 10;
     int idTopMargin = (outerRect.height() - id->height()) / 2;
     id->move(idLeftMargin, idTopMargin);
 
-    int propertiesLeftMargin = idLeftMargin + id->width() + 10;
-    int propertiesTopMargin = (outerRect.height() - propertiesButton->height()) / 2;
-    propertiesButton->move(propertiesLeftMargin, propertiesTopMargin);
+    // title gets remaining space
+    title->setFixedWidth(qMax(0, idLeftMargin - titleLeftMargin - 10));
 }
 
 void NodeTypesDelegate::onColorChanged(const QColor &color)
