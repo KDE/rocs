@@ -55,6 +55,8 @@ private Q_SLOTS:
     void nodeDynamicProperties();
     /** test edge properties (from, to, directed) **/
     void edgeProperties();
+    /** test edge dynamic properties **/
+    void edgeDynamicProperties();
     /** test node type access **/
     void nodeTypes();
     /** test node type access **/

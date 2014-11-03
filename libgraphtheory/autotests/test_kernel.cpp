@@ -259,7 +259,6 @@ void TestKernel::nodeDynamicProperties()
     // property write-access from script
     script = "Document.nodes()[0].propertyC = 3";
     result = kernel.execute(document, script);
-    qDebug() << result.toString();
     QCOMPARE(node->dynamicProperty("propertyC").toInt(), 3);
 
     // cleanup
@@ -290,6 +289,43 @@ void TestKernel::edgeProperties()
     script = "Document.nodes()[0].edges()[0].directed();";
     result = kernel.execute(document, script);
     QCOMPARE(result.toBool(), true);
+
+    // cleanup
+    document->destroy();
+}
+
+void TestKernel::edgeDynamicProperties()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    EdgeTypePtr type = document->edgeTypes().first();
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    EdgePtr edge = Edge::create(nodeA, nodeB);
+
+    type->addDynamicProperty("propertyA");
+    type->addDynamicProperty("propertyB");
+    type->addDynamicProperty("propertyC");
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    // property read-access from script
+    edge->setDynamicProperty("propertyA", "1");
+    script = "Document.edges()[0].propertyA;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), 1);
+
+    // property local write/read-access in script
+    script = "Document.edges()[0].propertyB = 2; Document.edges()[0].propertyB";
+    result = kernel.execute(document, script);
+    QCOMPARE(edge->dynamicProperty("propertyB").toInt(), 2);
+
+    // property write-access from script
+    script = "Document.edges()[0].propertyC = 3";
+    result = kernel.execute(document, script);
+    QCOMPARE(edge->dynamicProperty("propertyC").toInt(), 3);
 
     // cleanup
     document->destroy();

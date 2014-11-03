@@ -67,7 +67,7 @@ public:
     Q_INVOKABLE bool directed() const;
 
     /** reimplemented from QObject **/
-    virtual bool event(QEvent* e);
+    virtual bool event(QEvent *e) Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
     void updateDynamicProperties();

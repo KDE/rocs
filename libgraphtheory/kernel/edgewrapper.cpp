@@ -88,7 +88,7 @@ bool EdgeWrapper::directed() const
     return false;
 }
 
-bool EdgeWrapper::event(QEvent* e)
+bool EdgeWrapper::event(QEvent *e)
 {
     if (e->type() == QEvent::DynamicPropertyChange) {
         QDynamicPropertyChangeEvent *propertyEvent = static_cast<QDynamicPropertyChangeEvent *>(e);
@@ -96,13 +96,18 @@ bool EdgeWrapper::event(QEvent* e)
         QVariant value = property(propertyEvent->propertyName());
         m_edge->setDynamicProperty(name, value);
     }
-    return parent()->event(e);
+    return true;
 }
 
 void EdgeWrapper::updateDynamicProperties()
 {
-    // set dynamic properties
-    foreach (QString property, m_edge->dynamicProperties()) {
-        setProperty(property.toUtf8(), m_edge->dynamicProperty(property));
+    foreach (const QString &property, m_edge->dynamicProperties()) {
+        // property value must not be set to QVariant::Invalid, else the properties are not accessible
+        // from the script engine
+        if (m_edge->dynamicProperty(property).isValid()) {
+            setProperty(property.toUtf8(), m_edge->dynamicProperty(property));
+        } else {
+            setProperty(property.toUtf8(), QVariant::Int);
+        }
     }
 }
