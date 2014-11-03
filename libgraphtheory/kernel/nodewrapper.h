@@ -46,7 +46,7 @@ class NodeWrapper : public QObject
     Q_PROPERTY(int id READ id NOTIFY idChanged)
     Q_PROPERTY(qreal x READ x WRITE setX NOTIFY positionChanged)
     Q_PROPERTY(qreal y READ y WRITE setY NOTIFY positionChanged)
-    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(QString color READ color WRITE setColor NOTIFY colorChanged)
     Q_PROPERTY(int type READ type WRITE setType NOTIFY typeChanged)
 
 public:
@@ -84,12 +84,12 @@ public:
     /**
      * @return color of node
      */
-    QColor color() const;
+    QString color() const;
 
     /**
      * set color of node to @c color
      */
-    void setColor(const QColor &color);
+    void setColor(const QString &colorString);
 
     /**
      * @return NodeType::id of corresponding node

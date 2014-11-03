@@ -82,13 +82,14 @@ void NodeWrapper::setY(qreal y)
     // change signal will be emitted by connection to m_node signal
 }
 
-QColor NodeWrapper::color() const
+QString NodeWrapper::color() const
 {
-    return m_node->color();
+    return m_node->color().name();
 }
 
-void NodeWrapper::setColor(const QColor &color)
+void NodeWrapper::setColor(const QString &colorString)
 {
+    QColor color = QColor(colorString);
     if (color == m_node->color()) {
         return;
     }
