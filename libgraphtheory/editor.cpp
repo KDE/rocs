@@ -87,5 +87,6 @@ GraphDocumentPtr Editor::openDocument(const QUrl &documentUrl)
         importer->errorString();
         return GraphDocumentPtr();
     }
+    importer->graphDocument()->setDocumentUrl(documentUrl);
     return importer->graphDocument();
 }
