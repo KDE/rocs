@@ -230,6 +230,42 @@ void TestKernel::nodeProperties()
     document->destroy();
 }
 
+void TestKernel::nodeDynamicProperties()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodeTypePtr type = document->nodeTypes().first();
+    NodePtr node = Node::create(document);
+
+    type->addDynamicProperty("propertyA");
+    type->addDynamicProperty("propertyB");
+    type->addDynamicProperty("propertyC");
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    // property read-access from script
+    node->setDynamicProperty("propertyA", "1");
+    script = "Document.nodes()[0].propertyA;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), 1);
+
+    // property local write/read-access in script
+    script = "Document.nodes()[0].propertyB = 2; Document.nodes()[0].propertyB";
+    result = kernel.execute(document, script);
+    QCOMPARE(node->dynamicProperty("propertyB").toInt(), 2);
+
+    // property write-access from script
+    script = "Document.nodes()[0].propertyC = 3";
+    result = kernel.execute(document, script);
+    qDebug() << result.toString();
+    QCOMPARE(node->dynamicProperty("propertyC").toInt(), 3);
+
+    // cleanup
+    document->destroy();
+}
+
 void TestKernel::edgeProperties()
 {
     GraphDocumentPtr document = GraphDocument::create();

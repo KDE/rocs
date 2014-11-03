@@ -260,7 +260,7 @@ QList<NodeWrapper*> NodeWrapper::successors() const
     return successors.values();
 }
 
-bool NodeWrapper::event(QEvent* e)
+bool NodeWrapper::event(QEvent *e)
 {
     if (e->type() == QEvent::DynamicPropertyChange) {
         QDynamicPropertyChangeEvent *propertyEvent = static_cast<QDynamicPropertyChangeEvent *>(e);
@@ -268,13 +268,18 @@ bool NodeWrapper::event(QEvent* e)
         QVariant value = property(propertyEvent->propertyName());
         m_node->setDynamicProperty(name, value);
     }
-    return parent()->event(e);
+    return true;
 }
 
 void NodeWrapper::updateDynamicProperties()
 {
-    // set dynamic properties
-    foreach (QString property, m_node->dynamicProperties()) {
-        setProperty(property.toUtf8(), m_node->dynamicProperty(property));
+    foreach (const QString &property, m_node->dynamicProperties()) {
+        // property value must not be set to QVariant::Invalid, else the properties are not accessible
+        // from the script engine
+        if (m_node->dynamicProperty(property).isValid()) {
+            setProperty(property.toUtf8(), m_node->dynamicProperty(property));
+        } else {
+            setProperty(property.toUtf8(), QVariant::Int);
+        }
     }
 }

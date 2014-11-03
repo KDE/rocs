@@ -140,7 +140,6 @@ public:
      */
     Q_INVOKABLE QList<GraphTheory::EdgeWrapper*> outEdges(int type) const;
 
-
     /**
      * @return list of all neighbors connected to this node
      */
@@ -157,7 +156,7 @@ public:
     Q_INVOKABLE QList<GraphTheory::NodeWrapper*> successors() const;
 
     /** reimplemented from QObject **/
-    virtual bool event(QEvent* e);
+    virtual bool event(QEvent* e) Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
     void updateDynamicProperties();
