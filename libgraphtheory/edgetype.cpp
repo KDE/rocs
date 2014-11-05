@@ -20,6 +20,7 @@
 
 #include "edgetype.h"
 #include "graphdocument.h"
+#include <QDebug>
 
 using namespace GraphTheory;
 

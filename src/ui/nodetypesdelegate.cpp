@@ -114,6 +114,7 @@ void NodeTypesDelegate::updateItemWidgets(const QList< QWidget* > widgets, const
 
     colorButton->setColor(index.data(NodeTypeModel::ColorRole).value<QColor>());
     title->setText(index.data(NodeTypeModel::TitleRole).toString());
+    id->setText(index.data(NodeTypeModel::IdRole).toString());
 
     QRect outerRect(0, 0, option.rect.width(), option.rect.height());
     QRect contentRect = outerRect.adjusted(m_hPadding, m_vPadding, -m_hPadding, -m_vPadding);
