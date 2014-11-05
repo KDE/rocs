@@ -44,12 +44,14 @@ public:
 
 private Q_SLOTS:
     void apply();
+    void validateIdInput();
 
 private:
     QLineEdit *m_name;
     QSpinBox *m_id;
     KColorButton *m_color;
     PropertiesWidget *m_properties;
+    QPushButton *m_okButton;
     NodeTypePtr m_type;
 };
 }

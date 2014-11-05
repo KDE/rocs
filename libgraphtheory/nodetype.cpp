@@ -93,6 +93,11 @@ bool NodeType::isValid() const
     return d->m_valid;
 }
 
+GraphDocumentPtr NodeType::document() const
+{
+    return d->m_document;
+}
+
 void NodeType::setName(const QString& name)
 {
     if (d->m_name == name) {

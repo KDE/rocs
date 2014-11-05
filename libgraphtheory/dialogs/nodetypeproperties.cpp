@@ -45,6 +45,7 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     , m_id(new QSpinBox(this))
     , m_color(new KColorButton(this))
     , m_properties(new PropertiesWidget(this))
+    , m_okButton(new QPushButton(this))
     , m_type(NodeTypePtr())
 {
     setWindowTitle(i18nc("@title:window", "Node Type Properties"));
@@ -65,21 +66,25 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     // dialog buttons
     QDialogButtonBox *buttons = new QDialogButtonBox(this);
 
-    QPushButton *okButton = new QPushButton;
-    KGuiItem::assign(okButton, KStandardGuiItem::ok());
-    okButton->setShortcut(Qt::Key_Return);
+    KGuiItem::assign(m_okButton, KStandardGuiItem::ok());
+    m_okButton->setShortcut(Qt::Key_Return);
 
     QPushButton *cancelButton = new QPushButton;
     KGuiItem::assign(cancelButton, KStandardGuiItem::cancel());
     cancelButton->setShortcut(Qt::Key_Escape);
 
-    buttons->addButton(okButton, QDialogButtonBox::AcceptRole);
+    buttons->addButton(m_okButton, QDialogButtonBox::AcceptRole);
     buttons->addButton(cancelButton, QDialogButtonBox::RejectRole);
     mainLayout->addWidget(buttons);
-    connect(okButton, &QPushButton::clicked, this, &NodeTypeProperties::accept);
-    connect(cancelButton, &QPushButton::clicked, this, &NodeTypeProperties::reject);
+    connect(m_okButton, &QPushButton::clicked,
+        this, &NodeTypeProperties::accept);
+    connect(cancelButton, &QPushButton::clicked,
+        this, &NodeTypeProperties::reject);
 
-    connect(this, &QDialog::accepted, this, &NodeTypeProperties::apply);
+    connect(m_id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+        this, &NodeTypeProperties::validateIdInput);
+    connect(this, &QDialog::accepted,
+        this, &NodeTypeProperties::apply);
     setAttribute(Qt::WA_DeleteOnClose);
 }
 
@@ -94,11 +99,39 @@ void NodeTypeProperties::setType(NodeTypePtr type)
     m_id->setValue(type->id());
     m_color->setColor(type->color());
     m_properties->setType(type);
+
+    // set initial color and tooltip
+    validateIdInput();
 }
 
 void NodeTypeProperties::apply()
 {
     m_type->setName(m_name->text());
-    m_type->setId(m_id->value()); // FIXME no check performed if ID is already in use!
+    // note: ID is valid since otherwise OK-button would be disabled
+    // no need to check here
+    m_type->setId(m_id->value());
     m_type->setColor(m_color->color());
+}
+
+void NodeTypeProperties::validateIdInput()
+{
+    int valid = true;
+    foreach (auto type, m_type->document()->nodeTypes()) {
+        if (type != m_type && type->id() == m_id->value()) {
+            valid = false;
+            break;
+        }
+    }
+    // set color
+    QPalette palette = m_id->palette();
+    if (valid) {
+        palette.setColor(QPalette::Text, Qt::black);
+        m_okButton->setEnabled(true);
+        m_okButton->setToolTip(i18nc("@info:tooltip", "The selected ID for this node type."));
+    } else {
+        palette.setColor(QPalette::Text, Qt::red);
+        m_okButton->setEnabled(false);
+        m_okButton->setToolTip(i18nc("@info:tooltip", "The selected ID is already used for another node type, please select a different one."));
+    }
+    m_id->setPalette(palette);
 }

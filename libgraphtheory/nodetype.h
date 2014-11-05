@@ -72,6 +72,11 @@ public:
     bool isValid() const;
 
     /**
+     * @return the GraphDocument that contains this node type
+     */
+    GraphDocumentPtr document() const;
+
+    /**
      * Set user visible name of node type to @p name.
      */
     void setName(const QString &name);
