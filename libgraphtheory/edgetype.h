@@ -76,6 +76,11 @@ public:
     bool isValid() const;
 
     /**
+     * @return the GraphDocument that contains this edge type
+     */
+    GraphDocumentPtr document() const;
+
+    /**
      * @return direction of edges of this type
      */
     EdgeType::Direction direction() const;

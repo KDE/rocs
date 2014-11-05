@@ -44,6 +44,7 @@ public:
 
 private Q_SLOTS:
     void apply();
+    void validateIdInput();
 
 private:
     QLineEdit *m_name;
@@ -51,6 +52,7 @@ private:
     KColorButton *m_color;
     QComboBox *m_direction;
     PropertiesWidget *m_properties;
+    QPushButton *m_okButton;
     EdgeTypePtr m_type;
 };
 }

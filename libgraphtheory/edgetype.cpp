@@ -82,6 +82,11 @@ EdgeTypePtr EdgeType::create(GraphDocumentPtr document)
     return pi;
 }
 
+bool EdgeType::isValid() const
+{
+    return d->m_valid;
+}
+
 void EdgeType::destroy()
 {
     d->m_valid = false;
@@ -89,6 +94,11 @@ void EdgeType::destroy()
 
     // reset last reference to this object
     d->q.reset();
+}
+
+GraphDocumentPtr EdgeType::document() const
+{
+    return d->m_document;
 }
 
 void EdgeType::setName(const QString& name)
@@ -131,11 +141,6 @@ void EdgeType::setColor(const QColor &color)
     }
     d->m_color = color;
     emit colorChanged(color);
-}
-
-bool EdgeType::isValid() const
-{
-    return d->m_valid;
 }
 
 QStringList EdgeType::dynamicProperties() const

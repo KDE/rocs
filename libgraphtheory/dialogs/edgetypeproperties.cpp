@@ -46,6 +46,7 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     , m_color(new KColorButton(this))
     , m_direction(new QComboBox(this))
     , m_properties(new PropertiesWidget(this))
+    , m_okButton(new QPushButton(this))
     , m_type(EdgeTypePtr())
 {
     setWindowTitle(i18nc("@title:window", "Edge Type Properties"));
@@ -69,21 +70,25 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     // dialog buttons
     QDialogButtonBox *buttons = new QDialogButtonBox(this);
 
-    QPushButton *okButton = new QPushButton;
-    KGuiItem::assign(okButton, KStandardGuiItem::ok());
-    okButton->setShortcut(Qt::Key_Return);
+    KGuiItem::assign(m_okButton, KStandardGuiItem::ok());
+    m_okButton->setShortcut(Qt::Key_Return);
 
     QPushButton *cancelButton = new QPushButton;
     KGuiItem::assign(cancelButton, KStandardGuiItem::cancel());
     cancelButton->setShortcut(Qt::Key_Escape);
 
-    buttons->addButton(okButton, QDialogButtonBox::AcceptRole);
+    buttons->addButton(m_okButton, QDialogButtonBox::AcceptRole);
     buttons->addButton(cancelButton, QDialogButtonBox::RejectRole);
     mainLayout->addWidget(buttons);
-    connect(okButton, &QPushButton::clicked, this, &EdgeTypeProperties::accept);
-    connect(cancelButton, &QPushButton::clicked, this, &EdgeTypeProperties::reject);
+    connect(m_okButton, &QPushButton::clicked,
+        this, &EdgeTypeProperties::accept);
+    connect(cancelButton, &QPushButton::clicked,
+        this, &EdgeTypeProperties::reject);
 
-    connect(this, &QDialog::accepted, this, &EdgeTypeProperties::apply);
+    connect(m_id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+        this, &EdgeTypeProperties::validateIdInput);
+    connect(this, &QDialog::accepted, this,
+        &EdgeTypeProperties::apply);
     setAttribute(Qt::WA_DeleteOnClose);
 }
 
@@ -99,12 +104,40 @@ void EdgeTypeProperties::setType(EdgeTypePtr type)
     m_color->setColor(type->color());
     m_direction->setCurrentIndex(m_direction->findData(type->direction()));
     m_properties->setType(type);
+
+    // set initial color and tooltip
+    validateIdInput();
 }
 
 void EdgeTypeProperties::apply()
 {
     m_type->setName(m_name->text());
-    m_type->setId(m_id->value()); // FIXME no check performed if ID is already in use!
+    // note: ID is valid since otherwise OK-button would be disabled
+    // no need to check here
+    m_type->setId(m_id->value());
     m_type->setColor(m_color->color());
     m_type->setDirection(static_cast<EdgeType::Direction>(m_direction->currentData().toInt()));
+}
+
+void EdgeTypeProperties::validateIdInput()
+{
+    int valid = true;
+    foreach (auto type, m_type->document()->edgeTypes()) {
+        if (type != m_type && type->id() == m_id->value()) {
+            valid = false;
+            break;
+        }
+    }
+    // set color
+    QPalette palette = m_id->palette();
+    if (valid) {
+        palette.setColor(QPalette::Text, Qt::black);
+        m_okButton->setEnabled(true);
+        m_okButton->setToolTip(i18nc("@info:tooltip", "The selected ID for this edge type."));
+    } else {
+        palette.setColor(QPalette::Text, Qt::red);
+        m_okButton->setEnabled(false);
+        m_okButton->setToolTip(i18nc("@info:tooltip", "The selected ID is already used for another edge type, please select a different one."));
+    }
+    m_id->setPalette(palette);
 }
