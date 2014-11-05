@@ -55,7 +55,8 @@ NodeTypeModel::NodeTypeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NodeTypeModelPrivate)
 {
-    connect(d->m_signalMapper, SIGNAL(mapped(int)), SLOT(emitNodeTypeChanged(int)));
+    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped),
+        this, &NodeTypeModel::emitNodeTypeChanged);
 }
 
 NodeTypeModel::~NodeTypeModel()
@@ -84,10 +85,14 @@ void NodeTypeModel::setDocument(GraphDocumentPtr document)
     }
     d->m_document = document;
     if (d->m_document) {
-        connect(d->m_document.data(), SIGNAL(nodeTypeAboutToBeAdded(NodeTypePtr,int)), SLOT(onNodeTypeAboutToBeAdded(NodeTypePtr,int)));
-        connect(d->m_document.data(), SIGNAL(nodeTypeAdded()), SLOT(onNodeTypeAdded()));
-        connect(d->m_document.data(), SIGNAL(nodeTypesAboutToBeRemoved(int,int)), SLOT(onNodeTypesAboutToBeRemoved(int,int)));
-        connect(d->m_document.data(), SIGNAL(nodeTypesRemoved()), SLOT(onNodeTypesRemoved()));
+        connect(d->m_document.data(), &GraphDocument::nodeTypeAboutToBeAdded,
+            this, &NodeTypeModel::onNodeTypeAboutToBeAdded);
+        connect(d->m_document.data(), &GraphDocument::nodeTypeAdded,
+            this, &NodeTypeModel::onNodeTypeAdded);
+        connect(d->m_document.data(), &GraphDocument::nodeTypesAboutToBeRemoved,
+            this, &NodeTypeModel::onNodeTypesAboutToBeRemoved);
+        connect(d->m_document.data(), &GraphDocument::nodeTypesRemoved,
+            this, &NodeTypeModel::onNodeTypesRemoved);
     }
     endResetModel();
 }
@@ -165,9 +170,12 @@ int NodeTypeModel::rowCount(const QModelIndex &parent) const
 void NodeTypeModel::onNodeTypeAboutToBeAdded(NodeTypePtr type, int index)
 {
     beginInsertRows(QModelIndex(), index, index);
-    connect(type.data(), SIGNAL(idChanged(int)), d->m_signalMapper, SLOT(map()));
-    connect(type.data(), SIGNAL(nameChanged(QString)), d->m_signalMapper, SLOT(map()));
-    connect(type.data(), SIGNAL(colorChanged(QColor)), d->m_signalMapper, SLOT(map()));
+    connect(type.data(), &NodeType::idChanged,
+        d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
+    connect(type.data(), &NodeType::nameChanged,
+        d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
+    connect(type.data(), &NodeType::colorChanged,
+        d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
 }
 
 void NodeTypeModel::onNodeTypeAdded()
