@@ -56,6 +56,7 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     QFormLayout *head = new QFormLayout(widget);
     head->addRow(i18n("Name"), m_name);
     head->addRow(i18n("Identifier"), m_id);
+    m_id->setMinimum(1);
     head->addRow(i18n("Color"), m_color);
     m_direction->addItem(QIcon::fromTheme("rocsunidirectional"), i18n("Unidirectional"), EdgeType::Unidirectional);
     m_direction->addItem(QIcon::fromTheme("rocsbidirectional"), i18n("Bidirectional"), EdgeType::Bidirectional);

@@ -55,6 +55,7 @@ NodeTypeProperties::NodeTypeProperties(QWidget *parent)
     QFormLayout *head = new QFormLayout(widget);
     head->addRow(i18n("Name"), m_name);
     head->addRow(i18n("Identifier"), m_id);
+    m_id->setMinimum(1);
     head->addRow(i18n("Color"), m_color);
     widget->setLayout(head);
 
