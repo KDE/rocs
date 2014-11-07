@@ -8,6 +8,7 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 Name=GML File Format
+Name[cs]=Formát souboru GML
 Name[de]=GML-Dateiformat
 Name[es]=Formato de archivo GML
 Name[nl]=GML-bestandsformaat

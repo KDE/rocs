@@ -8,6 +8,7 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 Name=TGF Graph File Format
+Name[cs]=Formát souborů grafů TGF
 Name[de]=TGF-Graphendateiformat
 Name[es]=Formato de archivo de grafos TGF
 Name[nl]=Bestandsformaat voor TGF Graph

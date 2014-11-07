@@ -8,6 +8,7 @@ X-KDE-PluginInfo-Version=0.2
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 Name=Assign Values Plugin
+Name[cs]=Modul pro přiřazování hodnot
 Name[de]=Wertzuweisungs-Modul
 Name[es]=Complemento para asignar valores
 Name[nl]=Plug-in voor waarden toekennen

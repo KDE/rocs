@@ -8,6 +8,7 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 Name=DOT Graph File Format
+Name[cs]=Formát souborů grafů DOT
 Name[de]=DOT-Graphendateiformat
 Name[es]=Formato de archivo de grafos DOT
 Name[nl]=Bestandsformaat voor DOT Graph
