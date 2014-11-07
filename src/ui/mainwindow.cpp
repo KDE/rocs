@@ -412,8 +412,10 @@ void MainWindow::saveProject()
     if (m_currentProject->projectUrl().isEmpty()) {
         saveProjectAs();
         return;
+    } else {
+        m_currentProject->projectSave();
+        m_recentProjects->addUrl(m_currentProject->projectUrl());
     }
-    m_currentProject->projectSave();
     updateCaption();
 }
 
@@ -468,8 +470,9 @@ void MainWindow::openProject(const QUrl &fileName)
 
     Project *project = new Project(file, m_graphEditor);
     setProject(project);
-
     m_recentProjects->addUrl(file);
+    updateCaption();
+
     Settings::setLastOpenedDirectory(file.path());
 }
 
