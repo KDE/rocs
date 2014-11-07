@@ -459,4 +459,32 @@ void TestKernel::neighborships()
     document->destroy();
 }
 
+void TestKernel::automaticScriptObjectPropertyGeneration()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    EdgePtr edge = Edge::create(nodeA, nodeB);
+
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    // For edges/nodes we can assign arbitrary dynamic properties during
+    // script exection. However, they exist only during execution and are removed
+    // at the end of the execution.
+    script = "Document.nodes()[0].nonRegProp=1; Document.nodes()[0].nonRegProp;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), 1);
+    QCOMPARE(nodeA->dynamicProperty("nonRegProp").toInt(), 0);
+
+    script = "Document.edges()[0].nonRegProp=1; Document.edges()[0].nonRegProp;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toString().toInt(), 1);
+    QCOMPARE(edge->dynamicProperty("nonRegProp").toInt(), 0);
+
+    // cleanup
+    document->destroy();
+}
+
 QTEST_MAIN(TestKernel)

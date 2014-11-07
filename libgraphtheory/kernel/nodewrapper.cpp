@@ -267,7 +267,10 @@ bool NodeWrapper::event(QEvent *e)
         QDynamicPropertyChangeEvent *propertyEvent = static_cast<QDynamicPropertyChangeEvent *>(e);
         QString name = QString::fromUtf8(propertyEvent->propertyName());
         QVariant value = property(propertyEvent->propertyName());
-        m_node->setDynamicProperty(name, value);
+        // only propagate property to node object if it is registered
+        if (m_node->dynamicProperties().contains(name)) {
+            m_node->setDynamicProperty(name, value);
+        }
     }
     return true;
 }

@@ -84,12 +84,15 @@ EdgeWrapper * DocumentWrapper::edgeWrapper(EdgePtr edge) const
 
 QScriptValue DocumentWrapper::nodes() const
 {
-    QScriptValue array = m_engine->newArray();
-    QList<NodeWrapper*> nodeWrappers;
-    foreach(NodePtr node, m_document->nodes()) {
-        nodeWrappers.append(nodeWrapper(node));
+    NodeList nodes = m_document->nodes();
+    QScriptValue array = m_engine->newArray(nodes.length());
+    for (int i = 0; i < nodes.length(); ++i) {
+        QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)),
+                                                            QScriptEngine::AutoOwnership,
+                                                            QScriptEngine::AutoCreateDynamicProperties);
+        array.setProperty(i, nodeScriptValue);
     }
-    return m_engine->toScriptValue(nodeWrappers);
+    return array;
 }
 
 QScriptValue DocumentWrapper::nodes(int type) const
@@ -106,22 +109,28 @@ QScriptValue DocumentWrapper::nodes(int type) const
         // TODO present error message in UI
         return m_engine->newArray();
     }
-    QScriptValue array = m_engine->newArray();
-    QList<NodeWrapper*> nodeWrappers;
-    foreach(NodePtr node, m_document->nodes(typePtr)) {
-        nodeWrappers.append(nodeWrapper(node));
+    NodeList nodes = m_document->nodes(typePtr);
+    QScriptValue array = m_engine->newArray(nodes.length());
+    for (int i = 0; i < nodes.length(); ++i) {
+        QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)),
+                                                            QScriptEngine::AutoOwnership,
+                                                            QScriptEngine::AutoCreateDynamicProperties);
+        array.setProperty(i, nodeScriptValue);
     }
-    return m_engine->toScriptValue(nodeWrappers);
+    return array;
 }
 
 QScriptValue DocumentWrapper::edges() const
 {
-    QScriptValue array = m_engine->newArray();
-    QList<EdgeWrapper*> edgeWrappers;
-    foreach(EdgePtr edge, m_document->edges()) {
-        edgeWrappers.append(edgeWrapper(edge));
+    EdgeList edges = m_document->edges();
+    QScriptValue array = m_engine->newArray(edges.length());
+    for (int i = 0; i < edges.length(); ++i) {
+        QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)),
+                                                            QScriptEngine::AutoOwnership,
+                                                            QScriptEngine::AutoCreateDynamicProperties);
+        array.setProperty(i, edgeScriptValue);
     }
-    return m_engine->toScriptValue(edgeWrappers);
+    return array;
 }
 
 QScriptValue DocumentWrapper::edges(int type) const
@@ -138,10 +147,13 @@ QScriptValue DocumentWrapper::edges(int type) const
         // TODO present error message in UI
         return m_engine->newArray();
     }
-    QScriptValue array = m_engine->newArray();
-    QList<EdgeWrapper*> edgeWrappers;
-    foreach(EdgePtr edge, m_document->edges(typePtr)) {
-        edgeWrappers.append(edgeWrapper(edge));
+    EdgeList edges = m_document->edges(typePtr);
+    QScriptValue array = m_engine->newArray(edges.length());
+    for (int i = 0; i < edges.length(); ++i) {
+        QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)),
+                                                            QScriptEngine::AutoOwnership,
+                                                            QScriptEngine::AutoCreateDynamicProperties);
+        array.setProperty(i, edgeScriptValue);
     }
-    return m_engine->toScriptValue(edgeWrappers);
+    return array;
 }

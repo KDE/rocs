@@ -94,7 +94,10 @@ bool EdgeWrapper::event(QEvent *e)
         QDynamicPropertyChangeEvent *propertyEvent = static_cast<QDynamicPropertyChangeEvent *>(e);
         QString name = QString::fromUtf8(propertyEvent->propertyName());
         QVariant value = property(propertyEvent->propertyName());
-        m_edge->setDynamicProperty(name, value);
+        // only propagate property to edge object if it is registered
+        if (m_edge->dynamicProperties().contains(name)) {
+            m_edge->setDynamicProperty(name, value);
+        }
     }
     return true;
 }
