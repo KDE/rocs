@@ -77,10 +77,12 @@ void NodeItem::setNode(Node *node)
     setGlobalPosition(QPointF(node->x(), node->y()));
     connect(node, &Node::positionChanged,
         this, &NodeItem::setGlobalPosition);
-    connect(node, SIGNAL(typeColorChanged(QColor)),
-        this, SLOT(update()));
-    connect(node, SIGNAL(colorChanged(QColor)),
-        this, SLOT(update()));
+    connect(node, &Node::typeColorChanged,
+        this, [&] (QColor) { update(); });
+    connect(node, &Node::colorChanged,
+        this, [&] (QColor) { update(); });
+    connect(node, &Node::typeChanged,
+        this, [&] (NodeTypePtr) { update(); });
     connect(this, &NodeItem::xChanged,
         this, &NodeItem::updatePositionfromScene);
     connect(this, &NodeItem::yChanged,

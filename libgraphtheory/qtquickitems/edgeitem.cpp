@@ -78,10 +78,16 @@ void EdgeItem::setEdge(Edge *edge)
         edge->disconnect(this);
     }
     d->m_edge = edge;
-    connect(edge->from().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
-    connect(edge->to().data(), &Node::positionChanged, this, &EdgeItem::updatePosition);
-    connect(edge, &Edge::typeColorChanged, this, &EdgeItem::updateColor);
-    connect(edge, &Edge::directionChanged, this, &EdgeItem::updateDirection);
+    connect(edge->from().data(), &Node::positionChanged,
+        this, &EdgeItem::updatePosition);
+    connect(edge->to().data(), &Node::positionChanged,
+        this, &EdgeItem::updatePosition);
+    connect(edge, &Edge::typeChanged,
+        this, [&](EdgeTypePtr) { update(); });
+    connect(edge, &Edge::typeColorChanged,
+        this, &EdgeItem::updateColor);
+    connect(edge, &Edge::directionChanged,
+        this, &EdgeItem::updateDirection);
 
     updatePosition();
     emit edgeChanged();
