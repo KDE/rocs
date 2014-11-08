@@ -92,6 +92,8 @@ QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
     // add document
     DocumentWrapper documentWrapper(document, d->m_engine);
     d->m_engine->globalObject().setProperty("Document", d->m_engine->newQObject(&documentWrapper));
+    connect(&documentWrapper, &DocumentWrapper::message,
+        this, &Kernel::processMessage);
 
     // set modules
     d->m_engine->globalObject().setProperty("Console", d->m_engine->newQObject(&d->m_consoleModule));
@@ -109,6 +111,10 @@ QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
         emit message(result.toString(), InfoMessage);
         d->m_engine->popContext();
     }
+    // end processing messages
+    disconnect(&documentWrapper, &DocumentWrapper::message,
+        this, &Kernel::processMessage);
+
     emit executionFinished();
 
     return result;
@@ -119,10 +125,9 @@ void Kernel::stop()
     d->m_engine->abortEvaluation();
 }
 
-void Kernel::processMessage(const QString& messageString, Kernel::MessageType type)
+void Kernel::processMessage(const QString &messageString, Kernel::MessageType type)
 {
     emit message(messageString, type);
 }
 
 //END: Kernel
-

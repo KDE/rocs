@@ -22,6 +22,7 @@
 #define DOCUMENTWRAPPER_H
 
 #include "libgraphtheoryexport.h"
+#include "kernel.h"
 #include "typenames.h"
 #include "node.h"
 #include "edge.h"
@@ -65,6 +66,7 @@ public:
     Q_INVOKABLE QScriptValue edges(int type) const;
 
 Q_SIGNALS:
+    void message(const QString &messageString, Kernel::MessageType type) const;
 
 private Q_SLOTS:
     void registerWrapper(NodePtr node);

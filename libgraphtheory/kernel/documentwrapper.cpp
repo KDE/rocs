@@ -24,7 +24,7 @@
 #include "graphdocument.h"
 #include "nodetype.h"
 #include "edge.h"
-
+#include <KLocalizedString>
 #include <QDebug>
 
 using namespace GraphTheory;
@@ -105,8 +105,8 @@ QScriptValue DocumentWrapper::nodes(int type) const
         }
     }
     if (!typePtr) {
-        qCritical() << "Node type with ID" << type << "is not registered at document.";
-        // TODO present error message in UI
+        QString command = QString("Document.nodes(%1)").arg(type);
+        emit message(i18nc("@info:shell", "%1: node type ID %2 not registered", command, type), Kernel::ErrorMessage);
         return m_engine->newArray();
     }
     NodeList nodes = m_document->nodes(typePtr);
@@ -143,8 +143,8 @@ QScriptValue DocumentWrapper::edges(int type) const
         }
     }
     if (!typePtr) {
-        qCritical() << "Edge type with ID" << type << "is not registered at document.";
-        // TODO present error message in UI
+        QString command = QString("Document.edges(%1)").arg(type);
+        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
         return m_engine->newArray();
     }
     EdgeList edges = m_document->edges(typePtr);
