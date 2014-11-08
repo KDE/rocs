@@ -22,6 +22,7 @@
 #define EDGEWRAPPER_H
 
 #include "libgraphtheoryexport.h"
+#include "kernel.h"
 #include "typenames.h"
 #include "node.h"
 #include "graphdocument.h"
@@ -73,6 +74,7 @@ public Q_SLOTS:
     void updateDynamicProperties();
 
 Q_SIGNALS:
+    void message(const QString &messageString, Kernel::MessageType type) const;
     void colorChanged(const QColor &color);
     void typeChanged();
 

@@ -24,7 +24,7 @@
 #include "nodetype.h"
 #include "edge.h"
 #include "typenames.h"
-
+#include <KLocalizedString>
 #include <QPointF>
 #include <QColor>
 #include <QDebug>
@@ -115,7 +115,8 @@ void NodeWrapper::setType(int typeId)
         }
     }
     if (newType == m_node->type()) {
-        qWarning() << "No type with ID" << typeId << "found, aborting type change.";
+        QString command = QString("node.type = %1)").arg(typeId);
+        emit message(i18nc("@info:shell", "%1: node type ID %2 not registered", command, typeId), Kernel::ErrorMessage);
         return;
     }
     m_node->setType(newType);
@@ -141,8 +142,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::edges(int type) const
         }
     }
     if (!typePtr) {
-        qCritical() << "Edge type with ID" << type << "is not registered at document.";
-        // TODO present error message in UI
+        QString command = QString("node.edges(%1)").arg(type);
+        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
         return QList<EdgeWrapper*>();
     }
     QList<EdgeWrapper*> edges;
@@ -170,9 +171,9 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::inEdges(int type) const
             break;
         }
     }
-    if (!typePtr) {
-        qCritical() << "Edge type with ID" << type << "is not registered at document.";
-        // TODO present error message in UI
+    if (!typePtr) {;
+        QString command = QString("node.inEdges(%1)").arg(type);
+        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
         return QList<EdgeWrapper*>();
     }
     QList<EdgeWrapper*> edges;
@@ -201,8 +202,8 @@ QList<GraphTheory::EdgeWrapper*> NodeWrapper::outEdges(int type) const
         }
     }
     if (!typePtr) {
-        qCritical() << "Edge type with ID" << type << "is not registered at document.";
-        // TODO present error message in UI
+        QString command = QString("node.outEdges(%1)").arg(type);
+        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
         return QList<EdgeWrapper*>();
     }
     QList<EdgeWrapper*> edges;

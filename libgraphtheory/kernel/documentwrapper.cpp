@@ -57,6 +57,8 @@ void DocumentWrapper::registerWrapper(NodePtr node)
     }
     NodeWrapper *wrapper = new NodeWrapper(node, this);
     m_nodeMap.insert(node, wrapper);
+    connect(wrapper, &NodeWrapper::message,
+        this, &DocumentWrapper::message);
     return;
 }
 
@@ -67,6 +69,8 @@ void DocumentWrapper::registerWrapper(EdgePtr edge)
     }
     EdgeWrapper *wrapper = new EdgeWrapper(edge, this);
     m_edgeMap.insert(edge, wrapper);
+    connect(wrapper, &EdgeWrapper::message,
+        this, &DocumentWrapper::message);
     return;
 }
 
