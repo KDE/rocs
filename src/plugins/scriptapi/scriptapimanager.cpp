@@ -28,16 +28,18 @@
 #include <grantlee/metatype.h>
 #include <grantlee/templateloader.h>
 
-#include <QIODevice>
+#include <KLocalizedString>
+#include <QDebug>
+#include <QDir>
+#include <QDomDocument>
 #include <QFile>
+#include <QIODevice>
 #include <QPointer>
+#include <QStandardPaths>
+#include <QString>
+#include <QUrl>
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
-#include <QDomDocument>
-#include <QStandardPaths>
-#include <QDebug>
-#include <QUrl>
-#include <KLocalizedString>
 
 ScriptApiManager::ScriptApiManager(QObject *parent)
     : QObject(parent)
@@ -46,9 +48,16 @@ ScriptApiManager::ScriptApiManager(QObject *parent)
 
 void ScriptApiManager::loadLocalData()
 {
-    QStringList apiDocFiles = QStandardPaths::locateAll(QStandardPaths::DataLocation, QString("engineapi/*.xml"));
-    foreach (const QString &file, apiDocFiles) {
-        loadObjectApi(QUrl::fromLocalFile(file));
+    // locate directory
+    const QString dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("rocs/engineapi"), QStandardPaths::LocateDirectory);
+    if (dir.isEmpty()) {
+        qCritical() << "Could not locate \"rocs/engineapi\" directory, abort loading script API documentation.";
+        return;
+    }
+
+    const QStringList files = QDir(dir).entryList(QStringList() << QStringLiteral("*.xml"));
+    Q_FOREACH (const QString &file, files) {
+        loadObjectApi(QUrl::fromLocalFile(dir + '/' + file));
     }
 }
 
@@ -161,7 +170,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
         return false;
     }
 
-    QXmlSchema schema = loadXmlSchema("engineApi");
+    QXmlSchema schema = loadXmlSchema("engineapi");
     if (!schema.isValid()) {
         return false;
     }
@@ -309,10 +318,10 @@ QString ScriptApiManager::apiOverviewDocument() const
 
 QXmlSchema ScriptApiManager::loadXmlSchema(const QString &schemeName) const
 {
-    QString relPath = QString("schemes/%1.xsd").arg(schemeName);
-    QUrl file = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::DataLocation, relPath));
+    QString relPath = QString("rocs/schemes/%1.xsd").arg(schemeName);
+    QUrl file = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, relPath));
     QXmlSchema schema;
-    if (schema.load(file) == false) {
+    if (file.isEmpty() || schema.load(file) == false) {
         qWarning() << "Schema at file " << file.toLocalFile() << " is invalid.";
     }
     return schema;

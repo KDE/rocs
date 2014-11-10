@@ -1,0 +1,71 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="object">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string" />
+        <xs:element name="id" type="xs:string" />
+        <xs:element name="componentType" type="xs:string" />
+        <xs:element name="description" type="description" />
+        <xs:element name="syntax" type="xs:string" />
+        <xs:element name="properties" type="propertyList" />
+        <xs:element name="methods" type="methodList" />
+      </xs:sequence>
+      <xs:attribute name="inherit" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="description">
+    <xs:sequence>
+      <xs:element name="para" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="propertyList">
+    <xs:sequence>
+      <xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="property">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="description" type="description" />
+      <xs:element name="type" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="methodList">
+    <xs:sequence>
+      <xs:element name="method" type="method" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="method">
+    <xs:sequence>
+        <xs:element name="name" type="xs:string" />
+        <xs:element name="description" type="description" />
+        <xs:element name="returnType" type="xs:string" />
+        <xs:element name="parameters" type="parameterList" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="parameterList">
+    <xs:sequence>
+      <xs:element name="parameter" type="parameter" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="parameter">
+    <xs:sequence>
+        <xs:element name="name" type="xs:string" />
+        <xs:element name="type" type="xs:string" />
+        <xs:element name="info" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+<!--
+kate: space-indent on; indent-width 2; mixedindent off; indent-mode xml;
+-->
+
+</xs:schema>

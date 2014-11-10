@@ -101,6 +101,9 @@ set_target_properties(
         SOVERSION ${GENERIC_LIB_SOVERSION}
 )
 
+# scripting API files
+install(FILES kernel/modules/console/console.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/engineapi)
+
 install(TARGETS rocsgraphtheory  ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel)
 
