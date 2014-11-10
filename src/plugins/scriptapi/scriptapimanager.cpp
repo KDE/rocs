@@ -52,24 +52,24 @@ void ScriptApiManager::loadLocalData()
 
 QList<Object*> ScriptApiManager::objectApiList() const
 {
-    return _objectApiList;
+    return m_objectApiList;
 }
 
 Object * ScriptApiManager::objectApi(int index) const
 {
-    Q_ASSERT (index >= 0 && index < _objectApiList.count());
-    return _objectApiList.at(index);
+    Q_ASSERT (index >= 0 && index < m_objectApiList.count());
+    return m_objectApiList.at(index);
 }
 
 QString ScriptApiManager::objectApiDocument(const QString &identifier)
 {
-    if (_objectApiDocuments.contains(identifier)) {
-        return _objectApiDocuments.value(identifier);
+    if (m_objectApiDocuments.contains(identifier)) {
+        return m_objectApiDocuments.value(identifier);
     }
 
     // get object API object
     Object *objectApi = 0;
-    foreach (Object *obj, _objectApiList) {
+    foreach (Object *obj, m_objectApiList) {
         if (obj->id() == identifier) {
             objectApi = obj;
             break;
@@ -95,7 +95,7 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     // if parent object exists, find it
     Object *parentObjectApi = 0;
     if (!objectApi->objectParent().isEmpty()) {
-        foreach (Object *obj, _objectApiList) {
+        foreach (Object *obj, m_objectApiList) {
             if (obj->id() == objectApi->objectParent()) {
                 parentObjectApi = obj;
                 break;
@@ -147,9 +147,9 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     Grantlee::Context c(mapping);
 
     // create and cache HTML file
-    _objectApiDocuments.insert(objectApi->id(), t->render(&c));
+    m_objectApiDocuments.insert(objectApi->id(), t->render(&c));
 
-    return _objectApiDocuments.value(identifier);
+    return m_objectApiDocuments.value(identifier);
 }
 
 bool ScriptApiManager::loadObjectApi(const QUrl &path)
@@ -174,12 +174,12 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
 
     // this addition must be performed for every object before any HTML documentation page
     // is created
-    _objectApiCache.append(root.firstChildElement("id").text());
+    m_objectApiCache.append(root.firstChildElement("id").text());
 
     // create object documentation
     Object *objectApi = new Object(this);
-    _objectApiList.append(objectApi);
-    emit objectApiAboutToBeAdded(objectApi, _objectApiList.count() - 1);
+    m_objectApiList.append(objectApi);
+    emit objectApiAboutToBeAdded(objectApi, m_objectApiList.count() - 1);
 
     objectApi->setTitle(root.firstChildElement("name").text());
     objectApi->setId(root.firstChildElement("id").text());
@@ -212,7 +212,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
             paragraphs.append(i18nc("Scripting API Description", descriptionNode.text().toUtf8()));
         }
         property->setDescription(paragraphs);
-        if (_objectApiCache.contains(property->type())) {
+        if (m_objectApiCache.contains(property->type())) {
             property->setTypeLink(property->type());
         }
 
@@ -227,7 +227,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
         Method *method = new Method(objectApi);
         method->setName(methodNode.firstChildElement("name").text());
         method->setReturnType(methodNode.firstChildElement("returnType").text());
-        if (_objectApiCache.contains(method->returnType())) {
+        if (m_objectApiCache.contains(method->returnType())) {
             method->setReturnTypeLink(method->returnType());
         }
 
@@ -245,7 +245,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
             parameterNode = parameterNode.nextSiblingElement())
         {
             QString typeLink;
-            if (_objectApiCache.contains(parameterNode.firstChildElement("type").text())) {
+            if (m_objectApiCache.contains(parameterNode.firstChildElement("type").text())) {
                 typeLink = parameterNode.firstChildElement("type").text();
             }
             method->addParameter(
@@ -279,7 +279,7 @@ QString ScriptApiManager::apiOverviewDocument() const
     // objects
     QVariantList engineComponentList;
     QVariantList dataStructureComopnentList;
-    foreach (Object *object, _objectApiList) {
+    foreach (Object *object, m_objectApiList) {
         switch (object->componentType()) {
         case Object::EngineComponent:
             engineComponentList.append(QVariant::fromValue<QObject*>(object));

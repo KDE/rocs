@@ -66,14 +66,14 @@ public:
 
 private:
     Q_DISABLE_COPY(Object)
-    QString _title;
-    QString _id;
-    ComponentType _componentType;
-    QString _objectParent;
-    QStringList _description;
-    QString _syntaxExample;
-    QList<Property*> _properties;
-    QList<Method*> _methods;
+    QString m_title;
+    QString m_id;
+    ComponentType m_componentType;
+    QString m_objectParent;
+    QStringList m_description;
+    QString m_syntaxExample;
+    QList<Property*> m_properties;
+    QList<Method*> m_methods;
 };
 
 #endif

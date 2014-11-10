@@ -27,23 +27,23 @@ Property::Property(QObject* parent)
 
 void Property::setName(const QString &name)
 {
-    _name = name;
+    m_name = name;
 }
 
 QString Property::name() const
 {
-    return _name;
+    return m_name;
 }
 
 void Property::setDescription(const QStringList &description)
 {
-    _description = description;
+    m_description = description;
 }
 
 QVariantList Property::description() const
 {
     QVariantList list;
-    foreach (QString paragraph, _description) {
+    foreach (QString paragraph, m_description) {
         list.append(paragraph);
     }
     return list;
@@ -51,25 +51,25 @@ QVariantList Property::description() const
 
 void Property::setType(const QString &type)
 {
-    _type = type;
+    m_type = type;
 }
 
 QString Property::type() const
 {
-    return _type;
+    return m_type;
 }
 
 void Property::setTypeLink(const QString& link)
 {
-    _typeLink = link;
+    m_typeLink = link;
 }
 
 QString Property::typeLink() const
 {
-    return _typeLink;
+    return m_typeLink;
 }
 
 QString Property::apiDocumentAnchor()
 {
-    return QString("property").append(_name);
+    return QString("property").append(m_name);
 }

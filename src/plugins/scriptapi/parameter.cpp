@@ -26,40 +26,40 @@ Parameter::Parameter(QObject* parent)
 
 QString Parameter::name() const
 {
-    return _name;
+    return m_name;
 }
 
 void Parameter::setName(const QString &name)
 {
-    _name = name;
+    m_name = name;
 }
 
 QString Parameter::info() const
 {
-    return _info;
+    return m_info;
 }
 
 void Parameter::setInfo(const QString &info)
 {
-    _info = info;
+    m_info = info;
 }
 
 QString Parameter::type() const
 {
-    return _type;
+    return m_type;
 }
 
 void Parameter::setType(const QString &type)
 {
-    _type = type;
+    m_type = type;
 }
 
 void Parameter::setTypeLink(const QString& link)
 {
-    _typeLink = link;
+    m_typeLink = link;
 }
 
 QString Parameter::typeLink() const
 {
-    return _typeLink;
+    return m_typeLink;
 }

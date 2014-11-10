@@ -54,11 +54,11 @@ public:
 
 private:
     Q_DISABLE_COPY(Method)
-    QString _name;
-    QStringList _description;
-    QString _returnType;
-    QString _returnTypeLink;
-    QList<Parameter*> _parameters;
+    QString m_name;
+    QStringList m_description;
+    QString m_returnType;
+    QString m_returnTypeLink;
+    QList<Parameter*> m_parameters;
 };
 
 // Q_DECLARE_METATYPE(QList<ParameterDocumentation*>);

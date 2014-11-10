@@ -103,9 +103,9 @@ private:
      */
     QDomDocument loadDomDocument(const QUrl &path, const QXmlSchema &schema) const;
 
-    QList<Object*> _objectApiList;
-    QHash<QString, QString> _objectApiDocuments;
-    QList<QString> _objectApiCache; // list of all objects available
+    QList<Object*> m_objectApiList;
+    QHash<QString, QString> m_objectApiDocuments;
+    QList<QString> m_objectApiCache; // list of all objects available
 };
 
 #endif

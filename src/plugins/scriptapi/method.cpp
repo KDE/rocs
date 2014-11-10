@@ -27,23 +27,23 @@ Method::Method(QObject* parent)
 
 void Method::setName(const QString &name)
 {
-    _name = name;
+    m_name = name;
 }
 
 QString Method::name() const
 {
-    return _name;
+    return m_name;
 }
 
 void Method::setDescription(const QStringList &description)
 {
-    _description = description;
+    m_description = description;
 }
 
 QVariantList Method::description() const
 {
     QVariantList list;
-    foreach (QString paragraph, _description) {
+    foreach (QString paragraph, m_description) {
         list << paragraph;
     }
     return list;
@@ -51,12 +51,12 @@ QVariantList Method::description() const
 
 void Method::setReturnType(const QString& type)
 {
-    _returnType = type;
+    m_returnType = type;
 }
 
 QString Method::returnType() const
 {
-    return _returnType;
+    return m_returnType;
 }
 
 void Method::addParameter(const QString& name, const QString& type, const QString& info, const QString &typeLink = QString())
@@ -66,31 +66,30 @@ void Method::addParameter(const QString& name, const QString& type, const QStrin
     parameter->setType(type);
     parameter->setInfo(info);
     parameter->setTypeLink(typeLink);
-    _parameters.append(parameter);
+    m_parameters.append(parameter);
 }
 
 QVariant Method::parametersVar() const
 {
-    return QVariant::fromValue(_parameters);
+    return QVariant::fromValue(m_parameters);
 }
 
 QList<Parameter*> Method::parameters() const
 {
-    return _parameters;
+    return m_parameters;
 }
 
 QString Method::apiDocumentAnchor()
 {
-    return QString("method").append(_name);
+    return QString("method").append(m_name);
 }
 
 void Method::setReturnTypeLink(const QString& link)
 {
-    _returnTypeLink = link;
+    m_returnTypeLink = link;
 }
 
 QString Method::returnTypeLink() const
 {
-    return _returnTypeLink;
+    return m_returnTypeLink;
 }
-

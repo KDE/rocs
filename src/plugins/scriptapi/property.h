@@ -50,10 +50,10 @@ public:
 
 private:
     Q_DISABLE_COPY(Property)
-    QString _name;
-    QStringList _description;
-    QString _type;
-    QString _typeLink;
+    QString m_name;
+    QStringList m_description;
+    QString m_type;
+    QString m_typeLink;
 };
 
 #endif

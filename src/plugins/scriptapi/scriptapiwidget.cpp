@@ -28,10 +28,10 @@
 
 ScriptApiWidget::ScriptApiWidget(QWidget* parent)
     : QWidget(parent)
-    , _manager(new ScriptApiManager(this))
-    , _historyPointer(-1)
+    , m_manager(new ScriptApiManager(this))
+    , m_historyPointer(-1)
 {
-    _baseUrl = QUrl::fromLocalFile(
+    m_baseUrl = QUrl::fromLocalFile(
         QStandardPaths::locate(QStandardPaths::DataLocation, "plugin/apidoc/objectApi.html", QStandardPaths::LocateDirectory));
 
     ui = new Ui::ScriptApiWidget;
@@ -44,8 +44,8 @@ ScriptApiWidget::ScriptApiWidget(QWidget* parent)
     ui->buttonPrev->setEnabled(false);
     ui->buttonNext->setEnabled(false);
 
-    _manager->loadLocalData();
-    _model = new ScriptApiModel(_manager->objectApiList(), this);
+    m_manager->loadLocalData();
+    m_model = new ScriptApiModel(m_manager->objectApiList(), this);
 
     connect(ui->buttonTree, SIGNAL(clicked(bool)), this, SLOT(showTreeOutline()));
     connect(ui->buttonHome, SIGNAL(clicked(bool)), this, SLOT(showHtmlOutline()));
@@ -62,7 +62,7 @@ ScriptApiWidget::ScriptApiWidget(QWidget* parent)
     // drawback: history only works for object pages, not for anchors
     ui->docDetails->page()->setLinkDelegationPolicy(QWebPage::DelegateExternalLinks);
 
-    ui->docTree->setModel(_model);
+    ui->docTree->setModel(m_model);
 }
 
 void ScriptApiWidget::showTreeOutline()
@@ -77,7 +77,7 @@ void ScriptApiWidget::showHtmlOutline()
 
 void ScriptApiWidget::showHtmlOutline(bool logHistory)
 {
-    ui->docDetails->setHtml(_manager->apiOverviewDocument(), _baseUrl);
+    ui->docDetails->setHtml(m_manager->apiOverviewDocument(), m_baseUrl);
     ui->pageStack->setCurrentIndex(1);
 
     if (!logHistory) {
@@ -85,46 +85,46 @@ void ScriptApiWidget::showHtmlOutline(bool logHistory)
     }
 
     // clear forward history
-    if (_historyPointer < _history.count() - 1) {
-        while (_historyPointer < _history.count() - 1) {
-            _history.removeAt(_history.count() - 1);
+    if (m_historyPointer < m_history.count() - 1) {
+        while (m_historyPointer < m_history.count() - 1) {
+            m_history.removeAt(m_history.count() - 1);
         }
         ui->buttonNext->setEnabled(false);
     }
 
-    ++_historyPointer;
-    _history.append("_outline"); // use this identifier for the script api html outline
-    if (_historyPointer > 0) {
+    ++m_historyPointer;
+    m_history.append("m_outline"); // use this identifier for the script api html outline
+    if (m_historyPointer > 0) {
         ui->buttonPrev->setEnabled(true);
     }
 }
 
 void ScriptApiWidget::showDetails(const QModelIndex &index)
 {
-    showObjectApi(_model->data(index, ScriptApiModel::DocumentRole).toString(), true);
+    showObjectApi(m_model->data(index, ScriptApiModel::DocumentRole).toString(), true);
     ui->pageStack->setCurrentIndex(1);
 
     // TODO jump to anchor
-    // _model->data(index, ApiDocModel::AnchorRole).toString();
+    // m_model->data(index, ApiDocModel::AnchorRole).toString();
 }
 
 void ScriptApiWidget::showObjectApi(const QString &id, bool logHistory=true)
 {
-    QString htmlDocument = _manager->objectApiDocument(id);
-    ui->docDetails->setHtml(htmlDocument, _baseUrl);
+    QString htmlDocument = m_manager->objectApiDocument(id);
+    ui->docDetails->setHtml(htmlDocument, m_baseUrl);
     ui->pageStack->setCurrentIndex(1);
 
     if (logHistory) {
         // update history
-        if (_historyPointer < _history.count() - 1) {
-            while (_historyPointer < _history.count() -1) {
-                _history.removeAt(_history.count() - 1);
+        if (m_historyPointer < m_history.count() - 1) {
+            while (m_historyPointer < m_history.count() -1) {
+                m_history.removeAt(m_history.count() - 1);
             }
             ui->buttonNext->setEnabled(false);
         }
-        _history.append(id);
-        ++_historyPointer;
-        if (_historyPointer > 0) {
+        m_history.append(id);
+        ++m_historyPointer;
+        if (m_historyPointer > 0) {
             ui->buttonPrev->setEnabled(true);
         }
     }
@@ -153,39 +153,39 @@ void ScriptApiWidget::showObjectApi(const QUrl &aliasPage)
 
 void ScriptApiWidget::historyGoBack()
 {
-    if (_historyPointer <= 0) {
+    if (m_historyPointer <= 0) {
         qCritical() << "Cannot go back in history, none exist";
         return;
     }
-    --_historyPointer;
-    if (_history.at(_historyPointer) == "_outline") {
+    --m_historyPointer;
+    if (m_history.at(m_historyPointer) == "m_outline") {
         showHtmlOutline(false);
     } else {
-        showObjectApi(_history.at(_historyPointer), false);
+        showObjectApi(m_history.at(m_historyPointer), false);
     }
 
     // set buttons
     ui->buttonNext->setEnabled(true);
-    if (_historyPointer <= 0) {
+    if (m_historyPointer <= 0) {
         ui->buttonPrev->setEnabled(false);
     }
 }
 
 void ScriptApiWidget::historyGoForward()
 {
-    if (_historyPointer >= _history.length() - 1) {
+    if (m_historyPointer >= m_history.length() - 1) {
         qCritical() << "Cannot go forward in history, none exist";
         return;
     }
-    ++_historyPointer;
-    if (_history.at(_historyPointer) == "_outline") {
+    ++m_historyPointer;
+    if (m_history.at(m_historyPointer) == "m_outline") {
         showHtmlOutline(false);
     } else {
-        showObjectApi(_history.at(_historyPointer), false);
+        showObjectApi(m_history.at(m_historyPointer), false);
     }
     // set buttons
     ui->buttonPrev->setEnabled(true);
-    if (_historyPointer >= _history.count() - 1) {
+    if (m_historyPointer >= m_history.count() - 1) {
         ui->buttonNext->setEnabled(false);
     }
 }

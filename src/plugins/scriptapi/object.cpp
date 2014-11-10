@@ -31,62 +31,62 @@ Object::~Object()
 
 void Object::setId(const QString &id)
 {
-    _id = id;
+    m_id = id;
 }
 
 QString Object::id() const
 {
-    return _id;
+    return m_id;
 }
 
 void Object::setComponentType(const QString& compenentTypeName)
 {
     if (compenentTypeName == "DataStructure") {
-        _componentType = DataStructure;
+        m_componentType = DataStructure;
         return;
     }
     if (compenentTypeName == "Data") {
-        _componentType = Data;
+        m_componentType = Data;
         return;
     }
     if (compenentTypeName == "Pointer") {
-        _componentType = Pointer;
+        m_componentType = Pointer;
         return;
     }
     if (compenentTypeName == "EngineComponent") {
-        _componentType = EngineComponent;
+        m_componentType = EngineComponent;
         return;
     }
 
     // else
     qCritical() << "Unable to understand componentType " << compenentTypeName;
-    _componentType = EngineComponent;
+    m_componentType = EngineComponent;
 }
 
 Object::ComponentType Object::componentType() const
 {
-    return _componentType;
+    return m_componentType;
 }
 
 void Object::setTitle(const QString &title)
 {
-    _title = title;
+    m_title = title;
 }
 
 QString Object::title() const
 {
-    return _title;
+    return m_title;
 }
 
 void Object::setDescription(const QStringList &description)
 {
-    _description = description;
+    m_description = description;
 }
 
 QVariantList Object::description() const
 {
     QVariantList list;
-    foreach (QString paragraph, _description) {
+    foreach (QString paragraph, m_description) {
         list << paragraph;
     }
     return list;
@@ -94,45 +94,45 @@ QVariantList Object::description() const
 
 void Object::setSyntaxExample(const QString &syntaxExample)
 {
-    _syntaxExample = syntaxExample;
+    m_syntaxExample = syntaxExample;
 }
 
 QString Object::syntaxExample() const
 {
-    return _syntaxExample;
+    return m_syntaxExample;
 }
 
 void Object::addProperty(Property* property)
 {
-    _properties.append(property);
+    m_properties.append(property);
 }
 
 QList< Property* > Object::properties() const
 {
-    return _properties;
+    return m_properties;
 }
 
 void Object::addMethod(Method* method)
 {
-    _methods.append(method);
+    m_methods.append(method);
 }
 
 QList< Method* > Object::methods() const
 {
-    return _methods;
+    return m_methods;
 }
 
 void Object::setObjectParent(const QString& id)
 {
-    _objectParent = id;
+    m_objectParent = id;
 }
 
 QString Object::objectParent() const
 {
-    return _objectParent;
+    return m_objectParent;
 }
 
 QString Object::apiDocumentIdentifier()
 {
-    return _id;
+    return m_id;
 }

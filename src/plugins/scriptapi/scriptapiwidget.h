@@ -51,11 +51,11 @@ public slots:
     void historyGoForward();
 
 private:
-    ScriptApiManager *_manager;
-    ScriptApiModel *_model;
-    QUrl _baseUrl;
-    QList<QString> _history;
-    int _historyPointer;
+    ScriptApiManager *m_manager;
+    ScriptApiModel *m_model;
+    QUrl m_baseUrl;
+    QList<QString> m_history;
+    int m_historyPointer;
     Ui::ScriptApiWidget *ui;
 };
 
