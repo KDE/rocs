@@ -16,31 +16,31 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "PropertyDocumentation.h"
+#include "property.h"
 #include <QVariant>
 
-PropertyDocumentation::PropertyDocumentation(QObject* parent)
+Property::Property(QObject* parent)
     : QObject(parent)
 {
 
 }
 
-void PropertyDocumentation::setName(const QString &name)
+void Property::setName(const QString &name)
 {
     _name = name;
 }
 
-QString PropertyDocumentation::name() const
+QString Property::name() const
 {
     return _name;
 }
 
-void PropertyDocumentation::setDescription(const QStringList &description)
+void Property::setDescription(const QStringList &description)
 {
     _description = description;
 }
 
-QVariantList PropertyDocumentation::description() const
+QVariantList Property::description() const
 {
     QVariantList list;
     foreach (QString paragraph, _description) {
@@ -49,27 +49,27 @@ QVariantList PropertyDocumentation::description() const
     return list;
 }
 
-void PropertyDocumentation::setType(const QString &type)
+void Property::setType(const QString &type)
 {
     _type = type;
 }
 
-QString PropertyDocumentation::type() const
+QString Property::type() const
 {
     return _type;
 }
 
-void PropertyDocumentation::setTypeLink(const QString& link)
+void Property::setTypeLink(const QString& link)
 {
     _typeLink = link;
 }
 
-QString PropertyDocumentation::typeLink() const
+QString Property::typeLink() const
 {
     return _typeLink;
 }
 
-QString PropertyDocumentation::apiDocumentAnchor()
+QString Property::apiDocumentAnchor()
 {
     return QString("property").append(_name);
 }

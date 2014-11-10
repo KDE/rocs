@@ -16,17 +16,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OBJECT_DOCUMENTATION_H
-#define OBJECT_DOCUMENTATION_H
+#ifndef OBJECT_H
+#define OBJECT_H
 
 #include <QObject>
 #include <QList>
 #include <QStringList>
 
-class PropertyDocumentation;
-class MethodDocumentation;
+class Property;
+class Method;
 
-class ObjectDocumentation : public QObject
+class Object : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString id READ id)
@@ -42,8 +42,8 @@ public:
         EngineComponent
     };
 
-    explicit ObjectDocumentation(QObject *parent = 0);
-    ~ObjectDocumentation();
+    explicit Object(QObject *parent = 0);
+    ~Object();
 
     QString id() const;
     void setId(const QString& id);
@@ -55,25 +55,25 @@ public:
     void setDescription(const QStringList &description);
     QString syntaxExample() const;
     void setSyntaxExample(const QString &syntaxExample);
-    QList<PropertyDocumentation *> properties() const;
-    void addProperty(PropertyDocumentation *property);
-    QList<MethodDocumentation *> methods() const;
-    void addMethod(MethodDocumentation *method);
+    QList<Property*> properties() const;
+    void addProperty(Property *property);
+    QList<Method*> methods() const;
+    void addMethod(Method *method);
     QString objectParent() const;
     void setObjectParent(const QString &id);
     QString apiDocumentIdentifier();
     QString apiDocumentAnchor();
 
 private:
-    Q_DISABLE_COPY(ObjectDocumentation)
+    Q_DISABLE_COPY(Object)
     QString _title;
     QString _id;
     ComponentType _componentType;
     QString _objectParent;
     QStringList _description;
     QString _syntaxExample;
-    QList< PropertyDocumentation *> _properties;
-    QList< MethodDocumentation *> _methods;
+    QList<Property*> _properties;
+    QList<Method*> _methods;
 };
 
-#endif // OBJECT_DOCUMENTATION_H
+#endif

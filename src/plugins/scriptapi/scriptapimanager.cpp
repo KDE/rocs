@@ -16,11 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ApiDocManager.h"
-#include "ObjectDocumentation.h"
-#include "PropertyDocumentation.h"
-#include "MethodDocumentation.h"
-#include "ParameterDocumentation.h"
+#include "scriptapimanager.h"
+#include "object.h"
+#include "property.h"
+#include "method.h"
+#include "parameter.h"
 
 #include <grantlee/engine.h>
 #include <grantlee/metatype.h>
@@ -37,12 +37,12 @@
 #include <QUrl>
 #include <KLocalizedString>
 
-ApiDocManager::ApiDocManager(QObject *parent)
+ScriptApiManager::ScriptApiManager(QObject *parent)
     : QObject(parent)
 {
 }
 
-void ApiDocManager::loadLocalData()
+void ScriptApiManager::loadLocalData()
 {
     QStringList apiDocFiles = QStandardPaths::locateAll(QStandardPaths::DataLocation, QString("engineapi/*.xml"));
     foreach (const QString &file, apiDocFiles) {
@@ -50,26 +50,26 @@ void ApiDocManager::loadLocalData()
     }
 }
 
-QList< ObjectDocumentation* > ApiDocManager::objectApiList() const
+QList<Object*> ScriptApiManager::objectApiList() const
 {
     return _objectApiList;
 }
 
-ObjectDocumentation * ApiDocManager::objectApi(int index) const
+Object * ScriptApiManager::objectApi(int index) const
 {
     Q_ASSERT (index >= 0 && index < _objectApiList.count());
     return _objectApiList.at(index);
 }
 
-QString ApiDocManager::objectApiDocument(const QString &identifier)
+QString ScriptApiManager::objectApiDocument(const QString &identifier)
 {
     if (_objectApiDocuments.contains(identifier)) {
         return _objectApiDocuments.value(identifier);
     }
 
     // get object API object
-    ObjectDocumentation *objectApi = 0;
-    foreach (ObjectDocumentation *obj, _objectApiList) {
+    Object *objectApi = 0;
+    foreach (Object *obj, _objectApiList) {
         if (obj->id() == identifier) {
             objectApi = obj;
             break;
@@ -93,9 +93,9 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
     QVariantHash mapping;
 
     // if parent object exists, find it
-    ObjectDocumentation *parentObjectApi = 0;
+    Object *parentObjectApi = 0;
     if (!objectApi->objectParent().isEmpty()) {
-        foreach (ObjectDocumentation *obj, _objectApiList) {
+        foreach (Object *obj, _objectApiList) {
             if (obj->id() == objectApi->objectParent()) {
                 parentObjectApi = obj;
                 break;
@@ -111,11 +111,11 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
     // we use QHash to override parent properties
     QHash<QString, QVariant> propertyList;
     if (parentObjectApi) { // add properties from parent
-        foreach (PropertyDocumentation *property, parentObjectApi->properties()) {
+        foreach (Property *property, parentObjectApi->properties()) {
             propertyList.insert(property->name(), QVariant::fromValue<QObject*>(property));
         }
     }
-    foreach (PropertyDocumentation *property, objectApi->properties()) {
+    foreach (Property *property, objectApi->properties()) {
         // override parent properties, if necessary
         propertyList.insert(property->name(), QVariant::fromValue<QObject*>(property));
     }
@@ -124,11 +124,11 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
     // properties
     QVariantList methodList;
     if (parentObjectApi) {
-        foreach (MethodDocumentation *method, parentObjectApi->methods()) {
+        foreach (Method *method, parentObjectApi->methods()) {
             methodList.append(QVariant::fromValue<QObject*>(method));
         }
     }
-    foreach (MethodDocumentation *method, objectApi->methods()) {
+    foreach (Method *method, objectApi->methods()) {
         // TODO override parent methods
         methodList.append(QVariant::fromValue<QObject*>(method));
     }
@@ -152,7 +152,7 @@ QString ApiDocManager::objectApiDocument(const QString &identifier)
     return _objectApiDocuments.value(identifier);
 }
 
-bool ApiDocManager::loadObjectApi(const QUrl &path)
+bool ScriptApiManager::loadObjectApi(const QUrl &path)
 {
     if (!path.isLocalFile()) {
         qWarning() << "Cannot open API file at " << path.toLocalFile() << ", aborting.";
@@ -177,7 +177,7 @@ bool ApiDocManager::loadObjectApi(const QUrl &path)
     _objectApiCache.append(root.firstChildElement("id").text());
 
     // create object documentation
-    ObjectDocumentation *objectApi = new ObjectDocumentation(this);
+    Object *objectApi = new Object(this);
     _objectApiList.append(objectApi);
     emit objectApiAboutToBeAdded(objectApi, _objectApiList.count() - 1);
 
@@ -200,7 +200,7 @@ bool ApiDocManager::loadObjectApi(const QUrl &path)
         !propertyNode.isNull();
         propertyNode = propertyNode.nextSiblingElement())
     {
-        PropertyDocumentation *property = new PropertyDocumentation(objectApi);
+        Property *property = new Property(objectApi);
         property->setName(propertyNode.firstChildElement("name").text());
         property->setType(propertyNode.firstChildElement("type").text());
 
@@ -224,7 +224,7 @@ bool ApiDocManager::loadObjectApi(const QUrl &path)
         !methodNode.isNull();
         methodNode = methodNode.nextSiblingElement())
     {
-        MethodDocumentation *method = new MethodDocumentation(objectApi);
+        Method *method = new Method(objectApi);
         method->setName(methodNode.firstChildElement("name").text());
         method->setReturnType(methodNode.firstChildElement("returnType").text());
         if (_objectApiCache.contains(method->returnType())) {
@@ -262,7 +262,7 @@ bool ApiDocManager::loadObjectApi(const QUrl &path)
     return true;
 }
 
-QString ApiDocManager::apiOverviewDocument() const
+QString ScriptApiManager::apiOverviewDocument() const
 {
     // initialize Grantlee engine
     Grantlee::Engine engine;
@@ -279,18 +279,18 @@ QString ApiDocManager::apiOverviewDocument() const
     // objects
     QVariantList engineComponentList;
     QVariantList dataStructureComopnentList;
-    foreach (ObjectDocumentation *object, _objectApiList) {
+    foreach (Object *object, _objectApiList) {
         switch (object->componentType()) {
-        case ObjectDocumentation::EngineComponent:
+        case Object::EngineComponent:
             engineComponentList.append(QVariant::fromValue<QObject*>(object));
             break;
-        case ObjectDocumentation::DataStructure:
+        case Object::DataStructure:
             dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
             break;
-        case ObjectDocumentation::Pointer:
+        case Object::Pointer:
             dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
             break;
-        case ObjectDocumentation::Data:
+        case Object::Data:
             dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
             break;
         }
@@ -310,7 +310,7 @@ QString ApiDocManager::apiOverviewDocument() const
     return t->render(&c);
 }
 
-QXmlSchema ApiDocManager::loadXmlSchema(const QString &schemeName) const
+QXmlSchema ScriptApiManager::loadXmlSchema(const QString &schemeName) const
 {
     QString relPath = QString("schemes/%1.xsd").arg(schemeName);
     QUrl file = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::DataLocation, relPath));
@@ -321,7 +321,7 @@ QXmlSchema ApiDocManager::loadXmlSchema(const QString &schemeName) const
     return schema;
 }
 
-QDomDocument ApiDocManager::loadDomDocument(const QUrl &path, const QXmlSchema &schema) const
+QDomDocument ScriptApiManager::loadDomDocument(const QUrl &path, const QXmlSchema &schema) const
 {
     QDomDocument document;
     QXmlSchemaValidator validator(schema);

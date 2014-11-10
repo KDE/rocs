@@ -18,10 +18,10 @@
 
 #include <QAbstractItemModel>
 
-class ObjectDocumentation;
+class Object;
 class Item;
 
-class ApiDocModel : public QAbstractItemModel
+class ScriptApiModel : public QAbstractItemModel
 {
     Q_OBJECT
 
@@ -32,8 +32,8 @@ public:
         AnchorRole
     };
 
-    explicit ApiDocModel(QList<ObjectDocumentation* > dataList, QObject *parent = 0);
-    ~ApiDocModel();
+    explicit ScriptApiModel(QList<Object* > dataList, QObject *parent = 0);
+    ~ScriptApiModel();
 
     QVariant data(const QModelIndex &index, int role) const;
 
@@ -47,6 +47,6 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
 private:
-    void setupModelData(QList< ObjectDocumentation* > dataList, Item* parent);
+    void setupModelData(QList<Object*> dataList, Item* parent);
     Item *rootItem;
 };

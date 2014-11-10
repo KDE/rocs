@@ -17,24 +17,24 @@
 */
 
 
-#include "ApiDocWidget.h"
-#include "ApiDocManager.h"
-#include "ApiDocModel.h"
+#include "scriptapiwidget.h"
+#include "scriptapimanager.h"
+#include "scriptapimodel.h"
 
 #include <QWebView>
 #include <QDebug>
 #include <QStandardPaths>
 #include <QIcon>
 
-ApiDocWidget::ApiDocWidget(QWidget* parent)
+ScriptApiWidget::ScriptApiWidget(QWidget* parent)
     : QWidget(parent)
-    , _manager(new ApiDocManager(this))
+    , _manager(new ScriptApiManager(this))
     , _historyPointer(-1)
 {
     _baseUrl = QUrl::fromLocalFile(
         QStandardPaths::locate(QStandardPaths::DataLocation, "plugin/apidoc/objectApi.html", QStandardPaths::LocateDirectory));
 
-    ui = new Ui::ApiDocWidget;
+    ui = new Ui::ScriptApiWidget;
     ui->setupUi(this);
     ui->buttonTree->setIcon(QIcon::fromTheme("view-sidetree"));
     ui->buttonHome->setIcon(QIcon::fromTheme("go-home"));
@@ -45,7 +45,7 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
     ui->buttonNext->setEnabled(false);
 
     _manager->loadLocalData();
-    _model = new ApiDocModel(_manager->objectApiList(), this);
+    _model = new ScriptApiModel(_manager->objectApiList(), this);
 
     connect(ui->buttonTree, SIGNAL(clicked(bool)), this, SLOT(showTreeOutline()));
     connect(ui->buttonHome, SIGNAL(clicked(bool)), this, SLOT(showHtmlOutline()));
@@ -65,17 +65,17 @@ ApiDocWidget::ApiDocWidget(QWidget* parent)
     ui->docTree->setModel(_model);
 }
 
-void ApiDocWidget::showTreeOutline()
+void ScriptApiWidget::showTreeOutline()
 {
     ui->pageStack->setCurrentIndex(0);
 }
 
-void ApiDocWidget::showHtmlOutline()
+void ScriptApiWidget::showHtmlOutline()
 {
     showHtmlOutline(true);
 }
 
-void ApiDocWidget::showHtmlOutline(bool logHistory)
+void ScriptApiWidget::showHtmlOutline(bool logHistory)
 {
     ui->docDetails->setHtml(_manager->apiOverviewDocument(), _baseUrl);
     ui->pageStack->setCurrentIndex(1);
@@ -99,16 +99,16 @@ void ApiDocWidget::showHtmlOutline(bool logHistory)
     }
 }
 
-void ApiDocWidget::showDetails(const QModelIndex &index)
+void ScriptApiWidget::showDetails(const QModelIndex &index)
 {
-    showObjectApi(_model->data(index, ApiDocModel::DocumentRole).toString(), true);
+    showObjectApi(_model->data(index, ScriptApiModel::DocumentRole).toString(), true);
     ui->pageStack->setCurrentIndex(1);
 
     // TODO jump to anchor
     // _model->data(index, ApiDocModel::AnchorRole).toString();
 }
 
-void ApiDocWidget::showObjectApi(const QString &id, bool logHistory=true)
+void ScriptApiWidget::showObjectApi(const QString &id, bool logHistory=true)
 {
     QString htmlDocument = _manager->objectApiDocument(id);
     ui->docDetails->setHtml(htmlDocument, _baseUrl);
@@ -130,7 +130,7 @@ void ApiDocWidget::showObjectApi(const QString &id, bool logHistory=true)
     }
 }
 
-void ApiDocWidget::showObjectApi(const QUrl &aliasPage)
+void ScriptApiWidget::showObjectApi(const QUrl &aliasPage)
 {
     if (aliasPage.toString().isEmpty()) {
         qCritical() << "No path given, aborting.";
@@ -151,7 +151,7 @@ void ApiDocWidget::showObjectApi(const QUrl &aliasPage)
     }
 }
 
-void ApiDocWidget::historyGoBack()
+void ScriptApiWidget::historyGoBack()
 {
     if (_historyPointer <= 0) {
         qCritical() << "Cannot go back in history, none exist";
@@ -171,7 +171,7 @@ void ApiDocWidget::historyGoBack()
     }
 }
 
-void ApiDocWidget::historyGoForward()
+void ScriptApiWidget::historyGoForward()
 {
     if (_historyPointer >= _history.length() - 1) {
         qCritical() << "Cannot go forward in history, none exist";

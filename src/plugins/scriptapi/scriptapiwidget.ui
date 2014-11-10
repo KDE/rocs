@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ApiDocWidget</class>
- <widget class="QWidget" name="ApiDocWidget">
+ <class>ScriptApiWidget</class>
+ <widget class="QWidget" name="ScriptApiWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

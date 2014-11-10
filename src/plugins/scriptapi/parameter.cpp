@@ -16,50 +16,50 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ParameterDocumentation.h"
+#include "parameter.h"
 
-ParameterDocumentation::ParameterDocumentation(QObject* parent)
+Parameter::Parameter(QObject* parent)
     : QObject(parent)
 {
 
 }
 
-QString ParameterDocumentation::name() const
+QString Parameter::name() const
 {
     return _name;
 }
 
-void ParameterDocumentation::setName(const QString &name)
+void Parameter::setName(const QString &name)
 {
     _name = name;
 }
 
-QString ParameterDocumentation::info() const
+QString Parameter::info() const
 {
     return _info;
 }
 
-void ParameterDocumentation::setInfo(const QString &info)
+void Parameter::setInfo(const QString &info)
 {
     _info = info;
 }
 
-QString ParameterDocumentation::type() const
+QString Parameter::type() const
 {
     return _type;
 }
 
-void ParameterDocumentation::setType(const QString &type)
+void Parameter::setType(const QString &type)
 {
     _type = type;
 }
 
-void ParameterDocumentation::setTypeLink(const QString& link)
+void Parameter::setTypeLink(const QString& link)
 {
     _typeLink = link;
 }
 
-QString ParameterDocumentation::typeLink() const
+QString Parameter::typeLink() const
 {
     return _typeLink;
 }

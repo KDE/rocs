@@ -16,21 +16,21 @@
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef APIDOCWIDGET_H
-#define APIDOCWIDGET_H
+#ifndef SCRIPTAPIWIDGET_H
+#define SCRIPTAPIWIDGET_H
 
-#include "ui_ApiDocWidget.h"
+#include "ui_scriptapiwidget.h"
 #include <QWidget>
 
 class QUrl;
-class ApiDocManager;
-class ApiDocModel;
+class ScriptApiManager;
+class ScriptApiModel;
 
 /**
- * \class ApiDocWidget
+ * \class ScriptApiWidget
  * This Widget loads API information about all script interfaces and displays them.
  */
-class ApiDocWidget : public QWidget
+class ScriptApiWidget : public QWidget
 {
     Q_OBJECT
 
@@ -38,7 +38,7 @@ public:
     /**
      * Default constructor.
      */
-    explicit ApiDocWidget(QWidget* parent);
+    explicit ScriptApiWidget(QWidget* parent);
     void showHtmlOutline(bool logHistory);
 
 public slots:
@@ -51,12 +51,12 @@ public slots:
     void historyGoForward();
 
 private:
-    ApiDocManager *_manager;
-    ApiDocModel *_model;
+    ScriptApiManager *_manager;
+    ScriptApiModel *_model;
     QUrl _baseUrl;
     QList<QString> _history;
     int _historyPointer;
-    Ui::ApiDocWidget *ui;
+    Ui::ScriptApiWidget *ui;
 };
 
-#endif // APIDOCWIDGET_H
+#endif

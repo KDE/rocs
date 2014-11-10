@@ -16,30 +16,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef APIDOCMANAGER_H
-#define APIDOCMANAGER_H
+#ifndef SCRIPTAPIMANAGER_H
+#define SCRIPTAPIMANAGER_H
 
 #include <QObject>
 #include <QMap>
 #include <QHash>
 
-class ObjectDocumentation;
+class Object;
 class QUrl;
 class QDomDocument;
 class QFile;
 class QXmlSchema;
 
 /**
- * \class ApiDocManager
+ * \class ScriptApiManager
  *
  * Load and provide api documentation objects.
  */
-class ApiDocManager : public QObject
+class ScriptApiManager : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ApiDocManager(QObject *parent = 0);
+    explicit ScriptApiManager(QObject *parent = 0);
 
     /**
      * This method loads all api documentation files.
@@ -49,9 +49,9 @@ public:
     /**
      * \return list of all loaded language specifications
      */
-    QList<ObjectDocumentation *> objectApiList() const;
+    QList<Object *> objectApiList() const;
 
-    ObjectDocumentation * objectApi(int index) const;
+    Object * objectApi(int index) const;
 
     /**
      * Generates HTML document with the API documentation for the specified object.
@@ -80,7 +80,7 @@ public:
 
 signals:
     void objectApiAdded();
-    void objectApiAboutToBeAdded(ObjectDocumentation*,int);
+    void objectApiAboutToBeAdded(Object*,int);
     void objectApiRemoved();
     void objectApiAboutToBeRemoved(int,int);
 
@@ -103,9 +103,9 @@ private:
      */
     QDomDocument loadDomDocument(const QUrl &path, const QXmlSchema &schema) const;
 
-    QList<ObjectDocumentation *> _objectApiList;
+    QList<Object*> _objectApiList;
     QHash<QString, QString> _objectApiDocuments;
     QList<QString> _objectApiCache; // list of all objects available
 };
 
-#endif // APIDOCMANAGER_H
+#endif

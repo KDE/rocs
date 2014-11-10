@@ -16,10 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ApiDocModel.h"
-#include "ObjectDocumentation.h"
-#include "MethodDocumentation.h"
-#include "PropertyDocumentation.h"
+#include "scriptapimodel.h"
+#include "object.h"
+#include "method.h"
+#include "property.h"
 
 #include <QDebug>
 #include <KLocalizedString>
@@ -116,8 +116,8 @@ Item * Item::parent()
 }
 
 
-// ApiDocModel methods
-ApiDocModel::ApiDocModel(QList<ObjectDocumentation* > dataList, QObject *parent)
+// ScriptApiModel methods
+ScriptApiModel::ScriptApiModel(QList<Object*> dataList, QObject *parent)
     : QAbstractItemModel(parent)
 {
     QList<QVariant> rootData;
@@ -126,12 +126,12 @@ ApiDocModel::ApiDocModel(QList<ObjectDocumentation* > dataList, QObject *parent)
     setupModelData(dataList, rootItem);
 }
 
-ApiDocModel::~ApiDocModel()
+ScriptApiModel::~ScriptApiModel()
 {
     delete rootItem;
 }
 
-QModelIndex ApiDocModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex ScriptApiModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (!hasIndex(row, column, parent)) {
         return QModelIndex();
@@ -154,7 +154,7 @@ QModelIndex ApiDocModel::index(int row, int column, const QModelIndex &parent) c
     }
 }
 
-QModelIndex ApiDocModel::parent(const QModelIndex &index) const
+QModelIndex ScriptApiModel::parent(const QModelIndex &index) const
 {
     if (!index.isValid()) {
         return QModelIndex();
@@ -170,7 +170,7 @@ QModelIndex ApiDocModel::parent(const QModelIndex &index) const
     return createIndex(parentItem->row(), 0, parentItem);
 }
 
-int ApiDocModel::rowCount(const QModelIndex &parent) const
+int ScriptApiModel::rowCount(const QModelIndex &parent) const
 {
     Item *parentItem;
     if (parent.column() > 0) {
@@ -187,7 +187,7 @@ int ApiDocModel::rowCount(const QModelIndex &parent) const
     return parentItem->childCount();
 }
 
-int ApiDocModel::columnCount(const QModelIndex &parent) const
+int ScriptApiModel::columnCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
         return static_cast<Item*>(parent.internalPointer())->columnCount();
@@ -197,7 +197,7 @@ int ApiDocModel::columnCount(const QModelIndex &parent) const
     }
 }
 
-QVariant ApiDocModel::data(const QModelIndex &index, int role) const
+QVariant ScriptApiModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
         return QVariant();
@@ -216,7 +216,7 @@ QVariant ApiDocModel::data(const QModelIndex &index, int role) const
     return item->data(index.column());
 }
 
-Qt::ItemFlags ApiDocModel::flags(const QModelIndex &index) const
+Qt::ItemFlags ScriptApiModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid()) {
         return 0;
@@ -224,7 +224,7 @@ Qt::ItemFlags ApiDocModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
-QVariant ApiDocModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant ScriptApiModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         return rootItem->data(section);
@@ -233,9 +233,9 @@ QVariant ApiDocModel::headerData(int section, Qt::Orientation orientation, int r
     return QVariant();
 }
 
-void ApiDocModel::setupModelData(QList<ObjectDocumentation* > dataList, Item *parent)
+void ScriptApiModel::setupModelData(QList<Object*> dataList, Item *parent)
 {
-    foreach (ObjectDocumentation *object, dataList) {
+    foreach (Object *object, dataList) {
         QList<QVariant> columnData;
         columnData << object->id();
         Item *objectItem = new Item(columnData, parent);
@@ -247,7 +247,7 @@ void ApiDocModel::setupModelData(QList<ObjectDocumentation* > dataList, Item *pa
         Item *propertyContainer = new Item(propertyColumnData, objectItem);
         propertyContainer->setDocumentAnchor(object->apiDocumentIdentifier(), "properties");
         objectItem->appendChild(propertyContainer);
-        foreach (PropertyDocumentation *property, object->properties()) {
+        foreach (Property *property, object->properties()) {
             QList<QVariant> columnData;
             columnData << property->name();
             Item *propertyItem = new Item(columnData, propertyContainer);
@@ -261,7 +261,7 @@ void ApiDocModel::setupModelData(QList<ObjectDocumentation* > dataList, Item *pa
         Item *methodContainer = new Item(methodColumnData, objectItem);
         methodContainer->setDocumentAnchor(object->apiDocumentIdentifier(), "methods");
         objectItem->appendChild(methodContainer);
-        foreach (MethodDocumentation *method, object->methods()) {
+        foreach (Method *method, object->methods()) {
             QList<QVariant> columnData;
             columnData << method->name();
             Item *methodProperty = new Item(columnData, methodContainer);

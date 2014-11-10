@@ -66,7 +66,7 @@
 #include "ui/fileformatdialog.h"
 #include "ui/journalwidget.h"
 #include "grapheditorwidget.h"
-#include "plugins/ApiDoc/ApiDocWidget.h"
+#include "plugins/scriptapi/scriptapiwidget.h"
 #include "project/project.h"
 
 using namespace GraphTheory;
@@ -261,7 +261,7 @@ QWidget* MainWindow::setupSidePanel()
     sideDock->addDock(documentation, i18nc("@title", "Handbook"), QIcon::fromTheme("help-contents"));
 
     // Rocs scripting API documentation
-    ApiDocWidget* apiDoc = new ApiDocWidget(panel);
+    ScriptApiWidget* apiDoc = new ScriptApiWidget(panel);
     sideDock->addDock(apiDoc, i18nc("@title", "Scripting API"), QIcon::fromTheme("documentation"));
 
     return panel;

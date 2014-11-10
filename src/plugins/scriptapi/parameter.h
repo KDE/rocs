@@ -16,44 +16,39 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PROPERTY_DOCUMENTATION_H
-#define PROPERTY_DOCUMENTATION_H
+#ifndef PARAMETER_H
+#define PARAMETER_H
 
 #include <QObject>
 #include <QList>
 #include <QStringList>
 
-class PropertyDocumentation : public QObject
+class Parameter : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name)
-    Q_PROPERTY(QVariantList description READ description)
     Q_PROPERTY(QString type READ type)
+    Q_PROPERTY(QString info READ info)
     Q_PROPERTY(QString typeLink READ typeLink)
-    Q_PROPERTY(QString documentAnchor READ apiDocumentAnchor)
 
 public:
-    explicit PropertyDocumentation(QObject *parent = 0);
+    explicit Parameter(QObject *parent = 0);
 
     QString name() const;
     void setName(const QString &name);
-    /**
-     * \return list of paragraphs
-     */
-    QVariantList description() const;
-    void setDescription(const QStringList &description);
     QString type() const;
     void setType(const QString &type);
+    QString info() const;
+    void setInfo(const QString &info);
     QString typeLink() const;
     void setTypeLink(const QString &link);
-    QString apiDocumentAnchor();
 
 private:
-    Q_DISABLE_COPY(PropertyDocumentation)
+    Q_DISABLE_COPY(Parameter)
     QString _name;
-    QStringList _description;
     QString _type;
+    QString _info;
     QString _typeLink;
 };
 
-#endif // PROPERTY_DOCUMENTATION_H
+#endif

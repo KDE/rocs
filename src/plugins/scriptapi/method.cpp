@@ -16,31 +16,31 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MethodDocumentation.h"
-#include "ParameterDocumentation.h"
+#include "method.h"
+#include "parameter.h"
 
-MethodDocumentation::MethodDocumentation(QObject* parent)
+Method::Method(QObject* parent)
     : QObject(parent)
 {
 
 }
 
-void MethodDocumentation::setName(const QString &name)
+void Method::setName(const QString &name)
 {
     _name = name;
 }
 
-QString MethodDocumentation::name() const
+QString Method::name() const
 {
     return _name;
 }
 
-void MethodDocumentation::setDescription(const QStringList &description)
+void Method::setDescription(const QStringList &description)
 {
     _description = description;
 }
 
-QVariantList MethodDocumentation::description() const
+QVariantList Method::description() const
 {
     QVariantList list;
     foreach (QString paragraph, _description) {
@@ -49,19 +49,19 @@ QVariantList MethodDocumentation::description() const
     return list;
 }
 
-void MethodDocumentation::setReturnType(const QString& type)
+void Method::setReturnType(const QString& type)
 {
     _returnType = type;
 }
 
-QString MethodDocumentation::returnType() const
+QString Method::returnType() const
 {
     return _returnType;
 }
 
-void MethodDocumentation::addParameter(const QString& name, const QString& type, const QString& info, const QString& typeLink=QString())
+void Method::addParameter(const QString& name, const QString& type, const QString& info, const QString &typeLink = QString())
 {
-    ParameterDocumentation *parameter = new ParameterDocumentation(this);
+    Parameter *parameter = new Parameter(this);
     parameter->setName(name);
     parameter->setType(type);
     parameter->setInfo(info);
@@ -69,27 +69,27 @@ void MethodDocumentation::addParameter(const QString& name, const QString& type,
     _parameters.append(parameter);
 }
 
-QVariant MethodDocumentation::parametersVar() const
+QVariant Method::parametersVar() const
 {
     return QVariant::fromValue(_parameters);
 }
 
-QList< ParameterDocumentation* > MethodDocumentation::parameters() const
+QList<Parameter*> Method::parameters() const
 {
     return _parameters;
 }
 
-QString MethodDocumentation::apiDocumentAnchor()
+QString Method::apiDocumentAnchor()
 {
     return QString("method").append(_name);
 }
 
-void MethodDocumentation::setReturnTypeLink(const QString& link)
+void Method::setReturnTypeLink(const QString& link)
 {
     _returnTypeLink = link;
 }
 
-QString MethodDocumentation::returnTypeLink() const
+QString Method::returnTypeLink() const
 {
     return _returnTypeLink;
 }

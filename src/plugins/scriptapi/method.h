@@ -16,17 +16,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef METHOD_DOCUMENTATION_H
-#define METHOD_DOCUMENTATION_H
+#ifndef METHOD_H
+#define METHOD_H
 
 #include <QObject>
 #include <QList>
 #include <QStringList>
 #include <QVariantList>
 
-class ParameterDocumentation;
+class Parameter;
 
-class MethodDocumentation : public QObject
+class Method : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name)
@@ -37,7 +37,7 @@ class MethodDocumentation : public QObject
     Q_PROPERTY(QString documentAnchor READ apiDocumentAnchor)
 
 public:
-    explicit MethodDocumentation(QObject *parent = 0);
+    explicit Method(QObject *parent = 0);
 
     QString name() const;
     void setName(const QString &name);
@@ -46,22 +46,22 @@ public:
     QString returnType() const;
     void setReturnType(const QString &type);
     QVariant parametersVar() const;
-    QList<ParameterDocumentation*> parameters() const;
+    QList<Parameter*> parameters() const;
     void addParameter(const QString &name, const QString &type, const QString &info, const QString &typeLink);
     QString apiDocumentAnchor();
     QString returnTypeLink() const;
     void setReturnTypeLink(const QString &link);
 
 private:
-    Q_DISABLE_COPY(MethodDocumentation)
+    Q_DISABLE_COPY(Method)
     QString _name;
     QStringList _description;
     QString _returnType;
     QString _returnTypeLink;
-    QList<ParameterDocumentation*> _parameters;
+    QList<Parameter*> _parameters;
 };
 
 // Q_DECLARE_METATYPE(QList<ParameterDocumentation*>);
 // Q_DECLARE_METATYPE(ParameterDocumentation*);
 
-#endif // METHOD_DOCUMENTATION_H
+#endif

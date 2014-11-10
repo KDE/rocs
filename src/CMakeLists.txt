@@ -47,13 +47,13 @@ set( rocs_interface_SRCS
     ui/edgetypesdelegate.cpp
     ui/scriptoutputwidget.cpp
     project/project.cpp
-    plugins/ApiDoc/ApiDocWidget.cpp
-    plugins/ApiDoc/ObjectDocumentation.cpp
-    plugins/ApiDoc/PropertyDocumentation.cpp
-    plugins/ApiDoc/MethodDocumentation.cpp
-    plugins/ApiDoc/ParameterDocumentation.cpp
-    plugins/ApiDoc/ApiDocManager.cpp
-    plugins/ApiDoc/ApiDocModel.cpp
+    plugins/scriptapi/scriptapiwidget.cpp
+    plugins/scriptapi/object.cpp
+    plugins/scriptapi/property.cpp
+    plugins/scriptapi/method.cpp
+    plugins/scriptapi/parameter.cpp
+    plugins/scriptapi/scriptapimanager.cpp
+    plugins/scriptapi/scriptapimodel.cpp
 )
 
 set(
@@ -68,7 +68,7 @@ ki18n_wrap_ui(
     ui/documentationwidget.ui
     ui/journalwidget.ui
     ui/scriptoutputwidget.ui
-    plugins/ApiDoc/ApiDocWidget.ui
+    plugins/scriptapi/scriptapiwidget.ui
 )
 
 kconfig_add_kcfg_files(rocs_Settings_SRCS settings.kcfgc)

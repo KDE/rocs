@@ -16,30 +16,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ObjectDocumentation.h"
+#include "object.h"
 #include <QStringList>
 #include <QDebug>
 
-ObjectDocumentation::ObjectDocumentation(QObject* parent)
+Object::Object(QObject* parent)
     : QObject(parent)
 {
 }
 
-ObjectDocumentation::~ObjectDocumentation()
+Object::~Object()
 {
 }
 
-void ObjectDocumentation::setId(const QString &id)
+void Object::setId(const QString &id)
 {
     _id = id;
 }
 
-QString ObjectDocumentation::id() const
+QString Object::id() const
 {
     return _id;
 }
 
-void ObjectDocumentation::setComponentType(const QString& compenentTypeName)
+void Object::setComponentType(const QString& compenentTypeName)
 {
     if (compenentTypeName == "DataStructure") {
         _componentType = DataStructure;
@@ -63,27 +63,27 @@ void ObjectDocumentation::setComponentType(const QString& compenentTypeName)
     _componentType = EngineComponent;
 }
 
-ObjectDocumentation::ComponentType ObjectDocumentation::componentType() const
+Object::ComponentType Object::componentType() const
 {
     return _componentType;
 }
 
-void ObjectDocumentation::setTitle(const QString &title)
+void Object::setTitle(const QString &title)
 {
     _title = title;
 }
 
-QString ObjectDocumentation::title() const
+QString Object::title() const
 {
     return _title;
 }
 
-void ObjectDocumentation::setDescription(const QStringList &description)
+void Object::setDescription(const QStringList &description)
 {
     _description = description;
 }
 
-QVariantList ObjectDocumentation::description() const
+QVariantList Object::description() const
 {
     QVariantList list;
     foreach (QString paragraph, _description) {
@@ -92,47 +92,47 @@ QVariantList ObjectDocumentation::description() const
     return list;
 }
 
-void ObjectDocumentation::setSyntaxExample(const QString &syntaxExample)
+void Object::setSyntaxExample(const QString &syntaxExample)
 {
     _syntaxExample = syntaxExample;
 }
 
-QString ObjectDocumentation::syntaxExample() const
+QString Object::syntaxExample() const
 {
     return _syntaxExample;
 }
 
-void ObjectDocumentation::addProperty(PropertyDocumentation* property)
+void Object::addProperty(Property* property)
 {
     _properties.append(property);
 }
 
-QList< PropertyDocumentation* > ObjectDocumentation::properties() const
+QList< Property* > Object::properties() const
 {
     return _properties;
 }
 
-void ObjectDocumentation::addMethod(MethodDocumentation* method)
+void Object::addMethod(Method* method)
 {
     _methods.append(method);
 }
 
-QList< MethodDocumentation* > ObjectDocumentation::methods() const
+QList< Method* > Object::methods() const
 {
     return _methods;
 }
 
-void ObjectDocumentation::setObjectParent(const QString& id)
+void Object::setObjectParent(const QString& id)
 {
     _objectParent = id;
 }
 
-QString ObjectDocumentation::objectParent() const
+QString Object::objectParent() const
 {
     return _objectParent;
 }
 
-QString ObjectDocumentation::apiDocumentIdentifier()
+QString Object::apiDocumentIdentifier()
 {
     return _id;
 }
