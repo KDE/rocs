@@ -38,10 +38,9 @@ class Object : public QObject
 
 public:
     enum ComponentType {
-        DataStructure,
-        Pointer,
-        Data,
-        EngineComponent
+        Edge,
+        Node,
+        KernelModule
     };
 
     explicit Object(QObject *parent = 0);

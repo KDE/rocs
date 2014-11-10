@@ -44,26 +44,22 @@ QString Object::id() const
 
 void Object::setComponentType(const QString& compenentTypeName)
 {
-    if (compenentTypeName == "DataStructure") {
-        m_componentType = DataStructure;
+    if (compenentTypeName == "Node") {
+        m_componentType = Node;
         return;
     }
-    if (compenentTypeName == "Data") {
-        m_componentType = Data;
+    if (compenentTypeName == "Edge") {
+        m_componentType = Edge;
         return;
     }
-    if (compenentTypeName == "Pointer") {
-        m_componentType = Pointer;
-        return;
-    }
-    if (compenentTypeName == "EngineComponent") {
-        m_componentType = EngineComponent;
+    if (compenentTypeName == "KernelModule") {
+        m_componentType = KernelModule;
         return;
     }
 
     // else
     qCritical() << "Unable to understand componentType " << compenentTypeName;
-    m_componentType = EngineComponent;
+    m_componentType = KernelModule;
 }
 
 Object::ComponentType Object::componentType() const

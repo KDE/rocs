@@ -279,32 +279,27 @@ QString ScriptApiManager::apiOverviewDocument() const
     QVariantHash mapping;
 
     // objects
-    QVariantList engineComponentList;
-    QVariantList dataStructureComopnentList;
+    QVariantList kernelModuleList;
+    QVariantList elementList;
     foreach (Object *object, m_objectApiList) {
         switch (object->componentType()) {
-        case Object::EngineComponent:
-            engineComponentList.append(QVariant::fromValue<QObject*>(object));
+        case Object::KernelModule:
+            kernelModuleList.append(QVariant::fromValue<QObject*>(object));
             break;
-        case Object::DataStructure:
-            dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
+        case Object::Edge:
+            elementList.append(QVariant::fromValue<QObject*>(object));
             break;
-        case Object::Pointer:
-            dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
-            break;
-        case Object::Data:
-            dataStructureComopnentList.append(QVariant::fromValue<QObject*>(object));
+        case Object::Node:
+            elementList.append(QVariant::fromValue<QObject*>(object));
             break;
         }
     }
-    mapping.insert("engineComponents", engineComponentList);
-    mapping.insert("dataStructureComponents", dataStructureComopnentList);
+    mapping.insert("kernelModules", kernelModuleList);
 
     // localized strings
     mapping.insert("i18nScriptEngineApi", i18nc("@title", "Script Engine API"));
     mapping.insert("i18nObjects", i18nc("@title", "Objects"));
-    mapping.insert("i18nDataStructures", i18nc("@title", "Data Structures"));
-    mapping.insert("i18nEngineComponents", i18nc("@title", "Script Engine Components"));
+    mapping.insert("i18nEngineComponents", i18nc("@title", "Script Engine Modules"));
 
     Grantlee::Context c(mapping);
 

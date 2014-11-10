@@ -1,5 +1,5 @@
 <!--
- *  Copyright 2013  Andreas Cord-Landwehr <cola@uni-paderborn.de>
+ *  Copyright 2013-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  Licensed under the Creative Commons Attribution-Share Alike 3.0 Unported licence
  *  available at http://creativecommons.org/licenses/by-sa/3.0/
@@ -18,14 +18,14 @@
 
 <h2>{{ i18nEngineComponents }}</h2>
 <ul>
-{% for component in engineComponents %}
+{% for component in kernelModules %}
     <li>
         <a href="http://virtual/{{ component.id }}">{{ component.title }}</a>
     </li>
 {% endfor %}
 </ul>
 
-<h2>{{ i18nDataStructures }}</h2>
+<h2>FIXME {{ i18nDataStructures }}</h2>
 <ul>
 {% for component in dataStructureComponents %}
     <li>
