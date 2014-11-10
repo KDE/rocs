@@ -33,7 +33,7 @@ ScriptApiWidget::ScriptApiWidget(QWidget* parent)
     , m_historyPointer(-1)
 {
     m_baseUrl = QUrl::fromLocalFile(
-        QStandardPaths::locate(QStandardPaths::DataLocation, "plugin/apidoc/objectApi.html", QStandardPaths::LocateDirectory));
+        QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("rocs/plugin/apidoc/"), QStandardPaths::LocateDirectory));
 
     ui = new Ui::ScriptApiWidget;
     ui->setupUi(this);

@@ -111,4 +111,5 @@ install(PROGRAMS org.kde.rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES rocsui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/rocs)
 install(FILES rocs.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 
+ecm_optional_add_subdirectory(plugins/scriptapi)
 ecm_optional_add_subdirectory(autotests)
