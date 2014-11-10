@@ -9,8 +9,6 @@
   <!ENTITY apiConsole SYSTEM "apiConsole.docbook">
   <!ENTITY apiDatastructure SYSTEM "apiDatastructure.docbook">
   <!ENTITY apiGraphstructure SYSTEM "apiGraphstructure.docbook">
-  <!ENTITY apiLinkedListstructure SYSTEM "apiLinkedListstructure.docbook">
-  <!ENTITY apiRootedTreestructure SYSTEM "apiRootedTreestructure.docbook">
 
   <!ENTITY chapterImportExport SYSTEM "chapterImportExport.docbook">
 ]>
@@ -609,10 +607,6 @@ But also every backend provides the properties and functions that are defined fo
 &apiDatastructure;
 
 &apiGraphstructure;
-
-&apiLinkedListstructure;
-
-&apiRootedTreestructure;
 
 &apiConsole;
 </chapter>
