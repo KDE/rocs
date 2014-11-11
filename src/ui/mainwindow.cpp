@@ -491,13 +491,13 @@ void MainWindow::updateCaption()
 QString MainWindow::uniqueFilename(const QString &basePrefix, const QString &suffix) {
     QFile targetFile;
     QString basePath = m_currentProject->projectUrl().path();
-    QString fullSuffix = "." + suffix;
+    QString fullSuffix = '.' + suffix;
     QString fullPrefix = basePrefix;
 
     if (fullPrefix.isNull()) {
         fullPrefix = m_currentProject->projectUrl().fileName().remove(QRegExp(".rocs*$"));
     } else if (fullPrefix.endsWith(fullSuffix)) {
-        fullPrefix.remove(QRegExp(fullSuffix + "$"));
+        fullPrefix.remove(QRegExp(fullSuffix + '$'));
     }
 
     targetFile.setFileName(basePath + fullPrefix + fullSuffix);
