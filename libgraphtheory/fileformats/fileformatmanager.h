@@ -18,8 +18,8 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GRAPHFILEBACKENDMANAGER_H
-#define GRAPHFILEBACKENDMANAGER_H
+#ifndef FILEFORMATMANAGER_H
+#define FILEFORMATMANAGER_H
 
 #include "fileformatinterface.h"
 #include "typenames.h"

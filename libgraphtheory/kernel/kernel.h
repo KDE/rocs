@@ -26,7 +26,7 @@
 #include "node.h"
 #include "graphdocument.h"
 
-#include <QtScript>
+#include <QScriptEngine>
 #include <QObject>
 
 namespace GraphTheory

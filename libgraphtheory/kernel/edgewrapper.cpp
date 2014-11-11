@@ -26,6 +26,7 @@
 #include <KLocalizedString>
 #include <QColor>
 #include <QDebug>
+#include <QEvent>
 
 using namespace GraphTheory;
 

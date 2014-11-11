@@ -18,6 +18,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef SCRIPTAPIMODEL_H
+#define SCRIPTAPIMODEL_H
+
 #include <QAbstractItemModel>
 
 class Object;
@@ -52,3 +55,5 @@ private:
     void setupModelData(QList<Object*> dataList, Item* parent);
     Item *rootItem;
 };
+
+#endif

@@ -28,7 +28,7 @@
 #include "edge.h"
 #include "graphdocument.h"
 
-#include <QtScript>
+#include <QScriptEngine>
 #include <QObject>
 #include <QColor>
 

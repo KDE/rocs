@@ -18,8 +18,8 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NODEPROPERTYSMODEL_H
-#define NODEPROPERTYSMODEL_H
+#ifndef NODEPROPERTYMODEL_H
+#define NODEPROPERTYMODEL_H
 
 #include "libgraphtheoryexport.h"
 #include "typenames.h"

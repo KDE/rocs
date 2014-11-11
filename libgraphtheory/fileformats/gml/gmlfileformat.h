@@ -22,9 +22,7 @@
 #define GMLFILEFORMAT_H
 
 #include <QObject>
-
 #include "fileformats/fileformatinterface.h"
-#include <QObject>
 
 namespace GraphTheory
 {

@@ -27,9 +27,10 @@
 #include "node.h"
 #include "graphdocument.h"
 
-#include <QtScript>
 #include <QObject>
 #include <QColor>
+
+class QEvent;
 
 namespace GraphTheory
 {

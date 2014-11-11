@@ -28,9 +28,10 @@
 #include "graphdocument.h"
 #include "documentwrapper.h"
 
-#include <QtScript>
 #include <QObject>
 #include <QColor>
+
+class QEvent;
 
 namespace GraphTheory
 {
@@ -157,7 +158,7 @@ public:
     Q_INVOKABLE QList<GraphTheory::NodeWrapper*> successors() const;
 
     /** reimplemented from QObject **/
-    virtual bool event(QEvent* e) Q_DECL_OVERRIDE;
+    virtual bool event(QEvent *e) Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
     void updateDynamicProperties();

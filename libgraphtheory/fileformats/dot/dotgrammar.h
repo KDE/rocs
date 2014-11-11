@@ -16,8 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOT_GRAMMAR_H
-#define DOT_GRAMMAR_H
+#ifndef DOTGRAMMAR_H
+#define DOTGRAMMAR_H
 
 #include "typenames.h"
 #include <string>
@@ -56,4 +56,5 @@ namespace DotParser {
     void edgebound(const std::string &str);
     void createEdge();
 }
+
 #endif

@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOTFILEFORMATTEST_H
-#define DOTFILEFORMATTEST_H
+#ifndef TESTDOTFILEFORMAT_H
+#define TESTDOTFILEFORMAT_H
 
 #include <QObject>
 #include "typenames.h"

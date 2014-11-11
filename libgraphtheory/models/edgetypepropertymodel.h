@@ -18,8 +18,8 @@
  *  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EDGETYPEPROPERTYSMODEL_H
-#define EDGETYPEPROPERTYSMODEL_H
+#ifndef EDGETYPEPROPERTYMODEL_H
+#define EDGETYPEPROPERTYMODEL_H
 
 #include "libgraphtheoryexport.h"
 #include "typenames.h"
