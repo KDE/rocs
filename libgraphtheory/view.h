@@ -48,7 +48,7 @@ class GRAPHTHEORY_EXPORT View : public QQuickWidget
     Q_OBJECT
 
 public:
-    View(QWidget *parent);
+    explicit View(QWidget *parent);
     virtual ~View();
     void setGraphDocument(GraphDocumentPtr document);
     GraphDocumentPtr graphDocument() const;
