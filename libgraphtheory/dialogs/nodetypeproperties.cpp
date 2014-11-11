@@ -117,7 +117,7 @@ void NodeTypeProperties::apply()
 void NodeTypeProperties::validateIdInput()
 {
     int valid = true;
-    foreach (auto type, m_type->document()->nodeTypes()) {
+    foreach (const auto &type, m_type->document()->nodeTypes()) {
         if (type != m_type && type->id() == m_id->value()) {
             valid = false;
             break;

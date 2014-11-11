@@ -85,7 +85,7 @@ void Object::setDescription(const QStringList &description)
 QVariantList Object::description() const
 {
     QVariantList list;
-    foreach (QString paragraph, m_description) {
+    foreach (const QString &paragraph, m_description) {
         list << paragraph;
     }
     return list;

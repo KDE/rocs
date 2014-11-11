@@ -205,7 +205,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
 
     // serialize node types
     QJsonArray nodeTypes;
-    foreach (NodeTypePtr type, document->nodeTypes()) {
+    foreach (const auto &type, document->nodeTypes()) {
         QJsonObject typeJson;
         typeJson.insert("Id", type->id());
         if (type->id() == -1) {
@@ -214,7 +214,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         typeJson.insert("Name", type->name());
         typeJson.insert("Color", type->color().name());
         QJsonArray propertiesJson;
-        foreach (QString property, type->dynamicProperties()) {
+        foreach (const QString &property, type->dynamicProperties()) {
             propertiesJson.append(property);
         }
         typeJson.insert("Properties", propertiesJson);
@@ -234,7 +234,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         typeJson.insert("Color", type->color().name());
         typeJson.insert("Direction", direction(type->direction()));
         QJsonArray propertiesJson;
-        foreach (QString property, type->dynamicProperties()) {
+        foreach (const QString &property, type->dynamicProperties()) {
             propertiesJson.append(property);
         }
         typeJson.insert("Properties", propertiesJson);
@@ -244,7 +244,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
 
     // serialize nodes
     QJsonArray nodes;
-    foreach (NodePtr node, document->nodes()) {
+    foreach (const auto &node, document->nodes()) {
         QJsonObject nodeJson;
         nodeJson.insert("Id", node->id());
         nodeJson.insert("Type", node->type()->id());
@@ -252,7 +252,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         nodeJson.insert("Y", node->y());
         nodeJson.insert("Color", node->color().name());
         QJsonArray propertiesJson;
-        foreach (QString property, node->dynamicProperties()) {
+        foreach (const QString &property, node->dynamicProperties()) {
             QJsonObject propertyJson;
             propertyJson.insert("Name", property);
             propertyJson.insert("Value", node->dynamicProperty(property).toString());
@@ -265,13 +265,13 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
 
     // serialize edges
     QJsonArray edges;
-    foreach (EdgePtr edge, document->edges()) {
+    foreach (const auto &edge, document->edges()) {
         QJsonObject edgeJson;
         edgeJson.insert("Type", edge->type()->id());
         edgeJson.insert("From", edge->from()->id());
         edgeJson.insert("To", edge->to()->id());
         QJsonArray propertiesJson;
-        foreach (QString property, edge->dynamicProperties()) {
+        foreach (const QString &property, edge->dynamicProperties()) {
             QJsonObject propertyJson;
             propertyJson.insert("Name", property);
             propertyJson.insert("Value", edge->dynamicProperty(property).toString());

@@ -123,7 +123,7 @@ void EdgeTypeProperties::apply()
 void EdgeTypeProperties::validateIdInput()
 {
     int valid = true;
-    foreach (auto type, m_type->document()->edgeTypes()) {
+    foreach (const auto &type, m_type->document()->edgeTypes()) {
         if (type != m_type && type->id() == m_id->value()) {
             valid = false;
             break;
