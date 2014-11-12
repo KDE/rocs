@@ -38,6 +38,7 @@ class Object : public QObject
 
 public:
     enum ComponentType {
+        Document,
         Edge,
         Node,
         KernelModule

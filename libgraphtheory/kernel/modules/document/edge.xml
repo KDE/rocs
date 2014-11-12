@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<object>
+<name>Edge</name>
+<id>Edge</id>
+<componentType>Edge</componentType>
+<description>
+<para>
+An edge is the connection of two nodes. Edges can be either directed or undirected, depending on their type.
+</para>
+</description>
+<syntax>
+</syntax>
+<properties>
+<property>
+    <name>type</name>
+    <description>
+        <para>Read and set the identifier of the edge's type. If setting, the edge type identifier must exist.</para>
+    </description>
+    <type>string</type>
+</property>
+</properties>
+<methods>
+<method>
+    <name>from()</name>
+    <description>
+        <para>Return the origin node of the edge.</para>
+    </description>
+    <returnType>Node</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>to()</name>
+    <description>
+        <para>Return the target node of the edge.</para>
+    </description>
+    <returnType>Node</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>directed()</name>
+    <description>
+        <para>Returns true if the edge's type is directed, otherwise false.</para>
+    </description>
+    <returnType>bool</returnType>
+    <parameters>
+    </parameters>
+</method>
+</methods>
+</object>

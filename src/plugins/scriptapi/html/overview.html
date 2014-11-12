@@ -16,18 +16,18 @@
 <div style="margin: 10pt" id="rocs-content-text">
 <h1>{{ i18nScriptEngineApi }}</h1>
 
-<h2>{{ i18nEngineComponents }}</h2>
+<h2>{{ i18nDocument }}</h2>
 <ul>
-{% for component in kernelModules %}
+{% for component in kernelElements %}
     <li>
         <a href="http://virtual/{{ component.id }}">{{ component.title }}</a>
     </li>
 {% endfor %}
 </ul>
 
-<h2>FIXME {{ i18nDataStructures }}</h2>
+<h2>{{ i18nEngineComponents }}</h2>
 <ul>
-{% for component in dataStructureComponents %}
+{% for component in kernelModules %}
     <li>
         <a href="http://virtual/{{ component.id }}">{{ component.title }}</a>
     </li>

@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<object>
+<name>Node</name>
+<id>Node</id>
+<componentType>Node</componentType>
+<description>
+<para>
+A node is the data element of a graph.
+It can have arbitrary dynamic properties that are either set in the editor or simply assigned on run-time.
+Note that dynamic properties are only available after script execution, if they are registered for the node's type.
+</para>
+</description>
+<syntax>
+</syntax>
+<properties>
+<property>
+    <name>id</name>
+    <description>
+        <para>Read and set the unique identifier of this node.</para>
+    </description>
+    <type>int</type>
+</property>
+<property>
+    <name>x</name>
+    <description>
+        <para>Read and set the x-coordinate of the node.</para>
+    </description>
+    <type>real</type>
+</property>
+<property>
+    <name>y</name>
+    <description>
+        <para>Read and set the y-coordinate of the node.</para>
+    </description>
+    <type>real</type>
+</property>
+<property>
+    <name>color</name>
+    <description>
+        <para>Read and set the color string of this node in hex values (e.g., "#ff0000" for red).</para>
+    </description>
+    <type>string</type>
+</property>
+<property>
+    <name>type</name>
+    <description>
+        <para>Read at set the identifier of the node's type. If setting, the node type identifier must exist.</para>
+    </description>
+    <type>string</type>
+</property>
+</properties>
+<methods>
+<method>
+    <name>edges()</name>
+    <description>
+        <para>Return a list of all edges (incoming and outgoing) of this node.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>edges(type)</name>
+    <description>
+        <para>Return a list of all edges (incoming and outgoing) of this node of a specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>inEdges()</name>
+    <description>
+        <para>Return a list of incoming edges of this node.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>inEdges(type)</name>
+    <description>
+        <para>Return a list of all incoming edges of this node of a specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>outEdges()</name>
+    <description>
+        <para>Return a list of all outgoing edges of this node.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>outEdges(type)</name>
+    <description>
+        <para>Return a list of all outgoing edges of this node of a specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>neighbors()</name>
+    <description>
+        <para>Return list all nodes connected to this node. This method respects if edges are directed.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>predecessors()</name>
+    <description>
+        <para>Return a list all nodes connected to this node by an incoming edge.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>successors()</name>
+    <description>
+        <para>Return list all nodes connected to this node by an outgoing edge.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+</methods>
+</object>

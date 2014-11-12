@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<object>
+<name>Document</name>
+<id>Document</id>
+<componentType>Document</componentType>
+<description>
+<para>
+The document object provides access to all elements.
+</para>
+</description>
+<syntax>
+</syntax>
+<properties>
+</properties>
+<methods>
+<method>
+    <name>nodes()</name>
+    <description>
+        <para>Return a list of all nodes.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>nodes(type)</name>
+    <description>
+        <para>Return a list all nodes of specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of a node type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
+    <name>edges()</name>
+    <description>
+        <para>Return a list of all edges.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+    </parameters>
+</method>
+<method>
+    <name>edges(type)</name>
+    <description>
+        <para>Return a list all edges of specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+</methods>
+</object>

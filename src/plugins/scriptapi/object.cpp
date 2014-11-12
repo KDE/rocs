@@ -44,6 +44,10 @@ QString Object::id() const
 
 void Object::setComponentType(const QString& compenentTypeName)
 {
+    if (compenentTypeName == "Document") {
+        m_componentType = Document;
+        return;
+    }
     if (compenentTypeName == "Node") {
         m_componentType = Node;
         return;

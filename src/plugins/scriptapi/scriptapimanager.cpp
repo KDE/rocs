@@ -98,21 +98,9 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::DataLocation));
     engine->addTemplateLoader(loader);
     Grantlee::Template t = engine->loadByName("plugin/apidoc/objectApi.html");
-//     Grantlee::registerMetaType<ParameterDocumentation*>(); //FIXME commented out while porting
 
     // create mapping
     QVariantHash mapping;
-
-    // if parent object exists, find it
-    Object *parentObjectApi = 0;
-    if (!objectApi->objectParent().isEmpty()) {
-        foreach (Object *obj, m_objectApiList) {
-            if (obj->id() == objectApi->objectParent()) {
-                parentObjectApi = obj;
-                break;
-            }
-        }
-    }
 
     // object
     QVariant objectVar = QVariant::fromValue<QObject*>(objectApi);
@@ -121,26 +109,14 @@ QString ScriptApiManager::objectApiDocument(const QString &identifier)
     // properties
     // we use QHash to override parent properties
     QHash<QString, QVariant> propertyList;
-    if (parentObjectApi) { // add properties from parent
-        foreach (Property *property, parentObjectApi->properties()) {
-            propertyList.insert(property->name(), QVariant::fromValue<QObject*>(property));
-        }
-    }
     foreach (Property *property, objectApi->properties()) {
-        // override parent properties, if necessary
         propertyList.insert(property->name(), QVariant::fromValue<QObject*>(property));
     }
     mapping.insert("properties", propertyList.values());
 
     // properties
     QVariantList methodList;
-    if (parentObjectApi) {
-        foreach (Method *method, parentObjectApi->methods()) {
-            methodList.append(QVariant::fromValue<QObject*>(method));
-        }
-    }
     foreach (Method *method, objectApi->methods()) {
-        // TODO override parent methods
         methodList.append(QVariant::fromValue<QObject*>(method));
     }
     mapping.insert("methods", methodList);
@@ -196,7 +172,6 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
     objectApi->setId(root.firstChildElement("id").text());
     objectApi->setComponentType(root.firstChildElement("componentType").text());
     objectApi->setSyntaxExample(root.firstChildElement("syntax").text());
-    objectApi->setObjectParent(root.attribute("inherit"));
     QStringList paragraphs;
     for (QDomElement descriptionNode = root.firstChildElement("description").firstChildElement("para");
         !descriptionNode.isNull();
@@ -282,7 +257,6 @@ QString ScriptApiManager::apiOverviewDocument() const
     loader->setTemplateDirs(QStandardPaths::standardLocations(QStandardPaths::DataLocation));
     engine.addTemplateLoader(loader);
     Grantlee::Template t = engine.loadByName("plugin/apidoc/overview.html");
-//     Grantlee::registerMetaType<ParameterDocumentation*>(); //FIXME commented out while porting
 
     // create mapping
     QVariantHash mapping;
@@ -295,6 +269,9 @@ QString ScriptApiManager::apiOverviewDocument() const
         case Object::KernelModule:
             kernelModuleList.append(QVariant::fromValue<QObject*>(object));
             break;
+        case Object::Document:
+            elementList.append(QVariant::fromValue<QObject*>(object));
+            break;
         case Object::Edge:
             elementList.append(QVariant::fromValue<QObject*>(object));
             break;
@@ -304,9 +281,11 @@ QString ScriptApiManager::apiOverviewDocument() const
         }
     }
     mapping.insert("kernelModules", kernelModuleList);
+    mapping.insert("kernelElements", elementList);
 
     // localized strings
     mapping.insert("i18nScriptEngineApi", i18nc("@title", "Script Engine API"));
+    mapping.insert("i18nDocument", i18nc("@title", "The Graph Document"));
     mapping.insert("i18nObjects", i18nc("@title", "Objects"));
     mapping.insert("i18nEngineComponents", i18nc("@title", "Script Engine Modules"));
 
