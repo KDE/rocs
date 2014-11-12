@@ -17,6 +17,7 @@ Name[pl]=Wtyczka przypisywania wartości
 Name[pt]='Plugin' de Atribuição de Valores
 Name[pt_BR]=Plugin de atribuição de valores
 Name[sk]=Plugin priradenia hodnôt
+Name[tr]=Değerleri Ata
 Name[uk]=Додаток пов’язування значень
 Name[x-test]=xxAssign Values Pluginxx
 Comment=Assign values to graph edges and nodes.
