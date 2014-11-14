@@ -10,6 +10,7 @@ X-KDE-PluginInfo-License=GPL
 Name=PGF/TikZ Graph File Export Plugin
 Name[cs]=Export souborů grafů PGF/TikZ
 Name[de]=PGF/TikZ-Graphendateiexportmodul
+Name[en_GB]=PGF/TikZ Graph File Export Plugin
 Name[es]=Complemento de exportación de archivo de grafos PGF/TikZ
 Name[fi]=PGF/TikZ-graafitiedoston vientiliitännäinen
 Name[nl]=Plugin voor exporteren van PGF/TikZ Graph-bestanden
