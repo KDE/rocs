@@ -22,6 +22,7 @@ import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
+import QtQml.StateMachine 1.0 as DSM
 import org.kde.rocs.graphtheory 1.0
 
 Item {
@@ -93,6 +94,14 @@ Item {
             width: sceneScrollView.width - 30
             height: sceneScrollView.height - 20
             property variant origin: Qt.point(0, 0) // coordinate of global origin (0,0) in scene
+            signal deleteSelected();
+            signal updateSelection();
+            function clearSelection()
+            {
+                selectionRect.from = Qt.point(0, 0)
+                selectionRect.to = Qt.point(0, 0)
+                updateSelection();
+            }
 
             MouseArea {
                 id: sceneAction
@@ -105,12 +114,15 @@ Item {
                 property int mouseX
                 property int mouseY
 
-                signal deleteSelected();
-                signal clearSelection();
+                property variant lastMouseClicked: Qt.point(0, 0)
+                property variant lastMousePressed: Qt.point(0, 0)
+                property variant lastMouseReleased: Qt.point(0, 0)
+                property variant lastMousePosition: Qt.point(0, 0)
 
                 focus: true
 
                 onClicked: {
+                    lastMouseClicked = Qt.point(mouse.x, mouse.y)
                     if (addNodeAction.checked) {
                         mouse.accepted = true
                         createNode(mouse.x + scene.origin.x, mouse.y + scene.origin.y);
@@ -118,20 +130,14 @@ Item {
                     }
                 }
                 onPressed: {
-                    clearSelection();
-                    activePress = true
-                    startX = mouse.x
-                    startY = mouse.y
-                    endX = mouse.x
-                    endY = mouse.y
+                    lastMousePressed = Qt.point(mouse.x, mouse.y)
+                    console.log("rect set");
                 }
                 onPositionChanged: {
-                    mouseX = mouse.x
-                    mouseY = mouse.y
-                    endX = mouse.x
-                    endY = mouse.y
+                    lastMousePosition = Qt.point(mouse.x, mouse.y)
                 }
                 onReleased: {
+                    lastMouseReleased = Qt.point(mouse.x, mouse.y)
                     activePress = false
                     if (addEdgeAction.checked) {
                         addEdgeAction.apply();
@@ -146,24 +152,12 @@ Item {
                 }
             }
 
-            // highlighter for selection and edges
-            Component {
-                id: rectComponent
-                Rectangle {
-                    id: rectangle
-                    x: Math.min(sceneAction.startX, sceneAction.endX)
-                    y: Math.min(sceneAction.startY, sceneAction.endY)
-                    width: Math.abs(sceneAction.startX - sceneAction.endX)
-                    height: Math.abs(sceneAction.startY - sceneAction.endY)
-                    color: "#afc3deff"
-                    border.color: "steelblue"
-                    border.width: 2
-                    onXChanged: selectMoveAction.selectX = x
-                    onYChanged: selectMoveAction.selectY = y
-                    onWidthChanged: selectMoveAction.selectWidth = width
-                    onHeightChanged: selectMoveAction.selectHeight = height
-                }
+            SelectionRectangle {
+                id: selectionRect
+                visible: false
             }
+
+            // highlighter for selection and edges
             Component {
                 id: lineComponent
                 Line {
@@ -174,10 +168,8 @@ Item {
                 }
             }
             Loader {
+                id: loader
                 sourceComponent: {
-                    if (selectMoveAction.checked && sceneAction.activePress) {
-                        return rectComponent
-                    }
                     if (addEdgeAction.checked && sceneAction.activePress) {
                         return lineComponent
                     }
@@ -222,18 +214,10 @@ Item {
                     origin: scene.origin
                     highlighted: addEdgeAction.from == node || addEdgeAction.to == node
                     property bool __modifyingPosition : false
-                    function isSelected()
-                    {
-                        if (x + width/2 < selectMoveAction.selectX) return false;
-                        if (y + height/2 < selectMoveAction.selectY) return false;
-                        if (x - width/2 > selectMoveAction.selectX + selectMoveAction.selectWidth) return false;
-                        if (y - height/2 > selectMoveAction.selectY + selectMoveAction.selectHeight) return false;
-                        return true;
-                    }
                     Connections {
-                        target: sceneAction
-                        onMouseXChanged: {
-                            if (selectMoveAction.checked && isSelected()) {
+                        target: selectionRect
+                        onChanged: {
+                            if (selectMoveAction.checked && selectionRect.contains(x, y)) {
                                 highlighted = true
                             } else {
                                 highlighted = false
@@ -246,27 +230,16 @@ Item {
                                 }
                             }
                         }
-                        onMouseYChanged: {
-                            if (selectMoveAction.checked && isSelected()) {
-                                highlighted = true
-                            } else {
-                                highlighted = false
-                            }
-                            if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
-                                if (addEdgeAction.from == null) {
-                                    addEdgeAction.from = node;
-                                } else {
-                                    addEdgeAction.to = node
-                                }
-                            }
+                    }
+                    Connections {
+                        target: scene
+                        onUpdateSelection: {
+                            highlighted = false
                         }
                         onDeleteSelected: {
                             if (highlighted) {
                                 deleteNode(node)
                             }
-                        }
-                        onClearSelection: {
-                            highlighted = false
                         }
                     }
                     onXChanged: {
@@ -352,6 +325,52 @@ Item {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    // state maching solely for select/move
+    DSM.StateMachine {
+        id: stateMachine
+        initialState: stateIdle
+        running: true
+        DSM.State {
+            id: stateIdle
+            DSM.SignalTransition {
+                targetState: stateSelecting
+                signal: sceneAction.onPressed
+            }
+            DSM.SignalTransition {
+                signal: sceneAction.onClicked
+                onTriggered: {
+                    scene.clearSelection
+                    console.log("clear")
+                }
+            }
+            onEntered: console.log("enter: stateIdle")
+            onExited: console.log("exit: stateIdle")
+        }
+        DSM.State {
+            id: stateSelecting
+            DSM.SignalTransition {
+                signal: sceneAction.onPositionChanged
+                onTriggered: {
+                    selectionRect.visible = true
+                    selectionRect.to = sceneAction.lastMousePosition
+                }
+            }
+            DSM.SignalTransition {
+                targetState: stateIdle
+                signal: sceneAction.onReleased
+            }
+            onEntered: {
+                console.log("enter: stateSelecting")
+                scene.clearSelection()
+                selectionRect.from = sceneAction.lastMousePressed
+            }
+            onExited: {
+                console.log("exit: stateSelecting")
+                selectionRect.visible = false
             }
         }
     }
