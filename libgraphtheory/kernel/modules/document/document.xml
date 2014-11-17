@@ -93,7 +93,7 @@ The document object provides access to all elements.
     </parameters>
 </method>
 <method>
-    <name>createEdge(Node from, Node to)</name>
+    <name>createEdge(from, to)</name>
     <description>
         <para>Create edge between the given nodes of default edge type.</para>
     </description>
@@ -110,6 +110,32 @@ The document object provides access to all elements.
             <info>Target node of the edge.</info>
         </parameter>
     </parameters>
+</method>
+<method>
+    <name>remove(node)</name>
+    <description>
+        <para>Delete the given node.</para>
+    </description>
+    <returnType>void</returnType>
+    <parameters>
+        <parameter>
+            <name>node</name>
+            <type>Node</type>
+            <info>The to be deleted node.</info>
+        </parameter>
+</method>
+<method>
+    <name>remove(edge)</name>
+    <description>
+        <para>Delete the given edge.</para>
+    </description>
+    <returnType>void</returnType>
+    <parameters>
+        <parameter>
+            <name>edge</name>
+            <type>Edge</type>
+            <info>The to be deleted edge.</info>
+        </parameter>
 </method>
 </methods>
 </object>

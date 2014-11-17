@@ -53,6 +53,8 @@ public:
 
     virtual ~EdgeWrapper();
 
+    EdgePtr edge() const;
+
     /**
      * @return EdgeType::id of corresponding node
      */
@@ -85,5 +87,7 @@ private:
     const DocumentWrapper *m_documentWrapper;
 };
 }
+
+Q_DECLARE_METATYPE(GraphTheory::EdgeWrapper*)
 
 #endif

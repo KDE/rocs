@@ -205,3 +205,25 @@ QScriptValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
                                 QScriptEngine::AutoOwnership,
                                 QScriptEngine::AutoCreateDynamicProperties);
 }
+
+void DocumentWrapper::remove(NodeWrapper *node)
+{
+    if (!node) {
+        QString command = QString("Document.remove(node)");
+        emit message(i18nc("@info:shell", "%1: \"node\" is not a valid node object", command), Kernel::ErrorMessage);
+        return;
+    }
+    m_nodeMap.remove(node->node());
+    node->node()->destroy();
+}
+
+void DocumentWrapper::remove(EdgeWrapper *edge)
+{
+    if (!edge) {
+        QString command = QString("Document.remove(edge)");
+        emit message(i18nc("@info:shell", "%1: \"edge\" is not a valid edge object", command), Kernel::ErrorMessage);
+        return;
+    }
+    m_edgeMap.remove(edge->edge());
+    edge->edge()->destroy();
+}

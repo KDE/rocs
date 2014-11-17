@@ -46,6 +46,11 @@ EdgeWrapper::~EdgeWrapper()
 
 }
 
+EdgePtr EdgeWrapper::edge() const
+{
+    return m_edge;
+}
+
 int EdgeWrapper::type() const
 {
     return m_edge->type()->id();

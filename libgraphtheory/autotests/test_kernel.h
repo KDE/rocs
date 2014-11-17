@@ -71,6 +71,11 @@ private Q_SLOTS:
     void createNode();
     /** test script API to create edges **/
     void createEdge();
+    /** test script API to delete nodes **/
+    void deleteNode();
+    /** test script API to delete edges **/
+    void deleteEdge();
+
 };
 
 #endif

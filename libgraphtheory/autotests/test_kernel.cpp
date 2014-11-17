@@ -542,4 +542,44 @@ void TestKernel::createEdge()
     document->destroy();
 }
 
+void TestKernel::deleteNode()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    Node::create(document);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+    QCOMPARE(document->nodes().count(), 1);
+
+    script = "Document.remove(Document.nodes()[0]);";
+    result = kernel.execute(document, script);
+    QCOMPARE(document->nodes().count(), 0);
+
+    // cleanup
+    document->destroy();
+}
+
+void TestKernel::deleteEdge()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    Edge::create(nodeA, nodeB);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+    QCOMPARE(document->edges().count(), 1);
+
+    script = "Document.remove(Document.edges()[0]);";
+    result = kernel.execute(document, script);
+    QCOMPARE(document->edges().count(), 0);
+
+    // cleanup
+    document->destroy();
+}
+
 QTEST_MAIN(TestKernel)
