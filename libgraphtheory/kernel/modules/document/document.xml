@@ -73,5 +73,24 @@ The document object provides access to all elements.
         </parameter>
     </parameters>
 </method>
+<method>
+    <name>createEdge(Node from, Node to)</name>
+    <description>
+        <para>Create edge between the given nodes of default edge type.</para>
+    </description>
+    <returnType>Edge</returnType>
+    <parameters>
+        <parameter>
+            <name>from</name>
+            <type>Node</type>
+            <info>Start node of the edge.</info>
+        </parameter>
+        <parameter>
+            <name>to</name>
+            <type>Node</type>
+            <info>Target node of the edge.</info>
+        </parameter>
+    </parameters>
+</method>
 </methods>
 </object>

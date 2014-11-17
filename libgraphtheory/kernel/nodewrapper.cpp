@@ -50,6 +50,11 @@ NodeWrapper::~NodeWrapper()
 
 }
 
+NodePtr NodeWrapper::node() const
+{
+    return m_node;
+}
+
 int NodeWrapper::id() const
 {
     return m_node->id();

@@ -177,3 +177,21 @@ QScriptValue DocumentWrapper::edges(int type) const
     }
     return array;
 }
+
+QScriptValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
+{
+    if (!from) {
+        QString command = QString("Document.createEdge(from, to)");
+        emit message(i18nc("@info:shell", "%1: \"from\" is not a valid node object", command), Kernel::ErrorMessage);
+        return QScriptValue();
+    }
+    if (!to) {
+        QString command = QString("Document.createEdge(from, to)");
+        emit message(i18nc("@info:shell", "%1: \"to\" is not a valid node object", command), Kernel::ErrorMessage);
+        return QScriptValue();
+    }
+    EdgePtr edge = Edge::create(from->node(), to->node());
+    return m_engine->newQObject(edgeWrapper(edge),
+                                QScriptEngine::AutoOwnership,
+                                QScriptEngine::AutoCreateDynamicProperties);
+}

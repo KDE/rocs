@@ -82,6 +82,7 @@ QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
     // register meta types
     qScriptRegisterSequenceMetaType<QList<GraphTheory::NodeWrapper*> >(d->m_engine);
     qScriptRegisterSequenceMetaType<QList<GraphTheory::EdgeWrapper*> >(d->m_engine);
+    qRegisterMetaType<GraphTheory::NodeWrapper*>("Node");
 
     if (d->m_engine->isEvaluating()) {
         d->m_engine->abortEvaluation();

@@ -56,6 +56,8 @@ public:
 
     virtual ~NodeWrapper();
 
+    NodePtr node() const;
+
     /**
      * If the id value is invalid, -1 is returned.
      *
@@ -176,5 +178,7 @@ private:
     const DocumentWrapper *m_documentWrapper;
 };
 }
+
+Q_DECLARE_METATYPE(GraphTheory::NodeWrapper*)
 
 #endif

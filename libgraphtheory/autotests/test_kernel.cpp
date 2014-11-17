@@ -506,4 +506,24 @@ void TestKernel::automaticScriptObjectPropertyGeneration()
     document->destroy();
 }
 
+void TestKernel::createEdge()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    script = "Document.createEdge(Document.nodes()[0], Document.nodes()[1]);";
+    result = kernel.execute(document, script);
+    QCOMPARE(document->edges().count(), 1);
+
+    // cleanup
+    document->destroy();
+}
+
+
 QTEST_MAIN(TestKernel)
