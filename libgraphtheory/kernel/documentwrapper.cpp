@@ -178,6 +178,16 @@ QScriptValue DocumentWrapper::edges(int type) const
     return array;
 }
 
+QScriptValue DocumentWrapper::createNode(int x, int y)
+{
+    NodePtr node = Node::create(m_document);
+    node->setX(x);
+    node->setY(y);
+    return m_engine->newQObject(nodeWrapper(node),
+                                QScriptEngine::AutoOwnership,
+                                QScriptEngine::AutoCreateDynamicProperties);
+}
+
 QScriptValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
 {
     if (!from) {

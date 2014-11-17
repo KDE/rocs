@@ -74,6 +74,25 @@ The document object provides access to all elements.
     </parameters>
 </method>
 <method>
+    <name>createNode(int x, int y)</name>
+    <description>
+        <para>Create node at position (x,y).</para>
+    </description>
+    <returnType>Node</returnType>
+    <parameters>
+        <parameter>
+            <name>x</name>
+            <type>int</type>
+            <info>X-coordinate of the node.</info>
+        </parameter>
+        <parameter>
+            <name>y</name>
+            <type>int</type>
+            <info>Y-coordinate of the node.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
     <name>createEdge(Node from, Node to)</name>
     <description>
         <para>Create edge between the given nodes of default edge type.</para>

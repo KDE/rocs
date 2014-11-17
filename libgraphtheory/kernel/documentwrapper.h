@@ -65,6 +65,7 @@ public:
     Q_INVOKABLE QScriptValue nodes(int type) const;
     Q_INVOKABLE QScriptValue edges() const;
     Q_INVOKABLE QScriptValue edges(int type) const;
+    Q_INVOKABLE QScriptValue createNode(int x, int y);
     Q_INVOKABLE QScriptValue createEdge(GraphTheory::NodeWrapper *from, GraphTheory::NodeWrapper *to);
 
 Q_SIGNALS:
