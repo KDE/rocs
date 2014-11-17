@@ -166,6 +166,11 @@ Project::Project(const QUrl &projectFile, GraphTheory::Editor *graphEditor)
     d->m_graphEditor = graphEditor;
     d->m_projectUrl = projectFile;
     d->loadProject(projectFile);
+
+    for (const auto &document : d->m_codeDocuments) {
+        connect(document, &KTextEditor::Document::modifiedChanged,
+            this, &Project::modifiedChanged);
+    }
 }
 
 Project::~Project()
@@ -211,9 +216,11 @@ bool Project::addCodeDocument(KTextEditor::Document *document)
     }
 
     emit codeDocumentAboutToBeAdded(document, d->m_codeDocuments.count());
+    connect(document, &KTextEditor::Document::modifiedChanged,
+        this, &Project::modifiedChanged);
     d->m_codeDocuments.append(document);
     emit codeDocumentAdded();
-    d->m_modified = true;
+    setModified(true);
     return true;
 }
 
@@ -231,6 +238,8 @@ void Project::removeCodeDocument(KTextEditor::Document *document)
     document->closeUrl();
     int index = d->m_codeDocuments.indexOf(document);
     emit codeDocumentAboutToBeRemoved(index, index);
+    disconnect(document, &KTextEditor::Document::modifiedChanged,
+        this, &Project::modifiedChanged);
     d->m_codeDocuments.removeAt(index);
     emit codeDocumentRemoved();
     if (!path.startsWith(d->m_workingDirectory.path())) {
@@ -240,7 +249,7 @@ void Project::removeCodeDocument(KTextEditor::Document *document)
     if (!QFile::remove(path)) {
         qCritical() << "Could not remove code file" << path;
     }
-    d->m_modified = true;
+    setModified(true);
 }
 
 QList<KTextEditor::Document*> Project::codeDocuments() const
@@ -288,7 +297,7 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
     emit graphDocumentAboutToBeAdded(document, index);
     d->m_graphDocuments.append(document);
     emit graphDocumentAdded();
-    d->m_modified = true;
+    setModified(true);
 
     if (d->m_activeGraphDocumentIndex < 0) {
         setActiveGraphDocument(index);
@@ -321,7 +330,7 @@ void Project::removeGraphDocument(GraphDocumentPtr document)
     emit graphDocumentAboutToBeRemoved(index, index);
     d->m_graphDocuments.removeAt(index);
     emit graphDocumentRemoved();
-    d->m_modified = true;
+    setModified(true);
 }
 
 void Project::setActiveGraphDocument(int index)
@@ -371,7 +380,7 @@ bool Project::projectSave()
     tar.close();
 
     // update modified state
-    d->m_modified = false;
+    setModified(false);
 
     return true;
 }
@@ -385,6 +394,7 @@ bool Project::projectSaveAs(const QUrl &url)
 void Project::setModified(bool modified)
 {
     d->m_modified = modified;
+    emit modifiedChanged();
 }
 
 bool Project::isModified() const

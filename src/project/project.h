@@ -117,6 +117,7 @@ Q_SIGNALS:
     void codeDocumentAboutToBeRemoved(int,int);
     void codeDocumentRemoved();
     void activeCodeDocumentChanged(int index);
+    void modifiedChanged();
 
   /*
    * Handling of graph documents.

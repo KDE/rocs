@@ -280,6 +280,8 @@ void MainWindow::setProject(Project *project)
 
     connect(project, static_cast<void (Project::*)(GraphTheory::GraphDocumentPtr)>(&Project::activeGraphDocumentChanged),
         this, &MainWindow::graphDocumentChanged);
+    connect(project, &Project::modifiedChanged,
+        this, &MainWindow::updateCaption);
     m_currentProject = project;
     emit graphDocumentChanged(m_currentProject->activeGraphDocument());
 }
@@ -479,11 +481,16 @@ void MainWindow::updateCaption()
     if (!m_currentProject) {
         return;
     }
+    QString modified;
+    if (m_currentProject->isModified()) {
+        modified = '*';
+        qDebug() << "XXXXXXXXXXXXXX";
+    }
 
     if (m_currentProject->projectUrl().isEmpty()) {
-        setCaption(i18nc("caption text for temporary project", "[ untitled ]"));
+        setCaption(i18nc("caption text for temporary project", "[ untitled ]%1", modified));
     } else {
-        setCaption(QString("[ %1 ]").arg(m_currentProject->projectUrl().toLocalFile()));
+        setCaption(QString("[ %1 ]%2").arg(m_currentProject->projectUrl().toLocalFile()).arg(modified));
     }
 }
 
