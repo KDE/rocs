@@ -86,6 +86,22 @@ EdgeWrapper * DocumentWrapper::edgeWrapper(EdgePtr edge) const
     return m_edgeMap.value(edge);
 }
 
+QScriptValue DocumentWrapper::node(int id) const
+{
+    //TODO average access time is linear, which might drastically be improved by
+    //     using proper caching mechanisms at Document objects
+    for (auto const &node : m_document->nodes()) {
+        if (node->id() == id) {
+            return m_engine->newQObject(nodeWrapper(node),
+                                        QScriptEngine::AutoOwnership,
+                                        QScriptEngine::AutoCreateDynamicProperties);
+        }
+    }
+    QString command = QString("Document.node(%1)").arg(id);
+    emit message(i18nc("@info:shell", "%1: no node with ID %2 registered", command, id), Kernel::ErrorMessage);
+    return QScriptValue();
+}
+
 QScriptValue DocumentWrapper::nodes() const
 {
     NodeList nodes = m_document->nodes();

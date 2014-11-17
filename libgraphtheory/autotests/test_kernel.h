@@ -45,6 +45,8 @@ private Q_SLOTS:
     void graphObjectAccess();
     /** test access to graph objects of specific type (nodetype, edgetype) **/
     void graphObjectAccessWithTypes();
+    /** test access of nodes by node(id) **/
+    void nodeAccessMethods();
     /** test edge, inEdges, outEdges methods **/
     void edgeAccessMethods();
     /** test edge, inEdges, outEdges methods for edges of specific type **/

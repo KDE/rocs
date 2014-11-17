@@ -14,6 +14,20 @@ The document object provides access to all elements.
 </properties>
 <methods>
 <method>
+    <name>node(id)</name>
+    <description>
+        <para>Return the node with specified ID.</para>
+    </description>
+    <returnType>Node</returnType>
+    <parameters>
+        <parameter>
+            <name>id</name>
+            <type>int</type>
+            <info>Identifier of a node.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
     <name>nodes()</name>
     <description>
         <para>Return a list of all nodes.</para>

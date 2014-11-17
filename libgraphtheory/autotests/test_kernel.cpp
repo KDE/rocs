@@ -130,6 +130,25 @@ void TestKernel::graphObjectAccessWithTypes()
     document->destroy();
 }
 
+void TestKernel::nodeAccessMethods()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr node = Node::create(document);
+    node->setId(42);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    script = "Document.node(42).id;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(42));
+
+    // cleanup
+    document->destroy();
+}
+
 void TestKernel::edgeAccessMethods()
 {
     GraphDocumentPtr document = GraphDocument::create();
