@@ -49,9 +49,9 @@ ScriptApiManager::ScriptApiManager(QObject *parent)
 void ScriptApiManager::loadLocalData()
 {
     // locate directory
-    const QString dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("rocs/engineapi"), QStandardPaths::LocateDirectory);
+    const QString dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("rocs/kernelapi"), QStandardPaths::LocateDirectory);
     if (dir.isEmpty()) {
-        qCritical() << "Could not locate \"rocs/engineapi\" directory, abort loading script API documentation.";
+        qCritical() << "Could not locate \"rocs/kernelapi\" directory, abort loading script API documentation.";
         return;
     }
 
@@ -146,7 +146,7 @@ bool ScriptApiManager::loadObjectApi(const QUrl &path)
         return false;
     }
 
-    QXmlSchema schema = loadXmlSchema("engineapi");
+    QXmlSchema schema = loadXmlSchema("kernelapi");
     if (!schema.isValid()) {
         return false;
     }

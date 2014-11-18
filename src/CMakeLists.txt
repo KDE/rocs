@@ -105,7 +105,6 @@ target_link_libraries(rocs
 )
 
 ################## INSTALLS ##########################
-install(FILES plugins/scriptapi/engineapi.xsd DESTINATION ${DATA_INSTALL_DIR}/rocs/schemes)
 install(TARGETS rocs ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.rocs.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES rocsui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/rocs)

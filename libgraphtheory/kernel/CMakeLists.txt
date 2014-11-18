@@ -21,28 +21,15 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+install(FILES kernelapi.xsd DESTINATION ${DATA_INSTALL_DIR}/rocs/schemes)
+install(FILES modules/console/console.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/kernelapi)
+install(FILES modules/document/document.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/kernelapi)
+install(FILES modules/document/node.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/kernelapi)
+install(FILES modules/document/edge.xml DESTINATION ${DATA_INSTALL_DIR}/rocs/kernelapi)
 
-include(ECMMarkAsTest)
-
-find_package(Qt5Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
-
-if(NOT Qt5Test_FOUND)
-    message(STATUS "Qt5Test not found, autotests will not be built.")
-    return()
-endif()
-
-macro(GRAPHTHEORY_UNIT_TESTS)
-   foreach(_testname ${ARGN})
-      add_executable(${_testname} ${_testname}.cpp)
-      add_test(graphtheory-${_testname} ${_testname})
-      target_link_libraries(${_testname} rocsgraphtheory Qt5::Test Qt5::XmlPatterns )
-      ecm_mark_as_test(${_testname})
-   endforeach()
-endmacro()
-
-graphtheory_unit_tests(
-   test_graphoperations
-   test_kernel
-   test_kernelscriptapi
-)
+# also copy all files for autotests
+file(COPY kernelapi.xsd DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../autotests/kernelapi)
+file(COPY modules/console/console.xml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../autotests/kernelapi)
+file(COPY modules/document/document.xml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../autotests/kernelapi)
+file(COPY modules/document/node.xml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../autotests/kernelapi)
+file(COPY modules/document/edge.xml DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../autotests/kernelapi)
