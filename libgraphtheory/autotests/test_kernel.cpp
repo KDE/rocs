@@ -582,4 +582,27 @@ void TestKernel::deleteEdge()
     document->destroy();
 }
 
+void TestKernel::distance()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    EdgePtr edge = Edge::create(nodeA, nodeB);
+    document->edgeTypes().first()->addDynamicProperty("dist");
+
+    edge->setDynamicProperty("dist", "42");
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    script = "Document.nodes()[0].distance(\"dist\", Document.nodes())[1];";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(42));
+
+    // cleanup
+    document->destroy();
+}
+
 QTEST_MAIN(TestKernel)

@@ -50,6 +50,8 @@ public:
     DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engine);
     virtual ~DocumentWrapper();
 
+    QScriptEngine * engine() const;
+
     /**
      * \return wrapper for \p node
      */

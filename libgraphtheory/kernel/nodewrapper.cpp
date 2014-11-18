@@ -268,6 +268,75 @@ QList<NodeWrapper*> NodeWrapper::successors() const
     return successors.values();
 }
 
+QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList< NodeWrapper* > targets)
+{
+    //TODO at a later point in time:
+    //     factor this algorithm out into a self-containted graph algorithm class
+
+    // Implementation of Floyd-Warshall Algorithm:
+    // asymptotic runtime: O(n^3), n = number of nodes
+    //
+    // 1 let D be a |V| × |V| matrix of minimum distances initialized to ∞ (infinity)
+    // 2 foreach(vertex v)
+    // 3    D[v][v] ← 0
+    // 4 foreach (edge (u,v))
+    // 5    D[u][v] := w(u,v)  // the weight of the edge (u,v)
+    // 6 for (k from 1 to |V|)
+    // 7    for (i from 1 to |V|)
+    // 8       for (j from 1 to |V|)
+    // 9          if (D[i][j] > D[i][k] + D[k][j])
+    // 10             D[i][j] := D[i][k] + D[k][j]
+    // 11         end if
+
+    const NodeList nodes = m_node->document()->nodes();
+    const EdgeList edges = m_node->document()->edges();
+    const int n = nodes.length();
+
+    // create fast access mapping of node IDs to positions
+    QMap<int, int> map;
+    for (int i = 0; i < n; ++i) {
+        map.insert(nodes.at(i)->id(), i);
+    }
+
+    // initialize distance matrix D
+    QVector< QVector<qreal> > D(n, QVector<qreal>(n));
+    for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < n; ++j) {
+        if (i == j) {
+            D[i][j] = 0;
+        }
+        else {
+            D[i][j] = std::numeric_limits<qreal>::max();
+        }
+    }
+    }
+
+    // set edges lengths to D
+    for (const auto &edge : edges) {
+        D[map[edge->from()->id()]][map[edge->to()->id()]] = edge->dynamicProperty(lengthProperty).toDouble();
+    }
+
+    // computation
+    for (int k = 0; k < n; ++k) {
+    for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < n; ++j) {
+        if (D[i][j] > D[i][k] + D[k][j]) {
+            D[i][j] = D[i][k] + D[k][j];
+        }
+    }
+    }
+    }
+
+    // compute return statement
+    QScriptValue array = m_documentWrapper->engine()->newArray(targets.length());
+    const int from = map[m_node->id()];
+    for (int i = 0; i < targets.length(); ++i) {
+        const qreal distance = D[from][map[targets.at(i)->id()]];
+        array.setProperty(i, distance);
+    }
+    return array;
+}
+
 bool NodeWrapper::event(QEvent *e)
 {
     if (e->type() == QEvent::DynamicPropertyChange) {

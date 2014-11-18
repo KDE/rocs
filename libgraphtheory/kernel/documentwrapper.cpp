@@ -50,6 +50,11 @@ DocumentWrapper::~DocumentWrapper()
     qDeleteAll(m_nodeMap);
 }
 
+QScriptEngine* DocumentWrapper::engine() const
+{
+    return m_engine;
+}
+
 void DocumentWrapper::registerWrapper(NodePtr node)
 {
     if (m_nodeMap.contains(node)) {

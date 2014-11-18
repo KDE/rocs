@@ -146,5 +146,24 @@ Note that dynamic properties are only available after script execution, if they 
     <parameters>
     </parameters>
 </method>
+<method>
+    <name>distance(property, targets)</name>
+    <description>
+        <para>Return list of distances to specified targets in same order.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>property</name>
+            <type>string</type>
+            <info>Name of edge property that holds the edge length.</info>
+        </parameter>
+        <parameter>
+            <name>targets</name>
+            <type>array</type>
+            <info>List of nodes to that the distances shall be computed.</info>
+        </parameter>
+    </parameters>
+</method>
 </methods>
 </object>

@@ -75,7 +75,8 @@ private Q_SLOTS:
     void deleteNode();
     /** test script API to delete edges **/
     void deleteEdge();
-
+    /** test Node::distance function **/
+    void distance();
 };
 
 #endif
