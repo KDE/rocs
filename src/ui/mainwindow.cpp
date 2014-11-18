@@ -484,7 +484,6 @@ void MainWindow::updateCaption()
     QString modified;
     if (m_currentProject->isModified()) {
         modified = '*';
-        qDebug() << "XXXXXXXXXXXXXX";
     }
 
     if (m_currentProject->projectUrl().isEmpty()) {

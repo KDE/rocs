@@ -261,6 +261,7 @@ public:
 
 Q_SIGNALS:
     void documentUrlChanged();
+    void modifiedChanged();
 
 protected:
     GraphDocument();

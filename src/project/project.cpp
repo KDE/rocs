@@ -171,6 +171,10 @@ Project::Project(const QUrl &projectFile, GraphTheory::Editor *graphEditor)
         connect(document, &KTextEditor::Document::modifiedChanged,
             this, &Project::modifiedChanged);
     }
+    for (const auto &document : d->m_graphDocuments) {
+        connect(document.data(), &GraphDocument::modifiedChanged,
+            this, &Project::modifiedChanged);
+    }
 }
 
 Project::~Project()
@@ -295,6 +299,8 @@ bool Project::addGraphDocument(GraphDocumentPtr document)
     document->documentSaveAs(QUrl::fromLocalFile(path));
     int index = d->m_graphDocuments.length();
     emit graphDocumentAboutToBeAdded(document, index);
+    connect(document.data(), &GraphDocument::modifiedChanged,
+        this, &Project::modifiedChanged);
     d->m_graphDocuments.append(document);
     emit graphDocumentAdded();
     setModified(true);
@@ -393,6 +399,9 @@ bool Project::projectSaveAs(const QUrl &url)
 
 void Project::setModified(bool modified)
 {
+    if (modified == d->m_modified) {
+        return;
+    }
     d->m_modified = modified;
     emit modifiedChanged();
 }

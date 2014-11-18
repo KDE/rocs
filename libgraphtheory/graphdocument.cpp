@@ -177,7 +177,7 @@ void GraphDocument::insert(NodePtr node)
     emit nodeAboutToBeAdded(node, d->m_nodes.length());
     d->m_nodes.append(node);
     emit nodeAdded();
-    d->m_modified = true;
+    setModified(true);
 }
 
 void GraphDocument::insert(EdgePtr edge)
@@ -193,7 +193,7 @@ void GraphDocument::insert(EdgePtr edge)
     emit edgeAboutToBeAdded(edge, d->m_edges.length());
     d->m_edges.append(edge);
     emit edgeAdded();
-    d->m_modified = true;
+    setModified(true);
 }
 
 void GraphDocument::insert(NodeTypePtr type)
@@ -205,7 +205,7 @@ void GraphDocument::insert(NodeTypePtr type)
     emit nodeTypeAboutToBeAdded(type, d->m_nodeTypes.length());
     d->m_nodeTypes.append(type);
     emit nodeTypeAdded();
-    d->m_modified = true;
+    setModified(true);
 }
 
 void GraphDocument::insert(EdgeTypePtr type)
@@ -217,7 +217,7 @@ void GraphDocument::insert(EdgeTypePtr type)
     emit edgeTypeAboutToBeAdded(type, d->m_edgeTypes.length());
     d->m_edgeTypes.append(type);
     emit edgeTypeAdded();
-    d->m_modified = true;
+    setModified(true);
 }
 
 void GraphDocument::remove(NodePtr node)
@@ -231,7 +231,7 @@ void GraphDocument::remove(NodePtr node)
         d->m_nodes.removeAt(index);
         emit nodesRemoved();
     }
-    d->m_modified = true;
+    setModified(true);
 }
 
 void GraphDocument::remove(EdgePtr edge)
@@ -245,7 +245,7 @@ void GraphDocument::remove(EdgePtr edge)
         d->m_edges.removeAt(index);
         emit edgesRemoved();
     }
-    d->m_modified = true;
+    setModified(true);
 }
 
 void GraphDocument::remove(NodeTypePtr type)
@@ -262,7 +262,7 @@ void GraphDocument::remove(NodeTypePtr type)
     emit nodeTypesAboutToBeRemoved(index, index);
     d->m_nodeTypes.removeOne(type);
     emit nodeTypesRemoved();
-    d->m_modified = true;
+    setModified(true);
 }
 
 void GraphDocument::remove(EdgeTypePtr type)
@@ -277,7 +277,7 @@ void GraphDocument::remove(EdgeTypePtr type)
     emit edgeTypesAboutToBeRemoved(index, index);
     d->m_edgeTypes.removeOne(type);
     emit edgeTypesRemoved();
-    d->m_modified = true;
+    setModified(true);
 }
 
 QList< EdgeTypePtr > GraphDocument::edgeTypes() const
@@ -316,7 +316,7 @@ void GraphDocument::setDocumentName(const QString& name)
     }
     d->m_name = name;
     emit documentNameChanged(name);
-    d->m_modified = true;
+    setModified(true);
 }
 //END file stuff
 
@@ -326,7 +326,7 @@ bool GraphDocument::documentReload()
 {
     qCritical() << "graph reloading not implemented!";
     //FIXME reload document
-    d->m_modified = false;
+    setModified(false);
     return true;
 }
 
@@ -356,7 +356,7 @@ bool GraphDocument::documentSaveAs(const QUrl &documentUrl)
         d->m_documentUrl = documentUrl;
         emit documentUrlChanged();
     }
-    d->m_modified = false;
+    setModified(false);
 
     return true;
 }
@@ -379,7 +379,11 @@ bool GraphDocument::isModified() const
 
 void GraphDocument::setModified(bool modified)
 {
+    if (modified == d->m_modified) {
+        return;
+    }
     d->m_modified = modified;
+    emit modifiedChanged();
 }
 
 //END
