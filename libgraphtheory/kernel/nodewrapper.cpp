@@ -314,6 +314,9 @@ QScriptValue NodeWrapper::distance(const QString &lengthProperty, QList< NodeWra
     // set edges lengths to D
     for (const auto &edge : edges) {
         D[map[edge->from()->id()]][map[edge->to()->id()]] = edge->dynamicProperty(lengthProperty).toDouble();
+        if (edge->type()->direction() == EdgeType::Bidirectional) {
+            D[map[edge->to()->id()]][map[edge->from()->id()]] = edge->dynamicProperty(lengthProperty).toDouble();
+        }
     }
 
     // computation

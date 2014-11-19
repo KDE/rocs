@@ -587,19 +587,27 @@ void TestKernel::distance()
     GraphDocumentPtr document = GraphDocument::create();
     NodePtr nodeA = Node::create(document);
     NodePtr nodeB = Node::create(document);
-    EdgePtr edge = Edge::create(nodeA, nodeB);
+    NodePtr nodeC = Node::create(document);
+    EdgePtr edgeAB = Edge::create(nodeA, nodeB);
+    EdgePtr edgeBC = Edge::create(nodeB, nodeC);
     document->edgeTypes().first()->addDynamicProperty("dist");
+    document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
 
-    edge->setDynamicProperty("dist", "42");
+    edgeAB->setDynamicProperty("dist", "1");
+    edgeBC->setDynamicProperty("dist", "1");
 
     // test nodes
     Kernel kernel;
     QString script;
     QScriptValue result;
 
-    script = "Document.nodes()[0].distance(\"dist\", Document.nodes())[1];";
+    script = "Document.nodes()[0].distance(\"dist\", Document.nodes())[2];";
     result = kernel.execute(document, script);
-    QCOMPARE(result.toInteger(), qreal(42));
+    QCOMPARE(result.toInteger(), qreal(2));
+
+    script = "Document.nodes()[2].distance(\"dist\", Document.nodes())[0];";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(2));
 
     // cleanup
     document->destroy();
