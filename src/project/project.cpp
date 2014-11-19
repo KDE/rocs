@@ -98,7 +98,8 @@ bool ProjectPrivate::loadProject(const QUrl &url)
 
     QJsonArray codeDocs = metaInfo["scripts"].toArray();
     for (int index = 0; index < codeDocs.count(); ++index) {
-        QString filename = codeDocs.at(index).toString();
+        QJsonObject docInfo = codeDocs.at(index).toObject();
+        QString filename = docInfo["file"].toString();
         KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(0);
         document->openUrl(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + filename));
         m_codeDocuments.append(document);
@@ -106,11 +107,13 @@ bool ProjectPrivate::loadProject(const QUrl &url)
 
     QJsonArray graphDocs = metaInfo["graphs"].toArray();
     for (int index = 0; index < graphDocs.count(); ++index) {
-        QString fileName = graphDocs.at(index).toString();
+        QJsonObject docInfo = graphDocs.at(index).toObject();
+        QString fileName = docInfo["file"].toString();
         QUrl fileUrl = QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + fileName);
         GraphDocumentPtr document = m_graphEditor->openDocument(fileUrl);
         // add only to project, if document was loaded correctly
         if (document) {
+            document->setDocumentName(docInfo["name"].toString());
             m_graphDocuments.append(document);
         }
     }
@@ -128,10 +131,15 @@ bool ProjectPrivate::writeProjectMetaInfo()
 
     QJsonArray codeDocs, graphDocs;
     foreach (KTextEditor::Document *document,  m_codeDocuments) {
-        codeDocs.append(document->url().fileName());
+        QJsonObject docInfo;
+        docInfo.insert("file", document->url().fileName());
+        codeDocs.append(docInfo);
     }
     foreach (GraphTheory::GraphDocumentPtr document,  m_graphDocuments) {
-        graphDocs.append(document->documentUrl().fileName());
+        QJsonObject docInfo;
+        docInfo.insert("file", document->documentUrl().fileName());
+        docInfo.insert("name", document->documentName());
+        graphDocs.append(docInfo);
     }
     metaInfo.insert("scripts", codeDocs);
     metaInfo.insert("graphs", graphDocs);

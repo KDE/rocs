@@ -100,6 +100,7 @@ void TestProject::loadSaveMultipleGraphDocuments()
     Project project(graphEditor);
     GraphDocumentPtr docA = graphEditor->createDocument();
     GraphDocumentPtr docB = graphEditor->createDocument();
+    docA->setDocumentName("docA");
     project.addGraphDocument(docA);
     project.addGraphDocument(docB);
 
@@ -119,6 +120,7 @@ void TestProject::loadSaveMultipleGraphDocuments()
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
     QCOMPARE(loadedProject.graphDocuments().count(), 2);
     QCOMPARE(loadedProject.graphDocuments().at(0)->nodes().count(), 1);
+    QCOMPARE(loadedProject.graphDocuments().at(0)->documentName(), QString("docA"));
     QCOMPARE(loadedProject.graphDocuments().at(1)->nodes().count(), 2);
 
     graphEditor->deleteLater();
