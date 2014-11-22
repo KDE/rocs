@@ -37,7 +37,6 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
     connect(m_edge.data(), &Edge::typeColorChanged, this, &EdgeWrapper::colorChanged);
     connect(m_edge.data(), &Edge::dynamicPropertiesChanged, this, &EdgeWrapper::updateDynamicProperties);
     connect(m_edge.data(), &Edge::typeChanged, this, &EdgeWrapper::typeChanged);
-
     updateDynamicProperties();
 }
 

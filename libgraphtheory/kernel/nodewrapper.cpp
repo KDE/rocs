@@ -33,7 +33,8 @@
 using namespace GraphTheory;
 
 NodeWrapper::NodeWrapper(NodePtr node, DocumentWrapper *documentWrapper)
-    : m_node(node)
+    : QObject(node.data())
+    , m_node(node)
     , m_documentWrapper(documentWrapper)
 {
     connect(m_node.data(), &Node::idChanged, this, &NodeWrapper::idChanged);

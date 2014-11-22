@@ -64,7 +64,7 @@ void CodeEditorWidget::setProject(Project *project)
     }
 }
 
-KTextEditor::Document* CodeEditorWidget::activeDocument() const
+KTextEditor::Document * CodeEditorWidget::activeDocument() const
 {
     return m_project->codeDocuments().at(m_viewWidgets->currentIndex());
 }

@@ -98,7 +98,7 @@ QScriptValue DocumentWrapper::node(int id) const
     for (auto const &node : m_document->nodes()) {
         if (node->id() == id) {
             return m_engine->newQObject(nodeWrapper(node),
-                                        QScriptEngine::AutoOwnership,
+                                        QScriptEngine::QtOwnership,
                                         QScriptEngine::AutoCreateDynamicProperties);
         }
     }
@@ -113,7 +113,7 @@ QScriptValue DocumentWrapper::nodes() const
     QScriptValue array = m_engine->newArray(nodes.length());
     for (int i = 0; i < nodes.length(); ++i) {
         QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)),
-                                                            QScriptEngine::AutoOwnership,
+                                                            QScriptEngine::QtOwnership,
                                                             QScriptEngine::AutoCreateDynamicProperties);
         array.setProperty(i, nodeScriptValue);
     }
@@ -138,7 +138,7 @@ QScriptValue DocumentWrapper::nodes(int type) const
     QScriptValue array = m_engine->newArray(nodes.length());
     for (int i = 0; i < nodes.length(); ++i) {
         QScriptValue nodeScriptValue = m_engine->newQObject(nodeWrapper(nodes.at(i)),
-                                                            QScriptEngine::AutoOwnership,
+                                                            QScriptEngine::QtOwnership,
                                                             QScriptEngine::AutoCreateDynamicProperties);
         array.setProperty(i, nodeScriptValue);
     }
@@ -151,7 +151,7 @@ QScriptValue DocumentWrapper::edges() const
     QScriptValue array = m_engine->newArray(edges.length());
     for (int i = 0; i < edges.length(); ++i) {
         QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)),
-                                                            QScriptEngine::AutoOwnership,
+                                                            QScriptEngine::QtOwnership,
                                                             QScriptEngine::AutoCreateDynamicProperties);
         array.setProperty(i, edgeScriptValue);
     }
@@ -176,7 +176,7 @@ QScriptValue DocumentWrapper::edges(int type) const
     QScriptValue array = m_engine->newArray(edges.length());
     for (int i = 0; i < edges.length(); ++i) {
         QScriptValue edgeScriptValue = m_engine->newQObject(edgeWrapper(edges.at(i)),
-                                                            QScriptEngine::AutoOwnership,
+                                                            QScriptEngine::QtOwnership,
                                                             QScriptEngine::AutoCreateDynamicProperties);
         array.setProperty(i, edgeScriptValue);
     }
@@ -189,7 +189,7 @@ QScriptValue DocumentWrapper::createNode(int x, int y)
     node->setX(x);
     node->setY(y);
     return m_engine->newQObject(nodeWrapper(node),
-                                QScriptEngine::AutoOwnership,
+                                QScriptEngine::QtOwnership,
                                 QScriptEngine::AutoCreateDynamicProperties);
 }
 
@@ -207,7 +207,7 @@ QScriptValue DocumentWrapper::createEdge(NodeWrapper *from, NodeWrapper *to)
     }
     EdgePtr edge = Edge::create(from->node(), to->node());
     return m_engine->newQObject(edgeWrapper(edge),
-                                QScriptEngine::AutoOwnership,
+                                QScriptEngine::QtOwnership,
                                 QScriptEngine::AutoCreateDynamicProperties);
 }
 
@@ -218,7 +218,10 @@ void DocumentWrapper::remove(NodeWrapper *node)
         emit message(i18nc("@info:shell", "%1: \"node\" is not a valid node object", command), Kernel::ErrorMessage);
         return;
     }
-    m_nodeMap.remove(node->node());
+    // note: The NodeWrapper object explicitly is not removed freom m_nodeMap and by this the node object is not removed.
+    // This has the benefit to not taking care validity of Node, NodeWrapper and its QScriptObject, but on the downside
+    // leads to much used memory, that is only freed after run.
+    // TODO: we need a mechanism that carefully implements on-the-fly object deletions
     node->node()->destroy();
 }
 
@@ -229,6 +232,9 @@ void DocumentWrapper::remove(EdgeWrapper *edge)
         emit message(i18nc("@info:shell", "%1: \"edge\" is not a valid edge object", command), Kernel::ErrorMessage);
         return;
     }
-    m_edgeMap.remove(edge->edge());
+    // note: The EdgeWrapper object explicitly is not removed freom m_edgeMap and by this the edge object is not removed.
+    // This has the benefit to not taking care validity of Edge, EdgeWrapper and its QScriptObject, but on the downside
+    // leads to much used memory, that is only freed after run.
+    // TODO: we need a mechanism that carefully implements on-the-fly object deletions
     edge->edge()->destroy();
 }

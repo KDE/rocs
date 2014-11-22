@@ -65,6 +65,7 @@ public:
 
     /**
      * Destroys the node object, invoke destroy calls for edges, and removes it from the document.
+     * This emits the destroyed() signal
      */
     void destroy();
 
