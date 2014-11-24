@@ -37,9 +37,11 @@ public:
 
 private Q_SLOTS:
     void apply();
+    void validateIdInput();
 
 private:
     NodePtr m_node;
+    QPushButton *m_okButton;
     Ui::NodeProperties *ui;
 };
 }
