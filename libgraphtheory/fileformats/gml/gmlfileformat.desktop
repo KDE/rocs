@@ -8,6 +8,7 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 Name=GML File Format
+Name[ca]=Format de fitxer GML
 Name[cs]=Formát souboru GML
 Name[de]=GML-Dateiformat
 Name[en_GB]=GML File Format

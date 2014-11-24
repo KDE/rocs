@@ -8,6 +8,7 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Plugins
 X-KDE-PluginInfo-License=GPL
 Name=PGF/TikZ Graph File Export Plugin
+Name[ca]=Connector d'exportació de fitxer de grafs PGF/TikZ
 Name[cs]=Export souborů grafů PGF/TikZ
 Name[de]=PGF/TikZ-Graphendateiexportmodul
 Name[en_GB]=PGF/TikZ Graph File Export Plugin
