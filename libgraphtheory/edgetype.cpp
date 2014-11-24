@@ -32,22 +32,24 @@ class GraphTheory::EdgeTypePrivate {
 public:
     EdgeTypePrivate()
         : m_id(-1)
+        , m_style(new EdgeTypeStyle)
         , m_direction(EdgeType::Unidirectional)
         , m_name(QString())
         , m_valid(false)
     {
-        m_style.setColor(QColor(77, 77, 77)); // dark gray
+
     }
 
     ~EdgeTypePrivate()
     {
+        m_style->deleteLater();
     }
 
     EdgeTypePtr q;
     GraphDocumentPtr m_document;
     int m_id;
     QStringList m_dynamicProperties;
-    EdgeTypeStyle m_style;
+    EdgeTypeStyle *m_style;
     EdgeType::Direction m_direction;
     QString m_name;
     bool m_valid;
@@ -58,9 +60,6 @@ EdgeType::EdgeType()
     , d(new EdgeTypePrivate)
 {
     ++EdgeType::objectCounter;
-
-    connect(&d->m_style, &EdgeTypeStyle::colorChanged,
-        this, &EdgeType::colorChanged);
 }
 
 EdgeType::~EdgeType()
@@ -133,14 +132,9 @@ void EdgeType::setId(int id)
     emit idChanged(id);
 }
 
-QColor EdgeType::color() const
+EdgeTypeStyle * EdgeType::style() const
 {
-    return d->m_style.color();
-}
-
-void EdgeType::setColor(const QColor &color)
-{
-    d->m_style.setColor(color);
+    return d->m_style;
 }
 
 QStringList EdgeType::dynamicProperties() const

@@ -57,6 +57,7 @@ private Q_SLOTS:
     void updatePosition();
     void updateColor();
     void updateDirection();
+    void updateVisibility();
 
 private:
     Q_DISABLE_COPY(EdgeItem)

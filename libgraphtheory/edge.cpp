@@ -19,6 +19,7 @@
  */
 
 #include "edge.h"
+#include "edgetypestyle.h"
 #include <QVariant>
 #include <QDebug>
 
@@ -136,8 +137,10 @@ void Edge::setType(EdgeTypePtr type)
         this, &Edge::updateDynamicProperty);
     connect(type.data(), &EdgeType::directionChanged,
         this, &Edge::directionChanged);
-    connect(type.data(), &EdgeType::colorChanged,
+    connect(type->style(), &EdgeTypeStyle::colorChanged,
         this, &Edge::typeColorChanged);
+    connect(type->style(), &EdgeTypeStyle::visibilityChanged,
+        this, &Edge::typeVisibilityChanged);
     connect(type.data(), &EdgeType::dynamicPropertyRenamed,
         this, &Edge::renameDynamicProperty);
 

@@ -19,6 +19,7 @@
  */
 
 #include "edgeitem.h"
+#include "edgetypestyle.h"
 #include "qsglinenode.h"
 #include <QSGSimpleRectNode>
 #include <QPainter>
@@ -36,6 +37,7 @@ public:
         , m_nodeWidth(32)
         , m_colorDirty(false)
         , m_directionDirty(false)
+        , m_visible(true)
     {
     }
 
@@ -48,6 +50,7 @@ public:
     const int m_nodeWidth;
     bool m_colorDirty;
     bool m_directionDirty;
+    bool m_visible;
 };
 
 EdgeItem::EdgeItem(QQuickItem *parent)
@@ -78,6 +81,7 @@ void EdgeItem::setEdge(Edge *edge)
         edge->disconnect(this);
     }
     d->m_edge = edge;
+    d->m_visible = edge->type()->style()->isVisible();
     connect(edge->from().data(), &Node::positionChanged,
         this, &EdgeItem::updatePosition);
     connect(edge->to().data(), &Node::positionChanged,
@@ -88,8 +92,11 @@ void EdgeItem::setEdge(Edge *edge)
         this, &EdgeItem::updateColor);
     connect(edge, &Edge::directionChanged,
         this, &EdgeItem::updateDirection);
+    connect(edge, &Edge::typeVisibilityChanged,
+        this, &EdgeItem::updateVisibility);
 
     updatePosition();
+    updateVisibility();
     emit edgeChanged();
 }
 
@@ -113,10 +120,10 @@ QSGNode * EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeDa
     if (!n) {
         n = new QSGLineNode();
         n->setDirection(d->m_edge->type()->direction());
-        n->setColor(d->m_edge->type()->color());
+        n->setColor(d->m_edge->type()->style()->color());
     }
     if (d->m_colorDirty) {
-        n->setColor(d->m_edge->type()->color());
+        n->setColor(d->m_edge->type()->style()->color());
         d->m_colorDirty = false;
     }
     if (d->m_directionDirty) {
@@ -163,4 +170,14 @@ void EdgeItem::updateDirection()
 {
     d->m_directionDirty = true;
     update();
+}
+
+void EdgeItem::updateVisibility()
+{
+    d->m_visible = d->m_edge->type()->style()->isVisible();
+    if (d->m_visible) {
+        setOpacity(1);
+    } else {
+        setOpacity(0);
+    }
 }

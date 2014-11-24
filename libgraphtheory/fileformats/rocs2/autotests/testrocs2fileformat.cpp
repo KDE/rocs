@@ -24,6 +24,7 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
+#include "edgetypestyle.h"
 #include <QtTest/QtTest>
 
 using namespace GraphTheory;
@@ -46,7 +47,7 @@ void TestRocs2FileFormat::documentTypesTest()
     // setup edge type
     document->edgeTypes().first()->setId(1);
     document->edgeTypes().first()->setName("testName");
-    document->edgeTypes().first()->setColor(QColor("#ff0000"));
+    document->edgeTypes().first()->style()->setColor(QColor("#ff0000"));
     document->edgeTypes().first()->addDynamicProperty("label");
     document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
 
@@ -74,7 +75,7 @@ void TestRocs2FileFormat::documentTypesTest()
     QCOMPARE(importDocument->edgeTypes().count(), 1);
     QCOMPARE(importDocument->edgeTypes().first()->id(), 1);
     QCOMPARE(importDocument->edgeTypes().first()->name(), QString("testName"));
-    QCOMPARE(importDocument->edgeTypes().first()->color().name(), QString("#ff0000"));
+    QCOMPARE(importDocument->edgeTypes().first()->style()->color().name(), QString("#ff0000"));
     QCOMPARE(importDocument->edgeTypes().first()->direction(), EdgeType::Bidirectional);
 }
 

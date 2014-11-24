@@ -20,9 +20,9 @@
 
 #ifndef EDGETYPESTYLE_H
 #define EDGETYPESTYLE_H
+
 #include "libgraphtheoryexport.h"
 #include "typenames.h"
-
 #include <QObject>
 #include <QSharedPointer>
 
@@ -34,7 +34,7 @@ class EdgeTypeStylePrivate;
 /**
  * \class Edge
  */
-class EdgeTypeStyle : public QObject
+class GRAPHTHEORY_EXPORT EdgeTypeStyle : public QObject
 {
     Q_OBJECT
 public:
@@ -42,9 +42,12 @@ public:
     ~EdgeTypeStyle();
     void setColor(const QColor &color);
     QColor color() const;
+    void setVisible(bool visible);
+    bool isVisible() const;
 
 Q_SIGNALS:
     void colorChanged(QColor);
+    void visibilityChanged(bool);
 
 private:
     Q_DISABLE_COPY(EdgeTypeStyle)

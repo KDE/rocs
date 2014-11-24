@@ -24,6 +24,7 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
+#include "edgetypestyle.h"
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <QJsonDocument>
@@ -99,7 +100,7 @@ void Rocs2FileFormat::readFile()
         EdgeTypePtr type = EdgeType::create(document);
         type->setId(typeJson["Id"].toInt());
         type->setName(typeJson["Name"].toString());
-        type->setColor(QColor(typeJson["Color"].toString()));
+        type->style()->setColor(QColor(typeJson["Color"].toString()));
         type->setDirection(direction(typeJson["Direction"].toString()));
 
         QJsonArray propertiesJson = typeJson["Properties"].toArray();
@@ -231,7 +232,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
             qCritical() << "Serializing unset ID, this will break import";
         }
         typeJson.insert("Name", type->name());
-        typeJson.insert("Color", type->color().name());
+        typeJson.insert("Color", type->style()->color().name());
         typeJson.insert("Direction", direction(type->direction()));
         QJsonArray propertiesJson;
         foreach (const QString &property, type->dynamicProperties()) {

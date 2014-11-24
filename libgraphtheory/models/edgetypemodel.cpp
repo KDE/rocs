@@ -20,6 +20,7 @@
 
 #include "edgetypemodel.h"
 #include "graphdocument.h"
+#include "edgetypestyle.h"
 
 #include <KLocalizedString>
 #include <QSignalMapper>
@@ -118,7 +119,7 @@ QVariant EdgeTypeModel::data(const QModelIndex &index, int role) const
     case TitleRole:
         return type->name();
     case ColorRole:
-        return type->color();
+        return type->style()->color();
     case DirectionRole:
         return type->direction();
     case DataRole:
@@ -150,7 +151,7 @@ bool EdgeTypeModel::setData(const QModelIndex &index, const QVariant &value, int
         type->setName(value.toString());
         break;
     case ColorRole:
-        type->setColor(value.value<QColor>());
+        type->style()->setColor(value.value<QColor>());
         break;
     case DirectionRole:
         type->setDirection(static_cast<EdgeType::Direction>(value.toInt()));
@@ -182,7 +183,7 @@ void EdgeTypeModel::onEdgeTypeAboutToBeAdded(EdgeTypePtr type, int index)
         d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
     connect(type.data(), &EdgeType::nameChanged,
         d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
-    connect(type.data(), &EdgeType::colorChanged,
+    connect(type->style(), &EdgeTypeStyle::colorChanged,
         d->m_signalMapper, static_cast<void (QSignalMapper::*)(void)>(&QSignalMapper::map));
 }
 

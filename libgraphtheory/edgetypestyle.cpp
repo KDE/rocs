@@ -20,13 +20,15 @@
 
 #include "edgetypestyle.h"
 #include <QColor>
+#include <QDebug>
 
 using namespace GraphTheory;
 
 class GraphTheory::EdgeTypeStylePrivate {
 public:
     EdgeTypeStylePrivate()
-        : m_color(QColor())
+        : m_color(77, 77, 77) // dark gray
+        , m_visible(true)
     {
     }
 
@@ -35,9 +37,12 @@ public:
     }
 
     QColor m_color;
+    bool m_visible;
 };
 
-EdgeTypeStyle::EdgeTypeStyle(): QObject()
+EdgeTypeStyle::EdgeTypeStyle()
+    : QObject()
+    , d(new EdgeTypeStylePrivate)
 {
 
 }
@@ -59,4 +64,18 @@ void EdgeTypeStyle::setColor(const QColor &color)
 QColor EdgeTypeStyle::color() const
 {
     return d->m_color;
+}
+
+void EdgeTypeStyle::setVisible(bool visible)
+{
+    if (d->m_visible == visible) {
+        return;
+    }
+    d->m_visible = visible;
+    emit visibilityChanged(visible);
+}
+
+bool EdgeTypeStyle::isVisible() const
+{
+    return d->m_visible;
 }

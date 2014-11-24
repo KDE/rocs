@@ -31,6 +31,7 @@ namespace GraphTheory
 {
 
 class EdgeTypePrivate;
+class EdgeTypeStyle;
 
 /**
  * \class Edge
@@ -140,14 +141,9 @@ public:
     void setId(int id);
 
     /**
-     * @return color of edge type
+     * @return style object of the edge type
      */
-    QColor color() const;
-
-    /**
-     * set color of edge type to @c color
-     */
-    void setColor(const QColor &color);
+    EdgeTypeStyle * style() const;
 
     /**
      * Debug method that tracks how many edge objects exist.
@@ -162,7 +158,6 @@ public:
 Q_SIGNALS:
     void directionChanged(EdgeType::Direction direction);
     void idChanged(int id);
-    void colorChanged(const QColor &color);
     void dynamicPropertyAboutToBeAdded(const QString &property, int);
     void dynamicPropertyAdded();
     void dynamicPropertiesAboutToBeRemoved(int, int);
