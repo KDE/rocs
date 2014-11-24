@@ -31,6 +31,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"libgraphtheory\")
 set(graphtheory_SRCS
     edge.cpp
     edgetype.cpp
+    edgetypestyle.cpp
     graphdocument.cpp
     node.cpp
     nodetype.cpp

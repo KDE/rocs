@@ -19,6 +19,7 @@
  */
 
 #include "edgetype.h"
+#include "edgetypestyle.h"
 #include "graphdocument.h"
 #include <QDebug>
 
@@ -31,11 +32,11 @@ class GraphTheory::EdgeTypePrivate {
 public:
     EdgeTypePrivate()
         : m_id(-1)
-        , m_color(77, 77, 77) // dark gray
         , m_direction(EdgeType::Unidirectional)
         , m_name(QString())
         , m_valid(false)
     {
+        m_style.setColor(QColor(77, 77, 77)); // dark gray
     }
 
     ~EdgeTypePrivate()
@@ -46,7 +47,7 @@ public:
     GraphDocumentPtr m_document;
     int m_id;
     QStringList m_dynamicProperties;
-    QColor m_color;
+    EdgeTypeStyle m_style;
     EdgeType::Direction m_direction;
     QString m_name;
     bool m_valid;
@@ -57,6 +58,9 @@ EdgeType::EdgeType()
     , d(new EdgeTypePrivate)
 {
     ++EdgeType::objectCounter;
+
+    connect(&d->m_style, &EdgeTypeStyle::colorChanged,
+        this, &EdgeType::colorChanged);
 }
 
 EdgeType::~EdgeType()
@@ -131,16 +135,12 @@ void EdgeType::setId(int id)
 
 QColor EdgeType::color() const
 {
-    return d->m_color;
+    return d->m_style.color();
 }
 
 void EdgeType::setColor(const QColor &color)
 {
-    if (color == d->m_color) {
-        return;
-    }
-    d->m_color = color;
-    emit colorChanged(color);
+    d->m_style.setColor(color);
 }
 
 QStringList EdgeType::dynamicProperties() const
