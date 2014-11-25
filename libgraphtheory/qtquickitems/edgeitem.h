@@ -31,7 +31,7 @@ namespace GraphTheory
 {
 class EdgeItemPrivate;
 
-class GRAPHTHEORY_EXPORT EdgeItem : public QQuickItem
+class EdgeItem : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(GraphTheory::Edge * edge READ edge WRITE setEdge NOTIFY edgeChanged)

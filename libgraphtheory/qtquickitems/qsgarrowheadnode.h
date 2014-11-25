@@ -29,7 +29,7 @@ class QColor;
 
 namespace GraphTheory
 {
-class GRAPHTHEORY_EXPORT QSGArrowHeadNode : public QSGGeometryNode
+class QSGArrowHeadNode : public QSGGeometryNode
 {
 
 public:

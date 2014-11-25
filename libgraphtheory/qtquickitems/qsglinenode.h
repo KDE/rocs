@@ -32,7 +32,7 @@ namespace GraphTheory
 {
 class QSGArrowHeadNode;
 
-class GRAPHTHEORY_EXPORT QSGLineNode : public QSGGeometryNode
+class QSGLineNode : public QSGGeometryNode
 {
 
 public:

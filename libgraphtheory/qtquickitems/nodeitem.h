@@ -29,7 +29,7 @@ namespace GraphTheory
 {
 class NodeItemPrivate;
 
-class GRAPHTHEORY_EXPORT NodeItem : public QQuickPaintedItem
+class NodeItem : public QQuickPaintedItem
 {
     Q_OBJECT
     Q_PROPERTY(GraphTheory::Node * node READ node WRITE setNode NOTIFY nodeChanged)
