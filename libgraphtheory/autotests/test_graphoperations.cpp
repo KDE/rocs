@@ -321,6 +321,42 @@ void TestGraphOperations::testEdgesOfDifferentType()
     document->destroy();
 }
 
+void TestGraphOperations::testEdgeDirectionChange()
+{
+    GraphDocumentPtr document = GraphDocument::create();
+    EdgeTypePtr type = document->edgeTypes().first();
+    type->setDirection(EdgeType::Bidirectional);
+
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    NodePtr nodeC = Node::create(document);
+    EdgePtr edgeAB = Edge::create(nodeA, nodeB);
+    EdgePtr edgeBC = Edge::create(nodeB, nodeC);
+
+    QCOMPARE(nodeA->edges().count(), 1);
+    QCOMPARE(nodeB->edges().count(), 2);
+    QCOMPARE(nodeC->edges().count(), 1);
+    QCOMPARE(nodeA->outEdges().count(), 1);
+    QCOMPARE(nodeB->outEdges().count(), 2);
+    QCOMPARE(nodeC->outEdges().count(), 1);
+    QCOMPARE(nodeA->inEdges().count(), 1);
+    QCOMPARE(nodeB->inEdges().count(), 2);
+    QCOMPARE(nodeC->inEdges().count(), 1);
+
+    type->setDirection(EdgeType::Unidirectional);
+    QCOMPARE(nodeA->edges().count(), 1);
+    QCOMPARE(nodeB->edges().count(), 2);
+    QCOMPARE(nodeC->edges().count(), 1);
+    QCOMPARE(nodeA->outEdges().count(), 1);
+    QCOMPARE(nodeB->outEdges().count(), 1);
+    QCOMPARE(nodeC->outEdges().count(), 0);
+    QCOMPARE(nodeA->inEdges().count(), 0);
+    QCOMPARE(nodeB->inEdges().count(), 1);
+    QCOMPARE(nodeC->inEdges().count(), 1);
+
+    document->destroy();
+}
+
 void TestGraphOperations::testDynamicPropertyRename()
 {
     GraphDocumentPtr document = GraphDocument::create();

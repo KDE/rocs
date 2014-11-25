@@ -50,6 +50,7 @@ private Q_SLOTS:
     void testUnidirectionalEdges();
     void testBidirectionalEdges();
     void testEdgesOfDifferentType();
+    void testEdgeDirectionChange();
     void testDynamicPropertyRename();
 };
 
