@@ -112,8 +112,8 @@ QSGNode * EdgeItem::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeDa
     QSGLineNode *n = static_cast<QSGLineNode *>(node);
     if (!n) {
         n = new QSGLineNode();
-        n->setColor(d->m_edge->type()->color());
         n->setDirection(d->m_edge->type()->direction());
+        n->setColor(d->m_edge->type()->color());
     }
     if (d->m_colorDirty) {
         n->setColor(d->m_edge->type()->color());
