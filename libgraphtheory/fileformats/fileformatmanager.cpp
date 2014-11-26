@@ -21,7 +21,8 @@
 #include "fileformatmanager.h"
 #include "fileformatinterface.h"
 
-#include <KPluginInfo>
+#include <KPluginLoader>
+#include <KPluginMetaData>
 #include <KServiceTypeTrader>
 #include <QString>
 #include <QDir>
@@ -49,21 +50,6 @@ public:
     QList<FileFormatInterface*> backends;
     FileFormatInterface *defaultGraphFilePlugin;
 };
-
-static QStringList readStringList(const QJsonObject &obj, const QString &key)
-{
-    const auto value = obj[key];
-    if (value.isString()) {
-        return QStringList(value.toString());
-    }
-    QStringList ret;
-    if (value.isArray()) {
-        foreach (const QJsonValue& i, value.toArray()) {
-            ret << i.toString();
-        }
-    }
-    return ret;
-}
 
 FileFormatManager::FileFormatManager()
     : d(new FileFormatManagerPrivate)
@@ -124,20 +110,15 @@ void FileFormatManager::loadBackends()
     // load plugins
     QPluginLoader loader;
     foreach (const QString &dir, dirsToCheck) {
-        QDirIterator it(dir, QDir::Files);
-        qCDebug(FILEFORMAT) << "iterating over directory " << dir;
-        while (it.hasNext()) {
-            it.next();
-            loader.setFileName(it.fileInfo().absoluteFilePath());
-            QJsonObject m_metaData = loader.metaData()["MetaData"].toObject();
-            if (!readStringList(m_metaData, "X-KDE-ServiceTypes").contains("rocs/graphtheory/fileformat")) {
-                continue;
-            }
-            qCDebug(FILEFORMAT) << "Load Plugin: " << m_metaData["Name"].toString();
+        QVector<KPluginMetaData> metadataList = KPluginLoader::findPlugins(dir,[=](const KPluginMetaData &data){
+            return data.serviceTypes().contains("rocs/graphtheory/fileformat");
+        });
+        for (const auto &metadata : metadataList) {
+            loader.setFileName(metadata.fileName());
+            qCDebug(FILEFORMAT) << "Load Plugin: " << metadata.name();
             if (!loader.load()) {
-                qCCritical(FILEFORMAT) << "Error while loading plugin: " << m_metaData["Name"].toString();
+                qCCritical(FILEFORMAT) << "Error while loading plugin: " << metadata.name();
             }
-
             KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
             FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
             d->backends.append(plugin);

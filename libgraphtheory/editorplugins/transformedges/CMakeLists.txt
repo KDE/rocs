@@ -37,7 +37,7 @@ target_link_libraries(transformedgesplugin
     KF5::Completion
 )
 
-kservice_desktop_to_json(transformedgesplugin transformedgesplugin.desktop)
+kcoreaddons_desktop_to_json(transformedgesplugin transformedgesplugin.desktop)
 install(TARGETS transformedgesplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
 
 ecm_optional_add_subdirectory(autotests)

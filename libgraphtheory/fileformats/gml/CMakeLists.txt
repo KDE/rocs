@@ -38,7 +38,7 @@ target_link_libraries(gmlfileformat
         rocsgraphtheory
 )
 
-kservice_desktop_to_json(gmlfileformat gmlfileformat.desktop)
+kcoreaddons_desktop_to_json(gmlfileformat gmlfileformat.desktop)
 install(TARGETS gmlfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

@@ -50,7 +50,7 @@ find_package(Qt5 5.3 REQUIRED NO_MODULE COMPONENTS
   Test
   XmlPatterns
 )
-find_package(KF5 REQUIRED COMPONENTS
+find_package(KF5 5.1 REQUIRED COMPONENTS
   Config
   CoreAddons
   Declarative
@@ -59,7 +59,6 @@ find_package(KF5 REQUIRED COMPONENTS
   ItemViews
   TextEditor
   XmlGui
-  Service
 )
 
 include_directories(

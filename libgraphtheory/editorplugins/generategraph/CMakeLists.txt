@@ -40,7 +40,7 @@ target_link_libraries(generategraphplugin
     KF5::Completion
 )
 
-kservice_desktop_to_json(generategraphplugin generategraphplugin.desktop)
+kcoreaddons_desktop_to_json(generategraphplugin generategraphplugin.desktop)
 install(TARGETS generategraphplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
 
 ecm_optional_add_subdirectory(autotests)

@@ -31,7 +31,7 @@ target_link_libraries(tikzfileformat
     rocsgraphtheory
 )
 
-kservice_desktop_to_json(tikzfileformat tikzfileformat.desktop)
+kcoreaddons_desktop_to_json(tikzfileformat tikzfileformat.desktop)
 install(TARGETS tikzfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)
