@@ -150,14 +150,32 @@ public:
     Q_INVOKABLE QList<GraphTheory::NodeWrapper*> neighbors() const;
 
     /**
+     * @param type is the ID of an existing EdgeType
+     * @return list of all neighbors connected to this node via an edge of type \p type
+     */
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> neighbors(int type) const;
+
+    /**
      * @return list of all neighbors connected by an incoming edge
      */
     Q_INVOKABLE QList<GraphTheory::NodeWrapper*> predecessors() const;
 
     /**
+     * @param type is the ID of an existing EdgeType
+     * @return list of all neighbors connected by an incoming edge of type \p type
+     */
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> predecessors(int type) const;
+
+    /**
      * @return list of all neighbors connected by an outgoing edge
      */
     Q_INVOKABLE QList<GraphTheory::NodeWrapper*> successors() const;
+
+    /**
+     * @param type is the ID of an existing EdgeType
+     * @return list of all neighbors connected by an outgoing edge of type \p type
+     */
+    Q_INVOKABLE QList<GraphTheory::NodeWrapper*> successors(int type) const;
 
     /**
      * @return array of distances to given set of nodes

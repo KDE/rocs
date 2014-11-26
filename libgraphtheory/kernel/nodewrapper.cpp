@@ -233,6 +233,31 @@ QList<NodeWrapper*> NodeWrapper::neighbors() const
     return neighbors.values();
 }
 
+QList<NodeWrapper*> NodeWrapper::neighbors(int type) const
+{
+    EdgeTypePtr typePtr;
+    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+        if (typeTest->id() == type) {
+            typePtr = typeTest;
+            break;
+        }
+    }
+    if (!typePtr) {
+        QString command = QString("node.neighbors(%1)").arg(type);
+        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        return QList<NodeWrapper*>();
+    }
+    QSet<NodeWrapper*> neighbors;
+    for (const auto &edge : m_node->edges(typePtr)) {
+        if (m_node == edge->from()) {
+            neighbors.insert(m_documentWrapper->nodeWrapper(edge->to()));
+        } else {
+            neighbors.insert(m_documentWrapper->nodeWrapper(edge->from()));
+        }
+    }
+    return neighbors.values();
+}
+
 QList<NodeWrapper*> NodeWrapper::predecessors() const
 {
     QSet<NodeWrapper*> precessors;
@@ -251,10 +276,70 @@ QList<NodeWrapper*> NodeWrapper::predecessors() const
     return precessors.values();
 }
 
+QList<NodeWrapper*> NodeWrapper::predecessors(int type) const
+{
+    EdgeTypePtr typePtr;
+    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+        if (typeTest->id() == type) {
+            typePtr = typeTest;
+            break;
+        }
+    }
+    if (!typePtr) {
+        QString command = QString("node.predecessors(%1)").arg(type);
+        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        return QList<NodeWrapper*>();
+    }
+    QSet<NodeWrapper*> precessors;
+    for (const auto &edge : m_node->inEdges(typePtr)) {
+        if (edge->type()->direction() == EdgeType::Unidirectional) {
+            precessors.insert(m_documentWrapper->nodeWrapper(edge->from()));
+            continue;
+        } else {
+            if (m_node == edge->from()) {
+                precessors.insert(m_documentWrapper->nodeWrapper(edge->to()));
+            } else {
+                precessors.insert(m_documentWrapper->nodeWrapper(edge->from()));
+            }
+        }
+    }
+    return precessors.values();
+}
+
 QList<NodeWrapper*> NodeWrapper::successors() const
 {
     QSet<NodeWrapper*> successors;
     for (const auto &edge : m_node->outEdges()) {
+        if (edge->type()->direction() == EdgeType::Unidirectional) {
+            successors.insert(m_documentWrapper->nodeWrapper(edge->to()));
+            continue;
+        } else {
+            if (m_node == edge->from()) {
+                successors.insert(m_documentWrapper->nodeWrapper(edge->to()));
+            } else {
+                successors.insert(m_documentWrapper->nodeWrapper(edge->from()));
+            }
+        }
+    }
+    return successors.values();
+}
+
+QList<NodeWrapper*> NodeWrapper::successors(int type) const
+{
+    EdgeTypePtr typePtr;
+    for (const auto &typeTest : m_node->document()->edgeTypes()) {
+        if (typeTest->id() == type) {
+            typePtr = typeTest;
+            break;
+        }
+    }
+    if (!typePtr) {
+        QString command = QString("node.successors(%1)").arg(type);
+        emit message(i18nc("@info:shell", "%1: edge type ID %2 not registered", command, type), Kernel::ErrorMessage);
+        return QList<NodeWrapper*>();
+    }
+    QSet<NodeWrapper*> successors;
+    for (const auto &edge : m_node->outEdges(typePtr)) {
         if (edge->type()->direction() == EdgeType::Unidirectional) {
             successors.insert(m_documentWrapper->nodeWrapper(edge->to()));
             continue;

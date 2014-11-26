@@ -65,6 +65,8 @@ private Q_SLOTS:
     void edgeTypes();
     /** test neighborship accessors: neighbors(), successors(), precedessors() **/
     void neighborships();
+    /** test neighborship accessors: neighbors(), successors(), precedessors() with specified types**/
+    void neighborshipsWithTypes();
     /** test automatic creation of dynamic properties: nodes/edges can store arbitrary properties **/
     void automaticScriptObjectPropertyGeneration();
     /** test script API to create nodes **/

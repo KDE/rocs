@@ -478,6 +478,83 @@ void TestKernel::neighborships()
     document->destroy();
 }
 
+void TestKernel::neighborshipsWithTypes()
+{
+    // this test is the same as withouth types but we add an backedge of another type that
+    // changes the results if types are not respected
+    GraphDocumentPtr document = GraphDocument::create();
+    EdgeTypePtr typeA = document->edgeTypes().first();
+    EdgeTypePtr typeB = EdgeType::create(document);
+    typeA->setDirection(EdgeType::Unidirectional);
+    typeA->setId(1);
+    typeB->setDirection(EdgeType::Unidirectional);
+    typeB->setId(2);
+    NodePtr nodeA = Node::create(document);
+    NodePtr nodeB = Node::create(document);
+    EdgePtr edgeAB = Edge::create(nodeA, nodeB);
+    EdgePtr edgeBA = Edge::create(nodeB, nodeA);
+    edgeBA->setType(typeB);
+
+    // test nodes
+    Kernel kernel;
+    QString script;
+    QScriptValue result;
+
+    // test with unidirectional edge
+    script = "Document.nodes()[0].neighbors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].neighbors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[0].successors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].successors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(0));
+
+    script = "Document.nodes()[0].predecessors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(0));
+
+    script = "Document.nodes()[1].predecessors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    // test with bidirectional edge
+    document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
+    script = "Document.nodes()[0].neighbors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].neighbors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[0].successors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].successors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[0].predecessors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    script = "Document.nodes()[1].predecessors(1).length;";
+    result = kernel.execute(document, script);
+    QCOMPARE(result.toInteger(), qreal(1));
+
+    // cleanup
+    document->destroy();
+}
+
 void TestKernel::automaticScriptObjectPropertyGeneration()
 {
     GraphDocumentPtr document = GraphDocument::create();

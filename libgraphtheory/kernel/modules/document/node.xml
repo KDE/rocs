@@ -129,6 +129,20 @@ Note that dynamic properties are only available after script execution, if they 
     </parameters>
 </method>
 <method>
+    <name>neighbors(type)</name>
+    <description>
+        <para>Return list all nodes connected to this node via an edge of specified type. This method respects if edges are directed.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
     <name>predecessors()</name>
     <description>
         <para>Return a list all nodes connected to this node by an incoming edge.</para>
@@ -138,12 +152,40 @@ Note that dynamic properties are only available after script execution, if they 
     </parameters>
 </method>
 <method>
+    <name>predecessors(type)</name>
+    <description>
+        <para>Return a list all nodes connected to this node by an incoming edge of specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
+    </parameters>
+</method>
+<method>
     <name>successors()</name>
     <description>
         <para>Return list all nodes connected to this node by an outgoing edge.</para>
     </description>
     <returnType>array</returnType>
     <parameters>
+    </parameters>
+</method>
+<method>
+    <name>successors(type)</name>
+    <description>
+        <para>Return list all nodes connected to this node by an outgoing edge of specified type.</para>
+    </description>
+    <returnType>array</returnType>
+    <parameters>
+        <parameter>
+            <name>type</name>
+            <type>int</type>
+            <info>Identifier of an edge type.</info>
+        </parameter>
     </parameters>
 </method>
 <method>
