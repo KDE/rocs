@@ -92,6 +92,8 @@ void EdgeItem::setEdge(Edge *edge)
         this, &EdgeItem::updateColor);
     connect(edge, &Edge::directionChanged,
         this, &EdgeItem::updateDirection);
+    connect(edge, &Edge::typeChanged,
+        this, &EdgeItem::updateVisibility);
     connect(edge, &Edge::typeVisibilityChanged,
         this, &EdgeItem::updateVisibility);
 
