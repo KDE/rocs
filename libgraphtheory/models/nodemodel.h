@@ -49,11 +49,11 @@ public:
     /**
      * Reimplemented from QAbstractListModel::roleNames()
      */
-    virtual QHash<int,QByteArray> roleNames() const;
+    virtual QHash<int,QByteArray> roleNames() const Q_DECL_OVERRIDE;
     void setDocument(GraphDocumentPtr document);
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
 Q_SIGNALS:
     void nodeChanged(int index);
