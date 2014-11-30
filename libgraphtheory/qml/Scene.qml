@@ -30,6 +30,8 @@ Item {
     width: 800
     height: 600
 
+    focus: true
+
     // element create/remove actions
     signal createNode(real x, real y);
     signal createEdge(Node from, Node to);
@@ -53,6 +55,20 @@ Item {
         }
     }
 
+    Keys.onPressed: {
+        switch(event.key) {
+        case Qt.Key_Escape:
+            scene.clearSelection();
+            event.accepted = true;
+            break;
+        case Qt.Key_Delete:
+            scene.deleteSelected()
+            event.accepted = true;
+            break;
+        default:
+            break;
+        }
+    }
 
     ExclusiveGroup {
         id: editToolButton
@@ -132,8 +148,6 @@ Item {
                 property variant lastMouseReleased: Qt.point(0, 0)
                 property variant lastMousePosition: Qt.point(0, 0)
 
-                focus: true
-
                 onClicked: {
                     lastMouseClicked = Qt.point(mouse.x, mouse.y)
                     if (addNodeAction.checked) {
@@ -150,13 +164,6 @@ Item {
                 }
                 onReleased: {
                     lastMouseReleased = Qt.point(mouse.x, mouse.y)
-                }
-
-                Keys.onPressed: {
-                    if (event.key == Qt.Key_Delete) {
-                        deleteSelected()
-                        event.accepted = true;
-                    }
                 }
             }
 
