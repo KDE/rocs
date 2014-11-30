@@ -124,6 +124,8 @@ Item {
             height: sceneScrollView.height - 20
             property variant origin: Qt.point(0, 0) // coordinate of global origin (0,0) in scene
             signal deleteSelected();
+            signal startMoveSelected();
+            signal finishMoveSelected();
             signal updateSelection();
             signal createEdgeUpdateFromNode();
             signal createEdgeUpdateToNode();
@@ -147,6 +149,7 @@ Item {
                 property variant lastMousePressed: Qt.point(0, 0)
                 property variant lastMouseReleased: Qt.point(0, 0)
                 property variant lastMousePosition: Qt.point(0, 0)
+                property bool nodePressed: false // if true, the current mouse-press event started at a node
 
                 onClicked: {
                     lastMouseClicked = Qt.point(mouse.x, mouse.y)
@@ -158,12 +161,14 @@ Item {
                 }
                 onPressed: {
                     lastMousePressed = Qt.point(mouse.x, mouse.y)
+                    lastMousePosition = Qt.point(mouse.x, mouse.y)
                 }
                 onPositionChanged: {
                     lastMousePosition = Qt.point(mouse.x, mouse.y)
                 }
                 onReleased: {
                     lastMouseReleased = Qt.point(mouse.x, mouse.y)
+                    sceneAction.nodePressed = false
                 }
             }
 
@@ -217,7 +222,8 @@ Item {
                     node: model.dataRole
                     origin: scene.origin
                     highlighted: addEdgeAction.from == node || addEdgeAction.to == node
-                    property bool __modifyingPosition : false
+                    property bool __modifyingPosition: false
+                    property variant __moveStartedPosition: Qt.point(0, 0)
                     Connections {
                         target: selectionRect
                         onChanged: {
@@ -237,6 +243,24 @@ Item {
                             if (highlighted) {
                                 deleteNode(node)
                             }
+                        }
+                        onStartMoveSelected: {
+                            if (!highlighted) {
+                                return
+                            }
+                            __moveStartedPosition.x = node.x
+                            __moveStartedPosition.y = node.y
+                            node.x = Qt.binding(function() { return __moveStartedPosition.x + sceneAction.lastMousePosition.x - sceneAction.lastMousePressed.x })
+                            node.y = Qt.binding(function() { return __moveStartedPosition.y + sceneAction.lastMousePosition.y - sceneAction.lastMousePressed.y })
+                        }
+                        onFinishMoveSelected: {
+                            if (!highlighted) {
+                                return
+                            }
+                            node.x = __moveStartedPosition.x + sceneAction.lastMousePosition.x - sceneAction.lastMousePressed.x
+                            node.y = __moveStartedPosition.y + sceneAction.lastMousePosition.y - sceneAction.lastMousePressed.y
+                            __moveStartedPosition.x = 0
+                            __moveStartedPosition.y = 0
                         }
                         onCreateEdgeUpdateFromNode: {
                             if (nodeItem.contains(Qt.point(sceneAction.lastMousePressed.x, sceneAction.lastMousePressed.y))) {
@@ -323,16 +347,17 @@ Item {
                             showNodePropertiesDialog(nodeItem.node);
                         }
                         onPressed: {
+                            sceneAction.nodePressed = true
                             if (selectMoveAction.checked && !nodeItem.highlighted) {
                                 scene.clearSelection()
                                 nodeItem.highlighted = true
                                 mouse.accepted = true
                                 return
                             }
-                            if (!(deleteAction.checked || selectMoveAction.checked)) {
-                                mouse.accepted = false
-                            }
                             mouse.accepted = false
+                        }
+                        onReleased: {
+                            sceneAction.nodePressed = false
                         }
                     }
                 }
@@ -348,8 +373,14 @@ Item {
         DSM.State {
             id: smStateIdle
             DSM.SignalTransition {
+                targetState: smStateMoving
+                signal: sceneAction.onPressed
+                guard: sceneAction.nodePressed
+            }
+            DSM.SignalTransition {
                 targetState: smStateSelecting
                 signal: sceneAction.onPressed
+                guard: !sceneAction.nodePressed
             }
             DSM.SignalTransition {
                 signal: sceneAction.onClicked
@@ -377,6 +408,19 @@ Item {
             }
             onExited: {
                 selectionRect.visible = false
+            }
+        }
+        DSM.State {
+            id: smStateMoving
+            DSM.SignalTransition {
+                targetState: smStateIdle
+                signal: sceneAction.onReleased
+            }
+            onEntered: {
+                scene.startMoveSelected();
+            }
+            onExited: {
+                scene.finishMoveSelected()
             }
         }
     }
