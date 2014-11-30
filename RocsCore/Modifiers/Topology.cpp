@@ -159,7 +159,7 @@ void Topology::applyCircleAlignment(DataList dataList, qreal radius)
         qSort(xList.begin(), xList.end());
         qSort(yList.begin(), yList.end());
 
-        radius = fmax(abs(xList.first() - xList.last()), abs(yList.first() - yList.last())) / 2;
+        radius = fmax(fabs(xList.first() - xList.last()), fabs(yList.first() - yList.last())) / 2;
     }
 
     // create IDs for all nodes
