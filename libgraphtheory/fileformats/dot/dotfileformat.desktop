@@ -19,6 +19,7 @@ Name[pl]=Format plików grafów DOT
 Name[pt]=Formato de Ficheiros de Grafos em DOT
 Name[pt_BR]=Formato de arquivo de grafo DOT
 Name[sk]=Súborový formát grafu DOT
+Name[sl]=Vrsta datotek grafov DOT
 Name[uk]=формат файлів графів DOT
 Name[x-test]=xxDOT Graph File Formatxx
 Comment=Read and write Graphviz graph documents (DOT)
