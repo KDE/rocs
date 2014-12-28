@@ -353,12 +353,11 @@ void MainWindow::showConfigurationDialog()
 
 void MainWindow::setupToolsPluginsAction()
 {
-    QAction *action = 0;
     QList<EditorPluginInterface*> availablePlugins =  m_graphEditorPluginManager.plugins();
     QList<QAction*> actions;
     int count = 0;
-    foreach(EditorPluginInterface * plugin, availablePlugins) {
-        action = new QAction(plugin->displayName(), this);
+    for (auto plugin : availablePlugins) {
+        QAction *action = new QAction(plugin->displayName(), this);
         action->setData(count++);
         connect(action, &QAction::triggered,
             this, &MainWindow::showEditorPluginDialog);
