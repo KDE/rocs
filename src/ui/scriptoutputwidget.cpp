@@ -37,8 +37,8 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget *parent)
     ui->buttonClear->setIcon(QIcon::fromTheme("edit-clear-list"));
 
     connect(ui->buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
-    connect(ui->buttonDisableClear, SIGNAL(clicked(bool)), this, SLOT(updateFixOutputButton()));
-    connect(ui->buttonClear, SIGNAL(clicked(bool)), this, SLOT(clear()));
+    connect(ui->buttonDisableClear, &QPushButton::clicked, this, &ScriptOutputWidget::updateFixOutputButton);
+    connect(ui->buttonClear, &QPushButton::clicked, this, &ScriptOutputWidget::clear);
 }
 
 

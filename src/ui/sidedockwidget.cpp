@@ -145,7 +145,7 @@ void SidedockWidget::addDock(QWidget* widget, const QString& title, const QIcon&
     button->setChecked(false); // initially do not check
 
     // only request action on user set action
-    connect(button, SIGNAL(clicked(bool)), this, SLOT(buttonToggled(bool)));
+    connect(button, &SideToolButton::clicked, this, &SidedockWidget::buttonToggled);
 
     // register and add to list
     _toolBar->addWidget(button);
