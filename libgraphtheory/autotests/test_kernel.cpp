@@ -272,12 +272,12 @@ void TestKernel::nodeDynamicProperties()
 
     // property local write/read-access in script
     script = "Document.nodes()[0].propertyB = 2; Document.nodes()[0].propertyB";
-    result = kernel.execute(document, script);
+    kernel.execute(document, script);
     QCOMPARE(node->dynamicProperty("propertyB").toInt(), 2);
 
     // property write-access from script
     script = "Document.nodes()[0].propertyC = 3";
-    result = kernel.execute(document, script);
+    kernel.execute(document, script);
     QCOMPARE(node->dynamicProperty("propertyC").toInt(), 3);
 
     // cleanup
@@ -338,12 +338,12 @@ void TestKernel::edgeDynamicProperties()
 
     // property local write/read-access in script
     script = "Document.edges()[0].propertyB = 2; Document.edges()[0].propertyB";
-    result = kernel.execute(document, script);
+    kernel.execute(document, script);
     QCOMPARE(edge->dynamicProperty("propertyB").toInt(), 2);
 
     // property write-access from script
     script = "Document.edges()[0].propertyC = 3";
-    result = kernel.execute(document, script);
+    kernel.execute(document, script);
     QCOMPARE(edge->dynamicProperty("propertyC").toInt(), 3);
 
     // cleanup
@@ -368,7 +368,7 @@ void TestKernel::nodeTypes()
     QCOMPARE(result.toString().toInt(), 1);
 
     script = "Document.nodes()[0].type = 2;";
-    result = kernel.execute(document, script);
+    kernel.execute(document, script);
     QCOMPARE(node->type()->id(), 2);
 
     script = "Document.nodes()[0].type;";
@@ -399,7 +399,7 @@ void TestKernel::edgeTypes()
     QCOMPARE(result.toString().toInt(), 1);
 
     script = "Document.edges()[0].type = 2;";
-    result = kernel.execute(document, script);
+    kernel.execute(document, script);
     QCOMPARE(edge->type()->id(), 2);
 
     script = "Document.edges()[0].type;";
