@@ -167,7 +167,14 @@ void Node::remove(EdgePtr edge)
     if (edge && edge->isValid()) {
         edge->destroy();
     }
-    d->m_edges.removeOne(edge);
+    // efficient way to remove edge without having to preserve order
+    for (int i = 0; i < d->m_edges.length(); ++i) {
+        if (d->m_edges.at(i) == edge) {
+            d->m_edges[i] = d->m_edges.last();
+            d->m_edges.removeLast();
+            return;
+        }
+    }
 }
 
 EdgeList Node::edges(EdgeTypePtr type) const
