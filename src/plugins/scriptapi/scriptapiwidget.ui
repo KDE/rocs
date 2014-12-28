@@ -125,11 +125,6 @@
    <extends>QWidget</extends>
    <header>QtWebKit/QWebView</header>
   </customwidget>
-  <customwidget>
-   <class>QPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
