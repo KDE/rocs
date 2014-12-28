@@ -25,6 +25,7 @@
 
 Object::Object(QObject* parent)
     : QObject(parent)
+    , m_componentType(Object::KernelModule)
 {
 }
 
