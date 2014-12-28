@@ -24,6 +24,7 @@
 #include <limits.h>
 #include <QString>
 #include <QVariant>
+#include <QVector>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int.hpp>
 #include <boost/random/uniform_real.hpp>
@@ -37,7 +38,7 @@ ValueAssign::ValueAssign()
 
 
 template<typename T>
-void ValueAssign::enumerate(const QList<T> &list, const QString &property, int start, const QString &baseString, bool overrideValues)
+void ValueAssign::enumerate(const QVector<T> &list, const QString &property, int start, const QString &baseString, bool overrideValues)
 {
     for (int i = 0; i < list.size(); i++) {
         if (!overrideValues && !list[i]->dynamicProperty(property).isNull()) {
@@ -46,12 +47,12 @@ void ValueAssign::enumerate(const QList<T> &list, const QString &property, int s
         list[i]->setDynamicProperty(property, baseString + QString::number(start++));
     }
 }
-template GRAPHTHEORY_EXPORT void ValueAssign::enumerate<NodePtr>(const QList<NodePtr> &list, const QString &property, int start, const QString &baseString, bool overrideValues);
-template GRAPHTHEORY_EXPORT void ValueAssign::enumerate<EdgePtr>(const QList<EdgePtr> &list, const QString &property, int start, const QString &baseString, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::enumerate<NodePtr>(const QVector<NodePtr> &list, const QString &property, int start, const QString &baseString, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::enumerate<EdgePtr>(const QVector<EdgePtr> &list, const QString &property, int start, const QString &baseString, bool overrideValues);
 
 
 template<typename T>
-void ValueAssign::enumerateAlpha(const QList< T >& list, const QString &property, const QString &start, bool overrideValues)
+void ValueAssign::enumerateAlpha(const QVector< T >& list, const QString &property, const QString &start, bool overrideValues)
 {
     QString identifier = start;
     for (int i = start.length()-1; i >= 0; --i) {
@@ -82,12 +83,12 @@ void ValueAssign::enumerateAlpha(const QList< T >& list, const QString &property
         }
     }
 }
-template GRAPHTHEORY_EXPORT void ValueAssign::enumerateAlpha<NodePtr>(const QList<NodePtr> &list, const QString &property, const QString &start, bool overrideValues);
-template GRAPHTHEORY_EXPORT void ValueAssign::enumerateAlpha<EdgePtr>(const QList<EdgePtr> &list, const QString &property, const QString &start, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::enumerateAlpha<NodePtr>(const QVector<NodePtr> &list, const QString &property, const QString &start, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::enumerateAlpha<EdgePtr>(const QVector<EdgePtr> &list, const QString &property, const QString &start, bool overrideValues);
 
 
 template<typename T>
-void ValueAssign::assignRandomIntegers(const QList<T> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues)
+void ValueAssign::assignRandomIntegers(const QVector<T> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit) {
         return;
@@ -106,12 +107,12 @@ void ValueAssign::assignRandomIntegers(const QList<T> &list, const QString &prop
         list[i]->setDynamicProperty(property, QString::number(die()));
     }
 }
-template GRAPHTHEORY_EXPORT void ValueAssign::assignRandomIntegers<NodePtr>(const QList<NodePtr> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues);
-template GRAPHTHEORY_EXPORT void ValueAssign::assignRandomIntegers<EdgePtr>(const QList<EdgePtr> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::assignRandomIntegers<NodePtr>(const QVector<NodePtr> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::assignRandomIntegers<EdgePtr>(const QVector<EdgePtr> &list, const QString &property, int lowerLimit, int upperLimit, int seed, bool overrideValues);
 
 
 template<typename T>
-void ValueAssign::assignRandomReals(const QList<T> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
+void ValueAssign::assignRandomReals(const QVector<T> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues)
 {
     if (lowerLimit > upperLimit) {
         return;
@@ -130,11 +131,11 @@ void ValueAssign::assignRandomReals(const QList<T> &list, const QString &propert
         list[i]->setDynamicProperty(property, QString::number(die()));
     }
 }
-template GRAPHTHEORY_EXPORT void ValueAssign::assignRandomReals<NodePtr>(const QList<NodePtr> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
-template GRAPHTHEORY_EXPORT void ValueAssign::assignRandomReals<EdgePtr>(const QList<EdgePtr> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::assignRandomReals<NodePtr>(const QVector<NodePtr> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::assignRandomReals<EdgePtr>(const QVector<EdgePtr> &list, const QString &property, qreal lowerLimit, qreal upperLimit, int seed, bool overrideValues);
 
 template<typename T>
-void ValueAssign::assignConstantValue(const QList<T> &list, const QString &property, const QString &constant, bool overrideValues)
+void ValueAssign::assignConstantValue(const QVector<T> &list, const QString &property, const QString &constant, bool overrideValues)
 {
     for (int i = 0; i < list.size(); i++) {
         if (!overrideValues && !list[i]->dynamicProperty(property).isNull()) {
@@ -143,5 +144,5 @@ void ValueAssign::assignConstantValue(const QList<T> &list, const QString &prope
         list[i]->setDynamicProperty(property, constant);
     }
 }
-template GRAPHTHEORY_EXPORT void ValueAssign::assignConstantValue<NodePtr>(const QList<NodePtr> &list, const QString &property, const QString &constant, bool overrideValues);
-template GRAPHTHEORY_EXPORT void ValueAssign::assignConstantValue<EdgePtr>(const QList<EdgePtr> &list, const QString &property, const QString &constant, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::assignConstantValue<NodePtr>(const QVector<NodePtr> &list, const QString &property, const QString &constant, bool overrideValues);
+template GRAPHTHEORY_EXPORT void ValueAssign::assignConstantValue<EdgePtr>(const QVector<EdgePtr> &list, const QString &property, const QString &constant, bool overrideValues);

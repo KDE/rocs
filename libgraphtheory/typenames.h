@@ -21,7 +21,6 @@
 #ifndef TYPENAMES_H
 #define TYPENAMES_H
 
-#include <QList>
 #include <QSharedPointer>
 
 namespace GraphTheory
@@ -36,9 +35,9 @@ typedef QSharedPointer<GraphDocument> GraphDocumentPtr;
 typedef QSharedPointer<NodeType> NodeTypePtr;
 typedef QSharedPointer<EdgeType> EdgeTypePtr;
 typedef QSharedPointer<Node> NodePtr;
-typedef QList< QSharedPointer<Node> > NodeList;
+typedef QVector< QSharedPointer<Node> > NodeList;
 typedef QSharedPointer<Edge> EdgePtr;
-typedef QList< QSharedPointer<Edge> > EdgeList;
+typedef QVector< QSharedPointer<Edge> > EdgeList;
 }
 
 #endif

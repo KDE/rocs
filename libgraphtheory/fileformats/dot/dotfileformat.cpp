@@ -30,6 +30,7 @@
 #include <QTextStream>
 #include <QUrl>
 #include <QHash>
+#include <QVector>
 #include "dotgrammarhelper.h"
 #include "dotgrammar.h"
 
@@ -99,7 +100,7 @@ void DotFileFormat::writeFile(GraphDocumentPtr document)
     }
 
     // process all edges
-    foreach(EdgePtr edge, document->edges()) {
+    for (auto const edge : document->edges()) {
         out << processEdge(edge);
     }
     out << "}\n";

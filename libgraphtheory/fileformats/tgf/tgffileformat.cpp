@@ -30,6 +30,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QUrl>
+#include <QVector>
 
 using namespace GraphTheory;
 
@@ -130,7 +131,7 @@ void TgfFileFormat::writeFile(GraphDocumentPtr document)
     }
     out << "#\n";
     // export pointers
-    foreach(EdgePtr edge, document->edges()) {
+    for (auto const edge : document->edges()) {
         out << edge->from()->id() << " " << edge->to()->id() << " " << edge->dynamicProperty("label").toString() <<'\n';
     }
     setError(None);

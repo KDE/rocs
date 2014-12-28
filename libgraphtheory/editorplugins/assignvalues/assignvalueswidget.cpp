@@ -197,10 +197,10 @@ void AssignValuesWidget::assignValues()
         int start = ui->spinBoxIDStartValue->value();
 
         if (ui->applyToNodes->isChecked()) {
-	    modifier.enumerate(nodes, property, start, "", overrideValues);
+            modifier.enumerate(nodes, property, start, "", overrideValues);
         }
         if (ui->applyToEdges->isChecked()) {
-	    modifier.enumerate(edges, property, start, "", overrideValues);
+            modifier.enumerate(edges, property, start, "", overrideValues);
         }
         break;
     }

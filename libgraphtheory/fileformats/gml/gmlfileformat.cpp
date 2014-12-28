@@ -31,6 +31,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QUrl>
+#include <QVector>
 
 using namespace GraphTheory;
 
@@ -102,12 +103,12 @@ void GmlFileFormat::writeFile(GraphDocumentPtr document)
             out << "]\n";
 
         }
-        foreach(EdgePtr e, document->edges()) {
+        for (auto const edge : document->edges()) {
             out << "edge [\n";
 //                  foreach (QByteArray p, e->dynamicPropertyNames()){
 //                    out << p << " " << e->property(p).toString() << "\n";
 //                  }
-            out << processEdge(e);
+            out << processEdge(edge);
 
             out << "]\n";
         }
