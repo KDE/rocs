@@ -323,6 +323,7 @@ GraphTheory::GraphDocumentPtr Project::importGraphDocument(const QUrl &documentU
 {
     Q_ASSERT(d->m_graphEditor);
     GraphTheory::GraphDocumentPtr document = d->m_graphEditor->openDocument(documentUrl);
+    Q_ASSERT(document);
     addGraphDocument(document);
     return document;
 }
