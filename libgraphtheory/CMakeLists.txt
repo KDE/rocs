@@ -35,6 +35,7 @@ set(graphtheory_SRCS
     graphdocument.cpp
     node.cpp
     nodetype.cpp
+    nodetypestyle.cpp
     editor.cpp
     view.cpp
     dialogs/nodeproperties.cpp

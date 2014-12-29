@@ -19,6 +19,7 @@
  */
 
 #include "nodetype.h"
+#include "nodetypestyle.h"
 #include "graphdocument.h"
 
 using namespace GraphTheory;
@@ -31,9 +32,9 @@ public:
     NodeTypePrivate()
         : m_id(-1)
         , m_name(QString())
-        , m_color(77, 77, 77) // dark gray
         , m_valid(false)
     {
+        m_style.setColor(QColor(77, 77, 77)); // dark gray
     }
 
     ~NodeTypePrivate()
@@ -45,7 +46,7 @@ public:
     GraphDocumentPtr m_document;
     QStringList m_dynamicProperties;
     QString m_name;
-    QColor m_color;
+    NodeTypeStyle m_style;
     bool m_valid;
 };
 
@@ -54,6 +55,9 @@ NodeType::NodeType()
     , d(new NodeTypePrivate)
 {
     ++NodeType::objectCounter;
+
+    connect(&d->m_style, &NodeTypeStyle::colorChanged,
+        this, &NodeType::colorChanged);
 }
 
 NodeType::~NodeType()
@@ -128,16 +132,12 @@ void NodeType::setId(int id)
 
 QColor NodeType::color() const
 {
-    return d->m_color;
+    return d->m_style.color();
 }
 
 void NodeType::setColor(const QColor &color)
 {
-    if (color == d->m_color) {
-        return;
-    }
-    d->m_color = color;
-    emit colorChanged(color);
+    d->m_style.setColor(color);
 }
 
 QStringList NodeType::dynamicProperties() const
