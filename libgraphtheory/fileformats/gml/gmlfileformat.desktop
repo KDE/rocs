@@ -20,6 +20,7 @@ Name[pt]=Formato de Ficheiros GML
 Name[pt_BR]=Formato de arquivo GML
 Name[sk]=Formát súborov GML
 Name[sl]=Vrsta datotek GML
+Name[sv]=GML-filformat
 Name[uk]=формат файлів GML
 Name[x-test]=xxGML File Formatxx
 Comment=Read and write Graph Markup Language documents (GML)

@@ -20,6 +20,7 @@ Name[pt]=Formato de Ficheiros do Rocs
 Name[pt_BR]=Formato de arquivo do Rocs
 Name[sk]=Súborový formát Rocs
 Name[sl]=Vrsta datotek Rocs
+Name[sv]=Rocs-filformat
 Name[uk]=формат файлів Rocs
 Name[x-test]=xxRocs File Formatxx
 Comment=Rocs Graph File Format
@@ -35,6 +36,7 @@ Comment[pt]=Formato de Ficheiros de Grafos do Rocs
 Comment[pt_BR]=Formato de arquivo de grafo do Rocs
 Comment[sk]=Súborový formát grafi Rocs
 Comment[sl]=Vrsta datotek z grafi Rocs
+Comment[sv]=Rocs-graffilformat
 Comment[uk]=формат файлів графів Rocs
 Comment[x-test]=xxRocs Graph File Formatxx
 

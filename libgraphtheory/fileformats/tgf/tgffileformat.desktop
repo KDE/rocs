@@ -20,6 +20,7 @@ Name[pt]=Formato de Ficheiros de Grafos em TGF
 Name[pt_BR]=Formato de arquivo de grafo TGF
 Name[sk]=Grafický súborový formát TGF
 Name[sl]=Vrsta datotek z grafi TGF
+Name[sv]=TGF-graffilformat
 Name[uk]=формат файлів графів TGF
 Name[x-test]=xxTGF Graph File Formatxx
 Comment=Read and write graph documents in Trivial Graph Format (TGF)
