@@ -19,6 +19,7 @@
  */
 
 #include "nodeitem.h"
+#include "nodetypestyle.h"
 
 #include <QPainter>
 #include <qmath.h>
@@ -131,7 +132,7 @@ void NodeItem::paint(QPainter *painter)
         painter->setBrush(QColor(246, 116, 0, 125)); // beware orange, half transparent
         painter->drawEllipse(QRectF(0, 0, width(), height()));
     }
-    painter->setPen(QPen(QColor(d->m_node->type()->color()), 2, Qt::SolidLine));
+    painter->setPen(QPen(QColor(d->m_node->type()->style()->color()), 2, Qt::SolidLine));
     painter->setBrush(QBrush(d->m_node->color()));
     painter->drawEllipse(QRectF(4, 4, width() - 8, height() - 8));
 }

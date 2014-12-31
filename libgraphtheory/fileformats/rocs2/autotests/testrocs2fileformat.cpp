@@ -25,7 +25,8 @@
 #include "node.h"
 #include "edge.h"
 #include "edgetypestyle.h"
-#include <QtTest/QtTest>
+#include "nodetypestyle.h"
+#include <QtTest>
 
 using namespace GraphTheory;
 
@@ -41,7 +42,7 @@ void TestRocs2FileFormat::documentTypesTest()
     // setup node type
     document->nodeTypes().first()->setId(1);
     document->nodeTypes().first()->setName("testName");
-    document->nodeTypes().first()->setColor(QColor("#ff0000"));
+    document->nodeTypes().first()->style()->setColor(QColor("#ff0000"));
     document->nodeTypes().first()->addDynamicProperty("label");
 
     // setup edge type
@@ -69,7 +70,7 @@ void TestRocs2FileFormat::documentTypesTest()
     QCOMPARE(importDocument->nodeTypes().count(), 1);
     QCOMPARE(importDocument->nodeTypes().first()->id(), 1);
     QCOMPARE(importDocument->nodeTypes().first()->name(), QString("testName"));
-    QCOMPARE(importDocument->nodeTypes().first()->color().name(), QString("#ff0000"));
+    QCOMPARE(importDocument->nodeTypes().first()->style()->color().name(), QString("#ff0000"));
 
     // test edge type
     QCOMPARE(importDocument->edgeTypes().count(), 1);

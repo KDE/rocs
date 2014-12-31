@@ -20,6 +20,7 @@
 
 #include "nodetypestyle.h"
 #include <QColor>
+#include <QString>
 #include <QDebug>
 
 using namespace GraphTheory;
@@ -29,6 +30,7 @@ public:
     NodeTypeStylePrivate()
         : m_color(77, 77, 77) // dark gray
         , m_visible(true)
+        , m_propertyNamesVisible(false)
     {
     }
 
@@ -38,6 +40,7 @@ public:
 
     QColor m_color;
     bool m_visible;
+    bool m_propertyNamesVisible;
 };
 
 NodeTypeStyle::NodeTypeStyle()
@@ -78,4 +81,18 @@ void NodeTypeStyle::setVisible(bool visible)
 bool NodeTypeStyle::isVisible() const
 {
     return d->m_visible;
+}
+
+void NodeTypeStyle::setPropertyNamesVisible(bool visible)
+{
+    if (d->m_propertyNamesVisible == visible) {
+        return;
+    }
+    d->m_propertyNamesVisible = visible;
+    emit propertyNamesVisibilityChanged(visible);
+}
+
+bool NodeTypeStyle::isPropertyNamesVisible() const
+{
+    return d->m_propertyNamesVisible;
 }

@@ -31,22 +31,24 @@ class GraphTheory::NodeTypePrivate {
 public:
     NodeTypePrivate()
         : m_id(-1)
+        , m_style(new NodeTypeStyle)
         , m_name(QString())
         , m_valid(false)
     {
-        m_style.setColor(QColor(77, 77, 77)); // dark gray
+        m_style->setColor(QColor(77, 77, 77)); // dark gray
     }
 
     ~NodeTypePrivate()
     {
+        m_style->deleteLater();
     }
 
     NodeTypePtr q;
     int m_id;
+    NodeTypeStyle *m_style;
     GraphDocumentPtr m_document;
     QStringList m_dynamicProperties;
     QString m_name;
-    NodeTypeStyle m_style;
     bool m_valid;
 };
 
@@ -56,7 +58,7 @@ NodeType::NodeType()
 {
     ++NodeType::objectCounter;
 
-    connect(&d->m_style, &NodeTypeStyle::colorChanged,
+    connect(d->m_style, &NodeTypeStyle::colorChanged,
         this, &NodeType::colorChanged);
 }
 
@@ -130,14 +132,9 @@ void NodeType::setId(int id)
     emit idChanged(id);
 }
 
-QColor NodeType::color() const
+NodeTypeStyle * NodeType::style() const
 {
-    return d->m_style.color();
-}
-
-void NodeType::setColor(const QColor &color)
-{
-    d->m_style.setColor(color);
+    return d->m_style;
 }
 
 QStringList NodeType::dynamicProperties() const

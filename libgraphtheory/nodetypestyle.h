@@ -44,10 +44,13 @@ public:
     QColor color() const;
     void setVisible(bool visible);
     bool isVisible() const;
+    void setPropertyNamesVisible(bool visible);
+    bool isPropertyNamesVisible() const;
 
 Q_SIGNALS:
     void colorChanged(QColor);
     void visibilityChanged(bool);
+    void propertyNamesVisibilityChanged(bool);
 
 private:
     Q_DISABLE_COPY(NodeTypeStyle)

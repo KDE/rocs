@@ -20,6 +20,7 @@
 
 #include "nodetypemodel.h"
 #include "graphdocument.h"
+#include "nodetypestyle.h"
 
 #include <KLocalizedString>
 #include <QSignalMapper>
@@ -117,7 +118,7 @@ QVariant NodeTypeModel::data(const QModelIndex &index, int role) const
     case TitleRole:
         return type->name();
     case ColorRole:
-        return type->color();
+        return type->style()->color();
     case DataRole:
         return QVariant::fromValue<QObject*>(type.data());
     default:
@@ -147,7 +148,7 @@ bool NodeTypeModel::setData(const QModelIndex &index, const QVariant &value, int
         type->setName(value.toString());
         return true;
     case ColorRole:
-        type->setColor(value.value<QColor>());
+        type->style()->setColor(value.value<QColor>());
         return true;
     default:
         return false;

@@ -32,6 +32,7 @@ namespace GraphTheory
 {
 
 class NodeTypePrivate;
+class NodeTypeStyle;
 
 /**
  * \class Node
@@ -99,14 +100,9 @@ public:
     void setId(int id);
 
     /**
-     * @return color of node type
+     * @return style object of the edge type
      */
-    QColor color() const;
-
-    /**
-     * set color of node type to @c color
-     */
-    void setColor(const QColor &color);
+    NodeTypeStyle * style() const;
 
     /**
      * @return dynamic properties registered for this node type
