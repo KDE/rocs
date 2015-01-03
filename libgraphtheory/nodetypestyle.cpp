@@ -47,7 +47,12 @@ NodeTypeStyle::NodeTypeStyle()
     : QObject()
     , d(new NodeTypeStylePrivate)
 {
-
+    connect(this, &NodeTypeStyle::colorChanged,
+        this, &NodeTypeStyle::changed);
+    connect(this, &NodeTypeStyle::visibilityChanged,
+        this, &NodeTypeStyle::changed);
+    connect(this, &NodeTypeStyle::propertyNamesVisibilityChanged,
+        this, &NodeTypeStyle::changed);
 }
 
 NodeTypeStyle::~NodeTypeStyle()

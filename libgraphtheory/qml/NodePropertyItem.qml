@@ -33,7 +33,13 @@ Item {
         Repeater {
             model: NodePropertyModel { node: root.node }
             Text {
-                text: model.name + " / " + model.value
+                text: {
+                    if (model.visibility) {
+                        return model.name + ": " + model.value;
+                    } else {
+                        return (model.value != undefined) ? model.value : "";
+                    }
+                }
             }
         }
     }

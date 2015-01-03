@@ -20,6 +20,7 @@
 
 #include "nodepropertymodel.h"
 #include "node.h"
+#include "nodetypestyle.h"
 #include <KLocalizedString>
 #include <QDebug>
 
@@ -37,6 +38,7 @@ public:
     }
 
     NodePtr m_node;
+
 };
 
 NodePropertyModel::NodePropertyModel(QObject *parent)
@@ -56,6 +58,7 @@ QHash< int, QByteArray > NodePropertyModel::roleNames() const
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
     roles[ValueRole] = "value";
+    roles[VisibilityRole] = "visibility";
 
     return roles;
 }
@@ -82,6 +85,11 @@ void NodePropertyModel::setNode(Node* node)
             this, &NodePropertyModel::onDynamicPropertyRemoved);
         connect(d->m_node.data(), &Node::dynamicPropertyChanged,
             this, &NodePropertyModel::onDynamicPropertyChanged);
+        connect(d->m_node.data(), &Node::styleChanged,[=]() {
+            QVector<int> changedRoles;
+            changedRoles.append(VisibilityRole);
+            emit dataChanged(index(0), index(d->m_node->dynamicProperties().count() - 1), changedRoles);
+        } );
     }
     endResetModel();
     emit nodeChanged();
@@ -112,6 +120,8 @@ QVariant NodePropertyModel::data(const QModelIndex &index, int role) const
         return property;
     case ValueRole:
         return d->m_node->dynamicProperty(property);
+    case VisibilityRole:
+        return d->m_node->type()->style()->isPropertyNamesVisible();
     default:
         return QVariant();
     }

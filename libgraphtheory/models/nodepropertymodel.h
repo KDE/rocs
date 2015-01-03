@@ -40,7 +40,8 @@ class GRAPHTHEORY_EXPORT NodePropertyModel : public QAbstractListModel
 public:
     enum NodePropertyRoles {
         NameRole = Qt::UserRole + 1,      //!< unique identifier of node
-        ValueRole                        //!< access to property value
+        ValueRole,                        //!< access to property value
+        VisibilityRole                    //!< is property name visible
     };
 
     explicit NodePropertyModel(QObject *parent = 0);

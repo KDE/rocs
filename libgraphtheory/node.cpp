@@ -22,6 +22,7 @@
 #include "graphdocument.h"
 #include "nodetype.h"
 #include "edge.h"
+#include "nodetypestyle.h"
 
 #include <QPointF>
 #include <QColor>
@@ -131,6 +132,7 @@ void Node::setType(NodeTypePtr type)
     }
     if (d->m_type) {
         d->m_type->disconnect(this);
+        d->m_type->style()->disconnect(this);
     }
     d->m_type = type;
     connect(type.data(), &NodeType::dynamicPropertyAboutToBeAdded,
@@ -145,9 +147,10 @@ void Node::setType(NodeTypePtr type)
         this, &Node::updateDynamicProperty);
     connect(type.data(), &NodeType::dynamicPropertyRenamed,
         this, &Node::renameDynamicProperty);
-    connect(type.data(), &NodeType::colorChanged,
-        this, &Node::typeColorChanged);
+    connect(type->style(), &NodeTypeStyle::changed,
+        this, &Node::styleChanged);
     emit typeChanged(type);
+    emit styleChanged();
 }
 
 void Node::insert(EdgePtr edge)

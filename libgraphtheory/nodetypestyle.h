@@ -48,6 +48,7 @@ public:
     bool isPropertyNamesVisible() const;
 
 Q_SIGNALS:
+    void changed();
     void colorChanged(QColor);
     void visibilityChanged(bool);
     void propertyNamesVisibilityChanged(bool);

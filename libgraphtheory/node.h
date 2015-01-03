@@ -215,7 +215,11 @@ Q_SIGNALS:
     void positionChanged(const QPointF &position);
     void idChanged(int id);
     void colorChanged(const QColor &color);
-    void typeColorChanged(const QColor &color);
+    /**
+     * signal is emitted whenever a style property changed. Use typeChanged() to get informed
+     * about a change of the style object.
+     **/
+    void styleChanged();
     void dynamicPropertyAboutToBeAdded(const QString&, int);
     void dynamicPropertyAdded();
     void dynamicPropertiesAboutToBeRemoved(int, int);
