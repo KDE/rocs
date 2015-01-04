@@ -59,6 +59,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void updatePositionfromScene();
     void setGlobalPosition(const QPointF &globalPosition);
+    void updateVisibility();
 
 private:
     Q_DISABLE_COPY(NodeItem)

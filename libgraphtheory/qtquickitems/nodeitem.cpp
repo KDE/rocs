@@ -31,6 +31,7 @@ public:
     NodeItemPrivate()
         : m_node(0)
         , m_origin(0,0)
+        , m_visible(true)
         , m_highlighted(false)
         , m_updating(false)
     {
@@ -42,6 +43,7 @@ public:
 
     Node *m_node;
     QPointF m_origin;
+    bool m_visible;
     bool m_highlighted;
     bool m_updating; //!< while true do not react to any change requested
 };
@@ -84,10 +86,13 @@ void NodeItem::setNode(Node *node)
         this, [&] (QColor) { update(); });
     connect(node, &Node::typeChanged,
         this, [&] (NodeTypePtr) { update(); });
+    connect(node, &Node::styleChanged,
+        this, &NodeItem::updateVisibility);
     connect(this, &NodeItem::xChanged,
         this, &NodeItem::updatePositionfromScene);
     connect(this, &NodeItem::yChanged,
         this, &NodeItem::updatePositionfromScene);
+
     emit nodeChanged();
     update();
 }
@@ -169,4 +174,17 @@ void NodeItem::setGlobalPosition(const QPointF &position)
     setX(position.x() - d->m_origin.x() - width()/2);
     setY(position.y() - d->m_origin.y() - height()/2);
     update();
+}
+
+void NodeItem::updateVisibility()
+{
+    if (d->m_visible == d->m_node->type()->style()->isVisible()) {
+        return;
+    }
+    d->m_visible = d->m_node->type()->style()->isVisible();
+    if (d->m_visible) {
+        setOpacity(1);
+    } else {
+        setOpacity(0);
+    }
 }
