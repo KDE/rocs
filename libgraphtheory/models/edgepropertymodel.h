@@ -40,20 +40,20 @@ class GRAPHTHEORY_EXPORT EdgePropertyModel : public QAbstractListModel
 public:
     enum EdgePropertyRoles {
         NameRole = Qt::UserRole + 1,      //!< unique identifier of edge
-        ValueRole                        //!< access to Edge object
+        ValueRole                         //!< access to property value
     };
 
     explicit EdgePropertyModel(QObject *parent = 0);
-    ~EdgePropertyModel();
+    virtual ~EdgePropertyModel();
     /**
      * Reimplemented from QAbstractListModel::roleNames()
      */
-    virtual QHash<int,QByteArray> roleNames() const;
+    virtual QHash<int,QByteArray> roleNames() const Q_DECL_OVERRIDE;
     void setEdge(Edge *edge);
     Edge * edge() const;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
 Q_SIGNALS:
     void edgeChanged();
