@@ -25,11 +25,12 @@
 #include "typenames.h"
 #include "libgraphtheoryexport.h"
 
+class KColorButton;
+class QCheckBox;
+class QComboBox;
 class QLineEdit;
 class QSpinBox;
-class QComboBox;
 class QToolButton;
-class KColorButton;
 
 namespace GraphTheory {
 
@@ -52,7 +53,8 @@ private:
     QSpinBox *m_id;
     KColorButton *m_color;
     QComboBox *m_direction;
-    QToolButton *m_visible;
+    QCheckBox *m_visible;
+    QCheckBox *m_propertyNamesVisible;
     PropertiesWidget *m_properties;
     QPushButton *m_okButton;
     EdgeTypePtr m_type;

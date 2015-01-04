@@ -28,6 +28,7 @@
 #include <KGuiItem>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
+#include <QCheckBox>
 #include <QComboBox>
 #include <QDebug>
 #include <QDialogButtonBox>
@@ -47,7 +48,8 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     , m_id(new QSpinBox(this))
     , m_color(new KColorButton(this))
     , m_direction(new QComboBox(this))
-    , m_visible(new QToolButton(this))
+    , m_visible(new QCheckBox(i18n("Edges"), this))
+    , m_propertyNamesVisible(new QCheckBox(i18n("Property Names"), this))
     , m_properties(new PropertiesWidget(this))
     , m_okButton(new QPushButton(this))
     , m_type(EdgeTypePtr())
@@ -65,7 +67,14 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     m_direction->addItem(QIcon::fromTheme("rocsbidirectional"), i18n("Bidirectional"), EdgeType::Bidirectional);
     head->addRow(i18n("Direction"), m_direction);
     m_visible->setCheckable(true);
-    head->addRow(i18n("Visible"), m_visible);
+    // set visibilities row
+    QWidget *visibilityWidget = new QWidget(this);
+    QVBoxLayout *visibilityForm = new QVBoxLayout(visibilityWidget);
+    visibilityForm->addWidget(m_visible);
+    visibilityForm->addWidget(m_propertyNamesVisible);
+    visibilityWidget->setLayout(visibilityForm);
+    head->addRow(i18n("Visibility"), visibilityWidget);
+    // set layout
     widget->setLayout(head);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
@@ -117,6 +126,7 @@ void EdgeTypeProperties::setType(EdgeTypePtr type)
     m_color->setColor(type->style()->color());
     m_direction->setCurrentIndex(m_direction->findData(type->direction()));
     m_visible->setChecked(type->style()->isVisible());
+    m_propertyNamesVisible->setChecked(type->style()->isPropertyNamesVisible());
     m_properties->setType(type);
 
     // set initial color and tooltip
@@ -132,6 +142,7 @@ void EdgeTypeProperties::apply()
     m_type->style()->setColor(m_color->color());
     m_type->setDirection(static_cast<EdgeType::Direction>(m_direction->currentData().toInt()));
     m_type->style()->setVisible(m_visible->isChecked());
+    m_type->style()->setPropertyNamesVisible(m_propertyNamesVisible->isChecked());
 }
 
 void EdgeTypeProperties::validateIdInput()
