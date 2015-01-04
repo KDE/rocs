@@ -123,6 +123,7 @@ void Edge::setType(EdgeTypePtr type)
     }
     if (d->m_type) {
         d->m_type->disconnect(this);
+        d->m_type->style()->disconnect(this);
     }
     d->m_type = type;
     connect(type.data(), &EdgeType::dynamicPropertyAboutToBeAdded,
@@ -137,14 +138,15 @@ void Edge::setType(EdgeTypePtr type)
         this, &Edge::updateDynamicProperty);
     connect(type.data(), &EdgeType::directionChanged,
         this, &Edge::directionChanged);
-    connect(type->style(), &EdgeTypeStyle::colorChanged,
-        this, &Edge::typeColorChanged);
     connect(type->style(), &EdgeTypeStyle::visibilityChanged,
         this, &Edge::typeVisibilityChanged);
     connect(type.data(), &EdgeType::dynamicPropertyRenamed,
         this, &Edge::renameDynamicProperty);
+    connect(type->style(), &EdgeTypeStyle::changed,
+        this, &Edge::styleChanged);
 
     emit typeChanged(type);
+    emit styleChanged();
 }
 
 QVariant Edge::dynamicProperty(const QString &property) const

@@ -40,7 +40,8 @@ class GRAPHTHEORY_EXPORT EdgePropertyModel : public QAbstractListModel
 public:
     enum EdgePropertyRoles {
         NameRole = Qt::UserRole + 1,      //!< unique identifier of edge
-        ValueRole                         //!< access to property value
+        ValueRole,                        //!< access to property value
+        VisibilityRole                    //!< is property name visible
     };
 
     explicit EdgePropertyModel(QObject *parent = 0);

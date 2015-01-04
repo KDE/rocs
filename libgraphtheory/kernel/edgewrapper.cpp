@@ -23,6 +23,7 @@
 #include "graphdocument.h"
 #include "edgetype.h"
 #include "edge.h"
+#include "edgetypestyle.h"
 #include <KLocalizedString>
 #include <QColor>
 #include <QDebug>
@@ -34,7 +35,9 @@ EdgeWrapper::EdgeWrapper(EdgePtr edge, DocumentWrapper *documentWrapper)
     : m_edge(edge)
     , m_documentWrapper(documentWrapper)
 {
-    connect(m_edge.data(), &Edge::typeColorChanged, this, &EdgeWrapper::colorChanged);
+    connect(m_edge.data(), &Edge::styleChanged, this, [=] () {
+        emit colorChanged(m_edge->type()->style()->color());
+    } );
     connect(m_edge.data(), &Edge::dynamicPropertiesChanged, this, &EdgeWrapper::updateDynamicProperties);
     connect(m_edge.data(), &Edge::typeChanged, this, &EdgeWrapper::typeChanged);
     updateDynamicProperties();

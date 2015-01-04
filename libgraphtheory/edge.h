@@ -140,7 +140,6 @@ public:
 
 Q_SIGNALS:
     void typeChanged(EdgeTypePtr type);
-    void typeColorChanged(const QColor &color);
     void typeVisibilityChanged(bool);
     void directionChanged(EdgeType::Direction direction);
     void dynamicPropertyAboutToBeAdded(const QString&, int);
@@ -150,6 +149,11 @@ Q_SIGNALS:
     void dynamicPropertyChanged(int index);
     /** list of dynamic properties changed **/
     void dynamicPropertiesChanged();
+    /**
+     * signal is emitted whenever a style property changed. Use typeChanged() to get informed
+     * about a change of the style object.
+     **/
+    void styleChanged();
 
 private Q_SLOTS:
     void updateDynamicProperty(const QString &property);

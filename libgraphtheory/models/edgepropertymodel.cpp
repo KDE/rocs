@@ -20,6 +20,7 @@
 
 #include "edgepropertymodel.h"
 #include "edge.h"
+#include "edgetypestyle.h"
 #include <KLocalizedString>
 #include <QDebug>
 
@@ -57,6 +58,7 @@ QHash< int, QByteArray > EdgePropertyModel::roleNames() const
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
     roles[ValueRole] = "value";
+    roles[VisibilityRole] = "visibility";
 
     return roles;
 }
@@ -83,6 +85,11 @@ void EdgePropertyModel::setEdge(Edge *edge)
             this, &EdgePropertyModel::onDynamicPropertyRemoved);
         connect(d->m_edge.data(), &Edge::dynamicPropertyChanged,
             this, &EdgePropertyModel::onDynamicPropertyChanged);
+        connect(d->m_edge.data(), &Edge::styleChanged,[=]() {
+            QVector<int> changedRoles;
+            changedRoles.append(VisibilityRole);
+            emit dataChanged(index(0), index(d->m_edge->dynamicProperties().count() - 1), changedRoles);
+        } );
     }
     endResetModel();
     emit edgeChanged();
@@ -113,6 +120,8 @@ QVariant EdgePropertyModel::data(const QModelIndex &index, int role) const
         return property;
     case ValueRole:
         return d->m_edge->dynamicProperty(property);
+    case VisibilityRole:
+        return d->m_edge->type()->style()->isPropertyNamesVisible();
     default:
         return QVariant();
     }

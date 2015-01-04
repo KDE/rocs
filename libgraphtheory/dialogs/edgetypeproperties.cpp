@@ -66,7 +66,6 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
     m_direction->addItem(QIcon::fromTheme("rocsunidirectional"), i18n("Unidirectional"), EdgeType::Unidirectional);
     m_direction->addItem(QIcon::fromTheme("rocsbidirectional"), i18n("Bidirectional"), EdgeType::Bidirectional);
     head->addRow(i18n("Direction"), m_direction);
-    m_visible->setCheckable(true);
     // set visibilities row
     QWidget *visibilityWidget = new QWidget(this);
     QVBoxLayout *visibilityForm = new QVBoxLayout(visibilityWidget);
@@ -102,13 +101,6 @@ EdgeTypeProperties::EdgeTypeProperties(QWidget *parent)
 
     connect(m_id, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
         this, &EdgeTypeProperties::validateIdInput);
-    connect(m_visible, &QToolButton::toggled, [=]() {
-        if (m_visible->isChecked()) {
-            m_visible->setIcon(QIcon::fromTheme("layer-visible-on"));
-        } else {
-            m_visible->setIcon(QIcon::fromTheme("layer-visible-off"));
-        }
-    });
     connect(this, &QDialog::accepted,
         this, &EdgeTypeProperties::apply);
     setAttribute(Qt::WA_DeleteOnClose);
