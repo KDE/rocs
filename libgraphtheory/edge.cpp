@@ -138,8 +138,6 @@ void Edge::setType(EdgeTypePtr type)
         this, &Edge::updateDynamicProperty);
     connect(type.data(), &EdgeType::directionChanged,
         this, &Edge::directionChanged);
-    connect(type->style(), &EdgeTypeStyle::visibilityChanged,
-        this, &Edge::typeVisibilityChanged);
     connect(type.data(), &EdgeType::dynamicPropertyRenamed,
         this, &Edge::renameDynamicProperty);
     connect(type->style(), &EdgeTypeStyle::changed,

@@ -1,5 +1,5 @@
 /*
- *  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2014-2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,6 +20,7 @@
 
 #include "edgeitem.h"
 #include "edgetypestyle.h"
+#include "nodetypestyle.h"
 #include "qsglinenode.h"
 #include <QSGSimpleRectNode>
 #include <QPainter>
@@ -92,9 +93,12 @@ void EdgeItem::setEdge(Edge *edge)
         this, &EdgeItem::updateColor);
     connect(edge, &Edge::directionChanged,
         this, &EdgeItem::updateDirection);
-    connect(edge, &Edge::typeChanged,
+
+    connect(edge, &Edge::styleChanged,
         this, &EdgeItem::updateVisibility);
-    connect(edge, &Edge::typeVisibilityChanged,
+    connect(edge->from().data(), &Node::styleChanged,
+        this, &EdgeItem::updateVisibility);
+    connect(edge->to().data(), &Node::styleChanged,
         this, &EdgeItem::updateVisibility);
 
     updatePosition();
@@ -176,7 +180,10 @@ void EdgeItem::updateDirection()
 
 void EdgeItem::updateVisibility()
 {
-    d->m_visible = d->m_edge->type()->style()->isVisible();
+    bool visible = d->m_edge->type()->style()->isVisible() &&
+        d->m_edge->from()->type()->style()->isVisible() &&
+        d->m_edge->to()->type()->style()->isVisible();
+    d->m_visible = visible;
     if (d->m_visible) {
         setOpacity(1);
     } else {
