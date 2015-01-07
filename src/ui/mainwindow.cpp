@@ -290,7 +290,7 @@ void MainWindow::setupActions()
     projectOpenAction->setShortcutContext(Qt::ApplicationShortcut);
     actionCollection()->addAction("open-project", projectOpenAction);
     actionCollection()->setDefaultShortcut(projectOpenAction, QKeySequence::Open);
-    connect(projectOpenAction, SIGNAL(triggered(bool)), this, SLOT(openProject()));
+    connect(projectOpenAction, &QAction::triggered, this, [=] () { openProject(); });
 
     m_recentProjects = new KRecentFilesAction(QIcon ("document-open"), i18nc("@action:inmenu","Recent Projects"), this);
     connect(m_recentProjects, &KRecentFilesAction::urlSelected,
