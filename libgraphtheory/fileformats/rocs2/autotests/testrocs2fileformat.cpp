@@ -43,12 +43,14 @@ void TestRocs2FileFormat::documentTypesTest()
     document->nodeTypes().first()->setId(1);
     document->nodeTypes().first()->setName("testName");
     document->nodeTypes().first()->style()->setColor(QColor("#ff0000"));
+    document->nodeTypes().first()->style()->setVisible(false);
     document->nodeTypes().first()->addDynamicProperty("label");
 
     // setup edge type
     document->edgeTypes().first()->setId(1);
     document->edgeTypes().first()->setName("testName");
     document->edgeTypes().first()->style()->setColor(QColor("#ff0000"));
+    document->edgeTypes().first()->style()->setVisible(false);
     document->edgeTypes().first()->addDynamicProperty("label");
     document->edgeTypes().first()->setDirection(EdgeType::Bidirectional);
 
@@ -70,6 +72,7 @@ void TestRocs2FileFormat::documentTypesTest()
     QCOMPARE(importDocument->nodeTypes().count(), 1);
     QCOMPARE(importDocument->nodeTypes().first()->id(), 1);
     QCOMPARE(importDocument->nodeTypes().first()->name(), QString("testName"));
+    QCOMPARE(importDocument->edgeTypes().first()->style()->isVisible(), false);
     QCOMPARE(importDocument->nodeTypes().first()->style()->color().name(), QString("#ff0000"));
 
     // test edge type
@@ -77,6 +80,7 @@ void TestRocs2FileFormat::documentTypesTest()
     QCOMPARE(importDocument->edgeTypes().first()->id(), 1);
     QCOMPARE(importDocument->edgeTypes().first()->name(), QString("testName"));
     QCOMPARE(importDocument->edgeTypes().first()->style()->color().name(), QString("#ff0000"));
+    QCOMPARE(importDocument->edgeTypes().first()->style()->isVisible(), false);
     QCOMPARE(importDocument->edgeTypes().first()->direction(), EdgeType::Bidirectional);
 }
 
