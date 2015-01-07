@@ -53,7 +53,6 @@ public:
 private:
     void setupWidgets();
     void setupActions();
-    void setupToolbars();
 
     /**
      * Set @p project as active project. This method updates all responsible widgets.

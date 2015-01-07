@@ -86,7 +86,6 @@ MainWindow::MainWindow()
     setupActions();
     setupGUI(ToolBar | Keys | Save | Create);
 
-    setupToolbars();
     setupToolsPluginsAction();
 
     // setup kernel
@@ -172,27 +171,6 @@ void MainWindow::setupWidgets()
     m_hSplitter->setSizes(QList<int>() << Settings::hSplitterSizeLeft() << panelWidth);
 
     setCentralWidget(m_hSplitter);
-}
-
-void MainWindow::setupToolbars()
-{
-    // If current version in settings file is less than demanded version
-    // perform operations.
-    QString configVersion = Settings::version();
-    if (configVersion.compare(QString("1.7.70")) < 0) {
-        qDebug() << "Apply new default settings for toolbars";
-        KToolBar* bar;
-
-        bar = toolBar("main");
-        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
-        bar->setOrientation(Qt::Vertical);
-        addToolBar(Qt::LeftToolBarArea, bar);
-
-        bar = toolBar("align");
-        bar->setToolButtonStyle(Qt::ToolButtonIconOnly);
-        bar->setOrientation(Qt::Vertical);
-        addToolBar(Qt::LeftToolBarArea, bar);
-    }
 }
 
 QWidget* MainWindow::setupScriptPanel()
