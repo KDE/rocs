@@ -266,7 +266,6 @@ void MainWindow::setProject(Project *project)
 
 void MainWindow::setupActions()
 {
-    qDebug() << "create and connect actions";
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(showConfigurationDialog()), actionCollection());
 
