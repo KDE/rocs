@@ -88,6 +88,7 @@ void Rocs2FileFormat::readFile()
         type->setName(typeJson["Name"].toString());
         type->style()->setColor(QColor(typeJson["Color"].toString()));
         type->style()->setVisible(typeJson["Visible"].toBool());
+        type->style()->setPropertyNamesVisible(typeJson["PropertyNamesVisible"].toBool());
 
         QJsonArray propertiesJson = typeJson["Properties"].toArray();
         for (int pIndex = 0; pIndex < propertiesJson.count(); ++pIndex) {
@@ -104,6 +105,7 @@ void Rocs2FileFormat::readFile()
         type->setName(typeJson["Name"].toString());
         type->style()->setColor(QColor(typeJson["Color"].toString()));
         type->style()->setVisible(typeJson["Visible"].toBool());
+        type->style()->setPropertyNamesVisible(typeJson["PropertyNamesVisible"].toBool());
         type->setDirection(direction(typeJson["Direction"].toString()));
 
         QJsonArray propertiesJson = typeJson["Properties"].toArray();
@@ -218,6 +220,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         typeJson.insert("Name", type->name());
         typeJson.insert("Color", type->style()->color().name());
         typeJson.insert("Visible", type->style()->isVisible());
+        typeJson.insert("PropertyNamesVisible", type->style()->isPropertyNamesVisible());
         QJsonArray propertiesJson;
         foreach (const QString &property, type->dynamicProperties()) {
             propertiesJson.append(property);
@@ -238,6 +241,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         typeJson.insert("Name", type->name());
         typeJson.insert("Color", type->style()->color().name());
         typeJson.insert("Visible", type->style()->isVisible());
+        typeJson.insert("PropertyNamesVisible", type->style()->isPropertyNamesVisible());
         typeJson.insert("Direction", direction(type->direction()));
         QJsonArray propertiesJson;
         foreach (const QString &property, type->dynamicProperties()) {
