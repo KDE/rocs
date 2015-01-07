@@ -19,14 +19,31 @@
  */
 
 import QtQuick 2.2
-import QtQuick.Controls 1.1
-import org.kde.rocs.graphtheory 1.0
 
-Action {
+Item {
     id: root
+    property variant from: Qt.point(0, 0)
+    property variant to: Qt.point(0, 0)
 
-    text: i18n("Select & Move")
-    iconName: "rocsselect"
-    checkable: true
-    tooltip: i18n("Select and move elements on the scene")
+    signal changed
+
+    function contains(x, y)
+    {
+        return (x >= rect.x && x <= rect.x + rect.width && y >= rect.y && y <= rect.y + rect.height)
+    }
+
+    onFromChanged: changed()
+    onToChanged: changed()
+
+    Rectangle {
+        id: rect
+        x: Math.min(from.x, to.x)
+        y: Math.min(from.y, to.y)
+        width: Math.abs(from.x - to.x)
+        height: Math.abs(from.y - to.y)
+
+        color: "#afc3deff"
+        border.color: "steelblue"
+        border.width: 2
+    }
 }

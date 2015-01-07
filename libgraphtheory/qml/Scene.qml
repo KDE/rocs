@@ -22,12 +22,15 @@ import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
+import QtQml.StateMachine 1.0 as DSM
 import org.kde.rocs.graphtheory 1.0
 
 Item {
     id: root
     width: 800
     height: 600
+
+    focus: true
 
     // element create/remove actions
     signal createNode(real x, real y);
@@ -39,10 +42,37 @@ Item {
     signal showNodePropertiesDialog(Node node);
     signal showEdgePropertiesDialog(Edge edge);
 
+    Connections {
+        target: selectMoveAction
+        onToggled: {
+            dsmSelectMove.running = selectMoveAction.checked
+        }
+    }
+    Connections {
+        target: addEdgeAction
+        onToggled: {
+            dsmCreateEdge.running = addEdgeAction.checked
+        }
+    }
+
+    Keys.onPressed: {
+        switch(event.key) {
+        case Qt.Key_Escape:
+            scene.clearSelection();
+            event.accepted = true;
+            break;
+        case Qt.Key_Delete:
+            scene.deleteSelected()
+            event.accepted = true;
+            break;
+        default:
+            break;
+        }
+    }
+
     ExclusiveGroup {
         id: editToolButton
     }
-
     ColumnLayout {
         id: toolbar
         ToolButton {
@@ -93,24 +123,36 @@ Item {
             width: sceneScrollView.width - 30
             height: sceneScrollView.height - 20
             property variant origin: Qt.point(0, 0) // coordinate of global origin (0,0) in scene
+            signal deleteSelected();
+            signal startMoveSelected();
+            signal finishMoveSelected();
+            signal updateSelection();
+            signal createEdgeUpdateFromNode();
+            signal createEdgeUpdateToNode();
+            function clearSelection()
+            {
+                selectionRect.from = Qt.point(0, 0)
+                selectionRect.to = Qt.point(0, 0)
+                updateSelection();
+            }
+            function setEdgeFromNode()
+            {
+                addEdgeAction.to = null
+                createEdgeUpdateFromNode();
+            }
 
             MouseArea {
                 id: sceneAction
                 anchors.fill: parent
-                property int startX
-                property int startY
-                property int endX
-                property int endY
-                property bool activePress
-                property int mouseX
-                property int mouseY
 
-                signal deleteSelected();
-                signal clearSelection();
-
-                focus: true
+                property variant lastMouseClicked: Qt.point(0, 0)
+                property variant lastMousePressed: Qt.point(0, 0)
+                property variant lastMouseReleased: Qt.point(0, 0)
+                property variant lastMousePosition: Qt.point(0, 0)
+                property bool nodePressed: false // if true, the current mouse-press event started at a node
 
                 onClicked: {
+                    lastMouseClicked = Qt.point(mouse.x, mouse.y)
                     if (addNodeAction.checked) {
                         mouse.accepted = true
                         createNode(mouse.x + scene.origin.x, mouse.y + scene.origin.y);
@@ -118,71 +160,30 @@ Item {
                     }
                 }
                 onPressed: {
-                    clearSelection();
-                    activePress = true
-                    startX = mouse.x
-                    startY = mouse.y
-                    endX = mouse.x
-                    endY = mouse.y
+                    lastMousePressed = Qt.point(mouse.x, mouse.y)
+                    lastMousePosition = Qt.point(mouse.x, mouse.y)
                 }
                 onPositionChanged: {
-                    mouseX = mouse.x
-                    mouseY = mouse.y
-                    endX = mouse.x
-                    endY = mouse.y
+                    lastMousePosition = Qt.point(mouse.x, mouse.y)
                 }
                 onReleased: {
-                    activePress = false
-                    if (addEdgeAction.checked) {
-                        addEdgeAction.apply();
-                    }
-                }
-
-                Keys.onPressed: {
-                    if (event.key == Qt.Key_Delete) {
-                        deleteSelected()
-                        event.accepted = true;
-                    }
+                    lastMouseReleased = Qt.point(mouse.x, mouse.y)
+                    sceneAction.nodePressed = false
                 }
             }
 
-            // highlighter for selection and edges
-            Component {
-                id: rectComponent
-                Rectangle {
-                    id: rectangle
-                    x: Math.min(sceneAction.startX, sceneAction.endX)
-                    y: Math.min(sceneAction.startY, sceneAction.endY)
-                    width: Math.abs(sceneAction.startX - sceneAction.endX)
-                    height: Math.abs(sceneAction.startY - sceneAction.endY)
-                    color: "#afc3deff"
-                    border.color: "steelblue"
-                    border.width: 2
-                    onXChanged: selectMoveAction.selectX = x
-                    onYChanged: selectMoveAction.selectY = y
-                    onWidthChanged: selectMoveAction.selectWidth = width
-                    onHeightChanged: selectMoveAction.selectHeight = height
-                }
+            SelectionRectangle {
+                id: selectionRect
+                visible: false
             }
-            Component {
-                id: lineComponent
-                Line {
-                    fromX: sceneAction.startX
-                    fromY: sceneAction.startY
-                    toX: sceneAction.endX
-                    toY: sceneAction.endY
-                }
-            }
-            Loader {
-                sourceComponent: {
-                    if (selectMoveAction.checked && sceneAction.activePress) {
-                        return rectComponent
-                    }
-                    if (addEdgeAction.checked && sceneAction.activePress) {
-                        return lineComponent
-                    }
-                    return undefined
-                }
+
+            Line {
+                id: createLineMarker
+                visible: false
+                fromX: sceneAction.lastMousePressed.x
+                fromY: sceneAction.lastMousePressed.y
+                toX: sceneAction.lastMousePosition.x
+                toY: sceneAction.lastMousePosition.y
             }
 
             Repeater {
@@ -221,52 +222,57 @@ Item {
                     node: model.dataRole
                     origin: scene.origin
                     highlighted: addEdgeAction.from == node || addEdgeAction.to == node
-                    property bool __modifyingPosition : false
-                    function isSelected()
-                    {
-                        if (x + width/2 < selectMoveAction.selectX) return false;
-                        if (y + height/2 < selectMoveAction.selectY) return false;
-                        if (x - width/2 > selectMoveAction.selectX + selectMoveAction.selectWidth) return false;
-                        if (y - height/2 > selectMoveAction.selectY + selectMoveAction.selectHeight) return false;
-                        return true;
-                    }
+                    property bool __modifyingPosition: false
+                    property variant __moveStartedPosition: Qt.point(0, 0)
                     Connections {
-                        target: sceneAction
-                        onMouseXChanged: {
-                            if (selectMoveAction.checked && isSelected()) {
+                        target: selectionRect
+                        onChanged: {
+                            if (selectMoveAction.checked && selectionRect.contains(x, y)) {
                                 highlighted = true
                             } else {
                                 highlighted = false
-                            }
-                            if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
-                                if (addEdgeAction.from == null) {
-                                    addEdgeAction.from = node;
-                                } else {
-                                    addEdgeAction.to = node
-                                }
                             }
                         }
-                        onMouseYChanged: {
-                            if (selectMoveAction.checked && isSelected()) {
-                                highlighted = true
-                            } else {
-                                highlighted = false
-                            }
-                            if (nodeItem.contains(Qt.point(sceneAction.mouseX,sceneAction.mouseY))) {
-                                if (addEdgeAction.from == null) {
-                                    addEdgeAction.from = node;
-                                } else {
-                                    addEdgeAction.to = node
-                                }
-                            }
+                    }
+                    Connections {
+                        target: scene
+                        onUpdateSelection: {
+                            highlighted = false
                         }
                         onDeleteSelected: {
                             if (highlighted) {
                                 deleteNode(node)
                             }
                         }
-                        onClearSelection: {
-                            highlighted = false
+                        onStartMoveSelected: {
+                            if (!highlighted) {
+                                return
+                            }
+                            __moveStartedPosition.x = node.x
+                            __moveStartedPosition.y = node.y
+                            node.x = Qt.binding(function() { return __moveStartedPosition.x + sceneAction.lastMousePosition.x - sceneAction.lastMousePressed.x })
+                            node.y = Qt.binding(function() { return __moveStartedPosition.y + sceneAction.lastMousePosition.y - sceneAction.lastMousePressed.y })
+                        }
+                        onFinishMoveSelected: {
+                            if (!highlighted) {
+                                return
+                            }
+                            node.x = __moveStartedPosition.x + sceneAction.lastMousePosition.x - sceneAction.lastMousePressed.x
+                            node.y = __moveStartedPosition.y + sceneAction.lastMousePosition.y - sceneAction.lastMousePressed.y
+                            __moveStartedPosition.x = 0
+                            __moveStartedPosition.y = 0
+                        }
+                        onCreateEdgeUpdateFromNode: {
+                            if (nodeItem.contains(Qt.point(sceneAction.lastMousePressed.x, sceneAction.lastMousePressed.y))) {
+                                node.highlighted = true
+                                addEdgeAction.from = node
+                            }
+                        }
+                        onCreateEdgeUpdateToNode: {
+                            if (nodeItem.contains(Qt.point(sceneAction.lastMouseReleased.x, sceneAction.lastMouseReleased.y))) {
+                                node.highlighted = true
+                                addEdgeAction.to = node
+                            }
                         }
                     }
                     onXChanged: {
@@ -341,17 +347,113 @@ Item {
                             showNodePropertiesDialog(nodeItem.node);
                         }
                         onPressed: {
+                            sceneAction.nodePressed = true
                             if (selectMoveAction.checked && !nodeItem.highlighted) {
-                                sceneAction.clearSelection()
+                                scene.clearSelection()
                                 nodeItem.highlighted = true
                                 mouse.accepted = true
+                                return
                             }
-                            if (!(deleteAction.checked || selectMoveAction.checked)) {
-                                mouse.accepted = false
-                            }
+                            mouse.accepted = false
+                        }
+                        onReleased: {
+                            sceneAction.nodePressed = false
                         }
                     }
                 }
+            }
+        }
+    }
+
+    // state maching solely for select/move
+    DSM.StateMachine {
+        id: dsmSelectMove
+        initialState: smStateIdle
+        running: true
+        DSM.State {
+            id: smStateIdle
+            DSM.SignalTransition {
+                targetState: smStateMoving
+                signal: sceneAction.onPressed
+                guard: sceneAction.nodePressed
+            }
+            DSM.SignalTransition {
+                targetState: smStateSelecting
+                signal: sceneAction.onPressed
+                guard: !sceneAction.nodePressed
+            }
+            DSM.SignalTransition {
+                signal: sceneAction.onClicked
+                onTriggered: {
+                    scene.clearSelection
+                }
+            }
+        }
+        DSM.State {
+            id: smStateSelecting
+            DSM.SignalTransition {
+                signal: sceneAction.onPositionChanged
+                onTriggered: {
+                    selectionRect.visible = true
+                    selectionRect.to = sceneAction.lastMousePosition
+                }
+            }
+            DSM.SignalTransition {
+                targetState: smStateIdle
+                signal: sceneAction.onReleased
+            }
+            onEntered: {
+                scene.clearSelection()
+                selectionRect.from = sceneAction.lastMousePressed
+            }
+            onExited: {
+                selectionRect.visible = false
+            }
+        }
+        DSM.State {
+            id: smStateMoving
+            DSM.SignalTransition {
+                targetState: smStateIdle
+                signal: sceneAction.onReleased
+            }
+            onEntered: {
+                scene.startMoveSelected();
+            }
+            onExited: {
+                scene.finishMoveSelected()
+            }
+        }
+    }
+
+    // state maching solely for edge creation
+    DSM.StateMachine {
+        id: dsmCreateEdge
+        initialState: ceStateIdle
+        running: false
+        DSM.State {
+            id: ceStateIdle
+            DSM.SignalTransition {
+                targetState: ceStateCreateEdgeTo
+                signal: sceneAction.onPressed
+            }
+            onExited: {
+                addEdgeAction.to = null
+                scene.createEdgeUpdateFromNode()
+            }
+        }
+        DSM.State {
+            id: ceStateCreateEdgeTo
+            DSM.SignalTransition {
+                targetState: ceStateIdle
+                signal: sceneAction.onReleased
+            }
+            onEntered: {
+                createLineMarker.visible = true
+            }
+            onExited: {
+                scene.createEdgeUpdateToNode()
+                addEdgeAction.apply()
+                createLineMarker.visible = false
             }
         }
     }
