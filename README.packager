@@ -1,50 +1,26 @@
-OUTLINE
+Outline
 =======
 This readme file currently covers the following topics (further topics will be included in the
 future):
 * Building
 * Licensing
 
-BUILDING
+Building
 ========
-For building Rocs, please refer to the instructions on techbase.kde.org. Further, Rocs provides
-a set of special cmake options:
+Rocs uses CMake as its build system. Please refer to the CMake output to see the list of needed
+packages and versions.
 
-Required Packages
------------------
-* CMake
-  - we use features of CMake 2.8.8
-* Boost
-  - >=1.49 is required for DOT file format support, if only older Boost is found, compilation of this
-    plugin is disabled
-  - >=1.43 is required for all other parts of Rocs
-* KDE4Libs
-  - minimum KDE4Libs version is 4.3
-  - if compiled with version less than 4.10, the build system will warn that KDE4Internal is not found
-    (this is a false positive!)
-* Grantlee
-  - minimum version is 0.3.0
-
-CMake Options
--------------
-* ROCS_BUILD_LOADSAVE
-  Build optional plugins for graph files. Those plugins are recommended, but Rocs will work
-  without (though with graph files limited to Rocs internal file types).
-* ROCS_EXPERIMENTAL_PLUGINS
-  Build of unstable/experimental plugins. This method is only recommended for developers. Explicitely,
-  those plugins are not yet suited for end users
-
-LICENSES
+Licenses
 ========
 Source Files
 ------------
 Rocs follows the KDE Licensing policy, available here: http://techbase.kde.org/Policies/Licensing_Policy
-Explicitely, all *.cpp, *.h, and *.cmake source files (to be found at: src/*) are licensed under one of
-the following licenses
+Explicitely, all *.cpp, *.h, and *.cmake source files are licensed under one of the following licenses
 * GPL-2
 * GPL-2+
 * LGPL-2.1
-It is a medium term goal to provide all sources under GPL-2+.
+It is a medium term goal to provide all sources under inside src/ as GPL-2+ and all sources in /libgraphtheory
+as LGPL-2+.
 
 Documentation
 -------------
