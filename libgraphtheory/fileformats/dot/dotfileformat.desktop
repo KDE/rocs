@@ -24,6 +24,7 @@ Name[sl]=Vrsta datotek grafov DOT
 Name[sv]=DOT-graffilformat
 Name[uk]=формат файлів графів DOT
 Name[x-test]=xxDOT Graph File Formatxx
+Name[zh_TW]=DOT 圖形檔案格式
 Comment=Read and write Graphviz graph documents (DOT)
 Comment[bs]=Čitanje i pisanje Graphwiz datoteka (DOT)
 Comment[ca]=Llegeix i escriu documents gràfics del Graphviz (DOT).

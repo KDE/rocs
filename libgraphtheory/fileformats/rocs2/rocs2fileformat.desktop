@@ -24,6 +24,7 @@ Name[sl]=Vrsta datotek Rocs
 Name[sv]=Rocs-filformat
 Name[uk]=формат файлів Rocs
 Name[x-test]=xxRocs File Formatxx
+Name[zh_TW]=Rocs 檔案格式
 Comment=Rocs Graph File Format
 Comment[ca]=Format de fitxers de grafs del Rocs
 Comment[cs]=Formát souborů grafů Rocs
@@ -41,4 +42,5 @@ Comment[sl]=Vrsta datotek z grafi Rocs
 Comment[sv]=Rocs-graffilformat
 Comment[uk]=формат файлів графів Rocs
 Comment[x-test]=xxRocs Graph File Formatxx
+Comment[zh_TW]=Rocs 圖形檔案格式
 

@@ -24,6 +24,7 @@ Name[sl]=Vrsta datotek GML
 Name[sv]=GML-filformat
 Name[uk]=формат файлів GML
 Name[x-test]=xxGML File Formatxx
+Name[zh_TW]=GML 檔案格式
 Comment=Read and write Graph Markup Language documents (GML)
 Comment[bs]=Čitanje i pisanje datoteka u jeziku za označavanje graf dokumenata (GML)
 Comment[ca]=Llegeix i escriu fitxers escrits en Llenguatge de Marcatge de Gràfics (GML)

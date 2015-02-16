@@ -24,6 +24,7 @@ Name[sl]=Vstavek izvoza datotek grafov PGF/TikZ
 Name[sv]=Exportinsticksprogram för PGF/TikZ-graffilformat
 Name[uk]=Додаток експортування файлів графів PGF/TikZ
 Name[x-test]=xxPGF/TikZ Graph File Export Pluginxx
+Name[zh_TW]=PGF/TikZ 圖形檔匯出外掛程式
 Comment=Writes graph documents in PGF/TikZ format for use in LaTeX documents
 Comment[bs]=Piše graf dokumente u PGF/TikZ formatu za upotrebu u LaTeX dokumentu
 Comment[ca]=Escriu documents gràfics en format PGF/TikZ per utilitzar-los en documents LaTeX

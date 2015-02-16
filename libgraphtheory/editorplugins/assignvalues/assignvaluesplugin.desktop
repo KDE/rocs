@@ -24,6 +24,7 @@ Name[sv]=Insticksprogram för att tilldela värden
 Name[tr]=Değerleri Ata
 Name[uk]=Додаток пов’язування значень
 Name[x-test]=xxAssign Values Pluginxx
+Name[zh_TW]=指定值外掛程式
 Comment=Assign values to graph edges and nodes.
 Comment[bs]=Dodijeli vrijednosti ivicama i čvorovima grafa
 Comment[ca]=Assigna valors a les arestes i nodes del graf.
