@@ -36,6 +36,7 @@ class NodeTypeModelPrivate;
 class GRAPHTHEORY_EXPORT NodeTypeModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(GraphTheory::GraphDocumentPtr document READ document WRITE setDocument NOTIFY documentChanged)
 
 public:
     enum NodeRoles {
@@ -51,6 +52,7 @@ public:
      * Reimplemented from QAbstractListModel::roleNames()
      */
     virtual QHash<int,QByteArray> roleNames() const Q_DECL_OVERRIDE;
+    GraphDocumentPtr document() const;
     void setDocument(GraphDocumentPtr document);
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
@@ -59,6 +61,7 @@ public:
 
 Q_SIGNALS:
     void nodeChanged(int index);
+    void documentChanged();
 
 private Q_SLOTS:
     void onNodeTypeAboutToBeAdded(NodeTypePtr node, int index);

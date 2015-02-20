@@ -74,6 +74,11 @@ QHash< int, QByteArray > NodeTypeModel::roleNames() const
     return roles;
 }
 
+GraphDocumentPtr NodeTypeModel::document() const
+{
+    return d->m_document;
+}
+
 void NodeTypeModel::setDocument(GraphDocumentPtr document)
 {
     if (d->m_document == document) {
@@ -96,6 +101,7 @@ void NodeTypeModel::setDocument(GraphDocumentPtr document)
             this, &NodeTypeModel::onNodeTypesRemoved);
     }
     endResetModel();
+    emit documentChanged();
 }
 
 QVariant NodeTypeModel::data(const QModelIndex &index, int role) const
