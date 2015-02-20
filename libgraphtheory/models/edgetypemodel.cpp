@@ -1,5 +1,5 @@
 /*
- *  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2014-2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -69,6 +69,7 @@ QHash< int, QByteArray > EdgeTypeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
+    roles[TitleRole] = "titleRole";
     roles[DataRole] = "dataRole";
 
     return roles;
@@ -96,6 +97,11 @@ void EdgeTypeModel::setDocument(GraphDocumentPtr document)
             this, &EdgeTypeModel::onEdgeTypesRemoved);
     }
     endResetModel();
+}
+
+QVariant EdgeTypeModel::type(int index) const
+{
+    return QVariant::fromValue<QObject*>(d->m_document->edgeTypes().at(index).data());
 }
 
 QVariant EdgeTypeModel::data(const QModelIndex &index, int role) const

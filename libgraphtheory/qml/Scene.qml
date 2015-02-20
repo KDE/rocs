@@ -1,5 +1,5 @@
 /*
- *  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2014-2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.0
+import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
 import QtQml.StateMachine 1.0 as DSM
@@ -33,8 +33,8 @@ Item {
     focus: true
 
     // element create/remove actions
-    signal createNode(real x, real y);
-    signal createEdge(Node from, Node to);
+    signal createNode(real x, real y, NodeType type);
+    signal createEdge(Node from, Node to, EdgeType type);
     signal deleteNode(Node node);
     signal deleteEdge(Edge edge);
 
@@ -92,7 +92,7 @@ Item {
             action: AddEdgeAction {
                 id: addEdgeAction
                 exclusiveGroup: editToolButton
-                onCreateEdge: root.createEdge(from, to)
+                onCreateEdge: root.createEdge(from, to, edgeTypeModel.type(edgeTypeSelector.currentIndex))
             }
         }
         ToolButton {
@@ -155,7 +155,7 @@ Item {
                     lastMouseClicked = Qt.point(mouse.x, mouse.y)
                     if (addNodeAction.checked) {
                         mouse.accepted = true
-                        createNode(mouse.x + scene.origin.x, mouse.y + scene.origin.y);
+                        createNode(mouse.x + scene.origin.x, mouse.y + scene.origin.y, nodeTypeModel.type(nodeTypeSelector.currentIndex));
                         return
                     }
                 }
@@ -362,6 +362,37 @@ Item {
                     }
                 }
             }
+        }
+    }
+
+    RowLayout {
+        id: extraToolbarCreateNode
+        visible: addNodeAction.checked
+        anchors {
+            top: sceneScrollView.top
+            right:sceneScrollView.right
+            topMargin: 10
+            rightMargin: 5
+        }
+        ComboBox {
+            id: nodeTypeSelector
+            model: nodeTypeModel
+            textRole: "title"
+        }
+    }
+    RowLayout {
+        id: extraToolbarCreateEdge
+        visible: addEdgeAction.checked
+        anchors {
+            top: sceneScrollView.top
+            right:sceneScrollView.right
+            topMargin: 10
+            rightMargin: 5
+        }
+        ComboBox {
+            id: edgeTypeSelector
+            model: edgeTypeModel
+            textRole: "title"
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- *  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2014-2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -69,6 +69,7 @@ QHash< int, QByteArray > NodeTypeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
+    roles[TitleRole] = "title";
     roles[DataRole] = "dataRole";
 
     return roles;
@@ -102,6 +103,11 @@ void NodeTypeModel::setDocument(GraphDocumentPtr document)
     }
     endResetModel();
     emit documentChanged();
+}
+
+QVariant NodeTypeModel::type(int index) const
+{
+    return QVariant::fromValue<QObject*>(d->m_document->nodeTypes().at(index).data());
 }
 
 QVariant NodeTypeModel::data(const QModelIndex &index, int role) const

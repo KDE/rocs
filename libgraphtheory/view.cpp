@@ -85,14 +85,16 @@ View::View(QWidget *parent)
 
     qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
     qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
+    qmlRegisterType<GraphTheory::NodeType>("org.kde.rocs.graphtheory", 1, 0, "NodeType");
+    qmlRegisterType<GraphTheory::EdgeType>("org.kde.rocs.graphtheory", 1, 0, "EdgeType");
     qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
     qmlRegisterType<GraphTheory::EdgeItem>("org.kde.rocs.graphtheory", 1, 0, "EdgeItem");
     qmlRegisterType<GraphTheory::NodeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeModel");
     qmlRegisterType<GraphTheory::EdgeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeModel");
     qmlRegisterType<GraphTheory::NodePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "NodePropertyModel");
     qmlRegisterType<GraphTheory::EdgePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "EdgePropertyModel");
-    qmlRegisterType<GraphTheory::NodeType>("org.kde.rocs.graphtheory", 1, 0, "NodeTypeModel");
-    qmlRegisterType<GraphTheory::EdgeType>("org.kde.rocs.graphtheory", 1, 0, "EdgeTypeModel");
+    qmlRegisterType<GraphTheory::NodeTypeModel>("org.kde.rocs.graphtheory", 1, 0, "NodeTypeModel");
+    qmlRegisterType<GraphTheory::EdgeTypeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeTypeModel");
 
     QUrl path = QUrl::fromLocalFile(
         QStandardPaths::locate(QStandardPaths::GenericDataLocation, "rocsgraphtheory/qml/Scene.qml"));
@@ -113,10 +115,10 @@ View::View(QWidget *parent)
     QObject *topLevel = component->create();
 
     // connections to QML signals
-    connect(topLevel, SIGNAL(createNode(qreal,qreal)),
-            this, SLOT(createNode(qreal,qreal)));
-    connect(topLevel, SIGNAL(createEdge(GraphTheory::Node*, GraphTheory::Node*)),
-            this, SLOT(createEdge(GraphTheory::Node*, GraphTheory::Node*)));
+    connect(topLevel, SIGNAL(createNode(qreal,qreal,GraphTheory::NodeType*)),
+            this, SLOT(createNode(qreal,qreal,GraphTheory::NodeType*)));
+    connect(topLevel, SIGNAL(createEdge(GraphTheory::Node*,GraphTheory::Node*,GraphTheory::EdgeType*)),
+            this, SLOT(createEdge(GraphTheory::Node*,GraphTheory::Node*,GraphTheory::EdgeType*)));
     connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node*)),
             this, SLOT(deleteNode(GraphTheory::Node*)));
     connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge*)),
@@ -149,14 +151,15 @@ GraphDocumentPtr View::graphDocument() const
     return d->m_document;
 }
 
-void View::createNode(qreal x, qreal y)
+void View::createNode(qreal x, qreal y, GraphTheory::NodeType *type)
 {
     NodePtr node = Node::create(d->m_document);
+    node->setType(type->self());
     node->setX(x);
     node->setY(y);
 }
 
-void View::createEdge(Node *from, Node *to)
+void View::createEdge(Node *from, Node *to, GraphTheory::EdgeType *type)
 {
     if (!from || !to) {
         return;
@@ -164,7 +167,8 @@ void View::createEdge(Node *from, Node *to)
     if (!from->isValid() || !to->isValid()) {
         return;
     }
-    Edge::create(from->self(), to->self());
+    EdgePtr edge = Edge::create(from->self(), to->self());
+    edge->setType(type->self());
 }
 
 void View::deleteNode(GraphTheory::Node *node)

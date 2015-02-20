@@ -53,6 +53,7 @@ public:
      */
     virtual QHash<int,QByteArray> roleNames() const Q_DECL_OVERRIDE;
     void setDocument(GraphDocumentPtr document);
+    Q_INVOKABLE QVariant type(int index) const;
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
