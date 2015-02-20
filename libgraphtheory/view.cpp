@@ -1,5 +1,5 @@
 /*
- *  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2014-2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,8 @@
 #include "models/edgemodel.h"
 #include "models/nodepropertymodel.h"
 #include "models/edgepropertymodel.h"
+#include "models/nodetypemodel.h"
+#include "models/edgetypemodel.h"
 #include "qtquickitems/nodeitem.h"
 #include "qtquickitems/edgeitem.h"
 #include "dialogs/nodeproperties.h"
@@ -47,8 +49,10 @@ using namespace GraphTheory;
 class GraphTheory::ViewPrivate {
 public:
     ViewPrivate()
-        : m_edgeModel(0)
-        , m_nodeModel(0)
+        : m_edgeModel(new EdgeModel())
+        , m_nodeModel(new NodeModel())
+        , m_edgeTypeModel(new EdgeTypeModel())
+        , m_nodeTypeModel(new NodeTypeModel)
     {
     }
 
@@ -56,11 +60,15 @@ public:
     {
         delete m_edgeModel;
         delete m_nodeModel;
+        delete m_edgeTypeModel;
+        delete m_nodeTypeModel;
     }
 
     GraphDocumentPtr m_document;
     EdgeModel *m_edgeModel;
     NodeModel *m_nodeModel;
+    EdgeTypeModel *m_edgeTypeModel;
+    NodeTypeModel *m_nodeTypeModel;
 };
 
 
@@ -75,9 +83,6 @@ View::View(QWidget *parent)
     kdeclarative.setDeclarativeEngine(engine());
     kdeclarative.setupBindings();
 
-    d->m_nodeModel = new NodeModel();
-    d->m_edgeModel = new EdgeModel();
-
     qmlRegisterType<GraphTheory::Node>("org.kde.rocs.graphtheory", 1, 0, "Node");
     qmlRegisterType<GraphTheory::Edge>("org.kde.rocs.graphtheory", 1, 0, "Edge");
     qmlRegisterType<GraphTheory::NodeItem>("org.kde.rocs.graphtheory", 1, 0, "NodeItem");
@@ -86,6 +91,8 @@ View::View(QWidget *parent)
     qmlRegisterType<GraphTheory::EdgeModel>("org.kde.rocs.graphtheory", 1, 0, "EdgeModel");
     qmlRegisterType<GraphTheory::NodePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "NodePropertyModel");
     qmlRegisterType<GraphTheory::EdgePropertyModel>("org.kde.rocs.graphtheory", 1, 0, "EdgePropertyModel");
+    qmlRegisterType<GraphTheory::NodeType>("org.kde.rocs.graphtheory", 1, 0, "NodeTypeModel");
+    qmlRegisterType<GraphTheory::EdgeType>("org.kde.rocs.graphtheory", 1, 0, "EdgeTypeModel");
 
     QUrl path = QUrl::fromLocalFile(
         QStandardPaths::locate(QStandardPaths::GenericDataLocation, "rocsgraphtheory/qml/Scene.qml"));
@@ -99,6 +106,8 @@ View::View(QWidget *parent)
     // register editor elements at context
     engine()->rootContext()->setContextProperty("nodeModel", d->m_nodeModel);
     engine()->rootContext()->setContextProperty("edgeModel", d->m_edgeModel);
+    engine()->rootContext()->setContextProperty("nodeTypeModel", d->m_nodeTypeModel);
+    engine()->rootContext()->setContextProperty("edgeTypeModel", d->m_edgeTypeModel);
 
     // create rootObject after context is set up
     QObject *topLevel = component->create();
@@ -131,6 +140,8 @@ void View::setGraphDocument(GraphDocumentPtr document)
     d->m_document = document;
     d->m_nodeModel->setDocument(d->m_document);
     d->m_edgeModel->setDocument(d->m_document);
+    d->m_nodeTypeModel->setDocument(d->m_document);
+    d->m_edgeTypeModel->setDocument(d->m_document);
 }
 
 GraphDocumentPtr View::graphDocument() const
