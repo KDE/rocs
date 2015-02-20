@@ -21,12 +21,13 @@
 project(rocs)
 cmake_minimum_required(VERSION 3.0.0)
 
-find_package(ECM 1.0.0 REQUIRED NO_MODULE)
+find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 find_package(KF5DocTools)
 find_package(Boost "1.49" REQUIRED)
 find_package(Grantlee5 "5.0.0" REQUIRED)
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+include(ECMAddAppIcon)
 include(ECMAddTests)
 include(ECMInstallIcons)
 include(ECMOptionalAddSubdirectory)
@@ -50,7 +51,7 @@ find_package(Qt5 5.4 REQUIRED NO_MODULE COMPONENTS
   Test
   XmlPatterns
 )
-find_package(KF5 5.1 REQUIRED COMPONENTS
+find_package(KF5 5.7 REQUIRED COMPONENTS
   Config
   CoreAddons
   Declarative

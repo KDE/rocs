@@ -73,11 +73,16 @@ ki18n_wrap_ui(
 
 kconfig_add_kcfg_files(rocs_Settings_SRCS settings.kcfgc)
 
-# needed to get icon on windows
-# FIXME port to kf5
-# kde4_add_app_icon( rocs_SRCS
-#     ${CMAKE_CURRENT_SOURCE_DIR}/../graphics/global/hi*-apps-rocs.png
-# )
+# add icon to executable on windows and mac
+ecm_add_app_icon(rocs_SRCS
+    ICONS
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi16-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi22-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi32-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi48-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi64-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi128-apps-rocs.png
+)
 
 add_executable( rocs
     ${rocs_SRCS}
