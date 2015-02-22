@@ -49,12 +49,14 @@ void TestProject::projectOperations()
     codeFile2.open();
     KTextEditor::Document *codeDoc1 = project.importCodeDocument(QUrl::fromLocalFile(codeFile1.fileName()));
     KTextEditor::Document *codeDoc2 = project.importCodeDocument(QUrl::fromLocalFile(codeFile2.fileName()));
+    project.setDocumentName(codeDoc1, "Test");
 
     QCOMPARE(project.codeDocuments().length(), 2); // check correct adding
     QVERIFY(project.codeDocuments().first()->url().toLocalFile().startsWith(project.workingDir())); // check working dir
     QVERIFY(codeDoc1->url().toLocalFile() != codeDoc2->url().toLocalFile()); // check for distinct names
     project.removeCodeDocument(codeDoc1);     // check removal
     QCOMPARE(project.codeDocuments().length(), 1);
+    QCOMPARE(project.documentName(codeDoc1), QString("Test"));
 
     // test import of graph
     QTemporaryFile graphFile;
@@ -138,11 +140,13 @@ void TestProject::loadSaveMultipleScriptDocuments()
     codeFileA.setFileTemplate("XXXXXXX.js");
     codeFileA.open();
     KTextEditor::Document* docA = project.importCodeDocument(QUrl::fromLocalFile(codeFileA.fileName()));
+    project.setDocumentName(docA, "A");
     docA->setText("1");
 
     codeFileB.setFileTemplate("XXXXXXX.js");
     codeFileB.open();
     KTextEditor::Document* docB = project.importCodeDocument(QUrl::fromLocalFile(codeFileB.fileName()));
+    project.setDocumentName(docB, "B");
     docB->setText("2");
 
     // save & load this project
@@ -153,6 +157,7 @@ void TestProject::loadSaveMultipleScriptDocuments()
 
     Project loadedProject(QUrl::fromLocalFile(projectFile.fileName()), graphEditor);
     QCOMPARE(loadedProject.codeDocuments().count(), 2);
+    QCOMPARE(loadedProject.documentName(loadedProject.codeDocuments().at(0)), QString("A"));
     QCOMPARE(loadedProject.codeDocuments().at(0)->text(), QString("1"));
     QCOMPARE(loadedProject.codeDocuments().at(1)->text(), QString("2"));
 

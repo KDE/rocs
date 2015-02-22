@@ -104,6 +104,17 @@ public:
      */
     void removeCodeDocument(KTextEditor::Document *document);
 
+    /**
+     * @return project dependent document name
+     */
+    QString documentName(KTextEditor::Document *document) const;
+
+    /**
+     * Set a project dependent document name @p name for @p document , i.e., the name is only
+     * provided by the project but not by the text document file.
+     */
+    void setDocumentName(KTextEditor::Document *document, const QString &name);
+
 public Q_SLOTS:
     /**
      * Set the currently active graph document index to @p index.

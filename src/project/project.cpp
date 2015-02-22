@@ -1,5 +1,5 @@
 /*
- *  Copyright 2012-2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2012-2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,7 @@
 #include <KTar>
 #include <QUrl>
 #include <QDir>
+#include <QHash>
 #include <QString>
 #include <QMap>
 #include <QList>
@@ -46,8 +47,8 @@ class ProjectPrivate
 {
 public:
     ProjectPrivate()
-        : m_journal(0)
-        , m_graphEditor(0)
+        : m_journal(Q_NULLPTR)
+        , m_graphEditor(Q_NULLPTR)
         , m_modified(false)
         , m_activeGraphDocumentIndex(-1)
         , m_activeCodeDocumentIndex(-1)
@@ -59,7 +60,8 @@ public:
     QTemporaryDir m_workingDirectory; //!< temporary directory where all project files are organized
     QList<KTextEditor::Document*> m_codeDocuments;
     QList<GraphDocumentPtr> m_graphDocuments;
-    KTextEditor::Document* m_journal;
+    QHash<KTextEditor::Document*,QString> m_documentNames;
+    KTextEditor::Document *m_journal;
     GraphTheory::Editor *m_graphEditor;
     bool m_modified;
 
@@ -97,12 +99,14 @@ bool ProjectPrivate::loadProject(const QUrl &url)
     QJsonObject metaInfo = metaInfoDoc.object();
 
     QJsonArray codeDocs = metaInfo["scripts"].toArray();
+    QJsonArray codeDocNames = metaInfo["scriptNames"].toArray();
     for (int index = 0; index < codeDocs.count(); ++index) {
         QJsonObject docInfo = codeDocs.at(index).toObject();
         QString filename = docInfo["file"].toString();
         KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(0);
         document->openUrl(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + filename));
         m_codeDocuments.append(document);
+        m_documentNames.insert(document, codeDocNames.at(index).toString());
     }
 
     QJsonArray graphDocs = metaInfo["graphs"].toArray();
@@ -129,11 +133,12 @@ bool ProjectPrivate::writeProjectMetaInfo()
 {
     QJsonObject metaInfo;
 
-    QJsonArray codeDocs, graphDocs;
+    QJsonArray codeDocs, codeDocNames, graphDocs;
     foreach (KTextEditor::Document *document,  m_codeDocuments) {
         QJsonObject docInfo;
         docInfo.insert("file", document->url().fileName());
         codeDocs.append(docInfo);
+        codeDocNames.append(m_documentNames.value(document));
     }
     foreach (GraphTheory::GraphDocumentPtr document,  m_graphDocuments) {
         QJsonObject docInfo;
@@ -142,6 +147,7 @@ bool ProjectPrivate::writeProjectMetaInfo()
         graphDocs.append(docInfo);
     }
     metaInfo.insert("scripts", codeDocs);
+    metaInfo.insert("scriptNames", codeDocNames);
     metaInfo.insert("graphs", graphDocs);
     metaInfo.insert("journal", m_journal->url().fileName());
 
@@ -261,6 +267,18 @@ void Project::removeCodeDocument(KTextEditor::Document *document)
     if (!QFile::remove(path)) {
         qCritical() << "Could not remove code file" << path;
     }
+    d->m_documentNames.remove(document);
+    setModified(true);
+}
+
+QString Project::documentName(KTextEditor::Document *document) const
+{
+    return d->m_documentNames.value(document);
+}
+
+void Project::setDocumentName(KTextEditor::Document *document, const QString &name)
+{
+    d->m_documentNames.insert(document, name);
     setModified(true);
 }
 
@@ -268,7 +286,6 @@ QList<KTextEditor::Document*> Project::codeDocuments() const
 {
     return d->m_codeDocuments;
 }
-
 
 void Project::setActiveCodeDocument(int index)
 {
