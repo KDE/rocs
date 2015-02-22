@@ -1,5 +1,5 @@
 /*
- *  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2014-2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This program is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
@@ -24,13 +24,15 @@
 #include <KTextEditor/Editor>
 #include <KTextEditor/Document>
 #include <KLocalizedString>
+#include <QInputDialog>
+#include <QLineEdit>
 #include <QTabWidget>
 #include <QVBoxLayout>
 #include <QDebug>
 
 CodeEditorWidget::CodeEditorWidget(QWidget *parent)
     : QWidget(parent)
-    , m_project(0)
+    , m_project(Q_NULLPTR)
 {
     QLayout *layout = new QVBoxLayout();
     m_editor = KTextEditor::Editor::instance();
@@ -42,6 +44,8 @@ CodeEditorWidget::CodeEditorWidget(QWidget *parent)
     layout->addWidget(m_viewWidgets);
     layout->setSpacing(0);
     setLayout(layout);
+
+    connect(m_viewWidgets, &QTabWidget::tabBarDoubleClicked, this, &CodeEditorWidget::showDocumentNameDialog);
 }
 
 void CodeEditorWidget::setProject(Project *project)
@@ -54,8 +58,8 @@ void CodeEditorWidget::setProject(Project *project)
         m_viewWidgets->removeTab(0);
     }
     m_project = project;
-    connect(project, SIGNAL(codeDocumentAboutToBeAdded(KTextEditor::Document*,int)), this, SLOT(onCodeDocumentAboutToBeAdded(KTextEditor::Document*,int)));
-    connect(project, SIGNAL(codeDocumentAboutToBeRemoved(int,int)), this, SLOT(onCodeDocumentAboutToBeRemoved(int,int)));
+    connect(project, &Project::codeDocumentAboutToBeAdded, this, &CodeEditorWidget::onCodeDocumentAboutToBeAdded);
+    connect(project, &Project::codeDocumentAboutToBeRemoved, this, &CodeEditorWidget::onCodeDocumentAboutToBeRemoved);
 
     // initialize views
     for (int index = 0; index < m_project->codeDocuments().count(); ++index) {
@@ -71,12 +75,32 @@ KTextEditor::Document * CodeEditorWidget::activeDocument() const
 
 void CodeEditorWidget::onCodeDocumentAboutToBeAdded(KTextEditor::Document* document, int index)
 {
-    m_viewWidgets->insertTab(index, document->createView(this), document->documentName());
+    m_viewWidgets->insertTab(index, document->createView(this), m_project->documentName(document));
 }
 
 void CodeEditorWidget::onCodeDocumentAboutToBeRemoved(int start, int end)
 {
     for (int i = end; i >= start; --i) {
         m_viewWidgets->removeTab(i);
+    }
+}
+
+
+void CodeEditorWidget::showDocumentNameDialog(int index)
+{
+    if (!m_project || m_project->codeDocuments().count() < index) {
+        return;
+    }
+    auto document = m_project->codeDocuments().at(index);
+    bool ok;
+    QString name = QInputDialog::getText(this,
+        i18nc("@title", "Code Document Name"),
+        i18n("Enter the name of your code document"),
+        QLineEdit::Normal,
+        m_project->documentName(document),
+        &ok);
+    if (ok) {
+        m_project->setDocumentName(document, name);
+        m_viewWidgets->setTabText(index, name);
     }
 }
