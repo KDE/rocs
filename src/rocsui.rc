@@ -41,7 +41,7 @@
                 <text>Graph File</text>
             </Menu>-->
             <Separator/>
-            <Menu name="graph_selected">
+<!--            <Menu name="graph_selected">
                 <text>Edit Selected Data</text>
                 <Menu>
                     <text>Layout</text>
@@ -55,7 +55,7 @@
                     <Action name="align-tree" />
                 </Menu>
                 <Action name="delete-selected" />
-            </Menu>
+            </Menu>-->
             <Menu>
                 <text>Tools</text>
                 <ActionList name="tools_plugins" />
