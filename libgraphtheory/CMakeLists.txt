@@ -96,11 +96,16 @@ set(rocscore_LIB_HDRS
     node.h
 )
 
+# we use SOVERION 0 to make clear that this is neither stable API nor stable ABI
+# i.e., the library for now is only used internally in Rocs and we require the exact
+# version as released alongside Rocs
+set(GRAPHTHEORY_LIB_VERSION "0.0.1")
+set(GRAPHTHEORY_LIB_SOVERSION "0")
 set_target_properties(
     rocsgraphtheory
     PROPERTIES
-        VERSION ${GENERIC_LIB_VERSION}
-        SOVERSION ${GENERIC_LIB_SOVERSION}
+#         VERSION ${GRAPHTHEORY_LIB_VERSION}
+        SOVERSION ${GRAPHTHEORY_LIB_SOVERSION}
 )
 
 install(TARGETS rocsgraphtheory  ${INSTALL_TARGETS_DEFAULT_ARGS})
