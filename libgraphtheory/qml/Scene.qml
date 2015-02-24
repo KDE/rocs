@@ -377,7 +377,7 @@ Item {
         ComboBox {
             id: nodeTypeSelector
             model: nodeTypeModel
-            textRole: "title"
+            textRole: "titleRole"
         }
     }
     RowLayout {
@@ -392,7 +392,7 @@ Item {
         ComboBox {
             id: edgeTypeSelector
             model: edgeTypeModel
-            textRole: "title"
+            textRole: "titleRole"
         }
     }
 

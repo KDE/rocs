@@ -69,7 +69,7 @@ QHash< int, QByteArray > NodeTypeModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
-    roles[TitleRole] = "title";
+    roles[TitleRole] = "titleRole";
     roles[DataRole] = "dataRole";
 
     return roles;
