@@ -273,7 +273,11 @@ void Project::removeCodeDocument(KTextEditor::Document *document)
 
 QString Project::documentName(KTextEditor::Document *document) const
 {
-    return d->m_documentNames.value(document);
+    if (!d->m_documentNames.value(document).isEmpty()) {
+        return d->m_documentNames.value(document);
+    } else { // fall back to internal document name
+        return document->documentName();
+    }
 }
 
 void Project::setDocumentName(KTextEditor::Document *document, const QString &name)
