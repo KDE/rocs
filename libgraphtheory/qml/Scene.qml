@@ -208,6 +208,13 @@ Item {
                                 mouse.accepted = false
                             }
                         }
+                        onPressed: {
+                            if (deleteAction.checked) {
+                                deleteEdge(edge)
+                            } else {
+                                mouse.accepted = false
+                            }
+                        }
                         onDoubleClicked: {
                             showEdgePropertiesDialog(edgeItem.edge);
                         }
