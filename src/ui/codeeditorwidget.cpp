@@ -64,7 +64,7 @@ void CodeEditorWidget::setProject(Project *project)
     // initialize views
     for (int index = 0; index < m_project->codeDocuments().count(); ++index) {
         KTextEditor::Document *document = m_project->codeDocuments().at(index);
-        m_viewWidgets->insertTab(index, document->createView(this), document->documentName());
+        m_viewWidgets->insertTab(index, document->createView(this), project->documentName(document));
     }
 }
 
