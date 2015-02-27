@@ -403,7 +403,7 @@ Item {
         }
     }
 
-    // state maching solely for select/move
+    // state machine only for select/move
     DSM.StateMachine {
         id: dsmSelectMove
         initialState: smStateIdle

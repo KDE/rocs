@@ -567,7 +567,7 @@ void TestKernel::automaticScriptObjectPropertyGeneration()
     QScriptValue result;
 
     // For edges/nodes we can assign arbitrary dynamic properties during
-    // script exection. However, they exist only during execution and are removed
+    // script execution. However, they exist only during execution and are removed
     // at the end of the execution.
     script = "Document.nodes()[0].nonRegProp=1; Document.nodes()[0].nonRegProp;";
     result = kernel.execute(document, script);

@@ -217,7 +217,7 @@ public:
 
     /**
      * Reload the current document.
-     * @return @e true on success, i.e. the the document was reloaded, otherwise
+     * @return @e true on success, i.e. the document was reloaded, otherwise
      *         @e false
      */
     bool documentReload();
