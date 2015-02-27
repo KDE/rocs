@@ -319,10 +319,10 @@ QString Rocs2FileFormat::direction(EdgeType::Direction direction) const
 
 EdgeType::Direction Rocs2FileFormat::direction(QString direction) const
 {
-    if (direction.startsWith("Unidirectional")) {
+    if (direction.startsWith(QLatin1String("Unidirectional"))) {
         return EdgeType::Unidirectional;
     }
-    if (direction.startsWith("Bidirectional")) {
+    if (direction.startsWith(QLatin1String("Bidirectional"))) {
         return EdgeType::Bidirectional;
     }
     qCritical() << "Unknown direction, cannot convert and defaulting to Bidirectional";
