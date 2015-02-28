@@ -69,11 +69,11 @@ Node * NodeItem::node() const
 
 void NodeItem::setNode(Node *node)
 {
-    if (node == d->m_node) {
+    if (d->m_node == node) {
         return;
     }
-    if (node) {
-        node->disconnect(this);
+    if (d->m_node) {
+        d->m_node->disconnect(this);
     }
     d->m_node = node;
     setGlobalPosition(QPointF(node->x(), node->y()));

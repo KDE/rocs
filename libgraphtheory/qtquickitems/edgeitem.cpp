@@ -73,13 +73,13 @@ Edge * EdgeItem::edge() const
 
 void EdgeItem::setEdge(Edge *edge)
 {
-    if (edge == d->m_edge) {
+    if (d->m_edge == edge) {
         return;
     }
-    if (edge) {
-        edge->from().data()->disconnect(this);
-        edge->to().data()->disconnect(this);
-        edge->disconnect(this);
+    if (d->m_edge) {
+        d->m_edge->from().data()->disconnect(this);
+        d->m_edge->to().data()->disconnect(this);
+        d->m_edge->disconnect(this);
     }
     d->m_edge = edge;
     d->m_visible = edge->type()->style()->isVisible();
