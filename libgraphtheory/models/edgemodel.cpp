@@ -56,7 +56,8 @@ EdgeModel::EdgeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new EdgeModelPrivate)
 {
-    connect(d->m_signalMapper, SIGNAL(mapped(int)), SLOT(emitEdgeChanged(int)));
+    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped),
+        this, &EdgeModel::emitEdgeChanged);
 }
 
 EdgeModel::~EdgeModel()
@@ -85,10 +86,14 @@ void EdgeModel::setDocument(GraphDocumentPtr document)
     }
     d->m_document = document;
     if (d->m_document) {
-        connect(d->m_document.data(), SIGNAL(edgeAboutToBeAdded(EdgePtr,int)), SLOT(onEdgeAboutToBeAdded(EdgePtr,int)));
-        connect(d->m_document.data(), SIGNAL(edgeAdded()), SLOT(onEdgeAdded()));
-        connect(d->m_document.data(), SIGNAL(edgesAboutToBeRemoved(int,int)), SLOT(onEdgesAboutToBeRemoved(int,int)));
-        connect(d->m_document.data(), SIGNAL(edgesRemoved()), SLOT(onEdgesRemoved()));
+        connect(d->m_document.data(), &GraphDocument::edgeAboutToBeAdded,
+            this, &EdgeModel::onEdgeAboutToBeAdded);
+        connect(d->m_document.data(), &GraphDocument::edgeAdded,
+            this, &EdgeModel::onEdgeAdded);
+        connect(d->m_document.data(), &GraphDocument::edgesAboutToBeRemoved,
+            this, &EdgeModel::onEdgesAboutToBeRemoved);
+        connect(d->m_document.data(), &GraphDocument::edgesRemoved,
+            this, &EdgeModel::onEdgesRemoved);
     }
     endResetModel();
 }
