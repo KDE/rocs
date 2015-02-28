@@ -53,7 +53,6 @@ NodeItem::NodeItem(QQuickPaintedItem *parent)
     , d(new NodeItemPrivate)
 {
     setFlag(QQuickItem::ItemHasContents, true);
-
     setWidth(32);
     setHeight(32);
 }
@@ -94,6 +93,7 @@ void NodeItem::setNode(Node *node)
         this, &NodeItem::updatePositionfromScene);
 
     emit nodeChanged();
+    updateVisibility();
     update();
 }
 
