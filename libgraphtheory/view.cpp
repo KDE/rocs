@@ -115,10 +115,10 @@ View::View(QWidget *parent)
     QObject *topLevel = component->create();
 
     // connections to QML signals
-    connect(topLevel, SIGNAL(createNode(qreal,qreal,GraphTheory::NodeType*)),
-            this, SLOT(createNode(qreal,qreal,GraphTheory::NodeType*)));
-    connect(topLevel, SIGNAL(createEdge(GraphTheory::Node*,GraphTheory::Node*,GraphTheory::EdgeType*)),
-            this, SLOT(createEdge(GraphTheory::Node*,GraphTheory::Node*,GraphTheory::EdgeType*)));
+    connect(topLevel, SIGNAL(createNode(qreal,qreal,int)),
+            this, SLOT(createNode(qreal,qreal,int)));
+    connect(topLevel, SIGNAL(createEdge(GraphTheory::Node*,GraphTheory::Node*,int)),
+            this, SLOT(createEdge(GraphTheory::Node*,GraphTheory::Node*,int)));
     connect(topLevel, SIGNAL(deleteNode(GraphTheory::Node*)),
             this, SLOT(deleteNode(GraphTheory::Node*)));
     connect(topLevel, SIGNAL(deleteEdge(GraphTheory::Edge*)),
@@ -151,16 +151,20 @@ GraphDocumentPtr View::graphDocument() const
     return d->m_document;
 }
 
-void View::createNode(qreal x, qreal y, GraphTheory::NodeType *type)
+void View::createNode(qreal x, qreal y, int typeIndex)
 {
+    Q_ASSERT(typeIndex >= 0);
+    Q_ASSERT(typeIndex < d->m_nodeTypeModel->rowCount());
     NodePtr node = Node::create(d->m_document);
-    node->setType(type->self());
+    node->setType(d->m_nodeTypeModel->type(typeIndex));
     node->setX(x);
     node->setY(y);
 }
 
-void View::createEdge(Node *from, Node *to, GraphTheory::EdgeType *type)
+void View::createEdge(Node *from, Node *to, int typeIndex)
 {
+    Q_ASSERT(typeIndex >= 0);
+    Q_ASSERT(typeIndex < d->m_edgeTypeModel->rowCount());
     if (!from || !to) {
         return;
     }
@@ -168,7 +172,7 @@ void View::createEdge(Node *from, Node *to, GraphTheory::EdgeType *type)
         return;
     }
     EdgePtr edge = Edge::create(from->self(), to->self());
-    edge->setType(type->self());
+    edge->setType(d->m_edgeTypeModel->type(typeIndex));
 }
 
 void View::deleteNode(GraphTheory::Node *node)

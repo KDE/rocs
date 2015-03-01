@@ -105,9 +105,9 @@ void NodeTypeModel::setDocument(GraphDocumentPtr document)
     emit documentChanged();
 }
 
-QVariant NodeTypeModel::type(int index) const
+NodeTypePtr NodeTypeModel::type(int index) const
 {
-    return QVariant::fromValue<QObject*>(d->m_document->nodeTypes().at(index).data());
+    return d->m_document->nodeTypes().at(index);
 }
 
 QVariant NodeTypeModel::data(const QModelIndex &index, int role) const

@@ -99,9 +99,9 @@ void EdgeTypeModel::setDocument(GraphDocumentPtr document)
     endResetModel();
 }
 
-QVariant EdgeTypeModel::type(int index) const
+EdgeTypePtr EdgeTypeModel::type(int index) const
 {
-    return QVariant::fromValue<QObject*>(d->m_document->edgeTypes().at(index).data());
+    return d->m_document->edgeTypes().at(index);
 }
 
 QVariant EdgeTypeModel::data(const QModelIndex &index, int role) const

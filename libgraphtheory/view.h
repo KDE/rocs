@@ -54,8 +54,8 @@ public:
     GraphDocumentPtr graphDocument() const;
 
 private Q_SLOTS:
-    void createNode(qreal x, qreal y, GraphTheory::NodeType* type);
-    void createEdge(GraphTheory::Node* from, GraphTheory::Node* to, GraphTheory::EdgeType* type);
+    void createNode(qreal x, qreal y, int typeIndex);
+    void createEdge(GraphTheory::Node* from, GraphTheory::Node* to, int typeIndex);
     void deleteNode(GraphTheory::Node *node);
     void deleteEdge(GraphTheory::Edge *edge);
     void showNodePropertiesDialog(GraphTheory::Node *node);

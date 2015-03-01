@@ -33,8 +33,8 @@ Item {
     focus: true
 
     // element create/remove actions
-    signal createNode(real x, real y, NodeType type);
-    signal createEdge(Node from, Node to, EdgeType type);
+    signal createNode(real x, real y, int typeIndex);
+    signal createEdge(Node from, Node to, int typeIndex);
     signal deleteNode(Node node);
     signal deleteEdge(Edge edge);
 
@@ -92,7 +92,7 @@ Item {
             action: AddEdgeAction {
                 id: addEdgeAction
                 exclusiveGroup: editToolButton
-                onCreateEdge: root.createEdge(from, to, edgeTypeModel.type(edgeTypeSelector.currentIndex))
+                onCreateEdge: root.createEdge(from, to, edgeTypeSelector.currentIndex)
             }
         }
         ToolButton {
@@ -155,7 +155,7 @@ Item {
                     lastMouseClicked = Qt.point(mouse.x, mouse.y)
                     if (addNodeAction.checked) {
                         mouse.accepted = true
-                        createNode(mouse.x + scene.origin.x, mouse.y + scene.origin.y, nodeTypeModel.type(nodeTypeSelector.currentIndex));
+                        createNode(mouse.x + scene.origin.x, mouse.y + scene.origin.y, nodeTypeSelector.currentIndex);
                         return
                     }
                 }

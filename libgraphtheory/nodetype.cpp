@@ -21,6 +21,7 @@
 #include "nodetype.h"
 #include "nodetypestyle.h"
 #include "graphdocument.h"
+#include <QDebug>
 
 using namespace GraphTheory;
 
