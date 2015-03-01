@@ -65,6 +65,12 @@ Item {
             scene.deleteSelected()
             event.accepted = true;
             break;
+        case Qt.Key_A: //CTRL+A
+            if (event.modifiers & Qt.ControlModifier) {
+                scene.selectAll();
+                event.accepted = true;
+            }
+            break;
         default:
             break;
         }
@@ -140,6 +146,13 @@ Item {
             {
                 addEdgeAction.to = null
                 createEdgeUpdateFromNode();
+            }
+            function selectAll()
+            {
+                console.log("select all")
+                selectionRect.from = Qt.point(0, 0)
+                selectionRect.to = Qt.point(width,height)
+                updateSelection();
             }
 
             MouseArea {
@@ -239,7 +252,11 @@ Item {
                     Connections {
                         target: scene
                         onUpdateSelection: {
-                            highlighted = false
+                            if (selectionRect.contains(x, y)) {
+                                highlighted = true
+                            } else {
+                                highlighted = false
+                            }
                         }
                         onDeleteSelected: {
                             if (highlighted) {
