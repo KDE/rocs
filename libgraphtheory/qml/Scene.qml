@@ -122,6 +122,7 @@ Item {
             id: scene
             width: sceneScrollView.width - 30
             height: sceneScrollView.height - 20
+            z: -10 // must lie behind everything else
             property variant origin: Qt.point(0, 0) // coordinate of global origin (0,0) in scene
             signal deleteSelected();
             signal startMoveSelected();
@@ -144,6 +145,7 @@ Item {
             MouseArea {
                 id: sceneAction
                 anchors.fill: parent
+                z: -10 // must lie behind everything else
 
                 property variant lastMouseClicked: Qt.point(0, 0)
                 property variant lastMousePressed: Qt.point(0, 0)
@@ -202,13 +204,6 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         propagateComposedEvents: true
-                        onClicked: {
-                            if (deleteAction.checked) {
-                                deleteEdge(edge)
-                            } else {
-                                mouse.accepted = false
-                            }
-                        }
                         onPressed: {
                             if (deleteAction.checked) {
                                 deleteEdge(edge)
@@ -342,24 +337,23 @@ Item {
                         Loader {
                             id: nodeDialogLoader
                         }
-                        onClicked: {
-                            if (deleteAction.checked) {
-                                deleteNode(nodeItem.node)
-                                mouse.accepted = true
-                                return
-                            }
-                        }
                         onDoubleClicked: {
                             showNodePropertiesDialog(nodeItem.node);
                             mouse.accepted = true
                         }
                         onPressed: {
-                            sceneAction.nodePressed = true
-                             // never handle other actions signals
-                            if (!selectMoveAction.checked) {
+                            // never handle undefined actions signals
+                            if (!(selectMoveAction.checked || deleteAction.checked)) {
                                 mouse.accepted = false
                                 return
                             }
+                            if (deleteAction.checked) {
+                                deleteNode(nodeItem.node)
+                                mouse.accepted = true
+                                return
+                            }
+                            // move actions
+                            sceneAction.nodePressed = true
                             if (selectMoveAction.checked && !nodeItem.highlighted) {
                                 scene.clearSelection()
                                 nodeItem.highlighted = true
