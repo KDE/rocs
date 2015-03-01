@@ -211,8 +211,7 @@ Item {
                         onPressed: {
                             if (deleteAction.checked) {
                                 deleteEdge(edge)
-                            } else {
-                                mouse.accepted = false
+                                mouse.accepted = true
                             }
                         }
                         onDoubleClicked: {
@@ -348,20 +347,24 @@ Item {
                                 mouse.accepted = true
                                 return
                             }
-                            mouse.accepted = false
                         }
                         onDoubleClicked: {
                             showNodePropertiesDialog(nodeItem.node);
+                            mouse.accepted = true
                         }
                         onPressed: {
                             sceneAction.nodePressed = true
+                             // never handle other actions signals
+                            if (!selectMoveAction.checked) {
+                                mouse.accepted = false
+                                return
+                            }
                             if (selectMoveAction.checked && !nodeItem.highlighted) {
                                 scene.clearSelection()
                                 nodeItem.highlighted = true
                                 mouse.accepted = true
                                 return
                             }
-                            mouse.accepted = false
                         }
                         onReleased: {
                             sceneAction.nodePressed = false
