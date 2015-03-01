@@ -149,7 +149,6 @@ Item {
             }
             function selectAll()
             {
-                console.log("select all")
                 selectionRect.from = Qt.point(0, 0)
                 selectionRect.to = Qt.point(width,height)
                 updateSelection();
