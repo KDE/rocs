@@ -192,6 +192,7 @@ Item {
                     id: edgeItem
                     edge: model.dataRole
                     origin: scene.origin
+                    z: -1 // edges must be below nodes
 
                     EdgePropertyItem {
                         anchors.centerIn: parent
