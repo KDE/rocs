@@ -173,6 +173,9 @@ void GraphDocument::insert(NodePtr node)
     if (!node || d->m_nodes.contains(node)) {
         return;
     }
+    if (0 <= node->id() && (uint)node->id() < d->m_lastGeneratedId) {
+        d->m_lastGeneratedId = node->id();
+    }
 
     emit nodeAboutToBeAdded(node, d->m_nodes.length());
     d->m_nodes.append(node);
@@ -202,6 +205,9 @@ void GraphDocument::insert(NodeTypePtr type)
     if (d->m_nodeTypes.contains(type)) {
         return;
     }
+    if (0 <= type->id() && (uint)type->id() < d->m_lastGeneratedId) {
+        d->m_lastGeneratedId = type->id();
+    }
     emit nodeTypeAboutToBeAdded(type, d->m_nodeTypes.length());
     d->m_nodeTypes.append(type);
     emit nodeTypeAdded();
@@ -213,6 +219,9 @@ void GraphDocument::insert(EdgeTypePtr type)
     Q_ASSERT(type);
     if (d->m_edgeTypes.contains(type)) {
         return;
+    }
+    if (0 <= type->id() && (uint)type->id() < d->m_lastGeneratedId) {
+        d->m_lastGeneratedId = type->id();
     }
     emit edgeTypeAboutToBeAdded(type, d->m_edgeTypes.length());
     d->m_edgeTypes.append(type);
