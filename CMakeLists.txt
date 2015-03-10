@@ -52,6 +52,7 @@ find_package(Qt5 5.4 REQUIRED NO_MODULE COMPONENTS
   XmlPatterns
 )
 find_package(KF5 5.7 REQUIRED COMPONENTS
+  Archive
   Config
   CoreAddons
   Declarative
