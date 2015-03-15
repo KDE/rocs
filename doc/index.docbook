@@ -509,19 +509,6 @@ Hence, the scripts actually modify the data structures.
 <para>
 </para>
 
-<sect2>
-<title>Include Files</title>
-<para>
-    Your script documents can include other scripts.
-    This can be useful to reduce the size of script documents and improve readability.
-    Using <menuchoice><guimenu>Script Document</guimenu> <guimenuitem>Possible Includes</guimenuitem></menuchoice> you get a list of script files already shipped with &rocs; that could be included.
-    You can include a script file with the following command:
-</para>
-<programlisting>
-    include_script(string path);            // relative or absolute path to script file
-</programlisting>
-</sect2>
-
 <sect2 id="scripting-output">
 <title>Script Output</title>
 <para>
