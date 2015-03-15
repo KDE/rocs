@@ -247,7 +247,7 @@ The algorithm can be executed by the <guibutton>Run</guibutton> button at the sc
 <title>The &rocs; User Interface</title>
 
 <sect1 id="user-interface-all">
-<title>General Elements of the User Interface</title>
+<title>Main Elements of the User Interface</title>
 <para>
 The user interface is divided into several logical parts as presented at the screenshot below.
 </para>
@@ -264,26 +264,21 @@ The user interface is divided into several logical parts as presented at the scr
 </screenshot>
 <variablelist>
 <varlistentry>
-    <term>Document Selector</term>
-    <listitem><para>At this top menubar you must select the current document and data structure.
-        Creating and deleting of data structures as well as access to data structure properties is also possible there.
-    </para></listitem>
-</varlistentry>
-<varlistentry>
     <term>Graph Editor</term>
-    <listitem><para>This is the whiteboard at which data structures can be created and modified. Right click at the whiteboard, at data elements, or at edges to open context menus. You can use the tools from the <emphasis>Visual Graph Editor Toolbar</emphasis> to modify the elements at the graph editor whiteboard.</para></listitem>
+    <listitem><para>
+    The editor provides a whiteboard at that nodes and edges can be placed.
+    Double-clicking at any of its elements opens a corresponding property menu.
+    You can use the tools from the <emphasis>Graph Editor Toolbar</emphasis> to create and modify graphs.</para></listitem>
 </varlistentry>
 <varlistentry>
-    <term>Visual Graph Editor Toolbar</term>
+    <term>Graph Editor Toolbar</term>
     <listitem><para>
-        This toolbar provides all tools for the graph editor.
-        Use the <inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsadddata.png" format="PNG"/></imageobject>
-        </inlinemediaobject><guibutton>Add Element</guibutton> or <inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsaddedge.png"
-        format="PNG"/></imageobject></inlinemediaobject><guibutton>Add Connection</guibutton> buttons to create new elements
-	or to connect elements, respectively.
-        New data elements are added to the data structure that is currently selected at the <emphasis>Document Selector</emphasis> bar.
-	  Note that <guibutton>Add Element</guibutton> and <guibutton>Add Connection</guibutton> buttons both have menus to select the type of which the created elements shall be.
-        For details see <xref linkend="user-interface-toolbars" />.
+    The toolbar provides the <inlinemediaobject><imageobject><imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
+    </inlinemediaobject><guibutton>Create Node</guibutton> or <inlinemediaobject><imageobject><imagedata fileref="hi22-actions-rocsedge.png"
+    format="PNG"/></imageobject></inlinemediaobject><guibutton>Create Edge</guibutton> tools, for creating new elements on the whiteboard.
+    (Note the extra-toolbar for selecting the respective node or edge type that becomes visible of one of these tools is selected.
+    Also tools for selecting and moving as well as deleting elements are available here.
+    For details see <xref linkend="user-interface-toolbars" />.
     </para></listitem>
 </varlistentry>
 <varlistentry>
@@ -291,7 +286,7 @@ The user interface is divided into several logical parts as presented at the scr
     <listitem><para>
         At the right, you can find the side bar that provides several tools for your workflow:
         <itemizedlist>
-        <listitem><para>Element Types: This widget gives you direct access to the available edge and data types.</para></listitem>
+        <listitem><para>Element Types: This widget gives you direct access to the available edge and node types.</para></listitem>
         <listitem><para>Journal: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para></listitem>
         <listitem><para>Handbook: To get direct access to the handbook and by this to the script documentation, you can open this widget.</para></listitem>
         <listitem><para>Scripting API: To get direct access to the script documentation, you can open this widget.</para></listitem>
@@ -319,8 +314,6 @@ The user interface is divided into several logical parts as presented at the scr
         Here you can find the controls for executing scripts.
         You can execute the script that is currently open at the script editor by pressing <guiicon>Run</guiicon>.
         While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.
-        Note that the <guibutton>One Step</guibutton> execution only stops at specific keywords (see <xref linkend="scripting" />).
-	  <!--FIXME DEBUG button missing-->
     </para></listitem>
 </varlistentry>
 </variablelist>
@@ -340,32 +333,25 @@ The user interface is divided into several logical parts as presented at the scr
 <itemizedlist>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsselectmove.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-actions-rocsselectmove.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
+<guilabel>Select and Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsadddata.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Add Element</guilabel>: Click at an arbitrary position at the graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
+<guilabel>Create Node</guilabel>: Click at an arbitrary position at the graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
 By keeping the mouse edge pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsaddedge.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Add Connection</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse edge pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para></listitem>
-<!--FIXME no different edge names here -->
+<guilabel>Create Edge</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse edge pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsdeletedata.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-actions-rocsdelete.png" format="PNG"/></imageobject>
 </inlinemediaobject>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocszoom.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Zoom</guilabel>: Click at the whiteboard, keep the &LMB; pressed, and by this draw a rectangle. The whiteboard will be zoomed to the selected area. Using the mousewheel to zoom in or out as well.
-A double click with the &LMB; restores the original zoom.</para></listitem>
 </itemizedlist>
 </sect2>
 
@@ -416,74 +402,6 @@ positions.</para></listitem>
 <guilabel>Minimize Crossing Edges</guilabel>: Rearrange the selected data elements to minimize the number of crossing connections (application of the Fruchterman-Reingold algorithm).</para></listitem>
 </itemizedlist>
 </sect2>-->
-</sect1>
-
-<sect1 id="user-interface-documents">
-<title>Working with Graph Documents</title>
-<para>
-    A &rocs; project contains one or multiple graph documents that can be edited with the graph editor.
-    Further, each document can contain an arbitrary number of data structures.
-    Here, data structures of a document all use the same data structure backend.
-    This section will explain how to switch between documents and how to create new ones.
-</para>
-
-<sect2 id="user-interface-documents-selector">
-<title>The Document Selector Bar</title>
-<para>
-    The document selector bar is used to select the current graph document and further the current data structure.
-    Using the graph editor tools to create data structures elements will automatically add those newly created elements to the current data structure.
-    Also, this bar gives direct access to delete existing or create new data structures within the current document.
-</para>
-
-<itemizedlist>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsnew.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>New</guilabel>: This action creates a new data structure using an automatic naming pattern given by the data structure backend.
-The created data structure is added to the currently selected graph document.
-</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsdelete.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Delete</guilabel>: This action deletes the data structure that is currently selected in the data structure selector for the current document.
-</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Properties</guilabel> for <guilabel>Graph Document</guilabel>: Open a dialog that gives access to the document properties as well as the data and edge types of the document.
-</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Properties</guilabel> for <guilabel>Graph</guilabel>: Open a dialog that gives access to the data structure properties.
-</para></listitem>
-  </itemizedlist>
-
-<screenshot>
-<screeninfo>The Main Toolbar.</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="document-selector.png" format="PNG" />
-</imageobject>
-<textobject>
-<phrase>The Document Selector Bar.</phrase>
-</textobject>
-</mediaobject>
-</screenshot>
-</sect2>
-
-<sect2 id="user-interface-documents-menu">
-<title>Create and Import Graph Documents</title>
-<para>
-    To create a new graph document or to add an existing one to the project, use <menuchoice><guimenu>File</guimenu> <guimenuitem>New Project</guimenuitem></menuchoice> or <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Import Graph</guimenuitem></menuchoice>.
-    You can also import graph documents from third party applications (for this, see <xref linkend="import-export" />).
-</para>
-</sect2>
-
 </sect1>
 </chapter>
 
