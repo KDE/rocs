@@ -407,57 +407,27 @@ positions.</para></listitem>
 
 
 <chapter id="scripting">
-<title>Writing and Executing Algorithms in &rocs;</title>
-
+<title>Executing Algorithms in &rocs;</title>
 <para>
-&rocs; internally uses the QtScript scripting engine, which is a specific JavaScript engine.
-This means, all algorithms that you implement must use JavaScript.
-How JavaScript works and how to write JavaScript code is not covered in this handbook, though we explain how to access data structures, data elements and edges of your data structures from the scripting engine.
-Since you never use the basic data structure object but one that is provided by the currently used data structure backend, the functionality of the data structure is extended by the corresponding backend and you should have a look at the specialized functionality.
-Especially, data structure backends use the common terms from their domain (nodes and edges in graphs, leafs and roots in trees, etc.)
+&rocs; internally uses the QtScript Java Script engine
+This means, all algorithms that you implement must use Java Script.
+In the following, we explain how to access and change elements of a graph document from the scripting engine.
+It is important to note that changes done by the scripting engine are directly reflected at the properties at the graph editor elements.
 </para>
-<para>
-It is important to know that changes done by the scripting engine are directly reflected at the properties at the graph editor whiteboard.
-Hence, the scripts actually modify the data structures.
-</para>
-
 
 <sect1 id="scripting-controls">
-<title>Controlling the Script Execution</title>
-<para>
-</para>
-
-<sect2 id="scripting-output">
-<title>Script Output</title>
-<para>
-    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &amp; Script Output</emphasis>.
-    If the scripting engine detects a syntax error in your script, the error is also displayed as debug message.
-    Note that all program messages are also displayed at the debug output (displayed as bold text).
-</para>
-<para>
-    You can control the text that is displayed at the script output by the following functions:
-</para>
-<programlisting>
-    Console.log(string message);            // displays the message as script output
-    Console.debug(string message);          // displays the message as debug output
-</programlisting>
-</sect2>
-
-<sect2 id="scripting-controlling">
 <title>Control Script Execution</title>
 <para>
-    There are different execution modes for your scripts.
-</para>
-<para>
-    You can control the text that is displayed at the script output by the following functions:
+    There are different execution modes for your algorithms:
 </para>
 <itemizedlist>
     <listitem><para>
         <inlinemediaobject><imageobject>
-        <imagedata fileref="rocs-control-engine-run.png" format="PNG"/></imageobject>
+        <imagedata fileref="hi22-actions-controls-run.png" format="PNG"/></imageobject>
         </inlinemediaobject>
         <guilabel>Run</guilabel>: Execute the script until it finishes.</para></listitem>
-    <listitem><para>
+<!--TODO not available right now -->
+<!--    <listitem><para>
         <inlinemediaobject><imageobject>
         <imagedata fileref="rocs-control-engine-step.png" format="PNG"/></imageobject>
         </inlinemediaobject>
@@ -470,14 +440,30 @@ Hence, the scripts actually modify the data structures.
         <inlinemediaobject><imageobject>
         <imagedata fileref="rocs-control-engine-debug.png" format="PNG"/></imageobject>
         </inlinemediaobject>
-        <guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>
+        <guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>-->
     <listitem><para>
         <inlinemediaobject><imageobject>
-        <imagedata fileref="rocs-control-engine-stop.png" format="PNG"/></imageobject>
+        <imagedata fileref="hi22-actions-control-stop.png" format="PNG"/></imageobject>
         </inlinemediaobject>
-        <guilabel>Stop</guilabel>: Stop script execution (only available if a script is executing).</para></listitem>
+        <guilabel>Stop</guilabel>: Stop script execution (only available while a script is executed).</para></listitem>
 </itemizedlist>
-</sect2>
+</sect1>
+
+<sect1 id="scripting-output">
+<title>Script Output</title>
+<para>
+    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &amp; Script Output</emphasis>.
+    If the scripting engine detects a syntax error in your script, the error is also displayed as debug message.
+    Note that all program messages are also displayed at the debug output (displayed as bold text).
+</para>
+<para>
+    You can control the text that is displayed at the script output by the following functions:
+</para>
+<programlisting>
+    Console.log(string message);            // displays the message as script output
+    Console.debug(string message);          // displays the message as debug output
+    Console.error(string message);          // displays the message as error output
+</programlisting>
 </sect1>
 </chapter>
 
