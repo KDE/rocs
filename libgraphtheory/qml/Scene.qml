@@ -477,7 +477,7 @@ Item {
         }
     }
 
-    // state matching solely for edge creation
+    // state matchine solely for edge creation
     DSM.StateMachine {
         id: dsmCreateEdge
         initialState: ceStateIdle
