@@ -465,21 +465,19 @@ It is important to note that changes done by the scripting engine are directly r
     Console.error(string message);          // displays the message as error output
 </programlisting>
 </sect1>
-</chapter>
 
-
-<chapter id="scripting-API">
+<sect1 id="scripting-API">
 <title>Scripting Engine API</title>
 <para>
-Every backend provides a special set of functions and properties for its data structures and their elements.
-But also every backend provides the properties and functions that are defined for the base data structure.
+The different parts of &rocs; each provide a static element that can be accessed by the scripting engine.
+These are:
+<itemizedlist>
+    <listitem><para><userinput><command>Document</command></userinput> for the graph document</para></listitem>
+    <listitem><para><userinput><command>Console</command></userinput> for the console log output</para></listitem>
+</itemizedlist>
+For the explicit API use and for a method reference, please see the inline help at the &rocs; side bar.
 </para>
-
-&apiDatastructure;
-
-&apiGraphstructure;
-
-&apiConsole;
+</sect1>
 </chapter>
 
 
