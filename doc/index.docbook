@@ -331,7 +331,7 @@ The user interface is divided into several logical parts as presented at the scr
 <para>There are different toolbars for the graph editor that allow you to access features by only one click. Per default, the following toolbars are shown:</para>
 <itemizedlist>
     <listitem><para>Main Toolbar</para></listitem>
-    <listitem><para>Alignment Toolbar</para></listitem>
+<!--     <listitem><para>Alignment Toolbar</para></listitem> -->
 </itemizedlist>
 <!--  -->
 <sect2 id="user-interface-toolbars-main">
@@ -369,7 +369,7 @@ A double click with the &LMB; restores the original zoom.</para></listitem>
 </itemizedlist>
 </sect2>
 
-<sect2 id="user-interface-toolbars-alignment">
+<!--<sect2 id="user-interface-toolbars-alignment">
 <title>Alignment Toolbar</title>
 <para>You can add the optional <emphasis>Alignment Toolbar</emphasis>. Pressing an action at this toolbar has direct effect to the currently selected nodes:</para>
 <itemizedlist>
@@ -415,7 +415,7 @@ positions.</para></listitem>
 </inlinemediaobject>
 <guilabel>Minimize Crossing Edges</guilabel>: Rearrange the selected data elements to minimize the number of crossing connections (application of the Fruchterman-Reingold algorithm).</para></listitem>
 </itemizedlist>
-</sect2>
+</sect2>-->
 </sect1>
 
 <sect1 id="user-interface-documents">
