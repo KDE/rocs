@@ -35,11 +35,8 @@
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
-<copyright><year>2009</year><holder>Tomaz Canabrava</holder></copyright>
-<copyright><year>2011-2013</year><holder>Andreas Cord-Landwehr</holder></copyright>
-
-<date>2013-07-03</date>
-<releaseinfo>1.10.0 &kde; 4.12</releaseinfo>
+<date>2015-03-13</date>
+<releaseinfo>2.0.0 &kde; 15.04</releaseinfo>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
@@ -64,29 +61,21 @@
 <chapter id="introduction">
 <title>Introduction</title>
 <para>
-In this chapter we provide an overview of the core features and the workflow of &rocs;.
-For the eager reader, who wants to start using &rocs; immediately, we suggest to read at least <xref linkend="introduction-nutshell"/> and using <xref linkend="scripting" /> as a reference when writing algorithms.
+This chapter provides an overview of the core features and the typical workflows.
+The most important parts are <xref linkend="introduction-nutshell"/> and <xref linkend="scripting" />, which together should allow every new user to directly start using &rocs;.
 </para>
 
 <sect1 id="introduction-goals">
-<title>Goals, Target Audience and Workflow</title>
-<para>&rocs; is a Graph Theory IDE for everybody interested in designing and analyzing graph algorithms. This explicitly includes</para>
+<title>Goals, Target Audience, and Workflows</title>
+<para>&rocs; is a Graph Theory Tool for everybody interested in designing and studying graph algorithms. In particular, those are</para>
 <itemizedlist>
     <listitem><para>lecturers, who want to demonstrate algorithms to their students,</para></listitem>
-    <listitem><para>students, who want to understand and see how their algorithm perform,</para></listitem>
-    <listitem><para>and everybody, who is interested in data structures and algorithms.</para></listitem>
+    <listitem><para>students and researchers, who want to see how their algorithm perform, and</para></listitem>
+    <listitem><para>everybody who is interested in data structures and algorithms.</para></listitem>
 </itemizedlist>
-
-<para>For all these users, &rocs; provides an easy to use data structure editor for creating the data structures, a powerful scripting engine to execute algorithms, and several helper tools for your simulations and experiments.
-</para>
-
-<para>
-The typical workflow when using &rocs; is to start by creating a graph with the visual graph editor.
-You can do this either by hand, this is adding data elements and connect them, or by using one of the data structure generators (if available for the currently selected data structure backend).
-Data structure generators can be found at <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Tools</guimenuitem> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
-Further, you can assign values to the data structure elements, either by hand or using <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Tools</guimenuitem> <guimenuitem>Assign Values</guimenuitem></menuchoice>.
-Finally, you can write your algorithm in JavaScript and execute it with the just created data structure.
-All changes that your algorithm perform at the data structure will be directly visible at the visual graph editor.
+<para>For all them, &rocs; provides an easy to use graphical editor for creating graphs, a powerful scripting engine to execute algorithms, and several helper tools for simulations, experiments, and graph exports.
+The typical way of using &rocs; is to create a graph, either by hand (i.e., dragging nodes and edges to the whiteboard), or by using one of the graph generators.
+Graph algorithms then can be implemented and executed on the created graph and all changes, which the algorithm performs, are visible immediately in the graph editor.
 </para>
 
 <screenshot>
@@ -105,77 +94,62 @@ All changes that your algorithm perform at the data structure will be directly v
 <sect1 id="introduction-nutshell">
 <title>&rocs; in a Nutshell</title>
 <para>
-In this section we provide a compact overview of the core elements of &rocs;.
-We explain the important notions of data structures, data structure backends, and element types.
-Understanding of these concepts is useful to understand how data structures can be created and modified in &rocs;.
-</para>
-<para>
-In general &rocs; works with projects: when opening &rocs; an empty project is created and you can replace it by loading or importing another project.
-Hereby, a project itself consists of <emphasis>graph documents</emphasis> and <emphasis>scripts</emphasis>.
+Every &rocs; session is a project: when opening &rocs; an empty project is created, when loading some project it becomes the current project.
+Hereby, a project itself consists of <emphasis>graph documents</emphasis>, <emphasis>scripts/algorithms</emphasis>, and a <emphasis>journal</emphasis>.
 </para>
 
 <sect2>
-<title>Graph Documents and Data Structure Backends</title>
+<title>Graph Documents</title>
 <para>
-A graph document represents the content of a whiteboard in the visual graph editor.
-Hereby, a graph document can contain several data structures at once, but only one data structure backends.
-Data structure backends are present for several graph types (general graphs, linked lists, rooted trees) and provide for their specific graph types additional functionality. That can be automatic positioning of the elements, special icon sets, or an extended set of script functions for use in your algorithms. (for details look at the corresponding handbook section). It is possible to change the data structure backend of a graph document, though information can be lost (e.g., edges of a circle in a general graph won't be added to a tree, if you switch to the rooted tree backend).
-</para>
-<para>
-Graph documents form also the base for defining pointer types and data types.
+A graph document represents the content of a whiteboard in the graph editor.
+It contains information about the user defined node and edge types, their properties, and about the already created nodes and edges.
+This is, &rocs; understands the set of all nodes and edges of a graph document to form a (not necessarily connected) graph.
+Everything belonging to a graph document is accessible by the script engine via the global object
+<userinput><command>Document</command></userinput>.
 </para>
 </sect2>
 
 <sect2>
-<title>Data Structures</title>
+<title>Edge Types</title>
 <para>
-Data structures are the base of all work in &rocs;. You can add one or several of them to a graph document, add data elements (nodes, datums) and pointers to them, and modify them by scripts. For this, each data structure has its unique name by which it can be accessed from your scripts. Due to your choice of the current data structure backend it can happen that you cannot modify the data structures arbitrarily (e.g., a tree should never contain a cycle). The data structure backend is determined by the data structure backend associated with the corresponding graph document that contains the data structure.
+In some scenarios, graphs consist of different types of edges (e.g., an undirected graph plus the tree edges computed by a breadh-first-search algorithm) that shall be handled and displayed differently.
+For this, besides a default edge type, you can define arbitrary other edge types.
+Each edge type has its individual visual representation, dynamic properties, and can be set to be either undirected or directed.
+The scripting interface provides convenience methods to specifically access only edges of specific types.
 </para>
 </sect2>
 
 <sect2>
-<title>Pointer Types</title>
+<title>Node Types</title>
 <para>
-By pointer types you can define different types of pointers to be used in your data structures.
-This is, a pointer type can get an individual layout (essentially a color) and it is easy to access only pointers of a specific type from your scripts.
-Typical use cases for pointers can be to implement meta-edges at your data structures that visualize relationships between data elements (e.g., visualize communication interests). But also, if your scripts shall identify specific kinds of edges (e.g., tree and cross edges at the depth first search algorithm), pointer types can be an elegant way to implement that.
+Analog to edge types, you can define different types of nodes of a graph (e.g., to give some nodes special roles).
+Each node type has its own visual representation and dynamic properties.
 </para>
 </sect2>
 
 <sect2>
-<title>Data Types</title>
+<title>Properties</title>
 <para>
-In several data structure problems, a set of data elements should be parted into groups of different types (e.g., clustering problems or covering problems).
-Or it is useful for the execution of an algorithm to specify a data element type to express a specific type (e.g., breath first search).
-For such use cases you can define data types. Each data type has its own icon and data types of some type can easily be accessed from your scripts.
-</para>
-</sect2>
-
-<sect2>
-<title>Dynamic Properties</title>
-<para>
-Every data element and pointer can have many properties. Some of these properties are default from data structure backend. See the documentation of the data structure backend for more details.
-To add further properties to the data elements and pointers, you can add <emphasis>dynamic properties</emphasis> to them.
-Each dynamic property is identified by its name and can contain any value associated with it. The name must start with a letter (a-z or A-Z) and can contain only letters, numbers and '_'. If you try to use any invalid character in the property name, the property will not be changed.
+Every (node or edge) element can have properties.
+Those properties must be setup at the corresponding node or edge type.
+Properties are identified and accessed by their names and can contain any value.
+To create new or change existing properties, use the <guilabel>Element Types</guilabel> sidebar and use the
+<inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/>
+</imageobject></inlinemediaobject><guibutton>Properties</guibutton>
+button to open the property dialog.
 </para>
 <para>
-To add dynamic properties, use the <guilabel>Data Element Properties</guilabel> and <guilabel>Pointer Properties</guilabel> dialogs from the context menus of the respective elements or the script functions as explained in <xref linkend="scripting-data-structure"
-/>.
-</para>
-<para>
-You can also use the scripts. You just need to use the <literal>add_property</literal> with the name and value of your property.
-After that, you can use node/pointer.propertyName to set/get the values.
-</para>
-<para>
-    Here is an example of how to use dynamic properties with data structure backend "Graph".
-    <programlisting>
-nodes = myGraph.list_nodes()
-for (var i = 0; i &lt; nodes.length; ++i ){
-    nodes[i].add_property("MyProperty", 0)
+You can also use the scripting engine to access registered properties and change their values.
+In the following example we assume that the property "weight" is registered for the default edge type.
+<programlisting>
+var nodes = Document.nodes()
+for (var i = 0; i &lt; nodes.length; ++i){
+    nodes[i].weight = i;
 }
-nodes[0].MyProperty = 2
-nodes[1].MyProperty = nodes[0].MyProperty + 2
-    </programlisting>
+for (var i = 0; i &lt; nodes.length; ++i){
+    Console.log("weight of node " + i + ": " + nodes[i].weight);
+}
+</programlisting>
 </para>
 </sect2>
 </sect1>
@@ -186,30 +160,29 @@ nodes[1].MyProperty = nodes[0].MyProperty + 2
 In this section we want to create an example project to explore some of the most important functions of &rocs;.
 The goal is to create a graph and a script that illustrates a simple 2-approximate algorithm for the <emphasis>minimum vertex cover</emphasis> problem.
 The minimum vertex cover problem is the problem to find a subset of graph nodes C of minimal size such that each graph edge is connected to at least one node in C.
-This problem is known to be NP-hard and we want to illustrate how to find an approximation of factor 2 by finding a matching in the given graph (in the following we use the common terms for graph algorithms: graph is the data structure, nodes are the data elements, edges are the pointers).
+This problem is known to be NP-hard and we want to illustrate how to find an approximation of factor 2 by computing a matching in the given graph.
 </para>
 <para>
-Our goal is to visualize the correspondence of the matching and the minimum vertex cover.
-For this, we want to specify two pointer types, one to display matching edges and one type to display ordinary edges, as well as two data types that we use to distinguish nodes contained in C and those not contained in C.
+Our goal is to visualize the relationship of the matching and the minimum vertex cover.
+For this, we want to specify two edge types, one to display matching edges and one type to display "ordinary" edges, as well as two node types that we use to distinguish nodes contained in C and those not contained in C.
 </para>
 
 <sect2>
-<title>Generate a Graph</title>
+<title>Generating the Graph</title>
 <para>
-For the data structure backend <quote>Graph</quote>, &rocs; ships a helper tool that can generate graphs. We go to <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
-There we generate a <guilabel>Random Graph</guilabel> with 30 nodes, 90 edges, and with seed 1 (the seed is the starting seed for the random graph generator; using the same seed multiple times results in same and reproducible graphs).
-Finally, we modify the graph name at the data structure panel and call the graph <literal>testgraph</literal>.
+For creating the graph, we use a default graph generator provided by &rocs;.
+This can be found in the main menu at <menuchoice><guimenu>Graph Document</guimenu> <guisubmenu>Tools</guisubmenu> <guimenuitem>Generate Graph</guimenuitem></menuchoice>.
+There, we select a <guilabel>Random Graph</guilabel> with 30 nodes, 90 edges, and with seed 1 (the seed is the starting seed for the random graph generator; using the same seed multiple times results in same and reproducible graphs).
 </para>
 </sect2>
 
 <sect2>
-<title>Create Types</title>
+<title>Creating the Element Types</title>
 <para>
-We use the <guibutton>Properties</guibutton> buttons at the Document Selector bar to open the properties dialog for data and pointer types of the current graph document.
-For the data types we add a new type called "C", which automatically gets ID <literal>1</literal>.
-For this type we select the server picture as icon.
-Furthermore, we switch to the pointer type page and add a new pointer type called "matching".
-This gets automatically ID <literal>1</literal> and we set the color to blue.
+We use the <guilabel>Element Types</guilabel> and create a second node type as well as a second edge type.
+For both new types we open the the properties dialog by using the respective <guibutton>Properties</guibutton> buttons and set the IDs to <literal>2</literal>.
+Furthermore, we change the colors of elements of these two new types (to distinguish them from the default types).
+Finally, we set all edge types to be bidirectional, and the IDs of the default types to <literal>1</literal>.
 </para>
 </sect2>
 
@@ -219,33 +192,40 @@ This gets automatically ID <literal>1</literal> and we set the color to blue.
 At last we have to implement the approximation algorithm. For this we use the following implementation:
 </para>
 <programlisting>
-var E = testgraph.list_edges(); // set of unprocessed edges
-var C = new Array();            // matching edges
+for (var i=0; i &lt; Document.nodes.length; i++) {
+    Document.nodes[i].type = 1;
+}
+for (var i=0; i &lt; Document.edges.length; i++) {
+    Document.edges[i].type = 1;
+}
+
+var E = Document.edges(); // set of unprocessed edges
+var C = new Array();      // matching edges
 while (E.length > 0) {
-    var e = E[0];        // we take first edge e={u,v}
-    var u = e.start();
-    var v = e.end();
-    e.set_type(1);        // set edge to be a matching edge
+    var e = E[0];         // we take first edge e={u,v}
+    var u = e.from();
+    var v = e.to();
+    e.type = 2;           // set edge to be a matching edge
     E.shift();            // remove e (i.e., E[0]) from edge list
     C.push(u);            // add u to C
     C.push(v);            // add v to C
 
     // mark u,v as nodes in C
-    u.set_type(1);
-    v.set_type(1);
+    u.type = 2;
+    v.type = 2;
 
     // remove from E all edges incident to u or v
-    var adjacent = u.adj_edges();
+    var adjacent = u.edges();
     for (var i=0; i &lt; adjacent.length; i++) {
         var index = E.indexOf(adjacent[i]); // find the index
-        if (index!=-1) {
+        if (index != -1) {
             E.splice(index, 1); // remove it if really found
         }
     }
-    var adjacent = v.adj_edges();
+    var adjacent = v.edges();
     for (var i=0; i &lt; adjacent.length; i++) {
         var index = E.indexOf(adjacent[i]); // find the index
-        if (index!=-1) {
+        if (index != -1) {
             E.splice(index, 1); // remove it if really found
         }
     }
@@ -257,7 +237,7 @@ Console.log("Vertex Cover contains " + C.length + " nodes.");
 <sect2>
 <title>Execute the Algorithm</title>
 <para>
-Finally we want to execute the algorithm. For this we can start the execution by the <guibutton>Run</guibutton> button at the script control panel.
+The algorithm can be executed by the <guibutton>Run</guibutton> button at the script control panel.
 </para>
 </sect2>
 </sect1>
@@ -267,7 +247,7 @@ Finally we want to execute the algorithm. For this we can start the execution by
 <title>The &rocs; User Interface</title>
 
 <sect1 id="user-interface-all">
-<title>General Elements of the User Interface</title>
+<title>Main Elements of the User Interface</title>
 <para>
 The user interface is divided into several logical parts as presented at the screenshot below.
 </para>
@@ -284,26 +264,21 @@ The user interface is divided into several logical parts as presented at the scr
 </screenshot>
 <variablelist>
 <varlistentry>
-    <term>Document Selector</term>
-    <listitem><para>At this top menubar you must select the current document and data structure.
-        Creating and deleting of data structures as well as access to data structure properties is also possible there.
-    </para></listitem>
-</varlistentry>
-<varlistentry>
-    <term>Visual Graph Editor</term>
-    <listitem><para>This is the whiteboard at which data structures can be created and modified. Right click at the whiteboard, at data elements, or at pointers to open context menus. You can use the tools from the <emphasis>Visual Graph Editor Toolbar</emphasis> to modify the elements at the visual graph editor whiteboard.</para></listitem>
-</varlistentry>
-<varlistentry>
-    <term>Visual Graph Editor Toolbar</term>
+    <term>Graph Editor</term>
     <listitem><para>
-        This toolbar provides all tools for the visual graph editor.
-        Use the <inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsadddata.png" format="PNG"/></imageobject>
-        </inlinemediaobject><guibutton>Add Element</guibutton> or <inlinemediaobject><imageobject><imagedata fileref="hi22-action-rocsaddedge.png"
-        format="PNG"/></imageobject></inlinemediaobject><guibutton>Add Connection</guibutton> buttons to create new elements
-	or to connect elements, respectively.
-        New data elements are added to the data structure that is currently selected at the <emphasis>Document Selector</emphasis> bar.
-	  Note that <guibutton>Add Element</guibutton> and <guibutton>Add Connection</guibutton> buttons both have menus to select the type of which the created elements shall be.
-        For details see <xref linkend="user-interface-toolbars" />.
+    The editor provides a whiteboard at that nodes and edges can be placed.
+    Double-clicking at any of its elements opens a corresponding property menu.
+    You can use the tools from the <emphasis>Graph Editor Toolbar</emphasis> to create and modify graphs.</para></listitem>
+</varlistentry>
+<varlistentry>
+    <term>Graph Editor Toolbar</term>
+    <listitem><para>
+    The toolbar provides the <inlinemediaobject><imageobject><imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
+    </inlinemediaobject><guibutton>Create Node</guibutton> or <inlinemediaobject><imageobject><imagedata fileref="hi22-actions-rocsedge.png"
+    format="PNG"/></imageobject></inlinemediaobject><guibutton>Create Edge</guibutton> tools, for creating new elements on the whiteboard.
+    (Note the extra-toolbar for selecting the respective node or edge type that becomes visible of one of these tools is selected.
+    Also tools for selecting and moving as well as deleting elements are available here.
+    For details see <xref linkend="user-interface-toolbars" />.
     </para></listitem>
 </varlistentry>
 <varlistentry>
@@ -311,7 +286,7 @@ The user interface is divided into several logical parts as presented at the scr
     <listitem><para>
         At the right, you can find the side bar that provides several tools for your workflow:
         <itemizedlist>
-        <listitem><para>Element Types: This widget gives you direct access to the available pointer and data types.</para></listitem>
+        <listitem><para>Element Types: This widget gives you direct access to the available edge and node types.</para></listitem>
         <listitem><para>Journal: Each project has its own journal that can be used to, &eg; note tasks, results, or observations.</para></listitem>
         <listitem><para>Handbook: To get direct access to the handbook and by this to the script documentation, you can open this widget.</para></listitem>
         <listitem><para>Scripting API: To get direct access to the script documentation, you can open this widget.</para></listitem>
@@ -339,8 +314,6 @@ The user interface is divided into several logical parts as presented at the scr
         Here you can find the controls for executing scripts.
         You can execute the script that is currently open at the script editor by pressing <guiicon>Run</guiicon>.
         While the script is executed, it is possible to stop execution by pressing the <guiicon>Stop</guiicon> button.
-        Note that the <guibutton>One Step</guibutton> execution only stops at specific keywords (see <xref linkend="scripting" />).
-	  <!--FIXME DEBUG button missing-->
     </para></listitem>
 </varlistentry>
 </variablelist>
@@ -348,48 +321,41 @@ The user interface is divided into several logical parts as presented at the scr
 
 <sect1 id="user-interface-toolbars">
 <title>Toolbars</title>
-<para>There are different toolbars for the visual graph editor that allow you to access features by only one click. Per default, the following toolbars are shown:</para>
+<para>There are different toolbars for the graph editor that allow you to access features by only one click. Per default, the following toolbars are shown:</para>
 <itemizedlist>
     <listitem><para>Main Toolbar</para></listitem>
-    <listitem><para>Alignment Toolbar</para></listitem>
+<!--     <listitem><para>Alignment Toolbar</para></listitem> -->
 </itemizedlist>
 <!--  -->
 <sect2 id="user-interface-toolbars-main">
 <title>Main Toolbar</title>
-<para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the visual graph editor whiteboard:</para>
+<para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse edge applies this action at the graph editor whiteboard:</para>
 <itemizedlist>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsselectmove.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-actions-rocsselectmove.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or pointers to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
+<guilabel>Select and Move</guilabel>: To select elements, either click at unused space at the whiteboard, keep the mouse pressed and draw a rectangle that contains some data elements and/or edges to select these elements or otherwise directly click at an unselected element to select this element. If you click at a selected element or a set of selected elements, respectively, by keeping the mouse pressed and moving around you can move these elements. Moving selected elements is also possible with the arrow keys.</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsadddata.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Add Element</guilabel>: Click at an arbitrary position at the visual graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
-By keeping the mouse pointer pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
+<guilabel>Create Node</guilabel>: Click at an arbitrary position at the graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
+By keeping the mouse edge pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsaddedge.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Add Connection</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the pointer/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a menu shows up at which the pointer type of the new created pointers can be selected (only if different pointer types exist).</para></listitem>
-<!--FIXME no different pointer names here -->
+<guilabel>Create Edge</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse edge pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsdeletedata.png" format="PNG"/></imageobject>
+<imagedata fileref="hi22-actions-rocsdelete.png" format="PNG"/></imageobject>
 </inlinemediaobject>
 <guilabel>Delete</guilabel>: Click at an element to delete it. If you delete a node, all adjacent edges are also deleted.</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocszoom.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Zoom</guilabel>: Click at the whiteboard, keep the &LMB; pressed, and by this draw a rectangle. The whiteboard will be zoomed to the selected area. Using the mousewheel to zoom in or out as well.
-A double click with the &LMB; restores the original zoom.</para></listitem>
 </itemizedlist>
 </sect2>
 
-<sect2 id="user-interface-toolbars-alignment">
+<!--<sect2 id="user-interface-toolbars-alignment">
 <title>Alignment Toolbar</title>
 <para>You can add the optional <emphasis>Alignment Toolbar</emphasis>. Pressing an action at this toolbar has direct effect to the currently selected nodes:</para>
 <itemizedlist>
@@ -435,144 +401,33 @@ positions.</para></listitem>
 </inlinemediaobject>
 <guilabel>Minimize Crossing Edges</guilabel>: Rearrange the selected data elements to minimize the number of crossing connections (application of the Fruchterman-Reingold algorithm).</para></listitem>
 </itemizedlist>
-</sect2>
-</sect1>
-
-<sect1 id="user-interface-documents">
-<title>Working with Graph Documents</title>
-<para>
-    A &rocs; project contains one or multiple graph documents that can be edited with the visual graph editor.
-    Further, each document can contain an arbitrary number of data structures.
-    Here, data structures of a document all use the same data structure backend.
-    This section will explain how to switch between documents and how to create new ones.
-</para>
-
-<sect2 id="user-interface-documents-selector">
-<title>The Document Selector Bar</title>
-<para>
-    The document selector bar is used to select the current graph document and further the current data structure.
-    Using the visual graph editor tools to create data structures elements will automatically add those newly created elements to the current data structure.
-    Also, this bar gives direct access to delete existing or create new data structures within the current document.
-</para>
-
-<itemizedlist>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsnew.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>New</guilabel>: This action creates a new data structure using an automatic naming pattern given by the data structure backend.
-The created data structure is added to the currently selected graph document.
-</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsdelete.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Delete</guilabel>: This action deletes the data structure that is currently selected in the data structure selector for the current document.
-</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Properties</guilabel> for <guilabel>Graph Document</guilabel>: Open a dialog that gives access to the document properties as well as the data and pointer types of the document.
-</para></listitem>
-<listitem><para>
-<inlinemediaobject><imageobject>
-<imagedata fileref="hi22-action-rocsproperties.png" format="PNG"/></imageobject>
-</inlinemediaobject>
-<guilabel>Properties</guilabel> for <guilabel>Data Structure</guilabel>: Open a dialog that gives access to the data structure properties.
-</para></listitem>
-  </itemizedlist>
-
-<screenshot>
-<screeninfo>The Main Toolbar.</screeninfo>
-<mediaobject>
-<imageobject>
-<imagedata fileref="document-selector.png" format="PNG" />
-</imageobject>
-<textobject>
-<phrase>The Document Selector Bar.</phrase>
-</textobject>
-</mediaobject>
-</screenshot>
-</sect2>
-
-<sect2 id="user-interface-documents-menu">
-<title>Create and Import Graph Documents</title>
-<para>
-    To create a new graph document or to add an existing one to the project, use <menuchoice><guimenu>File</guimenu> <guimenuitem>New Project</guimenuitem></menuchoice> or <menuchoice><guimenu>Graph Document</guimenu> <guimenuitem>Import Graph</guimenuitem></menuchoice>.
-    You can also import graph documents from third party applications (for this, see <xref linkend="import-export" />).
-</para>
-</sect2>
-
+</sect2>-->
 </sect1>
 </chapter>
 
 
 <chapter id="scripting">
-<title>Writing and Executing Algorithms in &rocs;</title>
-
+<title>Executing Algorithms in &rocs;</title>
 <para>
-&rocs; internally uses the QtScript scripting engine, which is a specific JavaScript engine.
-This means, all algorithms that you implement must use JavaScript.
-How JavaScript works and how to write JavaScript code is not covered in this handbook, though we explain how to access data structures, data elements and pointers of your data structures from the scripting engine.
-Since you never use the basic data structure object but one that is provided by the currently used data structure backend, the functionality of the data structure is extended by the corresponding backend and you should have a look at the specialized functionality.
-Especially, data structure backends use the common terms from their domain (nodes and edges in graphs, leafs and roots in trees, etc.)
+&rocs; internally uses the QtScript Java Script engine
+This means, all algorithms that you implement must use Java Script.
+In the following, we explain how to access and change elements of a graph document from the scripting engine.
+It is important to note that changes done by the scripting engine are directly reflected at the properties at the graph editor elements.
 </para>
-<para>
-It is important to know that changes done by the scripting engine are directly reflected at the properties at the visual graph editor whiteboard.
-Hence, the scripts actually modify the data structures.
-</para>
-
 
 <sect1 id="scripting-controls">
-<title>Controlling the Script Execution</title>
-<para>
-</para>
-
-<sect2>
-<title>Include Files</title>
-<para>
-    Your script documents can include other scripts.
-    This can be useful to reduce the size of script documents and improve readability.
-    Using <menuchoice><guimenu>Script Document</guimenu> <guimenuitem>Possible Includes</guimenuitem></menuchoice> you get a list of script files already shipped with &rocs; that could be included.
-    You can include a script file with the following command:
-</para>
-<programlisting>
-    include_script(string path);            // relative or absolute path to script file
-</programlisting>
-</sect2>
-
-<sect2 id="scripting-output">
-<title>Script Output</title>
-<para>
-    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &amp; Script Output</emphasis>.
-    If the scripting engine detects a syntax error in your script, the error is also displayed as debug message.
-    Note that all program messages are also displayed at the debug output (displayed as bold text).
-</para>
-<para>
-    You can control the text that is displayed at the script output by the following functions:
-</para>
-<programlisting>
-    Console.log(string message);            // displays the message as script output
-    Console.debug(string message);          // displays the message as debug output
-</programlisting>
-</sect2>
-
-<sect2 id="scripting-controlling">
 <title>Control Script Execution</title>
 <para>
-    There are different execution modes for your scripts.
-</para>
-<para>
-    You can control the text that is displayed at the script output by the following functions:
+    There are different execution modes for your algorithms:
 </para>
 <itemizedlist>
     <listitem><para>
         <inlinemediaobject><imageobject>
-        <imagedata fileref="rocs-control-engine-run.png" format="PNG"/></imageobject>
+        <imagedata fileref="hi22-actions-controls-run.png" format="PNG"/></imageobject>
         </inlinemediaobject>
         <guilabel>Run</guilabel>: Execute the script until it finishes.</para></listitem>
-    <listitem><para>
+<!--TODO not available right now -->
+<!--    <listitem><para>
         <inlinemediaobject><imageobject>
         <imagedata fileref="rocs-control-engine-step.png" format="PNG"/></imageobject>
         </inlinemediaobject>
@@ -585,30 +440,44 @@ Hence, the scripts actually modify the data structures.
         <inlinemediaobject><imageobject>
         <imagedata fileref="rocs-control-engine-debug.png" format="PNG"/></imageobject>
         </inlinemediaobject>
-        <guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>
+        <guilabel>Debug</guilabel>: Execute script in debug mode. This opens the QtScript debug dialog.</para></listitem>-->
     <listitem><para>
         <inlinemediaobject><imageobject>
-        <imagedata fileref="rocs-control-engine-stop.png" format="PNG"/></imageobject>
+        <imagedata fileref="hi22-actions-control-stop.png" format="PNG"/></imageobject>
         </inlinemediaobject>
-        <guilabel>Stop</guilabel>: Stop script execution (only available if a script is executing).</para></listitem>
+        <guilabel>Stop</guilabel>: Stop script execution (only available while a script is executed).</para></listitem>
 </itemizedlist>
-</sect2>
 </sect1>
-</chapter>
 
+<sect1 id="scripting-output">
+<title>Script Output</title>
+<para>
+    During the execution of an algorithm, debug and program output is displayed in the <emphasis>Debug &amp; Script Output</emphasis>.
+    If the scripting engine detects a syntax error in your script, the error is also displayed as debug message.
+    Note that all program messages are also displayed at the debug output (displayed as bold text).
+</para>
+<para>
+    You can control the text that is displayed at the script output by the following functions:
+</para>
+<programlisting>
+    Console.log(string message);            // displays the message as script output
+    Console.debug(string message);          // displays the message as debug output
+    Console.error(string message);          // displays the message as error output
+</programlisting>
+</sect1>
 
-<chapter id="scripting-API">
+<sect1 id="scripting-API">
 <title>Scripting Engine API</title>
 <para>
-Every backend provides a special set of functions and properties for its data structures and their elements.
-But also every backend provides the properties and functions that are defined for the base data structure.
+The different parts of &rocs; each provide a static element that can be accessed by the scripting engine.
+These are:
+<itemizedlist>
+    <listitem><para><userinput><command>Document</command></userinput> for the graph document</para></listitem>
+    <listitem><para><userinput><command>Console</command></userinput> for the console log output</para></listitem>
+</itemizedlist>
+For the explicit API use and for a method reference, please see the inline help at the &rocs; side bar.
 </para>
-
-&apiDatastructure;
-
-&apiGraphstructure;
-
-&apiConsole;
+</sect1>
 </chapter>
 
 
@@ -626,14 +495,14 @@ But also every backend provides the properties and functions that are defined fo
 	<listitem><para>Copyright 2008       Ugo Sangiori (ugorox AT gmail.com)</para></listitem>
 	<listitem><para>Copyright 2008-2012  Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
 	<listitem><para>Copyright 2008-2012  Wagner Reck (wagner.reck AT gmail.com)</para></listitem>
-	<listitem><para>Copyright 2011-2013  Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para></listitem>
+	<listitem><para>Copyright 2011-2015  Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para></listitem>
 </itemizedlist>
 
 <para>Documentation Copyright:</para>
 <itemizedlist>
 	<listitem><para>Documentation copyright 2009 &Anne-Marie.Mahfouf; &Anne-Marie.Mahfouf.mail;</para></listitem>
 	<listitem><para>Documentation copyright 2009 Tomaz Canabrava (tcanabrava AT kde.org)</para></listitem>
-	<listitem><para>Documentation copyright 2011-2013 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para></listitem>
+	<listitem><para>Documentation copyright 2011-2015 Andreas Cord-Landwehr (cordlandwehr AT kde.org)</para></listitem>
 </itemizedlist>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
