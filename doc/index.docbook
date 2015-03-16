@@ -276,7 +276,7 @@ The user interface is divided into several logical parts as presented at the scr
     The toolbar provides the <inlinemediaobject><imageobject><imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
     </inlinemediaobject><guibutton>Create Node</guibutton> or <inlinemediaobject><imageobject><imagedata fileref="hi22-actions-rocsedge.png"
     format="PNG"/></imageobject></inlinemediaobject><guibutton>Create Edge</guibutton> tools, for creating new elements on the whiteboard.
-    (Note the extra-toolbar for selecting the respective node or edge type that becomes visible of one of these tools is selected.
+    Note the extra-toolbar for selecting the respective node or edge type that becomes visible of one of these tools is selected.
     Also tools for selecting and moving as well as deleting elements are available here.
     For details see <xref linkend="user-interface-toolbars" />.
     </para></listitem>
@@ -329,7 +329,7 @@ The user interface is divided into several logical parts as presented at the scr
 <!--  -->
 <sect2 id="user-interface-toolbars-main">
 <title>Main Toolbar</title>
-<para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse edge applies this action at the graph editor whiteboard:</para>
+<para>The <emphasis>Main Toolbar</emphasis> consists of the following actions. Clicking at an action means that your mouse pointer applies this action at the graph editor whiteboard:</para>
 <itemizedlist>
 <listitem><para>
 <inlinemediaobject><imageobject>
@@ -341,12 +341,12 @@ The user interface is divided into several logical parts as presented at the scr
 <imagedata fileref="hi22-actions-rocsnode.png" format="PNG"/></imageobject>
 </inlinemediaobject>
 <guilabel>Create Node</guilabel>: Click at an arbitrary position at the graph editor whiteboard to create a new data element that belongs to the currently selected data structure.
-By keeping the mouse edge pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
+By keeping the mouse pointer pressed at the button, a menu shows up at which the data type of the new created data elements can be selected (only if different data types exist).</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-actions-rocsedge.png" format="PNG"/></imageobject>
 </inlinemediaobject>
-<guilabel>Create Edge</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge/edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse edge pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para></listitem>
+<guilabel>Create Edge</guilabel>: Click at one data element, keep the mouse pressed and draw a line to another data element to which the edge shall point. This action is only successful if the current graph allows to add this edge (&eg;, in an undirected graph you are not allowed to add multiple edges between two data elements). By keeping the mouse pointer pressed at the button, a menu shows up at which the edge type of the new created edges can be selected (only if different edge types exist).</para></listitem>
 <listitem><para>
 <inlinemediaobject><imageobject>
 <imagedata fileref="hi22-actions-rocsdelete.png" format="PNG"/></imageobject>
