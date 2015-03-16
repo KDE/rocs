@@ -35,7 +35,6 @@ include_directories(
 )
 
 set( rocs_interface_SRCS
-    ui/documentationwidget.cpp
     ui/journalwidget.cpp
     ui/sidedockwidget.cpp
     ui/fileformatdialog.cpp
@@ -65,7 +64,6 @@ set(
 
 ki18n_wrap_ui(
     rocs_SRCS
-    ui/documentationwidget.ui
     ui/journalwidget.ui
     ui/scriptoutputwidget.ui
     plugins/scriptapi/scriptapiwidget.ui

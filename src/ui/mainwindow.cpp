@@ -62,7 +62,6 @@
 #include "ui/codeeditorwidget.h"
 #include "ui/scriptoutputwidget.h"
 #include "ui/sidedockwidget.h"
-#include "ui/documentationwidget.h"
 #include "ui/fileformatdialog.h"
 #include "ui/journalwidget.h"
 #include "grapheditorwidget.h"
@@ -232,10 +231,6 @@ QWidget* MainWindow::setupSidePanel()
     // Project Journal
     m_journalWidget = new JournalEditorWidget(panel);
     sideDock->addDock(m_journalWidget, i18nc("@title", "Journal"), QIcon::fromTheme("story-editor"));
-
-    // Rocs handbook
-    DocumentationWidget* documentation = new DocumentationWidget(panel);
-    sideDock->addDock(documentation, i18nc("@title", "Handbook"), QIcon::fromTheme("help-contents"));
 
     // Rocs scripting API documentation
     ScriptApiWidget* apiDoc = new ScriptApiWidget(panel);
