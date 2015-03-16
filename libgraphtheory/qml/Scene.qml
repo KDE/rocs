@@ -368,12 +368,17 @@ Item {
                                 mouse.accepted = true
                                 return
                             }
-                            // move actions
+                            // single-node move action: directly handle it
                             sceneAction.nodePressed = true
                             if (selectMoveAction.checked && !nodeItem.highlighted) {
                                 scene.clearSelection()
                                 nodeItem.highlighted = true
                                 mouse.accepted = true
+                                return
+                            }
+                            // multi-node move action: gets handled by state-machine
+                            if (selectMoveAction.checked && nodeItem.highlighted) {
+                                mouse.accepted = false
                                 return
                             }
                         }
