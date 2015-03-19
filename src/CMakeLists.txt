@@ -76,12 +76,12 @@ kconfig_add_kcfg_files(rocs_Settings_SRCS settings.kcfgc)
 # add icon to executable on windows and mac
 ecm_add_app_icon(rocs_SRCS
     ICONS
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi16-apps-rocs.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi22-apps-rocs.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi32-apps-rocs.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi48-apps-rocs.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi64-apps-rocs.png
-    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/hi128-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/16-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/22-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/32-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/48-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/64-apps-rocs.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/../icons/128-apps-rocs.png
 )
 
 add_executable( rocs

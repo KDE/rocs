@@ -24,6 +24,7 @@
 include(ECMInstallIcons)
 
 ecm_install_icons( ICONS
+  128-apps-rocs.png  16-apps-rocs.png  22-apps-rocs.png  32-apps-rocs.png  48-apps-rocs.png  64-apps-rocs.png
   sc-apps-rocs.svgz
 
   sc-actions-rocsdelete.svgz
