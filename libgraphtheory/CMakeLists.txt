@@ -96,6 +96,9 @@ set(rocscore_LIB_HDRS
     node.h
 )
 
+# KI18N Translation Domain for library
+add_definitions(-DTRANSLATION_DOMAIN=\"libgraphtheory\")
+
 # we use SOVERION 0 to make clear that this is neither stable API nor stable ABI
 # i.e., the library for now is only used internally in Rocs and we require the exact
 # version as released alongside Rocs
