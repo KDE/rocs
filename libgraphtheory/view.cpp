@@ -80,6 +80,7 @@ View::View(QWidget *parent)
 
     // prepare QML engine to be globally used
     KDeclarative::KDeclarative kdeclarative;
+    kdeclarative.setTranslationDomain("libgraphtheory");
     kdeclarative.setDeclarativeEngine(engine());
     kdeclarative.setupBindings();
 
