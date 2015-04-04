@@ -30,6 +30,8 @@
 
 int main(int argc, char *argv[])
 {
+    KLocalizedString::setApplicationDomain("rocs");
+
     KAboutData aboutData("rocs",
                          ki18nc("@title Displayed program name", "Rocs").toString(),
                          ROCS_VERSION_STRING);

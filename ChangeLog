@@ -2,7 +2,16 @@ The Rocs Changelog
 ==================
 
 This changelog contains only the important changes for each release.
-For a detailed feature list please refer to the GIT log.
+For a detailed feature list please refer to the Git log.
+
+Rocs 2.0 (Applications 15.04)
+--------
+* Port to KF5/Qt5
+* Rewrite of the graph theory core
+* Major cleanups of UI
+* Removing data structure separtion and using of a more general graph document
+* Unified script API
+* Removing documentation/handbook side panel
 
 Rocs 1.8 (KDE SC 4.10)
 --------
