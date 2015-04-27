@@ -15,6 +15,7 @@
   <name xml:lang="et">Rocs</name>
   <name xml:lang="fi">Rocs</name>
   <name xml:lang="fr">Rocs</name>
+  <name xml:lang="ko">Rocs</name>
   <name xml:lang="lt">Rocs</name>
   <name xml:lang="nds">Rocs</name>
   <name xml:lang="nl">Rocs</name>
@@ -37,6 +38,7 @@
   <summary xml:lang="et">Rocs graafiteooria</summary>
   <summary xml:lang="fi">Rocs-graafiteoria</summary>
   <summary xml:lang="fr">Théorie des graphes Rocs</summary>
+  <summary xml:lang="ko">Rocs 그래프 이론</summary>
   <summary xml:lang="nds">Graphentheorie „Rocs“</summary>
   <summary xml:lang="nl">Rocs grafentheorie</summary>
   <summary xml:lang="pl">Teoria grafów Rocs</summary>
