@@ -27,6 +27,9 @@ set(dotformat_SRCS
     dotgrammarhelper.cpp
 )
 
+# Boost requires exceptions
+kde_source_files_enable_exceptions(dotgrammar.cpp)
+
 add_library(dotfileformat MODULE ${dotformat_SRCS})
 
 target_link_libraries(dotfileformat
