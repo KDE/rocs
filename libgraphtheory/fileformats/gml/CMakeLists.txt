@@ -27,6 +27,9 @@ set(gmlformat_SRCS
     gmlgrammarhelper.cpp
 )
 
+# Boost requires exceptions
+kde_source_files_enable_exceptions(gmlgrammar.cpp)
+
 add_library(gmlfileformat MODULE ${gmlformat_SRCS})
 
 target_link_libraries(gmlfileformat
