@@ -35,6 +35,7 @@ set(testdotfileformat_SRCS
     ../dotgrammar.cpp
     ../dotgrammarhelper.cpp
 )
+kde_source_files_enable_exceptions(../dotgrammar.cpp)
 add_executable(TestDotFileFormat ${testdotfileformat_SRCS})
 add_test(TestDotFileFormat TestDotFileFormat)
 ecm_mark_as_test(TestDotFileFormat)
