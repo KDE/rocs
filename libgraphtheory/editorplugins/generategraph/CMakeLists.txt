@@ -28,6 +28,10 @@ set(generategraph_SRCS
     generategraphplugin.cpp
     generategraphwidget.cpp
 )
+
+#boost requires exceptions
+kde_source_files_enable_exceptions(generategraphplugin.cpp)
+
 ki18n_wrap_ui(generategraph_SRCS generategraphwidget.ui)
 add_library(generategraphplugin
     MODULE
