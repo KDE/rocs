@@ -46,9 +46,11 @@ using namespace GraphTheory;
 #define SKIPPER space | confix("//", eol)[*(char_ - eol)] | confix("/*", "*/")[*(char_ - "*/")]
 
 // workaround for linking boost
-void boost::throw_exception(std::exception const & e)
+namespace boost {
+void throw_exception(std::exception const &e)
 {
     qCritical() << "Exception:" << e.what();
+}
 }
 
 // create distinct parser for dot keywords
