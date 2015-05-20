@@ -34,6 +34,10 @@ set(testgmlfileformat_SRCS
     ../gmlgrammarhelper.cpp
     ../gmlfileformat.cpp
 )
+
+# Boost requires exceptions
+kde_source_files_enable_exceptions(gmlgrammar.cpp)
+
 add_executable(TestGmlFileFormat ${testgmlfileformat_SRCS})
 add_test(TestGmlFileFormat TestGmlFileFormat)
 ecm_mark_as_test(TestGmlFileFormat)
@@ -41,3 +45,4 @@ target_link_libraries(TestGmlFileFormat
     rocsgraphtheory
     Qt5::Test
 )
+
