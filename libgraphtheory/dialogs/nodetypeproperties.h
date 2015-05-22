@@ -23,7 +23,7 @@
 
 #include <QDialog>
 #include "typenames.h"
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 
 class KColorButton;
 class QCheckBox;

@@ -21,7 +21,7 @@
 #ifndef QSGARROWHEADNODE_H
 #define QSGARROWHEADNODE_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include <QSGGeometryNode>
 #include <QSGFlatColorMaterial>
 

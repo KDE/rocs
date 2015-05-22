@@ -21,7 +21,7 @@
 #ifndef NODETYPE_H
 #define NODETYPE_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 
 #include <QObject>

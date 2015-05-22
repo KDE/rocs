@@ -21,7 +21,7 @@
 #ifndef EDGEMODEL_H
 #define EDGEMODEL_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 
 #include <QAbstractListModel>

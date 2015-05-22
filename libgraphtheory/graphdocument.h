@@ -21,7 +21,7 @@
 #ifndef GRAPHDOCUMENT_H
 #define GRAPHDOCUMENT_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 #include "node.h"
 #include "edgetype.h"

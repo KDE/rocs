@@ -21,7 +21,7 @@
 #ifndef VIEW_H
 #define VIEW_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 #include "editor.h"
 #include "graphdocument.h"

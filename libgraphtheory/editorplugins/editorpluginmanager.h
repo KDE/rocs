@@ -23,7 +23,7 @@
 
 #include "editorplugininterface.h"
 #include "typenames.h"
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include <QObject>
 #include <QList>
 

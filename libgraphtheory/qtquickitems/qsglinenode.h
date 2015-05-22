@@ -21,7 +21,7 @@
 #ifndef QSGLINENODE_H
 #define QSGLINENODE_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "edgetype.h"
 #include <QSGGeometryNode>
 #include <QSGFlatColorMaterial>

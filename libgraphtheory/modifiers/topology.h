@@ -22,7 +22,7 @@
 #define TOPOLOGY_H
 
 #include "typenames.h"
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 
 namespace GraphTheory
 {

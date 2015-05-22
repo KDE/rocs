@@ -21,7 +21,7 @@
 #ifndef EDGEPROPERTYMODEL_H
 #define EDGEPROPERTYMODEL_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 #include <QAbstractListModel>
 

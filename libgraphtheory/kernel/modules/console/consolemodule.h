@@ -21,7 +21,7 @@
 #ifndef CONSOLEMODULE_H
 #define CONSOLEMODULE_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "kernel/kernel.h"
 #include <QObject>
 #include <QList>

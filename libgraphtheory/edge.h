@@ -21,7 +21,7 @@
 #ifndef EDGE_H
 #define EDGE_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 #include "edgetype.h"
 #include "node.h"

@@ -21,7 +21,7 @@
 #ifndef NODETYPESTYLE_H
 #define NODETYPESTYLE_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 #include <QObject>
 #include <QSharedPointer>

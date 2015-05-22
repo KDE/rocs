@@ -21,7 +21,7 @@
 #ifndef NODEPROPERTYMODEL_H
 #define NODEPROPERTYMODEL_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 #include <QAbstractListModel>
 

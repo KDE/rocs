@@ -21,7 +21,7 @@
 #ifndef EDGEITEM_H
 #define EDGEITEM_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "edge.h"
 #include <QQuickItem>
 

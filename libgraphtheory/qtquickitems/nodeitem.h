@@ -21,7 +21,7 @@
 #ifndef NODEITEM_H
 #define NODEITEM_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "node.h"
 #include <QQuickPaintedItem>
 

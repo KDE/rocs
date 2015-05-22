@@ -27,7 +27,6 @@ include_directories(
 
 add_definitions(-DTRANSLATION_DOMAIN=\"libgraphtheory\")
 
-
 set(graphtheory_SRCS
     edge.cpp
     edgetype.cpp
@@ -75,6 +74,7 @@ ki18n_wrap_ui(graphtheory_SRCS
 )
 
 add_library(rocsgraphtheory SHARED ${graphtheory_SRCS} )
+generate_export_header(rocsgraphtheory BASE_NAME graphtheory)
 
 target_link_libraries(rocsgraphtheory
     PUBLIC

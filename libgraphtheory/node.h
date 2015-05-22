@@ -21,7 +21,7 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 #include "graphdocument.h"
 

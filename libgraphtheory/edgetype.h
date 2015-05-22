@@ -21,7 +21,7 @@
 #ifndef EDGETYPE_H
 #define EDGETYPE_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 
 #include <QObject>

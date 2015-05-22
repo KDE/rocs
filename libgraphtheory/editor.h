@@ -21,7 +21,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "graphdocument.h"
 #include <QObject>
 

@@ -21,7 +21,7 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "typenames.h"
 #include "node.h"
 #include "graphdocument.h"

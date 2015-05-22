@@ -21,7 +21,7 @@
 #ifndef NODEWRAPPER_H
 #define NODEWRAPPER_H
 
-#include "libgraphtheoryexport.h"
+#include "graphtheory_export.h"
 #include "kernel.h"
 #include "typenames.h"
 #include "node.h"
