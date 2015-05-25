@@ -38,7 +38,6 @@ target_link_libraries(gmlfileformat
         rocsgraphtheory
 )
 
-
 # Boost::spirit requires exceptions
 kde_target_enable_exceptions(gmlfileformat PRIVATE)
 

@@ -35,9 +35,6 @@ set(testgmlfileformat_SRCS
     ../gmlfileformat.cpp
 )
 
-# Boost requires exceptions
-kde_source_files_enable_exceptions(gmlgrammar.cpp)
-
 add_executable(TestGmlFileFormat ${testgmlfileformat_SRCS})
 add_test(TestGmlFileFormat TestGmlFileFormat)
 ecm_mark_as_test(TestGmlFileFormat)
@@ -46,3 +43,5 @@ target_link_libraries(TestGmlFileFormat
     Qt5::Test
 )
 
+# Boost::spirit requires exceptions
+kde_target_enable_exceptions(TestGmlFileFormat PRIVATE)
