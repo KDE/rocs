@@ -27,9 +27,6 @@ set(gmlformat_SRCS
     gmlgrammarhelper.cpp
 )
 
-# Boost requires exceptions
-kde_source_files_enable_exceptions(gmlgrammar.cpp)
-
 add_library(gmlfileformat MODULE ${gmlformat_SRCS})
 
 target_link_libraries(gmlfileformat
@@ -40,6 +37,10 @@ target_link_libraries(gmlfileformat
         KF5::Service
         rocsgraphtheory
 )
+
+
+# Boost::spirit requires exceptions
+kde_target_enable_exceptions(gmlfileformat PRIVATE)
 
 kcoreaddons_desktop_to_json(gmlfileformat gmlfileformat.desktop)
 install(TARGETS gmlfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
