@@ -115,7 +115,7 @@ install(TARGETS rocsgraphtheory  ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES ${rocscore_LIB_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/rocs  COMPONENT Devel)
 
 # Boost requires exceptions
-kde_source_files_enable_exceptions(modifiers/topology.cpp)
+kde_source_files_enable_exceptions(modifiers/topology.cpp modifiers/valueassign.cpp)
 
 ecm_optional_add_subdirectory(fileformats)
 ecm_optional_add_subdirectory(editorplugins)
