@@ -47,7 +47,7 @@ set( rocs_core_SRCS
 
 kde4_add_library( rocscore  SHARED ${rocs_core_SRCS} )
 
-target_link_libraries( rocscore
+target_link_libraries( rocscore LINK_PUBLIC
     ${KDE4_KROSSCORE_LIBS}
     ${KDE4_KIO_LIBS}
     ${QT_QTSCRIPT_LIBRARY}

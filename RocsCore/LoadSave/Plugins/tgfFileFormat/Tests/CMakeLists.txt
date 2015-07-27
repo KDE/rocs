@@ -35,4 +35,3 @@ target_link_libraries(TestTgfFileFormatPlugin
     ${QT_QTTEST_LIBRARY}
     ${KDE4_KDECORE_LIBS}
 )
-add_test(TestTgfFileFormatPlugin TestTgfFileFormatPlugin)

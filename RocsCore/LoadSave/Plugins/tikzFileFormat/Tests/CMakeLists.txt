@@ -29,5 +29,4 @@ target_link_libraries(TestTikzFileFormatPlugin
     ${QT_QTTEST_LIBRARY}
     ${KDE4_KDECORE_LIBS}
 )
-add_test(TestTikzFileFormatPlugin TestTikzFileFormatPlugin)
 

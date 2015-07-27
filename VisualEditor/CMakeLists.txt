@@ -82,7 +82,7 @@ kde4_add_ui_files( rocsvisualeditor_SRCS
 
 kde4_add_library( rocsvisualeditor SHARED ${rocsvisualeditor_SRCS} )
 
-target_link_libraries( rocsvisualeditor
+target_link_libraries( rocsvisualeditor LINK_PUBLIC
     rocscore
     ${KDE4_KROSSCORE_LIBS}
     ${KDE4_KIO_LIBS}

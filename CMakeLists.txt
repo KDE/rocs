@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 2.8.9)
 ##
 #   This file is part of Rocs.
 #   Copyright 2008-2011  Tomaz Canabrava <tomaz.canabrava@gmail.com>
@@ -20,7 +21,6 @@
 
 project(Rocs)
 
-cmake_minimum_required(VERSION 2.8.8)
 include(FeatureSummary)
 
 #### Boost ####
