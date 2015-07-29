@@ -176,7 +176,7 @@ protected:
     void setError(Error error, const QString &message = QString());
 
 private:
-    FileFormatInterfacePrivate * const d;
+    const QScopedPointer<FileFormatInterfacePrivate> d;
 };
 }
 

@@ -49,7 +49,7 @@ EditorPluginInterface::EditorPluginInterface(const QString &componentName, QObje
 
 EditorPluginInterface::~EditorPluginInterface()
 {
-    delete d;
+
 }
 
 QString EditorPluginInterface::displayName()

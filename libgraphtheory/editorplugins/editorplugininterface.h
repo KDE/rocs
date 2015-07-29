@@ -63,7 +63,7 @@ public:
     virtual void setDisplayName(const QString &name);
 
 private:
-    EditorPluginInterfacePrivate * const d;
+    const QScopedPointer<EditorPluginInterfacePrivate> d;
 };
 }
 

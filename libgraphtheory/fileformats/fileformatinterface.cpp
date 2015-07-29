@@ -54,6 +54,7 @@ FileFormatInterface::FileFormatInterface(const QString &componentName, QObject *
 
 FileFormatInterface::~FileFormatInterface()
 {
+
 }
 
 FileFormatInterface::PluginType FileFormatInterface::pluginCapability() const
