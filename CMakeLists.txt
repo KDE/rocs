@@ -39,28 +39,28 @@ include(FeatureSummary)
 include(GenerateExportHeader)
 
 find_package(Qt5 5.4 REQUIRED NO_MODULE COMPONENTS
-  Core
-  Gui
-  QuickWidgets
-  Script
-  WebKit
-  WebKitWidgets
-  Widgets
-  ScriptTools
-  Svg
-  Test
-  XmlPatterns
+    Core
+    Gui
+    QuickWidgets
+    Script
+    WebKit
+    WebKitWidgets
+    Widgets
+    ScriptTools
+    Svg
+    Test
+    XmlPatterns
 )
 find_package(KF5 5.7 REQUIRED COMPONENTS
-  Archive
-  Config
-  CoreAddons
-  Declarative
-  DocTools
-  I18n
-  ItemViews
-  TextEditor
-  XmlGui
+    Archive
+    Config
+    CoreAddons
+    Declarative
+    DocTools
+    I18n
+    ItemViews
+    TextEditor
+    XmlGui
 )
 
 include_directories(
