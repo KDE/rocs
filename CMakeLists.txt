@@ -39,7 +39,6 @@ include(FeatureSummary)
 include(GenerateExportHeader)
 
 find_package(Qt5 5.4 REQUIRED NO_MODULE COMPONENTS
-  Concurrent
   Core
   Gui
   QuickWidgets
