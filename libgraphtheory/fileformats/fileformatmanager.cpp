@@ -33,7 +33,7 @@
 
 using namespace GraphTheory;
 
-Q_LOGGING_CATEGORY(FILEFORMAT, "rocs.graphtheory.fileformat")
+Q_LOGGING_CATEGORY(ROCS_FILEFORMAT, "org.kde.rocs.graphtheory.fileformat", QtWarningMsg)
 
 class GraphTheory::FileFormatManagerPrivate
 {
@@ -115,9 +115,9 @@ void FileFormatManager::loadBackends()
         });
         for (const auto &metadata : metadataList) {
             loader.setFileName(metadata.fileName());
-            qCDebug(FILEFORMAT) << "Load Plugin: " << metadata.name();
+            qCDebug(ROCS_FILEFORMAT) << "Load Plugin: " << metadata.name();
             if (!loader.load()) {
-                qCCritical(FILEFORMAT) << "Error while loading plugin: " << metadata.name();
+                qCCritical(ROCS_FILEFORMAT) << "Error while loading plugin: " << metadata.name();
             }
             KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
             FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
