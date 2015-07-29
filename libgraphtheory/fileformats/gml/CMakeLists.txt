@@ -41,7 +41,6 @@ target_link_libraries(gmlfileformat
 # Boost::spirit requires exceptions
 kde_target_enable_exceptions(gmlfileformat PRIVATE)
 
-kcoreaddons_desktop_to_json(gmlfileformat gmlfileformat.desktop)
 install(TARGETS gmlfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

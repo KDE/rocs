@@ -38,9 +38,6 @@ target_link_libraries(assignvaluesplugin
 )
 
 kde_source_files_enable_exceptions(assignvalueswidget.cpp)
-
-kcoreaddons_desktop_to_json(assignvaluesplugin assignvaluesplugin.desktop)
-install(TARGETS assignvaluesplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)
-
 ecm_optional_add_subdirectory(autotests)
 
+install(TARGETS assignvaluesplugin DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/editorplugins)

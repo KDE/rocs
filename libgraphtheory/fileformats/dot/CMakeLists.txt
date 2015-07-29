@@ -41,7 +41,6 @@ target_link_libraries(dotfileformat
         rocsgraphtheory
 )
 
-kcoreaddons_desktop_to_json(dotfileformat dotfileformat.desktop)
 install(TARGETS dotfileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

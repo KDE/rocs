@@ -31,7 +31,6 @@ target_link_libraries(tgffileformat
     rocsgraphtheory
 )
 
-kcoreaddons_desktop_to_json(tgffileformat tgffileformat.desktop)
 install(TARGETS tgffileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)

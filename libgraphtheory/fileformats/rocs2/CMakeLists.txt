@@ -36,7 +36,6 @@ target_link_libraries(rocs2fileformat
         rocsgraphtheory
 )
 
-kcoreaddons_desktop_to_json(rocs2fileformat rocs2fileformat.desktop)
 install(TARGETS rocs2fileformat DESTINATION ${PLUGIN_INSTALL_DIR}/rocs/fileformats)
 
 ecm_optional_add_subdirectory(autotests)
