@@ -39,7 +39,7 @@ class GraphTheory::FileFormatManagerPrivate
 {
 public:
     FileFormatManagerPrivate()
-        : defaultGraphFilePlugin(0)
+        : defaultGraphFilePlugin(nullptr)
     {
         QLoggingCategory::setFilterRules(QStringLiteral("rocs.graphtheory.fileformat.debug=false"));
     }
@@ -137,7 +137,7 @@ FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
             return p;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 FileFormatInterface * FileFormatManager::defaultBackend()
