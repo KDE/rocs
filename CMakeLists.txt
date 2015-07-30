@@ -84,4 +84,4 @@ ecm_optional_add_subdirectory(doc)
 set_package_info(Boost "Boost C++ Libraries" "http://www.boost.org")
 feature_summary(WHAT ALL)
 
-install(FILES rocs.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
+install(FILES org.kde.rocs.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata/)
