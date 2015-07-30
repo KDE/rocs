@@ -97,13 +97,13 @@ GenerateGraphWidget::GenerateGraphWidget(GraphDocumentPtr document, QWidget *par
 
     ui->buttonShowAdvanced->setIcon(QIcon::fromTheme("rocsadvancedsetup"));
 
-    connect(ui->buttons, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(ui->buttons, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(ui->buttons, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(ui->buttons, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    connect(this, SIGNAL(accepted()), this, SLOT(generateGraph()));
-    connect(ui->comboGraphGenerator, SIGNAL(currentIndexChanged(int)), this, SLOT(setGraphGenerator(int)));
-    connect(ui->nodeTypeSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(setNodeType(int)));
-    connect(ui->edgeTypeSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(setEdgeType(int)));
+    connect(this, &QDialog::accepted, this, &GenerateGraphWidget::generateGraph);
+    connect(ui->comboGraphGenerator, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &GenerateGraphWidget::setGraphGenerator);
+    connect(ui->nodeTypeSelector, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &GenerateGraphWidget::setNodeType);
+    connect(ui->edgeTypeSelector, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &GenerateGraphWidget::setEdgeType);
 
     // set random seeds
     qint64 currentTime = QDateTime::currentMSecsSinceEpoch();

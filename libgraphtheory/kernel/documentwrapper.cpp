@@ -40,8 +40,8 @@ DocumentWrapper::DocumentWrapper(GraphDocumentPtr document, QScriptEngine *engin
         registerWrapper(edge);
     }
 
-    connect(document.data(), SIGNAL(nodeAboutToBeAdded(NodePtr,int)), this, SLOT(registerWrapper(NodePtr)));
-    connect(document.data(), SIGNAL(edgeAboutToBeAdded(EdgePtr,int)), this, SLOT(registerWrapper(EdgePtr)));
+    connect(document.data(), &GraphDocument::nodeAboutToBeAdded, this, static_cast<void (DocumentWrapper::*)(NodePtr)>(&DocumentWrapper::registerWrapper));
+    connect(document.data(), &GraphDocument::edgeAboutToBeAdded, this, static_cast<void (DocumentWrapper::*)(EdgePtr)>(&DocumentWrapper::registerWrapper));
 }
 
 DocumentWrapper::~DocumentWrapper()
@@ -62,8 +62,7 @@ void DocumentWrapper::registerWrapper(NodePtr node)
     }
     NodeWrapper *wrapper = new NodeWrapper(node, this);
     m_nodeMap.insert(node, wrapper);
-    connect(wrapper, &NodeWrapper::message,
-        this, &DocumentWrapper::message);
+    connect(wrapper, &NodeWrapper::message, this, &DocumentWrapper::message);
     return;
 }
 
@@ -74,8 +73,7 @@ void DocumentWrapper::registerWrapper(EdgePtr edge)
     }
     EdgeWrapper *wrapper = new EdgeWrapper(edge, this);
     m_edgeMap.insert(edge, wrapper);
-    connect(wrapper, &EdgeWrapper::message,
-        this, &DocumentWrapper::message);
+    connect(wrapper, &EdgeWrapper::message, this, &DocumentWrapper::message);
     return;
 }
 

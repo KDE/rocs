@@ -48,14 +48,14 @@ ScriptApiWidget::ScriptApiWidget(QWidget* parent)
     m_manager->loadLocalData();
     m_model = new ScriptApiModel(m_manager->objectApiList(), this);
 
-    connect(ui->buttonTree, SIGNAL(clicked(bool)), this, SLOT(showTreeOutline()));
-    connect(ui->buttonHome, SIGNAL(clicked(bool)), this, SLOT(showHtmlOutline()));
-    connect(ui->docTree, SIGNAL(clicked(QModelIndex)), this, SLOT(showDetails(QModelIndex)));
-    connect(ui->buttonNext, SIGNAL(clicked(bool)), this, SLOT(historyGoForward()));
-    connect(ui->buttonPrev, SIGNAL(clicked(bool)), this, SLOT(historyGoBack()));
+    connect(ui->buttonTree, &QPushButton::clicked, this, &ScriptApiWidget::showTreeOutline);
+    connect(ui->buttonHome, &QPushButton::clicked, this, static_cast<void (ScriptApiWidget::*)(bool)>(&ScriptApiWidget::showHtmlOutline));
+    connect(ui->docTree, &QTreeView::clicked, this, &ScriptApiWidget::showDetails);
+    connect(ui->buttonNext, &QPushButton::clicked, this, &ScriptApiWidget::historyGoForward);
+    connect(ui->buttonPrev, &QPushButton::clicked, this, &ScriptApiWidget::historyGoBack);
 
     // listen to all links for ids
-    connect(ui->docDetails, SIGNAL(linkClicked(QUrl)), this, SLOT(showObjectApi(QUrl)));
+    connect(ui->docDetails, &QWebView::linkClicked, this, static_cast<void (ScriptApiWidget::*)(const QUrl&)>(&ScriptApiWidget::showObjectApi));
     // this option has the following idea:
     // * handle relative anchor calls directly in the web engine
     // * use for switching between object pages the path "http://virtual/<object-id>"

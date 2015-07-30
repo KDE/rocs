@@ -36,11 +36,10 @@ ScriptOutputWidget::ScriptOutputWidget(QWidget *parent)
     ui->buttonDisableClear->setIcon(QIcon::fromTheme("document-decrypt"));
     ui->buttonClear->setIcon(QIcon::fromTheme("edit-clear-list"));
 
-    connect(ui->buttonEnableDebugOutput, SIGNAL(clicked(bool)), this, SLOT(showDebugOutput(bool)));
+    connect(ui->buttonEnableDebugOutput, &QPushButton::clicked, this, &ScriptOutputWidget::showDebugOutput);
     connect(ui->buttonDisableClear, &QPushButton::clicked, this, &ScriptOutputWidget::updateFixOutputButton);
     connect(ui->buttonClear, &QPushButton::clicked, this, &ScriptOutputWidget::clear);
 }
-
 
 void ScriptOutputWidget::updateFixOutputButton()
 {

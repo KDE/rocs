@@ -43,7 +43,7 @@ public:
     explicit ScriptApiWidget(QWidget* parent);
     void showHtmlOutline(bool logHistory);
 
-public slots:
+public Q_SLOTS:
     void showTreeOutline();
     void showHtmlOutline();
     void showDetails(const QModelIndex &index);

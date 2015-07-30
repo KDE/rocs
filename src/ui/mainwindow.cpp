@@ -88,8 +88,7 @@ MainWindow::MainWindow()
     setupToolsPluginsAction();
 
     // setup kernel
-    connect(m_kernel, &Kernel::message,
-        m_outputWidget, &ScriptOutputWidget::processMessage);
+    connect(m_kernel, &Kernel::message, m_outputWidget, &ScriptOutputWidget::processMessage);
 
     // TODO: use welcome widget instead of creating default empty project
     createProject();
@@ -191,10 +190,8 @@ QWidget* MainWindow::setupScriptPanel()
     actionCollection()->addAction("_runScript", m_runScript);
     actionCollection()->addAction("_stopScript", m_stopScript);
 
-    connect(m_runScript, &QAction::triggered,
-        this, &MainWindow::executeScript);
-    connect(m_stopScript, &QAction::triggered,
-        this, &MainWindow::stopScript);
+    connect(m_runScript, &QAction::triggered, this, &MainWindow::executeScript);
+    connect(m_stopScript, &QAction::triggered, this, &MainWindow::stopScript);
 
     m_hScriptSplitter->addWidget(m_codeEditorWidget);
     m_hScriptSplitter->addWidget(m_outputWidget);
@@ -221,8 +218,7 @@ QWidget* MainWindow::setupSidePanel()
     // add widgets to dock
     // document property widgets
     DocumentTypesWidget *documentTypesWidget = new DocumentTypesWidget(panel);
-    connect(this, &MainWindow::graphDocumentChanged,
-        documentTypesWidget, &DocumentTypesWidget::setDocument);
+    connect(this, &MainWindow::graphDocumentChanged, documentTypesWidget, &DocumentTypesWidget::setDocument);
     sideDock->addDock(documentTypesWidget, i18n("Element Types"), QIcon::fromTheme("document-properties"));
     if (m_currentProject && m_currentProject->activeGraphDocument()) {
         documentTypesWidget->setDocument(m_currentProject->activeGraphDocument());

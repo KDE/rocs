@@ -42,7 +42,7 @@ public:
         NameRole = Qt::UserRole + 1,      //!< unique identifier of edge
     };
 
-    explicit EdgeTypePropertyModel(QObject *parent = 0);
+    explicit EdgeTypePropertyModel(QObject *parent = nullptr);
     virtual ~EdgeTypePropertyModel();
     /**
      * Reimplemented from QAbstractListModel::roleNames()

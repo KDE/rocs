@@ -60,10 +60,10 @@ EdgeProperties::EdgeProperties(QWidget* parent)
     buttons->addButton(okButton, QDialogButtonBox::AcceptRole);
     buttons->addButton(cancelButton, QDialogButtonBox::RejectRole);
     mainLayout->addWidget(buttons);
-    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(okButton, &QPushButton::clicked, this, &EdgeProperties::accept);
+    connect(cancelButton, &QPushButton::clicked, this, &EdgeProperties::reject);
 
-    connect(this, SIGNAL(accepted()), SLOT(apply()));
+    connect(this, &QDialog::accepted, this, &EdgeProperties::apply);
 
     setAttribute(Qt::WA_DeleteOnClose);
 }

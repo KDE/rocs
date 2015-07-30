@@ -73,14 +73,14 @@ AssignValuesWidget::AssignValuesWidget(GraphDocumentPtr document, QWidget *paren
         ui->edgeType->addItem(type->name());
     }
 
-    connect(ui->buttons, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(ui->buttons, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(ui->buttons, &QDialogButtonBox::accepted, this, &AssignValuesWidget::accept);
+    connect(ui->buttons, &QDialogButtonBox::rejected, this, &AssignValuesWidget::reject);
 
     // set selection combos only enabled if they are used for assignment
     ui->nodeType->setEnabled(ui->applyToNodes->isChecked());
     ui->edgeType->setEnabled(ui->applyToEdges->isChecked());
-    connect(ui->applyToNodes, SIGNAL(toggled(bool)), ui->nodeType, SLOT(setEnabled(bool)));
-    connect(ui->applyToEdges, SIGNAL(toggled(bool)), ui->edgeType, SLOT(setEnabled(bool)));
+    connect(ui->applyToNodes, &QRadioButton::toggled, ui->nodeType, &QComboBox::setEnabled);
+    connect(ui->applyToEdges, &QRadioButton::toggled, ui->edgeType, &QComboBox::setEnabled);
 
     // set all available properties as possible completes
     KCompletion *complete = ui->propertyName->completionObject();
@@ -92,7 +92,7 @@ AssignValuesWidget::AssignValuesWidget(GraphDocumentPtr document, QWidget *paren
     }
     ui->propertyName->setContextMenuPolicy(Qt::DefaultContextMenu);
     ui->propertyName->setPlaceholderText(i18n("Enter Property Name"));
-    connect(ui->propertyName, SIGNAL(textChanged(QString)), this, SLOT(updateApplyButtonStates()));
+    connect(ui->propertyName, &QLineEdit::textChanged, this, &AssignValuesWidget::updateApplyButtonStates);
 
     // set random seeds
     qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
@@ -118,18 +118,18 @@ AssignValuesWidget::AssignValuesWidget(GraphDocumentPtr document, QWidget *paren
     m_applyButton = new QPushButton(this);
     KGuiItem::assign(m_applyButton, KStandardGuiItem::apply());
     buttons->addButton(m_applyButton, QDialogButtonBox::ApplyRole);
-    connect(m_applyButton, SIGNAL(clicked()), this, SLOT(assignValues()));
+    connect(m_applyButton, &QPushButton::clicked, this, &AssignValuesWidget::assignValues);
 
     QPushButton *cancelButton = new QPushButton(this);
     KGuiItem::assign(cancelButton, KStandardGuiItem::cancel());
     buttons->addButton(cancelButton, QDialogButtonBox::RejectRole);
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
 
     m_okButton = new QPushButton(this);
     KGuiItem::assign(m_okButton, KStandardGuiItem::ok());
     m_okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     buttons->addButton(m_okButton, QDialogButtonBox::AcceptRole);
-    connect(m_okButton, SIGNAL(clicked()), this, SLOT(assignValues()));
+    connect(m_okButton, &QPushButton::clicked, this, &AssignValuesWidget::assignValues);
 
     mainLayout->addWidget(buttons);
     updateApplyButtonStates();

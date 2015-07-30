@@ -64,8 +64,7 @@ QScriptValue KernelPrivate::registerGlobalObject(QObject *qobject, const QString
 Kernel::Kernel()
     : d(new KernelPrivate)
 {
-    connect(&d->m_consoleModule, SIGNAL(message(QString, GraphTheory::Kernel::MessageType)),
-        this, SLOT(processMessage(QString, GraphTheory::Kernel::MessageType)));
+    connect(&d->m_consoleModule, &ConsoleModule::message, this, &Kernel::processMessage);
 }
 
 Kernel::~Kernel()
@@ -114,8 +113,7 @@ QScriptValue Kernel::execute(GraphDocumentPtr document, const QString &script)
         d->m_engine->popContext();
     }
     // end processing messages
-    disconnect(&documentWrapper, &DocumentWrapper::message,
-        this, &Kernel::processMessage);
+    disconnect(&documentWrapper, &DocumentWrapper::message, this, &Kernel::processMessage);
 
     emit executionFinished();
     d->m_engine->globalObject().setProperty("Document", QScriptValue());

@@ -54,7 +54,7 @@ NodeModel::NodeModel(QObject *parent)
     : QAbstractListModel(parent)
     , d(new NodeModelPrivate)
 {
-    connect(d->m_signalMapper, SIGNAL(mapped(int)), SLOT(emitNodeChanged(int)));
+    connect(d->m_signalMapper, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mapped), this, &NodeModel::emitNodeChanged);
 }
 
 NodeModel::~NodeModel()
@@ -83,10 +83,10 @@ void NodeModel::setDocument(GraphDocumentPtr document)
     }
     d->m_document = document;
     if (d->m_document) {
-        connect(d->m_document.data(), SIGNAL(nodeAboutToBeAdded(NodePtr,int)), SLOT(onNodeAboutToBeAdded(NodePtr,int)));
-        connect(d->m_document.data(), SIGNAL(nodeAdded()), SLOT(onNodeAdded()));
-        connect(d->m_document.data(), SIGNAL(nodesAboutToBeRemoved(int,int)), SLOT(onNodesAboutToBeRemoved(int,int)));
-        connect(d->m_document.data(), SIGNAL(nodesRemoved()), SLOT(onNodesRemoved()));
+        connect(d->m_document.data(), &GraphDocument::nodeAboutToBeAdded, this, &NodeModel::onNodeAboutToBeAdded);
+        connect(d->m_document.data(), &GraphDocument::nodeAdded, this, &NodeModel::onNodeAdded);
+        connect(d->m_document.data(), &GraphDocument::nodesAboutToBeRemoved, this, &NodeModel::onNodesAboutToBeRemoved);
+        connect(d->m_document.data(), &GraphDocument::nodesRemoved, this, &NodeModel::onNodesRemoved);
     }
     endResetModel();
 }

@@ -44,9 +44,9 @@ TransformEdgesWidget::TransformEdgesWidget(GraphDocumentPtr document, QWidget *p
     ui->setupUi(widget);
     mainLayout->addWidget(widget);
 
-    connect(ui->buttons, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(ui->buttons, SIGNAL(rejected()), this, SLOT(reject()));
-    connect(this, SIGNAL(accepted()), this, SLOT(transform()));
+    connect(ui->buttons, &QDialogButtonBox::accepted, this, &TransformEdgesWidget::accept);
+    connect(ui->buttons, &QDialogButtonBox::rejected, this, &TransformEdgesWidget::reject);
+    connect(this, &QDialog::accepted, this, &TransformEdgesWidget::transform);
 }
 
 TransformEdgesWidget::~TransformEdgesWidget()
