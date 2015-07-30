@@ -34,7 +34,7 @@ using namespace GraphTheory;
 class GraphTheory::KernelPrivate {
 public:
     KernelPrivate()
-        : m_engine(0)
+        : m_engine(nullptr)
     {
     }
 
