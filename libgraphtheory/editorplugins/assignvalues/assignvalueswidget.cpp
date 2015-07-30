@@ -68,7 +68,7 @@ AssignValuesWidget::AssignValuesWidget(GraphDocumentPtr document, QWidget *paren
     foreach (NodeTypePtr type, m_document->nodeTypes()) {
         ui->nodeType->addItem(type->name());
     }
-    ui->edgeType->addItem(i18n("All Connection Types"), -1);
+    ui->edgeType->addItem(i18n("All Edge Types"), -1);
     foreach (EdgeTypePtr type, document->edgeTypes()) {
         ui->edgeType->addItem(type->name());
     }
