@@ -1,5 +1,5 @@
 /*
- *  Copyright 2014  Andreas Cord-Landwehr <cordlandwehr@kde.org>
+ *  Copyright 2014-2015  Andreas Cord-Landwehr <cordlandwehr@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -58,19 +58,26 @@ const QStringList Rocs2FileFormat::extensions() const
 
 void Rocs2FileFormat::readFile()
 {
-    GraphDocumentPtr document = GraphDocument::create();
-
-    // cleanup default
-    document->remove(document->nodeTypes().first());
-    document->remove(document->edgeTypes().first());
-
     QFile fileHandle(file().toLocalFile());
     if (!fileHandle.open(QFile::ReadOnly)) {
         setError(CouldNotOpenFile, i18n("Could not open file \"%1\" in read mode: %2", file().toLocalFile(), fileHandle.errorString()));
         return;
     }
+    const QByteArray fileContent = fileHandle.readAll();
 
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileHandle.readAll());
+    // gracefully handle empty documents: return a new one with default types
+    if (fileContent.isEmpty()) {
+        setGraphDocument(GraphDocument::create());
+        setError(None);
+        return;
+    }
+
+    // cleanup default
+    GraphDocumentPtr document = GraphDocument::create();
+    document->remove(document->nodeTypes().first());
+    document->remove(document->edgeTypes().first());
+
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent);
     QJsonObject jsonObj = jsonDoc.object();
 
     // check format
