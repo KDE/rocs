@@ -20,6 +20,7 @@
 
 #include "fileformatmanager.h"
 #include "fileformatinterface.h"
+#include "logging_p.h"
 
 #include <KPluginLoader>
 #include <KPluginMetaData>
@@ -29,11 +30,8 @@
 #include <QDirIterator>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QLoggingCategory>
 
 using namespace GraphTheory;
-
-Q_LOGGING_CATEGORY(ROCS_FILEFORMAT, "org.kde.rocs.graphtheory.fileformat", QtWarningMsg)
 
 class GraphTheory::FileFormatManagerPrivate
 {
@@ -41,7 +39,7 @@ public:
     FileFormatManagerPrivate()
         : defaultGraphFilePlugin(nullptr)
     {
-        QLoggingCategory::setFilterRules(QStringLiteral("rocs.graphtheory.fileformat.debug=false"));
+
     }
 
     ~FileFormatManagerPrivate()
