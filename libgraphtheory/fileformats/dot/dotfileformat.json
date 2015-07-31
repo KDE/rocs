@@ -3,9 +3,13 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Read and write Graphviz graph documents (DOT)", 
+        "Description[ca]": "Llegeix i escriu documents gràfics del Graphviz (DOT).", 
+        "Description[x-test]": "xxRead and write Graphviz graph documents (DOT)xx", 
         "Id": "rocs_dotfileformat", 
         "License": "GPL", 
         "Name": "DOT Graph File Format", 
+        "Name[ca]": "Format de fitxer de grafs DOT", 
+        "Name[x-test]": "xxDOT Graph File Formatxx", 
         "ServiceTypes": [
             "rocs/graphtheory/fileformat"
         ], 

@@ -3,9 +3,14 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Transform graph edges by a transformation rule.", 
+        "Description[ca]": "Transforma les arestes del graf seguint una regla de transformació.", 
+        "Description[x-test]": "xxTransform graph edges by a transformation rule.xx", 
         "Id": "rocs_transformedges", 
         "License": "GPL", 
         "Name": "Transform Edges", 
+        "Name[ca]": "Transforma les arestes", 
+        "Name[nb]": "Omform kanter", 
+        "Name[x-test]": "xxTransform Edgesxx", 
         "ServiceTypes": [
             "rocs/editorplugins"
         ], 

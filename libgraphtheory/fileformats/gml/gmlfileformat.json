@@ -3,9 +3,13 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Read and write Graph Markup Language documents (GML)", 
+        "Description[ca]": "Llegeix i escriu fitxers escrits en Llenguatge de Marcatge de Gràfics (GML)", 
+        "Description[x-test]": "xxRead and write Graph Markup Language documents (GML)xx", 
         "Id": "rocs_gmlfileformat", 
         "License": "GPL", 
         "Name": "GML File Format", 
+        "Name[ca]": "Format de fitxer GML", 
+        "Name[x-test]": "xxGML File Formatxx", 
         "ServiceTypes": [
             "rocs/graphtheory/fileformat"
         ], 

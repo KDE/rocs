@@ -3,9 +3,13 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Assign values to graph edges and nodes.", 
+        "Description[ca]": "Assigna valors a les arestes i nodes del graf.", 
+        "Description[x-test]": "xxAssign values to graph edges and nodes.xx", 
         "Id": "rocs_assignvaluesplugin", 
         "License": "GPL", 
         "Name": "Assign Values Plugin", 
+        "Name[ca]": "Connector per assignar valors", 
+        "Name[x-test]": "xxAssign Values Pluginxx", 
         "ServiceTypes": [
             "rocs/editorplugins"
         ], 

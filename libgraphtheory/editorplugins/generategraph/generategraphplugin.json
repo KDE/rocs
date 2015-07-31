@@ -3,9 +3,14 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "This generates a new graph by a pattern.", 
+        "Description[ca]": "Això genera un nou graf segons un patró.", 
+        "Description[x-test]": "xxThis generates a new graph by a pattern.xx", 
         "Id": "rocs_generategraphplugin", 
         "License": "GPL", 
         "Name": "Generate Graph", 
+        "Name[ca]": "Genera el graf", 
+        "Name[nb]": "Lag graf", 
+        "Name[x-test]": "xxGenerate Graphxx", 
         "ServiceTypes": [
             "rocs/editorplugins"
         ], 

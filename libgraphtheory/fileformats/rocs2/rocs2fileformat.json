@@ -3,9 +3,13 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Rocs Graph File Format", 
+        "Description[ca]": "Format de fitxers de graf del Rocs", 
+        "Description[x-test]": "xxRocs Graph File Formatxx", 
         "Id": "rocs_rocs2fileformat", 
         "License": "GPL", 
         "Name": "Rocs File Format", 
+        "Name[ca]": "Format de fitxer del Rocs", 
+        "Name[x-test]": "xxRocs File Formatxx", 
         "ServiceTypes": [
             "rocs/graphtheory/fileformat"
         ], 

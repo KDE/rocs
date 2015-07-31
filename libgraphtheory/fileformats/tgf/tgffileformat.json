@@ -3,9 +3,13 @@
     "KPlugin": {
         "Category": "Plugins", 
         "Description": "Read and write graph documents in Trivial Graph Format (TGF)", 
+        "Description[ca]": "Llegeix i escriu fitxers escrits en Format Gràfic Trivial (TGF)", 
+        "Description[x-test]": "xxRead and write graph documents in Trivial Graph Format (TGF)xx", 
         "Id": "rocs_tgffileformat", 
         "License": "GPL", 
         "Name": "TGF Graph File Format", 
+        "Name[ca]": "Format de fitxer de grafs TGF", 
+        "Name[x-test]": "xxTGF Graph File Formatxx", 
         "ServiceTypes": [
             "rocs/graphtheory/fileformat"
         ], 
