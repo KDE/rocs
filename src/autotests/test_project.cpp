@@ -60,7 +60,7 @@ void TestProject::projectOperations()
 
     // test import of graph
     QTemporaryFile graphFile;
-    graphFile.setFileTemplate("XXXXXXX.graph");
+    graphFile.setFileTemplate("XXXXXXX.graph2");
     graphFile.open();
     GraphTheory::GraphDocumentPtr graphDoc = project.importGraphDocument(QUrl::fromLocalFile(graphFile.fileName()));
     QCOMPARE(project.graphDocuments().length(), 1);
