@@ -367,7 +367,7 @@ void MainWindow::createProject()
     }
 
     Project *project = new Project(m_graphEditor);
-    project->addCodeDocument(KTextEditor::Editor::instance()->createDocument(0));
+    project->addCodeDocument(KTextEditor::Editor::instance()->createDocument(nullptr));
     project->addGraphDocument(m_graphEditor->createDocument());
     project->setModified(false);
 
@@ -489,7 +489,7 @@ void MainWindow::createCodeDocument()
         qDebug() << "Filename is empty and no script file was created.";
     } else {
         QString fileName = uniqueFilename(basePrefix, "js"); //TODO this does nothing
-        KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(0);
+        KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(nullptr);
         m_currentProject->addCodeDocument(document);
     }
 }

@@ -103,7 +103,7 @@ bool ProjectPrivate::loadProject(const QUrl &url)
     for (int index = 0; index < codeDocs.count(); ++index) {
         QJsonObject docInfo = codeDocs.at(index).toObject();
         QString filename = docInfo["file"].toString();
-        KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(0);
+        KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(nullptr);
         document->openUrl(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + filename));
         m_codeDocuments.append(document);
         m_documentNames.insert(document, codeDocNames.at(index).toString());
@@ -121,7 +121,7 @@ bool ProjectPrivate::loadProject(const QUrl &url)
             m_graphDocuments.append(document);
         }
     }
-    m_journal = KTextEditor::Editor::instance()->createDocument(0);
+    m_journal = KTextEditor::Editor::instance()->createDocument(nullptr);
     m_journal->openUrl(QUrl::fromLocalFile(m_workingDirectory.path() + QChar('/') + metaInfo["journal.txt"].toString()));
 
     //TODO save & load open document index
@@ -169,7 +169,7 @@ Project::Project(GraphTheory::Editor *graphEditor)
     : d(new ProjectPrivate)
 {
     d->m_graphEditor = graphEditor;
-    d->m_journal = KTextEditor::Editor::instance()->createDocument(0);
+    d->m_journal = KTextEditor::Editor::instance()->createDocument(nullptr);
     d->m_journal->saveAs(QUrl::fromLocalFile(workingDir() + QChar('/') + QString("journal.txt")));
 }
 
@@ -244,7 +244,7 @@ bool Project::addCodeDocument(KTextEditor::Document *document)
 
 KTextEditor::Document * Project::importCodeDocument(const QUrl &url)
 {
-    KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(0);
+    KTextEditor::Document *document = KTextEditor::Editor::instance()->createDocument(nullptr);
     document->openUrl(url);
     addCodeDocument(document);
     return document;
