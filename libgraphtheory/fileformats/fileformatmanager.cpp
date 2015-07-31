@@ -130,6 +130,10 @@ void FileFormatManager::loadBackends()
 FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
 {
     QString suffix = ext.section('.', -1); // get suffix
+    if (suffix.isEmpty()) {
+        qWarning() << "File does not contain extension, falling back to default file format";
+        return defaultBackend();
+    }
     foreach(FileFormatInterface * p,  d->backends) {
         if (p->extensions().join(";").contains(suffix, Qt::CaseInsensitive)) {
             return p;
