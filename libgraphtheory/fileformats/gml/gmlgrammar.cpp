@@ -37,9 +37,9 @@ void throw_exception(std::exception const &e)
 namespace GmlParser
 {
 
-GmlGrammarHelper *phelper = 0;
-std::string lastKey = "";
-QObject * lastInserted = 0;
+GmlGrammarHelper *phelper = nullptr;
+std::string lastKey = std::string();
+QObject * lastInserted = nullptr;
 
 void beginList()
 {
