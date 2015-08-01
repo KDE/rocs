@@ -21,11 +21,11 @@
 #include "topology.h"
 #include "graphdocument.h"
 #include "edge.h"
+#include "logging_p.h"
 
 #include <QList>
 #include <QPair>
 #include <QVector>
-#include <QDebug>
 
 #include <boost/graph/fruchterman_reingold.hpp>
 #include <boost/graph/circle_layout.hpp>
@@ -52,7 +52,7 @@ typedef QPair<int, int> BoostEdge;
 // handle boost exceptions
 namespace boost {
     void throw_exception(std::exception const &e) {
-        qCritical() << "Exception:" << e.what();;
+        qCCritical(GRAPHTHEORY_GENERAL) << "Exception:" << e.what();;
     }
 }
 
@@ -88,7 +88,7 @@ void Topology::applyMinCutTreeAlignment(NodeList nodes)
     // do not perform algorithm if graph is very dense:
     // this prevents very long algorithm computations and possible threading issues
     if (xList.last() - xList.first() < 10 && yList.last() - yList.first() < 10 ) {
-        qDebug() << "Aborting min cut alignment: nodes are already close to each other.";
+        qCDebug(GRAPHTHEORY_GENERAL) << "Aborting min cut alignment: nodes are already close to each other.";
         return;
     }
 
@@ -209,7 +209,7 @@ void Topology::applyCircleAlignment(NodeList nodes, qreal radius)
 void Topology::directedGraphDefaultTopology(GraphDocumentPtr document)
 {
     //TODO: port to graphviz layout functions
-    qDebug() << "Temporary implementation, should be replaced soon.";
+    qCDebug(GRAPHTHEORY_GENERAL) << "Temporary implementation, should be replaced soon.";
     applyCircleAlignment(document->nodes(), 300);
     applyMinCutTreeAlignment(document->nodes());
 }
@@ -218,7 +218,7 @@ void Topology::directedGraphDefaultTopology(GraphDocumentPtr document)
 void Topology::undirectedGraphDefaultTopology(GraphDocumentPtr document)
 {
     //TODO: port to graphviz layout functions
-    qDebug() << "Temporary implementation, should be replaced soon.";
+    qCDebug(GRAPHTHEORY_GENERAL) << "Temporary implementation, should be replaced soon.";
     applyCircleAlignment(document->nodes(), 300);
     applyMinCutTreeAlignment(document->nodes());
 }

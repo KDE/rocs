@@ -22,6 +22,7 @@
 #include "typenames.h"
 #include "graphdocument.h"
 #include "modifiers/valueassign.h"
+#include "logging_p.h"
 
 #include <limits.h>
 #include <KLocalizedString>
@@ -30,7 +31,6 @@
 #include <QPair>
 #include <QDialogButtonBox>
 #include <QDateTime>
-#include <QDebug>
 
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int.hpp>
@@ -59,7 +59,7 @@ AssignValuesWidget::AssignValuesWidget(GraphDocumentPtr document, QWidget *paren
     ui->buttonShowAdvanced->setIcon(QIcon::fromTheme("rocsadvancedsetup"));
 
     if (!m_document) {
-        qCritical() << "No document given, aborting.";
+        qCCritical(GRAPHTHEORY_GENERAL) << "No document given, aborting.";
         return;
     }
 

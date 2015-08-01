@@ -23,8 +23,8 @@
 #include "typenames.h"
 #include "graphdocument.h"
 #include "modifiers/valueassign.h"
+#include "logging_p.h"
 #include <KPluginFactory>
-#include <QDebug>
 #include <QDialog>
 
 using namespace GraphTheory;
@@ -63,7 +63,7 @@ GenerateGraphPlugin::~GenerateGraphPlugin()
 void GenerateGraphPlugin::showDialog(GraphDocumentPtr document)
 {
     if (!document) {
-        qCritical() << "No valid graph document given, aborting.";
+        qCCritical(GRAPHTHEORY_GENERAL) << "No valid graph document given, aborting.";
     }
     QPointer<GenerateGraphWidget> dialog = new GenerateGraphWidget(document);
     dialog->exec();

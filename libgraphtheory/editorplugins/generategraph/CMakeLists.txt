@@ -27,6 +27,7 @@ kde_enable_exceptions()
 set(generategraph_SRCS
     generategraphplugin.cpp
     generategraphwidget.cpp
+    ../../logging.cpp
 )
 
 #boost requires exceptions

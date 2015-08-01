@@ -24,9 +24,9 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
+#include "logging_p.h"
 #include <KPluginFactory>
 #include <QDialog>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -38,7 +38,7 @@ class GraphTheory::TransformEdgesPluginPrivate
 {
 public:
     TransformEdgesPluginPrivate()
-        : m_dialog(0)
+        : m_dialog(nullptr)
     {
     }
 
@@ -64,7 +64,7 @@ TransformEdgesPlugin::~TransformEdgesPlugin()
 void TransformEdgesPlugin::showDialog(GraphDocumentPtr document)
 {
     if (!document) {
-        qCritical() << "No valid graph document given, aborting.";
+        qCCritical(GRAPHTHEORY_GENERAL) << "No valid graph document given, aborting.";
     }
     QPointer<TransformEdgesWidget> dialog = new TransformEdgesWidget(document);
     dialog->exec();

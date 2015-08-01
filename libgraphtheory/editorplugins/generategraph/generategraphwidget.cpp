@@ -24,6 +24,7 @@
 #include "graphdocument.h"
 #include "edge.h"
 #include "modifiers/topology.h"
+#include "logging_p.h"
 
 #include <KLocalizedString>
 #include <KComboBox>
@@ -32,7 +33,6 @@
 #include <QList>
 #include <QMap>
 #include <QPair>
-#include <QDebug>
 #include <QButtonGroup>
 
 #include <cmath>
@@ -67,7 +67,7 @@ typedef boost::iterator_property_map < PositionVec::iterator,
 // handle boost exceptions
 namespace boost {
     void throw_exception(std::exception const &e) {
-        qCritical() << "Exception:" << e.what();;
+        qCCritical(GRAPHTHEORY_GENERAL) << "Exception:" << e.what();;
     }
 }
 
@@ -163,7 +163,7 @@ void GenerateGraphWidget::setGraphIdentifier(const QString &identifier)
 void GenerateGraphWidget::setNodeType(int type)
 {
     if (type >= m_document->nodeTypes().length()) {
-        qWarning() << "Node type " << type << " does not exist: aborting";
+        qCWarning(GRAPHTHEORY_GENERAL) << "Node type " << type << " does not exist: aborting";
         return;
     }
     m_nodeType = m_document->nodeTypes().at(type);
@@ -172,7 +172,7 @@ void GenerateGraphWidget::setNodeType(int type)
 void GenerateGraphWidget::setEdgeType(int type)
 {
     if (type >= m_document->edgeTypes().length()) {
-        qWarning() << "Edge type " << type << " does not exist: aborting";
+        qCWarning(GRAPHTHEORY_GENERAL) << "Edge type " << type << " does not exist: aborting";
         return;
     }
     m_edgeType = m_document->edgeTypes().at(type);

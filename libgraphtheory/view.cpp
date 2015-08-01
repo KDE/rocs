@@ -32,6 +32,7 @@
 #include "qtquickitems/edgeitem.h"
 #include "dialogs/nodeproperties.h"
 #include "dialogs/edgeproperties.h"
+#include "logging_p.h"
 
 #include <KDeclarative/KDeclarative>
 
@@ -42,7 +43,6 @@
 #include <QQuickWidget>
 #include <QPointer>
 #include <QStandardPaths>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -102,7 +102,7 @@ View::View(QWidget *parent)
     QQmlComponent *component = new QQmlComponent(engine());
     component->loadUrl(path);
     if (!component->isReady() ) {
-        qWarning() << ("%s", qPrintable(component->errorString()));
+        qCWarning(GRAPHTHEORY_GENERAL) << ("%s", qPrintable(component->errorString()));
         return;
     }
 

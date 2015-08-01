@@ -20,8 +20,8 @@
 
 #include "edge.h"
 #include "edgetypestyle.h"
+#include "logging_p.h"
 #include <QVariant>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -160,10 +160,10 @@ QStringList Edge::dynamicProperties() const
 void Edge::setDynamicProperty(const QString &property, const QVariant &value)
 {
     if (!d->m_type) {
-        qWarning() << "No type registered, aborting to set property.";
+        qCWarning(GRAPHTHEORY_GENERAL) << "No type registered, aborting to set property.";
     }
     if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
-        qWarning() << "Dynamic property not registered at type, aborting to set property.";
+        qCWarning(GRAPHTHEORY_GENERAL) << "Dynamic property not registered at type, aborting to set property.";
     }
     setProperty(("_graph_" + property).toLatin1(), value);
     emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));

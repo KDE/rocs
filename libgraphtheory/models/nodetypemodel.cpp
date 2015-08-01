@@ -21,10 +21,10 @@
 #include "nodetypemodel.h"
 #include "graphdocument.h"
 #include "nodetypestyle.h"
+#include "logging_p.h"
 
 #include <KLocalizedString>
 #include <QSignalMapper>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -141,7 +141,7 @@ QVariant NodeTypeModel::data(const QModelIndex &index, int role) const
 bool NodeTypeModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (!index.isValid()) {
-        qWarning() << "Index not valid, aborting";
+        qCWarning(GRAPHTHEORY_GENERAL) << "Index not valid, aborting";
         return false;
     }
     Q_ASSERT(d->m_document);

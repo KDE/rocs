@@ -21,10 +21,10 @@
 #include "edgetypemodel.h"
 #include "graphdocument.h"
 #include "edgetypestyle.h"
+#include "logging_p.h"
 
 #include <KLocalizedString>
 #include <QSignalMapper>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -138,7 +138,7 @@ QVariant EdgeTypeModel::data(const QModelIndex &index, int role) const
 bool EdgeTypeModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (!index.isValid()) {
-        qWarning() << "Index not valid, aborting";
+        qCWarning(GRAPHTHEORY_GENERAL) << "Index not valid, aborting";
         return false;
     }
     Q_ASSERT(d->m_document);

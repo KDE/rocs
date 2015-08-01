@@ -23,10 +23,10 @@
 #include "nodetype.h"
 #include "edge.h"
 #include "nodetypestyle.h"
+#include "logging_p.h"
 
 #include <QPointF>
 #include <QColor>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -306,10 +306,10 @@ QStringList Node::dynamicProperties() const
 void Node::setDynamicProperty(const QString &property, const QVariant &value)
 {
     if (!d->m_type) {
-        qWarning() << "No type registered, aborting to set property.";
+        qCWarning(GRAPHTHEORY_GENERAL) << "No type registered, aborting to set property.";
     }
     if (value.isValid() && !d->m_type->dynamicProperties().contains(property)) {
-        qWarning() << "Dynamic property not registered at type, aborting to set property.";
+        qCWarning(GRAPHTHEORY_GENERAL) << "Dynamic property not registered at type, aborting to set property.";
     }
     setProperty(("_graph_" + property).toLatin1(), value);
     emit dynamicPropertyChanged(d->m_type->dynamicProperties().indexOf(property));

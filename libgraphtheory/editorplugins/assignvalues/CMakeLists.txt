@@ -24,6 +24,7 @@
 set(assignvalues_SRCS
     assignvaluesplugin.cpp
     assignvalueswidget.cpp
+    ../../logging.cpp
 )
 ki18n_wrap_ui(assignvalues_SRCS assignvalueswidget.ui)
 add_library(assignvaluesplugin

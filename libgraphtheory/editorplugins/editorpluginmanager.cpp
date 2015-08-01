@@ -20,6 +20,7 @@
 
 #include "editorpluginmanager.h"
 #include "editorplugininterface.h"
+#include "logging_p.h"
 
 #include <KPluginMetaData>
 #include <KPluginLoader>
@@ -30,7 +31,6 @@
 #include <QDirIterator>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -88,7 +88,7 @@ void EditorPluginManager::loadPlugins()
             EditorPluginInterface *plugin = factory->create<EditorPluginInterface>(this);
             plugin->setDisplayName(metadata.name());
             d->m_plugins.append(plugin);
-            qDebug() << "Loaded plugin:" << metadata.name();
+            qCDebug(GRAPHTHEORY_GENERAL) << "Loaded plugin:" << metadata.name();
         }
     }
 }

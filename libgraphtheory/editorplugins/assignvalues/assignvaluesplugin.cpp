@@ -24,11 +24,11 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
+#include "logging_p.h"
 #include <KPluginFactory>
 #include <QString>
 #include <QStringList>
 #include <QDialog>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -40,7 +40,7 @@ class GraphTheory::AssignValuesPluginPrivate
 {
 public:
     AssignValuesPluginPrivate()
-        : m_dialog(0)
+        : m_dialog(nullptr)
     {
     }
 
@@ -66,7 +66,7 @@ AssignValuesPlugin::~AssignValuesPlugin()
 void AssignValuesPlugin::showDialog(GraphDocumentPtr document)
 {
     if (!document) {
-        qCritical() << "No valid graph document given, aborting.";
+        qCCritical(GRAPHTHEORY_GENERAL) << "No valid graph document given, aborting.";
     }
     QPointer<AssignValuesWidget> dialog = new AssignValuesWidget(document);
     dialog->exec();

@@ -24,10 +24,10 @@
 #include "nodetype.h"
 #include "edge.h"
 #include "fileformats/fileformatmanager.h"
+#include "logging_p.h"
 #include <KLocalizedString>
 #include <QSurfaceFormat>
 #include <QString>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -333,7 +333,7 @@ void GraphDocument::setDocumentName(const QString& name)
 //BEGIN file stuff
 bool GraphDocument::documentReload()
 {
-    qCritical() << "graph reloading not implemented!";
+    qCCritical(GRAPHTHEORY_GENERAL) << "graph reloading not implemented!";
     //FIXME reload document
     setModified(false);
     return true;
@@ -347,7 +347,7 @@ bool GraphDocument::documentSave()
 bool GraphDocument::documentSaveAs(const QUrl &documentUrl)
 {
     if (!documentUrl.isValid()) {
-        qCritical() << "No valid document url specified, abort saving.";
+        qCCritical(GRAPHTHEORY_GENERAL) << "No valid document url specified, abort saving.";
         return false;
     }
 
@@ -356,7 +356,7 @@ bool GraphDocument::documentSaveAs(const QUrl &documentUrl)
     serializer->setFile(documentUrl);
     serializer->writeFile(d->q);
     if (serializer->hasError()) {
-        qCritical() << "Graph file serializer reported error:" << serializer->errorString();
+        qCCritical(GRAPHTHEORY_GENERAL) << "Graph file serializer reported error:" << serializer->errorString();
         return false;
     }
 

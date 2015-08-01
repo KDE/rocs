@@ -24,6 +24,7 @@
 set(transformedges_SRCS
     transformedgesplugin.cpp
     transformedgeswidget.cpp
+    ../../logging.cpp
 )
 ki18n_wrap_ui(transformedges_SRCS transformedgeswidget.ui)
 add_library(transformedgesplugin
