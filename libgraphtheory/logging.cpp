@@ -21,3 +21,4 @@
 #include "logging_p.h"
 
 Q_LOGGING_CATEGORY(GRAPHTHEORY_FILEFORMAT, "org.kde.rocs.graphtheory.fileformat", QtWarningMsg)
+Q_LOGGING_CATEGORY(GRAPHTHEORY_KERNEL, "org.kde.rocs.graphtheory.kernel", QtWarningMsg)

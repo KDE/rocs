@@ -23,11 +23,11 @@
 #include "documentwrapper.h"
 #include "nodewrapper.h"
 #include "edgewrapper.h"
+#include "logging_p.h"
 #include "kernel/modules/console/consolemodule.h"
 
 #include <KLocalizedString>
 #include <QScriptEngine>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -51,7 +51,7 @@ public:
 QScriptValue KernelPrivate::registerGlobalObject(QObject *qobject, const QString &name)
 {
     if (!m_engine) {
-        qCritical() << "No engine set, aborting global object creation.";
+        qCCritical(GRAPHTHEORY_KERNEL) << "No engine set, aborting global object creation.";
         return 0;
     }
     QScriptValue globalObject = m_engine->newQObject(qobject);
