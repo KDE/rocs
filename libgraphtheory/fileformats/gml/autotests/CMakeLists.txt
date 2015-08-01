@@ -33,6 +33,7 @@ set(testgmlfileformat_SRCS
     ../gmlgrammar.cpp
     ../gmlgrammarhelper.cpp
     ../gmlfileformat.cpp
+    ../../../logging.cpp
 )
 
 add_executable(TestGmlFileFormat ${testgmlfileformat_SRCS})

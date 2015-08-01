@@ -28,6 +28,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 set(testrocs1fileformat_SRCS
     testrocs1fileformat.cpp
     ../rocs1fileformat.cpp
+    ../../../logging.cpp
 )
 add_executable(TestRocs1FileFormat ${testrocs1fileformat_SRCS})
 add_test(TestRocs1FileFormat TestRocs1FileFormat)

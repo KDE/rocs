@@ -23,9 +23,9 @@
 #include "dotgrammar.h"
 #include "graphdocument.h"
 #include "node.h"
-#include <edge.h>
+#include "edge.h"
+#include "logging_p.h"
 
-#include <QDebug>
 #include <QFile>
 
 extern DotParser::DotGraphParsingHelper* phelper;
@@ -119,7 +119,7 @@ void DotGraphParsingHelper::applyAttributedList()
             std::vector< int > v;
             parseIntegers(unprocessedAttributes["bb"].toStdString().c_str(), v);
 //             if (v.size() >= 4) {
-//                 qDebug() << "setting width and height to " << v[2] << v[3];
+//                 qCDebug(GRAPHTHEORY_FILEFORMAT) << "setting width and height to " << v[2] << v[3];
 //             }
         }
         AttributesMap::const_iterator it, it_end;
@@ -151,7 +151,7 @@ void DotGraphParsingHelper::createNode(const QString &name)
     edgebounds.clear(); //TODO explain meaning of this
 
     if (nodeMap.contains(name)) {
-        qCritical() << "Omitting data element, identifying label is already used: "<< name;
+        qCCritical(GRAPHTHEORY_FILEFORMAT) << "Omitting data element, identifying label is already used: "<< name;
         return;
     }
     currentNode = GraphTheory::Node::create(document);
@@ -218,7 +218,7 @@ void DotGraphParsingHelper::createEdge()
         NodePtr to = nodeMap[toId];
 
         currentEdge = Edge::create(from, to);
-//         qDebug() << "Creating new edge: " << from->identifier() << " -> " << to->identifier();
+//         qCDebug(GRAPHTHEORY_FILEFORMAT) << "Creating new edge: " << from->identifier() << " -> " << to->identifier();
         setEdgeAttributes();
 
         fromId = toId;

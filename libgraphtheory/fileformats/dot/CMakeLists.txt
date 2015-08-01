@@ -25,6 +25,7 @@ set(dotformat_SRCS
     dotfileformat.cpp
     dotgrammar.cpp
     dotgrammarhelper.cpp
+    ../../logging.cpp
 )
 
 # Boost requires exceptions

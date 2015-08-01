@@ -23,7 +23,7 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
-#include <QDebug>
+#include "logging_p.h"
 #include <QFile>
 
 extern GmlParser::GmlGrammarHelper *phelper;
@@ -45,7 +45,7 @@ GmlGrammarHelper::GmlGrammarHelper():
 
 void GmlGrammarHelper::startList(const QString& key)
 {
-    qDebug() << "starting a list with key:" << key;
+    qCDebug(GRAPHTHEORY_FILEFORMAT) << "starting a list with key:" << key;
     if (currentState == begin && key.compare("graph", Qt::CaseInsensitive) == 0) {
         createGraph();
         return;
@@ -68,7 +68,7 @@ void GmlGrammarHelper::endList()
         return;
     }
     switch (currentState) {
-    case begin: qDebug() << "Ending a list without begin a item??"; break;
+    case begin: qCDebug(GRAPHTHEORY_FILEFORMAT) << "Ending a list without begin a item??"; break;
     case node: currentNode.reset();
         currentState = graph;
         break;
@@ -94,7 +94,7 @@ const QString GmlGrammarHelper::processKey(const QString& key)
 
 void GmlGrammarHelper::setAttribute(const QString& key, const QString& value)
 {
-    qDebug() << "Setting attibute " << key;
+    qCDebug(GRAPHTHEORY_FILEFORMAT) << "Setting attibute " << key;
     switch (currentState) {
     case begin: break;
     case graph:
@@ -103,7 +103,7 @@ void GmlGrammarHelper::setAttribute(const QString& key, const QString& value)
             joined.append('.').append(key);
 //             document->setDynamicProperty(joined, value);
         } else {
-            qDebug() << "seting property to graph" << key << value;
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "seting property to graph" << key << value;
 //           if (!currentGraph->setProperty(processKey(key).toAscii(),value)){
 //             document->addDynamicProperty(processKey(key), value); //is a dinamic property
 //           }
@@ -126,11 +126,11 @@ void GmlGrammarHelper::setAttribute(const QString& key, const QString& value)
             createEdge();
         } else if (currentEdge) {      //if edge was created.
 //               if(!currentEdge->setProperty(processKey(key).toAscii(),value)){
-            qDebug() << "inserting edge key: " << key;
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "inserting edge key: " << key;
             currentEdge->setDynamicProperty(processKey(key), value);
 // //               }
         } else {
-            qDebug() << "Saving edge key: " << key;
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "Saving edge key: " << key;
             edgeAttributes.insert(processKey(key), value); //store to be inserted later
         }
         break;
@@ -140,7 +140,7 @@ void GmlGrammarHelper::setAttribute(const QString& key, const QString& value)
             joined.append('.').append(key);
             currentNode->setProperty(joined.toUtf8(), value);
         } else {
-            qDebug() << "seting property to node" << key << value;
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "seting property to node" << key << value;
 //           if(!currentNode->setProperty(processKey(key).toAscii(),value)){
             currentNode->setDynamicProperty(processKey(key), value);
 //           }
@@ -160,7 +160,7 @@ void GmlGrammarHelper::createGraph()
 void GmlGrammarHelper::createNode()
 {
     if (currentState == graph) {
-        qDebug() << "Creating a node";
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "Creating a node";
         currentState = node;
         currentNode = Node::create(document);
     }
@@ -169,10 +169,10 @@ void GmlGrammarHelper::createNode()
 void GmlGrammarHelper::createEdge()
 {
     if (!edgeSource.isEmpty() && !edgeTarget.isEmpty()) {
-        qDebug() << "Creating a edge";
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "Creating a edge";
         currentState = edge;
         if (!nodeMap.contains(edgeSource) || !nodeMap.contains(edgeTarget)) {
-            qCritical() << "No edge created: end points were not created";
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "No edge created: end points were not created";
             return;
         }
         currentEdge = Edge::create(nodeMap[edgeSource], nodeMap[edgeTarget]);
@@ -184,7 +184,7 @@ void GmlGrammarHelper::createEdge()
             edgeAttributes.remove(property);
         }
     } else if (currentState == graph) {
-        qDebug() << "changing state Edge";
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "changing state Edge";
         currentState = edge;
         currentEdge.reset();
     }

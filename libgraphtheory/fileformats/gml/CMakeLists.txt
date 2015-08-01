@@ -25,6 +25,7 @@ set(gmlformat_SRCS
     gmlfileformat.cpp
     gmlgrammar.cpp
     gmlgrammarhelper.cpp
+    ../../logging.cpp
 )
 
 add_library(gmlfileformat MODULE ${gmlformat_SRCS})

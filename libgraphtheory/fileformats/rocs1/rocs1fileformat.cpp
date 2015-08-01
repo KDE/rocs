@@ -23,6 +23,7 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
+#include "logging_p.h"
 #include <KAboutData>
 #include <KLocalizedString>
 #include <KPluginFactory>
@@ -30,7 +31,6 @@
 #include <QTextStream>
 #include <QUrl>
 #include <QSaveFile>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -153,7 +153,7 @@ void Rocs1FileFormat::readFile()
                         tmpEdgeType->setDirection(EdgeType::Unidirectional);
                     }
                     else {
-                        qCritical() << "Direction unset, use default direction of this data type backend.";
+                        qCCritical(GRAPHTHEORY_FILEFORMAT) << "Direction unset, use default direction of this data type backend.";
                     }
                 } else if (dataLine.startsWith(QLatin1String("Properties :"))) {
                     QStringList properties = dataLine.section(' ', 2).split(',');
@@ -193,7 +193,7 @@ void Rocs1FileFormat::readFile()
                 tmpNode = Node::create(document);
                 tmpNode->setType(nodeTypeMap[type]);
             } else {
-                qDebug() << "Create data element of type 0, since type " << type << " was not registered.";
+                qCDebug(GRAPHTHEORY_FILEFORMAT) << "Create data element of type 0, since type " << type << " was not registered.";
                 tmpNode = Node::create(document);
             }
             if (tmpNode) {
@@ -229,17 +229,17 @@ void Rocs1FileFormat::readFile()
             }
             if (edgeTypeMap.contains(type)) {
                 if (!nodeMap.contains(nameFrom.toInt())) {
-                    qCritical() << "Node creating edge, node ID" << nameFrom.toInt() << "not registered";
+                    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Node creating edge, node ID" << nameFrom.toInt() << "not registered";
                     break;
                 }
                 if (!nodeMap.contains(nameTo.toInt())) {
-                    qCritical() << "Node creating edge, node ID" << nameTo.toInt() << "not registered";
+                    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Node creating edge, node ID" << nameTo.toInt() << "not registered";
                     break;
                 }
                 tmpEdge = Edge::create(nodeMap[nameFrom.toInt()], nodeMap[nameTo.toInt()]);
                 tmpEdge->setType(edgeTypeMap[type]);
             } else {
-                qDebug() << "Create pointer of type 0, since type " << type << " was not registered.";
+                qCDebug(GRAPHTHEORY_FILEFORMAT) << "Create pointer of type 0, since type " << type << " was not registered.";
                 tmpEdge = Edge::create(nodeMap[nameFrom.toInt()], nodeMap[nameTo.toInt()]);
             }
         }
@@ -337,9 +337,9 @@ QString Rocs1FileFormat::serialize(GraphDocumentPtr document)
         d->_buffer += QChar('\n');
     }
 
-    qDebug() << "------- /// BEGIN internal file format /// -------";
-    qDebug() << d->_buffer;
-    qDebug() << "------- /// internal file format END /// -------";
+    qCDebug(GRAPHTHEORY_FILEFORMAT) << "------- /// BEGIN internal file format /// -------";
+    qCDebug(GRAPHTHEORY_FILEFORMAT) << d->_buffer;
+    qCDebug(GRAPHTHEORY_FILEFORMAT) << "------- /// internal file format END /// -------";
 
     return d->_buffer;
 }

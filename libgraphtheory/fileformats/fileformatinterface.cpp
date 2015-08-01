@@ -25,7 +25,6 @@
 #include <QStringList>
 #include <QObject>
 #include <QUrl>
-#include <QDebug>
 
 using namespace GraphTheory;
 

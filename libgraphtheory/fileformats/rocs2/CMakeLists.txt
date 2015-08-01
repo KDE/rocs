@@ -23,6 +23,7 @@
 
 set(rocs2format_SRCS
     rocs2fileformat.cpp
+    ../../logging.cpp
 )
 
 add_library(rocs2fileformat MODULE ${rocs2format_SRCS})

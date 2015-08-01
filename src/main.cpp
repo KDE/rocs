@@ -26,6 +26,7 @@
 #include <QDir>
 
 #include "rocsversion.h"
+#include "logging_p.h"
 #include "ui/mainwindow.h"
 
 int main(int argc, char *argv[])

@@ -23,13 +23,13 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
+#include "logging_p.h"
 #include <KAboutData>
 #include <KPluginFactory>
 #include <KLocalizedString>
 #include <QTextStream>
 #include <QFile>
 #include <QUrl>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -59,7 +59,7 @@ FileFormatInterface::PluginType TikzFileFormat::pluginCapability() const
 
 void TikzFileFormat::readFile()
 {
-    qWarning() << "This plugin cannot import documents.";
+    qCWarning(GRAPHTHEORY_FILEFORMAT) << "This plugin cannot import documents.";
     setError(NotSupportedOperation);
 }
 

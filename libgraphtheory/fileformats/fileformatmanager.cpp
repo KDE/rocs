@@ -113,9 +113,9 @@ void FileFormatManager::loadBackends()
         });
         for (const auto &metadata : metadataList) {
             loader.setFileName(metadata.fileName());
-            qCDebug(ROCS_FILEFORMAT) << "Load Plugin: " << metadata.name();
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "Load Plugin: " << metadata.name();
             if (!loader.load()) {
-                qCCritical(ROCS_FILEFORMAT) << "Error while loading plugin: " << metadata.name();
+                qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error while loading plugin: " << metadata.name();
             }
             KPluginFactory *factory = KPluginLoader(loader.fileName()).factory();
             FileFormatInterface *plugin = factory->create<FileFormatInterface>(this);
@@ -131,7 +131,7 @@ FileFormatInterface * FileFormatManager::backendByExtension(const QString &ext)
 {
     QString suffix = ext.section('.', -1); // get suffix
     if (suffix.isEmpty()) {
-        qWarning() << "File does not contain extension, falling back to default file format";
+        qCWarning(GRAPHTHEORY_FILEFORMAT) << "File does not contain extension, falling back to default file format";
         return defaultBackend();
     }
     foreach(FileFormatInterface * p,  d->backends) {

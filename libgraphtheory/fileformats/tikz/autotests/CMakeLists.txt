@@ -28,6 +28,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 set(testtikzfileformat_SRCS
     testtikzfileformat.cpp
     ../tikzfileformat.cpp
+    ../../../logging.cpp
 )
 add_executable(TestTikzFileFormat ${testtikzfileformat_SRCS})
 add_test(TestTikzFileFormat TestTikzFileFormat)

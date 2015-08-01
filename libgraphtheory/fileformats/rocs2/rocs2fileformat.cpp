@@ -26,6 +26,7 @@
 #include "edge.h"
 #include "edgetypestyle.h"
 #include "nodetypestyle.h"
+#include "logging_p.h"
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <QJsonDocument>
@@ -33,7 +34,6 @@
 #include <QJsonArray>
 #include <QFile>
 #include <QUrl>
-#include <QDebug>
 
 using namespace GraphTheory;
 
@@ -83,7 +83,7 @@ void Rocs2FileFormat::readFile()
     // check format
     int formatVersion = jsonObj["FormatVersion"].toInt();
     if (formatVersion > 1) {
-        qCritical() << "File format has version" << formatVersion << "which is higher than the latest supported version.";
+        qCCritical(GRAPHTHEORY_FILEFORMAT) << "File format has version" << formatVersion << "which is higher than the latest supported version.";
     }
 
     // import node types
@@ -137,7 +137,7 @@ void Rocs2FileFormat::readFile()
             }
         }
         if (!typeToSet) {
-            qCritical() << "No type found with this ID, defaulting to first found type";
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "No type found with this ID, defaulting to first found type";
             typeToSet = document->nodeTypes().first();
         }
         node->setType(typeToSet);
@@ -172,7 +172,7 @@ void Rocs2FileFormat::readFile()
             }
         }
         if (!fromNode || !toNode) {
-            qCritical() << "No type found with this ID, aborting edge from"
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "No type found with this ID, aborting edge from"
                 << edgeJson["From"].toInt() << "to" << edgeJson["To"].toInt();
             continue;
         }
@@ -188,7 +188,7 @@ void Rocs2FileFormat::readFile()
             }
         }
         if (!typeToSet) {
-            qCritical() << "No type found with this ID, defaulting to first found type";
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "No type found with this ID, defaulting to first found type";
             typeToSet = document->edgeTypes().first();
         }
         edge->setType(typeToSet);
@@ -222,7 +222,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         QJsonObject typeJson;
         typeJson.insert("Id", type->id());
         if (type->id() == -1) {
-            qCritical() << "Serializing unset ID, this will break import";
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "Serializing unset ID, this will break import";
         }
         typeJson.insert("Name", type->name());
         typeJson.insert("Color", type->style()->color().name());
@@ -243,7 +243,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
         QJsonObject typeJson;
         typeJson.insert("Id", type->id());
         if (type->id() == -1) {
-            qCritical() << "Serializing unset ID, this will break import";
+            qCCritical(GRAPHTHEORY_FILEFORMAT) << "Serializing unset ID, this will break import";
         }
         typeJson.insert("Name", type->name());
         typeJson.insert("Color", type->style()->color().name());
@@ -307,7 +307,7 @@ void Rocs2FileFormat::writeFile(GraphDocumentPtr document)
     }
 
     // debug serialization
-    // qDebug() << outputDocument.toJson();
+    // qCDebug(GRAPHTHEORY_FILEFORMAT) << outputDocument.toJson();
 
     setError(None);
 }
@@ -332,7 +332,7 @@ EdgeType::Direction Rocs2FileFormat::direction(QString direction) const
     if (direction.startsWith(QLatin1String("Bidirectional"))) {
         return EdgeType::Bidirectional;
     }
-    qCritical() << "Unknown direction, cannot convert and defaulting to Bidirectional";
+    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Unknown direction, cannot convert and defaulting to Bidirectional";
     return EdgeType::Unidirectional;
 }
 

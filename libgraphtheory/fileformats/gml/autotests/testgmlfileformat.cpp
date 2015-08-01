@@ -25,7 +25,6 @@
 #include "node.h"
 #include "edge.h"
 #include <QTest>
-#include <QDebug>
 #include <QUrl>
 
 using namespace GraphTheory;

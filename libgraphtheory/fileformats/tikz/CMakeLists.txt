@@ -23,6 +23,7 @@
 
 set(tikzformat_SRCS
     tikzfileformat.cpp
+    ../../logging.cpp
 )
 
 add_library(tikzfileformat MODULE ${tikzformat_SRCS})

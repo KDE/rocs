@@ -18,10 +18,8 @@
 */
 
 #include "gmlgrammar.h"
-
 #include "gmlgrammarhelper.h"
-
-#include <QDebug>
+#include "logging_p.h"
 
 #define KGV_MAX_ITEMS_TO_LOAD std::numeric_limits<size_t>::max()
 #define BOOST_SPIRIT_DEBUG 1
@@ -32,7 +30,7 @@ using namespace GraphTheory;
 namespace boost {
 void throw_exception(std::exception const &e)
 {
-    qCritical() << "Exception:" << e.what();
+    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Exception:" << e.what();
 }
 }
 
@@ -58,17 +56,17 @@ void gotKey(const std::string& key)
     lastKey = key.c_str();
 //   QString k = key.c_str();
 //   if (k.compare("dataType", Qt::CaseInsensitive) == 0){
-//     qDebug() << "create a graph";
+//     qCDebug(GRAPHTHEORY_FILEFORMAT) << "create a graph";
 //     actualGraph =  document->addGraph("new");
 //     lastInserted = actualGraph;
 //   }else if (k.compare("node", Qt::CaseInsensitive) == 0){
-//     qDebug() << "create a node";
+//     qCDebug(GRAPHTHEORY_FILEFORMAT) << "create a node";
 //     actualNode = actualGraph->addNode("new");
 //     lastInserted = actualNode;
 //   }else if (k.compare("edge", Qt::CaseInsensitive) == 0){
-//     qDebug() << "create a edge";
+//     qCDebug(GRAPHTHEORY_FILEFORMAT) << "create a edge";
 //   }else {
-//     qDebug() << "Process atribute " << k;
+//     qCDebug(GRAPHTHEORY_FILEFORMAT) << "Process atribute " << k;
 //     lastKey = key;
 //   }
 
@@ -82,7 +80,7 @@ void gotValue(const std::string& Value)
         phelper->setAttribute(QString::fromStdString(lastKey), QString::fromStdString(Value));
 //     if (lastInserted){
     if (!lastInserted) {
-        qCritical() << "Cannot specify data node value: internal error";
+        qCCritical(GRAPHTHEORY_FILEFORMAT) << "Cannot specify data node value: internal error";
         return;
     }
     if (lastKey == "id" && lastInserted){
@@ -91,7 +89,7 @@ void gotValue(const std::string& Value)
     }
 //       lastInserted->setProperty(lastKey.c_str(), Value.c_str());
 //     }else{
-//       qDebug() << "ignoring keyvalue: "<< lastKey.c_str() << Value.c_str();
+//       qCDebug(GRAPHTHEORY_FILEFORMAT) << "ignoring keyvalue: "<< lastKey.c_str() << Value.c_str();
 //     }
     }
 }

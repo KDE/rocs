@@ -23,6 +23,7 @@
 
 set(tgfformat_SRCS
     tgffileformat.cpp
+    ../../logging.cpp
 )
 
 add_library(tgffileformat MODULE ${tgfformat_SRCS})

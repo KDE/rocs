@@ -21,10 +21,8 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
-#include <QDebug>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(ROCS_FILEFORMAT, "org.kde.rocs.graphtheory.fileformat", QtWarningMsg)
-Q_LOGGING_CATEGORY(ROCS_MAIN, "org.kde.rocs.general", QtWarningMsg)
+Q_DECLARE_LOGGING_CATEGORY(ROCS_GENERAL)
 
 #endif

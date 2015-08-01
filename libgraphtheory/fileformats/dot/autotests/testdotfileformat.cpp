@@ -24,9 +24,9 @@
 #include "graphdocument.h"
 #include "node.h"
 #include "edge.h"
+#include "logging_p.h"
 #include <string>
 #include <QtTest>
-#include <QDebug>
 #include <QUrl>
 
 using namespace GraphTheory;
@@ -48,14 +48,14 @@ void DotFileFormatTest::checkNodes(GraphDocumentPtr document, QList<QString> nod
 {
     NodeList nodes = document->nodes();
     foreach(const NodePtr &node, nodes) {
-        qDebug() << "test NODE " << node->dynamicProperty("name").toString();
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "test NODE " << node->dynamicProperty("name").toString();
     }
 
     foreach(const NodePtr &node, nodes) {
         QString name = node->dynamicProperty("name").toString();
         int index = nodeNames.indexOf(name);
         if (index == -1) {
-            qDebug() << "Node "<< name << " was created unnecessarily.";
+            qCDebug(GRAPHTHEORY_FILEFORMAT) << "Node "<< name << " was created unnecessarily.";
         }
         QVERIFY(index != -1);
         nodeNames.removeAt(index);

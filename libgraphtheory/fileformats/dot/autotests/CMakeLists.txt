@@ -34,6 +34,7 @@ set(testdotfileformat_SRCS
     ../dotfileformat.cpp
     ../dotgrammar.cpp
     ../dotgrammarhelper.cpp
+    ../../../logging.cpp
 )
 kde_source_files_enable_exceptions(../dotgrammar.cpp)
 add_executable(TestDotFileFormat ${testdotfileformat_SRCS})

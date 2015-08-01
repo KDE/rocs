@@ -27,6 +27,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 set(testtgffileformat_SRCS
     testtgffileformat.cpp
     ../tgffileformat.cpp
+    ../../../logging.cpp
 )
 add_executable(TestTgfFileFormat ${testtgffileformat_SRCS})
 add_test(TestTgfFileFormat TestTgfFileFormat)

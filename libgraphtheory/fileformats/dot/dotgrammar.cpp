@@ -21,8 +21,7 @@
 #include "typenames.h"
 #include "graphdocument.h"
 #include "node.h"
-
-#include <QDebug>
+#include "logging_p.h"
 
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_int.hpp>
@@ -49,7 +48,7 @@ using namespace GraphTheory;
 namespace boost {
 void throw_exception(std::exception const &e)
 {
-    qCritical() << "Exception:" << e.what();
+    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Exception:" << e.what();
 }
 }
 
@@ -265,7 +264,7 @@ void leaveSubGraph()
 
 void setStrict()
 {
-    qCritical() << "Graphviz \"strict\" keyword is not implemented.";
+    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Graphviz \"strict\" keyword is not implemented.";
 }
 
 void setUndirected()
@@ -281,7 +280,7 @@ void setDirected()
 void setGraphId(const std::string& str)
 {
     QString name = QString::fromStdString(str);
-    qCritical() << "Graph ID not supported, _not_ setting: " << name;
+    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Graph ID not supported, _not_ setting: " << name;
     //TODO not implemented
 }
 
@@ -427,7 +426,7 @@ void checkEdgeOperator(const std::string& str)
         return;
     }
 
-    qCritical() << "Error: incoherent edge direction relation" << endl;
+    qCCritical(GRAPHTHEORY_FILEFORMAT) << "Error: incoherent edge direction relation" << endl;
 }
 
 void edgebound(const std::string& str)
@@ -478,13 +477,13 @@ bool parse(const std::string& str, GraphDocumentPtr document)
     DotGrammar<std::string::iterator, skipper_type> r;
 
     if (phrase_parse(iter, input.end(), r, SKIPPER)) {
-        qDebug() << "Complete dot file was parsed successfully.";
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "Complete dot file was parsed successfully.";
         return true;
     } else {
-        qWarning() << "Dot file parsing failed. Unable to parse:";
-        qDebug() << "///// FILE CONTENT BEGIN /////";
-        qDebug() << QString::fromStdString(std::string(iter, input.end()));
-        qDebug() << "///// FILE CONTENT END /////";
+        qCWarning(GRAPHTHEORY_FILEFORMAT) << "Dot file parsing failed. Unable to parse:";
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "///// FILE CONTENT BEGIN /////";
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << QString::fromStdString(std::string(iter, input.end()));
+        qCDebug(GRAPHTHEORY_FILEFORMAT) << "///// FILE CONTENT END /////";
     }
     return false;
 }

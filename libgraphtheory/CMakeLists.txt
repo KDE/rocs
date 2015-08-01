@@ -32,6 +32,7 @@ set(graphtheory_SRCS
     edgetype.cpp
     edgetypestyle.cpp
     graphdocument.cpp
+    logging.cpp
     node.cpp
     nodetype.cpp
     nodetypestyle.cpp
