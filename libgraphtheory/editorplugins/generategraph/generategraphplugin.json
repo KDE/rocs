@@ -7,6 +7,8 @@
         "Description[de]": "Erstellt anhand eines Musters einen neuen Graphen.", 
         "Description[en_GB]": "This generates a new graph by a pattern.", 
         "Description[es]": "Esto genera un nuevo grafo usando un patrón.", 
+        "Description[fi]": "Tämä generoi uuden graafin mallin perusteella.", 
+        "Description[gl]": "Xera un gráfico novo segundo un padrón.", 
         "Description[nl]": "Dit genereert een nieuwe graaf naar een patroon.", 
         "Description[pt]": "Isto gera um novo grafo com base num dado padrão.", 
         "Description[pt_BR]": "Isto gera um novo grafo de acordo com um padrão.", 

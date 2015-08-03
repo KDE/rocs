@@ -7,6 +7,8 @@
         "Description[de]": "Graphviz-Graphendokumente (DOT) lesen und schreiben", 
         "Description[en_GB]": "Read and write Graphviz graph documents (DOT)", 
         "Description[es]": "Leer y escribir documentos de grafos Graphviz (DOT)", 
+        "Description[fi]": "Lukee ja kirjoittaa Graphviz-graafitiedostoja (DOT)", 
+        "Description[gl]": "Le e escribe documentos de gráficos de Graphviz (DOT)", 
         "Description[nl]": "Lezen en schrijven van Graphviz grafiekbestanden (DOT)", 
         "Description[pt]": "Lê e grava documentos de grafos no Graphviz (DOT)", 
         "Description[pt_BR]": "Lê e grava documentos de grafo do Graphviz (DOT)", 

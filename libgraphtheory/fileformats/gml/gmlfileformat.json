@@ -7,6 +7,8 @@
         "Description[de]": "Dokumente im Format „Graph Markup Language“ (GML) lesen und schreiben", 
         "Description[en_GB]": "Read and write Graph Markup Language documents (GML)", 
         "Description[es]": "Leer y escribir documentos del lenguaje de marcas de grafos (GML)", 
+        "Description[fi]": "Lukee ja kirjoittaa Graph Markup Language (GML) -tiedostoja", 
+        "Description[gl]": "Le e escribe documentos na linguaxe de etiquetaxe de gráficos (GML)", 
         "Description[nl]": "Lezen en schrijven van Graph Markup Language documenten (GML)", 
         "Description[pt]": "Lê e grava documentos no formato GML (Graph Markup Language)", 
         "Description[pt_BR]": "Lê e grava documentos no formato Graph Markup Language (GML)", 

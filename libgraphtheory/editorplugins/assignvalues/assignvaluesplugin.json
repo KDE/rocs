@@ -7,6 +7,8 @@
         "Description[de]": "Werte zu Graphenkanten und -knoten zuweisen.", 
         "Description[en_GB]": "Assign values to graph edges and nodes.", 
         "Description[es]": "Asignar valores a aristas de grafos y a nodos.", 
+        "Description[fi]": "Sijoita arvot graafin väleihin ja solmuihin.", 
+        "Description[gl]": "Asigna valores ás arestas e vértices do gráfico.", 
         "Description[nl]": "Waarden toekennen aan randen en knooppunten van grafen.", 
         "Description[pt]": "Atribui valores às arestas e nós do grafo.", 
         "Description[pt_BR]": "Atribuir valores às bordas e nós do grafo.", 
