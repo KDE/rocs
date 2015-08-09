@@ -10,6 +10,7 @@
         "Description[fi]": "Kirjoittaa PGF/TikZ-muotoisia graafitiedostoja LaTeX-tiedostoissa käyttämiseen", 
         "Description[gl]": "Escribe documentos de gráficos no formato PGF/TikZ para usar en documentos de LaTeX", 
         "Description[nl]": "Schrijft grafiekdocumenten in PGF/TikZ-formaat die in LaTeX-documenten worden gebruikt.", 
+        "Description[pl]": "Zapisuje dokumenty grafów w formacie PGF/TikZ do wykorzystania w dokumentach LaTeX", 
         "Description[pt]": "Grava os documentos dos grafos no formato PGF/TikZ para usar nos documentos em LaTeX", 
         "Description[pt_BR]": "Grava documentos de grafo no formato PGF/TikZ para uso em documentos LaTeX", 
         "Description[sk]": "Zapíše grafické dokumenty do formátu PGF/TikZ na použitie s dokumentmi LaTeX", 
