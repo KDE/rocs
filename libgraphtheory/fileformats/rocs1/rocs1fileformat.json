@@ -4,6 +4,7 @@
         "Category": "Plugins", 
         "Description": "Rocs Graph File Format (old)", 
         "Description[ca]": "Format de fitxers de grafs del Rocs (antic)", 
+        "Description[cs]": "Formát souborů grafů Rocs (starý)", 
         "Description[de]": "Rocs-Graphendatei-Format (veraltet)", 
         "Description[en_GB]": "Rocs Graph File Format (old)", 
         "Description[es]": "Formato de archivo de grafos de Rocs (antiguo)", 
