@@ -15,6 +15,7 @@
         "Description[pt]": "Lê e grava documentos de grafos no Graphviz (DOT)", 
         "Description[pt_BR]": "Lê e grava documentos de grafo do Graphviz (DOT)", 
         "Description[sk]": "Čítanie a zápis grafických dokumentov Graphviz (DOT)", 
+        "Description[sl]": "Branje in pisanje dokumentov grafov Graphviz (DOT)", 
         "Description[sv]": "Läs och skriv Graphviz-grafdokument (DOT)", 
         "Description[uk]": "Читання і запис файлів документів графів Graphviz (DOT)", 
         "Description[x-test]": "xxRead and write Graphviz graph documents (DOT)xx", 

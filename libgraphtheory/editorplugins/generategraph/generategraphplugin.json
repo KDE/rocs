@@ -14,6 +14,7 @@
         "Description[pt]": "Isto gera um novo grafo com base num dado padrão.", 
         "Description[pt_BR]": "Isto gera um novo grafo de acordo com um padrão.", 
         "Description[sk]": "Toto generuje nový graf podľa vzoru.", 
+        "Description[sl]": "Po vzorcu ustvari nov graf.", 
         "Description[sv]": "Skapar en ny graf enligt ett mönster.", 
         "Description[uk]": "Створює новий граф за шаблоном.", 
         "Description[x-test]": "xxThis generates a new graph by a pattern.xx", 
