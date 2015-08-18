@@ -16,6 +16,7 @@
         "Description[sk]": "Toto generuje nový graf podľa vzoru.", 
         "Description[sl]": "Po vzorcu ustvari nov graf.", 
         "Description[sv]": "Skapar en ny graf enligt ett mönster.", 
+        "Description[tr]": "Bu, bir desene göre bir grafik oluşturur.", 
         "Description[uk]": "Створює новий граф за шаблоном.", 
         "Description[x-test]": "xxThis generates a new graph by a pattern.xx", 
         "Id": "rocs_generategraphplugin", 

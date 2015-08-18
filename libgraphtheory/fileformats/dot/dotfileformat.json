@@ -17,6 +17,7 @@
         "Description[sk]": "Čítanie a zápis grafických dokumentov Graphviz (DOT)", 
         "Description[sl]": "Branje in pisanje dokumentov grafov Graphviz (DOT)", 
         "Description[sv]": "Läs och skriv Graphviz-grafdokument (DOT)", 
+        "Description[tr]": "Graphviz grafik belgelerini oku ve yaz (DOT)", 
         "Description[uk]": "Читання і запис файлів документів графів Graphviz (DOT)", 
         "Description[x-test]": "xxRead and write Graphviz graph documents (DOT)xx", 
         "Id": "rocs_dotfileformat", 

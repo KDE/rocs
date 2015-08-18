@@ -16,6 +16,7 @@
         "Description[sk]": "Čítať a zapisovať grafické dokumenty v triviálnom grafickom formáte (TGF)", 
         "Description[sl]": "Branje in pisanje dokumentov grafov Trivial Graph Format (TGF)", 
         "Description[sv]": "Läs och skriv grafdokument med Trivial Graph-format (TGF)", 
+        "Description[tr]": "Grafik belgelerini Açık Grafik Biçiminde oku ve yaz (TGF)", 
         "Description[uk]": "Читання і запис документів графів у форматі звичайного графу (TGF)", 
         "Description[x-test]": "xxRead and write graph documents in Trivial Graph Format (TGF)xx", 
         "Id": "rocs_tgffileformat", 

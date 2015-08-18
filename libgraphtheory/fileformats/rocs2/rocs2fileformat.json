@@ -17,6 +17,7 @@
         "Description[sk]": "Súborový formát grafi Rocs", 
         "Description[sl]": "Vrsta datotek z grafi Rocs", 
         "Description[sv]": "Rocs-graffilformat", 
+        "Description[tr]": "Rocs Grafik Dosya Biçimi", 
         "Description[uk]": "формат файлів графів Rocs", 
         "Description[x-test]": "xxRocs Graph File Formatxx", 
         "Id": "rocs_rocs2fileformat", 

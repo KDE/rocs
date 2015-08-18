@@ -16,6 +16,7 @@
         "Description[sk]": "Transformácia hrán grafu podľa transformačného pravidla.", 
         "Description[sl]": "Po pravilu preoblikuje povezave grafa.", 
         "Description[sv]": "Transformerar grafernas kanter med en transformeringsregel.", 
+        "Description[tr]": "Grafik kenarlarını bir dönüştürme kuralı ile dönüştür.", 
         "Description[uk]": "Перетворити ребра графу за правилом перетворення.", 
         "Description[x-test]": "xxTransform graph edges by a transformation rule.xx", 
         "Id": "rocs_transformedges", 

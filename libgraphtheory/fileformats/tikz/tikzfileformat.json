@@ -16,6 +16,7 @@
         "Description[sk]": "Zapíše grafické dokumenty do formátu PGF/TikZ na použitie s dokumentmi LaTeX", 
         "Description[sl]": "Zapiše dokumente grafov v obliki PGF/TikZ za uporabo v dokumentih LaTeX", 
         "Description[sv]": "Skriver grafdokument med PGF/TikZ-format för användning i Latex-dokument", 
+        "Description[tr]": "LaTeX belgelerinde kullanmak üzere grafik belgelerini PGF/TikZ biçiminde yazar", 
         "Description[uk]": "Запис документів графів у форматі PGF/TikZ з метою наступного використання у документах LaTeX", 
         "Description[x-test]": "xxWrites graph documents in PGF/TikZ format for use in LaTeX documentsxx", 
         "Id": "rocs_tikzfileformat", 
