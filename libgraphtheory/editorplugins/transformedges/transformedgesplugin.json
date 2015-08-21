@@ -13,6 +13,7 @@
         "Description[pl]": "Przekształć krawędzie grafu według reguły przekształcania.", 
         "Description[pt]": "Transforma as arestas do grafo com base numa regra de transformação.", 
         "Description[pt_BR]": "Transformar os cantos do grafo de acordo com uma regra de transformação.", 
+        "Description[ru]": "Преобразует рёбра графа по заданному правилу.", 
         "Description[sk]": "Transformácia hrán grafu podľa transformačného pravidla.", 
         "Description[sl]": "Po pravilu preoblikuje povezave grafa.", 
         "Description[sv]": "Transformerar grafernas kanter med en transformeringsregel.", 

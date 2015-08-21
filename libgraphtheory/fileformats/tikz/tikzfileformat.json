@@ -13,6 +13,7 @@
         "Description[pl]": "Zapisuje dokumenty grafów w formacie PGF/TikZ do wykorzystania w dokumentach LaTeX", 
         "Description[pt]": "Grava os documentos dos grafos no formato PGF/TikZ para usar nos documentos em LaTeX", 
         "Description[pt_BR]": "Grava documentos de grafo no formato PGF/TikZ para uso em documentos LaTeX", 
+        "Description[ru]": "Записывает определения графов в формате PGF/TikZ для использования в документах LaTeX", 
         "Description[sk]": "Zapíše grafické dokumenty do formátu PGF/TikZ na použitie s dokumentmi LaTeX", 
         "Description[sl]": "Zapiše dokumente grafov v obliki PGF/TikZ za uporabo v dokumentih LaTeX", 
         "Description[sv]": "Skriver grafdokument med PGF/TikZ-format för användning i Latex-dokument", 
