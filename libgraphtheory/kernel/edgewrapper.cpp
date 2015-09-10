@@ -107,8 +107,9 @@ bool EdgeWrapper::event(QEvent *e)
         if (m_edge->dynamicProperties().contains(name)) {
             m_edge->setDynamicProperty(name, value);
         }
+        return true;
     }
-    return true;
+    return QObject::event(e);
 }
 
 void EdgeWrapper::updateDynamicProperties()

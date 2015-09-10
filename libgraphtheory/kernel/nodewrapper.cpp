@@ -436,8 +436,9 @@ bool NodeWrapper::event(QEvent *e)
         if (m_node->dynamicProperties().contains(name)) {
             m_node->setDynamicProperty(name, value);
         }
+        return true;
     }
-    return true;
+    return QObject::event(e);
 }
 
 void NodeWrapper::updateDynamicProperties()
